@@ -1,17 +1,26 @@
-  - name: makerom
-    type: code
+  - name: header
+    type: header
     start: 0x0
-    subsegments:
-      - {start: 0x0, type: header, name: header}
-      - {start: 0x40, type: textbin, name: ipl3}
 
-  - name: main
+  - name: boot
+    type: bin
+    start: 0x40
+
+  - name: entry
     type: code
     start: 0x1000
     vram: 0x80067000
-    symbol_name_format: $VRAM
     subsegments:
-      - [0x1000, asm, entrypoint]
+      - [0x1000, hasm]
+
+  - name: main
+    type: code
+    start: 0x1060
+    vram: 0x80067060
+    follows_vram: entry
+    bss_size: 0x24700
+    subsegments:
+      - [0x1060, asm]
       - [0x1AE0, c, game/1AE0]
       - [0x2A60, c, game/2A60]
       - [0x2B20, c, game/2B20]
@@ -35,624 +44,82 @@
       - [0x4EC40, c, game/4EC40]
       - [0x4FFB0, c, game/4FFB0]
       - [0x511D0, c, game/511D0]
-       # libultra
-      - [0x559A0, hasm, libultra/os/setcause]
-      - [0x559B0, asm, libultra/os/sendmesg]
-      - [0x55B00, asm, libultra/os/stopthread]
-      - [0x55BC0, asm, libultra/os/recvmesg]
+      # libultra
+      - [0x559B0, c, libultra/os/sendmesg]
+      - [0x55B00, c, libultra/os/stopthread]
       - [0x55D00, hasm, libultra/os/getintmask]
       - [0x55D60, hasm, libultra/os/setintmask]
-      - [0x55E00, asm, libultra/os/scale]
-      - [0x55EA0, asm, libultra/io/sptask]
-      - [0x56190, asm, libultra/libc/ll]
-      - [0x56450, hasm, libultra/os/exceptasm]
-      - [0x56D60, asm, libultra/os/thread]
-      - [0x56DA0, asm, libultra/os/destroythread]
       - [0x56EB0, hasm, libultra/libc/bzero]
-      - [0x56F50, asm, libultra/io/leointerrupt]
-      - [0x57640, asm, libultra/io/motor]
-      - [0x57A10, asm, libultra/io/siacs]
-      - [0x57AD0, asm, libultra/io/controller]
-      - [0x57E10, asm]
-      - [0x57E70, asm, libultra/os/createthread]
+      - [0x57E70, c, libultra/os/createthread]
       - [0x57FC0, asm, libultra/io/contreaddata]
-      - [0x581A0, hasm, libultra/os/setcount]
-      - [0x581B0, asm, libultra/io/driverominit]
-      - [0x58290, asm, libultra/os/virtualtophysical]
-      - [0x58310, asm, libultra/os/physicaltovirtual]
-      - [0x58320, asm, libultra/os/setsr]
-      - [0x58330, hasm, libultra/os/writebackdcache]
-      - [0x583B0, asm, libultra/os/initialize]
-      - [0x58640, asm, libultra/os/pirawread]
-      - [0x586A0, hasm, libultra/os/getsr]
+      - [0x581B0, c, libultra/io/driverominit]
+      - [0x58290, c, libultra/os/virtualtophysical]
+      - [0x58310, c, libultra/os/physicaltovirtual]
+      - [0x583B0, c, libultra/os/initialize]
       - [0x586B0, asm, libultra/io/vigetcurrframebuf]
-      - [0x586F0, asm, libultra/gu/perspective]
-      - [0x58980, asm, libultra/gu/sinf]
-      - [0x58B40, asm, libultra/io/sprawdma]
-      - [0x58BD0, asm, libultra/io/sirawdma]
-      - [0x58C80, asm, libultra/io/epilinkhandle]
-      - [0x58CD0, asm, libultra/io/viblack]
-      - [0x58D40, asm, libultra/io/sirawread]
-      - [0x58D90, asm, libultra/io/sptaskyield]
-      - [0x58DB0, asm, libultra/io/pfsreadwritefile]
-      - [0x59200, asm, libultra/gu/mtxutil]
-      - [0x59470, asm, libultra/io/visetmode]
-      - [0x594E0, asm, libultra/gu/lookat]
-      - [0x59810, asm, libultra/io/pfsallocatefile]
-      - [0x59C90, asm, libultra/io/pfsfreeblocks]
-      - [0x59E30, hasm, libultra/os/probetlb]
-      - [0x59EF0, asm, libultra/libc/llcvt]
+      - [0x58C80, c, libultra/io/epilinkhandle]
+      - [0x58CD0, c, libultra/io/viblack]
+      - [0x59470, c, libultra/io/visetmode]
       - [0x5A100, hasm, libultra/os/getcount]
-      - [0x5A110, asm, libultra/io/contpfs]
-      - [0x5AC90, asm, libultra/os/getmemsize]
-      - [0x5AD20, asm, libultra/io/pfssearchfile]
+      - [0x5AC90, c, libultra/os/getmemsize]
       - [0x5AED0, asm]
-      - [0x5B0C0, asm, libultra/io/piacs]
-      - [0x5B180, asm, libultra/io/devmgr]
-      - [0x5B610, asm, libultra/io/pirawdma]
-      - [0x5B6F0, asm, libultra/os/seteventmesg]
       - [0x5B760, hasm, libultra/gu/sqrtf]
-      - [0x5B770, asm, libultra/libc/xprintf]
-      - [0x5C430, asm, libultra/libc/sprintf]
-      - [0x5C4B0, asm, libultra/io/epidma]
-      - [0x5C590, asm, libultra/io/leodiskinit]
-      - [0x5C630, asm, libultra/libc/string]
-      - [0x5C6D0, asm, libultra/os/createmesgqueue]
+      - [0x5C4B0, c, libultra/io/epidma]
+      - [0x5C630, c, libultra/libc/string]
+      - [0x5C6D0, c, libultra/os/createmesgqueue]
       - [0x5C700, hasm, libultra/os/invaldcache]
       - [0x5C7B0, hasm, libultra/os/invalicache]
-      - [0x5C830, asm, libultra/io/sp]
-      - [0x5C860, asm, libultra/io/si]
-      - [0x5C890, asm, libultra/os/jammesg]
-      - [0x5C9E0, asm, libultra/os/setthreadpri]
-      - [0x5CAC0, asm, libultra/os/getthreadpri]
-      - [0x5CAE0, asm, libultra/io/viswapbuf]
-      - [0x5CB30, asm, libultra/io/epirawdma]
-      - [0x5CD60, asm, libultra/io/sptaskyielded]
-      - [0x5CDE0, hasm, libultra/libc/bcmp]
-      - [0x5CF00, asm, libultra/os/gettime]
-      - [0x5CF90, bin, noppad_5CF90]
-      - [0x5CFA0, asm, libultra/os/timerintr]
-      - [0x5D3A0, asm, libultra/gu/rotate]
-      - [0x5D590, asm, libultra/os/setglobalintmask]
-      - [0x5D5E0, asm, libultra/io/aisetfreq]
-      - [0x5D740, asm, libultra/os/getactivequeue]
-      - [0x5D750, hasm, libultra/gu/normalize]
-      - [0x5D7E0, hasm, libultra/os/setcompare]
-      - [0x5D7F0, asm, libultra/io/dpsetstat]
-      - [0x5D800, asm, libultra/io/dpgetstat]
+      - [0x5CAE0, c, libultra/io/viswapbuf]
+      - [0x5CD60, c, libultra/io/sptaskyielded]
+      - [0x5CF00, c, libultra/os/gettime]
+      - [0x5D5E0, c, libultra/io/aisetfreq]
+      - [0x5D7F0, c, libultra/io/dpsetstat]
+      - [0x5D800, c, libultra/io/dpgetstat]
       - [0x5D810, hasm, libultra/libc/bcopy]
-      - [0x5DB20, asm, libultra/os/resetglobalintmask]
-      - [0x5DB80, asm, libultra/gu/ortho]
-      - [0x5DD40, hasm, libultra/os/interrupt]
-      - [0x5DD80, asm, libultra/io/vi]
-      - [0x5DEC0, asm, libultra/io/viswapcontext]
-      - [0x5E1C0, asm, libultra/io/pigetcmdq]
-      - [0x5E1F0, asm, libultra/gu/cosf]
-      - [0x5E360, asm, libultra/io/epiread]
-      - [0x5E3B0, asm, libultra/io/visetspecial]
-      - [0x5E570, asm, libultra/os/settime]
-      - [0x5E5A0, asm, libultra/io/visetevent]
-      - [0x5E610, asm, libultra/io/cartrominit]
-      - [0x5E710, asm]
-      - [0x5E790, hasm, libultra/os/setfpccsr]
-      - [0x5E7A0, asm, libultra/io/pfsinitpak]
-      - [0x5E990, asm, libultra/io/pfsgetstatus]
-      - [0x5EBC0, asm, libultra/io/pfschecker]
-      - [0x5F560, asm, libultra/io/pfsisplug]
-      - [0x5F8A0, asm, libultra/io/aigetlen]
+      - [0x5E360, asm]
+      - [0x5E3B0, c, libultra/io/visetspecial]
+      - [0x5E570, c, libultra/io/settime]
+      - [0x5E5A0, c, libultra/io/visetevent]
+      - [0x5E610, c, libultra/io/cartrominit]
       - [0x5F8B0, asm, libultra/io/epiwrite]
-      - [0x5F900, asm, libultra/io/epirawread]
-      - [0x5FAA0, hasm, libultra/os/maptlbrdb]
-      - [0x5FB00, asm, libultra/os/yieldthread]
-      - [0x5FB50, asm, libultra/gu/translate]
-      - [0x5FBF0, asm, libultra/io/contramwrite]
-      - [0x5FE10, asm, libultra/io/contramread]
-      - [0x60010, asm, libultra/io/crc]
-      - [0x60180, asm, libultra/io/epirawwrite]
-      - [0x60310, asm, libultra/os/settimer]
-      - [0x603F0, asm]
-      - [0x60960, asm, libultra/libc/xldtob]
-      - [0x60EB0, asm]
-      - [0x61040, asm, libultra/libc/xlitob]
-      - [0x612E0, asm, libultra/io/sirawwrite]
-      - [0x61330, asm, libultra/io/spsetstat]
-      - [0x61340, asm, libultra/io/spgetstat]
       - [0x61360, asm, libultra/io/vimgr]
-      - [0x61670, asm, libultra/io/vigetcurrcontext]
       - [0x61680, hasm, libultra/os/writebackdcacheall]
-      - [0x616B0, asm, libultra/os/startthread]
-      - [0x61800, asm, libultra/io/visetyscale]
+      - [0x616B0, c, libultra/os/startthread]
       - [0x61860, asm]
-      - [0x618A0, asm, libultra/io/spsetpc]
-      - [0x618E0, asm, libultra/os/sethwinterrupt]
-      - [0x61930, bin]
-      - [0x61A00, bin]
-      - [0x625E0, bin]
-      - [0x66FB0, bin]
-      - [0x6A480, bin]
-      - [0x6A7B0, bin]
-      - [0x70E00, bin]
-      - [0x71220, bin]
-      - [0x71630, bin]
-      - [0x719E0, bin]
+      - [0x618E0, c, libultra/os/sethwinterrupt]
+      - [0x66FA0, data]
+      - [0x6D110, rodata]
+      - [0x6D380, rodata]
+      - [0x6D5D0, rodata, game/10490]
+      - [0x6DB60, rodata]
+      - [0x6E310, rodata]
+      - [0x6E6C0, rodata]
+      - [0x6E8B0, rodata]
+      - [0x6EC80, rodata]
+      - [0x6F540, rodata]
+      - [0x6FB40, rodata]
+      - [0x6FB80, rodata]
+      - [0x6FF40, rodata]
+      - [0x6FF70, rodata]
+      - [0x70050, rodata]
+      - [0x709A0, rodata]
+      - [0x70A70, rodata]
+      - [0x70A80, rodata]
+      - [0x70AD0, rodata]
+      - [0x70AE0, rodata]
+      - [0x70B00, rodata]
+      - [0x70C00, rodata]
+      - [0x70C10, rodata]
+      - [0x70C60, rodata]
+      - [0x70C70, rodata]
+      - [0x70CD0, rodata]
+      - [0x71500, rodata]
+      - [0x71CA0, rodata]
+      - [0x71FC0, rodata]
+      - [0x71FF0, rodata]
+      - { start: 0x72030, type: bss, vram: 0x800D8030 }
 
-      - [0xB5440, bin] # list of MIO0 Offsets
-
-  - type: code
-    name: segment_F2AC0
-    start: 0xF2AC0
-    vram:  0x80115DF0
-    exclusive_ram_id: "0x80115DF0"
-    subsegments:
-    - [0xF2AC0, asm]
-    - [0x145740, asm] # pointers to display lists / display list functions
-
-  - [0x1459A0, bin]
-  - [0x145B70, bin]
-  - [0x16C8A0, bin]  # MIO0 segment
-  - [0x17B1E0, bin]  # tbd
-  - [0x17B960, bin]  # tbd
-  - [0x1B5C50, bin]  # MAXSPEED rgba16 64x16
-  - [0x1B6450, bin]  # 0..9 numbers 12x16 * 10
-  - [0x1B8550, bin]  # tbd
-  - [0x22B0A0, bin]  # MIO0 segment
-  - [0x235130, bin]  # MIO0 segment
-  - [0x239A80, bin]  # MIO0 segment
-  - [0x23EC50, bin]  # MIO0 segment
-  - [0x243D90, bin]  # MIO0 segment
-  - [0x24A270, bin]  # MIO0 segment
-  - [0x2507F0, bin]  # MIO0 segment
-  - [0x255100, bin]  # MIO0 segment
-  - [0x259600, bin]  # MIO0 segment
-  - [0x25F360, bin]  # MIO0 segment
-  - [0x266C20, bin]  # MIO0 segment
-  - [0x26D780, bin]  # MIO0 segment
-  - [0x2738A0, bin]  # MIO0 segment
-  - [0x27A000, bin]  # n64 logo rgba16
-  - [0x2B9EA4, bin]  # MIO0 segment
-  - [0x2CE908, bin]  # MIO0 segment
-  - [0x2E01E8, bin]  # MIO0 segment
-  - [0x2E9FF8, bin]  # MIO0 segment
-  - [0x2EC6BC, bin]  # MIO0 segment
-  - [0x2EC91C, bin]  # MIO0 segment
-  - [0x2ECE0C, bin]  # MIO0 segment
-  - [0x2ED1C8, bin]  # MIO0 segment
-  - [0x2ED558, bin]  # MIO0 segment
-  - [0x2ED954, bin]  # MIO0 segment
-  - [0x2F244C, bin]  # MIO0 segment
-  - [0x2F8A54, bin]  # MIO0 segment
-  - [0x2FDFCC, bin]  # MIO0 segment
-  - [0x305684, bin]  # MIO0 segment
-  - [0x30BE7C, bin]  # MIO0 segment
-  - [0x31223C, bin]  # MIO0 segment
-  - [0x31812C, bin]  # MIO0 segment
-  - [0x31F2B4, bin]  # MIO0 segment
-  - [0x324920, bin]  # MIO0 segment
-  - [0x32A370, bin]  # MIO0 segment
-  - [0x32F938, bin]  # MIO0 segment
-  - [0x33528C, bin]  # MIO0 segment
-  - [0x33CD0C, bin]  # MIO0 segment
-  - [0x343154, bin]  # MIO0 segment
-  - [0x349394, bin]  # MIO0 segment
-  - [0x350310, bin]  # MIO0 segment
-  - [0x355F6C, bin]  # MIO0 segment
-  - [0x35B958, bin]  # MIO0 segment
-  - [0x3614B4, bin]  # MIO0 segment
-  - [0x367FE8, bin]  # MIO0 segment
-  - [0x36CE34, bin]  # MIO0 segment
-  - [0x373BCC, bin]  # MIO0 segment
-  - [0x379684, bin]  # MIO0 segment
-  - [0x37F4C4, bin]  # MIO0 segment
-  - [0x386374, bin]  # MIO0 segment
-  - [0x38B0AC, bin]  # MIO0 segment
-  - [0x3910EC, bin]  # MIO0 segment
-  - [0x3971A8, bin]  # MIO0 segment
-  - [0x39C6E0, bin]  # MIO0 segment
-  - [0x3A248C, bin]  # MIO0 segment
-  - [0x3A8144, bin]  # MIO0 segment
-  - [0x3AE6D8, bin]  # MIO0 segment
-  - [0x3B3700, bin]  # MIO0 segment
-  - [0x3B9004, bin]  # MIO0 segment
-  - [0x3B9788, bin]  # MIO0 segment
-  - [0x3BA03C, bin]  # MIO0 segment
-  - [0x3BA8B8, bin]  # MIO0 segment
-  - [0x3BB1F4, bin]  # MIO0 segment
-  - [0x3BBAE4, bin]  # MIO0 segment
-  - [0x3BC3F0, bin]  # MIO0 segment
-  - [0x3BCD10, bin]  # MIO0 segment
-  - [0x3BD6A0, bin]  # MIO0 segment
-  - [0x3BDED4, bin]  # MIO0 segment
-  - [0x3BE7D0, bin]  # MIO0 segment
-  - [0x3BF0DC, bin]  # MIO0 segment
-  - [0x3BF9D0, bin]  # MIO0 segment
-  - [0x3C0384, bin]  # MIO0 segment
-  - [0x3C0CAC, bin]  # MIO0 segment
-  - [0x3C15EC, bin]  # MIO0 segment
-  - [0x3C1F70, bin]  # MIO0 segment
-  - [0x3C29B4, bin]  # MIO0 segment
-  - [0x3C3264, bin]  # MIO0 segment
-  - [0x3C3B08, bin]  # MIO0 segment
-  - [0x3C43A8, bin]  # MIO0 segment
-  - [0x3C4A80, bin]  # MIO0 segment
-  - [0x3C53DC, bin]  # MIO0 segment
-  - [0x3C5CB8, bin]  # MIO0 segment
-  - [0x3C65A4, bin]  # MIO0 segment
-  - [0x3C6FB4, bin]  # MIO0 segment
-  - [0x3C7750, bin]  # MIO0 segment
-  - [0x3C7FEC, bin]  # MIO0 segment
-  - [0x3C88AC, bin]  # MIO0 segment
-  - [0x3C912C, bin]  # MIO0 segment
-  - [0x3C98DC, bin]  # MIO0 segment
-  - [0x3CA13C, bin]  # MIO0 segment
-  - [0x3CA954, bin]  # MIO0 segment
-  - [0x3CB1B4, bin]  # MIO0 segment
-  - [0x3CB86C, bin]  # MIO0 segment
-  - [0x3CBEC4, bin]  # MIO0 segment
-  - [0x3CC388, bin]  # MIO0 segment
-  - [0x3CCAFC, bin]  # MIO0 segment
-  - [0x3CD0F4, bin]  # MIO0 segment
-  - [0x3CD600, bin]  # MIO0 segment
-  - [0x3CDBA0, bin]  # MIO0 segment
-  - [0x3CE0F4, bin]  # MIO0 segment
-  - [0x3CE734, bin]  # MIO0 segment
-  - [0x3CED8C, bin]  # MIO0 segment
-  - [0x3CF374, bin]  # MIO0 segment
-  - [0x3CF91C, bin]  # MIO0 segment
-  - [0x3CFF04, bin]  # MIO0 segment
-  - [0x3D0504, bin]  # MIO0 segment
-  - [0x3D0C3C, bin]  # MIO0 segment
-  - [0x3D1268, bin]  # MIO0 segment
-  - [0x3D1854, bin]  # MIO0 segment
-  - [0x3D1EA8, bin]  # MIO0 segment
-  - [0x3D23FC, bin]  # MIO0 segment
-  - [0x3D2A00, bin]  # MIO0 segment
-  - [0x3D30C8, bin]  # MIO0 segment
-  - [0x3D3598, bin]  # MIO0 segment
-  - [0x3D3B8C, bin]  # MIO0 segment
-  - [0x3D4334, bin]  # MIO0 segment
-  - [0x3D4820, bin]  # MIO0 segment
-  - [0x3D4C8C, bin]  # MIO0 segment
-  - [0x3D519C, bin]  # MIO0 segment
-  - [0x3D5860, bin]  # MIO0 segment
-  - [0x3D5A04, bin]  # MIO0 segment
-  - [0x3D5BA4, bin]  # MIO0 segment
-  - [0x3D5D44, bin]  # MIO0 segment
-  - [0x3D5EE4, bin]  # MIO0 segment
-  - [0x3D6160, bin]  # MIO0 segment
-  - [0x3D699C, bin]  # MIO0 segment
-  - [0x3D6E08, bin]  # MIO0 segment
-  - [0x3D79EC, bin]  # MIO0 segment
-  - [0x3D81DC, bin]  # MIO0 segment
-  - [0x3D89C4, bin]  # MIO0 segment
-  - [0x3D8E8C, bin]  # MIO0 segment
-  - [0x3D91D0, bin]  # MIO0 segment
-  - [0x3D9534, bin]  # MIO0 segment
-  - [0x3D95A0, bin]  # MIO0 segment
-  - [0x3D9604, bin]  # MIO0 segment
-  - [0x3D9650, bin]  # MIO0 segment
-  - [0x3D96A4, bin]  # MIO0 segment
-  - [0x3D973C, bin]  # MIO0 segment
-  - [0x3D97D4, bin]  # MIO0 segment
-  - [0x3D9870, bin]  # MIO0 segment
-  - [0x3D9908, bin]  # MIO0 segment
-  - [0x3D99A4, bin]  # MIO0 segment
-  - [0x3D9A50, bin]  # MIO0 segment
-  - [0x3D9AF8, bin]  # MIO0 segment
-  - [0x3D9BB0, bin]  # MIO0 segment
-  - [0x3D9C50, bin]  # MIO0 segment
-  - [0x3D9CF8, bin]  # MIO0 segment
-  - [0x3D9DA8, bin]  # MIO0 segment
-  - [0x3D9E60, bin]  # MIO0 segment
-  - [0x3D9F1C, bin]  # MIO0 segment
-  - [0x3D9FC8, bin]  # MIO0 segment
-  - [0x3DA064, bin]  # MIO0 segment
-  - [0x3DA134, bin]  # MIO0 segment
-  - [0x3DA20C, bin]  # MIO0 segment
-  - [0x3DA2F0, bin]  # MIO0 segment
-  - [0x3DA3BC, bin]  # MIO0 segment
-  - [0x3DA480, bin]  # MIO0 segment
-  - [0x3DA4E4, bin]  # MIO0 segment
-  - [0x3DA5C0, bin]  # MIO0 segment
-  - [0x3DA69C, bin]  # MIO0 segment
-  - [0x3DA77C, bin]  # MIO0 segment
-  - [0x3DA860, bin]  # MIO0 segment
-  - [0x3DA920, bin]  # MIO0 segment
-  - [0x3DA9DC, bin]  # MIO0 segment
-  - [0x3DAAD4, bin]  # MIO0 segment
-  - [0x3DABA0, bin]  # MIO0 segment
-  - [0x3DAC34, bin]  # MIO0 segment
-  - [0x3DAD08, bin]  # MIO0 segment
-  - [0x3DADFC, bin]  # MIO0 segment
-  - [0x3DAEAC, bin]  # MIO0 segment
-  - [0x3DAFBC, bin]  # MIO0 segment
-  - [0x3DB0B4, bin]  # MIO0 segment
-  - [0x3DB1A0, bin]  # MIO0 segment
-  - [0x3DB26C, bin]  # MIO0 segment
-  - [0x3DB374, bin]  # MIO0 segment
-  - [0x3DB454, bin]  # MIO0 segment
-  - [0x3DB538, bin]  # MIO0 segment
-  - [0x3DB5F8, bin]  # MIO0 segment
-  - [0x3DB6E0, bin]  # MIO0 segment
-  - [0x3DB7BC, bin]  # MIO0 segment
-  - [0x3DB8C0, bin]  # MIO0 segment
-  - [0x3DB99C, bin]  # MIO0 segment
-  - [0x3DBA74, bin]  # MIO0 segment
-  - [0x3DBB24, bin]  # MIO0 segment
-  - [0x3DBB98, bin]  # MIO0 segment
-  - [0x3DBBF4, bin]  # MIO0 segment
-  - [0x3DBC54, bin]  # MIO0 segment
-  - [0x3DBCD8, bin]  # MIO0 segment
-  - [0x3DBD34, bin]  # MIO0 segment
-  - [0x3DBDD0, bin]  # MIO0 segment
-  - [0x3DBE40, bin]  # MIO0 segment
-  - [0x3DBEA4, bin]  # MIO0 segment
-  - [0x3DBFA8, bin]  # MIO0 segment
-  - [0x3DC088, bin]  # MIO0 segment
-  - [0x3DC11C, bin]  # MIO0 segment
-  - [0x3DC1FC, bin]  # MIO0 segment
-  - [0x3DC2E4, bin]  # MIO0 segment
-  - [0x3DC3AC, bin]  # MIO0 segment
-  - [0x3DC488, bin]  # MIO0 segment
-  - [0x3DC568, bin]  # MIO0 segment
-  - [0x3DC624, bin]  # MIO0 segment
-  - [0x3DC71C, bin]  # MIO0 segment
-  - [0x3DC80C, bin]  # MIO0 segment
-  - [0x3DC8C4, bin]  # MIO0 segment
-  - [0x3DC988, bin]  # MIO0 segment
-  - [0x3DCA44, bin]  # MIO0 segment
-  - [0x3DCB14, bin]  # MIO0 segment
-  - [0x3DCBB0, bin]  # MIO0 segment
-  - [0x3DCC84, bin]  # MIO0 segment
-  - [0x3DCCE4, bin]  # MIO0 segment
-  - [0x3DCD6C, bin]  # MIO0 segment
-  - [0x3DCDF0, bin]  # MIO0 segment
-  - [0x3DCE84, bin]  # MIO0 segment
-  - [0x3DCF08, bin]  # MIO0 segment
-  - [0x3DCFA4, bin]  # MIO0 segment
-  - [0x3DD018, bin]  # MIO0 segment
-  - [0x3DD0C8, bin]  # MIO0 segment
-  - [0x3DD164, bin]  # MIO0 segment
-  - [0x3DD1A4, bin]  # MIO0 segment
-  - [0x3DD1E8, bin]  # MIO0 segment
-  - [0x3DD22C, bin]  # MIO0 segment
-  - [0x3DD270, bin]  # MIO0 segment
-  - [0x3DD2AC, bin]  # MIO0 segment
-  - [0x3DD2E8, bin]  # MIO0 segment
-  - [0x3DD330, bin]  # MIO0 segment
-  - [0x3DD370, bin]  # MIO0 segment
-  - [0x3DD3A4, bin]  # MIO0 segment
-  - [0x3DD3E4, bin]  # MIO0 segment
-  - [0x3DD424, bin]  # MIO0 segment
-  - [0x3DD460, bin]  # MIO0 segment
-  - [0x3DD4A0, bin]  # MIO0 segment
-  - [0x3DD4E4, bin]  # MIO0 segment
-  - [0x3DD528, bin]  # MIO0 segment
-  - [0x3DD568, bin]  # MIO0 segment
-  - [0x3DD5B0, bin]  # MIO0 segment
-  - [0x3DD5F0, bin]  # MIO0 segment
-  - [0x3DD634, bin]  # MIO0 segment
-  - [0x3DD670, bin]  # MIO0 segment
-  - [0x3DD6B4, bin]  # MIO0 segment
-  - [0x3DD6F8, bin]  # MIO0 segment
-  - [0x3DD73C, bin]  # MIO0 segment
-  - [0x3DD78C, bin]  # MIO0 segment
-  - [0x3DD7C8, bin]  # MIO0 segment
-  - [0x3DD804, bin]  # MIO0 segment
-  - [0x3DD838, bin]  # MIO0 segment
-  - [0x3DD86C, bin]  # MIO0 segment
-  - [0x3DD8A4, bin]  # MIO0 segment
-  - [0x3DD8D0, bin]  # MIO0 segment
-  - [0x3DD924, bin]  # MIO0 segment
-  - [0x3DD968, bin]  # MIO0 segment
-  - [0x3DD9A4, bin]  # MIO0 segment
-  - [0x3DD9E0, bin]  # MIO0 segment
-  - [0x3DDA20, bin]  # MIO0 segment
-  - [0x3DDA60, bin]  # MIO0 segment
-  - [0x3DDAA4, bin]  # MIO0 segment
-  - [0x3DDAE4, bin]  # MIO0 segment
-  - [0x3DDB24, bin]  # MIO0 segment
-  - [0x3DDB5C, bin]  # MIO0 segment
-  - [0x3DDB98, bin]  # MIO0 segment
-  - [0x3E1C18, bin]  # MIO0 segment
-  - [0x3E1D98, bin]  # MIO0 segment
-  - [0x3E1F08, bin]  # MIO0 segment
-  - [0x3E20D4, bin]  # MIO0 segment
-  - [0x3E22AC, bin]  # MIO0 segment
-  - [0x3E3AF4, bin]  # MIO0 segment
-  - [0x3E4A50, bin]  # MIO0 segment
-  - [0x3E5AA0, bin]  # MIO0 segment
-  - [0x3E6A3C, bin]  # MIO0 segment
-  - [0x3E79B8, bin]  # MIO0 segment
-  - [0x3E8840, bin]  # MIO0 segment
-  - [0x3E97D4, bin]  # MIO0 segment
-  - [0x3EA7F0, bin]  # MIO0 segment
-  - [0x3EB808, bin]  # MIO0 segment
-  - [0x3EE21C, bin]  # MIO0 segment
-  - [0x3EE368, bin]  # MIO0 segment
-  - [0x3EE4B0, bin]  # MIO0 segment
-  - [0x3EEC04, bin]  # MIO0 segment
-  - [0x3EED4C, bin]  # MIO0 segment
-  - [0x3EEE9C, bin]  # MIO0 segment
-  - [0x3EEFEC, bin]  # MIO0 segment
-  - [0x3EF140, bin]  # MIO0 segment
-  - [0x3EF2F8, bin]  # MIO0 segment
-  - [0x3EF454, bin]  # MIO0 segment
-  - [0x3EFB38, bin]  # MIO0 segment
-  - [0x3F026C, bin]  # MIO0 segment
-  - [0x3F09A8, bin]  # MIO0 segment
-  - [0x3F1080, bin]  # MIO0 segment
-  - [0x3F1508, bin]  # MIO0 segment
-  - [0x3F1BD4, bin]  # MIO0 segment
-  - [0x3F2834, bin]  # MIO0 segment
-  - [0x3F2958, bin]  # MIO0 segment
-  - [0x3F3344, bin]  # MIO0 segment
-  - [0x3F33C0, bin]  # MIO0 segment
-  - [0x3F343C, bin]  # MIO0 segment
-  - [0x3F34B8, bin]  # MIO0 segment
-  - [0x3F3534, bin]  # MIO0 segment
-  - [0x3F35B0, bin]  # MIO0 segment
-  - [0x3F4984, bin]  # MIO0 segment
-  - [0x3F8AE0, bin]  # MIO0 segment
-  - [0x3FCA90, bin]  # MIO0 segment
-  - [0x3fd860, bin]  # B1
-  - [0x4007E4, bin]  # MIO0 segment
-  - [0x40426C, bin]  # MIO0 segment
-  - [0x4082F8, bin]  # MIO0 segment
-  - [0x40B9D8, bin]  # MIO0 segment
-  - [0x40F22C, bin]  # MIO0 segment
-  - [0x413128, bin]  # MIO0 segment
-  - [0x417D48, bin]  # MIO0 segment
-  - [0x41B88C, bin]  # MIO0 segment
-  - [0x4208E0, bin]  # MIO0 segment
-  - [0x4257EC, bin]  # MIO0 segment
-  - [0x429D8C, bin]  # MIO0 segment
-  - [0x42EA90, bin]  # MIO0 segment
-  - [0x433334, bin]  # MIO0 segment
-  - [0x436C68, bin]  # MIO0 segment
-  - [0x43A5F4, bin]  # MIO0 segment
-  - [0x43E5E4, bin]  # MIO0 segment
-  - [0x442190, bin]  # MIO0 segment
-  - [0x445C7C, bin]  # MIO0 segment
-  - [0x449E60, bin]  # MIO0 segment
-  - [0x44DC64, bin]  # MIO0 segment
-  - [0x452A2C, bin]  # MIO0 segment
-  - [0x456BD8, bin]  # MIO0 segment
-  - [0x45B5F8, bin]  # MIO0 segment
-  - [0x45FC14, bin]  # MIO0 segment
-  - [0x463D0C, bin]  # MIO0 segment
-  - [0x468118, bin]  # MIO0 segment
-  - [0x46CC5C, bin]  # MIO0 segment
-  - [0x471190, bin]  # MIO0 segment
-  - [0x473DEC, bin]  # MIO0 segment
-  - [0x477118, bin]  # MIO0 segment
-  - [0x47A3C4, bin]  # MIO0 segment
-  - [0x47E01C, bin]  # MIO0 segment
-  - [0x4805F4, bin]  # MIO0 segment
-  - [0x480F54, bin]  # MIO0 segment
-  - [0x4825BC, bin]  # MIO0 segment
-  - [0x48484C, bin]  # MIO0 segment
-  - [0x487158, bin]  # MIO0 segment
-  - [0x489F18, bin]  # MIO0 segment
-  - [0x48C9A4, bin]  # MIO0 segment
-  - [0x48E784, bin]  # MIO0 segment
-  - [0x490C80, bin]  # MIO0 segment
-  - [0x493900, bin]  # MIO0 segment
-  - [0x49630C, bin]  # MIO0 segment
-  - [0x499388, bin]  # MIO0 segment
-  - [0x49BAB8, bin]  # MIO0 segment
-  - [0x49dd10, bin]  # B1
-  - [0x49E7C8, bin]  # MIO0 segment
-  - [0x4A1E60, bin]  # MIO0 segment
-  - [0x4a2a70, bin]  # B1
-  - [0x4A44D8, bin]  # MIO0 segment
-  - [0x4A6AB4, bin]  # MIO0 segment
-  - [0x4A8C5C, bin]  # MIO0 segment
-  - [0x4AAED0, bin]  # MIO0 segment
-  - [0x4ADD10, bin]  # MIO0 segment
-  - [0x4B0DB4, bin]  # MIO0 segment
-  - [0x4B3934, bin]  # MIO0 segment
-  - [0x4B682C, bin]  # MIO0 segment
-  - [0x4B959C, bin]  # MIO0 segment
-  - [0x4BC400, bin]  # MIO0 segment
-  - [0x4BE838, bin]  # MIO0 segment
-  - [0x4C14F0, bin]  # MIO0 segment
-  - [0x4C37C0, bin]  # MIO0 segment
-  - [0x4C62F4, bin]  # MIO0 segment
-  - [0x4C8B78, bin]  # MIO0 segment
-  - [0x4CB004, bin]  # MIO0 segment
-  - [0x4CD2E4, bin]  # MIO0 segment
-  - [0x4FEDB4, bin]  # MIO0 segment
-  - [0x4FF664, bin]  # MIO0 segment
-  - [0x50006C, bin]  # MIO0 segment
-  - [0x500AB8, bin]  # MIO0 segment
-  - [0x501430, bin]  # MIO0 segment
-  - [0x501DE0, bin]  # MIO0 segment
-  - [0x5026E4, bin]  # MIO0 segment
-  - [0x502F70, bin]  # MIO0 segment
-  - [0x503918, bin]  # MIO0 segment
-  - [0x504134, bin]  # MIO0 segment
-  - [0x504AAC, bin]  # MIO0 segment
-  - [0x5052E4, bin]  # MIO0 segment
-  - [0x505C3C, bin]  # MIO0 segment
-  - [0x506428, bin]  # MIO0 segment
-  - [0x506CC0, bin]  # MIO0 segment
-  - [0x507704, bin]  # MIO0 segment
-  - [0x5080C4, bin]  # MIO0 segment
-  - [0x508AE8, bin]  # MIO0 segment
-  - [0x509340, bin]  # MIO0 segment
-  - [0x509BFC, bin]  # MIO0 segment
-  - [0x50A488, bin]  # MIO0 segment
-  - [0x50AC04, bin]  # MIO0 segment
-  - [0x50B5B8, bin]  # MIO0 segment
-  - [0x50BFD4, bin]  # MIO0 segment
-  - [0x50C998, bin]  # MIO0 segment
-  - [0x50D190, bin]  # MIO0 segment
-  - [0x50DB08, bin]  # MIO0 segment
-  - [0x50E308, bin]  # MIO0 segment
-  - [0x50ED90, bin]  # MIO0 segment
-  - [0x50F61C, bin]  # MIO0 segment
-  - [0x50FE98, bin]  # MIO0 segment
-  - [0x518F50, bin]  # MIO0 segment
-  - [0x519050, bin]  # MIO0 segment
-  - [0x5191D4, bin]  # MIO0 segment
-  - [0x5192A0, bin]  # MIO0 segment
-  - [0x51953C, bin]  # MIO0 segment
-  - [0x5197B4, bin]  # MIO0 segment
-  - [0x519970, bin]  # MIO0 segment
-  - [0x519C10, bin]  # MIO0 segment
-  - [0x519D34, bin]  # MIO0 segment
-  - [0x519F2C, bin]  # MIO0 segment
-  - [0x51A060, bin]  # MIO0 segment
-  - [0x51A300, bin]  # MIO0 segment
-  - [0x51A4EC, bin]  # MIO0 segment
-  - [0x51A938, bin]  # MIO0 segment
-  - [0x51AB04, bin]  # MIO0 segment
-  - [0x51AF50, bin]  # MIO0 segment
-  - [0x51B0C4, bin]  # MIO0 segment
-  - [0x51B204, bin]  # MIO0 segment
-  - [0x51B3C8, bin]  # MIO0 segment
-  - [0x51B60C, bin]  # MIO0 segment
-  - [0x51B974, bin]  # MIO0 segment
-  - [0x51BD20, bin]  # MIO0 segment
-  - [0x51C024, bin]  # MIO0 segment
-  - [0x51C238, bin]  # MIO0 segment
-  - [0x51C528, bin]  # MIO0 segment
-  - [0x51C848, bin]  # MIO0 segment
-  - [0x51CD70, bin]  # MIO0 segment
-  - [0x51CE54, bin]  # MIO0 segment
-  - [0x51CF68, bin]  # MIO0 segment
-  - [0x51D030, bin]  # MIO0 segment
-  - [0x51D0D0, bin]  # MIO0 segment
-  - [0x51D188, bin]  # MIO0 segment
-  - [0x51D344, bin]  # MIO0 segment
-  - [0x51D4E8, bin]  # MIO0 segment
-  - [0x51D53C, bin]  # MIO0 segment
-  - [0x51D590, bin]  # MIO0 segment
-  - [0x51D67C, bin]  # MIO0 segment
-  - [0x51D754, bin]  # MIO0 segment
-  - [0x51DC48, bin]  # MIO0 segment
-  - [0x527A00, bin]  # compresesed from here?
-  - [0x548630, bin]  # B1
-  - [0x55fa10, bin]  # B1
-  - [0x669ea0, bin]  # B1
-  - [0x715120, bin]  # B1
-  - [0x775dd0, bin]  # B1
-  - [0x8042e0, bin]  # B1
-  - [0x8b29a0, bin]  # B1
-  - [0x9a3050, bin]  # B1
-  - [0xade9e0, bin]  # B1
-  - [0xb37ac0, bin]  # B1
-  - [0xbca2d0, bin]  # B1
-  - [0xbd36e0, bin]  # B1
-  - [0xbf53f0, bin]  # B1
-  - [0xcac9c0, bin]  # B1
-  - [0xd1e620, bin]  # B1
-  - [0xd6eed0, bin]  # B1
-  - [0xdbb1f0, bin]  # B1
-  - [0xdd5f60, bin]  # B1
-  - [0xde16d0, bin]  # B1
-  - [0xe82690, bin]  # B1
-  - [0xe95d90, bin]  # B1
-  - [0xe968e0, bin]  # B1
-  - [0xF67900, bin, trailer]
+  - type: bin
+    start: 0x72030
+    follows_vram: main
   - [0x1000000]
