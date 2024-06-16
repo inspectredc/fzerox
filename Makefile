@@ -333,7 +333,7 @@ ifeq ($(COMPILER),ido)
 # $(BUILD_DIR)/src/libultra/libc/ll.o: MIPS_VERSION := -mips3 -32
 
 # cc & asm-processor
-# CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO) -- $(AS) $(ASFLAGS) --
+CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO) -- $(AS) $(ASFLAGS) --
 # $(BUILD_DIR)/src/libultra/gu/sqrtf.o: CC := $(IDO)
 # $(BUILD_DIR)/src/libultra/gu/sinf.o: CC := $(IDO)
 # $(BUILD_DIR)/src/libultra/gu/lookat.o: CC := $(IDO)
