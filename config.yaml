@@ -1,0 +1,11 @@
+5f658e88ffa9de23cba6986a8fd3d3a90d7b4340:
+  name: F-ZERO X US REV 0 (v1.0)
+  path: assets/yaml/us/rev0
+  config:
+    gbi: F3DEX2
+    sort: OFFSET
+    logging: ERROR
+    output:
+      code: src/assets
+      headers: include/assets
+      modding: src/assets

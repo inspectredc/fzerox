@@ -1,0 +1,58 @@
+name: F-ZERO X US REV 0 (v1.0)
+sha1: 5f658e88ffa9de23cba6986a8fd3d3a90d7b4340
+options:
+  basename: fzerox
+  # todo: fix compression
+  # target_path: baserom.us.rev0.uncompressed.z64
+  target_path: baserom.us.rev0.z64
+  elf_path: build/fzerox.us.rev0.elf
+  ld_script_path: linker_scripts/us/rev0/fzerox.ld
+  base_path: .
+  compiler: IDO
+  find_file_boundaries: True
+  header_encoding: ASCII
+  platform: n64
+  undefined_funcs_auto_path: linker_scripts/us/rev0/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: linker_scripts/us/rev0/auto/undefined_syms_auto.ld
+
+  symbol_addrs_path: 
+    - linker_scripts/us/rev0/symbol_addrs.txt
+
+  asm_path: asm/us/rev0
+  src_path: src
+  asset_path: bin/us/rev0
+
+  build_path: build
+
+  extensions_path: tools/splat_ext
+  mips_abi_float_regs: o32
+  create_asm_dependencies: True
+  do_c_func_detection: True
+  o_as_suffix: True
+  gfx_ucode: f3dex2
+  mnemonic_ljust: 12
+  rom_address_padding: True
+  dump_symbols: True
+  include_macro_inc: False
+  libultra_symbols: True
+  hardware_regs: True
+
+  ld_dependencies: True
+
+
+  use_legacy_include_asm: False
+
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+
+  ld_legacy_generation: True
+  check_consecutive_segment_types: False
+  
+  mips_abi_float_regs: o32
+
+  disasm_unknown: True
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+
+segments:
