@@ -3,7 +3,6 @@ expected
 __pycache__
 .splat/
 fzerox.ld
-fzerox.uncompressed.ld
 fzerox.*.*.yaml
 fzerox.us.modded.map
 ctx.c

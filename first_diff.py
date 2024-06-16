@@ -46,10 +46,10 @@ def firstDiffMain():
 
     buildFolder = Path("build")
 
-    BUILTROM = Path(buildFolder / f"fzerox.us.rev0.uncompressed.z64")
+    BUILTROM = Path(buildFolder / f"fzerox.us.rev0.z64")
     BUILTMAP = buildFolder / f"fzerox.us.rev0.map"
 
-    EXPECTEDROM = Path("baserom.us.rev0.uncompressed.z64")
+    EXPECTEDROM = Path("baserom.us.rev0.z64")
     EXPECTEDMAP = "expected" / BUILTMAP
 
     mapfile_parser.frontends.first_diff.doFirstDiff(BUILTMAP, EXPECTEDMAP, BUILTROM, EXPECTEDROM, args.count, mismatchSize=True, addColons=args.add_colons, bytesConverterCallback=decodeInstruction)

@@ -11,7 +11,7 @@
     vram: 0x80067000
     symbol_name_format: $VRAM
     subsegments:
-      - [0x1000, hasm, entrypoint]
+      - [0x1000, asm, entrypoint]
       - [0x1AE0, c, game/1AE0]
       - [0x2A60, c, game/2A60]
       - [0x2B20, c, game/2B20]

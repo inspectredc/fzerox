@@ -50,7 +50,6 @@ VERSION ?= us
 REV ?= rev0
 
 BASEROM              := baserom.$(VERSION).$(REV).z64
-BASEROM_UNCOMPRESSED := baserom.$(VERSION).$(REV).uncompressed.z64
 TARGET               := fzerox
 
 ### Output ###
@@ -58,13 +57,31 @@ TARGET               := fzerox
 BUILD_DIR := build
 TOOLS	  := tools
 PYTHON	  := python3
-ROM       := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).uncompressed.z64
 ROMC 	  := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).z64
 ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).elf
 LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).map
 LD_SCRIPT := linker_scripts/$(VERSION)/$(REV)/$(TARGET).ld
 
 #### Setup ####
+
+UNAME_S := $(shell uname -s)
+UNAME_M := $(shell uname -m)
+
+ifeq ($(OS),Windows_NT)
+$(error Native Windows is currently unsupported for building this repository, use WSL instead c:)
+else ifeq ($(UNAME_S),Linux)
+    DETECTED_OS := linux
+    #Detect aarch64 devices (Like Raspberry Pi OS 64-bit)
+    #If it's found, then change the compiler to a version that can compile in 32 bit mode.
+    ifeq ($(UNAME_M),aarch64)
+        CC_CHECK_COMP := arm-linux-gnueabihf-gcc
+    endif
+else ifeq ($(UNAME_S),Darwin)
+    DETECTED_OS := macos
+    MAKE := gmake
+    CPPFLAGS += -xc++
+	CC_CHECK_COMP := clang
+endif
 
 # If gcc is used, define the NON_MATCHING flag respectively so the files that
 # are safe to be used can avoid using GLOBAL_ASM which doesn't work with gcc.
@@ -79,8 +96,7 @@ ifeq ($(COMPILER),gcc)
   CC       := $(MIPS_BINUTILS_PREFIX)gcc
 else
 ifeq ($(COMPILER),ido)
-  CC       := $(TOOLS)/ido_recomp/$(DETECTED_OS)/7.1/cc
-  CC_OLD   := $(TOOLS)/ido_recomp/$(DETECTED_OS)/5.3/cc
+  CC   := $(TOOLS)/ido-recomp/$(DETECTED_OS)/cc
 else
 $(error Unsupported compiler. Please use either ido or gcc as the COMPILER variable.)
 endif
@@ -142,24 +158,6 @@ MAKE = make
 CPPFLAGS += -fno-dollars-in-identifiers -P
 LDFLAGS  := --no-check-sections --accept-unknown-input-arch --emit-relocs
 
-UNAME_S := $(shell uname -s)
-UNAME_M := $(shell uname -m)
-ifeq ($(OS),Windows_NT)
-$(error Native Windows is currently unsupported for building this repository, use WSL instead c:)
-else ifeq ($(UNAME_S),Linux)
-    DETECTED_OS := linux
-    #Detect aarch64 devices (Like Raspberry Pi OS 64-bit)
-    #If it's found, then change the compiler to a version that can compile in 32 bit mode.
-    ifeq ($(UNAME_M),aarch64)
-        CC_CHECK_COMP := arm-linux-gnueabihf-gcc
-    endif
-else ifeq ($(UNAME_S),Darwin)
-    DETECTED_OS := macos
-    MAKE := gmake
-    CPPFLAGS += -xc++
-	CC_CHECK_COMP := clang
-endif
-
 # Support python venv's if one is installed.
 PYTHON_VENV = .venv/bin/python3
 ifneq "$(wildcard $(PYTHON_VENV) )" ""
@@ -216,8 +214,6 @@ ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=globa
 SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py
 SPLAT_YAML      ?= $(TARGET).$(VERSION).$(REV).yaml
 
-COMPTOOL		:= $(TOOLS)/comptool.py
-COMPTOOL_DIR	:= baserom
 MIO0			:= $(TOOLS)/mio0
 
 
@@ -389,7 +385,7 @@ else
 # $(BUILD_DIR)/src/libultra/libc/xldtob.o:    OPTFLAGS := -Os
 endif
 
-all: uncompressed
+all: compressed
 
 toolchain:
 	@$(MAKE) -s -C $(TOOLS)
@@ -400,41 +396,19 @@ torch:
 
 init:
 	@$(MAKE) clean
-	@$(MAKE) decompress
 	@$(MAKE) extract -j $(N_THREADS)
 	@$(MAKE) assets -j $(N_THREADS)
-	@$(MAKE) uncompressed -j $(N_THREADS)
-	@$(MAKE) compressed
-
-uncompressed: $(ROM)
-ifneq ($(COMPARE),0)
-	@echo "$(GREEN)Calculating Rom Header Checksum... $(YELLOW)$<$(NO_COL)"
-	@$(PYTHON) $(COMPTOOL) -r $(ROM) .
-	@md5sum --status -c $(TARGET).$(VERSION).$(REV).uncompressed.md5 && \
-	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).uncompressed.z64$(NO_COL): $(GREEN)OK$(NO_COL)" || \
-	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).uncompressed.z64 $(RED)FAILED$(NO_COL)\n"
-	@md5sum --status -c $(TARGET).$(VERSION).$(REV).uncompressed.md5
-endif
+	@$(MAKE) compressed -j $(N_THREADS)
 
 compressed: $(ROMC)
 ifeq ($(COMPARE),1)
 	@echo "$(GREEN)Calculating Rom Header Checksum... $(YELLOW)$<$(NO_COL)"
-	@$(PYTHON) $(COMPTOOL) -r $(ROMC) .
 	@md5sum --status -c $(TARGET).$(VERSION).$(REV).md5 && \
 	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64$(NO_COL): $(GREEN)OK$(NO_COL)\n" || \
 	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64 $(RED)FAILED$(NO_COL)\n"
-	@md5sum --status -c $(TARGET).$(VERSION).$(REV).uncompressed.md5
 endif
 
 #### Main Targets ###
-
-decompress: $(BASEROM)
-	@echo "Decompressing ROM..."
-	@$(PYTHON) $(COMPTOOL) $(DECOMPRESS_OPT) -dse $(COMPTOOL_DIR) -m $(MIO0) $(BASEROM) $(BASEROM_UNCOMPRESSED)
-
-compress: $(BASEROM)
-	@echo "Compressing ROM..."
-	@$(PYTHON) $(COMPTOOL) $(COMPRESS_OPT) -c -m $(MIO0) $(ROM) $(ROMC)
 
 extract:
 	@$(RM) -r asm/$(VERSION)/$(REV) bin/$(VERSION)/$(REV)
@@ -445,12 +419,12 @@ extract:
 
 assets:
 	@echo "Extracting assets from ROM..."
-	@$(TORCH) code $(BASEROM_UNCOMPRESSED)
-	@$(TORCH) header $(BASEROM_UNCOMPRESSED)
-	@$(TORCH) modding export $(BASEROM_UNCOMPRESSED)
+	@$(TORCH) code $(BASEROM)
+	@$(TORCH) header $(BASEROM)
+	@$(TORCH) modding export $(BASEROM)
 
 mod:
-	@$(TORCH) modding import code $(BASEROM_UNCOMPRESSED)
+	@$(TORCH) modding import code $(BASEROM)
 
 clean:
 	rm -f torch.hash.yml
@@ -486,21 +460,17 @@ disasm:
 
 #### Various Recipes ####
 
-# Final ROM
-$(ROMC): $(BASEROM_UNCOMPRESSED)
-	$(call print,Compressing ROM...,$<,$@)
-	@$(PYTHON) $(COMPTOOL) -c -m $(MIO0) $(ROM) $(ROMC)
-
-# Uncompressed ROM
-$(ROM): $(ELF)
+# Compressed ROM
+$(ROMC): $(ELF)
 	$(call print,ELF->ROM:,$<,$@)
 	$(V)$(OBJCOPY) -O binary $< $@
 
 # Link
-$(ELF): $(LIBULTRA_O) $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/pif_syms.ld
+$(ELF): $(LIBULTRA_O) $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/pif_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto/undefined_funcs_auto.ld
 	$(call print,Linking:,$<,$@)
 	$(V)$(LD) $(LDFLAGS) -T $(LD_SCRIPT) \
 		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/hardware_regs.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/undefined_syms.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/pif_syms.ld \
+		-T $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto/undefined_syms_auto.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto/undefined_funcs_auto.ld \
 		-Map $(LD_MAP) -o $@
 
 # PreProcessor
@@ -541,4 +511,4 @@ $(BUILD_DIR)/src/libultra/libc/ll.o: src/libultra/libc/ll.c
 # Print target for debugging
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
-.PHONY: all uncompressed compressed clean init extract expected format checkformat decompress compress assets context disasm toolchain
+.PHONY: all compressed clean init extract expected format checkformat assets context disasm toolchain
