@@ -174,6 +174,7 @@ RED     := \033[0;31m
 GREEN   := \033[0;32m
 BLUE    := \033[0;34m
 YELLOW  := \033[0;33m
+PURPLE  := \033[0;35m
 BLINK   := \033[33;5m
 endif
 
@@ -400,11 +401,13 @@ init:
 	@$(MAKE) assets -j $(N_THREADS)
 	@$(MAKE) compressed -j $(N_THREADS)
 
+FZERO :=$(PURPLE)________        _______    _______    ______      ____         ___   ___\n|  ____/        |___   |   |  ____|   |  __ \    / __ \        \  \ /  /\n| |____    ___     /  /    | |___     | |_/ /   | |  | |        \  V  /\n|  ____|  |___|   /  /     |  ___|    |  _ |    | |  | |         |   |\n| |              /  /__    | |____    | | \ \   | |__| |        /  .  \ \n|_|             |______|   |______|   |_|  \_|   \____/        /__/ \__\ \n$(NO_COL)
+
 compressed: $(ROMC)
 ifeq ($(COMPARE),1)
 	@echo "$(GREEN)Calculating Rom Header Checksum... $(YELLOW)$<$(NO_COL)"
 	@md5sum --status -c $(TARGET).$(VERSION).$(REV).md5 && \
-	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64$(NO_COL): $(GREEN)OK$(NO_COL)\n" || \
+	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64$(NO_COL): $(GREEN)OK$(NO_COL)\n$(FZERO)" || \
 	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64 $(RED)FAILED$(NO_COL)\n"
 endif
 
