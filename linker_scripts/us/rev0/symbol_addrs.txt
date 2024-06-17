@@ -1,0 +1,8 @@
+D_800D35D8 = 0x800D35D8; //size:0xB8
+
+D_800D5AA8 = 0x800D5AA8; //force_migration:True
+D_800D5AC0 = 0x800D5AC0; //force_migration:True
+D_800D5AC8 = 0x800D5AC8; //force_migration:True
+D_800D5AE8 = 0x800D5AE8; //force_migration:True
+
+D_800D6894 = 0x800D6894; //force_migration:True
