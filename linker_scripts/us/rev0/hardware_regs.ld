@@ -73,6 +73,7 @@ PI_BSD_DOM2_LAT_REG = 0xA4600024; // defined:True // PI dom2 latency
 PI_BSD_DOM2_LWD_REG = 0xA4600028; // defined:True // PI dom2 pulse width
 PI_BSD_DOM2_PGS_REG = 0xA460002C; // defined:True // PI dom2 page size
 PI_BSD_DOM2_RLS_REG = 0xA4600030; // defined:True // PI dom2 release
+PI_RDB_REQ_HI_REG = 0xA46E0000; // defined:True
 
 // RDRAM Interface Registers
 RI_MODE_REG = 0xA4700000; // defined:True
