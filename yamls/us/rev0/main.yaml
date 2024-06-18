@@ -34,7 +34,7 @@
       - [0x18410, c, game/18410]
       - [0x194E0, c, game/194E0]
       - [0x197D0, c, game/197D0]
-      - [0x19F40, asm, game/19F40]
+      - [0x19F40, asm, game/19F40] # sys_fault?
       - [0x36ED0, c, game/36ED0]
       - [0x44620, c, game/44620]
       - [0x446D0, c, game/446D0]
@@ -249,8 +249,68 @@
       # - [0x71FC0, rodata] game/459A0?
       # - [0x71FF0, rodata] game/459A0?
       - { start: 0x72030, type: bss, vram: 0x800D8030 }
+  
+  - name: second
+    type: code
+    start: 0x72030
+    vram: 0x800FC730
+    follows_vram: main
+    subsegments:
+      - [0x72030, hasm]
+      - [0x72150, hasm]
+      - [0x721B0, asm]
+      - [0x72E40, asm]
+      - [0x75090, asm]
+      - [0x76270, asm]
+      - [0x77CA0, asm]
+      - [0x78170, asm]
+      - [0x79180, asm]
+      - [0x79830, asm]
+      - [0x79AF0, asm]
+      - [0x7A590, asm]
+      - [0x7AA00, asm]
+      - [0x7AAF0, asm]
+      - [0x7AF20, asm]
+      - [0x7BC20, asm]
+      - [0x7C7E0, asm]
+      - [0x7C960, asm]
+      - [0x7CAB0, asm]
+      - [0x7CBE0, asm]
+      - [0x7E320, asm]
+      - [0x7E4E0, asm]
+      - [0x7E700, asm]
+      - [0x7E830, asm]
+      - [0x7F2B0, asm]
+      - [0x7F3B0, asm]
+      - [0x7F480, asm]
+      - [0x7F8A0, asm]
+      - [0x7F970, asm]
+      - [0x7FB30, asm]
+      - [0x7FC70, asm]
+      - [0x7FD70, asm]
+      - [0x7FE10, asm]
+      - [0x80960, rodata]
+      - [0x810B0, rodata]
+      - [0x81120, rodata]
+      - { start: 0x842A0, type: bss, vram: 0x8010F120 }
 
   - type: bin
-    start: 0x72030
-    follows_vram: main
+    start: 0x842A0
+
+  # - name: third
+  #   type: code
+  #   start: 0xA90C0
+  #   vram: 0x80148B88
+  #   follows_vram: second
+  #   subsegments:
+  #     - [0xA90C0, asm]
+  #     - [0xC2160, asm]
+  #     - [0xC2290, asm]
+  #     - [0xC8970, asm]
+  #     - [0xCCFF0, asm]
+  #     - [0xD0E50, rodata]
+
+  # - type: bin
+  #   start: 0xD28E0
+
   - [0x1000000]
