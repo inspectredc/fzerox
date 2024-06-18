@@ -20,8 +20,8 @@
     follows_vram: entry
     bss_size: 0x24700
     subsegments:
-      - [0x1060, c, game/1060]
-      - [0x1AE0, c, game/1AE0]
+      - [0x1060, c, game/1060] #sys_boot
+      - [0x1AE0, c, game/1AE0] #sys_main
       - [0x2A60, c, game/2A60]
       - [0x2B20, c, game/2B20]
       - [0x73F0, c, game/73F0]
@@ -167,7 +167,9 @@
       - [0x61860, c, libultra/io/vigetnextframebuf]
       - [0x618A0, c, libultra/io/spsetpc]
       - [0x618E0, c, libultra/os/sethwinterrupt]
-      - [0x61930, hasm]
+      # Microcode
+      - [0x61930, textbin, rspboot]
+      - [0x61A00, hasm]
       # todo: verify data splits
       - [0x66FA0, data]
       - [0x66FE0, data]
@@ -289,9 +291,9 @@
       - [0x7FC70, asm]
       - [0x7FD70, asm]
       - [0x7FE10, asm]
-      - [0x80960, rodata]
-      - [0x810B0, rodata]
-      - [0x81120, rodata]
+      - [0x80960, data]
+      - [0x810B0, data]
+      - [0x81120, data]
       - { start: 0x842A0, type: bss, vram: 0x8010F120 }
 
   - type: bin
