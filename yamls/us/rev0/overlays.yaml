@@ -4,7 +4,7 @@
     dir: overlays/ovl_i1
     start: 0x72030
     vram: 0x800FC730
-    # follows_vram: main
+    follows_vram: main
     symbol_name_format: i1_$VRAM
     subsegments:
       - [0x72030, hasm]
@@ -54,7 +54,7 @@
     dir: overlays/ovl_i2
     start: 0x98080
     vram: 0x800FC730
-    # follows_vram: main
+    follows_vram: main
     symbol_name_format: i2_$VRAM
     subsegments:
       - [0x98080, asm]
@@ -122,7 +122,6 @@
     dir: overlays/ovl_i3
     start: 0xA90C0
     vram: 0x80115DF0
-    # follows_vram: main
     symbol_name_format: i3_$VRAM
     subsegments:
       - [0xA90C0, asm]
@@ -141,29 +140,91 @@
       - [0xD4BA0, rodata]
 
 
-  - type: bin
+  - name: ovl_i4
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i4
     start: 0xD4BD0
-    # start: 0x100000
+    vram: 0x80115DF0
+    symbol_name_format: i4_$VRAM
+    subsegments:
+      - [0xD4BD0, asm]
+      - [0xDA760, data]
+      - [0xDC4E0, rodata]
+      - [0xDC560, rodata]
 
-# asm
-      # - [0xDB950, rodata]
-      # - [0xE8A10, rodata]
-      # - [0xEB5C0, rodata]
-      # - [0xEB620, rodata]
-      # - [0xEB6C0, rodata]
-      # - [0xEDAD0, rodata]
-      # - [0xEE030, rodata]
-      # - [0xEE0C0, rodata]
-      # - [0xEE110, rodata]
-      # - [0xEE1C0, rodata]
-      # - [0xEE1F0, rodata]
-      # - [0xEE260, rodata]
-      # - [0xEE290, rodata]
-      # - [0xEE470, rodata]
-      # - [0xEE570, rodata]
-      # - [0xEE5B0, rodata]
-      # - [0xEE5F0, rodata]
-      # - [0xEE660, rodata]
-      # - [0xEE6A0, rodata]
-      # - [0xEE770, rodata]
+  - name: ovl_i5
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i5
+    start: 0xDC570
+    vram: 0x80115DF0
+    symbol_name_format: i5_$VRAM
+    subsegments:
+      - [0xDC570, asm]
+      - [0xDCF90, asm]
+      - [0xDF770, asm]
+      - [0xDF830, data]
+      - [0xDFE40, rodata]
+
+  - name: ovl_i6
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i6
+    start: 0xDFF10
+    vram: 0x80115DF0
+    symbol_name_format: i6_$VRAM
+    subsegments:
+      - [0xDFF10, asm]
+      - [0xE2000, asm]
+      - [0xE7CF0, asm]
+      - [0xE7D60, data]
+      - [0xE9040, rodata]
+      - [0xE9180, rodata]
+
+  - name: ovl_i7
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i7
+    start: 0xE9A30
+    vram: 0x801439D0
+    symbol_name_format: i7_$VRAM
+    subsegments:
+      - [0xE9A30, asm]
+      - [0xEFEF0, data]
+      - [0xF13A0, rodata]
+
+  - name: ovl_i8
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i8
+    start: 0xF14E0
+    # todo: verify vram
+    vram: 0x801439D0
+    symbol_name_format: i8_$VRAM
+    subsegments:
+      - [0xF14E0, asm]
+      - [0xF2A50, data]
+      - [0xF2AB0, rodata]
+
+  - name: ovl_i9
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i9
+    start: 0xF2AC0
+    vram: 0x80115DF0
+    symbol_name_format: i9_$VRAM
+    subsegments:
+      - [0xF2AC0, asm]
+      - [0x145740, data]
+      - [0x1459A0, rodata]
+
+  #File Screen Textures
+  - type: bin
+    start: 0x145B70
+
+  # First MIO0 Segment
+  - type: bin
+    start: 0x16C8A0
+
   - [0x1000000]
