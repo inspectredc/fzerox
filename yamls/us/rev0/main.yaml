@@ -20,8 +20,8 @@
     follows_vram: entry
     bss_size: 0x24700
     subsegments:
-      - [0x1060, c, game/1060]
-      - [0x1AE0, c, game/1AE0]
+      - [0x1060, c, game/1060] #sys_boot
+      - [0x1AE0, c, game/1AE0] #sys_main
       - [0x2A60, c, game/2A60]
       - [0x2B20, c, game/2B20]
       - [0x73F0, c, game/73F0]
@@ -34,7 +34,7 @@
       - [0x18410, c, game/18410]
       - [0x194E0, c, game/194E0]
       - [0x197D0, c, game/197D0]
-      - [0x19F40, asm, game/19F40]
+      - [0x19F40, asm, game/19F40] # sys_fault?
       - [0x36ED0, c, game/36ED0]
       - [0x44620, c, game/44620]
       - [0x446D0, c, game/446D0]
@@ -67,7 +67,7 @@
       - [0x58290, c, libultra/os/virtualtophysical]
       - [0x58310, c, libultra/os/physicaltovirtual]
       - [0x58320, hasm, libultra/os/setsr]
-      - [0x58330, hasm, libultra/os/writebackdcacheall]
+      - [0x58330, hasm, libultra/os/writebackdcache]
       - [0x583B0, c, libultra/os/initialize]
       - [0x58640, c, libultra/os/pirawread]
       - [0x586A0, hasm, libultra/os/getsr]
@@ -161,13 +161,15 @@
       - [0x61340, c, libultra/io/spgetstat]
       - [0x61360, c, libultra/io/vimgr]
       - [0x61670, c, libultra/io/vigetcurrcontext]
-      - [0x61680, hasm, libultra/61680] #libultra/os/writebackdcacheall
+      - [0x61680, hasm, libultra/os/writebackdcacheall]
       - [0x616B0, c, libultra/os/startthread]
       - [0x61800, c, libultra/io/visetyscale]
       - [0x61860, c, libultra/io/vigetnextframebuf]
       - [0x618A0, c, libultra/io/spsetpc]
       - [0x618E0, c, libultra/os/sethwinterrupt]
-      - [0x61930, hasm]
+      # Microcode
+      - [0x61930, textbin, rspboot]
+      - [0x61A00, hasm]
       # todo: verify data splits
       - [0x66FA0, data]
       - [0x66FE0, data]
@@ -250,7 +252,3 @@
       # - [0x71FF0, rodata] game/459A0?
       - { start: 0x72030, type: bss, vram: 0x800D8030 }
 
-  - type: bin
-    start: 0x72030
-    follows_vram: main
-  - [0x1000000]
