@@ -1,0 +1,5 @@
+D_i2_8010AE1C = 0x8010AE1C; //force_migration:True size:0x8 segment:ovl_i2
+
+D_i3_80140F50 = 0x80140F50; //segment:ovl_i3 type:asciz
+D_i3_801417C4 = 0x801417C4; //force_migration:True size:0x8 segment:ovl_i3
+D_i3_801417F8 = 0x801417F8; //force_migration:True size:0x8 segment:ovl_i3
