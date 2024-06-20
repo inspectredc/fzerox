@@ -1,3 +1,5 @@
+D_800D0AC4 = 0x800D0AC4; //type:asciz
+
 D_800D35D8 = 0x800D35D8; //size:0xB8
 
 D_800D5AA8 = 0x800D5AA8; //force_migration:True
@@ -6,3 +8,132 @@ D_800D5AC8 = 0x800D5AC8; //force_migration:True
 D_800D5AE8 = 0x800D5AE8; //force_migration:True
 
 D_800D6894 = 0x800D6894; //force_migration:True
+
+osSendMesg = 0x800BB9B0;
+osRecvMesg = 0x800BBBC0;
+guScaleF = 0x800BBE00;
+
+__ull_rem = 0x800BC1BC;
+__ull_div = 0x800BC1F8;
+__ll_div = 0x800BC29C;
+__ll_mul = 0x800BC2F8;
+send_mesg = 0x800BC994;
+__osEnqueueAndYield = 0x800BCA7C;
+__osEnqueueThread = 0x800BCB7C;
+__osPopThread = 0x800BCBC4;
+__osDispatchThread = 0x800BCBD4;
+__osDequeueThread = 0x800BCD60;
+osDestroyThread = 0x800BCDA0;
+bzero = 0x800BCEB0;
+__osSiCreateAccessQueue = 0x800BDA10;
+__osSiGetAccess = 0x800BDA60;
+__osSiRelAccess = 0x800BDAA4;
+__osContGetInitData = 0x800BDC40;
+__osPackRequestData = 0x800BDD10;
+osVirtualToPhysical = 0x800BE290;
+__osSetSR = 0x800BE320;
+osWritebackDCache = 0x800BE330;
+osPiRawReadIo = 0x800BE640;
+__osGetSR = 0x800BE6A0;
+guPerspectiveF = 0x800BE6F0;
+sinf = 0x800BE980;
+__osSpRawStartDma = 0x800BEB40;
+__osSiRawStartDma = 0x800BEBD0;
+__osSiRawReadIo = 0x800BED40;
+guMtxF2L = 0x800BF200;
+guMtxIdentF = 0x800BF300;
+guLookAtF = 0x800BF4E0;
+__osProbeTLB = 0x800BFE30;
+osGetCount = 0x800C0100;
+sqrtf = 0x800C1760;
+
+_Printf = 0x800C1DE0;
+
+memcpy = 0x800C2630;
+strlen = 0x800C265C;
+strchr = 0x800C2684;
+osCreateMesgQueue = 0x800C26D0;
+osInvalICache = 0x800C27B0;
+__osSpDeviceBusy = 0x800C2830;
+osJamMesg = 0x800C2890;
+osGetTime = 0x800C2F00;
+__osSetTimerIntr = 0x800C31A4;
+__osInsertTimer = 0x800C3218;
+guRotateF = 0x800C33A0;
+__osSetGlobalIntMask = 0x800C3590;
+guNormalize = 0x800C3750;
+__osSetCompare = 0x800C37E0;
+bcopy = 0x800C3810;
+__osResetGlobalIntMask = 0x800C3B20;
+guOrthoF = 0x800C3B80;
+__osDisableInt = 0x800C3D40;
+__osRestoreInt = 0x800C3D60;
+__osViSwapContext = 0x800C3EC0;
+osPiGetCmdQueue = 0x800C41C0;
+cosf = 0x800C41F0;
+__osSetFpcCsr = 0x800C4790;
+__osPfsRequestData = 0x800C5700;
+__osPfsGetInitData = 0x800C57D0;
+osEPiRawReadIo = 0x800C5900;
+osMapTLBRdb = 0x800C5AA0;
+osYieldThread = 0x800C5B00;
+osEPiRawWriteIo = 0x800C6180;
+osSetTimer = 0x800C6310;
+
+_Ldtob = 0x800C6960;
+lldiv = 0x800C6EB0;
+ldiv = 0x800C6FB0;
+_Litob = 0x800C7040;
+__osSiRawWriteIo = 0x800C72E0;
+__osSpSetStatus = 0x800C7330;
+__osSpGetStatus = 0x800C7340;
+osStartThread = 0x800C76B0;
+__osSpSetPc = 0x800C78A0;
+__osHwIntTable = 0x800D1C80;
+__osThreadTail = 0x800D1CA0;
+__osRunQueue = 0x800D1CA8;
+__osActiveQueue = 0x800D1CAC;
+__osRunningThread = 0x800D1CB0;
+__osFaultedThread = 0x800D1CB4;
+__osContinitialized = 0x800D1CD0;
+osClockRate = 0x800D1CE0;
+osViClock = 0x800D1CE8;
+__osShutdown = 0x800D1CEC;
+__OSGlobalIntMask = 0x800D1CF0;
+__osPiDevMgr = 0x800D2E90;
+__osPiTable = 0x800D2EAC;
+__osCurrentHandle = 0x800D2EB0;
+
+__osTimerList = 0x800D2F20;
+
+__osViCurr = 0x800D2F90;
+__osViNext = 0x800D2F94;
+osViModePalLan1 = 0x800D2FA0;
+osViModeNtscLan1 = 0x800D2FF0;
+osViModeMpalLan1 = 0x800D3040;
+
+__osRcpImTable = 0x800D69A0;
+
+__libm_qnan_f = 0x800D6C60;
+
+__osExceptionPreamble = 0x800DC450;
+__osException = 0x800DC460;
+__osCleanupThread = 0x800DCD50;
+
+leoDiskStack = 0x80118B30;
+__osContPifRam = 0x80119C50;
+__osContLastCmd = 0x80119C90;
+__osMaxControllers = 0x80119C91;
+__osEepromTimerQ = 0x80119CB8;
+__osEepromTimerMsg = 0x80119CD0;
+DriveRomHandle = 0x80119CE0;
+__osFinalrom = 0x80119D60;
+__osThreadSave = 0x80119D70;
+__osEventStateTab = 0x8011B300;
+__osCurrentTime = 0x8011B420;
+__osBaseCounter = 0x8011B428;
+__osViIntrCount = 0x8011B42C;
+__osTimerCounter = 0x8011B430;
+
+CartRomHandle = 0x8011B450;
+__osPfsPifRam = 0x8011B4D0;
