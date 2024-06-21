@@ -13,6 +13,20 @@ jobs:
 
     # Todo: Add secrets and verify builds
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: Install package requirements
+      run: sudo apt-get install -y git make git build-essential binutils-mips-linux-gnu python3 python3-pip
+
+    - name: Install Python dependencies
+      run: python3 -m pip install -r ./tools/requirements-python.txt
+
+    - name: Update submodules
+      run: git submodule update --init --recursive
+
     - name: Upload progress to Discord
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       run: python3 tools/upload_progress.py --discord_url ${{ secrets.DISCORD_URL }}
