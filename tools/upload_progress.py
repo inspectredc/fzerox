@@ -21,7 +21,7 @@ def main(args):
         funcs_matching_ratio = (len(matching_funcs) / len(all_funcs)) * 100
         matching_ratio = (matching_size / total_size) * 100
 
-    commit = repo.heads.master.commit
+    commit = repo.heads.main.commit
 
     content = {
         "embeds": [{
