@@ -1040,6 +1040,9 @@
     type: bin
     start: 0x3DDB98
 
+  - type: bin
+    start: 0x3DDBDC
+
   - name: mio0/segment_259
     type: bin
     start: 0x3E1C18
@@ -1059,6 +1062,9 @@
   - name: mio0/segment_263
     type: bin
     start: 0x3E22AC
+
+  - type: bin
+    start: 0x3E236C
 
   - name: mio0/segment_264
     type: bin
@@ -1107,6 +1113,9 @@
   - name: mio0/segment_275
     type: bin
     start: 0x3EE4B0
+
+  - type: bin
+    start: 0x3EE5F8
 
   - name: mio0/segment_276
     type: bin
@@ -1160,6 +1169,9 @@
     type: bin
     start: 0x3F1BD4
 
+  - type: bin
+    start: 0x3F23A8
+
   - name: mio0/segment_289
     type: bin
     start: 0x3F2834
@@ -1191,6 +1203,9 @@
   - name: mio0/segment_296
     type: bin
     start: 0x3F35B0
+
+  - type: bin
+    start: 0x3F36C8
 
   - name: mio0/segment_297
     type: bin
@@ -1460,6 +1475,9 @@
     type: bin
     start: 0x4CD2E4
 
+  - type: bin
+    start: 0x4CFA50
+
   - name: mio0/segment_364
     type: bin
     start: 0x4FEDB4
@@ -1583,6 +1601,9 @@
   - name: mio0/segment_394
     type: bin
     start: 0x50FE98
+
+  - type: bin
+    start: 0x5107A0
 
   - name: mio0/segment_395
     type: bin
@@ -1739,5 +1760,8 @@
   - name: mio0/segment_433
     type: bin
     start: 0x51DC48
+
+  - type: bin
+    start: 0x51DFB0
 
   - [0x1000000]
