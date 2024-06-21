@@ -14,5 +14,5 @@ jobs:
     # Todo: Add secrets and verify builds
     steps:
     - name: Upload progress to Discord
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       run: python3 tools/upload_progress.py --discord_url ${{ secrets.DISCORD_URL }}
