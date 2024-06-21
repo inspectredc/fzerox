@@ -27,6 +27,22 @@ jobs:
     - name: Update submodules
       run: git submodule update --init --recursive
 
+    - name: build toolchain
+      run: make -s -C tools
+
+    - name: Get extra dependencies
+      uses: actions/checkout@v4
+      with:
+        repository: ${{ secrets.FZEROX_DEPENDENCIES }}
+        token: ${{ secrets.FZEROX_TOKEN }}
+        path: fzerox-secret
+
+    - name: Get the dependency
+      run: cp -r fzerox-secret/baserom.us.rev0.z64 ./
+
+    - name: Compile
+      run: make init
+
     - name: Upload progress to Discord
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       run: python3 tools/upload_progress.py --discord_url ${{ secrets.DISCORD_URL }}
