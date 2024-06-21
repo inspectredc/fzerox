@@ -216,6 +216,7 @@ SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py
 SPLAT_YAML      ?= $(TARGET).$(VERSION).$(REV).yaml
 
 MIO0			:= $(TOOLS)/mio0
+EXTRACT_MIO0    := $(PYTHON) $(TOOLS)/decompressMio0Segments.py
 
 
 IINC := -Iinclude -Ibin/$(VERSION).$(REV) -I.
@@ -252,7 +253,7 @@ endif
 
 ASFLAGS         := -march=vr4300 -32 -G0
 COMMON_DEFINES  := -D_MIPS_SZLONG=32
-GBI_DEFINES     := -DF3DEX_GBI
+GBI_DEFINES     := -DF3DEX_GBI_2
 RELEASE_DEFINES := -DNDEBUG
 AS_DEFINES      := -DMIPSEB -D_LANGUAGE_ASSEMBLY -D_ULTRA64
 C_DEFINES       := -DLANGUAGE_C -D_LANGUAGE_C -DBUILD_VERSION=VERSION_H ${RELEASE_DEFINES}
@@ -414,11 +415,13 @@ endif
 #### Main Targets ###
 
 extract:
-	@$(RM) -r asm/$(VERSION)/$(REV) bin/$(VERSION)/$(REV)
+	@$(RM) -r asm/$(VERSION)/$(REV) bin/$(VERSION)/$(REV) mio0/$(VERSION)/$(REV) 
 	@echo "Unifying yamls..."
-	@$(CAT) yamls/$(VERSION)/$(REV)/header.yaml yamls/$(VERSION)/$(REV)/main.yaml yamls/$(VERSION)/$(REV)/assets.yaml yamls/$(VERSION)/$(REV)/overlays.yaml > $(SPLAT_YAML)
+	@$(CAT) yamls/$(VERSION)/$(REV)/header.yaml yamls/$(VERSION)/$(REV)/main.yaml yamls/$(VERSION)/$(REV)/overlays.yaml yamls/$(VERSION)/$(REV)/assets.yaml > $(SPLAT_YAML)
 	@echo "Extracting..."
 	@$(SPLAT) $(SPLAT_YAML)
+	@echo "Decompressing MIO0s..."
+	@$(EXTRACT_MIO0) $(VERSION) $(REV)
 
 assets:
 	@echo "Extracting assets from ROM..."
@@ -433,6 +436,7 @@ clean:
 	rm -f torch.hash.yml
 	@git clean -fdx asm/$(VERSION)/$(REV)
 	@git clean -fdx bin/$(VERSION)/$(REV)
+	@git clean -fdx mio0/$(VERSION)/$(REV) 
 	@git clean -fdx $(BUILD_DIR)/
 	@git clean -fdx src/assets/
 	@git clean -fdx include/assets/
@@ -455,9 +459,9 @@ context:
 	@$(PYTHON) ./$(TOOLS)/m2ctx.py $(filter-out $@, $(MAKECMDGOALS))
 
 disasm:
-	@$(RM) -r asm/$(VERSION)/$(REV) bin/$(VERSION)/$(REV)
+	@$(RM) -r asm/$(VERSION)/$(REV) bin/$(VERSION)/$(REV) mio0/$(VERSION)/$(REV) 
 	@echo "Unifying yamls..."
-	@$(CAT) yamls/$(VERSION)/$(REV)/header.yaml yamls/$(VERSION)/$(REV)/main.yaml yamls/$(VERSION)/$(REV)/assets.yaml yamls/$(VERSION)/$(REV)/overlays.yaml > $(SPLAT_YAML)
+	@$(CAT) yamls/$(VERSION)/$(REV)/header.yaml yamls/$(VERSION)/$(REV)/main.yaml yamls/$(VERSION)/$(REV)/overlays.yaml yamls/$(VERSION)/$(REV)/assets.yaml > $(SPLAT_YAML)
 	@echo "Extracting..."
 	@$(SPLAT) $(SPLAT_YAML) --disassemble-all
 
@@ -480,6 +484,24 @@ $(ELF): $(LIBULTRA_O) $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/$(VERS
 $(BUILD_DIR)/%.ld: %.ld
 	$(call print,PreProcessor:,$<,$@)
 	$(V)$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) $< > $@
+
+# Mio0 Todo: Figure out how to link mio0 bins through here only
+# $(BUILD_DIR)/%.mio0: %.mio0d
+# 	$(call print,mio0:,$<,$@)
+# 	$(V)$(MIO0) -c $< $@
+
+# $(BUILD_DIR)/%.mio0.s: $(BUILD_DIR)/%.mio0
+# 	$(call print,Generating mio0 asm:,$<,$@)
+# 	$(V)$(PRINT) ".section .data\n\n.balign 4\n\n.incbin \"$<\"\n" > $@
+
+# $(BUILD_DIR)/%.o: $(BUILD_DIR)/%.mio0.s
+# 	$(call print,Compiling mio0:,$<,$@)
+# 	$(V)$(AS) $(ASFLAGS) -o $@ $<
+
+# $(BUILD_DIR)/%.o: %.mio0
+# 	$(call print,mio0:,$<,$@)
+# 	$(V)$(MIO0) -c $< $@
+# 	$(V)$(OBJCOPY) -I binary -O elf32-big $@ $@
 
 # Binary
 $(BUILD_DIR)/%.o: %.bin
