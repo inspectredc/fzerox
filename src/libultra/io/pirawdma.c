@@ -18,7 +18,7 @@ s32 __osPiRawStartDma(s32 direction, u32 devAddr, void* dramAddr, u32 size) {
         return -1;
     }
 
-    if ((u32)dramAddr & 0x7) {
+    if ((u32) dramAddr & 0x7) {
         __osError(ERR_OSPIRAWSTARTDMA_ADDR, 1, dramAddr);
         return -1;
     }
@@ -37,7 +37,7 @@ s32 __osPiRawStartDma(s32 direction, u32 devAddr, void* dramAddr, u32 size) {
     WAIT_ON_IOBUSY(stat);
 
     IO_WRITE(PI_DRAM_ADDR_REG, osVirtualToPhysical(dramAddr));
-    IO_WRITE(PI_CART_ADDR_REG, K1_TO_PHYS((u32)osRomBase | devAddr));
+    IO_WRITE(PI_CART_ADDR_REG, K1_TO_PHYS((u32) osRomBase | devAddr));
 
     switch (direction) {
         case OS_READ:

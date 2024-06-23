@@ -12,8 +12,7 @@
 
 #include <PR/guint.h>
 
-void guScaleF(float mf[4][4], float x, float y, float z)
-{
+void guScaleF(float mf[4][4], float x, float y, float z) {
     guMtxIdentF(mf);
 
     mf[0][0] = x;
@@ -22,9 +21,8 @@ void guScaleF(float mf[4][4], float x, float y, float z)
     mf[3][3] = 1;
 }
 
-void guScale(Mtx *m, float x, float y, float z)
-{
-    Matrix	mf;
+void guScale(Mtx* m, float x, float y, float z) {
+    Matrix mf;
 
     guScaleF(mf, x, y, z);
 

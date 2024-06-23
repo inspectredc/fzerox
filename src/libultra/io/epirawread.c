@@ -2,25 +2,6 @@
 #include "PR/ultraerror.h"
 #include "PR/assert.h"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Adjust line numbers to match assert
 #if BUILD_VERSION < VERSION_J
 #line 28

@@ -81,12 +81,12 @@ void INITIALIZE_FUNC() {
     while (__osSiRawWriteIo(PIF_RAM_END - 3, pifdata | 8)) {
         ; // todo: magic contant
     }
-    *(__osExceptionVector*)UT_VEC = *__osExceptionPreamble;
-    *(__osExceptionVector*)XUT_VEC = *__osExceptionPreamble;
-    *(__osExceptionVector*)ECC_VEC = *__osExceptionPreamble;
-    *(__osExceptionVector*)E_VEC = *__osExceptionPreamble;
-    osWritebackDCache((void*)UT_VEC, E_VEC - UT_VEC + sizeof(__osExceptionVector));
-    osInvalICache((void*)UT_VEC, E_VEC - UT_VEC + sizeof(__osExceptionVector));
+    *(__osExceptionVector*) UT_VEC = *__osExceptionPreamble;
+    *(__osExceptionVector*) XUT_VEC = *__osExceptionPreamble;
+    *(__osExceptionVector*) ECC_VEC = *__osExceptionPreamble;
+    *(__osExceptionVector*) E_VEC = *__osExceptionPreamble;
+    osWritebackDCache((void*) UT_VEC, E_VEC - UT_VEC + sizeof(__osExceptionVector));
+    osInvalICache((void*) UT_VEC, E_VEC - UT_VEC + sizeof(__osExceptionVector));
 #if BUILD_VERSION >= VERSION_J
     SPEED_PARAM_FUNC();
     osUnmapTLBAll();
@@ -95,8 +95,7 @@ void INITIALIZE_FUNC() {
     osMapTLBRdb();
     osPiRawReadIo(4, &clock); // Read clock rate from the ROM header
     clock &= ~0xf;
-    if (clock != 0)
-    {
+    if (clock != 0) {
         osClockRate = clock;
     }
 #endif
@@ -140,14 +139,14 @@ void INITIALIZE_FUNC() {
         volatile unsigned int* mon;
         volatile unsigned int* stat;
 
-        stat = (unsigned*)0xbff08004;
-        mon = (unsigned*)0xBFF00000;
+        stat = (unsigned*) 0xbff08004;
+        mon = (unsigned*) 0xBFF00000;
         if (*mon != 0x4B4D4300) {
             return;
         }
 
-        src = (unsigned*)__ptExceptionPreamble;
-        dst = (unsigned*)E_VEC;
+        src = (unsigned*) __ptExceptionPreamble;
+        dst = (unsigned*) E_VEC;
         *dst++ = *src++;
         *dst++ = *src++;
         *dst++ = *src++;
@@ -185,11 +184,9 @@ void INITIALIZE_FUNC() {
 
 #if !defined(_FINALROM) && BUILD_VERSION < VERSION_J
 void ptstart() {
-
 }
 #elif !defined(_FINALROM) && BUILD_VERSION < VERSION_K
 static void ptstart() {
-
 }
 #endif
 

@@ -15,7 +15,7 @@ s32 osPfsFindFile(OSPfs* pfs, u16 company_code, u32 game_code, u8* game_name, u8
     ERRCK(__osCheckId(pfs));
 
     for (j = 0; j < pfs->dir_size; j++) {
-        ERRCK(__osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + j, (u8*)&dir));
+        ERRCK(__osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + j, (u8*) &dir));
 
         if ((dir.company_code == company_code) && dir.game_code == game_code) {
             fail = FALSE;

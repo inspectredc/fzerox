@@ -31,7 +31,7 @@ s32 osAiSetFrequency(u32 frequency) {
     }
 #endif
 
-    f = osViClock / (float)frequency + .5f;
+    f = osViClock / (float) frequency + .5f;
     dacRate = f;
 
     if (dacRate < AI_MIN_DAC_RATE) {
@@ -49,5 +49,5 @@ s32 osAiSetFrequency(u32 frequency) {
 #if BUILD_VERSION < VERSION_J
     IO_WRITE(AI_CONTROL_REG, AI_CONTROL_DMA_ON);
 #endif
-    return osViClock / (s32)dacRate;
+    return osViClock / (s32) dacRate;
 }

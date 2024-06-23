@@ -4,23 +4,25 @@
 #include "PR/controller.h"
 #include "PR/siint.h"
 
-#define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))
+#define READFORMAT(ptr) ((__OSContRamReadFormat*) (ptr))
 
 s32 __osPfsLastChannel = -1;
 
 s32 __osContRamRead(OSMesgQueue* mq, int channel, u16 address, u8* buffer) {
     s32 ret = 0;
     s32 i;
-    u8* ptr = (u8*)&__osPfsPifRam;
+    u8* ptr = (u8*) &__osPfsPifRam;
     s32 retry = 2;
 
     __osSiGetAccess();
 
-    if (__osContLastCmd != CONT_CMD_READ_PAK || (u32)__osPfsLastChannel != channel) {
+    if (__osContLastCmd != CONT_CMD_READ_PAK || (u32) __osPfsLastChannel != channel) {
         __osContLastCmd = CONT_CMD_READ_PAK;
         __osPfsLastChannel = channel;
 
-        for (i = 0; i < channel; i++) { *ptr++ = CONT_CMD_REQUEST_STATUS; }
+        for (i = 0; i < channel; i++) {
+            *ptr++ = CONT_CMD_REQUEST_STATUS;
+        }
 
         __osPfsPifRam.pifstatus = CONT_CMD_EXE;
 
@@ -36,8 +38,7 @@ s32 __osContRamRead(OSMesgQueue* mq, int channel, u16 address, u8* buffer) {
     }
 
     READFORMAT(ptr)->addrh = address >> 3;
-    READFORMAT(ptr)->addrl = (u8)((address << 5) | __osContAddressCrc(address));
-
+    READFORMAT(ptr)->addrl = (u8) ((address << 5) | __osContAddressCrc(address));
 
     ret = __osSiRawStartDma(OS_WRITE, &__osPfsPifRam);
     osRecvMesg(mq, NULL, OS_MESG_BLOCK);

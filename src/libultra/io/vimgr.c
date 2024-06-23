@@ -86,10 +86,10 @@ static void viMgrMain(void* arg) {
     if (retrace == 0) {
         retrace = 1;
     }
-    dm = (OSDevMgr*)arg;
+    dm = (OSDevMgr*) arg;
 
     while (TRUE) {
-        osRecvMesg(dm->evtQueue, (OSMesg)&mb, OS_MESG_BLOCK);
+        osRecvMesg(dm->evtQueue, (OSMesg) &mb, OS_MESG_BLOCK);
         switch (mb->hdr.type) {
             case OS_MESG_TYPE_VRETRACE:
                 __osViSwapContext();

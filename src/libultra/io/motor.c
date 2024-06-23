@@ -6,12 +6,12 @@
 
 static OSPifRam __MotorDataBuf[MAXCONTROLLERS] ALIGNED(8);
 
-#define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))
+#define READFORMAT(ptr) ((__OSContRamReadFormat*) (ptr))
 
 s32 __osMotorAccess(OSPfs* pfs, s32 flag) {
     int i;
     s32 ret;
-    u8* ptr = (u8*)&__MotorDataBuf[pfs->channel];
+    u8* ptr = (u8*) &__MotorDataBuf[pfs->channel];
 
     if (!(pfs->status & PFS_MOTOR_INITIALIZED)) {
         return 5;
@@ -50,7 +50,7 @@ s32 __osMotorAccess(OSPfs* pfs, s32 flag) {
 }
 
 static void __osMakeMotorData(int channel, OSPifRam* mdata) {
-    u8* ptr = (u8*)mdata->ramarray;
+    u8* ptr = (u8*) mdata->ramarray;
     __OSContRamReadFormat ramreadformat;
     int i;
 
@@ -59,7 +59,7 @@ static void __osMakeMotorData(int channel, OSPifRam* mdata) {
     ramreadformat.rxsize = CONT_CMD_WRITE_PAK_RX;
     ramreadformat.cmd = CONT_CMD_WRITE_PAK;
     ramreadformat.addrh = CONT_BLOCK_RUMBLE >> 3;
-    ramreadformat.addrl = (u8)(__osContAddressCrc(CONT_BLOCK_RUMBLE) | (CONT_BLOCK_RUMBLE << 5));
+    ramreadformat.addrl = (u8) (__osContAddressCrc(CONT_BLOCK_RUMBLE) | (CONT_BLOCK_RUMBLE << 5));
 
     if (channel != 0) {
         for (i = 0; i < channel; i++) {

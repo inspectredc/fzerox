@@ -10,12 +10,12 @@ void __osDevMgrMain(void* args) {
     OSDevMgr* dm;
     s32 messageSend = 0;
 
-    dm = (OSDevMgr*)args;
+    dm = (OSDevMgr*) args;
     mb = NULL;
     ret = 0;
 
     while (TRUE) {
-        osRecvMesg(dm->cmdQueue, (OSMesg)&mb, OS_MESG_BLOCK);
+        osRecvMesg(dm->cmdQueue, (OSMesg) &mb, OS_MESG_BLOCK);
 
         if (mb->piHandle != NULL && mb->piHandle->type == DEVICE_TYPE_64DD &&
             (mb->piHandle->transferInfo.cmdType == LEO_CMD_TYPE_0 ||
@@ -27,7 +27,7 @@ void __osDevMgrMain(void* args) {
             info->sectorNum = -1;
 
             if (info->transferMode != LEO_SECTOR_MODE) {
-                blockInfo->dramAddr = (void*)((u32)blockInfo->dramAddr - blockInfo->sectorSize);
+                blockInfo->dramAddr = (void*) ((u32) blockInfo->dramAddr - blockInfo->sectorSize);
             }
 
             if (info->transferMode == LEO_TRACK_MODE && mb->piHandle->transferInfo.cmdType == LEO_CMD_TYPE_0) {

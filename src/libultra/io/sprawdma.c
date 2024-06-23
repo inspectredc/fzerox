@@ -3,50 +3,6 @@
 #include "PR/osint.h"
 #include "PR/assert.h"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Adjust line numbers to match assert
 #if BUILD_VERSION < VERSION_J
 #line 52
@@ -56,9 +12,9 @@
 #ident "$Revision: 1.17 $"
 
 s32 __osSpRawStartDma(s32 direction, u32 devAddr, void* dramAddr, u32 size) {
-    assert(((u32)devAddr & 0x7) == 0);
-    assert(((u32)dramAddr & 0x7) == 0);
-    assert(((u32)size & 0x7) == 0);
+    assert(((u32) devAddr & 0x7) == 0);
+    assert(((u32) dramAddr & 0x7) == 0);
+    assert(((u32) size & 0x7) == 0);
 
     if (__osSpDeviceBusy()) {
         return -1;

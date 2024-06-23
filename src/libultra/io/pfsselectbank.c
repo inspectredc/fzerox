@@ -18,4 +18,3 @@ s32 __osPfsSelectBank(OSPfs* pfs, u8 bank) {
 
     return ret;
 }
-

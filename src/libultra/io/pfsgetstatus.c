@@ -43,7 +43,7 @@ void __osPfsRequestOneChannel(int channel) {
 
     __osPfsPifRam.pifstatus = CONT_CMD_READ_BUTTON;
 
-    ptr = (u8*)&__osPfsPifRam;
+    ptr = (u8*) &__osPfsPifRam;
 
     requestformat.txsize = CONT_CMD_REQUEST_STATUS_TX;
     requestformat.rxsize = CONT_CMD_REQUEST_STATUS_RX;
@@ -56,13 +56,13 @@ void __osPfsRequestOneChannel(int channel) {
         *ptr++ = CONT_CMD_REQUEST_STATUS;
     }
 
-    *(__OSContRequesFormatShort*)ptr = requestformat;
+    *(__OSContRequesFormatShort*) ptr = requestformat;
     ptr += sizeof(__OSContRequesFormatShort);
     *ptr = CONT_CMD_END;
 }
 
 void __osPfsGetOneChannelData(int channel, OSContStatus* data) {
-    u8* ptr = (u8*)&__osPfsPifRam;
+    u8* ptr = (u8*) &__osPfsPifRam;
     __OSContRequesFormatShort requestformat;
     int i;
 
@@ -70,7 +70,7 @@ void __osPfsGetOneChannelData(int channel, OSContStatus* data) {
         ptr++;
     }
 
-    requestformat = *(__OSContRequesFormatShort*)ptr;
+    requestformat = *(__OSContRequesFormatShort*) ptr;
     data->errno = CHNL_ERR(requestformat);
 
     if (data->errno != 0) {

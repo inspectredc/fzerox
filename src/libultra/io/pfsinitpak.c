@@ -28,8 +28,8 @@ s32 osPfsInitPak(OSMesgQueue* queue, OSPfs* pfs, int channel) {
     ERRCK(SELECT_BANK(pfs, 0));
     ERRCK(__osContRamRead(pfs->queue, pfs->channel, PFS_ID_0AREA, temp));
 
-    __osIdCheckSum((u16*)temp, &sum, &isum);
-    id = (__OSPackId*)temp;
+    __osIdCheckSum((u16*) temp, &sum, &isum);
+    id = (__OSPackId*) temp;
 
     if ((id->checksum != sum) || (id->inverted_checksum != isum)) {
         ret = __osCheckPackId(pfs, id);

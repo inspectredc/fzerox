@@ -57,9 +57,9 @@ void __osContGetInitData(u8* pattern, OSContStatus* data) {
     int i;
     u8 bits = 0;
 
-    ptr = (u8*)__osContPifRam.ramarray;
+    ptr = (u8*) __osContPifRam.ramarray;
     for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(requestHeader), data++) {
-        requestHeader = *(__OSContRequesFormat*)ptr;
+        requestHeader = *(__OSContRequesFormat*) ptr;
         data->errno = CHNL_ERR(requestHeader);
 
         if (data->errno != 0) {
@@ -83,7 +83,7 @@ void __osPackRequestData(u8 cmd) {
     }
 
     __osContPifRam.pifstatus = CONT_CMD_EXE;
-    ptr = (u8*)__osContPifRam.ramarray;
+    ptr = (u8*) __osContPifRam.ramarray;
     requestHeader.dummy = CONT_CMD_NOP;
     requestHeader.txsize = CONT_CMD_RESET_TX;
     requestHeader.rxsize = CONT_CMD_RESET_RX;
@@ -94,7 +94,7 @@ void __osPackRequestData(u8 cmd) {
     requestHeader.dummy1 = CONT_CMD_NOP;
 
     for (i = 0; i < __osMaxControllers; i++) {
-        *(__OSContRequesFormat*)ptr = requestHeader;
+        *(__OSContRequesFormat*) ptr = requestHeader;
         ptr += sizeof(requestHeader);
     }
     *ptr = CONT_CMD_END;

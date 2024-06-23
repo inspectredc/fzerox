@@ -34,7 +34,7 @@ s32 osPfsReadWriteFile(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in
     u8 bank;
     u16 blockno;
 
-    if ((file_no >= (s32)pfs->dir_size) || (file_no < 0)) {
+    if ((file_no >= (s32) pfs->dir_size) || (file_no < 0)) {
         return PFS_ERR_INVALID;
     }
 
@@ -49,7 +49,7 @@ s32 osPfsReadWriteFile(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in
     PFS_CHECK_STATUS();
     PFS_CHECK_ID();
     SET_ACTIVEBANK_TO_ZERO();
-    ERRCK(__osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8*)&dir));
+    ERRCK(__osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8*) &dir));
 
     if (dir.company_code == 0 || dir.game_code == 0) {
         return PFS_ERR_INVALID;
@@ -111,7 +111,7 @@ s32 osPfsReadWriteFile(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in
 
         SET_ACTIVEBANK_TO_ZERO();
 
-        ERRCK(__osContRamWrite(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8*)&dir, FALSE));
+        ERRCK(__osContRamWrite(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8*) &dir, FALSE));
     }
 
     return 0;

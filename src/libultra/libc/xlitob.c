@@ -12,9 +12,9 @@
 static char ldigs[] = "0123456789abcdef";
 static char udigs[] = "0123456789ABCDEF";
 
-void _Litob(_Pft *args, char type) {
+void _Litob(_Pft* args, char type) {
     char buff[BUFF_LEN];
-    const char *digs;
+    const char* digs;
     s32 base;
     s32 i;
     unsigned long long ullval;
@@ -37,7 +37,7 @@ void _Litob(_Pft *args, char type) {
 
     while (args->v.ll > 0 && i > 0) {
         lldiv_t qr = lldiv(args->v.ll, base);
-        
+
         args->v.ll = qr.quot;
         buff[--i] = digs[qr.rem];
     }

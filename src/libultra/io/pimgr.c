@@ -32,13 +32,13 @@ void osCreatePiManager(OSPri pri, OSMesgQueue* cmdQ, OSMesg* cmdBuf, s32 cmdMsgC
     }
     func_800C104C();
     osCreateMesgQueue(cmdQ, cmdBuf, cmdMsgCnt);
-    osCreateMesgQueue(&piEventQueue, (OSMesg*)piEventBuf, 1);
+    osCreateMesgQueue(&piEventQueue, (OSMesg*) piEventBuf, 1);
 
     if (!__osPiAccessQueueEnabled) {
         __osPiCreateAccessQueue();
     }
 
-    osSetEventMesg(OS_EVENT_PI, &piEventQueue, (OSMesg)0x22222222);
+    osSetEventMesg(OS_EVENT_PI, &piEventQueue, (OSMesg) 0x22222222);
     oldPri = -1;
     myPri = osGetThreadPri(NULL);
 
@@ -71,7 +71,7 @@ void func_800C104C(void) {
     D_800FA020.pageSize = IO_READ(PI_BSD_DOM1_PGS_REG);
     D_800FA020.relDuration = IO_READ(PI_BSD_DOM1_RLS_REG);
     D_800FA020.domain = 0;
-    
+
     D_800FA098.latency = IO_READ(PI_BSD_DOM2_LAT_REG);
     D_800FA098.pulse = IO_READ(PI_BSD_DOM2_PWD_REG);
     D_800FA098.pageSize = IO_READ(PI_BSD_DOM2_PGS_REG);

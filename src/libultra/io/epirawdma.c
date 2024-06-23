@@ -19,7 +19,7 @@ s32 __osEPiRawStartDma(OSPiHandle* pihandle, s32 direction, u32 devAddr, void* d
         return -1;
     }
 
-    if ((u32)dramAddr & 0x7) {
+    if ((u32) dramAddr & 0x7) {
         __osError(ERR_OSPIRAWSTARTDMA_ADDR, 1, dramAddr);
         return -1;
     }

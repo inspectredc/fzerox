@@ -4,7 +4,7 @@
 
 OSPiHandle DriveRomHandle ALIGNED(8);
 
-OSPiHandle *osDriveRomInit() {
+OSPiHandle* osDriveRomInit() {
     u32 saveMask;
 
     if (DriveRomHandle.baseAddress == PHYS_TO_K1(PI_DOM1_ADDR1)) {

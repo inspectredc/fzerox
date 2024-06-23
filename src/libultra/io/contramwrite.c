@@ -6,28 +6,28 @@
 
 extern s32 __osPfsLastChannel;
 
-#define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))
+#define READFORMAT(ptr) ((__OSContRamReadFormat*) (ptr))
 
 s32 __osContRamWrite(OSMesgQueue* mq, int channel, u16 address, u8* buffer, int force) {
     s32 ret = 0;
     s32 i;
-    u8* ptr = (u8*)__osPfsPifRam.ramarray;
+    u8* ptr = (u8*) __osPfsPifRam.ramarray;
     s32 retry = 2;
     u8 crc;
 
-    
     if ((force != TRUE) && (address < PFS_LABEL_AREA) && (address != 0)) {
         return 0;
     }
 
     __osSiGetAccess();
 
-
-    if (__osContLastCmd != CONT_CMD_WRITE_PAK || (u32)__osPfsLastChannel != channel) {
+    if (__osContLastCmd != CONT_CMD_WRITE_PAK || (u32) __osPfsLastChannel != channel) {
         __osContLastCmd = CONT_CMD_WRITE_PAK;
         __osPfsLastChannel = channel;
 
-        for (i = 0; i < channel; i++) { *ptr++ = CONT_CMD_REQUEST_STATUS; }
+        for (i = 0; i < channel; i++) {
+            *ptr++ = CONT_CMD_REQUEST_STATUS;
+        }
 
         __osPfsPifRam.pifstatus = CONT_CMD_EXE;
 

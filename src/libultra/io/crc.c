@@ -7,7 +7,7 @@ u8 __osContAddressCrc(u16 addr) {
     do {
         temp <<= 1;
 
-        if ((u32)addr & i) {
+        if ((u32) addr & i) {
             if (temp & 0x20) {
                 temp ^= 0x14;
             } else {

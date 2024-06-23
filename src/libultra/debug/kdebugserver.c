@@ -5,7 +5,7 @@
 // not included in final rom, but __osThreadSave is here for some reason
 OSThread __osThreadSave;
 
-extern OSThread *__osRunningThread;
+extern OSThread* __osRunningThread;
 extern u32 __osRdb_IP6_Empty;
 
 #ifndef _FINALROM
@@ -34,14 +34,14 @@ static void send_packet(u8* s, u32 n) {
     for (i = 0; i < n; i++) {
         packet.buf[i] = s[i];
     }
-    *(vu32*)RDB_BASE_REG = *(u32*)&packet;
+    *(vu32*) RDB_BASE_REG = *(u32*) &packet;
 }
 
 static void clear_IP6(void) {
     while (!(__osGetCause() & CAUSE_IP6)) {
         ;
     }
-    *(vu32*)RDB_READ_INTR_REG = 0;
+    *(vu32*) RDB_READ_INTR_REG = 0;
 
     while (__osGetCause() & CAUSE_IP6) {
         ;
@@ -83,7 +83,7 @@ void kdebugserver(rdbPacket packet) {
     }
 
     if (buffer[0] == 2) {
-        send((char*)&__osRunningThread->context, sizeof(__OSThreadContext));
+        send((char*) &__osRunningThread->context, sizeof(__OSThreadContext));
         numChars = 0;
     } else if (numChars >= 9 && buffer[0] == 1) {
         addr = string_to_u32(&buffer[1]);

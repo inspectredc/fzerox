@@ -13,60 +13,58 @@
 #include <PR/guint.h>
 #include <PR/os_version.h>
 
-void guRotateF(float mf[4][4], float a, float x, float y, float z)
-{
-	static float	dtor = 3.1415926 / 180.0;
-	float	sine;
-	float	cosine;
-	float	ab, bc, ca, t;
+void guRotateF(float mf[4][4], float a, float x, float y, float z) {
+    static float dtor = 3.1415926 / 180.0;
+    float sine;
+    float cosine;
+    float ab, bc, ca, t;
 #if BUILD_VERSION >= VERSION_K
-	float xxsine;
-	float yxsine;
-	float zxsine;
+    float xxsine;
+    float yxsine;
+    float zxsine;
 #endif
 
-	guNormalize(&x, &y, &z);
-	a *= dtor;
-	sine = sinf(a);
-	cosine = cosf(a);
-	t = (1-cosine);
-	ab = x*y*t;
-	bc = y*z*t;
-	ca = z*x*t;
+    guNormalize(&x, &y, &z);
+    a *= dtor;
+    sine = sinf(a);
+    cosine = cosf(a);
+    t = (1 - cosine);
+    ab = x * y * t;
+    bc = y * z * t;
+    ca = z * x * t;
 
-	guMtxIdentF(mf);
+    guMtxIdentF(mf);
 
 #if BUILD_VERSION >= VERSION_K
     xxsine = x * sine;
     yxsine = y * sine;
     zxsine = z * sine;
 #else
-    #define xxsine (x * sine)
-    #define yxsine (y * sine)
-    #define zxsine (z * sine)
+#define xxsine (x * sine)
+#define yxsine (y * sine)
+#define zxsine (z * sine)
 #endif
 
-	t = x*x;
-	mf[0][0] = t+cosine*(1-t);
-	mf[2][1] = bc-xxsine;
-	mf[1][2] = bc+xxsine;
+    t = x * x;
+    mf[0][0] = t + cosine * (1 - t);
+    mf[2][1] = bc - xxsine;
+    mf[1][2] = bc + xxsine;
 
-	t = y*y;
-	mf[1][1] = t+cosine*(1-t);
-	mf[2][0] = ca+yxsine;
-	mf[0][2] = ca-yxsine;
+    t = y * y;
+    mf[1][1] = t + cosine * (1 - t);
+    mf[2][0] = ca + yxsine;
+    mf[0][2] = ca - yxsine;
 
-	t = z*z;
-	mf[2][2] = t+cosine*(1-t);
-	mf[1][0] = ab-zxsine;
-	mf[0][1] = ab+zxsine;
+    t = z * z;
+    mf[2][2] = t + cosine * (1 - t);
+    mf[1][0] = ab - zxsine;
+    mf[0][1] = ab + zxsine;
 }
 
-void guRotate(Mtx *m, float a, float x, float y, float z)
-{
-	Matrix	mf;
+void guRotate(Mtx* m, float a, float x, float y, float z) {
+    Matrix mf;
 
-	guRotateF(mf, a, x, y, z);
+    guRotateF(mf, a, x, y, z);
 
-	guMtxF2L(mf, m);
+    guMtxF2L(mf, m);
 }

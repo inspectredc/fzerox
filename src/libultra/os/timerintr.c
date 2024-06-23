@@ -74,11 +74,11 @@ void __osTimerInterrupt(void) {
             } else {
                 pc = __osRunQueue->context.pc;
                 for (prof = __osProfileList; prof < __osProfileListEnd; prof++) {
-                    offset = pc - (u32)prof->text_start;
+                    offset = pc - (u32) prof->text_start;
 
                     if (offset >= 0) {
-                        if ((s32)prof->text_end - (s32)pc > 0) {
-                            (*(u16*)(u32)((offset >> 2) + prof->histo_base))++;
+                        if ((s32) prof->text_end - (s32) pc > 0) {
+                            (*(u16*) (u32) ((offset >> 2) + prof->histo_base))++;
                             goto __ProfDone;
                         }
                     }
