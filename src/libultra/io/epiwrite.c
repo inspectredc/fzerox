@@ -1,3 +1,19 @@
-#include "common.h"
+#include "PR/piint.h"
+#include "PR/ultraerror.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/epiwrite/func_800C58B0.s")
+s32 osEPiWriteIo(OSPiHandle* pihandle, u32 devAddr, u32 data) {
+    register s32 ret;
+
+#ifdef _DEBUG
+    if (devAddr & 0x3) {
+        __osError(ERR_OSPIWRITEIO, 1, devAddr);
+        return -1;
+    }
+#endif
+
+    __osPiGetAccess();
+    ret = __osEPiRawWriteIo(pihandle, devAddr, data);
+    __osPiRelAccess();
+
+    return ret;
+}

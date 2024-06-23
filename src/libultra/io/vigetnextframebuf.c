@@ -1,3 +1,20 @@
-#include "common.h"
+#include "PR/os_internal.h"
+#include "PR/ultraerror.h"
+#include "PR/viint.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/vigetnextframebuf/func_800C7860.s")
+void* osViGetNextFramebuffer(void) {
+    register u32 saveMask;
+    void* framep;
+
+#ifdef _DEBUG
+    if (!__osViDevMgr.active) {
+        __osError(ERR_OSVIGETNEXTFRAMEBUFFER, 0);
+        return NULL;
+    }
+#endif
+
+    saveMask = __osDisableInt();
+    framep = __osViNext->framep;
+    __osRestoreInt(saveMask);
+    return framep;
+}

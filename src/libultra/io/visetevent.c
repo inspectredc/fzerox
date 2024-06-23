@@ -1,3 +1,27 @@
-#include "common.h"
+#include "PR/os_internal.h"
+#include "PR/ultraerror.h"
+#include "PR/assert.h"
+#include "PR/viint.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/visetevent/func_800C45A0.s")
+// TODO: this comes from a header
+#ident "$Revision: 1.17 $"
+
+void osViSetEvent(OSMesgQueue* mq, OSMesg m, u32 retraceCount) {
+    register u32 saveMask;
+
+#ifdef _DEBUG
+    if (!__osViDevMgr.active) {
+        __osError(ERR_OSVISETEVENT, 0);
+        return;
+    }
+
+    assert(mq != NULL);
+#endif
+
+    saveMask = __osDisableInt();
+
+    __osViNext->msgq = mq;
+    __osViNext->msg = m;
+    __osViNext->retraceCount = retraceCount;
+    __osRestoreInt(saveMask);
+}

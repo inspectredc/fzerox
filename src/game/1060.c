@@ -10,10 +10,6 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1060/func_800671A8.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1060/D_800D30D0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1060/D_800D30EC.s")
-
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1060/func_800671EC.s")
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1060/func_800678B8.s")

@@ -1,25 +1,48 @@
-#include "common.h"
+#include "PR/os.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/func_800BC190.s")
+unsigned long long __ull_rshift(unsigned long long a0, unsigned long long a1) {
+    return a0 >> a1;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/__ull_rem.s")
+unsigned long long __ull_rem(unsigned long long a0, unsigned long long a1) {
+    return a0 % a1;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/__ull_div.s")
+unsigned long long __ull_div(unsigned long long a0, unsigned long long a1) {
+    return a0 / a1;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/func_800BC234.s")
+unsigned long long __ll_lshift(unsigned long long a0, unsigned long long a1) {
+    return a0 << a1;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/func_800BC260.s")
+long long __ll_rem(unsigned long long a0, long long a1) {
+    return a0 % a1;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/__ll_div.s")
+long long __ll_div(long long a0, long long a1) {
+    return a0 / a1;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/__ll_mul.s")
+unsigned long long __ll_mul(unsigned long long a0, unsigned long long a1) {
+    return a0 * a1;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/func_800BC328.s")
+void __ull_divremi(unsigned long long* div, unsigned long long* rem, unsigned long long a2, unsigned short a3) {
+    *div = a2 / a3;
+    *rem = a2 % a3;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/func_800BC388.s")
+long long __ll_mod(long long a0, long long a1) {
+    long long tmp = a0 % a1;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/func_800BC424.s")
+    if ((tmp < 0 && a1 > 0) || (tmp > 0 && a1 < 0)) {
+        tmp += a1;
+    }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/__osRcpImTable.s")
+    return tmp;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ll/D_800D6A20.s")
+long long __ll_rshift(long long a0, long long a1) {
+    return a0 >> a1;
+}

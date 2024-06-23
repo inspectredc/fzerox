@@ -1,5 +1,34 @@
-#include "common.h"
+#include "PR/os_version.h"
+#include "libc/stdlib.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ldiv/lldiv.s")
+// TODO: these come from headers
+#ident "$Revision: 1.34 $"
+#ident "$Revision: 1.5 $"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/ldiv/ldiv.s")
+lldiv_t lldiv(long long num, long long denom) {
+    lldiv_t ret;
+
+    ret.quot = num / denom;
+    ret.rem = num - denom * ret.quot;
+
+    if (ret.quot < 0 && ret.rem > 0) {
+        ret.quot += 1;
+        ret.rem -= denom;
+    }
+
+    return ret;
+}
+
+ldiv_t ldiv(long num, long denom) {
+    ldiv_t ret;
+
+    ret.quot = num / denom;
+    ret.rem = num - denom * ret.quot;
+
+    if (ret.quot < 0 && ret.rem > 0) {
+        ret.quot += 1;
+        ret.rem -= denom;
+    }
+
+    return ret;
+}
