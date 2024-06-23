@@ -331,22 +331,8 @@ $(BUILD_DIR)/src/libultra/io/viswapcontext.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/io/motor.o: OPTFLAGS := -O2 -g0
 
 $(BUILD_DIR)/src/libultra/os/%.o: OPTFLAGS := -O1 -g0
-# $(BUILD_DIR)/src/libultra/rmon/%.o: OPTFLAGS := -O1 -g0
-# $(BUILD_DIR)/src/libultra/debug/%.o: OPTFLAGS := -O1 -g0
-# $(BUILD_DIR)/src/libultra/host/%.o:	OPTFLAGS := -O1 -g0
-# $(BUILD_DIR)/src/audio/%.o: OPTFLAGS := -O2 -g0
 
 # per-file flags
-# $(BUILD_DIR)/src/audio/audio_effects.o: CFLAGS += -use_readwrite_const
-# $(BUILD_DIR)/src/audio/audio_heap.o: CFLAGS += -use_readwrite_const
-# $(BUILD_DIR)/src/audio/audio_load.o: CFLAGS += -use_readwrite_const
-# $(BUILD_DIR)/src/audio/audio_seqplayer.o: CFLAGS += -use_readwrite_const
-# $(BUILD_DIR)/src/audio/audio_playback.o: CFLAGS += -use_readwrite_const
-# $(BUILD_DIR)/src/audio/audio_synthesis.o: CFLAGS += -use_readwrite_const
-
-# $(BUILD_DIR)/src/libc_sprintf.o: OPTFLAGS := -O2 -g0
-# $(BUILD_DIR)/src/libc_math64.o: OPTFLAGS := -O2 -g0
-
 $(BUILD_DIR)/src/libultra/libc/ldiv.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/libc/string.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/libc/sprintf.o: OPTFLAGS := -O2 -g0
@@ -364,10 +350,6 @@ $(BUILD_DIR)/src/libultra/gu/%.o: CC := $(IDO)
 $(BUILD_DIR)/src/libultra/io/%.o: CC := $(IDO)
 $(BUILD_DIR)/src/libultra/os/%.o: CC := $(IDO)
 $(BUILD_DIR)/src/libultra/libc/%.o: CC := $(IDO)
-# $(BUILD_DIR)/src/libultra/gu/translate.o: CC := $(IDO)
-# $(BUILD_DIR)/src/libultra/libc/ll.o: CC := $(IDO)
-# $(BUILD_DIR)/src/libultra/libc/xprintf.o: CC := $(IDO)
-# $(BUILD_DIR)/src/libultra/libc/xldtob.o: CC := $(IDO)
 else
 # directory flags
 # $(BUILD_DIR)/src/libultra/gu/%.o:    OPTFLAGS := -Os
