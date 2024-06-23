@@ -20,7 +20,7 @@ void __osSetHWIntrRoutine(OSHWIntr interrupt, s32 (*handler)(void), void* stackE
 
 #else
 
-extern struct s32 (*__osHwIntTable[])(void);
+extern s32 (*__osHwIntTable[])(void);
 
 void __osSetHWIntrRoutine(OSHWIntr interrupt, s32 (*handler)(void)) {
     register u32 saveMask = __osDisableInt();
