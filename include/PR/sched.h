@@ -24,7 +24,7 @@
  *
  *  $Revision: 1.7 $
  *  $Date: 1997/02/11 08:32:02 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/sched.h,v $
+ *  $Source: /exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/sched.h,v $
  *
  **************************************************************************/
 

@@ -1,21 +1,31 @@
-#include "common.h"
+long long __d_to_ll(double d) {
+    return d;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/llcvt/func_800BFEF0.s")
+long long __f_to_ll(float f) {
+    return f;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/llcvt/func_800BFF0C.s")
+unsigned long long __d_to_ull(double d) {
+    return d;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/llcvt/func_800BFF28.s")
+unsigned long long __f_to_ull(float f) {
+    return f;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/llcvt/func_800BFFC8.s")
+double __ll_to_d(long long s) {
+    return s;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/llcvt/func_800C0064.s")
+float __ll_to_f(long long s) {
+    return s;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/llcvt/func_800C007C.s")
+double __ull_to_d(unsigned long long u) {
+    return u;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/llcvt/func_800C0094.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/llcvt/func_800C00C8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/llcvt/D_800D6AD0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/llcvt/D_800D6AD8.s")
+float __ull_to_f(unsigned long long u) {
+    return u;
+}

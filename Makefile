@@ -307,9 +307,30 @@ $(shell mkdir -p $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV) $(BUILD_DIR)/link
 ifeq ($(COMPILER),ido)
 
 # directory flags
-# $(BUILD_DIR)/src/libultra/gu/%.o: OPTFLAGS := -O3 -g0
-# $(BUILD_DIR)/src/libultra/io/%.o: OPTFLAGS := -O1 -g0
-# $(BUILD_DIR)/src/libultra/os/%.o: OPTFLAGS := -O1 -g0
+$(BUILD_DIR)/src/libultra/gu/%.o: OPTFLAGS := -O3 -g0
+$(BUILD_DIR)/src/libultra/io/%.o: OPTFLAGS := -O1 -g0
+$(BUILD_DIR)/src/libultra/io/pimgr.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/vimgr.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/sirawdma.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/pfsselectbank.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/leointerrupt.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/crc.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/contramread.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/contramwrite.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/contreaddata.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/contpfs.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/pfsreadwritefile.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/pfsallocatefile.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/pfsfreeblocks.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/pfssearchfile.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/pfsinitpak.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/pfsgetstatus.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/pfschecker.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/leodiskinit.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/viswapcontext.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/motor.o: OPTFLAGS := -O2 -g0
+
+$(BUILD_DIR)/src/libultra/os/%.o: OPTFLAGS := -O1 -g0
 # $(BUILD_DIR)/src/libultra/rmon/%.o: OPTFLAGS := -O1 -g0
 # $(BUILD_DIR)/src/libultra/debug/%.o: OPTFLAGS := -O1 -g0
 # $(BUILD_DIR)/src/libultra/host/%.o:	OPTFLAGS := -O1 -g0
@@ -326,24 +347,25 @@ ifeq ($(COMPILER),ido)
 # $(BUILD_DIR)/src/libc_sprintf.o: OPTFLAGS := -O2 -g0
 # $(BUILD_DIR)/src/libc_math64.o: OPTFLAGS := -O2 -g0
 
-# $(BUILD_DIR)/src/libultra/libc/ldiv.o: OPTFLAGS := -O2 -g0
-# $(BUILD_DIR)/src/libultra/libc/string.o: OPTFLAGS := -O2 -g0
-# $(BUILD_DIR)/src/libultra/libc/xlitob.o: OPTFLAGS := -O2 -g0
-# $(BUILD_DIR)/src/libultra/libc/xldtob.o: OPTFLAGS := -O3 -g0
-# $(BUILD_DIR)/src/libultra/libc/xprintf.o: OPTFLAGS := -O3 -g0
-# $(BUILD_DIR)/src/libultra/libc/ll.o: OPTFLAGS := -O1 -g0
-# $(BUILD_DIR)/src/libultra/libc/ll.o: MIPS_VERSION := -mips3 -32
+$(BUILD_DIR)/src/libultra/libc/ldiv.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/libc/string.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/libc/sprintf.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/libc/xlitob.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/libc/xldtob.o: OPTFLAGS := -O3 -g0
+$(BUILD_DIR)/src/libultra/libc/xprintf.o: OPTFLAGS := -O3 -g0
+$(BUILD_DIR)/src/libultra/libc/ll.o: OPTFLAGS := -O1 -g0
+$(BUILD_DIR)/src/libultra/libc/ll.o: MIPS_VERSION := -mips3 -32
+$(BUILD_DIR)/src/libultra/libc/llcvt.o: OPTFLAGS := -O1 -g0
+$(BUILD_DIR)/src/libultra/libc/llcvt.o: MIPS_VERSION := -mips3 -32
 
 # cc & asm-processor
 CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO) -- $(AS) $(ASFLAGS) --
-# $(BUILD_DIR)/src/libultra/gu/sqrtf.o: CC := $(IDO)
-# $(BUILD_DIR)/src/libultra/gu/sinf.o: CC := $(IDO)
-# $(BUILD_DIR)/src/libultra/gu/lookat.o: CC := $(IDO)
-# $(BUILD_DIR)/src/libultra/gu/ortho.o: CC := $(IDO)
+$(BUILD_DIR)/src/libultra/gu/%.o: CC := $(IDO)
+$(BUILD_DIR)/src/libultra/io/%.o: CC := $(IDO)
+$(BUILD_DIR)/src/libultra/os/%.o: CC := $(IDO)
+$(BUILD_DIR)/src/libultra/libc/%.o: CC := $(IDO)
+# $(BUILD_DIR)/src/libultra/gu/translate.o: CC := $(IDO)
 # $(BUILD_DIR)/src/libultra/libc/ll.o: CC := $(IDO)
-# $(BUILD_DIR)/src/libultra/gu/perspective.o: CC := $(IDO)
-# $(BUILD_DIR)/src/libultra/gu/mtxutil.o: CC := $(IDO)
-# $(BUILD_DIR)/src/libultra/gu/cosf.o: CC := $(IDO)
 # $(BUILD_DIR)/src/libultra/libc/xprintf.o: CC := $(IDO)
 # $(BUILD_DIR)/src/libultra/libc/xldtob.o: CC := $(IDO)
 else
@@ -524,6 +546,15 @@ $(BUILD_DIR)/%.o: %.c
 
 # Patch ll.o
 $(BUILD_DIR)/src/libultra/libc/ll.o: src/libultra/libc/ll.c
+	$(call print,Patching:,$<,$@)
+	@$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
+	$(V)$(CC) -c $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(OPTFLAGS) -o $@ $<
+	$(V)$(PYTHON) $(TOOLS)/set_o32abi_bit.py $@
+	$(V)$(OBJDUMP_CMD)
+	$(V)$(RM_MDEBUG)
+
+# Patch llcvt.o
+$(BUILD_DIR)/src/libultra/libc/llcvt.o: src/libultra/libc/llcvt.c
 	$(call print,Patching:,$<,$@)
 	@$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
 	$(V)$(CC) -c $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(OPTFLAGS) -o $@ $<

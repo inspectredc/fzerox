@@ -20,9 +20,9 @@
 
 /**************************************************************************
  *
- *  $Revision: 1.23 $
- *  $Date: 1997/02/11 08:38:08 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/ultraerror.h,v $
+ *  $Revision: 1.27 $
+ *  $Date: 1999/07/14 02:44:00 $
+ *  $Source: /exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/ultraerror.h,v $
  *
  **************************************************************************/
 
@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-#include <PR/ultratypes.h>
+#include "ultratypes.h"
 
 #define	OS_ERROR_FMT	"/usr/lib/PR/error.fmt"
 #define OS_ERROR_MAGIC	0x6b617479

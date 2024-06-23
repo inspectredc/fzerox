@@ -1,5 +1,23 @@
-#include "common.h"
+#include "PR/xstdio.h"
+#include "libc/string.h"
+#include "PR/os.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/sprintf/func_800C2430.s")
+// TODO: this comes from a header
+#ident "$Revision: 1.23 $"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/libc/sprintf/func_800C2454.s")
+static char* proutSprintf(char* dst, const char* src, size_t count);
+
+static char* proutSprintf(char* dst, const char* src, size_t count) {
+    return (char*)memcpy((u8*)dst, (u8*)src, count) + count;
+}
+
+int sprintf(char* dst, const char* fmt, ...) {
+    s32 ans;
+    va_list ap;
+    va_start(ap, fmt);
+    ans = _Printf(proutSprintf, dst, fmt, ap);
+    if (ans >= 0) {
+        dst[ans] = 0;
+    }
+    return ans;
+}

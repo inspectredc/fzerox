@@ -1,3 +1,16 @@
-#include "common.h"
+#include "PR/os_internal.h"
+#include "PR/ultraerror.h"
+#include "PR/osint.h"
+#include "PR/viint.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/os/settime/func_800C4570.s")
+void osSetTime(OSTime time) {
+
+#ifdef _DEBUG
+    if (!__osViDevMgr.active) {
+        __osError(ERR_OSSETTIME, 0);
+        return;
+    }
+#endif
+
+    __osCurrentTime = time;
+}

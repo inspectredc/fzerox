@@ -1,3 +1,32 @@
-#include "common.h"
+#include "PR/os_internal.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/os/sethwinterrupt/func_800C78E0.s")
+// A stack frame was added to hardware interrupt handlers in 2.0J
+#if BUILD_VERSION >= VERSION_J
+
+struct __osHwInt {
+    s32 (*handler)(void);
+    void* stackEnd;
+};
+
+extern struct __osHwInt __osHwIntTable[];
+
+void __osSetHWIntrRoutine(OSHWIntr interrupt, s32 (*handler)(void), void* stackEnd) {
+    register u32 saveMask = __osDisableInt();
+
+    __osHwIntTable[interrupt].handler = handler;
+    __osHwIntTable[interrupt].stackEnd = stackEnd;
+    __osRestoreInt(saveMask);
+}
+
+#else
+
+extern struct s32 (*__osHwIntTable[])(void);
+
+void __osSetHWIntrRoutine(OSHWIntr interrupt, s32 (*handler)(void)) {
+    register u32 saveMask = __osDisableInt();
+
+    __osHwIntTable[interrupt] = handler;
+    __osRestoreInt(saveMask);
+}
+
+#endif

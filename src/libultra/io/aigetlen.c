@@ -1,3 +1,8 @@
-#include "common.h"
+#include "PR/rcp.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/aigetlen/func_800C58A0.s")
+// TODO: this comes from a header
+#ident "$Revision: 1.17 $"
+
+u32 osAiGetLength(void) {
+    return IO_READ(AI_LEN_REG);
+}

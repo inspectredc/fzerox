@@ -1,3 +1,9 @@
-#include "common.h"
+#include "PR/os_internal.h"
+#include "PR/rcp.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/dpgetstat/func_800C3800.s")
+// TODO: this comes from a header
+#ident "$Revision: 1.17 $"
+
+u32 osDpGetStatus() {
+    return IO_READ(DPC_STATUS_REG);
+}

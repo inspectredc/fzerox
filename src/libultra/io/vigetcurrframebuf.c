@@ -1,7 +1,20 @@
-#include "common.h"
+#include "PR/os_internal.h"
+#include "PR/ultraerror.h"
+#include "PR/viint.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/vigetcurrframebuf/func_800BE6B0.s")
+void* osViGetCurrentFramebuffer(void) {
+    register u32 saveMask;
+    void* framep;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/vigetcurrframebuf/guPerspectiveF.s")
+#ifdef _DEBUG
+    if (!__osViDevMgr.active) {
+        __osError(ERR_OSVIGETCURRENTFRAMEBUFFER, 0);
+        return NULL;
+    }
+#endif
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/vigetcurrframebuf/func_800BE920.s")
+    saveMask = __osDisableInt();
+    framep = __osViCurr->framep;
+    __osRestoreInt(saveMask);
+    return framep;
+}

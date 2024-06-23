@@ -1,5 +1,18 @@
-#include "common.h"
+#include "PR/os_internal.h"
+#include "PR/sptask.h"
+#include "PR/rcp.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/sptaskyielded/func_800C2D60.s")
+OSYieldResult osSpTaskYielded(OSTask* tp) {
+    u32 status;
+    OSYieldResult result;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/sptaskyielded/func_800C2DE0.s")
+    status = __osSpGetStatus();
+    result = (status & SP_STATUS_YIELDED) ? OS_TASK_YIELDED : 0;
+
+    if (status & SP_STATUS_YIELD) {
+        tp->t.flags |= result;
+        tp->t.flags &= ~(OS_TASK_DP_WAIT);
+    }
+
+    return result;
+}

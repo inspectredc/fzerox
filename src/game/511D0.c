@@ -132,8 +132,4 @@ void func_800BAF28(void) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/511D0/func_800BB49C.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/511D0/func_800BB4E0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/511D0/func_800BB61C.s")
-
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/511D0/D_800D6050.s")

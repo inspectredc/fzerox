@@ -1,3 +1,19 @@
-#include "common.h"
+#include "PR/piint.h"
+#include "PR/ultraerror.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/libultra/io/epiread/func_800C4360.s")
+s32 osEPiReadIo(OSPiHandle* pihandle, u32 devAddr, u32* data) {
+    register s32 ret;
+
+#ifdef _DEBUG
+    if (devAddr & 0x3) {
+        __osError(ERR_OSPIREADIO, 1, devAddr);
+        return -1;
+    }
+#endif
+
+    __osPiGetAccess();
+    ret = __osEPiRawReadIo(pihandle, devAddr, data);
+    __osPiRelAccess();
+
+    return ret;
+}
