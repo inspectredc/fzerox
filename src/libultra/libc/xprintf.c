@@ -88,9 +88,9 @@ int _Printf(outfun prout, char* arg, const char* fmt, va_list args) {
             for (x.prec = 0; isdigit(*s); s++) {
                 if (x.prec < 999) {
                     x.prec = x.prec * 10 + *s - '0';
-}
+                }
             }
-}
+        }
 
         x.qual = strchr("hlL", *s) ? *s++ : '\0';
 
@@ -209,7 +209,7 @@ static void _Putfld(_Pft* x, va_list* args, char type, char* buff) {
                 buff[x->n0++] = '+';
             } else if (x->flags & FLAGS_SPACE) {
                 buff[x->n0++] = ' ';
-}
+            }
 
             x->s = (char*) &buff[x->n0];
             _Ldtob(x, type);

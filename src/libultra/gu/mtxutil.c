@@ -27,7 +27,7 @@ void guMtxF2L(float mf[4][4], Mtx* m) {
             *(ai++) = (e1 & 0xffff0000) | ((e2 >> 16) & 0xffff);
             *(af++) = ((e1 << 16) & 0xffff0000) | (e2 & 0xffff);
         }
-}
+    }
 }
 
 void guMtxL2F(float mf[4][4], Mtx* m) {
@@ -49,7 +49,7 @@ void guMtxL2F(float mf[4][4], Mtx* m) {
             mf[i][j * 2] = FIX32TOF(q1);
             mf[i][j * 2 + 1] = FIX32TOF(q2);
         }
-}
+    }
 }
 
 void guMtxIdentF(float mf[4][4]) {
@@ -61,9 +61,9 @@ void guMtxIdentF(float mf[4][4]) {
                 mf[i][j] = 1.0;
             } else {
                 mf[i][j] = 0.0;
-}
-}
-}
+            }
+        }
+    }
 }
 
 void guMtxIdent(Mtx* m) {

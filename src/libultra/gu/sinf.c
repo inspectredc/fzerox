@@ -119,7 +119,7 @@ float fsin(float x) {
 
         if ((n & 1) == 0) {
             return ((float) result);
-}
+        }
 
         return (-(float) result);
     }
