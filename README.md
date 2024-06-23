@@ -1,3 +1,5 @@
+[![Discord Channel][discord-badge]][discord]
+
 # F-ZERO X (US) REV 1.0
 
 This is a WIP Matching Decompilation for F-ZERO X.
@@ -108,3 +110,6 @@ fzerox.us.rev0.z64 FAILED
 This means that something is wrong with the ROM's contents. Either the base files are incorrect due to a bad ROM, or some of the code is not matching.
 
 From now on you should be able to build the rom by running `make`.
+
+[discord]: https://discord.gg/f2gmBaHySA
+[discord-badge]: https://img.shields.io/discord/1252984267471061053?logo=discord&logoColor=ffffff
