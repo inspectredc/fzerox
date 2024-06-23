@@ -20,9 +20,9 @@ s32 __osContRamRead(OSMesgQueue* mq, int channel, u16 address, u8* buffer) {
         __osContLastCmd = CONT_CMD_READ_PAK;
         __osPfsLastChannel = channel;
 
-        for (i = 0; i < channel; i++) {
-            *ptr++ = CONT_CMD_REQUEST_STATUS;
-        }
+        // clang-format off
+        for (i = 0; i < channel; i++) { *ptr++ = CONT_CMD_REQUEST_STATUS; }
+        // clang-format on
 
         __osPfsPifRam.pifstatus = CONT_CMD_EXE;
 
