@@ -350,6 +350,7 @@ $(BUILD_DIR)/src/libultra/gu/%.o: CC := $(IDO)
 $(BUILD_DIR)/src/libultra/io/%.o: CC := $(IDO)
 $(BUILD_DIR)/src/libultra/os/%.o: CC := $(IDO)
 $(BUILD_DIR)/src/libultra/libc/%.o: CC := $(IDO)
+$(BUILD_DIR)/src/libultra/debug/%.o: CC := $(IDO)
 else
 # directory flags
 # $(BUILD_DIR)/src/libultra/gu/%.o:    OPTFLAGS := -Os
