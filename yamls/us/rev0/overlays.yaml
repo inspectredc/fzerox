@@ -7,6 +7,7 @@
     symbol_name_format: i1_$VRAM
     subsegments:
       - [0x72030, hasm]
+      - [0x72120, asm]
       - [0x72150, hasm]
       - [0x721B0, c]
       - [0x72E40, c]

@@ -9,6 +9,9 @@
 
 #define ABS(x) ((x) >= 0 ? (x) : -(x))
 
+#define true 1
+#define false 0
+
 /*
  * Macros for libultra
  */
