@@ -13,7 +13,8 @@
     "ctx.c" : true
   },
   "defines": [
-    "_LANGUAGE_C"
+    "_LANGUAGE_C",
+    "F3DEX_GBI_2"
   ],
   "files.associations": {
     "hud.h": "c",
@@ -89,7 +90,8 @@
     "object_ram.h": "c",
     "string": "c",
     "prevent_bss_reordering3.h": "c",
-    "siint.h": "c"
+    "siint.h": "c",
+    "cstdint": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": ""
 }

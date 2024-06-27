@@ -22,9 +22,10 @@
     subsegments:
       # Game/Sys
       - [0x1060, c, game/1060] #sys_boot
+      - [0x1AD0, pad]
       - [0x1AE0, c, game/1AE0] #sys_main
       - [0x2A60, c, game/2A60]
-      - [0x2B20, c, game/2B20]
+      - [0x2B20, c, game/2B20] #sys_joybus
       - [0x73F0, c, game/73F0]
       - [0xEA90, c, game/EA90]
       - [0xF0B0, c, game/F0B0]
@@ -185,6 +186,8 @@
 
       # DATA - todo: split data
       - [0x62920, data]
+      - [0x66FF0, .data, game/2A60]
+      - [0x67000, data]
       - [0x6BC80, data, libultra/os/exceptasm]
       - [0x6BCA0, .data, libultra/os/thread]
       - [0x6BCD0, .data, libultra/io/controller]
