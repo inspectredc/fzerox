@@ -22,11 +22,6 @@
 
 #include <PR/ultratypes.h>
 
-// m2ctx hack: todo fix
-#ifndef F3DEX_GBI_2
-#define F3DEX_GBI_2
-#endif
-
 /*
  * To use the F3DEX ucodes, define F3DEX_GBI before include this file.
  *

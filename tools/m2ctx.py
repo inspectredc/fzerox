@@ -23,11 +23,10 @@ CPP_FLAGS = [
     "-D__sgi",
     "-D_LANGUAGE_C",
     "-DNON_MATCHING",
-    "-D_Static_assert(x, y)=",
-    "-D__attribute__(x)="
     "-D_MIPS_SZLONG=32",
     "-ffreestanding",
     "-DM2CTX",
+    "-DF3DEX_GBI_2",
 
     "-std=gnu89",
 ]
