@@ -1,12 +1,10 @@
 #include "global.h"
-#include "libultra/ultra64.h"
-#include "libc/stdint.h"
 
-s32 func_8006D3F0(s32 arg0) {
+bool func_8006D3F0(s32 arg0) {
     if ((arg0 >= 0) && (arg0 < 0x16)) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 typedef struct unk_802D3978 {

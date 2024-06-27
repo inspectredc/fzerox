@@ -1,5 +1,4 @@
 #include "global.h"
-#include "libultra/ultra64.h"
 
 extern s32 D_800DCD04;
 extern s32 D_800DCD08;

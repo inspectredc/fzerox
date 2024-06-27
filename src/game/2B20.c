@@ -1,5 +1,4 @@
 #include "global.h"
-#include "libultra/ultra64.h"
 
 void func_80076848(void);
 void func_8007D9D0(void);
@@ -183,7 +182,6 @@ void func_80068DCC(void) {
 
 void func_8007DABC(void*);
 
-
 typedef struct unk_800DCE98 {
     OSPfs pfs;
     s8 unk_68[0x3];
@@ -211,7 +209,6 @@ typedef struct unk_800DCE98 {
 
 extern unk_800DCE98 D_800DCE98[];
 extern unk_800DCE98 D_800DD180;
-
 
 extern s32 D_800DD228;
 extern u16 D_800E416E;

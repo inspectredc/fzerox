@@ -1,5 +1,4 @@
 #include "global.h"
-#include "libultra/ultra64.h"
 
 extern s32 D_800D8430;
 extern OSThread D_800DC030;
