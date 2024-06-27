@@ -7,5 +7,7 @@
 #include "variables.h"
 #include "macros.h"
 #include "sys.h"
+#include "fzxmath.h"
+#include "unk_structs.h"
 
 #endif

@@ -257,43 +257,26 @@ Gfx* func_8006FB90(Gfx* gfx) {
     return gfx;
 }
 
-typedef struct unk_8006FC8C_unk_34 {
-    s8 unk_00[0x18];
-    f32 unk_18;
-    f32 unk_1C;
-} unk_8006FC8C_unk_34;
-
-typedef struct unk_8006FC8C {
-    s8 unk_00[0x18];
-    f32 unk_18;
-    f32 unk_1C;
-    s8 unk_20[0x14];
-    unk_8006FC8C_unk_34* unk_34;
-} unk_8006FC8C;
-
-f32 func_8009E108(unk_8006FC8C*, f32, f32*);
-void func_8009E6F0(unk_8006FC8C*, f32, f32*);
-void func_8009E85C(unk_8006FC8C*, f32, f32*, f32);
-
 void func_8006FC8C(unk_8006FC8C* arg0, f32 arg1, f32* arg2) {
-    f32 temp_fv0;
+    s32 pad;
     f32 sp58;
     f32 sp54;
     f32 sp50;
-    f32 sp28[10];
+    f32 temp_fv0;
+    unk_struct_24 sp28;
 
     temp_fv0 = func_8009E108(arg0, arg1, &sp58);
 
     sp54 = ((arg0->unk_34->unk_18 - arg0->unk_18) * temp_fv0) + arg0->unk_18;
-
     sp50 = ((arg0->unk_34->unk_1C - arg0->unk_1C) * temp_fv0) + arg0->unk_1C;
-    func_8009E85C(arg0, arg1, sp28, temp_fv0);
+
+    func_8009E85C(arg0, arg1, &sp28, temp_fv0);
     func_8009E6F0(arg0, arg1, arg2);
     sp58 = (sp54 - sp50) * 0.5f;
 
-    arg2[0] += sp58 * sp28[6];
-    arg2[1] += sp58 * sp28[7];
-    arg2[2] += sp58 * sp28[8];
+    arg2[0] += sp58 * sp28.unk_00[6];
+    arg2[1] += sp58 * sp28.unk_00[7];
+    arg2[2] += sp58 * sp28.unk_00[8];
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8006FD7C.s")
