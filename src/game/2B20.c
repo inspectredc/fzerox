@@ -412,33 +412,307 @@ s32 func_8006A9E0(f32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006AC10.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006ADE4.s")
+void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* arg3, s32* arg4, s32* arg5) {
+    s32 temp_lo;
+    s32 temp_t0;
+    s32 var_v1;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006AFC8.s")
+    if ((arg0 >> 8) & 1) {
+        var_v1 = 0xFF - (arg0 & 0xFF);
+    } else {
+        var_v1 = arg0 & 0xFF;
+    }
+    switch (arg0 >> 8) {
+        case 0:
+            *arg3 = 0xFF;
+            *arg4 = var_v1;
+            *arg5 = 0;
+            break;
+        case 1:
+            *arg3 = var_v1;
+            *arg4 = 0xFF;
+            *arg5 = 0;
+            break;
+        case 2:
+            *arg3 = 0;
+            *arg4 = 0xFF;
+            *arg5 = var_v1;
+            break;
+        case 3:
+            *arg3 = 0;
+            *arg4 = var_v1;
+            *arg5 = 0xFF;
+            break;
+        case 4:
+            *arg3 = var_v1;
+            *arg4 = 0;
+            *arg5 = 0xFF;
+            break;
+        case 5:
+            *arg3 = 0xFF;
+            *arg4 = 0;
+            *arg5 = var_v1;
+            break;
+    }
+    temp_lo = arg1 * arg2;
+    temp_t0 = (arg2 * 0xFE01) - (temp_lo * 0xFF);
+    *arg3 = (s32) ((*arg3 * temp_lo) + temp_t0) / 65025;
+    *arg4 = (s32) ((*arg4 * temp_lo) + temp_t0) / 65025;
+    *arg5 = (s32) ((*arg5 * temp_lo) + temp_t0) / 65025;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006AFE4.s")
+void func_8006AFC8(s8* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0[4] = arg1;
+    arg0[0] = arg1;
+    arg0[5] = arg2;
+    arg0[1] = arg2;
+    arg0[6] = arg3;
+    arg0[2] = arg3;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006B000.s")
+void func_8006AFE4(s8* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0[4] = arg1;
+    arg0[0] = arg1;
+    arg0[5] = arg2;
+    arg0[1] = arg2;
+    arg0[6] = arg3;
+    arg0[2] = arg3;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006B010.s")
+void func_8006B000(s8* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0[8] = arg1;
+    arg0[9] = arg2;
+    arg0[10] = arg3;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006B07C.s")
+void func_8006B010(s8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006B18C.s")
+    arg0[3] = arg0[7] = arg0[11] = arg0[15] = arg0[19] = 0;
+
+    func_8006AFC8(arg0, arg1, arg2, arg3);
+    func_8006AFE4(&arg0[8], arg4, arg5, arg6);
+    func_8006B000(&arg0[8], arg7, arg8, arg9);
+}
+
+void func_8006B07C(s8* arg0, f32* arg1) {
+
+    arg0[3] = arg0[7] = arg0[19] = arg0[23] = 0;
+    func_8006AFE4(arg0, 0, 0, 0);
+    func_8006AFE4(&arg0[16], 0, 128, 0);
+    
+    func_8006B000(arg0, func_8006A9E0(arg1[0] * 120.0f), func_8006A9E0(arg1[4] * 120.0f), func_8006A9E0(arg1[8] * 120.0f));
+
+    func_8006B000(&arg0[16], func_8006A9E0(arg1[1] * 120.0f), func_8006A9E0(arg1[5] * 120.0f), func_8006A9E0(arg1[9] * 120.0f));
+}
+
+void func_8006B18C(s8* arg0, s32* arg1, f32* arg2, f32 arg3, f32 arg4, f32 arg5, s32 arg6, s32 arg7) {
+    f32 temp_fa0;
+    f32 temp_fa1;
+    f32 temp_ft4;
+    f32 temp_ft5;
+    f32 temp_fv1;
+
+    func_8006B07C(arg0, arg2);
+    temp_fa1 = arg2[2] + arg3;
+    temp_ft4 = arg2[6] + arg4;
+    temp_ft5 = arg2[10] + arg5;
+    temp_fa0 = SQ(temp_fa1) + SQ(temp_ft4) + SQ(temp_ft5);
+    if (temp_fa0 > 0.01f) {
+        temp_fv1 = 1.0 / sqrtf(temp_fa0);
+        temp_fa1 *= temp_fv1;
+        temp_ft4 *= temp_fv1;
+        temp_ft5 *= temp_fv1;
+
+        arg1[0] = (temp_fa1 * arg2[0] + temp_ft4 * arg2[4] + arg2[8] * temp_ft5) * (arg6 * 2) + arg6 * 4;
+        arg1[1] = (temp_fa1 * arg2[1] + temp_ft4 * arg2[5] + arg2[9] * temp_ft5) * (arg7 * 2) + arg7 * 4;
+        return;
+    }
+    arg1[0] = arg6 * 2;
+    arg1[1] = arg7 * 2;
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006B33C.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006B908.s")
+void func_8006B908(f32* arg0, f32* arg1, f32* arg2) {
+    arg2[0] = arg0[0] * arg1[0] + arg0[4] * arg1[1] + arg0[8] * arg1[2];
+    arg2[1] = arg0[1] * arg1[0] + arg0[5] * arg1[1] + arg0[9] * arg1[2];
+    arg2[2] = arg0[2] * arg1[0] + arg0[6] * arg1[1] + arg0[10] * arg1[2];
+
+    arg2[4] = arg0[0] * arg1[4] + arg0[4] * arg1[5] + arg0[8] * arg1[6];
+    arg2[5] = arg0[1] * arg1[4] + arg0[5] * arg1[5] + arg0[9] * arg1[6];
+    arg2[6] = arg0[2] * arg1[4] + arg0[6] * arg1[5] + arg0[10] * arg1[6];
+
+    arg2[8] = arg0[0] * arg1[8] + arg0[4] * arg1[9] + arg0[8] * arg1[10];
+    arg2[9] = arg0[1] * arg1[8] + arg0[5] * arg1[9] + arg0[9] * arg1[10];
+    arg2[10] = arg0[2] * arg1[8] + arg0[6] * arg1[9] + arg0[10] * arg1[10];
+
+    arg2[12] = arg0[0] * arg1[12] + arg0[4] * arg1[13] + arg0[8] * arg1[14] + arg0[12];
+    arg2[13] = arg0[1] * arg1[12] + arg0[5] * arg1[13] + arg0[9] * arg1[14] + arg0[13];
+    arg2[14] = arg0[2] * arg1[12] + arg0[6] * arg1[13] + arg0[10] * arg1[14] + arg0[14];
+
+    arg2[3] = 0.0f;
+    arg2[7] = 0.0f;
+    arg2[11] = 0.0f;
+    arg2[15] = 1.0f;
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006BB80.s")
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006BBE8.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006BC84.s")
+void func_8006BBE8(f32*, s16*);
+void func_8006C378(s16* arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7, f32 arg8);
+extern s16 D_800E1230[];
+extern f32 D_800E1270[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006BFCC.s")
+void func_8006BC84(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD) {
+    f32 sp7C;
+    f32 sp78;
+    f32 sp74;
+    f32 sp70;
+    f32 sp6C;
+    f32 sp68;
+    f32 sp64;
+    f32 sp60;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006C278.s")
+    if (arg0 == NULL) {
+        arg0 = D_800E1230;
+    }
+    if (arg1 == NULL) {
+        arg1 = D_800E1270;
+    }
+    sp7C = SQ(arg5) + SQ(arg6) + SQ(arg7);
+    if (sp7C < 0.001f) {
+        func_8006C378(arg0, arg1, arg2, 0, 0, 0, argB, argC, argD);
+        return;
+    }
+    sp60 = arg2 / sqrtf(sp7C);
+    arg1[8] = sp60 * arg5;
+    arg1[9] = sp60 * arg6;
+    arg1[10] = sp60 * arg7;
+    sp78 = (arg9 * arg7) - (argA * arg6);
+    sp74 = (argA * arg5) - (arg8 * arg7);
+    sp70 = (arg8 * arg6) - (arg9 * arg5);
+
+    sp7C = SQ(sp78) + SQ(sp74) + SQ(sp70);
+    if (sp7C < 0.001f) {
+        func_8006C378(arg0, arg1, arg2, 0, 0, 0, argB, argC, argD);
+        return;
+    }
+
+    sp60 = arg4 / sqrtf(sp7C);
+    arg1[0] = sp60 * sp78;
+    arg1[1] = sp60 * sp74;
+    arg1[2] = sp60 * sp70;
+
+    sp6C = (arg6 * sp70) - (arg7 * sp74);
+    sp68 = (arg7 * sp78) - (arg5 * sp70);
+    sp64 = (arg5 * sp74) - (arg6 * sp78);
+    sp7C = SQ(sp6C) + SQ(sp68) + SQ(sp64);
+    if (sp7C < 0.001f) {
+        func_8006C378(arg0, arg1, arg2, 0, 0, 0, argB, argC, argD);
+        return;
+    }
+    sp60 = arg3 / sqrtf(sp7C);
+    arg1[4] = sp60 * sp6C;
+    arg1[5] = sp60 * sp68;
+    arg1[6] = sp60 * sp64;
+    arg1[12] = argB;
+    arg1[13] = argC;
+    arg1[14] = argD;
+    arg1[3] = 0.0f;
+    arg1[7] = 0.0f;
+    arg1[11] = 0.0f;
+    arg1[15] = 1.0f;
+    func_8006BBE8(arg1, arg0);
+}
+
+void func_8006BFCC(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6, f32* arg7) {
+    f32 sp84;
+    f32 sp80;
+    f32 sp70;
+    f32 sp6C;
+    f32 sp68;
+    f32 sp64;
+    f32 sp60;
+    f32 sp5C;
+
+    if (arg0 == NULL) {
+        arg0 = D_800E1230;
+    }
+    if (arg1 == NULL) {
+        arg1 = D_800E1270;
+    }
+    arg1[8] = arg5[0] * arg2;
+    arg1[9] = arg5[1] * arg2;
+    arg1[10] = arg5[2] * arg2;
+
+    sp80 = (arg6[1] * arg5[2]) - (arg5[1] * arg6[2]);
+    sp6C = (arg6[2] * arg5[0]) - (arg5[2] * arg6[0]);
+    sp5C = (arg6[0] * arg5[1]) - (arg5[0] * arg6[1]);
+    sp84 = SQ(sp80) + SQ(sp6C) + SQ(sp5C);
+    if (sp84 < 0.001f) {
+        func_8006C378(arg0, arg1, arg2, 0, 0, 0, arg7[0], arg7[1], arg7[2]);
+        return;
+    }
+
+    sp84 = arg4 / sqrtf(sp84);
+    arg1[0] = sp84 * sp80;
+    arg1[1] = sp84 * sp6C;
+    arg1[2] = sp84 * sp5C;
+
+    sp68 = (arg5[1] * sp5C) - (arg5[2] * sp6C);
+
+    sp64 = (arg5[2] * sp80) - (arg5[0] * sp5C);
+
+    sp60 = (arg5[0] * sp6C) - (arg5[1] * sp80);
+
+    sp84 = SQ(sp68) + SQ(sp64) + SQ(sp60);
+    if (sp84 < 0.001f) {
+        func_8006C378(arg0, arg1, arg2, 0, 0, 0, arg7[0], arg7[1], arg7[2]);
+        return;
+    }
+    sp84 = arg3 / sqrtf(sp84);
+    arg1[4] = sp84 * sp68;
+    arg1[5] = sp84 * sp64;
+    arg1[6] = sp84 * sp60;
+    arg1[12] = arg7[0];
+    arg1[13] = arg7[1];
+    arg1[14] = arg7[2];
+    arg1[3] = 0.0f;
+    arg1[7] = 0.0f;
+    arg1[11] = 0.0f;
+    arg1[15] = 1.0f;
+    func_8006BBE8(arg1, arg0);
+}
+
+void func_8006C278(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6) {
+
+    if (arg0 == NULL) {
+        arg0 = D_800E1230;
+    }
+    if (arg1 == NULL) {
+        arg1 = D_800E1270;
+    }
+    arg1[8] = arg5[0] * arg2;
+    arg1[9] = arg5[1] * arg2;
+    arg1[10] = arg5[2] * arg2;
+    arg1[0] = arg5[6] * arg4;
+    arg1[1] = arg5[7] * arg4;
+    arg1[2] = arg5[8] * arg4;
+    arg1[4] = arg5[3] * arg3;
+    arg1[5] = arg5[4] * arg3;
+    arg1[6] = arg5[5] * arg3;
+    arg1[12] = arg6[0];
+    arg1[13] = arg6[1];
+    arg1[14] = arg6[2];
+    arg1[3] = 0.0f;
+    arg1[7] = 0.0f;
+    arg1[11] = 0.0f;
+    arg1[15] = 1.0f;
+
+    func_8006BBE8(arg1, arg0);
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006C378.s")
 
@@ -450,4 +724,32 @@ s32 func_8006A9E0(f32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006D03C.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006D2E0.s")
+void func_8006D2E0(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8) {
+    f32 temp_fa0;
+    f32 temp_fv0;
+    f32 temp_fv1;
+
+    if (arg0 == NULL) {
+        arg0 = D_800E1230;
+    }
+    if (arg1 == NULL) {
+        arg1 = D_800E1270;
+    }
+    
+    temp_fv1 = arg2 / (arg3 - arg4);
+    arg1[0] = temp_fv1 * -2.0f;
+    arg1[12] = (arg4 + arg3) * temp_fv1;
+    
+    temp_fa0 = arg2 / (arg5 - arg6);
+    arg1[5] = temp_fa0 * -2.0f;
+    arg1[13] = (arg6 + arg5) * temp_fa0;
+    
+    temp_fv0 = arg2 / (arg7 - arg8);
+    arg1[10] = 2.0f * temp_fv0;
+    arg1[14] = (arg8 + arg7) * temp_fv0;
+    
+    arg1[15] = arg2;
+    arg1[1] = arg1[2] = arg1[3] = arg1[4] = arg1[6] = arg1[7] = arg1[8] = arg1[9] = arg1[11] = 0.0f;
+    func_8006BBE8(arg1, arg0);
+}
+
