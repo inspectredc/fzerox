@@ -103,7 +103,7 @@ void func_80068BC0(void) {
                 D_800CD044 = 0xB;
                 if (D_800DCE44 == 1) {
                     D_800DCE48 = 0x4012;
-                } else{
+                } else {
                     D_800DCE48 = 0x4009;
                 }
                 break;
@@ -112,7 +112,7 @@ void func_80068BC0(void) {
                 D_800DCE48 = D_800DCE44;
                 break;
         }
-    } 
+    }
 }
 
 #ifdef REQUIRES_DATA
@@ -269,10 +269,10 @@ void func_80068F04(void) {
                 switch (D_800CD010) {
                     case 1:
                         if (D_800E416E & 0x9000) {
-                    case 3:
-                            D_800DCE48 = 0x8000;
-                            D_800CD020 = 0;
-                            D_800CD010 = 2;
+                            case 3:
+                                D_800DCE48 = 0x8000;
+                                D_800CD020 = 0;
+                                D_800CD010 = 2;
                         }
                         break;
                     case 2:
@@ -307,7 +307,7 @@ void func_80069700(void) {
         func_80069820();
         D_800CD168 = 0;
     }
-    
+
     for (i = 0; i < 4; i++) {
         if (__osMotorAccess(&D_800DCE98[i].pfs, 0) == 0) {
             D_800DCE98[i].unk_74 = 1;
@@ -367,7 +367,6 @@ void func_8006A8F0(s32 arg0, s32 arg1) {
     D_800CD170 = arg0;
     D_800CD174 = arg1;
 }
-
 
 void func_8006A904(s32 arg0, s32 arg1) {
     D_800CD178 = arg0;
@@ -496,10 +495,12 @@ void func_8006B07C(s8* arg0, f32* arg1) {
     arg0[3] = arg0[7] = arg0[19] = arg0[23] = 0;
     func_8006AFE4(arg0, 0, 0, 0);
     func_8006AFE4(&arg0[16], 0, 128, 0);
-    
-    func_8006B000(arg0, func_8006A9E0(arg1[0] * 120.0f), func_8006A9E0(arg1[4] * 120.0f), func_8006A9E0(arg1[8] * 120.0f));
 
-    func_8006B000(&arg0[16], func_8006A9E0(arg1[1] * 120.0f), func_8006A9E0(arg1[5] * 120.0f), func_8006A9E0(arg1[9] * 120.0f));
+    func_8006B000(arg0, func_8006A9E0(arg1[0] * 120.0f), func_8006A9E0(arg1[4] * 120.0f),
+                  func_8006A9E0(arg1[8] * 120.0f));
+
+    func_8006B000(&arg0[16], func_8006A9E0(arg1[1] * 120.0f), func_8006A9E0(arg1[5] * 120.0f),
+                  func_8006A9E0(arg1[9] * 120.0f));
 }
 
 void func_8006B18C(s8* arg0, s32* arg1, f32* arg2, f32 arg3, f32 arg4, f32 arg5, s32 arg6, s32 arg7) {
@@ -562,7 +563,8 @@ void func_8006C378(s16* arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5,
 extern s16 D_800E1230[];
 extern f32 D_800E1270[];
 
-void func_8006BC84(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD) {
+void func_8006BC84(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9,
+                   f32 argA, f32 argB, f32 argC, f32 argD) {
     f32 sp7C;
     f32 sp78;
     f32 sp74;
@@ -732,21 +734,20 @@ void func_8006D2E0(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
     if (arg1 == NULL) {
         arg1 = D_800E1270;
     }
-    
+
     temp_fv1 = arg2 / (arg3 - arg4);
     arg1[0] = temp_fv1 * -2.0f;
     arg1[12] = (arg4 + arg3) * temp_fv1;
-    
+
     temp_fa0 = arg2 / (arg5 - arg6);
     arg1[5] = temp_fa0 * -2.0f;
     arg1[13] = (arg6 + arg5) * temp_fa0;
-    
+
     temp_fv0 = arg2 / (arg7 - arg8);
     arg1[10] = 2.0f * temp_fv0;
     arg1[14] = (arg8 + arg7) * temp_fv0;
-    
+
     arg1[15] = arg2;
     arg1[1] = arg1[2] = arg1[3] = arg1[4] = arg1[6] = arg1[7] = arg1[8] = arg1[9] = arg1[11] = 0.0f;
     func_8006BBE8(arg1, arg0);
 }
-

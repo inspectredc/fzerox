@@ -42,7 +42,7 @@ Gfx* func_8006F3D8(Gfx* gfx) {
     }
     D_800E32C8 = 5;
     gSPDisplayList(gfx++, D_80172A0);
-    
+
     return gfx;
 }
 
@@ -52,7 +52,7 @@ Gfx* func_8006F444(Gfx* gfx) {
 
     gSPSetGeometryMode(gfx++, G_CULL_BACK);
     gSPDisplayList(gfx++, D_8018618);
-    
+
     return gfx;
 }
 
@@ -67,7 +67,7 @@ Gfx* func_8006F478(Gfx* gfx) {
     }
     D_800E32C8 = 7;
     gSPDisplayList(gfx++, D_801A278);
-    
+
     return gfx;
 }
 
@@ -77,7 +77,7 @@ Gfx* func_8006F4E4(Gfx* gfx) {
 
     gSPClearGeometryMode(gfx++, G_CULL_BACK);
     gSPDisplayList(gfx++, D_801AEF8);
-    
+
     return gfx;
 }
 
@@ -92,7 +92,7 @@ Gfx* func_8006F514(Gfx* gfx) {
     }
     D_800E32C8 = 9;
     gSPDisplayList(gfx++, D_801D0B0);
-    
+
     return gfx;
 }
 
@@ -107,7 +107,7 @@ Gfx* func_8006F57C(Gfx* gfx) {
     }
     D_800E32C8 = 10;
     gSPDisplayList(gfx++, D_801E1F8);
-    
+
     return gfx;
 }
 
@@ -119,7 +119,7 @@ extern Gfx D_801EAA8[];
 Gfx* func_8006F5E4(Gfx* gfx) {
 
     gSPSetGeometryMode(gfx++, G_CULL_BACK);
-    
+
     if (D_800E32C8 != 11) {
         gSPDisplayList(gfx++, D_3000688);
     }
@@ -127,10 +127,10 @@ Gfx* func_8006F5E4(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_30006D0);
 
-    gSPMatrix(gfx++, (uintptr_t)&D_102C5E8 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    
+    gSPMatrix(gfx++, (uintptr_t) &D_102C5E8 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
     gSPDisplayList(gfx++, D_801EAA8);
-    
+
     return gfx;
 }
 
@@ -142,10 +142,10 @@ Gfx* func_8006F68C(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_30006D0);
 
-    gSPMatrix(gfx++, (uintptr_t)&D_102C628 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    
+    gSPMatrix(gfx++, (uintptr_t) &D_102C628 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
     gSPDisplayList(gfx++, D_801EAA8);
-    
+
     return gfx;
 }
 
@@ -157,7 +157,7 @@ extern Gfx D_801EBF8[];
 Gfx* func_8006F6FC(Gfx* gfx) {
 
     gSPSetGeometryMode(gfx++, G_CULL_BACK);
-    
+
     if (D_800E32C8 != 12) {
         gSPDisplayList(gfx++, D_3000590);
     }
@@ -165,10 +165,10 @@ Gfx* func_8006F6FC(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_30005D8);
 
-    gSPMatrix(gfx++, (uintptr_t)&D_102C668 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    
+    gSPMatrix(gfx++, (uintptr_t) &D_102C668 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
     gSPDisplayList(gfx++, D_801EBF8);
-    
+
     return gfx;
 }
 
@@ -180,7 +180,8 @@ Gfx* func_8006F7A4(Gfx* gfx) {
     if (D_800E32C8 != 0) {
         gDPPipeSync(gfx++);
 
-        gDPLoadTextureBlock(gfx++, D_8014A20, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock(gfx++, D_8014A20, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     }
 
     gSPDisplayList(gfx++, D_801ED28);
@@ -196,7 +197,8 @@ Gfx* func_8006F89C(Gfx* gfx) {
     if (D_800E32C8 != 1) {
         gDPPipeSync(gfx++);
 
-        gDPLoadTextureBlock(gfx++, D_801F018, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock(gfx++, D_801F018, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     }
 
     gSPDisplayList(gfx++, D_801EEA0);
@@ -212,7 +214,8 @@ Gfx* func_8006F998(Gfx* gfx) {
     if (D_800E32C8 != 2) {
         gDPPipeSync(gfx++);
 
-        gDPLoadTextureBlock(gfx++, D_801F8C8, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock(gfx++, D_801F8C8, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     }
 
     gSPDisplayList(gfx++, D_801F818);
@@ -228,7 +231,8 @@ Gfx* func_8006FA94(Gfx* gfx) {
     if (D_800E32C8 != 3) {
         gDPPipeSync(gfx++);
 
-        gDPLoadTextureBlock(gfx++, D_8020208, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock(gfx++, D_8020208, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMIRROR | G_TX_WRAP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
     }
 
     gSPDisplayList(gfx++, D_80200C8);
@@ -244,7 +248,8 @@ Gfx* func_8006FB90(Gfx* gfx) {
     if (D_800E32C8 != 4) {
         gDPPipeSync(gfx++);
 
-        gDPLoadTextureBlock(gfx++, D_8021380, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock(gfx++, D_8021380, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMIRROR | G_TX_WRAP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
     }
 
     gSPDisplayList(gfx++, D_8021208);

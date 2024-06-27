@@ -10,7 +10,7 @@ void func_800678B8(void*);
 void func_80067060(void) {
     osInitialize();
     osCreateMesgQueue(&D_800DCAF8, &D_800DCC80, 1);
-    osSetEventMesg(0xEU, &D_800DCAF8, (void* )0x1B);
+    osSetEventMesg(0xEU, &D_800DCAF8, (void*) 0x1B);
     osCreateThread(&D_800DC030, 1, func_800678B8, NULL, &D_800D8430, 0x64);
     osStartThread(&D_800DC030);
 }

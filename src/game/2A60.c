@@ -17,7 +17,7 @@ void func_80068A60(s32 arg0) {
         osRecvMesg(&D_800DCA98, &D_800DCE30, 1);
         if (D_800CCFF0 != 0) {
             D_800DCCC4 = D_800CCFF0;
-            osSendMesg(&D_800DCAE0, (void* )0x16, 1);
+            osSendMesg(&D_800DCAE0, (void*) 0x16, 1);
         }
         D_800CCFF0 = func_800BB49C();
     }

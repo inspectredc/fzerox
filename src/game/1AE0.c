@@ -32,7 +32,6 @@ void func_80067B14(void) {
     gMasterDisp = D_800DCCF0;
 }
 
-
 Gfx* func_80076C08(Gfx*);
 
 void func_80067BA8(void) {
@@ -68,13 +67,13 @@ void func_80067D64(void) {
     osRecvMesg(&D_800DCAC8, &D_800DCD10, 1);
 
     while (osDpGetStatus() & 0x170) {}
-    
+
     func_80077C9C();
     func_800FD344();
     osViSwapBuffer(D_800DCCD0[D_800DCD00]);
 
     while (osViGetCurrentFramebuffer() != D_800DCCD0[D_800DCD00]) {}
-    
+
     func_80067C0C(D_800DCCF4);
 }
 
@@ -94,7 +93,9 @@ void func_80067E98(void) {
     osViSwapBuffer(D_800DCCD0[D_800DCD08]);
     func_80077C9C();
 
-    while ((osViGetCurrentFramebuffer() == D_800DCCD0[D_800DCD04] || osViGetNextFramebuffer() == D_800DCCD0[D_800DCD04]) && var_s1 != 0) {
+    while (
+        (osViGetCurrentFramebuffer() == D_800DCCD0[D_800DCD04] || osViGetNextFramebuffer() == D_800DCCD0[D_800DCD04]) &&
+        var_s1 != 0) {
         var_s1 -= 1;
     }
 
