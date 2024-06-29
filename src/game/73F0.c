@@ -369,15 +369,21 @@ void func_8006FF90(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     temp_s0->unk_08 = 0x400;
     temp_s0->unk_0A = 0x800;
     temp_s0++;
-    temp_s0->unk_00 = func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.x) + sp60.x) - (sp30.unk_00.x * D_800CD1E4));
-    temp_s0->unk_02 = func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.y) + sp60.y) - (sp30.unk_00.y * D_800CD1E4));
-    temp_s0->unk_04 = func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.z) + sp60.z) - (sp30.unk_00.z * D_800CD1E4));
+    temp_s0->unk_00 =
+        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.x) + sp60.x) - (sp30.unk_00.x * D_800CD1E4));
+    temp_s0->unk_02 =
+        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.y) + sp60.y) - (sp30.unk_00.y * D_800CD1E4));
+    temp_s0->unk_04 =
+        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.z) + sp60.z) - (sp30.unk_00.z * D_800CD1E4));
     temp_s0->unk_08 = 0;
     temp_s0->unk_0A = 0x600;
     temp_s0++;
-    temp_s0->unk_00 = func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.x) + sp60.x) - (sp30.unk_00.x * D_800CD1E4));
-    temp_s0->unk_02 = func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.y) + sp60.y) - (sp30.unk_00.y * D_800CD1E4));
-    temp_s0->unk_04 = func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.z) + sp60.z) - (sp30.unk_00.z * D_800CD1E4));
+    temp_s0->unk_00 =
+        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.x) + sp60.x) - (sp30.unk_00.x * D_800CD1E4));
+    temp_s0->unk_02 =
+        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.y) + sp60.y) - (sp30.unk_00.y * D_800CD1E4));
+    temp_s0->unk_04 =
+        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.z) + sp60.z) - (sp30.unk_00.z * D_800CD1E4));
     temp_s0->unk_08 = 0x800;
     temp_s0->unk_0A = 0x600;
     D_802D2D78[arg0][0] = arg1->unk_04;
@@ -409,13 +415,14 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     spE8 = func_8009E108(sp88, arg1->unk_08, &spE4);
 
     func_8009E85C(sp88, arg1->unk_08, &sp8C, spE8);
-    
+
     spE0 = sp88->unk_18 + sp88->unk_1C;
     spE0 = (((sp88->unk_34->unk_18 + sp88->unk_34->unk_1C) - spE0) * spE8) + spE0;
     spE0 /= 2;
-    
+
     func_8006FC8C(sp88, arg1->unk_08, &spC8);
-    func_8006C520(NULL, sp44, 1.0f, (arg1->unk_10 * 4096.0f) / 360.0f, sp8C.unk_00.x, sp8C.unk_00.y, sp8C.unk_00.z, 0.0f, 0.0f, 0.0f);
+    func_8006C520(NULL, sp44, 1.0f, (arg1->unk_10 * 4096.0f) / 360.0f, sp8C.unk_00.x, sp8C.unk_00.y, sp8C.unk_00.z,
+                  0.0f, 0.0f, 0.0f);
     spBC.x = sp44[0] * sp8C.unk_18.x + sp44[4] * sp8C.unk_18.y + sp44[8] * sp8C.unk_18.z;
     spBC.y = sp44[1] * sp8C.unk_18.x + sp44[5] * sp8C.unk_18.y + sp44[9] * sp8C.unk_18.z;
     spBC.z = sp44[2] * sp8C.unk_18.x + sp44[6] * sp8C.unk_18.y + sp44[10] * sp8C.unk_18.z;
@@ -434,7 +441,7 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     spC8.x += (5.0f - spE0) * spBC.x;
     spC8.y += (5.0f - spE0) * spBC.y;
     spC8.z += (5.0f - spE0) * spBC.z;
-    
+
     temp_s0->unk_00 = func_8006A9E0((sp8C.unk_00.x * 50.0f) + spC8.x);
     temp_s0->unk_02 = func_8006A9E0((sp8C.unk_00.y * 50.0f) + spC8.y);
     temp_s0->unk_04 = func_8006A9E0((sp8C.unk_00.z * 50.0f) + spC8.z);
@@ -553,7 +560,7 @@ void func_80073894(s32 arg0) {
     } else if (D_8010B7B0.unk_000[1] < 4) {
         return;
     }
-    
+
     D_802D1B60.unk_08 = 0;
     D_802D1B60.unk_0C = 0;
     D_802D1B60.unk_04 = 0;
@@ -577,7 +584,7 @@ void func_8007392C(s32 arg0) {
     } else if (D_8010B7B0.unk_000[1] < 4) {
         return;
     }
-    
+
     D_802D2D74 = 0;
 
     for (i = 0; i < D_802A6B40[arg0].unk_08; i++) {
@@ -706,7 +713,6 @@ void func_80074634(unk_800F8510* arg0) {
         if (var_fa1 < temp_a1->unk_08) {
             var_fa1 = temp_a1->unk_08;
         }
-
     }
 
     for (i = 0; i < arg0->unk_08; i++) {
@@ -715,7 +721,6 @@ void func_80074634(unk_800F8510* arg0) {
 
         temp_a1->unk_00 -= ((var_fv0 + var_fv1) / 2);
         temp_a1->unk_08 -= ((var_fa0 + var_fa1) / 2);
-
     }
 }
 

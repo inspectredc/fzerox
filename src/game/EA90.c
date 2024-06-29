@@ -30,7 +30,6 @@ void func_80074B10(f32* arg0, f32* arg1, f32* arg2) {
     *arg2 *= temp_fv1;
 }
 
-
 s32 func_80074BB4(Vec3f* arg0, f32 arg1) {
     f32 temp_fa1;
     f32 temp_fv1;

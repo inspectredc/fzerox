@@ -3,7 +3,7 @@
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/F0B0/func_800750B0.s")
 
 // todo: clean this up, D_800FCB70_2 shouldnt really exist like this
-/* 
+/*
 void func_80073E28(void*, void*, size_t);
 void func_i2_800FC730(void);
 extern u8 D_524920[];
