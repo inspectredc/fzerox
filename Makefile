@@ -96,7 +96,7 @@ ifeq ($(COMPILER),gcc)
   CC       := $(MIPS_BINUTILS_PREFIX)gcc
 else
 ifeq ($(COMPILER),ido)
-  CC   := $(TOOLS)/ido-recomp/$(DETECTED_OS)/cc
+  CC       := $(TOOLS)/ido_recomp/$(DETECTED_OS)/7.1/cc
 else
 $(error Unsupported compiler. Please use either ido or gcc as the COMPILER variable.)
 endif
@@ -191,7 +191,8 @@ endif
 
 ### Compiler ###
 
-IDO              := $(TOOLS)/ido-recomp/$(DETECTED_OS)/cc
+IDO53           := $(TOOLS)/ido-recomp/$(DETECTED_OS)/5.3/cc
+IDO             := $(TOOLS)/ido-recomp/$(DETECTED_OS)/7.1/cc
 AS              := $(MIPS_BINUTILS_PREFIX)as
 LD              := $(MIPS_BINUTILS_PREFIX)ld
 OBJCOPY         := $(MIPS_BINUTILS_PREFIX)objcopy
@@ -204,10 +205,10 @@ TORCH           := $(TOOLS)/Torch/cmake-build-release/torch
 # Prefer clang as C preprocessor if installed on the system
 ifneq (,$(call find-command,clang))
   CPP      := clang
-  CPPFLAGS := -E -P -x c -Wno-trigraphs -Wmissing-prototypes -Wstrict-prototypes -D_LANGUAGE_ASSEMBLY -DF3DEX_GBI_2
+  CPPFLAGS := -E -P -x c -Wno-trigraphs -Wmissing-prototypes -Wstrict-prototypes -D_LANGUAGE_ASSEMBLY
 else
   CPP      := cpp
-  CPPFLAGS := -P -Wno-trigraphs -Wmissing-prototypes -Wstrict-prototypes -D_LANGUAGE_ASSEMBLY -DF3DEX_GBI_2
+  CPPFLAGS := -P -Wno-trigraphs -Wmissing-prototypes -Wstrict-prototypes -D_LANGUAGE_ASSEMBLY
 endif
 
 ASM_PROC_FLAGS  := --input-enc=utf-8 --output-enc=euc-jp --convert-statics=global-with-filename
@@ -346,10 +347,10 @@ $(BUILD_DIR)/src/libultra/libc/llcvt.o: MIPS_VERSION := -mips3 -32
 
 # cc & asm-processor
 CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO) -- $(AS) $(ASFLAGS) --
-$(BUILD_DIR)/src/libultra/gu/%.o: CC := $(IDO)
-$(BUILD_DIR)/src/libultra/io/%.o: CC := $(IDO)
-$(BUILD_DIR)/src/libultra/os/%.o: CC := $(IDO)
-$(BUILD_DIR)/src/libultra/libc/%.o: CC := $(IDO)
+$(BUILD_DIR)/src/libultra/gu/%.o: CC := $(IDO53)
+$(BUILD_DIR)/src/libultra/io/%.o: CC := $(IDO53)
+$(BUILD_DIR)/src/libultra/os/%.o: CC := $(IDO53)
+$(BUILD_DIR)/src/libultra/libc/%.o: CC := $(IDO53)
 else
 # directory flags
 # $(BUILD_DIR)/src/libultra/gu/%.o:    OPTFLAGS := -Os

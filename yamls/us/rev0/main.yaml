@@ -212,6 +212,7 @@
       - [0x6D110, .rodata, game/2B20]
       - [0x6D400, .rodata, game/73F0]
       - [0x6D5D0, .rodata, game/EA90]
+      - [0x6D5F0, data] # Not Used anywhere?
       - [0x6D690, .rodata, game/F1C0]
       - [0x6D860, .rodata, game/10490]
       - [0x6DB60, .rodata, game/11CF0]
