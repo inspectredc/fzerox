@@ -39,4 +39,4 @@ compiler_type = "ido"
 
 
 [decompme.compilers]
-"tools/ido-recomp/linux/cc" = "ido5.3"
+"tools/ido-recomp/linux/cc" = "ido7.1"
