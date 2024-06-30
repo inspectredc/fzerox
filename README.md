@@ -1,8 +1,8 @@
 [![Discord Channel][discord-badge]][discord]
 
-# F-ZERO X (US) REV 1.0
+# F-Zero X
 
-This is a WIP Matching Decompilation for F-ZERO X.
+This is a WIP Matching Decompilation for F-Zero X.
 
 It currently builds the following ROM:
 

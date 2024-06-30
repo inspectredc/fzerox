@@ -1,8 +1,5 @@
 #include "global.h"
 
-// Individual rodata doubles to import!
-extern f64 D_800D35D8[];
-
 void func_80074A90(f32* arg0, f32* arg1) {
     f32 temp_fa0;
     f32 temp_fv1;
