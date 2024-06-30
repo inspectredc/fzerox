@@ -115,7 +115,7 @@ void func_80068BC0(void) {
     }
 }
 
-#ifdef REQUIRES_DATA
+#ifdef IMPORT_DATA
 void func_8007E08C(void);
 void func_8007E0CC(s32);
 void func_800BAFA4(u8);
