@@ -75,15 +75,14 @@ void func_80076658(s32 arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4) {
 // https://decomp.me/scratch/S5I3s matching but symbols are wrong
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/10490/func_800766F0.s")
 
-
 extern u32 D_800E33C0[];
 extern s32 D_80115FC0;
 extern s32 D_8024DC80;
 
 void func_80076804(void) {
-    D_800E33C0[0] = ALIGN16((u32)&D_80115FC0);
+    D_800E33C0[0] = ALIGN16((u32) &D_80115FC0);
     D_800E33C0[1] = 0x803DA800;
-    D_800E33C0[2] = ALIGN16((u32)&D_8024DC80);
+    D_800E33C0[2] = ALIGN16((u32) &D_8024DC80);
 }
 
 extern u32 D_800E33D0[];
@@ -91,17 +90,16 @@ extern u32 D_800E33D0[];
 void func_80076848(void) {
     D_800E33D0[0] = 0x801D9800;
     D_800E33D0[1] = 0x803DA800;
-    D_800E33D0[2] = ALIGN16((u32)&D_8024DC80);
+    D_800E33D0[2] = ALIGN16((u32) &D_8024DC80);
 }
 
 s32 func_80076884(s32 arg0, u32 arg1) {
     s32 ret = D_800E33C0[arg0];
     arg1 = ALIGN16(arg1);
-    
+
     D_800E33C0[arg0] += arg1;
     return ret;
 }
-
 
 s32 func_800768B0(s32 arg0, s32 arg1) {
     s32 temp = D_800E33C0[arg0];
@@ -111,7 +109,7 @@ s32 func_800768B0(s32 arg0, s32 arg1) {
 s32 func_800768C8(s32 arg0, u32 arg1) {
 
     arg1 = ALIGN16(arg1);
-    
+
     D_800E33D0[arg0] -= arg1;
     return D_800E33D0[arg0];
 }
@@ -220,11 +218,11 @@ void func_80077B04(void);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/10490/func_80077B04.s")
 
 void func_800AA620(s32*, void*);
-    
+
 extern u8 D_2738A0[];
 extern u8 D_5000000[];
 extern u8 D_5000F50[];
-    
+
 extern s8 D_800CD2F4;
 extern u32 D_800DCDE4;
 extern s32 D_800DCE44;
@@ -233,7 +231,6 @@ void func_80077BE0(void) {
     s32 pad[3];
     s32 sp1C;
     s32* sp24;
-
 
     if (D_800CD2F4 != 0) {
         if (D_800DCE44 != 0x11) {
