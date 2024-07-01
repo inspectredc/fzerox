@@ -105,4 +105,19 @@ typedef struct unk_802D1B60 {
     s32 unk_0C;
 } unk_802D1B60;
 
+typedef struct unk_800E3A28 {
+    s32 unk_00;
+    s32 unk_04;
+    s32 unk_08;
+    s32 unk_0C;
+    s32 unk_10;
+    s8 unk_14;
+    s8 unk_15;
+    s8 unk_16[0x2];
+    s32 unk_18;
+    s32 unk_1C;
+    s32 unk_20;
+    s8 unk_24[0x4];
+} unk_800E3A28; // size = 0x28
+
 #endif // UNK_STRUCTS_H
