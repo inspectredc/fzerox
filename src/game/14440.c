@@ -68,7 +68,7 @@ Gfx* func_8007ABA4(Gfx* gfx) {
     return gfx;
 }
 
-#define PACK_5551(r,g,b,a) (((((r) << 11) | ((g) << 6)) | ((b) << 1)) | (a))
+#define PACK_5551(r, g, b, a) (((((r) << 11) | ((g) << 6)) | ((b) << 1)) | (a))
 
 Gfx* func_8007AC48(Gfx* gfx, u16 red, u16 green, u16 blue) {
 
@@ -127,7 +127,7 @@ Gfx* func_8007AF40(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, 
     gDPSetPrimColor(gfx++, 0, 0, red, green, blue, alpha);
     gSPDisplayList(gfx++, D_3000028);
     gDPFillRectangle(gfx++, left, top, right, bottom);
-    
+
     return gfx;
 }
 
@@ -136,14 +136,19 @@ extern s32 D_800CCFE0;
 
 Gfx* func_8007AFF4(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
     gSPDisplayList(gfx++, D_3000270);
-    gSPTextureRectangle(gfx++, (left + 1) << 2, (top + 1) << 2, (right - 1) << 2, (bottom - 1) << 2, G_TX_RENDERTILE, 0, (D_800CCFE0 & 0x1F) << 5, 1 << 10, 1 << 10);
-    
+    gSPTextureRectangle(gfx++, (left + 1) << 2, (top + 1) << 2, (right - 1) << 2, (bottom - 1) << 2, G_TX_RENDERTILE, 0,
+                        (D_800CCFE0 & 0x1F) << 5, 1 << 10, 1 << 10);
+
     return gfx;
 }
 
 Gfx* func_8007B0A8(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
     gDPPipeSync(gfx++);
-    gDPSetRenderMode(gfx++, IM_RD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | FORCE_BL | GBL_c1(G_BL_CLR_MEM, G_BL_0, G_BL_CLR_MEM, G_BL_1MA), IM_RD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | FORCE_BL | GBL_c2(G_BL_CLR_MEM, G_BL_0, G_BL_CLR_MEM, G_BL_1MA));
+    gDPSetRenderMode(gfx++,
+                     IM_RD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | FORCE_BL |
+                         GBL_c1(G_BL_CLR_MEM, G_BL_0, G_BL_CLR_MEM, G_BL_1MA),
+                     IM_RD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | FORCE_BL |
+                         GBL_c2(G_BL_CLR_MEM, G_BL_0, G_BL_CLR_MEM, G_BL_1MA));
     gDPSetCombineMode(gfx++, G_CC_SHADE, G_CC_SHADE);
     gDPSetCycleType(gfx++, G_CYC_1CYCLE);
     gDPFillRectangle(gfx++, left, top, right, bottom);
@@ -159,10 +164,9 @@ Gfx* func_8007B0A8(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
 extern s32 D_800CD3D0[];
 
 typedef struct unk9 {
-    u8 v0,v1,v2,v3,v4,v5,v6,v7,v8;
+    u8 v0, v1, v2, v3, v4, v5, v6, v7, v8;
 } unk9;
 extern unk9 D_8010D730[];
-
 
 void func_8007D9D0(void) {
     static s32 D_800E4180[55];
@@ -187,7 +191,7 @@ void func_8007D9D0(void) {
     for (i = 48; i < 54; i++) {
         D_800E4180[i] = D_800CD3D0[30];
     }
-    
+
     D_800E4180[54] = D_800CD3D0[31];
 }
 #else
@@ -247,8 +251,6 @@ void func_8007DEF0(void) {
     s32 var_v1 = 0;
     s32 var_a0;
 
-
-
     for (i = 0; i < 4; i++) {
         if (D_800E4174[i] < 3) {
             var_v1 = 1;
@@ -269,7 +271,7 @@ void func_8007DEF0(void) {
                 if (D_800E4174[i] < 3) {
                     var_v1 = 0;
                     if (D_800CD004) {}
-                }                
+                }
             }
 
             if (var_v1 != 0) {
