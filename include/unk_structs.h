@@ -24,7 +24,9 @@ typedef struct unk_800F8510 {
     s32 unk_08;
     s8 unk_0C[0x4];
     unk_8006FC8C* unk_10;
-    s8 unk_14[0xDC];
+    s8 unk_14[0xC];
+    s32 unk_20;
+    s8 unk_24[0xCC];
 } unk_800F8510; // size = 0xF0
 
 typedef struct unk_8010B7D0 {

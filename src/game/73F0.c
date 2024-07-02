@@ -517,7 +517,6 @@ void func_80071A58(s32, s32);
 void func_80071BE4(s32);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80071BE4.s")
 
-extern unk_800F8510 D_802A6B40[];
 extern unk_8010B7B0 D_8010B7B0;
 void func_8007243C(s32);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8007243C.s")
