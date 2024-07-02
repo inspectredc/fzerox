@@ -141,7 +141,7 @@ s32 func_800760F8(void) {
 
 #ifdef IMPORT_BSS
 extern s32 D_800DCCCC;
-s32 func_800760F8(void) {
+s32 func_800761D4(void) {
     static s32 D_800E3374;
 
     if (D_800DCCCC == 0) {

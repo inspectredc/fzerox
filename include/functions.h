@@ -12,6 +12,7 @@ void func_8006C520(s16* arg0, f32* arg1, f32 arg2, s32 arg3, f32 arg4, f32 arg5,
 void func_80074A90(f32* arg0, f32* arg1);
 void func_80074CE4(unk_800F8510*);
 
+s32 func_800760F8(void);
 void func_800765CC(s32 arg0, s32 arg1, u32 arg2);
 s32 func_80076BD4(uintptr_t arg0);
 
