@@ -62,7 +62,7 @@ void func_8007F5EC(void) {
         }
     }
 
-    label:
+label:
     if (D_80428610 == 0xF9) {
         func_8007F520();
     }

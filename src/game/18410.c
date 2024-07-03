@@ -26,7 +26,7 @@ s32 func_8007EF68(u16* arg0, s32 arg1, u16 arg2) {
 s32 func_8007EFBC(u16* arg0, u16* arg1, s32 arg2) {
     s32 i;
     s32 temp_v0;
-    u8* var_s0 = (u8*)arg0;
+    u8* var_s0 = (u8*) arg0;
     s32 var_s2 = 0;
     u16* var_s3 = arg1;
 
@@ -36,7 +36,7 @@ s32 func_8007EFBC(u16* arg0, u16* arg1, s32 arg2) {
             if (var_s2 >= 0x100) {
                 return -1;
             }
-            *var_s0 = var_s2; 
+            *var_s0 = var_s2;
             *var_s3 = *arg0;
             var_s0++;
             var_s3++;
@@ -59,7 +59,7 @@ Gfx* func_8007F090(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_v0 = D_800CCFE0 & 0x10;
     s32 temp_t0 = D_800CCFE0 & 0xF;
     f32 temp_fv0 = temp_t0 / 15.0f;
-    
+
     if (!temp_v0) {
         red = (arg1 - 255) * temp_fv0 + 255.0f;
         green = (arg2 - 255) * temp_fv0 + 255.0f;

@@ -369,21 +369,15 @@ void func_8006FF90(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     temp_s0->unk_08 = 0x400;
     temp_s0->unk_0A = 0x800;
     temp_s0++;
-    temp_s0->unk_00 =
-        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.xz) + sp60.x) - (sp30.xx * D_800CD1E4));
-    temp_s0->unk_02 =
-        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.yz) + sp60.y) - (sp30.yx * D_800CD1E4));
-    temp_s0->unk_04 =
-        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.zz) + sp60.z) - (sp30.zx * D_800CD1E4));
+    temp_s0->unk_00 = func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.xz) + sp60.x) - (sp30.xx * D_800CD1E4));
+    temp_s0->unk_02 = func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.yz) + sp60.y) - (sp30.yx * D_800CD1E4));
+    temp_s0->unk_04 = func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.zz) + sp60.z) - (sp30.zx * D_800CD1E4));
     temp_s0->unk_08 = 0;
     temp_s0->unk_0A = 0x600;
     temp_s0++;
-    temp_s0->unk_00 =
-        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.xz) + sp60.x) - (sp30.xx * D_800CD1E4));
-    temp_s0->unk_02 =
-        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.yz) + sp60.y) - (sp30.yx * D_800CD1E4));
-    temp_s0->unk_04 =
-        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.zz) + sp60.z) - (sp30.zx * D_800CD1E4));
+    temp_s0->unk_00 = func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.xz) + sp60.x) - (sp30.xx * D_800CD1E4));
+    temp_s0->unk_02 = func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.yz) + sp60.y) - (sp30.yx * D_800CD1E4));
+    temp_s0->unk_04 = func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.zz) + sp60.z) - (sp30.zx * D_800CD1E4));
     temp_s0->unk_08 = 0x800;
     temp_s0->unk_0A = 0x600;
     D_802D2D78[arg0][0] = arg1->unk_04;
@@ -421,8 +415,7 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     spE0 /= 2;
 
     func_8006FC8C(sp88, arg1->unk_08, &spC8);
-    func_8006C520(NULL, &sp44, 1.0f, (arg1->unk_10 * 4096.0f) / 360.0f, sp8C.xx, sp8C.yx, sp8C.zx,
-                  0.0f, 0.0f, 0.0f);
+    func_8006C520(NULL, &sp44, 1.0f, (arg1->unk_10 * 4096.0f) / 360.0f, sp8C.xx, sp8C.yx, sp8C.zx, 0.0f, 0.0f, 0.0f);
     spBC.x = sp44.m[0][0] * sp8C.xz + sp44.m[1][0] * sp8C.yz + sp44.m[2][0] * sp8C.zz;
     spBC.y = sp44.m[0][1] * sp8C.xz + sp44.m[1][1] * sp8C.yz + sp44.m[2][1] * sp8C.zz;
     spBC.z = sp44.m[0][2] * sp8C.xz + sp44.m[1][2] * sp8C.yz + sp44.m[2][2] * sp8C.zz;

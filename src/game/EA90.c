@@ -91,7 +91,8 @@ void func_80074CE4(unk_800F8510* arg0) {
         spF0 = ((spE0 * spD4.x) - (spE8 * spD4.z)) * -1.0f;
         spEC = ((spE8 * spD4.y) - (spE4 * spD4.x)) * -1.0f;
         func_80074B10(&spF4, &spF0, &spEC);
-        func_8006C520(NULL, &sp94, 1.0f, (D_8010B7B0.unk_520[i] << 0xC) / 360, spD4.x, spD4.y, spD4.z, 0.0f, 0.0f, 0.0f);
+        func_8006C520(NULL, &sp94, 1.0f, (D_8010B7B0.unk_520[i] << 0xC) / 360, spD4.x, spD4.y, spD4.z, 0.0f, 0.0f,
+                      0.0f);
         var_s0->unk_0C.x = sp94.m[0][0] * spF4 + sp94.m[1][0] * spF0 + sp94.m[2][0] * spEC;
         var_s0->unk_0C.y = sp94.m[0][1] * spF4 + sp94.m[1][1] * spF0 + sp94.m[2][1] * spEC;
         var_s0->unk_0C.z = sp94.m[0][2] * spF4 + sp94.m[1][2] * spF0 + sp94.m[2][2] * spEC;

@@ -406,15 +406,14 @@ s32 func_8006A9E0(f32 arg0) {
 
 s32 func_8006AA38(Mtx3F* mtx) {
     f32 temp_fs0;
-    
+
     temp_fs0 = SQ(mtx->xx) + SQ(mtx->yx) + SQ(mtx->zx);
-    
+
     if (temp_fs0 == 0.0f) {
         return -1;
     }
-    
-    temp_fs0 = 1.0f / sqrtf(temp_fs0);
 
+    temp_fs0 = 1.0f / sqrtf(temp_fs0);
 
     mtx->xx *= temp_fs0;
     mtx->yx *= temp_fs0;
@@ -425,11 +424,11 @@ s32 func_8006AA38(Mtx3F* mtx) {
     mtx->zz = mtx->xy * mtx->yx - mtx->yy * mtx->xx;
 
     temp_fs0 = SQ(mtx->xz) + SQ(mtx->yz) + SQ(mtx->zz);
-    
+
     if (temp_fs0 == 0.0f) {
         return -1;
     }
-    
+
     temp_fs0 = 1.0f / sqrtf(temp_fs0);
 
     mtx->xz *= temp_fs0;
@@ -455,7 +454,6 @@ s32 func_8006AC10(Mtx3F* mtx) {
     mtx->yy *= temp_fs0;
     mtx->zy *= temp_fs0;
 
-    
     mtx->xz = mtx->yy * mtx->zx - mtx->zy * mtx->yx;
     mtx->yz = mtx->zy * mtx->xx - mtx->xy * mtx->zx;
     mtx->zz = mtx->xy * mtx->yx - mtx->yy * mtx->xx;
@@ -612,9 +610,12 @@ void func_8006B908(MtxF* arg0, MtxF* arg1, MtxF* arg2) {
     arg2->m[2][1] = arg0->m[0][1] * arg1->m[2][0] + arg0->m[1][1] * arg1->m[2][1] + arg0->m[2][1] * arg1->m[2][2];
     arg2->m[2][2] = arg0->m[0][2] * arg1->m[2][0] + arg0->m[1][2] * arg1->m[2][1] + arg0->m[2][2] * arg1->m[2][2];
 
-    arg2->m[3][0] = arg0->m[0][0] * arg1->m[3][0] + arg0->m[1][0] * arg1->m[3][1] + arg0->m[2][0] * arg1->m[3][2] + arg0->m[3][0];
-    arg2->m[3][1] = arg0->m[0][1] * arg1->m[3][0] + arg0->m[1][1] * arg1->m[3][1] + arg0->m[2][1] * arg1->m[3][2] + arg0->m[3][1];
-    arg2->m[3][2] = arg0->m[0][2] * arg1->m[3][0] + arg0->m[1][2] * arg1->m[3][1] + arg0->m[2][2] * arg1->m[3][2] + arg0->m[3][2];
+    arg2->m[3][0] =
+        arg0->m[0][0] * arg1->m[3][0] + arg0->m[1][0] * arg1->m[3][1] + arg0->m[2][0] * arg1->m[3][2] + arg0->m[3][0];
+    arg2->m[3][1] =
+        arg0->m[0][1] * arg1->m[3][0] + arg0->m[1][1] * arg1->m[3][1] + arg0->m[2][1] * arg1->m[3][2] + arg0->m[3][1];
+    arg2->m[3][2] =
+        arg0->m[0][2] * arg1->m[3][0] + arg0->m[1][2] * arg1->m[3][1] + arg0->m[2][2] * arg1->m[3][2] + arg0->m[3][2];
 
     arg2->m[0][3] = 0.0f;
     arg2->m[1][3] = 0.0f;
@@ -663,8 +664,8 @@ void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5
 extern Mtx D_800E1230;
 extern MtxF D_800E1270;
 
-void func_8006BC84(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9,
-                   f32 argA, f32 argB, f32 argC, f32 argD) {
+void func_8006BC84(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,
+                   f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD) {
     f32 sp7C;
     f32 sp78;
     f32 sp74;
@@ -848,6 +849,7 @@ void func_8006D2E0(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
     arg1->m[3][2] = (arg8 + arg7) * temp_fv0;
 
     arg1->m[3][3] = arg2;
-    arg1->m[0][1] = arg1->m[0][2] = arg1->m[0][3] = arg1->m[1][0] = arg1->m[1][2] = arg1->m[1][3] = arg1->m[2][0] = arg1->m[2][1] = arg1->m[2][3] = 0.0f;
+    arg1->m[0][1] = arg1->m[0][2] = arg1->m[0][3] = arg1->m[1][0] = arg1->m[1][2] = arg1->m[1][3] = arg1->m[2][0] =
+        arg1->m[2][1] = arg1->m[2][3] = 0.0f;
     func_8006BBE8(arg1, arg0);
 }
