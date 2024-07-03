@@ -18,6 +18,9 @@ s32 func_80076BD4(uintptr_t arg0);
 
 void func_8007E2B4(void);
 
+void Fault_SetFrameBuffer(FrameBuffer* buffer, u16 width, u16 height);
+void Fault_Init(void);
+
 f32 func_8009E108(unk_8006FC8C*, f32, f32*);
 f32 func_8009E538(unk_8006FC8C*, f32, Vec3f*);
 void func_8009E6F0(unk_8006FC8C*, f32, Vec3f*);

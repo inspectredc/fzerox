@@ -9,6 +9,9 @@
 
 #define ABS(x) ((x) >= 0 ? (x) : -(x))
 
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 240
+
 /*
  * Macros for libultra
  */
@@ -27,5 +30,8 @@
 #ifndef __GNUC__
 #define __attribute__(x)
 #endif
+
+#define OS_MSEC_TO_CYCLES(n)    OS_USEC_TO_CYCLES((n) * 1000LL)
+#define OS_SEC_TO_CYCLES(n)     OS_MSEC_TO_CYCLES((n) * 1000LL)
 
 #endif // MACROS_H

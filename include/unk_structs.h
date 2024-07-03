@@ -116,4 +116,21 @@ typedef struct unk_800E3A28 {
     s8 unk_24[0x4];
 } unk_800E3A28; // size = 0x28
 
+typedef struct unk_800E51B8 {
+    s32 unk_00;
+    s16 unk_04;
+    s16 unk_06;
+    s16 unk_08;
+    s16 unk_0A;
+    s16 unk_0C;
+    s16 unk_0E;
+    s16 unk_10;
+    s16 unk_12;
+    s16 unk_14;
+    s16 unk_16;
+    s16 unk_18;
+    s16 unk_1A;
+    s32 unk_1C;
+} unk_800E51B8; // size = 0x20
+
 #endif // UNK_STRUCTS_H

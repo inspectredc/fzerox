@@ -188,3 +188,21 @@ leoDiskStack = 0x800F8B30;
 __osEventStateTab = 0x800FB300;
 
 gMasterDisp = 0x800DCCF8;
+
+Fault_FillRectangle = 0x8007FF40;
+Fault_DisplayChar = 0x8008002C;
+Fault_PrOut = 0x80080174;
+Fault_Printf = 0x80080198;
+Fault_Wait = 0x80080254;
+Fault_DisplayFloatReg = 0x8008031C;
+Fault_DisplayFloatException = 0x800803A0;
+Fault_DisplayDebugInfo = 0x8008042C;
+Fault_ThreadEntry = 0x800808F0;
+Fault_SetFrameBuffer = 0x80080974;
+Fault_Init = 0x8008099C;
+
+sFaultCharIndex = 0x800CD6C0;
+sFaultCharPixelFlags = 0x800CD740;
+sFloatExceptions = 0x800CD888;
+gFaultMgr = 0x800E47D0; //size:0x9D8
+
