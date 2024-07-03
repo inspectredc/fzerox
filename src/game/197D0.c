@@ -11,7 +11,7 @@ typedef struct unk_8007F86C_arg_1 {
 
 void func_8007F7D0(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s32* arg4) {
     u32 temp_t8 = func_80403040(arg0, arg2, arg3, arg4) + 0xA0000;
-    
+
     D_800E4330.hdr.pri = 0;
     D_800E4330.hdr.retQueue = &D_800DCA68;
     D_800E4330.dramAddr = arg1;

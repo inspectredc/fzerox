@@ -46,7 +46,7 @@ void Fault_DisplayChar(s32 xPos, s32 yPos, s32 index) {
 }
 
 char* Fault_PrOut(char* buffer, const char* fmt, size_t size) {
-    return (char*)memcpy(buffer, fmt, size) + size;
+    return (char*) memcpy(buffer, fmt, size) + size;
 }
 
 void Fault_Printf(s32 xPos, s32 yPos, const char* fmt, ...) {
@@ -60,7 +60,7 @@ void Fault_Printf(s32 xPos, s32 yPos, const char* fmt, ...) {
     charRemaining = _Printf(Fault_PrOut, buffer, fmt, args);
 
     if (charRemaining > 0) {
-        charPtr = (s8*)buffer;
+        charPtr = (s8*) buffer;
         while (charRemaining > 0) {
             charIndex = sFaultCharIndex[(*charPtr & 0x7F)];
             if (charIndex != 0xFF) {
