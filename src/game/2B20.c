@@ -404,9 +404,75 @@ s32 func_8006A9E0(f32 arg0) {
     return arg0 + 0.5f;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006AA38.s")
+s32 func_8006AA38(Mtx3F* mtx) {
+    f32 temp_fs0;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006AC10.s")
+    temp_fs0 = SQ(mtx->xx) + SQ(mtx->yx) + SQ(mtx->zx);
+
+    if (temp_fs0 == 0.0f) {
+        return -1;
+    }
+
+    temp_fs0 = 1.0f / sqrtf(temp_fs0);
+
+    mtx->xx *= temp_fs0;
+    mtx->yx *= temp_fs0;
+    mtx->zx *= temp_fs0;
+
+    mtx->xz = mtx->yy * mtx->zx - mtx->zy * mtx->yx;
+    mtx->yz = mtx->zy * mtx->xx - mtx->xy * mtx->zx;
+    mtx->zz = mtx->xy * mtx->yx - mtx->yy * mtx->xx;
+
+    temp_fs0 = SQ(mtx->xz) + SQ(mtx->yz) + SQ(mtx->zz);
+
+    if (temp_fs0 == 0.0f) {
+        return -1;
+    }
+
+    temp_fs0 = 1.0f / sqrtf(temp_fs0);
+
+    mtx->xz *= temp_fs0;
+    mtx->yz *= temp_fs0;
+    mtx->zz *= temp_fs0;
+
+    mtx->xy = mtx->yx * mtx->zz - mtx->zx * mtx->yz;
+    mtx->yy = mtx->zx * mtx->xz - mtx->xx * mtx->zz;
+    mtx->zy = mtx->xx * mtx->yz - mtx->yx * mtx->xz;
+    return 0;
+}
+
+s32 func_8006AC10(Mtx3F* mtx) {
+    f32 temp_fs0;
+
+    temp_fs0 = SQ(mtx->xy) + SQ(mtx->yy) + SQ(mtx->zy);
+    if (temp_fs0 == 0.0f) {
+        return -1;
+    }
+    temp_fs0 = 1.0f / sqrtf(temp_fs0);
+
+    mtx->xy *= temp_fs0;
+    mtx->yy *= temp_fs0;
+    mtx->zy *= temp_fs0;
+
+    mtx->xz = mtx->yy * mtx->zx - mtx->zy * mtx->yx;
+    mtx->yz = mtx->zy * mtx->xx - mtx->xy * mtx->zx;
+    mtx->zz = mtx->xy * mtx->yx - mtx->yy * mtx->xx;
+
+    temp_fs0 = SQ(mtx->xz) + SQ(mtx->yz) + SQ(mtx->zz);
+    if (temp_fs0 == 0.0f) {
+        return -1;
+    }
+    temp_fs0 = 1.0f / sqrtf(temp_fs0);
+
+    mtx->xz *= temp_fs0;
+    mtx->yz *= temp_fs0;
+    mtx->zz *= temp_fs0;
+
+    mtx->xx = mtx->yz * mtx->zy - mtx->zz * mtx->yy;
+    mtx->yx = mtx->zz * mtx->xy - mtx->xz * mtx->zy;
+    mtx->zx = mtx->xz * mtx->yy - mtx->yz * mtx->xy;
+    return 0;
+}
 
 void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* arg3, s32* arg4, s32* arg5) {
     s32 temp_lo;
@@ -531,40 +597,75 @@ void func_8006B18C(s8* arg0, s32* arg1, f32* arg2, f32 arg3, f32 arg4, f32 arg5,
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006B33C.s")
 
-void func_8006B908(f32* arg0, f32* arg1, f32* arg2) {
-    arg2[0] = arg0[0] * arg1[0] + arg0[4] * arg1[1] + arg0[8] * arg1[2];
-    arg2[1] = arg0[1] * arg1[0] + arg0[5] * arg1[1] + arg0[9] * arg1[2];
-    arg2[2] = arg0[2] * arg1[0] + arg0[6] * arg1[1] + arg0[10] * arg1[2];
+void func_8006B908(MtxF* arg0, MtxF* arg1, MtxF* arg2) {
+    arg2->m[0][0] = arg0->m[0][0] * arg1->m[0][0] + arg0->m[1][0] * arg1->m[0][1] + arg0->m[2][0] * arg1->m[0][2];
+    arg2->m[0][1] = arg0->m[0][1] * arg1->m[0][0] + arg0->m[1][1] * arg1->m[0][1] + arg0->m[2][1] * arg1->m[0][2];
+    arg2->m[0][2] = arg0->m[0][2] * arg1->m[0][0] + arg0->m[1][2] * arg1->m[0][1] + arg0->m[2][2] * arg1->m[0][2];
 
-    arg2[4] = arg0[0] * arg1[4] + arg0[4] * arg1[5] + arg0[8] * arg1[6];
-    arg2[5] = arg0[1] * arg1[4] + arg0[5] * arg1[5] + arg0[9] * arg1[6];
-    arg2[6] = arg0[2] * arg1[4] + arg0[6] * arg1[5] + arg0[10] * arg1[6];
+    arg2->m[1][0] = arg0->m[0][0] * arg1->m[1][0] + arg0->m[1][0] * arg1->m[1][1] + arg0->m[2][0] * arg1->m[1][2];
+    arg2->m[1][1] = arg0->m[0][1] * arg1->m[1][0] + arg0->m[1][1] * arg1->m[1][1] + arg0->m[2][1] * arg1->m[1][2];
+    arg2->m[1][2] = arg0->m[0][2] * arg1->m[1][0] + arg0->m[1][2] * arg1->m[1][1] + arg0->m[2][2] * arg1->m[1][2];
 
-    arg2[8] = arg0[0] * arg1[8] + arg0[4] * arg1[9] + arg0[8] * arg1[10];
-    arg2[9] = arg0[1] * arg1[8] + arg0[5] * arg1[9] + arg0[9] * arg1[10];
-    arg2[10] = arg0[2] * arg1[8] + arg0[6] * arg1[9] + arg0[10] * arg1[10];
+    arg2->m[2][0] = arg0->m[0][0] * arg1->m[2][0] + arg0->m[1][0] * arg1->m[2][1] + arg0->m[2][0] * arg1->m[2][2];
+    arg2->m[2][1] = arg0->m[0][1] * arg1->m[2][0] + arg0->m[1][1] * arg1->m[2][1] + arg0->m[2][1] * arg1->m[2][2];
+    arg2->m[2][2] = arg0->m[0][2] * arg1->m[2][0] + arg0->m[1][2] * arg1->m[2][1] + arg0->m[2][2] * arg1->m[2][2];
 
-    arg2[12] = arg0[0] * arg1[12] + arg0[4] * arg1[13] + arg0[8] * arg1[14] + arg0[12];
-    arg2[13] = arg0[1] * arg1[12] + arg0[5] * arg1[13] + arg0[9] * arg1[14] + arg0[13];
-    arg2[14] = arg0[2] * arg1[12] + arg0[6] * arg1[13] + arg0[10] * arg1[14] + arg0[14];
+    arg2->m[3][0] =
+        arg0->m[0][0] * arg1->m[3][0] + arg0->m[1][0] * arg1->m[3][1] + arg0->m[2][0] * arg1->m[3][2] + arg0->m[3][0];
+    arg2->m[3][1] =
+        arg0->m[0][1] * arg1->m[3][0] + arg0->m[1][1] * arg1->m[3][1] + arg0->m[2][1] * arg1->m[3][2] + arg0->m[3][1];
+    arg2->m[3][2] =
+        arg0->m[0][2] * arg1->m[3][0] + arg0->m[1][2] * arg1->m[3][1] + arg0->m[2][2] * arg1->m[3][2] + arg0->m[3][2];
 
-    arg2[3] = 0.0f;
-    arg2[7] = 0.0f;
-    arg2[11] = 0.0f;
-    arg2[15] = 1.0f;
+    arg2->m[0][3] = 0.0f;
+    arg2->m[1][3] = 0.0f;
+    arg2->m[2][3] = 0.0f;
+    arg2->m[3][3] = 1.0f;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006BB80.s")
+// Matrix_FromMtx
+void func_8006BB80(Mtx* src2, MtxF* dest) {
+    s32 i;
+    s32 j;
+    // Potential Re-cast?
+    Mtx* src = src2;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006BBE8.s")
+    for (i = 3; i >= 0; i--) {
+        for (j = 3; j >= 0; j--) {
+            dest->m[i][j] = (((s16) src->u.i[i][j] << 0x10) | (src->u.f[i][j])) / 65536.0f;
+        }
+    }
+}
 
-void func_8006BBE8(f32*, s16*);
-void func_8006C378(s16* arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7, f32 arg8);
-extern s16 D_800E1230[];
-extern f32 D_800E1270[];
+// Matrix_ToMtx
+void func_8006BBE8(MtxF* src, Mtx* dest2) {
+    s32 i;
+    s32 j;
+    s32 intValue;
+    f32 temp_fv0;
+    Mtx* dest = dest2;
 
-void func_8006BC84(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9,
-                   f32 argA, f32 argB, f32 argC, f32 argD) {
+    for (i = 3; i >= 0; i--) {
+        for (j = 3; j >= 0; j--) {
+            temp_fv0 = src->m[i][j] * 65536.0f;
+            // Round Value
+            if (temp_fv0 < 0.0f) {
+                intValue = temp_fv0 - 0.5f;
+            } else {
+                intValue = temp_fv0 + 0.5f;
+            }
+            dest->u.i[i][j] = intValue >> 0x10;
+            dest->u.f[i][j] = intValue;
+        }
+    }
+}
+
+void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7, f32 arg8);
+extern Mtx D_800E1230;
+extern MtxF D_800E1270;
+
+void func_8006BC84(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,
+                   f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD) {
     f32 sp7C;
     f32 sp78;
     f32 sp74;
@@ -575,10 +676,10 @@ void func_8006BC84(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
     f32 sp60;
 
     if (arg0 == NULL) {
-        arg0 = D_800E1230;
+        arg0 = &D_800E1230;
     }
     if (arg1 == NULL) {
-        arg1 = D_800E1270;
+        arg1 = &D_800E1270;
     }
     sp7C = SQ(arg5) + SQ(arg6) + SQ(arg7);
     if (sp7C < 0.001f) {
@@ -586,9 +687,9 @@ void func_8006BC84(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
         return;
     }
     sp60 = arg2 / sqrtf(sp7C);
-    arg1[8] = sp60 * arg5;
-    arg1[9] = sp60 * arg6;
-    arg1[10] = sp60 * arg7;
+    arg1->m[2][0] = sp60 * arg5;
+    arg1->m[2][1] = sp60 * arg6;
+    arg1->m[2][2] = sp60 * arg7;
     sp78 = (arg9 * arg7) - (argA * arg6);
     sp74 = (argA * arg5) - (arg8 * arg7);
     sp70 = (arg8 * arg6) - (arg9 * arg5);
@@ -600,9 +701,9 @@ void func_8006BC84(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
     }
 
     sp60 = arg4 / sqrtf(sp7C);
-    arg1[0] = sp60 * sp78;
-    arg1[1] = sp60 * sp74;
-    arg1[2] = sp60 * sp70;
+    arg1->m[0][0] = sp60 * sp78;
+    arg1->m[0][1] = sp60 * sp74;
+    arg1->m[0][2] = sp60 * sp70;
 
     sp6C = (arg6 * sp70) - (arg7 * sp74);
     sp68 = (arg7 * sp78) - (arg5 * sp70);
@@ -613,20 +714,20 @@ void func_8006BC84(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
         return;
     }
     sp60 = arg3 / sqrtf(sp7C);
-    arg1[4] = sp60 * sp6C;
-    arg1[5] = sp60 * sp68;
-    arg1[6] = sp60 * sp64;
-    arg1[12] = argB;
-    arg1[13] = argC;
-    arg1[14] = argD;
-    arg1[3] = 0.0f;
-    arg1[7] = 0.0f;
-    arg1[11] = 0.0f;
-    arg1[15] = 1.0f;
+    arg1->m[1][0] = sp60 * sp6C;
+    arg1->m[1][1] = sp60 * sp68;
+    arg1->m[1][2] = sp60 * sp64;
+    arg1->m[3][0] = argB;
+    arg1->m[3][1] = argC;
+    arg1->m[3][2] = argD;
+    arg1->m[0][3] = 0.0f;
+    arg1->m[1][3] = 0.0f;
+    arg1->m[2][3] = 0.0f;
+    arg1->m[3][3] = 1.0f;
     func_8006BBE8(arg1, arg0);
 }
 
-void func_8006BFCC(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6, f32* arg7) {
+void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6, f32* arg7) {
     f32 sp84;
     f32 sp80;
     f32 sp70;
@@ -637,14 +738,14 @@ void func_8006BFCC(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5
     f32 sp5C;
 
     if (arg0 == NULL) {
-        arg0 = D_800E1230;
+        arg0 = &D_800E1230;
     }
     if (arg1 == NULL) {
-        arg1 = D_800E1270;
+        arg1 = &D_800E1270;
     }
-    arg1[8] = arg5[0] * arg2;
-    arg1[9] = arg5[1] * arg2;
-    arg1[10] = arg5[2] * arg2;
+    arg1->m[2][0] = arg5[0] * arg2;
+    arg1->m[2][1] = arg5[1] * arg2;
+    arg1->m[2][2] = arg5[2] * arg2;
 
     sp80 = (arg6[1] * arg5[2]) - (arg5[1] * arg6[2]);
     sp6C = (arg6[2] * arg5[0]) - (arg5[2] * arg6[0]);
@@ -656,9 +757,9 @@ void func_8006BFCC(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5
     }
 
     sp84 = arg4 / sqrtf(sp84);
-    arg1[0] = sp84 * sp80;
-    arg1[1] = sp84 * sp6C;
-    arg1[2] = sp84 * sp5C;
+    arg1->m[0][0] = sp84 * sp80;
+    arg1->m[0][1] = sp84 * sp6C;
+    arg1->m[0][2] = sp84 * sp5C;
 
     sp68 = (arg5[1] * sp5C) - (arg5[2] * sp6C);
 
@@ -672,43 +773,43 @@ void func_8006BFCC(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5
         return;
     }
     sp84 = arg3 / sqrtf(sp84);
-    arg1[4] = sp84 * sp68;
-    arg1[5] = sp84 * sp64;
-    arg1[6] = sp84 * sp60;
-    arg1[12] = arg7[0];
-    arg1[13] = arg7[1];
-    arg1[14] = arg7[2];
-    arg1[3] = 0.0f;
-    arg1[7] = 0.0f;
-    arg1[11] = 0.0f;
-    arg1[15] = 1.0f;
+    arg1->m[1][0] = sp84 * sp68;
+    arg1->m[1][1] = sp84 * sp64;
+    arg1->m[1][2] = sp84 * sp60;
+    arg1->m[3][0] = arg7[0];
+    arg1->m[3][1] = arg7[1];
+    arg1->m[3][2] = arg7[2];
+    arg1->m[0][3] = 0.0f;
+    arg1->m[1][3] = 0.0f;
+    arg1->m[2][3] = 0.0f;
+    arg1->m[3][3] = 1.0f;
     func_8006BBE8(arg1, arg0);
 }
 
-void func_8006C278(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6) {
+void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6) {
 
     if (arg0 == NULL) {
-        arg0 = D_800E1230;
+        arg0 = &D_800E1230;
     }
     if (arg1 == NULL) {
-        arg1 = D_800E1270;
+        arg1 = &D_800E1270;
     }
-    arg1[8] = arg5[0] * arg2;
-    arg1[9] = arg5[1] * arg2;
-    arg1[10] = arg5[2] * arg2;
-    arg1[0] = arg5[6] * arg4;
-    arg1[1] = arg5[7] * arg4;
-    arg1[2] = arg5[8] * arg4;
-    arg1[4] = arg5[3] * arg3;
-    arg1[5] = arg5[4] * arg3;
-    arg1[6] = arg5[5] * arg3;
-    arg1[12] = arg6[0];
-    arg1[13] = arg6[1];
-    arg1[14] = arg6[2];
-    arg1[3] = 0.0f;
-    arg1[7] = 0.0f;
-    arg1[11] = 0.0f;
-    arg1[15] = 1.0f;
+    arg1->m[2][0] = arg5[0] * arg2;
+    arg1->m[2][1] = arg5[1] * arg2;
+    arg1->m[2][2] = arg5[2] * arg2;
+    arg1->m[0][0] = arg5[6] * arg4;
+    arg1->m[0][1] = arg5[7] * arg4;
+    arg1->m[0][2] = arg5[8] * arg4;
+    arg1->m[1][0] = arg5[3] * arg3;
+    arg1->m[1][1] = arg5[4] * arg3;
+    arg1->m[1][2] = arg5[5] * arg3;
+    arg1->m[3][0] = arg6[0];
+    arg1->m[3][1] = arg6[1];
+    arg1->m[3][2] = arg6[2];
+    arg1->m[0][3] = 0.0f;
+    arg1->m[1][3] = 0.0f;
+    arg1->m[2][3] = 0.0f;
+    arg1->m[3][3] = 1.0f;
 
     func_8006BBE8(arg1, arg0);
 }
@@ -723,31 +824,32 @@ void func_8006C278(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006D03C.s")
 
-void func_8006D2E0(s16* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8) {
+void func_8006D2E0(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8) {
     f32 temp_fa0;
     f32 temp_fv0;
     f32 temp_fv1;
 
     if (arg0 == NULL) {
-        arg0 = D_800E1230;
+        arg0 = &D_800E1230;
     }
     if (arg1 == NULL) {
-        arg1 = D_800E1270;
+        arg1 = &D_800E1270;
     }
 
     temp_fv1 = arg2 / (arg3 - arg4);
-    arg1[0] = temp_fv1 * -2.0f;
-    arg1[12] = (arg4 + arg3) * temp_fv1;
+    arg1->m[0][0] = temp_fv1 * -2.0f;
+    arg1->m[3][0] = (arg4 + arg3) * temp_fv1;
 
     temp_fa0 = arg2 / (arg5 - arg6);
-    arg1[5] = temp_fa0 * -2.0f;
-    arg1[13] = (arg6 + arg5) * temp_fa0;
+    arg1->m[1][1] = temp_fa0 * -2.0f;
+    arg1->m[3][1] = (arg6 + arg5) * temp_fa0;
 
     temp_fv0 = arg2 / (arg7 - arg8);
-    arg1[10] = 2.0f * temp_fv0;
-    arg1[14] = (arg8 + arg7) * temp_fv0;
+    arg1->m[2][2] = 2.0f * temp_fv0;
+    arg1->m[3][2] = (arg8 + arg7) * temp_fv0;
 
-    arg1[15] = arg2;
-    arg1[1] = arg1[2] = arg1[3] = arg1[4] = arg1[6] = arg1[7] = arg1[8] = arg1[9] = arg1[11] = 0.0f;
+    arg1->m[3][3] = arg2;
+    arg1->m[0][1] = arg1->m[0][2] = arg1->m[0][3] = arg1->m[1][0] = arg1->m[1][2] = arg1->m[1][3] = arg1->m[2][0] =
+        arg1->m[2][1] = arg1->m[2][3] = 0.0f;
     func_8006BBE8(arg1, arg0);
 }
