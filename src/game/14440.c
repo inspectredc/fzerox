@@ -2,9 +2,6 @@
 
 extern Gfx D_3000088[];
 
-#define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
-
 Gfx* func_8007A440(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha) {
 
     red &= 0xFF;

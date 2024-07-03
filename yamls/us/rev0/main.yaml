@@ -36,7 +36,9 @@
       - [0x18410, c, game/18410]
       - [0x194E0, c, game/194E0]
       - [0x197D0, c, game/197D0]
-      - [0x19F40, c, game/19F40] # sys_fault?
+      - [0x19F30, pad]
+      - [0x19F40, c, game/sys_fault] # sys_fault?
+      - [0x1AA40, c, game/1AA40]
       - [0x1AE90, c, game/1AE90]
       - [0x36ED0, c, game/36ED0]
       - [0x44620, hasm, game/44620]
@@ -219,7 +221,8 @@
       - [0x6E310, .rodata, game/14440]
       - [0x6E6B0, .rodata, game/194E0]
       - [0x6E6C0, .rodata, game/197D0]
-      - [0x6E8B0, .rodata, game/19F40]
+      - [0x6E8B0, .rodata, game/sys_fault]
+      - [0x6EC60, .rodata, game/1AA40]
       - [0x6EC80, .rodata, game/1AE90]
       - [0x6FA10, .rodata, game/36ED0]
       - [0x6FB40, .rodata, game/446D0]

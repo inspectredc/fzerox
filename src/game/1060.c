@@ -50,7 +50,7 @@ void func_800671A8(void) {
     D_800CCFA4 = 1;
 }
 
-extern void* D_800DCCD0[];
+extern FrameBuffer* D_800DCCD0[];
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1060/func_800671EC.s")
 
@@ -63,13 +63,11 @@ extern OSMesgQueue D_800DCA50;
 extern void* D_800DCB28;
 extern OSPiHandle* D_800DCCDC;
 extern OSPiHandle* D_800DCCE0;
-extern s32 D_801D9800;
-extern s32 D_80200000;
-extern s32 D_803DA800;
+extern FrameBuffer D_801D9800;
+extern FrameBuffer D_80200000;
+extern FrameBuffer D_803DA800;
 
 extern void func_800671EC(void*);
-extern void func_80080974(void*, s32, s32);
-extern void func_8008099C(void);
 
 void func_800678B8(void* arg0) {
     D_800DCCD0[0] = &D_801D9800;
@@ -89,8 +87,8 @@ void func_800678B8(void* arg0) {
     osCreatePiManager(0x96, &D_800DCA50, &D_800DCB28, 0x40);
     D_800DCCDC = osCartRomInit();
     D_800DCCE0 = osDriveRomInit();
-    func_8008099C();
-    func_80080974(&D_801D9800, 0x140, 0x10);
+    Fault_Init();
+    Fault_SetFrameBuffer(&D_801D9800, 0x140, 0x10);
     osCreateThread(&D_800DC1E0, 3, func_800671EC, NULL, &D_800D8830, 0x63);
     if (D_800CCFC8 != 0) {
         osStartThread(&D_800DC1E0);
