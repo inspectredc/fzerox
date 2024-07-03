@@ -1,147 +1,90 @@
-#include "common.h"
+#include "global.h"
+#include "PR/leo.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/func_8007F4E0.s")
+extern s32 D_800CD510;
+extern s32 D_800E4260;
+extern s32 D_800E4264;
 
+void func_8007F4E0(s32 arg0, s32 arg1) {
+    D_800CD510 = 1;
+    D_800E4264 = arg0;
+    D_800E4260 = arg1;
+}
+
+#ifdef IMPORT_BSS
+static s8 D_800E42C8[4];
+extern s16 D_800E42CC;
+
+void func_8007F500(void) {
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        D_800E42C8[i] = 0;
+    }
+
+    D_800E42CC = 0;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/func_8007F500.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/func_8007F520.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4310.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D431C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4324.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4330.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4340.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D434C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4358.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4364.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4370.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4384.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4390.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D439C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D43A8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D43B4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D43C0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D43CC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D43DC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D43EC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D43F8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4408.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D441C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4428.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4438.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4444.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4450.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D445C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4468.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4474.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4480.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D448C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4498.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D449C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D44A0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D44AC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D44B8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D44C4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D44D4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D44E0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D44EC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D44F8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4504.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4510.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4520.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4530.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4544.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4554.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4564.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4574.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4580.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D458C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4598.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D45A4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D45B4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D45C0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D45D0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D45E0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D45EC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D45FC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4608.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4618.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4624.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4634.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4640.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4650.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D465C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4668.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4678.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4684.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/D_800D4690.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/func_8007F5EC.s")
+void func_80076310(void);
+void func_8007F520(void);
+s32 func_80403F4C(s32, OSMesg*, s32);
+void func_8040428C(void);
+s32 func_804043B8(s32);
+s32 func_804046F0(void);
+void func_80404AEC(char*, char*);
+void func_804067BC(s32, s32);
+void func_800762B0(LEODiskID);
+extern OSMesgQueue D_800E42D0;
+extern OSMesg D_800E42E8;
+extern s32 D_80428610;
+extern LEODiskID D_80428618;
+extern LEODiskID leoBootID;
+
+void func_8007F5EC(void) {
+
+    func_80076310();
+    osCreateMesgQueue(&D_800E42D0, &D_800E42E8, 0x10);
+    func_80404AEC("01", "EFZE");
+    if (func_80403F4C(0x101, &D_800E42E8, 0x10) < 0) {
+        switch (D_80428610) {
+            case 0x29:
+                return;
+            case 0x2A:
+            case 0xF9:
+            default:
+                goto label;
+                break;
+        }
+    }
+
+    label:
+    if (D_80428610 == 0xF9) {
+        func_8007F520();
+    }
+    func_8040428C();
+    func_800762B0(D_80428618);
+    leoBootID = D_80428618;
+
+    switch (func_804046F0()) {
+        case 1:
+            break;
+        case 0:
+            if (func_804043B8(1) < 0) {}
+            break;
+        case -1:
+            switch (D_80428610) {
+                case 42:
+                    break;
+                case 23:
+                    func_804043B8(1);
+                    break;
+            }
+            break;
+    }
+    func_804067BC(0, 0);
+}

@@ -38,7 +38,7 @@ typedef struct unk_802A9FC0 {
 
 typedef struct unk_802D08E0 {
     Vec3f unk_00;
-    unk_struct_24 unk_0C;
+    Mtx3F unk_0C;
     f32 unk_30;
     unk_802A9FC0* unk_34;
 } unk_802D08E0; // size = 0x38
@@ -285,7 +285,7 @@ void func_8006FC8C(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
     f32 sp54;
     f32 sp50;
     f32 temp_fv0;
-    unk_struct_24 sp28;
+    Mtx3F sp28;
 
     temp_fv0 = func_8009E108(arg0, arg1, &sp58);
 
@@ -296,9 +296,9 @@ void func_8006FC8C(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
     func_8009E6F0(arg0, arg1, arg2);
     sp58 = (sp54 - sp50) / 2.0f;
 
-    arg2->x += sp58 * sp28.unk_18.x;
-    arg2->y += sp58 * sp28.unk_18.y;
-    arg2->z += sp58 * sp28.unk_18.z;
+    arg2->x += sp58 * sp28.xz;
+    arg2->y += sp58 * sp28.yz;
+    arg2->z += sp58 * sp28.zz;
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8006FD7C.s")
@@ -322,7 +322,7 @@ void func_8006FF90(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     f32 sp6C;
     Vec3f sp60;
     Vec3f sp54;
-    unk_struct_24 sp30;
+    Mtx3F sp30;
     unk_8006FC8C* sp2C;
 
     sp78 = arg1->unk_08;
@@ -332,24 +332,24 @@ void func_8006FF90(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     sp74 = func_8009E538(sp2C, sp78, &sp54);
     func_8009E85C(sp2C, arg1->unk_08, &sp30, func_8009E108(sp2C, arg1->unk_08, &sp6C));
     func_8006FC8C(sp2C, arg1->unk_08, &sp60);
-    sp60.x += 5.0f * sp30.unk_0C.x;
-    sp60.y += 5.0f * sp30.unk_0C.y;
-    sp60.z += 5.0f * sp30.unk_0C.z;
-    temp_s0->unk_00 = func_8006A9E0(((arg1->unk_10 * sp30.unk_18.x) + sp60.x) + (sp30.unk_00.x * D_800CD1E4));
-    temp_s0->unk_02 = func_8006A9E0(((arg1->unk_10 * sp30.unk_18.y) + sp60.y) + (sp30.unk_00.y * D_800CD1E4));
-    temp_s0->unk_04 = func_8006A9E0(((arg1->unk_10 * sp30.unk_18.z) + sp60.z) + (sp30.unk_00.z * D_800CD1E4));
+    sp60.x += 5.0f * sp30.xy;
+    sp60.y += 5.0f * sp30.yy;
+    sp60.z += 5.0f * sp30.zy;
+    temp_s0->unk_00 = func_8006A9E0(((arg1->unk_10 * sp30.xz) + sp60.x) + (sp30.xx * D_800CD1E4));
+    temp_s0->unk_02 = func_8006A9E0(((arg1->unk_10 * sp30.yz) + sp60.y) + (sp30.yx * D_800CD1E4));
+    temp_s0->unk_04 = func_8006A9E0(((arg1->unk_10 * sp30.zz) + sp60.z) + (sp30.zx * D_800CD1E4));
     temp_s0->unk_08 = 0x400;
     temp_s0->unk_0A = 0x200;
     temp_s0++;
-    temp_s0->unk_00 = func_8006A9E0(((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.x) + sp60.x);
-    temp_s0->unk_02 = func_8006A9E0(((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.y) + sp60.y);
-    temp_s0->unk_04 = func_8006A9E0(((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.z) + sp60.z);
+    temp_s0->unk_00 = func_8006A9E0(((arg1->unk_10 + D_800CD1E0) * sp30.xz) + sp60.x);
+    temp_s0->unk_02 = func_8006A9E0(((arg1->unk_10 + D_800CD1E0) * sp30.yz) + sp60.y);
+    temp_s0->unk_04 = func_8006A9E0(((arg1->unk_10 + D_800CD1E0) * sp30.zz) + sp60.z);
     temp_s0->unk_08 = 0;
     temp_s0->unk_0A = 0;
     temp_s0++;
-    temp_s0->unk_00 = func_8006A9E0(((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.x) + sp60.x);
-    temp_s0->unk_02 = func_8006A9E0(((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.y) + sp60.y);
-    temp_s0->unk_04 = func_8006A9E0(((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.z) + sp60.z);
+    temp_s0->unk_00 = func_8006A9E0(((arg1->unk_10 - D_800CD1E0) * sp30.xz) + sp60.x);
+    temp_s0->unk_02 = func_8006A9E0(((arg1->unk_10 - D_800CD1E0) * sp30.yz) + sp60.y);
+    temp_s0->unk_04 = func_8006A9E0(((arg1->unk_10 - D_800CD1E0) * sp30.zz) + sp60.z);
     temp_s0->unk_08 = 0x800;
     temp_s0->unk_0A = 0;
 
@@ -358,32 +358,32 @@ void func_8006FF90(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     D_802D3E38[arg0].unk_0C.x = arg1->unk_10 - D_800CD1E0;
     D_802D3E38[arg0].unk_18.x = arg1->unk_10 + D_800CD1E0;
 
-    sp60.x = sp60.x + sp30.unk_00.x * D_800CD1DC;
-    sp60.y = sp60.y + sp30.unk_00.y * D_800CD1DC;
-    sp60.z = sp60.z + sp30.unk_00.z * D_800CD1DC;
+    sp60.x = sp60.x + sp30.xx * D_800CD1DC;
+    sp60.y = sp60.y + sp30.yx * D_800CD1DC;
+    sp60.z = sp60.z + sp30.zx * D_800CD1DC;
 
     temp_s0++;
-    temp_s0->unk_00 = func_8006A9E0((arg1->unk_10 * sp30.unk_18.x) + sp60.x);
-    temp_s0->unk_02 = func_8006A9E0((arg1->unk_10 * sp30.unk_18.y) + sp60.y);
-    temp_s0->unk_04 = func_8006A9E0((arg1->unk_10 * sp30.unk_18.z) + sp60.z);
+    temp_s0->unk_00 = func_8006A9E0((arg1->unk_10 * sp30.xz) + sp60.x);
+    temp_s0->unk_02 = func_8006A9E0((arg1->unk_10 * sp30.yz) + sp60.y);
+    temp_s0->unk_04 = func_8006A9E0((arg1->unk_10 * sp30.zz) + sp60.z);
     temp_s0->unk_08 = 0x400;
     temp_s0->unk_0A = 0x800;
     temp_s0++;
     temp_s0->unk_00 =
-        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.x) + sp60.x) - (sp30.unk_00.x * D_800CD1E4));
+        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.xz) + sp60.x) - (sp30.xx * D_800CD1E4));
     temp_s0->unk_02 =
-        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.y) + sp60.y) - (sp30.unk_00.y * D_800CD1E4));
+        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.yz) + sp60.y) - (sp30.yx * D_800CD1E4));
     temp_s0->unk_04 =
-        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.unk_18.z) + sp60.z) - (sp30.unk_00.z * D_800CD1E4));
+        func_8006A9E0((((arg1->unk_10 + D_800CD1E0) * sp30.zz) + sp60.z) - (sp30.zx * D_800CD1E4));
     temp_s0->unk_08 = 0;
     temp_s0->unk_0A = 0x600;
     temp_s0++;
     temp_s0->unk_00 =
-        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.x) + sp60.x) - (sp30.unk_00.x * D_800CD1E4));
+        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.xz) + sp60.x) - (sp30.xx * D_800CD1E4));
     temp_s0->unk_02 =
-        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.y) + sp60.y) - (sp30.unk_00.y * D_800CD1E4));
+        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.yz) + sp60.y) - (sp30.yx * D_800CD1E4));
     temp_s0->unk_04 =
-        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.unk_18.z) + sp60.z) - (sp30.unk_00.z * D_800CD1E4));
+        func_8006A9E0((((arg1->unk_10 - D_800CD1E0) * sp30.zz) + sp60.z) - (sp30.zx * D_800CD1E4));
     temp_s0->unk_08 = 0x800;
     temp_s0->unk_0A = 0x600;
     D_802D2D78[arg0][0] = arg1->unk_04;
@@ -402,10 +402,10 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     Vec3f spC8;
     Vec3f spBC;
     Vec3f spB0;
-    unk_struct_24 sp8C;
+    Mtx3F sp8C;
     unk_8006FC8C* sp88;
     s32 pad;
-    f32 sp44[16];
+    MtxF sp44;
 
     spF0 = arg1->unk_08;
     sp88 = &D_800F8510->unk_10[arg1->unk_00];
@@ -421,36 +421,36 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     spE0 /= 2;
 
     func_8006FC8C(sp88, arg1->unk_08, &spC8);
-    func_8006C520(NULL, sp44, 1.0f, (arg1->unk_10 * 4096.0f) / 360.0f, sp8C.unk_00.x, sp8C.unk_00.y, sp8C.unk_00.z,
+    func_8006C520(NULL, &sp44, 1.0f, (arg1->unk_10 * 4096.0f) / 360.0f, sp8C.xx, sp8C.yx, sp8C.zx,
                   0.0f, 0.0f, 0.0f);
-    spBC.x = sp44[0] * sp8C.unk_18.x + sp44[4] * sp8C.unk_18.y + sp44[8] * sp8C.unk_18.z;
-    spBC.y = sp44[1] * sp8C.unk_18.x + sp44[5] * sp8C.unk_18.y + sp44[9] * sp8C.unk_18.z;
-    spBC.z = sp44[2] * sp8C.unk_18.x + sp44[6] * sp8C.unk_18.y + sp44[10] * sp8C.unk_18.z;
+    spBC.x = sp44.m[0][0] * sp8C.xz + sp44.m[1][0] * sp8C.yz + sp44.m[2][0] * sp8C.zz;
+    spBC.y = sp44.m[0][1] * sp8C.xz + sp44.m[1][1] * sp8C.yz + sp44.m[2][1] * sp8C.zz;
+    spBC.z = sp44.m[0][2] * sp8C.xz + sp44.m[1][2] * sp8C.yz + sp44.m[2][2] * sp8C.zz;
     func_80074BB4(&spBC, 1.0f);
-    sp8C.unk_18.x = spBC.x;
-    sp8C.unk_18.y = spBC.y;
-    sp8C.unk_18.z = spBC.z;
-    spBC.x = sp44[0] * sp8C.unk_0C.x + sp44[4] * sp8C.unk_0C.y + sp44[8] * sp8C.unk_0C.z;
-    spBC.y = sp44[1] * sp8C.unk_0C.x + sp44[5] * sp8C.unk_0C.y + sp44[9] * sp8C.unk_0C.z;
-    spBC.z = sp44[2] * sp8C.unk_0C.x + sp44[6] * sp8C.unk_0C.y + sp44[10] * sp8C.unk_0C.z;
+    sp8C.xz = spBC.x;
+    sp8C.yz = spBC.y;
+    sp8C.zz = spBC.z;
+    spBC.x = sp44.m[0][0] * sp8C.xy + sp44.m[1][0] * sp8C.yy + sp44.m[2][0] * sp8C.zy;
+    spBC.y = sp44.m[0][1] * sp8C.xy + sp44.m[1][1] * sp8C.yy + sp44.m[2][1] * sp8C.zy;
+    spBC.z = sp44.m[0][2] * sp8C.xy + sp44.m[1][2] * sp8C.yy + sp44.m[2][2] * sp8C.zy;
     func_80074BB4(&spBC, 1.0f);
-    sp8C.unk_0C.x = spBC.x;
-    sp8C.unk_0C.y = spBC.y;
-    sp8C.unk_0C.z = spBC.z;
+    sp8C.xy = spBC.x;
+    sp8C.yy = spBC.y;
+    sp8C.zy = spBC.z;
     spD4 = spC8;
     spC8.x += (5.0f - spE0) * spBC.x;
     spC8.y += (5.0f - spE0) * spBC.y;
     spC8.z += (5.0f - spE0) * spBC.z;
 
-    temp_s0->unk_00 = func_8006A9E0((sp8C.unk_00.x * 50.0f) + spC8.x);
-    temp_s0->unk_02 = func_8006A9E0((sp8C.unk_00.y * 50.0f) + spC8.y);
-    temp_s0->unk_04 = func_8006A9E0((sp8C.unk_00.z * 50.0f) + spC8.z);
+    temp_s0->unk_00 = func_8006A9E0((sp8C.xx * 50.0f) + spC8.x);
+    temp_s0->unk_02 = func_8006A9E0((sp8C.yx * 50.0f) + spC8.y);
+    temp_s0->unk_04 = func_8006A9E0((sp8C.zx * 50.0f) + spC8.z);
     temp_s0->unk_08 = 0x400;
     temp_s0->unk_0A = 0x200;
     temp_s0++;
-    temp_s0->unk_00 = func_8006A9E0((sp8C.unk_18.x * 50.0f) + spC8.x);
-    temp_s0->unk_02 = func_8006A9E0((sp8C.unk_18.y * 50.0f) + spC8.y);
-    temp_s0->unk_04 = func_8006A9E0((sp8C.unk_18.z * 50.0f) + spC8.z);
+    temp_s0->unk_00 = func_8006A9E0((sp8C.xz * 50.0f) + spC8.x);
+    temp_s0->unk_02 = func_8006A9E0((sp8C.yz * 50.0f) + spC8.y);
+    temp_s0->unk_04 = func_8006A9E0((sp8C.zz * 50.0f) + spC8.z);
     temp_s0->unk_08 = 0;
     temp_s0->unk_0A = 0;
     spB0.x = temp_s0->unk_00 - spD4.x;
@@ -461,9 +461,9 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     D_802D3E38[arg0].unk_0C = spB0;
     temp_s0++;
 
-    temp_s0->unk_00 = func_8006A9E0(spC8.x - (sp8C.unk_18.x * 50.0f));
-    temp_s0->unk_02 = func_8006A9E0(spC8.y - (sp8C.unk_18.y * 50.0f));
-    temp_s0->unk_04 = func_8006A9E0(spC8.z - (sp8C.unk_18.z * 50.0f));
+    temp_s0->unk_00 = func_8006A9E0(spC8.x - (sp8C.xz * 50.0f));
+    temp_s0->unk_02 = func_8006A9E0(spC8.y - (sp8C.yz * 50.0f));
+    temp_s0->unk_04 = func_8006A9E0(spC8.z - (sp8C.zz * 50.0f));
     temp_s0->unk_08 = 0x800;
     temp_s0->unk_0A = 0;
     spB0.x = temp_s0->unk_00 - spD4.x;
@@ -474,9 +474,9 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     D_802D3E38[arg0].unk_04 = spF0;
     spF0 += (150.0f / spEC);
     D_802D3E38[arg0].unk_08 = spF0;
-    spC8.x = spC8.x + sp8C.unk_00.x * 150.0f;
-    spC8.y = spC8.y + sp8C.unk_00.y * 150.0f;
-    spC8.z = spC8.z + sp8C.unk_00.z * 150.0f;
+    spC8.x = spC8.x + sp8C.xx * 150.0f;
+    spC8.y = spC8.y + sp8C.yx * 150.0f;
+    spC8.z = spC8.z + sp8C.zx * 150.0f;
 
     temp_s0++;
     temp_s0->unk_00 = func_8006A9E0(spC8.x);
@@ -485,15 +485,15 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     temp_s0->unk_08 = 0x400;
     temp_s0->unk_0A = 0x800;
     temp_s0++;
-    temp_s0->unk_00 = func_8006A9E0(((sp8C.unk_18.x * 50.0f) + spC8.x) - (sp8C.unk_00.x * 50.0f));
-    temp_s0->unk_02 = func_8006A9E0(((sp8C.unk_18.y * 50.0f) + spC8.y) - (sp8C.unk_00.y * 50.0f));
-    temp_s0->unk_04 = func_8006A9E0(((sp8C.unk_18.z * 50.0f) + spC8.z) - (sp8C.unk_00.z * 50.0f));
+    temp_s0->unk_00 = func_8006A9E0(((sp8C.xz * 50.0f) + spC8.x) - (sp8C.xx * 50.0f));
+    temp_s0->unk_02 = func_8006A9E0(((sp8C.yz * 50.0f) + spC8.y) - (sp8C.yx * 50.0f));
+    temp_s0->unk_04 = func_8006A9E0(((sp8C.zz * 50.0f) + spC8.z) - (sp8C.zx * 50.0f));
     temp_s0->unk_08 = 0;
     temp_s0->unk_0A = 0x600;
     temp_s0++;
-    temp_s0->unk_00 = func_8006A9E0((spC8.x - (sp8C.unk_18.x * 50.0f)) - (sp8C.unk_00.x * 50.0f));
-    temp_s0->unk_02 = func_8006A9E0((spC8.y - (sp8C.unk_18.y * 50.0f)) - (sp8C.unk_00.y * 50.0f));
-    temp_s0->unk_04 = func_8006A9E0((spC8.z - (sp8C.unk_18.z * 50.0f)) - (sp8C.unk_00.z * 50.0f));
+    temp_s0->unk_00 = func_8006A9E0((spC8.x - (sp8C.xz * 50.0f)) - (sp8C.xx * 50.0f));
+    temp_s0->unk_02 = func_8006A9E0((spC8.y - (sp8C.yz * 50.0f)) - (sp8C.yx * 50.0f));
+    temp_s0->unk_04 = func_8006A9E0((spC8.z - (sp8C.zz * 50.0f)) - (sp8C.zx * 50.0f));
     temp_s0->unk_08 = 0x800;
     temp_s0->unk_0A = 0x600;
     D_802D2D78[arg0][0] = arg1->unk_04;

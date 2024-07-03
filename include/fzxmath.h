@@ -9,4 +9,26 @@ typedef struct {
     /* 0x8 */ f32 z;
 } Vec3f; // size = 0xC
 
+typedef float Mtx3F_t[3][3];
+typedef union {
+    Mtx3F_t mf;
+    struct {
+        float xx, yx, zx,
+              xy, yy, zy,
+              xz, yz, zz;
+    };
+} Mtx3F; // size = 0x24
+
+typedef float MtxF_t[4][4];
+
+typedef union {
+    MtxF_t m;
+    struct {
+        float xx, yx, zx, wx,
+              xy, yy, zy, wy,
+              xz, yz, zz, wz,
+              xw, yw, zw, ww;
+    };
+} MtxF; // size = 0x40
+
 #endif // FZX_MATH_H

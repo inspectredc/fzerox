@@ -44,11 +44,11 @@ s32 func_80074BB4(Vec3f* arg0, f32 arg1) {
 
 extern unk_800F8510* D_800F8510;
 
-unk_struct_24* func_80074C60(unk_struct_24* arg0) {
+Mtx3F* func_80074C60(Mtx3F* arg0) {
     f32 sp44;
     f32 sp40;
     unk_8006FC8C* temp_a0;
-    unk_struct_24 sp18;
+    Mtx3F sp18;
 
     temp_a0 = D_800F8510->unk_10;
     sp44 = func_8009E108(temp_a0, 0.0f, &sp40);
@@ -68,7 +68,7 @@ void func_80074CE4(unk_800F8510* arg0) {
     f32 spE4;
     f32 spE0;
     Vec3f spD4;
-    f32 sp94[16];
+    MtxF sp94;
     s32 i;
     unk_8006FC8C* var_s0;
 
@@ -91,10 +91,10 @@ void func_80074CE4(unk_800F8510* arg0) {
         spF0 = ((spE0 * spD4.x) - (spE8 * spD4.z)) * -1.0f;
         spEC = ((spE8 * spD4.y) - (spE4 * spD4.x)) * -1.0f;
         func_80074B10(&spF4, &spF0, &spEC);
-        func_8006C520(NULL, sp94, 1.0f, (D_8010B7B0.unk_520[i] << 0xC) / 360, spD4.x, spD4.y, spD4.z, 0.0f, 0.0f, 0.0f);
-        var_s0->unk_0C.x = sp94[0] * spF4 + sp94[4] * spF0 + sp94[8] * spEC;
-        var_s0->unk_0C.y = sp94[1] * spF4 + sp94[5] * spF0 + sp94[9] * spEC;
-        var_s0->unk_0C.z = sp94[2] * spF4 + sp94[6] * spF0 + sp94[10] * spEC;
+        func_8006C520(NULL, &sp94, 1.0f, (D_8010B7B0.unk_520[i] << 0xC) / 360, spD4.x, spD4.y, spD4.z, 0.0f, 0.0f, 0.0f);
+        var_s0->unk_0C.x = sp94.m[0][0] * spF4 + sp94.m[1][0] * spF0 + sp94.m[2][0] * spEC;
+        var_s0->unk_0C.y = sp94.m[0][1] * spF4 + sp94.m[1][1] * spF0 + sp94.m[2][1] * spEC;
+        var_s0->unk_0C.z = sp94.m[0][2] * spF4 + sp94.m[1][2] * spF0 + sp94.m[2][2] * spEC;
         var_s0 = var_s0->unk_34;
     }
 }

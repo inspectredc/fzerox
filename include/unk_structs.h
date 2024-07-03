@@ -55,12 +55,6 @@ typedef struct unk_8010B7B0 {
     s8 unk_7A0[64];
 } unk_8010B7B0; // size = 0x7E0
 
-typedef struct unk_struct_24 {
-    Vec3f unk_00;
-    Vec3f unk_0C;
-    Vec3f unk_18;
-} unk_struct_24; // size = 0x24
-
 typedef struct unk_802D3E38 {
     s8 unk_00[0x4];
     f32 unk_04;
