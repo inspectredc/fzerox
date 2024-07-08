@@ -3,10 +3,13 @@
 
 #include "libultra/ultra64.h"
 
-typedef struct {
-    /* 0x0 */ f32 x;
-    /* 0x4 */ f32 y;
-    /* 0x8 */ f32 z;
+typedef union {
+    struct {
+        /* 0x0 */ f32 x;
+        /* 0x4 */ f32 y;
+        /* 0x8 */ f32 z;
+    };
+    /* 0x0 */ f32 v[3];
 } Vec3f; // size = 0xC
 
 typedef float Mtx3F_t[3][3];
