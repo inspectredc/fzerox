@@ -1764,4 +1764,19 @@
   - type: bin
     start: 0x51DFB0
 
+  - name: ovl_i11
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i11
+    start: 0x524920
+    # Todo: figure out vram
+    vram: 0x80600000
+    symbol_name_format: i11_$VRAM
+    subsegments:
+      - [0x524920, asm]
+      - [0x524BE0, data]
+
+  - type: bin
+    start: 0x527AF0
+
   - [0x1000000]

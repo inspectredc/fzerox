@@ -175,4 +175,13 @@
     subsegments:
       - [0xF2AC0, c]
       - [0x145740, data]
-      - [0x1459A0, .rodata, F2AC0]
+
+  - name: ovl_i10
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i10
+    start: 0x1459A0
+    vram: 0x80115DF0
+    symbol_name_format: i10_$VRAM
+    subsegments:
+      - [0x1459A0, c]

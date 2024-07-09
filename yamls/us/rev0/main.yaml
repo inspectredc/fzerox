@@ -50,7 +50,7 @@
       - [0x511D0, c, game/511D0]
 
       # TODO: Figure out these half functions/microcodes
-      - [0x554E0, bin]
+      - [0x554E0, bin] # includes func_800BB4E0
 
       # Libultra
       - [0x559B0, c, libultra/os/sendmesg]
