@@ -160,11 +160,13 @@ Gfx* func_80080E90(Gfx* gfx) {
         }
         gSPDisplayList(gfx++, D_80149A0);
         gDPSetFillColor(gfx++, var_s0->unk_1A << 16 | var_s0->unk_1A);
-        gDPFillRectangle(gfx++, var_s0->unk_08, var_s0->unk_0A, ((var_s0->unk_08 + var_s0->unk_10) - 1), ((var_s0->unk_0A + var_s0->unk_12) - 1));
+        gDPFillRectangle(gfx++, var_s0->unk_08, var_s0->unk_0A, ((var_s0->unk_08 + var_s0->unk_10) - 1),
+                         ((var_s0->unk_0A + var_s0->unk_12) - 1));
 
         gDPPipeSync(gfx++);
         gDPSetFillColor(gfx++, var_s0->unk_18 << 16 | var_s0->unk_18);
-        gDPFillRectangle(gfx++, var_s0->unk_08 + 1, var_s0->unk_0A + 1, ((var_s0->unk_08 + var_s0->unk_10) - 2), ((var_s0->unk_0A + var_s0->unk_12) - 2));
+        gDPFillRectangle(gfx++, var_s0->unk_08 + 1, var_s0->unk_0A + 1, ((var_s0->unk_08 + var_s0->unk_10) - 2),
+                         ((var_s0->unk_0A + var_s0->unk_12) - 2));
 
         if ((var_s0->unk_1C != NULL) && (var_s0->unk_00 == 3)) {
             gfx = var_s0->unk_1C(gfx, var_s0->unk_08, var_s0->unk_0A);

@@ -274,7 +274,7 @@ void func_80081364(unk_struct_F8* arg0, unk_8008112C_arg_1* arg1) {
 
 void func_800813E8(unk_struct_F8* arg0) {
     unk_8008112C_arg_1* var = &arg0->unk_04;
-    
+
     var->unk_00.unk_18[0] += (var->unk_00.unk_18[3] - var->unk_00.unk_18[0]) * var->unk_00.unk_18[6];
     var->unk_00.unk_18[1] += (var->unk_00.unk_18[4] - var->unk_00.unk_18[1]) * var->unk_00.unk_18[6];
     var->unk_00.unk_18[2] += (var->unk_00.unk_18[5] - var->unk_00.unk_18[2]) * var->unk_00.unk_18[6];
@@ -288,12 +288,18 @@ void func_8008149C(unk_struct_F8* arg0) {
     s32 pad;
     unk_8008112C_arg_1* var = &arg0->unk_04;
 
-    var->unk_00.unk_00.x += (var->unk_58.unk_00.unk_00.unk_00.unk_00.x - var->unk_00.unk_00.x) * var->unk_58.unk_00.unk_00.unk_00.unk_18;
-    var->unk_00.unk_00.y += (var->unk_58.unk_00.unk_00.unk_00.unk_00.y - var->unk_00.unk_00.y) * var->unk_58.unk_00.unk_00.unk_00.unk_18;
-    var->unk_00.unk_00.z += (var->unk_58.unk_00.unk_00.unk_00.unk_00.z - var->unk_00.unk_00.z) * var->unk_58.unk_00.unk_00.unk_00.unk_18;
-    var->unk_00.unk_0C.x += (var->unk_58.unk_00.unk_00.unk_00.unk_0C.x - var->unk_00.unk_0C.x) * var->unk_58.unk_00.unk_00.unk_00.unk_1C;
-    var->unk_00.unk_0C.y += (var->unk_58.unk_00.unk_00.unk_00.unk_0C.y - var->unk_00.unk_0C.y) * var->unk_58.unk_00.unk_00.unk_00.unk_1C;
-    var->unk_00.unk_0C.z += (var->unk_58.unk_00.unk_00.unk_00.unk_0C.z - var->unk_00.unk_0C.z) * var->unk_58.unk_00.unk_00.unk_00.unk_1C;
+    var->unk_00.unk_00.x +=
+        (var->unk_58.unk_00.unk_00.unk_00.unk_00.x - var->unk_00.unk_00.x) * var->unk_58.unk_00.unk_00.unk_00.unk_18;
+    var->unk_00.unk_00.y +=
+        (var->unk_58.unk_00.unk_00.unk_00.unk_00.y - var->unk_00.unk_00.y) * var->unk_58.unk_00.unk_00.unk_00.unk_18;
+    var->unk_00.unk_00.z +=
+        (var->unk_58.unk_00.unk_00.unk_00.unk_00.z - var->unk_00.unk_00.z) * var->unk_58.unk_00.unk_00.unk_00.unk_18;
+    var->unk_00.unk_0C.x +=
+        (var->unk_58.unk_00.unk_00.unk_00.unk_0C.x - var->unk_00.unk_0C.x) * var->unk_58.unk_00.unk_00.unk_00.unk_1C;
+    var->unk_00.unk_0C.y +=
+        (var->unk_58.unk_00.unk_00.unk_00.unk_0C.y - var->unk_00.unk_0C.y) * var->unk_58.unk_00.unk_00.unk_00.unk_1C;
+    var->unk_00.unk_0C.z +=
+        (var->unk_58.unk_00.unk_00.unk_00.unk_0C.z - var->unk_00.unk_0C.z) * var->unk_58.unk_00.unk_00.unk_00.unk_1C;
 }
 
 extern f32 D_800DD230[];
@@ -309,9 +315,15 @@ void func_80081550(unk_struct_F8* arg0) {
     unk_8008112C_arg_1* temp_v0_4;
     unk_struct_9C* temp_v1;
 
-    arg0->unk_04.unk_58.unk_00.unk_00.unk_30.x += (arg0->unk_04.unk_58.unk_00.unk_00.unk_30.y - arg0->unk_04.unk_58.unk_00.unk_00.unk_30.x) * arg0->unk_04.unk_58.unk_00.unk_00.unk_30.z;
-    arg0->unk_04.unk_58.unk_00.unk_00.unk_3C.x += (arg0->unk_04.unk_58.unk_00.unk_00.unk_3C.y - arg0->unk_04.unk_58.unk_00.unk_00.unk_3C.x) * arg0->unk_04.unk_58.unk_00.unk_00.unk_3C.z;
-    arg0->unk_04.unk_58.unk_00.unk_00.unk_48.x += (arg0->unk_04.unk_58.unk_00.unk_00.unk_48.y - arg0->unk_04.unk_58.unk_00.unk_00.unk_48.x) * arg0->unk_04.unk_58.unk_00.unk_00.unk_48.z;
+    arg0->unk_04.unk_58.unk_00.unk_00.unk_30.x +=
+        (arg0->unk_04.unk_58.unk_00.unk_00.unk_30.y - arg0->unk_04.unk_58.unk_00.unk_00.unk_30.x) *
+        arg0->unk_04.unk_58.unk_00.unk_00.unk_30.z;
+    arg0->unk_04.unk_58.unk_00.unk_00.unk_3C.x +=
+        (arg0->unk_04.unk_58.unk_00.unk_00.unk_3C.y - arg0->unk_04.unk_58.unk_00.unk_00.unk_3C.x) *
+        arg0->unk_04.unk_58.unk_00.unk_00.unk_3C.z;
+    arg0->unk_04.unk_58.unk_00.unk_00.unk_48.x +=
+        (arg0->unk_04.unk_58.unk_00.unk_00.unk_48.y - arg0->unk_04.unk_58.unk_00.unk_00.unk_48.x) *
+        arg0->unk_04.unk_58.unk_00.unk_00.unk_48.z;
     temp_v1 = &arg0->unk_04.unk_58;
     temp_v0 = func_8006A9E0(arg0->unk_04.unk_58.unk_00.unk_00.unk_3C.x * 11.377778f);
 
@@ -321,10 +333,13 @@ void func_80081550(unk_struct_F8* arg0) {
     temp_v0 = func_8006A9E0(temp_v1->unk_00.unk_00.unk_48.x * 11.377778f);
     temp_fv0 = D_800DD230[temp_v0 & 0xFFF] * sp40;
     temp_fv1 = D_800DD230[(temp_v0 + 0x400) & 0xFFF] * sp40;
-    
-    temp_fa0 = (temp_v1->unk_00.unk_00.unk_00.unk_0C.x * temp_fv1) + (temp_v1->unk_00.unk_00.unk_24.x * temp_fv0) + (temp_v1->unk_00.unk_00.unk_00.unk_18 * sp3C);
-    temp_ft5 = (temp_v1->unk_00.unk_00.unk_00.unk_0C.y * temp_fv1) + (temp_v1->unk_00.unk_00.unk_24.y * temp_fv0) + (temp_v1->unk_00.unk_00.unk_00.unk_1C * sp3C);
-    sp28 = (temp_v1->unk_00.unk_00.unk_00.unk_0C.z * temp_fv1) + (temp_v1->unk_00.unk_00.unk_24.z * temp_fv0) + (temp_v1->unk_00.unk_00.unk_20 * sp3C);
+
+    temp_fa0 = (temp_v1->unk_00.unk_00.unk_00.unk_0C.x * temp_fv1) + (temp_v1->unk_00.unk_00.unk_24.x * temp_fv0) +
+               (temp_v1->unk_00.unk_00.unk_00.unk_18 * sp3C);
+    temp_ft5 = (temp_v1->unk_00.unk_00.unk_00.unk_0C.y * temp_fv1) + (temp_v1->unk_00.unk_00.unk_24.y * temp_fv0) +
+               (temp_v1->unk_00.unk_00.unk_00.unk_1C * sp3C);
+    sp28 = (temp_v1->unk_00.unk_00.unk_00.unk_0C.z * temp_fv1) + (temp_v1->unk_00.unk_00.unk_24.z * temp_fv0) +
+           (temp_v1->unk_00.unk_00.unk_20 * sp3C);
 
     temp_v0_4 = &arg0->unk_04;
     switch (arg0->unk_00) {
@@ -350,22 +365,45 @@ void func_80081E24(unk_struct_F8* arg0) {
     s32 pad;
     unk_8008112C_arg_1* var = &arg0->unk_04;
 
-    var->unk_58.unk_00.unk_00.unk_30.x += (var->unk_58.unk_00.unk_00.unk_3C.x - var->unk_58.unk_00.unk_00.unk_30.x) * var->unk_58.unk_00.unk_60;
-    var->unk_58.unk_00.unk_00.unk_30.y += (var->unk_58.unk_00.unk_00.unk_3C.y - var->unk_58.unk_00.unk_00.unk_30.y) * var->unk_58.unk_00.unk_60;
-    var->unk_58.unk_00.unk_00.unk_30.z += (var->unk_58.unk_00.unk_00.unk_3C.z - var->unk_58.unk_00.unk_00.unk_30.z) * var->unk_58.unk_00.unk_60;
+    var->unk_58.unk_00.unk_00.unk_30.x +=
+        (var->unk_58.unk_00.unk_00.unk_3C.x - var->unk_58.unk_00.unk_00.unk_30.x) * var->unk_58.unk_00.unk_60;
+    var->unk_58.unk_00.unk_00.unk_30.y +=
+        (var->unk_58.unk_00.unk_00.unk_3C.y - var->unk_58.unk_00.unk_00.unk_30.y) * var->unk_58.unk_00.unk_60;
+    var->unk_58.unk_00.unk_00.unk_30.z +=
+        (var->unk_58.unk_00.unk_00.unk_3C.z - var->unk_58.unk_00.unk_00.unk_30.z) * var->unk_58.unk_00.unk_60;
 
+    var->unk_58.unk_00.unk_00.unk_48.x +=
+        (var->unk_58.unk_00.unk_54.x - var->unk_58.unk_00.unk_00.unk_48.x) * var->unk_58.unk_00.unk_64;
+    var->unk_58.unk_00.unk_00.unk_48.y +=
+        (var->unk_58.unk_00.unk_54.y - var->unk_58.unk_00.unk_00.unk_48.y) * var->unk_58.unk_00.unk_64;
+    var->unk_58.unk_00.unk_00.unk_48.z +=
+        (var->unk_58.unk_00.unk_54.z - var->unk_58.unk_00.unk_00.unk_48.z) * var->unk_58.unk_00.unk_64;
 
-    var->unk_58.unk_00.unk_00.unk_48.x += (var->unk_58.unk_00.unk_54.x - var->unk_58.unk_00.unk_00.unk_48.x) * var->unk_58.unk_00.unk_64;
-    var->unk_58.unk_00.unk_00.unk_48.y += (var->unk_58.unk_00.unk_54.y - var->unk_58.unk_00.unk_00.unk_48.y) * var->unk_58.unk_00.unk_64;
-    var->unk_58.unk_00.unk_00.unk_48.z += (var->unk_58.unk_00.unk_54.z - var->unk_58.unk_00.unk_00.unk_48.z) * var->unk_58.unk_00.unk_64;
-    
-    var->unk_00.unk_00.x = var->unk_58.unk_00.unk_00.unk_00.unk_00.x + (var->unk_58.unk_00.unk_00.unk_24.x * var->unk_58.unk_00.unk_00.unk_30.x) + (var->unk_58.unk_00.unk_00.unk_00.unk_18 * var->unk_58.unk_00.unk_00.unk_30.y) + (var->unk_58.unk_00.unk_00.unk_00.unk_0C.x * var->unk_58.unk_00.unk_00.unk_30.z);
-    var->unk_00.unk_00.y = var->unk_58.unk_00.unk_00.unk_00.unk_00.y + (var->unk_58.unk_00.unk_00.unk_24.y * var->unk_58.unk_00.unk_00.unk_30.x) + (var->unk_58.unk_00.unk_00.unk_00.unk_1C * var->unk_58.unk_00.unk_00.unk_30.y) + (var->unk_58.unk_00.unk_00.unk_00.unk_0C.y * var->unk_58.unk_00.unk_00.unk_30.z);
-    var->unk_00.unk_00.z = var->unk_58.unk_00.unk_00.unk_00.unk_00.z + (var->unk_58.unk_00.unk_00.unk_24.z * var->unk_58.unk_00.unk_00.unk_30.x) + (var->unk_58.unk_00.unk_00.unk_20 * var->unk_58.unk_00.unk_00.unk_30.y) + (var->unk_58.unk_00.unk_00.unk_00.unk_0C.z * var->unk_58.unk_00.unk_00.unk_30.z);
-    
-    var->unk_00.unk_0C.x = var->unk_58.unk_00.unk_00.unk_00.unk_00.x + (var->unk_58.unk_00.unk_00.unk_24.x * var->unk_58.unk_00.unk_00.unk_48.x) + (var->unk_58.unk_00.unk_00.unk_00.unk_18 * var->unk_58.unk_00.unk_00.unk_48.y) + (var->unk_58.unk_00.unk_00.unk_00.unk_0C.x * var->unk_58.unk_00.unk_00.unk_48.z);
-    var->unk_00.unk_0C.y = var->unk_58.unk_00.unk_00.unk_00.unk_00.y + (var->unk_58.unk_00.unk_00.unk_24.y * var->unk_58.unk_00.unk_00.unk_48.x) + (var->unk_58.unk_00.unk_00.unk_00.unk_1C * var->unk_58.unk_00.unk_00.unk_48.y) + (var->unk_58.unk_00.unk_00.unk_00.unk_0C.y * var->unk_58.unk_00.unk_00.unk_48.z);
-    var->unk_00.unk_0C.z = var->unk_58.unk_00.unk_00.unk_00.unk_00.z + (var->unk_58.unk_00.unk_00.unk_24.z * var->unk_58.unk_00.unk_00.unk_48.x) + (var->unk_58.unk_00.unk_00.unk_20 * var->unk_58.unk_00.unk_00.unk_48.y) + (var->unk_58.unk_00.unk_00.unk_00.unk_0C.z * var->unk_58.unk_00.unk_00.unk_48.z);
+    var->unk_00.unk_00.x = var->unk_58.unk_00.unk_00.unk_00.unk_00.x +
+                           (var->unk_58.unk_00.unk_00.unk_24.x * var->unk_58.unk_00.unk_00.unk_30.x) +
+                           (var->unk_58.unk_00.unk_00.unk_00.unk_18 * var->unk_58.unk_00.unk_00.unk_30.y) +
+                           (var->unk_58.unk_00.unk_00.unk_00.unk_0C.x * var->unk_58.unk_00.unk_00.unk_30.z);
+    var->unk_00.unk_00.y = var->unk_58.unk_00.unk_00.unk_00.unk_00.y +
+                           (var->unk_58.unk_00.unk_00.unk_24.y * var->unk_58.unk_00.unk_00.unk_30.x) +
+                           (var->unk_58.unk_00.unk_00.unk_00.unk_1C * var->unk_58.unk_00.unk_00.unk_30.y) +
+                           (var->unk_58.unk_00.unk_00.unk_00.unk_0C.y * var->unk_58.unk_00.unk_00.unk_30.z);
+    var->unk_00.unk_00.z = var->unk_58.unk_00.unk_00.unk_00.unk_00.z +
+                           (var->unk_58.unk_00.unk_00.unk_24.z * var->unk_58.unk_00.unk_00.unk_30.x) +
+                           (var->unk_58.unk_00.unk_00.unk_20 * var->unk_58.unk_00.unk_00.unk_30.y) +
+                           (var->unk_58.unk_00.unk_00.unk_00.unk_0C.z * var->unk_58.unk_00.unk_00.unk_30.z);
+
+    var->unk_00.unk_0C.x = var->unk_58.unk_00.unk_00.unk_00.unk_00.x +
+                           (var->unk_58.unk_00.unk_00.unk_24.x * var->unk_58.unk_00.unk_00.unk_48.x) +
+                           (var->unk_58.unk_00.unk_00.unk_00.unk_18 * var->unk_58.unk_00.unk_00.unk_48.y) +
+                           (var->unk_58.unk_00.unk_00.unk_00.unk_0C.x * var->unk_58.unk_00.unk_00.unk_48.z);
+    var->unk_00.unk_0C.y = var->unk_58.unk_00.unk_00.unk_00.unk_00.y +
+                           (var->unk_58.unk_00.unk_00.unk_24.y * var->unk_58.unk_00.unk_00.unk_48.x) +
+                           (var->unk_58.unk_00.unk_00.unk_00.unk_1C * var->unk_58.unk_00.unk_00.unk_48.y) +
+                           (var->unk_58.unk_00.unk_00.unk_00.unk_0C.y * var->unk_58.unk_00.unk_00.unk_48.z);
+    var->unk_00.unk_0C.z = var->unk_58.unk_00.unk_00.unk_00.unk_00.z +
+                           (var->unk_58.unk_00.unk_00.unk_24.z * var->unk_58.unk_00.unk_00.unk_48.x) +
+                           (var->unk_58.unk_00.unk_00.unk_20 * var->unk_58.unk_00.unk_00.unk_48.y) +
+                           (var->unk_58.unk_00.unk_00.unk_00.unk_0C.z * var->unk_58.unk_00.unk_00.unk_48.z);
 }
 
 void func_80082068(unk_struct_F8* arg0, unk_struct_1DC* arg1) {
@@ -455,7 +493,7 @@ void func_80082204(unk_struct_F8* arg0, Vec3f* arg1, Mtx3F* arg2, Vec3f* arg3, V
         arg0->unk_04.unk_58.unk_00.unk_00.unk_24.x += arg2->mf[2][0] * 0.2f;
         arg0->unk_04.unk_58.unk_00.unk_00.unk_24.y += arg2->mf[2][1] * 0.2f;
         arg0->unk_04.unk_58.unk_00.unk_00.unk_24.z += arg2->mf[2][2] * 0.2f;
-        func_8006AA38((Mtx3F* ) &arg0->unk_04.unk_58.unk_00.unk_00.unk_00.unk_0C);
+        func_8006AA38((Mtx3F*) &arg0->unk_04.unk_58.unk_00.unk_00.unk_00.unk_0C);
     }
     if (arg3 != NULL) {
         temp_v0->unk_00.unk_00.unk_3C.x = arg3->x;
@@ -509,12 +547,12 @@ f32 func_80082428(unk_8006FC8C** arg0, f32 arg1, f32 arg2) {
     Vec3f sp80;
     Mtx3F sp5C;
 
-    sp54 = (s32)arg2 / 20;
+    sp54 = (s32) arg2 / 20;
     temp_fs3 = func_8009E85C(*arg0, arg1, &sp5C, 0.0f);
 
     for (i = 0; i < sp54; i++) {
         arg1 += 20.0f / temp_fs3;
-         if (arg1 >= 1.0f) {
+        if (arg1 >= 1.0f) {
             *arg0 = (*arg0)->unk_34;
             arg1 -= 1.0f;
             arg1 *= (temp_fs3 / func_8009E538(*arg0, 0.0f, &sp80));
@@ -564,7 +602,7 @@ void func_80082624(unk_struct_1DC* arg0, unk_8008112C_arg_1* arg1, unk_struct_9C
     arg1->unk_00.unk_18[8] = arg0->unk_14 = var_v0->x;
 
     arg0->unk_10 = 2;
-    
+
     switch (arg0->unk_08) {
         case 1:
         case 2:
@@ -643,7 +681,7 @@ void func_80082960(MtxF* arg0, Mtx* arg1) {
                 var_v1 = temp_fv0 + 0.5f;
             }
 
-            if (arg1){}
+            if (arg1) {}
             arg1->u.i[i][j] = var_v1 >> 0x10;
             arg1->u.f[i][j] = var_v1 & 0xFFFF;
         }
@@ -661,7 +699,8 @@ void func_80082A6C(void* arg0, unk_struct_1DC* arg1) {
     f32 var_fv0;
     f32 var_fv1;
 
-    func_8006D03C((s32)arg0 + (arg1->unk_00 << 6) + 0x20008, &arg1->unk_11C, arg1->unk_94.x, arg1->unk_A0, arg1->unk_A4, arg1->unk_A8, arg1->unk_94.y, arg1->unk_AC, arg1->unk_94.z, &arg1->unk_118);
+    func_8006D03C((s32) arg0 + (arg1->unk_00 << 6) + 0x20008, &arg1->unk_11C, arg1->unk_94.x, arg1->unk_A0,
+                  arg1->unk_A4, arg1->unk_A8, arg1->unk_94.y, arg1->unk_AC, arg1->unk_94.z, &arg1->unk_118);
 
     if (D_800E5E8C != 0) {
         var_fv0 = D_800CD8AC;
@@ -681,10 +720,11 @@ void func_80082A6C(void* arg0, unk_struct_1DC* arg1) {
         sp64 = arg1->unk_88;
     }
 
-    func_8006CC98((s32)arg0 + (arg1->unk_00 << 6) + 0x20108, &arg1->unk_15C, sp58.x, sp58.y, sp58.z, sp64.x, sp64.y, sp64.z, arg1->unk_5C.mf[1][0], arg1->unk_5C.mf[1][1], arg1->unk_5C.mf[1][2]);
+    func_8006CC98((s32) arg0 + (arg1->unk_00 << 6) + 0x20108, &arg1->unk_15C, sp58.x, sp58.y, sp58.z, sp64.x, sp64.y,
+                  sp64.z, arg1->unk_5C.mf[1][0], arg1->unk_5C.mf[1][1], arg1->unk_5C.mf[1][2]);
 
     func_800827C4(&arg1->unk_19C, &arg1->unk_11C, &arg1->unk_15C);
-    func_80082960(&arg1->unk_19C, (s32)arg0 + (arg1->unk_00 << 6) + 0x20208);
+    func_80082960(&arg1->unk_19C, (s32) arg0 + (arg1->unk_00 << 6) + 0x20208);
 }
 
 void func_800BA2D0(u8);
@@ -703,18 +743,18 @@ void func_80082C80(unk_struct_1DC* arg0) {
     temp_fa1 = temp_v0->unk_40.x - arg0->unk_50.x;
     temp_ft4 = temp_v0->unk_40.y - arg0->unk_50.y;
     temp_ft5 = temp_v0->unk_40.z - arg0->unk_50.z;
-    
+
     var_fv1 = sqrtf(SQ(temp_fa1) + SQ(temp_ft4) + SQ(temp_ft5));
 
     if (var_fv1 != 0.0f) {
-        temp_fa0 = (-((temp_fa1 * arg0->unk_5C.xz) + (temp_ft4 * arg0->unk_5C.yz) + (temp_ft5 * arg0->unk_5C.zz))) / var_fv1;
+        temp_fa0 =
+            (-((temp_fa1 * arg0->unk_5C.xz) + (temp_ft4 * arg0->unk_5C.yz) + (temp_ft5 * arg0->unk_5C.zz))) / var_fv1;
         var_fv1 *= temp_fa0;
     }
     if ((var_fv1 >= -1000.0f) && (var_fv1 <= 1000.0f)) {
         func_800BA2D0(((var_fv1 + 1000.0f) / 2000.0f) * 127.0f);
     }
 }
-
 
 void func_80082E40(f32* arg0, f32* arg1, f32* arg2) {
     f32 temp_fv0;
@@ -790,7 +830,7 @@ u8* func_80083074(u32 arg0, unk_800832EC_arg_2* arg1) {
     }
 
     temp_v0 = (arg1->unk_04 - temp_a2) + 1;
-    
+
     for (var_a0 = 0; var_a0 < temp_v0; var_a0++) {
         for (var_a3 = 0; var_a3 < temp_a2; var_a3++) {
             if (arg1->unk_08[var_a0 + var_a3] != 0) {
@@ -856,7 +896,7 @@ Gfx* func_800833AC(Gfx* gfx, s32 arg1, s32 arg2) {
 
     if (temp_v0->unk_E0 == 1) {
         // FAKE
-        gSPViewport(gfx++, (s8*)&D_1000000[arg2] + 0x2C2C8);
+        gSPViewport(gfx++, (s8*) &D_1000000[arg2] + 0x2C2C8);
         gDPSetScissor(gfx++, G_SC_NON_INTERLACE, temp_v0->unk_B0, temp_v0->unk_B4, temp_v0->unk_B8, temp_v0->unk_BC);
 
     } else {
@@ -943,7 +983,7 @@ bool func_800835B0(unk_800E5D70* arg0) {
                     arg0->unk_08 = 0;
                 }
                 break;
-        }    
+        }
         break;
     }
 
@@ -1033,9 +1073,12 @@ void func_8008397C(unk_800E5D70* arg0, unk_struct_14* arg1) {
     sp3C.y = sp48[0].y + arg0->unk_10->y;
     sp3C.z = sp48[0].z + arg0->unk_10->z;
 
-    sp30.x = arg0->unk_1C->x + arg0->unk_20->mf[0][0] * sp48[1].z + arg0->unk_20->mf[1][0] * sp48[1].y + arg0->unk_20->mf[2][0] * sp48[1].x;
-    sp30.y = arg0->unk_1C->y + arg0->unk_20->mf[0][1] * sp48[1].z + arg0->unk_20->mf[1][1] * sp48[1].y + arg0->unk_20->mf[2][1] * sp48[1].x;
-    sp30.z = arg0->unk_1C->z + arg0->unk_20->mf[0][2] * sp48[1].z + arg0->unk_20->mf[1][2] * sp48[1].y + arg0->unk_20->mf[2][2] * sp48[1].x;
+    sp30.x = arg0->unk_1C->x + arg0->unk_20->mf[0][0] * sp48[1].z + arg0->unk_20->mf[1][0] * sp48[1].y +
+             arg0->unk_20->mf[2][0] * sp48[1].x;
+    sp30.y = arg0->unk_1C->y + arg0->unk_20->mf[0][1] * sp48[1].z + arg0->unk_20->mf[1][1] * sp48[1].y +
+             arg0->unk_20->mf[2][1] * sp48[1].x;
+    sp30.z = arg0->unk_1C->z + arg0->unk_20->mf[0][2] * sp48[1].z + arg0->unk_20->mf[1][2] * sp48[1].y +
+             arg0->unk_20->mf[2][2] * sp48[1].x;
     func_800820F4(arg0->unk_00, &sp3C, &sp30, NULL, NULL);
 }
 
@@ -1049,9 +1092,12 @@ void func_80083AAC(unk_800E5D70* arg0, unk_struct_14* arg1) {
     sp38.y = sp44[0].y + arg0->unk_10->y;
     sp38.z = sp44[0].z + arg0->unk_10->z;
 
-    sp2C.x = arg0->unk_1C->x + arg0->unk_20->mf[0][0] * sp44[1].z + arg0->unk_20->mf[1][0] * sp44[1].y + arg0->unk_20->mf[2][0] * sp44[1].x;
-    sp2C.y = arg0->unk_1C->y + arg0->unk_20->mf[0][1] * sp44[1].z + arg0->unk_20->mf[1][1] * sp44[1].y + arg0->unk_20->mf[2][1] * sp44[1].x;
-    sp2C.z = arg0->unk_1C->z + arg0->unk_20->mf[0][2] * sp44[1].z + arg0->unk_20->mf[1][2] * sp44[1].y + arg0->unk_20->mf[2][2] * sp44[1].x;
+    sp2C.x = arg0->unk_1C->x + arg0->unk_20->mf[0][0] * sp44[1].z + arg0->unk_20->mf[1][0] * sp44[1].y +
+             arg0->unk_20->mf[2][0] * sp44[1].x;
+    sp2C.y = arg0->unk_1C->y + arg0->unk_20->mf[0][1] * sp44[1].z + arg0->unk_20->mf[1][1] * sp44[1].y +
+             arg0->unk_20->mf[2][1] * sp44[1].x;
+    sp2C.z = arg0->unk_1C->z + arg0->unk_20->mf[0][2] * sp44[1].z + arg0->unk_20->mf[1][2] * sp44[1].y +
+             arg0->unk_20->mf[2][2] * sp44[1].x;
     func_800820F4(arg0->unk_00, &sp38, &sp2C, &sp44[2], NULL);
 }
 
@@ -1065,9 +1111,12 @@ void func_80083BDC(unk_800E5D70* arg0, unk_struct_14* arg1) {
     sp38.y = sp44.unk_00[0].y + arg0->unk_10->y;
     sp38.z = sp44.unk_00[0].z + arg0->unk_10->z;
 
-    sp2C.x = arg0->unk_1C->x + arg0->unk_20->mf[0][0] * sp44.unk_00[1].z + arg0->unk_20->mf[1][0] * sp44.unk_00[1].y + arg0->unk_20->mf[2][0] * sp44.unk_00[1].x;
-    sp2C.y = arg0->unk_1C->y + arg0->unk_20->mf[0][1] * sp44.unk_00[1].z + arg0->unk_20->mf[1][1] * sp44.unk_00[1].y + arg0->unk_20->mf[2][1] * sp44.unk_00[1].x;
-    sp2C.z = arg0->unk_1C->z + arg0->unk_20->mf[0][2] * sp44.unk_00[1].z + arg0->unk_20->mf[1][2] * sp44.unk_00[1].y + arg0->unk_20->mf[2][2] * sp44.unk_00[1].x;
+    sp2C.x = arg0->unk_1C->x + arg0->unk_20->mf[0][0] * sp44.unk_00[1].z + arg0->unk_20->mf[1][0] * sp44.unk_00[1].y +
+             arg0->unk_20->mf[2][0] * sp44.unk_00[1].x;
+    sp2C.y = arg0->unk_1C->y + arg0->unk_20->mf[0][1] * sp44.unk_00[1].z + arg0->unk_20->mf[1][1] * sp44.unk_00[1].y +
+             arg0->unk_20->mf[2][1] * sp44.unk_00[1].x;
+    sp2C.z = arg0->unk_1C->z + arg0->unk_20->mf[0][2] * sp44.unk_00[1].z + arg0->unk_20->mf[1][2] * sp44.unk_00[1].y +
+             arg0->unk_20->mf[2][2] * sp44.unk_00[1].x;
     func_800820F4(arg0->unk_00, &sp38, &sp2C, NULL, &sp44.unk_18);
 }
 
@@ -1081,9 +1130,12 @@ void func_80083D10(unk_800E5D70* arg0, unk_struct_14* arg1) {
     sp3C.y = sp48.unk_00[0].y + arg0->unk_10->y;
     sp3C.z = sp48.unk_00[0].z + arg0->unk_10->z;
 
-    sp30.x = arg0->unk_1C->x + arg0->unk_20->mf[0][0] * sp48.unk_00[1].z + arg0->unk_20->mf[1][0] * sp48.unk_00[1].y + arg0->unk_20->mf[2][0] * sp48.unk_00[1].x;
-    sp30.y = arg0->unk_1C->y + arg0->unk_20->mf[0][1] * sp48.unk_00[1].z + arg0->unk_20->mf[1][1] * sp48.unk_00[1].y + arg0->unk_20->mf[2][1] * sp48.unk_00[1].x;
-    sp30.z = arg0->unk_1C->z + arg0->unk_20->mf[0][2] * sp48.unk_00[1].z + arg0->unk_20->mf[1][2] * sp48.unk_00[1].y + arg0->unk_20->mf[2][2] * sp48.unk_00[1].x;
+    sp30.x = arg0->unk_1C->x + arg0->unk_20->mf[0][0] * sp48.unk_00[1].z + arg0->unk_20->mf[1][0] * sp48.unk_00[1].y +
+             arg0->unk_20->mf[2][0] * sp48.unk_00[1].x;
+    sp30.y = arg0->unk_1C->y + arg0->unk_20->mf[0][1] * sp48.unk_00[1].z + arg0->unk_20->mf[1][1] * sp48.unk_00[1].y +
+             arg0->unk_20->mf[2][1] * sp48.unk_00[1].x;
+    sp30.z = arg0->unk_1C->z + arg0->unk_20->mf[0][2] * sp48.unk_00[1].z + arg0->unk_20->mf[1][2] * sp48.unk_00[1].y +
+             arg0->unk_20->mf[2][2] * sp48.unk_00[1].x;
     func_800820F4(arg0->unk_00, &sp3C, &sp30, &sp48.unk_00[2], &sp48.unk_24);
 }
 
@@ -1319,8 +1371,8 @@ void func_80084914(unk_800E5D70* arg0, unk_struct_14* arg1) {
     func_80085390(sp38, arg0->unk_0C, arg1);
     temp_v1 = arg0->unk_18;
     temp_v0 = &arg0->unk_00->unk_04.unk_58;
-    *((Mtx3F*)&temp_v0->unk_00.unk_00.unk_00) = *arg0->unk_14;
-    *((Vec3f*)&temp_v0->unk_00.unk_60) = temp_v1->unk_B4;
+    *((Mtx3F*) &temp_v0->unk_00.unk_00.unk_00) = *arg0->unk_14;
+    *((Vec3f*) &temp_v0->unk_00.unk_60) = temp_v1->unk_B4;
     temp_v0->unk_90 = temp_v1->unk_98;
     temp_v0->unk_98 = temp_v1->unk_0C->unk_20;
     sp2C.x = sp38[0].x + arg0->unk_10->x;
@@ -1340,8 +1392,8 @@ void func_80084A04(unk_800E5D70* arg0, unk_struct_14* arg1) {
     func_800853D4(sp34, arg0->unk_0C, arg1);
     temp_v1 = arg0->unk_18;
     temp_v0 = &arg0->unk_00->unk_04.unk_58;
-    *((Mtx3F*)&temp_v0->unk_00.unk_00.unk_00) = *arg0->unk_14;
-    *((Vec3f*)&temp_v0->unk_00.unk_60) = temp_v1->unk_B4;
+    *((Mtx3F*) &temp_v0->unk_00.unk_00.unk_00) = *arg0->unk_14;
+    *((Vec3f*) &temp_v0->unk_00.unk_60) = temp_v1->unk_B4;
     temp_v0->unk_90 = temp_v1->unk_98;
     temp_v0->unk_98 = temp_v1->unk_0C->unk_20;
     sp28.x = sp34[0].x + arg0->unk_10->x;
@@ -1361,8 +1413,8 @@ void func_80084AF4(unk_800E5D70* arg0, unk_struct_14* arg1) {
     func_80085434(&sp34, arg0->unk_0C, arg1);
     temp_v1 = arg0->unk_18;
     temp_v0 = &arg0->unk_00->unk_04.unk_58;
-    *((Mtx3F*)&temp_v0->unk_00.unk_00.unk_00) = *arg0->unk_14;
-    *((Vec3f*)&temp_v0->unk_00.unk_60) = temp_v1->unk_B4;
+    *((Mtx3F*) &temp_v0->unk_00.unk_00.unk_00) = *arg0->unk_14;
+    *((Vec3f*) &temp_v0->unk_00.unk_60) = temp_v1->unk_B4;
     temp_v0->unk_90 = temp_v1->unk_98;
     temp_v0->unk_98 = temp_v1->unk_0C->unk_20;
     sp28.x = sp34.unk_00[0].x + arg0->unk_10->x;
@@ -1382,8 +1434,8 @@ void func_80084BE8(unk_800E5D70* arg0, unk_struct_14* arg1) {
     func_80085494(&sp38, arg0->unk_0C, arg1);
     temp_v1 = arg0->unk_18;
     temp_v0 = &arg0->unk_00->unk_04.unk_58;
-    *((Mtx3F*)&temp_v0->unk_00.unk_00.unk_00) = *arg0->unk_14;
-    *((Vec3f*)&temp_v0->unk_00.unk_60) = temp_v1->unk_B4;
+    *((Mtx3F*) &temp_v0->unk_00.unk_00.unk_00) = *arg0->unk_14;
+    *((Vec3f*) &temp_v0->unk_00.unk_60) = temp_v1->unk_B4;
     temp_v0->unk_90 = temp_v1->unk_98;
     temp_v0->unk_98 = temp_v1->unk_0C->unk_20;
     sp2C.x = sp38.unk_00[0].x + arg0->unk_10->x;
@@ -1467,9 +1519,10 @@ void func_80085154(f32* arg0, unk_struct_8* arg1, unk_struct_14* arg2) {
 
     while (arg2->unk_08[arg1->unk_04] == 0) {
         arg1->unk_04++;
-    } 
+    }
 
-    *arg0 = func_80084D50((f32) arg1->unk_00 / (f32) arg2->unk_08[arg1->unk_04], arg1->unk_04, arg2->unk_04[0], arg2->unk_00);
+    *arg0 = func_80084D50((f32) arg1->unk_00 / (f32) arg2->unk_08[arg1->unk_04], arg1->unk_04, arg2->unk_04[0],
+                          arg2->unk_00);
 
     arg1->unk_00++;
 
@@ -1494,10 +1547,11 @@ void func_8008524C(Vec3f* arg0, unk_struct_8* arg1, unk_struct_14* arg2) {
 
     while (arg2->unk_10[arg1->unk_04] == 0) {
         arg1->unk_04++;
-    } 
+    }
 
     for (i = 0; i < 3; i++) {
-        arg0->v[i] = func_80084D50((f32) arg1->unk_00 / (f32) arg2->unk_10[arg1->unk_04], arg1->unk_04, arg2->unk_04[i], arg2->unk_00);
+        arg0->v[i] = func_80084D50((f32) arg1->unk_00 / (f32) arg2->unk_10[arg1->unk_04], arg1->unk_04, arg2->unk_04[i],
+                                   arg2->unk_00);
     }
 
     arg1->unk_00++;
@@ -1546,7 +1600,7 @@ void func_80085510(void) {
     unk_struct_F8* var_s3;
 
     for (i = 0, var_s0 = D_800E5220, var_s1 = D_800E5D70, var_s3 = D_800E5990, var_s4 = D_800E5E00; i < 4; i++) {
-        var_s0->unk_00 = (s16)i;
+        var_s0->unk_00 = (s16) i;
         var_s0->unk_08 = 2;
         var_s0->unk_E0 = 0;
         func_80083548(var_s1, var_s3);
@@ -1696,7 +1750,7 @@ void func_8008681C(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
         }
         var_v1 = arg0->unk_04;
     } while (temp_s4 != var_v1);
-    
+
     func_80082068(arg1, arg0);
     func_80086B64(arg0, arg1);
     func_800826B8(arg0, arg1);
@@ -1730,14 +1784,14 @@ void func_800876A8(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
     s32 pad[5];
 
     temp_a3->unk_00.unk_00.unk_00.unk_00 = temp_t3->unk_180;
-    
-    *((Mtx3F*)&arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_0C) = temp_t3->unk_C0;
+
+    *((Mtx3F*) &arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_0C) = temp_t3->unk_C0;
 
     temp_fv0 = (f32) arg0->unk_1C / 300.0f;
     temp_fv0 = (-2.0f * temp_fv0 * temp_fv0 * temp_fv0) + (3.0f * temp_fv0 * temp_fv0);
     arg1->unk_04.unk_58.unk_00.unk_00.unk_30.y = (-880.0f * temp_fv0) + 1000.0f;
     arg1->unk_04.unk_58.unk_00.unk_00.unk_48.y = (-360.0f * temp_fv0) + 180.0f;
-    
+
     if (arg0->unk_1C >= 0x12C) {
         if (D_800CD000 == 2) {
             func_800811B0(arg1, &D_800D54A4);
@@ -1750,11 +1804,11 @@ void func_800876A8(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
         temp_a3->unk_00.unk_00.unk_48.x = 0.0f;
         temp_a3->unk_00.unk_00.unk_48.y = 0.0f;
         temp_a3->unk_00.unk_00.unk_48.z = 0.0f;
-        
+
         temp_a3->unk_68[1] = var_v1->y;
         temp_a3->unk_68[4] = var_v1->z;
         temp_a0->unk_00.unk_18[7] = var_v1->x;
-        
+
         if (D_800CD000 == 2) {
             var_v1 = &D_800D5328[arg0->unk_08];
         } else {
@@ -1763,12 +1817,12 @@ void func_800876A8(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
         temp_a3->unk_68[2] = var_v1->y;
         temp_a3->unk_68[5] = var_v1->z;
         temp_a0->unk_00.unk_18[8] = var_v1->x;
-        
+
         temp_t4 = &D_802C4920[arg0->unk_00];
         temp_a3->unk_00.unk_54.x = temp_t4->unk_180.x - (var_v1->y * temp_t4->unk_C0.xx);
         temp_a3->unk_00.unk_54.y = temp_t4->unk_180.y - (var_v1->y * temp_t4->unk_C0.yx);
         temp_a3->unk_00.unk_54.z = temp_t4->unk_180.z - (var_v1->y * temp_t4->unk_C0.zx);
-        
+
         arg0->unk_20 = temp_t4->unk_180;
         arg0->unk_2C = temp_t4->unk_C0;
 
@@ -1851,7 +1905,7 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
 
     temp_t1 = &D_800DCE98[D_800DD218[index]];
     var_v1 = false;
-    
+
     if (!(temp_t0->unk_04 & 0x40000) && (temp_t1->unk_7C & 1)) {
         var_v1 = true;
         if (++arg0->unk_08 == 4) {
@@ -1875,7 +1929,7 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
         temp_a2->unk_68[8] = (arg0->unk_0C * 180.0f) / D_800CDA9C;
     }
     if (arg0->unk_10 & 1) {
-        
+
         var_fv1 = sqrtf(SQ(temp_t0->unk_5C) + SQ(temp_t0->unk_64)) - D_800CDA90;
         if (var_fv1 < 0.0f) {
             var_fa0 = arg0->unk_14;
@@ -1884,7 +1938,7 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
             if (var_fv1 > 1.0f) {
                 var_fv1 = 1.0f;
             }
-            
+
             var_fa0 = arg0->unk_14 + ((120.0f - arg0->unk_14) * var_fv1);
         }
         if (arg0->unk_10 & 2) {
@@ -1903,7 +1957,7 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
 
 void func_80087DB8(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2) {
     s32 index = arg0->unk_00;
-    
+
     if (D_802C4920[index].unk_04 & 0x80000) {
         arg0->unk_04 = 7;
         func_80085B80(arg0, arg1, arg2);
@@ -1963,7 +2017,7 @@ void func_80087FAC(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
     unk_802C4920* temp_t2 = &D_802C4920[arg0->unk_00];
     unk_800CD8B0* temp_v0_2;
     s32 pad[2];
-    
+
     if (temp_t2->unk_04 & 0x80000) {
         arg0->unk_04 = 7;
         func_80085B80(arg0, arg1, arg2);
@@ -1978,21 +2032,33 @@ void func_80087FAC(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
             break;
         case 1:
             temp_v0_2 = temp_a3->unk_08;
-            
-            *((Mtx3F*)&temp_v1->unk_00.unk_00.unk_00.unk_0C) = temp_t2->unk_C0;
-            
+
+            *((Mtx3F*) &temp_v1->unk_00.unk_00.unk_00.unk_0C) = temp_t2->unk_C0;
+
             temp_t0->unk_00.unk_18[3] = temp_v1->unk_00.unk_00.unk_00.unk_18;
             temp_t0->unk_00.unk_18[4] = temp_v1->unk_00.unk_00.unk_00.unk_1C;
             temp_t0->unk_00.unk_18[5] = temp_v1->unk_00.unk_00.unk_20;
             temp_v1->unk_00.unk_00.unk_00.unk_00 = temp_t2->unk_180;
 
-            temp_v1->unk_00.unk_00.unk_3C.x = temp_v0_2->unk_00.x + ((((temp_v0_2->unk_0C.x - temp_v0_2->unk_00.x) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_30);
-            temp_v1->unk_00.unk_00.unk_3C.y = temp_v0_2->unk_00.y + ((((temp_v0_2->unk_0C.y - temp_v0_2->unk_00.y) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_30);
-            temp_v1->unk_00.unk_00.unk_3C.z = temp_v0_2->unk_00.z + ((((temp_v0_2->unk_0C.z - temp_v0_2->unk_00.z) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_30);
+            temp_v1->unk_00.unk_00.unk_3C.x =
+                temp_v0_2->unk_00.x +
+                ((((temp_v0_2->unk_0C.x - temp_v0_2->unk_00.x) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_30);
+            temp_v1->unk_00.unk_00.unk_3C.y =
+                temp_v0_2->unk_00.y +
+                ((((temp_v0_2->unk_0C.y - temp_v0_2->unk_00.y) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_30);
+            temp_v1->unk_00.unk_00.unk_3C.z =
+                temp_v0_2->unk_00.z +
+                ((((temp_v0_2->unk_0C.z - temp_v0_2->unk_00.z) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_30);
 
-            temp_v1->unk_00.unk_54.x = temp_v0_2->unk_18.x + ((((temp_v0_2->unk_24.x - temp_v0_2->unk_18.x) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_34);
-            temp_v1->unk_00.unk_54.y = temp_v0_2->unk_18.y + ((((temp_v0_2->unk_24.y - temp_v0_2->unk_18.y) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_34);
-            temp_v1->unk_00.unk_54.z = temp_v0_2->unk_18.z + ((((temp_v0_2->unk_24.z - temp_v0_2->unk_18.z) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_34);
+            temp_v1->unk_00.unk_54.x =
+                temp_v0_2->unk_18.x +
+                ((((temp_v0_2->unk_24.x - temp_v0_2->unk_18.x) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_34);
+            temp_v1->unk_00.unk_54.y =
+                temp_v0_2->unk_18.y +
+                ((((temp_v0_2->unk_24.y - temp_v0_2->unk_18.y) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_34);
+            temp_v1->unk_00.unk_54.z =
+                temp_v0_2->unk_18.z +
+                ((((temp_v0_2->unk_24.z - temp_v0_2->unk_18.z) * arg0->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_34);
         default:
             break;
     }
@@ -2006,8 +2072,8 @@ void func_80087FAC(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
         }
         temp_a3 = &D_800CD970[arg0->unk_18];
         temp_t0->unk_00.unk_18[8] = temp_a3->unk_04;
-        
-        switch (temp_a3->unk_00) {                        /* irregular */
+
+        switch (temp_a3->unk_00) { /* irregular */
             case 0:
                 if (temp_t1 != temp_a3->unk_00) {
                     func_800810E0(arg1, &D_800D4CD8);
@@ -2056,7 +2122,7 @@ void func_80088408(Vec3f* arg0, unk_8006FC8C* arg1, f32 arg2, unk_800CD970* arg3
 
     temp_ft4 = arg1->unk_18 * (1.0f - sp60) + arg1->unk_34->unk_18 * sp60;
     temp_fa1 = arg1->unk_1C * (1.0f - sp60) + arg1->unk_34->unk_1C * sp60;
-    
+
     switch (arg1->unk_20 & 0x1C0) {
         case 0xC0:
             var_fv0 = sp28->unk_00.y * temp_fa1;
@@ -2075,7 +2141,7 @@ void func_80088408(Vec3f* arg0, unk_8006FC8C* arg1, f32 arg2, unk_800CD970* arg3
             var_fa0 = sp28->unk_00.z;
             break;
     }
-    
+
     abs = ABS(var_fv0);
     if (D_800CDA98 < abs) {
         abs = D_800CDA98;
@@ -2085,14 +2151,14 @@ void func_80088408(Vec3f* arg0, unk_8006FC8C* arg1, f32 arg2, unk_800CD970* arg3
             var_fv0 = abs;
         }
     }
-    
+
     arg0->x += (sp2C.xy * var_fa0) + (sp2C.xz * var_fv0);
     arg0->y += (sp2C.yy * var_fa0) + (sp2C.yz * var_fv0);
     arg0->z += (sp2C.zy * var_fa0) + (sp2C.zz * var_fv0);
 }
 
 void func_800885F0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2) {
-    
+
     if (arg0->unk_1C <= 60) {
         arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_00 = D_802C4920[arg0->unk_00].unk_40;
         arg0->unk_1C++;
@@ -2117,13 +2183,13 @@ void func_80088660(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
     temp_v1->unk_00.unk_00.unk_00.unk_18 += temp_a3->unk_B4.x * 0.3f;
     temp_v1->unk_00.unk_00.unk_00.unk_1C += temp_a3->unk_B4.y * 0.3f;
     temp_v1->unk_00.unk_00.unk_20 += temp_a3->unk_B4.z * 0.3f;
-    
-    func_8006AC10((Mtx3F* ) &temp_v1->unk_00.unk_00.unk_00.unk_0C);
-    
+
+    func_8006AC10((Mtx3F*) &temp_v1->unk_00.unk_00.unk_00.unk_0C);
+
     temp_a0->unk_00.unk_18[3] = temp_v1->unk_00.unk_00.unk_00.unk_18;
     temp_a0->unk_00.unk_18[4] = temp_v1->unk_00.unk_00.unk_00.unk_1C;
     temp_a0->unk_00.unk_18[5] = temp_v1->unk_00.unk_00.unk_20;
-    
+
     temp_v1->unk_00.unk_00.unk_00.unk_00 = temp_a3->unk_180;
 
     switch (arg0->unk_18) {
@@ -2140,7 +2206,7 @@ void func_80088660(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
                 temp_v1->unk_00.unk_00.unk_30.y = (func_8006A918() % 451) + 50.0f;
             }
             temp_v1->unk_00.unk_00.unk_48.y += 0.4f;
-    
+
             if (temp_v1->unk_00.unk_00.unk_48.y >= 360.0f) {
                 temp_v1->unk_00.unk_00.unk_48.y -= 360.0f;
             }
@@ -2236,7 +2302,7 @@ void func_800888D0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
                 break;
             case 2:
                 temp_a3 = &D_802C4920[D_800E5E88];
-                *((Mtx3F*)&arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_0C) = temp_a3->unk_C0;
+                *((Mtx3F*) &arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_0C) = temp_a3->unk_C0;
                 arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_00 = temp_a3->unk_180;
                 if (func_80088CB8(4)) {
                     arg0->unk_18 = 3;
@@ -2267,7 +2333,7 @@ void func_800888D0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
         }
     }
     // FAKE, likely some recast somewhere
-    if (!arg1){}
+    if (!arg1) {}
 }
 
 extern s32 D_800E5E84;
@@ -2358,7 +2424,10 @@ void func_80088D28(void) {
             var_fv0 = D_800E5EC0 - 1;
         }
         var_fv0 = (((j - 1) & 3) * 2 - var_fv0) * 50.0f;
-        func_8009EBEC(&temp_s1->unk_0C, temp_s1->unk_40.x + (var_fs4 * temp_s1->unk_24C.xy) + (var_fv0 * temp_s1->unk_24C.xz), temp_s1->unk_40.y + (var_fs4 * temp_s1->unk_24C.yy) + (var_fv0 * temp_s1->unk_24C.yz), temp_s1->unk_40.z + (var_fs4 * temp_s1->unk_24C.zy) + (var_fv0 * temp_s1->unk_24C.zz), 100, 1.0f);
+        func_8009EBEC(&temp_s1->unk_0C,
+                      temp_s1->unk_40.x + (var_fs4 * temp_s1->unk_24C.xy) + (var_fv0 * temp_s1->unk_24C.xz),
+                      temp_s1->unk_40.y + (var_fs4 * temp_s1->unk_24C.yy) + (var_fv0 * temp_s1->unk_24C.yz),
+                      temp_s1->unk_40.z + (var_fs4 * temp_s1->unk_24C.zy) + (var_fv0 * temp_s1->unk_24C.zz), 100, 1.0f);
         if (D_800CD000 == 1) {
             var_fv0 = 100.0f;
         } else {
@@ -2407,7 +2476,7 @@ void func_800890B4(void) {
     while (var_v1->unk_04 & 0x40000) {
         var_v1++;
     }
-    
+
     if (var_v0->unk_0A < var_v1->unk_0A) {
         temp = var_v0;
         var_v0 = var_v1;
@@ -2418,7 +2487,7 @@ void func_800890B4(void) {
         var_a2 = var_v0->unk_0A;
         var_a3 = var_v1->unk_0A;
     }
-    
+
     var_a0 = D_800E5EC4;
     do {
         if (!(var_a0->unk_04 & 0x40000)) {
@@ -2560,7 +2629,7 @@ void func_800894C0(unk_802C4920* arg0) {
         }
         func_800BAB68(arg0->unk_00);
     } else {
-        arg0->unk_08 &= ~(0x800 | 0x400 |0x20 | 0x200 | 0x40 | 0x2000 | 0x100 | 0x80);
+        arg0->unk_08 &= ~(0x800 | 0x400 | 0x20 | 0x200 | 0x40 | 0x2000 | 0x100 | 0x80);
     }
 }
 
@@ -2610,7 +2679,7 @@ void func_80089800(void) {
     s32 index1;
 
     j = 0;
-    
+
     for (i = 0; i < 29; i++) {
         if (j == D_800E5EE0[0]) {
             j++;
@@ -2642,13 +2711,13 @@ void func_80089934(void) {
                 D_802C4920[i].unk_2C8 = (func_8006A978() & 0x1FFFF) % 30;
                 D_802C4920[i].unk_2CC = (func_8006A918() & 0x1FFFF) % 4;
                 for (j = 0; j < D_800CD000; j++) {
-                    if ((D_802C4920[i].unk_2C8 == D_802C4920[j].unk_2C8) && (D_802C4920[i].unk_2CC == D_802C4920[j].unk_2CC)) {
+                    if ((D_802C4920[i].unk_2C8 == D_802C4920[j].unk_2C8) &&
+                        (D_802C4920[i].unk_2CC == D_802C4920[j].unk_2CC)) {
                         break;
                     }
                 }
             } while (j < D_800CD000);
         }
-
     }
 }
 
@@ -2693,7 +2762,8 @@ void func_80089A74(u8* arg0) {
         arg0[18] = temp_v0[12];
         arg0[19] = temp_v0[13];
     } else {
-        arg0[2] = arg0[3] = arg0[4] = arg0[5] = arg0[6] = arg0[7] = arg0[11] = arg0[12] = arg0[13] = arg0[14] = arg0[15] = arg0[16] = arg0[17] = arg0[18] = arg0[19] = 0;
+        arg0[2] = arg0[3] = arg0[4] = arg0[5] = arg0[6] = arg0[7] = arg0[11] = arg0[12] = arg0[13] = arg0[14] =
+            arg0[15] = arg0[16] = arg0[17] = arg0[18] = arg0[19] = 0;
     }
 }
 
@@ -2715,7 +2785,7 @@ void func_8008A978(void) {
         var_v0->unk_2AC = 0;
         var_v0--;
     } while (var_v0 >= D_802C4920);
-    
+
     var_v1 = 1;
     var_a0 = D_800E5EC0;
 
@@ -2794,8 +2864,9 @@ void func_8008AA8C(void) {
                 var_a1 = 0;
             }
 
-            var_s0->unk_2A0 = (s32) (((var_s0->unk_2A0 - var_a1) * D_800CD00C) * D_800F8510->unk_0C / var_s0->unk_23C) + var_a1;
-            
+            var_s0->unk_2A0 =
+                (s32) (((var_s0->unk_2A0 - var_a1) * D_800CD00C) * D_800F8510->unk_0C / var_s0->unk_23C) + var_a1;
+
             var_a1 = 0;
             var_a0 = 0;
             while (true) {
@@ -2804,9 +2875,9 @@ void func_8008AA8C(void) {
                 }
 
                 var_a1 += var_s0->unk_290[var_a0];
-                
+
                 var_a0++;
-                
+
                 if (var_a0 >= D_800CD00C) {
                     break;
                 }
@@ -2817,7 +2888,6 @@ void func_8008AA8C(void) {
                 var_a1 += var_s0->unk_290[var_a0];
                 var_a0++;
             }
-
         }
     }
     func_8008A978();
@@ -2935,7 +3005,10 @@ void func_8008D3C4(s32 arg0, s32 arg1) {
         gSPEndDisplayList(gfx);
 
         for (i = 4; i >= 0; i--) {
-            gfx = func_i9_80115DF0(D_800CDDB0[arg1 * 6 + i], i, D_800F8360[arg0][0], D_800F8360[arg0][1], D_800F8360[arg0][2], D_800F8360[arg0][8], D_800F8360[arg0][9], D_800F8360[arg0][10], D_800F8360[arg0][5], D_800F8360[arg0][6], D_800F8360[arg0][7], 255, 255, 255, D_800F8360[arg0][11], D_800F8360[arg0][12], D_800F8360[arg0][13]);
+            gfx = func_i9_80115DF0(D_800CDDB0[arg1 * 6 + i], i, D_800F8360[arg0][0], D_800F8360[arg0][1],
+                                   D_800F8360[arg0][2], D_800F8360[arg0][8], D_800F8360[arg0][9], D_800F8360[arg0][10],
+                                   D_800F8360[arg0][5], D_800F8360[arg0][6], D_800F8360[arg0][7], 255, 255, 255,
+                                   D_800F8360[arg0][11], D_800F8360[arg0][12], D_800F8360[arg0][13]);
             gSPEndDisplayList(gfx);
         }
 
@@ -2967,7 +3040,8 @@ void func_8008D5F4(u8* arg0, s32 arg1) {
         gSPEndDisplayList(gfx);
 
         for (i = 4; i >= 0; i--) {
-            gfx = func_i9_80115DF0(D_800CDDB0[arg1 * 6 + i], i, arg0[2], arg0[3], arg0[4], arg0[14], arg0[15], arg0[16], arg0[11], arg0[12], arg0[13], 255, 255, 255, arg0[17], arg0[18], arg0[19]);
+            gfx = func_i9_80115DF0(D_800CDDB0[arg1 * 6 + i], i, arg0[2], arg0[3], arg0[4], arg0[14], arg0[15], arg0[16],
+                                   arg0[11], arg0[12], arg0[13], 255, 255, 255, arg0[17], arg0[18], arg0[19]);
             gSPEndDisplayList(gfx);
         }
 
@@ -3164,7 +3238,16 @@ void func_8008DCD8(unk_802C4920* arg0, f32 arg1) {
 
                     temp_fs1 = ((func_8006A918() & 0x1FFFF) * 0.00011444179f) - 7.5f;
 
-                    func_80105A28((((s32)func_8006A978() & 0x1F) - 0x10) + arg0->unk_40.x, (((s32)func_8006A918() & 0x1F) - 0x10) + arg0->unk_40.y, (((s32)func_8006A918() & 0x1F) - 0x10) + arg0->unk_40.z, (arg0->unk_C0.xz * temp_fs2) + sp90.z + (temp_fs0 * arg0->unk_C0.xy) + (temp_fs1 * arg0->unk_C0.xx), (arg0->unk_C0.yz * temp_fs2) + sp90.y + (temp_fs0 * arg0->unk_C0.yy) + (temp_fs1 * arg0->unk_C0.yx), (arg0->unk_C0.zz * temp_fs2) + sp90.x + (temp_fs0 * arg0->unk_C0.zy) + (temp_fs1 * arg0->unk_C0.zx), &arg0->unk_C0, temp_s5, temp_s6, temp_s7, arg0);
+                    func_80105A28((((s32) func_8006A978() & 0x1F) - 0x10) + arg0->unk_40.x,
+                                  (((s32) func_8006A918() & 0x1F) - 0x10) + arg0->unk_40.y,
+                                  (((s32) func_8006A918() & 0x1F) - 0x10) + arg0->unk_40.z,
+                                  (arg0->unk_C0.xz * temp_fs2) + sp90.z + (temp_fs0 * arg0->unk_C0.xy) +
+                                      (temp_fs1 * arg0->unk_C0.xx),
+                                  (arg0->unk_C0.yz * temp_fs2) + sp90.y + (temp_fs0 * arg0->unk_C0.yy) +
+                                      (temp_fs1 * arg0->unk_C0.yx),
+                                  (arg0->unk_C0.zz * temp_fs2) + sp90.x + (temp_fs0 * arg0->unk_C0.zy) +
+                                      (temp_fs1 * arg0->unk_C0.zx),
+                                  &arg0->unk_C0, temp_s5, temp_s6, temp_s7, arg0);
                     i--;
                 } while (i != 0);
             }
@@ -3218,16 +3301,19 @@ void func_8008E188(unk_802C4920* arg0, f32 arg1, f32 arg2, f32 arg3) {
     arg0->unk_34.z -= var_fv0;
     arg0->unk_40.z -= var_fv0;
     arg0->unk_50.z -= var_fv0;
-    
+
     arg0->unk_4C = sqrtf(SQ(arg0->unk_34.x) + SQ(arg0->unk_34.y) + SQ(arg0->unk_34.z));
 
     if (arg1 * arg2 <= 0.0f) {
         return;
     }
-    
+
     if (arg1 * arg2 > 0.01f) {
         if (arg0->unk_2B4 != 0) {
-            func_801054C0(arg0->unk_40.x + ((arg2 * 15.0f) * arg0->unk_24C.xz), arg0->unk_40.y + ((arg2 * 15.0f) * arg0->unk_24C.yz), arg0->unk_40.z + ((arg2 * 15.0f) * arg0->unk_24C.zz), arg0->unk_74.x, arg0->unk_74.y, arg0->unk_74.z, (arg1 * arg2 * 1.5f) + 18.0f, arg0);
+            func_801054C0(arg0->unk_40.x + ((arg2 * 15.0f) * arg0->unk_24C.xz),
+                          arg0->unk_40.y + ((arg2 * 15.0f) * arg0->unk_24C.yz),
+                          arg0->unk_40.z + ((arg2 * 15.0f) * arg0->unk_24C.zz), arg0->unk_74.x, arg0->unk_74.y,
+                          arg0->unk_74.z, (arg1 * arg2 * 1.5f) + 18.0f, arg0);
         }
         if (D_800E5FD0 != 0) {
             func_800BA710(arg0->unk_00, 3);
@@ -3235,7 +3321,6 @@ void func_8008E188(unk_802C4920* arg0, f32 arg1, f32 arg2, f32 arg3) {
         func_8008DCD8(arg0, arg1 * arg2 * 0.7f);
     }
 
-    
     arg0->unk_74.x = (arg0->unk_74.x - arg0->unk_234 * arg1 * arg0->unk_24C.xz) * 0.998f;
     arg0->unk_74.y = (arg0->unk_74.y - arg0->unk_234 * arg1 * arg0->unk_24C.yz) * 0.998f;
     arg0->unk_74.z = (arg0->unk_74.z - arg0->unk_234 * arg1 * arg0->unk_24C.zz) * 0.998f;
@@ -3245,7 +3330,7 @@ void func_8008E188(unk_802C4920* arg0, f32 arg1, f32 arg2, f32 arg3) {
     var->unk_118.x = var->unk_24C.xz * (-0.15f * arg1);
     var->unk_118.y = var->unk_24C.yz * (-0.15f * arg1);
     var->unk_118.z = var->unk_24C.zz * (-0.15f * arg1);
-    
+
     arg0->unk_04 |= 0x2000;
 }
 
@@ -3253,8 +3338,10 @@ void func_8008E418(unk_802C4920* arg0) {
     f32 temp_fv0;
     f32 temp_fv1;
 
-    temp_fv0 = ((arg0->unk_A8.x * arg0->unk_B4.x) + (arg0->unk_A8.y * arg0->unk_B4.y) + (arg0->unk_A8.z * arg0->unk_B4.z)) * 0.15f * arg0->unk_E4;
-    
+    temp_fv0 =
+        ((arg0->unk_A8.x * arg0->unk_B4.x) + (arg0->unk_A8.y * arg0->unk_B4.y) + (arg0->unk_A8.z * arg0->unk_B4.z)) *
+        0.15f * arg0->unk_E4;
+
     arg0->unk_B4.x = arg0->unk_C0.xy + (temp_fv0 * arg0->unk_C0.xx);
     arg0->unk_B4.y = arg0->unk_C0.yy + (temp_fv0 * arg0->unk_C0.yx);
     arg0->unk_B4.z = arg0->unk_C0.zy + (temp_fv0 * arg0->unk_C0.zx);
@@ -3291,18 +3378,22 @@ void func_8008E54C(unk_802C4920* arg0, f32 arg1) {
         if (arg0->unk_04 & 0x80000000) {
             return;
         }
-        sp50 = (arg0->unk_24C.xz * arg0->unk_34.x) + (arg0->unk_24C.yz * arg0->unk_34.y) + (arg0->unk_24C.zz * arg0->unk_34.z); 
+        sp50 = (arg0->unk_24C.xz * arg0->unk_34.x) + (arg0->unk_24C.yz * arg0->unk_34.y) +
+               (arg0->unk_24C.zz * arg0->unk_34.z);
         if ((sp50 < -arg0->unk_274) || (arg0->unk_270 < sp50)) {
             arg0->unk_04 |= 0x80000000;
             func_8008DCD8(arg0, 2.0f);
-            func_801054C0(arg0->unk_40.x, arg0->unk_40.y, arg0->unk_40.z, arg0->unk_74.x, arg0->unk_74.y, arg0->unk_74.z, 40.0f, arg0);
+            func_801054C0(arg0->unk_40.x, arg0->unk_40.y, arg0->unk_40.z, arg0->unk_74.x, arg0->unk_74.y,
+                          arg0->unk_74.z, 40.0f, arg0);
             if (D_800E5FD0 != 0) {
                 func_800BA710(arg0->unk_00, 3);
             }
         }
     } else {
-        sp50 = (arg0->unk_24C.xz * arg0->unk_34.x) + (arg0->unk_24C.yz * arg0->unk_34.y) + (arg0->unk_24C.zz * arg0->unk_34.z); 
-        arg0->unk_A0 = (arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) + (arg0->unk_24C.zy * arg0->unk_34.z); 
+        sp50 = (arg0->unk_24C.xz * arg0->unk_34.x) + (arg0->unk_24C.yz * arg0->unk_34.y) +
+               (arg0->unk_24C.zz * arg0->unk_34.z);
+        arg0->unk_A0 = (arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) +
+                       (arg0->unk_24C.zy * arg0->unk_34.z);
         arg0->unk_19C.x = arg0->unk_24C.xy;
         arg0->unk_19C.y = arg0->unk_24C.yy;
         arg0->unk_19C.z = arg0->unk_24C.zy;
@@ -3341,7 +3432,8 @@ void func_8008E54C(unk_802C4920* arg0, f32 arg1) {
 
             arg0->unk_A0 = 0.0f;
 
-            temp_ft4 = (arg0->unk_24C.xy * arg0->unk_74.x) + (arg0->unk_24C.yy * arg0->unk_74.y) + (arg0->unk_24C.zy * arg0->unk_74.z);
+            temp_ft4 = (arg0->unk_24C.xy * arg0->unk_74.x) + (arg0->unk_24C.yy * arg0->unk_74.y) +
+                       (arg0->unk_24C.zy * arg0->unk_74.z);
             if (temp_ft4 < 0.0f) {
                 arg0->unk_74.x -= temp_ft4 * arg0->unk_24C.xy;
                 arg0->unk_74.y -= temp_ft4 * arg0->unk_24C.yy;
@@ -3364,9 +3456,9 @@ void func_8008E54C(unk_802C4920* arg0, f32 arg1) {
                 }
             }
 
-            arg0->unk_A8.x = arg0->unk_B4.x =  arg0->unk_24C.xy;
-            arg0->unk_A8.y = arg0->unk_B4.y =  arg0->unk_24C.yy;
-            arg0->unk_A8.z = arg0->unk_B4.z =  arg0->unk_24C.zy;
+            arg0->unk_A8.x = arg0->unk_B4.x = arg0->unk_24C.xy;
+            arg0->unk_A8.y = arg0->unk_B4.y = arg0->unk_24C.yy;
+            arg0->unk_A8.z = arg0->unk_B4.z = arg0->unk_24C.zy;
 
         } else {
             arg0->unk_04 |= 0x4000000;
@@ -3387,7 +3479,7 @@ void func_8008E54C(unk_802C4920* arg0, f32 arg1) {
                 arg0->unk_A8.x = (arg0->unk_A8.x - arg0->unk_24C.xy) * temp_ft4 + arg0->unk_24C.xy;
                 arg0->unk_A8.y = (arg0->unk_A8.y - arg0->unk_24C.yy) * temp_ft4 + arg0->unk_24C.yy;
                 arg0->unk_A8.z = (arg0->unk_A8.z - arg0->unk_24C.zy) * temp_ft4 + arg0->unk_24C.zy;
-                
+
                 arg0->unk_B4.x = (arg0->unk_B4.x - arg0->unk_24C.xy) * temp_ft4 + arg0->unk_B4.x;
                 arg0->unk_B4.y = (arg0->unk_B4.y - arg0->unk_24C.yy) * temp_ft4 + arg0->unk_B4.y;
                 arg0->unk_B4.z = (arg0->unk_B4.z - arg0->unk_24C.zy) * temp_ft4 + arg0->unk_B4.z;
@@ -3400,9 +3492,15 @@ void func_8008E54C(unk_802C4920* arg0, f32 arg1) {
         }
 
         if (sp50 < -arg0->unk_274) {
-            func_8008E188(arg0, (arg0->unk_24C.xz * arg0->unk_74.x) + (arg0->unk_24C.yz * arg0->unk_74.y) + (arg0->unk_24C.zz * arg0->unk_74.z), -1.0f, arg0->unk_274 + sp50);
+            func_8008E188(arg0,
+                          (arg0->unk_24C.xz * arg0->unk_74.x) + (arg0->unk_24C.yz * arg0->unk_74.y) +
+                              (arg0->unk_24C.zz * arg0->unk_74.z),
+                          -1.0f, arg0->unk_274 + sp50);
         } else if (arg0->unk_270 < sp50) {
-            func_8008E188(arg0, (arg0->unk_24C.xz * arg0->unk_74.x) + (arg0->unk_24C.yz * arg0->unk_74.y) + (arg0->unk_24C.zz * arg0->unk_74.z), 1.0f, sp50 - arg0->unk_270);
+            func_8008E188(arg0,
+                          (arg0->unk_24C.xz * arg0->unk_74.x) + (arg0->unk_24C.yz * arg0->unk_74.y) +
+                              (arg0->unk_24C.zz * arg0->unk_74.z),
+                          1.0f, sp50 - arg0->unk_270);
         } else {
             arg0->unk_4C = sqrtf(SQ(arg0->unk_34.x) + SQ(arg0->unk_34.y) + SQ(arg0->unk_34.z));
         }
@@ -3458,7 +3556,9 @@ void func_8008EC98(unk_802C4920* arg0) {
     }
 
     if (var_fs0 != 0.0f) {
-        var_fv1 = ((arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) + (arg0->unk_24C.zy * arg0->unk_34.z)) - 23.0f;
+        var_fv1 = ((arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) +
+                   (arg0->unk_24C.zy * arg0->unk_34.z)) -
+                  23.0f;
         if (arg0->unk_04 & 0x80000000) {
             if ((var_fv1 >= 0.0f) || (arg0->unk_270 < arg0->unk_4C)) {
                 func_8008E418(arg0);
@@ -3490,11 +3590,11 @@ void func_8008EC98(unk_802C4920* arg0) {
             return;
         }
         arg0->unk_04 &= ~0x80000000;
-
     }
 
     if (var_fs0 != 0.0f) {
-        var_fv1 = var_fv0 + (arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) + (arg0->unk_24C.zy * arg0->unk_34.z);
+        var_fv1 = var_fv0 + (arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) +
+                  (arg0->unk_24C.zy * arg0->unk_34.z);
         if (var_fv1 < arg0->unk_A0) {
             arg0->unk_A0 = var_fv1;
             arg0->unk_19C.x = arg0->unk_24C.xy;
@@ -3535,7 +3635,8 @@ void func_8008EC98(unk_802C4920* arg0) {
                 arg0->unk_4C = sqrtf(SQ(arg0->unk_34.x) + SQ(arg0->unk_34.y) + SQ(arg0->unk_34.z));
                 arg0->unk_A0 = 0.0f;
 
-                var_fs0 = (arg0->unk_24C.xy * arg0->unk_74.x) + (arg0->unk_24C.yy * arg0->unk_74.y) + (arg0->unk_24C.zy * arg0->unk_74.z);
+                var_fs0 = (arg0->unk_24C.xy * arg0->unk_74.x) + (arg0->unk_24C.yy * arg0->unk_74.y) +
+                          (arg0->unk_24C.zy * arg0->unk_74.z);
                 if (var_fs0 < 0.0f) {
                     arg0->unk_74.x -= var_fs0 * arg0->unk_24C.xy;
                     arg0->unk_74.y -= var_fs0 * arg0->unk_24C.yy;
@@ -3559,7 +3660,7 @@ void func_8008EC98(unk_802C4920* arg0) {
             arg0->unk_B4.y = var_fv1 * sp58;
             arg0->unk_B4.z = var_fv1 * sp54;
         }
-        
+
         arg0->unk_A8.x = ((arg0->unk_19C.x - arg0->unk_24C.xy) * sp60) + arg0->unk_24C.xy;
         arg0->unk_A8.y = ((arg0->unk_19C.y - arg0->unk_24C.yy) * sp60) + arg0->unk_24C.yy;
         arg0->unk_A8.z = ((arg0->unk_19C.z - arg0->unk_24C.zy) * sp60) + arg0->unk_24C.zy;
@@ -3579,10 +3680,11 @@ void func_8008EC98(unk_802C4920* arg0) {
 
         arg0->unk_34.z *= var_fv1;
         arg0->unk_40.z = arg0->unk_50.z = arg0->unk_34.z + arg0->unk_28.z;
-        
+
         arg0->unk_A0 = 0.0f;
 
-        var_fs0 = (arg0->unk_19C.x * arg0->unk_74.x) + (arg0->unk_19C.y * arg0->unk_74.y) + (arg0->unk_19C.z * arg0->unk_74.z);
+        var_fs0 = (arg0->unk_19C.x * arg0->unk_74.x) + (arg0->unk_19C.y * arg0->unk_74.y) +
+                  (arg0->unk_19C.z * arg0->unk_74.z);
         if (var_fs0 < 0.0f) {
             arg0->unk_74.x -= var_fs0 * arg0->unk_19C.x;
             arg0->unk_74.y -= var_fs0 * arg0->unk_19C.y;
@@ -3653,7 +3755,10 @@ void func_8008FC80(unk_802C4920* arg0) {
         arg0->unk_19C.z = arg0->unk_34.z * temp_fv1;
     }
 
-    temp_fv1 = (((arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) + (arg0->unk_24C.zy * arg0->unk_34.z)) - 23.0f) + (var_fv0 * 0.3826834f);
+    temp_fv1 = (((arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) +
+                 (arg0->unk_24C.zy * arg0->unk_34.z)) -
+                23.0f) +
+               (var_fv0 * 0.3826834f);
     if (arg0->unk_04 & 0x80000000) {
         if ((temp_fv1 >= 0.0f) || (arg0->unk_270 < arg0->unk_4C)) {
             func_8008E418(arg0);
@@ -3680,7 +3785,8 @@ void func_8008FC80(unk_802C4920* arg0) {
     }
 
     if (var_fs0 != 0.0f) {
-        temp_fv1 = var_fv0 + (arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) + (arg0->unk_24C.zy * arg0->unk_34.z);
+        temp_fv1 = var_fv0 + (arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) +
+                   (arg0->unk_24C.zy * arg0->unk_34.z);
         if (temp_fv1 < arg0->unk_A0) {
             arg0->unk_A0 = temp_fv1;
             arg0->unk_19C.x = arg0->unk_24C.xy;
@@ -3701,21 +3807,22 @@ void func_8008FC80(unk_802C4920* arg0) {
                 arg0->unk_34.x -= temp_fv0;
                 arg0->unk_40.x -= temp_fv0;
                 arg0->unk_50.x -= temp_fv0;
-                
+
                 temp_fv0 = arg0->unk_A0 * arg0->unk_24C.yy;
                 arg0->unk_34.y -= temp_fv0;
                 arg0->unk_40.y -= temp_fv0;
                 arg0->unk_50.y -= temp_fv0;
-                
+
                 temp_fv0 = arg0->unk_A0 * arg0->unk_24C.zy;
                 arg0->unk_34.z -= temp_fv0;
                 arg0->unk_40.z -= temp_fv0;
                 arg0->unk_50.z -= temp_fv0;
-                
+
                 arg0->unk_4C = sqrtf(SQ(arg0->unk_34.x) + SQ(arg0->unk_34.y) + SQ(arg0->unk_34.z));
                 arg0->unk_A0 = 0.0f;
 
-                var_fs0 = (arg0->unk_24C.xy * arg0->unk_74.x) + (arg0->unk_24C.yy * arg0->unk_74.y) + (arg0->unk_24C.zy * arg0->unk_74.z);
+                var_fs0 = (arg0->unk_24C.xy * arg0->unk_74.x) + (arg0->unk_24C.yy * arg0->unk_74.y) +
+                          (arg0->unk_24C.zy * arg0->unk_74.z);
                 if (var_fs0 < 0.0f) {
                     arg0->unk_74.x -= var_fs0 * arg0->unk_24C.xy;
                     arg0->unk_74.y -= var_fs0 * arg0->unk_24C.yy;
@@ -3757,7 +3864,8 @@ void func_8008FC80(unk_802C4920* arg0) {
 
         arg0->unk_A0 = 0.0f;
 
-        var_fs0 = (arg0->unk_19C.x * arg0->unk_74.x) + (arg0->unk_19C.y * arg0->unk_74.y) + (arg0->unk_19C.z * arg0->unk_74.z);
+        var_fs0 = (arg0->unk_19C.x * arg0->unk_74.x) + (arg0->unk_19C.y * arg0->unk_74.y) +
+                  (arg0->unk_19C.z * arg0->unk_74.z);
         if (var_fs0 < 0.0f) {
             arg0->unk_74.x -= var_fs0 * arg0->unk_19C.x;
             arg0->unk_74.y -= var_fs0 * arg0->unk_19C.y;
@@ -3812,8 +3920,9 @@ void func_80090490(unk_802C4920* arg0) {
 
     arg0->unk_168.y = -54321.0f;
 
-    arg0->unk_A0 = (arg0->unk_34.x * arg0->unk_24C.xy) + (arg0->unk_34.y * arg0->unk_24C.yy) + (arg0->unk_34.z * arg0->unk_24C.zy);
-    
+    arg0->unk_A0 =
+        (arg0->unk_34.x * arg0->unk_24C.xy) + (arg0->unk_34.y * arg0->unk_24C.yy) + (arg0->unk_34.z * arg0->unk_24C.zy);
+
     arg0->unk_19C.x = arg0->unk_24C.xy;
     arg0->unk_19C.y = arg0->unk_24C.yy;
     arg0->unk_19C.z = arg0->unk_24C.zy;
@@ -3826,14 +3935,16 @@ void func_80090568(unk_802C4920* arg0) {
     f32 sp48;
     f32 temp_fv0;
 
-    sp48 = (arg0->unk_24C.xz * arg0->unk_34.x) + (arg0->unk_24C.yz * arg0->unk_34.y) + (arg0->unk_24C.zz * arg0->unk_34.z);
+    sp48 =
+        (arg0->unk_24C.xz * arg0->unk_34.x) + (arg0->unk_24C.yz * arg0->unk_34.y) + (arg0->unk_24C.zz * arg0->unk_34.z);
 
-    arg0->unk_A0 = (arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) + (arg0->unk_24C.zy * arg0->unk_34.z);
-    
+    arg0->unk_A0 =
+        (arg0->unk_24C.xy * arg0->unk_34.x) + (arg0->unk_24C.yy * arg0->unk_34.y) + (arg0->unk_24C.zy * arg0->unk_34.z);
+
     arg0->unk_19C.x = arg0->unk_24C.xy;
     arg0->unk_19C.y = arg0->unk_24C.yy;
     arg0->unk_19C.z = arg0->unk_24C.zy;
-    
+
     // FAKE
     if ((arg0->unk_04 ^ 0) & 0x80000000) {
         if ((arg0->unk_A0 < -100.0f) || (arg0->unk_A0 > 30.0f) || (sp48 < -arg0->unk_274) || (arg0->unk_270 < sp48)) {
@@ -3875,10 +3986,10 @@ void func_80090568(unk_802C4920* arg0) {
         arg0->unk_34.z -= temp_fv0;
         arg0->unk_40.z -= temp_fv0;
         arg0->unk_50.z -= temp_fv0;
-        
 
         arg0->unk_A0 = 0.0f;
-        sp48 = (arg0->unk_24C.xy * arg0->unk_74.x) + (arg0->unk_24C.yy * arg0->unk_74.y) + (arg0->unk_24C.zy * arg0->unk_74.z);
+        sp48 = (arg0->unk_24C.xy * arg0->unk_74.x) + (arg0->unk_24C.yy * arg0->unk_74.y) +
+               (arg0->unk_24C.zy * arg0->unk_74.z);
 
         if (sp48 < 0.0f) {
             arg0->unk_74.x -= sp48 * arg0->unk_24C.xy;
@@ -3889,7 +4000,6 @@ void func_80090568(unk_802C4920* arg0) {
             }
         }
     }
-
 
     if (arg0->unk_A0 <= 15.0f) {
         arg0->unk_04 &= ~0x4000000;
@@ -3971,7 +4081,7 @@ void func_80094FF4(s32 arg0) {
         if (D_800F5DC8 <= 16200) {
             *D_800F5DD4++ = -0x80;
             // FAKE
-            *D_800F5DD4++ = ((u16)arg0 >> 8);
+            *D_800F5DD4++ = ((u16) arg0 >> 8);
             *D_800F5DD4++ = arg0 & 0xFF;
         } else {
             D_800F5DC8 -= 3;
@@ -4003,18 +4113,18 @@ s32 func_800950E8(unk_800F5DF0* arg0) {
     if (temp1 == -0x80) {
         temp1 = *arg0->unk_08++;
         temp1 <<= 8;
-        temp1 |= (u8)*arg0->unk_08++;
+        temp1 |= (u8) *arg0->unk_08++;
         arg0->unk_0C += 3;
     } else {
         arg0->unk_0C++;
     }
-    
+
     return temp1;
 }
 
 void func_80095144(void) {
     s32 i;
-    
+
     for (i = 0; i < D_800CD000; i++) {
         D_800DCE98[D_800DD218[i]].unk_72 = 0;
     }
@@ -4049,7 +4159,8 @@ void func_800951DC(unk_802C4920* arg0) {
         func_80090BCC(arg0, &sp24);
     } else {
         func_80090BCC(arg0, &D_800DCE98[D_800DD218[arg0->unk_00]]);
-        arg0->unk_33C = - arg0->unk_34.x * arg0->unk_24C.xz - arg0->unk_34.y * arg0->unk_24C.yz - arg0->unk_34.z * arg0->unk_24C.zz;
+        arg0->unk_33C =
+            -arg0->unk_34.x * arg0->unk_24C.xz - arg0->unk_34.y * arg0->unk_24C.yz - arg0->unk_34.z * arg0->unk_24C.zz;
     }
 }
 
@@ -4071,7 +4182,7 @@ Gfx* func_8009CBE8(Gfx* gfx, s32 arg1, s32 red, s32 green, s32 blue) {
     } else {
         var_v1 = D_800F8500[10];
     }
-    
+
     gSPDisplayList(gfx++, D_800CDD38[var_v1]);
     gDPSetEnvColor(gfx++, red, green, blue, 255);
     gSPDisplayList(gfx++, D_800CDDB0[var_v1 * 6]);
@@ -4092,8 +4203,9 @@ extern void* D_800CDC54[];
 
 Gfx* func_8009CD60(Gfx* gfx, s32 arg1) {
     unk_800CF1B0* temp_v1 = &D_800F80C8[arg1];
-    
-    gDPLoadTextureBlock_4b(gfx++, D_800CDC54[temp_v1->unk_02], G_IM_FMT_I, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
+
+    gDPLoadTextureBlock_4b(gfx++, D_800CDC54[temp_v1->unk_02], G_IM_FMT_I, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP,
+                           G_TX_MIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
 
     gSPVertex(gfx++, D_800CDBA4[temp_v1->unk_02], 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
