@@ -227,7 +227,8 @@ void* func_80078DB4(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, s3
     }
 }
 
-void* func_80078EA0(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8) {
+void* func_80078EA0(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7,
+                    f32 arg8) {
     s32 temp_v0;
 
     while (arg1->unk_04 != 0) {

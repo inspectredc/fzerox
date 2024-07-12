@@ -3239,15 +3239,15 @@ void func_8008DCD8(unk_802C4920* arg0, f32 arg1) {
                     temp_fs1 = ((func_8006A918() & 0x1FFFF) * 0.00011444179f) - 7.5f;
 
                     func_i2_80105A28((((s32) func_8006A978() & 0x1F) - 0x10) + arg0->unk_40.x,
-                                  (((s32) func_8006A918() & 0x1F) - 0x10) + arg0->unk_40.y,
-                                  (((s32) func_8006A918() & 0x1F) - 0x10) + arg0->unk_40.z,
-                                  (arg0->unk_C0.xz * temp_fs2) + sp90.z + (temp_fs0 * arg0->unk_C0.xy) +
-                                      (temp_fs1 * arg0->unk_C0.xx),
-                                  (arg0->unk_C0.yz * temp_fs2) + sp90.y + (temp_fs0 * arg0->unk_C0.yy) +
-                                      (temp_fs1 * arg0->unk_C0.yx),
-                                  (arg0->unk_C0.zz * temp_fs2) + sp90.x + (temp_fs0 * arg0->unk_C0.zy) +
-                                      (temp_fs1 * arg0->unk_C0.zx),
-                                  &arg0->unk_C0, temp_s5, temp_s6, temp_s7, arg0);
+                                     (((s32) func_8006A918() & 0x1F) - 0x10) + arg0->unk_40.y,
+                                     (((s32) func_8006A918() & 0x1F) - 0x10) + arg0->unk_40.z,
+                                     (arg0->unk_C0.xz * temp_fs2) + sp90.z + (temp_fs0 * arg0->unk_C0.xy) +
+                                         (temp_fs1 * arg0->unk_C0.xx),
+                                     (arg0->unk_C0.yz * temp_fs2) + sp90.y + (temp_fs0 * arg0->unk_C0.yy) +
+                                         (temp_fs1 * arg0->unk_C0.yx),
+                                     (arg0->unk_C0.zz * temp_fs2) + sp90.x + (temp_fs0 * arg0->unk_C0.zy) +
+                                         (temp_fs1 * arg0->unk_C0.zx),
+                                     &arg0->unk_C0, temp_s5, temp_s6, temp_s7, arg0);
                     i--;
                 } while (i != 0);
             }
@@ -3311,9 +3311,9 @@ void func_8008E188(unk_802C4920* arg0, f32 arg1, f32 arg2, f32 arg3) {
     if (arg1 * arg2 > 0.01f) {
         if (arg0->unk_2B4 != 0) {
             func_i2_801054C0(arg0->unk_40.x + ((arg2 * 15.0f) * arg0->unk_24C.xz),
-                          arg0->unk_40.y + ((arg2 * 15.0f) * arg0->unk_24C.yz),
-                          arg0->unk_40.z + ((arg2 * 15.0f) * arg0->unk_24C.zz), arg0->unk_74.x, arg0->unk_74.y,
-                          arg0->unk_74.z, (arg1 * arg2 * 1.5f) + 18.0f, arg0);
+                             arg0->unk_40.y + ((arg2 * 15.0f) * arg0->unk_24C.yz),
+                             arg0->unk_40.z + ((arg2 * 15.0f) * arg0->unk_24C.zz), arg0->unk_74.x, arg0->unk_74.y,
+                             arg0->unk_74.z, (arg1 * arg2 * 1.5f) + 18.0f, arg0);
         }
         if (D_800E5FD0 != 0) {
             func_800BA710(arg0->unk_00, 3);
@@ -3384,7 +3384,7 @@ void func_8008E54C(unk_802C4920* arg0, f32 arg1) {
             arg0->unk_04 |= 0x80000000;
             func_8008DCD8(arg0, 2.0f);
             func_i2_801054C0(arg0->unk_40.x, arg0->unk_40.y, arg0->unk_40.z, arg0->unk_74.x, arg0->unk_74.y,
-                          arg0->unk_74.z, 40.0f, arg0);
+                             arg0->unk_74.z, 40.0f, arg0);
             if (D_800E5FD0 != 0) {
                 func_800BA710(arg0->unk_00, 3);
             }
