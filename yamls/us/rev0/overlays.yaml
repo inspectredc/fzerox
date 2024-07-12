@@ -131,7 +131,7 @@
     type: code
     dir: overlays/ovl_i6
     start: 0xDFF10
-    vram: 0x80115DF0
+    vram: 0x801439D0
     symbol_name_format: i6_$VRAM
     subsegments:
       - [0xDFF10, c]

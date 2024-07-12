@@ -6,7 +6,10 @@
 #include "unk_structs.h"
 
 s32 func_8006A9E0(f32 arg0);
+u32 func_8006A918(void);
+u32 func_8006A978(void);
 s32 func_8006AA38(Mtx3F* mtx);
+s32 func_8006AC10(Mtx3F* mtx);
 void func_8006BC84(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD);
 void func_8006C520(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9);
 void func_8006CC98(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 argA);
@@ -134,5 +137,7 @@ unk_800E3A28* func_8011A73C(unk_800E3A28*);
 unk_800E3A28* func_8011B2E0(unk_800E3A28*);
 unk_800E3A28* func_8011B874(unk_800E3A28*);
 
+Gfx* func_i9_80115DF0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 argA, s32 argB, s32 argC, s32 argD, s32 argE, s32 argF, s32 arg10);
+Gfx* func_i9_80161050(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3);
 
 #endif // FUNCTIONS_H

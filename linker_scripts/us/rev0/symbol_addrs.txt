@@ -205,3 +205,4 @@ sFaultCharIndex = 0x800CD6C0;
 sFaultCharPixelFlags = 0x800CD740;
 sFloatExceptions = 0x800CD888;
 gFaultMgr = 0x800E47D0; //size:0x9D8
+D_800F8500 = 0x800F8500;
