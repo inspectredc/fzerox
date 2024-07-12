@@ -128,9 +128,18 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011B06C.s")
 
+void func_i4_8011B0C8(void) {
+}
+
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011B0D0.s")
 
+void func_i4_8011B134(void) {
+}
+
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011B13C.s")
+
+void func_i4_8011B1E4(void) {
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011B1EC.s")
 

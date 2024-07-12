@@ -42,6 +42,7 @@
       - [0x7FE10, c]
       - [0x80870, hasm]
       - [0x80960, data]
+      # 0x83850 more code
       - [0x97890, .rodata, 72E40]
       - [0x978A0, .rodata, 76270]
       - [0x978C0, .rodata, 79AF0]
@@ -131,7 +132,7 @@
     type: code
     dir: overlays/ovl_i6
     start: 0xDFF10
-    vram: 0x801439D0
+    vram: 0x80115DF0
     symbol_name_format: i6_$VRAM
     subsegments:
       - [0xDFF10, c]
