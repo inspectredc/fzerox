@@ -16,17 +16,27 @@ typedef struct unk_8006FC8C {
     s32 unk_30;
     struct unk_8006FC8C* unk_34;
     struct unk_8006FC8C* unk_38;
-    s8 unk_3C[0x68];
+    s8 unk_3C[0x2C];
+    f32 unk_68;
+    f32 unk_6C;
+    f32 unk_70;
+    s8 unk_74[0x30];
 } unk_8006FC8C; // size = 0xA4
 
 typedef struct unk_800F8510 {
-    s8 unk_00[0x8];
+    s32 unk_00;
+    s8 unk_04[0x4];
     s32 unk_08;
-    s8 unk_0C[0x4];
+    f32 unk_0C;
     unk_8006FC8C* unk_10;
     s8 unk_14[0xC];
     s32 unk_20;
-    s8 unk_24[0xCC];
+    s8 unk_24[0x10];
+    u8 unk_34[4][20];
+    s8 unk_84[0x40];
+    u8 unk_C4[20];
+    s8 unk_D8[0x4];
+    u8 unk_DC[20];
 } unk_800F8510; // size = 0xF0
 
 typedef struct unk_8010B7D0 {
@@ -116,6 +126,8 @@ typedef struct unk_800E3A28 {
     s8 unk_24[0x4];
 } unk_800E3A28; // size = 0x28
 
+typedef Gfx* (*unk_800E51B8_unk_1C_func)(Gfx*, s16, s16);
+
 typedef struct unk_800E51B8 {
     s32 unk_00;
     s16 unk_04;
@@ -128,9 +140,9 @@ typedef struct unk_800E51B8 {
     s16 unk_12;
     s16 unk_14;
     s16 unk_16;
-    s16 unk_18;
-    s16 unk_1A;
-    s32 unk_1C;
+    u16 unk_18;
+    u16 unk_1A;
+    unk_800E51B8_unk_1C_func unk_1C;
 } unk_800E51B8; // size = 0x20
 
 #endif // UNK_STRUCTS_H

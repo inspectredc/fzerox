@@ -39,7 +39,7 @@
       - [0x19F30, pad]
       - [0x19F40, c, game/sys_fault] # sys_fault?
       - [0x1AA40, c, game/1AA40]
-      - [0x1AE90, c, game/1AE90]
+      - [0x1B0E0, c, game/1B0E0]
       - [0x36ED0, c, game/36ED0]
       - [0x44620, hasm, game/44620]
       - [0x446D0, c, game/446D0]
@@ -50,7 +50,7 @@
       - [0x511D0, c, game/511D0]
 
       # TODO: Figure out these half functions/microcodes
-      - [0x554E0, bin]
+      - [0x554E0, bin] # includes func_800BB4E0
 
       # Libultra
       - [0x559B0, c, libultra/os/sendmesg]
@@ -223,7 +223,7 @@
       - [0x6E6C0, .rodata, game/197D0]
       - [0x6E8B0, .rodata, game/sys_fault]
       - [0x6EC60, .rodata, game/1AA40]
-      - [0x6EC80, .rodata, game/1AE90]
+      - [0x6EC80, .rodata, game/1B0E0]
       - [0x6FA10, .rodata, game/36ED0]
       - [0x6FB40, .rodata, game/446D0]
       - [0x6FB50, .rodata, game/459A0]

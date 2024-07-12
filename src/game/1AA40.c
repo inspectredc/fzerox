@@ -147,3 +147,32 @@ void func_80080C0C(void) {
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1AA40/func_80080C0C.s")
 #endif
+
+extern Gfx D_80149A0[];
+
+Gfx* func_80080E90(Gfx* gfx) {
+    s32 i;
+    unk_800E51B8* var_s0;
+
+    for (i = 0, var_s0 = D_800E51B8; i < 3; i++, var_s0++) {
+        if (var_s0->unk_04 == -1) {
+            continue;
+        }
+        gSPDisplayList(gfx++, D_80149A0);
+        gDPSetFillColor(gfx++, var_s0->unk_1A << 16 | var_s0->unk_1A);
+        gDPFillRectangle(gfx++, var_s0->unk_08, var_s0->unk_0A, ((var_s0->unk_08 + var_s0->unk_10) - 1),
+                         ((var_s0->unk_0A + var_s0->unk_12) - 1));
+
+        gDPPipeSync(gfx++);
+        gDPSetFillColor(gfx++, var_s0->unk_18 << 16 | var_s0->unk_18);
+        gDPFillRectangle(gfx++, var_s0->unk_08 + 1, var_s0->unk_0A + 1, ((var_s0->unk_08 + var_s0->unk_10) - 2),
+                         ((var_s0->unk_0A + var_s0->unk_12) - 2));
+
+        if ((var_s0->unk_1C != NULL) && (var_s0->unk_00 == 3)) {
+            gfx = var_s0->unk_1C(gfx, var_s0->unk_08, var_s0->unk_0A);
+        }
+    }
+    return gfx;
+}
+
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1AA40/func_8008108C.s")

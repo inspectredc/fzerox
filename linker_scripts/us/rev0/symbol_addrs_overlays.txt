@@ -3,3 +3,12 @@ D_i2_8010AE1C = 0x8010AE1C; //force_migration:True size:0x8 segment:ovl_i2
 D_i3_80140F50 = 0x80140F50; //segment:ovl_i3 type:asciz
 D_i3_801417C4 = 0x801417C4; //force_migration:True size:0x8 segment:ovl_i3
 D_i3_801417F8 = 0x801417F8; //force_migration:True size:0x8 segment:ovl_i3
+
+
+D_i7_8014A4D0 = 0x8014A4D0; //segment:ovl_i7 size:0xC
+D_i7_8014A7E0 = 0x8014A7E0; //segment:ovl_i7 size:0xC
+D_i7_8014AB60 = 0x8014AB60; //segment:ovl_i7 size:0xC
+D_i7_8014B070 = 0x8014B070; //segment:ovl_i7 size:0xC
+D_i7_8014B190 = 0x8014B190; //segment:ovl_i7 size:0xC
+D_i7_8014B310 = 0x8014B310; //segment:ovl_i7 size:0xC
+D_i7_8014BDF6 = 0x8014BDF6; //segment:ovl_i7

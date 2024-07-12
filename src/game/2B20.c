@@ -373,7 +373,7 @@ void func_8006A904(s32 arg0, s32 arg1) {
     D_800CD17C = arg1;
 }
 
-s32 func_8006A918(void) {
+u32 func_8006A918(void) {
 
     D_800CD170 = D_800CD170 * 0x41C64E6D + 0x3039;
     if (D_800CD174 & 1) {
@@ -385,7 +385,7 @@ s32 func_8006A918(void) {
     return D_800CD170 ^ D_800CD174;
 }
 
-s32 func_8006A978(void) {
+u32 func_8006A978(void) {
 
     D_800CD178 = D_800CD178 * 0x41C64E6D + 0x10932;
     if (D_800CD17C & 1) {

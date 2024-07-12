@@ -93,5 +93,6 @@
     "siint.h": "c",
     "cstdint": "c"
   },
-  "C_Cpp_Runner.msvcBatchPath": ""
+  "C_Cpp_Runner.msvcBatchPath": "",
+  "C_Cpp.errorSquiggles": "enabled"
 }

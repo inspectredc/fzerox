@@ -13,7 +13,7 @@ void func_80067AE0(void) {
     D_800DCD0C = temp_t7;
 }
 
-void func_80076B80(s32, void*, s32*);
+void func_80076B80(s32, void*);
 extern void* D_800DCCF0;
 extern void* D_800DCCF4;
 extern s32 D_800DCCFC;
@@ -28,7 +28,7 @@ void func_80067B14(void) {
     D_800DCCFC ^= 1;
     D_800DCCF4 = (D_800DCCFC << 6) + D_802A6AC0;
     D_800DCCF0 = (D_800DCCFC * 0x2C6F0) + D_8024DCE0;
-    func_80076B80(1, D_800DCCF0, &D_800DCD00);
+    func_80076B80(1, D_800DCCF0);
     gMasterDisp = D_800DCCF0;
 }
 
