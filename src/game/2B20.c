@@ -8,7 +8,7 @@ void func_8008DA68(void);
 void func_8008DB98(void);
 void func_800A4B54(void);
 void func_800A4BAC(void);
-void func_800FC730(void);
+void func_i2_800FC730(void);
 extern s16 D_800CD16C;
 extern s32 D_800DCE44;
 extern s32 D_800DCE48;
@@ -26,7 +26,7 @@ void func_80068B20(void) {
         func_800A4B54();
     }
     func_80085510();
-    func_800FC730();
+    func_i2_800FC730();
     func_8007F500();
     func_80076848();
     func_8007D9D0();
@@ -285,7 +285,7 @@ void func_80068F04(void) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_800690FC.s")
 
-void func_800FD184(s32);
+void func_i2_800FD184(s32);
 extern s32 (*D_800CD0FC[])(void);
 extern s16 D_80106DA0;
 
@@ -294,7 +294,7 @@ void func_80069698(s32 arg0) {
     if ((D_800CD044 != 3) && (D_80106DA0 != 0)) {
         arg0 = D_800CD0FC[D_800DCE44 & 0x1F]();
     }
-    func_800FD184(arg0);
+    func_i2_800FD184(arg0);
 }
 
 void func_80069820(void);

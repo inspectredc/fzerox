@@ -52,7 +52,7 @@ extern void* D_800DCD10;
 void func_800B9E28(void);
 void func_800690FC(void);
 void func_80077C9C(void);
-void func_800FD344(void);
+void func_i2_800FD344(void);
 void func_80067C0C(void*);
 Gfx* func_80069698(Gfx*);
 
@@ -69,7 +69,7 @@ void func_80067D64(void) {
     while (osDpGetStatus() & 0x170) {}
 
     func_80077C9C();
-    func_800FD344();
+    func_i2_800FD344();
     osViSwapBuffer(D_800DCCD0[D_800DCD00]);
 
     while (osViGetCurrentFramebuffer() != D_800DCCD0[D_800DCD00]) {}
@@ -89,7 +89,7 @@ void func_80067E98(void) {
     func_80067BD0();
     func_800B9E28();
     osRecvMesg(&D_800DCAC8, &D_800DCD10, 1);
-    func_800FD344();
+    func_i2_800FD344();
     osViSwapBuffer(D_800DCCD0[D_800DCD08]);
     func_80077C9C();
 

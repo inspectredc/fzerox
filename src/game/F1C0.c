@@ -42,14 +42,14 @@ void func_80075228(void);
 s32 func_800753EC(void);
 void func_8007FC68(s32);
 void func_8007FCB8(void);
-s32 func_80414E30(u8*);
+s32 func_i1_80414E30(u8*);
 extern s32 D_800CD2D0;
 extern u8 D_800E32E0;
 extern s32 D_800E3324;
 
 s32 func_80075800(void) {
 
-    D_800E3324 = func_80414E30(&D_800E32E0);
+    D_800E3324 = func_i1_80414E30(&D_800E32E0);
 
     switch (D_800E3324) {
         case 0:
@@ -83,7 +83,7 @@ s32 func_80075800(void) {
 
 s32 func_800758F8(void) {
 
-    D_800E3324 = func_80414E30(&D_800E32E0);
+    D_800E3324 = func_i1_80414E30(&D_800E32E0);
 
     switch (D_800E3324) {
         case 8:
@@ -176,14 +176,14 @@ void func_80076310(void) {
     osCreateMesgQueue(&D_800E3308, &D_800E3320, 1);
 }
 
-s32 func_80414BA0(s32, s32, void*, s32);
+s32 func_i1_80414BA0(s32, s32, void*, s32);
 
 extern s32 D_800E3330;
 
 s32 func_80076340(void) {
 
     osCreateMesgQueue(&D_800E3308, &D_800E3320, 1);
-    D_800E3324 = func_80414BA0(0x95, 0x96, &D_800E3330, 0x10);
+    D_800E3324 = func_i1_80414BA0(0x95, 0x96, &D_800E3330, 0x10);
 
     if (D_800E3324 == 0x29) {
         return -1;

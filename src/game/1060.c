@@ -100,7 +100,7 @@ void func_800678B8(void* arg0) {
 
 void func_80069700(void);
 void func_800BA248(void);
-void func_8040BCB0(void);
+void func_i1_8040BCB0(void);
 extern s32 D_800CCFC0;
 extern s32 D_800CCFC4;
 extern s32 D_800DCCC8;
@@ -117,7 +117,7 @@ void func_80067A10(s32 arg0) {
     osViBlack(1);
     osViSetYScale(1.0f);
     if ((D_800CCFC0 != 0) && (D_800DCCCC != 0)) {
-        func_8040BCB0();
+        func_i1_8040BCB0();
     }
     func_80069700();
 
