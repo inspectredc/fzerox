@@ -818,7 +818,43 @@ void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006C520.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006CB0C.s")
+void func_8006CB0C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,
+                   f32 arg9, f32 argA) {
+    f32 temp_fv0;
+    f32 temp_fv1;
+    f32 temp;
+
+    if (arg0 == NULL) {
+        arg0 = &D_800E1230;
+    }
+    if (arg1 == NULL) {
+        arg1 = &D_800E1270;
+    }
+    temp_fv1 = (arg2 * arg8) + (arg3 * arg9) + (arg4 * argA);
+
+    if (!(SQ(temp_fv1) < 0.01)) {
+        temp_fv1 = -1.0f / temp_fv1;
+        temp_fv0 = (((-arg8 * arg5) - (arg9 * arg6)) - (argA * arg7)) * temp_fv1;
+        arg8 *= temp_fv1;
+        arg9 *= temp_fv1;
+        argA *= temp_fv1;
+        arg1->m[0][0] = arg8 * arg2 + 1.0f;
+        arg1->m[0][1] = arg8 * arg3;
+        arg1->m[0][2] = arg8 * arg4;
+        arg1->m[1][0] = arg9 * arg2;
+        arg1->m[1][1] = arg9 * arg3 + 1.0f;
+        arg1->m[1][2] = arg9 * arg4;
+        arg1->m[2][0] = argA * arg2;
+        arg1->m[2][1] = argA * arg3;
+        arg1->m[2][2] = argA * arg4 + 1.0f;
+        arg1->m[3][0] = temp_fv0 * arg2;
+        arg1->m[3][1] = temp_fv0 * arg3;
+        arg1->m[3][2] = temp_fv0 * arg4;
+        arg1->m[0][3] = arg1->m[1][3] = arg1->m[2][3] = 0.0f;
+        arg1->m[3][3] = 1.0f;
+        func_8006BBE8(arg1, arg0);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/2B20/func_8006CC98.s")
 

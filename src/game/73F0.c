@@ -692,18 +692,18 @@ void func_80074634(unk_800F8510* arg0) {
 
         temp_a1 = &arg0->unk_10[i];
 
-        if (temp_a1->unk_00 < var_fv0) {
-            var_fv0 = temp_a1->unk_00;
+        if (temp_a1->unk_00.x < var_fv0) {
+            var_fv0 = temp_a1->unk_00.x;
         }
-        if (var_fv1 < temp_a1->unk_00) {
-            var_fv1 = temp_a1->unk_00;
+        if (var_fv1 < temp_a1->unk_00.x) {
+            var_fv1 = temp_a1->unk_00.x;
         }
 
-        if (temp_a1->unk_08 < var_fa0) {
-            var_fa0 = temp_a1->unk_08;
+        if (temp_a1->unk_00.z < var_fa0) {
+            var_fa0 = temp_a1->unk_00.z;
         }
-        if (var_fa1 < temp_a1->unk_08) {
-            var_fa1 = temp_a1->unk_08;
+        if (var_fa1 < temp_a1->unk_00.z) {
+            var_fa1 = temp_a1->unk_00.z;
         }
     }
 
@@ -711,8 +711,8 @@ void func_80074634(unk_800F8510* arg0) {
 
         temp_a1 = &arg0->unk_10[i];
 
-        temp_a1->unk_00 -= ((var_fv0 + var_fv1) / 2);
-        temp_a1->unk_08 -= ((var_fa0 + var_fa1) / 2);
+        temp_a1->unk_00.x -= ((var_fv0 + var_fv1) / 2);
+        temp_a1->unk_00.z -= ((var_fa0 + var_fa1) / 2);
     }
 }
 

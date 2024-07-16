@@ -15,6 +15,11 @@ void func_8006C520(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, f32 arg4, f32 arg5
 void func_8006CC98(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 argA);
 void func_8006D03C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u16* arg9);
 
+void func_80073A04(void);
+void func_8007402C(s32 arg0);
+void func_800741DC(s32 arg0);
+void func_80074634(unk_800F8510* arg0);
+void func_800747EC(s32 arg0);
 void func_80074A90(f32* arg0, f32* arg1);
 void func_80074CE4(unk_800F8510*);
 
@@ -28,16 +33,19 @@ Gfx* func_8007AE70(Gfx*);
 Gfx* func_8007AC48(Gfx* gfx, u16 red, u16 green, u16 blue);
 Gfx* func_8007AE8C(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
 Gfx* func_8007AF40(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
-
 void func_8007E2B4(void);
 
 void Fault_SetFrameBuffer(FrameBuffer* buffer, u16 width, u16 height);
 void Fault_Init(void);
 
+void func_8009CED0(u32 arg0);
+s32 func_8009DEAC(unk_800F8510* arg0);
 f32 func_8009E108(unk_8006FC8C*, f32, f32*);
 f32 func_8009E538(unk_8006FC8C*, f32, Vec3f*);
 void func_8009E6F0(unk_8006FC8C*, f32, Vec3f*);
 f32 func_8009E85C(unk_8006FC8C*, f32, Mtx3F*, f32);
+
+s32 func_800AA394(s32);
 
 void func_i4_80116E64(void);
 void func_i4_80116E8C(unk_800E3A28*);
