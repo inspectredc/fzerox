@@ -91,7 +91,8 @@
     "string": "c",
     "prevent_bss_reordering3.h": "c",
     "siint.h": "c",
-    "cstdint": "c"
+    "cstdint": "c",
+    "unk_structs.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"
