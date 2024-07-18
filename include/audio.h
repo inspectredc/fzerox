@@ -60,7 +60,16 @@ typedef struct {
 } SeqScriptState;
 
 typedef struct {
-    s8 pad[0x1];
+    /* 0x000 */ u8 pad0 : 5;
+    /* 0x000 */ u8 recalculateVolume : 1;
+    /* 0x000 */ u8 pad0_2 : 2;
+    /* 0x001 */ s8 pad1[0x1B];
+    /* 0x01C */ f32 fadeVolume;
+    /* 0x020 */ s8 pad20[0x8];
+    /* 0x028 */ f32 muteVolumeMod;
+    /* 0x02C */ f32 fadeVolumeMod;
+    /* 0x030 */ f32 appliedFadeVolume;
+    /* 0x034 */ struct SequenceChannel* channels[16];
 } SequencePlayer;
 
 typedef struct {
@@ -123,24 +132,41 @@ typedef struct {
 } Instrument; // size = 0x20
 
 typedef struct SequenceChannel {
-    /* 0x00 */ u8 pad0 : 5;
+    /* 0x00 */ u8 enabled : 1;
+    /* 0x00 */ u8 pad0 : 4;
     /* 0x00 */ u8 reverbIndex : 1;
     /* 0x00 */ u8 pad0_2 : 2;
-    /* 0x01 */ s8 pad1[0x1];
+    union {
+        struct {
+            /* 0x01 */ u8 freqMod : 1;
+            /* 0x01 */ u8 volume : 1;
+            /* 0x01 */ u8 pan : 1;
+        } s;
+        /* 0x01 */ u8 asByte;
+    } changes;
     /* 0x02 */ u8 noteAllocPolicy;
     /* 0x03 */ u8 muteBehavior;
     /* 0x04 */ u8 targetReverbVol;
     /* 0x05 */ u8 notePriority;
     /* 0x06 */ u8 notePriority2;
     /* 0x07 */ u8 fontId;
-    /* 0x08 */ s8 pad8[0x6];
+    /* 0x08 */ u8 unkPan;
+    /* 0x09 */ u8 unkPan2;
+    /* 0x0A */ s8 padA[0x4];
     /* 0x0E */ s16 instOrWave;
-    /* 0x10 */ s8 pad1E[0x1C];
+    /* 0x10 */ s8 pad10[0x4];
+    /* 0x14 */ f32 volumeMod;
+    /* 0x18 */ f32 volume;
+    /* 0x1C */ s32 pan;
+    /* 0x20 */ f32 appliedVolume;
+    /* 0x24 */ f32 freqMod;
+    /* 0x28 */ s8 pad28[0x4];
     /* 0x2C */ struct Note* noteUnused;
     /* 0x30 */ struct SequenceLayer* layerUnused;
     /* 0x34 */ s8 pad34[0x4];
     /* 0x38 */ SequencePlayer* seqPlayer;
-    /* 0x3C */ s8 pad3C[0x2C];
+    /* 0x3C */ struct SequenceLayer* layers[4];
+    /* 0x4C */ s8 pad4C[0x1C];
     /* 0x68 */ AdsrSettings adsr;
     /* 0x70 */ NotePool notePool;
 } SequenceChannel;
@@ -148,16 +174,22 @@ typedef struct SequenceChannel {
 typedef struct SequenceLayer {
     /* 0x00 */ u8 enabled : 1;
     /* 0x00 */ u8 pad0 : 4;
-    /* 0x00 */ u8 bit5 : 1;
+    /* 0x00 */ u8 ignoreDrumPan : 1;
     /* 0x00 */ u8 pad0_2 : 1;
     /* 0x00 */ u8 bit8 : 1;
     /* 0x01 */ u8 instOrWave;
     /* 0x02 */ s8 unk_2;
-    /* 0x03 */ s8 pad3[0x3];
+    /* 0x03 */ s8 pad3[0x2];
+    /* 0x05 */ u8 pan;
     /* 0x06 */ u8 notePan;
-    /* 0x07 */ s8 pad7[0x11];
+    /* 0x07 */ s8 pad7[0x1];
+    /* 0x08 */ Portamento portamento;
     /* 0x18 */ AdsrSettings adsr;
-    /* 0x20 */ s8 pad20[0x14];
+    /* 0x20 */ s8 pad20[0x4];
+    /* 0x24 */ f32 freqMod;
+    /* 0x28 */ s8 pad28[0x4];
+    /* 0x2C */ f32 velocitySquare;
+    /* 0x30 */ s8 pad30[0x4];
     /* 0x34 */ f32 noteVelocity;
     /* 0x38 */ f32 noteFreqMod;
     /* 0x3C */ s8 pad3C[0xC];
@@ -179,12 +211,16 @@ typedef struct {
         /* 0x00 */ u8 asByte;
     } action;
     /* 0x01 */ u8 state;
-    /* 0x02 */ s8 pad2[0x6];
+    /* 0x02 */ s16 envIndex;
+    /* 0x04 */ s16 delay;
+    /* 0x06 */ s8 pad6[0x2];
     /* 0x08 */ f32 sustain;
-    /* 0x0C */ s8 padC[0x4];
+    /* 0x0C */ f32 velocity;
     /* 0x10 */ f32 fadeOutVel;
     /* 0x14 */ f32 current;
-    /* 0x18 */ s8 pad18[0xC];
+    /* 0x18 */ f32 target;
+    /* 0x1C */ s8 pad1C[0x4];
+    /* 0x20 */ EnvelopePoint* envelope;
 } AdsrState; // size = 0x24
 
 typedef struct {
@@ -204,7 +240,7 @@ typedef struct {
     /* 0x05 */ s8 pad5[0x1];
     /* 0x06 */ s16 adsrVolModUnused;
     /* 0x08 */ f32 portamentoFreqMod;
-    /* 0x0C */ f32 vibratoFreqMod;
+    /* 0x0C */ s8 padC[0x4];
     /* 0x10 */ struct SequenceLayer* prevParentLayer;
     /* 0x14 */ struct SequenceLayer* parentLayer;
     /* 0x18 */ struct SequenceLayer* wantedParentLayer;
@@ -269,5 +305,30 @@ typedef enum {
     /* 3 */ SOUNDMODE_MONO
 } SoundMode;
 
+typedef enum {
+    /* 0 */ ADSR_STATE_DISABLED,
+    /* 1 */ ADSR_STATE_INITIAL,
+    /* 2 */ ADSR_STATE_START_LOOP,
+    /* 3 */ ADSR_STATE_LOOP,
+    /* 4 */ ADSR_STATE_FADE,
+    /* 5 */ ADSR_STATE_HANG,
+    /* 6 */ ADSR_STATE_DECAY,
+    /* 7 */ ADSR_STATE_RELEASE,
+    /* 8 */ ADSR_STATE_SUSTAIN
+} AdsrStatus;
+
+#define ADSR_DISABLE 0
+#define ADSR_HANG -1
+#define ADSR_GOTO -2
+#define ADSR_RESTART -3
+
+extern AudioBufferParameters gAudioBufferParams;
+extern f32* D_800268B8; // gAudioContext.adsrDecayTable
+extern s8 gAudioSoundMode;
+extern f32 gDefaultPanVolume[128];
+extern s32 gNumNotes;
+extern Note* gNotes;
+extern NoteSubEu gZeroNoteSub;
+extern AudioAllocPool gMiscPool;
 
 #endif

@@ -210,3 +210,5 @@ D_800F8500 = 0x800F8500;
 gZeroNoteSub = 0x800D0460; // size:0x10
 gDefaultNoteSub = 0x800D0470; // size:0x10
 gDefaultPanVolume = 0x800D0480;
+
+gBendPitchOneOctaveFrequencies = 0x800CFA30;
