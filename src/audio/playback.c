@@ -1,11 +1,6 @@
 #include "global.h"
 #include "audio.h"
 
-extern AudioBufferParameters gAudioBufferParams;
-extern f32* D_800268B8; // gAudioContext.adsrDecayTable
-extern s8 gAudioSoundMode;
-extern f32 gDefaultPanVolume[128];
-
 void func_800AA7D4(Note* note, f32 arg1);
 
 void func_800AA6D0(Note* note, NoteAttributes* noteAttr) {
@@ -94,8 +89,6 @@ void func_800AA8E4(Note* note) {
     note->playbackState.adsr.current = 0.0f;
 }
 
-extern s32 gNumNotes;
-extern Note* gNotes;
 void func_800AC4C8(SequenceChannel* channel);
 void func_800AAF7C(SequenceLayer* layer);
 void func_800AB380(Note* note);
@@ -483,7 +476,7 @@ void func_800AB41C(Note* note, SequenceLayer* layer) {
     note->playbackState.prevParentLayer = NO_LAYER;
     note->playbackState.parentLayer = layer;
     playbackState->priority = layer->channel->notePriority;
-    layer->bit5 = true;
+    layer->ignoreDrumPan = true;
     layer->unk_2 = 3;
     layer->note = note;
     layer->channel->noteUnused = note;
@@ -605,8 +598,6 @@ Note* func_800AB710(SequenceLayer* layer) {
     return NULL;
 }
 
-extern NoteSubEu gZeroNoteSub;
-extern AudioAllocPool gMiscPool;
 void* func_800B2A8C(AudioAllocPool* pool, u32 size);
 
 void func_800AB888(void) {
