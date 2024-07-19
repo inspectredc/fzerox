@@ -472,12 +472,12 @@ extern SequencePlayer gSeqPlayers[4];
 extern SequenceLayer gSeqLayers[64];
 
 void func_800AA940(void);
-TunedSample* func_800AACF0(Instrument* instrument, s32 arg1);
+TunedSample* func_800AACF0(Instrument* instrument, s32 semitone);
 Instrument* func_800AAD2C(s32 arg0, s32 arg1);
 Drum* func_800AAD58(s32 arg0, s32 arg1);
 void func_800AAF5C(SequenceLayer* layer);
 void func_800AAFAC(NotePool* pool);
-void func_800AB204(NotePool* pool, s32 count);
+void func_800AB204(NotePool* pool, s32 arg1);
 Note* func_800AB710(SequenceLayer* layer);
 
 void func_800ABCB4(Note* note);

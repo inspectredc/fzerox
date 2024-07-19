@@ -38,7 +38,7 @@ s32 func_800AC038(SequencePlayer* seqPlayer, SeqScriptState* state, s32 cmd, s32
             return 1;
         case 0xFC:
             state->stack[state->depth++] = state->pc;
-            state->pc = seqPlayer->seqData + (u16)cmdArg;
+            state->pc = seqPlayer->seqData + (u16) cmdArg;
             break;
         case 0xF8:
             state->remLoopIters[state->depth] = cmdArg;
@@ -68,7 +68,7 @@ s32 func_800AC038(SequencePlayer* seqPlayer, SeqScriptState* state, s32 cmd, s32
             if (cmd == 0xF5 && state->value < 0) {
                 break;
             }
-            state->pc = seqPlayer->seqData + (u16)cmdArg;
+            state->pc = seqPlayer->seqData + (u16) cmdArg;
             break;
         case 0xF2:
         case 0xF3:
@@ -79,7 +79,7 @@ s32 func_800AC038(SequencePlayer* seqPlayer, SeqScriptState* state, s32 cmd, s32
             if (cmd == 0xF2 && state->value >= 0) {
                 break;
             }
-            state->pc += (s8)(cmdArg & 0xFF);
+            state->pc += (s8) (cmdArg & 0xFF);
             break;
     }
 
@@ -103,24 +103,24 @@ void func_800AC214(SequenceChannel* channel) {
     channel->reverbIndex = 0;
     channel->transposition = 0;
     channel->largeNotes = 0;
-    
+
     channel->changes.asByte = 0xFF;
     channel->scriptState.depth = 0;
-    
+
     channel->unkPan = 0x40;
     channel->unkPan2 = 0x80;
-    
+
     channel->velocityRandomVariance = 0;
     channel->gateTimeRandomVariance = 0;
-    
+
     channel->noteUnused = NULL;
     channel->targetReverbVol = 0;
 
     channel->notePriority = 3;
     channel->notePriority2 = 1;
-    
+
     channel->delay = 0;
-    
+
     channel->adsr.envelope = gDefaultEnvelope;
     channel->adsr.decayIndex = 0xF0;
     channel->adsr.sustain = 0;
@@ -128,7 +128,7 @@ void func_800AC214(SequenceChannel* channel) {
     channel->volume = 1.0f;
     channel->volumeMod = 1.0f;
     channel->freqMod = 1.0f;
-    
+
     for (i = 0; i < 8; i++) {
         channel->seqScriptIO[i] = -1;
     }
@@ -405,8 +405,7 @@ void func_800ACA84(SequenceLayer* layer) {
         func_800AAF5C(layer);
     }
 
-    if ((layer->portamento.mode & ~0x80) == 1 ||
-        (layer->portamento.mode & ~0x80) == 2) {
+    if ((layer->portamento.mode & ~0x80) == 1 || (layer->portamento.mode & ~0x80) == 2) {
         layer->portamento.mode = 0;
     }
     layer->notePropertiesNeedInit = true;
@@ -432,10 +431,10 @@ s32 func_800ACB10(SequenceLayer* layer, s32 sameTunedSample) {
         if (!sameTunedSample) {
             func_800AAF5C(layer);
         }
-    
+
         layer->note = func_800AB710(layer);
     }
-    
+
     if (layer->note != NULL && layer->note->playbackState.parentLayer == layer) {
         note = layer->note;
 
@@ -523,8 +522,7 @@ s32 func_800ACC28(SequenceLayer* layer) {
                         layer->adsr.decayIndex = 0;
                     }
                 } else {
-                    if ((layer->instOrWave = func_800AD704(channel, cmd, &layer->instrument, &layer->adsr)) ==
-                        0) {
+                    if ((layer->instOrWave = func_800AD704(channel, cmd, &layer->instrument, &layer->adsr)) == 0) {
                         layer->instOrWave = 0xFF;
                     }
                 }
@@ -559,7 +557,7 @@ s32 func_800ACC28(SequenceLayer* layer) {
 
             case 0xCB:
                 cmdArg = func_800AC908(state);
-                layer->adsr.envelope = (EnvelopePoint*)(seqPlayer->seqData + (u16)cmdArg);
+                layer->adsr.envelope = (EnvelopePoint*) (seqPlayer->seqData + (u16) cmdArg);
                 /* fallthrough */
             case 0xCF:
                 layer->adsr.decayIndex = func_800AC8F4(state);
@@ -575,7 +573,7 @@ s32 func_800ACC28(SequenceLayer* layer) {
 
             case 0xCE:
                 cmdArg = func_800AC8F4(state);
-                layer->bend = gBendPitchTwoSemitonesFrequencies[(u8)(cmdArg + 0x80)];
+                layer->bend = gBendPitchTwoSemitonesFrequencies[(u8) (cmdArg + 0x80)];
                 break;
 
             default:
@@ -678,7 +676,7 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
                     }
                 }
 
-                temp_fv1 = gPitchFrequencies[(s32)semitone] * tuning;
+                temp_fv1 = gPitchFrequencies[(s32) semitone] * tuning;
                 temp_fa1 = gPitchFrequencies[layer->portamentoTargetNote] * tuning;
 
                 switch (layer->portamento.mode & ~0x80) {
@@ -702,7 +700,8 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
                 portamento->extent = (freqMod2 / freqMod) - 1.0f;
 
                 if (layer->portamento.mode & 0x80) {
-                    portamento->speed = ((s32)seqPlayer->tempo * 32512.0f) / ((f32)layer->delay * (f32)gMaxTempo * (f32)(s32)layer->portamentoTime);
+                    portamento->speed = ((s32) seqPlayer->tempo * 32512.0f) /
+                                        ((f32) layer->delay * (f32) gMaxTempo * (f32) (s32) layer->portamentoTime);
                 } else {
                     portamento->speed = 127.0f / (s32) layer->portamentoTime;
                 }
@@ -719,10 +718,10 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
                 tunedSample = func_800AACF0(instrument, semitone);
                 sameTunedSample = (tunedSample == layer->tunedSample);
                 layer->tunedSample = tunedSample;
-                layer->freqMod = gPitchFrequencies[(s32)semitone] * tunedSample->tuning;
+                layer->freqMod = gPitchFrequencies[(s32) semitone] * tunedSample->tuning;
             } else {
                 layer->tunedSample = NULL;
-                layer->freqMod = gPitchFrequencies[(s32)semitone];
+                layer->freqMod = gPitchFrequencies[(s32) semitone];
                 if (instOrWave >= 0xC0) {
                     layer->tunedSample = &gSynthesisReverbs[instOrWave - 0xC0].tunedSample;
                 }
@@ -778,7 +777,7 @@ s32 func_800AD378(SequenceLayer* layer, s32 cmd) {
             break;
     }
 
-    layer->velocitySquare2 = SQ((f32)velocity) / SQ(127.0f);
+    layer->velocitySquare2 = SQ((f32) velocity) / SQ(127.0f);
     cmd -= (cmd & 0xC0);
 
     if (channel->velocityRandomVariance != 0) {
@@ -863,7 +862,7 @@ void func_800AD774(SequenceChannel* channel, u8 instId) {
     } else if (instId == 0x7F) {
         // Drums
         channel->instOrWave = 0;
-        channel->instrument = (Instrument*)1; // invalid pointer, never dereferenced
+        channel->instrument = (Instrument*) 1; // invalid pointer, never dereferenced
     } else {
         // Instruments
         if ((channel->instOrWave = func_800AD704(channel, instId, &channel->instrument, &channel->adsr)) == 0) {
@@ -876,7 +875,7 @@ void func_800AD774(SequenceChannel* channel, u8 instId) {
 }
 
 void func_800AD804(SequenceChannel* channel, u8 volume) {
-    channel->volume = (s32)volume / 127.0f;
+    channel->volume = (s32) volume / 127.0f;
 }
 
 extern u8 sSeqInstructionArgsTable[];
@@ -944,7 +943,7 @@ void func_800AD828(SequenceChannel* channel) {
 
                 case 0xF1:
                     func_800AB0AC(&channel->notePool);
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     func_800AB204(&channel->notePool, cmd);
                     break;
 
@@ -953,23 +952,23 @@ void func_800AD828(SequenceChannel* channel) {
                     break;
 
                 case 0xC2:
-                    cmdArgU16 = (u16)cmdArgs[0];
-                    channel->dynTable = (void*)&seqPlayer->seqData[cmdArgU16];
+                    cmdArgU16 = (u16) cmdArgs[0];
+                    channel->dynTable = (void*) &seqPlayer->seqData[cmdArgU16];
                     break;
 
                 case 0xC5:
                     if (scriptState->value != -1) {
                         data = (*channel->dynTable)[scriptState->value];
-                        cmdArgU16 = (u16)((data[0] << 8) + data[1]);
+                        cmdArgU16 = (u16) ((data[0] << 8) + data[1]);
 
-                        channel->dynTable = (void*)&seqPlayer->seqData[cmdArgU16];
+                        channel->dynTable = (void*) &seqPlayer->seqData[cmdArgU16];
                     }
                     break;
 
                 case 0xEB:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
 
-                    cmdArgU16 = ((u16*)gSeqFontTable)[seqPlayer->seqId];
+                    cmdArgU16 = ((u16*) gSeqFontTable)[seqPlayer->seqId];
                     lowBits = gSeqFontTable[cmdArgU16];
                     cmd = gSeqFontTable[cmdArgU16 + lowBits - cmd];
 
@@ -980,7 +979,7 @@ void func_800AD828(SequenceChannel* channel) {
                     cmdArgs[0] = cmdArgs[1];
                     /* fallthrough */
                 case 0xC1:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     func_800AD774(channel, cmd);
                     break;
 
@@ -993,73 +992,73 @@ void func_800AD828(SequenceChannel* channel) {
                     break;
 
                 case 0xDF:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     func_800AD804(channel, cmd);
                     channel->changes.s.volume = true;
                     break;
 
                 case 0xE0:
-                    cmd = (u8)cmdArgs[0];
-                    channel->volumeMod = (s32)cmd / 128.0f;
+                    cmd = (u8) cmdArgs[0];
+                    channel->volumeMod = (s32) cmd / 128.0f;
                     channel->changes.s.volume = true;
                     break;
 
                 case 0xDE:
-                    cmdArgU16 = (u16)cmdArgs[0];
-                    channel->freqMod = (s32)cmdArgU16 / 32768.0f;
+                    cmdArgU16 = (u16) cmdArgs[0];
+                    channel->freqMod = (s32) cmdArgU16 / 32768.0f;
                     channel->changes.s.freqMod = true;
                     break;
 
                 case 0xD3:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     cmd += 0x80;
                     channel->freqMod = gBendPitchOneOctaveFrequencies[cmd];
                     channel->changes.s.freqMod = true;
                     break;
 
                 case 0xEE:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     cmd += 0x80;
                     channel->freqMod = gBendPitchTwoSemitonesFrequencies[cmd];
                     channel->changes.s.freqMod = true;
                     break;
 
                 case 0xDD:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     channel->unkPan = cmd;
                     channel->changes.s.pan = true;
                     break;
 
                 case 0xDC:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     channel->unkPan2 = cmd;
                     channel->changes.s.pan = true;
                     break;
 
                 case 0xDB:
-                    cmdArgS8 = (s8)cmdArgs[0];
+                    cmdArgS8 = (s8) cmdArgs[0];
                     channel->transposition = cmdArgS8;
                     break;
 
                 case 0xDA:
-                    cmdArgU16 = (u16)cmdArgs[0];
-                    channel->adsr.envelope = (EnvelopePoint*)&seqPlayer->seqData[cmdArgU16];
+                    cmdArgU16 = (u16) cmdArgs[0];
+                    channel->adsr.envelope = (EnvelopePoint*) &seqPlayer->seqData[cmdArgU16];
                     break;
 
                 case 0xD9:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     channel->adsr.decayIndex = cmd;
                     break;
 
                 case 0xD4:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     channel->targetReverbVol = cmd;
                     break;
 
                 case 0xC6:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
 
-                    cmdArgU16 = ((u16*)gSeqFontTable)[seqPlayer->seqId];
+                    cmdArgU16 = ((u16*) gSeqFontTable)[seqPlayer->seqId];
                     lowBits = gSeqFontTable[cmdArgU16];
                     cmd = gSeqFontTable[cmdArgU16 + lowBits - cmd];
 
@@ -1069,16 +1068,16 @@ void func_800AD828(SequenceChannel* channel) {
                     break;
 
                 case 0xC7:
-                    cmd = (u8)cmdArgs[0];
-                    cmdArgU16 = (u16)cmdArgs[1];
+                    cmd = (u8) cmdArgs[0];
+                    cmdArgU16 = (u16) cmdArgs[1];
                     seqData = &seqPlayer->seqData[cmdArgU16];
-                    seqData[0] = (u8)scriptState->value + cmd;
+                    seqData[0] = (u8) scriptState->value + cmd;
                     break;
 
                 case 0xC8:
                 case 0xCC:
                 case 0xC9:
-                    cmdArgS8 = (s8)cmdArgs[0];
+                    cmdArgS8 = (s8) cmdArgs[0];
 
                     if (cmd == 0xC8) {
                         scriptState->value -= cmdArgS8;
@@ -1090,29 +1089,27 @@ void func_800AD828(SequenceChannel* channel) {
                     break;
 
                 case 0xCD:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     func_800AC4C8(seqPlayer->channels[cmd]);
                     break;
 
-
                 case 0xCB:
-                    cmdArgU16 = (u16)cmdArgs[0];
-                    scriptState->value = *(seqPlayer->seqData + (u32)(cmdArgU16 + scriptState->value));
+                    cmdArgU16 = (u16) cmdArgs[0];
+                    scriptState->value = *(seqPlayer->seqData + (u32) (cmdArgU16 + scriptState->value));
                     break;
 
                 case 0xD0:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     channel->reverbIndex = cmd;
                     break;
 
-
                 case 0xD1:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     channel->noteAllocPolicy = cmd;
                     break;
 
                 case 0xD2:
-                    cmd = (u8)cmdArgs[0];
+                    cmd = (u8) cmdArgs[0];
                     channel->adsr.sustain = cmd;
                     break;
 
@@ -1121,18 +1118,18 @@ void func_800AD828(SequenceChannel* channel) {
                         data = (*channel->dynTable)[scriptState->value];
                         //! @bug: Missing a stack depth check here
                         scriptState->stack[scriptState->depth++] = scriptState->pc;
-                        cmdArgU16 = (u16)((data[0] << 8) + data[1]);
+                        cmdArgU16 = (u16) ((data[0] << 8) + data[1]);
                         scriptState->pc = seqPlayer->seqData + cmdArgU16;
                     }
                     break;
 
                 case 0xE7:
-                    cmdArgU16 = (u16)cmdArgs[0];
+                    cmdArgU16 = (u16) cmdArgs[0];
                     data = &seqPlayer->seqData[cmdArgU16];
                     channel->muteBehavior = *data++;
                     channel->noteAllocPolicy = *data++;
                     func_800AD6D4(channel, *data++);
-                    channel->transposition = (s8)*data++;
+                    channel->transposition = (s8) *data++;
                     channel->unkPan = *data++;
                     channel->unkPan2 = *data++;
                     channel->targetReverbVol = *data++;
@@ -1142,13 +1139,13 @@ void func_800AD828(SequenceChannel* channel) {
                 case 0xE8:
                     channel->muteBehavior = cmdArgs[0];
                     channel->noteAllocPolicy = cmdArgs[1];
-                    cmd = (u8)cmdArgs[2];
+                    cmd = (u8) cmdArgs[2];
                     func_800AD6D4(channel, cmd);
-                    channel->transposition = (s8)func_800AC8F4(scriptState);
+                    channel->transposition = (s8) func_800AC8F4(scriptState);
                     channel->unkPan = func_800AC8F4(scriptState);
                     channel->unkPan2 = func_800AC8F4(scriptState);
                     channel->targetReverbVol = func_800AC8F4(scriptState);
-                     func_800AC8F4(scriptState);
+                    func_800AC8F4(scriptState);
                     //! @bug: Not marking reverb state as changed
                     channel->changes.s.pan = true;
                     break;
@@ -1160,45 +1157,43 @@ void func_800AD828(SequenceChannel* channel) {
                     break;
 
                 case 0xE9:
-                    func_800AD6D4(channel, (u8)cmdArgs[0]);
+                    func_800AD6D4(channel, (u8) cmdArgs[0]);
                     break;
 
                 case 0xCE:
-                    cmdArgU16 = (u16)cmdArgs[0];
+                    cmdArgU16 = (u16) cmdArgs[0];
                     channel->unkB8 = cmdArgU16;
                     break;
 
                 case 0xCF:
-                    cmdArgU16 = (u16)cmdArgs[0];
+                    cmdArgU16 = (u16) cmdArgs[0];
                     seqData = seqPlayer->seqData + cmdArgU16;
                     seqData[0] = (channel->unkB8 >> 8) & 0xFF;
                     seqData[1] = channel->unkB8 & 0xFF;
                     break;
 
                 case 0xB2:
-                    cmdArgU16 = (u16)cmdArgs[0];
-                    channel->unkB8 = *(u16*)(seqPlayer->seqData + (u32)(cmdArgU16 + scriptState->value * 2));
+                    cmdArgU16 = (u16) cmdArgs[0];
+                    channel->unkB8 = *(u16*) (seqPlayer->seqData + (u32) (cmdArgU16 + scriptState->value * 2));
                     break;
 
                 case 0xB4:
-                    channel->dynTable = (void*)&seqPlayer->seqData[channel->unkB8];
+                    channel->dynTable = (void*) &seqPlayer->seqData[channel->unkB8];
                     break;
 
                 case 0xB5:
-                    channel->unkB8 = ((u16*)(channel->dynTable))[scriptState->value];
+                    channel->unkB8 = ((u16*) (channel->dynTable))[scriptState->value];
                     break;
 
                 case 0xB6:
                     scriptState->value = (*channel->dynTable)[0][scriptState->value];
                     break;
-
             }
             continue;
         }
 
         if (cmd >= 0x80) {
             lowBits = cmd & 0x7;
-
 
             switch (cmd & 0xF8) {
                 case 0x80:
@@ -1242,7 +1237,7 @@ void func_800AD828(SequenceChannel* channel) {
 
                 channel->seqScriptIO[lowBits] = SEQ_IO_VAL_NONE;
                 if (func_800B0D30(channel->fontId, scriptState->value, &channel->seqScriptIO[lowBits]) == -1) {}
-                
+
                 break;
             case 0x70:
                 channel->seqScriptIO[lowBits] = scriptState->value;
@@ -1312,11 +1307,11 @@ void func_800AE19C(SequencePlayer* seqPlayer) {
     seqPlayer->scriptCounter++;
 
     seqPlayer->tempoAcc += seqPlayer->tempo;
-    seqPlayer->tempoAcc += (s16)seqPlayer->tempoChange;
+    seqPlayer->tempoAcc += (s16) seqPlayer->tempoChange;
     if (seqPlayer->tempoAcc < gMaxTempo) {
         return;
     }
-    seqPlayer->tempoAcc -= (u16)gMaxTempo;
+    seqPlayer->tempoAcc -= (u16) gMaxTempo;
 
     if (seqPlayer->delay > 1) {
         seqPlayer->delay--;
@@ -1346,22 +1341,22 @@ void func_800AE19C(SequencePlayer* seqPlayer) {
                         seqPlayer->transposition = 0;
                         /* fallthrough */
                     case 0xDE:
-                        seqPlayer->transposition += (s8)func_800AC8F4(seqScript);
+                        seqPlayer->transposition += (s8) func_800AC8F4(seqScript);
                         break;
 
                     case 0xDD:
                         seqPlayer->tempo = func_800AC8F4(seqScript) * SEQTICKS_PER_BEAT;
                         if (seqPlayer->tempo > gMaxTempo) {
-                            seqPlayer->tempo = (u16)gMaxTempo;
+                            seqPlayer->tempo = (u16) gMaxTempo;
                         }
 
-                        if ((s16)seqPlayer->tempo <= 0) {
+                        if ((s16) seqPlayer->tempo <= 0) {
                             seqPlayer->tempo = 1;
                         }
                         break;
 
                     case 0xDC:
-                        seqPlayer->tempoChange = (s8)func_800AC8F4(seqScript) * SEQTICKS_PER_BEAT;
+                        seqPlayer->tempoChange = (s8) func_800AC8F4(seqScript) * SEQTICKS_PER_BEAT;
                         break;
 
                     case 0xDA:
@@ -1370,11 +1365,11 @@ void func_800AE19C(SequencePlayer* seqPlayer) {
                         break;
 
                     case 0xDB:
-                        seqPlayer->fadeVolume = (s32)func_800AC8F4(seqScript) / 127.0f;
+                        seqPlayer->fadeVolume = (s32) func_800AC8F4(seqScript) / 127.0f;
                         break;
 
                     case 0xD9:
-                        seqPlayer->fadeVolumeMod = (s8)func_800AC8F4(seqScript) / 127.0f;
+                        seqPlayer->fadeVolumeMod = (s8) func_800AC8F4(seqScript) / 127.0f;
                         break;
 
                     case 0xD7:
@@ -1414,10 +1409,8 @@ void func_800AE19C(SequencePlayer* seqPlayer) {
                         cmd = func_800AC8F4(seqScript);
                         temp = func_800AC908(seqScript);
                         data2 = &seqPlayer->seqData[temp];
-                        *data2 = (u8)seqScript->value + cmd;
+                        *data2 = (u8) seqScript->value + cmd;
                         break;
-                    
-
                 }
                 continue;
             }
@@ -1450,7 +1443,7 @@ void func_800AE19C(SequencePlayer* seqPlayer) {
 
                 case 0x90:
                     temp = func_800AC908(seqScript);
-                    func_800AC6AC(seqPlayer, cmdLowBits, (void*)&seqPlayer->seqData[temp]);
+                    func_800AC6AC(seqPlayer, cmdLowBits, (void*) &seqPlayer->seqData[temp]);
                     break;
             }
         }
@@ -1469,7 +1462,7 @@ void func_800AE624(s32 arg0) {
     SequencePlayer* seqPlayer;
     u32 i;
 
-    for (i = 0; i < (u32)gAudioBufferParams.numSequencePlayers; i++) {
+    for (i = 0; i < (u32) gAudioBufferParams.numSequencePlayers; i++) {
         seqPlayer = &gSeqPlayers[i];
         if (seqPlayer->enabled == true) {
             func_800AE19C(seqPlayer);
@@ -1568,7 +1561,7 @@ void func_800AE8F0(void) {
         seqPlayer->muted = false;
         seqPlayer->fontDmaInProgress = false;
         seqPlayer->seqDmaInProgress = false;
-    
+
         func_800AAFAC(&seqPlayer->notePool);
         func_800AE700(i);
     }
