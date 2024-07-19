@@ -16,7 +16,7 @@ void func_800AB9A0(SequenceChannel* channel, s32 updateVolume) {
         SequenceLayer* layer = channel->layers[i];
 
         if ((layer != NULL) && layer->enabled && (layer->note != NULL)) {
-            if (layer->ignoreDrumPan) {
+            if (layer->notePropertiesNeedInit) {
                 layer->noteFreqMod = layer->freqMod * channel->freqMod;
                 layer->noteVelocity = layer->velocitySquare * channel->appliedVolume;
                 if (channel->unkPan2 == 0) {
@@ -24,7 +24,7 @@ void func_800AB9A0(SequenceChannel* channel, s32 updateVolume) {
                 } else {
                     layer->notePan = channel->pan;
                 }
-                layer->ignoreDrumPan = false;
+                layer->notePropertiesNeedInit = false;
             } else {
                 if (channel->changes.s.freqMod) {
                     layer->noteFreqMod = layer->freqMod * channel->freqMod;
@@ -56,8 +56,6 @@ void func_800ABAFC(SequencePlayer* seqPlayer) {
 
     seqPlayer->recalculateVolume = false;
 }
-
-extern f32 gBendPitchOneOctaveFrequencies[];
 
 f32 func_800ABBA4(Portamento* portamento) {
     u32 loResCur;
