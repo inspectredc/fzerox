@@ -1,7 +1,7 @@
 #include "global.h"
 
 // Appears to be a custom version of osAiSetNextBuffer
-s32 func_800B4BC0(void* buff, u32 len) {
+s32 osAiSetNextBuffer(void* buff, u32 len) {
     static u8 hdwrBugFlag = false;
     u8* bptr;
     u32 status;

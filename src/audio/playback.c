@@ -94,7 +94,6 @@ void func_800AAF7C(SequenceLayer* layer);
 void func_800AB380(Note* note);
 void func_800AB340(AudioListItem* item1, AudioListItem* item2);
 void func_800AB41C(Note* note, SequenceLayer* layer);
-void func_800ABCB4(Note* note);
 void func_800AC7F0(AudioListItem* list, AudioListItem* item);
 f32 func_800ABD0C(AdsrState* adsr);
 void func_800ABC78(Note* note);
@@ -212,12 +211,12 @@ void func_800AA940(void) {
     }
 }
 
-TunedSample* func_800AACF0(Instrument* instrument, s32 arg1) {
+TunedSample* func_800AACF0(Instrument* instrument, s32 semitone) {
     TunedSample* sample;
 
-    if (arg1 < instrument->normalRangeLo) {
+    if (semitone < instrument->normalRangeLo) {
         sample = &instrument->lowPitchTunedSample;
-    } else if (arg1 <= instrument->normalRangeHi) {
+    } else if (semitone <= instrument->normalRangeHi) {
         sample = &instrument->normalPitchTunedSample;
     } else {
         sample = &instrument->highPitchTunedSample;
@@ -225,21 +224,20 @@ TunedSample* func_800AACF0(Instrument* instrument, s32 arg1) {
     return sample;
 }
 
-// Some part of the audio context
 typedef struct {
     s8 unk_00[0x4];
-    s32* unk_04;
-    s32* unk_08;
-} unk;
+    Instrument** instruments;
+    Drum** drums;
+} SoundFont;
 
-extern unk* D_8002AA18;
+extern SoundFont* gSoundFontList;
 
-s32 func_800AAD2C(s32 arg0, s32 arg1) {
-    return D_8002AA18[arg0].unk_04[arg1];
+Instrument* func_800AAD2C(s32 arg0, s32 arg1) {
+    return gSoundFontList[arg0].instruments[arg1];
 }
 
-s32 func_800AAD58(s32 arg0, s32 arg1) {
-    return D_8002AA18[arg0].unk_08[arg1];
+Drum* func_800AAD58(s32 arg0, s32 arg1) {
+    return gSoundFontList[arg0].drums[arg1];
 }
 
 void func_800AB380(Note*);
@@ -476,7 +474,7 @@ void func_800AB41C(Note* note, SequenceLayer* layer) {
     note->playbackState.prevParentLayer = NO_LAYER;
     note->playbackState.parentLayer = layer;
     playbackState->priority = layer->channel->notePriority;
-    layer->ignoreDrumPan = true;
+    layer->notePropertiesNeedInit = true;
     layer->unk_2 = 3;
     layer->note = note;
     layer->channel->noteUnused = note;
