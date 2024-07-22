@@ -1,5 +1,3 @@
-D_800D0AC4 = 0x800D0AC4; //type:asciz
-
 D_800D35D8 = 0x800D35D8; //size:0xB8
 
 D_800D5AA8 = 0x800D5AA8; //force_migration:True
@@ -221,4 +219,18 @@ gPitchFrequencies = 0x800D0230;
 gDefaultShortNoteVelocityTable = 0x800D0430;
 gDefaultShortNoteGateTimeTable = 0x800D0440;
 
+sDmaHandler = 0x800D0AC0;
+sUnusedHandler = 0x800D0AC4;
+
 osAiSetNextBuffer = 0x800B4BC0;
+
+gInitPoolSize = 0x800D1C70;
+gPermanentPoolSize = 0x800D1C74;
+gAudioContextInitialized = 0x800D0CC4;
+
+gSoundFontTableData = 0x800D7F80;
+gSequenceFontTableData = 0x800D7FB0;
+gSequenceTableData = 0x800D7FC0;
+gSampleBankTableData = 0x800D7FF0;
+
+gSlowLoads = 0x800F89F0;

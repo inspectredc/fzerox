@@ -224,14 +224,6 @@ TunedSample* func_800AACF0(Instrument* instrument, s32 semitone) {
     return sample;
 }
 
-typedef struct {
-    s8 unk_00[0x4];
-    Instrument** instruments;
-    Drum** drums;
-} SoundFont;
-
-extern SoundFont* gSoundFontList;
-
 Instrument* func_800AAD2C(s32 arg0, s32 arg1) {
     return gSoundFontList[arg0].instruments[arg1];
 }
