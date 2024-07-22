@@ -263,9 +263,7 @@ void func_800AC6AC(SequencePlayer* seqPlayer, u8 channelIndex, void* script) {
 }
 
 extern AudioCache gFontCache;
-s32 func_800AF2C4(s32);
 void func_800AF36C(s32, s32);
-s32 func_800AF288(s32);
 void func_800AF33C(s32, s32);
 
 void func_800AC744(SequencePlayer* seqPlayer) {
@@ -879,7 +877,6 @@ void func_800AD804(SequenceChannel* channel, u8 volume) {
 }
 
 extern u8 sSeqInstructionArgsTable[];
-extern u8* gSeqFontTable;
 
 void func_800AD828(SequenceChannel* channel) {
     u8* data;
