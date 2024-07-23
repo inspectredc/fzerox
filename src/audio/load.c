@@ -897,8 +897,8 @@ void func_800B079C(void* heap, u32 heapSize) {
 
     gResetTimer = 0;
 
-    for (i = 0; i < D_800D1C6C / (s32) sizeof(s64); i++) {
-        D_8002B400[i] = 0;
+    for (i = 0; i < gAudioHeapSize / (s32) sizeof(s64); i++) {
+        ((s64*) gAudioHeap)[i] = 0;
     }
 
     {
@@ -982,7 +982,6 @@ void func_800B079C(void* heap, u32 heapSize) {
     gAudioContextInitialized = true;
 }
 
-void* func_800B4350(size_t, s32, void*, s8);
 Sample* func_800B0EE0(s32, s32);
 
 s32 func_800B0D30(s32 fontId, u8 instId, s8* status) {

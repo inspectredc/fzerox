@@ -226,11 +226,15 @@ osAiSetNextBuffer = 0x800B4BC0;
 
 gInitPoolSize = 0x800D1C70;
 gPermanentPoolSize = 0x800D1C74;
+gAudioHeapSize = 0x800D1C6C;
 gAudioContextInitialized = 0x800D0CC4;
 
 gSoundFontTableData = 0x800D7F80;
 gSequenceFontTableData = 0x800D7FB0;
 gSequenceTableData = 0x800D7FC0;
 gSampleBankTableData = 0x800D7FF0;
+
+gAudioSpecs = 0x800D1C34;
+gSeqTicksPerBeat = 0x800D1C68;
 
 gSlowLoads = 0x800F89F0;
