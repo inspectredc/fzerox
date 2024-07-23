@@ -91,10 +91,8 @@ void func_800AA8E4(Note* note) {
 
 void func_800AC4C8(SequenceChannel* channel);
 void func_800AAF7C(SequenceLayer* layer);
-void func_800AB380(Note* note);
 void func_800AB340(AudioListItem* item1, AudioListItem* item2);
 void func_800AB41C(Note* note, SequenceLayer* layer);
-void func_800AC7F0(AudioListItem* list, AudioListItem* item);
 f32 func_800ABD0C(AdsrState* adsr);
 void func_800ABC78(Note* note);
 
@@ -224,12 +222,12 @@ TunedSample* func_800AACF0(Instrument* instrument, s32 semitone) {
     return sample;
 }
 
-Instrument* func_800AAD2C(s32 arg0, s32 arg1) {
-    return gSoundFontList[arg0].instruments[arg1];
+Instrument* func_800AAD2C(s32 fontId, s32 instId) {
+    return gSoundFontList[fontId].instruments[instId];
 }
 
-Drum* func_800AAD58(s32 arg0, s32 arg1) {
-    return gSoundFontList[arg0].drums[arg1];
+Drum* func_800AAD58(s32 fontId, s32 drumId) {
+    return gSoundFontList[fontId].drums[drumId];
 }
 
 void func_800AB380(Note*);
@@ -320,8 +318,6 @@ void func_800AAFAC(NotePool* pool) {
     pool->releasing.pool = pool;
     pool->active.pool = pool;
 }
-
-extern NotePool gNoteFreeLists;
 
 void func_800AAFFC(void) {
     s32 i;

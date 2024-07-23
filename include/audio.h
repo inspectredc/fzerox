@@ -16,8 +16,41 @@ typedef struct {
 } AudioAllocPool; // size = 0x10
 
 typedef struct {
+    /* 0x0 */ size_t miscPoolSize;
+    /* 0x4 */ size_t unkSizes[2];
+    /* 0xC */ size_t cachePoolSize;
+} AudioSessionPoolSplit; // size = 0x10
+
+typedef struct {
+    /* 0x0 */ size_t persistentCommonPoolSize;
+    /* 0x4 */ size_t temporaryCommonPoolSize;
+} AudioCachePoolSplit; // size = 0x8
+
+typedef struct {
+    /* 0x0 */ size_t seqCacheSize;
+    /* 0x4 */ size_t fontCacheSize;
+    /* 0x8 */ size_t sampleBankCacheSize;
+} AudioCommonPoolSplit; // size = 0xC
+
+typedef struct {
+    /* 0x00 */ s8 inUse;
+    /* 0x01 */ s8 origMedium;
+    /* 0x02 */ s8 sampleBankId;
+    /* 0x03 */ char unk_03[0x5];
+    /* 0x08 */ u8* allocatedAddr;
+    /* 0x0C */ void* sampleAddr;
+    /* 0x10 */ size_t size;
+} SampleCacheEntry; // size = 0x14
+
+typedef struct {
+    /* 0x000 */ AudioAllocPool pool;
+    /* 0x010 */ SampleCacheEntry entries[32];
+    /* 0x150 */ s32 numEntries;
+} AudioSampleCache; // size = 0x154
+
+typedef struct {
     /* 0x0 */ u8* ramAddr;
-    /* 0x4 */ u32 size;
+    /* 0x4 */ size_t size;
     /* 0x8 */ s16 tableType;
     /* 0xA */ s16 id;
 } AudioCacheEntry; // size = 0xC
@@ -49,10 +82,10 @@ typedef struct {
     /* 0x01 */ s8 delay;
     /* 0x02 */ s8 medium;
     /* 0x04 */ u8* ramAddr;
-    /* 0x08 */ u32 curDevAddr;
+    /* 0x08 */ uintptr_t curDevAddr;
     /* 0x0C */ u8* curRamAddr;
     /* 0x10 */ u32 bytesRemaining;
-    /* 0x14 */ u32 chunkSize;
+    /* 0x14 */ size_t chunkSize;
     /* 0x18 */ OSMesg retMsg;
     /* 0x1C */ OSMesgQueue* retQueue;
     /* 0x20 */ OSMesgQueue mesgQueue;
@@ -70,20 +103,56 @@ typedef struct {
 } SampleBankRelocInfo; // size = 0x18
 
 typedef struct {
+    /* 0x00 */ u8 downsampleRate;
+    /* 0x01 */ u8 windowSize;
+    /* 0x02 */ u16 decayRatio; // determines how much reverb persists
+    /* 0x04 */ u16 volume;
+    /* 0x06 */ u16 leakRtL;
+    /* 0x08 */ u16 leakLtR;
+    /* 0x0A */ s8 unk_0A;
+    /* 0x0C */ u16 unk_0C;
+    /* 0x0E */ s8 padE[0x4];
+} ReverbSettings; // size = 0x12
+
+/**
+ * The high-level audio specifications requested when initializing or resetting the audio heap.
+ * The audio heap can be reset on various occasions, including on most scene transitions.
+ */
+typedef struct {
+    /* 0x00 */ u32 samplingFrequency; // Target sampling rate in Hz
+    /* 0x04 */ u8 numBuffers;
+    /* 0x05 */ u8 numNotes;
+    /* 0x06 */ u8 numSequencePlayers;
+    /* 0x07 */ u8 numReverbs;
+    /* 0x08 */ ReverbSettings* reverbSettings;
+    /* 0x0C */ u16 unk_14;
+    /* 0x10 */ size_t persistentSeqCacheSize;  // size of cache on audio pool to store sequences persistently
+    /* 0x14 */ size_t persistentFontCacheSize; // size of cache on audio pool to store soundFonts persistently
+    /* 0x18 */ size_t persistentSampleBankCacheSize;      // size of cache on audio pool to store entire sample banks persistently
+    /* 0x1C */ size_t temporarySeqCacheSize;   // size of cache on audio pool to store sequences temporarily
+    /* 0x20 */ size_t temporaryFontCacheSize;  // size of cache on audio pool to store soundFonts temporarily
+    /* 0x24 */ size_t temporarySampleBankCacheSize; // size of cache on audio pool to store entire sample banks temporarily
+    /* 0x28 */ size_t persistentSampleCacheSize; // size of cache in the audio misc pool to store individual samples persistently
+    /* 0x2C */ size_t temporarySampleCacheSize;  // size of cache in the audio misc pool to store individual samples temporarily
+} AudioSpec; // size = 0x30
+
+typedef struct {
     /* 0x00 */ s16 count;
-    /* 0x02 */ u16 samplingFrequency;
-    /* 0x04 */ u16 aiSamplingFrequency;
+    /* 0x02 */ u16 samplingFrequency; // Target sampling rate in Hz
+    /* 0x04 */ u16 aiSamplingFrequency; // True sampling rate of the audio interface (AI), see `osAiSetFrequency`
     /* 0x06 */ s16 samplesPerFrameTarget;
     /* 0x08 */ s16 maxAiBufferLength;
     /* 0x0A */ s16 minAiBufferLength;
-    /* 0x0C */ s16 ticksPerUpdate;
+    /* 0x0C */ s16 ticksPerUpdate; // for each audio thread update, number of ticks to process audio
     /* 0x0E */ s16 samplesPerTick;
-    /* 0x10 */ s16 numSequencePlayers;
+    /* 0x10 */ s16 samplesPerTickMax;
     /* 0x12 */ s16 samplesPerTickMin;
+    /* 0x14 */ s16 numSequencePlayers;
     /* 0x18 */ f32 resampleRate;
-    /* 0x1C */ f32 ticksPerUpdateInv;
-    /* 0x20 */ f32 ticksPerUpdateInvScaled;
-} AudioBufferParameters; // size = 0x24
+    /* 0x1C */ f32 ticksPerUpdateInv; // inverse (reciprocal) of ticksPerUpdate
+    /* 0x20 */ f32 ticksPerUpdateInvScaled; // ticksPerUpdateInv scaled down by a factor of 256
+    /* 0x24 */ f32 ticksPerUpdateScaled; // ticksPerUpdate scaled down by a factor of 4
+} AudioBufferParameters; // size = 0x28
 
 typedef struct AudioListItem {
     // A node in a circularly linked list. Each node is either a head or an item:
@@ -420,14 +489,33 @@ typedef struct Note {
 } Note; // size = 0xA0
 
 typedef struct {
-    /* 0x000 */ s8 pad0[0xE8];
+    /* 0x000 */ u8 resampleFlags;
+    /* 0x001 */ u8 useReverb;
+    /* 0x002 */ u8 framesToIgnore;
+    /* 0x003 */ u8 curFrame;
+    /* 0x004 */ u8 downsampleRate;
+    /* 0x005 */ s8 unk_05;
+    /* 0x006 */ u16 windowSize;
+    /* 0x008 */ s16 unk_08;
+    /* 0x00A */ s16 volume;
+    /* 0x00C */ u16 decayRatio; // determines how much reverb persists
+    /* 0x00E */ u16 unk_0E;
+    /* 0x010 */ s16 leakRtL;
+    /* 0x012 */ s16 leakLtR;
+    /* 0x014 */ s32 nextRingBufPos;
+    /* 0x018 */ s32 unk_20;
+    /* 0x01C */ s32 bufSizePerChan;
+    /* 0x020 */ s16* leftRingBuf;
+    /* 0x024 */ s16* rightRingBuf;
+    /* 0x028 */ s8 pad28[0xC0];
     /* 0x0E8 */ TunedSample tunedSample;
-    /* 0x0F0 */ s8 pad[0x40];
+    /* 0x0F0 */ Sample sample;
+    /* 0x100 */ AdpcmLoop loop;
 } SynthesisReverb; // size = 0x130
 
 typedef struct {
     /* 0x00 */ u8* ramAddr;
-    /* 0x04 */ u32 devAddr;
+    /* 0x04 */ uintptr_t devAddr;
     /* 0x08 */ u16 sizeUnused;
     /* 0x0A */ u16 size;
     /* 0x0C */ u8 unused;
@@ -436,8 +524,8 @@ typedef struct {
 } SampleDma; // size = 0x10
 
 typedef struct {
-    /* 0x00 */ u32 romAddr;
-    /* 0x04 */ u32 size;
+    /* 0x00 */ uintptr_t romAddr;
+    /* 0x04 */ size_t size;
     /* 0x08 */ s8 medium;
     /* 0x09 */ s8 cachePolicy;
     /* 0x0A */ s16 shortData1;
@@ -448,7 +536,7 @@ typedef struct {
 typedef struct {
     /* 0x00 */ s16 numEntries;
     /* 0x02 */ s16 unkMediumParam;
-    /* 0x04 */ u32 romAddr;
+    /* 0x04 */ uintptr_t romAddr;
     /* 0x08 */ char pad[0x8];
     /* 0x10 */ AudioTableEntry entries[1]; // (dynamic size)
 } AudioTable;
@@ -464,7 +552,7 @@ typedef struct {
     /* 0x00 */ u8 medium;
     /* 0x01 */ u8 seqOrFontId;
     /* 0x02 */ u8 instId;
-    /* 0x04 */ u32 curDevAddr;
+    /* 0x04 */ uintptr_t curDevAddr;
     /* 0x08 */ u8* curRamAddr;
     /* 0x0C */ u8* ramAddr;
     /* 0x10 */ s32 state;
@@ -620,6 +708,7 @@ extern s8 gAudioSoundMode;
 extern f32 gDefaultPanVolume[128];
 extern s32 gNumNotes;
 extern Note* gNotes;
+extern NotePool gNoteFreeLists;
 extern NoteSubEu gZeroNoteSub;
 extern AudioAllocPool gMiscPool;
 extern EnvelopePoint gDefaultEnvelope[];
@@ -644,9 +733,9 @@ extern u8 gSampleDmaReuseQueue1RdPos;
 extern u8 gSampleDmaReuseQueue2RdPos;
 extern size_t gSampleDmaBufSize;
 extern AudioAllocPool gExternalPool;
-extern u8 gFontLoadStatus[];
-extern u8 gSeqLoadStatus[];
-extern u8 gSampleFontLoadStatus[];
+extern u8 gFontLoadStatus[0x30];
+extern u8 gSeqLoadStatus[0x30];
+extern u8 gSampleFontLoadStatus[0x30];
 extern u8* gSeqFontTable;
 extern AudioTable* gSequenceTable;
 extern AudioTable* gSoundFontTable;
@@ -688,8 +777,8 @@ extern u8 gSequenceFontTableData[];
 extern u8 gSequenceTableData[];
 extern u8 gSampleBankTableData[];
 
-extern u32 gInitPoolSize;
-extern u32 gPermanentPoolSize;
+extern size_t gInitPoolSize;
+extern size_t gPermanentPoolSize;
 extern s32 gAudioContextInitialized;
 
 extern u8 D_527AF0[];
@@ -698,8 +787,6 @@ extern u8 D_528730[];
 extern u8 gAudioCtxStart[];
 extern u8 gAudioCtxEnd[];
 extern s32 D_8002B3C0;
-extern s64 D_8002B400[];
-extern s32 D_800D1C6C;
 
 extern AudioSlowLoadBuffer gSlowLoads;
 extern AudioAsyncLoad gAsyncLoads[16];
@@ -709,25 +796,65 @@ extern s32 gNumUsedSamples;
 extern s32 gPreloadSampleStackTop;
 extern AudioPreloadReq gPreloadSampleStack[128];
 
+extern f32* gAdsrDecayTable;
+
+extern u8 gAudioHeap[0x3B000];
+extern s32 gAudioHeapSize;
+extern AudioAllocPool gSessionPool;
+extern AudioAllocPool gCachePool;
+extern AudioAllocPool gPersistentCommonPool;
+extern AudioAllocPool gTemporaryCommonPool;
+extern AudioCache gSeqCache;
+extern AudioCache gSampleBankCache;
+extern s8 gNumSynthReverbs;
+extern SynthesisReverb gSynthReverbs[1];
+extern s32 gResetFadeoutFramesLeft;
+extern s16 gMaxTempo;
+
+extern AudioSpec gAudioSpecs[];
+extern u16 D_80025D50;
+extern u16 D_80025D54;
+extern s16 gSeqTicksPerBeat;
+extern s32 gMaxAudioCmds;
+extern AudioSessionPoolSplit gSessionPoolSplit;
+extern AudioCachePoolSplit gCachePoolSplit;
+extern AudioCommonPoolSplit gPersistentCommonPoolSplit;
+extern AudioCommonPoolSplit gTemporaryCommonPoolSplit;
+extern NoteSubEu* gNoteSubsEu;
+extern Acmd* gAbiCmdBuffs[2];
+extern AudioSampleCache gPersistentSampleCache;
+extern AudioSampleCache gTemporarySampleCache;
+
+void func_800AA8E4(Note* note);
 void func_800AA940(void);
 TunedSample* func_800AACF0(Instrument* instrument, s32 semitone);
-Instrument* func_800AAD2C(s32 arg0, s32 arg1);
-Drum* func_800AAD58(s32 arg0, s32 arg1);
+Instrument* func_800AAD2C(s32 fontId, s32 instId);
+Drum* func_800AAD58(s32 fontId, s32 drumId);
 void func_800AAF5C(SequenceLayer* layer);
 void func_800AAFAC(NotePool* pool);
+void func_800AAFFC(void);
 void func_800AB204(NotePool* pool, s32 arg1);
+void func_800AB380(Note* note);
 Note* func_800AB710(SequenceLayer* layer);
+void func_800AB888(void);
 
 void func_800ABCB4(Note* note);
+void func_800AE7F8(s32 seqPlayerIndex);
+void func_800AE8F0(void);
+void func_800AEEA0(s32 numNotes);
 
 void func_800AC744(SequencePlayer* seqPlayer);
+void func_800AC7F0(AudioListItem* list, AudioListItem* item);
 void func_800AE6B0(SequencePlayer* seqPlayer);
 void func_800AE700(s32 seqPlayerIndex);
 
 bool func_800AF288(s32 fontId);
 bool func_800AF2C4(s32 seqId);
+void func_800AF33C(s32 fontId, s32 loadStatus);
 
 s32 func_800B0D30(s32 fontId, u8 instId, s8* status);
+void func_800B2324(void);
 void* func_800B3534(s32 tableType, s32 cache, s32 id);
+void* func_800B4350(size_t size, s32 fontId, void* sampleAddr, s8 medium);
 
 #endif

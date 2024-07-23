@@ -264,7 +264,6 @@ void func_800AC6AC(SequencePlayer* seqPlayer, u8 channelIndex, void* script) {
 
 extern AudioCache gFontCache;
 void func_800AF36C(s32, s32);
-void func_800AF33C(s32, s32);
 
 void func_800AC744(SequencePlayer* seqPlayer) {
     func_800AC62C(seqPlayer, 0xFFFF);
@@ -590,7 +589,6 @@ s32 func_800ACC28(SequenceLayer* layer) {
 }
 
 extern f32 gPitchFrequencies[];
-extern s16 gMaxTempo;
 Drum* func_800AAD58(s32 fontId, s32 drumId);
 
 s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
