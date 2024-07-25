@@ -86,6 +86,8 @@ gNoteSubsEu = 0x80025D64;
 gAbiCmdBuffs = 0x8002AA68;
 gPersistentSampleCache = 0x800262B8;
 gTemporarySampleCache = 0x80026550;
+gCurLoadedBook = 0x80025D60;
+gUseReverb = 0x80025D52;
 
 gAudioCtxStart = 0x80025C00;
 gAudioCtxEnd = 0x8002B3C0;

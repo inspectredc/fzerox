@@ -48,7 +48,7 @@
       - [0x48A10, c, audio/load]
       - [0x4C460, c, audio/heap]
       - [0x4EBC0, c, audio/aisetnextbuf]
-      - [0x4EC40, c, game/4EC40]
+      - [0x4EC40, c, audio/synthesis]
       - [0x4FFB0, c, game/4FFB0]
       - [0x511D0, c, game/511D0]
 
