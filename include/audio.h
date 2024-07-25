@@ -463,7 +463,9 @@ typedef struct {
 } NoteSubEu; // size = 0x10
 
 typedef struct {
-    /* 0x000 */ char pad[0x80];
+    /* 0x000 */ s16 adpcmdecState[16];
+    /* 0x020 */ s16 finalResampleState[16];
+    /* 0x040 */ char pad40[0x40];
 } NoteSynthesisBuffers; // size = 0x80
 
 typedef struct {
@@ -489,6 +491,16 @@ typedef struct Note {
 } Note; // size = 0xA0
 
 typedef struct {
+    /* 0x00 */ s16 numSamplesAfterDownsampling;
+    /* 0x02 */ s16 chunkLen;
+    /* 0x04 */ s16* toDownsampleLeft;
+    /* 0x08 */ s16* toDownsampleRight;
+    /* 0x0C */ s32 startPos;
+    /* 0x10 */ s16 lengthA;
+    /* 0x12 */ s16 lengthB;
+} ReverbRingBufferItem; // size = 0x14
+
+typedef struct {
     /* 0x000 */ u8 resampleFlags;
     /* 0x001 */ u8 useReverb;
     /* 0x002 */ u8 framesToIgnore;
@@ -497,7 +509,7 @@ typedef struct {
     /* 0x005 */ s8 unk_05;
     /* 0x006 */ u16 windowSize;
     /* 0x008 */ s16 unk_08;
-    /* 0x00A */ s16 volume;
+    /* 0x00A */ u16 volume;
     /* 0x00C */ u16 decayRatio; // determines how much reverb persists
     /* 0x00E */ u16 unk_0E;
     /* 0x010 */ s16 leakRtL;
@@ -507,7 +519,9 @@ typedef struct {
     /* 0x01C */ s32 bufSizePerChan;
     /* 0x020 */ s16* leftRingBuf;
     /* 0x024 */ s16* rightRingBuf;
-    /* 0x028 */ s8 pad28[0xC0];
+    /* 0x028 */ s8 pad28[0x10];
+    /* 0x038 */ ReverbRingBufferItem items[2][4];
+    /* 0x0D8 */ s8 padD8[0x10];
     /* 0x0E8 */ TunedSample tunedSample;
     /* 0x0F0 */ Sample sample;
     /* 0x100 */ AdpcmLoop loop;
@@ -702,6 +716,20 @@ typedef enum {
 #define AIBUF_LEN (88 * SAMPLES_PER_FRAME) // number of samples
 #define AIBUF_SIZE (AIBUF_LEN * SAMPLE_SIZE) // number of bytes
 
+#define DMEM_1CH_SIZE (13 * SAMPLES_PER_FRAME * SAMPLE_SIZE)
+#define DMEM_2CH_SIZE (2 * DMEM_1CH_SIZE)
+
+#define DMEM_TEMP 0x3C0
+#define DMEM_LEFT_CH 0x940
+#define DMEM_RIGHT_CH 0xAE0
+#define DMEM_WET_LEFT_CH 0xC80
+#define DMEM_WET_RIGHT_CH 0xE20
+
+#define DMEM_UNCOMPRESSED_NOTE 0x580
+#define DMEM_COMPRESSED_ADPCM_DATA 0x940
+
+#define AUDIO_MK_CMD(b0,b1,b2,b3) ((((b0) & 0xFF) << 0x18) | (((b1) & 0xFF) << 0x10) | (((b2) & 0xFF) << 0x8) | (((b3) & 0xFF) << 0))
+
 extern AudioBufferParameters gAudioBufferParams;
 extern f32* D_800268B8; // gAudioContext.adsrDecayTable
 extern s8 gAudioSoundMode;
@@ -825,6 +853,9 @@ extern Acmd* gAbiCmdBuffs[2];
 extern AudioSampleCache gPersistentSampleCache;
 extern AudioSampleCache gTemporarySampleCache;
 
+extern void* gCurLoadedBook;
+extern s8 gUseReverb;
+
 void func_800AA8E4(Note* note);
 void func_800AA940(void);
 TunedSample* func_800AACF0(Instrument* instrument, s32 semitone);
@@ -839,8 +870,10 @@ Note* func_800AB710(SequenceLayer* layer);
 void func_800AB888(void);
 
 void func_800ABCB4(Note* note);
+void func_800AE624(s32 arg0);
 void func_800AE7F8(s32 seqPlayerIndex);
 void func_800AE8F0(void);
+void* func_800AEB28(uintptr_t devAddr, size_t size, s32 arg2, u8* dmaIndexRef, s32 medium);
 void func_800AEEA0(s32 numNotes);
 
 void func_800AC744(SequencePlayer* seqPlayer);
