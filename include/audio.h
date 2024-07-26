@@ -78,6 +78,27 @@ typedef struct {
 } AudioCache;
 
 typedef struct {
+    /* 0x0 */ union {
+        u32 opArgs;
+        struct {
+            u8 op;
+            u8 arg0;
+            u8 arg1;
+            u8 arg2;
+        };
+    };
+    /* 0x4 */ union {
+        void* data;
+        f32 asFloat;
+        s32 asInt;
+        u16 asUShort;
+        s8 asSbyte;
+        u8 asUbyte;
+        u32 asUInt;
+    };
+} AudioCmd; // size = 0x8
+
+typedef struct {
     /* 0x00 */ s8 status;
     /* 0x01 */ s8 delay;
     /* 0x02 */ s8 medium;
@@ -558,7 +579,7 @@ typedef struct {
 typedef struct {
     /* 0x00 */ OSTask task;
     /* 0x40 */ OSMesgQueue* msgQueue;
-    /* 0x44 */ void* unk_44; // probably a message that gets unused.
+    /* 0x44 */ OSMesg msg;
     /* 0x48 */ char unk_48[0x8];
 } AudioTask; // size = 0x50
 
@@ -852,7 +873,8 @@ extern NoteSubEu* gNoteSubsEu;
 extern Acmd* gAbiCmdBuffs[2];
 extern AudioSampleCache gPersistentSampleCache;
 extern AudioSampleCache gTemporarySampleCache;
-
+extern u16 gThreadCmdChannelMask[4];
+extern u32 gAudioRandom;
 extern void* gCurLoadedBook;
 extern s8 gUseReverb;
 
@@ -880,14 +902,29 @@ void func_800AC744(SequencePlayer* seqPlayer);
 void func_800AC7F0(AudioListItem* list, AudioListItem* item);
 void func_800AE6B0(SequencePlayer* seqPlayer);
 void func_800AE700(s32 seqPlayerIndex);
+void func_800AEA10(void);
 
 bool func_800AF288(s32 fontId);
 bool func_800AF2C4(s32 seqId);
 void func_800AF33C(s32 fontId, s32 loadStatus);
+void func_800AF4D8(s32 seqId, s32 flags);
+s32 func_800AF624(s32 fontId, s32 instId, s32 drumId);
+void func_800AF6F4(s32 sampleBankId, s32 nChunks, s32 retData, OSMesgQueue* retQueue);
+void func_800AF758(s32 seqId, s32 nChunks, s32 retData, OSMesgQueue* retQueue);
+u8* func_800AF820(s32 seqId, u32* outNumFonts);
+void func_800AF888(s32 seqId);
+s32 func_800AF9EC(s32 seqPlayerIndex, s32 seqId, s32 arg2);
+s32 func_800AFA48(s32 seqPlayerIndex, s32 seqId, s32 skipTicks);
+void func_800B0754(s32 resetStatus);
 
 s32 func_800B0D30(s32 fontId, u8 instId, s8* status);
 void func_800B2324(void);
+void func_800B2AE4(AudioAllocPool* pool, void* ramAddr, size_t size);
 void* func_800B3534(s32 tableType, s32 cache, s32 id);
+bool func_800B38AC(void);
 void* func_800B4350(size_t size, s32 fontId, void* sampleAddr, s8 medium);
+Acmd* func_800B4F4C(Acmd* aList, s32* cmdCount, s16* aiBufStart, s32 aiBufLen);
+
+void func_800B71A4(void);
 
 #endif

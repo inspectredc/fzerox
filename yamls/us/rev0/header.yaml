@@ -18,6 +18,7 @@ options:
   symbol_addrs_path: 
     - linker_scripts/us/rev0/symbol_addrs.txt
     - linker_scripts/us/rev0/symbol_addrs_overlays.txt
+    - linker_scripts/us/rev0/symbol_addrs_nlib_vars.txt
 
   asm_path: asm/us/rev0
   src_path: src

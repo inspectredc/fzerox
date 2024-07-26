@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzxthread.h"
 
 extern FaultMgr gFaultMgr;
 
@@ -182,7 +183,7 @@ void Fault_ThreadEntry(void* arg) {
 
     faultedThread = NULL;
     while (faultedThread == NULL) {
-        osRecvMesg(&gFaultMgr.mesgQueue, &dummy, 1);
+        MQ_WAIT_FOR_MESG(&gFaultMgr.mesgQueue, &dummy);
         faultedThread = func_80080884();
     }
     Fault_DisplayDebugInfo(faultedThread);

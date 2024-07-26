@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzxthread.h"
 
 extern s32 D_800DCD04;
 extern s32 D_800DCD08;
@@ -57,14 +58,14 @@ void func_80067C0C(void*);
 Gfx* func_80069698(Gfx*);
 
 void func_80067D64(void) {
-    osRecvMesg(&D_800DCAB0, &D_800DCD10, 1);
+    MQ_WAIT_FOR_MESG(&D_800DCAB0, &D_800DCD10);
     func_800B9E28();
     func_80067B14();
     func_800690FC();
     func_80067BA8();
     gMasterDisp = func_80069698(gMasterDisp);
     func_80067BD0();
-    osRecvMesg(&D_800DCAC8, &D_800DCD10, 1);
+    MQ_WAIT_FOR_MESG(&D_800DCAC8, &D_800DCD10);
 
     while (osDpGetStatus() & 0x170) {}
 
@@ -80,7 +81,7 @@ void func_80067D64(void) {
 void func_80067E98(void) {
     s32 var_s1 = 0x186A0;
 
-    osRecvMesg(&D_800DCAB0, &D_800DCD10, 1);
+    MQ_WAIT_FOR_MESG(&D_800DCAB0, &D_800DCD10);
     func_80067B14();
     func_800690FC();
     func_80067AE0();
@@ -88,7 +89,7 @@ void func_80067E98(void) {
     gMasterDisp = func_80069698(gMasterDisp);
     func_80067BD0();
     func_800B9E28();
-    osRecvMesg(&D_800DCAC8, &D_800DCD10, 1);
+    MQ_WAIT_FOR_MESG(&D_800DCAC8, &D_800DCD10);
     func_i2_800FD344();
     osViSwapBuffer(D_800DCCD0[D_800DCD08]);
     func_80077C9C();

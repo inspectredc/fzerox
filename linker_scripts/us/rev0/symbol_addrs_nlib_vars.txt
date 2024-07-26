@@ -1,0 +1,3 @@
+// rsp
+aspMainTextStart = 0x800CC270; //name_end:aspMainTextEnd
+aspMainDataStart = 0x800D7CA0; //name_end:aspMainDataEnd

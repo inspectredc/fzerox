@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzxthread.h"
 
 extern s32 D_800D8430;
 extern OSThread D_800DC030;
@@ -109,7 +110,7 @@ extern s32 D_800DCCCC;
 void func_80067A10(s32 arg0) {
     void* sp1C;
 
-    osRecvMesg(&D_800DCAF8, &sp1C, 1);
+    MQ_WAIT_FOR_MESG(&D_800DCAF8, &sp1C);
     if ((D_800DCCC8 == 0) && (D_800CCFC4 != 0)) {
         func_800BA248();
     }

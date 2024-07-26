@@ -526,7 +526,7 @@ void func_800B3834(void) {
 void func_800B3B68(void);
 void func_800B49A8(void);
 
-s32 func_800B38AC(void) {
+bool func_800B38AC(void) {
     s32 i;
     s32 j;
     s32 fadeOutFactor = 1;
@@ -585,9 +585,9 @@ s32 func_800B38AC(void) {
             break;
     }
     if (gResetStatus < 3) {
-        return 0;
+        return false;
     }
-    return 1;
+    return true;
 }
 
 s32 func_800B43F0(size_t, size_t);
