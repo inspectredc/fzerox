@@ -1,5 +1,6 @@
 #include "global.h"
 #include "audio.h"
+#include "fzxthread.h"
 
 void func_800AEA10(void) {
     u32 i;
@@ -719,14 +720,14 @@ void func_800B0268(uintptr_t devAddr, u8* ramAddr, size_t size, s32 medium) {
             break;
         }
         func_800B03A0(&gSyncDmaIoMsg, 1, 0, devAddr, ramAddr, 0x400, &gSyncDmaQueue, medium, D_800D0C14);
-        osRecvMesg(&gSyncDmaQueue, NULL, OS_MESG_BLOCK);
+        MQ_WAIT_FOR_MESG(&gSyncDmaQueue, NULL);
         size -= 0x400;
         devAddr += 0x400;
         ramAddr += 0x400;
     }
     if (size != 0) {
         func_800B03A0(&gSyncDmaIoMsg, 1, 0, devAddr, ramAddr, size, &gSyncDmaQueue, medium, D_800D0C20);
-        osRecvMesg(&gSyncDmaQueue, NULL, OS_MESG_BLOCK);
+        MQ_WAIT_FOR_MESG(&gSyncDmaQueue, NULL);
     }
 }
 
@@ -885,9 +886,6 @@ void func_800B0790(void* callback) {
     sUnusedHandler = callback;
 }
 
-void func_800B2AE4(AudioAllocPool*, void*, u32);
-s32 func_800B38AC(void);
-void func_800B71A4(void);
 void func_800B2B60(s32);
 
 void func_800B079C(void* heap, u32 heapSize) {
@@ -1076,7 +1074,7 @@ void func_800B0FB4(s32 resetStatus) {
         slowLoad = &gSlowLoads.slowLoad[i];
         switch (slowLoad->state) {
             case SLOW_LOAD_LOADING:
-                osRecvMesg(&slowLoad->msgQueue, NULL, OS_MESG_BLOCK);
+                MQ_WAIT_FOR_MESG(&slowLoad->msgQueue, NULL);
                 if (resetStatus != 0) {
                     slowLoad->state = SLOW_LOAD_DONE;
                     break;
@@ -1198,11 +1196,11 @@ void func_800B1370(AudioAsyncLoad* asyncLoad, s32 resetStatus) {
         asyncLoad->delay = 0;
     } else {
         if (resetStatus != 0) {
-            osRecvMesg(&asyncLoad->mesgQueue, NULL, OS_MESG_BLOCK);
+            MQ_WAIT_FOR_MESG(&asyncLoad->mesgQueue, NULL);
             asyncLoad->status = 0;
             return;
         }
-        if (osRecvMesg(&asyncLoad->mesgQueue, NULL, OS_MESG_NOBLOCK) == -1) {
+        if (!MQ_GET_MESG(&asyncLoad->mesgQueue, NULL)) {
             return;
         }
     }
@@ -1404,11 +1402,11 @@ bool func_800B1B40(s32 resetStatus) {
 
     if (gPreloadSampleStackTop > 0) {
         if (resetStatus != 0) {
-            osRecvMesg(&gPreloadSampleQueue, (OSMesg*) &preloadIndex, OS_MESG_NOBLOCK);
+            MQ_GET_MESG(&gPreloadSampleQueue, &preloadIndex);
             gPreloadSampleStackTop = 0;
             return false;
         }
-        if (osRecvMesg(&gPreloadSampleQueue, (OSMesg*) &preloadIndex, OS_MESG_NOBLOCK) == -1) {
+        if (!MQ_GET_MESG(&gPreloadSampleQueue, &preloadIndex)) {
             return false;
         }
         // "Receive %d\n"

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzxthread.h"
 
 bool func_8006D3F0(s32 arg0) {
     if ((arg0 >= 0) && (arg0 < 0x16)) {
@@ -602,14 +603,14 @@ void func_80073E28(u32 arg0, u32 arg1, s32 arg2) {
     D_800DCCA8.size = (u32) arg2;
     D_800DCCDC->transferInfo.cmdType = 2;
     osEPiStartDma(D_800DCCDC, &D_800DCCA8, 0);
-    osRecvMesg(&D_800DCA68, NULL, 1);
+    MQ_WAIT_FOR_MESG(&D_800DCA68, NULL);
 }
 
 void func_80073ED0(u32 arg0, u32 arg1, s32 arg2) {
     OSMesg sp20[8];
 
     if (D_800DCA68.validCount >= D_800DCA68.msgCount) {
-        osRecvMesg(&D_800DCA68, sp20, 1);
+        MQ_WAIT_FOR_MESG(&D_800DCA68, sp20);
     }
     osInvalDCache(osPhysicalToVirtual(arg1), arg2);
     D_800DCCA8.hdr.pri = 0;
@@ -619,7 +620,7 @@ void func_80073ED0(u32 arg0, u32 arg1, s32 arg2) {
     D_800DCCA8.size = (u32) arg2;
     D_800DCCDC->transferInfo.cmdType = 2;
     osEPiStartDma(D_800DCCDC, &D_800DCCA8, 0);
-    osRecvMesg(&D_800DCA68, sp20, 1);
+    MQ_WAIT_FOR_MESG(&D_800DCA68, sp20);
 }
 
 void func_80073FA0(u32 arg0, u32 arg1, u32 arg2) {

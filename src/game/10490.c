@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzxthread.h"
 
 void func_80076490(void) {
 }
@@ -17,7 +18,7 @@ void func_80076498(u32 arg0, u32 arg1, u32 arg2) {
     D_800DCCA8.size = arg2;
     D_800DCCDC->transferInfo.cmdType = 2;
     osEPiStartDma(D_800DCCDC, &D_800DCCA8, 0);
-    osRecvMesg(&D_800DCA68, sp1C, 1);
+    MQ_WAIT_FOR_MESG(&D_800DCA68, sp1C);
 }
 
 void func_80076528(u32 arg0, u32 arg1, u32 arg2, void* arg3, s32 arg4) {
@@ -31,7 +32,7 @@ void func_80076528(u32 arg0, u32 arg1, u32 arg2, void* arg3, s32 arg4) {
     D_800DCCDC->transferInfo.cmdType = 2;
     osEPiStartDma(D_800DCCDC, &D_800DCCA8, 0);
     bzero(arg3, arg4);
-    osRecvMesg(&D_800DCA68, sp24, 1);
+    MQ_WAIT_FOR_MESG(&D_800DCA68, sp24);
 }
 
 void func_800765CC(s32 arg0, s32 arg1, u32 arg2) {

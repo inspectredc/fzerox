@@ -731,8 +731,6 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
     return sameTunedSample;
 }
 
-extern u32 gAudioRandom;
-
 s32 func_800AD378(SequenceLayer* layer, s32 cmd) {
     SeqScriptState* state = &layer->state;
     u16 delay;

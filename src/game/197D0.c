@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzxthread.h"
 
 s32 func_80403040(s32*, s32*, s32*, s32*);
 extern OSMesgQueue D_800DCA68;
@@ -19,7 +20,7 @@ void func_8007F7D0(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s3
     D_800E4330.size = 0x80;
     D_800DCCE0->transferInfo.cmdType = 2;
     osEPiStartDma(D_800DCCE0, &D_800E4330, 0);
-    osRecvMesg(&D_800DCA68, NULL, 1);
+    MQ_WAIT_FOR_MESG(&D_800DCA68, NULL);
 }
 
 void func_8007F86C(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s32* arg4);
