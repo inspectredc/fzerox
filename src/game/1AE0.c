@@ -45,7 +45,46 @@ void func_80067BD0(void) {
     gSPEndDisplayList(gMasterDisp++);
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1AE0/func_80067C0C.s")
+extern OSMesgQueue D_800DCAE0;
+extern s32 D_800DCE44;
+extern OSTask* D_800DCCC0;
+
+void func_80067C0C(OSTask* task) {
+
+    task->t.type = 1;
+    task->t.flags = 4;
+    task->t.ucode_boot = (u64*) rspbootTextStart;
+    task->t.ucode_boot_size = (uintptr_t) rspbootTextEnd - (uintptr_t) rspbootTextStart;
+
+    switch (D_800DCE44 & 0xC000) {
+        case 0x0:
+            task->t.ucode = (u64*) gspF3DEX_fifoTextStart;
+            task->t.ucode_data = (u64*) gspF3DEX_fifoDataStart;
+            break;
+        case 0x4000:
+            task->t.ucode = (u64*) gspF3DLX_Rej_fifoTextStart;
+            task->t.ucode_data = (u64*) gspF3DLX_Rej_fifoDataStart;
+            break;
+        case 0x8000:
+            task->t.ucode = (u64*) gspF3DFLX_Rej_fifoTextStart;
+            task->t.ucode_data = (u64*) gspF3DFLX_Rej_fifoDataStart;
+            break;
+    }
+    
+    task->t.ucode_size = SP_UCODE_SIZE;
+    task->t.ucode_data_size = SP_UCODE_DATA_SIZE;
+    task->t.dram_stack = (u64*) gDramStack;
+    task->t.dram_stack_size = SP_DRAM_STACK_SIZE8;
+    task->t.output_buff = (u64*) gTaskOutputBuffer;
+    task->t.output_buff_size = (u64*) (gTaskOutputBuffer + ARRAY_COUNT(gTaskOutputBuffer));
+    task->t.data_ptr = D_800DCCF0;
+    task->t.data_size = (size_t) (gMasterDisp - (Gfx*)D_800DCCF0) * sizeof(Gfx);
+    task->t.yield_data_ptr = (u64*) gOSYieldData;
+    task->t.yield_data_size = OS_YIELD_DATA_SIZE;
+    D_800DCCC0 = task;
+    osSendMesg(&D_800DCAE0, (OSMesg)0x15, 1);
+}
+
 
 extern OSMesgQueue D_800DCAB0;
 extern OSMesgQueue D_800DCAC8;
@@ -54,7 +93,6 @@ extern void* D_800DCD10;
 
 void func_800690FC(void);
 void func_i2_800FD344(void);
-void func_80067C0C(void*);
 Gfx* func_80069698(Gfx*);
 
 void func_80067D64(void) {

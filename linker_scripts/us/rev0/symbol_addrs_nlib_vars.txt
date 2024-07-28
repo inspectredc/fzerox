@@ -1,3 +1,15 @@
 // rsp
+rspbootTextStart = 0x800C7930; //name_end:rspbootTextEnd
 aspMainTextStart = 0x800CC270; //name_end:aspMainTextEnd
 aspMainDataStart = 0x800D7CA0; //name_end:aspMainDataEnd
+gspF3DEX_fifoTextStart = 0x800C7A00; //name_end:gspF3DEX_fifoTextEnd
+gspF3DEX_fifoDataStart = 0x800D6CD0; //name_end:gspF3DEX_fifoDataEnd
+gspF3DLX_Rej_fifoTextStart = 0x800C8D70; //name_end:gspF3DLX_Rej_fifoTextEnd
+gspF3DLX_Rej_fifoDataStart = 0x800D70F0; //name_end:gspF3DLX_Rej_fifoDataEnd
+gspF3DFLX_Rej_fifoTextStart = 0x800C9F00; //name_end:gspF3DFLX_Rej_fifoTextEnd
+gspF3DFLX_Rej_fifoDataStart = 0x800D7500; //name_end:gspF3DFLX_Rej_fifoDataEnd
+
+// buffers
+gTaskOutputBuffer = 0x802D5C40; //size:0x54000 name_end:gTaskOutputBufferEnd segment:buffers defined:true
+gOSYieldData = 0x80329C40; //size:0xC00 segment:buffers defined:true
+gDramStack = 0x8032A840; //size:0x400 segment:buffers defined:true

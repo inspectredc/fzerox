@@ -188,11 +188,16 @@
 
       # Microcode
       - [0x61930, textbin, rspboot]
-      - [0x61A00, textbin]
-      - [0x66270, textbin, aspMain]
+      - [0x61A00, textbin, f3dex]
+      - [0x62D70, textbin, f3dlx]
+      - [0x63F00, textbin, f3dflx]
+      - [0x65090, textbin]
+      - [0x66220, c, game/66220]
+      - [0x66270, textbin, aspmain]
 
       # DATA - todo: split data
-      - [0x66FA0, data]
+      - [0x66FA0, .data, game/1060]
+      - [0x66FE0, data, game/1AE0]
       - [0x66FF0, .data, game/2A60]
       - [0x67000, data]
       - [0x6B6D0, .data, audio/aisetnextbuf]
@@ -256,7 +261,11 @@
       - [0x70C70, .rodata, libultra/libc/xldtob]
 
       # DATA - Microcode
-      - [0x70CD0, data] #f3dex, f3dlx, f3dflx, l3dex
+      - [0x70CD0, data, f3dex]
+      - [0x710F0, data, f3dlx]
+      - [0x71500, data, f3dflx]
+      - [0x718B0, data]
+      - [0x71CA0, data, aspmain]
 
       - { start: 0x72030, type: bss, vram: 0x800D8030, name: 800D8030 }
       - { type: .bss, vram: 0x800F8AF0, name: libultra/io/sptask }
@@ -277,3 +286,10 @@
       - { type: .bss, vram: 0x800FB4D0, name: libultra/io/pfsisplug }
       - { type: .bss, vram: 0x800FB510, name: libultra/io/vimgr }
 
+  - name: buffers
+    exclusive_ram_id: buffer
+    type: code
+    vram: 0x802D5C40
+    bss_size: 0x55000
+    subsegments:
+      - { type: .bss, vram: 0x802D5C40, name: buffers }

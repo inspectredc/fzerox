@@ -18,8 +18,8 @@ void func_80067060(void) {
     osStartThread(&D_800DC030);
 }
 
-extern s32 D_800CCFA0;
-extern s32 D_800CCFA4;
+s32 D_800CCFA0 = 0;
+s32 D_800CCFA4 = 0;
 
 void func_800670E8(void) {
     osSpTaskYield();
@@ -80,24 +80,26 @@ extern OSThread D_800DC390;
 extern OSThread D_800DC540;
 extern OSThread D_800DC6F0;
 
-extern s32 D_800CCFA8;
-extern s32 D_800CCFAC;
-extern s32 D_800CCFB0;
-extern s32 D_800CCFB4;
-extern s32 D_800CCFB8;
-extern s32 D_800CCFBC;
-extern s32 D_800CCFC0;
-extern s32 D_800CCFC4;
-extern s8 D_800CCFCC;
-extern s8 D_800CCFD0;
+s32 D_800CCFA8 = 0;
+s32 D_800CCFAC = 0;
+s32 D_800CCFB0 = 1;
+s32 D_800CCFB4 = 0;
+s32 D_800CCFB8 = 1;
+s32 D_800CCFBC = 1;
+s32 D_800CCFC0 = 0;
+s32 D_800CCFC4 = 0;
+s8 D_800CCFC8 = 1;
+s8 D_800CCFCC = 1;
+s8 D_800CCFD0 = 1;
+s8 D_800CCFD4 = 1;
+
 extern s32 D_800DCCC8;
-extern s32 D_800DCCCC;
+extern bool D_800DCCCC;
 
 extern u32 D_800D9830;
 extern u32 D_800DA030;
 extern u32 D_800DB230;
 
-s32 func_800CC220(void);
 void func_80069F5C(FrameBuffer*);
 
 void func_800671EC(void* arg0) {
@@ -149,11 +151,11 @@ void func_800671EC(void* arg0) {
     if (D_800CCFC0 != 0) {
         func_80073E28(D_72120, D_80403010, D_98080 - D_72120);
         bzero(D_80428F70, D_8042BC40 - D_80428F70);
-        if (D_800DCCCC != 0) {
+        if (D_800DCCCC) {
             func_8007F904();
         }
         func_800751FC("EFZE");
-        if (D_800DCCCC != 0) {
+        if (D_800DCCCC) {
             func_80076340();
         }
     }
@@ -161,10 +163,10 @@ void func_800671EC(void* arg0) {
     osCreateThread(&D_800DC6F0, 7, func_80067A10, NULL, &D_800DB230, 100);
     osStartThread(&D_800DC6F0);
 
-    if ((D_800CCFC0 != 0) && (D_800DCCCC != 0)) {
+    if ((D_800CCFC0 != 0) && D_800DCCCC) {
         func_800763A8();
     }
-    if ((D_800CCFC0 != 0) && (D_800DCCCC != 0) && (func_800761D4() == 2)) {
+    if ((D_800CCFC0 != 0) && D_800DCCCC && (func_800761D4() == 2)) {
         func_8007515C();
     }
     osViSwapBuffer(D_800DCCD0[1]);
@@ -178,7 +180,7 @@ void func_800671EC(void* arg0) {
 
     osViBlack(0);
 
-    if ((D_800CCFC0 != 0) && (D_800DCCCC != 0)) {
+    if ((D_800CCFC0 != 0) && D_800DCCCC) {
         func_8007F904();
     }
     func_80075230(&D_800DC540);
@@ -291,7 +293,6 @@ void func_800678B8(void* arg0) {
     while (true) {}
 }
 
-void func_80069700(void);
 void func_i1_8040BCB0(void);
 
 void func_80067A10(void* arg0) {
@@ -304,7 +305,7 @@ void func_80067A10(void* arg0) {
     D_800DCCC8 = 1;
     osViBlack(1);
     osViSetYScale(1.0f);
-    if ((D_800CCFC0 != 0) && (D_800DCCCC != 0)) {
+    if ((D_800CCFC0 != 0) && D_800DCCCC) {
         func_i1_8040BCB0();
     }
     func_80069700();

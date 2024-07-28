@@ -35,7 +35,7 @@ void func_80076528(u32 arg0, u32 arg1, u32 arg2, void* arg3, s32 arg4) {
     MQ_WAIT_FOR_MESG(&D_800DCA68, sp24);
 }
 
-void func_800765CC(s32 arg0, s32 arg1, u32 arg2) {
+void func_800765CC(u8* arg0, u8* arg1, u32 arg2) {
     s32 temp_a2;
     s32 i;
     s32 temp_s3;
@@ -115,7 +115,7 @@ s32 func_800768C8(s32 arg0, u32 arg1) {
     return D_800E33D0[arg0];
 }
 
-s32* func_800768F4(s32, s32);
+u8* func_800768F4(s32, s32);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/10490/func_800768F4.s")
 
 extern u32 D_800E3380[];
@@ -171,8 +171,8 @@ extern s32 D_800DCE44;
 
 void func_80077810(void) {
     s32 pad[2];
-    s32 sp1C;
-    s32 sp18;
+    u8* sp1C;
+    size_t sp18;
 
     if (D_800CD2E4 != 0) {
         switch (D_800DCE44) {
@@ -218,7 +218,7 @@ void func_80077AD8(s32 arg0) {
 void func_80077B04(void);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/10490/func_80077B04.s")
 
-void func_800AA620(s32*, void*);
+void func_800AA620(u8*, void*);
 
 extern u8 D_2738A0[];
 extern u8 D_5000000[];
@@ -231,7 +231,7 @@ extern s32 D_800DCE44;
 void func_80077BE0(void) {
     s32 pad[3];
     s32 sp1C;
-    s32* sp24;
+    u8* sp24;
 
     if (D_800CD2F4 != 0) {
         if (D_800DCE44 != 0x11) {
@@ -243,8 +243,8 @@ void func_80077BE0(void) {
         sp24 = func_800768F4(1, sp1C);
 
         osInvalDCache(sp24, sp1C);
-        func_800765CC(&D_2738A0, sp24, sp1C);
-        if (*sp24 == 0x4D494F30) {
+        func_800765CC(D_2738A0, sp24, sp1C);
+        if (*(s32*)sp24 == (s32)'MIO0') {
             func_800AA620(sp24, osPhysicalToVirtual(D_800DCDE4));
         }
         D_800CD2F4 = 0;
