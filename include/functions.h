@@ -5,8 +5,10 @@
 #include "fzxmath.h"
 #include "unk_structs.h"
 
-void func_80068A60(void* arg0);
 void func_80068008(void* arg0);
+void func_80068A60(void* arg0);
+
+void func_80069700(void);
 
 s32 func_8006A9E0(f32 arg0);
 u32 func_8006A918(void);
@@ -36,7 +38,7 @@ s32 func_800760F8(void);
 s32 func_800761D4(void);
 s32 func_80076340(void);
 void func_800763A8(void);
-void func_800765CC(s32 arg0, s32 arg1, u32 arg2);
+void func_800765CC(u8* arg0, u8* arg1, u32 arg2);
 void func_80076658(u8* arg0, u8* arg1, size_t arg2, void* arg3, size_t arg4);
 void func_800766F0(void);
 s32 func_80076BD4(uintptr_t arg0);
@@ -71,6 +73,8 @@ void func_8009E6F0(unk_8006FC8C*, f32, Vec3f*);
 f32 func_8009E85C(unk_8006FC8C*, f32, Mtx3F*, f32);
 
 s32 func_800AA394(s32);
+
+bool func_800CC220(void);
 
 void func_i2_800FC77C(void);
 void func_i2_800FC9BC(void);

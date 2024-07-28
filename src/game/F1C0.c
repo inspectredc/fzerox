@@ -125,12 +125,12 @@ s32 func_800758F8(void) {
 
 extern LEODiskID D_800CD2B0;
 #ifdef IMPORT_BSS
-extern s32 D_800DCCCC;
+extern bool D_800DCCCC;
 
 s32 func_800760F8(void) {
     static s32 D_800E3370;
 
-    if (D_800DCCCC == 0) {
+    if (!D_800DCCCC) {
         return 0;
     }
     D_800E3370 = func_80075800();
@@ -153,11 +153,11 @@ s32 func_800760F8(void) {
 #endif
 
 #ifdef IMPORT_BSS
-extern s32 D_800DCCCC;
+extern bool D_800DCCCC;
 s32 func_800761D4(void) {
     static s32 D_800E3374;
 
-    if (D_800DCCCC == 0) {
+    if (!D_800DCCCC) {
         return 0;
     }
     D_800E3374 = func_80075800();

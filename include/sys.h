@@ -10,6 +10,7 @@
 #include "libc/stddef.h"
 #include "libc/string.h"
 #include "gfx.h"
+#include "buffers.h"
 
 typedef struct {
     /* 0x000 */ OSThread thread;

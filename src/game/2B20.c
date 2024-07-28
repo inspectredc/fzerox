@@ -258,7 +258,6 @@ void func_80068F04(void) {
     }
 }
 
-void func_80069700(void);
 void func_80069820(void);
 
 extern s32 (*D_800CD0A4[])(void);

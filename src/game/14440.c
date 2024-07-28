@@ -293,10 +293,10 @@ s32 func_8007E008(void) {
 }
 
 extern s32 D_800CCFC0;
-extern s32 D_800DCCCC;
+extern bool D_800DCCCC;
 
 s32 func_8007E038(void) {
-    if ((D_800CCFC0 != 0) && (D_800DCCCC != 0) && (func_800760F8() == 2)) {
+    if ((D_800CCFC0 != 0) && D_800DCCCC && (func_800760F8() == 2)) {
         return 1;
     }
     return 0;
