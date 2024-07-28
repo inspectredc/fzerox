@@ -26,6 +26,7 @@
       - [0x1AE0, c, game/1AE0] #sys_main
       - [0x2A60, c, game/2A60]
       - [0x2B20, c, game/2B20] #sys_joybus
+      - [0x3ED0, c, game/3ED0]
       - [0x73F0, c, game/73F0]
       - [0xEA90, c, game/EA90]
       - [0xF0B0, c, game/F0B0]
@@ -188,9 +189,10 @@
       # Microcode
       - [0x61930, textbin, rspboot]
       - [0x61A00, textbin]
+      - [0x66270, textbin, aspMain]
 
       # DATA - todo: split data
-      - [0x62920, data]
+      - [0x66FA0, data]
       - [0x66FF0, .data, game/2A60]
       - [0x67000, data]
       - [0x6B6D0, .data, audio/aisetnextbuf]
@@ -219,10 +221,10 @@
       - [0x6D0F0, .rodata, game/1060]
       - [0x6D100, .rodata, game/1AE0]
       - [0x6D110, .rodata, game/2B20]
+      - [0x6D380, .rodata, game/3ED0]
       - [0x6D400, .rodata, game/73F0]
       - [0x6D5D0, .rodata, game/EA90]
-      - [0x6D5F0, data] # Not Used anywhere?
-      - [0x6D690, .rodata, game/F1C0]
+      - [0x6D5F0, .rodata, game/F1C0]
       - [0x6D860, .rodata, game/10490]
       - [0x6DB60, .rodata, game/11CF0]
       - [0x6E310, .rodata, game/14440]

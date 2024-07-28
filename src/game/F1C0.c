@@ -12,14 +12,26 @@ void func_800751C0(void) {
     func_800BBD60(sp1C);
 }
 
+#ifdef IMPORT_BSS
+static u8 D_800E332C[4];
+
+void func_800751FC(char* arg0) {
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        D_800E332C[i] = *arg0++;
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/F1C0/func_800751FC.s")
+#endif
 
 void func_80075228(void) {
 }
 
-extern s32 D_800CD2D4;
+extern OSThread* D_800CD2D4;
 
-void func_80075230(s32 arg0) {
+void func_80075230(OSThread* arg0) {
     D_800CD2D4 = arg0;
 }
 
@@ -29,6 +41,7 @@ void func_80075230(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/F1C0/func_800753EC.s")
 
+s32 func_80075534(void);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/F1C0/func_80075534.s")
 
 s32 func_80075690(LEODiskID);
@@ -191,7 +204,32 @@ s32 func_80076340(void) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/F1C0/func_800763A8.s")
+extern OSMesg D_800E3328;
+extern OSMesgQueue D_800DCAE0;
+
+void func_i1_8040BD70(void);
+
+void func_800763A8(void) {
+    s32 i;
+
+    for (i = 0; i < 30; i++) {
+        do {
+            osRecvMesg(&D_800DCAE0, &D_800E3328, 1);
+        } while (D_800E3328 != (OSMesg) 0x1A);
+
+        func_i1_8040BD70();
+        D_800E3324 = func_80075534();
+
+        if (D_800E3324 != 0x2B) {
+            return;
+        }
+    }
+    func_800751C0();
+    func_8007FCB8();
+    func_8007FC68(D_800E3324);
+    func_800751C0();
+    while (true) {}
+}
 
 void func_8007647C(void) {
 }

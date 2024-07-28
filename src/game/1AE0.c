@@ -49,11 +49,10 @@ void func_80067BD0(void) {
 
 extern OSMesgQueue D_800DCAB0;
 extern OSMesgQueue D_800DCAC8;
-extern void* D_800DCCD0[];
+extern FrameBuffer* D_800DCCD0[];
 extern void* D_800DCD10;
 
 void func_800690FC(void);
-void func_80077C9C(void);
 void func_i2_800FD344(void);
 void func_80067C0C(void*);
 Gfx* func_80069698(Gfx*);

@@ -57,17 +57,17 @@ void func_8007F970(void) {
 }
 
 void func_800751C0(void);
-extern s64* D_800DCCD0[];
+extern FrameBuffer* D_800DCCD0[];
 
 void func_8007F9E0(void) {
     u8 i;
-    s64* temp_v1;
-    s64* var_v0;
+    u64* temp_v1;
+    u64* var_v0;
 
     func_800751C0();
 
     for (i = 0; i < 3; i++) {
-        temp_v1 = D_800DCCD0[i];
+        temp_v1 = (u64*) D_800DCCD0[i];
         var_v0 = &temp_v1[19199];
 
         // FAKE
