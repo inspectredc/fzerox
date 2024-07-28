@@ -5,6 +5,9 @@
 #include "fzxmath.h"
 #include "unk_structs.h"
 
+void func_80068A60(void* arg0);
+void func_80068008(void* arg0);
+
 s32 func_8006A9E0(f32 arg0);
 u32 func_8006A918(void);
 u32 func_8006A978(void);
@@ -16,6 +19,8 @@ void func_8006CC98(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
 void func_8006D03C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u16* arg9);
 
 void func_80073A04(void);
+void func_80073E28(void* arg0, void* arg1, size_t arg2);
+void func_80073ED0(void* arg0, void* arg1, size_t arg2);
 void func_8007402C(s32 arg0);
 void func_800741DC(s32 arg0);
 void func_80074634(unk_800F8510* arg0);
@@ -23,9 +28,23 @@ void func_800747EC(s32 arg0);
 void func_80074A90(f32* arg0, f32* arg1);
 void func_80074CE4(unk_800F8510*);
 
+void func_8007515C(void);
+
+void func_800751FC(char* arg0);
+void func_80075230(OSThread* arg0);
 s32 func_800760F8(void);
+s32 func_800761D4(void);
+s32 func_80076340(void);
+void func_800763A8(void);
 void func_800765CC(s32 arg0, s32 arg1, u32 arg2);
+void func_80076658(u8* arg0, u8* arg1, size_t arg2, void* arg3, size_t arg4);
+void func_800766F0(void);
 s32 func_80076BD4(uintptr_t arg0);
+void func_80077318(void);
+void func_80077C9C(void);
+
+void func_80079EC8(void);
+void func_80079F1C(void);
 
 Gfx* func_8007AB88(Gfx*);
 Gfx* func_8007ABA4(Gfx*);
@@ -34,6 +53,12 @@ Gfx* func_8007AC48(Gfx* gfx, u16 red, u16 green, u16 blue);
 Gfx* func_8007AE8C(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
 Gfx* func_8007AF40(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
 void func_8007E2B4(void);
+void func_8007E08C(void);
+void func_8007F904(void);
+
+void func_8008D7E8(void);
+void func_8008D824(void);
+void func_8008D8E8(void);
 
 void Fault_SetFrameBuffer(FrameBuffer* buffer, u16 width, u16 height);
 void Fault_Init(void);
@@ -46,6 +71,16 @@ void func_8009E6F0(unk_8006FC8C*, f32, Vec3f*);
 f32 func_8009E85C(unk_8006FC8C*, f32, Mtx3F*, f32);
 
 s32 func_800AA394(s32);
+
+void func_i2_800FC77C(void);
+void func_i2_800FC9BC(void);
+s32 func_i2_800FCE3C(void);
+void func_i2_800FD184(s32);
+void func_i2_80100520(s32);
+void func_i2_801012CC(s32);
+void func_i2_80103A70(void);
+
+void func_i3_80134598(void);
 
 void func_i4_80116E64(void);
 void func_i4_80116E8C(unk_800E3A28*);
@@ -94,6 +129,7 @@ void func_i4_8011A08C(unk_800E3A28*);
 void func_i4_8011A6A0(unk_800E3A28*);
 void func_i4_8011A6EC(unk_800E3A28*);
 void func_i4_8011A73C(unk_800E3A28*);
+void func_i4_8011A7B8(void);
 void func_i4_8011B06C(unk_800E3A28*);
 void func_i4_8011B0C8(void);
 void func_i4_8011B0D0(unk_800E3A28*);

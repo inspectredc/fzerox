@@ -1,6 +1,31 @@
 #include "global.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/F0B0/func_800750B0.s")
+// Todo: Migrate these into appropriate functions
+static const char devrostr0[] = "========================================================\n";
+static const char devrostr1[] = "LBA %d, dist 0x%x-0x%x-0x%x , %dLBAs\n";
+static const char devrostr2[] = "========================================================\n";
+
+extern OSMesgQueue D_800DCA68;
+void func_i1_8040B8F0(void*, s32, s32, void*, s32, OSMesgQueue*);
+void func_i1_80410860(s32, s32, s32*);
+
+s32 func_800750B0(s32 arg0, void* arg1, s32 arg2, s32 arg3) {
+    void* sp54;
+    s32 sp4C[2];
+    s32 sp2C[8];
+    void* sp28;
+
+    func_i1_80410860(arg0, arg2, sp4C);
+    osVirtualToPhysical((uintptr_t) arg1);
+    sp54 = (uintptr_t) arg1 + (uintptr_t) arg2;
+    osVirtualToPhysical(sp54);
+    osVirtualToPhysical((uintptr_t) sp54 + (uintptr_t) arg3);
+    func_i1_8040B8F0(sp2C, 0, arg0, arg1, sp4C[0], &D_800DCA68);
+    osRecvMesg(&D_800DCA68, &sp28, 1);
+    bzero(sp54, arg3);
+
+    return sp4C[1];
+}
 
 // todo: clean this up, D_800FCB70_2 shouldnt really exist like this
 /*

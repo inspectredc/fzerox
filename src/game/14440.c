@@ -50,7 +50,7 @@ Gfx* func_8007AB88(Gfx* gfx) {
 }
 
 extern s16 D_800CCFE4;
-extern u16* D_800DCCD0[];
+extern FrameBuffer* D_800DCCD0[];
 extern s32 D_800DCCFC;
 extern s32 D_800DCD04;
 

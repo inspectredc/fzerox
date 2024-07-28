@@ -54,7 +54,7 @@ void func_800765CC(s32 arg0, s32 arg1, u32 arg2) {
     }
 }
 
-void func_80076658(s32 arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4) {
+void func_80076658(u8* arg0, u8* arg1, size_t arg2, void* arg3, size_t arg4) {
     s32 temp_a2;
     s32 i;
     s32 temp_s3;

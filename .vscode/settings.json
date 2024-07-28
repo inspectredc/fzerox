@@ -97,7 +97,8 @@
     "set": "c",
     "unordered_map": "c",
     "unordered_set": "c",
-    "format": "c"
+    "format": "c",
+    "audio.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"

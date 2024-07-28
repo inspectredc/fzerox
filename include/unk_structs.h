@@ -384,4 +384,29 @@ typedef struct unk_800CD970 {
     unk_800CD8B0* unk_08;
 } unk_800CD970; // size 0xC
 
+typedef struct unk_800DCE98 {
+    OSPfs pfs;
+    s8 unk_68[0x3];
+    u8 unk_6B;
+    s8 unk_6C;
+    s8 unk_6D;
+    u8 unk_6E;
+    u8 unk_6F;
+    u8 unk_70;
+    u8 unk_71;
+    s16 unk_72;
+    s16 unk_74;
+    s16 unk_76;
+    s16 unk_78;
+    u16 unk_7A;
+    u16 unk_7C;
+    u16 unk_7E;
+    u16 unk_80;
+    u16 unk_82;
+    s32 unk_84;
+    s32 unk_88;
+    s32 unk_8C;
+    s32 unk_90;
+} unk_800DCE98; // size = 0x94
+
 #endif // UNK_STRUCTS_H
