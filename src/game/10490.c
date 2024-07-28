@@ -244,7 +244,7 @@ void func_80077BE0(void) {
 
         osInvalDCache(sp24, sp1C);
         func_800765CC(D_2738A0, sp24, sp1C);
-        if (*(s32*)sp24 == (s32)'MIO0') {
+        if (*(s32*) sp24 == (s32) 'MIO0') {
             func_800AA620(sp24, osPhysicalToVirtual(D_800DCDE4));
         }
         D_800CD2F4 = 0;

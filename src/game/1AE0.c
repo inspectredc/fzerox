@@ -70,7 +70,7 @@ void func_80067C0C(OSTask* task) {
             task->t.ucode_data = (u64*) gspF3DFLX_Rej_fifoDataStart;
             break;
     }
-    
+
     task->t.ucode_size = SP_UCODE_SIZE;
     task->t.ucode_data_size = SP_UCODE_DATA_SIZE;
     task->t.dram_stack = (u64*) gDramStack;
@@ -78,13 +78,12 @@ void func_80067C0C(OSTask* task) {
     task->t.output_buff = (u64*) gTaskOutputBuffer;
     task->t.output_buff_size = (u64*) (gTaskOutputBuffer + ARRAY_COUNT(gTaskOutputBuffer));
     task->t.data_ptr = D_800DCCF0;
-    task->t.data_size = (size_t) (gMasterDisp - (Gfx*)D_800DCCF0) * sizeof(Gfx);
+    task->t.data_size = (size_t) (gMasterDisp - (Gfx*) D_800DCCF0) * sizeof(Gfx);
     task->t.yield_data_ptr = (u64*) gOSYieldData;
     task->t.yield_data_size = OS_YIELD_DATA_SIZE;
     D_800DCCC0 = task;
-    osSendMesg(&D_800DCAE0, (OSMesg)0x15, 1);
+    osSendMesg(&D_800DCAE0, (OSMesg) 0x15, 1);
 }
-
 
 extern OSMesgQueue D_800DCAB0;
 extern OSMesgQueue D_800DCAC8;
