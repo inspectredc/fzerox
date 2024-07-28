@@ -234,8 +234,8 @@ typedef struct {
     /* 0x01C */ f32 fadeVolume;
     /* 0x020 */ f32 fadeVelocity;
     /* 0x024 */ f32 volume;
-    /* 0x028 */ f32 muteVolumeMod;
-    /* 0x02C */ f32 fadeVolumeMod;
+    /* 0x028 */ f32 muteVolumeScale;
+    /* 0x02C */ f32 fadeVolumeScale;
     /* 0x030 */ f32 appliedFadeVolume;
     /* 0x034 */ struct SequenceChannel* channels[16];
     /* 0x074 */ SeqScriptState scriptState;
@@ -335,7 +335,7 @@ typedef struct SequenceChannel {
     /* 0x00 */ u8 unused : 1;
     union {
         struct {
-            /* 0x01 */ u8 freqMod : 1;
+            /* 0x01 */ u8 freqScale : 1;
             /* 0x01 */ u8 volume : 1;
             /* 0x01 */ u8 pan : 1;
         } s;
@@ -355,11 +355,11 @@ typedef struct SequenceChannel {
     /* 0x0E */ s16 instOrWave;
     /* 0x10 */ s16 transposition;
     /* 0x12 */ s8 pad12[0x2];
-    /* 0x14 */ f32 volumeMod;
+    /* 0x14 */ f32 volumeScale;
     /* 0x18 */ f32 volume;
     /* 0x1C */ s32 pan;
     /* 0x20 */ f32 appliedVolume;
-    /* 0x24 */ f32 freqMod;
+    /* 0x24 */ f32 freqScale;
     /* 0x28 */ u8 (*dynTable)[][2];
     /* 0x2C */ struct Note* noteUnused;
     /* 0x30 */ struct SequenceLayer* layerUnused;
@@ -393,12 +393,12 @@ typedef struct SequenceLayer {
     /* 0x18 */ AdsrSettings adsr;
     /* 0x20 */ u16 portamentoTime;
     /* 0x22 */ s16 transposition;
-    /* 0x24 */ f32 freqMod;
+    /* 0x24 */ f32 freqScale;
     /* 0x28 */ f32 bend;
     /* 0x2C */ f32 velocitySquare;
     /* 0x30 */ f32 velocitySquare2;
     /* 0x34 */ f32 noteVelocity;
-    /* 0x38 */ f32 noteFreqMod;
+    /* 0x38 */ f32 noteFreqScale;
     /* 0x3C */ u16 shortNoteDefaultDelay;
     /* 0x3E */ s16 lastDelay;
     /* 0x40 */ s16 delay;
@@ -440,7 +440,7 @@ typedef struct {
     /* 0x00 */ u8 reverb;
     /* 0x01 */ u8 pan;
     /* 0x02 */ s8 pad2[0x2];
-    /* 0x04 */ f32 freqMod;
+    /* 0x04 */ f32 freqScale;
     /* 0x08 */ f32 velocity;
 } NoteAttributes; // size = 0xC
 
@@ -451,8 +451,8 @@ typedef struct {
     /* 0x03 */ u8 fontId;
     /* 0x04 */ u8 unk_04;
     /* 0x05 */ s8 pad5[0x1];
-    /* 0x06 */ s16 adsrVolModUnused;
-    /* 0x08 */ f32 portamentoFreqMod;
+    /* 0x06 */ s16 adsrVolScaleUnused;
+    /* 0x08 */ f32 portamentoFreqScale;
     /* 0x0C */ s8 padC[0x4];
     /* 0x10 */ struct SequenceLayer* prevParentLayer;
     /* 0x14 */ struct SequenceLayer* parentLayer;
@@ -877,6 +877,7 @@ extern u16 gThreadCmdChannelMask[4];
 extern u32 gAudioRandom;
 extern void* gCurLoadedBook;
 extern s8 gUseReverb;
+extern SequenceChannel gSequenceChannelNone;
 
 void func_800AA8E4(Note* note);
 void func_800AA940(void);
@@ -917,6 +918,7 @@ s32 func_800AF9EC(s32 seqPlayerIndex, s32 seqId, s32 arg2);
 s32 func_800AFA48(s32 seqPlayerIndex, s32 seqId, s32 skipTicks);
 void func_800B0754(s32 resetStatus);
 
+void func_800B079C(void* heap, size_t heapSize);
 s32 func_800B0D30(s32 fontId, u8 instId, s8* status);
 void func_800B2324(void);
 void func_800B2AE4(AudioAllocPool* pool, void* ramAddr, size_t size);
@@ -925,6 +927,33 @@ bool func_800B38AC(void);
 void* func_800B4350(size_t size, s32 fontId, void* sampleAddr, s8 medium);
 Acmd* func_800B4F4C(Acmd* aList, s32* cmdCount, s16* aiBufStart, s32 aiBufLen);
 
+AudioTask* func_800B5FB0(void);
+void func_800B68EC(u32 opArgs, f32 data);
+void func_800B6910(u32 opArgs, u32 data);
+void func_800B6934(u32 opArgs, s8 data);
+void func_800B6964(u32 opArgs, u16 data);
+void func_800B6994(void);
+bool func_800B6E14(void);
+s32 func_800B6EC0(s32 specId);
+void func_800B6F58(void);
+
 void func_800B71A4(void);
+void func_800B9E28(void);
+void func_800BA248(void);
+void func_800BA268(void);
+void func_800BA2B4(u8);
+void func_800BA2D0(u8);
+void func_800BA2F0(u8, u8);
+void func_800BA3E4(u8, u8);
+void func_800BA710(u8, u8);
+void func_800BAB50(u8);
+void func_800BAB68(u8);
+void func_800BAF30(u8);
+void func_800BAF80(void);
+void func_800BAFA4(u8);
+void func_800BB078(void);
+void func_800BB39C(s32);
+void func_800BB3C4(u8, f32);
+AudioTask* func_800BB49C(void);
 
 #endif

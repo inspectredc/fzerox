@@ -5,7 +5,7 @@ void func_800AB9A0(SequenceChannel* channel, s32 updateVolume) {
     s32 i;
 
     if (channel->changes.s.volume || updateVolume) {
-        f32 channelVolume = channel->volume * channel->volumeMod * channel->seqPlayer->appliedFadeVolume;
+        f32 channelVolume = channel->volume * channel->volumeScale * channel->seqPlayer->appliedFadeVolume;
 
         channel->appliedVolume = SQ(channelVolume);
     }
@@ -17,7 +17,7 @@ void func_800AB9A0(SequenceChannel* channel, s32 updateVolume) {
 
         if ((layer != NULL) && layer->enabled && (layer->note != NULL)) {
             if (layer->notePropertiesNeedInit) {
-                layer->noteFreqMod = layer->freqMod * channel->freqMod;
+                layer->noteFreqScale = layer->freqScale * channel->freqScale;
                 layer->noteVelocity = layer->velocitySquare * channel->appliedVolume;
                 if (channel->unkPan2 == 0) {
                     layer->notePan = layer->pan;
@@ -26,8 +26,8 @@ void func_800AB9A0(SequenceChannel* channel, s32 updateVolume) {
                 }
                 layer->notePropertiesNeedInit = false;
             } else {
-                if (channel->changes.s.freqMod) {
-                    layer->noteFreqMod = layer->freqMod * channel->freqMod;
+                if (channel->changes.s.freqScale) {
+                    layer->noteFreqScale = layer->freqScale * channel->freqScale;
                 }
                 if (channel->changes.s.volume || updateVolume) {
                     layer->noteVelocity = layer->velocitySquare * channel->appliedVolume;
@@ -45,7 +45,7 @@ void func_800ABAFC(SequencePlayer* seqPlayer) {
     s32 i;
 
     if (seqPlayer->recalculateVolume) {
-        seqPlayer->appliedFadeVolume = seqPlayer->fadeVolume * seqPlayer->fadeVolumeMod;
+        seqPlayer->appliedFadeVolume = seqPlayer->fadeVolume * seqPlayer->fadeVolumeScale;
     }
 
     for (i = 0; i < 16; i++) {
@@ -75,14 +75,14 @@ f32 func_800ABBA4(Portamento* portamento) {
 
 void func_800ABC78(Note* note) {
     if (note->playbackState.portamento.mode != 0) {
-        note->playbackState.portamentoFreqMod = func_800ABBA4(&note->playbackState.portamento);
+        note->playbackState.portamentoFreqScale = func_800ABBA4(&note->playbackState.portamento);
     }
 }
 
 void func_800ABCB4(Note* note) {
     NotePlaybackState* noteState = &note->playbackState;
 
-    noteState->portamentoFreqMod = 1.0f;
+    noteState->portamentoFreqScale = 1.0f;
 
     noteState->portamento = noteState->parentLayer->portamento;
 }

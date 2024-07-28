@@ -86,12 +86,10 @@ s32 func_800AC038(SequencePlayer* seqPlayer, SeqScriptState* state, s32 cmd, s32
     return 0;
 }
 
-extern SequenceChannel D_80028DD8; // gAudioCtx.sequenceChannelNone
-
 void func_800AC214(SequenceChannel* channel) {
     s32 i;
 
-    if (channel == &D_80028DD8) {
+    if (channel == &gSequenceChannelNone) {
         return;
     }
 
@@ -126,8 +124,8 @@ void func_800AC214(SequenceChannel* channel) {
     channel->adsr.sustain = 0;
 
     channel->volume = 1.0f;
-    channel->volumeMod = 1.0f;
-    channel->freqMod = 1.0f;
+    channel->volumeScale = 1.0f;
+    channel->freqScale = 1.0f;
 
     for (i = 0; i < 8; i++) {
         channel->seqScriptIO[i] = -1;
@@ -177,7 +175,7 @@ s32 func_800AC328(SequenceChannel* channel, s32 arg1) {
     layer->note = NULL;
     layer->instrument = NULL;
     layer->instOrWave = 0xFF;
-    layer->freqMod = 1.0f;
+    layer->freqScale = 1.0f;
     layer->bend = 1.0f;
     layer->velocitySquare = 0.0f;
 
@@ -597,8 +595,8 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
     f32 temp_fa1;
     f32 temp_fv1;
     Portamento* portamento;
-    f32 freqMod;
-    f32 freqMod2;
+    f32 freqScale;
+    f32 freqScale2;
     TunedSample* tunedSample;
     Instrument* instrument;
     SequenceChannel* channel;
@@ -638,7 +636,7 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
                 layer->pan = drum->pan;
             }
             layer->tunedSample = tunedSample;
-            layer->freqMod = tunedSample->tuning;
+            layer->freqScale = tunedSample->tuning;
             break;
 
         default:
@@ -679,21 +677,21 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
                     case 1:
                     case 3:
                     case 5:
-                        freqMod2 = temp_fv1;
-                        freqMod = temp_fa1;
+                        freqScale2 = temp_fv1;
+                        freqScale = temp_fa1;
                         break;
                     case 2:
                     case 4:
-                        freqMod = temp_fv1;
-                        freqMod2 = temp_fa1;
+                        freqScale = temp_fv1;
+                        freqScale2 = temp_fa1;
                         break;
                     default:
-                        freqMod = temp_fv1;
-                        freqMod2 = temp_fv1;
+                        freqScale = temp_fv1;
+                        freqScale2 = temp_fv1;
                         break;
                 }
 
-                portamento->extent = (freqMod2 / freqMod) - 1.0f;
+                portamento->extent = (freqScale2 / freqScale) - 1.0f;
 
                 if (layer->portamento.mode & 0x80) {
                     portamento->speed = ((s32) seqPlayer->tempo * 32512.0f) /
@@ -703,7 +701,7 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
                 }
 
                 portamento->cur = 0;
-                layer->freqMod = freqMod;
+                layer->freqScale = freqScale;
                 if ((layer->portamento.mode & ~0x80) == 5) {
                     layer->portamentoTargetNote = semitone;
                 }
@@ -714,10 +712,10 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
                 tunedSample = func_800AACF0(instrument, semitone);
                 sameTunedSample = (tunedSample == layer->tunedSample);
                 layer->tunedSample = tunedSample;
-                layer->freqMod = gPitchFrequencies[(s32) semitone] * tunedSample->tuning;
+                layer->freqScale = gPitchFrequencies[(s32) semitone] * tunedSample->tuning;
             } else {
                 layer->tunedSample = NULL;
-                layer->freqMod = gPitchFrequencies[(s32) semitone];
+                layer->freqScale = gPitchFrequencies[(s32) semitone];
                 if (instOrWave >= 0xC0) {
                     layer->tunedSample = &gSynthesisReverbs[instOrWave - 0xC0].tunedSample;
                 }
@@ -726,7 +724,7 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
     }
 
     layer->delay2 = layer->delay;
-    layer->freqMod *= layer->bend;
+    layer->freqScale *= layer->bend;
 
     return sameTunedSample;
 }
@@ -992,28 +990,28 @@ void func_800AD828(SequenceChannel* channel) {
 
                 case 0xE0:
                     cmd = (u8) cmdArgs[0];
-                    channel->volumeMod = (s32) cmd / 128.0f;
+                    channel->volumeScale = (s32) cmd / 128.0f;
                     channel->changes.s.volume = true;
                     break;
 
                 case 0xDE:
                     cmdArgU16 = (u16) cmdArgs[0];
-                    channel->freqMod = (s32) cmdArgU16 / 32768.0f;
-                    channel->changes.s.freqMod = true;
+                    channel->freqScale = (s32) cmdArgU16 / 32768.0f;
+                    channel->changes.s.freqScale = true;
                     break;
 
                 case 0xD3:
                     cmd = (u8) cmdArgs[0];
                     cmd += 0x80;
-                    channel->freqMod = gBendPitchOneOctaveFrequencies[cmd];
-                    channel->changes.s.freqMod = true;
+                    channel->freqScale = gBendPitchOneOctaveFrequencies[cmd];
+                    channel->changes.s.freqScale = true;
                     break;
 
                 case 0xEE:
                     cmd = (u8) cmdArgs[0];
                     cmd += 0x80;
-                    channel->freqMod = gBendPitchTwoSemitonesFrequencies[cmd];
-                    channel->changes.s.freqMod = true;
+                    channel->freqScale = gBendPitchTwoSemitonesFrequencies[cmd];
+                    channel->changes.s.freqScale = true;
                     break;
 
                 case 0xDD:
@@ -1146,7 +1144,7 @@ void func_800AD828(SequenceChannel* channel) {
                     channel->adsr.sustain = 0;
                     channel->velocityRandomVariance = 0;
                     channel->gateTimeRandomVariance = 0;
-                    channel->freqMod = 1.0f;
+                    channel->freqScale = 1.0f;
                     break;
 
                 case 0xE9:
@@ -1362,7 +1360,7 @@ void func_800AE19C(SequencePlayer* seqPlayer) {
                         break;
 
                     case 0xD9:
-                        seqPlayer->fadeVolumeMod = (s8) func_800AC8F4(seqScript) / 127.0f;
+                        seqPlayer->fadeVolumeScale = (s8) func_800AC8F4(seqScript) / 127.0f;
                         break;
 
                     case 0xD7:
@@ -1496,10 +1494,10 @@ void func_800AE700(s32 seqPlayerIndex) {
     seqPlayer->shortNoteGateTimeTable = gDefaultShortNoteGateTimeTable;
     seqPlayer->scriptCounter = 0;
     seqPlayer->fadeVolume = 1.0f;
-    seqPlayer->fadeVolumeMod = 1.0f;
+    seqPlayer->fadeVolumeScale = 1.0f;
     seqPlayer->fadeVelocity = 0.0f;
     seqPlayer->volume = 0.0f;
-    seqPlayer->muteVolumeMod = 0.5f;
+    seqPlayer->muteVolumeScale = 0.5f;
 
     for (i = 0; i < ARRAY_COUNT(seqPlayer->channels); i++) {
         func_800AC214(seqPlayer->channels[i]);

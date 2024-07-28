@@ -1,4 +1,5 @@
 #include "global.h"
+#include "audio.h"
 
 extern Gfx D_3000088[];
 
@@ -301,25 +302,17 @@ s32 func_8007E038(void) {
     return 0;
 }
 
-void func_800BB39C(s32);
-
 void func_8007E08C(void) {
     func_800BB39C(0);
 }
-
-void func_800BAF30(u8);
 
 void func_8007E0AC(s32 arg0) {
     func_800BAF30(arg0);
 }
 
-void func_800BAF80(void);
-
 void func_8007E0CC(void) {
     func_800BAF80();
 }
-
-void func_800BB078(void);
 
 void func_8007E0EC(void) {
     func_800BB078();

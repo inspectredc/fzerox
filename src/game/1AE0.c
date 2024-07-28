@@ -1,4 +1,5 @@
 #include "global.h"
+#include "audio.h"
 #include "fzxthread.h"
 
 extern s32 D_800DCD04;
@@ -50,7 +51,7 @@ extern OSMesgQueue D_800DCAB0;
 extern OSMesgQueue D_800DCAC8;
 extern void* D_800DCCD0[];
 extern void* D_800DCD10;
-void func_800B9E28(void);
+
 void func_800690FC(void);
 void func_80077C9C(void);
 void func_i2_800FD344(void);

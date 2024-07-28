@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzxthread.h"
+#include "audio.h"
 
 extern s32 D_800D8430;
 extern OSThread D_800DC030;
@@ -25,7 +26,7 @@ void func_800670E8(void) {
     D_800CCFA4 = 1;
 }
 
-extern void* D_800DCCC4;
+extern AudioTask* D_800DCCC4;
 
 void func_80067118(void) {
     osSpTaskLoad(D_800DCCC4);
@@ -100,7 +101,6 @@ void func_800678B8(void* arg0) {
 }
 
 void func_80069700(void);
-void func_800BA248(void);
 void func_i1_8040BCB0(void);
 extern s32 D_800CCFC0;
 extern s32 D_800CCFC4;

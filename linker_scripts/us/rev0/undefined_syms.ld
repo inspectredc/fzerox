@@ -107,6 +107,7 @@ gAudioTaskIndexQ = 0x8002AA60;
 gCurAbiCmdBuffer = 0x8002AA70;
 gAudioCurTask = 0x8002AA74;
 gAudioRspTasks = 0x8002AA78;
+gSequenceChannelNone = 0x80028DD8;
 
 gAudioCtxStart = 0x80025C00;
 gAudioCtxEnd = 0x8002B3C0;

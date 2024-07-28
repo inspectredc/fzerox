@@ -1,4 +1,5 @@
 #include "global.h"
+#include "audio.h"
 
 extern unk_struct_F8 D_800E5990[];
 extern unk_struct_1DC D_800E5220[];
@@ -505,7 +506,6 @@ void func_80082A6C(void* arg0, unk_struct_1DC* arg1) {
     func_80082960(&arg1->unk_19C, (s32) arg0 + (arg1->unk_00 << 6) + 0x20208);
 }
 
-void func_800BA2D0(u8);
 extern s32 D_800E5FB8;
 
 void func_80082C80(unk_struct_1DC* arg0) {
@@ -2327,8 +2327,6 @@ void func_8008927C(s32 arg0) {
 }
 
 void func_8007E0CC(void);
-void func_800BA2B4(u8);
-void func_800BAB68(u8);
 
 extern s16 D_800E5FC6;
 extern s16 D_800E5FC8;
@@ -2367,9 +2365,6 @@ void func_800892E0(unk_802C4920* arg0) {
         }
     }
 }
-
-void func_800BA3E4(u8, s32);
-void func_800BAB50(u8);
 
 void func_800894C0(unk_802C4920* arg0) {
 
@@ -2966,7 +2961,6 @@ void func_8008DBB8(unk_802C4920* arg0, s32 arg1) {
 }
 
 extern f32 D_800CE770;
-s32 func_800BA710(u8, s32);
 void func_i2_80105648(f32, f32, f32, f32, f32, f32, f32, unk_802C4920*);
 void func_i2_80105A28(f32, f32, f32, f32, f32, f32, Mtx3F*, s32, s32, s32, unk_802C4920*);
 
@@ -3140,8 +3134,6 @@ void func_8008E504(unk_802C4920* arg0) {
 }
 
 void func_80090568(unk_802C4920*);
-void func_800BA2F0(u8, s32);
-void func_800BB3C4(u8, f32);
 
 void func_8008E54C(unk_802C4920* arg0, f32 arg1) {
     f32 temp_ft4;
