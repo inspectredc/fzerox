@@ -888,7 +888,7 @@ void func_800B0790(void* callback) {
 
 void func_800B2B60(s32);
 
-void func_800B079C(void* heap, u32 heapSize) {
+void func_800B079C(void* heap, size_t heapSize) {
     s32 numFonts;
     void* ramAddr;
     s32 i;

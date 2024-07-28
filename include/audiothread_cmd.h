@@ -69,15 +69,15 @@ typedef enum {
 // ==== Audio Thread Channel Commands ====
 
 /**
- * Set the volumeMod on a given channel
+ * Set the volumeScale on a given channel
  *
  * @param seqPlayerIndex the index of the seqPlayer to modify
  * @param channelIndex the index of the channel to modify
- * @param volumeMod (f32) the volume scale for the sequence. No change in volume is 1.0f
+ * @param volumeScale (f32) the volume scale for the sequence. No change in volume is 1.0f
  */
-#define AUDIOCMD_CHANNEL_SET_VOL_SCALE(seqPlayerIndex, channelIndex, volumeMod)                             \
+#define AUDIOCMD_CHANNEL_SET_VOL_SCALE(seqPlayerIndex, channelIndex, volumeScale)                             \
     func_800B68EC(AUDIO_MK_CMD(AUDIOCMD_OP_CHANNEL_SET_VOL_SCALE, seqPlayerIndex, channelIndex, 0), \
-                            volumeMod)
+                            volumeScale)
 
 /**
  * Set the volume on a given channel
@@ -104,11 +104,11 @@ typedef enum {
  *
  * @param seqPlayerIndex the index of the seqPlayer to modify
  * @param channelIndex the index of the channel to modify
- * @param freqMod (f32) the scaling factor to shift the pitch.
+ * @param freqScale (f32) the scaling factor to shift the pitch.
  */
-#define AUDIOCMD_CHANNEL_SET_FREQ_SCALE(seqPlayerIndex, channelIndex, freqMod)                               \
+#define AUDIOCMD_CHANNEL_SET_FREQ_SCALE(seqPlayerIndex, channelIndex, freqScale)                               \
     func_800B68EC(AUDIO_MK_CMD(AUDIOCMD_OP_CHANNEL_SET_FREQ_SCALE, seqPlayerIndex, channelIndex, 0), \
-                            freqMod)
+                            freqScale)
 
 /**
  * Set reverb volume
@@ -229,11 +229,11 @@ typedef enum {
  * Set the fade volume scale
  *
  * @param seqPlayerIndex the index of the seqPlayer to modify
- * @param fadeVolumeMod (f32) multiplicative scaling factor to apply to volume
+ * @param fadeVolumeScale (f32) multiplicative scaling factor to apply to volume
  */
-#define AUDIOCMD_SEQPLAYER_FADE_VOLUME_SCALE(seqPlayerIndex, fadeVolumeMod)                            \
+#define AUDIOCMD_SEQPLAYER_FADE_VOLUME_SCALE(seqPlayerIndex, fadeVolumeScale)                            \
     func_800B68EC(AUDIO_MK_CMD(AUDIOCMD_OP_SEQPLAYER_FADE_VOLUME_SCALE, seqPlayerIndex, 0, 0), \
-                            fadeVolumeMod)
+                            fadeVolumeScale)
 
 /**
  * Write a value that can be read as input directly by the sequence itself. This will be set to the global
@@ -297,12 +297,12 @@ typedef enum {
  * Fade the volume to the current volume scaled by a scale factor
  *
  * @param seqPlayerIndex the index of the seqPlayer to modify
- * @param fadeVolumeMod scaling factor to apply to volume to get the targetVolume
+ * @param fadeVolumeScale scaling factor to apply to volume to get the targetVolume
  * @param fadeTimer (s32) number of ticks to fade to `targetVolume`
  */
-#define AUDIOCMD_SEQPLAYER_FADE_TO_SCALED_VOLUME(seqPlayerIndex, fadeVolumeMod, fadeTimer) \
+#define AUDIOCMD_SEQPLAYER_FADE_TO_SCALED_VOLUME(seqPlayerIndex, fadeVolumeScale, fadeTimer) \
     func_800B6910(                                                                 \
-        AUDIO_MK_CMD(AUDIOCMD_OP_SEQPLAYER_FADE_TO_SCALED_VOLUME, seqPlayerIndex, fadeVolumeMod, 0), fadeTimer)
+        AUDIO_MK_CMD(AUDIOCMD_OP_SEQPLAYER_FADE_TO_SCALED_VOLUME, seqPlayerIndex, fadeVolumeScale, 0), fadeTimer)
 
 /**
  * Reset to the default volume of the seqPlayer

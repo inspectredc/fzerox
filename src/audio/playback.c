@@ -15,7 +15,7 @@ void func_800AA6D0(Note* note, NoteAttributes* noteAttr) {
     u8 pan;
     u8 reverb;
 
-    func_800AA7D4(note, noteAttr->freqMod);
+    func_800AA7D4(note, noteAttr->freqScale);
     noteSub = &note->noteSubEu;
     velocity = noteAttr->velocity;
     pan = noteAttr->pan;
@@ -65,10 +65,10 @@ extern NoteSubEu gDefaultNoteSub;
 void func_800AA84C(Note* note) {
     if (note->playbackState.parentLayer->adsr.decayIndex == 0) {
         func_800ABCE8(&note->playbackState.adsr, note->playbackState.parentLayer->channel->adsr.envelope,
-                      &note->playbackState.adsrVolModUnused);
+                      &note->playbackState.adsrVolScaleUnused);
     } else {
         func_800ABCE8(&note->playbackState.adsr, note->playbackState.parentLayer->adsr.envelope,
-                      &note->playbackState.adsrVolModUnused);
+                      &note->playbackState.adsrVolScaleUnused);
     }
     note->playbackState.unk_04 = 0;
     note->playbackState.adsr.state = 1;
@@ -191,17 +191,17 @@ void func_800AA940(void) {
                 parentChannel = playbackState->parentLayer->channel;
                 parentLayer = playbackState->parentLayer;
 
-                sp70.freqMod = parentLayer->noteFreqMod;
+                sp70.freqScale = parentLayer->noteFreqScale;
                 sp70.velocity = parentLayer->noteVelocity;
                 sp70.pan = parentLayer->notePan;
                 sp70.reverb = parentChannel->targetReverbVol;
             } else {
-                sp70.freqMod = attr->freqMod;
+                sp70.freqScale = attr->freqScale;
                 sp70.velocity = attr->velocity;
                 sp70.pan = attr->pan;
                 sp70.reverb = attr->reverb;
             }
-            sp70.freqMod *= playbackState->portamentoFreqMod;
+            sp70.freqScale *= playbackState->portamentoFreqScale;
             sp70.velocity *= temp_fs0;
             func_800AA6D0(note, &sp70);
         next:;
@@ -258,7 +258,7 @@ void func_800AAD84(SequenceLayer* layer, s32 arg1) {
     } else {
         noteAttr = &note->playbackState.attributes;
         if (note->playbackState.adsr.state != 6) {
-            noteAttr->freqMod = layer->noteFreqMod;
+            noteAttr->freqScale = layer->noteFreqScale;
             noteAttr->velocity = layer->noteVelocity;
             noteAttr->pan = layer->notePan;
             if (layer->channel != NULL) {
@@ -602,7 +602,7 @@ void func_800AB888(void) {
         note->playbackState.prevParentLayer = NO_LAYER;
         note->playbackState.waveId = 0;
         note->playbackState.attributes.velocity = 0.0f;
-        note->playbackState.adsrVolModUnused = 0;
+        note->playbackState.adsrVolScaleUnused = 0;
         note->playbackState.adsr.state = 0;
         note->playbackState.adsr.action.asByte = 0;
         note->playbackState.portamento.cur = 0.0f;

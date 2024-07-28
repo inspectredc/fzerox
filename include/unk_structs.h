@@ -296,7 +296,12 @@ typedef struct unk_802C4920 {
     s8 unk_18C[0x10];
     Vec3f unk_19C;
     f32 unk_1A8;
-    s8 unk_1AC[0x70];
+    s8 unk_1AC[0x28];
+    f32 unk_1D4;
+    f32 unk_1D8;
+    s8 unk_1DC[0x30];
+    s32 unk_20C;
+    s8 unk_210[0xC];
     s32 unk_21C;
     s8 unk_220[0x8];
     f32 unk_228;

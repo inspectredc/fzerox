@@ -50,7 +50,7 @@
       - [0x4EBC0, c, audio/aisetnextbuf]
       - [0x4EC40, c, audio/synthesis]
       - [0x4FFB0, c, audio/thread]
-      - [0x511D0, c, game/511D0]
+      - [0x511D0, c, audio/general]
 
       # TODO: Figure out these half functions/microcodes
       - [0x554E0, bin] # includes func_800BB4E0
@@ -238,7 +238,7 @@
       - [0x6FF40, .rodata, audio/load]
       - [0x6FF70, .rodata, audio/heap]
       - [0x6FF90, .rodata, audio/thread]
-      - [0x70050, .rodata, game/511D0]
+      - [0x70050, .rodata, audio/general]
 
       # RODATA - Libultra
       - [0x709A0, rodata, libultra/libc/setintmask]

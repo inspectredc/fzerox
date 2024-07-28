@@ -27,7 +27,6 @@ extern u8 gThreadCmdWritePos;
 extern u8 gThreadCmdReadPos;
 extern u8 gThreadCmdQueueFinished;
 
-void func_800B6994(void);
 void func_800B6A34(u32 msg);
 void func_800B706C(SequenceChannel* channel, AudioCmd* cmd);
 
@@ -294,7 +293,7 @@ void func_800B6910(u32 opArgs, u32 data) {
     func_800B6894(opArgs, (void**) &data);
 }
 
-void func_800B6934(u32 opArgs, u8 data) {
+void func_800B6934(u32 opArgs, s8 data) {
     u32 uData = data << 0x18;
 
     func_800B6894(opArgs, (void**) &uData);
@@ -364,8 +363,8 @@ void func_800B6A34(u32 msg) {
             } else if (cmd->op & 0x40) {
                 switch (cmd->op) {
                     case AUDIOCMD_OP_SEQPLAYER_FADE_VOLUME_SCALE:
-                        if (seqPlayer->fadeVolumeMod != cmd->asFloat) {
-                            seqPlayer->fadeVolumeMod = cmd->asFloat;
+                        if (seqPlayer->fadeVolumeScale != cmd->asFloat) {
+                            seqPlayer->fadeVolumeScale = cmd->asFloat;
                             seqPlayer->recalculateVolume = true;
                         }
                         break;
@@ -532,8 +531,8 @@ void func_800B7060(void) {
 void func_800B706C(SequenceChannel* channel, AudioCmd* cmd) {
     switch (cmd->op) {
         case AUDIOCMD_OP_CHANNEL_SET_VOL_SCALE:
-            if (channel->volumeMod != cmd->asFloat) {
-                channel->volumeMod = cmd->asFloat;
+            if (channel->volumeScale != cmd->asFloat) {
+                channel->volumeScale = cmd->asFloat;
                 channel->changes.s.volume = true;
             }
             break;
@@ -553,9 +552,9 @@ void func_800B706C(SequenceChannel* channel, AudioCmd* cmd) {
             break;
 
         case AUDIOCMD_OP_CHANNEL_SET_FREQ_SCALE:
-            if (channel->freqMod != cmd->asFloat) {
-                channel->freqMod = cmd->asFloat;
-                channel->changes.s.freqMod = true;
+            if (channel->freqScale != cmd->asFloat) {
+                channel->freqScale = cmd->asFloat;
+                channel->changes.s.freqScale = true;
             }
             break;
 

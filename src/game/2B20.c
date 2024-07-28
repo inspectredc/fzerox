@@ -1,4 +1,5 @@
 #include "global.h"
+#include "audio.h"
 
 void func_80076848(void);
 void func_8007D9D0(void);
@@ -118,7 +119,6 @@ void func_80068BC0(void) {
 #ifdef IMPORT_DATA
 void func_8007E08C(void);
 void func_8007E0CC(s32);
-void func_800BAFA4(u8);
 extern s8 D_800CD010;
 extern s32 D_800DCE44;
 
