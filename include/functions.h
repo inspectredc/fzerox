@@ -4,6 +4,7 @@
 #include "sys.h"
 #include "fzxmath.h"
 #include "unk_structs.h"
+#include "PR/leo.h"
 
 void func_80068008(void* arg0);
 void func_80068A60(void* arg0);
@@ -58,6 +59,14 @@ void func_8007E2B4(void);
 void func_8007E08C(void);
 void func_8007F904(void);
 
+void func_8007FCB8(void);
+void func_8007FCF4(void);
+void func_8007FD58(void);
+void func_8007FDD0(void);
+void func_8007FE48(void);
+void func_8007FE98(void);
+void func_8007FED4(void);
+
 void func_8008D7E8(void);
 void func_8008D824(void);
 void func_8008D8E8(void);
@@ -75,6 +84,11 @@ f32 func_8009E85C(unk_8006FC8C*, f32, Mtx3F*, f32);
 s32 func_800AA394(s32);
 
 bool func_800CC220(void);
+
+void func_i1_8040B8F0(void*, s32, s32, void*, s32, OSMesgQueue*);
+void func_i1_8040D7A0(LEOCmd*, LEODiskID*, OSMesgQueue*);
+s32 func_i1_8040D9A0(LEOCmd*, s32, OSMesgQueue*); // LeoSeek
+s32 func_i1_80414BA0(OSPri, OSPri, OSMesg*, s32); // LeoCJCreateLeoManager
 
 void func_i2_800FC77C(void);
 void func_i2_800FC9BC(void);

@@ -200,6 +200,8 @@
       - [0x66FE0, data, game/1AE0]
       - [0x66FF0, .data, game/2A60]
       - [0x67000, data]
+      - [0x672B0, .data, game/F1C0]
+      - [0x672E0, data]
       - [0x6B6D0, .data, audio/aisetnextbuf]
       - [0x6B6E0, data]
       - [0x6B710, .data, audio/thread]
@@ -268,6 +270,8 @@
       - [0x71CA0, data, aspmain]
 
       - { start: 0x72030, type: bss, vram: 0x800D8030, name: 800D8030 }
+      - { type: .bss, vram: 0x800E32E0, name: game/F1C0 }
+      - { type: bss, vram: 0x800E3380, name: 800E3380}
       - { type: .bss, vram: 0x800F8AF0, name: libultra/io/sptask }
       - { type: .bss, vram: 0x800F8B30, name: libultra/io/leointerrupt }
       - { type: .bss, vram: 0x800F9B30, name: libultra/io/motor }

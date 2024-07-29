@@ -6,7 +6,6 @@ static const char devrostr1[] = "LBA %d, dist 0x%x-0x%x-0x%x , %dLBAs\n";
 static const char devrostr2[] = "========================================================\n";
 
 extern OSMesgQueue D_800DCA68;
-void func_i1_8040B8F0(void*, s32, s32, void*, s32, OSMesgQueue*);
 void func_i1_80410860(s32, s32, s32*);
 
 s32 func_800750B0(s32 arg0, void* arg1, s32 arg2, s32 arg3) {
@@ -27,8 +26,6 @@ s32 func_800750B0(s32 arg0, void* arg1, s32 arg2, s32 arg3) {
     return sp4C[1];
 }
 
-// todo: clean this up, D_800FCB70_2 shouldnt really exist like this
-/*
 void func_80073E28(void*, void*, size_t);
 void func_i2_800FC730(void);
 extern u8 D_524920[];
@@ -39,10 +36,6 @@ extern u8 D_800FCB70_2[];
 
 void func_8007515C(void) {
     func_80073E28(D_524920, D_800FC730, D_524D60 - D_524920);
-    // vram size 0, with two different symbols?
     bzero(D_800FCB70, D_800FCB70_2 - D_800FCB70);
     func_i2_800FC730();
 }
- */
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/F0B0/func_8007515C.s")
