@@ -140,4 +140,8 @@ void func_80067E98(void) {
     func_80067C0C(D_800DCCF4);
 }
 
+s32 D_800CCFE0 = 0;
+s16 D_800CCFE4 = 2;
+s16 D_800CCFE8 = 2;
+
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1AE0/func_80068008.s")

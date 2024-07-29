@@ -717,7 +717,39 @@ void func_80074634(unk_800F8510* arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80074744.s")
+extern unk_8006FC8C D_802CB6D0[];
+
+void func_80074744(void) {
+    unk_8006FC8C* var_a0;
+    s32 i;
+    s32 temp;
+
+    for (i = 0; i < D_802CDFD0; i++) {
+        var_a0 = &D_802CB6D0[i];
+        temp = var_a0->unk_20 & 0x1C0;
+        switch (temp) {
+            case 0x80:
+            case 0xC0:
+            case 0x100:
+            case 0x180:
+                D_8010B7B0.unk_5A0[i] = -1;
+                D_8010B7B0.unk_620[i] = -1;
+                D_8010B7B0.unk_660[i] = -1;
+                D_8010B7B0.unk_6A0[i] = -1;
+                D_8010B7B0.unk_6E0[i] = -1;
+                break;
+        }
+        switch (temp) {
+            case 0:
+            case 0x1C0:
+                break;
+            default:
+                D_8010B7B0.unk_720[i] = -1;
+                D_8010B7B0.unk_7A0[i] = -1;
+                break;
+        }
+    }
+}
 
 extern s32 D_800CD220[];
 extern u8 D_2747F0[];

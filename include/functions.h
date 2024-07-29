@@ -87,7 +87,7 @@ bool func_800CC220(void);
 
 void func_i1_8040B8F0(void*, s32, s32, void*, s32, OSMesgQueue*);
 void func_i1_8040D7A0(LEOCmd*, LEODiskID*, OSMesgQueue*);
-s32 func_i1_8040D9A0(LEOCmd*, s32, OSMesgQueue*); // LeoSeek
+s32 func_i1_8040D9A0(LEOCmd*, s32, OSMesgQueue*);
 s32 func_i1_80414BA0(OSPri, OSPri, OSMesg*, s32); // LeoCJCreateLeoManager
 
 void func_i2_800FC77C(void);
@@ -97,9 +97,18 @@ void func_i2_800FD184(s32);
 void func_i2_80100520(s32);
 void func_i2_801012CC(s32);
 void func_i2_80103A70(void);
+void func_i2_80103AD4(void);
+s32 func_i2_80103B8C(void);
+s32 func_i2_80103BE0(void);
 
 void func_i3_80134598(void);
 
+void func_i4_80115DF0(void);
+void func_i4_801160D8(void);
+s32 func_i4_8011631C(void);
+s32 func_i4_801168D4(void);
+s32 func_i4_80116DC4(void);
+s32 func_i4_80116E10(void);
 void func_i4_80116E64(void);
 void func_i4_80116E8C(unk_800E3A28*);
 void func_i4_80116F48(unk_800E3A28*);
@@ -148,6 +157,9 @@ void func_i4_8011A6A0(unk_800E3A28*);
 void func_i4_8011A6EC(unk_800E3A28*);
 void func_i4_8011A73C(unk_800E3A28*);
 void func_i4_8011A7B8(void);
+void func_i4_8011AD60(void);
+s32 func_i4_8011AE2C(void);
+s32 func_i4_8011AF84(void);
 void func_i4_8011B06C(unk_800E3A28*);
 void func_i4_8011B0C8(void);
 void func_i4_8011B0D0(unk_800E3A28*);
@@ -167,6 +179,11 @@ Gfx* func_i4_8011B674(Gfx*);
 Gfx* func_i4_8011B6C4(Gfx*);
 void func_i4_8011B874(unk_800E3A28*);
 
+void func_i5_80116934(void);
+void func_i5_80116D00(void);
+s32 func_i5_80116EEC(void);
+s32 func_i5_801175D0(void);
+s32 func_i5_80117664(void);
 void func_i5_80117684(unk_800E3A28*);
 void func_i5_80117758(void);
 void func_i5_801177EC(unk_800E3A28*);
@@ -191,6 +208,9 @@ void func_i5_80118D94(unk_800E3A28*);
 void func_i5_80118F24(unk_800E3A28*);
 void func_i5_80118F84(unk_800E3A28*);
 
+void func_i6_80115DF0(void);
+s32 func_i6_80115FF0(void);
+s32 func_i6_801167CC(void);
 void func_i6_801167EC(unk_800E3A28*);
 void func_i6_80116894(unk_800E3A28*);
 void func_i6_801168EC(unk_800E3A28*);
@@ -208,6 +228,20 @@ Gfx* func_i6_80117A18(Gfx*);
 Gfx* func_i6_80117C50(Gfx*);
 void func_i6_80117D3C(unk_800E3A28*);
 void func_i6_80117DE0(unk_800E3A28*);
+void func_i6_8011BF50(void);
+s32 func_i6_8011BFB0(void);
+s32 func_i6_8011C01C(void);
+void func_i6_8011C050(void);
+s32 func_i6_8011C6DC(void);
+s32 func_i6_8011CD4C(void);
+
+void func_i7_80143A90(void);
+s32 func_i7_801441A0(void);
+s32 func_i7_801447F4(void);
+
+void func_i8_801439D0(void);
+s32 func_i8_80143DDC(void);
+s32 func_i8_80144568(void);
 
 Gfx* func_i9_80115DF0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 argA, s32 argB, s32 argC, s32 argD, s32 argE, s32 argF, s32 arg10);
 Gfx* func_i9_80161050(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3);
