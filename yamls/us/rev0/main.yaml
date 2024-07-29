@@ -197,9 +197,10 @@
 
       # DATA - todo: split data
       - [0x66FA0, .data, game/1060]
-      - [0x66FE0, data, game/1AE0]
+      - [0x66FE0, .data, game/1AE0]
       - [0x66FF0, .data, game/2A60]
-      - [0x67000, data]
+      - [0x67000, .data, game/2B20]
+      - [0x67170, data]
       - [0x672B0, .data, game/F1C0]
       - [0x672E0, data]
       - [0x6B6D0, .data, audio/aisetnextbuf]
