@@ -30,7 +30,96 @@ void* func_80069ED0(void) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_80069F5C.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006A00C.s")
+extern Vp D_80146A8[];
+extern Vp D_80146B8[];
+extern Vp D_80146C8[];
+extern Vp D_80146D8[];
+extern Vp D_80146E8[];
+extern Vp D_80146F8[];
+extern Vp D_8014708[];
+extern Vp D_8014718[];
+extern Vp D_8014728[];
+extern Vp D_8014738[];
+extern Vp D_8014748[];
+extern Vp D_8014758[];
+extern Vp D_8014768[];
+
+extern ScissorBox D_800CD9C0;
+extern ScissorBox D_800CD9D0;
+extern ScissorBox D_800CD9E0;
+extern ScissorBox D_800CD9F0;
+extern ScissorBox D_800CDA00;
+extern ScissorBox D_800CDA10;
+extern ScissorBox D_800CDA20;
+extern ScissorBox D_800CDA30;
+extern ScissorBox D_800CDA40;
+extern ScissorBox D_800CDA50;
+extern ScissorBox D_800CDA60;
+extern ScissorBox D_800CDA70;
+extern ScissorBox D_800CDA80;
+
+Gfx* func_8006A00C(Gfx* gfx, s32 arg1) {
+    ScissorBox* scissorBox;
+
+    switch (arg1) {
+        case 0:
+            gSPViewport(gfx++, D_80146A8);
+            scissorBox = &D_800CD9C0;
+            break;
+        case 1:
+            gSPViewport(gfx++, D_80146B8);
+            scissorBox = &D_800CD9D0;
+            break;
+        case 2:
+            gSPViewport(gfx++, D_80146C8);
+            scissorBox = &D_800CD9E0;
+            break;
+        case 3:
+            gSPViewport(gfx++, D_80146D8);
+            scissorBox = &D_800CD9F0;
+            break;
+        case 4:
+            gSPViewport(gfx++, D_80146E8);
+            scissorBox = &D_800CDA00;
+            break;
+        case 5:
+            gSPViewport(gfx++, D_80146F8);
+            scissorBox = &D_800CDA10;
+            break;
+        case 6:
+            gSPViewport(gfx++, D_8014708);
+            scissorBox = &D_800CDA20;
+            break;
+        case 7:
+            gSPViewport(gfx++, D_8014718);
+            scissorBox = &D_800CDA30;
+            break;
+        case 8:
+            gSPViewport(gfx++, D_8014728);
+            scissorBox = &D_800CDA40;
+            break;
+        case 9:
+            gSPViewport(gfx++, D_8014738);
+            scissorBox = &D_800CDA50;
+            break;
+        case 10:
+            gSPViewport(gfx++, D_8014748);
+            scissorBox = &D_800CDA60;
+            break;
+        case 11:
+            gSPViewport(gfx++, D_8014758);
+            scissorBox = &D_800CDA70;
+            break;
+        case 12:
+            gSPViewport(gfx++, D_8014768);
+            scissorBox = &D_800CDA80;
+            break;
+    }
+
+    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, scissorBox->left, scissorBox->top, scissorBox->right, scissorBox->bottom);
+
+    return gfx;
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006A3AC.s")
 

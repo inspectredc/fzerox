@@ -10,8 +10,9 @@ bool func_8006D3F0(s32 arg0) {
 
 typedef struct unk_802D3978 {
     s32 unk_00;
-    s8 unk_04[0x10];
-} unk_802D3978;
+    Vec3f unk_04;
+    s8 unk_10[0x4];
+} unk_802D3978; // size = 0x14
 
 extern unk_802D3978 D_802D3978[];
 
@@ -675,7 +676,40 @@ void func_800742D0(void) {
     D_8010B7B0.unk_000[3] = 0;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_800742FC.s")
+// Pre-buffers segment
+extern u8 D_802D5C40[];
+extern u8 D_802A6B40_2[];
+extern u8 D_802A6B40_3[];
+
+extern unk_8010B7B0 D_8010CF50;
+extern s32 D_802A6B50;
+extern s32 D_802C2020;
+extern s32 D_802D1B70;
+extern s32 D_802D2D70;
+extern unk_802D1B60_unk_00 D_802D0FE0;
+
+void func_800742FC(void) {
+    s32 i;
+
+    bzero(D_802A6B40_3, D_802D5C40 - D_802A6B40_2);
+    func_80074204();
+    D_802CDFD0 = 0;
+    D_8010B7B0.unk_000[0] = 4;
+    D_8010B7B0.unk_000[1] = 0;
+    D_8010B7B0.unk_000[2] = 0;
+    D_8010B7B0.unk_000[3] = 0;
+    D_8010CF50 = D_8010B7B0;
+    D_802D1B60.unk_00 = &D_802D0FE0;
+    D_802A6B50 = &D_802C2020;
+    D_802D2D70 = &D_802D1B70;
+
+    for (i = 0; i < 56; i++) {}
+    func_8007402C(0);
+    func_80074204();
+    D_8010CF50 = D_8010B7B0;
+    D_8010B7B0.unk_000[1] = 0;
+    D_802CDFD0 = 0;
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80074428.s")
 

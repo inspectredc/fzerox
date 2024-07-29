@@ -26,7 +26,6 @@ s32 func_800750B0(s32 arg0, void* arg1, s32 arg2, s32 arg3) {
     return sp4C[1];
 }
 
-void func_80073E28(void*, void*, size_t);
 void func_i2_800FC730(void);
 extern u8 D_524920[];
 extern u8 D_524D60[];
