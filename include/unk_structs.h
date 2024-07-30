@@ -17,6 +17,10 @@ typedef struct unk_8006FC8C {
     struct unk_8006FC8C* unk_34;
     struct unk_8006FC8C* unk_38;
     s8 unk_3C[0x28];
+    // s8 unk_3C[0x10];
+    // struct unk_802D3978* unk_4C;
+    // struct unk_802D3978* unk_50;
+    // s8 unk_54[0x10];
     f32 unk_64;
     f32 unk_68;
     f32 unk_6C;
