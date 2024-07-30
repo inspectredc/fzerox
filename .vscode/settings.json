@@ -98,7 +98,8 @@
     "unordered_map": "c",
     "unordered_set": "c",
     "format": "c",
-    "audio.h": "c"
+    "audio.h": "c",
+    "leoappli.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"

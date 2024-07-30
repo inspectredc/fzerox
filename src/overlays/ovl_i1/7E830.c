@@ -30,9 +30,11 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i1/7E830/func_i1_80410090.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i1/7E830/func_i1_804100C8.s")
+extern s32 D_i1_8042BC34;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i1/7E830/func_i1_804100D4.s")
+s32 func_i1_804100C8(void) {
+    return D_i1_8042BC34;
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i1/7E830/func_i1_804100E4.s")
 

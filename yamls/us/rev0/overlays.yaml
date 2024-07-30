@@ -4,6 +4,7 @@
     dir: overlays/ovl_i1
     start: 0x72030
     vram: 0x80402F20
+    bss_size: 0x2CD0
     symbol_name_format: i1_$VRAM
     subsegments:
       - [0x72030, hasm]
@@ -60,6 +61,7 @@
       - [0x97B90, .rodata, 7CBE0]
       - [0x97FB0, .rodata, 7E830]
       - [0x98060, .rodata, 7FE10]
+      - { start: 0x98080, type: bss, vram: 0x80428F70, name: 80428F70 }
 
   - name: ovl_i2
     exclusive_ram_id: overlay
