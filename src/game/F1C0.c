@@ -62,8 +62,8 @@ void func_8007FC68(s32);
 
 bool func_800752EC(void) {
 
-    LeoSpdlMotor(&D_800E32E8, 4, &D_800E3308);
-    osRecvMesg(&D_800E3308, &D_800E3324, 1);
+    LeoSpdlMotor(&D_800E32E8, LEO_MOTOR_BRAKE, &D_800E3308);
+    osRecvMesg(&D_800E3308, &D_800E3324, OS_MESG_BLOCK);
     switch ((s32) D_800E3324) {
         case 0:
         case 2:
@@ -563,8 +563,6 @@ s32 func_80076340(void) {
     return 0;
 }
 
-void func_i1_8040BD70(void);
-
 void func_800763A8(void) {
     s32 i;
 
@@ -573,7 +571,7 @@ void func_800763A8(void) {
             osRecvMesg(&D_800DCAE0, &D_800E3328, 1);
         } while (D_800E3328 != (OSMesg) 0x1A);
 
-        func_i1_8040BD70();
+        LeoResetClear();
         D_800E3324 = func_80075534();
 
         if ((s32) D_800E3324 != 0x2B) {

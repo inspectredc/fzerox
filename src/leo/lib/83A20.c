@@ -1,6 +1,7 @@
 #include "libultra/ultra64.h"
 #include "libc/stdbool.h"
 #include "leo/leo_internal.h"
+#include "PR/os_internal_exception.h"
 
 s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsgCnt) {
     OSPiHandle* driveRomHandle;
@@ -9,7 +10,7 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     LEOCmd cmdBlockID;
     LEODiskID thisID;
     u32 stat;
-    u32 data;
+    u32 status;
     s32 dummy;
     s32 dummy2;
 
@@ -20,8 +21,8 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     leoDiskHandle = osLeoDiskInit();
     driveRomHandle = osDriveRomInit();
 
-    osEPiReadIo(leoDiskHandle, 0x05000508, &data);
-    if (data & 0xFFFF) {
+    osEPiReadIo(leoDiskHandle, LEO_STATUS, &status);
+    if (status & LEO_STATUS_PRESENCE_MASK) {
         return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
     }
     
@@ -51,7 +52,7 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     }
 
     if (cmdBlockInq.header.status != 0) {
-        return cmdBlockInq.header.sense;
+        return GET_ERROR(cmdBlockInq);
     }
     __leoVersion.driver = cmdBlockInq.version;
     __leoVersion.drive = 4;
@@ -59,19 +60,19 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     __leoVersion.ndevices = cmdBlockInq.dev_num;
 
     if ((__leoVersion.driver & 0xF) == 4) {
-        LEO_country_code = 0;
+        LEO_country_code = LEO_COUNTRY_NONE;
     } else if (((__leoVersion.driver & 0xF) == 3) || ((__leoVersion.driver & 0xF) == 1)) {
 
-        osEPiReadIo(driveRomHandle, 0x9FF00, &data);
-        data = ((data & 0xFF000000) >> 0x18);
+        osEPiReadIo(driveRomHandle, 0x9FF00, &status);
+        status = ((status & 0xFF000000) >> 0x18);
         dummy2 = 0x3ED98F23;
-        if (data != 0xC3) {
+        if (status != 0xC3) {
             while (1) {}
         }
 
-        dummy2 *= data;
+        dummy2 *= status;
         dummy2 -= (u32)&cmdBlockInq;
-        LEO_country_code = 0xE848D316;
+        LEO_country_code = LEO_COUNTRY_JPN;
     } else {
         while (true) {}
     }
@@ -87,7 +88,7 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     LEOCmd cmdBlockID;
     LEODiskID thisID;
     u32 stat;
-    u32 data;
+    u32 status;
     s32 dummy;
 
     if (__leoActive) {
@@ -97,8 +98,8 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     leoDiskHandle = osLeoDiskInit();
     driveRomHandle = osDriveRomInit();
 
-    osEPiReadIo(leoDiskHandle, 0x05000508, &data);
-    if (data & 0xFFFF) {
+    osEPiReadIo(leoDiskHandle, LEO_STATUS, &status);
+    if (status & LEO_STATUS_PRESENCE_MASK) {
         return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
     }
     
@@ -126,7 +127,7 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     while (cmdBlockInq.header.status == 8) { }
 
     if (cmdBlockInq.header.status != 0) {
-        return cmdBlockInq.header.sense;
+        return GET_ERROR(cmdBlockInq);
     }
     __leoVersion.driver = cmdBlockInq.version;
     __leoVersion.drive = 4;
@@ -134,18 +135,18 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     __leoVersion.ndevices = cmdBlockInq.dev_num;
 
     if ((__leoVersion.driver & 0xF) == 4) {
-        LEO_country_code = 0;
+        LEO_country_code = LEO_COUNTRY_NONE;
     } else if (((__leoVersion.driver & 0xF) == 3) || ((__leoVersion.driver & 0xF) == 1)) {
         s32 dummy2;
-        osEPiReadIo(driveRomHandle, 0x9FF00, &data);
-        data = ((data & 0xFF000000) >> 0x18);
+        osEPiReadIo(driveRomHandle, 0x9FF00, &status);
+        status = ((status & 0xFF000000) >> 0x18);
 
-        if (data != 4) {
+        if (status != 4) {
             while (true) {}
         }
 
         dummy2 = 0x32F8EB20;
-        LEO_country_code = 0x2263EE56;
+        LEO_country_code = LEO_COUNTRY_USA;
         dummy2 += (u32)&__leoActive;
     } else {
         while (true) {}

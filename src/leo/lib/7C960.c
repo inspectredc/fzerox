@@ -35,6 +35,6 @@ void leoReadDiskId(void) {
     }
 
     // Copy status and sense
-    LEOcur_command->header.sense = dummy_cmd.header.sense;
+    LEOcur_command->header.sense = GET_ERROR(dummy_cmd);
     LEOcur_command->header.status = dummy_cmd.header.status;
 }

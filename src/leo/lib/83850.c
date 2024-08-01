@@ -39,7 +39,7 @@ void leoWrite(void) {
     osStartThread(&LEOinterruptThread);
     osRecvMesg(&LEOcontrol_que, (OSMesg*)&message, OS_MESG_BLOCK);
 
-    if (message != 0x90000) {
+    if (message != LEO_MSG_CONTROL_FORCE_ACCEPT) {
         LEOcur_command->header.sense = message;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;

@@ -1,7 +1,7 @@
 #include "libultra/ultra64.h"
 #include "leo/leo_internal.h"
 
-s32 LeoSpdlMotor(LEOCmd* cmdBlock, u8 mode, OSMesgQueue* mq) {
+s32 LeoSpdlMotor(LEOCmd* cmdBlock, LEOSpdlMode mode, OSMesgQueue* mq) {
     if (!__leoActive) {
         return -1;
     }

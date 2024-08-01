@@ -11,12 +11,11 @@ void func_i1_80403D30(void) {
 extern OSMesg D_i1_80428610;
 extern LEODiskID D_i1_80428618;
 s32 func_i1_80404108(LEODiskID*);
-void func_i1_8040BD70(void);
 
 s32 func_i1_80403D68(void) {
     s32 i = 0;
 
-    func_i1_8040BD70();
+    LeoResetClear();
     
     while (true) {
         if (func_i1_80404108(&D_i1_80428618) == 0) {
@@ -163,9 +162,12 @@ s32 func_i1_804041A8(void) {
     return 0;
 }
 
+// Unknown what this does yet
+extern void __LeoBootGame2(s32, s32, s32, s32);
+
 void func_i1_804041C8(void) {
     LeoBootGame(NULL);
-    LeoGetAAdr(0, NULL, NULL, NULL);
+    __LeoBootGame2(0, 0, 0, 0);
 }
 
 extern s32 D_i1_8042860C;

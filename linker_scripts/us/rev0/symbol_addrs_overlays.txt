@@ -97,7 +97,7 @@ leoSetTimer = 0x80411168; //segment:leo
 leoTest_unit_rdy = 0x80414EE0; //segment:leo
 leoWrite = 0x80414740; //segment:leo
 LeoBootGame = 0x80411760; //segment:leo
-LeoGetAAdr = 0x804122A0; //segment:leo
+__LeoBootGame2 = 0x804122A0; //segment:leo
 
 D_i2_8010AE1C = 0x8010AE1C; //force_migration:True size:0x8 segment:ovl_i2
 

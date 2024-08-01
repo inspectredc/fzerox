@@ -1,7 +1,7 @@
 #include "libultra/ultra64.h"
 #include "leo/leo_internal.h"
 
-s32 LeoTestUnitReady(u8* status) {
+s32 LeoTestUnitReady(LEOStatus* status) {
     LEOCmdTestUnitReady cmdBlock;
 
     if (!__leoActive) {
@@ -19,5 +19,5 @@ s32 LeoTestUnitReady(u8* status) {
     while (cmdBlock.header.status == LEO_STATUS_BUSY) {}
 
     *status = cmdBlock.test;
-    return cmdBlock.header.sense;
+    return GET_ERROR(cmdBlock);
 }

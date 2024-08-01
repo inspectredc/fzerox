@@ -81,6 +81,10 @@ typedef struct {
 #define LEO_TEST_PIN_SEL (LEO_BASE_REG + 0x548) //Test Write
 #define LEO_RAM_ADDR (LEO_BASE_REG + 0x580)     //Microsequencer RAM
 
+#define LEO_COUNTRY_JPN		0xE848D316
+#define LEO_COUNTRY_USA		0x2263EE56
+#define LEO_COUNTRY_NONE	0x00000000
+
 #define LEO_STATUS_PRESENCE_MASK 0xFFFF
 
 #define LEO_STATUS_DATA_REQUEST 0x40000000
@@ -145,6 +149,10 @@ typedef struct {
 #define ASIC_SOFT_RESET_CODE       0x000a0000
 #define ASIC_HARD_RESET_CODE       0xaaaa0000
 
+/* Special Case Control Queue Messages */
+#define LEO_MSG_CONTROL_FORCE_ACCEPT    0x90000
+#define LEO_MSG_CONTROL_C2_CORRECTION   0x80000
+
 u8 leoChk_asic_ready(u32 asic_cmd);
 u8 leoDetect_index_w(void);
 u8 leoSeek_i(u16 rwmode);
@@ -173,6 +181,7 @@ s32 __osLeoInterrupt(void);
 s32 leoC2_Correction(void);
 u16 leoLba_to_vzone(u32 lba);
 s32 __leoSetReset(void);
+u8 leoAnalize_asic_status(void);
 
 extern u8 LEOBYTE_TBL1[9];
 extern u16 LEOBYTE_TBL2[9];

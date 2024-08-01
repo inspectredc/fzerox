@@ -2,11 +2,11 @@
 
 bool func_800CC220(void) {
     OSPiHandle* leoHandle = osLeoDiskInit();
-    u32 data;
+    u32 status;
 
-    osEPiReadIo(leoHandle, 0x05000508, &data);
+    osEPiReadIo(leoHandle, LEO_STATUS, &status);
 
-    if (data & 0xFFFF) {
+    if (status & LEO_STATUS_PRESENCE_MASK) {
         return false;
     } else {
         return true;

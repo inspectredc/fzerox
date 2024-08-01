@@ -1,5 +1,6 @@
 #include "libultra/ultra64.h"
 #include "leo/leo_internal.h"
+#include "PR/os_internal_exception.h"
 
 s32 LeoCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsgCnt) {
     OSPiHandle* driveRomHandle;
@@ -8,7 +9,7 @@ s32 LeoCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsgCn
     LEOCmd cmdBlockID;
     LEODiskID thisID;
     u32 stat;
-    u32 data;
+    u32 status;
     s32 dummy;
 
     if (__leoActive) {
@@ -18,8 +19,8 @@ s32 LeoCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsgCn
     leoDiskHandle = osLeoDiskInit();
     driveRomHandle = osDriveRomInit();
 
-    osEPiReadIo(leoDiskHandle, 0x05000508, &data);
-    if (data & 0xFFFF) {
+    osEPiReadIo(leoDiskHandle, LEO_STATUS, &status);
+    if (status & LEO_STATUS_PRESENCE_MASK) {
         return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
     }
 
@@ -42,7 +43,7 @@ s32 LeoCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsgCn
     while (cmdBlockInq.header.status == 8) { }
 
     if (cmdBlockInq.header.status != 0) {
-        return cmdBlockInq.header.sense;
+        return GET_ERROR(cmdBlockInq);
     }
 
     __leoVersion.driver = cmdBlockInq.version;

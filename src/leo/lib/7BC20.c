@@ -20,7 +20,7 @@ void leomain(void* arg0) {
     LEOPiInfo = osLeoDiskInit();
     LEOPiDmaParam.hdr.pri = 1;
     LEOPiDmaParam.hdr.retQueue = &LEOdma_que;
-    osEPiReadIo(LEOPiInfo, 0x05000508, &cur_status);
+    osEPiReadIo(LEOPiInfo, LEO_STATUS, &cur_status);
     if (!(cur_status & 0x400000)) {
         if ((cur_status & 0x06800000)) {
             leoDrive_reset();
@@ -31,7 +31,7 @@ void leomain(void* arg0) {
         osRecvMesg(&LEOcommand_que, (void** ) &LEOcur_command, 1);
         if (LEOcur_command->header.command == 0) {
             leoDrive_reset();
-            osRecvMesg(&LEOevent_que, NULL, 0);
+            osRecvMesg(&LEOevent_que, NULL, OS_MESG_NOBLOCK);
             continue;
         }
         sense_code = leoChk_asic_ready(0x10001);
@@ -111,8 +111,8 @@ void leomain(void* arg0) {
                         goto block_59;
                 }
     
-                if (LEO_country_code == 0) {
-                    osEPiReadIo(LEOPiInfo, 0x05000540U, &cur_status);
+                if (LEO_country_code == LEO_COUNTRY_NONE) {
+                    osEPiReadIo(LEOPiInfo, LEO_ID_REG, &cur_status);
                     if ((cur_status & 0x70000) != 0x40000) {
                         while (true) {}
                     }
@@ -178,16 +178,16 @@ u8 leoRead_system_area(void) {
             // read System LBA 12 (+0, this is an offset value for leoRead_common)
             // see leo_sys_read_cmd premade struct
             leoRead_common(0);
-            switch (temp_cmd.header.sense) {
+            switch (GET_ERROR(temp_cmd)) {
                 case LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION:
                     do {
                         // if expecting a retail disk, LBA 12 is expected to do a read error, if not then freeze
-                    } while (LEO_country_code != 0);
+                    } while (LEO_country_code != LEO_COUNTRY_NONE);
                     break;
                 case LEO_SENSE_UNRECOVERED_READ_ERROR:
                     do {
                         // if expecting a development disk, LBA 12 is expected to read correctly, if not then freeze
-                    } while (LEO_country_code == 0);
+                    } while (LEO_country_code == LEO_COUNTRY_NONE);
                     break;
                 default:
                     goto system_retry;
@@ -198,7 +198,7 @@ u8 leoRead_system_area(void) {
         } else {
             // read System LBA 0,1,8,9 (or 2,3,10,11 for dev)
             temp_cmd.lba = leo_sys_form_lbas[retry_cntr % 4];
-            if (LEO_country_code == 0) {
+            if (LEO_country_code == LEO_COUNTRY_NONE) {
                 temp_cmd.lba += 2;
             }
             leoRead_common(0);
@@ -211,7 +211,7 @@ u8 leoRead_system_area(void) {
             }
         }
     system_retry:
-        if (leoChk_err_retry(temp_cmd.header.sense) != LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
+        if (leoChk_err_retry(GET_ERROR(temp_cmd)) != LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
             break;
         }
         if (retry_cntr++ >= 0x40U) {
@@ -226,7 +226,7 @@ u8 leoRead_system_area(void) {
         }
     }
     LEOcur_command = prev_cmd;
-    return LEOcur_command->header.sense = temp_cmd.header.sense;
+    return LEOcur_command->header.sense = GET_ERROR(temp_cmd);
 }
 
 void leoRead(void) {
@@ -270,9 +270,9 @@ void leoRead_common(u32 offset) {
         osRecvMesg(&LEOcontrol_que, (OSMesg)&message, OS_MESG_BLOCK);
 
         switch (message) {
-            case 0x90000:
+            case LEO_MSG_CONTROL_FORCE_ACCEPT:
                 goto end;
-            case 0x80000:
+            case LEO_MSG_CONTROL_C2_CORRECTION:
                 leoC2_Correction();
                 LEOrw_flags &= ~0x4000;
                 osSendMesg(&LEOc2ctrl_que, NULL, OS_MESG_NOBLOCK);

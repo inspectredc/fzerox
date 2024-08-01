@@ -86,7 +86,7 @@ u16 leoLba_to_phys(u32 lba) {
     LEOtgt_param.blk_bytes = LEOBYTE_TBL2[LEOtgt_param.zone];
 
     // For development disks
-    if ((LEO_country_code == 0) && (lba < 0xC)) {
+    if ((LEO_country_code == LEO_COUNTRY_NONE) && (lba < 0xC)) {
         LEOtgt_param.sec_bytes = 0xC0;
         LEOtgt_param.blk_bytes = 0x3FC0;
     }
