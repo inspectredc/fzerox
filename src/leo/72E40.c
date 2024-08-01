@@ -163,12 +163,9 @@ s32 func_i1_804041A8(void) {
     return 0;
 }
 
-void func_i1_80411760(s32);
-void func_i1_804122A0(s32, s32, s32, s32);
-
 void func_i1_804041C8(void) {
-    func_i1_80411760(0);
-    func_i1_804122A0(0, 0, 0, 0);
+    LeoBootGame(NULL);
+    LeoGetAAdr(0, NULL, NULL, NULL);
 }
 
 extern s32 D_i1_8042860C;
@@ -177,7 +174,7 @@ extern u32 D_i1_80428638;
 s32 func_i1_80404204(void) {
     s32 sp1C;
 
-    D_i1_80428610 = func_i1_80410C60(&D_i1_80428638, 1);
+    D_i1_80428610 = LeoReadCapacity(&D_i1_80428638, OS_WRITE);
     if ((s32)D_i1_80428610 != 0) {
         return -1;
     }

@@ -172,7 +172,6 @@ u8 leoSeek_w(void);
 s32 __osLeoInterrupt(void);
 s32 leoC2_Correction(void);
 u16 leoLba_to_vzone(u32 lba);
-s32 func_i1_80410C60(LEOCapacity* cmdBlock, s32 control);
 s32 __leoSetReset(void);
 
 extern u8 LEOBYTE_TBL1[9];

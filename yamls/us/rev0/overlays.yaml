@@ -1,7 +1,7 @@
-  - name: ovl_i1
+  - name: leo
     exclusive_ram_id: overlay
     type: code
-    dir: overlays/ovl_i1
+    dir: leo
     start: 0x72030
     vram: 0x80402F20
     bss_size: 0x2CD0
