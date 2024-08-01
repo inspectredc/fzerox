@@ -11,8 +11,8 @@ typedef struct unk_leo_804285D0 {
     s8 unk_06[4];
     u16 unk_0A;
     s32 unk_0C;
-    s8 unk_10[20];
-    s8 unk_24[5];
+    u8 unk_10[20];
+    u8 unk_24[5];
     s8 unk_29;
     u8 unk_2A;
     s8 unk_2B[0x1];

@@ -62,7 +62,7 @@ void func_8007FC68(s32);
 
 bool func_800752EC(void) {
 
-    func_i1_8040D9A0(&D_800E32E8, 4, &D_800E3308);
+    LeoSpdlMotor(&D_800E32E8, 4, &D_800E3308);
     osRecvMesg(&D_800E3308, &D_800E3324, 1);
     switch ((s32) D_800E3324) {
         case 0:
@@ -85,7 +85,7 @@ bool func_800752EC(void) {
 
 OSMesg func_800753EC(void) {
 
-    func_i1_8040D7A0(&D_800E32E8, &D_800CD2B0, &D_800E3308);
+    LeoReadDiskID(&D_800E32E8, &D_800CD2B0, &D_800E3308);
     osRecvMesg(&D_800E3308, &D_800E3324, 1);
 
     switch ((s32) D_800E3324) {
@@ -122,7 +122,7 @@ OSMesg func_800753EC(void) {
 
 OSMesg func_80075534(void) {
 
-    func_i1_8040D7A0(&D_800E32E8, &D_800CD2B0, &D_800E3308);
+    LeoReadDiskID(&D_800E32E8, &D_800CD2B0, &D_800E3308);
     osRecvMesg(&D_800E3308, &D_800E3324, 1);
 
     switch ((s32) D_800E3324) {
@@ -287,7 +287,7 @@ bool func_800759AC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, OSMesgQueue
         while (func_800752EC()) {}
         while (func_80075800()) {}
     }
-    func_i1_8040B8F0(arg0, arg1, arg2, arg3, arg4, &D_800E3308);
+    LeoReadWrite(arg0, arg1, arg2, arg3, arg4, &D_800E3308);
     osRecvMesg(&D_800E3308, &D_800E3324, 1);
 
     msg = D_800E3324;
@@ -401,7 +401,7 @@ bool func_80075D10(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, OSMesgQueue
         while (func_800752EC()) {}
         while (func_80075800()) {}
     }
-    func_i1_8040B8F0(arg0, arg1, arg2, arg3, arg4, &D_800E3308);
+    LeoReadWrite(arg0, arg1, arg2, arg3, arg4, &D_800E3308);
     osRecvMesg(&D_800E3308, &D_800E3324, 1);
 
     msg = D_800E3324;

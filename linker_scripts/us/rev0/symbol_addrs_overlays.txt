@@ -1,3 +1,46 @@
+__leoActive = 0x80428770; //segment:ovl_i1
+leoCommand = 0x8040BB44; //segment:ovl_i1
+
+LEOcommand_que = 0x8042B2A8; //segment:ovl_i1
+LEOcontrol_que = 0x8042B2D8; //segment:ovl_i1
+LEOevent_que = 0x8042B2C0; //segment:ovl_i1
+LEOdma_que = 0x8042B2F0; //segment:ovl_i1
+LEOblock_que = 0x8042B308; //segment:ovl_i1
+LEOpost_que = 0x8042A640; //segment:ovl_i1
+LEOcontrol_que_buf = 0x8042B324; //segment:ovl_i1
+LEOevent_que_buf = 0x8042B320; //segment:ovl_i1
+LEOdma_que_buf = 0x8042B328; //segment:ovl_i1
+LEOblock_que_buf = 0x8042B330; //segment:ovl_i1
+LEOpost_que_buf = 0x8042A658; //segment:ovl_i1
+LEOcommandThread = 0x8042A748; //segment:ovl_i1
+LEOcommandThreadStack = 0x8042AAA8; //segment:ovl_i1
+LEOinterruptThread = 0x8042A8F8; //segment:ovl_i1
+LEOinterruptThreadStack = 0x8042AEA8; //segment:ovl_i1
+LEOwrite_pointer = 0x8042B334; //segment:ovl_i1
+LEOc2ctrl_que_buf = 0x8042B360; //segment:ovl_i1
+LEOcur_command = 0x8042B338; //segment:ovl_i1
+LEOc2ctrl_que = 0x8042B368; //segment:ovl_i1
+LEOtgt_param = 0x8042B350; //segment:ovl_i1
+LEOrw_flags = 0x8042B346; //segment:ovl_i1
+LEO_sys_data = 0x8042A660; //segment:ovl_i1
+LEOPiDmaParam = 0x8042B38C; //segment:ovl_i1
+LEO_country_code = 0x8042B35C; //segment:ovl_i1
+LEO_cmd_tbl = 0x804286F0; //segment:ovl_i1
+
+leomain = 0x8040CB10; //segment:ovl_i1
+leoLba_to_phys = 0x80410370; //segment:ovl_i1
+leoSeek_i = 0x8040FE14; //segment:ovl_i1
+read_write_track = 0x8040BFB0; //segment:ovl_i1
+leoRead_system_area = 0x8040D0A0; //segment:ovl_i1
+leoChk_asic_ready = 0x8040F880; //segment:ovl_i1
+leoSend_asic_cmd_w = 0x8040FD10; //segment:ovl_i1
+leoChk_cur_drvmode = 0x80410004; //segment:ovl_i1
+leoDrive_reset = 0x80410090; //segment:ovl_i1
+leoChkUnit_atten = 0x804100C8; //segment:ovl_i1
+leoRetUnit_atten = 0x804100E4; //segment:ovl_i1
+leoInitUnit_atten = 0x80410184; //segment:ovl_i1
+leoClr_queue = 0x80410A20; //segment:ovl_i1
+
 D_i2_8010AE1C = 0x8010AE1C; //force_migration:True size:0x8 segment:ovl_i2
 
 D_i3_80140F50 = 0x80140F50; //segment:ovl_i3 type:asciz

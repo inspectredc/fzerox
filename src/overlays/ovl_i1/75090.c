@@ -161,19 +161,15 @@ s32 func_i1_804065C0(void) {
     return 0;
 }
 
-s32 func_i1_804106F0(LEOCmd*, OSMesgQueue*);
-
 s32 func_i1_80406688(void) {
     LEOCmd cmd;
 
-    if (func_i1_804106F0(&cmd, &D_i1_8042A5E8) < 0) {
+    if (LeoRezero(&cmd, &D_i1_8042A5E8) < 0) {
         D_i1_80428610 = 0xF7;
         return -1;
     }
     return func_i1_804065C0();
 }
-
-extern s32 (*D_i1_8042A624)(LEOCmd*, s32, OSMesgQueue*);
 
 s32 func_i1_804066E4(s32 arg0) {
     LEOCmd cmd;
@@ -197,8 +193,6 @@ s32 func_i1_80406750(u8 arg0) {
     return func_i1_804065C0();
 }
 
-extern s32 (*D_i1_8042A638)(LEOCmd*, s32, s32, OSMesgQueue*);
-
 s32 func_i1_804067BC(s32 arg0, s32 arg1) {
     LEOCmd cmd;
 
@@ -210,7 +204,6 @@ s32 func_i1_804067BC(s32 arg0, s32 arg1) {
 }
 
 extern u8 D_i1_80415190[];
-extern s32 (*D_i1_8042A620)(LEOCmd*, s32, s32, s32, u32, OSMesgQueue*);
 void func_i1_8040D530(s32, u32, s32*);
 
 s32 func_i1_80406830(s32 arg0, s32 arg1, u32 arg2) {

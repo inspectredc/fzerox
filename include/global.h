@@ -9,5 +9,6 @@
 #include "sys.h"
 #include "fzxmath.h"
 #include "unk_structs.h"
+#include "leo/leo_internal.h"
 
 #endif

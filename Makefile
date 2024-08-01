@@ -354,6 +354,9 @@ $(BUILD_DIR)/src/libultra/gu/%.o: CC := $(IDO53)
 $(BUILD_DIR)/src/libultra/io/%.o: CC := $(IDO53)
 $(BUILD_DIR)/src/libultra/os/%.o: CC := $(IDO53)
 $(BUILD_DIR)/src/libultra/libc/%.o: CC := $(IDO53)
+
+# libleo
+# $(BUILD_DIR)/src/overlays/ovl_i1/%.o: CC := $(IDO53)
 else
 # directory flags
 # $(BUILD_DIR)/src/libultra/gu/%.o:    OPTFLAGS := -Os
