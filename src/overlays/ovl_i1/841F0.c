@@ -1,5 +1,4 @@
 #include "libultra/ultra64.h"
-#include <PR/leo.h>
 #include "leo/leo_internal.h"
 
 s32 LeoSeek(LEOCmd* cmdBlock, u32 lba, OSMesgQueue* mq) {

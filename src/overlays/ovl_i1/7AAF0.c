@@ -1,7 +1,7 @@
 #include "global.h"
 #include "leo/leo_internal.h"
 
-void func_i1_8040B9E0(OSPri compri, OSPri intpri, OSMesg* cmdQueueBuf, u32 cmdBufCount) {
+void leoInitialize(OSPri compri, OSPri intpri, OSMesg* cmdQueueBuf, u32 cmdBufCount) {
     osCreateMesgQueue(&LEOcommand_que, cmdQueueBuf, cmdBufCount);
     osCreateMesgQueue(&LEOcontrol_que, LEOcontrol_que_buf, ARRAY_COUNT(LEOcontrol_que_buf));
     osCreateMesgQueue(&LEOevent_que, LEOevent_que_buf, ARRAY_COUNT(LEOevent_que_buf));
@@ -16,7 +16,6 @@ void func_i1_8040B9E0(OSPri compri, OSPri intpri, OSMesg* cmdQueueBuf, u32 cmdBu
     osSendMesg(&LEOblock_que, NULL, 0);
 }
 
-extern u8 D_i1_8042B345;
 extern OSMesgQueue LEOblock_que;
 extern OSMesgQueue LEOcommand_que;
 
@@ -28,9 +27,9 @@ void leoCommand(void* cmd_blk_addr) {
 
     switch (((LEOCmd*)cmd_blk_addr)->header.command) {
         case 1:
-            D_i1_8042B345 = 0xFF;
+            LEOclr_que_flag = 0xFF;
             leoClr_queue();
-            D_i1_8042B345 = 0;
+            LEOclr_que_flag = 0;
             ((LEOCmd*)cmd_blk_addr)->header.status = 0;
             if (((LEOCmd*)cmd_blk_addr)->header.control & 0x80) {
                 osSendMesg(((LEOCmd*)cmd_blk_addr)->header.post, NULL, 1);
@@ -59,15 +58,15 @@ const u8 D_i1_804287D0[] = { 0 };
 
 void LeoReset(void) {
     osRecvMesg(&LEOblock_que, NULL, 1);
-    D_i1_8042B345 = 0xFF;
+    LEOclr_que_flag = 0xFF;
     leoClr_queue();
-    D_i1_8042B345 = 0;
+    LEOclr_que_flag = 0;
     osRecvMesg(&LEOevent_que, NULL, 0);
-    osSendMesg(&LEOevent_que, (OSMesg)0xA0000, 1);
+    osSendMesg(&LEOevent_que, (OSMesg)ASIC_SOFT_RESET_CODE, 1);
     osSendMesg(&LEOcommand_que, (OSMesg)D_i1_804287D0, 1);
 }
 
-s32 func_i1_8040BD40(void) {
+s32 __leoSetReset(void) {
     leoDrive_reset();
     return 0;
 }

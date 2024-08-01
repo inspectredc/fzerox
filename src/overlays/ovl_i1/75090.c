@@ -204,7 +204,6 @@ s32 func_i1_804067BC(s32 arg0, s32 arg1) {
 }
 
 extern u8 D_i1_80415190[];
-void func_i1_8040D530(s32, u32, s32*);
 
 s32 func_i1_80406830(s32 arg0, s32 arg1, u32 arg2) {
     LEOCmd cmd;
@@ -219,7 +218,7 @@ s32 func_i1_80406830(s32 arg0, s32 arg1, u32 arg2) {
         if (func_i1_804065C0() < 0) {
             return -1;
         }
-        func_i1_8040D530(arg0, arg2, &sp24);
+        LeoLBAToByte(arg0, arg2, &sp24);
         osInvalDCache((void* ) arg1, sp24);
     } else {
         for (i = 0; i < arg2; i++) {
@@ -230,7 +229,7 @@ s32 func_i1_80406830(s32 arg0, s32 arg1, u32 arg2) {
             if (func_i1_804065C0() < 0) {
                 return -1;
             }
-            func_i1_8040D530(i + arg0, 1, &sp24);
+            LeoLBAToByte(i + arg0, 1, &sp24);
             osInvalDCache((void* ) arg1, sp24);
             bcopy(D_i1_80415190, (void* ) arg1, sp24);
             arg1 += sp24;
@@ -256,7 +255,7 @@ s32 func_i1_804069DC(s32 arg0, s32 arg1, u32 arg2) {
 
     } else {
         for (i = 0; i < arg2; i++) {
-            func_i1_8040D530(i + arg0, 1, &sp24);
+            LeoLBAToByte(i + arg0, 1, &sp24);
             bcopy(arg1, D_i1_80415190, sp24);
             if (D_i1_8042A620(&cmd, 1, i + arg0, D_i1_80415190, 1, &D_i1_8042A5E8) < 0) {
                 D_i1_80428610 = 0xF7;

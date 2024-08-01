@@ -1,5 +1,4 @@
 #include "libultra/ultra64.h"
-#include <PR/leo.h>
 #include "leo/leo_internal.h"
 
 s32 leoVerifyRTC(u8, u8);
@@ -27,11 +26,11 @@ s32 LeoSetRTC(LEOCmd* cmdBlock, LEODiskTime* RTCdata, OSMesgQueue* mq) {
 
 s32 leoVerifyRTC(u8 yearhi, u8 yearlo) {
     u32 year;
-    if (((yearlo & 0xF) >= 0xA) || ((yearlo & 0xF0) >= 0x91) || ((yearhi & 0xF) >= 0xA) || ((yearhi & 0xF0) >= 0x91)) {
+    if (((yearlo & 0xF) >= 10) || ((yearlo & 0xF0) >= 145) || ((yearhi & 0xF) >= 10) || ((yearhi & 0xF0) >= 145)) {
         return 1;
     }
-    year = (((yearhi - ((yearhi >> 4) * 6)) * 0x64)) + (yearlo - (yearlo >> 4) * 6);
-    if ((year < 0x7CCU) || (year >= 0x830U)) {
+    year = (((yearhi - ((yearhi >> 4) * 6)) * 100)) + (yearlo - (yearlo >> 4) * 6);
+    if ((year < 1996) || (year >= 2096)) {
         return 1;
     }
     return 0;

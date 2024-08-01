@@ -1,10 +1,8 @@
 #include "global.h"
 #include "unk_leo.h"
 
-void func_i1_80410860(s32, s32, s32*);
-
 void func_i1_804030A0(void) {
-    func_i1_80410860(0, 1, 0);
+    LeoByteToLBA(0, 1, 0);
 }
 
 extern unk_leo_804285D0 D_i1_804285D0;
@@ -228,8 +226,6 @@ extern u16 D_i1_80428F70[];
 extern u32 D_i1_80428638;
 extern u32 D_i1_8042863C;
 
-void func_i1_8040D530(s32, s32, u32*);
-
 s32 func_i1_804039F8(u32 arg0, u32* arg1, s32* arg2, u32* arg3) {
     u32 sp34;
     s32 sp30;
@@ -257,7 +253,7 @@ s32 func_i1_804039F8(u32 arg0, u32* arg1, s32* arg2, u32* arg3) {
             j++;
         }
 
-        func_i1_8040D530(i + D_i1_80428638, (j - i) + 1, &sp28);
+        LeoLBAToByte(i + D_i1_80428638, (j - i) + 1, &sp28);
         sp1C = 0;
         if (sp18 != 0) {
             sp1C++;
@@ -289,7 +285,7 @@ s32 func_i1_804039F8(u32 arg0, u32* arg1, s32* arg2, u32* arg3) {
 
     if (sp2C > arg0) {
         for (j = 1; j <= sp30; j++) {
-            func_i1_8040D530(sp34 + D_i1_80428638, j, &sp28);
+            LeoLBAToByte(sp34 + D_i1_80428638, j, &sp28);
             if (sp28 >= arg0) {
                 break;
             }

@@ -29,6 +29,7 @@
       - [0x7C960, c]
       - [0x7CAB0, c]
       - [0x7CBE0, c]
+      - [0x7E170, c]
       - [0x7E320, c]
       - [0x7E4E0, c]
       - [0x7E700, c]
@@ -61,7 +62,7 @@
       - [0x978F0, .rodata, 7BC20]
       - [0x979A0, data] # multiple asm files?
       - [0x97B90, .rodata, 7CBE0]
-      - [0x97FB0, .rodata, 7E830]
+      - [0x97FB0, .rodata, 7E4E0]
       - [0x98060, .rodata, 7FE10]
       - { start: 0x98080, type: bss, vram: 0x80428F70, name: 80428F70 }
 

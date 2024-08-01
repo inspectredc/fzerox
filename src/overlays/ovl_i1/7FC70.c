@@ -1,5 +1,4 @@
 #include "libultra/ultra64.h"
-#include <PR/leo.h>
 #include "leo/leo_internal.h"
 
 s32 LeoModeSelectAsync(LEOCmd* cmdBlock, u32 standby, u32 sleep, OSMesgQueue* mq) {

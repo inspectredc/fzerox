@@ -208,7 +208,6 @@ s32 func_i1_80407628(u16 arg0, u8* arg1, u8* arg2, s32 arg3, u32 arg4, s32 arg5,
 void func_i1_8040321C(void);
 s32 func_i1_8040A5F8(s32, u8*, s32, s32);
 void func_i1_80408D94(s32*, s32, u32*);
-void func_i1_8040D530(s32, s32, u32*);
 
 extern u8 D_i1_80415190[];
 
@@ -229,7 +228,7 @@ s32 func_i1_804078C8(u16 arg0, u8* arg1, u32 arg2, s32 arg3) {
     func_i1_80408B90();
     func_i1_80408D94(&sp34, sp44, &sp3C);
     if (sp3C != 0) {
-        func_i1_8040D530(sp34 + D_i1_80428638, 1, &sp38);
+        LeoLBAToByte(sp34 + D_i1_80428638, 1, &sp38);
         if (func_i1_8040A5F8(sp34 + D_i1_80428638, D_i1_80415190, 1, arg3) < 0) {
             return -1;
         }
@@ -379,7 +378,7 @@ s32 func_i1_80407F48(u16 arg0, u8* arg1, s32 arg2, u32 arg3, s32 arg4) {
     func_i1_80408B90();
     func_i1_80408EE4(&sp3C, arg2, &sp44);
     if (sp44 != 0) {
-        func_i1_8040D530(sp3C + D_i1_80428638, 1, &sp40);
+        LeoLBAToByte(sp3C + D_i1_80428638, 1, &sp40);
         if (func_i1_8040A5F8(sp3C + D_i1_80428638, D_i1_80415190, 1, arg4) < 0) {
             return -1;
         }
@@ -406,7 +405,7 @@ s32 func_i1_80407F48(u16 arg0, u8* arg1, s32 arg2, u32 arg3, s32 arg4) {
         sp30 = func_i1_80408FDC(sp3C);
 
         for (sp2C = 1; sp2C <= sp30; sp2C++) {
-            func_i1_8040D530(sp3C + D_i1_80428638, sp2C, &sp40);
+            LeoLBAToByte(sp3C + D_i1_80428638, sp2C, &sp40);
             if (sp40 >= sp48) {
                 break;
             }
@@ -417,7 +416,7 @@ s32 func_i1_80407F48(u16 arg0, u8* arg1, s32 arg2, u32 arg3, s32 arg4) {
             }
             sp48 = 0;
         } else if (--sp2C > 0) {
-            func_i1_8040D530(sp3C + D_i1_80428638, sp2C, &sp40);
+            LeoLBAToByte(sp3C + D_i1_80428638, sp2C, &sp40);
             if (func_i1_8040A4D4(sp3C + D_i1_80428638, sp28, sp2C, arg4) < 0) {
                 return -1;
             }

@@ -2,7 +2,6 @@
 #include "unk_leo.h"
 
 s32 func_i1_80404108(LEODiskID*);
-s32 func_i1_8040D530(s32, s32, s32*);
 s32 func_i1_804069DC(s32, u8*, u32);
 s32 func_i1_80406830(s32, u8*, u32);
 extern u8 D_i1_80415190[];
@@ -105,7 +104,7 @@ s32 func_i1_8040A4D4(s32 arg0, u8* arg1, u32 arg2, s32 arg3) {
         sp18 = arg1;
 
         for (sp24 = 0; sp24 < arg2; sp24++, sp20++) {
-            func_i1_8040D530(sp20, 1, &sp1C);
+            LeoLBAToByte(sp20, 1, &sp1C);
             if (D_i1_80415190 != arg1) {
                 bcopy(sp18, D_i1_80415190, sp1C);
             }
@@ -133,7 +132,7 @@ s32 func_i1_8040A5F8(s32 arg0, u8* arg1, u32 arg2, s32 arg3) {
         sp18 = arg1;
 
         for (sp24 = 0; sp24 < arg2; sp24++, sp20++) {
-            func_i1_8040D530(sp20, 1, &sp1C);
+            LeoLBAToByte(sp20, 1, &sp1C);
             if (func_i1_80406830(sp20, D_i1_80415190, 1) < 0) {
                 return -1;
             }

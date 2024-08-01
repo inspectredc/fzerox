@@ -7,8 +7,6 @@ extern unk_leo_804285D0 D_i1_804285D0;
 extern OSMesg D_i1_80428610;
 extern s32 D_i1_80428638;
 
-void func_i1_8040D530(s32, s32, u32*);
-
 s32 func_i1_80408B90(void) {
     bcopy(D_i1_80419EA0.unk_3C, D_i1_80428F70, sizeof(D_i1_80419EA0.unk_3C));
     return 0;
@@ -70,7 +68,7 @@ s32 func_i1_80408D94(s32* arg0, u32 arg1, s32* arg2) {
     u32 sp18;
 
     while (D_i1_80428F70[sp1C] != 0xFFFF) {
-        func_i1_8040D530(sp1C + D_i1_80428638, 1, &sp18);
+        LeoLBAToByte(sp1C + D_i1_80428638, 1, &sp18);
         if (arg1 < sp18) {
             D_i1_80428610 = 0xF3;
             return -1;
@@ -79,7 +77,7 @@ s32 func_i1_80408D94(s32* arg0, u32 arg1, s32* arg2) {
         sp1C = D_i1_80428F70[sp1C];
     }
 
-    func_i1_8040D530(sp1C + D_i1_80428638, 1, &sp18);
+    LeoLBAToByte(sp1C + D_i1_80428638, 1, &sp18);
     if (arg1 > sp18) {
         D_i1_80428610 = 0xF3;
         return -1;
@@ -94,7 +92,7 @@ s32 func_i1_80408EE4(s32* arg0, u32 arg1, s32* arg2) {
     u32 sp18;
 
     while (true) {
-        func_i1_8040D530(sp1C + D_i1_80428638, 1, &sp18);
+        LeoLBAToByte(sp1C + D_i1_80428638, 1, &sp18);
         if (arg1 < sp18) {
             break;
         }

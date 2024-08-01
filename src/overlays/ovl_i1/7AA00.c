@@ -1,5 +1,4 @@
 #include "libultra/ultra64.h"
-#include <PR/leo.h>
 #include "leo/leo_internal.h"
 
 s32 LeoReadWrite(LEOCmd* cmdBlock, s32 direction, u32 LBA, void* vAddr, u32 nLBAs, OSMesgQueue* mq) {

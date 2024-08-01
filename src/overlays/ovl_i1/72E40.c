@@ -83,8 +83,6 @@ extern s32 D_i1_80428644;
 extern u8 D_i1_80428654[2];
 extern u8 D_i1_80428658[4];
 
-s32 func_i1_8040F060(OSPri, OSPri, OSMesg*, s32);
-s32 func_i1_80414910(OSPri, OSPri, OSMesg*, s32);
 void func_i1_8040B320(void);
 void func_i1_804040EC(void);
 
@@ -105,13 +103,13 @@ s32 func_i1_80403F4C(s32 arg0, OSMesg* arg1, s32 arg2) {
     func_i1_804040EC();
     switch (arg0) {
         case 0x0:
-            D_i1_80428610 = func_i1_8040F060(0x95, 0x96, arg1, arg2);
+            D_i1_80428610 = LeoCreateLeoManager(0x95, 0x96, arg1, arg2);
             break;
         case 0x101:
-            D_i1_80428610 = func_i1_80414910(0x95, 0x96, arg1, arg2);
+            D_i1_80428610 = LeoCJCreateLeoManager(0x95, 0x96, arg1, arg2);
             break;
         case 0x102:
-            D_i1_80428610 = func_i1_80414BA0(0x95, 0x96, arg1, arg2);
+            D_i1_80428610 = LeoCACreateLeoManager(0x95, 0x96, arg1, arg2);
             break;
         default:
             D_i1_80428610 = 0xF4;
@@ -176,9 +174,6 @@ void func_i1_804041C8(void) {
 extern s32 D_i1_8042860C;
 extern u32 D_i1_80428638;
 
-s32 func_i1_80410C60(void*, s32);
-void func_i1_8040D530(s32, s32, s32*);
-
 s32 func_i1_80404204(void) {
     s32 sp1C;
 
@@ -186,7 +181,7 @@ s32 func_i1_80404204(void) {
     if ((s32)D_i1_80428610 != 0) {
         return -1;
     }
-    func_i1_8040D530(D_i1_80428638, 3, &sp1C);
+    LeoLBAToByte(D_i1_80428638, 3, &sp1C);
     D_i1_8042860C = (sp1C - 0x16B0) / 48;
     return 0;
 }
@@ -212,13 +207,11 @@ s32 func_i1_8040428C(void) {
     return 0;
 }
 
-s32 func_i1_80414E30(u8*);
-
 s32 func_i1_80404330(void) {
     u8 sp1F;
 
     D_i1_80428610 = 0;
-    D_i1_80428610 = func_i1_80414E30(&sp1F);
+    D_i1_80428610 = LeoTestUnitReady(&sp1F);
     if (!(sp1F & 1)) {
         if ((s32)D_i1_80428610 == 0x2F) {
 
@@ -415,7 +408,7 @@ s32 func_i1_80404924(void) {
         if (D_i1_80419EA0.unk_3C[i] != 0) {
             continue;
         }
-        func_i1_8040D530(i + D_i1_80428638, 1, &sp24);
+        LeoLBAToByte(i + D_i1_80428638, 1, &sp24);
         sp20 += sp24;
     }
 
@@ -438,7 +431,7 @@ s32 func_i1_80404A08(void) {
         if (D_i1_80428F70[i] != 0) {
             continue;
         }
-        func_i1_8040D530(i + D_i1_80428638, 1, &sp24);
+        LeoLBAToByte(i + D_i1_80428638, 1, &sp24);
         sp20 += sp24;
     }
 

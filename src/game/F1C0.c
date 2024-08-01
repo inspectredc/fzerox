@@ -214,11 +214,10 @@ s32 func_80075738(LEODiskID arg0) {
 
 void func_800751C0(void);
 void func_80075228(void);
-OSMesg func_i1_80414E30(u8*);
 
 s32 func_80075800(void) {
 
-    D_800E3324 = func_i1_80414E30(&D_800E32E0);
+    D_800E3324 = LeoTestUnitReady(&D_800E32E0);
 
     switch ((s32) D_800E3324) {
         case 0:
@@ -252,7 +251,7 @@ s32 func_80075800(void) {
 
 s32 func_800758F8(void) {
 
-    D_800E3324 = func_i1_80414E30(&D_800E32E0);
+    D_800E3324 = LeoTestUnitReady(&D_800E32E0);
 
     switch ((s32) D_800E3324) {
         case 8:
@@ -556,7 +555,7 @@ void func_80076310(void) {
 s32 func_80076340(void) {
 
     osCreateMesgQueue(&D_800E3308, &D_800E3320, 1);
-    D_800E3324 = func_i1_80414BA0(0x95, 0x96, D_800E3330, 0x10);
+    D_800E3324 = LeoCACreateLeoManager(0x95, 0x96, D_800E3330, 0x10);
 
     if ((s32) D_800E3324 == 0x29) {
         return -1;
