@@ -18,7 +18,7 @@ void func_8007F7D0(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s3
     D_800E4330.dramAddr = arg1;
     D_800E4330.devAddr = temp_t8;
     D_800E4330.size = 0x80;
-    D_800DCCE0->transferInfo.cmdType = 2;
+    D_800DCCE0->transferInfo.cmdType = LEO_CMD_TYPE_2;
     osEPiStartDma(D_800DCCE0, &D_800E4330, 0);
     MQ_WAIT_FOR_MESG(&D_800DCA68, NULL);
 }

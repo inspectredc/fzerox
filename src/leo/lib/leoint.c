@@ -74,7 +74,7 @@ LEOError read_write_track(void) {
     }
     retry_cntr = 0;
     while (true) {
-        LEOPiInfo->transferInfo.transferMode = 1;
+        LEOPiInfo->transferInfo.transferMode = LEO_BLOCK_MODE;
         LEOPiInfo->transferInfo.blockNum = 0;
         LEOPiInfo->transferInfo.block[0].C1ErrNum = 0;
         LEOPiInfo->transferInfo.block[0].sectorSize = block_param.bytes;
@@ -83,9 +83,9 @@ LEOError read_write_track(void) {
         if (LEOrw_flags & 0x2000) {
             // Sector Mode
             LEOtgt_param.rdwr_blocks = 1;
-            LEOPiInfo->transferInfo.transferMode = 3;
+            LEOPiInfo->transferInfo.transferMode = LEO_SECTOR_MODE;
         } else if (LEOtgt_param.rdwr_blocks == 2) {
-            LEOPiInfo->transferInfo.transferMode = 2;
+            LEOPiInfo->transferInfo.transferMode = LEO_TRACK_MODE;
             LEOPiInfo->transferInfo.block[1] = LEOPiInfo->transferInfo.block[0];
             LEOPiInfo->transferInfo.block[1].C2Addr = &LEOC2_Syndrome[1];
             LEOPiInfo->transferInfo.block[1].dramAddr =
@@ -106,7 +106,7 @@ LEOError read_write_track(void) {
         LEOPiInfo->transferInfo.bmCtlShadow = LEOasic_bm_ctl_shadow;
         LEOPiInfo->transferInfo.seqCtlShadow = LEOasic_seq_ctl_shadow;
         if (LEOrw_flags & 0x8000) {
-            LEOPiInfo->transferInfo.cmdType = 1;
+            LEOPiInfo->transferInfo.cmdType = LEO_CMD_TYPE_1;
             osWritebackDCache(block_param.pntr, block_param.blkbytes * LEOtgt_param.rdwr_blocks);
             osEPiStartDma(LEOPiInfo, &LEOPiDmaParam, 1);
             osRecvMesg(&LEOdma_que, NULL, 1);
@@ -124,7 +124,7 @@ LEOError read_write_track(void) {
             osRecvMesg(&LEOc2ctrl_que, NULL, 1);
             osSendMesg(&LEOc2ctrl_que, NULL, 0);
         }
-        LEOPiInfo->transferInfo.cmdType = 0;
+        LEOPiInfo->transferInfo.cmdType = LEO_CMD_TYPE_0;
         osInvalDCache(block_param.pntr, block_param.blkbytes * LEOtgt_param.rdwr_blocks);
         osEPiStartDma(LEOPiInfo, &LEOPiDmaParam, 0);
         
@@ -251,7 +251,7 @@ void leosetup_BM(void) {
     osEPiWriteIo(LEOPiInfo, LEO_BM_STATUS, LEOasic_bm_ctl_shadow);
 }
 
-u32 leochk_err_reg(void) {
+LEOError leochk_err_reg(void) {
     u32 sense;
     u32 index_status;
 

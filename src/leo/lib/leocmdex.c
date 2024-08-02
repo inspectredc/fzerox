@@ -1,4 +1,5 @@
-#include "global.h"
+#include "libultra/ultra64.h"
+#include "libc/stdbool.h"
 #include "leo/leo_internal.h"
 
 extern void (*LEO_cmd_tbl[])(void);
@@ -166,7 +167,7 @@ u8 leoRead_system_area(void) {
     read_mode = 0;
     retry_cntr = 0;
 
-    while (1) {
+    while (true) {
         LEOdisk_type = 0;
         // For lba_to_phys to avoid dealing with alternative tracks on the disk
         LEO_sys_data.param.defect_num[0] = 0;
@@ -214,10 +215,10 @@ u8 leoRead_system_area(void) {
         if (leoChk_err_retry(GET_ERROR(temp_cmd)) != LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
             break;
         }
-        if (retry_cntr++ >= 0x40U) {
+        if (retry_cntr++ >= 0x40) {
             break;
         }
-        if ((retry_cntr & 7) == 0) {
+        if ((retry_cntr % 8) == 0) {
             // Recalibrate drive every 8th tries
             if ((temp_cmd.header.sense = leoSend_asic_cmd_w(ASIC_RECAL, 0)) !=
                 LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
@@ -227,103 +228,4 @@ u8 leoRead_system_area(void) {
     }
     LEOcur_command = prev_cmd;
     return LEOcur_command->header.sense = GET_ERROR(temp_cmd);
-}
-
-void leoRead(void) {
-    LEOrw_flags = 0;
-    leoRead_common(0x18);
-}
-
-void leoRead_common(u32 offset) {
-    u32 tg_lba = LEOcur_command->data.readwrite.lba;
-    u32 tg_blocks = LEOcur_command->data.readwrite.xfer_blks;
-    u32 message;
-    s32 pad;
-
-    if ((tg_lba | tg_blocks) & 0xFFFF0000) {
-        goto invalid_lba;
-    }
-
-    tg_lba += offset;
-    if ((tg_lba + tg_blocks) > 0x10DC) { // Unclear what this number represents
-    invalid_lba:
-        LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
-        LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
-        return;
-    }
-
-    if (tg_blocks == 0) {
-        if (tg_lba >= 0x10DC) {
-            goto invalid_lba;
-        }
-        LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
-        LEOcur_command->header.status = LEO_STATUS_GOOD;
-        return;
-    }
-
-    LEOtgt_param.lba = tg_lba;
-    LEOrw_flags &= 0xFFFF3FFF;
-    osSendMesg(&LEOc2ctrl_que, NULL, OS_MESG_NOBLOCK);
-    osStartThread(&LEOinterruptThread);
-
-    while (true) {
-        osRecvMesg(&LEOcontrol_que, (OSMesg)&message, OS_MESG_BLOCK);
-
-        switch (message) {
-            case LEO_MSG_CONTROL_FORCE_ACCEPT:
-                goto end;
-            case LEO_MSG_CONTROL_C2_CORRECTION:
-                leoC2_Correction();
-                LEOrw_flags &= ~0x4000;
-                osSendMesg(&LEOc2ctrl_que, NULL, OS_MESG_NOBLOCK);
-                break;
-
-            default:
-                LEOcur_command->header.sense = message;
-                LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
-                return;
-
-        }
-    }
-end:
-    LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
-    LEOcur_command->header.status = LEO_STATUS_GOOD;
-}
-
-s32 LeoLBAToByte(s32 startlba, u32 nlbas, s32* bytes) {
-    u32 resbytes;
-    u32 byte_p_blk;
-    u16 zone;
-    u16 vzone;
-    u8 flag;
-
-    if (!__leoActive) {
-        return -1;
-    }
-    if ((u32)startlba >= NUM_LBAS) {
-        return LEO_ERROR_LBA_OUT_OF_RANGE;
-    }
-    resbytes = 0;
-    flag = vzone = 1;
-    startlba += 0x18;
-    while (nlbas > 0) {
-        if ((flag != 0) || (LEOVZONE_TBL[LEOdisk_type][vzone] == startlba)) {
-            vzone = leoLba_to_vzone(startlba);
-            zone = LEOVZONE_PZONEHD_TBL[LEOdisk_type][vzone];
-            if (zone >= 8) {
-                zone -= 7;
-            }
-            byte_p_blk = LEOBYTE_TBL2[zone];
-        }
-        resbytes += byte_p_blk;
-        nlbas -= 1;
-        startlba += 1;
-        if ((nlbas > 0) && ((u32)startlba >= NUM_LBAS + 0x18)) {
-            return LEO_ERROR_LBA_OUT_OF_RANGE;
-        }
-        flag = 0;
-    }
-
-    *bytes = resbytes;
-    return LEO_ERROR_GOOD;
 }
