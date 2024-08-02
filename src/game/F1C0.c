@@ -62,8 +62,8 @@ void func_8007FC68(s32);
 
 bool func_800752EC(void) {
 
-    func_i1_8040D9A0(&D_800E32E8, 4, &D_800E3308);
-    osRecvMesg(&D_800E3308, &D_800E3324, 1);
+    LeoSpdlMotor(&D_800E32E8, LEO_MOTOR_BRAKE, &D_800E3308);
+    osRecvMesg(&D_800E3308, &D_800E3324, OS_MESG_BLOCK);
     switch ((s32) D_800E3324) {
         case 0:
         case 2:
@@ -85,7 +85,7 @@ bool func_800752EC(void) {
 
 OSMesg func_800753EC(void) {
 
-    func_i1_8040D7A0(&D_800E32E8, &D_800CD2B0, &D_800E3308);
+    LeoReadDiskID(&D_800E32E8, &D_800CD2B0, &D_800E3308);
     osRecvMesg(&D_800E3308, &D_800E3324, 1);
 
     switch ((s32) D_800E3324) {
@@ -122,7 +122,7 @@ OSMesg func_800753EC(void) {
 
 OSMesg func_80075534(void) {
 
-    func_i1_8040D7A0(&D_800E32E8, &D_800CD2B0, &D_800E3308);
+    LeoReadDiskID(&D_800E32E8, &D_800CD2B0, &D_800E3308);
     osRecvMesg(&D_800E3308, &D_800E3324, 1);
 
     switch ((s32) D_800E3324) {
@@ -214,11 +214,10 @@ s32 func_80075738(LEODiskID arg0) {
 
 void func_800751C0(void);
 void func_80075228(void);
-OSMesg func_i1_80414E30(u8*);
 
 s32 func_80075800(void) {
 
-    D_800E3324 = func_i1_80414E30(&D_800E32E0);
+    D_800E3324 = LeoTestUnitReady(&D_800E32E0);
 
     switch ((s32) D_800E3324) {
         case 0:
@@ -252,7 +251,7 @@ s32 func_80075800(void) {
 
 s32 func_800758F8(void) {
 
-    D_800E3324 = func_i1_80414E30(&D_800E32E0);
+    D_800E3324 = LeoTestUnitReady(&D_800E32E0);
 
     switch ((s32) D_800E3324) {
         case 8:
@@ -287,7 +286,7 @@ bool func_800759AC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, OSMesgQueue
         while (func_800752EC()) {}
         while (func_80075800()) {}
     }
-    func_i1_8040B8F0(arg0, arg1, arg2, arg3, arg4, &D_800E3308);
+    LeoReadWrite(arg0, arg1, arg2, arg3, arg4, &D_800E3308);
     osRecvMesg(&D_800E3308, &D_800E3324, 1);
 
     msg = D_800E3324;
@@ -401,7 +400,7 @@ bool func_80075D10(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, OSMesgQueue
         while (func_800752EC()) {}
         while (func_80075800()) {}
     }
-    func_i1_8040B8F0(arg0, arg1, arg2, arg3, arg4, &D_800E3308);
+    LeoReadWrite(arg0, arg1, arg2, arg3, arg4, &D_800E3308);
     osRecvMesg(&D_800E3308, &D_800E3324, 1);
 
     msg = D_800E3324;
@@ -556,15 +555,13 @@ void func_80076310(void) {
 s32 func_80076340(void) {
 
     osCreateMesgQueue(&D_800E3308, &D_800E3320, 1);
-    D_800E3324 = func_i1_80414BA0(0x95, 0x96, D_800E3330, 0x10);
+    D_800E3324 = LeoCACreateLeoManager(0x95, 0x96, D_800E3330, 0x10);
 
     if ((s32) D_800E3324 == 0x29) {
         return -1;
     }
     return 0;
 }
-
-void func_i1_8040BD70(void);
 
 void func_800763A8(void) {
     s32 i;
@@ -574,7 +571,7 @@ void func_800763A8(void) {
             osRecvMesg(&D_800DCAE0, &D_800E3328, 1);
         } while (D_800E3328 != (OSMesg) 0x1A);
 
-        func_i1_8040BD70();
+        LeoResetClear();
         D_800E3324 = func_80075534();
 
         if ((s32) D_800E3324 != 0x2B) {

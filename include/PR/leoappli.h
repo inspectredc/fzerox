@@ -42,7 +42,7 @@
 /*-----------------------------------*/
 /*   LEO FUNCTION DEFINITIONS        */
 /*-----------------------------------*/
-extern void leoInitialize(OSPri compri, OSPri intpri, OSMesg* command_que_buf, u32 cmd_buff_size);
+extern void leoInitialize(OSPri compri, OSPri intpri, OSMesg* cmdQueueBuf, u32 cmdBufCount);
 extern void leoCommand(void* cmd_blk_addr);
 extern void LeoReset(void);
 extern s32  LeoResetClear(void);
@@ -70,6 +70,7 @@ extern s32  LeoResetClear(void);
 #define LEO_COMMAND_READ_DISK_ID      0x0c
 #define LEO_COMMAND_READ_TIMER        0x0d
 #define LEO_COMMAND_SET_TIMER         0x0e
+#define LEO_COMMAND_RESET_CLEAR       0x0f // Manually added f-zerox
 
 /*-----------------------------------*/
 /* CONTROL BIT                       */

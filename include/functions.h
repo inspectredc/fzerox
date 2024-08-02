@@ -85,11 +85,6 @@ s32 func_800AA394(s32);
 
 bool func_800CC220(void);
 
-void func_i1_8040B8F0(void*, s32, s32, void*, s32, OSMesgQueue*);
-void func_i1_8040D7A0(LEOCmd*, LEODiskID*, OSMesgQueue*);
-s32 func_i1_8040D9A0(LEOCmd*, s32, OSMesgQueue*);
-s32 func_i1_80414BA0(OSPri, OSPri, OSMesg*, s32); // LeoCJCreateLeoManager
-
 void func_i2_800FC77C(void);
 void func_i2_800FC9BC(void);
 s32 func_i2_800FCE3C(void);

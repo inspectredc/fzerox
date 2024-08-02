@@ -719,14 +719,16 @@ void func_800B0268(uintptr_t devAddr, u8* ramAddr, size_t size, s32 medium) {
         if (size < 0x400) {
             break;
         }
-        func_800B03A0(&gSyncDmaIoMsg, 1, 0, devAddr, ramAddr, 0x400, &gSyncDmaQueue, medium, D_800D0C14);
+        func_800B03A0(&gSyncDmaIoMsg, OS_MESG_PRI_HIGH, OS_READ, devAddr, ramAddr, 0x400, &gSyncDmaQueue, medium,
+                      D_800D0C14);
         MQ_WAIT_FOR_MESG(&gSyncDmaQueue, NULL);
         size -= 0x400;
         devAddr += 0x400;
         ramAddr += 0x400;
     }
     if (size != 0) {
-        func_800B03A0(&gSyncDmaIoMsg, 1, 0, devAddr, ramAddr, size, &gSyncDmaQueue, medium, D_800D0C20);
+        func_800B03A0(&gSyncDmaIoMsg, OS_MESG_PRI_HIGH, OS_READ, devAddr, ramAddr, size, &gSyncDmaQueue, medium,
+                      D_800D0C20);
         MQ_WAIT_FOR_MESG(&gSyncDmaQueue, NULL);
     }
 }
@@ -1114,8 +1116,8 @@ extern const char D_800D0E38[]; // "SLOWCOPY"
 void func_800B1140(AudioSlowLoad* slowLoad, s32 size) {
     osInvalDCache(slowLoad->curRamAddr, size);
     osCreateMesgQueue(&slowLoad->msgQueue, &slowLoad->msg, 1);
-    func_800B03A0(&slowLoad->ioMesg, 0, 0, slowLoad->curDevAddr, slowLoad->curRamAddr, size, &slowLoad->msgQueue,
-                  slowLoad->medium, D_800D0E38);
+    func_800B03A0(&slowLoad->ioMesg, OS_MESG_PRI_NORMAL, OS_READ, slowLoad->curDevAddr, slowLoad->curRamAddr, size,
+                  &slowLoad->msgQueue, slowLoad->medium, D_800D0E38);
 }
 
 void func_800B11C4(uintptr_t devAddr, u8* ramAddr, size_t size, s32 unkMediumParam) {
@@ -1265,8 +1267,8 @@ void func_800B15C8(AudioAsyncLoad* asyncLoad, size_t size) {
     osInvalDCache(asyncLoad->curRamAddr, size);
     osCreateMesgQueue(&asyncLoad->mesgQueue, &asyncLoad->msg, 1);
     if (size) {}
-    func_800B03A0(&asyncLoad->ioMesg, 0, 0, asyncLoad->curDevAddr, asyncLoad->curRamAddr, size, &asyncLoad->mesgQueue,
-                  asyncLoad->medium, D_800D0F00);
+    func_800B03A0(&asyncLoad->ioMesg, OS_MESG_PRI_NORMAL, OS_READ, asyncLoad->curDevAddr, asyncLoad->curRamAddr, size,
+                  &asyncLoad->mesgQueue, asyncLoad->medium, D_800D0F00);
 }
 
 void func_800B1658(uintptr_t devAddr, u8* ramAddr, size_t size, s32 unkMediumParam) {

@@ -96,7 +96,7 @@ ifeq ($(COMPILER),gcc)
   CC       := $(MIPS_BINUTILS_PREFIX)gcc
 else
 ifeq ($(COMPILER),ido)
-  CC       := $(TOOLS)/ido_recomp/$(DETECTED_OS)/7.1/cc
+  CC       := $(TOOLS)/ido-recomp/$(DETECTED_OS)/7.1/cc
 else
 $(error Unsupported compiler. Please use either ido or gcc as the COMPILER variable.)
 endif
@@ -333,6 +333,9 @@ $(BUILD_DIR)/src/libultra/io/motor.o: OPTFLAGS := -O2 -g0
 
 $(BUILD_DIR)/src/libultra/os/%.o: OPTFLAGS := -O1 -g0
 
+# libleo
+$(BUILD_DIR)/src/leo/%.o: OPTFLAGS := -g
+
 # per-file flags
 $(BUILD_DIR)/src/libultra/libc/ldiv.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/libc/string.o: OPTFLAGS := -O2 -g0
@@ -351,6 +354,9 @@ $(BUILD_DIR)/src/libultra/gu/%.o: CC := $(IDO53)
 $(BUILD_DIR)/src/libultra/io/%.o: CC := $(IDO53)
 $(BUILD_DIR)/src/libultra/os/%.o: CC := $(IDO53)
 $(BUILD_DIR)/src/libultra/libc/%.o: CC := $(IDO53)
+
+# libleo
+$(BUILD_DIR)/src/leo/lib/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO53) -- $(AS) $(ASFLAGS) --
 else
 # directory flags
 # $(BUILD_DIR)/src/libultra/gu/%.o:    OPTFLAGS := -Os

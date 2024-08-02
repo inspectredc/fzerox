@@ -293,7 +293,7 @@ void func_800678B8(void* arg0) {
     while (true) {}
 }
 
-void func_i1_8040BCB0(void);
+void LeoReset(void);
 
 void func_80067A10(void* arg0) {
     void* sp1C;
@@ -306,7 +306,7 @@ void func_80067A10(void* arg0) {
     osViBlack(1);
     osViSetYScale(1.0f);
     if ((D_800CCFC0 != 0) && D_800DCCCC) {
-        func_i1_8040BCB0();
+        LeoReset();
     }
     func_80069700();
 

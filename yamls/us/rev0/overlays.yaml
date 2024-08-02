@@ -1,9 +1,10 @@
-  - name: ovl_i1
+  - name: leo
     exclusive_ram_id: overlay
     type: code
-    dir: overlays/ovl_i1
+    dir: leo
     start: 0x72030
     vram: 0x80402F20
+    bss_size: 0x2CD0
     symbol_name_format: i1_$VRAM
     subsegments:
       - [0x72030, hasm]
@@ -19,47 +20,55 @@
       - [0x79830, c]
       - [0x79AF0, c]
       - [0x7A590, c]
-      - [0x7AA00, c]
-      - [0x7AAF0, c]
-      - [0x7AF20, c]
-      - [0x7BC20, c]
-      - [0x7C7E0, c]
-      - [0x7C960, c]
-      - [0x7CAB0, c]
-      - [0x7CBE0, c]
-      - [0x7E320, c]
-      - [0x7E4E0, c]
-      - [0x7E700, c]
-      - [0x7E830, c]
-      - [0x7F2B0, c]
-      - [0x7F3B0, c]
-      - [0x7F480, c]
-      - [0x7F8A0, c]
-      - [0x7F970, c]
-      - [0x7FB30, c]
-      - [0x7FC70, c]
-      - [0x7FD70, c]
-      - [0x7FE10, c]
-      - [0x80870, hasm]
+      - [0x7AA00, c, lib/readwrite]
+      - [0x7AAF0, c, lib/leofunc]
+      - [0x7AF20, c, lib/leoint]
+      - [0x7BC20, c, lib/leocmdex]
+      - [0x7C400, c, lib/leoread]
+      - [0x7C640, c, lib/lbatobyte]
+      - [0x7C7E0, c, lib/leoinquiry]
+      - [0x7C8B0, c, lib/readdiskid]
+      - [0x7C960, c, lib/leord_diskid]
+      - [0x7CAB0, c, lib/spdlmotor]
+      - [0x7CBE0, c, lib/leoc2ecc]
+      - [0x7E170, c, lib/createleomanager]
+      - [0x7E320, c, lib/setrtc]
+      - [0x7E4E0, c, lib/leomseq_tbl]
+      - [0x7E700, c, lib/leomotor]
+      - [0x7E830, c, lib/leomecha]
+      - [0x7F2B0, c, lib/leomode_sel]
+      - [0x7F3B0, c, lib/leord_capa]
+      - [0x7F480, c, lib/leoutil]
+      - [0x7F800, c, lib/rezero]
+      - [0x7F8A0, c, lib/leorezero]
+      - [0x7F970, c, lib/bytetolba]
+      - [0x7FB30, c, lib/leoreset]
+      - [0x7FC70, c, lib/modeselect]
+      - [0x7FD70, c, lib/readcapacity]
+      - [0x7FE10, c, lib/leotranslat]
+      - [0x80170, c, lib/leotimer]
+      - [0x80870, hasm] # libleo_bootdisk and libleo_bootstrap?
       - [0x80960, data]
-      # 0x83850 more code
-      - [0x83850, c]
-      - [0x83A20, c]
-      - [0x83F40, c]
-      - [0x83FF0, c]
-      - [0x84040, c]
-      - [0x840E0, c]
-      - [0x841F0, c]
-      - [0x842A0, data] # pad?
+      - [0x83850, c, lib/leowrite]
+      - [0x83A20, c, lib/cjcreateleomanager]
+      - [0x83CB0, c, lib/cacreateleomanager]
+      - [0x83F40, c, lib/testunitready]
+      - [0x83FF0, c, lib/leotestunit]
+      - [0x84040, c, lib/readrtc]
+      - [0x840E0, c, lib/leoseek]
+      - [0x841F0, c, lib/seek]
+      - [0x842A0, data] # buffer space
       - [0x97890, .rodata, 72E40]
       - [0x978A0, .rodata, 76270]
       - [0x978C0, .rodata, 79AF0]
-      - [0x978E0, .rodata, 7AAF0]
-      - [0x978F0, .rodata, 7BC20]
-      - [0x979A0, data] # multiple asm files?
-      - [0x97B90, .rodata, 7CBE0]
-      - [0x97FB0, .rodata, 7E830]
-      - [0x98060, .rodata, 7FE10]
+      - [0x978E0, .rodata, lib/leofunc]
+      - [0x978F0, .rodata, lib/leocmdex]
+      - [0x979A0, .rodata, lib/leord_diskid]
+      - [0x979B0, .rodata, lib/leo_tbl]
+      - [0x97B90, .rodata, lib/leoc2ecc]
+      - [0x97FB0, .rodata, lib/leomseq_tbl]
+      - [0x98060, .rodata, lib/leotimer]
+      - { start: 0x98080, type: bss, vram: 0x80428F70, name: 80428F70 }
 
   - name: ovl_i2
     exclusive_ram_id: overlay
