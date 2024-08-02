@@ -10,6 +10,7 @@ void func_80068008(void* arg0);
 void func_80068A60(void* arg0);
 
 void func_80069700(void);
+void func_80069820(void);
 
 s32 func_8006A9E0(f32 arg0);
 u32 func_8006A918(void);

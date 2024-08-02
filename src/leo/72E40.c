@@ -84,7 +84,11 @@ extern u8 D_i1_80428658[4];
 void func_i1_8040B320(void);
 void func_i1_804040EC(void);
 
-s32 func_i1_80403F4C(s32 arg0, OSMesg* arg1, s32 arg2) {
+#define LEO_MANAGER_REGION_NONE 0
+#define LEO_MANAGER_REGION_JP 0x101
+#define LEO_MANAGER_REGION_US 0x102
+
+s32 func_i1_80403F4C(s32 region, OSMesg* arg1, s32 arg2) {
     s32 i = 0;
 
     D_i1_80428600 = 0;
@@ -98,14 +102,14 @@ s32 func_i1_80403F4C(s32 arg0, OSMesg* arg1, s32 arg2) {
 
     func_i1_80403D30();
     func_i1_804040EC();
-    switch (arg0) {
-        case 0x0:
+    switch (region) {
+        case LEO_MANAGER_REGION_NONE:
             D_i1_80428610 = LeoCreateLeoManager(0x95, 0x96, arg1, arg2);
             break;
-        case 0x101:
+        case LEO_MANAGER_REGION_JP:
             D_i1_80428610 = LeoCJCreateLeoManager(0x95, 0x96, arg1, arg2);
             break;
-        case 0x102:
+        case LEO_MANAGER_REGION_US:
             D_i1_80428610 = LeoCACreateLeoManager(0x95, 0x96, arg1, arg2);
             break;
         default:
@@ -118,7 +122,7 @@ s32 func_i1_80403F4C(s32 arg0, OSMesg* arg1, s32 arg2) {
         return -1;
     }
 
-    if (arg0 == 0) {
+    if (region == LEO_MANAGER_REGION_NONE) {
         return func_i1_80403E6C();
     } else {
         return func_i1_80403E3C();
