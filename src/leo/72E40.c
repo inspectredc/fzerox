@@ -16,17 +16,17 @@ s32 func_i1_80403D68(void) {
     s32 i = 0;
 
     LeoResetClear();
-    
+
     while (true) {
         if (func_i1_80404108(&D_i1_80428618) == 0) {
             break;
         }
-    
+
         if (++i >= 4) {
             return -1;
         }
-    
-        switch ((s32)D_i1_80428610) {
+
+        switch ((s32) D_i1_80428610) {
             case 43:
                 D_i1_80428610 = 0xF9;
                 return -1;
@@ -37,7 +37,7 @@ s32 func_i1_80403D68(void) {
                 return -1;
         }
     }
-    
+
     return 0;
 }
 
@@ -59,16 +59,15 @@ s32 func_i1_80403E6C(void) {
             return -1;
         }
 
-        switch ((s32)D_i1_80428610) {
+        switch ((s32) D_i1_80428610) {
             case 0x2A:
             case 0x2F:
                 return -1;
         }
 
         return -1;
-
     }
-        
+
     if (bcmp(&leoBootID, &D_i1_80428618, sizeof(LEODiskID)) == 0) {
         return 0;
     }
@@ -90,14 +89,13 @@ s32 func_i1_80403F4C(s32 arg0, OSMesg* arg1, s32 arg2) {
 
     D_i1_80428600 = 0;
     func_i1_8040B320();
-    
-    
+
     if ((D_i1_80428654[0] == 0) || (D_i1_80428658[0] == 0)) {
         D_i1_80428644 = 0x107;
         D_i1_80428610 = 0x107;
         return -1;
     }
-    
+
     func_i1_80403D30();
     func_i1_804040EC();
     switch (arg0) {
@@ -115,11 +113,11 @@ s32 func_i1_80403F4C(s32 arg0, OSMesg* arg1, s32 arg2) {
             return -1;
             break;
     }
-    
-    if ((s32)D_i1_80428610 != 0) {
+
+    if ((s32) D_i1_80428610 != 0) {
         return -1;
     }
-    
+
     if (arg0 == 0) {
         return func_i1_80403E6C();
     } else {
@@ -177,7 +175,7 @@ s32 func_i1_80404204(void) {
     s32 sp1C;
 
     D_i1_80428610 = LeoReadCapacity(&D_i1_80428638, OS_WRITE);
-    if ((s32)D_i1_80428610 != 0) {
+    if ((s32) D_i1_80428610 != 0) {
         return -1;
     }
     LeoLBAToByte(D_i1_80428638, 3, &sp1C);
@@ -212,12 +210,10 @@ s32 func_i1_80404330(void) {
     D_i1_80428610 = 0;
     D_i1_80428610 = LeoTestUnitReady(&sp1F);
     if (!(sp1F & 1)) {
-        if ((s32)D_i1_80428610 == 0x2F) {
-
-        }
+        if ((s32) D_i1_80428610 == 0x2F) {}
         return 1;
     }
-    if ((s32)D_i1_80428610 == 0x2A) {
+    if ((s32) D_i1_80428610 == 0x2A) {
         return 0;
     }
     return -1;
@@ -328,11 +324,11 @@ s32 func_i1_804046F0(void) {
         }
 
         func_i1_80404610();
-        if ((s32)D_i1_80428610 == 0) {
+        if ((s32) D_i1_80428610 == 0) {
             break;
         }
 
-        if ((s32)D_i1_80428610 == 0x2F) {
+        if ((s32) D_i1_80428610 == 0x2F) {
             if (func_i1_80404108(&D_i1_80428618) < 0) {
                 return -1;
             }
@@ -370,7 +366,7 @@ s32 func_i1_80404830(void) {
         return -1;
     }
 
-    if ((s32)D_i1_80428610 == 0x2F) {
+    if ((s32) D_i1_80428610 == 0x2F) {
         func_i1_804040EC();
         D_i1_80428644 = 0x2F;
         return -1;
@@ -468,7 +464,7 @@ s32 func_i1_80404B90(u16 arg0, u16 arg1, u16 arg2) {
         D_i1_80428610 = 0xF4;
         return -1;
     }
-    
+
     func_i1_80408B90();
 
     for (i = 0; i < arg1; i++) {
@@ -498,7 +494,7 @@ s32 func_i1_80404CF0(u16 arg0, u16 arg1, u16 arg2) {
         D_i1_80428610 = 0xF4;
         return -1;
     }
-    
+
     func_i1_80408B90();
 
     for (i = 0; i < arg1; i++) {
@@ -689,8 +685,9 @@ extern unk_leo_804285D0 D_i1_8041B550[];
 u16 func_i1_8040547C(void) {
 
     while (D_i1_8042A602 < D_i1_8042860C) {
-        if ((D_i1_80419EA0.unk_16B0[D_i1_8042A602].unk_02 == D_i1_8042A600) && (D_i1_80419EA0.unk_16B0[D_i1_8042A602].unk_00 & 0x8000)) {
-            return  D_i1_8041B550[D_i1_8042A602++].unk_0A;
+        if ((D_i1_80419EA0.unk_16B0[D_i1_8042A602].unk_02 == D_i1_8042A600) &&
+            (D_i1_80419EA0.unk_16B0[D_i1_8042A602].unk_00 & 0x8000)) {
+            return D_i1_8041B550[D_i1_8042A602++].unk_0A;
         }
         D_i1_8042A602++;
     }
@@ -874,7 +871,7 @@ s32 func_i1_80405C0C(u16 arg0, s32 arg1) {
     for (i = 0, sp18 = 0; i < D_i1_8042860C; i++) {
         if (D_i1_8041B550[i].unk_00 == 0) {
             continue;
-        } 
+        }
         if (D_i1_8041B550[i].unk_02 == sp1C) {
             sp18++;
         }

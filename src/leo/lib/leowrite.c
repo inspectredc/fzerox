@@ -37,7 +37,7 @@ void leoWrite(void) {
     LEOrw_flags = 0x8000;
     LEOtgt_param.lba = start_lba;
     osStartThread(&LEOinterruptThread);
-    osRecvMesg(&LEOcontrol_que, (OSMesg*)&message, OS_MESG_BLOCK);
+    osRecvMesg(&LEOcontrol_que, (OSMesg*) &message, OS_MESG_BLOCK);
 
     if (message != LEO_MSG_CONTROL_FORCE_ACCEPT) {
         LEOcur_command->header.sense = message;

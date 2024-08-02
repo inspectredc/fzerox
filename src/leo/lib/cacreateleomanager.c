@@ -24,7 +24,7 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     if (status & LEO_STATUS_PRESENCE_MASK) {
         return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
     }
-    
+
     __leoActive = true;
 
     __osSetHWIntrRoutine(1, __osLeoInterrupt);
@@ -38,15 +38,15 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     cmdBlockInq.header.reserve1 = 0;
     cmdBlockInq.header.control = 0;
     cmdBlockInq.header.reserve3 = 0;
-    leoCommand((void*)&cmdBlockInq);
+    leoCommand((void*) &cmdBlockInq);
 
-    dummy = (u32)__osSetHWIntrRoutine & 0xA48D3C;
+    dummy = (u32) __osSetHWIntrRoutine & 0xA48D3C;
 
     while (dummy < 0xE00000) {
         dummy += (((s32) leoCommand & 0xFF) | 0x8A) << 0x10;
     }
 
-    while (cmdBlockInq.header.status == LEO_STATUS_BUSY) { }
+    while (cmdBlockInq.header.status == LEO_STATUS_BUSY) {}
 
     if (cmdBlockInq.header.status != 0) {
         return GET_ERROR(cmdBlockInq);
@@ -69,7 +69,7 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
 
         dummy2 = 0x32F8EB20;
         LEO_country_code = LEO_COUNTRY_USA;
-        dummy2 += (u32)&__leoActive;
+        dummy2 += (u32) &__leoActive;
     } else {
         while (true) {}
     }

@@ -9,8 +9,10 @@ u8 leoAnalize_asic_status(void) {
 
     osEPiReadIo(LEOPiInfo, LEO_STATUS, &asic_cur_status);
     curr_stat = asic_cur_status ^ LEO_STATUS_DISK_PRESENT;
-    if (curr_stat & (LEO_STATUS_DISK_PRESENT | LEO_STATUS_BUSY_STATE | LEO_STATUS_RESET_STATE | LEO_STATUS_MECHANIC_ERROR | LEO_STATUS_DISK_CHANGE | LEO_STATUS_PRESENCE_MASK)) {
-        if (curr_stat & (LEO_STATUS_DISK_PRESENT | LEO_STATUS_BUSY_STATE | LEO_STATUS_RESET_STATE | LEO_STATUS_DISK_CHANGE | LEO_STATUS_PRESENCE_MASK)) {
+    if (curr_stat & (LEO_STATUS_DISK_PRESENT | LEO_STATUS_BUSY_STATE | LEO_STATUS_RESET_STATE |
+                     LEO_STATUS_MECHANIC_ERROR | LEO_STATUS_DISK_CHANGE | LEO_STATUS_PRESENCE_MASK)) {
+        if (curr_stat & (LEO_STATUS_DISK_PRESENT | LEO_STATUS_BUSY_STATE | LEO_STATUS_RESET_STATE |
+                         LEO_STATUS_DISK_CHANGE | LEO_STATUS_PRESENCE_MASK)) {
             LEOdrive_flag = 0;
         }
         if (curr_stat & LEO_STATUS_PRESENCE_MASK) {
@@ -202,7 +204,7 @@ u8 leoSeek_w(void) {
 s32 leoRecv_event_mesg(s32 control) {
     u32 done_mesg;
 
-    if (osRecvMesg(&LEOevent_que, (OSMesg*)&done_mesg, control) == 0) {
+    if (osRecvMesg(&LEOevent_que, (OSMesg*) &done_mesg, control) == 0) {
         if (done_mesg == ASIC_SOFT_RESET_CODE) {
             leoDrive_reset();
             return 0xFF;

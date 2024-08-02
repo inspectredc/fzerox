@@ -371,7 +371,7 @@ s32 func_i1_80407F48(u16 arg0, u8* arg1, s32 arg2, u32 arg3, s32 arg4) {
 
     sp48 = arg3;
     sp28 = arg1;
-    
+
     sp4C = D_i1_8041B550[arg0].unk_0C;
     sp3C = D_i1_8041B550[arg0].unk_0A;
 

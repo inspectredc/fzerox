@@ -24,7 +24,9 @@ void func_i1_8040A070(LEODiskID* arg0, u8* arg1, s32 arg2) {
     *sp1C = (((*sp1C & 0x1F) << 3) | (*sp1C & 0xE0) >> 5) & 0xFF;
 
     for (j = 1; j < arg2; j++) {
-        sp1C[j] = ((sp1C[j] + (((((sp1C[j - 1] ^ 0xBF) & 0xF) << 4) | (((sp1C[j - 1] ^ 0xBF) & 0xF0) >> 4)) & 0xFF)) & 0xFF) ^ diskIdBuf[j & 0x1F];
+        sp1C[j] =
+            ((sp1C[j] + (((((sp1C[j - 1] ^ 0xBF) & 0xF) << 4) | (((sp1C[j - 1] ^ 0xBF) & 0xF0) >> 4)) & 0xFF)) & 0xFF) ^
+            diskIdBuf[j & 0x1F];
     }
 
     *sp1C = *sp1C ^ diskIdBuf[0x17];
@@ -143,8 +145,8 @@ s32 func_i1_8040A5F8(s32 arg0, u8* arg1, u32 arg2, s32 arg3) {
             sp18 += sp1C;
         }
     } else {
-        return func_i1_80406830(arg0, arg1, arg2);    
+        return func_i1_80406830(arg0, arg1, arg2);
     }
-        
+
     return 0;
 }

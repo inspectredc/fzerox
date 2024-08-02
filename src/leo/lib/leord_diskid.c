@@ -10,10 +10,10 @@ void leoReadDiskId(void) {
     u32 cntr;
 
     // Keep Disk ID Command and replace
-    temp_pointer = (u8*)LEOcur_command;
+    temp_pointer = (u8*) LEOcur_command;
 
     // Read Disk ID to Temp Buffer
-    LEOcur_command = (LEOCmd*)&dummy_cmd;
+    LEOcur_command = (LEOCmd*) &dummy_cmd;
     for (cntr = 0; cntr < (sizeof(leo_disk_id_lba)); cntr++) {
         LEOrw_flags = 0x2000;
         dummy_cmd = read_id_cmd;
@@ -25,12 +25,12 @@ void leoReadDiskId(void) {
     }
 
     // Put back the old ReadDiskID command
-    LEOcur_command = (LEOCmd*)temp_pointer;
+    LEOcur_command = (LEOCmd*) temp_pointer;
 
     // Copy Disk ID to buffer pointed by ReadDiskID command
-    temp_pointer = (u8*)LEOcur_command->data.readdiskid.buffer_pointer;
+    temp_pointer = (u8*) LEOcur_command->data.readdiskid.buffer_pointer;
     for (cntr = 0; cntr < (sizeof(LEODiskID)); cntr += sizeof(u32)) {
-        *(u32*)temp_pointer = *((u32*)&LEO_TempBuffer[cntr]);
+        *(u32*) temp_pointer = *((u32*) &LEO_TempBuffer[cntr]);
         temp_pointer += sizeof(u32);
     }
 

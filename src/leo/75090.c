@@ -28,7 +28,8 @@ s32 func_i1_80405F80(s32 year, s32 month, s32 day, s32 hour, s32 minute, s32 sec
 s32 func_i1_80406F40(s32);
 
 s32 func_i1_80406090(s32 year, s32 month, s32 day, s32 hour, s32 minute, s32 second) {
-    return func_i1_80405F80(func_i1_80406F40(year % 100), func_i1_80406F40(month), func_i1_80406F40(day), func_i1_80406F40(hour), func_i1_80406F40(minute), func_i1_80406F40(second));
+    return func_i1_80405F80(func_i1_80406F40(year % 100), func_i1_80406F40(month), func_i1_80406F40(day),
+                            func_i1_80406F40(hour), func_i1_80406F40(minute), func_i1_80406F40(second));
 }
 
 extern s32 (*D_i1_8042A630)(LEOCmd*, OSMesgQueue*);
@@ -108,7 +109,7 @@ s32 func_i1_80406390(LEODiskTime* arg0) {
     if (func_i1_804065C0() < 0) {
         return -1;
     }
-    
+
     bcopy(&cmd.data.time, arg0, sizeof(LEODiskTime));
     return 0;
 }
@@ -133,7 +134,8 @@ void func_i1_8040641C(LEODiskTime* arg0, unk_leo_timeformat* arg1) {
         sp1C = (s32) (sp1C + 0x4B) % 100;
     }
 
-    arg1->unkb0 = (sp1C >= 0x60) ? ((((sp1C - 0x60) << 2) & 0xFC) | (arg1->unkb0 & 0xFF03)) : ((((sp1C + 3) << 2) & 0xFC) | (arg1->unkb0 & 0xFF03));
+    arg1->unkb0 = (sp1C >= 0x60) ? ((((sp1C - 0x60) << 2) & 0xFC) | (arg1->unkb0 & 0xFF03))
+                                 : ((((sp1C + 3) << 2) & 0xFC) | (arg1->unkb0 & 0xFF03));
 
     arg1->unks0 = (((func_i1_80406F14(arg0->month) & 0xF) << 6) & 0x3C0) | (arg1->unks0 & 0xFC3F);
     arg1->unkb1 = (((func_i1_80406F14(arg0->day) & 0x1F) * 2) & 0x3E) | (arg1->unkb1 & 0xFFC1);
@@ -219,7 +221,7 @@ s32 func_i1_80406830(s32 arg0, s32 arg1, u32 arg2) {
             return -1;
         }
         LeoLBAToByte(arg0, arg2, &sp24);
-        osInvalDCache((void* ) arg1, sp24);
+        osInvalDCache((void*) arg1, sp24);
     } else {
         for (i = 0; i < arg2; i++) {
             if (D_i1_8042A620(&cmd, 0, i + arg0, D_i1_80415190, 1, &D_i1_8042A5E8) < 0) {
@@ -230,8 +232,8 @@ s32 func_i1_80406830(s32 arg0, s32 arg1, u32 arg2) {
                 return -1;
             }
             LeoLBAToByte(i + arg0, 1, &sp24);
-            osInvalDCache((void* ) arg1, sp24);
-            bcopy(D_i1_80415190, (void* ) arg1, sp24);
+            osInvalDCache((void*) arg1, sp24);
+            bcopy(D_i1_80415190, (void*) arg1, sp24);
             arg1 += sp24;
         }
     }
@@ -355,7 +357,7 @@ s32 func_i1_80406DE4(u8* dest, u8* src, size_t length) {
     i = 0;
     while (*p2) {
         *p1++ = *p2++;
-        
+
         if (++i == length) {
             return 0;
         }
@@ -408,13 +410,12 @@ s32 func_i1_80406F70(u8* arg0) {
         }
         if (*sp1C >= 0x81 && *sp1C < 0x99) {
             sp1C++;
-            if (*sp1C >= 0x40 && *sp1C < 0xFD && *sp1C != 0x7F){
+            if (*sp1C >= 0x40 && *sp1C < 0xFD && *sp1C != 0x7F) {
                 continue;
             }
             return -1;
         }
         return -1;
-        
     }
 
     return 0;

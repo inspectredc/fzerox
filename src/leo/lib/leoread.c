@@ -40,7 +40,7 @@ void leoRead_common(u32 offset) {
     osStartThread(&LEOinterruptThread);
 
     while (true) {
-        osRecvMesg(&LEOcontrol_que, (OSMesg)&message, OS_MESG_BLOCK);
+        osRecvMesg(&LEOcontrol_que, (OSMesg) &message, OS_MESG_BLOCK);
 
         switch (message) {
             case LEO_MSG_CONTROL_FORCE_ACCEPT:
@@ -55,7 +55,6 @@ void leoRead_common(u32 offset) {
                 LEOcur_command->header.sense = message;
                 LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                 return;
-
         }
     }
 end:

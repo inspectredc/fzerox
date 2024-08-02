@@ -11,7 +11,7 @@ void leointerrupt(void* arg) {
     u32 result;
     u32 tg_blocks;
 
-    osCreateMesgQueue(&LEOc2ctrl_que, (OSMesg)&LEOc2ctrl_que_buf, 1);
+    osCreateMesgQueue(&LEOc2ctrl_que, (OSMesg) &LEOc2ctrl_que_buf, 1);
 
     while (true) {
         osStopThread(&LEOinterruptThread);
@@ -41,7 +41,7 @@ void leointerrupt(void* arg) {
                 goto complete;
             }
 
-            LEOcur_command->data.readwrite.rw_bytes = LEOwrite_pointer - (u8*)LEOcur_command->data.readwrite.buff_ptr;
+            LEOcur_command->data.readwrite.rw_bytes = LEOwrite_pointer - (u8*) LEOcur_command->data.readwrite.buff_ptr;
         } while (tg_blocks != 0);
         result = LEO_MSG_CONTROL_FORCE_ACCEPT; // Unreachable, probably intended as a dev snippet
 
@@ -90,7 +90,7 @@ LEOError read_write_track(void) {
             LEOPiInfo->transferInfo.block[1] = LEOPiInfo->transferInfo.block[0];
             LEOPiInfo->transferInfo.block[1].C2Addr = &LEOC2_Syndrome[1];
             LEOPiInfo->transferInfo.block[1].dramAddr =
-                ((u8*)LEOPiInfo->transferInfo.block[1].dramAddr + block_param.blkbytes);
+                ((u8*) LEOPiInfo->transferInfo.block[1].dramAddr + block_param.blkbytes);
         }
         message = leoChk_mecha_int();
         if (message != LEO_ERROR_GOOD) {
@@ -119,8 +119,8 @@ LEOError read_write_track(void) {
                 return message;
             }
             goto track_end;
-        } 
-        
+        }
+
         if (LEOrw_flags & 0x4000) {
             osRecvMesg(&LEOc2ctrl_que, NULL, OS_MESG_BLOCK);
             osSendMesg(&LEOc2ctrl_que, NULL, OS_MESG_NOBLOCK);
@@ -128,7 +128,7 @@ LEOError read_write_track(void) {
         LEOPiInfo->transferInfo.cmdType = LEO_CMD_TYPE_0;
         osInvalDCache(block_param.pntr, block_param.blkbytes * LEOtgt_param.rdwr_blocks);
         osEPiStartDma(LEOPiInfo, &LEOPiDmaParam, OS_READ);
-        
+
         for (block = 0; LEOtgt_param.rdwr_blocks != 0; block++) {
             osRecvMesg(&LEOdma_que, NULL, OS_MESG_BLOCK);
             LEOasic_bm_ctl_shadow = LEOPiInfo->transferInfo.bmCtlShadow;
@@ -170,8 +170,8 @@ LEOError read_write_track(void) {
                 }
             } else {
                 if (LEOtgt_param.rdwr_blocks == 1) {
-                    if ((*(u32*)&LEOC2_Syndrome[block][0x00] | *(u32*)&LEOC2_Syndrome[block][0x04] |
-                         *(u32*)&LEOC2_Syndrome[block][0x08] | *(u32*)&LEOC2_Syndrome[block][0x0C]) != 0) {
+                    if ((*(u32*) &LEOC2_Syndrome[block][0x00] | *(u32*) &LEOC2_Syndrome[block][0x04] |
+                         *(u32*) &LEOC2_Syndrome[block][0x08] | *(u32*) &LEOC2_Syndrome[block][0x0C]) != 0) {
                         message = LEO_ERROR_NO_REFERENCE_POSITION_FOUND;
                         goto track_end;
                     }
@@ -183,7 +183,7 @@ LEOError read_write_track(void) {
         }
 
         return LEO_ERROR_GOOD;
-        
+
     track_end:
         if (message == LEO_ERROR_WRITE_FAULT) {
             message = leochk_err_reg();
@@ -191,10 +191,10 @@ LEOError read_write_track(void) {
     do_retry:
         if (leoChk_err_retry(message)) {
             break;
-        } 
+        }
         if (LEOrw_flags & 0x1000) {
             break;
-        } 
+        }
         if (retry_cntr++ == 64) {
             break;
         }

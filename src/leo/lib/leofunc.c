@@ -9,11 +9,13 @@ void leoInitialize(OSPri compri, OSPri intpri, OSMesg* cmdQueueBuf, u32 cmdBufCo
     osCreateMesgQueue(&LEOdma_que, LEOdma_que_buf, ARRAY_COUNT(LEOdma_que_buf));
     osCreateMesgQueue(&LEOblock_que, LEOblock_que_buf, ARRAY_COUNT(LEOblock_que_buf));
     osCreateMesgQueue(&LEOpost_que, LEOpost_que_buf, ARRAY_COUNT(LEOpost_que_buf));
-    osCreateThread(&LEOcommandThread, 1, leomain, NULL, LEOcommandThreadStack + ARRAY_COUNT(LEOcommandThreadStack), compri);
+    osCreateThread(&LEOcommandThread, 1, leomain, NULL, LEOcommandThreadStack + ARRAY_COUNT(LEOcommandThreadStack),
+                   compri);
     osStartThread(&LEOcommandThread);
-    osCreateThread(&LEOinterruptThread, 1, leointerrupt, NULL, LEOinterruptThreadStack + ARRAY_COUNT(LEOinterruptThreadStack), intpri);
+    osCreateThread(&LEOinterruptThread, 1, leointerrupt, NULL,
+                   LEOinterruptThreadStack + ARRAY_COUNT(LEOinterruptThreadStack), intpri);
     osStartThread(&LEOinterruptThread);
-    osSetEventMesg(OS_EVENT_CART, &LEOevent_que, (OSMesg)0x30000);
+    osSetEventMesg(OS_EVENT_CART, &LEOevent_que, (OSMesg) 0x30000);
     osSendMesg(&LEOblock_que, NULL, OS_MESG_NOBLOCK);
 }
 
@@ -23,33 +25,33 @@ extern OSMesgQueue LEOcommand_que;
 void leoCommand(void* cmd_blk_addr) {
 
     osRecvMesg(&LEOblock_que, NULL, OS_MESG_BLOCK);
-    ((LEOCmd*)cmd_blk_addr)->header.status = LEO_STATUS_BUSY;
-    ((LEOCmd*)cmd_blk_addr)->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
+    ((LEOCmd*) cmd_blk_addr)->header.status = LEO_STATUS_BUSY;
+    ((LEOCmd*) cmd_blk_addr)->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
 
-    switch (((LEOCmd*)cmd_blk_addr)->header.command) {
+    switch (((LEOCmd*) cmd_blk_addr)->header.command) {
         case LEO_COMMAND_CLEAR_QUE:
             LEOclr_que_flag = -1;
             leoClr_queue();
             LEOclr_que_flag = 0;
-            ((LEOCmd*)cmd_blk_addr)->header.status = LEO_STATUS_GOOD;
-            if (((LEOCmd*)cmd_blk_addr)->header.control & LEO_CONTROL_POST) {
-                osSendMesg(((LEOCmd*)cmd_blk_addr)->header.post, NULL, OS_MESG_BLOCK);
+            ((LEOCmd*) cmd_blk_addr)->header.status = LEO_STATUS_GOOD;
+            if (((LEOCmd*) cmd_blk_addr)->header.control & LEO_CONTROL_POST) {
+                osSendMesg(((LEOCmd*) cmd_blk_addr)->header.post, NULL, OS_MESG_BLOCK);
             }
             break;
         case LEO_COMMAND_READ:
         case LEO_COMMAND_WRITE:
-            ((LEOCmd*)cmd_blk_addr)->data.readwrite.rw_bytes = 0;
+            ((LEOCmd*) cmd_blk_addr)->data.readwrite.rw_bytes = 0;
             goto cmd_queing;
         default:
-            if ((u32)(((LEOCmd*)cmd_blk_addr)->header.command - 1) >= LEO_COMMAND_SET_TIMER) {
-                ((LEOCmd*)cmd_blk_addr)->header.sense = LEO_SENSE_INVALID_COMMAND_OPERATION_CODE;
-                ((LEOCmd*)cmd_blk_addr)->header.status = LEO_STATUS_CHECK_CONDITION;
+            if ((u32) (((LEOCmd*) cmd_blk_addr)->header.command - 1) >= LEO_COMMAND_SET_TIMER) {
+                ((LEOCmd*) cmd_blk_addr)->header.sense = LEO_SENSE_INVALID_COMMAND_OPERATION_CODE;
+                ((LEOCmd*) cmd_blk_addr)->header.status = LEO_STATUS_CHECK_CONDITION;
                 break;
             }
-    cmd_queing:
-            if (osSendMesg(&LEOcommand_que, ((LEOCmd*)cmd_blk_addr), OS_MESG_NOBLOCK) != 0) {
-                ((LEOCmd*)cmd_blk_addr)->header.sense = LEO_SENSE_QUEUE_FULL;
-                ((LEOCmd*)cmd_blk_addr)->header.status = LEO_STATUS_CHECK_CONDITION;
+        cmd_queing:
+            if (osSendMesg(&LEOcommand_que, ((LEOCmd*) cmd_blk_addr), OS_MESG_NOBLOCK) != 0) {
+                ((LEOCmd*) cmd_blk_addr)->header.sense = LEO_SENSE_QUEUE_FULL;
+                ((LEOCmd*) cmd_blk_addr)->header.status = LEO_STATUS_CHECK_CONDITION;
             }
     }
     osSendMesg(&LEOblock_que, NULL, OS_MESG_BLOCK);
@@ -63,8 +65,8 @@ void LeoReset(void) {
     leoClr_queue();
     LEOclr_que_flag = 0;
     osRecvMesg(&LEOevent_que, NULL, OS_MESG_NOBLOCK);
-    osSendMesg(&LEOevent_que, (OSMesg)ASIC_SOFT_RESET_CODE, OS_MESG_BLOCK);
-    osSendMesg(&LEOcommand_que, (OSMesg)D_i1_804287D0, OS_MESG_BLOCK);
+    osSendMesg(&LEOevent_que, (OSMesg) ASIC_SOFT_RESET_CODE, OS_MESG_BLOCK);
+    osSendMesg(&LEOcommand_que, (OSMesg) D_i1_804287D0, OS_MESG_BLOCK);
 }
 
 s32 __leoSetReset(void) {

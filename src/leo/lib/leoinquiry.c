@@ -14,9 +14,9 @@ void leoInquiry(void) {
         }
     }
 
-    ((LEOCmdInquiry*)LEOcur_command)->dev_type = 0;
-    ((LEOCmdInquiry*)LEOcur_command)->version = asic_id >> 0x10;
-    ((LEOCmdInquiry*)LEOcur_command)->dev_num = 1;
-    ((LEOCmdInquiry*)LEOcur_command)->leo_bios_ver = 0;
+    ((LEOCmdInquiry*) LEOcur_command)->dev_type = 0;
+    ((LEOCmdInquiry*) LEOcur_command)->version = asic_id >> 0x10;
+    ((LEOCmdInquiry*) LEOcur_command)->dev_num = 1;
+    ((LEOCmdInquiry*) LEOcur_command)->leo_bios_ver = 0;
     LEOcur_command->header.status = LEO_STATUS_GOOD;
 }

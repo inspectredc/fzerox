@@ -6,7 +6,7 @@ s32 LeoReadCapacity(LEOCapacity* cmdBlock, s32 dir) {
     if (__leoActive == 0) {
         return -1;
     }
-    
+
     if (dir == OS_WRITE) {
         cmdBlock->startLBA = LEORAM_START_LBA[LEOdisk_type] - 0x18;
         cmdBlock->endLBA = LEO_LBA_MAX;

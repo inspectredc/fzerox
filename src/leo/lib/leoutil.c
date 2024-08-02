@@ -42,7 +42,6 @@ u16 leoLba_to_phys(u32 lba) {
     // Get the start cylinder from current zone
     pzone_cylinder_start = LEOZONE_SCYL_TBL[pzone];
 
-
     // Get Virtual Zone LBA start, if Zone 0, it's LBA 0
     if (vzone != 0) {
         vzone_lba_start = LEOVZONE_TBL[LEOdisk_type][vzone - 1];
@@ -67,7 +66,6 @@ u16 leoLba_to_phys(u32 lba) {
     }
     // Get amount of defect tracks for the current zone
     defect_amount = LEO_sys_data.param.defect_num[pzone] - defect_offset;
-
 
     // Skip defective cylinders
     while (defect_amount != 0) {

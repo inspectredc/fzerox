@@ -110,10 +110,10 @@ s32 func_i1_80409310(s32 arg0, u8* arg1, u32 arg2, s32* arg3, OSMesg* arg4, s32*
         bcopy(D_i1_80415190, arg1, arg2);
         sp1C = arg2;
     }
-    
+
     *arg3 = D_i1_80419EA0.unk_3C[arg0 + sp20 - 1];
     *arg4 = arg1 + sp1C;
-    
+
     if (arg2 <= sp1C) {
         *arg5 = 0;
     } else {
@@ -139,7 +139,7 @@ s32 func_i1_804094E0(u16 arg0, s32 arg1, s32 arg2) {
         sp4C = sp48;
         arg1 = sp40;
         arg2 = sp3C;
-        
+
         if (sp38++ == 4) {
             while (true) {}
         }
@@ -152,10 +152,10 @@ s32 func_i1_804095F4(u16 arg0, s32 arg1, u32 arg2) {
     u32 sp1C;
 
     if (D_i1_8041B550[arg0].unk_00 & 0x1000) {
-       if (func_i1_804035DC(arg0) < 0) {
+        if (func_i1_804035DC(arg0) < 0) {
             D_i1_80428610 = 0x106;
             return -1;
-       }
+        }
     }
     sp1C = D_i1_8041B550[arg0].unk_0C;
     if ((arg2 == 0) || (sp1C < arg2)) {
@@ -256,7 +256,7 @@ s32 func_i1_804098C4(u16 arg0, u8* arg1, s32 arg2, u32 arg3) {
             if (sp34 < sp40) {
                 continue;
             }
-            
+
             if (sp34 == sp40) {
                 if (func_i1_8040A5F8(sp30 + D_i1_80428638, sp24, sp28, sp38) < 0) {
                     return -1;
@@ -266,8 +266,8 @@ s32 func_i1_804098C4(u16 arg0, u8* arg1, s32 arg2, u32 arg3) {
             }
             if (--sp28 == 0) {
                 break;
-            } 
-            
+            }
+
             LeoLBAToByte(sp30 + D_i1_80428638, sp28, &sp34);
             if (func_i1_8040A5F8(sp30 + D_i1_80428638, sp24, sp28, sp38) < 0) {
                 return -1;

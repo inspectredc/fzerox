@@ -110,6 +110,6 @@ s32 func_i1_8040B7EC(u16 arg0, s32 arg1, s32 arg2) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
-    
+
     return D_i1_8041B550[sp1E].unk_00;
 }

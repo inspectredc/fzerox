@@ -10,7 +10,7 @@ void leoReadTimer(void) {
     u8 data[4];
     u8 sense_code;
     __LOCTime time;
-    
+
     sense_code = __locReadTimer(&time);
     LEOcur_command->data.time.yearlo = time.year;
     LEOcur_command->data.time.month = time.month;
@@ -23,7 +23,7 @@ void leoReadTimer(void) {
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
     }
-    if ((u32)LEOcur_command->data.time.yearlo >= 150) {
+    if ((u32) LEOcur_command->data.time.yearlo >= 150) {
         LEOcur_command->data.time.yearhi = 25;
     } else {
         LEOcur_command->data.time.yearhi = 32;
@@ -137,16 +137,16 @@ u8 __locReadTimer(__LOCTime* time) {
         return sense_code;
     }
     osEPiReadIo(LEOPiInfo, LEO_DATA, &data);
-    time->minute = (u8)((u32)(data & 0xFF000000) >> 0x18);
-    time->second = (u8)((u32)(data & 0xFF0000) >> 0x10);
+    time->minute = (u8) ((u32) (data & 0xFF000000) >> 0x18);
+    time->second = (u8) ((u32) (data & 0xFF0000) >> 0x10);
     sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_DATE, 0);
     if (sense_code != 0) {
         time->minute &= ~0x80;
         return sense_code;
     }
     osEPiReadIo(LEOPiInfo, LEO_DATA, &data);
-    time->day = (u8)((u32)(data & 0xFF000000) >> 0x18);
-    time->hour = (u8)((u32)(data & 0xFF0000) >> 0x10);
+    time->day = (u8) ((u32) (data & 0xFF000000) >> 0x18);
+    time->hour = (u8) ((u32) (data & 0xFF0000) >> 0x10);
     sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_YEAR, 0);
     if (sense_code != 0) {
         time->minute &= ~0x80;
@@ -154,8 +154,8 @@ u8 __locReadTimer(__LOCTime* time) {
     }
     osEPiReadIo(LEOPiInfo, LEO_DATA, &data);
 
-    time->year = (u8)((u32)(data & 0xFF000000) >> 0x18);
-    time->month = (u8)((u32)(data & 0xFF0000) >> 0x10);
+    time->year = (u8) ((u32) (data & 0xFF000000) >> 0x18);
+    time->month = (u8) ((u32) (data & 0xFF0000) >> 0x10);
     if (time->minute & 0x80) {
         time->minute &= ~0x80;
         return 5;
@@ -174,9 +174,8 @@ u8 __locSetTimer(__LOCTime* time) {
     minuteSecond = (time->minute << 0x18) + (time->second << 0x10);
     result = leoSend_asic_cmd_w(ASIC_SET_TIMER_YEAR, yearMonth);
 
-    if ((result != 0) || (result = leoSend_asic_cmd_w(ASIC_SET_TIMER_DATE, dayHour),
-         (result != 0)) || (result = leoSend_asic_cmd_w(ASIC_SET_TIMER_MINUTE, minuteSecond),
-         (result != 0))) {
+    if ((result != 0) || (result = leoSend_asic_cmd_w(ASIC_SET_TIMER_DATE, dayHour), (result != 0)) ||
+        (result = leoSend_asic_cmd_w(ASIC_SET_TIMER_MINUTE, minuteSecond), (result != 0))) {
         return result;
     }
     return 0;

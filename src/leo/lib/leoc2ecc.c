@@ -98,7 +98,7 @@ void leoC2_single_ecc(void) {
     if (LEOc2_param.err_pos[0] >= 0x55) {
         return;
     }
-    
+
     byte = LEOc2_param.bytes;
     pointer = &LEOc2_param.pntr[(LEOc2_param.err_pos[0] + 1) * byte];
     p_s = LEOc2_param.c2buff_e;
@@ -476,6 +476,6 @@ s32 leoAlpha_mult(s32 i, s32 k) {
 s32 leoAlpha_div(s32 i, s32 k) {
     if ((i == 0) || (k == 0)) {
         return 0;
-    } 
+    }
     return ganlog[0xFF + (glog[i] - glog[k])];
 }

@@ -247,7 +247,7 @@ extern  u32 LeoDriveExist(void);
 extern	s32 LeoClearQueue(void);
 extern s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba);
 extern s32 LeoLBAToByte(s32 startlba, u32 nlbas, s32* bytes);
-extern	s32 LeoReadCapacity(LEOCapacity *cap, s32 dir);
+extern	s32 LeoReadCapacity(LEOCapacity *cmdBlock, s32 dir);
 extern	s32 LeoInquiry(LEOVersion *ver);
 extern	s32 LeoTestUnitReady(LEOStatus *status);
 

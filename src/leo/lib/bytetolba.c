@@ -11,10 +11,10 @@ s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba) {
     if (!__leoActive) {
         return -1;
     }
-    if ((u32)startlba >= NUM_LBAS) {
+    if ((u32) startlba >= NUM_LBAS) {
         return LEO_ERROR_LBA_OUT_OF_RANGE;
     }
-    
+
     reslba = 0;
     flag = vzone = 1;
     startlba += 0x18;
@@ -34,7 +34,7 @@ s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba) {
         }
         reslba++;
         startlba++;
-        if ((nbytes != 0) && ((u32)startlba >= NUM_LBAS + 0x18)) {
+        if ((nbytes != 0) && ((u32) startlba >= NUM_LBAS + 0x18)) {
             return LEO_ERROR_LBA_OUT_OF_RANGE;
         }
         flag = 0;
