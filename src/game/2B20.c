@@ -333,8 +333,6 @@ void func_80068F04(void) {
     }
 }
 
-void func_80069820(void);
-
 extern OSMesgQueue D_800DCA80;
 extern s8 D_800DCE5C;
 

@@ -38,7 +38,7 @@
       - [0x194E0, c, game/194E0]
       - [0x197D0, c, game/197D0]
       - [0x19F30, pad]
-      - [0x19F40, c, game/sys_fault] # sys_fault?
+      - [0x19F40, c, game/sys_fault]
       - [0x1AA40, c, game/1AA40]
       - [0x1B0E0, c, game/1B0E0]
       - [0x36ED0, c, game/36ED0]
@@ -203,6 +203,8 @@
       - [0x67170, data]
       - [0x672B0, .data, game/F1C0]
       - [0x672E0, data]
+      - [0x676C0, .data, game/sys_fault]
+      - [0x678A0, data]
       - [0x6B6D0, .data, audio/aisetnextbuf]
       - [0x6B6E0, data]
       - [0x6B710, .data, audio/thread]
@@ -272,7 +274,9 @@
 
       - { start: 0x72030, type: bss, vram: 0x800D8030, name: 800D8030 }
       - { type: .bss, vram: 0x800E32E0, name: game/F1C0 }
-      - { type: bss, vram: 0x800E3380, name: 800E3380}
+      - { type: bss, vram: 0x800E3380, name: 800E3380 }
+      - { type: .bss, vram: 0x800E47D0, name: game/sys_fault }
+      - { type: bss, vram: 0x800E51B0, name: 800E51B0 }
       - { type: .bss, vram: 0x800F8AF0, name: libultra/io/sptask }
       - { type: .bss, vram: 0x800F8B30, name: libultra/io/leointerrupt }
       - { type: .bss, vram: 0x800F9B30, name: libultra/io/motor }
