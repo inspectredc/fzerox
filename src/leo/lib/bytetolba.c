@@ -41,5 +41,5 @@ s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba) {
     }
 
     *lba = reslba;
-    return 0;
+    return LEO_ERROR_GOOD;
 }

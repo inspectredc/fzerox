@@ -1,4 +1,4 @@
-#include "global.h"
+#include "libultra/ultra64.h"
 #include "leo/leo_internal.h"
 
 void leoC2_single_ecc(void);
@@ -68,7 +68,7 @@ const u8 glog[512] = {
     0xD7, 0x4F, 0xAE, 0xD5, 0xE9, 0xE6, 0xE7, 0xAD, 0xE8, 0x74, 0xD6, 0xF4, 0xEA, 0xA8, 0x50, 0x58, 0xAF, 0xFF
 };
 
-s32 leoC2_Correction(void) {
+u16 leoC2_Correction(void) {
     switch (LEOc2_param.err_num) {
         case 0:
             break;
@@ -85,7 +85,7 @@ s32 leoC2_Correction(void) {
             leoC2_4_ecc();
             break;
         default:
-            return 0xFFFF;
+            return -1;
     }
     return 0;
 }
@@ -141,7 +141,7 @@ c2_2_1:
     p_s = LEOc2_param.c2buff_e;
 
     do {
-        s0 = (p_s -= 4)[0];
+        s0 = *(p_s -= 4);
         if (s0 != 0) {
             a = ganlog[m + glog[s0]] ^ p_s[1];
         } else {
@@ -235,7 +235,7 @@ c2_3_1:
     p_s = LEOc2_param.c2buff_e;
 
     do {
-        s0 = (p_s -= 4)[0];
+        s0 = *(p_s -= 4);
         if (s0) {
             s0 = glog[s0];
             error_i = ganlog[s0 + a];
@@ -412,7 +412,7 @@ c2_4_1:
     p_s = LEOc2_param.c2buff_e;
 
     do {
-        s0 = (p_s -= 4)[0];
+        s0 = *(p_s -= 4);
         if (!s0) {
             R0 = R1 = R2 = R3 = 0;
         } else {

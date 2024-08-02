@@ -15,10 +15,10 @@ u16 leoLba_to_phys(u32 lba) {
 
     // A cylinder track is made of two blocks, so we may be able to only read one of it if the next block is on the next
     // cylinder
-    LEOtgt_param.rdwr_blocks = 2 - (lba & 1);
+    LEOtgt_param.rdwr_blocks = 2 - (lba % 2);
 
     // Blocks are interleaved between cylinders
-    switch (lba & 3) {
+    switch (lba % 4) {
         case 0:
         case 3:
             LEOtgt_param.start_block = 0;

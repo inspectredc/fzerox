@@ -597,13 +597,13 @@ extern OSPiHandle* D_800DCCDC;
 
 void func_80073E28(void* arg0, void* arg1, size_t arg2) {
     osInvalDCache(osPhysicalToVirtual(arg1), arg2);
-    D_800DCCA8.hdr.pri = 0;
+    D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
     D_800DCCA8.hdr.retQueue = &D_800DCA68;
     D_800DCCA8.dramAddr = osPhysicalToVirtual(arg1);
     D_800DCCA8.devAddr = (uintptr_t) arg0;
     D_800DCCA8.size = arg2;
     D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
-    osEPiStartDma(D_800DCCDC, &D_800DCCA8, 0);
+    osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
     MQ_WAIT_FOR_MESG(&D_800DCA68, NULL);
 }
 
@@ -614,13 +614,13 @@ void func_80073ED0(void* arg0, void* arg1, size_t arg2) {
         MQ_WAIT_FOR_MESG(&D_800DCA68, sp20);
     }
     osInvalDCache(osPhysicalToVirtual(arg1), arg2);
-    D_800DCCA8.hdr.pri = 0;
+    D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
     D_800DCCA8.hdr.retQueue = &D_800DCA68;
     D_800DCCA8.dramAddr = osPhysicalToVirtual(arg1);
     D_800DCCA8.devAddr = (uintptr_t) arg0;
     D_800DCCA8.size = arg2;
     D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
-    osEPiStartDma(D_800DCCDC, &D_800DCCA8, 0);
+    osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
     MQ_WAIT_FOR_MESG(&D_800DCA68, sp20);
 }
 

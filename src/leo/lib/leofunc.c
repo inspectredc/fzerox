@@ -1,5 +1,6 @@
-#include "global.h"
+#include "libultra/ultra64.h"
 #include "leo/leo_internal.h"
+#include "macros.h"
 
 void leoInitialize(OSPri compri, OSPri intpri, OSMesg* cmdQueueBuf, u32 cmdBufCount) {
     osCreateMesgQueue(&LEOcommand_que, cmdQueueBuf, cmdBufCount);
@@ -74,14 +75,14 @@ s32 __leoSetReset(void) {
 s32 LeoResetClear(void) {
     LEOCmdHeader resetclear;
 
-    resetclear.command = 15;
+    resetclear.command = LEO_COMMAND_RESET_CLEAR;
     resetclear.control = LEO_CONTROL_POST;
-    resetclear.status = 0;
+    resetclear.status = LEO_STATUS_GOOD;
     resetclear.post = &LEOpost_que;
-    if (osSendMesg(&LEOcommand_que, &resetclear.command, 0) != 0) {
+    if (osSendMesg(&LEOcommand_que, &resetclear.command, OS_MESG_NOBLOCK) != 0) {
         return LEO_SENSE_QUEUE_FULL;
     }
-    osRecvMesg(&LEOpost_que, NULL, 1);
+    osRecvMesg(&LEOpost_que, NULL, OS_MESG_BLOCK);
     if (resetclear.status == LEO_STATUS_GOOD) {
         return LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
     }

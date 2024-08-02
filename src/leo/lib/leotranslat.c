@@ -41,7 +41,7 @@ void leoTranslate(void) {
             calc_blks++;
             lba++;
 
-            if ((calc_bytes != 0) && (lba > LEO_LBA_MAX + 0x18)) {
+            if ((calc_bytes != 0) && (lba >= NUM_LBAS + 0x18)) {
                 LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
                 LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                 return;
@@ -64,7 +64,7 @@ void leoTranslate(void) {
             calc_bytes += byte_p_blk;
             calc_blks--;
             lba++;
-            if ((calc_blks != 0) && (lba >= 0x10DC)) {
+            if ((calc_blks != 0) && (lba >= NUM_LBAS + 0x18)) {
                 LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
                 LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                 return;

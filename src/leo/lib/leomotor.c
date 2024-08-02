@@ -9,19 +9,19 @@ void leoStart_stop(void) {
 
     do {
         send_data = 0;
-        if ((LEOcur_command->header.control & 1)) {
+        if ((LEOcur_command->header.control & LEO_CONTROL_START)) {
             send_cmd = ASIC_START;
-        } else if ((LEOcur_command->header.control & 2)) {
+        } else if ((LEOcur_command->header.control & LEO_CONTROL_STBY)) {
             send_cmd = ASIC_STANDBY;
         } else {
-            if ((LEOcur_command->header.control & 4)) {
+            if ((LEOcur_command->header.control & LEO_CONTROL_BRAKE)) {
                 send_data = 0x10000;
             }
             send_cmd = ASIC_SLEEP;
         }
         sense_code = leoSend_asic_cmd_w(send_cmd, send_data);
         if (sense_code == 0) {
-            LEOcur_command->header.status = 0;
+            LEOcur_command->header.status = LEO_STATUS_GOOD;
             return;
         }
         if (leoChk_err_retry(sense_code)) {
@@ -30,6 +30,6 @@ void leoStart_stop(void) {
     } while (retry_cntr--);
 
     LEOcur_command->header.sense = sense_code;
-    LEOcur_command->header.status = 2;
+    LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
     return;
 }

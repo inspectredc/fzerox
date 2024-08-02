@@ -18,7 +18,7 @@ void leoRead_common(u32 offset) {
     }
 
     tg_lba += offset;
-    if ((tg_lba + tg_blocks) > 0x10DC) { // Unclear what this number represents
+    if ((tg_lba + tg_blocks) > NUM_LBAS + 0x18) {
     invalid_lba:
         LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
@@ -26,7 +26,7 @@ void leoRead_common(u32 offset) {
     }
 
     if (tg_blocks == 0) {
-        if (tg_lba >= 0x10DC) {
+        if (tg_lba >= NUM_LBAS + 0x18) {
             goto invalid_lba;
         }
         LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;

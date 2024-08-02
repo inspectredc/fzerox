@@ -16,7 +16,7 @@ u8 leoAnalize_asic_status(void) {
         if (curr_stat & LEO_STATUS_PRESENCE_MASK) {
             return LEO_SENSE_DEVICE_COMMUNICATION_FAILURE;
         }
-        if ((curr_stat & 0xC00000) == LEO_STATUS_BUSY_STATE) {
+        if ((curr_stat & (LEO_STATUS_BUSY_STATE | LEO_STATUS_RESET_STATE)) == LEO_STATUS_BUSY_STATE) {
             return LEO_SENSE_COMMAND_PHASE_ERROR;
         }
         if (curr_stat & LEO_STATUS_RESET_STATE) {
@@ -81,7 +81,7 @@ u8 leoChk_done_status(u32 asic_cmd) {
                     return LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED;
                 }
 
-                osEPiWriteIo(LEOPiInfo, 0x5000508, 0x90000);
+                osEPiWriteIo(LEOPiInfo, LEO_STATUS, ASIC_CLR_RSTFLG);
                 if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
                     return LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED;
                 }
@@ -95,17 +95,17 @@ u8 leoChk_done_status(u32 asic_cmd) {
             return 0;
 
         case LEO_SENSE_NO_SEEK_COMPLETE:
-            osEPiWriteIo(LEOPiInfo, 0x5000500, 0);
+            osEPiWriteIo(LEOPiInfo, LEO_DATA, 0);
             if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
                 return LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED;
             }
 
-            osEPiWriteIo(LEOPiInfo, 0x5000508, 0xC0000);
+            osEPiWriteIo(LEOPiInfo, LEO_STATUS, ASIC_REQ_STATUS);
             if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
                 return LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED;
             }
 
-            osEPiReadIo(LEOPiInfo, 0x5000500, &asic_data);
+            osEPiReadIo(LEOPiInfo, LEO_DATA, &asic_data);
             code = leoChk_asic_ready(ASIC_REQ_STATUS);
             if (code != 0) {
                 return code;

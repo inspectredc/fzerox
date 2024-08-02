@@ -2,7 +2,7 @@
 #include "leo/leo_internal.h"
 
 extern LEOCmdRead read_id_cmd;
-extern u8 leo_disk_id_lba[2];
+const u8 leo_disk_id_lba[2] = { 14, 15 };
 
 void leoReadDiskId(void) {
     LEOCmdRead dummy_cmd;

@@ -63,7 +63,8 @@
       - [0x978C0, .rodata, 79AF0]
       - [0x978E0, .rodata, lib/leofunc]
       - [0x978F0, .rodata, lib/leocmdex]
-      - [0x979A0, data] # multiple asm files?
+      - [0x979A0, .rodata, lib/leord_diskid]
+      - [0x979B0, .rodata, lib/leo_tbl]
       - [0x97B90, .rodata, lib/leoc2ecc]
       - [0x97FB0, .rodata, lib/leomseq_tbl]
       - [0x98060, .rodata, lib/leotimer]

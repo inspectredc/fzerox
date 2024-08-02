@@ -182,19 +182,19 @@ void leoSet_mseq(u16 rwmode);
 u8 leoRecal_w(void);
 u8 leoSeek_w(void);
 s32 __osLeoInterrupt(void);
-s32 leoC2_Correction(void);
+u16 leoC2_Correction(void);
 u16 leoLba_to_vzone(u32 lba);
 s32 __leoSetReset(void);
 u8 leoAnalize_asic_status(void);
 
-extern u8 LEOBYTE_TBL1[9];
-extern u16 LEOBYTE_TBL2[9];
-extern u16 LEOVZONE_TBL[][0x10];
-extern u16 LEOZONE_SCYL_TBL[16];
-extern u8 LEOVZONE_PZONEHD_TBL[][0x10];
-extern u16 LEOZONE_OUTERCYL_TBL[8];
-extern u16 LEORAM_START_LBA[7];
-extern s32 LEORAM_BYTE[7];
+extern const u8 LEOBYTE_TBL1[9];
+extern const u16 LEOBYTE_TBL2[9];
+extern const u16 LEOVZONE_TBL[][0x10];
+extern const u16 LEOZONE_SCYL_TBL[16];
+extern const u8 LEOVZONE_PZONEHD_TBL[][0x10];
+extern const u16 LEOZONE_OUTERCYL_TBL[8];
+extern const u16 LEORAM_START_LBA[7];
+extern const s32 LEORAM_BYTE[7];
 
 extern s32 __leoActive;
 extern s32 LEO_country_code;

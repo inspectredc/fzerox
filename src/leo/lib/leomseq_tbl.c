@@ -39,7 +39,7 @@ void leoSet_mseq(u16 rwmode) {
     LEOPiDmaParam.devAddr = LEO_RAM_ADDR;
     LEOPiDmaParam.size = 0x40;
     LEOPiInfo->transferInfo.cmdType = LEO_CMD_TYPE_2;
-    osEPiStartDma(LEOPiInfo, &LEOPiDmaParam, 1);
+    osEPiStartDma(LEOPiInfo, &LEOPiDmaParam, OS_WRITE);
     osRecvMesg(&LEOdma_que, NULL, 1);
     osEPiWriteIo(LEOPiInfo, LEO_SEC_BYTE, (sct_byte_u | 0x5900) << 0x10);
 

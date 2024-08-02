@@ -32,6 +32,7 @@ void leoReadTimer(void) {
 }
 
 static const u8 ymdupper[6] = { 99, 12, 31, 23, 59, 59 };
+//                                 Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
 static const u8 dayupper[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 void leoSetTimer(void) {
@@ -64,7 +65,8 @@ void leoSetTimer(void) {
             case 2:
                 // Day value check
                 if (temp > dayupper[month]) {
-                    if (temp != 0x1D || year & 3) {
+                    // Leap year check
+                    if (temp != 29 || year % 4) {
                         LEOcur_command->header.sense = LEO_SENSE_ILLEGAL_TIMER_VALUE;
                         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                         return;
@@ -130,14 +132,14 @@ u8 __locReadTimer(__LOCTime* time) {
     u32 data;
     u8 sense_code;
 
-    sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_MINUTE, 0U);
+    sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_MINUTE, 0);
     if (sense_code != 0) {
         return sense_code;
     }
     osEPiReadIo(LEOPiInfo, LEO_DATA, &data);
     time->minute = (u8)((u32)(data & 0xFF000000) >> 0x18);
     time->second = (u8)((u32)(data & 0xFF0000) >> 0x10);
-    sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_DATE, 0U);
+    sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_DATE, 0);
     if (sense_code != 0) {
         time->minute &= ~0x80;
         return sense_code;
@@ -145,7 +147,7 @@ u8 __locReadTimer(__LOCTime* time) {
     osEPiReadIo(LEOPiInfo, LEO_DATA, &data);
     time->day = (u8)((u32)(data & 0xFF000000) >> 0x18);
     time->hour = (u8)((u32)(data & 0xFF0000) >> 0x10);
-    sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_YEAR, 0U);
+    sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_YEAR, 0);
     if (sense_code != 0) {
         time->minute &= ~0x80;
         return sense_code;

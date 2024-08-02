@@ -26,7 +26,7 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
         return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
     }
     
-    __leoActive = 1;
+    __leoActive = true;
 
     __osSetHWIntrRoutine(1, __osLeoInterrupt);
     leoInitialize(comPri, intPri, cmdBuf, cmdMsgCnt);
@@ -35,7 +35,7 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
         __leoSetReset();
     }
 
-    cmdBlockInq.header.command = 2;
+    cmdBlockInq.header.command = LEO_COMMAND_INQUIRY;
     cmdBlockInq.header.reserve1 = 0;
     cmdBlockInq.header.control = 0;
     cmdBlockInq.header.reserve3 = 0;
@@ -47,9 +47,7 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
         dummy -= ((u32)__leoSetReset & 0xFFFFFF) | 0x403DF4;
     }
 
-    while (cmdBlockInq.header.status == 8) {
-        ;
-    }
+    while (cmdBlockInq.header.status == LEO_STATUS_BUSY) { }
 
     if (cmdBlockInq.header.status != 0) {
         return GET_ERROR(cmdBlockInq);
