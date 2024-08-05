@@ -1550,73 +1550,1861 @@ Gfx* func_i9_8011D154(Gfx* gfx, s32 red1, s32 green1, s32 blue1, s32 red2, s32 g
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011D5EC.s")
+extern Vtx D_703C808[];
+extern Vtx D_703C868[];
+extern Vtx D_703C988[];
+extern Vtx D_703C9C8[];
+extern Vtx D_703CA68[];
+extern Vtx D_703CC28[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011DA60.s")
+Gfx* func_i9_8011D5EC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011DE24.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703CC28, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011E1A0.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703C868, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011E40C.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703CA68, 28, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 5, 8, 7, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 10, 12, 11, 0, 13, 4, 6, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011E89C.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703C808, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011EC68.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703C988, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011F02C.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_703C9C8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011F3F0.s")
+extern Vtx D_703CCC8[];
+extern Vtx D_703CD28[];
+extern Vtx D_703CE48[];
+extern Vtx D_703CE88[];
+extern Vtx D_703CF28[];
+extern Vtx D_703D0D8[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011F704.s")
+Gfx* func_i9_8011DA60(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011FACC.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D0D8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8011FEB0.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703CD28, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80120298.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703CF28, 27, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 5, 8, 9, 0, 10, 11, 12, 0);
+    gSP2Triangles(gfx++, 11, 13, 12, 0, 14, 4, 6, 0);
+    gSP2Triangles(gfx++, 15, 16, 17, 0, 18, 19, 20, 0);
+    gSP2Triangles(gfx++, 21, 22, 23, 0, 24, 25, 26, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801205FC.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703CCC8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80120910.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703CE48, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80120E14.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_703CE88, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801212E8.s")
+extern Vtx D_703D178[];
+extern Vtx D_703D1D8[];
+extern Vtx D_703D298[];
+extern Vtx D_703D338[];
+extern Vtx D_703D448[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801217BC.s")
+Gfx* func_i9_8011DE24(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80121B68.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D448, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80121E60.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D1D8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801223BC.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703D338, 17, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP1Triangle(gfx++, 14, 15, 16, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8012290C.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D178, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80122DDC.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D298, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8012311C.s")
+extern Vtx D_703D4E8[];
+extern Vtx D_703D5A8[];
+extern Vtx D_703D5E8[];
+extern Vtx D_703D678[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80123384.s")
+Gfx* func_i9_8011E1A0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801238FC.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D678, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80123E08.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D4E8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801242E8.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703D5E8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80124664.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D5A8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8012498C.s")
+extern Vtx D_30337A8[];
+extern Vtx D_30338A8[];
+extern Vtx D_3033928[];
+extern Vtx D_3033968[];
+extern Vtx D_3033A08[];
+extern Vtx D_3033C68[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80125030.s")
+Gfx* func_i9_8011E40C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801255F8.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3033C68, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80125AC4.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_30338A8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 0, 6, 1, 0, 7, 3, 5, 0);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80125E48.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_3033A08, 38, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 22, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 26, 28, 29, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 30, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 34, 36, 37, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_30337A8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3033928, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3033968, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_703D6D8[];
+extern Vtx D_703D7D8[];
+extern Vtx D_703D858[];
+extern Vtx D_703D898[];
+extern Vtx D_703D938[];
+extern Vtx D_703DB58[];
+
+Gfx* func_i9_8011E89C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703DB58, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D7D8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 0, 6, 1, 0, 7, 3, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703D938, 34, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D6D8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703D858, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_703D898, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_703DBF8[];
+extern Vtx D_703DCE8[];
+extern Vtx D_703DD68[];
+extern Vtx D_703DDA8[];
+extern Vtx D_703DE48[];
+extern Vtx D_703E058[];
+
+Gfx* func_i9_8011EC68(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E058, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703DCE8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 0, 6, 1, 0, 7, 3, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703DE48, 33, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
+    gSP1Triangle(gfx++, 30, 31, 32, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703DBF8, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP1Triangle(gfx++, 12, 13, 14, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703DD68, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_703DDA8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_703E0F8[];
+extern Vtx D_703E1B8[];
+extern Vtx D_703E238[];
+extern Vtx D_703E2D8[];
+extern Vtx D_703E488[];
+
+Gfx* func_i9_8011F02C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E488, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E1B8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 1, 6, 2, 0, 3, 7, 4, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703E2D8, 27, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP1Triangle(gfx++, 24, 25, 26, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E0F8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E238, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_703E528[];
+extern Vtx D_703E588[];
+extern Vtx D_703E608[];
+extern Vtx D_703E6A8[];
+extern Vtx D_703E6D8[];
+
+Gfx* func_i9_8011F3F0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E6D8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E588, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 0, 2, 0, 3, 5, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703E6A8, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E528, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E608, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_3033D08[];
+extern Vtx D_3033E28[];
+extern Vtx D_3033EA8[];
+extern Vtx D_3033F48[];
+extern Vtx D_3033FE8[];
+extern Vtx D_3034148[];
+
+Gfx* func_i9_8011F704(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3034148, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3033E28, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 0, 2, 6, 0, 4, 7, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_3033FE8, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3033D08, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3033EA8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 0, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3033F48, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_703E738[];
+extern Vtx D_703E858[];
+extern Vtx D_703E8D8[];
+extern Vtx D_703E978[];
+extern Vtx D_703EA18[];
+extern Vtx D_703EB68[];
+
+Gfx* func_i9_8011FACC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703EB68, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E858, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 0, 2, 6, 0, 4, 7, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703EA18, 21, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP1Triangle(gfx++, 18, 19, 20, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E738, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703E8D8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 0, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_703E978, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_703EBF8[];
+extern Vtx D_703ED08[];
+extern Vtx D_703ED88[];
+extern Vtx D_703EE28[];
+extern Vtx D_703EEC8[];
+extern Vtx D_703EFE8[];
+
+Gfx* func_i9_8011FEB0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703EFE8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703ED08, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 0, 2, 6, 0, 4, 7, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703EEC8, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703EBF8, 17, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 10, 8, 0, 11, 12, 13, 0);
+    gSP1Triangle(gfx++, 14, 15, 16, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703ED88, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 0, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_703EE28, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_703F078[];
+extern Vtx D_703F158[];
+extern Vtx D_703F1D8[];
+extern Vtx D_703F278[];
+extern Vtx D_703F398[];
+
+Gfx* func_i9_80120298(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F398, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F158, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 0, 2, 0, 3, 5, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703F278, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F078, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F1D8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_703F428[];
+extern Vtx D_703F488[];
+extern Vtx D_703F518[];
+extern Vtx D_703F5B8[];
+extern Vtx D_703F648[];
+
+Gfx* func_i9_801205FC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F648, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F488, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 2, 0, 3, 5, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703F5B8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F428, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F518, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_30341E8[];
+extern Vtx D_3034328[];
+extern Vtx D_30343C8[];
+extern Vtx D_3034508[];
+extern Vtx D_3034598[];
+extern Vtx D_3034818[];
+
+Gfx* func_i9_80120910(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3034818, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3034328, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 1, 0, 6, 0, 3, 7, 4, 0);
+    gSP2Triangles(gfx++, 8, 1, 6, 0, 4, 7, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_3034598, 40, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 37, 38, 39, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_30341E8, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_30343C8, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 3, 18, 19, 0, 3, 19, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3034508, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 0, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 7, 6, 8, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_703F6A8[];
+extern Vtx D_703F7E8[];
+extern Vtx D_703F888[];
+extern Vtx D_703F9C8[];
+extern Vtx D_703FA58[];
+extern Vtx D_703FBE8[];
+
+Gfx* func_i9_80120E14(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703FBE8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F7E8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 1, 0, 6, 0, 3, 7, 4, 0);
+    gSP2Triangles(gfx++, 8, 1, 6, 0, 4, 7, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_703FA58, 25, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 4, 10, 5, 0, 11, 12, 1, 0);
+    gSP2Triangles(gfx++, 13, 14, 15, 0, 16, 17, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 24, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F6A8, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703F888, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 3, 18, 19, 0, 3, 19, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_703F9C8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 0, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 7, 6, 8, 0);    
+    
+    return gfx;
+}
+
+extern Vtx D_703FC88[];
+extern Vtx D_703FDC8[];
+extern Vtx D_703FE68[];
+extern Vtx D_703FFA8[];
+extern Vtx D_7040038[];
+extern Vtx D_70401C8[];
+
+Gfx* func_i9_801212E8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70401C8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703FDC8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 1, 0, 6, 0, 3, 7, 4, 0);
+    gSP2Triangles(gfx++, 8, 1, 6, 0, 4, 7, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7040038, 25, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 4, 10, 5, 0, 11, 12, 1, 0);
+    gSP2Triangles(gfx++, 13, 14, 15, 0, 16, 17, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 24, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703FC88, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_703FE68, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 3, 18, 19, 0, 3, 19, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_703FFA8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 0, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 7, 6, 8, 0);   
+    
+    return gfx;
+}
+
+extern Vtx D_7040268[];
+extern Vtx D_7040308[];
+extern Vtx D_70403A8[];
+extern Vtx D_7040438[];
+extern Vtx D_7040528[];
+
+Gfx* func_i9_801217BC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040528, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040308, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 1, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 5, 8, 0);
+    gSP2Triangles(gfx++, 0, 2, 9, 0, 5, 4, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7040438, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 6, 14, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040268, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70403A8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 1, 0, 0, 5, 7, 8, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_70405B8[];
+extern Vtx D_70405F8[];
+extern Vtx D_7040688[];
+extern Vtx D_70406E8[];
+extern Vtx D_7040718[];
+
+Gfx* func_i9_80121B68(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040718, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70405F8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 1, 0, 8, 3, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_70406E8, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70405B8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040688, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_30348B8[];
+extern Vtx D_3034958[];
+extern Vtx D_3034A38[];
+extern Vtx D_3034B48[];
+extern Vtx D_3034BC8[];
+extern Vtx D_3034EC8[];
+
+Gfx* func_i9_80121E60(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3034EC8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3034958, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 4, 3, 0, 7, 5, 8, 0);
+    gSP2Triangles(gfx++, 4, 6, 9, 0, 10, 0, 11, 0);
+    gSP2Triangles(gfx++, 7, 3, 5, 0, 10, 1, 0, 0);
+    gSP2Triangles(gfx++, 2, 1, 12, 0, 13, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_3034BC8, 48, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 19, 21, 20, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 9, 28, 10, 0, 29, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 35, 37, 38, 0, 39, 40, 41, 0);
+    gSP2Triangles(gfx++, 42, 43, 44, 0, 45, 46, 47, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_30348B8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3034A38, 17, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 2, 7, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 12, 13, 9, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 10, 9, 13, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3034B48, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 2, 4, 5, 0, 3, 6, 7, 0);   
+    
+    return gfx;
+}
+
+extern Vtx D_7040778[];
+extern Vtx D_7040818[];
+extern Vtx D_7040918[];
+extern Vtx D_70409D8[];
+extern Vtx D_7040A58[];
+extern Vtx D_7040CB8[];
+
+Gfx* func_i9_801223BC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040CB8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040818, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 1, 0, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 3, 10, 4, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 7, 9, 0, 15, 12, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7040A58, 38, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 5, 0);
+    gSP2Triangles(gfx++, 29, 30, 31, 0, 29, 31, 32, 0);
+    gSP2Triangles(gfx++, 33, 34, 35, 0, 36, 2, 1, 0);
+    gSP1Triangle(gfx++, 3, 37, 4, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040778, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040918, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 3, 4, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 6, 8, 7, 0);
+    gSP1Triangle(gfx++, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_70409D8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 0, 0, 5, 6, 7, 0);  
+    
+    return gfx;
+}
+
+extern Vtx D_7040D58[];
+extern Vtx D_7040DE8[];
+extern Vtx D_7040EE8[];
+extern Vtx D_7040FA8[];
+extern Vtx D_7041028[];
+extern Vtx D_70411D8[];
+
+Gfx* func_i9_8012290C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70411D8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040DE8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 1, 0, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 3, 10, 4, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 7, 9, 0, 15, 12, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7041028, 27, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP1Triangle(gfx++, 24, 25, 26, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040D58, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7040EE8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 3, 4, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 6, 8, 7, 0);
+    gSP1Triangle(gfx++, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7040FA8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 0, 0, 5, 6, 7, 0);  
+    
+    return gfx;
+}
+
+extern Vtx D_7041268[];
+extern Vtx D_70412C8[];
+extern Vtx D_7041398[];
+extern Vtx D_7041418[];
+extern Vtx D_70414D8[];
+
+Gfx* func_i9_80122DDC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70414D8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70412C8, 13, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 5, 7, 0, 4, 3, 8, 0);
+    gSP2Triangles(gfx++, 1, 0, 9, 0, 10, 5, 4, 0);
+    gSP2Triangles(gfx++, 2, 1, 11, 0, 9, 0, 12, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7041418, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041268, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041398, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 3, 4, 5, 0, 2, 6, 7, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7041568[];
+extern Vtx D_7041608[];
+extern Vtx D_7041648[];
+extern Vtx D_7041678[];
+
+Gfx* func_i9_8012311C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041678, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041568, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 1, 0, 3, 0, 6, 8, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7041648, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041608, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_3034F68[];
+extern Vtx D_3035108[];
+extern Vtx D_3035308[];
+extern Vtx D_3035348[];
+extern Vtx D_3035388[];
+extern Vtx D_30355E8[];
+
+Gfx* func_i9_80123384(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_30355E8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3035108, 32, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 19, 17, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 24, 26, 25, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 27, 29, 30, 0, 20, 31, 21, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_3035388, 38, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 14, 16, 15, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 20, 18, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 22, 24, 23, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 35, 36, 37, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3034F68, 26, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 22, 24, 25, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3035308, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3035348, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_70416D8[];
+extern Vtx D_7041858[];
+extern Vtx D_7041A38[];
+extern Vtx D_7041A78[];
+extern Vtx D_7041AB8[];
+extern Vtx D_7041CC8[];
+
+Gfx* func_i9_801238FC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041CC8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041858, 30, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 17, 15, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 22, 24, 23, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 25, 27, 28, 0, 18, 29, 19, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7041AB8, 33, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 23, 24, 25, 0, 23, 25, 26, 0);
+    gSP2Triangles(gfx++, 27, 28, 29, 0, 30, 31, 32, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70416D8, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041A38, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7041A78, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7041D68[];
+extern Vtx D_7041E18[];
+extern Vtx D_7041FD8[];
+extern Vtx D_7042018[];
+extern Vtx D_7042058[];
+extern Vtx D_7042278[];
+
+Gfx* func_i9_80123E08(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7042278, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041E18, 28, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 17, 15, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 19, 21, 20, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7042058, 34, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 8, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 23, 24, 3, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041D68, 11, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP1Triangle(gfx++, 8, 9, 10, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7041FD8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7042018, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7042308[];
+extern Vtx D_7042368[];
+extern Vtx D_7042428[];
+extern Vtx D_7042468[];
+extern Vtx D_7042648[];
+
+Gfx* func_i9_801242E8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7042648, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7042368, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7042468, 30, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7042308, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7042428, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_70426D8[];
+extern Vtx D_7042738[];
+extern Vtx D_70427F8[];
+extern Vtx D_7042838[];
+extern Vtx D_7042928[];
+
+Gfx* func_i9_80124664(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7042928, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7042738, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7042838, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP1Triangle(gfx++, 12, 13, 14, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70426D8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70427F8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_3035688[];
+extern Vtx D_3035788[];
+extern Vtx D_3035A48[];
+extern Vtx D_3035A88[];
+extern Vtx D_3035B48[];
+extern Vtx D_3035F28[];
+extern Vtx D_3035FE8[];
+
+Gfx* func_i9_8012498C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3035FE8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3035788, 44, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 24, 27, 25, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 29, 31, 30, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 33, 35, 34, 0);
+    gSP2Triangles(gfx++, 36, 37, 38, 0, 36, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 40, 43, 41, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_3035B48, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 3, 9, 4, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 11, 16, 12, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 24, 26, 25, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 28, 30, 29, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 35, 37, 36, 0);
+    gSP2Triangles(gfx++, 2, 38, 39, 0, 40, 41, 17, 0);
+    gSP2Triangles(gfx++, 42, 43, 44, 0, 45, 46, 47, 0);
+    gSP2Triangles(gfx++, 48, 49, 50, 0, 51, 52, 53, 0);
+    gSP2Triangles(gfx++, 51, 53, 54, 0, 55, 56, 57, 0);
+    gSP2Triangles(gfx++, 55, 57, 58, 0, 59, 60, 61, 0);
+    gSPVertex(gfx++, D_3035F28, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3035688, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3035A48, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3035A88, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 7, 8, 9, 0, 7, 9, 4, 0);
+    gSP2Triangles(gfx++, 3, 10, 11, 0, 3, 11, 0, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7042988[];
+extern Vtx D_7042A08[];
+extern Vtx D_7042C48[];
+extern Vtx D_7042C88[];
+extern Vtx D_7042D48[];
+extern Vtx D_7043058[];
+
+Gfx* func_i9_80125030(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043058, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7042A08, 36, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+    gSP2Triangles(gfx++, 2, 24, 0, 0, 2, 25, 24, 0);
+    gSP2Triangles(gfx++, 5, 26, 3, 0, 26, 27, 3, 0);
+    gSP2Triangles(gfx++, 15, 28, 13, 0, 28, 29, 13, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 30, 32, 33, 0);
+    gSP2Triangles(gfx++, 12, 34, 10, 0, 12, 35, 34, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7042D48, 49, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 9, 7, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 12, 0);
+    gSP2Triangles(gfx++, 15, 16, 17, 0, 18, 19, 20, 0);
+    gSP2Triangles(gfx++, 19, 21, 20, 0, 22, 23, 24, 0);
+    gSP2Triangles(gfx++, 23, 25, 24, 0, 26, 27, 28, 0);
+    gSP2Triangles(gfx++, 29, 30, 31, 0, 30, 32, 31, 0);
+    gSP2Triangles(gfx++, 5, 33, 34, 0, 35, 36, 15, 0);
+    gSP2Triangles(gfx++, 37, 38, 39, 0, 40, 41, 42, 0);
+    gSP2Triangles(gfx++, 43, 44, 45, 0, 46, 47, 48, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7042988, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7042C48, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7042C88, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 7, 8, 9, 0, 7, 9, 4, 0);
+    gSP2Triangles(gfx++, 3, 10, 11, 0, 3, 11, 0, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_70430F8[];
+extern Vtx D_7043178[];
+extern Vtx D_7043378[];
+extern Vtx D_70433F8[];
+extern Vtx D_7043608[];
+
+Gfx* func_i9_801255F8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043608, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043178, 32, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+    gSP2Triangles(gfx++, 2, 24, 0, 0, 5, 25, 3, 0);
+    gSP2Triangles(gfx++, 15, 26, 13, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 27, 29, 30, 0, 12, 31, 10, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_70433F8, 33, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 9, 11, 10, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
+    gSP1Triangle(gfx++, 30, 31, 32, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70430F8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043378, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7043698[];
+extern Vtx D_70436F8[];
+extern Vtx D_70437F8[];
+extern Vtx D_7043858[];
+extern Vtx D_70439E8[];
+
+Gfx* func_i9_80125AC4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70439E8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70436F8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 8, 9, 6, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 5, 13, 3, 0);
+    gSP2Triangles(gfx++, 12, 14, 10, 0, 2, 15, 0, 0);
+    
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7043858, 25, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 2, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 6, 8, 7, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 10, 12, 11, 0);
+    gSP2Triangles(gfx++, 13, 14, 15, 0, 16, 17, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 24, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043698, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70437F8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7043A78[];
+extern Vtx D_7043B38[];
+extern Vtx D_7043B98[];
+extern Vtx D_7043C58[];
+
+Gfx* func_i9_80125E48(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043C58, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043A78, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7043B98, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 9, 11, 10, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043B38, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    
+    return gfx;
+}
 
 extern Vtx D_3036088[];
 
@@ -1634,57 +3422,476 @@ Gfx* func_i9_801260FC(Gfx* gfx, s32 red, s32 green, s32 blue, s32 arg4, s32 arg5
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801261E0.s")
+extern Vtx D_7043CE8[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801262C0.s")
+Gfx* func_i9_801261E0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8012638C.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043CE8, 11, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP1Triangle(gfx++, 8, 9, 10, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80126440.s")
+extern Vtx D_7043D98[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80126544.s")
+Gfx* func_i9_801262C0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80126648.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043D98, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80126718.s")
+extern Vtx D_7043E18[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801267E8.s")
+Gfx* func_i9_8012638C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80126950.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043E18, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80126AA4.s")
+extern Vtx D_3036138[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80126BE4.s")
+Gfx* func_i9_80126440(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80126CCC.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3036138, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80126D98.s")
+extern Vtx D_7043E78[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80127044.s")
+Gfx* func_i9_80126544(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8012720C.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043E78, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801273A4.s")
+extern Vtx D_7043F78[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80127508.s")
+Gfx* func_i9_80126648(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801275CC.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7043F78, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80127704.s")
+extern Vtx D_7044038[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80127808.s")
+Gfx* func_i9_80126718(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801278F0.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044038, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801279C0.s")
+extern Vtx D_3036238[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80127A74.s")
+Gfx* func_i9_801267E8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80127C28.s")
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3036238, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 11, 13, 14, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 14, 16, 11, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 8, 0, 8, 20, 21, 0);
+    gSP1Triangle(gfx++, 8, 21, 17, 0);
+    
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80127D68.s")
+extern Vtx D_70440F8[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80127E70.s")
+Gfx* func_i9_80126950(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70440F8, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 11, 13, 8, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 17, 19, 14, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044238[];
+
+Gfx* func_i9_80126AA4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044238, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 9, 11, 6, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 15, 16, 17, 0, 15, 17, 12, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044358[];
+
+Gfx* func_i9_80126BE4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044358, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 8, 9, 6, 0);
+
+    return gfx;
+}
+
+extern Vtx D_70443F8[];
+
+Gfx* func_i9_80126CCC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70443F8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 3, 0, 0);
+
+    return gfx;
+}
+
+extern Vtx D_3036398[];
+extern Vtx D_3036518[];
+
+Gfx* func_i9_80126D98(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3036398, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 14, 16, 17, 0, 14, 17, 15, 0);
+    gSP2Triangles(gfx++, 8, 18, 19, 0, 8, 19, 9, 0);
+    gSP2Triangles(gfx++, 0, 20, 21, 0, 0, 21, 1, 0);
+    gSP2Triangles(gfx++, 6, 22, 23, 0, 6, 23, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_3036518, 23, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 8, 11, 12, 0);
+    gSP2Triangles(gfx++, 8, 12, 9, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 14, 17, 18, 0);
+    gSP2Triangles(gfx++, 14, 18, 15, 0, 19, 20, 21, 0);
+    gSP1Triangle(gfx++, 19, 21, 22, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044438[];
+extern Vtx D_7044538[];
+
+Gfx* func_i9_80127044(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044438, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7044538, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044618[];
+extern Vtx D_70446D8[];
+
+Gfx* func_i9_8012720C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044618, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_70446D8, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_70447B8[];
+extern Vtx D_7044878[];
+
+Gfx* func_i9_801273A4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_70447B8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gSPVertex(gfx++, D_7044878, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044908[];
+
+Gfx* func_i9_80127508(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg4, arg5, arg6, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044908, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_3036688[];
+
+Gfx* func_i9_801275CC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3036688, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 12, 14, 15, 0, 16, 17, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 18, 0, 13, 17, 11, 0);
+    gSP1Triangle(gfx++, 21, 22, 23, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044938[];
+
+Gfx* func_i9_80127704(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044938, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044A78[];
+
+Gfx* func_i9_80127808(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044A78, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044B58[];
+
+Gfx* func_i9_801278F0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044B58, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044C18[];
+
+Gfx* func_i9_801279C0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044C18, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_3036808[];
+
+Gfx* func_i9_80127A74(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_3036808, 39, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 19, 21, 20, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 26, 3, 27, 0, 28, 29, 30, 0);
+    gSP2Triangles(gfx++, 31, 32, 15, 0, 32, 16, 15, 0);
+    gSP2Triangles(gfx++, 33, 29, 34, 0, 29, 28, 34, 0);
+    gSP2Triangles(gfx++, 3, 35, 4, 0, 1, 36, 2, 0);
+    gSP2Triangles(gfx++, 9, 37, 10, 0, 7, 38, 8, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044C78[];
+
+Gfx* func_i9_80127C28(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044C78, 30, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 10, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 23, 3, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 16, 15, 0, 29, 26, 25, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044E58[];
+
+Gfx* func_i9_80127D68(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044E58, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    
+    return gfx;
+}
+
+extern Vtx D_7044FD8[];
+
+Gfx* func_i9_80127E70(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, arg1, arg2, arg3, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+    gSPVertex(gfx++, D_7044FD8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    
+    return gfx;
+}
 
 Gfx* func_i9_80127F40(Gfx* gfx, s32 red, s32 green, s32 blue, s32 arg4, s32 arg5, s32 arg6) {
     return gfx;
