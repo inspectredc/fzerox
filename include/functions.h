@@ -25,6 +25,7 @@ void func_8006D03C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
 void func_80073A04(void);
 void func_80073E28(void* arg0, void* arg1, size_t arg2);
 void func_80073ED0(void* arg0, void* arg1, size_t arg2);
+void func_80073FA0(u8* arg0, u8* arg1, u32 arg2);
 void func_8007402C(s32 arg0);
 void func_800741DC(s32 arg0);
 void func_80074634(unk_800F8510* arg0);
@@ -83,6 +84,7 @@ void func_8009E6F0(unk_8006FC8C*, f32, Vec3f*);
 f32 func_8009E85C(unk_8006FC8C*, f32, Mtx3F*, f32);
 
 s32 func_800AA394(s32);
+void func_800AA620(u8*, void*); // mio0 decode?
 
 bool func_800CC220(void);
 

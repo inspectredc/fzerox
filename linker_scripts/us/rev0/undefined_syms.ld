@@ -117,6 +117,84 @@ gAudioCtxEnd = 0x8002B3C0;
 D_8025DCE8 = 0x8025DCE8;
 
 // OVERLAYS/SEGMENTS SPLITS
+
+// ovl 3
+ovl_i3_rom_start = 0xA90C0;
+ovl_i3_vram_start = 0x80115DF0;
+ovl_i3_vram_end = 0x801439D0;
+ovl_i3_vram_text_start = 0x80115DF0;
+ovl_i3_vram_text_end = 0x8013DB80;
+ovl_i3_vram_data_start = 0x8013DB80;
+ovl_i3_vram_data_end = 0x80141900;
+ovl_i3_vram_bss_start = 0x80141900;
+ovl_i3_vram_bss_end = 0x801439D0;
+
+// ovl 4
+ovl_i4_rom_start = 0xD4BD0;
+ovl_i4_vram_start = 0x80115DF0;
+ovl_i4_vram_end = 0x8011D7A0;
+ovl_i4_vram_text_start = 0x80115DF0;
+ovl_i4_vram_text_end = 0x8011B980;
+ovl_i4_vram_data_start = 0x8011B980;
+ovl_i4_vram_data_end = 0x8011D770;
+ovl_i4_vram_bss_start = 0x8011D770;
+ovl_i4_vram_bss_end = 0x8011D7A0;
+
+// ovl 5
+ovl_i5_rom_start = 0xDC550;
+ovl_i5_vram_start = 0x80115DF0;
+ovl_i5_vram_end = 0x801197F0;
+ovl_i5_vram_text_start = 0x80115DF0;
+ovl_i5_vram_text_end = 0x80118FF0;
+ovl_i5_vram_data_start = 0x80118FF0;
+ovl_i5_vram_data_end = 0x801197B0;
+ovl_i5_vram_bss_start = 0x801197B0;
+ovl_i5_vram_bss_end = 0x801197F0;
+
+// ovl 6
+ovl_i6_rom_start = 0xDFF10;
+ovl_i6_vram_start = 0x80115DF0;
+ovl_i6_vram_end = 0x8012C7C0;
+ovl_i6_vram_text_start = 0x80115DF0;
+ovl_i6_vram_text_end = 0x8011DC40;
+ovl_i6_vram_data_start = 0x8011DC40;
+ovl_i6_vram_data_end = 0x8011F910;
+ovl_i6_vram_bss_start = 0x8011F910;
+ovl_i6_vram_bss_end = 0x8012C7C0;
+
+// ovl 7
+ovl_i7_rom_start = 0xE9A30;
+ovl_i7_vram_start = 0x801439D0;
+ovl_i7_vram_end = 0x8014C250;
+ovl_i7_vram_text_start = 0x801439D0;
+ovl_i7_vram_text_end = 0x80149E90;
+ovl_i7_vram_data_start = 0x80149E90;
+ovl_i7_vram_data_end = 0x8014B480;
+ovl_i7_vram_bss_start = 0x8014B480;
+ovl_i7_vram_bss_end = 0x8014C250;
+
+// ovl 8
+ovl_i8_rom_start = 0xF14E0;
+ovl_i8_vram_start = 0x801439D0;
+ovl_i8_vram_end = 0x801450E0;
+ovl_i8_vram_text_start = 0x801439D0;
+ovl_i8_vram_text_end = 0x80144F40;
+ovl_i8_vram_data_start = 0x80144F40;
+ovl_i8_vram_data_end = 0x80144FB0;
+ovl_i8_vram_bss_start = 0x80144FB0;
+ovl_i8_vram_bss_end = 0x801450E0;
+
+// ovl 9
+ovl_i9_rom_start = 0xF2AC0;
+ovl_i9_vram_start = 0x80115DF0;
+ovl_i9_vram_end = 0x80168CE0;
+ovl_i9_vram_text_start = 0x80115DF0;
+ovl_i9_vram_text_end = 0x80168A70;
+ovl_i9_vram_data_start = 0x80168A70;
+ovl_i9_vram_data_end = 0x80168CD0;
+ovl_i9_vram_bss_start = 0x80168CD0;
+ovl_i9_vram_bss_end = 0x80168CE0;
+
 // ovl 11
 D_800FC730 = 0x800FC730;
 D_800FCB70_2 = 0x800FCB70;
@@ -131,3 +209,7 @@ D_i9_80115DF0 = 0x80115DF0;
 D_802D5C40 = 0x802D5C40;
 D_802A6B40_2 = 0x802A6B40;
 D_802A6B40_3 = 0x802A6B40;
+
+// UNKNOWN
+// not sure which overlay this references
+D_80115DF0 = 0x80115DF0;

@@ -624,7 +624,7 @@ void func_80073ED0(void* arg0, void* arg1, size_t arg2) {
     MQ_WAIT_FOR_MESG(&D_800DCA68, sp20);
 }
 
-void func_80073FA0(u32 arg0, u32 arg1, u32 arg2) {
+void func_80073FA0(u8* arg0, u8* arg1, u32 arg2) {
     s32 temp_a2;
     s32 i;
     s32 temp_s3 = (arg2 >> 10);

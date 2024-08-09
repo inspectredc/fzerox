@@ -101,7 +101,8 @@
     "audio.h": "c",
     "leoappli.h": "c",
     "leo.h": "c",
-    "leo_internal.h": "c"
+    "leo_internal.h": "c",
+    "other_types.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"

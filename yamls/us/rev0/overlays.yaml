@@ -102,6 +102,7 @@
     dir: overlays/ovl_i3
     start: 0xA90C0
     vram: 0x80115DF0
+    bss_size: 0x20D0
     symbol_name_format: i3_$VRAM
     subsegments:
       - [0xA90C0, c]
@@ -117,6 +118,7 @@
       - [0xD4B20, .rodata, C2290]
       - [0xD4B30, .rodata, C8970]
       - [0xD4BA0, .rodata, CCFF0]
+      - { start: 0xD4BD0, type: bss, vram: 0x80141900, name: 80141900 }
 
 
   - name: ovl_i4
@@ -125,11 +127,13 @@
     dir: overlays/ovl_i4
     start: 0xD4BD0
     vram: 0x80115DF0
+    bss_size: 0x30
     symbol_name_format: i4_$VRAM
     subsegments:
       - [0xD4BD0, c]
       - [0xDA760, data]
       - [0xDC4E0, .rodata, D4BD0]
+      - { start: 0xDC550, type: bss, vram: 0x8011D770, name: 8011D770 }
 
   - name: ovl_i5
     exclusive_ram_id: overlay
@@ -137,12 +141,14 @@
     dir: overlays/ovl_i5
     start: 0xDC550
     vram: 0x80115DF0
+    bss_size: 0x40
     symbol_name_format: i5_$VRAM
     subsegments:
       - [0xDC550, c]
       - [0xDCF90, c]
       - [0xDF750, data]
       - [0xDFCB0, .rodata, DCF90]
+      - { start: 0xDFF10, type: bss, vram: 0x801197B0, name: 801197B0 }
 
   - name: ovl_i6
     exclusive_ram_id: overlay
@@ -150,6 +156,7 @@
     dir: overlays/ovl_i6
     start: 0xDFF10
     vram: 0x80115DF0
+    bss_size: 0xCEB0
     symbol_name_format: i6_$VRAM
     subsegments:
       - [0xDFF10, c]
@@ -158,6 +165,7 @@
       - [0xE7D60, data]
       - [0xE9040, .rodata, DFF10]
       - [0xE9180, .rodata, E2000]
+      - { start: 0xE9A30, type: bss, vram: 0x8011F910, name: 8011F910 }
 
   - name: ovl_i7
     exclusive_ram_id: overlay
@@ -165,11 +173,13 @@
     dir: overlays/ovl_i7
     start: 0xE9A30
     vram: 0x801439D0
+    bss_size: 0xDD0
     symbol_name_format: i7_$VRAM
     subsegments:
       - [0xE9A30, c]
       - [0xEFEF0, data]
       - [0xF13A0, .rodata, E9A30]
+      - { start: 0xF14E0, type: bss, vram: 0x8014B480, name: 8014B480 }
 
   - name: ovl_i8
     exclusive_ram_id: overlay
@@ -177,11 +187,13 @@
     dir: overlays/ovl_i8
     start: 0xF14E0
     vram: 0x801439D0
+    bss_size: 0x130
     symbol_name_format: i8_$VRAM
     subsegments:
       - [0xF14E0, c]
       - [0xF2A50, data]
       - [0xF2AB0, .rodata, F14E0]
+      - { start: 0xF2AC0, type: bss, vram: 0x80144FB0, name: 80144FB0 }
 
   - name: ovl_i9
     exclusive_ram_id: overlay
@@ -189,10 +201,12 @@
     dir: overlays/ovl_i9
     start: 0xF2AC0
     vram: 0x80115DF0
+    bss_size: 0x10
     symbol_name_format: i9_$VRAM
     subsegments:
       - [0xF2AC0, c]
       - [0x145740, data]
+      - { start: 0x1459A0, type: bss, vram: 0x80168CD0, name: 80168CD0 }
 
   - name: ovl_i10
     exclusive_ram_id: overlay
