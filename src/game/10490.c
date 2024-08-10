@@ -8,68 +8,68 @@ extern OSMesgQueue D_800DCA68;
 extern OSIoMesg D_800DCCA8;
 extern OSPiHandle* D_800DCCDC;
 
-void func_80076498(u32 arg0, u32 arg1, u32 arg2) {
-    OSMesg sp1C[7];
+void func_80076498(u32 devAddr, u32 ramAddr, size_t size) {
+    OSMesg msgBuf[7];
 
     D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
     D_800DCCA8.hdr.retQueue = &D_800DCA68;
-    D_800DCCA8.dramAddr = osPhysicalToVirtual(arg1);
-    D_800DCCA8.devAddr = arg0;
-    D_800DCCA8.size = arg2;
+    D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
+    D_800DCCA8.devAddr = devAddr;
+    D_800DCCA8.size = size;
     D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
     osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
-    MQ_WAIT_FOR_MESG(&D_800DCA68, sp1C);
+    MQ_WAIT_FOR_MESG(&D_800DCA68, msgBuf);
 }
 
-void func_80076528(u32 arg0, u32 arg1, u32 arg2, void* arg3, s32 arg4) {
-    OSMesg sp24[7];
+void func_80076528(u32 devAddr, u32 ramAddr, size_t size, void* arg3, s32 arg4) {
+    OSMesg msgBuf[7];
 
     D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
     D_800DCCA8.hdr.retQueue = &D_800DCA68;
-    D_800DCCA8.dramAddr = osPhysicalToVirtual(arg1);
-    D_800DCCA8.devAddr = arg0;
-    D_800DCCA8.size = arg2;
+    D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
+    D_800DCCA8.devAddr = devAddr;
+    D_800DCCA8.size = size;
     D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
     osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
     bzero(arg3, arg4);
-    MQ_WAIT_FOR_MESG(&D_800DCA68, sp24);
+    MQ_WAIT_FOR_MESG(&D_800DCA68, msgBuf);
 }
 
-void func_800765CC(u8* arg0, u8* arg1, u32 arg2) {
+void func_800765CC(u8* devAddr, u8* ramAddr, size_t size) {
     s32 temp_a2;
     s32 i;
     s32 temp_s3;
 
-    temp_s3 = arg2 >> 0xA;
+    temp_s3 = size / 1024;
 
     for (i = 0; i < temp_s3; i++) {
-        func_80076498(arg0, arg1, 0x400);
+        func_80076498(devAddr, ramAddr, 0x400);
 
-        arg0 += 0x400;
-        arg1 += 0x400;
+        devAddr += 0x400;
+        ramAddr += 0x400;
     }
-    temp_a2 = arg2 & 0x3FF;
-    if (temp_a2) {
-        func_80076498(arg0, arg1, temp_a2);
-    }
-}
-
-void func_80076658(u8* arg0, u8* arg1, size_t arg2, void* arg3, size_t arg4) {
-    s32 temp_a2;
-    s32 i;
-    s32 temp_s3;
-
-    temp_s3 = arg2 >> 0xA;
-
-    for (i = 0; i < temp_s3; i++) {
-        func_80076498(arg0, arg1, 0x400);
-
-        arg0 += 0x400;
-        arg1 += 0x400;
-    }
-    temp_a2 = arg2 & 0x3FF;
+    temp_a2 = size % 1024;
     if (temp_a2 != 0) {
-        func_80076528(arg0, arg1, temp_a2, arg3, arg4);
+        func_80076498(devAddr, ramAddr, temp_a2);
+    }
+}
+
+void func_80076658(u8* devAddr, u8* ramAddr, size_t size, void* arg3, size_t arg4) {
+    s32 temp_a2;
+    s32 i;
+    s32 temp_s3;
+
+    temp_s3 = size / 1024;
+
+    for (i = 0; i < temp_s3; i++) {
+        func_80076498(devAddr, ramAddr, 0x400);
+
+        devAddr += 0x400;
+        ramAddr += 0x400;
+    }
+    temp_a2 = size % 1024;
+    if (temp_a2 != 0) {
+        func_80076528(devAddr, ramAddr, temp_a2, arg3, arg4);
     }
 }
 
@@ -131,29 +131,31 @@ void func_80076848(void) {
     D_800E33D0[2] = ALIGN16((uintptr_t) D_8024DC80);
 }
 
-u8* func_80076884(s32 arg0, s32 arg1) {
-    s32 ret = D_800E33C0[arg0];
-    arg1 = ALIGN16(arg1);
+u8* func_80076884(s32 arg0, size_t arg1) {
+    u8* ret = D_800E33C0[arg0];
 
+    arg1 = ALIGN16(arg1);
     D_800E33C0[arg0] += arg1;
+
     return ret;
 }
 
-u8* func_800768B0(s32 arg0, s32 arg1) {
-    s32 temp = D_800E33C0[arg0];
-    return temp;
+u8* func_800768B0(s32 arg0, size_t arg1) {
+    u8* ret = D_800E33C0[arg0];
+
+    return ret;
 }
 
-u8* func_800768C8(s32 arg0, s32 arg1) {
+u8* func_800768C8(s32 arg0, size_t arg1) {
 
     arg1 = ALIGN16(arg1);
-
     D_800E33D0[arg0] -= arg1;
-    return D_800E33D0[arg0];
+
+    return (u8*)D_800E33D0[arg0];
 }
 
 u8* func_800768F4(s32 arg0, size_t arg1) {
-    u32 sp54[3];
+    size_t sp54[3];
     s8 sp50[3];
     u8* sp4C;
     s32 i;
@@ -570,8 +572,8 @@ extern u32 D_800DCDB4;
 
 void func_80077630(void) {
     s32 pad[2];
-    RomOffset sp1C;
-    size_t sp18;
+    RomOffset romOffset;
+    size_t ramSize;
 
     if (D_800CD2E0 != 0) {
         switch (D_800DCE44) {
@@ -584,18 +586,18 @@ void func_80077630(void) {
             case 0x11:
             case 0x15:
                 func_80073FA0(D_17B960, osPhysicalToVirtual(D_800DCDB4), D_1B8550 - D_17B960);
-                sp1C = D_1B8550;
-                sp18 = D_4029EA0 - D_4000000;
+                romOffset = D_1B8550;
+                ramSize = D_4029EA0 - D_4000000;
                 break;
             case 0x10:
                 func_80073FA0(D_17B960, osPhysicalToVirtual(D_800DCDB4), D_1B8550 - D_17B960);
-                sp1C = D_166660;
-                sp18 = D_4006240 - D_4000000;
+                romOffset = D_166660;
+                ramSize = D_4006240 - D_4000000;
                 break;
             case 0xD:
                 func_80073FA0(D_17B960, osPhysicalToVirtual(D_800DCDB4), D_1B8550 - D_17B960);
-                sp1C = D_1535B0;
-                sp18 = D_40130B0 - D_4000000;
+                romOffset = D_1535B0;
+                ramSize = D_40130B0 - D_4000000;
                 break;
             case 0x6:
             case 0x4009:
@@ -607,8 +609,8 @@ void func_80077630(void) {
                 return;
         }
 
-        osInvalDCache(osPhysicalToVirtual(D_800DCDC4), sp18);
-        func_800765CC(sp1C, osPhysicalToVirtual(D_800DCDC4), sp18);
+        osInvalDCache(osPhysicalToVirtual(D_800DCDC4), ramSize);
+        func_800765CC(romOffset, osPhysicalToVirtual(D_800DCDC4), ramSize);
         D_800CD2E0 = 0;
     }
 }
@@ -623,8 +625,8 @@ extern s32 D_800DCE44;
 
 void func_80077810(void) {
     s32 pad[2];
-    RomOffset sp1C;
-    size_t sp18;
+    RomOffset romOffset;
+    size_t ramSize;
 
     if (D_800CD2E4 != 0) {
         switch (D_800DCE44) {
@@ -635,20 +637,20 @@ void func_80077810(void) {
             case 5:
             case 14:
             case 21:
-                sp1C = D_1E23F0;
-                sp18 = D_7048CB0 - D_7000000;
+                romOffset = D_1E23F0;
+                ramSize = D_7048CB0 - D_7000000;
                 break;
             case 13:
             case 16:
-                sp1C = D_145B70;
-                sp18 = D_700DA40 - D_7000000;
+                romOffset = D_145B70;
+                ramSize = D_700DA40 - D_7000000;
                 break;
             default:
                 D_800CD2E4 = 0;
                 return;
         }
-        osInvalDCache(osPhysicalToVirtual(D_800DCDCC), sp18);
-        func_800765CC(sp1C, osPhysicalToVirtual(D_800DCDCC), sp18);
+        osInvalDCache(osPhysicalToVirtual(D_800DCDCC), ramSize);
+        func_800765CC(romOffset, osPhysicalToVirtual(D_800DCDCC), ramSize);
         D_800CD2E4 = 0;
     }
 }
@@ -659,7 +661,7 @@ extern u8 D_900A090[];
 
 void func_800778F8(void) {
     s32 pad[3];
-    size_t sp1C;
+    size_t ramSize;
     u8* sp24;
 
     if (D_800CD2E8 != 0) {
@@ -671,11 +673,11 @@ void func_800778F8(void) {
             case 0x11:
             case 0x4009:
             case 0x4012:
-                sp1C = D_900A090 - D_9000000;
-                sp24 = func_800768F4(1, sp1C);
+                ramSize = D_900A090 - D_9000000;
+                sp24 = func_800768F4(1, ramSize);
 
-                osInvalDCache(sp24, sp1C);
-                func_800765CC(D_22B0A0, sp24, sp1C);
+                osInvalDCache(sp24, ramSize);
+                func_800765CC(D_22B0A0, sp24, ramSize);
                 if (*(s32*) sp24 == (s32) 'MIO0') {
                     func_800AA620(sp24, osPhysicalToVirtual(D_800DCDD4));
                 }
