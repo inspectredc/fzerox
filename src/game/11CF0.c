@@ -2,9 +2,9 @@
 
 extern u8 D_2B9EA0[];
 
-void func_80077CF0(s32 arg0, s32 arg1, void* arg2) {
+void func_80077CF0(s32 arg0, s32 arg1, u8* arg2) {
     osInvalDCache(arg2, arg1);
-    func_800765CC(D_2B9EA0 + (arg0 & 0xFFFFFF), arg2, arg1);
+    func_800765CC(D_2B9EA0 + SEGMENT_OFFSET(arg0), arg2, arg1);
 }
 
 extern s32 D_800E3A20;
@@ -13,19 +13,206 @@ void func_80077D44(void) {
     D_800E3A20 = 0;
 }
 
+typedef struct unk_80077D50 {
+    s16 unk_00;
+    struct unk_80077D50* unk_04;
+    u16 unk_08; // width
+    u16 unk_0A; // height?
+    u32 unk_0C;
+} unk_80077D50;
+
 typedef struct unk_800E33E0 {
-    s32 unk_00;
-    s32 unk_04;
+    unk_80077D50* unk_00;
+    TexturePtr unk_04;
 } unk_800E33E0; // size = 0x8
+
+typedef struct unk_800E3F28 {
+    unk_800E33E0* unk_00;
+    s16 unk_04;
+    s16 unk_06;
+    s16 unk_08;
+    s16 unk_0A;
+    TexturePtr unk_0C;
+    TexturePtr unk_10;
+} unk_800E3F28; // size = 0x14
+
 extern unk_800E33E0 D_800E33E0[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/11CF0/func_80077D50.s")
+extern u8* D_800E33C0;
+extern s32 D_800E3A20;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/11CF0/func_80078104.s")
+u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
+    bool var_a0;
+    bool var_s7;
+    s32 var_s0;
+    s32 var_s5;
+    s32 var_s2;
+    s32 temp_lo;
+    u8* sp44;
+    u8* var_s4;
+    u8* header;
+    unk_800E33E0* var_s8 = D_800E33E0;
+
+    sp44 = D_800E33C0;
+    var_s7 = false;
+
+    while (arg0->unk_04 != 0) {
+        var_a0 = false;
+        if (arg1 == 0) {
+            for (var_s0 = 0; var_s0 < D_800E3A20; var_s0++) {
+                // FAKE
+                if (D_800E33E0[var_s0].unk_00 == (0, arg0->unk_04)) {
+                    var_a0 = true;
+                    break;
+                }
+            }
+        }
+        if (!var_a0) {
+            switch (arg0->unk_00) {
+                case 4:
+                case 5:
+                    if (arg0->unk_08 % 16) {
+                        var_s5 = ((arg0->unk_08 + 16) / 16) * 16;
+                    } else {
+                        var_s5 = arg0->unk_08;
+                    }
+                    temp_lo = arg0->unk_0A * var_s5;
+                    var_s4 = func_800768F4(0, temp_lo);
+                    func_80077CF0(arg0->unk_04, temp_lo, var_s4);
+                    break;
+                case 20:
+                case 21:
+
+                    if (arg0->unk_08 % 16) {
+                        var_s5 = ((arg0->unk_08 + 16) / 16) * 16;
+                    } else {
+                        var_s5 = arg0->unk_08;
+                    }
+                    temp_lo = arg0->unk_0A * var_s5;
+                    if (arg0->unk_0C != 0) {
+                        var_s2 = ((arg0->unk_0C / 2) * 2) + 2;
+                    } else {
+                        var_s2 = 0x400;
+                    }
+                    var_s4 = func_800768F4(0, temp_lo);
+                    header = func_800768F4(1, var_s2);
+                    osInvalDCache(header, var_s2);
+                    func_80077CF0(arg0->unk_04, var_s2, header);
+                    if (*(s32*) header == (s32) 'MIO0') {
+                        func_800AA620(header, var_s4);
+                    } else {
+                        bzero(var_s4, (arg0->unk_0A * var_s5) / 2);
+                    }
+                    break;
+                case 17:
+                case 18:
+                    if (arg0->unk_0C != 0) {
+                        var_s0 = ((arg0->unk_0C / 2) * 2) + 2;
+                    } else {
+                        var_s0 = 0x400;
+                    }
+
+                    var_s4 = func_800768F4(0, arg0->unk_0A * arg0->unk_08 * 2);
+                    header = func_800768F4(1, var_s0);
+                    osInvalDCache(header, var_s0);
+                    func_80077CF0(arg0->unk_04, var_s0, header);
+                    if (*(s32*) header == (s32) 'MIO0') {
+                        func_800AA620(header, var_s4);
+                    } else {
+                        bzero(var_s4, arg0->unk_0A * arg0->unk_08 * 2);
+                    }
+                    break;
+                default:
+                    var_s0 = arg0->unk_0A * arg0->unk_08 * 2;
+                    var_s4 = func_800768F4(0, var_s0);
+                    func_80077CF0(arg0->unk_04, var_s0, var_s4);
+                    break;
+            }
+            if (!var_s7) {
+                sp44 = var_s4;
+                var_s7 = true;
+            }
+            var_s8[D_800E3A20].unk_00 = arg0->unk_04;
+            var_s8[D_800E3A20].unk_04 = (s32) var_s4;
+            D_800E3A20++;
+        }
+
+        arg0++;
+    }
+
+    return sp44;
+}
+
+u8* func_80078104(unk_80077D50* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
+    s32 var_a3;
+    bool var_t0;
+    u8* var_s0;
+    u8* var_a2;
+    s32 sp24;
+    unk_800E33E0* var_v1 = D_800E33E0;
+
+    var_t0 = false;
+    if ((arg2 == 0) && !arg4) {
+        for (var_a3 = 0; var_a3 < D_800E3A20; var_a3++) {
+            if (D_800E33E0[var_a3].unk_00 == arg0) {
+                var_t0 = true;
+                break;
+            }
+        }
+    }
+    if (!var_t0 || arg4) {
+        if (arg3 == 0) {
+            if (!arg4) {
+                var_s0 = func_800768F4(0, arg1);
+            } else {
+                var_s0 = func_800768F4(1, arg1);
+            }
+            func_80077CF0(arg0, arg1, var_s0);
+        } else {
+            var_s0 = func_800768F4(1, 8);
+            func_80077CF0(arg0, 8, var_s0);
+            var_a3 = func_800AA6BC(var_s0);
+
+            if (!arg4) {
+                var_s0 = func_800768F4(0, var_a3);
+                var_a2 = func_800768F4(1, arg1);
+            } else {
+                if (var_a3 % 16) {
+                    var_a3 = ((var_a3 / 16) * 16) + 16;
+                }
+                if (arg1 % 16) {
+                    arg1 = ((arg1 / 16) * 16) + 16;
+                }
+
+                sp24 = arg1 + var_a3;
+                var_s0 = func_800768F4(1, sp24);
+                osInvalDCache(var_s0, sp24);
+                var_a2 = var_s0 + var_a3;
+            }
+
+            osInvalDCache(var_a2, arg1);
+            func_80077CF0(arg0, arg1, var_a2);
+            if (*(s32*) var_a2 == (s32) 'MIO0') {
+                func_800AA620(var_a2, var_s0);
+            } else {
+                bzero(var_s0, var_a3);
+            }
+        }
+        if (!arg4) {
+            var_v1[D_800E3A20].unk_00 = arg0;
+            var_v1[D_800E3A20].unk_04 = var_s0;
+            D_800E3A20++;
+        }
+    } else {
+        // FAKE
+        return ((unk_800E33E0*) (var_v1 + var_a3))->unk_04;
+    }
+    return var_s0;
+}
 
 extern s32 D_800E3A20;
 
-s32 func_800783AC(s32 arg0) {
+TexturePtr func_800783AC(unk_80077D50* arg0) {
     s32 i;
 
     for (i = 0; i < D_800E3A20; i++) {
@@ -33,218 +220,196 @@ s32 func_800783AC(s32 arg0) {
             return D_800E33E0[i].unk_04;
         }
     }
-    return 0;
+    return NULL;
 }
 
-typedef struct unk_800783F4_arg_1 {
-    s16 unk_00;
-    s8 unk_02[0x2];
-    s32 unk_04;
-    u16 unk_08;
-    u16 unk_0A;
-    s8 unk_0C[0x4];
-} unk_800783F4_arg_1;
-void* func_8007B14C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u32 arg5, s32 arg6, s32 arg7, s32 arg8,
-                    s32 arg9, s32 argA, s32 argB);
+Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 arg2, s32 arg3, s32 arg4, u32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                   s32 arg9, s32 argA, s32 argB);
 
-void func_800783F4(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, s32 arg4) {
+Gfx* func_800783F4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture) {
 
     switch (arg1->unk_00) {
         case 3:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 0, 0, 0);
         case 5:
         case 21:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 1, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 1, 0, 0);
         case 2:
         case 18:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, 0, 0);
         case 1:
         default:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 0, 0, 0);
     }
 }
 
-void func_8007857C(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, s32 arg4) {
+Gfx* func_8007857C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture) {
 
     switch (arg1->unk_00) {
         case 3:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 0, 0, 0);
         case 5:
         case 21:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 1, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 1, 0, 0);
         case 2:
         case 18:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 1, 1, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 1, 1, 0, 0);
         case 1:
         default:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 1, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 1, 0, 0, 0);
     }
 }
 
-void func_8007870C(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+Gfx* func_8007870C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture, s32 arg5, s32 arg6) {
 
     switch (arg1->unk_00) {
         case 3:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 0, 0, 0);
         case 5:
         case 21:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 1, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 1, 0, 0);
         case 2:
         case 18:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, arg5, arg6);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, arg5, arg6);
         case 1:
         default:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 0, arg5, arg6);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 0, arg5, arg6);
     }
 }
 
-void* func_8007CDB0(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u32 arg5, f32 arg6, f32 arg7, s32 arg8,
-                    s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 arg2, s32 arg3, s32 arg4, u32 arg5, f32 arg6, f32 arg7, s32 arg8,
+                   s32 arg9, s32 argA, s32 argB, s32 argC);
 
-void func_800788A4(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg5, f32 arg6) {
+Gfx* func_800788A4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture, f32 arg5, f32 arg6) {
 
     switch (arg1->unk_00) {
         case 3:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            func_8007CDB0(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
-            break;
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
         case 5:
         case 21:
-            func_8007CDB0(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
-            break;
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
         case 2:
         case 18:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, 0, 0);
         case 1:
         default:
-            func_8007CDB0(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 0, 0, 0);
-            break;
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 0, 0, 0);
     }
 }
 
-void func_80078A4C(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg5, f32 arg6) {
+Gfx* func_80078A4C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture, f32 arg5, f32 arg6) {
 
     switch (arg1->unk_00) {
         case 3:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            func_8007CDB0(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
-            break;
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
         case 5:
         case 21:
-            func_8007CDB0(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
-            break;
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
         case 2:
         case 18:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, 0, 0);
         case 1:
         default:
-            func_8007CDB0(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 0, 0, 1);
-            break;
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 0, 0, 1);
     }
 }
 
-void func_80078BF8(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg5, f32 arg6) {
+Gfx* func_80078BF8(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture, f32 arg5, f32 arg6) {
 
     switch (arg1->unk_00) {
         case 3:
-            func_8007B14C(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
-            break;
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            func_8007CDB0(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
-            break;
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
         case 5:
         case 21:
-            func_8007CDB0(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
-            break;
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
         case 2:
         case 18:
-            func_8007CDB0(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 1, 1, 0);
-            break;
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 1, 1, 0);
         case 1:
         default:
-            func_8007CDB0(arg0, arg4, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 1, 0, 0);
-            break;
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 1, 0, 0);
     }
 }
 
-// BAD RETURN: (TODO: This should still return the outputs of the functions in the switch cases)
-void* func_80078DB4(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, s32 arg4, u32 arg5, s32 arg6, s32 arg7,
-                    f32 arg8, f32 arg9) {
+// BAD RETURN
+Gfx* func_80078DB4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture, u32 arg5, s32 arg6, s32 arg7,
+                   f32 arg8, f32 arg9) {
     switch (arg5) {
         case 0:
-            func_800783F4(arg0, arg1, arg2, arg3, arg4);
-            break;
+            return func_800783F4(gfx, arg1, arg2, arg3, texture);
         case 1:
-            func_8007857C(arg0, arg1, arg2, arg3, arg4);
-            break;
+            return func_8007857C(gfx, arg1, arg2, arg3, texture);
         case 2:
-            func_8007870C(arg0, arg1, arg2, arg3, arg4, arg6, arg7);
-            break;
+            return func_8007870C(gfx, arg1, arg2, arg3, texture, arg6, arg7);
         case 3:
-            func_800788A4(arg0, arg1, arg2, arg3, arg4, arg8, arg9);
-            break;
+            return func_800788A4(gfx, arg1, arg2, arg3, texture, arg8, arg9);
         case 5:
-            func_80078A4C(arg0, arg1, arg2, arg3, arg4, arg8, arg9);
-            break;
+            return func_80078A4C(gfx, arg1, arg2, arg3, texture, arg8, arg9);
         case 4:
-            func_80078BF8(arg0, arg1, arg2, arg3, arg4, arg8, arg9);
-            break;
-        default:
-            break;
+            return func_80078BF8(gfx, arg1, arg2, arg3, texture, arg8, arg9);
     }
 }
 
-void* func_80078EA0(void* arg0, unk_800783F4_arg_1* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7,
-                    f32 arg8) {
-    s32 temp_v0;
+Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8) {
+    TexturePtr texture;
 
     while (arg1->unk_04 != 0) {
         // FAKE
-        if (arg0) {}
+        if (gfx) {}
 
-        temp_v0 = func_800783AC(arg1->unk_04);
-        if (temp_v0 != 0) {
-            arg0 = func_80078DB4(arg0, arg1, arg2, arg3, temp_v0, arg4, arg5, arg6, arg7, arg8);
+        texture = func_800783AC(arg1->unk_04);
+        if (texture != NULL) {
+            gfx = func_80078DB4(gfx, arg1, arg2, arg3, texture, arg4, arg5, arg6, arg7, arg8);
         }
         arg1++;
     }
-    return arg0;
+    return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/11CF0/func_80078F80.s")
+Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8) {
+    TexturePtr texture;
+    unk_80077D50* var_s0;
+    s32 var;
+
+    var_s0 = arg1->unk_00[arg1->unk_04].unk_00;
+
+    while (var_s0->unk_04 != 0) {
+        var = arg1->unk_0A;
+        switch (var) {
+            case 0:
+                texture = arg1->unk_0C;
+                break;
+            default:
+                texture = arg1->unk_10;
+                break;
+        }
+
+        if (texture != NULL) {
+            gfx = func_80078DB4(gfx, var_s0, arg2, arg3, texture, arg4, arg5, arg6, arg7, arg8);
+        }
+
+        var_s0++;
+    }
+    return gfx;
+}
 
 extern unk_800E33E0 D_800E4068[];
 
@@ -267,17 +432,56 @@ void func_800790A4(s32 arg0, s32 arg1) {
     var_v0->unk_04 = arg1;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/11CF0/func_800790D4.s")
+void func_800790D4(void) {
+    s32 var_v1;
+    u8* header;
+    u32 var_s0;
+    unk_80077D50* temp_s1;
+    unk_800E33E0* var_s3;
 
-typedef struct unk_800E3F28 {
-    void* unk_00;
-    s16 unk_04;
-    s16 unk_06;
-    s16 unk_08;
-    s16 unk_0A;
-    s32 unk_0C;
-    s32 unk_10;
-} unk_800E3F28; // size = 0x14
+    var_s3 = D_800E4068;
+
+    while (true) {
+        temp_s1 = var_s3->unk_00;
+        if (temp_s1 != NULL) {
+            switch (temp_s1->unk_00) {
+                case 4:
+                case 5:
+                    if (temp_s1->unk_08 % 16) {
+                        var_v1 = ((temp_s1->unk_08 + 16) / 16) * 16;
+                    } else {
+                        var_v1 = temp_s1->unk_08;
+                    }
+                    func_80077CF0(temp_s1->unk_04, temp_s1->unk_0A * var_v1, var_s3->unk_04);
+                    break;
+                case 17:
+                case 18:
+                    if (temp_s1->unk_0C != 0) {
+                        var_s0 = ((temp_s1->unk_0C / 2) * 2) + 2;
+                    } else {
+                        var_s0 = 0x400;
+                    }
+                    header = func_800768F4(1, var_s0);
+                    osInvalDCache(header, var_s0);
+                    func_80077CF0(temp_s1->unk_04, var_s0, header);
+                    if (*(s32*) header == (s32) 'MIO0') {
+                        func_800AA620(header, var_s3->unk_04);
+                    } else {
+                        bzero(var_s3->unk_04, temp_s1->unk_0A * temp_s1->unk_08 * 2);
+                    }
+                    break;
+                default:
+                    var_s0 = temp_s1->unk_0A * temp_s1->unk_08;
+                    func_80077CF0(temp_s1->unk_04, var_s0 * 2, var_s3->unk_04);
+                    break;
+            }
+            var_s3->unk_00 = NULL;
+            var_s3++;
+        } else {
+            break;
+        }
+    }
+}
 
 extern unk_800E3F28 D_800E3F28[];
 
@@ -289,21 +493,39 @@ void func_800792A8(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/11CF0/func_800792D8.s")
+s32 func_800792D8(unk_800E33E0* arg0) {
+    s32 i = 0;
+    u8* var_v0;
 
-typedef struct unk_800793E8_arg_2 {
-    s32 unk_00;
-    s32 unk_04;
-} unk_800793E8_arg_2;
+    while (D_800E3F28[i].unk_08 != 0) {
+        if (++i >= 16) {
+            return -1;
+        }
+    }
 
-// TODO: FAKE
-void func_800793E8(s32 arg0, s32 arg1, unk_800793E8_arg_2* arg2) {
+    D_800E3F28[i].unk_00 = arg0;
+    D_800E3F28[i].unk_04 = -1;
+    D_800E3F28[i].unk_06 = 0;
+    D_800E3F28[i].unk_08 = -0x8000;
+
+    if (arg0[0].unk_00 != NULL) {
+        D_800E3F28[i].unk_0C = func_80077D50(arg0[0].unk_00, 1);
+    }
+
+    D_800E3F28[i].unk_10 =
+        (arg0[1].unk_00 != NULL) ? func_80077D50(arg0[1].unk_00, 1) : func_80077D50(arg0[0].unk_00, 1);
+    D_800E3F28[i].unk_0A = 0;
+    return i;
+}
+
+void func_800793E8(s32 arg0, s32 arg1, unk_800E33E0* arg2) {
     unk_800E3F28* sp1C;
     s32 temp_a3;
 
     D_800E3F28[arg0].unk_04 = arg1;
     D_800E3F28[arg0].unk_00 = arg2;
-    D_800E3F28[arg0].unk_06 = (*(unk_800793E8_arg_2*) (arg2 + arg1)).unk_04;
+    // FAKE
+    D_800E3F28[arg0].unk_06 = ((unk_800E33E0*) (arg2 + arg1))->unk_04;
     temp_a3 = arg2[D_800E3F28[arg0].unk_04].unk_00;
 
     if (D_800E3F28[arg0].unk_0A != 0) {

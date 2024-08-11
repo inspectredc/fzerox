@@ -15,7 +15,6 @@ s32 func_i1_80408CDC(s32);
 s32 func_i1_804045AC(void);
 s32 func_i1_80404830(void);
 s32 func_i1_80409060(u16);
-s32 func_i1_80403680(u16, s32, s32);
 s32 func_i1_80408FDC(s32);
 s32 func_i1_8040A5F8(s32, u8*, s32, s32);
 s32 func_i1_804035DC(u16);
@@ -164,7 +163,7 @@ s32 func_i1_804095F4(u16 arg0, s32 arg1, u32 arg2) {
     return func_i1_804094E0(arg0, arg1, arg2);
 }
 
-s32 func_i1_804096C8(u16 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_i1_804096C8(u16 arg0, s32 arg1, u8* arg2, s32 arg3, s32 arg4) {
     u16 sp1E;
 
     if (func_i1_80404830() < 0) {

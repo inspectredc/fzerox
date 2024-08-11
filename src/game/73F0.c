@@ -624,7 +624,7 @@ void func_80073ED0(void* arg0, void* arg1, size_t arg2) {
     MQ_WAIT_FOR_MESG(&D_800DCA68, sp20);
 }
 
-void func_80073FA0(u32 arg0, u32 arg1, u32 arg2) {
+void func_80073FA0(u8* arg0, u8* arg1, u32 arg2) {
     s32 temp_a2;
     s32 i;
     s32 temp_s3 = (arg2 >> 10);
@@ -642,9 +642,53 @@ void func_80073FA0(u32 arg0, u32 arg1, u32 arg2) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/D_800D3400.s")
+// todo: move these to appropriate places
+static const char devrostr0[] = "\n/***\nCOURSE GADGET TEXTURE OVER!! %f,%f\n***/\n";
+static const char devrostr1[] = "GADGET OVER !! OVER !! OVER !!\n";
+static const char devrostr2[] = "Gadget Vtx Over %d!!\n";
+static const char devrostr3[] = "move start position %d\n";
+static const char devrostr4[] = "look index %d\n";
+static const char devrostr5[] = "index %d\n";
+static const char devrostr6[] = "ENTRY CHECK\n";
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8007402C.s")
+extern u8 D_2AD1E0[];
+extern u8 D_8010D730[];
+extern s16 D_80106F48;
+
+void func_80074428(s32 arg0);
+
+void func_8007402C(s32 arg0) {
+    s32 pad;
+    s32 sp28;
+
+    if (arg0 >= 0x36) {
+        func_80073FA0((arg0 * 0x7E0) + 0xFFFF13C0 + D_2AD1E0, osVirtualToPhysical(D_8010B7B0.unk_000), 0x7E0);
+        if ((D_80106F48 >= 4) && (arg0 == 0x37)) {
+            D_8010B7B0.unk_000[3] = 3;
+        }
+    } else if (arg0 >= 0x30) {
+        func_800A3044();
+        return;
+    } else if (arg0 >= 0x18) {
+        sp28 = arg0 - 0x18;
+        if (func_800760F8() != 2) {
+            osWritebackDCacheAll();
+            func_8007FE98();
+            osWritebackDCacheAll();
+        }
+
+        while (func_800760F8() != 2) {}
+
+        if (func_i1_80403680(0xFFFB, (sp28 * 9) + D_8010D730, "CRSD\0\0\0\0ENTRY CHECK OK\n") != 0xFFFF) {
+            func_i1_804096C8(0xFFFB, (sp28 * 9) + D_8010D730, "CRSD\0\0\0\0ENTRY LOAD OK\n\0\0UNPACK\n\0UNPACK OK\n",
+                             D_8010B7B0.unk_000, 0);
+        }
+    } else {
+        func_80073FA0((arg0 * 0x7E0) + D_2AD1E0, osVirtualToPhysical(D_8010B7B0.unk_000), 0x7E0);
+    }
+
+    func_80074428(arg0);
+}
 
 void func_800741DC(s32 arg0) {
     func_80073894(arg0);

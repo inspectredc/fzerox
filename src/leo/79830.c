@@ -6,7 +6,6 @@ extern OSMesg D_i1_80428610;
 extern unk_leo_804285D0 D_i1_804285D0;
 extern unk_leo_804285D0 D_i1_8041B550[];
 s32 func_i1_80403420(u16);
-s32 func_i1_80403680(u16, u8*, u8*);
 s32 func_i1_804031C0(s32);
 s32 func_i1_80403274(s32);
 s32 func_i1_804033A4(u16);

@@ -2,7 +2,6 @@
 #include "unk_leo.h"
 
 s32 func_i1_80404830(void);
-u16 func_i1_80403680(u16, s32, s32);
 u16 func_i1_804037C4(u16, s32);
 s32 func_i1_8040567C(u16);
 u16 func_i1_804038A0(u16);
