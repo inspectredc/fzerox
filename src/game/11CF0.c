@@ -41,7 +41,6 @@ extern unk_800E33E0 D_800E33E0[];
 extern u8* D_800E33C0;
 extern s32 D_800E3A20;
 
-
 u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     bool var_a0;
     bool var_s7;
@@ -86,7 +85,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
 
                     if (arg0->unk_08 % 16) {
                         var_s5 = ((arg0->unk_08 + 16) / 16) * 16;
-                    } else  {
+                    } else {
                         var_s5 = arg0->unk_08;
                     }
                     temp_lo = arg0->unk_0A * var_s5;
@@ -99,7 +98,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
                     header = func_800768F4(1, var_s2);
                     osInvalDCache(header, var_s2);
                     func_80077CF0(arg0->unk_04, var_s2, header);
-                    if (*(s32*)header == (s32)'MIO0') {
+                    if (*(s32*) header == (s32) 'MIO0') {
                         func_800AA620(header, var_s4);
                     } else {
                         bzero(var_s4, (arg0->unk_0A * var_s5) / 2);
@@ -117,7 +116,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
                     header = func_800768F4(1, var_s0);
                     osInvalDCache(header, var_s0);
                     func_80077CF0(arg0->unk_04, var_s0, header);
-                    if (*(s32*)header == (s32)'MIO0') {
+                    if (*(s32*) header == (s32) 'MIO0') {
                         func_800AA620(header, var_s4);
                     } else {
                         bzero(var_s4, arg0->unk_0A * arg0->unk_08 * 2);
@@ -193,7 +192,7 @@ u8* func_80078104(unk_80077D50* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
 
             osInvalDCache(var_a2, arg1);
             func_80077CF0(arg0, arg1, var_a2);
-            if (*(s32*)var_a2 == (s32)'MIO0') {
+            if (*(s32*) var_a2 == (s32) 'MIO0') {
                 func_800AA620(var_a2, var_s0);
             } else {
                 bzero(var_s0, var_a3);
@@ -206,7 +205,7 @@ u8* func_80078104(unk_80077D50* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
         }
     } else {
         // FAKE
-        return ((unk_800E33E0*)(var_v1 + var_a3))->unk_04;
+        return ((unk_800E33E0*) (var_v1 + var_a3))->unk_04;
     }
     return var_s0;
 }
@@ -225,7 +224,7 @@ TexturePtr func_800783AC(unk_80077D50* arg0) {
 }
 
 Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 arg2, s32 arg3, s32 arg4, u32 arg5, s32 arg6, s32 arg7, s32 arg8,
-                    s32 arg9, s32 argA, s32 argB);
+                   s32 arg9, s32 argA, s32 argB);
 
 Gfx* func_800783F4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture) {
 
@@ -288,7 +287,7 @@ Gfx* func_8007870C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 }
 
 Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 arg2, s32 arg3, s32 arg4, u32 arg5, f32 arg6, f32 arg7, s32 arg8,
-                    s32 arg9, s32 argA, s32 argB, s32 argC);
+                   s32 arg9, s32 argA, s32 argB, s32 argC);
 
 Gfx* func_800788A4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture, f32 arg5, f32 arg6) {
 
@@ -352,7 +351,7 @@ Gfx* func_80078BF8(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
 // BAD RETURN
 Gfx* func_80078DB4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture, u32 arg5, s32 arg6, s32 arg7,
-                    f32 arg8, f32 arg9) {
+                   f32 arg8, f32 arg9) {
     switch (arg5) {
         case 0:
             return func_800783F4(gfx, arg1, arg2, arg3, texture);
@@ -369,8 +368,7 @@ Gfx* func_80078DB4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
     }
 }
 
-Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7,
-                    f32 arg8) {
+Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8) {
     TexturePtr texture;
 
     while (arg1->unk_04 != 0) {
@@ -392,7 +390,7 @@ Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 arg2, s32 arg3, u32 arg4, s
     s32 var;
 
     var_s0 = arg1->unk_00[arg1->unk_04].unk_00;
-    
+
     while (var_s0->unk_04 != 0) {
         var = arg1->unk_0A;
         switch (var) {
@@ -466,7 +464,7 @@ void func_800790D4(void) {
                     header = func_800768F4(1, var_s0);
                     osInvalDCache(header, var_s0);
                     func_80077CF0(temp_s1->unk_04, var_s0, header);
-                    if (*(s32*)header == (s32)'MIO0') {
+                    if (*(s32*) header == (s32) 'MIO0') {
                         func_800AA620(header, var_s3->unk_04);
                     } else {
                         bzero(var_s3->unk_04, temp_s1->unk_0A * temp_s1->unk_08 * 2);
@@ -498,7 +496,7 @@ void func_800792A8(void) {
 s32 func_800792D8(unk_800E33E0* arg0) {
     s32 i = 0;
     u8* var_v0;
-    
+
     while (D_800E3F28[i].unk_08 != 0) {
         if (++i >= 16) {
             return -1;
@@ -514,7 +512,8 @@ s32 func_800792D8(unk_800E33E0* arg0) {
         D_800E3F28[i].unk_0C = func_80077D50(arg0[0].unk_00, 1);
     }
 
-    D_800E3F28[i].unk_10 = (arg0[1].unk_00 != NULL) ? func_80077D50(arg0[1].unk_00, 1) :  func_80077D50(arg0[0].unk_00, 1);
+    D_800E3F28[i].unk_10 =
+        (arg0[1].unk_00 != NULL) ? func_80077D50(arg0[1].unk_00, 1) : func_80077D50(arg0[0].unk_00, 1);
     D_800E3F28[i].unk_0A = 0;
     return i;
 }
@@ -526,7 +525,7 @@ void func_800793E8(s32 arg0, s32 arg1, unk_800E33E0* arg2) {
     D_800E3F28[arg0].unk_04 = arg1;
     D_800E3F28[arg0].unk_00 = arg2;
     // FAKE
-    D_800E3F28[arg0].unk_06 = ((unk_800E33E0*)(arg2 + arg1))->unk_04;
+    D_800E3F28[arg0].unk_06 = ((unk_800E33E0*) (arg2 + arg1))->unk_04;
     temp_a3 = arg2[D_800E3F28[arg0].unk_04].unk_00;
 
     if (D_800E3F28[arg0].unk_0A != 0) {

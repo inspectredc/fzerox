@@ -681,7 +681,7 @@ void func_8007402C(s32 arg0) {
 
         if (func_i1_80403680(0xFFFB, (sp28 * 9) + D_8010D730, "CRSD\0\0\0\0ENTRY CHECK OK\n") != 0xFFFF) {
             func_i1_804096C8(0xFFFB, (sp28 * 9) + D_8010D730, "CRSD\0\0\0\0ENTRY LOAD OK\n\0\0UNPACK\n\0UNPACK OK\n",
-                          D_8010B7B0.unk_000, 0);
+                             D_8010B7B0.unk_000, 0);
         }
     } else {
         func_80073FA0((arg0 * 0x7E0) + D_2AD1E0, osVirtualToPhysical(D_8010B7B0.unk_000), 0x7E0);

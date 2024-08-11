@@ -257,8 +257,6 @@ Gfx* func_8007DB28(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-
-
 #ifdef IMPORT_BSS
 static s8 D_800E4174[4];
 void func_8007DED8(void) {
