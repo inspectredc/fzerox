@@ -1,6 +1,58 @@
 #include "global.h"
 #include "fzxthread.h"
 
+u16 D_800CD2E0 = 0;
+s8 D_800CD2E4 = 0;
+s8 D_800CD2E8 = 0;
+s8 D_800CD2EC = 0;
+s8 D_800CD2F0 = -1;
+s8 D_800CD2F4 = 0;
+
+// Todo use symbol offsets for next 3 arrays
+RomOffset D_800CD2F8[] = {
+    0x235130,
+    0x239A80,
+    0x23EC50,
+    0x243D90,
+    0x24A270,
+    0x2507F0,
+    0x255100,
+    0x259600,
+    0x25F360,
+    0x266C20,
+    0x26D780,
+};
+
+// Segment ram start
+u8* D_800CD324[] = {
+    0x0A000000,
+    0x0A000000,
+    0x0A000000,
+    0x0A000000,
+    0x0A000000,
+    0x0A000000,
+    0x0A000000,
+    0x0A000000,
+    0x0A000000,
+    0x0A000000,
+    0x0A000000,
+};
+
+// Segment ram end
+u8* D_800CD350[] = {
+    0x0A004950,
+    0x0A0051D0,
+    0x0A005140,
+    0x0A0064E0,
+    0x0A006580,
+    0x0A004910,
+    0x0A004500,
+    0x0A005D60,
+    0x0A0078C0,
+    0x0A006B60,
+    0x0A006120,
+};
+
 void func_80076490(void) {
 }
 
@@ -238,7 +290,6 @@ extern u8 D_4000000[];
 extern u8 D_4006240[];
 extern u8 D_4029EA0[];
 
-extern u16 D_800CD2E0;
 extern s32 D_800DCDC4;
 extern s32 D_800DCDC8;
 extern s32 D_800DCE44;
@@ -282,7 +333,6 @@ extern u8 D_7000000[];
 extern u8 D_700DA40[];
 extern u8 D_7048CB0[];
 
-extern s8 D_800CD2E4;
 extern s32 D_800DCDCC;
 extern s32 D_800DCDD0;
 
@@ -317,7 +367,6 @@ void func_80076E10(void) {
 
 extern u8 D_18750[];
 
-extern s8 D_800CD2E8;
 extern s32 D_800DCDD4;
 extern s32 D_800DCDD8;
 
@@ -344,7 +393,6 @@ void func_80076F00(void) {
 
 extern u8 D_BFC0[];
 
-extern s8 D_800CD2EC;
 extern s32 D_800DCDDC;
 extern s32 D_800DCDE0;
 
@@ -376,7 +424,6 @@ void func_80076FC0(void) {
 }
 
 extern u8 D_3680[];
-extern s8 D_800CD2F4;
 extern s32 D_800DCDE4;
 extern s32 D_800DCDE8;
 
@@ -687,9 +734,6 @@ void func_800778F8(void) {
     }
 }
 
-extern RomOffset D_800CD2F8[];
-extern u8* D_800CD324[];
-extern u8* D_800CD350[];
 extern s8 D_8010B7B2;
 
 void func_800779D0(void) {
@@ -731,8 +775,6 @@ void func_800779D0(void) {
         func_8009CED0(sp28);
     }
 }
-
-extern s8 D_800CD2F0;
 
 void func_80077AD8(s32 arg0) {
     if ((arg0 >= 0) && (arg0 < 0xA) && (D_800CD2F0 < 0)) {
