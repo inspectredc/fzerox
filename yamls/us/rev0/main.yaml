@@ -296,6 +296,20 @@
       - { type: .bss, vram: 0x800FB4D0, name: libultra/io/pfsisplug }
       - { type: .bss, vram: 0x800FB510, name: libultra/io/vimgr }
 
+  - name: audio_context
+    type: code
+    vram: 0x80025C00
+    bss_size: 0x57C0
+    subsegments:
+      - { type: .bss, vram: 0x80025C00, name: audio/audio_context }
+
+  - name: audio_heap
+    type: code
+    vram: 0x8002B400
+    bss_size: 0x3B000
+    subsegments:
+      - { type: .bss, vram: 0x8002B400, name: audio/audio_heap }
+
   - name: buffers
     exclusive_ram_id: buffer
     type: code

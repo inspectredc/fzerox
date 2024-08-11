@@ -21,7 +21,7 @@ void func_800AA6D0(Note* note, NoteAttributes* noteAttr) {
     pan = noteAttr->pan;
     reverb = noteAttr->reverb;
 
-    if (gAudioSoundMode == SOUNDMODE_MONO) {
+    if (gSoundMode == SOUNDMODE_MONO) {
         panVolumeLeft = 0.707f;
         pamVolumeRight = 0.707f;
     } else {
@@ -279,9 +279,9 @@ void func_800AAD84(SequenceLayer* layer, s32 arg1) {
                 note->playbackState.unk_04 = 1;
                 note->playbackState.adsr.action.asByte |= 0x20;
                 if (layer->adsr.decayIndex == 0) {
-                    note->playbackState.adsr.fadeOutVel = D_800268B8[layer->channel->adsr.decayIndex];
+                    note->playbackState.adsr.fadeOutVel = gAdsrDecayTable[layer->channel->adsr.decayIndex];
                 } else {
-                    note->playbackState.adsr.fadeOutVel = D_800268B8[layer->adsr.decayIndex];
+                    note->playbackState.adsr.fadeOutVel = gAdsrDecayTable[layer->adsr.decayIndex];
                 }
                 note->playbackState.adsr.sustain =
                     (s32) layer->channel->adsr.sustain * note->playbackState.adsr.current / 256.0f;

@@ -454,7 +454,7 @@ void func_800B84B8(void) {
     SequenceLayer* layer;
     Note* note;
 
-    if ((D_800D1A60 == 0xD) && (&gSequenceChannelNone != gSeqPlayers[0].channels[0])) {
+    if ((D_800D1A60 == 0xD) && (&gSeqChannelNone != gSeqPlayers[0].channels[0])) {
         layer = gSeqPlayers[0].channels[0]->layers[0];
         if (layer != NULL) {
             note = layer->note;
@@ -774,13 +774,11 @@ void func_800B8DAC(u8 arg0) {
     }
 }
 
-extern s16 D_80025C1A;
-
 void func_800B9240(u8 arg0) {
     switch (D_800D1A18) {
         case 0:
             if (D_800D1A90[0] == 1) {
-                D_80025C1A = 0x7FFF;
+                gSynthReverbs[0].volume = 0x7FFF;
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 14, 80);
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 15, 80);
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
@@ -795,7 +793,7 @@ void func_800B9240(u8 arg0) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, 80);
                 }
             } else {
-                D_80025C1A = 0;
+                gSynthReverbs[0].volume = 0;
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 15, 0);
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 14, 0);
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 0);
@@ -805,9 +803,9 @@ void func_800B9240(u8 arg0) {
             break;
         case 1:
             if ((D_800D1A90[0] == 1) || (D_800D1A90[1] == 1)) {
-                D_80025C1A = 0x7FFF;
+                gSynthReverbs[0].volume = 0x7FFF;
             } else {
-                D_80025C1A = 0;
+                gSynthReverbs[0].volume = 0;
             }
             if (D_800D1A90[0] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
@@ -846,9 +844,9 @@ void func_800B9240(u8 arg0) {
             break;
         case 2:
             if ((D_800D1A90[0] == 1) || (D_800D1A90[1] == 1) || (D_800D1A90[2] == 1)) {
-                D_80025C1A = 0x7FFF;
+                gSynthReverbs[0].volume = 0x7FFF;
             } else {
-                D_80025C1A = 0;
+                gSynthReverbs[0].volume = 0;
             }
             if (D_800D1A90[0] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
@@ -904,9 +902,9 @@ void func_800B9240(u8 arg0) {
             break;
         case 3:
             if ((D_800D1A90[0] == 1) || (D_800D1A90[1] == 1) || (D_800D1A90[2] == 1) || (D_800D1A90[3] == 1)) {
-                D_80025C1A = 0x7FFF;
+                gSynthReverbs[0].volume = 0x7FFF;
             } else {
-                D_80025C1A = 0;
+                gSynthReverbs[0].volume = 0;
             }
             if (D_800D1A90[0] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);

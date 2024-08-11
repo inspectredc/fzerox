@@ -1769,8 +1769,7 @@
     type: code
     dir: overlays/ovl_i11
     start: 0x524920
-    # Todo: figure out vram
-    vram: 0x80600000
+    vram: 0x800FC730
     symbol_name_format: i11_$VRAM
     subsegments:
       - [0x524920, asm]

@@ -76,6 +76,7 @@
     dir: overlays/ovl_i2
     start: 0x98080
     vram: 0x800FC730
+    bss_size: 0x8680
     follows_vram: main
     symbol_name_format: i2_$VRAM
     subsegments:
@@ -91,10 +92,7 @@
       - [0xA6760, .rodata, 9FE40]
       - [0xA67C0, .rodata, A1700]
       - [0xA7100, data] # could be rodata for 9F3C0 but would be out of order
-
-  # zero padding
-  - type: bin
-    start: 0xA7110
+      - {start: 0xA90C0, type: bss, vram: 0x8010D770, name: 8010D770 }
 
   - name: ovl_i3
     exclusive_ram_id: overlay

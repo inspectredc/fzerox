@@ -431,42 +431,42 @@ void func_8007712C(void) {
     switch (D_800DCE44) {
         // ovl_i8
         case 6:
-            vramTextStart = ovl_i8_vram_text_start;
-            vramStart = ovl_i8_vram_start;
-            vramDataStart = ovl_i8_vram_data_start;
-            vramBssStart = ovl_i8_vram_bss_start;
-            romStart = ovl_i8_rom_start;
-            segmentTextSize = ovl_i8_vram_text_end - ovl_i8_vram_text_start;
-            segmentDataSize = ovl_i8_vram_data_end - ovl_i8_vram_data_start;
-            segmentRomSize = ovl_i8_vram_bss_start - ovl_i8_vram_start;
-            segmentVramSize = ovl_i8_vram_end - ovl_i8_vram_start;
-            segmentBssSize = ovl_i8_vram_bss_end - ovl_i8_vram_bss_start;
+            vramTextStart = SEGMENT_TEXT_START(ovl_i8);
+            vramStart = SEGMENT_VRAM_START(ovl_i8);
+            vramDataStart = SEGMENT_DATA_START(ovl_i8);
+            vramBssStart = SEGMENT_BSS_START(ovl_i8);
+            romStart = SEGMENT_ROM_START(ovl_i8);
+            segmentTextSize = SEGMENT_TEXT_SIZE(ovl_i8);
+            segmentDataSize = SEGMENT_DATA_SIZE(ovl_i8);
+            segmentRomSize = SEGMENT_BSS_START(ovl_i8) - SEGMENT_VRAM_START(ovl_i8);
+            segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i8);
+            segmentBssSize = SEGMENT_BSS_SIZE(ovl_i8);
             break;
         // ovl_i7
         case 17:
-            vramTextStart = ovl_i7_vram_text_start;
-            vramStart = ovl_i7_vram_start;
-            vramDataStart = ovl_i7_vram_data_start;
-            vramBssStart = ovl_i7_vram_bss_start;
-            romStart = ovl_i7_rom_start;
-            segmentTextSize = ovl_i7_vram_text_end - ovl_i7_vram_text_start;
-            segmentDataSize = ovl_i7_vram_data_end - ovl_i7_vram_data_start;
-            segmentRomSize = ovl_i7_vram_bss_start - ovl_i7_vram_start;
-            segmentVramSize = ovl_i7_vram_end - ovl_i7_vram_start;
-            segmentBssSize = ovl_i7_vram_bss_end - ovl_i7_vram_bss_start;
+            vramTextStart = SEGMENT_TEXT_START(ovl_i7);
+            vramStart = SEGMENT_VRAM_START(ovl_i7);
+            vramDataStart = SEGMENT_DATA_START(ovl_i7);
+            vramBssStart = SEGMENT_BSS_START(ovl_i7);
+            romStart = SEGMENT_ROM_START(ovl_i7);
+            segmentTextSize = SEGMENT_TEXT_SIZE(ovl_i7);
+            segmentDataSize = SEGMENT_DATA_SIZE(ovl_i7);
+            segmentRomSize = SEGMENT_BSS_START(ovl_i7) - SEGMENT_VRAM_START(ovl_i7);
+            segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i7);
+            segmentBssSize = SEGMENT_BSS_SIZE(ovl_i7);
             break;
         // ovl_i9
         case 16:
-            vramTextStart = ovl_i9_vram_text_start;
-            vramStart = ovl_i9_vram_start;
-            vramDataStart = ovl_i9_vram_data_start;
-            vramBssStart = ovl_i9_vram_bss_start;
-            romStart = ovl_i9_rom_start;
-            segmentTextSize = ovl_i9_vram_text_end - ovl_i9_vram_text_start;
-            segmentDataSize = ovl_i9_vram_data_end - ovl_i9_vram_data_start;
-            segmentRomSize = ovl_i9_vram_bss_start - ovl_i9_vram_start;
-            segmentVramSize = ovl_i9_vram_end - ovl_i9_vram_start;
-            segmentBssSize = ovl_i9_vram_bss_end - ovl_i9_vram_bss_start;
+            vramTextStart = SEGMENT_TEXT_START(ovl_i9);
+            vramStart = SEGMENT_VRAM_START(ovl_i9);
+            vramDataStart = SEGMENT_DATA_START(ovl_i9);
+            vramBssStart = SEGMENT_BSS_START(ovl_i9);
+            romStart = SEGMENT_ROM_START(ovl_i9);
+            segmentTextSize = SEGMENT_TEXT_SIZE(ovl_i9);
+            segmentDataSize = SEGMENT_DATA_SIZE(ovl_i9);
+            segmentRomSize = SEGMENT_BSS_START(ovl_i9) - SEGMENT_VRAM_START(ovl_i9);
+            segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i9);
+            segmentBssSize = SEGMENT_BSS_SIZE(ovl_i9);
             break;
         default:
             return;
@@ -502,63 +502,63 @@ void func_80077318(void) {
         case 0x11:
         case 0x15:
             // ovl_i3
-            vramTextStart = ovl_i3_vram_text_start;
-            vramStart = ovl_i3_vram_start;
-            vramDataStart = ovl_i3_vram_data_start;
-            vramBssStart = ovl_i3_vram_bss_start;
-            romStart = ovl_i3_rom_start;
-            segmentTextSize = ovl_i3_vram_text_end - ovl_i3_vram_text_start;
-            segmentDataSize = ovl_i3_vram_data_end - ovl_i3_vram_data_start;
-            segmentRomSize = ovl_i3_vram_bss_start - ovl_i3_vram_start;
-            segmentVramSize = ovl_i3_vram_end - ovl_i3_vram_start;
-            segmentBssSize = ovl_i3_vram_bss_end - ovl_i3_vram_bss_start;
+            vramTextStart = SEGMENT_TEXT_START(ovl_i3);
+            vramStart = SEGMENT_VRAM_START(ovl_i3);
+            vramDataStart = SEGMENT_DATA_START(ovl_i3);
+            vramBssStart = SEGMENT_BSS_START(ovl_i3);
+            romStart = SEGMENT_ROM_START(ovl_i3);
+            segmentTextSize = SEGMENT_TEXT_SIZE(ovl_i3);
+            segmentDataSize = SEGMENT_DATA_SIZE(ovl_i3);
+            segmentRomSize = SEGMENT_BSS_START(ovl_i3) - SEGMENT_VRAM_START(ovl_i3);
+            segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i3);
+            segmentBssSize = SEGMENT_BSS_SIZE(ovl_i3);
             break;
         case 0x4009:
         case 0x4012:
         case 0x8000:
         case 0x8008:
             // ovl_i4
-            vramTextStart = ovl_i4_vram_text_start;
-            vramStart = ovl_i4_vram_start;
-            vramDataStart = ovl_i4_vram_data_start;
-            vramBssStart = ovl_i4_vram_bss_start;
-            romStart = ovl_i4_rom_start;
-            segmentTextSize = ovl_i4_vram_text_end - ovl_i4_vram_text_start;
-            segmentDataSize = ovl_i4_vram_data_end - ovl_i4_vram_data_start;
-            segmentRomSize = ovl_i4_vram_bss_start - ovl_i4_vram_start;
-            segmentVramSize = ovl_i4_vram_end - ovl_i4_vram_start;
-            segmentBssSize = ovl_i4_vram_bss_end - ovl_i4_vram_bss_start;
+            vramTextStart = SEGMENT_TEXT_START(ovl_i4);
+            vramStart = SEGMENT_VRAM_START(ovl_i4);
+            vramDataStart = SEGMENT_DATA_START(ovl_i4);
+            vramBssStart = SEGMENT_BSS_START(ovl_i4);
+            romStart = SEGMENT_ROM_START(ovl_i4);
+            segmentTextSize = SEGMENT_TEXT_SIZE(ovl_i4);
+            segmentDataSize = SEGMENT_DATA_SIZE(ovl_i4);
+            segmentRomSize = SEGMENT_BSS_START(ovl_i4) - SEGMENT_VRAM_START(ovl_i4);
+            segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i4);
+            segmentBssSize = SEGMENT_BSS_SIZE(ovl_i4);
             break;
         case 0x800A:
         case 0x800F:
         case 0x8013:
             // ovl_i5
-            vramTextStart = ovl_i5_vram_text_start;
-            vramStart = ovl_i5_vram_start;
-            vramDataStart = ovl_i5_vram_data_start;
-            vramBssStart = ovl_i5_vram_bss_start;
-            romStart = ovl_i5_rom_start;
-            segmentTextSize = ovl_i5_vram_text_end - ovl_i5_vram_text_start;
-            segmentDataSize = ovl_i5_vram_data_end - ovl_i5_vram_data_start;
-            segmentRomSize = ovl_i5_vram_bss_start - ovl_i5_vram_start;
-            segmentVramSize = ovl_i5_vram_end - ovl_i5_vram_start;
-            segmentBssSize = ovl_i5_vram_bss_end - ovl_i5_vram_bss_start;
+            vramTextStart = SEGMENT_TEXT_START(ovl_i5);
+            vramStart = SEGMENT_VRAM_START(ovl_i5);
+            vramDataStart = SEGMENT_DATA_START(ovl_i5);
+            vramBssStart = SEGMENT_BSS_START(ovl_i5);
+            romStart = SEGMENT_ROM_START(ovl_i5);
+            segmentTextSize = SEGMENT_TEXT_SIZE(ovl_i5);
+            segmentDataSize = SEGMENT_DATA_SIZE(ovl_i5);
+            segmentRomSize = SEGMENT_BSS_START(ovl_i5) - SEGMENT_VRAM_START(ovl_i5);
+            segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i5);
+            segmentBssSize = SEGMENT_BSS_SIZE(ovl_i5);
             break;
         case 0x8007:
         case 0x800B:
         case 0x800C:
         case 0x8014:
             // ovl_i6
-            vramTextStart = ovl_i6_vram_text_start;
-            vramStart = ovl_i6_vram_start;
-            vramDataStart = ovl_i6_vram_data_start;
-            vramBssStart = ovl_i6_vram_bss_start;
-            romStart = ovl_i6_rom_start;
-            segmentTextSize = ovl_i6_vram_text_end - ovl_i6_vram_text_start;
-            segmentDataSize = ovl_i6_vram_data_end - ovl_i6_vram_data_start;
-            segmentRomSize = ovl_i6_vram_bss_start - ovl_i6_vram_start;
-            segmentVramSize = ovl_i6_vram_end - ovl_i6_vram_start;
-            segmentBssSize = ovl_i6_vram_bss_end - ovl_i6_vram_bss_start;
+            vramTextStart = SEGMENT_TEXT_START(ovl_i6);
+            vramStart = SEGMENT_VRAM_START(ovl_i6);
+            vramDataStart = SEGMENT_DATA_START(ovl_i6);
+            vramBssStart = SEGMENT_BSS_START(ovl_i6);
+            romStart = SEGMENT_ROM_START(ovl_i6);
+            segmentTextSize = SEGMENT_TEXT_SIZE(ovl_i6);
+            segmentDataSize = SEGMENT_DATA_SIZE(ovl_i6);
+            segmentRomSize = SEGMENT_BSS_START(ovl_i6) - SEGMENT_VRAM_START(ovl_i6);
+            segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i6);
+            segmentBssSize = SEGMENT_BSS_SIZE(ovl_i6);
             break;
         default:
             return;
