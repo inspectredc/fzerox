@@ -1,6 +1,5 @@
 #include "global.h"
 
-u8* func_800768F4(s32, s32);
 s32 func_80103698(void);
 void func_i10_80115E30(u8*);
 extern s32 D_8011183C; // ovl 2 bss
@@ -44,7 +43,7 @@ void func_i10_80115E30(u8* arg0) {
 
 extern u8 D_i2_8010ADE0[];
 
-bool func_i10_80115EE8(u8 *arg0) {
+bool func_i10_80115EE8(u8* arg0) {
     s32 ret = false;
     s32 i;
 
@@ -61,7 +60,7 @@ bool func_i10_80115EE8(u8 *arg0) {
 void func_i10_80115F2C(u8* arg0, s32 arg1) {
     s32 i;
     // FAKE?
-    u8* temp_a2 = (u8*)arg0 + arg1 * 0x19E0;
+    u8* temp_a2 = (u8*) arg0 + arg1 * 0x19E0;
 
     for (i = 0; i < 8; i++) {
         temp_a2[i] = D_i2_8010ADE0[i];
