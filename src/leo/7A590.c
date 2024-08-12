@@ -42,7 +42,6 @@ s32 func_i1_8040B584(u16 arg0, s32 arg1, s32 arg2, s32 arg3) {
 extern u16 D_i1_80428614;
 s32 func_i1_80406F70(s32);
 u16 func_i1_8040567C(s32);
-s32 func_i1_80403680(u16, u16, u16);
 
 s32 func_i1_8040B618(u16 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     u16 sp1E;

@@ -89,7 +89,7 @@ s32 func_800AC038(SequencePlayer* seqPlayer, SeqScriptState* state, s32 cmd, s32
 void func_800AC214(SequenceChannel* channel) {
     s32 i;
 
-    if (channel == &gSequenceChannelNone) {
+    if (channel == &gSeqChannelNone) {
         return;
     }
 
@@ -134,7 +134,6 @@ void func_800AC214(SequenceChannel* channel) {
     func_800AAFAC(&channel->notePool);
 }
 
-extern AudioListItem gLayerFreeList;
 void* func_800AC830(AudioListItem*);
 
 s32 func_800AC328(SequenceChannel* channel, s32 arg1) {
@@ -260,7 +259,6 @@ void func_800AC6AC(SequencePlayer* seqPlayer, u8 channelIndex, void* script) {
     }
 }
 
-extern AudioCache gFontCache;
 void func_800AF36C(s32, s32);
 
 void func_800AC744(SequencePlayer* seqPlayer) {
@@ -666,7 +664,7 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
                     layer->tunedSample = NULL;
                     tuning = 1.0f;
                     if (instOrWave >= 0xC0) {
-                        layer->tunedSample = &gSynthesisReverbs[instOrWave - 0xC0].tunedSample;
+                        layer->tunedSample = &gSynthReverbs[instOrWave - 0xC0].tunedSample;
                     }
                 }
 
@@ -717,7 +715,7 @@ s32 func_800ACF94(SequenceLayer* layer, s32 cmd) {
                 layer->tunedSample = NULL;
                 layer->freqScale = gPitchFrequencies[(s32) semitone];
                 if (instOrWave >= 0xC0) {
-                    layer->tunedSample = &gSynthesisReverbs[instOrWave - 0xC0].tunedSample;
+                    layer->tunedSample = &gSynthReverbs[instOrWave - 0xC0].tunedSample;
                 }
             }
             break;

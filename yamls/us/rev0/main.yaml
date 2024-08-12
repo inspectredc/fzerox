@@ -6,6 +6,20 @@
     type: bin
     start: 0x40
 
+  - name: audio_context
+    type: code
+    vram: 0x80025C00
+    bss_size: 0x57C0
+    subsegments:
+      - { type: .bss, vram: 0x80025C00, name: audio/audio_context }
+
+  - name: audio_heap
+    type: code
+    vram: 0x8002B400
+    bss_size: 0x3B000
+    subsegments:
+      - { type: .bss, vram: 0x8002B400, name: audio/audio_heap }
+
   - name: entry
     type: code
     start: 0x1000
@@ -202,7 +216,8 @@
       - [0x67000, .data, game/2B20]
       - [0x67170, data]
       - [0x672B0, .data, game/F1C0]
-      - [0x672E0, data]
+      - [0x672E0, .data, game/10490]
+      - [0x67380, data]
       - [0x676C0, .data, game/sys_fault]
       - [0x678A0, data]
       - [0x6B6D0, .data, audio/aisetnextbuf]
@@ -294,6 +309,13 @@
       - { type: .bss, vram: 0x800FB450, name: libultra/io/cartrominit }
       - { type: .bss, vram: 0x800FB4D0, name: libultra/io/pfsisplug }
       - { type: .bss, vram: 0x800FB510, name: libultra/io/vimgr }
+
+  - name: unk_context
+    type: code
+    vram: 0x802A6B40
+    bss_size: 0x2F100
+    subsegments:
+      - { type: .bss, vram: 0x802A6B40, name: unk_context }
 
   - name: buffers
     exclusive_ram_id: buffer

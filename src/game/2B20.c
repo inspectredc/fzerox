@@ -336,14 +336,6 @@ void func_80068F04(void) {
 extern OSMesgQueue D_800DCA80;
 extern s8 D_800DCE5C;
 
-// Ovl 9 Segments
-extern u8 D_F2AC0[];
-extern u8 D_1459A0[];
-extern u8 D_i9_80168A70[];
-extern u8 D_i9_80168CD0[];
-extern u8 D_i9_80168CE0[];
-extern u8 D_i9_80115DF0[];
-
 void func_800690FC(void) {
     s32 sp24;
 
@@ -460,10 +452,11 @@ void func_800690FC(void) {
             }
             if (sp24 != 0) {
                 // clang-format off
-                osInvalICache(D_i9_80115DF0, D_i9_80168A70 - D_i9_80115DF0);\
-                osInvalDCache(D_i9_80168A70, D_i9_80168CD0 - D_i9_80168A70);
+                osInvalICache(SEGMENT_VRAM_START(ovl_i9), SEGMENT_DATA_START(ovl_i9) - SEGMENT_VRAM_START(ovl_i9));\
+                osInvalDCache(SEGMENT_DATA_START(ovl_i9), SEGMENT_BSS_START(ovl_i9) - SEGMENT_DATA_START(ovl_i9));
                 // clang-format on
-                func_80076658(D_F2AC0, D_i9_80115DF0, D_1459A0 - D_F2AC0, D_i9_80168CD0, D_i9_80168CE0 - D_i9_80168CD0);
+                func_80076658(SEGMENT_ROM_START(ovl_i9), SEGMENT_VRAM_START(ovl_i9), SEGMENT_ROM_SIZE(ovl_i9),
+                              SEGMENT_BSS_START(ovl_i9), SEGMENT_BSS_SIZE(ovl_i9));
                 switch (sp24) {
                     case 1:
                         func_8008D7E8();
@@ -528,12 +521,12 @@ void func_800690FC(void) {
 
 extern s16 D_80106DA0;
 
-void func_80069698(s32 arg0) {
+Gfx* func_80069698(Gfx* gfx) {
 
     if ((D_800CD044 != 3) && (D_80106DA0 != 0)) {
-        arg0 = D_800CD0FC[D_800DCE44 & 0x1F]();
+        gfx = D_800CD0FC[D_800DCE44 & 0x1F]();
     }
-    func_i2_800FD184(arg0);
+    return func_i2_800FD184(gfx);
 }
 
 void func_80069700(void) {

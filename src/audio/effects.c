@@ -96,8 +96,6 @@ void func_800ABCE8(AdsrState* adsr, EnvelopePoint* envelope, s16* arg2) {
     adsr->current = 0.0f;
 }
 
-extern f32 D_8002AA44;
-
 f32 func_800ABD0C(AdsrState* adsr) {
     u8 action = adsr->action.asByte;
     u8 state = adsr->state;
@@ -130,7 +128,7 @@ f32 func_800ABD0C(AdsrState* adsr) {
                     adsr->state = ADSR_STATE_INITIAL;
                     break;
                 default:
-                    adsr->delay *= D_8002AA44;
+                    adsr->delay *= gAudioBufferParams.ticksPerUpdateScaled;
 
                     if (adsr->delay == 0) {
                         adsr->delay = 1;
