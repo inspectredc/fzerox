@@ -521,12 +521,12 @@ void func_800690FC(void) {
 
 extern s16 D_80106DA0;
 
-void func_80069698(s32 arg0) {
+Gfx* func_80069698(Gfx* gfx) {
 
     if ((D_800CD044 != 3) && (D_80106DA0 != 0)) {
-        arg0 = D_800CD0FC[D_800DCE44 & 0x1F]();
+        gfx = D_800CD0FC[D_800DCE44 & 0x1F]();
     }
-    func_i2_800FD184(arg0);
+    return func_i2_800FD184(gfx);
 }
 
 void func_80069700(void) {
