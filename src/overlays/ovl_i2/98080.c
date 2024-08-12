@@ -44,12 +44,12 @@ extern s32 D_i2_80106DA4;
 
 void func_i2_800FC77C(void) {
     D_i2_80106DA4 = 2;
-    
+
     if (D_800CD044 == 0x1F) {
         func_i2_800FCB84(0, 10);
         return;
     }
-    
+
     switch (D_800DCE44) {
         case 0x8000:
             func_i2_800FCB84(0, 7);
@@ -117,12 +117,12 @@ extern s32 D_800DCE48;
 
 void func_i2_800FC9BC(void) {
     D_i2_80106DA4 = 1;
-    
+
     if (D_800CD044 == 0x21) {
         func_i2_800FCB84(1, 10);
         return;
     }
-    
+
     switch (D_800DCE48) {
         case 0x8000:
             func_i2_800FCB84(1, 1);
@@ -421,7 +421,7 @@ void func_i2_800FDBDC(unk_8010D778* arg0) {
 
     arg0->unk_1C = 0x40;
     arg0->unk_12 |= 1;
-    
+
     for (i = 0, var_v1 = arg0->unk_18; i < 0x40; i++) {
         *var_v1++ = 0;
         *var_v1++ = -1;

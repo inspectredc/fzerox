@@ -72,7 +72,7 @@ s32 func_i2_801005CC(s32 arg0) {
             var_v1 = i;
             break;
         }
-    }    
+    }
 
     if (var_v1 != -1) {
         return var_v1;
@@ -84,7 +84,7 @@ s32 func_i2_801005CC(s32 arg0) {
             break;
         }
     }
-    
+
     var_a0 = -1;
     if (var_v1 != -1) {
         return var_v1;
@@ -257,7 +257,7 @@ extern OSPiHandle* D_i2_8011183C;
 
 void func_i2_80103728(s32 arg0, size_t arg1, void* arg2, size_t arg3) {
     osWritebackDCache(arg2, arg3);
-    osInvalDCache(osPhysicalToVirtual((uintptr_t)arg2), arg3);
+    osInvalDCache(osPhysicalToVirtual((uintptr_t) arg2), arg3);
     D_i2_801117B0.hdr.pri = 0;
     D_i2_801117B0.hdr.retQueue = &D_800DCA68;
     D_i2_801117B0.dramAddr = arg2;

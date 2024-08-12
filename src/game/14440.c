@@ -50,7 +50,7 @@ void func_8007A59C(u16* arg0, s32 arg1) {
         alpha = *arg0 & 0x1;
 
         colorBlend = (red + green + blue) >> 8;
-        
+
         *arg0 = (colorBlend << 1) + (colorBlend << 6) + (colorBlend << 11) + alpha;
     }
 }
@@ -67,8 +67,9 @@ void func_8007A828(u16* arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         alpha = *arg0 & 0x1;
 
         colorBlend = (red + green + blue) >> 8;
-        
-        *arg0 = (((arg2 * colorBlend) >> 8) << 11) + (((arg3 * colorBlend) >> 8) << 6) + (((arg4 * colorBlend) >> 8) << 1) + alpha;
+
+        *arg0 = (((arg2 * colorBlend) >> 8) << 11) + (((arg3 * colorBlend) >> 8) << 6) +
+                (((arg4 * colorBlend) >> 8) << 1) + alpha;
     }
 }
 
