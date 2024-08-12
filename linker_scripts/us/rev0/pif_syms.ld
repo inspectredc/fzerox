@@ -8,3 +8,6 @@ osCicId        = 0x80000310;
 osVersion      = 0x80000314;
 osMemSize      = 0x80000318;
 osAppNMIBuffer = 0x8000031C;
+
+// libleo symbols
+leoBootID = 0x800001A0;

@@ -31,7 +31,7 @@ void func_800AEA10(void) {
         }
     }
 
-    D_8002A7FC = 0;
+    gSampleDmaListSize2 = 0;
 }
 
 extern const char D_800D0AE4[]; // "SUPERDMA"
@@ -903,8 +903,8 @@ void func_800B079C(void* heap, size_t heapSize) {
 
     {
         s32 i;
-        s64* audioContextPtr = (s64*) gAudioCtxStart;
-        size_t audioContextSize = gAudioCtxEnd - gAudioCtxStart;
+        s64* audioContextPtr = (s64*) SEGMENT_BSS_START(audio_context);
+        size_t audioContextSize = SEGMENT_BSS_SIZE(audio_context);
 
         for (i = audioContextSize / sizeof(s64); i >= 0; i--) {
             *audioContextPtr++ = 0;

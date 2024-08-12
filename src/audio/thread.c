@@ -3,30 +3,6 @@
 #include "audiothread_cmd.h"
 #include "fzxthread.h"
 
-extern AudioTask* gAudioCurTask;
-extern AudioTask gAudioRspTasks[2];
-extern Acmd* gCurAbiCmdBuffer;
-extern volatile s32 gAudioTaskCountQ;
-extern s32 gAudioTaskIndexQ;
-
-extern OSMesg sAudioTaskStartMsg[1];
-extern OSMesg sThreadCmdProcMsg[4];
-extern OSMesg sAudioResetMsg[1];
-
-extern OSMesgQueue sAudioTaskStartQueue;
-extern OSMesgQueue sThreadCmdProcQueue;
-extern OSMesgQueue sAudioResetQueue;
-
-extern OSMesgQueue* gAudioTaskStartQueue;
-extern OSMesgQueue* gThreadCmdProcQueue;
-extern OSMesgQueue* gAudioResetQueue;
-
-extern AudioCmd gThreadCmdBuffer[256];
-
-extern u8 gThreadCmdWritePos;
-extern u8 gThreadCmdReadPos;
-extern u8 gThreadCmdQueueFinished;
-
 void func_800B6A34(u32 msg);
 void func_800B706C(SequenceChannel* channel, AudioCmd* cmd);
 
@@ -51,10 +27,10 @@ AudioTask* func_800B5FB0(void) {
     s32 pad30;
     s32 i;
 
-    gAudioTaskCountQ++;
+    gTotalTaskCount++;
 
-    osSendMesg(gAudioTaskStartQueue, (OSMesg) gAudioTaskCountQ, OS_MESG_NOBLOCK);
-    gAudioTaskIndexQ ^= 1;
+    osSendMesg(gAudioTaskStartQueuePtr, (OSMesg) gTotalTaskCount, OS_MESG_NOBLOCK);
+    gRspTaskIndex ^= 1;
     gCurAiBufIndex++;
     gCurAiBufIndex %= 3;
 
@@ -78,7 +54,7 @@ AudioTask* func_800B5FB0(void) {
 
     if (gResetStatus != 0 && !func_800B38AC()) {
         if (gResetStatus == 0) {
-            osSendMesg(gAudioResetQueue, (OSMesg) (s32) gSpecId, OS_MESG_NOBLOCK);
+            osSendMesg(gAudioResetQueuePtr, (OSMesg) (s32) gSpecId, OS_MESG_NOBLOCK);
         }
         gWaitingAudioTask = NULL;
         return NULL;
@@ -89,8 +65,8 @@ AudioTask* func_800B5FB0(void) {
     if (gResetTimer != 0) {
         gResetTimer++;
     }
-    gAudioCurTask = &gAudioRspTasks[gAudioTaskIndexQ];
-    gCurAbiCmdBuffer = gAbiCmdBuffs[gAudioTaskIndexQ];
+    gCurTask = &gRspTask[gRspTaskIndex];
+    gCurAbiCmdBuffer = gAbiCmdBuffs[gRspTaskIndex];
     aiBufIndex = gCurAiBufIndex;
     aiBuffer = gAiBuffers[aiBufIndex];
     gAiBufLengths[aiBufIndex] = ((gAudioBufferParams.samplesPerFrameTarget - aiSamplesLeft + 0x80) & 0xFFF0) + 0x10;
@@ -104,7 +80,7 @@ AudioTask* func_800B5FB0(void) {
 
     i = 0;
     if (gResetStatus == 0) {
-        while (MQ_GET_MESG(gThreadCmdProcQueue, &msg)) {
+        while (MQ_GET_MESG(gThreadCmdProcQueuePtr, &msg)) {
             func_800B6A34(msg);
             i++;
         }
@@ -113,15 +89,15 @@ AudioTask* func_800B5FB0(void) {
         }
     }
     gCurAbiCmdBuffer = func_800B4F4C(gCurAbiCmdBuffer, &abiCmdCount, aiBuffer, gAiBufLengths[aiBufIndex]);
-    gAudioRandom = osGetCount() * (gAudioRandom + gAudioTaskCountQ);
-    gAudioRandom = gAiBuffers[aiBufIndex][gAudioTaskCountQ & 0xFF] + gAudioRandom;
+    gAudioRandom = osGetCount() * (gAudioRandom + gTotalTaskCount);
+    gAudioRandom = gAiBuffers[aiBufIndex][gTotalTaskCount & 0xFF] + gAudioRandom;
 
-    aiBufIndex = gAudioTaskIndexQ;
+    aiBufIndex = gRspTaskIndex;
 
-    gAudioCurTask->msgQueue = NULL;
-    gAudioCurTask->msg = NULL;
+    gCurTask->msgQueue = NULL;
+    gCurTask->msg = NULL;
 
-    task = &gAudioCurTask->task.t;
+    task = &gCurTask->task.t;
 
     task->type = 2;
     task->flags = 0;
@@ -149,7 +125,7 @@ AudioTask* func_800B5FB0(void) {
         gMaxAbiCmdCnt = abiCmdCount;
     }
 
-    return gAudioCurTask;
+    return gCurTask;
 }
 
 static char devstr5[] = "BGLOAD Start %d\n";
@@ -187,7 +163,7 @@ void func_800B641C(AudioCmd* cmd) {
             }
             break;
         case AUDIOCMD_OP_GLOBAL_SET_SOUND_MODE:
-            gAudioSoundMode = cmd->asUInt;
+            gSoundMode = cmd->asUInt;
             break;
         case AUDIOCMD_OP_GLOBAL_MUTE:
             for (i = 0; i < gAudioBufferParams.numSequencePlayers; i++) {
@@ -265,12 +241,12 @@ void func_800B67EC(void) {
     gThreadCmdReadPos = 0;
     gThreadCmdQueueFinished = false;
 
-    gAudioTaskStartQueue = &sAudioTaskStartQueue;
-    gThreadCmdProcQueue = &sThreadCmdProcQueue;
-    gAudioResetQueue = &sAudioResetQueue;
-    osCreateMesgQueue(gAudioTaskStartQueue, sAudioTaskStartMsg, 1);
-    osCreateMesgQueue(gThreadCmdProcQueue, sThreadCmdProcMsg, 4);
-    osCreateMesgQueue(gAudioResetQueue, sAudioResetMsg, 1);
+    gAudioTaskStartQueuePtr = &gAudioTaskStartQueue;
+    gThreadCmdProcQueuePtr = &gThreadCmdProcQueue;
+    gAudioResetQueuePtr = &gAudioResetQueue;
+    osCreateMesgQueue(gAudioTaskStartQueuePtr, gAudioTaskStartMsg, 1);
+    osCreateMesgQueue(gThreadCmdProcQueuePtr, gThreadCmdProcMsg, 4);
+    osCreateMesgQueue(gAudioResetQueuePtr, gAudioResetMsg, 1);
 }
 
 void func_800B6894(u32 opArgs, void** data) {
@@ -315,7 +291,7 @@ void func_800B6994(void) {
 
     msg = ((gThreadCmdReadPos & 0xFF) << 8) | (gThreadCmdWritePos & 0xFF);
 
-    if (osSendMesg(gThreadCmdProcQueue, msg, 0) != -1) {
+    if (osSendMesg(gThreadCmdProcQueuePtr, msg, 0) != -1) {
         gThreadCmdReadPos = gThreadCmdWritePos;
     }
 }
@@ -460,7 +436,7 @@ bool func_800B6E14(void) {
     s32 pad;
     s32 specId;
 
-    if (!MQ_GET_MESG(gAudioResetQueue, &specId)) {
+    if (!MQ_GET_MESG(gAudioResetQueuePtr, &specId)) {
         return false;
     }
     if (specId != gSpecId) {
@@ -470,7 +446,7 @@ bool func_800B6E14(void) {
 }
 
 void func_800B6E6C(void) {
-    MQ_CLEAR_QUEUE(gAudioResetQueue);
+    MQ_CLEAR_QUEUE(gAudioResetQueuePtr);
 }
 
 s32 func_800B6EC0(s32 specId) {
@@ -486,7 +462,7 @@ s32 func_800B6EC0(s32 specId) {
         } else if (resetStatus > 2) {
             return 0;
         } else {
-            MQ_WAIT_FOR_MESG(gAudioResetQueue, &msg);
+            MQ_WAIT_FOR_MESG(gAudioResetQueuePtr, &msg);
         }
     }
 

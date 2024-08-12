@@ -28,7 +28,25 @@ void* func_80069ED0(void) {
     return NULL;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_80069F5C.s")
+// n64 boot logo
+extern u8 D_2787F0[];
+
+void func_80069F5C(u64* arg0) {
+    u64* var_s0 = &arg0[19199];
+    s32 var_s1;
+
+    // FAKE?
+    while (var_s0 >= arg0) {
+        *(--var_s0 + 1) = 0x1000100010001;
+    }
+    osWritebackDCache(arg0, SCREEN_HEIGHT * SCREEN_WIDTH * sizeof(u16));
+
+    var_s0 = &arg0[5624];
+
+    for (var_s1 = 0; var_s1 < 0x6A00; var_s1 += 0x100, var_s0 += 80) {
+        func_80073E28((uintptr_t) D_2787F0 + var_s1 + 8, var_s0, 0x100);
+    }
+}
 
 extern Vp D_80146A8[];
 extern Vp D_80146B8[];

@@ -124,7 +124,7 @@ void func_800671EC(void* arg0) {
     var_v1 = (u64*) D_800DCCD0[0];
 
     // clang-format off
-    for (var_a0 = 0; var_a0 < 0x4B00; var_a0++) {\
+    for (var_a0 = 0; var_a0 < (SCREEN_WIDTH * SCREEN_HEIGHT) / 4; var_a0++) {\
         var_v1[var_a0] = 1;
     }
     // clang-format on
@@ -149,8 +149,8 @@ void func_800671EC(void* arg0) {
     }
 
     if (D_800CCFC0 != 0) {
-        func_80073E28(D_72120, D_80403010, D_98080 - D_72120);
-        bzero(D_80428F70, D_8042BC40 - D_80428F70);
+        func_80073E28(SEGMENT_ROM_START(leo), SEGMENT_VRAM_START(leo), SEGMENT_ROM_SIZE(leo));
+        bzero(SEGMENT_BSS_START(leo), SEGMENT_BSS_SIZE(leo));
         if (D_800DCCCC) {
             func_8007F904();
         }

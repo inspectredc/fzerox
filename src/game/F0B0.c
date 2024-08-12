@@ -27,14 +27,9 @@ s32 func_800750B0(s32 arg0, void* arg1, s32 arg2, s32 arg3) {
 }
 
 void func_i2_800FC730(void);
-extern u8 D_524920[];
-extern u8 D_524D60[];
-extern u8 D_800FC730[];
-extern u8 D_800FCB70[];
-extern u8 D_800FCB70_2[];
 
 void func_8007515C(void) {
-    func_80073E28(D_524920, D_800FC730, D_524D60 - D_524920);
-    bzero(D_800FCB70, D_800FCB70_2 - D_800FCB70);
+    func_80073E28(SEGMENT_ROM_START(ovl_i11), SEGMENT_VRAM_START(ovl_i11), SEGMENT_ROM_SIZE(ovl_i11));
+    bzero(SEGMENT_BSS_START(ovl_i11), SEGMENT_BSS_SIZE(ovl_i11));
     func_i2_800FC730();
 }
