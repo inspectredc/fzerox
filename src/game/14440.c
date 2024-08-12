@@ -38,9 +38,40 @@ Gfx* func_8007A440(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, 
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007A59C.s")
+void func_8007A59C(u16* arg0, s32 arg1) {
+    u32 i;
+    u32 colorBlend;
+    u32 red, green, blue, alpha;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007A828.s")
+    for (i = 0; i < (arg1 / 2); i++, arg0++) {
+        red = ((*arg0 & 0xF800) >> 11) * 77;
+        green = ((*arg0 & 0x7C0) >> 6) * 150;
+        blue = ((*arg0 & 0x3E) >> 1) * 29;
+        alpha = *arg0 & 0x1;
+
+        colorBlend = (red + green + blue) >> 8;
+
+        *arg0 = (colorBlend << 1) + (colorBlend << 6) + (colorBlend << 11) + alpha;
+    }
+}
+
+void func_8007A828(u16* arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    u32 i;
+    u32 colorBlend;
+    u32 red, green, blue, alpha;
+
+    for (i = 0; i < (arg1 / 2); i++, arg0++) {
+        red = ((*arg0 & 0xF800) >> 11) * 77;
+        green = ((*arg0 & 0x7C0) >> 6) * 150;
+        blue = ((*arg0 & 0x3E) >> 1) * 29;
+        alpha = *arg0 & 0x1;
+
+        colorBlend = (red + green + blue) >> 8;
+
+        *arg0 = (((arg2 * colorBlend) >> 8) << 11) + (((arg3 * colorBlend) >> 8) << 6) +
+                (((arg4 * colorBlend) >> 8) << 1) + alpha;
+    }
+}
 
 extern Gfx D_30001A8[];
 
@@ -130,12 +161,12 @@ Gfx* func_8007AF40(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, 
 }
 
 extern Gfx D_3000270[];
-extern s32 D_800CCFE0;
+extern u32 D_800CCFE0;
 
 Gfx* func_8007AFF4(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
     gSPDisplayList(gfx++, D_3000270);
     gSPTextureRectangle(gfx++, (left + 1) << 2, (top + 1) << 2, (right - 1) << 2, (bottom - 1) << 2, G_TX_RENDERTILE, 0,
-                        (D_800CCFE0 & 0x1F) << 5, 1 << 10, 1 << 10);
+                        (D_800CCFE0 % 32) << 5, 1 << 10, 1 << 10);
 
     return gfx;
 }
@@ -222,7 +253,40 @@ void func_8007DABC(unk_8007DABC_arg_0* arg0) {
     D_800E416C = D_800E416E | D_800E4170;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007DB28.s")
+extern u32 D_800CCFE0;
+extern s32 D_800CD4E0[];
+
+Gfx* func_8007DB28(Gfx* gfx, s32 arg1) {
+    s32 temp_a3;
+    s32 temp_a2;
+    s32 red;
+    s32 green;
+    s32 blue;
+    s32 temp_hi;
+    s32* temp_a0;
+
+    temp_hi = ((D_800CCFE0 % 300) * 8) % 300;
+    temp_a2 = temp_hi % 100;
+    temp_a3 = 100 - temp_a2;
+    temp_a0 = &D_800CD4E0[((temp_hi / 100) % 3) * 3];
+
+    switch (arg1) {
+        case 0:
+            red = ((temp_a0[0] * temp_a3) + (temp_a0[3] * temp_a2)) / 100;
+            green = ((temp_a0[1] * temp_a3) + (temp_a0[4] * temp_a2)) / 100;
+            blue = ((temp_a0[2] * temp_a3) + (temp_a0[5] * temp_a2)) / 100;
+            break;
+        case 1:
+        default:
+            red = ((temp_a0[0] * temp_a2) + (temp_a0[3] * temp_a3)) / 100;
+            green = ((temp_a0[1] * temp_a2) + (temp_a0[4] * temp_a3)) / 100;
+            blue = ((temp_a0[2] * temp_a2) + (temp_a0[5] * temp_a3)) / 100;
+            break;
+    }
+
+    gDPSetPrimColor(gfx++, 0, 0, red, green, blue, 255);
+    return gfx;
+}
 
 #ifdef IMPORT_BSS
 static s8 D_800E4174[4];

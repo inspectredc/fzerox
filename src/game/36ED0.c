@@ -16,30 +16,6 @@ typedef struct unk_800CF528 {
     s16 unk_1E;
 } unk_800CF528; // size = 0x20
 
-typedef struct unk_36ED0 {
-    s32 unk_00;
-    s8 unk_04[0x8];
-    f32 unk_0C;
-    s8 unk_10[0x4];
-    Vec3f unk_14;
-    s16 unk_20[3];
-    s16 unk_26[3];
-    s16 unk_2C[3];
-    s16 unk_32[3];
-    s16 unk_38[3];
-    s16 unk_3E[3];
-    s16 unk_44[3];
-    s16 unk_4A[3];
-    s16 unk_50;
-    s16 unk_52;
-    s16 unk_54;
-    s16 unk_56;
-    s16 unk_58;
-    s16 unk_5A;
-    s16 unk_5C;
-    s16 unk_5E;
-} unk_36ED0; // size = 0x60
-
 typedef struct unk_800F8958 {
     unk_36ED0* unk_00;
     Gfx* unk_04;
@@ -1287,8 +1263,8 @@ extern f32 D_800CF524;
 void func_800A4EAC(void) {
     unk_8006FC8C* var_v0;
 
-    if (D_800F8514 >= 0x38) {
-        D_800F8514 = 0x37;
+    if (D_800F8514 >= ARRAY_COUNT(D_802A6B40)) {
+        D_800F8514 = ARRAY_COUNT(D_802A6B40) - 1;
     }
     if (D_800CD000 >= 3) {
         func_800A4D0C(2);
@@ -2114,7 +2090,7 @@ typedef struct unk_800A8B74_arg_0 {
     unk_36ED0* unk_04;
 } unk_800A8B74_arg_0;
 
-extern unk_36ED0 D_802A9FC0;
+extern unk_36ED0 D_802A9FC0[];
 extern unk_36ED0* D_800F851C;
 extern unk_36ED0* D_800F89C8;
 extern s32 D_800F8928;
@@ -2130,7 +2106,7 @@ void func_800A8B74(unk_800A8B74_arg_0* arg0) {
     D_800F89D0 = arg0->unk_00 + 1;
 
     if (D_800F89D0 == D_800F851C) {
-        D_800F89D0 = &D_802A9FC0;
+        D_800F89D0 = D_802A9FC0;
     }
 
     do {
@@ -2139,7 +2115,7 @@ void func_800A8B74(unk_800A8B74_arg_0* arg0) {
 
                 D_800F89C8 = D_800F89D0 + 1;
                 if (D_800F89C8 == D_800F851C) {
-                    D_800F89C8 = &D_802A9FC0;
+                    D_800F89C8 = D_802A9FC0;
                 }
                 var_fv0 = D_800F894C;
 
@@ -2155,7 +2131,7 @@ void func_800A8B74(unk_800A8B74_arg_0* arg0) {
 
                     D_800F89C8++;
                     if (D_800F89C8 == D_800F851C) {
-                        D_800F89C8 = &D_802A9FC0;
+                        D_800F89C8 = D_802A9FC0;
                     }
                 } while (D_800F89D0->unk_00 & 0x40000000);
             }
@@ -2192,7 +2168,7 @@ void func_800A8B74(unk_800A8B74_arg_0* arg0) {
 
         D_800F89CC = D_800F89D0++;
         if (D_800F89D0 == D_800F851C) {
-            D_800F89D0 = &D_802A9FC0;
+            D_800F89D0 = D_802A9FC0;
         }
     } while (D_800F89CC != arg0->unk_04);
 }
@@ -2204,7 +2180,7 @@ void func_800A8F1C(unk_800A8B74_arg_0* arg0) {
     s32 temp_a3;
     u32 temp_t1;
     unk_800CF528* temp_a2;
-    unk_36ED0* tempLimit = &D_802A9FC0;
+    unk_36ED0* tempLimit = D_802A9FC0;
 
     D_800F89CC = arg0->unk_04 - 1;
     if ((u32) D_800F89CC < (u32) tempLimit) {
@@ -2306,7 +2282,6 @@ extern s32 D_800CCFE0;
 extern s32 D_800F8518;
 extern Gfx D_8014040[];
 extern Gfx D_8014078[];
-extern unk_36ED0 D_802AA020;
 
 Gfx* func_800A95B4(Gfx* gfx) {
     s32 temp_t0;
@@ -2325,8 +2300,8 @@ Gfx* func_800A95B4(Gfx* gfx) {
     D_800F8928 = D_800F892C = -1;
     D_800F8958[0].unk_00 = D_800F8958[1].unk_00 = 0;
     D_800F89C0 = 0;
-    D_800F89CC = &D_802A9FC0;
-    D_800F89D0 = &D_802AA020;
+    D_800F89CC = D_802A9FC0;
+    D_800F89D0 = &D_802A9FC0[1];
     do {
 
         temp_t1 = (u32) (D_800F89CC->unk_00 & 0x1C0) >> 6;

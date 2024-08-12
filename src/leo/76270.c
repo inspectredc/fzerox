@@ -90,7 +90,6 @@ s32 func_i1_80407278(u16 arg0, u8* arg1, u8* arg2, s32 arg3, s32 arg4, s32 arg5,
 extern unk_leo_804285D0 D_i1_8041B550[];
 extern u16 D_i1_80428614;
 
-u16 func_i1_80403680(u16, u8*, u8*);
 void func_i1_804040EC(void);
 s32 func_i1_804045AC(void);
 s32 func_i1_80404830(void);

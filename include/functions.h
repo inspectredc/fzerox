@@ -9,6 +9,7 @@
 void func_80068008(void* arg0);
 void func_80068A60(void* arg0);
 
+Gfx* func_80069698(Gfx*);
 void func_80069700(void);
 void func_80069820(void);
 
@@ -25,6 +26,7 @@ void func_8006D03C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
 void func_80073A04(void);
 void func_80073E28(void* arg0, void* arg1, size_t arg2);
 void func_80073ED0(void* arg0, void* arg1, size_t arg2);
+void func_80073FA0(u8* arg0, u8* arg1, u32 arg2);
 void func_8007402C(s32 arg0);
 void func_800741DC(s32 arg0);
 void func_80074634(unk_800F8510* arg0);
@@ -40,9 +42,10 @@ s32 func_800760F8(void);
 s32 func_800761D4(void);
 s32 func_80076340(void);
 void func_800763A8(void);
-void func_800765CC(u8* arg0, u8* arg1, u32 arg2);
-void func_80076658(u8* arg0, u8* arg1, size_t arg2, void* arg3, size_t arg4);
+void func_800765CC(u8* devAddr, u8* ramAddr, size_t size);
+void func_80076658(u8* devAddr, u8* ramAddr, size_t size, void* arg3, size_t arg4);
 void func_800766F0(void);
+u8* func_800768F4(s32 arg0, size_t arg1);
 s32 func_80076BD4(uintptr_t arg0);
 void func_80077318(void);
 void func_80077C9C(void);
@@ -82,15 +85,22 @@ f32 func_8009E538(unk_8006FC8C*, f32, Vec3f*);
 void func_8009E6F0(unk_8006FC8C*, f32, Vec3f*);
 f32 func_8009E85C(unk_8006FC8C*, f32, Mtx3F*, f32);
 
+void func_800A3044(void);
 s32 func_800AA394(s32);
 
+void func_800AA620(u8*, void*); // mio0 decode?
+s32 func_800AA6BC(u8*);
+
 bool func_800CC220(void);
+
+u16 func_i1_80403680(u16 arg0, u8* arg1, u8* arg2);
+s32 func_i1_804096C8(u16 arg0, s32 arg1, u8* arg2, s32 arg3, s32 arg4);
 
 void func_i2_800FC77C(void);
 void func_i2_800FC9BC(void);
 s32 func_i2_800FCE3C(void);
-void func_i2_800FD184(s32);
-void func_i2_80100520(s32);
+Gfx* func_i2_800FD184(Gfx*);
+s32 func_i2_80100520(s32);
 void func_i2_801012CC(s32);
 void func_i2_80103A70(void);
 void func_i2_80103AD4(void);

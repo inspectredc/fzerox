@@ -15,46 +15,57 @@
 
   - name: mio0/segment_3
     type: bin
+    vram: 0x0A000000
     start: 0x235130
 
   - name: mio0/segment_4
     type: bin
+    vram: 0x0A000000
     start: 0x239A80
 
   - name: mio0/segment_5
     type: bin
+    vram: 0x0A000000
     start: 0x23EC50
 
   - name: mio0/segment_6
     type: bin
+    vram: 0x0A000000
     start: 0x243D90
 
   - name: mio0/segment_7
     type: bin
+    vram: 0x0A000000
     start: 0x24A270
 
   - name: mio0/segment_8
     type: bin
+    vram: 0x0A000000
     start: 0x2507F0
 
   - name: mio0/segment_9
     type: bin
+    vram: 0x0A000000
     start: 0x255100
 
   - name: mio0/segment_10
     type: bin
+    vram: 0x0A000000
     start: 0x259600
 
   - name: mio0/segment_11
     type: bin
+    vram: 0x0A000000
     start: 0x25F360
 
   - name: mio0/segment_12
     type: bin
+    vram: 0x0A000000
     start: 0x266C20
 
   - name: mio0/segment_13
     type: bin
+    vram: 0x0A000000
     start: 0x26D780
 
   - name: mio0/segment_14
@@ -1769,14 +1780,13 @@
     type: code
     dir: overlays/ovl_i11
     start: 0x524920
-    # Todo: figure out vram
-    vram: 0x80600000
+    vram: 0x800FC730
     symbol_name_format: i11_$VRAM
     subsegments:
       - [0x524920, asm]
       - [0x524BE0, data]
 
   - type: bin
-    start: 0x527AF0
+    start: 0x524D60
 
   - [0x1000000]

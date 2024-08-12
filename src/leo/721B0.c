@@ -154,7 +154,7 @@ s32 func_i1_8040567C(u16);
 extern OSMesg D_i1_80428610;
 extern u16 D_i1_80428614;
 
-u16 func_i1_80403680(u16 arg0, s32 arg1, s32 arg2) {
+u16 func_i1_80403680(u16 arg0, u8* arg1, u8* arg2) {
     s32 i;
 
     D_i1_80428610 = 0;
