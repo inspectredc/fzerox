@@ -9,6 +9,7 @@
 void func_80068008(void* arg0);
 void func_80068A60(void* arg0);
 
+Gfx* func_80069698(Gfx*);
 void func_80069700(void);
 void func_80069820(void);
 
@@ -98,8 +99,8 @@ s32 func_i1_804096C8(u16 arg0, s32 arg1, u8* arg2, s32 arg3, s32 arg4);
 void func_i2_800FC77C(void);
 void func_i2_800FC9BC(void);
 s32 func_i2_800FCE3C(void);
-void func_i2_800FD184(s32);
-void func_i2_80100520(s32);
+Gfx* func_i2_800FD184(Gfx*);
+s32 func_i2_80100520(s32);
 void func_i2_801012CC(s32);
 void func_i2_80103A70(void);
 void func_i2_80103AD4(void);

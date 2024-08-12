@@ -38,9 +38,39 @@ Gfx* func_8007A440(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, 
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007A59C.s")
+void func_8007A59C(u16* arg0, s32 arg1) {
+    u32 i;
+    u32 colorBlend;
+    u32 red, green, blue, alpha;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007A828.s")
+    for (i = 0; i < (arg1 / 2); i++, arg0++) {
+        red = ((*arg0 & 0xF800) >> 11) * 77;
+        green = ((*arg0 & 0x7C0) >> 6) * 150;
+        blue = ((*arg0 & 0x3E) >> 1) * 29;
+        alpha = *arg0 & 0x1;
+
+        colorBlend = (red + green + blue) >> 8;
+        
+        *arg0 = (colorBlend << 1) + (colorBlend << 6) + (colorBlend << 11) + alpha;
+    }
+}
+
+void func_8007A828(u16* arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    u32 i;
+    u32 colorBlend;
+    u32 red, green, blue, alpha;
+
+    for (i = 0; i < (arg1 / 2); i++, arg0++) {
+        red = ((*arg0 & 0xF800) >> 11) * 77;
+        green = ((*arg0 & 0x7C0) >> 6) * 150;
+        blue = ((*arg0 & 0x3E) >> 1) * 29;
+        alpha = *arg0 & 0x1;
+
+        colorBlend = (red + green + blue) >> 8;
+        
+        *arg0 = (((arg2 * colorBlend) >> 8) << 11) + (((arg3 * colorBlend) >> 8) << 6) + (((arg4 * colorBlend) >> 8) << 1) + alpha;
+    }
+}
 
 extern Gfx D_30001A8[];
 

@@ -92,7 +92,6 @@ extern void* D_800DCD10;
 
 void func_800690FC(void);
 void func_i2_800FD344(void);
-Gfx* func_80069698(Gfx*);
 
 void func_80067D64(void) {
     MQ_WAIT_FOR_MESG(&D_800DCAB0, &D_800DCD10);

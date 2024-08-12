@@ -2869,12 +2869,6 @@ void func_8008D824(void) {
 
 void func_800A4DF0(void);
 
-typedef struct unk_800E5FF8 {
-    s32 unk_0000;
-    s8 unk_0004[0x3F66];
-    u8 unk_3F6A[20];
-} unk_800E5FF8; // size = 0x3F80
-
 extern unk_800E5FF8 D_800E5FF8[];
 
 void func_8008D8E8(void) {
