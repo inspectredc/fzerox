@@ -1,13 +1,20 @@
+  - name: unk_nmi_ovl
+    exclusive_ram_id: overlay
+    type: code
+    start: 0x72030
+    vram: 0x80402F20 # vram unknown
+    subsegments:
+      - [0x72030, hasm]
+
   - name: leo
     exclusive_ram_id: overlay
     type: code
     dir: leo
-    start: 0x72030
-    vram: 0x80402F20
+    start: 0x72120
+    vram: 0x80403010
     bss_size: 0x2CD0
     symbol_name_format: i1_$VRAM
     subsegments:
-      - [0x72030, hasm]
       - [0x72120, asm]
       - [0x72150, hasm]
       - [0x721B0, c]

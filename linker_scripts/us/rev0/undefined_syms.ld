@@ -1,5 +1,3 @@
-leoBootID = 0x800001A0;
-
 // before buffers
 D_8025DCE8 = 0x8025DCE8;
 
