@@ -3,23 +3,6 @@ leoBootID = 0x800001A0;
 // before buffers
 D_8025DCE8 = 0x8025DCE8;
 
-// OVERLAYS/SEGMENTS SPLITS
-
-// ovl 11
-D_800FC730 = 0x800FC730;
-D_800FCB70_2 = 0x800FCB70;
-
-// ovl 9
-D_i9_80168A70 = 0x80168A70;
-D_i9_80168CD0 = 0x80168CD0;
-D_i9_80168CE0 = 0x80168CE0;
-D_i9_80115DF0 = 0x80115DF0;
-
-// before buffers
-D_802D5C40 = 0x802D5C40;
-D_802A6B40_2 = 0x802A6B40;
-D_802A6B40_3 = 0x802A6B40;
-
 // UNKNOWN
-// not sure which overlay this references
+// not sure which overlay this references / covers multiple overlays?
 D_80115DF0 = 0x80115DF0;

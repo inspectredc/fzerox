@@ -8,21 +8,25 @@ s8 D_800CD2EC = 0;
 s8 D_800CD2F0 = -1;
 s8 D_800CD2F4 = 0;
 
-// Todo use symbol offsets for next 3 arrays
 RomOffset D_800CD2F8[] = {
-    0x235130, 0x239A80, 0x23EC50, 0x243D90, 0x24A270, 0x2507F0, 0x255100, 0x259600, 0x25F360, 0x266C20, 0x26D780,
+    SEGMENT_ROM_START(mio0_segment_3),  SEGMENT_ROM_START(mio0_segment_4),  SEGMENT_ROM_START(mio0_segment_5),
+    SEGMENT_ROM_START(mio0_segment_6),  SEGMENT_ROM_START(mio0_segment_7),  SEGMENT_ROM_START(mio0_segment_8),
+    SEGMENT_ROM_START(mio0_segment_9),  SEGMENT_ROM_START(mio0_segment_10), SEGMENT_ROM_START(mio0_segment_11),
+    SEGMENT_ROM_START(mio0_segment_12), SEGMENT_ROM_START(mio0_segment_13),
 };
 
-// Segment ram start
 u8* D_800CD324[] = {
-    0x0A000000, 0x0A000000, 0x0A000000, 0x0A000000, 0x0A000000, 0x0A000000,
-    0x0A000000, 0x0A000000, 0x0A000000, 0x0A000000, 0x0A000000,
+    SEGMENT_VRAM_START(mio0_segment_3),  SEGMENT_VRAM_START(mio0_segment_4),  SEGMENT_VRAM_START(mio0_segment_5),
+    SEGMENT_VRAM_START(mio0_segment_6),  SEGMENT_VRAM_START(mio0_segment_7),  SEGMENT_VRAM_START(mio0_segment_8),
+    SEGMENT_VRAM_START(mio0_segment_9),  SEGMENT_VRAM_START(mio0_segment_10), SEGMENT_VRAM_START(mio0_segment_11),
+    SEGMENT_VRAM_START(mio0_segment_12), SEGMENT_VRAM_START(mio0_segment_13),
 };
 
-// Segment ram end
 u8* D_800CD350[] = {
-    0x0A004950, 0x0A0051D0, 0x0A005140, 0x0A0064E0, 0x0A006580, 0x0A004910,
-    0x0A004500, 0x0A005D60, 0x0A0078C0, 0x0A006B60, 0x0A006120,
+    SEGMENT_VRAM_END(mio0_segment_3),  SEGMENT_VRAM_END(mio0_segment_4),  SEGMENT_VRAM_END(mio0_segment_5),
+    SEGMENT_VRAM_END(mio0_segment_6),  SEGMENT_VRAM_END(mio0_segment_7),  SEGMENT_VRAM_END(mio0_segment_8),
+    SEGMENT_VRAM_END(mio0_segment_9),  SEGMENT_VRAM_END(mio0_segment_10), SEGMENT_VRAM_END(mio0_segment_11),
+    SEGMENT_VRAM_END(mio0_segment_12), SEGMENT_VRAM_END(mio0_segment_13),
 };
 
 void func_80076490(void) {

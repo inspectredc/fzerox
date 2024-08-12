@@ -8,12 +8,6 @@ bool func_8006D3F0(s32 arg0) {
     return false;
 }
 
-typedef struct unk_802D3978 {
-    s32 unk_00;
-    Vec3f unk_04;
-    s8 unk_10[0x4];
-} unk_802D3978; // size = 0x14
-
 extern unk_802D3978 D_802D3978[];
 
 void func_8006D414(void) {
@@ -31,20 +25,6 @@ void func_8006D414(void) {
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8006E478.s")
 
 extern unk_800F8510* D_800F8510;
-
-typedef struct unk_802A9FC0 {
-    s8 unk_00[0x14];
-    Vec3f unk_14;
-    s8 unk_20[0x40];
-} unk_802A9FC0; // size = 0x60
-
-typedef struct unk_802D08E0 {
-    Vec3f unk_00;
-    Mtx3F unk_0C;
-    f32 unk_30;
-    unk_802A9FC0* unk_34;
-} unk_802D08E0; // size = 0x38
-
 extern unk_802A9FC0 D_802A9FC0[];
 extern unk_802D1B60 D_802D1B60;
 extern unk_802D08E0 D_802D08E0[];
@@ -566,7 +546,7 @@ void func_80073894(s32 arg0) {
 }
 
 extern s32 D_800CD180;
-extern s32 D_802D2D74;
+extern unk_802D2D70 D_802D2D70;
 
 void func_8007392C(s32 arg0) {
     s32 i;
@@ -579,7 +559,7 @@ void func_8007392C(s32 arg0) {
         return;
     }
 
-    D_802D2D74 = 0;
+    D_802D2D70.index = 0;
 
     for (i = 0; i < D_802A6B40[arg0].unk_08; i++) {
         func_80071A58(arg0, i);
@@ -720,22 +700,16 @@ void func_800742D0(void) {
     D_8010B7B0.unk_000[3] = 0;
 }
 
-// Pre-buffers segment
-extern u8 D_802D5C40[];
-extern u8 D_802A6B40_2[];
-extern u8 D_802A6B40_3[];
-
 extern unk_8010B7B0 D_8010CF50;
 extern s32 D_802A6B50;
-extern s32 D_802C2020;
-extern s32 D_802D1B70;
-extern s32 D_802D2D70;
-extern unk_802D1B60_unk_00 D_802D0FE0;
+extern unk_8006FC8C D_802C2020[];
+extern unk_8006FF90_arg_1 D_802D1B70[];
+extern unk_802D1B60_unk_00 D_802D0FE0[];
 
 void func_800742FC(void) {
     s32 i;
 
-    bzero(D_802A6B40_3, D_802D5C40 - D_802A6B40_2);
+    bzero(SEGMENT_VRAM_START(unk_context), SEGMENT_BSS_SIZE(unk_context));
     func_80074204();
     D_802CDFD0 = 0;
     D_8010B7B0.unk_000[0] = 4;
@@ -743,11 +717,12 @@ void func_800742FC(void) {
     D_8010B7B0.unk_000[2] = 0;
     D_8010B7B0.unk_000[3] = 0;
     D_8010CF50 = D_8010B7B0;
-    D_802D1B60.unk_00 = &D_802D0FE0;
-    D_802A6B50 = &D_802C2020;
-    D_802D2D70 = &D_802D1B70;
+    D_802D1B60.unk_00 = D_802D0FE0;
+    D_802A6B50 = D_802C2020;
+    D_802D2D70.unk_00 = D_802D1B70;
 
-    for (i = 0; i < 56; i++) {}
+    for (i = 0; i < ARRAY_COUNT(D_802A6B40); i++) {}
+
     func_8007402C(0);
     func_80074204();
     D_8010CF50 = D_8010B7B0;

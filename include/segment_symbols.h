@@ -34,8 +34,8 @@
 #define SEGMENT_VRAM_END(segment)   (segment ## _VRAM_END)
 #define SEGMENT_VRAM_SIZE(segment)  (SEGMENT_VRAM_END(segment) - SEGMENT_VRAM_START(segment))
 
-#define SEGMENT_ROM_START(segment) ((RomOffset)segment ## _ROM_START)
-#define SEGMENT_ROM_END(segment)   ((RomOffset)segment ## _ROM_END)
+#define SEGMENT_ROM_START(segment) (segment ## _ROM_START)
+#define SEGMENT_ROM_END(segment)   (segment ## _ROM_END)
 #define SEGMENT_ROM_SIZE(segment)  (SEGMENT_ROM_END(segment) - SEGMENT_ROM_START(segment))
 
 #define SEGMENT_TEXT_START(segment) (segment ## _TEXT_START)
@@ -59,5 +59,22 @@ DECLARE_SEGMENT(ovl_i6);
 DECLARE_SEGMENT(ovl_i7);
 DECLARE_SEGMENT(ovl_i8);
 DECLARE_SEGMENT(ovl_i9);
+
+DECLARE_SEGMENT(mio0_segment_3);
+DECLARE_SEGMENT(mio0_segment_4);
+DECLARE_SEGMENT(mio0_segment_5);
+DECLARE_SEGMENT(mio0_segment_6);
+DECLARE_SEGMENT(mio0_segment_7);
+DECLARE_SEGMENT(mio0_segment_8);
+DECLARE_SEGMENT(mio0_segment_9);
+DECLARE_SEGMENT(mio0_segment_10);
+DECLARE_SEGMENT(mio0_segment_11);
+DECLARE_SEGMENT(mio0_segment_12);
+DECLARE_SEGMENT(mio0_segment_13);
+
+DECLARE_SEGMENT(ovl_i11);
+
+DECLARE_VRAM_SEGMENT(unk_context);
+DECLARE_BSS_SEGMENT(unk_context);
 
 #endif
