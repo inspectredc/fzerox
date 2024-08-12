@@ -44,8 +44,7 @@ void func_80069F5C(u64* arg0) {
     var_s0 = &arg0[5624];
 
     for (var_s1 = 0; var_s1 < 0x6A00; var_s1 += 0x100, var_s0 += 80) {
-        func_80073E28((uintptr_t)D_2787F0 + var_s1 + 8, var_s0, 0x100);
-        
+        func_80073E28((uintptr_t) D_2787F0 + var_s1 + 8, var_s0, 0x100);
     }
 }
 
