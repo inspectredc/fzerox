@@ -17,6 +17,7 @@
 
 #define DECLARE_DATA_SEGMENT(name)   \
     extern u8 name ## _DATA_START[]; \
+    extern u8 name ## _DATA_SIZE[]; \
     extern u8 name ## _RODATA_END[]
 
 #define DECLARE_BSS_SEGMENT(name)   \
@@ -45,6 +46,8 @@
 #define SEGMENT_DATA_START(segment) (segment ## _DATA_START)
 #define SEGMENT_DATA_END(segment)   (segment ## _RODATA_END)
 #define SEGMENT_DATA_SIZE(segment)  (SEGMENT_DATA_END(segment) - SEGMENT_DATA_START(segment))
+
+#define SEGMENT_DATA_SIZE_CONST(segment) (segment ## _DATA_SIZE)
 
 #define SEGMENT_BSS_START(segment) (segment ## _BSS_START)
 #define SEGMENT_BSS_END(segment)   (segment ## _BSS_END)
@@ -75,6 +78,10 @@ DECLARE_SEGMENT(mio0_segment_12);
 DECLARE_SEGMENT(mio0_segment_13);
 
 DECLARE_SEGMENT(ovl_i11);
+
+DECLARE_SEGMENT(audio_seq);
+DECLARE_SEGMENT(audio_bank);
+DECLARE_SEGMENT(audio_table);
 
 DECLARE_VRAM_SEGMENT(unk_context);
 DECLARE_BSS_SEGMENT(unk_context);

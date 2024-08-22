@@ -336,7 +336,164 @@ f32 func_8009E85C(unk_8006FC8C* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
     return sp50;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_8009EBEC.s")
+s32 func_8009EBEC(unk_802C4920_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32 arg5) {
+    s32 i;
+    Vec3f spD0;
+    f32 temp_ft4;
+    f32 temp_ft5;
+    f32 temp_fs1;
+    f32 temp_fs2;
+    f32 spBC;
+    f32 temp_fa0;
+    f32 spB4;
+    s32 pad;
+    f32 sp78;
+    f32 var_fs3;
+    f32 var_fs5;
+    f32 square;
+    f32 temp_fv1;
+    unk_8006FC8C* var_s1;
+    unk_8006FC8C* var_s2;
+    unk_8006FC8C* var_s3;
+    unk_8006FC8C* var_s4;
+
+    spD0.x = arg1 - arg0->unk_44.x;
+    spD0.y = arg2 - arg0->unk_44.y;
+    spD0.z = arg3 - arg0->unk_44.z;
+
+    i = arg4 - 1;
+
+    var_s3 = arg0->unk_00;
+    var_s4 = var_s3->unk_34;
+    var_s1 = var_s3->unk_38;
+    var_s2 = var_s4->unk_34;
+
+    var_fs3 = var_s3->unk_24;
+    var_fs5 = var_fs3 - 2.0f;
+
+    spBC = ((var_fs5 - 1.0f) + var_fs3) - 3.0f;
+    sp78 = spBC + var_fs3;
+
+    spB4 = sp78 + var_fs3;
+    while ((arg5 < (SQ_SUM(&spD0))) && (i != 0)) {
+
+        arg0->unk_04 += DOT_XYZ(&spD0, &arg0->unk_0C) / SQ(arg0->unk_18);
+
+        if (arg0->unk_04 >= 1.0f) {
+            if (arg0->unk_04 > 1.9f) {
+                return -1;
+            }
+            arg0->unk_00 = arg0->unk_00->unk_34;
+            var_s1 = var_s3;
+            var_s3 = var_s4;
+            var_s4 = var_s2;
+            var_s2 = arg0->unk_00->unk_34->unk_34;
+            var_fs3 = arg0->unk_00->unk_24;
+
+            var_fs5 = var_fs3 - 2.0f;
+
+            spBC = ((var_fs5 - 1.0f) + var_fs3) - 3.0f;
+            sp78 = spBC + var_fs3;
+
+            spB4 = sp78 + var_fs3;
+            arg0->unk_04 -= 1.0f;
+
+            arg0->unk_04 *= arg0->unk_18 / func_8009E538(arg0->unk_00, 0.0f, &spD0);
+        } else if (arg0->unk_04 < 0.0f) {
+            if (arg0->unk_04 < -0.9f) {
+                return -1;
+            }
+            arg0->unk_00 = arg0->unk_00->unk_38;
+            var_s2 = var_s4;
+            var_s4 = var_s3;
+            var_s3 = var_s1;
+            var_s1 = arg0->unk_00->unk_38;
+            var_fs3 = arg0->unk_00->unk_24;
+
+            var_fs5 = var_fs3 - 2.0f;
+
+            spBC = ((var_fs5 - 1.0f) + var_fs3) - 3.0f;
+            sp78 = spBC + var_fs3;
+            spB4 = sp78 + var_fs3;
+
+            arg0->unk_04 *= arg0->unk_18 / func_8009E538(arg0->unk_00, 1.0f, &spD0);
+            arg0->unk_04 += 1.0f;
+        }
+
+        square = SQ(arg0->unk_04);
+        // FAKE
+        temp_fv1 = arg0->unk_04 * (0, square);
+        temp_ft4 = (((2.0f * square) - arg0->unk_04) - temp_fv1) * var_fs3;
+        temp_ft5 = (((var_fs5 - 1.0f) * square) - var_fs5 * temp_fv1) + 1.0f;
+        temp_fs1 = (var_fs5 * temp_fv1 - (((var_fs5 - 1.0f) + var_fs3) * square)) + (var_fs3 * arg0->unk_04);
+        temp_fs2 = (temp_fv1 - square) * var_fs3;
+
+        arg0->unk_1C.x = (temp_ft4 * var_s1->unk_00.x) + (temp_ft5 * var_s3->unk_00.x) + (temp_fs1 * var_s4->unk_00.x) +
+                         (temp_fs2 * var_s2->unk_00.x);
+        arg0->unk_1C.y = (temp_ft4 * var_s1->unk_00.y) + (temp_ft5 * var_s3->unk_00.y) + (temp_fs1 * var_s4->unk_00.y) +
+                         (temp_fs2 * var_s2->unk_00.y);
+        arg0->unk_1C.z = (temp_ft4 * var_s1->unk_00.z) + (temp_ft5 * var_s3->unk_00.z) + (temp_fs1 * var_s4->unk_00.z) +
+                         (temp_fs2 * var_s2->unk_00.z);
+
+        temp_fv1 = 3.0f * square;
+        temp_ft4 = (((arg0->unk_04 * 4.0f) - 1.0f) - temp_fv1) * var_fs3;
+        temp_ft5 = (arg0->unk_04 * spBC) - sp78 * square;
+        temp_fs1 = (sp78 * square - (spB4 * arg0->unk_04)) + var_fs3;
+        temp_fs2 = (temp_fv1 - (2.0f * arg0->unk_04)) * var_fs3;
+
+        arg0->unk_0C.x = (temp_ft4 * var_s1->unk_00.x) + (temp_ft5 * var_s3->unk_00.x) + (temp_fs1 * var_s4->unk_00.x) +
+                         (temp_fs2 * var_s2->unk_00.x);
+        arg0->unk_0C.y = (temp_ft4 * var_s1->unk_00.y) + (temp_ft5 * var_s3->unk_00.y) + (temp_fs1 * var_s4->unk_00.y) +
+                         (temp_fs2 * var_s2->unk_00.y);
+        arg0->unk_0C.z = (temp_ft4 * var_s1->unk_00.z) + (temp_ft5 * var_s3->unk_00.z) + (temp_fs1 * var_s4->unk_00.z) +
+                         (temp_fs2 * var_s2->unk_00.z);
+
+        arg0->unk_18 = sqrtf(SQ_SUM(&arg0->unk_0C));
+        arg0->unk_28.x = arg1 - arg0->unk_1C.x;
+        arg0->unk_28.y = arg2 - arg0->unk_1C.y;
+        arg0->unk_28.z = arg3 - arg0->unk_1C.z;
+        arg0->unk_40 = sqrtf(SQ_SUM(&arg0->unk_28));
+
+        if (arg0->unk_40 < 0.001f) {
+            break;
+        }
+
+        arg0->unk_34.x = CROSS_X(&arg0->unk_28, &arg0->unk_0C);
+        arg0->unk_34.y = CROSS_Y(&arg0->unk_28, &arg0->unk_0C);
+        arg0->unk_34.z = CROSS_Z(&arg0->unk_28, &arg0->unk_0C);
+
+        arg0->unk_28.x = CROSS_X(&arg0->unk_0C, &arg0->unk_34);
+        arg0->unk_28.y = CROSS_Y(&arg0->unk_0C, &arg0->unk_34);
+        arg0->unk_28.z = CROSS_Z(&arg0->unk_0C, &arg0->unk_34);
+
+        temp_fa0 = arg0->unk_40 / sqrtf(SQ_SUM(&arg0->unk_28));
+
+        arg0->unk_28.x *= temp_fa0;
+        arg0->unk_44.x = temp_fv1 = arg0->unk_28.x + arg0->unk_1C.x;
+        spD0.x = arg1 - arg0->unk_44.x;
+
+        arg0->unk_28.y *= temp_fa0;
+        arg0->unk_44.y = temp_fv1 = arg0->unk_28.y + arg0->unk_1C.y;
+        spD0.y = arg2 - arg0->unk_44.y;
+
+        arg0->unk_28.z *= temp_fa0;
+        arg0->unk_44.z = temp_fv1 = arg0->unk_28.z + arg0->unk_1C.z;
+        spD0.z = arg3 - arg0->unk_44.z;
+
+        i--;
+    }
+
+    arg0->unk_28.x = arg1 - arg0->unk_1C.x;
+    arg0->unk_28.y = arg2 - arg0->unk_1C.y;
+    arg0->unk_28.z = arg3 - arg0->unk_1C.z;
+
+    arg0->unk_34.x = arg1;
+    arg0->unk_34.y = arg2;
+    arg0->unk_34.z = arg3;
+    arg0->unk_40 = sqrtf(SQ_SUM(&arg0->unk_28));
+
+    return 0;
+}
 
 s32 func_8009F334(unk_800F8510* arg0) {
     unk_8006FC8C* var_s0 = arg0->unk_10;
@@ -1236,24 +1393,24 @@ void func_800A4D0C(s32 arg0) {
 
 extern unk_800F8510* D_800F8510;
 extern s32 D_800F8514;
-extern s8 D_8010B7B2;
+
+extern unk_8010B7B0 D_8010B7B0;
+s32 func_800AA394(void);
 
 void func_800A4DF0(void) {
-    s32 temp_a0;
 
     D_800F8510 = &D_802A6B40[D_800F8514];
     func_8007402C(D_800F8514);
-    func_800747EC(D_8010B7B2);
-    func_8009CED0(D_8010B7B2);
+    func_800747EC(D_8010B7B0.unk_000[2]);
+    func_8009CED0(D_8010B7B0.unk_000[2]);
     func_80074634(D_800F8510);
     func_8009DEAC(D_800F8510);
-    temp_a0 = D_800F8510->unk_04;
-    if (temp_a0 >= 24) {
+    if (D_800F8510->unk_04 >= 24) {
         D_800F8510->unk_00 = 24;
     } else {
-        D_800F8510->unk_00 = temp_a0;
+        D_800F8510->unk_00 = D_800F8510->unk_04;
     }
-    D_800F8510->unk_00 |= func_800AA394(temp_a0) << 5;
+    D_800F8510->unk_00 |= func_800AA394() << 5;
 }
 
 extern s32 D_800CD000;
@@ -2341,4 +2498,33 @@ Gfx* func_800A95B4(Gfx* gfx) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_800A9938.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_800AA394.s")
+s32 func_800AA394(void) {
+    s32 i;
+    u32 var_v1 = D_8010B7B0.unk_000[1];
+
+    for (i = 0; i < D_8010B7B0.unk_000[1]; i++) {
+
+        D_8010B7B0.unk_020[i].unk_10 &= ~0x600;
+        D_8010B7B0.unk_020[i].unk_10 &= ~0x38000;
+        D_8010B7B0.unk_020[i].unk_10 &= ~0x40000000;
+
+        var_v1 += (s32) ((D_8010B7B0.unk_020[i].unk_00.x + ((1.1f + (0.7f * i)) * D_8010B7B0.unk_020[i].unk_00.y)) +
+                         ((2.2f + (1.2f * i)) * D_8010B7B0.unk_020[i].unk_00.z * (4.4f + (0.9f * i))) +
+                         D_8010B7B0.unk_020[i].unk_0C + ((5.5f + (0.8f * i)) * D_8010B7B0.unk_020[i].unk_0E * 4.8f)) +
+                  D_8010B7B0.unk_020[i].unk_10 * (0xFE - i) + D_8010B7B0.unk_520[i] * (0x93DE - i * 2);
+    }
+
+    for (i = 0; i < D_8010B7B0.unk_000[1]; i++) {
+        var_v1 += (D_8010B7B0.unk_5A0[i] * i);
+        var_v1 += (D_8010B7B0.unk_5E0[i] * (i + 0x10));
+        var_v1 += (D_8010B7B0.unk_620[i] * (i + 0x80));
+        var_v1 += (D_8010B7B0.unk_660[i] * (i + 0x100));
+        var_v1 += (D_8010B7B0.unk_6A0[i] * (i + 0x800));
+        var_v1 += (D_8010B7B0.unk_6E0[i] * (i + 0x1000));
+        var_v1 += (D_8010B7B0.unk_720[i] * (i + 0x8000));
+        var_v1 += (D_8010B7B0.unk_760[i] * (i + 0x10000));
+        var_v1 += (D_8010B7B0.unk_7A0[i] * (i + 0x80000));
+    }
+
+    return var_v1;
+}

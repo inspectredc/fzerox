@@ -773,10 +773,6 @@ extern u8 gSequenceFontTableData[];
 extern u8 gSequenceTableData[];
 extern u8 gSampleBankTableData[];
 
-extern u8 D_527AF0[];
-extern u8 D_524D60[];
-extern u8 D_528730[];
-
 extern SynthesisReverb gSynthReverbs[1];
 extern u16 D_80025D50;
 extern s8 gUseReverb;

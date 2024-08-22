@@ -575,50 +575,50 @@ extern OSMesgQueue D_800DCA68;
 extern OSIoMesg D_800DCCA8;
 extern OSPiHandle* D_800DCCDC;
 
-void func_80073E28(void* arg0, void* arg1, size_t arg2) {
-    osInvalDCache(osPhysicalToVirtual(arg1), arg2);
+void func_80073E28(void* romAddr, void* ramAddr, size_t size) {
+    osInvalDCache(osPhysicalToVirtual(ramAddr), size);
     D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
     D_800DCCA8.hdr.retQueue = &D_800DCA68;
-    D_800DCCA8.dramAddr = osPhysicalToVirtual(arg1);
-    D_800DCCA8.devAddr = (uintptr_t) arg0;
-    D_800DCCA8.size = arg2;
+    D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
+    D_800DCCA8.devAddr = (uintptr_t) romAddr;
+    D_800DCCA8.size = size;
     D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
     osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
     MQ_WAIT_FOR_MESG(&D_800DCA68, NULL);
 }
 
-void func_80073ED0(void* arg0, void* arg1, size_t arg2) {
+void func_80073ED0(void* romAddr, void* ramAddr, size_t size) {
     OSMesg sp20[8];
 
     if (D_800DCA68.validCount >= D_800DCA68.msgCount) {
         MQ_WAIT_FOR_MESG(&D_800DCA68, sp20);
     }
-    osInvalDCache(osPhysicalToVirtual(arg1), arg2);
+    osInvalDCache(osPhysicalToVirtual(ramAddr), size);
     D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
     D_800DCCA8.hdr.retQueue = &D_800DCA68;
-    D_800DCCA8.dramAddr = osPhysicalToVirtual(arg1);
-    D_800DCCA8.devAddr = (uintptr_t) arg0;
-    D_800DCCA8.size = arg2;
+    D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
+    D_800DCCA8.devAddr = (uintptr_t) romAddr;
+    D_800DCCA8.size = size;
     D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
     osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
     MQ_WAIT_FOR_MESG(&D_800DCA68, sp20);
 }
 
-void func_80073FA0(u8* arg0, u8* arg1, u32 arg2) {
-    s32 temp_a2;
+void func_80073FA0(u8* romAddr, u8* ramAddr, size_t size) {
+    s32 remainder;
     s32 i;
-    s32 temp_s3 = (arg2 >> 10);
+    s32 numBlocks = size / 1024;
 
-    for (i = 0; i < temp_s3; i++) {
-        func_80073ED0(arg0, arg1, 0x400);
+    for (i = 0; i < numBlocks; i++) {
+        func_80073ED0(romAddr, ramAddr, 0x400);
 
-        arg0 += 0x400;
-        arg1 += 0x400;
+        romAddr += 0x400;
+        ramAddr += 0x400;
     }
 
-    temp_a2 = arg2 & 0x3FF;
-    if (temp_a2) {
-        func_80073ED0(arg0, arg1, temp_a2);
+    remainder = size % 1024;
+    if (remainder) {
+        func_80073ED0(romAddr, ramAddr, remainder);
     }
 }
 

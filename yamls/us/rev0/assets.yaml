@@ -9,6 +9,12 @@
   - type: bin
     start: 0x17B1E0
 
+  - type: bin
+    start: 0x17B960
+
+  - type: bin
+    start: 0x1B8550
+
   - name: mio0/segment_2
     type: bin
     start: 0x22B0A0
@@ -1786,7 +1792,16 @@
       - [0x524920, asm]
       - [0x524BE0, data]
 
-  - type: bin
+  - name: audio_bank
+    type: bin
     start: 0x524D60
+
+  - name: audio_seq
+    type: bin
+    start: 0x527AF0
+
+  - name: audio_table
+    type: bin
+    start: 0x528730
 
   - [0x1000000]

@@ -36,68 +36,68 @@ extern OSMesgQueue D_800DCA68;
 extern OSIoMesg D_800DCCA8;
 extern OSPiHandle* D_800DCCDC;
 
-void func_80076498(u32 devAddr, u32 ramAddr, size_t size) {
+void func_80076498(u32 romAddr, u32 ramAddr, size_t size) {
     OSMesg msgBuf[7];
 
     D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
     D_800DCCA8.hdr.retQueue = &D_800DCA68;
     D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
-    D_800DCCA8.devAddr = devAddr;
+    D_800DCCA8.devAddr = romAddr;
     D_800DCCA8.size = size;
     D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
     osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
     MQ_WAIT_FOR_MESG(&D_800DCA68, msgBuf);
 }
 
-void func_80076528(u32 devAddr, u32 ramAddr, size_t size, void* arg3, s32 arg4) {
+void func_80076528(u32 romAddr, u32 ramAddr, size_t size, void* bssAddr, size_t bssSize) {
     OSMesg msgBuf[7];
 
     D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
     D_800DCCA8.hdr.retQueue = &D_800DCA68;
     D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
-    D_800DCCA8.devAddr = devAddr;
+    D_800DCCA8.devAddr = romAddr;
     D_800DCCA8.size = size;
     D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
     osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
-    bzero(arg3, arg4);
+    bzero(bssAddr, bssSize);
     MQ_WAIT_FOR_MESG(&D_800DCA68, msgBuf);
 }
 
-void func_800765CC(u8* devAddr, u8* ramAddr, size_t size) {
-    s32 temp_a2;
+void func_800765CC(u8* romAddr, u8* ramAddr, size_t size) {
+    s32 remainder;
     s32 i;
-    s32 temp_s3;
+    s32 numBlocks;
 
-    temp_s3 = size / 1024;
+    numBlocks = size / 1024;
 
-    for (i = 0; i < temp_s3; i++) {
-        func_80076498(devAddr, ramAddr, 0x400);
+    for (i = 0; i < numBlocks; i++) {
+        func_80076498(romAddr, ramAddr, 0x400);
 
-        devAddr += 0x400;
+        romAddr += 0x400;
         ramAddr += 0x400;
     }
-    temp_a2 = size % 1024;
-    if (temp_a2 != 0) {
-        func_80076498(devAddr, ramAddr, temp_a2);
+    remainder = size % 1024;
+    if (remainder != 0) {
+        func_80076498(romAddr, ramAddr, remainder);
     }
 }
 
-void func_80076658(u8* devAddr, u8* ramAddr, size_t size, void* arg3, size_t arg4) {
-    s32 temp_a2;
+void func_80076658(u8* romAddr, u8* ramAddr, size_t size, void* bssAddr, size_t bssSize) {
+    s32 remainder;
     s32 i;
-    s32 temp_s3;
+    s32 numBlocks;
 
-    temp_s3 = size / 1024;
+    numBlocks = size / 1024;
 
-    for (i = 0; i < temp_s3; i++) {
-        func_80076498(devAddr, ramAddr, 0x400);
+    for (i = 0; i < numBlocks; i++) {
+        func_80076498(romAddr, ramAddr, 0x400);
 
-        devAddr += 0x400;
+        romAddr += 0x400;
         ramAddr += 0x400;
     }
-    temp_a2 = size % 1024;
-    if (temp_a2 != 0) {
-        func_80076528(devAddr, ramAddr, temp_a2, arg3, arg4);
+    remainder = size % 1024;
+    if (remainder != 0) {
+        func_80076528(romAddr, ramAddr, remainder, bssAddr, bssSize);
     }
 }
 

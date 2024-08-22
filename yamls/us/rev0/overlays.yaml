@@ -4,7 +4,7 @@
     start: 0x72030
     vram: 0x80402F20 # vram unknown
     subsegments:
-      - [0x72030, hasm]
+      - [0x72030, data]
 
   - name: leo
     exclusive_ram_id: overlay
