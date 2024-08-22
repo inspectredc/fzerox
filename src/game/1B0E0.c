@@ -1399,7 +1399,138 @@ void func_80085510(void) {
 void func_80085B80(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_80085B80.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_80086400.s")
+extern s32* D_800CD9AC[];
+extern u32 D_800CD9C0[];
+extern u32 D_800CD9D0[];
+extern u32 D_800CD9E0[];
+extern u32 D_800CD9F0[];
+extern u32 D_800CDA00[];
+extern u32 D_800CDA10[];
+extern u32 D_800CDA20[];
+extern u32 D_800CDA30[];
+extern u32 D_800CDA40[];
+extern u32 D_800CDA50[];
+extern u32 D_800CDA60[];
+extern u32 D_800CDA70[];
+extern u32 D_800CDA80[];
+extern s32 D_800E5E80;
+extern u8 D_80146A8[];
+extern u8 D_80146B8[];
+extern u8 D_80146C8[];
+extern u8 D_80146D8[];
+extern u8 D_80146E8[];
+extern u8 D_80146F8[];
+extern u8 D_8014708[];
+extern u8 D_8014718[];
+extern u8 D_8014728[];
+extern u8 D_8014738[];
+extern u8 D_8014748[];
+extern u8 D_8014758[];
+extern u8 D_8014768[];
+
+void func_80086400(unk_struct_1DC* arg0) {
+    s32* temp = D_800CD9AC[D_800E5E80];
+    s32 temp2 = temp[arg0->unk_00];
+    s16* sp24;
+    u32* sp20;
+    f32 var_fv0;
+    f32 var_fv1;
+
+    switch (temp2) {
+        case 0:
+            sp24 = func_80076BD4(D_80146A8);
+            sp20 = D_800CD9C0;
+            break;
+        case 1:
+            sp24 = func_80076BD4(D_80146B8);
+            sp20 = D_800CD9D0;
+            break;
+        case 2:
+            sp24 = func_80076BD4(D_80146C8);
+            sp20 = D_800CD9E0;
+            break;
+        case 3:
+            sp24 = func_80076BD4(D_80146D8);
+            sp20 = D_800CD9F0;
+            break;
+        case 4:
+            sp24 = func_80076BD4(D_80146E8);
+            sp20 = D_800CDA00;
+            break;
+        case 5:
+            sp24 = func_80076BD4(D_80146F8);
+            sp20 = D_800CDA10;
+            break;
+        case 6:
+            sp24 = func_80076BD4(D_8014708);
+            sp20 = D_800CDA20;
+            break;
+        case 7:
+            sp24 = func_80076BD4(D_8014718);
+            sp20 = D_800CDA30;
+            break;
+        case 8:
+            sp24 = func_80076BD4(D_8014728);
+            sp20 = D_800CDA40;
+            break;
+        case 9:
+            sp24 = func_80076BD4(D_8014738);
+            sp20 = D_800CDA50;
+            break;
+        case 10:
+            sp24 = func_80076BD4(D_8014748);
+            sp20 = D_800CDA60;
+            break;
+        case 11:
+            sp24 = func_80076BD4(D_8014758);
+            sp20 = D_800CDA70;
+            break;
+        case 12:
+            sp24 = func_80076BD4(D_8014768);
+            sp20 = D_800CDA80;
+            break;
+    }
+
+    var_fv0 = sp24[0] * 0.25f;
+    arg0->unk_108 = var_fv0;
+    arg0->unk_F8 = var_fv0;
+    arg0->unk_E8 = var_fv0;
+
+    var_fv0 = sp24[1] * 0.25f;
+    arg0->unk_10C = var_fv0;
+    arg0->unk_FC = var_fv0;
+    arg0->unk_EC = var_fv0;
+
+    arg0->unk_F0 = sp24[4] * 0.25f;
+    arg0->unk_F4 = sp24[5] * 0.25f;
+
+    var_fv1 = arg0->unk_F0 - arg0->unk_E8;
+    arg0->unk_110 = var_fv1;
+    arg0->unk_100 = var_fv1;
+    var_fv1 = arg0->unk_F4 - arg0->unk_EC;
+    arg0->unk_114 = var_fv1;
+    arg0->unk_104 = var_fv1;
+
+    var_fv0 = sp20[0];
+    arg0->unk_D0 = var_fv0;
+    arg0->unk_C0 = var_fv0;
+    arg0->unk_B0 = var_fv0;
+
+    var_fv0 = sp20[1];
+    arg0->unk_D4 = var_fv0;
+    arg0->unk_C4 = var_fv0;
+    arg0->unk_B4 = var_fv0;
+
+    var_fv0 = sp20[2];
+    arg0->unk_D8 = var_fv0;
+    arg0->unk_C8 = var_fv0;
+    arg0->unk_B8 = var_fv0;
+
+    var_fv0 = sp20[3];
+    arg0->unk_DC = var_fv0;
+    arg0->unk_CC = var_fv0;
+    arg0->unk_BC = var_fv0;
+}
 
 void func_8008681C(unk_struct_1DC*, unk_struct_F8*, unk_800E5D70*);
 void func_80086FD0(void);

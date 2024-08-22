@@ -623,20 +623,20 @@ void func_8006CB0C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
         arg8 *= temp_fv1;
         arg9 *= temp_fv1;
         argA *= temp_fv1;
-        arg1->m[0][0] = arg8 * arg2 + 1.0f;
-        arg1->m[0][1] = arg8 * arg3;
-        arg1->m[0][2] = arg8 * arg4;
-        arg1->m[1][0] = arg9 * arg2;
-        arg1->m[1][1] = arg9 * arg3 + 1.0f;
-        arg1->m[1][2] = arg9 * arg4;
-        arg1->m[2][0] = argA * arg2;
-        arg1->m[2][1] = argA * arg3;
-        arg1->m[2][2] = argA * arg4 + 1.0f;
-        arg1->m[3][0] = temp_fv0 * arg2;
-        arg1->m[3][1] = temp_fv0 * arg3;
-        arg1->m[3][2] = temp_fv0 * arg4;
-        arg1->m[0][3] = arg1->m[1][3] = arg1->m[2][3] = 0.0f;
-        arg1->m[3][3] = 1.0f;
+        arg1->xx = arg8 * arg2 + 1.0f;
+        arg1->yx = arg8 * arg3;
+        arg1->zx = arg8 * arg4;
+        arg1->xy = arg9 * arg2;
+        arg1->yy = arg9 * arg3 + 1.0f;
+        arg1->zy = arg9 * arg4;
+        arg1->xz = argA * arg2;
+        arg1->yz = argA * arg3;
+        arg1->zz = argA * arg4 + 1.0f;
+        arg1->xw = temp_fv0 * arg2;
+        arg1->yw = temp_fv0 * arg3;
+        arg1->zw = temp_fv0 * arg4;
+        arg1->wx = arg1->wy = arg1->wz = 0.0f;
+        arg1->ww = 1.0f;
         func_8006BBE8(arg1, arg0);
     }
 }

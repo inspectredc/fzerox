@@ -58,7 +58,6 @@ bool func_8007523C(LEODiskID arg0, LEODiskID arg1) {
 }
 
 void func_8007FCB8(void);
-void func_8007FC68(s32);
 
 bool func_800752EC(void) {
 
@@ -212,7 +211,6 @@ s32 func_80075738(LEODiskID arg0) {
     return 2;
 }
 
-void func_800751C0(void);
 void func_80075228(void);
 
 s32 func_80075800(void) {
@@ -388,10 +386,10 @@ bool func_800759AC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, OSMesgQueue
     return false;
 }
 
-bool func_80075D10(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, OSMesgQueue* arg5) {
+bool func_80075D10(LEOCmd* cmdBlock, s32 direction, s32 LBA, void* vaddr, u32 nLBAs, OSMesgQueue* arg5) {
     OSMesg msg;
 
-    while (func_8007523C(D_800CD2B0, leoBootID) != 0) {
+    while (func_8007523C(D_800CD2B0, leoBootID)) {
 
         func_800751C0();
         func_8007FED4();
@@ -400,13 +398,13 @@ bool func_80075D10(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, OSMesgQueue
         while (func_800752EC()) {}
         while (func_80075800()) {}
     }
-    LeoReadWrite(arg0, arg1, arg2, arg3, arg4, &D_800E3308);
-    osRecvMesg(&D_800E3308, &D_800E3324, 1);
+    LeoReadWrite(cmdBlock, direction, LBA, vaddr, nLBAs, &D_800E3308);
+    osRecvMesg(&D_800E3308, &D_800E3324, OS_MESG_BLOCK);
 
     msg = D_800E3324;
 
     if (msg == NULL) {
-        osSendMesg(arg5, msg, 0);
+        osSendMesg(arg5, msg, OS_MESG_NOBLOCK);
     }
 
     switch ((s32) D_800E3324) {
@@ -418,12 +416,12 @@ bool func_80075D10(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, OSMesgQueue
             func_800751C0();
 
             while (func_80075800()) {}
-            return func_80075D10(arg0, arg1, arg2, arg3, arg4, arg5);
+            return func_80075D10(cmdBlock, direction, LBA, vaddr, nLBAs, arg5);
         case 47:
 
             while (func_80075800()) {}
             func_80075228();
-            return func_80075D10(arg0, arg1, arg2, arg3, arg4, arg5);
+            return func_80075D10(cmdBlock, direction, LBA, vaddr, nLBAs, arg5);
         case 49:
             func_800751C0();
             func_8007FD58();
@@ -431,7 +429,7 @@ bool func_80075D10(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, OSMesgQueue
             func_800751C0();
 
             while (func_80075800()) {}
-            return func_80075D10(arg0, arg1, arg2, arg3, arg4, arg5);
+            return func_80075D10(cmdBlock, direction, LBA, vaddr, nLBAs, arg5);
         case 2:
             func_800751C0();
             func_8007FDD0();
@@ -440,11 +438,11 @@ bool func_80075D10(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, OSMesgQueue
 
             while (func_800752EC()) {}
             while (func_80075800()) {}
-            return func_80075D10(arg0, arg1, arg2, arg3, arg4, arg5);
+            return func_80075D10(cmdBlock, direction, LBA, vaddr, nLBAs, arg5);
         case 35:
-            return func_80075D10(arg0, arg1, arg2, arg3, arg4, arg5);
+            return func_80075D10(cmdBlock, direction, LBA, vaddr, nLBAs, arg5);
         case 23:
-            if (arg1 == 0) {
+            if (direction == OS_READ) {
                 break;
             }
         /* fallthrough */

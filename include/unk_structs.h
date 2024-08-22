@@ -50,19 +50,15 @@ typedef struct unk_800F8510 {
 } unk_800F8510; // size = 0xF0
 
 typedef struct unk_8010B7D0 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
+    Vec3f unk_00;
     s16 unk_0C;
     s16 unk_0E;
-    s16 unk_10;
-    s8 unk_12[0x2];
-} unk_8010B7D0; // size = 0x14
+    s32 unk_10;
+} unk_8010B7D0;
 
 typedef struct unk_8010B7B0 {
     s8 unk_000[0x20];
-    unk_8010B7D0 unk_020[1]; // unknown length
-    s8 unk_034[0x4EC];
+    unk_8010B7D0 unk_020[64];
     s16 unk_520[64];
     s8 unk_5A0[64];
     s8 unk_5E0[64];
@@ -258,11 +254,29 @@ typedef struct unk_struct_1DC {
     f32 unk_B4;
     f32 unk_B8;
     f32 unk_BC;
-    s8 unk_C0[0x20];
+    f32 unk_C0;
+    f32 unk_C4;
+    f32 unk_C8;
+    f32 unk_CC;
+    f32 unk_D0;
+    f32 unk_D4;
+    f32 unk_D8;
+    f32 unk_DC;
     s32 unk_E0;
     s16 unk_E4;
     s16 unk_E6;
-    s8 unk_E8[0x30];
+    f32 unk_E8;
+    f32 unk_EC;
+    f32 unk_F0;
+    f32 unk_F4;
+    f32 unk_F8;
+    f32 unk_FC;
+    f32 unk_100;
+    f32 unk_104;
+    f32 unk_108;
+    f32 unk_10C;
+    f32 unk_110;
+    f32 unk_114;
     u16 unk_118;
     s8 unk_11A[0x2];
     MtxF unk_11C;

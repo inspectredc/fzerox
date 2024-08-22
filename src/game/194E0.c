@@ -28,16 +28,35 @@ void func_8007F500(void) {
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/func_8007F500.s")
 #endif
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/func_8007F520.s")
+extern OSMesgQueue D_800DCAE0;
+
+void func_8007F520(void) {
+    u8 i;
+    OSMesg temp_v0;
+    OSMesg msg;
+
+    for (i = 0; i < 30; i++) {
+    start:
+        do {
+            osRecvMesg(&D_800DCAE0, &msg, 1);
+        } while (msg != (OSMesg) 0x1A);
+
+        LeoResetClear();
+        temp_v0 = func_80075534();
+        if (temp_v0 != (OSMesg) 0x2B) {
+            return;
+        }
+    }
+
+    func_800751C0();
+    func_8007FCB8();
+    func_8007FC68(temp_v0);
+    func_800751C0();
+    while (true) {}
+}
 
 void func_80076310(void);
 void func_8007F520(void);
-s32 func_80403F4C(s32, OSMesg*, s32);
-void func_8040428C(void);
-s32 func_804043B8(s32);
-s32 func_804046F0(void);
-void func_80404AEC(char*, char*);
-void func_804067BC(s32, s32);
 void func_800762B0(LEODiskID);
 extern OSMesgQueue D_800E42D0;
 extern OSMesg D_800E42E8;
@@ -49,8 +68,8 @@ void func_8007F5EC(void) {
 
     func_80076310();
     osCreateMesgQueue(&D_800E42D0, &D_800E42E8, 0x10);
-    func_80404AEC("01", "EFZE");
-    if (func_80403F4C(0x101, &D_800E42E8, 0x10) < 0) {
+    func_i1_80404AEC("01", "EFZE");
+    if (func_i1_80403F4C(0x101, &D_800E42E8, 0x10) < 0) {
         switch (D_80428610) {
             case 0x29:
                 return;
@@ -66,25 +85,25 @@ label:
     if (D_80428610 == 0xF9) {
         func_8007F520();
     }
-    func_8040428C();
+    func_i1_8040428C();
     func_800762B0(D_80428618);
     leoBootID = D_80428618;
 
-    switch (func_804046F0()) {
+    switch (func_i1_804046F0()) {
         case 1:
             break;
         case 0:
-            if (func_804043B8(1) < 0) {}
+            if (func_i1_804043B8(1) < 0) {}
             break;
         case -1:
             switch (D_80428610) {
                 case 42:
                     break;
                 case 23:
-                    func_804043B8(1);
+                    func_i1_804043B8(1);
                     break;
             }
             break;
     }
-    func_804067BC(0, 0);
+    func_i1_804067BC(0, 0);
 }
