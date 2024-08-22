@@ -196,9 +196,9 @@ typedef struct unk9 {
     u8 v0, v1, v2, v3, v4, v5, v6, v7, v8;
 } unk9;
 extern unk9 D_8010D730[];
+static s32 D_800E4180[55];
 
 void func_8007D9D0(void) {
-    static s32 D_800E4180[55];
     s32 i;
 
     for (i = 0; i < 24; i++) {

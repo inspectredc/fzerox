@@ -175,4 +175,19 @@ Gfx* func_80080E90(Gfx* gfx) {
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1AA40/func_8008108C.s")
+bool func_8008108C(s32* arg0, s32 arg1) {
+    bool ret = false;
+
+    switch (arg1) {
+        case 0:
+            ret = ((arg0 != NULL) && (*arg0 != 0)) ? true : false;
+            break;
+        case 1:
+            ret = (*arg0 == 3) ? true : false;
+            break;
+        default:
+            break;
+    }
+
+    return ret;
+}

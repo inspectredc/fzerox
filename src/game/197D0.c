@@ -27,13 +27,13 @@ void func_8007F86C(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s3
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/197D0/func_8007F86C.s")
 
 extern s32 D_800CD520;
-extern s32 D_800E4350;
-extern s32 D_800E44D0;
-extern s32 D_800E4650;
-extern unk_8007F86C_arg_1 D_80400008;
+extern s32 D_800E4350[];
+extern s32 D_800E44D0[];
+extern s32 D_800E4650[];
+extern unk_8007F86C_arg_1 D_80400008[];
 
 void func_8007F904(void) {
-    func_8007F86C(&D_800CD520, &D_80400008, &D_800E4350, &D_800E44D0, &D_800E4650);
+    func_8007F86C(&D_800CD520, D_80400008, D_800E4350, D_800E44D0, D_800E4650);
 }
 
 extern s16* D_800E4348;
@@ -56,7 +56,6 @@ void func_8007F970(void) {
     }
 }
 
-void func_800751C0(void);
 extern FrameBuffer* D_800DCCD0[];
 
 void func_8007F9E0(void) {
@@ -80,11 +79,55 @@ void func_8007F9E0(void) {
     func_800751C0();
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/197D0/func_8007FA64.s")
+extern u16 D_800CD6A0[];
+extern s16* D_800E4348;
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/197D0/func_8007FB80.s")
+void func_8007FA64(s32 arg0, s32 arg1, u8* arg2, s32 arg3, s32 arg4, s32 arg5) {
+    u8 i;
+    u16 j;
+    u8 temp_a3;
+    u32 temp_t1;
+    u8* var_v0 = arg2;
 
-void func_8007FB80(s32, s32, char*);
+    arg1 += 12;
+
+    for (i = (arg1 - arg5); i < (arg1 - arg5) + arg4; i++) {
+        for (j = arg0; j < arg0 + arg3; j += 2, var_v0++) {
+            temp_a3 = *var_v0 >> 4;
+            temp_t1 = *var_v0 & 0xFF;
+            D_800E434C = (i * 320) + &D_800E4348[j];
+            temp_t1 &= 0xF;
+            if (temp_a3 != 0) {
+                *D_800E434C = D_800CD6A0[temp_a3];
+            }
+            if (j + 1 < arg0 + arg3) {
+                D_800E434C++;
+                if (temp_t1) {
+                    *D_800E434C = D_800CD6A0[temp_t1];
+                }
+            }
+        }
+    }
+}
+
+void func_8007FB80(s32 arg0, s32 arg1, s8* arg2) {
+    s32 temp_v0;
+    s32 temp_v1;
+    s32 var_s2;
+    s32* temp_s3;
+    s8 var_s1;
+    s8* var_s0;
+    s32 i;
+
+    for (i = 0; arg2[i] != 0; i++) {
+        temp_v1 = arg2[i] - 32;
+        func_8007FA64(arg0, arg1, &D_80400008[temp_v1], D_800E4350[temp_v1], D_800E44D0[temp_v1], D_800E4650[temp_v1]);
+        // FAKE
+        arg0 = arg0 + D_800E4350[temp_v1] + (0, 1);
+    }
+}
+
+void func_8007FB80(s32, s32, s8*);
 
 void func_8007FC68(s32 arg0) {
     char sp1C[4];

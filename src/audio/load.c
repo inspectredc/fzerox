@@ -960,9 +960,9 @@ void func_800B079C(void* heap, size_t heapSize) {
     gNumSequences = gSequenceTable->numEntries;
 
     // Initialize audio tables
-    func_800AF3CC(gSequenceTable, (u32) D_527AF0, 0);
-    func_800AF3CC(gSoundFontTable, (u32) D_524D60, 0);
-    func_800AF3CC(gSampleBankTable, (u32) D_528730, 0);
+    func_800AF3CC(gSequenceTable, SEGMENT_ROM_START(audio_seq), 0);
+    func_800AF3CC(gSoundFontTable, SEGMENT_ROM_START(audio_bank), 0);
+    func_800AF3CC(gSampleBankTable, SEGMENT_ROM_START(audio_table), 0);
     numFonts = gSoundFontTable->numEntries;
     gSoundFontList = func_800B2A8C(&gInitPool, numFonts * sizeof(SoundFont));
 

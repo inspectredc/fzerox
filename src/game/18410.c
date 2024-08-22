@@ -2,7 +2,22 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/18410/func_8007E410.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/18410/func_8007ECCC.s")
+void func_8007ECCC(u16* arg0, s32 arg1) {
+    s32 i;
+    u32 colorBlend;
+    u32 red, green, blue, alpha;
+
+    for (i = 0; i < (arg1 / 2); i++, arg0++) {
+        red = ((*arg0 & 0xF800) >> 11) * 77;
+        green = ((*arg0 & 0x7C0) >> 6) * 150;
+        blue = ((*arg0 & 0x3E) >> 1) * 29;
+        alpha = *arg0 & 0x1;
+
+        colorBlend = (0x1F00 - red - green - blue) >> 8;
+
+        *arg0 = (colorBlend << 1) + (colorBlend << 6) + (colorBlend << 11) + alpha;
+    }
+}
 
 s32 func_8007EF68(u16* arg0, s32 arg1, u16 arg2) {
     s32 i;

@@ -286,6 +286,7 @@
       - [0x71500, data, f3dflx]
       - [0x718B0, data]
       - [0x71CA0, data, aspmain]
+      - [0x71F80, data, audio/audio_tables]
 
       - { start: 0x72030, type: bss, vram: 0x800D8030, name: 800D8030 }
       - { type: .bss, vram: 0x800E32E0, name: game/F1C0 }
