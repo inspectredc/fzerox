@@ -163,7 +163,7 @@ s32 func_i1_804095F4(u16 arg0, s32 arg1, u32 arg2) {
     return func_i1_804094E0(arg0, arg1, arg2);
 }
 
-s32 func_i1_804096C8(u16 arg0, s32 arg1, u8* arg2, s32 arg3, s32 arg4) {
+s32 func_i1_804096C8(u16 arg0, u8* arg1, u8* arg2, s32 arg3, s32 arg4) {
     u16 sp1E;
 
     if (func_i1_80404830() < 0) {

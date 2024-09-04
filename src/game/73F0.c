@@ -632,7 +632,7 @@ static const char devrostr5[] = "index %d\n";
 static const char devrostr6[] = "ENTRY CHECK\n";
 
 extern u8 D_2AD1E0[];
-extern u8 D_8010D730[];
+extern u8 D_8010D730[][9];
 extern s16 D_80106F48;
 
 void func_80074428(s32 arg0);
@@ -659,8 +659,8 @@ void func_8007402C(s32 arg0) {
 
         while (func_800760F8() != 2) {}
 
-        if (func_i1_80403680(0xFFFB, (sp28 * 9) + D_8010D730, "CRSD\0\0\0\0ENTRY CHECK OK\n") != 0xFFFF) {
-            func_i1_804096C8(0xFFFB, (sp28 * 9) + D_8010D730, "CRSD\0\0\0\0ENTRY LOAD OK\n\0\0UNPACK\n\0UNPACK OK\n",
+        if (func_i1_80403680(0xFFFB, D_8010D730[sp28], "CRSD\0\0\0\0ENTRY CHECK OK\n") != 0xFFFF) {
+            func_i1_804096C8(0xFFFB, D_8010D730[sp28], "CRSD\0\0\0\0ENTRY LOAD OK\n\0\0UNPACK\n\0UNPACK OK\n",
                              D_8010B7B0.unk_000, 0);
         }
     } else {

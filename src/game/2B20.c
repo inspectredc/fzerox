@@ -318,12 +318,14 @@ void func_80068F04(void) {
                 D_800CD020++;
                 switch (D_800CD010) {
                     case 1:
-                        if (D_800E416E & 0x9000) {
-                            case 3:
-                                D_800DCE48 = 0x8000;
-                                D_800CD020 = 0;
-                                D_800CD010 = 2;
+                        if (!(D_800E416E & 0x9000)) {
+                            break;
                         }
+                        /* fallthrough */
+                    case 3:
+                        D_800DCE48 = 0x8000;
+                        D_800CD020 = 0;
+                        D_800CD010 = 2;
                         break;
                     case 2:
                         break;

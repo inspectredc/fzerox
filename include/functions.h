@@ -114,7 +114,7 @@ s32 func_i1_804043B8(s32 arg0);
 s32 func_i1_804046F0(void);
 void func_i1_80404AEC(u8* arg0, u8* arg1);
 s32 func_i1_804067BC(s32 arg0, s32 arg1);
-s32 func_i1_804096C8(u16 arg0, s32 arg1, u8* arg2, s32 arg3, s32 arg4);
+s32 func_i1_804096C8(u16 arg0, u8* arg1, u8* arg2, s32 arg3, s32 arg4);
 
 void func_i2_800FC77C(void);
 void func_i2_800FC9BC(void);

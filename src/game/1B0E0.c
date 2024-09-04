@@ -1,9 +1,9 @@
 #include "global.h"
 #include "audio.h"
+#include "fzx_racer.h"
 
 extern unk_struct_F8 D_800E5990[];
 extern unk_struct_1DC D_800E5220[];
-extern unk_802C4920 D_802C4920[];
 extern unk_800E5D70 D_800E5D70[];
 extern unk_800CD970 D_800CD970[];
 
@@ -517,7 +517,7 @@ void func_80082C80(unk_struct_1DC* arg0) {
     f32 var_fv1;
     unk_802C4920* temp_v0;
 
-    temp_v0 = &D_802C4920[D_800E5FB8];
+    temp_v0 = &gRacers[D_800E5FB8];
     temp_fa1 = temp_v0->unk_0C.unk_34.x - arg0->unk_50.x;
     temp_ft4 = temp_v0->unk_0C.unk_34.y - arg0->unk_50.y;
     temp_ft5 = temp_v0->unk_0C.unk_34.z - arg0->unk_50.z;
@@ -1383,7 +1383,7 @@ void func_80085510(void) {
         var_s0->unk_E0 = 0;
         func_80083548(var_s1, var_s3);
         func_80083550(var_s1, var_s4);
-        temp_a3 = &D_802C4920[var_s0->unk_00];
+        temp_a3 = &gRacers[var_s0->unk_00];
         func_80083558(var_s1, &temp_a3->unk_180, &temp_a3->unk_C0, temp_a3);
 
         var_s1++;
@@ -1687,7 +1687,7 @@ void func_800876A8(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
     f32 temp_fv0;
     s32 index;
     unk_8008112C_arg_1* temp_a0 = &arg1->unk_04;
-    unk_802C4920* temp_t3 = &D_802C4920[arg0->unk_00];
+    unk_802C4920* temp_t3 = &gRacers[arg0->unk_00];
     unk_struct_9C* temp_a3 = &arg1->unk_04.unk_58;
     unk_802C4920* temp_t4;
     s32 pad[5];
@@ -1727,7 +1727,7 @@ void func_800876A8(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
         temp_a3->unk_68[5] = var_v1->z;
         temp_a0->unk_00.unk_18[8] = var_v1->x;
 
-        temp_t4 = &D_802C4920[arg0->unk_00];
+        temp_t4 = &gRacers[arg0->unk_00];
         temp_a3->unk_00.unk_54.x = temp_t4->unk_180.x - (var_v1->y * temp_t4->unk_C0.xx);
         temp_a3->unk_00.unk_54.y = temp_t4->unk_180.y - (var_v1->y * temp_t4->unk_C0.yx);
         temp_a3->unk_00.unk_54.z = temp_t4->unk_180.z - (var_v1->y * temp_t4->unk_C0.zx);
@@ -1783,7 +1783,7 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
     unk_struct_94* temp_t1;
 
     index = arg0->unk_00;
-    temp_t0 = &D_802C4920[index];
+    temp_t0 = &gRacers[index];
     if (D_800DCE5C == 0) {
         if (temp_t0->unk_04 & 0x80000) {
             arg0->unk_04 = 7;
@@ -1867,7 +1867,7 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
 void func_80087DB8(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2) {
     s32 index = arg0->unk_00;
 
-    if (D_802C4920[index].unk_04 & 0x80000) {
+    if (gRacers[index].unk_04 & 0x80000) {
         arg0->unk_04 = 7;
         func_80085B80(arg0, arg1, arg2);
     }
@@ -1909,7 +1909,7 @@ void func_80087E14(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
 }
 
 void func_80087F60(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
-    arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_00 = D_802C4920[arg0->unk_00].unk_0C.unk_34;
+    arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_00 = gRacers[arg0->unk_00].unk_0C.unk_34;
 }
 
 void func_80088408(Vec3f* arg0, unk_8006FC8C* arg1, f32 arg2, unk_800CD970* arg3);
@@ -1923,7 +1923,7 @@ void func_80087FAC(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
     unk_800CD970* temp_a3 = &D_800CD970[arg0->unk_18];
     unk_8008112C_arg_1* temp_t0 = &arg1->unk_04;
     s16 temp_t1 = temp_a3->unk_00;
-    unk_802C4920* temp_t2 = &D_802C4920[arg0->unk_00];
+    unk_802C4920* temp_t2 = &gRacers[arg0->unk_00];
     unk_800CD8B0* temp_v0_2;
     s32 pad[2];
 
@@ -2069,7 +2069,7 @@ void func_80088408(Vec3f* arg0, unk_8006FC8C* arg1, f32 arg2, unk_800CD970* arg3
 void func_800885F0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2) {
 
     if (arg0->unk_1C <= 60) {
-        arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_00 = D_802C4920[arg0->unk_00].unk_0C.unk_34;
+        arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_00 = gRacers[arg0->unk_00].unk_0C.unk_34;
         arg0->unk_1C++;
     }
 }
@@ -2081,7 +2081,7 @@ void func_80088660(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
     s32 pad;
     f32 temp;
     unk_struct_9C* temp_v1 = &arg1->unk_04.unk_58;
-    unk_802C4920* temp_a3 = &D_802C4920[arg0->unk_00];
+    unk_802C4920* temp_a3 = &gRacers[arg0->unk_00];
     unk_8008112C_arg_1* temp_a0 = &arg1->unk_04;
 
     if (temp_a3->unk_04 & 0x80000) {
@@ -2187,7 +2187,7 @@ void func_800888D0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
                             var_a1 = &D_i7_8014A7E0;
                         }
                         func_80083574(arg2, var_a1);
-                        temp_a3 = &D_802C4920[D_800E5E88];
+                        temp_a3 = &gRacers[D_800E5E88];
                         func_80083558(&D_800E5D70[arg0->unk_00], &temp_a3->unk_180, &temp_a3->unk_C0, temp_a3);
                     }
                 }
@@ -2210,7 +2210,7 @@ void func_800888D0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
                 }
                 break;
             case 2:
-                temp_a3 = &D_802C4920[D_800E5E88];
+                temp_a3 = &gRacers[D_800E5E88];
                 *((Mtx3F*) &arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_0C) = temp_a3->unk_C0;
                 arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_00 = temp_a3->unk_180;
                 if (func_80088CB8(4)) {
@@ -2232,7 +2232,7 @@ void func_800888D0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
                 if (func_800835B0(arg2) && func_80088CB8(2)) {
                     arg0->unk_18 = 5;
                     arg0->unk_1C = 0;
-                    func_80083558(&D_800E5D70[arg0->unk_00], &D_802C4AA0, &D_802C49E0, D_802C4920);
+                    func_80083558(&D_800E5D70[arg0->unk_00], &D_802C4AA0, &D_802C49E0, gRacers);
                     func_80083574(arg2, &D_i7_8014B070);
                 }
                 break;
@@ -2267,7 +2267,7 @@ s32 func_80088CE0(s32 arg0) {
     s32 i;
 
     for (i = 0; i < D_800E5EC0; i++) {
-        if (arg0 == D_802C4920[i].unk_2AC) {
+        if (arg0 == gRacers[i].unk_2AC) {
             return i;
         }
     }
@@ -2315,7 +2315,7 @@ void func_80088D28(void) {
 
     for (j = 1; j <= D_800E5EC0; j++) {
         index = func_80088CE0(j);
-        temp_s1 = &D_802C4920[index];
+        temp_s1 = &gRacers[index];
         temp_s1->unk_0C.unk_00 = var_s2;
         temp_s1->unk_0C.unk_04 = var_fs0;
         func_8009E6F0(var_s2, var_fs0, &temp_s1->unk_0C.unk_1C);
@@ -2378,7 +2378,7 @@ void func_800890B4(void) {
         D_800E5EC8 = NULL;
         return;
     }
-    var_v0 = D_802C4920;
+    var_v0 = gRacers;
     while (var_v0->unk_04 & 0x40000) {
         var_v0++;
     }
@@ -2412,13 +2412,13 @@ void func_800890B4(void) {
             }
         }
         var_a0--;
-    } while (var_a0 >= D_802C4920);
+    } while (var_a0 >= gRacers);
 
     if (var_a2 == 0) {
         D_800E5EC8 = NULL;
         return;
     }
-    if (var_v0 == D_802C4920) {
+    if (var_v0 == gRacers) {
         D_800E5EC8 = var_v1;
         return;
     }
@@ -2475,13 +2475,13 @@ void func_800892E0(unk_802C4920* arg0) {
         } else if (D_800E5FBC == 0) {
             D_800E5FC6++;
             if ((D_800DCE44 == 0x15) && (D_800E5EC0 == (D_800E5FC6 + 1))) {
-                D_802C4920->unk_04 |= 0x2800000;
-                D_802C4920->unk_2A0 += func_8006A978() & 0xF;
+                gRacers->unk_04 |= 0x2800000;
+                gRacers->unk_2A0 += func_8006A978() & 0xF;
                 D_800E5FBC = 1;
-                D_802C4920->unk_228 = D_802C4920->unk_22C;
+                gRacers->unk_228 = gRacers->unk_22C;
                 D_800F5DE8 = D_800E5FBC;
-                func_800BA2B4(D_802C4920->unk_00);
-                func_800BAB68(D_802C4920->unk_00);
+                func_800BA2B4(gRacers->unk_00);
+                func_800BAB68(gRacers->unk_00);
                 func_8007E0CC();
             }
         }
@@ -2560,8 +2560,8 @@ void func_8008969C(void) {
     s32 i;
 
     for (i = D_800CD000 - 1; i >= 0; i--) {
-        D_802C4920[i].unk_2C8 = D_800E5EE0[i];
-        D_802C4920[i].unk_2CC = D_800E5EE8[i];
+        gRacers[i].unk_2C8 = D_800E5EE0[i];
+        gRacers[i].unk_2CC = D_800E5EE8[i];
     }
 }
 
@@ -2571,9 +2571,9 @@ void func_80089724(void) {
     s32 i;
 
     for (i = D_800CD000 - 1; i >= 0; i--) {
-        D_800E5EE0[i] = D_802C4920[i].unk_2C8;
-        D_800E5EE8[i] = D_802C4920[i].unk_2CC;
-        D_802C4920[i].unk_1A8 = func_8008960C(D_800E5EF0[i]);
+        D_800E5EE0[i] = gRacers[i].unk_2C8;
+        D_800E5EE8[i] = gRacers[i].unk_2CC;
+        gRacers[i].unk_1A8 = func_8008960C(D_800E5EF0[i]);
     }
 }
 
@@ -2597,9 +2597,9 @@ void func_80089800(void) {
         index0 = (func_8006A918() & 0x1FFFF) % 29 + 1;
         index1 = (func_8006A978() & 0x1FFFF) % 29 + 1;
 
-        j = D_802C4920[index0].unk_2C8;
-        D_802C4920[index0].unk_2C8 = D_802C4920[index1].unk_2C8;
-        D_802C4920[index1].unk_2C8 = j;
+        j = gRacers[index0].unk_2C8;
+        gRacers[index0].unk_2C8 = gRacers[index1].unk_2C8;
+        gRacers[index1].unk_2C8 = j;
     }
 }
 
@@ -2613,11 +2613,11 @@ void func_80089934(void) {
     for (i = 1; i < D_800E5EC0; i++) {
         if (i >= D_800CD000) {
             do {
-                D_802C4920[i].unk_2C8 = (func_8006A978() & 0x1FFFF) % 30;
-                D_802C4920[i].unk_2CC = (func_8006A918() & 0x1FFFF) % 4;
+                gRacers[i].unk_2C8 = (func_8006A978() & 0x1FFFF) % 30;
+                gRacers[i].unk_2CC = (func_8006A918() & 0x1FFFF) % 4;
                 for (j = 0; j < D_800CD000; j++) {
-                    if ((D_802C4920[i].unk_2C8 == D_802C4920[j].unk_2C8) &&
-                        (D_802C4920[i].unk_2CC == D_802C4920[j].unk_2CC)) {
+                    if ((gRacers[i].unk_2C8 == gRacers[j].unk_2C8) &&
+                        (gRacers[i].unk_2CC == gRacers[j].unk_2CC)) {
                         break;
                     }
                 }
@@ -2643,19 +2643,19 @@ void func_80089A74(u8* arg0) {
     u8 var_v0;
     u8* temp_v0;
 
-    arg0[0] = D_802C4920->unk_2C8;
-    arg0[8] = (s32) D_802C4920->unk_2E0;
-    arg0[9] = (s32) D_802C4920->unk_2E4;
-    arg0[10] = (s32) D_802C4920->unk_2E8;
-    var_v0 = D_802C4920->unk_164;
+    arg0[0] = gRacers->unk_2C8;
+    arg0[8] = (s32) gRacers->unk_2E0;
+    arg0[9] = (s32) gRacers->unk_2E4;
+    arg0[10] = (s32) gRacers->unk_2E8;
+    var_v0 = gRacers->unk_164;
     arg0[1] = var_v0;
     if (var_v0 == 1) {
-        temp_v0 = D_800F8360[D_802C4920->unk_2C8];
+        temp_v0 = D_800F8360[gRacers->unk_2C8];
         arg0[2] = temp_v0[0];
         arg0[3] = temp_v0[1];
         arg0[4] = temp_v0[2];
         arg0[5] = temp_v0[3];
-        arg0[6] = D_800F80C8[D_802C4920->unk_2C8].unk_10[0] - 1;
+        arg0[6] = D_800F80C8[gRacers->unk_2C8].unk_10[0] - 1;
         arg0[7] = temp_v0[4];
         arg0[11] = temp_v0[5];
         arg0[12] = temp_v0[6];
@@ -2689,7 +2689,7 @@ void func_8008A978(void) {
     do {
         var_v0->unk_2AC = 0;
         var_v0--;
-    } while (var_v0 >= D_802C4920);
+    } while (var_v0 >= gRacers);
 
     var_v1 = 1;
     var_a0 = D_800E5EC0;
@@ -2714,7 +2714,7 @@ void func_8008A978(void) {
                 }
             }
             var_v0--;
-        } while (var_v0 >= D_802C4920);
+        } while (var_v0 >= gRacers);
 
         if (var_a2 != NULL) {
             D_800E5F40[var_v1 - 1] = var_a2;
@@ -2744,7 +2744,7 @@ void func_8008AA8C(void) {
     unk_802C4920* var_s0;
     unk_802C4920* var_v0;
 
-    for (var_s0 = D_800E5EC4; var_s0 >= D_802C4920; var_s0--) {
+    for (var_s0 = D_800E5EC4; var_s0 >= gRacers; var_s0--) {
         if (var_s0->unk_04 & 0x2000000) {
             continue;
         }
@@ -2796,7 +2796,7 @@ void func_8008AA8C(void) {
         }
     }
     func_8008A978();
-    if ((D_800DCE44 == 1) && (D_802C4920->unk_04 & 0x2000000)) {
+    if ((D_800DCE44 == 1) && (gRacers->unk_04 & 0x2000000)) {
         var_v1 = D_800E5EC0 - 1;
         while (var_v1 >= 0) {
             if (D_800E5F40[var_v1]->unk_2A0 != 0) {
@@ -2848,7 +2848,7 @@ extern s16 D_800E5ED8[];
 extern s32 D_800E5FF0;
 
 void func_8008B1CC(void) {
-    s32 size = 29;
+    s32 size = ARRAY_COUNT(gRacers) - 1;
     s32 i;
 
     if (size) {}
@@ -2857,7 +2857,7 @@ void func_8008B1CC(void) {
     D_800CF504 = -1;
 
     for (i = size; i >= 0; i--) {
-        D_802C4920[i].unk_0A = 0;
+        gRacers[i].unk_0A = 0;
     }
 
     D_800E5ED8[0] = D_800E5ED8[1] = D_800E5ED8[2] = D_800E5ED8[3] = D_800CE4DC[D_800CD008];
@@ -3042,13 +3042,13 @@ void func_8008DA68(void) {
     D_800E5FD6 = D_800E5FF0 = 0;
     D_800E5FCC = D_800E5FCE = 0;
 
-    for (i = 0; i < 30; i++) {
-        D_802C4920[i].unk_2C8 = (s8) (i % 30);
-        D_802C4920[i].unk_2CC = 0;
-        D_802C4920[i].unk_1A8 = func_8008960C(0.5f);
+    for (i = 0; i < ARRAY_COUNT(gRacers); i++) {
+        gRacers[i].unk_2C8 = (s8) (i % ARRAY_COUNT(gRacers));
+        gRacers[i].unk_2CC = 0;
+        gRacers[i].unk_1A8 = func_8008960C(0.5f);
         if (i < 4) {
-            D_800E5EE0[i] = (s16) D_802C4920[i].unk_2C8;
-            D_800E5EE8[i] = D_802C4920[i].unk_2CC;
+            D_800E5EE0[i] = (s16) gRacers[i].unk_2C8;
+            D_800E5EE8[i] = gRacers[i].unk_2CC;
             D_800E5EF0[i] = 0.5f;
         }
     }

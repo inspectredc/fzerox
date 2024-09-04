@@ -1,6 +1,7 @@
 #include "global.h"
 #include "audio.h"
 #include "audiothread_cmd.h"
+#include "fzx_racer.h"
 
 void func_800BAE98(u8 channelIndex, u8 ioData);
 void func_800BAEDC(u8);
@@ -152,7 +153,6 @@ extern u8 D_800D1A3C;
 extern u8 D_800D1A74[];
 extern u8 D_800D1AD8[];
 extern f32 D_800D1AF8[];
-extern unk_802C4920 D_802C4920[];
 extern unk_struct_1DC D_800E5220[];
 
 void func_800B7600(u8 arg0, u8 arg1) {
@@ -181,9 +181,9 @@ void func_800B7600(u8 arg0, u8 arg1) {
                     if (arg0 == D_800D1A20) {
                         var_fv1 = D_800D1A30;
                     } else {
-                        vec.x = D_802C4920[arg0].unk_0C.unk_34.x - D_800E5220[0].unk_50.x;
-                        vec.y = D_802C4920[arg0].unk_0C.unk_34.y - D_800E5220[0].unk_50.y;
-                        vec.z = D_802C4920[arg0].unk_0C.unk_34.z - D_800E5220[0].unk_50.z;
+                        vec.x = gRacers[arg0].unk_0C.unk_34.x - D_800E5220[0].unk_50.x;
+                        vec.y = gRacers[arg0].unk_0C.unk_34.y - D_800E5220[0].unk_50.y;
+                        vec.z = gRacers[arg0].unk_0C.unk_34.z - D_800E5220[0].unk_50.z;
 
                         var_fv1 = sqrtf(SQ_SUM(&vec));
                     }
@@ -513,9 +513,9 @@ void func_800B8640(void) {
 
     if ((D_800D19E0 != 1) && (D_800D1A18 == 0) && (D_800D1A20 != 0) && (D_800D1A40 != 1) && (D_800D1A40 != 2) &&
         ((D_800DCE44 == 1) || (D_800DCE44 == 2) || (D_800DCE44 == 0x15)) && (D_800D1A58 == 0)) {
-        vec.x = D_802C4920[D_800D1A20].unk_0C.unk_34.x - D_800E5220[0].unk_50.x;
-        vec.y = D_802C4920[D_800D1A20].unk_0C.unk_34.y - D_800E5220[0].unk_50.y;
-        vec.z = D_802C4920[D_800D1A20].unk_0C.unk_34.z - D_800E5220[0].unk_50.z;
+        vec.x = gRacers[D_800D1A20].unk_0C.unk_34.x - D_800E5220[0].unk_50.x;
+        vec.y = gRacers[D_800D1A20].unk_0C.unk_34.y - D_800E5220[0].unk_50.y;
+        vec.z = gRacers[D_800D1A20].unk_0C.unk_34.z - D_800E5220[0].unk_50.z;
         D_800D1A30 = sqrtf(SQ_SUM(&vec));
         if ((D_800D1A30 < 820.0f) && (D_800D1A30 != 0.0f)) {
             if (D_800D1A1C == 0) {
@@ -548,7 +548,7 @@ void func_800B8640(void) {
             D_800D1A28 = D_800D1A30;
             D_800D1A24 = D_800D1A20;
 
-            D_800D1A38 = ((D_802C4920[D_800D1A20].unk_98 + 0.01f) * (1.0f / 21.0f)) + 0.5f + D_800D1A2C;
+            D_800D1A38 = ((gRacers[D_800D1A20].unk_98 + 0.01f) * (1.0f / 21.0f)) + 0.5f + D_800D1A2C;
             if (D_800D1A38 < 0.1f) {
                 D_800D1A38 = 0.1f;
             }
@@ -578,14 +578,14 @@ void func_800B899C(u8 arg0) {
             }
         }
 
-        if (D_802C4920[arg0].unk_98 < D_800D1A7C[arg0]) {
+        if (gRacers[arg0].unk_98 < D_800D1A7C[arg0]) {
             D_800D1A78[arg0] = 1;
         } else {
             D_800D1A78[arg0] = 0;
         }
-        D_800D1A7C[arg0] = D_802C4920[arg0].unk_98;
+        D_800D1A7C[arg0] = gRacers[arg0].unk_98;
         if (D_800D1A94[arg0] == 0) {
-            if ((D_802C4920[arg0].unk_1D4 != 0.0f) && (D_802C4920[arg0].unk_98 > 27.0f)) {
+            if ((gRacers[arg0].unk_1D4 != 0.0f) && (gRacers[arg0].unk_98 > 27.0f)) {
                 if (D_800D1A78[arg0] == 1) {
                     if (D_800D1A64[arg0] > -0.5f) {
                         D_800D1A64[arg0] -= 0.004f;
@@ -596,24 +596,24 @@ void func_800B899C(u8 arg0) {
             } else {
                 D_800D1A64[arg0] = 0.0f;
             }
-            if (D_802C4920[arg0].unk_20C != 0) {
+            if (gRacers[arg0].unk_20C != 0) {
                 D_800D1A64[arg0] = 0.0f;
             }
         } else {
             // FAKE
         }
 
-        freqScale = (((0.01f + D_802C4920[arg0].unk_98) * (1.0f / 21.0f)) + 0.25f) + D_800D1A64[arg0];
+        freqScale = (((0.01f + gRacers[arg0].unk_98) * (1.0f / 21.0f)) + 0.25f) + D_800D1A64[arg0];
         AUDIOCMD_CHANNEL_SET_FREQ_SCALE(0, arg0 + 2, freqScale);
 
-        if ((D_802C4920[arg0].unk_1D4 == 0.0f) && (D_802C4920[arg0].unk_1D8 == 0.0f)) {
+        if ((gRacers[arg0].unk_1D4 == 0.0f) && (gRacers[arg0].unk_1D8 == 0.0f)) {
             if (D_800D1A94[arg0] == 1) {
                 Vec3f vec;
                 f32 temp;
 
-                vec.x = D_802C4920[arg0].unk_0C.unk_34.x - D_800E5220[arg0].unk_50.x;
-                vec.y = D_802C4920[arg0].unk_0C.unk_34.y - D_800E5220[arg0].unk_50.y;
-                vec.z = D_802C4920[arg0].unk_0C.unk_34.z - D_800E5220[arg0].unk_50.z;
+                vec.x = gRacers[arg0].unk_0C.unk_34.x - D_800E5220[arg0].unk_50.x;
+                vec.y = gRacers[arg0].unk_0C.unk_34.y - D_800E5220[arg0].unk_50.y;
+                vec.z = gRacers[arg0].unk_0C.unk_34.z - D_800E5220[arg0].unk_50.z;
                 temp = sqrtf(SQ_SUM(&vec));
                 volumeScale = (-0.002f * temp + 1.2f) * 0.65f;
 
@@ -630,9 +630,9 @@ void func_800B899C(u8 arg0) {
             Vec3f vec;
             f32 temp;
 
-            vec.x = D_802C4920[arg0].unk_0C.unk_34.x - D_800E5220[arg0].unk_50.x;
-            vec.y = D_802C4920[arg0].unk_0C.unk_34.y - D_800E5220[arg0].unk_50.y;
-            vec.z = D_802C4920[arg0].unk_0C.unk_34.z - D_800E5220[arg0].unk_50.z;
+            vec.x = gRacers[arg0].unk_0C.unk_34.x - D_800E5220[arg0].unk_50.x;
+            vec.y = gRacers[arg0].unk_0C.unk_34.y - D_800E5220[arg0].unk_50.y;
+            vec.z = gRacers[arg0].unk_0C.unk_34.z - D_800E5220[arg0].unk_50.z;
             temp = sqrtf(SQ_SUM(&vec));
             volumeScale = -0.002f * temp + 1.2f;
 
@@ -680,8 +680,8 @@ void func_800B8DAC(u8 arg0) {
             case 5:
             case 15:
             case 25:
-                volumeScale = (D_802C4920[arg0].unk_98 * (1.0f / 45.0f)) + 0.5f;
-                if (D_802C4920[arg0].unk_98 < 0.1f) {
+                volumeScale = (gRacers[arg0].unk_98 * (1.0f / 45.0f)) + 0.5f;
+                if (gRacers[arg0].unk_98 < 0.1f) {
                     volumeScale = 0.0f;
                 }
                 if (volumeScale > 1.0f) {
@@ -695,8 +695,8 @@ void func_800B8DAC(u8 arg0) {
             case 11:
             case 21:
             case 31:
-                volumeScale = (D_802C4920[arg0].unk_98 * (1.0f / 45.0f)) + 0.5f;
-                if (D_802C4920[arg0].unk_98 < 0.1f) {
+                volumeScale = (gRacers[arg0].unk_98 * (1.0f / 45.0f)) + 0.5f;
+                if (gRacers[arg0].unk_98 < 0.1f) {
                     volumeScale = 0.0f;
                 }
                 if (volumeScale > 1.0f) {
@@ -711,7 +711,7 @@ void func_800B8DAC(u8 arg0) {
             case 18:
             case 28:
                 volumeScale = 0.8f;
-                freqScale = (D_802C4920[arg0].unk_98 * (1.0f / 30.0f)) - (8.0f / 10.0f);
+                freqScale = (gRacers[arg0].unk_98 * (1.0f / 30.0f)) - (8.0f / 10.0f);
                 if (freqScale > 2.5f) {
                     freqScale = 2.5f;
                 }
@@ -723,7 +723,7 @@ void func_800B8DAC(u8 arg0) {
             case 19:
             case 29:
                 volumeScale = 0.85f;
-                freqScale = D_802C4920[arg0].unk_98 * (1.0f / 20.0f);
+                freqScale = gRacers[arg0].unk_98 * (1.0f / 20.0f);
                 if (freqScale > 8.0f) {
                     freqScale = 8.0f;
                 }
@@ -734,9 +734,9 @@ void func_800B8DAC(u8 arg0) {
             case 6:
             case 16:
             case 26:
-                if (D_802C4920[arg0].unk_5C > 0.0f) {
-                    volumeScale = D_802C4920[arg0].unk_5C * (2.0f / 30.0f);
-                    freqScale = (D_802C4920[arg0].unk_5C * (1.0f / 80.0f)) + 1.0f;
+                if (gRacers[arg0].unk_5C > 0.0f) {
+                    volumeScale = gRacers[arg0].unk_5C * (2.0f / 30.0f);
+                    freqScale = (gRacers[arg0].unk_5C * (1.0f / 80.0f)) + 1.0f;
                     if (volumeScale > 1.0f) {
                         volumeScale = 1.0f;
                     }
@@ -750,8 +750,8 @@ void func_800B8DAC(u8 arg0) {
                         freqScale = 0.3f;
                     }
                 } else {
-                    volumeScale = -D_802C4920[arg0].unk_5C * (1.0f / 15.0f);
-                    freqScale = (-D_802C4920[arg0].unk_5C * (1.0f / 80.0f)) + 1.0f;
+                    volumeScale = -gRacers[arg0].unk_5C * (1.0f / 15.0f);
+                    freqScale = (-gRacers[arg0].unk_5C * (1.0f / 80.0f)) + 1.0f;
                     if (volumeScale > 1.0f) {
                         volumeScale = 1.0f;
                     }
