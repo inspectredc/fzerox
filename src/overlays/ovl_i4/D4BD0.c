@@ -1,4 +1,4 @@
-#include "common.h"
+#include "functions.h"
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_80115DF0.s")
 
@@ -12,7 +12,9 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_80116E10.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_80116E5C.s")
+s32 func_i4_80116E5C(s32 arg0) {
+    return arg0;
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_80116E64.s")
 
@@ -88,7 +90,7 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_80119B50.s")
 
-void func_i4_80119BB8(s32 arg0) {
+void func_i4_80119BB8(unk_800E3A28* arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_80119BC0.s")
@@ -97,7 +99,8 @@ void func_i4_80119BB8(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_80119D0C.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_80119D84.s")
+void func_i4_80119D84(unk_800E3A28* arg0) {
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_80119D8C.s")
 
@@ -111,7 +114,8 @@ void func_i4_80119BB8(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011A7B8.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011A860.s")
+void func_i4_8011A860(s32 arg0) {
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011A868.s")
 
