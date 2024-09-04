@@ -113,7 +113,7 @@
 extern s32 D_i3_801419B8;
 
 void func_i3_80128D8C(void) {
-    D_i3_801419B8 += 1;
+    D_i3_801419B8++;
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/func_i3_80128DA4.s")

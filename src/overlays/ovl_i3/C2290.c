@@ -54,10 +54,10 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/C2290/func_i3_80134548.s")
 
-extern s32 D_8010D768;
+extern s32 D_i2_8010D768;
 
 void func_i3_80134598(void) {
-    D_8010D768 = 0;
+    D_i2_8010D768 = 0;
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/C2290/func_i3_801345A4.s")
