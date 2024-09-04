@@ -2,7 +2,12 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115DF0.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115E1C.s")
+s32 func_i3_80115E1C(s32 arg0) {
+    if (arg0 < 0) {
+        return -arg0;
+    }
+    return arg0;
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115E34.s")
 
@@ -35,9 +40,11 @@ void func_i3_80117B04(s32 arg0, s32 arg1) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80117B88.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80117BD8.s")
+void func_i3_80117BD8(s32 arg0, s32 arg1) {
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80117BE4.s")
+void func_i3_80117BE4(s32 arg0, s32 arg1) {
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80117BF0.s")
 

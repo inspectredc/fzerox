@@ -61,6 +61,7 @@ leoSetTimer = 0x80411168; //segment:leo
 leoClr_reset = 0x80410AB8; //segment:leo
 
 D_i2_8010AE1C = 0x8010AE1C; //force_migration:True size:0x8 segment:ovl_i2
+D_i2_8010D768 = 0x8010D768;
 
 D_i3_80140F50 = 0x80140F50; //segment:ovl_i3 type:asciz
 D_i3_801417C4 = 0x801417C4; //force_migration:True size:0x8 segment:ovl_i3

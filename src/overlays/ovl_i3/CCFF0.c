@@ -2,7 +2,11 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/CCFF0/func_i3_80139D20.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/CCFF0/func_i3_80139FF4.s")
+extern s16 D_i3_80143782;
+
+void func_i3_80139FF4(void) {
+    D_i3_80143782 = 1;
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/CCFF0/func_i3_8013A004.s")
 
