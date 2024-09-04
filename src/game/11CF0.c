@@ -750,13 +750,13 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
             gfx = func_i4_8011B3E8(gfx);
             break;
         case 0x10:
-            gfx = func_i4_8011B438(gfx);
+            gfx = func_i4_8011B438(gfx, arg1);
             break;
         case 0x11:
             gfx = func_i4_8011B444(gfx);
             break;
         case 0x12:
-            gfx = func_i4_8011B668(gfx);
+            gfx = func_i4_8011B668(gfx, arg1);
             break;
         case 0x13:
             gfx = func_i4_8011B674(gfx);
