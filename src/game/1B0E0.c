@@ -2616,8 +2616,7 @@ void func_80089934(void) {
                 gRacers[i].unk_2C8 = (func_8006A978() & 0x1FFFF) % 30;
                 gRacers[i].unk_2CC = (func_8006A918() & 0x1FFFF) % 4;
                 for (j = 0; j < D_800CD000; j++) {
-                    if ((gRacers[i].unk_2C8 == gRacers[j].unk_2C8) &&
-                        (gRacers[i].unk_2CC == gRacers[j].unk_2CC)) {
+                    if ((gRacers[i].unk_2C8 == gRacers[j].unk_2C8) && (gRacers[i].unk_2CC == gRacers[j].unk_2CC)) {
                         break;
                     }
                 }
