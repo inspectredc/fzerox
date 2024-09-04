@@ -206,7 +206,8 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011B860.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011BAB8.s")
+void func_i6_8011BAB8(s32 arg0) {
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011BAC0.s")
 

@@ -24,7 +24,8 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80117A4C.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80117B04.s")
+void func_i3_80117B04(s32 arg0, s32 arg1) {
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80117B10.s")
 
