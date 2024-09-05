@@ -233,9 +233,15 @@ void func_i2_80100DDC(u8* arg0, s32 arg1, u16 arg2);
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/9BD00/func_i2_801034F8.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/9BD00/func_i2_8010356C.s")
+s32 func_i2_801034F8(s32, s32);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/9BD00/func_i2_8010358C.s")
+void func_i2_8010356C(s32 arg0) {
+    func_i2_801034F8(arg0, 0xE);
+}
+
+void func_i2_8010358C(s32 arg0) {
+    func_i2_801034F8(arg0 + 0x12, 0xE);
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/9BD00/func_i2_801035B0.s")
 

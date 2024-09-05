@@ -1,6 +1,10 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i5/DC550/func_i5_80115DF0.s")
+s32 func_i5_801161D8();
+
+void func_i5_80115DF0(void) {
+    func_i5_801161D8();
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i5/DC550/func_i5_80115E10.s")
 

@@ -12,7 +12,11 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i5/DCF90/func_i5_801175D0.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i5/DCF90/func_i5_80117664.s")
+void func_80079BC8();
+
+void func_i5_80117664(void) {
+    func_80079BC8();
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i5/DCF90/func_i5_80117684.s")
 
