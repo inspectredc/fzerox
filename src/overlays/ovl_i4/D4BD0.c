@@ -154,8 +154,8 @@ void func_i4_8011B1E4(void) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011B380.s")
 
-Gfx* func_i4_8011B3DC(Gfx* arg0, unk_800E3A28* arg1) {
-    return arg0;
+Gfx* func_i4_8011B3DC(Gfx* gfx, unk_800E3A28* arg1) {
+    return gfx;
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011B3E8.s")
