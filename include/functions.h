@@ -196,7 +196,7 @@ void func_i4_8011B1EC(void);
 void func_i4_8011B214(unk_800E3A28*);
 void func_i4_8011B2E0(unk_800E3A28*);
 Gfx* func_i4_8011B380(Gfx*);
-Gfx* func_i4_8011B3DC(Gfx*);
+Gfx* func_i4_8011B3DC(Gfx*,unk_800E3A28*);
 Gfx* func_i4_8011B3E8(Gfx*);
 Gfx* func_i4_8011B438(Gfx*,unk_800E3A28*);
 Gfx* func_i4_8011B444(Gfx*);

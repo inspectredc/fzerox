@@ -738,7 +738,7 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
             gfx = func_i4_8011B380(gfx);
             break;
         case 0xE:
-            gfx = func_i4_8011B3DC(gfx);
+            gfx = func_i4_8011B3DC(gfx, arg1);
             break;
         case 0xC:
             gfx = func_8007AF40(gfx, 118, 164, 203, 217, 255, 255, 255, 48);

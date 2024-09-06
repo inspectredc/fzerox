@@ -4,7 +4,11 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/DFF10/func_i6_80115FF0.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/DFF10/func_i6_801167CC.s")
+s32 func_80079BC8();
+
+void func_i6_801167CC(void) {
+    func_80079BC8();
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/DFF10/func_i6_801167EC.s")
 
