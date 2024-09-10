@@ -192,10 +192,7 @@ Gfx* func_8007B0A8(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
 #ifdef IMPORT_BSS
 extern s32 D_800CD3D0[];
 
-typedef struct unk9 {
-    u8 v0, v1, v2, v3, v4, v5, v6, v7, v8;
-} unk9;
-extern unk9 D_8010D730[];
+extern u8 D_8010D730[][9];
 static s32 D_800E4180[55];
 
 void func_8007D9D0(void) {
@@ -206,10 +203,10 @@ void func_8007D9D0(void) {
     }
 
     for (i = 24; i < 30; i++) {
-        if (D_8010D730[i - 24].v0 == 0) {
+        if (D_8010D730[i - 24][0] == 0) {
             D_800E4180[i] = D_800CD3D0[i];
         } else {
-            D_800E4180[i] = &D_8010D730[i - 24];
+            D_800E4180[i] = D_8010D730[i - 24];
         }
     }
 
@@ -231,19 +228,7 @@ extern s16 D_800E416C;
 extern u16 D_800E416E;
 extern u16 D_800E4170;
 
-typedef struct unk_8007DABC_arg_0 {
-    s8 unk_00[0x6E];
-    u8 unk_6E;
-    u8 unk_6F;
-    s8 unk_70[0xA];
-    u16 unk_7A;
-    u16 unk_7C;
-    s8 unk_7E[0x2];
-    s8 unk_80[0x2];
-    u16 unk_82;
-} unk_8007DABC_arg_0;
-
-void func_8007DABC(unk_8007DABC_arg_0* arg0) {
+void func_8007DABC(unk_800DCE98* arg0) {
     D_800E416E = arg0->unk_7C | (arg0->unk_6F << 4);
     if (arg0->unk_82 != 0) {
         D_800E4170 = arg0->unk_7A | (arg0->unk_6E << 4);
