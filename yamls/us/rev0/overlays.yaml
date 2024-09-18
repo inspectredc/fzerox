@@ -210,8 +210,8 @@
     symbol_name_format: i9_$VRAM
     subsegments:
       - [0xF2AC0, c]
-      - [0x145740, data]
-      - { start: 0x1459A0, type: bss, vram: 0x80168CD0, name: 80168CD0 }
+      - [0x145740, .data, F2AC0]
+      - { start: 0x1459A0, type: .bss, vram: 0x80168CD0, name: F2AC0 }
 
   - name: ovl_i10
     exclusive_ram_id: overlay
