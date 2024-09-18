@@ -1,11 +1,234 @@
 #include "global.h"
 
+s32 D_i9_80168CD0; // some unused bss exists in the file
+
 typedef Gfx* (*unk_i9_80168B20)(Gfx*, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
 typedef Gfx* (*unk_i9_80168BAC)(Gfx*, s32, s32, s32, s32, s32, s32);
 
-extern unk_i9_80168B20 D_i9_80168B20[][5];
-extern unk_i9_80168BAC D_i9_80168BAC[][5];
-extern unk_i9_80168BAC D_i9_80168C38[][5];
+extern u8 D_302BE38[];
+extern u8 D_302C638[];
+extern u8 D_302CE38[];
+extern u8 D_302D638[];
+extern u8 D_302DE38[];
+extern u8 D_302E638[];
+extern u8 D_302EE38[];
+extern u8 D_302F638[];
+extern u8 D_302FE38[];
+extern u8 D_302FEB8[];
+extern u8 D_302FF38[];
+extern u8 D_302FFB8[];
+extern u8 D_3030038[];
+extern u8 D_30302B8[];
+extern u8 D_30304B8[];
+extern u8 D_30306B8[];
+extern u8 D_30308B8[];
+extern u8 D_3030AB8[];
+extern u8 D_3030CB8[];
+extern u8 D_3030EB8[];
+extern u8 D_30310B8[];
+extern u8 D_30312B8[];
+extern u8 D_3016758[];
+extern u8 D_30293C8[];
+extern u8 D_3013ED8[];
+extern u8 D_3023158[];
+extern u8 D_301C898[];
+extern u8 D_3026E68[];
+extern u8 D_302A708[];
+extern u8 D_3018498[];
+extern u8 D_3021F78[];
+extern u8 D_30175D8[];
+extern u8 D_301DE58[];
+extern u8 D_301F128[];
+extern u8 D_3012CC8[];
+extern u8 D_3025BB8[];
+extern u8 D_301B5B8[];
+extern u8 D_302B7F8[];
+extern u8 D_3011578[];
+extern u8 D_30283C8[];
+extern u8 D_3015218[];
+extern u8 D_3024B78[];
+extern u8 D_301A068[];
+extern u8 D_30300B8[];
+
+TexturePtr D_i9_80168A70[] = {
+    D_302BE38, D_302C638, D_302CE38, D_302D638, D_302DE38, D_302E638, D_302EE38, D_302F638,
+};
+
+TexturePtr D_i9_80168A90[] = {
+    D_302FE38, D_302FEB8, D_302FF38, D_302FFB8, D_3030038,
+};
+
+TexturePtr D_i9_80168AA4[] = {
+    D_30302B8, D_30304B8, D_30306B8, D_30308B8, D_3030AB8, D_3030CB8, D_3030EB8, D_30310B8,
+    D_30312B8, D_3016758, D_30293C8, D_3013ED8, D_3023158, D_301C898, D_3026E68, D_302A708,
+    D_3018498, D_3021F78, D_30175D8, D_301DE58, D_301F128, D_3012CC8, D_3025BB8, D_301B5B8,
+    D_302B7F8, D_3011578, D_30283C8, D_3015218, D_3024B78, D_301A068, D_30300B8,
+};
+
+Gfx* func_i9_80119B6C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80119F20(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011A2C8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011A62C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011A8A8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011BF1C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011C398(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011C810(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011CBF0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011CF20(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011AAD0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011AFE8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011B47C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011B8E4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011BC3C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80116CF0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80117168(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_801174E4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_801177F4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80117A18(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80117BFC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_801180D0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80118494(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_801187D8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80118A3C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80118C74(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_801190F0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80119470(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_8011974C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80119980(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80115F38(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_801162D4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80116604(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_801168F8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+Gfx* func_i9_80116B48(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                      s32 arg9, s32 argA, s32 argB, s32 argC);
+
+unk_i9_80168B20 D_i9_80168B20[][5] = {
+    { func_i9_80119B6C, func_i9_80119F20, func_i9_8011A2C8, func_i9_8011A62C, func_i9_8011A8A8 },
+    { func_i9_8011BF1C, func_i9_8011C398, func_i9_8011C810, func_i9_8011CBF0, func_i9_8011CF20 },
+    { func_i9_8011AAD0, func_i9_8011AFE8, func_i9_8011B47C, func_i9_8011B8E4, func_i9_8011BC3C },
+    { func_i9_80116CF0, func_i9_80117168, func_i9_801174E4, func_i9_801177F4, func_i9_80117A18 },
+    { func_i9_80117BFC, func_i9_801180D0, func_i9_80118494, func_i9_801187D8, func_i9_80118A3C },
+    { func_i9_80118C74, func_i9_801190F0, func_i9_80119470, func_i9_8011974C, func_i9_80119980 },
+    { func_i9_80115F38, func_i9_801162D4, func_i9_80116604, func_i9_801168F8, func_i9_80116B48 },
+};
+
+Gfx* func_i9_8011D154(Gfx* gfx, s32 red1, s32 green1, s32 blue1, s32 red2, s32 green2, s32 blue2);
+Gfx* func_i9_8011D5EC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011DA60(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011DE24(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011E1A0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8012498C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80125030(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801255F8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80125AC4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80125E48(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80123384(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801238FC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80123E08(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801242E8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80124664(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011E40C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011E89C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011EC68(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011F02C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011F3F0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011F704(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011FACC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8011FEB0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80120298(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801205FC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80120910(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80120E14(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801212E8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801217BC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80121B68(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80121E60(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801223BC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8012290C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80122DDC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8012311C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+
+unk_i9_80168BAC D_i9_80168BAC[][5] = {
+    { func_i9_8011D154, func_i9_8011D5EC, func_i9_8011DA60, func_i9_8011DE24, func_i9_8011E1A0 },
+    { func_i9_8012498C, func_i9_80125030, func_i9_801255F8, func_i9_80125AC4, func_i9_80125E48 },
+    { func_i9_80123384, func_i9_801238FC, func_i9_80123E08, func_i9_801242E8, func_i9_80124664 },
+    { func_i9_8011E40C, func_i9_8011E89C, func_i9_8011EC68, func_i9_8011F02C, func_i9_8011F3F0 },
+    { func_i9_8011F704, func_i9_8011FACC, func_i9_8011FEB0, func_i9_80120298, func_i9_801205FC },
+    { func_i9_80120910, func_i9_80120E14, func_i9_801212E8, func_i9_801217BC, func_i9_80121B68 },
+    { func_i9_80121E60, func_i9_801223BC, func_i9_8012290C, func_i9_80122DDC, func_i9_8012311C },
+};
+
+Gfx* func_i9_80127F40(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801260FC(Gfx* gfx, s32 red, s32 green, s32 blue, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801261E0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801262C0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8012638C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801275CC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80127704(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80127808(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801278F0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80126440(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80126544(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80126648(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80126718(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80127A74(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80127C28(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80127D68(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80127E70(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801267E8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80126950(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80126AA4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80126BE4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80126CCC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80126D98(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80127044(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_8012720C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_801273A4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+Gfx* func_i9_80127508(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+
+unk_i9_80168BAC D_i9_80168C38[][5] = {
+    { func_i9_80127F40, func_i9_80127F40, func_i9_80127F40, func_i9_80127F40, func_i9_80127F40 },
+    { func_i9_801260FC, func_i9_801261E0, func_i9_801262C0, func_i9_8012638C, func_i9_8012638C },
+    { func_i9_801275CC, func_i9_80127704, func_i9_80127808, func_i9_801278F0, func_i9_801278F0 },
+    { func_i9_80126440, func_i9_80126544, func_i9_80126648, func_i9_80126718, func_i9_80126718 },
+    { func_i9_80127A74, func_i9_80127C28, func_i9_80127D68, func_i9_80127E70, func_i9_80127E70 },
+    { func_i9_801267E8, func_i9_80126950, func_i9_80126AA4, func_i9_80126BE4, func_i9_80126CCC },
+    { func_i9_80126D98, func_i9_80127044, func_i9_8012720C, func_i9_801273A4, func_i9_80127508 },
+};
 
 Gfx* func_i9_80115DF0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
                       s32 arg9, s32 argA, s32 argB, s32 argC, s32 argD, s32 argE, s32 argF, s32 arg10) {
@@ -5714,7 +5937,6 @@ Gfx* func_i9_8012F608(Gfx* gfx) {
     return gfx;
 }
 
-// #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8012F7BC.s")
 extern Vtx D_3005358[];
 extern Vtx D_30054E8[];
 extern Vtx D_3005568[];
@@ -10561,168 +10783,5735 @@ Gfx* func_i9_80145F34(Gfx* gfx) {
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014651C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80146A4C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80146DB8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80147074.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801479B8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014812C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80148778.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80148BF0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80148E3C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801495B8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80149CBC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014A31C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014A6D4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014A98C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014B174.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014B874.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014BE8C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014C32C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014C5D4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014CD1C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014D3A0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014D9A4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014DE64.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014E104.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014E8E0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014EFAC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014F580.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014FA30.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8014FCC0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80150414.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80150AEC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801511A8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015156C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801517FC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80151FE0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801526BC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80152CA8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801531A4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80153538.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80153BD4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80154234.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015483C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80154CE4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80154F14.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801556FC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80155EB8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801564E8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801569C8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80156CAC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80157390.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80157A50.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015805C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801584F0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80158800.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80158EEC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801595B0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80159BE0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80159F7C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015A1B4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015AAE8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015B1F4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015B7E8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015BC90.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015BF44.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015C634.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015CD18.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015D344.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015D814.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015DA94.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015E268.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015E910.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015EE84.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015F214.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015F46C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8015FC70.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80160314.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801608D8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80160D90.s")
-
-extern u16 D_3006178[];
-extern u16 D_3006A78[];
-extern u16 D_3008A18[];
-extern void* D_i9_80168A70[];
-extern void* D_i9_80168A90[];
-extern void* D_i9_80168AA4[];
+extern Vtx D_701CE18[];
+extern Vtx D_701CED8[];
+extern Vtx D_701D088[];
+extern Vtx D_701D128[];
+extern Vtx D_701D168[];
+extern Vtx D_701D268[];
+
+Gfx* func_i9_8014651C(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_701CED8, 27, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 4, 0);
+    gSP2Triangles(gfx++, 3, 4, 5, 0, 5, 4, 6, 0);
+    gSP2Triangles(gfx++, 4, 7, 6, 0, 8, 9, 10, 0);
+    gSP2Triangles(gfx++, 11, 4, 1, 0, 7, 4, 11, 0);
+    gSP2Triangles(gfx++, 12, 7, 11, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 15, 14, 16, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 14, 22, 0);
+    gSP2Triangles(gfx++, 21, 16, 14, 0, 14, 23, 24, 0);
+    gSP2Triangles(gfx++, 22, 14, 24, 0, 13, 25, 26, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_701D128, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_701D168, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 11, 13, 14, 0, 0, 15, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_701CE18, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
+    gSP2Triangles(gfx++, 1, 4, 2, 0, 3, 5, 4, 0);
+    gSP2Triangles(gfx++, 2, 4, 6, 0, 2, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_701D088, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_701D268, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+
+    return gfx;
+}
+
+extern Vtx D_701D3A8[];
+extern Vtx D_701D548[];
+extern Vtx D_701D5E8[];
+extern Vtx D_701D628[];
+extern Vtx D_701D6E8[];
+
+Gfx* func_i9_80146A4C(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_701D3A8, 26, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 4, 7, 8, 0);
+    gSP2Triangles(gfx++, 5, 4, 8, 0, 9, 7, 10, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 11, 15, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 16, 15, 17, 0);
+    gSP2Triangles(gfx++, 15, 18, 17, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 15, 12, 0, 18, 15, 22, 0);
+    gSP2Triangles(gfx++, 23, 18, 22, 0, 9, 4, 24, 0);
+    gSP2Triangles(gfx++, 24, 4, 6, 0, 24, 6, 25, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_701D5E8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_701D628, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_701D548, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_701D6E8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 0, 7, 1, 0);
+
+    return gfx;
+}
+
+extern Vtx D_701D768[];
+extern Vtx D_701D838[];
+extern Vtx D_701D8D8[];
+extern Vtx D_701D918[];
+extern Vtx D_701D9D8[];
+
+Gfx* func_i9_80146DB8(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_701D768, 13, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 3, 4, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 9, 11, 0, 1, 0, 12, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_701D8D8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_701D918, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_701D838, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_701D9D8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    return gfx;
+}
+
+extern Vtx D_30192D8[];
+extern Vtx D_3019378[];
+extern Vtx D_30193D8[];
+extern Vtx D_3019498[];
+extern Vtx D_3019518[];
+extern Vtx D_3019918[];
+extern Vtx D_3019D18[];
+extern Vtx D_3019D58[];
+extern Vtx D_3019E98[];
+
+Gfx* func_i9_80147074(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_30193D8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 5, 4, 0, 8, 9, 5, 0);
+    gSP2Triangles(gfx++, 10, 11, 1, 0, 11, 2, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_3019498, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 7, 0, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_3019D58, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 7, 9, 0);
+    gSP2Triangles(gfx++, 12, 14, 10, 0, 4, 6, 15, 0);
+    gSP2Triangles(gfx++, 10, 16, 11, 0, 16, 17, 11, 0);
+    gSP2Triangles(gfx++, 3, 18, 0, 0, 3, 19, 18, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_3019518, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 9, 11, 12, 0);
+    gSP2Triangles(gfx++, 9, 12, 10, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 19, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 23, 26, 24, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 27, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 32, 34, 33, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 35, 37, 38, 0, 39, 40, 41, 0);
+    gSP2Triangles(gfx++, 39, 41, 42, 0, 39, 43, 40, 0);
+    gSP2Triangles(gfx++, 44, 45, 43, 0, 44, 43, 39, 0);
+    gSP2Triangles(gfx++, 46, 47, 48, 0, 46, 48, 44, 0);
+    gSP2Triangles(gfx++, 48, 45, 44, 0, 49, 50, 51, 0);
+    gSP2Triangles(gfx++, 49, 51, 52, 0, 53, 54, 55, 0);
+    gSP2Triangles(gfx++, 54, 56, 55, 0, 56, 57, 58, 0);
+    gSP2Triangles(gfx++, 56, 58, 55, 0, 59, 12, 11, 0);
+    gSP2Triangles(gfx++, 59, 11, 60, 0, 61, 62, 63, 0);
+    gSPVertex(gfx++, D_3019918, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 3, 4, 2, 0, 5, 6, 7, 0);
+    gSP2Triangles(gfx++, 5, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 21, 23, 0);
+    gSP2Triangles(gfx++, 27, 23, 28, 0, 26, 25, 29, 0);
+    gSP2Triangles(gfx++, 26, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 31, 33, 34, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 35, 37, 38, 0, 39, 40, 41, 0);
+    gSP2Triangles(gfx++, 39, 41, 42, 0, 43, 44, 45, 0);
+    gSP2Triangles(gfx++, 43, 45, 46, 0, 47, 48, 49, 0);
+    gSP2Triangles(gfx++, 50, 51, 52, 0, 53, 54, 39, 0);
+    gSP2Triangles(gfx++, 54, 40, 39, 0, 44, 55, 56, 0);
+    gSP2Triangles(gfx++, 44, 43, 55, 0, 57, 58, 59, 0);
+    gSP2Triangles(gfx++, 60, 61, 58, 0, 50, 62, 63, 0);
+    gSPVertex(gfx++, D_3019D18, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_30192D8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3019378, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 0, 3, 4, 0, 0, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_3019E98, 21, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 1, 7, 2, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 12, 14, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 19, 17, 0);
+    gSP2Triangles(gfx++, 9, 11, 20, 0, 9, 20, 12, 0);
+
+    return gfx;
+}
+
+extern Vtx D_701DA18[];
+extern Vtx D_701DAB8[];
+extern Vtx D_701DB18[];
+extern Vtx D_701DBB8[];
+extern Vtx D_701DC38[];
+extern Vtx D_701E038[];
+extern Vtx D_701E358[];
+extern Vtx D_701E498[];
+
+Gfx* func_i9_801479B8(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_701DB18, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 4, 3, 0, 6, 7, 4, 0);
+    gSP2Triangles(gfx++, 8, 9, 1, 0, 9, 2, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_701DBB8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 7, 0, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_701E358, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 0, 7, 1, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 8, 10, 0, 13, 15, 11, 0);
+    gSP2Triangles(gfx++, 11, 16, 12, 0, 16, 17, 12, 0);
+    gSP2Triangles(gfx++, 6, 18, 3, 0, 6, 19, 18, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_701DC38, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 21, 24, 22, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 25, 27, 28, 0, 29, 30, 31, 0);
+    gSP2Triangles(gfx++, 30, 32, 31, 0, 33, 34, 35, 0);
+    gSP2Triangles(gfx++, 33, 35, 36, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 37, 39, 40, 0, 37, 41, 38, 0);
+    gSP2Triangles(gfx++, 42, 43, 37, 0, 44, 45, 46, 0);
+    gSP2Triangles(gfx++, 44, 46, 42, 0, 46, 47, 42, 0);
+    gSP2Triangles(gfx++, 48, 49, 50, 0, 48, 50, 51, 0);
+    gSP2Triangles(gfx++, 52, 53, 54, 0, 55, 56, 57, 0);
+    gSP2Triangles(gfx++, 55, 57, 54, 0, 58, 59, 60, 0);
+    gSP1Triangle(gfx++, 61, 62, 63, 0);
+    gSPVertex(gfx++, D_701E038, 50, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 2, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 8, 9, 10, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 23, 24, 25, 0, 26, 27, 28, 0);
+    gSP2Triangles(gfx++, 29, 30, 31, 0, 32, 33, 34, 0);
+    gSP2Triangles(gfx++, 35, 36, 23, 0, 36, 24, 23, 0);
+    gSP2Triangles(gfx++, 27, 37, 38, 0, 27, 26, 37, 0);
+    gSP2Triangles(gfx++, 39, 40, 41, 0, 42, 43, 40, 0);
+    gSP2Triangles(gfx++, 32, 44, 45, 0, 46, 47, 48, 0);
+    gSP1Triangle(gfx++, 46, 48, 49, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_701DA18, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_701DAB8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 0, 3, 4, 0, 0, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_701E498, 21, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 8, 10, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 5, 7, 15, 0);
+    gSP2Triangles(gfx++, 5, 15, 8, 0, 12, 16, 13, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 17, 19, 20, 0);
+
+    return gfx;
+}
+
+extern Vtx D_701E5E8[];
+extern Vtx D_701E688[];
+extern Vtx D_701E6E8[];
+extern Vtx D_701E788[];
+extern Vtx D_701E808[];
+extern Vtx D_701EC08[];
+extern Vtx D_701EDA8[];
+extern Vtx D_701EF08[];
+
+Gfx* func_i9_8014812C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_701E6E8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 4, 3, 0, 6, 7, 4, 0);
+    gSP2Triangles(gfx++, 8, 9, 1, 0, 9, 2, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_701E788, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 7, 0, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_701EDA8, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 14, 13, 19, 0);
+    gSP2Triangles(gfx++, 19, 20, 14, 0, 5, 21, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_701E808, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 20, 18, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 25, 27, 26, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 32, 34, 35, 0);
+    gSP2Triangles(gfx++, 32, 36, 33, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 37, 39, 40, 0, 39, 41, 42, 0);
+    gSP2Triangles(gfx++, 43, 44, 45, 0, 43, 45, 46, 0);
+    gSP2Triangles(gfx++, 47, 48, 49, 0, 50, 51, 49, 0);
+    gSP2Triangles(gfx++, 52, 48, 53, 0, 54, 55, 56, 0);
+    gSP2Triangles(gfx++, 52, 57, 58, 0, 59, 49, 60, 0);
+    gSP2Triangles(gfx++, 58, 61, 62, 0, 34, 33, 63, 0);
+    gSPVertex(gfx++, D_701EC08, 26, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 16, 0, 12, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 22, 24, 25, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_701E5E8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_701E688, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 0, 3, 4, 0, 0, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_701EF08, 17, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 12, 13, 14, 0);
+    gSP2Triangles(gfx++, 12, 14, 15, 0, 16, 7, 6, 0);
+
+    return gfx;
+}
+
+extern Vtx D_701F018[];
+extern Vtx D_701F0B8[];
+extern Vtx D_701F138[];
+extern Vtx D_701F378[];
+extern Vtx D_701F618[];
+
+Gfx* func_i9_80148778(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_701F0B8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 4, 3, 0, 7, 2, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_701F378, 42, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 0, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 21, 23, 22, 0, 13, 24, 14, 0);
+    gSP2Triangles(gfx++, 25, 26, 9, 0, 25, 27, 26, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 10, 9, 34, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 35, 37, 38, 0, 25, 9, 20, 0);
+    gSP2Triangles(gfx++, 25, 20, 22, 0, 39, 40, 41, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_701F138, 36, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 5, 7, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 12, 13, 14, 0);
+    gSP2Triangles(gfx++, 15, 16, 17, 0, 18, 19, 20, 0);
+    gSP2Triangles(gfx++, 21, 22, 23, 0, 24, 25, 26, 0);
+    gSP2Triangles(gfx++, 24, 26, 27, 0, 28, 29, 30, 0);
+    gSP2Triangles(gfx++, 31, 32, 29, 0, 33, 34, 35, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_701F018, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_701F618, 7, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 1, 3, 0);
+    gSP2Triangles(gfx++, 2, 3, 4, 0, 4, 5, 6, 0);
+
+    return gfx;
+}
+
+extern Vtx D_701F688[];
+extern Vtx D_701F6F8[];
+extern Vtx D_701F758[];
+extern Vtx D_701F8D8[];
+
+Gfx* func_i9_80148BF0(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_701F6F8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_701F8D8, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 8, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 15, 14, 20, 0);
+    gSP1Triangle(gfx++, 21, 9, 8, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_701F758, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_701F688, 7, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 0, 0, 4, 0, 5, 0);
+
+    return gfx;
+}
+
+extern Vtx D_301A728[];
+extern Vtx D_301A7F8[];
+extern Vtx D_301A8D8[];
+extern Vtx D_301AAC8[];
+extern Vtx D_301AEA8[];
+extern Vtx D_301AF48[];
+extern Vtx D_301B008[];
+
+Gfx* func_i9_80148E3C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 50, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_301AF48, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 1, 6, 2, 0, 7, 6, 1, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 10, 9, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_301A8D8, 31, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 4, 0);
+    gSP2Triangles(gfx++, 0, 4, 1, 0, 3, 5, 4, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 10, 16, 14, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 23, 25, 26, 0, 27, 28, 29, 0);
+    gSP1Triangle(gfx++, 27, 30, 28, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_301B008, 27, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 0, 0, 4, 0, 6, 0);
+    gSP2Triangles(gfx++, 7, 8, 9, 0, 7, 10, 8, 0);
+    gSP2Triangles(gfx++, 11, 12, 7, 0, 11, 7, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 8, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 14, 17, 0, 19, 18, 17, 0);
+    gSP2Triangles(gfx++, 4, 6, 20, 0, 21, 22, 20, 0);
+    gSP2Triangles(gfx++, 21, 20, 23, 0, 21, 23, 24, 0);
+    gSP2Triangles(gfx++, 19, 25, 18, 0, 23, 26, 24, 0);
+    gSP2Triangles(gfx++, 22, 4, 20, 0, 14, 8, 16, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_301AAC8, 62, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 30, 31, 18, 0, 30, 18, 23, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 32, 34, 22, 0);
+    gSP2Triangles(gfx++, 35, 36, 37, 0, 26, 25, 38, 0);
+    gSP2Triangles(gfx++, 39, 40, 41, 0, 42, 43, 44, 0);
+    gSP2Triangles(gfx++, 42, 44, 45, 0, 46, 47, 48, 0);
+    gSP2Triangles(gfx++, 49, 50, 51, 0, 52, 16, 22, 0);
+    gSP2Triangles(gfx++, 53, 54, 55, 0, 53, 55, 14, 0);
+    gSP2Triangles(gfx++, 26, 38, 56, 0, 57, 58, 13, 0);
+    gSP2Triangles(gfx++, 57, 13, 16, 0, 19, 13, 59, 0);
+    gSP2Triangles(gfx++, 60, 1, 0, 0, 61, 60, 0, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_301A728, 13, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
+    gSP2Triangles(gfx++, 1, 4, 2, 0, 3, 5, 4, 0);
+    gSP2Triangles(gfx++, 2, 4, 6, 0, 2, 6, 7, 0);
+    gSP2Triangles(gfx++, 7, 6, 8, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 9, 8, 10, 0, 8, 11, 10, 0);
+    gSP1Triangle(gfx++, 9, 10, 12, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_301A7F8, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_301AEA8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_701FA38[];
+extern Vtx D_701FAF8[];
+extern Vtx D_701FB98[];
+extern Vtx D_701FCF8[];
+extern Vtx D_70200F8[];
+extern Vtx D_7020158[];
+extern Vtx D_70201F8[];
+extern Vtx D_70202B8[];
+
+Gfx* func_i9_801495B8(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 50, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_70201F8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 1, 6, 2, 0, 7, 6, 1, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 10, 9, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_701FB98, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 21, 19, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_70202B8, 27, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 10, 8, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 8, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 14, 17, 0, 19, 18, 17, 0);
+    gSP2Triangles(gfx++, 3, 6, 20, 0, 21, 22, 20, 0);
+    gSP2Triangles(gfx++, 21, 20, 23, 0, 21, 23, 24, 0);
+    gSP2Triangles(gfx++, 19, 25, 18, 0, 23, 26, 24, 0);
+    gSP2Triangles(gfx++, 22, 3, 20, 0, 14, 8, 16, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_701FCF8, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 2, 1, 14, 0, 2, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 16, 18, 0);
+    gSP2Triangles(gfx++, 18, 17, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 24, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 38, 39, 40, 0, 41, 42, 43, 0);
+    gSP2Triangles(gfx++, 44, 45, 46, 0, 47, 48, 49, 0);
+    gSP2Triangles(gfx++, 50, 51, 52, 0, 53, 54, 55, 0);
+    gSP2Triangles(gfx++, 56, 51, 57, 0, 58, 59, 60, 0);
+    gSP2Triangles(gfx++, 58, 60, 61, 0, 62, 54, 63, 0);
+    gSPVertex(gfx++, D_70200F8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_701FA38, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 7, 6, 8, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 9, 8, 10, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_701FAF8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7020158, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7020468[];
+extern Vtx D_70204F8[];
+extern Vtx D_7020598[];
+extern Vtx D_70206F8[];
+extern Vtx D_7020A28[];
+extern Vtx D_7020AB8[];
+extern Vtx D_7020B98[];
+
+Gfx* func_i9_80149CBC(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 50, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7020AB8, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 7, 1, 12, 0, 4, 13, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7020598, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 0, 7, 1, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 21, 19, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7020B98, 23, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 6, 8, 0, 12, 13, 14, 0);
+    gSP2Triangles(gfx++, 15, 12, 14, 0, 16, 15, 17, 0);
+    gSP2Triangles(gfx++, 3, 5, 18, 0, 19, 20, 18, 0);
+    gSP2Triangles(gfx++, 19, 18, 21, 0, 19, 21, 22, 0);
+    gSP2Triangles(gfx++, 20, 3, 18, 0, 12, 8, 13, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_70206F8, 51, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 3, 4, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 8, 9, 10, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 14, 16, 17, 0, 18, 19, 20, 0);
+    gSP2Triangles(gfx++, 18, 20, 21, 0, 22, 23, 24, 0);
+    gSP2Triangles(gfx++, 25, 26, 27, 0, 28, 20, 29, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 33, 26, 34, 0);
+    gSP2Triangles(gfx++, 35, 34, 36, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 12, 0, 40, 12, 42, 0);
+    gSP2Triangles(gfx++, 20, 12, 43, 0, 44, 45, 46, 0);
+    gSP2Triangles(gfx++, 47, 48, 49, 0, 47, 49, 50, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7020468, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 6, 5, 7, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_70204F8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7020A28, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7020D08[];
+extern Vtx D_7020DA8[];
+extern Vtx D_7020E68[];
+extern Vtx D_7021088[];
+extern Vtx D_70210B8[];
+
+Gfx* func_i9_8014A31C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    //! @bug This seems intended to be tile 2
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7020DA8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 0, 7, 1, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_70210B8, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 4, 0);
+    gSP2Triangles(gfx++, 5, 0, 4, 0, 6, 5, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 10, 0);
+    gSP2Triangles(gfx++, 11, 10, 13, 0, 14, 13, 15, 0);
+    gSP2Triangles(gfx++, 12, 8, 10, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 16, 2, 1, 0, 9, 8, 17, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7020E68, 34, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 1, 0, 22, 23, 24, 0);
+    gSP2Triangles(gfx++, 25, 26, 27, 0, 28, 29, 30, 0);
+    gSP2Triangles(gfx++, 28, 30, 31, 0, 26, 32, 33, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7020D08, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7021088, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    return gfx;
+}
+
+extern Vtx D_70211D8[];
+extern Vtx D_7021238[];
+extern Vtx D_7021268[];
+extern Vtx D_7021308[];
+extern Vtx D_7021338[];
+
+Gfx* func_i9_8014A6D4(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7021238, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7021338, 13, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 4, 8, 5, 0, 1, 9, 2, 0);
+    gSP2Triangles(gfx++, 10, 11, 1, 0, 5, 8, 12, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7021268, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 1, 0, 8, 7, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_70211D8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7021308, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    return gfx;
+}
+
+extern Vtx D_301BBF8[];
+extern Vtx D_301BC78[];
+extern Vtx D_301BCB8[];
+extern Vtx D_301BE48[];
+extern Vtx D_301BEE8[];
+extern Vtx D_301C2E8[];
+extern Vtx D_301C538[];
+extern Vtx D_301C638[];
+
+Gfx* func_i9_8014A98C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_301BCB8, 25, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 3, 5, 0, 6, 7, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 9, 12, 10, 0);
+    gSP2Triangles(gfx++, 13, 14, 15, 0, 14, 16, 15, 0);
+    gSP2Triangles(gfx++, 1, 17, 18, 0, 1, 19, 17, 0);
+    gSP2Triangles(gfx++, 20, 5, 21, 0, 20, 8, 5, 0);
+    gSP2Triangles(gfx++, 1, 18, 22, 0, 23, 22, 24, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_301C638, 30, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 0, 4, 5, 0, 6, 7, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 11, 10, 12, 0);
+    gSP2Triangles(gfx++, 8, 7, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 14, 16, 17, 0, 18, 19, 20, 0);
+    gSP2Triangles(gfx++, 18, 20, 21, 0, 0, 5, 1, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 22, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 26, 28, 29, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_301BE48, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_301BEE8, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 2, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 20, 22, 23, 0, 24, 7, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 26, 28, 29, 0);
+    gSP2Triangles(gfx++, 8, 7, 24, 0, 30, 31, 32, 0);
+    gSP2Triangles(gfx++, 33, 34, 35, 0, 33, 35, 36, 0);
+    gSP2Triangles(gfx++, 32, 31, 37, 0, 38, 39, 40, 0);
+    gSP2Triangles(gfx++, 37, 31, 41, 0, 42, 39, 38, 0);
+    gSP2Triangles(gfx++, 17, 43, 44, 0, 42, 38, 45, 0);
+    gSP2Triangles(gfx++, 5, 46, 47, 0, 48, 49, 50, 0);
+    gSP2Triangles(gfx++, 49, 51, 50, 0, 52, 53, 54, 0);
+    gSP2Triangles(gfx++, 53, 55, 54, 0, 56, 57, 58, 0);
+    gSP2Triangles(gfx++, 56, 58, 59, 0, 60, 61, 62, 0);
+    gSP1Triangle(gfx++, 60, 62, 63, 0);
+    gSPVertex(gfx++, D_301C2E8, 37, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 2, 0, 8, 2, 1, 0);
+    gSP2Triangles(gfx++, 5, 10, 11, 0, 5, 11, 6, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 26, 28, 29, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 33, 34, 35, 0);
+    gSP1Triangle(gfx++, 33, 35, 36, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_301BBF8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 6, 3, 2, 0, 6, 2, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_301BC78, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_301C538, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7021408[];
+extern Vtx D_7021488[];
+extern Vtx D_70214C8[];
+extern Vtx D_7021638[];
+extern Vtx D_70216D8[];
+extern Vtx D_7021AD8[];
+extern Vtx D_7021C58[];
+extern Vtx D_7021D38[];
+
+Gfx* func_i9_8014B174(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_70214C8, 23, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 3, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 1, 16, 17, 0, 1, 18, 16, 0);
+    gSP2Triangles(gfx++, 19, 5, 20, 0, 19, 21, 5, 0);
+    gSP2Triangles(gfx++, 1, 17, 22, 0, 1, 22, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7021D38, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 4, 16, 5, 0, 4, 17, 16, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7021638, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_70216D8, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 8, 11, 0, 11, 8, 12, 0);
+    gSP2Triangles(gfx++, 13, 14, 15, 0, 13, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 23, 24, 25, 0, 26, 27, 28, 0);
+    gSP2Triangles(gfx++, 29, 27, 30, 0, 28, 27, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 36, 38, 37, 0, 39, 40, 41, 0);
+    gSP2Triangles(gfx++, 40, 42, 41, 0, 43, 44, 45, 0);
+    gSP2Triangles(gfx++, 43, 45, 46, 0, 47, 48, 49, 0);
+    gSP2Triangles(gfx++, 47, 49, 50, 0, 51, 52, 53, 0);
+    gSP2Triangles(gfx++, 51, 53, 54, 0, 55, 56, 57, 0);
+    gSP2Triangles(gfx++, 55, 57, 58, 0, 59, 60, 53, 0);
+    gSP2Triangles(gfx++, 59, 53, 52, 0, 56, 61, 62, 0);
+    gSP2Triangles(gfx++, 56, 62, 57, 0, 49, 48, 63, 0);
+    gSPVertex(gfx++, D_7021AD8, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7021408, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 6, 3, 2, 0, 6, 2, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7021488, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7021C58, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7021E98[];
+extern Vtx D_7021F18[];
+extern Vtx D_7021F58[];
+extern Vtx D_7021FD8[];
+extern Vtx D_7022078[];
+extern Vtx D_7022478[];
+extern Vtx D_70224E8[];
+extern Vtx D_70225C8[];
+
+Gfx* func_i9_8014B874(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7021F58, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 0, 2, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_70225C8, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 12, 14, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7021FD8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7022078, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 3, 4, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 5, 7, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 12, 10, 13, 0);
+    gSP2Triangles(gfx++, 11, 10, 12, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 23, 24, 25, 0, 26, 27, 28, 0);
+    gSP2Triangles(gfx++, 26, 28, 29, 0, 30, 31, 32, 0);
+    gSP2Triangles(gfx++, 31, 33, 32, 0, 34, 35, 36, 0);
+    gSP2Triangles(gfx++, 35, 37, 36, 0, 38, 39, 40, 0);
+    gSP2Triangles(gfx++, 38, 40, 41, 0, 42, 43, 44, 0);
+    gSP2Triangles(gfx++, 42, 44, 45, 0, 46, 47, 48, 0);
+    gSP2Triangles(gfx++, 46, 48, 49, 0, 50, 51, 52, 0);
+    gSP2Triangles(gfx++, 50, 52, 53, 0, 54, 55, 56, 0);
+    gSP2Triangles(gfx++, 57, 58, 59, 0, 60, 61, 62, 0);
+    gSP1Triangle(gfx++, 61, 63, 62, 0);
+    gSPVertex(gfx++, D_7022478, 7, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 4, 6, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7021E98, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 5, 3, 2, 0, 5, 2, 6, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7021F18, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_70224E8, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7022708[];
+extern Vtx D_7022748[];
+extern Vtx D_70227C8[];
+extern Vtx D_7022868[];
+extern Vtx D_7022C08[];
+extern Vtx D_7022C48[];
+
+Gfx* func_i9_8014BE8C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7022748, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7022C48, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_70227C8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7022868, 58, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 15, 11, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 22, 25, 0, 23, 22, 24, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 29, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 33, 35, 34, 0);
+    gSP2Triangles(gfx++, 36, 37, 38, 0, 37, 39, 38, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 43, 44, 45, 0);
+    gSP2Triangles(gfx++, 46, 47, 48, 0, 49, 50, 51, 0);
+    gSP2Triangles(gfx++, 52, 53, 54, 0, 55, 56, 57, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7022708, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7022C08, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7022D08[];
+extern Vtx D_7022DB8[];
+extern Vtx D_7022FB8[];
+extern Vtx D_7022FF8[];
+
+Gfx* func_i9_8014C32C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7022D08, 11, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 2, 0, 6, 7, 8, 0);
+    gSP2Triangles(gfx++, 6, 9, 7, 0, 9, 10, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7022FF8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 2, 0);
+    gSP2Triangles(gfx++, 0, 2, 3, 0, 4, 5, 6, 0);
+    gSP1Triangle(gfx++, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7022DB8, 32, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 16, 18, 17, 0, 0, 2, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 29, 30, 31, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7022FB8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP1Triangle(gfx++, 0, 3, 0, 0);
+
+    return gfx;
+}
+
+extern Vtx D_301CED8[];
+extern Vtx D_301D298[];
+extern Vtx D_301D338[];
+extern Vtx D_301D598[];
+extern Vtx D_301D6B8[];
+extern Vtx D_301D808[];
+extern Vtx D_301D928[];
+
+Gfx* func_i9_8014C5D4(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_301D338, 38, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 6, 8, 0);
+    gSP2Triangles(gfx++, 7, 8, 9, 0, 10, 11, 12, 0);
+    gSP2Triangles(gfx++, 13, 14, 15, 0, 16, 17, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 24, 0);
+    gSP2Triangles(gfx++, 22, 24, 25, 0, 26, 25, 27, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 20, 29, 21, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 30, 32, 33, 0);
+    gSP2Triangles(gfx++, 10, 34, 11, 0, 18, 35, 16, 0);
+    gSP1Triangle(gfx++, 2, 36, 37, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_301D598, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 1, 0, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 4, 0);
+    gSP2Triangles(gfx++, 8, 5, 4, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 0, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_301D928, 19, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 6, 11, 12, 0);
+    gSP2Triangles(gfx++, 8, 13, 9, 0, 14, 15, 16, 0);
+    gSP1Triangle(gfx++, 17, 18, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_301CED8, 60, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 0, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 5, 7, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 15, 17, 16, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 18, 0);
+    gSP2Triangles(gfx++, 23, 22, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 27, 28, 29, 0, 30, 28, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 35, 36, 32, 0);
+    gSP2Triangles(gfx++, 37, 36, 38, 0, 39, 40, 41, 0);
+    gSP2Triangles(gfx++, 41, 22, 42, 0, 43, 22, 44, 0);
+    gSP2Triangles(gfx++, 45, 46, 47, 0, 46, 48, 47, 0);
+    gSP2Triangles(gfx++, 49, 50, 51, 0, 52, 49, 51, 0);
+    gSP2Triangles(gfx++, 53, 54, 55, 0, 4, 56, 57, 0);
+    gSP1Triangle(gfx++, 11, 58, 59, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_301D298, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 1, 4, 5, 0, 1, 5, 2, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_301D6B8, 21, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP1Triangle(gfx++, 17, 19, 20, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_301D808, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 6, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 12, 13, 14, 0);
+    gSP2Triangles(gfx++, 12, 14, 15, 0, 10, 16, 17, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7023078[];
+extern Vtx D_7023308[];
+extern Vtx D_70233A8[];
+extern Vtx D_70235C8[];
+extern Vtx D_70236C8[];
+extern Vtx D_7023818[];
+extern Vtx D_7023938[];
+
+Gfx* func_i9_8014CD1C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_70233A8, 34, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 11, 13, 12, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 17, 15, 0);
+    gSP2Triangles(gfx++, 18, 16, 19, 0, 18, 19, 20, 0);
+    gSP2Triangles(gfx++, 21, 22, 23, 0, 24, 25, 26, 0);
+    gSP2Triangles(gfx++, 9, 27, 28, 0, 26, 25, 29, 0);
+    gSP2Triangles(gfx++, 21, 23, 30, 0, 31, 32, 1, 0);
+    gSP1Triangle(gfx++, 32, 33, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_70235C8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 13, 15, 14, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7023938, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 4, 10, 11, 0, 12, 13, 14, 0);
+    gSP1Triangle(gfx++, 13, 15, 14, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7023078, 41, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 0, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 5, 7, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 24, 0);
+    gSP2Triangles(gfx++, 25, 26, 22, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 29, 30, 31, 0, 32, 30, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 4, 37, 38, 0);
+    gSP1Triangle(gfx++, 11, 39, 40, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7023308, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 1, 4, 5, 0, 1, 5, 2, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_70236C8, 21, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 11, 13, 14, 0, 15, 16, 17, 0);
+    gSP1Triangle(gfx++, 18, 19, 20, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7023818, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 2, 7, 0, 4, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7023A38[];
+extern Vtx D_7023C48[];
+extern Vtx D_7023D08[];
+extern Vtx D_7023EC8[];
+extern Vtx D_7023FB8[];
+extern Vtx D_70240A8[];
+extern Vtx D_70241C8[];
+
+Gfx* func_i9_8014D3A0(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7023D08, 28, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 16, 14, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 18, 20, 19, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 21, 24, 22, 0, 25, 26, 27, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7023EC8, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP1Triangle(gfx++, 12, 14, 13, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_70241C8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 7, 0, 2, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 9, 0);
+    gSP1Triangle(gfx++, 13, 14, 15, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7023A38, 33, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 0, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 5, 7, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 4, 29, 30, 0);
+    gSP1Triangle(gfx++, 11, 31, 32, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7023C48, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 0, 3, 0, 10, 3, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7023FB8, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP1Triangle(gfx++, 12, 13, 14, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_70240A8, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 9, 11, 0, 12, 0, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+
+    return gfx;
+}
+
+extern Vtx D_70242C8[];
+extern Vtx D_7024468[];
+extern Vtx D_70245A8[];
+extern Vtx D_7024668[];
+extern Vtx D_7024758[];
+extern Vtx D_7024828[];
+
+Gfx* func_i9_8014D9A4(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7024468, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 12, 10, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 0, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_70245A8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7024828, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_70242C8, 26, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 0, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 8, 9, 10, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 4, 22, 23, 0, 10, 24, 25, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7024668, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP1Triangle(gfx++, 12, 13, 14, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7024758, 13, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 4, 0, 8, 0, 9, 0);
+    gSP1Triangle(gfx++, 10, 11, 12, 0);
+
+    return gfx;
+}
+
+extern Vtx D_70248E8[];
+extern Vtx D_70249A8[];
+extern Vtx D_7024AA8[];
+extern Vtx D_7024B08[];
+extern Vtx D_7024B38[];
+
+Gfx* func_i9_8014DE64(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_70249A8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 5, 0, 8, 9, 10, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 0, 14, 15, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7024AA8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_70248E8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 3, 0, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 6, 7, 8, 0);
+    gSP1Triangle(gfx++, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7024B08, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7024B38, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    return gfx;
+}
+
+extern Vtx D_301E498[];
+extern Vtx D_301E6B8[];
+extern Vtx D_301E7B8[];
+extern Vtx D_301E838[];
+extern Vtx D_301EA18[];
+extern Vtx D_301EB78[];
+extern Vtx D_301EC98[];
+extern Vtx D_301F088[];
+
+Gfx* func_i9_8014E104(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_301E7B8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_301E838, 30, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 9, 8, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 3, 6, 0, 15, 17, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 29, 0, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_301EC98, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 16, 17, 18, 0);
+    gSP2Triangles(gfx++, 1, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 12, 0);
+    gSP2Triangles(gfx++, 27, 12, 29, 0, 29, 11, 30, 0);
+    gSP2Triangles(gfx++, 29, 12, 11, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 31, 33, 34, 0, 16, 18, 35, 0);
+    gSP2Triangles(gfx++, 36, 37, 38, 0, 39, 32, 40, 0);
+    gSP2Triangles(gfx++, 41, 42, 43, 0, 44, 6, 45, 0);
+    gSP2Triangles(gfx++, 44, 45, 46, 0, 47, 48, 49, 0);
+    gSP2Triangles(gfx++, 50, 3, 44, 0, 3, 6, 44, 0);
+    gSP2Triangles(gfx++, 51, 52, 53, 0, 51, 53, 54, 0);
+    gSP2Triangles(gfx++, 55, 56, 57, 0, 55, 57, 58, 0);
+    gSP2Triangles(gfx++, 54, 59, 60, 0, 61, 55, 62, 0);
+    gSPVertex(gfx++, D_301F088, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_301E498, 34, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 4, 0, 8, 7, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 6, 0);
+    gSP2Triangles(gfx++, 13, 14, 15, 0, 13, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 21, 23, 24, 0, 25, 23, 26, 0);
+    gSP2Triangles(gfx++, 27, 28, 29, 0, 24, 27, 29, 0);
+    gSP2Triangles(gfx++, 12, 30, 31, 0, 24, 32, 33, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_301E6B8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 11, 13, 14, 0, 5, 15, 6, 0);
+    gSP2Triangles(gfx++, 1, 4, 6, 0, 1, 6, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_301EA18, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 7, 12, 13, 0, 7, 13, 14, 0);
+    gSP2Triangles(gfx++, 11, 15, 16, 0, 11, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_301EB78, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 13, 15, 0, 5, 16, 17, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7024BC8[];
+extern Vtx D_7024DA8[];
+extern Vtx D_7024EA8[];
+extern Vtx D_7024F18[];
+extern Vtx D_7025128[];
+extern Vtx D_7025288[];
+extern Vtx D_7025358[];
+
+Gfx* func_i9_8014E8E0(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7024EA8, 7, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 3, 5, 6, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7024F18, 33, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 1, 18, 2, 0, 11, 10, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 25, 3, 5, 0, 26, 27, 28, 0);
+    gSP2Triangles(gfx++, 26, 29, 27, 0, 30, 31, 32, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7025358, 61, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 8, 9, 4, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 11, 10, 40, 0, 41, 42, 43, 0);
+    gSP2Triangles(gfx++, 41, 44, 42, 0, 45, 46, 47, 0);
+    gSP2Triangles(gfx++, 16, 48, 47, 0, 43, 49, 50, 0);
+    gSP2Triangles(gfx++, 51, 52, 53, 0, 54, 37, 39, 0);
+    gSP2Triangles(gfx++, 55, 56, 57, 0, 58, 59, 60, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7024BC8, 30, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 3, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 11, 13, 14, 0);
+    gSP2Triangles(gfx++, 15, 16, 17, 0, 18, 19, 20, 0);
+    gSP2Triangles(gfx++, 21, 22, 23, 0, 20, 24, 25, 0);
+    gSP2Triangles(gfx++, 10, 26, 27, 0, 20, 28, 29, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7024DA8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 2, 0);
+    gSP2Triangles(gfx++, 3, 2, 5, 0, 6, 7, 8, 0);
+    gSP2Triangles(gfx++, 6, 8, 9, 0, 10, 11, 12, 0);
+    gSP2Triangles(gfx++, 10, 12, 13, 0, 14, 3, 5, 0);
+    gSP2Triangles(gfx++, 14, 5, 15, 0, 4, 0, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7025128, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 3, 12, 13, 0, 3, 13, 14, 0);
+    gSP2Triangles(gfx++, 7, 15, 16, 0, 7, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7025288, 13, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 4, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 8, 9, 10, 0);
+    gSP1Triangle(gfx++, 11, 7, 12, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7025728[];
+extern Vtx D_70258F8[];
+extern Vtx D_70259F8[];
+extern Vtx D_7025A58[];
+extern Vtx D_7025B98[];
+extern Vtx D_7025CA8[];
+extern Vtx D_7025D78[];
+
+Gfx* func_i9_8014EFAC(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_70259F8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7025A58, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 2, 1, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 15, 17, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 16, 0, 0, 2, 19, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7025D78, 40, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 5, 4, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 20, 18, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 22, 24, 23, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 37, 38, 39, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7025728, 29, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 3, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 19, 23, 24, 0, 10, 25, 26, 0);
+    gSP1Triangle(gfx++, 19, 27, 28, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_70258F8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 13, 15, 14, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7025B98, 17, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 2, 1, 10, 0, 11, 4, 12, 0);
+    gSP2Triangles(gfx++, 13, 14, 15, 0, 13, 15, 16, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7025CA8, 13, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 4, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 8, 9, 10, 0);
+    gSP1Triangle(gfx++, 11, 7, 12, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7025FF8[];
+extern Vtx D_70261C8[];
+extern Vtx D_7026228[];
+extern Vtx D_7026348[];
+extern Vtx D_7026468[];
+extern Vtx D_70264F8[];
+
+Gfx* func_i9_8014F580(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_70261C8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7026228, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 3, 5, 0, 4, 7, 8, 0);
+    gSP2Triangles(gfx++, 9, 2, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 1, 10, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_70264F8, 34, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 12, 21, 22, 0);
+    gSP2Triangles(gfx++, 23, 24, 25, 0, 26, 27, 24, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7025FF8, 29, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 3, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 19, 23, 24, 0, 10, 25, 26, 0);
+    gSP1Triangle(gfx++, 19, 27, 28, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7026348, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 1, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 9, 11, 12, 0);
+    gSP2Triangles(gfx++, 13, 14, 15, 0, 16, 14, 17, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7026468, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7026718[];
+extern Vtx D_70267E8[];
+extern Vtx D_70268A8[];
+extern Vtx D_7026918[];
+extern Vtx D_7026948[];
+
+Gfx* func_i9_8014FA30(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_70267E8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7026948, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7026718, 13, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 1, 6, 7, 0, 8, 9, 10, 0);
+    gSP1Triangle(gfx++, 11, 12, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_70268A8, 7, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
+    gSP1Triangle(gfx++, 5, 6, 0, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7026918, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    return gfx;
+}
+
+extern Vtx D_301F768[];
+extern Vtx D_301F808[];
+extern Vtx D_301F888[];
+extern Vtx D_301F948[];
+extern Vtx D_301FA08[];
+extern Vtx D_301FDE8[];
+extern Vtx D_301FE58[];
+extern Vtx D_301FF98[];
+extern Vtx D_3020028[];
+
+Gfx* func_i9_8014FCC0(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_301FF98, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 1, 0, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 8, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 10, 10, 70, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_3020028, 35, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 11, 17, 12, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 21, 23, 24, 0, 25, 20, 26, 0);
+    gSP2Triangles(gfx++, 1, 12, 17, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 30, 31, 27, 0, 32, 9, 8, 0);
+    gSP2Triangles(gfx++, 9, 33, 34, 0, 9, 32, 33, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_301F888, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 7, 0, 2, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_301FA08, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 11, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 12, 18, 19, 0, 12, 19, 13, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 23, 21, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 25, 27, 26, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 32, 34, 35, 0);
+    gSP2Triangles(gfx++, 36, 37, 38, 0, 36, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 43, 44, 45, 0);
+    gSP2Triangles(gfx++, 43, 45, 46, 0, 47, 48, 49, 0);
+    gSP2Triangles(gfx++, 47, 49, 50, 0, 24, 26, 51, 0);
+    gSP2Triangles(gfx++, 52, 53, 54, 0, 52, 54, 55, 0);
+    gSP2Triangles(gfx++, 56, 57, 58, 0, 56, 58, 59, 0);
+    gSP1Triangle(gfx++, 60, 61, 0, 0);
+    gSPVertex(gfx++, D_301FDE8, 7, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 0, 2, 6, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_301F768, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_301F808, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_301F948, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_301FE58, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7026A08[];
+extern Vtx D_7026AA8[];
+extern Vtx D_7026B28[];
+extern Vtx D_7026BC8[];
+extern Vtx D_7026C88[];
+extern Vtx D_7027088[];
+extern Vtx D_70271C8[];
+extern Vtx D_7027258[];
+
+Gfx* func_i9_80150414(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_70271C8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 1, 0, 4, 3, 8, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 10, 10, 70, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7027258, 30, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 9, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 20, 23, 21, 0, 24, 25, 26, 0);
+    gSP2Triangles(gfx++, 27, 28, 25, 0, 29, 4, 6, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7026B28, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7026C88, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 5, 11, 12, 0);
+    gSP2Triangles(gfx++, 5, 12, 6, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 16, 14, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 18, 20, 19, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 21, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 25, 27, 28, 0, 29, 30, 31, 0);
+    gSP2Triangles(gfx++, 29, 31, 32, 0, 33, 34, 35, 0);
+    gSP2Triangles(gfx++, 36, 37, 38, 0, 36, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 40, 42, 43, 0);
+    gSP2Triangles(gfx++, 17, 19, 44, 0, 45, 46, 47, 0);
+    gSP2Triangles(gfx++, 45, 47, 48, 0, 49, 50, 51, 0);
+    gSP2Triangles(gfx++, 49, 51, 52, 0, 53, 13, 15, 0);
+    gSP2Triangles(gfx++, 54, 55, 56, 0, 57, 58, 59, 0);
+    gSP2Triangles(gfx++, 60, 61, 62, 0, 60, 62, 63, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7026A08, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7026AA8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_7026BC8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7027088, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7027438[];
+extern Vtx D_70274D8[];
+extern Vtx D_7027558[];
+extern Vtx D_70275B8[];
+extern Vtx D_7027678[];
+extern Vtx D_70279B8[];
+extern Vtx D_7027AF8[];
+extern Vtx D_7027B88[];
+
+Gfx* func_i9_80150AEC(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7027AF8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 2, 7, 0, 4, 3, 8, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 10, 10, 70, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7027B88, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 8, 10, 9, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 20, 0, 14, 21, 15, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7027558, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7027678, 52, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 21, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 32, 34, 35, 0);
+    gSP2Triangles(gfx++, 10, 12, 36, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 37, 39, 40, 0, 41, 42, 43, 0);
+    gSP2Triangles(gfx++, 41, 43, 44, 0, 45, 7, 9, 0);
+    gSP2Triangles(gfx++, 46, 47, 48, 0, 46, 48, 49, 0);
+    gSP2Triangles(gfx++, 50, 3, 6, 0, 50, 6, 51, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7027438, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_70274D8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_70275B8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_70279B8, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7027CE8[];
+extern Vtx D_7027D88[];
+extern Vtx D_7027E48[];
+extern Vtx D_7028188[];
+extern Vtx D_70281C8[];
+
+Gfx* func_i9_801511A8(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 10, 10, 70, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_70281C8, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7027E48, 52, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 10, 16, 11, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 21, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 25, 27, 28, 0, 29, 13, 15, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 30, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 34, 36, 37, 0);
+    gSP2Triangles(gfx++, 38, 39, 40, 0, 41, 42, 43, 0);
+    gSP2Triangles(gfx++, 41, 43, 44, 0, 45, 46, 47, 0);
+    gSP2Triangles(gfx++, 45, 47, 48, 0, 49, 50, 51, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7027CE8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_7027D88, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7028188, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    return gfx;
+}
+
+extern Vtx D_70282A8[];
+extern Vtx D_70282E8[];
+extern Vtx D_7028348[];
+extern Vtx D_7028468[];
+extern Vtx D_70284A8[];
+
+Gfx* func_i9_8015156C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 10, 10, 70, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_70284A8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7028348, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 0, 2, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 8, 17, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_70282A8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_70282E8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7028468, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    return gfx;
+}
+
+extern Vtx D_3020B98[];
+extern Vtx D_3020CD8[];
+extern Vtx D_3021098[];
+extern Vtx D_3021268[];
+extern Vtx D_3021328[];
+extern Vtx D_3021448[];
+extern Vtx D_3021578[];
+
+Gfx* func_i9_801517FC(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_3021578, 32, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 1, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 19, 21, 0);
+    gSP2Triangles(gfx++, 22, 14, 13, 0, 23, 17, 24, 0);
+    gSP2Triangles(gfx++, 18, 25, 19, 0, 26, 27, 3, 0);
+    gSP2Triangles(gfx++, 28, 29, 2, 0, 3, 30, 31, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_3021448, 19, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 2, 6, 7, 0, 8, 9, 10, 0);
+    gSP2Triangles(gfx++, 8, 10, 11, 0, 12, 13, 14, 0);
+    gSP2Triangles(gfx++, 12, 14, 15, 0, 16, 17, 18, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 147, 33, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_3020CD8, 60, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 3, 6, 0, 7, 4, 6, 0);
+    gSP2Triangles(gfx++, 1, 8, 2, 0, 1, 9, 10, 0);
+    gSP2Triangles(gfx++, 1, 10, 4, 0, 9, 1, 11, 0);
+    gSP2Triangles(gfx++, 12, 3, 13, 0, 12, 6, 3, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 15, 2, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 20, 22, 23, 0, 24, 25, 26, 0);
+    gSP2Triangles(gfx++, 27, 28, 29, 0, 30, 31, 32, 0);
+    gSP2Triangles(gfx++, 30, 32, 33, 0, 34, 35, 36, 0);
+    gSP2Triangles(gfx++, 34, 37, 35, 0, 38, 39, 40, 0);
+    gSP2Triangles(gfx++, 38, 40, 41, 0, 42, 43, 44, 0);
+    gSP2Triangles(gfx++, 42, 45, 43, 0, 46, 47, 48, 0);
+    gSP2Triangles(gfx++, 49, 50, 51, 0, 49, 51, 52, 0);
+    gSP2Triangles(gfx++, 53, 54, 55, 0, 53, 56, 54, 0);
+    gSP1Triangle(gfx++, 57, 58, 59, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 240, 180, 20, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_3021098, 29, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 3, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 8, 13, 9, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 17, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 19, 21, 22, 0);
+    gSP2Triangles(gfx++, 23, 24, 25, 0, 23, 25, 26, 0);
+    gSP2Triangles(gfx++, 0, 27, 1, 0, 10, 28, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_3020B98, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 6, 8, 0);
+    gSP2Triangles(gfx++, 8, 10, 9, 0, 11, 10, 8, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 13, 12, 0);
+    gSP2Triangles(gfx++, 12, 16, 15, 0, 12, 17, 16, 0);
+    gSP2Triangles(gfx++, 18, 19, 2, 0, 2, 4, 18, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3021268, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 8, 10, 9, 0, 0, 2, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_3021328, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7028528[];
+extern Vtx D_70285E8[];
+extern Vtx D_7028918[];
+extern Vtx D_7028A38[];
+extern Vtx D_7028AF8[];
+extern Vtx D_7028BE8[];
+extern Vtx D_7028D18[];
+
+Gfx* func_i9_80151FE0(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7028D18, 34, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 1, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 23, 24, 25, 0, 26, 18, 17, 0);
+    gSP2Triangles(gfx++, 27, 28, 3, 0, 29, 30, 2, 0);
+    gSP1Triangle(gfx++, 31, 32, 33, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7028BE8, 19, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 13, 15, 0, 16, 17, 18, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 147, 33, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_70285E8, 51, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 4, 7, 0);
+    gSP2Triangles(gfx++, 8, 5, 7, 0, 0, 9, 10, 0);
+    gSP2Triangles(gfx++, 0, 10, 5, 0, 9, 0, 11, 0);
+    gSP2Triangles(gfx++, 12, 4, 13, 0, 12, 7, 4, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 15, 2, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 20, 22, 23, 0, 24, 25, 26, 0);
+    gSP2Triangles(gfx++, 27, 28, 29, 0, 27, 29, 30, 0);
+    gSP2Triangles(gfx++, 31, 32, 33, 0, 31, 34, 32, 0);
+    gSP2Triangles(gfx++, 35, 36, 37, 0, 35, 37, 38, 0);
+    gSP2Triangles(gfx++, 39, 40, 41, 0, 39, 42, 40, 0);
+    gSP2Triangles(gfx++, 43, 44, 45, 0, 43, 45, 46, 0);
+    gSP2Triangles(gfx++, 47, 48, 49, 0, 47, 50, 48, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 240, 180, 20, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7028918, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 9, 11, 0, 6, 8, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7028528, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 10, 11, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7028A38, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 0, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7028AF8, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP1Triangle(gfx++, 12, 13, 14, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7028F38[];
+extern Vtx D_7028FF8[];
+extern Vtx D_70292E8[];
+extern Vtx D_7029408[];
+extern Vtx D_70294C8[];
+extern Vtx D_7029558[];
+extern Vtx D_7029668[];
+
+Gfx* func_i9_801526BC(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7029668, 13, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 5, 7, 0, 8, 9, 2, 0);
+    gSP1Triangle(gfx++, 10, 11, 12, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7029558, 17, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 11, 15, 0, 16, 10, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 147, 33, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7028FF8, 47, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 4, 7, 0);
+    gSP2Triangles(gfx++, 8, 5, 7, 0, 0, 9, 10, 0);
+    gSP2Triangles(gfx++, 0, 10, 5, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 4, 15, 0, 14, 7, 4, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 17, 2, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 24, 0);
+    gSP2Triangles(gfx++, 22, 24, 25, 0, 26, 27, 28, 0);
+    gSP2Triangles(gfx++, 29, 30, 31, 0, 32, 33, 34, 0);
+    gSP2Triangles(gfx++, 35, 36, 37, 0, 38, 39, 40, 0);
+    gSP2Triangles(gfx++, 41, 42, 43, 0, 44, 45, 46, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 240, 180, 20, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_70292E8, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 3, 5, 0, 0, 2, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7028F38, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 10, 11, 8, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7029408, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 0, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_70294C8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7029738[];
+extern Vtx D_7029A28[];
+extern Vtx D_7029AE8[];
+extern Vtx D_7029BA8[];
+extern Vtx D_7029BD8[];
+extern Vtx D_7029CD8[];
+
+Gfx* func_i9_80152CA8(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7029CD8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 5, 7, 0, 8, 9, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7029BD8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 12, 11, 14, 0, 15, 10, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 147, 33, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7029738, 47, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 4, 0, 10, 1, 12, 0);
+    gSP2Triangles(gfx++, 13, 14, 15, 0, 16, 17, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 24, 0);
+    gSP2Triangles(gfx++, 22, 24, 25, 0, 26, 27, 28, 0);
+    gSP2Triangles(gfx++, 29, 30, 31, 0, 32, 33, 34, 0);
+    gSP2Triangles(gfx++, 35, 36, 37, 0, 38, 39, 40, 0);
+    gSP2Triangles(gfx++, 41, 42, 43, 0, 44, 45, 46, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 240, 180, 20, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7029A28, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 7, 9, 0, 4, 6, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7029AE8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 10, 8, 0, 0, 11, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7029BA8, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7029D78[];
+extern Vtx D_7029EF8[];
+extern Vtx D_7029F98[];
+extern Vtx D_7029FC8[];
+extern Vtx D_702A028[];
+extern Vtx D_702A088[];
+
+Gfx* func_i9_801531A4(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702A088, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 5, 7, 0, 8, 9, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702A028, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 147, 33, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7029D78, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 240, 180, 20, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7029EF8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 1, 0, 3, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7029F98, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7029FC8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    return gfx;
+}
+
+extern Vtx D_30225B8[];
+extern Vtx D_3022618[];
+extern Vtx D_3022718[];
+extern Vtx D_3022988[];
+extern Vtx D_3022CB8[];
+extern Vtx D_3022D58[];
+extern Vtx D_3022E18[];
+
+Gfx* func_i9_80153538(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_3022E18, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 11, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 16, 18, 17, 0, 4, 6, 19, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_3022718, 39, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 12, 0, 7, 13, 8, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 5, 4, 0, 21, 14, 22, 0);
+    gSP2Triangles(gfx++, 17, 23, 18, 0, 24, 25, 26, 0);
+    gSP2Triangles(gfx++, 27, 28, 29, 0, 30, 31, 32, 0);
+    gSP2Triangles(gfx++, 27, 33, 28, 0, 34, 35, 36, 0);
+    gSP2Triangles(gfx++, 34, 36, 37, 0, 1, 0, 38, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_3022988, 51, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 9, 7, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 11, 13, 12, 0);
+    gSP2Triangles(gfx++, 9, 14, 7, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 15, 17, 18, 0, 11, 19, 13, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 23, 26, 24, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 27, 30, 28, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 37, 20, 22, 0);
+    gSP2Triangles(gfx++, 3, 38, 4, 0, 39, 40, 41, 0);
+    gSP2Triangles(gfx++, 40, 42, 41, 0, 43, 44, 2, 0);
+    gSP2Triangles(gfx++, 31, 33, 45, 0, 0, 46, 1, 0);
+    gSP2Triangles(gfx++, 47, 48, 49, 0, 48, 50, 49, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_30225B8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 1, 0, 4, 1, 0, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_3022618, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 3, 2, 0, 1, 0, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3022D58, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 4, 6, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_3022CB8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702A128[];
+extern Vtx D_702A188[];
+extern Vtx D_702A288[];
+extern Vtx D_702A4F8[];
+extern Vtx D_702A808[];
+extern Vtx D_702A8A8[];
+extern Vtx D_702A968[];
+
+Gfx* func_i9_80153BD4(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702A968, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702A288, 39, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 12, 0, 7, 13, 8, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 5, 4, 0, 21, 14, 22, 0);
+    gSP2Triangles(gfx++, 17, 23, 18, 0, 24, 25, 26, 0);
+    gSP2Triangles(gfx++, 27, 28, 29, 0, 30, 31, 32, 0);
+    gSP2Triangles(gfx++, 27, 33, 28, 0, 34, 35, 36, 0);
+    gSP2Triangles(gfx++, 34, 36, 37, 0, 1, 0, 38, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702A4F8, 49, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 7, 12, 8, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 9, 17, 10, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 21, 24, 22, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 25, 28, 26, 0, 29, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 35, 18, 20, 0);
+    gSP2Triangles(gfx++, 3, 36, 4, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 38, 40, 39, 0, 41, 42, 2, 0);
+    gSP2Triangles(gfx++, 29, 31, 43, 0, 0, 44, 1, 0);
+    gSP2Triangles(gfx++, 45, 46, 47, 0, 46, 48, 47, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_702A128, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 1, 0, 4, 1, 0, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702A188, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 3, 2, 0, 1, 0, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_702A8A8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 4, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702A808, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702AA68[];
+extern Vtx D_702AAC8[];
+extern Vtx D_702AB28[];
+extern Vtx D_702ACC8[];
+extern Vtx D_702AFB8[];
+extern Vtx D_702B058[];
+extern Vtx D_702B118[];
+
+Gfx* func_i9_80154234(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702B118, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 9, 11, 10, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702AB28, 26, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 4, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 12, 18, 13, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 10, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702ACC8, 47, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 5, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 6, 17, 7, 0, 18, 19, 20, 0);
+    gSP2Triangles(gfx++, 21, 22, 23, 0, 24, 25, 26, 0);
+    gSP2Triangles(gfx++, 22, 27, 23, 0, 28, 29, 30, 0);
+    gSP2Triangles(gfx++, 28, 30, 31, 0, 24, 32, 25, 0);
+    gSP2Triangles(gfx++, 33, 34, 35, 0, 36, 37, 38, 0);
+    gSP2Triangles(gfx++, 36, 39, 37, 0, 40, 41, 42, 0);
+    gSP2Triangles(gfx++, 40, 43, 41, 0, 44, 14, 16, 0);
+    gSP2Triangles(gfx++, 18, 45, 19, 0, 46, 0, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_702AA68, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 1, 0, 4, 1, 0, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702AAC8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 3, 2, 0, 1, 0, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_702B058, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702AFB8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702B218[];
+extern Vtx D_702B278[];
+extern Vtx D_702B388[];
+extern Vtx D_702B5C8[];
+extern Vtx D_702B668[];
+extern Vtx D_702B728[];
+
+Gfx* func_i9_8015483C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702B728, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702B278, 17, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 0, 2, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP1Triangle(gfx++, 14, 15, 16, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702B388, 36, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 8, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 14, 16, 0, 18, 19, 20, 0);
+    gSP2Triangles(gfx++, 21, 22, 23, 0, 24, 25, 26, 0);
+    gSP2Triangles(gfx++, 22, 27, 23, 0, 28, 29, 30, 0);
+    gSP2Triangles(gfx++, 24, 31, 25, 0, 32, 33, 34, 0);
+    gSP1Triangle(gfx++, 18, 35, 19, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702B218, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 3, 2, 0, 4, 2, 1, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_702B668, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 3, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 0, 11, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702B5C8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702B7E8[];
+extern Vtx D_702B858[];
+extern Vtx D_702BAA8[];
+
+Gfx* func_i9_80154CE4(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702BAA8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702B858, 37, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 0, 2, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 6, 8, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 29, 30, 31, 0);
+    gSP2Triangles(gfx++, 24, 32, 25, 0, 29, 33, 30, 0);
+    gSP1Triangle(gfx++, 34, 35, 36, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702B7E8, 7, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 4, 0);
+    gSP2Triangles(gfx++, 3, 5, 1, 0, 6, 3, 1, 0);
+
+    return gfx;
+}
+
+extern Vtx D_3023798[];
+extern Vtx D_3023838[];
+extern Vtx D_3023878[];
+extern Vtx D_3023AA8[];
+extern Vtx D_3023C48[];
+extern Vtx D_3024048[];
+extern Vtx D_30240F8[];
+extern Vtx D_30241F8[];
+extern Vtx D_30242B8[];
+
+Gfx* func_i9_80154F14(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_30242B8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 100, 0, 24, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_3023878, 35, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 17, 13, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 18, 0, 13, 12, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 17, 0, 20, 17, 16, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 22, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 23, 0, 24, 28, 25, 0);
+    gSP2Triangles(gfx++, 29, 30, 31, 0, 32, 33, 34, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 107, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_3023C48, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 32, 34, 35, 0);
+    gSP2Triangles(gfx++, 36, 37, 33, 0, 36, 33, 32, 0);
+    gSP2Triangles(gfx++, 36, 38, 37, 0, 39, 40, 38, 0);
+    gSP2Triangles(gfx++, 39, 38, 36, 0, 35, 34, 41, 0);
+    gSP2Triangles(gfx++, 35, 41, 39, 0, 41, 40, 39, 0);
+    gSP2Triangles(gfx++, 42, 43, 44, 0, 42, 44, 45, 0);
+    gSP2Triangles(gfx++, 46, 47, 48, 0, 46, 48, 49, 0);
+    gSP2Triangles(gfx++, 50, 51, 52, 0, 50, 52, 53, 0);
+    gSP2Triangles(gfx++, 54, 55, 56, 0, 54, 56, 57, 0);
+    gSP2Triangles(gfx++, 58, 59, 60, 0, 58, 60, 61, 0);
+    gSP2Triangles(gfx++, 5, 4, 62, 0, 5, 62, 63, 0);
+    gSPVertex(gfx++, D_3024048, 11, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 2, 8, 9, 0, 2, 9, 10, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_30241F8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_3023798, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3023838, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_3023AA8, 26, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 8, 10, 9, 0, 7, 11, 8, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 0, 2, 0, 24, 25, 0, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_30240F8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702BB08[];
+extern Vtx D_702BB48[];
+extern Vtx D_702BB88[];
+extern Vtx D_702BDA8[];
+extern Vtx D_702BEC8[];
+extern Vtx D_702C2C8[];
+extern Vtx D_702C3C8[];
+extern Vtx D_702C488[];
+
+Gfx* func_i9_801556FC(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702C488, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 100, 0, 24, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702BB88, 34, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 19, 18, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 23, 0, 26, 23, 22, 0);
+    gSP2Triangles(gfx++, 0, 2, 3, 0, 0, 3, 5, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 107, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702BEC8, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 15, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 25, 27, 28, 0, 29, 30, 31, 0);
+    gSP2Triangles(gfx++, 29, 31, 32, 0, 33, 34, 30, 0);
+    gSP2Triangles(gfx++, 33, 30, 29, 0, 33, 35, 34, 0);
+    gSP2Triangles(gfx++, 36, 37, 35, 0, 36, 35, 33, 0);
+    gSP2Triangles(gfx++, 32, 31, 38, 0, 32, 38, 36, 0);
+    gSP2Triangles(gfx++, 38, 37, 36, 0, 39, 40, 41, 0);
+    gSP2Triangles(gfx++, 39, 41, 42, 0, 43, 44, 45, 0);
+    gSP2Triangles(gfx++, 46, 47, 48, 0, 46, 48, 49, 0);
+    gSP2Triangles(gfx++, 50, 51, 52, 0, 2, 53, 54, 0);
+    gSP2Triangles(gfx++, 2, 1, 53, 0, 55, 56, 57, 0);
+    gSP2Triangles(gfx++, 55, 58, 56, 0, 59, 60, 61, 0);
+    gSP2Triangles(gfx++, 59, 61, 62, 0, 56, 58, 63, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_702C3C8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702BB08, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_702BB48, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_702BDA8, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 9, 11, 10, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702C2C8, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702C4C8[];
+extern Vtx D_702C508[];
+extern Vtx D_702C548[];
+extern Vtx D_702C6C8[];
+extern Vtx D_702C7E8[];
+extern Vtx D_702CAA8[];
+extern Vtx D_702CB48[];
+extern Vtx D_702CC08[];
+
+Gfx* func_i9_80155EB8(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702CC08, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 100, 0, 24, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702C548, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 0, 2, 3, 0, 0, 3, 5, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 107, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702C7E8, 44, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 19, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 23, 25, 26, 0, 27, 28, 24, 0);
+    gSP2Triangles(gfx++, 27, 24, 23, 0, 27, 29, 28, 0);
+    gSP2Triangles(gfx++, 30, 31, 29, 0, 30, 29, 27, 0);
+    gSP2Triangles(gfx++, 26, 25, 32, 0, 26, 32, 30, 0);
+    gSP2Triangles(gfx++, 32, 31, 30, 0, 33, 34, 35, 0);
+    gSP2Triangles(gfx++, 33, 35, 36, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 37, 39, 40, 0, 41, 42, 43, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_702CB48, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702C4C8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_702C508, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_702C6C8, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 9, 11, 10, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702CAA8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702CC48[];
+extern Vtx D_702CC88[];
+extern Vtx D_702CDE8[];
+extern Vtx D_702CEC8[];
+extern Vtx D_702D028[];
+extern Vtx D_702D0C8[];
+extern Vtx D_702D188[];
+
+Gfx* func_i9_801564E8(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702D188, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 100, 0, 24, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702CC88, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 107, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702CEC8, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 10, 8, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 11, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 15, 17, 18, 0, 19, 20, 21, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_702D0C8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702CC48, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_702CDE8, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 2, 0, 6, 7, 8, 0);
+    gSP2Triangles(gfx++, 9, 10, 11, 0, 12, 13, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702D028, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702D1C8[];
+extern Vtx D_702D208[];
+extern Vtx D_702D268[];
+extern Vtx D_702D428[];
+extern Vtx D_702D468[];
+
+Gfx* func_i9_801569C8(Gfx* gfx) {
+
+    gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
+                      0, 0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702D468, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 100, 0, 24, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702D208, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 107, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702D268, 28, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 9, 11, 10, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 15, 13, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 23, 21, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 24, 27, 25, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702D1C8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702D428, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    return gfx;
+}
+
+extern Vtx D_30251B8[];
+extern Vtx D_3025318[];
+extern Vtx D_3025378[];
+extern Vtx D_30253F8[];
+extern Vtx D_3025438[];
+extern Vtx D_3025828[];
+extern Vtx D_30259B8[];
+extern Vtx D_3025A78[];
+
+Gfx* func_i9_80156CAC(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_30251B8, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 15, 17, 16, 0);
+    gSP2Triangles(gfx++, 18, 9, 19, 0, 20, 21, 19, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_30253F8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_3025A78, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 7, 9, 8, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 13, 11, 0);
+    gSP2Triangles(gfx++, 14, 0, 2, 0, 14, 15, 0, 0);
+    gSP2Triangles(gfx++, 3, 5, 16, 0, 17, 3, 16, 0);
+    gSP2Triangles(gfx++, 6, 18, 17, 0, 6, 17, 16, 0);
+    gSP2Triangles(gfx++, 8, 18, 6, 0, 19, 10, 12, 0);
+    gSP2Triangles(gfx++, 2, 1, 19, 0, 2, 19, 12, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_3025438, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 21, 23, 24, 0, 19, 25, 20, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 26, 29, 27, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 30, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 37, 39, 40, 0, 41, 42, 43, 0);
+    gSP2Triangles(gfx++, 22, 21, 44, 0, 22, 44, 45, 0);
+    gSP2Triangles(gfx++, 46, 47, 48, 0, 49, 50, 51, 0);
+    gSP2Triangles(gfx++, 49, 51, 52, 0, 53, 54, 55, 0);
+    gSP2Triangles(gfx++, 56, 57, 58, 0, 56, 58, 59, 0);
+    gSP1Triangle(gfx++, 60, 61, 62, 0);
+    gSPVertex(gfx++, D_3025828, 25, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+    gSP1Triangle(gfx++, 22, 23, 24, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_3025318, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 2, 4, 3, 0, 5, 1, 0, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3025378, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_30259B8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 6, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702D4A8[];
+extern Vtx D_702D5E8[];
+extern Vtx D_702D648[];
+extern Vtx D_702D6C8[];
+extern Vtx D_702D708[];
+extern Vtx D_702DAE8[];
+extern Vtx D_702DC48[];
+extern Vtx D_702DD08[];
+
+Gfx* func_i9_80157390(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702D4A8, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 7, 9, 8, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 11, 13, 12, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702D6C8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702DD08, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 7, 9, 8, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 13, 11, 0);
+    gSP2Triangles(gfx++, 14, 0, 2, 0, 14, 15, 0, 0);
+    gSP2Triangles(gfx++, 3, 5, 16, 0, 17, 3, 16, 0);
+    gSP2Triangles(gfx++, 6, 18, 17, 0, 6, 17, 16, 0);
+    gSP2Triangles(gfx++, 8, 18, 6, 0, 19, 10, 12, 0);
+    gSP2Triangles(gfx++, 2, 1, 19, 0, 2, 19, 12, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_702D708, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 8, 10, 9, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 11, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 15, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 26, 28, 27, 0, 29, 30, 31, 0);
+    gSP2Triangles(gfx++, 29, 31, 32, 0, 33, 34, 35, 0);
+    gSP2Triangles(gfx++, 33, 36, 34, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 40, 42, 43, 0);
+    gSP2Triangles(gfx++, 44, 45, 46, 0, 47, 48, 49, 0);
+    gSP2Triangles(gfx++, 47, 49, 50, 0, 51, 52, 53, 0);
+    gSP2Triangles(gfx++, 4, 6, 54, 0, 55, 56, 57, 0);
+    gSP2Triangles(gfx++, 58, 59, 60, 0, 58, 60, 61, 0);
+    gSPVertex(gfx++, D_702DAE8, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702D5E8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 2, 4, 3, 0, 5, 1, 0, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_702D648, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702DC48, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 6, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702DE48[];
+extern Vtx D_702DFA8[];
+extern Vtx D_702E008[];
+extern Vtx D_702E048[];
+extern Vtx D_702E088[];
+extern Vtx D_702E478[];
+extern Vtx D_702E4A8[];
+extern Vtx D_702E568[];
+
+Gfx* func_i9_80157A50(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702DE48, 22, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 7, 9, 8, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 11, 13, 12, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 3, 17, 18, 0);
+    gSP1Triangle(gfx++, 19, 20, 21, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702E048, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702E568, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 0, 12, 14, 0);
+    gSP2Triangles(gfx++, 2, 12, 0, 0, 9, 4, 6, 0);
+    gSP2Triangles(gfx++, 10, 9, 6, 0, 12, 15, 13, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_702E088, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 11, 13, 12, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 14, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 27, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 34, 36, 37, 0);
+    gSP2Triangles(gfx++, 38, 39, 40, 0, 41, 42, 43, 0);
+    gSP2Triangles(gfx++, 44, 45, 46, 0, 42, 47, 43, 0);
+    gSP2Triangles(gfx++, 4, 6, 9, 0, 48, 49, 50, 0);
+    gSP2Triangles(gfx++, 51, 52, 53, 0, 54, 55, 56, 0);
+    gSP2Triangles(gfx++, 57, 58, 59, 0, 60, 61, 62, 0);
+    gSPVertex(gfx++, D_702E478, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702DFA8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 2, 4, 3, 0, 5, 1, 0, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_702E008, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702E4A8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 6, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702E668[];
+extern Vtx D_702E808[];
+extern Vtx D_702E868[];
+extern Vtx D_702E8A8[];
+extern Vtx D_702EB38[];
+extern Vtx D_702EC28[];
+
+Gfx* func_i9_8015805C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702E668, 26, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 13, 12, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 17, 16, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702E868, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702EC28, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_702E8A8, 41, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 9, 28, 0);
+    gSP2Triangles(gfx++, 29, 30, 31, 0, 32, 33, 34, 0);
+    gSP2Triangles(gfx++, 35, 36, 37, 0, 38, 39, 40, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702E808, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 2, 4, 3, 0, 5, 1, 0, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702EB38, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP1Triangle(gfx++, 12, 13, 14, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702ECE8[];
+extern Vtx D_702EDF8[];
+extern Vtx D_702EE28[];
+extern Vtx D_702EF48[];
+extern Vtx D_702EFA8[];
+
+Gfx* func_i9_801584F0(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702ECE8, 17, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 1, 0, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 5, 4, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 9, 8, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 13, 16, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702EFA8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_702EE28, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702EDF8, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702EF48, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    return gfx;
+}
+
+extern Vtx D_30261F8[];
+extern Vtx D_30265F8[];
+extern Vtx D_3026658[];
+extern Vtx D_30266D8[];
+extern Vtx D_3026788[];
+extern Vtx D_3026878[];
+extern Vtx D_30269B8[];
+extern Vtx D_3026B38[];
+
+Gfx* func_i9_80158800(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_30261F8, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 33, 34, 35, 0);
+    gSP2Triangles(gfx++, 36, 37, 38, 0, 39, 40, 41, 0);
+    gSP2Triangles(gfx++, 42, 43, 44, 0, 42, 44, 45, 0);
+    gSP2Triangles(gfx++, 46, 47, 48, 0, 49, 46, 48, 0);
+    gSP2Triangles(gfx++, 50, 51, 0, 0, 6, 52, 53, 0);
+    gSP2Triangles(gfx++, 54, 55, 56, 0, 54, 56, 57, 0);
+    gSP2Triangles(gfx++, 58, 59, 60, 0, 61, 62, 63, 0);
+    gSPVertex(gfx++, D_30265F8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_3026658, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 0, 2, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_3026B38, 43, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 1, 8, 3, 0, 4, 9, 5, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 13, 0);
+    gSP2Triangles(gfx++, 25, 26, 27, 0, 28, 29, 30, 0);
+    gSP2Triangles(gfx++, 28, 30, 31, 0, 25, 27, 32, 0);
+    gSP2Triangles(gfx++, 33, 34, 35, 0, 36, 37, 38, 0);
+    gSP2Triangles(gfx++, 36, 38, 39, 0, 40, 41, 42, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_30269B8, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_30266D8, 11, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 0, 6, 1, 0, 2, 7, 8, 0);
+    gSP2Triangles(gfx++, 7, 3, 8, 0, 6, 9, 10, 0);
+    gSP1Triangle(gfx++, 8, 0, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3026788, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 5, 10, 3, 0, 11, 12, 13, 0);
+    gSP1Triangle(gfx++, 1, 14, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_3026878, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702F068[];
+extern Vtx D_702F458[];
+extern Vtx D_702F4B8[];
+extern Vtx D_702F538[];
+extern Vtx D_702F5E8[];
+extern Vtx D_702F6D8[];
+extern Vtx D_702F818[];
+extern Vtx D_702F998[];
+
+Gfx* func_i9_80158EEC(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702F068, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 33, 34, 35, 0);
+    gSP2Triangles(gfx++, 36, 37, 13, 0, 38, 39, 40, 0);
+    gSP2Triangles(gfx++, 41, 42, 43, 0, 41, 43, 44, 0);
+    gSP2Triangles(gfx++, 45, 46, 47, 0, 48, 45, 47, 0);
+    gSP2Triangles(gfx++, 49, 50, 0, 0, 6, 51, 52, 0);
+    gSP2Triangles(gfx++, 53, 54, 55, 0, 53, 55, 56, 0);
+    gSP2Triangles(gfx++, 57, 58, 59, 0, 60, 61, 62, 0);
+    gSPVertex(gfx++, D_702F458, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702F4B8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 0, 2, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_702F998, 33, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
+    gSP2Triangles(gfx++, 1, 8, 3, 0, 4, 9, 5, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 4, 24, 0);
+    gSP2Triangles(gfx++, 25, 26, 27, 0, 28, 29, 30, 0);
+    gSP2Triangles(gfx++, 28, 30, 31, 0, 25, 27, 32, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_702F818, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702F538, 11, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 0, 6, 1, 0, 2, 7, 8, 0);
+    gSP2Triangles(gfx++, 7, 3, 8, 0, 6, 9, 10, 0);
+    gSP1Triangle(gfx++, 8, 0, 2, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_702F5E8, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 5, 10, 3, 0, 11, 12, 13, 0);
+    gSP1Triangle(gfx++, 1, 14, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_702F6D8, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+
+    return gfx;
+}
+
+extern Vtx D_702FBA8[];
+extern Vtx D_702FEF8[];
+extern Vtx D_702FF58[];
+extern Vtx D_7030008[];
+extern Vtx D_70300F8[];
+extern Vtx D_7030228[];
+extern Vtx D_70303A8[];
+
+Gfx* func_i9_801595B0(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_702FBA8, 53, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 33, 34, 35, 0);
+    gSP2Triangles(gfx++, 36, 33, 35, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 43, 44, 45, 0);
+    gSP2Triangles(gfx++, 43, 45, 46, 0, 47, 48, 49, 0);
+    gSP1Triangle(gfx++, 50, 51, 52, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_702FEF8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_70303A8, 30, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 0, 6, 1, 0, 3, 7, 4, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 11, 13, 14, 0, 15, 16, 10, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 17, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 25, 27, 28, 0, 22, 24, 29, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7030228, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_702FF58, 11, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 1, 4, 3, 0);
+    gSP2Triangles(gfx++, 2, 7, 0, 0, 8, 9, 10, 0);
+    gSP1Triangle(gfx++, 7, 8, 0, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7030008, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 12, 0, 13, 6, 8, 0);
+    gSP1Triangle(gfx++, 2, 14, 0, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_70300F8, 19, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP1Triangle(gfx++, 16, 17, 18, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7030588[];
+extern Vtx D_70306C8[];
+extern Vtx D_70307B8[];
+extern Vtx D_70308E8[];
+extern Vtx D_7030A08[];
+
+Gfx* func_i9_80159BE0(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7030588, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP1Triangle(gfx++, 18, 4, 19, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7030A08, 28, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 6, 8, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 21, 23, 24, 0, 18, 20, 25, 0);
+    gSP2Triangles(gfx++, 3, 5, 26, 0, 27, 2, 1, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_70308E8, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_70306C8, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 12, 0, 13, 0, 2, 0);
+    gSP1Triangle(gfx++, 5, 14, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_70307B8, 19, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP1Triangle(gfx++, 18, 15, 17, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7030BC8[];
+extern Vtx D_7030C18[];
+extern Vtx D_7030C48[];
+extern Vtx D_7030CA8[];
+
+Gfx* func_i9_80159F7C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7030CA8, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 4, 10, 0);
+    gSP2Triangles(gfx++, 6, 8, 11, 0, 12, 13, 14, 0);
+    gSP2Triangles(gfx++, 15, 0, 2, 0, 16, 17, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 19, 21, 22, 0);
+    gSP1Triangle(gfx++, 16, 18, 23, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7030C48, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7030BC8, 5, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP1Triangle(gfx++, 2, 3, 4, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7030C18, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    return gfx;
+}
+
+extern Vtx D_30274A8[];
+extern Vtx D_3027508[];
+extern Vtx D_3027568[];
+extern Vtx D_3027728[];
+extern Vtx D_30277A8[];
+extern Vtx D_30278E8[];
+extern Vtx D_3027AE8[];
+extern Vtx D_3027EE8[];
+extern Vtx D_30282D8[];
+
+Gfx* func_i9_8015A1B4(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_30278E8, 32, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 0, 3, 0, 5, 4, 3, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 6, 8, 0);
+    gSP2Triangles(gfx++, 9, 8, 10, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 18, 20, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 29, 31, 30, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_3027AE8, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 14, 13, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 18, 17, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 24, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 31, 33, 34, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 38, 39, 40, 0, 38, 40, 41, 0);
+    gSP2Triangles(gfx++, 42, 43, 44, 0, 45, 46, 47, 0);
+    gSP2Triangles(gfx++, 45, 47, 48, 0, 49, 50, 51, 0);
+    gSP2Triangles(gfx++, 52, 53, 54, 0, 52, 54, 55, 0);
+    gSP2Triangles(gfx++, 56, 57, 58, 0, 56, 58, 59, 0);
+    gSP2Triangles(gfx++, 60, 61, 62, 0, 60, 62, 63, 0);
+    gSPVertex(gfx++, D_3027EE8, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 24, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 35, 33, 32, 0);
+    gSP2Triangles(gfx++, 36, 37, 38, 0, 37, 36, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 43, 44, 45, 0);
+    gSP2Triangles(gfx++, 46, 47, 48, 0, 46, 48, 49, 0);
+    gSP2Triangles(gfx++, 50, 51, 52, 0, 53, 54, 55, 0);
+    gSP2Triangles(gfx++, 56, 57, 58, 0, 59, 60, 61, 0);
+    gSP1Triangle(gfx++, 59, 61, 62, 0);
+    gSPVertex(gfx++, D_30282D8, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 2, 6, 0, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
+    gSP1Triangle(gfx++, 11, 13, 14, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_3027568, 28, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 24, 26, 27, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_3027728, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 2, 1, 6, 0, 7, 4, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_30274A8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 3, 0, 0);
+    gSP2Triangles(gfx++, 1, 0, 4, 0, 1, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3027508, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 2, 0);
+    gSP2Triangles(gfx++, 3, 2, 1, 0, 0, 2, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_30277A8, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7030E28[];
+extern Vtx D_7030E68[];
+extern Vtx D_7030EC8[];
+extern Vtx D_7030F88[];
+extern Vtx D_7031048[];
+extern Vtx D_7031188[];
+extern Vtx D_7031348[];
+extern Vtx D_7031738[];
+
+Gfx* func_i9_8015AAE8(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7031188, 28, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 3, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 22, 23, 20, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 25, 24, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7031348, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 24, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 31, 33, 34, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 38, 39, 40, 0, 41, 42, 43, 0);
+    gSP2Triangles(gfx++, 41, 43, 44, 0, 45, 46, 47, 0);
+    gSP2Triangles(gfx++, 48, 49, 50, 0, 48, 50, 51, 0);
+    gSP2Triangles(gfx++, 35, 52, 36, 0, 28, 53, 29, 0);
+    gSP2Triangles(gfx++, 21, 54, 22, 0, 14, 55, 15, 0);
+    gSP2Triangles(gfx++, 56, 57, 58, 0, 56, 58, 59, 0);
+    gSP1Triangle(gfx++, 60, 61, 62, 0);
+    gSPVertex(gfx++, D_7031738, 49, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 31, 33, 34, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 38, 39, 40, 0, 41, 42, 43, 0);
+    gSP2Triangles(gfx++, 41, 43, 44, 0, 45, 46, 47, 0);
+    gSP1Triangle(gfx++, 45, 47, 48, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7030EC8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7030F88, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7030E28, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 3, 0, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7030E68, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 1, 0, 4, 1, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7031048, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 18, 19, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7031A48[];
+extern Vtx D_7031A88[];
+extern Vtx D_7031AE8[];
+extern Vtx D_7031B68[];
+extern Vtx D_7031C28[];
+extern Vtx D_7031CC8[];
+extern Vtx D_7031E48[];
+extern Vtx D_7032248[];
+
+Gfx* func_i9_8015B1F4(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7031CC8, 24, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7031E48, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 23, 25, 26, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 30, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 37, 39, 40, 0, 41, 42, 43, 0);
+    gSP2Triangles(gfx++, 44, 45, 46, 0, 47, 48, 49, 0);
+    gSP2Triangles(gfx++, 47, 49, 50, 0, 51, 52, 53, 0);
+    gSP2Triangles(gfx++, 54, 55, 56, 0, 54, 56, 57, 0);
+    gSP2Triangles(gfx++, 58, 59, 60, 0, 61, 62, 63, 0);
+    gSPVertex(gfx++, D_7032248, 32, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 23, 0, 25, 30, 31, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7031AE8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7031B68, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7031A48, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 3, 0, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7031A88, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 1, 0, 4, 1, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7031C28, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7032448[];
+extern Vtx D_70324A8[];
+extern Vtx D_7032528[];
+extern Vtx D_70325E8[];
+extern Vtx D_7032688[];
+extern Vtx D_70327A8[];
+
+Gfx* func_i9_8015B7E8(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7032688, 18, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_70327A8, 46, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 43, 44, 45, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_70324A8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7032528, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7032448, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 1, 0, 4, 1, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_70325E8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7032A88[];
+extern Vtx D_7032AB8[];
+extern Vtx D_7032B78[];
+extern Vtx D_7032C08[];
+extern Vtx D_7032C68[];
+
+Gfx* func_i9_8015BC90(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7032C08, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7032C68, 32, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 1, 4, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 8, 9, 10, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 20, 21, 22, 0);
+    gSP2Triangles(gfx++, 23, 24, 25, 0, 26, 27, 28, 0);
+    gSP1Triangle(gfx++, 29, 30, 31, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7032AB8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7032A88, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7032B78, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    return gfx;
+}
+
+extern Vtx D_3028A08[];
+extern Vtx D_3028A88[];
+extern Vtx D_3028B08[];
+extern Vtx D_3028D68[];
+extern Vtx D_3028EA8[];
+extern Vtx D_3028EE8[];
+extern Vtx D_3028FA8[];
+extern Vtx D_3029398[];
+
+Gfx* func_i9_8015BF44(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_3028A88, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 89, 84, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_3028B08, 38, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 8, 0);
+    gSP2Triangles(gfx++, 9, 8, 11, 0, 12, 13, 14, 0);
+    gSP2Triangles(gfx++, 15, 16, 7, 0, 15, 11, 16, 0);
+    gSP2Triangles(gfx++, 17, 13, 12, 0, 18, 13, 17, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 18, 22, 13, 0);
+    gSP2Triangles(gfx++, 23, 24, 25, 0, 26, 12, 14, 0);
+    gSP2Triangles(gfx++, 23, 21, 24, 0, 27, 28, 29, 0);
+    gSP2Triangles(gfx++, 30, 27, 29, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 21, 20, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 24, 21, 34, 0, 0, 30, 1, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_3028FA8, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 8, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 11, 13, 14, 0);
+    gSP2Triangles(gfx++, 15, 16, 17, 0, 15, 17, 18, 0);
+    gSP2Triangles(gfx++, 9, 19, 10, 0, 9, 20, 19, 0);
+    gSP2Triangles(gfx++, 21, 22, 23, 0, 22, 24, 23, 0);
+    gSP2Triangles(gfx++, 25, 26, 27, 0, 25, 28, 26, 0);
+    gSP2Triangles(gfx++, 29, 30, 31, 0, 30, 32, 31, 0);
+    gSP2Triangles(gfx++, 33, 34, 35, 0, 33, 36, 34, 0);
+    gSP2Triangles(gfx++, 37, 3, 5, 0, 38, 39, 40, 0);
+    gSP2Triangles(gfx++, 41, 42, 43, 0, 44, 45, 46, 0);
+    gSP2Triangles(gfx++, 44, 46, 47, 0, 48, 49, 50, 0);
+    gSP2Triangles(gfx++, 48, 51, 49, 0, 52, 53, 54, 0);
+    gSP2Triangles(gfx++, 52, 55, 53, 0, 55, 56, 53, 0);
+    gSP2Triangles(gfx++, 56, 57, 53, 0, 58, 59, 9, 0);
+    gSP1Triangle(gfx++, 60, 61, 62, 0);
+    gSPVertex(gfx++, D_3029398, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_3028A08, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 0, 5, 0, 1, 6, 7, 0);
+    gSP2Triangles(gfx++, 2, 1, 7, 0, 5, 0, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_3028EA8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_3028EE8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_3028D68, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7032E68[];
+extern Vtx D_7032F08[];
+extern Vtx D_7032F88[];
+extern Vtx D_70331F8[];
+extern Vtx D_7033338[];
+extern Vtx D_7033378[];
+extern Vtx D_70333F8[];
+extern Vtx D_70337E8[];
+
+Gfx* func_i9_8015C634(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7032F08, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 89, 84, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7032F88, 39, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 7, 0, 8, 9, 10, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 13, 0);
+    gSP2Triangles(gfx++, 14, 13, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 16, 21, 0);
+    gSP2Triangles(gfx++, 23, 18, 17, 0, 24, 18, 23, 0);
+    gSP2Triangles(gfx++, 25, 26, 1, 0, 24, 27, 18, 0);
+    gSP2Triangles(gfx++, 28, 0, 29, 0, 30, 17, 19, 0);
+    gSP2Triangles(gfx++, 28, 1, 0, 0, 10, 31, 32, 0);
+    gSP2Triangles(gfx++, 4, 10, 32, 0, 33, 34, 35, 0);
+    gSP2Triangles(gfx++, 36, 37, 38, 0, 2, 1, 26, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_70333F8, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 15, 0, 18, 19, 20, 0);
+    gSP2Triangles(gfx++, 18, 20, 21, 0, 22, 23, 24, 0);
+    gSP2Triangles(gfx++, 22, 24, 25, 0, 16, 26, 17, 0);
+    gSP2Triangles(gfx++, 27, 28, 29, 0, 28, 30, 29, 0);
+    gSP2Triangles(gfx++, 31, 32, 33, 0, 31, 34, 32, 0);
+    gSP2Triangles(gfx++, 35, 36, 37, 0, 36, 38, 37, 0);
+    gSP2Triangles(gfx++, 39, 40, 41, 0, 39, 42, 40, 0);
+    gSP2Triangles(gfx++, 16, 43, 26, 0, 44, 45, 46, 0);
+    gSP2Triangles(gfx++, 47, 48, 49, 0, 50, 51, 52, 0);
+    gSP2Triangles(gfx++, 50, 52, 53, 0, 54, 10, 12, 0);
+    gSP2Triangles(gfx++, 55, 56, 57, 0, 55, 58, 56, 0);
+    gSP2Triangles(gfx++, 59, 2, 60, 0, 61, 62, 16, 0);
+    gSP1Triangle(gfx++, 59, 0, 2, 0);
+    gSPVertex(gfx++, D_70337E8, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7032E68, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7033338, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7033378, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_70331F8, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7033818[];
+extern Vtx D_70338B8[];
+extern Vtx D_7033918[];
+extern Vtx D_7033B88[];
+extern Vtx D_7033C18[];
+extern Vtx D_7033C58[];
+extern Vtx D_7033CD8[];
+
+Gfx* func_i9_8015CD18(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_70338B8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 89, 84, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7033918, 39, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 7, 0);
+    gSP2Triangles(gfx++, 17, 13, 12, 0, 18, 13, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 18, 23, 13, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 12, 14, 0);
+    gSP2Triangles(gfx++, 24, 22, 25, 0, 28, 29, 30, 0);
+    gSP2Triangles(gfx++, 31, 22, 21, 0, 32, 33, 34, 0);
+    gSP2Triangles(gfx++, 35, 36, 37, 0, 25, 22, 38, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7033CD8, 58, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 3, 4, 1, 0, 4, 5, 1, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 15, 17, 18, 0, 19, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 43, 44, 45, 0);
+    gSP2Triangles(gfx++, 46, 47, 48, 0, 46, 48, 49, 0);
+    gSP2Triangles(gfx++, 50, 51, 39, 0, 50, 52, 51, 0);
+    gSP2Triangles(gfx++, 50, 53, 52, 0, 54, 22, 24, 0);
+    gSP2Triangles(gfx++, 55, 19, 16, 0, 6, 8, 56, 0);
+    gSP1Triangle(gfx++, 17, 19, 57, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7033818, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7033C18, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7033C58, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7033B88, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7034078[];
+extern Vtx D_7034118[];
+extern Vtx D_7034148[];
+extern Vtx D_7034368[];
+extern Vtx D_70343F8[];
+extern Vtx D_7034428[];
+
+Gfx* func_i9_8015D344(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7034118, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 89, 84, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7034148, 34, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 6, 10, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 15, 18, 0, 19, 20, 1, 0);
+    gSP2Triangles(gfx++, 17, 21, 15, 0, 1, 0, 22, 0);
+    gSP2Triangles(gfx++, 23, 16, 15, 0, 24, 25, 22, 0);
+    gSP2Triangles(gfx++, 24, 26, 25, 0, 27, 1, 20, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7034428, 43, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 3, 10, 4, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 29, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 38, 39, 36, 0, 39, 40, 36, 0);
+    gSP1Triangle(gfx++, 8, 41, 42, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7034078, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_70343F8, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7034368, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    return gfx;
+}
+
+extern Vtx D_70346D8[];
+extern Vtx D_7034778[];
+extern Vtx D_70347D8[];
+extern Vtx D_7034808[];
+
+Gfx* func_i9_8015D814(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 89, 84, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_70346D8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 1, 0, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 5, 4, 0);
+    gSP2Triangles(gfx++, 1, 3, 8, 0, 9, 6, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7034808, 28, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 1, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 8, 9, 10, 0);
+    gSP2Triangles(gfx++, 11, 12, 13, 0, 14, 15, 16, 0);
+    gSP2Triangles(gfx++, 17, 18, 19, 0, 6, 20, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_70347D8, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7034778, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    return gfx;
+}
+
+extern Vtx D_3029A88[];
+extern Vtx D_3029B48[];
+extern Vtx D_3029C78[];
+extern Vtx D_3029CF8[];
+extern Vtx D_3029FD8[];
+extern Vtx D_302A128[];
+extern Vtx D_302A528[];
+extern Vtx D_302A628[];
+
+Gfx* func_i9_8015DA94(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_3029C78, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_3029CF8, 46, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 9, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 13, 16, 14, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 20, 18, 0, 21, 22, 8, 0);
+    gSP2Triangles(gfx++, 22, 6, 8, 0, 6, 23, 7, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 4, 3, 27, 0);
+    gSP2Triangles(gfx++, 4, 27, 24, 0, 4, 24, 26, 0);
+    gSP2Triangles(gfx++, 28, 1, 29, 0, 30, 26, 25, 0);
+    gSP2Triangles(gfx++, 31, 32, 33, 0, 34, 35, 36, 0);
+    gSP2Triangles(gfx++, 0, 37, 1, 0, 0, 2, 38, 0);
+    gSP2Triangles(gfx++, 39, 40, 41, 0, 42, 43, 40, 0);
+    gSP2Triangles(gfx++, 42, 40, 44, 0, 43, 42, 45, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_302A128, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 0, 0);
+    gSP2Triangles(gfx++, 5, 6, 7, 0, 8, 9, 10, 0);
+    gSP2Triangles(gfx++, 8, 10, 11, 0, 12, 13, 14, 0);
+    gSP2Triangles(gfx++, 12, 14, 15, 0, 16, 17, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 19, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 25, 27, 26, 0);
+    gSP2Triangles(gfx++, 24, 28, 25, 0, 28, 29, 30, 0);
+    gSP2Triangles(gfx++, 28, 30, 25, 0, 30, 31, 27, 0);
+    gSP2Triangles(gfx++, 30, 27, 25, 0, 32, 33, 34, 0);
+    gSP2Triangles(gfx++, 32, 34, 35, 0, 34, 36, 37, 0);
+    gSP2Triangles(gfx++, 34, 37, 35, 0, 38, 35, 39, 0);
+    gSP2Triangles(gfx++, 38, 32, 35, 0, 35, 37, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 40, 42, 43, 0);
+    gSP2Triangles(gfx++, 44, 45, 46, 0, 44, 46, 47, 0);
+    gSP2Triangles(gfx++, 48, 49, 50, 0, 48, 50, 51, 0);
+    gSP2Triangles(gfx++, 52, 53, 54, 0, 52, 54, 55, 0);
+    gSP2Triangles(gfx++, 56, 57, 58, 0, 56, 58, 59, 0);
+    gSP2Triangles(gfx++, 60, 61, 62, 0, 60, 62, 63, 0);
+    gSPVertex(gfx++, D_302A528, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSPVertex(gfx++, D_302A628, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_3029A88, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 3, 4, 1, 0, 3, 5, 4, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 8, 1, 4, 0, 8, 4, 9, 0);
+    gSP2Triangles(gfx++, 0, 10, 11, 0, 0, 11, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_3029B48, 19, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 3, 10, 1, 0, 11, 12, 8, 0);
+    gSP2Triangles(gfx++, 5, 13, 14, 0, 15, 16, 17, 0);
+    gSP1Triangle(gfx++, 15, 17, 18, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_3029FD8, 21, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP1Triangle(gfx++, 18, 19, 20, 0);
+
+    return gfx;
+}
+
+extern Vtx D_70349C8[];
+extern Vtx D_7034A68[];
+extern Vtx D_7034B78[];
+extern Vtx D_7034BF8[];
+extern Vtx D_7034ED8[];
+extern Vtx D_7034FC8[];
+extern Vtx D_70353C8[];
+
+Gfx* func_i9_8015E268(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7034B78, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7034BF8, 46, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 7, 0, 3, 5, 6, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 15, 13, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 19, 17, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 25, 0, 27, 23, 25, 0);
+    gSP2Triangles(gfx++, 23, 28, 24, 0, 29, 2, 1, 0);
+    gSP2Triangles(gfx++, 21, 20, 30, 0, 31, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 21, 30, 29, 0);
+    gSP2Triangles(gfx++, 21, 29, 1, 0, 37, 5, 38, 0);
+    gSP2Triangles(gfx++, 39, 40, 41, 0, 42, 43, 40, 0);
+    gSP2Triangles(gfx++, 42, 40, 44, 0, 43, 42, 45, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7034FC8, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 13, 15, 14, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 17, 19, 18, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 23, 21, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 25, 27, 26, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 32, 34, 35, 0);
+    gSP2Triangles(gfx++, 36, 37, 38, 0, 36, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 40, 42, 43, 0);
+    gSP2Triangles(gfx++, 44, 45, 46, 0, 44, 46, 47, 0);
+    gSP2Triangles(gfx++, 48, 49, 50, 0, 48, 50, 51, 0);
+    gSP2Triangles(gfx++, 52, 53, 54, 0, 52, 54, 55, 0);
+    gSP2Triangles(gfx++, 56, 57, 58, 0, 56, 58, 59, 0);
+    gSP2Triangles(gfx++, 60, 61, 62, 0, 60, 62, 63, 0);
+    gSPVertex(gfx++, D_70353C8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_70349C8, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 3, 4, 1, 0, 3, 5, 4, 0);
+    gSP2Triangles(gfx++, 6, 1, 4, 0, 6, 4, 7, 0);
+    gSP2Triangles(gfx++, 0, 8, 9, 0, 0, 9, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7034A68, 17, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 2, 7, 0, 4, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP1Triangle(gfx++, 13, 15, 16, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7034ED8, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP1Triangle(gfx++, 12, 13, 14, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7035408[];
+extern Vtx D_7035488[];
+extern Vtx D_7035598[];
+extern Vtx D_70357A8[];
+extern Vtx D_7035898[];
+
+Gfx* func_i9_8015E910(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7035598, 33, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 0, 3, 4, 0, 5, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 4, 9, 0, 10, 11, 6, 0);
+    gSP2Triangles(gfx++, 10, 12, 13, 0, 14, 0, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 18, 17, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 29, 30, 28, 0);
+    gSP2Triangles(gfx++, 26, 31, 27, 0, 3, 32, 4, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7035898, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 4, 6, 5, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 0, 2, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 23, 21, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 25, 27, 26, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 32, 34, 35, 0);
+    gSP2Triangles(gfx++, 36, 37, 38, 0, 36, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 40, 42, 43, 0);
+    gSP2Triangles(gfx++, 44, 45, 46, 0, 47, 48, 49, 0);
+    gSP2Triangles(gfx++, 50, 51, 52, 0, 53, 54, 55, 0);
+    gSP2Triangles(gfx++, 53, 55, 56, 0, 57, 58, 59, 0);
+    gSP2Triangles(gfx++, 60, 61, 62, 0, 60, 62, 63, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7035408, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 3, 4, 1, 0, 3, 5, 4, 0);
+    gSP2Triangles(gfx++, 6, 1, 4, 0, 6, 4, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7035488, 17, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 5, 10, 0);
+    gSP2Triangles(gfx++, 7, 11, 12, 0, 13, 14, 15, 0);
+    gSP1Triangle(gfx++, 13, 15, 16, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_70357A8, 15, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP1Triangle(gfx++, 12, 13, 14, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7035C98[];
+extern Vtx D_7035D78[];
+extern Vtx D_7035F58[];
+extern Vtx D_7035FE8[];
+
+Gfx* func_i9_8015EE84(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7035D78, 30, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 6, 4, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 7, 0);
+    gSP2Triangles(gfx++, 10, 7, 9, 0, 13, 14, 15, 0);
+    gSP2Triangles(gfx++, 15, 14, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 9, 27, 0, 28, 29, 24, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7035FE8, 46, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 15, 13, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 17, 19, 18, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 26, 27, 28, 0, 26, 28, 29, 0);
+    gSP2Triangles(gfx++, 30, 31, 32, 0, 30, 32, 33, 0);
+    gSP2Triangles(gfx++, 34, 35, 36, 0, 37, 38, 39, 0);
+    gSP2Triangles(gfx++, 40, 41, 42, 0, 43, 44, 45, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7035C98, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 3, 7, 0, 8, 2, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7035F58, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    return gfx;
+}
+
+extern Vtx D_70362C8[];
+extern Vtx D_7036358[];
+extern Vtx D_7036458[];
+extern Vtx D_70364B8[];
+
+Gfx* func_i9_8015F214(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7036358, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 1, 0, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_70364B8, 27, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
+    gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
+    gSP1Triangle(gfx++, 24, 25, 26, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_70362C8, 9, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP1Triangle(gfx++, 6, 7, 8, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7036458, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    return gfx;
+}
+
+extern Vtx D_302AD48[];
+extern Vtx D_302AE28[];
+extern Vtx D_302AF08[];
+extern Vtx D_302AF48[];
+extern Vtx D_302B008[];
+extern Vtx D_302B408[];
+extern Vtx D_302B5D8[];
+extern Vtx D_302B698[];
+extern Vtx D_302B798[];
+
+Gfx* func_i9_8015F46C(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_302AF08, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_302AF48, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 212, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_302B698, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 5, 4, 6, 0, 5, 6, 7, 0);
+    gSP2Triangles(gfx++, 3, 8, 9, 0, 3, 9, 0, 0);
+    gSP2Triangles(gfx++, 3, 10, 8, 0, 9, 1, 0, 0);
+    gSP2Triangles(gfx++, 11, 10, 5, 0, 11, 5, 7, 0);
+    gSP2Triangles(gfx++, 12, 2, 13, 0, 12, 13, 14, 0);
+    gSP2Triangles(gfx++, 2, 1, 15, 0, 2, 15, 13, 0);
+    gSP2Triangles(gfx++, 10, 3, 5, 0, 0, 2, 12, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_302B008, 64, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 18, 19, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 24, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
+    gSP2Triangles(gfx++, 32, 33, 34, 0, 35, 36, 37, 0);
+    gSP2Triangles(gfx++, 35, 37, 38, 0, 35, 39, 36, 0);
+    gSP2Triangles(gfx++, 37, 40, 38, 0, 41, 42, 43, 0);
+    gSP2Triangles(gfx++, 44, 45, 46, 0, 44, 46, 47, 0);
+    gSP2Triangles(gfx++, 48, 49, 50, 0, 48, 50, 51, 0);
+    gSP2Triangles(gfx++, 52, 53, 54, 0, 52, 54, 55, 0);
+    gSP2Triangles(gfx++, 53, 56, 57, 0, 53, 57, 54, 0);
+    gSP2Triangles(gfx++, 36, 58, 59, 0, 36, 59, 37, 0);
+    gSP2Triangles(gfx++, 58, 11, 10, 0, 58, 10, 59, 0);
+    gSP2Triangles(gfx++, 60, 61, 62, 0, 60, 62, 63, 0);
+    gSPVertex(gfx++, D_302B408, 29, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 6, 0);
+    gSP2Triangles(gfx++, 4, 9, 10, 0, 11, 12, 13, 0);
+    gSP2Triangles(gfx++, 11, 14, 12, 0, 4, 15, 9, 0);
+    gSP2Triangles(gfx++, 16, 17, 18, 0, 16, 19, 17, 0);
+    gSP2Triangles(gfx++, 20, 21, 22, 0, 23, 24, 25, 0);
+    gSP2Triangles(gfx++, 24, 26, 27, 0, 20, 28, 21, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_302B798, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_302AD48, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 3, 4, 5, 0, 3, 5, 2, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_302AE28, 14, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 1, 4, 5, 0, 1, 5, 2, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+    gSP2Triangles(gfx++, 8, 10, 9, 0, 6, 11, 7, 0);
+    gSP2Triangles(gfx++, 12, 0, 3, 0, 12, 13, 0, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_302B5D8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 1, 4, 2, 0, 5, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 0, 3, 0, 9, 10, 11, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7036668[];
+extern Vtx D_7036728[];
+extern Vtx D_70367E8[];
+extern Vtx D_7036868[];
+extern Vtx D_70368E8[];
+extern Vtx D_7036CD8[];
+extern Vtx D_7036D98[];
+extern Vtx D_7036E98[];
+
+Gfx* func_i9_8015FC70(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_70367E8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7036868, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 212, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7036D98, 16, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 3, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 8, 11, 0, 10, 11, 12, 0);
+    gSP2Triangles(gfx++, 13, 4, 3, 0, 13, 14, 0, 0);
+    gSP2Triangles(gfx++, 13, 0, 7, 0, 13, 15, 14, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_70368E8, 63, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+    gSP2Triangles(gfx++, 0, 12, 13, 0, 0, 13, 14, 0);
+    gSP2Triangles(gfx++, 15, 16, 17, 0, 15, 17, 18, 0);
+    gSP2Triangles(gfx++, 19, 20, 5, 0, 19, 5, 21, 0);
+    gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
+    gSP2Triangles(gfx++, 28, 29, 21, 0, 28, 21, 30, 0);
+    gSP2Triangles(gfx++, 28, 31, 29, 0, 21, 32, 30, 0);
+    gSP2Triangles(gfx++, 33, 34, 35, 0, 2, 1, 36, 0);
+    gSP2Triangles(gfx++, 37, 38, 39, 0, 37, 39, 40, 0);
+    gSP2Triangles(gfx++, 41, 18, 17, 0, 41, 17, 42, 0);
+    gSP2Triangles(gfx++, 43, 44, 45, 0, 43, 45, 46, 0);
+    gSP2Triangles(gfx++, 26, 47, 12, 0, 48, 49, 50, 0);
+    gSP2Triangles(gfx++, 51, 52, 2, 0, 51, 53, 52, 0);
+    gSP2Triangles(gfx++, 54, 4, 6, 0, 20, 55, 5, 0);
+    gSP2Triangles(gfx++, 56, 57, 58, 0, 6, 59, 60, 0);
+    gSP2Triangles(gfx++, 10, 9, 60, 0, 57, 52, 53, 0);
+    gSP2Triangles(gfx++, 49, 61, 50, 0, 24, 62, 22, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPVertex(gfx++, D_7036E98, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7036668, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 3, 4, 5, 0, 3, 5, 2, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_7036728, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7036CD8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 1, 4, 2, 0, 5, 0, 3, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7036EF8[];
+extern Vtx D_7036F38[];
+extern Vtx D_7036FD8[];
+extern Vtx D_7037058[];
+extern Vtx D_70370D8[];
+extern Vtx D_7037498[];
+extern Vtx D_7037558[];
+
+Gfx* func_i9_80160314(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7036FD8, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_7037058, 8, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 212, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7037558, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 0, 2, 0, 7, 2, 8, 0);
+    gSP2Triangles(gfx++, 9, 4, 10, 0, 11, 4, 3, 0);
+    gSP2Triangles(gfx++, 7, 8, 9, 0, 7, 9, 10, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_70370D8, 60, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 13, 11, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 8, 0);
+    gSP2Triangles(gfx++, 17, 8, 19, 0, 4, 20, 21, 0);
+    gSP2Triangles(gfx++, 4, 21, 19, 0, 22, 23, 24, 0);
+    gSP2Triangles(gfx++, 25, 26, 27, 0, 28, 29, 30, 0);
+    gSP2Triangles(gfx++, 28, 31, 29, 0, 29, 32, 30, 0);
+    gSP2Triangles(gfx++, 33, 34, 35, 0, 6, 5, 36, 0);
+    gSP2Triangles(gfx++, 37, 38, 39, 0, 37, 40, 38, 0);
+    gSP2Triangles(gfx++, 41, 42, 43, 0, 42, 44, 43, 0);
+    gSP2Triangles(gfx++, 4, 45, 20, 0, 46, 47, 48, 0);
+    gSP2Triangles(gfx++, 49, 50, 51, 0, 52, 53, 8, 0);
+    gSP2Triangles(gfx++, 54, 55, 56, 0, 57, 7, 9, 0);
+    gSP2Triangles(gfx++, 47, 58, 48, 0, 24, 59, 22, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7036EF8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 7, G_ON);
+    gSPVertex(gfx++, D_7036F38, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
+    gSP2Triangles(gfx++, 1, 4, 5, 0, 1, 5, 2, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7037498, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 4, 0, 2, 0);
+    gSP2Triangles(gfx++, 4, 2, 5, 0, 9, 10, 11, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7037618[];
+extern Vtx D_7037658[];
+extern Vtx D_70376C8[];
+extern Vtx D_7037728[];
+extern Vtx D_70379B8[];
+extern Vtx D_7037A78[];
+
+Gfx* func_i9_801608D8(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7037658, 7, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP1Triangle(gfx++, 4, 5, 6, 0);
+
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPVertex(gfx++, D_70376C8, 6, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 212, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7037A78, 11, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 1, 0, 0, 3, 5, 7, 0);
+    gSP2Triangles(gfx++, 8, 1, 9, 0, 3, 7, 8, 0);
+    gSP2Triangles(gfx++, 3, 8, 9, 0, 4, 10, 5, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7037728, 41, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
+    gSP2Triangles(gfx++, 12, 1, 0, 0, 7, 13, 8, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+    gSP2Triangles(gfx++, 17, 19, 20, 0, 21, 22, 23, 0);
+    gSP2Triangles(gfx++, 24, 25, 26, 0, 12, 27, 28, 0);
+    gSP2Triangles(gfx++, 12, 28, 29, 0, 12, 29, 20, 0);
+    gSP2Triangles(gfx++, 30, 31, 0, 0, 32, 33, 19, 0);
+    gSP2Triangles(gfx++, 8, 34, 35, 0, 36, 37, 38, 0);
+    gSP2Triangles(gfx++, 4, 39, 5, 0, 38, 40, 36, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7037618, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_70379B8, 12, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
+    gSP2Triangles(gfx++, 1, 4, 2, 0, 5, 6, 7, 0);
+    gSP2Triangles(gfx++, 8, 9, 10, 0, 3, 11, 4, 0);
+
+    return gfx;
+}
+
+extern Vtx D_7037B28[];
+extern Vtx D_7037B68[];
+extern Vtx D_7037B98[];
+extern Vtx D_7037CD8[];
+extern Vtx D_7037D18[];
+
+Gfx* func_i9_80160D90(Gfx* gfx) {
+
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
+                      0, 0, 0, COMBINED);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPVertex(gfx++, D_7037B68, 3, 0);
+    gSP1Triangle(gfx++, 0, 1, 2, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 212, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPVertex(gfx++, D_7037D18, 10, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+    gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPVertex(gfx++, D_7037B98, 20, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
+    gSP2Triangles(gfx++, 6, 7, 0, 0, 7, 1, 0, 0);
+    gSP2Triangles(gfx++, 4, 8, 5, 0, 8, 9, 5, 0);
+    gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
+    gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetEnvColor(gfx++, 0, 0, 0, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 6, G_ON);
+    gSPVertex(gfx++, D_7037B28, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
+    gSPVertex(gfx++, D_7037CD8, 4, 0);
+    gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+
+    return gfx;
+}
+
+extern u8 D_3006178[];
+extern u8 D_3006A78[];
+extern u8 D_3008A18[];
 
 Gfx* func_i9_80161050(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
 
@@ -10744,75 +16533,679 @@ Gfx* func_i9_80161050(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801614D0.s")
+extern u8 D_3008698[];
+extern u8 D_3008718[];
+extern u8 D_301A268[];
+extern u8 D_3026DE8[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8016197C.s")
+Gfx* func_i9_801614D0(Gfx* gfx) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80161C78.s")
+    gDPPipeSync(gfx++);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80161FF8.s")
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3026DE8, 0x40, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_302B7F8, 0x50, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_301A268, 0x90, 5, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xA0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0xE0, 7, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80162370.s")
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80162768.s")
+extern u8 D_3024AF8[];
+extern u8 D_302A688[];
+extern u8 D_3004B18[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80162B08.s")
+Gfx* func_i9_8016197C(Gfx* gfx) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80162FE0.s")
+    gDPPipeSync(gfx++);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80163374.s")
+    gDPLoadMultiBlock_4b(gfx++, D_3024AF8, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_302A708, 0x20, 2, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_302A688, 0x60, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x70, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0xB0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801636F4.s")
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80163BAC.s")
+extern u8 D_30295C8[];
+extern u8 D_3004D18[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80163F28.s")
+Gfx* func_i9_80161C78(Gfx* gfx) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801642A4.s")
+    gDPPipeSync(gfx++);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80164608.s")
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_30295C8, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_30293C8, 0x30, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004D18, 0x70, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0xB0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xF0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_8016497C.s")
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80164E34.s")
+extern u8 D_3007E18[];
+extern u8 D_3004698[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80165124.s")
+Gfx* func_i9_80161FF8(Gfx* gfx) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80165494.s")
+    gDPPipeSync(gfx++);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80165858.s")
+    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0x10, 1, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3007E18, 0x20, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x30, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_30283C8, 0x50, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80165D28.s")
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801660BC.s")
+extern u8 D_3006478[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80166468.s")
+Gfx* func_i9_80162370(Gfx* gfx) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801667F8.s")
+    gDPPipeSync(gfx++);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80166CF4.s")
+    gDPLoadMultiBlock_4b(gfx++, D_3026E68, 0x10, 1, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x50, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0x60, 3, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3026DE8, 0x70, 4, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x80, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0xC0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80167068.s")
+    return gfx;
+}
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80167530.s")
+extern u8 D_3022F58[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80167898.s")
+Gfx* func_i9_80162768(Gfx* gfx) {
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_80167C1C.s")
+    gDPPipeSync(gfx++);
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i9/F2AC0/func_i9_801680E8.s")
+    gDPLoadMultiBlock_4b(gfx++, D_3022F58, 0x10, 1, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x50, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x70, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3025BB8, 0x80, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xC0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x100, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-extern u16 D_3004498[];
-extern u16 D_3004598[];
-extern u16 D_3004698[];
-extern u16 D_3004718[];
-extern u16 D_3004918[];
-extern u16 D_3004B18[];
-extern u16 D_3004D18[];
+    return gfx;
+}
+
+extern u8 D_300B5F8[];
+extern u8 D_3012C48[];
+extern u8 D_30242F8[];
+
+Gfx* func_i9_80162B08(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock(gfx++, D_30242F8, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP,
+                      G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3024B78, 0x120, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3024AF8, 0x160, 4, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x170, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x1B0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300B5F8, 0x1F0, 7, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+Gfx* func_i9_80162FE0(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3023158, 0x20, 2, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3022F58, 0x60, 3, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0xA0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300B5F8, 0x120, 6, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3021778[];
+
+Gfx* func_i9_80163374(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock(gfx++, D_3021778, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                      G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x130, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3021F78, 0x140, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x180, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x1C0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3020258[];
+extern u8 D_3020658[];
+
+Gfx* func_i9_801636F4(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3020258, 0x10, 1, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x90, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0xA0, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3020658, 0xC0, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x120, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300B5F8, 0x160, 7, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_301DA58[];
+
+Gfx* func_i9_80163BAC(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_301DA58, 0x30, 3, G_IM_FMT_I, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_301F128, 0xB0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xF0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x130, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+Gfx* func_i9_80163F28(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_301DA58, 0x30, 3, G_IM_FMT_I, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_301DE58, 0xB0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xF0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x130, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_301C818[];
+
+Gfx* func_i9_801642A4(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_301C818, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x30, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_301C898, 0x50, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_301B1B8[];
+
+Gfx* func_i9_80164608(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_301B1B8, 0x10, 1, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x90, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0xA0, 3, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_301B5B8, 0xB0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xF0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x130, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3019FE8[];
+
+Gfx* func_i9_8016497C(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_301A268, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3019FE8, 0x30, 3, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_301A068, 0x40, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x80, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0xC0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300B5F8, 0x100, 7, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3018698[];
+
+Gfx* func_i9_80164E34(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock(gfx++, D_3018698, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                      G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3018498, 0x130, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x170, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x1B0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+Gfx* func_i9_80165124(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x20, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x40, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_30175D8, 0x50, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3016558[];
+
+Gfx* func_i9_80165494(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock(gfx++, D_3016558, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                      G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3016758, 0x60, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xA0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x120, 6, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3006878[];
+extern u8 D_3015198[];
+
+Gfx* func_i9_80165858(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3007E18, 0x10, 1, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3015198, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006878, 0x30, 3, G_IM_FMT_IA, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x70, 4, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3015218, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x110, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_300CDF8[];
+
+Gfx* func_i9_80165D28(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_300CDF8, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x30, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3013ED8, 0x50, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x90, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xD0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004D18, 0x110, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3012BC8[];
+
+Gfx* func_i9_801660BC(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3012CC8, 0x40, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x80, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0xC0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3012BC8, 0x100, 6, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_300E8A8[];
+
+Gfx* func_i9_80166468(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_300CDF8, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x30, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x50, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300E8A8, 0x60, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x80, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xC0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_300FAF8[];
+extern u8 D_30102F8[];
+extern u8 D_30103F8[];
+
+Gfx* func_i9_801667F8(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock(gfx++, D_300FAF8, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                      G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x130, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_30103F8, 0x140, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_30102F8, 0x160, 5, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x180, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0x1C0, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+Gfx* func_i9_80166CF4(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0x40, 3, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3011578, 0x50, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_300CD78[];
+extern u8 D_300CEF8[];
+extern u8 D_300D2F8[];
+
+Gfx* func_i9_80167068(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_300CDF8, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300CD78, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x40, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300D2F8, 0x50, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300CEF8, 0x70, 5, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xF0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x130, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_300B678[];
+extern u8 D_300BA78[];
+
+Gfx* func_i9_80167530(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300BA78, 0x30, 2, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300B678, 0x50, 3, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_300B5F8, 0xD0, 4, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x120, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3009BE8[];
+extern u8 D_3009CE8[];
+
+Gfx* func_i9_80167898(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock(gfx++, D_3009CE8, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                      G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x120, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3009BE8, 0x140, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0x160, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x1A0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3007E98[];
+extern u8 D_3008918[];
+
+Gfx* func_i9_80167C1C(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock(gfx++, D_3007E98, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                      G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3007E18, 0x110, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008918, 0x120, 3, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x140, 4, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x160, 5, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x170, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x1B0, 7, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3006078[];
+extern u8 D_3006278[];
+extern u8 D_3006678[];
+
+Gfx* func_i9_801680E8(Gfx* gfx) {
+
+    gDPPipeSync(gfx++);
+
+    gDPLoadMultiBlock(gfx++, D_3006278, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                      G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006678, 0x50, 2, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x90, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006078, 0xB0, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006878, 0xD0, 5, G_IM_FMT_IA, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x110, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x150, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+
+    return gfx;
+}
+
+extern u8 D_3004498[];
+extern u8 D_3004598[];
+extern u8 D_3004718[];
+extern u8 D_3004918[];
 
 Gfx* func_i9_801685B4(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
+
     gDPLoadMultiBlock(gfx++, D_3004918, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                       G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, D_3004698, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
