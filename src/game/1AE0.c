@@ -139,7 +139,7 @@ void func_80067E98(void) {
     func_80067C0C(D_800DCCF4);
 }
 
-s32 D_800CCFE0 = 0;
+u32 D_800CCFE0 = 0;
 s16 D_800CCFE4 = 2;
 s16 D_800CCFE8 = 2;
 

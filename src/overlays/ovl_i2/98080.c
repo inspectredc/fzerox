@@ -113,7 +113,7 @@ void func_i2_800FC77C(void) {
     }
 }
 
-extern s32 D_800DCE48;
+extern unk_800DCE48 D_800DCE48;
 
 void func_i2_800FC9BC(void) {
     D_i2_80106DA4 = 1;
@@ -123,7 +123,7 @@ void func_i2_800FC9BC(void) {
         return;
     }
 
-    switch (D_800DCE48) {
+    switch (D_800DCE48.unk_00) {
         case 0x8000:
             func_i2_800FCB84(1, 1);
             break;

@@ -2425,7 +2425,6 @@ void func_800890B4(void) {
     D_800E5EC8 = var_v0;
 }
 
-void func_800BA8D8(s32);
 void func_i3_80128D8C(void);
 void func_i3_801345A4(void);
 extern s16 D_800E5ED8[];
@@ -2456,8 +2455,6 @@ void func_8008927C(s32 arg0) {
     }
     D_800F80C4 = 0;
 }
-
-void func_8007E0CC(void);
 
 extern s16 D_800E5FC6;
 extern s16 D_800E5FC8;

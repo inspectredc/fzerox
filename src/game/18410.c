@@ -65,7 +65,7 @@ s32 func_8007EFBC(u16* arg0, u16* arg1, s32 arg2) {
     return var_s2;
 }
 
-extern s32 D_800CCFE0;
+extern u32 D_800CCFE0;
 
 Gfx* func_8007F090(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     u32 red;

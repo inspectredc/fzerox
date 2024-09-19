@@ -1,4 +1,4 @@
-#include "common.h"
+#include "global.h"
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i5/DCF90/func_i5_80116830.s")
 
@@ -12,10 +12,8 @@
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i5/DCF90/func_i5_801175D0.s")
 
-void func_80079BC8();
-
-void func_i5_80117664(void) {
-    func_80079BC8();
+Gfx* func_i5_80117664(Gfx* gfx) {
+    return func_80079BC8(gfx);
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i5/DCF90/func_i5_80117684.s")

@@ -286,7 +286,6 @@ void func_8007DED8(void) {
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007DED8.s")
 #endif
 
-void func_80101414(void);
 extern s32 D_800CD004;
 extern s32 D_800CD008;
 extern s8 D_800E4174[4];
@@ -325,7 +324,7 @@ void func_8007DEF0(void) {
                 D_800E42CC = 1;
             }
         }
-        func_80101414();
+        func_i2_80101414();
     }
 }
 

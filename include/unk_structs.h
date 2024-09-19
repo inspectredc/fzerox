@@ -483,4 +483,29 @@ typedef struct unk_800E5FF8 {
     u8 unk_3F6A[20];
 } unk_800E5FF8; // size = 0x3F80
 
+typedef struct unk_80077D50 {
+    s16 unk_00;
+    u32 unk_04; // segmented address
+    u16 width;
+    u16 height;
+    u32 unk_0C;
+} unk_80077D50;
+
+typedef struct unk_800E33E0 {
+    u32 unk_00; // segmented address
+    TexturePtr unk_04;
+} unk_800E33E0; // size = 0x8
+
+typedef struct unk_800792D8 {
+    unk_80077D50* unk_00;
+    s32 unk_04;
+} unk_800792D8;
+
+
+typedef struct unk_800DCE48 {
+    s32 unk_00;
+    s8 unk_04[0xC];
+    s32 unk_10;
+} unk_800DCE48;
+
 #endif // UNK_STRUCTS_H
