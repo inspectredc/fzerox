@@ -7,10 +7,10 @@ s32 func_i6_8011DBD0(void) {
 
     while (i < 2) {
 
-        while(IO_READ(0x4600010) % 4) {}
-        
+        while (IO_READ(0x4600010) % 4) {}
+
         temp_a0 = IO_READ(0x100006E8);
-        
+
         if (temp_a0 != var_v1) {
             i = 0;
         } else {
@@ -18,6 +18,6 @@ s32 func_i6_8011DBD0(void) {
         }
 
         var_v1 = temp_a0;
-    } 
+    }
     return temp_a0;
 }

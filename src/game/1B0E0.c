@@ -663,7 +663,6 @@ u8* func_800832EC(u8* arg0, u32 arg1, unk_800832EC_arg_2* arg2) {
     return temp_v0;
 }
 
-Gfx* func_8006A00C(Gfx*, s32);
 extern s32 D_800CD000;
 extern s32 D_800DCE44;
 // Todo: figure out what this array is

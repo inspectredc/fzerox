@@ -117,11 +117,11 @@ s32 func_i6_80115FF0(void) {
                 D_800CD384 = 5;
                 return 0x8000;
             }
-        
+
             if ((D_800E416E & 0x1000) && (func_80079E88(0x5E)->unk_04 == 7)) {
                 break;
             }
-        
+
             if (D_800E416E & 0x9000) {
                 func_800BA8D8(0x3E);
                 D_800DCE48.unk_10 = (func_80079E88(0x5E)->unk_1C & 0xFFFF) + 0xFFFF6686;
@@ -180,7 +180,7 @@ s32 func_i6_80115FF0(void) {
                     break;
                 }
             }
-            
+
             if (D_800E416C & 0x800) {
                 if (D_800CD388[D_800CD380] > 0) {
                     D_800CD388[D_800CD380]--;
@@ -198,23 +198,23 @@ s32 func_i6_80115FF0(void) {
                 func_800BA8D8(0x21);
                 D_800CD384 = 2;
                 switch (D_800CD380) {
-                case 3:
-                    D_800CD000 = D_800CD394 + 2;
-                    break;
-                case 1:
-                    if (D_800CD38C != 0) {
-                        D_800CD384 = 6;
-                        D_800CD048 = 9;
-                        func_800BA8D8(0x3E);
-                    } else {
+                    case 3:
+                        D_800CD000 = D_800CD394 + 2;
+                        break;
+                    case 1:
+                        if (D_800CD38C != 0) {
+                            D_800CD384 = 6;
+                            D_800CD048 = 9;
+                            func_800BA8D8(0x3E);
+                        } else {
+                            D_800CD000 = 1;
+                        }
+                        break;
+                    case 0:
+                    case 5:
                         D_800CD000 = 1;
-                    }
-                    break;
-                case 0:
-                case 5:
-                    D_800CD000 = 1;
-                    D_800CD008 = D_800DCE48.unk_10 + D_800CD388[D_800CD380];
-                    break;
+                        D_800CD008 = D_800DCE48.unk_10 + D_800CD388[D_800CD380];
+                        break;
                 }
             }
             break;
@@ -237,7 +237,7 @@ s32 func_i6_80115FF0(void) {
             }
             if ((D_800E416E & 0x1000) && (func_80079E88(0x5E)->unk_04 == 7)) {
                 break;
-            } 
+            }
             if (D_800E416E & 0x9000) {
                 func_800BA8D8(0x3E);
                 func_800BB324((D_800CD000 - 1) & 0xFF);
@@ -302,13 +302,9 @@ s32 func_i6_80115FF0(void) {
     return 0x8007;
 }
 
-Gfx* func_80079BC8(Gfx*);
-
 Gfx* func_i6_801167CC(Gfx* gfx) {
     return func_80079BC8(gfx);
 }
-
-u8* func_80077D50(unk_80077D50* arg0, s32 arg1);
 
 extern s16 D_8011F910[];
 extern unk_80077D50* D_i6_8011DDF0[];
@@ -331,7 +327,7 @@ void func_i6_801167EC(unk_800E3A28* arg0) {
             }
 
             func_80077D50(D_i6_8011DDF8, 0);
-        break;
+            break;
     }
 }
 
@@ -376,7 +372,7 @@ void func_i6_80116990(void) {
     s32 i;
 
     func_80077D50(&D_i6_8011DE1C, 0);
-    
+
     for (i = 0; i < 4; i++) {
         func_80077D50(D_i6_8011DF5C[i], 0);
     }
@@ -388,7 +384,7 @@ void func_i6_801169EC(void) {
     s32 i;
 
     func_80077D50(&D_i6_8011DE1C, 0);
-    
+
     for (i = 0; i < 2; i++) {
         func_80077D50(D_i6_8011DF78[i], 0);
     }
@@ -418,11 +414,11 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp2;
 
     temp_t0 = arg1->unk_00 - 0x51;
-    
+
     if ((temp_t0 == 4) || (temp_t0 == 7)) {
         return gfx;
     }
-    
+
     if (temp_t0 == D_800CD380) {
         if (D_800CD384 == 0) {
             var_v1 = D_800CCFE0 % 30;
@@ -439,7 +435,7 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 180);
     }
 
-    switch ((s32)D_800CD384) {
+    switch ((s32) D_800CD384) {
         case 3:
         case 4:
             if (++arg1->unk_1C > 12) {
@@ -459,7 +455,7 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
 
     temp1 = (((temp_t0 % 4) << 6) - (SQ(arg1->unk_1C) * 2)) + 0x20;
     temp2 = ((temp_t0 / 4) * 0x5B) + 0x26;
-    
+
     return func_80078EA0(gfx, D_i6_8011DD70[temp_t0], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
 }
 
@@ -487,7 +483,8 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
     if (arg1->unk_04 < 3) {
         sp44 = D_i6_8011DDF0[arg1->unk_04];
         gfx = func_80078EA0(gfx, sp44, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
-        gfx = func_8007A440(gfx, arg1->unk_0C, arg1->unk_10, arg1->unk_0C + sp44->width, arg1->unk_10 + sp44->height, D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68, D_i6_8011DC6C);
+        gfx = func_8007A440(gfx, arg1->unk_0C, arg1->unk_10, arg1->unk_0C + sp44->width, arg1->unk_10 + sp44->height,
+                            D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68, D_i6_8011DC6C);
     } else {
         sp44 = D_i6_8011DDF0[D_800CD3C4];
         gfx = func_80078EA0(gfx, sp44, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
@@ -534,7 +531,7 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
                     }
                 }
 
-                label:
+            label:
                 break;
             case 12:
             case 22:
@@ -543,7 +540,7 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
         }
 
         for (var_t1 = 0; var_t1 < 240; var_t1++) {
-        
+
             switch (arg1->unk_04) {
                 case 10:
                 case 20:
@@ -583,11 +580,16 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
             }
 
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, alpha);
-            gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, var_ra->width, 1 /* unused by macro */, 0, var_t1, var_ra->width, var_t1 + 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);            
-            gSPScisTextureRectangle(gfx++, (sp58 + sp50) << 2, (sp54 + var_t1) << 2, ((sp58 + sp50) + var_ra->width) << 2, (sp54 + var_t1 + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+            gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, var_ra->width, 1 /* unused by macro */, 0,
+                               var_t1, var_ra->width, var_t1 + 1, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gSPScisTextureRectangle(gfx++, (sp58 + sp50) << 2, (sp54 + var_t1) << 2,
+                                    ((sp58 + sp50) + var_ra->width) << 2, (sp54 + var_t1 + 1) << 2, 0, 0, 0, 1 << 10,
+                                    1 << 10);
         }
 
-        gfx = func_8007A440(gfx, arg1->unk_0C, arg1->unk_10, arg1->unk_0C + sp44->width, arg1->unk_10 + sp44->height, D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68, D_i6_8011DC6C);
+        gfx = func_8007A440(gfx, arg1->unk_0C, arg1->unk_10, arg1->unk_0C + sp44->width, arg1->unk_10 + sp44->height,
+                            D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68, D_i6_8011DC6C);
         switch (arg1->unk_04) {
             case 10:
             case 20:
@@ -624,7 +626,7 @@ Gfx* func_i6_80117400(Gfx* gfx, unk_800E3A28* arg1) {
                 arg1->unk_1C = 12;
             }
             break;
-        default: 
+        default:
             if (arg1->unk_1C > 0) {
                 arg1->unk_1C--;
             }
@@ -693,15 +695,16 @@ Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
             }
         }
-        gfx = func_80078EA0(gfx, D_i6_8011DF6C[i], (arg1->unk_0C - temp_s7) + 0x20, arg1->unk_10 + (i * 20) + 0xC, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, D_i6_8011DF6C[i], (arg1->unk_0C - temp_s7) + 0x20, arg1->unk_10 + (i * 20) + 0xC, 1, 0,
+                            0, 1.0f, 1.0f);
     }
-    
+
     if (D_800CD384 != 2) {
         gfx = func_8007DB28(gfx, 0);
     } else {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     }
-    
+
     return gfx;
 }
 
@@ -712,7 +715,7 @@ Gfx* func_i6_80117760(Gfx* gfx, unk_800E3A28* arg1) {
     if (D_800CD380 != 5 && D_800CD380 != 0) {
         return gfx;
     }
-    
+
     switch (D_800CD384) {
         case 0:
         case 5:
@@ -755,10 +758,12 @@ Gfx* func_i6_80117760(Gfx* gfx, unk_800E3A28* arg1) {
         }
         if ((D_800CD3C0 < 2) && (D_800CD3C8 == 0)) {
             if (i < 3) {
-                gfx = func_80078EA0(gfx, D_i6_8011DF5C[i], (arg1->unk_0C - temp_s6) + 0x20, arg1->unk_10 + (i * 20) + 0xE, 1, 0, 0, 1.0f, 1.0f);
+                gfx = func_80078EA0(gfx, D_i6_8011DF5C[i], (arg1->unk_0C - temp_s6) + 0x20,
+                                    arg1->unk_10 + (i * 20) + 0xE, 1, 0, 0, 1.0f, 1.0f);
             }
         } else {
-            gfx = func_80078EA0(gfx, D_i6_8011DF5C[i], (arg1->unk_0C - temp_s6) + 0x20, arg1->unk_10 + (i * 18) + 7, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, D_i6_8011DF5C[i], (arg1->unk_0C - temp_s6) + 0x20, arg1->unk_10 + (i * 18) + 7, 1,
+                                0, 0, 1.0f, 1.0f);
         }
     }
 
@@ -814,7 +819,8 @@ Gfx* func_i6_80117A18(Gfx* gfx, unk_800E3A28* arg1) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
         temp_a1 = D_i6_8011DF78[i];
-        gfx = func_80078EA0(gfx, temp_a1, (((s32) (0x80 - temp_a1->width) / 2) + arg1->unk_0C) - temp_s7, arg1->unk_10 + (i * 28) + 0x15, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, temp_a1, (((s32) (0x80 - temp_a1->width) / 2) + arg1->unk_0C) - temp_s7,
+                            arg1->unk_10 + (i * 28) + 0x15, 1, 0, 0, 1.0f, 1.0f);
     }
 
     return gfx;

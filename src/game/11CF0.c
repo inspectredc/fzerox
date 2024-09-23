@@ -13,16 +13,6 @@ void func_80077D44(void) {
     D_800E3A20 = 0;
 }
 
-typedef struct unk_800E3F28 {
-    unk_800792D8* unk_00;
-    s16 unk_04;
-    s16 unk_06;
-    s16 unk_08;
-    s16 unk_0A;
-    TexturePtr unk_0C;
-    TexturePtr unk_10;
-} unk_800E3F28; // size = 0x14
-
 extern unk_800E33E0 D_800E33E0[];
 
 extern u8* D_800E33C0;
@@ -130,7 +120,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     return sp44;
 }
 
-u8* func_80078104(u32 arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
+u8* func_80078104(void* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
     s32 var_a3;
     bool var_t0;
     u8* var_s0;
@@ -199,7 +189,7 @@ u8* func_80078104(u32 arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
 
 extern s32 D_800E3A20;
 
-TexturePtr func_800783AC(u32 arg0) {
+TexturePtr func_800783AC(void* arg0) {
     s32 i;
 
     for (i = 0; i < D_800E3A20; i++) {
@@ -209,9 +199,6 @@ TexturePtr func_800783AC(u32 arg0) {
     }
     return NULL;
 }
-
-Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 arg2, s32 arg3, s32 arg4, u32 arg5, s32 arg6, s32 arg7, s32 arg8,
-                   s32 arg9, s32 argA, s32 argB);
 
 Gfx* func_800783F4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture) {
 

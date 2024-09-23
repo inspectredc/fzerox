@@ -1,7 +1,7 @@
 #include "global.h"
 
-void func_80080A40(s32* arg0) {
-    *arg0 = 0;
+void func_80080A40(unk_800E51B8** arg0) {
+    *arg0 = NULL;
 }
 
 extern s32 D_800E51B0;
@@ -23,7 +23,7 @@ void func_80080A48(void) {
     }
 }
 
-unk_800E51B8* func_80080AA8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, u16 arg5, s32 arg6) {
+unk_800E51B8* func_80080AA8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, u16 arg5, unk_800E51B8_unk_1C_func arg6) {
     s32 var_v0;
     s32 i;
     unk_800E51B8* var_v1;
@@ -175,15 +175,15 @@ Gfx* func_80080E90(Gfx* gfx) {
     return gfx;
 }
 
-bool func_8008108C(s32* arg0, s32 arg1) {
+bool func_8008108C(unk_800E51B8* arg0, s32 arg1) {
     bool ret = false;
 
     switch (arg1) {
         case 0:
-            ret = ((arg0 != NULL) && (*arg0 != 0)) ? true : false;
+            ret = ((arg0 != NULL) && (arg0->unk_00 != 0)) ? true : false;
             break;
         case 1:
-            ret = (*arg0 == 3) ? true : false;
+            ret = (arg0->unk_00 == 3) ? true : false;
             break;
         default:
             break;

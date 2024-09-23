@@ -15,6 +15,7 @@ void func_80069700(void);
 void func_80069820(void);
 void func_80069D44(void);
 
+Gfx* func_8006A00C(Gfx* gfx, s32 arg1);
 void func_8006A6E4(void);
 void func_8006A8F0(s32 arg0, s32 arg1);
 void func_8006A904(s32 arg0, s32 arg1);
@@ -28,6 +29,7 @@ void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5
 void func_8006C520(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9);
 void func_8006CC98(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 argA);
 void func_8006D03C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u16* arg9);
+void func_8006D2E0(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8);
 
 void func_80073A04(void);
 void func_80073E28(void* romAddr, void* ramAddr, size_t size);
@@ -63,7 +65,13 @@ s32 func_80076BD4(uintptr_t arg0);
 void func_80077318(void);
 void func_80077C9C(void);
 
-TexturePtr func_800783AC(u32 arg0);
+u8* func_80077D50(unk_80077D50* arg0, s32 arg1);
+u8* func_80078104(void* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4);
+TexturePtr func_800783AC(void* arg0);
+Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
+void func_800790D4(void);
+s32 func_800792D8(unk_800792D8* arg0);
+void func_800793E8(s32 arg0, s32 arg1, unk_800792D8* arg2);
 void func_800794B0(s32 arg0, s32 arg1, s32 arg2, s8 arg3);
 Gfx* func_80079BC8(Gfx* gfx);
 unk_800E3A28* func_80079E88(s32 arg0);
@@ -71,21 +79,28 @@ void func_80079EC8(void);
 void func_80079F1C(void);
 void func_80079F54(unk_800E3A28* arg0, s32 arg1, s32 arg2);
 void func_8007A0A0(unk_800E3A28* arg0, s32 arg1, s32 arg2);
+void func_8007A334(unk_800E3A28* arg0, s32 arg1, s32 arg2);
 
 Gfx* func_8007A440(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
+void func_8007A828(u16* arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4);
 Gfx* func_8007AB88(Gfx*);
 Gfx* func_8007ABA4(Gfx*);
 Gfx* func_8007AE70(Gfx*);
 Gfx* func_8007AC48(Gfx* gfx, u16 red, u16 green, u16 blue);
 Gfx* func_8007AE8C(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
 Gfx* func_8007AF40(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
+Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 arg2, s32 arg3, s32 arg4, u32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                   s32 arg9, s32 argA, s32 argB);
 void func_8007DABC(unk_800DCE98* arg0);
 Gfx* func_8007DB28(Gfx* gfx, s32 arg1);
 void func_8007E2B4(void);
 void func_8007E08C(void);
 void func_8007E0CC(void);
-void func_8007F904(void);
+void func_8007E398(void);
 
+Gfx* func_8007E410(Gfx* gfx, s32 arg1, TexturePtr arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, u16 arg9);
+
+void func_8007F904(void);
 void func_8007FC68(s32);
 void func_8007FCB8(void);
 void func_8007FCF4(void);
@@ -94,6 +109,14 @@ void func_8007FDD0(void);
 void func_8007FE48(void);
 void func_8007FE98(void);
 void func_8007FED4(void);
+
+void func_80080A40(unk_800E51B8** arg0);
+void func_80080A48(void);
+void func_80080BDC(unk_800E51B8* arg0);
+void func_80080C0C(void);
+unk_800E51B8* func_80080AA8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, u16 arg5, unk_800E51B8_unk_1C_func arg6);
+Gfx* func_80080E90(Gfx* gfx);
+bool func_8008108C(unk_800E51B8* arg0, s32 arg1);
 
 void func_8008B1CC(void);
 void func_8008D7E8(void);
@@ -115,6 +138,7 @@ void func_800A3044(void);
 void func_800AA620(u8*, void*); // mio0 decode?
 s32 func_800AA6BC(u8*);
 
+void func_800BA28C(u8 soundMode);
 void func_800BA8D8(u8 arg0);
 void func_800BB324(u8 arg0);
 
@@ -136,6 +160,7 @@ Gfx* func_i2_800FD184(Gfx*);
 s32 func_i2_80100520(s32);
 void func_i2_801012CC(s32);
 void func_i2_80101414(void);
+void func_i2_80101784(s32, s32);
 void func_i2_80103A70(void);
 void func_i2_80103AD4(void);
 s32 func_i2_80103B8C(void);

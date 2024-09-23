@@ -1,16 +1,15 @@
 #include "global.h"
 
-s32 func_80103698(void);
+s32 func_i2_80103698(void);
 void func_i10_80115E30(u8*);
 extern s32 D_8011183C; // ovl 2 bss
 
 s32 func_i10_80115DF0(void) {
-    D_8011183C = func_80103698();
+    D_8011183C = func_i2_80103698();
     func_i10_80115E30(func_800768F4(1, 0x8000));
     return 0;
 }
 
-void func_i2_80101784(s32, s32);
 void func_i2_80102600(s32);
 void func_i2_80103728(s32, s32, u8*, s32);
 bool func_i10_80115EE8(u8*);
