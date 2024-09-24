@@ -2,7 +2,6 @@
 #define OVL_I6_H
 
 #include "unk_structs.h"
-#include "other_types.h"
 
 typedef struct unk_8011DC40 {
     f32 unk_00;
@@ -142,5 +141,12 @@ extern u8 D_F262398[];
 extern u8 D_F262688[];
 extern u8 D_F263DA8[];
 extern u8 D_F2630C8[];
+
+
+extern u8 D_801247C0[];
+
+extern s32 D_i6_8011EED0[];
+extern s32 D_i6_8011EEF0[];
+extern u16 D_i6_8011EF10[];
 
 #endif // OVL_I6_H

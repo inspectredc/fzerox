@@ -68,6 +68,7 @@ D_i3_801417C4 = 0x801417C4; //force_migration:True size:0x8 segment:ovl_i3
 D_i3_801417F8 = 0x801417F8; //force_migration:True size:0x8 segment:ovl_i3
 
 D_i6_8011EDDC = 0x8011EDDC; //segment:ovl_i6 size:0xF4
+D_i6_80124788 = 0x80124788; //segment:ovl_i6 size:0x1C
 
 D_i7_8014A4D0 = 0x8014A4D0; //segment:ovl_i7 size:0xC
 D_i7_8014A7E0 = 0x8014A7E0; //segment:ovl_i7 size:0xC

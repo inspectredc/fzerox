@@ -169,9 +169,12 @@
       - [0xE7CF0, c]
       - [0xE7D60, .data, DFF10]
       - [0xE80CC, .data, E2000]
+      - [0xE8FF0, .data, ovl_i6_data]
       - [0xE9040, .rodata, DFF10]
       - [0xE9180, .rodata, E2000]
-      - { start: 0xE9A30, type: bss, vram: 0x8011F910, name: 8011F910 }
+      - { start: 0xE9A30, type: .bss, vram: 0x8011F910, name: DFF10 }
+      - { type: .bss, vram: 0x8011FAF0, name: E2000 }
+      - { type: .bss, vram: 0x801247C0, name: ovl_i6_data }
 
   - name: ovl_i7
     exclusive_ram_id: overlay

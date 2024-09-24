@@ -1,6 +1,8 @@
 #include "global.h"
 #include "ovl_i6.h"
 
+s16 D_i6_8011F910[240];
+
 // UNUSED?
 unk_8011DC40 D_i6_8011DC40 = { 1.0f, 1.0f, 32, 12, 0, 2, 17, 20 };
 
@@ -143,8 +145,6 @@ extern u16 D_800E416E;
 extern s32 D_800E4178;
 extern s32 D_800F8514;
 extern s32 D_80106DA4;
-extern s32 D_i6_8011EED0[];
-extern s32 D_i6_8011EEF0[];
 
 s32 func_i6_80115FF0(void) {
     s32 temp_t0;
@@ -390,8 +390,6 @@ Gfx* func_i6_801167CC(Gfx* gfx) {
     return func_80079BC8(gfx);
 }
 
-extern s16 D_8011F910[];
-extern unk_80077D50* D_i6_8011DDF0[];
 extern s8 D_800CD3C4;
 
 void func_i6_801167EC(unk_800E3A28* arg0) {
@@ -406,7 +404,7 @@ void func_i6_801167EC(unk_800E3A28* arg0) {
             /* fallthrough */
         case 1:
             for (i = 0; i < 240; i++) {
-                D_8011F910[i] = 0;
+                D_i6_8011F910[i] = 0;
             }
 
             func_80077D50(D_i6_8011DDF0[2], 0);
@@ -433,8 +431,6 @@ void func_i6_801168EC(unk_800E3A28* arg0) {
     }
 }
 
-extern unk_80077D50* D_i6_8011DF6C[];
-
 void func_i6_80116934(void) {
     s32 i;
 
@@ -445,8 +441,6 @@ void func_i6_80116934(void) {
     }
 }
 
-extern unk_80077D50* D_i6_8011DF5C[];
-
 void func_i6_80116990(void) {
     s32 i;
 
@@ -456,8 +450,6 @@ void func_i6_80116990(void) {
         func_80077D50(D_i6_8011DF5C[i], 0);
     }
 }
-
-extern unk_80077D50* D_i6_8011DF78[];
 
 void func_i6_801169EC(void) {
     s32 i;
@@ -540,8 +532,6 @@ extern Gfx D_3000088[];
 extern f32 D_800DD230[];
 extern s8 D_800CD3C4;
 
-extern s16 D_i6_8011FAEE;
-
 Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
     s32 j;
     s32 i;
@@ -584,8 +574,8 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
 
                 for (i = 0; i <= 100; i++) {
                     j = func_8006A918() % 240;
-                    if (D_8011F910[j] == 0) {
-                        D_8011F910[j] = 1;
+                    if (D_i6_8011F910[j] == 0) {
+                        D_i6_8011F910[j] = 1;
                         alpha++;
                     }
 
@@ -595,8 +585,8 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
                 }
 
                 for (j = 0; j < 240; j++) {
-                    if (D_8011F910[j] == 0) {
-                        D_8011F910[j] = 1;
+                    if (D_i6_8011F910[j] == 0) {
+                        D_i6_8011F910[j] = 1;
                         alpha++;
                     }
 
@@ -623,23 +613,23 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
                         if (alpha > 320) {
                             alpha = 320;
                         }
-                        D_8011F910[var_t1] = alpha;
+                        D_i6_8011F910[var_t1] = alpha;
                     } else {
-                        D_8011F910[var_t1] = 0;
+                        D_i6_8011F910[var_t1] = 0;
                     }
                     alpha = 255;
-                    sp50 = D_8011F910[var_t1];
+                    sp50 = D_i6_8011F910[var_t1];
 
                     break;
                 case 11:
                 case 21:
-                    if (D_8011F910[var_t1] != 0) {
-                        D_8011F910[var_t1]++;
+                    if (D_i6_8011F910[var_t1] != 0) {
+                        D_i6_8011F910[var_t1]++;
                     }
-                    if (D_8011F910[var_t1] > 18) {
-                        D_8011F910[var_t1] = 18;
+                    if (D_i6_8011F910[var_t1] > 18) {
+                        D_i6_8011F910[var_t1] = 18;
                     }
-                    sp50 = SQ(D_8011F910[var_t1]);
+                    sp50 = SQ(D_i6_8011F910[var_t1]);
                     alpha = 255;
                     break;
                 case 12:
@@ -667,7 +657,7 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
         switch (arg1->unk_04) {
             case 10:
             case 20:
-                if (D_i6_8011FAEE >= 0x140) {
+                if (D_i6_8011F910[239] >= 0x140) {
                     arg1->unk_04 = D_800CD3C4;
                 }
                 break;
@@ -942,7 +932,6 @@ void func_i6_80117D3C(unk_800E3A28* arg0) {
 extern s8 D_800CD3C8;
 extern u16 D_800E416C;
 extern u16 D_800E416E;
-extern u16 D_i6_8011EF10[];
 
 void func_i6_80117DE0(unk_800E3A28* arg0) {
     unk_800E3A28* sp1C;

@@ -2,6 +2,7 @@
 #define UNK_STRUCTS_H
 
 #include "libultra/ultra64.h"
+#include "other_types.h"
 #include "fzxmath.h"
 
 typedef struct unk_8006FC8C {

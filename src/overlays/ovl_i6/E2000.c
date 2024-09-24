@@ -1,6 +1,20 @@
 #include "global.h"
 #include "ovl_i6.h"
 
+s8 D_i6_8011FAF0[30];
+u8* D_i6_8011FB10;
+u8 D_i6_8011FB18[2][0x2580]; // Some kind of vtx buffer space?
+void* D_i6_80124618;
+s16 D_i6_80124620[176];
+s32 D_i6_80124780;
+s16 D_i6_80124784;
+s32 D_i6_80124788[7];
+unk_800E51B8* D_i6_801247A4;
+s16 D_i6_801247A8;
+s16 D_i6_801247AA;
+TexturePtr D_i6_801247AC;
+s16 D_i6_801247B0;
+
 s8 D_i6_8011DFA0 = 0;
 s32 D_i6_8011DFA4 = 64; // UNUSED?
 s32 D_i6_8011DFA8 = 40; // UNUSED?
@@ -348,14 +362,6 @@ unk_8011EDDC D_i6_8011EDDC[] = {
 
 char D_i6_8011EEBC[] = { "Feel Mie" }; // UNUSED
 
-s32 D_i6_8011EEC4[] = { 0, 0 }; // UNUSED
-
-s32 D_i6_8011EED0[] = { 2, 1, 0, 2, 0, 2, 0, 0 };
-
-s32 D_i6_8011EEF0[] = { 3, 1, 0, 2, 0, 3, 0, 0 };
-
-u16 D_i6_8011EF10[] = { 0x20, 0x2000, 0x10, 0x8, 0x4, 0x2, 0x1, 0x1000 };
-
 extern unk_800E3A28 D_800E3A28[];
 extern unk_800E3F28 D_800E3F28[];
 
@@ -368,9 +374,6 @@ void func_i6_80117EE0(unk_800E3A28* arg0) {
     D_800E3F28[arg0->unk_18].unk_04 = -1;
 }
 
-#ifdef IMPORT_BSS
-s8 D_i6_8011FAF0[30];
-
 void func_i6_80117F2C(unk_800E3A28* arg0) {
     s32 i;
 
@@ -381,10 +384,6 @@ void func_i6_80117F2C(unk_800E3A28* arg0) {
 
     D_800E3F28[arg0->unk_18].unk_04 = -1;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_80117F2C.s")
-void func_i6_80117F2C(unk_800E3A28* arg0);
-#endif
 
 void func_i6_80117FA8(unk_800E3A28* arg0) {
     func_80077D50(D_i6_8011E5D8, 0);
@@ -855,8 +854,6 @@ Gfx* func_i6_8011A59C(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-extern const char* D_i6_8011EC70[];
-
 Gfx* func_i6_8011A6CC(Gfx* gfx, unk_800E3A28* arg1) {
     s32 pad[3];
     s32 temp_v0;
@@ -997,8 +994,6 @@ void func_i6_8011AB1C(unk_800E3A28* arg0) {
         func_800793E8(arg0->unk_18, 0, D_i6_8011E558[arg0->unk_04 + 2]);
     }
 }
-
-extern s8 D_i6_8011FAF0[30];
 
 void func_i6_8011AC38(unk_800E3A28* arg0) {
     s32 pad;
@@ -1826,7 +1821,6 @@ Gfx* func_i6_8011C01C(Gfx* gfx) {
 
 extern s16 D_800CCFE8;
 extern s8 D_800CD3C4;
-extern u8 D_801247C0[];
 extern u8 D_F000004[];
 extern u8 D_F014A68[];
 extern u8 D_F026348[];
@@ -1844,16 +1838,6 @@ extern u8 D_F263648[];
 extern u8 D_F26369C[];
 extern u8 D_F2636F0[];
 extern u8 D_F2637DC[];
-extern s32 D_i6_8011EDD8;
-extern unk_8011EDDC D_i6_8011EDDC[];
-extern u8* D_i6_8011FB10;
-extern s16 D_i6_80124620[];
-extern s32 D_i6_80124780;
-extern s16 D_i6_80124784;
-extern unk_800E51B8* D_i6_801247A4;
-extern s16 D_i6_801247A8;
-extern TexturePtr D_i6_801247AC;
-extern s16 D_i6_801247B0;
 void func_i6_8011C404(void);
 
 void func_i6_8011C050(void) {
@@ -1920,8 +1904,6 @@ void func_i6_8011CBB4(void);
 void func_i6_8011D394(void);
 extern s16 D_800CD048;
 extern s32 D_i2_80106DA4;
-extern s32 D_i6_80124780;
-extern s16 D_i6_80124784;
 
 s32 func_i6_8011C6DC(void) {
     func_8007DABC(&D_800DD180);
@@ -1948,7 +1930,6 @@ extern s16 D_800CE4D4;
 extern u16 D_800E416E;
 extern s32 D_80106F40;
 extern s16 D_80111840;
-extern s32 D_i6_80124788[];
 Gfx* func_i6_8011D168(Gfx*, s32, s32);
 
 bool func_i6_8011C788(void) {
@@ -2055,7 +2036,7 @@ bool func_i6_8011C788(void) {
         case 4:
             if (D_800E416E & 0x9000) {
                 D_i6_801247A4 = func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, 0xF801, func_i6_8011D168);
-                if (D_i6_801247A4 != 0) {
+                if (D_i6_801247A4 != NULL) {
                     D_i6_80124780 = 1;
                     D_i6_80124788[D_i6_8011EDD8] = 0;
                     func_800BA8D8(0x21);
@@ -2198,9 +2179,6 @@ Gfx* func_i6_8011CD4C(Gfx* gfx) {
     return func_80080E90(gfx);
 }
 
-extern s32 D_i6_8011EDD8;
-extern unk_8011EDDC_unk_14 D_i6_8011EDC8[];
-
 Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 sp54;
     unk_8011EDDC_unk_14* temp_v1;
@@ -2226,7 +2204,6 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
 extern Mtx D_102B248[];
 extern Mtx D_2000000[];
 extern Gfx D_8014810[];
-extern void* D_i6_80124618;
 
 Gfx* func_i6_8011D8C8(Gfx* gfx) {
     s32 pad[27];
