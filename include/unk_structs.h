@@ -146,7 +146,7 @@ typedef struct unk_800E3A28 {
     s8 unk_24[0x4];
 } unk_800E3A28; // size = 0x28
 
-typedef Gfx* (*unk_800E51B8_unk_1C_func)(Gfx*, s16, s16);
+typedef Gfx* (*unk_800E51B8_unk_1C_func)(Gfx*, s32, s32);
 
 typedef struct unk_800E51B8 {
     s32 unk_00;
@@ -489,13 +489,18 @@ typedef struct unk_80077D50 {
     void* unk_04; // segmented address
     u16 width;
     u16 height;
-    u32 unk_0C;
+    size_t compressedSize;
 } unk_80077D50;
 
 typedef struct unk_800E33E0 {
     void* unk_00; // segmented address
     TexturePtr unk_04;
 } unk_800E33E0; // size = 0x8
+
+typedef struct unk_800E4068 {
+    unk_80077D50* unk_00;
+    TexturePtr unk_04;
+} unk_800E4068; // size = 0x8
 
 typedef struct unk_800792D8 {
     unk_80077D50* unk_00;

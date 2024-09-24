@@ -1,14 +1,15 @@
 #include "global.h"
 #include "ovl_i6.h"
+#include "audio.h"
 
 s8 D_i6_8011FAF0[30];
 u8* D_i6_8011FB10;
 u8 D_i6_8011FB18[2][0x2580]; // Some kind of vtx buffer space?
 void* D_i6_80124618;
 s16 D_i6_80124620[176];
-s32 D_i6_80124780;
-s16 D_i6_80124784;
-s32 D_i6_80124788[7];
+s32 gOptionsDataClearMenu;
+s16 gOptionsDataAlreadyCleared;
+s32 gOptionsSelectionState[7];
 unk_800E51B8* D_i6_801247A4;
 s16 D_i6_801247A8;
 s16 D_i6_801247AA;
@@ -23,65 +24,99 @@ s32 D_i6_8011DFAC = 60;
 s32 D_i6_8011DFB0 = 30;
 s32 D_i6_8011DFB4 = 50;
 
+/*
+    VEHICLE ARTWORK
+ */
+
+// BLUE FALCON
 unk_80077D50 D_i6_8011DFB8[] = { { 18, D_F1C871C, 128, 85, 0x2289 }, { 0 } };
 
+// WILD GOOSE
 unk_80077D50 D_i6_8011DFD8[] = { { 18, D_F1CA9AC, 128, 94, 0x2905 }, { 0 } };
 
+// FIRE STINGRAY
 unk_80077D50 D_i6_8011DFF8[] = { { 18, D_F1CD2B8, 128, 113, 0x2DBA }, { 0 } };
 
+// GOLDEN FOX
 unk_80077D50 D_i6_8011E018[] = { { 18, D_F1D0078, 128, 91, 0x2A88 }, { 0 } };
 
+// RED GAZELLE
 unk_80077D50 D_i6_8011E038[] = { { 18, D_F1D2B04, 128, 94, 0x1DDB }, { 0 } };
 
+// WHITE CAT
 unk_80077D50 D_i6_8011E058[] = { { 18, D_F1D48E4, 128, 79, 0x24F5 }, { 0 } };
 
+// IRON TIGER
 unk_80077D50 D_i6_8011E078[] = { { 18, D_F1D6DE0, 128, 92, 0x2C79 }, { 0 } };
 
+// DEEP CLAW
 unk_80077D50 D_i6_8011E098[] = { { 18, D_F1D9A60, 128, 87, 0x2A05 }, { 0 } };
 
+// CRAZY BEAR
 unk_80077D50 D_i6_8011E0B8[] = { { 18, D_F1DC46C, 128, 96, 0x3077 }, { 0 } };
 
+// GREAT STAR
 unk_80077D50 D_i6_8011E0D8[] = { { 18, D_F1DF4E8, 128, 82, 0x272B }, { 0 } };
 
+// BIG FANG
 unk_80077D50 D_i6_8011E0F8[] = { { 18, D_F1E1C18, 128, 100, 0x2D0A }, { 0 } };
 
+// MAD WOLF
 unk_80077D50 D_i6_8011E118[] = { { 18, D_F1E4928, 128, 97, 0x3694 }, { 0 } };
 
+// NIGHT THUNDER
 unk_80077D50 D_i6_8011E138[] = { { 18, D_F1E7FC0, 128, 84, 0x2674 }, { 0 } };
 
+// TWIN NORITTA
 unk_80077D50 D_i6_8011E158[] = { { 18, D_F1EA638, 128, 93, 0x25D7 }, { 0 } };
 
+// WONDER WASP
 unk_80077D50 D_i6_8011E178[] = { { 18, D_F1ECC14, 128, 85, 0x21A2 }, { 0 } };
 
+// QUEEN METEOR
 unk_80077D50 D_i6_8011E198[] = { { 18, D_F1EEDBC, 128, 86, 0x226D }, { 0 } };
 
+// BLOOD HAWK
 unk_80077D50 D_i6_8011E1B8[] = { { 18, D_F1F1030, 128, 96, 0x2E39 }, { 0 } };
 
+// ASTRO ROBIN
 unk_80077D50 D_i6_8011E1D8[] = { { 18, D_F1F3E70, 128, 101, 0x309E }, { 0 } };
 
+// DEATH ANCHOR
 unk_80077D50 D_i6_8011E1F8[] = { { 18, D_F1F6F14, 128, 118, 0x2B7C }, { 0 } };
 
+// WILD BOAR
 unk_80077D50 D_i6_8011E218[] = { { 18, D_F1F9A94, 128, 98, 0x2EF3 }, { 0 } };
 
+// KING METEOR
 unk_80077D50 D_i6_8011E238[] = { { 18, D_F1FC98C, 128, 103, 0x2D69 }, { 0 } };
 
+// SUPER PIRANHA
 unk_80077D50 D_i6_8011E258[] = { { 18, D_F1FF6FC, 128, 94, 0x2E5F }, { 0 } };
 
+// MIGHTY HURRICANE
 unk_80077D50 D_i6_8011E278[] = { { 18, D_F202560, 128, 83, 0x2432 }, { 0 } };
 
+// SPACE ANGLER
 unk_80077D50 D_i6_8011E298[] = { { 18, D_F204998, 128, 92, 0x2CB2 }, { 0 } };
 
+// MIGHTY TYPHOON
 unk_80077D50 D_i6_8011E2B8[] = { { 18, D_F207650, 128, 82, 0x22C9 }, { 0 } };
 
+// HYPER SPEEDER
 unk_80077D50 D_i6_8011E2D8[] = { { 18, D_F209920, 128, 101, 0x2B2E }, { 0 } };
 
+// GREEN PANTHER
 unk_80077D50 D_i6_8011E2F8[] = { { 18, D_F20C454, 128, 88, 0x287D }, { 0 } };
 
-unk_80077D50 D_i6_8011E318[] = { { 18, D_F20ECD8, 128, 0x5D, 0x2488 }, { 0 } };
+// BLACK BULL
+unk_80077D50 D_i6_8011E318[] = { { 18, D_F20ECD8, 128, 93, 0x2488 }, { 0 } };
 
-unk_80077D50 D_i6_8011E338[] = { { 18, D_F211164, 128, 0x52, 0x22DA }, { 0 } };
+// LITTLE WYVERN
+unk_80077D50 D_i6_8011E338[] = { { 18, D_F211164, 128, 82, 0x22DA }, { 0 } };
 
-unk_80077D50 D_i6_8011E358[] = { { 18, D_F213444, 128, 0x5C, 0x276B }, { 0 } };
+// SONIC PHANTOM
+unk_80077D50 D_i6_8011E358[] = { { 18, D_F213444, 128, 92, 0x276B }, { 0 } };
 
 unk_800792D8 D_i6_8011E378[] = { { D_i6_8011DFB8, 60 }, { 0 } };
 
@@ -151,72 +186,110 @@ unk_800792D8* D_i6_8011E558[] = {
     D_i6_8011E518, D_i6_8011E528, D_i6_8011E538, D_i6_8011E548,
 };
 
+/*
+    CREDITS / ENDING IMAGES + CHARACTER PORTRAITS
+ */
+
+// ENDING SCREEN GIRL
 unk_80077D50 D_i6_8011E5D8[] = { { 17, D_F1C417C, 80, 182, 0x25D1 }, { 0 } };
 
+// 'SEE YOU AGAIN!!'
 unk_80077D50 D_i6_8011E5F8[] = { { 17, D_F1C6754, 64, 64, 0x95A }, { 0 } };
 
+// MR ZERO
 unk_80077D50 D_i6_8011E618[] = { { 17, D_F1C70B4, 80, 72, 0x1662 }, { 0 } };
 
+// COPYRIGHT LOGO (1998)
 unk_80077D50 D_i6_8011E638[] = { { 17, D_F0336B8, 128, 14, 0x439 }, { 0 } };
 
+// DR STEWART
 unk_80077D50 D_i6_8011E658[] = { { 17, D_F033AB4, 180, 245, 0x4AF4 }, { 0 } };
 
+// CAPTAIN FALCON
 unk_80077D50 D_i6_8011E678[] = { { 17, D_F0385AC, 180, 245, 0x6604 }, { 0 } };
 
+// JODY SUMMER
 unk_80077D50 D_i6_8011E698[] = { { 17, D_F03EBB4, 180, 245, 0x5573 }, { 0 } };
 
+// SAMURAI GOROH
 unk_80077D50 D_i6_8011E6B8[] = { { 17, D_F04412C, 180, 245, 0x76B4 }, { 0 } };
 
+// MIGHTY GAZELLE
 unk_80077D50 D_i6_8011E6D8[] = { { 17, D_F04B7E4, 180, 245, 0x67F2 }, { 0 } };
 
+// PICO
 unk_80077D50 D_i6_8011E6F8[] = { { 17, D_F051FDC, 180, 245, 0x63BB }, { 0 } };
 
+// BABA
 unk_80077D50 D_i6_8011E718[] = { { 17, D_F05839C, 180, 245, 0x5EE9 }, { 0 } };
 
+// MR EAD
 unk_80077D50 D_i6_8011E738[] = { { 17, D_F05E28C, 180, 245, 0x7184 }, { 0 } };
 
+// OCTOMAN
 unk_80077D50 D_i6_8011E758[] = { { 17, D_F065414, 180, 245, 0x5666 }, { 0 } };
 
+// THE SKULL
 unk_80077D50 D_i6_8011E778[] = { { 17, D_F06AA80, 180, 245, 0x5A49 }, { 0 } };
 
+// BEASTMAN
 unk_80077D50 D_i6_8011E798[] = { { 17, D_F0704D0, 180, 245, 0x55C1 }, { 0 } };
 
+// ANTONIO GUSTER
 unk_80077D50 D_i6_8011E7B8[] = { { 17, D_F075A98, 180, 245, 0x594F }, { 0 } };
 
+// DRAQ
 unk_80077D50 D_i6_8011E7D8[] = { { 17, D_F07B3EC, 180, 245, 0x7A7A }, { 0 } };
 
+// ROGER BUSTER
 unk_80077D50 D_i6_8011E7F8[] = { { 17, D_F082E6C, 180, 245, 0x6444 }, { 0 } };
 
+// SILVER NEEISEN
 unk_80077D50 D_i6_8011E818[] = { { 17, D_F0892B4, 180, 245, 0x623A }, { 0 } };
 
+// SUPER ARROW
 unk_80077D50 D_i6_8011E838[] = { { 17, D_F08F4F4, 180, 245, 0x6F78 }, { 0 } };
 
+// MRS ARROW
 unk_80077D50 D_i6_8011E858[] = { { 17, D_F096470, 180, 245, 0x5C56 }, { 0 } };
 
+// ZODA
 unk_80077D50 D_i6_8011E878[] = { { 17, D_F09C0CC, 180, 245, 0x59E6 }, { 0 } };
 
+// JOHN TANAKA
 unk_80077D50 D_i6_8011E898[] = { { 17, D_F0A1AB8, 180, 245, 0x5B58 }, { 0 } };
 
+// BIO REX
 unk_80077D50 D_i6_8011E8B8[] = { { 17, D_F0A7614, 180, 245, 0x6B2D }, { 0 } };
 
+// KATE ALEN
 unk_80077D50 D_i6_8011E8D8[] = { { 17, D_F0AE148, 180, 245, 0x4E48 }, { 0 } };
 
+// GOMAR & SHIOH
 unk_80077D50 D_i6_8011E8F8[] = { { 17, D_F0B2F94, 180, 245, 0x6D92 }, { 0 } };
 
+// MICHAEL CHAIN
 unk_80077D50 D_i6_8011E918[] = { { 17, D_F0B9D2C, 180, 245, 0x5AB3 }, { 0 } };
 
+// BILLY
 unk_80077D50 D_i6_8011E938[] = { { 17, D_F0BF7E4, 180, 245, 0x5E3B }, { 0 } };
 
+// DR CLASH
 unk_80077D50 D_i6_8011E958[] = { { 17, D_F0C5624, 180, 245, 0x6EAC }, { 0 } };
 
+// JACK LEVIN
 unk_80077D50 D_i6_8011E978[] = { { 17, D_F0CC4D4, 180, 245, 0x4D32 }, { 0 } };
 
+// BLOOD FALCON
 unk_80077D50 D_i6_8011E998[] = { { 17, D_F0D120C, 180, 245, 0x603A }, { 0 } };
 
+// LEON
 unk_80077D50 D_i6_8011E9B8[] = { { 17, D_F0D724C, 180, 245, 0x60B6 }, { 0 } };
 
+// JAMES MCCLOUD
 unk_80077D50 D_i6_8011E9D8[] = { { 17, D_F0DD308, 180, 245, 0x5534 }, { 0 } };
 
+// BLACK SHADOW
 unk_80077D50 D_i6_8011E9F8[] = { { 17, D_F0E2840, 180, 245, 0x5DA7 }, { 0 } };
 
 unk_800792D8 D_i6_8011EA18[] = { { D_i6_8011E658, 60 }, { 0 } };
@@ -287,8 +360,7 @@ unk_800792D8* D_i6_8011EBF8[] = {
     D_i6_8011EAD8, D_i6_8011EAB8, D_i6_8011EAC8, D_i6_8011EBE8, D_i6_8011EBD8, D_i6_8011EAA8,
 };
 
-// Credits Roles
-const char* D_i6_8011EC70[] = {
+const char* gCreditsAttributions[] = {
     "director",          "assistant director", "chief programmer",    "programmer",          "programmer",
     "programmer",        "dd programmer",      "dd programmer",       "sound composer",      "sound composer",
     "sound effects",     "chief designer",     "graphic designer",    "machine modeler",     "course design",
@@ -298,8 +370,7 @@ const char* D_i6_8011EC70[] = {
     "producer",
 };
 
-// Credits Names
-const char* D_i6_8011ECEC[] = { "tadashi sugiyama", "yasuyuki oyagi",    "keizo ohta",       "tsutomu kaneshige",
+const char* gCreditsNames[] = { "tadashi sugiyama", "yasuyuki oyagi",    "keizo ohta",       "tsutomu kaneshige",
                                 "masahiro kawano",  "daisuke tsujimura", "hiroki sotoike",   "shiro mouri",
                                 "taro bando",       "hajime wakai",      "taro bando",       "takaya imamura",
                                 "katsuhiko kanno",  "tadashi sugiyama",  "tadashi sugiyama", "takaya imamura",
@@ -308,8 +379,6 @@ const char* D_i6_8011ECEC[] = { "tadashi sugiyama", "yasuyuki oyagi",    "keizo 
                                 "yasuhiro sakai",   "atsushi tejima",    "masanori sato",    "takayuki hashida",
                                 "super mario club", "hiroshi yamauchi",  "shigeru miyamoto", "yoshitaka yasumoto",
                                 "naruhisa kawano",  "sou kimura",        "kayomi mcdonald",  "jim wornell" };
-
-s32 D_i6_8011ED7C = 0; // UNUSED?
 
 const s16 D_i6_8011F4BC[] = { 50, 240, 280, -20, 280, 240, 50, -20 };
 
@@ -325,42 +394,63 @@ const s16 D_i6_8011F4EC[] = { 216, 0,   0, 248, 0, 0,   0, 0,   217, 0,   0,   2
                               0,   0,   0, 0,   0, 0,   0, 0,   0,   0,   0,   0,   0, 0,   0,   0,   0,   0,
                               0,   0,   0, 0,   0, 0,   0, 0,   0,   0,   228, 0,   0, 260, -1,  0 };
 
-unk_8011EDDC_unk_14 D_i6_8011ED80[] = {
+s32 D_i6_8011ED7C = 0; // UNUSED?
+
+/*
+    OPTIONS MENU
+ */
+
+// 'WITH', 'W/O'
+OptionsTextureInfo gOptionsVsComSelection[] = {
     { D_F262FB4, 32, 16 },
     { D_F262ED0, 32, 16 },
 };
 
-unk_8011EDDC_unk_14 D_i6_8011ED90[] = {
+// 'WITH', 'W/O'
+OptionsTextureInfo gOptionsVsSlotSelection[] = {
     { D_F262FB4, 32, 16 },
     { D_F262ED0, 32, 16 },
 };
 
-unk_8011EDDC_unk_14 D_i6_8011EDA0[] = {
+// 'W/O', '+1', '+2'
+OptionsTextureInfo gOptionsVsHandicapSelection[] = {
     { D_F262ED0, 32, 16 },
     { D_F263190, 32, 16 },
     { D_F263230, 32, 16 },
 };
 
-unk_8011EDDC_unk_14 D_i6_8011EDB8[] = {
+// 'Stereo', 'Mono'
+OptionsTextureInfo gOptionsSoundModeSelection[] = {
     { D_F2632E8, 64, 16 },
     { D_F2634A4, 64, 16 },
 };
 
-unk_8011EDDC_unk_14 D_i6_8011EDC8[] = {
+// 'No', 'Yes'
+OptionsTextureInfo gOptionsAllDataClearSelection[] = {
     { D_F2637DC, 32, 16 },
     { D_F2636F0, 32, 16 },
 };
 
-s32 D_i6_8011EDD8 = 0;
+s32 gOptionsCurrentRow = 0;
 
-unk_8011EDDC D_i6_8011EDDC[] = {
-    { 0, 2, 2, 0, 0, D_i6_8011ED80, { D_F261AD4, 128, 16 } }, { 1, 2, 2, 0, 0, D_i6_8011ED90, { D_F262184, 96, 16 } },
-    { 2, 2, 3, 0, 0, D_i6_8011EDA0, { D_F261E80, 96, 16 } },  { 3, 2, 2, 0, 0, D_i6_8011EDB8, { D_F262398, 96, 16 } },
-    { 4, 3, 0, 0, 0, NULL, { D_F262688, 96, 16 } },           { 5, 1, 0, 0, 0, NULL, { D_F263DA8, 96, 16 } },
-    { 6, 3, 0, 0, 0, NULL, { D_F2630C8, 40, 16 } },
+OptionsInfo gOptionsInfo[] = {
+    // 'VS COM (2P,3P)'
+    { OPTIONS_VS_COM, OPTIONS_SHOWN, 2, 0, 0, gOptionsVsComSelection, { D_F261AD4, 128, 16 } },
+    // 'VS Slot'
+    { OPTIONS_VS_SLOT, OPTIONS_SHOWN, 2, 0, 0, gOptionsVsSlotSelection, { D_F262184, 96, 16 } },
+    // 'VS Handicap'
+    { OPTIONS_VS_HANDICAP, OPTIONS_SHOWN, 3, 0, 0, gOptionsVsHandicapSelection, { D_F261E80, 96, 16 } },
+    // 'Sound Mode'
+    { OPTIONS_SOUND_MODE, OPTIONS_SHOWN, 2, 0, 0, gOptionsSoundModeSelection, { D_F262398, 96, 16 } },
+    // 'All data clear'
+    { OPTIONS_DATA_CLEAR, OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN, 0, 0, 0, NULL, { D_F262688, 96, 16 } },
+    // 'Copying ghost'
+    { OPTIONS_GHOST_COPY, OPTIONS_REQUIRE_SELECTING, 0, 0, 0, NULL, { D_F263DA8, 96, 16 } },
+    // 'EXIT'
+    { OPTIONS_EXIT, OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN, 0, 0, 0, NULL, { D_F2630C8, 40, 16 } },
 };
 
-char D_i6_8011EEBC[] = { "Feel Mie" }; // UNUSED
+char D_i6_8011EEBC[] = "Feel Mie"; // UNUSED
 
 extern unk_800E3A28 D_800E3A28[];
 extern unk_800E3F28 D_800E3F28[];
@@ -377,7 +467,7 @@ void func_i6_80117EE0(unk_800E3A28* arg0) {
 void func_i6_80117F2C(unk_800E3A28* arg0) {
     s32 i;
 
-    for (i = 0; i < 30; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_i6_8011FAF0); i++) {
         D_i6_8011FAF0[i] = 0;
     }
     arg0->unk_18 = func_800792D8(D_i6_8011E558[0]);
@@ -424,13 +514,12 @@ Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
     s32 var_v1;
     s32 pad[4]; // possibly part of buffer
     s8 sp64[2];
-    s8* var_s5;
+    s8* name;
 
-    // FAKE!!
-    var_s5 = (&D_i6_8011E938[1].unk_0C)[arg1->unk_00];
+    name = gCreditsNames[arg1->unk_00 - 230];
 
     if (arg3 != 0) {
-        i = func_i2_801062E4(var_s5, 1, 0);
+        i = func_i2_801062E4(name, 1, 0);
     } else {
         i = 0;
     }
@@ -446,7 +535,7 @@ Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
 
     for (i = 0; i < var_v0 + 1; i++) {
 
-        sp64[0] = *var_s5++;
+        sp64[0] = *name++;
         if (sp64[0] == 0) {
             break;
         }
@@ -474,7 +563,7 @@ Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
 
 Gfx* func_i6_801182DC(Gfx* gfx, unk_800E3A28* arg1) {
 
-    if (D_i6_8011DFA0 == 0) {
+    if (!D_i6_8011DFA0) {
         return gfx;
     }
 
@@ -486,19 +575,19 @@ extern Gfx D_3000088[];
 
 Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
     s32 sp154;
-    s32 row;    // sp150
-    s32 var_t5; // sp14C
+    s32 row;
+    s32 var_t5;
     f32 var_fv1;
     s32 sp144;
     unk_800E3F28* temp_s1;
     s32 height;
-    s32 width; // sp138
+    s32 width;
     s32 var_a0;
     s32 pad;
     s32 additionalWidth;
     s32 additionalHeight;
-    f32 var_ft4;        // sp124
-    TexturePtr texture; // sp120
+    f32 var_ft4;
+    TexturePtr texture;
     s32 var_s3;
 
     temp_s1 = &D_800E3F28[arg1->unk_18];
@@ -854,7 +943,7 @@ Gfx* func_i6_8011A6CC(Gfx* gfx, unk_800E3A28* arg1) {
     s8* temp_s2;
 
     temp_v0 = arg1->unk_00 - 198;
-    temp_s2 = D_i6_8011EC70[temp_v0];
+    temp_s2 = gCreditsAttributions[temp_v0];
 
     gDPSetPrimColor(gfx++, 0, 0, 24, 24, 24, 255);
 
@@ -888,9 +977,9 @@ Gfx* func_i6_8011A6CC(Gfx* gfx, unk_800E3A28* arg1) {
 
 Gfx* func_i6_8011A890(Gfx* gfx, unk_800E3A28* arg1) {
     s8* temp_a3;
-    s32 index = arg1->unk_00 - 0xC6;
+    s32 index = arg1->unk_00 - 198;
 
-    temp_a3 = D_i6_8011EC70[index];
+    temp_a3 = gCreditsAttributions[index];
 
     gDPSetPrimColor(gfx++, 0, 0, 24, 24, 24, 255);
     gfx = func_i2_80106450(gfx, arg1->unk_0C + 1, arg1->unk_10 + 1, temp_a3, 0, 6, 0);
@@ -908,8 +997,8 @@ Gfx* func_i6_8011A944(Gfx* gfx, unk_800E3A28* arg1) {
     s32 pad2[9];
     char* temp_a3;
 
-    temp_v1 = arg1->unk_00 - 0xE6;
-    temp_a3 = D_i6_8011ECEC[temp_v1];
+    temp_v1 = arg1->unk_00 - 230;
+    temp_a3 = gCreditsNames[temp_v1];
 
     switch (arg1->unk_04) {
         case 0:
@@ -948,7 +1037,7 @@ Gfx* func_i6_8011A944(Gfx* gfx, unk_800E3A28* arg1) {
 
 Gfx* func_i6_8011AAC8(Gfx* gfx, unk_800E3A28* arg1) {
     s32 index = arg1->unk_00 - 0xE6;
-    char* temp = D_i6_8011ECEC[index];
+    char* temp = gCreditsNames[index];
 
     return func_i2_80106450(gfx, arg1->unk_0C, arg1->unk_10, temp, 0, 1, 0);
 }
@@ -966,8 +1055,8 @@ void func_i6_8011AB1C(unk_800E3A28* arg0) {
         arg0->unk_04 = 0;
         var_v1 = 1;
     }
-    if (D_i6_8011DFA0 != 0) {
-        if (D_800E416C & 0x200) {
+    if (D_i6_8011DFA0) {
+        if (D_800E416C & CONT_LEFT) {
             func_800BA8D8(30);
             if (arg0->unk_04 != 0) {
                 arg0->unk_04--;
@@ -977,7 +1066,7 @@ void func_i6_8011AB1C(unk_800E3A28* arg0) {
             var_v1++;
         }
 
-        if (D_800E416C & 0x100) {
+        if (D_800E416C & CONT_RIGHT) {
             func_800BA8D8(30);
             arg0->unk_04++;
             arg0->unk_04 = arg0->unk_04 % 30;
@@ -1042,7 +1131,7 @@ void func_i6_8011AC38(unk_800E3A28* arg0) {
                         }
                     }
 
-                    for (var_v1 = 0; var_v1 < 30; var_v1++) {
+                    for (var_v1 = 0; var_v1 < ARRAY_COUNT(D_i6_8011FAF0); var_v1++) {
                         var_a2 = var_v1;
                         if (D_i6_8011FAF0[var_v1] == 0) {
                             D_i6_8011FAF0[var_v1] = 1;
@@ -1234,7 +1323,7 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
     unk_800E3A28* temp_v0_3;
 
     temp_v0 = arg0->unk_00 - 198;
-    sp1C = D_i6_8011EC70[temp_v0];
+    sp1C = gCreditsAttributions[temp_v0];
 
     switch (temp_v0 % 4) {
         case 0:
@@ -1796,10 +1885,10 @@ extern unk_800DCE98 D_800DD180;
 s32 func_i6_8011BFB0(void) {
 
     func_8007DABC(&D_800DD180);
-    if (D_800E416C & 0x9000) {
+    if (D_800E416C & (CONT_A | CONT_START)) {
         D_i6_8011DFA0 ^= 1;
     }
-    if ((D_800DCE44 != 0x800C) && (D_800E416C & 0x4000)) {
+    if ((D_800DCE44 != 0x800C) && (D_800E416C & CONT_B)) {
         return 0x8007;
     } else {
         return D_800DCE44;
@@ -1820,29 +1909,28 @@ void func_i6_8011C404(void);
 
 void func_i6_8011C050(void) {
     s32 i;
-    unk_8011EDDC* var_s0;
+    OptionsInfo* option;
 
     D_800CCFE8 = 3;
     func_800794B0(5, 0, 0, 1);
-    func_80078104(D_F25F070, 0x40, 0, 0, 0);
-    func_80078104(D_F138AB8, 0x2000, 0, 1, 0);
-    func_80078104(D_F26176C, 0x900, 0, 1, 0);
-    func_80078104(D_F2629A8, 0x1000, 0, 1, 0);
-    func_80078104(D_F262ED0, 0x200, 0, 1, 0);
-    func_80078104(D_F262FB4, 0x200, 0, 1, 0);
-    func_80078104(D_F263190, 0x200, 0, 1, 0);
-    func_80078104(D_F263230, 0x200, 0, 1, 0);
-    func_80078104(D_F2632E8, 0x400, 0, 1, 0);
-    func_80078104(D_F2634A4, 0x400, 0, 1, 0);
-    func_80078104(D_F263648, 0x100, 0, 1, 0);
-    func_80078104(D_F26369C, 0x100, 0, 1, 0);
-    func_80078104(D_F2637DC, 0x200, 0, 1, 0);
-    func_80078104(D_F2636F0, 0x200, 0, 1, 0);
+    func_80078104(D_F25F070, 0x40, 0, 0, false);
+    func_80078104(D_F138AB8, 0x2000, 0, 1, false);
+    func_80078104(D_F26176C, 0x900, 0, 1, false);
+    func_80078104(D_F2629A8, 0x1000, 0, 1, false);
+    func_80078104(D_F262ED0, 0x200, 0, 1, false);
+    func_80078104(D_F262FB4, 0x200, 0, 1, false);
+    func_80078104(D_F263190, 0x200, 0, 1, false);
+    func_80078104(D_F263230, 0x200, 0, 1, false);
+    func_80078104(D_F2632E8, 0x400, 0, 1, false);
+    func_80078104(D_F2634A4, 0x400, 0, 1, false);
+    func_80078104(D_F263648, 0x100, 0, 1, false);
+    func_80078104(D_F26369C, 0x100, 0, 1, false);
+    func_80078104(D_F2637DC, 0x200, 0, 1, false);
+    func_80078104(D_F2636F0, 0x200, 0, 1, false);
 
-    var_s0 = D_i6_8011EDDC;
-
-    for (i = 0; i < 7; i++, var_s0++) {
-        func_80078104(var_s0->unk_18.textureOffset, var_s0->unk_18.width * var_s0->unk_18.height, 0, 1, 0);
+    for (i = 0, option = gOptionsInfo; i < OPTIONS_MAX; i++, option++) {
+        func_80078104(option->optionTextureInfo.textureOffset,
+                      option->optionTextureInfo.width * option->optionTextureInfo.height, 0, 1, 0);
     }
 
     func_80078104(D_F000004, 0x23A00, 0, 1, 0);
@@ -1858,17 +1946,17 @@ void func_i6_8011C050(void) {
     if (D_800CD3C4 != 0) {
         D_i6_801247A8 = 1;
         // clang-format off
-        for (i = 0; i < 176; i++) { \
+        for (i = 0; i < ARRAY_COUNT(D_i6_80124620); i++) { \
             D_i6_80124620[i] = 255;
         }
         // clang-format on
     } else {
         D_i6_801247A8 = 0;
     }
-    D_i6_80124780 = 0;
-    D_i6_80124784 = 0;
+    gOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_CLOSED;
+    gOptionsDataAlreadyCleared = false;
     D_i6_801247B0 = 0;
-    D_i6_8011EDD8 = 0;
+    gOptionsCurrentRow = 0;
     func_i6_8011C404();
     func_80080A40(&D_i6_801247A4);
     func_80080A48();
@@ -1887,15 +1975,15 @@ s32 func_i6_8011C6DC(void) {
     func_8007DABC(&D_800DD180);
     func_80080C0C();
     func_i6_8011D394();
-    if (D_i6_80124784 == 0) {
-        switch (D_i6_80124780) {
-            case 0:
+    if (!gOptionsDataAlreadyCleared) {
+        switch (gOptionsDataClearMenu) {
+            case OPTIONS_DATA_CLEAR_MENU_CLOSED:
                 if (D_i2_80106DA4 == 0 && func_i6_8011C788()) {
-                    D_i6_80124784 = 1;
+                    gOptionsDataAlreadyCleared = true;
                     D_800CD048 = 0xE;
                 }
                 break;
-            case 1:
+            case OPTIONS_DATA_CLEAR_MENU_OPEN:
                 func_i6_8011CBB4();
                 break;
         }
@@ -1911,118 +1999,118 @@ extern s16 D_80111840;
 Gfx* func_i6_8011D168(Gfx*, s32, s32);
 
 bool func_i6_8011C788(void) {
-    s32 temp_a3;
+    s32 lastRow;
     s32 temp_t0;
-    bool var_t2;
-    unk_8011EDDC* temp_a3_2;
+    bool updateSettings;
+    OptionsInfo* temp_a3_2;
 
     if (func_8008108C(D_i6_801247A4, 0)) {
         return false;
     }
-    temp_a3 = D_i6_8011EDD8;
-    if (D_800E416C & 0x800) {
-        if (--D_i6_8011EDD8 < 0) {
-            D_i6_8011EDD8 = 6;
+    lastRow = gOptionsCurrentRow;
+    if (D_800E416C & CONT_UP) {
+        if (--gOptionsCurrentRow < OPTIONS_VS_COM) {
+            gOptionsCurrentRow = OPTIONS_EXIT;
         }
-        while (!(D_i6_8011EDDC[D_i6_8011EDD8].unk_04 & 2)) {
-            if (--D_i6_8011EDD8 < 0) {
-                D_i6_8011EDD8 = 6;
+        while (!(gOptionsInfo[gOptionsCurrentRow].flags & OPTIONS_SHOWN)) {
+            if (--gOptionsCurrentRow < OPTIONS_VS_COM) {
+                gOptionsCurrentRow = OPTIONS_EXIT;
             }
         }
     }
-    if (D_800E416C & 0x400) {
-        if (++D_i6_8011EDD8 > 6) {
-            D_i6_8011EDD8 = 0;
+    if (D_800E416C & CONT_DOWN) {
+        if (++gOptionsCurrentRow > OPTIONS_EXIT) {
+            gOptionsCurrentRow = OPTIONS_VS_COM;
         }
-        while (!(D_i6_8011EDDC[D_i6_8011EDD8].unk_04 & 2)) {
-            if (++D_i6_8011EDD8 > 6) {
-                D_i6_8011EDD8 = 0;
+        while (!(gOptionsInfo[gOptionsCurrentRow].flags & OPTIONS_SHOWN)) {
+            if (++gOptionsCurrentRow > OPTIONS_EXIT) {
+                gOptionsCurrentRow = OPTIONS_VS_COM;
             }
         }
     }
-    if (temp_a3 != D_i6_8011EDD8) {
+    if (lastRow != gOptionsCurrentRow) {
         func_800BA8D8(0x1E);
         return false;
     }
-    temp_a3_2 = &D_i6_8011EDDC[D_i6_8011EDD8];
-    var_t2 = false;
-    if (!(temp_a3_2->unk_04 & 1)) {
-        temp_t0 = D_i6_80124788[D_i6_8011EDD8];
-        if (D_800E416E & 0x200) {
-            D_i6_80124788[D_i6_8011EDD8]--;
-            if (D_i6_80124788[D_i6_8011EDD8] < 0) {
-                D_i6_80124788[D_i6_8011EDD8] = temp_a3_2->unk_08 - 1;
+    temp_a3_2 = &gOptionsInfo[gOptionsCurrentRow];
+    updateSettings = false;
+    if (!(temp_a3_2->flags & OPTIONS_REQUIRE_SELECTING)) {
+        temp_t0 = gOptionsSelectionState[gOptionsCurrentRow];
+        if (D_800E416E & CONT_LEFT) {
+            gOptionsSelectionState[gOptionsCurrentRow]--;
+            if (gOptionsSelectionState[gOptionsCurrentRow] < 0) {
+                gOptionsSelectionState[gOptionsCurrentRow] = temp_a3_2->totalSelectionStates - 1;
             }
         }
-        if (D_800E416E & 0x100) {
-            D_i6_80124788[D_i6_8011EDD8]++;
-            if (D_i6_80124788[D_i6_8011EDD8] > temp_a3_2->unk_08 - 1) {
-                D_i6_80124788[D_i6_8011EDD8] = 0;
+        if (D_800E416E & CONT_RIGHT) {
+            gOptionsSelectionState[gOptionsCurrentRow]++;
+            if (gOptionsSelectionState[gOptionsCurrentRow] > temp_a3_2->totalSelectionStates - 1) {
+                gOptionsSelectionState[gOptionsCurrentRow] = 0;
             }
         }
-        if (temp_t0 != D_i6_80124788[D_i6_8011EDD8]) {
-            var_t2 = true;
+        if (temp_t0 != gOptionsSelectionState[gOptionsCurrentRow]) {
+            updateSettings = true;
             func_800BA8D8(0x21);
         }
     }
-    if (D_800E416E & 0x4000) {
+    if (D_800E416E & CONT_B) {
         func_800BA8D8(0x10);
         return true;
     }
 
-    switch (temp_a3_2->unk_00) {
-        case 0:
-            if (var_t2) {
-                if (D_i6_80124788[D_i6_8011EDD8] == 1) {
+    switch (temp_a3_2->row) {
+        case OPTIONS_VS_COM:
+            if (updateSettings) {
+                if (gOptionsSelectionState[gOptionsCurrentRow] == 1) {
                     D_800CE4D4 = 0;
                 } else {
                     D_800CE4D4 = 1;
                 }
             }
             break;
-        case 1:
-            if (var_t2) {
-                if (D_i6_80124788[D_i6_8011EDD8] == 1) {
+        case OPTIONS_VS_SLOT:
+            if (updateSettings) {
+                if (gOptionsSelectionState[gOptionsCurrentRow] == 1) {
                     D_80106F40 = 0;
                 } else {
                     D_80106F40 = 1;
                 }
             }
             break;
-        case 2:
-            if (var_t2) {
-                if (D_i6_80124788[D_i6_8011EDD8] == 0) {
+        case OPTIONS_VS_HANDICAP:
+            if (updateSettings) {
+                if (gOptionsSelectionState[gOptionsCurrentRow] == 0) {
                     D_800CE4D0 = 0;
-                } else if (D_i6_80124788[D_i6_8011EDD8] == 1) {
+                } else if (gOptionsSelectionState[gOptionsCurrentRow] == 1) {
                     D_800CE4D0 = 1;
                 } else {
                     D_800CE4D0 = 2;
                 }
             }
             break;
-        case 3:
-            if (var_t2) {
-                if (D_i6_80124788[D_i6_8011EDD8] == 0) {
+        case OPTIONS_SOUND_MODE:
+            if (updateSettings) {
+                if (gOptionsSelectionState[gOptionsCurrentRow] == 0) {
                     D_80111840 = 0;
-                    func_800BA28C(2);
+                    func_800BA28C(SOUNDMODE_SURROUND); // Option says stereo, but sets surround anyway?
                 } else {
                     D_80111840 = 1;
-                    func_800BA28C(3);
+                    func_800BA28C(SOUNDMODE_MONO);
                 }
             }
             break;
-        case 4:
-            if (D_800E416E & 0x9000) {
+        case OPTIONS_DATA_CLEAR:
+            if (D_800E416E & (CONT_A | CONT_START)) {
                 D_i6_801247A4 = func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, 0xF801, func_i6_8011D168);
                 if (D_i6_801247A4 != NULL) {
-                    D_i6_80124780 = 1;
-                    D_i6_80124788[D_i6_8011EDD8] = 0;
+                    gOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_OPEN;
+                    gOptionsSelectionState[gOptionsCurrentRow] = 0;
                     func_800BA8D8(0x21);
                 }
             }
             break;
-        case 6:
-            if (D_800E416E & 0x9000) {
+        case OPTIONS_EXIT:
+            if (D_800E416E & (CONT_A | CONT_START)) {
                 func_800BA8D8(0x10);
                 return true;
             }
@@ -2031,7 +2119,7 @@ bool func_i6_8011C788(void) {
             break;
     }
 
-    if (var_t2) {
+    if (updateSettings) {
         func_i2_80101414();
     }
     return false;
@@ -2047,29 +2135,29 @@ extern s32 D_800E5F18;
 extern s32 D_800E5F1C;
 
 void func_i6_8011CBB4(void) {
-    s32 temp_a1;
+    s32 lastSelectionState;
     s32 pad[2];
-    bool sp18;
+    bool updateSettings;
 
     if (func_8008108C(D_i6_801247A4, 1) != 0) {
-        temp_a1 = D_i6_80124788[D_i6_8011EDD8];
-        if (D_800E416E & 0x200) {
-            if (--D_i6_80124788[D_i6_8011EDD8] < 0) {
-                D_i6_80124788[D_i6_8011EDD8] = 1;
+        lastSelectionState = gOptionsSelectionState[gOptionsCurrentRow];
+        if (D_800E416E & CONT_LEFT) {
+            if (--gOptionsSelectionState[gOptionsCurrentRow] < 0) {
+                gOptionsSelectionState[gOptionsCurrentRow] = 1;
             }
         }
-        if (D_800E416E & 0x100) {
-            if (++D_i6_80124788[D_i6_8011EDD8] > 1) {
-                D_i6_80124788[D_i6_8011EDD8] = 0;
+        if (D_800E416E & CONT_RIGHT) {
+            if (++gOptionsSelectionState[gOptionsCurrentRow] > 1) {
+                gOptionsSelectionState[gOptionsCurrentRow] = 0;
             }
         }
-        if (temp_a1 != D_i6_80124788[D_i6_8011EDD8]) {
+        if (lastSelectionState != gOptionsSelectionState[gOptionsCurrentRow]) {
             func_800BA8D8(0x1E);
         }
-        sp18 = false;
-        if (D_800E416E & 0x9000) {
-            sp18 = true;
-            if (D_i6_80124788[D_i6_8011EDD8] == 1) {
+        updateSettings = false;
+        if (D_800E416E & (CONT_A | CONT_START)) {
+            updateSettings = true;
+            if (gOptionsSelectionState[gOptionsCurrentRow] == 1) {
                 func_i2_80101784(D_i6_8011FB10, 1);
                 func_i6_8011C404();
                 D_800E5F10 = 0;
@@ -2085,12 +2173,12 @@ void func_i6_8011CBB4(void) {
             } else {
                 func_800BA8D8(0x10);
             }
-        } else if (D_800E416E & 0x4000) {
-            sp18 = true;
+        } else if (D_800E416E & CONT_B) {
+            updateSettings = true;
             func_800BA8D8(0x10);
         }
-        if (sp18) {
-            D_i6_80124780 = 0;
+        if (updateSettings) {
+            gOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_CLOSED;
             func_80080BDC(D_i6_801247A4);
         }
     }
@@ -2098,14 +2186,14 @@ void func_i6_8011CBB4(void) {
 
 Gfx* func_i6_8011D8C8(Gfx*);
 
-Gfx* func_i6_8011CD4C(Gfx* gfx) {
+Gfx* Menu_OptionsDraw(Gfx* gfx) {
     s32 temp_s4;
     s32 var_s5;
     s32 i;
     s32 var_s7;
-    unk_8011EDDC* var_s1;
-    unk_8011EDDC_unk_14* temp_s0_2;
-    unk_8011EDDC_unk_14* temp_v1_2;
+    OptionsInfo* option;
+    OptionsTextureInfo* selectionStateTextureInfo;
+    OptionsTextureInfo* optionTextureInfo;
 
     gfx = func_80079BC8(gfx);
     if (D_i6_801247A8 != 1) {
@@ -2128,28 +2216,29 @@ Gfx* func_i6_8011CD4C(Gfx* gfx) {
         var_s7 = 0x1B;
     }
 
-    for (i = 0, var_s1 = D_i6_8011EDDC; i < 7; i++, var_s1++) {
-        if (!(var_s1->unk_04 & 2)) {
+    for (i = 0, option = gOptionsInfo; i < 7; i++, option++) {
+        if (!(option->flags & OPTIONS_SHOWN)) {
             continue;
         }
 
         gDPPipeSync(gfx++);
-        if (D_i6_8011EDD8 != i) {
+        if (gOptionsCurrentRow != i) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         } else {
             gfx = func_8007DB28(gfx, 0);
         }
-        temp_v1_2 = &var_s1->unk_18;
-        gfx = func_8007E410(gfx, func_800783AC(temp_v1_2->textureOffset), NULL, 2, 1, var_s1->unk_0C + 0x1E, var_s5,
-                            temp_v1_2->width, temp_v1_2->height, 0);
+        optionTextureInfo = &option->optionTextureInfo;
+        gfx = func_8007E410(gfx, func_800783AC(optionTextureInfo->textureOffset), NULL, 2, 1, option->unk_0C + 0x1E,
+                            var_s5, optionTextureInfo->width, optionTextureInfo->height, 0);
 
-        if (!(var_s1->unk_04 & 1)) {
+        if (!(option->flags & OPTIONS_REQUIRE_SELECTING)) {
             gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, 2, 1, 0xBE, var_s5, 0x10, 0x10, 0);
             gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, 2, 1, 0x109, var_s5, 0x10, 0x10, 0);
-            temp_s0_2 = &var_s1->unk_14[D_i6_80124788[i]];
-            temp_s4 = ((60 - temp_s0_2->width) / 2) + var_s1->unk_10;
-            gfx = func_8007E410(gfx, func_800783AC(temp_s0_2->textureOffset), NULL, 2, 1, temp_s4 + 0xD0, var_s5,
-                                temp_s0_2->width, temp_s0_2->height, 0);
+            selectionStateTextureInfo = &option->selectionStateTextureInfo[gOptionsSelectionState[i]];
+            temp_s4 = ((60 - selectionStateTextureInfo->width) / 2) + option->unk_10;
+            gfx =
+                func_8007E410(gfx, func_800783AC(selectionStateTextureInfo->textureOffset), NULL, 2, 1, temp_s4 + 0xD0,
+                              var_s5, selectionStateTextureInfo->width, selectionStateTextureInfo->height, 0);
         }
         var_s5 += var_s7;
     }
@@ -2159,7 +2248,7 @@ Gfx* func_i6_8011CD4C(Gfx* gfx) {
 
 Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 sp54;
-    unk_8011EDDC_unk_14* temp_v1;
+    OptionsTextureInfo* dataClearTextureInfo;
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -2171,10 +2260,10 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
     gfx = func_8007DB28(gfx, 0);
     gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, 2, 1, arg1 + 0x18, arg2 + 0x32, 0x10, 0x10, 0);
     gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, 2, 1, arg1 + 0x63, arg2 + 0x32, 0x10, 0x10, 0);
-    temp_v1 = &D_i6_8011EDC8[D_i6_80124788[D_i6_8011EDD8]];
-    sp54 = (0x3C - temp_v1->width) / 2;
-    return func_8007E410(gfx, func_800783AC(temp_v1->textureOffset), NULL, 2, 1, arg1 + sp54 + 0x2A, arg2 + 0x32,
-                         temp_v1->width, temp_v1->height, 0);
+    dataClearTextureInfo = &gOptionsAllDataClearSelection[gOptionsSelectionState[gOptionsCurrentRow]];
+    sp54 = (60 - dataClearTextureInfo->width) / 2;
+    return func_8007E410(gfx, func_800783AC(dataClearTextureInfo->textureOffset), NULL, 2, 1, arg1 + sp54 + 0x2A,
+                         arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011D394.s")

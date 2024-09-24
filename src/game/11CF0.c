@@ -24,7 +24,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     s32 var_s0;
     s32 alignedWidth;
     s32 var_s2;
-    size_t size;
+    size_t textureSize;
     u8* sp44;
     u8* var_s4;
     u8* header;
@@ -53,9 +53,9 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
                     } else {
                         alignedWidth = arg0->width;
                     }
-                    size = arg0->height * alignedWidth;
-                    var_s4 = func_800768F4(0, size);
-                    func_80077CF0(arg0->unk_04, size, var_s4);
+                    textureSize = arg0->height * alignedWidth;
+                    var_s4 = func_800768F4(0, textureSize);
+                    func_80077CF0(arg0->unk_04, textureSize, var_s4);
                     break;
                 case 20:
                 case 21:
@@ -65,13 +65,13 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
                     } else {
                         alignedWidth = arg0->width;
                     }
-                    size = arg0->height * alignedWidth;
-                    if (arg0->unk_0C != 0) {
-                        var_s2 = ((arg0->unk_0C / 2) * 2) + 2;
+                    textureSize = arg0->height * alignedWidth;
+                    if (arg0->compressedSize != 0) {
+                        var_s2 = ((arg0->compressedSize / 2) * 2) + 2;
                     } else {
                         var_s2 = 0x400;
                     }
-                    var_s4 = func_800768F4(0, size);
+                    var_s4 = func_800768F4(0, textureSize);
                     header = func_800768F4(1, var_s2);
                     osInvalDCache(header, var_s2);
                     func_80077CF0(arg0->unk_04, var_s2, header);
@@ -83,8 +83,8 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
                     break;
                 case 17:
                 case 18:
-                    if (arg0->unk_0C != 0) {
-                        var_s0 = ((arg0->unk_0C / 2) * 2) + 2;
+                    if (arg0->compressedSize != 0) {
+                        var_s0 = ((arg0->compressedSize / 2) * 2) + 2;
                     } else {
                         var_s0 = 0x400;
                     }
@@ -120,7 +120,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     return sp44;
 }
 
-u8* func_80078104(void* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
+u8* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) {
     s32 var_a3;
     bool var_t0;
     u8* var_s0;
@@ -140,11 +140,11 @@ u8* func_80078104(void* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
     if (!var_t0 || arg4) {
         if (arg3 == 0) {
             if (!arg4) {
-                var_s0 = func_800768F4(0, arg1);
+                var_s0 = func_800768F4(0, textureSize);
             } else {
-                var_s0 = func_800768F4(1, arg1);
+                var_s0 = func_800768F4(1, textureSize);
             }
-            func_80077CF0(arg0, arg1, var_s0);
+            func_80077CF0(arg0, textureSize, var_s0);
         } else {
             var_s0 = func_800768F4(1, 8);
             func_80077CF0(arg0, 8, var_s0);
@@ -152,23 +152,23 @@ u8* func_80078104(void* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
 
             if (!arg4) {
                 var_s0 = func_800768F4(0, var_a3);
-                var_a2 = func_800768F4(1, arg1);
+                var_a2 = func_800768F4(1, textureSize);
             } else {
                 if (var_a3 % 16) {
                     var_a3 = ((var_a3 / 16) * 16) + 16;
                 }
-                if (arg1 % 16) {
-                    arg1 = ((arg1 / 16) * 16) + 16;
+                if (textureSize % 16) {
+                    textureSize = ((textureSize / 16) * 16) + 16;
                 }
 
-                sp24 = arg1 + var_a3;
+                sp24 = textureSize + var_a3;
                 var_s0 = func_800768F4(1, sp24);
                 osInvalDCache(var_s0, sp24);
                 var_a2 = var_s0 + var_a3;
             }
 
-            osInvalDCache(var_a2, arg1);
-            func_80077CF0(arg0, arg1, var_a2);
+            osInvalDCache(var_a2, textureSize);
+            func_80077CF0(arg0, textureSize, var_a2);
             if (*(s32*) var_a2 == (s32) 'MIO0') {
                 mio0Decode(var_a2, var_s0);
             } else {
@@ -385,21 +385,21 @@ Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 arg2, s32 arg3, u32 arg4, s
     return gfx;
 }
 
-extern unk_800E33E0 D_800E4068[];
+extern unk_800E4068 D_800E4068[];
 
 void func_80079080(void) {
     s32 i;
 
-    D_800E4068[0].unk_00 = 0;
+    D_800E4068[0].unk_00 = NULL;
 
     for (i = 1; i < 17; i++) {}
 }
 
-void func_800790A4(s32 arg0, s32 arg1) {
-    unk_800E33E0* var_v0;
+void func_800790A4(unk_80077D50* arg0, TexturePtr arg1) {
+    unk_800E4068* var_v0;
 
     var_v0 = D_800E4068;
-    while (var_v0->unk_00 != 0) {
+    while (var_v0->unk_00 != NULL) {
         var_v0++;
     }
     var_v0->unk_00 = arg0;
@@ -409,9 +409,9 @@ void func_800790A4(s32 arg0, s32 arg1) {
 void func_800790D4(void) {
     s32 var_v1;
     u8* header;
-    u32 var_s0;
+    size_t size;
     unk_80077D50* temp_s1;
-    unk_800E33E0* var_s3;
+    unk_800E4068* var_s3;
 
     var_s3 = D_800E4068;
 
@@ -430,14 +430,14 @@ void func_800790D4(void) {
                     break;
                 case 17:
                 case 18:
-                    if (temp_s1->unk_0C != 0) {
-                        var_s0 = ((temp_s1->unk_0C / 2) * 2) + 2;
+                    if (temp_s1->compressedSize != 0) {
+                        size = ((temp_s1->compressedSize / 2) * 2) + 2;
                     } else {
-                        var_s0 = 0x400;
+                        size = 0x400;
                     }
-                    header = func_800768F4(1, var_s0);
-                    osInvalDCache(header, var_s0);
-                    func_80077CF0(temp_s1->unk_04, var_s0, header);
+                    header = func_800768F4(1, size);
+                    osInvalDCache(header, size);
+                    func_80077CF0(temp_s1->unk_04, size, header);
                     if (*(s32*) header == (s32) 'MIO0') {
                         mio0Decode(header, var_s3->unk_04);
                     } else {
@@ -445,8 +445,8 @@ void func_800790D4(void) {
                     }
                     break;
                 default:
-                    var_s0 = temp_s1->height * temp_s1->width;
-                    func_80077CF0(temp_s1->unk_04, var_s0 * 2, var_s3->unk_04);
+                    size = temp_s1->height * temp_s1->width;
+                    func_80077CF0(temp_s1->unk_04, size * 2, var_s3->unk_04);
                     break;
             }
             var_s3->unk_00 = NULL;
@@ -984,7 +984,6 @@ Gfx* func_80079BC8(Gfx* gfx) {
     return gfx;
 }
 
-// Todo: figure out a way to stop pointer comparison (use index comparison instead)
 unk_800E3A28* func_80079E88(s32 arg0) {
     unk_800E3A28* var_v1;
 

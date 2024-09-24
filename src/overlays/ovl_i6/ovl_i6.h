@@ -3,6 +3,20 @@
 
 #include "unk_structs.h"
 
+typedef enum OptionsRow {
+    /* 0 */ OPTIONS_VS_COM,
+    /* 1 */ OPTIONS_VS_SLOT,
+    /* 2 */ OPTIONS_VS_HANDICAP,
+    /* 3 */ OPTIONS_SOUND_MODE,
+    /* 4 */ OPTIONS_DATA_CLEAR,
+    /* 5 */ OPTIONS_GHOST_COPY,
+    /* 6 */ OPTIONS_EXIT,
+    /* 7 */ OPTIONS_MAX
+} OptionsRow;
+
+#define OPTIONS_DATA_CLEAR_MENU_CLOSED 0
+#define OPTIONS_DATA_CLEAR_MENU_OPEN 1
+
 typedef struct unk_8011DC40 {
     f32 unk_00;
     f32 unk_04;
@@ -14,22 +28,24 @@ typedef struct unk_8011DC40 {
     s32 unk_1C;
 } unk_8011DC40; // UNUSED?
 
-typedef struct unk_8011EDDC_unk_14 {
+typedef struct OptionsTextureInfo {
     void* textureOffset;
     s16 width;
     s16 height;
-} unk_8011EDDC_unk_14;
+} OptionsTextureInfo;
 
-typedef struct unk_8011EDDC {
-    s32 unk_00;
-    u16 unk_04;
-    // s16 unk_06;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-    unk_8011EDDC_unk_14* unk_14; // points to pair
-    unk_8011EDDC_unk_14 unk_18;
-} unk_8011EDDC;
+#define OPTIONS_REQUIRE_SELECTING 1
+#define OPTIONS_SHOWN 2
+
+typedef struct OptionsInfo {
+    /* 0x00 */ OptionsRow row;
+    /* 0x04 */ u16 flags;
+    /* 0x08 */ s32 totalSelectionStates;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ OptionsTextureInfo* selectionStateTextureInfo;
+    /* 0x18 */ OptionsTextureInfo optionTextureInfo;
+} OptionsInfo;
 
 extern u8 D_F129C54[];
 extern u8 D_F12ABB0[];

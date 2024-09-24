@@ -90,7 +90,7 @@ Gfx* (*D_800CD0FC[])(Gfx*) = {
     func_i7_801447F4,
     func_i4_80116E10,
     func_i5_80117664,
-    func_i6_8011CD4C,
+    Menu_OptionsDraw,
     func_i2_80103BE0,
 };
 
@@ -314,7 +314,7 @@ void func_80068F04(void) {
                 D_800CD020++;
                 switch (D_800CD010) {
                     case 1:
-                        if (!(D_800E416E & 0x9000)) {
+                        if (!(D_800E416E & (CONT_A | CONT_START))) {
                             break;
                         }
                         /* fallthrough */

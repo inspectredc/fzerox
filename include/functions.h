@@ -66,7 +66,7 @@ void func_80077318(void);
 void func_80077C9C(void);
 
 u8* func_80077D50(unk_80077D50* arg0, s32 arg1);
-u8* func_80078104(void* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4);
+u8* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4);
 TexturePtr func_800783AC(void* arg0);
 Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
 void func_800790D4(void);
@@ -98,7 +98,7 @@ void func_8007E08C(void);
 void func_8007E0CC(void);
 void func_8007E398(void);
 
-Gfx* func_8007E410(Gfx* gfx, s32 arg1, TexturePtr arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, u16 arg9);
+Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlut, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, u16 arg9);
 
 void func_8007F904(void);
 void func_8007FC68(s32);
@@ -298,7 +298,7 @@ s32 func_i6_8011BFB0(void);
 Gfx* func_i6_8011C01C(Gfx*);
 void func_i6_8011C050(void);
 s32 func_i6_8011C6DC(void);
-Gfx* func_i6_8011CD4C(Gfx*);
+Gfx* Menu_OptionsDraw(Gfx*);
 
 void func_i7_80143A90(void);
 s32 func_i7_801441A0(void);
