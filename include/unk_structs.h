@@ -2,6 +2,7 @@
 #define UNK_STRUCTS_H
 
 #include "libultra/ultra64.h"
+#include "other_types.h"
 #include "fzxmath.h"
 
 typedef struct unk_8006FC8C {
@@ -145,7 +146,7 @@ typedef struct unk_800E3A28 {
     s8 unk_24[0x4];
 } unk_800E3A28; // size = 0x28
 
-typedef Gfx* (*unk_800E51B8_unk_1C_func)(Gfx*, s16, s16);
+typedef Gfx* (*unk_800E51B8_unk_1C_func)(Gfx*, s32, s32);
 
 typedef struct unk_800E51B8 {
     s32 unk_00;
@@ -482,5 +483,46 @@ typedef struct unk_800E5FF8 {
     s16 unk_3F68;
     u8 unk_3F6A[20];
 } unk_800E5FF8; // size = 0x3F80
+
+typedef struct unk_80077D50 {
+    s16 unk_00;
+    void* unk_04; // segmented address
+    u16 width;
+    u16 height;
+    size_t compressedSize;
+} unk_80077D50;
+
+typedef struct unk_800E33E0 {
+    void* unk_00; // segmented address
+    TexturePtr unk_04;
+} unk_800E33E0; // size = 0x8
+
+typedef struct unk_800E4068 {
+    unk_80077D50* unk_00;
+    TexturePtr unk_04;
+} unk_800E4068; // size = 0x8
+
+typedef struct unk_800792D8 {
+    unk_80077D50* unk_00;
+    s32 unk_04;
+} unk_800792D8;
+
+typedef struct unk_800E3F28 {
+    unk_800792D8* unk_00;
+    s16 unk_04;
+    s16 unk_06;
+    s16 unk_08;
+    s16 unk_0A;
+    TexturePtr unk_0C;
+    TexturePtr unk_10;
+} unk_800E3F28; // size = 0x14
+
+
+typedef struct unk_800DCE48 {
+    s32 unk_00;
+    s8 unk_04[0xC];
+    s32 unk_10;
+} unk_800DCE48;
+
 
 #endif // UNK_STRUCTS_H

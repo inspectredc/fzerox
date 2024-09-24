@@ -5539,7 +5539,7 @@ Gfx* func_i9_8012D998(Gfx* gfx) {
     var_a0 = 0;
     var_a1 = 0;
     while (var_a0 < 2) {
-        while (IO_READ(0x4600010) & 3) {}
+        while (IO_READ(0x4600010) % 4) {}
 
         temp_v1 = IO_READ(0x10000510);
         if (temp_v1 == var_a1) {

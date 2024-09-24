@@ -286,7 +286,6 @@ void func_8007DED8(void) {
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007DED8.s")
 #endif
 
-void func_80101414(void);
 extern s32 D_800CD004;
 extern s32 D_800CD008;
 extern s8 D_800E4174[4];
@@ -325,7 +324,7 @@ void func_8007DEF0(void) {
                 D_800E42CC = 1;
             }
         }
-        func_80101414();
+        func_i2_80101414();
     }
 }
 
@@ -385,7 +384,7 @@ s32 func_8007E11C(s32 arg0) {
     return 0;
 }
 
-s32 func_801037CC(s32*, s32);
+s32 func_i2_801037CC(s32*, s32);
 extern s8 D_800CD3C0;
 extern s8 D_800CD3C4;
 
@@ -398,7 +397,7 @@ void func_8007E1C0(void) {
     sp38 = false;
 
     for (i = 0; i < 24; i++) {
-        if (func_801037CC(sp40, i) != 0) {
+        if (func_i2_801037CC(sp40, i) != 0) {
             sp38 = true;
             break;
         } else {

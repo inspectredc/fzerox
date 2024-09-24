@@ -139,7 +139,7 @@ void func_80067E98(void) {
     func_80067C0C(D_800DCCF4);
 }
 
-s32 D_800CCFE0 = 0;
+u32 D_800CCFE0 = 0;
 s16 D_800CCFE4 = 2;
 s16 D_800CCFE8 = 2;
 
@@ -382,7 +382,7 @@ SEGMENT_BSS_START(ovl_i10), SEGMENT_BSS_SIZE(ovl_i10));
     func_800765CC(SEGMENT_ROM_START(mio0_segment_1), (uintptr_t)osPhysicalToVirtual(D_800DCDA4) +
 SEGMENT_DECOMPRESSED_SIZE(mio0_segment_1), SEGMENT_ROM_SIZE(mio0_segment_1));
     // mio decode
-    func_800AA620((uintptr_t)osPhysicalToVirtual(D_800DCDA4) + SEGMENT_DECOMPRESSED_SIZE(mio0_segment_1),
+    mio0Decode((uintptr_t)osPhysicalToVirtual(D_800DCDA4) + SEGMENT_DECOMPRESSED_SIZE(mio0_segment_1),
 osPhysicalToVirtual(D_800DCDA4)); func_800765CC(SEGMENT_ROM_START(_17B1E0), osPhysicalToVirtual(D_800DCDAC),
 SEGMENT_ROM_SIZE(_17B1E0)); func_800765CC(SEGMENT_ROM_START(_17B960), osPhysicalToVirtual(D_800DCDB4),
 SEGMENT_ROM_SIZE(_17B960)); D_800DCCFC = 0; D_800DCD00 = 1; D_800DCD08 = 2; D_800DCD04 = 0; D_800DCD0C = 1;

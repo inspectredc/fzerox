@@ -2,9 +2,9 @@
 
 extern u8 D_2B9EA0[];
 
-void func_80077CF0(s32 arg0, s32 arg1, u8* arg2) {
-    osInvalDCache(arg2, arg1);
-    func_800765CC(D_2B9EA0 + SEGMENT_OFFSET(arg0), arg2, arg1);
+void func_80077CF0(s32 segAddr, size_t size, u8* startAddr) {
+    osInvalDCache(startAddr, size);
+    func_800765CC(D_2B9EA0 + SEGMENT_OFFSET(segAddr), startAddr, size);
 }
 
 extern s32 D_800E3A20;
@@ -12,29 +12,6 @@ extern s32 D_800E3A20;
 void func_80077D44(void) {
     D_800E3A20 = 0;
 }
-
-typedef struct unk_80077D50 {
-    s16 unk_00;
-    struct unk_80077D50* unk_04;
-    u16 unk_08; // width
-    u16 unk_0A; // height?
-    u32 unk_0C;
-} unk_80077D50;
-
-typedef struct unk_800E33E0 {
-    unk_80077D50* unk_00;
-    TexturePtr unk_04;
-} unk_800E33E0; // size = 0x8
-
-typedef struct unk_800E3F28 {
-    unk_800E33E0* unk_00;
-    s16 unk_04;
-    s16 unk_06;
-    s16 unk_08;
-    s16 unk_0A;
-    TexturePtr unk_0C;
-    TexturePtr unk_10;
-} unk_800E3F28; // size = 0x14
 
 extern unk_800E33E0 D_800E33E0[];
 
@@ -45,9 +22,9 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     bool var_a0;
     bool var_s7;
     s32 var_s0;
-    s32 var_s5;
+    s32 alignedWidth;
     s32 var_s2;
-    s32 temp_lo;
+    size_t textureSize;
     u8* sp44;
     u8* var_s4;
     u8* header;
@@ -71,59 +48,59 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
             switch (arg0->unk_00) {
                 case 4:
                 case 5:
-                    if (arg0->unk_08 % 16) {
-                        var_s5 = ((arg0->unk_08 + 16) / 16) * 16;
+                    if (arg0->width % 16) {
+                        alignedWidth = ((arg0->width + 16) / 16) * 16;
                     } else {
-                        var_s5 = arg0->unk_08;
+                        alignedWidth = arg0->width;
                     }
-                    temp_lo = arg0->unk_0A * var_s5;
-                    var_s4 = func_800768F4(0, temp_lo);
-                    func_80077CF0(arg0->unk_04, temp_lo, var_s4);
+                    textureSize = arg0->height * alignedWidth;
+                    var_s4 = func_800768F4(0, textureSize);
+                    func_80077CF0(arg0->unk_04, textureSize, var_s4);
                     break;
                 case 20:
                 case 21:
 
-                    if (arg0->unk_08 % 16) {
-                        var_s5 = ((arg0->unk_08 + 16) / 16) * 16;
+                    if (arg0->width % 16) {
+                        alignedWidth = ((arg0->width + 16) / 16) * 16;
                     } else {
-                        var_s5 = arg0->unk_08;
+                        alignedWidth = arg0->width;
                     }
-                    temp_lo = arg0->unk_0A * var_s5;
-                    if (arg0->unk_0C != 0) {
-                        var_s2 = ((arg0->unk_0C / 2) * 2) + 2;
+                    textureSize = arg0->height * alignedWidth;
+                    if (arg0->compressedSize != 0) {
+                        var_s2 = ((arg0->compressedSize / 2) * 2) + 2;
                     } else {
                         var_s2 = 0x400;
                     }
-                    var_s4 = func_800768F4(0, temp_lo);
+                    var_s4 = func_800768F4(0, textureSize);
                     header = func_800768F4(1, var_s2);
                     osInvalDCache(header, var_s2);
                     func_80077CF0(arg0->unk_04, var_s2, header);
                     if (*(s32*) header == (s32) 'MIO0') {
-                        func_800AA620(header, var_s4);
+                        mio0Decode(header, var_s4);
                     } else {
-                        bzero(var_s4, (arg0->unk_0A * var_s5) / 2);
+                        bzero(var_s4, (arg0->height * alignedWidth) / 2);
                     }
                     break;
                 case 17:
                 case 18:
-                    if (arg0->unk_0C != 0) {
-                        var_s0 = ((arg0->unk_0C / 2) * 2) + 2;
+                    if (arg0->compressedSize != 0) {
+                        var_s0 = ((arg0->compressedSize / 2) * 2) + 2;
                     } else {
                         var_s0 = 0x400;
                     }
 
-                    var_s4 = func_800768F4(0, arg0->unk_0A * arg0->unk_08 * 2);
+                    var_s4 = func_800768F4(0, arg0->height * arg0->width * 2);
                     header = func_800768F4(1, var_s0);
                     osInvalDCache(header, var_s0);
                     func_80077CF0(arg0->unk_04, var_s0, header);
                     if (*(s32*) header == (s32) 'MIO0') {
-                        func_800AA620(header, var_s4);
+                        mio0Decode(header, var_s4);
                     } else {
-                        bzero(var_s4, arg0->unk_0A * arg0->unk_08 * 2);
+                        bzero(var_s4, arg0->height * arg0->width * 2);
                     }
                     break;
                 default:
-                    var_s0 = arg0->unk_0A * arg0->unk_08 * 2;
+                    var_s0 = arg0->height * arg0->width * 2;
                     var_s4 = func_800768F4(0, var_s0);
                     func_80077CF0(arg0->unk_04, var_s0, var_s4);
                     break;
@@ -143,7 +120,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     return sp44;
 }
 
-u8* func_80078104(unk_80077D50* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
+u8* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) {
     s32 var_a3;
     bool var_t0;
     u8* var_s0;
@@ -163,11 +140,11 @@ u8* func_80078104(unk_80077D50* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
     if (!var_t0 || arg4) {
         if (arg3 == 0) {
             if (!arg4) {
-                var_s0 = func_800768F4(0, arg1);
+                var_s0 = func_800768F4(0, textureSize);
             } else {
-                var_s0 = func_800768F4(1, arg1);
+                var_s0 = func_800768F4(1, textureSize);
             }
-            func_80077CF0(arg0, arg1, var_s0);
+            func_80077CF0(arg0, textureSize, var_s0);
         } else {
             var_s0 = func_800768F4(1, 8);
             func_80077CF0(arg0, 8, var_s0);
@@ -175,25 +152,25 @@ u8* func_80078104(unk_80077D50* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
 
             if (!arg4) {
                 var_s0 = func_800768F4(0, var_a3);
-                var_a2 = func_800768F4(1, arg1);
+                var_a2 = func_800768F4(1, textureSize);
             } else {
                 if (var_a3 % 16) {
                     var_a3 = ((var_a3 / 16) * 16) + 16;
                 }
-                if (arg1 % 16) {
-                    arg1 = ((arg1 / 16) * 16) + 16;
+                if (textureSize % 16) {
+                    textureSize = ((textureSize / 16) * 16) + 16;
                 }
 
-                sp24 = arg1 + var_a3;
+                sp24 = textureSize + var_a3;
                 var_s0 = func_800768F4(1, sp24);
                 osInvalDCache(var_s0, sp24);
                 var_a2 = var_s0 + var_a3;
             }
 
-            osInvalDCache(var_a2, arg1);
-            func_80077CF0(arg0, arg1, var_a2);
+            osInvalDCache(var_a2, textureSize);
+            func_80077CF0(arg0, textureSize, var_a2);
             if (*(s32*) var_a2 == (s32) 'MIO0') {
-                func_800AA620(var_a2, var_s0);
+                mio0Decode(var_a2, var_s0);
             } else {
                 bzero(var_s0, var_a3);
             }
@@ -212,7 +189,7 @@ u8* func_80078104(unk_80077D50* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
 
 extern s32 D_800E3A20;
 
-TexturePtr func_800783AC(unk_80077D50* arg0) {
+TexturePtr func_800783AC(void* arg0) {
     s32 i;
 
     for (i = 0; i < D_800E3A20; i++) {
@@ -223,26 +200,23 @@ TexturePtr func_800783AC(unk_80077D50* arg0) {
     return NULL;
 }
 
-Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 arg2, s32 arg3, s32 arg4, u32 arg5, s32 arg6, s32 arg7, s32 arg8,
-                   s32 arg9, s32 argA, s32 argB);
-
 Gfx* func_800783F4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture) {
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 0, 0, 0);
         case 5:
         case 21:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 1, 0, 0);
         case 2:
         case 18:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 1, 0, 0);
         case 1:
         default:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 0, 0, 0);
     }
 }
 
@@ -250,19 +224,19 @@ Gfx* func_8007857C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 0, 0, 0);
         case 5:
         case 21:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 1, 0, 0);
         case 2:
         case 18:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 1, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 1, 1, 0, 0);
         case 1:
         default:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 1, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 1, 0, 0, 0);
     }
 }
 
@@ -270,19 +244,19 @@ Gfx* func_8007870C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 0, 0, 0);
         case 5:
         case 21:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 4, 0, 3, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 1, 0, 0);
         case 2:
         case 18:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, arg5, arg6);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 1, arg5, arg6);
         case 1:
         default:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 0, arg5, arg6);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 0, arg5, arg6);
     }
 }
 
@@ -293,19 +267,19 @@ Gfx* func_800788A4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
         case 5:
         case 21:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
         case 2:
         case 18:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 1, 0, 0);
         case 1:
         default:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 0, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 0, 2, 0, 0, 0);
     }
 }
 
@@ -313,19 +287,19 @@ Gfx* func_80078A4C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
         case 5:
         case 21:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
         case 2:
         case 18:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 0, 2, 0, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 1, 0, 0);
         case 1:
         default:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 0, 0, 1);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 0, 2, 0, 0, 1);
     }
 }
 
@@ -333,19 +307,19 @@ Gfx* func_80078BF8(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
         case 4:
         case 20:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
         case 5:
         case 21:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
         case 2:
         case 18:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 1, 1, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 0, 2, 1, 1, 0);
         case 1:
         default:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->unk_08, arg1->unk_0A, arg5, arg6, 0, 2, 1, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 0, 2, 1, 0, 0);
     }
 }
 
@@ -411,21 +385,21 @@ Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 arg2, s32 arg3, u32 arg4, s
     return gfx;
 }
 
-extern unk_800E33E0 D_800E4068[];
+extern unk_800E4068 D_800E4068[];
 
 void func_80079080(void) {
     s32 i;
 
-    D_800E4068[0].unk_00 = 0;
+    D_800E4068[0].unk_00 = NULL;
 
     for (i = 1; i < 17; i++) {}
 }
 
-void func_800790A4(s32 arg0, s32 arg1) {
-    unk_800E33E0* var_v0;
+void func_800790A4(unk_80077D50* arg0, TexturePtr arg1) {
+    unk_800E4068* var_v0;
 
     var_v0 = D_800E4068;
-    while (var_v0->unk_00 != 0) {
+    while (var_v0->unk_00 != NULL) {
         var_v0++;
     }
     var_v0->unk_00 = arg0;
@@ -435,9 +409,9 @@ void func_800790A4(s32 arg0, s32 arg1) {
 void func_800790D4(void) {
     s32 var_v1;
     u8* header;
-    u32 var_s0;
+    size_t size;
     unk_80077D50* temp_s1;
-    unk_800E33E0* var_s3;
+    unk_800E4068* var_s3;
 
     var_s3 = D_800E4068;
 
@@ -447,32 +421,32 @@ void func_800790D4(void) {
             switch (temp_s1->unk_00) {
                 case 4:
                 case 5:
-                    if (temp_s1->unk_08 % 16) {
-                        var_v1 = ((temp_s1->unk_08 + 16) / 16) * 16;
+                    if (temp_s1->width % 16) {
+                        var_v1 = ((temp_s1->width + 16) / 16) * 16;
                     } else {
-                        var_v1 = temp_s1->unk_08;
+                        var_v1 = temp_s1->width;
                     }
-                    func_80077CF0(temp_s1->unk_04, temp_s1->unk_0A * var_v1, var_s3->unk_04);
+                    func_80077CF0(temp_s1->unk_04, temp_s1->height * var_v1, var_s3->unk_04);
                     break;
                 case 17:
                 case 18:
-                    if (temp_s1->unk_0C != 0) {
-                        var_s0 = ((temp_s1->unk_0C / 2) * 2) + 2;
+                    if (temp_s1->compressedSize != 0) {
+                        size = ((temp_s1->compressedSize / 2) * 2) + 2;
                     } else {
-                        var_s0 = 0x400;
+                        size = 0x400;
                     }
-                    header = func_800768F4(1, var_s0);
-                    osInvalDCache(header, var_s0);
-                    func_80077CF0(temp_s1->unk_04, var_s0, header);
+                    header = func_800768F4(1, size);
+                    osInvalDCache(header, size);
+                    func_80077CF0(temp_s1->unk_04, size, header);
                     if (*(s32*) header == (s32) 'MIO0') {
-                        func_800AA620(header, var_s3->unk_04);
+                        mio0Decode(header, var_s3->unk_04);
                     } else {
-                        bzero(var_s3->unk_04, temp_s1->unk_0A * temp_s1->unk_08 * 2);
+                        bzero(var_s3->unk_04, temp_s1->height * temp_s1->width * 2);
                     }
                     break;
                 default:
-                    var_s0 = temp_s1->unk_0A * temp_s1->unk_08;
-                    func_80077CF0(temp_s1->unk_04, var_s0 * 2, var_s3->unk_04);
+                    size = temp_s1->height * temp_s1->width;
+                    func_80077CF0(temp_s1->unk_04, size * 2, var_s3->unk_04);
                     break;
             }
             var_s3->unk_00 = NULL;
@@ -493,7 +467,7 @@ void func_800792A8(void) {
     }
 }
 
-s32 func_800792D8(unk_800E33E0* arg0) {
+s32 func_800792D8(unk_800792D8* arg0) {
     s32 i = 0;
     u8* var_v0;
 
@@ -518,7 +492,7 @@ s32 func_800792D8(unk_800E33E0* arg0) {
     return i;
 }
 
-void func_800793E8(s32 arg0, s32 arg1, unk_800E33E0* arg2) {
+void func_800793E8(s32 arg0, s32 arg1, unk_800792D8* arg2) {
     unk_800E3F28* sp1C;
     s32 temp_a3;
 
@@ -843,7 +817,7 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
             gfx = func_i4_80119A64(gfx);
             break;
         case 0x50:
-            gfx = func_i6_80116C78(gfx);
+            gfx = func_i6_80116C78(gfx, arg1);
             break;
         case 0x51:
         case 0x52:
@@ -853,22 +827,22 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
         case 0x56:
         case 0x57:
         case 0x58:
-            gfx = func_i6_80116AA8(gfx);
+            gfx = func_i6_80116AA8(gfx, arg1);
             break;
         case 0x59:
-            gfx = func_i6_80117400(gfx);
+            gfx = func_i6_80117400(gfx, arg1);
             break;
         case 0x5A:
-            gfx = func_i6_801174DC(gfx);
+            gfx = func_i6_801174DC(gfx, arg1);
             break;
         case 0x5C:
-            gfx = func_i6_80117760(gfx);
+            gfx = func_i6_80117760(gfx, arg1);
             break;
         case 0x5F:
-            gfx = func_i6_80117A18(gfx);
+            gfx = func_i6_80117A18(gfx, arg1);
             break;
         case 0x5D:
-            gfx = func_i6_80117C50(gfx);
+            gfx = func_i6_80117C50(gfx, arg1);
             break;
         case 0x64:
         case 0x8C:
@@ -1010,7 +984,6 @@ Gfx* func_80079BC8(Gfx* gfx) {
     return gfx;
 }
 
-// Todo: figure out a way to stop pointer comparison (use index comparison instead)
 unk_800E3A28* func_80079E88(s32 arg0) {
     unk_800E3A28* var_v1;
 
@@ -1047,13 +1020,7 @@ void func_80079F1C(void) {
     func_8007E2B4();
 }
 
-typedef struct unk_80079F54_arg_0 {
-    s8 unk_00[0xC];
-    s32 unk_0C;
-    s32 unk_10;
-} unk_80079F54_arg_0;
-
-void func_80079F54(unk_80079F54_arg_0* arg0, s32 arg1, s32 arg2) {
+void func_80079F54(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
 
     var_v0 = arg1 - arg0->unk_0C;
@@ -1073,7 +1040,7 @@ void func_80079F54(unk_80079F54_arg_0* arg0, s32 arg1, s32 arg2) {
     arg0->unk_0C += var_v0;
 }
 
-void func_80079FFC(unk_80079F54_arg_0* arg0, s32 arg1) {
+void func_80079FFC(unk_800E3A28* arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = arg1 - arg0->unk_10;
@@ -1093,12 +1060,12 @@ void func_80079FFC(unk_80079F54_arg_0* arg0, s32 arg1) {
     arg0->unk_10 += var_v0;
 }
 
-void func_8007A06C(unk_80079F54_arg_0* arg0, s32 arg1, s32 arg2) {
+void func_8007A06C(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     func_80079F54(arg0, arg1, 4);
     func_80079FFC(arg0, arg2);
 }
 
-void func_8007A0A0(unk_80079F54_arg_0* arg0, s32 arg1, s32 arg2) {
+void func_8007A0A0(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
 
     var_v0 = arg1 - arg0->unk_0C;
@@ -1133,7 +1100,7 @@ void func_8007A0A0(unk_80079F54_arg_0* arg0, s32 arg1, s32 arg2) {
     }
 }
 
-void func_8007A154(unk_80079F54_arg_0* arg0, s32 arg1) {
+void func_8007A154(unk_800E3A28* arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = arg1 - arg0->unk_10;
@@ -1168,7 +1135,7 @@ void func_8007A154(unk_80079F54_arg_0* arg0, s32 arg1) {
     }
 }
 
-void func_8007A208(unk_80079F54_arg_0* arg0, s32 arg1) {
+void func_8007A208(unk_800E3A28* arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = arg1 - arg0->unk_10;
@@ -1188,7 +1155,7 @@ void func_8007A208(unk_80079F54_arg_0* arg0, s32 arg1) {
     arg0->unk_10 += var_v0;
 }
 
-void func_8007A278(unk_80079F54_arg_0* arg0, s32 arg1) {
+void func_8007A278(unk_800E3A28* arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = arg1 - arg0->unk_0C;
@@ -1222,7 +1189,7 @@ void func_8007A278(unk_80079F54_arg_0* arg0, s32 arg1) {
     }
 }
 
-void func_8007A334(unk_80079F54_arg_0* arg0, s32 arg1, s32 arg2) {
+void func_8007A334(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     UNUSED s32 temp = arg0->unk_0C;
     s32 var_v1;
 
@@ -1247,7 +1214,7 @@ void func_8007A334(unk_80079F54_arg_0* arg0, s32 arg1, s32 arg2) {
     arg0->unk_0C -= var_v1;
 }
 
-void func_8007A3B8(unk_80079F54_arg_0* arg0, s32 arg1, s32 arg2) {
+void func_8007A3B8(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     UNUSED s32 temp = arg0->unk_10;
     s32 var_v1;
 

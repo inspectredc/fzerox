@@ -2435,7 +2435,7 @@ Gfx* func_800A92FC(Gfx* gfx, Vtx* arg1, s32 arg2) {
     return gfx;
 }
 
-extern s32 D_800CCFE0;
+extern u32 D_800CCFE0;
 extern s32 D_800F8518;
 extern Gfx D_8014040[];
 extern Gfx D_8014078[];

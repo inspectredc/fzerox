@@ -159,6 +159,7 @@ void func_80076848(void) {
     D_800E33D0[2] = ALIGN16((uintptr_t) D_8024DC80);
 }
 
+// Add to memory start and return start of newly allocated block
 u8* func_80076884(s32 arg0, size_t arg1) {
     u8* ret = D_800E33C0[arg0];
 
@@ -168,12 +169,14 @@ u8* func_80076884(s32 arg0, size_t arg1) {
     return ret;
 }
 
+// Get memory block (non-allocating mode, used for compressed blocks)
 u8* func_800768B0(s32 arg0, size_t arg1) {
     u8* ret = D_800E33C0[arg0];
 
     return ret;
 }
 
+// Take from memory end and return new memory end
 u8* func_800768C8(s32 arg0, size_t arg1) {
 
     arg1 = ALIGN16(arg1);
@@ -190,11 +193,14 @@ u8* func_800768F4(s32 arg0, size_t arg1) {
     s32 j;
     s32 temp;
 
+    // Sets initial array of memory indexes and the sizes left in the 3 memory blocks
     for (i = 0; i < 3; i++) {
         sp50[i] = i;
         sp54[i] = D_800E33D0[i] - D_800E33C0[i];
     }
 
+    // Sort memory indexes in order of size (without disturbing order of memory blocks)
+    // Smallest -> Largest
     for (i = 2; i > 0; i--) {
         for (j = 0; j < i; j++) {
             if (sp54[sp50[j]] >= sp54[sp50[j + 1]]) {
@@ -205,12 +211,15 @@ u8* func_800768F4(s32 arg0, size_t arg1) {
         }
     }
 
+    // Check the smallest memory block this can be allocated into
     for (i = 0; i < 3; i++) {
         if (arg1 < sp54[sp50[i]]) {
             break;
         }
     }
 
+    // If not enough size in any block, default to memory block with largest available space
+    // Exit with NULL under a certain condition (todo)
     if (i >= 3) {
         i = 2;
         if (arg0 == 2) {
@@ -232,31 +241,31 @@ u8* func_800768F4(s32 arg0, size_t arg1) {
     return sp4C;
 }
 
-extern u32 D_800E3380[];
+extern u32 gSegments[];
 
 s32 func_80076B80(s32 arg0, s32 arg1) {
-    D_800E3380[arg0] = K0_TO_PHYS(arg1);
-    return D_800E3380[arg0];
+    gSegments[arg0] = K0_TO_PHYS(arg1);
+    return gSegments[arg0];
 }
 
 s32 func_80076BA0(s32 arg0, s32 arg1) {
-    D_800E3380[arg0] = arg1;
+    gSegments[arg0] = arg1;
     return arg1;
 }
 
 s32 func_80076BB8(s32 arg0) {
-    return PHYS_TO_K0(D_800E3380[arg0]);
+    return PHYS_TO_K0(gSegments[arg0]);
 }
 
 s32 func_80076BD4(uintptr_t arg0) {
-    return PHYS_TO_K0(D_800E3380[SEGMENT_NUMBER(arg0)] + SEGMENT_OFFSET(arg0));
+    return PHYS_TO_K0(gSegments[SEGMENT_NUMBER(arg0)] + SEGMENT_OFFSET(arg0));
 }
 
 Gfx* func_80076C08(Gfx* gfx) {
     s32 i;
 
     for (i = 0; i < 16; i++) {
-        gSPSegment(gfx++, i, D_800E3380[i]);
+        gSPSegment(gfx++, i, gSegments[i]);
     }
 
     return gfx;
@@ -702,7 +711,7 @@ void func_800778F8(void) {
                 osInvalDCache(sp24, ramSize);
                 func_800765CC(D_22B0A0, sp24, ramSize);
                 if (*(s32*) sp24 == (s32) 'MIO0') {
-                    func_800AA620(sp24, osPhysicalToVirtual(D_800DCDD4));
+                    mio0Decode(sp24, osPhysicalToVirtual(D_800DCDD4));
                 }
                 D_800CD2E8 = 0;
                 break;
@@ -745,7 +754,7 @@ void func_800779D0(void) {
         osInvalDCache(sp18, sp1C);
         func_800765CC(sp20, sp18, sp1C);
         if (*(s32*) sp18 == (s32) 'MIO0') {
-            func_800AA620(sp18, osPhysicalToVirtual(D_800DCDDC));
+            mio0Decode(sp18, osPhysicalToVirtual(D_800DCDDC));
         }
         D_800CD2EC = 0;
         func_8009CED0(sp28);
@@ -783,7 +792,7 @@ void func_80077B04(void) {
         osInvalDCache(sp18, sp1C);
         func_800765CC(sp20, sp18, sp1C);
         if (*(s32*) sp18 == (s32) 'MIO0') {
-            func_800AA620(sp18, osPhysicalToVirtual(D_800DCDDC));
+            mio0Decode(sp18, osPhysicalToVirtual(D_800DCDDC));
         }
         D_800CD2F0 = -1;
         func_8009CED0(sp28);
@@ -811,7 +820,7 @@ void func_80077BE0(void) {
         osInvalDCache(sp24, sp1C);
         func_800765CC(D_2738A0, sp24, sp1C);
         if (*(s32*) sp24 == (s32) 'MIO0') {
-            func_800AA620(sp24, osPhysicalToVirtual(D_800DCDE4));
+            mio0Decode(sp24, osPhysicalToVirtual(D_800DCDE4));
         }
         D_800CD2F4 = 0;
     }
