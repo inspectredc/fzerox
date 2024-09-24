@@ -135,7 +135,7 @@ f32 func_8009E85C(unk_8006FC8C*, f32, Mtx3F*, f32);
 
 void func_800A3044(void);
 
-void func_800AA620(u8*, void*); // mio0 decode?
+void mio0Decode(u8*, void*);
 s32 func_800AA6BC(u8*);
 
 void func_800BA28C(u8 soundMode);

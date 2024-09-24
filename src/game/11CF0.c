@@ -2,9 +2,9 @@
 
 extern u8 D_2B9EA0[];
 
-void func_80077CF0(s32 arg0, s32 arg1, u8* arg2) {
-    osInvalDCache(arg2, arg1);
-    func_800765CC(D_2B9EA0 + SEGMENT_OFFSET(arg0), arg2, arg1);
+void func_80077CF0(s32 segAddr, size_t size, u8* startAddr) {
+    osInvalDCache(startAddr, size);
+    func_800765CC(D_2B9EA0 + SEGMENT_OFFSET(segAddr), startAddr, size);
 }
 
 extern s32 D_800E3A20;
@@ -22,9 +22,9 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     bool var_a0;
     bool var_s7;
     s32 var_s0;
-    s32 var_s5;
+    s32 alignedWidth;
     s32 var_s2;
-    s32 temp_lo;
+    size_t size;
     u8* sp44;
     u8* var_s4;
     u8* header;
@@ -49,36 +49,36 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
                 case 4:
                 case 5:
                     if (arg0->width % 16) {
-                        var_s5 = ((arg0->width + 16) / 16) * 16;
+                        alignedWidth = ((arg0->width + 16) / 16) * 16;
                     } else {
-                        var_s5 = arg0->width;
+                        alignedWidth = arg0->width;
                     }
-                    temp_lo = arg0->height * var_s5;
-                    var_s4 = func_800768F4(0, temp_lo);
-                    func_80077CF0(arg0->unk_04, temp_lo, var_s4);
+                    size = arg0->height * alignedWidth;
+                    var_s4 = func_800768F4(0, size);
+                    func_80077CF0(arg0->unk_04, size, var_s4);
                     break;
                 case 20:
                 case 21:
 
                     if (arg0->width % 16) {
-                        var_s5 = ((arg0->width + 16) / 16) * 16;
+                        alignedWidth = ((arg0->width + 16) / 16) * 16;
                     } else {
-                        var_s5 = arg0->width;
+                        alignedWidth = arg0->width;
                     }
-                    temp_lo = arg0->height * var_s5;
+                    size = arg0->height * alignedWidth;
                     if (arg0->unk_0C != 0) {
                         var_s2 = ((arg0->unk_0C / 2) * 2) + 2;
                     } else {
                         var_s2 = 0x400;
                     }
-                    var_s4 = func_800768F4(0, temp_lo);
+                    var_s4 = func_800768F4(0, size);
                     header = func_800768F4(1, var_s2);
                     osInvalDCache(header, var_s2);
                     func_80077CF0(arg0->unk_04, var_s2, header);
                     if (*(s32*) header == (s32) 'MIO0') {
-                        func_800AA620(header, var_s4);
+                        mio0Decode(header, var_s4);
                     } else {
-                        bzero(var_s4, (arg0->height * var_s5) / 2);
+                        bzero(var_s4, (arg0->height * alignedWidth) / 2);
                     }
                     break;
                 case 17:
@@ -94,7 +94,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
                     osInvalDCache(header, var_s0);
                     func_80077CF0(arg0->unk_04, var_s0, header);
                     if (*(s32*) header == (s32) 'MIO0') {
-                        func_800AA620(header, var_s4);
+                        mio0Decode(header, var_s4);
                     } else {
                         bzero(var_s4, arg0->height * arg0->width * 2);
                     }
@@ -170,7 +170,7 @@ u8* func_80078104(void* arg0, s32 arg1, s32 arg2, s32 arg3, bool arg4) {
             osInvalDCache(var_a2, arg1);
             func_80077CF0(arg0, arg1, var_a2);
             if (*(s32*) var_a2 == (s32) 'MIO0') {
-                func_800AA620(var_a2, var_s0);
+                mio0Decode(var_a2, var_s0);
             } else {
                 bzero(var_s0, var_a3);
             }
@@ -439,7 +439,7 @@ void func_800790D4(void) {
                     osInvalDCache(header, var_s0);
                     func_80077CF0(temp_s1->unk_04, var_s0, header);
                     if (*(s32*) header == (s32) 'MIO0') {
-                        func_800AA620(header, var_s3->unk_04);
+                        mio0Decode(header, var_s3->unk_04);
                     } else {
                         bzero(var_s3->unk_04, temp_s1->height * temp_s1->width * 2);
                     }

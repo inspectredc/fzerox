@@ -627,8 +627,6 @@ Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-extern u8 D_F1C417C[];
-
 Gfx* func_i6_80118ED4(Gfx* gfx, unk_800E3A28* arg1) {
     s32 row;
     s32 var_a0;
@@ -720,8 +718,6 @@ Gfx* func_i6_80118ED4(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-extern u8 D_F1C6754[];
-
 Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
     s32 row;
     s32 sp50;
@@ -796,8 +792,6 @@ Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
 
 Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_80119908.s")
-
-extern u8 D_F0336B8[];
 
 Gfx* func_i6_8011A248(Gfx* gfx, unk_800E3A28* arg1) {
     s32 var_s2;
@@ -1821,23 +1815,7 @@ Gfx* func_i6_8011C01C(Gfx* gfx) {
 
 extern s16 D_800CCFE8;
 extern s8 D_800CD3C4;
-extern u8 D_F000004[];
-extern u8 D_F014A68[];
-extern u8 D_F026348[];
-extern u8 D_F138AB8[];
-extern u8 D_F25F070[];
-extern u8 D_F26176C[];
-extern u8 D_F2629A8[];
-extern u8 D_F262ED0[];
-extern u8 D_F262FB4[];
-extern u8 D_F263190[];
-extern u8 D_F263230[];
-extern u8 D_F2632E8[];
-extern u8 D_F2634A4[];
-extern u8 D_F263648[];
-extern u8 D_F26369C[];
-extern u8 D_F2636F0[];
-extern u8 D_F2637DC[];
+
 void func_i6_8011C404(void);
 
 void func_i6_8011C050(void) {

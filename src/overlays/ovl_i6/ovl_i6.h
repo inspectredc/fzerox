@@ -142,6 +142,13 @@ extern u8 D_F262688[];
 extern u8 D_F263DA8[];
 extern u8 D_F2630C8[];
 
+extern u8 D_F25F070[];
+extern u8 D_F138AB8[];
+extern u8 D_F26176C[];
+extern u8 D_F2629A8[];
+extern u8 D_F263648[];
+extern u8 D_F26369C[];
+
 
 extern u8 D_801247C0[];
 
