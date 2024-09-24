@@ -1,12 +1,367 @@
 #include "global.h"
+#include "ovl_i6.h"
+
+s8 D_i6_8011DFA0 = 0;
+s32 D_i6_8011DFA4 = 64; // UNUSED?
+s32 D_i6_8011DFA8 = 40; // UNUSED?
+
+s32 D_i6_8011DFAC = 60;
+s32 D_i6_8011DFB0 = 30;
+s32 D_i6_8011DFB4 = 50;
+
+unk_80077D50 D_i6_8011DFB8[] = { { 18, D_F1C871C, 128, 85, 0x2289 }, { 0 } };
+
+unk_80077D50 D_i6_8011DFD8[] = { { 18, D_F1CA9AC, 128, 94, 0x2905 }, { 0 } };
+
+unk_80077D50 D_i6_8011DFF8[] = { { 18, D_F1CD2B8, 128, 113, 0x2DBA }, { 0 } };
+
+unk_80077D50 D_i6_8011E018[] = { { 18, D_F1D0078, 128, 91, 0x2A88 }, { 0 } };
+
+unk_80077D50 D_i6_8011E038[] = { { 18, D_F1D2B04, 128, 94, 0x1DDB }, { 0 } };
+
+unk_80077D50 D_i6_8011E058[] = { { 18, D_F1D48E4, 128, 79, 0x24F5 }, { 0 } };
+
+unk_80077D50 D_i6_8011E078[] = { { 18, D_F1D6DE0, 128, 92, 0x2C79 }, { 0 } };
+
+unk_80077D50 D_i6_8011E098[] = { { 18, D_F1D9A60, 128, 87, 0x2A05 }, { 0 } };
+
+unk_80077D50 D_i6_8011E0B8[] = { { 18, D_F1DC46C, 128, 96, 0x3077 }, { 0 } };
+
+unk_80077D50 D_i6_8011E0D8[] = { { 18, D_F1DF4E8, 128, 82, 0x272B }, { 0 } };
+
+unk_80077D50 D_i6_8011E0F8[] = { { 18, D_F1E1C18, 128, 100, 0x2D0A }, { 0 } };
+
+unk_80077D50 D_i6_8011E118[] = { { 18, D_F1E4928, 128, 97, 0x3694 }, { 0 } };
+
+unk_80077D50 D_i6_8011E138[] = { { 18, D_F1E7FC0, 128, 84, 0x2674 }, { 0 } };
+
+unk_80077D50 D_i6_8011E158[] = { { 18, D_F1EA638, 128, 93, 0x25D7 }, { 0 } };
+
+unk_80077D50 D_i6_8011E178[] = { { 18, D_F1ECC14, 128, 85, 0x21A2 }, { 0 } };
+
+unk_80077D50 D_i6_8011E198[] = { { 18, D_F1EEDBC, 128, 86, 0x226D }, { 0 } };
+
+unk_80077D50 D_i6_8011E1B8[] = { { 18, D_F1F1030, 128, 96, 0x2E39 }, { 0 } };
+
+unk_80077D50 D_i6_8011E1D8[] = { { 18, D_F1F3E70, 128, 101, 0x309E }, { 0 } };
+
+unk_80077D50 D_i6_8011E1F8[] = { { 18, D_F1F6F14, 128, 118, 0x2B7C }, { 0 } };
+
+unk_80077D50 D_i6_8011E218[] = { { 18, D_F1F9A94, 128, 98, 0x2EF3 }, { 0 } };
+
+unk_80077D50 D_i6_8011E238[] = { { 18, D_F1FC98C, 128, 103, 0x2D69 }, { 0 } };
+
+unk_80077D50 D_i6_8011E258[] = { { 18, D_F1FF6FC, 128, 94, 0x2E5F }, { 0 } };
+
+unk_80077D50 D_i6_8011E278[] = { { 18, D_F202560, 128, 83, 0x2432 }, { 0 } };
+
+unk_80077D50 D_i6_8011E298[] = { { 18, D_F204998, 128, 92, 0x2CB2 }, { 0 } };
+
+unk_80077D50 D_i6_8011E2B8[] = { { 18, D_F207650, 128, 82, 0x22C9 }, { 0 } };
+
+unk_80077D50 D_i6_8011E2D8[] = { { 18, D_F209920, 128, 101, 0x2B2E }, { 0 } };
+
+unk_80077D50 D_i6_8011E2F8[] = { { 18, D_F20C454, 128, 88, 0x287D }, { 0 } };
+
+unk_80077D50 D_i6_8011E318[] = { { 18, D_F20ECD8, 128, 0x5D, 0x2488 }, { 0 } };
+
+unk_80077D50 D_i6_8011E338[] = { { 18, D_F211164, 128, 0x52, 0x22DA }, { 0 } };
+
+unk_80077D50 D_i6_8011E358[] = { { 18, D_F213444, 128, 0x5C, 0x276B }, { 0 } };
+
+unk_800792D8 D_i6_8011E378[] = { { D_i6_8011DFB8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E388[] = { { D_i6_8011DFD8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E398[] = { { D_i6_8011DFF8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E3A8[] = { { D_i6_8011E018, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E3B8[] = { { D_i6_8011E038, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E3C8[] = { { D_i6_8011E058, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E3D8[] = { { D_i6_8011E078, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E3E8[] = { { D_i6_8011E098, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E3F8[] = { { D_i6_8011E0B8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E408[] = { { D_i6_8011E0D8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E418[] = { { D_i6_8011E0F8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E428[] = { { D_i6_8011E118, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E438[] = { { D_i6_8011E138, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E448[] = { { D_i6_8011E158, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E458[] = { { D_i6_8011E178, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E468[] = { { D_i6_8011E198, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E478[] = { { D_i6_8011E1B8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E488[] = { { D_i6_8011E1D8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E498[] = { { D_i6_8011E1F8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E4A8[] = { { D_i6_8011E218, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E4B8[] = { { D_i6_8011E238, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E4C8[] = { { D_i6_8011E258, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E4D8[] = { { D_i6_8011E278, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E4E8[] = { { D_i6_8011E298, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E4F8[] = { { D_i6_8011E2B8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E508[] = { { D_i6_8011E2D8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E518[] = { { D_i6_8011E2F8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E528[] = { { D_i6_8011E318, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E538[] = { { D_i6_8011E338, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011E548[] = { { D_i6_8011E358, 60 }, { 0 } };
+
+unk_800792D8* D_i6_8011E558[] = {
+    D_i6_8011E498, D_i6_8011E498, D_i6_8011E378, D_i6_8011E388, D_i6_8011E398, D_i6_8011E3A8, D_i6_8011E3B8,
+    D_i6_8011E3C8, D_i6_8011E3D8, D_i6_8011E3E8, D_i6_8011E3F8, D_i6_8011E408, D_i6_8011E418, D_i6_8011E428,
+    D_i6_8011E438, D_i6_8011E448, D_i6_8011E458, D_i6_8011E468, D_i6_8011E478, D_i6_8011E488, D_i6_8011E498,
+    D_i6_8011E4A8, D_i6_8011E4B8, D_i6_8011E4C8, D_i6_8011E4D8, D_i6_8011E4E8, D_i6_8011E4F8, D_i6_8011E508,
+    D_i6_8011E518, D_i6_8011E528, D_i6_8011E538, D_i6_8011E548,
+};
+
+unk_80077D50 D_i6_8011E5D8[] = { { 17, D_F1C417C, 80, 182, 0x25D1 }, { 0 } };
+
+unk_80077D50 D_i6_8011E5F8[] = { { 17, D_F1C6754, 64, 64, 0x95A }, { 0 } };
+
+unk_80077D50 D_i6_8011E618[] = { { 17, D_F1C70B4, 80, 72, 0x1662 }, { 0 } };
+
+unk_80077D50 D_i6_8011E638[] = { { 17, D_F0336B8, 128, 14, 0x439 }, { 0 } };
+
+unk_80077D50 D_i6_8011E658[] = { { 17, D_F033AB4, 180, 245, 0x4AF4 }, { 0 } };
+
+unk_80077D50 D_i6_8011E678[] = { { 17, D_F0385AC, 180, 245, 0x6604 }, { 0 } };
+
+unk_80077D50 D_i6_8011E698[] = { { 17, D_F03EBB4, 180, 245, 0x5573 }, { 0 } };
+
+unk_80077D50 D_i6_8011E6B8[] = { { 17, D_F04412C, 180, 245, 0x76B4 }, { 0 } };
+
+unk_80077D50 D_i6_8011E6D8[] = { { 17, D_F04B7E4, 180, 245, 0x67F2 }, { 0 } };
+
+unk_80077D50 D_i6_8011E6F8[] = { { 17, D_F051FDC, 180, 245, 0x63BB }, { 0 } };
+
+unk_80077D50 D_i6_8011E718[] = { { 17, D_F05839C, 180, 245, 0x5EE9 }, { 0 } };
+
+unk_80077D50 D_i6_8011E738[] = { { 17, D_F05E28C, 180, 245, 0x7184 }, { 0 } };
+
+unk_80077D50 D_i6_8011E758[] = { { 17, D_F065414, 180, 245, 0x5666 }, { 0 } };
+
+unk_80077D50 D_i6_8011E778[] = { { 17, D_F06AA80, 180, 245, 0x5A49 }, { 0 } };
+
+unk_80077D50 D_i6_8011E798[] = { { 17, D_F0704D0, 180, 245, 0x55C1 }, { 0 } };
+
+unk_80077D50 D_i6_8011E7B8[] = { { 17, D_F075A98, 180, 245, 0x594F }, { 0 } };
+
+unk_80077D50 D_i6_8011E7D8[] = { { 17, D_F07B3EC, 180, 245, 0x7A7A }, { 0 } };
+
+unk_80077D50 D_i6_8011E7F8[] = { { 17, D_F082E6C, 180, 245, 0x6444 }, { 0 } };
+
+unk_80077D50 D_i6_8011E818[] = { { 17, D_F0892B4, 180, 245, 0x623A }, { 0 } };
+
+unk_80077D50 D_i6_8011E838[] = { { 17, D_F08F4F4, 180, 245, 0x6F78 }, { 0 } };
+
+unk_80077D50 D_i6_8011E858[] = { { 17, D_F096470, 180, 245, 0x5C56 }, { 0 } };
+
+unk_80077D50 D_i6_8011E878[] = { { 17, D_F09C0CC, 180, 245, 0x59E6 }, { 0 } };
+
+unk_80077D50 D_i6_8011E898[] = { { 17, D_F0A1AB8, 180, 245, 0x5B58 }, { 0 } };
+
+unk_80077D50 D_i6_8011E8B8[] = { { 17, D_F0A7614, 180, 245, 0x6B2D }, { 0 } };
+
+unk_80077D50 D_i6_8011E8D8[] = { { 17, D_F0AE148, 180, 245, 0x4E48 }, { 0 } };
+
+unk_80077D50 D_i6_8011E8F8[] = { { 17, D_F0B2F94, 180, 245, 0x6D92 }, { 0 } };
+
+unk_80077D50 D_i6_8011E918[] = { { 17, D_F0B9D2C, 180, 245, 0x5AB3 }, { 0 } };
+
+unk_80077D50 D_i6_8011E938[] = { { 17, D_F0BF7E4, 180, 245, 0x5E3B }, { 0 } };
+
+unk_80077D50 D_i6_8011E958[] = { { 17, D_F0C5624, 180, 245, 0x6EAC }, { 0 } };
+
+unk_80077D50 D_i6_8011E978[] = { { 17, D_F0CC4D4, 180, 245, 0x4D32 }, { 0 } };
+
+unk_80077D50 D_i6_8011E998[] = { { 17, D_F0D120C, 180, 245, 0x603A }, { 0 } };
+
+unk_80077D50 D_i6_8011E9B8[] = { { 17, D_F0D724C, 180, 245, 0x60B6 }, { 0 } };
+
+unk_80077D50 D_i6_8011E9D8[] = { { 17, D_F0DD308, 180, 245, 0x5534 }, { 0 } };
+
+unk_80077D50 D_i6_8011E9F8[] = { { 17, D_F0E2840, 180, 245, 0x5DA7 }, { 0 } };
+
+unk_800792D8 D_i6_8011EA18[] = { { D_i6_8011E658, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EA28[] = { { D_i6_8011E678, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EA38[] = { { D_i6_8011E698, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EA48[] = { { D_i6_8011E6B8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EA58[] = { { D_i6_8011E6D8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EA68[] = { { D_i6_8011E6F8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EA78[] = { { D_i6_8011E718, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EA88[] = { { D_i6_8011E738, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EA98[] = { { D_i6_8011E758, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EAA8[] = { { D_i6_8011E778, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EAB8[] = { { D_i6_8011E798, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EAC8[] = { { D_i6_8011E7B8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EAD8[] = { { D_i6_8011E7D8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EAE8[] = { { D_i6_8011E7F8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EAF8[] = { { D_i6_8011E818, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EB08[] = { { D_i6_8011E838, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EB18[] = { { D_i6_8011E858, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EB28[] = { { D_i6_8011E878, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EB38[] = { { D_i6_8011E898, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EB48[] = { { D_i6_8011E8B8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EB58[] = { { D_i6_8011E8D8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EB68[] = { { D_i6_8011E8F8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EB78[] = { { D_i6_8011E918, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EB88[] = { { D_i6_8011E938, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EB98[] = { { D_i6_8011E958, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EBA8[] = { { D_i6_8011E978, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EBB8[] = { { D_i6_8011E998, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EBC8[] = { { D_i6_8011E9B8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EBD8[] = { { D_i6_8011E9D8, 60 }, { 0 } };
+
+unk_800792D8 D_i6_8011EBE8[] = { { D_i6_8011E9F8, 60 }, { 0 } };
+
+unk_800792D8* D_i6_8011EBF8[] = {
+    D_i6_8011EA28, D_i6_8011EA68, D_i6_8011EA48, D_i6_8011EA18, D_i6_8011EA58, D_i6_8011EA38,
+    D_i6_8011EA78, D_i6_8011EA98, D_i6_8011EB98, D_i6_8011EA88, D_i6_8011EB48, D_i6_8011EB88,
+    D_i6_8011EAF8, D_i6_8011EB68, D_i6_8011EB38, D_i6_8011EB18, D_i6_8011EBB8, D_i6_8011EBA8,
+    D_i6_8011EB28, D_i6_8011EB78, D_i6_8011EB08, D_i6_8011EB58, D_i6_8011EAE8, D_i6_8011EBC8,
+    D_i6_8011EAD8, D_i6_8011EAB8, D_i6_8011EAC8, D_i6_8011EBE8, D_i6_8011EBD8, D_i6_8011EAA8,
+};
+
+// Credits Roles
+const char* D_i6_8011EC70[] = {
+    "director",          "assistant director", "chief programmer",    "programmer",          "programmer",
+    "programmer",        "dd programmer",      "dd programmer",       "sound composer",      "sound composer",
+    "sound effects",     "chief designer",     "graphic designer",    "machine modeler",     "course design",
+    "course design",     "course design",      "course design",       "sequence support",    "graphic support",
+    "technical support", "technical support",  "progress management", "progress management", "special thanks to",
+    "special thanks to", "special thanks to",  "special thanks to",   "special thanks to",   "executive producer",
+    "producer",
+};
+
+// Credits Names
+const char* D_i6_8011ECEC[] = { "tadashi sugiyama", "yasuyuki oyagi",    "keizo ohta",       "tsutomu kaneshige",
+                                "masahiro kawano",  "daisuke tsujimura", "hiroki sotoike",   "shiro mouri",
+                                "taro bando",       "hajime wakai",      "taro bando",       "takaya imamura",
+                                "katsuhiko kanno",  "tadashi sugiyama",  "tadashi sugiyama", "takaya imamura",
+                                "yasuyuki oyagi",   "keizo ohta",        "hideki konno",     "masanao arimoto",
+                                "hironobu kakui",   "shin hasegawa",     "kimiyoshi fukui",  "keizo kato",
+                                "yasuhiro sakai",   "atsushi tejima",    "masanori sato",    "takayuki hashida",
+                                "super mario club", "hiroshi yamauchi",  "shigeru miyamoto", "yoshitaka yasumoto",
+                                "naruhisa kawano",  "sou kimura",        "kayomi mcdonald",  "jim wornell" };
+
+s32 D_i6_8011ED7C = 0; // UNUSED?
+
+const s16 D_i6_8011F4BC[] = { 50, 240, 280, -20, 280, 240, 50, -20 };
+
+const s16 D_i6_8011F4CC[] = { 50, 100, 280, 180, 280, 100, 50, 180 };
+
+const s16 D_i6_8011F4DC[] = { 150, 210, 50, 35, 50, 210, 150, 35 };
+
+const s16 D_i6_8011F4EC[] = { 216, 0,   0, 248, 0, 0,   0, 0,   217, 0,   0,   249, 0, 0,   0,   0,   218, 0,
+                              0,   250, 0, 251, 0, 0,   0, 0,   220, 0,   0,   252, 0, 253, 0,   0,   0,   0,
+                              222, 0,   0, 254, 0, 255, 0, 262, 0,   256, 0,   257, 0, 261, 0,   263, 0,   264,
+                              0,   265, 0, 258, 0, 0,   0, 0,   0,   0,   0,   0,   0, 0,   0,   0,   0,   0,
+                              0,   0,   0, 0,   0, 0,   0, 0,   0,   0,   0,   0,   0, 0,   227, 0,   0,   259,
+                              0,   0,   0, 0,   0, 0,   0, 0,   0,   0,   0,   0,   0, 0,   0,   0,   0,   0,
+                              0,   0,   0, 0,   0, 0,   0, 0,   0,   0,   228, 0,   0, 260, -1,  0 };
+
+unk_8011EDDC_unk_14 D_i6_8011ED80[] = {
+    { D_F262FB4, 32, 16 },
+    { D_F262ED0, 32, 16 },
+};
+
+unk_8011EDDC_unk_14 D_i6_8011ED90[] = {
+    { D_F262FB4, 32, 16 },
+    { D_F262ED0, 32, 16 },
+};
+
+unk_8011EDDC_unk_14 D_i6_8011EDA0[] = {
+    { D_F262ED0, 32, 16 },
+    { D_F263190, 32, 16 },
+    { D_F263230, 32, 16 },
+};
+
+unk_8011EDDC_unk_14 D_i6_8011EDB8[] = {
+    { D_F2632E8, 64, 16 },
+    { D_F2634A4, 64, 16 },
+};
+
+unk_8011EDDC_unk_14 D_i6_8011EDC8[] = {
+    { D_F2637DC, 32, 16 },
+    { D_F2636F0, 32, 16 },
+};
+
+s32 D_i6_8011EDD8 = 0;
+
+unk_8011EDDC D_i6_8011EDDC[] = {
+    { 0, 2, 2, 0, 0, D_i6_8011ED80, { D_F261AD4, 128, 16 } }, { 1, 2, 2, 0, 0, D_i6_8011ED90, { D_F262184, 96, 16 } },
+    { 2, 2, 3, 0, 0, D_i6_8011EDA0, { D_F261E80, 96, 16 } },  { 3, 2, 2, 0, 0, D_i6_8011EDB8, { D_F262398, 96, 16 } },
+    { 4, 3, 0, 0, 0, NULL, { D_F262688, 96, 16 } },           { 5, 1, 0, 0, 0, NULL, { D_F263DA8, 96, 16 } },
+    { 6, 3, 0, 0, 0, NULL, { D_F2630C8, 40, 16 } },
+};
+
+char D_i6_8011EEBC[] = { "Feel Mie" }; // UNUSED
+
+s32 D_i6_8011EEC4[] = { 0, 0 }; // UNUSED
+
+s32 D_i6_8011EED0[] = { 2, 1, 0, 2, 0, 2, 0, 0 };
+
+s32 D_i6_8011EEF0[] = { 3, 1, 0, 2, 0, 3, 0, 0 };
+
+u16 D_i6_8011EF10[] = { 0x20, 0x2000, 0x10, 0x8, 0x4, 0x2, 0x1, 0x1000 };
 
 extern unk_800E3A28 D_800E3A28[];
 extern unk_800E3F28 D_800E3F28[];
-extern unk_800792D8* D_i6_8011E558;
 
 void func_i6_80117EE0(unk_800E3A28* arg0) {
 
-    arg0->unk_18 = func_800792D8(D_i6_8011E558);
+    arg0->unk_18 = func_800792D8(D_i6_8011E558[0]);
 
     arg0->unk_04 = 0;
 
@@ -22,7 +377,7 @@ void func_i6_80117F2C(unk_800E3A28* arg0) {
     for (i = 0; i < 30; i++) {
         D_i6_8011FAF0[i] = 0;
     }
-    arg0->unk_18 = func_800792D8(D_i6_8011E558);
+    arg0->unk_18 = func_800792D8(D_i6_8011E558[0]);
 
     D_800E3F28[arg0->unk_18].unk_04 = -1;
 }
@@ -31,34 +386,24 @@ void func_i6_80117F2C(unk_800E3A28* arg0) {
 void func_i6_80117F2C(unk_800E3A28* arg0);
 #endif
 
-extern unk_80077D50 D_i6_8011E5D8;
-
 void func_i6_80117FA8(unk_800E3A28* arg0) {
-    func_80077D50(&D_i6_8011E5D8, 0);
+    func_80077D50(D_i6_8011E5D8, 0);
     arg0->unk_1C = 0xB6;
 }
 
-extern unk_80077D50 D_i6_8011E5F8;
-
 void func_i6_80117FE0(void) {
-    func_80077D50(&D_i6_8011E5F8, 0);
+    func_80077D50(D_i6_8011E5F8, 0);
 }
 
-extern unk_80077D50 D_i6_8011E618;
-
 void func_i6_80118008(unk_800E3A28* arg0) {
-    func_80077D50(&D_i6_8011E618, 0);
+    func_80077D50(D_i6_8011E618, 0);
     arg0->unk_1C = 0x100;
     arg0->unk_18 = 0;
 }
 
-extern unk_80077D50 D_i6_8011E638;
-
 void func_i6_80118044(void) {
-    func_80077D50(&D_i6_8011E638, 0);
+    func_80077D50(D_i6_8011E638, 0);
 }
-
-extern unk_800792D8* D_i6_8011EBF8[];
 
 void func_i6_8011806C(unk_800E3A28* arg0) {
 
@@ -70,7 +415,6 @@ void func_i6_8011806C(unk_800E3A28* arg0) {
 s16 func_i2_801061D4(s8*, s32);
 s32 func_i2_801062E4(s8*, s32, s32);
 Gfx* func_i2_80106450(Gfx*, s32, s32, s8*, s32, s32, s32);
-extern s32 D_i6_8011E954[1];
 
 Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
     s32 temp_v0;
@@ -83,7 +427,8 @@ Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
     s8 sp64[2];
     s8* var_s5;
 
-    var_s5 = D_i6_8011E954[arg1->unk_00];
+    // FAKE!!
+    var_s5 = (&D_i6_8011E938[1].unk_0C)[arg1->unk_00];
 
     if (arg3 != 0) {
         i = func_i2_801062E4(var_s5, 1, 0);
@@ -127,8 +472,6 @@ Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
 
     return gfx;
 }
-
-extern s8 D_i6_8011DFA0;
 
 Gfx* func_i6_801182DC(Gfx* gfx, unk_800E3A28* arg1) {
 
@@ -452,146 +795,6 @@ Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F060.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F06C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F080.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F094.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F0A0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F0AC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F0B8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F0C8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F0D8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F0E8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F0F8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F108.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F118.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F12C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F13C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F14C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F15C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F16C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F17C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F190.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F1A0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F1B4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F1C8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F1DC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F1F0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F204.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F218.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F22C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F240.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F254.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F268.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F274.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F288.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F298.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F2A4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F2B8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F2C8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F2DC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F2EC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F2F8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F304.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F314.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F320.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F330.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F340.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F354.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F368.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F378.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F388.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F394.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F3A4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F3B4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F3C4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F3D4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F3E4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F3F0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F400.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F410.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F420.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F434.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F448.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F45C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F470.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F484.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F494.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F4A0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F4B0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F4BC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F4CC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/D_i6_8011F4DC.s")
-
 Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_80119908.s")
 
@@ -627,8 +830,6 @@ Gfx* func_i6_8011A248(Gfx* gfx, unk_800E3A28* arg1) {
 
     return gfx;
 }
-
-extern s16 D_i6_8011F4DC[];
 
 Gfx* func_i6_8011A59C(Gfx* gfx, unk_800E3A28* arg1) {
     s32 pad[14];
@@ -709,8 +910,6 @@ Gfx* func_i6_8011A890(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-extern char* D_i6_8011ECEC[];
-
 Gfx* func_i6_8011A944(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_v1;
     s32 pad[2];
@@ -764,7 +963,6 @@ Gfx* func_i6_8011AAC8(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 extern u16 D_800E416C;
-extern unk_800792D8* D_i6_8011E560[];
 
 void func_i6_8011AB1C(unk_800E3A28* arg0) {
     s32 var_v1;
@@ -796,7 +994,7 @@ void func_i6_8011AB1C(unk_800E3A28* arg0) {
         }
     }
     if (var_v1 != 0) {
-        func_800793E8(arg0->unk_18, 0, D_i6_8011E560[arg0->unk_04]);
+        func_800793E8(arg0->unk_18, 0, D_i6_8011E558[arg0->unk_04 + 2]);
     }
 }
 
@@ -881,7 +1079,7 @@ void func_i6_8011AC38(unk_800E3A28* arg0) {
         var_a2++;
     }
     if (var_a2 != 0) {
-        func_800793E8(arg0->unk_18, 0, D_i6_8011E560[arg0->unk_04]);
+        func_800793E8(arg0->unk_18, 0, D_i6_8011E558[arg0->unk_04 + 2]);
     }
 }
 
@@ -968,9 +1166,6 @@ bool func_i6_8011B058(unk_800E3A28* arg0, s32 arg1, s32 arg2, s32 arg3) {
     return false;
 }
 
-extern s16 D_i6_8011F4BC[];
-extern s16 D_i6_8011F4CC[];
-extern s16 D_i6_8011F4EA[];
 void func_i6_8011BAC0(s32 arg0, s32 arg1, s32 arg2, s8 arg3);
 
 void func_i6_8011B0CC(unk_800E3A28* arg0) {
@@ -1014,7 +1209,7 @@ void func_i6_8011B0CC(unk_800E3A28* arg0) {
             case 18:
                 if ((arg0->unk_1C % 15) == 0) {
                     index = arg0->unk_1C / 15;
-                    temp_a0 = D_i6_8011F4EA[index];
+                    temp_a0 = D_i6_8011F4EC[index - 1];
                     if (temp_a0 > 0) {
                         func_i6_8011BAC0(temp_a0, 0x32, 0xF0, 0xA);
                     } else if (temp_a0 < 0) {
@@ -1182,7 +1377,7 @@ void func_i6_8011B6A0(unk_800E3A28* arg0) {
                 arg0->unk_04++;
                 arg0->unk_1C = 0;
                 func_i6_8011BAC0(0xC2, 0x80, 0x40, 8);
-                func_800BA8D8(0x2BU);
+                func_800BA8D8(0x2B);
             }
             break;
         case 4:
@@ -1650,21 +1845,6 @@ extern u8 D_F26369C[];
 extern u8 D_F2636F0[];
 extern u8 D_F2637DC[];
 extern s32 D_i6_8011EDD8;
-typedef struct unk_8011EDDC_unk_14 {
-    u8* unk_00;
-    s16 unk_04;
-    s16 unk_06;
-} unk_8011EDDC_unk_14;
-typedef struct unk_8011EDDC {
-    s32 unk_00;
-    u16 unk_04;
-    s16 unk_06;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-    unk_8011EDDC_unk_14* unk_14; // points to pair
-    unk_8011EDDC_unk_14 unk_18;
-} unk_8011EDDC;
 extern unk_8011EDDC D_i6_8011EDDC[];
 extern u8* D_i6_8011FB10;
 extern s16 D_i6_80124620[];
@@ -1700,24 +1880,26 @@ void func_i6_8011C050(void) {
     var_s0 = D_i6_8011EDDC;
 
     for (i = 0; i < 7; i++, var_s0++) {
-        func_80078104(var_s0->unk_18.unk_00, var_s0->unk_18.unk_04 * var_s0->unk_18.unk_06, 0, 1, 0);
+        func_80078104(var_s0->unk_18.textureOffset, var_s0->unk_18.width * var_s0->unk_18.height, 0, 1, 0);
     }
 
     func_80078104(D_F000004, 0x23A00, 0, 1, 0);
-    func_8007A828(func_800783AC(D_F000004), 0x23A00U, 0xC3, 0x5F, 0x5F);
+    func_8007A828(func_800783AC(D_F000004), 0x23A00, 0xC3, 0x5F, 0x5F);
 
     if (D_800CD3C4 == 1) {
         D_i6_801247AC = func_80078104(D_F014A68, 0x25800, 0, 1, 0);
-        func_8007A828(D_i6_801247AC, 0x25800U, 0xC3, 0x5F, 0x5F);
+        func_8007A828(D_i6_801247AC, 0x25800, 0xC3, 0x5F, 0x5F);
     } else if (D_800CD3C4 == 2) {
         D_i6_801247AC = func_80078104(D_F026348, 0x25800, 0, 1, 0);
-        func_8007A828(D_i6_801247AC, 0x25800U, 0xC3, 0x5F, 0x5F);
+        func_8007A828(D_i6_801247AC, 0x25800, 0xC3, 0x5F, 0x5F);
     }
     if (D_800CD3C4 != 0) {
         D_i6_801247A8 = 1;
-        for (i = 0; i < 176; i++) {
+        // clang-format off
+        for (i = 0; i < 176; i++) { \
             D_i6_80124620[i] = 255;
         }
+        // clang-format on
     } else {
         D_i6_801247A8 = 0;
     }
@@ -1872,7 +2054,7 @@ bool func_i6_8011C788(void) {
             break;
         case 4:
             if (D_800E416E & 0x9000) {
-                D_i6_801247A4 = func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, 0xF801U, func_i6_8011D168);
+                D_i6_801247A4 = func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, 0xF801, func_i6_8011D168);
                 if (D_i6_801247A4 != 0) {
                     D_i6_80124780 = 1;
                     D_i6_80124788[D_i6_8011EDD8] = 0;
@@ -1999,16 +2181,16 @@ Gfx* func_i6_8011CD4C(Gfx* gfx) {
             gfx = func_8007DB28(gfx, 0);
         }
         temp_v1_2 = &var_s1->unk_18;
-        gfx = func_8007E410(gfx, func_800783AC(temp_v1_2->unk_00), NULL, 2, 1, var_s1->unk_0C + 0x1E, var_s5,
-                            temp_v1_2->unk_04, temp_v1_2->unk_06, 0);
+        gfx = func_8007E410(gfx, func_800783AC(temp_v1_2->textureOffset), NULL, 2, 1, var_s1->unk_0C + 0x1E, var_s5,
+                            temp_v1_2->width, temp_v1_2->height, 0);
 
         if (!(var_s1->unk_04 & 1)) {
             gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, 2, 1, 0xBE, var_s5, 0x10, 0x10, 0);
             gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, 2, 1, 0x109, var_s5, 0x10, 0x10, 0);
             temp_s0_2 = &var_s1->unk_14[D_i6_80124788[i]];
-            temp_s4 = ((60 - temp_s0_2->unk_04) / 2) + var_s1->unk_10;
-            gfx = func_8007E410(gfx, func_800783AC((u32) temp_s0_2->unk_00), NULL, 2, 1, temp_s4 + 0xD0, var_s5,
-                                temp_s0_2->unk_04, temp_s0_2->unk_06, 0);
+            temp_s4 = ((60 - temp_s0_2->width) / 2) + var_s1->unk_10;
+            gfx = func_8007E410(gfx, func_800783AC(temp_s0_2->textureOffset), NULL, 2, 1, temp_s4 + 0xD0, var_s5,
+                                temp_s0_2->width, temp_s0_2->height, 0);
         }
         var_s5 += var_s7;
     }
@@ -2027,16 +2209,16 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
 
     gfx = func_8007E410(gfx, func_800783AC(D_F2629A8), func_800783AC(D_F25F070), 2, 1, arg1 + 0xC, arg2 + 0xA, 0x80,
-                        0x20, 3U);
+                        0x20, 3);
 
     gDPPipeSync(gfx++);
     gfx = func_8007DB28(gfx, 0);
-    gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, 2, 1, arg1 + 0x18, arg2 + 0x32, 0x10, 0x10, 0U);
-    gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, 2, 1, arg1 + 0x63, arg2 + 0x32, 0x10, 0x10, 0U);
+    gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, 2, 1, arg1 + 0x18, arg2 + 0x32, 0x10, 0x10, 0);
+    gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, 2, 1, arg1 + 0x63, arg2 + 0x32, 0x10, 0x10, 0);
     temp_v1 = &D_i6_8011EDC8[D_i6_80124788[D_i6_8011EDD8]];
-    sp54 = (0x3C - temp_v1->unk_04) / 2;
-    return func_8007E410(gfx, func_800783AC(temp_v1->unk_00), NULL, 2, 1, arg1 + sp54 + 0x2A, arg2 + 0x32,
-                         temp_v1->unk_04, temp_v1->unk_06, 0U);
+    sp54 = (0x3C - temp_v1->width) / 2;
+    return func_8007E410(gfx, func_800783AC(temp_v1->textureOffset), NULL, 2, 1, arg1 + sp54 + 0x2A, arg2 + 0x32,
+                         temp_v1->width, temp_v1->height, 0);
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011D394.s")

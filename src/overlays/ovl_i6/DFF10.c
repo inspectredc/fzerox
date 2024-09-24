@@ -1,4 +1,88 @@
 #include "global.h"
+#include "ovl_i6.h"
+
+// UNUSED?
+unk_8011DC40 D_i6_8011DC40 = { 1.0f, 1.0f, 32, 12, 0, 2, 17, 20 };
+
+s32 D_i6_8011DC60 = 0;
+s32 D_i6_8011DC64 = 0;
+s32 D_i6_8011DC68 = 0;
+s32 D_i6_8011DC6C = 180;
+
+unk_80077D50 D_i6_8011DC70[] = { { 17, D_F129C54, 64, 86, 0xF57 }, { 0 } };
+
+unk_80077D50 D_i6_8011DC90[] = { { 17, D_F12ABB0, 64, 86, 0x1049 }, { 0 } };
+
+unk_80077D50 D_i6_8011DCB0[] = { { 17, D_F12BC00, 64, 86, 0xF98 }, { 0 } };
+
+unk_80077D50 D_i6_8011DCD0[] = { { 17, D_F12CB9C, 64, 86, 0xF76 }, { 0 } };
+
+unk_80077D50 D_i6_8011DCF0[] = { { 17, D_F12DB18, 64, 86, 0xE83 }, { 0 } };
+
+unk_80077D50 D_i6_8011DD10[] = { { 17, D_F12E9A0, 64, 86, 0xF8F }, { 0 } };
+
+unk_80077D50 D_i6_8011DD30[] = { { 17, D_F12F934, 64, 86, 0x1016 }, { 0 } };
+
+unk_80077D50 D_i6_8011DD50[] = { { 17, D_F130950, 64, 86, 0x1012 }, { 0 } };
+
+unk_80077D50* D_i6_8011DD70[] = {
+    D_i6_8011DC70, D_i6_8011DC90, D_i6_8011DCF0, D_i6_8011DCB0,
+    D_i6_8011DD30, D_i6_8011DCD0, D_i6_8011DD10, D_i6_8011DD50,
+};
+
+unk_80077D50 D_i6_8011DD90[] = { { 17, D_F000004, 304, 240, 0x14A5D }, { 0 } };
+
+unk_80077D50 D_i6_8011DDB0[] = { { 17, D_F014A68, 320, 240, 0x118DB }, { 0 } };
+
+unk_80077D50 D_i6_8011DDD0[] = { { 17, D_F026348, 320, 240, 0x9E0A }, { 0 } };
+
+unk_80077D50* D_i6_8011DDF0[] = {
+    D_i6_8011DD90,
+    D_i6_8011DDB0,
+    D_i6_8011DDD0,
+};
+
+unk_80077D50 D_i6_8011DDFC[] = { { 4, D_F134760, 128, 24, 0 }, { 0 } };
+
+unk_80077D50 D_i6_8011DE1C[] = { { 17, D_F131968, 128, 80, 0x2A0E }, { 0 } };
+
+unk_80077D50 D_i6_8011DE3C[] = { { 17, D_F134D64, 64, 18, 0x144 }, { 0 } };
+
+unk_80077D50 D_i6_8011DE5C[] = { { 17, D_F134EAC, 64, 18, 0x14C }, { 0 } };
+
+unk_80077D50 D_i6_8011DE7C[] = { { 17, D_F134FFC, 64, 18, 0x149 }, { 0 } };
+
+unk_80077D50 D_i6_8011DE9C[] = { { 17, D_F13514C, 64, 18, 0x14E }, { 0 } };
+
+unk_80077D50 D_i6_8011DEBC[] = { { 17, D_F13437C, 64, 18, 0x146 }, { 0 } };
+
+unk_80077D50 D_i6_8011DEDC[] = { { 17, D_F1344C8, 64, 18, 0x142 }, { 0 } };
+
+unk_80077D50 D_i6_8011DEFC[] = { { 17, D_F134610, 64, 18, 0x143 }, { 0 } };
+
+unk_80077D50 D_i6_8011DF1C[] = { { 18, D_F1352A0, 88, 18, 0x1B1 }, { 0 } };
+
+unk_80077D50 D_i6_8011DF3C[] = { { 17, D_F135458, 64, 18, 0x149 }, { 0 } };
+
+unk_80077D50* D_i6_8011DF5C[] = {
+    D_i6_8011DE3C,
+    D_i6_8011DE5C,
+    D_i6_8011DE7C,
+    D_i6_8011DE9C,
+};
+
+unk_80077D50* D_i6_8011DF6C[] = {
+    D_i6_8011DEBC,
+    D_i6_8011DEDC,
+    D_i6_8011DEFC,
+};
+
+unk_80077D50* D_i6_8011DF78[] = {
+    D_i6_8011DF1C,
+    D_i6_8011DF3C,
+};
+
+unk_80077D50 D_i6_8011DF80[] = { { 17, D_F139710, 32, 16, 0x112 }, { 0 } };
 
 extern u32 D_800CCFE0;
 extern s16 D_800CCFE8;
@@ -308,7 +392,6 @@ Gfx* func_i6_801167CC(Gfx* gfx) {
 
 extern s16 D_8011F910[];
 extern unk_80077D50* D_i6_8011DDF0[];
-extern s32 D_i6_8011DDF8;
 extern s8 D_800CD3C4;
 
 void func_i6_801167EC(unk_800E3A28* arg0) {
@@ -326,13 +409,12 @@ void func_i6_801167EC(unk_800E3A28* arg0) {
                 D_8011F910[i] = 0;
             }
 
-            func_80077D50(D_i6_8011DDF8, 0);
+            func_80077D50(D_i6_8011DDF0[2], 0);
             break;
     }
 }
 
 extern s16 D_800CD044;
-extern unk_80077D50* D_i6_8011DD70[];
 
 void func_i6_80116894(unk_800E3A28* arg0) {
     s32 index = arg0->unk_00 - 0x51;
@@ -343,23 +425,20 @@ void func_i6_80116894(unk_800E3A28* arg0) {
     }
 }
 
-extern unk_80077D50 D_i6_8011DDFC;
-
 void func_i6_801168EC(unk_800E3A28* arg0) {
 
-    func_80077D50(&D_i6_8011DDFC, 0);
+    func_80077D50(D_i6_8011DDFC, 0);
     if (D_800CD044 == 0x21) {
         arg0->unk_1C = 0xC;
     }
 }
 
-extern unk_80077D50 D_i6_8011DE1C;
 extern unk_80077D50* D_i6_8011DF6C[];
 
 void func_i6_80116934(void) {
     s32 i;
 
-    func_80077D50(&D_i6_8011DE1C, 0);
+    func_80077D50(D_i6_8011DE1C, 0);
 
     for (i = 0; i < 3; i++) {
         func_80077D50(D_i6_8011DF6C[i], 0);
@@ -371,7 +450,7 @@ extern unk_80077D50* D_i6_8011DF5C[];
 void func_i6_80116990(void) {
     s32 i;
 
-    func_80077D50(&D_i6_8011DE1C, 0);
+    func_80077D50(D_i6_8011DE1C, 0);
 
     for (i = 0; i < 4; i++) {
         func_80077D50(D_i6_8011DF5C[i], 0);
@@ -383,17 +462,15 @@ extern unk_80077D50* D_i6_8011DF78[];
 void func_i6_801169EC(void) {
     s32 i;
 
-    func_80077D50(&D_i6_8011DE1C, 0);
+    func_80077D50(D_i6_8011DE1C, 0);
 
     for (i = 0; i < 2; i++) {
         func_80077D50(D_i6_8011DF78[i], 0);
     }
 }
 
-extern unk_80077D50 D_i6_8011DF80;
-
 void func_i6_80116A48(unk_800E3A28* arg0) {
-    func_80077D50(&D_i6_8011DF80, 0);
+    func_80077D50(D_i6_8011DF80, 0);
     arg0->unk_0C = 0x32;
 }
 
@@ -462,10 +539,7 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
 extern Gfx D_3000088[];
 extern f32 D_800DD230[];
 extern s8 D_800CD3C4;
-extern s32 D_i6_8011DC60;
-extern s32 D_i6_8011DC64;
-extern s32 D_i6_8011DC68;
-extern s32 D_i6_8011DC6C;
+
 extern s16 D_i6_8011FAEE;
 
 Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
@@ -614,8 +688,6 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-extern unk_80077D50 D_i6_8011DDFC;
-
 Gfx* func_i6_80117400(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp;
 
@@ -641,7 +713,7 @@ Gfx* func_i6_80117400(Gfx* gfx, unk_800E3A28* arg1) {
 
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return func_80078EA0(gfx, &D_i6_8011DDFC, arg1->unk_0C - temp, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, D_i6_8011DDFC, arg1->unk_0C - temp, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
@@ -674,7 +746,7 @@ Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
             break;
     }
     temp_s7 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, &D_i6_8011DE1C, arg1->unk_0C - temp_s7, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, D_i6_8011DE1C, arg1->unk_0C - temp_s7, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 
     for (i = 0; i < 3; i++) {
         if (D_800CD388[D_800CD380] == i) {
@@ -739,7 +811,7 @@ Gfx* func_i6_80117760(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     temp_s6 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, &D_i6_8011DE1C, arg1->unk_0C - temp_s6, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, D_i6_8011DE1C, arg1->unk_0C - temp_s6, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 
     for (i = 0; i < 4; i++) {
         if (D_800CD388[D_800CD380] == i) {
@@ -801,7 +873,7 @@ Gfx* func_i6_80117A18(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     temp_s7 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, &D_i6_8011DE1C, arg1->unk_0C - temp_s7, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, D_i6_8011DE1C, arg1->unk_0C - temp_s7, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 
     for (i = 0; i < 2; i++) {
         if (D_800CD388[1] == i) {
@@ -835,11 +907,11 @@ Gfx* func_i6_80117C50(Gfx* gfx, unk_800E3A28* arg1) {
         case 4:
         case 5:
             gfx = func_8007DB28(gfx, 1);
-            gfx = func_80078EA0(gfx, &D_i6_8011DF80, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, D_i6_8011DF80, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
             break;
         default:
             gfx = func_8007DB28(gfx, 0);
-            gfx = func_80078EA0(gfx, &D_i6_8011DF80, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, D_i6_8011DF80, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
             break;
     }
     return gfx;
