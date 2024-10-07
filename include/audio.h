@@ -936,23 +936,6 @@ bool func_800B6E14(void);
 s32 func_800B6EC0(s32 specId);
 void func_800B6F58(void);
 
-void func_800B71A4(void);
-void func_800B9E28(void);
-void func_800BA248(void);
-void func_800BA268(void);
-void func_800BA2B4(u8);
-void func_800BA2D0(u8);
-void func_800BA2F0(u8, u8);
-void func_800BA3E4(u8, u8);
-void func_800BA710(u8, u8);
-void func_800BAB50(u8);
-void func_800BAB68(u8);
-void func_800BAF30(u8);
-void func_800BAF80(void);
-void func_800BAFA4(u8);
-void func_800BB078(void);
-void func_800BB39C(s32);
-void func_800BB3C4(u8, f32);
 AudioTask* func_800BB49C(void);
 
 #endif

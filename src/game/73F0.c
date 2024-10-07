@@ -131,7 +131,7 @@ Gfx* func_8006F5E4(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_30006D0);
 
-    gSPMatrix(gfx++, (uintptr_t) &D_102C5E8 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, K0_TO_PHYS(&D_102C5E8), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     gSPDisplayList(gfx++, D_801EAA8);
 
@@ -146,7 +146,7 @@ Gfx* func_8006F68C(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_30006D0);
 
-    gSPMatrix(gfx++, (uintptr_t) &D_102C628 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, K0_TO_PHYS(&D_102C628), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     gSPDisplayList(gfx++, D_801EAA8);
 
@@ -169,7 +169,7 @@ Gfx* func_8006F6FC(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_30005D8);
 
-    gSPMatrix(gfx++, (uintptr_t) &D_102C668 & 0x1FFFFFFF, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, K0_TO_PHYS(&D_102C668), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     gSPDisplayList(gfx++, D_801EBF8);
 
@@ -642,7 +642,7 @@ void func_8007402C(s32 arg0) {
     s32 sp28;
 
     if (arg0 >= 0x36) {
-        func_80073FA0((arg0 * 0x7E0) + 0xFFFF13C0 + D_2AD1E0, osVirtualToPhysical(D_8010B7B0.unk_000), 0x7E0);
+        func_80073FA0(((arg0 - 30) * 0x7E0) + D_2AD1E0, osVirtualToPhysical(D_8010B7B0.unk_000), 0x7E0);
         if ((D_80106F48 >= 4) && (arg0 == 0x37)) {
             D_8010B7B0.unk_000[3] = 3;
         }

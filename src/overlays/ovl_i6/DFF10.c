@@ -161,7 +161,7 @@ void func_i6_80115DF0(void) {
 
 extern unk_800DCE48 D_800DCE48;
 extern s32 D_800CD388[];
-extern s32 D_800E4180[];
+extern char* D_800E4180[];
 
 extern s32 D_800CD000;
 extern s32 D_800CD008;
@@ -177,7 +177,7 @@ extern unk_800DCE98 D_800DD180;
 extern s32 D_800DD228;
 extern u16 D_800E416C;
 extern u16 D_800E416E;
-extern s32 D_800E4178;
+extern char* D_800E4178;
 extern s32 D_800F8514;
 extern s32 D_80106DA4;
 

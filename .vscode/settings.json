@@ -103,7 +103,8 @@
     "leo.h": "c",
     "leo_internal.h": "c",
     "other_types.h": "c",
-    "fzxthread.h": "c"
+    "fzxthread.h": "c",
+    "fzx_racer.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"
