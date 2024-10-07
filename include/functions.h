@@ -61,10 +61,12 @@ void func_80076804(void);
 void func_80076848(void);
 u8* func_800768F4(s32 arg0, size_t arg1);
 s32 func_80076BA0(s32 arg0, s32 arg1);
+s32 func_80076BB8(s32 arg0);
 s32 func_80076BD4(uintptr_t arg0);
 void func_80077318(void);
 void func_80077C9C(void);
 
+void func_80077CF0(s32 segAddr, size_t size, u8* startAddr);
 u8* func_80077D50(unk_80077D50* arg0, s32 arg1);
 u8* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4);
 TexturePtr func_800783AC(void* arg0);
@@ -93,12 +95,15 @@ Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 arg2, s32 arg3, s32 arg4, u
                    s32 arg9, s32 argA, s32 argB);
 void func_8007DABC(unk_800DCE98* arg0);
 Gfx* func_8007DB28(Gfx* gfx, s32 arg1);
+void func_8007DEF0(void);
 void func_8007E2B4(void);
 void func_8007E08C(void);
 void func_8007E0CC(void);
+void func_8007E0EC(void);
 void func_8007E398(void);
 
 Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlut, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, u16 arg9);
+Gfx* func_8007F090(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3);
 
 void func_8007F904(void);
 void func_8007FC68(s32);
@@ -110,6 +115,9 @@ void func_8007FE48(void);
 void func_8007FE98(void);
 void func_8007FED4(void);
 
+void Fault_SetFrameBuffer(FrameBuffer* buffer, u16 width, u16 height);
+void Fault_Init(void);
+
 void func_80080A40(unk_800E51B8** arg0);
 void func_80080A48(void);
 void func_80080BDC(unk_800E51B8* arg0);
@@ -118,15 +126,17 @@ unk_800E51B8* func_80080AA8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, u1
 Gfx* func_80080E90(Gfx* gfx);
 bool func_8008108C(unk_800E51B8* arg0, s32 arg1);
 
+f32 func_8008960C(f32 arg0);
+void func_80089BD0(void);
+void func_8008AA8C(void);
 void func_8008B1CC(void);
 void func_8008D7E8(void);
 void func_8008D824(void);
 void func_8008D8E8(void);
-
-void Fault_SetFrameBuffer(FrameBuffer* buffer, u16 width, u16 height);
-void Fault_Init(void);
+void func_80095144(void);
 
 void func_8009CED0(u32 arg0);
+s32 func_8009D16C(unk_802C4920_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4);
 s32 func_8009DEAC(unk_800F8510* arg0);
 f32 func_8009E108(unk_8006FC8C*, f32, f32*);
 f32 func_8009E538(unk_8006FC8C*, f32, Vec3f*);
@@ -138,9 +148,29 @@ void func_800A3044(void);
 void mio0Decode(u8*, void*);
 s32 func_800AA6BC(u8*);
 
+void func_800B71A4(void);
+void func_800B9E28(void);
+void func_800BA248(void);
+void func_800BA268(void);
 void func_800BA28C(u8 soundMode);
+void func_800BA2B4(u8);
+void func_800BA2D0(u8);
+void func_800BA2F0(u8, u8);
+void func_800BA3E4(u8, u8);
+void func_800BA710(u8 arg0, u8 arg1);
 void func_800BA8D8(u8 arg0);
+void func_800BAB50(u8);
+void func_800BAB68(u8);
+void func_800BAF30(u8);
+void func_800BAF80(void);
+void func_800BAFA4(u8);
+void func_800BB038(void);
+void func_800BB048(void);
+void func_800BB078(void);
+void func_800BB0C0(u8 arg0);
 void func_800BB324(u8 arg0);
+void func_800BB39C(s32);
+void func_800BB3C4(u8, f32);
 
 bool func_800CC220(void);
 
@@ -161,10 +191,13 @@ s32 func_i2_80100520(s32);
 void func_i2_801012CC(s32);
 void func_i2_80101414(void);
 void func_i2_80101784(s32, s32);
+s32 func_i2_801037CC(s32*, s32);
 void func_i2_80103A70(void);
 void func_i2_80103AD4(void);
 s32 func_i2_80103B8C(void);
 Gfx* func_i2_80103BE0(Gfx*);
+s32 func_i2_801062E4(s8*, s32, s32);
+Gfx* func_i2_80106450(Gfx*, s32, s32, s8*, s32, s32, s32);
 
 void func_i3_80134598(void);
 

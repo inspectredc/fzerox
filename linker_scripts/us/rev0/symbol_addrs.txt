@@ -227,4 +227,4 @@ gSegments = 0x800E3380;
 
 gSlowLoads = 0x800F89F0;
 
-gRacers = 0x802C4920;
+gRacers = 0x802C4920; // size:0x6DB0

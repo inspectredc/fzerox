@@ -3,6 +3,10 @@
 
 #include "libultra/ultra64.h"
 
+#define M_PI    3.14159265358979323846f
+#define M_DTOR	(M_PI / 180.0f)
+#define M_RTOD	(180.0f / M_PI)
+
 typedef union {
     struct {
         /* 0x0 */ f32 x;

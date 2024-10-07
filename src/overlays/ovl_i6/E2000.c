@@ -502,8 +502,6 @@ void func_i6_8011806C(unk_800E3A28* arg0) {
 }
 
 s16 func_i2_801061D4(s8*, s32);
-s32 func_i2_801062E4(s8*, s32, s32);
-Gfx* func_i2_80106450(Gfx*, s32, s32, s8*, s32, s32, s32);
 
 Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
     s32 temp_v0;
@@ -2125,18 +2123,13 @@ bool func_i6_8011C788(void) {
     return false;
 }
 
-extern s32 D_800E5F00;
-extern s32 D_800E5F04;
-extern s32 D_800E5F08;
-extern s32 D_800E5F0C;
-extern s32 D_800E5F10;
-extern s32 D_800E5F14;
-extern s32 D_800E5F18;
-extern s32 D_800E5F1C;
+extern s32 D_800E5F00[];
+extern s32 D_800E5F10[];
 
 void func_i6_8011CBB4(void) {
     s32 lastSelectionState;
-    s32 pad[2];
+    s32 pad;
+    s32 i;
     bool updateSettings;
 
     if (func_8008108C(D_i6_801247A4, 1) != 0) {
@@ -2160,14 +2153,9 @@ void func_i6_8011CBB4(void) {
             if (gOptionsSelectionState[gOptionsCurrentRow] == 1) {
                 func_i2_80101784(D_i6_8011FB10, 1);
                 func_i6_8011C404();
-                D_800E5F10 = 0;
-                D_800E5F00 = 0;
-                D_800E5F14 = 0;
-                D_800E5F04 = 0;
-                D_800E5F18 = 0;
-                D_800E5F08 = 0;
-                D_800E5F1C = 0;
-                D_800E5F0C = 0;
+                for (i = 0; i < 4; i++) {
+                    D_800E5F00[i] = D_800E5F10[i] = 0;
+                }
                 func_8007E398();
                 func_800BA8D8(5);
             } else {

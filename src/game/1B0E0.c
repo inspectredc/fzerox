@@ -478,7 +478,7 @@ void func_80082A6C(void* arg0, unk_struct_1DC* arg1) {
     f32 var_fv0;
     f32 var_fv1;
 
-    func_8006D03C((s32) arg0 + (arg1->unk_00 << 6) + 0x20008, &arg1->unk_11C, arg1->unk_94.x, arg1->unk_A0,
+    func_8006D03C((u8*) arg0 + (arg1->unk_00 << 6) + 0x20008, &arg1->unk_11C, arg1->unk_94.x, arg1->unk_A0,
                   arg1->unk_A4, arg1->unk_A8, arg1->unk_94.y, arg1->unk_AC, arg1->unk_94.z, &arg1->unk_118);
 
     if (D_800E5E8C != 0) {
@@ -1749,15 +1749,7 @@ void func_800876A8(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
     }
 }
 
-typedef struct unk_struct_94 {
-    s8 unk_00[0x72];
-    u16 unk_72;
-    s8 unk_74[0x6];
-    u16 unk_7A;
-    u16 unk_7C;
-    s8 unk_80[0x16];
-} unk_struct_94; // size = 0x94
-extern unk_struct_94 D_800DCE98[];
+extern unk_800DCE98 D_800DCE98[];
 extern s32 D_800DD218[];
 extern s32 D_800CD000;
 extern s32 D_800CD3CC;
@@ -1779,7 +1771,7 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
     s32 pad[4];
     unk_802C4920* temp_t0;
     unk_struct_9C* temp_a2 = &arg1->unk_04.unk_58;
-    unk_struct_94* temp_t1;
+    unk_800DCE98* temp_t1;
 
     index = arg0->unk_00;
     temp_t0 = &gRacers[index];
@@ -1885,7 +1877,7 @@ void func_80087E14(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
         }
         if (arg0->unk_18 == 0) {
             for (i = 0; i < D_800CD000; i++) {
-                unk_struct_94* temp_a0 = &D_800DCE98[D_800DD218[i]];
+                unk_800DCE98* temp_a0 = &D_800DCE98[D_800DD218[i]];
 
                 if (temp_a0->unk_7A & 8) {
                     temp_v0->unk_00.unk_00.unk_3C.y += 0.1f;
@@ -3995,13 +3987,6 @@ void func_80094FF4(s32 arg0) {
     }
 }
 
-typedef struct unk_800F5DF0 {
-    s8 unk_00[0x8];
-    s8* unk_08;
-    s32 unk_0C;
-    s8 unk_10[0x24];
-} unk_800F5DF0; // size = 0x34
-
 s32 func_800950E8(unk_800F5DF0* arg0) {
     s32 temp1 = *arg0->unk_08++;
 
@@ -4032,11 +4017,11 @@ void func_80095144(void) {
 }
 
 extern s32 D_800F5E98;
-void func_80090BCC(unk_802C4920*, unk_struct_94*);
-void func_i3_80117BF0(unk_802C4920*, unk_struct_94*);
+void func_80090BCC(unk_802C4920*, unk_800DCE98*);
+void func_i3_80117BF0(unk_802C4920*, unk_800DCE98*);
 
 void func_800951DC(unk_802C4920* arg0) {
-    unk_struct_94 sp24;
+    unk_800DCE98 sp24;
     f32 sp20;
 
     if (arg0->unk_04 & 0x800000) {

@@ -190,10 +190,10 @@ Gfx* func_8007B0A8(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007CDB0.s")
 
 #ifdef IMPORT_BSS
-extern s32 D_800CD3D0[];
+extern char* D_800CD3D0[];
 
 extern u8 D_8010D730[][9];
-static s32 D_800E4180[55];
+char* D_800E4180[55];
 
 void func_8007D9D0(void) {
     s32 i;
@@ -384,7 +384,6 @@ s32 func_8007E11C(s32 arg0) {
     return 0;
 }
 
-s32 func_i2_801037CC(s32*, s32);
 extern s8 D_800CD3C0;
 extern s8 D_800CD3C4;
 
