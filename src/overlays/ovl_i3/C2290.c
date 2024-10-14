@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzx_racer.h"
+#include "ovl_i3.h"
 
 Gfx* func_i3_8012EFC0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
 
@@ -500,7 +501,7 @@ Gfx* func_i3_80130824(Gfx* gfx, s32 arg1, s32 arg2) {
     temp_t4 = D_i3_8013F354[arg1][arg2][1];
 
     gSPDisplayList(gfx++, D_80149A0);
-    gDPSetFillColor(gfx++, 0x10001);
+    gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1));
 
     gDPFillRectangle(gfx++, temp_t3 + 12, temp_t4, temp_t3 + 35, temp_t4 + sp48);
 
@@ -1761,14 +1762,14 @@ Gfx* func_i3_80135598(Gfx* gfx, s32 arg1, s32 arg2) {
     xl = D_i3_8013F19C[arg1][arg2][0] + 32;
     yl = D_i3_8013F19C[arg1][arg2][1] + 16;
 
-    if (D_800F8510->unk_20 == (3600000 - 1)) {
+    if (D_800F8510->unk_20[0] == (3600000 - 1)) {
         gDPPipeSync(gfx++);
         gDPSetCombineLERP(gfx++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE,
                           0, TEXEL0, 0);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
         gfx = func_i3_8012F8E4(gfx, xl, yl);
     } else {
-        gfx = func_i3_801335F0(gfx, D_800F8510->unk_20 + 5, xl, yl, 1.0f);
+        gfx = func_i3_801335F0(gfx, D_800F8510->unk_20[0] + 5, xl, yl, 1.0f);
     }
 
     return gfx;

@@ -16,25 +16,23 @@ void func_80067AE0(void) {
 }
 
 void func_80076B80(s32, void*);
-extern void* D_800DCCF0;
-extern void* D_800DCCF4;
+extern GfxPool* D_800DCCF0;
+extern OSTask* D_800DCCF4;
 extern s32 D_800DCCFC;
 extern s32 D_800DCD00;
-extern u8 D_8024DCE0[];
-extern u8 D_802A6AC0[];
+extern GfxPool D_8024DCE0[2];
+extern OSTask D_802A6AC0[];
 extern Gfx* gMasterDisp;
 
 void func_80067B14(void) {
 
     D_800DCD00 ^= 1;
     D_800DCCFC ^= 1;
-    D_800DCCF4 = (D_800DCCFC << 6) + D_802A6AC0;
-    D_800DCCF0 = (D_800DCCFC * 0x2C6F0) + D_8024DCE0;
+    D_800DCCF4 = &D_802A6AC0[D_800DCCFC];
+    D_800DCCF0 = &D_8024DCE0[D_800DCCFC];
     func_80076B80(1, D_800DCCF0);
-    gMasterDisp = D_800DCCF0;
+    gMasterDisp = D_800DCCF0->gfxBuffer;
 }
-
-Gfx* func_80076C08(Gfx*);
 
 void func_80067BA8(void) {
     gMasterDisp = func_80076C08(gMasterDisp);
@@ -77,8 +75,8 @@ void func_80067C0C(OSTask* task) {
     task->t.dram_stack_size = SP_DRAM_STACK_SIZE8;
     task->t.output_buff = (u64*) gTaskOutputBuffer;
     task->t.output_buff_size = (u64*) (gTaskOutputBuffer + ARRAY_COUNT(gTaskOutputBuffer));
-    task->t.data_ptr = D_800DCCF0;
-    task->t.data_size = (size_t) (gMasterDisp - (Gfx*) D_800DCCF0) * sizeof(Gfx);
+    task->t.data_ptr = D_800DCCF0->gfxBuffer;
+    task->t.data_size = (size_t) (gMasterDisp - D_800DCCF0->gfxBuffer) * sizeof(Gfx);
     task->t.yield_data_ptr = (u64*) gOSYieldData;
     task->t.yield_data_size = OS_YIELD_DATA_SIZE;
     D_800DCCC0 = task;
@@ -208,7 +206,7 @@ extern u32 D_800DCDF8;
 extern u32 D_800DCDFC;
 extern u32 D_800DCE00;
 
-extern void* D_800DCCF4;
+extern OSTask* D_800DCCF4;
 extern s32 D_800DCCFC;
 extern s32 D_800CCFE0;
 extern s16 D_800CCFE4;

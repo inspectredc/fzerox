@@ -115,7 +115,7 @@ Gfx* func_8006F57C(Gfx* gfx) {
     return gfx;
 }
 
-extern Mtx D_102C5E8;
+extern GfxPool D_1000000;
 extern Gfx D_3000688[];
 extern Gfx D_30006D0[];
 extern Gfx D_801EAA8[];
@@ -131,14 +131,12 @@ Gfx* func_8006F5E4(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_30006D0);
 
-    gSPMatrix(gfx++, K0_TO_PHYS(&D_102C5E8), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, K0_TO_PHYS(D_1000000.unk_2C5E8), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     gSPDisplayList(gfx++, D_801EAA8);
 
     return gfx;
 }
-
-extern Mtx D_102C628;
 
 Gfx* func_8006F68C(Gfx* gfx) {
 
@@ -146,14 +144,13 @@ Gfx* func_8006F68C(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_30006D0);
 
-    gSPMatrix(gfx++, K0_TO_PHYS(&D_102C628), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, K0_TO_PHYS(D_1000000.unk_2C628), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     gSPDisplayList(gfx++, D_801EAA8);
 
     return gfx;
 }
 
-extern Mtx D_102C668;
 extern Gfx D_3000590[];
 extern Gfx D_30005D8[];
 extern Gfx D_801EBF8[];
@@ -169,7 +166,7 @@ Gfx* func_8006F6FC(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_30005D8);
 
-    gSPMatrix(gfx++, K0_TO_PHYS(&D_102C668), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, K0_TO_PHYS(D_1000000.unk_2C668), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     gSPDisplayList(gfx++, D_801EBF8);
 

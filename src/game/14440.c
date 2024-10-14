@@ -400,7 +400,7 @@ void func_8007E1C0(void) {
             sp38 = true;
             break;
         } else {
-            if (D_802A6B40[i].unk_20 >= sp40[2]) {
+            if (D_802A6B40[i].unk_20[0] >= sp40[2]) {
                 sp38 = true;
                 break;
             }

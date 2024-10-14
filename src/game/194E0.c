@@ -12,7 +12,7 @@ void func_8007F4E0(s32 arg0, s32 arg1) {
 }
 
 #ifdef IMPORT_BSS
-static s8 D_800E42C8[4];
+s8 D_800E42C8[4];
 extern s16 D_800E42CC;
 
 void func_8007F500(void) {

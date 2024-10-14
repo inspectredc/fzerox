@@ -2256,7 +2256,7 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011D394.s")
 
-extern Mtx D_102B248[];
+extern GfxPool D_1000000;
 extern Mtx D_2000000[];
 extern Gfx D_8014810[];
 
@@ -2279,7 +2279,7 @@ Gfx* func_i6_8011D8C8(Gfx* gfx) {
         gDPSetTextureFilter(gfx++, G_TF_POINT);
         gDPSetRenderMode(gfx++, G_RM_XLU_SURF, G_RM_NOOP2);
         gDPSetCombineMode(gfx++, G_CC_DECALRGB, G_CC_DECALRGB);
-        gSPMatrix(gfx++, D_102B248, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+        gSPMatrix(gfx++, D_1000000.unk_2B248, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
         gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         for (sp40 = 0, var_s5 = 0x10, var_s4 = -1; var_s4 < SCREEN_HEIGHT - 1; var_s4 += 16, sp40 += 10, var_s5 += 16) {

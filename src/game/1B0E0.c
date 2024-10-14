@@ -472,13 +472,13 @@ extern f32 D_800CD8A8;
 extern f32 D_800CD8AC;
 extern s16 D_800E5E8C;
 
-void func_80082A6C(void* arg0, unk_struct_1DC* arg1) {
+void func_80082A6C(GfxPool* arg0, unk_struct_1DC* arg1) {
     Vec3f sp64;
     Vec3f sp58;
     f32 var_fv0;
     f32 var_fv1;
 
-    func_8006D03C((u8*) arg0 + (arg1->unk_00 << 6) + 0x20008, &arg1->unk_11C, arg1->unk_94.x, arg1->unk_A0,
+    func_8006D03C(&arg0->unk_20008[arg1->unk_00], &arg1->unk_11C, arg1->unk_94.x, arg1->unk_A0,
                   arg1->unk_A4, arg1->unk_A8, arg1->unk_94.y, arg1->unk_AC, arg1->unk_94.z, &arg1->unk_118);
 
     if (D_800E5E8C != 0) {
@@ -499,11 +499,11 @@ void func_80082A6C(void* arg0, unk_struct_1DC* arg1) {
         sp64 = arg1->unk_88;
     }
 
-    func_8006CC98((s32) arg0 + (arg1->unk_00 << 6) + 0x20108, &arg1->unk_15C, sp58.x, sp58.y, sp58.z, sp64.x, sp64.y,
+    func_8006CC98(&arg0->unk_20108[arg1->unk_00], &arg1->unk_15C, sp58.x, sp58.y, sp58.z, sp64.x, sp64.y,
                   sp64.z, arg1->unk_5C.mf[1][0], arg1->unk_5C.mf[1][1], arg1->unk_5C.mf[1][2]);
 
     func_800827C4(&arg1->unk_19C, &arg1->unk_11C, &arg1->unk_15C);
-    func_80082960(&arg1->unk_19C, (s32) arg0 + (arg1->unk_00 << 6) + 0x20208);
+    func_80082960(&arg1->unk_19C, &arg0->unk_20208[arg1->unk_00]);
 }
 
 extern s32 D_800E5FB8;
@@ -665,18 +665,16 @@ u8* func_800832EC(u8* arg0, u32 arg1, unk_800832EC_arg_2* arg2) {
 
 extern s32 D_800CD000;
 extern s32 D_800DCE44;
-// Todo: figure out what this array is
-extern Vp D_1000000[];
+extern GfxPool D_1000000;
 
 Gfx* func_800833AC(Gfx* gfx, s32 arg1, s32 arg2) {
     unk_struct_1DC* temp_v0 = &D_800E5220[arg2];
 
     if (temp_v0->unk_E0 == 1) {
-        // FAKE
-        gSPViewport(gfx++, (s8*) &D_1000000[arg2] + 0x2C2C8);
+        gSPViewport(gfx++, &D_1000000.unk_2C2C8[arg2]);
         gDPSetScissor(gfx++, G_SC_NON_INTERLACE, temp_v0->unk_B0, temp_v0->unk_B4, temp_v0->unk_B8, temp_v0->unk_BC);
-
     } else {
+        // FAKE
         if (1) {}
         gfx = func_8006A00C(gfx, arg1);
         if ((D_800CD000 == 1) && (D_800DCE44 != 6) && (D_800DCE44 != 0x11)) {
@@ -1560,7 +1558,7 @@ void func_80088660(unk_struct_1DC*, unk_struct_F8*, unk_800E5D70*);
 void func_800888D0(unk_struct_1DC*, unk_struct_F8*, unk_800E5D70*);
 
 extern s8 D_800DCE5C;
-extern void* D_800DCCF0;
+extern GfxPool* D_800DCCF0;
 
 void func_8008681C(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2) {
     f32 temp_fa0;
@@ -2464,7 +2462,7 @@ void func_800892E0(unk_802C4920* arg0) {
             D_800E5FC6++;
             if ((D_800DCE44 == 0x15) && (D_800E5EC0 == (D_800E5FC6 + 1))) {
                 gRacers->unk_04 |= 0x2800000;
-                gRacers->unk_2A0 += func_8006A978() & 0xF;
+                gRacers->unk_2A0 += func_8006A978() % 16;
                 D_800E5FBC = 1;
                 gRacers->unk_228 = gRacers->unk_22C;
                 D_800F5DE8 = D_800E5FBC;
@@ -3124,9 +3122,9 @@ void func_8008DCD8(unk_802C4920* arg0, f32 arg1) {
 
                     temp_fs1 = ((func_8006A918() & 0x1FFFF) * 0.00011444179f) - 7.5f;
 
-                    func_i2_80105A28((((s32) func_8006A978() & 0x1F) - 0x10) + arg0->unk_0C.unk_34.x,
-                                     (((s32) func_8006A918() & 0x1F) - 0x10) + arg0->unk_0C.unk_34.y,
-                                     (((s32) func_8006A918() & 0x1F) - 0x10) + arg0->unk_0C.unk_34.z,
+                    func_i2_80105A28(((s32)(func_8006A978() % 32) - 0x10) + arg0->unk_0C.unk_34.x,
+                                     ((s32)(func_8006A918() % 32) - 0x10) + arg0->unk_0C.unk_34.y,
+                                     ((s32)(func_8006A918() % 32) - 0x10) + arg0->unk_0C.unk_34.z,
                                      (arg0->unk_C0.xz * temp_fs2) + sp90.z + (temp_fs0 * arg0->unk_C0.xy) +
                                          (temp_fs1 * arg0->unk_C0.xx),
                                      (arg0->unk_C0.yz * temp_fs2) + sp90.y + (temp_fs0 * arg0->unk_C0.yy) +
@@ -3151,7 +3149,7 @@ void func_8008DCD8(unk_802C4920* arg0, f32 arg1) {
             if (arg0->unk_238 > 1.0f) {
                 arg0->unk_238 = 1.0f;
             }
-            if (func_8006A918() & 1) {
+            if (func_8006A918() % 2) {
                 arg0->unk_238 *= -1.0f;
             }
 

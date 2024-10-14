@@ -14,6 +14,36 @@
 #include "other_types.h"
 #include "segment_symbols.h"
 
+// ROUGH APPROXIMATIONS OF SIZES, NOT CORRECT!!
+
+typedef struct GfxPool {
+    Gfx gfxBuffer[1];
+    s8 pad_00008[0x20000];
+    Mtx unk_20008[4];
+    Mtx unk_20108[4];
+    Mtx unk_20208[4];
+    s8 pad_20308[0x1680];
+    Mtx unk_21988[1];
+    s8 pad_219C8[0x8180];
+    Vtx unk_29B48[28];
+    s8 pad_29D08[0x1540];
+    Mtx unk_2B248[1];
+    s8 pad_2B288[0x1040];
+    Vp unk_2C2C8[1];
+    s8 pad_2C2D8[0x30];
+    Vp unk_2C308[4];
+    s8 pad_2C348[0x20];
+    Mtx unk_2C368[1];
+    s8 pad_2C3A8[0x140];
+    Vtx unk_2C4E8[4];
+    u16 unk_2C528[1][16];
+    s8 pad_2C548[0xA0];
+    Mtx unk_2C5E8[1];
+    Mtx unk_2C628[1];
+    Mtx unk_2C668[1];
+    s8 pad_2C6A8[0x48];
+} GfxPool; // size = 0x2C6F0
+
 typedef struct {
     /* 0x000 */ OSThread thread;
     /* 0x1B0 */ char stack[0x800];

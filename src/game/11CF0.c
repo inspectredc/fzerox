@@ -120,7 +120,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     return sp44;
 }
 
-u8* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) {
+void* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) {
     s32 var_a3;
     bool var_t0;
     u8* var_s0;

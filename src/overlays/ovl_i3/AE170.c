@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzx_racer.h"
+#include "ovl_i3.h"
 
 extern s8 D_800DCE5C;
 extern s32 D_800DD218[];
@@ -20,7 +21,6 @@ extern s16 D_80115D50[];
 void func_i3_8011AE70(void);
 void func_i3_8013BF50(s32);
 void func_i3_8013C008(void);
-void func_i2_80101118(s32);
 void func_i2_801016DC(void);
 
 void func_i3_8011AEA0(void) {
@@ -171,7 +171,6 @@ extern u8 D_F25F070[];
 extern u8 D_F263648[];
 extern u8 D_F26369C[];
 
-u8* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4);
 void func_i3_80122C3C(void);
 void func_i3_80139D20(void);
 void func_i3_8013C080(void);
@@ -411,9 +410,6 @@ extern u8 D_401A120[];
 extern unk_802C4920* D_800E5F40[];
 extern Gfx D_80149D0[];
 extern s16 D_i3_8013ED48[][4][2];
-extern u32 D_800CCFE0;
-extern s8 D_800CD010;
-
 extern u32 D_800CCFE0;
 extern s8 D_800CD010;
 
@@ -717,7 +713,6 @@ extern s32 D_i3_80141BAC;
 extern s32 D_i3_80141BB0;
 extern s32 D_i3_80141BB4;
 extern s32 D_i3_80141BB8;
-Gfx* func_i3_8012F554(Gfx*, s32, s32, s32, f32);
 
 Gfx* func_i3_8011DD30(Gfx* gfx, s32 arg1) {
     s32 sp144;
@@ -1496,12 +1491,12 @@ void func_i3_801217F0(s32 arg0) {
     D_i3_80141BF0[arg0] = 0;
 }
 
-extern Mtx D_1000000[];
+extern GfxPool D_1000000;
 extern Gfx D_400A258[];
 extern Gfx D_400FC08[];
 extern unk_struct_1DC D_800E5220[];
 extern f32 D_800DD230[];
-extern u8* D_800DCCF0;
+extern GfxPool* D_800DCCF0;
 Gfx* func_i3_8012EE90(Gfx* gfx, s32 arg1);
 #ifdef NON_MATCHING
 // 0 vs 0.0f -> zero loading float regalloc
@@ -1566,15 +1561,15 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 arg1) {
 
     gfx = func_i3_8012EE90(gfx, arg1);
 
-    gSPMatrix(gfx++, (u8*) &D_1000000[arg1] + 0x20008, G_MTX_PUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gfx++, (u8*) &D_1000000[arg1] + 0x20108, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, &D_1000000.unk_20008[arg1], G_MTX_PUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gfx++, &D_1000000.unk_20108[arg1], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gfx++, D_400A258);
     gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BACK);
     gDPPipeSync(gfx++);
     gDPSetRenderMode(gfx++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-    func_8006BC84(D_800DCCF0 + 0x21988, NULL, 0.07f, 0.07f, 0.07f, 0.0f, spA0, spA4, 0.0f, spAC, spB0, spC0, spC4,
+    func_8006BC84(D_800DCCF0->unk_21988, NULL, 0.07f, 0.07f, 0.07f, 0.0f, spA0, spA4, 0.0f, spAC, spB0, spC0, spC4,
                   spC8);
-    gSPMatrix(gfx++, D_800DCCF0 + 0x21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, D_800DCCF0->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gfx++, D_400FC08);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
@@ -1736,8 +1731,8 @@ Gfx* func_i3_80121E70(Gfx* gfx, s32 arg1) {
     sp5C = D_800DD230[index & 0xFFF];
     sp64 = -D_800DD230[(index + 0x400) & 0xFFF];
     gfx = func_i3_8012EE90(gfx, arg1);
-    gSPMatrix(gfx++, (u8*) &D_1000000[arg1] + 0x20008, G_MTX_PUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gfx++, (u8*) &D_1000000[arg1] + 0x20108, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, &D_1000000.unk_20008[arg1], G_MTX_PUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gfx++, &D_1000000.unk_20108[arg1], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gfx++, D_400A258);
 
     D_i3_80141D0C += 0.00005f;
@@ -1755,9 +1750,9 @@ Gfx* func_i3_80121E70(Gfx* gfx, s32 arg1) {
         }
     }
 
-    func_8006BC84(D_800DCCF0 + 0x21988, NULL, D_i3_80141D0C, D_i3_80141D0C, D_i3_80141D0C, sp5C, 0.0f, sp64, 0.0f, 1.0f,
+    func_8006BC84(D_800DCCF0->unk_21988, NULL, D_i3_80141D0C, D_i3_80141D0C, D_i3_80141D0C, sp5C, 0.0f, sp64, 0.0f, 1.0f,
                   0.0f, sp80, sp84, sp88);
-    gSPMatrix(gfx++, D_800DCCF0 + 0x21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, D_800DCCF0->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gfx++, D_400C9C0);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
@@ -3232,7 +3227,7 @@ Gfx* func_i3_80127B2C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_i3_8012F554(gfx, D_800F8510->unk_20, ((s32) (var_t2 + var_t4) / 2) - 60, (s32) (var_t3 + var_t5) / 2,
+    gfx = func_i3_8012F554(gfx, D_800F8510->unk_20[0], ((s32) (var_t2 + var_t4) / 2) - 60, (s32) (var_t3 + var_t5) / 2,
                            1.0f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 255);
@@ -3283,7 +3278,7 @@ Gfx* func_i3_80127E88(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_i3_8012F554(gfx, D_800F8510->unk_20, ((s32) (var_t2 + var_t4) / 2) - 35, (s32) (var_t3 + var_t5) / 2,
+    gfx = func_i3_8012F554(gfx, D_800F8510->unk_20[0], ((s32) (var_t2 + var_t4) / 2) - 35, (s32) (var_t3 + var_t5) / 2,
                            1.0f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 255);
@@ -3817,7 +3812,7 @@ Gfx* func_i3_80129948(Gfx* gfx) {
     gDPSetCombineLERP(gfx++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0,
                       TEXEL0, 0);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-    return func_i3_8012F554(gfx, D_800F8510->unk_20, 0xD5, 0x72, 1.0f);
+    return func_i3_8012F554(gfx, D_800F8510->unk_20[0], 0xD5, 0x72, 1.0f);
 }
 
 extern s32 D_i3_80141D10;
@@ -4612,16 +4607,6 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-Gfx* func_i3_80130824(Gfx*, s32, s32);
-Gfx* func_i3_801312DC(Gfx*, s32, s32);
-Gfx* func_i3_80131DF4(Gfx*);
-Gfx* func_i3_80132EEC(Gfx*);
-Gfx* func_i3_80135B20(Gfx*, s32, s32);
-void func_i3_80139FF4(void);
-s32 func_i3_8013A004(void);
-Gfx* func_i3_8013A360(Gfx*, s32);
-void func_i3_8013C15C(void);
-Gfx* func_i3_8013D2BC(Gfx*);
 extern s32 D_800CD00C;
 extern char* D_800E4178;
 extern s16 D_800E5FBC;
