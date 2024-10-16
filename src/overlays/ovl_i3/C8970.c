@@ -3,6 +3,26 @@
 #include "ovl_i3.h"
 #include "tex_assets.h"
 
+unk_80141FF0 D_i3_80141FF0[4];
+s32 D_i3_80142170;
+s16 D_i3_80142174;
+s16 D_i3_80142176;
+s16 D_i3_80142178;
+s16 D_i3_8014217A;
+s16 D_i3_8014217C;
+s16 D_i3_8014217E;
+unk_80142180 D_i3_80142180;
+u16 D_i3_80142188;
+s32 D_i3_8014218C;
+TexturePtr D_i3_80142190;
+TexturePtr D_i3_80142194;
+TexturePtr D_i3_80142198;
+TexturePtr D_i3_8014219C;
+unk_801421A0 D_i3_801421A0[6];
+unk_80142248 D_i3_80142248[6];
+unk_80142320 D_i3_80142320[100];
+s32 D_i3_80143770;
+
 u8 D_i3_8013F700[0x1000] = { 0 };
 
 u8 D_i3_80140700[] = { 0, 0, 0, 1, 255, 255, 99, 25 };
@@ -509,20 +529,7 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
 extern s32 D_800CD510;
 extern s32 D_800E4260;
 extern s32 D_800E4264;
-extern s32 D_i3_80142170;
-extern s16 D_i3_80142174;
-extern s16 D_i3_8014217A;
-extern s16 D_i3_8014217C;
-extern s16 D_i3_8014217E;
-extern u16 D_i3_80142188;
-extern s32 D_i3_8014218C;
-extern TexturePtr D_i3_80142190;
-extern TexturePtr D_i3_80142194;
-extern TexturePtr D_i3_80142198;
-extern TexturePtr D_i3_8014219C;
-extern unk_80142180 D_i3_80142180;
 
-extern unk_80141FF0 D_i3_80141FF0[];
 extern unk_struct_1DC D_800E5220[];
 extern s32 D_800F8514;
 
@@ -646,10 +653,6 @@ void func_i3_80137AC4(Vtx*, unk_80141FF0*, unk_struct_1DC*, unk_80141860*, f32, 
 void func_i3_80138D80(void);
 void func_i3_801398D0(s32, unk_80141FF0*, unk_struct_1DC*);
 
-extern s32 D_i3_80142170;
-extern s16 D_i3_80142176;
-extern u16 D_i3_80142188;
-extern s32 D_i3_8014218C;
 extern f32 D_800DD230[];
 
 extern GfxPool* D_800DCCF0;
@@ -1177,12 +1180,7 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
 }
 
 extern s16 D_80106F48;
-extern s16 D_i3_80142176;
-extern s16 D_i3_80142178;
-extern u16 D_i3_80142188;
-extern unk_80142248 D_i3_80142248[];
 extern s32 D_800CD004;
-extern unk_801421A0 D_i3_801421A0[];
 extern GfxPool D_8024DCE0[2];
 
 void func_i3_801387EC(void) {
@@ -1368,8 +1366,6 @@ void func_i3_801387EC(void) {
     }
 }
 
-extern s16 D_i3_80142176;
-extern s16 D_i3_80142178;
 u16 func_i3_8013907C(void);
 
 void func_i3_80138D80(void) {
@@ -1449,12 +1445,6 @@ u16 func_i3_8013907C(void) {
     return PACK_5551(red, green, blue, 1);
 }
 
-extern s16 D_i3_80142176;
-extern s16 D_i3_8014217A;
-extern s16 D_i3_8014217C;
-extern s16 D_i3_8014217E;
-extern u16 D_i3_80142188;
-
 Gfx* func_i3_80139168(Gfx* gfx) {
     unk_801421A0* var_a3;
     s32 i;
@@ -1495,9 +1485,6 @@ Gfx* func_i3_80139168(Gfx* gfx) {
     return gfx;
 }
 
-extern unk_80142320 D_i3_80142320[];
-extern s32 D_i3_80143770;
-
 void func_i3_80139550(void) {
     unk_80142320* var_s0;
     s32 i;
@@ -1527,8 +1514,6 @@ void func_i3_80139550(void) {
         var_s0->unk_03 = -1;
     }
 }
-
-extern s32 D_i3_80143770;
 
 void func_i3_801398D0(s32 arg0, unk_80141FF0* arg1, unk_struct_1DC* arg2) {
     unk_80142320* var_v1;

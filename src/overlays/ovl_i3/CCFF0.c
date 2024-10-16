@@ -2,26 +2,38 @@
 #include "ovl_i3.h"
 #include "fzx_racer.h"
 
+u16 D_i3_80143780;
+u16 D_i3_80143782;
+s32 D_i3_80143784;
+s32 D_i3_80143788;
+s32 D_i3_8014378C;
+s32 D_i3_80143790;
+int D_i3_80143794;
+s32 D_i3_80143798;
+s32 D_i3_8014379C;
+s32 D_i3_801437A0;
+s32 D_i3_801437A4;
+s16 D_i3_801437A8;
+s16 D_i3_801437AA;
+s16 D_i3_801437AC;
+s16 D_i3_801437AE;
+s16 D_i3_801437B0;
+s16 D_i3_801437B2;
+s16 D_i3_801437B4;
+s16 D_i3_801437B6;
+s16 D_i3_801437B8;
+s16 D_i3_801437BA;
+s16 D_i3_801437BC;
+unk_801437C0 D_i3_801437C0[50];
+s16 D_i3_801439B4[3];
+unk_80077D50* D_i3_801439BC;
+u16 D_i3_801439C0;
+
 extern f32 D_800CE748;
 extern f32 D_800CE74C;
 extern f32 D_800CE750;
 extern Mtx D_8024DC80;
 extern s8 D_8024DCC0[];
-extern u16 D_i3_80143780;
-extern u16 D_i3_80143782;
-extern s32 D_i3_80143784;
-extern s32 D_i3_80143788;
-extern s32 D_i3_8014378C;
-extern s32 D_i3_80143790;
-extern int D_i3_80143794;
-extern s32 D_i3_80143798;
-extern s32 D_i3_8014379C;
-extern s32 D_i3_801437A0;
-extern s32 D_i3_801437A4;
-extern s16 D_i3_801437A8;
-extern s16 D_i3_801437AA;
-extern s16 D_i3_801437AC;
-extern s16 D_i3_801437AE;
 
 extern u8 D_F138994[];
 extern u8 D_F242E10[];
@@ -95,8 +107,6 @@ bool func_i3_8013A004(void) {
     f32 temp_ft1;
     s32 temp_t6;
     s32 var_a2;
-
-    // FAKE? Requires D_i3_80143794 to be int vs s32
 
     var_a0 = false;
     switch (D_i3_80143784) {
@@ -543,8 +553,6 @@ Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {
     return gfx;
 }
 
-extern u16 D_i3_80143780;
-
 void func_i3_8013BF18(s32 arg0) {
     if (arg0 != 0) {
         D_i3_80143780 |= 0x20;
@@ -597,12 +605,6 @@ void func_i3_8013C008(void) {
 
 s32 func_i3_8013D1B4(s8);
 extern s8 D_800E42C8[];
-extern s16 D_i3_801437B0;
-extern s16 D_i3_801437B4;
-extern s16 D_i3_801437B6;
-extern s16 D_i3_801437B8;
-extern s16 D_i3_801437BA;
-extern s16 D_i3_801437BC;
 
 void func_i3_8013C080(void) {
     s32 i;
@@ -648,7 +650,6 @@ void func_i3_8013C15C(void) {
     }
 }
 
-extern unk_801437C0 D_i3_801437C0[];
 signed char D_i3_80140F50[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ'!.,0123456789       >-<";
 
 void func_i3_8013C20C(s32 arg0) {
@@ -676,8 +677,6 @@ void func_i3_8013C380(void) {
     D_i3_801437B4 = 0;
     func_i3_8013C20C(0);
 }
-
-extern s32 D_i3_801419BC;
 
 void func_i3_8013C3B4(s32 arg0) {
     unk_801437C0* var_s0;
@@ -764,13 +763,6 @@ void func_i3_8013D214(unk_800F8510* arg0) {
 
 signed char D_i3_80140F84[] = "NAME ENTRY";
 
-extern s16 D_i3_801437B0;
-extern s16 D_i3_801437B2;
-extern s16 D_i3_801437B4;
-extern s16 D_i3_801437B6;
-extern s16 D_i3_801437B8;
-extern s16 D_i3_801437BA;
-extern u16 D_i3_801439C0;
 extern Vtx D_1029D08[];
 extern Mtx D_102B308[];
 extern Mtx D_102B348[];
@@ -778,7 +770,6 @@ extern Mtx D_102B388[];
 extern Vp D_102C2D8[];
 extern s8 D_800E42C8[];
 extern Gfx D_80148C0[];
-extern unk_80077D50* D_i3_801439BC;
 
 Gfx* func_i3_8013D2BC(Gfx* gfx) {
     s32 i;

@@ -4,6 +4,11 @@
 #include "tex_assets.h"
 #include "segment_symbols.h"
 
+f32 D_i3_80141E30[30];
+unk_80141EA8 D_i3_80141EA8[4];
+s32 D_i3_80141FC8[4];
+s32 D_i3_80141FD8[4];
+
 s32 D_i3_8013EFF0 = 0;
 s32 D_i3_8013EFF4 = 0;
 s32 D_i3_8013EFF8 = 0;
@@ -148,9 +153,7 @@ Gfx* func_i3_8012F0B0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
     return gfx;
 }
 
-extern unk_80141EA8 D_i3_80141EA8[4];
-#ifdef IMPORT_BSS
-unk_80141EA8 D_i3_80141EA8[4];
+extern s32 D_800DCE44;
 
 void func_i3_8012F324(void) {
     s32 i;
@@ -177,9 +180,6 @@ void func_i3_8012F324(void) {
         D_i3_8013F008[i] = 1;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/C2290/func_i3_8012F324.s")
-#endif
 
 void func_i3_8012F450(unk_8012F450* arg0) {
 
@@ -383,7 +383,6 @@ Gfx* func_i3_8012FB20(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 extern Gfx D_80149D0[];
-extern s32 D_800DCE44;
 
 Gfx* func_i3_8012FE8C(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 temp_a3;
@@ -573,7 +572,6 @@ Gfx* func_i3_8013064C(Gfx* gfx, s32 arg1, s32 arg2) {
 extern u8 D_303B270[];
 extern u8 D_303C170[];
 extern Gfx D_80149A0[];
-extern unk_80141EA8 D_i3_80141EAC[];
 
 Gfx* func_i3_80130824(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 i;
@@ -586,7 +584,7 @@ Gfx* func_i3_80130824(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 var_a2;
     f32 sp34;
 
-    if ((arg1 >= 2) && (D_i3_80141EAC[arg2].unk_00 != 0)) {
+    if ((arg1 >= 2) && (D_i3_80141EA8[arg2].unk_04 != 0)) {
         return gfx;
     }
 
@@ -1121,8 +1119,6 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
     return gfx;
 }
 
-extern f32 D_i3_80141E30[];
-
 void func_i3_80132CD8(void) {
     s32 i;
 
@@ -1168,7 +1164,6 @@ void func_i3_80132D78(void) {
 extern u32 D_800CCFE0;
 extern u8 D_401A120[];
 
-extern f32 D_i3_80141E30[];
 void func_i3_80134CA0(void);
 
 Gfx* func_i3_80132EEC(Gfx* gfx) {
@@ -1397,8 +1392,6 @@ Gfx* func_i3_80133944(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
     return gfx;
 }
 
-extern s32 D_i3_80141FC8[];
-extern s32 D_i3_80141FD8[];
 extern unk_800F5DF0* D_800F5E90;
 
 Gfx* func_i3_80133D4C(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {
@@ -1531,10 +1524,6 @@ Gfx* func_i3_801340F4(Gfx* gfx, s32 arg1, s32 arg2) {
     return gfx;
 }
 
-#ifdef IMPORT_BSS
-extern s32 D_i3_8013F000;
-f32 D_i3_80141E30[30];
-
 void func_i3_80134548(void) {
     s32 i;
 
@@ -1544,10 +1533,6 @@ void func_i3_80134548(void) {
         D_i3_80141E30[i] = 1.0f;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/C2290/func_i3_80134548.s")
-void func_i3_80134548(void);
-#endif
 
 extern s32 D_i2_8010D768;
 
@@ -1738,8 +1723,6 @@ Gfx* func_i3_80134D0C(Gfx* gfx) {
 
     return gfx;
 }
-
-extern s32 D_i3_8013F11C[][4][2];
 
 Gfx* func_i3_80134FFC(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 var_s0 = 0;

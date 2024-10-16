@@ -3,10 +3,105 @@
 #include "ovl_i3.h"
 #include "tex_assets.h"
 
-extern s16 D_i3_801419A0;
-extern s16 D_i3_801419A2;
-extern s16 D_i3_801419A4;
-extern s16 D_i3_801419A6;
+s16 D_i3_801419A0;
+s16 D_i3_801419A2;
+s16 D_i3_801419A4;
+s16 D_i3_801419A6;
+s32 D_i3_801419A8;
+s32 D_i3_801419AC;
+s32 D_i3_801419B0;
+s32 D_i3_801419B4;
+s32 D_i3_801419B8;
+s32 D_i3_801419BC;
+UNUSED s32 D_i3_801419C0[4];
+s32 D_i3_801419D0[30];
+UNUSED s32 D_i3_80141A48;
+s32 D_i3_80141A4C;
+s16 D_i3_80141A50[4][3];
+s16 D_i3_80141A68[4];
+f32 D_i3_80141A70[4][3];
+Vec3f D_i3_80141AA0[4];
+Vec3f D_i3_80141AD0;
+TexturePtr D_i3_80141AE0[8][3];
+u16 D_i3_80141B40[8][3];
+s16 D_i3_80141B70[4];
+s32 D_i3_80141B78[4];
+s32 D_i3_80141B88[4];
+s32 D_i3_80141B98;
+s32 D_i3_80141B9C;
+s32 D_i3_80141BA0;
+s32 D_i3_80141BA4;
+s32 D_i3_80141BA8;
+s32 D_i3_80141BAC;
+s32 D_i3_80141BB0;
+s32 D_i3_80141BB4;
+s32 D_i3_80141BB8;
+s32 D_i3_80141BC0[4];
+s32 D_i3_80141BD0[4];
+s32 D_i3_80141BE0[4];
+s32 D_i3_80141BF0[4];
+f32 D_i3_80141C00[4];
+f32 D_i3_80141C10[4];
+s32 D_i3_80141C20[4];
+s32 D_i3_80141C30[4];
+f32 D_i3_80141C40[4];
+f32 D_i3_80141C50[4];
+u8* D_i3_80141C60;
+u8* D_i3_80141C64;
+u8* D_i3_80141C68;
+u8* D_i3_80141C6C;
+u8* D_i3_80141C70;
+u8* D_i3_80141C74;
+s32 D_80141C78;
+s32 D_i3_80141C7C;
+s32 D_i3_80141C80;
+s32 D_i3_80141C84;
+unk_80141C88 D_i3_80141C88;
+f32 D_i3_80141CC8;
+s32 D_i3_80141CD0[4];
+s32 D_i3_80141CE0[4];
+s32 D_i3_80141CF0[4];
+f32 D_i3_80141D00;
+f32 D_i3_80141D04;
+f32 D_i3_80141D08;
+f32 D_i3_80141D0C;
+s32 D_i3_80141D10;
+s32 D_i3_80141D18[4];
+s32 D_i3_80141D28[4];
+s32 D_i3_80141D38[4];
+s32 D_i3_80141D48[4];
+s32 D_i3_80141D58[4];
+s32 D_i3_80141D68;
+s32 D_80141D6C;
+s32 D_80141D70;
+s32 D_i3_80141D78[4];
+s32 D_i3_80141D88;
+s32 D_i3_80141D8C;
+s32 D_i3_80141D90;
+s32 D_i3_80141D94;
+s32 D_i3_80141D98;
+s32 D_i3_80141D9C;
+s32 D_i3_80141DA0;
+s32 D_i3_80141DA4;
+s32 D_i3_80141DA8;
+s32 D_i3_80141DAC;
+s32 D_i3_80141DB0;
+s32 D_i3_80141DB4;
+s32 D_i3_80141DB8;
+s32 D_i3_80141DBC;
+s32 D_i3_80141DC0;
+s32 D_i3_80141DC4;
+s32 D_i3_80141DC8;
+s16 D_i3_80141DCC;
+unk_802C4920* D_i3_80141DD0;
+UNUSED s32 D_i3_80141DD4;
+f32 D_i3_80141DD8;
+f32 D_i3_80141DDC;
+s32 D_i3_80141DE0[4];
+s32 D_i3_80141DF0[4];
+s32 D_i3_80141E00;
+char D_i3_80141E08[32];
+s32 D_i3_80141E28;
 
 TexturePtr D_i3_8013ED30[] = {
     D_4029A20, D_4029AE0, D_4029BA0, D_4029C60, D_4029D20, D_4029DE0,
@@ -29,15 +124,9 @@ s32 D_i3_8013EDF8[] = {
     96, 32, 64, 16, 96, 32, 64, 16, 32, 16, 32, 16, 64,  16, 64, 16, 128, 16, 128, 32, 16,  16, 16, 16,
 };
 
-extern s32 D_i3_801419B0;
-extern s32 D_i3_801419B4;
-
 void func_i3_8011AE70(void) {
     D_i3_801419B0 = D_i3_801419B4 = 0;
 }
-
-extern s32 D_i3_801419A8;
-extern s32 D_i3_801419AC;
 
 void func_i3_8011AE88(void) {
     D_i3_801419A8 = D_i3_801419AC = 0;
@@ -185,71 +274,10 @@ void func_i3_8013C080(void);
 extern unk_800CD970 D_800CD970[];
 extern s32* D_800CD9AC[];
 
-extern s16 D_i3_80141A50[][3];
-extern f32 D_i3_80141A70[][3];
-extern f32 D_i3_80141C00[];
-extern Vec3f D_i3_80141AA0[];
-extern Vec3f D_i3_80141AD0;
-extern s16 D_i3_80141A68[];
-extern s32 D_i3_80141DF0[];
-extern s32 D_i3_80141DE0[];
-extern s32 D_i3_80141BD0[];
-extern s16 D_i3_80141B70[];
-extern s32 D_i3_80141C30[];
-extern s32 D_i3_80141BC0[];
-extern s32 D_i3_80141BF0[];
-extern s32 D_i3_80141D78[];
-extern s32 D_i3_80141B88[];
-extern s32 D_i3_80141B78[];
-extern s32 D_i3_80141CF0[];
-extern s32 D_i3_80141CD0[];
-extern s32 D_i3_80141CE0[];
-extern s32 D_i3_80141BE0[];
-extern s32 D_i3_80141C20[];
-extern f32 D_i3_80141C50[];
-extern f32 D_i3_80141C10[];
-extern f32 D_i3_80141C40[];
-extern u16 D_i3_80141B40[][3];
-extern TexturePtr D_i3_80141AE0[][3];
-
 extern unk_800F5DF0* D_800F5E90;
-extern unk_802C4920* D_i3_80141DD0;
 extern s16 D_800E5ED8[];
 extern s16 D_80115DE0;
-extern s32 D_80141D6C;
-extern s32 D_i3_801419B8;
-extern s32 D_i3_801419BC;
-extern f32 D_i3_80141AD4;
-extern f32 D_i3_80141AD8;
-extern s32 D_i3_80141B98;
-extern s32 D_i3_80141B9C;
-extern u8* D_i3_80141C60;
-extern u8* D_i3_80141C64;
-extern u8* D_i3_80141C68;
-extern u8* D_i3_80141C6C;
-extern u8* D_i3_80141C70;
-extern u8* D_i3_80141C74;
-extern s32 D_i3_80141C84;
-extern f32 D_i3_80141CC8;
-extern f32 D_i3_80141D08;
-extern s32 D_i3_80141D88;
-extern s32 D_i3_80141D8C;
-extern s32 D_i3_80141D90;
-extern s32 D_i3_80141D94;
-extern s32 D_i3_80141D98;
-extern s32 D_i3_80141D9C;
-extern s32 D_i3_80141DA0;
-extern s32 D_i3_80141DB0;
-extern s32 D_i3_80141DB4;
-extern s32 D_i3_80141DB8;
-extern s32 D_i3_80141DBC;
-extern s32 D_i3_80141DC0;
-extern s32 D_i3_80141DC4;
-extern s32 D_i3_80141DC8;
-extern s16 D_i3_80141DCC;
-extern f32 D_i3_80141DD8;
-extern f32 D_i3_80141DDC;
-extern s32 D_i3_80141E00;
+
 extern unk_800F8510* D_800F8510;
 extern s32 D_80141900;
 
@@ -712,13 +740,6 @@ extern u8 D_4019CA0[];
 extern s32 D_800CD00C;
 extern s16 D_800E5FE2;
 extern s16 D_800E5FE6;
-extern s32 D_i3_80141BA0;
-extern s32 D_i3_80141BA4;
-extern s32 D_i3_80141BA8;
-extern s32 D_i3_80141BAC;
-extern s32 D_i3_80141BB0;
-extern s32 D_i3_80141BB4;
-extern s32 D_i3_80141BB8;
 
 Gfx* func_i3_8011DD30(Gfx* gfx, s32 arg1) {
     s32 sp144;
@@ -1014,8 +1035,6 @@ Gfx* func_i3_8011FFB4(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {
 
     return gfx;
 }
-
-extern s32 D_80141D70;
 
 Gfx* func_i3_8012040C(Gfx* gfx, s32 arg1) {
     s32 i;
@@ -1620,8 +1639,6 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 arg1) {
 Gfx* func_i3_80121860(Gfx* gfx, s32 arg1);
 #endif
 
-extern f32 D_i3_80141D0C;
-
 void func_i3_80121E28(s32 arg0) {
     D_i3_80141C00[arg0] = 0.25f;
     D_i3_80141BF0[arg0] = 0;
@@ -1810,8 +1827,6 @@ Gfx* func_i3_8012266C(Gfx* gfx, s32 arg1) {
     return func_i3_8012F554(gfx, gRacers[arg1].unk_2A0, sp30, sp2C, 1.0f);
 }
 
-extern s32 D_i3_8013EDF8[];
-
 Gfx* func_i3_80122854(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
 
     if (arg1 >= 24) {
@@ -1920,9 +1935,6 @@ Gfx* func_i3_80122BE0(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-extern s32 D_80141C78;
-extern s32 D_i3_80141C7C;
-extern s32 D_i3_80141C80;
 extern unk_800E5FF8 D_800E5FF8[];
 extern unk_800E5FF8* D_800F1E78;
 
@@ -1945,8 +1957,6 @@ void func_i3_80122C3C(void) {
 
 s32 func_i2_801014D4(void*);
 void func_i2_80101690(s32, unk_800E5FF8*);
-extern s32 D_i3_80141A4C;
-extern s32 D_i3_80141C88[];
 
 s32 func_i3_80122CEC(void) {
     func_i3_80122C3C();
@@ -1955,7 +1965,7 @@ s32 func_i3_80122CEC(void) {
         D_i3_80141DB0 = 0;
         return -1;
     }
-    if (func_i2_801014D4(D_i3_80141C88) != 0) {
+    if (func_i2_801014D4(&D_i3_80141C88) != 0) {
         if (D_800F8514 < 0x18) {
             func_i2_80101690(D_800F8514, D_800F1E78);
         }
@@ -1965,10 +1975,6 @@ s32 func_i3_80122CEC(void) {
     }
     return 0;
 }
-
-extern s32 D_i3_80141A4C;
-extern s32 D_i3_80141C7C;
-extern s32 D_i3_80141C80;
 
 s32 func_i3_80122D88(void) {
     D_i3_80141A4C = 0;
@@ -1982,16 +1988,15 @@ s32 func_i3_80122D88(void) {
         D_i3_80141DB0 = 0;
         return -1;
     }
-    if (func_i2_801014D4(D_i3_80141C88) != 0) {
+    if (func_i2_801014D4(&D_i3_80141C88) != 0) {
         return 0;
     }
-    if ((D_800F8514 == D_i3_80141C88[0]) && (D_i3_80141C7C >= D_i3_80141C88[2])) {
+    if ((D_800F8514 == D_i3_80141C88.unk_00[0]) && (D_i3_80141C7C >= D_i3_80141C88.unk_00[2])) {
         D_i3_80141A4C = 1;
     }
     return 0;
 }
 
-extern s32 D_i3_80141A4C;
 extern Gfx D_4011D78[];
 
 Gfx* func_i3_80122E64(Gfx* gfx) {
@@ -2047,7 +2052,6 @@ Gfx* func_i3_80123014(Gfx* gfx) {
 
 extern char* D_800E4180[];
 extern char* D_800E4178;
-extern char D_i3_80141C9C[];
 
 Gfx* func_i3_801231A0(Gfx* gfx) {
     s32 pad[7];
@@ -2068,7 +2072,7 @@ Gfx* func_i3_801231A0(Gfx* gfx) {
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     gfx = func_i3_8012F554(gfx, D_i3_80141C7C, 115, 77, 1.0f);
-    gfx = func_i3_8012F554(gfx, D_i3_80141C88[2], 115, 141, 1.0f);
+    gfx = func_i3_8012F554(gfx, D_i3_80141C88.unk_00[2], 115, 141, 1.0f);
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
@@ -2077,22 +2081,22 @@ Gfx* func_i3_801231A0(Gfx* gfx) {
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
     gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(D_800E4178, 6, 1) / 2), 77, D_800E4178, 1, 6, 0);
 
-    if ((D_i3_80141C88[0] >= 0) && (D_i3_80141C88[0] < 24)) {
+    if ((D_i3_80141C88.unk_00[0] >= 0) && (D_i3_80141C88.unk_00[0] < 24)) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-        gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(D_800E4180[D_i3_80141C88[0]], 6, 1) / 2), 142,
-                               D_800E4180[D_i3_80141C88[0]], 1, 6, 0);
+        gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(D_800E4180[D_i3_80141C88.unk_00[0]], 6, 1) / 2), 142,
+                               D_800E4180[D_i3_80141C88.unk_00[0]], 1, 6, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-        gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(D_800E4180[D_i3_80141C88[0]], 6, 1) / 2), 141,
-                               D_800E4180[D_i3_80141C88[0]], 1, 6, 0);
+        gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(D_800E4180[D_i3_80141C88.unk_00[0]], 6, 1) / 2), 141,
+                               D_800E4180[D_i3_80141C88.unk_00[0]], 1, 6, 0);
     } else {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-        gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(D_i3_80141C9C, 6, 1) / 2), 142, D_i3_80141C9C, 1, 6, 0);
+        gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(D_i3_80141C88.unk_14, 6, 1) / 2), 142, D_i3_80141C88.unk_14, 1, 6, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-        gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(D_i3_80141C9C, 6, 1) / 2), 141, D_i3_80141C9C, 1, 6, 0);
+        gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(D_i3_80141C88.unk_14, 6, 1) / 2), 141, D_i3_80141C88.unk_14, 1, 6, 0);
     }
 
     gSPDisplayList(gfx++, D_4011D78);
@@ -2603,10 +2607,6 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
     }
     return gfx;
 }
-
-extern s32 D_i3_80141DA4;
-extern s32 D_i3_80141DA8;
-extern s32 D_i3_80141DAC;
 
 Gfx* func_i3_8012548C(Gfx* gfx) {
     s32 pad[2];
@@ -3425,8 +3425,6 @@ Gfx* func_i3_80128948(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {
     return gfx;
 }
 
-extern s32 D_i3_801419B8;
-
 void func_i3_80128D8C(void) {
     D_i3_801419B8++;
 }
@@ -3642,9 +3640,6 @@ Gfx* func_i3_80129698(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     return func_i2_80106450(gfx, arg2, arg3, "RETIRE", 1, 4, 0);
 }
 
-#ifdef IMPORT_BSS
-char D_i3_80141E08[4];
-
 void func_i3_801296E8(s32 num) {
     s32 digitIndex = 0;
     s32 remainingNum;
@@ -3679,11 +3674,6 @@ void func_i3_801296E8(s32 num) {
     D_i3_80141E08[digitIndex + 0] = remainingNum + '0';
     D_i3_80141E08[digitIndex + 1] = '\0';
 }
-#else
-extern char D_i3_80141E08[];
-void func_i3_801296E8(s32 num);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE140/func_i3_801296E8.s")
-#endif
 
 Gfx* func_i3_80129800(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     gfx = func_i3_80122BE0(gfx, arg1);
@@ -3757,20 +3747,9 @@ Gfx* func_i3_80129948(Gfx* gfx) {
     return func_i3_8012F554(gfx, D_800F8510->unk_20[0], 0xD5, 0x72, 1.0f);
 }
 
-extern s32 D_i3_80141D10;
-
-extern s32 D_i3_80141D68;
-extern char D_i3_80141E08[];
-extern s32 D_i3_80141E28;
 extern s32 D_800E5F00[];
 extern s32 D_800E5F10[];
 extern s32 D_80115DD0[];
-extern s32 D_i3_80141D48[];
-
-extern s32 D_i3_80141D18[];
-extern s32 D_i3_80141D28[];
-extern s32 D_i3_80141D38[];
-extern s32 D_i3_80141D48[];
 
 UNUSED s32 D_i3_8013EF40 = 0;
 
@@ -4305,11 +4284,7 @@ Gfx* func_i3_8012BBAC(Gfx* gfx, s32 arg1) {
 void func_i2_80101310(s32, s32, s32);
 extern s32 D_800CD004;
 extern s16 D_80106F48;
-extern s32 D_i3_801419D0[];
-extern f32 D_i3_80141D00;
-extern f32 D_i3_80141D04;
 extern s16 D_80115D90[];
-extern s32 D_i3_801419D0[];
 
 Gfx* func_i3_8012C4D8(Gfx* gfx, s32 arg1) {
     s32 i;
@@ -4567,18 +4542,6 @@ extern s32 D_800F5E98;
 extern s32 D_800F80A8;
 extern s32 D_80106F40;
 extern s32 D_80106F44;
-extern s32 D_80141C78;
-extern s32 D_80141D70;
-
-extern f32 D_i3_80141D00;
-extern f32 D_i3_80141D04;
-extern s32 D_i3_80141D10;
-extern s32 D_i3_80141D58[];
-extern s32 D_i3_80141DA4;
-extern s32 D_i3_80141DA8;
-extern s32 D_i3_80141DAC;
-
-extern unk_80141EA8 D_i3_80141EA8[];
 
 #ifdef NON_MATCHING
 Gfx* func_i3_8012D3D4(Gfx* gfx) {

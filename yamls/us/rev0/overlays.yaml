@@ -127,7 +127,10 @@
       - [0xD4B30, .rodata, C8970]
       - [0xD4BA0, .rodata, CCFF0]
       - { start: 0xD4BD0, type: .bss, vram: 0x80141900, name: A90C0 }
-      - { type: bss, vram: 0x801419A0, name: 801419A0 }
+      - { type: .bss, vram: 0x801419A0, name: AE140 }
+      - { type: .bss, vram: 0x80141E30, name: C2290 }
+      - { type: .bss, vram: 0x80141FF0, name: C8970 }
+      - { type: .bss, vram: 0x80143780, name: CCFF0 }
 
 
   - name: ovl_i4

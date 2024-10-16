@@ -35,7 +35,7 @@ typedef struct unk_80140920 {
 typedef struct unk_80142180 {
     unk_80140874* unk_00;
     unk_80140920* unk_04;
-} unk_80142180;
+} unk_80142180; // size = 0x8
 
 typedef struct unk_80141860 {
     f32 unk_00;
@@ -59,7 +59,7 @@ typedef struct unk_80141FF0 {
     unk_80141860 unk_1C;
     unk_80141860 unk_3C;
     f32 unk_5C;
-} unk_80141FF0;
+} unk_80141FF0; // size = 0x60
 
 typedef struct unk_80140E58 {
     s16 unk_00;
@@ -105,6 +105,21 @@ typedef struct unk_801437C0 {
     s16 unk_08;
 } unk_801437C0; // size = 0xA
 
+typedef struct unk_80141C88 {
+    s32 unk_00[3];
+    s8 unk_0C[0x8];
+    char unk_14[1]; // unk size
+    s8 unk_15[0x2B];
+} unk_80141C88; // size = 0x40
+
+typedef struct unk_80141EA8 {
+    s32 unk_00;
+    s32 unk_04;
+    s32 unk_08;
+    unk_8012F450 unk_0C;
+    s8 unk_18[0x30];
+} unk_80141EA8; // size = 0x48
+
 Gfx* func_i3_8011B264(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8);
 Gfx* func_i3_8012F554(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, f32 arg4);
 
@@ -120,6 +135,10 @@ void func_i3_8013C15C(void);
 Gfx* func_i3_8013D2BC(Gfx*);
 
 extern s32 D_80141900;
+
+extern s32 D_i3_801419BC;
+
+extern unk_80141EA8 D_i3_80141EA8[];
 
 extern s32 D_i3_8013F008[];
 extern TexturePtr D_i3_8013F088[];

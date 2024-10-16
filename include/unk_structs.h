@@ -606,13 +606,6 @@ typedef struct unk_8012F450 {
     s8 unk_06[0x2];
     f32 unk_08;
 } unk_8012F450;
-typedef struct unk_80141EA8 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    unk_8012F450 unk_0C;
-    s8 unk_18[0x30];
-} unk_80141EA8; // size = 0x48
 
 typedef struct unk_800E4268 {
     s32 unk_00;

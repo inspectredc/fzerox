@@ -68,6 +68,7 @@ D_i3_801417C4 = 0x801417C4; //force_migration:True size:0x8 segment:ovl_i3
 D_i3_801417F8 = 0x801417F8; //force_migration:True size:0x8 segment:ovl_i3
 D_i3_8013F008 = 0x8013F008; //segment:ovl_i3 size:0x10
 D_i3_8013F068 = 0x8013F068; //segment:ovl_i3 size:0x10
+D_i3_80141EA8 = 0x80141EA8; //segment:ovl_i3 size:0x120
 
 gOptionsInfo = 0x8011EDDC; //segment:ovl_i6 size:0xF4
 gOptionsSelectionState = 0x80124788; //segment:ovl_i6 size:0x1C
