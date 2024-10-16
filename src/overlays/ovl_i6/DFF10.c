@@ -1,10 +1,11 @@
 #include "global.h"
 #include "ovl_i6.h"
+#include "tex_assets.h"
 
 s16 D_i6_8011F910[240];
 
 // UNUSED?
-unk_8011DC40 D_i6_8011DC40 = { 1.0f, 1.0f, 32, 12, 0, 2, 17, 20 };
+UNUSED unk_8011DC40 D_i6_8011DC40 = { 1.0f, 1.0f, 32, 12, 0, 2, 17, 20 };
 
 s32 D_i6_8011DC60 = 0;
 s32 D_i6_8011DC64 = 0;

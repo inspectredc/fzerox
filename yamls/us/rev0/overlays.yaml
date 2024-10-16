@@ -111,19 +111,23 @@
     symbol_name_format: i3_$VRAM
     subsegments:
       - [0xA90C0, c]
-      # Candidates: 0xAE170, 0xAE7F0, 0xB0BC0, 0xB1000, 0xB1FC0, 0xB2830, 0xB4990, 0xB4AC0, 0xB4B30, 0xB5140, 0xB5EB0, 0xB6470, 0xB6CA0
-      - [0xAE170, c] # Potentially any of the above candidates
+      - [0xAE140, c]
       - [0xC2160, c]
       - [0xC2290, c]
       - [0xC8970, c]
       - [0xCCFF0, c]
-      - [0xD0E50, data]
+      - [0xD0E50, .data, A90C0]
+      - [0xD2000, .data, AE140]
+      - [0xD22C0, .data, C2290]
+      - [0xD29D0, .data, C8970]
+      - [0xD4220, .data, CCFF0]
       - [0xD4260, .rodata, A90C0]
-      - [0xD4410, .rodata, AE170]
+      - [0xD4410, .rodata, AE140]
       - [0xD4B20, .rodata, C2290]
       - [0xD4B30, .rodata, C8970]
       - [0xD4BA0, .rodata, CCFF0]
-      - { start: 0xD4BD0, type: bss, vram: 0x80141900, name: 80141900 }
+      - { start: 0xD4BD0, type: .bss, vram: 0x80141900, name: A90C0 }
+      - { type: bss, vram: 0x801419A0, name: 801419A0 }
 
 
   - name: ovl_i4

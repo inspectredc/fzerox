@@ -77,6 +77,8 @@ DECLARE_SEGMENT(mio0_segment_11);
 DECLARE_SEGMENT(mio0_segment_12);
 DECLARE_SEGMENT(mio0_segment_13);
 
+DECLARE_SEGMENT(segment_2747F0);
+
 DECLARE_SEGMENT(ovl_i11);
 
 DECLARE_SEGMENT(audio_seq);

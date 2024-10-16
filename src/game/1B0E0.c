@@ -478,8 +478,8 @@ void func_80082A6C(GfxPool* arg0, unk_struct_1DC* arg1) {
     f32 var_fv0;
     f32 var_fv1;
 
-    func_8006D03C(&arg0->unk_20008[arg1->unk_00], &arg1->unk_11C, arg1->unk_94.x, arg1->unk_A0,
-                  arg1->unk_A4, arg1->unk_A8, arg1->unk_94.y, arg1->unk_AC, arg1->unk_94.z, &arg1->unk_118);
+    func_8006D03C(&arg0->unk_20008[arg1->unk_00], &arg1->unk_11C, arg1->unk_94.x, arg1->unk_A0, arg1->unk_A4,
+                  arg1->unk_A8, arg1->unk_94.y, arg1->unk_AC, arg1->unk_94.z, &arg1->unk_118);
 
     if (D_800E5E8C != 0) {
         var_fv0 = D_800CD8AC;
@@ -499,8 +499,8 @@ void func_80082A6C(GfxPool* arg0, unk_struct_1DC* arg1) {
         sp64 = arg1->unk_88;
     }
 
-    func_8006CC98(&arg0->unk_20108[arg1->unk_00], &arg1->unk_15C, sp58.x, sp58.y, sp58.z, sp64.x, sp64.y,
-                  sp64.z, arg1->unk_5C.mf[1][0], arg1->unk_5C.mf[1][1], arg1->unk_5C.mf[1][2]);
+    func_8006CC98(&arg0->unk_20108[arg1->unk_00], &arg1->unk_15C, sp58.x, sp58.y, sp58.z, sp64.x, sp64.y, sp64.z,
+                  arg1->unk_5C.mf[1][0], arg1->unk_5C.mf[1][1], arg1->unk_5C.mf[1][2]);
 
     func_800827C4(&arg1->unk_19C, &arg1->unk_11C, &arg1->unk_15C);
     func_80082960(&arg1->unk_19C, &arg0->unk_20208[arg1->unk_00]);
@@ -3122,9 +3122,9 @@ void func_8008DCD8(unk_802C4920* arg0, f32 arg1) {
 
                     temp_fs1 = ((func_8006A918() & 0x1FFFF) * 0.00011444179f) - 7.5f;
 
-                    func_i2_80105A28(((s32)(func_8006A978() % 32) - 0x10) + arg0->unk_0C.unk_34.x,
-                                     ((s32)(func_8006A918() % 32) - 0x10) + arg0->unk_0C.unk_34.y,
-                                     ((s32)(func_8006A918() % 32) - 0x10) + arg0->unk_0C.unk_34.z,
+                    func_i2_80105A28(((s32) (func_8006A978() % 32) - 0x10) + arg0->unk_0C.unk_34.x,
+                                     ((s32) (func_8006A918() % 32) - 0x10) + arg0->unk_0C.unk_34.y,
+                                     ((s32) (func_8006A918() % 32) - 0x10) + arg0->unk_0C.unk_34.z,
                                      (arg0->unk_C0.xz * temp_fs2) + sp90.z + (temp_fs0 * arg0->unk_C0.xy) +
                                          (temp_fs1 * arg0->unk_C0.xx),
                                      (arg0->unk_C0.yz * temp_fs2) + sp90.y + (temp_fs0 * arg0->unk_C0.yy) +

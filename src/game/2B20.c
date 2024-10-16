@@ -11,7 +11,7 @@ s32 D_800CD00C = 3;
 s8 D_800CD010 = 0;
 s8 D_800CD014 = 0;
 s8 D_800CD018 = 0;
-s32 D_800CD01C = 0; // unused
+UNUSED s32 D_800CD01C = 0;
 u16 D_800CD020 = 0;
 s32 D_800CD024[] = { 1, 3, 5 };
 s32 D_800CD030[] = { 1, 2, 4 };
@@ -260,7 +260,7 @@ void func_80068DCC(void) {
     D_800CD154 = var_v1;
 }
 
-s32 D_800CD158[2] = { 0 }; // unused
+UNUSED s32 D_800CD158[2] = { 0 }; // New File?
 s32 D_800CD160 = 15;
 s32 D_800CD164 = 5;
 s16 D_800CD168 = 0;

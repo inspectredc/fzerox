@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzxthread.h"
+#include "segment_symbols.h"
 
 bool func_8006D3F0(s32 arg0) {
     if ((arg0 >= 0) && (arg0 < 0x16)) {
@@ -802,9 +803,8 @@ void func_80074744(void) {
 }
 
 extern s32 D_800CD220[];
-extern u8 D_2747F0[];
 void func_800747EC(s32 arg0) {
-    void* sp1C = (D_800CD220[arg0] << 0xB) + D_2747F0;
+    void* sp1C = (D_800CD220[arg0] * 0x800) + SEGMENT_ROM_START(segment_2747F0);
 
     func_80073FA0(sp1C, func_80076BD4(D_8014A20), 0x800);
 }

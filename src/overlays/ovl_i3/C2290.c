@@ -1,6 +1,129 @@
 #include "global.h"
 #include "fzx_racer.h"
 #include "ovl_i3.h"
+#include "tex_assets.h"
+#include "segment_symbols.h"
+
+s32 D_i3_8013EFF0 = 0;
+s32 D_i3_8013EFF4 = 0;
+s32 D_i3_8013EFF8 = 0;
+s32 D_i3_8013EFFC = 180;
+s32 D_i3_8013F000 = 3;
+UNUSED s32 D_i3_8013F004 = 0;
+
+s32 D_i3_8013F008[] = { 1, 1, 1, 1 };
+
+UNUSED s32 D_i3_8013F018 = 0;
+UNUSED s32 D_i3_8013F01C = 0;
+
+s32 D_i3_8013F020[6][3] = { 0 };
+
+f32 D_i3_8013F068[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+s32 D_i3_8013F078[] = { 0, 0, 0, 0 };
+
+TexturePtr D_i3_8013F088[] = {
+    D_401AA20, D_4026A20, D_4024A20, D_401B220, D_401BA20, D_4026220, D_4020A20, D_4027A20, D_4024220, D_4021220,
+    D_4023220, D_401F220, D_4022220, D_4025220, D_401C220, D_401EA20, D_4023A20, D_4021A20, D_401CA20, D_4028220,
+    D_4027220, D_401DA20, D_4028A20, D_4020220, D_4022A20, D_4025A20, D_401FA20, D_401E220, D_4029220, D_401D220,
+};
+
+UNUSED u32 D_8013F100 = 0x2800;
+
+TexturePtr D_i3_8013F104[] = {
+    D_4029A20, D_4029AE0, D_4029BA0, D_4029C60, D_4029D20, D_4029DE0,
+};
+
+s32 D_i3_8013F11C[][4][2] = {
+    { { 230, 38 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 24, 20 }, { 24, 132 }, { 0, 0 }, { 0, 0 } },
+    { { 24, 20 }, { 24, 132 }, { 168, 20 }, { 0, 0 } },
+    { { 24, 20 }, { 24, 132 }, { 168, 20 }, { 168, 132 } },
+};
+
+s32 D_i3_8013F19C[][4][2] = {
+    { { 198, 38 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 100, 20 }, { 100, 132 }, { 0, 0 }, { 0, 0 } },
+    { { 26, 20 }, { 26, 132 }, { 164, 20 }, { 0, 0 } },
+    { { 26, 20 }, { 26, 132 }, { 164, 20 }, { 164, 132 } },
+};
+
+s32 D_i3_8013F21C[] = { 0, 0, 0, 0 };
+
+u32 D_i3_8013F22C[] = {
+    (GPACK_RGBA5551(155, 0, 0, 1) << 16 | GPACK_RGBA5551(155, 0, 0, 1)),
+    (GPACK_RGBA5551(220, 0, 0, 1) << 16 | GPACK_RGBA5551(220, 0, 0, 1)),
+    (GPACK_RGBA5551(255, 0, 0, 1) << 16 | GPACK_RGBA5551(255, 0, 0, 1)),
+    (GPACK_RGBA5551(220, 0, 0, 1) << 16 | GPACK_RGBA5551(230, 0, 0, 1)),
+    (GPACK_RGBA5551(155, 0, 0, 1) << 16 | GPACK_RGBA5551(155, 0, 0, 1)),
+    (GPACK_RGBA5551(0, 255, 0, 1) << 16 | GPACK_RGBA5551(0, 255, 0, 1)),
+    (GPACK_RGBA5551(0, 255, 20, 1) << 16 | GPACK_RGBA5551(0, 255, 20, 1)),
+    (GPACK_RGBA5551(0, 195, 35, 1) << 16 | GPACK_RGBA5551(0, 195, 35, 1)),
+    (GPACK_RGBA5551(0, 160, 50, 1) << 16 | GPACK_RGBA5551(0, 160, 50, 1)),
+    (GPACK_RGBA5551(0, 135, 70, 1) << 16 | GPACK_RGBA5551(0, 135, 70, 1)),
+};
+
+s32 D_i3_8013F254[][4][2] = {
+    { { 220, 20 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 224, 20 }, { 224, 132 }, { 0, 0 }, { 0, 0 } },
+    { { 96, 20 }, { 96, 132 }, { 240, 20 }, { 0, 0 } },
+    { { 96, 20 }, { 96, 132 }, { 240, 20 }, { 240, 132 } },
+};
+
+s32 D_i3_8013F2D4[][4][2] = {
+    { { 222, 28 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 226, 28 }, { 226, 140 }, { 0, 0 }, { 0, 0 } },
+    { { 98, 26 }, { 98, 138 }, { 242, 26 }, { 0, 0 } },
+    { { 98, 26 }, { 98, 138 }, { 242, 26 }, { 242, 138 } },
+};
+
+s32 D_i3_8013F354[][4][2] = {
+    { { 226, 204 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 226, 92 }, { 226, 204 }, { 0, 0 }, { 0, 0 } },
+    { { 24, 20 }, { 24, 132 }, { 168, 20 }, { 0, 0 } },
+    { { 24, 20 }, { 24, 132 }, { 168, 20 }, { 168, 132 } },
+};
+
+s32 D_i3_8013F3D4[][4][2] = {
+    { { 118, 20 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { -4, 76 }, { -4, 188 }, { 0, 0 }, { 0, 0 } },
+    { { 4, 84 }, { 4, 196 }, { 146, 84 }, { 0, 0 } },
+    { { 4, 84 }, { 4, 196 }, { 146, 84 }, { 146, 196 } },
+};
+
+s32 D_i3_8013F454[][4][2] = {
+    { { 66, 20 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 24, 40 }, { 24, 152 }, { 0, 0 }, { 0, 0 } },
+    { { 130, 87 }, { 130, 199 }, { 272, 87 }, { 0, 0 } },
+    { { 130, 87 }, { 130, 199 }, { 272, 87 }, { 272, 199 } },
+};
+
+s32 D_i3_8013F4D4[] = { 18, 56, 94, 132, 162, 192 };
+
+s32 D_i3_8013F4EC[] = { 50, 88, 126, 156, 186, 216 };
+
+s32 D_i3_8013F504[][4][2] = {
+    { { 120, 72 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 120, 20 }, { 120, 132 }, { 0, 0 }, { 0, 0 } },
+    { { 48, 40 }, { 48, 152 }, { 196, 40 }, { 0, 0 } },
+    { { 48, 40 }, { 48, 152 }, { 196, 40 }, { 196, 152 } },
+};
+
+s32 D_i3_8013F584[][4][2] = {
+    { { 104, 64 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 104, 20 }, { 104, 132 }, { 0, 0 }, { 0, 0 } },
+    { { 44, 40 }, { 44, 152 }, { 188, 40 }, { 0, 0 } },
+    { { 44, 40 }, { 44, 152 }, { 188, 40 }, { 188, 152 } },
+};
+
+s32 D_i3_8013F604[][4][2] = {
+    { { 68, 48 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+    { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
+};
+
+s32 D_i3_8013F684[] = { 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 Gfx* func_i3_8012EFC0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
 
@@ -28,8 +151,6 @@ Gfx* func_i3_8012F0B0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
 extern unk_80141EA8 D_i3_80141EA8[4];
 #ifdef IMPORT_BSS
 unk_80141EA8 D_i3_80141EA8[4];
-extern f32 D_i3_8013F068[];
-extern s32 D_i3_8013F008[];
 
 void func_i3_8012F324(void) {
     s32 i;
@@ -181,8 +302,6 @@ Gfx* func_i3_8012F9F4(Gfx* gfx, s32 arg1, s32 arg2) {
     return func_i3_8012EFC0(gfx, arg1 + var, arg2, 13, 1.0f);
 }
 
-extern s32 D_i3_8013F11C[][4][2];
-
 Gfx* func_i3_8012FB20(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     s32 pad;
     s32 temp_s1;
@@ -265,7 +384,6 @@ Gfx* func_i3_8012FB20(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
 
 extern Gfx D_80149D0[];
 extern s32 D_800DCE44;
-extern s32 D_i3_8013F19C[][4][2];
 
 Gfx* func_i3_8012FE8C(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 temp_a3;
@@ -291,11 +409,6 @@ extern s32 D_800CD00C;
 extern s16 D_800E5FBC;
 extern s16 D_800E5FD0;
 extern s8 D_800DCE5C;
-extern s32 D_i3_8013EFF4;
-extern s32 D_i3_8013EFF8;
-extern s32 D_i3_8013EFFC;
-extern s32 D_i3_8013F008[];
-extern s32 D_i3_8013F21C[];
 
 Gfx* func_i3_8012FF7C(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 pad[2];
@@ -367,9 +480,7 @@ Gfx* func_i3_8012FF7C(Gfx* gfx, s32 arg1, s32 arg2) {
     return gfx;
 }
 
-extern s32 D_i3_8013F22C[];
 extern Gfx D_80149A0[];
-extern s32 D_i3_8013F2D4[][4][2];
 
 Gfx* func_i3_80130304(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 i;
@@ -421,8 +532,6 @@ Gfx* func_i3_80130304(Gfx* gfx, s32 arg1, s32 arg2) {
     return gfx;
 }
 
-extern s32 D_i3_8013F254[][4][2];
-
 Gfx* func_i3_8013064C(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 pad;
     s32 temp_t0;
@@ -464,7 +573,6 @@ Gfx* func_i3_8013064C(Gfx* gfx, s32 arg1, s32 arg2) {
 extern u8 D_303B270[];
 extern u8 D_303C170[];
 extern Gfx D_80149A0[];
-extern s32 D_i3_8013F354[][4][2];
 extern unk_80141EA8 D_i3_80141EAC[];
 
 Gfx* func_i3_80130824(Gfx* gfx, s32 arg1, s32 arg2) {
@@ -608,9 +716,6 @@ extern u8 D_4013DE0[];
 extern u8 D_4019020[];
 extern Gfx D_8014940[];
 
-extern f32 D_i3_8013F068[];
-extern s32 D_i3_8013F3D4[][4][2];
-
 Gfx* func_i3_801312DC(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 i;
     u8* texturePtr;
@@ -744,9 +849,6 @@ Gfx* func_i3_801312DC(Gfx* gfx, s32 arg1, s32 arg2) {
 
     return gfx;
 }
-
-extern s32 D_i3_8013F454[][4][2];
-extern s32 D_i3_80140788[];
 
 Gfx* func_i3_80131A68(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 temp_a3;
@@ -1036,7 +1138,6 @@ void func_i3_80132CD8(void) {
     }
 }
 
-extern s32 D_i3_8013F020[][3];
 extern unk_802C4920* D_800E5F40[];
 
 void func_i3_80132D78(void) {
@@ -1066,11 +1167,7 @@ void func_i3_80132D78(void) {
 
 extern u32 D_800CCFE0;
 extern u8 D_401A120[];
-extern s32 D_i3_8013F000;
-extern TexturePtr D_i3_8013F088[];
-extern TexturePtr D_i3_8013F104[];
-extern s32 D_i3_8013F4D4[];
-extern s32 D_i3_8013F4EC[];
+
 extern f32 D_i3_80141E30[];
 void func_i3_80134CA0(void);
 
@@ -1300,7 +1397,6 @@ Gfx* func_i3_80133944(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
     return gfx;
 }
 
-extern s32 D_i3_8013F504[][4][2];
 extern s32 D_i3_80141FC8[];
 extern s32 D_i3_80141FD8[];
 extern unk_800F5DF0* D_800F5E90;
@@ -1370,8 +1466,6 @@ Gfx* func_i3_80133D4C(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {
 extern u8 D_4011DA0[];
 extern u8 D_40131C0[];
 extern s32 D_800F80A8[];
-extern s32 D_i3_8013F078[];
-extern s32 D_i3_8013F584[][4][2];
 
 Gfx* func_i3_801340F4(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 i;
@@ -1510,7 +1604,6 @@ Gfx* func_i3_801345EC(Gfx* gfx, s32 arg1, s32 arg2) {
 }
 
 extern u8 D_401A920[];
-extern s32 D_i3_8013F604[][4][2];
 
 Gfx* func_i3_801347AC(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 i;
@@ -1561,10 +1654,7 @@ Gfx* func_i3_801347AC(Gfx* gfx, s32 arg1, s32 arg2) {
     return gfx;
 }
 
-extern u8 D_2747F0[];
 extern u8 D_2800[];
-extern u8 D_401AA20[];
-extern s32 D_i3_8013F684[];
 
 void func_i3_80134C24(s32 arg0) {
     s32 temp_v1;
@@ -1576,10 +1666,10 @@ void func_i3_80134C24(s32 arg0) {
     sp18 = D_i3_8013F684[arg0];
 
     temp_v1 = sp18 << 0xB;
-    temp = (func_80076BB8(4) + (SEGMENT_OFFSET(D_401AA20))) + temp_v1;
+    temp = (func_80076BB8(4) + SEGMENT_OFFSET(D_401AA20)) + temp_v1;
 
     temp_v1 = sp18 << 0xB;
-    temp2 = ((u32) D_2747F0 + (SEGMENT_OFFSET(D_2800))) + temp_v1;
+    temp2 = (SEGMENT_ROM_START(segment_2747F0) + SEGMENT_OFFSET(D_2800)) + temp_v1;
 
     func_80073FA0(temp2, temp, 0x800);
 }
@@ -1596,7 +1686,6 @@ void func_i3_80134CA0(void) {
 
 extern s32 D_800E5FDC;
 extern s16 D_800E5FE0;
-extern s32 D_i3_8013EFF0;
 
 extern u8 D_F243290[];
 

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "ovl_i6.h"
 #include "audio.h"
+#include "tex_assets.h"
 
 s8 D_i6_8011FAF0[30];
 u8* D_i6_8011FB10;
@@ -17,8 +18,8 @@ TexturePtr D_i6_801247AC;
 s16 D_i6_801247B0;
 
 s8 D_i6_8011DFA0 = 0;
-s32 D_i6_8011DFA4 = 64; // UNUSED?
-s32 D_i6_8011DFA8 = 40; // UNUSED?
+UNUSED s32 D_i6_8011DFA4 = 64;
+UNUSED s32 D_i6_8011DFA8 = 40;
 
 s32 D_i6_8011DFAC = 60;
 s32 D_i6_8011DFB0 = 30;
@@ -394,7 +395,7 @@ const s16 D_i6_8011F4EC[] = { 216, 0,   0, 248, 0, 0,   0, 0,   217, 0,   0,   2
                               0,   0,   0, 0,   0, 0,   0, 0,   0,   0,   0,   0,   0, 0,   0,   0,   0,   0,
                               0,   0,   0, 0,   0, 0,   0, 0,   0,   0,   228, 0,   0, 260, -1,  0 };
 
-s32 D_i6_8011ED7C = 0; // UNUSED?
+UNUSED s32 D_i6_8011ED7C = 0; // UNUSED?
 
 /*
     OPTIONS MENU
@@ -450,7 +451,7 @@ OptionsInfo gOptionsInfo[] = {
     { OPTIONS_EXIT, OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN, 0, 0, 0, NULL, { D_F2630C8, 40, 16 } },
 };
 
-char D_i6_8011EEBC[] = "Feel Mie"; // UNUSED
+UNUSED char D_i6_8011EEBC[] = "Feel Mie";
 
 extern unk_800E3A28 D_800E3A28[];
 extern unk_800E3F28 D_800E3F28[];

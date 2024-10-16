@@ -104,7 +104,9 @@
     "leo_internal.h": "c",
     "other_types.h": "c",
     "fzxthread.h": "c",
-    "fzx_racer.h": "c"
+    "fzx_racer.h": "c",
+    "ovl_i3.h": "c",
+    "segment_symbols.h": "c",
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"

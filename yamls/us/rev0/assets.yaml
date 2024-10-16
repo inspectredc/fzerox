@@ -79,7 +79,8 @@
     type: bin
     start: 0x2738A0
 
-  - type: bin
+  - name: segment_2747F0
+    type: bin
     start: 0x2747F0
 
   - name: mio0/segment_15

@@ -1,13 +1,51 @@
 #include "global.h"
 #include "fzx_racer.h"
 #include "ovl_i3.h"
+#include "tex_assets.h"
+
+extern s16 D_i3_801419A0;
+extern s16 D_i3_801419A2;
+extern s16 D_i3_801419A4;
+extern s16 D_i3_801419A6;
+
+TexturePtr D_i3_8013ED30[] = {
+    D_4029A20, D_4029AE0, D_4029BA0, D_4029C60, D_4029D20, D_4029DE0,
+};
+
+s16 D_i3_8013ED48[][4][2] = {
+    { { 58, 80 }, { 58, 193 }, { 200, 80 }, { 200, 193 } },   { { 58, 80 }, { 58, 193 }, { 200, 80 }, { 200, 193 } },
+    { { 118, 83 }, { 118, 196 }, { 200, 80 }, { 200, 193 } }, { { 58, 80 }, { 58, 193 }, { 200, 80 }, { 200, 193 } },
+    { { 58, 80 }, { 58, 193 }, { 200, 80 }, { 200, 193 } },
+};
+
+void* D_i3_8013ED98[] = {
+    D_F25F0B0, D_F25F1B0, D_F25F334, D_F25F400, D_F25F69C, D_F25F914, D_F25FAD0, D_F25FD70,
+    D_F25FE94, D_F26008C, D_F2601C0, D_F260460, D_F26064C, D_F260A98, D_F260C64, D_F2610B0,
+    D_F2636F0, D_F2637DC, D_F261224, D_F261364, D_F261528, D_F2638B4, D_F263648, D_F26369C,
+};
+
+s32 D_i3_8013EDF8[] = {
+    40, 16, 64, 16, 24, 16, 64, 16, 64, 16, 64, 16, 128, 16, 40, 16, 64,  16, 40,  16, 128, 16, 64, 16,
+    96, 32, 64, 16, 96, 32, 64, 16, 32, 16, 32, 16, 64,  16, 64, 16, 128, 16, 128, 32, 16,  16, 16, 16,
+};
+
+extern s32 D_i3_801419B0;
+extern s32 D_i3_801419B4;
+
+void func_i3_8011AE70(void) {
+    D_i3_801419B0 = D_i3_801419B4 = 0;
+}
+
+extern s32 D_i3_801419A8;
+extern s32 D_i3_801419AC;
+
+void func_i3_8011AE88(void) {
+    D_i3_801419A8 = D_i3_801419AC = 0;
+}
 
 extern s8 D_800DCE5C;
 extern s32 D_800DD218[];
 extern s32 D_80106F10;
-extern s16 D_i3_801419A0;
-extern s16 D_i3_801419A4;
-extern s16 D_i3_801419A6;
 extern s32 D_i3_801419B0;
 extern unk_800DCE98 D_800DCE98[];
 extern s32 D_800DD218[];
@@ -18,7 +56,6 @@ extern s16 D_800CD048;
 extern s32 D_800E5EC0;
 extern s16 D_80115D50[];
 
-void func_i3_8011AE70(void);
 void func_i3_8013BF50(s32);
 void func_i3_8013C008(void);
 void func_i2_801016DC(void);
@@ -142,41 +179,11 @@ Gfx* func_i3_8011B41C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern u8 D_F243290[];
-extern u8 D_F25A8F0[];
-extern u8 D_F25B8F0[];
-extern u8 D_F25BAF0[];
-extern u8 D_F25CAF0[];
-extern u8 D_F25CCF0[];
-extern u8 D_F25D650[];
-extern u8 D_F25D858[];
-extern u8 D_F25E060[];
-extern u8 D_F25E868[];
-extern u8 D_F25F0B0[];
-extern u8 D_F25F1B0[];
-extern u8 D_F25F334[];
-extern u8 D_F25F400[];
-extern u8 D_F25F69C[];
-extern u8 D_F25F914[];
-extern u8 D_F25FAD0[];
-extern u8 D_F25FD70[];
-extern u8 D_F2610B0[];
-extern u8 D_F261224[];
-extern u8 D_F261364[];
-extern u8 D_F261528[];
-extern u8 D_F2636F0[];
-extern u8 D_F2637DC[];
-extern u8 D_F2638B4[];
-extern u8 D_F25F070[];
-extern u8 D_F263648[];
-extern u8 D_F26369C[];
-
 void func_i3_80122C3C(void);
 void func_i3_80139D20(void);
 void func_i3_8013C080(void);
 extern unk_800CD970 D_800CD970[];
 extern s32* D_800CD9AC[];
-extern TexturePtr D_i3_8013F088[];
 
 extern s16 D_i3_80141A50[][3];
 extern f32 D_i3_80141A70[][3];
@@ -210,7 +217,6 @@ extern unk_802C4920* D_i3_80141DD0;
 extern s16 D_800E5ED8[];
 extern s16 D_80115DE0;
 extern s32 D_80141D6C;
-extern s16 D_i3_801419A2;
 extern s32 D_i3_801419B8;
 extern s32 D_i3_801419BC;
 extern f32 D_i3_80141AD4;
@@ -409,7 +415,7 @@ extern u8 D_401A120[];
 
 extern unk_802C4920* D_800E5F40[];
 extern Gfx D_80149D0[];
-extern s16 D_i3_8013ED48[][4][2];
+
 extern u32 D_800CCFE0;
 extern s8 D_800CD010;
 
@@ -822,7 +828,6 @@ Gfx* func_i3_8011DD30(Gfx* gfx, s32 arg1) {
 }
 
 extern Gfx D_8014940[];
-extern TexturePtr D_i3_8013ED30[];
 
 Gfx* func_i3_8011ECF0(Gfx* gfx) {
     f32 var_fs0;
@@ -1611,7 +1616,7 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 #else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/func_i3_80121860.s")
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE140/func_i3_80121860.s")
 Gfx* func_i3_80121860(Gfx* gfx, s32 arg1);
 #endif
 
@@ -1750,8 +1755,8 @@ Gfx* func_i3_80121E70(Gfx* gfx, s32 arg1) {
         }
     }
 
-    func_8006BC84(D_800DCCF0->unk_21988, NULL, D_i3_80141D0C, D_i3_80141D0C, D_i3_80141D0C, sp5C, 0.0f, sp64, 0.0f, 1.0f,
-                  0.0f, sp80, sp84, sp88);
+    func_8006BC84(D_800DCCF0->unk_21988, NULL, D_i3_80141D0C, D_i3_80141D0C, D_i3_80141D0C, sp5C, 0.0f, sp64, 0.0f,
+                  1.0f, 0.0f, sp80, sp84, sp88);
     gSPMatrix(gfx++, D_800DCCF0->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gfx++, D_400C9C0);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
@@ -1805,7 +1810,6 @@ Gfx* func_i3_8012266C(Gfx* gfx, s32 arg1) {
     return func_i3_8012F554(gfx, gRacers[arg1].unk_2A0, sp30, sp2C, 1.0f);
 }
 
-extern void* D_i3_8013ED98[];
 extern s32 D_i3_8013EDF8[];
 
 Gfx* func_i3_80122854(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
@@ -3292,16 +3296,9 @@ Gfx* func_i3_80127E88(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141228.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141230.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_8014123C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141244.s")
-
 extern s32 D_800CD008;
-extern const char* D_i3_8013EEB8[];
+
+const char* D_i3_8013EEB8[] = { "NOVICE", "STANDARD", "EXPERT", "MASTER" };
 
 Gfx* func_i3_801281B4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     s32 sp3C;
@@ -3628,72 +3625,17 @@ Gfx* func_i3_8012952C(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-extern const char* D_i3_8013EEC8[];
+const char* D_i3_8013EEC8[] = { "CAPTAIN FALCON", "Dr. STEWART",   "PICO",          "SAMURAI GOROH", "JODY SUMMER",
+                                "MIGHTY GAZELLE", "Mr. EAD",       "BABA",          "OCTOMAN",       "GOMAR&SHIOH",
+                                "KATE ALEN",      "ROGER BUSTER",  "JAMES McCLOUD", "LEON",          "ANTONIO GUSTER",
+                                "BLACK SHADOW",   "MICHAEL CHAIN", "JACK LEVIN",    "SUPER ARROW",   "Mrs. ARROW",
+                                "JOHN TANAKA",    "BEASTMAN",      "ZODA",          "Dr. CLASH",     "SILVER NEELSEN",
+                                "BIO REX",        "DRAQ",          "BILLY",         "THE SKULL",     "BLOOD FALCON" };
 
 Gfx* func_i3_8012963C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     gfx = func_i3_80122BE0(gfx, arg1);
     return func_i2_80106450(gfx, arg3, arg4, D_i3_8013EEC8[arg2], 1, 4, 0);
 }
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_801412EC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_801412FC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141308.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141310.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141320.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_8014132C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_8014133C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141344.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_8014134C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141354.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141360.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_8014136C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_8014137C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_8014138C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141394.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_801413A4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_801413B4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_801413C4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_801413D0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_801413DC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_801413E8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_801413F4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141400.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141408.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141414.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141424.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_8014142C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141434.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_8014143C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/D_i3_80141448.s")
 
 Gfx* func_i3_80129698(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gfx = func_i3_80122BE0(gfx, arg1);
@@ -3740,7 +3682,7 @@ void func_i3_801296E8(s32 num) {
 #else
 extern char D_i3_80141E08[];
 void func_i3_801296E8(s32 num);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/func_i3_801296E8.s")
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE140/func_i3_801296E8.s")
 #endif
 
 Gfx* func_i3_80129800(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
@@ -3830,11 +3772,19 @@ extern s32 D_i3_80141D28[];
 extern s32 D_i3_80141D38[];
 extern s32 D_i3_80141D48[];
 
-extern s32 D_i3_8013EF44[][4];
-extern s32 D_i3_8013EF94[];
-extern s32 D_i3_8013EFA4[];
-extern s32 D_i3_8013EFB4[];
-extern s32 D_i3_8013EFC4[];
+UNUSED s32 D_i3_8013EF40 = 0;
+
+s32 D_i3_8013EF44[][4] = {
+    { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 5, 0, 0, 0 }, { 5, 3, 0, 0 }, { 5, 3, 1, 0 },
+};
+
+s32 D_i3_8013EF94[] = { 0, 255, 0, 255 };
+
+s32 D_i3_8013EFA4[] = { 255, 255, 255, 127 };
+
+s32 D_i3_8013EFB4[] = { 255, 0, 0, 255 };
+
+s32 D_i3_8013EFC4[] = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 Gfx* func_i3_80129F40(Gfx* gfx) {
     s32 var_a1;
@@ -4619,7 +4569,7 @@ extern s32 D_80106F40;
 extern s32 D_80106F44;
 extern s32 D_80141C78;
 extern s32 D_80141D70;
-extern s32 D_i3_8013F008[];
+
 extern f32 D_i3_80141D00;
 extern f32 D_i3_80141D04;
 extern s32 D_i3_80141D10;
@@ -5131,5 +5081,5 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     return gfx;
 }
 #else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE170/func_i3_8012D3D4.s")
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE140/func_i3_8012D3D4.s")
 #endif

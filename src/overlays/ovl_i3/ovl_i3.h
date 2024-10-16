@@ -3,6 +3,12 @@
 
 #include "unk_structs.h"
 
+typedef struct unk_8013E7A8 {
+    s16 unk_00;
+    s8 unk_02;
+    s8 unk_03[11];
+} unk_8013E7A8; // size = 0xE
+
 typedef struct unk_80140874 {
     void* unk_00;
     f32 unk_04;
@@ -112,5 +118,12 @@ bool func_i3_8013A004(void);
 Gfx* func_i3_8013A360(Gfx*, s32);
 void func_i3_8013C15C(void);
 Gfx* func_i3_8013D2BC(Gfx*);
+
+extern s32 D_80141900;
+
+extern s32 D_i3_8013F008[];
+extern TexturePtr D_i3_8013F088[];
+
+extern s32 D_i3_80140788[];
 
 #endif // OVL_I3_H
