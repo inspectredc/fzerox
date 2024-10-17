@@ -66,6 +66,14 @@ D_i2_8010D768 = 0x8010D768;
 D_i3_80140F50 = 0x80140F50; //segment:ovl_i3 type:asciz
 D_i3_801417C4 = 0x801417C4; //force_migration:True size:0x8 segment:ovl_i3
 D_i3_801417F8 = 0x801417F8; //force_migration:True size:0x8 segment:ovl_i3
+D_i3_8013F008 = 0x8013F008; //segment:ovl_i3 size:0x10
+D_i3_8013F068 = 0x8013F068; //segment:ovl_i3 size:0x10
+D_i3_80141EA8 = 0x80141EA8; //segment:ovl_i3 size:0x120
+sPausePlayerNum = 0x80141DAC; //segment:ovl_i3
+
+func_i3_DrawBeveledBox = 0x8011B264; //segment:ovl_i3
+func_i3_DrawTimeAttackFinishMenu = 0x80123B24; //segment:ovl_i3
+func_i3_DrawHUD = 0x80131DF4; //segment:ovl_i3
 
 gOptionsInfo = 0x8011EDDC; //segment:ovl_i6 size:0xF4
 gOptionsSelectionState = 0x80124788; //segment:ovl_i6 size:0x1C

@@ -444,7 +444,7 @@ void func_800B82C8(void) {
     }
 }
 
-extern s32 D_800CD000;
+extern s32 gNumPlayers;
 extern s8 D_800CD010;
 extern u8 D_800D1A60;
 extern s32 D_800DCE44;
@@ -461,7 +461,7 @@ void func_800B84B8(void) {
             if (note != NULL) {
                 temp_lo = (s32) note->synthesisState.samplePosInt / 100;
 
-                switch (D_800CD000) {
+                switch (gNumPlayers) {
                     case 1:
                     case 2:
                         break;

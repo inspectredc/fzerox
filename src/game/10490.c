@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzxthread.h"
+#include "segment_symbols.h"
 
 u16 D_800CD2E0 = 0;
 s8 D_800CD2E4 = 0;
@@ -591,15 +592,6 @@ void func_80077318(void) {
     func_80077084();
 }
 
-extern u8 D_1535B0[];
-extern u8 D_166660[];
-extern u8 D_17B960[];
-extern u8 D_1B8550[];
-extern u8 D_4000000[];
-extern u8 D_4006240[];
-extern u8 D_40130B0[];
-extern u8 D_4029EA0[];
-
 extern u32 D_800DCDB4;
 
 void func_80077630(void) {
@@ -617,25 +609,29 @@ void func_80077630(void) {
             case 0xE:
             case 0x11:
             case 0x15:
-                func_80073FA0(D_17B960, osPhysicalToVirtual(D_800DCDB4), D_1B8550 - D_17B960);
-                romOffset = D_1B8550;
-                ramSize = D_4029EA0 - D_4000000;
+                func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
+                              SEGMENT_ROM_SIZE(segment_17B960));
+                romOffset = SEGMENT_ROM_START(segment_1B8550);
+                ramSize = SEGMENT_VRAM_SIZE(segment_1B8550);
                 break;
             case 0x10:
-                func_80073FA0(D_17B960, osPhysicalToVirtual(D_800DCDB4), D_1B8550 - D_17B960);
-                romOffset = D_166660;
-                ramSize = D_4006240 - D_4000000;
+                func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
+                              SEGMENT_ROM_SIZE(segment_17B960));
+                romOffset = SEGMENT_ROM_START(segment_166660);
+                ramSize = SEGMENT_VRAM_SIZE(segment_166660);
                 break;
             case 0xD:
-                func_80073FA0(D_17B960, osPhysicalToVirtual(D_800DCDB4), D_1B8550 - D_17B960);
-                romOffset = D_1535B0;
-                ramSize = D_40130B0 - D_4000000;
+                func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
+                              SEGMENT_ROM_SIZE(segment_17B960));
+                romOffset = SEGMENT_ROM_START(segment_1535B0);
+                ramSize = SEGMENT_VRAM_SIZE(segment_1535B0);
                 break;
             case 0x6:
             case 0x4009:
             case 0x4012:
             case 0x8008:
-                func_80073FA0(D_17B960, osPhysicalToVirtual(D_800DCDB4), D_1B8550 - D_17B960);
+                func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
+                              SEGMENT_ROM_SIZE(segment_17B960));
             default:
                 D_800CD2E0 = 0;
                 return;
@@ -669,13 +665,13 @@ void func_80077810(void) {
             case 5:
             case 14:
             case 21:
-                romOffset = D_1E23F0;
-                ramSize = D_7048CB0 - D_7000000;
+                romOffset = SEGMENT_ROM_START(segment_1E23F0);
+                ramSize = SEGMENT_VRAM_SIZE(segment_1E23F0);
                 break;
             case 13:
             case 16:
-                romOffset = D_145B70;
-                ramSize = D_700DA40 - D_7000000;
+                romOffset = SEGMENT_ROM_START(segment_145B70);
+                ramSize = SEGMENT_VRAM_SIZE(segment_145B70);
                 break;
             default:
                 D_800CD2E4 = 0;
@@ -687,12 +683,9 @@ void func_80077810(void) {
     }
 }
 
-extern u8 D_22B0A0[];
-extern u8 D_9000000[];
-extern u8 D_900A090[];
-
 void func_800778F8(void) {
-    s32 pad[3];
+    s32 pad[2];
+    RomOffset romOffset;
     size_t ramSize;
     u8* sp24;
 
@@ -705,11 +698,12 @@ void func_800778F8(void) {
             case 0x11:
             case 0x4009:
             case 0x4012:
-                ramSize = D_900A090 - D_9000000;
+                romOffset = SEGMENT_ROM_START(mio0_segment_2);
+                ramSize = SEGMENT_VRAM_SIZE(mio0_segment_2);
                 sp24 = func_800768F4(1, ramSize);
 
                 osInvalDCache(sp24, ramSize);
-                func_800765CC(D_22B0A0, sp24, ramSize);
+                func_800765CC(romOffset, sp24, ramSize);
                 if (*(s32*) sp24 == (s32) 'MIO0') {
                     mio0Decode(sp24, osPhysicalToVirtual(D_800DCDD4));
                 }
@@ -725,8 +719,8 @@ void func_800779D0(void) {
     s32 pad;
     s32 sp28;
     s32 pad2;
-    RomOffset sp20;
-    size_t sp1C;
+    RomOffset romOffset;
+    size_t ramSize;
     u8* sp18;
 
     if (D_800CD2EC != 0) {
@@ -742,17 +736,17 @@ void func_800779D0(void) {
             case 17:
             case 21:
                 sp28 = D_8010B7B2;
-                sp20 = D_800CD2F8[sp28];
-                sp1C = D_800CD350[sp28] - D_800CD324[sp28];
+                romOffset = D_800CD2F8[sp28];
+                ramSize = D_800CD350[sp28] - D_800CD324[sp28];
                 break;
             default:
                 D_800CD2EC = 0;
                 return;
         }
-        sp18 = func_800768F4(1, sp1C);
+        sp18 = func_800768F4(1, ramSize);
 
-        osInvalDCache(sp18, sp1C);
-        func_800765CC(sp20, sp18, sp1C);
+        osInvalDCache(sp18, ramSize);
+        func_800765CC(romOffset, sp18, ramSize);
         if (*(s32*) sp18 == (s32) 'MIO0') {
             mio0Decode(sp18, osPhysicalToVirtual(D_800DCDDC));
         }
@@ -771,8 +765,8 @@ void func_80077B04(void) {
     s32 pad;
     s32 sp28;
     s32 pad2;
-    RomOffset sp20;
-    s32 sp1C;
+    RomOffset romOffset;
+    size_t ramSize;
     u8* sp18;
 
     if (D_800CD2F0 >= 0) {
@@ -780,17 +774,17 @@ void func_80077B04(void) {
 
         switch (D_800DCE44) {
             case 0xD:
-                sp20 = D_800CD2F8[sp28];
-                sp1C = D_800CD350[sp28] - D_800CD324[sp28];
+                romOffset = D_800CD2F8[sp28];
+                ramSize = D_800CD350[sp28] - D_800CD324[sp28];
                 break;
             default:
                 return;
         }
 
-        sp18 = func_800768F4(1, sp1C);
+        sp18 = func_800768F4(1, ramSize);
 
-        osInvalDCache(sp18, sp1C);
-        func_800765CC(sp20, sp18, sp1C);
+        osInvalDCache(sp18, ramSize);
+        func_800765CC(romOffset, sp18, ramSize);
         if (*(s32*) sp18 == (s32) 'MIO0') {
             mio0Decode(sp18, osPhysicalToVirtual(D_800DCDDC));
         }
@@ -804,8 +798,9 @@ extern u8 D_5000000[];
 extern u8 D_5000F50[];
 
 void func_80077BE0(void) {
-    s32 pad[3];
-    size_t sp1C;
+    s32 pad[2];
+    RomOffset romOffset;
+    size_t ramSize;
     u8* sp24;
 
     if (D_800CD2F4 != 0) {
@@ -813,12 +808,13 @@ void func_80077BE0(void) {
             D_800CD2F4 = 0;
             return;
         }
-        sp1C = D_5000F50 - D_5000000;
+        romOffset = SEGMENT_ROM_START(mio0_segment_14);
+        ramSize = SEGMENT_VRAM_SIZE(mio0_segment_14);
 
-        sp24 = func_800768F4(1, sp1C);
+        sp24 = func_800768F4(1, ramSize);
 
-        osInvalDCache(sp24, sp1C);
-        func_800765CC(D_2738A0, sp24, sp1C);
+        osInvalDCache(sp24, ramSize);
+        func_800765CC(romOffset, sp24, ramSize);
         if (*(s32*) sp24 == (s32) 'MIO0') {
             mio0Decode(sp24, osPhysicalToVirtual(D_800DCDE4));
         }

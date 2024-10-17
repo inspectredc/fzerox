@@ -120,7 +120,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     return sp44;
 }
 
-u8* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) {
+void* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) {
     s32 var_a3;
     bool var_t0;
     u8* var_s0;
@@ -259,9 +259,6 @@ Gfx* func_8007870C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
             return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 0, arg5, arg6);
     }
 }
-
-Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 arg2, s32 arg3, s32 arg4, u32 arg5, f32 arg6, f32 arg7, s32 arg8,
-                   s32 arg9, s32 argA, s32 argB, s32 argC);
 
 Gfx* func_800788A4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture, f32 arg5, f32 arg6) {
 

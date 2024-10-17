@@ -153,7 +153,7 @@ void Fault_DisplayFloatException(u32 exceptFlags) {
 extern OSMesgQueue D_800DCA80;
 // unk flags
 const u16 D_800D4AE4[] = { 0x8000, 0x0008, 0x0008, 0x4000, 0x0001, 0x0001, 0x4000, 0x0001, 0x4000, 0x0001, 0x1000 };
-extern unk_800DCE98 D_800DD180;
+extern Controller D_800DD180;
 #define CAUSE_INDEX(cause) ((cause >> CAUSE_EXCSHIFT) & (CAUSE_EXCMASK >> CAUSE_EXCSHIFT))
 
 void Fault_DisplayDebugInfo(OSThread* thread) {

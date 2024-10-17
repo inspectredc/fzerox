@@ -2,17 +2,17 @@
 #include "PR/leo.h"
 
 extern s32 D_800CD510;
-extern s32 D_800E4260;
-extern s32 D_800E4264;
+extern s32 gSkyboxType;
+extern s32 gBackgroundFloorType;
 
 void func_8007F4E0(s32 arg0, s32 arg1) {
     D_800CD510 = 1;
-    D_800E4264 = arg0;
-    D_800E4260 = arg1;
+    gBackgroundFloorType = arg0;
+    gSkyboxType = arg1;
 }
 
 #ifdef IMPORT_BSS
-static s8 D_800E42C8[4];
+s8 D_800E42C8[4];
 extern s16 D_800E42CC;
 
 void func_8007F500(void) {

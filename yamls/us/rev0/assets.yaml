@@ -1,22 +1,47 @@
   #File Screen Textures
-  - type: bin
+  - name: segment_145B70
+    type: bin
+    vram: 0x07000000
     start: 0x145B70
+    
+  - name: segment_1535B0
+    type: bin
+    vram: 0x04000000
+    start: 0x1535B0
+    
+  - name: segment_166660
+    type: bin
+    vram: 0x04000000
+    start: 0x166660
 
   - name: mio0/segment_1
     type: bin
+    vram: 0x08000000
     start: 0x16C8A0
 
-  - type: bin
+  - name: segment_17B1E0
+    type: bin
+    vram: 0x03000000
     start: 0x17B1E0
 
-  - type: bin
+  - name: segment_17B960
+    type: bin
+    vram: 0x03000780
     start: 0x17B960
 
-  - type: bin
+  - name: segment_1B8550
+    type: bin
+    vram: 0x04000000
     start: 0x1B8550
+
+  - name: segment_1E23F0
+    type: bin
+    vram: 0x07000000
+    start: 0x1E23F0
 
   - name: mio0/segment_2
     type: bin
+    vram: 0x09000000
     start: 0x22B0A0
 
   - name: mio0/segment_3
@@ -76,9 +101,11 @@
 
   - name: mio0/segment_14
     type: bin
+    vram: 0x05000000
     start: 0x2738A0
 
-  - type: bin
+  - name: segment_2747F0
+    type: bin
     start: 0x2747F0
 
   - name: mio0/segment_15
