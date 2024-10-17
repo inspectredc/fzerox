@@ -73,6 +73,7 @@ sPausePlayerNum = 0x80141DAC; //segment:ovl_i3
 
 func_i3_DrawBeveledBox = 0x8011B264; //segment:ovl_i3
 func_i3_DrawTimeAttackFinishMenu = 0x80123B24; //segment:ovl_i3
+func_i3_DrawHUD = 0x80131DF4; //segment:ovl_i3
 
 gOptionsInfo = 0x8011EDDC; //segment:ovl_i6 size:0xF4
 gOptionsSelectionState = 0x80124788; //segment:ovl_i6 size:0x1C

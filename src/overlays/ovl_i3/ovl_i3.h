@@ -167,7 +167,7 @@ Gfx* func_i3_8012EE90(Gfx* gfx, s32 arg1);
 Gfx* func_i3_8012F554(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale);
 Gfx* func_i3_80130824(Gfx*, s32, s32);
 Gfx* func_i3_801312DC(Gfx*, s32, s32);
-Gfx* func_i3_80131DF4(Gfx*);
+Gfx* func_i3_DrawHUD(Gfx*);
 Gfx* func_i3_80132EEC(Gfx*);
 Gfx* func_i3_80133944(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale);
 Gfx* func_i3_80135B20(Gfx*, s32, s32);
@@ -184,7 +184,7 @@ extern bool D_i3_801419BC;
 extern unk_80141EA8 D_i3_80141EA8[];
 
 extern s32 D_i3_8013F008[];
-extern TexturePtr D_i3_8013F088[];
+extern TexturePtr sCharacterPortraitTextures[];
 
 extern s32 D_i3_80140788[];
 

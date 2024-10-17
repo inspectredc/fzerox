@@ -461,7 +461,7 @@ void func_i3_8011B520(void) {
 
             for (i = 0; i < 8; i++) {
                 if (D_i3_80141B40[i][j] < 30) {
-                    D_i3_80141AE0[i][j] = D_i3_8013F088[D_i3_80141B40[i][j]];
+                    D_i3_80141AE0[i][j] = sCharacterPortraitTextures[D_i3_80141B40[i][j]];
                 } else {
                     switch (D_i3_80141B40[i][j]) {
                         case 30:
@@ -980,7 +980,7 @@ Gfx* func_i3_8011ECF0(Gfx* gfx) {
         if (left < 0x140) {
             gDPPipeSync(gfx++);
             character = D_800E5F40[i]->character;
-            gDPLoadTextureBlock(gfx++, D_i3_8013F088[character], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+            gDPLoadTextureBlock(gfx++, sCharacterPortraitTextures[character], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
             gSPScisTextureRectangle(gfx++, left << 2, top << 2, (s32) (left + 32.0f * scale) << 2,
@@ -1004,7 +1004,7 @@ Gfx* func_i3_8011F560(Gfx* gfx, s32 arg1, s32 character, s32 left, s32 top, f32 
     s32 pad;
 
     gSPDisplayList(gfx++, D_8014940);
-    gDPLoadTextureBlock(gfx++, D_i3_8013F088[character], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+    gDPLoadTextureBlock(gfx++, sCharacterPortraitTextures[character], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
     gSPScisTextureRectangle(gfx++, left << 2, top << 2, (s32) (left + 32.0f * arg5) << 2,
@@ -4670,7 +4670,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
         if ((gNumPlayers != 1) || (D_800DCE44 != 1) || (D_i3_801419B8 > 0) || (D_i3_80141C20[0] < 2)) {
             if (((gNumPlayers != 1) || (D_i3_80141DF0[0] != 2)) &&
                 ((gNumPlayers != 1) || (D_800E5220[playerIndex].unk_04 != 10) || (D_i3_80141D78[0] < 300))) {
-                gfx = func_i3_80131DF4(gfx);
+                gfx = func_i3_DrawHUD(gfx);
             }
             for (i = 0; i < gNumPlayers; i++) {
                 if ((gNumPlayers != 1) ||

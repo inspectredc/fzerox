@@ -27,15 +27,42 @@ f32 D_i3_8013F068[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 s32 D_i3_8013F078[] = { 0, 0, 0, 0 };
 
-TexturePtr D_i3_8013F088[] = {
-    D_401AA20, D_4026A20, D_4024A20, D_401B220, D_401BA20, D_4026220, D_4020A20, D_4027A20, D_4024220, D_4021220,
-    D_4023220, D_401F220, D_4022220, D_4025220, D_401C220, D_401EA20, D_4023A20, D_4021A20, D_401CA20, D_4028220,
-    D_4027220, D_401DA20, D_4028A20, D_4020220, D_4022A20, D_4025A20, D_401FA20, D_401E220, D_4029220, D_401D220,
+TexturePtr sCharacterPortraitTextures[] = {
+    D_401AA20, // CAPTAIN_FALCON
+    D_4026A20, // DR_STEWART
+    D_4024A20, // PICO
+    D_401B220, // SAMURAI_GOROH
+    D_401BA20, // JODY_SUMMER
+    D_4026220, // MIGHTY_GAZELLE
+    D_4020A20, // MR_EAD
+    D_4027A20, // BABA
+    D_4024220, // OCTOMAN
+    D_4021220, // GOMAR_AND_SHIOH
+    D_4023220, // KATE_ALEN
+    D_401F220, // ROGER_BUSTER
+    D_4022220, // JAMES_MCCLOUD
+    D_4025220, // LEON
+    D_401C220, // ANTONIO_GUSTER
+    D_401EA20, // BLACK_SHADOW
+    D_4023A20, // MICHAEL_CHAIN
+    D_4021A20, // JACK_LEVIN
+    D_401CA20, // SUPER_ARROW
+    D_4028220, // MRS_ARROW
+    D_4027220, // JOHN_TANAKA
+    D_401DA20, // BEASTMAN
+    D_4028A20, // ZODA
+    D_4020220, // DR_CLASH
+    D_4022A20, // SILVER_NEELSEN
+    D_4025A20, // BIO_REX
+    D_401FA20, // DRAQ
+    D_401E220, // BILLY
+    D_4029220, // THE_SKULL
+    D_401D220, // BLOOD_FALCON
 };
 
 UNUSED u32 D_8013F100 = 0x2800;
 
-TexturePtr D_i3_8013F104[] = {
+TexturePtr sPositionTextures[] = {
     D_4029A20, D_4029AE0, D_4029BA0, D_4029C60, D_4029D20, D_4029DE0,
 };
 
@@ -925,20 +952,21 @@ extern u8 D_4019CA0[];
 
 extern s32 gNumPlayers;
 
-Gfx* func_i3_80131DF4(Gfx* gfx) {
+Gfx* func_i3_DrawHUD(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_8014940);
 
     switch (gNumPlayers) {
         case 1:
+            // Time
             gDPPipeSync(gfx++);
-
             gDPLoadTextureBlock(gfx++, D_40131E0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 24, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
             gfx = func_i3_8012FE8C(gfx, 0, 0);
             gfx = func_i3_801353C0(gfx, 0, 0);
 
+            // Timer
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -950,18 +978,21 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_80134FFC(gfx, 0, 0);
             gfx = func_i3_80135598(gfx, 0, 0);
 
+            // Energy Bar
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_40134E0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 72, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
             gfx = func_i3_8013064C(gfx, 0, 0);
 
+            // Lap
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_303D1F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
             gfx = func_i3_80131A68(gfx, 0, 0);
 
+            // Lap Counter
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_4019CA0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 72, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -973,6 +1004,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_801345EC(gfx, 0, 0);
             break;
         case 2:
+            // Timer
             gDPPipeSync(gfx++);
             gDPSetTextureFilter(gfx++, G_TF_POINT);
 
@@ -984,6 +1016,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_80133D4C(gfx, 1, 0, 1.0f);
             gfx = func_i3_80133D4C(gfx, 1, 1, 1.0f);
 
+            // Energy Bar
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_40134E0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 72, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -991,6 +1024,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_8013064C(gfx, 1, 0);
             gfx = func_i3_8013064C(gfx, 1, 1);
 
+            // Lap
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_303D1F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -998,6 +1032,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_80131A68(gfx, 1, 0);
             gfx = func_i3_80131A68(gfx, 1, 1);
 
+            // Lap Counter
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_4019CA0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 72, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -1010,6 +1045,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_801340F4(gfx, 1, 1);
             break;
         case 3:
+            // Timer
             gDPPipeSync(gfx++);
             gDPSetTextureFilter(gfx++, G_TF_POINT);
             gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -1022,6 +1058,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_80133D4C(gfx, 2, 1, 0.75f);
             gfx = func_i3_80133D4C(gfx, 2, 2, 0.75f);
 
+            // Energy Bar
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_40134E0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 72, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -1030,6 +1067,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_8013064C(gfx, 2, 1);
             gfx = func_i3_8013064C(gfx, 2, 2);
 
+            // Lap
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_303D1F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -1038,6 +1076,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_80131A68(gfx, 2, 1);
             gfx = func_i3_80131A68(gfx, 2, 2);
 
+            // Lap Counter
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_4019CA0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 72, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -1053,6 +1092,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_801340F4(gfx, 2, 2);
             break;
         case 4:
+            // Timer
             gDPPipeSync(gfx++);
             gDPSetTextureFilter(gfx++, G_TF_POINT);
 
@@ -1068,6 +1108,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_80133D4C(gfx, 3, 2, 0.75f);
             gfx = func_i3_80133D4C(gfx, 3, 3, 0.75f);
 
+            // Energy Bar
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_40134E0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 72, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -1077,6 +1118,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_8013064C(gfx, 3, 2);
             gfx = func_i3_8013064C(gfx, 3, 3);
 
+            // Lap
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_303D1F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -1086,6 +1128,7 @@ Gfx* func_i3_80131DF4(Gfx* gfx) {
             gfx = func_i3_80131A68(gfx, 3, 2);
             gfx = func_i3_80131A68(gfx, 3, 3);
 
+            // Lap Counter
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, D_4019CA0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 72, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -1160,7 +1203,7 @@ void func_i3_80134CA0(void);
 
 Gfx* func_i3_80132EEC(Gfx* gfx) {
     s32 i;
-    s32 sp128;
+    s32 position;
     s32 var_s1;
     s32 var_s6;
     s32 var_s4;
@@ -1178,7 +1221,7 @@ Gfx* func_i3_80132EEC(Gfx* gfx) {
 
     func_i3_80132CD8();
 
-    for (sp128 = 0, i = 0; i < 6; i++, sp128++) {
+    for (position = 0, i = 0; i < 6; i++, position++) {
         if (D_800E5EC0 == i) {
             break;
         }
@@ -1186,7 +1229,7 @@ Gfx* func_i3_80132EEC(Gfx* gfx) {
         if ((D_800DCE44 == 2) || (D_800DCE44 == 0x15)) {
             racer = gRacers;
         } else {
-            racer = D_800E5F40[sp128];
+            racer = D_800E5F40[position];
         }
         if (i < 3) {
             var_fs1 = D_i3_80141E30[racer->unk_00];
@@ -1206,7 +1249,7 @@ Gfx* func_i3_80132EEC(Gfx* gfx) {
         }
         character = racer->character;
         gDPPipeSync(gfx++);
-        gDPLoadTextureBlock(gfx++, D_i3_8013F088[character], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+        gDPLoadTextureBlock(gfx++, sCharacterPortraitTextures[character], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
@@ -1220,7 +1263,7 @@ Gfx* func_i3_80132EEC(Gfx* gfx) {
 
         gDPPipeSync(gfx++);
 
-        gDPLoadTextureBlock(gfx++, D_i3_8013F104[sp128], G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 6, 0,
+        gDPLoadTextureBlock(gfx++, sPositionTextures[position], G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 6, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
         gSPTextureRectangle(gfx++, 24 << 2, D_i3_8013F4EC[i] << 2, (24 + 16) << 2, (D_i3_8013F4EC[i] + 6) << 2, 0, 0, 0,
