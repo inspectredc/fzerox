@@ -260,9 +260,6 @@ Gfx* func_8007870C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
     }
 }
 
-Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 arg2, s32 arg3, s32 arg4, u32 arg5, f32 arg6, f32 arg7, s32 arg8,
-                   s32 arg9, s32 argA, s32 argB, s32 argC);
-
 Gfx* func_800788A4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr texture, f32 arg5, f32 arg6) {
 
     switch (arg1->unk_00) {

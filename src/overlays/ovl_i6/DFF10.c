@@ -122,28 +122,28 @@ unk_80077D50* D_i6_8011DF78[] = {
 // 'OK?'
 unk_80077D50 D_i6_8011DF80[] = { { 17, D_F139710, 32, 16, 0x112 }, { 0 } };
 
-extern u32 D_800CCFE0;
+extern u32 gGameFrameCount;
 extern s16 D_800CCFE8;
-extern s32 D_800CD000;
+extern s32 gNumPlayers;
 extern u32 D_800CD384;
 
 void func_i6_80115DF0(void) {
     D_800CCFE8 = 3;
     D_800CD384 = 0;
-    D_800CD000 = 1;
-    if ((D_800CCFE0 % 4) == 0) {
+    gNumPlayers = 1;
+    if ((gGameFrameCount % 4) == 0) {
         func_800794B0(0x5E, 0, 0, 0);
     }
     func_800794B0(5, 0, 0, 1);
-    if ((D_800CCFE0 % 4) == 1) {
+    if ((gGameFrameCount % 4) == 1) {
         func_800794B0(0x5E, 0, 0, 0);
     }
     func_800794B0(0x50, 0, 0, 4);
-    if ((D_800CCFE0 % 4) == 2) {
+    if ((gGameFrameCount % 4) == 2) {
         func_800794B0(0x5E, 0, 0, 0);
     }
     func_800794B0(0x51, 0, 0, 10);
-    if ((D_800CCFE0 % 4) == 3) {
+    if ((gGameFrameCount % 4) == 3) {
         func_800794B0(0x5E, 0, 0, 0);
     }
     func_800794B0(0x52, 0, 0, 0xA);
@@ -164,8 +164,8 @@ extern unk_800DCE48 D_800DCE48;
 extern s32 D_800CD388[];
 extern char* D_800E4180[];
 
-extern s32 D_800CD000;
-extern s32 D_800CD008;
+extern s32 gNumPlayers;
+extern s32 gDifficulty;
 extern s16 D_800CD044;
 extern s16 D_800CD048;
 extern s32 D_800CD380;
@@ -174,7 +174,7 @@ extern s32 D_800CD394;
 extern s8 D_800CD3C0;
 extern s8 D_800CD3C8;
 extern s32 D_800DCE44;
-extern unk_800DCE98 D_800DD180;
+extern Controller D_800DD180;
 extern s32 D_800DD228;
 extern u16 D_800E416C;
 extern u16 D_800E416E;
@@ -244,7 +244,7 @@ s32 func_i6_80115FF0(void) {
 
             if (D_800E416E & (CONT_A | CONT_START)) {
                 func_800BA8D8(0x3E);
-                D_800DCE48.unk_10 = (func_80079E88(0x5E)->unk_1C & 0xFFFF) + 0xFFFF6686;
+                D_800DCE48.unk_10 = (func_80079E88(0x5E)->unk_1C & 0xFFFF) - 39290;
                 switch (D_800CD380) {
                     case 0:
                     case 1:
@@ -257,9 +257,9 @@ s32 func_i6_80115FF0(void) {
                         D_800CD384 = 5;
                         D_800F8514 = 0x36;
                         D_800E4178 = D_800E4180[D_800F8514];
-                        D_800CD000 = 1;
-                        func_800BB324(D_800CD000 - 1);
-                        D_800CD008 = D_800DCE48.unk_10 + 3;
+                        gNumPlayers = 1;
+                        func_800BB324(gNumPlayers - 1);
+                        gDifficulty = D_800DCE48.unk_10 + 3;
                         return 0x8008;
                     case 6:
                         D_800CD384 = 5;
@@ -319,7 +319,7 @@ s32 func_i6_80115FF0(void) {
                 D_800CD384 = 2;
                 switch (D_800CD380) {
                     case 3:
-                        D_800CD000 = D_800CD394 + 2;
+                        gNumPlayers = D_800CD394 + 2;
                         break;
                     case 1:
                         if (D_800CD38C != 0) {
@@ -327,19 +327,19 @@ s32 func_i6_80115FF0(void) {
                             D_800CD048 = 9;
                             func_800BA8D8(0x3E);
                         } else {
-                            D_800CD000 = 1;
+                            gNumPlayers = 1;
                         }
                         break;
                     case 0:
                     case 5:
-                        D_800CD000 = 1;
-                        D_800CD008 = D_800DCE48.unk_10 + D_800CD388[D_800CD380];
+                        gNumPlayers = 1;
+                        gDifficulty = D_800DCE48.unk_10 + D_800CD388[D_800CD380];
                         break;
                 }
             }
             break;
         case 2:
-            func_8006A918();
+            Math_Rand1();
             if (D_800E416E & CONT_B) {
                 func_800BA8D8(0x10);
                 switch (D_800CD380) {
@@ -360,7 +360,7 @@ s32 func_i6_80115FF0(void) {
             }
             if (D_800E416E & (CONT_A | CONT_START)) {
                 func_800BA8D8(0x3E);
-                func_800BB324((D_800CD000 - 1) & 0xFF);
+                func_800BB324((gNumPlayers - 1) & 0xFF);
                 switch (D_800CD380) {
                     case 0:
                     case 1:
@@ -508,7 +508,7 @@ void func_i6_80116A80(unk_800E3A28* arg0) {
     arg0->unk_1C = func_i6_8011DBD0();
 }
 
-extern u32 D_800CCFE0;
+extern u32 gGameFrameCount;
 extern s32 D_800CD380;
 Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
 
@@ -526,7 +526,7 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
 
     if (temp_t0 == D_800CD380) {
         if (D_800CD384 == 0) {
-            var_v1 = D_800CCFE0 % 30;
+            var_v1 = gGameFrameCount % 30;
 
             if (var_v1 >= 15) {
                 var_v1 = 30 - var_v1;
@@ -609,7 +609,7 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
                 arg1->unk_1C++;
 
                 for (i = 0; i <= 100; i++) {
-                    j = func_8006A918() % 240;
+                    j = Math_Rand1() % 240;
                     if (D_i6_8011F910[j] == 0) {
                         D_i6_8011F910[j] = 1;
                         alpha++;
@@ -980,7 +980,7 @@ void func_i6_80117DE0(unk_800E3A28* arg0) {
                 func_800BA8D8(0x2E);
                 sp1C = func_80079E88(0x50);
                 if (sp1C->unk_04 < 2) {
-                    sp1C->unk_04 = (func_8006A918() % 3) + (sp1C->unk_04 * 10) + 10;
+                    sp1C->unk_04 = (Math_Rand1() % 3) + (sp1C->unk_04 * 10) + 10;
                 }
             }
         } else {

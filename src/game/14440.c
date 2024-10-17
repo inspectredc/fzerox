@@ -161,12 +161,12 @@ Gfx* func_8007AF40(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, 
 }
 
 extern Gfx D_3000270[];
-extern u32 D_800CCFE0;
+extern u32 gGameFrameCount;
 
 Gfx* func_8007AFF4(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
     gSPDisplayList(gfx++, D_3000270);
     gSPTextureRectangle(gfx++, (left + 1) << 2, (top + 1) << 2, (right - 1) << 2, (bottom - 1) << 2, G_TX_RENDERTILE, 0,
-                        (D_800CCFE0 % 32) << 5, 1 << 10, 1 << 10);
+                        (gGameFrameCount % 32) << 5, 1 << 10, 1 << 10);
 
     return gfx;
 }
@@ -187,7 +187,164 @@ Gfx* func_8007B0A8(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007B14C.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007CDB0.s")
+extern Gfx D_3000050[];
+extern Gfx D_3000088[];
+extern Gfx D_3000100[];
+extern Gfx D_3000138[];
+
+Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u32 height, f32 arg6, f32 arg7,
+                   s32 format, s32 size, s32 argA, s32 argB, s32 argC) {
+    s32 i;
+    s32 numBlocks;
+    s32 blockHeight;
+    s32 blockWidth = width;
+    s32 pad[5];
+    s32 spE0;
+    s32 var_a0;
+    s32 dsdx;
+    s32 dtdy;
+    s32 var_t0;
+    s32 spCC;
+    s32 spC8;
+    s32 spC4;
+    s32 spC0;
+    f32 temp;
+    s32 sTemp = 1;
+
+    if (blockWidth & 3) {
+        return gfx;
+    }
+    if ((arg6 == 0.0) || (arg7 == 0.0)) {
+        return gfx;
+    }
+
+    switch (size) {
+        case G_IM_SIZ_4b:
+            var_t0 = G_IM_SIZ_4b_LOAD_BLOCK;
+            spC8 = G_IM_SIZ_4b_INCR;
+            spC4 = G_IM_SIZ_4b_SHIFT;
+            spC0 = G_IM_SIZ_4b_BYTES;
+            var_a0 = 0x1000;
+            break;
+        case G_IM_SIZ_8b:
+            var_t0 = G_IM_SIZ_8b_LOAD_BLOCK;
+            spCC = G_IM_SIZ_8b_LINE_BYTES;
+            spC8 = G_IM_SIZ_8b_INCR;
+            spC4 = G_IM_SIZ_8b_SHIFT;
+            spC0 = G_IM_SIZ_8b_BYTES;
+            var_a0 = 0x800;
+            break;
+        case G_IM_SIZ_16b:
+            var_t0 = G_IM_SIZ_16b_LOAD_BLOCK;
+            spCC = G_IM_SIZ_16b_LINE_BYTES;
+            spC8 = G_IM_SIZ_16b_INCR;
+            spC4 = G_IM_SIZ_16b_SHIFT;
+            spC0 = G_IM_SIZ_16b_BYTES;
+            var_a0 = 0x400;
+            break;
+        case G_IM_SIZ_32b:
+            var_t0 = G_IM_SIZ_32b_LOAD_BLOCK;
+            spCC = G_IM_SIZ_32b_LINE_BYTES;
+            spC8 = G_IM_SIZ_32b_INCR;
+            spC4 = G_IM_SIZ_32b_SHIFT;
+            spC0 = G_IM_SIZ_32b_BYTES;
+            var_a0 = 0x200;
+            break;
+        default:
+            return gfx;
+    }
+
+    if (argB == 0) {
+        blockHeight = var_a0 / blockWidth;
+        while (height < blockHeight / 2) {
+            blockHeight /= 2;
+        }
+    } else {
+        blockHeight = 1;
+    }
+
+    numBlocks = height / blockHeight;
+
+    if (argC != 0) {
+        dsdx = -0x400;
+        dtdy = 0x400;
+        spE0 = (blockWidth - sTemp) << 5;
+    } else {
+        dsdx = 0x400;
+        dtdy = 0x400;
+        spE0 = 0;
+    }
+
+    switch (argA) {
+        case 1:
+            gSPDisplayList(gfx++, D_3000088);
+            break;
+        case 2:
+            gSPDisplayList(gfx++, D_3000100);
+            break;
+        case 3:
+            gSPDisplayList(gfx++, D_3000138);
+            break;
+        case 0:
+        default:
+            gSPDisplayList(gfx++, D_3000050);
+            break;
+    }
+
+    dsdx /= arg6;
+    dtdy /= arg7;
+
+    gDPSetTextureImage(gfx++, format, var_t0, blockWidth, texture);
+
+    gDPSetTile(gfx++, format, var_t0, 0, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+
+    if (size == G_IM_SIZ_4b) {
+        gDPSetTile(gfx++, format, size, ((blockWidth >> 1) + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    } else {
+        gDPSetTile(gfx++, format, size, ((blockWidth * spCC) + 7) >> 3, 0, G_TX_RENDERTILE, 0,
+                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                   G_TX_NOLOD);
+    }
+
+    gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, 0, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                   (blockHeight - 1) << G_TEXTURE_IMAGE_FRAC);
+
+    temp = blockHeight * arg7;
+
+    for (i = 0; i < numBlocks; i++) {
+        gDPLoadSync(gfx++);
+        if (size == G_IM_SIZ_4b) {
+            gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight, ((blockWidth * blockHeight + spC8) >> spC4) - 1,
+                         CALC_DXT_4b(blockWidth));
+        } else {
+            gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight, ((blockWidth * blockHeight + spC8) >> spC4) - 1,
+                         CALC_DXT(blockWidth, spC0));
+        }
+
+        gSPScisTextureRectangle(
+            gfx++, left << 2, (top + (s32) (i * temp)) << 2, (left + (s32) (blockWidth * arg6)) << 2,
+            (top + (s32) ((i + 1) * (blockHeight * arg7))) << 2, G_TX_RENDERTILE, spE0, 0, dsdx, dtdy);
+    }
+
+    if (height % blockHeight) {
+        gDPLoadSync(gfx++);
+        if (size == G_IM_SIZ_4b) {
+            gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight,
+                         ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT_4b(blockWidth));
+        } else {
+            gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight,
+                         ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT(blockWidth, spC0));
+        }
+
+        gSPScisTextureRectangle(gfx++, left << 2, (top + (s32) (numBlocks * temp)) << 2,
+                                (left + (s32) (blockWidth * arg6)) << 2, (top + (s32) (height * arg7)) << 2,
+                                G_TX_RENDERTILE, spE0, 0, dsdx, dtdy);
+    }
+
+    return gfx;
+}
 
 #ifdef IMPORT_BSS
 extern char* D_800CD3D0[];
@@ -228,7 +385,7 @@ extern s16 D_800E416C;
 extern u16 D_800E416E;
 extern u16 D_800E4170;
 
-void func_8007DABC(unk_800DCE98* arg0) {
+void func_8007DABC(Controller* arg0) {
     D_800E416E = arg0->unk_7C | (arg0->unk_6F << 4);
     if (arg0->unk_82 != 0) {
         D_800E4170 = arg0->unk_7A | (arg0->unk_6E << 4);
@@ -238,7 +395,7 @@ void func_8007DABC(unk_800DCE98* arg0) {
     D_800E416C = D_800E416E | D_800E4170;
 }
 
-extern u32 D_800CCFE0;
+extern u32 gGameFrameCount;
 extern s32 D_800CD4E0[];
 
 Gfx* func_8007DB28(Gfx* gfx, s32 arg1) {
@@ -250,7 +407,7 @@ Gfx* func_8007DB28(Gfx* gfx, s32 arg1) {
     s32 temp_hi;
     s32* temp_a0;
 
-    temp_hi = ((D_800CCFE0 % 300) * 8) % 300;
+    temp_hi = ((gGameFrameCount % 300) * 8) % 300;
     temp_a2 = temp_hi % 100;
     temp_a3 = 100 - temp_a2;
     temp_a0 = &D_800CD4E0[((temp_hi / 100) % 3) * 3];
@@ -287,7 +444,7 @@ void func_8007DED8(void) {
 #endif
 
 extern s32 D_800CD004;
-extern s32 D_800CD008;
+extern s32 gDifficulty;
 extern s8 D_800E4174[4];
 
 extern s16 D_800E42CC;
@@ -303,7 +460,7 @@ void func_8007DEF0(void) {
             break;
         }
     }
-    var_a0 = D_800CD008 + 1;
+    var_a0 = gDifficulty + 1;
     if ((D_800CD004 >= 0) || (D_800CD004 < 4)) {
         if (var_a0 > 4) {
             var_a0 = 4;

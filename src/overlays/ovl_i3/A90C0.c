@@ -7,7 +7,7 @@ s32 D_80141900;
 s32 D_i3_80141904;
 s32 D_i3_80141908;
 s32 D_i3_8014190C;
-unk_802C4920* D_i3_80141910;
+Racer* D_i3_80141910;
 UNUSED s32 D_i3_80141914;
 s32 D_i3_80141918;
 s32 D_i3_8014191C;
@@ -155,21 +155,23 @@ unk_8013E7A8 D_i3_8013E7A8[] = {
     { 5, 0, { 255, 255, 255, 0, 3, 26, 11, 255, 255, 255, 255 } },
 };
 
-f32 func_i3_80115DF0(f32 arg0) {
-    if (arg0 < 0.0f) {
-        return 0.0f - arg0;
+// fabsf
+f32 func_i3_80115DF0(f32 num) {
+    if (num < 0.0f) {
+        return 0.0f - num;
     }
-    return arg0;
+    return num;
 }
 
-s32 func_i3_80115E1C(s32 arg0) {
-    if (arg0 < 0) {
-        return -arg0;
+// abs
+s32 func_i3_80115E1C(s32 num) {
+    if (num < 0) {
+        return -num;
     }
-    return arg0;
+    return num;
 }
 
-void func_i3_80115E34(unk_802C4920* arg0) {
+void func_i3_80115E34(Racer* arg0) {
 
     arg0->unk_34D = (arg0->unk_00 % 5) + 2;
     if ((arg0->unk_00 < 0xF) && (arg0->unk_34D == 2)) {
@@ -184,7 +186,7 @@ s16 D_i3_8013E94C[] = {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115E74.s")
 
-extern s32 D_800CD008;
+extern s32 gDifficulty;
 extern unk_800F8510* D_800F8510;
 extern s32 D_800F8514;
 
@@ -193,23 +195,23 @@ void func_i3_80116974(void) {
 
     if (D_800F8514 < 0x18) {
         if (func_i2_801037CC(&sp1C, D_800F8514) == 0) {
-            D_i3_80141990 = D_i3_8013E328[D_800F8514 * 4 + D_800CD008];
+            D_i3_80141990 = D_i3_8013E328[D_800F8514 * 4 + gDifficulty];
         } else {
-            D_i3_80141990 = 3600000 - 1;
+            D_i3_80141990 = MAX_TIMER;
         }
-        if (D_800CD008 >= 2) {
+        if (gDifficulty >= EXPERT) {
             if (D_800F8510->unk_20[0] < sp1C[2]) {
                 D_i3_80141990 = D_800F8510->unk_20[0] + (D_i3_80141990 - sp1C[2]);
             }
         }
     } else {
-        D_i3_80141990 = 3600000 - 1;
+        D_i3_80141990 = MAX_TIMER;
     }
     D_i3_80141994 = D_i3_80141990;
 }
 
 void func_i3_801175A4(void);
-extern s32 D_800CD000;
+extern s32 gNumPlayers;
 extern s32 D_800CD00C;
 extern s32 D_800E5EC0;
 
@@ -226,10 +228,10 @@ s32 D_i3_8013E9F0[] = {
     14700, 16160, 17680, 19260, 20900, 22600, 24360, 26180, 28060, 30000, 32000, 34060, 36180, 38360, 40600,
 };
 
-void func_i3_80116A50(unk_802C4920* arg0) {
+void func_i3_80116A50(Racer* arg0) {
     s32 var_s3;
     s32 i;
-    unk_802C4920* var_s0;
+    Racer* var_s0;
     f32 temp_ft3;
     f32 temp_fv0;
     f32 var_fs0;
@@ -237,7 +239,7 @@ void func_i3_80116A50(unk_802C4920* arg0) {
     temp_ft3 = D_800F8510->unk_0C * D_800CD00C;
 
     if (D_800E5EC0 < arg0->unk_368) {
-        for (i = D_800CD000, var_fs0 = temp_ft3, var_s3 = 0; i < D_800E5EC0; i++) {
+        for (i = gNumPlayers, var_fs0 = temp_ft3, var_s3 = 0; i < D_800E5EC0; i++) {
             var_s0 = &gRacers[i];
             if ((D_800E5EC0 >= var_s0->unk_368) && (arg0->unk_00 != var_s0->unk_00)) {
                 temp_fv0 = func_i3_80115DF0(arg0->unk_23C - var_s0->unk_23C);
@@ -254,8 +256,8 @@ void func_i3_80116A50(unk_802C4920* arg0) {
         func_i3_801175A4();
     }
 
-    arg0->unk_398 = D_i3_80141990 - ((temp_ft3 - arg0->unk_23C) / temp_ft3) * D_i3_8013E9E0[D_800CD008] +
-                    D_i3_8013E9F0[arg0->unk_368 + D_800CD008 * 30 - 1];
+    arg0->unk_398 = D_i3_80141990 - ((temp_ft3 - arg0->unk_23C) / temp_ft3) * D_i3_8013E9E0[gDifficulty] +
+                    D_i3_8013E9F0[arg0->unk_368 + gDifficulty * 30 - 1];
 }
 
 void func_i3_80116C4C(void) {
@@ -275,7 +277,7 @@ f32 D_i3_8013EC30[] = {
 extern s32 D_800CD004;
 extern s32 D_800DCE44;
 
-void func_i3_80116C74(unk_802C4920* arg0) {
+void func_i3_80116C74(Racer* arg0) {
     f32 var_fa0;
     s32 padC0[7];
     s32 sp48[30];
@@ -309,7 +311,7 @@ void func_i3_80116C74(unk_802C4920* arg0) {
         for (i = 0; i < 30; i++) {
             sp48[i] = 0xFF;
             for (j = 0; j < D_800E5EC0; j++) {
-                if (gRacers[j].unk_2C8 == i) {
+                if (gRacers[j].character == i) {
                     sp48[i] = j;
                     break;
                 }
@@ -350,10 +352,10 @@ void func_i3_80116C74(unk_802C4920* arg0) {
 
     arg0->unk_358 = 0xFFFF;
     arg0->unk_330 = 0.01f;
-    arg0->unk_334 = func_8006A918() % 32768 / 32767.0f * 20.0f + 350.0f;
-    arg0->unk_338 = func_8006A978() % 32768 / 32767.0f * 0.01f + 0.3f;
-    arg0->unk_354 = func_8006A918() % 32768 / 32767.0f + 5.0f;
-    arg0->unk_340 = func_8006A918() % 8 + 15;
+    arg0->unk_334 = Math_Rand1() % 32768 / 32767.0f * 20.0f + 350.0f;
+    arg0->unk_338 = Math_Rand2() % 32768 / 32767.0f * 0.01f + 0.3f;
+    arg0->unk_354 = Math_Rand1() % 32768 / 32767.0f + 5.0f;
+    arg0->unk_340 = Math_Rand1() % 8 + 15;
     arg0->unk_3A4 = 0;
     arg0->unk_39C = 0;
     arg0->unk_398 = 0;
@@ -369,19 +371,19 @@ void func_i3_80116C74(unk_802C4920* arg0) {
     arg0->unk_1EC = 2500.0f / 27.0f;
 
     if (D_800DCE44 == 1) {
-        arg0->unk_360 = D_i3_8013EBD0[D_i3_8013E7A8[arg0->unk_2C8].unk_02 * 4 + D_800CD008];
-        arg0->unk_364 = D_i3_8013EC30[D_i3_8013E7A8[arg0->unk_2C8].unk_02 * 4 + D_800CD008] + arg0->unk_360;
+        arg0->unk_360 = D_i3_8013EBD0[D_i3_8013E7A8[arg0->character].unk_02 * 4 + gDifficulty];
+        arg0->unk_364 = D_i3_8013EC30[D_i3_8013E7A8[arg0->character].unk_02 * 4 + gDifficulty] + arg0->unk_360;
     }
 
     arg0->unk_370 = 0;
     arg0->unk_33C = ((arg0->unk_24C.z.x * arg0->unk_0C.unk_28.x) + (arg0->unk_24C.z.y * arg0->unk_0C.unk_28.y) +
                      (arg0->unk_24C.z.z * arg0->unk_0C.unk_28.z)) *
                     -1.0f;
-    arg0->unk_340 = func_8006A978() % 2 + 1;
+    arg0->unk_340 = Math_Rand2() % 2 + 1;
 
-    arg0->unk_36C = D_i3_8013E7A8[arg0->unk_2C8].unk_00;
+    arg0->unk_36C = D_i3_8013E7A8[arg0->character].unk_00;
 
-    if (D_i3_8013E7A8[arg0->unk_2C8].unk_02 < 2) {
+    if (D_i3_8013E7A8[arg0->character].unk_02 < 2) {
         arg0->unk_36C |= 0x200;
     }
 
@@ -395,18 +397,18 @@ void func_i3_80116C74(unk_802C4920* arg0) {
         arg0->unk_1EC = 2500.0f / 27.0f;
         arg0->unk_1E8 = 0.0f;
         arg0->unk_330 = 0.01f;
-        arg0->unk_334 = func_8006A918() % 32768 / 32767.0f * 20.0f + 500.0f;
+        arg0->unk_334 = Math_Rand1() % 32768 / 32767.0f * 20.0f + 500.0f;
     }
 
-    if (arg0->unk_00 >= D_800CD000) {
+    if (arg0->unk_00 >= gNumPlayers) {
         if (D_800F8514 < 0x18) {
             if (D_800E5EC0 >= arg0->unk_368) {
-                arg0->unk_39C = D_i3_8013E4A8[D_800F8514 * 4 + D_800CD008] +
-                                D_i3_8013E628[D_800F8514 * 4 + D_800CD008] * (arg0->unk_368 - 1);
+                arg0->unk_39C = D_i3_8013E4A8[D_800F8514 * 4 + gDifficulty] +
+                                D_i3_8013E628[D_800F8514 * 4 + gDifficulty] * (arg0->unk_368 - 1);
             }
         }
         if ((D_i3_80141910->unk_2AC == arg0->unk_2AC - 4) || (D_i3_80141910->unk_2AC == (arg0->unk_2AC + 4)) ||
-            (D_800CD000 >= 2)) {
+            (gNumPlayers >= 2)) {
             var_fa0 = D_i3_80141910->unk_1A8;
             if (var_fa0 > 0.95f) {
                 var_fa0 = 0.95f;
@@ -415,8 +417,8 @@ void func_i3_80116C74(unk_802C4920* arg0) {
                 var_fa0 = 0.0f;
             }
             arg0->unk_1A8 = var_fa0;
-        } else if ((D_800CD008 == 3) && (D_i3_8013E94C[D_800F8514] != 0)) {
-            var_fa0 = (func_8006A918() % 256 / 255.0f + 10.0f) / 14.0f;
+        } else if ((gDifficulty == MASTER) && (D_i3_8013E94C[D_800F8514] != 0)) {
+            var_fa0 = (Math_Rand1() % 256 / 255.0f + 10.0f) / 14.0f;
             if (var_fa0 > 0.95f) {
                 var_fa0 = 0.95f;
             }
@@ -426,7 +428,7 @@ void func_i3_80116C74(unk_802C4920* arg0) {
             arg0->unk_1A8 = func_8008960C(var_fa0);
         } else {
             var_fa0 = D_i3_80141910->unk_1A8;
-            var_fa0 += func_8006A978() % 32768 / 32767.0f * 0.2f - 0.1f;
+            var_fa0 += Math_Rand2() % 32768 / 32767.0f * 0.2f - 0.1f;
             if (var_fa0 > 0.95f) {
                 var_fa0 = 0.95f;
             }
@@ -444,7 +446,7 @@ void func_i3_80116C74(unk_802C4920* arg0) {
             }
         }
         if (D_800DCE44 == 0x15) {
-            arg0->unk_1A8 = (func_8006A918() % 256 / 255.0f) * 0.2f;
+            arg0->unk_1A8 = (Math_Rand1() % 256 / 255.0f) * 0.2f;
         }
         arg0->unk_1EC = 2500.0f / 27.0f;
         arg0->unk_1E8 = 0.0f;
@@ -453,7 +455,7 @@ void func_i3_80116C74(unk_802C4920* arg0) {
 
 extern s32 D_800CD00C;
 extern s16 D_80115DE0;
-extern unk_802C4920* D_800E5F40[];
+extern Racer* D_800E5F40[];
 
 void func_i3_801175A4(void) {
     f32 temp_fv0;
@@ -483,9 +485,9 @@ void func_i3_801175A4(void) {
 
         if (var_t0 != 0) {
             if (D_800CD004 == 5) {
-                var_v0_2 = D_i3_8013DC04[D_800CD008] * ((f32) (s32) ((f32) var_a3 / var_t0) * D_800CD00C);
+                var_v0_2 = D_i3_8013DC04[gDifficulty] * ((f32) (s32) ((f32) var_a3 / var_t0) * D_800CD00C);
             } else {
-                var_v0_2 = D_i3_8013DBF0[D_800CD008] * ((f32) (s32) ((f32) var_a3 / var_t0) * D_800CD00C);
+                var_v0_2 = D_i3_8013DBF0[gDifficulty] * ((f32) (s32) ((f32) var_a3 / var_t0) * D_800CD00C);
             }
             if (var_v0_2 < D_i3_80141994) {
                 D_i3_80141990 = var_v0_2;
@@ -538,16 +540,16 @@ void func_i3_801175A4(void) {
     }
 }
 
-f32 func_i3_801179DC(unk_802C4920* arg0) {
-    return D_i3_8013DC18[D_800F8514 * 4 + D_800CD008] * (2500.0f / 27.0f);
+f32 func_i3_801179DC(Racer* arg0) {
+    return D_i3_8013DC18[D_800F8514 * 4 + gDifficulty] * (2500.0f / 27.0f);
 }
 
-f32 func_i3_80117A1C(unk_802C4920* arg0) {
-    return D_i3_8013DFA0[D_800F8514 * 4 + D_800CD008];
+f32 func_i3_80117A1C(Racer* arg0) {
+    return D_i3_8013DFA0[D_800F8514 * 4 + gDifficulty];
 }
 
-void func_i3_80117A4C(unk_802C4920* arg0, s32 arg1) {
-    unk_802C4920* temp_v0 = &gRacers[arg1];
+void func_i3_80117A4C(Racer* arg0, s32 arg1) {
+    Racer* temp_v0 = &gRacers[arg1];
 
     if ((arg0->unk_368 < D_800E5EC0) && (arg1 < D_800E5EC0)) {
         if (temp_v0->unk_368 < D_800E5EC0) {
@@ -564,34 +566,34 @@ void func_i3_80117A4C(unk_802C4920* arg0, s32 arg1) {
     }
 }
 
-void func_i3_80117B04(unk_802C4920* arg0, unk_800DCE98* arg1) {
+void func_i3_80117B04(Racer* arg0, Controller* arg1) {
 }
 
-void func_i3_80117B10(unk_802C4920* arg0, unk_800DCE98* arg1) {
+void func_i3_80117B10(Racer* arg0, Controller* arg1) {
     func_i3_80117A4C(arg0, D_i3_80141960);
 }
 
-void func_i3_80117B38(unk_802C4920* arg0, unk_800DCE98* arg1) {
+void func_i3_80117B38(Racer* arg0, Controller* arg1) {
     func_i3_80117A4C(arg0, D_i3_80141944);
 }
 
-void func_i3_80117B60(unk_802C4920* arg0, unk_800DCE98* arg1) {
+void func_i3_80117B60(Racer* arg0, Controller* arg1) {
     func_i3_80117A4C(arg0, D_i3_80141940);
 }
 
-void func_i3_80117B88(unk_802C4920* arg0, unk_800DCE98* arg1) {
+void func_i3_80117B88(Racer* arg0, Controller* arg1) {
     if ((arg0->unk_2B4 != 0) && (D_i3_80141910->unk_23C < arg0->unk_23C) && (arg0->unk_04 & 0x04000000)) {
         arg1->unk_7C |= 0x80;
     }
 }
 
-void func_i3_80117BD8(unk_802C4920* arg0, unk_800DCE98* arg1) {
+void func_i3_80117BD8(Racer* arg0, Controller* arg1) {
 }
 
-void func_i3_80117BE4(unk_802C4920* arg0, unk_800DCE98* arg1) {
+void func_i3_80117BE4(Racer* arg0, Controller* arg1) {
 }
 
-void (*D_i3_8013EC90[])(unk_802C4920*, unk_800DCE98*) = {
+void (*D_i3_8013EC90[])(Racer*, Controller*) = {
     func_i3_80117B04, func_i3_80117B04, func_i3_80117B04, func_i3_80117B04, func_i3_80117B04, func_i3_80117B04,
     func_i3_80117BE4, func_i3_80117B04, func_i3_80117B04, func_i3_80117B04, func_i3_80117B04, func_i3_80117B04,
     func_i3_80117B04, func_i3_80117B04, func_i3_80117B04, func_i3_80117B04, func_i3_80117BD8, func_i3_80117B04,
@@ -605,7 +607,7 @@ f32 D_i3_8013ED10[] = { 0.0f, 138.0f, 138.0f };
 
 f32 D_i3_8013ED1C[] = { 0.0f, 2.0f, -2.0f };
 
-extern u32 D_800CCFE0;
+extern u32 gGameFrameCount;
 extern s32 D_800CD00C;
 extern s8 D_800CD010;
 extern s32 D_800F80A8;
@@ -613,7 +615,7 @@ extern unk_8010B7B0 D_8010B7B0;
 
 #ifdef NON_MATCHING
 // regalloc (0.0f vs 0.f vs 0?) and missing branch instruction
-void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
+void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     f32 spBC;
     s32 temps;
     f32 spB4;
@@ -636,13 +638,13 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
     bool sp70;
     Mtx3F sp4C;
     f32 temp3;
-    unk_802C4920* sp44;
-    unk_802C4920* sp40;
+    Racer* sp44;
+    Racer* sp40;
 
-    if ((arg0->unk_00 & 3) != (D_800CCFE0 % 4) && (D_800DCE44 != 0x11)) {
+    if ((arg0->unk_00 & 3) != (gGameFrameCount % 4) && (D_800DCE44 != 0x11)) {
         arg1->unk_7E = 0;
-        arg1->unk_6C = arg0->unk_374;
-        arg1->unk_6D = arg0->unk_378;
+        arg1->stickX = arg0->unk_374;
+        arg1->stickY = arg0->unk_378;
         arg1->unk_7C = 0;
         arg1->unk_7A = arg0->unk_380;
         return;
@@ -661,15 +663,15 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
         arg0->unk_1F8 = 10.0f;
         arg0->unk_1E0 = 0.108f;
         arg0->unk_1E4 = 0.06f;
-        if (arg0->unk_00 >= D_800CD000) {
+        if (arg0->unk_00 >= gNumPlayers) {
             arg0->unk_1AC = 0.f;
         }
     }
     if ((D_800DCE44 == 3) || (D_800DCE44 == 4)) {
-        if (arg0->unk_00 >= D_800CD000) {
-            if (D_800CD000 == 3) {
+        if (arg0->unk_00 >= gNumPlayers) {
+            if (gNumPlayers == 3) {
                 var_a1 = 0x1E;
-                for (i = 0; i < D_800CD000; i++) {
+                for (i = 0; i < gNumPlayers; i++) {
                     if (gRacers[i].unk_2AC < var_a1) {
                         var_a1 = gRacers[i].unk_2AC;
                         var_a3 = i;
@@ -707,8 +709,8 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
             arg0->unk_1EC = func_i3_801179DC(arg0);
             arg0->unk_1E8 = func_i3_80117A1C(arg0);
         }
-    } else if (((D_800CD000 == 1) && (D_i3_80141910->unk_04 & 0x02000000)) || (arg0->unk_04 & 0x02000000) ||
-               (arg0->unk_00 < D_800CD000)) {
+    } else if (((gNumPlayers == 1) && (D_i3_80141910->unk_04 & 0x02000000)) || (arg0->unk_04 & 0x02000000) ||
+               (arg0->unk_00 < gNumPlayers)) {
         arg0->unk_1E8 = 0.f;
         arg0->unk_1EC = (2500.0f / 27.0f);
         arg0->unk_1B4 = 1.00894f;
@@ -717,7 +719,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
         arg0->unk_1BC = 36.769516f;
         arg0->unk_1C4 = 1.726068f;
         arg0->unk_1D0 = 0.198282f;
-        if ((D_800CD000 == 1) && (D_800E5EC0 != 1) && (arg0->unk_00 != 0) && (D_i3_80141910->unk_04 & 0x02000000)) {
+        if ((gNumPlayers == 1) && (D_800E5EC0 != 1) && (arg0->unk_00 != 0) && (D_i3_80141910->unk_04 & 0x02000000)) {
             if ((sp44->unk_00 == 0) && (arg0->unk_2C0 < 2000.0f)) {
                 arg0->unk_1EC = (625.0f / 27.0f);
             } else if ((sp40->unk_00 == 0) && (arg0->unk_2C4 < 2000.0f)) {
@@ -728,16 +730,16 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
     } else if ((arg0->unk_274 + arg0->unk_270) < 184.0f) {
         arg0->unk_1E8 = 0.f;
         arg0->unk_1EC = (2500.0f / 27.0f);
-    } else if (D_800CD000 == 1) {
+    } else if (gNumPlayers == 1) {
         if (arg0->unk_352 != 0xFF) {
             spBC = (gRacers[arg0->unk_352].unk_23C + arg0->unk_38C) - arg0->unk_23C;
             func_i3_80115DF0(D_i3_80141910->unk_23C - arg0->unk_23C);
             if ((func_i3_80115DF0(spBC) < 460.0f) && sp70 && (arg0->unk_2A0 > 1000)) {
-                if ((arg0->unk_352 >= D_800CD000) && ((arg0->unk_00 + D_800CCFE0) % 16) < 4) {
+                if ((arg0->unk_352 >= gNumPlayers) && ((arg0->unk_00 + gGameFrameCount) % 16) < 4) {
                     spB4 = ((-gRacers[arg0->unk_352].unk_0C.unk_28.x * gRacers[arg0->unk_352].unk_24C.z.x) -
                             (gRacers[arg0->unk_352].unk_0C.unk_28.y * gRacers[arg0->unk_352].unk_24C.z.y)) -
                            (gRacers[arg0->unk_352].unk_0C.unk_28.z * gRacers[arg0->unk_352].unk_24C.z.z);
-                    if (func_8006A978() % 2) {
+                    if (Math_Rand2() % 2) {
                         arg0->unk_33C = spB4 + 23.0f;
                     } else {
                         arg0->unk_33C = spB4 - 23.0f;
@@ -752,7 +754,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
             arg0->unk_1E8 = 1.2f;
             if (sp70 && (arg0->unk_2A0 > 1000) && ((arg0->unk_274 + arg0->unk_270) > 138.0f) &&
                 (func_i3_80115DF0(gRacers[arg0->unk_352].unk_23C - arg0->unk_23C) < 184.0f)) {
-                spB4 = ((f32) (func_8006A918() % 32768) / 32767.0f) + 0.00001f;
+                spB4 = ((f32) (Math_Rand1() % 32768) / 32767.0f) + 0.00001f;
 
                 if (func_i3_80115DF0(gRacers[arg0->unk_352].unk_33C - arg0->unk_33C) < 92.0f) {
                     if (((arg0->unk_352 != 0) && (spB4 < 0.15f) && (arg0->unk_36C & 0x200)) || (spB4 < arg0->unk_360)) {
@@ -765,9 +767,9 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                         }
                     } else if ((((arg0->unk_352 != 0) && (spB4 < 0.2f) && (arg0->unk_36C & 0x200)) ||
                                 (spB4 < arg0->unk_364)) &&
-                               (((D_800CD008 >= 2) && (D_i3_80141910->unk_23C < arg0->unk_23C)) ||
+                               (((gDifficulty >= EXPERT) && (D_i3_80141910->unk_23C < arg0->unk_23C)) ||
                                 ((D_i3_80141910->unk_23C + 138.0f) < arg0->unk_23C))) {
-                        if (func_8006A978() % 2) {
+                        if (Math_Rand2() % 2) {
                             arg1->unk_7C |= 0x80;
                         } else {
                             arg1->unk_7C |= 0x40;
@@ -785,10 +787,10 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                     arg0->unk_1E8 = var_fv0;
                 }
             }
-            if ((u32) (u8) (arg0->unk_00 + D_800CCFE0) < 4) {
-                if (arg0->unk_352 < D_800CD000) {
+            if ((u32) (u8) (arg0->unk_00 + gGameFrameCount) < 4) {
+                if (arg0->unk_352 < gNumPlayers) {
                     arg0->unk_38C =
-                        ((func_8006A978() % 32768 / 32767.0f * 400.0f + 30.0f) + 200.0f) - (80 * -D_800CD008 + 240);
+                        ((Math_Rand2() % 32768 / 32767.0f * 400.0f + 30.0f) + 200.0f) - (80 * -gDifficulty + 240);
                 } else {
                     arg0->unk_38C = 30.0f;
                 }
@@ -803,7 +805,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                 }
             }
         } else if ((arg0->unk_2A8 >= 2) || (D_800CD010 == 1)) {
-            if ((arg0->unk_398 == 0) || ((u32) (arg0->unk_00 + D_800CCFE0) % 64) < 4) {
+            if ((arg0->unk_398 == 0) || ((u32) (arg0->unk_00 + gGameFrameCount) % 64) < 4) {
                 func_i3_80116A50(arg0);
             }
 
@@ -854,7 +856,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
     if (D_i3_8013DBE8[var_a3] < arg0->unk_1EC) {
         arg0->unk_1EC = D_i3_8013DBE8[var_a3];
     }
-    if (((D_80141900 >= 0x15) || (D_800F80A8 >= 0x1F)) && (D_800CD000 == 1) && (arg0->unk_00 != 0) &&
+    if (((D_80141900 >= 0x15) || (D_800F80A8 >= 0x1F)) && (gNumPlayers == 1) && (arg0->unk_00 != 0) &&
         (arg0->unk_2A0 >= 0x2711) && !(D_i3_80141910->unk_04 & 0x08000000) &&
         (func_i3_80115DF0(D_i3_80141910->unk_33C - sp94) < 138.0f)) {
 
@@ -871,7 +873,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
             var_fv0 = 0.0f - var_fv0;
         }
         if (var_fv0 < 500.0f) {
-            if (func_8006A918() % 2) {
+            if (Math_Rand1() % 2) {
                 arg1->unk_7C |= 0x80;
             } else {
                 arg1->unk_7C |= 0x40;
@@ -924,15 +926,15 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                                       (arg0->unk_0C.unk_28.z * arg0->unk_24C.z.z))) *
                     1.2f;
             temp1 += (arg0->unk_334 * ((temp4 * sp4C.z.x) + (temp5 * sp4C.z.y) + (temp6 * sp4C.z.z)) * 1.2f);
-            var_a3 = func_8006A9E0(temp1);
+            var_a3 = Math_Round(temp1);
         } else if (!sp74) {
-            var_a3 = func_8006A9E0(-arg0->unk_334 * ((arg0->unk_C0.z.x * sp4C.x.x) + (arg0->unk_C0.z.y * sp4C.x.y) +
-                                                     (arg0->unk_C0.z.z * sp4C.x.z)));
-            if (!(func_8006A978() % 64)) {
-                if (func_8006A918() % 2) {
-                    arg0->unk_370 = (func_8006A978() % 16) + 20;
+            var_a3 = Math_Round(-arg0->unk_334 * ((arg0->unk_C0.z.x * sp4C.x.x) + (arg0->unk_C0.z.y * sp4C.x.y) +
+                                                  (arg0->unk_C0.z.z * sp4C.x.z)));
+            if (!(Math_Rand2() % 64)) {
+                if (Math_Rand1() % 2) {
+                    arg0->unk_370 = (Math_Rand2() % 16) + 20;
                 } else {
-                    arg0->unk_370 = -20 - (func_8006A918() % 16);
+                    arg0->unk_370 = -20 - (Math_Rand1() % 16);
                 }
             }
 
@@ -943,12 +945,12 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
         } else {
             arg0->unk_370 = 0;
             temp1 = (arg0->unk_338 * DOT_XYZ(&arg0->unk_C0.z, &arg0->unk_24C.y) * 160.0f);
-            var_a3 = func_8006A9E0(temp1 - (arg0->unk_334 * 0.5f *
-                                            ((arg0->unk_C0.z.x * sp4C.x.x) + (arg0->unk_C0.z.y * -sp4C.x.y) +
-                                             (arg0->unk_C0.z.z * sp4C.x.z))));
+            var_a3 = Math_Round(temp1 - (arg0->unk_334 * 0.5f *
+                                         ((arg0->unk_C0.z.x * sp4C.x.x) + (arg0->unk_C0.z.y * -sp4C.x.y) +
+                                          (arg0->unk_C0.z.z * sp4C.x.z))));
         }
         if (arg0->unk_04 & 0x04000000) {
-            var_a1 = func_8006A9E0(-arg0->unk_334 * 0.1f * DOT_XYZ(&arg0->unk_C0.y, &sp4C.x));
+            var_a1 = Math_Round(-arg0->unk_334 * 0.1f * DOT_XYZ(&arg0->unk_C0.y, &sp4C.x));
 
             if (D_800F8514 == 0xC) {
                 if ((arg0->unk_0C.unk_00->unk_30 >= 7) && (arg0->unk_0C.unk_00->unk_30 < 0xF)) {
@@ -997,23 +999,23 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
             var_a3 = 0x46;
             arg1->unk_7A |= 0x10;
         }
-        arg1->unk_6C = (var_a3 * 5) / 8;
-        arg1->unk_6D = var_a1;
-        if (D_800CD000 == 1) {
-            if (sp70 && (arg0->unk_2A0 > 1000) && (D_800CD008 >= 2) && (arg0->unk_00 != 0) && (D_800E5EC0 != 1) &&
+        arg1->stickX = (var_a3 * 5) / 8;
+        arg1->stickY = var_a1;
+        if (gNumPlayers == 1) {
+            if (sp70 && (arg0->unk_2A0 > 1000) && (gDifficulty >= EXPERT) && (arg0->unk_00 != 0) && (D_800E5EC0 != 1) &&
                 (arg0->unk_36C & 0x200)) {
                 if ((arg0->unk_2C4 < 23.0f) &&
-                    (((D_800CD008 >= 2) && (D_i3_80141910->unk_23C < arg0->unk_23C)) ||
+                    (((gDifficulty >= EXPERT) && (D_i3_80141910->unk_23C < arg0->unk_23C)) ||
                      ((D_i3_80141910->unk_23C + 138.0f) < arg0->unk_23C)) &&
-                    ((func_8006A978() % 32768) < 16)) {
-                    if (func_8006A978() % 2) {
+                    ((Math_Rand2() % 32768) < 16)) {
+                    if (Math_Rand2() % 2) {
                         arg1->unk_7C |= 0x80;
                     } else {
                         arg1->unk_7C |= 0x40;
                     }
                 }
                 if ((arg0->unk_2C4 < 23.0f) && (func_i3_80115DF0(sp40->unk_33C - arg0->unk_33C) < 138.0f) &&
-                    (arg0->unk_390 == 0) && (((f32) (func_8006A918() % 32768) / 32767.0f) < 0.01f)) {
+                    (arg0->unk_390 == 0) && (((f32) (Math_Rand1() % 32768) / 32767.0f) < 0.01f)) {
                     if (arg0->unk_33C < sp40->unk_33C) {
                         arg0->unk_390 = 5;
                     } else {
@@ -1025,19 +1027,19 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
             if (arg0->unk_390 < 0) {
                 arg0->unk_390++;
                 if (((arg0->unk_390 == -3) || (arg0->unk_390 == -1)) &&
-                    ((D_800CD008 >= 2) || (func_i3_80115DF0(D_i3_80141910->unk_23C - arg0->unk_23C) > 184.0f)) &&
+                    ((gDifficulty >= EXPERT) || (func_i3_80115DF0(D_i3_80141910->unk_23C - arg0->unk_23C) > 184.0f)) &&
                     (D_i3_80141910->unk_23C < arg0->unk_23C)) {
                     arg1->unk_7C |= 0x2000;
                 }
             } else if (arg0->unk_390 > 0) {
                 arg0->unk_390--;
                 if (((arg0->unk_390 == 3) || (arg0->unk_390 == 1)) &&
-                    ((D_800CD008 >= 2) || ((arg0->unk_23C - D_i3_80141910->unk_23C) > 184.0f)) &&
+                    ((gDifficulty >= EXPERT) || ((arg0->unk_23C - D_i3_80141910->unk_23C) > 184.0f)) &&
                     (D_i3_80141910->unk_23C < arg0->unk_23C)) {
                     arg1->unk_7C |= 0x10;
                 }
             }
-            if (!(func_8006A978() % 2048)) {
+            if (!(Math_Rand2() % 2048)) {
                 arg0->unk_36C &= ~0xC00;
             }
         }
@@ -1056,7 +1058,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
             arg0->unk_346 = D_8010B7B0.unk_620[var_a3];
             arg0->unk_347 = D_8010B7B0.unk_660[var_a3];
             arg0->unk_348 = D_8010B7B0.unk_5A0[var_a3];
-            if (D_800CD008 >= 2) {
+            if (gDifficulty >= EXPERT) {
                 arg0->unk_349 = D_8010B7B0.unk_5E0[var_a3];
             } else {
                 arg0->unk_349 = -1;
@@ -1092,19 +1094,19 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
         if (arg0->unk_36C & 0x800) {
             var_a3 = (arg0->unk_0C.unk_00->unk_20 & 0x1C0);
             if ((var_a3 == 0x80) || (var_a3 == 0xC0)) {
-                if (arg0->unk_2C8 & 1) {
-                    arg1->unk_6C += 0x2A;
-                    if (arg1->unk_6C >= 0x47) {
-                        arg1->unk_6C = 0x46;
+                if (arg0->character & 1) {
+                    arg1->stickX += 42;
+                    if (arg1->stickX > 70) {
+                        arg1->stickX = 70;
                     }
                 } else {
-                    arg1->unk_6C -= 0x2A;
-                    if (arg1->unk_6C < -0x46) {
-                        arg1->unk_6C = -0x46;
+                    arg1->stickX -= 42;
+                    if (arg1->stickX < -70) {
+                        arg1->stickX = -70;
                     }
                 }
             } else {
-                var_a3 = (u32) ((arg0->unk_2C8 * 5) + D_800CCFE0) % 280U;
+                var_a3 = (u32) ((arg0->character * 5) + gGameFrameCount) % 280U;
                 if (var_a3 >= 0x8D) {
                     var_a3 = -var_a3;
                 }
@@ -1114,9 +1116,9 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                 if (var_a3 < -0x46) {
                     var_a3 = -0x8C - var_a3;
                 }
-                arg1->unk_6C = var_a3;
+                arg1->stickX = var_a3;
                 if (D_i3_80141910->unk_23C < arg0->unk_23C) {
-                    if (func_8006A978() % 2) {
+                    if (Math_Rand2() % 2) {
                         arg1->unk_7C |= 0x80;
                     } else {
                         arg1->unk_7C |= 0x40;
@@ -1129,7 +1131,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                 if ((D_800F8514 < 0x18) && (((arg0->unk_2A0 >= 0x7D1) &&
                                              (((arg0->unk_368 % 6) < 2) ||
                                               (func_i3_80115DF0(arg0->unk_23C - D_i3_80141910->unk_23C) > 5000.0f))) ||
-                                            (arg0->unk_00 < D_800CD000))) {
+                                            (arg0->unk_00 < gNumPlayers))) {
                     var_a3 = arg0->unk_0C.unk_00->unk_30 * 4;
                     if (arg0->unk_0C.unk_08 >= 0.5f) {
                         var_a3 += 2;
@@ -1156,7 +1158,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                     } else {
                         arg0->unk_33C = spBC;
                     }
-                    if ((var_a3 != arg0->unk_358) && (sp7C & 1) && (arg0->unk_00 < D_800CD000)) {
+                    if ((var_a3 != arg0->unk_358) && (sp7C & 1) && (arg0->unk_00 < gNumPlayers)) {
                         var_fv0 = arg0->unk_228 / arg0->unk_22C;
                         if (var_fv0 > 0.3f) {
                             arg1->unk_7C |= 0xC000;
@@ -1210,7 +1212,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
 
                             if ((arg0->unk_348 == 1) && (var_fv0 < 0.99f)) {
                                 arg0->unk_33C = sp94;
-                                if ((D_800DCE44 == 0x15) && (arg0->unk_00 >= D_800CD000)) {
+                                if ((D_800DCE44 == 0x15) && (arg0->unk_00 >= gNumPlayers)) {
                                     if (arg0->unk_33C < ((sp9C - 100.0f) + 46.0f)) {
                                         arg0->unk_33C += (arg0->unk_354 * 10.0f);
                                     }
@@ -1406,8 +1408,8 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                                 }
                             }
 
-                            if ((arg0->unk_2A0 >= 0x7D1) && !(func_8006A918() & 0x7F0)) {
-                                if (!(func_8006A918() % 2)) {
+                            if ((arg0->unk_2A0 >= 0x7D1) && !(Math_Rand1() & 0x7F0)) {
+                                if (!(Math_Rand1() % 2)) {
                                     arg0->unk_33C -= 46.0f;
                                 } else {
                                     arg0->unk_33C += 46.0f;
@@ -1418,8 +1420,8 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                 }
             }
         }
-        D_i3_8013EC90[arg0->unk_2C8](arg0, arg1);
-        if ((D_800CD000 == 1) && (arg0->unk_00 != 0)) {
+        D_i3_8013EC90[arg0->character](arg0, arg1);
+        if ((gNumPlayers == 1) && (arg0->unk_00 != 0)) {
             var_fv0 = arg0->unk_23C - D_i3_80141910->unk_23C;
             if ((var_fv0 > -230.0f) && (var_fv0 < -11.5f) &&
                 (func_i3_80115DF0(sp94 - D_i3_80141910->unk_33C) < 92.0f)) {
@@ -1475,7 +1477,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                 }
             }
         }
-        if ((D_800CD000 == 1) && (arg0->unk_00 != 0)) {
+        if ((gNumPlayers == 1) && (arg0->unk_00 != 0)) {
             var_fv0 = D_i3_80141910->unk_23C - arg0->unk_23C;
             if ((var_fv0 > 0.0f) && (var_fv0 < spBC) &&
                 (func_i3_80115DF0(D_i3_80141910->unk_33C - arg0->unk_33C) < 69.0f)) {
@@ -1489,7 +1491,7 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
         }
         if ((arg0->unk_04 & 0x02000000) || (D_800DCE44 == 0x11)) {
             arg0->unk_36C &= ~0xA00;
-            if (arg0->unk_00 < D_800CD000) {
+            if (arg0->unk_00 < gNumPlayers) {
                 arg1->unk_7C &= ~0x4000;
             }
             if (D_i3_80141908 != 0) {
@@ -1522,13 +1524,13 @@ void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1) {
                 arg1->unk_7E &= 0x7FFF;
             }
         }
-        arg0->unk_374 = arg1->unk_6C;
-        arg0->unk_378 = arg1->unk_6D;
+        arg0->unk_374 = arg1->stickX;
+        arg0->unk_378 = arg1->stickY;
         arg0->unk_37C = arg1->unk_7C;
         arg0->unk_380 = arg1->unk_7A;
     }
 }
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80117BF0.s")
-void func_i3_80117BF0(unk_802C4920* arg0, unk_800DCE98* arg1);
+void func_i3_80117BF0(Racer* arg0, Controller* arg1);
 #endif

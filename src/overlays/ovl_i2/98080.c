@@ -37,7 +37,7 @@ void func_i2_800FC730(void) {
 s32 func_i2_800FCB84(s32, s32);
 void func_i2_800FCD38(s32, s32);
 s32 func_i2_800FCD4C(s32, s32);
-extern s32 D_800CD000;
+extern s32 gNumPlayers;
 extern s16 D_800CD044;
 extern s32 D_800DCE44;
 extern s32 D_i2_80106DA4;
@@ -66,7 +66,7 @@ void func_i2_800FC77C(void) {
             func_i2_800FCB84(0, 5);
             break;
         case 0x8008:
-            if (D_800CD000 == 1) {
+            if (gNumPlayers == 1) {
                 func_i2_800FCB84(0, 10);
                 break;
             }
@@ -192,20 +192,20 @@ s32 func_i2_800FCD4C(s32 arg0, s32 arg1) {
     s32 var_v0;
 
     if (arg0 == 0) {
-        temp = (func_8006A918() % 8);
+        temp = (Math_Rand1() % 8);
         if (arg1 != 0) {
             if (temp < 2) {
-                temp2 = func_8006A918();
+                temp2 = Math_Rand1();
                 var_v0 = func_i2_800FCB84(arg0, D_i2_8010AB60[temp2 % 7]);
             } else {
                 var_v0 = func_i2_800FCB84(arg0, 10);
             }
         } else {
-            temp2 = func_8006A918();
+            temp2 = Math_Rand1();
             var_v0 = func_i2_800FCB84(arg0, D_i2_8010AB60[temp2 % 7]);
         }
     } else {
-        temp2 = func_8006A918();
+        temp2 = Math_Rand1();
         var_v0 = func_i2_800FCB84(arg0, D_i2_8010AB60[temp2 % 7]);
     }
     return var_v0;
@@ -327,8 +327,8 @@ void func_i2_800FD4AC(unk_8010D778* arg0) {
     }
 
     for (i = 0; i < 5; i++) {
-        temp = func_8006A918() % 74;
-        temp2 = func_8006A918() % 56;
+        temp = Math_Rand1() % 74;
+        temp2 = Math_Rand1() % 56;
         func_i2_800FD978(arg0, (temp2 * 74) + temp, 1);
     }
 }

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "ovl_i3.h"
 #include "fzx_racer.h"
+#include "tex_assets.h"
 
 u16 D_i3_80143780;
 u16 D_i3_80143782;
@@ -34,11 +35,6 @@ extern f32 D_800CE74C;
 extern f32 D_800CE750;
 extern Mtx D_8024DC80;
 extern s8 D_8024DCC0[];
-
-extern u8 D_F138994[];
-extern u8 D_F242E10[];
-extern u8 D_F243210[];
-extern u8 D_F243290[];
 
 extern s32 D_800DCE44;
 
@@ -170,14 +166,13 @@ extern FrameBuffer* D_800DCCD0[];
 extern char* D_800E4180[55];
 extern u8 D_C9F00[];
 extern u8 D_D7500[];
-extern u8 D_F138994[];
 extern Gfx D_8014940[];
 extern u8 D_303C3F0[];
 extern u8 D_303D1F0[];
 extern unk_struct_1DC D_800E5220[];
 extern GfxPool D_1000000;
 
-extern u32 D_800CCFE0;
+extern u32 gGameFrameCount;
 extern s32 D_800DCD04;
 extern s16 D_800E5FE2;
 extern s16 D_800E5FE4;
@@ -209,7 +204,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         var = D_800E4180[arg1];
         i = func_i2_801062E4(var, 3, 1);
 
-        gfx = func_i3_8011B264(gfx, 0x99 - i / 2, 0x15, i / 2 + 0xA7, 0x2B, 0, 0, 0xC8, 0x7F);
+        gfx = func_i3_DrawBeveledBox(gfx, 0x99 - i / 2, 0x15, i / 2 + 0xA7, 0x2B, 0, 0, 0xC8, 0x7F);
 
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -222,7 +217,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         gfx = func_i2_80106450(gfx, 0xA0 - (func_i2_801062E4(var, 3, 1) / 2), 0x28, var, 1, 3, 0);
 
         if ((D_i3_80143780 & 0x10) && (D_i3_80143780 & 0x20)) {
-            temp2 = (D_800CCFE0 % 40);
+            temp2 = (gGameFrameCount % 40);
             temp1 = (temp2 / 20);
             temp2 %= 20;
 
@@ -247,13 +242,13 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
             } else {
                 var_s3 = D_i3_80143788;
             }
-            if (var_s2->unk_20[i] != (3600000 - 1)) {
+            if (var_s2->unk_20[i] != MAX_TIMER) {
                 xl = func_i2_801062E4(var_s2->unk_AC[i], 1, 1);
                 if (xl > 0) {
-                    gfx = func_i3_8011B264(gfx, (var_s3 + D_i3_80143790) + 0x4A,
-                                           (D_i3_80143794 + (D_i3_80143798 * i)) + 3,
-                                           (var_s3 + D_i3_80143790) + xl + 0x4D,
-                                           (D_i3_80143794 + (D_i3_80143798 * i)) + 0x11, 0, 0, 0, 0x80);
+                    gfx = func_i3_DrawBeveledBox(gfx, (var_s3 + D_i3_80143790) + 0x4A,
+                                                 (D_i3_80143794 + (D_i3_80143798 * i)) + 3,
+                                                 (var_s3 + D_i3_80143790) + xl + 0x4D,
+                                                 (D_i3_80143794 + (D_i3_80143798 * i)) + 0x11, 0, 0, 0, 0x80);
                 }
             }
         }
@@ -269,7 +264,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
             var_s3 = D_i3_80143788;
         }
 
-        if (var_s2->unk_20[i] != (3600000 - 1)) {
+        if (var_s2->unk_20[i] != MAX_TIMER) {
             if ((i != 0) && (var_s2->unk_20[i] != var_s2->unk_20[i - 1])) {
                 sp1A8 = i + 1;
             }
@@ -315,7 +310,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         } else {
             var_s3 = D_i3_80143788;
         }
-        if (var_s2->unk_20[i] != (3600000 - 1)) {
+        if (var_s2->unk_20[i] != MAX_TIMER) {
 
             if (D_i3_80143780 & 8) {
                 if (D_800E5FE2 == i + 1) {
@@ -340,7 +335,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         }
     }
 
-    if (var_s2->unk_D8 != (3600000 - 1)) {
+    if (var_s2->unk_D8 != MAX_TIMER) {
 
         if (D_i3_80143780 & 8) {
             if (D_800E5FE6 != 0) {
@@ -389,13 +384,13 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         } else {
             var_s3 = D_i3_80143788;
         }
-        if (var_s2->unk_20[i] == (3600000 - 1)) {
+        if (var_s2->unk_20[i] == MAX_TIMER) {
             gfx = func_i2_80106450(gfx, var_s3 + D_i3_80143790 + 0x4B, (D_i3_80143794 + (D_i3_80143798 * i)) - 2,
                                    "--------", 1, 4, 0);
         }
     }
 
-    if (var_s2->unk_D8 == (3600000 - 1)) {
+    if (var_s2->unk_D8 == MAX_TIMER) {
         gfx = func_i2_80106450(gfx, D_i3_801437A8 + D_i3_80143788, D_i3_801437AA + 0xC, "--------", 1, 4, 0);
     }
 
@@ -405,7 +400,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         } else {
             var_s3 = D_i3_80143788;
         }
-        if (var_s2->unk_20[i] != (3600000 - 1)) {
+        if (var_s2->unk_20[i] != MAX_TIMER) {
             gfx = func_i2_80106450(gfx, var_s3 + D_i3_80143790 + 0x4B, D_i3_80143794 + (D_i3_80143798 * i) + 0x12,
                                    var_s2->unk_AC[i], 1, 1, 0);
         }
@@ -413,7 +408,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
 
     if (D_i3_80143780 & 4) {
         for (i = 0; i < 5; i++) {
-            if (var_s2->unk_20[i] != (3600000 - 1)) {
+            if (var_s2->unk_20[i] != MAX_TIMER) {
                 gfx = func_i3_8013BBF8(gfx, 0xB2, (i * 0x23) + 0x33, var_s2->unk_98[i]);
             }
         }
@@ -443,7 +438,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
     gSPMatrix(gfx++, &D_2028480, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     for (i = 0; i < 5; i++) {
-        if (var_s2->unk_20[i] != (3600000 - 1)) {
+        if (var_s2->unk_20[i] != MAX_TIMER) {
             gfx = func_i3_8013BB80(gfx, i, var_s2->unk_34[i]);
         }
     }
@@ -567,7 +562,7 @@ extern s16 D_800E5FE2;
 extern s16 D_800E5FE4;
 
 void func_i3_8013BF50(s32 arg0) {
-    unk_802C4920* racer;
+    Racer* racer;
     unk_800E4268* temp_a3;
     s32 i;
     s32 index = arg0 % 6;
@@ -629,7 +624,7 @@ void func_i3_8013C380(void);
 void func_i3_8013C3B4(s32);
 void func_i3_8013C6D8(void);
 
-extern unk_800DCE98 D_800DCE98[];
+extern Controller D_800DCE98[];
 extern s32 D_800DD218[];
 
 void func_i3_8013C15C(void) {
@@ -659,8 +654,8 @@ void func_i3_8013C20C(s32 arg0) {
     for (i = 0, var_s0 = D_i3_801437C0; i < 50; i++, var_s0++) {
         var_s0->unk_00 = D_i3_80140F50[i];
         var_s0->unk_01 = 0;
-        var_s0->unk_02 = func_8006A918() % 320;
-        var_s0->unk_04 = func_8006A918() % 240;
+        var_s0->unk_02 = Math_Rand1() % 320;
+        var_s0->unk_04 = Math_Rand1() % 240;
 
         if (arg0 == 0) {
             var_s0->unk_06 = var_s0->unk_02;
@@ -712,7 +707,7 @@ void func_i3_8013C3B4(s32 arg0) {
                 var_s0->unk_00 = 0;
             }
         } else {
-            D_i3_801419BC = 0;
+            D_i3_801419BC = false;
             func_i3_80139FF4();
         }
     }
@@ -763,11 +758,6 @@ void func_i3_8013D214(unk_800F8510* arg0) {
 
 signed char D_i3_80140F84[] = "NAME ENTRY";
 
-extern Vtx D_1029D08[];
-extern Mtx D_102B308[];
-extern Mtx D_102B348[];
-extern Mtx D_102B388[];
-extern Vp D_102C2D8[];
 extern s8 D_800E42C8[];
 extern Gfx D_80148C0[];
 
@@ -795,7 +785,7 @@ Gfx* func_i3_8013D2BC(Gfx* gfx) {
     switch (var_v0) {
         case 2:
             spF4 = (D_i3_801437B8 * 10) + D_i3_801437B6;
-            gfx = func_i3_8011B264(gfx, 0x34, 0x36, 0x10C, 0xDC, 0, 0, 0, 0x80);
+            gfx = func_i3_DrawBeveledBox(gfx, 0x34, 0x36, 0x10C, 0xDC, 0, 0, 0, 0x80);
             temp_v0 = func_i2_801062E4(D_i3_80140F84, 3, 1);
             temp_v1 = (320 - temp_v0) / 2;
             gDPPipeSync(gfx++);
@@ -841,12 +831,12 @@ Gfx* func_i3_8013D2BC(Gfx* gfx) {
             }
 
             gSPDisplayList(gfx++, D_80148C0);
-            gSPViewport(gfx++, D_102C2D8);
+            gSPViewport(gfx++, D_1000000.unk_2C2D8);
             gSPPerspNormalize(gfx++, D_i3_801439C0);
-            gSPMatrix(gfx++, D_102B308, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gSPMatrix(gfx++, D_102B348, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
-            gSPMatrix(gfx++, D_102B388, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPVertex(gfx++, D_1029D08, 4, 0);
+            gSPMatrix(gfx++, &D_1000000.unk_2B308, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+            gSPMatrix(gfx++, &D_1000000.unk_2B348, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+            gSPMatrix(gfx++, &D_1000000.unk_2B388, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPVertex(gfx++, D_1000000.unk_29D08, 4, 0);
 
             gDPLoadTextureBlock(gfx++, func_800783AC(D_i3_801439BC->unk_04), G_IM_FMT_RGBA, G_IM_SIZ_16b,
                                 D_i3_801439BC->width, D_i3_801439BC->height, 0, G_TX_NOMIRROR | G_TX_CLAMP,

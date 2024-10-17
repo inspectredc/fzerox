@@ -570,7 +570,7 @@ Gfx* func_i6_801182DC(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 extern Gfx D_3000088[];
-#define UNK_RAND_MACRO(var, x, y) (((func_8006A918() >> (var % 4)) % x) - y)
+#define UNK_RAND_MACRO(var, x, y) (((Math_Rand1() >> (var % 4)) % x) - y)
 
 Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
     s32 sp154;
@@ -1119,7 +1119,7 @@ void func_i6_8011AC38(unk_800E3A28* arg0) {
                 }
                 if (var_v1 == 0) {
                     while (true) {
-                        var_a2 = func_8006A918() % 30;
+                        var_a2 = Math_Rand1() % 30;
                         if (D_i6_8011FAF0[var_a2] == 0) {
                             D_i6_8011FAF0[var_a2] = 1;
                             goto label;
@@ -1151,7 +1151,7 @@ void func_i6_8011AC38(unk_800E3A28* arg0) {
 
     if (D_800E3F28[arg0->unk_18].unk_04 == -1) {
         D_800E3F28[arg0->unk_18].unk_04 = 0;
-        arg0->unk_04 = func_8006A918() % 30;
+        arg0->unk_04 = Math_Rand1() % 30;
         D_i6_8011FAF0[arg0->unk_04] = 1;
         var_a2++;
     }
@@ -1222,11 +1222,11 @@ bool func_i6_8011B010(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     return false;
 }
 
-extern u32 D_800CCFE0;
+extern u32 gGameFrameCount;
 
 bool func_i6_8011B058(unk_800E3A28* arg0, s32 arg1, s32 arg2, s32 arg3) {
 
-    if (D_800CCFE0 % arg3) {
+    if (gGameFrameCount % arg3) {
         return false;
     }
 
@@ -1879,7 +1879,7 @@ void func_i6_8011BF50(void) {
 }
 
 extern s32 D_800DCE44;
-extern unk_800DCE98 D_800DD180;
+extern Controller D_800DD180;
 
 s32 func_i6_8011BFB0(void) {
 

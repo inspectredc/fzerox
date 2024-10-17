@@ -137,7 +137,7 @@ void func_80067E98(void) {
     func_80067C0C(D_800DCCF4);
 }
 
-u32 D_800CCFE0 = 0;
+u32 gGameFrameCount = 0;
 s16 D_800CCFE4 = 2;
 s16 D_800CCFE8 = 2;
 
@@ -208,7 +208,6 @@ extern u32 D_800DCE00;
 
 extern OSTask* D_800DCCF4;
 extern s32 D_800DCCFC;
-extern s32 D_800CCFE0;
 extern s16 D_800CCFE4;
 extern s16 D_800CCFE8;
 extern s32 D_800DCD00;
@@ -419,7 +418,7 @@ SEGMENT_ROM_SIZE(_17B960)); D_800DCCFC = 0; D_800DCD00 = 1; D_800DCD08 = 2; D_80
 
     func_80067C0C(D_800DCCF4);
     func_80068B20();
-    D_800CCFE0 = 0;
+    gGameFrameCount = 0;
 
     while(true) {
         if (D_800CCFE4 != D_800CCFE8) {
@@ -443,7 +442,7 @@ SEGMENT_ROM_SIZE(_17B960)); D_800DCCFC = 0; D_800DCD00 = 1; D_800DCD08 = 2; D_80
                 func_80067E98();
                 break;
         }
-        D_800CCFE0++;
+        gGameFrameCount++;
     }
 }
 */

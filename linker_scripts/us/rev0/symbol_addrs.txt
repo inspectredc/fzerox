@@ -221,6 +221,9 @@ gSampleBankTableData = 0x800D7FF0;
 gAudioSpecs = 0x800D1C34;
 gSeqTicksPerBeat = 0x800D1C68;
 
+Math_Rand1 = 0x8006A918;
+Math_Rand2 = 0x8006A978;
+Math_Round = 0x8006A9E0;
 mio0Decode = 0x800AA620;
 
 gSegments = 0x800E3380;
@@ -229,4 +232,11 @@ gSlowLoads = 0x800F89F0;
 
 gRacers = 0x802C4920; // size:0x6DB0
 
+gGameFrameCount = 0x800CCFE0;
+gDifficulty = 0x800CD008;
+gNumPlayers = 0x800CD000;
+
 D_800E4268 = 0x800E4268;
+
+gSkyboxType = 0x800E4260;
+gBackgroundFloorType = 0x800E4264;

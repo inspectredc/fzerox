@@ -10,7 +10,7 @@ extern s32 D_800DCF2C;
 extern s32 D_800DCFC0;
 extern s32 D_800DD054;
 
-extern unk_800DCE98 D_800DCE98[];
+extern Controller D_800DCE98[];
 
 void* func_80069ED0(void) {
     if ((D_800DCE70 & 0x1F07) == 2) {
@@ -158,7 +158,7 @@ void func_8006A904(s32 arg0, s32 arg1) {
     D_800CD17C = arg1;
 }
 
-u32 func_8006A918(void) {
+u32 Math_Rand1(void) {
 
     D_800CD170 = D_800CD170 * 0x41C64E6D + 0x3039;
     if (D_800CD174 & 1) {
@@ -170,7 +170,7 @@ u32 func_8006A918(void) {
     return D_800CD170 ^ D_800CD174;
 }
 
-u32 func_8006A978(void) {
+u32 Math_Rand2(void) {
 
     D_800CD178 = D_800CD178 * 0x41C64E6D + 0x10932;
     if (D_800CD17C & 1) {
@@ -182,11 +182,11 @@ u32 func_8006A978(void) {
     return D_800CD178 + D_800CD17C;
 }
 
-s32 func_8006A9E0(f32 arg0) {
-    if (arg0 < 0.0f) {
-        return arg0 - 0.5f;
+s32 Math_Round(f32 num) {
+    if (num < 0.0f) {
+        return num - 0.5f;
     }
-    return arg0 + 0.5f;
+    return num + 0.5f;
 }
 
 s32 func_8006AA38(Mtx3F* mtx) {
@@ -347,11 +347,9 @@ void func_8006B07C(s8* arg0, f32* arg1) {
     func_8006AFE4(arg0, 0, 0, 0);
     func_8006AFE4(&arg0[16], 0, 128, 0);
 
-    func_8006B000(arg0, func_8006A9E0(arg1[0] * 120.0f), func_8006A9E0(arg1[4] * 120.0f),
-                  func_8006A9E0(arg1[8] * 120.0f));
+    func_8006B000(arg0, Math_Round(arg1[0] * 120.0f), Math_Round(arg1[4] * 120.0f), Math_Round(arg1[8] * 120.0f));
 
-    func_8006B000(&arg0[16], func_8006A9E0(arg1[1] * 120.0f), func_8006A9E0(arg1[5] * 120.0f),
-                  func_8006A9E0(arg1[9] * 120.0f));
+    func_8006B000(&arg0[16], Math_Round(arg1[1] * 120.0f), Math_Round(arg1[5] * 120.0f), Math_Round(arg1[9] * 120.0f));
 }
 
 void func_8006B18C(s8* arg0, s32* arg1, f32* arg2, f32 arg3, f32 arg4, f32 arg5, s32 arg6, s32 arg7) {

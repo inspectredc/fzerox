@@ -352,4 +352,10 @@ extern u8 D_F242210[];
 extern u8 D_F242410[];
 extern u8 D_F242C10[];
 
+extern u8 D_F21FFB8[];
+extern u8 D_F2207C8[];
+extern u8 D_F138994[];
+extern u8 D_F242E10[];
+extern u8 D_F243210[];
+
 #endif // TEX_ASSETS_H

@@ -5,6 +5,6 @@
 
 #define TOTAL_RACER_COUNT 30
 
-extern unk_802C4920 gRacers[TOTAL_RACER_COUNT];
+extern Racer gRacers[TOTAL_RACER_COUNT];
 
 #endif // FZX_THREAD_H

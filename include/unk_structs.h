@@ -287,7 +287,7 @@ typedef struct unk_struct_1DC {
     MtxF unk_19C;
 } unk_struct_1DC; // size = 0x1DC
 
-typedef struct unk_802C4920_unk_C {
+typedef struct Racer_unk_C {
     unk_8006FC8C* unk_00;
     f32 unk_04;
     f32 unk_08;
@@ -298,14 +298,14 @@ typedef struct unk_802C4920_unk_C {
     Vec3f unk_34;
     f32 unk_40;
     Vec3f unk_44;
-} unk_802C4920_unk_C; // size >= 0x50
+} Racer_unk_C; // size >= 0x50
 
-typedef struct unk_802C4920 {
+typedef struct Racer {
     s32 unk_00;
     s32 unk_04;
     u16 unk_08;
     s16 unk_0A;
-    unk_802C4920_unk_C unk_0C;
+    Racer_unk_C unk_0C;
     f32 unk_5C;
     s8 unk_60[0x4];
     f32 unk_64;
@@ -367,7 +367,7 @@ typedef struct unk_802C4920 {
     f32 unk_274;
     s8 unk_278[0x10];
     s32 unk_288;
-    struct unk_802C4920* unk_28C;
+    struct Racer* unk_28C;
     s32 unk_290[4];
     s32 unk_2A0;
     s32 unk_2A4;
@@ -377,11 +377,11 @@ typedef struct unk_802C4920 {
     s16 unk_2B0;
     s8 unk_2B2[0x2];
     s32 unk_2B4;
-    struct unk_802C4920* unk_2B8;
-    struct unk_802C4920* unk_2BC;
+    struct Racer* unk_2B8;
+    struct Racer* unk_2BC;
     f32 unk_2C0;
     f32 unk_2C4;
-    s8 unk_2C8;
+    s8 character;
     s8 unk_2C9[0x3];
     s16 unk_2CC;
     s8 unk_2CE[0x2];
@@ -429,7 +429,7 @@ typedef struct unk_802C4920 {
     s32 unk_39C;
     s32 unk_3A0;
     s32 unk_3A4;
-} unk_802C4920; // size = 0x3A8
+} Racer; // size = 0x3A8
 
 typedef struct unk_struct_C {
     s32 unk_00;
@@ -444,7 +444,7 @@ typedef struct unk_800E5D70 {
     unk_struct_20_2* unk_0C;
     Vec3f* unk_10;
     Mtx3F* unk_14;
-    unk_802C4920* unk_18;
+    Racer* unk_18;
     Vec3f* unk_1C;
     Mtx3F* unk_20;
 } unk_800E5D70; // size = 0x24
@@ -475,12 +475,12 @@ typedef struct unk_800CD970 {
     unk_800CD8B0* unk_08;
 } unk_800CD970; // size 0xC
 
-typedef struct unk_800DCE98 {
+typedef struct Controller {
     OSPfs pfs;
     s8 unk_68[0x3];
     u8 unk_6B;
-    s8 unk_6C;
-    s8 unk_6D;
+    s8 stickX;
+    s8 stickY;
     u8 unk_6E;
     u8 unk_6F;
     u8 unk_70;
@@ -498,7 +498,7 @@ typedef struct unk_800DCE98 {
     s32 unk_88;
     s32 unk_8C;
     s32 unk_90;
-} unk_800DCE98; // size = 0x94
+} Controller; // size = 0x94
 
 typedef struct unk_36ED0 {
     s32 unk_00;
@@ -596,16 +596,15 @@ typedef struct unk_800F5DF0 {
     s32 unk_1C;
     s8 unk_20[0xC];
     f32 unk_2C;
-    unk_802C4920* unk_30;
+    Racer* unk_30;
 } unk_800F5DF0; // size 0x34
 
 typedef struct unk_8012F450 {
-    s32 unk_00;
-    u8 unk_04;
-    u8 unk_05;
-    s8 unk_06[0x2];
-    f32 unk_08;
-} unk_8012F450;
+    /* 0x00 */ s32 time;
+    /* 0x04 */ u8 hours;
+    /* 0x05 */ u8 minutes;
+    /* 0x08 */ f32 minuteFraction;
+} unk_8012F450; // size = 0xC
 
 typedef struct unk_800E4268 {
     s32 unk_00;

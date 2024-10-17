@@ -1,14 +1,14 @@
 #include "global.h"
 
 extern GfxPool* D_800DCCF0;
-extern s32 D_800CD000;
+extern s32 gNumPlayers;
 
 Gfx* func_i3_8012EE90(Gfx* gfx, s32 arg1) {
     u16 sp46;
     f32 var_fv0;
 
     var_fv0 = 0;
-    if (D_800CD000 == 2) {
+    if (gNumPlayers == 2) {
         var_fv0 = -60.0f;
     }
 

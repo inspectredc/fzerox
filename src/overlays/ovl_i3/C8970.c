@@ -14,8 +14,8 @@ s16 D_i3_8014217E;
 unk_80142180 D_i3_80142180;
 u16 D_i3_80142188;
 s32 D_i3_8014218C;
-TexturePtr D_i3_80142190;
-TexturePtr D_i3_80142194;
+TexturePtr sSkyboxTexture;
+TexturePtr sBackgroundFloorTexture;
 TexturePtr D_i3_80142198;
 TexturePtr D_i3_8014219C;
 unk_801421A0 D_i3_801421A0[6];
@@ -30,8 +30,8 @@ u8 D_i3_80140700[] = { 0, 0, 0, 1, 255, 255, 99, 25 };
 s32 D_i3_80140708[][4][2] = {
     { { 232, 132 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
     { { 246, 40 }, { 246, 152 }, { 0, 0 }, { 0, 0 } },
-    { { 106, 58 }, { 106, 170 }, { 0xF8, 58 }, { 0xD2, 152 } },
-    { { 106, 58 }, { 106, 170 }, { 0xF8, 58 }, { 0xF8, 170 } },
+    { { 106, 58 }, { 106, 170 }, { 248, 58 }, { 210, 152 } },
+    { { 106, 58 }, { 106, 170 }, { 248, 58 }, { 248, 170 } },
 };
 
 s32 D_i3_80140788[] = { 0, 0, 0, 0, 0, 0 };
@@ -40,51 +40,88 @@ f32 D_i3_801407A0 = 50.0f;
 f32 D_i3_801407A4 = 400.0f;
 f32 D_i3_801407A8 = 100.0f;
 
-unk_80140874 D_i3_801407AC = { D_F215FB0, 0.03f, 0.03f, 0.0f, 0.0f };
+/*
+    BACKGROUND FLOOR TEXTURES
+ */
 
-unk_80140874 D_i3_801407C0 = { D_F216FB0, 0.03f, 0.03f, 0.0f, 0.0f };
+// MUTE CITY
+CourseBackgroundFloor D_i3_801407AC = { D_F215FB0, 0.03f, 0.03f, 0.0f, 0.0f };
 
-unk_80140874 D_i3_801407D4 = { D_F217FB0, 0.03f, 0.03f, 0.01f, 0.01f };
+// PORT TOWN
+CourseBackgroundFloor D_i3_801407C0 = { D_F216FB0, 0.03f, 0.03f, 0.0f, 0.0f };
 
-unk_80140874 D_i3_801407E8 = { D_F218FB0, 0.03f, 0.03f, 0.0f, 0.0f };
+// BIG BLUE / RAINBOW ROAD
+CourseBackgroundFloor D_i3_801407D4 = { D_F217FB0, 0.03f, 0.03f, 0.01f, 0.01f };
 
-unk_80140874 D_i3_801407FC = { D_F219FB0, 0.03f, 0.03f, 0.0f, 0.0f };
+// SAND OCEAN
+CourseBackgroundFloor D_i3_801407E8 = { D_F218FB0, 0.03f, 0.03f, 0.0f, 0.0f };
 
-unk_80140874 D_i3_80140810 = { D_F21AFB0, 0.03f, 0.03f, 0.0f, 0.0f };
+// DEVILS FOREST / BIG HAND
+CourseBackgroundFloor D_i3_801407FC = { D_F219FB0, 0.03f, 0.03f, 0.0f, 0.0f };
 
-unk_80140874 D_i3_80140824 = { D_F21BFB0, 0.03f, 0.03f, 0.0f, 0.0f };
+// WHITE LAND
+CourseBackgroundFloor D_i3_80140810 = { D_F21AFB0, 0.03f, 0.03f, 0.0f, 0.0f };
 
-unk_80140874 D_i3_80140838 = { D_F21CFB0, 0.03f, 0.03f, 0.0f, 0.0f };
+// SECTORS / SPACE PLANT
+CourseBackgroundFloor D_i3_80140824 = { D_F21BFB0, 0.03f, 0.03f, 0.0f, 0.0f };
 
-unk_80140874 D_i3_8014084C = { D_F21DFB0, 0.03f, 0.03f, 0.005f, 0.005f };
+// RED CANYON
+CourseBackgroundFloor D_i3_80140838 = { D_F21CFB0, 0.03f, 0.03f, 0.0f, 0.0f };
 
-unk_80140874 D_i3_80140860 = { D_F21EFB0, 0.03f, 0.03f, 0.0f, 0.0f };
+// FIRE FIELD
+CourseBackgroundFloor D_i3_8014084C = { D_F21DFB0, 0.03f, 0.03f, 0.005f, 0.005f };
 
-unk_80140874* D_i3_80140874[] = {
+// SILENCE
+CourseBackgroundFloor D_i3_80140860 = { D_F21EFB0, 0.03f, 0.03f, 0.0f, 0.0f };
+
+CourseBackgroundFloor* D_i3_80140874[] = {
     &D_i3_801407AC, &D_i3_801407C0, &D_i3_801407D4, &D_i3_801407E8, &D_i3_801407FC, &D_i3_80140810,
     &D_i3_80140824, &D_i3_80140838, &D_i3_8014084C, &D_i3_80140860, &D_i3_801407AC,
 };
 
-unk_80140920 D_i3_801408A0 = { D_F215F30, 252, 192, 253, 0, 0, 0, 200, 130, 240, 0, 2 };
+/*
+    BACKGROUND SKYBOXES
+ */
 
-unk_80140920 D_i3_801408B0 = { D_F215C30, 155, 247, 245, 210, 255, 230, 155, 247, 245, 0, 2 };
+// PURPLE SKIES
+// MUTE CITY / WHITE LAND
+CourseSkyboxes D_i3_801408A0 = { D_F215F30, 252, 192, 253, 0, 0, 0, 200, 130, 240, 0, 2 };
 
-unk_80140920 D_i3_801408C0 = { D_F215DB0, 224, 234, 210, 0, 0, 0, 225, 190, 160, 0, 2 };
+// TURQUOISE SKIES
+// SILENCE 2
+CourseSkyboxes D_i3_801408B0 = { D_F215C30, 155, 247, 245, 210, 255, 230, 155, 247, 245, 0, 2 };
 
-unk_80140920 D_i3_801408D0 = { D_F215D30, 151, 194, 218, 210, 255, 230, 151, 194, 218, 0, 2 };
+// DESERT YELLOW
+// SAND OCEAN
+CourseSkyboxes D_i3_801408C0 = { D_F215DB0, 224, 234, 210, 0, 0, 0, 225, 190, 160, 0, 2 };
 
-unk_80140920 D_i3_801408E0 = { D_F215E30, 2, 2, 23, 245, 162, 99, 125, 155, 185, 0, 5 };
+// BLUE
+CourseSkyboxes D_i3_801408D0 = { D_F215D30, 151, 194, 218, 210, 255, 230, 151, 194, 218, 0, 2 };
 
-unk_80140920 D_i3_801408F0 = { D_F215CB0, 255, 224, 144, 0, 0, 0, 255, 224, 204, 0, 2 };
+// NIGHT
+// SILENCE / MUTE CITY 2
+CourseSkyboxes D_i3_801408E0 = { D_F215E30, 2, 2, 23, 245, 162, 99, 125, 155, 185, 0, 5 };
 
-unk_80140920 D_i3_80140900 = { D_F215EB0, 245, 162, 99, 0, 0, 0, 245, 162, 99, 0, 2 };
+// ORANGE DAY
+// DEVILS FOREST / SECTOR ALPHA
+CourseSkyboxes D_i3_801408F0 = { D_F215CB0, 255, 224, 144, 0, 0, 0, 255, 224, 204, 0, 2 };
 
-unk_80140920 D_i3_80140910 = { D_F215BB0, 250, 255, 255, 0, 0, 0, 180, 200, 180, 0, 2 };
+// SUNSET
+// PORT TOWN / DEVILS FOREST 2 / FIRE FIELD
+CourseSkyboxes D_i3_80140900 = { D_F215EB0, 245, 162, 99, 0, 0, 0, 245, 162, 99, 0, 2 };
 
-unk_80140920* D_i3_80140920[] = {
+// SKY BLUE
+// BIG BLUE 1 & 2 / RED CANYON
+CourseSkyboxes D_i3_80140910 = { D_F215BB0, 250, 255, 255, 0, 0, 0, 180, 200, 180, 0, 2 };
+
+CourseSkyboxes* D_i3_80140920[] = {
     &D_i3_801408A0, &D_i3_801408B0, &D_i3_801408C0, &D_i3_801408D0,
     &D_i3_801408E0, &D_i3_801408F0, &D_i3_80140900, &D_i3_80140910,
 };
+
+/*
+    BACKGROUND SPRITES AND PALETTES
+ */
 
 void* D_i3_80140940[][2] = {
     { NULL, NULL },           { D_F220810, D_F221010 }, { D_F221210, D_F221A10 }, { D_F221C10, D_F222410 },
@@ -244,7 +281,7 @@ s8 D_i3_80140F40[][3] = {
     { 31, 10, 0 }, { 0, 15, 31 }, { 31, 31, 10 }, { 0, 0, 0 }, { 0, 0, 0 },
 };
 
-extern s32 D_800CD000;
+extern s32 gNumPlayers;
 extern unk_800F8510* D_800F8510;
 
 void func_i3_801356A0(void) {
@@ -262,7 +299,7 @@ void func_i3_801356A0(void) {
     Vec3f sp78;
     unk_800F8510* sp74 = D_800F8510;
 
-    if (D_800CD000 == 1) {
+    if (gNumPlayers == 1) {
         sp90 = 1;
     } else {
         sp90 = 0.75f;
@@ -280,8 +317,8 @@ void func_i3_801356A0(void) {
     while (true) {
         temp_fs1 = func_8009E538(var_s1, var_fs0, &sp84);
         func_8009E6F0(var_s1, var_fs0, &sp78);
-        temp_s0 = func_8006A9E0(((sp78.x * 64.0f * sp90) / 16000.0f) + temp_fs3) / 2;
-        temp_v0 = func_8006A9E0(((sp78.z * 64.0f * sp90) / 16000.0f) + temp_fs3);
+        temp_s0 = Math_Round(((sp78.x * 64.0f * sp90) / 16000.0f) + temp_fs3) / 2;
+        temp_v0 = Math_Round(((sp78.z * 64.0f * sp90) / 16000.0f) + temp_fs3);
         if ((temp_s0 >= 0) && (temp_s0 < 64)) {
             temp_v0 /= 2;
             if ((temp_v0 >= 0) && (temp_v0 < 64)) {
@@ -317,8 +354,8 @@ void func_i3_801356A0(void) {
     while (true) {
         temp_fs1 = func_8009E538(var_s1, var_fs0, &sp84);
         func_8009E6F0(var_s1, var_fs0, &sp78);
-        temp_s0 = func_8006A9E0(((sp78.x * 64.0f * sp90) / 16000.0f) + temp_fs3) / 2;
-        temp_v0 = func_8006A9E0(((sp78.z * 64.0f * sp90) / 16000.0f) + temp_fs3);
+        temp_s0 = Math_Round(((sp78.x * 64.0f * sp90) / 16000.0f) + temp_fs3) / 2;
+        temp_v0 = Math_Round(((sp78.z * 64.0f * sp90) / 16000.0f) + temp_fs3);
         if ((temp_s0 > 0) && (temp_s0 < 64)) {
             temp_v0 /= 2;
             if ((temp_v0 > 0) && (temp_v0 < 64)) {
@@ -343,8 +380,8 @@ void func_i3_801356A0(void) {
     var_s1 = sp74->unk_10;
     func_8009E538(var_s1, 0.0f, &sp84);
     func_8009E6F0(var_s1, 0.0f, &sp78);
-    temp_s0 = func_8006A9E0(((sp78.x * 64.0f * sp90) / 16000.0f) + temp_fs3) / 2;
-    temp_v0 = func_8006A9E0(((sp78.z * 64.0f * sp90) / 16000.0f) + temp_fs3);
+    temp_s0 = Math_Round(((sp78.x * 64.0f * sp90) / 16000.0f) + temp_fs3) / 2;
+    temp_v0 = Math_Round(((sp78.z * 64.0f * sp90) / 16000.0f) + temp_fs3);
     if ((temp_s0 > 0) && (temp_s0 < 63)) {
         temp_v0 /= 2;
         if ((temp_v0 > 0) && (temp_v0 < 63)) {
@@ -362,20 +399,20 @@ void func_i3_801356A0(void) {
 }
 
 extern s16 D_800CE4D4;
-extern unk_800DCE98 D_800DCE98[];
+extern Controller D_800DCE98[];
 extern s32 D_800DD218[];
 extern s8 D_800CD010;
 extern Gfx D_8014940[];
 extern Gfx D_80149A0[];
 extern s32 D_800DCE44;
 extern s32 D_800E5EC0;
-extern unk_802C4920* D_800E5F40[];
+extern Racer* D_800E5F40[];
 extern unk_800F5DF0* D_800F5E90;
-extern u32 D_800CCFE0;
+extern u32 gGameFrameCount;
 
 Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
-    unk_800DCE98* controller = &D_800DCE98[D_800DD218[arg2]];
-    unk_802C4920* racer;
+    Controller* controller = &D_800DCE98[D_800DD218[arg2]];
+    Racer* racer;
     s32 i;
     s32 sp108;
     s32 sp104;
@@ -436,8 +473,8 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
         if (i == arg2) {
             continue;
         }
-        temp_s2 = func_8006A9E0(((gRacers[i].unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
-        temp_v0 = func_8006A9E0(((gRacers[i].unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
+        temp_s2 = Math_Round(((gRacers[i].unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
+        temp_v0 = Math_Round(((gRacers[i].unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
         temp_s2 += sp104;
         temp_v0 /= 2;
         temp_v0 += sp100;
@@ -467,8 +504,8 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
             } else {
                 racer = D_800E5F40[0];
             }
-            temp_s2 = func_8006A9E0(((racer->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
-            temp_v0 = func_8006A9E0(((racer->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
+            temp_s2 = Math_Round(((racer->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
+            temp_v0 = Math_Round(((racer->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
             temp_s2 += sp104;
             temp_v0 /= 2;
             temp_v0 += sp100;
@@ -479,10 +516,8 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
 
         } else if (D_800F5E90 != NULL) {
             temp_s2 =
-                func_8006A9E0(((D_800F5E90->unk_30->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) /
-                2;
-            temp_v0 =
-                func_8006A9E0(((D_800F5E90->unk_30->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
+                Math_Round(((D_800F5E90->unk_30->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
+            temp_v0 = Math_Round(((D_800F5E90->unk_30->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
             temp_s2 += sp104;
             temp_v0 /= 2;
             temp_v0 += sp100;
@@ -492,13 +527,13 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
             gDPFillRectangle(gfx++, temp_s2 - 1, temp_v0 - 1, temp_s2 + 1, temp_v0 + 1);
         }
     }
-    if ((D_800CCFE0 % 16) < 8) {
+    if ((gGameFrameCount % 16) < 8) {
         if ((arg1 < arg2) && (D_800CE4D4 == 0)) {
             return gfx;
         }
 
-        temp_s2 = func_8006A9E0(((gRacers[arg2].unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
-        temp_v0 = func_8006A9E0(((gRacers[arg2].unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
+        temp_s2 = Math_Round(((gRacers[arg2].unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
+        temp_v0 = Math_Round(((gRacers[arg2].unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
         temp_s2 += sp104;
         temp_v0 /= 2;
         temp_v0 += sp100;
@@ -527,18 +562,15 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
 }
 
 extern s32 D_800CD510;
-extern s32 D_800E4260;
-extern s32 D_800E4264;
+extern s32 gSkyboxType;
+extern s32 gBackgroundFloorType;
 
 extern unk_struct_1DC D_800E5220[];
 extern s32 D_800F8514;
 
-extern u8 D_F21FFB8[];
-extern u8 D_F2207C8[];
-
 void func_i3_80139550(void);
 void func_i3_801387EC(void);
-void func_i3_80136974(unk_struct_1DC* arg0, unk_80141FF0* arg1, unk_80140874* arg2, f32 arg3, f32 arg4);
+void func_i3_80136974(unk_struct_1DC* arg0, unk_80141FF0* arg1, CourseBackgroundFloor* arg2, f32 arg3, f32 arg4);
 
 void func_i3_801365E0(void) {
     s32 pad;
@@ -549,19 +581,19 @@ void func_i3_801365E0(void) {
     unk_80141FF0* var_s0;
     unk_struct_1DC* var_s1;
 
-    D_i3_80142170 = D_800CD000;
+    D_i3_80142170 = gNumPlayers;
     D_800CD510 = 0;
-    D_i3_80142180.unk_00 = D_i3_80140874[D_800E4264];
-    D_i3_80142180.unk_04 = D_i3_80140920[D_800E4260];
+    D_i3_80142180.unk_00 = D_i3_80140874[gBackgroundFloorType];
+    D_i3_80142180.unk_04 = D_i3_80140920[gSkyboxType];
     D_i3_80142188 = D_i3_80142180.unk_04->unk_0E;
 
-    i = func_8006A918() % 11;
+    i = Math_Rand1() % 11;
     var_fs1 = i * 0.0005f;
-    if (func_8006A918() % 2) {
+    if (Math_Rand1() % 2) {
         var_fs1 = 0.0f - var_fs1;
     }
     var_fs0 = i * 0.0005f;
-    if (func_8006A918() % 2) {
+    if (Math_Rand1() % 2) {
         var_fs0 = 0.0f - var_fs0;
     }
 
@@ -590,7 +622,7 @@ void func_i3_801365E0(void) {
     D_i3_8014217E = D_i3_80142180.unk_04->unk_0C;
 
     if (D_i3_80142188 & 2) {
-        if (D_800CD000 >= 3) {
+        if (gNumPlayers >= 3) {
             D_i3_8014218C = 0;
             D_i3_80142188 &= ~2;
         } else {
@@ -604,8 +636,8 @@ void func_i3_801365E0(void) {
     }
     func_i3_801387EC();
 
-    D_i3_80142190 = func_80078104(D_i3_80142180.unk_04->unk_00, 0x80, 0, 0, 0);
-    D_i3_80142194 = func_80078104(D_i3_80142180.unk_00->unk_00, 0x1000, 0, 0, 0);
+    sSkyboxTexture = func_80078104(D_i3_80142180.unk_04->unk_00, 0x80, 0, 0, 0);
+    sBackgroundFloorTexture = func_80078104(D_i3_80142180.unk_00->unk_00, 0x1000, 0, 0, 0);
 
     if (D_i3_80142188 & 2) {
         D_i3_80142198 = func_80078104(D_F21FFB8, 0x800, 0, 0, 0);
@@ -622,11 +654,11 @@ void func_i3_801365E0(void) {
 
 const unk_80141860 D_i3_80141860 = { 400.0f, 1700.0f, 0.006f, 0.006f, 0.0f, 0.0f, 0.0f, 0.0f };
 
-void func_i3_80136974(unk_struct_1DC* arg0, unk_80141FF0* arg1, unk_80140874* arg2, f32 arg3, f32 arg4) {
+void func_i3_80136974(unk_struct_1DC* arg0, unk_80141FF0* arg1, CourseBackgroundFloor* arg2, f32 arg3, f32 arg4) {
     arg1->unk_00 = 0.0f;
     arg1->unk_08 = 0.0f;
     arg1->unk_04 = -750.0f;
-    if (D_800CD000 == 2) {
+    if (gNumPlayers == 2) {
         arg1->unk_10 = 4300.0f;
         arg1->unk_18 = 5300.0f;
     } else {
@@ -649,7 +681,8 @@ void func_i3_80136974(unk_struct_1DC* arg0, unk_80141FF0* arg1, unk_80140874* ar
 
 void func_i3_80136E74(Vtx*, unk_80141FF0*, unk_struct_1DC*, f32);
 void func_i3_801374D4(Vtx*, unk_80141FF0*, unk_struct_1DC*, f32, f32, f32, f32, f32, f32, s32, s32);
-void func_i3_80137AC4(Vtx*, unk_80141FF0*, unk_struct_1DC*, unk_80141860*, f32, f32, f32, f32, f32, f32, s32, s32, s32);
+void func_i3_80137AC4(Vtx*, unk_80141FF0*, unk_struct_1DC*, unk_80141860*, f32, f32, f32, f32, f32, f32, s32, s32,
+                      bool);
 void func_i3_80138D80(void);
 void func_i3_801398D0(s32, unk_80141FF0*, unk_struct_1DC*);
 
@@ -674,13 +707,13 @@ void func_i3_80136A6C(void) {
     f32 temp_fv1;
     s32 temp_v0;
     f32 var_fv0;
-    s32 var_s3;
+    bool var_s3;
 
     for (i = 0, var_s1 = D_i3_80141FF0, var_s2 = D_800E5220; i < D_i3_80142170; i++, var_s1++, var_s2++) {
 
         var_s1->unk_00 = var_s2->unk_50.x + (var_s2->unk_80 * D_i3_801407A8);
         var_s1->unk_08 = var_s2->unk_50.z + (var_s2->unk_84 * D_i3_801407A8);
-        temp_v0 = func_8006A9E0(var_s2->unk_94.x * 5.688889f);
+        temp_v0 = Math_Round(var_s2->unk_94.x * 5.688889f);
         temp_fa0 = D_800DD230[temp_v0 & 0xFFF] / D_800DD230[(temp_v0 + 0x400) & 0xFFF];
 
         var_s1->unk_0C = (var_s1->unk_10 + D_i3_801407A8) * temp_fa0 * 1.2f;
@@ -715,9 +748,9 @@ void func_i3_80136A6C(void) {
                     var_fv0 = 1.0f;
                 }
                 if (temp_fv1 > 0.0f) {
-                    var_s3 = 1;
+                    var_s3 = true;
                 } else {
-                    var_s3 = 0;
+                    var_s3 = false;
                 }
 
                 vtx = &D_800DCCF0->unk_29B48[i * 28 + 3 * 4];
@@ -974,7 +1007,7 @@ void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, f32 ar
 
 #ifdef NON_MATCHING
 void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, unk_80141860* arg3, f32 arg4, f32 arg5,
-                      f32 arg6, f32 arg7, f32 arg8, f32 arg9, s32 argA, s32 argB, s32 argC) {
+                      f32 arg6, f32 arg7, f32 arg8, f32 arg9, s32 argA, s32 argB, bool argC) {
     s32 temp1;
     s32 temp2;
     s32 temp3;
@@ -991,7 +1024,7 @@ void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, unk_80
     f32 sp34[4];
     f32 sp24[4];
 
-    if (argC != 0) {
+    if (argC) {
         var_fa0 = arg2->unk_50.y + arg3->unk_00;
     } else {
         var_fa0 = arg1->unk_04 + arg3->unk_04;
@@ -1023,7 +1056,7 @@ void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, unk_80
         }
     }
 
-    if (argC != 0) {
+    if (argC) {
         temp_ft5 = ((arg1->unk_04 + arg3->unk_04) - arg2->unk_50.y) / (var_fa0 - arg2->unk_50.y);
         sp34[0] = ((((sp58[0] - arg2->unk_50.x) * temp_ft5) + arg2->unk_50.x) * arg3->unk_08) + arg3->unk_10;
         sp24[0] = ((((sp44[0] - arg2->unk_50.z) * temp_ft5) + arg2->unk_50.z) * arg3->unk_0C) + arg3->unk_14;
@@ -1111,8 +1144,8 @@ Gfx* func_i3_80139168(Gfx*);
 Gfx* func_i3_80139AB0(Gfx*, s32);
 
 Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
-    unk_80140920* spEC;
-    Vtx* vtx;
+    CourseSkyboxes* spEC;
+    s32 pad;
 
     spEC = D_i3_80142180.unk_04;
 
@@ -1131,7 +1164,7 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
     gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gfx++, &D_1000000.unk_29B48[arg1 * 28], 28, 0);
 
-    gDPLoadTextureBlock(gfx++, D_i3_80142190, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+    gDPLoadTextureBlock(gfx++, sSkyboxTexture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     gSP2Triangles(gfx++, 8, 11, 9, 0, 8, 10, 11, 0);
@@ -1149,8 +1182,8 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
     gSPDisplayList(gfx++, D_303AA40);
     gDPSetPrimColor(gfx++, 0, 0, spEC->unk_04, spEC->unk_05, spEC->unk_06, 0);
 
-    gDPLoadTextureBlock(gfx++, D_i3_80142194, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                        G_TX_NOMIRROR | G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock(gfx++, sBackgroundFloorTexture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 32, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     gSP2Triangles(gfx++, 0, 3, 1, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 7, 5, 0, 4, 6, 7, 0);
@@ -1199,14 +1232,14 @@ void func_i3_801387EC(void) {
     unk_80140E58 sp54[8];
 
     D_i3_80142176 = 0;
-    if (D_800CD000 != 1) {
+    if (gNumPlayers != 1) {
         return;
     }
 
     if (D_800F8514 < 0x18) {
         var_s3 = D_i3_80140E58[D_800F8514];
     } else if ((D_800F8514 >= 0x30) && (D_800F8514 < 0x36)) {
-        j = func_8006A918() % 7;
+        j = Math_Rand1() % 7;
         var_s3 = sp54;
         if (j > 0) {
             sp9C = 360.0f / j;
@@ -1214,10 +1247,10 @@ void func_i3_801387EC(void) {
 
         for (i = 0; i < j; i++) {
             if (D_i3_80142188 & 4) {
-                var_s3->unk_00 = D_i3_80140EFC[func_8006A918() % 12];
+                var_s3->unk_00 = D_i3_80140EFC[Math_Rand1() % 12];
             } else {
-                var_s3->unk_00 = D_i3_80140EB8[func_8006A918() % 34];
-                if ((func_8006A918() % 3) == 0) {
+                var_s3->unk_00 = D_i3_80140EB8[Math_Rand1() % 34];
+                if ((Math_Rand1() % 3) == 0) {
                     var_s3->unk_00 = 0x35;
                 }
             }
@@ -1263,7 +1296,7 @@ void func_i3_801387EC(void) {
         }
         var_s1->unk_02 = 0;
         var_s1->unk_04 = 0;
-        i = func_8006A9E0(var_s3->unk_04 * 11.377778f);
+        i = Math_Round(var_s3->unk_04 * 11.377778f);
 
         var_s1->unk_08 = 0.0f - (D_800DD230[i & 0xFFF] * 8000.0f);
         var_s1->unk_0C = D_i3_801407A4;
@@ -1430,9 +1463,9 @@ u16 func_i3_8013907C(void) {
     s32 green;
     s32 blue;
 
-    temp_hi = (D_800CCFE0 >> 4) % 3;
+    temp_hi = (gGameFrameCount >> 4) % 3;
     temp = (temp_hi + 1) % 3;
-    temp_a1 = D_800CCFE0 % 16;
+    temp_a1 = gGameFrameCount % 16;
 
     red = D_i3_80140F40[temp_hi][0];
     green = D_i3_80140F40[temp_hi][1];
@@ -1492,8 +1525,8 @@ void func_i3_80139550(void) {
     f32 temp_fv0;
     s32 temp_s1;
 
-    if ((D_800CD000 > 0) && (D_800CD000 < 5)) {
-        D_i3_80143770 = 100 / D_800CD000;
+    if ((gNumPlayers > 0) && (gNumPlayers < 5)) {
+        D_i3_80143770 = 100 / gNumPlayers;
     }
 
     for (i = 0, var_s0 = D_i3_80142320; i < D_i3_80143770; i++, var_s0++) {
@@ -1502,13 +1535,13 @@ void func_i3_80139550(void) {
             var_s0->unk_14[j][0] = var_s0->unk_14[j][1] = 0.0f;
         }
 
-        var_s0->unk_0C = (func_8006A918() % 100000) + 100000.0f;
-        temp_s1 = func_8006A918() % 4096;
-        temp_fv0 = func_8006A918() % 800000;
+        var_s0->unk_0C = (Math_Rand1() % 100000) + 100000.0f;
+        temp_s1 = Math_Rand1() % 4096;
+        temp_fv0 = Math_Rand1() % 800000;
         var_s0->unk_08 = D_800DD230[(temp_s1 + 0x400) & 0xFFF] * temp_fv0;
         var_s0->unk_10 = D_800DD230[temp_s1 & 0xFFF] * temp_fv0;
 
-        temp_fv0 = ((func_8006A918() % 10) + 1) * 0.1f;
+        temp_fv0 = ((Math_Rand1() % 10) + 1) * 0.1f;
         var_s0->unk_00 = var_s0->unk_01 = 255.0f * temp_fv0;
         var_s0->unk_02 = 64.0f * temp_fv0;
         var_s0->unk_03 = -1;

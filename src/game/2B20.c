@@ -4,9 +4,9 @@
 // This needs to be used in a function earlier than this can be declared
 extern s16 D_800CD16C;
 
-s32 D_800CD000 = 1;
+s32 gNumPlayers = 1;
 s32 D_800CD004 = 0;
-s32 D_800CD008 = 0;
+s32 gDifficulty = 0;
 s32 D_800CD00C = 3;
 s8 D_800CD010 = 0;
 s8 D_800CD014 = 0;
@@ -266,8 +266,8 @@ s32 D_800CD164 = 5;
 s16 D_800CD168 = 0;
 s16 D_800CD16C = 0;
 
-extern unk_800DCE98 D_800DCE98[];
-extern unk_800DCE98 D_800DD180;
+extern Controller D_800DCE98[];
+extern Controller D_800DD180;
 
 extern s32 D_800DD228;
 extern u16 D_800E416E;
@@ -288,7 +288,7 @@ void func_80068F04(void) {
             if ((D_800CD010 != 0) && (D_800DD228 != 0)) {
 
                 D_800DCE48.unk_00 = D_800CD024[D_800CD014];
-                D_800CD000 = D_800CD030[D_800CD014];
+                gNumPlayers = D_800CD030[D_800CD014];
                 D_800F8514 = D_800CD03C[D_800CD018];
                 D_800CD014++;
                 D_800CD018++;
@@ -300,7 +300,7 @@ void func_80068F04(void) {
                 }
                 D_800CD020 = 0;
                 D_800CD010 = 1;
-                D_800CD008 = 3;
+                gDifficulty = 3;
             }
             break;
         case 0x1:
@@ -397,7 +397,7 @@ void func_800690FC(void) {
             switch (D_800DCE44) {
                 case 0x4009:
                 case 0x4012:
-                    if ((D_800CD000 == 1) && (D_800F8514 < 0x18)) {
+                    if ((gNumPlayers == 1) && (D_800F8514 < 0x18)) {
                         func_i2_801012CC(D_800F8514);
                     }
                     break;
@@ -547,14 +547,14 @@ void func_80069700(void) {
 }
 
 void func_80069790(void) {
-    unk_800DCE98* var_v0;
+    Controller* var_v0;
 
     // clang-format off
     var_v0 = &D_800DCE98[4];\
     do {
         if (var_v0->unk_6B == 0) {
             var_v0->unk_82 = var_v0->unk_7A = var_v0->unk_7C = var_v0->unk_7E = var_v0->unk_80 = 0;
-            var_v0->unk_6C = var_v0->unk_6D = var_v0->unk_6E = var_v0->unk_6F = var_v0->unk_70 = var_v0->unk_71 = 0;
+            var_v0->stickX = var_v0->stickY = var_v0->unk_6E = var_v0->unk_6F = var_v0->unk_70 = var_v0->unk_71 = 0;
             var_v0->unk_84 = 0;
         }
         var_v0--;
@@ -562,13 +562,13 @@ void func_80069790(void) {
     // clang-format on
 
     D_800DD180.unk_82 = D_800DD180.unk_7A = D_800DD180.unk_7C = D_800DD180.unk_7E = 0;
-    D_800DD180.unk_6C = D_800DD180.unk_6D = D_800DD180.unk_6E = D_800DD180.unk_6F = D_800DD180.unk_70 = 0;
+    D_800DD180.stickX = D_800DD180.stickY = D_800DD180.unk_6E = D_800DD180.unk_6F = D_800DD180.unk_70 = 0;
 }
 
 extern s32 D_800CCFB0;
 extern OSContPad D_800DCE80[];
 extern s32 D_800DCCC8;
-extern unk_800DCE98 D_800DD0E8;
+extern Controller D_800DD0E8;
 extern s32 D_800DD218[];
 extern OSMesg D_800E12B0;
 
@@ -580,7 +580,7 @@ void func_80069820(void) {
     s32 var_s2;
     s32 var_s6;
     s32 var_s7;
-    unk_800DCE98* var_s0;
+    Controller* var_s0;
     OSContPad* var_s5;
     s32* var_v0;
 
@@ -621,22 +621,22 @@ void func_80069820(void) {
                 D_800DD180.unk_7C |= var_s0->unk_7C = temp_a2 & var_s0->unk_7A;
                 D_800DD180.unk_7E |= var_s0->unk_7E = temp_a2 & var_s0->unk_80;
 
-                var_fp += var_s0->unk_6C = var_s5->stick_x;
-                var_s7 += var_s0->unk_6D = var_s5->stick_y;
+                var_fp += var_s0->stickX = var_s5->stick_x;
+                var_s7 += var_s0->stickY = var_s5->stick_y;
 
                 var_s0->unk_71 = var_s0->unk_6E;
 
-                if (var_s0->unk_6C < -0x32) {
+                if (var_s0->stickX < -50) {
                     var_s0->unk_6E = 0x20;
-                } else if (var_s0->unk_6C >= 0x33) {
+                } else if (var_s0->stickX > 50) {
                     var_s0->unk_6E = 0x10;
                 } else {
                     var_s0->unk_6E = 0;
                 }
 
-                if (var_s0->unk_6D < -0x32) {
+                if (var_s0->stickY < -50) {
                     var_s0->unk_6E |= 0x40;
-                } else if (var_s0->unk_6D >= 0x33) {
+                } else if (var_s0->stickY > 50) {
                     var_s0->unk_6E |= 0x80;
                 }
 
@@ -707,9 +707,9 @@ void func_80069820(void) {
     } while (var_s0 != D_800DCE98);
 
     if (var_s6 != 0) {
-        D_800DD180.unk_6C = var_fp / var_s6;
+        D_800DD180.stickX = var_fp / var_s6;
 
-        D_800DD180.unk_6D = var_s7 / var_s6;
+        D_800DD180.stickY = var_s7 / var_s6;
     }
 }
 

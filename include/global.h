@@ -11,4 +11,13 @@
 #include "unk_structs.h"
 #include "leo/leo_internal.h"
 
-#endif
+// TODO: Move to own header
+
+typedef enum Difficulty {
+    /* 0 */ NOVICE,
+    /* 1 */ STANDARD,
+    /* 2 */ EXPERT,
+    /* 3 */ MASTER,
+} Difficulty;
+
+#endif // GLOBAL_H
