@@ -71,12 +71,10 @@ void func_80080BDC(unk_800E51B8* arg0) {
     arg0->unk_16 = arg0->unk_12;
 }
 
-#ifdef NON_MATCHING
 void func_80080C0C(void) {
     s32 i;
     unk_800E51B8* var_v1;
     f32 temp1;
-    f32 temp2;
 
     for (i = 0, var_v1 = D_800E51B8; i < 3; i++, var_v1++) {
         if (var_v1->unk_04 == -1) {
@@ -87,10 +85,10 @@ void func_80080C0C(void) {
             case 1:
                 var_v1->unk_06++;
                 temp1 = (var_v1->unk_06 / 10.0f);
-
-                var_v1->unk_08 = var_v1->unk_0C + (s32) ((var_v1->unk_14 * 0.5f) * (1.0f - temp1));
+                
+                var_v1->unk_08 = var_v1->unk_0C + ((s16) ((var_v1->unk_14 / 2.0f) * (1.0f - temp1)));
                 var_v1->unk_10 = var_v1->unk_14 * temp1;
-
+                
                 if (var_v1->unk_06 >= 10) {
                     var_v1->unk_00 = 2;
                     var_v1->unk_06 = 0;
@@ -101,10 +99,10 @@ void func_80080C0C(void) {
             case 2:
                 var_v1->unk_06++;
                 temp1 = (var_v1->unk_06 / 10.0f);
-
-                var_v1->unk_0A = var_v1->unk_0E + (s32) (((var_v1->unk_16 - 2) * 0.5f) * (1.0f - temp1));
-                var_v1->unk_12 = (s32) ((var_v1->unk_16 - 2) * temp1) + 2;
-
+                
+                var_v1->unk_0A = var_v1->unk_0E + (s16) (((var_v1->unk_16 - 2) / 2.0f) * (1.0f - temp1));
+                var_v1->unk_12 = (s16) ((var_v1->unk_16 - 2) * temp1) + 2;
+                
                 if (var_v1->unk_06 >= 10) {
                     var_v1->unk_00 = 3;
                     var_v1->unk_06 = 0;
@@ -117,10 +115,10 @@ void func_80080C0C(void) {
             case 4:
                 var_v1->unk_06++;
                 temp1 = (var_v1->unk_06 / 10.0f);
-
-                var_v1->unk_0A = var_v1->unk_0E + (s32) (((var_v1->unk_16 - 2) * 0.5f) * temp1);
+                
+                var_v1->unk_0A = var_v1->unk_0E + (s16) (((var_v1->unk_16 - 2) / 2.0f) * temp1);
                 var_v1->unk_12 = (var_v1->unk_16 - 2) * (1.0f - temp1);
-
+                
                 if (var_v1->unk_06 >= 10) {
                     var_v1->unk_00 = 5;
                     var_v1->unk_06 = 0;
@@ -131,10 +129,10 @@ void func_80080C0C(void) {
             case 5:
                 var_v1->unk_06++;
                 temp1 = (var_v1->unk_06 / 10.0f);
-
-                var_v1->unk_08 = var_v1->unk_0C + (s32) ((var_v1->unk_14 * 0.5f) * temp1);
+                
+                var_v1->unk_08 = var_v1->unk_0C + (s16) ((var_v1->unk_14 / 2.0f) * temp1);
                 var_v1->unk_10 = var_v1->unk_14 * (1.0f - temp1);
-
+                
                 if (var_v1->unk_06 >= 11) {
                     var_v1->unk_00 = 0;
                     var_v1->unk_04 = -1;
@@ -144,9 +142,6 @@ void func_80080C0C(void) {
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1AA40/func_80080C0C.s")
-#endif
 
 extern Gfx D_80149A0[];
 

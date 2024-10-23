@@ -510,7 +510,6 @@ void func_i6_80116A80(unk_800E3A28* arg0) {
 
 extern u32 gGameFrameCount;
 extern s32 D_800CD380;
-Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
 
 Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_t0;

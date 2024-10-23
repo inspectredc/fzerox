@@ -47,7 +47,7 @@ typedef struct OptionsInfo {
     /* 0x18 */ OptionsTextureInfo optionTextureInfo;
 } OptionsInfo; // size = 0x20
 
-extern u8 D_801247C0[];
+extern unk_801247C0 D_801247C0;
 
 extern s32 D_i6_8011EED0[];
 extern s32 D_i6_8011EEF0[];

@@ -107,7 +107,8 @@
     "fzx_racer.h": "c",
     "ovl_i3.h": "c",
     "segment_symbols.h": "c",
-    "tex_assets.h": "c"
+    "tex_assets.h": "c",
+    "segment_17b1e0.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"

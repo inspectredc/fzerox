@@ -16,4 +16,11 @@ typedef struct ScissorBox {
     u32 bottom;
 } ScissorBox;
 
+// TODO: Figure out where this is supposed to come from
+#define F3DEX_GBI_PL
+#ifdef F3DEX_GBI_PL
+# define G_LIGHTING_POSITIONAL  0x00400000
+#endif
+#undef F3DEX_GBI_PL
+
 #endif // GFX_H

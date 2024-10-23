@@ -107,13 +107,6 @@ typedef struct unk_801437C0 {
     s16 unk_08;
 } unk_801437C0; // size = 0xA
 
-typedef struct unk_80141C88 {
-    s32 unk_00[3];
-    s8 unk_0C[0x8];
-    char unk_14[1]; // unk size
-    s8 unk_15[0x2B];
-} unk_80141C88; // size = 0x40
-
 typedef struct unk_80141EA8 {
     s32 unk_00;
     s32 unk_04;
@@ -160,6 +153,7 @@ typedef enum TimeAttackFinishOptions {
     /* 5 */ TIME_ATTACK_QUIT,
 } TimeAttackFinishOptions;
 
+void func_i3_801175A4(void);
 Gfx* func_i3_DrawBeveledBox(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
 
 Gfx* func_i3_8012EE90(Gfx* gfx, s32 arg1);

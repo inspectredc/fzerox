@@ -833,9 +833,9 @@ Gfx* func_i3_8013D2BC(Gfx* gfx) {
             gSPDisplayList(gfx++, D_80148C0);
             gSPViewport(gfx++, D_1000000.unk_2C2D8);
             gSPPerspNormalize(gfx++, D_i3_801439C0);
-            gSPMatrix(gfx++, &D_1000000.unk_2B308, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gSPMatrix(gfx++, &D_1000000.unk_2B348, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
-            gSPMatrix(gfx++, &D_1000000.unk_2B388, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(gfx++, &D_1000000.unk_2B2C8[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+            gSPMatrix(gfx++, &D_1000000.unk_2B2C8[2], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+            gSPMatrix(gfx++, &D_1000000.unk_2B2C8[3], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPVertex(gfx++, D_1000000.unk_29D08, 4, 0);
 
             gDPLoadTextureBlock(gfx++, func_800783AC(D_i3_801439BC->unk_04), G_IM_FMT_RGBA, G_IM_SIZ_16b,

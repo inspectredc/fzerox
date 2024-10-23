@@ -4,7 +4,7 @@
 #include "tex_assets.h"
 
 s8 D_i6_8011FAF0[30];
-u8* D_i6_8011FB10;
+unk_801247C0* D_i6_8011FB10;
 u8 D_i6_8011FB18[2][0x2580]; // Some kind of vtx buffer space?
 void* D_i6_80124618;
 s16 D_i6_80124620[176];
@@ -1959,7 +1959,7 @@ void func_i6_8011C050(void) {
     func_i6_8011C404();
     func_80080A40(&D_i6_801247A4);
     func_80080A48();
-    D_i6_8011FB10 = D_801247C0;
+    D_i6_8011FB10 = &D_801247C0;
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011C404.s")

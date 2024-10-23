@@ -210,7 +210,6 @@ void func_i3_80116974(void) {
     D_i3_80141994 = D_i3_80141990;
 }
 
-void func_i3_801175A4(void);
 extern s32 gNumPlayers;
 extern s32 D_800CD00C;
 extern s32 D_800E5EC0;
@@ -610,7 +609,7 @@ f32 D_i3_8013ED1C[] = { 0.0f, 2.0f, -2.0f };
 extern u32 gGameFrameCount;
 extern s32 D_800CD00C;
 extern s8 D_800CD010;
-extern s32 D_800F80A8;
+extern s32 D_800F80A8[];
 extern unk_8010B7B0 D_8010B7B0;
 
 #ifdef NON_MATCHING
@@ -856,7 +855,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     if (D_i3_8013DBE8[var_a3] < arg0->unk_1EC) {
         arg0->unk_1EC = D_i3_8013DBE8[var_a3];
     }
-    if (((D_80141900 >= 0x15) || (D_800F80A8 >= 0x1F)) && (gNumPlayers == 1) && (arg0->unk_00 != 0) &&
+    if (((D_80141900 >= 0x15) || (D_800F80A8[0] >= 0x1F)) && (gNumPlayers == 1) && (arg0->unk_00 != 0) &&
         (arg0->unk_2A0 >= 0x2711) && !(D_i3_80141910->unk_04 & 0x08000000) &&
         (func_i3_80115DF0(D_i3_80141910->unk_33C - sp94) < 138.0f)) {
 

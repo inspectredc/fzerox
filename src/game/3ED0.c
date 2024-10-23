@@ -48,19 +48,19 @@ void func_80069F5C(u64* arg0) {
     }
 }
 
-extern Vp D_80146A8[];
-extern Vp D_80146B8[];
-extern Vp D_80146C8[];
-extern Vp D_80146D8[];
-extern Vp D_80146E8[];
-extern Vp D_80146F8[];
-extern Vp D_8014708[];
-extern Vp D_8014718[];
-extern Vp D_8014728[];
-extern Vp D_8014738[];
-extern Vp D_8014748[];
-extern Vp D_8014758[];
-extern Vp D_8014768[];
+extern Vp D_80146A8;
+extern Vp D_80146B8;
+extern Vp D_80146C8;
+extern Vp D_80146D8;
+extern Vp D_80146E8;
+extern Vp D_80146F8;
+extern Vp D_8014708;
+extern Vp D_8014718;
+extern Vp D_8014728;
+extern Vp D_8014738;
+extern Vp D_8014748;
+extern Vp D_8014758;
+extern Vp D_8014768;
 
 extern ScissorBox D_800CD9C0;
 extern ScissorBox D_800CD9D0;
@@ -81,55 +81,55 @@ Gfx* func_8006A00C(Gfx* gfx, s32 arg1) {
 
     switch (arg1) {
         case 0:
-            gSPViewport(gfx++, D_80146A8);
+            gSPViewport(gfx++, &D_80146A8);
             scissorBox = &D_800CD9C0;
             break;
         case 1:
-            gSPViewport(gfx++, D_80146B8);
+            gSPViewport(gfx++, &D_80146B8);
             scissorBox = &D_800CD9D0;
             break;
         case 2:
-            gSPViewport(gfx++, D_80146C8);
+            gSPViewport(gfx++, &D_80146C8);
             scissorBox = &D_800CD9E0;
             break;
         case 3:
-            gSPViewport(gfx++, D_80146D8);
+            gSPViewport(gfx++, &D_80146D8);
             scissorBox = &D_800CD9F0;
             break;
         case 4:
-            gSPViewport(gfx++, D_80146E8);
+            gSPViewport(gfx++, &D_80146E8);
             scissorBox = &D_800CDA00;
             break;
         case 5:
-            gSPViewport(gfx++, D_80146F8);
+            gSPViewport(gfx++, &D_80146F8);
             scissorBox = &D_800CDA10;
             break;
         case 6:
-            gSPViewport(gfx++, D_8014708);
+            gSPViewport(gfx++, &D_8014708);
             scissorBox = &D_800CDA20;
             break;
         case 7:
-            gSPViewport(gfx++, D_8014718);
+            gSPViewport(gfx++, &D_8014718);
             scissorBox = &D_800CDA30;
             break;
         case 8:
-            gSPViewport(gfx++, D_8014728);
+            gSPViewport(gfx++, &D_8014728);
             scissorBox = &D_800CDA40;
             break;
         case 9:
-            gSPViewport(gfx++, D_8014738);
+            gSPViewport(gfx++, &D_8014738);
             scissorBox = &D_800CDA50;
             break;
         case 10:
-            gSPViewport(gfx++, D_8014748);
+            gSPViewport(gfx++, &D_8014748);
             scissorBox = &D_800CDA60;
             break;
         case 11:
-            gSPViewport(gfx++, D_8014758);
+            gSPViewport(gfx++, &D_8014758);
             scissorBox = &D_800CDA70;
             break;
         case 12:
-            gSPViewport(gfx++, D_8014768);
+            gSPViewport(gfx++, &D_8014768);
             scissorBox = &D_800CDA80;
             break;
     }

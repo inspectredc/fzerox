@@ -92,8 +92,8 @@
       - [0x9F3C0, c]
       - [0x9FE40, c]
       - [0xA1700, c]
-      # todo: split data
       - [0xA26F0, data]
+      - [0xA28A0, .data, A1700]
       - [0xA64B0, .rodata, 98080]
       - [0xA6730, .rodata, 9BD00]
       - [0xA6760, .rodata, 9FE40]

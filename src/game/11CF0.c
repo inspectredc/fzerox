@@ -204,19 +204,24 @@ Gfx* func_800783F4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
+                                 0);
         case 4:
         case 20:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 0, 0,
+                                 0);
         case 5:
         case 21:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 1, 0,
+                                 0);
         case 2:
         case 18:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 1,
+                                 0, 0);
         case 1:
         default:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
+                                 0, 0);
     }
 }
 
@@ -224,19 +229,24 @@ Gfx* func_8007857C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
+                                 0);
         case 4:
         case 20:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 0, 0,
+                                 0);
         case 5:
         case 21:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 1, 0,
+                                 0);
         case 2:
         case 18:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 1, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1,
+                                 0, 0);
         case 1:
         default:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 1, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0,
+                                 0, 0);
     }
 }
 
@@ -244,19 +254,24 @@ Gfx* func_8007870C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
+                                 0);
         case 4:
         case 20:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 0, 0,
+                                 0);
         case 5:
         case 21:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 4, 0, 3, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 1, 0,
+                                 0);
         case 2:
         case 18:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 1, arg5, arg6);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 1,
+                                 arg5, arg6);
         case 1:
         default:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 0, arg5, arg6);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
+                                 arg5, arg6);
     }
 }
 
@@ -264,19 +279,24 @@ Gfx* func_800788A4(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
+                                 0);
         case 4:
         case 20:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
+                                 G_IM_SIZ_4b, 3, 0, 0);
         case 5:
         case 21:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
+                                 G_IM_SIZ_4b, 3, 0, 0);
         case 2:
         case 18:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 1,
+                                 0, 0);
         case 1:
         default:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 0, 2, 0, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_RGBA,
+                                 G_IM_SIZ_16b, 0, 0, 0);
     }
 }
 
@@ -284,19 +304,24 @@ Gfx* func_80078A4C(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
+                                 0);
         case 4:
         case 20:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
+                                 G_IM_SIZ_4b, 3, 0, 0);
         case 5:
         case 21:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
+                                 G_IM_SIZ_4b, 3, 0, 0);
         case 2:
         case 18:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 0, 2, 0, 1, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 1,
+                                 0, 0);
         case 1:
         default:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 0, 2, 0, 0, 1);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_RGBA,
+                                 G_IM_SIZ_16b, 0, 0, 1);
     }
 }
 
@@ -304,19 +329,24 @@ Gfx* func_80078BF8(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, TexturePtr 
 
     switch (arg1->unk_00) {
         case 3:
-            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, 3, 1, 2, 0, 0, 0);
+            return func_8007B14C(gfx, texture, arg2, arg3, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
+                                 0);
         case 4:
         case 20:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
+                                 G_IM_SIZ_4b, 3, 0, 0);
         case 5:
         case 21:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 4, 0, 3, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
+                                 G_IM_SIZ_4b, 3, 0, 0);
         case 2:
         case 18:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 0, 2, 1, 1, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_RGBA,
+                                 G_IM_SIZ_16b, 1, 1, 0);
         case 1:
         default:
-            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, 0, 2, 1, 0, 0);
+            return func_8007CDB0(gfx, texture, arg2, arg3, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_RGBA,
+                                 G_IM_SIZ_16b, 1, 0, 0);
     }
 }
 

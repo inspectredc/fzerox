@@ -20,9 +20,13 @@
     start: 0x16C8A0
 
   - name: segment_17B1E0
-    type: bin
+    exclusive_ram_id: segment_03
+    type: code
+    dir: assets
     vram: 0x03000000
     start: 0x17B1E0
+    subsegments:
+      - [0x17B1E0, .data, segment_17B1E0/segment_17B1E0]
 
   - name: segment_17B960
     type: bin
