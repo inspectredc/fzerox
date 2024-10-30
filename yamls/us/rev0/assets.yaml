@@ -112,6 +112,11 @@
     type: bin
     start: 0x2747F0
 
+  # Cup Info
+  - name: segment_2AD1E0
+    type: bin
+    start: 0x2AD1E0
+
   - name: mio0/segment_15
     type: bin
     start: 0x2B9EA4

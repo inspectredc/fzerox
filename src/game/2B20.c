@@ -314,7 +314,7 @@ void func_80068F04(void) {
                 D_800CD020++;
                 switch (D_800CD010) {
                     case 1:
-                        if (!(D_800E416E & (CONT_A | CONT_START))) {
+                        if (!(D_800E416E & (BTN_A | BTN_START))) {
                             break;
                         }
                         /* fallthrough */
@@ -517,11 +517,11 @@ void func_800690FC(void) {
     }
 }
 
-extern s16 D_80106DA0;
+extern s16 D_i2_80106DA0;
 
 Gfx* func_80069698(Gfx* gfx) {
 
-    if ((D_800CD044 != 3) && (D_80106DA0 != 0)) {
+    if ((D_800CD044 != 3) && (D_i2_80106DA0 != 0)) {
         gfx = D_800CD0FC[D_800DCE44 & 0x1F](gfx);
     }
     return func_i2_800FD184(gfx);

@@ -4,7 +4,7 @@
 #include "tex_assets.h"
 #include "segment_symbols.h"
 
-f32 D_i3_80141E30[30];
+f32 D_i3_80141E30[TOTAL_RACER_COUNT];
 unk_80141EA8 D_i3_80141EA8[4];
 s32 D_i3_80141FC8[4];
 s32 D_i3_80141FD8[4];

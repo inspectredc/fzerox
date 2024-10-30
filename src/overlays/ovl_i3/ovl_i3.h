@@ -3,8 +3,6 @@
 
 #include "unk_structs.h"
 
-#define MAX_TIMER (60 * 60 * 1000 - 1)
-
 typedef struct unk_8013E7A8 {
     s16 unk_00;
     s8 unk_02;

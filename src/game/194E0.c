@@ -1,19 +1,19 @@
 #include "global.h"
 #include "PR/leo.h"
 
-extern s32 D_800CD510;
-extern s32 gSkyboxType;
-extern s32 gBackgroundFloorType;
+bool D_800CD510 = false;
+s32 gSkyboxType;
+s32 gBackgroundFloorType;
+unk_800E4268 D_800E4268[1][6];
 
 void func_8007F4E0(s32 arg0, s32 arg1) {
-    D_800CD510 = 1;
+    D_800CD510 = true;
     gBackgroundFloorType = arg0;
     gSkyboxType = arg1;
 }
 
-#ifdef IMPORT_BSS
 s8 D_800E42C8[4];
-extern s16 D_800E42CC;
+s16 D_800E42CC;
 
 void func_8007F500(void) {
     s32 i;
@@ -24,9 +24,6 @@ void func_8007F500(void) {
 
     D_800E42CC = 0;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/194E0/func_8007F500.s")
-#endif
 
 extern OSMesgQueue D_800DCAE0;
 
@@ -58,18 +55,20 @@ void func_8007F520(void) {
 void func_80076310(void);
 void func_8007F520(void);
 void func_800762B0(LEODiskID);
-extern OSMesgQueue D_800E42D0;
-extern OSMesg D_800E42E8;
+
+OSMesgQueue D_800E42D0;
+OSMesg D_800E42E8[16];
+
 extern s32 D_80428610;
-extern LEODiskID D_80428618;
+extern LEODiskID D_i1_80428618;
 extern LEODiskID leoBootID;
 
 void func_8007F5EC(void) {
 
     func_80076310();
-    osCreateMesgQueue(&D_800E42D0, &D_800E42E8, 0x10);
+    osCreateMesgQueue(&D_800E42D0, D_800E42E8, ARRAY_COUNT(D_800E42E8));
     func_i1_80404AEC("01", "EFZE");
-    if (func_i1_80403F4C(0x101, &D_800E42E8, 0x10) < 0) {
+    if (func_i1_80403F4C(0x101, D_800E42E8, ARRAY_COUNT(D_800E42E8)) < 0) {
         switch (D_80428610) {
             case 0x29:
                 return;
@@ -86,8 +85,8 @@ label:
         func_8007F520();
     }
     func_i1_8040428C();
-    func_800762B0(D_80428618);
-    leoBootID = D_80428618;
+    func_800762B0(D_i1_80428618);
+    leoBootID = D_i1_80428618;
 
     switch (func_i1_804046F0()) {
         case 1:

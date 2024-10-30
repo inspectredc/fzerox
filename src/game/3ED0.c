@@ -143,43 +143,43 @@ Gfx* func_8006A00C(Gfx* gfx, s32 arg1) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006A6E4.s")
 
-extern s32 D_800CD170;
-extern u32 D_800CD174;
-extern s32 D_800CD178;
-extern u32 D_800CD17C;
+s32 gRandSeed1 = 12345;
+u32 gRandMask1 = 6789;
+s32 gRandSeed2 = 9876;
+u32 gRandMask2 = 54321;
 
 void func_8006A8F0(s32 arg0, s32 arg1) {
-    D_800CD170 = arg0;
-    D_800CD174 = arg1;
+    gRandSeed1 = arg0;
+    gRandMask1 = arg1;
 }
 
 void func_8006A904(s32 arg0, s32 arg1) {
-    D_800CD178 = arg0;
-    D_800CD17C = arg1;
+    gRandSeed2 = arg0;
+    gRandMask2 = arg1;
 }
 
 u32 Math_Rand1(void) {
 
-    D_800CD170 = D_800CD170 * 0x41C64E6D + 0x3039;
-    if (D_800CD174 & 1) {
-        D_800CD174 ^= 0x11020;
+    gRandSeed1 = gRandSeed1 * LCG_MULTIPLIER + LCG_INCREMENT_1;
+    if (gRandMask1 & 1) {
+        gRandMask1 ^= 0x11020;
     }
 
-    D_800CD174 >>= 1;
+    gRandMask1 >>= 1;
 
-    return D_800CD170 ^ D_800CD174;
+    return gRandSeed1 ^ gRandMask1;
 }
 
 u32 Math_Rand2(void) {
 
-    D_800CD178 = D_800CD178 * 0x41C64E6D + 0x10932;
-    if (D_800CD17C & 1) {
-        D_800CD17C ^= 0x11020;
+    gRandSeed2 = gRandSeed2 * LCG_MULTIPLIER + LCG_INCREMENT_2;
+    if (gRandMask2 & 1) {
+        gRandMask2 ^= 0x11020;
     }
 
-    D_800CD17C >>= 1;
+    gRandMask2 >>= 1;
 
-    return D_800CD178 + D_800CD17C;
+    return gRandSeed2 + gRandMask2;
 }
 
 s32 Math_Round(f32 num) {
@@ -406,8 +406,7 @@ void func_8006B908(MtxF* arg0, MtxF* arg1, MtxF* arg2) {
     arg2->m[3][3] = 1.0f;
 }
 
-// Matrix_FromMtx
-void func_8006BB80(Mtx* src2, MtxF* dest) {
+void Matrix_FromMtx(Mtx* src2, MtxF* dest) {
     s32 i;
     s32 j;
     // Potential Re-cast?
@@ -420,8 +419,7 @@ void func_8006BB80(Mtx* src2, MtxF* dest) {
     }
 }
 
-// Matrix_ToMtx
-void func_8006BBE8(MtxF* src, Mtx* dest2) {
+void Matrix_ToMtx(MtxF* src, Mtx* dest2) {
     s32 i;
     s32 j;
     s32 intValue;
@@ -507,7 +505,7 @@ void func_8006BC84(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
     arg1->m[1][3] = 0.0f;
     arg1->m[2][3] = 0.0f;
     arg1->m[3][3] = 1.0f;
-    func_8006BBE8(arg1, arg0);
+    Matrix_ToMtx(arg1, arg0);
 }
 
 void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6, f32* arg7) {
@@ -566,7 +564,7 @@ void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
     arg1->m[1][3] = 0.0f;
     arg1->m[2][3] = 0.0f;
     arg1->m[3][3] = 1.0f;
-    func_8006BBE8(arg1, arg0);
+    Matrix_ToMtx(arg1, arg0);
 }
 
 void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6) {
@@ -594,7 +592,7 @@ void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
     arg1->m[2][3] = 0.0f;
     arg1->m[3][3] = 1.0f;
 
-    func_8006BBE8(arg1, arg0);
+    Matrix_ToMtx(arg1, arg0);
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006C378.s")
@@ -635,7 +633,7 @@ void func_8006CB0C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
         arg1->zw = temp_fv0 * arg4;
         arg1->wx = arg1->wy = arg1->wz = 0.0f;
         arg1->ww = 1.0f;
-        func_8006BBE8(arg1, arg0);
+        Matrix_ToMtx(arg1, arg0);
     }
 }
 
@@ -670,5 +668,5 @@ void func_8006D2E0(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
     arg1->m[3][3] = arg2;
     arg1->m[0][1] = arg1->m[0][2] = arg1->m[0][3] = arg1->m[1][0] = arg1->m[1][2] = arg1->m[1][3] = arg1->m[2][0] =
         arg1->m[2][1] = arg1->m[2][3] = 0.0f;
-    func_8006BBE8(arg1, arg0);
+    Matrix_ToMtx(arg1, arg0);
 }

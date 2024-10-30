@@ -1,48 +1,75 @@
 #include "global.h"
 #include "fzxthread.h"
+#include "PR/leo.h"
 
-s32 func_80403040(s32*, s32*, s32*, s32*);
+OSIoMesg D_800E4330;
+s16* D_800E4348;
+s16* D_800E434C;
+s32 D_800E4350[96];
+s32 D_800E44D0[96];
+s32 D_800E4650[96];
+
+s32 D_800CD520[] = { 0x6CA06F18, 0x6CB82A14, 0x6CBE4314, 0x6CC29A14, 0x6CDE8D16, 0x6CFADB14, 0x6D249B14, 0x6D422314,
+                     0x6D445D14, 0x6D594D14, 0x6D675414, 0x6D6F870E, 0x6D7F2402, 0x6D829108, 0x6D872102, 0x6D885A14,
+                     0x6D998B14, 0x6DB15A14, 0x6DC28A14, 0x6DD88B14, 0x6DF08A14, 0x6E068B14, 0x6E1E8B14, 0x6E368A14,
+                     0x6E4C8B14, 0x6E648B14, 0x6E7C270E, 0x6E802A0E, 0x6E86970E, 0x6E9A850C, 0x6EA6970E, 0x6EBA7A14,
+                     0x6ED0DB14, 0x6EFAAA14, 0x6F169A14, 0x6F32AB14, 0x6F509A14, 0x6F6C9A14, 0x6F889A14, 0x6FA4AB14,
+                     0x6FC2AA14, 0x6FDE2A14, 0x6FE47B14, 0x6FFC9A14, 0x70188A14, 0x702EBA14, 0x704F9A14, 0x706BBB14,
+                     0x708F9A14, 0x70ABBB14, 0x70CF9A14, 0x70EB9B14, 0x7109AA14, 0x71259B14, 0x7143AA14, 0x715FEA14,
+                     0x7186AA14, 0x71A2AA14, 0x71BE9A14, 0x71DA3D14, 0x71E87A14, 0x71FE4D14, 0x720C5214, 0x721190FC,
+                     0x6CA06F18, 0x722C8910, 0x72408B14, 0x72588910, 0x726C7C16, 0x72868910, 0x729A6A14, 0x72AB8C10,
+                     0x72C57A14, 0x72DB2A14, 0x72E14E14, 0x72F07A14, 0x73062A14, 0x730CB810, 0x73277810, 0x73398910,
+                     0x734D8C10, 0x73678C10, 0x73815810, 0x738F7910, 0x73A34A12, 0x73AE780E, 0x73C0870E, 0x73D0B70E,
+                     0x73E8770E, 0x73F88B0E, 0x7410770E, 0x74205D14, 0x74352A14, 0x743B6D14, 0x74506114, 0x00000000 };
+
+u16 D_800CD6A0[] = {
+    0x0001, 0x1085, 0x2109, 0x318D, 0x4211, 0x5295, 0x6319, 0x739D,
+    0x8C63, 0x9CE7, 0xAD6B, 0xBDEF, 0xCE73, 0xDEF7, 0xEF7B, 0xFFFF,
+};
+
 extern OSMesgQueue D_800DCA68;
 extern OSPiHandle* D_800DCCE0;
-extern OSIoMesg D_800E4330;
 
 typedef struct unk_8007F86C_arg_1 {
     s8 pad[0x80];
 } unk_8007F86C_arg_1;
 
 void func_8007F7D0(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s32* arg4) {
-    u32 temp_t8 = func_80403040(arg0, arg2, arg3, arg4) + 0xA0000;
+    u32 temp_t8 = LeoGetAAdr2(arg0, arg2, arg3, arg4) + 0xA0000;
 
     D_800E4330.hdr.pri = OS_MESG_PRI_NORMAL;
     D_800E4330.hdr.retQueue = &D_800DCA68;
     D_800E4330.dramAddr = arg1;
     D_800E4330.devAddr = temp_t8;
-    D_800E4330.size = 0x80;
+    D_800E4330.size = sizeof(unk_8007F86C_arg_1);
     D_800DCCE0->transferInfo.cmdType = LEO_CMD_TYPE_2;
     osEPiStartDma(D_800DCCE0, &D_800E4330, OS_READ);
     MQ_WAIT_FOR_MESG(&D_800DCA68, NULL);
 }
 
+#ifdef NON_MATCHING
+// instruction swap
+void func_8007F86C(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s32* arg4) {
+    s32 i;
+
+    for (i = 0; arg0[i] != 0; i++) {
+        func_8007F7D0(arg0[i], &arg1[i], &arg2[i], &arg3[i], &arg4[i]);
+    }
+}
+#else
 void func_8007F86C(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s32* arg4);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/197D0/func_8007F86C.s")
+#endif
 
-extern s32 D_800CD520;
-extern s32 D_800E4350[];
-extern s32 D_800E44D0[];
-extern s32 D_800E4650[];
 extern unk_8007F86C_arg_1 D_80400008[];
 
 void func_8007F904(void) {
-    func_8007F86C(&D_800CD520, D_80400008, D_800E4350, D_800E44D0, D_800E4650);
+    func_8007F86C(D_800CD520, D_80400008, D_800E4350, D_800E44D0, D_800E4650);
 }
-
-extern s16* D_800E4348;
 
 void func_8007F94C(void) {
     D_800E4348 = osViGetNextFramebuffer();
 }
-
-extern s16* D_800E434C;
 
 void func_8007F970(void) {
     u8 i;
@@ -79,7 +106,6 @@ void func_8007F9E0(void) {
     func_800751C0();
 }
 
-extern u16 D_800CD6A0[];
 extern s16* D_800E4348;
 
 void func_8007FA64(s32 arg0, s32 arg1, u8* arg2, s32 arg3, s32 arg4, s32 arg5) {

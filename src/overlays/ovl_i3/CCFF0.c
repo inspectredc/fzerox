@@ -164,8 +164,6 @@ extern Gfx D_303A5F8[];
 extern Gfx D_303A810[];
 extern FrameBuffer* D_800DCCD0[];
 extern char* D_800E4180[55];
-extern u8 D_C9F00[];
-extern u8 D_D7500[];
 extern Gfx D_8014940[];
 extern u8 D_303C3F0[];
 extern u8 D_303D1F0[];

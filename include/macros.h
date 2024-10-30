@@ -17,9 +17,12 @@
 #define DOT_XYZ(v1Ptr, v2Ptr) ((v1Ptr)->x * (v2Ptr)->x + (v1Ptr)->y * (v2Ptr)->y + (v1Ptr)->z * (v2Ptr)->z)
 #define DIST_DOT_XYZ(v1Ptr, v2APtr, v2BPtr) ((v1Ptr)->x * ((v2APtr)->x - (v2BPtr)->x) + (v1Ptr)->y * ((v2APtr)->y - (v2BPtr)->y) + (v1Ptr)->z * ((v2APtr)->z - (v2BPtr)->z))
 
+#define ALIGN_2(x) (((x) / 2) * 2)
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
+
+#define MAX_TIMER (60 * 60 * 1000 - 1)
 
 /*
  * Macros for libultra

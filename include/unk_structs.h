@@ -42,15 +42,14 @@ typedef struct unk_800F8510 {
     unk_8006FC8C* unk_10;
     s16 unk_14[6];
     s32 unk_20[5];
-    u8 unk_34[4][20];
-    s8 unk_84[0x14];
+    u8 unk_34[5][20];
     f32 unk_98[5];
-    s8 unk_AC[5][4];
+    u8 unk_AC[5][4];
     f32 unk_C0;
     u8 unk_C4[20];
     s32 unk_D8;
     u8 unk_DC[20];
-} unk_800F8510;
+} unk_800F8510; // size = 0xF0
 
 typedef struct unk_8010B7D0 {
     Vec3f unk_00;
@@ -582,8 +581,10 @@ typedef struct unk_802D3978 {
 typedef struct unk_800E5FF8 {
     u32 unk_0000;
     s32 unk_0004;
-    s32 unk_0008[1]; // unknown length
-    s8 unk_000C[0x3F58];
+    s32 unk_0008[3];
+    s32 unk_0014;
+    s32 unk_0018;
+    s8 unk_001C[16200];
     s32 unk_3F64;
     s16 unk_3F68;
     u8 unk_3F6A[20];
@@ -660,50 +661,65 @@ typedef struct unk_800E4268 {
     s8 unk_0E[0x2];
 } unk_800E4268; // size = 0x10
 
+typedef struct unk_80141C88_unk_1D {
+    u8 unk_00[20];
+    s8 unk_14[12];
+} unk_80141C88_unk_1D;
+
 typedef struct unk_80141C88 {
     s32 unk_00;
     s32 unk_04;
     s32 unk_08;
     s32 unk_0C;
     u16 unk_10;
-    s8 unk_12[0x2];
-    char unk_14[1];
-    s8 unk_15[0x8];
-    u8 unk_1D[20];
-    s8 unk_31[0xF];
+    u16 unk_12;
+    char unk_14[9];
+    unk_80141C88_unk_1D unk_1D;
 } unk_80141C88; // size = 0x40
 
-/* 
-    spacing marker
- */
-
 typedef struct unk_struct_110 {
-    s16 unk_00;
-    s8 unk_02[0x10A];
-    s32 unk_10C; // added to allow struct copy match
+    u16 unk_00;
+    s16 unk_02;
+    s32 unk_04[5];
+    f32 unk_18[5];
+    f32 unk_2C;
+    s32 unk_30;
+    u8 unk_34[5][4];
+    u8 unk_48[8];
+    u8 unk_50[5][32];
+    u8 unk_F0[20];
+    s8 unk_104[0xC];
 } unk_struct_110; // size = 0x110
 
 typedef struct unk_struct_80 {
-    s16 unk_00;
-    s8 unk_02[0x7E];
+    u16 unk_00;
+    u16 unk_02;
+    s32 unk_04;
+    f32 unk_08[30];
 } unk_struct_80; // size = 0x80
 
-// possibly just unk_struct_40
 typedef struct unk_struct_40_2 {
-    s16 unk_00;
-    s8 unk_02[0x3A];
-    s32 unk_3C;
+    u16 unk_00;
+    s16 unk_02;
+    s32 unk_04;
+    s16 unk_08;
+    u8 unk_0A[6][9];
 } unk_struct_40_2; // size = 0x40
 
 typedef struct unk_struct_10 {
-    u8 unk_00[14];
-    s16 unk_0E;
-} unk_struct_10;
+    u8 unk_00[8];
+    u8 unk_08;
+    u8 unk_09;
+    u8 unk_0A[4];
+    u16 unk_0E;
+} unk_struct_10; // size = 0x10
 
 typedef struct unk_struct_10_2 {
-    s16 unk_00;
-    u8 unk_02[14];
-} unk_struct_10_2;
+    u16 unk_00;
+    s16 unk_02;
+    s32 unk_04[1];
+    u8 unk_08[8];
+} unk_struct_10_2; // size = 0x10
 
 typedef struct unk_struct_19E0 {
     unk_struct_10 unk_00;
@@ -713,18 +729,33 @@ typedef struct unk_struct_19E0 {
 } unk_struct_19E0; // size = 0x19E0
 
 typedef struct unk_struct_40 {
-    s16 unk_00;
-    s8 unk_02[0x3E];
+    u16 unk_00;
+    u16 unk_02;
+    s32 unk_04;
+    s32 unk_08;
+    s32 unk_0C;
+    u16 unk_10;
+    s8 unk_12[5];
+    u8 unk_17[9];
+    unk_80141C88_unk_1D unk_20;
 } unk_struct_40; // size = 0x40
 
 typedef struct unk_struct_3F80 {
-    s16 unk_00;
-    s8 unk_02[0x3F7E];
+    u16 unk_00;
+    s16 unk_02;
+    s32 unk_04[3];
+    s32 unk_10;
+    u32 unk_14;
+    s32 unk_18;
+    s32 unk_1C;
+    u8 unk_20[16200];
+    s8 unk_3F68[0x18];
 } unk_struct_3F80; // size = 0x3F80
 
 typedef struct unk_struct_60 {
-    s16 unk_00;
-    s8 unk_02[0x5E];
+    u16 unk_00;
+    s8 unk_02[0xE];
+    u16 unk_10[4][10];
 } unk_struct_60; // size = 0x60
 
 typedef struct unk_801247C0 {
@@ -735,5 +766,44 @@ typedef struct unk_801247C0 {
     unk_struct_60 unk_7F80;
     s8 unk_7FE0[0x20];
 } unk_801247C0; // size = 0x8000
+
+typedef struct unk_80111870 {
+    Vec3f unk_00;
+    Vec3f unk_0C;
+    f32 unk_18;
+    u32 unk_1C;
+    Racer* unk_20;
+} unk_80111870; // size = 0x24
+
+typedef struct unk_80112FB8 {
+    f32 unk_00;
+    s32 unk_04;
+    Racer* unk_08;
+} unk_80112FB8; // size = 0xC
+
+typedef struct unk_801122A8 {
+    Vec3f unk_00;
+    Vec3f unk_0C;
+    Vec3f unk_18;
+    Vec3f unk_24;
+    Vec3f unk_30;
+    u32 unk_3C;
+    Racer* unk_40;
+} unk_801122A8; // size = 0x44
+
+typedef struct unk_80113140 {
+    Vec3f unk_00;
+    Vec3f unk_0C;
+    Vec3f unk_18;
+    Vec3i unk_24;
+    Vec3f unk_30;
+    Vec3f unk_3C;
+    s16 unk_48;
+    s16 unk_4A;
+    s16 unk_4C;
+    s16 unk_4E;
+    u32 unk_50;
+    Racer* unk_54;
+} unk_80113140; // size = 0x58
 
 #endif // UNK_STRUCTS_H

@@ -2,6 +2,10 @@
 #include "fzxthread.h"
 #include "segment_symbols.h"
 
+u32 gSegments[16];
+u32 D_800E33C0[3];
+u32 D_800E33D0[3];
+
 u16 D_800CD2E0 = 0;
 s8 D_800CD2E4 = 0;
 s8 D_800CD2E8 = 0;
@@ -143,7 +147,6 @@ void func_800766F0(void) {
     }
 }
 
-extern u32 D_800E33C0[];
 extern u8 D_80115FC0[];
 
 void func_80076804(void) {
@@ -151,8 +154,6 @@ void func_80076804(void) {
     D_800E33C0[1] = 0x803DA800;
     D_800E33C0[2] = ALIGN16((uintptr_t) D_8024DC80);
 }
-
-extern u32 D_800E33D0[];
 
 void func_80076848(void) {
     D_800E33D0[0] = 0x801D9800;
@@ -241,8 +242,6 @@ u8* func_800768F4(s32 arg0, size_t arg1) {
     }
     return sp4C;
 }
-
-extern u32 gSegments[];
 
 s32 func_80076B80(s32 arg0, s32 arg1) {
     gSegments[arg0] = K0_TO_PHYS(arg1);

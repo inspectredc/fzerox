@@ -2906,7 +2906,8 @@ void func_8008C14C(Racer* arg0) {
     } else {
         arg0->unk_04 = 0x60008000;
     }
-    if ((arg0->unk_00 >= gNumPlayers) || (D_800CE77C != 0) || (D_800DCE44 == 6) || (D_800DCE44 == 0x11) || (D_800CD010 != 0)) {
+    if ((arg0->unk_00 >= gNumPlayers) || (D_800CE77C != 0) || (D_800DCE44 == 6) || (D_800DCE44 == 0x11) ||
+        (D_800CD010 != 0)) {
         arg0->unk_04 |= 0x800000;
     }
     arg0->unk_0C.unk_08 = func_8009E108(arg0->unk_0C.unk_00, arg0->unk_0C.unk_04, &arg0->unk_244);
@@ -2939,8 +2940,14 @@ void func_8008C14C(Racer* arg0) {
     arg0->unk_2AA = 1;
     arg0->unk_28C = NULL;
     arg0->unk_08 = 0x8000;
-    arg0->unk_2B0 = arg0->unk_288 = arg0->unk_278 = arg0->unk_27A = arg0->unk_27C = arg0->unk_220 = arg0->unk_21C = arg0->unk_29C = arg0->unk_2A0 = arg0->unk_2A8 = arg0->unk_204 = arg0->unk_208 = arg0->unk_20C = arg0->unk_218 = arg0->unk_214 = arg0->unk_210 = 0;
-    arg0->unk_118.x = arg0->unk_118.y = arg0->unk_118.z = arg0->unk_224 = arg0->unk_1DC = arg0->unk_E4 = arg0->unk_238 = arg0->unk_200 = arg0->unk_A0 = arg0->unk_1D4 = arg0->unk_1D8 = arg0->unk_98 = arg0->unk_9C = arg0->unk_198 = arg0->unk_18C.x = arg0->unk_18C.y = arg0->unk_18C.z = arg0->unk_68.x = arg0->unk_68.y = arg0->unk_68.z = arg0->unk_5C.x = arg0->unk_5C.y = arg0->unk_5C.z = arg0->unk_80.x = arg0->unk_80.y = arg0->unk_80.z = arg0->unk_74.x = arg0->unk_74.y = arg0->unk_74.z = var_fs0 = 0.0f;
+    arg0->unk_2B0 = arg0->unk_288 = arg0->unk_278 = arg0->unk_27A = arg0->unk_27C = arg0->unk_220 = arg0->unk_21C =
+        arg0->unk_29C = arg0->unk_2A0 = arg0->unk_2A8 = arg0->unk_204 = arg0->unk_208 = arg0->unk_20C = arg0->unk_218 =
+            arg0->unk_214 = arg0->unk_210 = 0;
+    arg0->unk_118.x = arg0->unk_118.y = arg0->unk_118.z = arg0->unk_224 = arg0->unk_1DC = arg0->unk_E4 = arg0->unk_238 =
+        arg0->unk_200 = arg0->unk_A0 = arg0->unk_1D4 = arg0->unk_1D8 = arg0->unk_98 = arg0->unk_9C = arg0->unk_198 =
+            arg0->unk_18C.x = arg0->unk_18C.y = arg0->unk_18C.z = arg0->unk_68.x = arg0->unk_68.y = arg0->unk_68.z =
+                arg0->unk_5C.x = arg0->unk_5C.y = arg0->unk_5C.z = arg0->unk_80.x = arg0->unk_80.y = arg0->unk_80.z =
+                    arg0->unk_74.x = arg0->unk_74.y = arg0->unk_74.z = var_fs0 = 0.0f;
     arg0->unk_A4 = arg0->unk_230 = arg0->unk_178 = arg0->unk_1E8 = 0.0f;
     arg0->unk_174 = 1.0f;
     arg0->unk_1EC = 2500.0f / 27.0f;
@@ -2952,7 +2959,7 @@ void func_8008C14C(Racer* arg0) {
     arg0->unk_1F4 = ((4 - temp_s2->unk_11) * 312.0f) + 780.0f + ((312.0f * (temp_s2->unk_14 - 780.0f)) / 1560.0f);
 
     arg0->unk_1F4 = SQ(arg0->unk_1F4);
-    
+
     for (i = 0; i < 2;) {
         temp_fv0_4 = func_8008B2D8(arg0, arg0->unk_1A8);
         if (temp_fv0_4 == var_fs0) {
@@ -2962,7 +2969,7 @@ void func_8008C14C(Racer* arg0) {
         }
         var_fs0 = temp_fv0_4;
     }
-    
+
     arg0->unk_234 = 1.7f;
 
     arg0->unk_228 = arg0->unk_22C = D_800CF160[temp_s2->unk_11];
@@ -2973,13 +2980,14 @@ void func_8008C14C(Racer* arg0) {
     arg0->unk_328 = 1.0f - arg0->unk_1D0;
     arg0->unk_32C = arg0->unk_22C * D_800CE778;
 
-    arg0->unk_270 = (arg0->unk_0C.unk_08 * (arg0->unk_0C.unk_00->unk_34->unk_18 - arg0->unk_0C.unk_00->unk_18)) + arg0->unk_0C.unk_00->unk_18;
-    arg0->unk_274 = (arg0->unk_0C.unk_08 * (arg0->unk_0C.unk_00->unk_34->unk_1C - arg0->unk_0C.unk_00->unk_1C)) + arg0->unk_0C.unk_00->unk_1C;
+    arg0->unk_270 = (arg0->unk_0C.unk_08 * (arg0->unk_0C.unk_00->unk_34->unk_18 - arg0->unk_0C.unk_00->unk_18)) +
+                    arg0->unk_0C.unk_00->unk_18;
+    arg0->unk_274 = (arg0->unk_0C.unk_08 * (arg0->unk_0C.unk_00->unk_34->unk_1C - arg0->unk_0C.unk_00->unk_1C)) +
+                    arg0->unk_0C.unk_00->unk_1C;
 }
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_8008C14C.s")
 #endif
-
 
 #ifdef IMPORT_BSS
 extern s16 D_800CE4D4;
@@ -3483,8 +3491,6 @@ void func_8008DBB8(Racer* arg0, s32 arg1) {
 }
 
 extern f32 D_800CE770;
-void func_i2_80105648(f32, f32, f32, f32, f32, f32, f32, Racer*);
-void func_i2_80105A28(f32, f32, f32, f32, f32, f32, Mtx3F*, s32, s32, s32, Racer*);
 
 void func_8008DCD8(Racer* arg0, f32 arg1) {
     s32 pad[7];
@@ -3525,23 +3531,23 @@ void func_8008DCD8(Racer* arg0, f32 arg1) {
                 temp_s6 = arg0->unk_2E4;
                 temp_s7 = arg0->unk_2E8;
 
-                i = (arg0->unk_00 < gNumPlayers) ? 0x3C : 0x1E;
+                i = (arg0->unk_00 < gNumPlayers) ? 60 : 30;
                 do {
 
-                    temp_fs2 = ((Math_Rand1() & 0x1FFFF) * 0.00011444179f) - 7.5f;
+                    temp_fs2 = ((Math_Rand1() & 0x1FFFF) * (15.0f / 131071.0f)) - 7.5f;
 
-                    temp_fs0 = ((Math_Rand2() & 0x1FFFF) * 0.00005340617f) + 3.5f;
+                    temp_fs0 = ((Math_Rand2() & 0x1FFFF) * (7.0f / 131071.0f)) + 3.5f;
 
-                    temp_fs1 = ((Math_Rand1() & 0x1FFFF) * 0.00011444179f) - 7.5f;
+                    temp_fs1 = ((Math_Rand1() & 0x1FFFF) * (15.0f / 131071.0f)) - 7.5f;
 
                     func_i2_80105A28(((s32) (Math_Rand2() % 32) - 0x10) + arg0->unk_0C.unk_34.x,
                                      ((s32) (Math_Rand1() % 32) - 0x10) + arg0->unk_0C.unk_34.y,
                                      ((s32) (Math_Rand1() % 32) - 0x10) + arg0->unk_0C.unk_34.z,
-                                     (arg0->unk_C0.xz * temp_fs2) + sp90.z + (temp_fs0 * arg0->unk_C0.xy) +
+                                     sp90.z + (arg0->unk_C0.xz * temp_fs2) + (temp_fs0 * arg0->unk_C0.xy) +
                                          (temp_fs1 * arg0->unk_C0.xx),
-                                     (arg0->unk_C0.yz * temp_fs2) + sp90.y + (temp_fs0 * arg0->unk_C0.yy) +
+                                     sp90.y + (arg0->unk_C0.yz * temp_fs2) + (temp_fs0 * arg0->unk_C0.yy) +
                                          (temp_fs1 * arg0->unk_C0.yx),
-                                     (arg0->unk_C0.zz * temp_fs2) + sp90.x + (temp_fs0 * arg0->unk_C0.zy) +
+                                     sp90.x + (arg0->unk_C0.zz * temp_fs2) + (temp_fs0 * arg0->unk_C0.zy) +
                                          (temp_fs1 * arg0->unk_C0.zx),
                                      &arg0->unk_C0, temp_s5, temp_s6, temp_s7, arg0);
                     i--;
@@ -3575,8 +3581,6 @@ void func_8008DCD8(Racer* arg0, f32 arg1) {
         }
     }
 }
-
-void func_i2_801054C0(f32, f32, f32, f32, f32, f32, f32, Racer*);
 
 void func_8008E188(Racer* arg0, f32 arg1, f32 arg2, f32 arg3) {
     s32 pad;
