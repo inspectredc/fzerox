@@ -2281,8 +2281,7 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                 }
             }
         }
-        if ((D_800DCE98[D_800DD218[0]].unk_7C & (BTN_A | BTN_START)) && (D_i3_801419A2 == 0) &&
-            (D_i3_80141DCC == 0)) {
+        if ((D_800DCE98[D_800DD218[0]].unk_7C & (BTN_A | BTN_START)) && (D_i3_801419A2 == 0) && (D_i3_80141DCC == 0)) {
             switch (sRaceMenuOptionIndex) {
                 case TIME_ATTACK_RETRY:
                     if (D_800CD010 == 0) {

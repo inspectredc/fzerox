@@ -305,112 +305,112 @@ s32 func_i2_80103674(unk_struct_60*);
 void func_i2_80100C9C(unk_801247C0* arg0) {
     s32 i;
     s32 j;
-    s32 temp_v0;
+    s32 checksum;
     unk_struct_80* var_s1;
     unk_struct_19E0* var_v1;
 
-    temp_v0 = func_i2_8010356C(arg0->unk_00);
+    checksum = func_i2_8010356C(arg0->unk_00);
 
     for (i = 0, var_v1 = arg0->unk_00; i < 2; i++, var_v1++) {
-        var_v1->unk_00.unk_0E = temp_v0;
+        var_v1->unk_00.checksum = checksum;
     }
-    temp_v0 = func_i2_8010358C(arg0->unk_00);
+    checksum = func_i2_8010358C(arg0->unk_00);
 
     for (i = 0, var_v1 = arg0->unk_00; i < 2; i++, var_v1++) {
-        var_v1->unk_10.unk_00 = temp_v0;
+        var_v1->unk_10.checksum = checksum;
     }
 
     for (j = 0; j < 24; j++) {
-        temp_v0 = func_i2_801035B0(arg0->unk_00, j);
+        checksum = func_i2_801035B0(arg0->unk_00, j);
 
         for (i = 0, var_v1 = arg0->unk_00; i < 2; i++, var_v1++) {
-            var_v1->unk_20[j].unk_00 = temp_v0;
+            var_v1->unk_20[j].checksum = checksum;
         }
     }
-    temp_v0 = func_i2_801035E4(arg0->unk_00);
+    checksum = func_i2_801035E4(arg0->unk_00);
 
     for (i = 0, var_v1 = arg0->unk_00; i < 2; i++, var_v1++) {
-        var_v1->unk_19A0.unk_00 = temp_v0;
+        var_v1->unk_19A0.checksum = checksum;
     }
-    arg0->unk_33C0.unk_00 = func_i2_80103608(&arg0->unk_33C0);
-    arg0->unk_3400.unk_00 = func_i2_8010362C(&arg0->unk_3400);
+    arg0->unk_33C0.checksum = func_i2_80103608(&arg0->unk_33C0);
+    arg0->unk_3400.checksum = func_i2_8010362C(&arg0->unk_3400);
 
     for (i = 0, var_s1 = arg0->unk_7380; i < 24; i++, var_s1++) {
-        var_s1->unk_00 = func_i2_80103650(var_s1);
+        var_s1->checksum = func_i2_80103650(var_s1);
     }
-    arg0->unk_7F80.unk_00 = func_i2_80103674(&arg0->unk_7F80);
+    arg0->unk_7F80.checksum = func_i2_80103674(&arg0->unk_7F80);
     func_i2_80103728(OS_WRITE, 0, arg0, sizeof(unk_801247C0));
 }
 
-void func_i2_80100DDC(unk_struct_19E0* arg0, s32 arg1, u16 arg2) {
+void func_i2_80100DDC(unk_struct_19E0* arg0, s32 arg1, u16 checksum) {
     unk_struct_19E0* temp_a2 = &arg0[arg1];
 
-    temp_a2->unk_00.unk_0E = arg2;
+    temp_a2->unk_00.checksum = checksum;
     func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_00[arg1].unk_00 - (uintptr_t) &D_801247C0, temp_a2,
                      sizeof(unk_struct_10));
 }
 
-void func_i2_80100E64(unk_struct_19E0* arg0, s32 arg1, u16 arg2) {
+void func_i2_80100E64(unk_struct_19E0* arg0, s32 arg1, u16 checksum) {
     unk_struct_19E0* temp_v1 = &arg0[arg1];
-    temp_v1->unk_10.unk_00 = arg2;
+    temp_v1->unk_10.checksum = checksum;
 
     func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_00[arg1].unk_10 - (uintptr_t) &D_801247C0, &temp_v1->unk_10,
                      sizeof(unk_struct_10_2));
 }
 
-void func_i2_80100ED4(unk_struct_19E0* arg0, s32 arg1, s32 arg2, u16 arg3) {
+void func_i2_80100ED4(unk_struct_19E0* arg0, s32 arg1, s32 arg2, u16 checksum) {
     unk_struct_19E0* temp_v1 = &arg0[arg1];
     unk_struct_110* temp_v0 = &temp_v1->unk_20[arg2];
 
-    temp_v0->unk_00 = arg3;
+    temp_v0->checksum = checksum;
     func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_00[arg1].unk_20[arg2] - (uintptr_t) &D_801247C0, temp_v0,
                      sizeof(unk_struct_110));
 }
 
-void func_i2_80100F7C(unk_struct_19E0* arg0, s32 arg1, u16 arg2) {
+void func_i2_80100F7C(unk_struct_19E0* arg0, s32 arg1, u16 checksum) {
     unk_struct_19E0* temp_v1 = &arg0[arg1];
 
-    temp_v1->unk_19A0.unk_00 = arg2;
+    temp_v1->unk_19A0.checksum = checksum;
     func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_00[arg1].unk_19A0 - (uintptr_t) &D_801247C0,
                      &temp_v1->unk_19A0, sizeof(unk_struct_40_2));
 }
 
 void func_i2_80100FEC(unk_struct_40* arg0) {
-    arg0->unk_00 = func_i2_80103608(arg0);
+    arg0->checksum = func_i2_80103608(arg0);
     func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_33C0 - (uintptr_t) &D_801247C0, arg0, sizeof(unk_struct_40));
 }
 
 void func_i2_80101034(unk_struct_3F80* arg0) {
-    arg0->unk_00 = func_i2_8010362C(arg0);
+    arg0->checksum = func_i2_8010362C(arg0);
     func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_3400 - (uintptr_t) &D_801247C0, arg0,
                      sizeof(unk_struct_3F80));
 }
 
 void func_i2_8010107C(unk_struct_80* arg0, s32 arg1) {
-    arg0->unk_00 = func_i2_80103650(arg0);
+    arg0->checksum = func_i2_80103650(arg0);
     func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_7380[arg1] - (uintptr_t) &D_801247C0, arg0,
                      sizeof(unk_struct_80));
 }
 
 void func_i2_801010D0(unk_struct_60* arg0) {
-    arg0->unk_00 = func_i2_80103674(arg0);
+    arg0->checksum = func_i2_80103674(arg0);
     func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_7F80 - (uintptr_t) &D_801247C0, arg0, sizeof(unk_struct_60));
 }
 
 void func_i2_80102214(unk_struct_110* arg0, s32 arg1);
 
 s32 func_i2_80101118(s32 arg0) {
-    u16 temp_s2;
+    u16 checksum;
     s32 i;
     unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
 
     func_i2_80102214(&var[0].unk_20[arg0], arg0);
     var[1].unk_20[arg0] = var[0].unk_20[arg0];
 
-    temp_s2 = func_i2_801035B0(var, arg0);
+    checksum = func_i2_801035B0(var, arg0);
 
     for (i = 0; i < 2; i++) {
-        func_i2_80100ED4(var, i, arg0, temp_s2);
+        func_i2_80100ED4(var, i, arg0, checksum);
     }
 
     return 0;
@@ -420,7 +420,7 @@ extern s32 D_800CCFC0;
 void func_i2_80102350(unk_struct_40_2* arg0);
 
 s32 func_i2_801011FC(void) {
-    u16 temp_s1;
+    u16 checksum;
     s32 i;
     unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
 
@@ -431,10 +431,10 @@ s32 func_i2_801011FC(void) {
 
     var[1].unk_19A0 = var[0].unk_19A0;
 
-    temp_s1 = func_i2_801035E4(var);
+    checksum = func_i2_801035E4(var);
 
     for (i = 0; i < 2; i++) {
-        func_i2_80100F7C(var, i, temp_s1);
+        func_i2_80100F7C(var, i, checksum);
     }
 
     return 0;
@@ -478,17 +478,17 @@ s32 func_i2_80101310(s32 arg0, s32 arg1, s32 arg2) {
 void func_i2_80101FEC(unk_struct_10* arg0);
 
 s32 func_i2_80101414(void) {
-    u16 temp_s2;
+    u16 checksum;
     s32 i;
     unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
 
     func_i2_80101FEC(&var[0].unk_00);
     var[1].unk_00 = var[0].unk_00;
 
-    temp_s2 = func_i2_8010356C(var);
+    checksum = func_i2_8010356C(var);
 
     for (i = 0; i < 2; i++) {
-        func_i2_80100DDC(var, i, temp_s2);
+        func_i2_80100DDC(var, i, checksum);
     }
 
     return 0;
@@ -507,7 +507,7 @@ s32 func_i2_801014D4(unk_80141C88* arg0) {
     func_i2_801003B0(var);
     var_v1 = 0;
 
-    if (var->unk_00 != func_i2_80103608(var) * 1) {
+    if (var->checksum != func_i2_80103608(var) * 1) {
         func_i2_80101DE8(var, 1);
         func_i2_80100FEC(var);
         func_i2_80101E68(var2, 1);
@@ -587,17 +587,17 @@ s32 func_i2_80101784(unk_801247C0* arg0, s32 arg1) {
 void func_i2_80101D18(unk_struct_110*, s32);
 
 s32 func_i2_801017B8(s32 arg0) {
-    u16 temp_s2;
+    u16 checksum;
     s32 i;
     unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
 
     func_i2_80101D18(&var[0].unk_20[arg0], 1);
     var[1].unk_20[arg0] = var[0].unk_20[arg0];
 
-    temp_s2 = func_i2_801035B0(var, arg0);
+    checksum = func_i2_801035B0(var, arg0);
 
     for (i = 0; i < 2; i++) {
-        func_i2_80100ED4(var, i, arg0, temp_s2);
+        func_i2_80100ED4(var, i, arg0, checksum);
     }
 
     func_i2_80102CA4(var, arg0);
@@ -874,6 +874,7 @@ void func_i2_80101FEC(unk_struct_10* arg0) {
     var = ((u8) D_800CE4D0 * 0x10);
 
     var_v1_2 = 0;
+
     if (D_800CE4D4 != 0) {
         var_v1_2 |= 1;
     }
@@ -886,10 +887,13 @@ void func_i2_80101FEC(unk_struct_10* arg0) {
     if (D_800CD3C8 != 0) {
         var_v1_2 |= 8;
     }
+
     arg0->unk_08 = var | var_v1_2;
+
     for (i = 0; i < 4; i++) {
-        arg0->unk_00[10 + i] = D_800E4174[i];
+        arg0->unk_0A[i] = D_800E4174[i];
     }
+
     arg0->unk_09 = 0;
 
     if (D_i2_80111848[0] != 0) {
@@ -1108,7 +1112,7 @@ void func_i2_80102600(unk_801247C0* arg0) {
 }
 
 void func_i2_80102784(unk_struct_19E0* arg0, s32 arg1) {
-    u16 temp_s1;
+    u16 checksum;
     s32 var_v1;
     s32 sp2C;
     s32 i;
@@ -1119,7 +1123,7 @@ void func_i2_80102784(unk_struct_19E0* arg0, s32 arg1) {
     var_v1 = 0;
 
     for (i = 0, var_s1 = arg0; i < 2; i++) {
-        if (var_s1->unk_00.unk_0E != func_i2_8010356C(var_s1) * 1) {
+        if (var_s1->unk_00.checksum != func_i2_8010356C(var_s1) * 1) {
             var_v1++;
             sp2C = i;
         }
@@ -1130,10 +1134,10 @@ void func_i2_80102784(unk_struct_19E0* arg0, s32 arg1) {
         func_i2_80101B8C(&arg0[0].unk_00, 1);
         arg0[1].unk_00 = arg0[0].unk_00;
 
-        temp_s1 = func_i2_8010356C(arg0);
+        checksum = func_i2_8010356C(arg0);
 
         for (i = 0; i < 2; i++) {
-            func_i2_80100DDC(arg0, i, temp_s1);
+            func_i2_80100DDC(arg0, i, checksum);
         }
     } else if (var_v1 == 1) {
         var_v0 = (sp2C == 0) ? 1 : 0;
@@ -1219,7 +1223,7 @@ void func_i2_80102A7C(u8* arg0, u8* arg1) {
 }
 
 void func_i2_80102B20(unk_struct_19E0* arg0) {
-    u16 temp_s1;
+    u16 checksum;
     s32 var_s2;
     s32 var_v0;
     s32 sp30;
@@ -1231,7 +1235,7 @@ void func_i2_80102B20(unk_struct_19E0* arg0) {
     var_s2 = 0;
 
     for (i = 0, var_s1 = arg0; i < 2; i++) {
-        if (var_s1->unk_10.unk_00 != func_i2_8010358C(var_s1) * 1) {
+        if (var_s1->unk_10.checksum != func_i2_8010358C(var_s1) * 1) {
             var_s2++;
             sp30 = i;
         }
@@ -1242,10 +1246,10 @@ void func_i2_80102B20(unk_struct_19E0* arg0) {
         func_i2_80101CCC(&arg0[0].unk_10, 1);
         arg0[1].unk_10 = arg0[0].unk_10;
 
-        temp_s1 = func_i2_8010358C(arg0);
+        checksum = func_i2_8010358C(arg0);
 
         for (i = 0; i < 2; i++) {
-            func_i2_80100E64(arg0, i, temp_s1);
+            func_i2_80100E64(arg0, i, checksum);
         }
     } else if (var_s2 == 1) {
         var_v0 = (sp30 == 0) ? 1 : 0;
@@ -1262,7 +1266,7 @@ void func_i2_80102B20(unk_struct_19E0* arg0) {
 }
 
 void func_i2_80102CA4(unk_struct_19E0* arg0, s32 arg1) {
-    u16 temp_s0;
+    u16 checksum;
     s32 j;
     s32 i;
     s32 var_s4;
@@ -1274,7 +1278,7 @@ void func_i2_80102CA4(unk_struct_19E0* arg0, s32 arg1) {
     j = 0;
 
     for (i = 0, var_s0 = arg0; i < 2; i++) {
-        if (var_s0->unk_20[arg1].unk_00 != func_i2_801035B0(var_s0, arg1)) {
+        if (var_s0->unk_20[arg1].checksum != func_i2_801035B0(var_s0, arg1)) {
             j++;
             var_s4 = i;
         }
@@ -1286,10 +1290,10 @@ void func_i2_80102CA4(unk_struct_19E0* arg0, s32 arg1) {
         func_i2_80101D18(&arg0[0].unk_20[arg1], 1);
         arg0[1].unk_20[arg1] = arg0[0].unk_20[arg1];
 
-        temp_s0 = func_i2_801035B0(arg0, arg1);
+        checksum = func_i2_801035B0(arg0, arg1);
 
         for (i = 0; i < 2; i++) {
-            func_i2_80100ED4(arg0, i, arg1, temp_s0);
+            func_i2_80100ED4(arg0, i, arg1, checksum);
         }
 
     } else if (j == 1) {
@@ -1319,7 +1323,7 @@ void func_i2_80102CA4(unk_struct_19E0* arg0, s32 arg1) {
 void func_i2_80102F70(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3) {
 
     if (arg3 != 0) {
-        if (arg0->unk_00 != func_i2_80103608(arg0) * 1) {
+        if (arg0->checksum != func_i2_80103608(arg0) * 1) {
             func_i2_80101DE8(arg0, 1);
             func_i2_80100FEC(arg0);
             func_i2_80101E68(arg1, 1);
@@ -1342,7 +1346,7 @@ void func_i2_8010300C(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* 
     unk_struct_3F80* var2 = (unk_struct_3F80*) &D_i2_8010D7F0[sizeof(unk_struct_40)];
 
     if (arg3 != 0) {
-        if (arg1->unk_00 != func_i2_8010362C(arg1) * 1) {
+        if (arg1->checksum != func_i2_8010362C(arg1) * 1) {
             func_i2_80101DE8(var, 1);
             func_i2_80100FEC(var);
             func_i2_80101E68(var2, 1);
@@ -1371,7 +1375,7 @@ void func_i2_80103108(unk_struct_19E0* arg0, s32 arg1) {
     s32 i;
     s32 j;
     s32 sp30;
-    u16 temp_s1;
+    u16 checksum;
     s32 var_s2;
     s32 var_v0;
     unk_struct_19E0* var_s1;
@@ -1379,7 +1383,7 @@ void func_i2_80103108(unk_struct_19E0* arg0, s32 arg1) {
     var_s2 = 0;
 
     for (i = 0, var_s1 = arg0; i < 2; i++) {
-        if (var_s1->unk_19A0.unk_00 != func_i2_801035E4(var_s1) * 1) {
+        if (var_s1->unk_19A0.checksum != func_i2_801035E4(var_s1) * 1) {
             var_s2++;
             sp30 = i;
         }
@@ -1390,9 +1394,9 @@ void func_i2_80103108(unk_struct_19E0* arg0, s32 arg1) {
         func_i2_80101C04(&arg0[0].unk_19A0, 1);
         arg0[1].unk_19A0 = arg0[0].unk_19A0;
 
-        temp_s1 = func_i2_801035E4(arg0);
+        checksum = func_i2_801035E4(arg0);
         for (i = 0; i < 2; i++) {
-            func_i2_80100F7C(arg0, i, temp_s1);
+            func_i2_80100F7C(arg0, i, checksum);
         }
     } else if (var_s2 == 1) {
         var_v0 = (sp30 == 0) ? 1 : 0;
@@ -1420,7 +1424,7 @@ extern f32 D_800E40F0[];
 void func_i2_80103310(unk_struct_80* arg0, s32 arg1) {
     s32 i;
 
-    if (arg0->unk_00 != func_i2_80103650(arg0) * 1) {
+    if (arg0->checksum != func_i2_80103650(arg0) * 1) {
         func_i2_80101EBC(arg0, 1);
         func_i2_8010107C(arg0, arg1);
     }
@@ -1439,7 +1443,7 @@ void func_i2_801033B8(unk_struct_60* arg0, s8* arg1) {
     s8* var_a0;
     s32 temp;
 
-    if (arg0->unk_00 != func_i2_80103674(arg0) * 1) {
+    if (arg0->checksum != func_i2_80103674(arg0) * 1) {
         func_i2_80101F24(arg0, 1);
         func_i2_801010D0(arg0);
     }
@@ -1469,19 +1473,17 @@ void func_i2_801033B8(unk_struct_60* arg0, s8* arg1) {
     }
 }
 
-u16 func_i2_801034F8(void* arg0, s32 arg1) {
-    u16 var_v1;
-    u8* var_v0;
+// Basic checksum calculation
+u16 func_i2_801034F8(void* data, s32 size) {
+    u8* dataPtr = data;
+    u16 checksum = 0;
     s32 i;
 
-    var_v0 = arg0;
-    var_v1 = 0;
-
-    for (i = 0; i < arg1; i++) {
-        var_v1 += *var_v0++;
+    for (i = 0; i < size; i++) {
+        checksum += *dataPtr++;
     }
 
-    return var_v1;
+    return checksum;
 }
 
 s32 func_i2_8010356C(unk_struct_19E0* arg0) {

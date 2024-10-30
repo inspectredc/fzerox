@@ -678,7 +678,7 @@ typedef struct unk_80141C88 {
 } unk_80141C88; // size = 0x40
 
 typedef struct unk_struct_110 {
-    u16 unk_00;
+    u16 checksum;
     s16 unk_02;
     s32 unk_04[5];
     f32 unk_18[5];
@@ -692,14 +692,14 @@ typedef struct unk_struct_110 {
 } unk_struct_110; // size = 0x110
 
 typedef struct unk_struct_80 {
-    u16 unk_00;
+    u16 checksum;
     u16 unk_02;
     s32 unk_04;
     f32 unk_08[30];
 } unk_struct_80; // size = 0x80
 
 typedef struct unk_struct_40_2 {
-    u16 unk_00;
+    u16 checksum;
     s16 unk_02;
     s32 unk_04;
     s16 unk_08;
@@ -711,11 +711,11 @@ typedef struct unk_struct_10 {
     u8 unk_08;
     u8 unk_09;
     u8 unk_0A[4];
-    u16 unk_0E;
+    u16 checksum;
 } unk_struct_10; // size = 0x10
 
 typedef struct unk_struct_10_2 {
-    u16 unk_00;
+    u16 checksum;
     s16 unk_02;
     s32 unk_04[1];
     u8 unk_08[8];
@@ -729,7 +729,7 @@ typedef struct unk_struct_19E0 {
 } unk_struct_19E0; // size = 0x19E0
 
 typedef struct unk_struct_40 {
-    u16 unk_00;
+    u16 checksum;
     u16 unk_02;
     s32 unk_04;
     s32 unk_08;
@@ -741,7 +741,7 @@ typedef struct unk_struct_40 {
 } unk_struct_40; // size = 0x40
 
 typedef struct unk_struct_3F80 {
-    u16 unk_00;
+    u16 checksum;
     s16 unk_02;
     s32 unk_04[3];
     s32 unk_10;
@@ -753,7 +753,7 @@ typedef struct unk_struct_3F80 {
 } unk_struct_3F80; // size = 0x3F80
 
 typedef struct unk_struct_60 {
-    u16 unk_00;
+    u16 checksum;
     s8 unk_02[0xE];
     u16 unk_10[4][10];
 } unk_struct_60; // size = 0x60
