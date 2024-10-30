@@ -1,7 +1,80 @@
 #include "global.h"
 #include "audio.h"
+#include "assets/segment_17B1E0.h"
 
-extern Gfx D_3000088[];
+f32 D_800E40F0[30];
+UNUSED s32 D_800E4168;
+s16 D_800E416C;
+u16 D_800E416E;
+u16 D_800E4170;
+s8 D_800E4174[4];
+char* D_800E4178;
+char* D_800E4180[55];
+
+s32 D_800CD380 = 0;
+u32 D_800CD384 = 0;
+
+s32 D_800CD388[8] = { 0 };
+
+s8 D_800CD3A8[] = { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+s32 D_800CD3B8 = 0;
+s32 D_800CD3BC = 0;
+s8 D_800CD3C0 = 0;
+s8 D_800CD3C4 = 0;
+s8 D_800CD3C8 = 0;
+s32 D_800CD3CC = 1;
+
+const char* D_800CD3D0[] = { "mute city",
+                             "silence",
+                             "sand ocean",
+                             "devil's forest",
+                             "big blue",
+                             "port town",
+                             "sector Ａ",
+                             "red canyon",
+                             "devil's forest 2",
+                             "mute city 2",
+                             "big blue 2",
+                             "white land",
+                             "fire field",
+                             "silence 2",
+                             "sector Ｂ",
+                             "red canyon 2",
+                             "white land 2",
+                             "mute city 3",
+                             "rainbow road",
+                             "devil's forest 3",
+                             "space plant",
+                             "sand ocean 2",
+                             "port town 2",
+                             "big hand",
+                             "default 1",
+                             "default 2",
+                             "default 3",
+                             "default 4",
+                             "default 5",
+                             "default 6",
+                             "x",
+                             "\0" };
+
+const char* D_800CD450[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
+                             "red gazelle",   "great star",       "iron tiger",    "deep claw",      "twin noritta",
+                             "super piranha", "mighty hurricane", "little wyvern", "space angler",   "green panther",
+                             "black bull",    "wild boar",        "astro robin",   "king meteor",    "queen meteor",
+                             "wonder wasp",   "hyper speeder",    "death anchor",  "crazy bear",     "night thunder",
+                             "big fang",      "mighty typhoon",   "mad wolf",      "sonic phantom",  "blood hawk",
+                             "super falcon",  "golden fox",       "wild goose",    "super stingray", "super cat",
+                             "red gazelle" };
+
+// clang-format off
+s32 D_800CD4E0[] = {
+    255, 0, 0,
+    0, 255, 0,
+    255, 255, 100,
+    255, 0, 0,
+};
+// clang-format on
 
 Gfx* func_8007A440(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha) {
 
@@ -73,8 +146,6 @@ void func_8007A828(u16* arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     }
 }
 
-extern Gfx D_30001A8[];
-
 Gfx* func_8007AB88(Gfx* gfx) {
     gSPDisplayList(gfx++, D_30001A8);
     return gfx;
@@ -131,14 +202,10 @@ Gfx* func_8007AD44(Gfx* gfx, u16 red, u16 green, u16 blue, s32 left, s32 top, s3
     return gfx;
 }
 
-extern Gfx D_3000170[];
-
 Gfx* func_8007AE70(Gfx* gfx) {
     gSPDisplayList(gfx++, D_3000170);
     return gfx;
 }
-
-extern Gfx D_3000000[];
 
 Gfx* func_8007AE8C(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha) {
     gDPPipeSync(gfx++);
@@ -149,8 +216,6 @@ Gfx* func_8007AE8C(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, 
     return gfx;
 }
 
-extern Gfx D_3000028[];
-
 Gfx* func_8007AF40(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, red, green, blue, alpha);
@@ -160,7 +225,6 @@ Gfx* func_8007AF40(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, 
     return gfx;
 }
 
-extern Gfx D_3000270[];
 extern u32 gGameFrameCount;
 
 Gfx* func_8007AFF4(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
@@ -186,11 +250,6 @@ Gfx* func_8007B0A8(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007B14C.s")
-
-extern Gfx D_3000050[];
-extern Gfx D_3000088[];
-extern Gfx D_3000100[];
-extern Gfx D_3000138[];
 
 Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u32 height, f32 arg6, f32 arg7,
                    s32 format, s32 size, s32 argA, s32 argB, s32 argC) {
@@ -346,11 +405,7 @@ Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u
     return gfx;
 }
 
-#ifdef IMPORT_BSS
-extern char* D_800CD3D0[];
-
-extern u8 D_8010D730[][9];
-char* D_800E4180[55];
+extern u8 D_i2_8010D730[][9];
 
 void func_8007D9D0(void) {
     s32 i;
@@ -360,10 +415,10 @@ void func_8007D9D0(void) {
     }
 
     for (i = 24; i < 30; i++) {
-        if (D_8010D730[i - 24][0] == 0) {
+        if (D_i2_8010D730[i - 24][0] == 0) {
             D_800E4180[i] = D_800CD3D0[i];
         } else {
-            D_800E4180[i] = D_8010D730[i - 24];
+            D_800E4180[i] = D_i2_8010D730[i - 24];
         }
     }
 
@@ -377,13 +432,6 @@ void func_8007D9D0(void) {
 
     D_800E4180[54] = D_800CD3D0[31];
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007D9D0.s")
-#endif
-
-extern s16 D_800E416C;
-extern u16 D_800E416E;
-extern u16 D_800E4170;
 
 void func_8007DABC(Controller* arg0) {
     D_800E416E = arg0->unk_7C | (arg0->unk_6F << 4);
@@ -396,7 +444,6 @@ void func_8007DABC(Controller* arg0) {
 }
 
 extern u32 gGameFrameCount;
-extern s32 D_800CD4E0[];
 
 Gfx* func_8007DB28(Gfx* gfx, s32 arg1) {
     s32 temp_a3;
@@ -430,8 +477,6 @@ Gfx* func_8007DB28(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-#ifdef IMPORT_BSS
-static s8 D_800E4174[4];
 void func_8007DED8(void) {
     s32 i;
 
@@ -439,13 +484,9 @@ void func_8007DED8(void) {
         D_800E4174[i] = 0;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007DED8.s")
-#endif
 
 extern s32 D_800CD004;
 extern s32 gDifficulty;
-extern s8 D_800E4174[4];
 
 extern s16 D_800E42CC;
 
@@ -523,7 +564,8 @@ void func_8007E0EC(void) {
     func_800BB078();
 }
 
-extern const s8 D_800D4690[];
+const s8 D_800D4690[] = { 0,  1,  2,  3,  4,  5,  7,  8,  23, 6,  25, 27, 24, 9,  20, 19,
+                          29, 17, 12, 22, 16, 18, 10, 11, 13, 26, 21, 14, 15, 28, 30 };
 
 s8 func_8007E10C(s32 arg0) {
     return D_800D4690[arg0];
@@ -540,9 +582,6 @@ s32 func_8007E11C(s32 arg0) {
 
     return 0;
 }
-
-extern s8 D_800CD3C0;
-extern s8 D_800CD3C4;
 
 void func_8007E1C0(void) {
     s32 sp40[16];
@@ -610,11 +649,6 @@ void func_8007E2B4(void) {
     func_8007E1C0();
 }
 
-extern s32 D_800CD388[];
-extern s32 D_800CD3B8;
-extern s32 D_800CD3BC;
-extern s32 D_800CD3CC;
-
 extern s16 D_800E5EE0[];
 extern s16 D_800E5EE8[];
 
@@ -635,141 +669,3 @@ void func_8007E398(void) {
     D_800CD3BC = 0;
     D_800CD3CC = 1;
 }
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4310.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D431C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4324.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4330.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4340.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D434C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4358.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4364.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4370.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4384.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4390.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D439C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D43A8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D43B4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D43C0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D43CC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D43DC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D43EC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D43F8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4408.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D441C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4428.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4438.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4444.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4450.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D445C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4468.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4474.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4480.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D448C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4498.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D449C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D44A0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D44AC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D44B8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D44C4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D44D4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D44E0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D44EC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D44F8.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4504.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4510.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4520.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4530.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4544.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4554.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4564.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4574.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4580.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D458C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4598.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D45A4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D45B4.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D45C0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D45D0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D45E0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D45EC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D45FC.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4608.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4618.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4624.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4634.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4640.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4650.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D465C.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4668.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4678.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4684.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/D_800D4690.s")

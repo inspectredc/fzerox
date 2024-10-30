@@ -225,6 +225,12 @@ Math_Rand1 = 0x8006A918;
 Math_Rand2 = 0x8006A978;
 Math_Round = 0x8006A9E0;
 mio0Decode = 0x800AA620;
+Matrix_ToMtx = 0x8006BBE8;
+
+gRandSeed1 = 0x800CD170;
+gRandMask1 = 0x800CD174;
+gRandSeed2 = 0x800CD178;
+gRandMask2 = 0x800CD17C;
 
 gSegments = 0x800E3380;
 

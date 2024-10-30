@@ -4,7 +4,7 @@
 #include "tex_assets.h"
 
 s8 D_i6_8011FAF0[30];
-u8* D_i6_8011FB10;
+unk_801247C0* D_i6_8011FB10;
 u8 D_i6_8011FB18[2][0x2580]; // Some kind of vtx buffer space?
 void* D_i6_80124618;
 s16 D_i6_80124620[176];
@@ -1055,7 +1055,7 @@ void func_i6_8011AB1C(unk_800E3A28* arg0) {
         var_v1 = 1;
     }
     if (D_i6_8011DFA0) {
-        if (D_800E416C & CONT_LEFT) {
+        if (D_800E416C & BTN_LEFT) {
             func_800BA8D8(30);
             if (arg0->unk_04 != 0) {
                 arg0->unk_04--;
@@ -1065,7 +1065,7 @@ void func_i6_8011AB1C(unk_800E3A28* arg0) {
             var_v1++;
         }
 
-        if (D_800E416C & CONT_RIGHT) {
+        if (D_800E416C & BTN_RIGHT) {
             func_800BA8D8(30);
             arg0->unk_04++;
             arg0->unk_04 = arg0->unk_04 % 30;
@@ -1884,10 +1884,10 @@ extern Controller D_800DD180;
 s32 func_i6_8011BFB0(void) {
 
     func_8007DABC(&D_800DD180);
-    if (D_800E416C & (CONT_A | CONT_START)) {
+    if (D_800E416C & (BTN_A | BTN_START)) {
         D_i6_8011DFA0 ^= 1;
     }
-    if ((D_800DCE44 != 0x800C) && (D_800E416C & CONT_B)) {
+    if ((D_800DCE44 != 0x800C) && (D_800E416C & BTN_B)) {
         return 0x8007;
     } else {
         return D_800DCE44;
@@ -1959,7 +1959,7 @@ void func_i6_8011C050(void) {
     func_i6_8011C404();
     func_80080A40(&D_i6_801247A4);
     func_80080A48();
-    D_i6_8011FB10 = D_801247C0;
+    D_i6_8011FB10 = &D_801247C0;
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011C404.s")
@@ -2007,7 +2007,7 @@ bool func_i6_8011C788(void) {
         return false;
     }
     lastRow = gOptionsCurrentRow;
-    if (D_800E416C & CONT_UP) {
+    if (D_800E416C & BTN_UP) {
         if (--gOptionsCurrentRow < OPTIONS_VS_COM) {
             gOptionsCurrentRow = OPTIONS_EXIT;
         }
@@ -2017,7 +2017,7 @@ bool func_i6_8011C788(void) {
             }
         }
     }
-    if (D_800E416C & CONT_DOWN) {
+    if (D_800E416C & BTN_DOWN) {
         if (++gOptionsCurrentRow > OPTIONS_EXIT) {
             gOptionsCurrentRow = OPTIONS_VS_COM;
         }
@@ -2035,13 +2035,13 @@ bool func_i6_8011C788(void) {
     updateSettings = false;
     if (!(temp_a3_2->flags & OPTIONS_REQUIRE_SELECTING)) {
         temp_t0 = gOptionsSelectionState[gOptionsCurrentRow];
-        if (D_800E416E & CONT_LEFT) {
+        if (D_800E416E & BTN_LEFT) {
             gOptionsSelectionState[gOptionsCurrentRow]--;
             if (gOptionsSelectionState[gOptionsCurrentRow] < 0) {
                 gOptionsSelectionState[gOptionsCurrentRow] = temp_a3_2->totalSelectionStates - 1;
             }
         }
-        if (D_800E416E & CONT_RIGHT) {
+        if (D_800E416E & BTN_RIGHT) {
             gOptionsSelectionState[gOptionsCurrentRow]++;
             if (gOptionsSelectionState[gOptionsCurrentRow] > temp_a3_2->totalSelectionStates - 1) {
                 gOptionsSelectionState[gOptionsCurrentRow] = 0;
@@ -2052,7 +2052,7 @@ bool func_i6_8011C788(void) {
             func_800BA8D8(0x21);
         }
     }
-    if (D_800E416E & CONT_B) {
+    if (D_800E416E & BTN_B) {
         func_800BA8D8(0x10);
         return true;
     }
@@ -2099,7 +2099,7 @@ bool func_i6_8011C788(void) {
             }
             break;
         case OPTIONS_DATA_CLEAR:
-            if (D_800E416E & (CONT_A | CONT_START)) {
+            if (D_800E416E & (BTN_A | BTN_START)) {
                 D_i6_801247A4 = func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, 0xF801, func_i6_8011D168);
                 if (D_i6_801247A4 != NULL) {
                     gOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_OPEN;
@@ -2109,7 +2109,7 @@ bool func_i6_8011C788(void) {
             }
             break;
         case OPTIONS_EXIT:
-            if (D_800E416E & (CONT_A | CONT_START)) {
+            if (D_800E416E & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x10);
                 return true;
             }
@@ -2135,12 +2135,12 @@ void func_i6_8011CBB4(void) {
 
     if (func_8008108C(D_i6_801247A4, 1) != 0) {
         lastSelectionState = gOptionsSelectionState[gOptionsCurrentRow];
-        if (D_800E416E & CONT_LEFT) {
+        if (D_800E416E & BTN_LEFT) {
             if (--gOptionsSelectionState[gOptionsCurrentRow] < 0) {
                 gOptionsSelectionState[gOptionsCurrentRow] = 1;
             }
         }
-        if (D_800E416E & CONT_RIGHT) {
+        if (D_800E416E & BTN_RIGHT) {
             if (++gOptionsSelectionState[gOptionsCurrentRow] > 1) {
                 gOptionsSelectionState[gOptionsCurrentRow] = 0;
             }
@@ -2149,7 +2149,7 @@ void func_i6_8011CBB4(void) {
             func_800BA8D8(0x1E);
         }
         updateSettings = false;
-        if (D_800E416E & (CONT_A | CONT_START)) {
+        if (D_800E416E & (BTN_A | BTN_START)) {
             updateSettings = true;
             if (gOptionsSelectionState[gOptionsCurrentRow] == 1) {
                 func_i2_80101784(D_i6_8011FB10, 1);
@@ -2162,7 +2162,7 @@ void func_i6_8011CBB4(void) {
             } else {
                 func_800BA8D8(0x10);
             }
-        } else if (D_800E416E & CONT_B) {
+        } else if (D_800E416E & BTN_B) {
             updateSettings = true;
             func_800BA8D8(0x10);
         }

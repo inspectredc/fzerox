@@ -42,8 +42,9 @@ asic_cur_status = 0x8042BC30; //segment:leo
 unit_atten = 0x8042BC34; //segment:leo
 mseq_tbl = 0x8042BBF0; //segment:leo
 
-LeoBootGame = 0x80411760; //segment:leo
-__LeoBootGame2 = 0x804122A0; //segment:leo
+LeoGetKAdr = 0x80411760; //segment:leo
+LeoGetAAdr = 0x804122A0; //segment:leo
+LeoGetAAdr2 = 0x80403040; //segment:leo
 leoClr_queue = 0x80410A20; //segment:leo
 leoInquiry = 0x8040D6D0; //segment:leo
 leoTest_unit_rdy = 0x80414EE0; //segment:leo

@@ -164,12 +164,9 @@ s32 func_i1_804041A8(void) {
     return 0;
 }
 
-// Unknown what this does yet
-extern void __LeoBootGame2(s32, s32, s32, s32);
-
 void func_i1_804041C8(void) {
-    LeoBootGame(NULL);
-    __LeoBootGame2(0, 0, 0, 0);
+    LeoGetKAdr(0);
+    LeoGetAAdr(0, 0, 0, 0);
 }
 
 extern s32 D_i1_8042860C;

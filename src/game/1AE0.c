@@ -113,7 +113,7 @@ void func_80067D64(void) {
 }
 
 void func_80067E98(void) {
-    s32 var_s1 = 0x186A0;
+    s32 var_s1 = 100000;
 
     MQ_WAIT_FOR_MESG(&D_800DCAB0, &D_800DCD10);
     func_80067B14();
@@ -131,7 +131,7 @@ void func_80067E98(void) {
     while (
         (osViGetCurrentFramebuffer() == D_800DCCD0[D_800DCD04] || osViGetNextFramebuffer() == D_800DCCD0[D_800DCD04]) &&
         var_s1 != 0) {
-        var_s1 -= 1;
+        var_s1--;
     }
 
     func_80067C0C(D_800DCCF4);

@@ -421,7 +421,7 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 temp_s2;
     s32 temp_v0;
 
-    if ((controller->unk_7C & CONT_C) && (arg1 >= 2)) {
+    if ((controller->unk_7C & BTN_CLEFT) && (arg1 >= 2)) {
         if (D_800CD010 == 0) {
             D_i3_80140788[arg2] = (D_i3_80140788[arg2] + 1) % 2;
         }
@@ -582,7 +582,7 @@ void func_i3_801365E0(void) {
     unk_struct_1DC* var_s1;
 
     D_i3_80142170 = gNumPlayers;
-    D_800CD510 = 0;
+    D_800CD510 = false;
     D_i3_80142180.unk_00 = D_i3_80140874[gBackgroundFloorType];
     D_i3_80142180.unk_04 = D_i3_80140920[gSkyboxType];
     D_i3_80142188 = D_i3_80142180.unk_04->unk_0E;

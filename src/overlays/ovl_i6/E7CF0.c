@@ -7,7 +7,7 @@ s32 func_i6_8011DBD0(void) {
 
     while (i < 2) {
 
-        while (IO_READ(0x4600010) % 4) {}
+        while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
 
         temp_a0 = IO_READ(0x100006E8);
 

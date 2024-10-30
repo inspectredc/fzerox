@@ -2,6 +2,28 @@
 #include "fzxthread.h"
 #include "segment_symbols.h"
 
+Gfx* func_8006F3D8(Gfx* gfx);
+Gfx* func_8006F444(Gfx* gfx);
+Gfx* func_8006F478(Gfx* gfx);
+Gfx* func_8006F4E4(Gfx* gfx);
+Gfx* func_8006F514(Gfx* gfx);
+Gfx* func_8006F57C(Gfx* gfx);
+Gfx* func_8006F5E4(Gfx* gfx);
+Gfx* func_8006F68C(Gfx* gfx);
+Gfx* func_8006F6FC(Gfx* gfx);
+Gfx* func_8006F7A4(Gfx* gfx);
+Gfx* func_8006F89C(Gfx* gfx);
+Gfx* func_8006F998(Gfx* gfx);
+Gfx* func_8006FA94(Gfx* gfx);
+Gfx* func_8006FB90(Gfx* gfx);
+
+s32 D_800CD180 = 0;
+
+Gfx* (*D_800CD184[])(Gfx*) = { func_8006F3D8, func_8006F444, func_8006F478, func_8006F4E4, func_8006F4E4, func_8006F514,
+                               func_8006F514, func_8006F57C, func_8006F57C, func_8006F5E4, func_8006F68C, func_8006F6FC,
+                               func_8006F7A4, func_8006F7A4, func_8006F89C, func_8006F89C, func_8006F998, func_8006F998,
+                               func_8006FA94, func_8006FA94, func_8006FB90, func_8006FB90 };
+
 bool func_8006D3F0(s32 arg0) {
     if ((arg0 >= 0) && (arg0 < 0x16)) {
         return true;
@@ -30,7 +52,6 @@ extern unk_802A9FC0 D_802A9FC0[];
 extern unk_802D1B60 D_802D1B60;
 extern unk_802D08E0 D_802D08E0[];
 extern s16 D_8022F0C0[];
-extern s32 D_800CD180;
 extern s32 D_800F8518;
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8006EC7C.s")
@@ -290,9 +311,9 @@ extern unk_802D3E38 D_802D3E38[];
 
 s32 func_80074BB4(Vec3f* arg0, f32 arg1);
 
-extern f32 D_800CD1DC;
-extern f32 D_800CD1E0;
-extern f32 D_800CD1E4;
+f32 D_800CD1DC = 150.0f;
+f32 D_800CD1E0 = 50.0f;
+f32 D_800CD1E4 = 50.0f;
 
 void func_8006FF90(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2) {
     unk_8006FF90_arg_2* temp_s0;
@@ -474,6 +495,13 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
     *arg2 = temp_s0;
 }
 
+s32 D_800CD1E8 = 0;
+
+Vec3f D_800CD1EC = { 0.0f, 0.0f, 0.0f }; // migrate into func_80070B5C
+Vec3f D_800CD1F8 = { 0.0f, 0.0f, 0.0f }; // migrate into func_80070B5C
+Vec3f D_800CD204 = { 0.0f, 0.0f, 0.0f }; // migrate into func_80070B5C
+Vec3f D_800CD210 = { 0.0f, 0.0f, 0.0f }; // migrate into func_80070B5C
+
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80070B5C.s")
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80071260.s")
@@ -630,7 +658,7 @@ static const char devrostr5[] = "index %d\n";
 static const char devrostr6[] = "ENTRY CHECK\n";
 
 extern u8 D_2AD1E0[];
-extern u8 D_8010D730[][9];
+extern u8 D_i2_8010D730[][9];
 extern s16 D_80106F48;
 
 void func_80074428(s32 arg0);
@@ -657,8 +685,8 @@ void func_8007402C(s32 arg0) {
 
         while (func_800760F8() != 2) {}
 
-        if (func_i1_80403680(0xFFFB, D_8010D730[sp28], "CRSD\0\0\0\0ENTRY CHECK OK\n") != 0xFFFF) {
-            func_i1_804096C8(0xFFFB, D_8010D730[sp28], "CRSD\0\0\0\0ENTRY LOAD OK\n\0\0UNPACK\n\0UNPACK OK\n",
+        if (func_i1_80403680(0xFFFB, D_i2_8010D730[sp28], "CRSD\0\0\0\0ENTRY CHECK OK\n") != 0xFFFF) {
+            func_i1_804096C8(0xFFFB, D_i2_8010D730[sp28], "CRSD\0\0\0\0ENTRY LOAD OK\n\0\0UNPACK\n\0UNPACK OK\n",
                              D_8010B7B0.unk_000, 0);
         }
     } else {
@@ -802,12 +830,18 @@ void func_80074744(void) {
     }
 }
 
-extern s32 D_800CD220[];
+UNUSED s32 D_800CD21C = 0;
+s32 D_800CD220[] = { 1, 0, 0, 0, 2, 3, 4, 0, 0, 0, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
 void func_800747EC(s32 arg0) {
     void* sp1C = (D_800CD220[arg0] * 0x800) + SEGMENT_ROM_START(segment_2747F0);
 
     func_80073FA0(sp1C, func_80076BD4(D_8014A20), 0x800);
 }
+
+s32 D_800CD298 = 0;
+s32 D_800CD29C = 0;
+UNUSED s32 D_800CD2A0 = -1;
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80074844.s")
 

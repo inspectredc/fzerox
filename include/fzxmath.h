@@ -7,6 +7,10 @@
 #define M_DTOR	(M_PI / 180.0f)
 #define M_RTOD	(180.0f / M_PI)
 
+#define LCG_MULTIPLIER 1103515245
+#define LCG_INCREMENT_1 12345
+#define LCG_INCREMENT_2 67890
+
 typedef union {
     struct {
         /* 0x0 */ f32 x;
@@ -15,6 +19,24 @@ typedef union {
     };
     /* 0x0 */ f32 v[3];
 } Vec3f; // size = 0xC
+
+typedef union {
+    struct {
+        /* 0x0 */ s16 x;
+        /* 0x2 */ s16 y;
+        /* 0x4 */ s16 z;
+    };
+    /* 0x0 */ s16 v[3];
+} Vec3s; // size = 0x6
+
+typedef union {
+    struct {
+        /* 0x0 */ s32 x;
+        /* 0x4 */ s32 y;
+        /* 0x8 */ s32 z;
+    };
+    /* 0x0 */ s32 v[3];
+} Vec3i; // size = 0xC
 
 // Needed for stack to complement macros
 typedef struct Vec3fFlip {

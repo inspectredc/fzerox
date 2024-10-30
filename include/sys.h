@@ -18,22 +18,25 @@
 
 typedef struct GfxPool {
     Gfx gfxBuffer[1];
-    s8 pad_00008[0x20000];
+    s8 pad_00008[0x10000];
+    Vtx unk_10008[1];
+    s8 pad_10018[0xFFF0];
     Mtx unk_20008[4];
     Mtx unk_20108[4];
     Mtx unk_20208[4];
     s8 pad_20308[0x1680];
     Mtx unk_21988[1];
-    s8 pad_219C8[0x8180];
+    s8 pad_219C8[0xC0];
+    s8 unk_21A88[4][24];
+    s8 pad_21AE8[0x60];
+    Vtx unk_21B48[2048];
     Vtx unk_29B48[28];
     Vtx unk_29D08[4];
-    s8 pad_29D48[0x1500];
+    s8 pad_29D48[0x500];
+    Vtx unk_2A248[256];
     Mtx unk_2B248[1];
-    s8 pad_2B288[0x80];
-    Mtx unk_2B308;
-    Mtx unk_2B348;
-    Mtx unk_2B388;
-    s8 pad_2B3C8[0xF00];
+    Mtx unk_2B288[1];
+    Mtx unk_2B2C8[64];
     Vp unk_2C2C8[1];
     Vp unk_2C2D8[1];
     s8 pad_2C2E8[0x20];

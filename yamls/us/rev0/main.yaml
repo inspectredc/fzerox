@@ -56,7 +56,7 @@
       - [0x1AA40, c, game/1AA40]
       - [0x1B0E0, c, game/1B0E0]
       - [0x36ED0, c, game/36ED0]
-      - [0x44620, hasm, game/44620]
+      - [0x44620, hasm, game/mio0Decode]
       - [0x446D0, c, audio/playback]
       - [0x459A0, c, audio/effects]
       - [0x45FD0, c, audio/seqplayer]
@@ -214,10 +214,13 @@
       - [0x66FE0, .data, game/1AE0]
       - [0x66FF0, .data, game/2A60]
       - [0x67000, .data, game/2B20]
-      - [0x67170, data]
+      - [0x67170, .data, game/3ED0]
+      - [0x67180, .data, game/73F0]
       - [0x672B0, .data, game/F1C0]
       - [0x672E0, .data, game/10490]
-      - [0x67380, data]
+      - [0x67380, .data, game/14440]
+      - [0x67510, .data, game/194E0]
+      - [0x67520, .data, game/197D0]
       - [0x676C0, .data, game/sys_fault]
       - [0x678A0, data]
       - [0x6B6D0, .data, audio/aisetnextbuf]
@@ -290,7 +293,11 @@
 
       - { start: 0x72030, type: bss, vram: 0x800D8030, name: 800D8030 }
       - { type: .bss, vram: 0x800E32E0, name: game/F1C0 }
-      - { type: bss, vram: 0x800E3380, name: 800E3380 }
+      - { type: .bss, vram: 0x800E3380, name: game/10490 }
+      - { type: .bss, vram: 0x800E33E0, name: game/11CF0 }
+      - { type: .bss, vram: 0x800E40F0, name: game/14440 }
+      - { type: .bss, vram: 0x800E4260, name: game/194E0 }
+      - { type: .bss, vram: 0x800E4330, name: game/197D0 }
       - { type: .bss, vram: 0x800E47D0, name: game/sys_fault }
       - { type: bss, vram: 0x800E51B0, name: 800E51B0 }
       - { type: .bss, vram: 0x800F8AF0, name: libultra/io/sptask }
