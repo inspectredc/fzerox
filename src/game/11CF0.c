@@ -729,7 +729,7 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
             gfx = func_8007ABA4(func_8007AE70(func_8007AB88(gfx)));
             break;
         case 0xA:
-            gfx = func_i4_8011B380(gfx);
+            gfx = func_i4_8011B380(gfx, arg1);
             break;
         case 0xE:
             gfx = func_i4_8011B3DC(gfx, arg1);
@@ -741,22 +741,22 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
             gfx = func_8007AE8C(gfx, 12, 8, 307, 231, 0, 0, 0, 0);
             break;
         case 0xF:
-            gfx = func_i4_8011B3E8(gfx);
+            gfx = func_i4_8011B3E8(gfx, arg1);
             break;
         case 0x10:
             gfx = func_i4_8011B438(gfx, arg1);
             break;
         case 0x11:
-            gfx = func_i4_8011B444(gfx);
+            gfx = func_i4_8011B444(gfx, arg1);
             break;
         case 0x12:
             gfx = func_i4_8011B668(gfx, arg1);
             break;
         case 0x13:
-            gfx = func_i4_8011B674(gfx);
+            gfx = func_i4_8011B674(gfx, arg1);
             break;
         case 0x14:
-            gfx = func_i4_8011B6C4(gfx);
+            gfx = func_i4_8011B6C4(gfx, arg1);
             break;
         case 0x1E:
             gfx = func_i4_801178C4(gfx);
@@ -765,7 +765,7 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
             gfx = func_8007AC48(gfx, 0x18, 0x18, 0x18);
             break;
         case 0x1F:
-            gfx = func_i4_80117B74(gfx);
+            gfx = func_i4_80117B74(gfx, arg1);
             break;
         case 0x20:
             gfx = func_i4_80117BE0(gfx, arg1);
@@ -774,67 +774,67 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
         case 0x3D:
         case 0x3E:
         case 0x3F:
-            gfx = func_i4_80117D10(gfx);
+            gfx = func_i4_80117D10(gfx, arg1);
             break;
         case 0x21:
         case 0x22:
         case 0x23:
         case 0x24:
-            gfx = func_i4_801180EC(gfx);
+            gfx = func_i4_801180EC(gfx, arg1);
             break;
         case 0x28:
         case 0x29:
         case 0x2A:
         case 0x2B:
-            gfx = func_i4_801181C0(gfx);
+            gfx = func_i4_801181C0(gfx, arg1);
             break;
         case 0x2C:
-            gfx = func_i4_8011821C(gfx);
+            gfx = func_i4_8011821C(gfx, arg1);
             break;
         case 0x2D:
-            gfx = func_i4_80118414(gfx);
+            gfx = func_i4_80118414(gfx, arg1);
             break;
         case 0x2E:
-            gfx = func_i4_80118734(gfx);
+            gfx = func_i4_80118734(gfx, arg1);
             break;
         case 0x41:
         case 0x42:
         case 0x43:
         case 0x44:
-            gfx = func_i4_80117E98(gfx);
+            gfx = func_i4_80117E98(gfx, arg1);
             break;
         case 0x35:
-            gfx = func_i4_80118918(gfx);
+            gfx = func_i4_80118918(gfx, arg1);
             break;
         case 0x32:
             gfx = func_i4_801187C0(gfx);
             break;
         case 0x33:
-            gfx = func_i4_80118EC8(gfx);
+            gfx = func_i4_80118EC8(gfx, arg1);
             break;
         case 0x34:
-            gfx = func_i4_80119170(gfx);
+            gfx = func_i4_80119170(gfx, arg1);
             break;
         case 0x3A:
-            gfx = func_i4_801193B8(gfx);
+            gfx = func_i4_801193B8(gfx, arg1);
             break;
         case 0x36:
-            gfx = func_i4_801194F8(gfx);
+            gfx = func_i4_801194F8(gfx, arg1);
             break;
         case 0x37:
-            gfx = func_i4_80119574(gfx);
+            gfx = func_i4_80119574(gfx, arg1);
             break;
         case 0x38:
             gfx = func_i4_801197A0(gfx);
             break;
         case 0x39:
-            gfx = func_i4_80119B50(gfx);
+            gfx = func_i4_80119B50(gfx, arg1);
             break;
         case 0x2F:
-            gfx = func_i4_80119834(gfx);
+            gfx = func_i4_80119834(gfx, arg1);
             break;
         case 0x30:
-            gfx = func_i4_80119A64(gfx);
+            gfx = func_i4_80119A64(gfx, arg1);
             break;
         case 0x50:
             gfx = func_i6_80116C78(gfx, arg1);

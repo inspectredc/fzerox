@@ -149,9 +149,9 @@
     symbol_name_format: i4_$VRAM
     subsegments:
       - [0xD4BD0, c]
-      - [0xDA760, data]
-      - [0xDC4E0, .rodata, D4BD0]
-      - { start: 0xDC550, type: bss, vram: 0x8011D770, name: 8011D770 }
+      - [0xDA760, .data, D4BD0]
+      - [0xDC440, .rodata, D4BD0]
+      - { start: 0xDC550, type: .bss, vram: 0x8011D770, name: D4BD0 }
 
   - name: ovl_i5
     exclusive_ram_id: overlay

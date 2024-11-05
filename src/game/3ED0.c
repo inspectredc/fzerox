@@ -1,7 +1,7 @@
 #include "global.h"
 #include "audio.h"
 
-extern u16 D_800DCE70;
+extern OSContStatus D_800DCE70[];
 extern u16 D_800DCE74;
 extern u16 D_800DCE78;
 extern u16 D_800DCE7C;
@@ -12,19 +12,15 @@ extern s32 D_800DD054;
 
 extern Controller D_800DCE98[];
 
-void* func_80069ED0(void) {
-    if ((D_800DCE70 & 0x1F07) == 2) {
-        return &D_800DCE98;
+Controller* func_80069ED0(void) {
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        if ((D_800DCE70[i].type & 0x1F07) == 2) {
+            return &D_800DCE98[i];
+        }
     }
-    if ((D_800DCE74 & 0x1F07) == 2) {
-        return &D_800DCF2C;
-    }
-    if ((D_800DCE78 & 0x1F07) == 2) {
-        return &D_800DCFC0;
-    }
-    if ((D_800DCE7C & 0x1F07) == 2) {
-        return &D_800DD054;
-    }
+
     return NULL;
 }
 
@@ -308,51 +304,52 @@ void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* arg3, s32* arg4, s32* arg5
     *arg5 = (s32) ((*arg5 * temp_lo) + temp_t0) / 65025;
 }
 
-void func_8006AFC8(s8* arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0[4] = arg1;
-    arg0[0] = arg1;
-    arg0[5] = arg2;
-    arg0[1] = arg2;
-    arg0[6] = arg3;
-    arg0[2] = arg3;
+void func_8006AFC8(Ambient* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0->l.col[0] = arg0->l.colc[0] = arg1;
+    arg0->l.col[1] = arg0->l.colc[1] = arg2;
+    arg0->l.col[2] = arg0->l.colc[2] = arg3;
 }
 
-void func_8006AFE4(s8* arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0[4] = arg1;
-    arg0[0] = arg1;
-    arg0[5] = arg2;
-    arg0[1] = arg2;
-    arg0[6] = arg3;
-    arg0[2] = arg3;
+void func_8006AFE4(Light* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0->l.col[0] = arg0->l.colc[0] = arg1;
+    arg0->l.col[1] = arg0->l.colc[1] = arg2;
+    arg0->l.col[2] = arg0->l.colc[2] = arg3;
 }
 
-void func_8006B000(s8* arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0[8] = arg1;
-    arg0[9] = arg2;
-    arg0[10] = arg3;
+void func_8006B000(Light* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0->l.dir[0] = arg1;
+    arg0->l.dir[1] = arg2;
+    arg0->l.dir[2] = arg3;
 }
 
-void func_8006B010(s8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9) {
+void func_8006B010(Lights1* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
+                   s32 arg9) {
 
-    arg0[3] = arg0[7] = arg0[11] = arg0[15] = arg0[19] = 0;
+    // FAKE
+    ((s8*) arg0)[3] = ((s8*) arg0)[7] = ((s8*) arg0)[11] = ((s8*) arg0)[15] = ((s8*) arg0)[19] = 0;
+    // arg0->a.l.pad1 = arg0->a.l.pad2 = arg0->l[0].l.pad1 = arg0->l[0].l.pad2 = arg0->l[0].l.pad3 = 0;
 
-    func_8006AFC8(arg0, arg1, arg2, arg3);
-    func_8006AFE4(&arg0[8], arg4, arg5, arg6);
-    func_8006B000(&arg0[8], arg7, arg8, arg9);
+    func_8006AFC8(&arg0->a, arg1, arg2, arg3);
+    func_8006AFE4(&arg0->l[0], arg4, arg5, arg6);
+    func_8006B000(&arg0->l[0], arg7, arg8, arg9);
 }
 
-void func_8006B07C(s8* arg0, f32* arg1) {
+void func_8006B07C(LookAt* arg0, MtxF* arg1) {
 
-    arg0[3] = arg0[7] = arg0[19] = arg0[23] = 0;
-    func_8006AFE4(arg0, 0, 0, 0);
-    func_8006AFE4(&arg0[16], 0, 128, 0);
+    // FAKE
+    ((s8*) arg0)[3] = ((s8*) arg0)[7] = ((s8*) arg0)[19] = ((s8*) arg0)[23] = 0;
+    // arg0->l[0].l.pad1 = arg0->l[0].l.pad2 = arg0->l[1].l.pad1 = arg0->l[1].l.pad2 = 0;
 
-    func_8006B000(arg0, Math_Round(arg1[0] * 120.0f), Math_Round(arg1[4] * 120.0f), Math_Round(arg1[8] * 120.0f));
+    func_8006AFE4(&arg0->l[0], 0, 0, 0);
+    func_8006AFE4(&arg0->l[1], 0, 128, 0);
 
-    func_8006B000(&arg0[16], Math_Round(arg1[1] * 120.0f), Math_Round(arg1[5] * 120.0f), Math_Round(arg1[9] * 120.0f));
+    func_8006B000(&arg0->l[0], Math_Round(arg1->m[0][0] * 120.0f), Math_Round(arg1->m[1][0] * 120.0f),
+                  Math_Round(arg1->m[2][0] * 120.0f));
+    func_8006B000(&arg0->l[1], Math_Round(arg1->m[0][1] * 120.0f), Math_Round(arg1->m[1][1] * 120.0f),
+                  Math_Round(arg1->m[2][1] * 120.0f));
 }
 
-void func_8006B18C(s8* arg0, s32* arg1, f32* arg2, f32 arg3, f32 arg4, f32 arg5, s32 arg6, s32 arg7) {
+void func_8006B18C(LookAt* arg0, s32* arg1, MtxF* arg2, f32 arg3, f32 arg4, f32 arg5, s32 arg6, s32 arg7) {
     f32 temp_fa0;
     f32 temp_fa1;
     f32 temp_ft4;
@@ -360,9 +357,9 @@ void func_8006B18C(s8* arg0, s32* arg1, f32* arg2, f32 arg3, f32 arg4, f32 arg5,
     f32 temp_fv1;
 
     func_8006B07C(arg0, arg2);
-    temp_fa1 = arg2[2] + arg3;
-    temp_ft4 = arg2[6] + arg4;
-    temp_ft5 = arg2[10] + arg5;
+    temp_fa1 = arg2->m[0][2] + arg3;
+    temp_ft4 = arg2->m[1][2] + arg4;
+    temp_ft5 = arg2->m[2][2] + arg5;
     temp_fa0 = SQ(temp_fa1) + SQ(temp_ft4) + SQ(temp_ft5);
     if (temp_fa0 > 0.01f) {
         temp_fv1 = 1.0 / sqrtf(temp_fa0);
@@ -370,8 +367,10 @@ void func_8006B18C(s8* arg0, s32* arg1, f32* arg2, f32 arg3, f32 arg4, f32 arg5,
         temp_ft4 *= temp_fv1;
         temp_ft5 *= temp_fv1;
 
-        arg1[0] = (temp_fa1 * arg2[0] + temp_ft4 * arg2[4] + arg2[8] * temp_ft5) * (arg6 * 2) + arg6 * 4;
-        arg1[1] = (temp_fa1 * arg2[1] + temp_ft4 * arg2[5] + arg2[9] * temp_ft5) * (arg7 * 2) + arg7 * 4;
+        arg1[0] =
+            (temp_fa1 * arg2->m[0][0] + temp_ft4 * arg2->m[1][0] + temp_ft5 * arg2->m[2][0]) * (arg6 * 2) + arg6 * 4;
+        arg1[1] =
+            (temp_fa1 * arg2->m[0][1] + temp_ft4 * arg2->m[1][1] + temp_ft5 * arg2->m[2][1]) * (arg7 * 2) + arg7 * 4;
         return;
     }
     arg1[0] = arg6 * 2;
