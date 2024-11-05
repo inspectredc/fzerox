@@ -38,8 +38,6 @@ extern Lights1 D_8024DCC0;
 
 extern s32 D_800DCE44;
 
-void func_i3_8013BF18(s32 arg0);
-
 void func_i3_80139D20(void) {
 
     D_i3_80143780 = 0;
@@ -193,7 +191,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
 
     gSPDisplayList(gfx++, D_303A810);
     gDPPipeSync(gfx++);
-    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
 
     if (D_i3_80143780 & 2) {
         gfx = func_8007A440(gfx, 0xC, 8, 0x134, 0xE8, 0, 0, 0, 0xBF);

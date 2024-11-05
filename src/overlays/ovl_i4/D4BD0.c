@@ -392,7 +392,6 @@ extern s8 D_800CD3C8;
 extern f32 D_800CE748;
 extern f32 D_800CE74C;
 extern f32 D_800CE750;
-extern f32 D_i4_8011D6E8;
 extern s32 gNumPlayers;
 
 void func_i4_80115DF0(void) {
@@ -666,7 +665,7 @@ s32 func_i4_8011631C(void);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011631C.s")
 #endif
 
-extern s32 D_80106DA4;
+extern s32 D_i2_80106DA4;
 
 s32 func_i4_801168D4(void) {
     s32 i;
@@ -679,7 +678,7 @@ s32 func_i4_801168D4(void) {
     s32 var_v0;
 
     func_8008675C();
-    if (D_80106DA4 != 0) {
+    if (D_i2_80106DA4 != 0) {
         return D_800DCE44;
     }
 
@@ -820,8 +819,6 @@ s32 func_i4_80116E5C(s32 arg0) {
     return arg0;
 }
 
-extern unk_80077D50 D_i4_8011CECC[];
-
 void func_i4_80116E64(void) {
     func_80077D50(D_i4_8011CECC, 0);
 }
@@ -838,8 +835,6 @@ void func_i4_80116E8C(unk_800E3A28* arg0) {
         func_80077D50(D_i4_8011C508[gRacers[i].character], 0);
     }
 }
-
-extern unk_80077D50 D_i4_8011BDA0[];
 
 void func_i4_80116F48(unk_800E3A28* arg0) {
     s32 index = arg0->unk_00 - 60;
@@ -859,13 +854,9 @@ void func_i4_80117008(unk_800E3A28* arg0) {
     arg0->unk_18 = func_800792D8(D_i4_8011C7A4[0]);
 }
 
-extern unk_80077D50* D_i4_8011CF6C[];
-
 void func_i4_80117038(unk_800E3A28* arg0) {
     func_80077D50(D_i4_8011CF6C[arg0->unk_00 - 0x28], 0);
 }
-
-extern unk_80077D50 D_i4_8011CF7C[];
 
 void func_i4_8011706C(void) {
     func_80077D50(D_i4_8011CF7C, 0);
@@ -954,11 +945,6 @@ void func_i4_80117400(unk_800E3A28* arg0) {
     }
 }
 
-extern unk_80077D50 D_i4_8011CF9C[];
-extern unk_80077D50 D_i4_8011CFBC[];
-extern unk_80077D50 D_i4_8011CFFC[];
-extern unk_80077D50 D_i4_8011D01C[];
-
 void func_i4_8011764C(void) {
     if (gNumPlayers == 1) {
         func_80077D50(D_i4_8011CF9C, 0);
@@ -968,9 +954,6 @@ void func_i4_8011764C(void) {
         func_80077D50(D_i4_8011D01C, 0);
     }
 }
-
-extern unk_80077D50 D_i4_8011CFDC[];
-extern unk_80077D50 D_i4_8011D03C[];
 
 void func_i4_801176BC(void) {
     if (gNumPlayers == 1) {
@@ -985,8 +968,6 @@ void func_i4_8011770C(unk_800E3A28* arg0) {
         arg0->unk_18 = func_800792D8(D_i4_8011CE50[0]);
     }
 }
-
-extern unk_80077D50 D_i4_8011D05C[];
 
 void func_i4_8011774C(void) {
     func_80077D50(D_i4_8011D05C, 0);
@@ -1070,7 +1051,7 @@ Gfx* func_i4_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-extern unk_800E3F28 D_800E3F28[16];
+extern unk_800E3F28 D_800E3F28[];
 
 Gfx* func_i4_80117D10(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_v1;
@@ -2011,8 +1992,6 @@ void func_i4_8011B06C(unk_800E3A28* arg0) {
 void func_i4_8011B0C8(void) {
 }
 
-extern unk_80077D50 D_i4_8011D55C[];
-
 void func_i4_8011B0D0(unk_800E3A28* arg0) {
     arg0->unk_04 = D_800CD3C4;
     arg0->unk_0C = 0x55;
@@ -2032,9 +2011,6 @@ void func_i4_8011B0D0(unk_800E3A28* arg0) {
 
 void func_i4_8011B134(void) {
 }
-
-extern unk_80077D50 D_i4_8011D57C[];
-extern unk_80077D50 D_i4_8011D59C[];
 
 void func_i4_8011B13C(unk_800E3A28* arg0) {
 

@@ -177,7 +177,7 @@ void func_i3_8011AE88(void) {
 
 extern s8 D_800DCE5C;
 extern s32 D_800DD218[];
-extern s32 D_80106F10;
+extern s32 D_i2_80106F10;
 extern s32 D_i3_801419B0;
 extern Controller D_800DCE98[];
 extern s32 D_800DD218[];
@@ -204,7 +204,7 @@ void func_i3_8011AEA0(void) {
         }
         if (D_i3_801419B0 & 2) {
             D_800DCE5C = 0;
-            D_80106F10 = 4;
+            D_i2_80106F10 = 4;
             for (i = 0; i < gNumPlayers; i++) {
                 D_800DCE98[D_800DD218[i]].unk_72 = 1;
             }
@@ -315,7 +315,6 @@ Gfx* func_i3_8011B41C(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 re
 }
 
 void func_i3_80122C3C(void);
-void func_i3_80139D20(void);
 void func_i3_8013C080(void);
 extern unk_800CD970 D_800CD970[];
 extern s32* D_800CD9AC[];
@@ -2007,7 +2006,6 @@ void func_i3_80122C3C(void) {
 }
 
 void func_i2_80101690(s32, unk_800E5FF8*);
-s32 func_i2_801014D4(unk_80141C88*);
 
 s32 func_i3_80122CEC(void) {
     func_i3_80122C3C();
