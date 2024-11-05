@@ -806,4 +806,16 @@ typedef struct unk_80113140 {
     Racer* unk_54;
 } unk_80113140; // size = 0x58
 
+typedef struct unk_800CF1B0 {
+    s16 unk_00;
+    u8 unk_02;
+    u8 unk_03;
+    u8 unk_04[4];
+    u8 unk_08[4];
+    u8 unk_0C[4];
+    u8 unk_10;
+    s8 unk_11[3];
+    s16 unk_14;
+} unk_800CF1B0; // size = 0x16
+
 #endif // UNK_STRUCTS_H

@@ -16,8 +16,11 @@ u32 D_800CD384 = 0;
 
 s32 D_800CD388[8] = { 0 };
 
-s8 D_800CD3A8[] = { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+s8 D_800CD3A8[] = { 0, 0, 0, 0 };
+s8 D_800CD3AC[] = { 1, 1, 1, 1 };
 
+s32 D_800CD3B0 = 0;
+s32 D_800CD3B4 = 0;
 s32 D_800CD3B8 = 0;
 s32 D_800CD3BC = 0;
 s8 D_800CD3C0 = 0;
@@ -564,18 +567,23 @@ void func_8007E0EC(void) {
     func_800BB078();
 }
 
-const s8 D_800D4690[] = { 0,  1,  2,  3,  4,  5,  7,  8,  23, 6,  25, 27, 24, 9,  20, 19,
-                          29, 17, 12, 22, 16, 18, 10, 11, 13, 26, 21, 14, 15, 28, 30 };
+const s8 D_800D4690[] = { CAPTAIN_FALCON, DR_STEWART,   PICO,           SAMURAI_GOROH,   JODY_SUMMER,
+                          MIGHTY_GAZELLE, BABA,         OCTOMAN,        DR_CLASH,        MR_EAD,
+                          BIO_REX,        BILLY,        SILVER_NEELSEN, GOMAR_AND_SHIOH, JOHN_TANAKA,
+                          MRS_ARROW,      BLOOD_FALCON, JACK_LEVIN,     JAMES_MCCLOUD,   ZODA,
+                          MICHAEL_CHAIN,  SUPER_ARROW,  KATE_ALEN,      ROGER_BUSTER,    LEON,
+                          DRAQ,           BEASTMAN,     ANTONIO_GUSTER, BLACK_SHADOW,    THE_SKULL,
+                          MAX_CHARACTER };
 
 s8 func_8007E10C(s32 arg0) {
     return D_800D4690[arg0];
 }
 
-s32 func_8007E11C(s32 arg0) {
+s32 func_8007E11C(s32 character) {
     s32 i;
 
     for (i = 0; i < 30; i++) {
-        if (arg0 == D_800D4690[i]) {
+        if (character == D_800D4690[i]) {
             return i;
         }
     }

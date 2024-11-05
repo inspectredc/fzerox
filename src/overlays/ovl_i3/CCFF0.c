@@ -34,7 +34,7 @@ extern f32 D_800CE748;
 extern f32 D_800CE74C;
 extern f32 D_800CE750;
 extern Mtx D_8024DC80;
-extern s8 D_8024DCC0[];
+extern Lights1 D_8024DCC0;
 
 extern s32 D_800DCE44;
 
@@ -77,7 +77,7 @@ void func_i3_80139D20(void) {
     }
     func_8006BC84(&D_8024DC80, NULL, 0.7f * D_800CE748, 0.7f * D_800CE74C, 0.7f * D_800CE750, 0.0f, 0.0f, 1.0f, 0.0f,
                   1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-    func_8006B010(D_8024DCC0, 0, 0, 0, 255, 255, 255, 100, 50, 69);
+    func_8006B010(&D_8024DCC0, 0, 0, 0, 255, 255, 255, 100, 50, 69);
     func_80078104(D_F243290, 0x180, 0, 0, 0);
 
     if (D_i3_80143780 & 4) {

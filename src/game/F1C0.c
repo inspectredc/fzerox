@@ -1,7 +1,7 @@
 #include "global.h"
 #include "PR/leo.h"
 
-u8 D_800E32E0;
+LEOStatus D_800E32E0;
 LEOCmd D_800E32E8;
 OSMesgQueue D_800E3308;
 OSMesg D_800E3320;

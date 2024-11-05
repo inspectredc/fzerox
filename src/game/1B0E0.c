@@ -2611,18 +2611,6 @@ void func_80089934(void) {
     }
 }
 
-typedef struct unk_800CF1B0 {
-    s16 unk_00;
-    u8 unk_02;
-    u8 unk_03;
-    u8 unk_04[4];
-    u8 unk_08[4];
-    u8 unk_0C[4];
-    u8 unk_10;
-    s8 unk_11;
-    s8 unk_12[0x2];
-    s16 unk_14;
-} unk_800CF1B0; // size = 0x16
 extern unk_800CF1B0 D_800F80C8[];
 extern u8 D_800F8360[][14];
 
@@ -2956,7 +2944,7 @@ void func_8008C14C(Racer* arg0) {
     arg0->unk_1E0 = (((temp_s2->unk_14 - 780.0f) * -0.0050000027f) / 1560.0f) + 0.054f;
     arg0->unk_1E4 = (((temp_s2->unk_14 - 780.0f) * -0.004999999f) / 1560.0f) + 0.03f;
     arg0->unk_1F0 = temp_s2->unk_14;
-    arg0->unk_1F4 = ((4 - temp_s2->unk_11) * 312.0f) + 780.0f + ((312.0f * (temp_s2->unk_14 - 780.0f)) / 1560.0f);
+    arg0->unk_1F4 = ((4 - temp_s2->unk_11[0]) * 312.0f) + 780.0f + ((312.0f * (temp_s2->unk_14 - 780.0f)) / 1560.0f);
 
     arg0->unk_1F4 = SQ(arg0->unk_1F4);
 
@@ -2972,7 +2960,7 @@ void func_8008C14C(Racer* arg0) {
 
     arg0->unk_234 = 1.7f;
 
-    arg0->unk_228 = arg0->unk_22C = D_800CF160[temp_s2->unk_11];
+    arg0->unk_228 = arg0->unk_22C = D_800CF160[temp_s2->unk_11[0]];
     arg0->unk_1AC = arg0->unk_22C * 0.0015f;
     arg0->unk_31C = arg0->unk_1C4 - 1.0f;
     arg0->unk_320 = (0.5f - arg0->unk_1A8) * 0.5f;
@@ -3175,7 +3163,7 @@ void func_8008C7C8(void) {
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 4; j++) {
-            func_8006B010(D_8024DCE0[i].unk_21A88[j], 100, 100, 100, 255, 255, 255, 69, 69, 69);
+            func_8006B010(&D_8024DCE0[i].unk_21A88[j], 100, 100, 100, 255, 255, 255, 69, 69, 69);
         }
     }
 

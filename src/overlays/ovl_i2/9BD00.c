@@ -18,7 +18,7 @@ size_t D_i2_80106DF0[][3] = {
     { 0x26E10, 0x26E50, 0x26E70 }, { 0x28D00, 0x28D40, 0x28D60 }, { 0x2B130, 0x2B170, 0x2B190 },
 };
 
-void func_i2_801033B8(unk_struct_60* arg0, s8* arg1);
+void func_i2_801033B8(unk_struct_60* arg0, u8* arg1);
 void func_i2_8010300C(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3);
 void func_i2_80102F70(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3);
 void func_i2_80102CA4(unk_struct_19E0* arg0, s32 arg1);
@@ -285,7 +285,7 @@ s32 func_i2_80100C18(s32 arg0) {
     return 0;
 }
 
-s32 func_i2_80100C60(s32 arg0) {
+s32 func_i2_80100C60(u8* arg0) {
     unk_struct_60* var = (unk_struct_60*) D_i2_8010D7F0;
 
     func_i2_8010046C(var);
@@ -457,7 +457,7 @@ s32 func_i2_80101310(s32 arg0, s32 arg1, s32 arg2) {
     unk_struct_60* var = (unk_struct_60*) D_i2_8010D7F0;
 
     func_i2_8010046C(var);
-    func_i2_801033B8(var, 0);
+    func_i2_801033B8(var, NULL);
 
     temp = var->unk_10[arg0][arg2 / 3];
     temp |= (1 << ((arg2 % 3) * 5)) << arg1;
@@ -1434,7 +1434,7 @@ void func_i2_80103310(unk_struct_80* arg0, s32 arg1) {
     }
 }
 
-void func_i2_801033B8(unk_struct_60* arg0, s8* arg1) {
+void func_i2_801033B8(unk_struct_60* arg0, u8* arg1) {
     s32 i;
     s32 j;
     s32 k;
