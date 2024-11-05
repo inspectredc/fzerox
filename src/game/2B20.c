@@ -6,7 +6,7 @@ extern s16 D_800CD16C;
 
 s32 gNumPlayers = 1;
 s32 D_800CD004 = 0;
-s32 gDifficulty = 0;
+s32 gDifficulty = NOVICE;
 s32 D_800CD00C = 3;
 s8 D_800CD010 = 0;
 s8 D_800CD014 = 0;
@@ -300,7 +300,7 @@ void func_80068F04(void) {
                 }
                 D_800CD020 = 0;
                 D_800CD010 = 1;
-                gDifficulty = 3;
+                gDifficulty = MASTER;
             }
             break;
         case 0x1:

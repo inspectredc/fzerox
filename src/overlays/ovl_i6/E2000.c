@@ -2100,7 +2100,8 @@ bool func_i6_8011C788(void) {
             break;
         case OPTIONS_DATA_CLEAR:
             if (D_800E416E & (BTN_A | BTN_START)) {
-                D_i6_801247A4 = func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, 0xF801, func_i6_8011D168);
+                D_i6_801247A4 =
+                    func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, GPACK_RGBA5551(255, 0, 0, 1), func_i6_8011D168);
                 if (D_i6_801247A4 != NULL) {
                     gOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_OPEN;
                     gOptionsSelectionState[gOptionsCurrentRow] = 0;

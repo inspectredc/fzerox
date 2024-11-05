@@ -824,4 +824,6 @@ extern u8 D_F03281C[];
 extern u8 D_F032A7C[];
 extern u8 D_F032F6C[];
 
+extern u8 D_F13A9E0[];
+
 #endif // TEX_ASSETS_H

@@ -161,7 +161,6 @@ s32 func_i2_801005CC(s32 arg0) {
 }
 
 bool func_i2_80100B38(unk_80141C88*);
-s32 func_i2_801014D4(unk_80141C88*);
 s32 func_i2_801005CC(s32);
 
 s32 func_i2_80100810(s32 arg0, s32 arg1) {

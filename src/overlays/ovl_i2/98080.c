@@ -40,7 +40,6 @@ void func_i2_800FC730(void) {
 }
 
 s32 func_i2_800FCB84(s32, s32);
-void func_i2_800FCD38(s32, s32);
 s32 func_i2_800FCD4C(s32, s32);
 extern s32 gNumPlayers;
 extern s16 D_800CD044;

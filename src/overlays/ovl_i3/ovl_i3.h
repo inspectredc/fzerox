@@ -164,8 +164,6 @@ Gfx* func_i3_80132EEC(Gfx*);
 Gfx* func_i3_80133944(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale);
 Gfx* func_i3_80135B20(Gfx*, s32, s32);
 void func_i3_80139FF4(void);
-bool func_i3_8013A004(void);
-Gfx* func_i3_8013A360(Gfx*, s32);
 void func_i3_8013C15C(void);
 Gfx* func_i3_8013D2BC(Gfx*);
 

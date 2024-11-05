@@ -178,13 +178,13 @@ extern u16 D_800E416C;
 extern u16 D_800E416E;
 extern char* D_800E4178;
 extern s32 D_800F8514;
-extern s32 D_80106DA4;
+extern s32 D_i2_80106DA4;
 
 s32 func_i6_80115FF0(void) {
     s32 temp_t0;
     s32 var_v1_2;
 
-    if (D_80106DA4 != 0) {
+    if (D_i2_80106DA4 != 0) {
         return D_800DCE44;
     }
 
