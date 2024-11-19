@@ -948,4 +948,27 @@ extern u8 D_F26A480[];
 extern u8 D_F26A680[];
 extern u8 D_F26A880[];
 
+extern u8 D_F1355B4[];
+extern u8 D_F135C98[];
+extern u8 D_F1363CC[];
+extern u8 D_F136B08[];
+extern u8 D_F137668[];
+extern u8 D_F1371E0[];
+extern u8 D_F137D34[];
+
+extern u8 D_F139830[];
+extern u8 D_F138510[];
+
+extern u8 D_F1394A4[];
+extern u8 D_F139520[];
+extern u8 D_F13959C[];
+extern u8 D_F139618[];
+
+extern u8 D_F139694[];
+extern u8 D_F139FB8[];
+extern u8 D_F13A1C0[];
+extern u8 D_F13A3C8[];
+extern u8 D_F13A5D0[];
+extern u8 D_F13A7D8[];
+
 #endif // TEX_ASSETS_H

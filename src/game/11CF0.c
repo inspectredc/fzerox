@@ -869,7 +869,7 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
             gfx = func_8007AC48(gfx, 0, 0, 0);
             break;
         case 0x78:
-            gfx = func_i5_80117A98(gfx);
+            gfx = func_i5_80117A98(gfx, arg1);
             break;
         case 0x79:
             gfx = func_i5_80117BE0(gfx, arg1);
@@ -880,25 +880,25 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
         case 0x7D:
         case 0x7E:
         case 0x7F:
-            gfx = func_i5_80117C48(gfx);
+            gfx = func_i5_80117C48(gfx, arg1);
             break;
         case 0x83:
-            gfx = func_i5_80117FB4(gfx);
+            gfx = func_i5_80117FB4(gfx, arg1);
             break;
         case 0x80:
-            gfx = func_i5_80118100(gfx);
+            gfx = func_i5_80118100(gfx, arg1);
             break;
         case 0x81:
-            gfx = func_i5_80118168(gfx);
+            gfx = func_i5_80118168(gfx, arg1);
             break;
         case 0x82:
             gfx = func_i5_801182DC(gfx);
             break;
         case 0x84:
-            gfx = func_i5_80118674(gfx);
+            gfx = func_i5_80118674(gfx, arg1);
             break;
         case 0x85:
-            gfx = func_i5_80118790(gfx);
+            gfx = func_i5_80118790(gfx, arg1);
             break;
     }
     return gfx;

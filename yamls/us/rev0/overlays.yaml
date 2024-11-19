@@ -164,9 +164,10 @@
     subsegments:
       - [0xDC550, c]
       - [0xDCF90, c]
-      - [0xDF750, data]
+      - [0xDF750, .data, DCF90]
       - [0xDFCB0, .rodata, DCF90]
-      - { start: 0xDFF10, type: bss, vram: 0x801197B0, name: 801197B0 }
+      - { start: 0xDFF10, type: .bss, vram: 0x801197B0, name: DC550 }
+      - { type: .bss, vram: 0x801197E0, name: DCF90}
 
   - name: ovl_i6
     exclusive_ram_id: overlay
