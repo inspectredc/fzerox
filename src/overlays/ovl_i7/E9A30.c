@@ -492,7 +492,10 @@ u8 D_i7_8014AD2C[][3] = {
 };
 
 TexturePtr D_i7_8014AD8C[] = {
-    D_i7_8014ADA8, D_i7_8014AE30, D_i7_8014AEB8, NULL,
+    D_i7_8014ADA8,
+    D_i7_8014AE30,
+    D_i7_8014AEB8,
+    NULL,
 };
 
 UNUSED Gfx D_i7_8014ADA0[] = {
