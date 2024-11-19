@@ -72,7 +72,6 @@ void func_i2_801044F0(void) {
     }
 }
 
-void func_i2_8010466C(void);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/9FE40/func_i2_8010466C.s")
 extern s8 D_800DCE5C;
 extern f32 D_800DD230[];

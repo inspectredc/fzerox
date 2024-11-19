@@ -2,9 +2,6 @@
 
 extern s8 D_800DCE5C;
 
-void func_i2_801044F0(void);
-void func_i2_8010466C(void);
-
 void func_i2_80103A70(void) {
     func_i3_8012F324();
     func_80069700();

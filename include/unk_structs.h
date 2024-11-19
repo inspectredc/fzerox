@@ -178,11 +178,25 @@ typedef struct unk_struct_20_2 {
 
 typedef struct unk_struct_14 {
     s32 unk_00;
-    f32* unk_04[1];
-    s32* unk_08;
-    s8 unk_0C[0x4];
+    f32* unk_04[3];
     s32* unk_10;
 } unk_struct_14; // size = 0x14
+
+typedef struct unk_80085154_arg_2 {
+    s32 unk_00;
+    f32* unk_04;
+    s32* unk_08;
+} unk_80085154_arg_2; // size = 0xC
+
+typedef struct unk_80085434_arg_2 {
+    unk_struct_14 unk_00[2];
+    unk_80085154_arg_2 unk_28;
+} unk_80085434_arg_2; // size = 0x34
+
+typedef struct unk_80085494_arg_2 {
+    unk_struct_14 unk_00[3];
+    unk_80085154_arg_2 unk_3C;
+} unk_80085494_arg_2; // size = 0x48
 
 typedef struct unk_struct_20 {
     Vec3f unk_00;

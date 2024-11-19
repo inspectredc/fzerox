@@ -199,9 +199,9 @@
     symbol_name_format: i7_$VRAM
     subsegments:
       - [0xE9A30, c]
-      - [0xEFEF0, data]
+      - [0xEFEF0, .data, E9A30]
       - [0xF13A0, .rodata, E9A30]
-      - { start: 0xF14E0, type: bss, vram: 0x8014B480, name: 8014B480 }
+      - { start: 0xF14E0, type: bss, vram: 0x8014B480, name: E9A30 }
 
   - name: ovl_i8
     exclusive_ram_id: overlay

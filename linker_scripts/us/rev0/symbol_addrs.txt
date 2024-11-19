@@ -246,3 +246,5 @@ D_800E4268 = 0x800E4268;
 
 gSkyboxType = 0x800E4260;
 gBackgroundFloorType = 0x800E4264;
+
+D_800D4E98 = 0x800D4E98;
