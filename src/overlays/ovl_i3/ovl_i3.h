@@ -156,7 +156,6 @@ Gfx* func_i3_DrawBeveledBox(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, 
 
 Gfx* func_i3_8012EE90(Gfx* gfx, s32 arg1);
 
-Gfx* func_i3_8012F554(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale);
 Gfx* func_i3_80130824(Gfx*, s32, s32);
 Gfx* func_i3_801312DC(Gfx*, s32, s32);
 Gfx* func_i3_DrawHUD(Gfx*);

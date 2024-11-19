@@ -152,7 +152,6 @@ bool func_i3_8013A004(void) {
     return var_a0;
 }
 
-Gfx* func_i3_8013B348(Gfx*, s32, s32, f32, bool, bool);
 Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, u8* arg2);
 Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3);
 

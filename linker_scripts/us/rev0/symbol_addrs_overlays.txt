@@ -86,6 +86,7 @@ D_i7_8014B070 = 0x8014B070; //segment:ovl_i7 size:0xC
 D_i7_8014B190 = 0x8014B190; //segment:ovl_i7 size:0xC
 D_i7_8014B310 = 0x8014B310; //segment:ovl_i7 size:0xC
 D_i7_8014BDF6 = 0x8014BDF6; //segment:ovl_i7
+D_i7_8014BF30 = 0x8014BF30; //segment:ovl_i7 size:0x54
 
 func_i4_8011B0C8 = 0x8011B0C8; //segment:ovl_i4
 func_i4_8011B134 = 0x8011B134; //segment:ovl_i4
