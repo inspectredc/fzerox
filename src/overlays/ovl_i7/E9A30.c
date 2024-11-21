@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_racer.h"
 #include "tex_assets.h"
+#include "assets/segment_17B960.h"
 
 extern Gfx D_5000178[];
 extern Gfx D_5001E38[];
@@ -23,7 +24,6 @@ extern s32 gDifficulty;
 extern char* D_800E4180[55];
 extern unk_800E4268 D_800E4268[1][6];
 
-extern u8 D_303C3F0[];
 extern Gfx D_8014940[];
 
 extern FrameBuffer* D_800DCCD0[];
@@ -35,7 +35,6 @@ extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
 
 extern GfxPool D_1000000;
-extern Gfx D_303A810[];
 
 #include "prevent_bss_reordering.h"
 #include "ovl_i7.h"

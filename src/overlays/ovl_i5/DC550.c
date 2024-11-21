@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ovl_i5.h"
+#include "assets/segment_17B1E0.h"
 
 void func_i5_80115DF0(void) {
     func_i5_801161D8();
@@ -17,7 +18,6 @@ void func_i5_80115E10(void) {
 }
 
 extern GfxPool D_1000000;
-extern Gfx D_3000338[];
 
 extern GfxPool* D_800DCCF0;
 extern s32 D_800DCCFC;

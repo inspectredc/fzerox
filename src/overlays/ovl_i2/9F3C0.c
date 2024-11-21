@@ -1,4 +1,5 @@
 #include "global.h"
+#include "assets/segment_17B960.h"
 
 extern s8 D_800DCE5C;
 
@@ -57,8 +58,6 @@ s32 func_i2_80103B8C(void) {
     return D_800DCE44;
 }
 
-extern Gfx D_303A810[];
-extern Gfx D_303A8F8[];
 extern s32 D_800DCCFC;
 extern s32 D_800DCD04;
 extern Vtx* D_800E5ECC;

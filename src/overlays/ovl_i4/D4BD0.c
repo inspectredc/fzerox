@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_racer.h"
 #include "tex_assets.h"
+#include "assets/segment_17B960.h"
 
 UNUSED s32 D_8011D770;
 s32 D_i4_8011D774;
@@ -1149,7 +1150,6 @@ Gfx* func_i4_8011821C(Gfx* gfx, unk_800E3A28* arg1) {
 extern unk_struct_1DC D_800E5220[];
 extern GfxPool D_1000000;
 extern GfxPool* D_800DCCF0;
-extern Gfx D_303A5F8[];
 
 Gfx* func_i4_80118414(Gfx* gfx, unk_800E3A28* arg1) {
     bool var_t0;
@@ -1233,8 +1233,6 @@ Gfx* func_i4_801187C0(Gfx* gfx) {
     return gfx;
 }
 
-extern Gfx D_303A758[];
-extern Gfx D_303A7D8[];
 extern u16 D_9000008[];
 extern Gfx D_90186C8[];
 

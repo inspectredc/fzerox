@@ -2,6 +2,7 @@
 #include "ovl_i6.h"
 #include "audio.h"
 #include "tex_assets.h"
+#include "assets/segment_17B1E0.h"
 
 s8 D_i6_8011FAF0[30];
 unk_801247C0* D_i6_8011FB10;
@@ -569,7 +570,6 @@ Gfx* func_i6_801182DC(Gfx* gfx, unk_800E3A28* arg1) {
     return func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 }
 
-extern Gfx D_3000088[];
 #define UNK_RAND_MACRO(var, x, y) (((Math_Rand1() >> (var % 4)) % x) - y)
 
 Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
