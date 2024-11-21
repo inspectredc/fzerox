@@ -2,6 +2,7 @@
 #include "fzx_racer.h"
 #include "ovl_i3.h"
 #include "tex_assets.h"
+#include "assets/segment_17B960.h"
 
 s16 D_i3_801419A0;
 s16 D_i3_801419A2;
@@ -731,7 +732,6 @@ Gfx* func_i3_8011C25C(Gfx* gfx, s32 playerNum) {
 }
 
 extern Gfx D_8014940[];
-extern u8 D_303C3F0[];
 Gfx* func_i3_8012F8E4(Gfx*, s32, s32);
 
 Gfx* func_i3_8011D8F0(Gfx* gfx, s32 left, s32 top) {
@@ -782,7 +782,6 @@ Gfx* func_i3_8011DB98(Gfx* gfx, s32 time, s32 left, s32 top) {
     return func_i3_80133944(gfx, time, left, top, 1.0f);
 }
 
-extern u8 D_303D1F0[];
 extern u8 D_40131E0[];
 extern u8 D_4019CA0[];
 extern s32 D_800CD00C;
@@ -3033,9 +3032,6 @@ Gfx* func_i3_80126330(Gfx* gfx) {
 }
 
 extern s16 D_800E5FE4;
-extern u8 D_303AA70[];
-extern u8 D_303B270[];
-extern u8 D_303C170[];
 
 Gfx* func_i3_80126B40(Gfx* gfx, s32 arg1) {
     s32 i;

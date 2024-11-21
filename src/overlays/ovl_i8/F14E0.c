@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_racer.h"
 #include "tex_assets.h"
+#include "assets/segment_17B960.h"
 
 typedef struct unk_80144F74 {
     void* unk_00;
@@ -425,8 +426,6 @@ extern Vtx* D_800E5ECC;
 extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
 extern GfxPool* D_800DCCF0;
-
-extern Gfx D_303A810[];
 
 Gfx* func_i8_801449B8(Gfx*);
 

@@ -2,6 +2,7 @@
 #include "fzx_racer.h"
 #include "ovl_i3.h"
 #include "tex_assets.h"
+#include "assets/segment_17B960.h"
 #include "segment_symbols.h"
 
 f32 D_i3_80141E30[TOTAL_RACER_COUNT];
@@ -593,8 +594,6 @@ Gfx* func_i3_8013064C(Gfx* gfx, s32 arg1, s32 arg2) {
     return gfx;
 }
 
-extern u8 D_303B270[];
-extern u8 D_303C170[];
 extern Gfx D_80149A0[];
 
 Gfx* func_i3_80130824(Gfx* gfx, s32 arg1, s32 arg2) {
@@ -944,8 +943,6 @@ Gfx* func_i3_80134FFC(Gfx* gfx, s32 arg1, s32 arg2);
 Gfx* func_i3_801353C0(Gfx* gfx, s32 arg1, s32 arg2);
 Gfx* func_i3_80135598(Gfx* gfx, s32 arg1, s32 arg2);
 
-extern u8 D_303C3F0[];
-extern u8 D_303D1F0[];
 extern u8 D_40131E0[];
 extern u8 D_40134E0[];
 extern u8 D_4019CA0[];

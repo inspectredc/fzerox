@@ -1,6 +1,7 @@
 #include "global.h"
 #include "ovl_i6.h"
 #include "tex_assets.h"
+#include "assets/segment_17B1E0.h"
 
 s16 D_i6_8011F910[240];
 
@@ -561,7 +562,6 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
     return func_80078EA0(gfx, D_i6_8011DD70[temp_t0], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
 }
 
-extern Gfx D_3000088[];
 extern f32 D_800DD230[];
 extern s8 D_800CD3C4;
 

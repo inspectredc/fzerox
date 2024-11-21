@@ -1,54 +1,10 @@
 #include "global.h"
+#include "assets/segment_17B960.h"
 
 s32 D_i9_80168CD0; // some unused bss exists in the file
 
 typedef Gfx* (*unk_i9_80168B20)(Gfx*, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
 typedef Gfx* (*unk_i9_80168BAC)(Gfx*, s32, s32, s32, s32, s32, s32);
-
-extern u8 D_302BE38[];
-extern u8 D_302C638[];
-extern u8 D_302CE38[];
-extern u8 D_302D638[];
-extern u8 D_302DE38[];
-extern u8 D_302E638[];
-extern u8 D_302EE38[];
-extern u8 D_302F638[];
-extern u8 D_302FE38[];
-extern u8 D_302FEB8[];
-extern u8 D_302FF38[];
-extern u8 D_302FFB8[];
-extern u8 D_3030038[];
-extern u8 D_30302B8[];
-extern u8 D_30304B8[];
-extern u8 D_30306B8[];
-extern u8 D_30308B8[];
-extern u8 D_3030AB8[];
-extern u8 D_3030CB8[];
-extern u8 D_3030EB8[];
-extern u8 D_30310B8[];
-extern u8 D_30312B8[];
-extern u8 D_3016758[];
-extern u8 D_30293C8[];
-extern u8 D_3013ED8[];
-extern u8 D_3023158[];
-extern u8 D_301C898[];
-extern u8 D_3026E68[];
-extern u8 D_302A708[];
-extern u8 D_3018498[];
-extern u8 D_3021F78[];
-extern u8 D_30175D8[];
-extern u8 D_301DE58[];
-extern u8 D_301F128[];
-extern u8 D_3012CC8[];
-extern u8 D_3025BB8[];
-extern u8 D_301B5B8[];
-extern u8 D_302B7F8[];
-extern u8 D_3011578[];
-extern u8 D_30283C8[];
-extern u8 D_3015218[];
-extern u8 D_3024B78[];
-extern u8 D_301A068[];
-extern u8 D_30300B8[];
 
 TexturePtr D_i9_80168A70[] = {
     D_302BE38, D_302C638, D_302CE38, D_302D638, D_302DE38, D_302E638, D_302EE38, D_302F638,
@@ -237,11 +193,6 @@ Gfx* func_i9_80115DF0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     gfx = D_i9_80168B20[arg2][arg1](gfx, arg5, arg6, arg7, arg8, arg9, argA, argB, argC, argD, argE, argF, arg10);
     return gfx;
 }
-
-extern Vtx D_30314B8[];
-extern Vtx D_3031548[];
-extern Vtx D_3031668[];
-extern Vtx D_3031848[];
 
 Gfx* func_i9_80115F38(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
                       s32 arg9, s32 argA, s32 argB, s32 argC) {
@@ -442,11 +393,6 @@ Gfx* func_i9_80116B48(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern Vtx D_3031898[];
-extern Vtx D_30318D8[];
-extern Vtx D_3031958[];
-extern Vtx D_3031A98[];
-
 Gfx* func_i9_80116CF0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
                       s32 arg9, s32 argA, s32 argB, s32 argC) {
 
@@ -646,11 +592,6 @@ Gfx* func_i9_80117A18(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
 
     return gfx;
 }
-
-extern Vtx D_3031CE8[];
-extern Vtx D_3031D78[];
-extern Vtx D_3031F28[];
-extern Vtx D_3032158[];
 
 Gfx* func_i9_80117BFC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
                       s32 arg9, s32 argA, s32 argB, s32 argC) {
@@ -877,10 +818,6 @@ Gfx* func_i9_80118A3C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern Vtx D_30321D8[];
-extern Vtx D_3032268[];
-extern Vtx D_3032358[];
-
 Gfx* func_i9_80118C74(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
                       s32 arg9, s32 argA, s32 argB, s32 argC) {
 
@@ -1070,12 +1007,6 @@ Gfx* func_i9_80119980(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
 
     return gfx;
 }
-
-extern Vtx D_30326F8[];
-extern Vtx D_3032738[];
-extern Vtx D_3032778[];
-extern Vtx D_3032878[];
-extern Vtx D_3032A58[];
 
 Gfx* func_i9_80119B6C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
                       s32 arg9, s32 argA, s32 argB, s32 argC) {
@@ -1305,12 +1236,6 @@ Gfx* func_i9_8011A8A8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
 
     return gfx;
 }
-
-extern Vtx D_3032A98[];
-extern Vtx D_3032AD8[];
-extern Vtx D_3032B98[];
-extern Vtx D_3032C18[];
-extern Vtx D_3032D58[];
 
 Gfx* func_i9_8011AAD0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
                       s32 arg9, s32 argA, s32 argB, s32 argC) {
@@ -1570,12 +1495,6 @@ Gfx* func_i9_8011BC3C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern Vtx D_3032F08[];
-extern Vtx D_3032F68[];
-extern Vtx D_3032FE8[];
-extern Vtx D_3033128[];
-extern Vtx D_3033268[];
-
 Gfx* func_i9_8011BF1C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
                       s32 arg9, s32 argA, s32 argB, s32 argC) {
 
@@ -1814,13 +1733,6 @@ Gfx* func_i9_8011CF20(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
 
     return gfx;
 }
-
-extern Vtx D_30332A8[];
-extern Vtx D_3033308[];
-extern Vtx D_3033468[];
-extern Vtx D_30334A8[];
-extern Vtx D_3033548[];
-extern Vtx D_3033708[];
 
 Gfx* func_i9_8011D154(Gfx* gfx, s32 red1, s32 green1, s32 blue1, s32 red2, s32 green2, s32 blue2) {
 
@@ -2085,13 +1997,6 @@ Gfx* func_i9_8011E1A0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
 
     return gfx;
 }
-
-extern Vtx D_30337A8[];
-extern Vtx D_30338A8[];
-extern Vtx D_3033928[];
-extern Vtx D_3033968[];
-extern Vtx D_3033A08[];
-extern Vtx D_3033C68[];
 
 Gfx* func_i9_8011E40C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
@@ -2368,13 +2273,6 @@ Gfx* func_i9_8011F3F0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern Vtx D_3033D08[];
-extern Vtx D_3033E28[];
-extern Vtx D_3033EA8[];
-extern Vtx D_3033F48[];
-extern Vtx D_3033FE8[];
-extern Vtx D_3034148[];
-
 Gfx* func_i9_8011F704(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -2646,13 +2544,6 @@ Gfx* func_i9_801205FC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
 
     return gfx;
 }
-
-extern Vtx D_30341E8[];
-extern Vtx D_3034328[];
-extern Vtx D_30343C8[];
-extern Vtx D_3034508[];
-extern Vtx D_3034598[];
-extern Vtx D_3034818[];
 
 Gfx* func_i9_80120910(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
@@ -2939,13 +2830,6 @@ Gfx* func_i9_80121B68(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern Vtx D_30348B8[];
-extern Vtx D_3034958[];
-extern Vtx D_3034A38[];
-extern Vtx D_3034B48[];
-extern Vtx D_3034BC8[];
-extern Vtx D_3034EC8[];
-
 Gfx* func_i9_80121E60(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -3223,13 +3107,6 @@ Gfx* func_i9_8012311C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
 
     return gfx;
 }
-
-extern Vtx D_3034F68[];
-extern Vtx D_3035108[];
-extern Vtx D_3035308[];
-extern Vtx D_3035348[];
-extern Vtx D_3035388[];
-extern Vtx D_30355E8[];
 
 Gfx* func_i9_80123384(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
@@ -3522,14 +3399,6 @@ Gfx* func_i9_80124664(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern Vtx D_3035688[];
-extern Vtx D_3035788[];
-extern Vtx D_3035A48[];
-extern Vtx D_3035A88[];
-extern Vtx D_3035B48[];
-extern Vtx D_3035F28[];
-extern Vtx D_3035FE8[];
-
 Gfx* func_i9_8012498C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -3574,7 +3443,7 @@ Gfx* func_i9_8012498C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     gSP2Triangles(gfx++, 48, 49, 50, 0, 51, 52, 53, 0);
     gSP2Triangles(gfx++, 51, 53, 54, 0, 55, 56, 57, 0);
     gSP2Triangles(gfx++, 55, 57, 58, 0, 59, 60, 61, 0);
-    gSPVertex(gfx++, D_3035F28, 12, 0);
+    gSPVertex(gfx++, &D_3035B48[62], 12, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
@@ -3832,8 +3701,6 @@ Gfx* func_i9_80125E48(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern Vtx D_3036088[];
-
 Gfx* func_i9_801260FC(Gfx* gfx, s32 red, s32 green, s32 blue, s32 arg4, s32 arg5, s32 arg6) {
 
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
@@ -3895,8 +3762,6 @@ Gfx* func_i9_8012638C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
 
     return gfx;
 }
-
-extern Vtx D_3036138[];
 
 Gfx* func_i9_80126440(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
@@ -3963,8 +3828,6 @@ Gfx* func_i9_80126718(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
 
     return gfx;
 }
-
-extern Vtx D_3036238[];
 
 Gfx* func_i9_801267E8(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
@@ -4054,9 +3917,6 @@ Gfx* func_i9_80126CCC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
 
     return gfx;
 }
-
-extern Vtx D_3036398[];
-extern Vtx D_3036518[];
 
 Gfx* func_i9_80126D98(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
@@ -4181,8 +4041,6 @@ Gfx* func_i9_80127508(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern Vtx D_3036688[];
-
 Gfx* func_i9_801275CC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
@@ -4267,8 +4125,6 @@ Gfx* func_i9_801279C0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern Vtx D_3036808[];
-
 Gfx* func_i9_80127A74(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
 
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
@@ -4349,16 +4205,6 @@ Gfx* func_i9_80127F40(Gfx* gfx, s32 red, s32 green, s32 blue, s32 arg4, s32 arg5
     return gfx;
 }
 
-extern Vtx D_3000788[];
-extern Vtx D_3000868[];
-extern Vtx D_3000A78[];
-extern Vtx D_3000AF8[];
-extern Vtx D_3000C38[];
-extern Vtx D_3000C98[];
-extern Vtx D_3001098[];
-extern Vtx D_30013C8[];
-extern Vtx D_3001488[];
-
 Gfx* func_i9_80127F54(Gfx* gfx) {
 
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
@@ -4421,7 +4267,7 @@ Gfx* func_i9_80127F54(Gfx* gfx) {
     gSP2Triangles(gfx++, 55, 56, 35, 0, 57, 44, 47, 0);
     gSP2Triangles(gfx++, 33, 32, 58, 0, 42, 41, 59, 0);
     gSP2Triangles(gfx++, 60, 61, 62, 0, 60, 63, 61, 0);
-    gSPVertex(gfx++, D_3001098, 51, 0);
+    gSPVertex(gfx++, &D_3000C98[64], 51, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 8, 0);
     gSP2Triangles(gfx++, 4, 6, 7, 0, 9, 10, 11, 0);
@@ -4768,15 +4614,6 @@ Gfx* func_i9_80129D04(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_30017D8[];
-extern Vtx D_3001858[];
-extern Vtx D_30019B8[];
-extern Vtx D_3001B28[];
-extern Vtx D_3001BA8[];
-extern Vtx D_3001CE8[];
-extern Vtx D_3001D28[];
-extern Vtx D_3002128[];
-
 Gfx* func_i9_80129FC4(Gfx* gfx) {
 
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
@@ -4801,7 +4638,7 @@ Gfx* func_i9_80129FC4(Gfx* gfx) {
     gSP2Triangles(gfx++, 54, 55, 56, 0, 57, 58, 56, 0);
     gSP2Triangles(gfx++, 58, 59, 60, 0, 58, 60, 56, 0);
     gSP1Triangle(gfx++, 61, 62, 63, 0);
-    gSPVertex(gfx++, D_3002128, 54, 0);
+    gSPVertex(gfx++, &D_3001D28[64], 54, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 7, 9, 8, 0);
     gSP2Triangles(gfx++, 9, 7, 10, 0, 11, 9, 10, 0);
@@ -5126,16 +4963,6 @@ Gfx* func_i9_8012B9C4(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3002488[];
-extern Vtx D_3002568[];
-extern Vtx D_30025E8[];
-extern Vtx D_3002828[];
-extern Vtx D_3002B08[];
-extern Vtx D_3002EF8[];
-extern Vtx D_3003168[];
-extern Vtx D_3003228[];
-extern Vtx D_3003388[];
-
 Gfx* func_i9_8012BB50(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -5183,7 +5010,7 @@ Gfx* func_i9_8012BB50(Gfx* gfx) {
     gSP2Triangles(gfx++, 51, 52, 53, 0, 51, 53, 54, 0);
     gSP2Triangles(gfx++, 55, 56, 57, 0, 55, 57, 58, 0);
     gSP2Triangles(gfx++, 59, 60, 61, 0, 59, 61, 62, 0);
-    gSPVertex(gfx++, D_3002EF8, 39, 0);
+    gSPVertex(gfx++, &D_3002B08[63], 39, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
     gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
@@ -5514,15 +5341,6 @@ Gfx* func_i9_8012D7CC(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3003468[];
-extern Vtx D_30034E8[];
-extern Vtx D_3003758[];
-extern Vtx D_30037D8[];
-extern Vtx D_3003918[];
-extern Vtx D_3003978[];
-extern Vtx D_3003D58[];
-extern Vtx D_30040F8[];
-extern Vtx D_3004238[];
 extern s16 D_800CE784;
 extern f32 D_800CF160[];
 extern OSMesgQueue D_800DCAB0;
@@ -5614,7 +5432,7 @@ Gfx* func_i9_8012D998(Gfx* gfx) {
     gSP2Triangles(gfx++, 53, 55, 56, 0, 57, 44, 33, 0);
     gSP2Triangles(gfx++, 57, 33, 58, 0, 57, 58, 59, 0);
     gSP1Triangle(gfx++, 60, 61, 40, 0);
-    gSPVertex(gfx++, D_3003D58, 58, 0);
+    gSPVertex(gfx++, &D_3003978[62], 58, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
     gSP2Triangles(gfx++, 10, 11, 12, 0, 11, 10, 13, 0);
@@ -5937,16 +5755,6 @@ Gfx* func_i9_8012F608(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3005358[];
-extern Vtx D_30054E8[];
-extern Vtx D_3005568[];
-extern Vtx D_3005708[];
-extern Vtx D_3005AE8[];
-extern Vtx D_3005B88[];
-extern Vtx D_3005C08[];
-extern Vtx D_3005DA8[];
-extern Vtx D_3005DF8[];
-
 Gfx* func_i9_8012F7BC(Gfx* gfx) {
 
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
@@ -5992,7 +5800,7 @@ Gfx* func_i9_8012F7BC(Gfx* gfx) {
     gSP2Triangles(gfx++, 49, 50, 51, 0, 49, 51, 52, 0);
     gSP2Triangles(gfx++, 53, 54, 55, 0, 56, 57, 10, 0);
     gSP2Triangles(gfx++, 17, 58, 18, 0, 59, 60, 61, 0);
-    gSPVertex(gfx++, D_3005AE8, 10, 0);
+    gSPVertex(gfx++, &D_3005708[62], 10, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
@@ -6303,15 +6111,6 @@ Gfx* func_i9_80131130(Gfx* gfx) {
 
     return gfx;
 }
-
-extern Vtx D_30070B8[];
-extern Vtx D_30072D8[];
-extern Vtx D_3007478[];
-extern Vtx D_30077F8[];
-extern Vtx D_30078D8[];
-extern Vtx D_3007918[];
-extern Vtx D_3007C18[];
-extern Vtx D_3007CD8[];
 
 Gfx* func_i9_801312F0(Gfx* gfx) {
 
@@ -6675,15 +6474,6 @@ Gfx* func_i9_80132E04(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3009058[];
-extern Vtx D_30090D8[];
-extern Vtx D_3009238[];
-extern Vtx D_30093A8[];
-extern Vtx D_3009428[];
-extern Vtx D_30094C8[];
-extern Vtx D_3009508[];
-extern Vtx D_30098E8[];
-
 Gfx* func_i9_80132F44(Gfx* gfx) {
 
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
@@ -6708,7 +6498,7 @@ Gfx* func_i9_80132F44(Gfx* gfx) {
     gSP2Triangles(gfx++, 50, 51, 49, 0, 52, 53, 54, 0);
     gSP2Triangles(gfx++, 55, 56, 57, 0, 58, 59, 60, 0);
     gSP1Triangle(gfx++, 59, 61, 60, 0);
-    gSPVertex(gfx++, D_30098E8, 48, 0);
+    gSPVertex(gfx++, &D_3009508[62], 48, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
     gSP2Triangles(gfx++, 8, 9, 10, 0, 0, 11, 1, 0);
@@ -7017,16 +6807,6 @@ Gfx* func_i9_80134734(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_300A928[];
-extern Vtx D_300AA08[];
-extern Vtx D_300AA88[];
-extern Vtx D_300ABC8[];
-extern Vtx D_300AEC8[];
-extern Vtx D_300B2B8[];
-extern Vtx D_300B2F8[];
-extern Vtx D_300B3B8[];
-extern Vtx D_300B518[];
-
 Gfx* func_i9_80134880(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -7077,7 +6857,7 @@ Gfx* func_i9_80134880(Gfx* gfx) {
     gSP2Triangles(gfx++, 51, 52, 53, 0, 51, 53, 54, 0);
     gSP2Triangles(gfx++, 55, 56, 57, 0, 55, 57, 58, 0);
     gSP2Triangles(gfx++, 59, 60, 61, 0, 59, 61, 62, 0);
-    gSPVertex(gfx++, D_300B2B8, 4, 0);
+    gSPVertex(gfx++, &D_300AEC8[63], 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
     gDPPipeSync(gfx++);
@@ -7370,16 +7150,6 @@ Gfx* func_i9_801361B8(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_300BFB8[];
-extern Vtx D_300C3B8[];
-extern Vtx D_300C608[];
-extern Vtx D_300C688[];
-extern Vtx D_300C6C8[];
-extern Vtx D_300C788[];
-extern Vtx D_300C8E8[];
-extern Vtx D_300C9C8[];
-extern Vtx D_300CB08[];
-
 Gfx* func_i9_80136350(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -7432,7 +7202,7 @@ Gfx* func_i9_80136350(Gfx* gfx) {
     gSP2Triangles(gfx++, 49, 50, 51, 0, 52, 53, 54, 0);
     gSP2Triangles(gfx++, 55, 56, 46, 0, 57, 56, 48, 0);
     gSP2Triangles(gfx++, 58, 59, 60, 0, 61, 62, 63, 0);
-    gSPVertex(gfx++, D_300C3B8, 37, 0);
+    gSPVertex(gfx++, &D_300BFB8[64], 37, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 2, 6, 7, 0, 8, 6, 9, 0);
     gSP2Triangles(gfx++, 10, 11, 12, 0, 7, 10, 12, 0);
@@ -7713,16 +7483,6 @@ Gfx* func_i9_80137C68(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_300D838[];
-extern Vtx D_300D8D8[];
-extern Vtx D_300D958[];
-extern Vtx D_300DB78[];
-extern Vtx D_300DF78[];
-extern Vtx D_300E2A8[];
-extern Vtx D_300E408[];
-extern Vtx D_300E488[];
-extern Vtx D_300E548[];
-
 Gfx* func_i9_80137DBC(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -7775,7 +7535,7 @@ Gfx* func_i9_80137DBC(Gfx* gfx) {
     gSP2Triangles(gfx++, 53, 54, 55, 0, 54, 56, 55, 0);
     gSP2Triangles(gfx++, 57, 58, 59, 0, 57, 60, 58, 0);
     gSP1Triangle(gfx++, 61, 62, 63, 0);
-    gSPVertex(gfx++, D_300DF78, 51, 0);
+    gSPVertex(gfx++, &D_300DB78[64], 51, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 4, 6, 5, 0, 7, 8, 9, 0);
     gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
@@ -8066,16 +7826,6 @@ Gfx* func_i9_801397B0(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_300EDE8[];
-extern Vtx D_300EF98[];
-extern Vtx D_300F398[];
-extern Vtx D_300F3D8[];
-extern Vtx D_300F4B8[];
-extern Vtx D_300F608[];
-extern Vtx D_300F778[];
-extern Vtx D_300F898[];
-extern Vtx D_300F918[];
-
 Gfx* func_i9_8013996C(Gfx* gfx) {
 
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
@@ -8129,7 +7879,7 @@ Gfx* func_i9_8013996C(Gfx* gfx) {
     gSP2Triangles(gfx++, 52, 53, 54, 0, 53, 55, 54, 0);
     gSP2Triangles(gfx++, 56, 57, 58, 0, 57, 59, 58, 0);
     gSP2Triangles(gfx++, 60, 61, 62, 0, 61, 63, 62, 0);
-    gSPVertex(gfx++, D_300F398, 4, 0);
+    gSPVertex(gfx++, &D_300EF98[64], 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
 
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
@@ -8453,15 +8203,6 @@ Gfx* func_i9_8013B34C(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3010938[];
-extern Vtx D_3010978[];
-extern Vtx D_3010BB8[];
-extern Vtx D_3010D48[];
-extern Vtx D_3010DE8[];
-extern Vtx D_3010E88[];
-extern Vtx D_30110A8[];
-extern Vtx D_30114A8[];
-
 Gfx* func_i9_8013B57C(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -8515,7 +8256,7 @@ Gfx* func_i9_8013B57C(Gfx* gfx) {
     gSP2Triangles(gfx++, 55, 56, 57, 0, 58, 59, 60, 0);
     gSP2Triangles(gfx++, 61, 22, 21, 0, 24, 26, 62, 0);
     gSP1Triangle(gfx++, 50, 63, 51, 0);
-    gSPVertex(gfx++, D_30114A8, 13, 0);
+    gSPVertex(gfx++, &D_30110A8[64], 13, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
     gSP1Triangle(gfx++, 9, 11, 12, 0);
@@ -8797,15 +8538,6 @@ Gfx* func_i9_8013CC0C(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3011BB8[];
-extern Vtx D_3011F98[];
-extern Vtx D_30121F8[];
-extern Vtx D_30122F8[];
-extern Vtx D_3012438[];
-extern Vtx D_30126C8[];
-extern Vtx D_3012748[];
-extern Vtx D_3012A68[];
-
 Gfx* func_i9_8013CED0(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -8851,7 +8583,7 @@ Gfx* func_i9_8013CED0(Gfx* gfx) {
     gSP2Triangles(gfx++, 51, 53, 54, 0, 32, 55, 33, 0);
     gSP2Triangles(gfx++, 56, 57, 42, 0, 58, 59, 60, 0);
     gSP1Triangle(gfx++, 59, 61, 60, 0);
-    gSPVertex(gfx++, D_3011F98, 38, 0);
+    gSPVertex(gfx++, &D_3011BB8[62], 38, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 2, 1, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 2, 0);
     gSP2Triangles(gfx++, 9, 10, 11, 0, 12, 13, 14, 0);
@@ -9164,15 +8896,6 @@ Gfx* func_i9_8013E964(Gfx* gfx) {
 
     return gfx;
 }
-
-extern Vtx D_3013308[];
-extern Vtx D_30136C8[];
-extern Vtx D_3013708[];
-extern Vtx D_3013948[];
-extern Vtx D_30139E8[];
-extern Vtx D_3013AE8[];
-extern Vtx D_3013DD8[];
-extern Vtx D_3013E58[];
 
 Gfx* func_i9_8013EB2C(Gfx* gfx) {
 
@@ -9533,16 +9256,6 @@ Gfx* func_i9_801403C4(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3014518[];
-extern Vtx D_3014908[];
-extern Vtx D_3014B98[];
-extern Vtx D_3014BF8[];
-extern Vtx D_3014CB8[];
-extern Vtx D_3014D78[];
-extern Vtx D_3014ED8[];
-extern Vtx D_3014F58[];
-extern Vtx D_3015158[];
-
 Gfx* func_i9_8014061C(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -9595,7 +9308,7 @@ Gfx* func_i9_8014061C(Gfx* gfx) {
     gSP2Triangles(gfx++, 51, 52, 53, 0, 51, 53, 54, 0);
     gSP2Triangles(gfx++, 55, 56, 57, 0, 55, 57, 58, 0);
     gSP2Triangles(gfx++, 59, 60, 61, 0, 59, 61, 62, 0);
-    gSPVertex(gfx++, D_3014908, 41, 0);
+    gSPVertex(gfx++, &D_3014518[63], 41, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
     gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
@@ -9886,15 +9599,6 @@ Gfx* func_i9_80141ECC(Gfx* gfx) {
 
     return gfx;
 }
-
-extern Vtx D_3015858[];
-extern Vtx D_30158F8[];
-extern Vtx D_3015978[];
-extern Vtx D_3015A48[];
-extern Vtx D_3015BA8[];
-extern Vtx D_3015CE8[];
-extern Vtx D_3015E88[];
-extern Vtx D_3016258[];
 
 Gfx* func_i9_80142078(Gfx* gfx) {
 
@@ -10277,15 +9981,6 @@ Gfx* func_i9_80143BB8(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3016D98[];
-extern Vtx D_3017178[];
-extern Vtx D_3017238[];
-extern Vtx D_3017318[];
-extern Vtx D_3017378[];
-extern Vtx D_30173F8[];
-extern Vtx D_3017458[];
-extern Vtx D_3017498[];
-
 Gfx* func_i9_80143E40(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 150, 255);
@@ -10311,7 +10006,7 @@ Gfx* func_i9_80143E40(Gfx* gfx) {
     gSP2Triangles(gfx++, 50, 53, 51, 0, 54, 55, 52, 0);
     gSP2Triangles(gfx++, 54, 56, 57, 0, 58, 59, 60, 0);
     gSP1Triangle(gfx++, 58, 61, 59, 0);
-    gSPVertex(gfx++, D_3017178, 12, 0);
+    gSPVertex(gfx++, &D_3016D98[62], 12, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 5, 7, 6, 0);
     gSP2Triangles(gfx++, 5, 7, 6, 0, 4, 5, 6, 0);
@@ -10622,13 +10317,6 @@ Gfx* func_i9_8014553C(Gfx* gfx) {
 
     return gfx;
 }
-
-extern Vtx D_3017C18[];
-extern Vtx D_3017D18[];
-extern Vtx D_3017F78[];
-extern Vtx D_3018018[];
-extern Vtx D_30180F8[];
-extern Vtx D_30182F8[];
 
 Gfx* func_i9_80145860(Gfx* gfx) {
 
@@ -10953,16 +10641,6 @@ Gfx* func_i9_80146DB8(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_30192D8[];
-extern Vtx D_3019378[];
-extern Vtx D_30193D8[];
-extern Vtx D_3019498[];
-extern Vtx D_3019518[];
-extern Vtx D_3019918[];
-extern Vtx D_3019D18[];
-extern Vtx D_3019D58[];
-extern Vtx D_3019E98[];
-
 Gfx* func_i9_80147074(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -11013,7 +10691,7 @@ Gfx* func_i9_80147074(Gfx* gfx) {
     gSP2Triangles(gfx++, 54, 56, 55, 0, 56, 57, 58, 0);
     gSP2Triangles(gfx++, 56, 58, 55, 0, 59, 12, 11, 0);
     gSP2Triangles(gfx++, 59, 11, 60, 0, 61, 62, 63, 0);
-    gSPVertex(gfx++, D_3019918, 64, 0);
+    gSPVertex(gfx++, &D_3019518[64], 64, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 2, 0);
     gSP2Triangles(gfx++, 3, 4, 2, 0, 5, 6, 7, 0);
     gSP2Triangles(gfx++, 5, 7, 8, 0, 9, 10, 11, 0);
@@ -11031,7 +10709,7 @@ Gfx* func_i9_80147074(Gfx* gfx) {
     gSP2Triangles(gfx++, 54, 40, 39, 0, 44, 55, 56, 0);
     gSP2Triangles(gfx++, 44, 43, 55, 0, 57, 58, 59, 0);
     gSP2Triangles(gfx++, 60, 61, 58, 0, 50, 62, 63, 0);
-    gSPVertex(gfx++, D_3019D18, 4, 0);
+    gSPVertex(gfx++, &D_3019518[128], 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
     gDPPipeSync(gfx++);
@@ -11332,14 +11010,6 @@ Gfx* func_i9_80148BF0(Gfx* gfx) {
 
     return gfx;
 }
-
-extern Vtx D_301A728[];
-extern Vtx D_301A7F8[];
-extern Vtx D_301A8D8[];
-extern Vtx D_301AAC8[];
-extern Vtx D_301AEA8[];
-extern Vtx D_301AF48[];
-extern Vtx D_301B008[];
 
 Gfx* func_i9_80148E3C(Gfx* gfx) {
 
@@ -11694,15 +11364,6 @@ Gfx* func_i9_8014A6D4(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_301BBF8[];
-extern Vtx D_301BC78[];
-extern Vtx D_301BCB8[];
-extern Vtx D_301BE48[];
-extern Vtx D_301BEE8[];
-extern Vtx D_301C2E8[];
-extern Vtx D_301C538[];
-extern Vtx D_301C638[];
-
 Gfx* func_i9_8014A98C(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -11756,7 +11417,7 @@ Gfx* func_i9_8014A98C(Gfx* gfx) {
     gSP2Triangles(gfx++, 53, 55, 54, 0, 56, 57, 58, 0);
     gSP2Triangles(gfx++, 56, 58, 59, 0, 60, 61, 62, 0);
     gSP1Triangle(gfx++, 60, 62, 63, 0);
-    gSPVertex(gfx++, D_301C2E8, 37, 0);
+    gSPVertex(gfx++, &D_301BEE8[64], 37, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
     gSP2Triangles(gfx++, 8, 9, 2, 0, 8, 2, 1, 0);
@@ -12070,14 +11731,6 @@ Gfx* func_i9_8014C32C(Gfx* gfx) {
 
     return gfx;
 }
-
-extern Vtx D_301CED8[];
-extern Vtx D_301D298[];
-extern Vtx D_301D338[];
-extern Vtx D_301D598[];
-extern Vtx D_301D6B8[];
-extern Vtx D_301D808[];
-extern Vtx D_301D928[];
 
 Gfx* func_i9_8014C5D4(Gfx* gfx) {
 
@@ -12435,15 +12088,6 @@ Gfx* func_i9_8014DE64(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_301E498[];
-extern Vtx D_301E6B8[];
-extern Vtx D_301E7B8[];
-extern Vtx D_301E838[];
-extern Vtx D_301EA18[];
-extern Vtx D_301EB78[];
-extern Vtx D_301EC98[];
-extern Vtx D_301F088[];
-
 Gfx* func_i9_8014E104(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -12486,7 +12130,7 @@ Gfx* func_i9_8014E104(Gfx* gfx) {
     gSP2Triangles(gfx++, 51, 52, 53, 0, 51, 53, 54, 0);
     gSP2Triangles(gfx++, 55, 56, 57, 0, 55, 57, 58, 0);
     gSP2Triangles(gfx++, 54, 59, 60, 0, 61, 55, 62, 0);
-    gSPVertex(gfx++, D_301F088, 10, 0);
+    gSPVertex(gfx++, &D_301EC98[63], 10, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
 
@@ -12808,16 +12452,6 @@ Gfx* func_i9_8014FA30(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_301F768[];
-extern Vtx D_301F808[];
-extern Vtx D_301F888[];
-extern Vtx D_301F948[];
-extern Vtx D_301FA08[];
-extern Vtx D_301FDE8[];
-extern Vtx D_301FE58[];
-extern Vtx D_301FF98[];
-extern Vtx D_3020028[];
-
 Gfx* func_i9_8014FCC0(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -12870,7 +12504,7 @@ Gfx* func_i9_8014FCC0(Gfx* gfx) {
     gSP2Triangles(gfx++, 52, 53, 54, 0, 52, 54, 55, 0);
     gSP2Triangles(gfx++, 56, 57, 58, 0, 56, 58, 59, 0);
     gSP1Triangle(gfx++, 60, 61, 0, 0);
-    gSPVertex(gfx++, D_301FDE8, 7, 0);
+    gSPVertex(gfx++, &D_301FA08[62], 7, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 0, 2, 6, 0);
 
@@ -13180,14 +12814,6 @@ Gfx* func_i9_8015156C(Gfx* gfx) {
 
     return gfx;
 }
-
-extern Vtx D_3020B98[];
-extern Vtx D_3020CD8[];
-extern Vtx D_3021098[];
-extern Vtx D_3021268[];
-extern Vtx D_3021328[];
-extern Vtx D_3021448[];
-extern Vtx D_3021578[];
 
 Gfx* func_i9_801517FC(Gfx* gfx) {
 
@@ -13570,14 +13196,6 @@ Gfx* func_i9_801531A4(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_30225B8[];
-extern Vtx D_3022618[];
-extern Vtx D_3022718[];
-extern Vtx D_3022988[];
-extern Vtx D_3022CB8[];
-extern Vtx D_3022D58[];
-extern Vtx D_3022E18[];
-
 Gfx* func_i9_80153538(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -13916,16 +13534,6 @@ Gfx* func_i9_80154CE4(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3023798[];
-extern Vtx D_3023838[];
-extern Vtx D_3023878[];
-extern Vtx D_3023AA8[];
-extern Vtx D_3023C48[];
-extern Vtx D_3024048[];
-extern Vtx D_30240F8[];
-extern Vtx D_30241F8[];
-extern Vtx D_30242B8[];
-
 Gfx* func_i9_80154F14(Gfx* gfx) {
 
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
@@ -13972,7 +13580,7 @@ Gfx* func_i9_80154F14(Gfx* gfx) {
     gSP2Triangles(gfx++, 54, 55, 56, 0, 54, 56, 57, 0);
     gSP2Triangles(gfx++, 58, 59, 60, 0, 58, 60, 61, 0);
     gSP2Triangles(gfx++, 5, 4, 62, 0, 5, 62, 63, 0);
-    gSPVertex(gfx++, D_3024048, 11, 0);
+    gSPVertex(gfx++, &D_3023C48[64], 11, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
     gSP2Triangles(gfx++, 2, 8, 9, 0, 2, 9, 10, 0);
@@ -14319,15 +13927,6 @@ Gfx* func_i9_801569C8(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_30251B8[];
-extern Vtx D_3025318[];
-extern Vtx D_3025378[];
-extern Vtx D_30253F8[];
-extern Vtx D_3025438[];
-extern Vtx D_3025828[];
-extern Vtx D_30259B8[];
-extern Vtx D_3025A78[];
-
 Gfx* func_i9_80156CAC(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -14377,7 +13976,7 @@ Gfx* func_i9_80156CAC(Gfx* gfx) {
     gSP2Triangles(gfx++, 49, 51, 52, 0, 53, 54, 55, 0);
     gSP2Triangles(gfx++, 56, 57, 58, 0, 56, 58, 59, 0);
     gSP1Triangle(gfx++, 60, 61, 62, 0);
-    gSPVertex(gfx++, D_3025828, 25, 0);
+    gSPVertex(gfx++, &D_3025438[63], 25, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
     gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
@@ -14686,15 +14285,6 @@ Gfx* func_i9_801584F0(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_30261F8[];
-extern Vtx D_30265F8[];
-extern Vtx D_3026658[];
-extern Vtx D_30266D8[];
-extern Vtx D_3026788[];
-extern Vtx D_3026878[];
-extern Vtx D_30269B8[];
-extern Vtx D_3026B38[];
-
 Gfx* func_i9_80158800(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -14715,7 +14305,7 @@ Gfx* func_i9_80158800(Gfx* gfx) {
     gSP2Triangles(gfx++, 50, 51, 0, 0, 6, 52, 53, 0);
     gSP2Triangles(gfx++, 54, 55, 56, 0, 54, 56, 57, 0);
     gSP2Triangles(gfx++, 58, 59, 60, 0, 61, 62, 63, 0);
-    gSPVertex(gfx++, D_30265F8, 6, 0);
+    gSPVertex(gfx++, &D_30261F8[64], 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
     gDPPipeSync(gfx++);
@@ -15042,16 +14632,6 @@ Gfx* func_i9_80159F7C(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_30274A8[];
-extern Vtx D_3027508[];
-extern Vtx D_3027568[];
-extern Vtx D_3027728[];
-extern Vtx D_30277A8[];
-extern Vtx D_30278E8[];
-extern Vtx D_3027AE8[];
-extern Vtx D_3027EE8[];
-extern Vtx D_30282D8[];
-
 Gfx* func_i9_8015A1B4(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -15084,7 +14664,7 @@ Gfx* func_i9_8015A1B4(Gfx* gfx) {
     gSP2Triangles(gfx++, 52, 53, 54, 0, 52, 54, 55, 0);
     gSP2Triangles(gfx++, 56, 57, 58, 0, 56, 58, 59, 0);
     gSP2Triangles(gfx++, 60, 61, 62, 0, 60, 62, 63, 0);
-    gSPVertex(gfx++, D_3027EE8, 64, 0);
+    gSPVertex(gfx++, &D_3027AE8[64], 64, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
     gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
@@ -15099,7 +14679,7 @@ Gfx* func_i9_8015A1B4(Gfx* gfx) {
     gSP2Triangles(gfx++, 50, 51, 52, 0, 53, 54, 55, 0);
     gSP2Triangles(gfx++, 56, 57, 58, 0, 59, 60, 61, 0);
     gSP1Triangle(gfx++, 59, 61, 62, 0);
-    gSPVertex(gfx++, D_30282D8, 15, 0);
+    gSPVertex(gfx++, &D_3027AE8[127], 15, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 2, 6, 0, 0, 7, 8, 9, 0);
     gSP2Triangles(gfx++, 7, 9, 10, 0, 11, 12, 13, 0);
@@ -15429,15 +15009,6 @@ Gfx* func_i9_8015BC90(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3028A08[];
-extern Vtx D_3028A88[];
-extern Vtx D_3028B08[];
-extern Vtx D_3028D68[];
-extern Vtx D_3028EA8[];
-extern Vtx D_3028EE8[];
-extern Vtx D_3028FA8[];
-extern Vtx D_3029398[];
-
 Gfx* func_i9_8015BF44(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -15484,7 +15055,7 @@ Gfx* func_i9_8015BF44(Gfx* gfx) {
     gSP2Triangles(gfx++, 52, 55, 53, 0, 55, 56, 53, 0);
     gSP2Triangles(gfx++, 56, 57, 53, 0, 58, 59, 9, 0);
     gSP1Triangle(gfx++, 60, 61, 62, 0);
-    gSPVertex(gfx++, D_3029398, 3, 0);
+    gSPVertex(gfx++, &D_3028FA8[63], 3, 0);
     gSP1Triangle(gfx++, 0, 1, 2, 0);
 
     gDPPipeSync(gfx++);
@@ -15794,15 +15365,6 @@ Gfx* func_i9_8015D814(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_3029A88[];
-extern Vtx D_3029B48[];
-extern Vtx D_3029C78[];
-extern Vtx D_3029CF8[];
-extern Vtx D_3029FD8[];
-extern Vtx D_302A128[];
-extern Vtx D_302A528[];
-extern Vtx D_302A628[];
-
 Gfx* func_i9_8015DA94(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -15851,7 +15413,7 @@ Gfx* func_i9_8015DA94(Gfx* gfx) {
     gSP2Triangles(gfx++, 52, 53, 54, 0, 52, 54, 55, 0);
     gSP2Triangles(gfx++, 56, 57, 58, 0, 56, 58, 59, 0);
     gSP2Triangles(gfx++, 60, 61, 62, 0, 60, 62, 63, 0);
-    gSPVertex(gfx++, D_302A528, 16, 0);
+    gSPVertex(gfx++, &D_302A128[64], 16, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
     gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
@@ -16132,16 +15694,6 @@ Gfx* func_i9_8015F214(Gfx* gfx) {
     return gfx;
 }
 
-extern Vtx D_302AD48[];
-extern Vtx D_302AE28[];
-extern Vtx D_302AF08[];
-extern Vtx D_302AF48[];
-extern Vtx D_302B008[];
-extern Vtx D_302B408[];
-extern Vtx D_302B5D8[];
-extern Vtx D_302B698[];
-extern Vtx D_302B798[];
-
 Gfx* func_i9_8015F46C(Gfx* gfx) {
 
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -16192,7 +15744,7 @@ Gfx* func_i9_8015F46C(Gfx* gfx) {
     gSP2Triangles(gfx++, 36, 58, 59, 0, 36, 59, 37, 0);
     gSP2Triangles(gfx++, 58, 11, 10, 0, 58, 10, 59, 0);
     gSP2Triangles(gfx++, 60, 61, 62, 0, 60, 62, 63, 0);
-    gSPVertex(gfx++, D_302B408, 29, 0);
+    gSPVertex(gfx++, &D_302B008[64], 29, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 6, 0);
     gSP2Triangles(gfx++, 4, 9, 10, 0, 11, 12, 13, 0);
@@ -16509,10 +16061,6 @@ Gfx* func_i9_80160D90(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_3006178[];
-extern u8 D_3006A78[];
-extern u8 D_3008A18[];
-
 Gfx* func_i9_80161050(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
 
     gDPPipeSync(gfx++);
@@ -16532,11 +16080,6 @@ Gfx* func_i9_80161050(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
 
     return gfx;
 }
-
-extern u8 D_3008698[];
-extern u8 D_3008718[];
-extern u8 D_301A268[];
-extern u8 D_3026DE8[];
 
 Gfx* func_i9_801614D0(Gfx* gfx) {
 
@@ -16560,10 +16103,6 @@ Gfx* func_i9_801614D0(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_3024AF8[];
-extern u8 D_302A688[];
-extern u8 D_3004B18[];
-
 Gfx* func_i9_8016197C(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -16581,9 +16120,6 @@ Gfx* func_i9_8016197C(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_30295C8[];
-extern u8 D_3004D18[];
 
 Gfx* func_i9_80161C78(Gfx* gfx) {
 
@@ -16605,9 +16141,6 @@ Gfx* func_i9_80161C78(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_3007E18[];
-extern u8 D_3004698[];
-
 Gfx* func_i9_80161FF8(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -16627,8 +16160,6 @@ Gfx* func_i9_80161FF8(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_3006478[];
 
 Gfx* func_i9_80162370(Gfx* gfx) {
 
@@ -16650,8 +16181,6 @@ Gfx* func_i9_80162370(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_3022F58[];
-
 Gfx* func_i9_80162768(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -16671,10 +16200,6 @@ Gfx* func_i9_80162768(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_300B5F8[];
-extern u8 D_3012C48[];
-extern u8 D_30242F8[];
 
 Gfx* func_i9_80162B08(Gfx* gfx) {
 
@@ -16718,8 +16243,6 @@ Gfx* func_i9_80162FE0(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_3021778[];
-
 Gfx* func_i9_80163374(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -16739,9 +16262,6 @@ Gfx* func_i9_80163374(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_3020258[];
-extern u8 D_3020658[];
 
 Gfx* func_i9_801636F4(Gfx* gfx) {
 
@@ -16764,8 +16284,6 @@ Gfx* func_i9_801636F4(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_301DA58[];
 
 Gfx* func_i9_80163BAC(Gfx* gfx) {
 
@@ -16807,8 +16325,6 @@ Gfx* func_i9_80163F28(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_301C818[];
-
 Gfx* func_i9_801642A4(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -16829,8 +16345,6 @@ Gfx* func_i9_801642A4(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_301B1B8[];
-
 Gfx* func_i9_80164608(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -16850,8 +16364,6 @@ Gfx* func_i9_80164608(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_3019FE8[];
 
 Gfx* func_i9_8016497C(Gfx* gfx) {
 
@@ -16874,8 +16386,6 @@ Gfx* func_i9_8016497C(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_3018698[];
 
 Gfx* func_i9_80164E34(Gfx* gfx) {
 
@@ -16915,8 +16425,6 @@ Gfx* func_i9_80165124(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_3016558[];
-
 Gfx* func_i9_80165494(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -16936,9 +16444,6 @@ Gfx* func_i9_80165494(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_3006878[];
-extern u8 D_3015198[];
 
 Gfx* func_i9_80165858(Gfx* gfx) {
 
@@ -16962,8 +16467,6 @@ Gfx* func_i9_80165858(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_300CDF8[];
-
 Gfx* func_i9_80165D28(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -16983,8 +16486,6 @@ Gfx* func_i9_80165D28(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_3012BC8[];
 
 Gfx* func_i9_801660BC(Gfx* gfx) {
 
@@ -17006,8 +16507,6 @@ Gfx* func_i9_801660BC(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_300E8A8[];
-
 Gfx* func_i9_80166468(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -17027,10 +16526,6 @@ Gfx* func_i9_80166468(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_300FAF8[];
-extern u8 D_30102F8[];
-extern u8 D_30103F8[];
 
 Gfx* func_i9_801667F8(Gfx* gfx) {
 
@@ -17074,10 +16569,6 @@ Gfx* func_i9_80166CF4(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_300CD78[];
-extern u8 D_300CEF8[];
-extern u8 D_300D2F8[];
-
 Gfx* func_i9_80167068(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -17100,9 +16591,6 @@ Gfx* func_i9_80167068(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_300B678[];
-extern u8 D_300BA78[];
-
 Gfx* func_i9_80167530(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -17123,9 +16611,6 @@ Gfx* func_i9_80167530(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_3009BE8[];
-extern u8 D_3009CE8[];
-
 Gfx* func_i9_80167898(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -17145,9 +16630,6 @@ Gfx* func_i9_80167898(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_3007E98[];
-extern u8 D_3008918[];
 
 Gfx* func_i9_80167C1C(Gfx* gfx) {
 
@@ -17171,10 +16653,6 @@ Gfx* func_i9_80167C1C(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_3006078[];
-extern u8 D_3006278[];
-extern u8 D_3006678[];
-
 Gfx* func_i9_801680E8(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
@@ -17196,11 +16674,6 @@ Gfx* func_i9_801680E8(Gfx* gfx) {
 
     return gfx;
 }
-
-extern u8 D_3004498[];
-extern u8 D_3004598[];
-extern u8 D_3004718[];
-extern u8 D_3004918[];
 
 Gfx* func_i9_801685B4(Gfx* gfx) {
 

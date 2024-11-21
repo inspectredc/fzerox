@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzxthread.h"
 #include "segment_symbols.h"
+#include "assets/segment_17B1E0.h"
 
 Gfx* func_8006F3D8(Gfx* gfx);
 Gfx* func_8006F444(Gfx* gfx);
@@ -138,8 +139,6 @@ Gfx* func_8006F57C(Gfx* gfx) {
 }
 
 extern GfxPool D_1000000;
-extern Gfx D_3000688[];
-extern Gfx D_30006D0[];
 extern Gfx D_801EAA8[];
 
 Gfx* func_8006F5E4(Gfx* gfx) {
@@ -173,8 +172,6 @@ Gfx* func_8006F68C(Gfx* gfx) {
     return gfx;
 }
 
-extern Gfx D_3000590[];
-extern Gfx D_30005D8[];
 extern Gfx D_801EBF8[];
 
 Gfx* func_8006F6FC(Gfx* gfx) {

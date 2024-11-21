@@ -2,6 +2,7 @@
 #include "fzx_racer.h"
 #include "ovl_i3.h"
 #include "tex_assets.h"
+#include "assets/segment_17B960.h"
 
 unk_80141FF0 D_i3_80141FF0[4];
 s32 D_i3_80142170;
@@ -1135,9 +1136,6 @@ void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, unk_80
 
 extern GfxPool D_1000000;
 extern Mtx D_2000000[];
-extern Gfx D_303A9E0[];
-extern Gfx D_303AA18[];
-extern Gfx D_303AA40[];
 
 Gfx* func_i7_80149760(Gfx*);
 Gfx* func_i3_80139168(Gfx*);

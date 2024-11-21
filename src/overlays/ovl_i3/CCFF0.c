@@ -2,6 +2,7 @@
 #include "ovl_i3.h"
 #include "fzx_racer.h"
 #include "tex_assets.h"
+#include "assets/segment_17B960.h"
 
 u16 D_i3_80143780;
 u16 D_i3_80143782;
@@ -157,13 +158,9 @@ Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3);
 
 extern Mtx D_2028480;
 extern Lights0 D_20284C0;
-extern Gfx D_303A5F8[];
-extern Gfx D_303A810[];
 extern FrameBuffer* D_800DCCD0[];
 extern char* D_800E4180[55];
 extern Gfx D_8014940[];
-extern u8 D_303C3F0[];
-extern u8 D_303D1F0[];
 extern unk_struct_1DC D_800E5220[];
 extern GfxPool D_1000000;
 
@@ -444,9 +441,6 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-extern u8 D_303AA70[];
-extern u8 D_303B270[];
-extern u8 D_303C170[];
 extern Gfx D_80149A0[];
 
 #ifdef NON_MATCHING
