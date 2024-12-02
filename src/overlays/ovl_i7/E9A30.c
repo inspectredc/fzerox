@@ -1,7 +1,8 @@
 #include "global.h"
 #include "fzx_racer.h"
-#include "tex_assets.h"
 #include "assets/segment_17B960.h"
+#include "assets/segment_1B8550.h"
+#include "assets/segment_2B9EA0.h"
 
 extern Gfx D_5000178[];
 extern Gfx D_5001E38[];
@@ -727,7 +728,7 @@ void func_i7_80143A90(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0.unk_000[2], D_8010B7B0.unk_000[3]);
+    func_8007F4E0(D_8010B7B0.unk_002, D_8010B7B0.unk_003);
     func_i3_801365E0();
     func_i2_801044F0();
     func_8006D448();
@@ -1155,20 +1156,20 @@ Gfx* func_i7_80144B2C(Gfx* gfx) {
                     gDPPipeSync(gfx++);
                     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i7_8014BE14);
 
-                    gfx = func_8007B14C(gfx, func_800783AC(D_F256900), var_s1->unk_08, var_fs0, 0x108, 0x1F,
-                                        G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+                    gfx = func_8007B14C(gfx, func_800783AC(D_F256900), var_s1->unk_08, var_fs0, 264, 31, G_IM_FMT_RGBA,
+                                        G_IM_SIZ_16b, 1, 1, 0, 0);
                 }
                 break;
             case 2:
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i7_8014BE14);
 
-                gfx = func_8007B14C(gfx, D_i7_8014BDF8, var_s1->unk_08, var_fs0, 0xA8, 0x63, G_IM_FMT_RGBA,
-                                    G_IM_SIZ_16b, 1, 1, 0, 0);
+                gfx = func_8007B14C(gfx, D_i7_8014BDF8, var_s1->unk_08, var_fs0, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                    1, 1, 0, 0);
 
                 if (D_i7_8014BDFC != NULL) {
-                    gfx = func_8007B14C(gfx, D_i7_8014BDFC, var_s1->unk_08 + -14.0f, var_fs0 + 99.0f + 10.0f, 0xC4,
-                                        0x20, 0, 2, 1, 1, 0, 0);
+                    gfx = func_8007B14C(gfx, D_i7_8014BDFC, var_s1->unk_08 + -14.0f, var_fs0 + 99.0f + 10.0f, 196, 32,
+                                        G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
                 }
                 break;
             case 3:
@@ -1299,33 +1300,30 @@ Gfx* func_i7_80145244(Gfx* gfx, s32 xPos, s32 yPos, s32 arg3, bool arg4) {
                          0, 0);
 }
 
-extern u16 D_4013DE0[];
-extern u8 D_4019020[];
-
 Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     s32 i;
     f32 temp_fa1;
     f32 var_fv0;
-    s32 spDC[2];
-    s32 spD8;
-    s32 var_a1;
-    s32 temp_a2;
+    s32 positionDigits[2];
+    s32 ordinalSuffix;
+    s32 position;
+    s32 positionDigit;
     s8 spCC[4];
 
-    var_a1 = D_80106F48;
-    if ((var_a1 == 1) || (var_a1 == 0x15)) {
-        spD8 = 0;
-    } else if ((var_a1 == 2) || (var_a1 == 0x16)) {
-        spD8 = 1;
-    } else if ((var_a1 == 3) || (var_a1 == 0x17)) {
-        spD8 = 2;
+    position = D_80106F48;
+    if ((position == 1) || (position == 21)) {
+        ordinalSuffix = POSITION_SUFFIX_ST;
+    } else if ((position == 2) || (position == 22)) {
+        ordinalSuffix = POSITION_SUFFIX_ND;
+    } else if ((position == 3) || (position == 23)) {
+        ordinalSuffix = POSITION_SUFFIX_RD;
     } else {
-        spD8 = 3;
+        ordinalSuffix = POSITION_SUFFIX_TH;
     }
 
-    for (i = 0; i < 2; i++) {
-        spDC[i] = var_a1 % 10;
-        var_a1 /= 10;
+    for (i = 0; i < ARRAY_COUNT(positionDigits); i++) {
+        positionDigits[i] = position % 10;
+        position /= 10;
     }
 
     gDPPipeSync(gfx++);
@@ -1345,16 +1343,16 @@ Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     gDPPipeSync(gfx++);
     gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 
-    for (i = 0; i < 2; i++) {
-        temp_a2 = spDC[1 - i];
-        if ((i == 0) && (temp_a2 == 0)) {
+    for (i = 0; i < ARRAY_COUNT(positionDigits); i++) {
+        positionDigit = positionDigits[1 - i];
+        if ((i == 0) && (positionDigit == 0)) {
             var_fv0 += 28.0f;
             continue;
         }
 
         gDPPipeSync(gfx++);
 
-        gDPLoadTextureBlock(gfx++, D_4013DE0 + (temp_a2 * 0x380), G_IM_FMT_RGBA, G_IM_SIZ_16b, 28, 32, 0,
+        gDPLoadTextureBlock(gfx++, aPositionDigitTexs[positionDigit], G_IM_FMT_RGBA, G_IM_SIZ_16b, 28, 32, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
@@ -1364,7 +1362,7 @@ Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
         var_fv0 += 28.0f;
     }
 
-    gDPLoadTextureBlock(gfx++, (D_4019020 + (spD8 * 0x320)), G_IM_FMT_RGBA, G_IM_SIZ_16b, 20, 20, 0,
+    gDPLoadTextureBlock(gfx++, aPositionOrdinalSuffixTexs[ordinalSuffix], G_IM_FMT_RGBA, G_IM_SIZ_16b, 20, 20, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
 
@@ -1503,8 +1501,6 @@ Gfx* func_i7_80146250(Gfx* gfx) {
     return gfx;
 }
 
-extern u16 D_401A9A0[];
-
 Gfx* func_i7_80146344(Gfx* gfx, s32 left, s32 top, s32 arg3) {
     s32 i;
     s32 j;
@@ -1516,7 +1512,7 @@ Gfx* func_i7_80146344(Gfx* gfx, s32 left, s32 top, s32 arg3) {
     gDPPipeSync(gfx++);
     gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 
-    gDPLoadTextureBlock(gfx++, D_401A9A0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(gfx++, aHudRacersKOdTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     numBlocks = arg3 / 10;
@@ -1854,8 +1850,6 @@ void func_i7_801478E8(void) {
         }
     }
 }
-
-extern Gfx D_400A258[];
 
 Gfx* func_i7_80147AC8(Gfx* gfx) {
     s32 i;

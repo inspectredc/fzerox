@@ -17,11 +17,13 @@ typedef struct unk_8006FC8C {
     s32 unk_30;
     struct unk_8006FC8C* unk_34;
     struct unk_8006FC8C* unk_38;
-    s8 unk_3C[0x28];
+    s8 unk_3C[0x18];
     // s8 unk_3C[0x10];
     // struct unk_802D3978* unk_4C;
     // struct unk_802D3978* unk_50;
-    // s8 unk_54[0x10];
+    struct unk_802D3E38* unk_54;
+    struct unk_802D3E38* unk_58;
+    s8 unk_5C[0x8];
     f32 unk_64;
     f32 unk_68;
     f32 unk_6C;
@@ -59,7 +61,11 @@ typedef struct unk_8010B7D0 {
 } unk_8010B7D0;
 
 typedef struct unk_8010B7B0 {
-    s8 unk_000[0x20];
+    s8 unk_000;
+    s8 unk_001;
+    s8 unk_002;
+    s8 unk_003;
+    s8 unk_004[0x1C];
     unk_8010B7D0 unk_020[64];
     s16 unk_520[64];
     s8 unk_5A0[64];
@@ -74,7 +80,7 @@ typedef struct unk_8010B7B0 {
 } unk_8010B7B0; // size = 0x7E0
 
 typedef struct unk_802D3E38 {
-    s8 unk_00[0x4];
+    s32 unk_00;
     f32 unk_04;
     f32 unk_08;
     Vec3f unk_0C;
@@ -336,14 +342,10 @@ typedef struct Racer {
     Vec3f unk_10C;
     Vec3f unk_118;
     s8 unk_124[0x40];
-    // very weird field
-    union {
-        s32 unk_164;
-        struct {
-            s8 unk_164_pad[3];
-            s8 unk_167;
-        };
-    };
+    s8 unk_164;
+    s8 unk_165;
+    s8 unk_166;
+    s8 unk_167;
     Vec3f unk_168;
     f32 unk_174;
     f32 unk_178;
@@ -559,7 +561,8 @@ typedef struct Controller {
 
 typedef struct unk_36ED0 {
     s32 unk_00;
-    s8 unk_04[0x8];
+    s32 unk_04;
+    f32 unk_08;
     f32 unk_0C;
     s8 unk_10[0x4];
     Vec3f unk_14;
@@ -585,6 +588,13 @@ typedef struct unk_802D2D70 {
     unk_8006FF90_arg_1* unk_00;
     s32 index;
 } unk_802D2D70;
+
+typedef struct unk_802D2D78 {
+    s32 unk_00;
+    unk_8006FF90_arg_2* unk_04;
+    unk_8006FF90_arg_2* unk_08;
+    s8 unk_0C[0x4];
+} unk_802D2D78; // size = 0x10
 
 typedef struct unk_802D3978 {
     s32 unk_00;

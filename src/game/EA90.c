@@ -100,12 +100,12 @@ void func_80074CE4(unk_800F8510* arg0) {
     }
 }
 
-s64 __f_to_ll(f32);
 void func_800BB4E0(s32);
 
 // Test Function?
 void func_80074F98(void) {
     f32 sp2C;
+    s64 temp;
     bcmp(NULL, NULL, 0);
     osEPiReadIo(NULL, 0, NULL);
     osEPiWriteIo(NULL, 0, 0);
@@ -119,5 +119,5 @@ void func_80074F98(void) {
     osPfsFindFile(NULL, 0, 0, NULL, NULL, NULL);
     sprintf(NULL, "\0\0\0\0\0\0\0");
     guOrtho(NULL, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-    __f_to_ll(sp2C);
+    temp = sp2C;
 }

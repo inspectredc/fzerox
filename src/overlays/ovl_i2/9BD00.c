@@ -1563,10 +1563,8 @@ s32 func_i2_801037CC(unk_80141C88* arg0, s32 arg1) {
     return 0;
 }
 
-extern u8 D_27F200[];
-
 void func_i2_8010382C(unk_struct_40* arg0, s32 arg1) {
-    func_80073ED0(D_27F200 + D_i2_80106DF0[arg1][0], arg0, sizeof(unk_struct_40));
+    func_80073ED0(SEGMENT_ROM_START(segment_27F200) + D_i2_80106DF0[arg1][0], arg0, sizeof(unk_struct_40));
 }
 
 void func_i2_80103930(unk_struct_3F80* arg0, s32 arg1);
@@ -1592,7 +1590,7 @@ s32 func_i2_8010387C(s32 arg0) {
 
 void func_i2_80103930(unk_struct_3F80* arg0, s32 arg1) {
     size_t* offsets = D_i2_80106DF0[arg1];
-    RomOffset romOffset = D_27F200;
+    RomOffset romOffset = SEGMENT_ROM_START(segment_27F200);
 
     func_80073ED0(romOffset + offsets[1], arg0, 0x20);
     func_80073ED0(romOffset + offsets[2], arg0->unk_20, ALIGN_2(arg0->unk_14 + 1));

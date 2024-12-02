@@ -271,10 +271,6 @@ Gfx* func_80076C08(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_4000000[];
-extern u8 D_4006240[];
-extern u8 D_4029EA0[];
-
 extern s32 D_800DCDC4;
 extern s32 D_800DCDC8;
 extern s32 D_800DCE44;
@@ -291,10 +287,10 @@ void func_80076CB8(void) {
         case 0xE:
         case 0x11:
         case 0x15:
-            segmentSize = D_4029EA0 - D_4000000;
+            segmentSize = SEGMENT_VRAM_SIZE(segment_1B8550);
             break;
         case 0x10:
-            segmentSize = D_4006240 - D_4000000;
+            segmentSize = SEGMENT_VRAM_SIZE(create_machine_textures);
             D_800CD2E0 = 2;
             break;
         case 0x6:
@@ -314,15 +310,11 @@ void func_80076CB8(void) {
     func_80076BA0(4, D_800DCDC4);
 }
 
-extern u8 D_7000000[];
-extern u8 D_700DA40[];
-extern u8 D_7048CB0[];
-
 extern s32 D_800DCDCC;
 extern s32 D_800DCDD0;
 
 void func_80076E10(void) {
-    size_t var_a2;
+    size_t ramSize;
 
     D_800CD2E4 = 1;
     switch (D_800DCE44) {
@@ -333,11 +325,11 @@ void func_80076E10(void) {
         case 5:
         case 14:
         case 21:
-            var_a2 = D_7048CB0 - D_7000000;
+            ramSize = SEGMENT_VRAM_SIZE(segment_1E23F0);
             break;
         case 13:
         case 16:
-            var_a2 = D_700DA40 - D_7000000;
+            ramSize = SEGMENT_VRAM_SIZE(segment_145B70);
             break;
         default:
             D_800CD2E4 = 0;
@@ -345,8 +337,8 @@ void func_80076E10(void) {
             return;
     }
 
-    D_800DCDCC = osVirtualToPhysical(func_800768F4(0, var_a2));
-    D_800DCDD0 = ALIGN16(D_800DCDCC + var_a2);
+    D_800DCDCC = osVirtualToPhysical(func_800768F4(0, ramSize));
+    D_800DCDD0 = ALIGN16(D_800DCDCC + ramSize);
     func_80076BA0(7, D_800DCDCC);
 }
 
@@ -616,14 +608,14 @@ void func_80077630(void) {
             case 0x10:
                 func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                               SEGMENT_ROM_SIZE(segment_17B960));
-                romOffset = SEGMENT_ROM_START(segment_166660);
-                ramSize = SEGMENT_VRAM_SIZE(segment_166660);
+                romOffset = SEGMENT_ROM_START(create_machine_textures);
+                ramSize = SEGMENT_VRAM_SIZE(create_machine_textures);
                 break;
             case 0xD:
                 func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                               SEGMENT_ROM_SIZE(segment_17B960));
-                romOffset = SEGMENT_ROM_START(segment_1535B0);
-                ramSize = SEGMENT_VRAM_SIZE(segment_1535B0);
+                romOffset = SEGMENT_ROM_START(course_edit_textures);
+                ramSize = SEGMENT_VRAM_SIZE(course_edit_textures);
                 break;
             case 0x6:
             case 0x4009:
@@ -641,12 +633,6 @@ void func_80077630(void) {
         D_800CD2E0 = 0;
     }
 }
-
-extern u8 D_145B70[];
-extern u8 D_1E23F0[];
-extern u8 D_7000000[];
-extern u8 D_700DA40[];
-extern u8 D_7048CB0[];
 
 extern s32 D_800DCE44;
 

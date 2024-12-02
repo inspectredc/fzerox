@@ -1599,5 +1599,5 @@ bool func_i2_801002E8(unk_8010D778* arg0) {
 }
 
 Gfx* func_i2_8010034C(Gfx* gfx, unk_8010D778* arg1) {
-    return func_8007E410(gfx, arg1->unk_14, D_i2_8010D7AC, 2, 1, 12, 8, 296, 224, 5);
+    return func_8007E410(gfx, arg1->unk_14, D_i2_8010D7AC, G_IM_FMT_CI, 1, 12, 8, 296, 224, 5);
 }

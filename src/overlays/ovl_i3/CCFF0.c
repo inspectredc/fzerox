@@ -1,7 +1,7 @@
 #include "global.h"
 #include "ovl_i3.h"
 #include "fzx_racer.h"
-#include "tex_assets.h"
+#include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
 
 u16 D_i3_80143780;
@@ -220,9 +220,10 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
             }
             var_s3 = (s32) (10.0f * var_fv0);
 
-            gfx =
-                func_8007B14C(gfx, func_800783AC(D_F138994), (-(i / 2) - var_s3) + 0x76, 16, 32, 32, 0, 2, 0, 0, 0, 0);
-            gfx = func_8007B14C(gfx, func_800783AC(D_F138994), (i / 2) + var_s3 + 0xAA, 16, 32, 32, 0, 2, 0, 0, 1, 0);
+            gfx = func_8007B14C(gfx, func_800783AC(D_F138994), (-(i / 2) - var_s3) + 0x76, 16, 32, 32, G_IM_FMT_RGBA,
+                                G_IM_SIZ_16b, 0, 0, 0, 0);
+            gfx = func_8007B14C(gfx, func_800783AC(D_F138994), (i / 2) + var_s3 + 0xAA, 16, 32, 32, G_IM_FMT_RGBA,
+                                G_IM_SIZ_16b, 0, 0, 1, 0);
         }
     }
 

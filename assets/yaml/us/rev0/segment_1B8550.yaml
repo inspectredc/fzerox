@@ -1,0 +1,1502 @@
+:config:
+  offset: 0x1B8550
+  segments:
+    - [0x04,  0x1B8550]
+  external_files:
+    - "assets/yaml/us/rev0/mio0_segment_1.yaml"
+  header:
+    code:
+      - '#include "assets/segment_1B8550.h"'
+      - '#include "assets/mio0_segment_1.h"'
+    header:
+      - '#include "gfx.h"'
+  tables:
+    aPositionDigitTexs:
+      range: [0x4013DE0, 0x4017CE0]
+      mode: APPEND
+    aPositionOrdinalSuffixTexs:
+      range: [0x4019020, 0x4019980]
+      mode: APPEND
+
+D_4000000:
+  type: GFX
+  offset: 0x0
+  symbol: D_4000000
+
+aFirstPlaceMarker1PTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 30
+  offset: 0x8
+  symbol: aFirstPlaceMarker1PTex
+
+aSecondPlaceMarker1PTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 30
+  offset: 0x5A8
+  symbol: aSecondPlaceMarker1PTex
+
+aThirdPlaceMarker1PTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 30
+  offset: 0xB48
+  symbol: aThirdPlaceMarker1PTex
+
+aFirstPlaceMarkerMPTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x10E8
+  symbol: aFirstPlaceMarkerMPTex
+
+aSecondPlaceMarkerMPTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x12E8
+  symbol: aSecondPlaceMarkerMPTex
+
+aThirdPlaceMarkerMPTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x14E8
+  symbol: aThirdPlaceMarkerMPTex
+
+aRivalMarkerTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  offset: 0x16E8
+  symbol: aRivalMarkerTex
+
+aCheckMarkerTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA4
+  width: 32
+  height: 23
+  offset: 0x1AE8
+  symbol: aCheckMarkerTex
+
+aDownMarkerTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA4
+  width: 16
+  height: 10
+  offset: 0x1C58
+  symbol: aDownMarkerTex
+
+D_4001CA8:
+  type: TEXTURE
+  ctype: u16
+  format: IA16
+  width: 16
+  height: 16
+  offset: 0x1CA8
+  symbol: D_4001CA8
+
+aExplosion1Tex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 32
+  offset: 0x1EA8
+  symbol: aExplosion1Tex
+
+aExplosion2Tex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 32
+  offset: 0x22A8
+  symbol: aExplosion2Tex
+
+aExplosion3Tex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 32
+  offset: 0x26A8
+  symbol: aExplosion3Tex
+
+aExplosion4Tex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 32
+  offset: 0x2AA8
+  symbol: aExplosion4Tex
+
+aExplosion5Tex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 32
+  offset: 0x2EA8
+  symbol: aExplosion5Tex
+
+aExplosion6Tex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 32
+  offset: 0x32A8
+  symbol: aExplosion6Tex
+
+aExplosion7Tex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 32
+  offset: 0x36A8
+  symbol: aExplosion7Tex
+
+aExplosion8Tex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 32
+  offset: 0x3AA8
+  symbol: aExplosion8Tex
+
+aSupernovaTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 256
+  offset: 0x3EA8
+  symbol: aSupernovaTex
+
+# aSupernova1Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x3EA8
+#   symbol: aSupernova1Tex
+
+# aSupernova2Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x40A8
+#   symbol: aSupernova2Tex
+
+# aSupernova3Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x42A8
+#   symbol: aSupernova3Tex
+
+# aSupernova4Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x44A8
+#   symbol: aSupernova4Tex
+
+# aSupernova5Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x46A8
+#   symbol: aSupernova5Tex
+
+# aSupernova6Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x48A8
+#   symbol: aSupernova6Tex
+
+# aSupernova7Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x4AA8
+#   symbol: aSupernova7Tex
+
+# aSupernova8Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x4CA8
+#   symbol: aSupernova8Tex
+
+aSmokeEffect1Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x4EA8
+  symbol: aSmokeEffect1Tex
+
+aSmokeEffect2Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x50A8
+  symbol: aSmokeEffect2Tex
+
+aSmokeEffect3Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x52A8
+  symbol: aSmokeEffect3Tex
+
+aSmokeEffect4Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x54A8
+  symbol: aSmokeEffect4Tex
+
+aSmokeEffect5Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x56A8
+  symbol: aSmokeEffect5Tex
+
+aSmokeEffect6Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x58A8
+  symbol: aSmokeEffect6Tex
+
+aSmokeEffect7Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x5AA8
+  symbol: aSmokeEffect7Tex
+
+aSmokeEffect8Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x5CA8
+  symbol: aSmokeEffect8Tex
+
+# Boost refill effect?
+D_4005EA8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x5EA8
+  symbol: D_4005EA8
+
+D_40060A8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x60A8
+  symbol: D_40060A8
+
+D_40062A8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x62A8
+  symbol: D_40062A8
+
+D_40064A8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x64A8
+  symbol: D_40064A8
+
+D_40066A8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x66A8
+  symbol: D_40066A8
+
+D_40068A8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x68A8
+  symbol: D_40068A8
+
+D_4006AA8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x6AA8
+  symbol: D_4006AA8
+
+D_4006CA8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x6CA8
+  symbol: D_4006CA8
+
+D_4006EA8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 64
+  offset: 0x6EA8
+  symbol: D_4006EA8
+
+D_40076A8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 64
+  offset: 0x76A8
+  symbol: D_40076A8
+
+D_4007EA8:
+  type: GFX
+  offset: 0x7EA8
+  symbol: D_4007EA8
+
+D_4007F08:
+  type: GFX
+  offset: 0x7F08
+  symbol: D_4007F08
+
+D_4007FB8:
+  type: GFX
+  offset: 0x7FB8
+  symbol: D_4007FB8
+
+D_4007FD8:
+  type: GFX
+  offset: 0x7FD8
+  symbol: D_4007FD8
+
+D_4008000:
+  type: GFX
+  offset: 0x8000
+  symbol: D_4008000
+
+D_4008028:
+  type: GFX
+  offset: 0x8028
+  symbol: D_4008028
+
+D_4008130:
+  type: GFX
+  offset: 0x8130
+  symbol: D_4008130
+
+D_4008180:
+  type: GFX
+  offset: 0x8180
+  symbol: D_4008180
+
+D_40081D8:
+  type: GFX
+  offset: 0x81D8
+  symbol: D_40081D8
+
+D_4008250:
+  type: GFX
+  offset: 0x8250
+  symbol: D_4008250
+
+aCountdown3Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x8258
+  symbol: aCountdown3Tex
+
+aCountdown2Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x8A58
+  symbol: aCountdown2Tex
+
+aCountdown1Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x9258
+  symbol: aCountdown1Tex
+
+aCountdownGoTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x9A58
+  symbol: aCountdownGoTex
+
+D_400A258:
+  type: GFX
+  offset: 0xA258
+  symbol: D_400A258
+
+aCountdownSignDL:
+  type: GFX
+  offset: 0xA2D8
+  symbol: aCountdownSignDL
+
+D_400A480:
+  type: GFX
+  offset: 0xA480
+  symbol: D_400A480
+
+D_400A4A8:
+  type: VTX
+  count: 12
+  offset: 0xA4A8
+  symbol: D_400A4A8
+
+D_400A568:
+  type: VTX
+  count: 8
+  offset: 0xA568
+  symbol: D_400A568
+
+D_400A5E8:
+  type: VTX
+  count: 4
+  offset: 0xA5E8
+  symbol: D_400A5E8
+
+D_400A628:
+  type: VTX
+  count: 4
+  offset: 0xA628
+  symbol: D_400A628
+
+D_400A668:
+  type: VTX
+  count: 12
+  offset: 0xA668
+  symbol: D_400A668
+
+D_400A728:
+  type: VTX
+  count: 8
+  offset: 0xA728
+  symbol: D_400A728
+
+D_400A7A8:
+  type: VTX
+  count: 4
+  offset: 0xA7A8
+  symbol: D_400A7A8
+
+D_400A7E8:
+  type: VTX
+  count: 4
+  offset: 0xA7E8
+  symbol: D_400A7E8
+
+D_400A828:
+  type: VTX
+  count: 4
+  offset: 0xA828
+  symbol: D_400A828
+
+D_400A868:
+  type: VTX
+  count: 20
+  offset: 0xA868
+  symbol: D_400A868
+
+aCountdownSignGrates3Vtx:
+  type: VTX
+  count: 8
+  offset: 0xA9A8
+  symbol: aCountdownSignGrates3Vtx
+
+D_400AA28:
+  type: VTX
+  count: 4
+  offset: 0xAA28
+  symbol: D_400AA28
+
+aCountdownSignGratesTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0xAA68
+  symbol: aCountdownSignGratesTex
+
+aCountdownMrZeroMouthClosedTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0xB268
+  symbol: aCountdownMrZeroMouthClosedTex
+
+aCountdownMrZeroMouthOpenTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0xBA68
+  symbol: aCountdownMrZeroMouthOpenTex
+
+aCongratulationsDL:
+  type: GFX
+  offset: 0xC270
+  symbol: aCongratulationsDL
+
+D_400C9B0:
+  type: GFX
+  offset: 0xC9B0
+  symbol: D_400C9B0
+
+aExecuteCongratulationsDL:
+  type: GFX
+  offset: 0xC9C0
+  symbol: aExecuteCongratulationsDL
+
+D_400C9D0:
+  type: GFX
+  offset: 0xC9D0
+  symbol: D_400C9D0
+
+D_400C9D8:
+  type: VTX
+  count: 32
+  offset: 0xC9D8
+  symbol: D_400C9D8
+
+D_400CBD8:
+  type: VTX
+  count: 32
+  offset: 0xCBD8
+  symbol: D_400CBD8
+
+D_400CDD8:
+  type: VTX
+  count: 32
+  offset: 0xCDD8
+  symbol: D_400CDD8
+
+D_400CFD8:
+  type: VTX
+  count: 32
+  offset: 0xCFD8
+  symbol: D_400CFD8
+
+D_400D1D8:
+  type: VTX
+  count: 32
+  offset: 0xD1D8
+  symbol: D_400D1D8
+
+D_400D3D8:
+  type: VTX
+  count: 32
+  offset: 0xD3D8
+  symbol: D_400D3D8
+
+D_400D5D8:
+  type: VTX
+  count: 32
+  offset: 0xD5D8
+  symbol: D_400D5D8
+
+D_400D7D8:
+  type: VTX
+  count: 24
+  offset: 0xD7D8
+  symbol: D_400D7D8
+
+D_400D958:
+  type: VTX
+  count: 32
+  offset: 0xD958
+  symbol: D_400D958
+
+D_400DB58:
+  type: VTX
+  count: 32
+  offset: 0xDB58
+  symbol: D_400DB58
+
+D_400DD58:
+  type: VTX
+  count: 32
+  offset: 0xDD58
+  symbol: D_400DD58
+
+D_400DF58:
+  type: VTX
+  count: 32
+  offset: 0xDF58
+  symbol: D_400DF58
+
+D_400E158:
+  type: VTX
+  count: 32
+  offset: 0xE158
+  symbol: D_400E158
+
+D_400E358:
+  type: VTX
+  count: 32
+  offset: 0xE358
+  symbol: D_400E358
+
+D_400E558:
+  type: VTX
+  count: 32
+  offset: 0xE558
+  symbol: D_400E558
+
+D_400E758:
+  type: VTX
+  count: 32
+  offset: 0xE758
+  symbol: D_400E758
+
+D_400E958:
+  type: VTX
+  count: 17
+  offset: 0xE958
+  symbol: D_400E958
+
+aCongratulationsFaceTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0xEA68
+  symbol: aCongratulationsFaceTex
+
+aCongratulationsSideTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 8
+  offset: 0xEC68
+  symbol: aCongratulationsSideTex
+
+aFinalLapTex:
+  type: TEXTURE
+  ctype: u8
+  format: CI8
+  tlut: 0x400F4E8
+  width: 128
+  height: 16
+  offset: 0xECE8
+  symbol: aFinalLapTex
+
+aFinalLapPalette:
+  type: TEXTURE
+  ctype: u16
+  format: TLUT
+  colors: 16
+  offset: 0xF4E8
+  symbol: aFinalLapPalette
+
+aBoosterOkTex:
+  type: TEXTURE
+  ctype: u8
+  format: CI8
+  tlut: 0x400FA08
+  width: 80
+  height: 16
+  offset: 0xF508
+  symbol: aBoosterOkTex
+
+aBoosterOkPalette:
+  type: TEXTURE
+  ctype: u16
+  format: TLUT
+  colors: 256
+  offset: 0xFA08
+  symbol: aBoosterOkPalette
+
+aFinishDL:
+  type: GFX
+  offset: 0xFC08
+  symbol: aFinishDL
+
+D_40104F0:
+  type: GFX
+  offset: 0x104F0
+  symbol: D_40104F0
+
+D_40104F8:
+  type: VTX
+  count: 10
+  offset: 0x104F8
+  symbol: D_40104F8
+
+D_4010598:
+  type: VTX
+  count: 4
+  offset: 0x10598
+  symbol: D_4010598
+
+D_40105D8:
+  type: VTX
+  count: 10
+  offset: 0x105D8
+  symbol: D_40105D8
+
+D_4010678:
+  type: VTX
+  count: 4
+  offset: 0x10678
+  symbol: D_4010678
+
+D_40106B8:
+  type: VTX
+  count: 22
+  offset: 0x106B8
+  symbol: D_40106B8
+
+D_4010818:
+  type: VTX
+  count: 12
+  offset: 0x10818
+  symbol: D_4010818
+
+D_40108D8:
+  type: VTX
+  count: 24
+  offset: 0x108D8
+  symbol: D_40108D8
+
+D_4010A58:
+  type: VTX
+  count: 12
+  offset: 0x10A58
+  symbol: D_4010A58
+
+D_4010B18:
+  type: VTX
+  count: 32
+  offset: 0x10B18
+  symbol: D_4010B18
+
+D_4010D18:
+  type: VTX
+  count: 20
+  offset: 0x10D18
+  symbol: D_4010D18
+
+D_4010E58:
+  type: VTX
+  count: 22
+  offset: 0x10E58
+  symbol: D_4010E58
+
+D_4010FB8:
+  type: VTX
+  count: 8
+  offset: 0x10FB8
+  symbol: D_4010FB8
+
+D_4011038:
+  type: VTX
+  count: 4
+  offset: 0x11038
+  symbol: D_4011038
+
+D_4011078:
+  type: VTX
+  count: 20
+  offset: 0x11078
+  symbol: D_4011078
+
+D_40111B8:
+  type: VTX
+  count: 10
+  offset: 0x111B8
+  symbol: D_40111B8
+
+D_4011258:
+  type: VTX
+  count: 8
+  offset: 0x11258
+  symbol: D_4011258
+
+D_40112D8:
+  type: VTX
+  count: 4
+  offset: 0x112D8
+  symbol: D_40112D8
+
+D_4011318:
+  type: VTX
+  count: 20
+  offset: 0x11318
+  symbol: D_4011318
+
+D_4011458:
+  type: VTX
+  count: 10
+  offset: 0x11458
+  symbol: D_4011458
+
+aFinishFaceTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x114F8
+  symbol: aFinishFaceTex
+
+aFinishSideTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 8
+  offset: 0x116F8
+  symbol: aFinishSideTex
+
+aStartStopGuideTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 12
+  offset: 0x11778
+  symbol: aStartStopGuideTex
+
+aMenuTextTlutSetupDL:
+  type: GFX
+  offset: 0x11D78
+  symbol: aMenuTextTlutSetupDL
+
+aReverseTex:
+  type: TEXTURE
+  ctype: u8
+  format: CI8
+  width: 112
+  height: 46
+  tlut: 0x40131C0
+  offset: 0x11DA0
+  symbol: aReverseTex
+
+aReversePalette:
+  type: TEXTURE
+  ctype: u16
+  format: TLUT
+  colors: 16
+  offset: 0x131C0
+  symbol: aReversePalette
+
+aHudTimeTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x131E0
+  symbol: aHudTimeTex
+
+aHudEnergyTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 72
+  height: 16
+  offset: 0x134E0
+  symbol: aHudEnergyTex
+
+aPosition0Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 32
+  offset: 0x13DE0
+  symbol: aPosition0Tex
+
+aPosition1Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 32
+  offset: 0x144E0
+  symbol: aPosition1Tex
+
+aPosition2Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 32
+  offset: 0x14BE0
+  symbol: aPosition2Tex
+
+aPosition3Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 32
+  offset: 0x152E0
+  symbol: aPosition3Tex
+
+aPosition4Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 32
+  offset: 0x159E0
+  symbol: aPosition4Tex
+
+aPosition5Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 32
+  offset: 0x160E0
+  symbol: aPosition5Tex
+
+aPosition6Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 32
+  offset: 0x167E0
+  symbol: aPosition6Tex
+
+aPosition7Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 32
+  offset: 0x16EE0
+  symbol: aPosition7Tex
+
+aPosition8Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 32
+  offset: 0x175E0
+  symbol: aPosition8Tex
+
+aPosition9Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 32
+  offset: 0x17CE0
+  symbol: aPosition9Tex
+
+aRacersLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  offset: 0x183E0
+  symbol: aRacersLeftTex
+
+aTotalRacerDigitsTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 132
+  offset: 0x187E0
+  symbol: aTotalRacerDigitsTex
+
+aPositionOrdinalSuffixSTTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 20
+  height: 20
+  offset: 0x19020
+  symbol: aPositionOrdinalSuffixSTTex
+
+aPositionOrdinalSuffixNDTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 20
+  height: 20
+  offset: 0x19340
+  symbol: aPositionOrdinalSuffixNDTex
+
+aPositionOrdinalSuffixRDTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 20
+  height: 20
+  offset: 0x19660
+  symbol: aPositionOrdinalSuffixRDTex
+
+aPositionOrdinalSuffixTHTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 20
+  height: 20
+  offset: 0x19980
+  symbol: aPositionOrdinalSuffixTHTex
+
+aLapCounterSymbolsTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 72
+  offset: 0x19CA0
+  symbol: aLapCounterSymbolsTex
+
+aCharacterPortraitHighlightBorderTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1A120
+  symbol: aCharacterPortraitHighlightBorderTex
+
+aHudLivesLeftIconTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 8
+  offset: 0x1A920
+  symbol: aHudLivesLeftIconTex
+
+aHudRacersKOdTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 8
+  offset: 0x1A9A0
+  symbol: aHudRacersKOdTex
+
+aPortraitCaptainFalconTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1AA20
+  symbol: aPortraitCaptainFalconTex
+
+aPortraitSamuraiGorohTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1B220
+  symbol: aPortraitSamuraiGorohTex
+
+aPortraitJodySummerTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1BA20
+  symbol: aPortraitJodySummerTex
+
+aPortraitAntonioGusterTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1C220
+  symbol: aPortraitAntonioGusterTex
+
+aPortraitSuperArrowTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1CA20
+  symbol: aPortraitSuperArrowTex
+
+aPortraitBloodFalconTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1D220
+  symbol: aPortraitBloodFalconTex
+
+aPortraitBeastmanTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1DA20
+  symbol: aPortraitBeastmanTex
+
+aPortraitBillyTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1E220
+  symbol: aPortraitBillyTex
+
+aPortraitBlackShadowTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1EA20
+  symbol: aPortraitBlackShadowTex
+
+aPortraitRogerBusterTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1F220
+  symbol: aPortraitRogerBusterTex
+
+aPortraitDraqTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1FA20
+  symbol: aPortraitDraqTex
+
+aPortraitDrClashTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x20220
+  symbol: aPortraitDrClashTex
+
+aPortraitMrEadTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x20A20
+  symbol: aPortraitMrEadTex
+
+aPortraitGomarAndShiohTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x21220
+  symbol: aPortraitGomarAndShiohTex
+
+aPortraitJackLevinTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x21A20
+  symbol: aPortraitJackLevinTex
+
+aPortraitJamesMcCloudTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x22220
+  symbol: aPortraitJamesMcCloudTex
+
+aPortraitSilverNeelsenTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x22A20
+  symbol: aPortraitSilverNeelsenTex
+
+aPortraitKateAlenTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x23220
+  symbol: aPortraitKateAlenTex
+
+aPortraitMichaelChainTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x23A20
+  symbol: aPortraitMichaelChainTex
+
+aPortraitOctomanTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x24220
+  symbol: aPortraitOctomanTex
+
+aPortraitPicoTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x24A20
+  symbol: aPortraitPicoTex
+
+aPortraitLeonTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x25220
+  symbol: aPortraitLeonTex
+
+aPortraitBioRexTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x25A20
+  symbol: aPortraitBioRexTex
+
+aPortraitMightyGazelleTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x26220
+  symbol: aPortraitMightyGazelleTex
+
+aPortraitDrStewartTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x26A20
+  symbol: aPortraitDrStewartTex
+
+aPortraitJohnTanakaTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x27220
+  symbol: aPortraitJohnTanakaTex
+
+aPortraitBabaTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x27A20
+  symbol: aPortraitBabaTex
+
+aPortraitMrsArrowTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x28220
+  symbol: aPortraitMrsArrowTex
+
+aPortraitZodaTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x28A20
+  symbol: aPortraitZodaTex
+
+aPortraitTheSkullTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x29220
+  symbol: aPortraitTheSkullTex
+
+aPortraitPositionFirstTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 6
+  offset: 0x29A20
+  symbol: aPortraitPositionFirstTex
+
+aPortraitPositionSecondTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 6
+  offset: 0x29AE0
+  symbol: aPortraitPositionSecondTex
+
+aPortraitPositionThirdTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 6
+  offset: 0x29BA0
+  symbol: aPortraitPositionThirdTex
+
+aPortraitPositionFourthTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 6
+  offset: 0x29C60
+  symbol: aPortraitPositionFourthTex
+
+aPortraitPositionFifthTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 6
+  offset: 0x29D20
+  symbol: aPortraitPositionFifthTex
+
+aPortraitPositionSixthTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 6
+  offset: 0x29DE0
+  symbol: aPortraitPositionSixthTex

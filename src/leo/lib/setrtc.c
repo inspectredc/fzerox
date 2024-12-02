@@ -9,7 +9,7 @@ s32 LeoSetRTC(LEOCmd* cmdBlock, LEODiskTime* RTCdata, OSMesgQueue* mq) {
         return -1;
     }
     if (leoVerifyRTC(RTCdata->yearhi, RTCdata->yearlo)) {
-        osSendMesg(mq, (void*) LEO_SENSE_ILLEGAL_TIMER_VALUE, 1);
+        osSendMesg(mq, (void*) LEO_SENSE_ILLEGAL_TIMER_VALUE, OS_MESG_BLOCK);
         return 0;
     }
     cmdBlock->header.command = LEO_COMMAND_SET_TIMER;

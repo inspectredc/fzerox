@@ -125,7 +125,7 @@ s32 func_8007E11C(s32 character);
 void func_8007E2B4(void);
 void func_8007E398(void);
 
-Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 format, s32 unkTmemFlag, s32 left, s32 top, s32 width, s32 height, u16 unkDrawFlag);
+Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 format, s32 unkTmemFlag, s32 arg5, s32 arg6, s32 width, s32 height, u16 unkDrawFlag);
 void func_8007ECCC(u16* arg0, s32 arg1);
 s32 func_8007EFBC(u16* arg0, u16* arg1, s32 arg2);
 Gfx* func_8007F090(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3);

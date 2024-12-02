@@ -17,7 +17,7 @@ void func_80068A60(void* arg0) {
         MQ_WAIT_FOR_MESG(&D_800DCA98, &D_800DCE30);
         if (D_800CCFF0 != NULL) {
             D_800DCCC4 = &D_800CCFF0->task;
-            osSendMesg(&D_800DCAE0, (void*) 0x16, 1);
+            osSendMesg(&D_800DCAE0, (void*) 0x16, OS_MESG_BLOCK);
         }
         D_800CCFF0 = func_800BB49C();
     }

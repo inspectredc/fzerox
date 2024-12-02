@@ -35,31 +35,26 @@ typedef struct unk_8007F86C_arg_1 {
 } unk_8007F86C_arg_1;
 
 void func_8007F7D0(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s32* arg4) {
-    u32 temp_t8 = LeoGetAAdr2(arg0, arg2, arg3, arg4) + 0xA0000;
+    uintptr_t fontAddr = LeoGetAAdr2(arg0, arg2, arg3, arg4) + DDROM_FONT_START;
 
     D_800E4330.hdr.pri = OS_MESG_PRI_NORMAL;
     D_800E4330.hdr.retQueue = &D_800DCA68;
     D_800E4330.dramAddr = arg1;
-    D_800E4330.devAddr = temp_t8;
+    D_800E4330.devAddr = fontAddr;
     D_800E4330.size = sizeof(unk_8007F86C_arg_1);
     D_800DCCE0->transferInfo.cmdType = LEO_CMD_TYPE_2;
     osEPiStartDma(D_800DCCE0, &D_800E4330, OS_READ);
     MQ_WAIT_FOR_MESG(&D_800DCA68, NULL);
 }
 
-#ifdef NON_MATCHING
-// instruction swap
 void func_8007F86C(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s32* arg4) {
     s32 i;
+    s32 j;
 
-    for (i = 0; arg0[i] != 0; i++) {
-        func_8007F7D0(arg0[i], &arg1[i], &arg2[i], &arg3[i], &arg4[i]);
+    for (i = 0, j = 0; arg0[i] != 0; j++, i++) {
+        func_8007F7D0(arg0[i], &arg1[j], &arg2[i], &arg3[i], &arg4[i]);
     }
 }
-#else
-void func_8007F86C(s32* arg0, unk_8007F86C_arg_1* arg1, s32* arg2, s32* arg3, s32* arg4);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/197D0/func_8007F86C.s")
-#endif
 
 extern unk_8007F86C_arg_1 D_80400008[];
 
@@ -77,7 +72,7 @@ void func_8007F970(void) {
 
     for (i = 75; i < 191; i++) {
         for (j = 22; j < 298; j++) {
-            D_800E434C = (i * 320) + &D_800E4348[j];
+            D_800E434C = D_800E4348 + (i * SCREEN_WIDTH) + j;
             *D_800E434C = 1;
         }
     }
@@ -106,8 +101,6 @@ void func_8007F9E0(void) {
     func_800751C0();
 }
 
-extern s16* D_800E4348;
-
 void func_8007FA64(s32 arg0, s32 arg1, u8* arg2, s32 arg3, s32 arg4, s32 arg5) {
     u8 i;
     u16 j;
@@ -121,7 +114,7 @@ void func_8007FA64(s32 arg0, s32 arg1, u8* arg2, s32 arg3, s32 arg4, s32 arg5) {
         for (j = arg0; j < arg0 + arg3; j += 2, var_v0++) {
             temp_a3 = *var_v0 >> 4;
             temp_t1 = *var_v0 & 0xFF;
-            D_800E434C = (i * 320) + &D_800E4348[j];
+            D_800E434C = D_800E4348 + (i * SCREEN_WIDTH) + j;
             temp_t1 &= 0xF;
             if (temp_a3 != 0) {
                 *D_800E434C = D_800CD6A0[temp_a3];

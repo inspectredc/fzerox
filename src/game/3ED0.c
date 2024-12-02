@@ -15,17 +15,14 @@ extern Controller D_800DCE98[];
 Controller* func_80069ED0(void) {
     s32 i;
 
-    for (i = 0; i < 4; i++) {
-        if ((D_800DCE70[i].type & 0x1F07) == 2) {
+    for (i = 0; i < MAXCONTROLLERS; i++) {
+        if ((D_800DCE70[i].type & CONT_TYPE_MASK) == CONT_TYPE_MOUSE) {
             return &D_800DCE98[i];
         }
     }
 
     return NULL;
 }
-
-// n64 boot logo
-extern u8 D_2787F0[];
 
 void func_80069F5C(u64* arg0) {
     u64* var_s0 = &arg0[19199];
@@ -40,7 +37,7 @@ void func_80069F5C(u64* arg0) {
     var_s0 = &arg0[5624];
 
     for (var_s1 = 0; var_s1 < 0x6A00; var_s1 += 0x100, var_s0 += 80) {
-        func_80073E28((uintptr_t) D_2787F0 + var_s1 + 8, var_s0, 0x100);
+        func_80073E28((uintptr_t) SEGMENT_ROM_START(segment_2787F0) + var_s1 + 8, var_s0, 0x100);
     }
 }
 

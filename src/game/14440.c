@@ -544,11 +544,11 @@ s32 func_8007E008(void) {
 extern s32 D_800CCFC0;
 extern bool D_800DCCCC;
 
-s32 func_8007E038(void) {
+bool func_8007E038(void) {
     if ((D_800CCFC0 != 0) && D_800DCCCC && (func_800760F8() == 2)) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 void func_8007E08C(void) {
@@ -592,7 +592,7 @@ s32 func_8007E11C(s32 character) {
 }
 
 void func_8007E1C0(void) {
-    s32 sp40[16];
+    unk_80141C88 sp40;
     s32 pad;
     bool sp38;
     s32 i;
@@ -600,11 +600,11 @@ void func_8007E1C0(void) {
     sp38 = false;
 
     for (i = 0; i < 24; i++) {
-        if (func_i2_801037CC(sp40, i) != 0) {
+        if (func_i2_801037CC(&sp40, i) != 0) {
             sp38 = true;
             break;
         } else {
-            if (D_802A6B40[i].unk_20[0] >= sp40[2]) {
+            if (D_802A6B40[i].unk_20[0] >= sp40.unk_08) {
                 sp38 = true;
                 break;
             }

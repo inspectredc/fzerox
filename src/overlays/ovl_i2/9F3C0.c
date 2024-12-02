@@ -31,7 +31,7 @@ void func_i2_80103AD4(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0.unk_000[2], D_8010B7B0.unk_000[3]);
+    func_8007F4E0(D_8010B7B0.unk_002, D_8010B7B0.unk_003);
     func_i3_801365E0();
     func_i2_801044F0();
     func_8006D448();
