@@ -80,7 +80,7 @@ void func_80067C0C(OSTask* task) {
     task->t.yield_data_ptr = (u64*) gOSYieldData;
     task->t.yield_data_size = OS_YIELD_DATA_SIZE;
     D_800DCCC0 = task;
-    osSendMesg(&D_800DCAE0, (OSMesg) 0x15, 1);
+    osSendMesg(&D_800DCAE0, (OSMesg) 0x15, OS_MESG_BLOCK);
 }
 
 extern OSMesgQueue D_800DCAB0;

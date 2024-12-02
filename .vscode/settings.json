@@ -111,7 +111,9 @@
     "segment_17b1e0.h": "c",
     "ovl_i6.h": "c",
     "ovl_i2.h": "c",
-    "ovl_i7.h": "c"
+    "ovl_i7.h": "c",
+    "segment_17b960.h": "c",
+    "segment_2b9ea0.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"

@@ -1,8 +1,9 @@
 #include "global.h"
 #include "fzx_racer.h"
 #include "ovl_i3.h"
-#include "tex_assets.h"
 #include "assets/segment_17B960.h"
+#include "assets/segment_1B8550.h"
+#include "assets/segment_2B9EA0.h"
 
 s16 D_i3_801419A0;
 s16 D_i3_801419A2;
@@ -105,7 +106,8 @@ char D_i3_80141E08[32];
 s32 D_i3_80141E28;
 
 TexturePtr D_i3_8013ED30[] = {
-    D_4029A20, D_4029AE0, D_4029BA0, D_4029C60, D_4029D20, D_4029DE0,
+    aPortraitPositionFirstTex,  aPortraitPositionSecondTex, aPortraitPositionThirdTex,
+    aPortraitPositionFourthTex, aPortraitPositionFifthTex,  aPortraitPositionSixthTex,
 };
 
 s16 D_i3_8013ED48[][4][2] = {
@@ -485,9 +487,6 @@ void func_i3_8011B520(void) {
     func_i3_8013C080();
 }
 
-extern u8 D_4011778[];
-extern u8 D_401A120[];
-
 extern Racer* D_800E5F40[];
 extern Gfx D_80149D0[];
 
@@ -647,8 +646,9 @@ Gfx* func_i3_8011C25C(Gfx* gfx, s32 playerNum) {
         }
         gSPDisplayList(gfx++, D_80149D0);
         gDPPipeSync(gfx++);
-        gDPLoadTextureBlock(gfx++, D_4011778, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 12, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock(gfx++, aStartStopGuideTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 12, 0,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                            G_TX_NOLOD);
         gSPTextureRectangle(gfx++, D_i3_8013ED48[gNumPlayers][playerNum][0] << 2,
                             (D_i3_8013ED48[gNumPlayers][playerNum][1] - 12) << 2,
                             (D_i3_8013ED48[gNumPlayers][playerNum][0] + 63) << 2,
@@ -695,8 +695,9 @@ Gfx* func_i3_8011C25C(Gfx* gfx, s32 playerNum) {
                  ((D_i3_80141A68[playerNum] >= 3) && (D_i3_80141AA0[playerNum].z != 0.0f)))) {
                 gSPDisplayList(gfx++, D_80149D0);
                 gDPPipeSync(gfx++);
-                gDPLoadTextureBlock(gfx++, D_401A120, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gDPLoadTextureBlock(gfx++, aCharacterPortraitHighlightBorderTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                    G_TX_NOLOD, G_TX_NOLOD);
                 gSPTextureRectangle(gfx++, (D_i3_8013ED48[gNumPlayers][playerNum][0] + 64) << 2,
                                     D_i3_8013ED48[gNumPlayers][playerNum][1] << 2,
                                     (D_i3_8013ED48[gNumPlayers][playerNum][0] + 95) << 2,
@@ -709,8 +710,9 @@ Gfx* func_i3_8011C25C(Gfx* gfx, s32 playerNum) {
                  (D_i3_80141B40[D_i3_80141A50[playerNum][0]][0] == D_i3_80141B40[D_i3_80141A50[playerNum][2]][2])) &&
                 ((gGameFrameCount % 20) >= 5)) {
                 gSPDisplayList(gfx++, D_80149D0);
-                gDPLoadTextureBlock(gfx++, D_401A120, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gDPLoadTextureBlock(gfx++, aCharacterPortraitHighlightBorderTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                    G_TX_NOLOD, G_TX_NOLOD);
                 gSPTextureRectangle(gfx++, (D_i3_8013ED48[gNumPlayers][playerNum][0] + 64) << 2,
                                     D_i3_8013ED48[gNumPlayers][playerNum][1] << 2,
                                     (D_i3_8013ED48[gNumPlayers][playerNum][0] + 95) << 2,
@@ -782,8 +784,6 @@ Gfx* func_i3_8011DB98(Gfx* gfx, s32 time, s32 left, s32 top) {
     return func_i3_80133944(gfx, time, left, top, 1.0f);
 }
 
-extern u8 D_40131E0[];
-extern u8 D_4019CA0[];
 extern s32 D_800CD00C;
 extern s16 D_800E5FE2;
 extern s16 D_800E5FE6;
@@ -811,7 +811,7 @@ Gfx* func_i3_8011DD30(Gfx* gfx, s32 arg1) {
         }
     }
     gDPPipeSync(gfx++);
-    gDPLoadTextureBlock(gfx++, D_4019CA0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 72, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(gfx++, aLapCounterSymbolsTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 72, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     left += 0x11;
@@ -828,7 +828,7 @@ Gfx* func_i3_8011DD30(Gfx* gfx, s32 arg1) {
 
     gSPDisplayList(gfx++, D_8014940);
     gDPPipeSync(gfx++);
-    gDPLoadTextureBlock(gfx++, D_40131E0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 24, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(gfx++, aHudTimeTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 24, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     left = D_i3_80141BA0 - D_i3_80141B9C;
@@ -987,8 +987,9 @@ Gfx* func_i3_8011ECF0(Gfx* gfx) {
 
             if ((D_800E5F40[i]->unk_00 == 0) && ((gGameFrameCount % 20) >= 5)) {
                 gDPPipeSync(gfx++);
-                gDPLoadTextureBlock(gfx++, D_401A120, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gDPLoadTextureBlock(gfx++, aCharacterPortraitHighlightBorderTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                    G_TX_NOLOD, G_TX_NOLOD);
                 gSPScisTextureRectangle(gfx++, left << 2, top << 2, (s32) (left + 32.0f * scale) << 2,
                                         (s32) (top + 32.0f * scale) << 2, 0, 0, 0, (s32) (1024.0f / scale),
                                         (s32) (1024.0f / scale));
@@ -1010,8 +1011,9 @@ Gfx* func_i3_8011F560(Gfx* gfx, s32 arg1, s32 character, s32 left, s32 top, f32 
 
     if ((arg1 == 0) && ((gGameFrameCount % 20) >= 5)) {
         gDPPipeSync(gfx++);
-        gDPLoadTextureBlock(gfx++, D_401A120, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock(gfx++, aCharacterPortraitHighlightBorderTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                            G_TX_NOLOD);
         gSPScisTextureRectangle(gfx++, left << 2, top << 2, (s32) (left + 32.0f * arg5) << 2,
                                 (s32) (top + 32.0f * arg5) << 2, 0, 0, 0, (s32) (1024.0f / arg5),
                                 (s32) (1024.0f / arg5));
@@ -1391,21 +1393,18 @@ Gfx* func_i3_801209C8(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-extern u8 D_400ECE8[];
-extern u8 D_400F4E8[];
-
 Gfx* func_i3_80120D28(Gfx* gfx, s32 left, s32 top, f32 scale) {
     s32 i;
 
     gSPDisplayList(gfx++, D_8014940);
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 8, 308, 232);
-    gDPLoadTLUT_pal256(gfx++, D_400F4E8);
+    gDPLoadTLUT_pal256(gfx++, aFinalLapPalette);
     gDPSetTextureLUT(gfx++, G_TT_RGBA16);
 
     for (i = 0; i < 1; i++) {
 
         gDPPipeSync(gfx++);
-        gDPLoadTextureBlock(gfx++, (D_400ECE8 + (i * 0x800)), G_IM_FMT_CI, G_IM_SIZ_8b, 128, 16, 0,
+        gDPLoadTextureBlock(gfx++, (aFinalLapTex + (i * 0x800)), G_IM_FMT_CI, G_IM_SIZ_8b, 128, 16, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
@@ -1471,9 +1470,6 @@ Gfx* func_i3_80121178(Gfx* gfx, s32 arg1) {
     return func_i3_80120D28(gfx, left, top, scale);
 }
 
-extern u8 D_400F508[];
-extern u8 D_400FA08[];
-
 Gfx* func_i3_801212A8(Gfx* gfx, s32 left, s32 top, f32 scale) {
     s32 i;
     f32 blockTop;
@@ -1482,7 +1478,7 @@ Gfx* func_i3_801212A8(Gfx* gfx, s32 left, s32 top, f32 scale) {
 
     gSPDisplayList(gfx++, D_8014940);
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 8, 308, 232);
-    gDPLoadTLUT_pal256(gfx++, D_400FA08);
+    gDPLoadTLUT_pal256(gfx++, aBoosterOkPalette);
     gDPSetTextureLUT(gfx++, G_TT_RGBA16);
 
     blockTop = top;
@@ -1490,7 +1486,7 @@ Gfx* func_i3_801212A8(Gfx* gfx, s32 left, s32 top, f32 scale) {
     for (i = 0; i < 2; i++) {
 
         gDPPipeSync(gfx++);
-        gDPLoadTextureBlock(gfx++, (D_400F508 + (i * 0x280)), G_IM_FMT_CI, G_IM_SIZ_8b, 80, 8, 0,
+        gDPLoadTextureBlock(gfx++, (aBoosterOkTex + (i * 0x280)), G_IM_FMT_CI, G_IM_SIZ_8b, 80, 8, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
         temp = (8.0f * scale);
@@ -1565,8 +1561,6 @@ void func_i3_801217F0(s32 arg0) {
 }
 
 extern GfxPool D_1000000;
-extern Gfx D_400A258[];
-extern Gfx D_400FC08[];
 extern unk_struct_1DC D_800E5220[];
 extern f32 D_800DD230[];
 extern GfxPool* D_800DCCF0;
@@ -1642,7 +1636,7 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 arg1) {
     func_8006BC84(D_800DCCF0->unk_21988, NULL, 0.07f, 0.07f, 0.07f, 0.0f, spA0, spA4, 0.0f, spAC, spB0, spC0, spC4,
                   spC8);
     gSPMatrix(gfx++, D_800DCCF0->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gfx++, D_400FC08);
+    gSPDisplayList(gfx++, aFinishDL);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
 
@@ -1693,8 +1687,6 @@ void func_i3_80121E28(s32 arg0) {
     D_i3_80141C10[arg0] = 0.0f;
     D_i3_80141D0C = 0.001f;
 }
-
-extern Gfx D_400C9C0[];
 
 // TODO: figure out calculation from D_PI and M_PI which gives correct rodata values
 #define D_TWO_PI 6.283185958862305
@@ -1824,7 +1816,7 @@ Gfx* func_i3_80121E70(Gfx* gfx, s32 arg1) {
     func_8006BC84(D_800DCCF0->unk_21988, NULL, D_i3_80141D0C, D_i3_80141D0C, D_i3_80141D0C, sp5C, 0.0f, sp64, 0.0f,
                   1.0f, 0.0f, sp80, sp84, sp88);
     gSPMatrix(gfx++, D_800DCCF0->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gfx++, D_400C9C0);
+    gSPDisplayList(gfx++, aExecuteCongratulationsDL);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
 
@@ -2045,8 +2037,6 @@ s32 func_i3_80122D88(void) {
     return 0;
 }
 
-extern Gfx D_4011D78[];
-
 Gfx* func_i3_DrawSaved(Gfx* gfx) {
 
     if (sGhostSaveTimer > 0) {
@@ -2065,7 +2055,7 @@ Gfx* func_i3_DrawSaved(Gfx* gfx) {
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 85, 105, 165, 135);
 
     gfx = func_i3_DrawBeveledBox(gfx, 90, 110, 160, 130, 0, 0, 0, 255);
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_SAVED, 93, 112);
@@ -2087,7 +2077,7 @@ Gfx* func_i3_DrawSaving(Gfx* gfx) {
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 80, 105, 170, 135);
 
     gfx = func_i3_DrawBeveledBox(gfx, 90, 110, 160, 130, 0, 0, 0, 255);
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_SAVING, 95, 112);
@@ -2149,7 +2139,7 @@ Gfx* func_i3_DrawGhostSave(Gfx* gfx) {
                                1, 6, 0);
     }
 
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_NEW_GHOST, 43, 45);
@@ -2200,7 +2190,7 @@ Gfx* func_i3_801239D0(Gfx* gfx) {
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 16, 308, 224);
 
     gfx = func_i3_DrawBeveledBox(gfx, 20, 56, 140, 86, 0, 0, 0, 180);
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
     gfx = func_8007DB28(gfx, 0);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_CANNOT_SAVE_GHOST, 16, 54);
@@ -2224,7 +2214,7 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_i3_80141D98 + 205, D_i3_80141D98 + 132, 305 - D_i3_80141D98,
                   225 - D_i3_80141D98);
     gfx = func_i3_DrawBeveledBox(gfx, 210, 137, 300, 220, 0, 0, 0, 180);
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
     gfx = func_i3_SetOptionColor(gfx, sRaceMenuOptionIndex - TIME_ATTACK_RETRY);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 230, 140);
@@ -2371,7 +2361,7 @@ Gfx* func_i3_80124370(Gfx* gfx) {
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_i3_80141DA0 + 205, D_i3_80141DA0 + 132, 305 - D_i3_80141DA0,
                   225 - D_i3_80141DA0);
     gfx = func_i3_DrawBeveledBox(gfx, 210, 137, 300, 220, 0, 0, 0, 180);
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
     gfx = func_i3_SetOptionColor(gfx, D_i3_80141D9C);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 230, 140);
@@ -2474,7 +2464,7 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_i3_80141D98 + 205, D_i3_80141D98 + 132, 305 - D_i3_80141D98,
                   226 - D_i3_80141D98);
     gfx = func_i3_DrawBeveledBox(gfx, 210, 137, 300, 221, 0, 0, 200, 127);
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
     gfx = func_i3_SetOptionColor(gfx, sRaceMenuOptionIndex);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 230, 140);
@@ -2581,7 +2571,7 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
     } else {
         gfx = func_i3_DrawBeveledBox(gfx, 210, 137, 300, 205, 0, 0, 200, 127);
     }
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
     gfx = func_i3_SetOptionColor(gfx, sRaceMenuOptionIndex);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 230, 140);
@@ -2670,7 +2660,7 @@ Gfx* func_i3_8012548C(Gfx* gfx) {
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_i3_80141DA8 + 100, D_i3_80141DA8 + 41, 230 - D_i3_80141DA8,
                   197 - D_i3_80141DA8);
     gfx = func_i3_DrawBeveledBox(gfx, 120, 61, 210, 177, 0, 0, 0, 220);
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
 
     gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4);
@@ -2802,7 +2792,7 @@ Gfx* func_i3_80125C34(Gfx* gfx) {
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_i3_80141DA8 + 100, D_i3_80141DA8 + 56, 230 - D_i3_80141DA8,
                   166 - D_i3_80141DA8);
     gfx = func_i3_DrawBeveledBox(gfx, 120, 61, 210, 161, 0, 0, 0, 220);
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
 
     gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4);
@@ -2918,7 +2908,7 @@ Gfx* func_i3_80126330(Gfx* gfx) {
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_i3_80141DA8 + 100, D_i3_80141DA8 + 56, 220 - D_i3_80141DA8,
                   150 - D_i3_80141DA8);
     gfx = func_i3_DrawBeveledBox(gfx, 120, 61, 200, 145, 0, 0, 0, 220);
-    gSPDisplayList(gfx++, D_4011D78);
+    gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(D_F25F070));
 
     gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4);
@@ -3758,7 +3748,7 @@ Gfx* func_i3_80129948(Gfx* gfx) {
     gfx = func_i2_80106450(gfx, 0xA0 - (func_i2_801062E4("death race  results", 3, 1) / 2), 0x2A, "death race  results",
                            1, 3, 0);
     gSPDisplayList(gfx++, D_8014940);
-    gDPLoadTextureBlock(gfx++, D_40131E0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 24, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(gfx++, aHudTimeTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 24, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     xl = 213;
     yl = 60;
@@ -4446,7 +4436,7 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 arg1) {
     if ((D_800DCE44 == 1) && (D_i3_80141B88[arg1] == 60) && (D_i3_801419D0[0] == 0) && ((D_800F8514 % 6) == 5) &&
         (D_800CD004 < 5)) {
         func_8007DEF0();
-        if ((s8) gRacers[0].unk_164 == 0) {
+        if (gRacers[0].unk_167 == 0) {
             func_i2_80101310(gDifficulty, D_800CD004, gRacers[0].character);
         }
     }

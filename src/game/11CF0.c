@@ -1,4 +1,5 @@
 #include "global.h"
+#include "segment_symbols.h"
 
 unk_800E33E0 D_800E33E0[200];
 s32 D_800E3A20;
@@ -6,11 +7,9 @@ unk_800E3A28 D_800E3A28[32];
 unk_800E3F28 D_800E3F28[16];
 unk_800E4068 D_800E4068[16];
 
-extern u8 D_2B9EA0[];
-
 void func_80077CF0(s32 segAddr, size_t size, u8* startAddr) {
     osInvalDCache(startAddr, size);
-    func_800765CC(D_2B9EA0 + SEGMENT_OFFSET(segAddr), startAddr, size);
+    func_800765CC(SEGMENT_ROM_START(segment_2B9EA0) + SEGMENT_OFFSET(segAddr), startAddr, size);
 }
 
 void func_80077D44(void) {
@@ -546,7 +545,6 @@ void func_800794B0(s32 arg0, s32 arg1, s32 arg2, s8 arg3) {
     unk_800E3A28* var_s0 = D_800E3A28;
 
     while (true) {
-        i++;
         // clang-format off
         if (var_s0->unk_00 == 0) {   \
             var_s0->unk_00 = arg0;   \
@@ -559,10 +557,11 @@ void func_800794B0(s32 arg0, s32 arg1, s32 arg2, s8 arg3) {
             var_s0->unk_1C = 0;      \
             var_s0->unk_20 = 0;      \
             break;
-        } else if (i > 0x20) {
-            return;
         }
         // clang-format on
+        if (++i > 0x20) {
+            return;
+        }
         var_s0++;
     }
 
@@ -1162,13 +1161,13 @@ void func_8007A208(unk_800E3A28* arg0, s32 arg1) {
     if (var_v0 != 0) {
         if (var_v0 > 0) {
             var_v0 /= 4;
-            if (++var_v0 > 0x10) {
-                var_v0 = 0x10;
+            if (++var_v0 > 16) {
+                var_v0 = 16;
             }
         } else {
             var_v0 /= 4;
-            if (--var_v0 < -0x10) {
-                var_v0 = -0x10;
+            if (--var_v0 < -16) {
+                var_v0 = -16;
             }
         }
     }
@@ -1180,13 +1179,13 @@ void func_8007A278(unk_800E3A28* arg0, s32 arg1) {
 
     var_v0 = arg1 - arg0->unk_0C;
     if (var_v0 != 0) {
-        var_v0 = 0xC8 / var_v0;
+        var_v0 = 200 / var_v0;
         if (var_v0 > 0) {
-            if (var_v0 > 0x18) {
-                var_v0 = 0x18;
+            if (var_v0 > 24) {
+                var_v0 = 24;
             }
-            if (var_v0 < 0x10) {
-                var_v0 = 0x10;
+            if (var_v0 < 16) {
+                var_v0 = 16;
             }
             arg0->unk_0C += var_v0;
 
@@ -1194,11 +1193,11 @@ void func_8007A278(unk_800E3A28* arg0, s32 arg1) {
                 arg0->unk_0C = arg1;
             }
         } else {
-            if (var_v0 < -0x18) {
-                var_v0 = -0x18;
+            if (var_v0 < -24) {
+                var_v0 = -24;
             }
-            if (var_v0 > -0x10) {
-                var_v0 = -0x10;
+            if (var_v0 > -16) {
+                var_v0 = -16;
             }
             arg0->unk_0C += var_v0;
 
@@ -1221,13 +1220,13 @@ void func_8007A334(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     if (var_v1 != 0) {
         if (var_v1 > 0) {
             var_v1 /= 8;
-            if (++var_v1 > 0x10) {
-                var_v1 = 0x10;
+            if (++var_v1 > 16) {
+                var_v1 = 16;
             }
         } else {
             var_v1 /= 8;
-            if (--var_v1 < -0x10) {
-                var_v1 = -0x10;
+            if (--var_v1 < -16) {
+                var_v1 = -16;
             }
         }
     }
@@ -1246,13 +1245,13 @@ void func_8007A3B8(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     if (var_v1 != 0) {
         if (var_v1 > 0) {
             var_v1 /= 8;
-            if (++var_v1 > 0x10) {
-                var_v1 = 0x10;
+            if (++var_v1 > 16) {
+                var_v1 = 16;
             }
         } else {
             var_v1 /= 8;
-            if (--var_v1 < -0x10) {
-                var_v1 = -0x10;
+            if (--var_v1 < -16) {
+                var_v1 = -16;
             }
         }
     }

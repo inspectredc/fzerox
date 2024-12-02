@@ -1,6 +1,6 @@
 #include "global.h"
 #include "fzx_racer.h"
-#include "tex_assets.h"
+#include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
 
 UNUSED s32 D_8011D770;

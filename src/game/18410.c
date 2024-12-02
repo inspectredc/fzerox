@@ -1,12 +1,10 @@
 #include "global.h"
 
-#ifdef NON_MATCHING
-// s2 s3 regalloc and stack
 extern Gfx D_8014940[];
 
-Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 format, s32 unkTmemFlag, s32 left, s32 top,
-                   s32 width, s32 height, u16 unkDrawFlag) {
-    s32 sp30;
+Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 format, s32 unkTmemFlag, s32 arg5,
+                   s32 arg6, s32 width, s32 height, u16 unkDrawFlag) {
+    bool usedPrimitives;
     u8* texPtr;
     s32 numBlocks;
     s32 blockHeight;
@@ -15,21 +13,19 @@ Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 for
     s32 row;
     s32 remainingHeight;
     s32 blockWidth = width;
-    bool usedPrimitives;
 
     tmem = 0x1000;
     if (unkTmemFlag == 1) {
         tmem = 0x800;
         pixelSize = 1;
     } else {
-        // UB pixelSize unset
+        //! @bug pixelSize uninitialised
     }
     blockHeight = (s32) (tmem / pixelSize) / blockWidth;
     if (unkDrawFlag & 4) {
         blockHeight = 2;
     }
     numBlocks = height / blockHeight;
-    texPtr = texture;
 
     usedPrimitives = false;
     if (unkDrawFlag & 1) {
@@ -52,13 +48,13 @@ Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 for
         gDPLoadTLUT_pal256(gfx++, tlutTexture);
     }
 
-    for (row = 0; row < numBlocks; row++) {
+    for (row = 0, texPtr = texture; row < numBlocks; row++) {
         gDPPipeSync(gfx++);
         gDPLoadTextureBlock(gfx++, texPtr, G_IM_FMT_CI, G_IM_SIZ_8b, blockWidth, blockHeight, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                             G_TX_NOLOD, G_TX_NOLOD);
-        gSPScisTextureRectangle(gfx++, left << 2, (top + (blockHeight * row)) << 2, (left + blockWidth) << 2,
-                                (top + (blockHeight * (row + 1))) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
+        gSPScisTextureRectangle(gfx++, arg5 << 2, (arg6 + (blockHeight * row)) << 2, (arg5 + blockWidth) << 2,
+                                (arg6 + (blockHeight * (row + 1))) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
 
         texPtr += blockWidth * blockHeight * pixelSize;
     }
@@ -68,15 +64,12 @@ Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 for
         gDPLoadTextureBlock(gfx++, texPtr, format, G_IM_SIZ_8b, blockWidth, remainingHeight, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                             G_TX_NOLOD, G_TX_NOLOD);
-        gSPScisTextureRectangle(gfx++, left << 2, (top + (blockHeight * row)) << 2, (left + blockWidth) << 2,
-                                ((top + (blockHeight * row) + (remainingHeight))) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10,
+        gSPScisTextureRectangle(gfx++, arg5 << 2, (arg6 + (blockHeight * row)) << 2, (arg5 + blockWidth) << 2,
+                                ((arg6 + (blockHeight * row) + (remainingHeight))) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10,
                                 1 << 10);
     }
     return gfx;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/18410/func_8007E410.s")
-#endif
 
 void func_8007ECCC(u16* arg0, s32 arg1) {
     s32 i;

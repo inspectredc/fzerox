@@ -1,29 +1,30 @@
 #include "global.h"
 
-// Todo: Migrate these into appropriate functions
-static const char devrostr0[] = "========================================================\n";
-static const char devrostr1[] = "LBA %d, dist 0x%x-0x%x-0x%x , %dLBAs\n";
-static const char devrostr2[] = "========================================================\n";
-
 extern OSMesgQueue D_800DCA68;
 
-s32 func_800750B0(s32 arg0, void* arg1, s32 arg2, s32 arg3) {
+s32 func_800750B0(s32 startLBA, void* arg1, u32 numBytes, size_t size) {
     void* sp54;
-    s32 sp4C[2];
+    s32 sp50;
+    s32 numLBAs;
     s32 pad;
-    LEOCmd sp2C;
+    LEOCmd cmd;
     void* sp28;
 
-    LeoByteToLBA(arg0, arg2, sp4C);
-    osVirtualToPhysical((uintptr_t) arg1);
-    sp54 = (uintptr_t) arg1 + (uintptr_t) arg2;
+    LeoByteToLBA(startLBA, numBytes, &numLBAs);
+    osVirtualToPhysical(arg1);
+    sp54 = (uintptr_t) arg1 + numBytes;
     osVirtualToPhysical(sp54);
-    osVirtualToPhysical((uintptr_t) sp54 + (uintptr_t) arg3);
-    LeoReadWrite(&sp2C, 0, arg0, arg1, sp4C[0], &D_800DCA68);
-    osRecvMesg(&D_800DCA68, &sp28, 1);
-    bzero(sp54, arg3);
+    osVirtualToPhysical((uintptr_t) sp54 + size);
+    LeoReadWrite(&cmd, OS_READ, startLBA, arg1, numLBAs, &D_800DCA68);
+    osRecvMesg(&D_800DCA68, &sp28, OS_MESG_BLOCK);
+    bzero(sp54, size);
 
-    return sp4C[1];
+    PRINTF("========================================================\n");
+    PRINTF("LBA %d, dist 0x%x-0x%x-0x%x , %dLBAs\n", startLBA, sp54, size, arg1, numLBAs);
+    PRINTF("========================================================\n");
+
+    //! @bug sp50 uninitialised?
+    return sp50;
 }
 
 void func_i2_800FC730(void);

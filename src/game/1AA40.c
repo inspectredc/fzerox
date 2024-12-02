@@ -16,8 +16,7 @@ void func_80080A48(void) {
     for (i = 0, var_v1 = D_800E51B8; i < 3; i++, var_v1++) {
         var_v1->unk_00 = 0;
         var_v1->unk_04 = -1;
-        var_v1->unk_1A = 0;
-        var_v1->unk_18 = 0;
+        var_v1->unk_18 = var_v1->unk_1A = 0;
         var_v1->unk_06 = var_v1->unk_08 = var_v1->unk_0A = var_v1->unk_0C = var_v1->unk_0E = var_v1->unk_10 =
             var_v1->unk_12 = 0;
     }
@@ -56,7 +55,7 @@ unk_800E51B8* func_80080AA8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, u1
     var_v1->unk_12 = 2;
     var_v1->unk_14 = arg3;
     var_v1->unk_16 = arg4;
-    var_v1->unk_18 = 1;
+    var_v1->unk_18 = GPACK_RGBA5551(0, 0, 0, 1);
     var_v1->unk_1A = arg5;
     var_v1->unk_1C = arg6;
     return var_v1;

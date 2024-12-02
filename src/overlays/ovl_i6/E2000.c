@@ -1,7 +1,7 @@
 #include "global.h"
 #include "ovl_i6.h"
 #include "audio.h"
-#include "tex_assets.h"
+#include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B1E0.h"
 
 s8 D_i6_8011FAF0[30];
@@ -2187,16 +2187,16 @@ Gfx* Menu_OptionsDraw(Gfx* gfx) {
 
     gfx = func_80079BC8(gfx);
     if (D_i6_801247A8 != 1) {
-        gfx = func_8007B14C(gfx, func_800783AC(D_F000004), 8, 0, 0x130, 0xF0, 0, 2, 0, 0, 0, 0);
+        gfx = func_8007B14C(gfx, func_800783AC(D_F000004), 8, 0, 304, 240, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 0, 0);
     }
     if (D_i6_801247A8 != 0) {
         gfx = func_i6_8011D8C8(gfx);
     }
-    gfx = func_8007B14C(gfx, func_800783AC(D_F138AB8), 0x32, 4, 0x40, 0x40, 0, 2, 0, 0, 1, 0);
-    gfx = func_8007B14C(gfx, func_800783AC(D_F138AB8), 0xCE, 4, 0x40, 0x40, 0, 2, 0, 0, 0, 0);
+    gfx = func_8007B14C(gfx, func_800783AC(D_F138AB8), 0x32, 4, 64, 64, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 1, 0);
+    gfx = func_8007B14C(gfx, func_800783AC(D_F138AB8), 0xCE, 4, 64, 64, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 0, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_8007E410(gfx, func_800783AC(D_F26176C), func_800783AC(D_F25F070), 2, 1, 0x70, 0x16, 0x60, 0x18, 3);
+    gfx = func_8007E410(gfx, func_800783AC(D_F26176C), func_800783AC(D_F25F070), G_IM_FMT_CI, 1, 0x70, 0x16, 96, 24, 3);
 
     var_s5 = 60;
 
@@ -2218,17 +2218,17 @@ Gfx* Menu_OptionsDraw(Gfx* gfx) {
             gfx = func_8007DB28(gfx, 0);
         }
         optionTextureInfo = &option->optionTextureInfo;
-        gfx = func_8007E410(gfx, func_800783AC(optionTextureInfo->textureOffset), NULL, 2, 1, option->unk_0C + 0x1E,
-                            var_s5, optionTextureInfo->width, optionTextureInfo->height, 0);
+        gfx = func_8007E410(gfx, func_800783AC(optionTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
+                            option->unk_0C + 0x1E, var_s5, optionTextureInfo->width, optionTextureInfo->height, 0);
 
         if (!(option->flags & OPTIONS_REQUIRE_SELECTING)) {
-            gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, 2, 1, 0xBE, var_s5, 0x10, 0x10, 0);
-            gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, 2, 1, 0x109, var_s5, 0x10, 0x10, 0);
+            gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, G_IM_FMT_CI, 1, 0xBE, var_s5, 0x10, 0x10, 0);
+            gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, G_IM_FMT_CI, 1, 0x109, var_s5, 0x10, 0x10, 0);
             selectionStateTextureInfo = &option->selectionStateTextureInfo[gOptionsSelectionState[i]];
             temp_s4 = ((60 - selectionStateTextureInfo->width) / 2) + option->unk_10;
-            gfx =
-                func_8007E410(gfx, func_800783AC(selectionStateTextureInfo->textureOffset), NULL, 2, 1, temp_s4 + 0xD0,
-                              var_s5, selectionStateTextureInfo->width, selectionStateTextureInfo->height, 0);
+            gfx = func_8007E410(gfx, func_800783AC(selectionStateTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
+                                temp_s4 + 0xD0, var_s5, selectionStateTextureInfo->width,
+                                selectionStateTextureInfo->height, 0);
         }
         var_s5 += var_s7;
     }
@@ -2243,17 +2243,17 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
 
-    gfx = func_8007E410(gfx, func_800783AC(D_F2629A8), func_800783AC(D_F25F070), 2, 1, arg1 + 0xC, arg2 + 0xA, 0x80,
-                        0x20, 3);
+    gfx = func_8007E410(gfx, func_800783AC(D_F2629A8), func_800783AC(D_F25F070), G_IM_FMT_CI, 1, arg1 + 0xC, arg2 + 0xA,
+                        128, 32, 3);
 
     gDPPipeSync(gfx++);
     gfx = func_8007DB28(gfx, 0);
-    gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, 2, 1, arg1 + 0x18, arg2 + 0x32, 0x10, 0x10, 0);
-    gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, 2, 1, arg1 + 0x63, arg2 + 0x32, 0x10, 0x10, 0);
+    gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, G_IM_FMT_CI, 1, arg1 + 0x18, arg2 + 0x32, 16, 16, 0);
+    gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, G_IM_FMT_CI, 1, arg1 + 0x63, arg2 + 0x32, 16, 16, 0);
     dataClearTextureInfo = &gOptionsAllDataClearSelection[gOptionsSelectionState[gOptionsCurrentRow]];
     sp54 = (60 - dataClearTextureInfo->width) / 2;
-    return func_8007E410(gfx, func_800783AC(dataClearTextureInfo->textureOffset), NULL, 2, 1, arg1 + sp54 + 0x2A,
-                         arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);
+    return func_8007E410(gfx, func_800783AC(dataClearTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
+                         arg1 + sp54 + 0x2A, arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);
 }
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011D394.s")

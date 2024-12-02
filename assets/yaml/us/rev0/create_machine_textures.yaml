@@ -1,0 +1,396 @@
+:config:
+  offset: 0x166660
+  segments:
+    - [0x4,  0x166660]
+  header:
+    code:
+      - '#include "assets/create_machine_textures.h"'
+    header:
+      - '#include "gfx.h"'
+
+aCreateMachinePartsTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0x0
+  symbol: aCreateMachinePartsTex
+
+aCreateMachineDesignTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0x180
+  symbol: aCreateMachineDesignTex
+
+aCreateMachineSettingsTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0x300
+  symbol: aCreateMachineSettingsTex
+
+aCreateMachineMarkTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0x480
+  symbol: aCreateMachineMarkTex
+
+aCreateMachineColorTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0x600
+  symbol: aCreateMachineColorTex
+
+aCreateMachineBodyTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0x780
+  symbol: aCreateMachineBodyTex
+
+aCreateMachineLineTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0x900
+  symbol: aCreateMachineLineTex
+
+aCreateMachineNumberTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0xA80
+  symbol: aCreateMachineNumberTex
+
+aCreateMachineCockpitTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0xC00
+  symbol: aCreateMachineCockpitTex
+
+aCreateMachineSaveAsTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0xD80
+  symbol: aCreateMachineSaveAsTex
+
+aCreateMachineUseTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0xF00
+  symbol: aCreateMachineUseTex
+
+aCreateMachineClearTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 24
+  height: 16
+  offset: 0x1080
+  symbol: aCreateMachineClearTex
+
+D_4001200:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x1200
+  symbol: D_4001200
+
+D_4001440:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x1440
+  symbol: D_4001440
+
+D_4001680:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x1680
+  symbol: D_4001680
+
+D_40018C0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x18C0
+  symbol: D_40018C0
+
+D_4001B00:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x1B00
+  symbol: D_4001B00
+
+D_4001D40:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x1D40
+  symbol: D_4001D40
+
+D_4001F80:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x1F80
+  symbol: D_4001F80
+
+D_40021C0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x21C0
+  symbol: D_40021C0
+
+D_4002400:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x2400
+  symbol: D_4002400
+
+D_4002640:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x2640
+  symbol: D_4002640
+
+D_4002880:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x2880
+  symbol: D_4002880
+
+D_4002AC0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x2AC0
+  symbol: D_4002AC0
+
+D_4002D00:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x2D00
+  symbol: D_4002D00
+
+D_4002F40:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 16
+  offset: 0x2F40
+  symbol: D_4002F40
+
+D_4003140:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 16
+  offset: 0x3140
+  symbol: D_4003140
+
+D_4003340:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 32
+  height: 16
+  offset: 0x3340
+  symbol: D_4003340
+
+D_4003540:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x3540
+  symbol: D_4003540
+
+D_4003840:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x3840
+  symbol: D_4003840
+
+D_4003B40:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x3B40
+  symbol: D_4003B40
+
+D_4003E40:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x3E40
+  symbol: D_4003E40
+
+D_4004140:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x4140
+  symbol: D_4004140
+
+D_4004440:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x4440
+  symbol: D_4004440
+
+D_4004740:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x4740
+  symbol: D_4004740
+
+D_4004A40:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x4A40
+  symbol: D_4004A40
+
+D_4004D40:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x4D40
+  symbol: D_4004D40
+
+D_4005040:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x5040
+  symbol: D_4005040
+
+D_4005340:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x5340
+  symbol: D_4005340
+
+D_4005640:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x5640
+  symbol: D_4005640
+
+D_4005940:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x5940
+  symbol: D_4005940
+
+D_4005C40:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x5C40
+  symbol: D_4005C40
+
+D_4005F40:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 16
+  offset: 0x5F40
+  symbol: D_4005F40

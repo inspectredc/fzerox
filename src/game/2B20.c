@@ -536,7 +536,7 @@ void func_80069700(void) {
     }
 
     for (i = 0; i < 4; i++) {
-        if (__osMotorAccess(&D_800DCE98[i].pfs, 0) == 0) {
+        if (osMotorStop(&D_800DCE98[i].pfs) == 0) {
             D_800DCE98[i].unk_74 = 1;
         } else {
             D_800DCE98[i].unk_74 = 0;
@@ -594,7 +594,7 @@ void func_80069820(void) {
     i = 4;
     var_s5 = &D_800DCE80[4];
 
-    osRecvMesg(&D_800DCA80, &D_800E12B0, 1);
+    osRecvMesg(&D_800DCA80, &D_800E12B0, OS_MESG_BLOCK);
     osContGetReadData(D_800DCE80);
     do {
         var_s0--;
@@ -660,7 +660,7 @@ void func_80069820(void) {
                 D_800DD180.unk_82 |= var_s0->unk_82;
                 if (var_s0->unk_78 != 0) {
                     if (osMotorInit(&D_800DCA80, &var_s0->pfs, i) == 0) {
-                        __osMotorAccess(&var_s0->pfs, 0);
+                        osMotorStop(&var_s0->pfs);
                         var_s0->unk_74 = 1;
                     } else {
                         var_s0->unk_74 = 0;
@@ -672,7 +672,7 @@ void func_80069820(void) {
                     var_s0->unk_78 = var_s0->unk_76;
                 } else if ((var_s0->unk_72 == 0) || (D_800DCCC8 != 0)) {
                     if ((var_s0->unk_74 == 1) && ((var_s0->unk_76 == 1) || !(((i << 5) + D_800CCFB0) & 0x7F))) {
-                        if (__osMotorAccess(&var_s0->pfs, 0) == 0) {
+                        if (osMotorStop(&var_s0->pfs) == 0) {
                             var_s0->unk_76 = 0;
                         } else {
                             var_s0->unk_74 = 0;
@@ -688,14 +688,14 @@ void func_80069820(void) {
                     if (var_s0->unk_88 >= 1000) {
                         var_s0->unk_88 -= 1000;
                         if (var_s0->unk_76 == 0) {
-                            if (__osMotorAccess(&var_s0->pfs, 1) == 0) {
+                            if (osMotorStart(&var_s0->pfs) == 0) {
                                 var_s0->unk_76 = 1;
                             } else {
                                 var_s0->unk_74 = 0;
                             }
                         }
                     } else if (var_s0->unk_76 == 1) {
-                        if (__osMotorAccess(&var_s0->pfs, 0) == 0) {
+                        if (osMotorStop(&var_s0->pfs) == 0) {
                             var_s0->unk_76 = 0;
                         } else {
                             var_s0->unk_74 = 0;
@@ -722,7 +722,7 @@ void func_80069D44(void) {
     osContInit(&D_800DCA80, &sp53, D_800DCE70);
     D_800DD228 = 0;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < MAXCONTROLLERS; i++) {
 
         D_800DCE98[i].unk_6B = D_800DCE70[i].errno;
         D_800DCE98[i].unk_72 = D_800DCE98[i].unk_74 = D_800DCE98[i].unk_76 = D_800DCE98[i].unk_78 = 0;
@@ -731,7 +731,7 @@ void func_80069D44(void) {
             D_800DD218[D_800DD228] = i;
             D_800DD228++;
             if (osMotorInit(&D_800DCA80, &D_800DCE98[i].pfs, i) == 0) {
-                __osMotorAccess(&D_800DCE98[i].pfs, 0);
+                osMotorStop(&D_800DCE98[i].pfs);
                 D_800DCE98[i].unk_74 = 1;
             }
         }

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "tex_assets.h"
+#include "assets/segment_2B9EA0.h"
 
 unk_80077D50 D_i2_80106F50[] = { { 17, D_F120644, 16, 16, 0xD7 }, { 0 } };
 unk_80077D50 D_i2_80106F70[] = { { 17, D_F120720, 16, 16, 0xD6 }, { 0 } };
@@ -194,6 +194,8 @@ unk_80077D50* D_i2_80108170[] = {
     D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
 };
 
+//! @bug These textures actually have width 16 and height 8.
+// They instead should be cropped or reformatted rather than setting the width here
 unk_80077D50 D_i2_80108518[] = { { 4, D_F125434, 8, 8, 0 }, { 0 } };
 unk_80077D50 D_i2_80108538[] = { { 4, D_F125474, 8, 8, 0 }, { 0 } };
 unk_80077D50 D_i2_80108558[] = { { 4, D_F1254B4, 8, 8, 0 }, { 0 } };

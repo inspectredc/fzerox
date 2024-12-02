@@ -35,7 +35,7 @@ void func_8007F520(void) {
     for (i = 0; i < 30; i++) {
     start:
         do {
-            osRecvMesg(&D_800DCAE0, &msg, 1);
+            osRecvMesg(&D_800DCAE0, &msg, OS_MESG_BLOCK);
         } while (msg != (OSMesg) 0x1A);
 
         LeoResetClear();
@@ -59,7 +59,7 @@ void func_800762B0(LEODiskID);
 OSMesgQueue D_800E42D0;
 OSMesg D_800E42E8[16];
 
-extern s32 D_80428610;
+extern s32 D_i1_80428610;
 extern LEODiskID D_i1_80428618;
 extern LEODiskID leoBootID;
 
@@ -69,7 +69,7 @@ void func_8007F5EC(void) {
     osCreateMesgQueue(&D_800E42D0, D_800E42E8, ARRAY_COUNT(D_800E42E8));
     func_i1_80404AEC("01", "EFZE");
     if (func_i1_80403F4C(0x101, D_800E42E8, ARRAY_COUNT(D_800E42E8)) < 0) {
-        switch (D_80428610) {
+        switch (D_i1_80428610) {
             case 0x29:
                 return;
             case 0x2A:
@@ -81,7 +81,7 @@ void func_8007F5EC(void) {
     }
 
 label:
-    if (D_80428610 == 0xF9) {
+    if (D_i1_80428610 == 0xF9) {
         func_8007F520();
     }
     func_i1_8040428C();
@@ -95,7 +95,7 @@ label:
             if (func_i1_804043B8(1) < 0) {}
             break;
         case -1:
-            switch (D_80428610) {
+            switch (D_i1_80428610) {
                 case 42:
                     break;
                 case 23:

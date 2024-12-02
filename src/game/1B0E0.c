@@ -1429,8 +1429,6 @@ void func_80086400(unk_struct_1DC* arg0) {
     s32 temp2 = temp[arg0->unk_00];
     Vp* sp24;
     ScissorBox* sp20;
-    f32 var_fv0;
-    f32 var_fv1;
 
     switch (temp2) {
         case 0:
@@ -1487,45 +1485,19 @@ void func_80086400(unk_struct_1DC* arg0) {
             break;
     }
 
-    var_fv0 = sp24->vp.vscale[0] * 0.25f;
-    arg0->unk_108 = var_fv0;
-    arg0->unk_F8 = var_fv0;
-    arg0->unk_E8 = var_fv0;
-
-    var_fv0 = sp24->vp.vscale[1] * 0.25f;
-    arg0->unk_10C = var_fv0;
-    arg0->unk_FC = var_fv0;
-    arg0->unk_EC = var_fv0;
+    arg0->unk_E8 = arg0->unk_F8 = arg0->unk_108 = sp24->vp.vscale[0] * 0.25f;
+    arg0->unk_EC = arg0->unk_FC = arg0->unk_10C = sp24->vp.vscale[1] * 0.25f;
 
     arg0->unk_F0 = sp24->vp.vtrans[0] * 0.25f;
     arg0->unk_F4 = sp24->vp.vtrans[1] * 0.25f;
 
-    var_fv1 = arg0->unk_F0 - arg0->unk_E8;
-    arg0->unk_110 = var_fv1;
-    arg0->unk_100 = var_fv1;
-    var_fv1 = arg0->unk_F4 - arg0->unk_EC;
-    arg0->unk_114 = var_fv1;
-    arg0->unk_104 = var_fv1;
+    arg0->unk_100 = arg0->unk_110 = arg0->unk_F0 - arg0->unk_E8;
+    arg0->unk_104 = arg0->unk_114 = arg0->unk_F4 - arg0->unk_EC;
 
-    var_fv0 = sp20->left;
-    arg0->unk_D0 = var_fv0;
-    arg0->unk_C0 = var_fv0;
-    arg0->unk_B0 = var_fv0;
-
-    var_fv0 = sp20->top;
-    arg0->unk_D4 = var_fv0;
-    arg0->unk_C4 = var_fv0;
-    arg0->unk_B4 = var_fv0;
-
-    var_fv0 = sp20->right;
-    arg0->unk_D8 = var_fv0;
-    arg0->unk_C8 = var_fv0;
-    arg0->unk_B8 = var_fv0;
-
-    var_fv0 = sp20->bottom;
-    arg0->unk_DC = var_fv0;
-    arg0->unk_CC = var_fv0;
-    arg0->unk_BC = var_fv0;
+    arg0->unk_B0 = arg0->unk_C0 = arg0->unk_D0 = sp20->left;
+    arg0->unk_B4 = arg0->unk_C4 = arg0->unk_D4 = sp20->top;
+    arg0->unk_B8 = arg0->unk_C8 = arg0->unk_D8 = sp20->right;
+    arg0->unk_BC = arg0->unk_CC = arg0->unk_DC = sp20->bottom;
 }
 
 void func_8008681C(unk_struct_1DC*, unk_struct_F8*, unk_800E5D70*);
@@ -2621,8 +2593,7 @@ void func_80089A74(u8* arg0) {
     arg0[8] = (s32) gRacers->unk_2E0;
     arg0[9] = (s32) gRacers->unk_2E4;
     arg0[10] = (s32) gRacers->unk_2E8;
-    var_v0 = gRacers->unk_164;
-    arg0[1] = var_v0;
+    arg0[1] = var_v0 = gRacers->unk_167;
     if (var_v0 == 1) {
         temp_v0 = D_800F8360[gRacers->character];
         arg0[2] = temp_v0[0];
@@ -3138,8 +3109,8 @@ void func_8008C7C8(void) {
         D_800F80A4 = 5.0f;
     }
     func_80088D28();
-    osRecvMesg(&D_800DCAB0, &sp68, 0);
-    osRecvMesg(&D_800DCAB0, &sp68, 1);
+    osRecvMesg(&D_800DCAB0, &sp68, OS_MESG_NOBLOCK);
+    osRecvMesg(&D_800DCAB0, &sp68, OS_MESG_BLOCK);
     for (i = 0; i < D_800E5EC0; i++) {
         gRacers[i].unk_00 = i;
         func_80116C74(&gRacers[i]);

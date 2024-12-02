@@ -1,7 +1,7 @@
 #include "global.h"
 #include "ovl_i3.h"
 #include "fzx_racer.h"
-#include "tex_assets.h"
+#include "assets/segment_2B9EA0.h"
 
 s32 D_80141900;
 s32 D_i3_80141904;
@@ -288,7 +288,7 @@ void func_i3_80116C74(Racer* arg0) {
     D_80141900 = 0;
     if (arg0->unk_00 == 0) {
         func_i3_80116974();
-        if (D_800F8514 < 0x18) {
+        if (D_800F8514 < ARRAY_COUNT(D_i3_8013DB80)) {
             func_80077CF0(D_i3_8013DB80[D_800F8514], 0x400, D_i3_8013DBE8);
         } else {
             for (i = 0; i < 0x200; i += 2) {

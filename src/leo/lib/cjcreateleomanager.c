@@ -65,7 +65,7 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
         status = ((status & 0xFF000000) >> 0x18);
         dummy2 = 0x3ED98F23;
         if (status != 0xC3) {
-            while (1) {}
+            while (true) {}
         }
 
         dummy2 *= status;

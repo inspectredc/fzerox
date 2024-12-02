@@ -13,7 +13,7 @@ void func_80067A10(void*);
 void func_80067060(void) {
     osInitialize();
     osCreateMesgQueue(&D_800DCAF8, &D_800DCC80, 1);
-    osSetEventMesg(0xEU, &D_800DCAF8, (void*) 0x1B);
+    osSetEventMesg(OS_EVENT_PRENMI, &D_800DCAF8, (void*) 0x1B);
     osCreateThread(&D_800DC030, 1, func_800678B8, NULL, &D_800D8430, 0x64);
     osStartThread(&D_800DC030);
 }
@@ -55,13 +55,6 @@ void func_800671A8(void) {
 
 extern FrameBuffer* D_800DCCD0[];
 
-// Segments
-extern u8 D_72120[];
-extern u8 D_98080[];
-extern u8 D_80428F70[];
-extern u8 D_8042BC40[];
-extern u8 D_80403010[];
-
 extern OSMesgQueue D_800DCA68;
 extern OSMesgQueue D_800DCA80;
 extern OSMesgQueue D_800DCA98;
@@ -74,7 +67,7 @@ extern OSMesg D_800DCC2C;
 extern OSMesg D_800DCC30;
 extern OSMesg D_800DCC34;
 extern OSMesg D_800DCC38;
-extern OSMesg D_800DCC40;
+extern OSMesg D_800DCC40[16];
 extern OSMesg D_800DCC84;
 extern OSThread D_800DC390;
 extern OSThread D_800DC540;
@@ -112,12 +105,12 @@ void func_800671EC(void* arg0) {
     osCreateMesgQueue(&D_800DCA98, &D_800DCC30, 1);
     osCreateMesgQueue(&D_800DCAB0, &D_800DCC34, 1);
     osCreateMesgQueue(&D_800DCAC8, &D_800DCC38, 1);
-    osCreateMesgQueue(&D_800DCAE0, &D_800DCC40, 0x10);
+    osCreateMesgQueue(&D_800DCAE0, D_800DCC40, ARRAY_COUNT(D_800DCC40));
     osCreateMesgQueue(&D_800DCA80, &D_800DCC2C, 1);
     osCreateMesgQueue(&D_800DCB10, &D_800DCC84, 1);
-    osSetEventMesg(5, &D_800DCA80, (OSMesg) 0xB);
-    osSetEventMesg(4, &D_800DCAE0, (OSMesg) 0x18);
-    osSetEventMesg(9, &D_800DCAE0, (OSMesg) 0x19);
+    osSetEventMesg(OS_EVENT_SI, &D_800DCA80, (OSMesg) 0xB);
+    osSetEventMesg(OS_EVENT_SP, &D_800DCAE0, (OSMesg) 0x18);
+    osSetEventMesg(OS_EVENT_DP, &D_800DCAE0, (OSMesg) 0x19);
     osViSetEvent(&D_800DCAE0, (OSMesg) 0x1A, 1U);
     D_800DCCC8 = 0;
     D_800DCCCC = func_800CC220();
@@ -135,7 +128,7 @@ void func_800671EC(void* arg0) {
 
     while (osViGetCurrentFramebuffer() != D_800DCCD0[0]) {}
 
-    osViBlack(0);
+    osViBlack(false);
 
     if (osAppNMIBuffer[15] != 0x20DE1529) {
         if (osGetMemSize() >= 0x800000) {
@@ -178,7 +171,7 @@ void func_800671EC(void* arg0) {
 
     while (osViGetCurrentFramebuffer() != D_800DCCD0[0]) {}
 
-    osViBlack(0);
+    osViBlack(false);
 
     if ((D_800CCFC0 != 0) && D_800DCCCC) {
         func_8007F904();
@@ -195,8 +188,8 @@ void func_800671EC(void* arg0) {
         osStartThread(&D_800DC540);
     }
 
-    while (1) {
-        osRecvMesg(&D_800DCAE0, &msg, 1);
+    while (true) {
+        osRecvMesg(&D_800DCAE0, &msg, OS_MESG_BLOCK);
         if (msg == (OSMesg) 0x18) {
             switch (D_800CCFA0) {
                 case 1:
@@ -223,11 +216,11 @@ void func_800671EC(void* arg0) {
                     break;
             }
         } else if (msg == (OSMesg) 0x1A) {
-            osSendMesg(&D_800DCA98, (OSMesg) 0x1F, 0);
+            osSendMesg(&D_800DCA98, (OSMesg) 0x1F, OS_MESG_NOBLOCK);
             if ((++D_800CCFB0 - D_800CCFB4) >= D_800CCFB8) {
                 D_800CCFB4 = D_800CCFB0;
                 D_800CCFB8 = D_800CCFBC;
-                osSendMesg(&D_800DCAB0, (OSMesg) 0x29, 0);
+                osSendMesg(&D_800DCAB0, (OSMesg) 0x29, OS_MESG_NOBLOCK);
             }
         } else if (msg == (OSMesg) 0x16) {
             osWritebackDCacheAll();
@@ -246,7 +239,7 @@ void func_800671EC(void* arg0) {
                 func_8006715C();
             }
         } else if (msg == (OSMesg) 0x19) {
-            osSendMesg(&D_800DCAC8, (OSMesg) 0x2A, 0);
+            osSendMesg(&D_800DCAC8, (OSMesg) 0x2A, OS_MESG_NOBLOCK);
         }
     }
 }
@@ -274,17 +267,17 @@ void func_800678B8(void* arg0) {
     } else {
         osViSetMode(&D_800D2660);
     }
-    osViSetSpecialFeatures(2);
-    osViSetSpecialFeatures(8);
-    osViSetSpecialFeatures(0x20);
-    osViSetSpecialFeatures(0x80);
-    osViBlack(1);
+    osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
+    osViSetSpecialFeatures(OS_VI_GAMMA_DITHER_OFF);
+    osViSetSpecialFeatures(OS_VI_DIVOT_OFF);
+    osViSetSpecialFeatures(OS_VI_DITHER_FILTER_OFF);
+    osViBlack(true);
     osCreatePiManager(0x96, &D_800DCA50, &D_800DCB28, 0x40);
     D_800DCCDC = osCartRomInit();
     D_800DCCE0 = osDriveRomInit();
     Fault_Init();
-    Fault_SetFrameBuffer(&D_801D9800, 0x140, 0x10);
-    osCreateThread(&D_800DC1E0, 3, func_800671EC, NULL, &D_800D8830, 0x63);
+    Fault_SetFrameBuffer(&D_801D9800, SCREEN_WIDTH, 16);
+    osCreateThread(&D_800DC1E0, 3, func_800671EC, NULL, &D_800D8830, 99);
     if (D_800CCFC8 != 0) {
         osStartThread(&D_800DC1E0);
     }
@@ -303,7 +296,7 @@ void func_80067A10(void* arg0) {
         func_800BA248();
     }
     D_800DCCC8 = 1;
-    osViBlack(1);
+    osViBlack(true);
     osViSetYScale(1.0f);
     if ((D_800CCFC0 != 0) && D_800DCCCC) {
         LeoReset();

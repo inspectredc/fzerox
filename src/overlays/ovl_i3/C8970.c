@@ -1,7 +1,7 @@
 #include "global.h"
 #include "fzx_racer.h"
 #include "ovl_i3.h"
-#include "tex_assets.h"
+#include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
 
 unk_80141FF0 D_i3_80141FF0[4];

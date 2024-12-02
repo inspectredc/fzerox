@@ -151,11 +151,11 @@ extern OSMesg D_i1_80428608;
 
 s32 func_i1_804065C0(void) {
     if (D_i1_80428600 != 0) {
-        while (osRecvMesg(&D_i1_8042A5E8, &D_i1_80428610, 0) < 0) {
-            osSendMesg(D_i1_80428604, D_i1_80428608, 1);
+        while (osRecvMesg(&D_i1_8042A5E8, &D_i1_80428610, OS_MESG_NOBLOCK) < 0) {
+            osSendMesg(D_i1_80428604, D_i1_80428608, OS_MESG_BLOCK);
         }
     } else {
-        osRecvMesg(&D_i1_8042A5E8, &D_i1_80428610, 1);
+        osRecvMesg(&D_i1_8042A5E8, &D_i1_80428610, OS_MESG_BLOCK);
     }
     if (D_i1_80428610 != NULL) {
         return -1;

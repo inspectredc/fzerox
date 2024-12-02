@@ -1399,8 +1399,8 @@ void func_800A4DF0(void) {
 
     D_800F8510 = &D_802A6B40[D_800F8514];
     func_8007402C(D_800F8514);
-    func_800747EC(D_8010B7B0.unk_000[2]);
-    func_8009CED0(D_8010B7B0.unk_000[2]);
+    func_800747EC(D_8010B7B0.unk_002);
+    func_8009CED0(D_8010B7B0.unk_002);
     func_80074634(D_800F8510);
     func_8009DEAC(D_800F8510);
     if (D_800F8510->unk_04 >= 24) {
@@ -2498,9 +2498,9 @@ Gfx* func_800A95B4(Gfx* gfx) {
 
 s32 func_800AA394(void) {
     s32 i;
-    u32 var_v1 = D_8010B7B0.unk_000[1];
+    u32 var_v1 = D_8010B7B0.unk_001;
 
-    for (i = 0; i < D_8010B7B0.unk_000[1]; i++) {
+    for (i = 0; i < D_8010B7B0.unk_001; i++) {
 
         D_8010B7B0.unk_020[i].unk_10 &= ~0x600;
         D_8010B7B0.unk_020[i].unk_10 &= ~0x38000;
@@ -2512,7 +2512,7 @@ s32 func_800AA394(void) {
                   D_8010B7B0.unk_020[i].unk_10 * (0xFE - i) + D_8010B7B0.unk_520[i] * (0x93DE - i * 2);
     }
 
-    for (i = 0; i < D_8010B7B0.unk_000[1]; i++) {
+    for (i = 0; i < D_8010B7B0.unk_001; i++) {
         var_v1 += (D_8010B7B0.unk_5A0[i] * i);
         var_v1 += (D_8010B7B0.unk_5E0[i] * (i + 0x10));
         var_v1 += (D_8010B7B0.unk_620[i] * (i + 0x80));

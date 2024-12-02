@@ -1,6 +1,6 @@
 #include "global.h"
 #include "ovl_i6.h"
-#include "tex_assets.h"
+#include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B1E0.h"
 
 s16 D_i6_8011F910[240];

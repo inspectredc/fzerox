@@ -291,7 +291,7 @@ void func_800B6994(void) {
 
     msg = ((gThreadCmdReadPos & 0xFF) << 8) | (gThreadCmdWritePos & 0xFF);
 
-    if (osSendMesg(gThreadCmdProcQueuePtr, msg, 0) != -1) {
+    if (osSendMesg(gThreadCmdProcQueuePtr, msg, OS_MESG_NOBLOCK) != -1) {
         gThreadCmdReadPos = gThreadCmdWritePos;
     }
 }
