@@ -1,5 +1,4 @@
 :config:
-  offset: 0x1B8550
   segments:
     - [0x04,  0x1B8550]
   external_files:

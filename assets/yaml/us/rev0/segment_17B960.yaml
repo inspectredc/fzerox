@@ -1,5 +1,4 @@
 :config:
-  offset: 0x17B1E0
   segments:
     - [0x03,  0x17B1E0]
   header:
@@ -2488,7 +2487,6 @@ D_302A128:
   offset: 0x2A128
   symbol: D_302A128
 
-# Potentially part of D_302A128
 D_302A628:
   type: VTX
   count: 6
