@@ -60,9 +60,13 @@
       - [0x1B8550, .data, segment_1B8550/segment_1B8550]
 
   - name: segment_1E23F0
-    type: bin
+    exclusive_ram_id: segment_07
+    type: code
+    dir: assets
     vram: 0x07000000
     start: 0x1E23F0
+    subsegments:
+      - [0x1E23F0, .data, segment_1E23F0/segment_1E23F0]
 
   - name: mio0/segment_2
     type: bin

@@ -1,5 +1,4 @@
 :config:
-  offset: 0x145B70
   segments:
     - [0x07,  0x145B70]
   header:
@@ -8,23 +7,23 @@
     header:
       - '#include "gfx.h"'
 
-D_7000000:
+aDDYesTex:
   type: TEXTURE
   ctype: u8
   format: I8
   width: 16
   height: 16
   offset: 0x0
-  symbol: D_7000000
+  symbol: aDDYesTex
 
-D_7000100:
+aDDNoTex:
   type: TEXTURE
   ctype: u8
   format: I8
   width: 16
   height: 16
   offset: 0x100
-  symbol: D_7000100
+  symbol: aDDNoTex
 
 D_7000200:
   type: TEXTURE

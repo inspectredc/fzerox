@@ -1,5 +1,4 @@
 :config:
-  offset: 0x17B1E0
   segments:
     - [0x03,  0x17B1E0]
   header:
