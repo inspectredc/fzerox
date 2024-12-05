@@ -54,7 +54,7 @@
       - [0x7FD70, c, lib/readcapacity]
       - [0x7FE10, c, lib/leotranslat]
       - [0x80170, c, lib/leotimer]
-      - [0x80870, hasm] # libleo_bootdisk and libleo_bootstrap?
+      - [0x80870, hasm]
       - [0x80960, data]
       - [0x83850, c, lib/leowrite]
       - [0x83A20, c, lib/cjcreateleomanager]

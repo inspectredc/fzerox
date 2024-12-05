@@ -14,6 +14,10 @@ def main(argv):
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
 
+    # Check if any mio0 segments to decompress
+    if not os.path.exists(mio0_dir):
+        sys.exit()
+
     for bin in os.listdir(mio0_dir):
         print("Decompressing: " + bin)
         mio0in = os.path.join(mio0_dir, bin)

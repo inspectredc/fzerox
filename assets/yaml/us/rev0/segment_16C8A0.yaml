@@ -5,7 +5,7 @@
     - [0x08,  0x16C8A0]
   header:
     code:
-      - '#include "assets/mio0_segment_1.h"'
+      - '#include "assets/segment_16C8A0.h"'
     header:
       - '#include "gfx.h"'
 
@@ -638,6 +638,11 @@ D_801C018:
   symbol: D_801C018
 
 # 0x18 sized thing
+D_801D018:
+  type: BLOB
+  size: 0x18
+  offset: 0x1D018
+  symbol: D_801D018
 
 D_801D030:
   type: GFX
@@ -668,6 +673,11 @@ D_801D960:
   symbol: D_801D960
 
 # 0x18 sized thing
+D_801E160:
+  type: BLOB
+  size: 0x18
+  offset: 0x1E160
+  symbol: D_801E160
 
 D_801E178:
   type: GFX

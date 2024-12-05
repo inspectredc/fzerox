@@ -41,6 +41,8 @@ __osSiRawReadIo = 0x800BED40;
 __osProbeTLB = 0x800BFE30;
 osGetCount = 0x800C0100;
 sqrtf = 0x800C1760;
+__osSetCause = 0x800BB9A0;
+__osSetCount = 0x800BE1A0;
 
 _Printf = 0x800C1DE0;
 

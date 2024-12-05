@@ -67,10 +67,12 @@
       - [0x4FFB0, c, audio/thread]
       - [0x511D0, c, audio/general]
 
-      # TODO: Figure out these half functions/microcodes
-      - [0x554E0, bin] # includes func_800BB4E0
+      # Leo Boot
+      - [0x554E0, c, leo_bootdisk]
+      - [0x55940, hasm, ../../../src/leo_bootstrap] # have to redirect to unextracted hasm
 
       # Libultra
+      - [0x559A0, hasm, libultra/os/setcause]
       - [0x559B0, c, libultra/os/sendmesg]
       - [0x55B00, c, libultra/os/stopthread]
       - [0x55BC0, c, libultra/os/recvmesg]

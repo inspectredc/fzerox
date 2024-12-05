@@ -32,15 +32,19 @@ LEOasic_seq_ctl_shadow = 0x8042B340; //segment:leo
 LEOC2_Syndrome = 0x8042B490; //segment:leo
 LEOc2_param = 0x8042BBD0; //segment:leo size:0x10
 LEOdisk_type = 0x8042B348; //segment:leo
-leo_sys_read_cmd = 0x80428730; //segment:leo size:0x1C
+leo_sys_read_cmd = 0x80428730; //segment:leo size:0x1C type:u8
 LEOdrive_flag = 0x8042B344; //segment:leo
 LEOclr_que_flag = 0x8042B345; //segment:leo
-read_id_cmd = 0x80428750; //segment:leo
+read_id_cmd = 0x80428750; //segment:leo type:u8
 LEO_TempBuffer = 0x8042B3A0; //segment:leo
 __leoVersion = 0x8042BBE0; //segment:leo size:0x4
 asic_cur_status = 0x8042BC30; //segment:leo
 unit_atten = 0x8042BC34; //segment:leo
 mseq_tbl = 0x8042BBF0; //segment:leo
+
+LeoBootGame = 0x800BB4E0; //type:func
+__LeoBootGame2 = 0x800BB61C; //type:func
+__LeoBootGame3 = 0x800BB940; //type:func
 
 LeoGetKAdr = 0x80411760; //segment:leo
 LeoGetAAdr = 0x804122A0; //segment:leo
@@ -91,3 +95,5 @@ D_i7_8014BF30 = 0x8014BF30; //segment:ovl_i7 size:0x54
 func_i4_8011B0C8 = 0x8011B0C8; //segment:ovl_i4
 func_i4_8011B134 = 0x8011B134; //segment:ovl_i4
 func_i4_8011B1E4 = 0x8011B1E4; //segment:ovl_i4
+
+D_i11_800FC9F0 = 0x800FC9F0; //segment:ovl_i11 type:u8

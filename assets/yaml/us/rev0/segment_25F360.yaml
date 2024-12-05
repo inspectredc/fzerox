@@ -1,0 +1,170 @@
+:config:
+  segments:
+    - [0x0A,  0x25F360]
+  header:
+    code:
+      - '#include "assets/segment_25F360.h"'
+    header:
+      - '#include "gfx.h"'
+
+D_A000000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x0
+  symbol: D_A000000_25F360
+
+D_A001000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x1000
+  symbol: D_A001000_25F360
+
+D_A002000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x2000
+  symbol: D_A002000_25F360
+
+D_A003000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x3000
+  symbol: D_A003000_25F360
+
+D_A004000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x4000
+  symbol: D_A004000_25F360
+
+D_A005000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x5000
+  symbol: D_A005000_25F360
+
+D_A006000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x6000
+  symbol: D_A006000_25F360
+
+D_A007000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 128
+  height: 16
+  offset: 0x7000
+  symbol: D_A007000_25F360
+
+D_A008000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x8000
+  symbol: D_A008000_25F360
+
+D_A009000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x9000
+  symbol: D_A009000_25F360
+
+D_A00A000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0xA000
+  symbol: D_A00A000_25F360
+
+D_A00B000_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xB000
+  symbol: D_A00B000_25F360
+
+D_A00B240_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xB240
+  symbol: D_A00B240_25F360
+
+D_A00B480_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xB480
+  symbol: D_A00B480_25F360
+
+D_A00B6C0_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xB6C0
+  symbol: D_A00B6C0_25F360
+
+D_A00B900_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xB900
+  symbol: D_A00B900_25F360
+
+D_A00BB40_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xBB40
+  symbol: D_A00BB40_25F360
+
+D_A00BD80_25F360:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xBD80
+  symbol: D_A00BD80_25F360
