@@ -2,11 +2,11 @@
   segments:
     - [0x04,  0x1B8550]
   external_files:
-    - "assets/yaml/us/rev0/mio0_segment_1.yaml"
+    - "assets/yaml/us/rev0/segment_16C8A0.yaml"
   header:
     code:
       - '#include "assets/segment_1B8550.h"'
-      - '#include "assets/mio0_segment_1.h"'
+      - '#include "assets/segment_16C8A0.h"'
     header:
       - '#include "gfx.h"'
   tables:
@@ -628,20 +628,20 @@ aCountdownMrZeroMouthOpenTex:
   offset: 0xBA68
   symbol: aCountdownMrZeroMouthOpenTex
 
-aCongratulationsDL:
+aGameoverDL:
   type: GFX
   offset: 0xC270
-  symbol: aCongratulationsDL
+  symbol: aGameoverDL
 
 D_400C9B0:
   type: GFX
   offset: 0xC9B0
   symbol: D_400C9B0
 
-aExecuteCongratulationsDL:
+aExecuteGameoverDL:
   type: GFX
   offset: 0xC9C0
-  symbol: aExecuteCongratulationsDL
+  symbol: aExecuteGameoverDL
 
 D_400C9D0:
   type: GFX
@@ -750,23 +750,23 @@ D_400E958:
   offset: 0xE958
   symbol: D_400E958
 
-aCongratulationsFaceTex:
+aGameoverFaceTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
   offset: 0xEA68
-  symbol: aCongratulationsFaceTex
+  symbol: aGameoverFaceTex
 
-aCongratulationsSideTex:
+aGameoverSideTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 8
   height: 8
   offset: 0xEC68
-  symbol: aCongratulationsSideTex
+  symbol: aGameoverSideTex
 
 aFinalLapTex:
   type: TEXTURE

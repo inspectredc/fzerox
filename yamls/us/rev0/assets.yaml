@@ -26,10 +26,14 @@
     subsegments:
       - [0x166660, .data, create_machine_textures/create_machine_textures]
 
-  - name: mio0/segment_1
-    type: bin
+  - name: segment_16C8A0
+    exclusive_ram_id: segment_08
+    type: code
+    dir: assets
     vram: 0x08000000
     start: 0x16C8A0
+    subsegments:
+      - [0x16C8A0, .data, segment_16C8A0/segment_16C8A0]
 
   - name: segment_17B1E0
     exclusive_ram_id: segment_03
@@ -68,73 +72,126 @@
     subsegments:
       - [0x1E23F0, .data, segment_1E23F0/segment_1E23F0]
 
-  - name: mio0/segment_2
-    type: bin
+  - name: segment_22B0A0
+    exclusive_ram_id: segment_09
+    type: code
+    dir: assets
     vram: 0x09000000
     start: 0x22B0A0
+    subsegments:
+      - [0x22B0A0, .data, segment_22B0A0/segment_22B0A0]
 
-  - name: mio0/segment_3
-    type: bin
+  - name: segment_235130
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x235130
+    subsegments:
+      - [0x235130, .data, segment_235130/segment_235130]
 
-  - name: mio0/segment_4
-    type: bin
+  - name: segment_239A80
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x239A80
+    subsegments:
+      - [0x239A80, .data, segment_239A80/segment_239A80]
 
-  - name: mio0/segment_5
-    type: bin
+  - name: segment_23EC50
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x23EC50
+    subsegments:
+      - [0x23EC50, .data, segment_23EC50/segment_23EC50]
 
-  - name: mio0/segment_6
-    type: bin
+  - name: segment_243D90
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x243D90
+    subsegments:
+      - [0x243D90, .data, segment_243D90/segment_243D90]
 
-  - name: mio0/segment_7
-    type: bin
+  - name: segment_24A270
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x24A270
+    subsegments:
+      - [0x24A270, .data, segment_24A270/segment_24A270]
 
-  - name: mio0/segment_8
-    type: bin
+  - name: segment_2507F0
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x2507F0
+    subsegments:
+      - [0x2507F0, .data, segment_2507F0/segment_2507F0]
 
-  - name: mio0/segment_9
-    type: bin
+  - name: segment_255100
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x255100
+    subsegments:
+      - [0x255100, .data, segment_255100/segment_255100]
 
-  - name: mio0/segment_10
-    type: bin
+  - name: segment_259600
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x259600
+    subsegments:
+      - [0x259600, .data, segment_259600/segment_259600]
 
-  - name: mio0/segment_11
-    type: bin
+  - name: segment_25F360
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x25F360
+    subsegments:
+      - [0x25F360, .data, segment_25F360/segment_25F360]
 
-  - name: mio0/segment_12
-    type: bin
+  - name: segment_266C20
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x266C20
+    subsegments:
+      - [0x266C20, .data, segment_266C20/segment_266C20]
 
-  - name: mio0/segment_13
-    type: bin
+  - name: segment_26D780
+    exclusive_ram_id: segment_0A
+    type: code
+    dir: assets
     vram: 0x0A000000
     start: 0x26D780
+    subsegments:
+      - [0x26D780, .data, segment_26D780/segment_26D780]
 
-  - name: mio0/segment_14
-    type: bin
+  - name: segment_2738A0
+    exclusive_ram_id: segment_05
+    type: code
+    dir: assets
     vram: 0x05000000
     start: 0x2738A0
+    subsegments:
+      - [0x2738A0, .data, segment_2738A0/segment_2738A0]
 
   - name: segment_2747F0
     type: bin
+    vram: 0x0
     start: 0x2747F0
 
   - name: segment_2787F0

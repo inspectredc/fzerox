@@ -1816,7 +1816,7 @@ Gfx* func_i3_80121E70(Gfx* gfx, s32 arg1) {
     func_8006BC84(D_800DCCF0->unk_21988, NULL, D_i3_80141D0C, D_i3_80141D0C, D_i3_80141D0C, sp5C, 0.0f, sp64, 0.0f,
                   1.0f, 0.0f, sp80, sp84, sp88);
     gSPMatrix(gfx++, D_800DCCF0->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gfx++, aExecuteCongratulationsDL);
+    gSPDisplayList(gfx++, aExecuteGameoverDL);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
 

@@ -57,6 +57,7 @@ TARGET               := fzerox
 BUILD_DIR := build
 TOOLS	  := tools
 PYTHON	  := python3
+ROM	      := $(BUILD_DIR)/$(TARGET)_uncompressed.$(VERSION).$(REV).z64
 ROMC 	  := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).z64
 ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).elf
 LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).map
@@ -217,6 +218,7 @@ SPLAT           ?= $(PYTHON) $(TOOLS)/splat/split.py
 SPLAT_YAML      ?= $(TARGET).$(VERSION).$(REV).yaml
 
 MIO0			:= $(TOOLS)/mio0
+ENCRYPT_LIBLEO  := $(PYTHON) $(TOOLS)/encrypt_libleo.py
 EXTRACT_MIO0    := $(PYTHON) $(TOOLS)/decompressMio0Segments.py
 
 
@@ -357,6 +359,7 @@ $(BUILD_DIR)/src/libultra/os/%.o: CC := $(IDO53)
 $(BUILD_DIR)/src/libultra/libc/%.o: CC := $(IDO53)
 
 # libleo
+$(BUILD_DIR)/src/leo_bootdisk.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO53) -- $(AS) $(ASFLAGS) --
 $(BUILD_DIR)/src/leo/lib/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO53) -- $(AS) $(ASFLAGS) --
 else
 # directory flags
@@ -480,9 +483,15 @@ disasm:
 #### Various Recipes ####
 
 # Compressed ROM
-$(ROMC): $(ELF)
+$(ROMC): $(ROM)
+	$(call print,ROM->Compressed ROM:,$<,$@)
+	$(V)$(PYTHON) $(TOOLS)/compress.py $(ROM) $(ROMC) $(ELF) $(VERSION)
+
+# Uncompressed ROM intermediary
+$(ROM): $(ELF)
 	$(call print,ELF->ROM:,$<,$@)
 	$(V)$(OBJCOPY) -O binary $< $@
+	$(V)$(ENCRYPT_LIBLEO) $@ $(LD_MAP)
 
 # Link
 $(ELF): $(LIBULTRA_O) $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/pif_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto/undefined_funcs_auto.ld
@@ -496,24 +505,6 @@ $(ELF): $(LIBULTRA_O) $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/$(VERS
 $(BUILD_DIR)/%.ld: %.ld
 	$(call print,PreProcessor:,$<,$@)
 	$(V)$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) $< > $@
-
-# Mio0 Todo: Figure out how to link mio0 bins through here only
-# $(BUILD_DIR)/%.mio0: %.mio0d
-# 	$(call print,mio0:,$<,$@)
-# 	$(V)$(MIO0) -c $< $@
-
-# $(BUILD_DIR)/%.mio0.s: $(BUILD_DIR)/%.mio0
-# 	$(call print,Generating mio0 asm:,$<,$@)
-# 	$(V)$(PRINT) ".section .data\n\n.balign 4\n\n.incbin \"$<\"\n" > $@
-
-# $(BUILD_DIR)/%.o: $(BUILD_DIR)/%.mio0.s
-# 	$(call print,Compiling mio0:,$<,$@)
-# 	$(V)$(AS) $(ASFLAGS) -o $@ $<
-
-# $(BUILD_DIR)/%.o: %.mio0
-# 	$(call print,mio0:,$<,$@)
-# 	$(V)$(MIO0) -c $< $@
-# 	$(V)$(OBJCOPY) -I binary -O elf32-big $@ $@
 
 # Binary
 $(BUILD_DIR)/%.o: %.bin

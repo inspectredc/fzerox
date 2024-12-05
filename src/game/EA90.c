@@ -100,8 +100,6 @@ void func_80074CE4(unk_800F8510* arg0) {
     }
 }
 
-void func_800BB4E0(s32);
-
 // Test Function?
 void func_80074F98(void) {
     f32 sp2C;
@@ -111,7 +109,7 @@ void func_80074F98(void) {
     osEPiWriteIo(NULL, 0, 0);
     __osSetHWIntrRoutine(0, NULL);
     osStopThread(NULL);
-    func_800BB4E0(0);
+    LeoBootGame(NULL);
     osEPiLinkHandle(NULL);
     osPfsInitPak(NULL, NULL, 0);
     osPfsAllocateFile(NULL, 0, 0, NULL, NULL, 0, NULL);

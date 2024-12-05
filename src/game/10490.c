@@ -14,24 +14,24 @@ s8 D_800CD2F0 = -1;
 s8 D_800CD2F4 = 0;
 
 RomOffset D_800CD2F8[] = {
-    SEGMENT_ROM_START(mio0_segment_3),  SEGMENT_ROM_START(mio0_segment_4),  SEGMENT_ROM_START(mio0_segment_5),
-    SEGMENT_ROM_START(mio0_segment_6),  SEGMENT_ROM_START(mio0_segment_7),  SEGMENT_ROM_START(mio0_segment_8),
-    SEGMENT_ROM_START(mio0_segment_9),  SEGMENT_ROM_START(mio0_segment_10), SEGMENT_ROM_START(mio0_segment_11),
-    SEGMENT_ROM_START(mio0_segment_12), SEGMENT_ROM_START(mio0_segment_13),
+    SEGMENT_ROM_START(segment_235130), SEGMENT_ROM_START(segment_239A80), SEGMENT_ROM_START(segment_23EC50),
+    SEGMENT_ROM_START(segment_243D90), SEGMENT_ROM_START(segment_24A270), SEGMENT_ROM_START(segment_2507F0),
+    SEGMENT_ROM_START(segment_255100), SEGMENT_ROM_START(segment_259600), SEGMENT_ROM_START(segment_25F360),
+    SEGMENT_ROM_START(segment_266C20), SEGMENT_ROM_START(segment_26D780),
 };
 
 u8* D_800CD324[] = {
-    SEGMENT_VRAM_START(mio0_segment_3),  SEGMENT_VRAM_START(mio0_segment_4),  SEGMENT_VRAM_START(mio0_segment_5),
-    SEGMENT_VRAM_START(mio0_segment_6),  SEGMENT_VRAM_START(mio0_segment_7),  SEGMENT_VRAM_START(mio0_segment_8),
-    SEGMENT_VRAM_START(mio0_segment_9),  SEGMENT_VRAM_START(mio0_segment_10), SEGMENT_VRAM_START(mio0_segment_11),
-    SEGMENT_VRAM_START(mio0_segment_12), SEGMENT_VRAM_START(mio0_segment_13),
+    SEGMENT_VRAM_START(segment_235130), SEGMENT_VRAM_START(segment_239A80), SEGMENT_VRAM_START(segment_23EC50),
+    SEGMENT_VRAM_START(segment_243D90), SEGMENT_VRAM_START(segment_24A270), SEGMENT_VRAM_START(segment_2507F0),
+    SEGMENT_VRAM_START(segment_255100), SEGMENT_VRAM_START(segment_259600), SEGMENT_VRAM_START(segment_25F360),
+    SEGMENT_VRAM_START(segment_266C20), SEGMENT_VRAM_START(segment_26D780),
 };
 
 u8* D_800CD350[] = {
-    SEGMENT_VRAM_END(mio0_segment_3),  SEGMENT_VRAM_END(mio0_segment_4),  SEGMENT_VRAM_END(mio0_segment_5),
-    SEGMENT_VRAM_END(mio0_segment_6),  SEGMENT_VRAM_END(mio0_segment_7),  SEGMENT_VRAM_END(mio0_segment_8),
-    SEGMENT_VRAM_END(mio0_segment_9),  SEGMENT_VRAM_END(mio0_segment_10), SEGMENT_VRAM_END(mio0_segment_11),
-    SEGMENT_VRAM_END(mio0_segment_12), SEGMENT_VRAM_END(mio0_segment_13),
+    SEGMENT_VRAM_END(segment_235130), SEGMENT_VRAM_END(segment_239A80), SEGMENT_VRAM_END(segment_23EC50),
+    SEGMENT_VRAM_END(segment_243D90), SEGMENT_VRAM_END(segment_24A270), SEGMENT_VRAM_END(segment_2507F0),
+    SEGMENT_VRAM_END(segment_255100), SEGMENT_VRAM_END(segment_259600), SEGMENT_VRAM_END(segment_25F360),
+    SEGMENT_VRAM_END(segment_266C20), SEGMENT_VRAM_END(segment_26D780),
 };
 
 void func_80076490(void) {
@@ -683,8 +683,8 @@ void func_800778F8(void) {
             case 0x11:
             case 0x4009:
             case 0x4012:
-                romOffset = SEGMENT_ROM_START(mio0_segment_2);
-                ramSize = SEGMENT_VRAM_SIZE(mio0_segment_2);
+                romOffset = SEGMENT_ROM_START(segment_22B0A0);
+                ramSize = SEGMENT_VRAM_SIZE(segment_22B0A0);
                 sp24 = func_800768F4(1, ramSize);
 
                 osInvalDCache(sp24, ramSize);
@@ -793,8 +793,8 @@ void func_80077BE0(void) {
             D_800CD2F4 = 0;
             return;
         }
-        romOffset = SEGMENT_ROM_START(mio0_segment_14);
-        ramSize = SEGMENT_VRAM_SIZE(mio0_segment_14);
+        romOffset = SEGMENT_ROM_START(segment_2738A0);
+        ramSize = SEGMENT_VRAM_SIZE(segment_2738A0);
 
         sp24 = func_800768F4(1, ramSize);
 
