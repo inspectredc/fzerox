@@ -115,7 +115,9 @@
     "segment_17b960.h": "c",
     "segment_2b9ea0.h": "c",
     "segment_22b0a0.h": "c",
-    "segment_2738a0.h": "c"
+    "segment_2738a0.h": "c",
+    "unk_leo.h": "c",
+    "fzx_game.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"

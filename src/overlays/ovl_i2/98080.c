@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "ovl_i2.h"
 
 s16 D_8010D770;
@@ -43,7 +44,7 @@ s32 func_i2_800FCB84(s32, s32);
 s32 func_i2_800FCD4C(s32, s32);
 extern s32 gNumPlayers;
 extern s16 D_800CD044;
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 
 void func_i2_800FC77C(void) {
     D_i2_80106DA4 = 2;
@@ -53,57 +54,57 @@ void func_i2_800FC77C(void) {
         return;
     }
 
-    switch (D_800DCE44) {
-        case 0x8000:
+    switch (gGameMode) {
+        case GAMEMODE_8000:
             func_i2_800FCB84(0, 7);
             break;
-        case 0x11:
+        case GAMEMODE_11:
             func_i2_800FCD38(5, 120);
             func_i2_800FCB84(0, 5);
             break;
-        case 0xD:
+        case GAMEMODE_D:
             func_i2_800FCB84(0, 10);
             break;
-        case 0x800A:
+        case GAMEMODE_800A:
             func_i2_800FCD38(5, 40);
             func_i2_800FCB84(0, 5);
             break;
-        case 0x8008:
+        case GAMEMODE_8008:
             if (gNumPlayers == 1) {
                 func_i2_800FCB84(0, 10);
                 break;
             }
             func_i2_800FCB84(0, 5);
             break;
-        case 0x8007:
+        case GAMEMODE_8007:
             if (D_800CD044 == 0x15) {
                 func_i2_800FCB84(0, 10);
                 break;
             }
             func_i2_800FCB84(0, 1);
             break;
-        case 0x8013:
-        case 0x8014:
+        case GAMEMODE_8013:
+        case GAMEMODE_8014:
             if (D_800CD044 == 0x15) {
                 func_i2_800FCB84(0, 10);
                 break;
             }
             func_i2_800FCD4C(0, 1);
             break;
-        case 0x1:
-        case 0x2:
-        case 0x3:
-        case 0x4:
-        case 0x5:
-        case 0xE:
-        case 0x15:
+        case GAMEMODE_GP_RACE:
+        case GAMEMODE_PRACTICE:
+        case GAMEMODE_VS_2P:
+        case GAMEMODE_VS_3P:
+        case GAMEMODE_VS_4P:
+        case GAMEMODE_TIME_ATTACK:
+        case GAMEMODE_DEATH_RACE:
             func_i2_800FCB84(0, 5);
             break;
-        case 0x4009:
-        case 0x4012:
+        case GAMEMODE_4009:
+        case GAMEMODE_4012:
             func_i2_800FCB84(0, 6);
             break;
-        case 0x6:
+        case GAMEMODE_6:
             if (D_800CD044 != 0x15) {
                 func_i2_800FCD4C(0, 1);
                 break;
@@ -126,28 +127,28 @@ void func_i2_800FC9BC(void) {
         return;
     }
 
-    switch (D_800DCE48.unk_00) {
-        case 0x8000:
+    switch (D_800DCE48.gameMode) {
+        case GAMEMODE_8000:
             func_i2_800FCB84(1, 1);
             break;
-        case 0x11:
+        case GAMEMODE_11:
             func_i2_800FCB84(1, 5);
             break;
-        case 0x1:
-        case 0x2:
-        case 0x3:
-        case 0x4:
-        case 0x5:
-        case 0xE:
-        case 0x15:
-        case 0x8008:
+        case GAMEMODE_GP_RACE:
+        case GAMEMODE_PRACTICE:
+        case GAMEMODE_VS_2P:
+        case GAMEMODE_VS_3P:
+        case GAMEMODE_VS_4P:
+        case GAMEMODE_TIME_ATTACK:
+        case GAMEMODE_DEATH_RACE:
+        case GAMEMODE_8008:
             func_i2_800FCB84(1, 5);
             break;
-        case 0xD:
+        case GAMEMODE_D:
             func_i2_800FCB84(1, 10);
             break;
-        case 0x8013:
-        case 0x8014:
+        case GAMEMODE_8013:
+        case GAMEMODE_8014:
             if (D_800CD044 == 0x17) {
                 func_i2_800FCD38(9, 2);
                 func_i2_800FCB84(1, 9);
@@ -155,7 +156,7 @@ void func_i2_800FC9BC(void) {
             }
             func_i2_800FCD4C(1, 1);
             break;
-        case 0x8007:
+        case GAMEMODE_8007:
             if (D_800CD044 == 0x17) {
                 func_i2_800FCD38(9, 3);
                 func_i2_800FCB84(1, 9);
@@ -163,14 +164,14 @@ void func_i2_800FC9BC(void) {
             }
             func_i2_800FCB84(1, 7);
             break;
-        case 0x6:
+        case GAMEMODE_6:
             if (D_800CD044 != 0x17) {
                 func_i2_800FCD4C(1, 1);
                 break;
             }
             func_i2_800FCB84(1, 9);
             break;
-        case 0x800C:
+        case GAMEMODE_800C:
             func_i2_800FCD38(5, 60);
             func_i2_800FCB84(1, 5);
             break;

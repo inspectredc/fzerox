@@ -64,6 +64,7 @@ def main(argv):
     segmentOffsets: dict[str, tuple[int, int]] = {}
     relsOffetsToApply: dict[int, tuple[str, spimdisasm.common.RelocType]] = {}
     romOffsetValues: dict[str, int] = {}
+    compressedOffsetSizes: dict[int, tuple[int, int]] = {}
 
     # spimdisasm.common.GlobalConfig.VERBOSE = VERBOSE
 
@@ -136,7 +137,6 @@ def main(argv):
             size = entry.size
         else:
             compressedBytearray = bytearray(crunch64.mio0.compress(bytes(segmentBytearray)))
-
             # Align to a 0x10 boundary
             while len(compressedBytearray) % 0x10 != 0:
                 compressedBytearray.append(0)
@@ -147,6 +147,7 @@ def main(argv):
                 print(f"Writing compressed the segment '{sectionEntryName}' at rom offset 0x{offsetStart:06X} to 0x{offsetEnd:06X}.")
 
             size = len(compressedBytearray)
+            compressedOffsetSizes[offsetStart] = (entry.size, size)
 
         sizeWrote += size
 
@@ -163,6 +164,11 @@ def main(argv):
     romcBin.extend(bytearray((alignedSize - sizeWrote) * [0xFF]))
 
     for relRomOffset, (symName, rType) in relsOffetsToApply.items():
+        # Handle case where relRomOffset comes after previously compressed segments
+        for offset, (originalSize, compressedSize) in compressedOffsetSizes.items():
+            if relRomOffset > offset:
+                relRomOffset -= (originalSize - compressedSize)
+
         value = romOffsetValues[symName]
         hiValue = value >> 16
         loValue = value & 0xFFFF

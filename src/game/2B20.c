@@ -1,5 +1,6 @@
 #include "global.h"
 #include "audio.h"
+#include "fzx_game.h"
 
 // This needs to be used in a function earlier than this can be declared
 extern s16 D_800CD16C;
@@ -7,13 +8,13 @@ extern s16 D_800CD16C;
 s32 gNumPlayers = 1;
 s32 D_800CD004 = 0;
 s32 gDifficulty = NOVICE;
-s32 D_800CD00C = 3;
+s32 gTotalLapCount = 3;
 s8 D_800CD010 = 0;
 s8 D_800CD014 = 0;
 s8 D_800CD018 = 0;
 UNUSED s32 D_800CD01C = 0;
 u16 D_800CD020 = 0;
-s32 D_800CD024[] = { 1, 3, 5 };
+s32 D_800CD024[] = { GAMEMODE_GP_RACE, GAMEMODE_VS_2P, GAMEMODE_VS_4P };
 s32 D_800CD030[] = { 1, 2, 4 };
 s8 D_800CD03C[] = { 3, 1, 2, 4, 16 };
 s16 D_800CD044 = 0;
@@ -104,13 +105,13 @@ void func_800A4B54(void);
 void func_800A4BAC(void);
 void func_i2_800FC730(void);
 
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 extern unk_800DCE48 D_800DCE48;
 extern s32 D_800DCE60;
 
 void func_80068B20(void) {
-    D_800DCE44 = -1;
-    D_800DCE48.unk_00 = 0x8000;
+    gGameMode = -1;
+    D_800DCE48.gameMode = GAMEMODE_8000;
     if (D_800DCE60 != 0x20DE1529) {
         D_800DCE60 = 0x20DE1529;
         func_8008DB98();
@@ -138,70 +139,70 @@ void func_80068BC0(void) {
                 break;
             case 2:
                 D_800CD044 = 1;
-                D_800DCE48.unk_00 = 0x8007;
+                D_800DCE48.gameMode = GAMEMODE_8007;
                 break;
             case 3:
                 D_800CD044 = 1;
-                D_800DCE48.unk_00 = 0x800A;
+                D_800DCE48.gameMode = GAMEMODE_800A;
                 break;
             case 7:
                 D_800CD044 = 1;
-                D_800DCE48.unk_00 = 0x8008;
+                D_800DCE48.gameMode = GAMEMODE_8008;
                 break;
             case 4:
                 D_800CD044 = 1;
                 if (D_800F8514 % 6 == 5) {
-                    D_800DCE48.unk_00 = 0x11;
+                    D_800DCE48.gameMode = GAMEMODE_11;
                 } else {
-                    D_800DCE48.unk_00 = 0x800F;
+                    D_800DCE48.gameMode = GAMEMODE_800F;
                     D_800F8514++;
                 }
                 D_800E5EF0 = 0.5f;
                 break;
             case 5:
                 D_800CD044 = 1;
-                D_800DCE48.unk_00 = 0x800F;
+                D_800DCE48.gameMode = GAMEMODE_800F;
                 break;
             case 6:
                 D_800CD044 = 0xB;
-                D_800DCE48.unk_00 = 0x800F;
+                D_800DCE48.gameMode = GAMEMODE_800F;
                 break;
             case 8:
                 D_800CD044 = 0x15;
-                D_800DCE48.unk_00 = 6;
+                D_800DCE48.gameMode = GAMEMODE_6;
                 break;
             case 9:
                 D_800CD044 = 0x15;
-                D_800DCE48.unk_00 = 0x8013;
+                D_800DCE48.gameMode = GAMEMODE_8013;
                 break;
             case 10:
             case 14:
                 D_800CD044 = 0x15;
-                D_800DCE48.unk_00 = 0x8007;
+                D_800DCE48.gameMode = GAMEMODE_8007;
                 break;
             case 11:
                 D_800CD044 = 0x1F;
-                D_800DCE48.unk_00 = 0x800A;
+                D_800DCE48.gameMode = GAMEMODE_800A;
                 break;
             case 12:
                 D_800CD044 = 0x1F;
-                D_800DCE48.unk_00 = 0x8007;
+                D_800DCE48.gameMode = GAMEMODE_8007;
                 break;
             case 13:
                 D_800CD044 = 0x15;
-                D_800DCE48.unk_00 = 0x8014;
+                D_800DCE48.gameMode = GAMEMODE_8014;
                 break;
             case 15:
                 D_800CD044 = 0xB;
-                if (D_800DCE44 == 1) {
-                    D_800DCE48.unk_00 = 0x4012;
+                if (gGameMode == GAMEMODE_GP_RACE) {
+                    D_800DCE48.gameMode = GAMEMODE_4012;
                 } else {
-                    D_800DCE48.unk_00 = 0x4009;
+                    D_800DCE48.gameMode = GAMEMODE_4009;
                 }
                 break;
             case 16:
                 D_800CD044 = 0xB;
-                D_800DCE48.unk_00 = D_800DCE44;
+                D_800DCE48.gameMode = gGameMode;
                 break;
         }
     }
@@ -211,38 +212,38 @@ void func_80068DCC(void) {
     static u16 D_800CD154 = 0;
     s32 var_v1 = D_800CD154;
 
-    switch (D_800DCE44) {
-        case 0x1:
-        case 0x2:
-        case 0x3:
-        case 0x4:
-        case 0x5:
-        case 0xE:
-        case 0x15:
+    switch (gGameMode) {
+        case GAMEMODE_GP_RACE:
+        case GAMEMODE_PRACTICE:
+        case GAMEMODE_VS_2P:
+        case GAMEMODE_VS_3P:
+        case GAMEMODE_VS_4P:
+        case GAMEMODE_TIME_ATTACK:
+        case GAMEMODE_DEATH_RACE:
             if (D_800CD010 == 0) {
                 D_800CD154 = 0;
             }
             return;
-        case 0x8000:
+        case GAMEMODE_8000:
             var_v1 = 0xD;
             break;
-        case 0x11:
+        case GAMEMODE_11:
             var_v1 = 0x15;
             break;
-        case 0x800B:
-        case 0x800C:
+        case GAMEMODE_800B:
+        case GAMEMODE_800C:
             var_v1 = 0x16;
             break;
-        case 0x8013:
-        case 0x8014:
+        case GAMEMODE_8013:
+        case GAMEMODE_8014:
             var_v1 = 0xF;
             break;
-        case 0x4009:
-        case 0x4012:
-        case 0x8007:
-        case 0x8008:
-        case 0x800A:
-        case 0x800F:
+        case GAMEMODE_4009:
+        case GAMEMODE_4012:
+        case GAMEMODE_8007:
+        case GAMEMODE_8008:
+        case GAMEMODE_800A:
+        case GAMEMODE_800F:
             var_v1 = 0xE;
             break;
         case 0xD:
@@ -274,20 +275,20 @@ extern u16 D_800E416E;
 
 void func_80068F04(void) {
 
-    if (D_800DCE44 != D_800DCE48.unk_00) {
+    if (gGameMode != D_800DCE48.gameMode) {
         D_800CD010 = 0;
         D_800CD020 = 0;
         return;
     }
     func_8007DABC(&D_800DD180);
-    switch (D_800DCE44) {
-        case 0x8000:
+    switch (gGameMode) {
+        case GAMEMODE_8000:
             if (D_800DD228 != 0) {
                 D_800CD020++;
             }
             if ((D_800CD010 != 0) && (D_800DD228 != 0)) {
 
-                D_800DCE48.unk_00 = D_800CD024[D_800CD014];
+                D_800DCE48.gameMode = D_800CD024[D_800CD014];
                 gNumPlayers = D_800CD030[D_800CD014];
                 D_800F8514 = D_800CD03C[D_800CD018];
                 D_800CD014++;
@@ -303,13 +304,13 @@ void func_80068F04(void) {
                 gDifficulty = MASTER;
             }
             break;
-        case 0x1:
-        case 0x2:
-        case 0x3:
-        case 0x4:
-        case 0x5:
-        case 0xE:
-        case 0x15:
+        case GAMEMODE_GP_RACE:
+        case GAMEMODE_PRACTICE:
+        case GAMEMODE_VS_2P:
+        case GAMEMODE_VS_3P:
+        case GAMEMODE_VS_4P:
+        case GAMEMODE_TIME_ATTACK:
+        case GAMEMODE_DEATH_RACE:
             if (D_800CD010 != 0) {
                 D_800CD020++;
                 switch (D_800CD010) {
@@ -319,7 +320,7 @@ void func_80068F04(void) {
                         }
                         /* fallthrough */
                     case 3:
-                        D_800DCE48.unk_00 = 0x8000;
+                        D_800DCE48.gameMode = GAMEMODE_8000;
                         D_800CD020 = 0;
                         D_800CD010 = 2;
                         break;
@@ -337,9 +338,9 @@ extern s8 D_800DCE5C;
 void func_800690FC(void) {
     s32 sp24;
 
-    if (D_800DCE44 != D_800DCE48.unk_00) {
+    if (gGameMode != D_800DCE48.gameMode) {
         if (D_800CD044 == 0) {
-            if (D_800DCE44 == -1) {
+            if (gGameMode == -1) {
                 D_800CD044 = 3;
             } else {
                 D_800CD044 = 1;
@@ -360,7 +361,7 @@ void func_800690FC(void) {
                 func_80069820();
                 D_800CD168 = 0;
             }
-            D_800CD0A4[D_800DCE44 & 0x1F]();
+            D_800CD0A4[GET_MODE(gGameMode)]();
             func_i2_800FCE3C();
             if (D_800CD16C != 0) {
                 osContStartReadData(&D_800DCA80);
@@ -376,10 +377,10 @@ void func_800690FC(void) {
                 func_80069820();
                 D_800CD168 = 0;
             }
-            D_800CD0A4[D_800DCE44 & 0x1F]();
+            D_800CD0A4[GET_MODE(gGameMode)]();
             if (func_i2_800FCE3C() != 0) {
-                if (D_800DCE44 == 1) {
-                    func_i3_80134598();
+                if (gGameMode == GAMEMODE_GP_RACE) {
+                    func_i3_ResetLivesChangeCounter();
                 }
                 D_800CD044++;
             }
@@ -394,57 +395,57 @@ void func_800690FC(void) {
         case 23:
         case 33:
             func_80069700();
-            switch (D_800DCE44) {
-                case 0x4009:
-                case 0x4012:
+            switch (gGameMode) {
+                case GAMEMODE_4009:
+                case GAMEMODE_4012:
                     if ((gNumPlayers == 1) && (D_800F8514 < 0x18)) {
                         func_i2_801012CC(D_800F8514);
                     }
                     break;
-                case 0x8008:
+                case GAMEMODE_8008:
                     func_i4_8011A7B8();
                     break;
             }
-            D_800DCE44 = D_800DCE48.unk_00;
+            gGameMode = D_800DCE48.gameMode;
             if (D_800CD010 == 2) {
                 D_800CD010 = 0;
             }
             D_800DCE5C = 0;
             func_800766F0();
 
-            switch (D_800DCE44) {
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 13:
-                case 14:
-                case 16:
-                case 21:
+            switch (gGameMode) {
+                case GAMEMODE_GP_RACE:
+                case GAMEMODE_PRACTICE:
+                case GAMEMODE_VS_2P:
+                case GAMEMODE_VS_3P:
+                case GAMEMODE_VS_4P:
+                case GAMEMODE_D:
+                case GAMEMODE_TIME_ATTACK:
+                case GAMEMODE_10:
+                case GAMEMODE_DEATH_RACE:
                     if (D_800CD010 == 0) {
                         func_8007E08C();
                     }
                     break;
             }
             sp24 = 0;
-            switch (D_800DCE44) {
-                case 0x1:
-                case 0x2:
-                case 0x3:
-                case 0x4:
-                case 0x5:
-                case 0xD:
-                case 0x15:
-                case 0x4009:
-                case 0x4012:
-                case 0x8008:
+            switch (gGameMode) {
+                case GAMEMODE_GP_RACE:
+                case GAMEMODE_PRACTICE:
+                case GAMEMODE_VS_2P:
+                case GAMEMODE_VS_3P:
+                case GAMEMODE_VS_4P:
+                case GAMEMODE_D:
+                case GAMEMODE_DEATH_RACE:
+                case GAMEMODE_4009:
+                case GAMEMODE_4012:
+                case GAMEMODE_8008:
                     sp24 = 1;
                     break;
-                case 0xE:
+                case GAMEMODE_TIME_ATTACK:
                     sp24 = 2;
                     break;
-                case 0x6:
+                case GAMEMODE_6:
                     sp24 = 3;
                     break;
             }
@@ -470,7 +471,7 @@ void func_800690FC(void) {
             }
             func_80077318();
             func_80079EC8();
-            D_800CD04C[D_800DCE44 & 0x1F]();
+            D_800CD04C[GET_MODE(gGameMode)]();
             func_80068DCC();
             func_80077C9C();
             func_i2_800FC9BC();
@@ -484,7 +485,7 @@ void func_800690FC(void) {
         case 6:
             if (func_i2_800FCE3C() != 0) {
                 func_i2_800FC9BC();
-                if (D_800DCE44 != 6) {
+                if (gGameMode != GAMEMODE_6) {
                     func_8007E08C();
                 }
                 func_80068DCC();
@@ -502,7 +503,7 @@ void func_800690FC(void) {
         func_80069820();
         D_800CD168 = 0;
     }
-    D_800DCE48.unk_00 = D_800CD0A4[D_800DCE44 & 0x1F]();
+    D_800DCE48.gameMode = D_800CD0A4[GET_MODE(gGameMode)]();
     func_80068F04();
     switch (D_800CD044) {
         case 6:
@@ -522,7 +523,7 @@ extern s16 D_i2_80106DA0;
 Gfx* func_80069698(Gfx* gfx) {
 
     if ((D_800CD044 != 3) && (D_i2_80106DA0 != 0)) {
-        gfx = D_800CD0FC[D_800DCE44 & 0x1F](gfx);
+        gfx = D_800CD0FC[GET_MODE(gGameMode)](gfx);
     }
     return func_i2_800FD184(gfx);
 }
@@ -541,8 +542,7 @@ void func_80069700(void) {
         } else {
             D_800DCE98[i].unk_74 = 0;
         }
-        D_800DCE98[i].unk_76 = 0;
-        D_800DCE98[i].unk_72 = D_800DCE98[i].unk_76;
+        D_800DCE98[i].unk_72 = D_800DCE98[i].unk_76 = 0;
     }
 }
 

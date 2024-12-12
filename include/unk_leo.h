@@ -27,7 +27,7 @@ typedef struct unk_leo_80419EA0 {
     u16 unk_28;
     s8 unk_2C[0x12];
     u16 unk_3C[0xB3A];
-    unk_leo_804285D0 unk_16B0[1];
+    unk_leo_804285D0 unk_16B0[1112];
 } unk_leo_80419EA0;
 
 #endif // UNK_LEO_H

@@ -241,9 +241,13 @@ gSlowLoads = 0x800F89F0;
 gRacers = 0x802C4920; // size:0x6DB0
 
 gGameFrameCount = 0x800CCFE0;
-gDifficulty = 0x800CD008;
 gNumPlayers = 0x800CD000;
+gDifficulty = 0x800CD008;
+gTotalLapCount = 0x800CD00C;
+gTotalLives = 0x800CE4DC;
 
+gGameMode = 0x800DCE44;
+gPlayerLives = 0x800E5ED8;
 D_800E4268 = 0x800E4268;
 
 gSkyboxType = 0x800E4260;

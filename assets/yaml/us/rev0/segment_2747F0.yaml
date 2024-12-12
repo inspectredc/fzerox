@@ -1,0 +1,78 @@
+:config:
+  header:
+    code:
+      - '#include "assets/segment_2747F0.h"'
+    header:
+      - '#include "gfx.h"'
+
+D_2747F0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2747F0
+  symbol: D_2747F0
+
+D_274FF0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x274FF0
+  symbol: D_274FF0
+
+D_2757F0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2757F0
+  symbol: D_2757F0
+
+D_275FF0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x275FF0
+  symbol: D_275FF0
+
+D_2767F0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2767F0
+  symbol: D_2767F0
+
+D_276FF0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x276FF0
+  symbol: D_276FF0
+
+D_2777F0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2777F0
+  symbol: D_2777F0
+
+D_277FF0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x277FF0
+  symbol: D_277FF0

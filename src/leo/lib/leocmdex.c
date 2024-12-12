@@ -2,7 +2,15 @@
 #include "libc/stdbool.h"
 #include "leo/leo_internal.h"
 
-extern void (*LEO_cmd_tbl[])(void);
+void (*LEO_cmd_tbl[])(void) = {
+    NULL,          leoClr_queue, leoInquiry,    leoTest_unit_rdy, leoRezero,    leoRead,
+    leoWrite,      leoSeek,      leoStart_stop, leoRd_capacity,   leoTranslate, leoMode_sel,
+    leoReadDiskId, leoReadTimer, leoSetTimer,   leoClr_reset,
+};
+
+LEOCmdRead leo_sys_read_cmd = {
+    { LEO_COMMAND_READ, 0, 0, 0, 0, 0, 0, 0, 0 }, 12, 1, 0, 0,
+};
 
 void leomain(void* arg0) {
     u32 cur_status;
@@ -156,7 +164,6 @@ void leomain(void* arg0) {
     }
 }
 
-extern LEOCmdRead leo_sys_read_cmd;
 const u8 leo_sys_form_lbas[] = { 0, 1, 8, 9, 0, 0, 0, 0 };
 
 u8 leoRead_system_area(void) {

@@ -7,7 +7,7 @@ OSPiHandle* D_i2_8011183C;
 s16 D_80111840;
 u8 D_i2_80111848[30];
 
-size_t D_i2_80106DF0[][3] = {
+uintptr_t D_i2_80106DF0[][3] = {
     { 0x0, 0x40, 0x60 },           { 0x1B30, 0x1B70, 0x1B90 },    { 0x37B0, 0x37F0, 0x3810 },
     { 0x5070, 0x50B0, 0x50D0 },    { 0x6B50, 0x6B90, 0x6BB0 },    { 0x8A30, 0x8A70, 0x8A90 },
     { 0xA920, 0xA960, 0xA980 },    { 0xC410, 0xC450, 0xC470 },    { 0xDDC0, 0xDE00, 0xDE20 },
@@ -772,8 +772,8 @@ void func_i2_80101D18(unk_struct_110* arg0, s32 arg1) {
         // clang-format on
     }
 
-    arg0->unk_30 = MAX_TIMER;
     arg0->unk_2C = 0.0f;
+    arg0->unk_30 = MAX_TIMER;
 
     func_i2_80101C78(arg0->unk_F0);
 }
@@ -1589,7 +1589,7 @@ s32 func_i2_8010387C(s32 arg0) {
 }
 
 void func_i2_80103930(unk_struct_3F80* arg0, s32 arg1) {
-    size_t* offsets = D_i2_80106DF0[arg1];
+    uintptr_t* offsets = D_i2_80106DF0[arg1];
     RomOffset romOffset = SEGMENT_ROM_START(segment_27F200);
 
     func_80073ED0(romOffset + offsets[1], arg0, 0x20);

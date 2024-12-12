@@ -4,7 +4,6 @@
 extern s32 D_i1_8042860C;
 extern OSMesg D_i1_80428610;
 extern u16 D_i1_80428614;
-extern unk_leo_804285D0 D_i1_8041B550[];
 extern unk_leo_80419EA0 D_i1_80419EA0;
 extern u8 D_i1_80415190[];
 extern s32 D_i1_80428638;
@@ -25,15 +24,15 @@ s32 func_i1_80408EE4(s32*, s32, u32*);
 s32 func_i1_80409060(u16 arg0) {
     s32 sp1C;
 
-    if (D_i1_8041B550[arg0].unk_00 & 0x2000) {
+    if (D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x2000) {
         D_i1_80428610 = 0x106;
         return -1;
     }
     func_i1_80408B90();
-    sp1C = D_i1_8041B550[arg0].unk_0A;
+    sp1C = D_i1_80419EA0.unk_16B0[arg0].unk_0A;
     func_i1_80408CDC(sp1C);
     func_i1_80408BD4();
-    D_i1_8041B550[arg0].unk_00 = 0;
+    D_i1_80419EA0.unk_16B0[arg0].unk_00 = 0;
     return 0;
 }
 
@@ -65,11 +64,11 @@ s32 func_i1_804091E0(u16 arg0, s32 arg1) {
         D_i1_80428610 = 0xF4;
         return -1;
     }
-    if (!(D_i1_8041B550[arg0].unk_00 & 0x4000)) {
+    if (!(D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x4000)) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
-    if (D_i1_8041B550[arg0].unk_00 & 0x8000) {
+    if (D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x8000) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
@@ -129,10 +128,10 @@ s32 func_i1_804094E0(u16 arg0, s32 arg1, s32 arg2) {
     s32 sp3C;
     s32 sp38 = 0;
 
-    sp4C = D_i1_8041B550[arg0].unk_0A;
+    sp4C = D_i1_80419EA0.unk_16B0[arg0].unk_0A;
 
     while (arg2 != 0) {
-        sp44 = D_i1_8041B550[arg0].unk_00;
+        sp44 = D_i1_80419EA0.unk_16B0[arg0].unk_00;
 
         func_i1_80409310(sp4C, arg1, arg2, &sp48, &sp40, &sp3C, (sp44 & 0x400) ? 1 : 0);
         sp4C = sp48;
@@ -150,13 +149,13 @@ s32 func_i1_804094E0(u16 arg0, s32 arg1, s32 arg2) {
 s32 func_i1_804095F4(u16 arg0, s32 arg1, u32 arg2) {
     u32 sp1C;
 
-    if (D_i1_8041B550[arg0].unk_00 & 0x1000) {
+    if (D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x1000) {
         if (func_i1_804035DC(arg0) < 0) {
             D_i1_80428610 = 0x106;
             return -1;
         }
     }
-    sp1C = D_i1_8041B550[arg0].unk_0C;
+    sp1C = D_i1_80419EA0.unk_16B0[arg0].unk_0C;
     if ((arg2 == 0) || (sp1C < arg2)) {
         arg2 = sp1C;
     }
@@ -195,11 +194,11 @@ s32 func_i1_804097BC(u16 arg0, s32 arg1, s32 arg2) {
         D_i1_80428610 = 0xF4;
         return -1;
     }
-    if (!(D_i1_8041B550[arg0].unk_00 & 0x4000)) {
+    if (!(D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x4000)) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
-    if (D_i1_8041B550[arg0].unk_00 & 0x8000) {
+    if (D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x8000) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
@@ -219,9 +218,9 @@ s32 func_i1_804098C4(u16 arg0, u8* arg1, s32 arg2, u32 arg3) {
 
     sp40 = arg3;
     sp24 = arg1;
-    sp44 = D_i1_8041B550[arg0].unk_0C;
-    sp30 = D_i1_8041B550[arg0].unk_0A;
-    if (D_i1_8041B550[arg0].unk_00 & 0x400) {
+    sp44 = D_i1_80419EA0.unk_16B0[arg0].unk_0C;
+    sp30 = D_i1_80419EA0.unk_16B0[arg0].unk_0A;
+    if (D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x400) {
         sp38 = 1;
     } else {
         sp38 = 0;
@@ -307,13 +306,13 @@ s32 func_i1_804098C4(u16 arg0, u8* arg1, s32 arg2, u32 arg3) {
 s32 func_i1_80409D78(u16 arg0, s32 arg1, s32 arg2, u32 arg3) {
     s32 sp1C;
 
-    if (D_i1_8041B550[arg0].unk_00 & 0x1000) {
+    if (D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x1000) {
         if (func_i1_804035DC(arg0) < 0) {
             D_i1_80428610 = 0x106;
             return -1;
         }
     }
-    sp1C = D_i1_8041B550[arg0].unk_0C;
+    sp1C = D_i1_80419EA0.unk_16B0[arg0].unk_0C;
     if (arg3 == 0 || (sp1C - arg2) < arg3) {
         arg3 = sp1C - arg2;
     }
@@ -352,11 +351,11 @@ s32 func_i1_80409F5C(u16 arg0, s32 arg1, s32 arg2, s32 arg3) {
         D_i1_80428610 = 0xF4;
         return -1;
     }
-    if (!(D_i1_8041B550[arg0].unk_00 & 0x4000)) {
+    if (!(D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x4000)) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
-    if (D_i1_8041B550[arg0].unk_00 & 0x8000) {
+    if (D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x8000) {
         D_i1_80428610 = 0xF2;
         return -1;
     }

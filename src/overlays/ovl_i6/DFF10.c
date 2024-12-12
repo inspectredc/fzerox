@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "ovl_i6.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B1E0.h"
@@ -172,7 +173,7 @@ extern s16 D_800CD048;
 extern s32 D_800CD380;
 extern s8 D_800CD3C0;
 extern s8 D_800CD3C8;
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 extern Controller D_800DD180;
 extern s32 D_800DD228;
 extern u16 D_800E416C;
@@ -183,15 +184,15 @@ extern s32 D_i2_80106DA4;
 
 s32 func_i6_80115FF0(void) {
     s32 temp_t0;
-    s32 var_v1_2;
+    bool var_v1_2;
 
     if (D_i2_80106DA4 != 0) {
-        return D_800DCE44;
+        return gGameMode;
     }
 
     func_8007DABC(&D_800DD180);
     if (func_80079E88(0x50)->unk_04 >= 3) {
-        return D_800DCE44;
+        return gGameMode;
     }
     switch (D_800CD384) {
         case 0:
@@ -234,7 +235,7 @@ s32 func_i6_80115FF0(void) {
                 func_800BA8D8(0x10);
                 func_8007E0CC();
                 D_800CD384 = 5;
-                return 0x8000;
+                return GAMEMODE_8000;
             }
 
             if ((D_800E416E & BTN_START) && (func_80079E88(0x5E)->unk_04 == 7)) {
@@ -259,17 +260,17 @@ s32 func_i6_80115FF0(void) {
                         gNumPlayers = 1;
                         func_800BB324(gNumPlayers - 1);
                         gDifficulty = D_800DCE48.unk_10 + 3;
-                        return 0x8008;
+                        return GAMEMODE_8008;
                     case 6:
                         D_800CD384 = 5;
                         D_800CD048 = 0xD;
                         break;
                     case 4:
                         D_800CD384 = 5;
-                        return 0xD;
+                        return GAMEMODE_D;
                     case 7:
                         D_800CD384 = 5;
-                        return 0x10;
+                        return GAMEMODE_10;
                     default:
                         D_800CD384 = 2;
                         break;
@@ -359,7 +360,7 @@ s32 func_i6_80115FF0(void) {
             }
             if (D_800E416E & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
-                func_800BB324((gNumPlayers - 1) & 0xFF);
+                func_800BB324(gNumPlayers - 1);
                 switch (D_800CD380) {
                     case 0:
                     case 1:
@@ -369,7 +370,7 @@ s32 func_i6_80115FF0(void) {
                         D_800CD384 = 3;
                         break;
                     default:
-                        return 0x8000;
+                        return GAMEMODE_8000;
                 }
             }
             break;
@@ -418,7 +419,7 @@ s32 func_i6_80115FF0(void) {
         default:
             break;
     }
-    return 0x8007;
+    return GAMEMODE_8007;
 }
 
 Gfx* func_i6_801167CC(Gfx* gfx) {

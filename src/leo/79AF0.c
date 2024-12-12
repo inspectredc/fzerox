@@ -11,7 +11,6 @@ extern OSMesg D_i1_80428610;
 extern u16 D_i1_80428614;
 extern u16 D_i1_8042A610;
 extern u16 D_i1_8042A612;
-extern unk_leo_804285D0 D_i1_8041B550[];
 extern unk_leo_80419EA0 D_i1_80419EA0;
 
 s32 func_i1_8040A9E0(u16 arg0, unk_leo_804285D0** arg1) {
@@ -19,7 +18,7 @@ s32 func_i1_8040A9E0(u16 arg0, unk_leo_804285D0** arg1) {
     if (func_i1_80404830() < 0) {
         return -1;
     }
-    if (!(D_i1_8041B550[arg0].unk_00 & 0xC000)) {
+    if (!(D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0xC000)) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
@@ -104,7 +103,7 @@ s32 func_i1_8040AD08(u16 arg0) {
     switch (arg0) {
         case 0xFFFD:
             for (i = 0; i < D_i1_8042860C; i++) {
-                if (D_i1_8041B550[i].unk_00 & 0x4000) {
+                if (D_i1_80419EA0.unk_16B0[i].unk_00 & 0x4000) {
                     sp18++;
                 }
             }
@@ -142,7 +141,7 @@ s32 func_i1_8040AECC(u16 arg0) {
     switch (arg0) {
         case 0xFFFD:
             for (i = 0; i < D_i1_8042860C; i++) {
-                if (D_i1_8041B550[i].unk_00 & 0x8000) {
+                if (D_i1_80419EA0.unk_16B0[i].unk_00 & 0x8000) {
                     sp18++;
                 }
             }
@@ -174,7 +173,7 @@ s32 func_i1_8040B0E4(u16 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
-    if (D_i1_8041B550[sp1E].unk_00 & 0x2000) {
+    if (D_i1_80419EA0.unk_16B0[sp1E].unk_00 & 0x2000) {
         D_i1_80428610 = 0x106;
         return -1;
     }
@@ -195,11 +194,11 @@ s32 func_i1_8040B1E8(u16 arg0, s32 arg1, s32 arg2) {
         D_i1_80428610 = 0xF4;
         return -1;
     }
-    if (!(D_i1_8041B550[arg0].unk_00 & 0x4000)) {
+    if (!(D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x4000)) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
-    if (D_i1_8041B550[arg0].unk_00 & 0x8000) {
+    if (D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x8000) {
         D_i1_80428610 = 0xF2;
         return -1;
     }

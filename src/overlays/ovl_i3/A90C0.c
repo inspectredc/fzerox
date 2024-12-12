@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ovl_i3.h"
+#include "fzx_game.h"
 #include "fzx_racer.h"
 #include "assets/segment_2B9EA0.h"
 
@@ -43,7 +44,7 @@ s32 D_i3_80141990;
 s32 D_i3_80141994;
 s32 D_i3_80141998;
 
-void* D_i3_8013DB80[] = {
+s16* D_i3_8013DB80[] = {
     D_F264110, D_F264340, D_F264450, D_F2641D8, D_F264690, D_F264540, D_F264920, D_F264860,
     D_F264740, D_F264C80, D_F264B40, D_F2652B0, D_F264DE0, D_F264F08, D_F2650B0, D_F2651C8,
     D_F264A58, D_F2656C8, D_F265530, D_F2659E0, D_F2658D0, D_F265B70, D_F2653E8, D_F265D08,
@@ -156,7 +157,7 @@ unk_8013E7A8 D_i3_8013E7A8[] = {
 };
 
 // fabsf
-f32 func_i3_80115DF0(f32 num) {
+f32 func_i3_fabsf(f32 num) {
     if (num < 0.0f) {
         return 0.0f - num;
     }
@@ -164,7 +165,7 @@ f32 func_i3_80115DF0(f32 num) {
 }
 
 // abs
-s32 func_i3_80115E1C(s32 num) {
+s32 func_i3_abs(s32 num) {
     if (num < 0) {
         return -num;
     }
@@ -173,8 +174,8 @@ s32 func_i3_80115E1C(s32 num) {
 
 void func_i3_80115E34(Racer* arg0) {
 
-    arg0->unk_34D = (arg0->unk_00 % 5) + 2;
-    if ((arg0->unk_00 < 0xF) && (arg0->unk_34D == 2)) {
+    arg0->unk_34D = (arg0->id % 5) + 2;
+    if ((arg0->id < 15) && (arg0->unk_34D == 2)) {
         arg0->unk_34D = 1;
     }
 }
@@ -191,7 +192,8 @@ extern unk_800F8510* D_800F8510;
 extern s32 D_800F8514;
 
 void func_i3_80116974(void) {
-    s32 sp1C[19];
+    s32 pad[3];
+    unk_80141C88 sp1C;
 
     if (D_800F8514 < 0x18) {
         if (func_i2_801037CC(&sp1C, D_800F8514) == 0) {
@@ -200,8 +202,9 @@ void func_i3_80116974(void) {
             D_i3_80141990 = MAX_TIMER;
         }
         if (gDifficulty >= EXPERT) {
-            if (D_800F8510->unk_20[0] < sp1C[2]) {
-                D_i3_80141990 = D_800F8510->unk_20[0] + (D_i3_80141990 - sp1C[2]);
+            if (D_800F8510->unk_20[0] < sp1C.unk_08) {
+                // FAKE! might need unk_08 as array
+                D_i3_80141990 = D_800F8510->unk_20[0] + (0, (D_i3_80141990 - sp1C.unk_08));
             }
         }
     } else {
@@ -211,7 +214,7 @@ void func_i3_80116974(void) {
 }
 
 extern s32 gNumPlayers;
-extern s32 D_800CD00C;
+extern s32 gTotalLapCount;
 extern s32 D_800E5EC0;
 
 f32 D_i3_8013E9E0[] = { 5000.0f, 2000.0f, 1000.0f, 1000.0f };
@@ -235,13 +238,13 @@ void func_i3_80116A50(Racer* arg0) {
     f32 temp_fv0;
     f32 var_fs0;
 
-    temp_ft3 = D_800F8510->unk_0C * D_800CD00C;
+    temp_ft3 = D_800F8510->unk_0C * gTotalLapCount;
 
     if (D_800E5EC0 < arg0->unk_368) {
         for (i = gNumPlayers, var_fs0 = temp_ft3, var_s3 = 0; i < D_800E5EC0; i++) {
             var_s0 = &gRacers[i];
-            if ((D_800E5EC0 >= var_s0->unk_368) && (arg0->unk_00 != var_s0->unk_00)) {
-                temp_fv0 = func_i3_80115DF0(arg0->unk_23C - var_s0->unk_23C);
+            if ((D_800E5EC0 >= var_s0->unk_368) && (arg0->id != var_s0->id)) {
+                temp_fv0 = func_i3_fabsf(arg0->unk_23C - var_s0->unk_23C);
                 if (temp_fv0 < var_fs0) {
                     var_fs0 = temp_fv0;
                     var_s3 = i;
@@ -256,11 +259,11 @@ void func_i3_80116A50(Racer* arg0) {
     }
 
     arg0->unk_398 = D_i3_80141990 - ((temp_ft3 - arg0->unk_23C) / temp_ft3) * D_i3_8013E9E0[gDifficulty] +
-                    D_i3_8013E9F0[arg0->unk_368 + gDifficulty * 30 - 1];
+                    D_i3_8013E9F0[arg0->unk_368 - 1 + gDifficulty * 30];
 }
 
 void func_i3_80116C4C(void) {
-    D_i3_8013DBE8 = func_800768F4(0, 0x400);
+    D_i3_8013DBE8 = func_800768F4(0, 0x200 * sizeof(s16));
 }
 
 f32 D_i3_8013EBD0[] = {
@@ -274,7 +277,7 @@ f32 D_i3_8013EC30[] = {
 };
 
 extern s32 D_800CD004;
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 
 void func_i3_80116C74(Racer* arg0) {
     f32 var_fa0;
@@ -286,10 +289,10 @@ void func_i3_80116C74(Racer* arg0) {
 
     D_i3_80141910 = gRacers;
     D_80141900 = 0;
-    if (arg0->unk_00 == 0) {
+    if (arg0->id == 0) {
         func_i3_80116974();
         if (D_800F8514 < ARRAY_COUNT(D_i3_8013DB80)) {
-            func_80077CF0(D_i3_8013DB80[D_800F8514], 0x400, D_i3_8013DBE8);
+            func_80077CF0(D_i3_8013DB80[D_800F8514], 0x200 * sizeof(s16), D_i3_8013DBE8);
         } else {
             for (i = 0; i < 0x200; i += 2) {
                 D_i3_8013DBE8[i + 0] = 0x45;
@@ -297,7 +300,7 @@ void func_i3_80116C74(Racer* arg0) {
             }
         }
 
-        if (D_800DCE44 == 6) {
+        if (gGameMode == GAMEMODE_6) {
             arg0->unk_1A8 = 0.5f;
         }
 
@@ -369,7 +372,7 @@ void func_i3_80116C74(Racer* arg0) {
     arg0->unk_3A0 = D_800E5EC0;
     arg0->unk_1EC = 2500.0f / 27.0f;
 
-    if (D_800DCE44 == 1) {
+    if (gGameMode == GAMEMODE_GP_RACE) {
         arg0->unk_360 = D_i3_8013EBD0[D_i3_8013E7A8[arg0->character].unk_02 * 4 + gDifficulty];
         arg0->unk_364 = D_i3_8013EC30[D_i3_8013E7A8[arg0->character].unk_02 * 4 + gDifficulty] + arg0->unk_360;
     }
@@ -391,7 +394,7 @@ void func_i3_80116C74(Racer* arg0) {
     arg0->unk_378 = 0;
     arg0->unk_374 = 0;
 
-    if (D_800DCE44 == 0x11) {
+    if (gGameMode == GAMEMODE_11) {
         arg0->unk_1A8 = func_8008960C(0.1f);
         arg0->unk_1EC = 2500.0f / 27.0f;
         arg0->unk_1E8 = 0.0f;
@@ -399,14 +402,15 @@ void func_i3_80116C74(Racer* arg0) {
         arg0->unk_334 = Math_Rand1() % 32768 / 32767.0f * 20.0f + 500.0f;
     }
 
-    if (arg0->unk_00 >= gNumPlayers) {
+    // If CPU player
+    if (arg0->id >= gNumPlayers) {
         if (D_800F8514 < 0x18) {
             if (D_800E5EC0 >= arg0->unk_368) {
                 arg0->unk_39C = D_i3_8013E4A8[D_800F8514 * 4 + gDifficulty] +
                                 D_i3_8013E628[D_800F8514 * 4 + gDifficulty] * (arg0->unk_368 - 1);
             }
         }
-        if ((D_i3_80141910->unk_2AC == arg0->unk_2AC - 4) || (D_i3_80141910->unk_2AC == (arg0->unk_2AC + 4)) ||
+        if ((D_i3_80141910->position == arg0->position - 4) || (D_i3_80141910->position == (arg0->position + 4)) ||
             (gNumPlayers >= 2)) {
             var_fa0 = D_i3_80141910->unk_1A8;
             if (var_fa0 > 0.95f) {
@@ -444,7 +448,7 @@ void func_i3_80116C74(Racer* arg0) {
                 arg0->unk_1A8 = 0.6f;
             }
         }
-        if (D_800DCE44 == 0x15) {
+        if (gGameMode == GAMEMODE_DEATH_RACE) {
             arg0->unk_1A8 = (Math_Rand1() % 256 / 255.0f) * 0.2f;
         }
         arg0->unk_1EC = 2500.0f / 27.0f;
@@ -452,7 +456,7 @@ void func_i3_80116C74(Racer* arg0) {
     }
 }
 
-extern s32 D_800CD00C;
+extern s32 gTotalLapCount;
 extern s16 D_80115DE0;
 extern Racer* D_800E5F40[];
 
@@ -471,22 +475,22 @@ void func_i3_801175A4(void) {
 
     D_i3_80141910 = gRacers;
 
-    temp_fv0 = D_800F8510->unk_0C * D_800CD00C;
-    if ((D_800E5F40[0]->unk_2A8 == 2) && (D_i3_80141904 == 0)) {
+    temp_fv0 = D_800F8510->unk_0C * gTotalLapCount;
+    if ((D_800E5F40[0]->lap == 2) && (D_i3_80141904 == 0)) {
         var_a3 = 0;
         var_t0 = 0;
         for (i = 0; i < D_800E5EC0; i++) {
-            if (gRacers[i].unk_2A8 >= 2) {
+            if (gRacers[i].lap >= 2) {
                 var_t0++;
-                var_a3 += gRacers[i].unk_290[0];
+                var_a3 += gRacers[i].lapTimes[0];
             }
         }
 
         if (var_t0 != 0) {
             if (D_800CD004 == 5) {
-                var_v0_2 = D_i3_8013DC04[gDifficulty] * ((f32) (s32) ((f32) var_a3 / var_t0) * D_800CD00C);
+                var_v0_2 = D_i3_8013DC04[gDifficulty] * ((f32) (s32) ((f32) var_a3 / var_t0) * gTotalLapCount);
             } else {
-                var_v0_2 = D_i3_8013DBF0[gDifficulty] * ((f32) (s32) ((f32) var_a3 / var_t0) * D_800CD00C);
+                var_v0_2 = D_i3_8013DBF0[gDifficulty] * ((f32) (s32) ((f32) var_a3 / var_t0) * gTotalLapCount);
             }
             if (var_v0_2 < D_i3_80141994) {
                 D_i3_80141990 = var_v0_2;
@@ -497,7 +501,7 @@ void func_i3_801175A4(void) {
             }
         }
     }
-    if ((D_i3_80141910->unk_2AC == 1) && (D_i3_80141910->unk_2A8 >= 2)) {
+    if ((D_i3_80141910->position == 1) && (D_i3_80141910->lap >= 2)) {
         for (i = 0; i < D_800E5EC0; i++) {
             if (D_800E5F40[i]->unk_368 < D_800E5EC0) {
                 break;
@@ -607,10 +611,10 @@ f32 D_i3_8013ED10[] = { 0.0f, 138.0f, 138.0f };
 f32 D_i3_8013ED1C[] = { 0.0f, 2.0f, -2.0f };
 
 extern u32 gGameFrameCount;
-extern s32 D_800CD00C;
+extern s32 gTotalLapCount;
 extern s8 D_800CD010;
 extern s32 D_800F80A8[];
-extern unk_8010B7B0 D_8010B7B0;
+extern unk_8010B7B0 D_8010B7B0[];
 
 #ifdef NON_MATCHING
 // regalloc (0.0f vs 0.f vs 0?) and missing branch instruction
@@ -640,7 +644,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     Racer* sp44;
     Racer* sp40;
 
-    if ((arg0->unk_00 & 3) != (gGameFrameCount % 4) && (D_800DCE44 != 0x11)) {
+    if ((arg0->id & 3) != (gGameFrameCount % 4) && (gGameMode != GAMEMODE_11)) {
         arg1->unk_7E = 0;
         arg1->stickX = arg0->unk_374;
         arg1->stickY = arg0->unk_378;
@@ -662,21 +666,21 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         arg0->unk_1F8 = 10.0f;
         arg0->unk_1E0 = 0.108f;
         arg0->unk_1E4 = 0.06f;
-        if (arg0->unk_00 >= gNumPlayers) {
+        if (arg0->id >= gNumPlayers) {
             arg0->unk_1AC = 0.f;
         }
     }
-    if ((D_800DCE44 == 3) || (D_800DCE44 == 4)) {
-        if (arg0->unk_00 >= gNumPlayers) {
+    if ((gGameMode == GAMEMODE_VS_2P) || (gGameMode == GAMEMODE_VS_3P)) {
+        if (arg0->id >= gNumPlayers) {
             if (gNumPlayers == 3) {
                 var_a1 = 0x1E;
                 for (i = 0; i < gNumPlayers; i++) {
-                    if (gRacers[i].unk_2AC < var_a1) {
-                        var_a1 = gRacers[i].unk_2AC;
+                    if (gRacers[i].position < var_a1) {
+                        var_a1 = gRacers[i].position;
                         var_a3 = i;
                     }
                 }
-            } else if (arg0->unk_00 == 2) {
+            } else if (arg0->id == 2) {
                 var_a3 = 0;
             } else {
                 var_a3 = 1;
@@ -691,25 +695,25 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 }
             } else {
                 arg0->unk_1EC = gRacers[var_a3].unk_98 - (temp_fv1 * 0.0002f);
-                if ((D_800CD00C == arg0->unk_2A8) &&
+                if ((gTotalLapCount == arg0->lap) &&
                     (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->unk_30)) {
                     arg0->unk_1EC = gRacers[var_a3].unk_98 - (temp_fv1 * 0.002f);
                 }
                 arg0->unk_1E8 = 0.f;
             }
-            if ((D_800CD00C == arg0->unk_2A8) && (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->unk_30)) {
+            if ((gTotalLapCount == arg0->lap) && (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->unk_30)) {
                 arg0->unk_1E8 = 0.f;
             }
             arg0->unk_38C = 0.0f;
         }
     }
     if (D_i3_80141998 != 0) {
-        if (D_800DCE44 == 2) {
+        if (gGameMode == GAMEMODE_PRACTICE) {
             arg0->unk_1EC = func_i3_801179DC(arg0);
             arg0->unk_1E8 = func_i3_80117A1C(arg0);
         }
     } else if (((gNumPlayers == 1) && (D_i3_80141910->unk_04 & 0x02000000)) || (arg0->unk_04 & 0x02000000) ||
-               (arg0->unk_00 < gNumPlayers)) {
+               (arg0->id < gNumPlayers)) {
         arg0->unk_1E8 = 0.f;
         arg0->unk_1EC = (2500.0f / 27.0f);
         arg0->unk_1B4 = 1.00894f;
@@ -718,10 +722,10 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         arg0->unk_1BC = 36.769516f;
         arg0->unk_1C4 = 1.726068f;
         arg0->unk_1D0 = 0.198282f;
-        if ((gNumPlayers == 1) && (D_800E5EC0 != 1) && (arg0->unk_00 != 0) && (D_i3_80141910->unk_04 & 0x02000000)) {
-            if ((sp44->unk_00 == 0) && (arg0->unk_2C0 < 2000.0f)) {
+        if ((gNumPlayers == 1) && (D_800E5EC0 != 1) && (arg0->id != 0) && (D_i3_80141910->unk_04 & 0x02000000)) {
+            if ((sp44->id == 0) && (arg0->unk_2C0 < 2000.0f)) {
                 arg0->unk_1EC = (625.0f / 27.0f);
-            } else if ((sp40->unk_00 == 0) && (arg0->unk_2C4 < 2000.0f)) {
+            } else if ((sp40->id == 0) && (arg0->unk_2C4 < 2000.0f)) {
                 arg0->unk_1E8 = 1.0f;
                 arg1->unk_7C |= 0x4000;
             }
@@ -732,9 +736,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     } else if (gNumPlayers == 1) {
         if (arg0->unk_352 != 0xFF) {
             spBC = (gRacers[arg0->unk_352].unk_23C + arg0->unk_38C) - arg0->unk_23C;
-            func_i3_80115DF0(D_i3_80141910->unk_23C - arg0->unk_23C);
-            if ((func_i3_80115DF0(spBC) < 460.0f) && sp70 && (arg0->unk_2A0 > 1000)) {
-                if ((arg0->unk_352 >= gNumPlayers) && ((arg0->unk_00 + gGameFrameCount) % 16) < 4) {
+            func_i3_fabsf(D_i3_80141910->unk_23C - arg0->unk_23C);
+            if ((func_i3_fabsf(spBC) < 460.0f) && sp70 && (arg0->unk_2A0 > 1000)) {
+                if ((arg0->unk_352 >= gNumPlayers) && ((arg0->id + gGameFrameCount) % 16) < 4) {
                     spB4 = ((-gRacers[arg0->unk_352].unk_0C.unk_28.x * gRacers[arg0->unk_352].unk_24C.z.x) -
                             (gRacers[arg0->unk_352].unk_0C.unk_28.y * gRacers[arg0->unk_352].unk_24C.z.y)) -
                            (gRacers[arg0->unk_352].unk_0C.unk_28.z * gRacers[arg0->unk_352].unk_24C.z.z);
@@ -752,10 +756,10 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             }
             arg0->unk_1E8 = 1.2f;
             if (sp70 && (arg0->unk_2A0 > 1000) && ((arg0->unk_274 + arg0->unk_270) > 138.0f) &&
-                (func_i3_80115DF0(gRacers[arg0->unk_352].unk_23C - arg0->unk_23C) < 184.0f)) {
+                (func_i3_fabsf(gRacers[arg0->unk_352].unk_23C - arg0->unk_23C) < 184.0f)) {
                 spB4 = ((f32) (Math_Rand1() % 32768) / 32767.0f) + 0.00001f;
 
-                if (func_i3_80115DF0(gRacers[arg0->unk_352].unk_33C - arg0->unk_33C) < 92.0f) {
+                if (func_i3_fabsf(gRacers[arg0->unk_352].unk_33C - arg0->unk_33C) < 92.0f) {
                     if (((arg0->unk_352 != 0) && (spB4 < 0.15f) && (arg0->unk_36C & 0x200)) || (spB4 < arg0->unk_360)) {
                         if (arg0->unk_390 == 0) {
                             if (arg0->unk_33C < gRacers[arg0->unk_352].unk_33C) {
@@ -776,7 +780,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     }
                 }
             }
-            if (arg0->unk_2A8 == 1) {
+            if (arg0->lap == 1) {
                 var_fv0 = func_i3_801179DC(arg0);
                 if (var_fv0 < arg0->unk_1EC) {
                     arg0->unk_1EC = var_fv0;
@@ -786,7 +790,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     arg0->unk_1E8 = var_fv0;
                 }
             }
-            if ((u32) (u8) (arg0->unk_00 + gGameFrameCount) < 4) {
+            if ((u32) (u8) (arg0->id + gGameFrameCount) < 4) {
                 if (arg0->unk_352 < gNumPlayers) {
                     arg0->unk_38C =
                         ((Math_Rand2() % 32768 / 32767.0f * 400.0f + 30.0f) + 200.0f) - (80 * -gDifficulty + 240);
@@ -795,24 +799,25 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 }
             }
 
-            if (((D_800CD00C == arg0->unk_2A8) &&
+            if (((gTotalLapCount == arg0->lap) &&
                  (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->unk_30)) ||
-                ((gRacers[arg0->unk_352].unk_368 == 0xFE) && (D_800DCE44 != 2) && (D_800DCE44 != 0x15))) {
+                ((gRacers[arg0->unk_352].unk_368 == 0xFE) && (gGameMode != GAMEMODE_PRACTICE) &&
+                 (gGameMode != GAMEMODE_DEATH_RACE))) {
                 arg0->unk_352 = 255;
-                if (arg0->unk_2A8 >= 2) {
+                if (arg0->lap >= 2) {
                     func_i3_80116A50(arg0);
                 }
             }
-        } else if ((arg0->unk_2A8 >= 2) || (D_800CD010 == 1)) {
-            if ((arg0->unk_398 == 0) || ((u32) (arg0->unk_00 + gGameFrameCount) % 64) < 4) {
+        } else if ((arg0->lap >= 2) || (D_800CD010 == 1)) {
+            if ((arg0->unk_398 == 0) || ((u32) (arg0->id + gGameFrameCount) % 64) < 4) {
                 func_i3_80116A50(arg0);
             }
 
-            var_fv0 = (D_800F8510->unk_0C * (D_800CD00C - 1)) / (arg0->unk_398 - arg0->unk_290[0]);
-            spBC = (((arg0->unk_2A0 - arg0->unk_290[0]) * var_fv0) + D_800F8510->unk_0C) - arg0->unk_23C;
-            spB4 = ((((arg0->unk_2A0 - arg0->unk_290[0]) - 0x11) * var_fv0) + D_800F8510->unk_0C) - arg0->unk_23C;
+            var_fv0 = (D_800F8510->unk_0C * (gTotalLapCount - 1)) / (arg0->unk_398 - arg0->lapTimes[0]);
+            spBC = (((arg0->unk_2A0 - arg0->lapTimes[0]) * var_fv0) + D_800F8510->unk_0C) - arg0->unk_23C;
+            spB4 = ((((arg0->unk_2A0 - arg0->lapTimes[0]) - 0x11) * var_fv0) + D_800F8510->unk_0C) - arg0->unk_23C;
 
-            var_fv0 = func_i3_80115DF0(D_i3_80141910->unk_23C - arg0->unk_23C);
+            var_fv0 = func_i3_fabsf(D_i3_80141910->unk_23C - arg0->unk_23C);
             arg0->unk_1EC = (spBC * 0.05f) + (spBC - spB4);
             arg0->unk_1E8 = 0.3f;
             if (spBC > 0.0f) {
@@ -823,7 +828,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                         arg0->unk_1EC = (2500.0f / 27.0f);
                     }
                 }
-            } else if ((var_fv0 < 2000.0f) && (D_800CD00C == arg0->unk_2A8) &&
+            } else if ((var_fv0 < 2000.0f) && (gTotalLapCount == arg0->lap) &&
                        (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->unk_30)) {
                 spBC = D_i3_80141910->unk_98 - 2.3148148f;
                 if ((var_fv0 < 0.0f) && (arg0->unk_1EC < spBC)) {
@@ -855,9 +860,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     if (D_i3_8013DBE8[var_a3] < arg0->unk_1EC) {
         arg0->unk_1EC = D_i3_8013DBE8[var_a3];
     }
-    if (((D_80141900 >= 0x15) || (D_800F80A8[0] >= 0x1F)) && (gNumPlayers == 1) && (arg0->unk_00 != 0) &&
+    if (((D_80141900 >= 0x15) || (D_800F80A8[0] >= 0x1F)) && (gNumPlayers == 1) && (arg0->id != 0) &&
         (arg0->unk_2A0 >= 0x2711) && !(D_i3_80141910->unk_04 & 0x08000000) &&
-        (func_i3_80115DF0(D_i3_80141910->unk_33C - sp94) < 138.0f)) {
+        (func_i3_fabsf(D_i3_80141910->unk_33C - sp94) < 138.0f)) {
 
         var_fv0 = D_i3_80141910->unk_23C - arg0->unk_23C;
         while (var_fv0 > D_800F8510->unk_0C * 0.5f) {
@@ -912,10 +917,10 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             temp4 = arg0->unk_C0.x.x;
             temp5 = arg0->unk_C0.x.y;
             temp6 = arg0->unk_C0.x.z;
-            if (D_800DCE44 == 0x11) {
-                arg0->unk_33C = D_i3_8013ED1C[arg0->unk_00] * 46.0f;
-                if (arg0->unk_00 != 0) {
-                    temp3 = ((gRacers[0].unk_23C - D_i3_8013ED10[arg0->unk_00]) - arg0->unk_23C);
+            if (gGameMode == GAMEMODE_11) {
+                arg0->unk_33C = D_i3_8013ED1C[arg0->id] * 46.0f;
+                if (arg0->id != 0) {
+                    temp3 = ((gRacers[0].unk_23C - D_i3_8013ED10[arg0->id]) - arg0->unk_23C);
                     arg0->unk_1EC = gRacers[0].unk_98 + (temp3 * 0.1f);
                     arg0->unk_1E8 = 1.0f;
                 }
@@ -1001,7 +1006,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         arg1->stickX = (var_a3 * 5) / 8;
         arg1->stickY = var_a1;
         if (gNumPlayers == 1) {
-            if (sp70 && (arg0->unk_2A0 > 1000) && (gDifficulty >= EXPERT) && (arg0->unk_00 != 0) && (D_800E5EC0 != 1) &&
+            if (sp70 && (arg0->unk_2A0 > 1000) && (gDifficulty >= EXPERT) && (arg0->id != 0) && (D_800E5EC0 != 1) &&
                 (arg0->unk_36C & 0x200)) {
                 if ((arg0->unk_2C4 < 23.0f) &&
                     (((gDifficulty >= EXPERT) && (D_i3_80141910->unk_23C < arg0->unk_23C)) ||
@@ -1013,7 +1018,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                         arg1->unk_7C |= 0x40;
                     }
                 }
-                if ((arg0->unk_2C4 < 23.0f) && (func_i3_80115DF0(sp40->unk_33C - arg0->unk_33C) < 138.0f) &&
+                if ((arg0->unk_2C4 < 23.0f) && (func_i3_fabsf(sp40->unk_33C - arg0->unk_33C) < 138.0f) &&
                     (arg0->unk_390 == 0) && (((f32) (Math_Rand1() % 32768) / 32767.0f) < 0.01f)) {
                     if (arg0->unk_33C < sp40->unk_33C) {
                         arg0->unk_390 = 5;
@@ -1026,7 +1031,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             if (arg0->unk_390 < 0) {
                 arg0->unk_390++;
                 if (((arg0->unk_390 == -3) || (arg0->unk_390 == -1)) &&
-                    ((gDifficulty >= EXPERT) || (func_i3_80115DF0(D_i3_80141910->unk_23C - arg0->unk_23C) > 184.0f)) &&
+                    ((gDifficulty >= EXPERT) || (func_i3_fabsf(D_i3_80141910->unk_23C - arg0->unk_23C) > 184.0f)) &&
                     (D_i3_80141910->unk_23C < arg0->unk_23C)) {
                     arg1->unk_7C |= 0x2000;
                 }
@@ -1052,13 +1057,13 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
 
         var_a3 = arg0->unk_0C.unk_00->unk_30;
         if (var_a3 != arg0->unk_358) {
-            arg0->unk_344 = D_8010B7B0.unk_6E0[var_a3];
-            arg0->unk_345 = D_8010B7B0.unk_6A0[var_a3];
-            arg0->unk_346 = D_8010B7B0.unk_620[var_a3];
-            arg0->unk_347 = D_8010B7B0.unk_660[var_a3];
-            arg0->unk_348 = D_8010B7B0.unk_5A0[var_a3];
+            arg0->unk_344 = D_8010B7B0[0].unk_6E0[var_a3];
+            arg0->unk_345 = D_8010B7B0[0].unk_6A0[var_a3];
+            arg0->unk_346 = D_8010B7B0[0].unk_620[var_a3];
+            arg0->unk_347 = D_8010B7B0[0].unk_660[var_a3];
+            arg0->unk_348 = D_8010B7B0[0].unk_5A0[var_a3];
             if (gDifficulty >= EXPERT) {
-                arg0->unk_349 = D_8010B7B0.unk_5E0[var_a3];
+                arg0->unk_349 = D_8010B7B0[0].unk_5E0[var_a3];
             } else {
                 arg0->unk_349 = -1;
             }
@@ -1069,9 +1074,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             if (++var_a3 >= D_800F8510->unk_08) {
                 var_a3 = 0;
             }
-            arg0->unk_34A = D_8010B7B0.unk_6E0[var_a3];
-            arg0->unk_34B = D_8010B7B0.unk_620[var_a3];
-            arg0->unk_34C = D_8010B7B0.unk_5E0[var_a3];
+            arg0->unk_34A = D_8010B7B0[0].unk_6E0[var_a3];
+            arg0->unk_34B = D_8010B7B0[0].unk_620[var_a3];
+            arg0->unk_34C = D_8010B7B0[0].unk_5E0[var_a3];
             arg0->unk_34E = 6;
             if (arg0->unk_344 != -1) {
                 arg0->unk_34E = 5;
@@ -1126,11 +1131,11 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             }
         } else {
             if (((arg0->unk_0C.unk_00->unk_20 & 0x1C0) != 0x80) && ((arg0->unk_0C.unk_00->unk_20 & 0x1C0) != 0xC0) &&
-                (D_800DCE44 != 0x11)) {
+                (gGameMode != GAMEMODE_11)) {
                 if ((D_800F8514 < 0x18) && (((arg0->unk_2A0 >= 0x7D1) &&
                                              (((arg0->unk_368 % 6) < 2) ||
-                                              (func_i3_80115DF0(arg0->unk_23C - D_i3_80141910->unk_23C) > 5000.0f))) ||
-                                            (arg0->unk_00 < gNumPlayers))) {
+                                              (func_i3_fabsf(arg0->unk_23C - D_i3_80141910->unk_23C) > 5000.0f))) ||
+                                            (arg0->id < gNumPlayers))) {
                     var_a3 = arg0->unk_0C.unk_00->unk_30 * 4;
                     if (arg0->unk_0C.unk_08 >= 0.5f) {
                         var_a3 += 2;
@@ -1143,8 +1148,8 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     temps = D_i3_8013DBE8[var_a1 + 1];
                     spBC = (temps - sp7C) * arg0->unk_0C.unk_08 + sp7C;
                     if (D_800E5EC0 != 1) {
-                        if (sp44->unk_00 != arg0->unk_352) {
-                            if ((arg0->unk_2C0 < 92.0f) && (func_i3_80115DF0(sp44->unk_33C - spBC) < 69.0f)) {
+                        if (sp44->id != arg0->unk_352) {
+                            if ((arg0->unk_2C0 < 92.0f) && (func_i3_fabsf(sp44->unk_33C - spBC) < 69.0f)) {
                                 if (spBC < sp44->unk_33C) {
                                     arg0->unk_33C = spBC - 92.0f;
                                 } else {
@@ -1157,7 +1162,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     } else {
                         arg0->unk_33C = spBC;
                     }
-                    if ((var_a3 != arg0->unk_358) && (sp7C & 1) && (arg0->unk_00 < gNumPlayers)) {
+                    if ((var_a3 != arg0->unk_358) && (sp7C & 1) && (arg0->id < gNumPlayers)) {
                         var_fv0 = arg0->unk_228 / arg0->unk_22C;
                         if (var_fv0 > 0.3f) {
                             arg1->unk_7C |= 0xC000;
@@ -1199,7 +1204,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                                                  (arg0->unk_0C.unk_28.y * arg0->unk_24C.z.y)) -
                                                 (arg0->unk_0C.unk_28.z * arg0->unk_24C.z.z);
 
-                                if (func_i3_80115DF0(sp9C - arg0->unk_33C) < 146.0f) {
+                                if (func_i3_fabsf(sp9C - arg0->unk_33C) < 146.0f) {
                                     if (arg0->unk_33C > sp9C) {
                                         arg0->unk_33C += arg0->unk_354 * 10.0f;
                                     } else {
@@ -1211,7 +1216,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
 
                             if ((arg0->unk_348 == 1) && (var_fv0 < 0.99f)) {
                                 arg0->unk_33C = sp94;
-                                if ((D_800DCE44 == 0x15) && (arg0->unk_00 >= gNumPlayers)) {
+                                if ((gGameMode == GAMEMODE_DEATH_RACE) && (arg0->id >= gNumPlayers)) {
                                     if (arg0->unk_33C < ((sp9C - 100.0f) + 46.0f)) {
                                         arg0->unk_33C += (arg0->unk_354 * 10.0f);
                                     }
@@ -1223,7 +1228,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                                 break;
                             }
 
-                            if ((arg0->unk_348 == 2) && ((arg0->unk_2A8 == 1) || (var_fv0 < 0.99f))) {
+                            if ((arg0->unk_348 == 2) && ((arg0->lap == 1) || (var_fv0 < 0.99f))) {
                                 arg0->unk_33C = sp94;
                                 if (arg0->unk_33C < (sp9C + 100.0f + 46.0f)) {
                                     arg0->unk_33C += arg0->unk_354 * 10.0f;
@@ -1233,7 +1238,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                             /* fallthrough */
                         case 4:
                             if ((arg0->unk_346 != -1) && (arg0->unk_36C & 4)) {
-                                if ((arg0->unk_346 == 0) && (func_i3_80115DF0(sp9C - arg0->unk_33C) > 77.0f)) {
+                                if ((arg0->unk_346 == 0) && (func_i3_fabsf(sp9C - arg0->unk_33C) > 77.0f)) {
                                     if (arg0->unk_33C > sp9C) {
                                         arg0->unk_33C -= arg0->unk_354 * 4.0f;
                                     } else {
@@ -1254,7 +1259,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                                     }
                                 }
                                 if (arg0->unk_346 == 3) {
-                                    if (func_i3_80115DF0(sp9C - arg0->unk_33C) > 146.0f) {
+                                    if (func_i3_fabsf(sp9C - arg0->unk_33C) > 146.0f) {
                                         if (arg0->unk_33C < sp9C) {
                                             arg0->unk_33C -= arg0->unk_354 * 4.0f;
                                         } else {
@@ -1278,8 +1283,8 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                             }
                             /* fallthrough */
                         case 6:
-                            if ((D_800E5EC0 != 1) && (sp44->unk_00 != arg0->unk_352) && (arg0->unk_2C0 < 92.0f) &&
-                                (func_i3_80115DF0(sp44->unk_33C - arg0->unk_33C) < 92.0f)) {
+                            if ((D_800E5EC0 != 1) && (sp44->id != arg0->unk_352) && (arg0->unk_2C0 < 92.0f) &&
+                                (func_i3_fabsf(sp44->unk_33C - arg0->unk_33C) < 92.0f)) {
                                 if ((arg0->unk_33C > 0.0f) && (arg0->unk_274 < (arg0->unk_33C + 46.0f))) {
                                     arg0->unk_33C -= arg0->unk_354;
                                     break;
@@ -1299,24 +1304,24 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
 
                             if ((arg0->unk_349 != -1) && (arg0->unk_36C & 1)) {
                                 if ((arg0->unk_349 == 0) && (arg0->unk_0C.unk_08 < 0.8f) &&
-                                    (func_i3_80115DF0(arg0->unk_33C - sp9C) < 230.0f)) {
+                                    (func_i3_fabsf(arg0->unk_33C - sp9C) < 230.0f)) {
                                     arg0->unk_33C = sp9C;
                                     break;
                                 }
                                 if ((arg0->unk_349 == 1) && (arg0->unk_0C.unk_08 < 0.8f) &&
-                                    (func_i3_80115DF0(arg0->unk_33C - ((-1.0f * arg0->unk_270) + 100.0f)) < 230.0f)) {
+                                    (func_i3_fabsf(arg0->unk_33C - ((-1.0f * arg0->unk_270) + 100.0f)) < 230.0f)) {
                                     arg0->unk_33C = (arg0->unk_270 * -1.0f) + 100.0f;
                                     break;
                                 }
                                 if ((arg0->unk_349 == 2) && (arg0->unk_0C.unk_08 < 0.8f)) {
-                                    if (func_i3_80115DF0(arg0->unk_33C - (arg0->unk_274 - 100.0f)) < 230.0f) {
+                                    if (func_i3_fabsf(arg0->unk_33C - (arg0->unk_274 - 100.0f)) < 230.0f) {
                                         arg0->unk_33C = arg0->unk_274 - 100.0f;
                                         break;
                                     }
                                 }
                             }
                             if ((arg0->unk_347 != -1) && (arg0->unk_36C & 1)) {
-                                if ((arg0->unk_347 == 0) && (func_i3_80115DF0(sp9C - arg0->unk_33C) > 77.0f)) {
+                                if ((arg0->unk_347 == 0) && (func_i3_fabsf(sp9C - arg0->unk_33C) > 77.0f)) {
                                     if (sp9C < arg0->unk_33C) {
                                         arg0->unk_33C -= arg0->unk_354 * 3.0f;
                                     } else {
@@ -1335,7 +1340,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                                     break;
                                 }
 
-                                if ((arg0->unk_347 == 3) && (func_i3_80115DF0(sp9C - arg0->unk_33C) > 146.0f)) {
+                                if ((arg0->unk_347 == 3) && (func_i3_fabsf(sp9C - arg0->unk_33C) > 146.0f)) {
                                     if (arg0->unk_33C < sp9C) {
                                         arg0->unk_33C -= arg0->unk_354 * 3.0f;
                                     } else {
@@ -1346,7 +1351,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                             }
 
                             if ((arg0->unk_34B != -1) && (arg0->unk_36C & 0x10)) {
-                                if ((arg0->unk_34B == 0) && (func_i3_80115DF0(sp9C - arg0->unk_33C) > 77.0f)) {
+                                if ((arg0->unk_34B == 0) && (func_i3_fabsf(sp9C - arg0->unk_33C) > 77.0f)) {
                                     if (arg0->unk_33C > sp9C) {
                                         arg0->unk_33C -= arg0->unk_354 * 3.0f;
                                     } else {
@@ -1367,7 +1372,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                                     }
                                 } else {
                                 block_429:
-                                    if ((arg0->unk_34B == 3) && (func_i3_80115DF0(sp9C - arg0->unk_33C) > 146.0f)) {
+                                    if ((arg0->unk_34B == 3) && (func_i3_fabsf(sp9C - arg0->unk_33C) > 146.0f)) {
                                         if (arg0->unk_33C < sp9C) {
                                             arg0->unk_33C -= arg0->unk_354 * 3.0f;
                                         } else {
@@ -1389,18 +1394,17 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
 
                             if ((arg0->unk_34C != -1) && (arg0->unk_36C & 0x20)) {
                                 if ((arg0->unk_34C == 0) && (arg0->unk_0C.unk_08 < 0.5f) &&
-                                    (func_i3_80115DF0(arg0->unk_33C - sp9C) < 230.0f)) {
+                                    (func_i3_fabsf(arg0->unk_33C - sp9C) < 230.0f)) {
                                     arg0->unk_33C = sp9C;
                                     break;
                                 } else {
                                     if ((arg0->unk_34C == 1) && (arg0->unk_0C.unk_08 < 0.5f) &&
-                                        (func_i3_80115DF0(arg0->unk_33C - ((-1.0f * arg0->unk_270) + 100.0f)) <
-                                         230.0f)) {
+                                        (func_i3_fabsf(arg0->unk_33C - ((-1.0f * arg0->unk_270) + 100.0f)) < 230.0f)) {
                                         arg0->unk_33C = (arg0->unk_270 * -1.0f) + 100.0f;
                                         break;
                                     }
                                     if ((arg0->unk_34C == 2) && (arg0->unk_0C.unk_08 < 0.5f) &&
-                                        (func_i3_80115DF0(arg0->unk_33C - (arg0->unk_274 - 100.0f)) < 230.0f)) {
+                                        (func_i3_fabsf(arg0->unk_33C - (arg0->unk_274 - 100.0f)) < 230.0f)) {
                                         arg0->unk_33C = arg0->unk_274 - 100.0f;
                                         break;
                                     }
@@ -1420,10 +1424,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             }
         }
         D_i3_8013EC90[arg0->character](arg0, arg1);
-        if ((gNumPlayers == 1) && (arg0->unk_00 != 0)) {
+        if ((gNumPlayers == 1) && (arg0->id != 0)) {
             var_fv0 = arg0->unk_23C - D_i3_80141910->unk_23C;
-            if ((var_fv0 > -230.0f) && (var_fv0 < -11.5f) &&
-                (func_i3_80115DF0(sp94 - D_i3_80141910->unk_33C) < 92.0f)) {
+            if ((var_fv0 > -230.0f) && (var_fv0 < -11.5f) && (func_i3_fabsf(sp94 - D_i3_80141910->unk_33C) < 92.0f)) {
                 if (D_i3_80141910->unk_33C < sp94) {
                     arg0->unk_33C = D_i3_80141910->unk_33C + 92.0f;
                 } else {
@@ -1476,10 +1479,10 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 }
             }
         }
-        if ((gNumPlayers == 1) && (arg0->unk_00 != 0)) {
+        if ((gNumPlayers == 1) && (arg0->id != 0)) {
             var_fv0 = D_i3_80141910->unk_23C - arg0->unk_23C;
             if ((var_fv0 > 0.0f) && (var_fv0 < spBC) &&
-                (func_i3_80115DF0(D_i3_80141910->unk_33C - arg0->unk_33C) < 69.0f)) {
+                (func_i3_fabsf(D_i3_80141910->unk_33C - arg0->unk_33C) < 69.0f)) {
                 if (D_i3_80141910->unk_98 < arg0->unk_1EC) {
                     arg0->unk_1EC = D_i3_80141910->unk_98;
                 }
@@ -1488,9 +1491,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         if (arg0->unk_1EC < (625.0f / 27.0f)) {
             arg0->unk_1EC = (625.0f / 27.0f);
         }
-        if ((arg0->unk_04 & 0x02000000) || (D_800DCE44 == 0x11)) {
+        if ((arg0->unk_04 & 0x02000000) || (gGameMode == GAMEMODE_11)) {
             arg0->unk_36C &= ~0xA00;
-            if (arg0->unk_00 < gNumPlayers) {
+            if (arg0->id < gNumPlayers) {
                 arg1->unk_7C &= ~0x4000;
             }
             if (D_i3_80141908 != 0) {
@@ -1504,7 +1507,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 }
 
                 if (var_a1 == D_800E5EC0) {
-                    if (arg0->unk_00 == 0) {
+                    if (arg0->id == 0) {
                         D_i3_8014190C++;
                     }
                     if (D_i3_8014190C > 60) {

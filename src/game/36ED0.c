@@ -1392,15 +1392,15 @@ void func_800A4D0C(s32 arg0) {
 extern unk_800F8510* D_800F8510;
 extern s32 D_800F8514;
 
-extern unk_8010B7B0 D_8010B7B0;
+extern unk_8010B7B0 D_8010B7B0[];
 s32 func_800AA394(void);
 
 void func_800A4DF0(void) {
 
     D_800F8510 = &D_802A6B40[D_800F8514];
     func_8007402C(D_800F8514);
-    func_800747EC(D_8010B7B0.unk_002);
-    func_8009CED0(D_8010B7B0.unk_002);
+    func_800747EC(D_8010B7B0[0].unk_002);
+    func_8009CED0(D_8010B7B0[0].unk_002);
     func_80074634(D_800F8510);
     func_8009DEAC(D_800F8510);
     if (D_800F8510->unk_04 >= 24) {
@@ -2498,30 +2498,31 @@ Gfx* func_800A95B4(Gfx* gfx) {
 
 s32 func_800AA394(void) {
     s32 i;
-    u32 var_v1 = D_8010B7B0.unk_001;
+    u32 var_v1 = D_8010B7B0[0].unk_001;
 
-    for (i = 0; i < D_8010B7B0.unk_001; i++) {
+    for (i = 0; i < D_8010B7B0[0].unk_001; i++) {
 
-        D_8010B7B0.unk_020[i].unk_10 &= ~0x600;
-        D_8010B7B0.unk_020[i].unk_10 &= ~0x38000;
-        D_8010B7B0.unk_020[i].unk_10 &= ~0x40000000;
+        D_8010B7B0[0].unk_020[i].unk_10 &= ~0x600;
+        D_8010B7B0[0].unk_020[i].unk_10 &= ~0x38000;
+        D_8010B7B0[0].unk_020[i].unk_10 &= ~0x40000000;
 
-        var_v1 += (s32) ((D_8010B7B0.unk_020[i].unk_00.x + ((1.1f + (0.7f * i)) * D_8010B7B0.unk_020[i].unk_00.y)) +
-                         ((2.2f + (1.2f * i)) * D_8010B7B0.unk_020[i].unk_00.z * (4.4f + (0.9f * i))) +
-                         D_8010B7B0.unk_020[i].unk_0C + ((5.5f + (0.8f * i)) * D_8010B7B0.unk_020[i].unk_0E * 4.8f)) +
-                  D_8010B7B0.unk_020[i].unk_10 * (0xFE - i) + D_8010B7B0.unk_520[i] * (0x93DE - i * 2);
+        var_v1 +=
+            (s32) ((D_8010B7B0[0].unk_020[i].unk_00.x + ((1.1f + (0.7f * i)) * D_8010B7B0[0].unk_020[i].unk_00.y)) +
+                   ((2.2f + (1.2f * i)) * D_8010B7B0[0].unk_020[i].unk_00.z * (4.4f + (0.9f * i))) +
+                   D_8010B7B0[0].unk_020[i].unk_0C + ((5.5f + (0.8f * i)) * D_8010B7B0[0].unk_020[i].unk_0E * 4.8f)) +
+            D_8010B7B0[0].unk_020[i].unk_10 * (0xFE - i) + D_8010B7B0[0].unk_520[i] * (0x93DE - i * 2);
     }
 
-    for (i = 0; i < D_8010B7B0.unk_001; i++) {
-        var_v1 += (D_8010B7B0.unk_5A0[i] * i);
-        var_v1 += (D_8010B7B0.unk_5E0[i] * (i + 0x10));
-        var_v1 += (D_8010B7B0.unk_620[i] * (i + 0x80));
-        var_v1 += (D_8010B7B0.unk_660[i] * (i + 0x100));
-        var_v1 += (D_8010B7B0.unk_6A0[i] * (i + 0x800));
-        var_v1 += (D_8010B7B0.unk_6E0[i] * (i + 0x1000));
-        var_v1 += (D_8010B7B0.unk_720[i] * (i + 0x8000));
-        var_v1 += (D_8010B7B0.unk_760[i] * (i + 0x10000));
-        var_v1 += (D_8010B7B0.unk_7A0[i] * (i + 0x80000));
+    for (i = 0; i < D_8010B7B0[0].unk_001; i++) {
+        var_v1 += (D_8010B7B0[0].unk_5A0[i] * i);
+        var_v1 += (D_8010B7B0[0].unk_5E0[i] * (i + 0x10));
+        var_v1 += (D_8010B7B0[0].unk_620[i] * (i + 0x80));
+        var_v1 += (D_8010B7B0[0].unk_660[i] * (i + 0x100));
+        var_v1 += (D_8010B7B0[0].unk_6A0[i] * (i + 0x800));
+        var_v1 += (D_8010B7B0[0].unk_6E0[i] * (i + 0x1000));
+        var_v1 += (D_8010B7B0[0].unk_720[i] * (i + 0x8000));
+        var_v1 += (D_8010B7B0[0].unk_760[i] * (i + 0x10000));
+        var_v1 += (D_8010B7B0[0].unk_7A0[i] * (i + 0x80000));
     }
 
     return var_v1;

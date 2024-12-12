@@ -2,7 +2,6 @@
 #include "unk_leo.h"
 
 extern unk_leo_80419EA0 D_i1_80419EA0;
-extern unk_leo_804285D0 D_i1_8041B550[];
 extern s32 D_i1_80428610;
 
 s32 func_i1_8040B480(u16 arg0, u16 arg1, u16 arg2) {
@@ -16,10 +15,10 @@ s32 func_i1_8040B480(u16 arg0, u16 arg1, u16 arg2) {
         D_i1_80428610 = 0xF4;
         return -1;
     }
-    sp6 = D_i1_8041B550[arg0].unk_00;
+    sp6 = D_i1_80419EA0.unk_16B0[arg0].unk_00;
     sp6 |= arg1;
     sp6 &= arg2 ^ 0xFFFF;
-    D_i1_8041B550[arg0].unk_00 = sp6;
+    D_i1_80419EA0.unk_16B0[arg0].unk_00 = sp6;
     return 0;
 }
 
@@ -80,11 +79,11 @@ s32 func_i1_8040B740(u16 arg0) {
         return -1;
     }
 
-    if (!(D_i1_8041B550[arg0].unk_00 & 0x4000) || (D_i1_8041B550[arg0].unk_00 & 0x8000)) {
+    if (!(D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x4000) || (D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x8000)) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
-    return D_i1_8041B550[arg0].unk_00;
+    return D_i1_80419EA0.unk_16B0[arg0].unk_00;
 }
 
 s32 func_i1_8040B7EC(u16 arg0, s32 arg1, s32 arg2) {
@@ -110,5 +109,5 @@ s32 func_i1_8040B7EC(u16 arg0, s32 arg1, s32 arg2) {
         return -1;
     }
 
-    return D_i1_8041B550[sp1E].unk_00;
+    return D_i1_80419EA0.unk_16B0[sp1E].unk_00;
 }

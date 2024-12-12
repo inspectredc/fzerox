@@ -821,7 +821,7 @@ void func_80071A58(s32, s32);
 void func_80071BE4(s32);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80071BE4.s")
 
-extern unk_8010B7B0 D_8010B7B0;
+extern unk_8010B7B0 D_8010B7B0[];
 void func_8007243C(s32);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8007243C.s")
 
@@ -860,7 +860,7 @@ void func_80073894(s32 arg0) {
         if (D_802CDFD0 < 4) {
             return;
         }
-    } else if (D_8010B7B0.unk_001 < 4) {
+    } else if (D_8010B7B0[0].unk_001 < 4) {
         return;
     }
 
@@ -883,7 +883,7 @@ void func_8007392C(s32 arg0) {
         if (D_802CDFD0 < 4) {
             return;
         }
-    } else if (D_8010B7B0.unk_001 < 4) {
+    } else if (D_8010B7B0[0].unk_001 < 4) {
         return;
     }
 
@@ -970,9 +970,9 @@ void func_8007402C(s32 arg0) {
 
     if (arg0 >= 54) {
         func_80073FA0(SEGMENT_ROM_START(segment_2AD1E0) + (arg0 - 30) * sizeof(unk_8010B7B0),
-                      osVirtualToPhysical(&D_8010B7B0), sizeof(unk_8010B7B0));
+                      osVirtualToPhysical(D_8010B7B0), sizeof(unk_8010B7B0));
         if ((D_80106F48 >= 4) && (arg0 == 55)) {
-            D_8010B7B0.unk_003 = 3;
+            D_8010B7B0[0].unk_003 = 3;
         }
     } else if (arg0 >= 48) {
         func_800A3044();
@@ -989,10 +989,10 @@ void func_8007402C(s32 arg0) {
 
         if (func_i1_80403680(0xFFFB, D_i2_8010D730[sp28], "CRSD\0\0\0\0ENTRY CHECK OK\n") != 0xFFFF) {
             func_i1_804096C8(0xFFFB, D_i2_8010D730[sp28], "CRSD\0\0\0\0ENTRY LOAD OK\n\0\0UNPACK\n\0UNPACK OK\n",
-                             &D_8010B7B0, 0);
+                             D_8010B7B0, 0);
         }
     } else {
-        func_80073FA0(SEGMENT_ROM_START(segment_2AD1E0) + arg0 * sizeof(unk_8010B7B0), osVirtualToPhysical(&D_8010B7B0),
+        func_80073FA0(SEGMENT_ROM_START(segment_2AD1E0) + arg0 * sizeof(unk_8010B7B0), osVirtualToPhysical(D_8010B7B0),
                       sizeof(unk_8010B7B0));
     }
 
@@ -1008,16 +1008,16 @@ void func_80074204(void) {
     s32 i;
 
     for (i = 0; i < 64; i++) {
-        D_8010B7B0.unk_520[i] = 0;
-        D_8010B7B0.unk_5A0[i] = -1;
-        D_8010B7B0.unk_5E0[i] = -1;
-        D_8010B7B0.unk_620[i] = -1;
-        D_8010B7B0.unk_660[i] = -1;
-        D_8010B7B0.unk_6A0[i] = -1;
-        D_8010B7B0.unk_6E0[i] = -1;
-        D_8010B7B0.unk_720[i] = -1;
-        D_8010B7B0.unk_760[i] = -1;
-        D_8010B7B0.unk_7A0[i] = -1;
+        D_8010B7B0[0].unk_520[i] = 0;
+        D_8010B7B0[0].unk_5A0[i] = -1;
+        D_8010B7B0[0].unk_5E0[i] = -1;
+        D_8010B7B0[0].unk_620[i] = -1;
+        D_8010B7B0[0].unk_660[i] = -1;
+        D_8010B7B0[0].unk_6A0[i] = -1;
+        D_8010B7B0[0].unk_6E0[i] = -1;
+        D_8010B7B0[0].unk_720[i] = -1;
+        D_8010B7B0[0].unk_760[i] = -1;
+        D_8010B7B0[0].unk_7A0[i] = -1;
     }
 }
 
@@ -1025,8 +1025,8 @@ void func_80074204(void);
 
 void func_800742D0(void) {
     func_80074204();
-    D_8010B7B0.unk_002 = 0;
-    D_8010B7B0.unk_003 = 0;
+    D_8010B7B0[0].unk_002 = 0;
+    D_8010B7B0[0].unk_003 = 0;
 }
 
 extern unk_8010B7B0 D_8010CF50;
@@ -1041,11 +1041,11 @@ void func_800742FC(void) {
     bzero(SEGMENT_VRAM_START(unk_context), SEGMENT_BSS_SIZE(unk_context));
     func_80074204();
     D_802CDFD0 = 0;
-    D_8010B7B0.unk_000 = 4;
-    D_8010B7B0.unk_001 = 0;
-    D_8010B7B0.unk_002 = 0;
-    D_8010B7B0.unk_003 = 0;
-    D_8010CF50 = D_8010B7B0;
+    D_8010B7B0[0].unk_000 = 4;
+    D_8010B7B0[0].unk_001 = 0;
+    D_8010B7B0[0].unk_002 = 0;
+    D_8010B7B0[0].unk_003 = 0;
+    D_8010CF50 = D_8010B7B0[0];
     D_802D1B60.unk_00 = D_802D0FE0;
     D_802A6B50 = D_802C2020;
     D_802D2D70.unk_00 = D_802D1B70;
@@ -1054,8 +1054,8 @@ void func_800742FC(void) {
 
     func_8007402C(0);
     func_80074204();
-    D_8010CF50 = D_8010B7B0;
-    D_8010B7B0.unk_001 = 0;
+    D_8010CF50 = D_8010B7B0[0];
+    D_8010B7B0[0].unk_001 = 0;
     D_802CDFD0 = 0;
 }
 
@@ -1114,11 +1114,11 @@ void func_80074744(void) {
             case 0xC0:
             case 0x100:
             case 0x180:
-                D_8010B7B0.unk_5A0[i] = -1;
-                D_8010B7B0.unk_620[i] = -1;
-                D_8010B7B0.unk_660[i] = -1;
-                D_8010B7B0.unk_6A0[i] = -1;
-                D_8010B7B0.unk_6E0[i] = -1;
+                D_8010B7B0[0].unk_5A0[i] = -1;
+                D_8010B7B0[0].unk_620[i] = -1;
+                D_8010B7B0[0].unk_660[i] = -1;
+                D_8010B7B0[0].unk_6A0[i] = -1;
+                D_8010B7B0[0].unk_6E0[i] = -1;
                 break;
         }
         switch (temp) {
@@ -1126,8 +1126,8 @@ void func_80074744(void) {
             case 0x1C0:
                 break;
             default:
-                D_8010B7B0.unk_720[i] = -1;
-                D_8010B7B0.unk_7A0[i] = -1;
+                D_8010B7B0[0].unk_720[i] = -1;
+                D_8010B7B0[0].unk_7A0[i] = -1;
                 break;
         }
     }
