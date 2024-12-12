@@ -37,7 +37,7 @@ void func_80069F5C(u64* arg0) {
     var_s0 = &arg0[5624];
 
     for (var_s1 = 0; var_s1 < 0x6A00; var_s1 += 0x100, var_s0 += 80) {
-        func_80073E28((uintptr_t) SEGMENT_ROM_START(segment_2787F0) + var_s1 + 8, var_s0, 0x100);
+        func_80073E28((uintptr_t) SEGMENT_ROM_START(segment_2787F0) + var_s1 + sizeof(Gfx), var_s0, 0x100);
     }
 }
 
@@ -591,7 +591,53 @@ void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
     Matrix_ToMtx(arg1, arg0);
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006C378.s")
+extern Mtx D_800E1230;
+extern MtxF D_800E1270;
+extern f32 D_800DD230[];
+
+void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7, f32 arg8) {
+    f32 temp_fv1;
+    f32 sp28;
+    f32 sp24;
+    f32 temp_ft5;
+    f32 temp_fv0;
+    f32 sp18;
+    f32 temp;
+    f32 temp2;
+    f32 temp3;
+    f32 temp4;
+
+    if (arg0 == NULL) {
+        arg0 = &D_800E1230;
+    }
+    if (arg1 == NULL) {
+        arg1 = &D_800E1270;
+    }
+
+    arg1->yz = -(temp_fv1 = D_800DD230[arg3 & 0xFFF]);
+    sp28 = D_800DD230[arg4 & 0xFFF];
+    arg1->xz = (sp28 = D_800DD230[arg4 & 0xFFF]) * (temp_fv0 = D_800DD230[(arg3 + 0x400) & 0xFFF]);
+    arg1->zz = (temp_ft5 = D_800DD230[(arg4 + 0x400) & 0xFFF]) * temp_fv0;
+    arg1->yx = (sp24 = D_800DD230[arg5 & 0xFFF]) * temp_fv0;
+    arg1->yy = (sp18 = D_800DD230[(arg5 + 0x400) & 0xFFF]) * temp_fv0;
+
+    // FAKE
+    temp = sp28 * sp24;
+    temp4 = temp_ft5 * sp18;
+    temp2 = sp28 * sp18;
+    temp3 = sp24 * temp_ft5;
+    arg1->xx = (temp_ft5 * sp18) + temp_fv1 * (sp28 * sp24);
+    arg1->xy = temp_fv1 * temp2 - temp3;
+    arg1->zx = temp_fv1 * temp3 - temp2;
+    arg1->zy = temp_fv1 * temp4 + temp;
+
+    arg1->xw = arg6;
+    arg1->yw = arg7;
+    arg1->zw = arg8;
+    arg1->wx = arg1->wy = arg1->wz = 0.0f;
+    arg1->ww = 1.0f;
+    Matrix_ToMtx(arg1, arg0);
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006C520.s")
 
@@ -633,7 +679,89 @@ void func_8006CB0C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006CC98.s")
+void func_8006CC98(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,
+                   f32 arg9, f32 argA) {
+    f32 temp_fa0;
+    f32 sp68;
+    f32 sp64;
+    f32 sp60;
+    f32 sp8C;
+    f32 sp88;
+    f32 sp84;
+    f32 sp80;
+    f32 sp7C;
+    f32 sp78;
+
+    if (arg0 == NULL) {
+        arg0 = &D_800E1230;
+    }
+    if (arg1 == NULL) {
+        arg1 = &D_800E1270;
+    }
+
+    sp68 = arg2 - arg5;
+    sp64 = arg3 - arg6;
+    sp60 = arg4 - arg7;
+
+    temp_fa0 = SQ(sp68) + SQ(sp64) + SQ(sp60);
+    if (temp_fa0 <= 0.0f) {
+        return;
+    }
+
+    temp_fa0 = 1.0f / sqrtf(temp_fa0);
+    {
+        MtxF* mtxF = arg1;
+        mtxF->zy = sp64 * temp_fa0;
+        mtxF->zx = sp68 * temp_fa0;
+        mtxF->zz = sp60 * temp_fa0;
+
+        mtxF->zw = -arg2 * mtxF->zx - arg3 * mtxF->zy - mtxF->zz * arg4;
+    }
+
+    sp8C = (arg9 * sp60) - (argA * sp64);
+    sp88 = (argA * sp68) - (arg8 * sp60);
+    sp84 = (arg8 * sp64) - (arg9 * sp68);
+
+    temp_fa0 = SQ(sp8C) + SQ(sp88) + SQ(sp84);
+    if (temp_fa0 <= 0.0f) {
+        return;
+    }
+
+    temp_fa0 = 1.0f / sqrtf(temp_fa0);
+    {
+        MtxF* mtxF = arg1;
+        mtxF->xy = sp88 * temp_fa0;
+        mtxF->xx = sp8C * temp_fa0;
+        mtxF->xz = sp84 * temp_fa0;
+
+        mtxF->xw = -arg2 * mtxF->xx - arg3 * mtxF->xy - mtxF->xz * arg4;
+    }
+
+    sp80 = (sp64 * sp84) - (sp60 * sp88);
+    sp7C = (sp60 * sp8C) - (sp68 * sp84);
+    sp78 = (sp68 * sp88) - (sp64 * sp8C);
+
+    temp_fa0 = SQ(sp80) + SQ(sp7C) + SQ(sp78);
+    if (temp_fa0 <= 0.0f) {
+        return;
+    }
+
+    temp_fa0 = 1.0f / sqrtf(temp_fa0);
+    {
+        MtxF* mtxF = arg1;
+        mtxF->yy = sp7C * temp_fa0;
+        mtxF->yx = sp80 * temp_fa0;
+        mtxF->yz = sp78 * temp_fa0;
+
+        mtxF->yw = -arg2 * mtxF->yx - arg3 * mtxF->yy - mtxF->yz * arg4;
+    }
+
+    arg1->wx = 0.0f;
+    arg1->wy = 0.0f;
+    arg1->wz = 0.0f;
+    arg1->ww = 1.0f;
+    Matrix_ToMtx(arg1, arg0);
+}
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006D03C.s")
 

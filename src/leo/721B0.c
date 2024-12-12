@@ -105,8 +105,6 @@ s32 func_i1_80403420(u16 arg0) {
     return 0;
 }
 
-extern unk_leo_804285D0 D_i1_8041B550[];
-
 s32 func_i1_80404830(void);
 
 s32 func_i1_8040349C(void) {
@@ -118,7 +116,7 @@ s32 func_i1_8040349C(void) {
     }
 
     for (i = 0; i < D_i1_8042860C; i++) {
-        if (D_i1_8041B550[i].unk_00 == 0) {
+        if (D_i1_80419EA0.unk_16B0[i].unk_00 == 0) {
             sp18++;
         }
     }
@@ -128,13 +126,13 @@ s32 func_i1_8040349C(void) {
 
 void func_i1_80403544(u16 arg0) {
 
-    if (D_i1_8041B550[arg0].unk_2A < 0xFF) {
+    if (D_i1_80419EA0.unk_16B0[arg0].unk_2A < 0xFF) {
         D_i1_80419EA0.unk_16B0[arg0].unk_2A++;
     }
 }
 
 void func_i1_804035B0(u16 arg0) {
-    D_i1_8041B550[arg0].unk_2A = 0;
+    D_i1_80419EA0.unk_16B0[arg0].unk_2A = 0;
 }
 
 s32 func_i1_80406C10(void*, void*, size_t);
@@ -217,7 +215,7 @@ u16 func_i1_8040397C(void) {
     s32 i;
 
     for (i = 0; i < D_i1_8042860C; i++) {
-        if (D_i1_8041B550[i].unk_00 == 0) {
+        if (D_i1_80419EA0.unk_16B0[i].unk_00 == 0) {
             return i;
         }
     }

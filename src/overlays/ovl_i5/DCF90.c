@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "ovl_i5.h"
 #include "assets/segment_2B9EA0.h"
 
@@ -164,7 +165,7 @@ extern s32 D_800CD3BC;
 extern s8 D_800CD3C0;
 extern s8 D_800CD3C8;
 extern s32 D_800CD3CC;
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 
 void func_i5_80116934(void) {
     s32 var_a1;
@@ -175,7 +176,7 @@ void func_i5_80116934(void) {
     D_800CCFE8 = 3;
     D_i5_801190D4 = D_i5_80119544[D_800CD3CC];
     D_i5_801197E4 = -1;
-    if (D_800DCE44 == 0x800A) {
+    if (gGameMode == GAMEMODE_800A) {
         var_v0 = D_800CD3B8;
     } else {
         var_v0 = D_800CD3BC;
@@ -202,7 +203,7 @@ void func_i5_80116934(void) {
     if (var_v1 + 2 < D_i5_801190C8) {
         D_i5_801190C8 = var_v1 + 2;
     }
-    if ((D_i5_801190C8 == 4) && ((D_800DCE44 == 0x8013) || (D_800CD380 == 1))) {
+    if ((D_i5_801190C8 == 4) && ((gGameMode == GAMEMODE_8013) || (D_800CD380 == 1))) {
         D_i5_801190C8 = 3;
     }
     if (D_i5_801190C8 >= 0xA) {
@@ -216,7 +217,7 @@ void func_i5_80116934(void) {
     func_80085610();
     func_800794B0(5, 0, 0, 1);
     func_800794B0(120, 0, 0, 2);
-    if (D_800DCE44 != 0x8013) {
+    if (gGameMode != GAMEMODE_8013) {
         var_a1 = 80;
         var_a2 = 17;
     } else {
@@ -226,7 +227,7 @@ void func_i5_80116934(void) {
     func_800794B0(0x83, var_a1, var_a2, 4);
     func_800794B0(0x80, 0, 0, 10);
     func_800794B0(0x79, 0, 0, 8);
-    if (((D_800CD3C8 != 0) || (D_800CD3C0 >= 2)) && (D_800DCE44 != 0x8013) && (D_800CD380 != 1)) {
+    if (((D_800CD3C8 != 0) || (D_800CD3C0 >= 2)) && (gGameMode != GAMEMODE_8013) && (D_800CD380 != 1)) {
         func_800794B0(0x7E, 0, -100, 6);
     }
     if ((D_800CD3C0 > 0) || (D_800CD3C8 != 0)) {
@@ -241,7 +242,7 @@ void func_i5_80116934(void) {
     func_800794B0(0x82, 0, 0, 8);
     switch (D_800CD380) {
         case 1:
-            if (D_800DCE44 != 0x8013) {
+            if (gGameMode != GAMEMODE_8013) {
                 func_800794B0(0x85, 0, 0, 10);
             }
             /* fallthrough */
@@ -306,9 +307,9 @@ s32 func_i5_80116EEC(void) {
 
     func_8008675C();
     if (D_i2_80106DA4 != 0) {
-        return D_800DCE44;
+        return gGameMode;
     }
-    if ((D_800CD380 == 1) && (D_800DCE44 != 0x8013)) {
+    if ((D_800CD380 == 1) && (gGameMode != GAMEMODE_8013)) {
         func_i5_80116830();
     }
     func_8007DABC(&D_800DD180);
@@ -331,7 +332,7 @@ s32 func_i5_80116EEC(void) {
                 if (var_v1 + 2 < D_i5_801190C8) {
                     D_i5_801190C8 = var_v1 + 2;
                 }
-                if ((D_i5_801190C8 == 4) && ((D_800DCE44 == 0x8013) || (D_800CD380 == 1))) {
+                if ((D_i5_801190C8 == 4) && ((gGameMode == GAMEMODE_8013) || (D_800CD380 == 1))) {
                     D_i5_801190C8 = 3;
                 }
             }
@@ -363,7 +364,7 @@ s32 func_i5_80116EEC(void) {
             }
             if (D_800E416E & BTN_B) {
                 func_800BA8D8(0x10);
-                if (D_800DCE44 == 0x800A) {
+                if (gGameMode == GAMEMODE_800A) {
                     D_800CD3B8 = D_800F8514;
                     D_i5_801190C0 = 5;
                 } else {
@@ -392,7 +393,7 @@ s32 func_i5_80116EEC(void) {
             break;
         case 2:
             D_i5_801190D0 = 1;
-            if ((D_800CD380 == 1) && (D_800DCE44 != 0x8013)) {
+            if ((D_800CD380 == 1) && (gGameMode != GAMEMODE_8013)) {
                 temp_v1 = D_i5_801190D8;
                 temp_a2 = D_i5_801190D4;
                 if ((D_800E416C & BTN_UP) && (D_i5_801190D4 > 0)) {
@@ -450,12 +451,12 @@ s32 func_i5_80116EEC(void) {
             } else if (D_800E416E & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
                 D_i5_801190C0 = 4;
-                if (D_800DCE44 == 0x800A) {
+                if (gGameMode == GAMEMODE_800A) {
                     D_800CD3B8 = D_800F8514;
-                    return 0x8008;
+                    return GAMEMODE_8008;
                 }
                 D_800CD3BC = D_800F8514;
-                return 6;
+                return GAMEMODE_6;
             }
             break;
         case 5:
@@ -474,7 +475,7 @@ s32 func_i5_80116EEC(void) {
     }
 
     func_i5_80116910();
-    return D_800DCE44;
+    return gGameMode;
 }
 
 s32 func_i5_801175D0(void) {
@@ -486,14 +487,14 @@ s32 func_i5_801175D0(void) {
             if (D_800E416E & (BTN_A | BTN_START)) {
                 D_i5_801190C0 = 0xB;
                 func_800BA8D8(0x3E);
-                return 0x4012;
+                return GAMEMODE_4012;
             }
             break;
         case 11:
         default:
             break;
     }
-    return D_800DCE44;
+    return gGameMode;
 }
 
 Gfx* func_i5_80117664(Gfx* gfx) {
@@ -513,7 +514,7 @@ void func_i5_80117684(unk_800E3A28* arg0) {
     if (arg0->unk_04 == 0) {
         arg0->unk_0C = 8;
     }
-    if (D_800DCE44 == 0x8013) {
+    if (gGameMode == GAMEMODE_8013) {
         func_80077D50(D_i5_80119270, 0);
         if (arg0->unk_04 == 0) {
             var_a1 = 0x23A00;
@@ -569,7 +570,7 @@ void func_i5_801177EC(unk_800E3A28* arg0) {
 }
 
 void func_i5_801178D8(unk_800E3A28* arg0) {
-    if (D_800DCE44 != 0x8013) {
+    if (gGameMode != GAMEMODE_8013) {
         func_80077D50(D_i5_801191F0, 0);
         arg0->unk_1C = 0xC;
     } else {
@@ -617,7 +618,7 @@ void func_i5_80117A2C(unk_800E3A28* arg0) {
 
 Gfx* func_i5_80117A98(Gfx* gfx, unk_800E3A28* arg1) {
 
-    if (D_800DCE44 != 0x8013) {
+    if (gGameMode != GAMEMODE_8013) {
         gDPSetPrimColor(gfx++, 0, 0, 75, 75, 75, 180);
         gfx = func_80078EA0(gfx, D_i5_801192F0[arg1->unk_04], arg1->unk_0C, arg1->unk_10, 1, 0, 0, 1.0f, 1.0f);
     } else {
@@ -739,7 +740,7 @@ Gfx* func_i5_80117FB4(Gfx* gfx, unk_800E3A28* arg1) {
 
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    if (D_800DCE44 != 0x8013) {
+    if (gGameMode != GAMEMODE_8013) {
         switch (D_i5_801190C0) {
             case 5:
             case 6:
@@ -886,7 +887,7 @@ void func_i5_80118928(unk_800E3A28* arg0) {
         func_i5_80115E10();
     }
     temp_a1 = -(D_i5_801190CC * 0x500);
-    if (D_800DCE44 == 0x800F) {
+    if (gGameMode == GAMEMODE_800F) {
         arg0->unk_0C = temp_a1;
     } else {
         func_8007A0A0(arg0, temp_a1, 0xC0);
@@ -899,7 +900,7 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
     s32 var_a1;
     s32 var_v0;
 
-    if (D_800DCE44 == 0x800F) {
+    if (gGameMode == GAMEMODE_800F) {
         arg0->unk_0C = 0x80;
         arg0->unk_10 = 0x31;
         return;
@@ -977,7 +978,7 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
                     default:
                     case 2:
                     case 3:
-                        if ((D_800DCE44 != 0x8013) && (D_800CD380 != 1)) {
+                        if ((gGameMode != GAMEMODE_8013) && (D_800CD380 != 1)) {
                             var_a1 = ((s32) (var_v1 << 7) / 2) + (var_v1 * -8) + 0x10;
                             break;
                         }

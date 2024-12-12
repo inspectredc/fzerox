@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "fzx_racer.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
@@ -458,7 +459,7 @@ void func_i4_80115DF0(void) {
 }
 
 extern s32 D_800CD3B4;
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 extern s32 D_800F8514;
 extern f32 D_800E40F0[];
 extern f32 D_800E5EF0[];
@@ -473,7 +474,7 @@ void func_i4_801160D8(void) {
 
     for (i = 0; i < 4; i++) {
         D_800CD3A8[i] = 0;
-        if (D_800DCE44 != 0x4012) {
+        if (gGameMode != GAMEMODE_4012) {
             D_800E5EF0[i] = 0.5f;
         }
     }
@@ -543,9 +544,9 @@ s32 func_i4_8011631C(void) {
                 func_800BA8D8(0x10);
                 D_800CD3B0 = 1;
                 if (D_800CD380 == 2) {
-                    return 0x8007;
+                    return GAMEMODE_8007;
                 }
-                return 0x800A;
+                return GAMEMODE_800A;
             }
             continue;
         }
@@ -556,7 +557,7 @@ s32 func_i4_8011631C(void) {
                 D_i4_8011D778 = 1.0f;
                 D_i4_8011D77C = 0.0f;
                 func_800BA8D8(0x17);
-                return D_800DCE44;
+                return gGameMode;
             }
         }
 
@@ -603,9 +604,9 @@ s32 func_i4_8011631C(void) {
                     } else {
                         D_800CD3B0 = 1;
                         if (D_800CD380 == 2) {
-                            return 0x8007;
+                            return GAMEMODE_8007;
                         }
-                        return 0x800A;
+                        return GAMEMODE_800A;
                     }
                 } else if (D_800E416E & (BTN_A | BTN_START)) {
                     if (D_800CD3A8[i] == 0) {
@@ -654,12 +655,12 @@ s32 func_i4_8011631C(void) {
                 if (D_800E416E & (BTN_A | BTN_START)) {
                     func_800BA710(i, 0x3E);
                     D_800CD3B0 = 3;
-                    return 0x4009;
+                    return GAMEMODE_4009;
                 }
                 break;
         }
     }
-    return D_800DCE44;
+    return gGameMode;
 }
 #else
 s32 func_i4_8011631C(void);
@@ -680,7 +681,7 @@ s32 func_i4_801168D4(void) {
 
     func_8008675C();
     if (D_i2_80106DA4 != 0) {
-        return D_800DCE44;
+        return gGameMode;
     }
 
     for (i = gNumPlayers - 1; i >= 0; i--) {
@@ -693,11 +694,11 @@ s32 func_i4_801168D4(void) {
 
                     k = gRacers[i].unk_2CC;
 
-                    if (D_800E416E & 0x2000) {
+                    if (D_800E416E & BTN_Z) {
                         gRacers[i].unk_2CC--;
                         gRacers[i].unk_2CC &= 3;
                     }
-                    if (D_800E416E & 0x10) {
+                    if (D_800E416E & BTN_R) {
                         gRacers[i].unk_2CC++;
                         gRacers[i].unk_2CC &= 3;
                     }
@@ -735,19 +736,19 @@ s32 func_i4_801168D4(void) {
                         D_800E40F0[gRacers[0].character] = D_800E5EF0[0];
                     }
                 }
-                if (D_800E416E & 0x4000) {
+                if (D_800E416E & BTN_B) {
                     func_800BA710(i, 0x10);
 
                     if (D_800CD3A8[i] != 0) {
                         D_800CD3A8[i] = 0;
                     } else {
                         D_800CD3B4 = 1;
-                        if (D_800DCE44 == 0x4009) {
-                            return 0x8008;
+                        if (gGameMode == GAMEMODE_4009) {
+                            return GAMEMODE_8008;
                         }
-                        return 0x800F;
+                        return GAMEMODE_800F;
                     }
-                } else if ((D_800E416E & 0x9000) && (D_800CD3A8[i] == 0)) {
+                } else if ((D_800E416E & (BTN_A | BTN_START)) && (D_800CD3A8[i] == 0)) {
                     func_800BA710(i, 0x21);
                     D_800CD3A8[i] = 1;
                 }
@@ -764,36 +765,35 @@ s32 func_i4_801168D4(void) {
                 }
                 break;
             case 2:
-                if (D_800E416E & 0x4000) {
+                if (D_800E416E & BTN_B) {
                     D_800CD3A8[i] = 0;
                     D_800CD3B4 = 0;
                     func_800BA710(i, 0x10);
-                } else if (D_800E416E & 0x9000) {
+                } else if (D_800E416E & (BTN_A | BTN_START)) {
                     func_800BA710(i, 0x3E);
                     func_8007E0CC();
                     D_800CD3B4 = 3;
                     switch (D_800CD380) {
                         case 0:
-                            return 1;
+                            return GAMEMODE_GP_RACE;
                         case 1:
-                            return 0xE;
+                            return GAMEMODE_TIME_ATTACK;
                         case 5:
-                            return 2;
+                            return GAMEMODE_PRACTICE;
                         case 3:
                             return gNumPlayers + 1;
                         case 2:
-                            return 0x15;
+                            return GAMEMODE_DEATH_RACE;
                     }
                 }
             case 1:
             case 3:
             default:
                 break;
-                break;
         }
     }
 
-    return D_800DCE44;
+    return gGameMode;
 }
 
 extern unk_800DCE48 D_800DCE48;
@@ -801,7 +801,7 @@ extern unk_800DCE48 D_800DCE48;
 Gfx* func_i4_80116DC4(Gfx* gfx) {
     gfx = func_80079BC8(gfx);
     func_800790D4();
-    if (D_800DCE44 != D_800DCE48.unk_00) {
+    if (gGameMode != D_800DCE48.gameMode) {
         func_80089724();
     }
     return gfx;
@@ -810,7 +810,7 @@ Gfx* func_i4_80116DC4(Gfx* gfx) {
 Gfx* func_i4_80116E10(Gfx* gfx) {
     gfx = func_80079BC8(gfx);
     func_800790D4();
-    if (D_800DCE44 != D_800DCE48.unk_00) {
+    if (gGameMode != D_800DCE48.gameMode) {
         func_80089724();
     }
     return gfx;
@@ -1767,7 +1767,7 @@ void func_i4_8011A73C(unk_800E3A28* arg0) {
 }
 
 void func_i4_8011A7B8(void) {
-    if ((D_800DCE48.unk_00 == 0x4009) && (func_80079E88(0x2D)->unk_20 != 0)) {
+    if ((D_800DCE48.gameMode == GAMEMODE_4009) && (func_80079E88(0x2D)->unk_20 != 0)) {
         D_800CE748 = 0.075f;
         D_800CE74C = 0.125f;
         D_800CE750 = 0.105f;
@@ -1926,36 +1926,36 @@ extern s16 D_800CD044;
 s32 func_i4_8011AE2C(void) {
 
     if (D_800DD228 == 0) {
-        return D_800DCE44;
+        return gGameMode;
     }
     func_8007DABC(&D_800DD180);
     Math_Rand1();
     if ((D_800DCCCC != 0) && (func_80079E88(20)->unk_1C != 0) && (func_80079E88(20)->unk_04 == 0)) {
-        return D_800DCE44;
+        return gGameMode;
     }
     if (D_i4_8011D794 != 0) {
-        return D_800DCE44;
+        return gGameMode;
     }
 
     if (D_i4_8011D790 < 0) {
-        return D_800DCE44;
+        return gGameMode;
     }
 
     D_i4_8011D790++;
     if (D_i4_8011D790 < 0x50) {
-        return D_800DCE44;
+        return gGameMode;
     }
 
-    if ((D_800CD044 == 0) && (D_800E416E & 0x9000)) {
+    if ((D_800CD044 == 0) && (D_800E416E & (BTN_A | BTN_START))) {
         func_800BA8D8(0x3E);
         func_8007E0CC();
         D_i4_8011D790 = -1;
         if ((D_800DCCCC != 0) && (func_80079E88(20)->unk_04 == 1)) {
             func_800BB370();
         }
-        return 0x8007;
+        return GAMEMODE_8007;
     } else {
-        return 0x8000;
+        return GAMEMODE_8000;
     }
 }
 

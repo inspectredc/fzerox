@@ -3,8 +3,8 @@
 
 extern s32 D_i1_8042860C;
 extern OSMesg D_i1_80428610;
+extern unk_leo_80419EA0 D_i1_80419EA0;
 extern unk_leo_804285D0 D_i1_804285D0;
-extern unk_leo_804285D0 D_i1_8041B550[];
 s32 func_i1_80403420(u16);
 s32 func_i1_804031C0(s32);
 s32 func_i1_80403274(s32);
@@ -36,7 +36,7 @@ s32 func_i1_8040A7B4(u16 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
         D_i1_80428610 = 0xF2;
         return -1;
     }
-    if (D_i1_8041B550[sp1E].unk_00 & 0x2000) {
+    if (D_i1_80419EA0.unk_16B0[sp1E].unk_00 & 0x2000) {
         D_i1_80428610 = 0x106;
         return -1;
     }
@@ -55,11 +55,11 @@ s32 func_i1_8040A8AC(u16 arg0, s32 arg1, s32 arg2, s32 arg3) {
         D_i1_80428610 = 0xF4;
         return -1;
     }
-    if (!(D_i1_8041B550[arg0].unk_00 & 0x4000)) {
+    if (!(D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x4000)) {
         D_i1_80428610 = 0xF2;
         return -1;
     }
-    if (D_i1_8041B550[arg0].unk_00 & 0x8000) {
+    if (D_i1_80419EA0.unk_16B0[arg0].unk_00 & 0x8000) {
         D_i1_80428610 = 0xF2;
         return -1;
     }

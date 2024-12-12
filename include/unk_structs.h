@@ -58,7 +58,7 @@ typedef struct unk_8010B7D0 {
     s16 unk_0C;
     s16 unk_0E;
     s32 unk_10;
-} unk_8010B7D0;
+} unk_8010B7D0; // size = 0x14
 
 typedef struct unk_8010B7B0 {
     s8 unk_000;
@@ -320,7 +320,7 @@ typedef struct Racer_unk_C {
 } Racer_unk_C; // size >= 0x50
 
 typedef struct Racer {
-    s32 unk_00;
+    s32 id;
     s32 unk_04;
     u16 unk_08;
     s16 unk_0A;
@@ -405,13 +405,13 @@ typedef struct Racer {
     s16 unk_286;
     s32 unk_288;
     struct Racer* unk_28C;
-    s32 unk_290[3];
+    s32 lapTimes[3];
     s32 unk_29C;
     s32 unk_2A0;
     s32 unk_2A4;
-    s16 unk_2A8;
+    s16 lap;
     s16 unk_2AA;
-    s32 unk_2AC;
+    s32 position;
     s16 unk_2B0;
     s8 unk_2B2;
     s8 unk_2B3;
@@ -649,7 +649,7 @@ typedef struct unk_800E3F28 {
 
 
 typedef struct unk_800DCE48 {
-    s32 unk_00;
+    s32 gameMode;
     s8 unk_04[0xC];
     s32 unk_10;
 } unk_800DCE48;

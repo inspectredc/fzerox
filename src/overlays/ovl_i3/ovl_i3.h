@@ -108,7 +108,7 @@ typedef struct unk_801437C0 {
 typedef struct unk_80141EA8 {
     s32 unk_00;
     s32 unk_04;
-    s32 unk_08;
+    s32 lapIntervalCounter;
     unk_8012F450 unk_0C;
     s8 unk_18[0x30];
 } unk_80141EA8; // size = 0x48
@@ -156,11 +156,11 @@ Gfx* func_i3_DrawBeveledBox(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, 
 
 Gfx* func_i3_8012EE90(Gfx* gfx, s32 arg1);
 
-Gfx* func_i3_80130824(Gfx*, s32, s32);
-Gfx* func_i3_801312DC(Gfx*, s32, s32);
+Gfx* func_i3_DrawPlayerSpeed(Gfx*, s32, s32);
+Gfx* func_i3_DrawPosition(Gfx*, s32, s32);
 Gfx* func_i3_DrawHUD(Gfx*);
-Gfx* func_i3_80132EEC(Gfx*);
-Gfx* func_i3_80133944(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale);
+Gfx* func_i3_DrawRacePortraits(Gfx*);
+Gfx* func_i3_DrawRaceTimeInterval(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale);
 Gfx* func_i3_80135B20(Gfx*, s32, s32);
 void func_i3_80139FF4(void);
 void func_i3_8013C15C(void);
@@ -172,8 +172,8 @@ extern bool D_i3_801419BC;
 
 extern unk_80141EA8 D_i3_80141EA8[];
 
-extern s32 D_i3_8013F008[];
-extern TexturePtr sCharacterPortraitTextures[];
+extern s32 gPlayerLapNumbers[];
+extern TexturePtr gCharacterPortraitTextures[];
 
 extern s32 D_i3_80140788[];
 

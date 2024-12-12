@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "ovl_i6.h"
 #include "audio.h"
 #include "assets/segment_2B9EA0.h"
@@ -1878,7 +1879,7 @@ void func_i6_8011BF50(void) {
     func_i6_8011BAC0(0xC3, 0, 0, 8);
 }
 
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 extern Controller D_800DD180;
 
 s32 func_i6_8011BFB0(void) {
@@ -1887,10 +1888,10 @@ s32 func_i6_8011BFB0(void) {
     if (D_800E416C & (BTN_A | BTN_START)) {
         D_i6_8011DFA0 ^= 1;
     }
-    if ((D_800DCE44 != 0x800C) && (D_800E416C & BTN_B)) {
-        return 0x8007;
+    if ((gGameMode != GAMEMODE_800C) && (D_800E416C & BTN_B)) {
+        return GAMEMODE_8007;
     } else {
-        return D_800DCE44;
+        return gGameMode;
     }
 }
 
@@ -1987,7 +1988,7 @@ s32 func_i6_8011C6DC(void) {
                 break;
         }
     }
-    return 0x8014;
+    return GAMEMODE_8014;
 }
 
 extern s16 D_800CE4D0;

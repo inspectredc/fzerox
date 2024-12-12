@@ -1,7 +1,10 @@
 #include "libultra/ultra64.h"
 #include "leo/leo_internal.h"
 
-extern LEOCmdRead read_id_cmd;
+LEOCmdRead read_id_cmd = {
+    { LEO_COMMAND_READ, 0, 0, 0, 0, 0, 0, 0, 0 }, 14, 1, LEO_TempBuffer, 0,
+};
+
 const u8 leo_disk_id_lba[2] = { 14, 15 };
 
 void leoReadDiskId(void) {

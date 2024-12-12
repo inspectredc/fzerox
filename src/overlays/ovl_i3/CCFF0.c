@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ovl_i3.h"
+#include "fzx_game.h"
 #include "fzx_racer.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
@@ -37,13 +38,13 @@ extern f32 D_800CE750;
 extern Mtx D_8024DC80;
 extern Lights1 D_8024DCC0;
 
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 
 void func_i3_80139D20(void) {
 
     D_i3_80143780 = 0;
     D_i3_80143782 = 0;
-    if (D_800DCE44 == 0xE) {
+    if (gGameMode == GAMEMODE_TIME_ATTACK) {
         D_i3_80143784 = 0;
         D_i3_80143780 |= 0x48;
         D_i3_80143790 = 0x19;
@@ -323,8 +324,8 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
             } else {
                 gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
             }
-            gfx = func_i3_8012F554(gfx, var_s2->unk_20[i], var_s3 + D_i3_80143790 + 0x4B,
-                                   (D_i3_80143794 + (D_i3_80143798 * i)) - 0xE, 1.0f);
+            gfx = func_i3_DrawTimerScisThousandths(gfx, var_s2->unk_20[i], var_s3 + D_i3_80143790 + 0x4B,
+                                                   (D_i3_80143794 + (D_i3_80143798 * i)) - 0xE, 1.0f);
         }
     }
 
@@ -348,7 +349,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         } else {
             gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
         }
-        gfx = func_i3_8012F554(gfx, var_s2->unk_D8, D_i3_801437A8 + D_i3_80143788, D_i3_801437AA, 1.0f);
+        gfx = func_i3_DrawTimerScisThousandths(gfx, var_s2->unk_D8, D_i3_801437A8 + D_i3_80143788, D_i3_801437AA, 1.0f);
     }
 
     xl = D_i3_801437A8 + D_i3_80143788 + D_i3_801437AC;
@@ -444,39 +445,38 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
 
 extern Gfx D_80149A0[];
 
-#ifdef NON_MATCHING
-// Stack
-Gfx* func_i3_8013B348(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3, bool arg4, bool arg5) {
+Gfx* func_i3_8013B348(Gfx* gfx, s32 left, s32 top, f32 arg3, bool arg4, bool drawMaxSpeed) {
     s32 i;
-    s32 var_t5;
-    s32 var_t0;
-    bool var_t3;
-    s32 temp_t1;
-    s32 temp;
+    s32 speed;
+    s32 digitMask;
+    bool startedDrawSpeed;
+    s32 digit;
+    s32 texLeft;
 
     gSPDisplayList(gfx++, D_80149A0);
     gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1));
-    gDPFillRectangle(gfx++, arg1 + 12, arg2, arg1 + 35, arg2 + 15);
+    gDPFillRectangle(gfx++, left + 12, top, left + 35, top + 15);
     gSPDisplayList(gfx++, D_8014940);
 
-    var_t5 = (arg3 * 21.6f) + 0.5f;
-    if (arg5) {
+    texLeft = left;
+    speed = (arg3 * 21.6f) + 0.5f;
+    if (drawMaxSpeed) {
         gDPPipeSync(gfx++);
         gDPLoadTextureBlock(gfx++, D_303AA70, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-        gSPScisTextureRectangle(gfx++, (arg1 + 4) << 2, (arg2 - 17) << 2, (arg1 + 68) << 2, (arg2 - 1) << 2, 0, 0, 0,
-                                1 << 10, 1 << 10);
+        gSPScisTextureRectangle(gfx++, (texLeft + 4) << 2, (top - 17) << 2, (texLeft + 68) << 2, (top - 1) << 2, 0, 0,
+                                0, 1 << 10, 1 << 10);
     }
 
     gDPPipeSync(gfx++);
 
-    temp = arg1;
     gDPLoadTextureBlock(gfx++, D_303C170, G_IM_FMT_RGBA, G_IM_SIZ_16b, 20, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    temp += 48;
-    gSPScisTextureRectangle(gfx++, temp << 2, arg2 << 2, (temp + 20) << 2, (arg2 + 16) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    texLeft += 48;
+    gSPScisTextureRectangle(gfx++, texLeft << 2, top << 2, (texLeft + 20) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10,
+                            1 << 10);
 
     gDPPipeSync(gfx++);
 
@@ -489,25 +489,22 @@ Gfx* func_i3_8013B348(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3, bool arg4, bool ar
     gDPLoadTextureBlock(gfx++, D_303B270, G_IM_FMT_RGBA, G_IM_SIZ_16b, 12, 160, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    var_t0 = 1000;
-    var_t3 = false;
+    digitMask = 1000;
+    startedDrawSpeed = false;
 
     for (i = 0; i < 4; i++) {
-        temp_t1 = var_t5 / var_t0;
-        var_t5 %= var_t0;
-        var_t0 /= 10;
-        if ((temp_t1 != 0) || (var_t3) || (i == 3)) {
+        digit = speed / digitMask;
+        speed %= digitMask;
+        digitMask /= 10;
+        if ((digit != 0) || (startedDrawSpeed) || (i == 3)) {
             if (1) {}
-            var_t3 = true;
-            gSPScisTextureRectangle(gfx++, (arg1 + (i * 12)) << 2, arg2 << 2, (arg1 + ((i + 1) * 12)) << 2,
-                                    (arg2 + 16) << 2, 0, 0, (temp_t1 * 16) << 5, 1 << 10, 1 << 10);
+            startedDrawSpeed = true;
+            gSPScisTextureRectangle(gfx++, (left + (i * 12)) << 2, top << 2, (left + ((i + 1) * 12)) << 2,
+                                    (top + 16) << 2, 0, 0, (digit * 16) << 5, 1 << 10, 1 << 10);
         }
     }
     return gfx;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/CCFF0/func_i3_8013B348.s")
-#endif
 
 extern GfxPool D_1000000;
 
@@ -561,13 +558,13 @@ void func_i3_8013BF50(s32 arg0) {
         temp_a3 = &D_800E4268[i][index];
         temp_a3->unk_00 = racer->unk_2A0;
         temp_a3->unk_04 = racer->unk_9C;
-        temp_a3->unk_08 = racer->unk_2AC;
+        temp_a3->unk_08 = racer->position;
         temp_a3->unk_0A = 0;
         if (D_800E5FE2 != 0) {
             temp_a3->unk_0A |= (D_800E5FE2 & 0xF);
         }
         if (D_800E5FE4 != 0) {
-            temp_a3->unk_0A |= ((D_800E5FE4 & 0xF) * 0x10);
+            temp_a3->unk_0A |= ((D_800E5FE4 & 0xF) << 4);
         }
         temp_a3->unk_0C = D_800E5FD2;
     }
@@ -644,8 +641,8 @@ void func_i3_8013C20C(s32 arg0) {
     for (i = 0, var_s0 = D_i3_801437C0; i < 50; i++, var_s0++) {
         var_s0->unk_00 = D_i3_80140F50[i];
         var_s0->unk_01 = 0;
-        var_s0->unk_02 = Math_Rand1() % 320;
-        var_s0->unk_04 = Math_Rand1() % 240;
+        var_s0->unk_02 = Math_Rand1() % SCREEN_WIDTH;
+        var_s0->unk_04 = Math_Rand1() % SCREEN_HEIGHT;
 
         if (arg0 == 0) {
             var_s0->unk_06 = var_s0->unk_02;

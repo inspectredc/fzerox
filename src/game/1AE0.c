@@ -1,5 +1,6 @@
 #include "global.h"
 #include "audio.h"
+#include "fzx_game.h"
 #include "fzxthread.h"
 
 extern s32 D_800DCD04;
@@ -44,7 +45,7 @@ void func_80067BD0(void) {
 }
 
 extern OSMesgQueue D_800DCAE0;
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 extern OSTask* D_800DCCC0;
 
 void func_80067C0C(OSTask* task) {
@@ -54,7 +55,7 @@ void func_80067C0C(OSTask* task) {
     task->t.ucode_boot = (u64*) rspbootTextStart;
     task->t.ucode_boot_size = (uintptr_t) rspbootTextEnd - (uintptr_t) rspbootTextStart;
 
-    switch (D_800DCE44 & 0xC000) {
+    switch (gGameMode & GAMEMODE_F3D_MASK) {
         case 0x0:
             task->t.ucode = (u64*) gspF3DEX_fifoTextStart;
             task->t.ucode_data = (u64*) gspF3DEX_fifoDataStart;

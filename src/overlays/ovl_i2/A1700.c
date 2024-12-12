@@ -640,7 +640,7 @@ s32 func_i2_80105F6C(s8* arg0) {
 s32 func_i2_80106024(s8* arg0, s32 arg1) {
     s32 ret = 1;
 
-    if ((*arg0 >= 0x61) && (*arg0 < 0x7B)) {
+    if ((*arg0 >= 'a') && (*arg0 <= 'z')) {
         switch (arg1) {
             case 0:
                 ret = *arg0 - 0x61;
@@ -649,11 +649,11 @@ s32 func_i2_80106024(s8* arg0, s32 arg1) {
                 ret = *arg0 - 0x31;
                 break;
         }
-    } else if ((*arg0 >= 0x41) && (*arg0 < 0x5B)) {
+    } else if ((*arg0 >= 'A') && (*arg0 <= 'Z')) {
         ret = *arg0 - 0x41;
-    } else if ((*arg0 >= 0x30) && (*arg0 < 0x3A)) {
+    } else if ((*arg0 >= '0') && (*arg0 <= '9')) {
         ret = *arg0 - 0x10;
-    } else if (*arg0 == 0x20) {
+    } else if (*arg0 == ' ') {
         ret = -1;
     } else if (*arg0 < 0) {
         switch (*arg0) {
@@ -671,44 +671,44 @@ s32 func_i2_80106024(s8* arg0, s32 arg1) {
         }
     } else {
         switch (*arg0) {
-            case 39:
+            case '\'':
                 ret = 0x1A;
                 break;
-            case 34:
+            case '\"':
                 ret = 0x1B;
                 break;
-            case 38:
+            case '&':
                 ret = 0x1C;
                 break;
-            case 43:
+            case '+':
                 ret = 0x1D;
                 break;
-            case 45:
+            case '-':
                 ret = 0x1E;
                 break;
-            case 33:
-            case 36:
+            case '!':
+            case '$':
                 ret = 0x1F;
                 break;
-            case 58:
+            case ':':
                 ret = 0x2A;
                 break;
-            case 46:
+            case '.':
                 ret = 0x2B;
                 break;
-            case 42:
-            case 60:
+            case '*':
+            case '<':
                 ret = 0x2C;
                 break;
-            case 40:
-            case 62:
+            case '(':
+            case '>':
                 ret = 0x2D;
                 break;
-            case 95:
-            case 41:
+            case '_':
+            case ')':
                 ret = 0x2E;
                 break;
-            case 44:
+            case ',':
                 ret = 0x2F;
                 break;
             default:
@@ -860,7 +860,7 @@ s32 func_i2_801062E4(s8* arg0, s32 arg1, s32 arg2) {
             break;
     }
 
-    while (*arg0 != 0) {
+    while (*arg0 != '\0') {
         if (arg1 == 4) {
             var_v0 = func_i2_80106024(arg0, 1);
         } else {
@@ -928,7 +928,7 @@ Gfx* func_i2_80106450(Gfx* gfx, s32 arg1, s32 arg2, s8* arg3, s32 arg4, s32 arg5
             break;
     }
     var_s3 = 0;
-    while (*arg3 != 0) {
+    while (*arg3 != '\0') {
         if (arg5 == 4) {
             var_v0 = func_i2_80106024(arg3, 1);
         } else {
@@ -1010,7 +1010,7 @@ Gfx* func_i2_80106700(Gfx* gfx, s32 arg1, s32 arg2, s8* arg3, s32 arg4, s32 arg5
             break;
     }
     var_s3 = 0;
-    while (*arg3 != 0) {
+    while (*arg3 != '\0') {
         if (arg5 == 4) {
             var_v0 = func_i2_80106024(arg3, 1);
         } else {

@@ -1,4 +1,6 @@
 #include "global.h"
+#include "fzx_game.h"
+#include "fzx_hud.h"
 #include "fzx_racer.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"
@@ -15,7 +17,7 @@ extern s8 D_800DCE5C;
 extern s16 D_800E42CC;
 extern s32 D_800F8514;
 extern unk_800E4268 D_800E4268[1][6];
-extern unk_8010B7B0 D_8010B7B0;
+extern unk_8010B7B0 D_8010B7B0[];
 extern s32 D_i2_80106F10;
 extern s16 D_80106F48;
 
@@ -23,7 +25,6 @@ extern s32 gNumPlayers;
 extern s32 gDifficulty;
 
 extern char* D_800E4180[55];
-extern unk_800E4268 D_800E4268[1][6];
 
 extern Gfx D_8014940[];
 
@@ -728,7 +729,7 @@ void func_i7_80143A90(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0.unk_002, D_8010B7B0.unk_003);
+    func_8007F4E0(D_8010B7B0[0].unk_002, D_8010B7B0[0].unk_003);
     func_i3_801365E0();
     func_i2_801044F0();
     func_8006D448();
@@ -907,12 +908,12 @@ s32 func_i7_801441A0(void) {
 
     switch (func_i7_801442A0()) {
         case 1:
-            return 0x8007;
+            return GAMEMODE_8007;
         case 2:
-            return 0x800C;
+            return GAMEMODE_800C;
         case 0:
         default:
-            return 0x11;
+            return GAMEMODE_11;
     }
 }
 
@@ -1236,7 +1237,7 @@ Gfx* func_i7_80144EF4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gfx = func_i3_8012F554(gfx, temp_s2->unk_00, 0x6E, (arg2 + 28.0f), 1.0f);
+    gfx = func_i3_DrawTimerScisThousandths(gfx, temp_s2->unk_00, 0x6E, (arg2 + 28.0f), 1.0f);
     gDPPipeSync(gfx++);
     gfx = func_i3_8013B348(gfx, 0xC2, (arg2 + 28.0f), temp_s2->unk_04, false, false);
     gDPPipeSync(gfx++);
@@ -2222,7 +2223,7 @@ void func_i7_80147EBC(void) {
                                                  (var->unk_19C.yz * temp_fa1));
                     var_fs0 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
                                                  (var->unk_19C.zz * temp_fa1));
-                    if (func_i3_80115DF0(var_fs0) < 0.001f) {
+                    if (func_i3_fabsf(var_fs0) < 0.001f) {
                         temp_s0->unk_10 = 0x200;
                         temp_s0->unk_0C = 0x200;
                     } else {
@@ -2255,7 +2256,7 @@ void func_i7_80147EBC(void) {
                                                      (var->unk_19C.yz * temp_fa1));
                         var_fs0 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
                                                      (var->unk_19C.zz * temp_fa1));
-                        if (func_i3_80115DF0(var_fs0) < 0.001f) {
+                        if (func_i3_fabsf(var_fs0) < 0.001f) {
                             temp_s0->unk_10 = 0x200;
                             temp_s0->unk_0C = 0x200;
                         } else {

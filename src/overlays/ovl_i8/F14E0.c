@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "fzx_racer.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
@@ -57,7 +58,7 @@ unk_80144F74 D_i8_80144F84[] = {
 extern s16 D_800CCFE8;
 extern s8 D_800DCE5C;
 extern s32 D_i2_80106F10;
-extern unk_8010B7B0 D_8010B7B0;
+extern unk_8010B7B0 D_8010B7B0[];
 extern s32 gDifficulty;
 
 void func_i8_80143A78(void);
@@ -71,7 +72,7 @@ void func_i8_801439D0(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0.unk_002, D_8010B7B0.unk_003);
+    func_8007F4E0(D_8010B7B0[0].unk_002, D_8010B7B0[0].unk_003);
     func_i3_801365E0();
     func_8006D448();
     func_8006E478();
@@ -187,7 +188,7 @@ extern Controller D_800DD180;
 
 s32 func_i8_80143DDC(void) {
     s32 temp_v0;
-    s32 var_v1;
+    s32 gameMode;
     s32 sp1C;
 
     func_8007DABC(&D_800DD180);
@@ -202,17 +203,17 @@ s32 func_i8_80143DDC(void) {
     }
     func_i3_8013A004();
     func_80080C0C();
-    var_v1 = 6;
+    gameMode = GAMEMODE_6;
     sp1C = 0;
     if (D_i8_80144FD6 == 0) {
         switch (D_80144FB0) {
             case 0:
                 temp_v0 = func_i8_80143F94();
-                var_v1 = 6;
+                gameMode = GAMEMODE_6;
                 if (temp_v0 == 1) {
                     sp1C = 1;
                 } else if (temp_v0 == 2) {
-                    var_v1 = 0x8013;
+                    gameMode = GAMEMODE_8013;
                 }
                 if (temp_v0 != 0) {
                     D_i8_80144FD6 = 1;
@@ -220,11 +221,11 @@ s32 func_i8_80143DDC(void) {
                 break;
             case 1:
                 temp_v0 = func_i8_80144144();
-                var_v1 = 6;
+                gameMode = GAMEMODE_6;
                 if (temp_v0 == 1) {
-                    var_v1 = 0x8013;
+                    gameMode = GAMEMODE_8013;
                 } else if (temp_v0 == 2) {
-                    var_v1 = 0x8007;
+                    gameMode = GAMEMODE_8007;
                 }
                 if (temp_v0 != 0) {
                     D_i8_80144FD6 = 1;
@@ -232,17 +233,17 @@ s32 func_i8_80143DDC(void) {
                 break;
             case 2:
                 func_i8_801443D0();
-                var_v1 = 6;
+                gameMode = GAMEMODE_6;
                 break;
         }
     }
     if (sp1C != 0) {
         D_800CD3BC = D_800F8514;
         D_800CD048 = 8;
-    } else if ((var_v1 == 6) && (D_i8_80144FD6 == 0) && (gRacers[0].unk_04 & 0x80000)) {
+    } else if ((gameMode == GAMEMODE_6) && (D_i8_80144FD6 == 0) && (gRacers[0].unk_04 & 0x80000)) {
         D_800CD048 = 1;
     }
-    return var_v1;
+    return gameMode;
 }
 
 Gfx* func_i8_80144B34(Gfx*, s32, s32);

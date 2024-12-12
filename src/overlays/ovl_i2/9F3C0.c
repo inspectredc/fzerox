@@ -12,8 +12,8 @@ void func_i2_80103A70(void) {
     func_8006D414();
     D_800DCE5C = 0;
     func_i3_8011B520();
-    func_i3_80134598();
-    func_i3_80134548();
+    func_i3_ResetLivesChangeCounter();
+    func_i3_InitRacePortraits();
 }
 
 extern s16 D_800CCFE8;
@@ -22,7 +22,7 @@ s32 D_i2_80106F10 = 0;
 UNUSED s8 D_i2_80106F14[] = { 0, 1, 2, 5, 4, 3, 7, 6, 5, 0, 4, 8, 2, 1, 7, 6, 8,
                               0, 7, 5, 6, 2, 3, 8, 0, 3, 4, 2, 5, 8, 7, 6, 2, 1 };
 
-extern unk_8010B7B0 D_8010B7B0;
+extern unk_8010B7B0 D_8010B7B0[];
 
 void func_i2_80103AD4(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
@@ -31,7 +31,7 @@ void func_i2_80103AD4(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0.unk_002, D_8010B7B0.unk_003);
+    func_8007F4E0(D_8010B7B0[0].unk_002, D_8010B7B0[0].unk_003);
     func_i3_801365E0();
     func_i2_801044F0();
     func_8006D448();
@@ -41,10 +41,10 @@ void func_i2_80103AD4(void) {
     func_i3_8012F324();
     func_i3_801356A0();
     func_i3_8011B520();
-    func_i3_80134548();
+    func_i3_InitRacePortraits();
 }
 
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 
 s32 func_i2_80103B8C(void) {
     func_i3_8011AEA0();
@@ -55,7 +55,7 @@ s32 func_i2_80103B8C(void) {
     func_800A5028();
     func_80074844();
 
-    return D_800DCE44;
+    return gGameMode;
 }
 
 extern s32 D_800DCCFC;

@@ -32,15 +32,15 @@ LEOasic_seq_ctl_shadow = 0x8042B340; //segment:leo
 LEOC2_Syndrome = 0x8042B490; //segment:leo
 LEOc2_param = 0x8042BBD0; //segment:leo size:0x10
 LEOdisk_type = 0x8042B348; //segment:leo
-leo_sys_read_cmd = 0x80428730; //segment:leo size:0x1C type:u8
 LEOdrive_flag = 0x8042B344; //segment:leo
 LEOclr_que_flag = 0x8042B345; //segment:leo
-read_id_cmd = 0x80428750; //segment:leo type:u8
 LEO_TempBuffer = 0x8042B3A0; //segment:leo
 __leoVersion = 0x8042BBE0; //segment:leo size:0x4
 asic_cur_status = 0x8042BC30; //segment:leo
 unit_atten = 0x8042BC34; //segment:leo
 mseq_tbl = 0x8042BBF0; //segment:leo
+D_i1_80411850 = 0x80411850; //segment:leo type:u16
+asc2tbl = 0x8041231C; //segment:leo type:u32
 
 LeoBootGame = 0x800BB4E0; //type:func
 __LeoBootGame2 = 0x800BB61C; //type:func
@@ -66,16 +66,17 @@ leoSetTimer = 0x80411168; //segment:leo
 leoClr_reset = 0x80410AB8; //segment:leo
 
 D_i2_8010AE1C = 0x8010AE1C; //force_migration:True size:0x8 segment:ovl_i2
-D_i2_8010D768 = 0x8010D768;
+gLivesChangeCounter = 0x8010D768; //segment:ovl_i2
+gPreviousLivesCount = 0x8010D76C; //segment:ovl_i2
 
 D_i3_80140F50 = 0x80140F50; //segment:ovl_i3 type:asciz
 D_i3_801417C4 = 0x801417C4; //force_migration:True size:0x8 segment:ovl_i3
 D_i3_801417F8 = 0x801417F8; //force_migration:True size:0x8 segment:ovl_i3
-D_i3_8013F008 = 0x8013F008; //segment:ovl_i3 size:0x10
 D_i3_8013F068 = 0x8013F068; //segment:ovl_i3 size:0x10
 D_i3_80141EA8 = 0x80141EA8; //segment:ovl_i3 size:0x120
 sPausePlayerNum = 0x80141DAC; //segment:ovl_i3
 
+func_i3_fabsf = 0x80115DF0; //segment:ovl_i3
 func_i3_DrawBeveledBox = 0x8011B264; //segment:ovl_i3
 func_i3_DrawTimeAttackFinishMenu = 0x80123B24; //segment:ovl_i3
 func_i3_DrawHUD = 0x80131DF4; //segment:ovl_i3
@@ -97,3 +98,5 @@ func_i4_8011B134 = 0x8011B134; //segment:ovl_i4
 func_i4_8011B1E4 = 0x8011B1E4; //segment:ovl_i4
 
 D_i11_800FC9F0 = 0x800FC9F0; //segment:ovl_i11 type:u8
+
+D_8010B7B0 = 0x8010B7B0; //size:0x7E0

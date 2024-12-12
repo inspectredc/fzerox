@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "segment_symbols.h"
 
 unk_800E33E0 D_800E33E0[200];
@@ -1020,14 +1021,14 @@ unk_800E3A28* func_80079E88(s32 arg0) {
     return var_v1;
 }
 
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 
 void func_80079EC8(void) {
     func_80077D44();
     func_80079480();
     func_800792A8();
     func_80079080();
-    if (D_800DCE44 != 16) {
+    if (gGameMode != GAMEMODE_10) {
         func_8007E2B4();
     }
 }

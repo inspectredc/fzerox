@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "fzx_racer.h"
 #include "ovl_i3.h"
 #include "assets/segment_2B9EA0.h"
@@ -405,7 +406,7 @@ extern s32 D_800DD218[];
 extern s8 D_800CD010;
 extern Gfx D_8014940[];
 extern Gfx D_80149A0[];
-extern s32 D_800DCE44;
+extern s32 gGameMode;
 extern s32 D_800E5EC0;
 extern Racer* D_800E5F40[];
 extern unk_800F5DF0* D_800F5E90;
@@ -464,7 +465,7 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
     gSPDisplayList(gfx++, D_80149A0);
     gDPSetCombineMode(gfx++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
 
-    if ((D_800DCE44 == 3) || (D_800DCE44 == 4)) {
+    if ((gGameMode == GAMEMODE_VS_2P) || (gGameMode == GAMEMODE_VS_3P)) {
         sp108 = D_800E5EC0;
     } else {
         sp108 = arg1 + 1;
@@ -499,8 +500,8 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
         gDPFillRectangle(gfx++, temp_s2 - 1, temp_v0 - 1, temp_s2 + 1, temp_v0 + 1);
     }
     if (arg1 == 0) {
-        if (D_800DCE44 == 1) {
-            if (gRacers[0].unk_2AC == 1) {
+        if (gGameMode == GAMEMODE_GP_RACE) {
+            if (gRacers[0].position == 1) {
                 racer = D_800E5F40[1];
             } else {
                 racer = D_800E5F40[0];
@@ -646,7 +647,7 @@ void func_i3_801365E0(void) {
     if (D_i3_80142188 & 1) {
         D_i3_8014219C = func_80078104(D_F2207C8, 0x40, 0, 0, 0);
     }
-    if (D_800DCE44 == 0x11) {
+    if (gGameMode == GAMEMODE_11) {
         D_i3_80142174 = 1;
     } else {
         D_i3_80142174 = 0;
@@ -1186,7 +1187,7 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
     gSP2Triangles(gfx++, 0, 3, 1, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 7, 5, 0, 4, 6, 7, 0);
 
-    if (D_800DCE44 == 0x11) {
+    if (gGameMode == GAMEMODE_11) {
         gfx = func_i7_80149760(gfx);
         gSPClearGeometryMode(gfx++, 0xFFFFFFFF);
         gSPSetGeometryMode(gfx++, G_SHADE | G_SHADING_SMOOTH | G_CLIPPING);

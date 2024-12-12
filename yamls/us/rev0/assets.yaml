@@ -190,13 +190,22 @@
       - [0x2738A0, .data, segment_2738A0/segment_2738A0]
 
   - name: segment_2747F0
-    type: bin
+    exclusive_ram_id: segment_00
+    type: code
+    dir: assets
     vram: 0x0
     start: 0x2747F0
+    subsegments:
+      - [0x2747F0, .data, segment_2747F0/segment_2747F0]
 
   - name: segment_2787F0
-    type: bin
+    exclusive_ram_id: segment_00
+    type: code
+    dir: assets
     start: 0x2787F0
+    vram: 0x0
+    subsegments:
+      - [0x2787F0, .data, segment_2787F0/segment_2787F0]
 
   - name: segment_27F200
     type: bin
@@ -224,8 +233,9 @@
     vram: 0x800FC730
     symbol_name_format: i11_$VRAM
     subsegments:
-      - [0x524920, asm]
-      - [0x524BE0, data]
+      - [0x524920, c]
+      - [0x524BE0, .data, 524920]
+      - [0x524BF0, .rodata, 524920]
 
   - name: audio_bank
     type: bin
@@ -238,5 +248,8 @@
   - name: audio_table
     type: bin
     start: 0x528730
+
+  # End Padding
+  - [0xF67900, bin]
 
   - [0x1000000]

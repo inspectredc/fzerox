@@ -1,10 +1,10 @@
-  - name: unk_nmi_ovl
+  - name: unk_nmi
     exclusive_ram_id: overlay
     type: code
     start: 0x72030
     vram: 0x80402F20 # vram unknown
     subsegments:
-      - [0x72030, data]
+      - [0x72030, .data, unk_nmi]
 
   - name: leo
     exclusive_ram_id: overlay
@@ -15,8 +15,8 @@
     bss_size: 0x2CD0
     symbol_name_format: i1_$VRAM
     subsegments:
-      - [0x72120, asm]
-      - [0x72150, hasm]
+      - [0x72120, c, ../72120]
+      - [0x72150, hasm, lib/getaadr2]
       - [0x721B0, c]
       - [0x72E40, c]
       - [0x75090, c]
@@ -54,8 +54,11 @@
       - [0x7FD70, c, lib/readcapacity]
       - [0x7FE10, c, lib/leotranslat]
       - [0x80170, c, lib/leotimer]
-      - [0x80870, hasm]
+      - [0x80870, hasm, lib/getkadr]
       - [0x80960, data]
+      - [0x813B0, textbin, lib/getaadr]
+      # - [0x813B0, hasm, lib/getaadr]
+      # - [0x8142C, data, lib/getaadr]
       - [0x83850, c, lib/leowrite]
       - [0x83A20, c, lib/cjcreateleomanager]
       - [0x83CB0, c, lib/cacreateleomanager]
@@ -64,7 +67,12 @@
       - [0x84040, c, lib/readrtc]
       - [0x840E0, c, lib/leoseek]
       - [0x841F0, c, lib/seek]
-      - [0x842A0, data] # buffer space
+      - [0x842A0, .data, leo_data]
+      - [0x97770, .data, 75090]
+      - [0x977F0, .data, 76270]
+      - [0x97800, .data, lib/leocmdex]
+      - [0x97860, .data, lib/leord_diskid]
+      - [0x97880, .data, lib/leoglobals]
       - [0x97890, .rodata, 72E40]
       - [0x978A0, .rodata, 76270]
       - [0x978C0, .rodata, 79AF0]
@@ -101,7 +109,7 @@
       - [0xA6730, .rodata, 9BD00]
       - [0xA6760, .rodata, 9FE40]
       - [0xA67C0, .rodata, A1700]
-      - [0xA7100, data] # could be rodata for 9F3C0 but would be out of order
+      - [0xA7100, .data, ovl_i2_data]
       - { start: 0xA90C0, type: .bss, vram: 0x8010D770, name: 98080 }
       - { type: .bss, vram: 0x8010D7F0, name: ovl_i2_buffers }
       - { type: .bss, vram: 0x801117B0, name: 9BD00 }
