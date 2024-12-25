@@ -12,73 +12,77 @@ UNUSED s32 D_i5_801190BC = 0;
 
 s32 D_i5_801190C0 = 0;
 UNUSED s32 D_i5_801190C4 = 0;
-s8 D_i5_801190C8 = 0;
-s8 D_i5_801190CC = 0;
+s8 gCupSelectOption = 0;
+s8 sCourseSelectTrackNo = 0;
 s8 D_i5_801190D0 = 0;
-s8 D_i5_801190D4 = 0;
-s8 D_i5_801190D8 = 1;
-s8 D_i5_801190DC = 0;
+s8 sSelectedGhostOption = 0;
+s8 sUnlockedGhosts = 1;
+s8 sStaffGhostTimeBeaten = 0;
 UNUSED s32 D_i5_801190E0 = 64;
 UNUSED s32 D_i5_801190E4 = 0;
 UNUSED s32 D_i5_801190E8 = 60;
 UNUSED s32 D_i5_801190EC = 40;
 UNUSED s32 D_i5_801190F0 = 70;
 
-unk_80077D50 D_i5_801190F4[] = { { 17, D_F1355B4, 64, 96, 0x6DF }, { 0 } };
-unk_80077D50 D_i5_80119114[] = { { 17, D_F135C98, 64, 96, 0x72D }, { 0 } };
-unk_80077D50 D_i5_80119134[] = { { 17, D_F1363CC, 64, 96, 0x738 }, { 0 } };
-unk_80077D50 D_i5_80119154[] = { { 17, D_F136B08, 64, 96, 0x6D4 }, { 0 } };
-unk_80077D50 D_i5_80119174[] = { { 17, D_F137668, 64, 96, 0x6C5 }, { 0 } };
-unk_80077D50 D_i5_80119194[] = { { 17, D_F1371E0, 64, 64, 0x483 }, { 0 } };
-unk_80077D50 D_i5_801191B4[] = { { 17, D_F137D34, 64, 96, 0x7CE }, { 0 } };
+unk_80077D50 sCupSelectJackCompTexInfo[] = { { 17, aCupSelectJackTex, 64, 96, 0x6DF }, { 0 } };
+unk_80077D50 sCupSelectQueenCompTexInfo[] = { { 17, aCupSelectQueenTex, 64, 96, 0x72D }, { 0 } };
+unk_80077D50 sCupSelectKingCompTexInfo[] = { { 17, aCupSelectKingTex, 64, 96, 0x738 }, { 0 } };
+unk_80077D50 sCupSelectJokerCompTexInfo[] = { { 17, aCupSelectJokerTex, 64, 96, 0x6D4 }, { 0 } };
+unk_80077D50 sCupSelectXCompTexInfo[] = { { 17, aCupSelectXTex, 64, 96, 0x6C5 }, { 0 } };
+unk_80077D50 sCupSelectEditCompTexInfo[] = { { 17, aCupSelectEditTex, 64, 64, 0x483 }, { 0 } };
+unk_80077D50 sCupSelectQuestionMarkCompTexInfo[] = { { 17, aCupSelectQuestionMarkTex, 64, 96, 0x7CE }, { 0 } };
 
-unk_80077D50* D_i5_801191D4[] = {
-    D_i5_801190F4, D_i5_80119114, D_i5_80119134, D_i5_80119154, D_i5_80119174, D_i5_80119194, D_i5_801191B4,
+unk_80077D50* sCupSelectCompTexInfos[] = {
+    sCupSelectJackCompTexInfo,         sCupSelectQueenCompTexInfo, sCupSelectKingCompTexInfo,
+    sCupSelectJokerCompTexInfo,        sCupSelectXCompTexInfo,     sCupSelectEditCompTexInfo,
+    sCupSelectQuestionMarkCompTexInfo,
 };
 
-unk_80077D50 D_i5_801191F0[] = { { 4, D_F139830, 160, 24, 0 }, { 0 } };
-unk_80077D50 D_i5_80119210[] = { { 4, D_F138510, 96, 24, 0 }, { 0 } };
-unk_80077D50 D_i5_80119230[] = { { 17, D_F139710, 32, 16, 0x112 }, { 0 } };
-unk_80077D50 D_i5_80119250[] = { { 17, D_F138994, 32, 32, 0x120 }, { 0 } };
-unk_80077D50 D_i5_80119270[] = { { 17, D_F138AB8, 64, 64, 0x9E8 }, { 0 } };
+unk_80077D50 sSelectCourseCompTexInfo[] = { { 4, aSelectCourseTex, 160, 24, 0 }, { 0 } };
+unk_80077D50 sRecordsCompTexInfo[] = { { 4, aRecordsTex, 96, 24, 0 }, { 0 } };
+static unk_80077D50 sOKCompTexInfo[] = { { 17, aOKTex, 32, 16, 0x112 }, { 0 } };
+unk_80077D50 sRecordsArrowCompTexInfo[] = { { 17, aRecordsArrowTex, 32, 32, 0x120 }, { 0 } };
+unk_80077D50 sOptionsFalconHelmetCompTexInfo[] = { { 17, aOptionsFalconHelmetTex, 64, 64, 0x9E8 }, { 0 } };
 
-unk_80077D50 D_i5_80119290[] = { { 17, D_F000004, 304, 240, 0x14A5D }, { 0 } };
-unk_80077D50 D_i5_801192B0[] = { { 17, D_F014A68, 320, 240, 0x118DB }, { 0 } };
-unk_80077D50 D_i5_801192D0[] = { { 17, D_F026348, 320, 240, 0x9E0A }, { 0 } };
+static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = { { 17, aTitleBackgroundMainTex, 304, 240, 0x14A5D }, { 0 } };
+static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = { { 17, aTitleBackgroundComicTex, 320, 240, 0x118DB }, { 0 } };
+static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = { { 17, aTitleBackgroundFalconTex, 320, 240, 0x9E0A },
+                                                            { 0 } };
 
-unk_80077D50* D_i5_801192F0[] = {
-    D_i5_80119290,
-    D_i5_801192B0,
-    D_i5_801192D0,
+static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
+    sTitleBackgroundMainCompTexInfo,
+    sTitleBackgroundComicCompTexInfo,
+    sTitleBackgroundFalconCompTexInfo,
 };
 
-unk_80077D50 D_i5_801192FC[] = { { 17, D_F1394A4, 16, 16, 0x75 }, { 0 } };
-unk_80077D50 D_i5_8011931C[] = { { 17, D_F139520, 16, 16, 0x75 }, { 0 } };
-unk_80077D50 D_i5_8011933C[] = { { 17, D_F13959C, 16, 16, 0x76 }, { 0 } };
-unk_80077D50 D_i5_8011935C[] = { { 17, D_F139618, 16, 16, 0x75 }, { 0 } };
+unk_80077D50 sCupCleared1CompTexInfo[] = { { 17, aCupCleared1Tex, 16, 16, 0x75 }, { 0 } };
+unk_80077D50 sCupCleared2CompTexInfo[] = { { 17, aCupCleared2Tex, 16, 16, 0x75 }, { 0 } };
+unk_80077D50 sCupCleared3CompTexInfo[] = { { 17, aCupCleared3Tex, 16, 16, 0x76 }, { 0 } };
+unk_80077D50 sCupCleared4CompTexInfo[] = { { 17, aCupCleared4Tex, 16, 16, 0x75 }, { 0 } };
 
-unk_80077D50* D_i5_8011937C[] = {
-    D_i5_801192FC,
-    D_i5_8011931C,
-    D_i5_8011933C,
-    D_i5_8011935C,
+unk_80077D50* sCupClearedDifficultyCompTexInfos[] = {
+    sCupCleared1CompTexInfo,
+    sCupCleared2CompTexInfo,
+    sCupCleared3CompTexInfo,
+    sCupCleared4CompTexInfo,
 };
 
-unk_80077D50 D_i5_8011938C[] = { { 4, D_F13A9E0, 32, 16, 0 }, { 0 } };
-unk_80077D50 D_i5_801193AC[] = { { 17, D_F139694, 16, 16, 0x75 }, { 0 } };
+unk_80077D50 sHasGhostMarkerCompTexInfo[] = { { 4, aHasGhostMarkerTex, 32, 16, 0 }, { 0 } };
+unk_80077D50 sStaffGhostBeatenCompTexInfo[] = { { 17, aStaffGhostBeatenTex, 16, 16, 0x75 }, { 0 } };
 
-unk_80077D50 D_i5_801193CC[] = { { 4, D_F139FB8, 64, 16, 0 }, { 0 } };
-unk_80077D50 D_i5_801193EC[] = { { 4, D_F13A1C0, 64, 16, 0 }, { 0 } };
-unk_80077D50 D_i5_8011940C[] = { { 4, D_F13A3C8, 64, 16, 0 }, { 0 } };
-unk_80077D50 D_i5_8011942C[] = { { 4, D_F13A5D0, 64, 16, 0 }, { 0 } };
-unk_80077D50 D_i5_8011944C[] = { { 4, D_F13A7D8, 64, 16, 0 }, { 0 } };
+unk_80077D50 sMenuWithGhostCompTexInfo[] = { { 4, aMenuWithGhostTex, 64, 16, 0 }, { 0 } };
+unk_80077D50 sMenuWithoutGhostCompTexInfo[] = { { 4, aMenuWithoutGhostTex, 64, 16, 0 }, { 0 } };
+unk_80077D50 sMenuStaffGhostCompTexInfo[] = { { 4, aMenuStaffGhostTex, 64, 16, 0 }, { 0 } };
+unk_80077D50 sMenuCelebrityGhostCompTexInfo[] = { { 4, aMenuCelebrityGhostTex, 64, 16, 0 }, { 0 } };
+unk_80077D50 sMenuChampGhostCompTexInfo[] = { { 4, aMenuChampGhostTex, 64, 16, 0 }, { 0 } };
 
-unk_80077D50* D_i5_8011946C[] = {
-    D_i5_801193CC, D_i5_801193EC, D_i5_8011940C, D_i5_8011942C, D_i5_8011944C,
+unk_80077D50* sTimeAttackGhostOptionCompTexInfos[] = {
+    sMenuWithGhostCompTexInfo,      sMenuWithoutGhostCompTexInfo, sMenuStaffGhostCompTexInfo,
+    sMenuCelebrityGhostCompTexInfo, sMenuChampGhostCompTexInfo,
 };
 
 // clang-format off
-s32 D_i5_80119480[] = {
+s32 sCourseSelectCupColors[] = {
     192, 64,  64,
     100, 150, 255,
     255, 255, 100,
@@ -88,7 +92,7 @@ s32 D_i5_80119480[] = {
 };
 // clang-format on
 
-const char* D_i5_801194C8[] = {
+const char* sTrackSubtitles[] = {
     "FIGURE EIGHT",
     "HIGH SPEED",
     "PIPE",
@@ -124,38 +128,39 @@ const char* D_i5_801194C8[] = {
 
 s8 D_i5_80119544[] = { 1, 0, 2, 3, 4 };
 
-s32 D_i5_801197E0;
+s32 sCourseSelectCup;
 s32 D_i5_801197E4;
 
-extern s32 D_800F8514;
+extern s32 gTrackIndex;
 
 void func_i5_80116830(void) {
     unk_80141C88 sp28;
     s32 pad;
 
-    if (D_i5_801197E4 != D_800F8514) {
-        D_i5_801190DC = 0;
-        if (func_i2_801037CC(&sp28, D_800F8514) != 0) {
-            D_i5_801190D8 = 1;
+    if (D_i5_801197E4 != gTrackIndex) {
+        sStaffGhostTimeBeaten = false;
+        if (func_i2_801037CC(&sp28, gTrackIndex) != 0) {
+            sUnlockedGhosts = 1;
         } else {
-            if (D_802A6B40[D_800F8514].unk_20[0] < ((sp28.unk_08 * 115) / 100)) {
-                D_i5_801190D8 = 2;
+            // Within 115% of staff ghost time
+            if (D_802A6B40[gTrackIndex].timeRecord[0] < ((sp28.unk_08 * 115) / 100)) {
+                sUnlockedGhosts = 2;
             } else {
-                D_i5_801190D8 = 1;
+                sUnlockedGhosts = 1;
             }
-            if (D_802A6B40[D_800F8514].unk_20[0] < sp28.unk_08) {
-                D_i5_801190DC = 1;
+            if (D_802A6B40[gTrackIndex].timeRecord[0] < sp28.unk_08) {
+                sStaffGhostTimeBeaten = true;
             }
         }
-        D_i5_801197E4 = D_800F8514;
+        D_i5_801197E4 = gTrackIndex;
     }
 }
 
-extern char* D_800E4178;
-extern char* D_800E4180[];
+extern char* gCurrentTrackName;
+extern char* gTrackNames[];
 
 void func_i5_80116910(void) {
-    D_800E4178 = D_800E4180[D_800F8514];
+    gCurrentTrackName = gTrackNames[gTrackIndex];
 }
 
 extern s16 D_800CCFE8;
@@ -174,7 +179,7 @@ void func_i5_80116934(void) {
     s32 var_v1;
 
     D_800CCFE8 = 3;
-    D_i5_801190D4 = D_i5_80119544[D_800CD3CC];
+    sSelectedGhostOption = D_i5_80119544[D_800CD3CC];
     D_i5_801197E4 = -1;
     if (gGameMode == GAMEMODE_800A) {
         var_v0 = D_800CD3B8;
@@ -182,17 +187,17 @@ void func_i5_80116934(void) {
         var_v0 = D_800CD3BC;
     }
     if (var_v0 >= 48) {
-        D_i5_801190C8 = 4;
-        D_i5_801190CC = 0;
-        D_800F8514 = 48;
+        gCupSelectOption = 4;
+        sCourseSelectTrackNo = 0;
+        gTrackIndex = 48;
     } else {
-        D_i5_801190CC = var_v0 % 6;
+        sCourseSelectTrackNo = var_v0 % 6;
         if (var_v0 >= 24) {
-            D_i5_801190C8 = 10;
+            gCupSelectOption = 10;
         } else {
-            D_i5_801190C8 = var_v0 / 6;
+            gCupSelectOption = var_v0 / 6;
         }
-        D_800F8514 = var_v0;
+        gTrackIndex = var_v0;
     }
     func_i5_80116830();
     var_v1 = D_800CD3C0;
@@ -200,18 +205,18 @@ void func_i5_80116934(void) {
         var_v1 = 2;
     }
 
-    if (var_v1 + 2 < D_i5_801190C8) {
-        D_i5_801190C8 = var_v1 + 2;
+    if (var_v1 + 2 < gCupSelectOption) {
+        gCupSelectOption = var_v1 + 2;
     }
-    if ((D_i5_801190C8 == 4) && ((gGameMode == GAMEMODE_8013) || (D_800CD380 == 1))) {
-        D_i5_801190C8 = 3;
+    if ((gCupSelectOption == 4) && ((gGameMode == GAMEMODE_8013) || (D_800CD380 == 1))) {
+        gCupSelectOption = 3;
     }
-    if (D_i5_801190C8 >= 0xA) {
-        D_i5_801197E0 = 4;
-    } else if (D_i5_801190C8 == 4) {
-        D_i5_801197E0 = 5;
+    if (gCupSelectOption >= 10) {
+        sCourseSelectCup = X_CUP;
+    } else if (gCupSelectOption == 4) {
+        sCourseSelectCup = EDIT_CUP;
     } else {
-        D_i5_801197E0 = D_i5_801190C8;
+        sCourseSelectCup = gCupSelectOption;
     }
 
     func_80085610();
@@ -255,40 +260,40 @@ void func_i5_80116934(void) {
 void func_i5_80116D00(void) {
     D_800CCFE8 = 3;
     D_i5_801190C0 = 10;
-    if (D_800F8514 >= 48) {
-        D_i5_801190C8 = 4;
-        D_i5_801190CC = D_800F8514 % 6;
+    if (gTrackIndex >= 48) {
+        gCupSelectOption = 4;
+        sCourseSelectTrackNo = gTrackIndex % 6;
     } else {
-        D_i5_801190CC = D_800F8514 % 6;
-        if (D_800F8514 >= 24) {
-            D_i5_801190C8 = 10;
+        sCourseSelectTrackNo = gTrackIndex % 6;
+        if (gTrackIndex >= 24) {
+            gCupSelectOption = 10;
         } else {
-            D_i5_801190C8 = D_800F8514 / 6;
+            gCupSelectOption = gTrackIndex / 6;
         }
     }
     func_i5_80116910();
-    if (D_i5_801190C8 >= 10) {
-        D_i5_801197E0 = 4;
-    } else if (D_i5_801190C8 == 4) {
-        D_i5_801197E0 = 5;
+    if (gCupSelectOption >= 10) {
+        sCourseSelectCup = X_CUP;
+    } else if (gCupSelectOption == 4) {
+        sCourseSelectCup = EDIT_CUP;
     } else {
-        D_i5_801197E0 = D_i5_801190C8;
+        sCourseSelectCup = gCupSelectOption;
     }
     func_80085610();
     func_800794B0(5, 0, 0, 1);
     func_800794B0(0x78, 0, 0, 2);
     func_800794B0(0x79, 0, 0, 8);
-    if (D_i5_801190C8 >= 10) {
+    if (gCupSelectOption >= 10) {
         func_800794B0(0x7F, 0, -100, 6);
     } else {
-        func_800794B0(D_i5_801190C8 + 0x7A, 0, -100, 6);
+        func_800794B0(gCupSelectOption + 0x7A, 0, -100, 6);
     }
     func_800794B0(0x82, 0, 0, 8);
 }
 
 void func_i5_80116658(s32 arg0);
 
-extern s32 D_800CD004;
+extern s32 gCupType;
 extern s16 D_800CD044;
 extern s16 D_800CD048;
 extern Controller D_800DD180;
@@ -299,9 +304,9 @@ extern s32 D_i2_80106DA4;
 
 s32 func_i5_80116EEC(void) {
     s32 pad[2];
-    s32 temp_v0;
-    s8 temp_a2;
-    s32 temp_v1;
+    s32 originalCupSelectOption;
+    s8 originalSelectedGhostOption;
+    s32 unlockedGhost;
     s32 var_v1;
     unk_800E3A28* temp_v0_2;
 
@@ -316,120 +321,120 @@ s32 func_i5_80116EEC(void) {
     switch (D_i5_801190C0) {
         case 0:
             D_i5_801190D0 = 1;
-            temp_v0 = D_i5_801190C8;
-            if (D_i5_801190C8 < 10) {
-                if ((D_800E416C & BTN_LEFT) && (D_i5_801190C8 > 0)) {
-                    D_i5_801190C8--;
+            originalCupSelectOption = gCupSelectOption;
+            if (gCupSelectOption < 10) {
+                if ((D_800E416C & BTN_LEFT) && (gCupSelectOption > 0)) {
+                    gCupSelectOption--;
                 }
-                if ((D_800E416C & BTN_RIGHT) && (D_i5_801190C8 < 4)) {
-                    D_i5_801190C8++;
+                if ((D_800E416C & BTN_RIGHT) && (gCupSelectOption < 4)) {
+                    gCupSelectOption++;
                 }
                 var_v1 = D_800CD3C0;
                 if ((var_v1 >= 3) || (D_800CD3C8 != 0)) {
                     var_v1 = 2;
                 }
 
-                if (var_v1 + 2 < D_i5_801190C8) {
-                    D_i5_801190C8 = var_v1 + 2;
+                if (var_v1 + 2 < gCupSelectOption) {
+                    gCupSelectOption = var_v1 + 2;
                 }
-                if ((D_i5_801190C8 == 4) && ((gGameMode == GAMEMODE_8013) || (D_800CD380 == 1))) {
-                    D_i5_801190C8 = 3;
+                if ((gCupSelectOption == 4) && ((gGameMode == GAMEMODE_8013) || (D_800CD380 == 1))) {
+                    gCupSelectOption = 3;
                 }
             }
-            if (D_i5_801190C8 >= 10) {
-                D_i5_801197E0 = 4;
-            } else if (D_i5_801190C8 == 4) {
-                D_i5_801197E0 = 5;
+            if (gCupSelectOption >= 10) {
+                sCourseSelectCup = X_CUP;
+            } else if (gCupSelectOption == 4) {
+                sCourseSelectCup = EDIT_CUP;
             } else {
-                D_i5_801197E0 = D_i5_801190C8;
+                sCourseSelectCup = gCupSelectOption;
             }
-            if (temp_v0 != D_i5_801190C8) {
-                D_i5_801190CC = 0;
-                if (D_i5_801197E0 < 5) {
-                    func_i5_80116658(D_i5_801197E0);
+            if (originalCupSelectOption != gCupSelectOption) {
+                sCourseSelectTrackNo = 0;
+                if (sCourseSelectCup <= X_CUP) {
+                    func_i5_80116658(sCourseSelectCup);
                 }
                 func_800BA8D8(30);
             }
-            if (D_i5_801190C8 < 10) {
-                D_800CD004 = D_i5_801190C8;
+            if (gCupSelectOption < 10) {
+                gCupType = gCupSelectOption;
             } else {
-                D_800CD004 = 5;
+                gCupType = EDIT_CUP;
             }
-            if (D_i5_801190C8 >= 10) {
-                D_800F8514 = D_i5_801190CC + 24;
-            } else if (D_i5_801190C8 == 4) {
-                D_800F8514 = 48;
+            if (gCupSelectOption >= 10) {
+                gTrackIndex = sCourseSelectTrackNo + 24;
+            } else if (gCupSelectOption == 4) {
+                gTrackIndex = 48;
             } else {
-                D_800F8514 = (D_i5_801190C8 * 6) + D_i5_801190CC;
+                gTrackIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
             }
             if (D_800E416E & BTN_B) {
                 func_800BA8D8(0x10);
                 if (gGameMode == GAMEMODE_800A) {
-                    D_800CD3B8 = D_800F8514;
+                    D_800CD3B8 = gTrackIndex;
                     D_i5_801190C0 = 5;
                 } else {
-                    D_800CD3BC = D_800F8514;
+                    D_800CD3BC = gTrackIndex;
                     D_i5_801190C0 = 1;
                     D_800CD048 = 10;
                 }
             } else if (D_800E416E & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x21);
-                if (D_i5_801190C8 == 4) {
-                    D_i5_801190CC = 0;
+                if (gCupSelectOption == 4) {
+                    sCourseSelectTrackNo = 0;
                     D_i5_801190C0 = 3;
                 } else if (D_800CD380 == 0) {
-                    if (D_i5_801190C8 >= 10) {
-                        D_800F8514 = 0x18;
+                    if (gCupSelectOption >= 10) {
+                        gTrackIndex = 0x18;
                     } else {
-                        D_800F8514 = D_i5_801190C8 * 6;
+                        gTrackIndex = gCupSelectOption * 6;
                     }
-                    D_i5_801190CC = 0;
+                    sCourseSelectTrackNo = 0;
                     D_i5_801190C0 = 3;
                 } else {
                     D_i5_801190C0 = 2;
                 }
-                func_80079E88(0x79)->unk_0C = 0x190 - (D_i5_801190CC * 0x500);
+                func_80079E88(0x79)->unk_0C = 0x190 - (sCourseSelectTrackNo * 0x500);
             }
             break;
         case 2:
             D_i5_801190D0 = 1;
             if ((D_800CD380 == 1) && (gGameMode != GAMEMODE_8013)) {
-                temp_v1 = D_i5_801190D8;
-                temp_a2 = D_i5_801190D4;
-                if ((D_800E416C & BTN_UP) && (D_i5_801190D4 > 0)) {
-                    D_i5_801190D4--;
+                unlockedGhost = sUnlockedGhosts;
+                originalSelectedGhostOption = sSelectedGhostOption;
+                if ((D_800E416C & BTN_UP) && (sSelectedGhostOption > 0)) {
+                    sSelectedGhostOption--;
                 }
-                if ((D_800E416C & BTN_DOWN) && (D_i5_801190D4 < temp_v1)) {
-                    D_i5_801190D4++;
+                if ((D_800E416C & BTN_DOWN) && (sSelectedGhostOption < unlockedGhost)) {
+                    sSelectedGhostOption++;
                 }
-                if (temp_a2 != D_i5_801190D4) {
+                if (originalSelectedGhostOption != sSelectedGhostOption) {
                     func_800BA8D8(30);
                 }
-                if (temp_v1 < D_i5_801190D4) {
-                    D_i5_801190D4 = 0;
+                if (unlockedGhost < sSelectedGhostOption) {
+                    sSelectedGhostOption = 0;
                 }
-                D_800CD3CC = D_i5_80119544[D_i5_801190D4];
+                D_800CD3CC = D_i5_80119544[sSelectedGhostOption];
             }
 
-            if ((D_800E416C & BTN_LEFT) && (D_i5_801190CC > 0)) {
-                D_i5_801190CC--;
+            if ((D_800E416C & BTN_LEFT) && (sCourseSelectTrackNo > 0)) {
+                sCourseSelectTrackNo--;
                 D_800E5220[0].unk_18 = 1;
                 temp_v0_2 = func_80079E88(0x81);
                 temp_v0_2->unk_04 += 0x200;
                 func_800BA8D8(30);
             }
 
-            if ((D_800E416C & BTN_RIGHT) && (D_i5_801190CC < 5)) {
-                D_i5_801190CC++;
+            if ((D_800E416C & BTN_RIGHT) && (sCourseSelectTrackNo < 5)) {
+                sCourseSelectTrackNo++;
                 D_800E5220[0].unk_18 = 1;
                 temp_v0_2 = func_80079E88(0x81);
                 temp_v0_2->unk_08 += 0x200;
                 func_800BA8D8(30);
             }
-            if (D_i5_801190C8 >= 10) {
-                D_800F8514 = D_i5_801190CC + 0x18;
+            if (gCupSelectOption >= 10) {
+                gTrackIndex = sCourseSelectTrackNo + 0x18;
             } else {
-                D_800F8514 = (D_i5_801190C8 * 6) + D_i5_801190CC;
+                gTrackIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
             }
             if (D_800E416E & BTN_B) {
                 D_i5_801190C0 = 0;
@@ -442,7 +447,7 @@ s32 func_i5_80116EEC(void) {
             break;
         case 3:
             if (D_800E416E & BTN_B) {
-                if ((D_800CD380 == 0) || (D_i5_801190C8 == 4)) {
+                if ((D_800CD380 == 0) || (gCupSelectOption == 4)) {
                     D_i5_801190C0 = 0;
                 } else {
                     D_i5_801190C0 = 2;
@@ -452,10 +457,10 @@ s32 func_i5_80116EEC(void) {
                 func_800BA8D8(0x3E);
                 D_i5_801190C0 = 4;
                 if (gGameMode == GAMEMODE_800A) {
-                    D_800CD3B8 = D_800F8514;
+                    D_800CD3B8 = gTrackIndex;
                     return GAMEMODE_8008;
                 }
-                D_800CD3BC = D_800F8514;
+                D_800CD3BC = gTrackIndex;
                 return GAMEMODE_6;
             }
             break;
@@ -485,7 +490,7 @@ s32 func_i5_801175D0(void) {
     switch (D_i5_801190C0) {
         case 10:
             if (D_800E416E & (BTN_A | BTN_START)) {
-                D_i5_801190C0 = 0xB;
+                D_i5_801190C0 = 11;
                 func_800BA8D8(0x3E);
                 return GAMEMODE_4012;
             }
@@ -508,14 +513,14 @@ void func_i5_80117684(unk_800E3A28* arg0) {
     unk_80077D50* sp20;
 
     arg0->unk_04 = D_800CD3C4;
-    sp20 = D_i5_801192F0[arg0->unk_04];
+    sp20 = sTitleBackgroundCompTexInfos[arg0->unk_04];
     func_80077D50(sp20, 0);
 
     if (arg0->unk_04 == 0) {
         arg0->unk_0C = 8;
     }
     if (gGameMode == GAMEMODE_8013) {
-        func_80077D50(D_i5_80119270, 0);
+        func_80077D50(sOptionsFalconHelmetCompTexInfo, 0);
         if (arg0->unk_04 == 0) {
             var_a1 = 0x23A00;
         } else {
@@ -530,8 +535,8 @@ void func_i5_80117758(void) {
     s32 i;
 
     func_i5_80115DF0();
-    if (D_i5_801197E0 < 5) {
-        func_i5_80116658(D_i5_801197E0);
+    if (sCourseSelectCup <= X_CUP) {
+        func_i5_80116658(sCourseSelectCup);
         D_i5_801190B4 -= 2;
 
         for (i = 0; i < 6; i++) {
@@ -542,24 +547,24 @@ void func_i5_80117758(void) {
 }
 
 void func_i5_801177EC(unk_800E3A28* arg0) {
-    s32 var_v1;
+    s32 cupType;
     s32 var_v0;
     s32 i;
 
-    var_v1 = arg0->unk_00 - 0x7A;
-    if (var_v1 == 3 || var_v1 == 4) {
+    cupType = arg0->unk_00 - 0x7A;
+    if (cupType == JOKER_CUP || cupType == X_CUP) {
         var_v0 = D_800CD3C0;
         if ((var_v0 >= 3) || (D_800CD3C8 != 0)) {
             var_v0 = 2;
         }
-        if (var_v0 < (var_v1 - 2)) {
-            var_v1 = 6;
+        if (var_v0 < (cupType - 2)) {
+            cupType = 6;
         }
     }
-    func_80077D50(D_i5_801191D4[var_v1], 0);
+    func_80077D50(sCupSelectCompTexInfos[cupType], 0);
 
     for (i = 0; i < 4; i++) {
-        func_80077D50(D_i5_8011937C[i], 0);
+        func_80077D50(sCupClearedDifficultyCompTexInfos[i], 0);
     }
 
     if (D_800CD044 == 0x21) {
@@ -571,20 +576,20 @@ void func_i5_801177EC(unk_800E3A28* arg0) {
 
 void func_i5_801178D8(unk_800E3A28* arg0) {
     if (gGameMode != GAMEMODE_8013) {
-        func_80077D50(D_i5_801191F0, 0);
+        func_80077D50(sSelectCourseCompTexInfo, 0);
         arg0->unk_1C = 0xC;
     } else {
-        func_80077D50(D_i5_80119210, 0);
+        func_80077D50(sRecordsCompTexInfo, 0);
     }
 }
 
 void func_i5_80117934(unk_800E3A28* arg0) {
-    func_80077D50(D_i5_80119230, 0);
+    func_80077D50(sOKCompTexInfo, 0);
     arg0->unk_0C = 50;
 }
 
 void func_i5_8011796C(unk_800E3A28* arg0) {
-    func_80077D50(D_i5_80119250, 0);
+    func_80077D50(sRecordsArrowCompTexInfo, 0);
     arg0->unk_04 = 0x80;
     arg0->unk_08 = 0x80;
 }
@@ -601,16 +606,16 @@ void func_i5_801179A8(unk_800E3A28* arg0) {
     }
     arg0->unk_0C += (sp20.unk_00 % 6) * 320;
     arg0->unk_04 = sp20.unk_00;
-    func_80077D50(D_i5_8011938C, 0);
+    func_80077D50(sHasGhostMarkerCompTexInfo, 0);
 }
 
 void func_i5_80117A2C(unk_800E3A28* arg0) {
     s32 i;
 
-    func_80077D50(D_i5_801193AC, 0);
+    func_80077D50(sStaffGhostBeatenCompTexInfo, 0);
 
     for (i = 0; i < 5; i++) {
-        func_80077D50(D_i5_8011946C[i], 0);
+        func_80077D50(sTimeAttackGhostOptionCompTexInfos[i], 0);
     }
 
     arg0->unk_0C = 150;
@@ -620,11 +625,13 @@ Gfx* func_i5_80117A98(Gfx* gfx, unk_800E3A28* arg1) {
 
     if (gGameMode != GAMEMODE_8013) {
         gDPSetPrimColor(gfx++, 0, 0, 75, 75, 75, 180);
-        gfx = func_80078EA0(gfx, D_i5_801192F0[arg1->unk_04], arg1->unk_0C, arg1->unk_10, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->unk_0C, arg1->unk_10, 1, 0, 0, 1.0f,
+                            1.0f);
     } else {
-        gfx = func_80078EA0(gfx, D_i5_801192F0[arg1->unk_04], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
-        gfx = func_80078EA0(gfx, D_i5_80119270, 0x35, 4, 2, 1, 0, 1.0f, 1.0f);
-        gfx = func_80078EA0(gfx, D_i5_80119270, 0xCB, 4, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f,
+                            1.0f);
+        gfx = func_80078EA0(gfx, sOptionsFalconHelmetCompTexInfo, 0x35, 4, 2, 1, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sOptionsFalconHelmetCompTexInfo, 0xCB, 4, 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
@@ -637,7 +644,7 @@ Gfx* func_i5_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
         case 4:
         case 10:
         case 11:
-            if (D_i5_801197E0 < 5) {
+            if (sCourseSelectCup <= X_CUP) {
                 gfx = func_i5_80115E64(gfx);
             }
             break;
@@ -654,17 +661,17 @@ extern s8 D_800E4174[];
 Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
     s32 i;
     s32 alpha;
-    s32 var_t0;
+    s32 cupDifficultiesCleared;
     s32 var_s1;
     s32 var_v0;
     s32 sp80;
     s32 var_v1;
 
     i = arg1->unk_00 - 0x7A;
-    if (D_i5_801190C8 >= 10) {
-        var_s1 = 5;
+    if (gCupSelectOption >= 10) {
+        var_s1 = EDIT_CUP;
     } else {
-        var_s1 = D_i5_801190C8;
+        var_s1 = gCupSelectOption;
     }
     if (var_s1 == i) {
         if ((D_i5_801190C0 == 0) || (D_i5_801190C0 == 1)) {
@@ -701,12 +708,12 @@ Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
         arg1->unk_1C = 0;
     }
 
-    var_t0 = D_800E4174[i];
+    cupDifficultiesCleared = D_800E4174[i];
     sp80 = (SQ(arg1->unk_1C) * 3) / 2;
 
     switch (i) {
-        case 3:
-        case 4:
+        case JOKER_CUP:
+        case X_CUP:
             var_v0 = D_800CD3C0;
             if ((var_v0 >= 3) || (D_800CD3C8 != 0)) {
                 var_v0 = 2;
@@ -717,9 +724,9 @@ Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
             break;
     }
 
-    gfx = func_80078EA0(gfx, D_i5_801191D4[i], arg1->unk_0C, arg1->unk_10 + sp80, 1, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, sCupSelectCompTexInfos[i], arg1->unk_0C, arg1->unk_10 + sp80, 1, 0, 0, 1.0f, 1.0f);
 
-    if ((D_800CD380 == 0) && (i < 4)) {
+    if ((D_800CD380 == 0) && (i <= JOKER_CUP)) {
         alpha = ((arg1->unk_10 - 49) * 255) / 36;
         if (var_s1 == i) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -727,8 +734,8 @@ Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, alpha);
         }
 
-        for (i = 0; i < var_t0; i++) {
-            gfx = func_80078EA0(gfx, D_i5_8011937C[i], arg1->unk_0C + (i * 16) + ((12 - i * 8) / 2),
+        for (i = 0; i < cupDifficultiesCleared; i++) {
+            gfx = func_80078EA0(gfx, sCupClearedDifficultyCompTexInfos[i], arg1->unk_0C + (i * 16) + ((12 - i * 8) / 2),
                                 (arg1->unk_10 + sp80) - 12, 1, 0, 0, 1.0f, 1.0f);
         }
     }
@@ -761,16 +768,16 @@ Gfx* func_i5_80117FB4(Gfx* gfx, unk_800E3A28* arg1) {
         }
         temp_v1 = (SQ(arg1->unk_1C) * 3) / 2;
 
-        gfx = func_80078EA0(gfx, D_i5_801191F0, arg1->unk_0C, arg1->unk_10 + temp_v1, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sSelectCourseCompTexInfo, arg1->unk_0C, arg1->unk_10 + temp_v1, 0, 0, 0, 1.0f, 1.0f);
     } else {
-        gfx = func_80078EA0(gfx, D_i5_80119210, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sRecordsCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
 
 Gfx* func_i5_80118100(Gfx* gfx, unk_800E3A28* arg1) {
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, D_i5_80119230, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
 }
 
 extern f32 D_800DD230[];
@@ -779,17 +786,17 @@ Gfx* func_i5_80118168(Gfx* gfx, unk_800E3A28* arg1) {
     f32 temp_fv0 = (D_800DD230[arg1->unk_1C & 0xFFF] + 1.0) / 2;
     f32 temp_fa1 = (D_800DD230[arg1->unk_20 & 0xFFF] + 1.0) / 2;
 
-    gfx = func_80078EA0(gfx, D_i5_80119250, arg1->unk_0C + 0x2B, (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0, 0, 1.0f,
-                        temp_fv0);
-    return func_80078EA0(gfx, D_i5_80119250, arg1->unk_10 + 0xF5, (((1.0 - temp_fa1) * 16.0) + 112.0), 5, 0, 0, 1.0f,
-                         temp_fa1);
+    gfx = func_80078EA0(gfx, sRecordsArrowCompTexInfo, arg1->unk_0C + 0x2B, (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0,
+                        0, 1.0f, temp_fv0);
+    return func_80078EA0(gfx, sRecordsArrowCompTexInfo, arg1->unk_10 + 0xF5, (((1.0 - temp_fa1) * 16.0) + 112.0), 5, 0,
+                         0, 1.0f, temp_fa1);
 }
 
 Gfx* func_i5_801182DC(Gfx* gfx) {
-    char sp4C[4];
-    s32 sp48;
-    s32 sp44;
-    s32* temp_v1;
+    char cupTrackNoStr[4];
+    s32 cupTrackNoWidth;
+    s32 trackNameWidth;
+    s32* cupColors;
 
     switch (D_i5_801190C0) {
         case 0:
@@ -800,30 +807,33 @@ Gfx* func_i5_801182DC(Gfx* gfx) {
         case 4:
         case 10:
         case 11:
-            func_i2_80105DB0(D_i5_801190CC + 1, sp4C);
-            sp4C[1] = ':';
-            sp4C[2] = ' ';
-            sp4C[3] = '\0';
-            sp48 = func_i2_801062E4(sp4C, 3, 0);
-            if (D_i5_801197E0 == 5) {
-                sp44 = func_i2_801062E4(D_800E4178, 3, 0);
+            func_i2_80105DB0(sCourseSelectTrackNo + 1, cupTrackNoStr);
+            cupTrackNoStr[1] = ':';
+            cupTrackNoStr[2] = ' ';
+            cupTrackNoStr[3] = '\0';
+            cupTrackNoWidth = func_i2_801062E4(cupTrackNoStr, 3, 0);
+            if (sCourseSelectCup == EDIT_CUP) {
+                trackNameWidth = func_i2_801062E4(gCurrentTrackName, 3, 0);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-                gfx =
-                    func_i2_80106450(gfx, (-(sp44 / 2) - (func_i2_801062E4(sp4C, 3, 0) / 2)) + 160, 200, sp4C, 0, 3, 0);
-                gfx = func_i2_80106450(gfx, ((sp48 / 2) - (func_i2_801062E4(D_800E4178, 3, 0) / 2)) + 160, 200,
-                                       D_800E4178, 0, 3, 0);
+                gfx = func_i2_80106450(gfx, (-(trackNameWidth / 2) - (func_i2_801062E4(cupTrackNoStr, 3, 0) / 2)) + 160,
+                                       200, cupTrackNoStr, 0, 3, 0);
+                gfx = func_i2_80106450(gfx,
+                                       ((cupTrackNoWidth / 2) - (func_i2_801062E4(gCurrentTrackName, 3, 0) / 2)) + 160,
+                                       200, gCurrentTrackName, 0, 3, 0);
             } else {
-                sp44 = func_i2_801062E4(D_800E4178, 3, 0);
-                temp_v1 = &D_i5_80119480[D_i5_801197E0 * 3];
-                gDPSetPrimColor(gfx++, 0, 0, temp_v1[0], temp_v1[1], temp_v1[2], 255);
-                gfx =
-                    func_i2_80106450(gfx, (-(sp44 / 2) - (func_i2_801062E4(sp4C, 3, 0) / 2)) + 160, 200, sp4C, 0, 3, 0);
+                trackNameWidth = func_i2_801062E4(gCurrentTrackName, 3, 0);
+                cupColors = &sCourseSelectCupColors[sCourseSelectCup * 3];
+                gDPSetPrimColor(gfx++, 0, 0, cupColors[0], cupColors[1], cupColors[2], 255);
+                gfx = func_i2_80106450(gfx, (-(trackNameWidth / 2) - (func_i2_801062E4(cupTrackNoStr, 3, 0) / 2)) + 160,
+                                       200, cupTrackNoStr, 0, 3, 0);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-                gfx = func_i2_80106450(gfx, ((sp48 / 2) - (func_i2_801062E4(D_800E4178, 3, 0) / 2)) + 160, 200,
-                                       D_800E4178, 0, 3, 0);
+                gfx = func_i2_80106450(gfx,
+                                       ((cupTrackNoWidth / 2) - (func_i2_801062E4(gCurrentTrackName, 3, 0) / 2)) + 160,
+                                       200, gCurrentTrackName, 0, 3, 0);
                 gfx = func_i2_80106450(
-                    gfx, 160 - (func_i2_801062E4(D_i5_801194C8[D_i5_801197E0 * 6 + D_i5_801190CC], 4, 0) / 2), 210,
-                    D_i5_801194C8[D_i5_801197E0 * 6 + D_i5_801190CC], 0, 4, 0);
+                    gfx,
+                    160 - (func_i2_801062E4(sTrackSubtitles[sCourseSelectCup * 6 + sCourseSelectTrackNo], 4, 0) / 2),
+                    210, sTrackSubtitles[sCourseSelectCup * 6 + sCourseSelectTrackNo], 0, 4, 0);
             }
             break;
     }
@@ -832,7 +842,8 @@ Gfx* func_i5_801182DC(Gfx* gfx) {
 
 Gfx* func_i5_80118674(Gfx* gfx, unk_800E3A28* arg1) {
 
-    if ((arg1->unk_04 / 6) != (D_800F8514 / 6)) {
+    // If Cup Does Not Match
+    if ((arg1->unk_04 / 6) != (gTrackIndex / 6)) {
         return gfx;
     }
 
@@ -846,7 +857,8 @@ Gfx* func_i5_80118674(Gfx* gfx, unk_800E3A28* arg1) {
         case 3:
         case 4:
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            gfx = func_80078EA0(gfx, D_i5_8011938C, arg1->unk_0C + arg1->unk_1C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sHasGhostMarkerCompTexInfo, arg1->unk_0C + arg1->unk_1C, arg1->unk_10, 0, 0, 0,
+                                1.0f, 1.0f);
             break;
     }
 
@@ -855,10 +867,10 @@ Gfx* func_i5_80118674(Gfx* gfx, unk_800E3A28* arg1) {
 
 Gfx* func_i5_80118790(Gfx* gfx, unk_800E3A28* arg1) {
     s32 i;
-    s32 temp_s6 = D_i5_801190D8 + 1;
+    s32 numUnlockedGhosts = sUnlockedGhosts + 1;
 
-    for (i = 0; i < temp_s6; i++) {
-        if (i == D_i5_801190D4) {
+    for (i = 0; i < numUnlockedGhosts; i++) {
+        if (i == sSelectedGhostOption) {
             switch (D_i5_801190C0) {
                 case 3:
                 case 4:
@@ -871,10 +883,12 @@ Gfx* func_i5_80118790(Gfx* gfx, unk_800E3A28* arg1) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
-        gfx = func_80078EA0(gfx, D_i5_8011946C[i], arg1->unk_0C + 0xC3, i * 20 + 0x2D, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTimeAttackGhostOptionCompTexInfos[i], arg1->unk_0C + 0xC3, i * 20 + 0x2D, 0, 0, 0,
+                            1.0f, 1.0f);
 
-        if ((i == 2) && (D_i5_801190DC != 0)) {
-            gfx = func_80078EA0(gfx, &D_i5_801193AC, arg1->unk_0C + 0x109, i * 20 + 0x2D, 0, 0, 0, 1.0f, 1.0f);
+        if ((i == 2) && sStaffGhostTimeBeaten) {
+            gfx = func_80078EA0(gfx, sStaffGhostBeatenCompTexInfo, arg1->unk_0C + 0x109, i * 20 + 0x2D, 0, 0, 0, 1.0f,
+                                1.0f);
         }
     }
     return gfx;
@@ -883,10 +897,10 @@ Gfx* func_i5_80118790(Gfx* gfx, unk_800E3A28* arg1) {
 void func_i5_80118928(unk_800E3A28* arg0) {
     s32 temp_a1;
 
-    if (((D_i5_801190C0 != 0) && (D_i5_801190C0 != 1)) || (D_i5_801190C8 < 4)) {
+    if (((D_i5_801190C0 != 0) && (D_i5_801190C0 != 1)) || (gCupSelectOption < 4)) {
         func_i5_80115E10();
     }
-    temp_a1 = -(D_i5_801190CC * 0x500);
+    temp_a1 = -(sCourseSelectTrackNo * 0x500);
     if (gGameMode == GAMEMODE_800F) {
         arg0->unk_0C = temp_a1;
     } else {
@@ -927,7 +941,7 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
         case 1:
         case 2:
         case 3:
-            if ((var_v1 == D_i5_801190C8) || ((D_i5_801190C8 >= 0xA) && (var_v1 == 5))) {
+            if ((var_v1 == gCupSelectOption) || ((gCupSelectOption >= 10) && (var_v1 == 5))) {
                 arg0->unk_14 = 7;
             } else {
                 arg0->unk_14 = 6;
@@ -1052,12 +1066,12 @@ void func_i5_80118D94(unk_800E3A28* arg0) {
             arg0->unk_20 += arg0->unk_08;
 
             arg0->unk_15 = 1;
-            if ((D_i5_801190CC == 0) || (D_i5_801190C0 == 3) || (D_i5_801190C0 == 4)) {
+            if ((sCourseSelectTrackNo == 0) || (D_i5_801190C0 == 3) || (D_i5_801190C0 == 4)) {
                 func_8007A0A0(arg0, -100, 0xC0);
             } else {
                 func_8007A0A0(arg0, 0, 0xC0);
             }
-            if ((D_i5_801190CC == 5) || (D_i5_801190C0 == 3) || (D_i5_801190C0 == 4)) {
+            if ((sCourseSelectTrackNo == 5) || (D_i5_801190C0 == 3) || (D_i5_801190C0 == 4)) {
                 func_8007A154(arg0, 100);
             } else {
                 func_8007A154(arg0, 0);

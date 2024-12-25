@@ -48,7 +48,55 @@ typedef enum GameMode {
 #define GAMEMODE_8013 GAMEMODE_F3DFLX(GAMEMODE_13)
 #define GAMEMODE_8014 GAMEMODE_F3DFLX(GAMEMODE_14)
 
+typedef enum Difficulty {
+    /* 0 */ NOVICE,
+    /* 1 */ STANDARD,
+    /* 2 */ EXPERT,
+    /* 3 */ MASTER,
+} Difficulty;
 
+typedef enum Character {
+    /* 00 */ CAPTAIN_FALCON,
+    /* 01 */ DR_STEWART,
+    /* 02 */ PICO,
+    /* 03 */ SAMURAI_GOROH,
+    /* 04 */ JODY_SUMMER,
+    /* 05 */ MIGHTY_GAZELLE,
+    /* 06 */ MR_EAD,
+    /* 07 */ BABA,
+    /* 08 */ OCTOMAN,
+    /* 09 */ GOMAR_AND_SHIOH,
+    /* 10 */ KATE_ALEN,
+    /* 11 */ ROGER_BUSTER,
+    /* 12 */ JAMES_MCCLOUD,
+    /* 13 */ LEON,
+    /* 14 */ ANTONIO_GUSTER,
+    /* 15 */ BLACK_SHADOW,
+    /* 16 */ MICHAEL_CHAIN,
+    /* 17 */ JACK_LEVIN,
+    /* 18 */ SUPER_ARROW,
+    /* 19 */ MRS_ARROW,
+    /* 20 */ JOHN_TANAKA,
+    /* 21 */ BEASTMAN,
+    /* 22 */ ZODA,
+    /* 23 */ DR_CLASH,
+    /* 24 */ SILVER_NEELSEN,
+    /* 25 */ BIO_REX,
+    /* 26 */ DRAQ,
+    /* 27 */ BILLY,
+    /* 28 */ THE_SKULL,
+    /* 29 */ BLOOD_FALCON,
+    /* 30 */ MAX_CHARACTER
+} Character;
+
+typedef enum Cup {
+    JACK_CUP,
+    QUEEN_CUP,
+    KING_CUP,
+    JOKER_CUP,
+    X_CUP,
+    EDIT_CUP,
+} Cup;
 
 #endif // FZX_GAME_H
 

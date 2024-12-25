@@ -10,9 +10,9 @@ unk_801247C0* D_i6_8011FB10;
 u8 D_i6_8011FB18[2][0x2580]; // Some kind of vtx buffer space?
 void* D_i6_80124618;
 s16 D_i6_80124620[176];
-s32 gOptionsDataClearMenu;
-s16 gOptionsDataAlreadyCleared;
-s32 gOptionsSelectionState[7];
+s32 sOptionsDataClearMenu;
+s16 sOptionsDataAlreadyCleared;
+s32 sOptionsSelectionState[7];
 unk_800E51B8* D_i6_801247A4;
 s16 D_i6_801247A8;
 s16 D_i6_801247AA;
@@ -32,161 +32,191 @@ s32 D_i6_8011DFB4 = 50;
  */
 
 // BLUE FALCON
-unk_80077D50 D_i6_8011DFB8[] = { { 18, D_F1C871C, 128, 85, 0x2289 }, { 0 } };
+unk_80077D50 sCreditsBlueFalconCompTexInfo[] = { { 18, aCreditsBlueFalconTex, 128, 85, 0x2289 }, { 0 } };
 
 // WILD GOOSE
-unk_80077D50 D_i6_8011DFD8[] = { { 18, D_F1CA9AC, 128, 94, 0x2905 }, { 0 } };
+unk_80077D50 sCreditsWildGooseCompTexInfo[] = { { 18, aCreditsWildGooseTex, 128, 94, 0x2905 }, { 0 } };
 
 // FIRE STINGRAY
-unk_80077D50 D_i6_8011DFF8[] = { { 18, D_F1CD2B8, 128, 113, 0x2DBA }, { 0 } };
+unk_80077D50 sCreditsFireStingrayCompTexInfo[] = { { 18, aCreditsFireStingrayTex, 128, 113, 0x2DBA }, { 0 } };
 
 // GOLDEN FOX
-unk_80077D50 D_i6_8011E018[] = { { 18, D_F1D0078, 128, 91, 0x2A88 }, { 0 } };
+unk_80077D50 sCreditsGoldenFoxCompTexInfo[] = { { 18, aCreditsGoldenFoxTex, 128, 91, 0x2A88 }, { 0 } };
 
 // RED GAZELLE
-unk_80077D50 D_i6_8011E038[] = { { 18, D_F1D2B04, 128, 94, 0x1DDB }, { 0 } };
+unk_80077D50 sCreditsRedGazelleCompTexInfo[] = { { 18, aCreditsRedGazelleTex, 128, 94, 0x1DDB }, { 0 } };
 
 // WHITE CAT
-unk_80077D50 D_i6_8011E058[] = { { 18, D_F1D48E4, 128, 79, 0x24F5 }, { 0 } };
+unk_80077D50 sCreditsWhiteFoxCompTexInfo[] = { { 18, aCreditsWhiteFoxTex, 128, 79, 0x24F5 }, { 0 } };
 
 // IRON TIGER
-unk_80077D50 D_i6_8011E078[] = { { 18, D_F1D6DE0, 128, 92, 0x2C79 }, { 0 } };
+unk_80077D50 sCreditsIronTigerCompTexInfo[] = { { 18, aCreditsIronTigerTex, 128, 92, 0x2C79 }, { 0 } };
 
 // DEEP CLAW
-unk_80077D50 D_i6_8011E098[] = { { 18, D_F1D9A60, 128, 87, 0x2A05 }, { 0 } };
+unk_80077D50 sCreditsDeepClawCompTexInfo[] = { { 18, aCreditsDeepClawTex, 128, 87, 0x2A05 }, { 0 } };
 
 // CRAZY BEAR
-unk_80077D50 D_i6_8011E0B8[] = { { 18, D_F1DC46C, 128, 96, 0x3077 }, { 0 } };
+unk_80077D50 sCreditsCrazyBearCompTexInfo[] = { { 18, aCreditsCrazyBearTex, 128, 96, 0x3077 }, { 0 } };
 
 // GREAT STAR
-unk_80077D50 D_i6_8011E0D8[] = { { 18, D_F1DF4E8, 128, 82, 0x272B }, { 0 } };
+unk_80077D50 sCreditsGreatStarCompTexInfo[] = { { 18, aCreditsGreatStarTex, 128, 82, 0x272B }, { 0 } };
 
 // BIG FANG
-unk_80077D50 D_i6_8011E0F8[] = { { 18, D_F1E1C18, 128, 100, 0x2D0A }, { 0 } };
+unk_80077D50 sCreditsBigFangCompTexInfo[] = { { 18, aCreditsBigFangTex, 128, 100, 0x2D0A }, { 0 } };
 
 // MAD WOLF
-unk_80077D50 D_i6_8011E118[] = { { 18, D_F1E4928, 128, 97, 0x3694 }, { 0 } };
+unk_80077D50 sCreditsMadWolfCompTexInfo[] = { { 18, aCreditsMadWolfTex, 128, 97, 0x3694 }, { 0 } };
 
 // NIGHT THUNDER
-unk_80077D50 D_i6_8011E138[] = { { 18, D_F1E7FC0, 128, 84, 0x2674 }, { 0 } };
+unk_80077D50 sCreditsNightThunderCompTexInfo[] = { { 18, aCreditsNightThunderTex, 128, 84, 0x2674 }, { 0 } };
 
 // TWIN NORITTA
-unk_80077D50 D_i6_8011E158[] = { { 18, D_F1EA638, 128, 93, 0x25D7 }, { 0 } };
+unk_80077D50 sCreditsTwinNorittaCompTexInfo[] = { { 18, aCreditsTwinNorittaTex, 128, 93, 0x25D7 }, { 0 } };
 
 // WONDER WASP
-unk_80077D50 D_i6_8011E178[] = { { 18, D_F1ECC14, 128, 85, 0x21A2 }, { 0 } };
+unk_80077D50 sCreditsWonderWaspCompTexInfo[] = { { 18, aCreditsWonderWaspTex, 128, 85, 0x21A2 }, { 0 } };
 
 // QUEEN METEOR
-unk_80077D50 D_i6_8011E198[] = { { 18, D_F1EEDBC, 128, 86, 0x226D }, { 0 } };
+unk_80077D50 sCreditsQueenMeteorCompTexInfo[] = { { 18, aCreditsQueenMeteorTex, 128, 86, 0x226D }, { 0 } };
 
 // BLOOD HAWK
-unk_80077D50 D_i6_8011E1B8[] = { { 18, D_F1F1030, 128, 96, 0x2E39 }, { 0 } };
+unk_80077D50 sCreditsBloodHawkCompTexInfo[] = { { 18, aCreditsBloodHawkTex, 128, 96, 0x2E39 }, { 0 } };
 
 // ASTRO ROBIN
-unk_80077D50 D_i6_8011E1D8[] = { { 18, D_F1F3E70, 128, 101, 0x309E }, { 0 } };
+unk_80077D50 sCreditsAstroRobinCompTexInfo[] = { { 18, aCreditsAstroRobinTex, 128, 101, 0x309E }, { 0 } };
 
 // DEATH ANCHOR
-unk_80077D50 D_i6_8011E1F8[] = { { 18, D_F1F6F14, 128, 118, 0x2B7C }, { 0 } };
+unk_80077D50 sCreditsDeathAnchorCompTexInfo[] = { { 18, aCreditsDeathAnchorTex, 128, 118, 0x2B7C }, { 0 } };
 
 // WILD BOAR
-unk_80077D50 D_i6_8011E218[] = { { 18, D_F1F9A94, 128, 98, 0x2EF3 }, { 0 } };
+unk_80077D50 sCreditsWildBoarCompTexInfo[] = { { 18, aCreditsWildBoarTex, 128, 98, 0x2EF3 }, { 0 } };
 
 // KING METEOR
-unk_80077D50 D_i6_8011E238[] = { { 18, D_F1FC98C, 128, 103, 0x2D69 }, { 0 } };
+unk_80077D50 sCreditsKingMeteorCompTexInfo[] = { { 18, aCreditsKingMeteorTex, 128, 103, 0x2D69 }, { 0 } };
 
 // SUPER PIRANHA
-unk_80077D50 D_i6_8011E258[] = { { 18, D_F1FF6FC, 128, 94, 0x2E5F }, { 0 } };
+unk_80077D50 sCreditsSuperPiranhaCompTexInfo[] = { { 18, aCreditsSuperPiranhaTex, 128, 94, 0x2E5F }, { 0 } };
 
 // MIGHTY HURRICANE
-unk_80077D50 D_i6_8011E278[] = { { 18, D_F202560, 128, 83, 0x2432 }, { 0 } };
+unk_80077D50 sCreditsMightyHurricaneCompTexInfo[] = { { 18, aCreditsMightyHurricaneTex, 128, 83, 0x2432 }, { 0 } };
 
 // SPACE ANGLER
-unk_80077D50 D_i6_8011E298[] = { { 18, D_F204998, 128, 92, 0x2CB2 }, { 0 } };
+unk_80077D50 sCreditsSpaceAnglerCompTexInfo[] = { { 18, aCreditsSpaceAnglerTex, 128, 92, 0x2CB2 }, { 0 } };
 
 // MIGHTY TYPHOON
-unk_80077D50 D_i6_8011E2B8[] = { { 18, D_F207650, 128, 82, 0x22C9 }, { 0 } };
+unk_80077D50 sCreditsMightyTyphoonCompTexInfo[] = { { 18, aCreditsMightyTyphoonTex, 128, 82, 0x22C9 }, { 0 } };
 
 // HYPER SPEEDER
-unk_80077D50 D_i6_8011E2D8[] = { { 18, D_F209920, 128, 101, 0x2B2E }, { 0 } };
+unk_80077D50 sCreditsHyperSpeederCompTexInfo[] = { { 18, aCreditsHyperSpeederTex, 128, 101, 0x2B2E }, { 0 } };
 
 // GREEN PANTHER
-unk_80077D50 D_i6_8011E2F8[] = { { 18, D_F20C454, 128, 88, 0x287D }, { 0 } };
+unk_80077D50 sCreditsGreenPantherCompTexInfo[] = { { 18, aCreditsGreenPantherTex, 128, 88, 0x287D }, { 0 } };
 
 // BLACK BULL
-unk_80077D50 D_i6_8011E318[] = { { 18, D_F20ECD8, 128, 93, 0x2488 }, { 0 } };
+unk_80077D50 sCreditsBlackBullCompTexInfo[] = { { 18, aCreditsBlackBullTex, 128, 93, 0x2488 }, { 0 } };
 
 // LITTLE WYVERN
-unk_80077D50 D_i6_8011E338[] = { { 18, D_F211164, 128, 82, 0x22DA }, { 0 } };
+unk_80077D50 sCreditsLittleWyvernCompTexInfo[] = { { 18, aCreditsLittleWyvernTex, 128, 82, 0x22DA }, { 0 } };
 
 // SONIC PHANTOM
-unk_80077D50 D_i6_8011E358[] = { { 18, D_F213444, 128, 92, 0x276B }, { 0 } };
+unk_80077D50 sCreditsSonicPhantomCompTexInfo[] = { { 18, aCreditsSonicPhantomTex, 128, 92, 0x276B }, { 0 } };
 
-unk_800792D8 D_i6_8011E378[] = { { D_i6_8011DFB8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E378[] = { { sCreditsBlueFalconCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E388[] = { { D_i6_8011DFD8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E388[] = { { sCreditsWildGooseCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E398[] = { { D_i6_8011DFF8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E398[] = { { sCreditsFireStingrayCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E3A8[] = { { D_i6_8011E018, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E3A8[] = { { sCreditsGoldenFoxCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E3B8[] = { { D_i6_8011E038, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E3B8[] = { { sCreditsRedGazelleCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E3C8[] = { { D_i6_8011E058, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E3C8[] = { { sCreditsWhiteFoxCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E3D8[] = { { D_i6_8011E078, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E3D8[] = { { sCreditsIronTigerCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E3E8[] = { { D_i6_8011E098, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E3E8[] = { { sCreditsDeepClawCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E3F8[] = { { D_i6_8011E0B8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E3F8[] = { { sCreditsCrazyBearCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E408[] = { { D_i6_8011E0D8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E408[] = { { sCreditsGreatStarCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E418[] = { { D_i6_8011E0F8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E418[] = { { sCreditsBigFangCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E428[] = { { D_i6_8011E118, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E428[] = { { sCreditsMadWolfCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E438[] = { { D_i6_8011E138, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E438[] = { { sCreditsNightThunderCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E448[] = { { D_i6_8011E158, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E448[] = { { sCreditsTwinNorittaCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E458[] = { { D_i6_8011E178, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E458[] = { { sCreditsWonderWaspCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E468[] = { { D_i6_8011E198, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E468[] = { { sCreditsQueenMeteorCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E478[] = { { D_i6_8011E1B8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E478[] = { { sCreditsBloodHawkCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E488[] = { { D_i6_8011E1D8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E488[] = { { sCreditsAstroRobinCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E498[] = { { D_i6_8011E1F8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E498[] = { { sCreditsDeathAnchorCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E4A8[] = { { D_i6_8011E218, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E4A8[] = { { sCreditsWildBoarCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E4B8[] = { { D_i6_8011E238, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E4B8[] = { { sCreditsKingMeteorCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E4C8[] = { { D_i6_8011E258, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E4C8[] = { { sCreditsSuperPiranhaCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E4D8[] = { { D_i6_8011E278, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E4D8[] = { { sCreditsMightyHurricaneCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E4E8[] = { { D_i6_8011E298, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E4E8[] = { { sCreditsSpaceAnglerCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E4F8[] = { { D_i6_8011E2B8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E4F8[] = { { sCreditsMightyTyphoonCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E508[] = { { D_i6_8011E2D8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E508[] = { { sCreditsHyperSpeederCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E518[] = { { D_i6_8011E2F8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E518[] = { { sCreditsGreenPantherCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E528[] = { { D_i6_8011E318, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E528[] = { { sCreditsBlackBullCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E538[] = { { D_i6_8011E338, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E538[] = { { sCreditsLittleWyvernCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011E548[] = { { D_i6_8011E358, 60 }, { 0 } };
+unk_800792D8 D_i6_8011E548[] = { { sCreditsSonicPhantomCompTexInfo, 60 }, { 0 } };
 
 unk_800792D8* D_i6_8011E558[] = {
-    D_i6_8011E498, D_i6_8011E498, D_i6_8011E378, D_i6_8011E388, D_i6_8011E398, D_i6_8011E3A8, D_i6_8011E3B8,
-    D_i6_8011E3C8, D_i6_8011E3D8, D_i6_8011E3E8, D_i6_8011E3F8, D_i6_8011E408, D_i6_8011E418, D_i6_8011E428,
-    D_i6_8011E438, D_i6_8011E448, D_i6_8011E458, D_i6_8011E468, D_i6_8011E478, D_i6_8011E488, D_i6_8011E498,
-    D_i6_8011E4A8, D_i6_8011E4B8, D_i6_8011E4C8, D_i6_8011E4D8, D_i6_8011E4E8, D_i6_8011E4F8, D_i6_8011E508,
-    D_i6_8011E518, D_i6_8011E528, D_i6_8011E538, D_i6_8011E548,
+    D_i6_8011E498,
+    D_i6_8011E498,
+};
+
+unk_800792D8* D_i6_8011E560[] = {
+    D_i6_8011E378, // CAPTAIN_FALCON
+    D_i6_8011E388, // DR_STEWART
+    D_i6_8011E398, // PICO
+    D_i6_8011E3A8, // SAMURAI_GOROH
+    D_i6_8011E3B8, // JODY_SUMMER
+    D_i6_8011E3C8, // MIGHTY_GAZELLE
+    D_i6_8011E3D8, // MR_EAD
+    D_i6_8011E3E8, // BABA
+    D_i6_8011E3F8, // OCTOMAN
+    D_i6_8011E408, // GOMAR_AND_SHIOH
+    D_i6_8011E418, // KATE_ALEN
+    D_i6_8011E428, // ROGER_BUSTER
+    D_i6_8011E438, // JAMES_MCCLOUD
+    D_i6_8011E448, // LEON
+    D_i6_8011E458, // ANTONIO_GUSTER
+    D_i6_8011E468, // BLACK_SHADOW
+    D_i6_8011E478, // MICHAEL_CHAIN
+    D_i6_8011E488, // JACK_LEVIN
+    D_i6_8011E498, // SUPER_ARROW
+    D_i6_8011E4A8, // MRS_ARROW
+    D_i6_8011E4B8, // JOHN_TANAKA
+    D_i6_8011E4C8, // BEASTMAN
+    D_i6_8011E4D8, // ZODA
+    D_i6_8011E4E8, // DR_CLASH
+    D_i6_8011E4F8, // SILVER_NEELSEN
+    D_i6_8011E508, // BIO_REX
+    D_i6_8011E518, // DRAQ
+    D_i6_8011E528, // BILLY
+    D_i6_8011E538, // THE_SKULL
+    D_i6_8011E548, // BLOOD_FALCON
 };
 
 /*
@@ -194,173 +224,210 @@ unk_800792D8* D_i6_8011E558[] = {
  */
 
 // ENDING SCREEN GIRL
-unk_80077D50 D_i6_8011E5D8[] = { { 17, D_F1C417C, 80, 182, 0x25D1 }, { 0 } };
+unk_80077D50 sCreditsMenuLadyCompTexInfo[] = { { 17, aCreditsMenuLadyTex, 80, 182, 0x25D1 }, { 0 } };
 
 // 'SEE YOU AGAIN!!'
-unk_80077D50 D_i6_8011E5F8[] = { { 17, D_F1C6754, 64, 64, 0x95A }, { 0 } };
+unk_80077D50 sCreditsSeeYouAgainCompTexInfo[] = { { 17, aCreditsSeeYouAgainTex, 64, 64, 0x95A }, { 0 } };
 
 // MR ZERO
-unk_80077D50 D_i6_8011E618[] = { { 17, D_F1C70B4, 80, 72, 0x1662 }, { 0 } };
+unk_80077D50 sCreditsMrZeroCompTexInfo[] = { { 17, aCreditsMrZeroTex, 80, 72, 0x1662 }, { 0 } };
 
 // COPYRIGHT LOGO (1998)
-unk_80077D50 D_i6_8011E638[] = { { 17, D_F0336B8, 128, 14, 0x439 }, { 0 } };
+//! @bug This has the incorrect compressed size (leftover from version difference?)
+unk_80077D50 sCreditsCopyrightCompTexInfo[] = { { 17, aCopyrightTex, 128, 14, 0x439 }, { 0 } };
 
 // DR STEWART
-unk_80077D50 D_i6_8011E658[] = { { 17, D_F033AB4, 180, 245, 0x4AF4 }, { 0 } };
+unk_80077D50 sCreditsPortraitDrStewartCompTexInfo[] = { { 17, aFullPortraitDrStewartTex, 180, 245, 0x4AF4 }, { 0 } };
 
 // CAPTAIN FALCON
-unk_80077D50 D_i6_8011E678[] = { { 17, D_F0385AC, 180, 245, 0x6604 }, { 0 } };
+unk_80077D50 sCreditsPortraitCaptainFalconCompTexInfo[] = { { 17, aFullPortraitCaptainFalconTex, 180, 245, 0x6604 },
+                                                            { 0 } };
 
 // JODY SUMMER
-unk_80077D50 D_i6_8011E698[] = { { 17, D_F03EBB4, 180, 245, 0x5573 }, { 0 } };
+unk_80077D50 sCreditsPortraitJodySummerCompTexInfo[] = { { 17, aFullPortraitJodySummerTex, 180, 245, 0x5573 }, { 0 } };
 
 // SAMURAI GOROH
-unk_80077D50 D_i6_8011E6B8[] = { { 17, D_F04412C, 180, 245, 0x76B4 }, { 0 } };
+unk_80077D50 sCreditsPortraitSamuraiGorohCompTexInfo[] = { { 17, aFullPortraitSamuraiGorohTex, 180, 245, 0x76B4 },
+                                                           { 0 } };
 
 // MIGHTY GAZELLE
-unk_80077D50 D_i6_8011E6D8[] = { { 17, D_F04B7E4, 180, 245, 0x67F2 }, { 0 } };
+unk_80077D50 sCreditsPortraitMightyGazelleCompTexInfo[] = { { 17, aFullPortraitMightyGazelleTex, 180, 245, 0x67F2 },
+                                                            { 0 } };
 
 // PICO
-unk_80077D50 D_i6_8011E6F8[] = { { 17, D_F051FDC, 180, 245, 0x63BB }, { 0 } };
+unk_80077D50 sCreditsPortraitPicoCompTexInfo[] = { { 17, aFullPortraitPicoTex, 180, 245, 0x63BB }, { 0 } };
 
 // BABA
-unk_80077D50 D_i6_8011E718[] = { { 17, D_F05839C, 180, 245, 0x5EE9 }, { 0 } };
+unk_80077D50 sCreditsPortraitBabaCompTexInfo[] = { { 17, aFullPortraitBabaTex, 180, 245, 0x5EE9 }, { 0 } };
 
 // MR EAD
-unk_80077D50 D_i6_8011E738[] = { { 17, D_F05E28C, 180, 245, 0x7184 }, { 0 } };
+unk_80077D50 sCreditsPortraitMrEadCompTexInfo[] = { { 17, aFullPortraitMrEadTex, 180, 245, 0x7184 }, { 0 } };
 
 // OCTOMAN
-unk_80077D50 D_i6_8011E758[] = { { 17, D_F065414, 180, 245, 0x5666 }, { 0 } };
+unk_80077D50 sCreditsPortraitOctomanCompTexInfo[] = { { 17, aFullPortraitOctomanTex, 180, 245, 0x5666 }, { 0 } };
 
 // THE SKULL
-unk_80077D50 D_i6_8011E778[] = { { 17, D_F06AA80, 180, 245, 0x5A49 }, { 0 } };
+unk_80077D50 sCreditsPortraitTheSkullCompTexInfo[] = { { 17, aFullPortraitTheSkullTex, 180, 245, 0x5A49 }, { 0 } };
 
 // BEASTMAN
-unk_80077D50 D_i6_8011E798[] = { { 17, D_F0704D0, 180, 245, 0x55C1 }, { 0 } };
+unk_80077D50 sCreditsPortraitBeastmanCompTexInfo[] = { { 17, aFullPortraitBeastmanTex, 180, 245, 0x55C1 }, { 0 } };
 
 // ANTONIO GUSTER
-unk_80077D50 D_i6_8011E7B8[] = { { 17, D_F075A98, 180, 245, 0x594F }, { 0 } };
+unk_80077D50 sCreditsPortraitAntonioGusterCompTexInfo[] = { { 17, aFullPortraitAntonioGusterTex, 180, 245, 0x594F },
+                                                            { 0 } };
 
 // DRAQ
-unk_80077D50 D_i6_8011E7D8[] = { { 17, D_F07B3EC, 180, 245, 0x7A7A }, { 0 } };
+unk_80077D50 sCreditsPortraitDraqCompTexInfo[] = { { 17, aFullPortraitDraqTex, 180, 245, 0x7A7A }, { 0 } };
 
 // ROGER BUSTER
-unk_80077D50 D_i6_8011E7F8[] = { { 17, D_F082E6C, 180, 245, 0x6444 }, { 0 } };
+unk_80077D50 sCreditsPortraitRogerBusterCompTexInfo[] = { { 17, aFullPortraitRogerBusterTex, 180, 245, 0x6444 },
+                                                          { 0 } };
 
 // SILVER NEEISEN
-unk_80077D50 D_i6_8011E818[] = { { 17, D_F0892B4, 180, 245, 0x623A }, { 0 } };
+unk_80077D50 sCreditsPortraitSilverNeelsenCompTexInfo[] = { { 17, aFullPortraitSilverNeelsenTex, 180, 245, 0x623A },
+                                                            { 0 } };
 
 // SUPER ARROW
-unk_80077D50 D_i6_8011E838[] = { { 17, D_F08F4F4, 180, 245, 0x6F78 }, { 0 } };
+unk_80077D50 sCreditsPortraitSuperArrowCompTexInfo[] = { { 17, aFullPortraitSuperArrowTex, 180, 245, 0x6F78 }, { 0 } };
 
 // MRS ARROW
-unk_80077D50 D_i6_8011E858[] = { { 17, D_F096470, 180, 245, 0x5C56 }, { 0 } };
+unk_80077D50 sCreditsPortraitMrsArrowCompTexInfo[] = { { 17, aFullPortraitMrsArrowTex, 180, 245, 0x5C56 }, { 0 } };
 
 // ZODA
-unk_80077D50 D_i6_8011E878[] = { { 17, D_F09C0CC, 180, 245, 0x59E6 }, { 0 } };
+unk_80077D50 sCreditsPortraitZodaCompTexInfo[] = { { 17, aFullPortraitZodaTex, 180, 245, 0x59E6 }, { 0 } };
 
 // JOHN TANAKA
-unk_80077D50 D_i6_8011E898[] = { { 17, D_F0A1AB8, 180, 245, 0x5B58 }, { 0 } };
+unk_80077D50 sCreditsPortraitJohnTanakaCompTexInfo[] = { { 17, aFullPortraitJohnTanakaTex, 180, 245, 0x5B58 }, { 0 } };
 
 // BIO REX
-unk_80077D50 D_i6_8011E8B8[] = { { 17, D_F0A7614, 180, 245, 0x6B2D }, { 0 } };
+unk_80077D50 sCreditsPortraitBioRexCompTexInfo[] = { { 17, aFullPortraitBioRexTex, 180, 245, 0x6B2D }, { 0 } };
 
 // KATE ALEN
-unk_80077D50 D_i6_8011E8D8[] = { { 17, D_F0AE148, 180, 245, 0x4E48 }, { 0 } };
+unk_80077D50 sCreditsPortraitKateAlenCompTexInfo[] = { { 17, aFullPortraitKateAlenTex, 180, 245, 0x4E48 }, { 0 } };
 
 // GOMAR & SHIOH
-unk_80077D50 D_i6_8011E8F8[] = { { 17, D_F0B2F94, 180, 245, 0x6D92 }, { 0 } };
+unk_80077D50 sCreditsPortraitGomarAndShiohCompTexInfo[] = { { 17, aFullPortraitGomarAndShiohTex, 180, 245, 0x6D92 },
+                                                            { 0 } };
 
 // MICHAEL CHAIN
-unk_80077D50 D_i6_8011E918[] = { { 17, D_F0B9D2C, 180, 245, 0x5AB3 }, { 0 } };
+unk_80077D50 sCreditsPortraitMichaelChainCompTexInfo[] = { { 17, aFullPortraitMichaelChainTex, 180, 245, 0x5AB3 },
+                                                           { 0 } };
 
 // BILLY
-unk_80077D50 D_i6_8011E938[] = { { 17, D_F0BF7E4, 180, 245, 0x5E3B }, { 0 } };
+unk_80077D50 sCreditsPortraitBillyCompTexInfo[] = { { 17, aFullPortraitBillyTex, 180, 245, 0x5E3B }, { 0 } };
 
 // DR CLASH
-unk_80077D50 D_i6_8011E958[] = { { 17, D_F0C5624, 180, 245, 0x6EAC }, { 0 } };
+unk_80077D50 sCreditsPortraitDrClashCompTexInfo[] = { { 17, aFullPortraitDrClashTex, 180, 245, 0x6EAC }, { 0 } };
 
 // JACK LEVIN
-unk_80077D50 D_i6_8011E978[] = { { 17, D_F0CC4D4, 180, 245, 0x4D32 }, { 0 } };
+unk_80077D50 sCreditsPortraitJackLevinCompTexInfo[] = { { 17, aFullPortraitJackLevinTex, 180, 245, 0x4D32 }, { 0 } };
 
 // BLOOD FALCON
-unk_80077D50 D_i6_8011E998[] = { { 17, D_F0D120C, 180, 245, 0x603A }, { 0 } };
+unk_80077D50 sCreditsPortraitBloodFalconCompTexInfo[] = { { 17, aFullPortraitBloodFalconTex, 180, 245, 0x603A },
+                                                          { 0 } };
 
 // LEON
-unk_80077D50 D_i6_8011E9B8[] = { { 17, D_F0D724C, 180, 245, 0x60B6 }, { 0 } };
+unk_80077D50 sCreditsPortraitLeonCompTexInfo[] = { { 17, aFullPortraitLeonTex, 180, 245, 0x60B6 }, { 0 } };
 
 // JAMES MCCLOUD
-unk_80077D50 D_i6_8011E9D8[] = { { 17, D_F0DD308, 180, 245, 0x5534 }, { 0 } };
+unk_80077D50 sCreditsPortraitJamesMcCloudCompTexInfo[] = { { 17, aFullPortraitJamesMcCloudTex, 180, 245, 0x5534 },
+                                                           { 0 } };
 
 // BLACK SHADOW
-unk_80077D50 D_i6_8011E9F8[] = { { 17, D_F0E2840, 180, 245, 0x5DA7 }, { 0 } };
+unk_80077D50 sCreditsPortraitBlackShadowCompTexInfo[] = { { 17, aFullPortraitBlackShadowTex, 180, 245, 0x5DA7 },
+                                                          { 0 } };
 
-unk_800792D8 D_i6_8011EA18[] = { { D_i6_8011E658, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EA18[] = { { sCreditsPortraitDrStewartCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EA28[] = { { D_i6_8011E678, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EA28[] = { { sCreditsPortraitCaptainFalconCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EA38[] = { { D_i6_8011E698, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EA38[] = { { sCreditsPortraitJodySummerCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EA48[] = { { D_i6_8011E6B8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EA48[] = { { sCreditsPortraitSamuraiGorohCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EA58[] = { { D_i6_8011E6D8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EA58[] = { { sCreditsPortraitMightyGazelleCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EA68[] = { { D_i6_8011E6F8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EA68[] = { { sCreditsPortraitPicoCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EA78[] = { { D_i6_8011E718, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EA78[] = { { sCreditsPortraitBabaCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EA88[] = { { D_i6_8011E738, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EA88[] = { { sCreditsPortraitMrEadCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EA98[] = { { D_i6_8011E758, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EA98[] = { { sCreditsPortraitOctomanCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EAA8[] = { { D_i6_8011E778, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EAA8[] = { { sCreditsPortraitTheSkullCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EAB8[] = { { D_i6_8011E798, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EAB8[] = { { sCreditsPortraitBeastmanCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EAC8[] = { { D_i6_8011E7B8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EAC8[] = { { sCreditsPortraitAntonioGusterCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EAD8[] = { { D_i6_8011E7D8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EAD8[] = { { sCreditsPortraitDraqCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EAE8[] = { { D_i6_8011E7F8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EAE8[] = { { sCreditsPortraitRogerBusterCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EAF8[] = { { D_i6_8011E818, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EAF8[] = { { sCreditsPortraitSilverNeelsenCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EB08[] = { { D_i6_8011E838, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EB08[] = { { sCreditsPortraitSuperArrowCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EB18[] = { { D_i6_8011E858, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EB18[] = { { sCreditsPortraitMrsArrowCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EB28[] = { { D_i6_8011E878, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EB28[] = { { sCreditsPortraitZodaCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EB38[] = { { D_i6_8011E898, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EB38[] = { { sCreditsPortraitJohnTanakaCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EB48[] = { { D_i6_8011E8B8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EB48[] = { { sCreditsPortraitBioRexCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EB58[] = { { D_i6_8011E8D8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EB58[] = { { sCreditsPortraitKateAlenCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EB68[] = { { D_i6_8011E8F8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EB68[] = { { sCreditsPortraitGomarAndShiohCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EB78[] = { { D_i6_8011E918, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EB78[] = { { sCreditsPortraitMichaelChainCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EB88[] = { { D_i6_8011E938, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EB88[] = { { sCreditsPortraitBillyCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EB98[] = { { D_i6_8011E958, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EB98[] = { { sCreditsPortraitDrClashCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EBA8[] = { { D_i6_8011E978, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EBA8[] = { { sCreditsPortraitJackLevinCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EBB8[] = { { D_i6_8011E998, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EBB8[] = { { sCreditsPortraitBloodFalconCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EBC8[] = { { D_i6_8011E9B8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EBC8[] = { { sCreditsPortraitLeonCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EBD8[] = { { D_i6_8011E9D8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EBD8[] = { { sCreditsPortraitJamesMcCloudCompTexInfo, 60 }, { 0 } };
 
-unk_800792D8 D_i6_8011EBE8[] = { { D_i6_8011E9F8, 60 }, { 0 } };
+unk_800792D8 D_i6_8011EBE8[] = { { sCreditsPortraitBlackShadowCompTexInfo, 60 }, { 0 } };
 
 unk_800792D8* D_i6_8011EBF8[] = {
-    D_i6_8011EA28, D_i6_8011EA68, D_i6_8011EA48, D_i6_8011EA18, D_i6_8011EA58, D_i6_8011EA38,
-    D_i6_8011EA78, D_i6_8011EA98, D_i6_8011EB98, D_i6_8011EA88, D_i6_8011EB48, D_i6_8011EB88,
-    D_i6_8011EAF8, D_i6_8011EB68, D_i6_8011EB38, D_i6_8011EB18, D_i6_8011EBB8, D_i6_8011EBA8,
-    D_i6_8011EB28, D_i6_8011EB78, D_i6_8011EB08, D_i6_8011EB58, D_i6_8011EAE8, D_i6_8011EBC8,
-    D_i6_8011EAD8, D_i6_8011EAB8, D_i6_8011EAC8, D_i6_8011EBE8, D_i6_8011EBD8, D_i6_8011EAA8,
+    D_i6_8011EA28, // CAPTAIN_FALCON
+    D_i6_8011EA68, // DR_STEWART
+    D_i6_8011EA48, // PICO
+    D_i6_8011EA18, // SAMURAI_GOROH
+    D_i6_8011EA58, // JODY_SUMMER
+    D_i6_8011EA38, // MIGHTY_GAZELLE
+    D_i6_8011EA78, // MR_EAD
+    D_i6_8011EA98, // BABA
+    D_i6_8011EB98, // OCTOMAN
+    D_i6_8011EA88, // GOMAR_AND_SHIOH
+    D_i6_8011EB48, // KATE_ALEN
+    D_i6_8011EB88, // ROGER_BUSTER
+    D_i6_8011EAF8, // JAMES_MCCLOUD
+    D_i6_8011EB68, // LEON
+    D_i6_8011EB38, // ANTONIO_GUSTER
+    D_i6_8011EB18, // BLACK_SHADOW
+    D_i6_8011EBB8, // MICHAEL_CHAIN
+    D_i6_8011EBA8, // JACK_LEVIN
+    D_i6_8011EB28, // SUPER_ARROW
+    D_i6_8011EB78, // MRS_ARROW
+    D_i6_8011EB08, // JOHN_TANAKA
+    D_i6_8011EB58, // BEASTMAN
+    D_i6_8011EAE8, // ZODA
+    D_i6_8011EBC8, // DR_CLASH
+    D_i6_8011EAD8, // SILVER_NEELSEN
+    D_i6_8011EAB8, // BIO_REX
+    D_i6_8011EAC8, // DRAQ
+    D_i6_8011EBE8, // BILLY
+    D_i6_8011EBD8, // THE_SKULL
+    D_i6_8011EAA8, // BLOOD_FALCON
 };
 
 const char* gCreditsAttributions[] = {
@@ -373,15 +440,16 @@ const char* gCreditsAttributions[] = {
     "producer",
 };
 
-const char* gCreditsNames[] = { "tadashi sugiyama", "yasuyuki oyagi",    "keizo ohta",       "tsutomu kaneshige",
-                                "masahiro kawano",  "daisuke tsujimura", "hiroki sotoike",   "shiro mouri",
-                                "taro bando",       "hajime wakai",      "taro bando",       "takaya imamura",
-                                "katsuhiko kanno",  "tadashi sugiyama",  "tadashi sugiyama", "takaya imamura",
-                                "yasuyuki oyagi",   "keizo ohta",        "hideki konno",     "masanao arimoto",
-                                "hironobu kakui",   "shin hasegawa",     "kimiyoshi fukui",  "keizo kato",
-                                "yasuhiro sakai",   "atsushi tejima",    "masanori sato",    "takayuki hashida",
-                                "super mario club", "hiroshi yamauchi",  "shigeru miyamoto", "yoshitaka yasumoto",
-                                "naruhisa kawano",  "sou kimura",        "kayomi mcdonald",  "jim wornell" };
+const char* gCreditsNames[] = {
+    "tadashi sugiyama",  "yasuyuki oyagi",     "keizo ohta",       "tsutomu kaneshige", "masahiro kawano",
+    "daisuke tsujimura", "hiroki sotoike",     "shiro mouri",      "taro bando",        "hajime wakai",
+    "taro bando",        "takaya imamura",     "katsuhiko kanno",  "tadashi sugiyama",  "tadashi sugiyama",
+    "takaya imamura",    "yasuyuki oyagi",     "keizo ohta",       "hideki konno",      "masanao arimoto",
+    "hironobu kakui",    "shin hasegawa",      "kimiyoshi fukui",  "keizo kato",        "yasuhiro sakai",
+    "atsushi tejima",    "masanori sato",      "takayuki hashida", "super mario club",  "hiroshi yamauchi",
+    "shigeru miyamoto",  "yoshitaka yasumoto", "naruhisa kawano",  "sou kimura",        "kayomi mcdonald",
+    "jim wornell",
+};
 
 const s16 D_i6_8011F4BC[] = { 50, 240, 280, -20, 280, 240, 50, -20 };
 
@@ -405,52 +473,58 @@ UNUSED s32 D_i6_8011ED7C = 0; // UNUSED?
 
 // 'WITH', 'W/O'
 OptionsTextureInfo gOptionsVsComSelection[] = {
-    { D_F262FB4, 32, 16 },
-    { D_F262ED0, 32, 16 },
+    { aMenuWithTex, 32, 16 },
+    { aMenuWithoutTex, 32, 16 },
 };
 
 // 'WITH', 'W/O'
 OptionsTextureInfo gOptionsVsSlotSelection[] = {
-    { D_F262FB4, 32, 16 },
-    { D_F262ED0, 32, 16 },
+    { aMenuWithTex, 32, 16 },
+    { aMenuWithoutTex, 32, 16 },
 };
 
 // 'W/O', '+1', '+2'
 OptionsTextureInfo gOptionsVsHandicapSelection[] = {
-    { D_F262ED0, 32, 16 },
-    { D_F263190, 32, 16 },
-    { D_F263230, 32, 16 },
+    { aMenuWithoutTex, 32, 16 },
+    { aMenuPlusOneTex, 32, 16 },
+    { aMenuPlusTwoTex, 32, 16 },
 };
 
 // 'Stereo', 'Mono'
 OptionsTextureInfo gOptionsSoundModeSelection[] = {
-    { D_F2632E8, 64, 16 },
-    { D_F2634A4, 64, 16 },
+    { aMenuStereoTex, 64, 16 },
+    { aMenuMonoTex, 64, 16 },
 };
 
 // 'No', 'Yes'
 OptionsTextureInfo gOptionsAllDataClearSelection[] = {
-    { D_F2637DC, 32, 16 },
-    { D_F2636F0, 32, 16 },
+    { aMenuNoTex, 32, 16 },
+    { aMenuYesTex, 32, 16 },
 };
 
 s32 gOptionsCurrentRow = 0;
 
 OptionsInfo gOptionsInfo[] = {
     // 'VS COM (2P,3P)'
-    { OPTIONS_VS_COM, OPTIONS_SHOWN, 2, 0, 0, gOptionsVsComSelection, { D_F261AD4, 128, 16 } },
+    { OPTIONS_VS_COM, OPTIONS_SHOWN, 2, 0, 0, gOptionsVsComSelection, { aOptionsVsCom2P3PTex, 128, 16 } },
     // 'VS Slot'
-    { OPTIONS_VS_SLOT, OPTIONS_SHOWN, 2, 0, 0, gOptionsVsSlotSelection, { D_F262184, 96, 16 } },
+    { OPTIONS_VS_SLOT, OPTIONS_SHOWN, 2, 0, 0, gOptionsVsSlotSelection, { aOptionsVsSlotTex, 96, 16 } },
     // 'VS Handicap'
-    { OPTIONS_VS_HANDICAP, OPTIONS_SHOWN, 3, 0, 0, gOptionsVsHandicapSelection, { D_F261E80, 96, 16 } },
+    { OPTIONS_VS_HANDICAP, OPTIONS_SHOWN, 3, 0, 0, gOptionsVsHandicapSelection, { aOptionsVsHandicapTex, 96, 16 } },
     // 'Sound Mode'
-    { OPTIONS_SOUND_MODE, OPTIONS_SHOWN, 2, 0, 0, gOptionsSoundModeSelection, { D_F262398, 96, 16 } },
+    { OPTIONS_SOUND_MODE, OPTIONS_SHOWN, 2, 0, 0, gOptionsSoundModeSelection, { aOptionsSoundModeTex, 96, 16 } },
     // 'All data clear'
-    { OPTIONS_DATA_CLEAR, OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN, 0, 0, 0, NULL, { D_F262688, 96, 16 } },
+    { OPTIONS_DATA_CLEAR,
+      OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN,
+      0,
+      0,
+      0,
+      NULL,
+      { aOptionsAllDataClearTex, 96, 16 } },
     // 'Copying ghost'
-    { OPTIONS_GHOST_COPY, OPTIONS_REQUIRE_SELECTING, 0, 0, 0, NULL, { D_F263DA8, 96, 16 } },
+    { OPTIONS_GHOST_COPY, OPTIONS_REQUIRE_SELECTING, 0, 0, 0, NULL, { aOptionsCopyingGhostTex, 96, 16 } },
     // 'EXIT'
-    { OPTIONS_EXIT, OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN, 0, 0, 0, NULL, { D_F2630C8, 40, 16 } },
+    { OPTIONS_EXIT, OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN, 0, 0, 0, NULL, { aOptionsExitTex, 40, 16 } },
 };
 
 UNUSED char D_i6_8011EEBC[] = "Feel Mie";
@@ -464,6 +538,7 @@ void func_i6_80117EE0(unk_800E3A28* arg0) {
 
     arg0->unk_04 = 0;
 
+    //! @bug the case where func_800792D8 returns -1 is unhandled
     D_800E3F28[arg0->unk_18].unk_04 = -1;
 }
 
@@ -475,26 +550,27 @@ void func_i6_80117F2C(unk_800E3A28* arg0) {
     }
     arg0->unk_18 = func_800792D8(D_i6_8011E558[0]);
 
+    //! @bug the case where func_800792D8 returns -1 is unhandled
     D_800E3F28[arg0->unk_18].unk_04 = -1;
 }
 
 void func_i6_80117FA8(unk_800E3A28* arg0) {
-    func_80077D50(D_i6_8011E5D8, 0);
+    func_80077D50(sCreditsMenuLadyCompTexInfo, 0);
     arg0->unk_1C = 0xB6;
 }
 
 void func_i6_80117FE0(void) {
-    func_80077D50(D_i6_8011E5F8, 0);
+    func_80077D50(sCreditsSeeYouAgainCompTexInfo, 0);
 }
 
 void func_i6_80118008(unk_800E3A28* arg0) {
-    func_80077D50(D_i6_8011E618, 0);
+    func_80077D50(sCreditsMrZeroCompTexInfo, 0);
     arg0->unk_1C = 0x100;
     arg0->unk_18 = 0;
 }
 
 void func_i6_80118044(void) {
-    func_80077D50(D_i6_8011E638, 0);
+    func_80077D50(sCreditsCopyrightCompTexInfo, 0);
 }
 
 void func_i6_8011806C(unk_800E3A28* arg0) {
@@ -537,11 +613,11 @@ Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
     for (i = 0; i < var_v0 + 1; i++) {
 
         sp64[0] = *name++;
-        if (sp64[0] == 0) {
+        if (sp64[0] == '\0') {
             break;
         }
 
-        sp64[1] = 0;
+        sp64[1] = '\0';
         var_v1 = arg1->unk_1C - (i * 5);
         if (var_v1 >= 5) {
             var_v1 = 5;
@@ -726,7 +802,7 @@ Gfx* func_i6_80118ED4(Gfx* gfx, unk_800E3A28* arg1) {
     s32 var_t5;
     TexturePtr texture;
 
-    texture = func_800783AC(D_F1C417C);
+    texture = func_800783AC(aCreditsMenuLadyTex);
     spB0 = arg1->unk_0C;
     var_s1 = arg1->unk_10;
 
@@ -816,7 +892,7 @@ Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
     TexturePtr texture;
 
     arg1->unk_1C++;
-    texture = func_800783AC(D_F1C6754);
+    texture = func_800783AC(aCreditsSeeYouAgainTex);
     sp50 = arg1->unk_0C;
     var_s5 = arg1->unk_10;
 
@@ -879,8 +955,92 @@ Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
+#ifdef NON_MATCHING
+extern f32 D_800DD230[];
+Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1) {
+    s32 temp_a0;
+    s32 temp_t1;
+    s32 var_t2;
+    s32 row;
+    s32 temp;
+    s32 var;
+    f32 scale;
+    TexturePtr texture;
+
+    texture = func_800783AC(aCreditsMrZeroTex);
+    gSPDisplayList(gfx++, D_3000088);
+
+    var = 60;
+
+    for (row = 0; row < 72; row++) {
+        gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 1 /* unused by macro */, 0, row, 80,
+                           row + 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                           G_TX_NOLOD, G_TX_NOLOD);
+
+        if (arg1->unk_08 != 0) {
+            temp_a0 = arg1->unk_20;
+            var_t2 = 255 - temp_a0;
+            temp = ((((row * 4096) * (temp_a0 + 64)) / 64) / 72);
+            temp_t1 = ((D_800DD230[temp & 0xFFF] * (temp_a0 + 4)) / 4);
+            temp = (200 - temp_t1);
+
+            gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
+            gSPScisTextureRectangle(gfx++, temp << 2, (row + var) << 2, (temp + 80) << 2, (row + var + 1) << 2,
+                                    var_t2 * 0, 0, 0, 1 << 10, 1 << 10);
+        }
+        if (arg1->unk_04 != 0) {
+            temp_a0 = arg1->unk_1C;
+            var_t2 = 255 - temp_a0;
+            temp = ((((row * 4096) * (temp_a0 + 64)) / 64) / 72);
+            temp_t1 = ((D_800DD230[temp & 0xFFF] * (temp_a0 + 4)) / 4);
+            gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
+            gSPScisTextureRectangle(gfx++, (temp_t1 + 40) << 2, (row + var) << 2, ((temp_t1 + 40) + 80) << 2,
+                                    (row + var + 1) << 2, 0, 0x9E0, 0, 0xFC00, 1 << 10);
+        }
+    }
+
+    if (arg1->unk_18 >= 0x123) {
+        var_t2 = 0xA10 - (arg1->unk_18 * 8);
+        if (var_t2 > 255) {
+            var_t2 = 255;
+        }
+        if (var_t2 < 0) {
+            var_t2 = 0;
+        }
+
+        scale = (511 - var_t2) / 256.0f;
+
+        gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
+
+        gfx = func_i2_80106700(gfx, (s32) (160.0f - (((f32) func_i2_801062E4("f-zero x", 1, 0) * scale) / 2)),
+                               D_i6_8011DFAC + D_i6_8011DFB0, "f-zero x", 0, 1, 1, scale, scale);
+        gfx = func_i2_80106700(gfx, (s32) (160.0f - (((f32) func_i2_801062E4("staff", 1, 0) * scale) / 2)),
+                               D_i6_8011DFAC + D_i6_8011DFB4, "staff", 0, 1, 1, scale, scale);
+    } else if (arg1->unk_18 >= 0x79) {
+        var_t2 = (arg1->unk_18 * 3) - 0x168;
+        if (var_t2 > 255) {
+            var_t2 = 255;
+        }
+
+        scale = (f32) (628 - (arg1->unk_18 * 2)) / 192.0f;
+
+        if (scale < 1.0) {
+            scale = 1.0f;
+        }
+        gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
+
+        gfx =
+            func_i2_80106700(gfx, (s32) (160.0f - (((f32) func_i2_801062E4("f-zero x", 1, 0) * scale) / 2)),
+                             (D_i6_8011DFAC + D_i6_8011DFB0) - (scale - 1.0) * 20.0, "f-zero x", 0, 1, 1, scale, scale);
+        gfx = func_i2_80106700(gfx, (s32) (160.0f - (((f32) func_i2_801062E4("staff", 1, 0) * scale) / 2)),
+                               (D_i6_8011DFAC + D_i6_8011DFB4) + (scale - 1.0) * 20.0, "staff", 0, 1, 1, scale, scale);
+    }
+    return gfx;
+}
+#else
 Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_80119908.s")
+#endif
 
 Gfx* func_i6_8011A248(Gfx* gfx, unk_800E3A28* arg1) {
     s32 var_s2;
@@ -890,7 +1050,7 @@ Gfx* func_i6_8011A248(Gfx* gfx, unk_800E3A28* arg1) {
     TexturePtr texture;
 
     arg1->unk_1C++;
-    texture = func_800783AC(D_F0336B8);
+    texture = func_800783AC(aCopyrightTex);
     var_s2 = arg1->unk_10;
     temp_s7 = arg1->unk_0C;
     gSPDisplayList(gfx++, D_3000088);
@@ -1074,7 +1234,7 @@ void func_i6_8011AB1C(unk_800E3A28* arg0) {
         }
     }
     if (var_v1 != 0) {
-        func_800793E8(arg0->unk_18, 0, D_i6_8011E558[arg0->unk_04 + 2]);
+        func_800793E8(arg0->unk_18, 0, D_i6_8011E560[arg0->unk_04]);
     }
 }
 
@@ -1157,7 +1317,7 @@ void func_i6_8011AC38(unk_800E3A28* arg0) {
         var_a2++;
     }
     if (var_a2 != 0) {
-        func_800793E8(arg0->unk_18, 0, D_i6_8011E558[arg0->unk_04 + 2]);
+        func_800793E8(arg0->unk_18, 0, D_i6_8011E560[arg0->unk_04]);
     }
 }
 
@@ -1913,34 +2073,34 @@ void func_i6_8011C050(void) {
 
     D_800CCFE8 = 3;
     func_800794B0(5, 0, 0, 1);
-    func_80078104(D_F25F070, 0x40, 0, 0, false);
-    func_80078104(D_F138AB8, 0x2000, 0, 1, false);
-    func_80078104(D_F26176C, 0x900, 0, 1, false);
-    func_80078104(D_F2629A8, 0x1000, 0, 1, false);
-    func_80078104(D_F262ED0, 0x200, 0, 1, false);
-    func_80078104(D_F262FB4, 0x200, 0, 1, false);
-    func_80078104(D_F263190, 0x200, 0, 1, false);
-    func_80078104(D_F263230, 0x200, 0, 1, false);
-    func_80078104(D_F2632E8, 0x400, 0, 1, false);
-    func_80078104(D_F2634A4, 0x400, 0, 1, false);
-    func_80078104(D_F263648, 0x100, 0, 1, false);
-    func_80078104(D_F26369C, 0x100, 0, 1, false);
-    func_80078104(D_F2637DC, 0x200, 0, 1, false);
-    func_80078104(D_F2636F0, 0x200, 0, 1, false);
+    func_80078104(aMenuTextTLUT, 0x40, 0, 0, false);
+    func_80078104(aOptionsFalconHelmetTex, 0x2000, 0, 1, false);
+    func_80078104(aOptionsTex, 0x900, 0, 1, false);
+    func_80078104(aOptionsEraseAllSavedDataTex, 0x1000, 0, 1, false);
+    func_80078104(aMenuWithoutTex, 0x200, 0, 1, false);
+    func_80078104(aMenuWithTex, 0x200, 0, 1, false);
+    func_80078104(aMenuPlusOneTex, 0x200, 0, 1, false);
+    func_80078104(aMenuPlusTwoTex, 0x200, 0, 1, false);
+    func_80078104(aMenuStereoTex, 0x400, 0, 1, false);
+    func_80078104(aMenuMonoTex, 0x400, 0, 1, false);
+    func_80078104(aMenuLeftArrowTex, 0x100, 0, 1, false);
+    func_80078104(aMenuRightArrowTex, 0x100, 0, 1, false);
+    func_80078104(aMenuNoTex, 0x200, 0, 1, false);
+    func_80078104(aMenuYesTex, 0x200, 0, 1, false);
 
     for (i = 0, option = gOptionsInfo; i < OPTIONS_MAX; i++, option++) {
         func_80078104(option->optionTextureInfo.textureOffset,
                       option->optionTextureInfo.width * option->optionTextureInfo.height, 0, 1, 0);
     }
 
-    func_80078104(D_F000004, 0x23A00, 0, 1, 0);
-    func_8007A828(func_800783AC(D_F000004), 0x23A00, 0xC3, 0x5F, 0x5F);
+    func_80078104(aTitleBackgroundMainTex, 0x23A00, 0, 1, false);
+    func_8007A828(func_800783AC(aTitleBackgroundMainTex), 0x23A00, 0xC3, 0x5F, 0x5F);
 
     if (D_800CD3C4 == 1) {
-        D_i6_801247AC = func_80078104(D_F014A68, 0x25800, 0, 1, 0);
+        D_i6_801247AC = func_80078104(aTitleBackgroundComicTex, 0x25800, 0, 1, false);
         func_8007A828(D_i6_801247AC, 0x25800, 0xC3, 0x5F, 0x5F);
     } else if (D_800CD3C4 == 2) {
-        D_i6_801247AC = func_80078104(D_F026348, 0x25800, 0, 1, 0);
+        D_i6_801247AC = func_80078104(aTitleBackgroundFalconTex, 0x25800, 0, 1, false);
         func_8007A828(D_i6_801247AC, 0x25800, 0xC3, 0x5F, 0x5F);
     }
     if (D_800CD3C4 != 0) {
@@ -1953,8 +2113,8 @@ void func_i6_8011C050(void) {
     } else {
         D_i6_801247A8 = 0;
     }
-    gOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_CLOSED;
-    gOptionsDataAlreadyCleared = false;
+    sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_CLOSED;
+    sOptionsDataAlreadyCleared = false;
     D_i6_801247B0 = 0;
     gOptionsCurrentRow = 0;
     func_i6_8011C404();
@@ -1963,7 +2123,60 @@ void func_i6_8011C050(void) {
     D_i6_8011FB10 = &D_801247C0;
 }
 
+extern s16 D_800CE4D0;
+extern s16 D_800CE4D4;
+extern s32 D_i2_80106F40;
+extern s16 D_80111840;
+#ifdef NON_MATCHING
+
+void func_i6_8011C404(void) {
+    s32 state;
+    s32 i;
+    OptionsInfo* option = gOptionsInfo;
+
+    for (i = 0; i < 7; i++, option++) {
+        switch (option->row) {
+            case OPTIONS_VS_COM:
+                if (D_800CE4D4 == 0) {
+                    state = 1;
+                } else {
+                    state = 0;
+                }
+                break;
+            case OPTIONS_VS_SLOT:
+                if (D_i2_80106F40 == 0) {
+                    state = 1;
+                } else {
+                    state = 0;
+                }
+                break;
+            case OPTIONS_VS_HANDICAP:
+                if (D_800CE4D0 == 0) {
+                    state = 0;
+                } else if (D_800CE4D0 == 1) {
+                    state = 1;
+                } else {
+                    state = 2;
+                }
+                break;
+            case OPTIONS_SOUND_MODE:
+                if (D_80111840 == 0) {
+                    state = 0;
+                } else {
+                    state = 1;
+                }
+                break;
+            default:
+                state = 0;
+                break;
+        }
+
+        sOptionsSelectionState[i] = state;
+    }
+}
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011C404.s")
+#endif
 
 bool func_i6_8011C788(void);
 void func_i6_8011CBB4(void);
@@ -1975,11 +2188,11 @@ s32 func_i6_8011C6DC(void) {
     func_8007DABC(&D_800DD180);
     func_80080C0C();
     func_i6_8011D394();
-    if (!gOptionsDataAlreadyCleared) {
-        switch (gOptionsDataClearMenu) {
+    if (!sOptionsDataAlreadyCleared) {
+        switch (sOptionsDataClearMenu) {
             case OPTIONS_DATA_CLEAR_MENU_CLOSED:
                 if (D_i2_80106DA4 == 0 && func_i6_8011C788()) {
-                    gOptionsDataAlreadyCleared = true;
+                    sOptionsDataAlreadyCleared = true;
                     D_800CD048 = 0xE;
                 }
                 break;
@@ -1991,18 +2204,14 @@ s32 func_i6_8011C6DC(void) {
     return GAMEMODE_8014;
 }
 
-extern s16 D_800CE4D0;
-extern s16 D_800CE4D4;
 extern u16 D_800E416E;
-extern s32 D_80106F40;
-extern s16 D_80111840;
 Gfx* func_i6_8011D168(Gfx*, s32, s32);
 
 bool func_i6_8011C788(void) {
     s32 lastRow;
     s32 temp_t0;
     bool updateSettings;
-    OptionsInfo* temp_a3_2;
+    OptionsInfo* option;
 
     if (func_8008108C(D_i6_801247A4, 0)) {
         return false;
@@ -2032,23 +2241,23 @@ bool func_i6_8011C788(void) {
         func_800BA8D8(0x1E);
         return false;
     }
-    temp_a3_2 = &gOptionsInfo[gOptionsCurrentRow];
+    option = &gOptionsInfo[gOptionsCurrentRow];
     updateSettings = false;
-    if (!(temp_a3_2->flags & OPTIONS_REQUIRE_SELECTING)) {
-        temp_t0 = gOptionsSelectionState[gOptionsCurrentRow];
+    if (!(option->flags & OPTIONS_REQUIRE_SELECTING)) {
+        temp_t0 = sOptionsSelectionState[gOptionsCurrentRow];
         if (D_800E416E & BTN_LEFT) {
-            gOptionsSelectionState[gOptionsCurrentRow]--;
-            if (gOptionsSelectionState[gOptionsCurrentRow] < 0) {
-                gOptionsSelectionState[gOptionsCurrentRow] = temp_a3_2->totalSelectionStates - 1;
+            sOptionsSelectionState[gOptionsCurrentRow]--;
+            if (sOptionsSelectionState[gOptionsCurrentRow] < 0) {
+                sOptionsSelectionState[gOptionsCurrentRow] = option->totalSelectionStates - 1;
             }
         }
         if (D_800E416E & BTN_RIGHT) {
-            gOptionsSelectionState[gOptionsCurrentRow]++;
-            if (gOptionsSelectionState[gOptionsCurrentRow] > temp_a3_2->totalSelectionStates - 1) {
-                gOptionsSelectionState[gOptionsCurrentRow] = 0;
+            sOptionsSelectionState[gOptionsCurrentRow]++;
+            if (sOptionsSelectionState[gOptionsCurrentRow] > option->totalSelectionStates - 1) {
+                sOptionsSelectionState[gOptionsCurrentRow] = 0;
             }
         }
-        if (temp_t0 != gOptionsSelectionState[gOptionsCurrentRow]) {
+        if (temp_t0 != sOptionsSelectionState[gOptionsCurrentRow]) {
             updateSettings = true;
             func_800BA8D8(0x21);
         }
@@ -2058,10 +2267,10 @@ bool func_i6_8011C788(void) {
         return true;
     }
 
-    switch (temp_a3_2->row) {
+    switch (option->row) {
         case OPTIONS_VS_COM:
             if (updateSettings) {
-                if (gOptionsSelectionState[gOptionsCurrentRow] == 1) {
+                if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
                     D_800CE4D4 = 0;
                 } else {
                     D_800CE4D4 = 1;
@@ -2070,18 +2279,18 @@ bool func_i6_8011C788(void) {
             break;
         case OPTIONS_VS_SLOT:
             if (updateSettings) {
-                if (gOptionsSelectionState[gOptionsCurrentRow] == 1) {
-                    D_80106F40 = 0;
+                if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
+                    D_i2_80106F40 = 0;
                 } else {
-                    D_80106F40 = 1;
+                    D_i2_80106F40 = 1;
                 }
             }
             break;
         case OPTIONS_VS_HANDICAP:
             if (updateSettings) {
-                if (gOptionsSelectionState[gOptionsCurrentRow] == 0) {
+                if (sOptionsSelectionState[gOptionsCurrentRow] == 0) {
                     D_800CE4D0 = 0;
-                } else if (gOptionsSelectionState[gOptionsCurrentRow] == 1) {
+                } else if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
                     D_800CE4D0 = 1;
                 } else {
                     D_800CE4D0 = 2;
@@ -2090,7 +2299,7 @@ bool func_i6_8011C788(void) {
             break;
         case OPTIONS_SOUND_MODE:
             if (updateSettings) {
-                if (gOptionsSelectionState[gOptionsCurrentRow] == 0) {
+                if (sOptionsSelectionState[gOptionsCurrentRow] == 0) {
                     D_80111840 = 0;
                     func_800BA28C(SOUNDMODE_SURROUND); // Option says stereo, but sets surround anyway?
                 } else {
@@ -2104,8 +2313,8 @@ bool func_i6_8011C788(void) {
                 D_i6_801247A4 =
                     func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, GPACK_RGBA5551(255, 0, 0, 1), func_i6_8011D168);
                 if (D_i6_801247A4 != NULL) {
-                    gOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_OPEN;
-                    gOptionsSelectionState[gOptionsCurrentRow] = 0;
+                    sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_OPEN;
+                    sOptionsSelectionState[gOptionsCurrentRow] = 0;
                     func_800BA8D8(0x21);
                 }
             }
@@ -2136,24 +2345,24 @@ void func_i6_8011CBB4(void) {
     bool updateSettings;
 
     if (func_8008108C(D_i6_801247A4, 1) != 0) {
-        lastSelectionState = gOptionsSelectionState[gOptionsCurrentRow];
+        lastSelectionState = sOptionsSelectionState[gOptionsCurrentRow];
         if (D_800E416E & BTN_LEFT) {
-            if (--gOptionsSelectionState[gOptionsCurrentRow] < 0) {
-                gOptionsSelectionState[gOptionsCurrentRow] = 1;
+            if (--sOptionsSelectionState[gOptionsCurrentRow] < 0) {
+                sOptionsSelectionState[gOptionsCurrentRow] = 1;
             }
         }
         if (D_800E416E & BTN_RIGHT) {
-            if (++gOptionsSelectionState[gOptionsCurrentRow] > 1) {
-                gOptionsSelectionState[gOptionsCurrentRow] = 0;
+            if (++sOptionsSelectionState[gOptionsCurrentRow] > 1) {
+                sOptionsSelectionState[gOptionsCurrentRow] = 0;
             }
         }
-        if (lastSelectionState != gOptionsSelectionState[gOptionsCurrentRow]) {
+        if (lastSelectionState != sOptionsSelectionState[gOptionsCurrentRow]) {
             func_800BA8D8(0x1E);
         }
         updateSettings = false;
         if (D_800E416E & (BTN_A | BTN_START)) {
             updateSettings = true;
-            if (gOptionsSelectionState[gOptionsCurrentRow] == 1) {
+            if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
                 func_i2_80101784(D_i6_8011FB10, 1);
                 func_i6_8011C404();
                 for (i = 0; i < 4; i++) {
@@ -2169,7 +2378,7 @@ void func_i6_8011CBB4(void) {
             func_800BA8D8(0x10);
         }
         if (updateSettings) {
-            gOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_CLOSED;
+            sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_CLOSED;
             func_80080BDC(D_i6_801247A4);
         }
     }
@@ -2188,16 +2397,20 @@ Gfx* Menu_OptionsDraw(Gfx* gfx) {
 
     gfx = func_80079BC8(gfx);
     if (D_i6_801247A8 != 1) {
-        gfx = func_8007B14C(gfx, func_800783AC(D_F000004), 8, 0, 304, 240, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 0, 0);
+        gfx = func_8007B14C(gfx, func_800783AC(aTitleBackgroundMainTex), 8, 0, 304, 240, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0,
+                            0, 0, 0);
     }
     if (D_i6_801247A8 != 0) {
         gfx = func_i6_8011D8C8(gfx);
     }
-    gfx = func_8007B14C(gfx, func_800783AC(D_F138AB8), 0x32, 4, 64, 64, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 1, 0);
-    gfx = func_8007B14C(gfx, func_800783AC(D_F138AB8), 0xCE, 4, 64, 64, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 0, 0);
+    gfx = func_8007B14C(gfx, func_800783AC(aOptionsFalconHelmetTex), 50, 4, 64, 64, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
+                        1, 0);
+    gfx = func_8007B14C(gfx, func_800783AC(aOptionsFalconHelmetTex), 206, 4, 64, 64, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
+                        0, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_8007E410(gfx, func_800783AC(D_F26176C), func_800783AC(D_F25F070), G_IM_FMT_CI, 1, 0x70, 0x16, 96, 24, 3);
+    gfx = func_8007E410(gfx, func_800783AC(aOptionsTex), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1, 112, 22, 96, 24,
+                        3);
 
     var_s5 = 60;
 
@@ -2223,9 +2436,11 @@ Gfx* Menu_OptionsDraw(Gfx* gfx) {
                             option->unk_0C + 0x1E, var_s5, optionTextureInfo->width, optionTextureInfo->height, 0);
 
         if (!(option->flags & OPTIONS_REQUIRE_SELECTING)) {
-            gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, G_IM_FMT_CI, 1, 0xBE, var_s5, 0x10, 0x10, 0);
-            gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, G_IM_FMT_CI, 1, 0x109, var_s5, 0x10, 0x10, 0);
-            selectionStateTextureInfo = &option->selectionStateTextureInfo[gOptionsSelectionState[i]];
+            gfx =
+                func_8007E410(gfx, func_800783AC(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1, 0xBE, var_s5, 0x10, 0x10, 0);
+            gfx = func_8007E410(gfx, func_800783AC(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1, 0x109, var_s5, 0x10, 0x10,
+                                0);
+            selectionStateTextureInfo = &option->selectionStateTextureInfo[sOptionsSelectionState[i]];
             temp_s4 = ((60 - selectionStateTextureInfo->width) / 2) + option->unk_10;
             gfx = func_8007E410(gfx, func_800783AC(selectionStateTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
                                 temp_s4 + 0xD0, var_s5, selectionStateTextureInfo->width,
@@ -2244,14 +2459,16 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
 
-    gfx = func_8007E410(gfx, func_800783AC(D_F2629A8), func_800783AC(D_F25F070), G_IM_FMT_CI, 1, arg1 + 0xC, arg2 + 0xA,
-                        128, 32, 3);
+    gfx = func_8007E410(gfx, func_800783AC(aOptionsEraseAllSavedDataTex), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1,
+                        arg1 + 0xC, arg2 + 0xA, 128, 32, 3);
 
     gDPPipeSync(gfx++);
     gfx = func_8007DB28(gfx, 0);
-    gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, G_IM_FMT_CI, 1, arg1 + 0x18, arg2 + 0x32, 16, 16, 0);
-    gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, G_IM_FMT_CI, 1, arg1 + 0x63, arg2 + 0x32, 16, 16, 0);
-    dataClearTextureInfo = &gOptionsAllDataClearSelection[gOptionsSelectionState[gOptionsCurrentRow]];
+    gfx =
+        func_8007E410(gfx, func_800783AC(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1, arg1 + 0x18, arg2 + 0x32, 16, 16, 0);
+    gfx = func_8007E410(gfx, func_800783AC(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1, arg1 + 0x63, arg2 + 0x32, 16, 16,
+                        0);
+    dataClearTextureInfo = &gOptionsAllDataClearSelection[sOptionsSelectionState[gOptionsCurrentRow]];
     sp54 = (60 - dataClearTextureInfo->width) / 2;
     return func_8007E410(gfx, func_800783AC(dataClearTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
                          arg1 + sp54 + 0x2A, arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);

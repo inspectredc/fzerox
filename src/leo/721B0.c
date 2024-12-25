@@ -224,8 +224,7 @@ u16 func_i1_8040397C(void) {
 }
 
 extern u16 D_i1_80428F70[];
-extern u32 D_i1_80428638;
-extern u32 D_i1_8042863C;
+extern LEOCapacity D_i1_80428638;
 
 s32 func_i1_804039F8(u32 arg0, u32* arg1, s32* arg2, u32* arg3) {
     u32 sp34;
@@ -242,19 +241,19 @@ s32 func_i1_804039F8(u32 arg0, u32* arg1, s32* arg2, u32* arg3) {
     sp2C = 0;
     sp18 = 1;
 
-    for (i = 4; i <= (D_i1_8042863C - D_i1_80428638); i++) {
+    for (i = 4; i <= (D_i1_80428638.endLBA - D_i1_80428638.startLBA); i++) {
         if (D_i1_80428F70[i] != 0) {
             continue;
         }
         j = i;
-        while (j < (D_i1_8042863C - D_i1_80428638)) {
+        while (j < (D_i1_80428638.endLBA - D_i1_80428638.startLBA)) {
             if (D_i1_80428F70[j] != 0) {
                 break;
             }
             j++;
         }
 
-        LeoLBAToByte(i + D_i1_80428638, (j - i) + 1, &sp28);
+        LeoLBAToByte(i + D_i1_80428638.startLBA, (j - i) + 1, &sp28);
         sp1C = 0;
         if (sp18 != 0) {
             sp1C++;
@@ -286,7 +285,7 @@ s32 func_i1_804039F8(u32 arg0, u32* arg1, s32* arg2, u32* arg3) {
 
     if (sp2C > arg0) {
         for (j = 1; j <= sp30; j++) {
-            LeoLBAToByte(sp34 + D_i1_80428638, j, &sp28);
+            LeoLBAToByte(sp34 + D_i1_80428638.startLBA, j, &sp28);
             if (sp28 >= arg0) {
                 break;
             }

@@ -1,574 +1,1042 @@
 #include "global.h"
+#include "ovl_i2.h"
 #include "assets/segment_2B9EA0.h"
 
-unk_80077D50 D_i2_80106F50[] = { { 17, D_F120644, 16, 16, 0xD7 }, { 0 } };
-unk_80077D50 D_i2_80106F70[] = { { 17, D_F120720, 16, 16, 0xD6 }, { 0 } };
-unk_80077D50 D_i2_80106F90[] = { { 17, D_F1207FC, 16, 16, 0xDB }, { 0 } };
-unk_80077D50 D_i2_80106FB0[] = { { 17, D_F1208DC, 16, 16, 0xDD }, { 0 } };
-unk_80077D50 D_i2_80106FD0[] = { { 17, D_F1209C0, 16, 16, 0xBC }, { 0 } };
-unk_80077D50 D_i2_80106FF0[] = { { 17, D_F120A80, 16, 16, 0xB5 }, { 0 } };
-unk_80077D50 D_i2_80107010[] = { { 17, D_F120B3C, 16, 16, 0xF2 }, { 0 } };
-unk_80077D50 D_i2_80107030[] = { { 17, D_F120C34, 16, 16, 0xC5 }, { 0 } };
-unk_80077D50 D_i2_80107050[] = { { 17, D_F120D00, 8, 16, 0x8E }, { 0 } };
-unk_80077D50 D_i2_80107070[] = { { 17, D_F120D94, 16, 16, 0xCF }, { 0 } };
-unk_80077D50 D_i2_80107090[] = { { 17, D_F120E68, 16, 16, 0xEE }, { 0 } };
-unk_80077D50 D_i2_801070B0[] = { { 17, D_F120F5C, 16, 16, 0xAC }, { 0 } };
-unk_80077D50 D_i2_801070D0[] = { { 17, D_F12100C, 16, 16, 0x10B }, { 0 } };
-unk_80077D50 D_i2_801070F0[] = { { 17, D_F12111C, 16, 16, 0xF3 }, { 0 } };
-unk_80077D50 D_i2_80107110[] = { { 17, D_F121214, 16, 16, 0xE8 }, { 0 } };
-unk_80077D50 D_i2_80107130[] = { { 17, D_F121300, 16, 16, 0xC6 }, { 0 } };
-unk_80077D50 D_i2_80107150[] = { { 17, D_F1213CC, 16, 16, 0x101 }, { 0 } };
-unk_80077D50 D_i2_80107170[] = { { 17, D_F1214D4, 16, 16, 0xDA }, { 0 } };
-unk_80077D50 D_i2_80107190[] = { { 17, D_F1215B4, 16, 16, 0xDF }, { 0 } };
-unk_80077D50 D_i2_801071B0[] = { { 17, D_F121698, 16, 16, 0xB9 }, { 0 } };
-unk_80077D50 D_i2_801071D0[] = { { 17, D_F121758, 16, 16, 0xE4 }, { 0 } };
-unk_80077D50 D_i2_801071F0[] = { { 17, D_F121840, 16, 16, 0xD6 }, { 0 } };
-unk_80077D50 D_i2_80107210[] = { { 17, D_F12191C, 16, 16, 0x100 }, { 0 } };
-unk_80077D50 D_i2_80107230[] = { { 17, D_F121A20, 16, 16, 0xD8 }, { 0 } };
-unk_80077D50 D_i2_80107250[] = { { 17, D_F121AFC, 16, 16, 0xD4 }, { 0 } };
-unk_80077D50 D_i2_80107270[] = { { 17, D_F121BD4, 16, 16, 0xAB }, { 0 } };
-unk_80077D50 D_i2_80107290[] = { { 17, D_F121C84, 8, 16, 0x70 }, { 0 } };
-unk_80077D50 D_i2_801072B0[] = { { 17, D_F121CF8, 8, 16, 0x56 }, { 0 } };
-unk_80077D50 D_i2_801072D0[] = { { 17, D_F121D54, 8, 16, 0x5C }, { 0 } };
-unk_80077D50 D_i2_801072F0[] = { { 17, D_F121DB4, 8, 16, 0x80 }, { 0 } };
-unk_80077D50 D_i2_80107310[] = { { 17, D_F122108, 16, 16, 0xDA }, { 0 } };
-unk_80077D50 D_i2_80107330[] = { { 17, D_F1221E8, 8, 16, 0x8E }, { 0 } };
-unk_80077D50 D_i2_80107350[] = { { 17, D_F12227C, 16, 16, 0xDB }, { 0 } };
-unk_80077D50 D_i2_80107370[] = { { 17, D_F12235C, 16, 16, 0xE4 }, { 0 } };
-unk_80077D50 D_i2_80107390[] = { { 17, D_F122444, 16, 16, 0xC3 }, { 0 } };
-unk_80077D50 D_i2_801073B0[] = { { 17, D_F12250C, 16, 16, 0xD8 }, { 0 } };
-unk_80077D50 D_i2_801073D0[] = { { 17, D_F1225E8, 16, 16, 0xDB }, { 0 } };
-unk_80077D50 D_i2_801073F0[] = { { 17, D_F1226C8, 16, 16, 0xB5 }, { 0 } };
-unk_80077D50 D_i2_80107410[] = { { 17, D_F122784, 16, 16, 0xF4 }, { 0 } };
-unk_80077D50 D_i2_80107430[] = { { 17, D_F12287C, 16, 16, 0xEB }, { 0 } };
-unk_80077D50 D_i2_80107450[] = { { 17, D_F121E38, 16, 16, 0x56 }, { 0 } };
-unk_80077D50 D_i2_80107470[] = { { 17, D_F121E94, 16, 16, 0x97 }, { 0 } };
-unk_80077D50 D_i2_80107490[] = { { 17, D_F121F30, 16, 16, 0x6A }, { 0 } };
-unk_80077D50 D_i2_801074B0[] = { { 17, D_F121FA0, 16, 16, 0x5E }, { 0 } };
-unk_80077D50 D_i2_801074D0[] = { { 17, D_F122004, 16, 16, 0xFD }, { 0 } };
+unk_80077D50 sFont1ACompTexInfo[] = { { 17, aFont1ATex, 16, 16, 0xD7 }, { 0 } };
+unk_80077D50 sFont1BCompTexInfo[] = { { 17, aFont1BTex, 16, 16, 0xD6 }, { 0 } };
+unk_80077D50 sFont1CCompTexInfo[] = { { 17, aFont1CTex, 16, 16, 0xDB }, { 0 } };
+unk_80077D50 sFont1DCompTexInfo[] = { { 17, aFont1DTex, 16, 16, 0xDD }, { 0 } };
+unk_80077D50 sFont1ECompTexInfo[] = { { 17, aFont1ETex, 16, 16, 0xBC }, { 0 } };
+unk_80077D50 sFont1FCompTexInfo[] = { { 17, aFont1FTex, 16, 16, 0xB5 }, { 0 } };
+unk_80077D50 sFont1GCompTexInfo[] = { { 17, aFont1GTex, 16, 16, 0xF2 }, { 0 } };
+unk_80077D50 sFont1HCompTexInfo[] = { { 17, aFont1HTex, 16, 16, 0xC5 }, { 0 } };
+unk_80077D50 sFont1ICompTexInfo[] = { { 17, aFont1ITex, 8, 16, 0x8E }, { 0 } };
+unk_80077D50 sFont1JCompTexInfo[] = { { 17, aFont1JTex, 16, 16, 0xCF }, { 0 } };
+unk_80077D50 sFont1KCompTexInfo[] = { { 17, aFont1KTex, 16, 16, 0xEE }, { 0 } };
+unk_80077D50 sFont1LCompTexInfo[] = { { 17, aFont1LTex, 16, 16, 0xAC }, { 0 } };
+unk_80077D50 sFont1MCompTexInfo[] = { { 17, aFont1MTex, 16, 16, 0x10B }, { 0 } };
+unk_80077D50 sFont1NCompTexInfo[] = { { 17, aFont1NTex, 16, 16, 0xF3 }, { 0 } };
+unk_80077D50 sFont1OCompTexInfo[] = { { 17, aFont1OTex, 16, 16, 0xE8 }, { 0 } };
+unk_80077D50 sFont1PCompTexInfo[] = { { 17, aFont1PTex, 16, 16, 0xC6 }, { 0 } };
+unk_80077D50 sFont1QCompTexInfo[] = { { 17, aFont1QTex, 16, 16, 0x101 }, { 0 } };
+unk_80077D50 sFont1RCompTexInfo[] = { { 17, aFont1RTex, 16, 16, 0xDA }, { 0 } };
+unk_80077D50 sFont1SCompTexInfo[] = { { 17, aFont1STex, 16, 16, 0xDF }, { 0 } };
+unk_80077D50 sFont1TCompTexInfo[] = { { 17, aFont1TTex, 16, 16, 0xB9 }, { 0 } };
+unk_80077D50 sFont1UCompTexInfo[] = { { 17, aFont1UTex, 16, 16, 0xE4 }, { 0 } };
+unk_80077D50 sFont1VCompTexInfo[] = { { 17, aFont1VTex, 16, 16, 0xD6 }, { 0 } };
+unk_80077D50 sFont1WCompTexInfo[] = { { 17, aFont1WTex, 16, 16, 0x100 }, { 0 } };
+unk_80077D50 sFont1XCompTexInfo[] = { { 17, aFont1XTex, 16, 16, 0xD8 }, { 0 } };
+unk_80077D50 sFont1YCompTexInfo[] = { { 17, aFont1YTex, 16, 16, 0xD4 }, { 0 } };
+unk_80077D50 sFont1ZCompTexInfo[] = { { 17, aFont1ZTex, 16, 16, 0xAB }, { 0 } };
+unk_80077D50 sFont1CommaCompTexInfo[] = { { 17, aFont1CommaTex, 8, 16, 0x70 }, { 0 } };
+unk_80077D50 sFont1PeriodCompTexInfo[] = { { 17, aFont1PeriodTex, 8, 16, 0x56 }, { 0 } };
+unk_80077D50 sFont1PrimeCompTexInfo[] = { { 17, aFont1PrimeTex, 8, 16, 0x5C }, { 0 } };
+unk_80077D50 sFont1ExclamationMarkCompTexInfo[] = { { 17, aFont1ExclamationMarkTex, 8, 16, 0x80 }, { 0 } };
+unk_80077D50 sFont1Num0CompTexInfo[] = { { 17, aFont1Num0Tex, 16, 16, 0xDA }, { 0 } };
+unk_80077D50 sFont1Num1CompTexInfo[] = { { 17, aFont1Num1Tex, 8, 16, 0x8E }, { 0 } };
+unk_80077D50 sFont1Num2CompTexInfo[] = { { 17, aFont1Num2Tex, 16, 16, 0xDB }, { 0 } };
+unk_80077D50 sFont1Num3CompTexInfo[] = { { 17, aFont1Num3Tex, 16, 16, 0xE4 }, { 0 } };
+unk_80077D50 sFont1Num4CompTexInfo[] = { { 17, aFont1Num4Tex, 16, 16, 0xC3 }, { 0 } };
+unk_80077D50 sFont1Num5CompTexInfo[] = { { 17, aFont1Num5Tex, 16, 16, 0xD8 }, { 0 } };
+unk_80077D50 sFont1Num6CompTexInfo[] = { { 17, aFont1Num6Tex, 16, 16, 0xDB }, { 0 } };
+unk_80077D50 sFont1Num7CompTexInfo[] = { { 17, aFont1Num7Tex, 16, 16, 0xB5 }, { 0 } };
+unk_80077D50 sFont1Num8CompTexInfo[] = { { 17, aFont1Num8Tex, 16, 16, 0xF4 }, { 0 } };
+unk_80077D50 sFont1Num9CompTexInfo[] = { { 17, aFont1Num9Tex, 16, 16, 0xEB }, { 0 } };
+unk_80077D50 sFont1UnderscoreCompTexInfo[] = { { 17, aFont1UnderscoreTex, 16, 16, 0x56 }, { 0 } };
+unk_80077D50 sFont1EndCompTexInfo[] = { { 17, aFont1EndTex, 16, 16, 0x97 }, { 0 } };
+unk_80077D50 sFont1BoxCompTexInfo[] = { { 17, aFont1BoxTex, 16, 16, 0x6A }, { 0 } };
+unk_80077D50 sFont1DashCompTexInfo[] = { { 17, aFont1DashTex, 16, 16, 0x5E }, { 0 } };
+unk_80077D50 sFont1AmpersandCompTexInfo[] = { { 17, aFont1AmpersandTex, 16, 16, 0xFD }, { 0 } };
 
-unk_80077D50* D_i2_801074F0[] = {
-    D_i2_80106F50, D_i2_80106F70, D_i2_80106F90, D_i2_80106FB0, D_i2_80106FD0, D_i2_80106FF0, D_i2_80107010,
-    D_i2_80107030, D_i2_80107050, D_i2_80107070, D_i2_80107090, D_i2_801070B0, D_i2_801070D0, D_i2_801070F0,
-    D_i2_80107110, D_i2_80107130, D_i2_80107150, D_i2_80107170, D_i2_80107190, D_i2_801071B0, D_i2_801071D0,
-    D_i2_801071F0, D_i2_80107210, D_i2_80107230, D_i2_80107250, D_i2_80107270, D_i2_801072D0, D_i2_801072D0,
-    D_i2_801074D0, D_i2_801072D0, D_i2_801074B0, D_i2_801072F0, D_i2_80107310, D_i2_80107330, D_i2_80107350,
-    D_i2_80107370, D_i2_80107390, D_i2_801073B0, D_i2_801073D0, D_i2_801073F0, D_i2_80107410, D_i2_80107430,
-    D_i2_801072B0, D_i2_801072B0, D_i2_80107470, D_i2_80107490, D_i2_80107450, D_i2_80107290,
+unk_80077D50* sFont1CompTexInfos[] = {
+    sFont1ACompTexInfo,         sFont1BCompTexInfo,     sFont1CCompTexInfo,          sFont1DCompTexInfo,
+    sFont1ECompTexInfo,         sFont1FCompTexInfo,     sFont1GCompTexInfo,          sFont1HCompTexInfo,
+    sFont1ICompTexInfo,         sFont1JCompTexInfo,     sFont1KCompTexInfo,          sFont1LCompTexInfo,
+    sFont1MCompTexInfo,         sFont1NCompTexInfo,     sFont1OCompTexInfo,          sFont1PCompTexInfo,
+    sFont1QCompTexInfo,         sFont1RCompTexInfo,     sFont1SCompTexInfo,          sFont1TCompTexInfo,
+    sFont1UCompTexInfo,         sFont1VCompTexInfo,     sFont1WCompTexInfo,          sFont1XCompTexInfo,
+    sFont1YCompTexInfo,         sFont1ZCompTexInfo,     sFont1PrimeCompTexInfo,      sFont1PrimeCompTexInfo,
+    sFont1AmpersandCompTexInfo, sFont1PrimeCompTexInfo, sFont1DashCompTexInfo,       sFont1ExclamationMarkCompTexInfo,
+    sFont1Num0CompTexInfo,      sFont1Num1CompTexInfo,  sFont1Num2CompTexInfo,       sFont1Num3CompTexInfo,
+    sFont1Num4CompTexInfo,      sFont1Num5CompTexInfo,  sFont1Num6CompTexInfo,       sFont1Num7CompTexInfo,
+    sFont1Num8CompTexInfo,      sFont1Num9CompTexInfo,  sFont1PeriodCompTexInfo,     sFont1PeriodCompTexInfo,
+    sFont1EndCompTexInfo,       sFont1BoxCompTexInfo,   sFont1UnderscoreCompTexInfo, sFont1CommaCompTexInfo,
 };
 
-unk_80077D50 D_i2_801075B0[] = { { 17, D_F1232C4, 8, 8, 0x3A }, { 0 } };
-unk_80077D50 D_i2_801075D0[] = { { 17, D_F123304, 8, 8, 0x40 }, { 0 } };
-unk_80077D50 D_i2_801075F0[] = { { 17, D_F123348, 8, 8, 0x3F }, { 0 } };
-unk_80077D50 D_i2_80107610[] = { { 17, D_F12338C, 8, 8, 0x3D }, { 0 } };
-unk_80077D50 D_i2_80107630[] = { { 17, D_F1233D0, 8, 8, 0x37 }, { 0 } };
-unk_80077D50 D_i2_80107650[] = { { 17, D_F12340C, 8, 8, 0x35 }, { 0 } };
-unk_80077D50 D_i2_80107670[] = { { 17, D_F123448, 8, 8, 0x41 }, { 0 } };
-unk_80077D50 D_i2_80107690[] = { { 17, D_F123490, 8, 8, 0x3A }, { 0 } };
-unk_80077D50 D_i2_801076B0[] = { { 17, D_F1234D0, 4, 8, 0x2D }, { 0 } };
-unk_80077D50 D_i2_801076D0[] = { { 17, D_F123504, 8, 8, 0x39 }, { 0 } };
-unk_80077D50 D_i2_801076F0[] = { { 17, D_F123544, 8, 8, 0x3B }, { 0 } };
-unk_80077D50 D_i2_80107710[] = { { 17, D_F123584, 8, 8, 0x35 }, { 0 } };
-unk_80077D50 D_i2_80107730[] = { { 17, D_F1235C0, 8, 8, 0x3A }, { 0 } };
-unk_80077D50 D_i2_80107750[] = { { 17, D_F123600, 8, 8, 0x3F }, { 0 } };
-unk_80077D50 D_i2_80107770[] = { { 17, D_F123644, 8, 8, 0x3D }, { 0 } };
-unk_80077D50 D_i2_80107790[] = { { 17, D_F123688, 8, 8, 0x3A }, { 0 } };
-unk_80077D50 D_i2_801077B0[] = { { 17, D_F1236C8, 8, 8, 0x41 }, { 0 } };
-unk_80077D50 D_i2_801077D0[] = { { 17, D_F123710, 8, 8, 0x3C }, { 0 } };
-unk_80077D50 D_i2_801077F0[] = { { 17, D_F123750, 8, 8, 0x40 }, { 0 } };
-unk_80077D50 D_i2_80107810[] = { { 17, D_F123794, 8, 8, 0x35 }, { 0 } };
-unk_80077D50 D_i2_80107830[] = { { 17, D_F1237D0, 8, 8, 0x3D }, { 0 } };
-unk_80077D50 D_i2_80107850[] = { { 17, D_F123814, 8, 8, 0x3D }, { 0 } };
-unk_80077D50 D_i2_80107870[] = { { 17, D_F123858, 8, 8, 0x40 }, { 0 } };
-unk_80077D50 D_i2_80107890[] = { { 17, D_F12389C, 8, 8, 0x49 }, { 0 } };
-unk_80077D50 D_i2_801078B0[] = { { 17, D_F1238EC, 8, 8, 0x37 }, { 0 } };
-unk_80077D50 D_i2_801078D0[] = { { 17, D_F123928, 8, 8, 0x35 }, { 0 } };
-unk_80077D50 D_i2_801078F0[] = { { 17, D_F123964, 8, 8, 0x2E }, { 0 } };
-unk_80077D50 D_i2_80107910[] = { { 17, D_F123998, 8, 8, 0x2D }, { 0 } };
-unk_80077D50 D_i2_80107930[] = { { 17, D_F1239CC, 8, 8, 0x31 }, { 0 } };
-unk_80077D50 D_i2_80107950[] = { { 17, D_F123A04, 8, 8, 0x26 }, { 0 } };
-unk_80077D50 D_i2_80107970[] = { { 17, D_F123A30, 8, 8, 0x4D }, { 0 } };
-unk_80077D50 D_i2_80107990[] = { { 17, D_F123A84, 8, 8, 0x3F }, { 0 } };
-unk_80077D50 D_i2_801079B0[] = { { 17, D_F123AC8, 8, 8, 0x37 }, { 0 } };
-unk_80077D50 D_i2_801079D0[] = { { 17, D_F123B04, 8, 8, 0x37 }, { 0 } };
-unk_80077D50 D_i2_801079F0[] = { { 17, D_F123B40, 8, 8, 0x3B }, { 0 } };
-unk_80077D50 D_i2_80107A10[] = { { 17, D_F123B80, 8, 8, 0x39 }, { 0 } };
-unk_80077D50 D_i2_80107A30[] = { { 17, D_F123BC0, 8, 8, 0x3D }, { 0 } };
-unk_80077D50 D_i2_80107A50[] = { { 17, D_F123C04, 8, 8, 0x39 }, { 0 } };
-unk_80077D50 D_i2_80107A70[] = { { 17, D_F123C44, 8, 8, 0x3C }, { 0 } };
-unk_80077D50 D_i2_80107A90[] = { { 17, D_F123C84, 8, 8, 0x31 }, { 0 } };
-unk_80077D50 D_i2_80107AB0[] = { { 17, D_F123CBC, 8, 8, 0x38 }, { 0 } };
-unk_80077D50 D_i2_80107AD0[] = { { 17, D_F123CF8, 8, 8, 0x3B }, { 0 } };
+unk_80077D50 sFont2ACompTexInfo[] = { { 17, aFont2ATex, 8, 8, 0x3A }, { 0 } };
+unk_80077D50 sFont2BCompTexInfo[] = { { 17, aFont2BTex, 8, 8, 0x40 }, { 0 } };
+unk_80077D50 sFont2CCompTexInfo[] = { { 17, aFont2CTex, 8, 8, 0x3F }, { 0 } };
+unk_80077D50 sFont2DCompTexInfo[] = { { 17, aFont2DTex, 8, 8, 0x3D }, { 0 } };
+unk_80077D50 sFont2ECompTexInfo[] = { { 17, aFont2ETex, 8, 8, 0x37 }, { 0 } };
+unk_80077D50 sFont2FCompTexInfo[] = { { 17, aFont2FTex, 8, 8, 0x35 }, { 0 } };
+unk_80077D50 sFont2GCompTexInfo[] = { { 17, aFont2GTex, 8, 8, 0x41 }, { 0 } };
+unk_80077D50 sFont2HCompTexInfo[] = { { 17, aFont2HTex, 8, 8, 0x3A }, { 0 } };
+unk_80077D50 sFont2ICompTexInfo[] = { { 17, aFont2ITex, 4, 8, 0x2D }, { 0 } };
+unk_80077D50 sFont2JCompTexInfo[] = { { 17, aFont2JTex, 8, 8, 0x39 }, { 0 } };
+unk_80077D50 sFont2KCompTexInfo[] = { { 17, aFont2KTex, 8, 8, 0x3B }, { 0 } };
+unk_80077D50 sFont2LCompTexInfo[] = { { 17, aFont2LTex, 8, 8, 0x35 }, { 0 } };
+unk_80077D50 sFont2MCompTexInfo[] = { { 17, aFont2MTex, 8, 8, 0x3A }, { 0 } };
+unk_80077D50 sFont2NCompTexInfo[] = { { 17, aFont2NTex, 8, 8, 0x3F }, { 0 } };
+unk_80077D50 sFont2OCompTexInfo[] = { { 17, aFont2OTex, 8, 8, 0x3D }, { 0 } };
+unk_80077D50 sFont2PCompTexInfo[] = { { 17, aFont2PTex, 8, 8, 0x3A }, { 0 } };
+unk_80077D50 sFont2QCompTexInfo[] = { { 17, aFont2QTex, 8, 8, 0x41 }, { 0 } };
+unk_80077D50 sFont2RCompTexInfo[] = { { 17, aFont2RTex, 8, 8, 0x3C }, { 0 } };
+unk_80077D50 sFont2SCompTexInfo[] = { { 17, aFont2STex, 8, 8, 0x40 }, { 0 } };
+unk_80077D50 sFont2TCompTexInfo[] = { { 17, aFont2TTex, 8, 8, 0x35 }, { 0 } };
+unk_80077D50 sFont2UCompTexInfo[] = { { 17, aFont2UTex, 8, 8, 0x3D }, { 0 } };
+unk_80077D50 sFont2VCompTexInfo[] = { { 17, aFont2VTex, 8, 8, 0x3D }, { 0 } };
+unk_80077D50 sFont2WCompTexInfo[] = { { 17, aFont2WTex, 8, 8, 0x40 }, { 0 } };
+unk_80077D50 sFont2XCompTexInfo[] = { { 17, aFont2XTex, 8, 8, 0x49 }, { 0 } };
+unk_80077D50 sFont2YCompTexInfo[] = { { 17, aFont2YTex, 8, 8, 0x37 }, { 0 } };
+unk_80077D50 sFont2ZCompTexInfo[] = { { 17, aFont2ZTex, 8, 8, 0x35 }, { 0 } };
+unk_80077D50 sFont2CommaCompTexInfo[] = { { 17, aFont2CommaTex, 8, 8, 0x2E }, { 0 } };
+unk_80077D50 sFont2PeriodCompTexInfo[] = { { 17, aFont2PeriodTex, 8, 8, 0x2D }, { 0 } };
+unk_80077D50 sFont2PrimeCompTexInfo[] = { { 17, aFont2PrimeTex, 8, 8, 0x31 }, { 0 } };
+unk_80077D50 sFont2DashCompTexInfo[] = { { 17, aFont2DashTex, 8, 8, 0x26 }, { 0 } };
+unk_80077D50 sFont2KgCompTexInfo[] = { { 17, aFont2KgTex, 8, 8, 0x4D }, { 0 } };
+unk_80077D50 sFont2AmpersandCompTexInfo[] = { { 17, aFont2AmpersandTex, 8, 8, 0x3F }, { 0 } };
+unk_80077D50 sFont2Num0CompTexInfo[] = { { 17, aFont2Num0Tex, 8, 8, 0x37 }, { 0 } };
+unk_80077D50 sFont2Num1CompTexInfo[] = { { 17, aFont2Num1Tex, 8, 8, 0x37 }, { 0 } };
+unk_80077D50 sFont2Num2CompTexInfo[] = { { 17, aFont2Num2Tex, 8, 8, 0x3B }, { 0 } };
+unk_80077D50 sFont2Num3CompTexInfo[] = { { 17, aFont2Num3Tex, 8, 8, 0x39 }, { 0 } };
+unk_80077D50 sFont2Num4CompTexInfo[] = { { 17, aFont2Num4Tex, 8, 8, 0x3D }, { 0 } };
+unk_80077D50 sFont2Num5CompTexInfo[] = { { 17, aFont2Num5Tex, 8, 8, 0x39 }, { 0 } };
+unk_80077D50 sFont2Num6CompTexInfo[] = { { 17, aFont2Num6Tex, 8, 8, 0x3C }, { 0 } };
+unk_80077D50 sFont2Num7CompTexInfo[] = { { 17, aFont2Num7Tex, 8, 8, 0x31 }, { 0 } };
+unk_80077D50 sFont2Num8CompTexInfo[] = { { 17, aFont2Num8Tex, 8, 8, 0x38 }, { 0 } };
+unk_80077D50 sFont2Num9CompTexInfo[] = { { 17, aFont2Num9Tex, 8, 8, 0x3B }, { 0 } };
 
-unk_80077D50* D_i2_80107AF0[] = {
-    D_i2_801075B0, D_i2_801075D0, D_i2_801075F0, D_i2_80107610, D_i2_80107630, D_i2_80107650, D_i2_80107670,
-    D_i2_80107690, D_i2_801076B0, D_i2_801076D0, D_i2_801076F0, D_i2_80107710, D_i2_80107730, D_i2_80107750,
-    D_i2_80107770, D_i2_80107790, D_i2_801077B0, D_i2_801077D0, D_i2_801077F0, D_i2_80107810, D_i2_80107830,
-    D_i2_80107850, D_i2_80107870, D_i2_80107890, D_i2_801078B0, D_i2_801078D0, D_i2_80107930, D_i2_80107930,
-    D_i2_80107990, D_i2_80107930, D_i2_80107950, D_i2_80107970, D_i2_801079B0, D_i2_801079D0, D_i2_801079F0,
-    D_i2_80107A10, D_i2_80107A30, D_i2_80107A50, D_i2_80107A70, D_i2_80107A90, D_i2_80107AB0, D_i2_80107AD0,
-    D_i2_80107910, D_i2_80107910, D_i2_80107910, D_i2_801078F0, D_i2_801078F0, D_i2_801078F0,
+unk_80077D50* sFont2CompTexInfos[] = {
+    sFont2ACompTexInfo,         sFont2BCompTexInfo,     sFont2CCompTexInfo,      sFont2DCompTexInfo,
+    sFont2ECompTexInfo,         sFont2FCompTexInfo,     sFont2GCompTexInfo,      sFont2HCompTexInfo,
+    sFont2ICompTexInfo,         sFont2JCompTexInfo,     sFont2KCompTexInfo,      sFont2LCompTexInfo,
+    sFont2MCompTexInfo,         sFont2NCompTexInfo,     sFont2OCompTexInfo,      sFont2PCompTexInfo,
+    sFont2QCompTexInfo,         sFont2RCompTexInfo,     sFont2SCompTexInfo,      sFont2TCompTexInfo,
+    sFont2UCompTexInfo,         sFont2VCompTexInfo,     sFont2WCompTexInfo,      sFont2XCompTexInfo,
+    sFont2YCompTexInfo,         sFont2ZCompTexInfo,     sFont2PrimeCompTexInfo,  sFont2PrimeCompTexInfo,
+    sFont2AmpersandCompTexInfo, sFont2PrimeCompTexInfo, sFont2DashCompTexInfo,   sFont2KgCompTexInfo,
+    sFont2Num0CompTexInfo,      sFont2Num1CompTexInfo,  sFont2Num2CompTexInfo,   sFont2Num3CompTexInfo,
+    sFont2Num4CompTexInfo,      sFont2Num5CompTexInfo,  sFont2Num6CompTexInfo,   sFont2Num7CompTexInfo,
+    sFont2Num8CompTexInfo,      sFont2Num9CompTexInfo,  sFont2PeriodCompTexInfo, sFont2PeriodCompTexInfo,
+    sFont2PeriodCompTexInfo,    sFont2CommaCompTexInfo, sFont2CommaCompTexInfo,  sFont2CommaCompTexInfo,
 };
 
-unk_80077D50 D_i2_80107BB0[] = { { 4, D_F123D34, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107BD0[] = { { 4, D_F123DB4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107BF0[] = { { 4, D_F123E34, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107C10[] = { { 4, D_F123EB4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107C30[] = { { 4, D_F123F34, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107C50[] = { { 4, D_F123FB4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107C70[] = { { 4, D_F124034, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107C90[] = { { 4, D_F1240B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107CB0[] = { { 4, D_F124134, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107CD0[] = { { 4, D_F1241B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107CF0[] = { { 4, D_F124234, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107D10[] = { { 4, D_F1242B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107D30[] = { { 4, D_F124334, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107D50[] = { { 4, D_F1243B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107D70[] = { { 4, D_F124434, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107D90[] = { { 4, D_F1244B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107DB0[] = { { 4, D_F124534, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107DD0[] = { { 4, D_F1245B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107DF0[] = { { 4, D_F124634, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107E10[] = { { 4, D_F1246B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107E30[] = { { 4, D_F124734, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107E50[] = { { 4, D_F1247B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107E70[] = { { 4, D_F124834, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107E90[] = { { 4, D_F1248B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107EB0[] = { { 4, D_F124934, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107ED0[] = { { 4, D_F1249B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107EF0[] = { { 4, D_F124A34, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107F10[] = { { 4, D_F124AB4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107F30[] = { { 4, D_F124B34, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107F50[] = { { 4, D_F124BB4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107F70[] = { { 4, D_F124C34, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107F90[] = { { 4, D_F124CB4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107FB0[] = { { 4, D_F124D34, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107FD0[] = { { 4, D_F124DB4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80107FF0[] = { { 4, D_F124E34, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80108010[] = { { 4, D_F124EB4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80108030[] = { { 4, D_F124F34, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80108050[] = { { 4, D_F124FB4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80108070[] = { { 4, D_F125034, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80108090[] = { { 4, D_F1250B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_801080B0[] = { { 4, D_F125134, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_801080D0[] = { { 4, D_F1251B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_801080F0[] = { { 4, D_F125234, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80108110[] = { { 4, D_F1252B4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80108130[] = { { 4, D_F125334, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80108150[] = { { 4, D_F1253B4, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3ACompTexInfo[] = { { 4, aFont3ATex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3BCompTexInfo[] = { { 4, aFont3BTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3CCompTexInfo[] = { { 4, aFont3CTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3DCompTexInfo[] = { { 4, aFont3DTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3ECompTexInfo[] = { { 4, aFont3ETex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3FCompTexInfo[] = { { 4, aFont3FTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3GCompTexInfo[] = { { 4, aFont3GTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3HCompTexInfo[] = { { 4, aFont3HTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3ICompTexInfo[] = { { 4, aFont3ITex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3JCompTexInfo[] = { { 4, aFont3JTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3KCompTexInfo[] = { { 4, aFont3KTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3LCompTexInfo[] = { { 4, aFont3LTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3MCompTexInfo[] = { { 4, aFont3MTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3NCompTexInfo[] = { { 4, aFont3NTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3OCompTexInfo[] = { { 4, aFont3OTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3PCompTexInfo[] = { { 4, aFont3PTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3QCompTexInfo[] = { { 4, aFont3QTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3RCompTexInfo[] = { { 4, aFont3RTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3SCompTexInfo[] = { { 4, aFont3STex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3TCompTexInfo[] = { { 4, aFont3TTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3UCompTexInfo[] = { { 4, aFont3UTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3VCompTexInfo[] = { { 4, aFont3VTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3WCompTexInfo[] = { { 4, aFont3WTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3XCompTexInfo[] = { { 4, aFont3XTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3YCompTexInfo[] = { { 4, aFont3YTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3ZCompTexInfo[] = { { 4, aFont3ZTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3AlphaCompTexInfo[] = { { 4, aFont3AlphaTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3BetaCompTexInfo[] = { { 4, aFont3BetaTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3GammaCompTexInfo[] = { { 4, aFont3GammaTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3PrimeCompTexInfo[] = { { 4, aFont3PrimeTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3EllipsisCompTexInfo[] = { { 4, aFont3EllipsisTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3ColonCompTexInfo[] = { { 4, aFont3ColonTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3PeriodCompTexInfo[] = { { 4, aFont3PeriodTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3AmpersandCompTexInfo[] = { { 4, aFont3AmpersandTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3CommaCompTexInfo[] = { { 4, aFont3CommaTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3DashCompTexInfo[] = { { 4, aFont3DashTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3Num0CompTexInfo[] = { { 4, aFont3Num0Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3Num1CompTexInfo[] = { { 4, aFont3Num1Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3Num2CompTexInfo[] = { { 4, aFont3Num2Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3Num3CompTexInfo[] = { { 4, aFont3Num3Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3Num4CompTexInfo[] = { { 4, aFont3Num4Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3Num5CompTexInfo[] = { { 4, aFont3Num5Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3Num6CompTexInfo[] = { { 4, aFont3Num6Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3Num7CompTexInfo[] = { { 4, aFont3Num7Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3Num8CompTexInfo[] = { { 4, aFont3Num8Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont3Num9CompTexInfo[] = { { 4, aFont3Num9Tex, 16, 16, 0 }, { 0 } };
 
-unk_80077D50* D_i2_80108170[] = {
-    D_i2_80107BB0, D_i2_80107BD0, D_i2_80107BF0, D_i2_80107C10, D_i2_80107C30, D_i2_80107C50, D_i2_80107C70,
-    D_i2_80107C90, D_i2_80107CB0, D_i2_80107CD0, D_i2_80107CF0, D_i2_80107D10, D_i2_80107D30, D_i2_80107D50,
-    D_i2_80107D70, D_i2_80107D90, D_i2_80107DB0, D_i2_80107DD0, D_i2_80107DF0, D_i2_80107E10, D_i2_80107E30,
-    D_i2_80107E50, D_i2_80107E70, D_i2_80107E90, D_i2_80107EB0, D_i2_80107ED0, D_i2_80107F50, D_i2_80107BB0,
-    D_i2_80107FD0, D_i2_80107BB0, D_i2_80108010, D_i2_80107BB0, D_i2_80108030, D_i2_80108050, D_i2_80108070,
-    D_i2_80108090, D_i2_801080B0, D_i2_801080D0, D_i2_801080F0, D_i2_80108110, D_i2_80108130, D_i2_80108150,
-    D_i2_80107F90, D_i2_80107FB0, D_i2_80107F70, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107FF0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107EF0, D_i2_80107F10,
-    D_i2_80107F30, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107F30, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
-    D_i2_80107BB0, D_i2_80107BB0, D_i2_80107BB0,
+unk_80077D50* sFont3CompTexInfos[] = {
+    sFont3ACompTexInfo,         sFont3BCompTexInfo,    sFont3CCompTexInfo,     sFont3DCompTexInfo,
+    sFont3ECompTexInfo,         sFont3FCompTexInfo,    sFont3GCompTexInfo,     sFont3HCompTexInfo,
+    sFont3ICompTexInfo,         sFont3JCompTexInfo,    sFont3KCompTexInfo,     sFont3LCompTexInfo,
+    sFont3MCompTexInfo,         sFont3NCompTexInfo,    sFont3OCompTexInfo,     sFont3PCompTexInfo,
+    sFont3QCompTexInfo,         sFont3RCompTexInfo,    sFont3SCompTexInfo,     sFont3TCompTexInfo,
+    sFont3UCompTexInfo,         sFont3VCompTexInfo,    sFont3WCompTexInfo,     sFont3XCompTexInfo,
+    sFont3YCompTexInfo,         sFont3ZCompTexInfo,    sFont3PrimeCompTexInfo, sFont3ACompTexInfo,
+    sFont3AmpersandCompTexInfo, sFont3ACompTexInfo,    sFont3DashCompTexInfo,  sFont3ACompTexInfo,
+    sFont3Num0CompTexInfo,      sFont3Num1CompTexInfo, sFont3Num2CompTexInfo,  sFont3Num3CompTexInfo,
+    sFont3Num4CompTexInfo,      sFont3Num5CompTexInfo, sFont3Num6CompTexInfo,  sFont3Num7CompTexInfo,
+    sFont3Num8CompTexInfo,      sFont3Num9CompTexInfo, sFont3ColonCompTexInfo, sFont3PeriodCompTexInfo,
+    sFont3EllipsisCompTexInfo,  sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3CommaCompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3AlphaCompTexInfo,     sFont3BetaCompTexInfo, sFont3GammaCompTexInfo, sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3GammaCompTexInfo, sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
+    sFont3ACompTexInfo,         sFont3ACompTexInfo,
 };
 
 //! @bug These textures actually have width 16 and height 8.
 // They instead should be cropped or reformatted rather than setting the width here
-unk_80077D50 D_i2_80108518[] = { { 4, D_F125434, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108538[] = { { 4, D_F125474, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108558[] = { { 4, D_F1254B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108578[] = { { 4, D_F1254F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108598[] = { { 4, D_F125534, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801085B8[] = { { 4, D_F125574, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801085D8[] = { { 4, D_F1255B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801085F8[] = { { 4, D_F1255F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108618[] = { { 4, D_F125634, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108638[] = { { 4, D_F125674, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108658[] = { { 4, D_F1256B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108678[] = { { 4, D_F1256F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108698[] = { { 4, D_F125734, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801086B8[] = { { 4, D_F125774, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801086D8[] = { { 4, D_F1257B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801086F8[] = { { 4, D_F1257F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108718[] = { { 4, D_F125834, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108738[] = { { 4, D_F125874, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108758[] = { { 4, D_F1258B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108778[] = { { 4, D_F1258F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108798[] = { { 4, D_F125934, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801087B8[] = { { 4, D_F125974, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801087D8[] = { { 4, D_F1259B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801087F8[] = { { 4, D_F1259F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108818[] = { { 4, D_F125A34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108838[] = { { 4, D_F125A74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108858[] = { { 4, D_F125AB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108878[] = { { 4, D_F125AF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108898[] = { { 4, D_F125B34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801088B8[] = { { 4, D_F125B74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801088D8[] = { { 4, D_F125BB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801088F8[] = { { 4, D_F125BF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108918[] = { { 4, D_F125C34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108938[] = { { 4, D_F125C74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108958[] = { { 4, D_F125CB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108978[] = { { 4, D_F125CF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108998[] = { { 4, D_F125D34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801089B8[] = { { 4, D_F125D74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801089D8[] = { { 4, D_F125DB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801089F8[] = { { 4, D_F125DF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108A18[] = { { 4, D_F125E34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108A38[] = { { 4, D_F125E74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108A58[] = { { 4, D_F125EB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108A78[] = { { 4, D_F125EF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108A98[] = { { 4, D_F125F34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108AB8[] = { { 4, D_F125F74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108AD8[] = { { 4, D_F125FB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108AF8[] = { { 4, D_F125FF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108B18[] = { { 4, D_F126034, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108B38[] = { { 4, D_F1260B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108B58[] = { { 4, D_F1260F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108B78[] = { { 4, D_F126074, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108B98[] = { { 4, D_F126134, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108BB8[] = { { 4, D_F126174, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108BD8[] = { { 4, D_F1261B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108BF8[] = { { 4, D_F1261F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108C18[] = { { 4, D_F126234, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108C38[] = { { 4, D_F126274, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108C58[] = { { 4, D_F1262B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108C78[] = { { 4, D_F1262F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108C98[] = { { 4, D_F126334, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108CB8[] = { { 4, D_F126374, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108CD8[] = { { 4, D_F1263B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108CF8[] = { { 4, D_F1263F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108D18[] = { { 4, D_F126434, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108D38[] = { { 4, D_F126474, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108D58[] = { { 4, D_F1264B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108D78[] = { { 4, D_F1264F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108D98[] = { { 4, D_F126534, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108DB8[] = { { 4, D_F126574, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108DD8[] = { { 4, D_F1265B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108DF8[] = { { 4, D_F1265F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108E18[] = { { 4, D_F126634, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108E38[] = { { 4, D_F126674, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108E58[] = { { 4, D_F1266B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108E78[] = { { 4, D_F1266F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108E98[] = { { 4, D_F126734, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108EB8[] = { { 4, D_F126774, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108ED8[] = { { 4, D_F1267B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108EF8[] = { { 4, D_F1267F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108F18[] = { { 4, D_F126834, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108F38[] = { { 4, D_F126874, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108F58[] = { { 4, D_F1268B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108F78[] = { { 4, D_F1268F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108F98[] = { { 4, D_F126934, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108FB8[] = { { 4, D_F126974, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108FD8[] = { { 4, D_F1269B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80108FF8[] = { { 4, D_F1269F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109018[] = { { 4, D_F126A34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109038[] = { { 4, D_F126A74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109058[] = { { 4, D_F126AB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109078[] = { { 4, D_F126AF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109098[] = { { 4, D_F126B34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801090B8[] = { { 4, D_F126B74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801090D8[] = { { 4, D_F126BB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801090F8[] = { { 4, D_F126BF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109118[] = { { 4, D_F126C34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109138[] = { { 4, D_F126C74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109158[] = { { 4, D_F126CB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109178[] = { { 4, D_F126CF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109198[] = { { 4, D_F126D34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801091B8[] = { { 4, D_F126D74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801091D8[] = { { 4, D_F126DB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801091F8[] = { { 4, D_F126DF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109218[] = { { 4, D_F126E34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109238[] = { { 4, D_F126E74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109258[] = { { 4, D_F126EB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109278[] = { { 4, D_F126EF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109298[] = { { 4, D_F126F34, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801092B8[] = { { 4, D_F126F74, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801092D8[] = { { 4, D_F126FB4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801092F8[] = { { 4, D_F126FF4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109318[] = { { 4, D_F127034, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109338[] = { { 4, D_F127074, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109358[] = { { 4, D_F1270B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109378[] = { { 4, D_F1270F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109398[] = { { 4, D_F127134, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801093B8[] = { { 4, D_F127174, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801093D8[] = { { 4, D_F1271B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801093F8[] = { { 4, D_F1271F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109418[] = { { 4, D_F127234, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109438[] = { { 4, D_F127274, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109458[] = { { 4, D_F127374, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109478[] = { { 4, D_F1273B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109498[] = { { 4, D_F1273F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801094B8[] = { { 4, D_F127434, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801094D8[] = { { 4, D_F1272B4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_801094F8[] = { { 4, D_F1272F4, 8, 8, 0 }, { 0 } };
-unk_80077D50 D_i2_80109518[] = { { 4, D_F127334, 16, 8, 0 }, { 0 } };
+unk_80077D50 sFont4ACompTexInfo[] = { { 4, aFont4ATex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4DCompTexInfo[] = { { 4, aFont4DTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4ECompTexInfo[] = { { 4, aFont4ETex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4MCompTexInfo[] = { { 4, aFont4MTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4AmpersandCompTexInfo[] = { { 4, aFont4AmpersandTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4BCompTexInfo[] = { { 4, aFont4BTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4CCompTexInfo[] = { { 4, aFont4CTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4FCompTexInfo[] = { { 4, aFont4FTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4GCompTexInfo[] = { { 4, aFont4GTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4HCompTexInfo[] = { { 4, aFont4HTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4ICompTexInfo[] = { { 4, aFont4ITex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4JCompTexInfo[] = { { 4, aFont4JTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KCompTexInfo[] = { { 4, aFont4KTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4LCompTexInfo[] = { { 4, aFont4LTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4NCompTexInfo[] = { { 4, aFont4NTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4OCompTexInfo[] = { { 4, aFont4OTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4PCompTexInfo[] = { { 4, aFont4PTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4QCompTexInfo[] = { { 4, aFont4QTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4RCompTexInfo[] = { { 4, aFont4RTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4SCompTexInfo[] = { { 4, aFont4STex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4TCompTexInfo[] = { { 4, aFont4TTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4UCompTexInfo[] = { { 4, aFont4UTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4VCompTexInfo[] = { { 4, aFont4VTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4WCompTexInfo[] = { { 4, aFont4WTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4XCompTexInfo[] = { { 4, aFont4XTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4YCompTexInfo[] = { { 4, aFont4YTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4ZCompTexInfo[] = { { 4, aFont4ZTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4LowerCCompTexInfo[] = { { 4, aFont4LowerCTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4LowerRCompTexInfo[] = { { 4, aFont4LowerRTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4LowerSCompTexInfo[] = { { 4, aFont4LowerSTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4PeriodCompTexInfo[] = { { 4, aFont4PeriodTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaACompTexInfo[] = { { 4, aFont4KatakanaATex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaICompTexInfo[] = { { 4, aFont4KatakanaITex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaUCompTexInfo[] = { { 4, aFont4KatakanaUTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaECompTexInfo[] = { { 4, aFont4KatakanaETex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaOCompTexInfo[] = { { 4, aFont4KatakanaOTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaKaCompTexInfo[] = { { 4, aFont4KatakanaKaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaKiCompTexInfo[] = { { 4, aFont4KatakanaKiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaKuCompTexInfo[] = { { 4, aFont4KatakanaKuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaKeCompTexInfo[] = { { 4, aFont4KatakanaKeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaKoCompTexInfo[] = { { 4, aFont4KatakanaKoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaSaCompTexInfo[] = { { 4, aFont4KatakanaSaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaShiCompTexInfo[] = { { 4, aFont4KatakanaShiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaSuCompTexInfo[] = { { 4, aFont4KatakanaSuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaSeCompTexInfo[] = { { 4, aFont4KatakanaSeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaSoCompTexInfo[] = { { 4, aFont4KatakanaSoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaTaCompTexInfo[] = { { 4, aFont4KatakanaTaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaChiCompTexInfo[] = { { 4, aFont4KatakanaChiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaTsuCompTexInfo[] = { { 4, aFont4KatakanaTsuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaTeCompTexInfo[] = { { 4, aFont4KatakanaTeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaToCompTexInfo[] = { { 4, aFont4KatakanaToTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaSoukonCompTexInfo[] = { { 4, aFont4KatakanaSoukonTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaNaCompTexInfo[] = { { 4, aFont4KatakanaNaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaNiCompTexInfo[] = { { 4, aFont4KatakanaNiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaNuCompTexInfo[] = { { 4, aFont4KatakanaNuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaNeCompTexInfo[] = { { 4, aFont4KatakanaNeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaNoCompTexInfo[] = { { 4, aFont4KatakanaNoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaHaCompTexInfo[] = { { 4, aFont4KatakanaHaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaHiCompTexInfo[] = { { 4, aFont4KatakanaHiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaFuCompTexInfo[] = { { 4, aFont4KatakanaFuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaHeCompTexInfo[] = { { 4, aFont4KatakanaHeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaHoCompTexInfo[] = { { 4, aFont4KatakanaHoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaMaCompTexInfo[] = { { 4, aFont4KatakanaMaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaMiCompTexInfo[] = { { 4, aFont4KatakanaMiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaMuCompTexInfo[] = { { 4, aFont4KatakanaMuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaMeCompTexInfo[] = { { 4, aFont4KatakanaMeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaMoCompTexInfo[] = { { 4, aFont4KatakanaMoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaYaCompTexInfo[] = { { 4, aFont4KatakanaYaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaYuCompTexInfo[] = { { 4, aFont4KatakanaYuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaYoCompTexInfo[] = { { 4, aFont4KatakanaYoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaYoonYaCompTexInfo[] = { { 4, aFont4KatakanaYoonYaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaYoonYuCompTexInfo[] = { { 4, aFont4KatakanaYoonYuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaYoonYoCompTexInfo[] = { { 4, aFont4KatakanaYoonYoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaRaCompTexInfo[] = { { 4, aFont4KatakanaRaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaRiCompTexInfo[] = { { 4, aFont4KatakanaRiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaRuCompTexInfo[] = { { 4, aFont4KatakanaRuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaReCompTexInfo[] = { { 4, aFont4KatakanaReTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaRoCompTexInfo[] = { { 4, aFont4KatakanaRoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaWaCompTexInfo[] = { { 4, aFont4KatakanaWaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaWoCompTexInfo[] = { { 4, aFont4KatakanaWoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaNCompTexInfo[] = { { 4, aFont4KatakanaNTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaGaCompTexInfo[] = { { 4, aFont4KatakanaGaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaGiCompTexInfo[] = { { 4, aFont4KatakanaGiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaGuCompTexInfo[] = { { 4, aFont4KatakanaGuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaGeCompTexInfo[] = { { 4, aFont4KatakanaGeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaGoCompTexInfo[] = { { 4, aFont4KatakanaGoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaZaCompTexInfo[] = { { 4, aFont4KatakanaZaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaJiCompTexInfo[] = { { 4, aFont4KatakanaJiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaZuCompTexInfo[] = { { 4, aFont4KatakanaZuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaZeCompTexInfo[] = { { 4, aFont4KatakanaZeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaZoCompTexInfo[] = { { 4, aFont4KatakanaZoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaDaCompTexInfo[] = { { 4, aFont4KatakanaDaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaDjiCompTexInfo[] = { { 4, aFont4KatakanaDjiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaDzuCompTexInfo[] = { { 4, aFont4KatakanaDzuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaDeCompTexInfo[] = { { 4, aFont4KatakanaDeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaDoCompTexInfo[] = { { 4, aFont4KatakanaDoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaBaCompTexInfo[] = { { 4, aFont4KatakanaBaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaBiCompTexInfo[] = { { 4, aFont4KatakanaBiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaBuCompTexInfo[] = { { 4, aFont4KatakanaBuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaBeCompTexInfo[] = { { 4, aFont4KatakanaBeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaBoCompTexInfo[] = { { 4, aFont4KatakanaBoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaPaCompTexInfo[] = { { 4, aFont4KatakanaPaTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaPiCompTexInfo[] = { { 4, aFont4KatakanaPiTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaPuCompTexInfo[] = { { 4, aFont4KatakanaPuTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaPeCompTexInfo[] = { { 4, aFont4KatakanaPeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaPoCompTexInfo[] = { { 4, aFont4KatakanaPoTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaDigraphACompTexInfo[] = { { 4, aFont4KatakanaDigraphATex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaDigraphICompTexInfo[] = { { 4, aFont4KatakanaDigraphITex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4KatakanaDigraphECompTexInfo[] = { { 4, aFont4KatakanaDigraphETex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4DashCompTexInfo[] = { { 4, aFont4DashTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4Num0CompTexInfo[] = { { 4, aFont4Num0Tex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4Num1CompTexInfo[] = { { 4, aFont4Num1Tex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4Num2CompTexInfo[] = { { 4, aFont4Num2Tex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4Num3CompTexInfo[] = { { 4, aFont4Num3Tex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4Num4CompTexInfo[] = { { 4, aFont4Num4Tex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4Num5CompTexInfo[] = { { 4, aFont4Num5Tex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4Num6CompTexInfo[] = { { 4, aFont4Num6Tex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4Num7CompTexInfo[] = { { 4, aFont4Num7Tex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4Num8CompTexInfo[] = { { 4, aFont4Num8Tex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4Num9CompTexInfo[] = { { 4, aFont4Num9Tex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4PrimeCompTexInfo[] = { { 4, aFont4PrimeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4DoublePrimeCompTexInfo[] = { { 4, aFont4DoublePrimeTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4STCompTexInfo[] = { { 4, aFont4STTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4NDCompTexInfo[] = { { 4, aFont4NDTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4RDCompTexInfo[] = { { 4, aFont4RDTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4THCompTexInfo[] = { { 4, aFont4THTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4PlusCompTexInfo[] = { { 4, aFont4PlusTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4MinusCompTexInfo[] = { { 4, aFont4MinusTex, 8, 8, 0 }, { 0 } };
+unk_80077D50 sFont4PointsCompTexInfo[] = { { 4, aFont4PointsTex, 16, 8, 0 }, { 0 } };
 
-unk_80077D50* D_i2_80109538[] = {
-    D_i2_80108518, D_i2_801085B8, D_i2_801085D8, D_i2_80108538, D_i2_80108558, D_i2_801085F8, D_i2_80108618,
-    D_i2_80108638, D_i2_80108658, D_i2_80108678, D_i2_80108698, D_i2_801086B8, D_i2_80108578, D_i2_801086D8,
-    D_i2_801086F8, D_i2_80108718, D_i2_80108738, D_i2_80108758, D_i2_80108778, D_i2_80108798, D_i2_801087B8,
-    D_i2_801087D8, D_i2_801087F8, D_i2_80108818, D_i2_80108838, D_i2_80108858, D_i2_80109418, D_i2_80109438,
-    D_i2_80108598, D_i2_801094D8, D_i2_801094F8, D_i2_80109518, D_i2_801092D8, D_i2_801092F8, D_i2_80109318,
-    D_i2_80109338, D_i2_80109358, D_i2_80109378, D_i2_80109398, D_i2_801093B8, D_i2_801093D8, D_i2_801093F8,
-    D_i2_80108518, D_i2_801088D8, D_i2_80108518, D_i2_80108518, D_i2_80108518, D_i2_80108518, D_i2_80109258,
-    D_i2_801088F8, D_i2_80108878, D_i2_80108918, D_i2_80108938, D_i2_80108938, D_i2_80109298, D_i2_80108958,
-    D_i2_80108978, D_i2_80108978, D_i2_80108998, D_i2_80108F38, D_i2_801089B8, D_i2_80108F58, D_i2_801089D8,
-    D_i2_80108F78, D_i2_801089F8, D_i2_80108898, D_i2_801088B8, D_i2_80108FB8, D_i2_80108A38, D_i2_80108FD8,
-    D_i2_80108A58, D_i2_80108FF8, D_i2_80108A78, D_i2_80109018, D_i2_80108A98, D_i2_80109038, D_i2_80108AB8,
-    D_i2_80109058, D_i2_80108AD8, D_i2_80109078, D_i2_80108AF8, D_i2_80109098, D_i2_80108B78, D_i2_80108B18,
-    D_i2_801090B8, D_i2_80108B38, D_i2_801090D8, D_i2_80108B58, D_i2_801090F8, D_i2_80108B98, D_i2_80108BB8,
-    D_i2_80108BD8, D_i2_80108BF8, D_i2_80108C18, D_i2_80108C38, D_i2_80109118, D_i2_801091B8, D_i2_80108C58,
-    D_i2_80109138, D_i2_801091D8, D_i2_80108C78, D_i2_80109158, D_i2_801091F8, D_i2_80108C98, D_i2_80109178,
-    D_i2_80109218, D_i2_80108CB8, D_i2_80109198, D_i2_80109238, D_i2_80108CD8, D_i2_80108CF8, D_i2_80108D18,
-    D_i2_80108D38, D_i2_80108D58, D_i2_80108DD8, D_i2_80108D78, D_i2_80108DF8, D_i2_80108D98, D_i2_80108E18,
-    D_i2_80108DB8, D_i2_80108E38, D_i2_80108E58, D_i2_80108E78, D_i2_80108E98, D_i2_80108EB8, D_i2_80108ED8,
-    D_i2_80108EF8, D_i2_80108F18, D_i2_80109258, D_i2_801088F8, D_i2_80109278, D_i2_80108918, D_i2_80108938,
-    D_i2_80108938, D_i2_80109298, D_i2_80108958, D_i2_80108978, D_i2_80108978, D_i2_80108998, D_i2_80108F38,
-    D_i2_801089B8, D_i2_80108F58, D_i2_801089D8, D_i2_80108F78, D_i2_801089F8, D_i2_80108F98, D_i2_80108A18,
-    D_i2_80108FB8, D_i2_80108A38, D_i2_80108FD8, D_i2_80108A58, D_i2_80108FF8, D_i2_80108A78, D_i2_80109018,
-    D_i2_80108A98, D_i2_80109038, D_i2_80108AB8, D_i2_80109058, D_i2_80108AD8, D_i2_80109078, D_i2_80108AF8,
-    D_i2_80109098, D_i2_80108B78, D_i2_80108B18, D_i2_801090B8, D_i2_80108B38, D_i2_801090D8, D_i2_80108B58,
-    D_i2_801090F8, D_i2_80108B98, D_i2_80108BB8, D_i2_80108BD8, D_i2_80108BF8, D_i2_80108C18, D_i2_80108C38,
-    D_i2_80109118, D_i2_801091B8, D_i2_80108C58, D_i2_80109138, D_i2_801091D8, D_i2_80108C78, D_i2_80109158,
-    D_i2_801091F8, D_i2_80108C98, D_i2_80109178, D_i2_80109218, D_i2_80108CB8, D_i2_80109198, D_i2_80109238,
-    D_i2_80108CD8, D_i2_80108CF8, D_i2_80108D18, D_i2_80108D38, D_i2_80108D58, D_i2_80108DD8, D_i2_80108D78,
-    D_i2_80108DF8, D_i2_80108D98, D_i2_80108E18, D_i2_80108DB8, D_i2_80108E38, D_i2_80108E58, D_i2_80108E78,
-    D_i2_80108E98, D_i2_80108EB8, D_i2_80108ED8, D_i2_80108EF8, D_i2_80108F18, D_i2_80108518, D_i2_80108518,
-    D_i2_80108518, D_i2_80108518, D_i2_80108518, D_i2_80108518, D_i2_80108518, D_i2_80108518, D_i2_80108518,
-    D_i2_80108518, D_i2_80108518, D_i2_80108518, D_i2_80108518, D_i2_80109478, D_i2_80108518, D_i2_80108518,
-    D_i2_80108518, D_i2_80109498, D_i2_80109458, D_i2_801094B8, D_i2_80108518, D_i2_80108518, D_i2_80108518,
-    D_i2_80108518, D_i2_80108518, D_i2_80108518, D_i2_801092B8,
+unk_80077D50* sFont4CompTexInfos[] = {
+    sFont4ACompTexInfo,
+    sFont4BCompTexInfo,
+    sFont4CCompTexInfo,
+    sFont4DCompTexInfo,
+    sFont4ECompTexInfo,
+    sFont4FCompTexInfo,
+    sFont4GCompTexInfo,
+    sFont4HCompTexInfo,
+    sFont4ICompTexInfo,
+    sFont4JCompTexInfo,
+    sFont4KCompTexInfo,
+    sFont4LCompTexInfo,
+    sFont4MCompTexInfo,
+    sFont4NCompTexInfo,
+    sFont4OCompTexInfo,
+    sFont4PCompTexInfo,
+    sFont4QCompTexInfo,
+    sFont4RCompTexInfo,
+    sFont4SCompTexInfo,
+    sFont4TCompTexInfo,
+    sFont4UCompTexInfo,
+    sFont4VCompTexInfo,
+    sFont4WCompTexInfo,
+    sFont4XCompTexInfo,
+    sFont4YCompTexInfo,
+    sFont4ZCompTexInfo,
+    sFont4PrimeCompTexInfo,
+    sFont4DoublePrimeCompTexInfo,
+    sFont4AmpersandCompTexInfo,
+    sFont4PlusCompTexInfo,
+    sFont4MinusCompTexInfo,
+    sFont4PointsCompTexInfo,
+    sFont4Num0CompTexInfo,
+    sFont4Num1CompTexInfo,
+    sFont4Num2CompTexInfo,
+    sFont4Num3CompTexInfo,
+    sFont4Num4CompTexInfo,
+    sFont4Num5CompTexInfo,
+    sFont4Num6CompTexInfo,
+    sFont4Num7CompTexInfo,
+    sFont4Num8CompTexInfo,
+    sFont4Num9CompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4PeriodCompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4KatakanaDigraphACompTexInfo,
+    sFont4KatakanaACompTexInfo,
+    sFont4LowerCCompTexInfo,
+    sFont4KatakanaICompTexInfo,
+    sFont4KatakanaUCompTexInfo,
+    sFont4KatakanaUCompTexInfo,
+    sFont4KatakanaDigraphECompTexInfo,
+    sFont4KatakanaECompTexInfo,
+    sFont4KatakanaOCompTexInfo,
+    sFont4KatakanaOCompTexInfo,
+    sFont4KatakanaKaCompTexInfo,
+    sFont4KatakanaGaCompTexInfo,
+    sFont4KatakanaKiCompTexInfo,
+    sFont4KatakanaGiCompTexInfo,
+    sFont4KatakanaKuCompTexInfo,
+    sFont4KatakanaGuCompTexInfo,
+    sFont4KatakanaKeCompTexInfo,
+    sFont4LowerRCompTexInfo,
+    sFont4LowerSCompTexInfo,
+    sFont4KatakanaGoCompTexInfo,
+    sFont4KatakanaSaCompTexInfo,
+    sFont4KatakanaZaCompTexInfo,
+    sFont4KatakanaShiCompTexInfo,
+    sFont4KatakanaJiCompTexInfo,
+    sFont4KatakanaSuCompTexInfo,
+    sFont4KatakanaZuCompTexInfo,
+    sFont4KatakanaSeCompTexInfo,
+    sFont4KatakanaZeCompTexInfo,
+    sFont4KatakanaSoCompTexInfo,
+    sFont4KatakanaZoCompTexInfo,
+    sFont4KatakanaTaCompTexInfo,
+    sFont4KatakanaDaCompTexInfo,
+    sFont4KatakanaChiCompTexInfo,
+    sFont4KatakanaDjiCompTexInfo,
+    sFont4KatakanaSoukonCompTexInfo,
+    sFont4KatakanaTsuCompTexInfo,
+    sFont4KatakanaDzuCompTexInfo,
+    sFont4KatakanaTeCompTexInfo,
+    sFont4KatakanaDeCompTexInfo,
+    sFont4KatakanaToCompTexInfo,
+    sFont4KatakanaDoCompTexInfo,
+    sFont4KatakanaNaCompTexInfo,
+    sFont4KatakanaNiCompTexInfo,
+    sFont4KatakanaNuCompTexInfo,
+    sFont4KatakanaNeCompTexInfo,
+    sFont4KatakanaNoCompTexInfo,
+    sFont4KatakanaHaCompTexInfo,
+    sFont4KatakanaBaCompTexInfo,
+    sFont4KatakanaPaCompTexInfo,
+    sFont4KatakanaHiCompTexInfo,
+    sFont4KatakanaBiCompTexInfo,
+    sFont4KatakanaPiCompTexInfo,
+    sFont4KatakanaFuCompTexInfo,
+    sFont4KatakanaBuCompTexInfo,
+    sFont4KatakanaPuCompTexInfo,
+    sFont4KatakanaHeCompTexInfo,
+    sFont4KatakanaBeCompTexInfo,
+    sFont4KatakanaPeCompTexInfo,
+    sFont4KatakanaHoCompTexInfo,
+    sFont4KatakanaBoCompTexInfo,
+    sFont4KatakanaPoCompTexInfo,
+    sFont4KatakanaMaCompTexInfo,
+    sFont4KatakanaMiCompTexInfo,
+    sFont4KatakanaMuCompTexInfo,
+    sFont4KatakanaMeCompTexInfo,
+    sFont4KatakanaMoCompTexInfo,
+    sFont4KatakanaYoonYaCompTexInfo,
+    sFont4KatakanaYaCompTexInfo,
+    sFont4KatakanaYoonYuCompTexInfo,
+    sFont4KatakanaYuCompTexInfo,
+    sFont4KatakanaYoonYoCompTexInfo,
+    sFont4KatakanaYoCompTexInfo,
+    sFont4KatakanaRaCompTexInfo,
+    sFont4KatakanaRiCompTexInfo,
+    sFont4KatakanaRuCompTexInfo,
+    sFont4KatakanaReCompTexInfo,
+    sFont4KatakanaRoCompTexInfo,
+    sFont4KatakanaWaCompTexInfo,
+    sFont4KatakanaWoCompTexInfo,
+    sFont4KatakanaNCompTexInfo,
+    sFont4KatakanaDigraphACompTexInfo,
+    sFont4KatakanaACompTexInfo,
+    sFont4KatakanaDigraphICompTexInfo,
+    sFont4KatakanaICompTexInfo,
+    sFont4KatakanaUCompTexInfo,
+    sFont4KatakanaUCompTexInfo,
+    sFont4KatakanaDigraphECompTexInfo,
+    sFont4KatakanaECompTexInfo,
+    sFont4KatakanaOCompTexInfo,
+    sFont4KatakanaOCompTexInfo,
+    sFont4KatakanaKaCompTexInfo,
+    sFont4KatakanaGaCompTexInfo,
+    sFont4KatakanaKiCompTexInfo,
+    sFont4KatakanaGiCompTexInfo,
+    sFont4KatakanaKuCompTexInfo,
+    sFont4KatakanaGuCompTexInfo,
+    sFont4KatakanaKeCompTexInfo,
+    sFont4KatakanaGeCompTexInfo,
+    sFont4KatakanaKoCompTexInfo,
+    sFont4KatakanaGoCompTexInfo,
+    sFont4KatakanaSaCompTexInfo,
+    sFont4KatakanaZaCompTexInfo,
+    sFont4KatakanaShiCompTexInfo,
+    sFont4KatakanaJiCompTexInfo,
+    sFont4KatakanaSuCompTexInfo,
+    sFont4KatakanaZuCompTexInfo,
+    sFont4KatakanaSeCompTexInfo,
+    sFont4KatakanaZeCompTexInfo,
+    sFont4KatakanaSoCompTexInfo,
+    sFont4KatakanaZoCompTexInfo,
+    sFont4KatakanaTaCompTexInfo,
+    sFont4KatakanaDaCompTexInfo,
+    sFont4KatakanaChiCompTexInfo,
+    sFont4KatakanaDjiCompTexInfo,
+    sFont4KatakanaSoukonCompTexInfo,
+    sFont4KatakanaTsuCompTexInfo,
+    sFont4KatakanaDzuCompTexInfo,
+    sFont4KatakanaTeCompTexInfo,
+    sFont4KatakanaDeCompTexInfo,
+    sFont4KatakanaToCompTexInfo,
+    sFont4KatakanaDoCompTexInfo,
+    sFont4KatakanaNaCompTexInfo,
+    sFont4KatakanaNiCompTexInfo,
+    sFont4KatakanaNuCompTexInfo,
+    sFont4KatakanaNeCompTexInfo,
+    sFont4KatakanaNoCompTexInfo,
+    sFont4KatakanaHaCompTexInfo,
+    sFont4KatakanaBaCompTexInfo,
+    sFont4KatakanaPaCompTexInfo,
+    sFont4KatakanaHiCompTexInfo,
+    sFont4KatakanaBiCompTexInfo,
+    sFont4KatakanaPiCompTexInfo,
+    sFont4KatakanaFuCompTexInfo,
+    sFont4KatakanaBuCompTexInfo,
+    sFont4KatakanaPuCompTexInfo,
+    sFont4KatakanaHeCompTexInfo,
+    sFont4KatakanaBeCompTexInfo,
+    sFont4KatakanaPeCompTexInfo,
+    sFont4KatakanaHoCompTexInfo,
+    sFont4KatakanaBoCompTexInfo,
+    sFont4KatakanaPoCompTexInfo,
+    sFont4KatakanaMaCompTexInfo,
+    sFont4KatakanaMiCompTexInfo,
+    sFont4KatakanaMuCompTexInfo,
+    sFont4KatakanaMeCompTexInfo,
+    sFont4KatakanaMoCompTexInfo,
+    sFont4KatakanaYoonYaCompTexInfo,
+    sFont4KatakanaYaCompTexInfo,
+    sFont4KatakanaYoonYuCompTexInfo,
+    sFont4KatakanaYuCompTexInfo,
+    sFont4KatakanaYoonYoCompTexInfo,
+    sFont4KatakanaYoCompTexInfo,
+    sFont4KatakanaRaCompTexInfo,
+    sFont4KatakanaRiCompTexInfo,
+    sFont4KatakanaRuCompTexInfo,
+    sFont4KatakanaReCompTexInfo,
+    sFont4KatakanaRoCompTexInfo,
+    sFont4KatakanaWaCompTexInfo,
+    sFont4KatakanaWoCompTexInfo,
+    sFont4KatakanaNCompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4NDCompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4RDCompTexInfo,
+    sFont4STCompTexInfo,
+    sFont4THCompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4DashCompTexInfo,
 };
 
-unk_80077D50 D_i2_801098E4[] = { { 4, D_F127474, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109904[] = { { 4, D_F1274F4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109924[] = { { 4, D_F127574, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109944[] = { { 4, D_F1275F4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109964[] = { { 4, D_F127674, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109984[] = { { 4, D_F1276F4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_801099A4[] = { { 4, D_F127774, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_801099C4[] = { { 4, D_F1277F4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_801099E4[] = { { 4, D_F127874, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109A04[] = { { 4, D_F1278F4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109A24[] = { { 4, D_F127974, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109A44[] = { { 4, D_F1279F4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109A64[] = { { 4, D_F127A74, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109A84[] = { { 4, D_F127AF4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109AA4[] = { { 4, D_F127B74, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109AC4[] = { { 4, D_F127BF4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109AE4[] = { { 4, D_F127C74, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109B04[] = { { 4, D_F127CF4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109B24[] = { { 4, D_F127DF4, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109B44[] = { { 4, D_F127E74, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109B64[] = { { 4, D_F1284CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109B84[] = { { 20, D_F127D78, 32, 16, 0x7B }, { 0 } };
-unk_80077D50 D_i2_80109BA4[] = { { 20, D_F127EF8, 80, 16, 0x16C }, { 0 } };
-unk_80077D50 D_i2_80109BC4[] = { { 20, D_F128068, 80, 16, 0x1C8 }, { 0 } };
-unk_80077D50 D_i2_80109BE4[] = { { 20, D_F128234, 96, 16, 0x1D2 }, { 0 } };
-unk_80077D50 D_i2_80109C04[] = { { 20, D_F12840C, 32, 16, 0xC0 }, { 0 } };
+unk_80077D50 sFont5Num0CompTexInfo[] = { { 4, aFont5Num0Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5Num1CompTexInfo[] = { { 4, aFont5Num1Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5Num2CompTexInfo[] = { { 4, aFont5Num2Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5Num3CompTexInfo[] = { { 4, aFont5Num3Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5Num4CompTexInfo[] = { { 4, aFont5Num4Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5Num5CompTexInfo[] = { { 4, aFont5Num5Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5Num6CompTexInfo[] = { { 4, aFont5Num6Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5Num7CompTexInfo[] = { { 4, aFont5Num7Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5Num8CompTexInfo[] = { { 4, aFont5Num8Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5Num9CompTexInfo[] = { { 4, aFont5Num9Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5VCompTexInfo[] = { { 4, aFont5VTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5OpenParenthesisCompTexInfo[] = { { 4, aFont5OpenParenthesisTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5CloseParenthesisCompTexInfo[] = { { 4, aFont5CloseParenthesisTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5STCompTexInfo[] = { { 4, aFont5STTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5NDCompTexInfo[] = { { 4, aFont5NDTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5RDCompTexInfo[] = { { 4, aFont5RDTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5THCompTexInfo[] = { { 4, aFont5THTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5PlusCompTexInfo[] = { { 4, aFont5PlusTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5UpArrowCompTexInfo[] = { { 4, aFont5UpArrowTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5DownArrowCompTexInfo[] = { { 4, aFont5DownArrowTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5SideArrowCompTexInfo[] = { { 4, aFont5SideArrowTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont5PointsCompTexInfo[] = { { 20, aFont5PointsTex, 32, 16, 0x7B }, { 0 } };
+unk_80077D50 sFont5PlayerCompTexInfo[] = { { 20, aFont5PlayerTex, 80, 16, 0x16C }, { 0 } };
+unk_80077D50 sFont5ComputerCompTexInfo[] = { { 20, aFont5ComputerTex, 80, 16, 0x1C8 }, { 0 } };
+unk_80077D50 sFont5SelectCourseCompTexInfo[] = { { 20, aFont5SelectCourseTex, 96, 16, 0x1D2 }, { 0 } };
+unk_80077D50 sFont5QuitCompTexInfo[] = { { 20, aFont5QuitTex, 32, 16, 0xC0 }, { 0 } };
 
-unk_80077D50* D_i2_80109C24[] = {
-    D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24,
-    D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24,
-    D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24,
-    D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109418, D_i2_80109438,
-    D_i2_80108598, D_i2_80109B04, D_i2_801094F8, D_i2_80109B84, D_i2_801098E4, D_i2_80109904, D_i2_80109924,
-    D_i2_80109944, D_i2_80109964, D_i2_80109984, D_i2_801099A4, D_i2_801099C4, D_i2_801099E4, D_i2_80109A04,
-    D_i2_80108518, D_i2_80108518, D_i2_80108518, D_i2_80109A44, D_i2_80109A64, D_i2_80108518, D_i2_80109258,
-    D_i2_801088F8, D_i2_80109278, D_i2_80108918, D_i2_80108938, D_i2_80108938, D_i2_80109298, D_i2_80108958,
-    D_i2_80108978, D_i2_80108978, D_i2_80108998, D_i2_80108F38, D_i2_801089B8, D_i2_80108F58, D_i2_801089D8,
-    D_i2_80108F78, D_i2_801089F8, D_i2_80108F98, D_i2_80108A18, D_i2_80108FB8, D_i2_80108A38, D_i2_80108FD8,
-    D_i2_80108A58, D_i2_80108FF8, D_i2_80108A78, D_i2_80109018, D_i2_80108A98, D_i2_80109038, D_i2_80108AB8,
-    D_i2_80109058, D_i2_80108AD8, D_i2_80109078, D_i2_80108AF8, D_i2_80109098, D_i2_80108B78, D_i2_80108B18,
-    D_i2_801090B8, D_i2_80108B38, D_i2_801090D8, D_i2_80108B58, D_i2_801090F8, D_i2_80108B98, D_i2_80108BB8,
-    D_i2_80108BD8, D_i2_80108BF8, D_i2_80108C18, D_i2_80108C38, D_i2_80109118, D_i2_801091B8, D_i2_80108C58,
-    D_i2_80109138, D_i2_801091D8, D_i2_80108C78, D_i2_80109158, D_i2_801091F8, D_i2_80108C98, D_i2_80109178,
-    D_i2_80109218, D_i2_80108CB8, D_i2_80109198, D_i2_80109238, D_i2_80108CD8, D_i2_80108CF8, D_i2_80108D18,
-    D_i2_80108D38, D_i2_80108D58, D_i2_80108DD8, D_i2_80108D78, D_i2_80108DF8, D_i2_80108D98, D_i2_80108E18,
-    D_i2_80108DB8, D_i2_80108E38, D_i2_80108E58, D_i2_80108E78, D_i2_80108E98, D_i2_80108EB8, D_i2_80108ED8,
-    D_i2_80108EF8, D_i2_80108F18, D_i2_80109258, D_i2_801088F8, D_i2_80109278, D_i2_80108918, D_i2_80108938,
-    D_i2_80108938, D_i2_80109298, D_i2_80108958, D_i2_80108978, D_i2_80108978, D_i2_80108998, D_i2_80108F38,
-    D_i2_801089B8, D_i2_80108F58, D_i2_801089D8, D_i2_80108F78, D_i2_801089F8, D_i2_80108F98, D_i2_80108A18,
-    D_i2_80108FB8, D_i2_80108A38, D_i2_80108FD8, D_i2_80108A58, D_i2_80108FF8, D_i2_80108A78, D_i2_80109018,
-    D_i2_80108A98, D_i2_80109038, D_i2_80108AB8, D_i2_80109058, D_i2_80108AD8, D_i2_80109078, D_i2_80108AF8,
-    D_i2_80109098, D_i2_80108B78, D_i2_80108B18, D_i2_801090B8, D_i2_80108B38, D_i2_801090D8, D_i2_80108B58,
-    D_i2_801090F8, D_i2_80108B98, D_i2_80108BB8, D_i2_80108BD8, D_i2_80108BF8, D_i2_80108C18, D_i2_80108C38,
-    D_i2_80109118, D_i2_801091B8, D_i2_80108C58, D_i2_80109138, D_i2_801091D8, D_i2_80108C78, D_i2_80109158,
-    D_i2_801091F8, D_i2_80108C98, D_i2_80109178, D_i2_80109218, D_i2_80108CB8, D_i2_80109198, D_i2_80109238,
-    D_i2_80108CD8, D_i2_80108CF8, D_i2_80108D18, D_i2_80108D38, D_i2_80108D58, D_i2_80108DD8, D_i2_80108D78,
-    D_i2_80108DF8, D_i2_80108D98, D_i2_80108E18, D_i2_80108DB8, D_i2_80108E38, D_i2_80108E58, D_i2_80108E78,
-    D_i2_80108E98, D_i2_80108EB8, D_i2_80108ED8, D_i2_80108EF8, D_i2_80108F18, D_i2_80109BC4, D_i2_80109A24,
-    D_i2_80109BE4, D_i2_80109B44, D_i2_80109C04, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24,
-    D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109B64, D_i2_80109AA4, D_i2_80109A24, D_i2_80109BA4,
-    D_i2_80109A24, D_i2_80109AC4, D_i2_80109A84, D_i2_80109AE4, D_i2_80109B24, D_i2_80109A24, D_i2_80109A24,
-    D_i2_80109A24, D_i2_80109A24, D_i2_80109A24, D_i2_80109A24,
+unk_80077D50* sFont5CompTexInfos[] = {
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont4PrimeCompTexInfo,
+    sFont4DoublePrimeCompTexInfo,
+    sFont4AmpersandCompTexInfo,
+    sFont5PlusCompTexInfo,
+    sFont4MinusCompTexInfo,
+    sFont5PointsCompTexInfo,
+    sFont5Num0CompTexInfo,
+    sFont5Num1CompTexInfo,
+    sFont5Num2CompTexInfo,
+    sFont5Num3CompTexInfo,
+    sFont5Num4CompTexInfo,
+    sFont5Num5CompTexInfo,
+    sFont5Num6CompTexInfo,
+    sFont5Num7CompTexInfo,
+    sFont5Num8CompTexInfo,
+    sFont5Num9CompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4ACompTexInfo,
+    sFont5OpenParenthesisCompTexInfo,
+    sFont5CloseParenthesisCompTexInfo,
+    sFont4ACompTexInfo,
+    sFont4KatakanaDigraphACompTexInfo,
+    sFont4KatakanaACompTexInfo,
+    sFont4KatakanaDigraphICompTexInfo,
+    sFont4KatakanaICompTexInfo,
+    sFont4KatakanaUCompTexInfo,
+    sFont4KatakanaUCompTexInfo,
+    sFont4KatakanaDigraphECompTexInfo,
+    sFont4KatakanaECompTexInfo,
+    sFont4KatakanaOCompTexInfo,
+    sFont4KatakanaOCompTexInfo,
+    sFont4KatakanaKaCompTexInfo,
+    sFont4KatakanaGaCompTexInfo,
+    sFont4KatakanaKiCompTexInfo,
+    sFont4KatakanaGiCompTexInfo,
+    sFont4KatakanaKuCompTexInfo,
+    sFont4KatakanaGuCompTexInfo,
+    sFont4KatakanaKeCompTexInfo,
+    sFont4KatakanaGeCompTexInfo,
+    sFont4KatakanaKoCompTexInfo,
+    sFont4KatakanaGoCompTexInfo,
+    sFont4KatakanaSaCompTexInfo,
+    sFont4KatakanaZaCompTexInfo,
+    sFont4KatakanaShiCompTexInfo,
+    sFont4KatakanaJiCompTexInfo,
+    sFont4KatakanaSuCompTexInfo,
+    sFont4KatakanaZuCompTexInfo,
+    sFont4KatakanaSeCompTexInfo,
+    sFont4KatakanaZeCompTexInfo,
+    sFont4KatakanaSoCompTexInfo,
+    sFont4KatakanaZoCompTexInfo,
+    sFont4KatakanaTaCompTexInfo,
+    sFont4KatakanaDaCompTexInfo,
+    sFont4KatakanaChiCompTexInfo,
+    sFont4KatakanaDjiCompTexInfo,
+    sFont4KatakanaSoukonCompTexInfo,
+    sFont4KatakanaTsuCompTexInfo,
+    sFont4KatakanaDzuCompTexInfo,
+    sFont4KatakanaTeCompTexInfo,
+    sFont4KatakanaDeCompTexInfo,
+    sFont4KatakanaToCompTexInfo,
+    sFont4KatakanaDoCompTexInfo,
+    sFont4KatakanaNaCompTexInfo,
+    sFont4KatakanaNiCompTexInfo,
+    sFont4KatakanaNuCompTexInfo,
+    sFont4KatakanaNeCompTexInfo,
+    sFont4KatakanaNoCompTexInfo,
+    sFont4KatakanaHaCompTexInfo,
+    sFont4KatakanaBaCompTexInfo,
+    sFont4KatakanaPaCompTexInfo,
+    sFont4KatakanaHiCompTexInfo,
+    sFont4KatakanaBiCompTexInfo,
+    sFont4KatakanaPiCompTexInfo,
+    sFont4KatakanaFuCompTexInfo,
+    sFont4KatakanaBuCompTexInfo,
+    sFont4KatakanaPuCompTexInfo,
+    sFont4KatakanaHeCompTexInfo,
+    sFont4KatakanaBeCompTexInfo,
+    sFont4KatakanaPeCompTexInfo,
+    sFont4KatakanaHoCompTexInfo,
+    sFont4KatakanaBoCompTexInfo,
+    sFont4KatakanaPoCompTexInfo,
+    sFont4KatakanaMaCompTexInfo,
+    sFont4KatakanaMiCompTexInfo,
+    sFont4KatakanaMuCompTexInfo,
+    sFont4KatakanaMeCompTexInfo,
+    sFont4KatakanaMoCompTexInfo,
+    sFont4KatakanaYoonYaCompTexInfo,
+    sFont4KatakanaYaCompTexInfo,
+    sFont4KatakanaYoonYuCompTexInfo,
+    sFont4KatakanaYuCompTexInfo,
+    sFont4KatakanaYoonYoCompTexInfo,
+    sFont4KatakanaYoCompTexInfo,
+    sFont4KatakanaRaCompTexInfo,
+    sFont4KatakanaRiCompTexInfo,
+    sFont4KatakanaRuCompTexInfo,
+    sFont4KatakanaReCompTexInfo,
+    sFont4KatakanaRoCompTexInfo,
+    sFont4KatakanaWaCompTexInfo,
+    sFont4KatakanaWoCompTexInfo,
+    sFont4KatakanaNCompTexInfo,
+    sFont4KatakanaDigraphACompTexInfo,
+    sFont4KatakanaACompTexInfo,
+    sFont4KatakanaDigraphICompTexInfo,
+    sFont4KatakanaICompTexInfo,
+    sFont4KatakanaUCompTexInfo,
+    sFont4KatakanaUCompTexInfo,
+    sFont4KatakanaDigraphECompTexInfo,
+    sFont4KatakanaECompTexInfo,
+    sFont4KatakanaOCompTexInfo,
+    sFont4KatakanaOCompTexInfo,
+    sFont4KatakanaKaCompTexInfo,
+    sFont4KatakanaGaCompTexInfo,
+    sFont4KatakanaKiCompTexInfo,
+    sFont4KatakanaGiCompTexInfo,
+    sFont4KatakanaKuCompTexInfo,
+    sFont4KatakanaGuCompTexInfo,
+    sFont4KatakanaKeCompTexInfo,
+    sFont4KatakanaGeCompTexInfo,
+    sFont4KatakanaKoCompTexInfo,
+    sFont4KatakanaGoCompTexInfo,
+    sFont4KatakanaSaCompTexInfo,
+    sFont4KatakanaZaCompTexInfo,
+    sFont4KatakanaShiCompTexInfo,
+    sFont4KatakanaJiCompTexInfo,
+    sFont4KatakanaSuCompTexInfo,
+    sFont4KatakanaZuCompTexInfo,
+    sFont4KatakanaSeCompTexInfo,
+    sFont4KatakanaZeCompTexInfo,
+    sFont4KatakanaSoCompTexInfo,
+    sFont4KatakanaZoCompTexInfo,
+    sFont4KatakanaTaCompTexInfo,
+    sFont4KatakanaDaCompTexInfo,
+    sFont4KatakanaChiCompTexInfo,
+    sFont4KatakanaDjiCompTexInfo,
+    sFont4KatakanaSoukonCompTexInfo,
+    sFont4KatakanaTsuCompTexInfo,
+    sFont4KatakanaDzuCompTexInfo,
+    sFont4KatakanaTeCompTexInfo,
+    sFont4KatakanaDeCompTexInfo,
+    sFont4KatakanaToCompTexInfo,
+    sFont4KatakanaDoCompTexInfo,
+    sFont4KatakanaNaCompTexInfo,
+    sFont4KatakanaNiCompTexInfo,
+    sFont4KatakanaNuCompTexInfo,
+    sFont4KatakanaNeCompTexInfo,
+    sFont4KatakanaNoCompTexInfo,
+    sFont4KatakanaHaCompTexInfo,
+    sFont4KatakanaBaCompTexInfo,
+    sFont4KatakanaPaCompTexInfo,
+    sFont4KatakanaHiCompTexInfo,
+    sFont4KatakanaBiCompTexInfo,
+    sFont4KatakanaPiCompTexInfo,
+    sFont4KatakanaFuCompTexInfo,
+    sFont4KatakanaBuCompTexInfo,
+    sFont4KatakanaPuCompTexInfo,
+    sFont4KatakanaHeCompTexInfo,
+    sFont4KatakanaBeCompTexInfo,
+    sFont4KatakanaPeCompTexInfo,
+    sFont4KatakanaHoCompTexInfo,
+    sFont4KatakanaBoCompTexInfo,
+    sFont4KatakanaPoCompTexInfo,
+    sFont4KatakanaMaCompTexInfo,
+    sFont4KatakanaMiCompTexInfo,
+    sFont4KatakanaMuCompTexInfo,
+    sFont4KatakanaMeCompTexInfo,
+    sFont4KatakanaMoCompTexInfo,
+    sFont4KatakanaYoonYaCompTexInfo,
+    sFont4KatakanaYaCompTexInfo,
+    sFont4KatakanaYoonYuCompTexInfo,
+    sFont4KatakanaYuCompTexInfo,
+    sFont4KatakanaYoonYoCompTexInfo,
+    sFont4KatakanaYoCompTexInfo,
+    sFont4KatakanaRaCompTexInfo,
+    sFont4KatakanaRiCompTexInfo,
+    sFont4KatakanaRuCompTexInfo,
+    sFont4KatakanaReCompTexInfo,
+    sFont4KatakanaRoCompTexInfo,
+    sFont4KatakanaWaCompTexInfo,
+    sFont4KatakanaWoCompTexInfo,
+    sFont4KatakanaNCompTexInfo,
+    sFont5ComputerCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5SelectCourseCompTexInfo,
+    sFont5DownArrowCompTexInfo,
+    sFont5QuitCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5SideArrowCompTexInfo,
+    sFont5NDCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5PlayerCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5RDCompTexInfo,
+    sFont5STCompTexInfo,
+    sFont5THCompTexInfo,
+    sFont5UpArrowCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
+    sFont5VCompTexInfo,
 };
 
-unk_80077D50 D_i2_80109FD0[] = { { 4, D_F128A4C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_80109FF0[] = { { 4, D_F128ACC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A010[] = { { 4, D_F128B4C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A030[] = { { 4, D_F128BCC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A050[] = { { 4, D_F128C4C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A070[] = { { 4, D_F128CCC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A090[] = { { 4, D_F128D4C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A0B0[] = { { 4, D_F128DCC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A0D0[] = { { 4, D_F128E4C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A0F0[] = { { 4, D_F128ECC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A110[] = { { 4, D_F128F4C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A130[] = { { 4, D_F128FCC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A150[] = { { 4, D_F12904C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A170[] = { { 4, D_F1290CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A190[] = { { 4, D_F12914C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A1B0[] = { { 4, D_F1291CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A1D0[] = { { 4, D_F12924C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A1F0[] = { { 4, D_F1292CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A210[] = { { 4, D_F12934C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A230[] = { { 4, D_F1293CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A250[] = { { 4, D_F12944C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A270[] = { { 4, D_F1294CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A290[] = { { 4, D_F12954C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A2B0[] = { { 4, D_F1295CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A2D0[] = { { 4, D_F12964C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A2F0[] = { { 4, D_F1296CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A310[] = { { 4, D_F12854C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A330[] = { { 4, D_F1285CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A350[] = { { 4, D_F12864C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A370[] = { { 4, D_F1286CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A390[] = { { 4, D_F12874C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A3B0[] = { { 4, D_F1287CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A3D0[] = { { 4, D_F12884C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A3F0[] = { { 4, D_F1288CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A410[] = { { 4, D_F12894C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A430[] = { { 4, D_F1289CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A450[] = { { 4, D_F12974C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A470[] = { { 4, D_F1297CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A490[] = { { 4, D_F12984C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A4B0[] = { { 4, D_F1298CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A4D0[] = { { 4, D_F12994C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A4F0[] = { { 4, D_F1299CC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A510[] = { { 4, D_F129A4C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A530[] = { { 4, D_F129ACC, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A550[] = { { 4, D_F129B4C, 16, 16, 0 }, { 0 } };
-unk_80077D50 D_i2_8010A570[] = { { 4, D_F129BCC, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6ACompTexInfo[] = { { 4, aFont6ATex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6BCompTexInfo[] = { { 4, aFont6BTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6CCompTexInfo[] = { { 4, aFont6CTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6DCompTexInfo[] = { { 4, aFont6DTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6ECompTexInfo[] = { { 4, aFont6ETex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6FCompTexInfo[] = { { 4, aFont6FTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6GCompTexInfo[] = { { 4, aFont6GTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6HCompTexInfo[] = { { 4, aFont6HTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6ICompTexInfo[] = { { 4, aFont6ITex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6JCompTexInfo[] = { { 4, aFont6JTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6KCompTexInfo[] = { { 4, aFont6KTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6LCompTexInfo[] = { { 4, aFont6LTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6MCompTexInfo[] = { { 4, aFont6MTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6NCompTexInfo[] = { { 4, aFont6NTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6OCompTexInfo[] = { { 4, aFont6OTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6PCompTexInfo[] = { { 4, aFont6PTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6QCompTexInfo[] = { { 4, aFont6QTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6RCompTexInfo[] = { { 4, aFont6RTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6SCompTexInfo[] = { { 4, aFont6STex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6TCompTexInfo[] = { { 4, aFont6TTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6UCompTexInfo[] = { { 4, aFont6UTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6VCompTexInfo[] = { { 4, aFont6VTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6WCompTexInfo[] = { { 4, aFont6WTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6XCompTexInfo[] = { { 4, aFont6XTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6YCompTexInfo[] = { { 4, aFont6YTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6ZCompTexInfo[] = { { 4, aFont6ZTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6Num0CompTexInfo[] = { { 4, aFont6Num0Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6Num1CompTexInfo[] = { { 4, aFont6Num1Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6Num2CompTexInfo[] = { { 4, aFont6Num2Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6Num3CompTexInfo[] = { { 4, aFont6Num3Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6Num4CompTexInfo[] = { { 4, aFont6Num4Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6Num5CompTexInfo[] = { { 4, aFont6Num5Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6Num6CompTexInfo[] = { { 4, aFont6Num6Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6Num7CompTexInfo[] = { { 4, aFont6Num7Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6Num8CompTexInfo[] = { { 4, aFont6Num8Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6Num9CompTexInfo[] = { { 4, aFont6Num9Tex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6AlphaCompTexInfo[] = { { 4, aFont6AlphaTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6BetaCompTexInfo[] = { { 4, aFont6BetaTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6HiraganaNiCompTexInfo[] = { { 4, aFont6HiraganaNiTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6AmpersandCompTexInfo[] = { { 4, aFont6AmpersandTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6CommaCompTexInfo[] = { { 4, aFont6CommaTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6DoublePrimeCompTexInfo[] = { { 4, aFont6DoublePrimeTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6DashCompTexInfo[] = { { 4, aFont6DashTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6PeriodCompTexInfo[] = { { 4, aFont6PeriodTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6PrimeCompTexInfo[] = { { 4, aFont6PrimeTex, 16, 16, 0 }, { 0 } };
+unk_80077D50 sFont6UnderscoreCompTexInfo[] = { { 4, aFont6UnderscoreTex, 16, 16, 0 }, { 0 } };
 
-unk_80077D50* D_i2_8010A590[] = {
-    D_i2_80109FD0, D_i2_80109FF0, D_i2_8010A010, D_i2_8010A030, D_i2_8010A050, D_i2_8010A070, D_i2_8010A090,
-    D_i2_8010A0B0, D_i2_8010A0D0, D_i2_8010A0F0, D_i2_8010A110, D_i2_8010A130, D_i2_8010A150, D_i2_8010A170,
-    D_i2_8010A190, D_i2_8010A1B0, D_i2_8010A1D0, D_i2_8010A1F0, D_i2_8010A210, D_i2_8010A230, D_i2_8010A250,
-    D_i2_8010A270, D_i2_8010A290, D_i2_8010A2B0, D_i2_8010A2D0, D_i2_8010A2F0, D_i2_8010A550, D_i2_8010A4F0,
-    D_i2_8010A4B0, D_i2_80109FD0, D_i2_8010A510, D_i2_80109FD0, D_i2_8010A310, D_i2_8010A330, D_i2_8010A350,
-    D_i2_8010A370, D_i2_8010A390, D_i2_8010A3B0, D_i2_8010A3D0, D_i2_8010A3F0, D_i2_8010A410, D_i2_8010A430,
-    D_i2_80109FD0, D_i2_8010A530, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_8010A4D0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_8010A490,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_8010A450, D_i2_8010A470,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
-    D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0, D_i2_80109FD0,
+unk_80077D50* sFont6CompTexInfos[] = {
+    sFont6ACompTexInfo,         sFont6BCompTexInfo,    sFont6CCompTexInfo,          sFont6DCompTexInfo,
+    sFont6ECompTexInfo,         sFont6FCompTexInfo,    sFont6GCompTexInfo,          sFont6HCompTexInfo,
+    sFont6ICompTexInfo,         sFont6JCompTexInfo,    sFont6KCompTexInfo,          sFont6LCompTexInfo,
+    sFont6MCompTexInfo,         sFont6NCompTexInfo,    sFont6OCompTexInfo,          sFont6PCompTexInfo,
+    sFont6QCompTexInfo,         sFont6RCompTexInfo,    sFont6SCompTexInfo,          sFont6TCompTexInfo,
+    sFont6UCompTexInfo,         sFont6VCompTexInfo,    sFont6WCompTexInfo,          sFont6XCompTexInfo,
+    sFont6YCompTexInfo,         sFont6ZCompTexInfo,    sFont6PrimeCompTexInfo,      sFont6DoublePrimeCompTexInfo,
+    sFont6AmpersandCompTexInfo, sFont6ACompTexInfo,    sFont6DashCompTexInfo,       sFont6ACompTexInfo,
+    sFont6Num0CompTexInfo,      sFont6Num1CompTexInfo, sFont6Num2CompTexInfo,       sFont6Num3CompTexInfo,
+    sFont6Num4CompTexInfo,      sFont6Num5CompTexInfo, sFont6Num6CompTexInfo,       sFont6Num7CompTexInfo,
+    sFont6Num8CompTexInfo,      sFont6Num9CompTexInfo, sFont6ACompTexInfo,          sFont6PeriodCompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6CommaCompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6HiraganaNiCompTexInfo, sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6AlphaCompTexInfo,     sFont6BetaCompTexInfo, sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
+    sFont6ACompTexInfo,
 };
 
-unk_80077D50 D_i2_8010A944[] = { { 17, D_F12296C, 16, 16, 0xB3 }, { 0 } };
-unk_80077D50 D_i2_8010A964[] = { { 17, D_F122A24, 16, 16, 0xBF }, { 0 } };
-unk_80077D50 D_i2_8010A984[] = { { 17, D_F122AE8, 16, 16, 0xB5 }, { 0 } };
-unk_80077D50 D_i2_8010A9A4[] = { { 17, D_F122BA4, 16, 16, 0xC9 }, { 0 } };
-unk_80077D50 D_i2_8010A9C4[] = { { 17, D_F122C74, 16, 16, 0x97 }, { 0 } };
+unk_80077D50 sMachineStatACompTexInfo[] = { { 17, aMachineStatATex, 16, 16, 0xB3 }, { 0 } };
+unk_80077D50 sMachineStatBCompTexInfo[] = { { 17, aMachineStatBTex, 16, 16, 0xBF }, { 0 } };
+unk_80077D50 sMachineStatCCompTexInfo[] = { { 17, aMachineStatCTex, 16, 16, 0xB5 }, { 0 } };
+unk_80077D50 sMachineStatDCompTexInfo[] = { { 17, aMachineStatDTex, 16, 16, 0xC9 }, { 0 } };
+unk_80077D50 sMachineStatECompTexInfo[] = { { 17, aMachineStatETex, 16, 16, 0x97 }, { 0 } };
 
-unk_80077D50* D_i2_8010A9E4[] = {
-    D_i2_8010A944, D_i2_8010A964, D_i2_8010A984, D_i2_8010A9A4, D_i2_8010A9C4,
+unk_80077D50* sMachineStatValueCompTexInfos[] = {
+    sMachineStatACompTexInfo, sMachineStatBCompTexInfo, sMachineStatCCompTexInfo,
+    sMachineStatDCompTexInfo, sMachineStatECompTexInfo,
 };
 
-unk_80077D50 D_i2_8010A9F8[] = { { 17, D_F122D10, 8, 16, 0xCE }, { 0 } };
-unk_80077D50 D_i2_8010AA18[] = { { 17, D_F122DE4, 4, 16, 0x5B }, { 0 } };
-unk_80077D50 D_i2_8010AA38[] = { { 17, D_F122E44, 8, 16, 0x82 }, { 0 } };
-unk_80077D50 D_i2_8010AA58[] = { { 17, D_F122ECC, 8, 16, 0x7E }, { 0 } };
-unk_80077D50 D_i2_8010AA78[] = { { 17, D_F122F50, 8, 16, 0x8F }, { 0 } };
-unk_80077D50 D_i2_8010AA98[] = { { 17, D_F122FE4, 8, 16, 0x7F }, { 0 } };
-unk_80077D50 D_i2_8010AAB8[] = { { 17, D_F123068, 8, 16, 0x96 }, { 0 } };
-unk_80077D50 D_i2_8010AAD8[] = { { 17, D_F123104, 8, 16, 0x6D }, { 0 } };
-unk_80077D50 D_i2_8010AAF8[] = { { 17, D_F123178, 8, 16, 0xAA }, { 0 } };
-unk_80077D50 D_i2_8010AB18[] = { { 17, D_F123228, 8, 16, 0x96 }, { 0 } };
+unk_80077D50 sMachineWeight0CompTexInfo[] = { { 17, aMachineWeight0Tex, 8, 16, 0xCE }, { 0 } };
+unk_80077D50 sMachineWeight1CompTexInfo[] = { { 17, aMachineWeight1Tex, 4, 16, 0x5B }, { 0 } };
+unk_80077D50 sMachineWeight2CompTexInfo[] = { { 17, aMachineWeight2Tex, 8, 16, 0x82 }, { 0 } };
+unk_80077D50 sMachineWeight3CompTexInfo[] = { { 17, aMachineWeight3Tex, 8, 16, 0x7E }, { 0 } };
+unk_80077D50 sMachineWeight4CompTexInfo[] = { { 17, aMachineWeight4Tex, 8, 16, 0x8F }, { 0 } };
+unk_80077D50 sMachineWeight5CompTexInfo[] = { { 17, aMachineWeight5Tex, 8, 16, 0x7F }, { 0 } };
+unk_80077D50 sMachineWeight6CompTexInfo[] = { { 17, aMachineWeight6Tex, 8, 16, 0x96 }, { 0 } };
+unk_80077D50 sMachineWeight7CompTexInfo[] = { { 17, aMachineWeight7Tex, 8, 16, 0x6D }, { 0 } };
+unk_80077D50 sMachineWeight8CompTexInfo[] = { { 17, aMachineWeight8Tex, 8, 16, 0xAA }, { 0 } };
+unk_80077D50 sMachineWeight9CompTexInfo[] = { { 17, aMachineWeight9Tex, 8, 16, 0x96 }, { 0 } };
 
-unk_80077D50* D_i2_8010AB38[] = {
-    D_i2_8010A9F8, D_i2_8010AA18, D_i2_8010AA38, D_i2_8010AA58, D_i2_8010AA78,
-    D_i2_8010AA98, D_i2_8010AAB8, D_i2_8010AAD8, D_i2_8010AAF8, D_i2_8010AB18,
+unk_80077D50* sMachineWeightDigitCompTexInfos[] = {
+    sMachineWeight0CompTexInfo, sMachineWeight1CompTexInfo, sMachineWeight2CompTexInfo, sMachineWeight3CompTexInfo,
+    sMachineWeight4CompTexInfo, sMachineWeight5CompTexInfo, sMachineWeight6CompTexInfo, sMachineWeight7CompTexInfo,
+    sMachineWeight8CompTexInfo, sMachineWeight9CompTexInfo,
 };
 
-void func_i2_80105DB0(s32 arg0, s8* arg1) {
-    s32 var_v1;
+// Converts int to string
+void func_i2_80105DB0(s32 num, s8* str) {
+    s32 numDigits;
+    s32 digitMask;
     s32 i;
     s32 j;
 
-    j = arg0;
-    var_v1 = 0;
-    if (arg0 == 0) {
-        var_v1 = 1;
+    j = num;
+    numDigits = 0;
+    if (num == 0) {
+        numDigits = 1;
     } else {
         while (j != 0) {
             j /= 10;
-            var_v1++;
+            numDigits++;
         }
     }
 
-    for (i = var_v1; i > 0; i--) {
-        var_v1 = 1;
+    for (i = numDigits; i > 0; i--) {
+        digitMask = 1;
         for (j = 0; j < i - 1; j++) {
-            var_v1 *= 10;
+            digitMask *= 10;
         }
 
-        *arg1++ = (arg0 / var_v1) + '0';
-        arg0 %= var_v1;
+        *str++ = (num / digitMask) + '0';
+        num %= digitMask;
     }
 
-    *arg1 = 0;
+    *str = 0;
 }
 
-s32 func_i2_80105EE4(s8* arg0) {
+s32 func_i2_80105EE4(s8* str) {
     s32 ret;
-    u8 temp_v0 = *arg0 + 0x80;
+    u8 temp_v0 = *str + 0x80;
 
     // FAKE
     ret = temp_v0;
@@ -586,28 +1054,28 @@ s32 func_i2_80105EE4(s8* arg0) {
                 ret += 12;
                 break;
             default:
-                ret = -2;
+                ret = FONT_CHAR_UNKNOWN;
                 break;
         }
     }
     return ret;
 }
 
-s32 func_i2_80105F48(s8* arg0) {
-    return func_i2_80105EE4(arg0) + 0x50;
+s32 func_i2_80105F48(s8* str) {
+    return func_i2_80105EE4(str) + 0x50;
 }
 
-s32 func_i2_80105F6C(s8* arg0) {
+s32 func_i2_80105F6C(s8* str) {
     u8 temp_v0;
     s32 ret;
 
-    temp_v0 = (arg0[1] + 0x80);
+    temp_v0 = (str[1] + 0x80);
     ret = 2;
 
-    switch (arg0[0]) {
-        case -85:
+    switch (str[0]) {
+        case (s8) 0xAB:
             break;
-        case -95:
+        case (s8) 0xA1:
             switch (temp_v0) {
                 case 0x3C:
                 case 0x3D:
@@ -622,7 +1090,7 @@ s32 func_i2_80105F6C(s8* arg0) {
                     break;
             }
             break;
-        case -93:
+        case (s8) 0xA3:
             if ((temp_v0 >= 0x61) && (temp_v0 < 0x7B)) {
                 ret = temp_v0 + 0x6F;
             } else if ((temp_v0 >= 0x41) && (temp_v0 < 0x5B)) {
@@ -637,99 +1105,100 @@ s32 func_i2_80105F6C(s8* arg0) {
     return ret;
 }
 
-s32 func_i2_80106024(s8* arg0, s32 arg1) {
-    s32 ret = 1;
+s32 func_i2_80106024(s8* str, s32 fontSetLowercase) {
+    s32 fontChar = 1;
 
-    if ((*arg0 >= 'a') && (*arg0 <= 'z')) {
-        switch (arg1) {
-            case 0:
-                ret = *arg0 - 0x61;
+    if ((*str >= 'a') && (*str <= 'z')) {
+        switch (fontSetLowercase) {
+            case FONT_SET_UPPERCASE_ONLY:
+                fontChar = *str - 0x61;
                 break;
-            case 1:
-                ret = *arg0 - 0x31;
+            case FONT_SET_HAS_LOWERCASE:
+                fontChar = *str - 0x31;
                 break;
         }
-    } else if ((*arg0 >= 'A') && (*arg0 <= 'Z')) {
-        ret = *arg0 - 0x41;
-    } else if ((*arg0 >= '0') && (*arg0 <= '9')) {
-        ret = *arg0 - 0x10;
-    } else if (*arg0 == ' ') {
-        ret = -1;
-    } else if (*arg0 < 0) {
-        switch (*arg0) {
-            case -92:
-                ret = func_i2_80105EE4(arg0 + 1);
+    } else if ((*str >= 'A') && (*str <= 'Z')) {
+        fontChar = *str - 0x41;
+    } else if ((*str >= '0') && (*str <= '9')) {
+        fontChar = *str - 0x10;
+    } else if (*str == ' ') {
+        fontChar = FONT_CHAR_SPACE;
+    } else if (*str < 0) {
+        // Shift-JIS
+        switch (*str) {
+            case (s8) 0xA4:
+                fontChar = func_i2_80105EE4(str + 1);
                 break;
-            case -91:
-                ret = func_i2_80105F48(arg0 + 1);
+            case (s8) 0xA5:
+                fontChar = func_i2_80105F48(str + 1);
                 break;
-            case -95:
-            case -93:
-            case -85:
-                ret = func_i2_80105F6C(arg0);
+            case (s8) 0xA1:
+            case (s8) 0xA3:
+            case (s8) 0xAB:
+                fontChar = func_i2_80105F6C(str);
                 break;
         }
     } else {
-        switch (*arg0) {
+        switch (*str) {
             case '\'':
-                ret = 0x1A;
+                fontChar = FONT_CHAR_PRIME;
                 break;
             case '\"':
-                ret = 0x1B;
+                fontChar = FONT_CHAR_DOUBLE_PRIME;
                 break;
             case '&':
-                ret = 0x1C;
+                fontChar = FONT_CHAR_AMPERSAND;
                 break;
             case '+':
-                ret = 0x1D;
+                fontChar = FONT_CHAR_PLUS;
                 break;
             case '-':
-                ret = 0x1E;
+                fontChar = FONT_CHAR_MINUS;
                 break;
             case '!':
             case '$':
-                ret = 0x1F;
+                fontChar = FONT_CHAR_POINTS_KG;
                 break;
             case ':':
-                ret = 0x2A;
+                fontChar = FONT_CHAR_COLON;
                 break;
             case '.':
-                ret = 0x2B;
+                fontChar = FONT_CHAR_PERIOD;
                 break;
             case '*':
             case '<':
-                ret = 0x2C;
+                fontChar = FONT_CHAR_ELLIPSIS;
                 break;
             case '(':
             case '>':
-                ret = 0x2D;
+                fontChar = FONT_CHAR_OPEN_PARENTHESIS;
                 break;
             case '_':
             case ')':
-                ret = 0x2E;
+                fontChar = FONT_CHAR_CLOSE_PARENTHESIS;
                 break;
             case ',':
-                ret = 0x2F;
+                fontChar = FONT_CHAR_COMMA;
                 break;
             default:
-                ret = -2;
+                fontChar = FONT_CHAR_UNKNOWN;
                 break;
         }
     }
-    return ret;
+    return fontChar;
 }
 
-const s16 D_i2_8010AE70[] = {
+const s16 kFont1CharWidths[] = {
     13, 15, 14, 15, 14, 13, 15, 15, 7,  14, 15, 14, 17, 14, 14, 15, 15, 14, 14, 14, 14, 12, 16, 16,
     14, 14, 8,  8,  16, 8,  16, 7,  13, 7,  13, 13, 13, 12, 13, 12, 13, 13, 8,  8,  16, 16, 16, 8,
 };
 
-const s16 D_i2_8010AED0[] = {
+const s16 kFont2CharWidths[] = {
     8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
 };
 
-const s16 D_i2_8010AF30[] = {
+const s16 kFont3CharWidths[] = {
     13, 12, 12, 13, 12, 11, 12, 13, 6,  9,  15, 11, 15, 13, 13, 12, 12, 12, 11, 11, 12, 12, 15, 13, 12, 11,
     7,  14, 14, 14, 13, 14, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9,  9,  14, 14, 14, 9,  14, 14, 14, 14,
     14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
@@ -741,7 +1210,7 @@ const s16 D_i2_8010AF30[] = {
     12, 12, 12, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
 };
 
-const s16 D_i2_8010B104[] = {
+const s16 kFont4CharWidths[] = {
     7, 7, 6, 7, 6, 5, 6, 7, 4, 4, 6, 5, 7, 6, 7, 6, 7, 7, 6, 6, 7, 6, 7, 7, 7, 5, 8, 8, 8, 8, 8, 16, 8, 8,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6,  6, 8,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,  8, 8,
@@ -751,7 +1220,7 @@ const s16 D_i2_8010B104[] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
 };
 
-const s16 D_i2_8010B2DC[] = {
+const s16 kFont5CharWidths[] = {
     14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 8,
     8,  8,  14, 8,  22, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 8,  8,  8,  14, 16, 6,  8,  8,  8,  8,  8,  8,
     8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,
@@ -763,7 +1232,7 @@ const s16 D_i2_8010B2DC[] = {
     14, 14, 14, 14, 14, 14, 14, 68, 14, 14, 14, 14, 16, 14, 14, 14, 14, 14, 14,
 };
 
-const s16 D_i2_8010B4B4[] = {
+const s16 kFont6CharWidths[] = {
     11, 10, 10, 10, 9,  9,  10, 10, 7,  8,  11, 9,  12, 11, 11, 9,  11, 9,  9,  8,  10, 11, 12, 10, 8,  10, 7,
     9,  11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 8,  11, 11, 11, 7,  11, 11, 11, 7,  11, 11, 11, 11, 11, 11,
     11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
@@ -775,327 +1244,330 @@ const s16 D_i2_8010B4B4[] = {
     11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
 };
 
-const s16 D_i2_8010B690[] = { 9, 5, 9, 9, 9, 9, 9, 9, 9, 9 };
+const s16 kMachineWeightDigitWidths[] = { 9, 5, 9, 9, 9, 9, 9, 9, 9, 9 };
 
-s32 func_i2_801061D4(s8* arg0, s32 arg1) {
-    s32 sp24;
-    s32 var_v0;
-    s16* sp1C;
-    s32 sp18;
+s32 func_i2_801061D4(s8* str, s32 fontSet) {
+    s32 strWidth;
+    s32 fontChar;
+    const s16* fontCharWidths;
+    s32 fontSpaceWidth;
 
-    switch (arg1) {
-        case 2:
-            sp1C = D_i2_8010AED0;
-            sp18 = 3;
+    switch (fontSet) {
+        case FONT_SET_2:
+            fontCharWidths = kFont2CharWidths;
+            fontSpaceWidth = 3;
             break;
-        case 3:
-            sp1C = D_i2_8010AF30;
-            sp18 = 6;
+        case FONT_SET_3:
+            fontCharWidths = kFont3CharWidths;
+            fontSpaceWidth = 6;
             break;
-        case 4:
-            sp1C = D_i2_8010B104;
-            sp18 = 3;
+        case FONT_SET_4:
+            fontCharWidths = kFont4CharWidths;
+            fontSpaceWidth = 3;
             break;
-        case 5:
-            sp1C = D_i2_8010B2DC;
-            sp18 = 3;
+        case FONT_SET_5:
+            fontCharWidths = kFont5CharWidths;
+            fontSpaceWidth = 3;
             break;
-        case 6:
-            sp1C = D_i2_8010B4B4;
-            sp18 = 3;
+        case FONT_SET_6:
+            fontCharWidths = kFont6CharWidths;
+            fontSpaceWidth = 3;
             break;
-        case 1:
+        case FONT_SET_1:
         default:
-            sp1C = D_i2_8010AE70;
-            sp18 = 7;
+            fontCharWidths = kFont1CharWidths;
+            fontSpaceWidth = 7;
             break;
     }
-    sp24 = 0;
-    if (arg1 == 4) {
-        var_v0 = func_i2_80106024(arg0, 1);
+    strWidth = 0;
+    if (fontSet == FONT_SET_4) {
+        fontChar = func_i2_80106024(str, FONT_SET_HAS_LOWERCASE);
     } else {
-        var_v0 = func_i2_80106024(arg0, 0);
+        fontChar = func_i2_80106024(str, FONT_SET_UPPERCASE_ONLY);
     }
 
-    if (var_v0 >= 0) {
-        sp24 = sp1C[var_v0];
-    } else if (var_v0 == -1) {
-        sp24 = sp18;
+    if (fontChar >= 0) {
+        strWidth = fontCharWidths[fontChar];
+    } else if (fontChar == FONT_CHAR_SPACE) {
+        strWidth = fontSpaceWidth;
     }
-    return sp24;
+    return strWidth;
 }
 
-s32 func_i2_801062E4(s8* arg0, s32 arg1, s32 arg2) {
-    s16* var_s2;
-    s32 var_s1;
-    s32 var_s3;
-    s32 var_v0;
+s32 func_i2_801062E4(s8* str, s32 fontSet, s32 additionalSpacing) {
+    const s16* fontCharWidths;
+    s32 strWidth;
+    s32 fontSpaceWidth;
+    s32 fontChar;
 
-    var_s1 = 0;
-    switch (arg1) {
-        case 2:
-            var_s2 = D_i2_8010AED0;
-            var_s3 = 3;
+    strWidth = 0;
+    switch (fontSet) {
+        case FONT_SET_2:
+            fontCharWidths = kFont2CharWidths;
+            fontSpaceWidth = 3;
             break;
-        case 3:
-            var_s2 = D_i2_8010AF30;
-            var_s3 = 6;
+        case FONT_SET_3:
+            fontCharWidths = kFont3CharWidths;
+            fontSpaceWidth = 6;
             break;
-        case 4:
-            var_s2 = D_i2_8010B104;
-            var_s3 = 3;
+        case FONT_SET_4:
+            fontCharWidths = kFont4CharWidths;
+            fontSpaceWidth = 3;
             break;
-        case 5:
-            var_s2 = D_i2_8010B2DC;
-            var_s3 = 3;
+        case FONT_SET_5:
+            fontCharWidths = kFont5CharWidths;
+            fontSpaceWidth = 3;
             break;
-        case 6:
-            var_s2 = D_i2_8010B4B4;
-            var_s3 = 3;
+        case FONT_SET_6:
+            fontCharWidths = kFont6CharWidths;
+            fontSpaceWidth = 3;
             break;
-        case 1:
+        case FONT_SET_1:
         default:
-            var_s2 = D_i2_8010AE70;
-            var_s3 = 7;
+            fontCharWidths = kFont1CharWidths;
+            fontSpaceWidth = 7;
             break;
     }
 
-    while (*arg0 != '\0') {
-        if (arg1 == 4) {
-            var_v0 = func_i2_80106024(arg0, 1);
+    while (*str != '\0') {
+        if (fontSet == FONT_SET_4) {
+            fontChar = func_i2_80106024(str, FONT_SET_HAS_LOWERCASE);
         } else {
-            var_v0 = func_i2_80106024(arg0, 0);
+            fontChar = func_i2_80106024(str, FONT_SET_UPPERCASE_ONLY);
         }
-        if (var_v0 >= 0) {
-            var_s1 += var_s2[var_v0];
-        } else if (var_v0 == -1) {
-            var_s1 += var_s3;
+        if (fontChar >= 0) {
+            strWidth += fontCharWidths[fontChar];
+        } else if (fontChar == FONT_CHAR_SPACE) {
+            strWidth += fontSpaceWidth;
         }
-        var_s1 += arg2;
-        if (*arg0 < 0) {
-            arg0 += 2;
+        strWidth += additionalSpacing;
+
+        if (*str < 0) {
+            str += 2;
         } else {
-            arg0 += 1;
+            str += 1;
         }
     }
-    return var_s1;
+    return strWidth;
 }
 
-Gfx* func_i2_80106450(Gfx* gfx, s32 arg1, s32 arg2, s8* arg3, s32 arg4, s32 arg5, s32 arg6) {
-    s16* var_fp;
-    s32 var_s3;
-    s32 var_v0;
-    unk_80077D50** sp70;
-    s32 sp6C;
+Gfx* func_i2_80106450(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing, s32 fontSet, s32 arg6) {
+    const s16* fontCharWidths;
+    s32 strWidth;
+    s32 fontChar;
+    unk_80077D50** fontCharTexInfos;
+    s32 fontSpaceWidth;
 
-    switch (arg5) {
-        case 2:
-            var_fp = D_i2_8010AED0;
-            sp70 = D_i2_80107AF0;
-            sp6C = 3;
-            arg2 -= 8;
+    switch (fontSet) {
+        case FONT_SET_2:
+            fontCharWidths = kFont2CharWidths;
+            fontCharTexInfos = sFont2CompTexInfos;
+            fontSpaceWidth = 3;
+            top -= 8;
             break;
-        case 3:
-            var_fp = D_i2_8010AF30;
-            sp70 = D_i2_80108170;
-            sp6C = 6;
-            arg2 -= 16;
+        case FONT_SET_3:
+            fontCharWidths = kFont3CharWidths;
+            fontCharTexInfos = sFont3CompTexInfos;
+            fontSpaceWidth = 6;
+            top -= 16;
             break;
-        case 4:
-            var_fp = D_i2_8010B104;
-            sp70 = D_i2_80109538;
-            sp6C = 3;
-            arg2 -= 8;
+        case FONT_SET_4:
+            fontCharWidths = kFont4CharWidths;
+            fontCharTexInfos = sFont4CompTexInfos;
+            fontSpaceWidth = 3;
+            top -= 8;
             break;
-        case 5:
-            var_fp = D_i2_8010B2DC;
-            sp70 = D_i2_80109C24;
-            sp6C = 3;
-            arg2 -= 16;
+        case FONT_SET_5:
+            fontCharWidths = kFont5CharWidths;
+            fontCharTexInfos = sFont5CompTexInfos;
+            fontSpaceWidth = 3;
+            top -= 16;
             break;
-        case 6:
-            var_fp = D_i2_8010B4B4;
-            sp70 = D_i2_8010A590;
-            sp6C = 3;
-            arg2 -= 16;
+        case FONT_SET_6:
+            fontCharWidths = kFont6CharWidths;
+            fontCharTexInfos = sFont6CompTexInfos;
+            fontSpaceWidth = 3;
+            top -= 16;
             break;
-        case 1:
+        case FONT_SET_1:
         default:
-            var_fp = D_i2_8010AE70;
-            sp70 = D_i2_801074F0;
-            sp6C = 7;
-            arg2 -= 16;
+            fontCharWidths = kFont1CharWidths;
+            fontCharTexInfos = sFont1CompTexInfos;
+            fontSpaceWidth = 7;
+            top -= 16;
             break;
     }
-    var_s3 = 0;
-    while (*arg3 != '\0') {
-        if (arg5 == 4) {
-            var_v0 = func_i2_80106024(arg3, 1);
+    strWidth = 0;
+    while (*str != '\0') {
+        if (fontSet == FONT_SET_4) {
+            fontChar = func_i2_80106024(str, FONT_SET_HAS_LOWERCASE);
         } else {
-            var_v0 = func_i2_80106024(arg3, 0);
+            fontChar = func_i2_80106024(str, FONT_SET_UPPERCASE_ONLY);
         }
-        if (var_v0 >= 0) {
-            func_80077D50(sp70[var_v0], 0);
+        if (fontChar >= 0) {
+            func_80077D50(fontCharTexInfos[fontChar], 0);
             if (arg6 == 1) {
-                gfx = func_80078EA0(gfx, sp70[var_v0], arg1 + var_s3, arg2, 1, 0, 0, 1.0f, 1.0f);
+                gfx = func_80078EA0(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 1, 0, 0, 1.0f, 1.0f);
             } else {
-                gfx = func_80078EA0(gfx, sp70[var_v0], arg1 + var_s3, arg2, 0, 0, 0, 1.0f, 1.0f);
+                gfx = func_80078EA0(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 0, 0, 0, 1.0f, 1.0f);
             }
 
-            var_s3 += var_fp[var_v0] + arg4;
+            strWidth += fontCharWidths[fontChar] + additionalSpacing;
         } else {
-            switch (var_v0) {
-                case -1:
-                    var_s3 += sp6C + arg4;
+            switch (fontChar) {
+                case FONT_CHAR_SPACE:
+                    strWidth += fontSpaceWidth + additionalSpacing;
                     break;
-                case -2:
+                case FONT_CHAR_UNKNOWN:
                 default:
                     return gfx;
             }
         }
 
-        if (*arg3 < 0) {
-            arg3 += 2;
+        if (*str < 0) {
+            str += 2;
         } else {
-            arg3 += 1;
+            str += 1;
         }
     }
     return gfx;
 }
 
-Gfx* func_i2_80106700(Gfx* gfx, s32 arg1, s32 arg2, s8* arg3, s32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8) {
-    s16* var_s7;
-    s32 var_s3;
-    s32 var_v0;
-    unk_80077D50** var_fp;
-    s32 sp7C;
+Gfx* func_i2_80106700(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing, s32 fontSet, s32 arg6, f32 scaleX,
+                      f32 scaleY) {
+    const s16* fontCharWidths;
+    s32 strWidth;
+    s32 fontChar;
+    unk_80077D50** fontCharTexInfos;
+    s32 fontSpaceWidth;
 
-    switch (arg5) {
-        case 2:
-            var_s7 = D_i2_8010AED0;
-            var_fp = D_i2_80107AF0;
-            sp7C = 3;
-            arg2 -= 8;
+    switch (fontSet) {
+        case FONT_SET_2:
+            fontCharWidths = kFont2CharWidths;
+            fontCharTexInfos = sFont2CompTexInfos;
+            fontSpaceWidth = 3;
+            top -= 8;
             break;
-        case 3:
-            var_s7 = D_i2_8010AF30;
-            var_fp = D_i2_80108170;
-            sp7C = 6;
-            arg2 -= 16;
+        case FONT_SET_3:
+            fontCharWidths = kFont3CharWidths;
+            fontCharTexInfos = sFont3CompTexInfos;
+            fontSpaceWidth = 6;
+            top -= 16;
             break;
-        case 4:
-            var_s7 = D_i2_8010B104;
-            var_fp = D_i2_80109538;
-            sp7C = 3;
-            arg2 -= 8;
+        case FONT_SET_4:
+            fontCharWidths = kFont4CharWidths;
+            fontCharTexInfos = sFont4CompTexInfos;
+            fontSpaceWidth = 3;
+            top -= 8;
             break;
-        case 5:
-            var_s7 = D_i2_8010B2DC;
-            var_fp = D_i2_80109C24;
-            sp7C = 3;
-            arg2 -= 16;
+        case FONT_SET_5:
+            fontCharWidths = kFont5CharWidths;
+            fontCharTexInfos = sFont5CompTexInfos;
+            fontSpaceWidth = 3;
+            top -= 16;
             break;
-        case 6:
-            var_s7 = D_i2_8010B4B4;
-            var_fp = D_i2_8010A590;
-            sp7C = 3;
-            arg2 -= 16;
+        case FONT_SET_6:
+            fontCharWidths = kFont6CharWidths;
+            fontCharTexInfos = sFont6CompTexInfos;
+            fontSpaceWidth = 3;
+            top -= 16;
             break;
-        case 1:
+        case FONT_SET_1:
         default:
-            var_s7 = D_i2_8010AE70;
-            var_fp = D_i2_801074F0;
-            sp7C = 7;
-            arg2 -= 16;
+            fontCharWidths = kFont1CharWidths;
+            fontCharTexInfos = sFont1CompTexInfos;
+            fontSpaceWidth = 7;
+            top -= 16;
             break;
     }
-    var_s3 = 0;
-    while (*arg3 != '\0') {
-        if (arg5 == 4) {
-            var_v0 = func_i2_80106024(arg3, 1);
+    strWidth = 0;
+    while (*str != '\0') {
+        if (fontSet == FONT_SET_4) {
+            fontChar = func_i2_80106024(str, FONT_SET_HAS_LOWERCASE);
         } else {
-            var_v0 = func_i2_80106024(arg3, 0);
+            fontChar = func_i2_80106024(str, FONT_SET_UPPERCASE_ONLY);
         }
-        if (var_v0 >= 0) {
-            func_80077D50(var_fp[var_v0], 0);
+        if (fontChar >= 0) {
+            func_80077D50(fontCharTexInfos[fontChar], 0);
             if (arg6 == 1) {
-                gfx = func_80078EA0(gfx, var_fp[var_v0], (s32) (arg1 + (var_s3 * arg7)), arg2, 4, 0, 0, arg7, arg8);
+                gfx = func_80078EA0(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)), top, 4, 0, 0,
+                                    scaleX, scaleY);
             } else {
-                gfx = func_80078EA0(gfx, var_fp[var_v0], (s32) (arg1 + (var_s3 * arg7)), arg2, 3, 0, 0, arg7, arg8);
+                gfx = func_80078EA0(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)), top, 3, 0, 0,
+                                    scaleX, scaleY);
             }
 
-            var_s3 += var_s7[var_v0] + arg4;
+            strWidth += fontCharWidths[fontChar] + additionalSpacing;
         } else {
-            switch (var_v0) {
-                case -1:
-                    var_s3 += sp7C + arg4;
+            switch (fontChar) {
+                case FONT_CHAR_SPACE:
+                    strWidth += fontSpaceWidth + additionalSpacing;
                     break;
-                case -2:
+                case FONT_CHAR_UNKNOWN:
                 default:
                     return gfx;
             }
         }
 
-        if (*arg3 < 0) {
-            arg3 += 2;
+        if (*str < 0) {
+            str += 2;
         } else {
-            arg3 += 1;
+            str += 1;
         }
     }
     return gfx;
 }
 
-Gfx* func_i2_801069E4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
+Gfx* func_i2_DrawMachineStatValue(Gfx* gfx, s32 left, s32 top, s32 statValue) {
 
-    if ((arg3 < 0) && (arg3 >= 5)) {
+    if ((statValue < 0) && (statValue >= 5)) {
         return gfx;
     }
 
-    func_80077D50(D_i2_8010A9E4[arg3], 0);
-    return func_80078EA0(gfx, D_i2_8010A9E4[arg3], arg1, arg2, 0, 0, 0, 1.0f, 1.0f);
+    func_80077D50(sMachineStatValueCompTexInfos[statValue], 0);
+    return func_80078EA0(gfx, sMachineStatValueCompTexInfos[statValue], left, top, 0, 0, 0, 1.0f, 1.0f);
 }
 
-Gfx* func_i2_80106A74(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
+Gfx* func_i2_DrawMachineStatValueSmall(Gfx* gfx, s32 left, s32 top, s32 statValue) {
 
-    if ((arg3 < 0) && (arg3 >= 5)) {
+    if ((statValue < 0) && (statValue >= 5)) {
         return gfx;
     }
 
-    func_80077D50(D_i2_8010A9E4[arg3], 0);
-    return func_80078EA0(gfx, D_i2_8010A9E4[arg3], arg1, arg2, 3, 0, 0, 0.5f, 0.5f);
+    func_80077D50(sMachineStatValueCompTexInfos[statValue], 0);
+    return func_80078EA0(gfx, sMachineStatValueCompTexInfos[statValue], left, top, 3, 0, 0, 0.5f, 0.5f);
 }
 
-Gfx* func_i2_80106B08(Gfx* gfx, s32 arg1, s32 arg2, u32 arg3) {
-    Gfx* var_s3;
-    s32 var_s1;
-    s32 temp_hi;
+Gfx* func_i2_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight) {
+    s32 width;
+    s32 digit;
 
-    var_s1 = 0;
+    width = 0;
     do {
-        temp_hi = arg3 % 10;
-        var_s1 -= D_i2_8010B690[temp_hi];
-        func_80077D50(D_i2_8010AB38[temp_hi], 0);
-        gfx = func_80078EA0(gfx, D_i2_8010AB38[temp_hi], arg1 + var_s1, arg2 - 16, 0, 0, 0, 1.0f, 1.0f);
-        arg3 /= 10;
-    } while (arg3 != 0);
+        digit = weight % 10;
+        width -= kMachineWeightDigitWidths[digit];
+        func_80077D50(sMachineWeightDigitCompTexInfos[digit], 0);
+        gfx = func_80078EA0(gfx, sMachineWeightDigitCompTexInfos[digit], left + width, top - 16, 0, 0, 0, 1.0f, 1.0f);
+        weight /= 10;
+    } while (weight != 0);
 
     return gfx;
 }
 
-Gfx* func_i2_80106C20(Gfx* gfx, s32 arg1, s32 arg2, u32 arg3) {
-    Gfx* var_s3;
-    s32 var_s1;
-    s32 temp_hi;
+Gfx* func_i2_DrawMachineWeightSmall(Gfx* gfx, s32 left, s32 top, u32 weight) {
+    s32 width;
+    s32 digit;
     f32 scale = 0.75f;
 
-    var_s1 = 0;
+    width = 0;
     do {
-        temp_hi = arg3 % 10;
-        var_s1 -= D_i2_8010B690[temp_hi] * scale + 1.0f;
-        func_80077D50(D_i2_8010AB38[temp_hi], 0);
-        gfx = func_80078EA0(gfx, D_i2_8010AB38[temp_hi], arg1 + var_s1, arg2 - (16.0f * scale), 3, 0, 0, scale, scale);
-        arg3 /= 10;
-    } while (arg3 != 0);
+        digit = weight % 10;
+        width -= kMachineWeightDigitWidths[digit] * scale + 1.0f;
+        func_80077D50(sMachineWeightDigitCompTexInfos[digit], 0);
+        gfx = func_80078EA0(gfx, sMachineWeightDigitCompTexInfos[digit], left + width, top - (16.0f * scale), 3, 0, 0,
+                            scale, scale);
+        weight /= 10;
+    } while (weight != 0);
 
     return gfx;
 }

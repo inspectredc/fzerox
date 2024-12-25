@@ -1,5 +1,6 @@
 #include "global.h"
 #include "audio.h"
+#include "fzx_game.h"
 #include "assets/segment_17B1E0.h"
 
 f32 D_800E40F0[30];
@@ -8,8 +9,8 @@ s16 D_800E416C;
 u16 D_800E416E;
 u16 D_800E4170;
 s8 D_800E4174[4];
-char* D_800E4178;
-char* D_800E4180[55];
+char* gCurrentTrackName;
+char* gTrackNames[55];
 
 s32 D_800CD380 = 0;
 u32 D_800CD384 = 0;
@@ -28,47 +29,47 @@ s8 D_800CD3C4 = 0;
 s8 D_800CD3C8 = 0;
 s32 D_800CD3CC = 1;
 
-const char* D_800CD3D0[] = { "mute city",
-                             "silence",
-                             "sand ocean",
-                             "devil's forest",
-                             "big blue",
-                             "port town",
-                             "sector Ａ",
-                             "red canyon",
-                             "devil's forest 2",
-                             "mute city 2",
-                             "big blue 2",
-                             "white land",
-                             "fire field",
-                             "silence 2",
-                             "sector Ｂ",
-                             "red canyon 2",
-                             "white land 2",
-                             "mute city 3",
-                             "rainbow road",
-                             "devil's forest 3",
-                             "space plant",
-                             "sand ocean 2",
-                             "port town 2",
-                             "big hand",
-                             "default 1",
-                             "default 2",
-                             "default 3",
-                             "default 4",
-                             "default 5",
-                             "default 6",
-                             "x",
-                             "\0" };
+const char* sTrackNames[] = { "mute city",
+                              "silence",
+                              "sand ocean",
+                              "devil's forest",
+                              "big blue",
+                              "port town",
+                              "sector Ａ",
+                              "red canyon",
+                              "devil's forest 2",
+                              "mute city 2",
+                              "big blue 2",
+                              "white land",
+                              "fire field",
+                              "silence 2",
+                              "sector Ｂ",
+                              "red canyon 2",
+                              "white land 2",
+                              "mute city 3",
+                              "rainbow road",
+                              "devil's forest 3",
+                              "space plant",
+                              "sand ocean 2",
+                              "port town 2",
+                              "big hand",
+                              "default 1",
+                              "default 2",
+                              "default 3",
+                              "default 4",
+                              "default 5",
+                              "default 6",
+                              "x",
+                              "\0" };
 
-const char* D_800CD450[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
-                             "red gazelle",   "great star",       "iron tiger",    "deep claw",      "twin noritta",
-                             "super piranha", "mighty hurricane", "little wyvern", "space angler",   "green panther",
-                             "black bull",    "wild boar",        "astro robin",   "king meteor",    "queen meteor",
-                             "wonder wasp",   "hyper speeder",    "death anchor",  "crazy bear",     "night thunder",
-                             "big fang",      "mighty typhoon",   "mad wolf",      "sonic phantom",  "blood hawk",
-                             "super falcon",  "golden fox",       "wild goose",    "super stingray", "super cat",
-                             "red gazelle" };
+const char* sMachineNames[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
+                                "red gazelle",   "great star",       "iron tiger",    "deep claw",      "twin noritta",
+                                "super piranha", "mighty hurricane", "little wyvern", "space angler",   "green panther",
+                                "black bull",    "wild boar",        "astro robin",   "king meteor",    "queen meteor",
+                                "wonder wasp",   "hyper speeder",    "death anchor",  "crazy bear",     "night thunder",
+                                "big fang",      "mighty typhoon",   "mad wolf",      "sonic phantom",  "blood hawk",
+                                "super falcon",  "golden fox",       "wild goose",    "super stingray", "super cat",
+                                "red gazelle" };
 
 // clang-format off
 s32 D_800CD4E0[] = {
@@ -414,26 +415,26 @@ void func_8007D9D0(void) {
     s32 i;
 
     for (i = 0; i < 24; i++) {
-        D_800E4180[i] = D_800CD3D0[i];
+        gTrackNames[i] = sTrackNames[i];
     }
 
     for (i = 24; i < 30; i++) {
-        if (D_i2_8010D730[i - 24][0] == 0) {
-            D_800E4180[i] = D_800CD3D0[i];
+        if (D_i2_8010D730[i - 24][0] == '\0') {
+            gTrackNames[i] = sTrackNames[i];
         } else {
-            D_800E4180[i] = D_i2_8010D730[i - 24];
+            gTrackNames[i] = D_i2_8010D730[i - 24];
         }
     }
 
     for (i = 30; i < 48; i++) {
-        D_800E4180[i] = D_800CD3D0[31];
+        gTrackNames[i] = sTrackNames[31];
     }
 
     for (i = 48; i < 54; i++) {
-        D_800E4180[i] = D_800CD3D0[30];
+        gTrackNames[i] = sTrackNames[30];
     }
 
-    D_800E4180[54] = D_800CD3D0[31];
+    gTrackNames[54] = sTrackNames[31];
 }
 
 void func_8007DABC(Controller* arg0) {
@@ -488,7 +489,7 @@ void func_8007DED8(void) {
     }
 }
 
-extern s32 D_800CD004;
+extern s32 gCupType;
 extern s32 gDifficulty;
 
 extern s16 D_800E42CC;
@@ -505,19 +506,21 @@ void func_8007DEF0(void) {
         }
     }
     var_a0 = gDifficulty + 1;
-    if ((D_800CD004 >= 0) || (D_800CD004 < 4)) {
-        if (var_a0 > 4) {
-            var_a0 = 4;
+    //! @bug This always evaluates to true, and instead should use a &&
+    //       The result of this could lead to an OOB array access of D_800E4174
+    if ((gCupType >= JACK_CUP) || (gCupType <= JOKER_CUP)) {
+        if (var_a0 > MASTER + 1) {
+            var_a0 = MASTER + 1;
         }
 
-        if (D_800E4174[D_800CD004] < var_a0) {
-            D_800E4174[D_800CD004] = var_a0;
+        if (D_800E4174[gCupType] < var_a0) {
+            D_800E4174[gCupType] = var_a0;
         }
         if (var_v1 != 0) {
             for (i = 0; i < 4; i++) {
                 if (D_800E4174[i] < 3) {
                     var_v1 = 0;
-                    if (D_800CD004) {}
+                    if (gCupType) {}
                 }
             }
 
@@ -567,23 +570,23 @@ void func_8007E0EC(void) {
     func_800BB078();
 }
 
-const s8 D_800D4690[] = { CAPTAIN_FALCON, DR_STEWART,   PICO,           SAMURAI_GOROH,   JODY_SUMMER,
-                          MIGHTY_GAZELLE, BABA,         OCTOMAN,        DR_CLASH,        MR_EAD,
-                          BIO_REX,        BILLY,        SILVER_NEELSEN, GOMAR_AND_SHIOH, JOHN_TANAKA,
-                          MRS_ARROW,      BLOOD_FALCON, JACK_LEVIN,     JAMES_MCCLOUD,   ZODA,
-                          MICHAEL_CHAIN,  SUPER_ARROW,  KATE_ALEN,      ROGER_BUSTER,    LEON,
-                          DRAQ,           BEASTMAN,     ANTONIO_GUSTER, BLACK_SHADOW,    THE_SKULL,
-                          MAX_CHARACTER };
+const s8 kCharacterList[] = { CAPTAIN_FALCON, DR_STEWART,   PICO,           SAMURAI_GOROH,   JODY_SUMMER,
+                              MIGHTY_GAZELLE, BABA,         OCTOMAN,        DR_CLASH,        MR_EAD,
+                              BIO_REX,        BILLY,        SILVER_NEELSEN, GOMAR_AND_SHIOH, JOHN_TANAKA,
+                              MRS_ARROW,      BLOOD_FALCON, JACK_LEVIN,     JAMES_MCCLOUD,   ZODA,
+                              MICHAEL_CHAIN,  SUPER_ARROW,  KATE_ALEN,      ROGER_BUSTER,    LEON,
+                              DRAQ,           BEASTMAN,     ANTONIO_GUSTER, BLACK_SHADOW,    THE_SKULL,
+                              MAX_CHARACTER };
 
-s8 func_8007E10C(s32 arg0) {
-    return D_800D4690[arg0];
+s8 func_8007E10C(s32 i) {
+    return kCharacterList[i];
 }
 
 s32 func_8007E11C(s32 character) {
     s32 i;
 
     for (i = 0; i < 30; i++) {
-        if (character == D_800D4690[i]) {
+        if (character == kCharacterList[i]) {
             return i;
         }
     }
@@ -604,7 +607,7 @@ void func_8007E1C0(void) {
             sp38 = true;
             break;
         } else {
-            if (D_802A6B40[i].unk_20[0] >= sp40.unk_08) {
+            if (D_802A6B40[i].timeRecord[0] >= sp40.unk_08) {
                 sp38 = true;
                 break;
             }

@@ -39,20 +39,20 @@ unk_80144FE0 D_i8_80144FE0[2];
 s32 D_i8_80144F40 = 0;
 
 unk_80144F44 D_i8_80144F44[] = {
-    { 3, { D_F25F69C, 64, 16 } }, // CHANGE COURSE
-    { 2, { D_F25F334, 24, 16 } }, // QUIT
-    { 0, { D_F260460, 64, 16 } }, // CLEAR RECORD
-    { 1, { D_F260A98, 64, 16 } }, // CLEAR GHOST
+    { 3, { aMenuChangeCourseTex, 64, 16 } }, // CHANGE COURSE
+    { 2, { aMenuQuitTex, 24, 16 } },         // QUIT
+    { 0, { aMenuClearRecordTex, 64, 16 } },  // CLEAR RECORD
+    { 1, { aMenuClearGhostTex, 64, 16 } },   // CLEAR GHOST
 };
 
 unk_80144F74 D_i8_80144F74[] = {
-    { D_F26064C, 96, 32 }, // ERASE COURSE DATA? (1)
-    { D_F260C64, 96, 32 }, // ERASE COURSE DATA? (2)
+    { aMenuEraseCourseSavedData1Tex, 96, 32 }, // ERASE COURSE DATA? (1)
+    { aMenuEraseCourseSavedData2Tex, 96, 32 }, // ERASE COURSE DATA? (2)
 };
 
 unk_80144F74 D_i8_80144F84[] = {
-    { D_F2637DC, 32, 16 }, // NO
-    { D_F2636F0, 32, 16 }, // YES
+    { aMenuNoTex, 32, 16 },  // NO
+    { aMenuYesTex, 32, 16 }, // YES
 };
 
 extern s16 D_800CCFE8;
@@ -86,13 +86,13 @@ bool func_i8_80143D84(s32);
 
 extern s8 D_800CD3C0;
 extern s8 D_800CD3C8;
-extern s32 D_800F8514;
+extern s32 gTrackIndex;
 
 void func_i8_80143A78(void) {
     s32 i;
     unk_80144F44* var_s0;
 
-    D_i8_80144F40 = D_800F8514;
+    D_i8_80144F40 = gTrackIndex;
     if ((D_800CD3C0 == 0) && (D_800CD3C8 == 0)) {
         D_i8_80144FB4 = 0x12;
     } else {
@@ -129,19 +129,19 @@ void func_i8_80143A78(void) {
     }
     D_80144FB0 = 0;
     D_i8_80144FD6 = 0;
-    func_80078104(D_F25F070, 0x40, 0, 0, false);
+    func_80078104(aMenuTextTLUT, 0x40, 0, 0, false);
 
     var_s0 = D_i8_80144F44;
     for (i = 0; i < 4; i++, var_s0++) {
         func_80078104(var_s0->unk_04.unk_00, var_s0->unk_04.width * var_s0->unk_04.height, 0, 1, false);
     }
-    func_80078104(D_F26064C, 0xC00, 0, 1, false);
-    func_80078104(D_F260C64, 0xC00, 0, 1, false);
-    func_80078104(D_F263648, 0x100, 0, 1, false);
-    func_80078104(D_F26369C, 0x100, 0, 1, false);
-    func_80078104(D_F2637DC, 0x200, 0, 1, false);
-    func_80078104(D_F2636F0, 0x200, 0, 1, false);
-    func_80078104(D_F13A9E0, 0x100, 0, 0, false);
+    func_80078104(aMenuEraseCourseSavedData1Tex, 0xC00, 0, 1, false);
+    func_80078104(aMenuEraseCourseSavedData2Tex, 0xC00, 0, 1, false);
+    func_80078104(aMenuLeftArrowTex, 0x100, 0, 1, false);
+    func_80078104(aMenuRightArrowTex, 0x100, 0, 1, false);
+    func_80078104(aMenuNoTex, 0x200, 0, 1, false);
+    func_80078104(aMenuYesTex, 0x200, 0, 1, false);
+    func_80078104(aHasGhostMarkerTex, 0x100, 0, 0, false);
     func_i3_80139D20();
     func_80080A40(&D_i8_80144FC0);
     func_80080A40(&D_i8_80144FC4);
@@ -153,7 +153,7 @@ bool func_i8_80143D30(s32 arg0) {
     bool ret = true;
 
     for (i = 0; i < 5; i++) {
-        if (D_802A6B40[arg0].unk_20[i] != MAX_TIMER) {
+        if (D_802A6B40[arg0].timeRecord[i] != MAX_TIMER) {
             ret = false;
             break;
         }
@@ -238,7 +238,7 @@ s32 func_i8_80143DDC(void) {
         }
     }
     if (sp1C != 0) {
-        D_800CD3BC = D_800F8514;
+        D_800CD3BC = gTrackIndex;
         D_800CD048 = 8;
     } else if ((gameMode == GAMEMODE_6) && (D_i8_80144FD6 == 0) && (gRacers[0].unk_04 & 0x80000)) {
         D_800CD048 = 1;
@@ -265,22 +265,22 @@ s32 func_i8_80143F94(void) {
     }
     func_i3_8013BF18(1);
 
-    sp28 = D_800F8514;
+    sp28 = gTrackIndex;
     if (D_800E416C & BTN_RIGHT) {
-        D_800F8514++;
-        if (D_800F8514 >= D_i8_80144FB4) {
-            D_800F8514 = 0;
+        gTrackIndex++;
+        if (gTrackIndex >= D_i8_80144FB4) {
+            gTrackIndex = 0;
         }
         func_i2_800FCD38(9, 0);
     } else if (D_800E416C & BTN_LEFT) {
-        D_800F8514--;
-        if (D_800F8514 < 0) {
-            D_800F8514 = D_i8_80144FB4 - 1;
+        gTrackIndex--;
+        if (gTrackIndex < 0) {
+            gTrackIndex = D_i8_80144FB4 - 1;
         }
         func_i2_800FCD38(9, 1);
     }
 
-    if (sp28 != D_800F8514) {
+    if (sp28 != gTrackIndex) {
         sp2C = 1;
         func_800BA8D8(0x1E);
     } else {
@@ -401,9 +401,9 @@ void func_i8_801443D0(void) {
                 func_800BA8D8(0x10);
             } else {
                 if (D_i8_80144FCE == 0) {
-                    func_i2_801017B8(D_800F8514);
+                    func_i2_801017B8(gTrackIndex);
                 } else if (D_i8_80144FCE == 1) {
-                    func_i2_801018A8(D_800F8514);
+                    func_i2_801018A8(gTrackIndex);
                     D_i8_80144FD0 = 2;
                 }
                 D_i8_80144FB8[D_i8_80144FC8] = 0;
@@ -561,7 +561,7 @@ Gfx* func_i8_801449B8(Gfx* gfx) {
     gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gfx++, D_i8_80144FD8->unk_40, 4, 0);
 
-    gDPLoadTextureBlock_4b(gfx++, func_800783AC(D_F13A9E0), G_IM_FMT_I, 32, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+    gDPLoadTextureBlock_4b(gfx++, func_800783AC(aHasGhostMarkerTex), G_IM_FMT_I, 32, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                            G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     gSP2Triangles(gfx++, 0, 3, 1, 0, 0, 2, 3, 0);
@@ -596,7 +596,7 @@ Gfx* func_i8_80144B34(Gfx* gfx, s32 arg1, s32 arg2) {
         }
 
         if (i == 0) {
-            var_s2 = func_800783AC(D_F25F070);
+            var_s2 = func_800783AC(aMenuTextTLUT);
         } else {
             var_s2 = NULL;
         }
@@ -620,13 +620,13 @@ Gfx* func_i8_80144CDC(Gfx* gfx, s32 arg1, s32 arg2) {
     temp_s0 = &D_i8_80144F74[D_i8_80144FCE];
     sp58 = (0x7C - temp_s0->width) / 2;
 
-    gfx = func_8007E410(gfx, func_800783AC(temp_s0->unk_00), func_800783AC(D_F25F070), G_IM_FMT_CI, 1, arg1 + sp58 + 12,
-                        arg2 + 10, temp_s0->width, temp_s0->height, 3);
+    gfx = func_8007E410(gfx, func_800783AC(temp_s0->unk_00), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1,
+                        arg1 + sp58 + 12, arg2 + 10, temp_s0->width, temp_s0->height, 3);
 
     gDPPipeSync(gfx++);
     gfx = func_8007DB28(gfx, 0);
-    gfx = func_8007E410(gfx, func_800783AC(D_F263648), NULL, G_IM_FMT_CI, 1, arg1 + 24, arg2 + 50, 16, 16, 0);
-    gfx = func_8007E410(gfx, func_800783AC(D_F26369C), NULL, G_IM_FMT_CI, 1, arg1 + 99, arg2 + 50, 16, 16, 0);
+    gfx = func_8007E410(gfx, func_800783AC(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1, arg1 + 24, arg2 + 50, 16, 16, 0);
+    gfx = func_8007E410(gfx, func_800783AC(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1, arg1 + 99, arg2 + 50, 16, 16, 0);
 
     temp_s0 = &D_i8_80144F84[D_i8_80144FCC];
     sp58 = (0x3B - temp_s0->width) / 2;

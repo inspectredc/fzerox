@@ -24,7 +24,7 @@ u32 Math_Rand2(void);
 s32 Math_Round(f32 num);
 s32 func_8006AA38(Mtx3F* mtx);
 s32 func_8006AC10(Mtx3F* mtx);
-void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* arg3, s32* arg4, s32* arg5);
+void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* red, s32* green, s32* blue);
 void func_8006B010(Lights1* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9);
 void func_8006B07C(LookAt* arg0, MtxF* arg1);
 void func_8006BC84(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD);
@@ -84,8 +84,8 @@ void func_80077CF0(s32 segAddr, size_t size, u8* startAddr);
 u8* func_80077D50(unk_80077D50* arg0, s32 arg1);
 void* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4);
 TexturePtr func_800783AC(void* arg0);
-Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
-Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 arg2, s32 arg3, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
+Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
+Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
 void func_800790D4(void);
 s32 func_800792D8(unk_800792D8* arg0);
 void func_800793E8(s32 arg0, s32 arg1, unk_800792D8* arg2);
@@ -121,12 +121,12 @@ s32 func_8007E008(void);
 void func_8007E08C(void);
 void func_8007E0CC(void);
 void func_8007E0EC(void);
-s8 func_8007E10C(s32 arg0);
+s8 func_8007E10C(s32 i);
 s32 func_8007E11C(s32 character);
 void func_8007E2B4(void);
 void func_8007E398(void);
 
-Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 format, s32 unkTmemFlag, s32 arg5, s32 arg6, s32 width, s32 height, u16 unkDrawFlag);
+Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 format, s32 unkTmemFlag, s32 left, s32 top, s32 width, s32 height, u16 unkDrawFlag);
 void func_8007ECCC(u16* arg0, s32 arg1);
 s32 func_8007EFBC(u16* arg0, u16* arg1, s32 arg2);
 Gfx* func_8007F090(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3);
@@ -178,10 +178,10 @@ void func_80095144(void);
 void func_800952F4(void);
 Gfx* func_80096CE8(Gfx* gfx, s32 arg1);
 Gfx* func_8009CBE8(Gfx* gfx, s32 arg1, s32 red, s32 green, s32 blue);
-Gfx* func_8009CCBC(Gfx* gfx, s32 arg1, s32 arg2);
-Gfx* func_8009CD60(Gfx* gfx, s32 arg1);
-Gfx* func_8009CE70(Gfx* gfx, s32 arg1);
-Gfx* func_8009CEA0(Gfx* gfx, s32 arg1);
+Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2);
+Gfx* func_8009CD60(Gfx* gfx, s32 character);
+Gfx* func_8009CE70(Gfx* gfx, s32 character);
+Gfx* func_8009CEA0(Gfx* gfx, s32 character);
 
 void func_8009CED0(u32 arg0);
 s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4);
@@ -229,6 +229,7 @@ void func_800BB334(void);
 void func_800BB370(void);
 void func_800BB39C(s32);
 void func_800BB3C4(u8, f32);
+void func_800BB46C(void);
 
 bool func_800CC220(void);
 
@@ -270,19 +271,19 @@ s32 func_i2_80105700(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
 s32 func_i2_801058FC(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, Racer* arg7);
 s32 func_i2_801059B4(f32 arg0, Racer* arg1);
 s32 func_i2_80105A28(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, Mtx3F* arg6, s32 arg7, s32 arg8, s32 arg9, Racer* argA);
-void func_i2_80105DB0(s32 arg0, s8* arg1);
+void func_i2_80105DB0(s32 num, s8* str);
 s32 func_i2_801062E4(s8*, s32, s32);
 Gfx* func_i2_80106450(Gfx*, s32, s32, s8*, s32, s32, s32);
-Gfx* func_i2_80106700(Gfx* gfx, s32 arg1, s32 arg2, s8* arg3, s32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
-Gfx* func_i2_801069E4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3);
-Gfx* func_i2_80106B08(Gfx* gfx, s32 arg1, s32 arg2, u32 arg3);
-Gfx* func_i2_80106C20(Gfx* gfx, s32 arg1, s32 arg2, u32 arg3);
+Gfx* func_i2_80106700(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing, s32 fontSet, s32 arg6, f32 scaleX, f32 scaleY);
+Gfx* func_i2_DrawMachineStatValue(Gfx* gfx, s32 left, s32 top, s32 statValue);
+Gfx* func_i2_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight);
+Gfx* func_i2_DrawMachineWeightSmall(Gfx* gfx, s32 left, s32 top, u32 weight);
 
 f32 func_i3_fabsf(f32 num);
 void func_i3_80116C4C(void);
 void func_i3_8011AEA0(void);
 void func_i3_8011B520(void);
-Gfx* func_i3_8012CF34(Gfx* gfx, s32 arg1);
+Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex);
 Gfx* func_i3_8012D3D4(Gfx* gfx);
 void func_i3_8012F324(void);
 Gfx* func_i3_DrawTimerScisThousandths(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale);
@@ -295,7 +296,7 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2);
 void func_i3_80139D20(void);
 bool func_i3_8013A004(void);
 Gfx* func_i3_8013A360(Gfx*, s32);
-Gfx* func_i3_8013B348(Gfx*, s32, s32, f32, bool, bool);
+Gfx* func_i3_DrawSpeed(Gfx*, s32, s32, f32, bool, bool);
 void func_i3_8013BF18(s32 arg0);
 
 void func_i4_80115DF0(void);
@@ -440,5 +441,7 @@ Gfx* func_i8_80144568(Gfx*);
 
 Gfx* func_i9_80115DF0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 argA, s32 argB, s32 argC, s32 argD, s32 argE, s32 argF, s32 arg10);
 Gfx* func_i9_80161050(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3);
+
+s32 func_i10_80115DF0(void);
 
 #endif // FUNCTIONS_H

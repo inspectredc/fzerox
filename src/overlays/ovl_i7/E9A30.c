@@ -4,19 +4,16 @@
 #include "fzx_racer.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"
+#include "assets/segment_2738A0.h"
 #include "assets/segment_2B9EA0.h"
 
-extern Gfx D_5000178[];
-extern Gfx D_5001E38[];
-extern Gfx D_5002B18[];
-
 extern s16 D_800CCFE8;
-extern s32 D_800CD004;
+extern s32 gCupType;
 extern s8 D_800CD3C0;
 extern s8 D_800DCE5C;
 extern s16 D_800E42CC;
-extern s32 D_800F8514;
-extern unk_800E4268 D_800E4268[1][6];
+extern s32 gTrackIndex;
+extern RaceStats gCupRaceStats[1][6];
 extern unk_8010B7B0 D_8010B7B0[];
 extern s32 D_i2_80106F10;
 extern s16 D_80106F48;
@@ -24,7 +21,7 @@ extern s16 D_80106F48;
 extern s32 gNumPlayers;
 extern s32 gDifficulty;
 
-extern char* D_800E4180[55];
+extern char* gTrackNames[55];
 
 extern Gfx D_8014940[];
 
@@ -43,22 +40,22 @@ extern GfxPool D_1000000;
 
 extern unk_8014B480 D_8014B480[2];
 extern unk_8014B480* D_i7_8014BDF0;
-extern s16 D_i7_8014BDF4;
+extern s16 sTotalRacersKOd;
 extern u16 D_i7_8014BDF6;
-extern void* D_i7_8014BDF8;
-extern void* D_i7_8014BDFC;
-extern s16 D_i7_8014BE00;
-extern s16 D_i7_8014BE02;
-extern s16 D_i7_8014BE04;
-extern s32 D_i7_8014BE08;
-extern s16 D_i7_8014BE0C;
-extern f32 D_i7_8014BE10;
-extern s16 D_i7_8014BE14;
-extern s16 D_i7_8014BE16;
+extern void* sEndingTex;
+extern void* sEndingTextTex;
+extern s16 sEndScreenState;
+extern s16 sEndScreenFade;
+extern s16 sEndScreenAlpha;
+extern s32 D_i7_8014BE08; // state
+extern s16 D_i7_8014BE0C; // counter
+extern f32 D_i7_8014BE10; // scroll top
+extern s16 D_i7_8014BE14; // congrats/ending alpha
+extern s16 sCupNameIndex;
 extern s16 D_i7_8014BE18;
-extern s16 D_i7_8014BE1A;
-extern s16 D_i7_8014BE1C;
-extern s16 D_i7_8014BE1E;
+extern s16 sCupDifficulty;
+extern s16 D_i7_8014BE1C; // thanks for playing state
+extern s16 sThanksForPlayingFade;
 extern s16 D_i7_8014BE20;
 extern unk_8014BE28 D_i7_8014BE28[10];
 extern unk_8014BEC8 D_i7_8014BEC8[3];
@@ -80,22 +77,51 @@ extern s32 D_i7_8014C044;
 extern u8 D_i7_8014C048[0x200];
 extern s32 D_i7_8014C248;
 
-void* D_i7_80149E90[][2] = {
-    { D_F13AAE4, D_F255FF8 }, { D_F15DEA8, D_F2457C4 }, { D_F1A1758, D_F2461CC }, { D_F16FEEC, D_F246C18 },
-    { D_F180754, D_F247590 }, { D_F193DC4, D_F247F40 }, { D_F166A40, D_F248844 }, { D_F146944, D_F2490D0 },
-    { D_F19CD38, D_F249A78 }, { D_F16B94C, D_F24A294 }, { D_F1882F0, D_F24AC0C }, { D_F1A9E6C, D_F24B444 },
-    { D_F17CDC8, D_F24BD9C }, { D_F18BDDC, D_F24C588 }, { D_F13EC40, D_F24CE20 }, { D_F151B38, D_F24D864 },
-    { D_F18FFC0, D_F24E224 }, { D_F179494, D_F24EC48 }, { D_F142BF0, D_F24F4A0 }, { D_F198B8C, D_F24FD5C },
-    { D_F184744, D_F2505E8 }, { D_F14A3CC, D_F250D64 }, { D_F1B2DBC, D_F251718 }, { D_F159288, D_F252134 },
-    { D_F1AE278, D_F252AF8 }, { D_F1A5D74, D_F2532F0 }, { D_F1619EC, D_F253C68 }, { D_F14E458, D_F254468 },
-    { D_F174BF0, D_F254EF0 }, { D_F15538C, D_F25577C }, { D_F1B72F0, NULL },      { D_F1C0524, D_F244F14 },
-    { D_F1B9F4C, NULL },      { D_F1BD278, NULL },
+void* sEndingTextures[][2] = {
+    { aEndingCaptainFalconMasterTex, aEndingTextCaptainFalconMasterTex },                 // CAPTAIN_FALCON
+    { aEndingDrStewartTex, aEndingTextDrStewartTex },                                     // DR_STEWART
+    { aEndingPicoTex, aEndingTextPicoTex },                                               // PICO
+    { aEndingSamuraiGorohTex, aEndingTextSamuraiGorohTex },                               // SAMURAI_GOROH
+    { aEndingJodySummerTex, aEndingTextJodySummerTex },                                   // JODY_SUMMER
+    { aEndingMightyGazelleTex, aEndingTextMightyGazelleTex },                             // MIGHTY_GAZELLE
+    { aEndingMrEadTex, aEndingTextMrEadTex },                                             // MR_EAD
+    { aEndingBabaTex, aEndingTextBabaTex },                                               // BABA
+    { aEndingOctomanTex, aEndingTextOctomanTex },                                         // OCTOMAN
+    { aEndingGomarAndShiohTex, aEndingTextGomarAndShiohTex },                             // GOMAR_AND_SHIOH
+    { aEndingKateAlenTex, aEndingTextKateAlenTex },                                       // KATE_ALEN
+    { aEndingRogerBusterTex, aEndingTextRogerBusterTex },                                 // ROGER_BUSTER
+    { aEndingJamesMcCloudTex, aEndingTextJamesMcCloudTex },                               // JAMES_MCCLOUD
+    { aEndingLeonTex, aEndingTextLeonTex },                                               // LEON
+    { aEndingAntonioGusterTex, aEndingTextAntonioGusterTex },                             // ANTONIO_GUSTER
+    { aEndingBlackShadowTex, aEndingTextBlackShadowTex },                                 // BLACK_SHADOW
+    { aEndingMichaelChainTex, aEndingTextMichaelChainTex },                               // MICHAEL_CHAIN
+    { aEndingJackLevinTex, aEndingTextJackLevinTex },                                     // JACK_LEVIN
+    { aEndingSuperArrowTex, aEndingTextSuperArrowTex },                                   // SUPER_ARROW
+    { aEndingMrsArrowTex, aEndingTextMrsArrowTex },                                       // MRS_ARROW
+    { aEndingJohnTanakaTex, aEndingTextJohnTanakaTex },                                   // JOHN_TANAKA
+    { aEndingBeastmanTex, aEndingTextBeastmanTex },                                       // BEASTMAN
+    { aEndingZodaTex, aEndingTextZodaTex },                                               // ZODA
+    { aEndingDrClashTex, aEndingTextDrClashTex },                                         // DR_CLASH
+    { aEndingSilverNeelsenTex, aEndingTextSilverNeelsenTex },                             // SILVER_NEELSEN
+    { aEndingBioRexTex, aEndingTextBioRexTex },                                           // BIO_REX
+    { aEndingDraqTex, aEndingTextDraqTex },                                               // DRAQ
+    { aEndingBillyTex, aEndingTextBillyTex },                                             // BILLY
+    { aEndingTheSkullTex, aEndingTextTheSkullTex },                                       // THE_SKULL
+    { aEndingBloodFalconTex, aEndingTextBloodFalconTex },                                 // BLOOD_FALCON
+    { aEndingCaptainFalconAltTex, NULL },                                                 // CAPTAIN_FALCON 2
+    { aEndingCaptainFalconStandardExpertTex, aEndingTextCaptainFalconStandardExpertTex }, // CAPTAIN_FALCON 3
+    { aEndingSamuraiGorohAltTex, NULL },                                                  // SAMURAI_GOROH 2
+    { aEndingJodySummerAltTex, NULL },                                                    // JODY_SUMMER 2
 };
 
-void* D_i7_80149FA0[] = { D_F243410, D_F243610, D_F243710, D_F243910, D_F243B10,
-                          D_F243D10, D_F243F10, D_F244110, D_F244310, D_F244510 };
+void* sFinalResultPositionDigitTexs[] = {
+    aFinalResultPosition0Tex, aFinalResultPosition1Tex, aFinalResultPosition2Tex, aFinalResultPosition3Tex,
+    aFinalResultPosition4Tex, aFinalResultPosition5Tex, aFinalResultPosition6Tex, aFinalResultPosition7Tex,
+    aFinalResultPosition8Tex, aFinalResultPosition9Tex,
+};
 
-void* D_i7_80149FC8[] = { D_F244710, D_F244910, D_F244B10, D_F244D10 };
+void* sFinalResultsPositionSuffixTexs[] = { aFinalResultPositionSuffixSTTex, aFinalResultPositionSuffixNDTex,
+                                            aFinalResultPositionSuffixRDTex, aFinalResultPositionSuffixTHTex };
 
 Gfx* D_i7_80149FD8[] = { D_5000178, D_5001E38, D_5002B18 };
 
@@ -104,11 +130,11 @@ f32 D_i7_80149FE8 = 1.0f;
 
 s16 D_i7_80149FEC[] = { 1, 3, 4, 4, 4, 4, 4, 4, 5, -1 };
 
-char D_i7_8014A000[] = "TOTAL RANKING";
+char sTotalRankingStr[] = "TOTAL RANKING";
 
-const char* D_i7_8014A010[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP", "EDIT CUP", "X CUP" };
+const char* sCupNames[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP", "EDIT CUP", "X CUP" };
 
-char D_i7_8014A028[] = "THANKS FOR PLAYING!!";
+char sThanksForPlayingStr[] = "THANKS FOR PLAYING!!";
 
 f32 D_i7_8014A040[] = { 0.0f, -40.0f, -60.0f, 0.0f };
 
@@ -462,18 +488,78 @@ UNUSED s32 D_i7_8014ABFC = 0;
 s32 D_i7_8014AC00 = 0;
 UNUSED s32 D_i7_8014AC04 = 0x800;
 
-void* D_i7_8014AC08[] = { D_F0385AC, D_F033AB4, D_F051FDC, D_F04412C, D_F03EBB4, D_F04B7E4, D_F05E28C,
-                          D_F05839C, D_F065414, D_F0B2F94, D_F0AE148, D_F082E6C, D_F0DD308, D_F0D724C,
-                          D_F075A98, D_F0E2840, D_F0B9D2C, D_F0CC4D4, D_F08F4F4, D_F096470, D_F0A1AB8,
-                          D_F0704D0, D_F09C0CC, D_F0C5624, D_F0892B4, D_F0A7614, D_F07B3EC, D_F0BF7E4,
-                          D_F06AA80, D_F0D120C, D_F0E85EC, D_F0EE2A4, D_F0F4838 };
+void* sFullPortraits[] = {
+    aFullPortraitCaptainFalconTex, // CAPTAIN_FALCON
+    aFullPortraitDrStewartTex,     // DR_STEWART
+    aFullPortraitPicoTex,          // PICO
+    aFullPortraitSamuraiGorohTex,  // SAMURAI_GOROH
+    aFullPortraitJodySummerTex,    // JODY_SUMMER
+    aFullPortraitMightyGazelleTex, // MIGHTY_GAZELLE
+    aFullPortraitMrEadTex,         // MR_EAD
+    aFullPortraitBabaTex,          // BABA
+    aFullPortraitOctomanTex,       // OCTOMAN
+    aFullPortraitGomarAndShiohTex, // GOMAR_AND_SHIOH
+    aFullPortraitKateAlenTex,      // KATE_ALEN
+    aFullPortraitRogerBusterTex,   // ROGER_BUSTER
+    aFullPortraitJamesMcCloudTex,  // JAMES_MCCLOUD
+    aFullPortraitLeonTex,          // LEON
+    aFullPortraitAntonioGusterTex, // ANTONIO_GUSTER
+    aFullPortraitBlackShadowTex,   // BLACK_SHADOW
+    aFullPortraitMichaelChainTex,  // MICHAEL_CHAIN
+    aFullPortraitJackLevinTex,     // JACK_LEVIN
+    aFullPortraitSuperArrowTex,    // SUPER_ARROW
+    aFullPortraitMrsArrowTex,      // MRS_ARROW
+    aFullPortraitJohnTanakaTex,    // JOHN_TANAKA
+    aFullPortraitBeastmanTex,      // BEASTMAN
+    aFullPortraitZodaTex,          // ZODA
+    aFullPortraitDrClashTex,       // DR_CLASH
+    aFullPortraitSilverNeelsenTex, // SILVER_NEELSEN
+    aFullPortraitBioRexTex,        // BIO_REX
+    aFullPortraitDraqTex,          // DRAQ
+    aFullPortraitBillyTex,         // BILLY
+    aFullPortraitTheSkullTex,      // THE_SKULL
+    aFullPortraitBloodFalconTex,   // BLOOD_FALCON
+    aFullPortraitCaptainFalconAltTex,
+    aFullPortraitSamuraiGorohAltTex,
+    aFullPortraitJodySummerAltTex,
+};
 
 u8 D_i7_8014AC8C[] = { 1 << 7, 1 << 6, 1 << 5, 1 << 4, 1 << 3, 1 << 2, 1 << 1, 1 << 0 };
 
-void* D_i7_8014AC94[] = { D_F265E80, D_F268A80, D_F266880, D_F267A80, D_F268680, D_F266280, D_F267C80, D_F266080,
-                          D_F267880, D_F267080, D_F269680, D_F266480, D_F268080, D_F269280, D_F268C80, D_F266A80,
-                          D_F269480, D_F266680, D_F267280, D_F268880, D_F269080, D_F267480, D_F268E80, D_F266E80,
-                          D_F269880, D_F268480, D_F266C80, D_F267680, D_F268280, D_F267E80 };
+// Icon Textures (Less than 4b size), used as some kind of mask
+// Fireworks?
+void* D_i7_8014AC94[] = {
+    D_F265E80, // CAPTAIN_FALCON
+    D_F268A80, // DR_STEWART
+    D_F266880, // PICO
+    D_F267A80, // SAMURAI_GOROH
+    D_F268680, // JODY_SUMMER
+    D_F266280, // MIGHTY_GAZELLE
+    D_F267C80, // MR_EAD
+    D_F266080, // BABA
+    D_F267880, // OCTOMAN
+    D_F267080, // GOMAR_AND_SHIOH
+    D_F269680, // KATE_ALEN
+    D_F266480, // ROGER_BUSTER
+    D_F268080, // JAMES_MCCLOUD
+    D_F269280, // LEON
+    D_F268C80, // ANTONIO_GUSTER
+    D_F266A80, // BLACK_SHADOW
+    D_F269480, // MICHAEL_CHAIN
+    D_F266680, // JACK_LEVIN
+    D_F267280, // SUPER_ARROW
+    D_F268880, // MRS_ARROW
+    D_F269080, // JOHN_TANAKA
+    D_F267480, // BEASTMAN
+    D_F268E80, // ZODA
+    D_F266E80, // DR_CLASH
+    D_F269880, // SILVER_NEELSEN
+    D_F268480, // BIO_REX
+    D_F266C80, // DRAQ
+    D_F267680, // BILLY
+    D_F268280, // THE_SKULL
+    D_F267E80, // BLOOD_FALCON
+};
 
 void* D_i7_8014AD0C = D_F269A80;
 void* D_i7_8014AD10 = D_F269C80;
@@ -659,44 +745,44 @@ unk_struct_C D_i7_8014B310[] = {
     { -2, 0, 0 },
 };
 
-s32 func_i7_801439D0(s32 arg0, s16 arg1, s8 arg2) {
-    s32 var_v1;
+s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 arg2) {
+    s32 endScreenCharacterIndex;
 
-    switch (arg1) {
-        case 0:
+    switch (character) {
+        case CAPTAIN_FALCON:
             if (arg2 >= 2) {
-                var_v1 = 30;
+                endScreenCharacterIndex = 30;
             } else {
-                switch (arg0) {
-                    case 1:
-                    case 2:
-                        var_v1 = 31;
+                switch (difficulty) {
+                    case STANDARD:
+                    case EXPERT:
+                        endScreenCharacterIndex = 31;
                         break;
-                    case 3:
-                        var_v1 = arg1;
+                    case MASTER:
+                        endScreenCharacterIndex = character;
                         break;
                 }
             }
             break;
-        case 3:
+        case SAMURAI_GOROH:
             if (arg2 >= 2) {
-                var_v1 = 32;
+                endScreenCharacterIndex = 32;
             } else {
-                var_v1 = arg1;
+                endScreenCharacterIndex = character;
             }
             break;
-        case 4:
+        case JODY_SUMMER:
             if (arg2 >= 2) {
-                var_v1 = 33;
+                endScreenCharacterIndex = 33;
             } else {
-                var_v1 = arg1;
+                endScreenCharacterIndex = character;
             }
             break;
         default:
-            var_v1 = arg1;
+            endScreenCharacterIndex = character;
             break;
     }
-    return var_v1;
+    return endScreenCharacterIndex;
 }
 
 void func_i7_80147CC0(void);
@@ -704,25 +790,25 @@ void func_i7_801467FC(void);
 
 void func_i7_80143A90(void) {
     unk_8014BE28* var_v1;
-    s32 sp38;
+    s32 cupFirstTrackIndex;
     s32 pad;
     Racer* player = &gRacers[0];
     s32 i;
     s32 j;
-    void** temp_v0;
+    void** endingTextures;
     s32 var_a0;
 
     D_800CCFE8 = D_i2_80106F10 = 3;
     D_800DCE5C = 0;
     gNumPlayers = 1;
-    sp38 = (D_800F8514 / 6) * 6;
-    D_800F8514 = 0x37;
-    D_i7_8014BE1A = gDifficulty;
+    cupFirstTrackIndex = (gTrackIndex / 6) * 6;
+    gTrackIndex = 55;
+    sCupDifficulty = gDifficulty;
     gDifficulty = MASTER;
-    D_i7_8014BDF4 = 0;
+    sTotalRacersKOd = 0;
 
     for (j = 0; j < 6; j++) {
-        D_i7_8014BDF4 += D_800E4268[0][j].unk_0C;
+        sTotalRacersKOd += gCupRaceStats[0][j].racersKOd;
     }
 
     func_800A4EAC();
@@ -738,9 +824,9 @@ void func_i7_80143A90(void) {
     func_80071260(0);
     func_i7_80147CC0();
     func_i7_801467FC();
-    D_i7_8014BE00 = 0;
-    D_i7_8014BE02 = 0;
-    D_i7_8014BE04 = 0;
+    sEndScreenState = END_SCREEN_INACTIVE;
+    sEndScreenFade = 0;
+    sEndScreenAlpha = 0;
     D_i7_8014BDF6 = 0;
     if (D_80106F48 < 4) {
         D_i7_8014BDF6 |= 0xF;
@@ -751,10 +837,10 @@ void func_i7_80143A90(void) {
         D_800E42CC = 0;
         D_i7_8014BDF6 |= 0x10;
     } else if (D_800CD3C0 >= 2) {
-        switch (D_i7_8014BE1A) {
-            case 2:
-            case 3:
-                if (D_800CD004 == 3 && D_80106F48 == 1) {
+        switch (sCupDifficulty) {
+            case EXPERT:
+            case MASTER:
+                if (gCupType == JOKER_CUP && D_80106F48 == 1) {
                     D_i7_8014BDF6 |= 0x10;
                 }
                 break;
@@ -762,10 +848,10 @@ void func_i7_80143A90(void) {
     }
 
     if (D_80106F48 == 1) {
-        switch (D_i7_8014BE1A) {
-            case 1:
-            case 2:
-            case 3:
+        switch (sCupDifficulty) {
+            case STANDARD:
+            case EXPERT:
+            case MASTER:
                 D_i7_8014BDF6 |= 0x20;
                 break;
         }
@@ -776,29 +862,29 @@ void func_i7_80143A90(void) {
     D_i7_8014BE08 = 0;
     D_i7_8014BE0C = 0;
 
-    switch (D_800CD004) {
-        case 0:
-            D_i7_8014BE16 = 0;
+    switch (gCupType) {
+        case JACK_CUP:
+            sCupNameIndex = 0;
             break;
-        case 1:
-            D_i7_8014BE16 = 1;
+        case QUEEN_CUP:
+            sCupNameIndex = 1;
             break;
-        case 2:
-            D_i7_8014BE16 = 2;
+        case KING_CUP:
+            sCupNameIndex = 2;
             break;
-        case 3:
-            D_i7_8014BE16 = 3;
+        case JOKER_CUP:
+            sCupNameIndex = 3;
             break;
-        case 4:
-            D_i7_8014BE16 = 5;
+        case X_CUP:
+            sCupNameIndex = 5;
             break;
-        case 5:
-            D_i7_8014BE16 = 4;
+        case EDIT_CUP:
+            sCupNameIndex = 4;
             break;
     }
-    D_i7_8014BE18 = func_i2_801062E4(D_i7_8014A010[D_i7_8014BE16], 3, 1);
+    D_i7_8014BE18 = func_i2_801062E4(sCupNames[sCupNameIndex], 3, 1);
     D_i7_8014BE1C = 0;
-    D_i7_8014BE1E = 0;
+    sThanksForPlayingFade = 0;
     D_i7_8014BF28 = 0;
     var_a0 = 0;
 
@@ -808,31 +894,31 @@ void func_i7_80143A90(void) {
         var_v1->unk_00 = D_i7_80149FEC[i];
         switch (var_v1->unk_00) {
             case 1:
-                var_v1->unk_02 = 0;
+                var_v1->track = 0;
                 var_v1->unk_08 = 28.0f;
                 var_v1->unk_0C = 104.0f;
                 var_v1->unk_06 = 0x1F;
                 break;
             case 2:
-                var_v1->unk_02 = 0;
+                var_v1->track = 0;
                 var_v1->unk_08 = 76.0f;
                 var_v1->unk_06 = 0xCB;
                 var_v1->unk_0C = 62.0f;
                 break;
             case 3:
-                var_v1->unk_02 = 0;
+                var_v1->track = 0;
                 var_v1->unk_08 = 0.0f;
                 var_v1->unk_06 = 0x34;
                 var_v1->unk_0C = 236.0f;
                 break;
             case 5:
-                var_v1->unk_02 = 0;
+                var_v1->track = 0;
                 var_v1->unk_08 = 0.0f;
                 var_v1->unk_0C = 100.0f;
                 var_v1->unk_06 = 0x10A;
                 break;
             case 4:
-                var_v1->unk_02 = (s16) (sp38 + var_a0);
+                var_v1->track = (s16) (cupFirstTrackIndex + var_a0);
                 var_v1->unk_08 = 76.0f;
 
                 if (var_a0 != 0) {
@@ -848,39 +934,39 @@ void func_i7_80143A90(void) {
         var_v1++;
     }
     D_i7_8014BE20 = var_v1 - D_i7_8014BE28;
-    func_80078104(D_F256900, 0x3FF0, 0, 0, 0);
-    func_80078104(D_F243410, 0x200, 0, 0, 0);
-    func_80078104(D_F243610, 0x100, 0, 0, 0);
-    func_80078104(D_F243710, 0x200, 0, 0, 0);
-    func_80078104(D_F243910, 0x200, 0, 0, 0);
-    func_80078104(D_F243B10, 0x200, 0, 0, 0);
-    func_80078104(D_F243D10, 0x200, 0, 0, 0);
-    func_80078104(D_F243F10, 0x200, 0, 0, 0);
-    func_80078104(D_F244110, 0x200, 0, 0, 0);
-    func_80078104(D_F244310, 0x200, 0, 0, 0);
-    func_80078104(D_F244510, 0x200, 0, 0, 0);
-    func_80078104(D_F244710, 0x200, 0, 0, 0);
-    func_80078104(D_F244910, 0x200, 0, 0, 0);
-    func_80078104(D_F244B10, 0x200, 0, 0, 0);
-    func_80078104(D_F244D10, 0x200, 0, 0, 0);
+    func_80078104(aCongratulationsTex, 0x3FF0, 0, 0, 0);
+    func_80078104(aFinalResultPosition0Tex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPosition1Tex, 0x100, 0, 0, 0);
+    func_80078104(aFinalResultPosition2Tex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPosition3Tex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPosition4Tex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPosition5Tex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPosition6Tex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPosition7Tex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPosition8Tex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPosition9Tex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixSTTex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixNDTex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixRDTex, 0x200, 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixTHTex, 0x200, 0, 0, 0);
 
     if (D_i7_8014BDF6 & 0x20) {
 
-        temp_v0 = D_i7_80149E90[func_i7_801439D0(D_i7_8014BE1A, player->character, player->unk_167)];
+        endingTextures = sEndingTextures[func_i7_GetEndScreenIndex(sCupDifficulty, player->character, player->unk_167)];
 
-        D_i7_8014BDF8 = func_80078104(temp_v0[0], 0x81F0, 0, 1, 0);
+        sEndingTex = func_80078104(endingTextures[0], 0x81F0, 0, 1, 0);
 
-        if (temp_v0[1] != NULL) {
-            D_i7_8014BDFC = func_80078104(temp_v0[1], 0x3100, 0, 1, 0);
+        if (endingTextures[1] != NULL) {
+            sEndingTextTex = func_80078104(endingTextures[1], 0x3100, 0, 1, 0);
         } else {
-            D_i7_8014BDFC = NULL;
+            sEndingTextTex = NULL;
         }
     }
 }
 
 s32 func_i7_801442A0(void);
-void func_i7_80145FFC(void);
-void func_i7_8014612C(void);
+void func_i7_FadeInThanksForPlaying(void);
+void func_i7_FadeEndScreen(void);
 void func_i7_80146920(void);
 void func_i7_80147EBC(void);
 
@@ -899,10 +985,10 @@ s32 func_i7_801441A0(void) {
     func_80074844();
     func_i7_80147EBC();
     if (D_i7_8014BE1C != 0) {
-        func_i7_80145FFC();
+        func_i7_FadeInThanksForPlaying();
     }
-    if (D_i7_8014BE00 != 0) {
-        func_i7_8014612C();
+    if (sEndScreenState != END_SCREEN_INACTIVE) {
+        func_i7_FadeEndScreen();
     }
     func_i7_80146920();
 
@@ -947,7 +1033,7 @@ s32 func_i7_801442A0(void) {
             D_i7_8014BE14 = 255.0f * var_fv0;
             if (D_i7_8014BE0C >= 120) {
                 D_i7_8014BE08 = 2;
-                D_i7_8014BE14 = 0xFF;
+                D_i7_8014BE14 = 255;
                 D_i7_8014BE0C = 0;
                 func_80088CAC(1);
             }
@@ -1014,7 +1100,7 @@ s32 func_i7_801442A0(void) {
             if (D_i7_8014BE0C > 1020) {
                 if (D_i7_8014BDF6 & 0x20) {
                     D_i7_8014BE08 = 5;
-                    D_i7_8014BE00 = 1;
+                    sEndScreenState = END_SCREEN_FADE_IN;
                 } else {
                     D_i7_8014BE08 = 6;
                 }
@@ -1022,7 +1108,7 @@ s32 func_i7_801442A0(void) {
             }
             break;
         case 5:
-            if (D_i7_8014BE00 == 0) {
+            if (sEndScreenState == END_SCREEN_INACTIVE) {
                 D_i7_8014BE08 = 6;
                 D_i7_8014BE0C = 0;
             }
@@ -1127,27 +1213,27 @@ Gfx* func_i7_801447F4(Gfx* gfx) {
     return func_i7_80144B2C(gfx);
 }
 
-Gfx* func_i7_80144EF4(Gfx*, unk_8014BE28*, f32);
+Gfx* func_i7_DrawFinalResultsRaceResult(Gfx*, unk_8014BE28*, f32);
 Gfx* func_i7_801454B4(Gfx*, unk_8014BE28*, f32);
-Gfx* func_i7_80145D28(Gfx*, unk_8014BE28*, f32);
-Gfx* func_i7_80146020(Gfx*);
-Gfx* func_i7_80146250(Gfx*);
+Gfx* func_i7_DrawFinalResultsCupInfo(Gfx*, unk_8014BE28*, f32);
+Gfx* func_i7_DrawThanksForPlayingWindow(Gfx*);
+Gfx* func_i7_DrawEndScreen(Gfx*);
 
 Gfx* func_i7_80144B2C(Gfx* gfx) {
     unk_8014BE28* var_s1;
-    f32 var_fs0;
+    f32 textureTop;
     s32 i;
 
-    var_fs0 = D_i7_8014BE10;
+    textureTop = D_i7_8014BE10;
 
     var_s1 = D_i7_8014BE28;
     for (i = 0; i < D_i7_8014BE20; i++, var_s1++) {
-        var_fs0 += var_s1->unk_0C;
-        if ((var_s1->unk_00 == 0) || (var_s1->unk_04 == 0) || var_fs0 > 232.0f) {
+        textureTop += var_s1->unk_0C;
+        if ((var_s1->unk_00 == 0) || (var_s1->unk_04 == 0) || textureTop > 232.0f) {
             continue;
         }
 
-        if ((var_s1->unk_06 + var_fs0) < 8.0f) {
+        if ((var_s1->unk_06 + textureTop) < 8.0f) {
             var_s1->unk_00 = 0;
             continue;
         }
@@ -1157,79 +1243,80 @@ Gfx* func_i7_80144B2C(Gfx* gfx) {
                     gDPPipeSync(gfx++);
                     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i7_8014BE14);
 
-                    gfx = func_8007B14C(gfx, func_800783AC(D_F256900), var_s1->unk_08, var_fs0, 264, 31, G_IM_FMT_RGBA,
-                                        G_IM_SIZ_16b, 1, 1, 0, 0);
+                    gfx = func_8007B14C(gfx, func_800783AC(aCongratulationsTex), var_s1->unk_08, textureTop, 264, 31,
+                                        G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
                 }
                 break;
             case 2:
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i7_8014BE14);
 
-                gfx = func_8007B14C(gfx, D_i7_8014BDF8, var_s1->unk_08, var_fs0, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                gfx = func_8007B14C(gfx, sEndingTex, var_s1->unk_08, textureTop, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b,
                                     1, 1, 0, 0);
 
-                if (D_i7_8014BDFC != NULL) {
-                    gfx = func_8007B14C(gfx, D_i7_8014BDFC, var_s1->unk_08 + -14.0f, var_fs0 + 99.0f + 10.0f, 196, 32,
-                                        G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+                if (sEndingTextTex != NULL) {
+                    gfx = func_8007B14C(gfx, sEndingTextTex, var_s1->unk_08 + -14.0f, textureTop + 99.0f + 10.0f, 196,
+                                        32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
                 }
                 break;
             case 3:
-                gfx = func_i7_80145D28(gfx, var_s1, var_fs0);
+                gfx = func_i7_DrawFinalResultsCupInfo(gfx, var_s1, textureTop);
                 break;
             case 4:
-                gfx = func_i7_80144EF4(gfx, var_s1, var_fs0);
+                gfx = func_i7_DrawFinalResultsRaceResult(gfx, var_s1, textureTop);
                 break;
             case 5:
-                gfx = func_i7_801454B4(gfx, var_s1, var_fs0);
+                gfx = func_i7_801454B4(gfx, var_s1, textureTop);
                 break;
         }
     }
 
     if (D_i7_8014BE1C != 0) {
-        gfx = func_i7_80146020(gfx);
+        gfx = func_i7_DrawThanksForPlayingWindow(gfx);
     }
-    if (D_i7_8014BE00 != 0) {
-        gfx = func_i7_80146250(gfx);
+    if (sEndScreenState != END_SCREEN_INACTIVE) {
+        gfx = func_i7_DrawEndScreen(gfx);
     }
     return gfx;
 }
 
-Gfx* func_i7_80145244(Gfx*, s32, s32, s32, bool);
-Gfx* func_i7_80146344(Gfx*, s32, s32, s32);
+Gfx* func_i7_DrawFinalResultsPosition(Gfx*, s32, s32, s32, bool);
+Gfx* func_i7_DrawResultsRacersKOd(Gfx*, s32, s32, s32);
 
-Gfx* func_i7_80144EF4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
-    s32 sp9C;
+Gfx* func_i7_DrawFinalResultsRaceResult(Gfx* gfx, unk_8014BE28* arg1, f32 baseYPos) {
+    s32 cupTrackNo;
     f32 var_fv0;
-    bool var_v0;
+    bool shouldHighlight;
     s32 pad[2];
-    unk_800E4268* temp_s2;
-    const char* temp_s1;
+    RaceStats* raceStats;
+    const char* trackName;
 
-    sp9C = arg1->unk_02 % 6;
-    temp_s2 = &D_800E4268[0][sp9C];
-    temp_s1 = D_800E4180[arg1->unk_02];
+    cupTrackNo = arg1->track % 6;
+    raceStats = &gCupRaceStats[0][cupTrackNo];
+    trackName = gTrackNames[arg1->track];
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
 
     var_fv0 = 160.0f;
 
-    gfx = func_i2_80106450(gfx, (var_fv0 + 2.0f) - (func_i2_801062E4(temp_s1, 3, 1) / 2), (arg2 + 16.0f) + 2.0f,
-                           temp_s1, 1, 3, 0);
+    gfx = func_i2_80106450(gfx, (var_fv0 + 2.0f) - (func_i2_801062E4(trackName, 3, 1) / 2), (baseYPos + 16.0f) + 2.0f,
+                           trackName, 1, 3, 0);
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    gfx = func_i2_80106450(gfx, var_fv0 - (func_i2_801062E4(temp_s1, 3, 1) / 2), (arg2 + 16.0f), temp_s1, 1, 3, 0);
+    gfx = func_i2_80106450(gfx, var_fv0 - (func_i2_801062E4(trackName, 3, 1) / 2), (baseYPos + 16.0f), trackName, 1, 3,
+                           0);
     gSPDisplayList(gfx++, D_8014940);
 
-    if (temp_s2->unk_08 == 1) {
-        var_v0 = true;
+    if (raceStats->position == 1) {
+        shouldHighlight = true;
     } else {
-        var_v0 = false;
+        shouldHighlight = false;
     }
 
-    gfx = func_i7_80145244(gfx, 50, arg2 + 26.0f, temp_s2->unk_08, var_v0);
+    gfx = func_i7_DrawFinalResultsPosition(gfx, 50, baseYPos + 26.0f, raceStats->position, shouldHighlight);
     gDPPipeSync(gfx++);
     if (0) {}
     gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
@@ -1237,79 +1324,79 @@ Gfx* func_i7_80144EF4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gfx = func_i3_DrawTimerScisThousandths(gfx, temp_s2->unk_00, 0x6E, (arg2 + 28.0f), 1.0f);
+    gfx = func_i3_DrawTimerScisThousandths(gfx, raceStats->raceTime, 110, (baseYPos + 28.0f), 1.0f);
     gDPPipeSync(gfx++);
-    gfx = func_i3_8013B348(gfx, 0xC2, (arg2 + 28.0f), temp_s2->unk_04, false, false);
+    gfx = func_i3_DrawSpeed(gfx, 194, (baseYPos + 28.0f), raceStats->maxSpeed, false, false);
     gDPPipeSync(gfx++);
-    return func_i7_80146344(gfx, 0x6E, (arg2 + 48.0f), temp_s2->unk_0C);
+    return func_i7_DrawResultsRacersKOd(gfx, 110, (baseYPos + 48.0f), raceStats->racersKOd);
 }
 
-Gfx* func_i7_80145244(Gfx* gfx, s32 xPos, s32 yPos, s32 arg3, bool arg4) {
+Gfx* func_i7_DrawFinalResultsPosition(Gfx* gfx, s32 xPos, s32 yPos, s32 position, bool shouldHighlight) {
     s32 i;
     s32 xOffset;
     s32 width;
-    s32 sp80;
-    s32 sp78[2];
-    s32 var_t0;
-    s32 temp_v0;
+    s32 positionSuffix;
+    s32 digits[2];
+    s32 positionVar;
+    s32 digit;
 
-    var_t0 = arg3;
+    positionVar = position;
 
-    if ((arg3 == 1) || (arg3 == 0x15)) {
-        sp80 = 0;
-    } else if ((arg3 == 2) || (arg3 == 0x16)) {
-        sp80 = 1;
-    } else if ((arg3 == 3) || (arg3 == 0x17)) {
-        sp80 = 2;
+    if ((position == 1) || (position == 21)) {
+        positionSuffix = POSITION_SUFFIX_ST;
+    } else if ((position == 2) || (position == 22)) {
+        positionSuffix = POSITION_SUFFIX_ND;
+    } else if ((position == 3) || (position == 23)) {
+        positionSuffix = POSITION_SUFFIX_RD;
     } else {
-        sp80 = 3;
+        positionSuffix = POSITION_SUFFIX_TH;
     }
 
     for (i = 0; i < 2; i++) {
-        sp78[i] = var_t0 % 10;
-        var_t0 /= 10;
+        digits[i] = positionVar % 10;
+        positionVar /= 10;
     }
 
     gDPPipeSync(gfx++);
 
-    if (arg4) {
+    if (shouldHighlight) {
         gfx = func_8007DB28(gfx, 0);
     } else {
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 255, 255);
     }
 
     for (i = 0; i < 2; i++) {
-        temp_v0 = sp78[1 - i];
-        if ((i == 0) && (temp_v0 == 0)) {
+        digit = digits[1 - i];
+        if ((i == 0) && (digit == 0)) {
             xPos += 16;
             continue;
         }
 
-        if (temp_v0 != 1) {
+        if (digit != 1) {
             xOffset = 0;
             width = 16;
         } else {
             xOffset = 8;
             width = 8;
         }
-        gfx = func_8007B14C(gfx, func_800783AC(D_i7_80149FA0[temp_v0]), xPos + xOffset, yPos, width, 16, G_IM_FMT_RGBA,
-                            G_IM_SIZ_16b, 1, 0, 0, 0);
+        gfx = func_8007B14C(gfx, func_800783AC(sFinalResultPositionDigitTexs[digit]), xPos + xOffset, yPos, width, 16,
+                            G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0, 0, 0);
         xPos += 16;
     }
 
-    return func_8007B14C(gfx, func_800783AC(D_i7_80149FC8[sp80]), xPos, yPos, 16, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0,
-                         0, 0);
+    return func_8007B14C(gfx, func_800783AC(sFinalResultsPositionSuffixTexs[positionSuffix]), xPos, yPos, 16, 16,
+                         G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0, 0, 0);
 }
 
 Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     s32 i;
     f32 temp_fa1;
-    f32 var_fv0;
+    f32 left;
     s32 positionDigits[2];
     s32 ordinalSuffix;
     s32 position;
     s32 positionDigit;
-    s8 spCC[4];
+    char racersKOdStr[4];
 
     position = D_80106F48;
     if ((position == 1) || (position == 21)) {
@@ -1330,24 +1417,24 @@ Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
 
-    var_fv0 = 160.0f;
+    left = 160.0f;
     temp_fa1 = arg2 + 16.0f;
 
-    gfx = func_i2_80106450(gfx, (var_fv0 + 2.0f) - (func_i2_801062E4(D_i7_8014A000, 3, 1) / 2), temp_fa1 + 2.0f,
-                           D_i7_8014A000, 1, 3, 0);
+    gfx = func_i2_80106450(gfx, (left + 2.0f) - (func_i2_801062E4(sTotalRankingStr, 3, 1) / 2), temp_fa1 + 2.0f,
+                           sTotalRankingStr, 1, 3, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 250, 0, 255);
-    gfx =
-        func_i2_80106450(gfx, var_fv0 - (func_i2_801062E4(D_i7_8014A000, 3, 1) / 2), temp_fa1, D_i7_8014A000, 1, 3, 0);
+    gfx = func_i2_80106450(gfx, left - (func_i2_801062E4(sTotalRankingStr, 3, 1) / 2), temp_fa1, sTotalRankingStr, 1, 3,
+                           0);
     temp_fa1 += 10.0f;
-    var_fv0 = 122.0f;
+    left = 122.0f;
     gDPPipeSync(gfx++);
     gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 
     for (i = 0; i < ARRAY_COUNT(positionDigits); i++) {
         positionDigit = positionDigits[1 - i];
         if ((i == 0) && (positionDigit == 0)) {
-            var_fv0 += 28.0f;
+            left += 28.0f;
             continue;
         }
 
@@ -1357,50 +1444,50 @@ Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
-        gSPScisTextureRectangle(gfx++, (s32) (var_fv0) << 2, (s32) (temp_fa1) << 2, (s32) (var_fv0 + 28.0f) << 2,
+        gSPScisTextureRectangle(gfx++, (s32) (left) << 2, (s32) (temp_fa1) << 2, (s32) (left + 28.0f) << 2,
                                 (s32) (temp_fa1 + 32.0f) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
-        var_fv0 += 28.0f;
+        left += 28.0f;
     }
 
     gDPLoadTextureBlock(gfx++, aPositionOrdinalSuffixTexs[ordinalSuffix], G_IM_FMT_RGBA, G_IM_SIZ_16b, 20, 20, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
 
-    gSPScisTextureRectangle(gfx++, (s32) (var_fv0) << 2, (s32) ((temp_fa1 + 12.0f)) << 2, (s32) (var_fv0 + 20.0f) << 2,
+    gSPScisTextureRectangle(gfx++, (s32) (left) << 2, (s32) ((temp_fa1 + 12.0f)) << 2, (s32) (left + 20.0f) << 2,
                             (s32) ((temp_fa1 + 12.0f) + 20.0f) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
-    gfx = func_i7_80146344(gfx, 0x6E, arg2 + 70.0f, D_i7_8014BDF4);
+    gfx = func_i7_DrawResultsRacersKOd(gfx, 0x6E, arg2 + 70.0f, sTotalRacersKOd);
 
-    if (D_i7_8014BDF4 > 0) {
+    if (sTotalRacersKOd > 0) {
 
         for (i = 0; i < 4; i++) {
-            spCC[i] = 0;
+            racersKOdStr[i] = 0;
         }
 
-        sprintf(spCC, "%d", D_i7_8014BDF4);
+        sprintf(racersKOdStr, "%d", sTotalRacersKOd);
 
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-        i = D_i7_8014BDF4 / 10;
-        if (D_i7_8014BDF4 % 10) {
+        i = sTotalRacersKOd / 10;
+        if (sTotalRacersKOd % 10) {
             i++;
         }
-        gfx = func_i2_80106450(gfx, 0x6E, (arg2 + 70.0f) + 20.0f + (i * 10), spCC, 1, 3, 0);
+        gfx = func_i2_80106450(gfx, 0x6E, (arg2 + 70.0f) + 20.0f + (i * 10), racersKOdStr, 1, 3, 0);
     }
     return gfx;
 }
 
 extern const char* sDifficultyNames[];
 
-Gfx* func_i7_80145D28(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
-    s32 pad;
+Gfx* func_i7_DrawFinalResultsCupInfo(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
+    UNUSED s32 pad;
     f32 var_fv0;
     f32 temp_fa1;
-    const char* temp_s1;
+    const char* name;
 
-    temp_s1 = D_i7_8014A010[D_i7_8014BE16];
+    name = sCupNames[sCupNameIndex];
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
@@ -1408,101 +1495,99 @@ Gfx* func_i7_80145D28(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     var_fv0 = 160.0f;
     temp_fa1 = arg2 + 16.0f;
 
-    gfx = func_i2_80106450(gfx, (var_fv0 + 2.0f) - (func_i2_801062E4(temp_s1, 3, 1) / 2), temp_fa1 + 2.0f, temp_s1, 1,
-                           3, 0);
+    gfx = func_i2_80106450(gfx, (var_fv0 + 2.0f) - (func_i2_801062E4(name, 3, 1) / 2), temp_fa1 + 2.0f, name, 1, 3, 0);
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_i2_80106450(gfx, var_fv0 - (func_i2_801062E4(temp_s1, 3, 1) / 2), temp_fa1, temp_s1, 1, 3, 0);
+    gfx = func_i2_80106450(gfx, var_fv0 - (func_i2_801062E4(name, 3, 1) / 2), temp_fa1, name, 1, 3, 0);
 
     temp_fa1 += 20.0f;
-    temp_s1 = sDifficultyNames[D_i7_8014BE1A];
+    name = sDifficultyNames[sCupDifficulty];
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
 
-    gfx = func_i2_80106450(gfx, (var_fv0 + 2.0f) - (func_i2_801062E4(temp_s1, 3, 1) / 2), temp_fa1 + 2.0f, temp_s1, 1,
-                           3, 0);
+    gfx = func_i2_80106450(gfx, (var_fv0 + 2.0f) - (func_i2_801062E4(name, 3, 1) / 2), temp_fa1 + 2.0f, name, 1, 3, 0);
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    return func_i2_80106450(gfx, var_fv0 - (func_i2_801062E4(temp_s1, 3, 1) / 2), temp_fa1, temp_s1, 1, 3, 0);
+    return func_i2_80106450(gfx, var_fv0 - (func_i2_801062E4(name, 3, 1) / 2), temp_fa1, name, 1, 3, 0);
 }
 
-void func_i7_80145FFC(void) {
-    if (D_i7_8014BE1E < 120) {
-        D_i7_8014BE1E++;
+void func_i7_FadeInThanksForPlaying(void) {
+    if (sThanksForPlayingFade < 120) {
+        sThanksForPlayingFade++;
     }
 }
 
 #ifdef IMPORT_BSS
-Gfx* func_i7_80146020(Gfx* gfx) {
-    static s32 D_i7_8014BDE0;
-    static s32 D_i7_8014BDE4;
-    static s32 D_i7_8014BDE8;
-    static s32 D_i7_8014BDEC;
+Gfx* func_i7_DrawThanksForPlayingWindow(Gfx* gfx) {
+    static s32 sThanksForPlayingLeft;
+    static s32 sThanksForPlayingTop;
+    static s32 sThanksForPlayingWidth;
+    static s32 sThanksForPlayingBackgroundAlpha;
 
-    D_i7_8014BDEC = (D_i7_8014BE1E * 255) / 120;
+    sThanksForPlayingBackgroundAlpha = (sThanksForPlayingFade * 255) / 120;
 
-    gfx = func_8007A440(gfx, 12, 8, 308, 232, 0, 0, 0, D_i7_8014BDEC);
+    gfx = func_8007A440(gfx, 12, 8, 308, 232, 0, 0, 0, sThanksForPlayingBackgroundAlpha);
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i7_8014BDEC);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sThanksForPlayingBackgroundAlpha);
 
-    D_i7_8014BDE8 = func_i2_801062E4(D_i7_8014A028, 1, 1);
-    D_i7_8014BDE0 = (320 - D_i7_8014BDE8) / 2;
-    D_i7_8014BDE4 = 120;
+    sThanksForPlayingWidth = func_i2_801062E4(sThanksForPlayingStr, 1, 1);
+    sThanksForPlayingLeft = (SCREEN_WIDTH - sThanksForPlayingWidth) / 2;
+    sThanksForPlayingTop = SCREEN_HEIGHT / 2;
 
-    return func_i2_80106450(gfx, D_i7_8014BDE0, 120, D_i7_8014A028, 1, 1, 1);
+    return func_i2_80106450(gfx, sThanksForPlayingLeft, sThanksForPlayingTop, sThanksForPlayingStr, 1, 1, 1);
 }
 #else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_80146020.s")
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_DrawThanksForPlayingWindow.s")
 #endif
 
-void func_i7_8014612C(void) {
-    switch (D_i7_8014BE00) {
-        case 1:
-            D_i7_8014BE02++;
-            D_i7_8014BE04 = (D_i7_8014BE02 * 255) / 120;
-            if (D_i7_8014BE02 >= 120) {
-                D_i7_8014BE00 = 2;
-                D_i7_8014BE02 = 0;
-                D_i7_8014BE04 = 255;
+void func_i7_FadeEndScreen(void) {
+    switch (sEndScreenState) {
+        case END_SCREEN_FADE_IN:
+            sEndScreenFade++;
+            sEndScreenAlpha = (sEndScreenFade * 255) / 120;
+            if (sEndScreenFade >= 120) {
+                sEndScreenState = END_SCREEN_WAIT;
+                sEndScreenFade = 0;
+                sEndScreenAlpha = 255;
             }
             return;
-        case 2:
-            D_i7_8014BE02++;
-            if (D_i7_8014BE02 >= 180) {
-                D_i7_8014BE00 = 3;
-                D_i7_8014BE02 = 0;
+        case END_SCREEN_WAIT:
+            sEndScreenFade++;
+            if (sEndScreenFade >= 180) {
+                sEndScreenState = END_SCREEN_FADE_OUT;
+                sEndScreenFade = 0;
             }
             break;
-        case 3:
-            D_i7_8014BE02++;
-            D_i7_8014BE04 = 255 - (D_i7_8014BE02 * 255) / 120;
-            if (D_i7_8014BE02 >= 120) {
-                D_i7_8014BE00 = 0;
-                D_i7_8014BE02 = 0;
-                D_i7_8014BE04 = 0;
+        case END_SCREEN_FADE_OUT:
+            sEndScreenFade++;
+            sEndScreenAlpha = 255 - (sEndScreenFade * 255) / 120;
+            if (sEndScreenFade >= 120) {
+                sEndScreenState = END_SCREEN_INACTIVE;
+                sEndScreenFade = 0;
+                sEndScreenAlpha = 0;
             }
             break;
     }
 }
 
-Gfx* func_i7_80146250(Gfx* gfx) {
+Gfx* func_i7_DrawEndScreen(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i7_8014BE04);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sEndScreenAlpha);
 
-    gfx = func_8007B14C(gfx, D_i7_8014BDF8, 76, 62, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
-    if (D_i7_8014BDFC != NULL) {
-        gfx = func_8007B14C(gfx, D_i7_8014BDFC, 62, 171, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+    gfx = func_8007B14C(gfx, sEndingTex, 76, 62, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+    if (sEndingTextTex != NULL) {
+        gfx = func_8007B14C(gfx, sEndingTextTex, 62, 171, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
     }
     return gfx;
 }
 
-Gfx* func_i7_80146344(Gfx* gfx, s32 left, s32 top, s32 arg3) {
+Gfx* func_i7_DrawResultsRacersKOd(Gfx* gfx, s32 left, s32 top, s32 racersKOd) {
     s32 i;
     s32 j;
     s32 temp;
@@ -1516,8 +1601,8 @@ Gfx* func_i7_80146344(Gfx* gfx, s32 left, s32 top, s32 arg3) {
     gDPLoadTextureBlock(gfx++, aHudRacersKOdTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    numBlocks = arg3 / 10;
-    remainder = arg3 % 10;
+    numBlocks = racersKOd / 10;
+    remainder = racersKOd % 10;
 
     for (i = 0; i < numBlocks; i++) {
         temp = i * 10;
@@ -1758,7 +1843,7 @@ void func_i7_801471C0(void) {
     s32 character;
 
     D_i7_8014C044 = 0;
-    if ((D_i7_8014BE1A > 0) && (D_80106F48 < 4)) {
+    if ((sCupDifficulty > NOVICE) && (D_80106F48 < 4)) {
         D_i7_8014C044 = 1;
         D_i7_8014C038 = func_800768F4(0, 0xA80);
         D_i7_8014C03C = func_800768F4(0, 0xA80);
@@ -1772,14 +1857,14 @@ void func_i7_801471C0(void) {
 
             character = gRacers[i].character;
             j = character;
-            if ((character == 0) && (gRacers[i].unk_167 >= 2)) {
-                j = 0x1E;
-            } else if ((character == 3) && (gRacers[i].unk_167 >= 2)) {
-                j = 0x1F;
-            } else if ((character == 4) && (gRacers[i].unk_167 >= 2)) {
-                j = 0x20;
+            if ((character == CAPTAIN_FALCON) && (gRacers[i].unk_167 >= 2)) {
+                j = 30;
+            } else if ((character == SAMURAI_GOROH) && (gRacers[i].unk_167 >= 2)) {
+                j = 31;
+            } else if ((character == JODY_SUMMER) && (gRacers[i].unk_167 >= 2)) {
+                j = 32;
             }
-            D_i7_8014C034 = func_80078104(D_i7_8014AC08[j], 0x15888, 0, 1, 1);
+            D_i7_8014C034 = func_80078104(sFullPortraits[j], 0x15888, 0, 1, 1);
 
             for (j = 0; j != 0x2A; j++) {
                 for (var_a0 = 0; var_a0 < 32; var_a0++) {
@@ -1894,7 +1979,7 @@ void func_i7_80147CC0(void) {
         D_i7_8014C248 = 0;
         D_i7_8014C020 = 0;
         if (D_80106F48 == 1) {
-            if (D_800CD004 == 4) {
+            if (gCupType == X_CUP) {
                 func_80077CF0(D_i7_8014AD18[Math_Rand1() % 4], 0x200, D_i7_8014C048);
             } else if ((gRacers[0].character == CAPTAIN_FALCON) && (gRacers[0].unk_167 >= 2)) {
                 func_80077CF0(D_i7_8014AD0C, 0x200, D_i7_8014C048);
@@ -1967,7 +2052,7 @@ void func_i7_80147EBC(void) {
                 temp_s4->unk_20 = ((Math_Rand1() % 256) - 128.0f) * 0.01f;
                 temp_s4->unk_3C = Math_Rand1() % 7;
                 temp_s4->unk_2C = Math_Rand1() % 7;
-                temp_s4->unk_34 = Math_Rand1() % (128 - (D_i7_8014BE1A * 32));
+                temp_s4->unk_34 = Math_Rand1() % (128 - (sCupDifficulty * 32));
                 temp_s4->unk_28 = 1.2f;
                 switch (D_i7_8014C248) {
                     case 0:

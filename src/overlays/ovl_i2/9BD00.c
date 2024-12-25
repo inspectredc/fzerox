@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "ovl_i2.h"
 
 OSIoMesg D_i2_801117B0;
@@ -21,7 +22,7 @@ uintptr_t D_i2_80106DF0[][3] = {
 void func_i2_801033B8(unk_struct_60* arg0, u8* arg1);
 void func_i2_8010300C(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3);
 void func_i2_80102F70(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3);
-void func_i2_80102CA4(unk_struct_19E0* arg0, s32 arg1);
+void func_i2_80102CA4(unk_struct_19E0* arg0, s32 trackIndex);
 void func_i2_80101F9C(void* arg0, s32 arg1);
 
 extern u8 D_i2_8010D730[6][9];
@@ -396,7 +397,7 @@ void func_i2_801010D0(unk_struct_60* arg0) {
     func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_7F80 - (uintptr_t) &D_801247C0, arg0, sizeof(unk_struct_60));
 }
 
-void func_i2_80102214(unk_struct_110* arg0, s32 arg1);
+void func_i2_80102214(unk_struct_110* arg0, s32 trackIndex);
 
 s32 func_i2_80101118(s32 arg0) {
     u16 checksum;
@@ -450,7 +451,7 @@ s32 func_i2_801012CC(s32 arg0) {
     return 0;
 }
 
-s32 func_i2_80101310(s32 arg0, s32 arg1, s32 arg2) {
+s32 func_i2_80101310(s32 difficulty, s32 cupType, s32 character) {
     s32 i;
     s32 temp;
     unk_struct_60* var = (unk_struct_60*) D_i2_8010D7F0;
@@ -458,10 +459,10 @@ s32 func_i2_80101310(s32 arg0, s32 arg1, s32 arg2) {
     func_i2_8010046C(var);
     func_i2_801033B8(var, NULL);
 
-    temp = var->unk_10[arg0][arg2 / 3];
-    temp |= (1 << ((arg2 % 3) * 5)) << arg1;
+    temp = var->unk_10[difficulty][character / 3];
+    temp |= (1 << ((character % 3) * 5)) << cupType;
 
-    var->unk_10[arg0][arg2 / 3] = temp;
+    var->unk_10[difficulty][character / 3] = temp;
 
     // clang-format off
     for (i = 0; i < 14; i++) { \
@@ -889,7 +890,7 @@ void func_i2_80101FEC(unk_struct_10* arg0) {
 
     arg0->unk_08 = var | var_v1_2;
 
-    for (i = 0; i < 4; i++) {
+    for (i = JACK_CUP; i <= JOKER_CUP; i++) {
         arg0->unk_0A[i] = D_800E4174[i];
     }
 
@@ -935,7 +936,7 @@ void func_i2_801021B4(unk_struct_10_2* arg0) {
     s32 i;
 
     for (i = 0; i < 1; i++) {
-        arg0->unk_04[i] = var_a1->unk_20[i];
+        arg0->unk_04[i] = var_a1->timeRecord[i];
     }
     arg0->unk_02 = 0;
 
@@ -946,15 +947,15 @@ void func_i2_801021B4(unk_struct_10_2* arg0) {
     // clang-format on
 }
 
-void func_i2_80102214(unk_struct_110* arg0, s32 arg1) {
+void func_i2_80102214(unk_struct_110* arg0, s32 trackIndex) {
     unk_800F8510* temp_s5;
     s32 i;
     s32 j;
 
-    temp_s5 = &D_802A6B40[arg1];
+    temp_s5 = &D_802A6B40[trackIndex];
 
     for (i = 0; i < 5; i++) {
-        arg0->unk_04[i] = temp_s5->unk_20[i];
+        arg0->unk_04[i] = temp_s5->timeRecord[i];
         arg0->unk_18[i] = temp_s5->unk_98[i];
         func_i2_80102110(temp_s5->unk_34[i], arg0->unk_50[i]);
         for (j = 0; j < 4; j++) {
@@ -1083,7 +1084,7 @@ void func_i2_80102600(unk_801247C0* arg0) {
             func_i2_80101C78(sp60);
 
             for (j = 0; j < 5; j++) {
-                var_s7->unk_20[j] = MAX_TIMER;
+                var_s7->timeRecord[j] = MAX_TIMER;
                 var_s7->unk_98[j] = 0.5f;
                 func_i2_80102A7C(sp60, var_s7->unk_34[j]);
             }
@@ -1174,7 +1175,7 @@ void func_i2_80102784(unk_struct_19E0* arg0, s32 arg1) {
         D_800CD3C8 = 0;
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = JACK_CUP; i <= JOKER_CUP; i++) {
         D_800E4174[i] = var_v1_2->unk_0A[i];
     }
 
@@ -1260,11 +1261,11 @@ void func_i2_80102B20(unk_struct_19E0* arg0) {
     var_v0_2 = &D_802A6B40[54];
     var_v1 = &arg0->unk_10;
     for (i = 0; i < 1; i++) {
-        var_v0_2->unk_20[i] = var_v1->unk_04[i];
+        var_v0_2->timeRecord[i] = var_v1->unk_04[i];
     }
 }
 
-void func_i2_80102CA4(unk_struct_19E0* arg0, s32 arg1) {
+void func_i2_80102CA4(unk_struct_19E0* arg0, s32 trackIndex) {
     u16 checksum;
     s32 j;
     s32 i;
@@ -1277,7 +1278,7 @@ void func_i2_80102CA4(unk_struct_19E0* arg0, s32 arg1) {
     j = 0;
 
     for (i = 0, var_s0 = arg0; i < 2; i++) {
-        if (var_s0->unk_20[arg1].checksum != func_i2_801035B0(var_s0, arg1)) {
+        if (var_s0->unk_20[trackIndex].checksum != func_i2_801035B0(var_s0, trackIndex)) {
             j++;
             var_s4 = i;
         }
@@ -1286,28 +1287,28 @@ void func_i2_80102CA4(unk_struct_19E0* arg0, s32 arg1) {
 
     if (j == 2) {
 
-        func_i2_80101D18(&arg0[0].unk_20[arg1], 1);
-        arg0[1].unk_20[arg1] = arg0[0].unk_20[arg1];
+        func_i2_80101D18(&arg0[0].unk_20[trackIndex], 1);
+        arg0[1].unk_20[trackIndex] = arg0[0].unk_20[trackIndex];
 
-        checksum = func_i2_801035B0(arg0, arg1);
+        checksum = func_i2_801035B0(arg0, trackIndex);
 
         for (i = 0; i < 2; i++) {
-            func_i2_80100ED4(arg0, i, arg1, checksum);
+            func_i2_80100ED4(arg0, i, trackIndex, checksum);
         }
 
     } else if (j == 1) {
         var_v0 = (var_s4 == 0) ? 1 : 0;
 
-        (arg0 + var_s4)->unk_20[arg1] = (arg0 + var_v0)->unk_20[arg1];
+        (arg0 + var_s4)->unk_20[trackIndex] = (arg0 + var_v0)->unk_20[trackIndex];
 
-        func_i2_80100ED4(arg0, var_s4, arg1, func_i2_801035B0(arg0, arg1));
+        func_i2_80100ED4(arg0, var_s4, trackIndex, func_i2_801035B0(arg0, trackIndex));
     }
 
-    sp40 = &arg0->unk_20[arg1];
-    var_s3 = &D_802A6B40[arg1];
+    sp40 = &arg0->unk_20[trackIndex];
+    var_s3 = &D_802A6B40[trackIndex];
 
     for (i = 0; i < 5; i++) {
-        var_s3->unk_20[i] = sp40->unk_04[i];
+        var_s3->timeRecord[i] = sp40->unk_04[i];
         var_s3->unk_98[i] = sp40->unk_18[i];
         func_i2_80102A7C(sp40->unk_50[i], var_s3->unk_34[i]);
         for (j = 0; j < 4; j++) {

@@ -6,7 +6,7 @@
 extern s16 D_800CD16C;
 
 s32 gNumPlayers = 1;
-s32 D_800CD004 = 0;
+s32 gCupType = JACK_CUP;
 s32 gDifficulty = NOVICE;
 s32 gTotalLapCount = 3;
 s8 D_800CD010 = 0;
@@ -129,7 +129,7 @@ void func_80068B20(void) {
 }
 
 extern f32 D_800E5EF0;
-extern s32 D_800F8514;
+extern s32 gTrackIndex;
 
 void func_80068BC0(void) {
     if (D_800CD044 == 0) {
@@ -151,11 +151,11 @@ void func_80068BC0(void) {
                 break;
             case 4:
                 D_800CD044 = 1;
-                if (D_800F8514 % 6 == 5) {
+                if (gTrackIndex % 6 == 5) {
                     D_800DCE48.gameMode = GAMEMODE_11;
                 } else {
                     D_800DCE48.gameMode = GAMEMODE_800F;
-                    D_800F8514++;
+                    gTrackIndex++;
                 }
                 D_800E5EF0 = 0.5f;
                 break;
@@ -290,7 +290,7 @@ void func_80068F04(void) {
 
                 D_800DCE48.gameMode = D_800CD024[D_800CD014];
                 gNumPlayers = D_800CD030[D_800CD014];
-                D_800F8514 = D_800CD03C[D_800CD018];
+                gTrackIndex = D_800CD03C[D_800CD018];
                 D_800CD014++;
                 D_800CD018++;
                 if (D_800CD014 >= 3) {
@@ -398,8 +398,8 @@ void func_800690FC(void) {
             switch (gGameMode) {
                 case GAMEMODE_4009:
                 case GAMEMODE_4012:
-                    if ((gNumPlayers == 1) && (D_800F8514 < 0x18)) {
-                        func_i2_801012CC(D_800F8514);
+                    if ((gNumPlayers == 1) && (gTrackIndex < 0x18)) {
+                        func_i2_801012CC(gTrackIndex);
                     }
                     break;
                 case GAMEMODE_8008:
@@ -461,7 +461,7 @@ void func_800690FC(void) {
                         func_8008D7E8();
                         break;
                     case 2:
-                        func_i2_80100520(D_800F8514);
+                        func_i2_80100520(gTrackIndex);
                         func_8008D8E8();
                         break;
                     case 3:

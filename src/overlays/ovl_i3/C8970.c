@@ -18,7 +18,7 @@ u16 D_i3_80142188;
 s32 D_i3_8014218C;
 TexturePtr sSkyboxTexture;
 TexturePtr sBackgroundFloorTexture;
-TexturePtr D_i3_80142198;
+TexturePtr sCloudTexture;
 TexturePtr D_i3_8014219C;
 unk_801421A0 D_i3_801421A0[6];
 unk_80142248 D_i3_80142248[6];
@@ -47,38 +47,39 @@ f32 D_i3_801407A8 = 100.0f;
  */
 
 // MUTE CITY
-CourseBackgroundFloor D_i3_801407AC = { D_F215FB0, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseBackgroundFloor sBackgroundFloor0 = { aFloor0Tex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // PORT TOWN
-CourseBackgroundFloor D_i3_801407C0 = { D_F216FB0, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseBackgroundFloor sBackgroundFloor1 = { aFloor1Tex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // BIG BLUE / RAINBOW ROAD
-CourseBackgroundFloor D_i3_801407D4 = { D_F217FB0, 0.03f, 0.03f, 0.01f, 0.01f };
+CourseBackgroundFloor sBackgroundFloor2 = { aFloor2Tex, 0.03f, 0.03f, 0.01f, 0.01f };
 
 // SAND OCEAN
-CourseBackgroundFloor D_i3_801407E8 = { D_F218FB0, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseBackgroundFloor sBackgroundFloor3 = { aFloor3Tex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // DEVILS FOREST / BIG HAND
-CourseBackgroundFloor D_i3_801407FC = { D_F219FB0, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseBackgroundFloor sBackgroundFloor4 = { aFloor4Tex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // WHITE LAND
-CourseBackgroundFloor D_i3_80140810 = { D_F21AFB0, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseBackgroundFloor sBackgroundFloor5 = { aFloor5Tex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // SECTORS / SPACE PLANT
-CourseBackgroundFloor D_i3_80140824 = { D_F21BFB0, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseBackgroundFloor sBackgroundFloor6 = { aFloor6Tex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // RED CANYON
-CourseBackgroundFloor D_i3_80140838 = { D_F21CFB0, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseBackgroundFloor sBackgroundFloor7 = { aFloor7Tex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // FIRE FIELD
-CourseBackgroundFloor D_i3_8014084C = { D_F21DFB0, 0.03f, 0.03f, 0.005f, 0.005f };
+CourseBackgroundFloor sBackgroundFloor8 = { aFloor8Tex, 0.03f, 0.03f, 0.005f, 0.005f };
 
 // SILENCE
-CourseBackgroundFloor D_i3_80140860 = { D_F21EFB0, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseBackgroundFloor sBackgroundFloor9 = { aFloor9Tex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 CourseBackgroundFloor* D_i3_80140874[] = {
-    &D_i3_801407AC, &D_i3_801407C0, &D_i3_801407D4, &D_i3_801407E8, &D_i3_801407FC, &D_i3_80140810,
-    &D_i3_80140824, &D_i3_80140838, &D_i3_8014084C, &D_i3_80140860, &D_i3_801407AC,
+    &sBackgroundFloor0, &sBackgroundFloor1, &sBackgroundFloor2, &sBackgroundFloor3,
+    &sBackgroundFloor4, &sBackgroundFloor5, &sBackgroundFloor6, &sBackgroundFloor7,
+    &sBackgroundFloor8, &sBackgroundFloor9, &sBackgroundFloor0,
 };
 
 /*
@@ -87,38 +88,37 @@ CourseBackgroundFloor* D_i3_80140874[] = {
 
 // PURPLE SKIES
 // MUTE CITY / WHITE LAND
-CourseSkyboxes D_i3_801408A0 = { D_F215F30, 252, 192, 253, 0, 0, 0, 200, 130, 240, 0, 2 };
+CourseSkyboxes sSkybox0 = { aSkybox0Tex, 252, 192, 253, 0, 0, 0, 200, 130, 240, 0, 2 };
 
 // TURQUOISE SKIES
 // SILENCE 2
-CourseSkyboxes D_i3_801408B0 = { D_F215C30, 155, 247, 245, 210, 255, 230, 155, 247, 245, 0, 2 };
+CourseSkyboxes sSkybox1 = { aSkybox1Tex, 155, 247, 245, 210, 255, 230, 155, 247, 245, 0, 2 };
 
 // DESERT YELLOW
 // SAND OCEAN
-CourseSkyboxes D_i3_801408C0 = { D_F215DB0, 224, 234, 210, 0, 0, 0, 225, 190, 160, 0, 2 };
+CourseSkyboxes sSkybox2 = { aSkybox2Tex, 224, 234, 210, 0, 0, 0, 225, 190, 160, 0, 2 };
 
 // BLUE
-CourseSkyboxes D_i3_801408D0 = { D_F215D30, 151, 194, 218, 210, 255, 230, 151, 194, 218, 0, 2 };
+CourseSkyboxes sSkybox3 = { aSkybox3Tex, 151, 194, 218, 210, 255, 230, 151, 194, 218, 0, 2 };
 
 // NIGHT
 // SILENCE / MUTE CITY 2
-CourseSkyboxes D_i3_801408E0 = { D_F215E30, 2, 2, 23, 245, 162, 99, 125, 155, 185, 0, 5 };
+CourseSkyboxes sSkybox4 = { aSkybox4Tex, 2, 2, 23, 245, 162, 99, 125, 155, 185, 0, 5 };
 
 // ORANGE DAY
 // DEVILS FOREST / SECTOR ALPHA
-CourseSkyboxes D_i3_801408F0 = { D_F215CB0, 255, 224, 144, 0, 0, 0, 255, 224, 204, 0, 2 };
+CourseSkyboxes sSkybox5 = { aSkybox5Tex, 255, 224, 144, 0, 0, 0, 255, 224, 204, 0, 2 };
 
 // SUNSET
 // PORT TOWN / DEVILS FOREST 2 / FIRE FIELD
-CourseSkyboxes D_i3_80140900 = { D_F215EB0, 245, 162, 99, 0, 0, 0, 245, 162, 99, 0, 2 };
+CourseSkyboxes sSkybox6 = { aSkybox6Tex, 245, 162, 99, 0, 0, 0, 245, 162, 99, 0, 2 };
 
 // SKY BLUE
 // BIG BLUE 1 & 2 / RED CANYON
-CourseSkyboxes D_i3_80140910 = { D_F215BB0, 250, 255, 255, 0, 0, 0, 180, 200, 180, 0, 2 };
+CourseSkyboxes sSkybox7 = { aSkybox7Tex, 250, 255, 255, 0, 0, 0, 180, 200, 180, 0, 2 };
 
 CourseSkyboxes* D_i3_80140920[] = {
-    &D_i3_801408A0, &D_i3_801408B0, &D_i3_801408C0, &D_i3_801408D0,
-    &D_i3_801408E0, &D_i3_801408F0, &D_i3_80140900, &D_i3_80140910,
+    &sSkybox0, &sSkybox1, &sSkybox2, &sSkybox3, &sSkybox4, &sSkybox5, &sSkybox6, &sSkybox7,
 };
 
 /*
@@ -568,7 +568,7 @@ extern s32 gSkyboxType;
 extern s32 gBackgroundFloorType;
 
 extern unk_struct_1DC D_800E5220[];
-extern s32 D_800F8514;
+extern s32 gTrackIndex;
 
 void func_i3_80139550(void);
 void func_i3_801387EC(void);
@@ -603,7 +603,7 @@ void func_i3_801365E0(void) {
         func_i3_80136974(var_s1, var_s0, D_i3_80142180.unk_00, var_fs1, var_fs0);
     }
 
-    temp_v0 = &D_802A6B40[D_800F8514];
+    temp_v0 = &D_802A6B40[gTrackIndex];
     temp_v0->unk_14[0] = D_i3_80142180.unk_04->unk_04;
     temp_v0->unk_14[1] = D_i3_80142180.unk_04->unk_05;
     temp_v0->unk_14[2] = D_i3_80142180.unk_04->unk_06;
@@ -642,7 +642,7 @@ void func_i3_801365E0(void) {
     sBackgroundFloorTexture = func_80078104(D_i3_80142180.unk_00->unk_00, 0x1000, 0, 0, 0);
 
     if (D_i3_80142188 & 2) {
-        D_i3_80142198 = func_80078104(D_F21FFB8, 0x800, 0, 0, 0);
+        sCloudTexture = func_80078104(aCloudTex, 0x800, 0, 0, 0);
     }
     if (D_i3_80142188 & 1) {
         D_i3_8014219C = func_80078104(D_F2207C8, 0x40, 0, 0, 0);
@@ -1201,7 +1201,7 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
                           SHADE, TEXEL0);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 0);
 
-        gDPLoadTextureBlock(gfx++, D_i3_80142198, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+        gDPLoadTextureBlock(gfx++, sCloudTexture, G_IM_FMT_IA, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                             G_TX_NOMIRROR | G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
 
         gSP2Triangles(gfx++, 12, 15, 13, 0, 12, 14, 15, 0);
@@ -1212,7 +1212,7 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
 }
 
 extern s16 D_80106F48;
-extern s32 D_800CD004;
+extern s32 gCupType;
 extern GfxPool D_8024DCE0[2];
 
 void func_i3_801387EC(void) {
@@ -1235,9 +1235,9 @@ void func_i3_801387EC(void) {
         return;
     }
 
-    if (D_800F8514 < 0x18) {
-        var_s3 = D_i3_80140E58[D_800F8514];
-    } else if ((D_800F8514 >= 0x30) && (D_800F8514 < 0x36)) {
+    if (gTrackIndex < 24) {
+        var_s3 = D_i3_80140E58[gTrackIndex];
+    } else if ((gTrackIndex >= 48) && (gTrackIndex < 54)) {
         j = Math_Rand1() % 7;
         var_s3 = sp54;
         if (j > 0) {
@@ -1259,7 +1259,7 @@ void func_i3_801387EC(void) {
         var_s3->unk_00 = 0;
         var_s3->unk_04 = 0.0f;
         var_s3 = sp54;
-    } else if (D_800F8514 != 0x37) {
+    } else if (gTrackIndex != 55) {
         return;
     } else {
         // FAKE
@@ -1275,20 +1275,20 @@ void func_i3_801387EC(void) {
     while (var_s3->unk_00 != 0) {
         var_s1->unk_00 = var_s3->unk_00;
         if (var_s1->unk_00 == 0x2C) {
-            switch (D_800CD004) {
-                case 1:
+            switch (gCupType) {
+                case QUEEN_CUP:
                     var_s1->unk_00 = 0x30;
                     break;
-                case 2:
+                case KING_CUP:
                     var_s1->unk_00 = 0x31;
                     break;
-                case 3:
+                case JOKER_CUP:
                     var_s1->unk_00 = 0x32;
                     break;
-                case 4:
+                case X_CUP:
                     var_s1->unk_00 = 0x33;
                     break;
-                case 5:
+                case EDIT_CUP:
                     var_s1->unk_00 = 0x34;
                     break;
             }
@@ -1541,9 +1541,9 @@ void func_i3_80139550(void) {
         var_s0->unk_10 = D_800DD230[temp_s1 & 0xFFF] * temp_fv0;
 
         temp_fv0 = ((Math_Rand1() % 10) + 1) * 0.1f;
-        var_s0->unk_00 = var_s0->unk_01 = 255.0f * temp_fv0;
-        var_s0->unk_02 = 64.0f * temp_fv0;
-        var_s0->unk_03 = -1;
+        var_s0->red = var_s0->green = 255.0f * temp_fv0;
+        var_s0->blue = 64.0f * temp_fv0;
+        var_s0->alpha = 255;
     }
 }
 
@@ -1606,7 +1606,7 @@ Gfx* func_i3_80139AB0(Gfx* gfx, s32 arg1) {
             ptr = var_v0->unk_14[arg1];
 
             gDPPipeSync(gfx++);
-            gDPSetPrimColor(gfx++, 0, 0, var_v0->unk_00, var_v0->unk_01, var_v0->unk_02, var_v0->unk_03);
+            gDPSetPrimColor(gfx++, 0, 0, var_v0->red, var_v0->green, var_v0->blue, var_v0->alpha);
 
             xl = (ptr[0]) * 4.0f;
             yl = (ptr[1]) * 4.0f;

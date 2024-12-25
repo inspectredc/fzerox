@@ -1029,8 +1029,6 @@ void func_800742D0(void) {
     D_8010B7B0[0].unk_003 = 0;
 }
 
-extern unk_8010B7B0 D_8010CF50;
-extern s32 D_802A6B50;
 extern unk_8006FC8C D_802C2020[];
 extern unk_8006FF90_arg_1 D_802D1B70[];
 extern unk_802D1B60_unk_00 D_802D0FE0[];
@@ -1045,16 +1043,16 @@ void func_800742FC(void) {
     D_8010B7B0[0].unk_001 = 0;
     D_8010B7B0[0].unk_002 = 0;
     D_8010B7B0[0].unk_003 = 0;
-    D_8010CF50 = D_8010B7B0[0];
+    D_8010B7B0[3] = D_8010B7B0[0];
     D_802D1B60.unk_00 = D_802D0FE0;
-    D_802A6B50 = D_802C2020;
+    D_802A6B40[0].unk_10 = D_802C2020;
     D_802D2D70.unk_00 = D_802D1B70;
 
     for (i = 0; i < ARRAY_COUNT(D_802A6B40); i++) {}
 
     func_8007402C(0);
     func_80074204();
-    D_8010CF50 = D_8010B7B0[0];
+    D_8010B7B0[3] = D_8010B7B0[0];
     D_8010B7B0[0].unk_001 = 0;
     D_802CDFD0 = 0;
 }
