@@ -13,7 +13,7 @@ pad_segment_2B9EA0_F000000:
   size: 0x4
   symbol: pad_segment_2B9EA0_F000000
 
-D_F000004:
+aTitleBackgroundMainTex:
   type: COMPRESSED_TEXTURE
   offset: 0x4
   ctype: u16
@@ -21,9 +21,9 @@ D_F000004:
   width: 304
   height: 240
   compression: MIO0
-  symbol: D_F000004
+  symbol: aTitleBackgroundMainTex
 
-D_F014A68:
+aTitleBackgroundComicTex:
   type: COMPRESSED_TEXTURE
   offset: 0x14A68
   ctype: u16
@@ -31,9 +31,9 @@ D_F014A68:
   width: 320
   height: 240
   compression: MIO0
-  symbol: D_F014A68
+  symbol: aTitleBackgroundComicTex
 
-D_F026348:
+aTitleBackgroundFalconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x26348
   ctype: u16
@@ -41,9 +41,9 @@ D_F026348:
   width: 320
   height: 240
   compression: MIO0
-  symbol: D_F026348
+  symbol: aTitleBackgroundFalconTex
 
-D_F030158:
+aTitleLogoTex:
   type: COMPRESSED_TEXTURE
   offset: 0x30158
   ctype: u16
@@ -51,9 +51,9 @@ D_F030158:
   width: 160
   height: 65
   compression: MIO0
-  symbol: D_F030158
+  symbol: aTitleLogoTex
 
-D_F03281C:
+aTitleNoControllerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x3281C
   ctype: u8
@@ -61,9 +61,9 @@ D_F03281C:
   width: 160
   height: 32
   compression: MIO0
-  symbol: D_F03281C
+  symbol: aTitleNoControllerTex
 
-D_F032A7C:
+aTitleExpansionPakWarningTex:
   type: COMPRESSED_TEXTURE
   offset: 0x32A7C
   ctype: u8
@@ -71,9 +71,9 @@ D_F032A7C:
   width: 160
   height: 32
   compression: MIO0
-  symbol: D_F032A7C
+  symbol: aTitleExpansionPakWarningTex
 
-D_F032F6C:
+aTitleDiskWarningTex:
   type: COMPRESSED_TEXTURE
   offset: 0x32F6C
   ctype: u8
@@ -81,9 +81,9 @@ D_F032F6C:
   width: 160
   height: 32
   compression: MIO0
-  symbol: D_F032F6C
+  symbol: aTitleDiskWarningTex
 
-D_F033328:
+aTitlePushStartTex:
   type: COMPRESSED_TEXTURE
   offset: 0x33328
   ctype: u16
@@ -91,9 +91,9 @@ D_F033328:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F033328
+  symbol: aTitlePushStartTex
 
-D_F0336B8:
+aCopyrightTex:
   type: COMPRESSED_TEXTURE
   offset: 0x336B8
   ctype: u16
@@ -101,7 +101,7 @@ D_F0336B8:
   width: 128
   height: 14
   compression: MIO0
-  symbol: D_F0336B8
+  symbol: aCopyrightTex
 
 pad_segment_2B9EA0_F033AA4:
   type: BLOB
@@ -109,7 +109,7 @@ pad_segment_2B9EA0_F033AA4:
   size: 0x10
   symbol: pad_segment_2B9EA0_F033AA4
 
-D_F033AB4:
+aFullPortraitDrStewartTex:
   type: COMPRESSED_TEXTURE
   offset: 0x33AB4
   ctype: u16
@@ -117,9 +117,9 @@ D_F033AB4:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F033AB4
+  symbol: aFullPortraitDrStewartTex
 
-D_F0385AC:
+aFullPortraitCaptainFalconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x385AC
   ctype: u16
@@ -127,9 +127,9 @@ D_F0385AC:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0385AC
+  symbol: aFullPortraitCaptainFalconTex
 
-D_F03EBB4:
+aFullPortraitJodySummerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x3EBB4
   ctype: u16
@@ -137,9 +137,9 @@ D_F03EBB4:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F03EBB4
+  symbol: aFullPortraitJodySummerTex
 
-D_F04412C:
+aFullPortraitSamuraiGorohTex:
   type: COMPRESSED_TEXTURE
   offset: 0x4412C
   ctype: u16
@@ -147,9 +147,9 @@ D_F04412C:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F04412C
+  symbol: aFullPortraitSamuraiGorohTex
 
-D_F04B7E4:
+aFullPortraitMightyGazelleTex:
   type: COMPRESSED_TEXTURE
   offset: 0x4B7E4
   ctype: u16
@@ -157,9 +157,9 @@ D_F04B7E4:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F04B7E4
+  symbol: aFullPortraitMightyGazelleTex
 
-D_F051FDC:
+aFullPortraitPicoTex:
   type: COMPRESSED_TEXTURE
   offset: 0x51FDC
   ctype: u16
@@ -167,9 +167,9 @@ D_F051FDC:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F051FDC
+  symbol: aFullPortraitPicoTex
 
-D_F05839C:
+aFullPortraitBabaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x5839C
   ctype: u16
@@ -177,9 +177,9 @@ D_F05839C:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F05839C
+  symbol: aFullPortraitBabaTex
 
-D_F05E28C:
+aFullPortraitMrEadTex:
   type: COMPRESSED_TEXTURE
   offset: 0x5E28C
   ctype: u16
@@ -187,9 +187,9 @@ D_F05E28C:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F05E28C
+  symbol: aFullPortraitMrEadTex
 
-D_F065414:
+aFullPortraitOctomanTex:
   type: COMPRESSED_TEXTURE
   offset: 0x65414
   ctype: u16
@@ -197,9 +197,9 @@ D_F065414:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F065414
+  symbol: aFullPortraitOctomanTex
 
-D_F06AA80:
+aFullPortraitTheSkullTex:
   type: COMPRESSED_TEXTURE
   offset: 0x6AA80
   ctype: u16
@@ -207,9 +207,9 @@ D_F06AA80:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F06AA80
+  symbol: aFullPortraitTheSkullTex
 
-D_F0704D0:
+aFullPortraitBeastmanTex:
   type: COMPRESSED_TEXTURE
   offset: 0x704D0
   ctype: u16
@@ -217,9 +217,9 @@ D_F0704D0:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0704D0
+  symbol: aFullPortraitBeastmanTex
 
-D_F075A98:
+aFullPortraitAntonioGusterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x75A98
   ctype: u16
@@ -227,9 +227,9 @@ D_F075A98:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F075A98
+  symbol: aFullPortraitAntonioGusterTex
 
-D_F07B3EC:
+aFullPortraitDraqTex:
   type: COMPRESSED_TEXTURE
   offset: 0x7B3EC
   ctype: u16
@@ -237,9 +237,9 @@ D_F07B3EC:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F07B3EC
+  symbol: aFullPortraitDraqTex
 
-D_F082E6C:
+aFullPortraitRogerBusterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x82E6C
   ctype: u16
@@ -247,9 +247,9 @@ D_F082E6C:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F082E6C
+  symbol: aFullPortraitRogerBusterTex
 
-D_F0892B4:
+aFullPortraitSilverNeelsenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x892B4
   ctype: u16
@@ -257,9 +257,9 @@ D_F0892B4:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0892B4
+  symbol: aFullPortraitSilverNeelsenTex
 
-D_F08F4F4:
+aFullPortraitSuperArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x8F4F4
   ctype: u16
@@ -267,9 +267,9 @@ D_F08F4F4:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F08F4F4
+  symbol: aFullPortraitSuperArrowTex
 
-D_F096470:
+aFullPortraitMrsArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x96470
   ctype: u16
@@ -277,9 +277,9 @@ D_F096470:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F096470
+  symbol: aFullPortraitMrsArrowTex
 
-D_F09C0CC:
+aFullPortraitZodaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x9C0CC
   ctype: u16
@@ -287,9 +287,9 @@ D_F09C0CC:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F09C0CC
+  symbol: aFullPortraitZodaTex
 
-D_F0A1AB8:
+aFullPortraitJohnTanakaTex:
   type: COMPRESSED_TEXTURE
   offset: 0xA1AB8
   ctype: u16
@@ -297,9 +297,9 @@ D_F0A1AB8:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0A1AB8
+  symbol: aFullPortraitJohnTanakaTex
 
-D_F0A7614:
+aFullPortraitBioRexTex:
   type: COMPRESSED_TEXTURE
   offset: 0xA7614
   ctype: u16
@@ -307,9 +307,9 @@ D_F0A7614:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0A7614
+  symbol: aFullPortraitBioRexTex
 
-D_F0AE148:
+aFullPortraitKateAlenTex:
   type: COMPRESSED_TEXTURE
   offset: 0xAE148
   ctype: u16
@@ -317,9 +317,9 @@ D_F0AE148:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0AE148
+  symbol: aFullPortraitKateAlenTex
 
-D_F0B2F94:
+aFullPortraitGomarAndShiohTex:
   type: COMPRESSED_TEXTURE
   offset: 0xB2F94
   ctype: u16
@@ -327,9 +327,9 @@ D_F0B2F94:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0B2F94
+  symbol: aFullPortraitGomarAndShiohTex
 
-D_F0B9D2C:
+aFullPortraitMichaelChainTex:
   type: COMPRESSED_TEXTURE
   offset: 0xB9D2C
   ctype: u16
@@ -337,9 +337,9 @@ D_F0B9D2C:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0B9D2C
+  symbol: aFullPortraitMichaelChainTex
 
-D_F0BF7E4:
+aFullPortraitBillyTex:
   type: COMPRESSED_TEXTURE
   offset: 0xBF7E4
   ctype: u16
@@ -347,9 +347,9 @@ D_F0BF7E4:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0BF7E4
+  symbol: aFullPortraitBillyTex
 
-D_F0C5624:
+aFullPortraitDrClashTex:
   type: COMPRESSED_TEXTURE
   offset: 0xC5624
   ctype: u16
@@ -357,9 +357,9 @@ D_F0C5624:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0C5624
+  symbol: aFullPortraitDrClashTex
 
-D_F0CC4D4:
+aFullPortraitJackLevinTex:
   type: COMPRESSED_TEXTURE
   offset: 0xCC4D4
   ctype: u16
@@ -367,9 +367,9 @@ D_F0CC4D4:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0CC4D4
+  symbol: aFullPortraitJackLevinTex
 
-D_F0D120C:
+aFullPortraitBloodFalconTex:
   type: COMPRESSED_TEXTURE
   offset: 0xD120C
   ctype: u16
@@ -377,9 +377,9 @@ D_F0D120C:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0D120C
+  symbol: aFullPortraitBloodFalconTex
 
-D_F0D724C:
+aFullPortraitLeonTex:
   type: COMPRESSED_TEXTURE
   offset: 0xD724C
   ctype: u16
@@ -387,9 +387,9 @@ D_F0D724C:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0D724C
+  symbol: aFullPortraitLeonTex
 
-D_F0DD308:
+aFullPortraitJamesMcCloudTex:
   type: COMPRESSED_TEXTURE
   offset: 0xDD308
   ctype: u16
@@ -397,9 +397,9 @@ D_F0DD308:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0DD308
+  symbol: aFullPortraitJamesMcCloudTex
 
-D_F0E2840:
+aFullPortraitBlackShadowTex:
   type: COMPRESSED_TEXTURE
   offset: 0xE2840
   ctype: u16
@@ -407,9 +407,9 @@ D_F0E2840:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0E2840
+  symbol: aFullPortraitBlackShadowTex
 
-D_F0E85EC:
+aFullPortraitCaptainFalconAltTex:
   type: COMPRESSED_TEXTURE
   offset: 0xE85EC
   ctype: u16
@@ -417,9 +417,9 @@ D_F0E85EC:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0E85EC
+  symbol: aFullPortraitCaptainFalconAltTex
 
-D_F0EE2A4:
+aFullPortraitSamuraiGorohAltTex:
   type: COMPRESSED_TEXTURE
   offset: 0xEE2A4
   ctype: u16
@@ -427,9 +427,9 @@ D_F0EE2A4:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0EE2A4
+  symbol: aFullPortraitSamuraiGorohAltTex
 
-D_F0F4838:
+aFullPortraitJodySummerAltTex:
   type: COMPRESSED_TEXTURE
   offset: 0xF4838
   ctype: u16
@@ -437,9 +437,9 @@ D_F0F4838:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0F4838
+  symbol: aFullPortraitJodySummerAltTex
 
-D_F0F9860:
+aFullPortraitBackgroundTex:
   type: COMPRESSED_TEXTURE
   offset: 0xF9860
   ctype: u16
@@ -447,7 +447,7 @@ D_F0F9860:
   width: 180
   height: 245
   compression: MIO0
-  symbol: D_F0F9860
+  symbol: aFullPortraitBackgroundTex
 
 pad_segment_2B9EA0_F0FF154:
   type: BLOB
@@ -455,7 +455,7 @@ pad_segment_2B9EA0_F0FF154:
   size: 0x10
   symbol: pad_segment_2B9EA0_F0FF154
 
-D_F0FF164:
+aSmallPortraitDrStewartTex:
   type: COMPRESSED_TEXTURE
   offset: 0xFF164
   ctype: u16
@@ -463,9 +463,9 @@ D_F0FF164:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F0FF164
+  symbol: aSmallPortraitDrStewartTex
 
-D_F0FF8E8:
+aSmallPortraitCaptainFalconTex:
   type: COMPRESSED_TEXTURE
   offset: 0xFF8E8
   ctype: u16
@@ -473,9 +473,9 @@ D_F0FF8E8:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F0FF8E8
+  symbol: aSmallPortraitCaptainFalconTex
 
-D_F10019C:
+aSmallPortraitJodySummerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10019C
   ctype: u16
@@ -483,9 +483,9 @@ D_F10019C:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10019C
+  symbol: aSmallPortraitJodySummerTex
 
-D_F100A18:
+aSmallPortraitSamuraiGorohTex:
   type: COMPRESSED_TEXTURE
   offset: 0x100A18
   ctype: u16
@@ -493,9 +493,9 @@ D_F100A18:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F100A18
+  symbol: aSmallPortraitSamuraiGorohTex
 
-D_F101354:
+aSmallPortraitMightyGazelleTex:
   type: COMPRESSED_TEXTURE
   offset: 0x101354
   ctype: u16
@@ -503,9 +503,9 @@ D_F101354:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F101354
+  symbol: aSmallPortraitMightyGazelleTex
 
-D_F101C44:
+aSmallPortraitPicoTex:
   type: COMPRESSED_TEXTURE
   offset: 0x101C44
   ctype: u16
@@ -513,9 +513,9 @@ D_F101C44:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F101C44
+  symbol: aSmallPortraitPicoTex
 
-D_F102550:
+aSmallPortraitBabaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x102550
   ctype: u16
@@ -523,9 +523,9 @@ D_F102550:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F102550
+  symbol: aSmallPortraitBabaTex
 
-D_F102E70:
+aSmallPortraitMrEadTex:
   type: COMPRESSED_TEXTURE
   offset: 0x102E70
   ctype: u16
@@ -533,9 +533,9 @@ D_F102E70:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F102E70
+  symbol: aSmallPortraitMrEadTex
 
-D_F103800:
+aSmallPortraitOctomanTex:
   type: COMPRESSED_TEXTURE
   offset: 0x103800
   ctype: u16
@@ -543,9 +543,9 @@ D_F103800:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F103800
+  symbol: aSmallPortraitOctomanTex
 
-D_F104034:
+aSmallPortraitTheSkullTex:
   type: COMPRESSED_TEXTURE
   offset: 0x104034
   ctype: u16
@@ -553,9 +553,9 @@ D_F104034:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F104034
+  symbol: aSmallPortraitTheSkullTex
 
-D_F104930:
+aSmallPortraitBeastmanTex:
   type: COMPRESSED_TEXTURE
   offset: 0x104930
   ctype: u16
@@ -563,9 +563,9 @@ D_F104930:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F104930
+  symbol: aSmallPortraitBeastmanTex
 
-D_F10523C:
+aSmallPortraitAntonioGusterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10523C
   ctype: u16
@@ -573,9 +573,9 @@ D_F10523C:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10523C
+  symbol: aSmallPortraitAntonioGusterTex
 
-D_F105B30:
+aSmallPortraitDraqTex:
   type: COMPRESSED_TEXTURE
   offset: 0x105B30
   ctype: u16
@@ -583,9 +583,9 @@ D_F105B30:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F105B30
+  symbol: aSmallPortraitDraqTex
 
-D_F1064E4:
+aSmallPortraitRogerBusterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1064E4
   ctype: u16
@@ -593,9 +593,9 @@ D_F1064E4:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F1064E4
+  symbol: aSmallPortraitRogerBusterTex
 
-D_F106E0C:
+aSmallPortraitSilverNeelsenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x106E0C
   ctype: u16
@@ -603,9 +603,9 @@ D_F106E0C:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F106E0C
+  symbol: aSmallPortraitSilverNeelsenTex
 
-D_F10774C:
+aSmallPortraitSuperArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10774C
   ctype: u16
@@ -613,9 +613,9 @@ D_F10774C:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10774C
+  symbol: aSmallPortraitSuperArrowTex
 
-D_F1080D0:
+aSmallPortraitMrsArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1080D0
   ctype: u16
@@ -623,9 +623,9 @@ D_F1080D0:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F1080D0
+  symbol: aSmallPortraitMrsArrowTex
 
-D_F108B14:
+aSmallPortraitZodaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x108B14
   ctype: u16
@@ -633,9 +633,9 @@ D_F108B14:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F108B14
+  symbol: aSmallPortraitZodaTex
 
-D_F1093C4:
+aSmallPortraitJohnTanakaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1093C4
   ctype: u16
@@ -643,9 +643,9 @@ D_F1093C4:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F1093C4
+  symbol: aSmallPortraitJohnTanakaTex
 
-D_F109C68:
+aSmallPortraitBioRexTex:
   type: COMPRESSED_TEXTURE
   offset: 0x109C68
   ctype: u16
@@ -653,9 +653,9 @@ D_F109C68:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F109C68
+  symbol: aSmallPortraitBioRexTex
 
-D_F10A508:
+aSmallPortraitKateAlenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10A508
   ctype: u16
@@ -663,9 +663,9 @@ D_F10A508:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10A508
+  symbol: aSmallPortraitKateAlenTex
 
-D_F10ABE0:
+aSmallPortraitGomarAndShiohTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10ABE0
   ctype: u16
@@ -673,9 +673,9 @@ D_F10ABE0:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10ABE0
+  symbol: aSmallPortraitGomarAndShiohTex
 
-D_F10B53C:
+aSmallPortraitMichaelChainTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10B53C
   ctype: u16
@@ -683,9 +683,9 @@ D_F10B53C:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10B53C
+  symbol: aSmallPortraitMichaelChainTex
 
-D_F10BE18:
+aSmallPortraitBillyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10BE18
   ctype: u16
@@ -693,9 +693,9 @@ D_F10BE18:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10BE18
+  symbol: aSmallPortraitBillyTex
 
-D_F10C704:
+aSmallPortraitDrClashTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10C704
   ctype: u16
@@ -703,9 +703,9 @@ D_F10C704:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10C704
+  symbol: aSmallPortraitDrClashTex
 
-D_F10D114:
+aSmallPortraitJackLevinTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10D114
   ctype: u16
@@ -713,9 +713,9 @@ D_F10D114:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10D114
+  symbol: aSmallPortraitJackLevinTex
 
-D_F10D8B0:
+aSmallPortraitBloodFalconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10D8B0
   ctype: u16
@@ -723,9 +723,9 @@ D_F10D8B0:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10D8B0
+  symbol: aSmallPortraitBloodFalconTex
 
-D_F10E14C:
+aSmallPortraitLeonTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10E14C
   ctype: u16
@@ -733,9 +733,9 @@ D_F10E14C:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10E14C
+  symbol: aSmallPortraitLeonTex
 
-D_F10EA0C:
+aSmallPortraitJamesMcCloudTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10EA0C
   ctype: u16
@@ -743,9 +743,9 @@ D_F10EA0C:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10EA0C
+  symbol: aSmallPortraitJamesMcCloudTex
 
-D_F10F28C:
+aSmallPortraitBlackShadowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10F28C
   ctype: u16
@@ -753,9 +753,9 @@ D_F10F28C:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10F28C
+  symbol: aSmallPortraitBlackShadowTex
 
-D_F10FA3C:
+aSmallPortraitCaptainFalconAltTex:
   type: COMPRESSED_TEXTURE
   offset: 0x10FA3C
   ctype: u16
@@ -763,9 +763,9 @@ D_F10FA3C:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F10FA3C
+  symbol: aSmallPortraitCaptainFalconAltTex
 
-D_F11029C:
+aSmallPortraitSamuraiGorohAltTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11029C
   ctype: u16
@@ -773,9 +773,9 @@ D_F11029C:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F11029C
+  symbol: aSmallPortraitSamuraiGorohAltTex
 
-D_F110AB4:
+aSmallPortraitJodySummerAltTex:
   type: COMPRESSED_TEXTURE
   offset: 0x110AB4
   ctype: u16
@@ -783,9 +783,9 @@ D_F110AB4:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F110AB4
+  symbol: aSmallPortraitJodySummerAltTex
 
-D_F111314:
+aNameCardCaptainFalconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x111314
   ctype: u16
@@ -793,9 +793,9 @@ D_F111314:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F111314
+  symbol: aNameCardCaptainFalconTex
 
-D_F1119CC:
+aNameCardDrStewartTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1119CC
   ctype: u16
@@ -803,9 +803,9 @@ D_F1119CC:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F1119CC
+  symbol: aNameCardDrStewartTex
 
-D_F112024:
+aNameCardPicoTex:
   type: COMPRESSED_TEXTURE
   offset: 0x112024
   ctype: u16
@@ -813,9 +813,9 @@ D_F112024:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F112024
+  symbol: aNameCardPicoTex
 
-D_F1124E8:
+aNameCardSamuraiGorohTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1124E8
   ctype: u16
@@ -823,9 +823,9 @@ D_F1124E8:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F1124E8
+  symbol: aNameCardSamuraiGorohTex
 
-D_F112C5C:
+aNameCardJodySummerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x112C5C
   ctype: u16
@@ -833,9 +833,9 @@ D_F112C5C:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F112C5C
+  symbol: aNameCardJodySummerTex
 
-D_F113254:
+aNameCardMrEadTex:
   type: COMPRESSED_TEXTURE
   offset: 0x113254
   ctype: u16
@@ -843,9 +843,9 @@ D_F113254:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F113254
+  symbol: aNameCardMrEadTex
 
-D_F113760:
+aNameCardBabaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x113760
   ctype: u16
@@ -853,9 +853,9 @@ D_F113760:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F113760
+  symbol: aNameCardBabaTex
 
-D_F113D00:
+aNameCardOctomanTex:
   type: COMPRESSED_TEXTURE
   offset: 0x113D00
   ctype: u16
@@ -863,9 +863,9 @@ D_F113D00:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F113D00
+  symbol: aNameCardOctomanTex
 
-D_F114254:
+aNameCardGomarAndShiohTex:
   type: COMPRESSED_TEXTURE
   offset: 0x114254
   ctype: u16
@@ -873,9 +873,9 @@ D_F114254:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F114254
+  symbol: aNameCardGomarAndShiohTex
 
-D_F114894:
+aNameCardKateAlenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x114894
   ctype: u16
@@ -883,9 +883,9 @@ D_F114894:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F114894
+  symbol: aNameCardKateAlenTex
 
-D_F114EEC:
+aNameCardRogerBusterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x114EEC
   ctype: u16
@@ -893,9 +893,9 @@ D_F114EEC:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F114EEC
+  symbol: aNameCardRogerBusterTex
 
-D_F1154D4:
+aNameCardJamesMcCloudTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1154D4
   ctype: u16
@@ -903,9 +903,9 @@ D_F1154D4:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F1154D4
+  symbol: aNameCardJamesMcCloudTex
 
-D_F115A7C:
+aNameCardLeonTex:
   type: COMPRESSED_TEXTURE
   offset: 0x115A7C
   ctype: u16
@@ -913,9 +913,9 @@ D_F115A7C:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F115A7C
+  symbol: aNameCardLeonTex
 
-D_F116064:
+aNameCardAntonioGusterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x116064
   ctype: u16
@@ -923,9 +923,9 @@ D_F116064:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F116064
+  symbol: aNameCardAntonioGusterTex
 
-D_F116664:
+aNameCardBlackShadowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x116664
   ctype: u16
@@ -933,9 +933,9 @@ D_F116664:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F116664
+  symbol: aNameCardBlackShadowTex
 
-D_F116D9C:
+aNameCardMichaelChainTex:
   type: COMPRESSED_TEXTURE
   offset: 0x116D9C
   ctype: u16
@@ -943,9 +943,9 @@ D_F116D9C:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F116D9C
+  symbol: aNameCardMichaelChainTex
 
-D_F1173C8:
+aNameCardJackLevinTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1173C8
   ctype: u16
@@ -953,9 +953,9 @@ D_F1173C8:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F1173C8
+  symbol: aNameCardJackLevinTex
 
-D_F1179B4:
+aNameCardSuperArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1179B4
   ctype: u16
@@ -963,9 +963,9 @@ D_F1179B4:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F1179B4
+  symbol: aNameCardSuperArrowTex
 
-D_F118008:
+aNameCardJohnTanakaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x118008
   ctype: u16
@@ -973,9 +973,9 @@ D_F118008:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F118008
+  symbol: aNameCardJohnTanakaTex
 
-D_F11855C:
+aNameCardMrsArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11855C
   ctype: u16
@@ -983,9 +983,9 @@ D_F11855C:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F11855C
+  symbol: aNameCardMrsArrowTex
 
-D_F118B60:
+aNameCardBeastmanTex:
   type: COMPRESSED_TEXTURE
   offset: 0x118B60
   ctype: u16
@@ -993,9 +993,9 @@ D_F118B60:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F118B60
+  symbol: aNameCardBeastmanTex
 
-D_F119228:
+aNameCardZodaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x119228
   ctype: u16
@@ -1003,9 +1003,9 @@ D_F119228:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F119228
+  symbol: aNameCardZodaTex
 
-D_F1196F8:
+aNameCardDrClashTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1196F8
   ctype: u16
@@ -1013,9 +1013,9 @@ D_F1196F8:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F1196F8
+  symbol: aNameCardDrClashTex
 
-D_F119CEC:
+aNameCardSilverNeelsenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x119CEC
   ctype: u16
@@ -1023,9 +1023,9 @@ D_F119CEC:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F119CEC
+  symbol: aNameCardSilverNeelsenTex
 
-D_F11A494:
+aNameCardBioRexTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11A494
   ctype: u16
@@ -1033,9 +1033,9 @@ D_F11A494:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F11A494
+  symbol: aNameCardBioRexTex
 
-D_F11A980:
+aNameCardDraqTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11A980
   ctype: u16
@@ -1043,9 +1043,9 @@ D_F11A980:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F11A980
+  symbol: aNameCardDraqTex
 
-D_F11ADEC:
+aNameCardBillyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11ADEC
   ctype: u16
@@ -1053,9 +1053,9 @@ D_F11ADEC:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F11ADEC
+  symbol: aNameCardBillyTex
 
-D_F11B2FC:
+aNameCardBloodFalconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11B2FC
   ctype: u16
@@ -1063,9 +1063,9 @@ D_F11B2FC:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F11B2FC
+  symbol: aNameCardBloodFalconTex
 
-D_F11B9C0:
+a1PIconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11B9C0
   ctype: u16
@@ -1073,9 +1073,9 @@ D_F11B9C0:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F11B9C0
+  symbol: a1PIconTex
 
-D_F11BB64:
+a2PIconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11BB64
   ctype: u16
@@ -1083,9 +1083,9 @@ D_F11BB64:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F11BB64
+  symbol: a2PIconTex
 
-D_F11BD04:
+a3PIconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11BD04
   ctype: u16
@@ -1093,9 +1093,9 @@ D_F11BD04:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F11BD04
+  symbol: a3PIconTex
 
-D_F11BEA4:
+a4PIconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11BEA4
   ctype: u16
@@ -1103,9 +1103,9 @@ D_F11BEA4:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F11BEA4
+  symbol: a4PIconTex
 
-D_F11C044:
+aMachineSelectCursorTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11C044
   ctype: u16
@@ -1113,9 +1113,9 @@ D_F11C044:
   width: 40
   height: 40
   compression: MIO0
-  symbol: D_F11C044
+  symbol: aMachineSelectCursorTex
 
-D_F11C2C0:
+aMachineInfoGraphTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11C2C0
   ctype: u16
@@ -1123,9 +1123,9 @@ D_F11C2C0:
   width: 128
   height: 64
   compression: MIO0
-  symbol: D_F11C2C0
+  symbol: aMachineInfoGraphTex
 
-D_F11CAFC:
+aNameCardMightyGazelleTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11CAFC
   ctype: u16
@@ -1133,9 +1133,9 @@ D_F11CAFC:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F11CAFC
+  symbol: aNameCardMightyGazelleTex
 
-D_F11CF68:
+aNameCardTheSkullTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11CF68
   ctype: u16
@@ -1143,23 +1143,23 @@ D_F11CF68:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F11CF68
+  symbol: aNameCardTheSkullTex
 
 D_F11D3C0:
   type: GFX
   offset: 0x11D3C0
   symbol: D_F11D3C0
 
-D_F11D3C8:
+aSelectMachineTex:
   type: TEXTURE
   offset: 0x11D3C8
   ctype: u8
   format: I4
   width: 160
   height: 24
-  symbol: D_F11D3C8
+  symbol: aSelectMachineTex
 
-D_F11DB4C:
+aMachineAccelerationMaxSpeedTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11DB4C
   ctype: u16
@@ -1167,9 +1167,9 @@ D_F11DB4C:
   width: 128
   height: 64
   compression: MIO0
-  symbol: D_F11DB4C
+  symbol: aMachineAccelerationMaxSpeedTex
 
-D_F11E33C:
+aMachineBodyBoostGripTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11E33C
   ctype: u16
@@ -1177,9 +1177,9 @@ D_F11E33C:
   width: 128
   height: 64
   compression: MIO0
-  symbol: D_F11E33C
+  symbol: aMachineBodyBoostGripTex
 
-D_F11EB24:
+aMachineInfoGraphSmallTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11EB24
   ctype: u16
@@ -1187,9 +1187,9 @@ D_F11EB24:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F11EB24
+  symbol: aMachineInfoGraphSmallTex
 
-D_F11EFEC:
+aMachineAccelerationMaxSpeedSmallTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11EFEC
   ctype: u16
@@ -1197,9 +1197,9 @@ D_F11EFEC:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F11EFEC
+  symbol: aMachineAccelerationMaxSpeedSmallTex
 
-D_F11F330:
+aMachineBodyBoostGripSmallTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F330
   ctype: u16
@@ -1207,9 +1207,9 @@ D_F11F330:
   width: 80
   height: 40
   compression: MIO0
-  symbol: D_F11F330
+  symbol: aMachineBodyBoostGripSmallTex
 
-D_F11F694:
+aAccelerationSpeedSliderTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F694
   ctype: u16
@@ -1217,9 +1217,9 @@ D_F11F694:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11F694
+  symbol: aAccelerationSpeedSliderTex
 
-D_F11F700:
+aBoostTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F700
   ctype: u16
@@ -1227,9 +1227,9 @@ D_F11F700:
   width: 20
   height: 8
   compression: MIO0
-  symbol: D_F11F700
+  symbol: aBoostTex
 
-D_F11F764:
+aBodyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F764
   ctype: u16
@@ -1237,9 +1237,9 @@ D_F11F764:
   width: 16
   height: 8
   compression: MIO0
-  symbol: D_F11F764
+  symbol: aBodyTex
 
-D_F11F7B0:
+aGripTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F7B0
   ctype: u16
@@ -1247,9 +1247,9 @@ D_F11F7B0:
   width: 16
   height: 8
   compression: MIO0
-  symbol: D_F11F7B0
+  symbol: aGripTex
 
-D_F11F804:
+aNoviceJackTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F804
   ctype: u16
@@ -1257,9 +1257,9 @@ D_F11F804:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11F804
+  symbol: aNoviceJackTrophyTex
 
-D_F11F89C:
+aNoviceQueenTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F89C
   ctype: u16
@@ -1267,9 +1267,9 @@ D_F11F89C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11F89C
+  symbol: aNoviceQueenTrophyTex
 
-D_F11F934:
+aNoviceKingTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F934
   ctype: u16
@@ -1277,9 +1277,9 @@ D_F11F934:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11F934
+  symbol: aNoviceKingTrophyTex
 
-D_F11F9D0:
+aNoviceJokerTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F9D0
   ctype: u16
@@ -1287,9 +1287,9 @@ D_F11F9D0:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11F9D0
+  symbol: aNoviceJokerTrophyTex
 
-D_F11FA68:
+aNoviceXTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11FA68
   ctype: u16
@@ -1297,9 +1297,9 @@ D_F11FA68:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11FA68
+  symbol: aNoviceXTrophyTex
 
-D_F11FB04:
+aStandardJackTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11FB04
   ctype: u16
@@ -1307,9 +1307,9 @@ D_F11FB04:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11FB04
+  symbol: aStandardJackTrophyTex
 
-D_F11FBB0:
+aStandardQueenTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11FBB0
   ctype: u16
@@ -1317,9 +1317,9 @@ D_F11FBB0:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11FBB0
+  symbol: aStandardQueenTrophyTex
 
-D_F11FC58:
+aStandardKingTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11FC58
   ctype: u16
@@ -1327,9 +1327,9 @@ D_F11FC58:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11FC58
+  symbol: aStandardKingTrophyTex
 
-D_F11FD10:
+aStandardJokerTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11FD10
   ctype: u16
@@ -1337,9 +1337,9 @@ D_F11FD10:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11FD10
+  symbol: aStandardJokerTrophyTex
 
-D_F11FDB0:
+aStandardXTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11FDB0
   ctype: u16
@@ -1347,9 +1347,9 @@ D_F11FDB0:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11FDB0
+  symbol: aStandardXTrophyTex
 
-D_F11FE58:
+aExpertJackTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11FE58
   ctype: u16
@@ -1357,9 +1357,9 @@ D_F11FE58:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11FE58
+  symbol: aExpertJackTrophyTex
 
-D_F11FF08:
+aExpertQueenTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11FF08
   ctype: u16
@@ -1367,9 +1367,9 @@ D_F11FF08:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11FF08
+  symbol: aExpertQueenTrophyTex
 
-D_F11FFC0:
+aExpertKingTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11FFC0
   ctype: u16
@@ -1377,9 +1377,9 @@ D_F11FFC0:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F11FFC0
+  symbol: aExpertKingTrophyTex
 
-D_F12007C:
+aExpertJokerTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12007C
   ctype: u16
@@ -1387,9 +1387,9 @@ D_F12007C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12007C
+  symbol: aExpertJokerTrophyTex
 
-D_F120128:
+aExpertXTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x120128
   ctype: u16
@@ -1397,9 +1397,9 @@ D_F120128:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120128
+  symbol: aExpertXTrophyTex
 
-D_F1201C4:
+aMasterJackTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1201C4
   ctype: u16
@@ -1407,9 +1407,9 @@ D_F1201C4:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1201C4
+  symbol: aMasterJackTrophyTex
 
-D_F120294:
+aMasterQueenTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x120294
   ctype: u16
@@ -1417,9 +1417,9 @@ D_F120294:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120294
+  symbol: aMasterQueenTrophyTex
 
-D_F12036C:
+aMasterKingTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12036C
   ctype: u16
@@ -1427,9 +1427,9 @@ D_F12036C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12036C
+  symbol: aMasterKingTrophyTex
 
-D_F120450:
+aMasterJokerTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x120450
   ctype: u16
@@ -1437,9 +1437,9 @@ D_F120450:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120450
+  symbol: aMasterJokerTrophyTex
 
-D_F12051C:
+aMasterXTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12051C
   ctype: u16
@@ -1447,9 +1447,9 @@ D_F12051C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12051C
+  symbol: aMasterXTrophyTex
 
-D_F1205E0:
+aNoTrophyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1205E0
   ctype: u16
@@ -1457,9 +1457,9 @@ D_F1205E0:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1205E0
+  symbol: aNoTrophyTex
 
-D_F120644:
+aFont1ATex:
   type: COMPRESSED_TEXTURE
   offset: 0x120644
   ctype: u16
@@ -1467,9 +1467,9 @@ D_F120644:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120644
+  symbol: aFont1ATex
 
-D_F120720:
+aFont1BTex:
   type: COMPRESSED_TEXTURE
   offset: 0x120720
   ctype: u16
@@ -1477,9 +1477,9 @@ D_F120720:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120720
+  symbol: aFont1BTex
 
-D_F1207FC:
+aFont1CTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1207FC
   ctype: u16
@@ -1487,9 +1487,9 @@ D_F1207FC:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1207FC
+  symbol: aFont1CTex
 
-D_F1208DC:
+aFont1DTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1208DC
   ctype: u16
@@ -1497,9 +1497,9 @@ D_F1208DC:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1208DC
+  symbol: aFont1DTex
 
-D_F1209C0:
+aFont1ETex:
   type: COMPRESSED_TEXTURE
   offset: 0x1209C0
   ctype: u16
@@ -1507,9 +1507,9 @@ D_F1209C0:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1209C0
+  symbol: aFont1ETex
 
-D_F120A80:
+aFont1FTex:
   type: COMPRESSED_TEXTURE
   offset: 0x120A80
   ctype: u16
@@ -1517,9 +1517,9 @@ D_F120A80:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120A80
+  symbol: aFont1FTex
 
-D_F120B3C:
+aFont1GTex:
   type: COMPRESSED_TEXTURE
   offset: 0x120B3C
   ctype: u16
@@ -1527,9 +1527,9 @@ D_F120B3C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120B3C
+  symbol: aFont1GTex
 
-D_F120C34:
+aFont1HTex:
   type: COMPRESSED_TEXTURE
   offset: 0x120C34
   ctype: u16
@@ -1537,9 +1537,9 @@ D_F120C34:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120C34
+  symbol: aFont1HTex
 
-D_F120D00:
+aFont1ITex:
   type: COMPRESSED_TEXTURE
   offset: 0x120D00
   ctype: u16
@@ -1547,9 +1547,9 @@ D_F120D00:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F120D00
+  symbol: aFont1ITex
 
-D_F120D94:
+aFont1JTex:
   type: COMPRESSED_TEXTURE
   offset: 0x120D94
   ctype: u16
@@ -1557,9 +1557,9 @@ D_F120D94:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120D94
+  symbol: aFont1JTex
 
-D_F120E68:
+aFont1KTex:
   type: COMPRESSED_TEXTURE
   offset: 0x120E68
   ctype: u16
@@ -1567,9 +1567,9 @@ D_F120E68:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120E68
+  symbol: aFont1KTex
 
-D_F120F5C:
+aFont1LTex:
   type: COMPRESSED_TEXTURE
   offset: 0x120F5C
   ctype: u16
@@ -1577,9 +1577,9 @@ D_F120F5C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F120F5C
+  symbol: aFont1LTex
 
-D_F12100C:
+aFont1MTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12100C
   ctype: u16
@@ -1587,9 +1587,9 @@ D_F12100C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12100C
+  symbol: aFont1MTex
 
-D_F12111C:
+aFont1NTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12111C
   ctype: u16
@@ -1597,9 +1597,9 @@ D_F12111C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12111C
+  symbol: aFont1NTex
 
-D_F121214:
+aFont1OTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121214
   ctype: u16
@@ -1607,9 +1607,9 @@ D_F121214:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121214
+  symbol: aFont1OTex
 
-D_F121300:
+aFont1PTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121300
   ctype: u16
@@ -1617,9 +1617,9 @@ D_F121300:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121300
+  symbol: aFont1PTex
 
-D_F1213CC:
+aFont1QTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1213CC
   ctype: u16
@@ -1627,9 +1627,9 @@ D_F1213CC:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1213CC
+  symbol: aFont1QTex
 
-D_F1214D4:
+aFont1RTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1214D4
   ctype: u16
@@ -1637,9 +1637,9 @@ D_F1214D4:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1214D4
+  symbol: aFont1RTex
 
-D_F1215B4:
+aFont1STex:
   type: COMPRESSED_TEXTURE
   offset: 0x1215B4
   ctype: u16
@@ -1647,9 +1647,9 @@ D_F1215B4:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1215B4
+  symbol: aFont1STex
 
-D_F121698:
+aFont1TTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121698
   ctype: u16
@@ -1657,9 +1657,9 @@ D_F121698:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121698
+  symbol: aFont1TTex
 
-D_F121758:
+aFont1UTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121758
   ctype: u16
@@ -1667,9 +1667,9 @@ D_F121758:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121758
+  symbol: aFont1UTex
 
-D_F121840:
+aFont1VTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121840
   ctype: u16
@@ -1677,9 +1677,9 @@ D_F121840:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121840
+  symbol: aFont1VTex
 
-D_F12191C:
+aFont1WTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12191C
   ctype: u16
@@ -1687,9 +1687,9 @@ D_F12191C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12191C
+  symbol: aFont1WTex
 
-D_F121A20:
+aFont1XTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121A20
   ctype: u16
@@ -1697,9 +1697,9 @@ D_F121A20:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121A20
+  symbol: aFont1XTex
 
-D_F121AFC:
+aFont1YTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121AFC
   ctype: u16
@@ -1707,9 +1707,9 @@ D_F121AFC:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121AFC
+  symbol: aFont1YTex
 
-D_F121BD4:
+aFont1ZTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121BD4
   ctype: u16
@@ -1717,9 +1717,9 @@ D_F121BD4:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121BD4
+  symbol: aFont1ZTex
 
-D_F121C84:
+aFont1CommaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121C84
   ctype: u16
@@ -1727,9 +1727,9 @@ D_F121C84:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F121C84
+  symbol: aFont1CommaTex
 
-D_F121CF8:
+aFont1PeriodTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121CF8
   ctype: u16
@@ -1737,9 +1737,9 @@ D_F121CF8:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F121CF8
+  symbol: aFont1PeriodTex
 
-D_F121D54:
+aFont1PrimeTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121D54
   ctype: u16
@@ -1747,9 +1747,9 @@ D_F121D54:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F121D54
+  symbol: aFont1PrimeTex
 
-D_F121DB4:
+aFont1ExclamationMarkTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121DB4
   ctype: u16
@@ -1757,9 +1757,9 @@ D_F121DB4:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F121DB4
+  symbol: aFont1ExclamationMarkTex
 
-D_F121E38:
+aFont1UnderscoreTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121E38
   ctype: u16
@@ -1767,9 +1767,9 @@ D_F121E38:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121E38
+  symbol: aFont1UnderscoreTex
 
-D_F121E94:
+aFont1EndTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121E94
   ctype: u16
@@ -1777,9 +1777,9 @@ D_F121E94:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121E94
+  symbol: aFont1EndTex
 
-D_F121F30:
+aFont1BoxTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121F30
   ctype: u16
@@ -1787,9 +1787,9 @@ D_F121F30:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121F30
+  symbol: aFont1BoxTex
 
-D_F121FA0:
+aFont1DashTex:
   type: COMPRESSED_TEXTURE
   offset: 0x121FA0
   ctype: u16
@@ -1797,9 +1797,9 @@ D_F121FA0:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F121FA0
+  symbol: aFont1DashTex
 
-D_F122004:
+aFont1AmpersandTex:
   type: COMPRESSED_TEXTURE
   offset: 0x122004
   ctype: u16
@@ -1807,9 +1807,9 @@ D_F122004:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F122004
+  symbol: aFont1AmpersandTex
 
-D_F122108:
+aFont1Num0Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x122108
   ctype: u16
@@ -1817,9 +1817,9 @@ D_F122108:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F122108
+  symbol: aFont1Num0Tex
 
-D_F1221E8:
+aFont1Num1Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x1221E8
   ctype: u16
@@ -1827,9 +1827,9 @@ D_F1221E8:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F1221E8
+  symbol: aFont1Num1Tex
 
-D_F12227C:
+aFont1Num2Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x12227C
   ctype: u16
@@ -1837,9 +1837,9 @@ D_F12227C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12227C
+  symbol: aFont1Num2Tex
 
-D_F12235C:
+aFont1Num3Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x12235C
   ctype: u16
@@ -1847,9 +1847,9 @@ D_F12235C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12235C
+  symbol: aFont1Num3Tex
 
-D_F122444:
+aFont1Num4Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x122444
   ctype: u16
@@ -1857,9 +1857,9 @@ D_F122444:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F122444
+  symbol: aFont1Num4Tex
 
-D_F12250C:
+aFont1Num5Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x12250C
   ctype: u16
@@ -1867,9 +1867,9 @@ D_F12250C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12250C
+  symbol: aFont1Num5Tex
 
-D_F1225E8:
+aFont1Num6Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x1225E8
   ctype: u16
@@ -1877,9 +1877,9 @@ D_F1225E8:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1225E8
+  symbol: aFont1Num6Tex
 
-D_F1226C8:
+aFont1Num7Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x1226C8
   ctype: u16
@@ -1887,9 +1887,9 @@ D_F1226C8:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1226C8
+  symbol: aFont1Num7Tex
 
-D_F122784:
+aFont1Num8Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x122784
   ctype: u16
@@ -1897,9 +1897,9 @@ D_F122784:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F122784
+  symbol: aFont1Num8Tex
 
-D_F12287C:
+aFont1Num9Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x12287C
   ctype: u16
@@ -1907,9 +1907,9 @@ D_F12287C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12287C
+  symbol: aFont1Num9Tex
 
-D_F12296C:
+aMachineStatATex:
   type: COMPRESSED_TEXTURE
   offset: 0x12296C
   ctype: u16
@@ -1917,9 +1917,9 @@ D_F12296C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F12296C
+  symbol: aMachineStatATex
 
-D_F122A24:
+aMachineStatBTex:
   type: COMPRESSED_TEXTURE
   offset: 0x122A24
   ctype: u16
@@ -1927,9 +1927,9 @@ D_F122A24:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F122A24
+  symbol: aMachineStatBTex
 
-D_F122AE8:
+aMachineStatCTex:
   type: COMPRESSED_TEXTURE
   offset: 0x122AE8
   ctype: u16
@@ -1937,9 +1937,9 @@ D_F122AE8:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F122AE8
+  symbol: aMachineStatCTex
 
-D_F122BA4:
+aMachineStatDTex:
   type: COMPRESSED_TEXTURE
   offset: 0x122BA4
   ctype: u16
@@ -1947,9 +1947,9 @@ D_F122BA4:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F122BA4
+  symbol: aMachineStatDTex
 
-D_F122C74:
+aMachineStatETex:
   type: COMPRESSED_TEXTURE
   offset: 0x122C74
   ctype: u16
@@ -1957,9 +1957,9 @@ D_F122C74:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F122C74
+  symbol: aMachineStatETex
 
-D_F122D10:
+aMachineWeight0Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x122D10
   ctype: u16
@@ -1967,9 +1967,9 @@ D_F122D10:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F122D10
+  symbol: aMachineWeight0Tex
 
-D_F122DE4:
+aMachineWeight1Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x122DE4
   ctype: u16
@@ -1977,9 +1977,9 @@ D_F122DE4:
   width: 4
   height: 16
   compression: MIO0
-  symbol: D_F122DE4
+  symbol: aMachineWeight1Tex
 
-D_F122E44:
+aMachineWeight2Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x122E44
   ctype: u16
@@ -1987,9 +1987,9 @@ D_F122E44:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F122E44
+  symbol: aMachineWeight2Tex
 
-D_F122ECC:
+aMachineWeight3Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x122ECC
   ctype: u16
@@ -1997,9 +1997,9 @@ D_F122ECC:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F122ECC
+  symbol: aMachineWeight3Tex
 
-D_F122F50:
+aMachineWeight4Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x122F50
   ctype: u16
@@ -2007,9 +2007,9 @@ D_F122F50:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F122F50
+  symbol: aMachineWeight4Tex
 
-D_F122FE4:
+aMachineWeight5Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x122FE4
   ctype: u16
@@ -2017,9 +2017,9 @@ D_F122FE4:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F122FE4
+  symbol: aMachineWeight5Tex
 
-D_F123068:
+aMachineWeight6Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123068
   ctype: u16
@@ -2027,9 +2027,9 @@ D_F123068:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F123068
+  symbol: aMachineWeight6Tex
 
-D_F123104:
+aMachineWeight7Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123104
   ctype: u16
@@ -2037,9 +2037,9 @@ D_F123104:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F123104
+  symbol: aMachineWeight7Tex
 
-D_F123178:
+aMachineWeight8Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123178
   ctype: u16
@@ -2047,9 +2047,9 @@ D_F123178:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F123178
+  symbol: aMachineWeight8Tex
 
-D_F123228:
+aMachineWeight9Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123228
   ctype: u16
@@ -2057,9 +2057,9 @@ D_F123228:
   width: 8
   height: 16
   compression: MIO0
-  symbol: D_F123228
+  symbol: aMachineWeight9Tex
 
-D_F1232C4:
+aFont2ATex:
   type: COMPRESSED_TEXTURE
   offset: 0x1232C4
   ctype: u16
@@ -2067,9 +2067,9 @@ D_F1232C4:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F1232C4
+  symbol: aFont2ATex
 
-D_F123304:
+aFont2BTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123304
   ctype: u16
@@ -2077,9 +2077,9 @@ D_F123304:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123304
+  symbol: aFont2BTex
 
-D_F123348:
+aFont2CTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123348
   ctype: u16
@@ -2087,9 +2087,9 @@ D_F123348:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123348
+  symbol: aFont2CTex
 
-D_F12338C:
+aFont2DTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12338C
   ctype: u16
@@ -2097,9 +2097,9 @@ D_F12338C:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F12338C
+  symbol: aFont2DTex
 
-D_F1233D0:
+aFont2ETex:
   type: COMPRESSED_TEXTURE
   offset: 0x1233D0
   ctype: u16
@@ -2107,9 +2107,9 @@ D_F1233D0:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F1233D0
+  symbol: aFont2ETex
 
-D_F12340C:
+aFont2FTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12340C
   ctype: u16
@@ -2117,9 +2117,9 @@ D_F12340C:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F12340C
+  symbol: aFont2FTex
 
-D_F123448:
+aFont2GTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123448
   ctype: u16
@@ -2127,9 +2127,9 @@ D_F123448:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123448
+  symbol: aFont2GTex
 
-D_F123490:
+aFont2HTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123490
   ctype: u16
@@ -2137,9 +2137,9 @@ D_F123490:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123490
+  symbol: aFont2HTex
 
-D_F1234D0:
+aFont2ITex:
   type: COMPRESSED_TEXTURE
   offset: 0x1234D0
   ctype: u16
@@ -2147,9 +2147,9 @@ D_F1234D0:
   width: 4
   height: 8
   compression: MIO0
-  symbol: D_F1234D0
+  symbol: aFont2ITex
 
-D_F123504:
+aFont2JTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123504
   ctype: u16
@@ -2157,9 +2157,9 @@ D_F123504:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123504
+  symbol: aFont2JTex
 
-D_F123544:
+aFont2KTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123544
   ctype: u16
@@ -2167,9 +2167,9 @@ D_F123544:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123544
+  symbol: aFont2KTex
 
-D_F123584:
+aFont2LTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123584
   ctype: u16
@@ -2177,9 +2177,9 @@ D_F123584:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123584
+  symbol: aFont2LTex
 
-D_F1235C0:
+aFont2MTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1235C0
   ctype: u16
@@ -2187,9 +2187,9 @@ D_F1235C0:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F1235C0
+  symbol: aFont2MTex
 
-D_F123600:
+aFont2NTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123600
   ctype: u16
@@ -2197,9 +2197,9 @@ D_F123600:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123600
+  symbol: aFont2NTex
 
-D_F123644:
+aFont2OTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123644
   ctype: u16
@@ -2207,9 +2207,9 @@ D_F123644:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123644
+  symbol: aFont2OTex
 
-D_F123688:
+aFont2PTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123688
   ctype: u16
@@ -2217,9 +2217,9 @@ D_F123688:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123688
+  symbol: aFont2PTex
 
-D_F1236C8:
+aFont2QTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1236C8
   ctype: u16
@@ -2227,9 +2227,9 @@ D_F1236C8:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F1236C8
+  symbol: aFont2QTex
 
-D_F123710:
+aFont2RTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123710
   ctype: u16
@@ -2237,9 +2237,9 @@ D_F123710:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123710
+  symbol: aFont2RTex
 
-D_F123750:
+aFont2STex:
   type: COMPRESSED_TEXTURE
   offset: 0x123750
   ctype: u16
@@ -2247,9 +2247,9 @@ D_F123750:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123750
+  symbol: aFont2STex
 
-D_F123794:
+aFont2TTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123794
   ctype: u16
@@ -2257,9 +2257,9 @@ D_F123794:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123794
+  symbol: aFont2TTex
 
-D_F1237D0:
+aFont2UTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1237D0
   ctype: u16
@@ -2267,9 +2267,9 @@ D_F1237D0:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F1237D0
+  symbol: aFont2UTex
 
-D_F123814:
+aFont2VTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123814
   ctype: u16
@@ -2277,9 +2277,9 @@ D_F123814:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123814
+  symbol: aFont2VTex
 
-D_F123858:
+aFont2WTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123858
   ctype: u16
@@ -2287,9 +2287,9 @@ D_F123858:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123858
+  symbol: aFont2WTex
 
-D_F12389C:
+aFont2XTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12389C
   ctype: u16
@@ -2297,9 +2297,9 @@ D_F12389C:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F12389C
+  symbol: aFont2XTex
 
-D_F1238EC:
+aFont2YTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1238EC
   ctype: u16
@@ -2307,9 +2307,9 @@ D_F1238EC:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F1238EC
+  symbol: aFont2YTex
 
-D_F123928:
+aFont2ZTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123928
   ctype: u16
@@ -2317,9 +2317,9 @@ D_F123928:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123928
+  symbol: aFont2ZTex
 
-D_F123964:
+aFont2CommaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123964
   ctype: u16
@@ -2327,9 +2327,9 @@ D_F123964:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123964
+  symbol: aFont2CommaTex
 
-D_F123998:
+aFont2PeriodTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123998
   ctype: u16
@@ -2337,9 +2337,9 @@ D_F123998:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123998
+  symbol: aFont2PeriodTex
 
-D_F1239CC:
+aFont2PrimeTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1239CC
   ctype: u16
@@ -2347,9 +2347,9 @@ D_F1239CC:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F1239CC
+  symbol: aFont2PrimeTex
 
-D_F123A04:
+aFont2DashTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123A04
   ctype: u16
@@ -2357,9 +2357,9 @@ D_F123A04:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123A04
+  symbol: aFont2DashTex
 
-D_F123A30:
+aFont2KgTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123A30
   ctype: u16
@@ -2367,9 +2367,9 @@ D_F123A30:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123A30
+  symbol: aFont2KgTex
 
-D_F123A84:
+aFont2AmpersandTex:
   type: COMPRESSED_TEXTURE
   offset: 0x123A84
   ctype: u16
@@ -2377,9 +2377,9 @@ D_F123A84:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123A84
+  symbol: aFont2AmpersandTex
 
-D_F123AC8:
+aFont2Num0Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123AC8
   ctype: u16
@@ -2387,9 +2387,9 @@ D_F123AC8:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123AC8
+  symbol: aFont2Num0Tex
 
-D_F123B04:
+aFont2Num1Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123B04
   ctype: u16
@@ -2397,9 +2397,9 @@ D_F123B04:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123B04
+  symbol: aFont2Num1Tex
 
-D_F123B40:
+aFont2Num2Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123B40
   ctype: u16
@@ -2407,9 +2407,9 @@ D_F123B40:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123B40
+  symbol: aFont2Num2Tex
 
-D_F123B80:
+aFont2Num3Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123B80
   ctype: u16
@@ -2417,9 +2417,9 @@ D_F123B80:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123B80
+  symbol: aFont2Num3Tex
 
-D_F123BC0:
+aFont2Num4Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123BC0
   ctype: u16
@@ -2427,9 +2427,9 @@ D_F123BC0:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123BC0
+  symbol: aFont2Num4Tex
 
-D_F123C04:
+aFont2Num5Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123C04
   ctype: u16
@@ -2437,9 +2437,9 @@ D_F123C04:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123C04
+  symbol: aFont2Num5Tex
 
-D_F123C44:
+aFont2Num6Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123C44
   ctype: u16
@@ -2447,9 +2447,9 @@ D_F123C44:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123C44
+  symbol: aFont2Num6Tex
 
-D_F123C84:
+aFont2Num7Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123C84
   ctype: u16
@@ -2457,9 +2457,9 @@ D_F123C84:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123C84
+  symbol: aFont2Num7Tex
 
-D_F123CBC:
+aFont2Num8Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123CBC
   ctype: u16
@@ -2467,9 +2467,9 @@ D_F123CBC:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123CBC
+  symbol: aFont2Num8Tex
 
-D_F123CF8:
+aFont2Num9Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x123CF8
   ctype: u16
@@ -2477,1747 +2477,1747 @@ D_F123CF8:
   width: 8
   height: 8
   compression: MIO0
-  symbol: D_F123CF8
+  symbol: aFont2Num9Tex
 
-D_F123D34:
+aFont3ATex:
   type: TEXTURE
   offset: 0x123D34
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F123D34
+  symbol: aFont3ATex
 
-D_F123DB4:
+aFont3BTex:
   type: TEXTURE
   offset: 0x123DB4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F123DB4
+  symbol: aFont3BTex
 
-D_F123E34:
+aFont3CTex:
   type: TEXTURE
   offset: 0x123E34
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F123E34
+  symbol: aFont3CTex
 
-D_F123EB4:
+aFont3DTex:
   type: TEXTURE
   offset: 0x123EB4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F123EB4
+  symbol: aFont3DTex
 
-D_F123F34:
+aFont3ETex:
   type: TEXTURE
   offset: 0x123F34
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F123F34
+  symbol: aFont3ETex
 
-D_F123FB4:
+aFont3FTex:
   type: TEXTURE
   offset: 0x123FB4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F123FB4
+  symbol: aFont3FTex
 
-D_F124034:
+aFont3GTex:
   type: TEXTURE
   offset: 0x124034
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124034
+  symbol: aFont3GTex
 
-D_F1240B4:
+aFont3HTex:
   type: TEXTURE
   offset: 0x1240B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1240B4
+  symbol: aFont3HTex
 
-D_F124134:
+aFont3ITex:
   type: TEXTURE
   offset: 0x124134
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124134
+  symbol: aFont3ITex
 
-D_F1241B4:
+aFont3JTex:
   type: TEXTURE
   offset: 0x1241B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1241B4
+  symbol: aFont3JTex
 
-D_F124234:
+aFont3KTex:
   type: TEXTURE
   offset: 0x124234
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124234
+  symbol: aFont3KTex
 
-D_F1242B4:
+aFont3LTex:
   type: TEXTURE
   offset: 0x1242B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1242B4
+  symbol: aFont3LTex
 
-D_F124334:
+aFont3MTex:
   type: TEXTURE
   offset: 0x124334
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124334
+  symbol: aFont3MTex
 
-D_F1243B4:
+aFont3NTex:
   type: TEXTURE
   offset: 0x1243B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1243B4
+  symbol: aFont3NTex
 
-D_F124434:
+aFont3OTex:
   type: TEXTURE
   offset: 0x124434
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124434
+  symbol: aFont3OTex
 
-D_F1244B4:
+aFont3PTex:
   type: TEXTURE
   offset: 0x1244B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1244B4
+  symbol: aFont3PTex
 
-D_F124534:
+aFont3QTex:
   type: TEXTURE
   offset: 0x124534
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124534
+  symbol: aFont3QTex
 
-D_F1245B4:
+aFont3RTex:
   type: TEXTURE
   offset: 0x1245B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1245B4
+  symbol: aFont3RTex
 
-D_F124634:
+aFont3STex:
   type: TEXTURE
   offset: 0x124634
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124634
+  symbol: aFont3STex
 
-D_F1246B4:
+aFont3TTex:
   type: TEXTURE
   offset: 0x1246B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1246B4
+  symbol: aFont3TTex
 
-D_F124734:
+aFont3UTex:
   type: TEXTURE
   offset: 0x124734
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124734
+  symbol: aFont3UTex
 
-D_F1247B4:
+aFont3VTex:
   type: TEXTURE
   offset: 0x1247B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1247B4
+  symbol: aFont3VTex
 
-D_F124834:
+aFont3WTex:
   type: TEXTURE
   offset: 0x124834
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124834
+  symbol: aFont3WTex
 
-D_F1248B4:
+aFont3XTex:
   type: TEXTURE
   offset: 0x1248B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1248B4
+  symbol: aFont3XTex
 
-D_F124934:
+aFont3YTex:
   type: TEXTURE
   offset: 0x124934
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124934
+  symbol: aFont3YTex
 
-D_F1249B4:
+aFont3ZTex:
   type: TEXTURE
   offset: 0x1249B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1249B4
+  symbol: aFont3ZTex
 
-D_F124A34:
+aFont3AlphaTex:
   type: TEXTURE
   offset: 0x124A34
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124A34
+  symbol: aFont3AlphaTex
 
-D_F124AB4:
+aFont3BetaTex:
   type: TEXTURE
   offset: 0x124AB4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124AB4
+  symbol: aFont3BetaTex
 
-D_F124B34:
+aFont3GammaTex:
   type: TEXTURE
   offset: 0x124B34
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124B34
+  symbol: aFont3GammaTex
 
-D_F124BB4:
+aFont3PrimeTex:
   type: TEXTURE
   offset: 0x124BB4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124BB4
+  symbol: aFont3PrimeTex
 
-D_F124C34:
+aFont3EllipsisTex:
   type: TEXTURE
   offset: 0x124C34
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124C34
+  symbol: aFont3EllipsisTex
 
-D_F124CB4:
+aFont3ColonTex:
   type: TEXTURE
   offset: 0x124CB4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124CB4
+  symbol: aFont3ColonTex
 
-D_F124D34:
+aFont3PeriodTex:
   type: TEXTURE
   offset: 0x124D34
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124D34
+  symbol: aFont3PeriodTex
 
-D_F124DB4:
+aFont3AmpersandTex:
   type: TEXTURE
   offset: 0x124DB4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124DB4
+  symbol: aFont3AmpersandTex
 
-D_F124E34:
+aFont3CommaTex:
   type: TEXTURE
   offset: 0x124E34
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124E34
+  symbol: aFont3CommaTex
 
-D_F124EB4:
+aFont3DashTex:
   type: TEXTURE
   offset: 0x124EB4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124EB4
+  symbol: aFont3DashTex
 
-D_F124F34:
+aFont3Num0Tex:
   type: TEXTURE
   offset: 0x124F34
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124F34
+  symbol: aFont3Num0Tex
 
-D_F124FB4:
+aFont3Num1Tex:
   type: TEXTURE
   offset: 0x124FB4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F124FB4
+  symbol: aFont3Num1Tex
 
-D_F125034:
+aFont3Num2Tex:
   type: TEXTURE
   offset: 0x125034
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F125034
+  symbol: aFont3Num2Tex
 
-D_F1250B4:
+aFont3Num3Tex:
   type: TEXTURE
   offset: 0x1250B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1250B4
+  symbol: aFont3Num3Tex
 
-D_F125134:
+aFont3Num4Tex:
   type: TEXTURE
   offset: 0x125134
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F125134
+  symbol: aFont3Num4Tex
 
-D_F1251B4:
+aFont3Num5Tex:
   type: TEXTURE
   offset: 0x1251B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1251B4
+  symbol: aFont3Num5Tex
 
-D_F125234:
+aFont3Num6Tex:
   type: TEXTURE
   offset: 0x125234
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F125234
+  symbol: aFont3Num6Tex
 
-D_F1252B4:
+aFont3Num7Tex:
   type: TEXTURE
   offset: 0x1252B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1252B4
+  symbol: aFont3Num7Tex
 
-D_F125334:
+aFont3Num8Tex:
   type: TEXTURE
   offset: 0x125334
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F125334
+  symbol: aFont3Num8Tex
 
-D_F1253B4:
+aFont3Num9Tex:
   type: TEXTURE
   offset: 0x1253B4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1253B4
+  symbol: aFont3Num9Tex
 
-D_F125434:
+aFont4ATex:
   type: TEXTURE
   offset: 0x125434
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125434
+  symbol: aFont4ATex
 
-D_F125474:
+aFont4DTex:
   type: TEXTURE
   offset: 0x125474
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125474
+  symbol: aFont4DTex
 
-D_F1254B4:
+aFont4ETex:
   type: TEXTURE
   offset: 0x1254B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1254B4
+  symbol: aFont4ETex
 
-D_F1254F4:
+aFont4MTex:
   type: TEXTURE
   offset: 0x1254F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1254F4
+  symbol: aFont4MTex
 
-D_F125534:
+aFont4AmpersandTex:
   type: TEXTURE
   offset: 0x125534
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125534
+  symbol: aFont4AmpersandTex
 
-D_F125574:
+aFont4BTex:
   type: TEXTURE
   offset: 0x125574
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125574
+  symbol: aFont4BTex
 
-D_F1255B4:
+aFont4CTex:
   type: TEXTURE
   offset: 0x1255B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1255B4
+  symbol: aFont4CTex
 
-D_F1255F4:
+aFont4FTex:
   type: TEXTURE
   offset: 0x1255F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1255F4
+  symbol: aFont4FTex
 
-D_F125634:
+aFont4GTex:
   type: TEXTURE
   offset: 0x125634
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125634
+  symbol: aFont4GTex
 
-D_F125674:
+aFont4HTex:
   type: TEXTURE
   offset: 0x125674
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125674
+  symbol: aFont4HTex
 
-D_F1256B4:
+aFont4ITex:
   type: TEXTURE
   offset: 0x1256B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1256B4
+  symbol: aFont4ITex
 
-D_F1256F4:
+aFont4JTex:
   type: TEXTURE
   offset: 0x1256F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1256F4
+  symbol: aFont4JTex
 
-D_F125734:
+aFont4KTex:
   type: TEXTURE
   offset: 0x125734
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125734
+  symbol: aFont4KTex
 
-D_F125774:
+aFont4LTex:
   type: TEXTURE
   offset: 0x125774
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125774
+  symbol: aFont4LTex
 
-D_F1257B4:
+aFont4NTex:
   type: TEXTURE
   offset: 0x1257B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1257B4
+  symbol: aFont4NTex
 
-D_F1257F4:
+aFont4OTex:
   type: TEXTURE
   offset: 0x1257F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1257F4
+  symbol: aFont4OTex
 
-D_F125834:
+aFont4PTex:
   type: TEXTURE
   offset: 0x125834
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125834
+  symbol: aFont4PTex
 
-D_F125874:
+aFont4QTex:
   type: TEXTURE
   offset: 0x125874
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125874
+  symbol: aFont4QTex
 
-D_F1258B4:
+aFont4RTex:
   type: TEXTURE
   offset: 0x1258B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1258B4
+  symbol: aFont4RTex
 
-D_F1258F4:
+aFont4STex:
   type: TEXTURE
   offset: 0x1258F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1258F4
+  symbol: aFont4STex
 
-D_F125934:
+aFont4TTex:
   type: TEXTURE
   offset: 0x125934
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125934
+  symbol: aFont4TTex
 
-D_F125974:
+aFont4UTex:
   type: TEXTURE
   offset: 0x125974
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125974
+  symbol: aFont4UTex
 
-D_F1259B4:
+aFont4VTex:
   type: TEXTURE
   offset: 0x1259B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1259B4
+  symbol: aFont4VTex
 
-D_F1259F4:
+aFont4WTex:
   type: TEXTURE
   offset: 0x1259F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1259F4
+  symbol: aFont4WTex
 
-D_F125A34:
+aFont4XTex:
   type: TEXTURE
   offset: 0x125A34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125A34
+  symbol: aFont4XTex
 
-D_F125A74:
+aFont4YTex:
   type: TEXTURE
   offset: 0x125A74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125A74
+  symbol: aFont4YTex
 
-D_F125AB4:
+aFont4ZTex:
   type: TEXTURE
   offset: 0x125AB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125AB4
+  symbol: aFont4ZTex
 
-D_F125AF4:
+aFont4LowerCTex:
   type: TEXTURE
   offset: 0x125AF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125AF4
+  symbol: aFont4LowerCTex
 
-D_F125B34:
+aFont4LowerRTex:
   type: TEXTURE
   offset: 0x125B34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125B34
+  symbol: aFont4LowerRTex
 
-D_F125B74:
+aFont4LowerSTex:
   type: TEXTURE
   offset: 0x125B74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125B74
+  symbol: aFont4LowerSTex
 
-D_F125BB4:
+aFont4PeriodTex:
   type: TEXTURE
   offset: 0x125BB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125BB4
+  symbol: aFont4PeriodTex
 
-D_F125BF4:
+aFont4KatakanaATex:
   type: TEXTURE
   offset: 0x125BF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125BF4
+  symbol: aFont4KatakanaATex
 
-D_F125C34:
+aFont4KatakanaITex:
   type: TEXTURE
   offset: 0x125C34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125C34
+  symbol: aFont4KatakanaITex
 
-D_F125C74:
+aFont4KatakanaUTex:
   type: TEXTURE
   offset: 0x125C74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125C74
+  symbol: aFont4KatakanaUTex
 
-D_F125CB4:
+aFont4KatakanaETex:
   type: TEXTURE
   offset: 0x125CB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125CB4
+  symbol: aFont4KatakanaETex
 
-D_F125CF4:
+aFont4KatakanaOTex:
   type: TEXTURE
   offset: 0x125CF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125CF4
+  symbol: aFont4KatakanaOTex
 
-D_F125D34:
+aFont4KatakanaKaTex:
   type: TEXTURE
   offset: 0x125D34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125D34
+  symbol: aFont4KatakanaKaTex
 
-D_F125D74:
+aFont4KatakanaKiTex:
   type: TEXTURE
   offset: 0x125D74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125D74
+  symbol: aFont4KatakanaKiTex
 
-D_F125DB4:
+aFont4KatakanaKuTex:
   type: TEXTURE
   offset: 0x125DB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125DB4
+  symbol: aFont4KatakanaKuTex
 
-D_F125DF4:
+aFont4KatakanaKeTex:
   type: TEXTURE
   offset: 0x125DF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125DF4
+  symbol: aFont4KatakanaKeTex
 
-D_F125E34:
+aFont4KatakanaKoTex:
   type: TEXTURE
   offset: 0x125E34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125E34
+  symbol: aFont4KatakanaKoTex
 
-D_F125E74:
+aFont4KatakanaSaTex:
   type: TEXTURE
   offset: 0x125E74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125E74
+  symbol: aFont4KatakanaSaTex
 
-D_F125EB4:
+aFont4KatakanaShiTex:
   type: TEXTURE
   offset: 0x125EB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125EB4
+  symbol: aFont4KatakanaShiTex
 
-D_F125EF4:
+aFont4KatakanaSuTex:
   type: TEXTURE
   offset: 0x125EF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125EF4
+  symbol: aFont4KatakanaSuTex
 
-D_F125F34:
+aFont4KatakanaSeTex:
   type: TEXTURE
   offset: 0x125F34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125F34
+  symbol: aFont4KatakanaSeTex
 
-D_F125F74:
+aFont4KatakanaSoTex:
   type: TEXTURE
   offset: 0x125F74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125F74
+  symbol: aFont4KatakanaSoTex
 
-D_F125FB4:
+aFont4KatakanaTaTex:
   type: TEXTURE
   offset: 0x125FB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125FB4
+  symbol: aFont4KatakanaTaTex
 
-D_F125FF4:
+aFont4KatakanaChiTex:
   type: TEXTURE
   offset: 0x125FF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F125FF4
+  symbol: aFont4KatakanaChiTex
 
-D_F126034:
+aFont4KatakanaTsuTex:
   type: TEXTURE
   offset: 0x126034
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126034
+  symbol: aFont4KatakanaTsuTex
 
-D_F1260B4:
+aFont4KatakanaTeTex:
   type: TEXTURE
   offset: 0x1260B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1260B4
+  symbol: aFont4KatakanaTeTex
 
-D_F1260F4:
+aFont4KatakanaToTex:
   type: TEXTURE
   offset: 0x1260F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1260F4
+  symbol: aFont4KatakanaToTex
 
-D_F126074:
+aFont4KatakanaSoukonTex:
   type: TEXTURE
   offset: 0x126074
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126074
+  symbol: aFont4KatakanaSoukonTex
 
-D_F126134:
+aFont4KatakanaNaTex:
   type: TEXTURE
   offset: 0x126134
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126134
+  symbol: aFont4KatakanaNaTex
 
-D_F126174:
+aFont4KatakanaNiTex:
   type: TEXTURE
   offset: 0x126174
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126174
+  symbol: aFont4KatakanaNiTex
 
-D_F1261B4:
+aFont4KatakanaNuTex:
   type: TEXTURE
   offset: 0x1261B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1261B4
+  symbol: aFont4KatakanaNuTex
 
-D_F1261F4:
+aFont4KatakanaNeTex:
   type: TEXTURE
   offset: 0x1261F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1261F4
+  symbol: aFont4KatakanaNeTex
 
-D_F126234:
+aFont4KatakanaNoTex:
   type: TEXTURE
   offset: 0x126234
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126234
+  symbol: aFont4KatakanaNoTex
 
-D_F126274:
+aFont4KatakanaHaTex:
   type: TEXTURE
   offset: 0x126274
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126274
+  symbol: aFont4KatakanaHaTex
 
-D_F1262B4:
+aFont4KatakanaHiTex:
   type: TEXTURE
   offset: 0x1262B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1262B4
+  symbol: aFont4KatakanaHiTex
 
-D_F1262F4:
+aFont4KatakanaFuTex:
   type: TEXTURE
   offset: 0x1262F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1262F4
+  symbol: aFont4KatakanaFuTex
 
-D_F126334:
+aFont4KatakanaHeTex:
   type: TEXTURE
   offset: 0x126334
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126334
+  symbol: aFont4KatakanaHeTex
 
-D_F126374:
+aFont4KatakanaHoTex:
   type: TEXTURE
   offset: 0x126374
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126374
+  symbol: aFont4KatakanaHoTex
 
-D_F1263B4:
+aFont4KatakanaMaTex:
   type: TEXTURE
   offset: 0x1263B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1263B4
+  symbol: aFont4KatakanaMaTex
 
-D_F1263F4:
+aFont4KatakanaMiTex:
   type: TEXTURE
   offset: 0x1263F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1263F4
+  symbol: aFont4KatakanaMiTex
 
-D_F126434:
+aFont4KatakanaMuTex:
   type: TEXTURE
   offset: 0x126434
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126434
+  symbol: aFont4KatakanaMuTex
 
-D_F126474:
+aFont4KatakanaMeTex:
   type: TEXTURE
   offset: 0x126474
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126474
+  symbol: aFont4KatakanaMeTex
 
-D_F1264B4:
+aFont4KatakanaMoTex:
   type: TEXTURE
   offset: 0x1264B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1264B4
+  symbol: aFont4KatakanaMoTex
 
-D_F1264F4:
+aFont4KatakanaYaTex:
   type: TEXTURE
   offset: 0x1264F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1264F4
+  symbol: aFont4KatakanaYaTex
 
-D_F126534:
+aFont4KatakanaYuTex:
   type: TEXTURE
   offset: 0x126534
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126534
+  symbol: aFont4KatakanaYuTex
 
-D_F126574:
+aFont4KatakanaYoTex:
   type: TEXTURE
   offset: 0x126574
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126574
+  symbol: aFont4KatakanaYoTex
 
-D_F1265B4:
+aFont4KatakanaYoonYaTex:
   type: TEXTURE
   offset: 0x1265B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1265B4
+  symbol: aFont4KatakanaYoonYaTex
 
-D_F1265F4:
+aFont4KatakanaYoonYuTex:
   type: TEXTURE
   offset: 0x1265F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1265F4
+  symbol: aFont4KatakanaYoonYuTex
 
-D_F126634:
+aFont4KatakanaYoonYoTex:
   type: TEXTURE
   offset: 0x126634
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126634
+  symbol: aFont4KatakanaYoonYoTex
 
-D_F126674:
+aFont4KatakanaRaTex:
   type: TEXTURE
   offset: 0x126674
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126674
+  symbol: aFont4KatakanaRaTex
 
-D_F1266B4:
+aFont4KatakanaRiTex:
   type: TEXTURE
   offset: 0x1266B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1266B4
+  symbol: aFont4KatakanaRiTex
 
-D_F1266F4:
+aFont4KatakanaRuTex:
   type: TEXTURE
   offset: 0x1266F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1266F4
+  symbol: aFont4KatakanaRuTex
 
-D_F126734:
+aFont4KatakanaReTex:
   type: TEXTURE
   offset: 0x126734
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126734
+  symbol: aFont4KatakanaReTex
 
-D_F126774:
+aFont4KatakanaRoTex:
   type: TEXTURE
   offset: 0x126774
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126774
+  symbol: aFont4KatakanaRoTex
 
-D_F1267B4:
+aFont4KatakanaWaTex:
   type: TEXTURE
   offset: 0x1267B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1267B4
+  symbol: aFont4KatakanaWaTex
 
-D_F1267F4:
+aFont4KatakanaWoTex:
   type: TEXTURE
   offset: 0x1267F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1267F4
+  symbol: aFont4KatakanaWoTex
 
-D_F126834:
+aFont4KatakanaNTex:
   type: TEXTURE
   offset: 0x126834
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126834
+  symbol: aFont4KatakanaNTex
 
-D_F126874:
+aFont4KatakanaGaTex:
   type: TEXTURE
   offset: 0x126874
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126874
+  symbol: aFont4KatakanaGaTex
 
-D_F1268B4:
+aFont4KatakanaGiTex:
   type: TEXTURE
   offset: 0x1268B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1268B4
+  symbol: aFont4KatakanaGiTex
 
-D_F1268F4:
+aFont4KatakanaGuTex:
   type: TEXTURE
   offset: 0x1268F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1268F4
+  symbol: aFont4KatakanaGuTex
 
-D_F126934:
+aFont4KatakanaGeTex:
   type: TEXTURE
   offset: 0x126934
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126934
+  symbol: aFont4KatakanaGeTex
 
-D_F126974:
+aFont4KatakanaGoTex:
   type: TEXTURE
   offset: 0x126974
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126974
+  symbol: aFont4KatakanaGoTex
 
-D_F1269B4:
+aFont4KatakanaZaTex:
   type: TEXTURE
   offset: 0x1269B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1269B4
+  symbol: aFont4KatakanaZaTex
 
-D_F1269F4:
+aFont4KatakanaJiTex:
   type: TEXTURE
   offset: 0x1269F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1269F4
+  symbol: aFont4KatakanaJiTex
 
-D_F126A34:
+aFont4KatakanaZuTex:
   type: TEXTURE
   offset: 0x126A34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126A34
+  symbol: aFont4KatakanaZuTex
 
-D_F126A74:
+aFont4KatakanaZeTex:
   type: TEXTURE
   offset: 0x126A74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126A74
+  symbol: aFont4KatakanaZeTex
 
-D_F126AB4:
+aFont4KatakanaZoTex:
   type: TEXTURE
   offset: 0x126AB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126AB4
+  symbol: aFont4KatakanaZoTex
 
-D_F126AF4:
+aFont4KatakanaDaTex:
   type: TEXTURE
   offset: 0x126AF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126AF4
+  symbol: aFont4KatakanaDaTex
 
-D_F126B34:
+aFont4KatakanaDjiTex:
   type: TEXTURE
   offset: 0x126B34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126B34
+  symbol: aFont4KatakanaDjiTex
 
-D_F126B74:
+aFont4KatakanaDzuTex:
   type: TEXTURE
   offset: 0x126B74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126B74
+  symbol: aFont4KatakanaDzuTex
 
-D_F126BB4:
+aFont4KatakanaDeTex:
   type: TEXTURE
   offset: 0x126BB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126BB4
+  symbol: aFont4KatakanaDeTex
 
-D_F126BF4:
+aFont4KatakanaDoTex:
   type: TEXTURE
   offset: 0x126BF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126BF4
+  symbol: aFont4KatakanaDoTex
 
-D_F126C34:
+aFont4KatakanaBaTex:
   type: TEXTURE
   offset: 0x126C34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126C34
+  symbol: aFont4KatakanaBaTex
 
-D_F126C74:
+aFont4KatakanaBiTex:
   type: TEXTURE
   offset: 0x126C74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126C74
+  symbol: aFont4KatakanaBiTex
 
-D_F126CB4:
+aFont4KatakanaBuTex:
   type: TEXTURE
   offset: 0x126CB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126CB4
+  symbol: aFont4KatakanaBuTex
 
-D_F126CF4:
+aFont4KatakanaBeTex:
   type: TEXTURE
   offset: 0x126CF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126CF4
+  symbol: aFont4KatakanaBeTex
 
-D_F126D34:
+aFont4KatakanaBoTex:
   type: TEXTURE
   offset: 0x126D34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126D34
+  symbol: aFont4KatakanaBoTex
 
-D_F126D74:
+aFont4KatakanaPaTex:
   type: TEXTURE
   offset: 0x126D74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126D74
+  symbol: aFont4KatakanaPaTex
 
-D_F126DB4:
+aFont4KatakanaPiTex:
   type: TEXTURE
   offset: 0x126DB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126DB4
+  symbol: aFont4KatakanaPiTex
 
-D_F126DF4:
+aFont4KatakanaPuTex:
   type: TEXTURE
   offset: 0x126DF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126DF4
+  symbol: aFont4KatakanaPuTex
 
-D_F126E34:
+aFont4KatakanaPeTex:
   type: TEXTURE
   offset: 0x126E34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126E34
+  symbol: aFont4KatakanaPeTex
 
-D_F126E74:
+aFont4KatakanaPoTex:
   type: TEXTURE
   offset: 0x126E74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126E74
+  symbol: aFont4KatakanaPoTex
 
-D_F126EB4:
+aFont4KatakanaDigraphATex:
   type: TEXTURE
   offset: 0x126EB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126EB4
+  symbol: aFont4KatakanaDigraphATex
 
-D_F126EF4:
+aFont4KatakanaDigraphITex:
   type: TEXTURE
   offset: 0x126EF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126EF4
+  symbol: aFont4KatakanaDigraphITex
 
-D_F126F34:
+aFont4KatakanaDigraphETex:
   type: TEXTURE
   offset: 0x126F34
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126F34
+  symbol: aFont4KatakanaDigraphETex
 
-D_F126F74:
+aFont4DashTex:
   type: TEXTURE
   offset: 0x126F74
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126F74
+  symbol: aFont4DashTex
 
-D_F126FB4:
+aFont4Num0Tex:
   type: TEXTURE
   offset: 0x126FB4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126FB4
+  symbol: aFont4Num0Tex
 
-D_F126FF4:
+aFont4Num1Tex:
   type: TEXTURE
   offset: 0x126FF4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F126FF4
+  symbol: aFont4Num1Tex
 
-D_F127034:
+aFont4Num2Tex:
   type: TEXTURE
   offset: 0x127034
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F127034
+  symbol: aFont4Num2Tex
 
-D_F127074:
+aFont4Num3Tex:
   type: TEXTURE
   offset: 0x127074
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F127074
+  symbol: aFont4Num3Tex
 
-D_F1270B4:
+aFont4Num4Tex:
   type: TEXTURE
   offset: 0x1270B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1270B4
+  symbol: aFont4Num4Tex
 
-D_F1270F4:
+aFont4Num5Tex:
   type: TEXTURE
   offset: 0x1270F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1270F4
+  symbol: aFont4Num5Tex
 
-D_F127134:
+aFont4Num6Tex:
   type: TEXTURE
   offset: 0x127134
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F127134
+  symbol: aFont4Num6Tex
 
-D_F127174:
+aFont4Num7Tex:
   type: TEXTURE
   offset: 0x127174
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F127174
+  symbol: aFont4Num7Tex
 
-D_F1271B4:
+aFont4Num8Tex:
   type: TEXTURE
   offset: 0x1271B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1271B4
+  symbol: aFont4Num8Tex
 
-D_F1271F4:
+aFont4Num9Tex:
   type: TEXTURE
   offset: 0x1271F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1271F4
+  symbol: aFont4Num9Tex
 
-D_F127234:
+aFont4PrimeTex:
   type: TEXTURE
   offset: 0x127234
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F127234
+  symbol: aFont4PrimeTex
 
-D_F127274:
+aFont4DoublePrimeTex:
   type: TEXTURE
   offset: 0x127274
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F127274
+  symbol: aFont4DoublePrimeTex
 
-D_F127374:
+aFont4STTex:
   type: TEXTURE
   offset: 0x127374
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F127374
+  symbol: aFont4STTex
 
-D_F1273B4:
+aFont4NDTex:
   type: TEXTURE
   offset: 0x1273B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1273B4
+  symbol: aFont4NDTex
 
-D_F1273F4:
+aFont4RDTex:
   type: TEXTURE
   offset: 0x1273F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1273F4
+  symbol: aFont4RDTex
 
-D_F127434:
+aFont4THTex:
   type: TEXTURE
   offset: 0x127434
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F127434
+  symbol: aFont4THTex
 
-D_F1272B4:
+aFont4PlusTex:
   type: TEXTURE
   offset: 0x1272B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1272B4
+  symbol: aFont4PlusTex
 
-D_F1272F4:
+aFont4MinusTex:
   type: TEXTURE
   offset: 0x1272F4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F1272F4
+  symbol: aFont4MinusTex
 
-D_F127334:
+aFont4PointsTex:
   type: TEXTURE
   offset: 0x127334
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: D_F127334
+  symbol: aFont4PointsTex
 
-D_F127474:
+aFont5Num0Tex:
   type: TEXTURE
   offset: 0x127474
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127474
+  symbol: aFont5Num0Tex
 
-D_F1274F4:
+aFont5Num1Tex:
   type: TEXTURE
   offset: 0x1274F4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1274F4
+  symbol: aFont5Num1Tex
 
-D_F127574:
+aFont5Num2Tex:
   type: TEXTURE
   offset: 0x127574
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127574
+  symbol: aFont5Num2Tex
 
-D_F1275F4:
+aFont5Num3Tex:
   type: TEXTURE
   offset: 0x1275F4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1275F4
+  symbol: aFont5Num3Tex
 
-D_F127674:
+aFont5Num4Tex:
   type: TEXTURE
   offset: 0x127674
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127674
+  symbol: aFont5Num4Tex
 
-D_F1276F4:
+aFont5Num5Tex:
   type: TEXTURE
   offset: 0x1276F4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1276F4
+  symbol: aFont5Num5Tex
 
-D_F127774:
+aFont5Num6Tex:
   type: TEXTURE
   offset: 0x127774
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127774
+  symbol: aFont5Num6Tex
 
-D_F1277F4:
+aFont5Num7Tex:
   type: TEXTURE
   offset: 0x1277F4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1277F4
+  symbol: aFont5Num7Tex
 
-D_F127874:
+aFont5Num8Tex:
   type: TEXTURE
   offset: 0x127874
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127874
+  symbol: aFont5Num8Tex
 
-D_F1278F4:
+aFont5Num9Tex:
   type: TEXTURE
   offset: 0x1278F4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1278F4
+  symbol: aFont5Num9Tex
 
-D_F127974:
+aFont5VTex:
   type: TEXTURE
   offset: 0x127974
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127974
+  symbol: aFont5VTex
 
-D_F1279F4:
+aFont5OpenParenthesisTex:
   type: TEXTURE
   offset: 0x1279F4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1279F4
+  symbol: aFont5OpenParenthesisTex
 
-D_F127A74:
+aFont5CloseParenthesisTex:
   type: TEXTURE
   offset: 0x127A74
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127A74
+  symbol: aFont5CloseParenthesisTex
 
-D_F127AF4:
+aFont5STTex:
   type: TEXTURE
   offset: 0x127AF4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127AF4
+  symbol: aFont5STTex
 
-D_F127B74:
+aFont5NDTex:
   type: TEXTURE
   offset: 0x127B74
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127B74
+  symbol: aFont5NDTex
 
-D_F127BF4:
+aFont5RDTex:
   type: TEXTURE
   offset: 0x127BF4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127BF4
+  symbol: aFont5RDTex
 
-D_F127C74:
+aFont5THTex:
   type: TEXTURE
   offset: 0x127C74
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127C74
+  symbol: aFont5THTex
 
-D_F127CF4:
+aFont5PlusTex:
   type: TEXTURE
   offset: 0x127CF4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127CF4
+  symbol: aFont5PlusTex
 
 
-D_F127D78:
+aFont5PointsTex:
   type: COMPRESSED_TEXTURE
   offset: 0x127D78
   ctype: u8
@@ -4225,27 +4225,27 @@ D_F127D78:
   width: 32
   height: 16
   compression: MIO0
-  symbol: D_F127D78
+  symbol: aFont5PointsTex
 
-D_F127DF4:
+aFont5UpArrowTex:
   type: TEXTURE
   offset: 0x127DF4
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127DF4
+  symbol: aFont5UpArrowTex
 
-D_F127E74:
+aFont5DownArrowTex:
   type: TEXTURE
   offset: 0x127E74
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F127E74
+  symbol: aFont5DownArrowTex
 
-D_F127EF8:
+aFont5PlayerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x127EF8
   ctype: u8
@@ -4253,9 +4253,9 @@ D_F127EF8:
   width: 80
   height: 16
   compression: MIO0
-  symbol: D_F127EF8
+  symbol: aFont5PlayerTex
 
-D_F128068:
+aFont5ComputerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x128068
   ctype: u8
@@ -4263,9 +4263,9 @@ D_F128068:
   width: 80
   height: 16
   compression: MIO0
-  symbol: D_F128068
+  symbol: aFont5ComputerTex
 
-D_F128234:
+aFont5SelectCourseTex:
   type: COMPRESSED_TEXTURE
   offset: 0x128234
   ctype: u8
@@ -4273,9 +4273,9 @@ D_F128234:
   width: 96
   height: 16
   compression: MIO0
-  symbol: D_F128234
+  symbol: aFont5SelectCourseTex
 
-D_F12840C:
+aFont5QuitTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12840C
   ctype: u8
@@ -4283,432 +4283,432 @@ D_F12840C:
   width: 32
   height: 16
   compression: MIO0
-  symbol: D_F12840C
+  symbol: aFont5QuitTex
 
-D_F1284CC:
+aFont5SideArrowTex:
   type: TEXTURE
   offset: 0x1284CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1284CC
+  symbol: aFont5SideArrowTex
 
-D_F12854C:
+aFont6Num0Tex:
   type: TEXTURE
   offset: 0x12854C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12854C
+  symbol: aFont6Num0Tex
 
-D_F1285CC:
+aFont6Num1Tex:
   type: TEXTURE
   offset: 0x1285CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1285CC
+  symbol: aFont6Num1Tex
 
-D_F12864C:
+aFont6Num2Tex:
   type: TEXTURE
   offset: 0x12864C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12864C
+  symbol: aFont6Num2Tex
 
-D_F1286CC:
+aFont6Num3Tex:
   type: TEXTURE
   offset: 0x1286CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1286CC
+  symbol: aFont6Num3Tex
 
-D_F12874C:
+aFont6Num4Tex:
   type: TEXTURE
   offset: 0x12874C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12874C
+  symbol: aFont6Num4Tex
 
-D_F1287CC:
+aFont6Num5Tex:
   type: TEXTURE
   offset: 0x1287CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1287CC
+  symbol: aFont6Num5Tex
 
-D_F12884C:
+aFont6Num6Tex:
   type: TEXTURE
   offset: 0x12884C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12884C
+  symbol: aFont6Num6Tex
 
-D_F1288CC:
+aFont6Num7Tex:
   type: TEXTURE
   offset: 0x1288CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1288CC
+  symbol: aFont6Num7Tex
 
-D_F12894C:
+aFont6Num8Tex:
   type: TEXTURE
   offset: 0x12894C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12894C
+  symbol: aFont6Num8Tex
 
-D_F1289CC:
+aFont6Num9Tex:
   type: TEXTURE
   offset: 0x1289CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1289CC
+  symbol: aFont6Num9Tex
 
-D_F128A4C:
+aFont6ATex:
   type: TEXTURE
   offset: 0x128A4C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128A4C
+  symbol: aFont6ATex
 
-D_F128ACC:
+aFont6BTex:
   type: TEXTURE
   offset: 0x128ACC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128ACC
+  symbol: aFont6BTex
 
-D_F128B4C:
+aFont6CTex:
   type: TEXTURE
   offset: 0x128B4C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128B4C
+  symbol: aFont6CTex
 
-D_F128BCC:
+aFont6DTex:
   type: TEXTURE
   offset: 0x128BCC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128BCC
+  symbol: aFont6DTex
 
-D_F128C4C:
+aFont6ETex:
   type: TEXTURE
   offset: 0x128C4C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128C4C
+  symbol: aFont6ETex
 
-D_F128CCC:
+aFont6FTex:
   type: TEXTURE
   offset: 0x128CCC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128CCC
+  symbol: aFont6FTex
 
-D_F128D4C:
+aFont6GTex:
   type: TEXTURE
   offset: 0x128D4C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128D4C
+  symbol: aFont6GTex
 
-D_F128DCC:
+aFont6HTex:
   type: TEXTURE
   offset: 0x128DCC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128DCC
+  symbol: aFont6HTex
 
-D_F128E4C:
+aFont6ITex:
   type: TEXTURE
   offset: 0x128E4C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128E4C
+  symbol: aFont6ITex
 
-D_F128ECC:
+aFont6JTex:
   type: TEXTURE
   offset: 0x128ECC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128ECC
+  symbol: aFont6JTex
 
-D_F128F4C:
+aFont6KTex:
   type: TEXTURE
   offset: 0x128F4C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128F4C
+  symbol: aFont6KTex
 
-D_F128FCC:
+aFont6LTex:
   type: TEXTURE
   offset: 0x128FCC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F128FCC
+  symbol: aFont6LTex
 
-D_F12904C:
+aFont6MTex:
   type: TEXTURE
   offset: 0x12904C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12904C
+  symbol: aFont6MTex
 
-D_F1290CC:
+aFont6NTex:
   type: TEXTURE
   offset: 0x1290CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1290CC
+  symbol: aFont6NTex
 
-D_F12914C:
+aFont6OTex:
   type: TEXTURE
   offset: 0x12914C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12914C
+  symbol: aFont6OTex
 
-D_F1291CC:
+aFont6PTex:
   type: TEXTURE
   offset: 0x1291CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1291CC
+  symbol: aFont6PTex
 
-D_F12924C:
+aFont6QTex:
   type: TEXTURE
   offset: 0x12924C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12924C
+  symbol: aFont6QTex
 
-D_F1292CC:
+aFont6RTex:
   type: TEXTURE
   offset: 0x1292CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1292CC
+  symbol: aFont6RTex
 
-D_F12934C:
+aFont6STex:
   type: TEXTURE
   offset: 0x12934C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12934C
+  symbol: aFont6STex
 
-D_F1293CC:
+aFont6TTex:
   type: TEXTURE
   offset: 0x1293CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1293CC
+  symbol: aFont6TTex
 
-D_F12944C:
+aFont6UTex:
   type: TEXTURE
   offset: 0x12944C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12944C
+  symbol: aFont6UTex
 
-D_F1294CC:
+aFont6VTex:
   type: TEXTURE
   offset: 0x1294CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1294CC
+  symbol: aFont6VTex
 
-D_F12954C:
+aFont6WTex:
   type: TEXTURE
   offset: 0x12954C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12954C
+  symbol: aFont6WTex
 
-D_F1295CC:
+aFont6XTex:
   type: TEXTURE
   offset: 0x1295CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1295CC
+  symbol: aFont6XTex
 
-D_F12964C:
+aFont6YTex:
   type: TEXTURE
   offset: 0x12964C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12964C
+  symbol: aFont6YTex
 
-D_F1296CC:
+aFont6ZTex:
   type: TEXTURE
   offset: 0x1296CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1296CC
+  symbol: aFont6ZTex
 
-D_F12974C:
+aFont6AlphaTex:
   type: TEXTURE
   offset: 0x12974C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12974C
+  symbol: aFont6AlphaTex
 
-D_F1297CC:
+aFont6BetaTex:
   type: TEXTURE
   offset: 0x1297CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1297CC
+  symbol: aFont6BetaTex
 
-D_F12984C:
+aFont6HiraganaNiTex:
   type: TEXTURE
   offset: 0x12984C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12984C
+  symbol: aFont6HiraganaNiTex
 
-D_F1298CC:
+aFont6AmpersandTex:
   type: TEXTURE
   offset: 0x1298CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1298CC
+  symbol: aFont6AmpersandTex
 
-D_F12994C:
+aFont6CommaTex:
   type: TEXTURE
   offset: 0x12994C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F12994C
+  symbol: aFont6CommaTex
 
-D_F1299CC:
+aFont6DoublePrimeTex:
   type: TEXTURE
   offset: 0x1299CC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F1299CC
+  symbol: aFont6DoublePrimeTex
 
-D_F129A4C:
+aFont6DashTex:
   type: TEXTURE
   offset: 0x129A4C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F129A4C
+  symbol: aFont6DashTex
 
-D_F129ACC:
+aFont6PeriodTex:
   type: TEXTURE
   offset: 0x129ACC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F129ACC
+  symbol: aFont6PeriodTex
 
-D_F129B4C:
+aFont6PrimeTex:
   type: TEXTURE
   offset: 0x129B4C
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F129B4C
+  symbol: aFont6PrimeTex
 
-D_F129BCC:
+aFont6UnderscoreTex:
   type: TEXTURE
   offset: 0x129BCC
   ctype: u8
   format: I4
   width: 16
   height: 16
-  symbol: D_F129BCC
+  symbol: aFont6UnderscoreTex
 
-D_F129C54:
+aMenuSignGpRaceTex:
   type: COMPRESSED_TEXTURE
   offset: 0x129C54
   ctype: u16
@@ -4716,9 +4716,9 @@ D_F129C54:
   width: 64
   height: 86
   compression: MIO0
-  symbol: D_F129C54
+  symbol: aMenuSignGpRaceTex
 
-D_F12ABB0:
+aMenuSignTimeAttackTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12ABB0
   ctype: u16
@@ -4726,9 +4726,9 @@ D_F12ABB0:
   width: 64
   height: 86
   compression: MIO0
-  symbol: D_F12ABB0
+  symbol: aMenuSignTimeAttackTex
 
-D_F12BC00:
+aMenuSignVsBattleTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12BC00
   ctype: u16
@@ -4736,9 +4736,9 @@ D_F12BC00:
   width: 64
   height: 86
   compression: MIO0
-  symbol: D_F12BC00
+  symbol: aMenuSignVsBattleTex
 
-D_F12CB9C:
+aMenuSignPracticeTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12CB9C
   ctype: u16
@@ -4746,9 +4746,9 @@ D_F12CB9C:
   width: 64
   height: 86
   compression: MIO0
-  symbol: D_F12CB9C
+  symbol: aMenuSignPracticeTex
 
-D_F12DB18:
+aMenuSignDeathRaceTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12DB18
   ctype: u16
@@ -4756,9 +4756,9 @@ D_F12DB18:
   width: 64
   height: 86
   compression: MIO0
-  symbol: D_F12DB18
+  symbol: aMenuSignDeathRaceTex
 
-D_F12E9A0:
+aMenuSignOptionsTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12E9A0
   ctype: u16
@@ -4766,9 +4766,9 @@ D_F12E9A0:
   width: 64
   height: 86
   compression: MIO0
-  symbol: D_F12E9A0
+  symbol: aMenuSignOptionsTex
 
-D_F12F934:
+aMenuSignCourseEditTex:
   type: COMPRESSED_TEXTURE
   offset: 0x12F934
   ctype: u16
@@ -4776,9 +4776,9 @@ D_F12F934:
   width: 64
   height: 86
   compression: MIO0
-  symbol: D_F12F934
+  symbol: aMenuSignCourseEditTex
 
-D_F130950:
+aMenuSignCreateMachineTex:
   type: COMPRESSED_TEXTURE
   offset: 0x130950
   ctype: u16
@@ -4786,9 +4786,9 @@ D_F130950:
   width: 64
   height: 86
   compression: MIO0
-  symbol: D_F130950
+  symbol: aMenuSignCreateMachineTex
 
-D_F131968:
+aSelectModeOptionFlamesTex:
   type: COMPRESSED_TEXTURE
   offset: 0x131968
   ctype: u16
@@ -4796,9 +4796,9 @@ D_F131968:
   width: 128
   height: 80
   compression: MIO0
-  symbol: D_F131968
+  symbol: aSelectModeOptionFlamesTex
 
-D_F13437C:
+a2PlayersTex:
   type: COMPRESSED_TEXTURE
   offset: 0x13437C
   ctype: u16
@@ -4806,9 +4806,9 @@ D_F13437C:
   width: 64
   height: 18
   compression: MIO0
-  symbol: D_F13437C
+  symbol: a2PlayersTex
 
-D_F1344C8:
+a3PlayersTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1344C8
   ctype: u16
@@ -4816,9 +4816,9 @@ D_F1344C8:
   width: 64
   height: 18
   compression: MIO0
-  symbol: D_F1344C8
+  symbol: a3PlayersTex
 
-D_F134610:
+a4PlayersTex:
   type: COMPRESSED_TEXTURE
   offset: 0x134610
   ctype: u16
@@ -4826,23 +4826,23 @@ D_F134610:
   width: 64
   height: 18
   compression: MIO0
-  symbol: D_F134610
+  symbol: a4PlayersTex
 
 D_F134758:
   type: GFX
   offset: 0x134758
   symbol: D_F134758
 
-D_F134760:
+aSelectModeTex:
   type: TEXTURE
   offset: 0x134760
   ctype: u8
   format: I4
   width: 128
   height: 24
-  symbol: D_F134760
+  symbol: aSelectModeTex
 
-D_F134D64:
+aNoviceTex:
   type: COMPRESSED_TEXTURE
   offset: 0x134D64
   ctype: u16
@@ -4850,9 +4850,9 @@ D_F134D64:
   width: 64
   height: 18
   compression: MIO0
-  symbol: D_F134D64
+  symbol: aNoviceTex
 
-D_F134EAC:
+aStandardTex:
   type: COMPRESSED_TEXTURE
   offset: 0x134EAC
   ctype: u16
@@ -4860,9 +4860,9 @@ D_F134EAC:
   width: 64
   height: 18
   compression: MIO0
-  symbol: D_F134EAC
+  symbol: aStandardTex
 
-D_F134FFC:
+aExpertTex:
   type: COMPRESSED_TEXTURE
   offset: 0x134FFC
   ctype: u16
@@ -4870,9 +4870,9 @@ D_F134FFC:
   width: 64
   height: 18
   compression: MIO0
-  symbol: D_F134FFC
+  symbol: aExpertTex
 
-D_F13514C:
+aMasterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x13514C
   ctype: u16
@@ -4880,9 +4880,9 @@ D_F13514C:
   width: 64
   height: 18
   compression: MIO0
-  symbol: D_F13514C
+  symbol: aMasterTex
 
-D_F1352A0:
+aTimeAttackTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1352A0
   ctype: u16
@@ -4890,9 +4890,9 @@ D_F1352A0:
   width: 88
   height: 18
   compression: MIO0
-  symbol: D_F1352A0
+  symbol: aTimeAttackTex
 
-D_F135458:
+aRecordsOptionTex:
   type: COMPRESSED_TEXTURE
   offset: 0x135458
   ctype: u16
@@ -4900,7 +4900,7 @@ D_F135458:
   width: 64
   height: 18
   compression: MIO0
-  symbol: D_F135458
+  symbol: aRecordsOptionTex
 
 pad_segment_2B9EA0_F1355A4:
   type: BLOB
@@ -4908,7 +4908,7 @@ pad_segment_2B9EA0_F1355A4:
   size: 0x10
   symbol: pad_segment_2B9EA0_F1355A4
 
-D_F1355B4:
+aCupSelectJackTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1355B4
   ctype: u16
@@ -4916,9 +4916,9 @@ D_F1355B4:
   width: 64
   height: 96
   compression: MIO0
-  symbol: D_F1355B4
+  symbol: aCupSelectJackTex
 
-D_F135C98:
+aCupSelectQueenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x135C98
   ctype: u16
@@ -4926,9 +4926,9 @@ D_F135C98:
   width: 64
   height: 96
   compression: MIO0
-  symbol: D_F135C98
+  symbol: aCupSelectQueenTex
 
-D_F1363CC:
+aCupSelectKingTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1363CC
   ctype: u16
@@ -4936,9 +4936,9 @@ D_F1363CC:
   width: 64
   height: 96
   compression: MIO0
-  symbol: D_F1363CC
+  symbol: aCupSelectKingTex
 
-D_F136B08:
+aCupSelectJokerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x136B08
   ctype: u16
@@ -4946,9 +4946,9 @@ D_F136B08:
   width: 64
   height: 96
   compression: MIO0
-  symbol: D_F136B08
+  symbol: aCupSelectJokerTex
 
-D_F1371E0:
+aCupSelectEditTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1371E0
   ctype: u16
@@ -4956,9 +4956,9 @@ D_F1371E0:
   width: 64
   height: 64
   compression: MIO0
-  symbol: D_F1371E0
+  symbol: aCupSelectEditTex
 
-D_F137668:
+aCupSelectXTex:
   type: COMPRESSED_TEXTURE
   offset: 0x137668
   ctype: u16
@@ -4966,9 +4966,9 @@ D_F137668:
   width: 64
   height: 96
   compression: MIO0
-  symbol: D_F137668
+  symbol: aCupSelectXTex
 
-D_F137D34:
+aCupSelectQuestionMarkTex:
   type: COMPRESSED_TEXTURE
   offset: 0x137D34
   ctype: u16
@@ -4976,23 +4976,23 @@ D_F137D34:
   width: 64
   height: 96
   compression: MIO0
-  symbol: D_F137D34
+  symbol: aCupSelectQuestionMarkTex
 
 D_F138508:
   type: GFX
   offset: 0x138508
   symbol: D_F138508
 
-D_F138510:
+aRecordsTex:
   type: TEXTURE
   offset: 0x138510
   ctype: u8
   format: I4
   width: 96
   height: 24
-  symbol: D_F138510
+  symbol: aRecordsTex
 
-D_F138994:
+aRecordsArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x138994
   ctype: u16
@@ -5000,9 +5000,9 @@ D_F138994:
   width: 32
   height: 32
   compression: MIO0
-  symbol: D_F138994
+  symbol: aRecordsArrowTex
 
-D_F138AB8:
+aOptionsFalconHelmetTex:
   type: COMPRESSED_TEXTURE
   offset: 0x138AB8
   ctype: u16
@@ -5010,9 +5010,9 @@ D_F138AB8:
   width: 64
   height: 64
   compression: MIO0
-  symbol: D_F138AB8
+  symbol: aOptionsFalconHelmetTex
 
-D_F1394A4:
+aCupCleared1Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x1394A4
   ctype: u16
@@ -5020,9 +5020,9 @@ D_F1394A4:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F1394A4
+  symbol: aCupCleared1Tex
 
-D_F139520:
+aCupCleared2Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x139520
   ctype: u16
@@ -5030,9 +5030,9 @@ D_F139520:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F139520
+  symbol: aCupCleared2Tex
 
-D_F13959C:
+aCupCleared3Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x13959C
   ctype: u16
@@ -5040,9 +5040,9 @@ D_F13959C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F13959C
+  symbol: aCupCleared3Tex
 
-D_F139618:
+aCupCleared4Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x139618
   ctype: u16
@@ -5050,9 +5050,9 @@ D_F139618:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F139618
+  symbol: aCupCleared4Tex
 
-D_F139694:
+aStaffGhostBeatenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x139694
   ctype: u16
@@ -5060,9 +5060,9 @@ D_F139694:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F139694
+  symbol: aStaffGhostBeatenTex
 
-D_F139710:
+aOKTex:
   type: COMPRESSED_TEXTURE
   offset: 0x139710
   ctype: u16
@@ -5070,107 +5070,107 @@ D_F139710:
   width: 32
   height: 16
   compression: MIO0
-  symbol: D_F139710
+  symbol: aOKTex
 
 D_F139828:
   type: GFX
   offset: 0x139828
   symbol: D_F139828
 
-D_F139830:
+aSelectCourseTex:
   type: TEXTURE
   offset: 0x139830
   ctype: u8
   format: I4
   width: 160
   height: 24
-  symbol: D_F139830
+  symbol: aSelectCourseTex
 
 D_F139FB0:
   type: GFX
   offset: 0x139FB0
   symbol: D_F139FB0
 
-D_F139FB8:
+aMenuWithGhostTex:
   type: TEXTURE
   offset: 0x139FB8
   ctype: u8
   format: I4
   width: 64
   height: 16
-  symbol: D_F139FB8
+  symbol: aMenuWithGhostTex
 
 D_F13A1B8:
   type: GFX
   offset: 0x13A1B8
   symbol: D_F13A1B8
 
-D_F13A1C0:
+aMenuWithoutGhostTex:
   type: TEXTURE
   offset: 0x13A1C0
   ctype: u8
   format: I4
   width: 64
   height: 16
-  symbol: D_F13A1C0
+  symbol: aMenuWithoutGhostTex
 
 D_F13A3C0:
   type: GFX
   offset: 0x13A3C0
   symbol: D_F13A3C0
 
-D_F13A3C8:
+aMenuStaffGhostTex:
   type: TEXTURE
   offset: 0x13A3C8
   ctype: u8
   format: I4
   width: 64
   height: 16
-  symbol: D_F13A3C8
+  symbol: aMenuStaffGhostTex
 
 D_F13A5C8:
   type: GFX
   offset: 0x13A5C8
   symbol: D_F13A5C8
 
-D_F13A5D0:
+aMenuCelebrityGhostTex:
   type: TEXTURE
   offset: 0x13A5D0
   ctype: u8
   format: I4
   width: 64
   height: 16
-  symbol: D_F13A5D0
+  symbol: aMenuCelebrityGhostTex
 
 D_F13A7D0:
   type: GFX
   offset: 0x13A7D0
   symbol: D_F13A7D0
 
-D_F13A7D8:
+aMenuChampGhostTex:
   type: TEXTURE
   offset: 0x13A7D8
   ctype: u8
   format: I4
   width: 64
   height: 16
-  symbol: D_F13A7D8
+  symbol: aMenuChampGhostTex
 
 D_F13A9D8:
   type: GFX
   offset: 0x13A9D8
   symbol: D_F13A9D8
 
-D_F13A9E0:
+aHasGhostMarkerTex:
   type: TEXTURE
   offset: 0x13A9E0
   ctype: u8
   format: I4
   width: 32
   height: 16
-  symbol: D_F13A9E0
+  symbol: aHasGhostMarkerTex
 
-D_F13AAE4:
+aEndingCaptainFalconMasterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x13AAE4
   ctype: u16
@@ -5178,9 +5178,9 @@ D_F13AAE4:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F13AAE4
+  symbol: aEndingCaptainFalconMasterTex
 
-D_F13EC40:
+aEndingAntonioGusterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x13EC40
   ctype: u16
@@ -5188,9 +5188,9 @@ D_F13EC40:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F13EC40
+  symbol: aEndingAntonioGusterTex
 
-D_F142BF0:
+aEndingSuperArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x142BF0
   ctype: u16
@@ -5198,9 +5198,9 @@ D_F142BF0:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F142BF0
+  symbol: aEndingSuperArrowTex
 
-D_F146944:
+aEndingBabaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x146944
   ctype: u16
@@ -5208,9 +5208,9 @@ D_F146944:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F146944
+  symbol: aEndingBabaTex
 
-D_F14A3CC:
+aEndingBeastmanTex:
   type: COMPRESSED_TEXTURE
   offset: 0x14A3CC
   ctype: u16
@@ -5218,9 +5218,9 @@ D_F14A3CC:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F14A3CC
+  symbol: aEndingBeastmanTex
 
-D_F14E458:
+aEndingBillyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x14E458
   ctype: u16
@@ -5228,9 +5228,9 @@ D_F14E458:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F14E458
+  symbol: aEndingBillyTex
 
-D_F151B38:
+aEndingBlackShadowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x151B38
   ctype: u16
@@ -5238,9 +5238,9 @@ D_F151B38:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F151B38
+  symbol: aEndingBlackShadowTex
 
-D_F15538C:
+aEndingBloodFalconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x15538C
   ctype: u16
@@ -5248,9 +5248,9 @@ D_F15538C:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F15538C
+  symbol: aEndingBloodFalconTex
 
-D_F159288:
+aEndingDrClashTex:
   type: COMPRESSED_TEXTURE
   offset: 0x159288
   ctype: u16
@@ -5258,9 +5258,9 @@ D_F159288:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F159288
+  symbol: aEndingDrClashTex
 
-D_F15DEA8:
+aEndingDrStewartTex:
   type: COMPRESSED_TEXTURE
   offset: 0x15DEA8
   ctype: u16
@@ -5268,9 +5268,9 @@ D_F15DEA8:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F15DEA8
+  symbol: aEndingDrStewartTex
 
-D_F1619EC:
+aEndingDraqTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1619EC
   ctype: u16
@@ -5278,9 +5278,9 @@ D_F1619EC:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1619EC
+  symbol: aEndingDraqTex
 
-D_F166A40:
+aEndingMrEadTex:
   type: COMPRESSED_TEXTURE
   offset: 0x166A40
   ctype: u16
@@ -5288,9 +5288,9 @@ D_F166A40:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F166A40
+  symbol: aEndingMrEadTex
 
-D_F16B94C:
+aEndingGomarAndShiohTex:
   type: COMPRESSED_TEXTURE
   offset: 0x16B94C
   ctype: u16
@@ -5298,9 +5298,9 @@ D_F16B94C:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F16B94C
+  symbol: aEndingGomarAndShiohTex
 
-D_F16FEEC:
+aEndingSamuraiGorohTex:
   type: COMPRESSED_TEXTURE
   offset: 0x16FEEC
   ctype: u16
@@ -5308,9 +5308,9 @@ D_F16FEEC:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F16FEEC
+  symbol: aEndingSamuraiGorohTex
 
-D_F174BF0:
+aEndingTheSkullTex:
   type: COMPRESSED_TEXTURE
   offset: 0x174BF0
   ctype: u16
@@ -5318,9 +5318,9 @@ D_F174BF0:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F174BF0
+  symbol: aEndingTheSkullTex
 
-D_F179494:
+aEndingJackLevinTex:
   type: COMPRESSED_TEXTURE
   offset: 0x179494
   ctype: u16
@@ -5328,9 +5328,9 @@ D_F179494:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F179494
+  symbol: aEndingJackLevinTex
 
-D_F17CDC8:
+aEndingJamesMcCloudTex:
   type: COMPRESSED_TEXTURE
   offset: 0x17CDC8
   ctype: u16
@@ -5338,9 +5338,9 @@ D_F17CDC8:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F17CDC8
+  symbol: aEndingJamesMcCloudTex
 
-D_F180754:
+aEndingJodySummerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x180754
   ctype: u16
@@ -5348,9 +5348,9 @@ D_F180754:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F180754
+  symbol: aEndingJodySummerTex
 
-D_F184744:
+aEndingJohnTanakaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x184744
   ctype: u16
@@ -5358,9 +5358,9 @@ D_F184744:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F184744
+  symbol: aEndingJohnTanakaTex
 
-D_F1882F0:
+aEndingKateAlenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1882F0
   ctype: u16
@@ -5368,9 +5368,9 @@ D_F1882F0:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1882F0
+  symbol: aEndingKateAlenTex
 
-D_F18BDDC:
+aEndingLeonTex:
   type: COMPRESSED_TEXTURE
   offset: 0x18BDDC
   ctype: u16
@@ -5378,9 +5378,9 @@ D_F18BDDC:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F18BDDC
+  symbol: aEndingLeonTex
 
-D_F18FFC0:
+aEndingMichaelChainTex:
   type: COMPRESSED_TEXTURE
   offset: 0x18FFC0
   ctype: u16
@@ -5388,9 +5388,9 @@ D_F18FFC0:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F18FFC0
+  symbol: aEndingMichaelChainTex
 
-D_F193DC4:
+aEndingMightyGazelleTex:
   type: COMPRESSED_TEXTURE
   offset: 0x193DC4
   ctype: u16
@@ -5398,9 +5398,9 @@ D_F193DC4:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F193DC4
+  symbol: aEndingMightyGazelleTex
 
-D_F198B8C:
+aEndingMrsArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x198B8C
   ctype: u16
@@ -5408,9 +5408,9 @@ D_F198B8C:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F198B8C
+  symbol: aEndingMrsArrowTex
 
-D_F19CD38:
+aEndingOctomanTex:
   type: COMPRESSED_TEXTURE
   offset: 0x19CD38
   ctype: u16
@@ -5418,9 +5418,9 @@ D_F19CD38:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F19CD38
+  symbol: aEndingOctomanTex
 
-D_F1A1758:
+aEndingPicoTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1A1758
   ctype: u16
@@ -5428,9 +5428,9 @@ D_F1A1758:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1A1758
+  symbol: aEndingPicoTex
 
-D_F1A5D74:
+aEndingBioRexTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1A5D74
   ctype: u16
@@ -5438,9 +5438,9 @@ D_F1A5D74:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1A5D74
+  symbol: aEndingBioRexTex
 
-D_F1A9E6C:
+aEndingRogerBusterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1A9E6C
   ctype: u16
@@ -5448,9 +5448,9 @@ D_F1A9E6C:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1A9E6C
+  symbol: aEndingRogerBusterTex
 
-D_F1AE278:
+aEndingSilverNeelsenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1AE278
   ctype: u16
@@ -5458,9 +5458,9 @@ D_F1AE278:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1AE278
+  symbol: aEndingSilverNeelsenTex
 
-D_F1B2DBC:
+aEndingZodaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1B2DBC
   ctype: u16
@@ -5468,9 +5468,9 @@ D_F1B2DBC:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1B2DBC
+  symbol: aEndingZodaTex
 
-D_F1B72F0:
+aEndingCaptainFalconAltTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1B72F0
   ctype: u16
@@ -5478,9 +5478,9 @@ D_F1B72F0:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1B72F0
+  symbol: aEndingCaptainFalconAltTex
 
-D_F1B9F4C:
+aEndingSamuraiGorohAltTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1B9F4C
   ctype: u16
@@ -5488,9 +5488,9 @@ D_F1B9F4C:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1B9F4C
+  symbol: aEndingSamuraiGorohAltTex
 
-D_F1BD278:
+aEndingJodySummerAltTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1BD278
   ctype: u16
@@ -5498,9 +5498,9 @@ D_F1BD278:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1BD278
+  symbol: aEndingJodySummerAltTex
 
-D_F1C0524:
+aEndingCaptainFalconStandardExpertTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1C0524
   ctype: u16
@@ -5508,9 +5508,9 @@ D_F1C0524:
   width: 168
   height: 99
   compression: MIO0
-  symbol: D_F1C0524
+  symbol: aEndingCaptainFalconStandardExpertTex
 
-D_F1C417C:
+aCreditsMenuLadyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1C417C
   ctype: u16
@@ -5518,9 +5518,9 @@ D_F1C417C:
   width: 80
   height: 182
   compression: MIO0
-  symbol: D_F1C417C
+  symbol: aCreditsMenuLadyTex
 
-D_F1C6754:
+aCreditsSeeYouAgainTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1C6754
   ctype: u16
@@ -5528,9 +5528,9 @@ D_F1C6754:
   width: 64
   height: 64
   compression: MIO0
-  symbol: D_F1C6754
+  symbol: aCreditsSeeYouAgainTex
 
-D_F1C70B4:
+aCreditsMrZeroTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1C70B4
   ctype: u16
@@ -5538,9 +5538,9 @@ D_F1C70B4:
   width: 80
   height: 72
   compression: MIO0
-  symbol: D_F1C70B4
+  symbol: aCreditsMrZeroTex
 
-D_F1C871C:
+aCreditsBlueFalconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1C871C
   ctype: u16
@@ -5548,9 +5548,9 @@ D_F1C871C:
   width: 128
   height: 85
   compression: MIO0
-  symbol: D_F1C871C
+  symbol: aCreditsBlueFalconTex
 
-D_F1CA9AC:
+aCreditsWildGooseTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1CA9AC
   ctype: u16
@@ -5558,9 +5558,9 @@ D_F1CA9AC:
   width: 128
   height: 94
   compression: MIO0
-  symbol: D_F1CA9AC
+  symbol: aCreditsWildGooseTex
 
-D_F1CD2B8:
+aCreditsFireStingrayTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1CD2B8
   ctype: u16
@@ -5568,9 +5568,9 @@ D_F1CD2B8:
   width: 128
   height: 113
   compression: MIO0
-  symbol: D_F1CD2B8
+  symbol: aCreditsFireStingrayTex
 
-D_F1D0078:
+aCreditsGoldenFoxTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1D0078
   ctype: u16
@@ -5578,9 +5578,9 @@ D_F1D0078:
   width: 128
   height: 91
   compression: MIO0
-  symbol: D_F1D0078
+  symbol: aCreditsGoldenFoxTex
 
-D_F1D2B04:
+aCreditsRedGazelleTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1D2B04
   ctype: u16
@@ -5588,9 +5588,9 @@ D_F1D2B04:
   width: 128
   height: 94
   compression: MIO0
-  symbol: D_F1D2B04
+  symbol: aCreditsRedGazelleTex
 
-D_F1D48E4:
+aCreditsWhiteFoxTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1D48E4
   ctype: u16
@@ -5598,9 +5598,9 @@ D_F1D48E4:
   width: 128
   height: 79
   compression: MIO0
-  symbol: D_F1D48E4
+  symbol: aCreditsWhiteFoxTex
 
-D_F1D6DE0:
+aCreditsIronTigerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1D6DE0
   ctype: u16
@@ -5608,9 +5608,9 @@ D_F1D6DE0:
   width: 128
   height: 92
   compression: MIO0
-  symbol: D_F1D6DE0
+  symbol: aCreditsIronTigerTex
 
-D_F1D9A60:
+aCreditsDeepClawTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1D9A60
   ctype: u16
@@ -5618,9 +5618,9 @@ D_F1D9A60:
   width: 128
   height: 87
   compression: MIO0
-  symbol: D_F1D9A60
+  symbol: aCreditsDeepClawTex
 
-D_F1DC46C:
+aCreditsCrazyBearTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1DC46C
   ctype: u16
@@ -5628,9 +5628,9 @@ D_F1DC46C:
   width: 128
   height: 96
   compression: MIO0
-  symbol: D_F1DC46C
+  symbol: aCreditsCrazyBearTex
 
-D_F1DF4E8:
+aCreditsGreatStarTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1DF4E8
   ctype: u16
@@ -5638,9 +5638,9 @@ D_F1DF4E8:
   width: 128
   height: 82
   compression: MIO0
-  symbol: D_F1DF4E8
+  symbol: aCreditsGreatStarTex
 
-D_F1E1C18:
+aCreditsBigFangTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1E1C18
   ctype: u16
@@ -5648,9 +5648,9 @@ D_F1E1C18:
   width: 128
   height: 100
   compression: MIO0
-  symbol: D_F1E1C18
+  symbol: aCreditsBigFangTex
 
-D_F1E4928:
+aCreditsMadWolfTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1E4928
   ctype: u16
@@ -5658,9 +5658,9 @@ D_F1E4928:
   width: 128
   height: 97
   compression: MIO0
-  symbol: D_F1E4928
+  symbol: aCreditsMadWolfTex
 
-D_F1E7FC0:
+aCreditsNightThunderTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1E7FC0
   ctype: u16
@@ -5668,9 +5668,9 @@ D_F1E7FC0:
   width: 128
   height: 84
   compression: MIO0
-  symbol: D_F1E7FC0
+  symbol: aCreditsNightThunderTex
 
-D_F1EA638:
+aCreditsTwinNorittaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1EA638
   ctype: u16
@@ -5678,9 +5678,9 @@ D_F1EA638:
   width: 128
   height: 93
   compression: MIO0
-  symbol: D_F1EA638
+  symbol: aCreditsTwinNorittaTex
 
-D_F1ECC14:
+aCreditsWonderWaspTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1ECC14
   ctype: u16
@@ -5688,9 +5688,9 @@ D_F1ECC14:
   width: 128
   height: 85
   compression: MIO0
-  symbol: D_F1ECC14
+  symbol: aCreditsWonderWaspTex
 
-D_F1EEDBC:
+aCreditsQueenMeteorTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1EEDBC
   ctype: u16
@@ -5698,9 +5698,9 @@ D_F1EEDBC:
   width: 128
   height: 86
   compression: MIO0
-  symbol: D_F1EEDBC
+  symbol: aCreditsQueenMeteorTex
 
-D_F1F1030:
+aCreditsBloodHawkTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1F1030
   ctype: u16
@@ -5708,9 +5708,9 @@ D_F1F1030:
   width: 128
   height: 96
   compression: MIO0
-  symbol: D_F1F1030
+  symbol: aCreditsBloodHawkTex
 
-D_F1F3E70:
+aCreditsAstroRobinTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1F3E70
   ctype: u16
@@ -5718,9 +5718,9 @@ D_F1F3E70:
   width: 128
   height: 101
   compression: MIO0
-  symbol: D_F1F3E70
+  symbol: aCreditsAstroRobinTex
 
-D_F1F6F14:
+aCreditsDeathAnchorTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1F6F14
   ctype: u16
@@ -5728,9 +5728,9 @@ D_F1F6F14:
   width: 128
   height: 118
   compression: MIO0
-  symbol: D_F1F6F14
+  symbol: aCreditsDeathAnchorTex
 
-D_F1F9A94:
+aCreditsWildBoarTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1F9A94
   ctype: u16
@@ -5738,9 +5738,9 @@ D_F1F9A94:
   width: 128
   height: 98
   compression: MIO0
-  symbol: D_F1F9A94
+  symbol: aCreditsWildBoarTex
 
-D_F1FC98C:
+aCreditsKingMeteorTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1FC98C
   ctype: u16
@@ -5748,9 +5748,9 @@ D_F1FC98C:
   width: 128
   height: 103
   compression: MIO0
-  symbol: D_F1FC98C
+  symbol: aCreditsKingMeteorTex
 
-D_F1FF6FC:
+aCreditsSuperPiranhaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x1FF6FC
   ctype: u16
@@ -5758,9 +5758,9 @@ D_F1FF6FC:
   width: 128
   height: 94
   compression: MIO0
-  symbol: D_F1FF6FC
+  symbol: aCreditsSuperPiranhaTex
 
-D_F202560:
+aCreditsMightyHurricaneTex:
   type: COMPRESSED_TEXTURE
   offset: 0x202560
   ctype: u16
@@ -5768,9 +5768,9 @@ D_F202560:
   width: 128
   height: 83
   compression: MIO0
-  symbol: D_F202560
+  symbol: aCreditsMightyHurricaneTex
 
-D_F204998:
+aCreditsSpaceAnglerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x204998
   ctype: u16
@@ -5778,9 +5778,9 @@ D_F204998:
   width: 128
   height: 92
   compression: MIO0
-  symbol: D_F204998
+  symbol: aCreditsSpaceAnglerTex
 
-D_F207650:
+aCreditsMightyTyphoonTex:
   type: COMPRESSED_TEXTURE
   offset: 0x207650
   ctype: u16
@@ -5788,9 +5788,9 @@ D_F207650:
   width: 128
   height: 82
   compression: MIO0
-  symbol: D_F207650
+  symbol: aCreditsMightyTyphoonTex
 
-D_F209920:
+aCreditsHyperSpeederTex:
   type: COMPRESSED_TEXTURE
   offset: 0x209920
   ctype: u16
@@ -5798,9 +5798,9 @@ D_F209920:
   width: 128
   height: 101
   compression: MIO0
-  symbol: D_F209920
+  symbol: aCreditsHyperSpeederTex
 
-D_F20C454:
+aCreditsGreenPantherTex:
   type: COMPRESSED_TEXTURE
   offset: 0x20C454
   ctype: u16
@@ -5808,9 +5808,9 @@ D_F20C454:
   width: 128
   height: 88
   compression: MIO0
-  symbol: D_F20C454
+  symbol: aCreditsGreenPantherTex
 
-D_F20ECD8:
+aCreditsBlackBullTex:
   type: COMPRESSED_TEXTURE
   offset: 0x20ECD8
   ctype: u16
@@ -5818,9 +5818,9 @@ D_F20ECD8:
   width: 128
   height: 93
   compression: MIO0
-  symbol: D_F20ECD8
+  symbol: aCreditsBlackBullTex
 
-D_F211164:
+aCreditsLittleWyvernTex:
   type: COMPRESSED_TEXTURE
   offset: 0x211164
   ctype: u16
@@ -5828,9 +5828,9 @@ D_F211164:
   width: 128
   height: 82
   compression: MIO0
-  symbol: D_F211164
+  symbol: aCreditsLittleWyvernTex
 
-D_F213444:
+aCreditsSonicPhantomTex:
   type: COMPRESSED_TEXTURE
   offset: 0x213444
   ctype: u16
@@ -5838,183 +5838,183 @@ D_F213444:
   width: 128
   height: 92
   compression: MIO0
-  symbol: D_F213444
+  symbol: aCreditsSonicPhantomTex
 
-D_F215BB0:
+aSkybox7Tex:
   type: TEXTURE
   offset: 0x215BB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: D_F215BB0
+  symbol: aSkybox7Tex
 
-D_F215C30:
+aSkybox1Tex:
   type: TEXTURE
   offset: 0x215C30
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: D_F215C30
+  symbol: aSkybox1Tex
 
-D_F215CB0:
+aSkybox5Tex:
   type: TEXTURE
   offset: 0x215CB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: D_F215CB0
+  symbol: aSkybox5Tex
 
-D_F215D30:
+aSkybox3Tex:
   type: TEXTURE
   offset: 0x215D30
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: D_F215D30
+  symbol: aSkybox3Tex
 
-D_F215DB0:
+aSkybox2Tex:
   type: TEXTURE
   offset: 0x215DB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: D_F215DB0
+  symbol: aSkybox2Tex
 
-D_F215E30:
+aSkybox4Tex:
   type: TEXTURE
   offset: 0x215E30
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: D_F215E30
+  symbol: aSkybox4Tex
 
-D_F215EB0:
+aSkybox6Tex:
   type: TEXTURE
   offset: 0x215EB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: D_F215EB0
+  symbol: aSkybox6Tex
 
-D_F215F30:
+aSkybox0Tex:
   type: TEXTURE
   offset: 0x215F30
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: D_F215F30
+  symbol: aSkybox0Tex
 
-D_F215FB0:
+aFloor0Tex:
   type: TEXTURE
   offset: 0x215FB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: D_F215FB0
+  symbol: aFloor0Tex
 
-D_F216FB0:
+aFloor1Tex:
   type: TEXTURE
   offset: 0x216FB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: D_F216FB0
+  symbol: aFloor1Tex
 
-D_F217FB0:
+aFloor2Tex:
   type: TEXTURE
   offset: 0x217FB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: D_F217FB0
+  symbol: aFloor2Tex
 
-D_F218FB0:
+aFloor3Tex:
   type: TEXTURE
   offset: 0x218FB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: D_F218FB0
+  symbol: aFloor3Tex
 
-D_F219FB0:
+aFloor4Tex:
   type: TEXTURE
   offset: 0x219FB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: D_F219FB0
+  symbol: aFloor4Tex
 
-D_F21AFB0:
+aFloor5Tex:
   type: TEXTURE
   offset: 0x21AFB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: D_F21AFB0
+  symbol: aFloor5Tex
 
-D_F21BFB0:
+aFloor6Tex:
   type: TEXTURE
   offset: 0x21BFB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: D_F21BFB0
+  symbol: aFloor6Tex
 
-D_F21CFB0:
+aFloor7Tex:
   type: TEXTURE
   offset: 0x21CFB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: D_F21CFB0
+  symbol: aFloor7Tex
 
-D_F21DFB0:
+aFloor8Tex:
   type: TEXTURE
   offset: 0x21DFB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: D_F21DFB0
+  symbol: aFloor8Tex
 
-D_F21EFB0:
+aFloor9Tex:
   type: TEXTURE
   offset: 0x21EFB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: D_F21EFB0
+  symbol: aFloor9Tex
 
 D_F21FFB0:
   type: GFX
   offset: 0x21FFB0
   symbol: D_F21FFB0
 
-D_F21FFB8:
+aCloudTex:
   type: TEXTURE
   offset: 0x21FFB8
   ctype: u8
   format: IA8
   width: 64
   height: 32
-  symbol: D_F21FFB8
+  symbol: aCloudTex
 
 D_F2207C0:
   type: GFX
@@ -7350,160 +7350,160 @@ pad_segment_2B9EA0_F242C30:
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F242C30
 
-D_F242E10:
+aRecordsAccelerationSpeedGraphTex:
   type: TEXTURE
   offset: 0x242E10
   ctype: u16
   format: RGBA16
   width: 32
   height: 16
-  symbol: D_F242E10
+  symbol: aRecordsAccelerationSpeedGraphTex
 
-D_F243210:
+aRecordsAccelerationSpeedSliderTex:
   type: TEXTURE
   offset: 0x243210
   ctype: u16
   format: RGBA16
   width: 8
   height: 8
-  symbol: D_F243210
+  symbol: aRecordsAccelerationSpeedSliderTex
 
-D_F243290:
+aBestTex:
   type: TEXTURE
   offset: 0x243290
   ctype: u16
   format: RGBA16
   width: 16
   height: 12
-  symbol: D_F243290
+  symbol: aBestTex
 
-D_F243410:
+aFinalResultPosition0Tex:
   type: TEXTURE
   offset: 0x243410
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F243410
+  symbol: aFinalResultPosition0Tex
 
-D_F243610:
+aFinalResultPosition1Tex:
   type: TEXTURE
   offset: 0x243610
   ctype: u16
   format: RGBA16
   width: 8
   height: 16
-  symbol: D_F243610
+  symbol: aFinalResultPosition1Tex
 
-D_F243710:
+aFinalResultPosition2Tex:
   type: TEXTURE
   offset: 0x243710
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F243710
+  symbol: aFinalResultPosition2Tex
 
-D_F243910:
+aFinalResultPosition3Tex:
   type: TEXTURE
   offset: 0x243910
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F243910
+  symbol: aFinalResultPosition3Tex
 
-D_F243B10:
+aFinalResultPosition4Tex:
   type: TEXTURE
   offset: 0x243B10
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F243B10
+  symbol: aFinalResultPosition4Tex
 
-D_F243D10:
+aFinalResultPosition5Tex:
   type: TEXTURE
   offset: 0x243D10
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F243D10
+  symbol: aFinalResultPosition5Tex
 
-D_F243F10:
+aFinalResultPosition6Tex:
   type: TEXTURE
   offset: 0x243F10
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F243F10
+  symbol: aFinalResultPosition6Tex
 
-D_F244110:
+aFinalResultPosition7Tex:
   type: TEXTURE
   offset: 0x244110
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F244110
+  symbol: aFinalResultPosition7Tex
 
-D_F244310:
+aFinalResultPosition8Tex:
   type: TEXTURE
   offset: 0x244310
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F244310
+  symbol: aFinalResultPosition8Tex
 
-D_F244510:
+aFinalResultPosition9Tex:
   type: TEXTURE
   offset: 0x244510
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F244510
+  symbol: aFinalResultPosition9Tex
 
-D_F244710:
+aFinalResultPositionSuffixSTTex:
   type: TEXTURE
   offset: 0x244710
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F244710
+  symbol: aFinalResultPositionSuffixSTTex
 
-D_F244910:
+aFinalResultPositionSuffixNDTex:
   type: TEXTURE
   offset: 0x244910
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F244910
+  symbol: aFinalResultPositionSuffixNDTex
 
-D_F244B10:
+aFinalResultPositionSuffixRDTex:
   type: TEXTURE
   offset: 0x244B10
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F244B10
+  symbol: aFinalResultPositionSuffixRDTex
 
-D_F244D10:
+aFinalResultPositionSuffixTHTex:
   type: TEXTURE
   offset: 0x244D10
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
-  symbol: D_F244D10
+  symbol: aFinalResultPositionSuffixTHTex
 
-D_F244F14:
+aEndingTextCaptainFalconStandardExpertTex:
   type: COMPRESSED_TEXTURE
   offset: 0x244F14
   ctype: u16
@@ -7511,9 +7511,9 @@ D_F244F14:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F244F14
+  symbol: aEndingTextCaptainFalconStandardExpertTex
 
-D_F2457C4:
+aEndingTextDrStewartTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2457C4
   ctype: u16
@@ -7521,9 +7521,9 @@ D_F2457C4:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F2457C4
+  symbol: aEndingTextDrStewartTex
 
-D_F2461CC:
+aEndingTextPicoTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2461CC
   ctype: u16
@@ -7531,9 +7531,9 @@ D_F2461CC:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F2461CC
+  symbol: aEndingTextPicoTex
 
-D_F246C18:
+aEndingTextSamuraiGorohTex:
   type: COMPRESSED_TEXTURE
   offset: 0x246C18
   ctype: u16
@@ -7541,9 +7541,9 @@ D_F246C18:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F246C18
+  symbol: aEndingTextSamuraiGorohTex
 
-D_F247590:
+aEndingTextJodySummerTex:
   type: COMPRESSED_TEXTURE
   offset: 0x247590
   ctype: u16
@@ -7551,9 +7551,9 @@ D_F247590:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F247590
+  symbol: aEndingTextJodySummerTex
 
-D_F247F40:
+aEndingTextMightyGazelleTex:
   type: COMPRESSED_TEXTURE
   offset: 0x247F40
   ctype: u16
@@ -7561,9 +7561,9 @@ D_F247F40:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F247F40
+  symbol: aEndingTextMightyGazelleTex
 
-D_F248844:
+aEndingTextMrEadTex:
   type: COMPRESSED_TEXTURE
   offset: 0x248844
   ctype: u16
@@ -7571,9 +7571,9 @@ D_F248844:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F248844
+  symbol: aEndingTextMrEadTex
 
-D_F2490D0:
+aEndingTextBabaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2490D0
   ctype: u16
@@ -7581,9 +7581,9 @@ D_F2490D0:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F2490D0
+  symbol: aEndingTextBabaTex
 
-D_F249A78:
+aEndingTextOctomanTex:
   type: COMPRESSED_TEXTURE
   offset: 0x249A78
   ctype: u16
@@ -7591,9 +7591,9 @@ D_F249A78:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F249A78
+  symbol: aEndingTextOctomanTex
 
-D_F24A294:
+aEndingTextGomarAndShiohTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24A294
   ctype: u16
@@ -7601,9 +7601,9 @@ D_F24A294:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24A294
+  symbol: aEndingTextGomarAndShiohTex
 
-D_F24AC0C:
+aEndingTextKateAlenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24AC0C
   ctype: u16
@@ -7611,9 +7611,9 @@ D_F24AC0C:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24AC0C
+  symbol: aEndingTextKateAlenTex
 
-D_F24B444:
+aEndingTextRogerBusterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24B444
   ctype: u16
@@ -7621,9 +7621,9 @@ D_F24B444:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24B444
+  symbol: aEndingTextRogerBusterTex
 
-D_F24BD9C:
+aEndingTextJamesMcCloudTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24BD9C
   ctype: u16
@@ -7631,9 +7631,9 @@ D_F24BD9C:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24BD9C
+  symbol: aEndingTextJamesMcCloudTex
 
-D_F24C588:
+aEndingTextLeonTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24C588
   ctype: u16
@@ -7641,9 +7641,9 @@ D_F24C588:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24C588
+  symbol: aEndingTextLeonTex
 
-D_F24CE20:
+aEndingTextAntonioGusterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24CE20
   ctype: u16
@@ -7651,9 +7651,9 @@ D_F24CE20:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24CE20
+  symbol: aEndingTextAntonioGusterTex
 
-D_F24D864:
+aEndingTextBlackShadowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24D864
   ctype: u16
@@ -7661,9 +7661,9 @@ D_F24D864:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24D864
+  symbol: aEndingTextBlackShadowTex
 
-D_F24E224:
+aEndingTextMichaelChainTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24E224
   ctype: u16
@@ -7671,9 +7671,9 @@ D_F24E224:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24E224
+  symbol: aEndingTextMichaelChainTex
 
-D_F24EC48:
+aEndingTextJackLevinTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24EC48
   ctype: u16
@@ -7681,9 +7681,9 @@ D_F24EC48:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24EC48
+  symbol: aEndingTextJackLevinTex
 
-D_F24F4A0:
+aEndingTextSuperArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24F4A0
   ctype: u16
@@ -7691,9 +7691,9 @@ D_F24F4A0:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24F4A0
+  symbol: aEndingTextSuperArrowTex
 
-D_F24FD5C:
+aEndingTextMrsArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x24FD5C
   ctype: u16
@@ -7701,9 +7701,9 @@ D_F24FD5C:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F24FD5C
+  symbol: aEndingTextMrsArrowTex
 
-D_F2505E8:
+aEndingTextJohnTanakaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2505E8
   ctype: u16
@@ -7711,9 +7711,9 @@ D_F2505E8:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F2505E8
+  symbol: aEndingTextJohnTanakaTex
 
-D_F250D64:
+aEndingTextBeastmanTex:
   type: COMPRESSED_TEXTURE
   offset: 0x250D64
   ctype: u16
@@ -7721,9 +7721,9 @@ D_F250D64:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F250D64
+  symbol: aEndingTextBeastmanTex
 
-D_F251718:
+aEndingTextZodaTex:
   type: COMPRESSED_TEXTURE
   offset: 0x251718
   ctype: u16
@@ -7731,9 +7731,9 @@ D_F251718:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F251718
+  symbol: aEndingTextZodaTex
 
-D_F252134:
+aEndingTextDrClashTex:
   type: COMPRESSED_TEXTURE
   offset: 0x252134
   ctype: u16
@@ -7741,9 +7741,9 @@ D_F252134:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F252134
+  symbol: aEndingTextDrClashTex
 
-D_F252AF8:
+aEndingTextSilverNeelsenTex:
   type: COMPRESSED_TEXTURE
   offset: 0x252AF8
   ctype: u16
@@ -7751,9 +7751,9 @@ D_F252AF8:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F252AF8
+  symbol: aEndingTextSilverNeelsenTex
 
-D_F2532F0:
+aEndingTextBioRexTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2532F0
   ctype: u16
@@ -7761,9 +7761,9 @@ D_F2532F0:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F2532F0
+  symbol: aEndingTextBioRexTex
 
-D_F253C68:
+aEndingTextDraqTex:
   type: COMPRESSED_TEXTURE
   offset: 0x253C68
   ctype: u16
@@ -7771,9 +7771,9 @@ D_F253C68:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F253C68
+  symbol: aEndingTextDraqTex
 
-D_F254468:
+aEndingTextBillyTex:
   type: COMPRESSED_TEXTURE
   offset: 0x254468
   ctype: u16
@@ -7781,9 +7781,9 @@ D_F254468:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F254468
+  symbol: aEndingTextBillyTex
 
-D_F254EF0:
+aEndingTextTheSkullTex:
   type: COMPRESSED_TEXTURE
   offset: 0x254EF0
   ctype: u16
@@ -7791,9 +7791,9 @@ D_F254EF0:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F254EF0
+  symbol: aEndingTextTheSkullTex
 
-D_F25577C:
+aEndingTextBloodFalconTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25577C
   ctype: u16
@@ -7801,9 +7801,9 @@ D_F25577C:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F25577C
+  symbol: aEndingTextBloodFalconTex
 
-D_F255FF8:
+aEndingTextCaptainFalconMasterTex:
   type: COMPRESSED_TEXTURE
   offset: 0x255FF8
   ctype: u16
@@ -7811,18 +7811,18 @@ D_F255FF8:
   width: 196
   height: 32
   compression: MIO0
-  symbol: D_F255FF8
+  symbol: aEndingTextCaptainFalconMasterTex
 
-D_F256900:
+aCongratulationsTex:
   type: TEXTURE
   offset: 0x256900
   ctype: u16
   format: RGBA16
   width: 264
   height: 31
-  symbol: D_F256900
+  symbol: aCongratulationsTex
 
-D_F25A8F0:
+aRetireTex:
   type: TEXTURE
   offset: 0x25A8F0
   ctype: u8
@@ -7830,17 +7830,17 @@ D_F25A8F0:
   tlut: 0xF25B8F0
   width: 128
   height: 32
-  symbol: D_F25A8F0
+  symbol: aRetireTex
 
-D_F25B8F0:
+aRetireTLUT:
   type: TEXTURE
   offset: 0x25B8F0
   ctype: u16
   format: TLUT
   colors: 256
-  symbol: D_F25B8F0
+  symbol: aRetireTLUT
 
-D_F25BAF0:
+aWinnerTex:
   type: TEXTURE
   offset: 0x25BAF0
   ctype: u8
@@ -7848,17 +7848,17 @@ D_F25BAF0:
   tlut: 0xF25CAF0
   width: 128
   height: 32
-  symbol: D_F25BAF0
+  symbol: aWinnerTex
 
-D_F25CAF0:
+aWinnerTLUT:
   type: TEXTURE
   offset: 0x25CAF0
   ctype: u16
   format: TLUT
   colors: 256
-  symbol: D_F25CAF0
+  symbol: aWinnerTLUT
 
-D_F25CCF0:
+aLoserTex:
   type: TEXTURE
   offset: 0x25CCF0
   ctype: u8
@@ -7866,15 +7866,15 @@ D_F25CCF0:
   tlut: 0xF25D650
   width: 80
   height: 30
-  symbol: D_F25CCF0
+  symbol: aLoserTex
 
-D_F25D650:
+aLoserTLUT:
   type: TEXTURE
   offset: 0x25D650
   ctype: u16
   format: TLUT
   colors: 256
-  symbol: D_F25D650
+  symbol: aLoserTLUT
 
 D_F25D850:
   type: GFX
@@ -7923,15 +7923,15 @@ D_F25F068:
   offset: 0x25F068
   symbol: D_F25F068
 
-D_F25F070:
+aMenuTextTLUT:
   type: TEXTURE
   offset: 0x25F070
   ctype: u16
   format: TLUT
   colors: 32
-  symbol: D_F25F070
+  symbol: aMenuTextTLUT
 
-D_F25F0B0:
+aMenuRetryTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25F0B0
   ctype: u8
@@ -7940,9 +7940,9 @@ D_F25F0B0:
   width: 40
   height: 16
   compression: MIO0
-  symbol: D_F25F0B0
+  symbol: aMenuRetryTex
 
-D_F25F1B0:
+aMenuSettingsTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25F1B0
   ctype: u8
@@ -7951,9 +7951,9 @@ D_F25F1B0:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F25F1B0
+  symbol: aMenuSettingsTex
 
-D_F25F334:
+aMenuQuitTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25F334
   ctype: u8
@@ -7962,9 +7962,9 @@ D_F25F334:
   width: 24
   height: 16
   compression: MIO0
-  symbol: D_F25F334
+  symbol: aMenuQuitTex
 
-D_F25F400:
+aMenuChangeMachineTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25F400
   ctype: u8
@@ -7973,9 +7973,9 @@ D_F25F400:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F25F400
+  symbol: aMenuChangeMachineTex
 
-D_F25F69C:
+aMenuChangeCourseTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25F69C
   ctype: u8
@@ -7984,9 +7984,9 @@ D_F25F69C:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F25F69C
+  symbol: aMenuChangeCourseTex
 
-D_F25F914:
+aMenuGhostSaveTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25F914
   ctype: u8
@@ -7995,9 +7995,9 @@ D_F25F914:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F25F914
+  symbol: aMenuGhostSaveTex
 
-D_F25FAD0:
+aMenuOverwriteData1Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x25FAD0
   ctype: u8
@@ -8006,9 +8006,9 @@ D_F25FAD0:
   width: 128
   height: 16
   compression: MIO0
-  symbol: D_F25FAD0
+  symbol: aMenuOverwriteData1Tex
 
-D_F25FD70:
+aMenuSavingTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25FD70
   ctype: u8
@@ -8017,9 +8017,9 @@ D_F25FD70:
   width: 40
   height: 16
   compression: MIO0
-  symbol: D_F25FD70
+  symbol: aMenuSavingTex
 
-D_F25FE94:
+aMenuNoGamePakTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25FE94
   ctype: u8
@@ -8028,9 +8028,9 @@ D_F25FE94:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F25FE94
+  symbol: aMenuNoGamePakTex
 
-D_F26008C:
+aMenuNoDiskTex:
   type: COMPRESSED_TEXTURE
   offset: 0x26008C
   ctype: u8
@@ -8039,9 +8039,9 @@ D_F26008C:
   width: 40
   height: 16
   compression: MIO0
-  symbol: D_F26008C
+  symbol: aMenuNoDiskTex
 
-D_F2601C0:
+aMenuOverwriteData2Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x2601C0
   ctype: u8
@@ -8050,9 +8050,9 @@ D_F2601C0:
   width: 128
   height: 16
   compression: MIO0
-  symbol: D_F2601C0
+  symbol: aMenuOverwriteData2Tex
 
-D_F260460:
+aMenuClearRecordTex:
   type: COMPRESSED_TEXTURE
   offset: 0x260460
   ctype: u8
@@ -8061,9 +8061,9 @@ D_F260460:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F260460
+  symbol: aMenuClearRecordTex
 
-D_F26064C:
+aMenuEraseCourseSavedData1Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x26064C
   ctype: u8
@@ -8072,9 +8072,9 @@ D_F26064C:
   width: 96
   height: 32
   compression: MIO0
-  symbol: D_F26064C
+  symbol: aMenuEraseCourseSavedData1Tex
 
-D_F260A98:
+aMenuClearGhostTex:
   type: COMPRESSED_TEXTURE
   offset: 0x260A98
   ctype: u8
@@ -8083,9 +8083,9 @@ D_F260A98:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F260A98
+  symbol: aMenuClearGhostTex
 
-D_F260C64:
+aMenuEraseCourseSavedData2Tex:
   type: COMPRESSED_TEXTURE
   offset: 0x260C64
   ctype: u8
@@ -8094,9 +8094,9 @@ D_F260C64:
   width: 96
   height: 32
   compression: MIO0
-  symbol: D_F260C64
+  symbol: aMenuEraseCourseSavedData2Tex
 
-D_F2610B0:
+aMenuContinueTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2610B0
   ctype: u8
@@ -8105,9 +8105,9 @@ D_F2610B0:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F2610B0
+  symbol: aMenuContinueTex
 
-D_F261224:
+aMenuSavedTex:
   type: COMPRESSED_TEXTURE
   offset: 0x261224
   ctype: u8
@@ -8116,9 +8116,9 @@ D_F261224:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F261224
+  symbol: aMenuSavedTex
 
-D_F261364:
+aMenuNewGhostTex:
   type: COMPRESSED_TEXTURE
   offset: 0x261364
   ctype: u8
@@ -8127,9 +8127,9 @@ D_F261364:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F261364
+  symbol: aMenuNewGhostTex
 
-D_F261528:
+aMenuSavedGhostTex:
   type: COMPRESSED_TEXTURE
   offset: 0x261528
   ctype: u8
@@ -8138,9 +8138,9 @@ D_F261528:
   width: 128
   height: 16
   compression: MIO0
-  symbol: D_F261528
+  symbol: aMenuSavedGhostTex
 
-D_F26176C:
+aOptionsTex:
   type: COMPRESSED_TEXTURE
   offset: 0x26176C
   ctype: u8
@@ -8149,9 +8149,9 @@ D_F26176C:
   width: 96
   height: 24
   compression: MIO0
-  symbol: D_F26176C
+  symbol: aOptionsTex
 
-D_F261AD4:
+aOptionsVsCom2P3PTex:
   type: COMPRESSED_TEXTURE
   offset: 0x261AD4
   ctype: u8
@@ -8160,9 +8160,9 @@ D_F261AD4:
   width: 128
   height: 16
   compression: MIO0
-  symbol: D_F261AD4
+  symbol: aOptionsVsCom2P3PTex
 
-D_F261E80:
+aOptionsVsHandicapTex:
   type: COMPRESSED_TEXTURE
   offset: 0x261E80
   ctype: u8
@@ -8171,9 +8171,9 @@ D_F261E80:
   width: 96
   height: 16
   compression: MIO0
-  symbol: D_F261E80
+  symbol: aOptionsVsHandicapTex
 
-D_F262184:
+aOptionsVsSlotTex:
   type: COMPRESSED_TEXTURE
   offset: 0x262184
   ctype: u8
@@ -8182,9 +8182,9 @@ D_F262184:
   width: 96
   height: 16
   compression: MIO0
-  symbol: D_F262184
+  symbol: aOptionsVsSlotTex
 
-D_F262398:
+aOptionsSoundModeTex:
   type: COMPRESSED_TEXTURE
   offset: 0x262398
   ctype: u8
@@ -8193,9 +8193,9 @@ D_F262398:
   width: 96
   height: 16
   compression: MIO0
-  symbol: D_F262398
+  symbol: aOptionsSoundModeTex
 
-D_F262688:
+aOptionsAllDataClearTex:
   type: COMPRESSED_TEXTURE
   offset: 0x262688
   ctype: u8
@@ -8204,9 +8204,9 @@ D_F262688:
   width: 96
   height: 16
   compression: MIO0
-  symbol: D_F262688
+  symbol: aOptionsAllDataClearTex
 
-D_F2629A8:
+aOptionsEraseAllSavedDataTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2629A8
   ctype: u8
@@ -8215,9 +8215,9 @@ D_F2629A8:
   width: 128
   height: 32
   compression: MIO0
-  symbol: D_F2629A8
+  symbol: aOptionsEraseAllSavedDataTex
 
-D_F262ED0:
+aMenuWithoutTex:
   type: COMPRESSED_TEXTURE
   offset: 0x262ED0
   ctype: u8
@@ -8226,9 +8226,9 @@ D_F262ED0:
   width: 32
   height: 16
   compression: MIO0
-  symbol: D_F262ED0
+  symbol: aMenuWithoutTex
 
-D_F262FB4:
+aMenuWithTex:
   type: COMPRESSED_TEXTURE
   offset: 0x262FB4
   ctype: u8
@@ -8237,9 +8237,9 @@ D_F262FB4:
   width: 32
   height: 16
   compression: MIO0
-  symbol: D_F262FB4
+  symbol: aMenuWithTex
 
-D_F2630C8:
+aOptionsExitTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2630C8
   ctype: u8
@@ -8248,9 +8248,9 @@ D_F2630C8:
   width: 40
   height: 16
   compression: MIO0
-  symbol: D_F2630C8
+  symbol: aOptionsExitTex
 
-D_F263190:
+aMenuPlusOneTex:
   type: COMPRESSED_TEXTURE
   offset: 0x263190
   ctype: u8
@@ -8259,9 +8259,9 @@ D_F263190:
   width: 32
   height: 16
   compression: MIO0
-  symbol: D_F263190
+  symbol: aMenuPlusOneTex
 
-D_F263230:
+aMenuPlusTwoTex:
   type: COMPRESSED_TEXTURE
   offset: 0x263230
   ctype: u8
@@ -8270,9 +8270,9 @@ D_F263230:
   width: 32
   height: 16
   compression: MIO0
-  symbol: D_F263230
+  symbol: aMenuPlusTwoTex
 
-D_F2632E8:
+aMenuStereoTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2632E8
   ctype: u8
@@ -8281,9 +8281,9 @@ D_F2632E8:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F2632E8
+  symbol: aMenuStereoTex
 
-D_F2634A4:
+aMenuMonoTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2634A4
   ctype: u8
@@ -8292,9 +8292,9 @@ D_F2634A4:
   width: 64
   height: 16
   compression: MIO0
-  symbol: D_F2634A4
+  symbol: aMenuMonoTex
 
-D_F263648:
+aMenuLeftArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x263648
   ctype: u8
@@ -8303,9 +8303,9 @@ D_F263648:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F263648
+  symbol: aMenuLeftArrowTex
 
-D_F26369C:
+aMenuRightArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x26369C
   ctype: u8
@@ -8314,9 +8314,9 @@ D_F26369C:
   width: 16
   height: 16
   compression: MIO0
-  symbol: D_F26369C
+  symbol: aMenuRightArrowTex
 
-D_F2636F0:
+aMenuYesTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2636F0
   ctype: u8
@@ -8325,9 +8325,9 @@ D_F2636F0:
   width: 32
   height: 16
   compression: MIO0
-  symbol: D_F2636F0
+  symbol: aMenuYesTex
 
-D_F2637DC:
+aMenuNoTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2637DC
   ctype: u8
@@ -8336,9 +8336,9 @@ D_F2637DC:
   width: 32
   height: 16
   compression: MIO0
-  symbol: D_F2637DC
+  symbol: aMenuNoTex
 
-D_F2638B4:
+aMenuCannotSaveGhostTex:
   type: COMPRESSED_TEXTURE
   offset: 0x2638B4
   ctype: u8
@@ -8347,9 +8347,9 @@ D_F2638B4:
   width: 128
   height: 32
   compression: MIO0
-  symbol: D_F2638B4
+  symbol: aMenuCannotSaveGhostTex
 
-D_F263DA8:
+aOptionsCopyingGhostTex:
   type: COMPRESSED_TEXTURE
   offset: 0x263DA8
   ctype: u8
@@ -8358,7 +8358,7 @@ D_F263DA8:
   width: 96
   height: 16
   compression: MIO0
-  symbol: D_F263DA8
+  symbol: aOptionsCopyingGhostTex
 
 D_F264110:
   type: ARRAY

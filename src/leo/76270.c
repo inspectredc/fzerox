@@ -6,7 +6,7 @@ void func_i1_80408B90(void);
 void func_i1_80408C18(s32*, s32, s32);
 s32 func_i1_8040A4D4(s32, s32, s32, s32);
 extern s32 D_i1_80428610;
-extern s32 D_i1_80428638;
+extern LEOCapacity D_i1_80428638;
 
 s32 func_i1_80407160(s32 arg0, u32 arg1, s32 arg2) {
     u32 sp2C = arg1;
@@ -23,7 +23,7 @@ s32 func_i1_80407160(s32 arg0, u32 arg1, s32 arg2) {
             D_i1_80428610 = 0xF1;
             return -1;
         }
-        if (func_i1_8040A4D4(sp24 + D_i1_80428638, sp18, sp20, arg2) < 0) {
+        if (func_i1_8040A4D4(sp24 + D_i1_80428638.startLBA, sp18, sp20, arg2) < 0) {
             return -1;
         }
         func_i1_80408C18(&sp1C, sp24, sp20);
@@ -227,13 +227,13 @@ s32 func_i1_804078C8(u16 arg0, u8* arg1, u32 arg2, s32 arg3) {
     func_i1_80408B90();
     func_i1_80408D94(&sp34, sp44, &sp3C);
     if (sp3C != 0) {
-        LeoLBAToByte(sp34 + D_i1_80428638, 1, &sp38);
-        if (func_i1_8040A5F8(sp34 + D_i1_80428638, D_i1_80415190, 1, arg3) < 0) {
+        LeoLBAToByte(sp34 + D_i1_80428638.startLBA, 1, &sp38);
+        if (func_i1_8040A5F8(sp34 + D_i1_80428638.startLBA, D_i1_80415190, 1, arg3) < 0) {
             return -1;
         }
 
         bcopy(sp28, (sp38 - sp3C) + D_i1_80415190, (sp3C > sp40) ? sp40 : sp3C);
-        if (func_i1_8040A4D4(sp34 + D_i1_80428638, D_i1_80415190, 1, arg3) < 0) {
+        if (func_i1_8040A4D4(sp34 + D_i1_80428638.startLBA, D_i1_80415190, 1, arg3) < 0) {
             return -1;
         }
     }
@@ -245,7 +245,7 @@ s32 func_i1_804078C8(u16 arg0, u8* arg1, u32 arg2, s32 arg3) {
             D_i1_80428610 = 0xF1;
             return -1;
         }
-        if (func_i1_8040A4D4(sp30 + D_i1_80428638, sp28, sp2C, arg3) < 0) {
+        if (func_i1_8040A4D4(sp30 + D_i1_80428638.startLBA, sp28, sp2C, arg3) < 0) {
             return -1;
         }
         func_i1_80408C18(&sp34, sp30, sp2C);
@@ -377,13 +377,13 @@ s32 func_i1_80407F48(u16 arg0, u8* arg1, s32 arg2, u32 arg3, s32 arg4) {
     func_i1_80408B90();
     func_i1_80408EE4(&sp3C, arg2, &sp44);
     if (sp44 != 0) {
-        LeoLBAToByte(sp3C + D_i1_80428638, 1, &sp40);
-        if (func_i1_8040A5F8(sp3C + D_i1_80428638, D_i1_80415190, 1, arg4) < 0) {
+        LeoLBAToByte(sp3C + D_i1_80428638.startLBA, 1, &sp40);
+        if (func_i1_8040A5F8(sp3C + D_i1_80428638.startLBA, D_i1_80415190, 1, arg4) < 0) {
             return -1;
         }
 
         bcopy(sp28, (sp40 - sp44) + D_i1_80415190, (sp44 > sp48) ? sp48 : sp44);
-        if (func_i1_8040A4D4(sp3C + D_i1_80428638, D_i1_80415190, 1, arg4) < 0) {
+        if (func_i1_8040A4D4(sp3C + D_i1_80428638.startLBA, D_i1_80415190, 1, arg4) < 0) {
             return -1;
         }
 
@@ -404,19 +404,19 @@ s32 func_i1_80407F48(u16 arg0, u8* arg1, s32 arg2, u32 arg3, s32 arg4) {
         sp30 = func_i1_80408FDC(sp3C);
 
         for (sp2C = 1; sp2C <= sp30; sp2C++) {
-            LeoLBAToByte(sp3C + D_i1_80428638, sp2C, &sp40);
+            LeoLBAToByte(sp3C + D_i1_80428638.startLBA, sp2C, &sp40);
             if (sp40 >= sp48) {
                 break;
             }
         }
         if (sp40 == sp48) {
-            if (func_i1_8040A4D4(sp3C + D_i1_80428638, sp28, sp2C, arg4) < 0) {
+            if (func_i1_8040A4D4(sp3C + D_i1_80428638.startLBA, sp28, sp2C, arg4) < 0) {
                 return -1;
             }
             sp48 = 0;
         } else if (--sp2C > 0) {
-            LeoLBAToByte(sp3C + D_i1_80428638, sp2C, &sp40);
-            if (func_i1_8040A4D4(sp3C + D_i1_80428638, sp28, sp2C, arg4) < 0) {
+            LeoLBAToByte(sp3C + D_i1_80428638.startLBA, sp2C, &sp40);
+            if (func_i1_8040A4D4(sp3C + D_i1_80428638.startLBA, sp28, sp2C, arg4) < 0) {
                 return -1;
             }
             sp3C += sp2C;
@@ -437,11 +437,11 @@ s32 func_i1_80407F48(u16 arg0, u8* arg1, s32 arg2, u32 arg3, s32 arg4) {
         }
     }
     if (sp48 != 0) {
-        if (func_i1_8040A5F8(sp3C + D_i1_80428638, D_i1_80415190, 1, arg4) < 0) {
+        if (func_i1_8040A5F8(sp3C + D_i1_80428638.startLBA, D_i1_80415190, 1, arg4) < 0) {
             return -1;
         }
         bcopy(sp28, D_i1_80415190, sp48);
-        if (func_i1_8040A4D4(sp3C + D_i1_80428638, D_i1_80415190, 1, arg4) < 0) {
+        if (func_i1_8040A4D4(sp3C + D_i1_80428638.startLBA, D_i1_80415190, 1, arg4) < 0) {
             return -1;
         }
     }

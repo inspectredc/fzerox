@@ -226,7 +226,7 @@ void func_i3_8012F324(void) {
     sSecondLapStarted = false;
     sFinalLapStarted = false;
 
-    func_80078104(D_F243290, 0x180, 0, 0, 0);
+    func_80078104(aBestTex, 0x180, 0, 0, 0);
 
     if (gGameMode == GAMEMODE_PRACTICE) {
         D_i3_8013EFFC = 360;
@@ -536,7 +536,7 @@ Gfx* func_i3_UpdatePlayerHudInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
             return gfx;
         }
 
-        gfx = func_i3_DrawPlayerTimer(gfx, gRacers[playerNum].unk_2A0 + 5, numPlayersIndex, playerNum);
+        gfx = func_i3_DrawPlayerTimer(gfx, gRacers[playerNum].raceTime + 5, numPlayersIndex, playerNum);
     }
     return gfx;
 }
@@ -1650,7 +1650,7 @@ void func_i3_TriggerLivesDecrease(void) {
     gLivesChangeCounter = 90;
 }
 
-extern s16 D_800E5FD2;
+extern s16 gRacersKOd;
 
 Gfx* func_i3_DrawKOStars(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
     s32 i;
@@ -1667,7 +1667,7 @@ Gfx* func_i3_DrawKOStars(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     top = 464;
-    i = D_800E5FD2;
+    i = gRacersKOd;
     while (i != 0) {
         left = 1140;
         while (left > 940) {
@@ -1798,7 +1798,7 @@ Gfx* func_i3_DrawPracticeBestLap(Gfx* gfx) {
     top = 20;
 
     // Best
-    gDPLoadTextureBlock(gfx++, func_800783AC(D_F243290), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
+    gDPLoadTextureBlock(gfx++, func_800783AC(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
 
@@ -1828,7 +1828,7 @@ Gfx* func_i3_DrawDeathRaceTimer(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
         return gfx;
     }
 
-    time = gRacers[playerNum].unk_2A0 + 5;
+    time = gRacers[playerNum].raceTime + 5;
     left = sPlayerTimerPositions[numPlayersIndex][playerNum][0];
     top = sPlayerTimerPositions[numPlayersIndex][playerNum][1];
 
@@ -1905,7 +1905,7 @@ Gfx* func_i3_DrawDeathRaceBest(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
 
     // Best
-    gDPLoadTextureBlock(gfx++, func_800783AC(D_F243290), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
+    gDPLoadTextureBlock(gfx++, func_800783AC(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
 
@@ -1927,14 +1927,14 @@ Gfx* func_i3_DrawDeathRaceBestTime(Gfx* gfx, s32 numPlayersIndex, s32 playerNum)
     left = sPlayerTimePositions[numPlayersIndex][playerNum][0] + 32;
     top = sPlayerTimePositions[numPlayersIndex][playerNum][1] + 16;
 
-    if (D_800F8510->unk_20[0] == MAX_TIMER) {
+    if (D_800F8510->timeRecord[0] == MAX_TIMER) {
         gDPPipeSync(gfx++);
         gDPSetCombineLERP(gfx++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE,
                           0, TEXEL0, 0);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
         gfx = func_i3_DrawBlankTimeHundredths(gfx, left, top);
     } else {
-        gfx = func_i3_DrawTimerWithPosition(gfx, D_800F8510->unk_20[0] + 5, left, top, 1.0f);
+        gfx = func_i3_DrawTimerWithPosition(gfx, D_800F8510->timeRecord[0] + 5, left, top, 1.0f);
     }
 
     return gfx;

@@ -1,9 +1,12 @@
 :config:
   segments:
     - [0x03,  0x17B1E0]
+  external_files:
+    - "assets/yaml/us/rev0/segment_16C8A0.yaml"
   header:
     code:
       - '#include "assets/segment_17B1E0.h"'
+      - '#include "assets/segment_16C8A0.h"'
     header:
       - '#include "gfx.h"'
 

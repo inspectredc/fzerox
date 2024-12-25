@@ -2,8 +2,8 @@
 
 extern Gfx D_8014940[];
 
-Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 format, s32 unkTmemFlag, s32 arg5,
-                   s32 arg6, s32 width, s32 height, u16 unkDrawFlag) {
+Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 format, s32 unkTmemFlag, s32 left, s32 top,
+                   s32 width, s32 height, u16 unkDrawFlag) {
     bool usedPrimitives;
     u8* texPtr;
     s32 numBlocks;
@@ -53,8 +53,8 @@ Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 for
         gDPLoadTextureBlock(gfx++, texPtr, G_IM_FMT_CI, G_IM_SIZ_8b, blockWidth, blockHeight, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                             G_TX_NOLOD, G_TX_NOLOD);
-        gSPScisTextureRectangle(gfx++, arg5 << 2, (arg6 + (blockHeight * row)) << 2, (arg5 + blockWidth) << 2,
-                                (arg6 + (blockHeight * (row + 1))) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
+        gSPScisTextureRectangle(gfx++, left << 2, (top + (blockHeight * row)) << 2, (left + blockWidth) << 2,
+                                (top + (blockHeight * (row + 1))) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
 
         texPtr += blockWidth * blockHeight * pixelSize;
     }
@@ -64,8 +64,8 @@ Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 for
         gDPLoadTextureBlock(gfx++, texPtr, format, G_IM_SIZ_8b, blockWidth, remainingHeight, 0,
                             G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                             G_TX_NOLOD, G_TX_NOLOD);
-        gSPScisTextureRectangle(gfx++, arg5 << 2, (arg6 + (blockHeight * row)) << 2, (arg5 + blockWidth) << 2,
-                                ((arg6 + (blockHeight * row) + (remainingHeight))) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10,
+        gSPScisTextureRectangle(gfx++, left << 2, (top + (blockHeight * row)) << 2, (left + blockWidth) << 2,
+                                ((top + (blockHeight * row) + (remainingHeight))) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10,
                                 1 << 10);
     }
     return gfx;

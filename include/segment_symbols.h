@@ -17,6 +17,7 @@
 
 #define DECLARE_DATA_SEGMENT(name)   \
     extern u8 name ## _DATA_START[]; \
+    extern u8 name ## _DATA_END[]; \
     extern u8 name ## _DATA_SIZE[]; \
     extern u8 name ## _RODATA_END[]
 
@@ -44,8 +45,9 @@
 #define SEGMENT_TEXT_SIZE(segment)  (SEGMENT_TEXT_END(segment) - SEGMENT_TEXT_START(segment))
 
 #define SEGMENT_DATA_START(segment) (segment ## _DATA_START)
-#define SEGMENT_DATA_END(segment)   (segment ## _RODATA_END)
-#define SEGMENT_DATA_SIZE(segment)  (SEGMENT_DATA_END(segment) - SEGMENT_DATA_START(segment))
+#define SEGMENT_DATA_END(segment)   (segment ## _DATA_END)
+#define SEGMENT_RODATA_END(segment)   (segment ## _RODATA_END)
+#define SEGMENT_DATA_SIZE(segment)  (SEGMENT_RODATA_END(segment) - SEGMENT_DATA_START(segment))
 
 #define SEGMENT_DATA_SIZE_CONST(segment) (segment ## _DATA_SIZE)
 
@@ -53,7 +55,9 @@
 #define SEGMENT_BSS_END(segment)   (segment ## _BSS_END)
 #define SEGMENT_BSS_SIZE(segment)  (SEGMENT_BSS_END(segment) - SEGMENT_BSS_START(segment))
 
-DECLARE_BSS_SEGMENT(audio_context);
+DECLARE_SEGMENT(framebuffer_unused);
+DECLARE_SEGMENT(audio_context);
+DECLARE_SEGMENT(main);
 
 DECLARE_SEGMENT(unk_nmi);
 DECLARE_SEGMENT(leo);
@@ -66,6 +70,13 @@ DECLARE_SEGMENT(ovl_i7);
 DECLARE_SEGMENT(ovl_i8);
 DECLARE_SEGMENT(ovl_i9);
 DECLARE_SEGMENT(ovl_i10);
+DECLARE_SEGMENT(framebuffer1);
+DECLARE_SEGMENT(framebuffer2);
+DECLARE_SEGMENT(unk_gfx_segment);
+DECLARE_SEGMENT(unk_bss_segment);
+DECLARE_SEGMENT(gfxpool);
+DECLARE_SEGMENT(buffers);
+DECLARE_SEGMENT(framebuffer3);
 
 DECLARE_SEGMENT(segment_145B70);
 DECLARE_SEGMENT(course_edit_textures);
@@ -100,7 +111,6 @@ DECLARE_SEGMENT(audio_seq);
 DECLARE_SEGMENT(audio_bank);
 DECLARE_SEGMENT(audio_table);
 
-DECLARE_VRAM_SEGMENT(unk_context);
-DECLARE_BSS_SEGMENT(unk_context);
+DECLARE_SEGMENT(unk_context);
 
 #endif

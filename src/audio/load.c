@@ -903,8 +903,8 @@ void func_800B079C(void* heap, size_t heapSize) {
 
     {
         s32 i;
-        s64* audioContextPtr = (s64*) SEGMENT_BSS_START(audio_context);
-        size_t audioContextSize = SEGMENT_BSS_SIZE(audio_context);
+        s64* audioContextPtr = (s64*) SEGMENT_VRAM_START(audio_context);
+        size_t audioContextSize = SEGMENT_VRAM_SIZE(audio_context);
 
         for (i = audioContextSize / sizeof(s64); i >= 0; i--) {
             *audioContextPtr++ = 0;

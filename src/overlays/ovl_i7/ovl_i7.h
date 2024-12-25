@@ -12,7 +12,7 @@ typedef struct unk_8014B480 {
 
 typedef struct unk_8014BE28 {
     s16 unk_00;
-    s16 unk_02;
+    s16 track;
     s16 unk_04;
     s16 unk_06;
     f32 unk_08;
@@ -95,5 +95,12 @@ extern unk_8014BEC8 D_i7_8014BEC8[];
 extern u16 D_i7_8014BF28;
 extern s16 D_i7_8014BF92;
 extern s32 D_i7_8014C248;
+
+typedef enum EndScreenState {
+    /* 0 */ END_SCREEN_INACTIVE,
+    /* 1 */ END_SCREEN_FADE_IN,
+    /* 2 */ END_SCREEN_WAIT,
+    /* 3 */ END_SCREEN_FADE_OUT,
+};
 
 #endif // OVL_I7_H

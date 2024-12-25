@@ -12,82 +12,114 @@ s16 D_i4_8011D780[8];
 s32 D_i4_8011D790;
 s32 D_i4_8011D794;
 
-unk_80077D50 D_i4_8011B980[] = { { 17, D_F033AB4, 180, 245, 0x4AF4 }, { 0 } };
-unk_80077D50 D_i4_8011B9A0[] = { { 17, D_F0385AC, 180, 245, 0x6604 }, { 0 } };
-unk_80077D50 D_i4_8011B9C0[] = { { 17, D_F03EBB4, 180, 245, 0x5573 }, { 0 } };
-unk_80077D50 D_i4_8011B9E0[] = { { 17, D_F04412C, 180, 245, 0x76B4 }, { 0 } };
-unk_80077D50 D_i4_8011BA00[] = { { 17, D_F04B7E4, 180, 245, 0x67F2 }, { 0 } };
-unk_80077D50 D_i4_8011BA20[] = { { 17, D_F051FDC, 180, 245, 0x63BB }, { 0 } };
-unk_80077D50 D_i4_8011BA40[] = { { 17, D_F05839C, 180, 245, 0x5EE9 }, { 0 } };
-unk_80077D50 D_i4_8011BA60[] = { { 17, D_F05E28C, 180, 245, 0x7184 }, { 0 } };
-unk_80077D50 D_i4_8011BA80[] = { { 17, D_F065414, 180, 245, 0x5666 }, { 0 } };
-unk_80077D50 D_i4_8011BAA0[] = { { 17, D_F06AA80, 180, 245, 0x5A49 }, { 0 } };
-unk_80077D50 D_i4_8011BAC0[] = { { 17, D_F0704D0, 180, 245, 0x55C1 }, { 0 } };
-unk_80077D50 D_i4_8011BAE0[] = { { 17, D_F075A98, 180, 245, 0x594F }, { 0 } };
-unk_80077D50 D_i4_8011BB00[] = { { 17, D_F07B3EC, 180, 245, 0x7A7A }, { 0 } };
-unk_80077D50 D_i4_8011BB20[] = { { 17, D_F082E6C, 180, 245, 0x6444 }, { 0 } };
-unk_80077D50 D_i4_8011BB40[] = { { 17, D_F0892B4, 180, 245, 0x623A }, { 0 } };
-unk_80077D50 D_i4_8011BB60[] = { { 17, D_F08F4F4, 180, 245, 0x6F78 }, { 0 } };
-unk_80077D50 D_i4_8011BB80[] = { { 17, D_F096470, 180, 245, 0x5C56 }, { 0 } };
-unk_80077D50 D_i4_8011BBA0[] = { { 17, D_F09C0CC, 180, 245, 0x59E6 }, { 0 } };
-unk_80077D50 D_i4_8011BBC0[] = { { 17, D_F0A1AB8, 180, 245, 0x5B58 }, { 0 } };
-unk_80077D50 D_i4_8011BBE0[] = { { 17, D_F0A7614, 180, 245, 0x6B2D }, { 0 } };
-unk_80077D50 D_i4_8011BC00[] = { { 17, D_F0AE148, 180, 245, 0x4E48 }, { 0 } };
-unk_80077D50 D_i4_8011BC20[] = { { 17, D_F0B2F94, 180, 245, 0x6D92 }, { 0 } };
-unk_80077D50 D_i4_8011BC40[] = { { 17, D_F0B9D2C, 180, 245, 0x5AB3 }, { 0 } };
-unk_80077D50 D_i4_8011BC60[] = { { 17, D_F0BF7E4, 180, 245, 0x5E3B }, { 0 } };
-unk_80077D50 D_i4_8011BC80[] = { { 17, D_F0C5624, 180, 245, 0x6EAC }, { 0 } };
-unk_80077D50 D_i4_8011BCA0[] = { { 17, D_F0CC4D4, 180, 245, 0x4D32 }, { 0 } };
-unk_80077D50 D_i4_8011BCC0[] = { { 17, D_F0D120C, 180, 245, 0x603A }, { 0 } };
-unk_80077D50 D_i4_8011BCE0[] = { { 17, D_F0D724C, 180, 245, 0x60B6 }, { 0 } };
-unk_80077D50 D_i4_8011BD00[] = { { 17, D_F0DD308, 180, 245, 0x5534 }, { 0 } };
-unk_80077D50 D_i4_8011BD20[] = { { 17, D_F0E2840, 180, 245, 0x5DA7 }, { 0 } };
-unk_80077D50 D_i4_8011BD40[] = { { 17, D_F0E85EC, 180, 245, 0x5CB2 }, { 0 } };
-unk_80077D50 D_i4_8011BD60[] = { { 17, D_F0EE2A4, 180, 245, 0x6590 }, { 0 } };
-unk_80077D50 D_i4_8011BD80[] = { { 17, D_F0F4838, 180, 245, 0x5022 }, { 0 } };
-unk_80077D50 D_i4_8011BDA0[] = { { 17, D_F0F9860, 180, 245, 0x58F4 }, { 0 } };
+unk_80077D50 sPortraitDrStewartCompTexInfo[] = { { 17, aFullPortraitDrStewartTex, 180, 245, 0x4AF4 }, { 0 } };
+unk_80077D50 sPortraitCaptainFalconCompTexInfo[] = { { 17, aFullPortraitCaptainFalconTex, 180, 245, 0x6604 }, { 0 } };
+unk_80077D50 sPortraitJodySummerCompTexInfo[] = { { 17, aFullPortraitJodySummerTex, 180, 245, 0x5573 }, { 0 } };
+unk_80077D50 sPortraitSamuraiGorohCompTexInfo[] = { { 17, aFullPortraitSamuraiGorohTex, 180, 245, 0x76B4 }, { 0 } };
+unk_80077D50 sPortraitMightyGazelleCompTexInfo[] = { { 17, aFullPortraitMightyGazelleTex, 180, 245, 0x67F2 }, { 0 } };
+unk_80077D50 sPortraitPicoCompTexInfo[] = { { 17, aFullPortraitPicoTex, 180, 245, 0x63BB }, { 0 } };
+unk_80077D50 sPortraitBabaCompTexInfo[] = { { 17, aFullPortraitBabaTex, 180, 245, 0x5EE9 }, { 0 } };
+unk_80077D50 sPortraitMrEadCompTexInfo[] = { { 17, aFullPortraitMrEadTex, 180, 245, 0x7184 }, { 0 } };
+unk_80077D50 sPortraitOctomanCompTexInfo[] = { { 17, aFullPortraitOctomanTex, 180, 245, 0x5666 }, { 0 } };
+unk_80077D50 sPortraitTheSkullCompTexInfo[] = { { 17, aFullPortraitTheSkullTex, 180, 245, 0x5A49 }, { 0 } };
+unk_80077D50 sPortraitBeastmanCompTexInfo[] = { { 17, aFullPortraitBeastmanTex, 180, 245, 0x55C1 }, { 0 } };
+unk_80077D50 sPortraitAntonioGusterCompTexInfo[] = { { 17, aFullPortraitAntonioGusterTex, 180, 245, 0x594F }, { 0 } };
+unk_80077D50 sPortraitDraqCompTexInfo[] = { { 17, aFullPortraitDraqTex, 180, 245, 0x7A7A }, { 0 } };
+unk_80077D50 sPortraitRogerBusterCompTexInfo[] = { { 17, aFullPortraitRogerBusterTex, 180, 245, 0x6444 }, { 0 } };
+unk_80077D50 sPortraitSilverNeelsenCompTexInfo[] = { { 17, aFullPortraitSilverNeelsenTex, 180, 245, 0x623A }, { 0 } };
+unk_80077D50 sPortraitSuperArrowCompTexInfo[] = { { 17, aFullPortraitSuperArrowTex, 180, 245, 0x6F78 }, { 0 } };
+unk_80077D50 sPortraitMrsArrowCompTexInfo[] = { { 17, aFullPortraitMrsArrowTex, 180, 245, 0x5C56 }, { 0 } };
+unk_80077D50 sPortraitZodaCompTexInfo[] = { { 17, aFullPortraitZodaTex, 180, 245, 0x59E6 }, { 0 } };
+unk_80077D50 sPortraitJohnTanakaCompTexInfo[] = { { 17, aFullPortraitJohnTanakaTex, 180, 245, 0x5B58 }, { 0 } };
+unk_80077D50 sPortraitBioRexCompTexInfo[] = { { 17, aFullPortraitBioRexTex, 180, 245, 0x6B2D }, { 0 } };
+unk_80077D50 sPortraitKateAlenCompTexInfo[] = { { 17, aFullPortraitKateAlenTex, 180, 245, 0x4E48 }, { 0 } };
+unk_80077D50 sPortraitGomarAndShiohCompTexInfo[] = { { 17, aFullPortraitGomarAndShiohTex, 180, 245, 0x6D92 }, { 0 } };
+unk_80077D50 sPortraitMichaelChainCompTexInfo[] = { { 17, aFullPortraitMichaelChainTex, 180, 245, 0x5AB3 }, { 0 } };
+unk_80077D50 sPortraitBillyCompTexInfo[] = { { 17, aFullPortraitBillyTex, 180, 245, 0x5E3B }, { 0 } };
+unk_80077D50 sPortraitDrClashCompTexInfo[] = { { 17, aFullPortraitDrClashTex, 180, 245, 0x6EAC }, { 0 } };
+unk_80077D50 sPortraitJackLevinCompTexInfo[] = { { 17, aFullPortraitJackLevinTex, 180, 245, 0x4D32 }, { 0 } };
+unk_80077D50 sPortraitBloodFalconCompTexInfo[] = { { 17, aFullPortraitBloodFalconTex, 180, 245, 0x603A }, { 0 } };
+unk_80077D50 sPortraitLeonCompTexInfo[] = { { 17, aFullPortraitLeonTex, 180, 245, 0x60B6 }, { 0 } };
+unk_80077D50 sPortraitJamesMcCloudCompTexInfo[] = { { 17, aFullPortraitJamesMcCloudTex, 180, 245, 0x5534 }, { 0 } };
+unk_80077D50 sPortraitBlackShadowCompTexInfo[] = { { 17, aFullPortraitBlackShadowTex, 180, 245, 0x5DA7 }, { 0 } };
+unk_80077D50 sPortraitCaptainFalconAltCompTexInfo[] = { { 17, aFullPortraitCaptainFalconAltTex, 180, 245, 0x5CB2 },
+                                                        { 0 } };
+unk_80077D50 sPortraitSamuraiGorohAltCompTexInfo[] = { { 17, aFullPortraitSamuraiGorohAltTex, 180, 245, 0x6590 },
+                                                       { 0 } };
+unk_80077D50 sPortraitJodySummerAltCompTexInfo[] = { { 17, aFullPortraitJodySummerAltTex, 180, 245, 0x5022 }, { 0 } };
+unk_80077D50 sPortraitBackgroundCompTexInfo[] = { { 17, aFullPortraitBackgroundTex, 180, 245, 0x58F4 }, { 0 } };
 
-unk_80077D50* D_i4_8011BDC0[] = {
-    D_i4_8011B9A0, D_i4_8011B980, D_i4_8011BA20, D_i4_8011B9E0, D_i4_8011B9C0, D_i4_8011BA00, D_i4_8011BA60,
-    D_i4_8011BA40, D_i4_8011BA80, D_i4_8011BC20, D_i4_8011BC00, D_i4_8011BB20, D_i4_8011BD00, D_i4_8011BCE0,
-    D_i4_8011BAE0, D_i4_8011BD20, D_i4_8011BC40, D_i4_8011BCA0, D_i4_8011BB60, D_i4_8011BB80, D_i4_8011BBC0,
-    D_i4_8011BAC0, D_i4_8011BBA0, D_i4_8011BC80, D_i4_8011BB40, D_i4_8011BBE0, D_i4_8011BB00, D_i4_8011BC60,
-    D_i4_8011BAA0, D_i4_8011BCC0, D_i4_8011BD40, D_i4_8011BD40, D_i4_8011BD40, D_i4_8011BD60, D_i4_8011BD80,
+unk_80077D50* sPortraitCompTexInfos[] = {
+    sPortraitCaptainFalconCompTexInfo,    // CAPTAIN_FALCON
+    sPortraitDrStewartCompTexInfo,        // DR_STEWART
+    sPortraitPicoCompTexInfo,             // PICO
+    sPortraitSamuraiGorohCompTexInfo,     // SAMURAI_GOROH
+    sPortraitJodySummerCompTexInfo,       // JODY_SUMMER
+    sPortraitMightyGazelleCompTexInfo,    // MIGHTY_GAZELLE
+    sPortraitMrEadCompTexInfo,            // MR_EAD
+    sPortraitBabaCompTexInfo,             // BABA
+    sPortraitOctomanCompTexInfo,          // OCTOMAN
+    sPortraitGomarAndShiohCompTexInfo,    // GOMAR_AND_SHIOH
+    sPortraitKateAlenCompTexInfo,         // KATE_ALEN
+    sPortraitRogerBusterCompTexInfo,      // ROGER_BUSTER
+    sPortraitJamesMcCloudCompTexInfo,     // JAMES_MCCLOUD
+    sPortraitLeonCompTexInfo,             // LEON
+    sPortraitAntonioGusterCompTexInfo,    // ANTONIO_GUSTER
+    sPortraitBlackShadowCompTexInfo,      // BLACK_SHADOW
+    sPortraitMichaelChainCompTexInfo,     // MICHAEL_CHAIN
+    sPortraitJackLevinCompTexInfo,        // JACK_LEVIN
+    sPortraitSuperArrowCompTexInfo,       // SUPER_ARROW
+    sPortraitMrsArrowCompTexInfo,         // MRS_ARROW
+    sPortraitJohnTanakaCompTexInfo,       // JOHN_TANAKA
+    sPortraitBeastmanCompTexInfo,         // BEASTMAN
+    sPortraitZodaCompTexInfo,             // ZODA
+    sPortraitDrClashCompTexInfo,          // DR_CLASH
+    sPortraitSilverNeelsenCompTexInfo,    // SILVER_NEELSEN
+    sPortraitBioRexCompTexInfo,           // BIO_REX
+    sPortraitDraqCompTexInfo,             // DRAQ
+    sPortraitBillyCompTexInfo,            // BILLY
+    sPortraitTheSkullCompTexInfo,         // THE_SKULL
+    sPortraitBloodFalconCompTexInfo,      // BLOOD_FALCON
+    sPortraitCaptainFalconAltCompTexInfo, // FALCON_ALT
+    sPortraitCaptainFalconAltCompTexInfo, // FALCON_ALT
+    sPortraitCaptainFalconAltCompTexInfo, // FALCON_ALT
+    sPortraitSamuraiGorohAltCompTexInfo,  // GOROH_ALT
+    sPortraitJodySummerAltCompTexInfo,    // SUMMERS_ALT
 };
 
-unk_800792D8 D_i4_8011BE4C[] = { { D_i4_8011B980, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BE5C[] = { { D_i4_8011B9A0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BE6C[] = { { D_i4_8011B9C0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BE7C[] = { { D_i4_8011B9E0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BE8C[] = { { D_i4_8011BA00, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BE9C[] = { { D_i4_8011BA20, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BEAC[] = { { D_i4_8011BA40, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BEBC[] = { { D_i4_8011BA60, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BECC[] = { { D_i4_8011BA80, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BEDC[] = { { D_i4_8011BAA0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BEEC[] = { { D_i4_8011BAC0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BEFC[] = { { D_i4_8011BAE0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BF0C[] = { { D_i4_8011BB00, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BF1C[] = { { D_i4_8011BB20, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BF2C[] = { { D_i4_8011BB40, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BF3C[] = { { D_i4_8011BB60, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BF4C[] = { { D_i4_8011BB80, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BF5C[] = { { D_i4_8011BBA0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BF6C[] = { { D_i4_8011BBC0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BF7C[] = { { D_i4_8011BBE0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BF8C[] = { { D_i4_8011BC00, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BF9C[] = { { D_i4_8011BC20, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BFAC[] = { { D_i4_8011BC40, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BFBC[] = { { D_i4_8011BC60, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BFCC[] = { { D_i4_8011BC80, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BFDC[] = { { D_i4_8011BCA0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BFEC[] = { { D_i4_8011BCC0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011BFFC[] = { { D_i4_8011BCE0, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C00C[] = { { D_i4_8011BD00, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C01C[] = { { D_i4_8011BD20, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C02C[] = { { D_i4_8011BD40, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C03C[] = { { D_i4_8011BD60, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C04C[] = { { D_i4_8011BD80, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BE4C[] = { { sPortraitDrStewartCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BE5C[] = { { sPortraitCaptainFalconCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BE6C[] = { { sPortraitJodySummerCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BE7C[] = { { sPortraitSamuraiGorohCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BE8C[] = { { sPortraitMightyGazelleCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BE9C[] = { { sPortraitPicoCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BEAC[] = { { sPortraitBabaCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BEBC[] = { { sPortraitMrEadCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BECC[] = { { sPortraitOctomanCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BEDC[] = { { sPortraitTheSkullCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BEEC[] = { { sPortraitBeastmanCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BEFC[] = { { sPortraitAntonioGusterCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BF0C[] = { { sPortraitDraqCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BF1C[] = { { sPortraitRogerBusterCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BF2C[] = { { sPortraitSilverNeelsenCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BF3C[] = { { sPortraitSuperArrowCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BF4C[] = { { sPortraitMrsArrowCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BF5C[] = { { sPortraitZodaCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BF6C[] = { { sPortraitJohnTanakaCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BF7C[] = { { sPortraitBioRexCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BF8C[] = { { sPortraitKateAlenCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BF9C[] = { { sPortraitGomarAndShiohCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BFAC[] = { { sPortraitMichaelChainCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BFBC[] = { { sPortraitBillyCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BFCC[] = { { sPortraitDrClashCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BFDC[] = { { sPortraitJackLevinCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BFEC[] = { { sPortraitBloodFalconCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011BFFC[] = { { sPortraitLeonCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C00C[] = { { sPortraitJamesMcCloudCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C01C[] = { { sPortraitBlackShadowCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C02C[] = { { sPortraitCaptainFalconAltCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C03C[] = { { sPortraitSamuraiGorohAltCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C04C[] = { { sPortraitJodySummerAltCompTexInfo, 60 }, { 0 } };
 
 unk_800792D8* D_i4_8011C05C[] = {
     D_i4_8011BE5C, D_i4_8011BE4C, D_i4_8011BE9C, D_i4_8011BE7C, D_i4_8011BE6C, D_i4_8011BE8C, D_i4_8011BEBC,
@@ -97,81 +129,119 @@ unk_800792D8* D_i4_8011C05C[] = {
     D_i4_8011BEDC, D_i4_8011BFEC, D_i4_8011C02C, D_i4_8011C02C, D_i4_8011C02C, D_i4_8011C03C, D_i4_8011C04C,
 };
 
-unk_80077D50 D_i4_8011C0E8[] = { { 17, D_F0FF164, 40, 40, 0x77F }, { 0 } };
-unk_80077D50 D_i4_8011C108[] = { { 17, D_F0FF8E8, 40, 40, 0x8AF }, { 0 } };
-unk_80077D50 D_i4_8011C128[] = { { 17, D_F10019C, 40, 40, 0x875 }, { 0 } };
-unk_80077D50 D_i4_8011C148[] = { { 17, D_F100A18, 40, 40, 0x935 }, { 0 } };
-unk_80077D50 D_i4_8011C168[] = { { 17, D_F101354, 40, 40, 0x8EB }, { 0 } };
-unk_80077D50 D_i4_8011C188[] = { { 17, D_F101C44, 40, 40, 0x908 }, { 0 } };
-unk_80077D50 D_i4_8011C1A8[] = { { 17, D_F102550, 40, 40, 0x919 }, { 0 } };
-unk_80077D50 D_i4_8011C1C8[] = { { 17, D_F102E70, 40, 40, 0x989 }, { 0 } };
-unk_80077D50 D_i4_8011C1E8[] = { { 17, D_F103800, 40, 40, 0x82D }, { 0 } };
-unk_80077D50 D_i4_8011C208[] = { { 17, D_F104034, 40, 40, 0x8F8 }, { 0 } };
-unk_80077D50 D_i4_8011C228[] = { { 17, D_F104930, 40, 40, 0x908 }, { 0 } };
-unk_80077D50 D_i4_8011C248[] = { { 17, D_F10523C, 40, 40, 0x8EE }, { 0 } };
-unk_80077D50 D_i4_8011C268[] = { { 17, D_F105B30, 40, 40, 0x9AD }, { 0 } };
-unk_80077D50 D_i4_8011C288[] = { { 17, D_F1064E4, 40, 40, 0x923 }, { 0 } };
-unk_80077D50 D_i4_8011C2A8[] = { { 17, D_F106E0C, 40, 40, 0x93A }, { 0 } };
-unk_80077D50 D_i4_8011C2C8[] = { { 17, D_F10774C, 40, 40, 0x97F }, { 0 } };
-unk_80077D50 D_i4_8011C2E8[] = { { 17, D_F1080D0, 40, 40, 0xA3D }, { 0 } };
-unk_80077D50 D_i4_8011C308[] = { { 17, D_F108B14, 40, 40, 0x8AB }, { 0 } };
-unk_80077D50 D_i4_8011C328[] = { { 17, D_F1093C4, 40, 40, 0x8A0 }, { 0 } };
-unk_80077D50 D_i4_8011C348[] = { { 17, D_F109C68, 40, 40, 0x89B }, { 0 } };
-unk_80077D50 D_i4_8011C368[] = { { 17, D_F10A508, 40, 40, 0x6D1 }, { 0 } };
-unk_80077D50 D_i4_8011C388[] = { { 17, D_F10ABE0, 40, 40, 0x958 }, { 0 } };
-unk_80077D50 D_i4_8011C3A8[] = { { 17, D_F10B53C, 40, 40, 0x8D8 }, { 0 } };
-unk_80077D50 D_i4_8011C3C8[] = { { 17, D_F10BE18, 40, 40, 0x8E8 }, { 0 } };
-unk_80077D50 D_i4_8011C3E8[] = { { 17, D_F10C704, 40, 40, 0xA0A }, { 0 } };
-unk_80077D50 D_i4_8011C408[] = { { 17, D_F10D114, 40, 40, 0x797 }, { 0 } };
-unk_80077D50 D_i4_8011C428[] = { { 17, D_F10D8B0, 40, 40, 0x896 }, { 0 } };
-unk_80077D50 D_i4_8011C448[] = { { 17, D_F10E14C, 40, 40, 0x8BC }, { 0 } };
-unk_80077D50 D_i4_8011C468[] = { { 17, D_F10EA0C, 40, 40, 0x879 }, { 0 } };
-unk_80077D50 D_i4_8011C488[] = { { 17, D_F10F28C, 40, 40, 0x7AB }, { 0 } };
-unk_80077D50 D_i4_8011C4A8[] = { { 17, D_F10FA3C, 40, 40, 0x859 }, { 0 } };
-unk_80077D50 D_i4_8011C4C8[] = { { 17, D_F11029C, 40, 40, 0x813 }, { 0 } };
-unk_80077D50 D_i4_8011C4E8[] = { { 17, D_F110AB4, 40, 40, 0x859 }, { 0 } };
+unk_80077D50 sSmallPortraitDrStewartCompTexInfo[] = { { 17, aSmallPortraitDrStewartTex, 40, 40, 0x77F }, { 0 } };
+unk_80077D50 sSmallPortraitCaptainFalconCompTexInfo[] = { { 17, aSmallPortraitCaptainFalconTex, 40, 40, 0x8AF },
+                                                          { 0 } };
+unk_80077D50 sSmallPortraitJodySummerCompTexInfo[] = { { 17, aSmallPortraitJodySummerTex, 40, 40, 0x875 }, { 0 } };
+unk_80077D50 sSmallPortraitSamuraiGorohCompTexInfo[] = { { 17, aSmallPortraitSamuraiGorohTex, 40, 40, 0x935 }, { 0 } };
+unk_80077D50 sSmallPortraitMightyGazelleCompTexInfo[] = { { 17, aSmallPortraitMightyGazelleTex, 40, 40, 0x8EB },
+                                                          { 0 } };
+unk_80077D50 sSmallPortraitPicoCompTexInfo[] = { { 17, aSmallPortraitPicoTex, 40, 40, 0x908 }, { 0 } };
+unk_80077D50 sSmallPortraitBabaCompTexInfo[] = { { 17, aSmallPortraitBabaTex, 40, 40, 0x919 }, { 0 } };
+unk_80077D50 sSmallPortraitMrEadCompTexInfo[] = { { 17, aSmallPortraitMrEadTex, 40, 40, 0x989 }, { 0 } };
+unk_80077D50 sSmallPortraitOctomanCompTexInfo[] = { { 17, aSmallPortraitOctomanTex, 40, 40, 0x82D }, { 0 } };
+unk_80077D50 sSmallPortraitTheSkullCompTexInfo[] = { { 17, aSmallPortraitTheSkullTex, 40, 40, 0x8F8 }, { 0 } };
+unk_80077D50 sSmallPortraitBeastmanCompTexInfo[] = { { 17, aSmallPortraitBeastmanTex, 40, 40, 0x908 }, { 0 } };
+unk_80077D50 sSmallPortraitAntonioGusterCompTexInfo[] = { { 17, aSmallPortraitAntonioGusterTex, 40, 40, 0x8EE },
+                                                          { 0 } };
+unk_80077D50 sSmallPortraitDraqCompTexInfo[] = { { 17, aSmallPortraitDraqTex, 40, 40, 0x9AD }, { 0 } };
+unk_80077D50 sSmallPortraitRogerBusterCompTexInfo[] = { { 17, aSmallPortraitRogerBusterTex, 40, 40, 0x923 }, { 0 } };
+unk_80077D50 sSmallPortraitSilverNeelsenCompTexInfo[] = { { 17, aSmallPortraitSilverNeelsenTex, 40, 40, 0x93A },
+                                                          { 0 } };
+unk_80077D50 sSmallPortraitSuperArrowCompTexInfo[] = { { 17, aSmallPortraitSuperArrowTex, 40, 40, 0x97F }, { 0 } };
+unk_80077D50 sSmallPortraitMrsArrowCompTexInfo[] = { { 17, aSmallPortraitMrsArrowTex, 40, 40, 0xA3D }, { 0 } };
+unk_80077D50 sSmallPortraitZodaCompTexInfo[] = { { 17, aSmallPortraitZodaTex, 40, 40, 0x8AB }, { 0 } };
+unk_80077D50 sSmallPortraitJohnTanakaCompTexInfo[] = { { 17, aSmallPortraitJohnTanakaTex, 40, 40, 0x8A0 }, { 0 } };
+unk_80077D50 sSmallPortraitBioRexCompTexInfo[] = { { 17, aSmallPortraitBioRexTex, 40, 40, 0x89B }, { 0 } };
+unk_80077D50 sSmallPortraitKateAlenCompTexInfo[] = { { 17, aSmallPortraitKateAlenTex, 40, 40, 0x6D1 }, { 0 } };
+unk_80077D50 sSmallPortraitGomarAndShiohCompTexInfo[] = { { 17, aSmallPortraitGomarAndShiohTex, 40, 40, 0x958 },
+                                                          { 0 } };
+unk_80077D50 sSmallPortraitMichaelChainCompTexInfo[] = { { 17, aSmallPortraitMichaelChainTex, 40, 40, 0x8D8 }, { 0 } };
+unk_80077D50 sSmallPortraitBillyCompTexInfo[] = { { 17, aSmallPortraitBillyTex, 40, 40, 0x8E8 }, { 0 } };
+unk_80077D50 sSmallPortraitDrClashCompTexInfo[] = { { 17, aSmallPortraitDrClashTex, 40, 40, 0xA0A }, { 0 } };
+unk_80077D50 sSmallPortraitJackLevinCompTexInfo[] = { { 17, aSmallPortraitJackLevinTex, 40, 40, 0x797 }, { 0 } };
+unk_80077D50 sSmallPortraitBloodFalconCompTexInfo[] = { { 17, aSmallPortraitBloodFalconTex, 40, 40, 0x896 }, { 0 } };
+unk_80077D50 sSmallPortraitLeonCompTexInfo[] = { { 17, aSmallPortraitLeonTex, 40, 40, 0x8BC }, { 0 } };
+unk_80077D50 sSmallPortraitJamesMcCloudCompTexInfo[] = { { 17, aSmallPortraitJamesMcCloudTex, 40, 40, 0x879 }, { 0 } };
+unk_80077D50 sSmallPortraitBlackShadowCompTexInfo[] = { { 17, aSmallPortraitBlackShadowTex, 40, 40, 0x7AB }, { 0 } };
+unk_80077D50 sSmallPortraitCaptainFalconAltCompTexInfo[] = { { 17, aSmallPortraitCaptainFalconAltTex, 40, 40, 0x859 },
+                                                             { 0 } };
+unk_80077D50 sSmallPortraitSamuraiGorohAltCompTexInfo[] = { { 17, aSmallPortraitSamuraiGorohAltTex, 40, 40, 0x813 },
+                                                            { 0 } };
+unk_80077D50 sSmallPortraitJodySummerAltCompTexInfo[] = { { 17, aSmallPortraitJodySummerAltTex, 40, 40, 0x859 },
+                                                          { 0 } };
 
-unk_80077D50* D_i4_8011C508[] = {
-    D_i4_8011C108, D_i4_8011C0E8, D_i4_8011C188, D_i4_8011C148, D_i4_8011C128, D_i4_8011C168, D_i4_8011C1C8,
-    D_i4_8011C1A8, D_i4_8011C1E8, D_i4_8011C388, D_i4_8011C368, D_i4_8011C288, D_i4_8011C468, D_i4_8011C448,
-    D_i4_8011C248, D_i4_8011C488, D_i4_8011C3A8, D_i4_8011C408, D_i4_8011C2C8, D_i4_8011C2E8, D_i4_8011C328,
-    D_i4_8011C228, D_i4_8011C308, D_i4_8011C3E8, D_i4_8011C2A8, D_i4_8011C348, D_i4_8011C268, D_i4_8011C3C8,
-    D_i4_8011C208, D_i4_8011C428, D_i4_8011C4A8, D_i4_8011C4A8, D_i4_8011C4A8, D_i4_8011C4C8, D_i4_8011C4E8,
+unk_80077D50* sSmallPortraitCompTexInfos[] = {
+    sSmallPortraitCaptainFalconCompTexInfo,    // CAPTAIN_FALCON
+    sSmallPortraitDrStewartCompTexInfo,        // DR_STEWART
+    sSmallPortraitPicoCompTexInfo,             // PICO
+    sSmallPortraitSamuraiGorohCompTexInfo,     // SAMURAI_GOROH
+    sSmallPortraitJodySummerCompTexInfo,       // JODY_SUMMER
+    sSmallPortraitMightyGazelleCompTexInfo,    // MIGHTY_GAZELLE
+    sSmallPortraitMrEadCompTexInfo,            // MR_EAD
+    sSmallPortraitBabaCompTexInfo,             // BABA
+    sSmallPortraitOctomanCompTexInfo,          // OCTOMAN
+    sSmallPortraitGomarAndShiohCompTexInfo,    // GOMAR_AND_SHIOH
+    sSmallPortraitKateAlenCompTexInfo,         // KATE_ALEN
+    sSmallPortraitRogerBusterCompTexInfo,      // ROGER_BUSTER
+    sSmallPortraitJamesMcCloudCompTexInfo,     // JAMES_MCCLOUD
+    sSmallPortraitLeonCompTexInfo,             // LEON
+    sSmallPortraitAntonioGusterCompTexInfo,    // ANTONIO_GUSTER
+    sSmallPortraitBlackShadowCompTexInfo,      // BLACK_SHADOW
+    sSmallPortraitMichaelChainCompTexInfo,     // MICHAEL_CHAIN
+    sSmallPortraitJackLevinCompTexInfo,        // JACK_LEVIN
+    sSmallPortraitSuperArrowCompTexInfo,       // SUPER_ARROW
+    sSmallPortraitMrsArrowCompTexInfo,         // MRS_ARROW
+    sSmallPortraitJohnTanakaCompTexInfo,       // JOHN_TANAKA
+    sSmallPortraitBeastmanCompTexInfo,         // BEASTMAN
+    sSmallPortraitZodaCompTexInfo,             // ZODA
+    sSmallPortraitDrClashCompTexInfo,          // DR_CLASH
+    sSmallPortraitSilverNeelsenCompTexInfo,    // SILVER_NEELSEN
+    sSmallPortraitBioRexCompTexInfo,           // BIO_REX
+    sSmallPortraitDraqCompTexInfo,             // DRAQ
+    sSmallPortraitBillyCompTexInfo,            // BILLY
+    sSmallPortraitTheSkullCompTexInfo,         // THE_SKULL
+    sSmallPortraitBloodFalconCompTexInfo,      // BLOOD_FALCON
+    sSmallPortraitCaptainFalconAltCompTexInfo, // FALCON_ALT
+    sSmallPortraitCaptainFalconAltCompTexInfo, // FALCON_ALT
+    sSmallPortraitCaptainFalconAltCompTexInfo, // FALCON_ALT
+    sSmallPortraitSamuraiGorohAltCompTexInfo,  // GOROH_ALT
+    sSmallPortraitJodySummerAltCompTexInfo,    // SUMMERS_ALT
 };
 
-unk_800792D8 D_i4_8011C594[] = { { D_i4_8011C0E8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C5A4[] = { { D_i4_8011C108, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C5B4[] = { { D_i4_8011C128, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C5C4[] = { { D_i4_8011C148, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C5D4[] = { { D_i4_8011C168, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C5E4[] = { { D_i4_8011C188, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C5F4[] = { { D_i4_8011C1A8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C604[] = { { D_i4_8011C1C8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C614[] = { { D_i4_8011C1E8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C624[] = { { D_i4_8011C208, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C634[] = { { D_i4_8011C228, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C644[] = { { D_i4_8011C248, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C654[] = { { D_i4_8011C268, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C664[] = { { D_i4_8011C288, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C674[] = { { D_i4_8011C2A8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C684[] = { { D_i4_8011C2C8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C694[] = { { D_i4_8011C2E8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C6A4[] = { { D_i4_8011C308, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C6B4[] = { { D_i4_8011C328, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C6C4[] = { { D_i4_8011C348, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C6D4[] = { { D_i4_8011C368, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C6E4[] = { { D_i4_8011C388, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C6F4[] = { { D_i4_8011C3A8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C704[] = { { D_i4_8011C3C8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C714[] = { { D_i4_8011C3E8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C724[] = { { D_i4_8011C408, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C734[] = { { D_i4_8011C428, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C744[] = { { D_i4_8011C448, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C754[] = { { D_i4_8011C468, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C764[] = { { D_i4_8011C488, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C774[] = { { D_i4_8011C4A8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C784[] = { { D_i4_8011C4C8, 60 }, { 0 } };
-unk_800792D8 D_i4_8011C794[] = { { D_i4_8011C4E8, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C594[] = { { sSmallPortraitDrStewartCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C5A4[] = { { sSmallPortraitCaptainFalconCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C5B4[] = { { sSmallPortraitJodySummerCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C5C4[] = { { sSmallPortraitSamuraiGorohCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C5D4[] = { { sSmallPortraitMightyGazelleCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C5E4[] = { { sSmallPortraitPicoCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C5F4[] = { { sSmallPortraitBabaCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C604[] = { { sSmallPortraitMrEadCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C614[] = { { sSmallPortraitOctomanCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C624[] = { { sSmallPortraitTheSkullCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C634[] = { { sSmallPortraitBeastmanCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C644[] = { { sSmallPortraitAntonioGusterCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C654[] = { { sSmallPortraitDraqCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C664[] = { { sSmallPortraitRogerBusterCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C674[] = { { sSmallPortraitSilverNeelsenCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C684[] = { { sSmallPortraitSuperArrowCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C694[] = { { sSmallPortraitMrsArrowCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C6A4[] = { { sSmallPortraitZodaCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C6B4[] = { { sSmallPortraitJohnTanakaCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C6C4[] = { { sSmallPortraitBioRexCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C6D4[] = { { sSmallPortraitKateAlenCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C6E4[] = { { sSmallPortraitGomarAndShiohCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C6F4[] = { { sSmallPortraitMichaelChainCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C704[] = { { sSmallPortraitBillyCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C714[] = { { sSmallPortraitDrClashCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C724[] = { { sSmallPortraitJackLevinCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C734[] = { { sSmallPortraitBloodFalconCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C744[] = { { sSmallPortraitLeonCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C754[] = { { sSmallPortraitJamesMcCloudCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C764[] = { { sSmallPortraitBlackShadowCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C774[] = { { sSmallPortraitCaptainFalconAltCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C784[] = { { sSmallPortraitSamuraiGorohAltCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011C794[] = { { sSmallPortraitJodySummerAltCompTexInfo, 60 }, { 0 } };
 
 unk_800792D8* D_i4_8011C7A4[] = {
     D_i4_8011C5A4, D_i4_8011C594, D_i4_8011C5E4, D_i4_8011C5C4, D_i4_8011C5B4, D_i4_8011C5D4,
@@ -182,75 +252,101 @@ unk_800792D8* D_i4_8011C7A4[] = {
     D_i4_8011C774, D_i4_8011C774, D_i4_8011C774, D_i4_8011C784, D_i4_8011C794, D_i4_8011C774,
 };
 
-unk_80077D50 D_i4_8011C834[] = { { 18, D_F111314, 80, 40, 0x6B4 }, { 0 } };
-unk_80077D50 D_i4_8011C854[] = { { 18, D_F1119CC, 80, 40, 0x653 }, { 0 } };
-unk_80077D50 D_i4_8011C874[] = { { 18, D_F112024, 80, 40, 0x4BD }, { 0 } };
-unk_80077D50 D_i4_8011C894[] = { { 18, D_F1124E8, 80, 40, 0x770 }, { 0 } };
-unk_80077D50 D_i4_8011C8B4[] = { { 18, D_F112C5C, 80, 40, 0x5F4 }, { 0 } };
-unk_80077D50 D_i4_8011C8D4[] = { { 18, D_F113254, 80, 40, 0x505 }, { 0 } };
-unk_80077D50 D_i4_8011C8F4[] = { { 18, D_F113760, 80, 40, 0x59A }, { 0 } };
-unk_80077D50 D_i4_8011C914[] = { { 18, D_F113D00, 80, 40, 0x54E }, { 0 } };
-unk_80077D50 D_i4_8011C934[] = { { 18, D_F114254, 80, 40, 0x639 }, { 0 } };
-unk_80077D50 D_i4_8011C954[] = { { 18, D_F114894, 80, 40, 0x651 }, { 0 } };
-unk_80077D50 D_i4_8011C974[] = { { 18, D_F114EEC, 80, 40, 0x5E1 }, { 0 } };
-unk_80077D50 D_i4_8011C994[] = { { 18, D_F1154D4, 80, 40, 0x5A4 }, { 0 } };
-unk_80077D50 D_i4_8011C9B4[] = { { 18, D_F115A7C, 80, 40, 0x5E4 }, { 0 } };
-unk_80077D50 D_i4_8011C9D4[] = { { 18, D_F116064, 80, 40, 0x5FA }, { 0 } };
-unk_80077D50 D_i4_8011C9F4[] = { { 18, D_F116664, 80, 40, 0x734 }, { 0 } };
-unk_80077D50 D_i4_8011CA14[] = { { 18, D_F116D9C, 80, 40, 0x626 }, { 0 } };
-unk_80077D50 D_i4_8011CA34[] = { { 18, D_F1173C8, 80, 40, 0x5E7 }, { 0 } };
-unk_80077D50 D_i4_8011CA54[] = { { 18, D_F1179B4, 80, 40, 0x64D }, { 0 } };
-unk_80077D50 D_i4_8011CA74[] = { { 18, D_F11855C, 80, 40, 0x5FF }, { 0 } };
-unk_80077D50 D_i4_8011CA94[] = { { 18, D_F118008, 80, 40, 0x54E }, { 0 } };
-unk_80077D50 D_i4_8011CAB4[] = { { 18, D_F118B60, 80, 40, 0x6C2 }, { 0 } };
-unk_80077D50 D_i4_8011CAD4[] = { { 18, D_F119228, 80, 40, 0x4CB }, { 0 } };
-unk_80077D50 D_i4_8011CAF4[] = { { 18, D_F1196F8, 80, 40, 0x5ED }, { 0 } };
-unk_80077D50 D_i4_8011CB14[] = { { 18, D_F119CEC, 80, 40, 0x7A4 }, { 0 } };
-unk_80077D50 D_i4_8011CB34[] = { { 18, D_F11A494, 80, 40, 0x4E6 }, { 0 } };
-unk_80077D50 D_i4_8011CB54[] = { { 18, D_F11A980, 80, 40, 0x465 }, { 0 } };
-unk_80077D50 D_i4_8011CB74[] = { { 18, D_F11ADEC, 80, 40, 0x50A }, { 0 } };
-unk_80077D50 D_i4_8011CB94[] = { { 18, D_F11B2FC, 80, 40, 0x6BF }, { 0 } };
-unk_80077D50 D_i4_8011CBB4[] = { { 18, D_F11CAFC, 80, 40, 0x468 }, { 0 } };
-unk_80077D50 D_i4_8011CBD4[] = { { 18, D_F11CF68, 80, 40, 0x454 }, { 0 } };
+unk_80077D50 sNameCardCaptainFalconCompTexInfo[] = { { 18, aNameCardCaptainFalconTex, 80, 40, 0x6B4 }, { 0 } };
+unk_80077D50 sNameCardDrStewartCompTexInfo[] = { { 18, aNameCardDrStewartTex, 80, 40, 0x653 }, { 0 } };
+unk_80077D50 sNameCardPicoCompTexInfo[] = { { 18, aNameCardPicoTex, 80, 40, 0x4BD }, { 0 } };
+unk_80077D50 sNameCardSamuraiGorohCompTexInfo[] = { { 18, aNameCardSamuraiGorohTex, 80, 40, 0x770 }, { 0 } };
+unk_80077D50 sNameCardJodySummerCompTexInfo[] = { { 18, aNameCardJodySummerTex, 80, 40, 0x5F4 }, { 0 } };
+unk_80077D50 sNameCardMrEadCompTexInfo[] = { { 18, aNameCardMrEadTex, 80, 40, 0x505 }, { 0 } };
+unk_80077D50 sNameCardBabaCompTexInfo[] = { { 18, aNameCardBabaTex, 80, 40, 0x59A }, { 0 } };
+unk_80077D50 sNameCardOctomanCompTexInfo[] = { { 18, aNameCardOctomanTex, 80, 40, 0x54E }, { 0 } };
+unk_80077D50 sNameCardGomarAndShiohCompTexInfo[] = { { 18, aNameCardGomarAndShiohTex, 80, 40, 0x639 }, { 0 } };
+unk_80077D50 sNameCardKateAlenCompTexInfo[] = { { 18, aNameCardKateAlenTex, 80, 40, 0x651 }, { 0 } };
+unk_80077D50 sNameCardRogerBusterCompTexInfo[] = { { 18, aNameCardRogerBusterTex, 80, 40, 0x5E1 }, { 0 } };
+unk_80077D50 sNameCardJamesMcCloudCompTexInfo[] = { { 18, aNameCardJamesMcCloudTex, 80, 40, 0x5A4 }, { 0 } };
+unk_80077D50 sNameCardLeonCompTexInfo[] = { { 18, aNameCardLeonTex, 80, 40, 0x5E4 }, { 0 } };
+unk_80077D50 sNameCardAntonioGusterCompTexInfo[] = { { 18, aNameCardAntonioGusterTex, 80, 40, 0x5FA }, { 0 } };
+unk_80077D50 sNameCardBlackShadowCompTexInfo[] = { { 18, aNameCardBlackShadowTex, 80, 40, 0x734 }, { 0 } };
+unk_80077D50 sNameCardMichaelChainCompTexInfo[] = { { 18, aNameCardMichaelChainTex, 80, 40, 0x626 }, { 0 } };
+unk_80077D50 sNameCardJackLevinCompTexInfo[] = { { 18, aNameCardJackLevinTex, 80, 40, 0x5E7 }, { 0 } };
+unk_80077D50 sNameCardSuperArrowCompTexInfo[] = { { 18, aNameCardSuperArrowTex, 80, 40, 0x64D }, { 0 } };
+unk_80077D50 sNameCardMrsArrowCompTexInfo[] = { { 18, aNameCardMrsArrowTex, 80, 40, 0x5FF }, { 0 } };
+unk_80077D50 sNameCardJohnTanakaCompTexInfo[] = { { 18, aNameCardJohnTanakaTex, 80, 40, 0x54E }, { 0 } };
+unk_80077D50 sNameCardBeastmanCompTexInfo[] = { { 18, aNameCardBeastmanTex, 80, 40, 0x6C2 }, { 0 } };
+unk_80077D50 sNameCardZodaCompTexInfo[] = { { 18, aNameCardZodaTex, 80, 40, 0x4CB }, { 0 } };
+unk_80077D50 sNameCardDrClashCompTexInfo[] = { { 18, aNameCardDrClashTex, 80, 40, 0x5ED }, { 0 } };
+unk_80077D50 sNameCardSilverNeelsenCompTexInfo[] = { { 18, aNameCardSilverNeelsenTex, 80, 40, 0x7A4 }, { 0 } };
+unk_80077D50 sNameCardBioRexCompTexInfo[] = { { 18, aNameCardBioRexTex, 80, 40, 0x4E6 }, { 0 } };
+unk_80077D50 sNameCardDraqCompTexInfo[] = { { 18, aNameCardDraqTex, 80, 40, 0x465 }, { 0 } };
+unk_80077D50 sNameCardBillyCompTexInfo[] = { { 18, aNameCardBillyTex, 80, 40, 0x50A }, { 0 } };
+unk_80077D50 sNameCardBloodFalconCompTexInfo[] = { { 18, aNameCardBloodFalconTex, 80, 40, 0x6BF }, { 0 } };
+unk_80077D50 sNameCardMightyGazelleCompTexInfo[] = { { 18, aNameCardMightyGazelleTex, 80, 40, 0x468 }, { 0 } };
+unk_80077D50 sNameCardTheSkullCompTexInfo[] = { { 18, aNameCardTheSkullTex, 80, 40, 0x454 }, { 0 } };
 
-unk_80077D50* D_i4_8011CBF4[] = {
-    D_i4_8011C834, D_i4_8011C854, D_i4_8011C874, D_i4_8011C894, D_i4_8011C8B4, D_i4_8011CBB4, D_i4_8011C8D4,
-    D_i4_8011C8F4, D_i4_8011C914, D_i4_8011C934, D_i4_8011C954, D_i4_8011C974, D_i4_8011C994, D_i4_8011C9B4,
-    D_i4_8011C9D4, D_i4_8011C9F4, D_i4_8011CA14, D_i4_8011CA34, D_i4_8011CA54, D_i4_8011CA74, D_i4_8011CA94,
-    D_i4_8011CAB4, D_i4_8011CAD4, D_i4_8011CAF4, D_i4_8011CB14, D_i4_8011CB34, D_i4_8011CB54, D_i4_8011CB74,
-    D_i4_8011CBD4, D_i4_8011CB94, D_i4_8011C834,
+unk_80077D50* sNameCardCompTexInfos[] = {
+    sNameCardCaptainFalconCompTexInfo, // CAPTAIN_FALCON
+    sNameCardDrStewartCompTexInfo,     // DR_STEWART
+    sNameCardPicoCompTexInfo,          // PICO
+    sNameCardSamuraiGorohCompTexInfo,  // SAMURAI_GOROH
+    sNameCardJodySummerCompTexInfo,    // JODY_SUMMER
+    sNameCardMightyGazelleCompTexInfo, // MIGHTY_GAZELLE
+    sNameCardMrEadCompTexInfo,         // MR_EAD
+    sNameCardBabaCompTexInfo,          // BABA
+    sNameCardOctomanCompTexInfo,       // OCTOMAN
+    sNameCardGomarAndShiohCompTexInfo, // GOMAR_AND_SHIOH
+    sNameCardKateAlenCompTexInfo,      // KATE_ALEN
+    sNameCardRogerBusterCompTexInfo,   // ROGER_BUSTER
+    sNameCardJamesMcCloudCompTexInfo,  // JAMES_MCCLOUD
+    sNameCardLeonCompTexInfo,          // LEON
+    sNameCardAntonioGusterCompTexInfo, // ANTONIO_GUSTER
+    sNameCardBlackShadowCompTexInfo,   // BLACK_SHADOW
+    sNameCardMichaelChainCompTexInfo,  // MICHAEL_CHAIN
+    sNameCardJackLevinCompTexInfo,     // JACK_LEVIN
+    sNameCardSuperArrowCompTexInfo,    // SUPER_ARROW
+    sNameCardMrsArrowCompTexInfo,      // MRS_ARROW
+    sNameCardJohnTanakaCompTexInfo,    // JOHN_TANAKA
+    sNameCardBeastmanCompTexInfo,      // BEASTMAN
+    sNameCardZodaCompTexInfo,          // ZODA
+    sNameCardDrClashCompTexInfo,       // DR_CLASH
+    sNameCardSilverNeelsenCompTexInfo, // SILVER_NEELSEN
+    sNameCardBioRexCompTexInfo,        // BIO_REX
+    sNameCardDraqCompTexInfo,          // DRAQ
+    sNameCardBillyCompTexInfo,         // BILLY
+    sNameCardTheSkullCompTexInfo,      // THE_SKULL
+    sNameCardBloodFalconCompTexInfo,   // BLOOD_FALCON
+    sNameCardCaptainFalconCompTexInfo,
 };
 
-unk_800792D8 D_i4_8011CC70[] = { { D_i4_8011C834, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CC80[] = { { D_i4_8011C854, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CC90[] = { { D_i4_8011C874, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CCA0[] = { { D_i4_8011C894, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CCB0[] = { { D_i4_8011C8B4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CCC0[] = { { D_i4_8011CBB4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CCD0[] = { { D_i4_8011C8D4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CCE0[] = { { D_i4_8011C8F4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CCF0[] = { { D_i4_8011C914, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CD00[] = { { D_i4_8011C934, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CD10[] = { { D_i4_8011C954, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CD20[] = { { D_i4_8011C974, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CD30[] = { { D_i4_8011C994, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CD40[] = { { D_i4_8011C9B4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CD50[] = { { D_i4_8011C9D4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CD60[] = { { D_i4_8011C9F4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CD70[] = { { D_i4_8011CA14, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CD80[] = { { D_i4_8011CA34, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CD90[] = { { D_i4_8011CA54, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CDA0[] = { { D_i4_8011CA74, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CDB0[] = { { D_i4_8011CA94, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CDC0[] = { { D_i4_8011CAB4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CDD0[] = { { D_i4_8011CAD4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CDE0[] = { { D_i4_8011CAF4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CDF0[] = { { D_i4_8011CB14, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CE00[] = { { D_i4_8011CB34, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CE10[] = { { D_i4_8011CB54, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CE20[] = { { D_i4_8011CB74, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CE30[] = { { D_i4_8011CBD4, 60 }, { 0 } };
-unk_800792D8 D_i4_8011CE40[] = { { D_i4_8011CB94, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CC70[] = { { sNameCardCaptainFalconCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CC80[] = { { sNameCardDrStewartCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CC90[] = { { sNameCardPicoCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CCA0[] = { { sNameCardSamuraiGorohCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CCB0[] = { { sNameCardJodySummerCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CCC0[] = { { sNameCardMightyGazelleCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CCD0[] = { { sNameCardMrEadCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CCE0[] = { { sNameCardBabaCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CCF0[] = { { sNameCardOctomanCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CD00[] = { { sNameCardGomarAndShiohCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CD10[] = { { sNameCardKateAlenCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CD20[] = { { sNameCardRogerBusterCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CD30[] = { { sNameCardJamesMcCloudCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CD40[] = { { sNameCardLeonCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CD50[] = { { sNameCardAntonioGusterCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CD60[] = { { sNameCardBlackShadowCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CD70[] = { { sNameCardMichaelChainCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CD80[] = { { sNameCardJackLevinCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CD90[] = { { sNameCardSuperArrowCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CDA0[] = { { sNameCardMrsArrowCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CDB0[] = { { sNameCardJohnTanakaCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CDC0[] = { { sNameCardBeastmanCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CDD0[] = { { sNameCardZodaCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CDE0[] = { { sNameCardDrClashCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CDF0[] = { { sNameCardSilverNeelsenCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CE00[] = { { sNameCardBioRexCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CE10[] = { { sNameCardDraqCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CE20[] = { { sNameCardBillyCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CE30[] = { { sNameCardTheSkullCompTexInfo, 60 }, { 0 } };
+unk_800792D8 D_i4_8011CE40[] = { { sNameCardBloodFalconCompTexInfo, 60 }, { 0 } };
 
 unk_800792D8* D_i4_8011CE50[] = {
     D_i4_8011CC70, D_i4_8011CC80, D_i4_8011CC90, D_i4_8011CCA0, D_i4_8011CCB0, D_i4_8011CCC0, D_i4_8011CCD0,
@@ -260,80 +356,87 @@ unk_800792D8* D_i4_8011CE50[] = {
     D_i4_8011CE30, D_i4_8011CE40, D_i4_8011CC70,
 };
 
-unk_80077D50 D_i4_8011CECC[] = { { 4, D_F11D3C8, 160, 24, 0 }, { 0 } };
-unk_80077D50 D_i4_8011CEEC[] = { { 17, D_F11B9C0, 40, 40, 0x19E }, { 0 } };
-unk_80077D50 D_i4_8011CF0C[] = { { 17, D_F11BB64, 40, 40, 0x19C }, { 0 } };
-unk_80077D50 D_i4_8011CF2C[] = { { 17, D_F11BD04, 40, 40, 0x19A }, { 0 } };
-unk_80077D50 D_i4_8011CF4C[] = { { 17, D_F11BEA4, 40, 40, 0x19A }, { 0 } };
+unk_80077D50 sSelectMachineCompTexInfo[] = { { 4, aSelectMachineTex, 160, 24, 0 }, { 0 } };
+unk_80077D50 s1PIconCompTexInfo[] = { { 17, a1PIconTex, 40, 40, 0x19E }, { 0 } };
+unk_80077D50 s2PIconCompTexInfo[] = { { 17, a2PIconTex, 40, 40, 0x19C }, { 0 } };
+unk_80077D50 s3PIconCompTexInfo[] = { { 17, a3PIconTex, 40, 40, 0x19A }, { 0 } };
+unk_80077D50 s4PIconCompTexInfo[] = { { 17, a4PIconTex, 40, 40, 0x19A }, { 0 } };
 
-unk_80077D50* D_i4_8011CF6C[] = {
-    D_i4_8011CEEC,
-    D_i4_8011CF0C,
-    D_i4_8011CF2C,
-    D_i4_8011CF4C,
+unk_80077D50* sPlayerNumIconCompTexInfos[] = {
+    s1PIconCompTexInfo,
+    s2PIconCompTexInfo,
+    s3PIconCompTexInfo,
+    s4PIconCompTexInfo,
 };
 
-unk_80077D50 D_i4_8011CF7C[] = { { 17, D_F11C044, 40, 40, 0x277 }, { 0 } };
-unk_80077D50 D_i4_8011CF9C[] = { { 17, D_F11C2C0, 128, 64, 0x837 }, { 0 } };
-unk_80077D50 D_i4_8011CFBC[] = { { 17, D_F11DB4C, 128, 64, 0x7E9 }, { 0 } };
-unk_80077D50 D_i4_8011CFDC[] = { { 17, D_F11E33C, 128, 64, 0x7E4 }, { 0 } };
-unk_80077D50 D_i4_8011CFFC[] = { { 18, D_F11EB24, 80, 40, 0x4C2 }, { 0 } };
-unk_80077D50 D_i4_8011D01C[] = { { 18, D_F11EFEC, 80, 40, 0x33E }, { 0 } };
-unk_80077D50 D_i4_8011D03C[] = { { 17, D_F11F330, 80, 40, 0x35E }, { 0 } };
-unk_80077D50 D_i4_8011D05C[] = { { 17, D_F11F694, 16, 16, 0x066 }, { 0 } };
-unk_80077D50 D_i4_8011D07C[] = { { 17, D_F11F804, 16, 16, 0x092 }, { 0 } };
-unk_80077D50 D_i4_8011D09C[] = { { 17, D_F11F89C, 16, 16, 0x093 }, { 0 } };
-unk_80077D50 D_i4_8011D0BC[] = { { 17, D_F11F934, 16, 16, 0x098 }, { 0 } };
-unk_80077D50 D_i4_8011D0DC[] = { { 17, D_F11F9D0, 16, 16, 0x091 }, { 0 } };
-unk_80077D50 D_i4_8011D0FC[] = { { 17, D_F11FA68, 16, 16, 0x097 }, { 0 } };
-unk_80077D50 D_i4_8011D11C[] = { { 17, D_F11FB04, 16, 16, 0x0A6 }, { 0 } };
-unk_80077D50 D_i4_8011D13C[] = { { 17, D_F11FBB0, 16, 16, 0x0A3 }, { 0 } };
-unk_80077D50 D_i4_8011D15C[] = { { 17, D_F11FC58, 16, 16, 0x0B4 }, { 0 } };
-unk_80077D50 D_i4_8011D17C[] = { { 17, D_F11FD10, 16, 16, 0x09C }, { 0 } };
-unk_80077D50 D_i4_8011D19C[] = { { 17, D_F11FDB0, 16, 16, 0x0A2 }, { 0 } };
-unk_80077D50 D_i4_8011D1BC[] = { { 17, D_F11FE58, 16, 16, 0x0AA }, { 0 } };
-unk_80077D50 D_i4_8011D1DC[] = { { 17, D_F11FF08, 16, 16, 0x0B1 }, { 0 } };
-unk_80077D50 D_i4_8011D1FC[] = { { 17, D_F11FFC0, 16, 16, 0x0B6 }, { 0 } };
-unk_80077D50 D_i4_8011D21C[] = { { 17, D_F12007C, 16, 16, 0x0A8 }, { 0 } };
-unk_80077D50 D_i4_8011D23C[] = { { 17, D_F120128, 16, 16, 0x097 }, { 0 } };
-unk_80077D50 D_i4_8011D25C[] = { { 17, D_F1201C4, 16, 16, 0x0CB }, { 0 } };
-unk_80077D50 D_i4_8011D27C[] = { { 17, D_F120294, 16, 16, 0x0D4 }, { 0 } };
-unk_80077D50 D_i4_8011D29C[] = { { 17, D_F12036C, 16, 16, 0x0DD }, { 0 } };
-unk_80077D50 D_i4_8011D2BC[] = { { 17, D_F120450, 16, 16, 0x0C8 }, { 0 } };
-unk_80077D50 D_i4_8011D2DC[] = { { 17, D_F12051C, 16, 16, 0x0BF }, { 0 } };
-unk_80077D50 D_i4_8011D2FC[] = { { 17, D_F1205E0, 16, 16, 0x059 }, { 0 } };
+unk_80077D50 sMachineSelectCursorCompTexInfo[] = { { 17, aMachineSelectCursorTex, 40, 40, 0x277 }, { 0 } };
+unk_80077D50 sMachineInfoGraphCompTexInfo[] = { { 17, aMachineInfoGraphTex, 128, 64, 0x837 }, { 0 } };
+unk_80077D50 sMachineAccelerationMaxSpeedCompTexInfo[] = { { 17, aMachineAccelerationMaxSpeedTex, 128, 64, 0x7E9 },
+                                                           { 0 } };
+unk_80077D50 sMachineBodyBoostGripCompTexInfo[] = { { 17, aMachineBodyBoostGripTex, 128, 64, 0x7E4 }, { 0 } };
+unk_80077D50 sMachineInfoGraphSmallCompTexInfo[] = { { 18, aMachineInfoGraphSmallTex, 80, 40, 0x4C2 }, { 0 } };
+unk_80077D50 sMachineAccelerationMaxSpeedSmallCompTexInfo[] = {
+    { 18, aMachineAccelerationMaxSpeedSmallTex, 80, 40, 0x33E }, { 0 }
+};
+unk_80077D50 sMachineBodyBoostGripSmallCompTexInfo[] = { { 17, aMachineBodyBoostGripSmallTex, 80, 40, 0x35E }, { 0 } };
+unk_80077D50 sAccelerationSpeedSliderCompTexInfo[] = { { 17, aAccelerationSpeedSliderTex, 16, 16, 0x066 }, { 0 } };
+unk_80077D50 sNoviceJackTrophyCompTexInfo[] = { { 17, aNoviceJackTrophyTex, 16, 16, 0x092 }, { 0 } };
+unk_80077D50 sNoviceQueenTrophyCompTexInfo[] = { { 17, aNoviceQueenTrophyTex, 16, 16, 0x093 }, { 0 } };
+unk_80077D50 sNoviceKingTrophyCompTexInfo[] = { { 17, aNoviceKingTrophyTex, 16, 16, 0x098 }, { 0 } };
+unk_80077D50 sNoviceJokerTrophyCompTexInfo[] = { { 17, aNoviceJokerTrophyTex, 16, 16, 0x091 }, { 0 } };
+unk_80077D50 sNoviceXTrophyCompTexInfo[] = { { 17, aNoviceXTrophyTex, 16, 16, 0x097 }, { 0 } };
+unk_80077D50 sStandardJackTrophyCompTexInfo[] = { { 17, aStandardJackTrophyTex, 16, 16, 0x0A6 }, { 0 } };
+unk_80077D50 sStandardQueenTrophyCompTexInfo[] = { { 17, aStandardQueenTrophyTex, 16, 16, 0x0A3 }, { 0 } };
+unk_80077D50 sStandardKingTrophyCompTexInfo[] = { { 17, aStandardKingTrophyTex, 16, 16, 0x0B4 }, { 0 } };
+unk_80077D50 sStandardJokerTrophyCompTexInfo[] = { { 17, aStandardJokerTrophyTex, 16, 16, 0x09C }, { 0 } };
+unk_80077D50 sStandardXTrophyCompTexInfo[] = { { 17, aStandardXTrophyTex, 16, 16, 0x0A2 }, { 0 } };
+unk_80077D50 sExpertJackTrophyCompTexInfo[] = { { 17, aExpertJackTrophyTex, 16, 16, 0x0AA }, { 0 } };
+unk_80077D50 sExpertQueenTrophyCompTexInfo[] = { { 17, aExpertQueenTrophyTex, 16, 16, 0x0B1 }, { 0 } };
+unk_80077D50 sExpertKingTrophyCompTexInfo[] = { { 17, aExpertKingTrophyTex, 16, 16, 0x0B6 }, { 0 } };
+unk_80077D50 sExpertJokerTrophyCompTexInfo[] = { { 17, aExpertJokerTrophyTex, 16, 16, 0x0A8 }, { 0 } };
+unk_80077D50 sExpertXTrophyCompTexInfo[] = { { 17, aExpertXTrophyTex, 16, 16, 0x097 }, { 0 } };
+unk_80077D50 sMasterJackTrophyCompTexInfo[] = { { 17, aMasterJackTrophyTex, 16, 16, 0x0CB }, { 0 } };
+unk_80077D50 sMasterQueenTrophyCompTexInfo[] = { { 17, aMasterQueenTrophyTex, 16, 16, 0x0D4 }, { 0 } };
+unk_80077D50 sMasterKingTrophyCompTexInfo[] = { { 17, aMasterKingTrophyTex, 16, 16, 0x0DD }, { 0 } };
+unk_80077D50 sMasterJokerTrophyCompTexInfo[] = { { 17, aMasterJokerTrophyTex, 16, 16, 0x0C8 }, { 0 } };
+unk_80077D50 sMasterXTrophyCompTexInfo[] = { { 17, aMasterXTrophyTex, 16, 16, 0x0BF }, { 0 } };
+unk_80077D50 sNoTrophyCompTexInfo[] = { { 17, aNoTrophyTex, 16, 16, 0x059 }, { 0 } };
 
-unk_80077D50* D_i4_8011D31C[] = {
-    D_i4_8011D07C, D_i4_8011D09C, D_i4_8011D0BC, D_i4_8011D0DC, D_i4_8011D0FC, D_i4_8011D11C, D_i4_8011D13C,
-    D_i4_8011D15C, D_i4_8011D17C, D_i4_8011D19C, D_i4_8011D1BC, D_i4_8011D1DC, D_i4_8011D1FC, D_i4_8011D21C,
-    D_i4_8011D23C, D_i4_8011D25C, D_i4_8011D27C, D_i4_8011D29C, D_i4_8011D2BC, D_i4_8011D2DC, D_i4_8011D2FC,
+unk_80077D50* sTrophyCompTexInfos[] = {
+    sNoviceJackTrophyCompTexInfo,    sNoviceQueenTrophyCompTexInfo,  sNoviceKingTrophyCompTexInfo,
+    sNoviceJokerTrophyCompTexInfo,   sNoviceXTrophyCompTexInfo,      sStandardJackTrophyCompTexInfo,
+    sStandardQueenTrophyCompTexInfo, sStandardKingTrophyCompTexInfo, sStandardJokerTrophyCompTexInfo,
+    sStandardXTrophyCompTexInfo,     sExpertJackTrophyCompTexInfo,   sExpertQueenTrophyCompTexInfo,
+    sExpertKingTrophyCompTexInfo,    sExpertJokerTrophyCompTexInfo,  sExpertXTrophyCompTexInfo,
+    sMasterJackTrophyCompTexInfo,    sMasterQueenTrophyCompTexInfo,  sMasterKingTrophyCompTexInfo,
+    sMasterJokerTrophyCompTexInfo,   sMasterXTrophyCompTexInfo,      sNoTrophyCompTexInfo,
 };
 
-unk_80077D50 D_i4_8011D370[] = { { 17, D_F134D64, 64, 18, 0x144 }, { 0 } };
-unk_80077D50 D_i4_8011D390[] = { { 17, D_F134EAC, 64, 18, 0x14C }, { 0 } };
-unk_80077D50 D_i4_8011D3B0[] = { { 17, D_F134FFC, 64, 18, 0x149 }, { 0 } };
-unk_80077D50 D_i4_8011D3D0[] = { { 17, D_F13514C, 64, 18, 0x14E }, { 0 } };
+static unk_80077D50 sNoviceCompTexInfo[] = { { 17, aNoviceTex, 64, 18, 0x144 }, { 0 } };
+static unk_80077D50 sStandardCompTexInfo[] = { { 17, aStandardTex, 64, 18, 0x14C }, { 0 } };
+static unk_80077D50 sExpertCompTexInfo[] = { { 17, aExpertTex, 64, 18, 0x149 }, { 0 } };
+static unk_80077D50 sMasterCompTexInfo[] = { { 17, aMasterTex, 64, 18, 0x14E }, { 0 } };
 
-unk_80077D50* D_i4_8011D3F0[] = {
-    D_i4_8011D370,
-    D_i4_8011D390,
-    D_i4_8011D3B0,
-    D_i4_8011D3D0,
+static unk_80077D50* sDifficultyCompTexInfos[] = {
+    sNoviceCompTexInfo,
+    sStandardCompTexInfo,
+    sExpertCompTexInfo,
+    sMasterCompTexInfo,
 };
 
-unk_80077D50 D_i4_8011D400[] = { { 17, D_F11F700, 20, 8, 0x5E }, { 0 } };
-unk_80077D50 D_i4_8011D420[] = { { 17, D_F11F764, 16, 8, 0x46 }, { 0 } };
-unk_80077D50 D_i4_8011D440[] = { { 17, D_F11F7B0, 16, 8, 0x4F }, { 0 } };
+unk_80077D50 sBoostCompTexInfo[] = { { 17, aBoostTex, 20, 8, 0x5E }, { 0 } };
+unk_80077D50 sBodyCompTexInfo[] = { { 17, aBodyTex, 16, 8, 0x46 }, { 0 } };
+unk_80077D50 sGripCompTexInfo[] = { { 17, aGripTex, 16, 8, 0x4F }, { 0 } };
 
-unk_80077D50* D_i4_8011D460[] = {
-    D_i4_8011D420,
-    D_i4_8011D400,
-    D_i4_8011D440,
+unk_80077D50* sMachineStatCompTexInfos[] = {
+    sBodyCompTexInfo,
+    sBoostCompTexInfo,
+    sGripCompTexInfo,
 };
 
-unk_80077D50 D_i4_8011D46C[] = { { 17, D_F139710, 32, 16, 0x112 }, { 0 } };
+static unk_80077D50 sOKCompTexInfo[] = { { 17, aOKTex, 32, 16, 0x112 }, { 0 } };
 
-const char* D_i4_8011D48C[] = { "a", "b", "c", "d", "e" };
+const char* sMachineStatValues[] = { "a", "b", "c", "d", "e" };
 
 UNUSED s32 D_i4_8011D4A0[] = { 100, 218, 252, 221 };
 
@@ -346,37 +449,38 @@ UNUSED s32 D_i4_8011D4C0[] = { 0, 0, 0, 10, 0, 40 };
 
 UNUSED f32 D_i4_8011D4D8 = 1.2f;
 
-s16 D_i4_8011D4DC = 60;
+s16 D_i4_8011D4DC = 60; // alpha
 
-s32 D_i4_8011D4E0 = 2600;
+s32 D_i4_8011D4E0 = 2600; // texture scale
 
 s8 D_i4_8011D4E4[] = { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-unk_80077D50 D_i4_8011D4F0[] = { { 17, D_F000004, 304, 240, 0x14A5D }, { 0 } };
-unk_80077D50 D_i4_8011D510[] = { { 17, D_F014A68, 320, 240, 0x118DB }, { 0 } };
-unk_80077D50 D_i4_8011D530[] = { { 17, D_F026348, 320, 240, 0x9E0A }, { 0 } };
+static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = { { 17, aTitleBackgroundMainTex, 304, 240, 0x14A5D }, { 0 } };
+static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = { { 17, aTitleBackgroundComicTex, 320, 240, 0x118DB }, { 0 } };
+static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = { { 17, aTitleBackgroundFalconTex, 320, 240, 0x9E0A },
+                                                            { 0 } };
 
-unk_80077D50* D_i4_8011D550[] = {
-    D_i4_8011D4F0,
-    D_i4_8011D510,
-    D_i4_8011D530,
+static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
+    sTitleBackgroundMainCompTexInfo,
+    sTitleBackgroundComicCompTexInfo,
+    sTitleBackgroundFalconCompTexInfo,
 };
 
-unk_80077D50 D_i4_8011D55C[] = { { 18, D_F030158, 160, 65, 0x26C0 }, { 0 } };
-unk_80077D50 D_i4_8011D57C[] = { { 18, D_F033328, 80, 40, 0x389 }, { 0 } };
-unk_80077D50 D_i4_8011D59C[] = { { 20, D_F03281C, 160, 32, 0x259 }, { 0 } };
-unk_80077D50 D_i4_8011D5BC[] = { { 20, D_F032A7C, 160, 32, 0x4EA }, { 0 } };
-unk_80077D50 D_i4_8011D5DC[] = { { 20, D_F032F6C, 160, 32, 0x3B7 }, { 0 } };
+unk_80077D50 sTitleLogoCompTexInfo[] = { { 18, aTitleLogoTex, 160, 65, 0x26C0 }, { 0 } };
+unk_80077D50 sTitlePushStartCompTexInfo[] = { { 18, aTitlePushStartTex, 80, 40, 0x389 }, { 0 } };
+unk_80077D50 sTitleNoControllerCompTexInfo[] = { { 20, aTitleNoControllerTex, 160, 32, 0x259 }, { 0 } };
+unk_80077D50 sTitleExpansionPakWarningCompTexInfo[] = { { 20, aTitleExpansionPakWarningTex, 160, 32, 0x4EA }, { 0 } };
+unk_80077D50 sTitleDiskWarningCompTexInfo[] = { { 20, aTitleDiskWarningTex, 160, 32, 0x3B7 }, { 0 } };
 
-unk_80077D50* D_i4_8011D5FC[] = {
-    D_i4_8011D59C,
-    D_i4_8011D5BC,
-    D_i4_8011D5DC,
+unk_80077D50* sTitleWarningCompTexInfos[] = {
+    sTitleNoControllerCompTexInfo,
+    sTitleExpansionPakWarningCompTexInfo,
+    sTitleDiskWarningCompTexInfo,
 };
 
-unk_80077D50 D_i4_8011D608[] = { { 17, D_F0336B8, 128, 14, 0x3EC }, { 0 } };
+unk_80077D50 sCopyrightCompTexInfo[] = { { 17, aCopyrightTex, 128, 14, 0x3EC }, { 0 } };
 
-s32 D_i4_8011D628[] = { 85, 21, 120, 150 };
+UNUSED s32 D_i4_8011D628[] = { 85, 21, 120, 150 };
 
 s32 D_i4_8011D638 = 0;
 
@@ -460,7 +564,7 @@ void func_i4_80115DF0(void) {
 
 extern s32 D_800CD3B4;
 extern s32 gGameMode;
-extern s32 D_800F8514;
+extern s32 gTrackIndex;
 extern f32 D_800E40F0[];
 extern f32 D_800E5EF0[];
 
@@ -479,8 +583,8 @@ void func_i4_801160D8(void) {
         }
     }
 
-    if ((gNumPlayers == 1) && (D_800F8514 < 24)) {
-        func_i2_80100C18(D_800F8514);
+    if ((gNumPlayers == 1) && (gTrackIndex < 24)) {
+        func_i2_80100C18(gTrackIndex);
         D_800E5EF0[0] = D_800E40F0[gRacers[0].character];
     }
 
@@ -821,19 +925,19 @@ s32 func_i4_80116E5C(s32 arg0) {
 }
 
 void func_i4_80116E64(void) {
-    func_80077D50(D_i4_8011CECC, 0);
+    func_80077D50(sSelectMachineCompTexInfo, 0);
 }
 
 void func_i4_80116E8C(unk_800E3A28* arg0) {
     s32 i;
 
     if (gNumPlayers == 1) {
-        func_80077D50(D_i4_8011BDC0[gRacers[0].character], 0);
+        func_80077D50(sPortraitCompTexInfos[gRacers[0].character], 0);
         return;
     }
 
     for (i = 0; i < gNumPlayers; i++) {
-        func_80077D50(D_i4_8011C508[gRacers[i].character], 0);
+        func_80077D50(sSmallPortraitCompTexInfos[gRacers[i].character], 0);
     }
 }
 
@@ -844,7 +948,7 @@ void func_i4_80116F48(unk_800E3A28* arg0) {
     arg0->unk_04 = func_i4_80116E5C(arg0->unk_04);
 
     if (gNumPlayers == 1) {
-        func_80077D50(D_i4_8011BDA0, 0);
+        func_80077D50(sPortraitBackgroundCompTexInfo, 0);
         arg0->unk_18 = func_800792D8(D_i4_8011C05C[arg0->unk_04]);
     } else {
         arg0->unk_18 = func_800792D8(D_i4_8011C7A4[arg0->unk_04]);
@@ -856,11 +960,11 @@ void func_i4_80117008(unk_800E3A28* arg0) {
 }
 
 void func_i4_80117038(unk_800E3A28* arg0) {
-    func_80077D50(D_i4_8011CF6C[arg0->unk_00 - 0x28], 0);
+    func_80077D50(sPlayerNumIconCompTexInfos[arg0->unk_00 - 0x28], 0);
 }
 
 void func_i4_8011706C(void) {
-    func_80077D50(D_i4_8011CF7C, 0);
+    func_80077D50(sMachineSelectCursorCompTexInfo, 0);
 }
 
 void func_i4_80117094(unk_800E3A28* arg0) {
@@ -948,19 +1052,19 @@ void func_i4_80117400(unk_800E3A28* arg0) {
 
 void func_i4_8011764C(void) {
     if (gNumPlayers == 1) {
-        func_80077D50(D_i4_8011CF9C, 0);
-        func_80077D50(D_i4_8011CFBC, 0);
+        func_80077D50(sMachineInfoGraphCompTexInfo, 0);
+        func_80077D50(sMachineAccelerationMaxSpeedCompTexInfo, 0);
     } else {
-        func_80077D50(D_i4_8011CFFC, 0);
-        func_80077D50(D_i4_8011D01C, 0);
+        func_80077D50(sMachineInfoGraphSmallCompTexInfo, 0);
+        func_80077D50(sMachineAccelerationMaxSpeedSmallCompTexInfo, 0);
     }
 }
 
 void func_i4_801176BC(void) {
     if (gNumPlayers == 1) {
-        func_80077D50(D_i4_8011CFDC, 0);
+        func_80077D50(sMachineBodyBoostGripCompTexInfo, 0);
     } else {
-        func_80077D50(D_i4_8011D03C, 0);
+        func_80077D50(sMachineBodyBoostGripSmallCompTexInfo, 0);
     }
 }
 
@@ -971,7 +1075,7 @@ void func_i4_8011770C(unk_800E3A28* arg0) {
 }
 
 void func_i4_8011774C(void) {
-    func_80077D50(D_i4_8011D05C, 0);
+    func_80077D50(sAccelerationSpeedSliderCompTexInfo, 0);
 }
 
 void func_i4_80117774(unk_800E3A28* arg0) {
@@ -982,11 +1086,11 @@ void func_i4_80117774(unk_800E3A28* arg0) {
     func_i2_80100C60(arg0->unk_18);
 
     for (i = 0; i < 21; i++) {
-        func_80077D50(D_i4_8011D31C[i], 0);
+        func_80077D50(sTrophyCompTexInfos[i], 0);
     }
 
     for (i = 0; i < 4; i++) {
-        func_80077D50(D_i4_8011D3F0[i], 0);
+        func_80077D50(sDifficultyCompTexInfos[i], 0);
     }
 }
 
@@ -994,17 +1098,17 @@ void func_i4_80117808(void) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        func_80077D50(D_i4_8011D460[i], 0);
+        func_80077D50(sMachineStatCompTexInfos[i], 0);
     }
 }
 
 void func_i4_80117854(unk_800E3A28* arg0) {
-    func_80077D50(D_i4_8011D46C, 0);
+    func_80077D50(sOKCompTexInfo, 0);
     arg0->unk_10 = 50;
 }
 
 void func_i4_8011788C(unk_800E3A28* arg0) {
-    func_80077D50(D_i4_8011D46C, 0);
+    func_80077D50(sOKCompTexInfo, 0);
     arg0->unk_0C = 50;
 }
 
@@ -1033,7 +1137,7 @@ Gfx* func_i4_801178C4(Gfx* gfx) {
 Gfx* func_i4_80117B74(Gfx* gfx, unk_800E3A28* arg1) {
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return func_80078EA0(gfx, D_i4_8011CECC, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sSelectMachineCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
@@ -1041,12 +1145,13 @@ Gfx* func_i4_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
     const s32* var_s0;
 
     if (gNumPlayers == 1) {
-        gfx = func_80078EA0(gfx, D_i4_8011BDC0[gRacers[0].character], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sPortraitCompTexInfos[gRacers[0].character], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f,
+                            1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             var_s0 = &D_i4_8011D6C4[i * 2];
-            gfx =
-                func_80078EA0(gfx, D_i4_8011C508[gRacers[i].character], var_s0[0], var_s0[1] + 55, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sSmallPortraitCompTexInfos[gRacers[i].character], var_s0[0], var_s0[1] + 55, 0, 0,
+                                0, 1.0f, 1.0f);
         }
     }
     return gfx;
@@ -1062,7 +1167,7 @@ Gfx* func_i4_80117D10(Gfx* gfx, unk_800E3A28* arg1) {
     temp_v0 = &D_i4_8011D6C4[temp_v1 * 2];
     switch (gNumPlayers) {
         case 1:
-            gfx = func_80078EA0(gfx, D_i4_8011BDA0, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sPortraitBackgroundCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
             gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
             break;
         case 2:
@@ -1092,14 +1197,15 @@ Gfx* func_i4_80117E98(Gfx* gfx, unk_800E3A28* arg1) {
     temp_t0 = D_i4_8011D694[temp_t2 * 2 + 1];
     if (temp_t2 < 2) {
         for (i = 0; i < 3; i++) {
-            gfx = func_80078EA0(gfx, D_i4_8011D460[i], temp_fp, (temp_t0 - 7) + i * 20, 0, 0, 0, 1.0f, 1.0f);
-            temp_s0 = D_i4_8011D48C[temp_a3[i]];
+            gfx = func_80078EA0(gfx, sMachineStatCompTexInfos[i], temp_fp, (temp_t0 - 7) + i * 20, 0, 0, 0, 1.0f, 1.0f);
+            temp_s0 = sMachineStatValues[temp_a3[i]];
             gfx = func_i2_80106450(gfx, temp_fp + 5, (temp_t0 + 10) + i * 20, temp_s0, 0, 2, 0);
         }
     } else {
         for (i = 0; i < 3; i++) {
-            gfx = func_80078EA0(gfx, D_i4_8011D460[i], temp_fp - 0x14, (temp_t0 - 7) + i * 20, 0, 0, 0, 1.0f, 1.0f);
-            temp_s0 = D_i4_8011D48C[temp_a3[i]];
+            gfx = func_80078EA0(gfx, sMachineStatCompTexInfos[i], temp_fp - 0x14, (temp_t0 - 7) + i * 20, 0, 0, 0, 1.0f,
+                                1.0f);
+            temp_s0 = sMachineStatValues[temp_a3[i]];
             gfx = func_i2_80106450(gfx, (temp_fp - func_i2_801062E4(temp_s0, 2, 0)) - 5, (temp_t0 + 10) + i * 20,
                                    temp_s0, 0, 2, 0);
         }
@@ -1114,12 +1220,13 @@ Gfx* func_i4_801180EC(Gfx* gfx, unk_800E3A28* arg1) {
     sp3C = arg1->unk_00 - 0x21;
 
     gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
-    return func_80078EA0(gfx, D_i4_8011CF6C[sp3C], D_i4_8011D674[sp3C * 2 + 0] + arg1->unk_0C,
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[sp3C], D_i4_8011D674[sp3C * 2 + 0] + arg1->unk_0C,
                          D_i4_8011D674[sp3C * 2 + 1] + arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_801181C0(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, D_i4_8011CF6C[arg1->unk_00 - 0x28], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[arg1->unk_00 - 0x28], arg1->unk_0C, arg1->unk_10, 0, 0, 0,
+                         1.0f, 1.0f);
 }
 
 extern s32 gGameFrameCount;
@@ -1141,7 +1248,7 @@ Gfx* func_i4_8011821C(Gfx* gfx, unk_800E3A28* arg1) {
             arg1->unk_0C = ((temp_v0 % 6) * 0x28) + 0x28;
             arg1->unk_10 = ((temp_v0 / 6) * 0x22) + 0x25;
 
-            gfx = func_80078EA0(gfx, D_i4_8011CF7C, arg1->unk_0C, arg1->unk_10, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sMachineSelectCursorCompTexInfo, arg1->unk_0C, arg1->unk_10, 1, 0, 0, 1.0f, 1.0f);
         }
     }
     return gfx;
@@ -1209,10 +1316,10 @@ Gfx* func_i4_80118734(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, D_i4_8011D46C, arg1->unk_0C + var_v1, arg1->unk_10 + 0xD1, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, arg1->unk_0C + var_v1, arg1->unk_10 + 0xD1, 1, 0, 0, 1.0f, 1.0f);
 }
 
-extern const char* D_800CD450[];
+extern const char* sMachineNames[];
 
 Gfx* func_i4_801187C0(Gfx* gfx) {
     s32 i;
@@ -1220,12 +1327,12 @@ Gfx* func_i4_801187C0(Gfx* gfx) {
     const s32* var_s0;
 
     if (gNumPlayers == 1) {
-        temp_s1 = D_800CD450[func_i4_80116E5C(gRacers[0].character)];
+        temp_s1 = sMachineNames[func_i4_80116E5C(gRacers[0].character)];
         gfx = func_i2_80106450(gfx, 0x122 - func_i2_801062E4(temp_s1, 1, 0), 0x22, temp_s1, 0, 1, 0);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             var_s0 = &D_i4_8011D6C4[i * 2];
-            temp_s1 = D_800CD450[func_i4_80116E5C(gRacers[i].character)];
+            temp_s1 = sMachineNames[func_i4_80116E5C(gRacers[i].character)];
             gfx = func_i2_80106450(gfx, (var_s0[0] - func_i2_801062E4(temp_s1, 2, 0)) + 0x82, var_s0[1] + 0xA, temp_s1,
                                    0, 2, 0);
         }
@@ -1312,8 +1419,8 @@ Gfx* func_i4_80118EC8(Gfx* gfx, unk_800E3A28* arg1) {
 
     if (gNumPlayers == 1) {
         temp_s4 = D_800F80C8[gRacers[0].character].unk_14;
-        gfx = func_80078EA0(gfx, D_i4_8011CF9C, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
-        gfx = func_i2_80106B08(gfx, arg1->unk_0C + 0x66, arg1->unk_10 + 0x17, temp_s4);
+        gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_i2_DrawMachineWeight(gfx, arg1->unk_0C + 0x66, arg1->unk_10 + 0x17, temp_s4);
 
         switch (D_800CD3B4) {
             case 0:
@@ -1325,20 +1432,23 @@ Gfx* func_i4_80118EC8(Gfx* gfx, unk_800E3A28* arg1) {
                 break;
         }
 
-        gfx = func_80078EA0(gfx, D_i4_8011CFBC, arg1->unk_0C + 3, arg1->unk_10 + 1, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, arg1->unk_0C + 3, arg1->unk_10 + 1, 1, 0, 0,
+                            1.0f, 1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             temp_s4 = D_800F80C8[gRacers[i].character].unk_14;
             temp_s0 = D_i4_8011D6C4[i * 2 + 0];
             temp_s1 = D_i4_8011D6C4[i * 2 + 1];
-            gfx = func_80078EA0(gfx, D_i4_8011CFFC, temp_s0 + 0x2B, temp_s1 + 0xA, 0, 0, 0, 1.0f, 1.0f);
-            gfx = func_i2_80106B08(gfx, temp_s0 + 0x6E, temp_s1 + 0x1C, temp_s4);
+            gfx = func_80078EA0(gfx, sMachineInfoGraphSmallCompTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA, 0, 0, 0, 1.0f,
+                                1.0f);
+            gfx = func_i2_DrawMachineWeight(gfx, temp_s0 + 0x6E, temp_s1 + 0x1C, temp_s4);
             if (D_800CD3A8[i] == 0) {
                 gfx = func_8007DB28(gfx, 0);
             } else {
                 gDPSetPrimColor(gfx++, 0, 0, 0, 255, 0, 255);
             }
-            gfx = func_80078EA0(gfx, D_i4_8011D01C, temp_s0 + 0x2B, temp_s1 + 0xA, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedSmallCompTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA, 1, 0,
+                                0, 1.0f, 1.0f);
         }
     }
     return gfx;
@@ -1347,28 +1457,30 @@ Gfx* func_i4_80118EC8(Gfx* gfx, unk_800E3A28* arg1) {
 Gfx* func_i4_80119170(Gfx* gfx, unk_800E3A28* arg1) {
     s32 i;
     s32 j;
-    s32 sp74;
-    s32 sp70;
+    s32 leftOffset;
+    s32 topOffset;
     s8* temp;
     s32 pad;
 
     if (gNumPlayers == 1) {
-        gfx = func_80078EA0(gfx, D_i4_8011CFDC, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sMachineBodyBoostGripCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 
         for (i = 0; i < 3; i++) {
             temp = D_800F80C8[gRacers[0].character].unk_11;
-            gfx = func_i2_801069E4(gfx, arg1->unk_0C + 0x69, arg1->unk_10 + i * 23 + 3, temp[i]);
+            gfx = func_i2_DrawMachineStatValue(gfx, arg1->unk_0C + 0x69, arg1->unk_10 + i * 23 + 3, temp[i]);
         }
     } else {
         for (i = 0; i < gNumPlayers; i++) {
-            sp74 = D_i4_8011D6C4[i * 2 + 0];
-            sp70 = D_i4_8011D6C4[i * 2 + 1];
+            leftOffset = D_i4_8011D6C4[i * 2 + 0];
+            topOffset = D_i4_8011D6C4[i * 2 + 1];
 
-            gfx = func_80078EA0(gfx, D_i4_8011D03C, sp74 + 0x2B, sp70 + 0x39, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sMachineBodyBoostGripSmallCompTexInfo, leftOffset + 0x2B, topOffset + 0x39, 0, 0,
+                                0, 1.0f, 1.0f);
 
             for (j = 0; j < 3; j++) {
                 temp = D_800F80C8[gRacers[i].character].unk_11;
-                gfx = func_i2_80106450(gfx, sp74 + 0x6B, sp70 + 0x43 + j * 14, D_i4_8011D48C[temp[j]], 0, 2, 0);
+                gfx = func_i2_80106450(gfx, leftOffset + 0x6B, topOffset + 0x43 + j * 14, sMachineStatValues[temp[j]],
+                                       0, 2, 0);
             }
         }
     }
@@ -1389,7 +1501,7 @@ Gfx* func_i4_801193B8(Gfx* gfx, unk_800E3A28* arg1) {
 
         for (j = 0; j < 3; j++) {
             temp = D_800F80C8[gRacers[i].character].unk_11;
-            temp2 = D_i4_8011D48C[temp[j]];
+            temp2 = sMachineStatValues[temp[j]];
             gfx = func_i2_80106450(gfx, var_s3 + 0x6B, var_s1 + 0x43 + j * 14, temp2, 0, 2, 0);
         }
     }
@@ -1423,7 +1535,8 @@ Gfx* func_i4_80119574(Gfx* gfx, unk_800E3A28* arg1) {
                 break;
         }
 
-        gfx = func_80078EA0(gfx, D_i4_8011D05C, (s32) (D_800E5EF0[0] * 128.0f) + 0x98, 0x54, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sAccelerationSpeedSliderCompTexInfo, (s32) (D_800E5EF0[0] * 128.0f) + 0x98, 0x54, 1, 0,
+                            0, 1.0f, 1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             temp_v1 = 1;
@@ -1441,7 +1554,7 @@ Gfx* func_i4_80119574(Gfx* gfx, unk_800E3A28* arg1) {
 
             temp2 = D_i4_8011D6C4[i * 2 + 1] + 0x2E;
             temp = D_i4_8011D6C4[i * 2 + 0] + (s32) (D_800E5EF0[i] * 80.0f) + 0x23;
-            gfx = func_80078EA0(gfx, D_i4_8011D05C, temp, temp2, temp_v1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sAccelerationSpeedSliderCompTexInfo, temp, temp2, temp_v1, 0, 0, 1.0f, 1.0f);
         }
     }
     return gfx;
@@ -1463,38 +1576,38 @@ extern s8 D_800CD3C8;
 Gfx* func_i4_80119834(Gfx* gfx, unk_800E3A28* arg1) {
     s32 i;
     s32 temp_v0;
-    s32 var_t3;
-    s32 var_v0;
+    s32 difficulty;
+    s32 trophyIndex;
     s32 pad;
     s32 var_t0;
     s8* var_t1;
 
     temp_v0 = func_8007E10C(D_i4_8011D780[0]);
-    var_t3 = 0;
+    difficulty = 0;
     switch (D_800CD3B0) {
         case 2:
         case 3:
             break;
         default:
             if (((D_800CD3C0 >= 2) || (D_800CD3C8 != 0)) && (D_800DD180.unk_7A & 8)) {
-                var_t3 = 4;
+                difficulty = MASTER + 1;
             }
             if (D_800DD180.unk_7A & 1) {
-                var_t3 = 3;
+                difficulty = EXPERT + 1;
             }
             if (D_800DD180.unk_7A & 4) {
-                var_t3 = 2;
+                difficulty = STANDARD + 1;
             }
             if (D_800DD180.unk_7A & 2) {
-                var_t3 = 1;
+                difficulty = NOVICE + 1;
             }
             break;
     }
 
-    if (var_t3 != 0) {
-        var_t3--;
+    if (difficulty != 0) {
+        difficulty--;
     } else {
-        var_t3 = gDifficulty - D_800DCE48.unk_10;
+        difficulty = gDifficulty - D_800DCE48.unk_10;
     }
 
     if ((D_800CD3C0 >= 2) || (D_800CD3C8 != 0)) {
@@ -1507,38 +1620,39 @@ Gfx* func_i4_80119834(Gfx* gfx, unk_800E3A28* arg1) {
         }
     }
 
-    var_t1 = arg1->unk_18 + var_t3 * 150 + temp_v0 * 5;
+    var_t1 = arg1->unk_18 + difficulty * 150 + temp_v0 * 5;
 
     for (i = 0; i < var_t0; i++) {
 
         // FAKE
         if ((*((i ^ 0) + (0, var_t1))) == 0) {
-            var_v0 = 20;
+            // No trophy
+            trophyIndex = 20;
             if (1) {}
         } else {
-            var_v0 = (var_t3 * 5) + i;
+            trophyIndex = (difficulty * 5) + i;
             if (1) {}
         }
 
-        gfx = func_80078EA0(gfx, D_i4_8011D31C[var_v0], 20, 0x73 + i * 20, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTrophyCompTexInfos[trophyIndex], 20, 0x73 + i * 20, 0, 0, 0, 1.0f, 1.0f);
     }
-    return func_80078EA0(gfx, D_i4_8011D3F0[var_t3], 30, 0xD1, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sDifficultyCompTexInfos[difficulty], 30, 0xD1, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_80119A64(Gfx* gfx, unk_800E3A28* arg1) {
     s32 pad[2];
-    const char* temp_a0;
+    const char* machineName;
 
-    temp_a0 = D_800CD450[func_i4_80116E5C(gRacers[0].character)];
+    machineName = sMachineNames[func_i4_80116E5C(gRacers[0].character)];
 
-    gfx = func_i2_80106450(gfx, 0xA0 - (func_i2_801062E4(temp_a0, 2, 0) / 2), 0xDA, temp_a0, 0, 2, 0);
-    gfx = func_i2_80106C20(gfx, 0xFC, 0xDD, D_800F80C8[func_8007E10C(D_i4_8011D780[0])].unk_14);
-    return func_i2_80106450(gfx, 0xFC, 0xDD, "$", 0, 2, 0);
+    gfx = func_i2_80106450(gfx, 160 - (func_i2_801062E4(machineName, 2, 0) / 2), 218, machineName, 0, 2, 0);
+    gfx = func_i2_DrawMachineWeightSmall(gfx, 252, 221, D_800F80C8[func_8007E10C(D_i4_8011D780[0])].unk_14);
+    return func_i2_80106450(gfx, 252, 221, "$", 0, 2, 0);
 }
 
 Gfx* func_i4_80119B50(Gfx* gfx, unk_800E3A28* arg1) {
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, D_i4_8011D46C, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
 }
 
 void func_i4_80119BB8(unk_800E3A28* arg0) {
@@ -1779,127 +1893,124 @@ void func_i4_8011A7B8(void) {
 void func_i4_8011A860(u16* arg0) {
 }
 
-void func_i4_8011A868(u16* arg0) {
-    s32 sp1C;
-    s32 temp_v1;
-    s32 temp_a2;
-    s32 temp;
+void func_i4_8011A868(u16* texture) {
+    s32 column;
+    s32 pixel;
+    s32 pixelIndex;
+    s32 nextPixelIndex;
 
-    sp1C = (Math_Rand1() >> 3) % 304;
-    temp_v1 = (((Math_Rand1() >> 4) % 240) * 0x130) + sp1C;
-    temp = (temp_v1 + 1) % 72960;
+    column = (Math_Rand1() >> 3) % 304;
+    pixelIndex = (((Math_Rand1() >> 4) % 240) * 304) + column;
+    nextPixelIndex = (pixelIndex + 1) % (304 * 240);
 
-    temp_a2 = arg0[temp_v1];
-    arg0[temp_v1] = arg0[temp];
-    arg0[temp] = temp_a2;
+    pixel = texture[pixelIndex];
+    texture[pixelIndex] = texture[nextPixelIndex];
+    texture[nextPixelIndex] = pixel;
 
-    sp1C = (Math_Rand1() >> 5) % 304;
-    temp_v1 = (((Math_Rand1() >> 6) % 240) * 0x130) + sp1C;
-    temp = (temp_v1 + 0x130) % 72960;
+    column = (Math_Rand1() >> 5) % 304;
+    pixelIndex = (((Math_Rand1() >> 6) % 240) * 304) + column;
+    nextPixelIndex = (pixelIndex + 304) % (304 * 240);
 
-    temp_a2 = arg0[temp_v1];
-    arg0[temp_v1] = arg0[temp];
-    arg0[temp] = temp_a2;
+    pixel = texture[pixelIndex];
+    texture[pixelIndex] = texture[nextPixelIndex];
+    texture[nextPixelIndex] = pixel;
 }
 
-void func_i4_8011A98C(u16* arg0) {
-    u32 sp2C;
+void func_i4_8011A98C(u16* texture) {
+    u32 column;
     s32 pad;
-    u32 var_a0;
+    u32 pixelIndex;
     s32 pad2;
-    u16* sp1C;
+    u16* srcPixel;
 
-    sp2C = (Math_Rand1() >> 4) % 304;
-    var_a0 = (((Math_Rand1() >> 5) % 240) * 0x130) + sp2C;
+    column = (Math_Rand1() >> 4) % 304;
+    pixelIndex = (((Math_Rand1() >> 5) % 240) * 304) + column;
 
-    // FAKE
-    sp1C = &(0, arg0)[var_a0];
+    srcPixel = (u16*) texture + pixelIndex;
 
     switch ((Math_Rand1() >> 6) % 4) {
         case 0:
-            var_a0 = (var_a0 + 1) % 72960;
+            pixelIndex = (pixelIndex + 1) % (304 * 240);
             break;
         case 1:
-            var_a0 = (var_a0 - 1) % 72960;
+            pixelIndex = (pixelIndex - 1) % (304 * 240);
             break;
         case 2:
-            var_a0 = (var_a0 + 0x130) % 72960;
+            pixelIndex = (pixelIndex + 304) % (304 * 240);
             break;
         case 3:
-            var_a0 = (var_a0 - 0x130) % 72960;
+            pixelIndex = (pixelIndex - 304) % (304 * 240);
             break;
     }
 
-    if (arg0[var_a0] < *sp1C) {
-        arg0[var_a0] = *sp1C;
+    if (texture[pixelIndex] < *srcPixel) {
+        texture[pixelIndex] = *srcPixel;
     }
 }
 
-void func_i4_8011AAD8(u16* arg0) {
-    u32 sp2C;
+void func_i4_8011AAD8(u16* texture) {
+    u32 column;
     s32 pad;
-    u32 var_a0;
-    s32 pad2;
-    u16* sp1C;
+    u32 pixelIndex;
+    s32 fakeVar;
+    u16* srcPixel;
 
-    sp2C = (Math_Rand1() >> 5) % 304;
-    var_a0 = (((Math_Rand1() >> 6) % 240) * 0x130) + sp2C;
+    column = (Math_Rand1() >> 5) % 304;
+    pixelIndex = (((Math_Rand1() >> 6) % 240) * 304) + column;
 
-    // FAKE
-    sp1C = &(0, arg0)[var_a0];
+    srcPixel = (u16*) texture + pixelIndex;
 
     switch ((Math_Rand1() >> 7) % 4) {
         case 0:
-            var_a0 = (var_a0 + 1) % 72960;
+            pixelIndex = (pixelIndex + 1) % (304 * 240);
             break;
         case 1:
-            var_a0 = (var_a0 - 1) % 72960;
+            pixelIndex = (pixelIndex - 1) % (304 * 240);
             break;
         case 2:
-            var_a0 = (var_a0 + 0x130) % 72960;
+            pixelIndex = (pixelIndex + 304) % (304 * 240);
             break;
         case 3:
-            var_a0 = (var_a0 - 0x130) % 72960;
+            pixelIndex = (pixelIndex - 304) % (304 * 240);
             break;
     }
 
     // FAKE
-    pad2 = arg0[var_a0];
+    fakeVar = texture[pixelIndex];
 
-    if (*sp1C - arg0[var_a0] < 0) {
-        arg0[var_a0] = *sp1C;
+    if (*srcPixel - texture[pixelIndex] < 0) {
+        texture[pixelIndex] = *srcPixel;
     }
 }
 
-void func_i4_8011AC24(u16* arg0) {
-    u32 sp2C;
+void func_i4_8011AC24(u16* texture) {
+    u32 column;
     s32 pad;
-    u32 var_a0;
+    u32 pixelIndex;
     s32 pad2;
-    u16* sp1C;
+    u16* srcPixel;
 
-    sp2C = (Math_Rand1() >> 6) % 304;
-    var_a0 = (((Math_Rand1() >> 7) % 240) * 0x130) + sp2C;
+    column = (Math_Rand1() >> 6) % 304;
+    pixelIndex = (((Math_Rand1() >> 7) % 240) * 304) + column;
 
-    // FAKE
-    sp1C = &(0, arg0)[var_a0];
+    srcPixel = (u16*) texture + pixelIndex;
 
     switch ((Math_Rand1() >> 8) % 4) {
         case 0:
-            var_a0 = (var_a0 + 1) % 72960;
+            pixelIndex = (pixelIndex + 1) % (304 * 240);
             break;
         case 1:
-            var_a0 = (var_a0 - 1) % 72960;
+            pixelIndex = (pixelIndex - 1) % (304 * 240);
             break;
         case 2:
-            var_a0 = (var_a0 + 0x130) % 72960;
+            pixelIndex = (pixelIndex + 304) % (304 * 240);
             break;
         case 3:
-            var_a0 = (var_a0 - 0x130) % 72960;
+            pixelIndex = (pixelIndex - 304) % (304 * 240);
             break;
     }
 
-    arg0[var_a0] = *sp1C;
+    texture[pixelIndex] = *srcPixel;
 }
 
 extern s32 D_800DCCCC;
@@ -1907,7 +2018,7 @@ extern s32 D_800DCCCC;
 void func_i4_8011AD60(void) {
     D_800CCFE8 = 3;
     D_i4_8011D638 = 1;
-    D_800F8514 = 0;
+    gTrackIndex = 0;
     D_i4_8011D790 = 0;
     D_i4_8011D794 = 0;
     func_800794B0(5, 0, 0, 1);
@@ -1981,7 +2092,7 @@ extern s8 D_800CD3C4;
 
 void func_i4_8011B06C(unk_800E3A28* arg0) {
     arg0->unk_04 = D_800CD3C4;
-    func_80077D50(D_i4_8011D550[arg0->unk_04], 0);
+    func_80077D50(sTitleBackgroundCompTexInfos[arg0->unk_04], 0);
     if (arg0->unk_04 == 0) {
         arg0->unk_0C = 8;
     }
@@ -2004,7 +2115,7 @@ void func_i4_8011B0D0(unk_800E3A28* arg0) {
             break;
     }
 
-    func_80077D50(D_i4_8011D55C, 0);
+    func_80077D50(sTitleLogoCompTexInfo, 0);
 }
 
 void func_i4_8011B134(void) {
@@ -2013,9 +2124,9 @@ void func_i4_8011B134(void) {
 void func_i4_8011B13C(unk_800E3A28* arg0) {
 
     arg0->unk_04 = D_800CD3C4;
-    func_80077D50(D_i4_8011D59C, 0);
+    func_80077D50(sTitleNoControllerCompTexInfo, 0);
     if (D_800DD228 != 0) {
-        func_80077D50(D_i4_8011D57C, 0);
+        func_80077D50(sTitlePushStartCompTexInfo, 0);
         arg0->unk_0C = 120;
         switch (arg0->unk_04) {
             case 0:
@@ -2033,7 +2144,7 @@ void func_i4_8011B1E4(void) {
 }
 
 void func_i4_8011B1EC(void) {
-    func_80077D50(D_i4_8011D608, 0);
+    func_80077D50(sCopyrightCompTexInfo, 0);
 }
 
 extern s32 D_800CCFC0;
@@ -2059,7 +2170,7 @@ void func_i4_8011B214(unk_800E3A28* arg0) {
         var_v0 = 2;
     }
 
-    func_80077D50(D_i4_8011D5FC[var_v0], 0);
+    func_80077D50(sTitleWarningCompTexInfos[var_v0], 0);
     if ((D_800CCFC0 != 0) && (func_800758F8() != 1)) {
         arg0->unk_1C++;
         D_i4_8011D794 = 1;
@@ -2067,34 +2178,35 @@ void func_i4_8011B214(unk_800E3A28* arg0) {
     }
 }
 
-void (*D_i4_8011D63C[])(u16*) = {
+void (*sTitleBackgroundEffectFuncs[])(u16*) = {
     func_i4_8011A860, func_i4_8011A860, func_i4_8011A868, func_i4_8011A98C, func_i4_8011AAD8, func_i4_8011AC24,
 };
 
 void func_i4_8011B2E0(unk_800E3A28* arg0) {
-    void (*var_s2)(u16*);
+    void (*backgroundEffect)(u16*);
     s32 i;
-    u16* temp_s1;
+    u16* backgroundTexture;
 
     if (D_i4_8011D638 == 0) {
         arg0->unk_04++;
         if (arg0->unk_04 > 5) {
             arg0->unk_04 = 1;
         }
-        var_s2 = D_i4_8011D63C[arg0->unk_04];
+        backgroundEffect = sTitleBackgroundEffectFuncs[arg0->unk_04];
     } else {
-        var_s2 = D_i4_8011D63C[D_i4_8011D638];
+        backgroundEffect = sTitleBackgroundEffectFuncs[D_i4_8011D638];
     }
 
-    temp_s1 = func_800783AC(D_F000004);
+    backgroundTexture = func_800783AC(aTitleBackgroundMainTex);
 
     for (i = 1999; i > 0; i--) {
-        var_s2(temp_s1);
+        backgroundEffect(backgroundTexture);
     }
 }
 
 Gfx* func_i4_8011B380(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, D_i4_8011D550[arg1->unk_04], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f,
+                         1.0f);
 }
 
 Gfx* func_i4_8011B3DC(Gfx* gfx, unk_800E3A28* arg1) {
@@ -2102,7 +2214,7 @@ Gfx* func_i4_8011B3DC(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 Gfx* func_i4_8011B3E8(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, D_i4_8011D55C, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sTitleLogoCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_8011B438(Gfx* gfx, unk_800E3A28* arg1) {
@@ -2117,7 +2229,7 @@ Gfx* func_i4_8011B444(Gfx* gfx, unk_800E3A28* arg1) {
             return gfx;
         }
         gfx = func_8007DB28(gfx, 0);
-        gfx = func_80078EA0(gfx, D_i4_8011D57C, arg1->unk_0C, arg1->unk_10, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitlePushStartCompTexInfo, arg1->unk_0C, arg1->unk_10, 1, 0, 0, 1.0f, 1.0f);
     } else {
         arg1->unk_0C = 0x50;
 
@@ -2147,7 +2259,7 @@ Gfx* func_i4_8011B444(Gfx* gfx, unk_800E3A28* arg1) {
             gDPSetPrimColor(gfx++, 0, 0, ((0x28 - var_v1) * 255) / 40, 0, 0, 255);
         }
 
-        gfx = func_80078EA0(gfx, D_i4_8011D59C, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleNoControllerCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
@@ -2157,7 +2269,7 @@ Gfx* func_i4_8011B668(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 Gfx* func_i4_8011B674(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, D_i4_8011D608, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sCopyrightCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_8011B6C4(Gfx* gfx, unk_800E3A28* arg1) {
@@ -2187,7 +2299,7 @@ Gfx* func_i4_8011B6C4(Gfx* gfx, unk_800E3A28* arg1) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, ((0x28 - var_v1) * 255) / 40, 0, 0, 255);
         }
-        gfx = func_80078EA0(gfx, D_i4_8011D5FC[var_t0], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleWarningCompTexInfos[var_t0], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }

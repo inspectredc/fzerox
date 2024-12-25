@@ -1390,15 +1390,15 @@ void func_800A4D0C(s32 arg0) {
 }
 
 extern unk_800F8510* D_800F8510;
-extern s32 D_800F8514;
+extern s32 gTrackIndex;
 
 extern unk_8010B7B0 D_8010B7B0[];
 s32 func_800AA394(void);
 
 void func_800A4DF0(void) {
 
-    D_800F8510 = &D_802A6B40[D_800F8514];
-    func_8007402C(D_800F8514);
+    D_800F8510 = &D_802A6B40[gTrackIndex];
+    func_8007402C(gTrackIndex);
     func_800747EC(D_8010B7B0[0].unk_002);
     func_8009CED0(D_8010B7B0[0].unk_002);
     func_80074634(D_800F8510);
@@ -1418,8 +1418,8 @@ extern f32 D_800CF524;
 void func_800A4EAC(void) {
     unk_8006FC8C* var_v0;
 
-    if (D_800F8514 >= ARRAY_COUNT(D_802A6B40)) {
-        D_800F8514 = ARRAY_COUNT(D_802A6B40) - 1;
+    if (gTrackIndex >= ARRAY_COUNT(D_802A6B40)) {
+        gTrackIndex = ARRAY_COUNT(D_802A6B40) - 1;
     }
     if (gNumPlayers >= 3) {
         func_800A4D0C(2);
@@ -1429,7 +1429,7 @@ void func_800A4EAC(void) {
     func_800A4DF0();
     func_80073A04();
     func_8009F508(D_800F8510);
-    func_800741DC(D_800F8514);
+    func_800741DC(gTrackIndex);
     func_8009F3E0(D_800F8510);
     func_800A0010(D_800F8510);
     func_8009FC84(D_800F8510);

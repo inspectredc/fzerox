@@ -6,7 +6,8 @@
 typedef struct unk_8013E7A8 {
     s16 unk_00;
     s8 unk_02;
-    s8 unk_03[11];
+    s8 unk_03[3];
+    s8 unk_06[8];
 } unk_8013E7A8; // size = 0xE
 
 typedef struct CourseBackgroundFloor {
@@ -85,10 +86,10 @@ typedef struct unk_80142248 {
 } unk_80142248; // size = 0x24
 
 typedef struct unk_80142320 {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02;
-    u8 unk_03;
+    u8 red;
+    u8 green;
+    u8 blue;
+    u8 alpha;
     s8 unk_04[4];
     f32 unk_08;
     f32 unk_0C;

@@ -4,7 +4,7 @@
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B1E0.h"
 
-s16 D_i6_8011F910[240];
+s16 D_i6_8011F910[SCREEN_HEIGHT];
 
 // UNUSED?
 UNUSED unk_8011DC40 D_i6_8011DC40 = { 1.0f, 1.0f, 32, 12, 0, 2, 17, 20 };
@@ -19,32 +19,33 @@ s32 D_i6_8011DC6C = 180;
  */
 
 // GP RACE
-unk_80077D50 D_i6_8011DC70[] = { { 17, D_F129C54, 64, 86, 0xF57 }, { 0 } };
+unk_80077D50 sMenuSignGpRaceCompTexInfo[] = { { 17, aMenuSignGpRaceTex, 64, 86, 0xF57 }, { 0 } };
 
 // TIME ATTACK
-unk_80077D50 D_i6_8011DC90[] = { { 17, D_F12ABB0, 64, 86, 0x1049 }, { 0 } };
+unk_80077D50 sMenuSignTimeAttackCompTexInfo[] = { { 17, aMenuSignTimeAttackTex, 64, 86, 0x1049 }, { 0 } };
 
 // VS BATTLE
-unk_80077D50 D_i6_8011DCB0[] = { { 17, D_F12BC00, 64, 86, 0xF98 }, { 0 } };
+unk_80077D50 sMenuSignVsBattleCompTexInfo[] = { { 17, aMenuSignVsBattleTex, 64, 86, 0xF98 }, { 0 } };
 
 // PRACTICE
-unk_80077D50 D_i6_8011DCD0[] = { { 17, D_F12CB9C, 64, 86, 0xF76 }, { 0 } };
+unk_80077D50 sMenuSignPracticeCompTexInfo[] = { { 17, aMenuSignPracticeTex, 64, 86, 0xF76 }, { 0 } };
 
 // DEATH RACE
-unk_80077D50 D_i6_8011DCF0[] = { { 17, D_F12DB18, 64, 86, 0xE83 }, { 0 } };
+unk_80077D50 sMenuSignDeathRaceCompTexInfo[] = { { 17, aMenuSignDeathRaceTex, 64, 86, 0xE83 }, { 0 } };
 
 // OPTIONS
-unk_80077D50 D_i6_8011DD10[] = { { 17, D_F12E9A0, 64, 86, 0xF8F }, { 0 } };
+unk_80077D50 sMenuSignOptionsCompTexInfo[] = { { 17, aMenuSignOptionsTex, 64, 86, 0xF8F }, { 0 } };
 
 // COURSE EDIT
-unk_80077D50 D_i6_8011DD30[] = { { 17, D_F12F934, 64, 86, 0x1016 }, { 0 } };
+unk_80077D50 sMenuSignCourseEditCompTexInfo[] = { { 17, aMenuSignCourseEditTex, 64, 86, 0x1016 }, { 0 } };
 
 // CREATE MACHINE
-unk_80077D50 D_i6_8011DD50[] = { { 17, D_F130950, 64, 86, 0x1012 }, { 0 } };
+unk_80077D50 sMenuSignCreateMachineCompTexInfo[] = { { 17, aMenuSignCreateMachineTex, 64, 86, 0x1012 }, { 0 } };
 
-unk_80077D50* D_i6_8011DD70[] = {
-    D_i6_8011DC70, D_i6_8011DC90, D_i6_8011DCF0, D_i6_8011DCB0,
-    D_i6_8011DD30, D_i6_8011DCD0, D_i6_8011DD10, D_i6_8011DD50,
+unk_80077D50* sMenuSignCompTexInfos[] = {
+    sMenuSignGpRaceCompTexInfo,   sMenuSignTimeAttackCompTexInfo,    sMenuSignDeathRaceCompTexInfo,
+    sMenuSignVsBattleCompTexInfo, sMenuSignCourseEditCompTexInfo,    sMenuSignPracticeCompTexInfo,
+    sMenuSignOptionsCompTexInfo,  sMenuSignCreateMachineCompTexInfo,
 };
 
 /*
@@ -52,77 +53,78 @@ unk_80077D50* D_i6_8011DD70[] = {
  */
 
 // TITLE SCREEN BACKGROUND
-unk_80077D50 D_i6_8011DD90[] = { { 17, D_F000004, 304, 240, 0x14A5D }, { 0 } };
+static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = { { 17, aTitleBackgroundMainTex, 304, 240, 0x14A5D }, { 0 } };
 
 // COMIC STRIP
-unk_80077D50 D_i6_8011DDB0[] = { { 17, D_F014A68, 320, 240, 0x118DB }, { 0 } };
+static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = { { 17, aTitleBackgroundComicTex, 320, 240, 0x118DB }, { 0 } };
 
 // BLUE FALCON, SEMI-TRANSPARENT
-unk_80077D50 D_i6_8011DDD0[] = { { 17, D_F026348, 320, 240, 0x9E0A }, { 0 } };
+static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = { { 17, aTitleBackgroundFalconTex, 320, 240, 0x9E0A },
+                                                            { 0 } };
 
-unk_80077D50* D_i6_8011DDF0[] = {
-    D_i6_8011DD90,
-    D_i6_8011DDB0,
-    D_i6_8011DDD0,
+static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
+    sTitleBackgroundMainCompTexInfo,
+    sTitleBackgroundComicCompTexInfo,
+    sTitleBackgroundFalconCompTexInfo,
 };
 
 /*
     MENU SECOND OPTIONS
  */
 
-// REMOVED?
-unk_80077D50 D_i6_8011DDFC[] = { { 4, D_F134760, 128, 24, 0 }, { 0 } };
+// SELECT MODE
+unk_80077D50 sSelectModeCompTexInfo[] = { { 4, aSelectModeTex, 128, 24, 0 }, { 0 } };
 
 // FLAMES
-unk_80077D50 D_i6_8011DE1C[] = { { 17, D_F131968, 128, 80, 0x2A0E }, { 0 } };
+unk_80077D50 sSelectModeOptionFlamesCompTexInfo[] = { { 17, aSelectModeOptionFlamesTex, 128, 80, 0x2A0E }, { 0 } };
 
 // NOVICE
-unk_80077D50 D_i6_8011DE3C[] = { { 17, D_F134D64, 64, 18, 0x144 }, { 0 } };
+static unk_80077D50 sNoviceCompTexInfo[] = { { 17, aNoviceTex, 64, 18, 0x144 }, { 0 } };
 
 // STANDARD
-unk_80077D50 D_i6_8011DE5C[] = { { 17, D_F134EAC, 64, 18, 0x14C }, { 0 } };
+static unk_80077D50 sStandardCompTexInfo[] = { { 17, aStandardTex, 64, 18, 0x14C }, { 0 } };
 
 // EXPERT
-unk_80077D50 D_i6_8011DE7C[] = { { 17, D_F134FFC, 64, 18, 0x149 }, { 0 } };
+static unk_80077D50 sExpertCompTexInfo[] = { { 17, aExpertTex, 64, 18, 0x149 }, { 0 } };
 
 // MASTER
-unk_80077D50 D_i6_8011DE9C[] = { { 17, D_F13514C, 64, 18, 0x14E }, { 0 } };
+static unk_80077D50 sMasterCompTexInfo[] = { { 17, aMasterTex, 64, 18, 0x14E }, { 0 } };
 
 // 2 PLAYERS
-unk_80077D50 D_i6_8011DEBC[] = { { 17, D_F13437C, 64, 18, 0x146 }, { 0 } };
+unk_80077D50 s2PlayersCompTexInfo[] = { { 17, a2PlayersTex, 64, 18, 0x146 }, { 0 } };
 
 // 3 PLAYERS
-unk_80077D50 D_i6_8011DEDC[] = { { 17, D_F1344C8, 64, 18, 0x142 }, { 0 } };
+unk_80077D50 s3PlayersCompTexInfo[] = { { 17, a3PlayersTex, 64, 18, 0x142 }, { 0 } };
 
 // 4 PLAYERS
-unk_80077D50 D_i6_8011DEFC[] = { { 17, D_F134610, 64, 18, 0x143 }, { 0 } };
+unk_80077D50 s4PlayersCompTexInfo[] = { { 17, a4PlayersTex, 64, 18, 0x143 }, { 0 } };
 
 // TIME ATTACK
-unk_80077D50 D_i6_8011DF1C[] = { { 18, D_F1352A0, 88, 18, 0x1B1 }, { 0 } };
+unk_80077D50 sTimeAttackCompTexInfo[] = { { 18, aTimeAttackTex, 88, 18, 0x1B1 }, { 0 } };
 
 // RECORDS
-unk_80077D50 D_i6_8011DF3C[] = { { 17, D_F135458, 64, 18, 0x149 }, { 0 } };
+unk_80077D50 sRecordsOptionCompTexInfo[] = { { 17, aRecordsOptionTex, 64, 18, 0x149 }, { 0 } };
 
-unk_80077D50* D_i6_8011DF5C[] = {
-    D_i6_8011DE3C,
-    D_i6_8011DE5C,
-    D_i6_8011DE7C,
-    D_i6_8011DE9C,
+static unk_80077D50* sDifficultyCompTexInfos[] = {
+    sNoviceCompTexInfo,
+    sStandardCompTexInfo,
+    sExpertCompTexInfo,
+    sMasterCompTexInfo,
 };
 
-unk_80077D50* D_i6_8011DF6C[] = {
-    D_i6_8011DEBC,
-    D_i6_8011DEDC,
-    D_i6_8011DEFC,
+unk_80077D50* sNumPlayersCompTexInfos[] = {
+    s2PlayersCompTexInfo,
+    s3PlayersCompTexInfo,
+    s4PlayersCompTexInfo,
 };
 
-unk_80077D50* D_i6_8011DF78[] = {
-    D_i6_8011DF1C,
-    D_i6_8011DF3C,
+unk_80077D50* sTimeAttackModeCompTexInfos[] = {
+    sTimeAttackCompTexInfo,
+    sRecordsOptionCompTexInfo,
 };
 
 // 'OK?'
-unk_80077D50 D_i6_8011DF80[] = { { 17, D_F139710, 32, 16, 0x112 }, { 0 } };
+static unk_80077D50 sOkCompTexInfo[] = { { 17, aOKTex, 32, 16, 0x112 }, { 0 } };
 
 extern u32 gGameFrameCount;
 extern s16 D_800CCFE8;
@@ -164,7 +166,7 @@ void func_i6_80115DF0(void) {
 
 extern unk_800DCE48 D_800DCE48;
 extern s32 D_800CD388[];
-extern char* D_800E4180[];
+extern char* gTrackNames[];
 
 extern s32 gNumPlayers;
 extern s32 gDifficulty;
@@ -178,8 +180,8 @@ extern Controller D_800DD180;
 extern s32 D_800DD228;
 extern u16 D_800E416C;
 extern u16 D_800E416E;
-extern char* D_800E4178;
-extern s32 D_800F8514;
+extern char* gCurrentTrackName;
+extern s32 gTrackIndex;
 extern s32 D_i2_80106DA4;
 
 s32 func_i6_80115FF0(void) {
@@ -255,8 +257,8 @@ s32 func_i6_80115FF0(void) {
                         break;
                     case 2:
                         D_800CD384 = 5;
-                        D_800F8514 = 0x36;
-                        D_800E4178 = D_800E4180[D_800F8514];
+                        gTrackIndex = 54;
+                        gCurrentTrackName = gTrackNames[gTrackIndex];
                         gNumPlayers = 1;
                         func_800BB324(gNumPlayers - 1);
                         gDifficulty = D_800DCE48.unk_10 + 3;
@@ -432,7 +434,7 @@ void func_i6_801167EC(unk_800E3A28* arg0) {
     s32 i;
 
     arg0->unk_04 = D_800CD3C4;
-    func_80077D50(D_i6_8011DDF0[arg0->unk_04], 0);
+    func_80077D50(sTitleBackgroundCompTexInfos[arg0->unk_04], 0);
 
     switch (arg0->unk_04) {
         case 0:
@@ -443,7 +445,7 @@ void func_i6_801167EC(unk_800E3A28* arg0) {
                 D_i6_8011F910[i] = 0;
             }
 
-            func_80077D50(D_i6_8011DDF0[2], 0);
+            func_80077D50(sTitleBackgroundCompTexInfos[2], 0);
             break;
     }
 }
@@ -453,7 +455,7 @@ extern s16 D_800CD044;
 void func_i6_80116894(unk_800E3A28* arg0) {
     s32 index = arg0->unk_00 - 0x51;
 
-    func_80077D50(D_i6_8011DD70[index], 0);
+    func_80077D50(sMenuSignCompTexInfos[index], 0);
     if (D_800CD044 == 0x21) {
         arg0->unk_1C = 0xC;
     }
@@ -461,7 +463,7 @@ void func_i6_80116894(unk_800E3A28* arg0) {
 
 void func_i6_801168EC(unk_800E3A28* arg0) {
 
-    func_80077D50(D_i6_8011DDFC, 0);
+    func_80077D50(sSelectModeCompTexInfo, 0);
     if (D_800CD044 == 0x21) {
         arg0->unk_1C = 0xC;
     }
@@ -470,35 +472,35 @@ void func_i6_801168EC(unk_800E3A28* arg0) {
 void func_i6_80116934(void) {
     s32 i;
 
-    func_80077D50(D_i6_8011DE1C, 0);
+    func_80077D50(sSelectModeOptionFlamesCompTexInfo, 0);
 
     for (i = 0; i < 3; i++) {
-        func_80077D50(D_i6_8011DF6C[i], 0);
+        func_80077D50(sNumPlayersCompTexInfos[i], 0);
     }
 }
 
 void func_i6_80116990(void) {
     s32 i;
 
-    func_80077D50(D_i6_8011DE1C, 0);
+    func_80077D50(sSelectModeOptionFlamesCompTexInfo, 0);
 
     for (i = 0; i < 4; i++) {
-        func_80077D50(D_i6_8011DF5C[i], 0);
+        func_80077D50(sDifficultyCompTexInfos[i], 0);
     }
 }
 
 void func_i6_801169EC(void) {
     s32 i;
 
-    func_80077D50(D_i6_8011DE1C, 0);
+    func_80077D50(sSelectModeOptionFlamesCompTexInfo, 0);
 
     for (i = 0; i < 2; i++) {
-        func_80077D50(D_i6_8011DF78[i], 0);
+        func_80077D50(sTimeAttackModeCompTexInfos[i], 0);
     }
 }
 
 void func_i6_80116A48(unk_800E3A28* arg0) {
-    func_80077D50(D_i6_8011DF80, 0);
+    func_80077D50(sOkCompTexInfo, 0);
     arg0->unk_0C = 0x32;
 }
 
@@ -560,7 +562,7 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
     temp1 = (((temp_t0 % 4) << 6) - (SQ(arg1->unk_1C) * 2)) + 0x20;
     temp2 = ((temp_t0 / 4) * 0x5B) + 0x26;
 
-    return func_80078EA0(gfx, D_i6_8011DD70[temp_t0], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sMenuSignCompTexInfos[temp_t0], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
 }
 
 extern f32 D_800DD230[];
@@ -579,15 +581,15 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
     unk_80077D50* var_ra;
 
     if (arg1->unk_04 < 3) {
-        sp44 = D_i6_8011DDF0[arg1->unk_04];
+        sp44 = sTitleBackgroundCompTexInfos[arg1->unk_04];
         gfx = func_80078EA0(gfx, sp44, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
         gfx = func_8007A440(gfx, arg1->unk_0C, arg1->unk_10, arg1->unk_0C + sp44->width, arg1->unk_10 + sp44->height,
                             D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68, D_i6_8011DC6C);
     } else {
-        sp44 = D_i6_8011DDF0[D_800CD3C4];
+        sp44 = sTitleBackgroundCompTexInfos[D_800CD3C4];
         gfx = func_80078EA0(gfx, sp44, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
         var_t1 = (arg1->unk_04 / 10);
-        var_ra = D_i6_8011DDF0[var_t1 - 1];
+        var_ra = sTitleBackgroundCompTexInfos[var_t1 - 1];
 
         texture = func_800783AC(var_ra->unk_04);
 
@@ -643,9 +645,10 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
                 case 10:
                 case 20:
                     if (var_t1 < arg1->unk_1C) {
+                        // alpha variable re-used with different purpose here
                         alpha = SQ(arg1->unk_1C - var_t1) / 32;
-                        if (alpha > 320) {
-                            alpha = 320;
+                        if (alpha > SCREEN_WIDTH) {
+                            alpha = SCREEN_WIDTH;
                         }
                         D_i6_8011F910[var_t1] = alpha;
                     } else {
@@ -691,7 +694,7 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
         switch (arg1->unk_04) {
             case 10:
             case 20:
-                if (D_i6_8011F910[239] >= 0x140) {
+                if (D_i6_8011F910[SCREEN_HEIGHT - 1] >= SCREEN_WIDTH) {
                     arg1->unk_04 = D_800CD3C4;
                 }
                 break;
@@ -737,7 +740,7 @@ Gfx* func_i6_80117400(Gfx* gfx, unk_800E3A28* arg1) {
 
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return func_80078EA0(gfx, D_i6_8011DDFC, arg1->unk_0C - temp, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sSelectModeCompTexInfo, arg1->unk_0C - temp, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
@@ -770,7 +773,8 @@ Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
             break;
     }
     temp_s7 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, D_i6_8011DE1C, arg1->unk_0C - temp_s7, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->unk_0C - temp_s7, arg1->unk_10, 0, 0, 0, 1.0f,
+                        1.0f);
 
     for (i = 0; i < 3; i++) {
         if (D_800CD388[D_800CD380] == i) {
@@ -791,8 +795,8 @@ Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
             }
         }
-        gfx = func_80078EA0(gfx, D_i6_8011DF6C[i], (arg1->unk_0C - temp_s7) + 0x20, arg1->unk_10 + (i * 20) + 0xC, 1, 0,
-                            0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sNumPlayersCompTexInfos[i], (arg1->unk_0C - temp_s7) + 0x20,
+                            arg1->unk_10 + (i * 20) + 0xC, 1, 0, 0, 1.0f, 1.0f);
     }
 
     if (D_800CD384 != 2) {
@@ -835,7 +839,8 @@ Gfx* func_i6_80117760(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     temp_s6 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, D_i6_8011DE1C, arg1->unk_0C - temp_s6, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->unk_0C - temp_s6, arg1->unk_10, 0, 0, 0, 1.0f,
+                        1.0f);
 
     for (i = 0; i < 4; i++) {
         if (D_800CD388[D_800CD380] == i) {
@@ -854,12 +859,12 @@ Gfx* func_i6_80117760(Gfx* gfx, unk_800E3A28* arg1) {
         }
         if ((D_800CD3C0 < 2) && (D_800CD3C8 == 0)) {
             if (i < 3) {
-                gfx = func_80078EA0(gfx, D_i6_8011DF5C[i], (arg1->unk_0C - temp_s6) + 0x20,
+                gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (arg1->unk_0C - temp_s6) + 0x20,
                                     arg1->unk_10 + (i * 20) + 0xE, 1, 0, 0, 1.0f, 1.0f);
             }
         } else {
-            gfx = func_80078EA0(gfx, D_i6_8011DF5C[i], (arg1->unk_0C - temp_s6) + 0x20, arg1->unk_10 + (i * 18) + 7, 1,
-                                0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (arg1->unk_0C - temp_s6) + 0x20,
+                                arg1->unk_10 + (i * 18) + 7, 1, 0, 0, 1.0f, 1.0f);
         }
     }
 
@@ -897,7 +902,8 @@ Gfx* func_i6_80117A18(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     temp_s7 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, D_i6_8011DE1C, arg1->unk_0C - temp_s7, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->unk_0C - temp_s7, arg1->unk_10, 0, 0, 0, 1.0f,
+                        1.0f);
 
     for (i = 0; i < 2; i++) {
         if (D_800CD388[1] == i) {
@@ -914,7 +920,7 @@ Gfx* func_i6_80117A18(Gfx* gfx, unk_800E3A28* arg1) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
-        temp_a1 = D_i6_8011DF78[i];
+        temp_a1 = sTimeAttackModeCompTexInfos[i];
         gfx = func_80078EA0(gfx, temp_a1, (((s32) (0x80 - temp_a1->width) / 2) + arg1->unk_0C) - temp_s7,
                             arg1->unk_10 + (i * 28) + 0x15, 1, 0, 0, 1.0f, 1.0f);
     }
@@ -931,11 +937,11 @@ Gfx* func_i6_80117C50(Gfx* gfx, unk_800E3A28* arg1) {
         case 4:
         case 5:
             gfx = func_8007DB28(gfx, 1);
-            gfx = func_80078EA0(gfx, D_i6_8011DF80, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sOkCompTexInfo, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
             break;
         default:
             gfx = func_8007DB28(gfx, 0);
-            gfx = func_80078EA0(gfx, D_i6_8011DF80, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sOkCompTexInfo, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
             break;
     }
     return gfx;

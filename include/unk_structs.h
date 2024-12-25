@@ -43,7 +43,7 @@ typedef struct unk_800F8510 {
     f32 unk_0C;
     unk_8006FC8C* unk_10;
     s16 unk_14[6];
-    s32 unk_20[5];
+    s32 timeRecord[5];
     u8 unk_34[5][20];
     f32 unk_98[5];
     u8 unk_AC[5][4];
@@ -331,7 +331,7 @@ typedef struct Racer {
     Vec3f unk_80;
     s8 unk_8C[0xC];
     f32 unk_98;
-    f32 unk_9C;
+    f32 maxSpeed;
     f32 unk_A0;
     f32 unk_A4;
     Vec3f unk_A8;
@@ -407,7 +407,7 @@ typedef struct Racer {
     struct Racer* unk_28C;
     s32 lapTimes[3];
     s32 unk_29C;
-    s32 unk_2A0;
+    s32 raceTime;
     s32 unk_2A4;
     s16 lap;
     s16 unk_2AA;
@@ -676,14 +676,14 @@ typedef struct unk_8012F450 {
     /* 0x08 */ f32 minuteFraction;
 } unk_8012F450; // size = 0xC
 
-typedef struct unk_800E4268 {
-    s32 unk_00;
-    f32 unk_04;
-    s16 unk_08;
+typedef struct RaceStats {
+    s32 raceTime;
+    f32 maxSpeed;
+    s16 position;
     s16 unk_0A;
-    s16 unk_0C;
+    s16 racersKOd;
     s8 unk_0E[0x2];
-} unk_800E4268; // size = 0x10
+} RaceStats; // size = 0x10
 
 typedef struct unk_80141C88_unk_1D {
     u8 unk_00[20];
@@ -841,5 +841,11 @@ typedef struct unk_800CF1B0 {
     s8 unk_11[3];
     s16 unk_14;
 } unk_800CF1B0; // size = 0x16
+
+typedef struct unk_80225800 {
+    Mtx unk_000;
+    Vtx unk_040[4][6];
+    Vtx unk_1C0[48][5];
+} unk_80225800; // size = 0x10C0
 
 #endif // UNK_STRUCTS_H

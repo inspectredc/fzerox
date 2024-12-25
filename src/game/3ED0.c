@@ -252,53 +252,53 @@ s32 func_8006AC10(Mtx3F* mtx) {
     return 0;
 }
 
-void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* arg3, s32* arg4, s32* arg5) {
+void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* red, s32* green, s32* blue) {
     s32 temp_lo;
     s32 temp_t0;
     s32 var_v1;
 
     if ((arg0 >> 8) & 1) {
-        var_v1 = 0xFF - (arg0 & 0xFF);
+        var_v1 = 255 - (arg0 & 255);
     } else {
-        var_v1 = arg0 & 0xFF;
+        var_v1 = arg0 & 255;
     }
     switch (arg0 >> 8) {
         case 0:
-            *arg3 = 0xFF;
-            *arg4 = var_v1;
-            *arg5 = 0;
+            *red = 255;
+            *green = var_v1;
+            *blue = 0;
             break;
         case 1:
-            *arg3 = var_v1;
-            *arg4 = 0xFF;
-            *arg5 = 0;
+            *red = var_v1;
+            *green = 255;
+            *blue = 0;
             break;
         case 2:
-            *arg3 = 0;
-            *arg4 = 0xFF;
-            *arg5 = var_v1;
+            *red = 0;
+            *green = 255;
+            *blue = var_v1;
             break;
         case 3:
-            *arg3 = 0;
-            *arg4 = var_v1;
-            *arg5 = 0xFF;
+            *red = 0;
+            *green = var_v1;
+            *blue = 255;
             break;
         case 4:
-            *arg3 = var_v1;
-            *arg4 = 0;
-            *arg5 = 0xFF;
+            *red = var_v1;
+            *green = 0;
+            *blue = 255;
             break;
         case 5:
-            *arg3 = 0xFF;
-            *arg4 = 0;
-            *arg5 = var_v1;
+            *red = 255;
+            *green = 0;
+            *blue = var_v1;
             break;
     }
     temp_lo = arg1 * arg2;
-    temp_t0 = (arg2 * 0xFE01) - (temp_lo * 0xFF);
-    *arg3 = (s32) ((*arg3 * temp_lo) + temp_t0) / 65025;
-    *arg4 = (s32) ((*arg4 * temp_lo) + temp_t0) / 65025;
-    *arg5 = (s32) ((*arg5 * temp_lo) + temp_t0) / 65025;
+    temp_t0 = (arg2 * SQ(255)) - (temp_lo * 255);
+    *red = (s32) ((*red * temp_lo) + temp_t0) / SQ(255);
+    *green = (s32) ((*green * temp_lo) + temp_t0) / SQ(255);
+    *blue = (s32) ((*blue * temp_lo) + temp_t0) / SQ(255);
 }
 
 void func_8006AFC8(Ambient* arg0, s32 arg1, s32 arg2, s32 arg3) {

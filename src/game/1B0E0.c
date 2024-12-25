@@ -1759,7 +1759,7 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
             if (gGameMode == GAMEMODE_TIME_ATTACK) {
                 if ((D_800CD3CC != 2) && (D_800CD3CC != 3) && (D_800CD3CC != 4)) {
                     arg0->unk_04 = 8;
-                } else if (temp_t0->unk_2A0 < D_80141C78) {
+                } else if (temp_t0->raceTime < D_80141C78) {
                     arg0->unk_04 = 8;
                 } else {
                     arg0->unk_04 = 10;
@@ -2431,7 +2431,7 @@ void func_800892E0(Racer* arg0) {
             D_800E5FC6++;
             if ((gGameMode == GAMEMODE_DEATH_RACE) && (D_800E5EC0 == (D_800E5FC6 + 1))) {
                 gRacers[0].unk_04 |= 0x2800000;
-                gRacers[0].unk_2A0 += Math_Rand2() % 16;
+                gRacers[0].raceTime += Math_Rand2() % 16;
                 D_800E5FBC = 1;
                 gRacers[0].unk_228 = gRacers[0].unk_22C;
                 D_800F5DE8 = D_800E5FBC;
@@ -2642,13 +2642,13 @@ void func_8008A978(void) {
         var_a2 = NULL;
         var_v0 = D_800E5EC4;
         // FAKE
-        if (D_800E5F40) {}
+        if (D_800E5F40[0]) {}
 
         do {
             if (var_v0->position == 0) {
                 if (var_v0->unk_04 & 0x2000000) {
-                    if ((var_a2 == NULL) || (var_v0->unk_2A0 < var_a3)) {
-                        var_a3 = var_v0->unk_2A0;
+                    if ((var_a2 == NULL) || (var_v0->raceTime < var_a3)) {
+                        var_a3 = var_v0->raceTime;
                         var_a2 = var_v0;
                     }
                 } else if ((var_a1 == NULL) || (var_v0->unk_248 < var_fv0)) {
@@ -2693,13 +2693,13 @@ void func_8008AA8C(void) {
         }
 
         if (var_s0->unk_04 & 0x8000000) {
-            var_s0->unk_2A0 = 0;
+            var_s0->raceTime = 0;
         } else if (var_s0->unk_04 & 0x80000) {
             var_s0->unk_04 &= ~0x40000000;
             var_s0->unk_04 |= 0x8000000;
             D_800E5FC0++;
             func_800892E0(var_s0);
-            var_s0->unk_2A0 = 0;
+            var_s0->raceTime = 0;
         } else {
             var_s0->unk_04 |= 0x2000000;
             var_a0 = 0;
@@ -2712,8 +2712,8 @@ void func_8008AA8C(void) {
                 var_a1 = 0;
             }
 
-            var_s0->unk_2A0 =
-                (s32) (((var_s0->unk_2A0 - var_a1) * gTotalLapCount) * D_800F8510->unk_0C / var_s0->unk_23C) + var_a1;
+            var_s0->raceTime =
+                (s32) (((var_s0->raceTime - var_a1) * gTotalLapCount) * D_800F8510->unk_0C / var_s0->unk_23C) + var_a1;
 
             var_a1 = 0;
             var_a0 = 0;
@@ -2732,7 +2732,7 @@ void func_8008AA8C(void) {
             }
 
             while (var_a0 < gTotalLapCount) {
-                var_s0->lapTimes[var_a0] = (var_s0->unk_2A0 - var_a1) / (gTotalLapCount - var_a0);
+                var_s0->lapTimes[var_a0] = (var_s0->raceTime - var_a1) / (gTotalLapCount - var_a0);
                 var_a1 += var_s0->lapTimes[var_a0];
                 var_a0++;
             }
@@ -2742,7 +2742,7 @@ void func_8008AA8C(void) {
     if ((gGameMode == GAMEMODE_GP_RACE) && (gRacers[0].unk_04 & 0x2000000)) {
         var_v1 = D_800E5EC0 - 1;
         while (var_v1 >= 0) {
-            if (D_800E5F40[var_v1]->unk_2A0 != 0) {
+            if (D_800E5F40[var_v1]->raceTime != 0) {
                 break;
             }
             var_v1--;
@@ -2765,7 +2765,142 @@ typedef struct unk_800F5EA0 {
 } unk_800F5EA0; // size = 0x14
 extern unk_800F5EA0 D_800F5EA0[];
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_8008AD38.s")
+void func_8008AD38(void) {
+    Racer* var_a0;
+    Racer* var_a1;
+    f32 var_fv0;
+    f32 var_fv1;
+    Racer* sp14;
+    f32 temp_fv1;
+    f32 temp_fv0;
+    s32 temp_a2;
+    u32 i;
+    unk_800F5EA0* var_v1;
+
+    if (D_800E5EC0 < 2) {
+        gRacers[0].unk_2B8 = gRacers[0].unk_2BC = NULL;
+        gRacers[0].unk_2C0 = gRacers[0].unk_2C4 = D_800F8510->unk_0C;
+        return;
+    }
+
+    temp_fv0 = D_800F8510->unk_0C * 0.5f;
+    var_v1 = &D_800F5EA0[((s32) (D_800E5EC0 * (D_800E5EC0 - 1)) >> 1) - 1];
+    var_a0 = D_800E5EC4;
+
+    do {
+        var_a1 = var_a0 - 1;
+        do {
+            temp_fv1 = var_a1->unk_244 - var_a0->unk_244;
+            if (temp_fv1 < 0.0f) {
+                temp_fv1 = -temp_fv1;
+                if (temp_fv1 < temp_fv0) {
+                    var_v1->unk_00 = var_a0;
+                    var_v1->unk_04 = var_a1;
+                    var_v1->unk_08 = temp_fv1;
+                    var_v1->unk_0C = D_800F8510->unk_0C - temp_fv1;
+                } else {
+                    var_v1->unk_00 = var_a1;
+                    var_v1->unk_04 = var_a0;
+                    var_v1->unk_08 = D_800F8510->unk_0C - temp_fv1;
+                    var_v1->unk_0C = temp_fv1;
+                }
+            } else if (temp_fv1 < temp_fv0) {
+                var_v1->unk_00 = var_a1;
+                var_v1->unk_04 = var_a0;
+                var_v1->unk_08 = temp_fv1;
+                var_v1->unk_0C = D_800F8510->unk_0C - temp_fv1;
+            } else {
+                var_v1->unk_00 = var_a0;
+                var_v1->unk_04 = var_a1;
+                var_v1->unk_08 = D_800F8510->unk_0C - temp_fv1;
+                var_v1->unk_0C = temp_fv1;
+            }
+            var_a1--;
+            var_v1--;
+        } while (var_a1 >= gRacers);
+        var_a0--;
+    } while (var_a0 > gRacers);
+
+    var_a0 = D_800E5EC4;
+    temp_a2 = (s32) (var_a0->id * (var_a0->id - 1)) >> 1;
+
+    var_fv0 = D_800F8510->unk_0C + 10.0f;
+
+    for (var_a1 = var_a0 - 1; var_a1 >= gRacers; var_a1--) {
+
+        var_a1->unk_2B8 = NULL;
+        var_v1 = &D_800F5EA0[temp_a2 + var_a1->id];
+        if (var_a1 == var_v1->unk_04) {
+            var_fv1 = var_v1->unk_08;
+        } else {
+            var_fv1 = var_v1->unk_0C;
+        }
+        if (var_fv1 < var_fv0) {
+            var_fv0 = var_fv1;
+            sp14 = var_a1;
+        }
+    }
+
+    var_a0->unk_2BC = sp14;
+    sp14->unk_2B8 = var_a0;
+    sp14->unk_2C0 = var_fv0;
+    var_a0->unk_2C4 = var_fv0;
+
+    for (i = D_800E5EC0 - 2; i > 0; i--) {
+        var_a0 = sp14;
+        var_fv0 = D_800F8510->unk_0C + 10.0f;
+        temp_a2 = (s32) (sp14->id * (sp14->id - 1)) >> 1;
+
+        for (var_a1 = gRacers; var_a1 < var_a0; var_a1++) {
+            if (var_a1->unk_2B8 == NULL) {
+                var_v1 = &D_800F5EA0[temp_a2 + var_a1->id];
+                if (var_a1 == var_v1->unk_04) {
+                    var_fv1 = var_v1->unk_08;
+                } else {
+                    var_fv1 = var_v1->unk_0C;
+                }
+                if (var_fv1 < var_fv0) {
+                    var_fv0 = var_fv1;
+                    sp14 = var_a1;
+                }
+            }
+        }
+
+        for (var_a1 = var_a1 + 1; var_a1 < D_800E5EC4; var_a1++) {
+            if (var_a1->unk_2B8 != NULL) {
+                continue;
+            }
+
+            temp_a2 = var_a1->id;
+            var_v1 = &D_800F5EA0[((s32) (temp_a2 * (temp_a2 - 1)) >> 1) + var_a0->id];
+            if (var_a1 == var_v1->unk_04) {
+                var_fv1 = var_v1->unk_08;
+            } else {
+                var_fv1 = var_v1->unk_0C;
+            }
+            if (var_fv1 < var_fv0) {
+                var_fv0 = var_fv1;
+                sp14 = var_a1;
+            }
+        }
+        var_a0->unk_2BC = sp14;
+        sp14->unk_2B8 = var_a0;
+        sp14->unk_2C0 = var_fv0;
+        var_a0->unk_2C4 = var_fv0;
+    }
+
+    var_a0 = D_800E5EC4;
+    sp14->unk_2BC = var_a0;
+    var_a0->unk_2B8 = sp14;
+    var_v1 = &D_800F5EA0[((s32) (var_a0->id * (var_a0->id - 1)) >> 1) + sp14->id];
+    if (sp14 == var_v1->unk_00) {
+        var_fv0 = var_v1->unk_08;
+    } else {
+        var_fv0 = var_v1->unk_0C;
+    }
+    var_a0->unk_2C0 = var_fv0;
+    sp14->unk_2C4 = var_fv0;
+}
 
 extern s32 D_800E5EC0;
 extern s32 D_800E5FB8;
@@ -2827,10 +2962,10 @@ extern f32 D_800CF160[];
 extern f32 D_800CE778;
 extern s16 D_800CE77C;
 extern f32 D_800F80A4;
-#ifdef NON_MATCHING
-// float literals loading into wrong registers
+
 void func_8008C14C(Racer* arg0) {
-    s32 pad[8];
+    s32 pad[7];
+    f32 temp;
     f32 temp_fv0_4;
     f32 var_fs0;
     s32 i;
@@ -2897,10 +3032,10 @@ void func_8008C14C(Racer* arg0) {
     arg0->unk_28C = NULL;
     arg0->unk_08 = 0x8000;
     arg0->unk_2B0 = arg0->unk_288 = arg0->unk_278 = arg0->unk_27A = arg0->unk_27C = arg0->unk_220 = arg0->unk_21C =
-        arg0->unk_29C = arg0->unk_2A0 = arg0->lap = arg0->unk_204 = arg0->unk_208 = arg0->unk_20C = arg0->unk_218 =
+        arg0->unk_29C = arg0->raceTime = arg0->lap = arg0->unk_204 = arg0->unk_208 = arg0->unk_20C = arg0->unk_218 =
             arg0->unk_214 = arg0->unk_210 = 0;
     arg0->unk_118.x = arg0->unk_118.y = arg0->unk_118.z = arg0->unk_224 = arg0->unk_1DC = arg0->unk_E4 = arg0->unk_238 =
-        arg0->unk_200 = arg0->unk_A0 = arg0->unk_1D4 = arg0->unk_1D8 = arg0->unk_98 = arg0->unk_9C = arg0->unk_198 =
+        arg0->unk_200 = arg0->unk_A0 = arg0->unk_1D4 = arg0->unk_1D8 = arg0->unk_98 = arg0->maxSpeed = arg0->unk_198 =
             arg0->unk_18C.x = arg0->unk_18C.y = arg0->unk_18C.z = arg0->unk_68.x = arg0->unk_68.y = arg0->unk_68.z =
                 arg0->unk_5C.x = arg0->unk_5C.y = arg0->unk_5C.z = arg0->unk_80.x = arg0->unk_80.y = arg0->unk_80.z =
                     arg0->unk_74.x = arg0->unk_74.y = arg0->unk_74.z = var_fs0 = 0.0f;
@@ -2914,7 +3049,9 @@ void func_8008C14C(Racer* arg0) {
     arg0->unk_1F0 = temp_s2->unk_14;
     arg0->unk_1F4 = ((4 - temp_s2->unk_11[0]) * 312.0f) + 780.0f + ((312.0f * (temp_s2->unk_14 - 780.0f)) / 1560.0f);
 
-    arg0->unk_1F4 = SQ(arg0->unk_1F4);
+    // arg0->unk_1F4 = SQ(arg0->unk_1F4);
+    // FAKE
+    arg0->unk_1F4 = arg0->unk_1F4 * (temp = arg0->unk_1F4);
 
     for (i = 0; i < 2;) {
         temp_fv0_4 = func_8008B2D8(arg0, arg0->unk_1A8);
@@ -2941,9 +3078,6 @@ void func_8008C14C(Racer* arg0) {
     arg0->unk_274 = (arg0->unk_0C.unk_08 * (arg0->unk_0C.unk_00->unk_34->unk_1C - arg0->unk_0C.unk_00->unk_1C)) +
                     arg0->unk_0C.unk_00->unk_1C;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_8008C14C.s")
-#endif
 
 #ifdef IMPORT_BSS
 extern s16 D_800CE4D4;
@@ -2962,7 +3096,7 @@ extern s16 D_800E5FC4;
 extern s16 D_800E5FCA;
 extern s16 D_800E5FCC;
 extern s16 D_800E5FCE;
-extern s16 D_800E5FD2;
+extern s16 gRacersKOd;
 extern s32 D_800E5FDC;
 extern s16 D_800E5FE0;
 extern s16 D_800E5FE2;
@@ -3016,7 +3150,7 @@ void func_8008C7C8(void) {
     D_800E5FEC = &D_800CE5D0[D_8010B7B2 * 4];
     D_800E5FDC = 599999;
     D_800F809C = D_800F80A0 = 0.0f;
-    D_800E5FD8 = D_800E5FE0 = D_800E5FD2 = D_800F80C4 = D_800F80B8 = D_800E5FBC = D_800E5FBE = D_800E5FC0 = D_800E5FC2 =
+    D_800E5FD8 = D_800E5FE0 = gRacersKOd = D_800F80C4 = D_800F80B8 = D_800E5FBC = D_800E5FBE = D_800E5FC0 = D_800E5FC2 =
         D_800E5FC4 = D_800E5FC6 = D_800E5FC8 = D_800E5FCA = 0;
     D_800F80BC = D_800F8510->unk_0C * 0.5;
     D_800F80C0 = -D_800F80BC;
@@ -3337,14 +3471,14 @@ void func_8008D7E8(void) {
 }
 
 extern u8 D_800F8504[];
-extern s32 D_800F8514;
+extern s32 gTrackIndex;
 
 void func_8008D824(void) {
     unk_800F8510* sp2C;
     s32 i;
     u8 var;
 
-    sp2C = &D_802A6B40[D_800F8514];
+    sp2C = &D_802A6B40[gTrackIndex];
 
     for (i = 4; i >= 0; i--) {
         D_800F8504[i] = i + 1;
@@ -3420,7 +3554,7 @@ void func_8008DB98(void) {
     func_8008DA68();
 }
 
-extern s16 D_800E5FD2;
+extern s16 gRacersKOd;
 
 void func_8008DBB8(Racer* arg0, s32 arg1) {
     Racer* temp_v0;
@@ -3429,8 +3563,8 @@ void func_8008DBB8(Racer* arg0, s32 arg1) {
         temp_v0 = arg0->unk_28C;
         if ((temp_v0 != NULL) && !(temp_v0->unk_04 & 0x2044000)) {
             D_800E5FD4++;
-            D_800E5FD2++;
-            if ((gGameMode == GAMEMODE_GP_RACE) && (D_800E5FD2 == 5)) {
+            gRacersKOd++;
+            if ((gGameMode == GAMEMODE_GP_RACE) && (gRacersKOd == 5)) {
                 gPlayerLives[0]++;
                 func_i3_80128D8C();
                 func_i3_TriggerLivesIncrease();
@@ -4422,36 +4556,36 @@ extern Gfx* D_800CDDB0[];
 extern u8 D_800F8500[];
 
 Gfx* func_8009CBE8(Gfx* gfx, s32 arg1, s32 red, s32 green, s32 blue) {
-    u8 var_v1;
+    u8 character;
 
     if (arg1 < 6) {
-        var_v1 = D_800F8500[arg1 + 3];
+        character = D_800F8500[arg1 + 3];
     } else if (arg1 == 6) {
-        var_v1 = D_800F8500[9];
+        character = D_800F8500[9];
     } else {
-        var_v1 = D_800F8500[10];
+        character = D_800F8500[10];
     }
 
-    gSPDisplayList(gfx++, D_800CDD38[var_v1]);
+    gSPDisplayList(gfx++, D_800CDD38[character]);
     gDPSetEnvColor(gfx++, red, green, blue, 255);
-    gSPDisplayList(gfx++, D_800CDDB0[var_v1 * 6]);
+    gSPDisplayList(gfx++, D_800CDDB0[character * 6]);
     return gfx;
 }
 
-Gfx* func_8009CCBC(Gfx* gfx, s32 arg1, s32 arg2) {
-    unk_800CF1B0* temp_t0 = &D_800F80C8[arg1];
+Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2) {
+    unk_800CF1B0* temp_t0 = &D_800F80C8[character];
 
-    gSPDisplayList(gfx++, D_800CDD38[arg1]);
+    gSPDisplayList(gfx++, D_800CDD38[character]);
     gDPSetEnvColor(gfx++, temp_t0->unk_04[arg2], temp_t0->unk_08[arg2], temp_t0->unk_0C[arg2], 255);
-    gSPDisplayList(gfx++, D_800CDDB0[arg1 * 6]);
+    gSPDisplayList(gfx++, D_800CDDB0[character * 6]);
     return gfx;
 }
 
 extern Vtx* D_800CDBA4[];
 extern TexturePtr D_800CDC54[];
 
-Gfx* func_8009CD60(Gfx* gfx, s32 arg1) {
-    unk_800CF1B0* temp_v1 = &D_800F80C8[arg1];
+Gfx* func_8009CD60(Gfx* gfx, s32 character) {
+    unk_800CF1B0* temp_v1 = &D_800F80C8[character];
 
     gDPLoadTextureBlock_4b(gfx++, D_800CDC54[temp_v1->unk_02], G_IM_FMT_I, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP,
                            G_TX_MIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
@@ -4461,15 +4595,15 @@ Gfx* func_8009CD60(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-Gfx* func_8009CE70(Gfx* gfx, s32 arg1) {
-    gSPDisplayList(gfx++, D_800CDDB0[arg1 * 6]);
+Gfx* func_8009CE70(Gfx* gfx, s32 character) {
+    gSPDisplayList(gfx++, D_800CDDB0[character * 6]);
     return gfx;
 }
 
 extern Gfx* D_800CDAD8[];
 
-Gfx* func_8009CEA0(Gfx* gfx, s32 arg1) {
-    gSPDisplayList(gfx++, D_800CDAD8[arg1]);
+Gfx* func_8009CEA0(Gfx* gfx, s32 character) {
+    gSPDisplayList(gfx++, D_800CDAD8[character]);
     return gfx;
 }
 

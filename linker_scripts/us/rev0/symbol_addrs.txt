@@ -247,10 +247,13 @@ gTotalLapCount = 0x800CD00C;
 gTotalLives = 0x800CE4DC;
 
 gGameMode = 0x800DCE44;
+gCupRaceStats = 0x800E4268;
 gPlayerLives = 0x800E5ED8;
-D_800E4268 = 0x800E4268;
+gRacersKOd = 0x800E5FD2;
 
 gSkyboxType = 0x800E4260;
 gBackgroundFloorType = 0x800E4264;
+
+gTrackIndex = 0x800F8514;
 
 D_800D4E98 = 0x800D4E98;

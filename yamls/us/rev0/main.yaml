@@ -6,10 +6,18 @@
     type: bin
     start: 0x40
 
+  - name: framebuffer_unused
+    dir: framebuffers
+    type: code
+    vram: 0x80000400
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x80000400, name: framebuffer_unused }
+
   - name: audio_context
     type: code
     vram: 0x80025C00
-    bss_size: 0x57C0
+    bss_size: 0x57D0
     subsegments:
       - { type: .bss, vram: 0x80025C00, name: audio/audio_context }
 
@@ -320,6 +328,43 @@
       - { type: .bss, vram: 0x800FB4D0, name: libultra/io/pfsisplug }
       - { type: .bss, vram: 0x800FB510, name: libultra/io/vimgr }
 
+  - name: framebuffer1
+    type: code
+    dir: framebuffers
+    vram: 0x801D9800
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x801D9800, name: framebuffer1 }
+
+  - name: framebuffer2
+    type: code
+    dir: framebuffers
+    vram: 0x80200000
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x80200000, name: framebuffer2 }
+
+  - name: unk_gfx_segment
+    type: code
+    vram: 0x80225800
+    bss_size: 0x81340
+    subsegments:
+      - { type: .bss, vram: 0x80225800, name: unk_gfx_segment}
+
+  - name: unk_bss_segment
+    type: code
+    vram: 0x80225800
+    bss_size: 0x284C0
+    subsegments:
+      - { type: .bss, vram: 0x80225800, name: unk_bss_segment}
+
+  - name: gfxpool
+    type: code
+    vram: 0x8024DCE0
+    bss_size: 0x58D60
+    subsegments:
+      - { type: .bss, vram: 0x8024DCE0, name: gfxpool}
+
   - name: unk_context
     type: code
     vram: 0x802A6B40
@@ -334,3 +379,11 @@
     bss_size: 0x55000
     subsegments:
       - { type: .bss, vram: 0x802D5C40, name: buffers }
+
+  - name: framebuffer3
+    type: code
+    dir: framebuffers
+    vram: 0x803DA800
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x803DA800, name: framebuffer3 }

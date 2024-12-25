@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ovl_i5.h"
+#include "fzx_game.h"
 #include "assets/segment_17B1E0.h"
 
 void func_i5_80115DF0(void) {
@@ -26,6 +27,7 @@ extern unk_struct_1DC D_800E5220[];
 s32 D_801197B0[8];
 Vtx* D_i5_801197D0;
 
+// Track 3D Models
 Gfx* func_i5_80115E64(Gfx* gfx) {
     s32 i;
 
@@ -34,7 +36,7 @@ Gfx* func_i5_80115E64(Gfx* gfx) {
     gSPSetGeometryMode(gfx++, G_CLIPPING);
     gSPClipRatio(gfx++, FRUSTRATIO_6);
 
-    switch (D_i5_801190C8) {
+    switch (gCupSelectOption) {
         case 0:
             gDPSetPrimColor(gfx++, 0, 0, 192, 64, 64, 255);
             break;
@@ -112,27 +114,27 @@ void func_i5_801164A8(s32 arg0) {
     }
 }
 
-void func_i5_80116658(s32 arg0) {
-    D_i5_801190B0 = arg0;
+void func_i5_80116658(s32 cupType) {
+    D_i5_801190B0 = cupType;
     D_i5_801190B4 = 8;
     D_i5_801190B8 = 0;
 }
 
-void func_i5_80116678(s32 arg0) {
+void func_i5_80116678(s32 cupType) {
 
-    if (arg0 == 4) {
-        func_8007402C(arg0 * 6 + D_i5_801190B8);
-        func_80074634(&D_802A6B40[arg0 * 6 + D_i5_801190B8]);
-        func_8009F508(&D_802A6B40[arg0 * 6 + D_i5_801190B8]);
+    if (cupType == X_CUP) {
+        func_8007402C(cupType * 6 + D_i5_801190B8);
+        func_80074634(&D_802A6B40[cupType * 6 + D_i5_801190B8]);
+        func_8009F508(&D_802A6B40[cupType * 6 + D_i5_801190B8]);
         D_801197B0[D_i5_801190B8] =
-            func_800A2D2C(&D_802A6B40[arg0 * 6 + D_i5_801190B8], &D_i5_801197D0[D_i5_801190B8 * 0xC00]);
+            func_800A2D2C(&D_802A6B40[cupType * 6 + D_i5_801190B8], &D_i5_801197D0[D_i5_801190B8 * 0xC00]);
         D_i5_801190B8++;
     } else {
-        func_8007402C(arg0 * 6 + D_i5_801190B8);
-        func_80074634(&D_802A6B40[arg0 * 6 + D_i5_801190B8]);
-        func_8009F508(&D_802A6B40[arg0 * 6 + D_i5_801190B8]);
+        func_8007402C(cupType * 6 + D_i5_801190B8);
+        func_80074634(&D_802A6B40[cupType * 6 + D_i5_801190B8]);
+        func_8009F508(&D_802A6B40[cupType * 6 + D_i5_801190B8]);
         D_801197B0[D_i5_801190B8] =
-            func_800A2D2C(&D_802A6B40[arg0 * 6 + D_i5_801190B8], &D_i5_801197D0[D_i5_801190B8 * 0xC00]);
+            func_800A2D2C(&D_802A6B40[cupType * 6 + D_i5_801190B8], &D_i5_801197D0[D_i5_801190B8 * 0xC00]);
         D_i5_801190B8++;
     }
 }

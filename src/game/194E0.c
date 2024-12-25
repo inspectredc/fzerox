@@ -4,7 +4,7 @@
 bool D_800CD510 = false;
 s32 gSkyboxType;
 s32 gBackgroundFloorType;
-unk_800E4268 D_800E4268[1][6];
+RaceStats gCupRaceStats[1][6];
 
 void func_8007F4E0(s32 arg0, s32 arg1) {
     D_800CD510 = true;

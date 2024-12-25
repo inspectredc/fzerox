@@ -78,15 +78,15 @@ void func_i3_80139D20(void) {
     func_8006BC84(&D_8024DC80, NULL, 0.7f * D_800CE748, 0.7f * D_800CE74C, 0.7f * D_800CE750, 0.0f, 0.0f, 1.0f, 0.0f,
                   1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
     func_8006B010(&D_8024DCC0, 0, 0, 0, 255, 255, 255, 100, 50, 69);
-    func_80078104(D_F243290, 0x180, 0, 0, 0);
+    func_80078104(aBestTex, 0x180, 0, 0, 0);
 
     if (D_i3_80143780 & 4) {
-        func_80078104(D_F242E10, 0x400, 0, 0, 0);
-        func_80078104(D_F243210, 0x80, 0, 0, 0);
+        func_80078104(aRecordsAccelerationSpeedGraphTex, 0x400, 0, 0, 0);
+        func_80078104(aRecordsAccelerationSpeedSliderTex, 0x80, 0, 0, 0);
     }
     if (D_i3_80143780 & 0x10) {
         func_i3_8013BF18(1);
-        func_80078104(D_F138994, 0x800, 0, 1, 0);
+        func_80078104(aRecordsArrowTex, 0x800, 0, 1, 0);
     }
 }
 
@@ -160,7 +160,7 @@ Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3);
 extern Mtx D_2028480;
 extern Lights0 D_20284C0;
 extern FrameBuffer* D_800DCCD0[];
-extern char* D_800E4180[55];
+extern char* gTrackNames[55];
 extern Gfx D_8014940[];
 extern unk_struct_1DC D_800E5220[];
 extern GfxPool D_1000000;
@@ -171,7 +171,7 @@ extern s16 D_800E5FE2;
 extern s16 D_800E5FE4;
 extern s16 D_800E5FE6;
 
-Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
+Gfx* func_i3_8013A360(Gfx* gfx, s32 trackIndex) {
     unk_800F8510* var_s2;
     s32 sp1A8;
     s32 xl;
@@ -194,7 +194,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         gfx = func_8007A440(gfx, 0xC, 8, 0x134, 0xE8, 0, 0, 0, 0xBF);
     }
     if (D_i3_80143780 & 1) {
-        var = D_800E4180[arg1];
+        var = gTrackNames[trackIndex];
         i = func_i2_801062E4(var, 3, 1);
 
         gfx = func_i3_DrawBeveledBox(gfx, 0x99 - i / 2, 0x15, i / 2 + 0xA7, 0x2B, 0, 0, 0xC8, 0x7F);
@@ -221,22 +221,22 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
             }
             var_s3 = (s32) (10.0f * var_fv0);
 
-            gfx = func_8007B14C(gfx, func_800783AC(D_F138994), (-(i / 2) - var_s3) + 0x76, 16, 32, 32, G_IM_FMT_RGBA,
-                                G_IM_SIZ_16b, 0, 0, 0, 0);
-            gfx = func_8007B14C(gfx, func_800783AC(D_F138994), (i / 2) + var_s3 + 0xAA, 16, 32, 32, G_IM_FMT_RGBA,
-                                G_IM_SIZ_16b, 0, 0, 1, 0);
+            gfx = func_8007B14C(gfx, func_800783AC(aRecordsArrowTex), (-(i / 2) - var_s3) + 0x76, 16, 32, 32,
+                                G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 0, 0);
+            gfx = func_8007B14C(gfx, func_800783AC(aRecordsArrowTex), (i / 2) + var_s3 + 0xAA, 16, 32, 32,
+                                G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 1, 0);
         }
     }
 
     if (D_i3_80143780 & 0x40) {
-        var_s2 = &D_802A6B40[arg1];
+        var_s2 = &D_802A6B40[trackIndex];
         for (i = 0; i < 5; i++) {
             if (i & 1) {
                 var_s3 = -D_i3_80143788;
             } else {
                 var_s3 = D_i3_80143788;
             }
-            if (var_s2->unk_20[i] != MAX_TIMER) {
+            if (var_s2->timeRecord[i] != MAX_TIMER) {
                 xl = func_i2_801062E4(var_s2->unk_AC[i], 1, 1);
                 if (xl > 0) {
                     gfx = func_i3_DrawBeveledBox(gfx, (var_s3 + D_i3_80143790) + 0x4A,
@@ -249,7 +249,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
     }
 
     sp1A8 = 1;
-    var_s2 = &D_802A6B40[arg1];
+    var_s2 = &D_802A6B40[trackIndex];
     for (i = 0; i < 5; i++) {
 
         if (i & 1) {
@@ -258,8 +258,8 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
             var_s3 = D_i3_80143788;
         }
 
-        if (var_s2->unk_20[i] != MAX_TIMER) {
-            if ((i != 0) && (var_s2->unk_20[i] != var_s2->unk_20[i - 1])) {
+        if (var_s2->timeRecord[i] != MAX_TIMER) {
+            if ((i != 0) && (var_s2->timeRecord[i] != var_s2->timeRecord[i - 1])) {
                 sp1A8 = i + 1;
             }
         } else {
@@ -304,7 +304,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         } else {
             var_s3 = D_i3_80143788;
         }
-        if (var_s2->unk_20[i] != MAX_TIMER) {
+        if (var_s2->timeRecord[i] != MAX_TIMER) {
 
             if (D_i3_80143780 & 8) {
                 if (D_800E5FE2 == i + 1) {
@@ -324,7 +324,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
             } else {
                 gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
             }
-            gfx = func_i3_DrawTimerScisThousandths(gfx, var_s2->unk_20[i], var_s3 + D_i3_80143790 + 0x4B,
+            gfx = func_i3_DrawTimerScisThousandths(gfx, var_s2->timeRecord[i], var_s3 + D_i3_80143790 + 0x4B,
                                                    (D_i3_80143794 + (D_i3_80143798 * i)) - 0xE, 1.0f);
         }
     }
@@ -358,7 +358,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
     gDPPipeSync(gfx++);
     gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 
-    gDPLoadTextureBlock(gfx++, func_800783AC(D_F243290), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
+    gDPLoadTextureBlock(gfx++, func_800783AC(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
 
@@ -378,7 +378,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         } else {
             var_s3 = D_i3_80143788;
         }
-        if (var_s2->unk_20[i] == MAX_TIMER) {
+        if (var_s2->timeRecord[i] == MAX_TIMER) {
             gfx = func_i2_80106450(gfx, var_s3 + D_i3_80143790 + 0x4B, (D_i3_80143794 + (D_i3_80143798 * i)) - 2,
                                    "--------", 1, 4, 0);
         }
@@ -394,7 +394,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         } else {
             var_s3 = D_i3_80143788;
         }
-        if (var_s2->unk_20[i] != MAX_TIMER) {
+        if (var_s2->timeRecord[i] != MAX_TIMER) {
             gfx = func_i2_80106450(gfx, var_s3 + D_i3_80143790 + 0x4B, D_i3_80143794 + (D_i3_80143798 * i) + 0x12,
                                    var_s2->unk_AC[i], 1, 1, 0);
         }
@@ -402,7 +402,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
 
     if (D_i3_80143780 & 4) {
         for (i = 0; i < 5; i++) {
-            if (var_s2->unk_20[i] != MAX_TIMER) {
+            if (var_s2->timeRecord[i] != MAX_TIMER) {
                 gfx = func_i3_8013BBF8(gfx, 0xB2, (i * 0x23) + 0x33, var_s2->unk_98[i]);
             }
         }
@@ -419,7 +419,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
         var_v0 = false;
     }
 
-    gfx = func_i3_8013B348(gfx, D_i3_80143788 + D_i3_8014379C, D_i3_801437A0, var_s2->unk_C0, var_v0, true);
+    gfx = func_i3_DrawSpeed(gfx, D_i3_80143788 + D_i3_8014379C, D_i3_801437A0, var_s2->unk_C0, var_v0, true);
     gSPLoadUcodeL(gfx++, gspF3DFLX_Rej_fifo);
     gfx = func_80076C08(gfx);
     gSPClipRatio(gfx++, FRUSTRATIO_3);
@@ -432,7 +432,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
     gSPMatrix(gfx++, &D_2028480, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     for (i = 0; i < 5; i++) {
-        if (var_s2->unk_20[i] != MAX_TIMER) {
+        if (var_s2->timeRecord[i] != MAX_TIMER) {
             gfx = func_i3_8013BB80(gfx, i, var_s2->unk_34[i]);
         }
     }
@@ -445,7 +445,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 arg1) {
 
 extern Gfx D_80149A0[];
 
-Gfx* func_i3_8013B348(Gfx* gfx, s32 left, s32 top, f32 arg3, bool arg4, bool drawMaxSpeed) {
+Gfx* func_i3_DrawSpeed(Gfx* gfx, s32 left, s32 top, f32 arg3, bool arg4, bool drawMaxSpeedTexture) {
     s32 i;
     s32 speed;
     s32 digitMask;
@@ -460,7 +460,7 @@ Gfx* func_i3_8013B348(Gfx* gfx, s32 left, s32 top, f32 arg3, bool arg4, bool dra
 
     texLeft = left;
     speed = (arg3 * 21.6f) + 0.5f;
-    if (drawMaxSpeed) {
+    if (drawMaxSpeedTexture) {
         gDPPipeSync(gfx++);
         gDPLoadTextureBlock(gfx++, D_303AA70, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -517,7 +517,7 @@ Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, u8* arg2) {
 Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {
     u32 var_t8;
 
-    gDPLoadTextureBlock(gfx++, func_800783AC(D_F242E10), G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0,
+    gDPLoadTextureBlock(gfx++, func_800783AC(aRecordsAccelerationSpeedGraphTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
 
@@ -525,7 +525,7 @@ Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {
 
     var_t8 = arg3 * 29.5f;
 
-    gDPLoadTextureBlock(gfx++, func_800783AC(D_F243210), G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0,
+    gDPLoadTextureBlock(gfx++, func_800783AC(aRecordsAccelerationSpeedSliderTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
 
@@ -543,22 +543,22 @@ void func_i3_8013BF18(s32 arg0) {
     }
 }
 
-extern unk_800E4268 D_800E4268[][6];
-extern s16 D_800E5FD2;
+extern RaceStats gCupRaceStats[][6];
+extern s16 gRacersKOd;
 extern s16 D_800E5FE2;
 extern s16 D_800E5FE4;
 
 void func_i3_8013BF50(s32 arg0) {
     Racer* racer;
-    unk_800E4268* temp_a3;
+    RaceStats* temp_a3;
     s32 i;
     s32 index = arg0 % 6;
 
     for (i = 0, racer = gRacers; i < 1; i++, racer++) {
-        temp_a3 = &D_800E4268[i][index];
-        temp_a3->unk_00 = racer->unk_2A0;
-        temp_a3->unk_04 = racer->unk_9C;
-        temp_a3->unk_08 = racer->position;
+        temp_a3 = &gCupRaceStats[i][index];
+        temp_a3->raceTime = racer->raceTime;
+        temp_a3->maxSpeed = racer->maxSpeed;
+        temp_a3->position = racer->position;
         temp_a3->unk_0A = 0;
         if (D_800E5FE2 != 0) {
             temp_a3->unk_0A |= (D_800E5FE2 & 0xF);
@@ -566,19 +566,19 @@ void func_i3_8013BF50(s32 arg0) {
         if (D_800E5FE4 != 0) {
             temp_a3->unk_0A |= ((D_800E5FE4 & 0xF) << 4);
         }
-        temp_a3->unk_0C = D_800E5FD2;
+        temp_a3->racersKOd = gRacersKOd;
     }
 }
 
 extern s16 D_800E5FE2;
-extern s32 D_800F8514;
+extern s32 gTrackIndex;
 
 void func_i3_8013C008(void) {
     unk_800F8510* temp_v1;
     s32 i;
 
     if (D_800E5FE2 != 0) {
-        temp_v1 = &D_802A6B40[D_800F8514];
+        temp_v1 = &D_802A6B40[gTrackIndex];
         for (i = 0; i < 4; i++) {
             temp_v1->unk_AC[D_800E5FE2 - 1][i] = 0;
         }
@@ -740,7 +740,7 @@ void func_i3_8013D214(unk_800F8510* arg0) {
 
         arg0->unk_AC[D_800E5FE2 - 1][i] = var_v1;
     }
-    func_i2_80101118(D_800F8514);
+    func_i2_80101118(gTrackIndex);
 }
 
 signed char D_i3_80140F84[] = "NAME ENTRY";
