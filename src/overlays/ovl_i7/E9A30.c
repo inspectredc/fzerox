@@ -2,6 +2,7 @@
 #include "fzx_game.h"
 #include "fzx_hud.h"
 #include "fzx_racer.h"
+#include "fzx_course.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"
 #include "assets/segment_2738A0.h"
@@ -12,9 +13,9 @@ extern s32 gCupType;
 extern s8 D_800CD3C0;
 extern s8 D_800DCE5C;
 extern s16 D_800E42CC;
-extern s32 gTrackIndex;
+extern s32 gCourseIndex;
 extern RaceStats gCupRaceStats[1][6];
-extern unk_8010B7B0 D_8010B7B0[];
+extern CourseData D_8010B7B0;
 extern s32 D_i2_80106F10;
 extern s16 D_80106F48;
 
@@ -790,7 +791,7 @@ void func_i7_801467FC(void);
 
 void func_i7_80143A90(void) {
     unk_8014BE28* var_v1;
-    s32 cupFirstTrackIndex;
+    s32 cupFirstCourseIndex;
     s32 pad;
     Racer* player = &gRacers[0];
     s32 i;
@@ -801,8 +802,8 @@ void func_i7_80143A90(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
     D_800DCE5C = 0;
     gNumPlayers = 1;
-    cupFirstTrackIndex = (gTrackIndex / 6) * 6;
-    gTrackIndex = 55;
+    cupFirstCourseIndex = (gCourseIndex / 6) * 6;
+    gCourseIndex = 55;
     sCupDifficulty = gDifficulty;
     gDifficulty = MASTER;
     sTotalRacersKOd = 0;
@@ -815,7 +816,7 @@ void func_i7_80143A90(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0[0].unk_002, D_8010B7B0[0].unk_003);
+    func_8007F4E0(D_8010B7B0.venue, D_8010B7B0.skybox);
     func_i3_801365E0();
     func_i2_801044F0();
     func_8006D448();
@@ -918,7 +919,7 @@ void func_i7_80143A90(void) {
                 var_v1->unk_06 = 0x10A;
                 break;
             case 4:
-                var_v1->track = (s16) (cupFirstTrackIndex + var_a0);
+                var_v1->track = (s16) (cupFirstCourseIndex + var_a0);
                 var_v1->unk_08 = 76.0f;
 
                 if (var_a0 != 0) {
@@ -971,11 +972,11 @@ void func_i7_80146920(void);
 void func_i7_80147EBC(void);
 
 extern s32 D_800DCCFC;
-extern Controller D_800DD180;
+extern Controller gSharedController;
 
 s32 func_i7_801441A0(void) {
 
-    func_8007DABC(&D_800DD180);
+    func_8007DABC(&gSharedController);
     D_i7_8014BDF0 = &D_8014B480[D_800DCCFC];
     func_i2_8010466C();
     func_800952F4();
@@ -994,7 +995,7 @@ s32 func_i7_801441A0(void) {
 
     switch (func_i7_801442A0()) {
         case 1:
-            return GAMEMODE_8007;
+            return GAMEMODE_FLX_MAIN_MENU;
         case 2:
             return GAMEMODE_800C;
         case 0:
@@ -1003,7 +1004,7 @@ s32 func_i7_801441A0(void) {
     }
 }
 
-extern u16 D_800E416E;
+extern u16 gInputButtonPressed;
 extern s32 D_i3_80141908;
 
 s32 func_i7_801442A0(void) {
@@ -1133,7 +1134,7 @@ s32 func_i7_801442A0(void) {
             }
             if (D_i7_8014BE0C >= 360) {
                 D_i7_8014BE0C = 360;
-                if (D_800E416E & (BTN_A | BTN_START)) {
+                if (gInputButtonPressed & (BTN_A | BTN_START)) {
                     sp1C = 1;
                 }
             }
@@ -1621,7 +1622,7 @@ Gfx* func_i7_DrawResultsRacersKOd(Gfx* gfx, s32 left, s32 top, s32 racersKOd) {
     return gfx;
 }
 
-extern f32 D_800DD230[];
+extern f32 gSinTable[];
 
 #ifdef IMPORT_BSS
 void func_i7_801467FC(void) {
@@ -1643,8 +1644,8 @@ void func_i7_801467FC(void) {
         var_v0->unk_18 = 0.0f;
         var_v0->unk_1C = 1.0f;
     }
-    i = (Math_Round(341.33334f) + 0x400);
-    temp_fa0 = D_800DD230[i & 0xFFF] * 60.0f;
+    i = Math_Round(DEG_TO_FZXANG2(30));
+    temp_fa0 = COS(i) * 60.0f;
 
     var->x = 0.0f;
     var->y = 0.0f;

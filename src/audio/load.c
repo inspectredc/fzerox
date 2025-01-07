@@ -1285,7 +1285,7 @@ void func_800B166C(TunedSample* tSample, u32 fontDataAddr, SampleBankRelocInfo* 
         if ((sample->size != 0) && (sample->isRelocated != 1)) {
             sample->loop = reloc = (u32) sample->loop + fontDataAddr;
             sample->book = reloc = (u32) sample->book + fontDataAddr;
-            switch (sample->medium) { /* irregular */
+            switch (sample->medium) {
                 case MEDIUM_RAM:
                     sample->sampleAddr = reloc = sample->sampleAddr + relocInfo->baseAddr1;
                     sample->medium = relocInfo->medium1;

@@ -320,7 +320,7 @@ void func_80068008(void* arg0) {
     D_800DCD08 = 2;
     D_800DCD04 = 0;
     D_800DCD0C = 1;
-    func_8006A6E4();
+    Math_SinTableInit();
     if (D_800CCFC0 != 0) {
         func_800742D0();
     }

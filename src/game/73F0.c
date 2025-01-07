@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzxthread.h"
+#include "fzx_course.h"
 #include "segment_symbols.h"
 #include "assets/segment_17B1E0.h"
 
@@ -287,8 +288,8 @@ void func_8006FC8C(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
 
     temp_fv0 = func_8009E108(arg0, arg1, &sp58);
 
-    sp54 = ((arg0->unk_34->unk_18 - arg0->unk_18) * temp_fv0) + arg0->unk_18;
-    sp50 = ((arg0->unk_34->unk_1C - arg0->unk_1C) * temp_fv0) + arg0->unk_1C;
+    sp54 = ((arg0->next->radiusLeft - arg0->radiusLeft) * temp_fv0) + arg0->radiusLeft;
+    sp50 = ((arg0->next->radiusRight - arg0->radiusRight) * temp_fv0) + arg0->radiusRight;
 
     func_8009E85C(arg0, arg1, &sp28, temp_fv0);
     func_8009E6F0(arg0, arg1, arg2);
@@ -472,12 +473,12 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
 
     func_8009E85C(sp88, arg1->unk_08, &sp8C, spE8);
 
-    spE0 = sp88->unk_18 + sp88->unk_1C;
-    spE0 = (((sp88->unk_34->unk_18 + sp88->unk_34->unk_1C) - spE0) * spE8) + spE0;
+    spE0 = sp88->radiusLeft + sp88->radiusRight;
+    spE0 = (((sp88->next->radiusLeft + sp88->next->radiusRight) - spE0) * spE8) + spE0;
     spE0 /= 2;
 
     func_8006FC8C(sp88, arg1->unk_08, &spC8);
-    func_8006C520(NULL, &sp44, 1.0f, (arg1->unk_10 * 4096.0f) / 360.0f, sp8C.xx, sp8C.yx, sp8C.zx, 0.0f, 0.0f, 0.0f);
+    func_8006C520(NULL, &sp44, 1.0f, DEG_TO_FZXANG(arg1->unk_10), sp8C.xx, sp8C.yx, sp8C.zx, 0.0f, 0.0f, 0.0f);
     spBC.x = sp44.m[0][0] * sp8C.xz + sp44.m[1][0] * sp8C.yz + sp44.m[2][0] * sp8C.zz;
     spBC.y = sp44.m[0][1] * sp8C.xz + sp44.m[1][1] * sp8C.yz + sp44.m[2][1] * sp8C.zz;
     spBC.z = sp44.m[0][2] * sp8C.xz + sp44.m[1][2] * sp8C.yz + sp44.m[2][2] * sp8C.zz;
@@ -587,7 +588,7 @@ unk_8006FF90_arg_2* func_80070B5C(unk_8006FC8C* arg0, f32 arg1, unk_8006FF90_arg
     var_s2 = 0;
 
     while (true) {
-        func_8006FD7C((s32) (arg3 - D_800E32D0) / 2, arg0->unk_30, arg1);
+        func_8006FD7C((s32) (arg3 - D_800E32D0) / 2, arg0->segmentIndex, arg1);
         func_8009E538(arg0, arg1, &spDC);
         func_8006FC8C(arg0, arg1, &spE8);
         temp_fv0 = func_8009E108(arg0, arg1, &spF4);
@@ -596,8 +597,8 @@ unk_8006FF90_arg_2* func_80070B5C(unk_8006FC8C* arg0, f32 arg1, unk_8006FF90_arg
         spE8.y += sp88.y.y * 10.0f;
         spE8.z += sp88.y.z * 10.0f;
 
-        temp_fv1 = arg0->unk_18 + arg0->unk_1C;
-        temp_fv1 = (((arg0->unk_34->unk_18 + arg0->unk_34->unk_1C) - temp_fv1) * temp_fv0) + temp_fv1;
+        temp_fv1 = arg0->radiusLeft + arg0->radiusRight;
+        temp_fv1 = (((arg0->next->radiusLeft + arg0->next->radiusRight) - temp_fv1) * temp_fv0) + temp_fv1;
         temp_fv1 /= 2;
 
         if (arg2->unk_10 < -1.0f * temp_fv1) {
@@ -667,7 +668,7 @@ unk_8006FF90_arg_2* func_80070B5C(unk_8006FC8C* arg0, f32 arg1, unk_8006FF90_arg
             }
 
         } else {
-            arg1 = func_8006FE90(arg0->unk_30, arg1);
+            arg1 = func_8006FE90(arg0->segmentIndex, arg1);
 
             if (arg2->unk_0C <= arg1) {
                 if (1) {}
@@ -731,7 +732,7 @@ void func_80071260(s32 arg0) {
         temp_fa0 = temp_s0->unk_08;
 
         if (temp_s0->unk_04 == 3) {
-            var_fv1 = (temp_s5->unk_18 + temp_s5->unk_1C) / 520.0f;
+            var_fv1 = (temp_s5->radiusLeft + temp_s5->radiusRight) / 520.0f;
             if (var_fv1 < 1.0f) {
                 var_fv1 = 1.0f;
             }
@@ -739,11 +740,11 @@ void func_80071260(s32 arg0) {
             D_800CD1E0 = 50.0f * var_fv1;
             D_800CD1E4 = 50.0f * var_fv1;
 
-            switch (temp_s5->unk_20 & 0x1C0) {
-                case 0:
-                case 0x40:
-                case 0x140:
-                case 0x1C0:
+            switch (temp_s5->trackSegmentInfo & TRACK_SHAPE_MASK) {
+                case TRACK_SHAPE_ROAD:
+                case TRACK_SHAPE_WALLED_ROAD:
+                case TRACK_SHAPE_TUNNEL:
+                case TRACK_SHAPE_BORDERLESS_ROAD:
                     func_8006FF90(i, temp_s0, &spA4);
                     break;
                 default:
@@ -821,7 +822,7 @@ void func_80071A58(s32, s32);
 void func_80071BE4(s32);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80071BE4.s")
 
-extern unk_8010B7B0 D_8010B7B0[];
+extern CourseData D_8010B7B0;
 void func_8007243C(s32);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8007243C.s")
 
@@ -843,11 +844,11 @@ void func_800730A4(s32);
 void func_8007327C(s32);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8007327C.s")
 
-void func_80073510(s32 arg0) {
-    func_80072D00(arg0);
-    func_80072ECC(arg0);
-    func_800730A4(arg0);
-    func_8007327C(arg0);
+void func_80073510(s32 courseIndex) {
+    func_80072D00(courseIndex);
+    func_80072ECC(courseIndex);
+    func_800730A4(courseIndex);
+    func_8007327C(courseIndex);
 }
 
 void func_80073548(s32);
@@ -855,49 +856,136 @@ void func_80073548(s32);
 
 extern s32 D_802CDFD0;
 
-void func_80073894(s32 arg0) {
+void func_80073894(s32 courseIndex) {
     if (D_800CD180 != 0) {
         if (D_802CDFD0 < 4) {
             return;
         }
-    } else if (D_8010B7B0[0].unk_001 < 4) {
+    } else if (D_8010B7B0.controlPointCount < 4) {
         return;
     }
 
     D_802D1B60.unk_08 = 0;
     D_802D1B60.unk_0C = 0;
     D_802D1B60.unk_04 = 0;
-    func_80071BE4(arg0);
-    func_8007243C(arg0);
-    func_80072BB0(arg0);
-    func_80073510(arg0);
-    func_80073548(arg0);
+    func_80071BE4(courseIndex);
+    func_8007243C(courseIndex);
+    func_80072BB0(courseIndex);
+    func_80073510(courseIndex);
+    func_80073548(courseIndex);
 }
 
 extern s32 D_800CD180;
 
-void func_8007392C(s32 arg0) {
+void func_8007392C(s32 courseIndex) {
     s32 i;
 
     if (D_800CD180 != 0) {
         if (D_802CDFD0 < 4) {
             return;
         }
-    } else if (D_8010B7B0[0].unk_001 < 4) {
+    } else if (D_8010B7B0.controlPointCount < 4) {
         return;
     }
 
     D_802D2D70.index = 0;
 
-    for (i = 0; i < D_802A6B40[arg0].unk_08; i++) {
-        func_80071A58(arg0, i);
-        func_800718D0(arg0, i);
-        func_80071790(arg0, i);
-        func_80072758(arg0, i);
+    for (i = 0; i < D_802A6B40[courseIndex].unk_08; i++) {
+        func_80071A58(courseIndex, i);
+        func_800718D0(courseIndex, i);
+        func_80071790(courseIndex, i);
+        func_80072758(courseIndex, i);
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80073A04.s")
+extern s32 gCourseIndex;
+extern CourseData D_8010C770;
+extern unk_8006FC8C D_802CDFD8[];
+extern unk_8006FC8C D_802C2020[];
+
+void func_80073A04(void) {
+    unk_8006FC8C* var_a1;
+    unk_800F8510* var_a0;
+    s32 var_a3;
+    s32 i;
+
+    var_a0 = &D_802A6B40[gCourseIndex];
+    var_a1 = D_802C2020;
+    var_a0->unk_10 = D_802C2020;
+
+    for (i = 0; i < var_a0->unk_08; i++) {
+        var_a1->segmentIndex = i;
+        var_a1->next = var_a1 + 1;
+        var_a1->prev = var_a1 - 1;
+        var_a1++;
+    }
+
+    var_a0->unk_10->prev = &var_a0->unk_10[var_a0->unk_08 - 1];
+    var_a0->unk_10[var_a0->unk_08 - 1].next = var_a0->unk_10;
+
+    var_a3 = 0;
+    for (i = 0; i < var_a0->unk_08; i++) {
+        var_a1 = &var_a0->unk_10[i];
+        if (!(var_a1->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
+            var_a3 = i;
+            break;
+        }
+    }
+
+    var_a1 = &var_a0->unk_10[var_a3];
+
+    for (i = 0; i < var_a0->unk_08; i++) {
+        if (var_a1->next->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) {
+            var_a3 = var_a1->segmentIndex;
+            break;
+        }
+        var_a1 = var_a1->next;
+    }
+
+    var_a3 = var_a0->unk_10[var_a3].next->segmentIndex;
+    var_a1 = &var_a0->unk_10[var_a3];
+    for (i = 0; i < var_a0->unk_08; i++) {
+        D_802CDFD8[i] = *var_a1;
+
+        D_8010C770.bankAngle[i] = D_8010B7B0.bankAngle[var_a1->segmentIndex];
+        D_8010C770.pit[i] = D_8010B7B0.pit[var_a1->segmentIndex];
+        D_8010C770.dash[i] = D_8010B7B0.dash[var_a1->segmentIndex];
+        D_8010C770.dirt[i] = D_8010B7B0.dirt[var_a1->segmentIndex];
+        D_8010C770.ice[i] = D_8010B7B0.ice[var_a1->segmentIndex];
+        D_8010C770.jump[i] = D_8010B7B0.jump[var_a1->segmentIndex];
+        D_8010C770.landmine[i] = D_8010B7B0.landmine[var_a1->segmentIndex];
+        D_8010C770.gate[i] = D_8010B7B0.gate[var_a1->segmentIndex];
+        D_8010C770.building[i] = D_8010B7B0.building[var_a1->segmentIndex];
+        D_8010C770.sign[i] = D_8010B7B0.sign[var_a1->segmentIndex];
+        var_a1 = var_a1->next;
+    }
+
+    for (i = 0; i < var_a0->unk_08; i++) {
+        D_802C2020[i] = D_802CDFD8[i];
+        var_a0->unk_10[i] = D_802CDFD8[i];
+
+        D_8010B7B0.bankAngle[i] = D_8010C770.bankAngle[i];
+        D_8010B7B0.pit[i] = D_8010C770.pit[i];
+        D_8010B7B0.dash[i] = D_8010C770.dash[i];
+        D_8010B7B0.dirt[i] = D_8010C770.dirt[i];
+        D_8010B7B0.ice[i] = D_8010C770.ice[i];
+        D_8010B7B0.jump[i] = D_8010C770.jump[i];
+        D_8010B7B0.landmine[i] = D_8010C770.landmine[i];
+        D_8010B7B0.gate[i] = D_8010C770.gate[i];
+        D_8010B7B0.building[i] = D_8010C770.building[i];
+        D_8010B7B0.sign[i] = D_8010C770.sign[i];
+    }
+
+    var_a1 = var_a0->unk_10;
+    for (i = 0; i < var_a0->unk_08; i++) {
+        var_a1->segmentIndex = i;
+        var_a1->next = var_a1 + 1;
+        var_a1->prev = var_a1 - 1;
+        var_a1++;
+    }
+    var_a0->unk_10->prev = &var_a0->unk_10[var_a0->unk_08 - 1];
+    var_a0->unk_10[var_a0->unk_08 - 1].next = var_a0->unk_10;
+}
 
 extern OSMesgQueue D_800DCA68;
 extern OSIoMesg D_800DCCA8;
@@ -962,23 +1050,23 @@ static const char devrostr6[] = "ENTRY CHECK\n";
 extern u8 D_i2_8010D730[][9];
 extern s16 D_80106F48;
 
-void func_80074428(s32 arg0);
+void func_80074428(s32 courseIndex);
 
-void func_8007402C(s32 arg0) {
+void func_8007402C(s32 courseIndex) {
     s32 pad;
     s32 sp28;
 
-    if (arg0 >= 54) {
-        func_80073FA0(SEGMENT_ROM_START(segment_2AD1E0) + (arg0 - 30) * sizeof(unk_8010B7B0),
-                      osVirtualToPhysical(D_8010B7B0), sizeof(unk_8010B7B0));
-        if ((D_80106F48 >= 4) && (arg0 == 55)) {
-            D_8010B7B0[0].unk_003 = 3;
+    if (courseIndex >= 54) {
+        func_80073FA0(SEGMENT_ROM_START(course_data) + (courseIndex - 30) * sizeof(CourseData),
+                      osVirtualToPhysical(&D_8010B7B0), sizeof(CourseData));
+        if ((D_80106F48 >= 4) && (courseIndex == 55)) {
+            D_8010B7B0.skybox = SKYBOX_BLUE;
         }
-    } else if (arg0 >= 48) {
+    } else if (courseIndex >= 48) {
         func_800A3044();
         return;
-    } else if (arg0 >= 24) {
-        sp28 = arg0 - 24;
+    } else if (courseIndex >= 24) {
+        sp28 = courseIndex - 24;
         if (func_800760F8() != 2) {
             osWritebackDCacheAll();
             func_8007FE98();
@@ -989,35 +1077,35 @@ void func_8007402C(s32 arg0) {
 
         if (func_i1_80403680(0xFFFB, D_i2_8010D730[sp28], "CRSD\0\0\0\0ENTRY CHECK OK\n") != 0xFFFF) {
             func_i1_804096C8(0xFFFB, D_i2_8010D730[sp28], "CRSD\0\0\0\0ENTRY LOAD OK\n\0\0UNPACK\n\0UNPACK OK\n",
-                             D_8010B7B0, 0);
+                             &D_8010B7B0, 0);
         }
     } else {
-        func_80073FA0(SEGMENT_ROM_START(segment_2AD1E0) + arg0 * sizeof(unk_8010B7B0), osVirtualToPhysical(D_8010B7B0),
-                      sizeof(unk_8010B7B0));
+        func_80073FA0(SEGMENT_ROM_START(course_data) + courseIndex * sizeof(CourseData),
+                      osVirtualToPhysical(&D_8010B7B0), sizeof(CourseData));
     }
 
-    func_80074428(arg0);
+    func_80074428(courseIndex);
 }
 
-void func_800741DC(s32 arg0) {
-    func_80073894(arg0);
-    func_8007392C(arg0);
+void func_800741DC(s32 courseIndex) {
+    func_80073894(courseIndex);
+    func_8007392C(courseIndex);
 }
 
 void func_80074204(void) {
     s32 i;
 
     for (i = 0; i < 64; i++) {
-        D_8010B7B0[0].unk_520[i] = 0;
-        D_8010B7B0[0].unk_5A0[i] = -1;
-        D_8010B7B0[0].unk_5E0[i] = -1;
-        D_8010B7B0[0].unk_620[i] = -1;
-        D_8010B7B0[0].unk_660[i] = -1;
-        D_8010B7B0[0].unk_6A0[i] = -1;
-        D_8010B7B0[0].unk_6E0[i] = -1;
-        D_8010B7B0[0].unk_720[i] = -1;
-        D_8010B7B0[0].unk_760[i] = -1;
-        D_8010B7B0[0].unk_7A0[i] = -1;
+        D_8010B7B0.bankAngle[i] = 0;
+        D_8010B7B0.pit[i] = PIT_NONE;
+        D_8010B7B0.dash[i] = DASH_NONE;
+        D_8010B7B0.dirt[i] = DIRT_NONE;
+        D_8010B7B0.ice[i] = ICE_NONE;
+        D_8010B7B0.jump[i] = JUMP_NONE;
+        D_8010B7B0.landmine[i] = LANDMINE_NONE;
+        D_8010B7B0.gate[i] = GATE_NONE;
+        D_8010B7B0.building[i] = BUILDING_NONE;
+        D_8010B7B0.sign[i] = SIGN_NONE;
     }
 }
 
@@ -1025,13 +1113,13 @@ void func_80074204(void);
 
 void func_800742D0(void) {
     func_80074204();
-    D_8010B7B0[0].unk_002 = 0;
-    D_8010B7B0[0].unk_003 = 0;
+    D_8010B7B0.venue = VENUE_MUTE_CITY;
+    D_8010B7B0.skybox = SKYBOX_PURPLE;
 }
 
-extern unk_8006FC8C D_802C2020[];
 extern unk_8006FF90_arg_1 D_802D1B70[];
 extern unk_802D1B60_unk_00 D_802D0FE0[];
+extern CourseData D_8010CF50;
 
 void func_800742FC(void) {
     s32 i;
@@ -1039,11 +1127,11 @@ void func_800742FC(void) {
     bzero(SEGMENT_VRAM_START(unk_context), SEGMENT_BSS_SIZE(unk_context));
     func_80074204();
     D_802CDFD0 = 0;
-    D_8010B7B0[0].unk_000 = 4;
-    D_8010B7B0[0].unk_001 = 0;
-    D_8010B7B0[0].unk_002 = 0;
-    D_8010B7B0[0].unk_003 = 0;
-    D_8010B7B0[3] = D_8010B7B0[0];
+    D_8010B7B0.creatorId = CREATOR_NINTENDO;
+    D_8010B7B0.controlPointCount = 0;
+    D_8010B7B0.venue = VENUE_MUTE_CITY;
+    D_8010B7B0.skybox = SKYBOX_PURPLE;
+    D_8010CF50 = D_8010B7B0;
     D_802D1B60.unk_00 = D_802D0FE0;
     D_802A6B40[0].unk_10 = D_802C2020;
     D_802D2D70.unk_00 = D_802D1B70;
@@ -1052,8 +1140,8 @@ void func_800742FC(void) {
 
     func_8007402C(0);
     func_80074204();
-    D_8010B7B0[3] = D_8010B7B0[0];
-    D_8010B7B0[0].unk_001 = 0;
+    D_8010CF50 = D_8010B7B0;
+    D_8010B7B0.controlPointCount = 0;
     D_802CDFD0 = 0;
 }
 
@@ -1073,18 +1161,18 @@ void func_80074634(unk_800F8510* arg0) {
 
         temp_a1 = &arg0->unk_10[i];
 
-        if (temp_a1->unk_00.x < var_fv0) {
-            var_fv0 = temp_a1->unk_00.x;
+        if (temp_a1->pos.x < var_fv0) {
+            var_fv0 = temp_a1->pos.x;
         }
-        if (var_fv1 < temp_a1->unk_00.x) {
-            var_fv1 = temp_a1->unk_00.x;
+        if (var_fv1 < temp_a1->pos.x) {
+            var_fv1 = temp_a1->pos.x;
         }
 
-        if (temp_a1->unk_00.z < var_fa0) {
-            var_fa0 = temp_a1->unk_00.z;
+        if (temp_a1->pos.z < var_fa0) {
+            var_fa0 = temp_a1->pos.z;
         }
-        if (var_fa1 < temp_a1->unk_00.z) {
-            var_fa1 = temp_a1->unk_00.z;
+        if (var_fa1 < temp_a1->pos.z) {
+            var_fa1 = temp_a1->pos.z;
         }
     }
 
@@ -1092,8 +1180,8 @@ void func_80074634(unk_800F8510* arg0) {
 
         temp_a1 = &arg0->unk_10[i];
 
-        temp_a1->unk_00.x -= ((var_fv0 + var_fv1) / 2);
-        temp_a1->unk_00.z -= ((var_fa0 + var_fa1) / 2);
+        temp_a1->pos.x -= ((var_fv0 + var_fv1) / 2);
+        temp_a1->pos.z -= ((var_fa0 + var_fa1) / 2);
     }
 }
 
@@ -1102,40 +1190,42 @@ extern unk_8006FC8C D_802CB6D0[];
 void func_80074744(void) {
     unk_8006FC8C* var_a0;
     s32 i;
-    s32 temp;
+    s32 trackShape;
 
     for (i = 0; i < D_802CDFD0; i++) {
         var_a0 = &D_802CB6D0[i];
-        temp = var_a0->unk_20 & 0x1C0;
-        switch (temp) {
-            case 0x80:
-            case 0xC0:
-            case 0x100:
-            case 0x180:
-                D_8010B7B0[0].unk_5A0[i] = -1;
-                D_8010B7B0[0].unk_620[i] = -1;
-                D_8010B7B0[0].unk_660[i] = -1;
-                D_8010B7B0[0].unk_6A0[i] = -1;
-                D_8010B7B0[0].unk_6E0[i] = -1;
+        trackShape = var_a0->trackSegmentInfo & TRACK_SHAPE_MASK;
+        switch (trackShape) {
+            case TRACK_SHAPE_PIPE:
+            case TRACK_SHAPE_CYLINDER:
+            case TRACK_SHAPE_HALF_PIPE:
+            case TRACK_SHAPE_AIR:
+                D_8010B7B0.pit[i] = PIT_NONE;
+                D_8010B7B0.dirt[i] = DIRT_NONE;
+                D_8010B7B0.ice[i] = ICE_NONE;
+                D_8010B7B0.jump[i] = JUMP_NONE;
+                D_8010B7B0.landmine[i] = LANDMINE_NONE;
                 break;
         }
-        switch (temp) {
-            case 0:
-            case 0x1C0:
+        switch (trackShape) {
+            case TRACK_SHAPE_ROAD:
+            case TRACK_SHAPE_BORDERLESS_ROAD:
                 break;
             default:
-                D_8010B7B0[0].unk_720[i] = -1;
-                D_8010B7B0[0].unk_7A0[i] = -1;
+                D_8010B7B0.gate[i] = GATE_NONE;
+                D_8010B7B0.sign[i] = SIGN_NONE;
                 break;
         }
     }
 }
 
 UNUSED s32 D_800CD21C = 0;
-s32 D_800CD220[] = { 1, 0, 0, 0, 2, 3, 4, 0, 0, 0, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-void func_800747EC(s32 arg0) {
-    void* sp1C = (D_800CD220[arg0] * 0x800) + SEGMENT_ROM_START(segment_2747F0);
+s32 D_800CD220[] = { 1, 0, 0, 0, 2, 3, 4, 0, 0, 0, 0 };
+s32 D_800CD24C[] = { 1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+void func_800747EC(s32 venue) {
+    void* sp1C = (D_800CD220[venue] * 0x800) + SEGMENT_ROM_START(segment_2747F0);
 
     func_80073FA0(sp1C, func_80076BD4(D_8014A20), 0x800);
 }

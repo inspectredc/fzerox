@@ -515,7 +515,7 @@ void func_80077318(void) {
             break;
         case GAMEMODE_4009:
         case GAMEMODE_4012:
-        case GAMEMODE_8000:
+        case GAMEMODE_FLX_TITLE:
         case GAMEMODE_8008:
             // ovl_i4
             vramTextStart = SEGMENT_TEXT_START(ovl_i4);
@@ -544,7 +544,7 @@ void func_80077318(void) {
             segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i5);
             segmentBssSize = SEGMENT_BSS_SIZE(ovl_i5);
             break;
-        case GAMEMODE_8007:
+        case GAMEMODE_FLX_MAIN_MENU:
         case GAMEMODE_800B:
         case GAMEMODE_800C:
         case GAMEMODE_8014:

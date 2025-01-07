@@ -5,18 +5,19 @@
 #include "other_types.h"
 #include "fzxmath.h"
 
+// Course Segment
 typedef struct unk_8006FC8C {
-    Vec3f unk_00;
+    Vec3f pos;
     Vec3f unk_0C;
-    f32 unk_18;
-    f32 unk_1C;
-    s32 unk_20;
+    f32 radiusLeft;
+    f32 radiusRight;
+    s32 trackSegmentInfo;
     f32 unk_24;
     f32 unk_28;
     f32 unk_2C;
-    s32 unk_30;
-    struct unk_8006FC8C* unk_34;
-    struct unk_8006FC8C* unk_38;
+    s32 segmentIndex;
+    struct unk_8006FC8C* next;
+    struct unk_8006FC8C* prev;
     s8 unk_3C[0x18];
     // s8 unk_3C[0x10];
     // struct unk_802D3978* unk_4C;
@@ -52,32 +53,6 @@ typedef struct unk_800F8510 {
     s32 unk_D8;
     u8 unk_DC[20];
 } unk_800F8510; // size = 0xF0
-
-typedef struct unk_8010B7D0 {
-    Vec3f unk_00;
-    s16 unk_0C;
-    s16 unk_0E;
-    s32 unk_10;
-} unk_8010B7D0; // size = 0x14
-
-typedef struct unk_8010B7B0 {
-    s8 unk_000;
-    s8 unk_001;
-    s8 unk_002;
-    s8 unk_003;
-    s8 unk_004[0x1C];
-    unk_8010B7D0 unk_020[64];
-    s16 unk_520[64];
-    s8 unk_5A0[64];
-    s8 unk_5E0[64];
-    s8 unk_620[64];
-    s8 unk_660[64];
-    s8 unk_6A0[64];
-    s8 unk_6E0[64];
-    s8 unk_720[64];
-    s8 unk_760[64];
-    s8 unk_7A0[64];
-} unk_8010B7B0; // size = 0x7E0
 
 typedef struct unk_802D3E38 {
     s32 unk_00;
@@ -537,21 +512,21 @@ typedef struct unk_800CD970 {
 typedef struct Controller {
     OSPfs pfs;
     s8 unk_68[0x3];
-    u8 unk_6B;
+    u8 errno;
     s8 stickX;
     s8 stickY;
-    u8 unk_6E;
-    u8 unk_6F;
-    u8 unk_70;
-    u8 unk_71;
+    u8 stickCurrent;
+    u8 stickPressed;
+    u8 stickReleased;
+    u8 stickPrev;
     s16 unk_72;
     s16 unk_74;
     s16 unk_76;
     s16 unk_78;
-    u16 unk_7A;
-    u16 unk_7C;
-    u16 unk_7E;
-    u16 unk_80;
+    u16 buttonCurrent;
+    u16 buttonPressed;
+    u16 buttonReleased;
+    u16 buttonPrev;
     u16 unk_82;
     s32 unk_84;
     s32 unk_88;
@@ -560,11 +535,11 @@ typedef struct Controller {
 } Controller; // size = 0x94
 
 typedef struct unk_36ED0 {
-    s32 unk_00;
+    s32 trackSegmentInfo;
     s32 unk_04;
     f32 unk_08;
     f32 unk_0C;
-    s8 unk_10[0x4];
+    s32 unk_10;
     Vec3f unk_14;
     s16 unk_20[3];
     s16 unk_26[3];

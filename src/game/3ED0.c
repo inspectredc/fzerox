@@ -2,22 +2,14 @@
 #include "audio.h"
 
 extern OSContStatus D_800DCE70[];
-extern u16 D_800DCE74;
-extern u16 D_800DCE78;
-extern u16 D_800DCE7C;
-
-extern s32 D_800DCF2C;
-extern s32 D_800DCFC0;
-extern s32 D_800DD054;
-
-extern Controller D_800DCE98[];
+extern Controller gControllers[];
 
 Controller* func_80069ED0(void) {
     s32 i;
 
     for (i = 0; i < MAXCONTROLLERS; i++) {
         if ((D_800DCE70[i].type & CONT_TYPE_MASK) == CONT_TYPE_MOUSE) {
-            return &D_800DCE98[i];
+            return &gControllers[i];
         }
     }
 
@@ -134,7 +126,32 @@ Gfx* func_8006A00C(Gfx* gfx, s32 arg1) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006A3AC.s")
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006A6E4.s")
+extern f32 gSinTable[0x1000];
+
+void Math_SinTableInit(void) {
+    f64 denominator;
+    f64 minusSquareX;
+    f64 x;
+    f64 numerator;
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < ARRAY_COUNT(gSinTable); i++) {
+        x = (i * (2 * 3.1415926535)) / ARRAY_COUNT(gSinTable);
+        numerator = -x * x * x;
+        minusSquareX = -x * x;
+        denominator = 1 * 2 * 3; // 3!
+
+        // sinx = x - (x^3/3!) + (x^5/5!) - (x^7/7!) + ...
+        for (j = 2; j < 14; j++) {
+            x += (numerator / denominator);
+            numerator *= minusSquareX;
+            denominator *= j * ((j << 2) + 2);
+        }
+
+        gSinTable[i] = x;
+    }
+}
 
 s32 gRandSeed1 = 12345;
 u32 gRandMask1 = 6789;
@@ -593,7 +610,6 @@ void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
 
 extern Mtx D_800E1230;
 extern MtxF D_800E1270;
-extern f32 D_800DD230[];
 
 void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7, f32 arg8) {
     f32 temp_fv1;
@@ -614,12 +630,12 @@ void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5
         arg1 = &D_800E1270;
     }
 
-    arg1->yz = -(temp_fv1 = D_800DD230[arg3 & 0xFFF]);
-    sp28 = D_800DD230[arg4 & 0xFFF];
-    arg1->xz = (sp28 = D_800DD230[arg4 & 0xFFF]) * (temp_fv0 = D_800DD230[(arg3 + 0x400) & 0xFFF]);
-    arg1->zz = (temp_ft5 = D_800DD230[(arg4 + 0x400) & 0xFFF]) * temp_fv0;
-    arg1->yx = (sp24 = D_800DD230[arg5 & 0xFFF]) * temp_fv0;
-    arg1->yy = (sp18 = D_800DD230[(arg5 + 0x400) & 0xFFF]) * temp_fv0;
+    arg1->yz = -(temp_fv1 = SIN(arg3));
+    sp28 = SIN(arg4);
+    arg1->xz = (sp28 = SIN(arg4)) * (temp_fv0 = COS(arg3));
+    arg1->zz = (temp_ft5 = COS(arg4)) * temp_fv0;
+    arg1->yx = (sp24 = SIN(arg5)) * temp_fv0;
+    arg1->yy = (sp18 = COS(arg5)) * temp_fv0;
 
     // FAKE
     temp = sp28 * sp24;

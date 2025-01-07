@@ -2,14 +2,14 @@
 #define FZX_GAME_H
 
 typedef enum GameMode {
-    /*  0x0 */ GAMEMODE_0,
+    /*  0x0 */ GAMEMODE_TITLE,
     /*  0x1 */ GAMEMODE_GP_RACE,
     /*  0x2 */ GAMEMODE_PRACTICE,
     /*  0x3 */ GAMEMODE_VS_2P,
     /*  0x4 */ GAMEMODE_VS_3P,
     /*  0x5 */ GAMEMODE_VS_4P,
     /*  0x6 */ GAMEMODE_6,
-    /*  0x7 */ GAMEMODE_7,
+    /*  0x7 */ GAMEMODE_MAIN_MENU,
     /*  0x8 */ GAMEMODE_8,
     /*  0x9 */ GAMEMODE_9,
     /*  0xA */ GAMEMODE_A,
@@ -33,11 +33,11 @@ typedef enum GameMode {
 #define MODE_F3DLX 0x4000
 #define MODE_F3DFLX 0x8000
 
-#define GAMEMODE_F3DLX(mode) (mode | MODE_F3DLX)
-#define GAMEMODE_F3DFLX(mode) (mode | MODE_F3DFLX)
+#define GAMEMODE_F3DLX(mode) ((mode) | MODE_F3DLX)
+#define GAMEMODE_F3DFLX(mode) ((mode) | MODE_F3DFLX)
 
-#define GAMEMODE_8000 GAMEMODE_F3DFLX(GAMEMODE_0)
-#define GAMEMODE_8007 GAMEMODE_F3DFLX(GAMEMODE_7)
+#define GAMEMODE_FLX_TITLE GAMEMODE_F3DFLX(GAMEMODE_TITLE)
+#define GAMEMODE_FLX_MAIN_MENU GAMEMODE_F3DFLX(GAMEMODE_MAIN_MENU)
 #define GAMEMODE_8008 GAMEMODE_F3DFLX(GAMEMODE_8)
 #define GAMEMODE_4009 GAMEMODE_F3DLX(GAMEMODE_9)
 #define GAMEMODE_800A GAMEMODE_F3DFLX(GAMEMODE_A)
@@ -99,4 +99,3 @@ typedef enum Cup {
 } Cup;
 
 #endif // FZX_GAME_H
-

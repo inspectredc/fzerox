@@ -232,16 +232,23 @@
       - [0x67510, .data, game/194E0]
       - [0x67520, .data, game/197D0]
       - [0x676C0, .data, game/sys_fault]
-      - [0x678A0, data]
+      - [0x678A0, data, game/1B0E0]
+      - [0x69500, data, game/36ED0]
+      - [0x69A30, data, audio/note_data]
+      - [0x6A680, data, audio/playback]
+      - [0x6A860, data, audio/seqplayer]
+      - [0x6AAC0, data, audio/load]
+      - [0x6B130, data, audio/heap]
       - [0x6B6D0, .data, audio/aisetnextbuf]
-      - [0x6B6E0, data]
+      - [0x6B6E0, data, audio/synthesis]
       - [0x6B710, .data, audio/thread]
-      - [0x6B9E0, data]
+      - [0x6B9E0, data, audio/general]
+      - [0x6BC20, data, audio/audio_context]
       - [0x6BC80, data, libultra/os/exceptasm]
       - [0x6BCA0, .data, libultra/os/thread]
       - [0x6BCD0, .data, libultra/io/controller]
       - [0x6BCE0, .data, libultra/os/initialize]
-      - [0x6BD00, data]
+      - [0x6BD00, data] #vimodes
       - [0x6CE80, .data, libultra/io/contpfs]
       - [0x6CE90, .data, libultra/io/pimgr]
       - [0x6CEC0, .data, libultra/io/piacs]
@@ -309,7 +316,10 @@
       - { type: .bss, vram: 0x800E4260, name: game/194E0 }
       - { type: .bss, vram: 0x800E4330, name: game/197D0 }
       - { type: .bss, vram: 0x800E47D0, name: game/sys_fault }
-      - { type: bss, vram: 0x800E51B0, name: 800E51B0 }
+      - { type: bss, vram: 0x800E51B0, name: game/1AA40 }
+      - { type: bss, vram: 0x800E5220, name: game/1B0E0 }
+      - { type: bss, vram: 0x800F8510, name: game/36ED0 }
+      - { type: bss, vram: 0x800F89F0, name: audio/load }
       - { type: .bss, vram: 0x800F8AF0, name: libultra/io/sptask }
       - { type: .bss, vram: 0x800F8B30, name: libultra/io/leointerrupt }
       - { type: .bss, vram: 0x800F9B30, name: libultra/io/motor }

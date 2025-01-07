@@ -5,9 +5,9 @@
 
 f32 D_800E40F0[30];
 UNUSED s32 D_800E4168;
-s16 D_800E416C;
-u16 D_800E416E;
-u16 D_800E4170;
+u16 gInputPressed;
+u16 gInputButtonPressed;
+u16 gStickPressed;
 s8 D_800E4174[4];
 char* gCurrentTrackName;
 char* gTrackNames[55];
@@ -62,7 +62,7 @@ const char* sTrackNames[] = { "mute city",
                               "x",
                               "\0" };
 
-const char* sMachineNames[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
+const char* gMachineNames[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
                                 "red gazelle",   "great star",       "iron tiger",    "deep claw",      "twin noritta",
                                 "super piranha", "mighty hurricane", "little wyvern", "space angler",   "green panther",
                                 "black bull",    "wild boar",        "astro robin",   "king meteor",    "queen meteor",
@@ -437,14 +437,14 @@ void func_8007D9D0(void) {
     gTrackNames[54] = sTrackNames[31];
 }
 
-void func_8007DABC(Controller* arg0) {
-    D_800E416E = arg0->unk_7C | (arg0->unk_6F << 4);
-    if (arg0->unk_82 != 0) {
-        D_800E4170 = arg0->unk_7A | (arg0->unk_6E << 4);
+void func_8007DABC(Controller* controller) {
+    gInputButtonPressed = controller->buttonPressed | STICK_TO_BUTTON(controller->stickPressed);
+    if (controller->unk_82 != 0) {
+        gStickPressed = controller->buttonCurrent | STICK_TO_BUTTON(controller->stickCurrent);
     } else {
-        D_800E4170 = 0;
+        gStickPressed = 0;
     }
-    D_800E416C = D_800E416E | D_800E4170;
+    gInputPressed = gInputButtonPressed | gStickPressed;
 }
 
 extern u32 gGameFrameCount;

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
+#include "fzx_course.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
 
@@ -58,7 +59,7 @@ unk_80144F74 D_i8_80144F84[] = {
 extern s16 D_800CCFE8;
 extern s8 D_800DCE5C;
 extern s32 D_i2_80106F10;
-extern unk_8010B7B0 D_8010B7B0[];
+extern CourseData D_8010B7B0;
 extern s32 gDifficulty;
 
 void func_i8_80143A78(void);
@@ -72,7 +73,7 @@ void func_i8_801439D0(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0[0].unk_002, D_8010B7B0[0].unk_003);
+    func_8007F4E0(D_8010B7B0.venue, D_8010B7B0.skybox);
     func_i3_801365E0();
     func_8006D448();
     func_8006E478();
@@ -86,13 +87,13 @@ bool func_i8_80143D84(s32);
 
 extern s8 D_800CD3C0;
 extern s8 D_800CD3C8;
-extern s32 gTrackIndex;
+extern s32 gCourseIndex;
 
 void func_i8_80143A78(void) {
     s32 i;
     unk_80144F44* var_s0;
 
-    D_i8_80144F40 = gTrackIndex;
+    D_i8_80144F40 = gCourseIndex;
     if ((D_800CD3C0 == 0) && (D_800CD3C8 == 0)) {
         D_i8_80144FB4 = 0x12;
     } else {
@@ -184,14 +185,14 @@ void func_i8_801447C0(void);
 extern s16 D_800CD048;
 extern s32 D_800CD3BC;
 extern s32 D_800DCCFC;
-extern Controller D_800DD180;
+extern Controller gSharedController;
 
 s32 func_i8_80143DDC(void) {
     s32 temp_v0;
     s32 gameMode;
     s32 sp1C;
 
-    func_8007DABC(&D_800DD180);
+    func_8007DABC(&gSharedController);
     D_i8_80144FD8 = &D_i8_80144FE0[D_800DCCFC];
     func_800952F4();
     func_8008675C();
@@ -225,7 +226,7 @@ s32 func_i8_80143DDC(void) {
                 if (temp_v0 == 1) {
                     gameMode = GAMEMODE_8013;
                 } else if (temp_v0 == 2) {
-                    gameMode = GAMEMODE_8007;
+                    gameMode = GAMEMODE_FLX_MAIN_MENU;
                 }
                 if (temp_v0 != 0) {
                     D_i8_80144FD6 = 1;
@@ -238,7 +239,7 @@ s32 func_i8_80143DDC(void) {
         }
     }
     if (sp1C != 0) {
-        D_800CD3BC = gTrackIndex;
+        D_800CD3BC = gCourseIndex;
         D_800CD048 = 8;
     } else if ((gameMode == GAMEMODE_6) && (D_i8_80144FD6 == 0) && (gRacers[0].unk_04 & 0x80000)) {
         D_800CD048 = 1;
@@ -250,8 +251,8 @@ Gfx* func_i8_80144B34(Gfx*, s32, s32);
 Gfx* func_i8_80144CDC(Gfx*, s32, s32);
 
 extern s32 D_i2_80106DA4;
-extern u16 D_800E416C;
-extern u16 D_800E416E;
+extern u16 gInputPressed;
+extern u16 gInputButtonPressed;
 
 s32 func_i8_80143F94(void) {
     s32 sp2C;
@@ -265,29 +266,29 @@ s32 func_i8_80143F94(void) {
     }
     func_i3_8013BF18(1);
 
-    sp28 = gTrackIndex;
-    if (D_800E416C & BTN_RIGHT) {
-        gTrackIndex++;
-        if (gTrackIndex >= D_i8_80144FB4) {
-            gTrackIndex = 0;
+    sp28 = gCourseIndex;
+    if (gInputPressed & BTN_RIGHT) {
+        gCourseIndex++;
+        if (gCourseIndex >= D_i8_80144FB4) {
+            gCourseIndex = 0;
         }
         func_i2_800FCD38(9, 0);
-    } else if (D_800E416C & BTN_LEFT) {
-        gTrackIndex--;
-        if (gTrackIndex < 0) {
-            gTrackIndex = D_i8_80144FB4 - 1;
+    } else if (gInputPressed & BTN_LEFT) {
+        gCourseIndex--;
+        if (gCourseIndex < 0) {
+            gCourseIndex = D_i8_80144FB4 - 1;
         }
         func_i2_800FCD38(9, 1);
     }
 
-    if (sp28 != gTrackIndex) {
+    if (sp28 != gCourseIndex) {
         sp2C = 1;
         func_800BA8D8(0x1E);
     } else {
         sp2C = 0;
     }
     if (sp2C == 0) {
-        if (D_800E416E & (BTN_A | BTN_START)) {
+        if (gInputButtonPressed & (BTN_A | BTN_START)) {
             D_i8_80144FC0 = func_80080AA8(0, 108, 50, 104, 100, GPACK_RGBA5551(0, 255, 0, 1), func_i8_80144B34);
             if (D_i8_80144FC0 != NULL) {
                 D_80144FB0 = 1;
@@ -295,7 +296,7 @@ s32 func_i8_80143F94(void) {
                 func_800BA8D8(0x21);
                 func_i3_8013BF18(0);
             }
-        } else if (D_800E416E & BTN_B) {
+        } else if (gInputButtonPressed & BTN_B) {
             sp2C = 2;
             func_800BA8D8(0x10);
         }
@@ -315,13 +316,13 @@ s32 func_i8_80144144(void) {
     sp2C = 0;
     sp28 = D_i8_80144FC8;
     // clang-format off
-    if (D_800E416C & BTN_UP) {
+    if (gInputPressed & BTN_UP) {
         if (--D_i8_80144FC8 < 0) { D_i8_80144FC8 = 3; }
 
         while (D_i8_80144FB8[D_i8_80144FC8] == 0) {
             if (--D_i8_80144FC8 < 0) { D_i8_80144FC8 = 3; }
         }
-    } else if (D_800E416C & BTN_DOWN) {
+    } else if (gInputPressed & BTN_DOWN) {
         if (++D_i8_80144FC8 > 3) { D_i8_80144FC8 = 0; }
 
         while (D_i8_80144FB8[D_i8_80144FC8] == 0) {
@@ -332,7 +333,7 @@ s32 func_i8_80144144(void) {
     if (sp28 != D_i8_80144FC8) {
         func_800BA8D8(0x1E);
     }
-    if (D_800E416E & (BTN_A | BTN_START)) {
+    if (gInputButtonPressed & (BTN_A | BTN_START)) {
         var_t0 = 0;
 
         switch (D_i8_80144F44[D_i8_80144FC8].unk_00) {
@@ -368,7 +369,7 @@ s32 func_i8_80144144(void) {
         if (var_t0 != 0) {
             func_800BA8D8(0x21);
         }
-    } else if (D_800E416E & BTN_B) {
+    } else if (gInputButtonPressed & BTN_B) {
         D_80144FB0 = 0;
         func_80080BDC(D_i8_80144FC0);
         func_800BA8D8(0x10);
@@ -382,11 +383,11 @@ void func_i8_801443D0(void) {
 
     if (func_8008108C(D_i8_80144FC4, 1) != 0) {
         sp1C = D_i8_80144FCC;
-        if (D_800E416C & BTN_LEFT) {
+        if (gInputPressed & BTN_LEFT) {
             if (--D_i8_80144FCC < 0) {
                 D_i8_80144FCC = 1;
             }
-        } else if (D_800E416C & BTN_RIGHT) {
+        } else if (gInputPressed & BTN_RIGHT) {
             if (++D_i8_80144FCC > 1) {
                 D_i8_80144FCC = 0;
             }
@@ -395,22 +396,22 @@ void func_i8_801443D0(void) {
             func_800BA8D8(0x1E);
         }
         sp18 = 0;
-        if (D_800E416E & (BTN_A | BTN_START)) {
+        if (gInputButtonPressed & (BTN_A | BTN_START)) {
             sp18 = 1;
             if (D_i8_80144FCC == 0) {
                 func_800BA8D8(0x10);
             } else {
                 if (D_i8_80144FCE == 0) {
-                    func_i2_801017B8(gTrackIndex);
+                    func_i2_801017B8(gCourseIndex);
                 } else if (D_i8_80144FCE == 1) {
-                    func_i2_801018A8(gTrackIndex);
+                    func_i2_801018A8(gCourseIndex);
                     D_i8_80144FD0 = 2;
                 }
                 D_i8_80144FB8[D_i8_80144FC8] = 0;
                 D_i8_80144FC8 = D_i8_80144FCA;
                 func_800BA8D8(5);
             }
-        } else if (D_800E416E & BTN_B) {
+        } else if (gInputButtonPressed & BTN_B) {
             sp18 = 1;
             func_800BA8D8(0x10);
         }

@@ -5840,167 +5840,167 @@ aCreditsSonicPhantomTex:
   compression: MIO0
   symbol: aCreditsSonicPhantomTex
 
-aSkybox7Tex:
+aSkyboxSkyBlueTex:
   type: TEXTURE
   offset: 0x215BB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: aSkybox7Tex
+  symbol: aSkyboxSkyBlueTex
 
-aSkybox1Tex:
+aSkyboxTurquoiseTex:
   type: TEXTURE
   offset: 0x215C30
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: aSkybox1Tex
+  symbol: aSkyboxTurquoiseTex
 
-aSkybox5Tex:
+aSkyboxOrangeTex:
   type: TEXTURE
   offset: 0x215CB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: aSkybox5Tex
+  symbol: aSkyboxOrangeTex
 
-aSkybox3Tex:
+aSkyboxBlueTex:
   type: TEXTURE
   offset: 0x215D30
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: aSkybox3Tex
+  symbol: aSkyboxBlueTex
 
-aSkybox2Tex:
+aSkyboxDesertTex:
   type: TEXTURE
   offset: 0x215DB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: aSkybox2Tex
+  symbol: aSkyboxDesertTex
 
-aSkybox4Tex:
+aSkyboxNightTex:
   type: TEXTURE
   offset: 0x215E30
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: aSkybox4Tex
+  symbol: aSkyboxNightTex
 
-aSkybox6Tex:
+aSkyboxSunsetTex:
   type: TEXTURE
   offset: 0x215EB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: aSkybox6Tex
+  symbol: aSkyboxSunsetTex
 
-aSkybox0Tex:
+aSkyboxPurpleTex:
   type: TEXTURE
   offset: 0x215F30
   ctype: u16
   format: RGBA16
   width: 64
   height: 1
-  symbol: aSkybox0Tex
+  symbol: aSkyboxPurpleTex
 
-aFloor0Tex:
+aVenueMuteCityTex:
   type: TEXTURE
   offset: 0x215FB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: aFloor0Tex
+  symbol: aVenueMuteCityTex
 
-aFloor1Tex:
+aVenuePortTownTex:
   type: TEXTURE
   offset: 0x216FB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: aFloor1Tex
+  symbol: aVenuePortTownTex
 
-aFloor2Tex:
+aVenueBigBlueTex:
   type: TEXTURE
   offset: 0x217FB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: aFloor2Tex
+  symbol: aVenueBigBlueTex
 
-aFloor3Tex:
+aVenueSandOceanTex:
   type: TEXTURE
   offset: 0x218FB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: aFloor3Tex
+  symbol: aVenueSandOceanTex
 
-aFloor4Tex:
+aVenueDevilsForestTex:
   type: TEXTURE
   offset: 0x219FB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: aFloor4Tex
+  symbol: aVenueDevilsForestTex
 
-aFloor5Tex:
+aVenueWhiteLandTex:
   type: TEXTURE
   offset: 0x21AFB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: aFloor5Tex
+  symbol: aVenueWhiteLandTex
 
-aFloor6Tex:
+aVenueSectorTex:
   type: TEXTURE
   offset: 0x21BFB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: aFloor6Tex
+  symbol: aVenueSectorTex
 
-aFloor7Tex:
+aVenueRedCanyonTex:
   type: TEXTURE
   offset: 0x21CFB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: aFloor7Tex
+  symbol: aVenueRedCanyonTex
 
-aFloor8Tex:
+aVenueFireFieldTex:
   type: TEXTURE
   offset: 0x21DFB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: aFloor8Tex
+  symbol: aVenueFireFieldTex
 
-aFloor9Tex:
+aVenueSilenceTex:
   type: TEXTURE
   offset: 0x21EFB0
   ctype: u16
   format: RGBA16
   width: 64
   height: 32
-  symbol: aFloor9Tex
+  symbol: aVenueSilenceTex
 
 D_F21FFB0:
   type: GFX

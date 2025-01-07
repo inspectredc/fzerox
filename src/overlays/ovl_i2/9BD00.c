@@ -22,7 +22,7 @@ uintptr_t D_i2_80106DF0[][3] = {
 void func_i2_801033B8(unk_struct_60* arg0, u8* arg1);
 void func_i2_8010300C(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3);
 void func_i2_80102F70(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3);
-void func_i2_80102CA4(unk_struct_19E0* arg0, s32 trackIndex);
+void func_i2_80102CA4(unk_struct_19E0* arg0, s32 courseIndex);
 void func_i2_80101F9C(void* arg0, s32 arg1);
 
 extern u8 D_i2_8010D730[6][9];
@@ -277,19 +277,19 @@ bool func_i2_80100B38(unk_80141C88* arg0) {
 
 void func_i2_80103310(unk_struct_80*, s32);
 
-s32 func_i2_80100C18(s32 arg0) {
+s32 func_i2_80100C18(s32 courseIndex) {
     unk_struct_80* var = (unk_struct_80*) D_i2_8010D7F0;
 
-    func_i2_80100428(&var[arg0], arg0);
-    func_i2_80103310(&var[arg0], arg0);
+    func_i2_80100428(&var[courseIndex], courseIndex);
+    func_i2_80103310(&var[courseIndex], courseIndex);
     return 0;
 }
 
-s32 func_i2_80100C60(u8* arg0) {
+s32 func_i2_80100C60(u8* courseIndex) {
     unk_struct_60* var = (unk_struct_60*) D_i2_8010D7F0;
 
     func_i2_8010046C(var);
-    func_i2_801033B8(var, arg0);
+    func_i2_801033B8(var, courseIndex);
     return 0;
 }
 
@@ -397,7 +397,7 @@ void func_i2_801010D0(unk_struct_60* arg0) {
     func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_7F80 - (uintptr_t) &D_801247C0, arg0, sizeof(unk_struct_60));
 }
 
-void func_i2_80102214(unk_struct_110* arg0, s32 trackIndex);
+void func_i2_80102214(unk_struct_110* arg0, s32 courseIndex);
 
 s32 func_i2_80101118(s32 arg0) {
     u16 checksum;
@@ -586,33 +586,33 @@ s32 func_i2_80101784(unk_801247C0* arg0, s32 arg1) {
 
 void func_i2_80101D18(unk_struct_110*, s32);
 
-s32 func_i2_801017B8(s32 arg0) {
+s32 func_i2_801017B8(s32 courseIndex) {
     u16 checksum;
     s32 i;
     unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
 
-    func_i2_80101D18(&var[0].unk_20[arg0], 1);
-    var[1].unk_20[arg0] = var[0].unk_20[arg0];
+    func_i2_80101D18(&var[0].unk_20[courseIndex], 1);
+    var[1].unk_20[courseIndex] = var[0].unk_20[courseIndex];
 
-    checksum = func_i2_801035B0(var, arg0);
+    checksum = func_i2_801035B0(var, courseIndex);
 
     for (i = 0; i < 2; i++) {
-        func_i2_80100ED4(var, i, arg0, checksum);
+        func_i2_80100ED4(var, i, courseIndex, checksum);
     }
 
-    func_i2_80102CA4(var, arg0);
+    func_i2_80102CA4(var, courseIndex);
 
     return 0;
 }
 
-s32 func_i2_801018A8(s32 arg0) {
+s32 func_i2_801018A8(s32 courseIndex) {
     s32 i;
     unk_800E5FF8* var_v0;
     unk_struct_40* var = (unk_struct_40*) D_i2_8010D7F0;
     unk_struct_3F80* var2 = (unk_struct_3F80*) &D_i2_8010D7F0[sizeof(unk_struct_40)];
 
     for (i = 0, var_v0 = D_800E5FF8; i < 3; i++, var_v0++) {
-        if (var_v0->unk_0000 == D_802A6B40[arg0].unk_00) {
+        if (var_v0->unk_0000 == D_802A6B40[courseIndex].unk_00) {
             var_v0->unk_0000 = 0;
         }
     }
@@ -947,12 +947,12 @@ void func_i2_801021B4(unk_struct_10_2* arg0) {
     // clang-format on
 }
 
-void func_i2_80102214(unk_struct_110* arg0, s32 trackIndex) {
+void func_i2_80102214(unk_struct_110* arg0, s32 courseIndex) {
     unk_800F8510* temp_s5;
     s32 i;
     s32 j;
 
-    temp_s5 = &D_802A6B40[trackIndex];
+    temp_s5 = &D_802A6B40[courseIndex];
 
     for (i = 0; i < 5; i++) {
         arg0->unk_04[i] = temp_s5->timeRecord[i];
@@ -1265,7 +1265,7 @@ void func_i2_80102B20(unk_struct_19E0* arg0) {
     }
 }
 
-void func_i2_80102CA4(unk_struct_19E0* arg0, s32 trackIndex) {
+void func_i2_80102CA4(unk_struct_19E0* arg0, s32 courseIndex) {
     u16 checksum;
     s32 j;
     s32 i;
@@ -1278,7 +1278,7 @@ void func_i2_80102CA4(unk_struct_19E0* arg0, s32 trackIndex) {
     j = 0;
 
     for (i = 0, var_s0 = arg0; i < 2; i++) {
-        if (var_s0->unk_20[trackIndex].checksum != func_i2_801035B0(var_s0, trackIndex)) {
+        if (var_s0->unk_20[courseIndex].checksum != func_i2_801035B0(var_s0, courseIndex)) {
             j++;
             var_s4 = i;
         }
@@ -1287,25 +1287,25 @@ void func_i2_80102CA4(unk_struct_19E0* arg0, s32 trackIndex) {
 
     if (j == 2) {
 
-        func_i2_80101D18(&arg0[0].unk_20[trackIndex], 1);
-        arg0[1].unk_20[trackIndex] = arg0[0].unk_20[trackIndex];
+        func_i2_80101D18(&arg0[0].unk_20[courseIndex], 1);
+        arg0[1].unk_20[courseIndex] = arg0[0].unk_20[courseIndex];
 
-        checksum = func_i2_801035B0(arg0, trackIndex);
+        checksum = func_i2_801035B0(arg0, courseIndex);
 
         for (i = 0; i < 2; i++) {
-            func_i2_80100ED4(arg0, i, trackIndex, checksum);
+            func_i2_80100ED4(arg0, i, courseIndex, checksum);
         }
 
     } else if (j == 1) {
         var_v0 = (var_s4 == 0) ? 1 : 0;
 
-        (arg0 + var_s4)->unk_20[trackIndex] = (arg0 + var_v0)->unk_20[trackIndex];
+        (arg0 + var_s4)->unk_20[courseIndex] = (arg0 + var_v0)->unk_20[courseIndex];
 
-        func_i2_80100ED4(arg0, var_s4, trackIndex, func_i2_801035B0(arg0, trackIndex));
+        func_i2_80100ED4(arg0, var_s4, courseIndex, func_i2_801035B0(arg0, courseIndex));
     }
 
-    sp40 = &arg0->unk_20[trackIndex];
-    var_s3 = &D_802A6B40[trackIndex];
+    sp40 = &arg0->unk_20[courseIndex];
+    var_s3 = &D_802A6B40[courseIndex];
 
     for (i = 0; i < 5; i++) {
         var_s3->timeRecord[i] = sp40->unk_04[i];

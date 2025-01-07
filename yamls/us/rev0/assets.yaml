@@ -202,19 +202,24 @@
     exclusive_ram_id: segment_00
     type: code
     dir: assets
-    start: 0x2787F0
     vram: 0x0
+    start: 0x2787F0
     subsegments:
       - [0x2787F0, .data, segment_2787F0/segment_2787F0]
 
+  # Ghost Data
   - name: segment_27F200
     type: bin
     start: 0x27F200
 
-  # Cup Info
-  - name: segment_2AD1E0
-    type: bin
+  - name: course_data
+    exclusive_ram_id: segment_00
+    type: code
+    dir: assets
+    vram: 0x0
     start: 0x2AD1E0
+    subsegments:
+      - [0x2AD1E0, .data, course_data/course_data]
 
   - name: segment_2B9EA0
     exclusive_ram_id: segment_0F

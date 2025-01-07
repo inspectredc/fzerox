@@ -153,7 +153,7 @@ void Fault_DisplayFloatException(u32 exceptFlags) {
 extern OSMesgQueue D_800DCA80;
 // unk flags
 const u16 D_800D4AE4[] = { 0x8000, 0x0008, 0x0008, 0x4000, 0x0001, 0x0001, 0x4000, 0x0001, 0x4000, 0x0001, 0x1000 };
-extern Controller D_800DD180;
+extern Controller gSharedController;
 #define CAUSE_INDEX(cause) ((cause >> CAUSE_EXCSHIFT) & (CAUSE_EXCMASK >> CAUSE_EXCSHIFT))
 
 void Fault_DisplayDebugInfo(OSThread* thread) {
@@ -174,17 +174,17 @@ void Fault_DisplayDebugInfo(OSThread* thread) {
     while (true) {
         osContStartReadData(&D_800DCA80);
         func_80069820();
-        if (D_800DD180.unk_7C == 0) {
+        if (gSharedController.buttonPressed == 0) {
             continue;
         }
-        if (!(D_800DD180.unk_7A & 0x2000)) {
+        if (!(gSharedController.buttonCurrent & 0x2000)) {
             continue;
         }
-        if (!(D_800DD180.unk_7A & 0x20)) {
+        if (!(gSharedController.buttonCurrent & 0x20)) {
             continue;
         }
         i++;
-        if (D_800D4AE4[i - 1] & D_800DD180.unk_7C) {
+        if (D_800D4AE4[i - 1] & gSharedController.buttonPressed) {
             if (i == 11) {
                 break;
             }
