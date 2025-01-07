@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_course.h"
 #include "assets/segment_17B960.h"
 
 extern s8 D_800DCE5C;
@@ -22,7 +23,7 @@ s32 D_i2_80106F10 = 0;
 UNUSED s8 D_i2_80106F14[] = { 0, 1, 2, 5, 4, 3, 7, 6, 5, 0, 4, 8, 2, 1, 7, 6, 8,
                               0, 7, 5, 6, 2, 3, 8, 0, 3, 4, 2, 5, 8, 7, 6, 2, 1 };
 
-extern unk_8010B7B0 D_8010B7B0[];
+extern CourseData D_8010B7B0;
 
 void func_i2_80103AD4(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
@@ -31,7 +32,7 @@ void func_i2_80103AD4(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0[0].unk_002, D_8010B7B0[0].unk_003);
+    func_8007F4E0(D_8010B7B0.venue, D_8010B7B0.skybox);
     func_i3_801365E0();
     func_i2_801044F0();
     func_8006D448();
@@ -109,7 +110,7 @@ Gfx* func_i2_80103BE0(Gfx* gfx) {
     D_800F8520 = D_800DCCF0->unk_10008;
     D_800E5ECC = D_800DCCF0->unk_21B48;
     D_800E5ED0 = &D_800DCCF0->unk_21B48[0x7FF];
-    switch (gNumPlayers) { /* irregular */
+    switch (gNumPlayers) {
         case 1:
             gfx = func_i3_801381DC(gfx, 0, 0);
             gfx = func_800A9938(gfx, 0);

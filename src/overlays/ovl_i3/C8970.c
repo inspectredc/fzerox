@@ -17,7 +17,7 @@ unk_80142180 D_i3_80142180;
 u16 D_i3_80142188;
 s32 D_i3_8014218C;
 TexturePtr sSkyboxTexture;
-TexturePtr sBackgroundFloorTexture;
+TexturePtr sVenueTexture;
 TexturePtr sCloudTexture;
 TexturePtr D_i3_8014219C;
 unk_801421A0 D_i3_801421A0[6];
@@ -43,43 +43,42 @@ f32 D_i3_801407A4 = 400.0f;
 f32 D_i3_801407A8 = 100.0f;
 
 /*
-    BACKGROUND FLOOR TEXTURES
+    VENUE TEXTURES
  */
 
 // MUTE CITY
-CourseBackgroundFloor sBackgroundFloor0 = { aFloor0Tex, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseVenue sVenueMuteCity = { aVenueMuteCityTex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // PORT TOWN
-CourseBackgroundFloor sBackgroundFloor1 = { aFloor1Tex, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseVenue sVenuePortTown = { aVenuePortTownTex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // BIG BLUE / RAINBOW ROAD
-CourseBackgroundFloor sBackgroundFloor2 = { aFloor2Tex, 0.03f, 0.03f, 0.01f, 0.01f };
+CourseVenue sVenueBigBlue = { aVenueBigBlueTex, 0.03f, 0.03f, 0.01f, 0.01f };
 
 // SAND OCEAN
-CourseBackgroundFloor sBackgroundFloor3 = { aFloor3Tex, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseVenue sVenueSandOcean = { aVenueSandOceanTex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // DEVILS FOREST / BIG HAND
-CourseBackgroundFloor sBackgroundFloor4 = { aFloor4Tex, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseVenue sVenueDevilsForest = { aVenueDevilsForestTex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // WHITE LAND
-CourseBackgroundFloor sBackgroundFloor5 = { aFloor5Tex, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseVenue sVenueWhiteLand = { aVenueWhiteLandTex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // SECTORS / SPACE PLANT
-CourseBackgroundFloor sBackgroundFloor6 = { aFloor6Tex, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseVenue sVenueSector = { aVenueSectorTex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // RED CANYON
-CourseBackgroundFloor sBackgroundFloor7 = { aFloor7Tex, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseVenue sVenueRedCanyon = { aVenueRedCanyonTex, 0.03f, 0.03f, 0.0f, 0.0f };
 
 // FIRE FIELD
-CourseBackgroundFloor sBackgroundFloor8 = { aFloor8Tex, 0.03f, 0.03f, 0.005f, 0.005f };
+CourseVenue sVenueFireField = { aVenueFireFieldTex, 0.03f, 0.03f, 0.005f, 0.005f };
 
 // SILENCE
-CourseBackgroundFloor sBackgroundFloor9 = { aFloor9Tex, 0.03f, 0.03f, 0.0f, 0.0f };
+CourseVenue sVenueSilence = { aVenueSilenceTex, 0.03f, 0.03f, 0.0f, 0.0f };
 
-CourseBackgroundFloor* D_i3_80140874[] = {
-    &sBackgroundFloor0, &sBackgroundFloor1, &sBackgroundFloor2, &sBackgroundFloor3,
-    &sBackgroundFloor4, &sBackgroundFloor5, &sBackgroundFloor6, &sBackgroundFloor7,
-    &sBackgroundFloor8, &sBackgroundFloor9, &sBackgroundFloor0,
+CourseVenue* D_i3_80140874[] = {
+    &sVenueMuteCity, &sVenuePortTown,  &sVenueBigBlue,   &sVenueSandOcean, &sVenueDevilsForest, &sVenueWhiteLand,
+    &sVenueSector,   &sVenueRedCanyon, &sVenueFireField, &sVenueSilence,   &sVenueMuteCity,
 };
 
 /*
@@ -88,37 +87,38 @@ CourseBackgroundFloor* D_i3_80140874[] = {
 
 // PURPLE SKIES
 // MUTE CITY / WHITE LAND
-CourseSkyboxes sSkybox0 = { aSkybox0Tex, 252, 192, 253, 0, 0, 0, 200, 130, 240, 0, 2 };
+CourseSkyboxes sSkyboxPurple = { aSkyboxPurpleTex, 252, 192, 253, 0, 0, 0, 200, 130, 240, 0, 2 };
 
 // TURQUOISE SKIES
 // SILENCE 2
-CourseSkyboxes sSkybox1 = { aSkybox1Tex, 155, 247, 245, 210, 255, 230, 155, 247, 245, 0, 2 };
+CourseSkyboxes sSkyboxTurquoise = { aSkyboxTurquoiseTex, 155, 247, 245, 210, 255, 230, 155, 247, 245, 0, 2 };
 
 // DESERT YELLOW
 // SAND OCEAN
-CourseSkyboxes sSkybox2 = { aSkybox2Tex, 224, 234, 210, 0, 0, 0, 225, 190, 160, 0, 2 };
+CourseSkyboxes sSkyboxDesert = { aSkyboxDesertTex, 224, 234, 210, 0, 0, 0, 225, 190, 160, 0, 2 };
 
 // BLUE
-CourseSkyboxes sSkybox3 = { aSkybox3Tex, 151, 194, 218, 210, 255, 230, 151, 194, 218, 0, 2 };
+CourseSkyboxes sSkyboxBlue = { aSkyboxBlueTex, 151, 194, 218, 210, 255, 230, 151, 194, 218, 0, 2 };
 
 // NIGHT
 // SILENCE / MUTE CITY 2
-CourseSkyboxes sSkybox4 = { aSkybox4Tex, 2, 2, 23, 245, 162, 99, 125, 155, 185, 0, 5 };
+CourseSkyboxes sSkyboxNight = { aSkyboxNightTex, 2, 2, 23, 245, 162, 99, 125, 155, 185, 0, 5 };
 
 // ORANGE DAY
 // DEVILS FOREST / SECTOR ALPHA
-CourseSkyboxes sSkybox5 = { aSkybox5Tex, 255, 224, 144, 0, 0, 0, 255, 224, 204, 0, 2 };
+CourseSkyboxes sSkyboxOrange = { aSkyboxOrangeTex, 255, 224, 144, 0, 0, 0, 255, 224, 204, 0, 2 };
 
 // SUNSET
 // PORT TOWN / DEVILS FOREST 2 / FIRE FIELD
-CourseSkyboxes sSkybox6 = { aSkybox6Tex, 245, 162, 99, 0, 0, 0, 245, 162, 99, 0, 2 };
+CourseSkyboxes sSkyboxSunset = { aSkyboxSunsetTex, 245, 162, 99, 0, 0, 0, 245, 162, 99, 0, 2 };
 
 // SKY BLUE
 // BIG BLUE 1 & 2 / RED CANYON
-CourseSkyboxes sSkybox7 = { aSkybox7Tex, 250, 255, 255, 0, 0, 0, 180, 200, 180, 0, 2 };
+CourseSkyboxes sSkyboxSkyBlue = { aSkyboxSkyBlueTex, 250, 255, 255, 0, 0, 0, 180, 200, 180, 0, 2 };
 
 CourseSkyboxes* D_i3_80140920[] = {
-    &sSkybox0, &sSkybox1, &sSkybox2, &sSkybox3, &sSkybox4, &sSkybox5, &sSkybox6, &sSkybox7,
+    &sSkyboxPurple, &sSkyboxTurquoise, &sSkyboxDesert, &sSkyboxBlue,
+    &sSkyboxNight,  &sSkyboxOrange,    &sSkyboxSunset, &sSkyboxSkyBlue,
 };
 
 /*
@@ -340,7 +340,7 @@ void func_i3_801356A0(void) {
         }
         var_fs0 += 200.0f / temp_fs1;
         if (var_fs0 >= 1.0f) {
-            var_s1 = var_s1->unk_34;
+            var_s1 = var_s1->next;
             if (temp_s5 == var_s1) {
                 break;
             }
@@ -361,7 +361,7 @@ void func_i3_801356A0(void) {
         if ((temp_s0 > 0) && (temp_s0 < 64)) {
             temp_v0 /= 2;
             if ((temp_v0 > 0) && (temp_v0 < 64)) {
-                if (temp_s5 == var_s1->unk_34) {
+                if (temp_s5 == var_s1->next) {
                     D_i3_8013F700[temp_v0 * 64 + temp_s0 + 0] = 3;
                 } else {
                     D_i3_8013F700[temp_v0 * 64 + temp_s0 + 0] = 2;
@@ -370,7 +370,7 @@ void func_i3_801356A0(void) {
         }
         var_fs0 += 200.0f / temp_fs1;
         if (var_fs0 >= 1.0f) {
-            var_s1 = var_s1->unk_34;
+            var_s1 = var_s1->next;
             if (temp_s5 == var_s1) {
                 break;
             }
@@ -401,8 +401,8 @@ void func_i3_801356A0(void) {
 }
 
 extern s16 D_800CE4D4;
-extern Controller D_800DCE98[];
-extern s32 D_800DD218[];
+extern Controller gControllers[];
+extern s32 gPlayerControlPorts[];
 extern s8 D_800CD010;
 extern Gfx D_8014940[];
 extern Gfx D_80149A0[];
@@ -413,7 +413,7 @@ extern unk_800F5DF0* D_800F5E90;
 extern u32 gGameFrameCount;
 
 Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
-    Controller* controller = &D_800DCE98[D_800DD218[arg2]];
+    Controller* controller = &gControllers[gPlayerControlPorts[arg2]];
     Racer* racer;
     s32 i;
     s32 sp108;
@@ -423,7 +423,7 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 temp_s2;
     s32 temp_v0;
 
-    if ((controller->unk_7C & BTN_CLEFT) && (arg1 >= 2)) {
+    if ((controller->buttonPressed & BTN_CLEFT) && (arg1 >= 2)) {
         if (D_800CD010 == 0) {
             D_i3_80140788[arg2] = (D_i3_80140788[arg2] + 1) % 2;
         }
@@ -565,14 +565,14 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
 
 extern s32 D_800CD510;
 extern s32 gSkyboxType;
-extern s32 gBackgroundFloorType;
+extern s32 gVenueType;
 
 extern unk_struct_1DC D_800E5220[];
-extern s32 gTrackIndex;
+extern s32 gCourseIndex;
 
 void func_i3_80139550(void);
 void func_i3_801387EC(void);
-void func_i3_80136974(unk_struct_1DC* arg0, unk_80141FF0* arg1, CourseBackgroundFloor* arg2, f32 arg3, f32 arg4);
+void func_i3_80136974(unk_struct_1DC* arg0, unk_80141FF0* arg1, CourseVenue* arg2, f32 arg3, f32 arg4);
 
 void func_i3_801365E0(void) {
     s32 pad;
@@ -585,7 +585,7 @@ void func_i3_801365E0(void) {
 
     D_i3_80142170 = gNumPlayers;
     D_800CD510 = false;
-    D_i3_80142180.unk_00 = D_i3_80140874[gBackgroundFloorType];
+    D_i3_80142180.unk_00 = D_i3_80140874[gVenueType];
     D_i3_80142180.unk_04 = D_i3_80140920[gSkyboxType];
     D_i3_80142188 = D_i3_80142180.unk_04->unk_0E;
 
@@ -603,7 +603,7 @@ void func_i3_801365E0(void) {
         func_i3_80136974(var_s1, var_s0, D_i3_80142180.unk_00, var_fs1, var_fs0);
     }
 
-    temp_v0 = &D_802A6B40[gTrackIndex];
+    temp_v0 = &D_802A6B40[gCourseIndex];
     temp_v0->unk_14[0] = D_i3_80142180.unk_04->unk_04;
     temp_v0->unk_14[1] = D_i3_80142180.unk_04->unk_05;
     temp_v0->unk_14[2] = D_i3_80142180.unk_04->unk_06;
@@ -639,7 +639,7 @@ void func_i3_801365E0(void) {
     func_i3_801387EC();
 
     sSkyboxTexture = func_80078104(D_i3_80142180.unk_04->unk_00, 0x80, 0, 0, 0);
-    sBackgroundFloorTexture = func_80078104(D_i3_80142180.unk_00->unk_00, 0x1000, 0, 0, 0);
+    sVenueTexture = func_80078104(D_i3_80142180.unk_00->unk_00, 0x1000, 0, 0, 0);
 
     if (D_i3_80142188 & 2) {
         sCloudTexture = func_80078104(aCloudTex, 0x800, 0, 0, 0);
@@ -656,7 +656,7 @@ void func_i3_801365E0(void) {
 
 const unk_80141860 D_i3_80141860 = { 400.0f, 1700.0f, 0.006f, 0.006f, 0.0f, 0.0f, 0.0f, 0.0f };
 
-void func_i3_80136974(unk_struct_1DC* arg0, unk_80141FF0* arg1, CourseBackgroundFloor* arg2, f32 arg3, f32 arg4) {
+void func_i3_80136974(unk_struct_1DC* arg0, unk_80141FF0* arg1, CourseVenue* arg2, f32 arg3, f32 arg4) {
     arg1->unk_00 = 0.0f;
     arg1->unk_08 = 0.0f;
     arg1->unk_04 = -750.0f;
@@ -688,7 +688,7 @@ void func_i3_80137AC4(Vtx*, unk_80141FF0*, unk_struct_1DC*, unk_80141860*, f32, 
 void func_i3_80138D80(void);
 void func_i3_801398D0(s32, unk_80141FF0*, unk_struct_1DC*);
 
-extern f32 D_800DD230[];
+extern f32 gSinTable[];
 
 extern GfxPool* D_800DCCF0;
 
@@ -716,7 +716,7 @@ void func_i3_80136A6C(void) {
         var_s1->unk_00 = var_s2->unk_50.x + (var_s2->unk_80 * D_i3_801407A8);
         var_s1->unk_08 = var_s2->unk_50.z + (var_s2->unk_84 * D_i3_801407A8);
         temp_v0 = Math_Round(var_s2->unk_94.x * 5.688889f);
-        temp_fa0 = D_800DD230[temp_v0 & 0xFFF] / D_800DD230[(temp_v0 + 0x400) & 0xFFF];
+        temp_fa0 = TAN(temp_v0);
 
         var_s1->unk_0C = (var_s1->unk_10 + D_i3_801407A8) * temp_fa0 * 1.2f;
         var_s1->unk_14 = var_s1->unk_0C * var_s1->unk_5C;
@@ -1181,8 +1181,8 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
     gSPDisplayList(gfx++, D_303AA40);
     gDPSetPrimColor(gfx++, 0, 0, spEC->unk_04, spEC->unk_05, spEC->unk_06, 0);
 
-    gDPLoadTextureBlock(gfx++, sBackgroundFloorTexture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 32, 0,
-                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock(gfx++, sVenueTexture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                        G_TX_NOMIRROR | G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     gSP2Triangles(gfx++, 0, 3, 1, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 7, 5, 0, 4, 6, 7, 0);
@@ -1235,9 +1235,9 @@ void func_i3_801387EC(void) {
         return;
     }
 
-    if (gTrackIndex < 24) {
-        var_s3 = D_i3_80140E58[gTrackIndex];
-    } else if ((gTrackIndex >= 48) && (gTrackIndex < 54)) {
+    if (gCourseIndex < 24) {
+        var_s3 = D_i3_80140E58[gCourseIndex];
+    } else if ((gCourseIndex >= 48) && (gCourseIndex < 54)) {
         j = Math_Rand1() % 7;
         var_s3 = sp54;
         if (j > 0) {
@@ -1259,7 +1259,7 @@ void func_i3_801387EC(void) {
         var_s3->unk_00 = 0;
         var_s3->unk_04 = 0.0f;
         var_s3 = sp54;
-    } else if (gTrackIndex != 55) {
+    } else if (gCourseIndex != 55) {
         return;
     } else {
         // FAKE
@@ -1295,11 +1295,11 @@ void func_i3_801387EC(void) {
         }
         var_s1->unk_02 = 0;
         var_s1->unk_04 = 0;
-        i = Math_Round(var_s3->unk_04 * 11.377778f);
+        i = Math_Round(DEG_TO_FZXANG2(var_s3->unk_04));
 
-        var_s1->unk_08 = 0.0f - (D_800DD230[i & 0xFFF] * 8000.0f);
+        var_s1->unk_08 = 0.0f - (SIN(i) * 8000.0f);
         var_s1->unk_0C = D_i3_801407A4;
-        var_s1->unk_10 = 0.0f - (D_800DD230[(i + 0x400) & 0xFFF] * 8000.0f);
+        var_s1->unk_10 = 0.0f - (COS(i) * 8000.0f);
 
         temp1 = D_i3_80140940[var_s1->unk_00];
 
@@ -1535,10 +1535,10 @@ void func_i3_80139550(void) {
         }
 
         var_s0->unk_0C = (Math_Rand1() % 100000) + 100000.0f;
-        temp_s1 = Math_Rand1() % 4096;
+        temp_s1 = Math_Rand1() % 0x1000;
         temp_fv0 = Math_Rand1() % 800000;
-        var_s0->unk_08 = D_800DD230[(temp_s1 + 0x400) & 0xFFF] * temp_fv0;
-        var_s0->unk_10 = D_800DD230[temp_s1 & 0xFFF] * temp_fv0;
+        var_s0->unk_08 = COS(temp_s1) * temp_fv0;
+        var_s0->unk_10 = SIN(temp_s1) * temp_fv0;
 
         temp_fv0 = ((Math_Rand1() % 10) + 1) * 0.1f;
         var_s0->red = var_s0->green = 255.0f * temp_fv0;

@@ -176,12 +176,12 @@ extern s32 D_800CD380;
 extern s8 D_800CD3C0;
 extern s8 D_800CD3C8;
 extern s32 gGameMode;
-extern Controller D_800DD180;
-extern s32 D_800DD228;
-extern u16 D_800E416C;
-extern u16 D_800E416E;
+extern Controller gSharedController;
+extern s32 gControllersConnected;
+extern u16 gInputPressed;
+extern u16 gInputButtonPressed;
 extern char* gCurrentTrackName;
-extern s32 gTrackIndex;
+extern s32 gCourseIndex;
 extern s32 D_i2_80106DA4;
 
 s32 func_i6_80115FF0(void) {
@@ -192,34 +192,34 @@ s32 func_i6_80115FF0(void) {
         return gGameMode;
     }
 
-    func_8007DABC(&D_800DD180);
+    func_8007DABC(&gSharedController);
     if (func_80079E88(0x50)->unk_04 >= 3) {
         return gGameMode;
     }
     switch (D_800CD384) {
         case 0:
             temp_t0 = D_800CD380;
-            if (D_800E416C & BTN_RIGHT) {
+            if (gInputPressed & BTN_RIGHT) {
                 if ((D_800CD380 % 4) != 3) {
                     D_800CD380++;
                 }
             }
-            if (D_800E416C & BTN_LEFT) {
+            if (gInputPressed & BTN_LEFT) {
                 if (D_800CD380 % 4) {
                     D_800CD380--;
                 }
             }
-            if (D_800E416C & BTN_DOWN) {
+            if (gInputPressed & BTN_DOWN) {
                 if ((D_800CD380 / 4) == 0) {
                     D_800CD380 += 4;
                 }
             }
-            if (D_800E416C & BTN_UP) {
+            if (gInputPressed & BTN_UP) {
                 if ((D_800CD380 / 4) != 0) {
                     D_800CD380 -= 4;
                 }
             }
-            if ((D_800CD380 == 3) && (D_800DD228 < 2)) {
+            if ((D_800CD380 == 3) && (gControllersConnected < 2)) {
                 D_800CD380 = 2;
             }
             switch (D_800CD380) {
@@ -233,18 +233,18 @@ s32 func_i6_80115FF0(void) {
             if (temp_t0 != D_800CD380) {
                 func_800BA8D8(0x1E);
             }
-            if (D_800E416E & BTN_B) {
+            if (gInputButtonPressed & BTN_B) {
                 func_800BA8D8(0x10);
                 func_8007E0CC();
                 D_800CD384 = 5;
-                return GAMEMODE_8000;
+                return GAMEMODE_FLX_TITLE;
             }
 
-            if ((D_800E416E & BTN_START) && (func_80079E88(0x5E)->unk_04 == 7)) {
+            if ((gInputButtonPressed & BTN_START) && (func_80079E88(0x5E)->unk_04 == 7)) {
                 break;
             }
 
-            if (D_800E416E & (BTN_A | BTN_START)) {
+            if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
                 D_800DCE48.unk_10 = (func_80079E88(0x5E)->unk_1C & 0xFFFF) - 39290;
                 switch (D_800CD380) {
@@ -257,8 +257,8 @@ s32 func_i6_80115FF0(void) {
                         break;
                     case 2:
                         D_800CD384 = 5;
-                        gTrackIndex = 54;
-                        gCurrentTrackName = gTrackNames[gTrackIndex];
+                        gCourseIndex = 54;
+                        gCurrentTrackName = gTrackNames[gCourseIndex];
                         gNumPlayers = 1;
                         func_800BB324(gNumPlayers - 1);
                         gDifficulty = D_800DCE48.unk_10 + 3;
@@ -281,7 +281,7 @@ s32 func_i6_80115FF0(void) {
             break;
         case 1:
             temp_t0 = D_800CD388[D_800CD380];
-            if (D_800E416C & BTN_DOWN) {
+            if (gInputPressed & BTN_DOWN) {
                 D_800CD388[D_800CD380]++;
             }
             if ((D_800CD3C0 < 2) && (D_800CD3C8 == 0)) {
@@ -293,8 +293,8 @@ s32 func_i6_80115FF0(void) {
                     D_800CD388[D_800CD380] = D_i6_8011EEF0[D_800CD380];
                 }
             }
-            if (D_800CD380 == 3 && (D_800DD228 < D_800CD388[D_800CD380] + 2)) {
-                D_800CD388[D_800CD380] = D_800DD228 - 2;
+            if (D_800CD380 == 3 && (gControllersConnected < D_800CD388[D_800CD380] + 2)) {
+                D_800CD388[D_800CD380] = gControllersConnected - 2;
                 if (D_800CD388[D_800CD380] < 0) {
                     D_800CD388[D_800CD380] = 0;
                     D_800CD384 = 0;
@@ -303,7 +303,7 @@ s32 func_i6_80115FF0(void) {
                 }
             }
 
-            if (D_800E416C & BTN_UP) {
+            if (gInputPressed & BTN_UP) {
                 if (D_800CD388[D_800CD380] > 0) {
                     D_800CD388[D_800CD380]--;
                 }
@@ -311,12 +311,12 @@ s32 func_i6_80115FF0(void) {
             if (temp_t0 != D_800CD388[D_800CD380]) {
                 func_800BA8D8(0x1E);
             }
-            if (D_800E416E & BTN_B) {
+            if (gInputButtonPressed & BTN_B) {
                 D_800CD384 = 0;
                 func_800BA8D8(0x10);
-            } else if ((D_800E416E & BTN_START) && (func_80079E88(0x5E)->unk_04 == 7)) {
+            } else if ((gInputButtonPressed & BTN_START) && (func_80079E88(0x5E)->unk_04 == 7)) {
                 break;
-            } else if (D_800E416E & (BTN_A | BTN_START)) {
+            } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x21);
                 D_800CD384 = 2;
                 switch (D_800CD380) {
@@ -342,7 +342,7 @@ s32 func_i6_80115FF0(void) {
             break;
         case 2:
             Math_Rand1();
-            if (D_800E416E & BTN_B) {
+            if (gInputButtonPressed & BTN_B) {
                 func_800BA8D8(0x10);
                 switch (D_800CD380) {
                     case 0:
@@ -357,10 +357,10 @@ s32 func_i6_80115FF0(void) {
                 }
                 break;
             }
-            if ((D_800E416E & BTN_START) && (func_80079E88(0x5E)->unk_04 == 7)) {
+            if ((gInputButtonPressed & BTN_START) && (func_80079E88(0x5E)->unk_04 == 7)) {
                 break;
             }
-            if (D_800E416E & (BTN_A | BTN_START)) {
+            if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
                 func_800BB324(gNumPlayers - 1);
                 switch (D_800CD380) {
@@ -372,7 +372,7 @@ s32 func_i6_80115FF0(void) {
                         D_800CD384 = 3;
                         break;
                     default:
-                        return GAMEMODE_8000;
+                        return GAMEMODE_FLX_TITLE;
                 }
             }
             break;
@@ -401,7 +401,7 @@ s32 func_i6_80115FF0(void) {
                     D_800CD384 = 4;
                 }
             }
-            if (D_800E416E & BTN_B) {
+            if (gInputButtonPressed & BTN_B) {
                 func_800BA8D8(0x10);
                 switch (D_800CD380) {
                     case 0:
@@ -421,7 +421,7 @@ s32 func_i6_80115FF0(void) {
         default:
             break;
     }
-    return GAMEMODE_8007;
+    return GAMEMODE_FLX_MAIN_MENU;
 }
 
 Gfx* func_i6_801167CC(Gfx* gfx) {
@@ -565,7 +565,7 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
     return func_80078EA0(gfx, sMenuSignCompTexInfos[temp_t0], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
 }
 
-extern f32 D_800DD230[];
+extern f32 gSinTable[];
 extern s8 D_800CD3C4;
 
 Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
@@ -671,8 +671,8 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
                     break;
                 case 12:
                 case 22:
-                    i = ((s32) ((s32) ((var_t1 << 0xC) * (arg1->unk_1C + 0x40)) / 64) / 240);
-                    sp50 = (D_800DD230[i & 0xFFF] * arg1->unk_1C);
+                    i = ((((var_t1 * 0x1000) * (arg1->unk_1C + 64)) / 64) / 240);
+                    sp50 = (SIN(i) * arg1->unk_1C);
                     alpha = 255 - arg1->unk_1C;
                     if (alpha < 0) {
                         alpha = 0;
@@ -789,7 +789,7 @@ Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
                     break;
             }
         } else {
-            if ((D_800DD228 - 2) < i) {
+            if ((gControllersConnected - 2) < i) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 128);
             } else {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -970,14 +970,14 @@ void func_i6_80117D3C(unk_800E3A28* arg0) {
 }
 
 extern s8 D_800CD3C8;
-extern u16 D_800E416C;
-extern u16 D_800E416E;
+extern u16 gInputPressed;
+extern u16 gInputButtonPressed;
 
 void func_i6_80117DE0(unk_800E3A28* arg0) {
     unk_800E3A28* sp1C;
 
-    if ((arg0->unk_04 < 8) && (D_800E416E != 0)) {
-        if (D_i6_8011EF10[arg0->unk_04] & D_800E416C) {
+    if ((arg0->unk_04 < 8) && (gInputButtonPressed != 0)) {
+        if (D_i6_8011EF10[arg0->unk_04] & gInputPressed) {
             if (++arg0->unk_04 == 8) {
                 D_800CD3C8 = 1;
                 func_i2_80101414();
@@ -988,7 +988,7 @@ void func_i6_80117DE0(unk_800E3A28* arg0) {
                 }
             }
         } else {
-            if (D_i6_8011EF10[0] & D_800E416E) {
+            if (D_i6_8011EF10[0] & gInputButtonPressed) {
                 arg0->unk_04 = 1;
             } else {
                 arg0->unk_04 = 0;

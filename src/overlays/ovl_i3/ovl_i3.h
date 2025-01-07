@@ -10,13 +10,13 @@ typedef struct unk_8013E7A8 {
     s8 unk_06[8];
 } unk_8013E7A8; // size = 0xE
 
-typedef struct CourseBackgroundFloor {
+typedef struct CourseVenue {
     void* unk_00;
     f32 unk_04;
     f32 unk_08;
     f32 unk_0C;
     f32 unk_10;
-} CourseBackgroundFloor; // size = 0x14
+} CourseVenue; // size = 0x14
 
 typedef struct CourseSkyboxes {
     void* unk_00;
@@ -34,7 +34,7 @@ typedef struct CourseSkyboxes {
 } CourseSkyboxes; // size = 0x10
 
 typedef struct unk_80142180 {
-    CourseBackgroundFloor* unk_00;
+    CourseVenue* unk_00;
     CourseSkyboxes* unk_04;
 } unk_80142180; // size = 0x8
 

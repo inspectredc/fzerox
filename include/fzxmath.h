@@ -11,6 +11,19 @@
 #define LCG_INCREMENT_1 12345
 #define LCG_INCREMENT_2 67890
 
+#define SIN(x) (gSinTable[(x) & 0xFFF])
+#define COS(x) (gSinTable[((x) + 0x400) & 0xFFF])
+#define TAN(x) (SIN(x) / COS(x))
+
+// TODO: figure out calculation from D_PI and M_PI which gives correct rodata values
+#define D_TWO_PI 6.283185958862305
+#define M_TWO_PI 6.283186f
+
+#define RAD_TO_FZXANG(x) (((x) * 0x1000) / D_TWO_PI)
+
+#define DEG_TO_FZXANG(x) (((x) * 0x1000) / 360)
+#define DEG_TO_FZXANG2(x) ((x) * (0x1000 / 360.0f))
+
 typedef union {
     struct {
         /* 0x0 */ f32 x;
@@ -50,6 +63,9 @@ typedef union {
     Mtx3F_t mf;
     struct {
         Vec3f x,y,z;
+    };
+    struct {
+        Vec3f v[3];
     };
     struct {
         float xx, yx, zx,

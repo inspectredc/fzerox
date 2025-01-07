@@ -171,7 +171,7 @@ extern s16 D_800E5FE2;
 extern s16 D_800E5FE4;
 extern s16 D_800E5FE6;
 
-Gfx* func_i3_8013A360(Gfx* gfx, s32 trackIndex) {
+Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
     unk_800F8510* var_s2;
     s32 sp1A8;
     s32 xl;
@@ -194,7 +194,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 trackIndex) {
         gfx = func_8007A440(gfx, 0xC, 8, 0x134, 0xE8, 0, 0, 0, 0xBF);
     }
     if (D_i3_80143780 & 1) {
-        var = gTrackNames[trackIndex];
+        var = gTrackNames[courseIndex];
         i = func_i2_801062E4(var, 3, 1);
 
         gfx = func_i3_DrawBeveledBox(gfx, 0x99 - i / 2, 0x15, i / 2 + 0xA7, 0x2B, 0, 0, 0xC8, 0x7F);
@@ -229,7 +229,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 trackIndex) {
     }
 
     if (D_i3_80143780 & 0x40) {
-        var_s2 = &D_802A6B40[trackIndex];
+        var_s2 = &D_802A6B40[courseIndex];
         for (i = 0; i < 5; i++) {
             if (i & 1) {
                 var_s3 = -D_i3_80143788;
@@ -249,7 +249,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 trackIndex) {
     }
 
     sp1A8 = 1;
-    var_s2 = &D_802A6B40[trackIndex];
+    var_s2 = &D_802A6B40[courseIndex];
     for (i = 0; i < 5; i++) {
 
         if (i & 1) {
@@ -571,14 +571,14 @@ void func_i3_8013BF50(s32 arg0) {
 }
 
 extern s16 D_800E5FE2;
-extern s32 gTrackIndex;
+extern s32 gCourseIndex;
 
 void func_i3_8013C008(void) {
     unk_800F8510* temp_v1;
     s32 i;
 
     if (D_800E5FE2 != 0) {
-        temp_v1 = &D_802A6B40[gTrackIndex];
+        temp_v1 = &D_802A6B40[gCourseIndex];
         for (i = 0; i < 4; i++) {
             temp_v1->unk_AC[D_800E5FE2 - 1][i] = 0;
         }
@@ -611,11 +611,11 @@ void func_i3_8013C380(void);
 void func_i3_8013C3B4(s32);
 void func_i3_8013C6D8(void);
 
-extern Controller D_800DCE98[];
-extern s32 D_800DD218[];
+extern Controller gControllers[];
+extern s32 gPlayerControlPorts[];
 
 void func_i3_8013C15C(void) {
-    func_8007DABC(&D_800DCE98[D_800DD218[0]]);
+    func_8007DABC(&gControllers[gPlayerControlPorts[0]]);
     switch (D_i3_801437B0) {
         case 0:
             func_i3_8013C380();
@@ -740,7 +740,7 @@ void func_i3_8013D214(unk_800F8510* arg0) {
 
         arg0->unk_AC[D_800E5FE2 - 1][i] = var_v1;
     }
-    func_i2_80101118(gTrackIndex);
+    func_i2_80101118(gCourseIndex);
 }
 
 signed char D_i3_80140F84[] = "NAME ENTRY";

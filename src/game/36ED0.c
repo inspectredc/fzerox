@@ -1,4 +1,7 @@
 #include "global.h"
+#include "fzx_racer.h"
+#include "fzx_course.h"
+#include "assets/segment_16C8A0.h"
 
 #define VERTEX_MODIFIED_ST(s, t) ((((s) << 15) & 0xFFFF0000) | ((t) &0xFFFF))
 
@@ -35,15 +38,15 @@ extern unk_800CF528 D_800CF528[];
 extern unk_800CF528 D_800CF868[];
 extern f32 D_800CF60C;
 
-void func_8009CED0(u32 arg0) {
-    switch (arg0) {
-        case 0:
+void func_8009CED0(s32 venue) {
+    switch (venue) {
+        case VENUE_MUTE_CITY:
             D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[4].unk_04 = D_800CF528[5].unk_04 =
                 D_800CF528[6].unk_04 = 16.0f;
             D_800CF868[0].unk_04 = 14.0f;
             D_800CF60C = 7.0f;
             break;
-        case 2:
+        case VENUE_BIG_BLUE:
             D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = 14.0f;
             D_800CF528[5].unk_04 = 1.0f;
             D_800CF868[0].unk_04 = 1.0f;
@@ -51,29 +54,29 @@ void func_8009CED0(u32 arg0) {
             D_800CF528[6].unk_04 = 6.0f;
             D_800CF60C = 7.0f;
             break;
-        case 4:
+        case VENUE_DEVILS_FOREST:
             D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[4].unk_04 = D_800CF528[5].unk_04 =
                 D_800CF528[6].unk_04 = D_800CF868[0].unk_04 = 14.0f;
             D_800CF60C = 3.5f;
             break;
-        case 6:
+        case VENUE_SECTOR:
             D_800CF868[0].unk_04 = 7.0f;
             D_800CF528[4].unk_04 = 5.0f;
             D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[5].unk_04 = D_800CF528[6].unk_04 = 10.0f;
             D_800CF60C = 3.5f;
             break;
-        case 7:
+        case VENUE_RED_CANYON:
             D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[4].unk_04 = D_800CF528[5].unk_04 =
                 D_800CF528[6].unk_04 = D_800CF868[0].unk_04 = 14.0f;
             D_800CF60C = 3.5f;
             break;
-        case 9:
+        case VENUE_SILENCE:
             D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[5].unk_04 = D_800CF528[6].unk_04 =
                 D_800CF868[0].unk_04 = 14.0f;
             D_800CF528[4].unk_04 = 7.0f;
             D_800CF60C = 7.0f;
             break;
-        case 10:
+        case VENUE_ENDING:
             D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[4].unk_04 = D_800CF528[5].unk_04 =
                 D_800CF528[6].unk_04 = 5.5f;
             D_800CF868[0].unk_04 = 14.0f;
@@ -103,7 +106,7 @@ s32 func_8009DEAC(unk_800F8510* arg0) {
             return -1;
         }
         var_s0->unk_24 = (sp4C + sp48) * 0.5f;
-        var_s0 = var_s0->unk_34;
+        var_s0 = var_s0->next;
     } while (var_s0 != arg0->unk_10);
 
     return 0;
@@ -118,9 +121,9 @@ f32 func_8009DFA0(Racer_unk_C* arg0) {
     if (arg0->unk_04 < 0.5f) {
         if (arg0->unk_04 < 0.25f) {
             var_fv1 = 0.0f;
-            var_fv0 = arg0->unk_1C.x - arg0->unk_00->unk_00.x;
-            var_fa1 = arg0->unk_1C.y - arg0->unk_00->unk_00.y;
-            var_ft4 = arg0->unk_1C.z - arg0->unk_00->unk_00.z;
+            var_fv0 = arg0->unk_1C.x - arg0->unk_00->pos.x;
+            var_fa1 = arg0->unk_1C.y - arg0->unk_00->pos.y;
+            var_ft4 = arg0->unk_1C.z - arg0->unk_00->pos.z;
         } else {
             var_fv1 = arg0->unk_00->unk_98;
             var_fv0 = arg0->unk_1C.x - arg0->unk_00->unk_74.x;
@@ -162,9 +165,9 @@ f32 func_8009E108(unk_8006FC8C* arg0, f32 arg1, f32* arg2) {
     f32 spA4;
     Vec3f sp98;
     Vec3f sp8C;
-    unk_8006FC8C* temp_s0 = arg0->unk_34;
-    unk_8006FC8C* temp_s1 = arg0->unk_38;
-    unk_8006FC8C* temp_s2 = temp_s0->unk_34;
+    unk_8006FC8C* temp_s0 = arg0->next;
+    unk_8006FC8C* temp_s1 = arg0->prev;
+    unk_8006FC8C* temp_s2 = temp_s0->next;
 
     spDC = arg0->unk_24;
     spD8 = spDC - 2.0f;
@@ -186,12 +189,9 @@ f32 func_8009E108(unk_8006FC8C* arg0, f32 arg1, f32* arg2) {
     temp_ft4 = spD8 * cube + spD0 * square + spDC * var_fs0;
     spA4 = (cube - square) * spDC;
 
-    sp98.x = temp_fa0 * temp_s1->unk_00.x + temp_fa1 * arg0->unk_00.x + temp_ft4 * temp_s0->unk_00.x +
-             spA4 * temp_s2->unk_00.x;
-    sp98.y = temp_fa0 * temp_s1->unk_00.y + temp_fa1 * arg0->unk_00.y + temp_ft4 * temp_s0->unk_00.y +
-             spA4 * temp_s2->unk_00.y;
-    sp98.z = temp_fa0 * temp_s1->unk_00.z + temp_fa1 * arg0->unk_00.z + temp_ft4 * temp_s0->unk_00.z +
-             spA4 * temp_s2->unk_00.z;
+    sp98.x = temp_fa0 * temp_s1->pos.x + temp_fa1 * arg0->pos.x + temp_ft4 * temp_s0->pos.x + spA4 * temp_s2->pos.x;
+    sp98.y = temp_fa0 * temp_s1->pos.y + temp_fa1 * arg0->pos.y + temp_ft4 * temp_s0->pos.y + spA4 * temp_s2->pos.y;
+    sp98.z = temp_fa0 * temp_s1->pos.z + temp_fa1 * arg0->pos.z + temp_ft4 * temp_s0->pos.z + spA4 * temp_s2->pos.z;
 
     while (var_fs0 < spB4) {
         var_fs0 += 0.05f;
@@ -206,14 +206,14 @@ f32 func_8009E108(unk_8006FC8C* arg0, f32 arg1, f32* arg2) {
         temp_ft4 = spD8 * cube + spD0 * square + spDC * var_fs0;
         spA4 = (cube - square) * spDC;
 
-        sp8C.x = (temp_s1->unk_00.x * temp_fa0) + (temp_fa1 * arg0->unk_00.x) + (temp_ft4 * temp_s0->unk_00.x) +
-                 (spA4 * temp_s2->unk_00.x);
+        sp8C.x = (temp_s1->pos.x * temp_fa0) + (temp_fa1 * arg0->pos.x) + (temp_ft4 * temp_s0->pos.x) +
+                 (spA4 * temp_s2->pos.x);
         temp_fs2 = sp8C.x - sp98.x;
-        sp8C.y = (temp_s1->unk_00.y * temp_fa0) + (temp_fa1 * arg0->unk_00.y) + (temp_ft4 * temp_s0->unk_00.y) +
-                 (spA4 * temp_s2->unk_00.y);
+        sp8C.y = (temp_s1->pos.y * temp_fa0) + (temp_fa1 * arg0->pos.y) + (temp_ft4 * temp_s0->pos.y) +
+                 (spA4 * temp_s2->pos.y);
         temp_fv0 = sp8C.y - sp98.y;
-        sp8C.z = (temp_s1->unk_00.z * temp_fa0) + (temp_fa1 * arg0->unk_00.z) + (temp_ft4 * temp_s0->unk_00.z) +
-                 (spA4 * temp_s2->unk_00.z);
+        sp8C.z = (temp_s1->pos.z * temp_fa0) + (temp_fa1 * arg0->pos.z) + (temp_ft4 * temp_s0->pos.z) +
+                 (spA4 * temp_s2->pos.z);
         temp_fv1 = sp8C.z - sp98.z;
 
         *arg2 += sqrtf(SQ(temp_fs2) + SQ(temp_fv0) + SQ(temp_fv1));
@@ -242,9 +242,9 @@ f32 func_8009E538(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
     f32 sp40;
     f32 sp3C;
     f32 sp38;
-    unk_8006FC8C* temp_v0 = arg0->unk_34;
-    unk_8006FC8C* temp_v1 = arg0->unk_38;
-    unk_8006FC8C* temp_a1 = temp_v0->unk_34;
+    unk_8006FC8C* temp_v0 = arg0->next;
+    unk_8006FC8C* temp_v1 = arg0->prev;
+    unk_8006FC8C* temp_a1 = temp_v0->next;
 
     square = SQ(arg1);
     temp_fv0 = arg0->unk_24;
@@ -254,9 +254,9 @@ f32 func_8009E538(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
     sp3C = (3.0f * temp_fv0 - 6.0f) * square + (6.0f - 4.0f * temp_fv0) * arg1 + temp_fv0;
     sp38 = (3.0f * square - 2.0f * arg1) * temp_fv0;
 
-    arg2->x = sp44 * temp_v1->unk_00.x + sp40 * arg0->unk_00.x + sp3C * temp_v0->unk_00.x + sp38 * temp_a1->unk_00.x;
-    arg2->y = sp44 * temp_v1->unk_00.y + sp40 * arg0->unk_00.y + sp3C * temp_v0->unk_00.y + sp38 * temp_a1->unk_00.y;
-    arg2->z = sp44 * temp_v1->unk_00.z + sp40 * arg0->unk_00.z + sp3C * temp_v0->unk_00.z + sp38 * temp_a1->unk_00.z;
+    arg2->x = sp44 * temp_v1->pos.x + sp40 * arg0->pos.x + sp3C * temp_v0->pos.x + sp38 * temp_a1->pos.x;
+    arg2->y = sp44 * temp_v1->pos.y + sp40 * arg0->pos.y + sp3C * temp_v0->pos.y + sp38 * temp_a1->pos.y;
+    arg2->z = sp44 * temp_v1->pos.z + sp40 * arg0->pos.z + sp3C * temp_v0->pos.z + sp38 * temp_a1->pos.z;
 
     return sqrtf(SQ(arg2->x) + SQ(arg2->y) + SQ(arg2->z));
 }
@@ -269,9 +269,9 @@ void func_8009E6F0(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
     f32 sp2C;
     f32 sp28;
     f32 sp24;
-    unk_8006FC8C* temp_v0 = arg0->unk_38;
-    unk_8006FC8C* temp_v1 = arg0->unk_34;
-    unk_8006FC8C* temp_a1 = temp_v1->unk_34;
+    unk_8006FC8C* temp_v0 = arg0->prev;
+    unk_8006FC8C* temp_v1 = arg0->next;
+    unk_8006FC8C* temp_a1 = temp_v1->next;
 
     temp_fv0 = arg0->unk_24;
     square = SQ(arg1);
@@ -281,9 +281,9 @@ void func_8009E6F0(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
     sp28 = (temp_fv0 - 2.0f) * cube + (3.0f - 2.0f * temp_fv0) * square + temp_fv0 * arg1;
     sp24 = (cube - square) * temp_fv0;
 
-    arg2->x = sp30 * temp_v0->unk_00.x + sp2C * arg0->unk_00.x + sp28 * temp_v1->unk_00.x + sp24 * temp_a1->unk_00.x;
-    arg2->y = sp30 * temp_v0->unk_00.y + sp2C * arg0->unk_00.y + sp28 * temp_v1->unk_00.y + sp24 * temp_a1->unk_00.y;
-    arg2->z = sp30 * temp_v0->unk_00.z + sp2C * arg0->unk_00.z + sp28 * temp_v1->unk_00.z + sp24 * temp_a1->unk_00.z;
+    arg2->x = sp30 * temp_v0->pos.x + sp2C * arg0->pos.x + sp28 * temp_v1->pos.x + sp24 * temp_a1->pos.x;
+    arg2->y = sp30 * temp_v0->pos.y + sp2C * arg0->pos.y + sp28 * temp_v1->pos.y + sp24 * temp_a1->pos.y;
+    arg2->z = sp30 * temp_v0->pos.z + sp2C * arg0->pos.z + sp28 * temp_v1->pos.z + sp24 * temp_a1->pos.z;
 }
 
 f32 func_8009E85C(unk_8006FC8C* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
@@ -293,9 +293,9 @@ f32 func_8009E85C(unk_8006FC8C* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
     f32 sp48;
     f32 sp44;
     f32 sp40;
-    unk_8006FC8C* temp_v0 = arg0->unk_34;
-    unk_8006FC8C* temp_v1 = arg0->unk_38;
-    unk_8006FC8C* temp_a1 = temp_v0->unk_34;
+    unk_8006FC8C* temp_v0 = arg0->next;
+    unk_8006FC8C* temp_v1 = arg0->prev;
+    unk_8006FC8C* temp_a1 = temp_v0->next;
 
     temp_fa0 = arg0->unk_24;
     sp50 = SQ(arg1);
@@ -304,9 +304,9 @@ f32 func_8009E85C(unk_8006FC8C* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
     sp44 = (3.0f * temp_fa0 - 6.0f) * sp50 + (6.0f - 4.0f * temp_fa0) * arg1 + temp_fa0;
     sp40 = (3.0f * sp50 - 2.0f * arg1) * temp_fa0;
 
-    arg2->xx = sp4C * temp_v1->unk_00.x + sp48 * arg0->unk_00.x + sp44 * temp_v0->unk_00.x + sp40 * temp_a1->unk_00.x;
-    arg2->yx = sp4C * temp_v1->unk_00.y + sp48 * arg0->unk_00.y + sp44 * temp_v0->unk_00.y + sp40 * temp_a1->unk_00.y;
-    arg2->zx = sp4C * temp_v1->unk_00.z + sp48 * arg0->unk_00.z + sp44 * temp_v0->unk_00.z + sp40 * temp_a1->unk_00.z;
+    arg2->xx = sp4C * temp_v1->pos.x + sp48 * arg0->pos.x + sp44 * temp_v0->pos.x + sp40 * temp_a1->pos.x;
+    arg2->yx = sp4C * temp_v1->pos.y + sp48 * arg0->pos.y + sp44 * temp_v0->pos.y + sp40 * temp_a1->pos.y;
+    arg2->zx = sp4C * temp_v1->pos.z + sp48 * arg0->pos.z + sp44 * temp_v0->pos.z + sp40 * temp_a1->pos.z;
 
     sp50 = sqrtf(SQ(arg2->xx) + SQ(arg2->yx) + SQ(arg2->zx));
     temp_fa0 = 1.0f / sp50;
@@ -315,9 +315,9 @@ f32 func_8009E85C(unk_8006FC8C* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
     arg2->yx *= temp_fa0;
     arg2->zx *= temp_fa0;
 
-    arg2->xy = (arg0->unk_34->unk_0C.x - arg0->unk_0C.x) * arg3 + arg0->unk_0C.x;
-    arg2->yy = (arg0->unk_34->unk_0C.y - arg0->unk_0C.y) * arg3 + arg0->unk_0C.y;
-    arg2->zy = (arg0->unk_34->unk_0C.z - arg0->unk_0C.z) * arg3 + arg0->unk_0C.z;
+    arg2->xy = (arg0->next->unk_0C.x - arg0->unk_0C.x) * arg3 + arg0->unk_0C.x;
+    arg2->yy = (arg0->next->unk_0C.y - arg0->unk_0C.y) * arg3 + arg0->unk_0C.y;
+    arg2->zy = (arg0->next->unk_0C.z - arg0->unk_0C.z) * arg3 + arg0->unk_0C.z;
 
     arg2->xz = arg2->yy * arg2->zx - arg2->zy * arg2->yx;
     arg2->yz = arg2->zy * arg2->xx - arg2->xy * arg2->zx;
@@ -364,9 +364,9 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
     i = arg4 - 1;
 
     var_s3 = arg0->unk_00;
-    var_s4 = var_s3->unk_34;
-    var_s1 = var_s3->unk_38;
-    var_s2 = var_s4->unk_34;
+    var_s4 = var_s3->next;
+    var_s1 = var_s3->prev;
+    var_s2 = var_s4->next;
 
     var_fs3 = var_s3->unk_24;
     var_fs5 = var_fs3 - 2.0f;
@@ -383,11 +383,11 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
             if (arg0->unk_04 > 1.9f) {
                 return -1;
             }
-            arg0->unk_00 = arg0->unk_00->unk_34;
+            arg0->unk_00 = arg0->unk_00->next;
             var_s1 = var_s3;
             var_s3 = var_s4;
             var_s4 = var_s2;
-            var_s2 = arg0->unk_00->unk_34->unk_34;
+            var_s2 = arg0->unk_00->next->next;
             var_fs3 = arg0->unk_00->unk_24;
 
             var_fs5 = var_fs3 - 2.0f;
@@ -403,11 +403,11 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
             if (arg0->unk_04 < -0.9f) {
                 return -1;
             }
-            arg0->unk_00 = arg0->unk_00->unk_38;
+            arg0->unk_00 = arg0->unk_00->prev;
             var_s2 = var_s4;
             var_s4 = var_s3;
             var_s3 = var_s1;
-            var_s1 = arg0->unk_00->unk_38;
+            var_s1 = arg0->unk_00->prev;
             var_fs3 = arg0->unk_00->unk_24;
 
             var_fs5 = var_fs3 - 2.0f;
@@ -428,12 +428,12 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
         temp_fs1 = (var_fs5 * temp_fv1 - (((var_fs5 - 1.0f) + var_fs3) * square)) + (var_fs3 * arg0->unk_04);
         temp_fs2 = (temp_fv1 - square) * var_fs3;
 
-        arg0->unk_1C.x = (temp_ft4 * var_s1->unk_00.x) + (temp_ft5 * var_s3->unk_00.x) + (temp_fs1 * var_s4->unk_00.x) +
-                         (temp_fs2 * var_s2->unk_00.x);
-        arg0->unk_1C.y = (temp_ft4 * var_s1->unk_00.y) + (temp_ft5 * var_s3->unk_00.y) + (temp_fs1 * var_s4->unk_00.y) +
-                         (temp_fs2 * var_s2->unk_00.y);
-        arg0->unk_1C.z = (temp_ft4 * var_s1->unk_00.z) + (temp_ft5 * var_s3->unk_00.z) + (temp_fs1 * var_s4->unk_00.z) +
-                         (temp_fs2 * var_s2->unk_00.z);
+        arg0->unk_1C.x = (temp_ft4 * var_s1->pos.x) + (temp_ft5 * var_s3->pos.x) + (temp_fs1 * var_s4->pos.x) +
+                         (temp_fs2 * var_s2->pos.x);
+        arg0->unk_1C.y = (temp_ft4 * var_s1->pos.y) + (temp_ft5 * var_s3->pos.y) + (temp_fs1 * var_s4->pos.y) +
+                         (temp_fs2 * var_s2->pos.y);
+        arg0->unk_1C.z = (temp_ft4 * var_s1->pos.z) + (temp_ft5 * var_s3->pos.z) + (temp_fs1 * var_s4->pos.z) +
+                         (temp_fs2 * var_s2->pos.z);
 
         temp_fv1 = 3.0f * square;
         temp_ft4 = (((arg0->unk_04 * 4.0f) - 1.0f) - temp_fv1) * var_fs3;
@@ -441,12 +441,12 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
         temp_fs1 = (sp78 * square - (spB4 * arg0->unk_04)) + var_fs3;
         temp_fs2 = (temp_fv1 - (2.0f * arg0->unk_04)) * var_fs3;
 
-        arg0->unk_0C.x = (temp_ft4 * var_s1->unk_00.x) + (temp_ft5 * var_s3->unk_00.x) + (temp_fs1 * var_s4->unk_00.x) +
-                         (temp_fs2 * var_s2->unk_00.x);
-        arg0->unk_0C.y = (temp_ft4 * var_s1->unk_00.y) + (temp_ft5 * var_s3->unk_00.y) + (temp_fs1 * var_s4->unk_00.y) +
-                         (temp_fs2 * var_s2->unk_00.y);
-        arg0->unk_0C.z = (temp_ft4 * var_s1->unk_00.z) + (temp_ft5 * var_s3->unk_00.z) + (temp_fs1 * var_s4->unk_00.z) +
-                         (temp_fs2 * var_s2->unk_00.z);
+        arg0->unk_0C.x = (temp_ft4 * var_s1->pos.x) + (temp_ft5 * var_s3->pos.x) + (temp_fs1 * var_s4->pos.x) +
+                         (temp_fs2 * var_s2->pos.x);
+        arg0->unk_0C.y = (temp_ft4 * var_s1->pos.y) + (temp_ft5 * var_s3->pos.y) + (temp_fs1 * var_s4->pos.y) +
+                         (temp_fs2 * var_s2->pos.y);
+        arg0->unk_0C.z = (temp_ft4 * var_s1->pos.z) + (temp_ft5 * var_s3->pos.z) + (temp_fs1 * var_s4->pos.z) +
+                         (temp_fs2 * var_s2->pos.z);
 
         arg0->unk_18 = sqrtf(SQ_SUM(&arg0->unk_0C));
         arg0->unk_28.x = arg1 - arg0->unk_1C.x;
@@ -510,7 +510,7 @@ s32 func_8009F334(unk_800F8510* arg0) {
         var_s0->unk_0C.x = sp30.xy;
         var_s0->unk_0C.y = sp30.yy;
         var_s0->unk_0C.z = sp30.zy;
-        var_s0 = var_s0->unk_34;
+        var_s0 = var_s0->next;
     } while (var_s0 != arg0->unk_10);
 
     return 0;
@@ -523,28 +523,29 @@ s32 func_8009F3E0(unk_800F8510* arg0) {
     unk_8006FC8C* var_v0 = arg0->unk_10;
 
     do {
-        var_v0->unk_20 &= ~0x600;
-        if (var_v0->unk_20 & 0x10000000) {
+        var_v0->trackSegmentInfo &= ~TRACK_JOIN_MASK;
+        if (var_v0->trackSegmentInfo & TRACK_FLAG_JOINABLE) {
             continue;
         }
 
-        if (var_v0->unk_38->unk_20 & 0x10000000) {
-            var_v0->unk_20 |= 0x200;
+        if (var_v0->prev->trackSegmentInfo & TRACK_FLAG_JOINABLE) {
+            var_v0->trackSegmentInfo |= TRACK_JOIN_PREVIOUS;
         }
 
-        if (var_v0->unk_34->unk_20 & 0x10000000) {
-            var_v0->unk_20 |= 0x400;
+        if (var_v0->next->trackSegmentInfo & TRACK_FLAG_JOINABLE) {
+            var_v0->trackSegmentInfo |= TRACK_JOIN_NEXT;
         }
 
-        switch (var_v0->unk_20 & 0x600) {
-            case 0x200:
-            case 0x400:
-                if (var_v0->unk_28 <= (D_800CF8E8[(u32) (var_v0->unk_20 & 0x1C0) >> 6] + 100.0f)) {
+        switch (var_v0->trackSegmentInfo & TRACK_JOIN_MASK) {
+            case TRACK_JOIN_PREVIOUS:
+            case TRACK_JOIN_NEXT:
+                if (var_v0->unk_28 <= (D_800CF8E8[(u32) (var_v0->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6] + 100.0f)) {
                     var_v1 = -1;
                 }
                 break;
-            case 0x600:
-                if (var_v0->unk_28 <= ((2.0f * D_800CF8E8[(u32) (var_v0->unk_20 & 0x1C0) >> 6]) + 100.0f)) {
+            case TRACK_JOIN_BOTH:
+                if (var_v0->unk_28 <=
+                    ((2.0f * D_800CF8E8[(u32) (var_v0->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6]) + 100.0f)) {
                     var_v1 = -1;
                 }
                 break;
@@ -552,7 +553,7 @@ s32 func_8009F3E0(unk_800F8510* arg0) {
                 break;
         }
 
-    } while ((var_v0 = var_v0->unk_34) != arg0->unk_10);
+    } while ((var_v0 = var_v0->next) != arg0->unk_10);
 
     return var_v1;
 }
@@ -579,15 +580,15 @@ void func_8009F508(unk_800F8510* arg0) {
     arg0->unk_0C = 0.0f;
     do {
         f32 temp_fs2 = var_s1->unk_24;
-        unk_8006FC8C* temp_s4 = var_s1->unk_34;
-        unk_8006FC8C* temp_s2 = var_s1->unk_38;
-        unk_8006FC8C* temp_s3 = temp_s4->unk_34;
+        unk_8006FC8C* temp_s4 = var_s1->next;
+        unk_8006FC8C* temp_s2 = var_s1->prev;
+        unk_8006FC8C* temp_s3 = temp_s4->next;
 
         spD8 = temp_fs2 - 2.0f;
         spD4 = temp_fs2 - 3.0f;
         spD0 = 3.0f - (2.0f * temp_fs2);
 
-        sp9C = var_s1->unk_00;
+        sp9C = var_s1->pos;
         var_s1->unk_28 = 0.0f;
 
         for (i = 1; i <= 50; i++) {
@@ -599,14 +600,11 @@ void func_8009F508(unk_800F8510* arg0) {
             spAC = spD8 * cube + spD0 * square + temp_fs2 * temp_fv1;
             spA8 = (cube - square) * temp_fs2;
 
-            sp90.x = temp_fa1 * temp_s2->unk_00.x + spB0 * var_s1->unk_00.x + spAC * temp_s4->unk_00.x +
-                     spA8 * temp_s3->unk_00.x;
+            sp90.x = temp_fa1 * temp_s2->pos.x + spB0 * var_s1->pos.x + spAC * temp_s4->pos.x + spA8 * temp_s3->pos.x;
             temp_fs3 = sp90.x - sp9C.x;
-            sp90.y = temp_fa1 * temp_s2->unk_00.y + spB0 * var_s1->unk_00.y + spAC * temp_s4->unk_00.y +
-                     spA8 * temp_s3->unk_00.y;
+            sp90.y = temp_fa1 * temp_s2->pos.y + spB0 * var_s1->pos.y + spAC * temp_s4->pos.y + spA8 * temp_s3->pos.y;
             temp_fs4 = sp90.y - sp9C.y;
-            sp90.z = temp_fa1 * temp_s2->unk_00.z + spB0 * var_s1->unk_00.z + spAC * temp_s4->unk_00.z +
-                     spA8 * temp_s3->unk_00.z;
+            sp90.z = temp_fa1 * temp_s2->pos.z + spB0 * var_s1->pos.z + spAC * temp_s4->pos.z + spA8 * temp_s3->pos.z;
             temp_fv0 = sp90.z - sp9C.z;
 
             var_s1->unk_28 += sqrtf(SQ(temp_fs3) + SQ(temp_fs4) + SQ(temp_fv0));
@@ -629,7 +627,7 @@ void func_8009F508(unk_800F8510* arg0) {
         var_s1->unk_9C -= var_s1->unk_2C;
         func_8009E108(var_s1, 0.75f, &var_s1->unk_A0);
         var_s1->unk_A0 -= var_s1->unk_2C;
-        var_s1 = var_s1->unk_34;
+        var_s1 = var_s1->next;
     } while (var_s1 != arg0->unk_10);
 }
 
@@ -732,7 +730,7 @@ void func_8009FC84(unk_800F8510* arg0) {
     f32 temp_fv0;
 
     do {
-        var_s0->unk_20 &= ~(0x10000 | 0x20000 | 0x8000);
+        var_s0->trackSegmentInfo &= ~TRACK_FORM_MASK;
         func_8009E85C(var_s0, 0.0f, &sp110, 0.0f);
         func_8009E85C(var_s0, 0.5f, &spEC, 0.5f);
         func_8009E85C(var_s0, 1.0f, &spC8, 1.0f);
@@ -758,50 +756,51 @@ void func_8009FC84(unk_800F8510* arg0) {
                 }
                 if (sp88 < 0.0f) {
                     if (sp7C < 0.0f) {
-                        var_s0->unk_20 |= 0x10000 | 0x8000;
+                        var_s0->trackSegmentInfo |= TRACK_FORM_RIGHT;
                     } else {
-                        var_s0->unk_20 |= 0x20000 | 0x8000;
+                        var_s0->trackSegmentInfo |= TRACK_FORM_S_FLIPPED;
                     }
                 } else if (sp7C < 0.0f) {
-                    var_s0->unk_20 |= 0x20000;
+                    var_s0->trackSegmentInfo |= TRACK_FORM_S;
                 } else {
-                    var_s0->unk_20 |= 0x10000;
+                    var_s0->trackSegmentInfo |= TRACK_FORM_LEFT;
                 }
             } else {
                 var_s0->unk_64 = temp_fs0;
                 if (sp88 < 0.0f) {
-                    var_s0->unk_20 |= 0x10000 | 0x8000;
+                    var_s0->trackSegmentInfo |= TRACK_FORM_RIGHT;
                 } else {
-                    var_s0->unk_20 |= 0x10000;
+                    var_s0->trackSegmentInfo |= TRACK_FORM_LEFT;
                 }
             }
         } else if (temp_fv0 != 0.0f) {
             var_s0->unk_64 = temp_fv0;
             if (sp7C < 0.0f) {
-                var_s0->unk_20 |= 0x10000 | 0x8000;
+                var_s0->trackSegmentInfo |= TRACK_FORM_RIGHT;
             } else {
-                var_s0->unk_20 |= 0x10000;
+                var_s0->trackSegmentInfo |= TRACK_FORM_LEFT;
             }
         } else {
             var_s0->unk_64 = 0.0f;
-            var_s0->unk_20 |= 0x8000;
+            var_s0->trackSegmentInfo |= TRACK_FORM_STRAIGHT;
         }
-        var_s0 = var_s0->unk_34;
+        var_s0 = var_s0->next;
     } while (var_s0 != arg0->unk_10);
 }
 
 void func_800A0010(unk_800F8510* arg0) {
     unk_8006FC8C* var_v0 = arg0->unk_10;
-    unk_8006FC8C* var_v1 = var_v0->unk_38;
+    unk_8006FC8C* var_v1 = var_v0->prev;
 
     do {
-        if ((var_v1->unk_20 & 0x1FF) == (var_v0->unk_20 & 0x1FF)) {
-            var_v0->unk_20 |= 0x40000000;
+        if ((var_v1->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) ==
+            (var_v0->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
+            var_v0->trackSegmentInfo |= TRACK_FLAG_CONTINUOUS;
         } else {
-            var_v0->unk_20 &= ~0x40000000;
+            var_v0->trackSegmentInfo &= ~TRACK_FLAG_CONTINUOUS;
         }
         var_v1 = var_v0;
-        var_v0 = var_v0->unk_34;
+        var_v0 = var_v0->next;
     } while (var_v0 != arg0->unk_10);
 }
 
@@ -878,7 +877,7 @@ void func_800A05CC(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     arg0->unk_3E[2] = Math_Round(temp_fs0 - temp_fs4);
 }
 
-extern f32 D_800DD230[];
+extern f32 gSinTable[];
 
 void func_800A0900(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
                    Vec3f* arg8) {
@@ -892,9 +891,9 @@ void func_800A0900(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     f32 temp_fs4;
     f32 temp_fs5;
 
-    sp64 = arg1 / D_800DD230[0x4C1];
-    temp_fs1 = D_800DD230[0xD00] * sp64;
-    temp_fs2 = D_800DD230[0x900] * sp64;
+    sp64 = arg1 / gSinTable[0x4C1];
+    temp_fs1 = gSinTable[0xD00] * sp64;
+    temp_fs2 = gSinTable[0x900] * sp64;
 
     arg0->unk_44[0] =
         Math_Round(arg5->x = (sp58 = arg0->unk_14.x + (temp_fs2 * arg3->xy)) + (temp_fs3 = arg3->xz * temp_fs1));
@@ -907,8 +906,8 @@ void func_800A0900(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     arg0->unk_32[1] = Math_Round(arg4->y = sp54 - temp_fs4);
     arg0->unk_32[2] = Math_Round(arg4->z = temp_fs0 - temp_fs5);
 
-    temp_fs1 = D_800DD230[0xE80] * sp64;
-    temp_fs2 = D_800DD230[0xA80] * sp64;
+    temp_fs1 = gSinTable[0xE80] * sp64;
+    temp_fs2 = gSinTable[0xA80] * sp64;
 
     arg0->unk_4A[0] = Math_Round((sp58 = arg0->unk_14.x + (temp_fs2 * arg3->xy)) + (temp_fs3 = arg3->xz * temp_fs1));
     arg0->unk_4A[1] = Math_Round((sp54 = arg0->unk_14.y + (temp_fs2 * arg3->yy)) + (temp_fs4 = arg3->yz * temp_fs1));
@@ -924,8 +923,8 @@ void func_800A0900(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     arg0->unk_26[2] = Math_Round(arg7->z = arg0->unk_14.z - (sp64 * arg3->zy));
 
     sp64 *= 1.2f;
-    temp_fs1 = D_800DD230[0xE80] * sp64;
-    temp_fs2 = D_800DD230[0xA80] * sp64;
+    temp_fs1 = gSinTable[0xE80] * sp64;
+    temp_fs2 = gSinTable[0xA80] * sp64;
 
     arg0->unk_3E[0] = Math_Round((sp58 = arg0->unk_14.x + (temp_fs2 * arg3->xy)) + (temp_fs3 = arg3->xz * temp_fs1));
     arg0->unk_3E[1] = Math_Round((sp54 = arg0->unk_14.y + (temp_fs2 * arg3->yy)) + (temp_fs4 = arg3->yz * temp_fs1));
@@ -1078,8 +1077,8 @@ f32 func_800A15C8(unk_8006FC8C* arg0) {
     Vec3f sp58;
 
     arg0->unk_70 = -1.0f;
-    var_fs3 = D_800CF8E8[(u32) (arg0->unk_20 & 0x1C0) >> 6];
-    if (arg0->unk_20 & 0x200) {
+    var_fs3 = D_800CF8E8[(u32) (arg0->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6];
+    if (arg0->trackSegmentInfo & TRACK_JOIN_PREVIOUS) {
         arg0->unk_68 = 0.0f;
         var_fs1 = 0.0f;
         do {
@@ -1098,7 +1097,7 @@ f32 func_800A15C8(unk_8006FC8C* arg0) {
         arg0->unk_68 = -99.0f;
     }
 
-    if (arg0->unk_20 & 0x400) {
+    if (arg0->trackSegmentInfo & TRACK_JOIN_NEXT) {
         arg0->unk_6C = 1.0f;
 
         var_fs1 = 0.0f;
@@ -1113,7 +1112,8 @@ f32 func_800A15C8(unk_8006FC8C* arg0) {
             var_fs1 += 50.0f;
         } while (var_fs1 < var_fs3);
         arg0->unk_70 = var_fs1 / arg0->unk_28;
-    } else if (!(arg0->unk_20 & 0x1FF) && (arg0->unk_34->unk_20 & 0x1FF)) {
+    } else if (!(arg0->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) &&
+               (arg0->next->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
         arg0->unk_6C = 1.0f - (100.0f / func_8009E538(arg0, 1.0f, &sp58));
     } else {
         arg0->unk_6C = 99.0f;
@@ -1159,10 +1159,13 @@ f32 func_800A18A8(Vec3f* arg0, Vec3f* arg1) {
 
 extern unk_800CF528* D_800CF8C8[];
 
-s32 func_800A18FC(s32 arg0, f32 arg1) {
+s32 func_800A18FC(s32 trackSegmentInfo, f32 arg1) {
 
-    if ((arg0 & 0x3F) != 0x3F) {
-        return (s32) (D_800CF8C8[(s32) (arg0 & 0x1C0) >> 6][arg0 & 0x3F].unk_04 * arg1) - 0x8000;
+    if ((trackSegmentInfo & TRACK_TYPE_MASK) != TRACK_TYPE_NONE) {
+        return (s32) (D_800CF8C8[(s32) (trackSegmentInfo & TRACK_SHAPE_MASK) >> 6][trackSegmentInfo & TRACK_TYPE_MASK]
+                          .unk_04 *
+                      arg1) -
+               0x8000;
     }
     return -0x8000;
 }
@@ -1289,7 +1292,7 @@ extern unk_8006FC8C D_802C2020[];
 void func_800A4B54(void) {
     s32 i;
 
-    for (i = 0; i < 56; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_802A6B40); i++) {
         D_802A6B40[i].unk_04 = i;
         D_802A6B40[i].unk_10 = D_802C2020;
     }
@@ -1347,6 +1350,7 @@ void func_800A4BAC(void) {
 
     var_a0 = &D_8025DCE8[0xFFF];
     var_v1 = &D_8028A3D8[0xFFF];
+    // FAKE
     goto dummy;
 dummy:;
     do {
@@ -1390,17 +1394,17 @@ void func_800A4D0C(s32 arg0) {
 }
 
 extern unk_800F8510* D_800F8510;
-extern s32 gTrackIndex;
+extern s32 gCourseIndex;
 
-extern unk_8010B7B0 D_8010B7B0[];
-s32 func_800AA394(void);
+extern CourseData D_8010B7B0;
+s32 Course_CalculateChecksum(void);
 
 void func_800A4DF0(void) {
 
-    D_800F8510 = &D_802A6B40[gTrackIndex];
-    func_8007402C(gTrackIndex);
-    func_800747EC(D_8010B7B0[0].unk_002);
-    func_8009CED0(D_8010B7B0[0].unk_002);
+    D_800F8510 = &D_802A6B40[gCourseIndex];
+    func_8007402C(gCourseIndex);
+    func_800747EC(D_8010B7B0.venue);
+    func_8009CED0(D_8010B7B0.venue);
     func_80074634(D_800F8510);
     func_8009DEAC(D_800F8510);
     if (D_800F8510->unk_04 >= 24) {
@@ -1408,7 +1412,7 @@ void func_800A4DF0(void) {
     } else {
         D_800F8510->unk_00 = D_800F8510->unk_04;
     }
-    D_800F8510->unk_00 |= func_800AA394() << 5;
+    D_800F8510->unk_00 |= Course_CalculateChecksum() << 5;
 }
 
 extern s32 gNumPlayers;
@@ -1418,8 +1422,8 @@ extern f32 D_800CF524;
 void func_800A4EAC(void) {
     unk_8006FC8C* var_v0;
 
-    if (gTrackIndex >= ARRAY_COUNT(D_802A6B40)) {
-        gTrackIndex = ARRAY_COUNT(D_802A6B40) - 1;
+    if (gCourseIndex >= ARRAY_COUNT(D_802A6B40)) {
+        gCourseIndex = ARRAY_COUNT(D_802A6B40) - 1;
     }
     if (gNumPlayers >= 3) {
         func_800A4D0C(2);
@@ -1429,7 +1433,7 @@ void func_800A4EAC(void) {
     func_800A4DF0();
     func_80073A04();
     func_8009F508(D_800F8510);
-    func_800741DC(gTrackIndex);
+    func_800741DC(gCourseIndex);
     func_8009F3E0(D_800F8510);
     func_800A0010(D_800F8510);
     func_8009FC84(D_800F8510);
@@ -1438,14 +1442,14 @@ void func_800A4EAC(void) {
     var_v0 = D_800F8510->unk_10;
     do {
 
-        if (D_800CF524 < var_v0->unk_18) {
-            D_800CF524 = var_v0->unk_18;
+        if (D_800CF524 < var_v0->radiusLeft) {
+            D_800CF524 = var_v0->radiusLeft;
         }
 
-        if (D_800CF524 < var_v0->unk_1C) {
-            D_800CF524 = var_v0->unk_1C;
+        if (D_800CF524 < var_v0->radiusRight) {
+            D_800CF524 = var_v0->radiusRight;
         }
-        var_v0 = var_v0->unk_34;
+        var_v0 = var_v0->next;
     } while (var_v0 != D_800F8510->unk_10);
     D_800CF524 += 100.0f;
     D_800CF520 = D_800CF524 + 4500.0f;
@@ -1556,7 +1560,7 @@ void func_800A5380(unk_36ED0* arg0, s32 arg1) {
         var_t0 = arg0->unk_50;
         var_a0 = arg0->unk_52;
     }
-    if (arg0->unk_00 & 0x600) {
+    if (arg0->trackSegmentInfo & 0x600) {
         D_800F8520[0].v.tc[1] = D_800F8520[4].v.tc[1] = var_a0;
         D_800F8520[1].v.tc[1] = D_800F8520[3].v.tc[1] = (var_a0 + var_a2) >> 1;
         D_800F8520[2].v.tc[1] = var_a2;
@@ -1678,7 +1682,7 @@ void func_800A587C(void) {
     gSPVertex(D_800F89C4++, D_800F8520, 16, 0);
     gSPDisplayList(D_800F89C4++, D_80140F0);
 
-    func_800A52FC(D_800F89CC, D_800F89CC->unk_00 & 0x80000000);
+    func_800A52FC(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
     D_800F8958[0].unk_00 = D_800F89CC;
     func_800A52FC(D_800F89D0, 0);
     D_800F8988 = D_800F89D0;
@@ -1693,7 +1697,7 @@ void func_800A5924(void) {
     D_800F89B8 = &D_800F8958[D_800F89C0];
 
     if (D_800F89CC == D_800F89B8->unk_00) {
-        if (D_800F89CC->unk_00 & 0x80000000) {
+        if (D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000) {
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 0, G_MWO_POINT_ST,
                             VERTEX_MODIFIED_ST(D_800F8930[4], (D_800F89CC->unk_5C + D_800F89CC->unk_5E) >> 1));
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 1, G_MWO_POINT_ST,
@@ -1730,7 +1734,7 @@ void func_800A5CF0(void) {
     D_800F89B8 = &D_800F8958[D_800F89C0];
 
     if (D_800F89D0 == D_800F89B8->unk_00) {
-        if (D_800F89D0->unk_00 & 0x80000000) {
+        if (D_800F89D0->trackSegmentInfo & TRACK_FLAG_80000000) {
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 0, G_MWO_POINT_ST,
                             VERTEX_MODIFIED_ST(D_800F8930[4], (D_800F89D0->unk_54 + D_800F89D0->unk_56) >> 1));
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 1, G_MWO_POINT_ST,
@@ -1752,7 +1756,7 @@ void func_800A5CF0(void) {
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
         gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
         gSPDisplayList(D_800F89C4++, D_800F89BC->unk_04);
-        func_800A52FC(D_800F89CC, D_800F89CC->unk_00 & 0x80000000);
+        func_800A52FC(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
         D_800F89BC->unk_00 = D_800F89CC;
     } else {
         D_800F89C0 = 0;
@@ -1775,11 +1779,11 @@ void func_800A60CC(void) {
             D_800F892C = D_800F89D4;
         }
 
-        switch (D_800F89CC->unk_00 & 0x6000) {
-            case 0x0:
+        switch (D_800F89CC->trackSegmentInfo & TRACK_UNK2_MASK) {
+            case TRACK_UNK2_0:
                 gSPDisplayList(D_800F89C4++, D_80140F0);
                 break;
-            case 0x2000:
+            case TRACK_UNK2_2000:
                 gSPDisplayList(D_800F89C4++, D_80142C0);
                 break;
             default:
@@ -1804,7 +1808,7 @@ void func_800A60CC(void) {
             gSPDisplayList(D_800F89C4++, D_80140F0);
         }
     }
-    func_800A5380(D_800F89CC, D_800F89CC->unk_00 & 0x80000000);
+    func_800A5380(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
     D_800F8958[0].unk_00 = D_800F89CC;
     func_800A5380(D_800F89D0, 0);
     D_800F8988 = D_800F89D0;
@@ -1815,8 +1819,8 @@ void func_800A63A0(void) {
     D_800F89B8 = &D_800F8958[D_800F89C0];
 
     if (D_800F89CC == D_800F89B8->unk_00) {
-        if (D_800F89CC->unk_00 & 0x80000000) {
-            if (D_800F89CC->unk_00 & 0x600) {
+        if (D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000) {
+            if (D_800F89CC->trackSegmentInfo & TRACK_JOIN_BOTH) {
                 gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 0, G_MWO_POINT_ST,
                                 VERTEX_MODIFIED_ST(D_800F8930[4], D_800F89CC->unk_5A));
                 gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 1, G_MWO_POINT_ST,
@@ -1864,11 +1868,11 @@ void func_800A63A0(void) {
                 D_800F892C = D_800F89D4;
             }
 
-            switch (D_800F89CC->unk_00 & 0x6000) {
-                case 0x0:
+            switch (D_800F89CC->trackSegmentInfo & TRACK_UNK2_MASK) {
+                case TRACK_UNK2_0:
                     gSPDisplayList(D_800F89C4++, D_800F89B8->unk_04);
                     break;
-                case 0x2000:
+                case TRACK_UNK2_2000:
                     gSPDisplayList(D_800F89C4++, D_800F89B8->unk_14);
                     break;
                 default:
@@ -1910,8 +1914,8 @@ void func_800A6CF4(void) {
     D_800F89B8 = &D_800F8958[D_800F89C0];
 
     if (D_800F89D0 == D_800F89B8->unk_00) {
-        if (D_800F89D0->unk_00 & 0x80000000) {
-            if (D_800F89D0->unk_00 & 0x600) {
+        if (D_800F89D0->trackSegmentInfo & TRACK_FLAG_80000000) {
+            if (D_800F89D0->trackSegmentInfo & TRACK_JOIN_BOTH) {
                 gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 0, G_MWO_POINT_ST,
                                 VERTEX_MODIFIED_ST(D_800F8930[4], D_800F89D0->unk_52));
                 gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 1, G_MWO_POINT_ST,
@@ -1958,11 +1962,11 @@ void func_800A6CF4(void) {
                 D_800F892C = D_800F89D4;
             }
 
-            switch (D_800F89CC->unk_00 & 0x6000) {
-                case 0x0:
+            switch (D_800F89CC->trackSegmentInfo & TRACK_UNK2_MASK) {
+                case TRACK_UNK2_0:
                     gSPDisplayList(D_800F89C4++, D_800F89BC->unk_04);
                     break;
-                case 0x2000:
+                case TRACK_UNK2_2000:
                     func_800A5560(D_800F89D0);
                     gSPDisplayList(D_800F89C4++, D_800F89B8->unk_1C);
                     gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
@@ -1990,7 +1994,7 @@ void func_800A6CF4(void) {
                 gSPDisplayList(D_800F89C4++, D_800F89BC->unk_04);
             }
         }
-        func_800A5380(D_800F89CC, D_800F89CC->unk_00 & 0x80000000);
+        func_800A5380(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
         D_800F89BC->unk_00 = D_800F89CC;
     } else {
         D_800F89C0 = 0;
@@ -2002,11 +2006,11 @@ void func_800A7650(void) {
 
     gSPVertex(D_800F89C4++, D_800F8520, 16, 0);
 
-    switch (D_800F89CC->unk_00 & 0x1800) {
-        case 0x0:
+    switch (D_800F89CC->trackSegmentInfo & TRACK_UNK1_MASK) {
+        case TRACK_UNK1_0:
             gSPDisplayList(D_800F89C4++, D_80140F0);
             break;
-        case 0x800:
+        case TRACK_UNK1_800:
             gSPDisplayList(D_800F89C4++, D_8014520);
             break;
         default:
@@ -2014,7 +2018,7 @@ void func_800A7650(void) {
             if (1) {}
             break;
     }
-    func_800A573C(D_800F89CC, D_800F89CC->unk_00 & 0x80000000);
+    func_800A573C(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
     D_800F8958[0].unk_00 = D_800F89CC;
     func_800A573C(D_800F89D0, 0);
     D_800F8988 = D_800F89D0;
@@ -2025,7 +2029,7 @@ void func_800A7764(void) {
     D_800F89B8 = &D_800F8958[D_800F89C0];
 
     if (D_800F89CC == D_800F89B8->unk_00) {
-        if (D_800F89CC->unk_00 & 0x80000000) {
+        if (D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000) {
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 0, G_MWO_POINT_ST,
                             VERTEX_MODIFIED_ST(D_800F8930[4], D_800F89CC->unk_5A));
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 1, G_MWO_POINT_ST,
@@ -2048,11 +2052,11 @@ void func_800A7764(void) {
 
         gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
 
-        switch (D_800F89CC->unk_00 & 0x1800) {
-            case 0x0:
+        switch (D_800F89CC->trackSegmentInfo & TRACK_UNK1_MASK) {
+            case TRACK_UNK1_0:
                 gSPDisplayList(D_800F89C4++, D_800F89B8->unk_04);
                 break;
-            case 0x800:
+            case TRACK_UNK1_800:
                 gSPDisplayList(D_800F89C4++, D_800F89B8->unk_24);
                 break;
             default:
@@ -2073,7 +2077,7 @@ void func_800A7BC0(void) {
 
     D_800F89B8 = &D_800F8958[D_800F89C0];
     if (D_800F89D0 == D_800F89B8->unk_00) {
-        if (D_800F89D0->unk_00 & 0x80000000) {
+        if (D_800F89D0->trackSegmentInfo & TRACK_FLAG_80000000) {
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 0, G_MWO_POINT_ST,
                             VERTEX_MODIFIED_ST(D_800F8930[4], D_800F89D0->unk_52));
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 1, G_MWO_POINT_ST,
@@ -2096,11 +2100,11 @@ void func_800A7BC0(void) {
 
         gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
 
-        switch (D_800F89CC->unk_00 & 0x1800) {
-            case 0x0:
+        switch (D_800F89CC->trackSegmentInfo & TRACK_UNK1_MASK) {
+            case TRACK_UNK1_0:
                 gSPDisplayList(D_800F89C4++, D_800F89BC->unk_04);
                 break;
-            case 0x800:
+            case TRACK_UNK1_800:
                 gSPDisplayList(D_800F89C4++, D_800F89BC->unk_24);
                 break;
             default:
@@ -2109,7 +2113,7 @@ void func_800A7BC0(void) {
                 break;
         }
 
-        func_800A573C(D_800F89CC, D_800F89CC->unk_00 & 0x80000000);
+        func_800A573C(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
         D_800F89BC->unk_00 = D_800F89CC;
     } else {
         D_800F89C0 = 0;
@@ -2122,7 +2126,7 @@ void func_800A8028(void) {
     gSPVertex(D_800F89C4++, D_800F8520, 16, 0);
     gSPDisplayList(D_800F89C4++, D_80140F0);
 
-    func_800A57E8(D_800F89CC, D_800F89CC->unk_00 & 0x80000000);
+    func_800A57E8(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
     D_800F8958[0].unk_00 = D_800F89CC;
     func_800A57E8(D_800F89D0, 0);
     D_800F8988 = D_800F89D0;
@@ -2133,7 +2137,7 @@ void func_800A80D0(void) {
     D_800F89B8 = &D_800F8958[D_800F89C0];
 
     if (D_800F89CC == D_800F89B8->unk_00) {
-        if (D_800F89CC->unk_00 & 0x80000000) {
+        if (D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000) {
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 0, G_MWO_POINT_ST,
                             VERTEX_MODIFIED_ST(D_800F8930[4], D_800F89CC->unk_5A));
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 1, G_MWO_POINT_ST,
@@ -2168,7 +2172,7 @@ void func_800A84B8(void) {
     D_800F89B8 = &D_800F8958[D_800F89C0];
 
     if (D_800F89D0 == D_800F89B8->unk_00) {
-        if (D_800F89D0->unk_00 & 0x80000000) {
+        if (D_800F89D0->trackSegmentInfo & TRACK_FLAG_80000000) {
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 0, G_MWO_POINT_ST,
                             VERTEX_MODIFIED_ST(D_800F8930[4], D_800F89D0->unk_52));
             gSPModifyVertex(D_800F89C4++, D_800F89B8->unk_2C + 1, G_MWO_POINT_ST,
@@ -2190,7 +2194,7 @@ void func_800A84B8(void) {
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
         gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
         gSPDisplayList(D_800F89C4++, D_800F89BC->unk_0C);
-        func_800A57E8(D_800F89CC, D_800F89CC->unk_00 & 0x80000000);
+        func_800A57E8(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
         D_800F89BC->unk_00 = D_800F89CC;
     } else {
         D_800F89C0 = 0;
@@ -2232,7 +2236,7 @@ void func_800A8A5C(void) {
 
         gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
         gSPDisplayList(D_800F89C4++, D_800F89BC->unk_10);
-        func_800A52FC(D_800F89CC, D_800F89CC->unk_00 & 0x80000000);
+        func_800A52FC(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
         D_800F89BC->unk_00 = D_800F89CC;
     } else {
         D_800F89C0 = 0;
@@ -2243,6 +2247,8 @@ void func_800A8A5C(void) {
 typedef struct unk_800A8B74_arg_0 {
     unk_36ED0* unk_00;
     unk_36ED0* unk_04;
+    f32 unk_08;
+    s32 unk_0C;
 } unk_800A8B74_arg_0;
 
 extern unk_36ED0 D_802A9FC0[];
@@ -2253,8 +2259,8 @@ extern void (*D_800CF948[])(void);
 
 void func_800A8B74(unk_800A8B74_arg_0* arg0) {
     f32 var_fv0;
-    s32 temp_a3;
-    u32 temp_t1;
+    s32 trackType;
+    u32 trackShape;
     unk_800CF528* temp_a1;
 
     D_800F89CC = arg0->unk_00;
@@ -2265,7 +2271,7 @@ void func_800A8B74(unk_800A8B74_arg_0* arg0) {
     }
 
     do {
-        if (D_800F89D0->unk_00 & 0x40000000) {
+        if (D_800F89D0->trackSegmentInfo & TRACK_FLAG_CONTINUOUS) {
             if (D_800F89D0 != arg0->unk_04) {
 
                 D_800F89C8 = D_800F89D0 + 1;
@@ -2288,14 +2294,14 @@ void func_800A8B74(unk_800A8B74_arg_0* arg0) {
                     if (D_800F89C8 == D_800F851C) {
                         D_800F89C8 = D_802A9FC0;
                     }
-                } while (D_800F89D0->unk_00 & 0x40000000);
+                } while (D_800F89D0->trackSegmentInfo & TRACK_FLAG_CONTINUOUS);
             }
         }
 
-        temp_t1 = (u32) (D_800F89CC->unk_00 & 0x1C0) >> 6;
-        temp_a3 = D_800F89CC->unk_00 & 0x3F;
-        if (temp_a3 != 0x3F) {
-            temp_a1 = &D_800CF8C8[temp_t1][temp_a3];
+        trackShape = (u32) (D_800F89CC->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6;
+        trackType = D_800F89CC->trackSegmentInfo & TRACK_TYPE_MASK;
+        if (trackType != TRACK_TYPE_NONE) {
+            temp_a1 = &D_800CF8C8[trackShape][trackType];
             D_800F89D4 = temp_a1->unk_10;
 
             if (D_800F892C != D_800F89D4) {
@@ -2304,13 +2310,13 @@ void func_800A8B74(unk_800A8B74_arg_0* arg0) {
                 D_800F892C = D_800F89D4;
             }
 
-            temp_a3 = D_800F89CC->unk_00 & 0x1FF;
-            if (temp_a3 != D_800F8928) {
+            trackType = D_800F89CC->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK);
+            if (trackType != D_800F8928) {
                 gDPLoadSync(D_800F89C4++);
                 gDPSetTextureImage(D_800F89C4++, G_IM_FMT_RGBA, G_IM_SIZ_16b, temp_a1->width, temp_a1->texture);
                 gDPLoadBlock(D_800F89C4++, temp_a1->tile, 0, 0, 2047, CALC_DXT(temp_a1->width, G_IM_SIZ_16b));
 
-                D_800F8928 = temp_a3;
+                D_800F8928 = trackType;
                 D_800F8930[0] = temp_a1->unk_16;
                 D_800F8930[1] = temp_a1->unk_18;
                 D_800F8930[2] = temp_a1->unk_1A;
@@ -2318,8 +2324,8 @@ void func_800A8B74(unk_800A8B74_arg_0* arg0) {
                 D_800F8930[4] = temp_a1->unk_1E;
             }
         }
-        D_800F89DC = D_800F89CC->unk_00 & 0x7E00;
-        D_800CF948[temp_t1]();
+        D_800F89DC = D_800F89CC->trackSegmentInfo & (TRACK_JOIN_MASK | TRACK_UNK1_MASK | TRACK_UNK2_MASK);
+        D_800CF948[trackShape]();
 
         D_800F89CC = D_800F89D0++;
         if (D_800F89D0 == D_800F851C) {
@@ -2332,8 +2338,8 @@ extern void (*D_800CF968[])(void);
 
 void func_800A8F1C(unk_800A8B74_arg_0* arg0) {
     f32 var_fv0;
-    s32 temp_a3;
-    u32 temp_t1;
+    s32 trackType;
+    u32 trackShape;
     unk_800CF528* temp_a2;
     unk_36ED0* tempLimit = D_802A9FC0;
 
@@ -2344,7 +2350,7 @@ void func_800A8F1C(unk_800A8B74_arg_0* arg0) {
     D_800F89D0 = arg0->unk_04;
 
     do {
-        if (D_800F89CC->unk_00 & 0x40000000) {
+        if (D_800F89CC->trackSegmentInfo & TRACK_FLAG_CONTINUOUS) {
             if (D_800F89CC != arg0->unk_00) {
                 D_800F89C8 = D_800F89CC - 1;
                 if ((u32) D_800F89C8 < (u32) tempLimit) {
@@ -2366,13 +2372,13 @@ void func_800A8F1C(unk_800A8B74_arg_0* arg0) {
                     if ((u32) D_800F89C8 < (u32) tempLimit) {
                         D_800F89C8 = D_800F851C - 1;
                     }
-                } while (D_800F89CC->unk_00 & 0x40000000);
+                } while (D_800F89CC->trackSegmentInfo & TRACK_FLAG_CONTINUOUS);
             }
         }
-        temp_t1 = (u32) (D_800F89CC->unk_00 & 0x1C0) >> 6;
-        temp_a3 = D_800F89CC->unk_00 & 0x3F;
-        if (temp_a3 != 0x3F) {
-            temp_a2 = &D_800CF8C8[temp_t1][temp_a3];
+        trackShape = (u32) (D_800F89CC->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6;
+        trackType = D_800F89CC->trackSegmentInfo & TRACK_TYPE_MASK;
+        if (trackType != TRACK_TYPE_NONE) {
+            temp_a2 = &D_800CF8C8[trackShape][trackType];
             D_800F89D4 = temp_a2->unk_10;
 
             if (D_800F892C != D_800F89D4) {
@@ -2381,12 +2387,12 @@ void func_800A8F1C(unk_800A8B74_arg_0* arg0) {
                 D_800F892C = D_800F89D4;
             }
 
-            temp_a3 = D_800F89CC->unk_00 & 0x1FF;
-            if (temp_a3 != D_800F8928) {
+            trackType = D_800F89CC->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK);
+            if (trackType != D_800F8928) {
                 gDPLoadSync(D_800F89C4++);
                 gDPSetTextureImage(D_800F89C4++, G_IM_FMT_RGBA, G_IM_SIZ_16b, temp_a2->width, temp_a2->texture);
                 gDPLoadBlock(D_800F89C4++, temp_a2->tile, 0, 0, 2047, CALC_DXT(temp_a2->width, G_IM_SIZ_16b));
-                D_800F8928 = temp_a3;
+                D_800F8928 = trackType;
                 D_800F8930[0] = temp_a2->unk_16;
                 D_800F8930[1] = temp_a2->unk_18;
                 D_800F8930[2] = temp_a2->unk_1A;
@@ -2394,8 +2400,8 @@ void func_800A8F1C(unk_800A8B74_arg_0* arg0) {
                 D_800F8930[4] = temp_a2->unk_1E;
             }
         }
-        D_800F89DC = D_800F89CC->unk_00 & 0x7E00;
-        D_800CF968[temp_t1]();
+        D_800F89DC = D_800F89CC->trackSegmentInfo & (TRACK_JOIN_MASK | TRACK_UNK1_MASK | TRACK_UNK2_MASK);
+        D_800CF968[trackShape]();
 
         D_800F89D0 = D_800F89CC--;
         if ((u32) D_800F89CC < (u32) tempLimit) {
@@ -2439,8 +2445,8 @@ extern Gfx D_8014040[];
 extern Gfx D_8014078[];
 
 Gfx* func_800A95B4(Gfx* gfx) {
-    s32 temp_t0;
-    u32 temp_t1;
+    s32 trackType;
+    u32 trackShape;
     unk_800CF528* temp_a1;
 
     if (D_800F8518 < 3) {
@@ -2459,10 +2465,10 @@ Gfx* func_800A95B4(Gfx* gfx) {
     D_800F89D0 = &D_802A9FC0[1];
     do {
 
-        temp_t1 = (u32) (D_800F89CC->unk_00 & 0x1C0) >> 6;
-        temp_t0 = D_800F89CC->unk_00 & 0x3F;
-        if (temp_t0 != 0x3F) {
-            temp_a1 = &D_800CF8C8[temp_t1][temp_t0];
+        trackShape = (u32) (D_800F89CC->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6;
+        trackType = D_800F89CC->trackSegmentInfo & TRACK_TYPE_MASK;
+        if (trackType != TRACK_TYPE_NONE) {
+            temp_a1 = &D_800CF8C8[trackShape][trackType];
             D_800F89D4 = temp_a1->unk_10;
             if (D_800F892C != D_800F89D4) {
                 gSPTexture(D_800F89C4++, 0, 0, 0, D_800F892C, G_OFF);
@@ -2470,13 +2476,13 @@ Gfx* func_800A95B4(Gfx* gfx) {
                 D_800F892C = D_800F89D4;
             }
 
-            temp_t0 = D_800F89CC->unk_00 & 0x1FF;
-            if (temp_t0 != D_800F8928) {
+            trackType = D_800F89CC->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK);
+            if (trackType != D_800F8928) {
                 gDPLoadSync(D_800F89C4++);
                 gDPSetTextureImage(D_800F89C4++, G_IM_FMT_RGBA, G_IM_SIZ_16b, temp_a1->width, temp_a1->texture);
                 gDPLoadBlock(D_800F89C4++, temp_a1->tile, 0, 0, 2047, CALC_DXT(temp_a1->width, G_IM_SIZ_16b));
 
-                D_800F8928 = temp_t0;
+                D_800F8928 = trackType;
                 D_800F8930[0] = temp_a1->unk_16;
                 D_800F8930[1] = temp_a1->unk_18;
                 D_800F8930[2] = temp_a1->unk_1A;
@@ -2484,8 +2490,8 @@ Gfx* func_800A95B4(Gfx* gfx) {
                 D_800F8930[4] = temp_a1->unk_1E;
             }
         }
-        D_800F89DC = D_800F89CC->unk_00 & 0x7E00;
-        D_800CF948[temp_t1]();
+        D_800F89DC = D_800F89CC->trackSegmentInfo & (TRACK_JOIN_MASK | TRACK_UNK1_MASK | TRACK_UNK2_MASK);
+        D_800CF948[trackShape]();
 
         D_800F89CC = D_800F89D0++;
 
@@ -2494,35 +2500,297 @@ Gfx* func_800A95B4(Gfx* gfx) {
     return D_800F89C4;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_800A9938.s")
+extern unk_struct_1DC D_800E5220[];
+extern s32 D_800CCFE0;
+extern s32 D_800CF500;
+extern s32 D_800CF508;
+extern f32 D_800CF51C;
+extern unk_800A8B74_arg_0 D_800F8528[];
 
-s32 func_800AA394(void) {
+#ifdef NON_EQUIVALENT
+Gfx* func_800A9938(Gfx* gfx, s32 arg1) {
+    MtxF sp60;
+    f32 sp5C;
+    unk_800A8B74_arg_0* var_s0; // unk_800A8B74_arg_0* sp3C;
+    f32 temp_fa0;
+    f32 temp_fa0_2;
+    f32 temp_fa0_3;
+    f32 temp_fa1;
+    f32 temp_fv1;
+    f32 temp_fv1_3;
+    f32 var_fv1;
+    f32 var_fv1_2;
+    f32 temp_ft4;
+    s32 temp_a1;
+    s32 var_a0;
+    s32 var_a0_2;
+    s32 var_a1;
+    s32 var_a2;
+    s32 var_t0;
+    unk_36ED0* temp_a2_2;
+    unk_36ED0* var_v0;
+    unk_36ED0* var_v1;
+    unk_8006FC8C* temp_a2;
+    unk_800A8B74_arg_0* var_v1_3;
+    Racer* temp_ra;
+    unk_struct_1DC* temp_v0;
     s32 i;
-    u32 var_v1 = D_8010B7B0[0].unk_001;
 
-    for (i = 0; i < D_8010B7B0[0].unk_001; i++) {
+    temp_v0 = &D_800E5220[arg1];
+    temp_ra = &gRacers[temp_v0->unk_00];
+    D_800F89C4 = gfx;
+    temp_a2 = temp_ra->unk_0C.unk_00;
 
-        D_8010B7B0[0].unk_020[i].unk_10 &= ~0x600;
-        D_8010B7B0[0].unk_020[i].unk_10 &= ~0x38000;
-        D_8010B7B0[0].unk_020[i].unk_10 &= ~0x40000000;
-
-        var_v1 +=
-            (s32) ((D_8010B7B0[0].unk_020[i].unk_00.x + ((1.1f + (0.7f * i)) * D_8010B7B0[0].unk_020[i].unk_00.y)) +
-                   ((2.2f + (1.2f * i)) * D_8010B7B0[0].unk_020[i].unk_00.z * (4.4f + (0.9f * i))) +
-                   D_8010B7B0[0].unk_020[i].unk_0C + ((5.5f + (0.8f * i)) * D_8010B7B0[0].unk_020[i].unk_0E * 4.8f)) +
-            D_8010B7B0[0].unk_020[i].unk_10 * (0xFE - i) + D_8010B7B0[0].unk_520[i] * (0x93DE - i * 2);
+    if (temp_a2->unk_20 & 0x20000000) {
+        s32 temp = temp_a2->unk_20 & 0x400;
+        if (((temp_a2->unk_20 & 0x200) && (temp_ra->unk_0C.unk_04 < temp_a2->unk_68)) ||
+            ((temp) && (temp_a2->unk_6C < temp_ra->unk_0C.unk_04))) {
+            D_800F89D8 = 1;
+        } else {
+            D_800F89D8 = 0;
+        }
+    } else {
+        D_800F89D8 = 1;
     }
 
-    for (i = 0; i < D_8010B7B0[0].unk_001; i++) {
-        var_v1 += (D_8010B7B0[0].unk_5A0[i] * i);
-        var_v1 += (D_8010B7B0[0].unk_5E0[i] * (i + 0x10));
-        var_v1 += (D_8010B7B0[0].unk_620[i] * (i + 0x80));
-        var_v1 += (D_8010B7B0[0].unk_660[i] * (i + 0x100));
-        var_v1 += (D_8010B7B0[0].unk_6A0[i] * (i + 0x800));
-        var_v1 += (D_8010B7B0[0].unk_6E0[i] * (i + 0x1000));
-        var_v1 += (D_8010B7B0[0].unk_720[i] * (i + 0x8000));
-        var_v1 += (D_8010B7B0[0].unk_760[i] * (i + 0x10000));
-        var_v1 += (D_8010B7B0[0].unk_7A0[i] * (i + 0x80000));
+    var_v1 = D_802A9FC0;
+    temp_fv1 = (temp_v0->unk_5C.xx * D_800CF524) - temp_v0->unk_50.x;
+    temp_fa0 = (temp_v0->unk_5C.yx * D_800CF524) - temp_v0->unk_50.y;
+    temp_fa1 = (temp_v0->unk_5C.zx * D_800CF524) - temp_v0->unk_50.z;
+
+    sp60.m[3][3] = temp_ft4 = ((-temp_fv1 * temp_v0->unk_15C.m[0][2]) - (temp_fa0 * temp_v0->unk_15C.m[1][2])) -
+                              (temp_v0->unk_15C.m[2][2] * temp_fa1);
+    sp60.m[3][2] = temp_v0->unk_11C.m[3][2] - (temp_ft4 * temp_v0->unk_11C.m[2][2]);
+    sp60.m[3][0] =
+        (temp_v0->unk_11C.m[0][0] * ((temp_fv1 * temp_v0->unk_15C.m[0][0]) + (temp_fa0 * temp_v0->unk_15C.m[1][0]) +
+                                     (temp_fa1 * temp_v0->unk_15C.m[2][0]))) -
+        (temp_ft4 * temp_v0->unk_11C.m[2][0]);
+    sp60.m[3][1] =
+        (temp_v0->unk_11C.m[1][1] * ((temp_fv1 * temp_v0->unk_15C.m[0][1]) + (temp_fa0 * temp_v0->unk_15C.m[1][1]) +
+                                     (temp_fa1 * temp_v0->unk_15C.m[2][1]))) -
+        (temp_ft4 * temp_v0->unk_11C.m[2][1]);
+    sp60.m[0][0] = temp_v0->unk_19C.m[0][0];
+    sp60.m[1][0] = temp_v0->unk_19C.m[1][0];
+    sp60.m[0][1] = temp_v0->unk_19C.m[0][1];
+    sp60.m[0][2] = temp_v0->unk_19C.m[0][2];
+    sp60.m[0][3] = temp_v0->unk_19C.m[0][3];
+    sp60.m[1][1] = temp_v0->unk_19C.m[1][1];
+    sp60.m[1][2] = temp_v0->unk_19C.m[1][2];
+    sp60.m[1][3] = temp_v0->unk_19C.m[1][3];
+    sp60.m[2][0] = temp_v0->unk_19C.m[2][0];
+    sp60.m[2][1] = temp_v0->unk_19C.m[2][1];
+    sp60.m[2][2] = temp_v0->unk_19C.m[2][2];
+    sp60.m[2][3] = temp_v0->unk_19C.m[2][3];
+    var_a1 = 1;
+    do {
+        var_v1->unk_0C = sp60.m[3][2] + ((sp60.m[0][2] * var_v1->unk_14.x) + (sp60.m[1][2] * var_v1->unk_14.y) +
+                                         (sp60.m[2][2] * var_v1->unk_14.z));
+
+        if ((var_v1->unk_0C < 0.0f) || (D_800CF520 < var_v1->unk_0C)) {
+            var_v1->unk_10 = 0;
+        } else {
+            temp_fv1_3 =
+                (sp60.m[3][0] + ((sp60.m[0][0] * var_v1->unk_14.x) + (sp60.m[1][0] * var_v1->unk_14.y) +
+                                 (sp60.m[2][0] * var_v1->unk_14.z))) *
+                (1.0f / (sp60.m[3][3] + ((sp60.m[0][3] * var_v1->unk_14.x) + (sp60.m[1][3] * var_v1->unk_14.y) +
+                                         (sp60.m[2][3] * var_v1->unk_14.z))));
+            if ((temp_fv1_3 < -1.0f) || (temp_fv1_3 > 1.0f)) {
+                var_v1->unk_10 = 0;
+            } else {
+                temp_fv1_3 =
+                    (sp60.m[3][1] + ((sp60.m[0][1] * var_v1->unk_14.x) + (sp60.m[1][1] * var_v1->unk_14.y) +
+                                     (sp60.m[2][1] * var_v1->unk_14.z))) *
+                    (1.0f / (sp60.m[3][3] + ((sp60.m[0][3] * var_v1->unk_14.x) + (sp60.m[1][3] * var_v1->unk_14.y) +
+                                             (sp60.m[2][3] * var_v1->unk_14.z))));
+                if ((temp_fv1_3 < -1.0f) || (temp_fv1_3 > 1.0f)) {
+                    var_v1->unk_10 = 0;
+                } else {
+                    var_v1->unk_10 = 1;
+                }
+            }
+        }
+        var_v1++;
+    } while (var_v1 != D_800F851C);
+    D_800F851C->unk_0C = D_802A9FC0->unk_0C;
+    D_800F851C->unk_10 = D_802A9FC0->unk_10;
+    D_800CF500 = 0;
+    var_v0 = &D_802A9FC0[1];
+    var_v1 = D_802A9FC0;
+    do {
+        if ((var_v1->unk_10 != 0) || (var_v0->unk_10 != 0)) {
+            if (var_v0->unk_0C - var_v1->unk_0C < -30.0f) {
+                var_a1 = -1;
+                var_v1->unk_10 = var_a1;
+            } else if (var_v0->unk_0C - var_v1->unk_0C > 30.0f) {
+                var_a1 = 1;
+                var_v1->unk_10 = var_a1;
+            } else {
+                var_v1->unk_10 = var_a1;
+            }
+            D_800CF500++;
+        } else {
+            var_v1->unk_10 = 0;
+        }
+        var_v1 = var_v0;
+        var_v0++;
+    } while (D_800F851C >= var_v0);
+    D_800F851C->unk_10 = D_802A9FC0->unk_10;
+    if (D_800CF500 == 0) {
+        return D_800F89C4;
+    }
+    if (D_800F8518 == D_800CF500) {
+        D_800F8528[0].unk_00 = D_800F8528[0].unk_04 = D_802A9FC0;
+        D_800F8528[0].unk_0C = 1;
+        D_800F8528[0].unk_08 = 0.0f;
+        var_v1_3 = &D_800F8528[1];
+    } else {
+        var_v1 = D_800F851C - 1;
+        if (var_v1->unk_10 == 0) {
+            var_v1 = D_802A9FC0;
+            while (var_v1->unk_10 == 0) {
+                var_v1++;
+            }
+        } else {
+            var_v1--;
+            while (var_v1->unk_10 != 0) {
+                var_v1--;
+            }
+            var_v1++;
+        }
+        temp_a2_2 = var_v1;
+
+        i = 0;
+
+        do {
+            D_800F8528[i].unk_00 = var_v1;
+            var_a0 = 1;
+            D_800F8528[i].unk_08 = temp_fa0_3 = var_v1->unk_0C;
+            D_800F8528[i].unk_0C = temp_a1 = var_v1->unk_10;
+
+            while (true) {
+                var_v1++;
+                if (var_v1 == D_800F851C) {
+                    var_v1 = D_802A9FC0;
+                }
+                var_a0++;
+                D_800F8528[i].unk_08 += var_v1->unk_0C;
+                if ((temp_fa0_3 - var_v1->unk_0C < -D_800CF51C) || (D_800CF51C < temp_fa0_3 - var_v1->unk_0C) ||
+                    (var_v1 == temp_a2_2) || (temp_a1 != var_v1->unk_10)) {
+                    break;
+                }
+            }
+
+            D_800F8528[i].unk_04 = var_v1;
+            D_800F8528[i].unk_08 /= var_a0;
+
+            if (++i == 0x40) {
+                return D_800F89C4;
+            }
+            while (var_v1->unk_10 == 0) {
+                var_v1++;
+                if (var_v1 == D_800F851C) {
+                    var_v1 = D_802A9FC0;
+                }
+            }
+        } while (var_v1 != temp_a2_2);
+        var_v1_3 = &D_800F8528[i];
+    }
+
+    gSPDisplayList(D_800F89C4++, D_8014008);
+    gSPDisplayList(D_800F89C4++, D_8014078);
+    gSPFogPosition(D_800F89C4++, D_800CF508, 1000);
+    gDPSetPrimColor(D_800F89C4++, 0, 0, 255 - (D_800CCFE0 * 8), 0, 0, 255);
+
+    temp_a2 = temp_ra->unk_0C.unk_00;
+    if (temp_a2->unk_20 & 0x20000000) {
+        if (temp_a2->unk_6C < temp_ra->unk_0C.unk_04) {
+            var_fv1 = (1.0f - temp_ra->unk_0C.unk_08) / temp_a2->unk_70;
+        } else if (temp_ra->unk_0C.unk_04 < temp_a2->unk_68) {
+            var_fv1 = temp_ra->unk_0C.unk_08 / temp_a2->unk_70;
+        } else {
+            var_a0_2 = D_800F8510->unk_14[0] >> 2;
+            var_t0 = D_800F8510->unk_14[1] >> 2;
+            var_a2 = D_800F8510->unk_14[2] >> 2;
+            goto block_68;
+        }
+        var_a0_2 = Math_Round(((D_800F8510->unk_14[0] >> 2) - D_800F8510->unk_14[0]) * var_fv1) + D_800F8510->unk_14[0];
+        var_t0 = Math_Round(((D_800F8510->unk_14[1] >> 2) - D_800F8510->unk_14[1]) * var_fv1) + D_800F8510->unk_14[1];
+        var_a2 = Math_Round(((D_800F8510->unk_14[2] >> 2) - D_800F8510->unk_14[2]) * var_fv1) + D_800F8510->unk_14[2];
+    } else {
+        var_a0_2 = D_800F8510->unk_14[0];
+        var_t0 = D_800F8510->unk_14[1];
+        var_a2 = D_800F8510->unk_14[2];
+    }
+block_68:
+
+    gDPSetFogColor(D_800F89C4++, var_a0_2, var_t0, var_a2, 255);
+
+    D_800F8928 = D_800F892C = -1;
+    D_800F8958[0].unk_00 = D_800F8958[1].unk_00 = NULL;
+    D_800F89C0 = 0;
+
+    while (true) {
+        var_fv1_2 = -10000.0f;
+        i = 0;
+        do {
+            if (var_fv1_2 < D_800F8528[i].unk_08) {
+                var_fv1_2 = D_800F8528[i].unk_08;
+                var_s0 = &D_800F8528[i];
+            }
+            i++;
+        } while (&D_800F8528[i] != var_v1_3);
+
+        if (var_fv1_2 != -10000.0f) {
+            break;
+        }
+
+        if (var_s0->unk_0C == 1) {
+            func_800A8F1C(var_s0);
+        } else {
+            func_800A8B74(var_s0);
+        }
+        var_s0->unk_08 = -20000.0f;
+    }
+
+    if (D_800F892C == 1) {
+        gSPTexture(D_800F89C4++, 0, 0, 0, 1, G_OFF);
+    } else {
+        gSPTexture(D_800F89C4++, 0, 0, 0, 5, G_OFF);
+    }
+    return D_800F89C4;
+}
+#else
+Gfx* func_800A9938(Gfx* gfx, s32 arg1);
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_800A9938.s")
+#endif
+
+s32 Course_CalculateChecksum(void) {
+    s32 i;
+    u32 var_v1 = D_8010B7B0.controlPointCount;
+
+    for (i = 0; i < D_8010B7B0.controlPointCount; i++) {
+
+        D_8010B7B0.controlPoint[i].trackSegmentInfo &= ~TRACK_JOIN_MASK;
+        D_8010B7B0.controlPoint[i].trackSegmentInfo &= ~TRACK_FORM_MASK;
+        D_8010B7B0.controlPoint[i].trackSegmentInfo &= ~TRACK_FLAG_CONTINUOUS;
+
+        var_v1 += (s32) ((D_8010B7B0.controlPoint[i].pos.x + ((1.1f + (0.7f * i)) * D_8010B7B0.controlPoint[i].pos.y)) +
+                         ((2.2f + (1.2f * i)) * D_8010B7B0.controlPoint[i].pos.z * (4.4f + (0.9f * i))) +
+                         D_8010B7B0.controlPoint[i].radiusLeft +
+                         ((5.5f + (0.8f * i)) * D_8010B7B0.controlPoint[i].radiusRight * 4.8f)) +
+                  D_8010B7B0.controlPoint[i].trackSegmentInfo * (0xFE - i) + D_8010B7B0.bankAngle[i] * (0x93DE - i * 2);
+    }
+
+    for (i = 0; i < D_8010B7B0.controlPointCount; i++) {
+        var_v1 += (D_8010B7B0.pit[i] * i);
+        var_v1 += (D_8010B7B0.dash[i] * (i + 0x10));
+        var_v1 += (D_8010B7B0.dirt[i] * (i + 0x80));
+        var_v1 += (D_8010B7B0.ice[i] * (i + 0x100));
+        var_v1 += (D_8010B7B0.jump[i] * (i + 0x800));
+        var_v1 += (D_8010B7B0.landmine[i] * (i + 0x1000));
+        var_v1 += (D_8010B7B0.gate[i] * (i + 0x8000));
+        var_v1 += (D_8010B7B0.building[i] * (i + 0x10000));
+        var_v1 += (D_8010B7B0.sign[i] * (i + 0x80000));
     }
 
     return var_v1;

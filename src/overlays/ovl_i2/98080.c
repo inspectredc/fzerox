@@ -55,7 +55,7 @@ void func_i2_800FC77C(void) {
     }
 
     switch (gGameMode) {
-        case GAMEMODE_8000:
+        case GAMEMODE_FLX_TITLE:
             func_i2_800FCB84(0, 7);
             break;
         case GAMEMODE_11:
@@ -76,7 +76,7 @@ void func_i2_800FC77C(void) {
             }
             func_i2_800FCB84(0, 5);
             break;
-        case GAMEMODE_8007:
+        case GAMEMODE_FLX_MAIN_MENU:
             if (D_800CD044 == 0x15) {
                 func_i2_800FCB84(0, 10);
                 break;
@@ -128,7 +128,7 @@ void func_i2_800FC9BC(void) {
     }
 
     switch (D_800DCE48.gameMode) {
-        case GAMEMODE_8000:
+        case GAMEMODE_FLX_TITLE:
             func_i2_800FCB84(1, 1);
             break;
         case GAMEMODE_11:
@@ -156,7 +156,7 @@ void func_i2_800FC9BC(void) {
             }
             func_i2_800FCD4C(1, 1);
             break;
-        case GAMEMODE_8007:
+        case GAMEMODE_FLX_MAIN_MENU:
             if (D_800CD044 == 0x17) {
                 func_i2_800FCD38(9, 3);
                 func_i2_800FCB84(1, 9);

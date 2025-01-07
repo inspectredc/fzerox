@@ -118,7 +118,9 @@
     "segment_2738a0.h": "c",
     "unk_leo.h": "c",
     "fzx_game.h": "c",
-    "abi.h": "c"
+    "course_data.h": "c",
+    "fzx_course.h": "c",
+    "fzxmath.h": "c",
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"

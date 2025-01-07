@@ -3,13 +3,13 @@
 
 bool D_800CD510 = false;
 s32 gSkyboxType;
-s32 gBackgroundFloorType;
+s32 gVenueType;
 RaceStats gCupRaceStats[1][6];
 
-void func_8007F4E0(s32 arg0, s32 arg1) {
+void func_8007F4E0(s32 venue, s32 skybox) {
     D_800CD510 = true;
-    gBackgroundFloorType = arg0;
-    gSkyboxType = arg1;
+    gVenueType = venue;
+    gSkyboxType = skybox;
 }
 
 s8 D_800E42C8[4];

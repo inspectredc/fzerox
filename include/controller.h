@@ -20,4 +20,21 @@
 #define BTN_CLEFT CONT_C      // 0x2
 #define BTN_CRIGHT CONT_F     // 0x1
 
+#define CONT_MASK (CONT_A | CONT_B | CONT_G | CONT_START | CONT_UP | CONT_DOWN | CONT_LEFT | CONT_RIGHT | CONT_L | CONT_R | CONT_E | CONT_D | CONT_C | CONT_F)
+
+#define STICK_UP 0x80
+#define STICK_DOWN 0x40
+#define STICK_LEFT 0x20
+#define STICK_RIGHT 0x10
+
+#define STICK_TO_BUTTON(input) ((input) << 4)
+
+typedef enum ControllerPort {
+    /* 0 */ PORT_1,
+    /* 1 */ PORT_2,
+    /* 2 */ PORT_3,
+    /* 3 */ PORT_4,
+    /* 4 */ PORT_DISCONNECTED,
+} ControllerPort;
+
 #endif // CONTROLLER

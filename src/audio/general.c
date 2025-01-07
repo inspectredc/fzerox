@@ -472,7 +472,7 @@ void func_800B84B8(void) {
                         break;
                 }
 
-                if ((temp_lo > 2100) && (temp_lo < 2110) && (gGameMode == GAMEMODE_8000) && (D_800CD010 == 0)) {
+                if ((temp_lo > 2100) && (temp_lo < 2110) && (gGameMode == GAMEMODE_FLX_TITLE) && (D_800CD010 == 0)) {
                     D_800CD010 = 1;
                 }
                 if ((temp_lo > 8200) && (temp_lo < 8210) && (D_800CD010 == 1)) {

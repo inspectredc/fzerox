@@ -1014,7 +1014,8 @@ unk_800E3A28* func_80079E88(s32 arg0) {
             break;
         }
         var_v1++;
-        if ((u32) D_800E3F28 < (u32) var_v1) {
+        //! @bug this allows for an iteration out of the bounds of the array
+        if (var_v1 > &D_800E3A28[ARRAY_COUNT(D_800E3A28)]) {
             return NULL;
         }
     }

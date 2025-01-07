@@ -956,7 +956,7 @@ Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 #ifdef NON_MATCHING
-extern f32 D_800DD230[];
+extern f32 gSinTable[];
 Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_a0;
     s32 temp_t1;
@@ -980,8 +980,8 @@ Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1) {
         if (arg1->unk_08 != 0) {
             temp_a0 = arg1->unk_20;
             var_t2 = 255 - temp_a0;
-            temp = ((((row * 4096) * (temp_a0 + 64)) / 64) / 72);
-            temp_t1 = ((D_800DD230[temp & 0xFFF] * (temp_a0 + 4)) / 4);
+            temp = ((((row * 0x1000) * (temp_a0 + 64)) / 64) / 72);
+            temp_t1 = ((SIN(temp) * (temp_a0 + 4)) / 4);
             temp = (200 - temp_t1);
 
             gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
@@ -991,15 +991,15 @@ Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1) {
         if (arg1->unk_04 != 0) {
             temp_a0 = arg1->unk_1C;
             var_t2 = 255 - temp_a0;
-            temp = ((((row * 4096) * (temp_a0 + 64)) / 64) / 72);
-            temp_t1 = ((D_800DD230[temp & 0xFFF] * (temp_a0 + 4)) / 4);
+            temp = ((((row * 0x1000) * (temp_a0 + 64)) / 64) / 72);
+            temp_t1 = ((SIN(temp) * (temp_a0 + 4)) / 4);
             gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
             gSPScisTextureRectangle(gfx++, (temp_t1 + 40) << 2, (row + var) << 2, ((temp_t1 + 40) + 80) << 2,
-                                    (row + var + 1) << 2, 0, 0x9E0, 0, 0xFC00, 1 << 10);
+                                    (row + var + 1) << 2, 0, (80 - 1) * (1 << 5), 0, (64 - 1) * (1 << 10), 1 << 10);
         }
     }
 
-    if (arg1->unk_18 >= 0x123) {
+    if (arg1->unk_18 > 290) {
         var_t2 = 0xA10 - (arg1->unk_18 * 8);
         if (var_t2 > 255) {
             var_t2 = 255;
@@ -1016,7 +1016,7 @@ Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1) {
                                D_i6_8011DFAC + D_i6_8011DFB0, "f-zero x", 0, 1, 1, scale, scale);
         gfx = func_i2_80106700(gfx, (s32) (160.0f - (((f32) func_i2_801062E4("staff", 1, 0) * scale) / 2)),
                                D_i6_8011DFAC + D_i6_8011DFB4, "staff", 0, 1, 1, scale, scale);
-    } else if (arg1->unk_18 >= 0x79) {
+    } else if (arg1->unk_18 > 120) {
         var_t2 = (arg1->unk_18 * 3) - 0x168;
         if (var_t2 > 255) {
             var_t2 = 255;
@@ -1202,7 +1202,7 @@ Gfx* func_i6_8011AAC8(Gfx* gfx, unk_800E3A28* arg1) {
     return func_i2_80106450(gfx, arg1->unk_0C, arg1->unk_10, temp, 0, 1, 0);
 }
 
-extern u16 D_800E416C;
+extern u16 gInputPressed;
 
 void func_i6_8011AB1C(unk_800E3A28* arg0) {
     s32 var_v1;
@@ -1216,7 +1216,7 @@ void func_i6_8011AB1C(unk_800E3A28* arg0) {
         var_v1 = 1;
     }
     if (D_i6_8011DFA0) {
-        if (D_800E416C & BTN_LEFT) {
+        if (gInputPressed & BTN_LEFT) {
             func_800BA8D8(30);
             if (arg0->unk_04 != 0) {
                 arg0->unk_04--;
@@ -1226,7 +1226,7 @@ void func_i6_8011AB1C(unk_800E3A28* arg0) {
             var_v1++;
         }
 
-        if (D_800E416C & BTN_RIGHT) {
+        if (gInputPressed & BTN_RIGHT) {
             func_800BA8D8(30);
             arg0->unk_04++;
             arg0->unk_04 = arg0->unk_04 % 30;
@@ -2040,16 +2040,16 @@ void func_i6_8011BF50(void) {
 }
 
 extern s32 gGameMode;
-extern Controller D_800DD180;
+extern Controller gSharedController;
 
 s32 func_i6_8011BFB0(void) {
 
-    func_8007DABC(&D_800DD180);
-    if (D_800E416C & (BTN_A | BTN_START)) {
+    func_8007DABC(&gSharedController);
+    if (gInputPressed & (BTN_A | BTN_START)) {
         D_i6_8011DFA0 ^= 1;
     }
-    if ((gGameMode != GAMEMODE_800C) && (D_800E416C & BTN_B)) {
-        return GAMEMODE_8007;
+    if ((gGameMode != GAMEMODE_800C) && (gInputPressed & BTN_B)) {
+        return GAMEMODE_FLX_MAIN_MENU;
     } else {
         return gGameMode;
     }
@@ -2185,7 +2185,7 @@ extern s16 D_800CD048;
 extern s32 D_i2_80106DA4;
 
 s32 func_i6_8011C6DC(void) {
-    func_8007DABC(&D_800DD180);
+    func_8007DABC(&gSharedController);
     func_80080C0C();
     func_i6_8011D394();
     if (!sOptionsDataAlreadyCleared) {
@@ -2204,7 +2204,7 @@ s32 func_i6_8011C6DC(void) {
     return GAMEMODE_8014;
 }
 
-extern u16 D_800E416E;
+extern u16 gInputButtonPressed;
 Gfx* func_i6_8011D168(Gfx*, s32, s32);
 
 bool func_i6_8011C788(void) {
@@ -2217,7 +2217,7 @@ bool func_i6_8011C788(void) {
         return false;
     }
     lastRow = gOptionsCurrentRow;
-    if (D_800E416C & BTN_UP) {
+    if (gInputPressed & BTN_UP) {
         if (--gOptionsCurrentRow < OPTIONS_VS_COM) {
             gOptionsCurrentRow = OPTIONS_EXIT;
         }
@@ -2227,7 +2227,7 @@ bool func_i6_8011C788(void) {
             }
         }
     }
-    if (D_800E416C & BTN_DOWN) {
+    if (gInputPressed & BTN_DOWN) {
         if (++gOptionsCurrentRow > OPTIONS_EXIT) {
             gOptionsCurrentRow = OPTIONS_VS_COM;
         }
@@ -2245,13 +2245,13 @@ bool func_i6_8011C788(void) {
     updateSettings = false;
     if (!(option->flags & OPTIONS_REQUIRE_SELECTING)) {
         temp_t0 = sOptionsSelectionState[gOptionsCurrentRow];
-        if (D_800E416E & BTN_LEFT) {
+        if (gInputButtonPressed & BTN_LEFT) {
             sOptionsSelectionState[gOptionsCurrentRow]--;
             if (sOptionsSelectionState[gOptionsCurrentRow] < 0) {
                 sOptionsSelectionState[gOptionsCurrentRow] = option->totalSelectionStates - 1;
             }
         }
-        if (D_800E416E & BTN_RIGHT) {
+        if (gInputButtonPressed & BTN_RIGHT) {
             sOptionsSelectionState[gOptionsCurrentRow]++;
             if (sOptionsSelectionState[gOptionsCurrentRow] > option->totalSelectionStates - 1) {
                 sOptionsSelectionState[gOptionsCurrentRow] = 0;
@@ -2262,7 +2262,7 @@ bool func_i6_8011C788(void) {
             func_800BA8D8(0x21);
         }
     }
-    if (D_800E416E & BTN_B) {
+    if (gInputButtonPressed & BTN_B) {
         func_800BA8D8(0x10);
         return true;
     }
@@ -2309,7 +2309,7 @@ bool func_i6_8011C788(void) {
             }
             break;
         case OPTIONS_DATA_CLEAR:
-            if (D_800E416E & (BTN_A | BTN_START)) {
+            if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 D_i6_801247A4 =
                     func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, GPACK_RGBA5551(255, 0, 0, 1), func_i6_8011D168);
                 if (D_i6_801247A4 != NULL) {
@@ -2320,7 +2320,7 @@ bool func_i6_8011C788(void) {
             }
             break;
         case OPTIONS_EXIT:
-            if (D_800E416E & (BTN_A | BTN_START)) {
+            if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x10);
                 return true;
             }
@@ -2346,12 +2346,12 @@ void func_i6_8011CBB4(void) {
 
     if (func_8008108C(D_i6_801247A4, 1) != 0) {
         lastSelectionState = sOptionsSelectionState[gOptionsCurrentRow];
-        if (D_800E416E & BTN_LEFT) {
+        if (gInputButtonPressed & BTN_LEFT) {
             if (--sOptionsSelectionState[gOptionsCurrentRow] < 0) {
                 sOptionsSelectionState[gOptionsCurrentRow] = 1;
             }
         }
-        if (D_800E416E & BTN_RIGHT) {
+        if (gInputButtonPressed & BTN_RIGHT) {
             if (++sOptionsSelectionState[gOptionsCurrentRow] > 1) {
                 sOptionsSelectionState[gOptionsCurrentRow] = 0;
             }
@@ -2360,7 +2360,7 @@ void func_i6_8011CBB4(void) {
             func_800BA8D8(0x1E);
         }
         updateSettings = false;
-        if (D_800E416E & (BTN_A | BTN_START)) {
+        if (gInputButtonPressed & (BTN_A | BTN_START)) {
             updateSettings = true;
             if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
                 func_i2_80101784(D_i6_8011FB10, 1);
@@ -2373,7 +2373,7 @@ void func_i6_8011CBB4(void) {
             } else {
                 func_800BA8D8(0x10);
             }
-        } else if (D_800E416E & BTN_B) {
+        } else if (gInputButtonPressed & BTN_B) {
             updateSettings = true;
             func_800BA8D8(0x10);
         }

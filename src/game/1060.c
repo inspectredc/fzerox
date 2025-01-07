@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzxthread.h"
 #include "audio.h"
+#include "PR/viint.h"
 
 extern s32 D_800D8430;
 extern OSThread D_800DC030;
@@ -262,7 +263,7 @@ void func_800678B8(void* arg0) {
     D_800DCCD0[1] = &D_80200000;
     D_800DCCD0[2] = &D_803DA800;
     osCreateViManager(0xFE);
-    if (osTvType == 1) {
+    if (osTvType == OS_TV_TYPE_NTSC) {
         osViSetMode(&D_800D1DA0);
     } else {
         osViSetMode(&D_800D2660);

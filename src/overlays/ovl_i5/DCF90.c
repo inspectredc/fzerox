@@ -131,28 +131,28 @@ s8 D_i5_80119544[] = { 1, 0, 2, 3, 4 };
 s32 sCourseSelectCup;
 s32 D_i5_801197E4;
 
-extern s32 gTrackIndex;
+extern s32 gCourseIndex;
 
 void func_i5_80116830(void) {
     unk_80141C88 sp28;
     s32 pad;
 
-    if (D_i5_801197E4 != gTrackIndex) {
+    if (D_i5_801197E4 != gCourseIndex) {
         sStaffGhostTimeBeaten = false;
-        if (func_i2_801037CC(&sp28, gTrackIndex) != 0) {
+        if (func_i2_801037CC(&sp28, gCourseIndex) != 0) {
             sUnlockedGhosts = 1;
         } else {
             // Within 115% of staff ghost time
-            if (D_802A6B40[gTrackIndex].timeRecord[0] < ((sp28.unk_08 * 115) / 100)) {
+            if (D_802A6B40[gCourseIndex].timeRecord[0] < ((sp28.unk_08 * 115) / 100)) {
                 sUnlockedGhosts = 2;
             } else {
                 sUnlockedGhosts = 1;
             }
-            if (D_802A6B40[gTrackIndex].timeRecord[0] < sp28.unk_08) {
+            if (D_802A6B40[gCourseIndex].timeRecord[0] < sp28.unk_08) {
                 sStaffGhostTimeBeaten = true;
             }
         }
-        D_i5_801197E4 = gTrackIndex;
+        D_i5_801197E4 = gCourseIndex;
     }
 }
 
@@ -160,7 +160,7 @@ extern char* gCurrentTrackName;
 extern char* gTrackNames[];
 
 void func_i5_80116910(void) {
-    gCurrentTrackName = gTrackNames[gTrackIndex];
+    gCurrentTrackName = gTrackNames[gCourseIndex];
 }
 
 extern s16 D_800CCFE8;
@@ -189,7 +189,7 @@ void func_i5_80116934(void) {
     if (var_v0 >= 48) {
         gCupSelectOption = 4;
         sCourseSelectTrackNo = 0;
-        gTrackIndex = 48;
+        gCourseIndex = 48;
     } else {
         sCourseSelectTrackNo = var_v0 % 6;
         if (var_v0 >= 24) {
@@ -197,7 +197,7 @@ void func_i5_80116934(void) {
         } else {
             gCupSelectOption = var_v0 / 6;
         }
-        gTrackIndex = var_v0;
+        gCourseIndex = var_v0;
     }
     func_i5_80116830();
     var_v1 = D_800CD3C0;
@@ -260,15 +260,15 @@ void func_i5_80116934(void) {
 void func_i5_80116D00(void) {
     D_800CCFE8 = 3;
     D_i5_801190C0 = 10;
-    if (gTrackIndex >= 48) {
+    if (gCourseIndex >= 48) {
         gCupSelectOption = 4;
-        sCourseSelectTrackNo = gTrackIndex % 6;
+        sCourseSelectTrackNo = gCourseIndex % 6;
     } else {
-        sCourseSelectTrackNo = gTrackIndex % 6;
-        if (gTrackIndex >= 24) {
+        sCourseSelectTrackNo = gCourseIndex % 6;
+        if (gCourseIndex >= 24) {
             gCupSelectOption = 10;
         } else {
-            gCupSelectOption = gTrackIndex / 6;
+            gCupSelectOption = gCourseIndex / 6;
         }
     }
     func_i5_80116910();
@@ -296,9 +296,9 @@ void func_i5_80116658(s32 arg0);
 extern s32 gCupType;
 extern s16 D_800CD044;
 extern s16 D_800CD048;
-extern Controller D_800DD180;
-extern u16 D_800E416C;
-extern u16 D_800E416E;
+extern Controller gSharedController;
+extern u16 gInputPressed;
+extern u16 gInputButtonPressed;
 extern unk_struct_1DC D_800E5220[];
 extern s32 D_i2_80106DA4;
 
@@ -317,16 +317,16 @@ s32 func_i5_80116EEC(void) {
     if ((D_800CD380 == 1) && (gGameMode != GAMEMODE_8013)) {
         func_i5_80116830();
     }
-    func_8007DABC(&D_800DD180);
+    func_8007DABC(&gSharedController);
     switch (D_i5_801190C0) {
         case 0:
             D_i5_801190D0 = 1;
             originalCupSelectOption = gCupSelectOption;
             if (gCupSelectOption < 10) {
-                if ((D_800E416C & BTN_LEFT) && (gCupSelectOption > 0)) {
+                if ((gInputPressed & BTN_LEFT) && (gCupSelectOption > 0)) {
                     gCupSelectOption--;
                 }
-                if ((D_800E416C & BTN_RIGHT) && (gCupSelectOption < 4)) {
+                if ((gInputPressed & BTN_RIGHT) && (gCupSelectOption < 4)) {
                     gCupSelectOption++;
                 }
                 var_v1 = D_800CD3C0;
@@ -361,32 +361,32 @@ s32 func_i5_80116EEC(void) {
                 gCupType = EDIT_CUP;
             }
             if (gCupSelectOption >= 10) {
-                gTrackIndex = sCourseSelectTrackNo + 24;
+                gCourseIndex = sCourseSelectTrackNo + 24;
             } else if (gCupSelectOption == 4) {
-                gTrackIndex = 48;
+                gCourseIndex = 48;
             } else {
-                gTrackIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
+                gCourseIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
             }
-            if (D_800E416E & BTN_B) {
+            if (gInputButtonPressed & BTN_B) {
                 func_800BA8D8(0x10);
                 if (gGameMode == GAMEMODE_800A) {
-                    D_800CD3B8 = gTrackIndex;
+                    D_800CD3B8 = gCourseIndex;
                     D_i5_801190C0 = 5;
                 } else {
-                    D_800CD3BC = gTrackIndex;
+                    D_800CD3BC = gCourseIndex;
                     D_i5_801190C0 = 1;
                     D_800CD048 = 10;
                 }
-            } else if (D_800E416E & (BTN_A | BTN_START)) {
+            } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x21);
                 if (gCupSelectOption == 4) {
                     sCourseSelectTrackNo = 0;
                     D_i5_801190C0 = 3;
                 } else if (D_800CD380 == 0) {
                     if (gCupSelectOption >= 10) {
-                        gTrackIndex = 0x18;
+                        gCourseIndex = 0x18;
                     } else {
-                        gTrackIndex = gCupSelectOption * 6;
+                        gCourseIndex = gCupSelectOption * 6;
                     }
                     sCourseSelectTrackNo = 0;
                     D_i5_801190C0 = 3;
@@ -401,10 +401,10 @@ s32 func_i5_80116EEC(void) {
             if ((D_800CD380 == 1) && (gGameMode != GAMEMODE_8013)) {
                 unlockedGhost = sUnlockedGhosts;
                 originalSelectedGhostOption = sSelectedGhostOption;
-                if ((D_800E416C & BTN_UP) && (sSelectedGhostOption > 0)) {
+                if ((gInputPressed & BTN_UP) && (sSelectedGhostOption > 0)) {
                     sSelectedGhostOption--;
                 }
-                if ((D_800E416C & BTN_DOWN) && (sSelectedGhostOption < unlockedGhost)) {
+                if ((gInputPressed & BTN_DOWN) && (sSelectedGhostOption < unlockedGhost)) {
                     sSelectedGhostOption++;
                 }
                 if (originalSelectedGhostOption != sSelectedGhostOption) {
@@ -416,7 +416,7 @@ s32 func_i5_80116EEC(void) {
                 D_800CD3CC = D_i5_80119544[sSelectedGhostOption];
             }
 
-            if ((D_800E416C & BTN_LEFT) && (sCourseSelectTrackNo > 0)) {
+            if ((gInputPressed & BTN_LEFT) && (sCourseSelectTrackNo > 0)) {
                 sCourseSelectTrackNo--;
                 D_800E5220[0].unk_18 = 1;
                 temp_v0_2 = func_80079E88(0x81);
@@ -424,7 +424,7 @@ s32 func_i5_80116EEC(void) {
                 func_800BA8D8(30);
             }
 
-            if ((D_800E416C & BTN_RIGHT) && (sCourseSelectTrackNo < 5)) {
+            if ((gInputPressed & BTN_RIGHT) && (sCourseSelectTrackNo < 5)) {
                 sCourseSelectTrackNo++;
                 D_800E5220[0].unk_18 = 1;
                 temp_v0_2 = func_80079E88(0x81);
@@ -432,40 +432,40 @@ s32 func_i5_80116EEC(void) {
                 func_800BA8D8(30);
             }
             if (gCupSelectOption >= 10) {
-                gTrackIndex = sCourseSelectTrackNo + 0x18;
+                gCourseIndex = sCourseSelectTrackNo + 0x18;
             } else {
-                gTrackIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
+                gCourseIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
             }
-            if (D_800E416E & BTN_B) {
+            if (gInputButtonPressed & BTN_B) {
                 D_i5_801190C0 = 0;
                 func_800BA8D8(0x10);
-            } else if (D_800E416E & (BTN_A | BTN_START)) {
+            } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x21);
                 D_i5_801190C0 = 3;
                 D_i5_801190D0 = 0;
             }
             break;
         case 3:
-            if (D_800E416E & BTN_B) {
+            if (gInputButtonPressed & BTN_B) {
                 if ((D_800CD380 == 0) || (gCupSelectOption == 4)) {
                     D_i5_801190C0 = 0;
                 } else {
                     D_i5_801190C0 = 2;
                 }
                 func_800BA8D8(0x10);
-            } else if (D_800E416E & (BTN_A | BTN_START)) {
+            } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
                 D_i5_801190C0 = 4;
                 if (gGameMode == GAMEMODE_800A) {
-                    D_800CD3B8 = gTrackIndex;
+                    D_800CD3B8 = gCourseIndex;
                     return GAMEMODE_8008;
                 }
-                D_800CD3BC = gTrackIndex;
+                D_800CD3BC = gCourseIndex;
                 return GAMEMODE_6;
             }
             break;
         case 5:
-            if (D_800E416E & (BTN_A | BTN_START)) {
+            if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x21);
                 D_i5_801190C0 = 0;
             }
@@ -485,11 +485,11 @@ s32 func_i5_80116EEC(void) {
 
 s32 func_i5_801175D0(void) {
     func_8008675C();
-    func_8007DABC(&D_800DD180);
+    func_8007DABC(&gSharedController);
     D_i5_801190D0 = 1;
     switch (D_i5_801190C0) {
         case 10:
-            if (D_800E416E & (BTN_A | BTN_START)) {
+            if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 D_i5_801190C0 = 11;
                 func_800BA8D8(0x3E);
                 return GAMEMODE_4012;
@@ -780,11 +780,11 @@ Gfx* func_i5_80118100(Gfx* gfx, unk_800E3A28* arg1) {
     return func_80078EA0(gfx, sOKCompTexInfo, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
 }
 
-extern f32 D_800DD230[];
+extern f32 gSinTable[];
 
 Gfx* func_i5_80118168(Gfx* gfx, unk_800E3A28* arg1) {
-    f32 temp_fv0 = (D_800DD230[arg1->unk_1C & 0xFFF] + 1.0) / 2;
-    f32 temp_fa1 = (D_800DD230[arg1->unk_20 & 0xFFF] + 1.0) / 2;
+    f32 temp_fv0 = (SIN(arg1->unk_1C) + 1.0) / 2;
+    f32 temp_fa1 = (SIN(arg1->unk_20) + 1.0) / 2;
 
     gfx = func_80078EA0(gfx, sRecordsArrowCompTexInfo, arg1->unk_0C + 0x2B, (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0,
                         0, 1.0f, temp_fv0);
@@ -843,7 +843,7 @@ Gfx* func_i5_801182DC(Gfx* gfx) {
 Gfx* func_i5_80118674(Gfx* gfx, unk_800E3A28* arg1) {
 
     // If Cup Does Not Match
-    if ((arg1->unk_04 / 6) != (gTrackIndex / 6)) {
+    if ((arg1->unk_04 / 6) != (gCourseIndex / 6)) {
         return gfx;
     }
 

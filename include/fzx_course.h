@@ -1,0 +1,243 @@
+#ifndef FZX_COURSE_H
+#define FZX_COURSE_H
+
+#include "fzxmath.h"
+
+typedef struct ControlPoint {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ s16 radiusLeft;
+    /* 0x0E */ s16 radiusRight;
+    /* 0x10 */ s32 trackSegmentInfo;
+} ControlPoint; // size = 0x14
+
+typedef struct CourseData {
+    /* 0x000 */ s8 creatorId;
+    /* 0x001 */ s8 controlPointCount;
+    /* 0x002 */ s8 venue;
+    /* 0x003 */ s8 skybox;
+    /* 0x004 */ u32 checksum;
+    /* 0x008 */ s8 flag;
+    /* 0x009 */ char fileName[23];
+    /* 0x020 */ ControlPoint controlPoint[64];
+    /* 0x520 */ s16 bankAngle[64];
+    /* 0x5A0 */ s8 pit[64];
+    /* 0x5E0 */ s8 dash[64];
+    /* 0x620 */ s8 dirt[64];
+    /* 0x660 */ s8 ice[64];
+    /* 0x6A0 */ s8 jump[64];
+    /* 0x6E0 */ s8 landmine[64];
+    /* 0x720 */ s8 gate[64];
+    /* 0x760 */ s8 building[64];
+    /* 0x7A0 */ s8 sign[64];
+} CourseData; // size = 0x7E0
+
+#define CREATOR_NINTENDO 4
+
+typedef enum Venue {
+    /*  0 */ VENUE_MUTE_CITY,
+    /*  1 */ VENUE_PORT_TOWN,
+    /*  2 */ VENUE_BIG_BLUE,
+    /*  3 */ VENUE_SAND_OCEAN,
+    /*  4 */ VENUE_DEVILS_FOREST,
+    /*  5 */ VENUE_WHITE_LAND,
+    /*  6 */ VENUE_SECTOR,
+    /*  7 */ VENUE_RED_CANYON,
+    /*  8 */ VENUE_FIRE_FIELD,
+    /*  9 */ VENUE_SILENCE,
+    /* 10 */ VENUE_ENDING,
+} Venue;
+
+typedef enum Skybox {
+    /* 0 */ SKYBOX_PURPLE,
+    /* 1 */ SKYBOX_TURQUOISE,
+    /* 2 */ SKYBOX_DESERT,
+    /* 3 */ SKYBOX_BLUE,
+    /* 4 */ SKYBOX_NIGHT,
+    /* 5 */ SKYBOX_ORANGE,
+    /* 6 */ SKYBOX_SUNSET,
+    /* 7 */ SKYBOX_SKY_BLUE,
+} Skybox;
+
+typedef enum PitZone {
+    /* -1 */ PIT_NONE = -1,
+    /*  0 */ PIT_BOTH,
+    /*  1 */ PIT_LEFT,
+    /*  2 */ PIT_RIGHT,
+} PitZone;
+
+typedef enum DashZone {
+    /* -1 */ DASH_NONE = -1,
+    /*  0 */ DASH_MIDDLE,
+    /*  1 */ DASH_LEFT,
+    /*  2 */ DASH_RIGHT,
+} DashZone;
+
+typedef enum Dirt {
+    /* -1 */ DIRT_NONE = -1,
+    /*  0 */ DIRT_BOTH,
+    /*  1 */ DIRT_LEFT,
+    /*  2 */ DIRT_RIGHT,
+    /*  3 */ DIRT_MIDDLE,
+} Dirt;
+
+typedef enum Ice {
+    /* -1 */ ICE_NONE = -1,
+    /*  0 */ ICE_BOTH,
+    /*  1 */ ICE_LEFT,
+    /*  2 */ ICE_RIGHT,
+    /*  3 */ ICE_MIDDLE,
+} Ice;
+
+typedef enum Jump {
+    /* -1 */ JUMP_NONE = -1,
+    /*  0 */ JUMP_ALL,
+    /*  1 */ JUMP_LEFT,
+    /*  2 */ JUMP_RIGHT,
+} Jump;
+
+typedef enum Landmine {
+    /* -1 */ LANDMINE_NONE = -1,
+    /*  0 */ LANDMINE_MIDDLE,
+    /*  1 */ LANDMINE_LEFT,
+    /*  2 */ LANDMINE_RIGHT,
+} Landmine;
+
+typedef enum Gate {
+    /* -1 */ GATE_NONE = -1,
+    /*  0 */ GATE_SQUARE,
+    /*  1 */ GATE_START,
+    /*  2 */ GATE_HEXAGONAL,
+} Gate;
+
+typedef enum Building {
+    /* -1 */ BUILDING_NONE = -1,
+    /*  0 */ BUILDING_TALL_BOTH,
+    /*  1 */ BUILDING_TALL_LEFT,
+    /*  2 */ BUILDING_TALL_RIGHT,
+    /*  3 */ BUILDING_SHORT_BOTH,
+    /*  4 */ BUILDING_SHORT_LEFT,
+    /*  5 */ BUILDING_SHORT_RIGHT,
+    /*  6 */ BUILDING_SPIRE_BOTH,
+    /*  7 */ BUILDING_SPIRE_LEFT,
+    /*  8 */ BUILDING_SPIRE_RIGHT,
+    /*  9 */ BUILDING_MOUNTAIN_BOTH,
+    /* 10 */ BUILDING_MOUNTAIN_LEFT,
+    /* 11 */ BUILDING_MOUNTAIN_RIGHT,
+    /* 12 */ BUILDING_TALL_GOLD_BOTH,
+    /* 13 */ BUILDING_TALL_GOLD_LEFT,
+    /* 14 */ BUILDING_TALL_GOLD_RIGHT,
+} Building;
+
+typedef enum Sign {
+    /* -1 */ SIGN_NONE = -1,
+    /*  0 */ SIGN_TV,
+    /*  1 */ SIGN_1,
+    /*  2 */ SIGN_2,
+    /*  3 */ SIGN_NINTEX,
+    /*  4 */ SIGN_OVERHEAD,
+} Sign;
+
+typedef enum Road {
+    ROAD_START_LINE,
+    ROAD_1,
+    ROAD_2,
+    ROAD_3,
+    ROAD_4,
+    ROAD_5,
+    ROAD_6,
+    ROAD_7,
+    ROAD_MAX,
+} Road;
+
+typedef enum WalledRoad {
+    WALLED_ROAD_0,
+    WALLED_ROAD_1,
+    WALLED_ROAD_2,
+    WALLED_ROAD_MAX,
+} WalledRoad;
+
+typedef enum Pipe {
+    PIPE_0,
+    PIPE_1,
+    PIPE_2,
+    PIPE_3,
+    PIPE_MAX,
+} Pipe;
+
+typedef enum Cylinder {
+    CYLINDER_0,
+    CYLINDER_1,
+    CYLINDER_2,
+    CYLINDER_3,
+    CYLINDER_MAX,
+} Cylinder;
+
+typedef enum HalfPipe {
+    HALF_PIPE_0,
+    HALF_PIPE_1,
+    HALF_PIPE_2,
+    HALF_PIPE_3,
+    HALF_PIPE_MAX,
+} HalfPipe;
+
+typedef enum Tunnel {
+    TUNNEL_0,
+    TUNNEL_1,
+    TUNNEL_2,
+    TUNNEL_3,
+    TUNNEL_MAX,
+} Tunnel;
+
+typedef enum BorderlessRoad {
+    BORDERLESS_ROAD_0,
+    BORDERLESS_ROAD_1,
+    BORDERLESS_ROAD_2,
+    BORDERLESS_ROAD_MAX,
+} BorderlessRoad;
+
+#define TRACK_TYPE_NONE 0x3F
+#define TRACK_TYPE_MASK 0x3F
+
+#define TRACK_SHAPE_ROAD 0x0
+#define TRACK_SHAPE_WALLED_ROAD 0x40
+#define TRACK_SHAPE_PIPE 0x80
+#define TRACK_SHAPE_CYLINDER 0xC0
+#define TRACK_SHAPE_HALF_PIPE 0x100
+#define TRACK_SHAPE_TUNNEL 0x140
+#define TRACK_SHAPE_AIR 0x180
+#define TRACK_SHAPE_BORDERLESS_ROAD 0x1C0
+
+#define TRACK_SHAPE_MASK 0x1C0
+
+#define TRACK_JOIN_PREVIOUS 0x200
+#define TRACK_JOIN_NEXT 0x400
+#define TRACK_JOIN_BOTH 0x600
+#define TRACK_JOIN_MASK 0x600
+
+#define TRACK_UNK1_0 0x0
+#define TRACK_UNK1_800 0x800
+#define TRACK_UNK1_1000 0x1000
+#define TRACK_UNK1_1800 0x1800
+#define TRACK_UNK1_MASK 0x1800
+
+#define TRACK_UNK2_0 0x0
+#define TRACK_UNK2_2000 0x2000
+#define TRACK_UNK2_4000 0x4000
+#define TRACK_UNK2_6000 0x6000
+#define TRACK_UNK2_MASK 0x6000
+
+#define TRACK_FORM_STRAIGHT 0x00008000
+#define TRACK_FORM_LEFT 0x00010000
+#define TRACK_FORM_RIGHT 0x00018000
+#define TRACK_FORM_S 0x00020000
+#define TRACK_FORM_S_FLIPPED 0x00028000
+
+#define TRACK_FORM_MASK 0x00038000
+
+#define TRACK_FLAG_8000000 0x8000000
+#define TRACK_FLAG_JOINABLE 0x10000000
+#define TRACK_FLAG_20000000 0x20000000
+#define TRACK_FLAG_CONTINUOUS 0x40000000
+#define TRACK_FLAG_80000000 0x80000000
+
+#endif // FZX_COURSE_H
