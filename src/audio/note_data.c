@@ -207,8 +207,7 @@ NoteSubEu gZeroNoteSub = { 0 };
 
 NoteSubEu gDefaultNoteSub = {
     { 1, 1, 0, 0, 0, 0, 0, 0 },
-    { 0 },
-    0,
+    0, 0, 0, NULL,
 };
 
 f32 gDefaultPanVolume[] = {
