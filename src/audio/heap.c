@@ -209,19 +209,19 @@ void AudioHeap_InitSessionPools(AudioSessionPoolSplit* split) {
 void AudioHeap_InitCachePools(AudioCachePoolSplit* split) {
     gCachePool.curRamAddr = gCachePool.startRamAddr;
     AudioHeap_InitPool(&gPersistentCommonPool, AudioHeap_Alloc(&gCachePool, split->persistentCommonPoolSize),
-                  split->persistentCommonPoolSize);
+                       split->persistentCommonPoolSize);
     AudioHeap_InitPool(&gTemporaryCommonPool, AudioHeap_Alloc(&gCachePool, split->temporaryCommonPoolSize),
-                  split->temporaryCommonPoolSize);
+                       split->temporaryCommonPoolSize);
 }
 
 void AudioHeap_InitPersistentPoolsAndCaches(AudioCommonPoolSplit* split) {
     gPersistentCommonPool.curRamAddr = gPersistentCommonPool.startRamAddr;
     AudioHeap_InitPool(&gSeqCache.persistent.pool, AudioHeap_Alloc(&gPersistentCommonPool, split->seqCacheSize),
-                  split->seqCacheSize);
+                       split->seqCacheSize);
     AudioHeap_InitPool(&gFontCache.persistent.pool, AudioHeap_Alloc(&gPersistentCommonPool, split->fontCacheSize),
-                  split->fontCacheSize);
-    AudioHeap_InitPool(&gSampleBankCache.persistent.pool, AudioHeap_Alloc(&gPersistentCommonPool, split->sampleBankCacheSize),
-                  split->sampleBankCacheSize);
+                       split->fontCacheSize);
+    AudioHeap_InitPool(&gSampleBankCache.persistent.pool,
+                       AudioHeap_Alloc(&gPersistentCommonPool, split->sampleBankCacheSize), split->sampleBankCacheSize);
     AudioHeap_InitPersistentCache(&gSeqCache.persistent);
     AudioHeap_InitPersistentCache(&gFontCache.persistent);
     AudioHeap_InitPersistentCache(&gSampleBankCache.persistent);
@@ -230,11 +230,11 @@ void AudioHeap_InitPersistentPoolsAndCaches(AudioCommonPoolSplit* split) {
 void AudioHeap_InitTemporaryPoolsAndCaches(AudioCommonPoolSplit* split) {
     gTemporaryCommonPool.curRamAddr = gTemporaryCommonPool.startRamAddr;
     AudioHeap_InitPool(&gSeqCache.temporary.pool, AudioHeap_Alloc(&gTemporaryCommonPool, split->seqCacheSize),
-                  split->seqCacheSize);
+                       split->seqCacheSize);
     AudioHeap_InitPool(&gFontCache.temporary.pool, AudioHeap_Alloc(&gTemporaryCommonPool, split->fontCacheSize),
-                  split->fontCacheSize);
-    AudioHeap_InitPool(&gSampleBankCache.temporary.pool, AudioHeap_Alloc(&gTemporaryCommonPool, split->sampleBankCacheSize),
-                  split->sampleBankCacheSize);
+                       split->fontCacheSize);
+    AudioHeap_InitPool(&gSampleBankCache.temporary.pool,
+                       AudioHeap_Alloc(&gTemporaryCommonPool, split->sampleBankCacheSize), split->sampleBankCacheSize);
     AudioHeap_InitTemporaryCache(&gSeqCache.temporary);
     AudioHeap_InitTemporaryCache(&gFontCache.temporary);
     AudioHeap_InitTemporaryCache(&gSampleBankCache.temporary);
@@ -944,7 +944,8 @@ void AudioHeap_DiscardSampleCacheEntry(SampleCacheEntry* entry) {
         if (((sampleBankId1 != SAMPLES_NONE) && (entry->sampleBankId == sampleBankId1)) ||
             ((sampleBankId2 != SAMPLES_NONE) && (entry->sampleBankId == sampleBankId2)) ||
             (entry->sampleBankId == SAMPLES_SFX)) {
-            if ((AudioHeap_SearchCaches(FONT_TABLE, CACHE_EITHER, fontId) != NULL) && AudioLoad_IsFontLoadComplete(fontId)) {
+            if ((AudioHeap_SearchCaches(FONT_TABLE, CACHE_EITHER, fontId) != NULL) &&
+                AudioLoad_IsFontLoadComplete(fontId)) {
                 for (instId = 0; instId < gSoundFontList[fontId].numInstruments; instId++) {
                     instrument = Audio_GetInstrument(fontId, instId);
                     if (instrument != NULL) {
@@ -1012,7 +1013,8 @@ void AudioHeap_DiscardSampleCaches(void) {
         sampleBankId1 = gSoundFontList[fontId].sampleBankId1;
         sampleBankId2 = gSoundFontList[fontId].sampleBankId2;
         if ((sampleBankId1 != SAMPLES_NONE) || (sampleBankId2 != SAMPLES_NONE)) {
-            if (AudioHeap_SearchCaches(FONT_TABLE, CACHE_PERMANENT, fontId) != NULL && AudioLoad_IsFontLoadComplete(fontId)) {
+            if (AudioHeap_SearchCaches(FONT_TABLE, CACHE_PERMANENT, fontId) != NULL &&
+                AudioLoad_IsFontLoadComplete(fontId)) {
 
                 for (i = 0; i < gPersistentSampleCache.numEntries; i++) {
                     entry = &gPersistentSampleCache.entries[i];

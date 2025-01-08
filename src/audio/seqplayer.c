@@ -539,7 +539,8 @@ void AudioSeq_SeqLayerProcessScriptStep1(SequenceLayer* layer) {
         Audio_SeqLayerNoteDecay(layer);
     }
 
-    if (PORTAMENTO_MODE(layer->portamento) == PORTAMENTO_MODE_1 || PORTAMENTO_MODE(layer->portamento) == PORTAMENTO_MODE_2) {
+    if (PORTAMENTO_MODE(layer->portamento) == PORTAMENTO_MODE_1 ||
+        PORTAMENTO_MODE(layer->portamento) == PORTAMENTO_MODE_2) {
         layer->portamento.mode = PORTAMENTO_MODE_OFF;
     }
     layer->notePropertiesNeedInit = true;
@@ -656,7 +657,8 @@ s32 AudioSeq_SeqLayerProcessScriptStep2(SequenceLayer* layer) {
                         layer->adsr.decayIndex = 0;
                     }
                 } else {
-                    if ((layer->instOrWave = AudioSeq_GetInstrument(channel, cmd, &layer->instrument, &layer->adsr)) == 0) {
+                    if ((layer->instOrWave = AudioSeq_GetInstrument(channel, cmd, &layer->instrument, &layer->adsr)) ==
+                        0) {
                         layer->instOrWave = 0xFF;
                     }
                 }
@@ -996,7 +998,8 @@ void AudioSeq_SetInstrument(SequenceChannel* channel, u8 instId) {
         channel->instrument = (Instrument*) 1; // invalid pointer, never dereferenced
     } else {
         // Instruments
-        if ((channel->instOrWave = AudioSeq_GetInstrument(channel, instId, &channel->instrument, &channel->adsr)) == 0) {
+        if ((channel->instOrWave = AudioSeq_GetInstrument(channel, instId, &channel->instrument, &channel->adsr)) ==
+            0) {
             channel->hasInstrument = false;
             return;
         }
@@ -1366,7 +1369,8 @@ void AudioSeq_SequenceChannelProcessScript(SequenceChannel* channel) {
             case 0x10:
 
                 channel->seqScriptIO[lowBits] = SEQ_IO_VAL_NONE;
-                if (AudioLoad_SlowLoadSample(channel->fontId, scriptState->value, &channel->seqScriptIO[lowBits]) == -1) {}
+                if (AudioLoad_SlowLoadSample(channel->fontId, scriptState->value, &channel->seqScriptIO[lowBits]) ==
+                    -1) {}
 
                 break;
             case 0x70:
@@ -1452,7 +1456,8 @@ void AudioSeq_SequencePlayerProcessSequence(SequencePlayer* seqPlayer) {
             cmd = AudioSeq_ScriptReadU8(seqScript);
 
             if (cmd >= 0xF2) {
-                delay = AudioSeq_HandleScriptFlowControl(seqPlayer, seqScript, cmd, AudioSeq_GetScriptControlFlowArgument(&seqPlayer->scriptState, cmd));
+                delay = AudioSeq_HandleScriptFlowControl(
+                    seqPlayer, seqScript, cmd, AudioSeq_GetScriptControlFlowArgument(&seqPlayer->scriptState, cmd));
 
                 if (delay != 0) {
                     if (delay == -1) {

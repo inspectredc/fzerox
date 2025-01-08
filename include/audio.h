@@ -886,7 +886,7 @@ Drum* Audio_GetDrum(s32 fontId, s32 drumId);
 void Audio_SeqLayerNoteDecay(SequenceLayer* layer);
 void Audio_InitNoteLists(NotePool* pool);
 void Audio_InitNoteFreeList(void);
-void Audio_NotePoolFill(NotePool* pool, s32 arg1);
+void Audio_NotePoolFill(NotePool* pool, s32 count);
 void Audio_AudioListRemove(Note* note);
 Note* Audio_AllocNote(SequenceLayer* layer);
 void Audio_NoteInitAll(void);

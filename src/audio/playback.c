@@ -81,10 +81,10 @@ extern NoteSubEu gDefaultNoteSub;
 void Audio_NoteInit(Note* note) {
     if (note->playbackState.parentLayer->adsr.decayIndex == 0) {
         Audio_AdsrInit(&note->playbackState.adsr, note->playbackState.parentLayer->channel->adsr.envelope,
-                      &note->playbackState.adsrVolScaleUnused);
+                       &note->playbackState.adsrVolScaleUnused);
     } else {
         Audio_AdsrInit(&note->playbackState.adsr, note->playbackState.parentLayer->adsr.envelope,
-                      &note->playbackState.adsrVolScaleUnused);
+                       &note->playbackState.adsrVolScaleUnused);
     }
     note->playbackState.unk_04 = 0;
     note->playbackState.adsr.state = 1;
