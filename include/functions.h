@@ -202,7 +202,7 @@ Gfx* func_800A9938(Gfx* gfx, s32 arg1);
 void mio0Decode(u8*, void*);
 s32 func_800AA6BC(u8*);
 
-void func_800B71A4(void);
+void AudioThread_InitMesgQueues(void);
 void func_800B9E28(void);
 void func_800BA248(void);
 void func_800BA268(void);

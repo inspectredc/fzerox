@@ -9,6 +9,57 @@ void func_800BAEDC(u8);
 void func_800BA7C0(u8);
 void func_800BB45C(void);
 
+u8 D_800D19E0 = 0;
+u8 D_800D19E4 = 0;
+u8 D_800D19E8 = 0;
+u8 D_800D19EC = 0;
+u8 D_800D19F0 = 0;
+u8 D_800D19F4 = 0;
+u16 D_800D19F8 = 0;
+u16 D_800D19FC = 0;
+u16 D_800D1A00 = 0;
+u16 D_800D1A04 = 0;
+u8 D_800D1A08 = 0;
+u8 D_800D1A0C = 0;
+UNUSED s32 D_800D1A10 = 0;
+UNUSED s32 D_800D1A14 = 0;
+u8 D_800D1A18 = 0;
+u8 D_800D1A1C = 0;
+u8 D_800D1A20 = 0;
+u8 D_800D1A24 = 0;
+f32 D_800D1A28 = 0.0f;
+f32 D_800D1A2C = 1.0f;
+f32 D_800D1A30 = 0.0f;
+f32 D_800D1A34 = 0.0f;
+f32 D_800D1A38 = 0.0f;
+u8 D_800D1A3C = 64;
+u8 D_800D1A40 = 0;
+u16 D_800D1A44 = 0;
+u8 D_800D1A48 = 0;
+u16 D_800D1A4C = 0;
+u16 D_800D1A50 = 0;
+UNUSED s32 D_800D1A54 = 0;
+u8 D_800D1A58 = 0;
+u8 D_800D1A5C = 0;
+u8 D_800D1A60 = 0;
+f32 D_800D1A64[4] = { 0 };
+u8 D_800D1A74[4] = { 0 };
+u8 D_800D1A78[4] = { 0 };
+f32 D_800D1A7C[4] = { 0 };
+u8 D_800D1A8C[4] = { 0 };
+u8 D_800D1A90[4] = { 0 };
+u8 D_800D1A94[4] = { 0 };
+f32 D_800D1A98[16] = { 0 };
+u8 D_800D1AD8[30] = { 0 };
+f32 D_800D1AF8[] = {
+    1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+    1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+};
+u8 D_800D1B70[30][4] = { 0 };
+u8 D_800D1BE8[4][4] = { 0 };
+u8 D_800D1BF8[4][8] = { 0 };
+AudioTask* D_800D1C18 = NULL;
+
 s32 func_800B71D0(u8 arg0) {
     u8 var_v1;
 
@@ -26,9 +77,6 @@ s32 func_800B71D0(u8 arg0) {
         return var_v1;
     }
 }
-
-extern u8 D_800D1A18;
-extern u8 D_800D1BF8[][8];
 
 void func_800B7244(u8 playerNum, u8 arg1) {
 
@@ -79,7 +127,7 @@ void func_800B7244(u8 playerNum, u8 arg1) {
     }
     switch (D_800D1A18) {
         case 0:
-            func_800B6934(0x03000600, 0x3F);
+            AudioThread_QueueCmdS8(0x03000600, 0x3F);
             func_800BAE98(6, arg1);
             break;
         case 1:
@@ -133,8 +181,6 @@ void func_800B7244(u8 playerNum, u8 arg1) {
     }
 }
 
-extern u8 D_800D1BE8[][4];
-
 void func_800B759C(u8 arg0) {
 
     if (D_800D1BE8[arg0][0] != 0) {
@@ -146,14 +192,6 @@ void func_800B759C(u8 arg0) {
     }
 }
 
-extern u8 D_800D1A1C;
-extern u8 D_800D1A20;
-extern f32 D_800D1A30;
-extern f32 D_800D1A38;
-extern u8 D_800D1A3C;
-extern u8 D_800D1A74[];
-extern u8 D_800D1AD8[];
-extern f32 D_800D1AF8[];
 extern unk_struct_1DC D_800E5220[];
 
 void func_800B7600(u8 arg0, u8 arg1) {
@@ -285,8 +323,6 @@ void func_800B7600(u8 arg0, u8 arg1) {
     }
 }
 
-extern u8 D_800D1B70[][4];
-
 void func_800B7C40(u8 racerId) {
 
     if (D_800D1B70[racerId][0] != 0) {
@@ -297,15 +333,6 @@ void func_800B7C40(u8 racerId) {
         D_800D1B70[racerId][3] = 0;
     }
 }
-
-extern u8 D_800D1A40;
-extern u16 D_800D1A50;
-extern u8 D_800D1A58;
-extern u8 D_800D1A90[];
-extern f32 D_800D1A98[];
-extern u8 D_800D1C00;
-extern u8 D_800D1C08;
-extern u8 D_800D1C10;
 
 void func_800B7CA4(void) {
     f32 volumeScale;
@@ -370,21 +397,21 @@ void func_800B7CA4(void) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, reverbVolume);
         }
     }
-    if ((D_800D1A74[1] != 0) && (D_800D1C00 != 0) && (D_800D1A98[7] != 0.0f)) {
+    if ((D_800D1A74[1] != 0) && (D_800D1BF8[1][0] != 0) && (D_800D1A98[7] != 0.0f)) {
         volumeScale = D_800D1A98[7] - ((D_800D1A98[7] / 30.0f) * D_800D1A50);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 7, volumeScale);
         if (D_800D1A90[1] == 1) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, reverbVolume);
         }
     }
-    if ((D_800D1A74[2] != 0) && (D_800D1C08 != 0) && (D_800D1A98[8] != 0.0f)) {
+    if ((D_800D1A74[2] != 0) && (D_800D1BF8[2][0] != 0) && (D_800D1A98[8] != 0.0f)) {
         volumeScale = D_800D1A98[8] - ((D_800D1A98[8] / 30.0f) * D_800D1A50);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 8, volumeScale);
         if (D_800D1A90[2] == 1) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, reverbVolume);
         }
     }
-    if ((D_800D1A74[3] != 0) && (D_800D1C10 != 0) && (D_800D1A98[9] != 0.0f)) {
+    if ((D_800D1A74[3] != 0) && (D_800D1BF8[3][0] != 0) && (D_800D1A98[9] != 0.0f)) {
         volumeScale = D_800D1A98[9] - ((D_800D1A98[9] / 30.0f) * D_800D1A50);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 9, volumeScale);
         if (D_800D1A90[3] == 1) {
@@ -399,9 +426,6 @@ void func_800B7CA4(void) {
         }
     }
 }
-
-extern u8 D_800D1A48;
-extern u16 D_800D1A4C;
 
 void func_800B82C8(void) {
     f32 volumeScale;
@@ -447,7 +471,6 @@ void func_800B82C8(void) {
 
 extern s32 gNumPlayers;
 extern s8 D_800CD010;
-extern u8 D_800D1A60;
 extern s32 gGameMode;
 
 void func_800B84B8(void) {
@@ -483,8 +506,6 @@ void func_800B84B8(void) {
     }
 }
 
-extern u16 D_800D1A44;
-
 void func_800B8598(void) {
     f32 volumeScale;
 
@@ -499,15 +520,6 @@ void func_800B8598(void) {
         }
     }
 }
-
-extern u8 D_800D19E0;
-extern u8 D_800D1A08;
-extern u8 D_800D1A24;
-extern f32 D_800D1A28;
-extern f32 D_800D1A2C;
-extern f32 D_800D1A34;
-extern u8 D_800D1A8C[];
-extern f32 D_800D1AD0;
 
 void func_800B8640(void) {
     Vec3f vec;
@@ -556,18 +568,12 @@ void func_800B8640(void) {
             }
 
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 14, D_800D1A34);
-            D_800D1AD0 = D_800D1A34;
+            D_800D1A98[14] = D_800D1A34;
             AUDIOCMD_CHANNEL_SET_PAN(0, 14, func_800B71D0(D_800D1A3C));
             AUDIOCMD_CHANNEL_SET_FREQ_SCALE(0, 14, D_800D1A38);
         }
     }
 }
-
-extern f32 D_800D1A64[];
-extern u8 D_800D1A78[];
-extern f32 D_800D1A7C[];
-extern f32 D_800D1AA0[];
-extern u8 D_800D1A94[];
 
 void func_800B899C(u8 arg0) {
     f32 freqScale;
@@ -649,13 +655,12 @@ void func_800B899C(u8 arg0) {
         }
 
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, arg0 + 2, volumeScale);
-        D_800D1AA0[(s32) arg0] = volumeScale;
+        D_800D1A98[arg0 + 2] = volumeScale;
     }
 }
 
 extern u8 D_800D1A40;
 extern u8 D_800D1A58;
-extern f32 D_800D1AB0[];
 
 void func_800B8DAC(u8 arg0) {
     f32 freqScale;
@@ -770,7 +775,7 @@ void func_800B8DAC(u8 arg0) {
                 break;
         }
 
-        D_800D1AB0[(s32) arg0] = volumeScale;
+        D_800D1A98[arg0 + 6] = volumeScale;
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, arg0 + 6, volumeScale);
         AUDIOCMD_CHANNEL_SET_FREQ_SCALE(0, arg0 + 6, freqScale);
     }
@@ -833,7 +838,7 @@ void func_800B9240(u8 arg0) {
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 80);
                 }
-                if ((D_800D1C00 == 3) || (D_800D1C00 == 4)) {
+                if ((D_800D1BF8[1][0] == 3) || (D_800D1BF8[1][0] == 4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 80);
@@ -874,7 +879,7 @@ void func_800B9240(u8 arg0) {
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 80);
                 }
-                if ((D_800D1C00 == 3) || (D_800D1C00 == 4)) {
+                if ((D_800D1BF8[1][0] == 3) || (D_800D1BF8[1][0] == 4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 80);
@@ -891,7 +896,7 @@ void func_800B9240(u8 arg0) {
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 12, 80);
                 }
-                if ((D_800D1C08 == 3) || (D_800D1C08 == 4)) {
+                if ((D_800D1BF8[2][0] == 3) || (D_800D1BF8[2][0] == 4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, 80);
@@ -932,7 +937,7 @@ void func_800B9240(u8 arg0) {
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 80);
                 }
-                if ((D_800D1C00 == 3) || (D_800D1C00 == 4)) {
+                if ((D_800D1BF8[1][0] == 3) || (D_800D1BF8[1][0] == 4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 80);
@@ -949,7 +954,7 @@ void func_800B9240(u8 arg0) {
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 12, 80);
                 }
-                if ((D_800D1C08 == 3) || (D_800D1C08 == 4)) {
+                if ((D_800D1BF8[2][0] == 3) || (D_800D1BF8[2][0] == 4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, 80);
@@ -966,7 +971,7 @@ void func_800B9240(u8 arg0) {
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 13, 80);
                 }
-                if ((D_800D1C10 == 3) || (D_800D1C10 == 4)) {
+                if ((D_800D1BF8[3][0] == 3) || (D_800D1BF8[3][0] == 4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 9, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 9, 80);
@@ -979,16 +984,6 @@ void func_800B9240(u8 arg0) {
             break;
     }
 }
-
-extern u8 D_800D19E4;
-extern u8 D_800D19E8;
-extern u8 D_800D19EC;
-extern u8 D_800D19F0;
-extern u8 D_800D19F4;
-extern u16 D_800D19F8;
-extern u16 D_800D19FC;
-extern u16 D_800D1A00;
-extern u16 D_800D1A04;
 
 void func_800B9C54(void) {
 
@@ -1040,7 +1035,7 @@ void func_800B9D3C(void) {
 
 void func_800B9E28(void) {
     func_800B9D3C();
-    func_800B6994();
+    AudioThread_ScheduleProcessCmds();
 }
 
 void func_800B9E50(s32 seqPlayerIndex, s32 channelIndex, s32 muted) {
@@ -1056,8 +1051,6 @@ void func_800B9EBC(s32 arg0, s32 arg1, s32 arg2) {
 
 void func_800B9ECC(void) {
 }
-
-extern u8 D_800D1A0C;
 
 void func_800B9ED4(void) {
     u8 i;
@@ -1144,11 +1137,11 @@ void func_800B9ED4(void) {
 }
 
 void func_800BA248(void) {
-    func_800B6F58();
+    AudioThread_PreNMIInternal();
 }
 
 void func_800BA268(void) {
-    func_800B079C(NULL, 0);
+    AudioLoad_Init(NULL, 0);
 }
 
 void func_800BA28C(u8 soundMode) {
@@ -1607,14 +1600,12 @@ void func_800BB0C0(u8 arg0) {
     }
 }
 
-extern u8 D_800D1A5C;
-
 void func_800BB2E0(s32 specId) {
     if (specId != D_800D1A5C) {
         D_800D1A5C = specId;
-        func_800B6EC0(specId);
+        AudioThread_ResetAudioHeap(specId);
 
-        do { } while (!func_800B6E14()); }
+        do { } while (!AudioThread_ResetComplete()); }
 }
 
 void func_800BB324(u8 numPlayersIndex) {
@@ -1625,17 +1616,17 @@ void func_800BB334(void) {
     func_800B9ED4();
     AUDIOCMD_GLOBAL_DISABLE_SEQPLAYER(0, 0);
     func_800BB2E0(0);
-    func_800B6994();
+    AudioThread_ScheduleProcessCmds();
 }
 
 void func_800BB370(void) {
     AUDIOCMD_GLOBAL_INIT_SEQPLAYER(0, 0, 0, 0);
-    func_800B6994();
+    AudioThread_ScheduleProcessCmds();
 }
 
 void func_800BB39C(s32 arg0) {
     func_800B9ED4();
-    func_800B6994();
+    AudioThread_ScheduleProcessCmds();
 }
 
 void func_800BB3C4(u8 racerId, f32 arg1) {
@@ -1664,16 +1655,14 @@ void func_800BB46C(void) {
     func_800BB370();
 }
 
-extern AudioTask* D_800D1C18;
-
 AudioTask* func_800BB49C(void) {
     AudioTask* curAudioTask;
 
     func_800B82C8();
     func_800B7CA4();
     func_800B8598();
-    func_800B6994();
-    D_800D1C18 = curAudioTask = func_800B5FB0();
+    AudioThread_ScheduleProcessCmds();
+    D_800D1C18 = curAudioTask = AudioThread_CreateTask();
     return curAudioTask;
 }
 
