@@ -1,7 +1,9 @@
 #include "global.h"
 #include "audio.h"
 
-void func_800AB9A0(SequenceChannel* channel, s32 updateVolume) {
+static char D_800D0840[] = "Audio:Envp: overflow  %f\n";
+
+void Audio_SequenceChannelProcessSound(SequenceChannel* channel, s32 updateVolume) {
     s32 i;
 
     if (channel->changes.s.volume || updateVolume) {
@@ -41,7 +43,7 @@ void func_800AB9A0(SequenceChannel* channel, s32 updateVolume) {
     channel->changes.asByte = 0;
 }
 
-void func_800ABAFC(SequencePlayer* seqPlayer) {
+void Audio_SequencePlayerProcessSound(SequencePlayer* seqPlayer) {
     s32 i;
 
     if (seqPlayer->recalculateVolume) {
@@ -50,14 +52,14 @@ void func_800ABAFC(SequencePlayer* seqPlayer) {
 
     for (i = 0; i < 16; i++) {
         if (seqPlayer->channels[i]->enabled == 1) {
-            func_800AB9A0(seqPlayer->channels[i], seqPlayer->recalculateVolume);
+            Audio_SequenceChannelProcessSound(seqPlayer->channels[i], seqPlayer->recalculateVolume);
         }
     }
 
     seqPlayer->recalculateVolume = false;
 }
 
-f32 func_800ABBA4(Portamento* portamento) {
+f32 Audio_GetPortamentoFreqScale(Portamento* portamento) {
     u32 loResCur;
     f32 portamentoFreq;
 
@@ -73,13 +75,13 @@ f32 func_800ABBA4(Portamento* portamento) {
     return portamentoFreq;
 }
 
-void func_800ABC78(Note* note) {
+void Audio_NotePortamentoUpdate(Note* note) {
     if (note->playbackState.portamento.mode != 0) {
-        note->playbackState.portamentoFreqScale = func_800ABBA4(&note->playbackState.portamento);
+        note->playbackState.portamentoFreqScale = Audio_GetPortamentoFreqScale(&note->playbackState.portamento);
     }
 }
 
-void func_800ABCB4(Note* note) {
+void Audio_NotePortamentoInit(Note* note) {
     NotePlaybackState* noteState = &note->playbackState;
 
     noteState->portamentoFreqScale = 1.0f;
@@ -87,7 +89,7 @@ void func_800ABCB4(Note* note) {
     noteState->portamento = noteState->parentLayer->portamento;
 }
 
-void func_800ABCE8(AdsrState* adsr, EnvelopePoint* envelope, s16* arg2) {
+void Audio_AdsrInit(AdsrState* adsr, EnvelopePoint* envelope, s16* arg2) {
     adsr->action.asByte = 0;
     adsr->state = 0;
     adsr->delay = 0;
@@ -96,7 +98,7 @@ void func_800ABCE8(AdsrState* adsr, EnvelopePoint* envelope, s16* arg2) {
     adsr->current = 0.0f;
 }
 
-f32 func_800ABD0C(AdsrState* adsr) {
+f32 Audio_AdsrUpdate(AdsrState* adsr) {
     u8 action = adsr->action.asByte;
     u8 state = adsr->state;
 

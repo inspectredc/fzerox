@@ -3,8 +3,8 @@
 #include "audiothread_cmd.h"
 #include "fzxthread.h"
 
-void func_800B6A34(u32 msg);
-void func_800B706C(SequenceChannel* channel, AudioCmd* cmd);
+void AudioThread_ProcessCmds(u32 msg);
+void AudioThread_ProcessSeqPlayerCmd(SequenceChannel* channel, AudioCmd* cmd);
 
 static char devstr0[] = "DAC:Lost 1 Frame.\n";
 static char devstr1[] = "Address Error %x\n";
@@ -12,7 +12,7 @@ static char devstr2[] = "DMA: Request queue over.( %d )\n";
 static char devstr3[] = "Audio:now-max tasklen is %d / %d\n";
 static char devstr4[] = "Audio:Warning:ABI Tasklist length over (%d)\n";
 
-AudioTask* func_800B5FB0(void) {
+AudioTask* AudioThread_CreateTask(void) {
     static s32 gMaxAbiCmdCnt = 128;
     static AudioTask* gWaitingAudioTask = NULL;
     u32 aiSamplesLeft;
@@ -49,10 +49,10 @@ AudioTask* func_800B5FB0(void) {
 
     gCurAudioFrameDmaCount = 0;
 
-    func_800AEA10();
-    func_800B0754(gResetStatus);
+    AudioLoad_DecreaseSampleDmaTtls();
+    AudioLoad_ProcessLoads(gResetStatus);
 
-    if (gResetStatus != 0 && !func_800B38AC()) {
+    if (gResetStatus != 0 && !AudioHeap_ResetStep()) {
         if (gResetStatus == 0) {
             osSendMesg(gAudioResetQueuePtr, (OSMesg) (s32) gSpecId, OS_MESG_NOBLOCK);
         }
@@ -81,14 +81,14 @@ AudioTask* func_800B5FB0(void) {
     i = 0;
     if (gResetStatus == 0) {
         while (MQ_GET_MESG(gThreadCmdProcQueuePtr, &msg)) {
-            func_800B6A34(msg);
+            AudioThread_ProcessCmds(msg);
             i++;
         }
         if (i == 0 && gThreadCmdQueueFinished) {
-            func_800B6994();
+            AudioThread_ScheduleProcessCmds();
         }
     }
-    gCurAbiCmdBuffer = func_800B4F4C(gCurAbiCmdBuffer, &abiCmdCount, aiBuffer, gAiBufLengths[aiBufIndex]);
+    gCurAbiCmdBuffer = AudioSynth_Update(gCurAbiCmdBuffer, &abiCmdCount, aiBuffer, gAiBufLengths[aiBufIndex]);
     gAudioRandom = osGetCount() * (gAudioRandom + gTotalTaskCount);
     gAudioRandom = gAiBuffers[aiBufIndex][gTotalTaskCount & 0xFF] + gAudioRandom;
 
@@ -135,30 +135,30 @@ static char devstr8[] = "AudioSend: %d -> %d (%d)\n";
 static char devstr9[] = "Warning: MesgQ is Full, Retry Next Send.\n";
 static char devstr10[] = "Next Start %d \n";
 
-void func_800B6744(s32 seqPlayId, s32 fadeTime);
-void func_800B679C(s32 seqPlayId, s32 fadeTime);
+void AudioThread_SetFadeOutTimer(s32 seqPlayId, s32 fadeTime);
+void AudioThread_SetFadeInTimer(s32 seqPlayId, s32 fadeTime);
 
-void func_800B641C(AudioCmd* cmd) {
+void AudioThread_ProcessGlobalCmd(AudioCmd* cmd) {
     s32 i;
 
     switch (cmd->op) {
         case AUDIOCMD_OP_GLOBAL_SYNC_LOAD_SEQ_PARTS:
-            func_800AF4D8(cmd->arg1, 3);
+            AudioLoad_SyncLoadSeqParts(cmd->arg1, 3);
             break;
         case AUDIOCMD_OP_GLOBAL_INIT_SEQPLAYER:
         case AUDIOCMD_OP_GLOBAL_INIT_SEQPLAYER_ALT:
-            func_800AF9EC(cmd->arg0, cmd->arg1, cmd->arg2);
-            func_800B679C(cmd->arg0, cmd->data);
+            AudioLoad_SyncInitSeqPlayer(cmd->arg0, cmd->arg1, cmd->arg2);
+            AudioThread_SetFadeInTimer(cmd->arg0, cmd->data);
             break;
         case AUDIOCMD_OP_GLOBAL_INIT_SEQPLAYER_SKIP_TICKS:
-            func_800AFA48(cmd->arg0, cmd->arg1, cmd->data);
+            AudioLoad_SyncInitSeqPlayerSkipTicks(cmd->arg0, cmd->arg1, cmd->data);
             break;
         case AUDIOCMD_OP_GLOBAL_DISABLE_SEQPLAYER:
             if (gSeqPlayers[cmd->arg0].enabled) {
                 if (cmd->asInt == 0) {
-                    func_800AC744(&gSeqPlayers[cmd->arg0]);
+                    AudioSeq_SequencePlayerDisable(&gSeqPlayers[cmd->arg0]);
                 } else {
-                    func_800B6744(cmd->arg0, cmd->asInt);
+                    AudioThread_SetFadeOutTimer(cmd->arg0, cmd->asInt);
                 }
             }
             break;
@@ -193,16 +193,16 @@ void func_800B641C(AudioCmd* cmd) {
             }
             break;
         case AUDIOCMD_OP_GLOBAL_SYNC_LOAD_INSTRUMENT:
-            func_800AF624(cmd->arg0, cmd->arg1, cmd->arg2);
+            AudioLoad_SyncLoadInstrument(cmd->arg0, cmd->arg1, cmd->arg2);
             break;
         case AUDIOCMD_OP_GLOBAL_ASYNC_LOAD_SAMPLE_BANK:
-            func_800AF6F4(cmd->arg0, cmd->arg1, cmd->arg2, &gExternalLoadQueue);
+            AudioLoad_AsyncLoadSampleBank(cmd->arg0, cmd->arg1, cmd->arg2, &gExternalLoadQueue);
             break;
         case AUDIOCMD_OP_GLOBAL_ASYNC_LOAD_FONT:
-            func_800AF758(cmd->arg0, cmd->arg1, cmd->arg2, &gExternalLoadQueue);
+            AudioLoad_AsyncLoadSeq(cmd->arg0, cmd->arg1, cmd->arg2, &gExternalLoadQueue);
             break;
         case AUDIOCMD_OP_GLOBAL_DISCARD_SEQ_FONTS:
-            func_800AF888(cmd->arg1);
+            AudioLoad_DiscardSeqFonts(cmd->arg1);
             break;
         case AUDIOCMD_OP_GLOBAL_SET_CHANNEL_MASK:
             gThreadCmdChannelMask[cmd->arg0] = cmd->asUShort;
@@ -216,7 +216,7 @@ void func_800B641C(AudioCmd* cmd) {
     }
 }
 
-void func_800B6744(s32 seqPlayId, s32 fadeTime) {
+void AudioThread_SetFadeOutTimer(s32 seqPlayId, s32 fadeTime) {
     if (fadeTime == 0) {
         fadeTime = 1;
     }
@@ -226,7 +226,7 @@ void func_800B6744(s32 seqPlayId, s32 fadeTime) {
     gSeqPlayers[seqPlayId].fadeVelocity = -(gSeqPlayers[seqPlayId].fadeVolume / fadeTime);
 }
 
-void func_800B679C(s32 seqPlayId, s32 fadeTime) {
+void AudioThread_SetFadeInTimer(s32 seqPlayId, s32 fadeTime) {
     if (fadeTime != 0) {
         gSeqPlayers[seqPlayId].state = 1;
         gSeqPlayers[seqPlayId].fadeTimerUnkEu = fadeTime;
@@ -236,7 +236,7 @@ void func_800B679C(s32 seqPlayId, s32 fadeTime) {
     }
 }
 
-void func_800B67EC(void) {
+void AudioThread_InitQueues(void) {
     gThreadCmdWritePos = 0;
     gThreadCmdReadPos = 0;
     gThreadCmdQueueFinished = false;
@@ -249,7 +249,7 @@ void func_800B67EC(void) {
     osCreateMesgQueue(gAudioResetQueuePtr, gAudioResetMsg, 1);
 }
 
-void func_800B6894(u32 opArgs, void** data) {
+void AudioThread_QueueCmd(u32 opArgs, void** data) {
     AudioCmd* audioCmd = &gThreadCmdBuffer[gThreadCmdWritePos & 0xFF];
 
     audioCmd->opArgs = opArgs;
@@ -261,27 +261,27 @@ void func_800B6894(u32 opArgs, void** data) {
     }
 }
 
-void func_800B68EC(u32 opArgs, f32 data) {
-    func_800B6894(opArgs, (void**) &data);
+void AudioThread_QueueCmdF32(u32 opArgs, f32 data) {
+    AudioThread_QueueCmd(opArgs, (void**) &data);
 }
 
-void func_800B6910(u32 opArgs, u32 data) {
-    func_800B6894(opArgs, (void**) &data);
+void AudioThread_QueueCmdU32(u32 opArgs, u32 data) {
+    AudioThread_QueueCmd(opArgs, (void**) &data);
 }
 
-void func_800B6934(u32 opArgs, s8 data) {
+void AudioThread_QueueCmdS8(u32 opArgs, s8 data) {
     u32 uData = data << 0x18;
 
-    func_800B6894(opArgs, (void**) &uData);
+    AudioThread_QueueCmd(opArgs, (void**) &uData);
 }
 
-void func_800B6964(u32 opArgs, u16 data) {
+void AudioThread_QueueCmdU16(u32 opArgs, u16 data) {
     u32 uData = data << 0x10;
 
-    func_800B6894(opArgs, (void**) &uData);
+    AudioThread_QueueCmd(opArgs, (void**) &uData);
 }
 
-void func_800B6994(void) {
+void AudioThread_ScheduleProcessCmds(void) {
     static s32 D_800D185C = 0;
     OSMesg msg;
 
@@ -300,12 +300,12 @@ static char devstr11[] = "Continue Port\n";
 static char devstr12[] = "%d -> %d\n";
 static char devstr13[] = "Sync-Frame  Break. (Remain %d [%d,%d])\n";
 
-void func_800B6A18(void) {
+void AudioThread_ResetCmdQueue(void) {
     gThreadCmdReadPos = gThreadCmdWritePos;
-    gThreadCmdQueueFinished = 0;
+    gThreadCmdQueueFinished = false;
 }
 
-void func_800B6A34(u32 msg) {
+void AudioThread_ProcessCmds(u32 msg) {
     static u8 gCurCmdReadPos = 0;
     AudioCmd* cmd;
     SequenceChannel* channel;
@@ -321,7 +321,7 @@ void func_800B6A34(u32 msg) {
     writePos = msg & 0xFF;
     while (true) {
         if (gCurCmdReadPos == writePos) {
-            gThreadCmdQueueFinished = 0;
+            gThreadCmdQueueFinished = false;
             break;
         }
         cmd = &gThreadCmdBuffer[gCurCmdReadPos & 0xFF];
@@ -331,11 +331,11 @@ void func_800B6A34(u32 msg) {
             break;
         }
         if ((cmd->op & 0xF0) == 0xF0) {
-            func_800B641C(cmd);
+            AudioThread_ProcessGlobalCmd(cmd);
         } else if (cmd->arg0 < gAudioBufferParams.numSequencePlayers) {
             seqPlayer = &gSeqPlayers[cmd->arg0];
             if (cmd->op & 0x80) {
-                func_800B641C(cmd);
+                AudioThread_ProcessGlobalCmd(cmd);
             } else if (cmd->op & 0x40) {
                 switch (cmd->op) {
                     case AUDIOCMD_OP_SEQPLAYER_FADE_VOLUME_SCALE:
@@ -392,12 +392,12 @@ void func_800B6A34(u32 msg) {
                 }
             } else if (seqPlayer->enabled) {
                 if (cmd->arg1 < 16) {
-                    func_800B706C(seqPlayer->channels[cmd->arg1], cmd);
+                    AudioThread_ProcessSeqPlayerCmd(seqPlayer->channels[cmd->arg1], cmd);
                 } else if (cmd->arg1 == 0xFF) {
                     threadCmdChannelMask = gThreadCmdChannelMask[cmd->arg0];
                     for (i = 0; i < ARRAY_COUNT(seqPlayer->channels); i++) {
                         if (threadCmdChannelMask & 1) {
-                            func_800B706C(seqPlayer->channels[i], cmd);
+                            AudioThread_ProcessSeqPlayerCmd(seqPlayer->channels[i], cmd);
                         }
                         threadCmdChannelMask = threadCmdChannelMask >> 1;
                     }
@@ -417,7 +417,7 @@ static char devstr19[] = "Coherency safety wait..\n";
 static char devstr20[] = "Normal SpecChange [num %d]\n";
 static char devstr21[] = "Undefined Port Command %d\n";
 
-u32 func_800B6D90(u32* outData) {
+u32 AudioThread_GetAsyncLoadStatus(u32* outData) {
     u32 loadStatus;
 
     if (!MQ_GET_MESG(&gExternalLoadQueue, &loadStatus)) {
@@ -428,11 +428,11 @@ u32 func_800B6D90(u32* outData) {
     return loadStatus >> 0x18;
 }
 
-u8* func_800B6DF4(s32 seqId, u32* outNumFonts) {
-    return func_800AF820(seqId, outNumFonts);
+u8* AudioThread_GetFontsForSequence(s32 seqId, u32* outNumFonts) {
+    return AudioLoad_GetFontsForSequence(seqId, outNumFonts);
 }
 
-bool func_800B6E14(void) {
+bool AudioThread_ResetComplete(void) {
     s32 pad;
     s32 specId;
 
@@ -445,18 +445,18 @@ bool func_800B6E14(void) {
     return true;
 }
 
-void func_800B6E6C(void) {
+void AudioThread_ClearResetQueue(void) {
     MQ_CLEAR_QUEUE(gAudioResetQueuePtr);
 }
 
-s32 func_800B6EC0(s32 specId) {
+s32 AudioThread_ResetAudioHeap(s32 specId) {
     s32 resetStatus;
     OSMesg msg;
 
-    func_800B6E6C();
+    AudioThread_ClearResetQueue();
     resetStatus = gResetStatus;
     if (resetStatus != 0) {
-        func_800B6A18();
+        AudioThread_ResetCmdQueue();
         if (gSpecId == specId) {
             return 0;
         } else if (resetStatus > 2) {
@@ -466,21 +466,21 @@ s32 func_800B6EC0(s32 specId) {
         }
     }
 
-    func_800B6E6C();
+    AudioThread_ClearResetQueue();
     AUDIOCMD_GLOBAL_RESET_AUDIO_HEAP(specId);
 
-    func_800B6994();
+    AudioThread_ScheduleProcessCmds();
 }
 
-void func_800B6F58(void) {
+void AudioThread_PreNMIInternal(void) {
     gResetTimer = 1;
     if (gAudioContextInitialized) {
-        func_800B6EC0(0);
+        AudioThread_ResetAudioHeap(0);
         gResetStatus = 0;
     }
 }
 
-s8 func_800B6FA4(s32 seqPlayerIndex, s32 channelIndex, s32 ioPort) {
+s8 AudioThread_GetChannelIO(s32 seqPlayerIndex, s32 channelIndex, s32 ioPort) {
     SequencePlayer* seqPlayer = &gSeqPlayers[seqPlayerIndex];
     SequenceChannel* channel;
 
@@ -492,19 +492,19 @@ s8 func_800B6FA4(s32 seqPlayerIndex, s32 channelIndex, s32 ioPort) {
     }
 }
 
-s8 func_800B7000(s32 seqPlayerIndex, s32 ioPort) {
+s8 AudioThread_GetSeqPlayerIO(s32 seqPlayerIndex, s32 ioPort) {
     return gSeqPlayers[seqPlayerIndex].seqScriptIO[ioPort];
 }
 
-void func_800B7030(void* ramAddr, size_t size) {
-    func_800B2AE4(&gExternalPool, ramAddr, size);
+void AudioThread_InitExternalPool(void* ramAddr, size_t size) {
+    AudioHeap_InitPool(&gExternalPool, ramAddr, size);
 }
 
-void func_800B7060(void) {
+void AudioThread_ResetExternalPool(void) {
     gExternalPool.startRamAddr = NULL;
 }
 
-void func_800B706C(SequenceChannel* channel, AudioCmd* cmd) {
+void AudioThread_ProcessSeqPlayerCmd(SequenceChannel* channel, AudioCmd* cmd) {
     switch (cmd->op) {
         case AUDIOCMD_OP_CHANNEL_SET_VOL_SCALE:
             if (channel->volumeScale != cmd->asFloat) {
@@ -559,6 +559,6 @@ void func_800B706C(SequenceChannel* channel, AudioCmd* cmd) {
     }
 }
 
-void func_800B71A4(void) {
-    func_800B67EC();
+void AudioThread_InitMesgQueues(void) {
+    AudioThread_InitQueues();
 }

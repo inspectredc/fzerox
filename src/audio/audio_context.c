@@ -1,4 +1,5 @@
 #include "audio.h"
+#include "macros.h"
 
 s8 audioPad80025C00[0x10];
 SynthesisReverb gSynthReverbs[1];
@@ -107,3 +108,17 @@ OSMesgQueue* gThreadCmdProcQueuePtr;
 OSMesg gAudioResetMsg[1];
 OSMesgQueue gAudioResetQueue;
 OSMesgQueue* gAudioResetQueuePtr;
+
+ReverbSettings D_800D1C20[] = {
+    { 1, 0x20, 0x7000, 0x7FFF, 0, 0, 255 },
+};
+
+AudioSpec gAudioSpecs[] = {
+    { 32000, 1, 10, 2, ARRAY_COUNT(D_800D1C20), D_800D1C20, 0x7FFF, 0, 0, 0, 0, 0, 0, 0x22C00, 0 },
+};
+
+s8 D_800D1C64 = 10;
+s16 gSeqTicksPerBeat = 0x30;
+s32 gAudioHeapSize = sizeof(gAudioHeap);
+size_t gInitPoolSize = 0x6C00;
+size_t gPermanentPoolSize = 0x3C00;

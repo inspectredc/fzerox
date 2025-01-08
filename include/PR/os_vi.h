@@ -262,6 +262,12 @@ extern OSViMode osViModeFpalHaf1;
 extern OSViMode osViModeFpalHpn2;
 extern OSViMode osViModeFpalHpf2;
 
+// Duplicate Copies
+
+extern OSViMode	osViModeNtscLan1Copy;
+extern OSViMode	osViModePalLan1Copy;
+extern OSViMode	osViModeMpalLan1Copy;
+
 
 /**************************************************************************
  *

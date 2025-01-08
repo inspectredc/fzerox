@@ -246,8 +246,8 @@ void func_800671EC(void* arg0) {
 }
 
 extern s8 D_800CCFC8;
-extern OSViMode D_800D1DA0;
-extern OSViMode D_800D2660;
+// extern OSViMode D_800D1DA0;
+// extern OSViMode D_800D2660;
 extern s32 D_800D8830;
 extern OSThread D_800DC1E0;
 extern OSMesgQueue D_800DCA50;
@@ -264,9 +264,9 @@ void func_800678B8(void* arg0) {
     D_800DCCD0[2] = &D_803DA800;
     osCreateViManager(0xFE);
     if (osTvType == OS_TV_TYPE_NTSC) {
-        osViSetMode(&D_800D1DA0);
+        osViSetMode(&osViModeNtscLan1);
     } else {
-        osViSetMode(&D_800D2660);
+        osViSetMode(&osViModeMpalLan1);
     }
     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
     osViSetSpecialFeatures(OS_VI_GAMMA_DITHER_OFF);
