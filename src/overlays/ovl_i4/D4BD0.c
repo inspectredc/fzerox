@@ -621,7 +621,6 @@ void func_i4_801160D8(void) {
 extern Controller gSharedController;
 extern s32 D_800CD380;
 extern s32 D_800CD3B0;
-extern s32 D_800DD224;
 extern u16 gInputPressed;
 extern u16 gInputButtonPressed;
 extern s32 gPlayerControlPorts[];
@@ -760,7 +759,7 @@ s32 func_i4_8011631C(void) {
                 if (gInputButtonPressed & (BTN_A | BTN_START)) {
                     func_800BA710(i, 0x3E);
                     D_800CD3B0 = 3;
-                    return GAMEMODE_4009;
+                    return GAMEMODE_LX_MACHINE_SETTINGS;
                 }
                 break;
         }
@@ -848,8 +847,8 @@ s32 func_i4_801168D4(void) {
                         D_800CD3A8[i] = 0;
                     } else {
                         D_800CD3B4 = 1;
-                        if (gGameMode == GAMEMODE_4009) {
-                            return GAMEMODE_8008;
+                        if (gGameMode == GAMEMODE_LX_MACHINE_SETTINGS) {
+                            return GAMEMODE_FLX_MACHINE_SELECT;
                         }
                         return GAMEMODE_800F;
                     }
@@ -1115,7 +1114,7 @@ void func_i4_8011788C(unk_800E3A28* arg0) {
 
 #define PACK_5551(r, g, b, a) (((((r) << 11) | ((g) << 6)) | ((b) << 1)) | (a))
 
-#ifdef NON_EQUIVALENT
+#ifdef NON_MATCHING
 // loop unroll issue
 Gfx* func_i4_801178C4(Gfx* gfx) {
     s32 color;
@@ -1124,7 +1123,7 @@ Gfx* func_i4_801178C4(Gfx* gfx) {
     gDPSetCycleType(gfx++, G_CYC_FILL);
 
     for (i = 0; i < 0xE0; i++) {
-        color = PACK_5551((i * 10) / 1792, 0 / 1792, (i * 60) / 1792, 1);
+        color = PACK_5551((i * 10) / 1792, (i * 0) / 1792, (i * 60) / 1792, 1);
         gDPPipeSync(gfx++);
         gDPSetFillColor(gfx++, color << 0x10 | color);
         gDPFillRectangle(gfx++, 12, i + 8, 307, i + 8);
@@ -1274,8 +1273,8 @@ Gfx* func_i4_80118414(Gfx* gfx, unk_800E3A28* arg1) {
     gSPLight(gfx++, &D_1000000.unk_21A88[0].a, 2);
     gSPNumLights(gfx++, NUMLIGHTS_1);
 
-    func_8006B010(&D_800DCCF0->unk_21A88[0], 0, 0, 0, 255, 255, 255, 100, 50, 69);
-    func_8006B010(&D_800DCCF0->unk_21A88[1], 0, 0, 0, 100, 70, 70, 100, 50, 69);
+    Lights_SetSource(&D_800DCCF0->unk_21A88[0], 0, 0, 0, 255, 255, 255, 100, 50, 69);
+    Lights_SetSource(&D_800DCCF0->unk_21A88[1], 0, 0, 0, 100, 70, 70, 100, 50, 69);
 
     for (i = 0; i < 30; i++) {
         gDPPipeSync(gfx++);
@@ -1381,7 +1380,7 @@ Gfx* func_i4_80118918(Gfx* gfx, unk_800E3A28* arg1) {
 
     gSPDisplayList(gfx++, D_303A5F8);
 
-    func_8006B010(D_800DCCF0->unk_21A88, 0, 0, 0, 255, 255, 255, 50, 25, 34);
+    Lights_SetSource(D_800DCCF0->unk_21A88, 0, 0, 0, 255, 255, 255, 50, 25, 34);
     gSPLight(gfx++, &D_1000000.unk_21A88[0].l[0], 1);
     gSPLight(gfx++, &D_1000000.unk_21A88[0].a, 2);
 
@@ -1393,7 +1392,7 @@ Gfx* func_i4_80118918(Gfx* gfx, unk_800E3A28* arg1) {
 
     gSPDisplayList(gfx++, D_90186C8);
 
-    func_8006B07C(&D_800DCCF0->unk_21B28, &D_800E5220[0].unk_15C);
+    Light_SetLookAtSource(&D_800DCCF0->unk_21B28, &D_800E5220[0].unk_15C);
     gSPLookAt(gfx++, &D_800DCCF0->unk_21B28);
 
     gSPTexture(gfx++, D_i4_8011D4E0, D_i4_8011D4E0, 0, G_TX_RENDERTILE, G_ON);
@@ -1882,7 +1881,7 @@ void func_i4_8011A73C(unk_800E3A28* arg0) {
 }
 
 void func_i4_8011A7B8(void) {
-    if ((D_800DCE48.gameMode == GAMEMODE_4009) && (func_80079E88(0x2D)->unk_20 != 0)) {
+    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) && (func_80079E88(0x2D)->unk_20 != 0)) {
         D_800CE748 = 0.075f;
         D_800CE74C = 0.125f;
         D_800CE750 = 0.105f;
@@ -2014,7 +2013,7 @@ void func_i4_8011AC24(u16* texture) {
     texture[pixelIndex] = *srcPixel;
 }
 
-extern s32 D_800DCCCC;
+extern s32 gLeoDDConnected;
 
 void func_i4_TitleInit(void) {
     D_800CCFE8 = 3;
@@ -2027,7 +2026,7 @@ void func_i4_TitleInit(void) {
     func_800794B0(15, 0, 0, 10);
     func_800794B0(17, 0, 0, 12);
     func_800794B0(19, 94, 200, 12);
-    if (D_800DCCCC != 0) {
+    if (gLeoDDConnected) {
         func_800794B0(20, 0, 0, 12);
     }
 }
@@ -2042,7 +2041,7 @@ s32 func_i4_8011AE2C(void) {
     }
     func_8007DABC(&gSharedController);
     Math_Rand1();
-    if ((D_800DCCCC != 0) && (func_80079E88(20)->unk_1C != 0) && (func_80079E88(20)->unk_04 == 0)) {
+    if (gLeoDDConnected && (func_80079E88(20)->unk_1C != 0) && (func_80079E88(20)->unk_04 == 0)) {
         return gGameMode;
     }
     if (D_i4_8011D794 != 0) {
@@ -2062,7 +2061,7 @@ s32 func_i4_8011AE2C(void) {
         func_800BA8D8(0x3E);
         func_8007E0CC();
         D_i4_8011D790 = -1;
-        if ((D_800DCCCC != 0) && (func_80079E88(20)->unk_04 == 1)) {
+        if (gLeoDDConnected && (func_80079E88(20)->unk_04 == 1)) {
             func_800BB370();
         }
         return GAMEMODE_FLX_MAIN_MENU;
@@ -2148,7 +2147,7 @@ void func_i4_8011B1EC(void) {
     func_80077D50(sCopyrightCompTexInfo, 0);
 }
 
-extern s32 D_800CCFC0;
+extern s32 gRamDDCompatible;
 
 void func_i4_8011B214(unk_800E3A28* arg0) {
     s32 var_v0;
@@ -2165,14 +2164,14 @@ void func_i4_8011B214(unk_800E3A28* arg0) {
             break;
     }
 
-    if (D_800CCFC0 == 0) {
+    if (!gRamDDCompatible) {
         var_v0 = 1;
     } else {
         var_v0 = 2;
     }
 
     func_80077D50(sTitleWarningCompTexInfos[var_v0], 0);
-    if ((D_800CCFC0 != 0) && (func_800758F8() != 1)) {
+    if (gRamDDCompatible && (func_800758F8() != 1)) {
         arg0->unk_1C++;
         D_i4_8011D794 = 1;
         func_800BB334();
@@ -2278,7 +2277,7 @@ Gfx* func_i4_8011B6C4(Gfx* gfx, unk_800E3A28* arg1) {
     s32 var_v1;
 
     var_t0 = 0;
-    if (D_800CCFC0 == 0) {
+    if (!gRamDDCompatible) {
         var_t0 = 1;
     } else if (arg1->unk_04 != 0) {
         var_t0 = 2;
@@ -2309,7 +2308,7 @@ extern s8 D_800CD010;
 
 void func_i4_8011B874(unk_800E3A28* arg0) {
 
-    if ((D_800CCFC0 != 0) && (D_i4_8011D790 != -1) && (D_800CD010 == 0)) {
+    if (gRamDDCompatible && (D_i4_8011D790 != -1) && (D_800CD010 == 0)) {
         if (func_800758F8() == 1) {
             if (arg0->unk_1C != 0) {
                 func_800BB370();

@@ -544,11 +544,11 @@ s32 func_8007E008(void) {
     return sum;
 }
 
-extern s32 D_800CCFC0;
-extern bool D_800DCCCC;
+extern s32 gRamDDCompatible;
+extern bool gLeoDDConnected;
 
 bool func_8007E038(void) {
-    if ((D_800CCFC0 != 0) && D_800DCCCC && (func_800760F8() == 2)) {
+    if (gRamDDCompatible && gLeoDDConnected && (func_800760F8() == 2)) {
         return true;
     }
     return false;

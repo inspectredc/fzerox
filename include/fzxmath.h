@@ -86,4 +86,6 @@ typedef union {
     };
 } MtxF; // size = 0x40
 
+extern f32 gSinTable[];
+
 #endif // FZX_MATH_H

@@ -2,7 +2,22 @@
 #include "audio.h"
 #include "fzx_game.h"
 
-// This needs to be used in a function earlier than this can be declared
+UNUSED s32 D_800DCE40;
+s32 gGameMode;
+unk_800DCE48 D_800DCE48;
+s8 D_800DCE5C;
+s32 D_800DCE60;
+// File split?
+UNUSED s32 D_800DCE64;
+UNUSED s32 D_800DCE68;
+OSContStatus D_800DCE70[MAXCONTROLLERS];
+OSContPad gControllerPads[MAXCONTROLLERS];
+Controller gControllers[MAXCONTROLLERS + 1];
+Controller gSharedController;
+s32 gPlayerControlPorts[MAXCONTROLLERS];
+s32 gControllersConnected;
+
+// This needs to be used in a function earlier than this can be declared (i.e. todo: move this to a header)
 extern s16 D_800CD16C;
 
 s32 gNumPlayers = 1;
@@ -27,10 +42,10 @@ void (*sGamemodeInitFuncs[])(void) = {
     func_i2_80103AD4,  // GAMEMODE_VS_2P
     func_i2_80103AD4,  // GAMEMODE_VS_3P
     func_i2_80103AD4,  // GAMEMODE_VS_4P
-    func_i8_801439D0,  // GAMEMODE_6
+    func_i8_801439D0,  // GAMEMODE_RECORDS
     func_i4_80115DF0,  // GAMEMODE_MAIN_MENU
-    func_i6_80115DF0,  // GAMEMODE_8
-    func_i4_801160D8,  // GAMEMODE_9
+    func_i6_80115DF0,  // GAMEMODE_MACHINE_SELECT
+    func_i4_801160D8,  // GAMEMODE_MACHINE_SETTINGS
     func_i5_80116934,  // GAMEMODE_A
     func_i6_8011BF50,  // GAMEMODE_B
     func_i6_8011BF50,  // GAMEMODE_C
@@ -41,21 +56,21 @@ void (*sGamemodeInitFuncs[])(void) = {
     func_i7_80143A90,  // GAMEMODE_11
     func_i4_801160D8,  // GAMEMODE_12
     func_i5_80116934,  // GAMEMODE_13
-    func_i6_8011C050,  // GAMEMODE_14
+    func_i6_8011C050,  // GAMEMODE_OPTIONS_MENU
     func_i2_80103AD4,  // GAMEMODE_DEATH_RACE
 };
 
-s32 (*D_800CD0A4[])(void) = {
+s32 (*sGamemodeUpdateFuncs[])(void) = {
     func_i4_8011AE2C, // GAMEMODE_TITLE
     func_i2_80103B8C, // GAMEMODE_GP_RACE
     func_i2_80103B8C, // GAMEMODE_PRACTICE
     func_i2_80103B8C, // GAMEMODE_VS_2P
     func_i2_80103B8C, // GAMEMODE_VS_3P
     func_i2_80103B8C, // GAMEMODE_VS_4P
-    func_i8_80143DDC, // GAMEMODE_6
+    func_i8_80143DDC, // GAMEMODE_RECORDS
     func_i6_80115FF0, // GAMEMODE_MAIN_MENU
-    func_i4_8011631C, // GAMEMODE_8
-    func_i4_801168D4, // GAMEMODE_9
+    func_i4_8011631C, // GAMEMODE_MACHINE_SELECT
+    func_i4_801168D4, // GAMEMODE_MACHINE_SETTINGS
     func_i5_80116EEC, // GAMEMODE_A
     func_i6_8011BFB0, // GAMEMODE_B
     func_i6_8011BFB0, // GAMEMODE_C
@@ -66,21 +81,21 @@ s32 (*D_800CD0A4[])(void) = {
     func_i7_801441A0, // GAMEMODE_11
     func_i4_801168D4, // GAMEMODE_12
     func_i5_80116EEC, // GAMEMODE_13
-    func_i6_8011C6DC, // GAMEMODE_14
+    func_i6_8011C6DC, // GAMEMODE_OPTIONS_MENU
     func_i2_80103B8C, // GAMEMODE_DEATH_RACE
 };
 
-Gfx* (*D_800CD0FC[])(Gfx*) = {
+Gfx* (*sGamemodeDrawFuncs[])(Gfx*) = {
     func_i4_8011AF84, // GAMEMODE_TITLE
     func_i2_80103BE0, // GAMEMODE_GP_RACE
     func_i2_80103BE0, // GAMEMODE_PRACTICE
     func_i2_80103BE0, // GAMEMODE_VS_2P
     func_i2_80103BE0, // GAMEMODE_VS_3P
     func_i2_80103BE0, // GAMEMODE_VS_4P
-    func_i8_80144568, // GAMEMODE_6
+    func_i8_80144568, // GAMEMODE_RECORDS
     func_i6_801167CC, // GAMEMODE_MAIN_MENU
-    func_i4_80116DC4, // GAMEMODE_8
-    func_i4_80116E10, // GAMEMODE_9
+    func_i4_80116DC4, // GAMEMODE_MACHINE_SELECT
+    func_i4_80116E10, // GAMEMODE_MACHINE_SETTINGS
     func_i5_80117664, // GAMEMODE_A
     func_i6_8011C01C, // GAMEMODE_B
     func_i6_8011C01C, // GAMEMODE_C
@@ -91,7 +106,7 @@ Gfx* (*D_800CD0FC[])(Gfx*) = {
     func_i7_801447F4, // GAMEMODE_11
     func_i4_80116E10, // GAMEMODE_12
     func_i5_80117664, // GAMEMODE_13
-    Menu_OptionsDraw, // GAMEMODE_14
+    Menu_OptionsDraw, // GAMEMODE_OPTIONS_MENU
     func_i2_80103BE0, // GAMEMODE_DEATH_RACE
 };
 
@@ -105,11 +120,7 @@ void func_800A4B54(void);
 void func_800A4BAC(void);
 void func_i2_800FC730(void);
 
-extern s32 gGameMode;
-extern unk_800DCE48 D_800DCE48;
-extern s32 D_800DCE60;
-
-void func_80068B20(void) {
+void Game_Init(void) {
     gGameMode = -1;
     D_800DCE48.gameMode = GAMEMODE_FLX_TITLE;
     if (D_800DCE60 != 0x20DE1529) {
@@ -147,7 +158,7 @@ void func_80068BC0(void) {
                 break;
             case 7:
                 D_800CD044 = 1;
-                D_800DCE48.gameMode = GAMEMODE_8008;
+                D_800DCE48.gameMode = GAMEMODE_FLX_MACHINE_SELECT;
                 break;
             case 4:
                 D_800CD044 = 1;
@@ -169,7 +180,7 @@ void func_80068BC0(void) {
                 break;
             case 8:
                 D_800CD044 = 0x15;
-                D_800DCE48.gameMode = GAMEMODE_6;
+                D_800DCE48.gameMode = GAMEMODE_RECORDS;
                 break;
             case 9:
                 D_800CD044 = 0x15;
@@ -190,14 +201,14 @@ void func_80068BC0(void) {
                 break;
             case 13:
                 D_800CD044 = 0x15;
-                D_800DCE48.gameMode = GAMEMODE_8014;
+                D_800DCE48.gameMode = GAMEMODE_FLX_OPTIONS_MENU;
                 break;
             case 15:
                 D_800CD044 = 0xB;
                 if (gGameMode == GAMEMODE_GP_RACE) {
                     D_800DCE48.gameMode = GAMEMODE_4012;
                 } else {
-                    D_800DCE48.gameMode = GAMEMODE_4009;
+                    D_800DCE48.gameMode = GAMEMODE_LX_MACHINE_SETTINGS;
                 }
                 break;
             case 16:
@@ -235,13 +246,13 @@ void func_80068DCC(void) {
             var_v1 = 0x16;
             break;
         case GAMEMODE_8013:
-        case GAMEMODE_8014:
+        case GAMEMODE_FLX_OPTIONS_MENU:
             var_v1 = 0xF;
             break;
-        case GAMEMODE_4009:
+        case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_4012:
         case GAMEMODE_FLX_MAIN_MENU:
-        case GAMEMODE_8008:
+        case GAMEMODE_FLX_MACHINE_SELECT:
         case GAMEMODE_800A:
         case GAMEMODE_800F:
             var_v1 = 0xE;
@@ -267,10 +278,6 @@ s32 D_800CD164 = 5;
 s16 D_800CD168 = 0;
 s16 D_800CD16C = 0;
 
-extern Controller gControllers[];
-extern Controller gSharedController;
-
-extern s32 gControllersConnected;
 extern u16 gInputButtonPressed;
 
 void func_80068F04(void) {
@@ -332,8 +339,7 @@ void func_80068F04(void) {
     }
 }
 
-extern OSMesgQueue D_800DCA80;
-extern s8 D_800DCE5C;
+extern OSMesgQueue gSerialEventQueue;
 
 void func_800690FC(void) {
     s32 sp24;
@@ -358,13 +364,13 @@ void func_800690FC(void) {
         case 31:
             func_i2_800FC77C();
             if (D_800CD168 != 0) {
-                func_80069820();
+                Controller_UpdateInputs();
                 D_800CD168 = 0;
             }
-            D_800CD0A4[GET_MODE(gGameMode)]();
+            sGamemodeUpdateFuncs[GET_MODE(gGameMode)]();
             func_i2_800FCE3C();
             if (D_800CD16C != 0) {
-                osContStartReadData(&D_800DCA80);
+                osContStartReadData(&gSerialEventQueue);
                 D_800CD168 = 1;
             }
             D_800CD044++;
@@ -374,10 +380,10 @@ void func_800690FC(void) {
         case 22:
         case 32:
             if (D_800CD168 != 0) {
-                func_80069820();
+                Controller_UpdateInputs();
                 D_800CD168 = 0;
             }
-            D_800CD0A4[GET_MODE(gGameMode)]();
+            sGamemodeUpdateFuncs[GET_MODE(gGameMode)]();
             if (func_i2_800FCE3C() != 0) {
                 if (gGameMode == GAMEMODE_GP_RACE) {
                     func_i3_ResetLivesChangeCounter();
@@ -385,7 +391,7 @@ void func_800690FC(void) {
                 D_800CD044++;
             }
             if (D_800CD16C != 0) {
-                osContStartReadData(&D_800DCA80);
+                osContStartReadData(&gSerialEventQueue);
                 D_800CD168 = 1;
                 return;
             }
@@ -396,13 +402,13 @@ void func_800690FC(void) {
         case 33:
             func_80069700();
             switch (gGameMode) {
-                case GAMEMODE_4009:
+                case GAMEMODE_LX_MACHINE_SETTINGS:
                 case GAMEMODE_4012:
                     if ((gNumPlayers == 1) && (gCourseIndex < 0x18)) {
                         func_i2_801012CC(gCourseIndex);
                     }
                     break;
-                case GAMEMODE_8008:
+                case GAMEMODE_FLX_MACHINE_SELECT:
                     func_i4_8011A7B8();
                     break;
             }
@@ -437,15 +443,15 @@ void func_800690FC(void) {
                 case GAMEMODE_VS_4P:
                 case GAMEMODE_D:
                 case GAMEMODE_DEATH_RACE:
-                case GAMEMODE_4009:
+                case GAMEMODE_LX_MACHINE_SETTINGS:
                 case GAMEMODE_4012:
-                case GAMEMODE_8008:
+                case GAMEMODE_FLX_MACHINE_SELECT:
                     sp24 = 1;
                     break;
                 case GAMEMODE_TIME_ATTACK:
                     sp24 = 2;
                     break;
-                case GAMEMODE_6:
+                case GAMEMODE_RECORDS:
                     sp24 = 3;
                     break;
             }
@@ -454,8 +460,8 @@ void func_800690FC(void) {
                 osInvalICache(SEGMENT_VRAM_START(ovl_i9), SEGMENT_DATA_START(ovl_i9) - SEGMENT_VRAM_START(ovl_i9));\
                 osInvalDCache(SEGMENT_DATA_START(ovl_i9), SEGMENT_BSS_START(ovl_i9) - SEGMENT_DATA_START(ovl_i9));
                 // clang-format on
-                func_80076658(SEGMENT_ROM_START(ovl_i9), SEGMENT_VRAM_START(ovl_i9), SEGMENT_ROM_SIZE(ovl_i9),
-                              SEGMENT_BSS_START(ovl_i9), SEGMENT_BSS_SIZE(ovl_i9));
+                Dma_LoadOverlay(SEGMENT_ROM_START(ovl_i9), SEGMENT_VRAM_START(ovl_i9), SEGMENT_ROM_SIZE(ovl_i9),
+                                SEGMENT_BSS_START(ovl_i9), SEGMENT_BSS_SIZE(ovl_i9));
                 switch (sp24) {
                     case 1:
                         func_8008D7E8();
@@ -485,7 +491,7 @@ void func_800690FC(void) {
         case 6:
             if (func_i2_800FCE3C() != 0) {
                 func_i2_800FC9BC();
-                if (gGameMode != GAMEMODE_6) {
+                if (gGameMode != GAMEMODE_RECORDS) {
                     func_8007E08C();
                 }
                 func_80068DCC();
@@ -500,10 +506,10 @@ void func_800690FC(void) {
     }
 
     if (D_800CD168 != 0) {
-        func_80069820();
+        Controller_UpdateInputs();
         D_800CD168 = 0;
     }
-    D_800DCE48.gameMode = D_800CD0A4[GET_MODE(gGameMode)]();
+    D_800DCE48.gameMode = sGamemodeUpdateFuncs[GET_MODE(gGameMode)]();
     func_80068F04();
     switch (D_800CD044) {
         case 6:
@@ -513,7 +519,7 @@ void func_800690FC(void) {
             break;
     }
     if (D_800CD16C != 0) {
-        osContStartReadData(&D_800DCA80);
+        osContStartReadData(&gSerialEventQueue);
         D_800CD168 = 1;
     }
 }
@@ -523,7 +529,7 @@ extern s16 D_i2_80106DA0;
 Gfx* func_80069698(Gfx* gfx) {
 
     if ((D_800CD044 != 3) && (D_i2_80106DA0 != 0)) {
-        gfx = D_800CD0FC[GET_MODE(gGameMode)](gfx);
+        gfx = sGamemodeDrawFuncs[GET_MODE(gGameMode)](gfx);
     }
     return func_i2_800FD184(gfx);
 }
@@ -532,11 +538,11 @@ void func_80069700(void) {
     s32 i;
 
     if (D_800CD168 != 0) {
-        func_80069820();
+        Controller_UpdateInputs();
         D_800CD168 = 0;
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < MAXCONTROLLERS; i++) {
         if (osMotorStop(&gControllers[i].pfs) == 0) {
             gControllers[i].unk_74 = 1;
         } else {
@@ -546,7 +552,7 @@ void func_80069700(void) {
     }
 }
 
-void func_80069790(void) {
+void Controller_ClearInputs(void) {
     Controller* var_v0;
 
     // clang-format off
@@ -568,12 +574,10 @@ void func_80069790(void) {
 }
 
 extern s32 D_800CCFB0;
-extern OSContPad gControllerPads[];
-extern s32 D_800DCCC8;
-extern s32 gPlayerControlPorts[];
+extern bool gResetStarted;
 extern OSMesg D_800E12B0;
 
-void func_80069820(void) {
+void Controller_UpdateInputs(void) {
     s32 i;
     s32 j;
     u16 buttonDiff;
@@ -594,9 +598,10 @@ void func_80069820(void) {
 
     controller = &gControllers[4];
     i = 4;
+    //! @bug OOB array access, no reads are done before going back in bounds
     var_s5 = &gControllerPads[4];
 
-    osRecvMesg(&D_800DCA80, &D_800E12B0, OS_MESG_BLOCK);
+    osRecvMesg(&gSerialEventQueue, &D_800E12B0, OS_MESG_BLOCK);
     osContGetReadData(gControllerPads);
     do {
         controller--;
@@ -662,7 +667,7 @@ void func_80069820(void) {
                 }
                 gSharedController.unk_82 |= controller->unk_82;
                 if (controller->unk_78 != 0) {
-                    if (osMotorInit(&D_800DCA80, &controller->pfs, i) == 0) {
+                    if (osMotorInit(&gSerialEventQueue, &controller->pfs, i) == 0) {
                         osMotorStop(&controller->pfs);
                         controller->unk_74 = 1;
                     } else {
@@ -673,7 +678,7 @@ void func_80069820(void) {
                     controller->unk_8C = 0;
                     controller->unk_88 = 0;
                     controller->unk_78 = controller->unk_76;
-                } else if ((controller->unk_72 == 0) || (D_800DCCC8 != 0)) {
+                } else if ((controller->unk_72 == 0) || gResetStarted) {
                     if ((controller->unk_74 == 1) && ((controller->unk_76 == 1) || !(((i << 5) + D_800CCFB0) & 0x7F))) {
                         if (osMotorStop(&controller->pfs) == 0) {
                             controller->unk_76 = 0;
@@ -716,13 +721,11 @@ void func_80069820(void) {
     }
 }
 
-extern OSContStatus D_800DCE70[];
-
-void func_80069D44(void) {
+void Controller_Init(void) {
     s32 i;
     u8 sp53;
 
-    osContInit(&D_800DCA80, &sp53, D_800DCE70);
+    osContInit(&gSerialEventQueue, &sp53, D_800DCE70);
     gControllersConnected = 0;
 
     for (i = 0; i < MAXCONTROLLERS; i++) {
@@ -733,7 +736,7 @@ void func_80069D44(void) {
         if (D_800DCE70[i].errno == 0) {
             gPlayerControlPorts[gControllersConnected] = i;
             gControllersConnected++;
-            if (osMotorInit(&D_800DCA80, &gControllers[i].pfs, i) == 0) {
+            if (osMotorInit(&gSerialEventQueue, &gControllers[i].pfs, i) == 0) {
                 osMotorStop(&gControllers[i].pfs);
                 gControllers[i].unk_74 = 1;
             }
@@ -744,5 +747,5 @@ void func_80069D44(void) {
         gPlayerControlPorts[i] = PORT_DISCONNECTED;
     }
 
-    func_80069790();
+    Controller_ClearInputs();
 }

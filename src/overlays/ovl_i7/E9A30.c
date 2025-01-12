@@ -36,7 +36,7 @@ extern Vtx* D_800F8520;
 
 extern GfxPool D_1000000;
 
-#include "prevent_bss_reordering.h"
+// #include "prevent_bss_reordering.h"
 #include "ovl_i7.h"
 
 extern unk_8014B480 D_8014B480[2];
@@ -286,7 +286,7 @@ unk_struct_14 D_i7_8014A4A8[] = {
     { 7, D_i7_8014A444, D_i7_8014A460, D_i7_8014A47C, D_i7_8014A498 },
 };
 
-extern unk_8008112C_arg_1 D_800D4E98;
+extern const unk_8008112C_arg_1 D_800D4E98;
 
 unk_struct_C D_i7_8014A4D0[] = {
     { 0, func_80083734, &D_800D4E98 },
@@ -1201,7 +1201,7 @@ Gfx* func_i7_801447F4(Gfx* gfx) {
     gfx = func_i7_80146E28(gfx);
 
     gSPLoadUcodeL(gfx++, gspF3DLX_Rej_fifo);
-    gfx = func_80076C08(gfx);
+    gfx = Segment_SetTableAddresses(gfx);
     gSPClipRatio(gfx++, FRUSTRATIO_3);
     gDPPipeSync(gfx++);
     gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
@@ -1622,8 +1622,6 @@ Gfx* func_i7_DrawResultsRacersKOd(Gfx* gfx, s32 left, s32 top, s32 racersKOd) {
     return gfx;
 }
 
-extern f32 gSinTable[];
-
 #ifdef IMPORT_BSS
 void func_i7_801467FC(void) {
     f32 temp_fa0;
@@ -1686,8 +1684,6 @@ void func_i7_801467FC(void) {
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_801467FC.s")
 #endif
 
-#ifdef NON_MATCHING
-// vtx weirdness
 extern Vec3f D_i7_8014BF30[];
 
 void func_i7_80146920(void) {
@@ -1738,16 +1734,8 @@ void func_i7_80146920(void) {
                         var_a1 = D_i7_8014BF30[j - 5].x * var_fv0;
                         var_a2 = D_i7_8014BF30[j - 5].z * var_fv0;
                     }
-                    vtx->v.ob[0] = var_a1;
-                    vtx->v.ob[1] = 0;
-                    vtx->v.ob[2] = var_a2;
-                    vtx->v.flag = 0;
-                    vtx->v.tc[0] = 0;
-                    vtx->v.tc[1] = 0;
-                    vtx->v.cn[0] = 0;
-                    vtx->v.cn[1] = 0;
-                    vtx->v.cn[2] = 0;
-                    vtx->v.cn[3] = 0xFF;
+
+                    SET_VTX(vtx, var_a1, 0, var_a2, 0, 0, 0, 0, 0, 255);
                     vtx++;
                 }
 
@@ -1775,9 +1763,6 @@ void func_i7_80146920(void) {
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_80146920.s")
-#endif
 
 #ifdef NON_MATCHING
 // very weird, possibly patched after compilation?
@@ -2371,27 +2356,20 @@ void func_i7_80147EBC(void) {
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_80147EBC.s")
 #endif
 
-#ifdef NON_EQUIVALENT
-// texture rectangle issues
 Gfx* func_i7_80149760(Gfx* gfx) {
+    unk_8014BF98* temp_s6;
+    s32 left;
+    s32 top;
+    s32 right;
+    s32 bottom;
     s32 i;
     s32 j;
     s32 red;
     s32 green;
     s32 blue;
-    s32 alpha;
     f32 var_fs1;
-    s32 temp_t4;
     s32 temp_t6;
-    f32 temp_fv0;
-    f32 temp_fv1;
-    f32 temp_fa0;
-    s32 l;
-    s32 t;
-    s32 r;
-    s32 b;
     unk_8014BF94* temp_a0;
-    unk_8014BF98* temp_s6;
     unk_8014BF98* temp_v0;
 
     if (D_80106F48 >= 4) {
@@ -2404,60 +2382,56 @@ Gfx* func_i7_80149760(Gfx* gfx) {
 
     for (i = 0; i < D_i7_8014BF90; i++) {
 
-        if (D_i7_8014BF98[i + 0].unk_24 < 2) {
-            continue;
-        }
-        var_fs1 = D_i7_8014BF98[i].unk_28 * 0.5f;
+        if (D_i7_8014BF98[i].unk_24 >= 2) {
+            temp_s6 = &D_i7_8014BF98[i];
+            var_fs1 = temp_s6->unk_28 * 0.5f;
 
-        if (var_fs1 > 0.8f) {
-            var_fs1 = 0.8f;
-        }
-
-        if (var_fs1 < 0.1f) {
-            continue;
-        }
-
-        func_8006ADE4((i * 0x600) / D_i7_8014BF90, Math_Rand1() % 256, 255, &red, &green, &blue);
-        gDPPipeSync(gfx++);
-        alpha = (s32) ((var_fs1 / 0.8f) * 255.0f);
-        gDPSetPrimColor(gfx++, 0, 0, red, green, blue, alpha);
-        gDPLoadTextureBlock(gfx++, D_i7_8014AD8C[Math_Rand1() % 3], G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0,
-                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
-                            G_TX_NOLOD);
-
-        if (D_i7_8014BF98[i].unk_24 != 3) {
-            if (D_i7_8014BF98[i].unk_0C != 0x200) {
-                temp_fv0 = D_i7_8014BF98[i].unk_0C;
-                temp_fv1 = D_i7_8014BF98[i].unk_10;
-                l = (s32) ((temp_fv0 * 4.0f) - (4.0f * var_fs1));
-                t = (s32) ((temp_fv1 * 4.0f) - (4.0f * var_fs1));
-                r = (s32) (((temp_fv0 + 7.0f) * 4.0f) + (4.0f * var_fs1));
-                b = (s32) (((temp_fv1 + 7.0f) * 4.0f) + (4.0f * var_fs1));
-                gSPTextureRectangle(gfx++, l, t, r, b, 0, 0, 0, (s32) (1024.0f / var_fs1), (s32) (1024.0f / var_fs1));
+            if (var_fs1 > 0.8f) {
+                var_fs1 = 0.8f;
             }
-        } else {
-            for (j = D_i7_8014BF98[i].unk_2E; j < D_i7_8014BF98[i].unk_2E + D_i7_8014BF98[i].unk_30; j++) {
-                if ((D_i7_8014BF98[i].unk_2C == 0x20) && !(j & 0x1F)) {
-                    temp_t6 = Math_Rand1() % 32;
 
-                    gDPPipeSync(gfx++);
-                    gDPSetPrimColor(gfx++, 0, 0, D_i7_8014AD2C[temp_t6][0], D_i7_8014AD2C[temp_t6][1],
-                                    D_i7_8014AD2C[temp_t6][2], alpha);
-                    // if (!l){}
-                    gDPLoadTextureBlock(gfx++, D_i7_8014AD8C[Math_Rand1() % 3], G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0,
-                                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
-                                        G_TX_NOLOD, G_TX_NOLOD);
-                }
+            if (var_fs1 < 0.1f) {
+                continue;
+            }
 
-                if (D_i7_8014BF94[j].unk_0C != 0x200) {
-                    temp_fv0 = D_i7_8014BF94[j].unk_0C;
-                    temp_fv1 = D_i7_8014BF94[j].unk_10;
-                    l = (s32) ((temp_fv0 * 4.0f) - (4.0f * var_fs1));
-                    t = (s32) ((temp_fv1 * 4.0f) - (4.0f * var_fs1));
-                    r = (s32) (((temp_fv0 + 7.0f) * 4.0f) + (4.0f * var_fs1));
-                    b = (s32) (((temp_fv1 + 7.0f) * 4.0f) + (4.0f * var_fs1));
-                    gSPTextureRectangle(gfx++, l, t, r, b, 0, 0, 0, (s32) (1024.0f / var_fs1),
+            func_8006ADE4((i * 0x600) / D_i7_8014BF90, Math_Rand1() % 256, 255, &red, &green, &blue);
+            gDPPipeSync(gfx++);
+            gDPSetPrimColor(gfx++, 0, 0, red, green, blue, (s32) ((var_fs1 / 0.8f) * 255.0f));
+            gDPLoadTextureBlock(gfx++, D_i7_8014AD8C[Math_Rand1() % 3], G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0,
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                G_TX_NOLOD, G_TX_NOLOD);
+
+            if (D_i7_8014BF98[i].unk_24 != 3) {
+                if (temp_s6->unk_0C != 0x200) {
+                    left = (s32) ((temp_s6->unk_0C * 4.0f) - (4.0f * var_fs1));
+                    top = (s32) ((temp_s6->unk_10 * 4.0f) - (4.0f * var_fs1));
+                    right = (s32) (((temp_s6->unk_0C + 7.0f) * 4.0f) + (4.0f * var_fs1));
+                    bottom = (s32) (((temp_s6->unk_10 + 7.0f) * 4.0f) + (4.0f * var_fs1));
+                    gSPTextureRectangle(gfx++, left, top, right, bottom, 0, 0, 0, (s32) (1024.0f / var_fs1),
                                         (s32) (1024.0f / var_fs1));
+                }
+            } else {
+                for (j = D_i7_8014BF98[i].unk_2E; j < D_i7_8014BF98[i].unk_2E + D_i7_8014BF98[i].unk_30; j++) {
+                    if ((temp_s6->unk_2C == 0x20) && !(j & 0x1F)) {
+                        temp_t6 = Math_Rand1() % 32;
+
+                        gDPPipeSync(gfx++);
+                        gDPSetPrimColor(gfx++, 0, 0, D_i7_8014AD2C[temp_t6][0], D_i7_8014AD2C[temp_t6][1],
+                                        D_i7_8014AD2C[temp_t6][2], (s32) ((var_fs1 / 0.8f) * 255.0f));
+                        gDPLoadTextureBlock(gfx++, D_i7_8014AD8C[Math_Rand1() % 3], G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8,
+                                            0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                                            G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                    }
+
+                    temp_a0 = &D_i7_8014BF94[j];
+                    if (temp_a0->unk_0C != 0x200) {
+                        left = (s32) ((temp_a0->unk_0C * 4.0f) - (4.0f * var_fs1));
+                        top = (s32) ((temp_a0->unk_10 * 4.0f) - (4.0f * var_fs1));
+                        right = (s32) (((temp_a0->unk_0C + 7.0f) * 4.0f) + (4.0f * var_fs1));
+                        bottom = (s32) (((temp_a0->unk_10 + 7.0f) * 4.0f) + (4.0f * var_fs1));
+                        gSPTextureRectangle(gfx++, left, top, right, bottom, 0, 0, 0, (s32) (1024.0f / var_fs1),
+                                            (s32) (1024.0f / var_fs1));
+                    }
                 }
             }
         }
@@ -2469,6 +2443,3 @@ Gfx* func_i7_80149760(Gfx* gfx) {
 
     return gfx;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_80149760.s")
-#endif

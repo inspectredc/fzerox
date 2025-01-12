@@ -204,13 +204,13 @@ s32 func_i8_80143DDC(void) {
     }
     func_i3_8013A004();
     func_80080C0C();
-    gameMode = GAMEMODE_6;
+    gameMode = GAMEMODE_RECORDS;
     sp1C = 0;
     if (D_i8_80144FD6 == 0) {
         switch (D_80144FB0) {
             case 0:
                 temp_v0 = func_i8_80143F94();
-                gameMode = GAMEMODE_6;
+                gameMode = GAMEMODE_RECORDS;
                 if (temp_v0 == 1) {
                     sp1C = 1;
                 } else if (temp_v0 == 2) {
@@ -222,7 +222,7 @@ s32 func_i8_80143DDC(void) {
                 break;
             case 1:
                 temp_v0 = func_i8_80144144();
-                gameMode = GAMEMODE_6;
+                gameMode = GAMEMODE_RECORDS;
                 if (temp_v0 == 1) {
                     gameMode = GAMEMODE_8013;
                 } else if (temp_v0 == 2) {
@@ -234,14 +234,14 @@ s32 func_i8_80143DDC(void) {
                 break;
             case 2:
                 func_i8_801443D0();
-                gameMode = GAMEMODE_6;
+                gameMode = GAMEMODE_RECORDS;
                 break;
         }
     }
     if (sp1C != 0) {
         D_800CD3BC = gCourseIndex;
         D_800CD048 = 8;
-    } else if ((gameMode == GAMEMODE_6) && (D_i8_80144FD6 == 0) && (gRacers[0].unk_04 & 0x80000)) {
+    } else if ((gameMode == GAMEMODE_RECORDS) && (D_i8_80144FD6 == 0) && (gRacers[0].unk_04 & 0x80000)) {
         D_800CD048 = 1;
     }
     return gameMode;
@@ -494,58 +494,16 @@ void func_i8_801447C0(void) {
     func_8006D2E0(&D_i8_80144FD8->unk_00, NULL, 1.0f, 0.0f, 319.0f, 239.0f, 0.0f, -100.0f, 100.0f);
 
     vtx = D_i8_80144FD8->unk_40;
-    // FAKE
-    temp = -0x10;
+    temp = -16;
 
-    // clang-format off
-    vtx->v.ob[0] = 236;           \
-    vtx->v.ob[1] = 60;            \
-    vtx->v.ob[2] = 0;             \
-    vtx->v.flag = 0;              \
-    vtx->v.tc[0] = temp;          \
-    vtx->v.tc[1] = temp;          \
-    vtx->v.cn[0] = 255;           \
-    vtx->v.cn[1] = 255;           \
-    vtx->v.cn[2] = 255;           \
-    vtx->v.cn[3] = D_i8_80144FD2;
+    SET_VTX(vtx, 236, 60, 0, temp, temp, 255, 255, 255, D_i8_80144FD2);
     vtx++;
-    
-    vtx->v.ob[0] = 267;           \
-    vtx->v.ob[1] = 60;            \
-    vtx->v.ob[2] = 0;             \
-    vtx->v.flag = 0;              \
-    vtx->v.tc[0] = 0x400;         \
-    vtx->v.tc[1] = 0;             \
-    vtx->v.cn[0] = 255;           \
-    vtx->v.cn[1] = 255;           \
-    vtx->v.cn[2] = 255;           \
-    vtx->v.cn[3] = D_i8_80144FD2;
+    SET_VTX(vtx, 267, 60, 0, 0x400, 0, 255, 255, 255, D_i8_80144FD2);
     vtx++;
-    
-    vtx->v.ob[0] = 236;           \
-    vtx->v.ob[1] = 75;            \
-    vtx->v.ob[2] = 0;             \
-    vtx->v.flag = 0;              \
-    vtx->v.tc[0] = 0;             \
-    vtx->v.tc[1] = 0x200;         \
-    vtx->v.cn[0] = 255;           \
-    vtx->v.cn[1] = 255;           \
-    vtx->v.cn[2] = 255;           \
-    vtx->v.cn[3] = D_i8_80144FD4;
+    SET_VTX(vtx, 236, 75, 0, 0, 0x200, 255, 255, 255, D_i8_80144FD4);
     vtx++;
-    
-    vtx->v.ob[0] = 267;           \
-    vtx->v.ob[1] = 75;            \
-    vtx->v.ob[2] = 0;             \
-    vtx->v.flag = 0;              \
-    vtx->v.tc[0] = 0x400;         \
-    vtx->v.tc[1] = 0x200;         \
-    vtx->v.cn[0] = 255;           \
-    vtx->v.cn[1] = 255;           \
-    vtx->v.cn[2] = 255;           \
-    vtx->v.cn[3] = D_i8_80144FD4;
+    SET_VTX(vtx, 267, 75, 0, 0x400, 0x200, 255, 255, 255, D_i8_80144FD4);
     vtx++;
-    // clang-format on
 }
 
 extern Mtx D_2000000[];

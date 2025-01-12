@@ -58,7 +58,7 @@ f32 D_800D1AF8[] = {
 u8 D_800D1B70[30][4] = { 0 };
 u8 D_800D1BE8[4][4] = { 0 };
 u8 D_800D1BF8[4][8] = { 0 };
-AudioTask* D_800D1C18 = NULL;
+AudioTask* gCurAudioTask = NULL;
 
 s32 func_800B71D0(u8 arg0) {
     u8 var_v1;
@@ -1136,15 +1136,15 @@ void func_800B9ED4(void) {
     }
 }
 
-void func_800BA248(void) {
+void Audio_PreNMI(void) {
     AudioThread_PreNMIInternal();
 }
 
-void func_800BA268(void) {
+void Audio_Init(void) {
     AudioLoad_Init(NULL, 0);
 }
 
-void func_800BA28C(u8 soundMode) {
+void Audio_SetSoundMode(u8 soundMode) {
     AUDIOCMD_GLOBAL_SET_SOUND_MODE(soundMode);
 }
 
@@ -1414,9 +1414,9 @@ void func_800BABA0(u8 arg0) {
         case 0:
             AUDIOCMD_CHANNEL_SET_PAN(0, 2, 0x3F);
             if (D_800D1A94[arg0] == 0) {
-                func_800BAE98(arg0 + 2, 2U);
+                func_800BAE98(arg0 + 2, 2);
             } else {
-                func_800BAE98(arg0 + 2, 7U);
+                func_800BAE98(arg0 + 2, 7);
             }
             break;
         case 1:
@@ -1429,9 +1429,9 @@ void func_800BABA0(u8 arg0) {
                     break;
             }
             if (D_800D1A94[arg0] == 0) {
-                func_800BAE98(arg0 + 2, 0xCU);
+                func_800BAE98(arg0 + 2, 0xC);
             } else {
-                func_800BAE98(arg0 + 2, 0x11U);
+                func_800BAE98(arg0 + 2, 0x11);
             }
             break;
         case 2:
@@ -1447,9 +1447,9 @@ void func_800BABA0(u8 arg0) {
                     break;
             }
             if (D_800D1A94[arg0] == 0) {
-                func_800BAE98(arg0 + 2, 0x16U);
+                func_800BAE98(arg0 + 2, 0x16);
             } else {
-                func_800BAE98(arg0 + 2, 0x1BU);
+                func_800BAE98(arg0 + 2, 0x1B);
             }
             break;
         case 3:
@@ -1468,9 +1468,9 @@ void func_800BABA0(u8 arg0) {
                     break;
             }
             if (D_800D1A94[arg0] == 0) {
-                func_800BAE98(arg0 + 2, 0x16U);
+                func_800BAE98(arg0 + 2, 0x16);
             } else {
-                func_800BAE98(arg0 + 2, 0x1BU);
+                func_800BAE98(arg0 + 2, 0x1B);
             }
     }
 }
@@ -1655,14 +1655,14 @@ void func_800BB46C(void) {
     func_800BB370();
 }
 
-AudioTask* func_800BB49C(void) {
+AudioTask* Audio_SetupCreateTask(void) {
     AudioTask* curAudioTask;
 
     func_800B82C8();
     func_800B7CA4();
     func_800B8598();
     AudioThread_ScheduleProcessCmds();
-    D_800D1C18 = curAudioTask = AudioThread_CreateTask();
+    gCurAudioTask = curAudioTask = AudioThread_CreateTask();
     return curAudioTask;
 }
 

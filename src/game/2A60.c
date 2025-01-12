@@ -3,22 +3,23 @@
 #include "audio.h"
 #include "fzxthread.h"
 
-extern OSMesgQueue D_800DCA98;
-extern OSMesgQueue D_800DCAE0;
-extern OSTask* D_800DCCC4;
-extern void* D_800DCE30;
+extern OSMesgQueue gAudioTaskMesgQueue;
+extern OSMesgQueue gMainThreadMesgQueue;
+extern OSTask* gCurAudioOSTask;
 
-void func_80068A60(void* arg0) {
-    static AudioTask* D_800CCFF0 = NULL;
-    func_800BA268();
+OSMesg sAudioTaskMsg;
+
+void Audio_ThreadEntry(void* arg0) {
+    static AudioTask* sCurAudioTask = NULL;
+    Audio_Init();
 
     while (true) {
-        MQ_GET_MESG(&D_800DCA98, &D_800DCE30);
-        MQ_WAIT_FOR_MESG(&D_800DCA98, &D_800DCE30);
-        if (D_800CCFF0 != NULL) {
-            D_800DCCC4 = &D_800CCFF0->task;
-            osSendMesg(&D_800DCAE0, (void*) 0x16, OS_MESG_BLOCK);
+        MQ_GET_MESG(&gAudioTaskMesgQueue, &sAudioTaskMsg);
+        MQ_WAIT_FOR_MESG(&gAudioTaskMesgQueue, &sAudioTaskMsg);
+        if (sCurAudioTask != NULL) {
+            gCurAudioOSTask = &sCurAudioTask->task;
+            osSendMesg(&gMainThreadMesgQueue, (OSMesg) EVENT_MESG_AUDIO_TASK_SET, OS_MESG_BLOCK);
         }
-        D_800CCFF0 = func_800BB49C();
+        sCurAudioTask = Audio_SetupCreateTask();
     }
 }

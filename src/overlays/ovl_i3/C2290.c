@@ -1743,7 +1743,7 @@ void func_i3_ReplaceCharacterPortrait(s32 character) {
     textureIndex = sPortraitReplacementIndexes[character];
 
     textureOffset = textureIndex * 0x800;
-    vramOffset = (func_80076BB8(4) + SEGMENT_OFFSET(aPortraitCaptainFalconTex)) + textureOffset;
+    vramOffset = (Segment_GetAddress(4) + SEGMENT_OFFSET(aPortraitCaptainFalconTex)) + textureOffset;
 
     textureOffset = textureIndex * 0x800;
     romOffset = (SEGMENT_ROM_START(segment_2747F0) + SEGMENT_OFFSET(D_276FF0)) + textureOffset;

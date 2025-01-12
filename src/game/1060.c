@@ -3,122 +3,125 @@
 #include "audio.h"
 #include "PR/viint.h"
 
-extern s32 D_800D8430;
-extern OSThread D_800DC030;
-extern OSMesgQueue D_800DCAF8;
-extern void* D_800DCC80;
+char sBootThreadStack[0x200];
+char sIdleThreadStack[0x200];
+char sMainThreadStack[0x400];
+char sGameThreadStack[0x1000];
+char sAudioThreadStack[0x800];
+char sResetThreadStack[0x1200];
+UNUSED char sUnusedThreadStack[0xE00];
+OSThread sIdleThread;
+OSThread sMainThread;
+OSThread sAudioThread;
+OSThread sGameThread;
+OSThread sResetThread;
+UNUSED OSThread sUnusedThread;
+OSMesgQueue sPiMgrCmdQueue;
+OSMesgQueue gDmaMesgQueue;
+OSMesgQueue gSerialEventQueue;
+OSMesgQueue gAudioTaskMesgQueue;
+OSMesgQueue D_800DCAB0;
+OSMesgQueue D_800DCAC8;
+OSMesgQueue gMainThreadMesgQueue;
+OSMesgQueue gResetMesgQueue;
+OSMesgQueue D_800DCB10;
+OSMesg sPiMgrCmdBuf[64];
+OSMesg sDmaMsgBuf[1];
+OSMesg sSerialEventBuf[1];
+OSMesg sAudioTaskMsgBuf[1];
+OSMesg D_800DCC34[1];
+OSMesg D_800DCC38[1];
+OSMesg sMainThreadMsgBuf[16];
+OSMesg sResetMsgBuf[1];
+OSMesg D_800DCC84[1];
+/*  */ UNUSED s8 D_800DCC88[0x20];
+OSIoMesg D_800DCCA8;
+OSTask* gCurGfxTask;
+OSTask* gCurAudioOSTask;
+bool gResetStarted;
+bool gLeoDDConnected;
+FrameBuffer* D_800DCCD0[3];
+OSPiHandle* gCartRomHandle;
+OSPiHandle* gDriveRomHandle;
 
-void func_800678B8(void*);
-void func_80067A10(void*);
+void Idle_ThreadEntry(void*);
+void Reset_ThreadEntry(void*);
 
-void func_80067060(void) {
+void bootproc(void) {
     osInitialize();
-    osCreateMesgQueue(&D_800DCAF8, &D_800DCC80, 1);
-    osSetEventMesg(OS_EVENT_PRENMI, &D_800DCAF8, (void*) 0x1B);
-    osCreateThread(&D_800DC030, 1, func_800678B8, NULL, &D_800D8430, 0x64);
-    osStartThread(&D_800DC030);
+    osCreateMesgQueue(&gResetMesgQueue, sResetMsgBuf, ARRAY_COUNT(sResetMsgBuf));
+    osSetEventMesg(OS_EVENT_PRENMI, &gResetMesgQueue, (void*) 0x1B);
+    osCreateThread(&sIdleThread, THREAD_ID_IDLE, Idle_ThreadEntry, NULL, sIdleThreadStack + sizeof(sIdleThreadStack),
+                   100);
+    osStartThread(&sIdleThread);
 }
 
-s32 D_800CCFA0 = 0;
-s32 D_800CCFA4 = 0;
+s32 sSpTaskState = SP_TASK_INACTIVE;
+bool sSpTaskActive = false;
 
-void func_800670E8(void) {
+void Sched_SpTaskYield(void) {
     osSpTaskYield();
-    D_800CCFA0 = 1;
-    D_800CCFA4 = 1;
+    sSpTaskState = SP_TASK_YIELDING;
+    sSpTaskActive = true;
 }
 
-extern OSTask* D_800DCCC4;
-
-void func_80067118(void) {
-    osSpTaskLoad(D_800DCCC4);
-    osSpTaskStartGo(D_800DCCC4);
-    D_800CCFA0 = 2;
-    D_800CCFA4 = 1;
+void Sched_SpTaskStartAudio(void) {
+    osSpTaskStart(gCurAudioOSTask);
+    sSpTaskState = SP_TASK_AUDIO;
+    sSpTaskActive = true;
 }
 
-extern OSTask* D_800DCCC0;
-
-void func_8006715C(void) {
-    osDpSetStatus(0x3C0);
-    osSpTaskLoad(D_800DCCC0);
-    osSpTaskStartGo(D_800DCCC0);
-    D_800CCFA0 = 3;
-    D_800CCFA4 = 1;
+void Sched_SpTaskClearStartGfx(void) {
+    osDpSetStatus(DPC_CLR_TMEM_CTR | DPC_CLR_PIPE_CTR | DPC_CLR_CMD_CTR | DPC_CLR_CLOCK_CTR);
+    osSpTaskStart(gCurGfxTask);
+    sSpTaskState = SP_TASK_GFX;
+    sSpTaskActive = true;
 }
 
-void func_800671A8(void) {
-    osSpTaskLoad(D_800DCCC0);
-    osSpTaskStartGo(D_800DCCC0);
-    D_800CCFA0 = 3;
-    D_800CCFA4 = 1;
+void Sched_SpTaskResumeGfx(void) {
+    osSpTaskStart(gCurGfxTask);
+    sSpTaskState = SP_TASK_GFX;
+    sSpTaskActive = true;
 }
 
-extern FrameBuffer* D_800DCCD0[];
-
-extern OSMesgQueue D_800DCA68;
-extern OSMesgQueue D_800DCA80;
-extern OSMesgQueue D_800DCA98;
-extern OSMesgQueue D_800DCAB0;
-extern OSMesgQueue D_800DCAC8;
-extern OSMesgQueue D_800DCAE0;
-extern OSMesgQueue D_800DCB10;
-extern OSMesg D_800DCC28;
-extern OSMesg D_800DCC2C;
-extern OSMesg D_800DCC30;
-extern OSMesg D_800DCC34;
-extern OSMesg D_800DCC38;
-extern OSMesg D_800DCC40[16];
-extern OSMesg D_800DCC84;
-extern OSThread D_800DC390;
-extern OSThread D_800DC540;
-extern OSThread D_800DC6F0;
-
-s32 D_800CCFA8 = 0;
-s32 D_800CCFAC = 0;
+bool sGfxTaskYielded = false;
+bool sGfxTaskQueued = false;
 s32 D_800CCFB0 = 1;
 s32 D_800CCFB4 = 0;
 s32 D_800CCFB8 = 1;
 s32 D_800CCFBC = 1;
-s32 D_800CCFC0 = 0;
-s32 D_800CCFC4 = 0;
-s8 D_800CCFC8 = 1;
-s8 D_800CCFCC = 1;
-s8 D_800CCFD0 = 1;
-s8 D_800CCFD4 = 1;
-
-extern s32 D_800DCCC8;
-extern bool D_800DCCCC;
-
-extern u32 D_800D9830;
-extern u32 D_800DA030;
-extern u32 D_800DB230;
+bool gRamDDCompatible = false;
+bool sAudioThreadCreated = false;
+s8 sMainThreadStartEnabled = true;
+s8 sGameThreadStartEnabled = true;
+s8 sAudioThreadStartEnabled = 1;
+UNUSED s8 D_800CCFD4 = 1;
 
 void func_80069F5C(FrameBuffer*);
 
-void func_800671EC(void* arg0) {
+void Main_ThreadEntry(void* arg0) {
     OSMesg msg;
     s32 var_a0;
     u64* var_v1;
-    s32 i;
 
-    osCreateMesgQueue(&D_800DCA68, &D_800DCC28, 1);
-    osCreateMesgQueue(&D_800DCA98, &D_800DCC30, 1);
-    osCreateMesgQueue(&D_800DCAB0, &D_800DCC34, 1);
-    osCreateMesgQueue(&D_800DCAC8, &D_800DCC38, 1);
-    osCreateMesgQueue(&D_800DCAE0, D_800DCC40, ARRAY_COUNT(D_800DCC40));
-    osCreateMesgQueue(&D_800DCA80, &D_800DCC2C, 1);
-    osCreateMesgQueue(&D_800DCB10, &D_800DCC84, 1);
-    osSetEventMesg(OS_EVENT_SI, &D_800DCA80, (OSMesg) 0xB);
-    osSetEventMesg(OS_EVENT_SP, &D_800DCAE0, (OSMesg) 0x18);
-    osSetEventMesg(OS_EVENT_DP, &D_800DCAE0, (OSMesg) 0x19);
-    osViSetEvent(&D_800DCAE0, (OSMesg) 0x1A, 1U);
-    D_800DCCC8 = 0;
-    D_800DCCCC = func_800CC220();
+    // Init message queues
+    osCreateMesgQueue(&gDmaMesgQueue, sDmaMsgBuf, ARRAY_COUNT(sDmaMsgBuf));
+    osCreateMesgQueue(&gAudioTaskMesgQueue, sAudioTaskMsgBuf, ARRAY_COUNT(sAudioTaskMsgBuf));
+    osCreateMesgQueue(&D_800DCAB0, D_800DCC34, ARRAY_COUNT(D_800DCC34));
+    osCreateMesgQueue(&D_800DCAC8, D_800DCC38, ARRAY_COUNT(D_800DCC38));
+    osCreateMesgQueue(&gMainThreadMesgQueue, sMainThreadMsgBuf, ARRAY_COUNT(sMainThreadMsgBuf));
+    osCreateMesgQueue(&gSerialEventQueue, sSerialEventBuf, ARRAY_COUNT(sSerialEventBuf));
+    osCreateMesgQueue(&D_800DCB10, D_800DCC84, ARRAY_COUNT(D_800DCC84));
+    osSetEventMesg(OS_EVENT_SI, &gSerialEventQueue, (OSMesg) EVENT_MESG_SI);
+    osSetEventMesg(OS_EVENT_SP, &gMainThreadMesgQueue, (OSMesg) EVENT_MESG_SP);
+    osSetEventMesg(OS_EVENT_DP, &gMainThreadMesgQueue, (OSMesg) EVENT_MESG_DP);
+    osViSetEvent(&gMainThreadMesgQueue, (OSMesg) EVENT_MESG_VI, 1);
+    gResetStarted = false;
+    gLeoDDConnected = LeoDD_CheckPresence();
     var_v1 = (u64*) D_800DCCD0[0];
 
     // clang-format off
-    for (var_a0 = 0; var_a0 < (SCREEN_WIDTH * SCREEN_HEIGHT) / 4; var_a0++) {\
+    for (var_a0 = 0; var_a0 < (SCREEN_WIDTH * SCREEN_HEIGHT) / 4; var_a0++) { \
         var_v1[var_a0] = 1;
     }
     // clang-format on
@@ -132,35 +135,37 @@ void func_800671EC(void* arg0) {
     osViBlack(false);
 
     if (osAppNMIBuffer[15] != 0x20DE1529) {
+        // More than 8MB Ram available, n64dd compatible
         if (osGetMemSize() >= 0x800000) {
-            D_800CCFC0 = 1;
+            gRamDDCompatible = true;
         } else {
-            D_800CCFC0 = 0;
+            gRamDDCompatible = false;
         }
-        osAppNMIBuffer[14] = D_800CCFC0;
+        osAppNMIBuffer[14] = gRamDDCompatible;
     } else {
-        D_800CCFC0 = osAppNMIBuffer[14];
+        gRamDDCompatible = osAppNMIBuffer[14];
     }
 
-    if (D_800CCFC0 != 0) {
-        func_80073E28(SEGMENT_ROM_START(leo), SEGMENT_VRAM_START(leo), SEGMENT_ROM_SIZE(leo));
+    if (gRamDDCompatible) {
+        Dma_ClearRomCopy(SEGMENT_ROM_START(leo), SEGMENT_VRAM_START(leo), SEGMENT_ROM_SIZE(leo));
         bzero(SEGMENT_BSS_START(leo), SEGMENT_BSS_SIZE(leo));
-        if (D_800DCCCC) {
-            func_8007F904();
+        if (gLeoDDConnected) {
+            LeoDD_LoadFonts();
         }
         func_800751FC("EFZE");
-        if (D_800DCCCC) {
+        if (gLeoDDConnected) {
             func_80076340();
         }
     }
 
-    osCreateThread(&D_800DC6F0, 7, func_80067A10, NULL, &D_800DB230, 100);
-    osStartThread(&D_800DC6F0);
+    osCreateThread(&sResetThread, THREAD_ID_RESET, Reset_ThreadEntry, NULL,
+                   sResetThreadStack + sizeof(sResetThreadStack), 100);
+    osStartThread(&sResetThread);
 
-    if ((D_800CCFC0 != 0) && D_800DCCCC) {
+    if (gRamDDCompatible && gLeoDDConnected) {
         func_800763A8();
     }
-    if ((D_800CCFC0 != 0) && D_800DCCCC && (func_800761D4() == 2)) {
+    if (gRamDDCompatible && gLeoDDConnected && (func_800761D4() == 2)) {
         func_8007515C();
     }
     osViSwapBuffer(D_800DCCD0[1]);
@@ -174,95 +179,88 @@ void func_800671EC(void* arg0) {
 
     osViBlack(false);
 
-    if ((D_800CCFC0 != 0) && D_800DCCCC) {
-        func_8007F904();
+    if (gRamDDCompatible && gLeoDDConnected) {
+        LeoDD_LoadFonts();
     }
-    func_80075230(&D_800DC540);
-    // Audio Thread
-    osCreateThread(&D_800DC390, 4, func_80068A60, NULL, &D_800DA030, 20);
-    if (D_800CCFD0 != 0) {
-        osStartThread(&D_800DC390);
+    func_80075230(&sGameThread);
+
+    osCreateThread(&sAudioThread, THREAD_ID_AUDIO, Audio_ThreadEntry, NULL,
+                   sAudioThreadStack + sizeof(sAudioThreadStack), 20);
+    if (sAudioThreadStartEnabled) {
+        osStartThread(&sAudioThread);
     }
-    D_800CCFC4 = 1;
-    osCreateThread(&D_800DC540, 5, func_80068008, NULL, &D_800D9830, 10);
-    if (D_800CCFCC != 0) {
-        osStartThread(&D_800DC540);
+    sAudioThreadCreated = true;
+    osCreateThread(&sGameThread, THREAD_ID_GAME, Game_ThreadEntry, NULL, sGameThreadStack + sizeof(sGameThreadStack),
+                   10);
+    if (sGameThreadStartEnabled) {
+        osStartThread(&sGameThread);
     }
 
     while (true) {
-        osRecvMesg(&D_800DCAE0, &msg, OS_MESG_BLOCK);
-        if (msg == (OSMesg) 0x18) {
-            switch (D_800CCFA0) {
-                case 1:
-                    if (osSpTaskYielded(D_800DCCC0)) {
-                        D_800CCFA8 = 1;
+        osRecvMesg(&gMainThreadMesgQueue, &msg, OS_MESG_BLOCK);
+        if (msg == (OSMesg) EVENT_MESG_SP) {
+            switch (sSpTaskState) {
+                case SP_TASK_YIELDING:
+                    if (osSpTaskYielded(gCurGfxTask)) {
+                        sGfxTaskYielded = true;
                     }
-                    func_80067118();
+                    Sched_SpTaskStartAudio();
                     break;
-                case 2:
-                    if (D_800CCFA8 != 0) {
-                        D_800CCFA8 = 0;
-                        func_800671A8();
-                    } else if (D_800CCFAC != 0) {
-                        D_800CCFAC = 0;
-                        func_8006715C();
+                case SP_TASK_AUDIO:
+                    if (sGfxTaskYielded) {
+                        sGfxTaskYielded = false;
+                        Sched_SpTaskResumeGfx();
+                    } else if (sGfxTaskQueued) {
+                        sGfxTaskQueued = false;
+                        Sched_SpTaskClearStartGfx();
                     } else {
-                        D_800CCFA0 = 0;
-                        D_800CCFA4 = 0;
+                        sSpTaskState = SP_TASK_INACTIVE;
+                        sSpTaskActive = false;
                     }
                     break;
-                case 3:
-                    D_800CCFA0 = 0;
-                    D_800CCFA4 = 0;
+                case SP_TASK_GFX:
+                    sSpTaskState = SP_TASK_INACTIVE;
+                    sSpTaskActive = false;
                     break;
             }
-        } else if (msg == (OSMesg) 0x1A) {
-            osSendMesg(&D_800DCA98, (OSMesg) 0x1F, OS_MESG_NOBLOCK);
+        } else if (msg == (OSMesg) EVENT_MESG_VI) {
+            osSendMesg(&gAudioTaskMesgQueue, (OSMesg) EVENT_MESG_NEXT_AUDIO_TASK, OS_MESG_NOBLOCK);
             if ((++D_800CCFB0 - D_800CCFB4) >= D_800CCFB8) {
                 D_800CCFB4 = D_800CCFB0;
                 D_800CCFB8 = D_800CCFBC;
                 osSendMesg(&D_800DCAB0, (OSMesg) 0x29, OS_MESG_NOBLOCK);
             }
-        } else if (msg == (OSMesg) 0x16) {
+        } else if (msg == (OSMesg) EVENT_MESG_AUDIO_TASK_SET) {
             osWritebackDCacheAll();
-            if (D_800CCFA4 != 0) {
-                if (D_800CCFA0 != 1) {
-                    func_800670E8();
+            if (sSpTaskActive) {
+                if (sSpTaskState != SP_TASK_YIELDING) {
+                    Sched_SpTaskYield();
                 }
             } else {
-                func_80067118();
+                Sched_SpTaskStartAudio();
             }
-        } else if ((msg == (OSMesg) 0x15) && (D_800DCCC8 == 0)) {
+        } else if ((msg == (OSMesg) EVENT_MESG_GFX_TASK_SET) && !gResetStarted) {
             osWritebackDCacheAll();
-            if (D_800CCFA4 != 0) {
-                D_800CCFAC = 1;
+            if (sSpTaskActive) {
+                sGfxTaskQueued = true;
             } else {
-                func_8006715C();
+                Sched_SpTaskClearStartGfx();
             }
-        } else if (msg == (OSMesg) 0x19) {
+        } else if (msg == (OSMesg) EVENT_MESG_DP) {
             osSendMesg(&D_800DCAC8, (OSMesg) 0x2A, OS_MESG_NOBLOCK);
         }
     }
 }
 
-extern s8 D_800CCFC8;
-// extern OSViMode D_800D1DA0;
-// extern OSViMode D_800D2660;
-extern s32 D_800D8830;
-extern OSThread D_800DC1E0;
-extern OSMesgQueue D_800DCA50;
-extern void* D_800DCB28;
-extern OSPiHandle* D_800DCCDC;
-extern OSPiHandle* D_800DCCE0;
 extern FrameBuffer D_801D9800;
 extern FrameBuffer D_80200000;
 extern FrameBuffer D_803DA800;
 
-void func_800678B8(void* arg0) {
+void Idle_ThreadEntry(void* arg0) {
     D_800DCCD0[0] = &D_801D9800;
     D_800DCCD0[1] = &D_80200000;
     D_800DCCD0[2] = &D_803DA800;
-    osCreateViManager(0xFE);
+    osCreateViManager(OS_PRIORITY_VIMGR);
     if (osTvType == OS_TV_TYPE_NTSC) {
         osViSetMode(&osViModeNtscLan1);
     } else {
@@ -273,33 +271,34 @@ void func_800678B8(void* arg0) {
     osViSetSpecialFeatures(OS_VI_DIVOT_OFF);
     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_OFF);
     osViBlack(true);
-    osCreatePiManager(0x96, &D_800DCA50, &D_800DCB28, 0x40);
-    D_800DCCDC = osCartRomInit();
-    D_800DCCE0 = osDriveRomInit();
+    osCreatePiManager(OS_PRIORITY_PIMGR, &sPiMgrCmdQueue, sPiMgrCmdBuf, ARRAY_COUNT(sPiMgrCmdBuf));
+    gCartRomHandle = osCartRomInit();
+    gDriveRomHandle = osDriveRomInit();
     Fault_Init();
     Fault_SetFrameBuffer(&D_801D9800, SCREEN_WIDTH, 16);
-    osCreateThread(&D_800DC1E0, 3, func_800671EC, NULL, &D_800D8830, 99);
-    if (D_800CCFC8 != 0) {
-        osStartThread(&D_800DC1E0);
+    osCreateThread(&sMainThread, THREAD_ID_MAIN, Main_ThreadEntry, NULL, sMainThreadStack + sizeof(sMainThreadStack),
+                   99);
+    if (sMainThreadStartEnabled) {
+        osStartThread(&sMainThread);
     }
-    osSetThreadPri(NULL, 0);
+    osSetThreadPri(NULL, OS_PRIORITY_IDLE);
 
     while (true) {}
 }
 
 void LeoReset(void);
 
-void func_80067A10(void* arg0) {
-    void* sp1C;
+void Reset_ThreadEntry(void* arg0) {
+    OSMesg resetMsg;
 
-    MQ_WAIT_FOR_MESG(&D_800DCAF8, &sp1C);
-    if ((D_800DCCC8 == 0) && (D_800CCFC4 != 0)) {
-        func_800BA248();
+    MQ_WAIT_FOR_MESG(&gResetMesgQueue, &resetMsg);
+    if (!gResetStarted && sAudioThreadCreated) {
+        Audio_PreNMI();
     }
-    D_800DCCC8 = 1;
+    gResetStarted = true;
     osViBlack(true);
     osViSetYScale(1.0f);
-    if ((D_800CCFC0 != 0) && D_800DCCCC) {
+    if (gRamDDCompatible && gLeoDDConnected) {
         LeoReset();
     }
     func_80069700();

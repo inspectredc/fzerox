@@ -262,7 +262,7 @@ s32 func_i6_80115FF0(void) {
                         gNumPlayers = 1;
                         func_800BB324(gNumPlayers - 1);
                         gDifficulty = D_800DCE48.unk_10 + 3;
-                        return GAMEMODE_8008;
+                        return GAMEMODE_FLX_MACHINE_SELECT;
                     case 6:
                         D_800CD384 = 5;
                         D_800CD048 = 0xD;
@@ -565,7 +565,6 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
     return func_80078EA0(gfx, sMenuSignCompTexInfos[temp_t0], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
 }
 
-extern f32 gSinTable[];
 extern s8 D_800CD3C4;
 
 Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {

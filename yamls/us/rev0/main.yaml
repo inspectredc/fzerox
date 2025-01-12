@@ -215,7 +215,7 @@
       - [0x61A00, textbin, f3dex]
       - [0x62D70, textbin, f3dlx]
       - [0x63F00, textbin, f3dflx]
-      - [0x65090, textbin]
+      - [0x65090, textbin, l3dex]
       - [0x66220, c, game/66220]
       - [0x66270, textbin, aspmain]
 
@@ -233,7 +233,7 @@
       - [0x67520, .data, game/197D0]
       - [0x676C0, .data, game/sys_fault]
       - [0x678A0, data, game/1B0E0]
-      - [0x69500, data, game/36ED0]
+      - [0x69500, .data, game/36ED0]
       - [0x69A30, .data, audio/note_data]
       - [0x6A680, .data, audio/playback]
       - [0x6A840, .data, audio/effects]
@@ -360,11 +360,16 @@
       - [0x70CD0, data, f3dex]
       - [0x710F0, data, f3dlx]
       - [0x71500, data, f3dflx]
-      - [0x718B0, data]
+      - [0x718B0, data, l3dex]
       - [0x71CA0, data, aspmain]
       - [0x71F80, data, audio/audio_tables]
 
-      - { start: 0x72030, type: bss, vram: 0x800D8030, name: 800D8030 }
+      - { type: .bss, vram: 0x800D8030, name: game/1060 }
+      - { type: .bss, vram: 0x800DCCF0, name: game/1AE0 }
+      - { type: .bss, vram: 0x800DCE30, name: game/2A60 }
+      - { type: .bss, vram: 0x800DCE40, name: game/2B20 }
+      - { type: .bss, vram: 0x800DD230, name: game/3ED0 }
+      - { type: .bss, vram: 0x800E12B0, name: game/73F0 }
       - { type: .bss, vram: 0x800E32E0, name: game/F1C0 }
       - { type: .bss, vram: 0x800E3380, name: game/10490 }
       - { type: .bss, vram: 0x800E33E0, name: game/11CF0 }
@@ -372,10 +377,10 @@
       - { type: .bss, vram: 0x800E4260, name: game/194E0 }
       - { type: .bss, vram: 0x800E4330, name: game/197D0 }
       - { type: .bss, vram: 0x800E47D0, name: game/sys_fault }
-      - { type: bss, vram: 0x800E51B0, name: game/1AA40 }
-      - { type: bss, vram: 0x800E5220, name: game/1B0E0 }
-      - { type: bss, vram: 0x800F8510, name: game/36ED0 }
-      - { type: bss, vram: 0x800F89F0, name: audio/load }
+      - { type: .bss, vram: 0x800E51B0, name: game/1AA40 }
+      - { type: .bss, vram: 0x800E5220, name: game/1B0E0 }
+      - { type: .bss, vram: 0x800F8510, name: game/36ED0 }
+      - { type: .bss, vram: 0x800F89F0, name: audio/load }
       - { type: .bss, vram: 0x800F8AF0, name: libultra/io/sptask }
       - { type: .bss, vram: 0x800F8B30, name: libultra/io/leointerrupt }
       - { type: .bss, vram: 0x800F9B30, name: libultra/io/motor }

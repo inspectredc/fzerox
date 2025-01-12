@@ -4,6 +4,13 @@
 #include "segment_symbols.h"
 #include "assets/segment_17B1E0.h"
 
+OSMesg D_800E12B0;
+UNUSED s8 D_800E12B8[0x10];
+s32 D_800E12C8[0x800];
+s32 D_800E32C8;
+s32 D_800E32CC;
+unk_8006FF90_arg_2* D_800E32D0;
+
 Gfx* func_8006F3D8(Gfx* gfx);
 Gfx* func_8006F444(Gfx* gfx);
 Gfx* func_8006F478(Gfx* gfx);
@@ -58,7 +65,6 @@ extern s32 D_800F8518;
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8006EC7C.s")
 
-extern s32 D_800E32C8;
 extern Gfx D_8017220[];
 extern Gfx D_80172A0[];
 
@@ -299,8 +305,6 @@ void func_8006FC8C(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
     arg2->y += sp58 * sp28.yz;
     arg2->z += sp58 * sp28.zz;
 }
-
-extern s32 D_800E12C8[];
 
 void func_8006FD7C(s32 arg0, s32 arg1, f32 arg2) {
     s32 i = 0;
@@ -559,8 +563,6 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, unk_8006FF90_arg_2** arg2
 
 s32 D_800CD1E8 = 0;
 
-extern s32 D_800E32CC;
-extern unk_8006FF90_arg_2* D_800E32D0;
 f32 func_80074A20(Vec3f, Vec3f);
 void func_8006FD7C(s32 arg0, s32 arg1, f32 arg2);
 f32 func_8006FE90(s32 arg0, f32 arg1);
@@ -679,7 +681,6 @@ unk_8006FF90_arg_2* func_80070B5C(unk_8006FC8C* arg0, f32 arg1, unk_8006FF90_arg
     return arg3;
 }
 
-extern unk_8006FF90_arg_2* D_800E32D0;
 extern unk_8006FF90_arg_2 D_802268C0[];
 extern unk_8006FF90_arg_2 D_8022E8C0[];
 extern unk_802D2D70 D_802D2D70;
@@ -711,6 +712,7 @@ void func_80071260(s32 arg0) {
         D_800E32D0 = D_802268C0;
         spA8 = D_802268C0;
         spA4 = D_8022E8C0;
+        // FAKE
         if (1) {}
         if (1) {}
         if (1) {}
@@ -987,37 +989,37 @@ void func_80073A04(void) {
     var_a0->unk_10[var_a0->unk_08 - 1].next = var_a0->unk_10;
 }
 
-extern OSMesgQueue D_800DCA68;
+extern OSMesgQueue gDmaMesgQueue;
 extern OSIoMesg D_800DCCA8;
-extern OSPiHandle* D_800DCCDC;
+extern OSPiHandle* gCartRomHandle;
 
-void func_80073E28(void* romAddr, void* ramAddr, size_t size) {
+void Dma_ClearRomCopy(void* romAddr, void* ramAddr, size_t size) {
     osInvalDCache(osPhysicalToVirtual(ramAddr), size);
     D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
-    D_800DCCA8.hdr.retQueue = &D_800DCA68;
+    D_800DCCA8.hdr.retQueue = &gDmaMesgQueue;
     D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
     D_800DCCA8.devAddr = (uintptr_t) romAddr;
     D_800DCCA8.size = size;
-    D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
-    osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
-    MQ_WAIT_FOR_MESG(&D_800DCA68, NULL);
+    gCartRomHandle->transferInfo.cmdType = LEO_CMD_TYPE_2;
+    osEPiStartDma(gCartRomHandle, &D_800DCCA8, OS_READ);
+    MQ_WAIT_FOR_MESG(&gDmaMesgQueue, NULL);
 }
 
 void func_80073ED0(void* romAddr, void* ramAddr, size_t size) {
     OSMesg sp20[8];
 
-    if (D_800DCA68.validCount >= D_800DCA68.msgCount) {
-        MQ_WAIT_FOR_MESG(&D_800DCA68, sp20);
+    if (gDmaMesgQueue.validCount >= gDmaMesgQueue.msgCount) {
+        MQ_WAIT_FOR_MESG(&gDmaMesgQueue, sp20);
     }
     osInvalDCache(osPhysicalToVirtual(ramAddr), size);
     D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
-    D_800DCCA8.hdr.retQueue = &D_800DCA68;
+    D_800DCCA8.hdr.retQueue = &gDmaMesgQueue;
     D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
     D_800DCCA8.devAddr = (uintptr_t) romAddr;
     D_800DCCA8.size = size;
-    D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
-    osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
-    MQ_WAIT_FOR_MESG(&D_800DCA68, sp20);
+    gCartRomHandle->transferInfo.cmdType = LEO_CMD_TYPE_2;
+    osEPiStartDma(gCartRomHandle, &D_800DCCA8, OS_READ);
+    MQ_WAIT_FOR_MESG(&gDmaMesgQueue, sp20);
 }
 
 void func_80073FA0(u8* romAddr, u8* ramAddr, size_t size) {
@@ -1069,7 +1071,7 @@ void func_8007402C(s32 courseIndex) {
         sp28 = courseIndex - 24;
         if (func_800760F8() != 2) {
             osWritebackDCacheAll();
-            func_8007FE98();
+            LeoDD_DrawIsDiskInserted();
             osWritebackDCacheAll();
         }
 
@@ -1227,7 +1229,7 @@ s32 D_800CD24C[] = { 1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 void func_800747EC(s32 venue) {
     void* sp1C = (D_800CD220[venue] * 0x800) + SEGMENT_ROM_START(segment_2747F0);
 
-    func_80073FA0(sp1C, func_80076BD4(D_8014A20), 0x800);
+    func_80073FA0(sp1C, Segment_SegmentedToVirtual(D_8014A20), 0x800);
 }
 
 s32 D_800CD298 = 0;

@@ -77,7 +77,7 @@ void func_i3_80139D20(void) {
     }
     func_8006BC84(&D_8024DC80, NULL, 0.7f * D_800CE748, 0.7f * D_800CE74C, 0.7f * D_800CE750, 0.0f, 0.0f, 1.0f, 0.0f,
                   1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-    func_8006B010(&D_8024DCC0, 0, 0, 0, 255, 255, 255, 100, 50, 69);
+    Lights_SetSource(&D_8024DCC0, 0, 0, 0, 255, 255, 255, 100, 50, 69);
     func_80078104(aBestTex, 0x180, 0, 0, 0);
 
     if (D_i3_80143780 & 4) {
@@ -421,7 +421,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
 
     gfx = func_i3_DrawSpeed(gfx, D_i3_80143788 + D_i3_8014379C, D_i3_801437A0, var_s2->unk_C0, var_v0, true);
     gSPLoadUcodeL(gfx++, gspF3DFLX_Rej_fifo);
-    gfx = func_80076C08(gfx);
+    gfx = Segment_SetTableAddresses(gfx);
     gSPClipRatio(gfx++, FRUSTRATIO_3);
     gSPPerspNormalize(gfx++, D_800E5220[1].unk_118);
     gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);

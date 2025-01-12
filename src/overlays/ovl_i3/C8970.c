@@ -688,8 +688,6 @@ void func_i3_80137AC4(Vtx*, unk_80141FF0*, unk_struct_1DC*, unk_80141860*, f32, 
 void func_i3_80138D80(void);
 void func_i3_801398D0(s32, unk_80141FF0*, unk_struct_1DC*);
 
-extern f32 gSinTable[];
-
 extern GfxPool* D_800DCCF0;
 
 void func_i3_80136A6C(void) {
@@ -777,8 +775,6 @@ void func_i3_80136A6C(void) {
     }
 }
 
-#ifdef NON_MATCHING
-// Weird Temps and Vtx Stuff For Next 3 Functions, all the same issue
 void func_i3_80136E74(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, f32 arg3) {
     s32 i;
     s32 temp1;
@@ -876,25 +872,12 @@ void func_i3_80136E74(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, f32 ar
         temp4 = sp68[i] * 32.0f;
         temp5 = sp58[i] * 32.0f;
 
-        vtx->v.ob[0] = temp1;
-        vtx->v.ob[1] = temp2;
-        vtx->v.ob[2] = temp3;
-        vtx->v.flag = 0;
-        vtx->v.cn[0] = 0;
-        vtx->v.cn[1] = 0;
-        vtx->v.cn[2] = 0;
-        vtx->v.cn[3] = 255;
-        vtx->v.tc[0] = temp4;
-        vtx->v.tc[1] = temp5;
+        SET_VTX(vtx, temp1, temp2, temp3, temp4, temp5, 0, 0, 0, 255);
         vtx++;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/C8970/func_i3_80136E74.s")
-#endif
 
 extern s8 D_800DCE5C;
-#ifdef NON_MATCHING
 void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6,
                       f32 arg7, f32 arg8, s32 arg9, s32 argA) {
     unk_80141860* temp_v0;
@@ -990,24 +973,11 @@ void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, f32 ar
 
         var_t3 = (i < 2) ? arg9 : argA;
 
-        vtx->v.ob[0] = temp1;
-        vtx->v.ob[1] = (u16) (s32) temp_fa1;
-        vtx->v.ob[2] = temp3;
-        vtx->v.flag = 0;
-        vtx->v.tc[0] = temp4;
-        vtx->v.tc[1] = temp5;
-        vtx->v.cn[0] = var_t3;
-        vtx->v.cn[1] = var_t3;
-        vtx->v.cn[2] = var_t3;
-        vtx->v.cn[3] = 0xFF;
+        SET_VTX(vtx, temp1, (s32) (temp_fa1), temp3, temp4, temp5, var_t3, var_t3, var_t3, 255);
         vtx++;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/C8970/func_i3_801374D4.s")
-#endif
 
-#ifdef NON_MATCHING
 void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, unk_80141860* arg3, f32 arg4, f32 arg5,
                       f32 arg6, f32 arg7, f32 arg8, f32 arg9, s32 argA, s32 argB, bool argC) {
     s32 temp1;
@@ -1118,22 +1088,10 @@ void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, unk_80
             var_t3 = argB;
         }
 
-        vtx->v.ob[0] = temp1;
-        vtx->v.ob[1] = (u16) (s32) var_fa0;
-        vtx->v.ob[2] = temp2;
-        vtx->v.flag = 0;
-        vtx->v.tc[0] = temp3;
-        vtx->v.tc[1] = temp4;
-        vtx->v.cn[0] = 0xFF;
-        vtx->v.cn[1] = 0xFF;
-        vtx->v.cn[2] = 0xFF;
-        vtx->v.cn[3] = var_t3;
+        SET_VTX(vtx, temp1, (s32) (var_fa0), temp2, temp3, temp4, 255, 255, 255, var_t3);
         vtx++;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/C8970/func_i3_80137AC4.s")
-#endif
 
 extern GfxPool D_1000000;
 extern Mtx D_2000000[];

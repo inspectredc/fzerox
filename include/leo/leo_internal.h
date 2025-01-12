@@ -211,7 +211,6 @@ extern const u16 LEORAM_START_LBA[7];
 extern const s32 LEORAM_BYTE[7];
 
 extern s32 __leoActive;
-extern s32 LEO_country_code;
 
 extern s32 (*D_i1_8042A620)(LEOCmd*, s32, u32, void*, u32, OSMesgQueue*);
 extern s32 (*D_i1_8042A624)(LEOCmd*, u32, OSMesgQueue*);
@@ -222,38 +221,41 @@ extern s32 (*D_i1_8042A634)(LEOCmd*, LEODiskTime*, OSMesgQueue*);
 extern s32 (*D_i1_8042A638)(LEOCmd*, u32, u32, OSMesgQueue*);
 extern s32 (*D_i1_8042A63C)(LEOCmd*, OSMesgQueue*);
 
-extern u32 LEOasic_bm_ctl_shadow;
-extern u32 LEOasic_seq_ctl_shadow;
-extern u8 LEOdrive_flag;
-extern u8 LEOclr_que_flag;
-extern u8 LEOdisk_type;
-extern OSIoMesg LEOPiDmaParam;
 extern OSPiHandle* LEOPiInfo;
-extern u8* LEOwrite_pointer;
-extern u8* LEOc2ctrl_que_buf;
+extern OSIoMesg LEOPiDmaParam;
+extern OSMesg LEOc2ctrl_que_buf[1];
 extern LEOVersion __leoVersion;
-extern LEOCmd* LEOcur_command;
-extern OSMesgQueue LEOblock_que;
-extern OSMesgQueue LEOevent_que;
 extern OSMesgQueue LEOc2ctrl_que;
-extern OSMesgQueue LEOcontrol_que;
 extern OSMesgQueue LEOpost_que;
+extern OSMesg LEOpost_que_buf[1];
+
+extern u8 LEO_TempBuffer[0xE8];
+extern block_param_form LEOc2_param;
+
+extern leo_sys_form LEO_sys_data;
+extern OSThread LEOcommandThread;
+extern OSThread LEOinterruptThread;
+extern u8 LEOcommandThreadStack[0x400];
+extern u8 LEOinterruptThreadStack[0x400];
 extern OSMesgQueue LEOcommand_que;
+extern OSMesgQueue LEOevent_que;
+extern OSMesgQueue LEOcontrol_que;
 extern OSMesgQueue LEOdma_que;
+extern OSMesgQueue LEOblock_que;
 extern OSMesg LEOevent_que_buf[1];
 extern OSMesg LEOcontrol_que_buf[1];
 extern OSMesg LEOdma_que_buf[2];
 extern OSMesg LEOblock_que_buf[1];
-extern OSMesg LEOpost_que_buf[1];
-extern u8 LEOcommandThreadStack[0x400];
-extern u8 LEOinterruptThreadStack[0x400];
-extern OSThread LEOcommandThread;
-extern OSThread LEOinterruptThread;
-extern tgt_param_form LEOtgt_param;
+extern u8* LEOwrite_pointer;
+extern LEOCmd* LEOcur_command;
+extern u32 LEOasic_bm_ctl_shadow;
+extern u32 LEOasic_seq_ctl_shadow;
+extern u8 LEOdrive_flag;
+extern u8 LEOclr_que_flag;
 extern u16 LEOrw_flags;
-extern leo_sys_form LEO_sys_data;
+extern u8 LEOdisk_type;
+extern tgt_param_form LEOtgt_param;
+extern s32 LEO_country_code;
 
-extern u8 LEO_TempBuffer[0xE8];
-extern block_param_form LEOc2_param;
 
 #endif

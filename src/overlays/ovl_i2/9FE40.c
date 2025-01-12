@@ -81,7 +81,6 @@ void func_i2_801044F0(void) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/9FE40/func_i2_8010466C.s")
 extern s8 D_800DCE5C;
-extern f32 gSinTable[];
 
 s32 func_i2_801054C0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, Racer* arg7) {
     unk_80111870* temp_v1;

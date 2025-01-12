@@ -2,6 +2,9 @@
 #include "leo/leo_internal.h"
 #include "macros.h"
 
+OSMesgQueue LEOpost_que;
+OSMesg LEOpost_que_buf[1];
+
 void leoInitialize(OSPri compri, OSPri intpri, OSMesg* cmdQueueBuf, u32 cmdBufCount) {
     osCreateMesgQueue(&LEOcommand_que, cmdQueueBuf, cmdBufCount);
     osCreateMesgQueue(&LEOcontrol_que, LEOcontrol_que_buf, ARRAY_COUNT(LEOcontrol_que_buf));

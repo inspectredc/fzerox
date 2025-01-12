@@ -1,8 +1,8 @@
 #include "libultra/ultra64.h"
 #include "leo/leo_internal.h"
 
-extern u32 asic_cur_status;
-extern u32 unit_atten;
+u32 asic_cur_status;
+u32 unit_atten;
 
 u8 leoAnalize_asic_status(void) {
     u32 curr_stat;

@@ -10,7 +10,7 @@ unk_800E4068 D_800E4068[16];
 
 void func_80077CF0(s32 segAddr, size_t size, u8* startAddr) {
     osInvalDCache(startAddr, size);
-    func_800765CC(SEGMENT_ROM_START(segment_2B9EA0) + SEGMENT_OFFSET(segAddr), startAddr, size);
+    Dma_LoadAssets(SEGMENT_ROM_START(segment_2B9EA0) + SEGMENT_OFFSET(segAddr), startAddr, size);
 }
 
 void func_80077D44(void) {

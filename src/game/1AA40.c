@@ -4,8 +4,8 @@ void func_80080A40(unk_800E51B8** arg0) {
     *arg0 = NULL;
 }
 
-extern s32 D_800E51B0;
-extern unk_800E51B8 D_800E51B8[];
+s32 D_800E51B0;
+unk_800E51B8 D_800E51B8[3];
 
 void func_80080A48(void) {
     s32 i;

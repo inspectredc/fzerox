@@ -1,7 +1,7 @@
 #include "global.h"
 #include "segment_symbols.h"
 
-extern OSMesgQueue D_800DCA68;
+extern OSMesgQueue gDmaMesgQueue;
 extern LEODiskID D_800CD2B0;
 
 u8 D_i11_800FC9F0 = true;
@@ -46,22 +46,22 @@ void func_i11_800FC730(void) {
     ptr[9] = 0xFF;
     ptr[10] = 0xFF;
 
-    func_80075D10(&cmdBlock, 0, 0x341, ptr, 1, &D_800DCA68);
-    osRecvMesg(&D_800DCA68, NULL, 1);
+    func_80075D10(&cmdBlock, 0, 0x341, ptr, 1, &gDmaMesgQueue);
+    osRecvMesg(&gDmaMesgQueue, NULL, 1);
     sp58 = ptr[1];
     sp40 = ptr[3];
     sp50 = ptr[10] - ptr[9];
     sp4C = ptr[2] - ptr[1];
     PRINTF("INFO %d, 0x%x-0x%x-0x%x-0x%x, %dBytes, %dLBAs\n");
     if (D_i11_800FC9F0) {
-        func_80075D10(&cmdBlock, 0, sp58, sp40, sp4C, &D_800DCA68);
-        osRecvMesg(&D_800DCA68, NULL, 1);
+        func_80075D10(&cmdBlock, 0, sp58, sp40, sp4C, &gDmaMesgQueue);
+        osRecvMesg(&gDmaMesgQueue, NULL, 1);
         bzero(ptr[9], sp50);
     } else {
         switch (ptr[0]) {
             case 0:
-                func_80075D10(&cmdBlock, 0, sp58, sp40, sp4C, &D_800DCA68);
-                osRecvMesg(&D_800DCA68, NULL, 1);
+                func_80075D10(&cmdBlock, 0, sp58, sp40, sp4C, &gDmaMesgQueue);
+                osRecvMesg(&gDmaMesgQueue, NULL, 1);
                 break;
             case 1:
                 PRINTF("CODE USED LBA %d\n");
@@ -69,12 +69,12 @@ void func_i11_800FC730(void) {
                 sp48--;
                 LeoLBAToByte(sp58, sp48, &sp44);
                 sp44 += sp40;
-                func_80075D10(&cmdBlock, 0, sp58, sp40, 1, &D_800DCA68);
-                osRecvMesg(&D_800DCA68, NULL, 1);
+                func_80075D10(&cmdBlock, 0, sp58, sp40, 1, &gDmaMesgQueue);
+                osRecvMesg(&gDmaMesgQueue, NULL, 1);
                 sp4C -= sp48;
                 sp48 += sp58;
-                func_80075D10(&cmdBlock, 0, sp48, sp44, sp4C, &D_800DCA68);
-                osRecvMesg(&D_800DCA68, NULL, 1);
+                func_80075D10(&cmdBlock, 0, sp48, sp44, sp4C, &gDmaMesgQueue);
+                osRecvMesg(&gDmaMesgQueue, NULL, 1);
                 break;
             case 2:
                 break;
