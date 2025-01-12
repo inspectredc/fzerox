@@ -956,7 +956,6 @@ Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 #ifdef NON_MATCHING
-extern f32 gSinTable[];
 Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_a0;
     s32 temp_t1;
@@ -2127,14 +2126,13 @@ extern s16 D_800CE4D0;
 extern s16 D_800CE4D4;
 extern s32 D_i2_80106F40;
 extern s16 D_80111840;
-#ifdef NON_MATCHING
 
 void func_i6_8011C404(void) {
     s32 state;
     s32 i;
-    OptionsInfo* option = gOptionsInfo;
+    OptionsInfo* option;
 
-    for (i = 0; i < 7; i++, option++) {
+    for (i = 0, option = gOptionsInfo; i < 7; i++, option++) {
         switch (option->row) {
             case OPTIONS_VS_COM:
                 if (D_800CE4D4 == 0) {
@@ -2174,9 +2172,6 @@ void func_i6_8011C404(void) {
         sOptionsSelectionState[i] = state;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011C404.s")
-#endif
 
 bool func_i6_8011C788(void);
 void func_i6_8011CBB4(void);
@@ -2201,7 +2196,7 @@ s32 func_i6_8011C6DC(void) {
                 break;
         }
     }
-    return GAMEMODE_8014;
+    return GAMEMODE_FLX_OPTIONS_MENU;
 }
 
 extern u16 gInputButtonPressed;
@@ -2301,10 +2296,10 @@ bool func_i6_8011C788(void) {
             if (updateSettings) {
                 if (sOptionsSelectionState[gOptionsCurrentRow] == 0) {
                     D_80111840 = 0;
-                    func_800BA28C(SOUNDMODE_SURROUND); // Option says stereo, but sets surround anyway?
+                    Audio_SetSoundMode(SOUNDMODE_SURROUND); // Option says stereo, but sets surround anyway?
                 } else {
                     D_80111840 = 1;
-                    func_800BA28C(SOUNDMODE_MONO);
+                    Audio_SetSoundMode(SOUNDMODE_MONO);
                 }
             }
             break;

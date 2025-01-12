@@ -936,6 +936,6 @@ bool AudioThread_ResetComplete(void);
 s32 AudioThread_ResetAudioHeap(s32 specId);
 void AudioThread_PreNMIInternal(void);
 
-AudioTask* func_800BB49C(void);
+AudioTask* Audio_SetupCreateTask(void);
 
 #endif

@@ -1,10 +1,15 @@
 #include "global.h"
 #include "audio.h"
+#include "assets/segment_16C8A0.h"
+
+f32 gSinTable[0x1000];
+Mtx D_800E1230;
+MtxF D_800E1270;
 
 extern OSContStatus D_800DCE70[];
 extern Controller gControllers[];
 
-Controller* func_80069ED0(void) {
+Controller* Controller_GetMouse(void) {
     s32 i;
 
     for (i = 0; i < MAXCONTROLLERS; i++) {
@@ -29,23 +34,9 @@ void func_80069F5C(u64* arg0) {
     var_s0 = &arg0[5624];
 
     for (var_s1 = 0; var_s1 < 0x6A00; var_s1 += 0x100, var_s0 += 80) {
-        func_80073E28((uintptr_t) SEGMENT_ROM_START(segment_2787F0) + var_s1 + sizeof(Gfx), var_s0, 0x100);
+        Dma_ClearRomCopy((uintptr_t) SEGMENT_ROM_START(segment_2787F0) + var_s1 + sizeof(Gfx), var_s0, 0x100);
     }
 }
-
-extern Vp D_80146A8;
-extern Vp D_80146B8;
-extern Vp D_80146C8;
-extern Vp D_80146D8;
-extern Vp D_80146E8;
-extern Vp D_80146F8;
-extern Vp D_8014708;
-extern Vp D_8014718;
-extern Vp D_8014728;
-extern Vp D_8014738;
-extern Vp D_8014748;
-extern Vp D_8014758;
-extern Vp D_8014768;
 
 extern ScissorBox D_800CD9C0;
 extern ScissorBox D_800CD9D0;
@@ -126,8 +117,6 @@ Gfx* func_8006A00C(Gfx* gfx, s32 arg1) {
 
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006A3AC.s")
 
-extern f32 gSinTable[0x1000];
-
 void Math_SinTableInit(void) {
     f64 denominator;
     f64 minusSquareX;
@@ -158,14 +147,14 @@ u32 gRandMask1 = 6789;
 s32 gRandSeed2 = 9876;
 u32 gRandMask2 = 54321;
 
-void func_8006A8F0(s32 arg0, s32 arg1) {
-    gRandSeed1 = arg0;
-    gRandMask1 = arg1;
+void Math_Rand1Init(s32 seed, s32 mask) {
+    gRandSeed1 = seed;
+    gRandMask1 = mask;
 }
 
-void func_8006A904(s32 arg0, s32 arg1) {
-    gRandSeed2 = arg0;
-    gRandMask2 = arg1;
+void Math_Rand2Init(s32 seed, s32 mask) {
+    gRandSeed2 = seed;
+    gRandMask2 = mask;
 }
 
 u32 Math_Rand1(void) {
@@ -199,10 +188,11 @@ s32 Math_Round(f32 num) {
     return num + 0.5f;
 }
 
+// Orthonormalise vectors, possibly camera/light related?
 s32 func_8006AA38(Mtx3F* mtx) {
     f32 temp_fs0;
 
-    temp_fs0 = SQ(mtx->xx) + SQ(mtx->yx) + SQ(mtx->zx);
+    temp_fs0 = SQ(mtx->x.x) + SQ(mtx->x.y) + SQ(mtx->x.z);
 
     if (temp_fs0 == 0.0f) {
         return -1;
@@ -210,15 +200,15 @@ s32 func_8006AA38(Mtx3F* mtx) {
 
     temp_fs0 = 1.0f / sqrtf(temp_fs0);
 
-    mtx->xx *= temp_fs0;
-    mtx->yx *= temp_fs0;
-    mtx->zx *= temp_fs0;
+    mtx->x.x *= temp_fs0;
+    mtx->x.y *= temp_fs0;
+    mtx->x.z *= temp_fs0;
 
-    mtx->xz = mtx->yy * mtx->zx - mtx->zy * mtx->yx;
-    mtx->yz = mtx->zy * mtx->xx - mtx->xy * mtx->zx;
-    mtx->zz = mtx->xy * mtx->yx - mtx->yy * mtx->xx;
+    mtx->z.x = mtx->y.y * mtx->x.z - mtx->y.z * mtx->x.y;
+    mtx->z.y = mtx->y.z * mtx->x.x - mtx->y.x * mtx->x.z;
+    mtx->z.z = mtx->y.x * mtx->x.y - mtx->y.y * mtx->x.x;
 
-    temp_fs0 = SQ(mtx->xz) + SQ(mtx->yz) + SQ(mtx->zz);
+    temp_fs0 = SQ(mtx->z.x) + SQ(mtx->z.y) + SQ(mtx->z.z);
 
     if (temp_fs0 == 0.0f) {
         return -1;
@@ -226,46 +216,47 @@ s32 func_8006AA38(Mtx3F* mtx) {
 
     temp_fs0 = 1.0f / sqrtf(temp_fs0);
 
-    mtx->xz *= temp_fs0;
-    mtx->yz *= temp_fs0;
-    mtx->zz *= temp_fs0;
+    mtx->z.x *= temp_fs0;
+    mtx->z.y *= temp_fs0;
+    mtx->z.z *= temp_fs0;
 
-    mtx->xy = mtx->yx * mtx->zz - mtx->zx * mtx->yz;
-    mtx->yy = mtx->zx * mtx->xz - mtx->xx * mtx->zz;
-    mtx->zy = mtx->xx * mtx->yz - mtx->yx * mtx->xz;
+    mtx->y.x = mtx->x.y * mtx->z.z - mtx->x.z * mtx->z.y;
+    mtx->y.y = mtx->x.z * mtx->z.x - mtx->x.x * mtx->z.z;
+    mtx->y.z = mtx->x.x * mtx->z.y - mtx->x.y * mtx->z.x;
     return 0;
 }
 
+// Orthonormalise vectors, possibly camera/light related?
 s32 func_8006AC10(Mtx3F* mtx) {
     f32 temp_fs0;
 
-    temp_fs0 = SQ(mtx->xy) + SQ(mtx->yy) + SQ(mtx->zy);
+    temp_fs0 = SQ(mtx->y.x) + SQ(mtx->y.y) + SQ(mtx->y.z);
     if (temp_fs0 == 0.0f) {
         return -1;
     }
     temp_fs0 = 1.0f / sqrtf(temp_fs0);
 
-    mtx->xy *= temp_fs0;
-    mtx->yy *= temp_fs0;
-    mtx->zy *= temp_fs0;
+    mtx->y.x *= temp_fs0;
+    mtx->y.y *= temp_fs0;
+    mtx->y.z *= temp_fs0;
 
-    mtx->xz = mtx->yy * mtx->zx - mtx->zy * mtx->yx;
-    mtx->yz = mtx->zy * mtx->xx - mtx->xy * mtx->zx;
-    mtx->zz = mtx->xy * mtx->yx - mtx->yy * mtx->xx;
+    mtx->z.x = mtx->y.y * mtx->x.z - mtx->y.z * mtx->x.y;
+    mtx->z.y = mtx->y.z * mtx->x.x - mtx->y.x * mtx->x.z;
+    mtx->z.z = mtx->y.x * mtx->x.y - mtx->y.y * mtx->x.x;
 
-    temp_fs0 = SQ(mtx->xz) + SQ(mtx->yz) + SQ(mtx->zz);
+    temp_fs0 = SQ(mtx->z.x) + SQ(mtx->z.y) + SQ(mtx->z.z);
     if (temp_fs0 == 0.0f) {
         return -1;
     }
     temp_fs0 = 1.0f / sqrtf(temp_fs0);
 
-    mtx->xz *= temp_fs0;
-    mtx->yz *= temp_fs0;
-    mtx->zz *= temp_fs0;
+    mtx->z.x *= temp_fs0;
+    mtx->z.y *= temp_fs0;
+    mtx->z.z *= temp_fs0;
 
-    mtx->xx = mtx->yz * mtx->zy - mtx->zz * mtx->yy;
-    mtx->yx = mtx->zz * mtx->xy - mtx->xz * mtx->zy;
-    mtx->zx = mtx->xz * mtx->yy - mtx->yz * mtx->xy;
+    mtx->x.x = mtx->z.y * mtx->y.z - mtx->z.z * mtx->y.y;
+    mtx->x.y = mtx->z.z * mtx->y.x - mtx->z.x * mtx->y.z;
+    mtx->x.z = mtx->z.x * mtx->y.y - mtx->z.y * mtx->y.x;
     return 0;
 }
 
@@ -318,59 +309,59 @@ void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* red, s32* green, s32* blue
     *blue = (s32) ((*blue * temp_lo) + temp_t0) / SQ(255);
 }
 
-void func_8006AFC8(Ambient* arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0->l.col[0] = arg0->l.colc[0] = arg1;
-    arg0->l.col[1] = arg0->l.colc[1] = arg2;
-    arg0->l.col[2] = arg0->l.colc[2] = arg3;
+void Lights_SetAmbient(Ambient* ambient, s32 r, s32 g, s32 b) {
+    ambient->l.col[0] = ambient->l.colc[0] = r;
+    ambient->l.col[1] = ambient->l.colc[1] = g;
+    ambient->l.col[2] = ambient->l.colc[2] = b;
 }
 
-void func_8006AFE4(Light* arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0->l.col[0] = arg0->l.colc[0] = arg1;
-    arg0->l.col[1] = arg0->l.colc[1] = arg2;
-    arg0->l.col[2] = arg0->l.colc[2] = arg3;
+void Lights_SetColor(Light* light, s32 r, s32 g, s32 b) {
+    light->l.col[0] = light->l.colc[0] = r;
+    light->l.col[1] = light->l.colc[1] = g;
+    light->l.col[2] = light->l.colc[2] = b;
 }
 
-void func_8006B000(Light* arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0->l.dir[0] = arg1;
-    arg0->l.dir[1] = arg2;
-    arg0->l.dir[2] = arg3;
+void Lights_SetDirection(Light* light, s32 x, s32 y, s32 z) {
+    light->l.dir[0] = x;
+    light->l.dir[1] = y;
+    light->l.dir[2] = z;
 }
 
-void func_8006B010(Lights1* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,
-                   s32 arg9) {
+void Lights_SetSource(Lights1* light, s32 ambientR, s32 ambientG, s32 ambientB, s32 r, s32 g, s32 b, s32 x, s32 y,
+                      s32 z) {
 
     // FAKE
-    ((s8*) arg0)[3] = ((s8*) arg0)[7] = ((s8*) arg0)[11] = ((s8*) arg0)[15] = ((s8*) arg0)[19] = 0;
-    // arg0->a.l.pad1 = arg0->a.l.pad2 = arg0->l[0].l.pad1 = arg0->l[0].l.pad2 = arg0->l[0].l.pad3 = 0;
+    ((s8*) light)[3] = ((s8*) light)[7] = ((s8*) light)[11] = ((s8*) light)[15] = ((s8*) light)[19] = 0;
+    // light->a.l.pad1 = light->a.l.pad2 = light->l[0].l.pad1 = light->l[0].l.pad2 = light->l[0].l.pad3 = 0;
 
-    func_8006AFC8(&arg0->a, arg1, arg2, arg3);
-    func_8006AFE4(&arg0->l[0], arg4, arg5, arg6);
-    func_8006B000(&arg0->l[0], arg7, arg8, arg9);
+    Lights_SetAmbient(&light->a, ambientR, ambientG, ambientB);
+    Lights_SetColor(&light->l[0], r, g, b);
+    Lights_SetDirection(&light->l[0], x, y, z);
 }
 
-void func_8006B07C(LookAt* arg0, MtxF* arg1) {
+void Light_SetLookAtSource(LookAt* lookAt, MtxF* mtx) {
 
     // FAKE
-    ((s8*) arg0)[3] = ((s8*) arg0)[7] = ((s8*) arg0)[19] = ((s8*) arg0)[23] = 0;
-    // arg0->l[0].l.pad1 = arg0->l[0].l.pad2 = arg0->l[1].l.pad1 = arg0->l[1].l.pad2 = 0;
+    ((s8*) lookAt)[3] = ((s8*) lookAt)[7] = ((s8*) lookAt)[19] = ((s8*) lookAt)[23] = 0;
+    // lookAt->l[0].l.pad1 = lookAt->l[0].l.pad2 = lookAt->l[1].l.pad1 = lookAt->l[1].l.pad2 = 0;
 
-    func_8006AFE4(&arg0->l[0], 0, 0, 0);
-    func_8006AFE4(&arg0->l[1], 0, 128, 0);
+    Lights_SetColor(&lookAt->l[0], 0, 0, 0);
+    Lights_SetColor(&lookAt->l[1], 0, 128, 0);
 
-    func_8006B000(&arg0->l[0], Math_Round(arg1->m[0][0] * 120.0f), Math_Round(arg1->m[1][0] * 120.0f),
-                  Math_Round(arg1->m[2][0] * 120.0f));
-    func_8006B000(&arg0->l[1], Math_Round(arg1->m[0][1] * 120.0f), Math_Round(arg1->m[1][1] * 120.0f),
-                  Math_Round(arg1->m[2][1] * 120.0f));
+    Lights_SetDirection(&lookAt->l[0], Math_Round(mtx->m[0][0] * 120.0f), Math_Round(mtx->m[1][0] * 120.0f),
+                        Math_Round(mtx->m[2][0] * 120.0f));
+    Lights_SetDirection(&lookAt->l[1], Math_Round(mtx->m[0][1] * 120.0f), Math_Round(mtx->m[1][1] * 120.0f),
+                        Math_Round(mtx->m[2][1] * 120.0f));
 }
 
-void func_8006B18C(LookAt* arg0, s32* arg1, MtxF* arg2, f32 arg3, f32 arg4, f32 arg5, s32 arg6, s32 arg7) {
+void func_8006B18C(LookAt* lookAt, s32* arg1, MtxF* arg2, f32 arg3, f32 arg4, f32 arg5, s32 arg6, s32 arg7) {
     f32 temp_fa0;
     f32 temp_fa1;
     f32 temp_ft4;
     f32 temp_ft5;
     f32 temp_fv1;
 
-    func_8006B07C(arg0, arg2);
+    Light_SetLookAtSource(lookAt, arg2);
     temp_fa1 = arg2->m[0][2] + arg3;
     temp_ft4 = arg2->m[1][2] + arg4;
     temp_ft5 = arg2->m[2][2] + arg5;
@@ -455,8 +446,6 @@ void Matrix_ToMtx(MtxF* src, Mtx* dest2) {
 }
 
 void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7, f32 arg8);
-extern Mtx D_800E1230;
-extern MtxF D_800E1270;
 
 void func_8006BC84(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,
                    f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD) {
@@ -607,9 +596,6 @@ void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
 
     Matrix_ToMtx(arg1, arg0);
 }
-
-extern Mtx D_800E1230;
-extern MtxF D_800E1270;
 
 void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7, f32 arg8) {
     f32 temp_fv1;
@@ -779,7 +765,66 @@ void func_8006CC98(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
     Matrix_ToMtx(arg1, arg0);
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006D03C.s")
+void func_8006D03C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,
+                   u16* arg9) {
+    s32 angle;
+    f32 sp58;
+    f32 temp_fv1;
+    f32 sp50;
+    f32 sp4C;
+    f32 sp48;
+    f32 sp44;
+
+    if (arg0 == NULL) {
+        arg0 = &D_800E1230;
+    }
+    if (arg1 == NULL) {
+        arg1 = &D_800E1270;
+    }
+
+    angle = Math_Round(arg2 * ((0x1000 / 360.0f) / 2));
+    sp58 = TAN(angle) * arg3;
+    arg6 *= (sp58 + sp58) / arg5;
+
+    sp4C = arg6 + sp58;
+    sp50 = arg6 - sp58;
+
+    angle = Math_Round(arg2 * ((0x1000 / 360.0f) / 2));
+
+    sp58 *= arg7 / arg5;
+    arg8 *= (sp58 + sp58) / arg7;
+
+    sp48 = arg8 + sp58;
+    sp44 = arg8 - sp58;
+
+    arg1->m[0][0] = (arg3 + arg3) * (1.0f / (sp4C - sp50));
+    arg1->m[2][0] = (sp4C + sp50) * (1.0f / (sp4C - sp50));
+
+    // Unused
+    sp58 *= arg7 / arg5;
+
+    arg1->m[1][1] = (arg3 + arg3) * (1.0f / (sp48 - sp44));
+    arg1->m[2][1] = (sp48 + sp44) * (1.0f / (sp48 - sp44));
+
+    arg1->m[3][2] = (arg3 + arg3) * arg4 * (1.0f / (arg3 - arg4));
+    arg1->m[2][2] = (arg3 + arg4) * (1.0f / (arg3 - arg4));
+
+    if ((arg3 + arg4) > 2.0f) {
+        u16 temp_v0;
+
+        *arg9 = temp_v0 = 131072.0f / (arg3 + arg4);
+        if (!temp_v0) {
+            *arg9 = 1;
+        }
+    } else {
+        *arg9 = -1;
+    }
+
+    arg1->m[0][1] = arg1->m[0][2] = arg1->m[0][3] = arg1->m[1][0] = arg1->m[1][2] = arg1->m[1][3] = arg1->m[3][0] =
+        arg1->m[3][1] = arg1->m[3][3] = 0.0f;
+    arg1->m[2][3] = -1.0f;
+    Matrix_ToMtx(arg1, arg0);
+}
 
 void func_8006D2E0(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8) {
     f32 temp_fa0;

@@ -2,6 +2,9 @@
 #include "libc/stdbool.h"
 #include "leo/leo_internal.h"
 
+OSPiHandle* LEOPiInfo;
+OSIoMesg LEOPiDmaParam;
+
 void (*LEO_cmd_tbl[])(void) = {
     NULL,          leoClr_queue, leoInquiry,    leoTest_unit_rdy, leoRezero,    leoRead,
     leoWrite,      leoSeek,      leoStart_stop, leoRd_capacity,   leoTranslate, leoMode_sel,

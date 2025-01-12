@@ -1,7 +1,7 @@
 #include "libultra/ultra64.h"
 #include "leo/leo_internal.h"
 
-extern u32 mseq_tbl[0x10];
+u32 mseq_tbl[0x10];
 
 const u32 rd_mseq_code[0x10] = {
     0x00010000, 0x00020200, 0x80030100, 0x82040000, 0xA8050000, 0xA0060600, 0x31760000, 0x00020300,

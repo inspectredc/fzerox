@@ -2,6 +2,11 @@
 #include "audio.h"
 #include "fzxthread.h"
 
+AudioSlowLoadBuffer gSlowLoads;
+UNUSED s32 D_800F8AB4;
+s32 D_800F8AB8;
+UNUSED s8 D_800F8ABC[0x30];
+
 DmaHandler sDmaHandler = osEPiStartDma;
 void* sUnusedHandler = NULL;
 
@@ -1373,8 +1378,6 @@ void AudioLoad_RelocateSample(TunedSample* tSample, u32 fontDataAddr, SampleBank
         }
     }
 }
-
-extern s32 D_800F8AB8;
 
 void AudioLoad_RelocateFontAndPreloadSamples(s32 fontId, u32 fontDataAddr, SampleBankRelocInfo* relocData,
                                              s32 isAsync) {

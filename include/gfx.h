@@ -33,6 +33,18 @@ typedef struct ScissorBox {
 #define VTX_T(x, y, z, s, t, cr, cg, cb, a) \
     { { x, y, z }, 0, { s, t }, { cr, cg, cb, a }, }
 
+#define SET_VTX(vtx, x, y, z, s, t, cr, cg, cb, a) \
+    (vtx)->v.ob[0] = ((x) & 0xFFFF);               \
+    (vtx)->v.ob[1] = ((y) & 0xFFFF);               \
+    (vtx)->v.ob[2] = ((z) & 0xFFFF);               \
+    (vtx)->v.flag = 0;                             \
+    (vtx)->v.tc[0] = ((s) & 0xFFFF);               \
+    (vtx)->v.tc[1] = ((t) & 0xFFFF);               \
+    (vtx)->v.cn[0] = cr;                           \
+    (vtx)->v.cn[1] = cg;                           \
+    (vtx)->v.cn[2] = cb;                           \
+    (vtx)->v.cn[3] = a;
+
 // TODO: Figure out where this is supposed to come from
 #define F3DEX_GBI_PL
 #ifdef F3DEX_GBI_PL

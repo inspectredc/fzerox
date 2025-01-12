@@ -1,11 +1,14 @@
 #include "global.h"
 #include "unk_leo.h"
 
-extern void* D_i1_8042A5E4;
-extern OSMesgQueue D_i1_8042A5E8;
+u16 D_i1_80428F70[LEO_LBA_MAX - (0x5A2 - 0x18) + 1];
+OSMesg D_i1_8042A5E4[1];
+OSMesgQueue D_i1_8042A5E8;
+u16 D_i1_8042A600;
+u16 D_i1_8042A602;
 
 void func_i1_80403D30(void) {
-    osCreateMesgQueue(&D_i1_8042A5E8, &D_i1_8042A5E4, 1);
+    osCreateMesgQueue(&D_i1_8042A5E8, D_i1_8042A5E4, ARRAY_COUNT(D_i1_8042A5E4));
 }
 
 extern OSMesg D_i1_80428610;
@@ -78,8 +81,8 @@ s32 func_i1_80403E6C(void) {
 
 extern s32 D_i1_80428600;
 extern s32 D_i1_80428644;
-extern u8 D_i1_80428654[2];
-extern u8 D_i1_80428658[4];
+extern char D_i1_80428654[2];
+extern char D_i1_80428658[4];
 
 void func_i1_8040B320(void);
 void func_i1_804040EC(void);
@@ -136,7 +139,6 @@ void func_i1_804040EC(void) {
 }
 
 extern OSMesgQueue D_i1_8042A5E8;
-extern s32 (*D_i1_8042A62C)(LEOCmd*, LEODiskID*, OSMesgQueue*);
 s32 func_i1_804065C0(void);
 
 s32 func_i1_80404108(LEODiskID* arg0) {
@@ -651,9 +653,6 @@ s32 func_i1_80405334(u16 arg0) {
 s32 func_i1_80405368(void) {
     return func_i1_80405264(0xFFFC);
 }
-
-extern u16 D_i1_8042A600;
-extern u16 D_i1_8042A602;
 
 s32 func_i1_80405398(u16 arg0) {
 

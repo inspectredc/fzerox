@@ -69,7 +69,7 @@ void func_i2_800FC77C(void) {
             func_i2_800FCD38(5, 40);
             func_i2_800FCB84(0, 5);
             break;
-        case GAMEMODE_8008:
+        case GAMEMODE_FLX_MACHINE_SELECT:
             if (gNumPlayers == 1) {
                 func_i2_800FCB84(0, 10);
                 break;
@@ -84,7 +84,7 @@ void func_i2_800FC77C(void) {
             func_i2_800FCB84(0, 1);
             break;
         case GAMEMODE_8013:
-        case GAMEMODE_8014:
+        case GAMEMODE_FLX_OPTIONS_MENU:
             if (D_800CD044 == 0x15) {
                 func_i2_800FCB84(0, 10);
                 break;
@@ -100,11 +100,11 @@ void func_i2_800FC77C(void) {
         case GAMEMODE_DEATH_RACE:
             func_i2_800FCB84(0, 5);
             break;
-        case GAMEMODE_4009:
+        case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_4012:
             func_i2_800FCB84(0, 6);
             break;
-        case GAMEMODE_6:
+        case GAMEMODE_RECORDS:
             if (D_800CD044 != 0x15) {
                 func_i2_800FCD4C(0, 1);
                 break;
@@ -141,14 +141,14 @@ void func_i2_800FC9BC(void) {
         case GAMEMODE_VS_4P:
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_DEATH_RACE:
-        case GAMEMODE_8008:
+        case GAMEMODE_FLX_MACHINE_SELECT:
             func_i2_800FCB84(1, 5);
             break;
         case GAMEMODE_D:
             func_i2_800FCB84(1, 10);
             break;
         case GAMEMODE_8013:
-        case GAMEMODE_8014:
+        case GAMEMODE_FLX_OPTIONS_MENU:
             if (D_800CD044 == 0x17) {
                 func_i2_800FCD38(9, 2);
                 func_i2_800FCB84(1, 9);
@@ -164,7 +164,7 @@ void func_i2_800FC9BC(void) {
             }
             func_i2_800FCB84(1, 7);
             break;
-        case GAMEMODE_6:
+        case GAMEMODE_RECORDS:
             if (D_800CD044 != 0x17) {
                 func_i2_800FCD4C(1, 1);
                 break;
@@ -873,8 +873,6 @@ Gfx* func_i2_800FDE84(Gfx* gfx, unk_8010D778* arg1) {
 
 extern GfxPool D_8024DCE0[2];
 
-#ifdef NON_MATCHING
-// Vtx temp issue
 void func_i2_800FE13C(unk_8010D778* arg0) {
     s32 pad[11];
     f32 sp104[4];
@@ -921,16 +919,7 @@ void func_i2_800FE13C(unk_8010D778* arg0) {
                     temp_v0 = Math_Round(spF4[m]);
                     temp_ft0 = spE4[m] * 32.0f;
                     temp_ft3 = spD4[m] * 32.0f;
-                    vtx->v.cn[3] = 0;
-                    vtx->v.cn[2] = 0;
-                    vtx->v.cn[1] = 0;
-                    vtx->v.cn[0] = 0;
-                    vtx->v.flag = 0;
-                    vtx->v.ob[2] = 0;
-                    vtx->v.ob[1] = temp_v0;
-                    vtx->v.ob[0] = temp_s4;
-                    vtx->v.tc[1] = temp_ft3;
-                    vtx->v.tc[0] = temp_ft0;
+                    SET_VTX(vtx, temp_s4, temp_v0, 0, temp_ft0, temp_ft3, 0, 0, 0, 0);
                     vtx++;
                 }
             }
@@ -950,9 +939,6 @@ void func_i2_800FE13C(unk_8010D778* arg0) {
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/98080/func_i2_800FE13C.s")
-#endif
 
 extern GfxPool* D_800DCCF0;
 bool func_i2_800FE6F0(unk_8010D778* arg0);
@@ -1128,7 +1114,7 @@ Gfx* func_i2_800FEB2C(Gfx* gfx, unk_8010D778* arg1) {
 }
 
 #ifdef NON_MATCHING
-// Vtx temp issue
+// vtx assign regalloc
 void func_i2_800FEED8(unk_8010D778* arg0) {
     s32 i;
     s32 j;
@@ -1176,16 +1162,7 @@ void func_i2_800FEED8(unk_8010D778* arg0) {
                     }
                     temp_ft0 = spA4[m] * 32.0f;
                     temp_ft3 = sp94[m] * 32.0f;
-                    vtx->v.cn[3] = 0;
-                    vtx->v.cn[2] = 0;
-                    vtx->v.cn[1] = 0;
-                    vtx->v.cn[0] = 0;
-                    vtx->v.flag = 0;
-                    vtx->v.ob[2] = 0;
-                    vtx->v.ob[1] = temp_v0;
-                    vtx->v.ob[0] = temp_s4;
-                    vtx->v.tc[1] = temp_ft3;
-                    vtx->v.tc[0] = temp_ft0;
+                    SET_VTX(vtx, temp_s4, temp_v0, 0, temp_ft0, temp_ft3, 0, 0, 0, 0);
                     vtx++;
                 }
             }

@@ -1,6 +1,6 @@
 #include "global.h"
 
-bool func_800CC220(void) {
+bool LeoDD_CheckPresence(void) {
     OSPiHandle* leoHandle = osLeoDiskInit();
     u32 status;
 

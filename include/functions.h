@@ -6,27 +6,27 @@
 #include "unk_structs.h"
 #include "PR/leo.h"
 
-void func_80068008(void* arg0);
-void func_80068A60(void* arg0);
+void Game_ThreadEntry(void* arg0);
+void Audio_ThreadEntry(void* arg0);
 
-void func_80068B20(void);
+void Game_Init(void);
 Gfx* func_80069698(Gfx*);
 void func_80069700(void);
-void func_80069820(void);
-void func_80069D44(void);
+void Controller_UpdateInputs(void);
+void Controller_Init(void);
 
 Gfx* func_8006A00C(Gfx* gfx, s32 arg1);
 void Math_SinTableInit(void);
-void func_8006A8F0(s32 arg0, s32 arg1);
-void func_8006A904(s32 arg0, s32 arg1);
+void Math_Rand1Init(s32 seed, s32 mask);
+void Math_Rand2Init(s32 seed, s32 mask);
 u32 Math_Rand1(void);
 u32 Math_Rand2(void);
 s32 Math_Round(f32 num);
 s32 func_8006AA38(Mtx3F* mtx);
 s32 func_8006AC10(Mtx3F* mtx);
 void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* red, s32* green, s32* blue);
-void func_8006B010(Lights1* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9);
-void func_8006B07C(LookAt* arg0, MtxF* arg1);
+void Lights_SetSource(Lights1* light, s32 ambientR, s32 ambientG, s32 ambientB, s32 r, s32 g, s32 b, s32 x, s32 y, s32 z);
+void Light_SetLookAtSource(LookAt* lookAt, MtxF* mtx);
 void func_8006BC84(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD);
 void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6, f32* arg7);
 void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7, f32 arg8);
@@ -42,7 +42,7 @@ void func_8006E478(void);
 void func_8006EC7C(void);
 void func_80071260(s32);
 void func_80073A04(void);
-void func_80073E28(void* romAddr, void* ramAddr, size_t size);
+void Dma_ClearRomCopy(void* romAddr, void* ramAddr, size_t size);
 void func_80073ED0(void* romAddr, void* ramAddr, size_t size);
 void func_80073FA0(u8* romAddr, u8* ramAddr, size_t size);
 void func_8007402C(s32 courseIndex);
@@ -57,7 +57,7 @@ void func_80074844(void);
 
 void func_8007515C(void);
 
-void func_800751C0(void);
+void LeoDD_ForceWritebackDCacheAll(void);
 void func_800751FC(char* arg0);
 void func_80075230(OSThread* arg0);
 OSMesg func_80075534(void);
@@ -67,16 +67,16 @@ s32 func_800760F8(void);
 s32 func_800761D4(void);
 s32 func_80076340(void);
 void func_800763A8(void);
-void func_800765CC(u8* romAddr, u8* ramAddr, size_t size);
-void func_80076658(u8* romAddr, u8* ramAddr, size_t size, void* bssAddr, size_t bssSize);
+void Dma_LoadAssets(u8* romAddr, u8* ramAddr, size_t size);
+void Dma_LoadOverlay(u8* romAddr, u8* ramAddr, size_t size, void* bssAddr, size_t bssSize);
 void func_800766F0(void);
 void func_80076804(void);
 void func_80076848(void);
 u8* func_800768F4(s32 arg0, size_t arg1);
-s32 func_80076BA0(s32 arg0, s32 arg1);
-s32 func_80076BB8(s32 arg0);
-s32 func_80076BD4(uintptr_t arg0);
-Gfx* func_80076C08(Gfx*);
+s32 Segment_SetAddress(s32 segment, s32 addr);
+s32 Segment_GetAddress(s32 segment);
+s32 Segment_SegmentedToVirtual(uintptr_t segmentedAddr);
+Gfx* Segment_SetTableAddresses(Gfx*);
 void func_80077318(void);
 void func_80077C9C(void);
 
@@ -133,16 +133,16 @@ Gfx* func_8007F090(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3);
 
 void func_8007F4E0(s32 venue, s32 skybox);
 
-void func_8007F904(void);
+void LeoDD_LoadFonts(void);
 void func_8007F9E0(void);
-void func_8007FC68(s32);
-void func_8007FCB8(void);
-void func_8007FCF4(void);
-void func_8007FD58(void);
-void func_8007FDD0(void);
-void func_8007FE48(void);
-void func_8007FE98(void);
-void func_8007FED4(void);
+void LeoDD_DrawErrorNumber(s32);
+void LeoDD_DrawReferUserGuide(void);
+void LeoDD_DrawCautionDoNotRemove(void);
+void LeoDD_DrawCautionDoNotRemovePleaseInsert(void);
+void LeoDD_DrawReinsertDisk(void);
+void LeoDD_DrawWrongDisk(void);
+void LeoDD_DrawIsDiskInserted(void);
+void LeoDD_DrawInsertInitialDiskUsed(void);
 
 void Fault_SetFrameBuffer(FrameBuffer* buffer, u16 width, u16 height);
 void Fault_Init(void);
@@ -204,9 +204,9 @@ s32 func_800AA6BC(u8*);
 
 void AudioThread_InitMesgQueues(void);
 void func_800B9E28(void);
-void func_800BA248(void);
-void func_800BA268(void);
-void func_800BA28C(u8 soundMode);
+void Audio_PreNMI(void);
+void Audio_Init(void);
+void Audio_SetSoundMode(u8 soundMode);
 void func_800BA2B4(u8);
 void func_800BA2D0(u8);
 void func_800BA2F0(u8, u8);
@@ -231,7 +231,7 @@ void func_800BB39C(s32);
 void func_800BB3C4(u8, f32);
 void func_800BB46C(void);
 
-bool func_800CC220(void);
+bool LeoDD_CheckPresence(void);
 
 s32 func_i1_8040428C(void);
 u16 func_i1_80403680(u16 arg0, u8* arg1, u8* arg2);
@@ -281,6 +281,7 @@ Gfx* func_i2_DrawMachineWeightSmall(Gfx* gfx, s32 left, s32 top, u32 weight);
 
 f32 func_i3_fabsf(f32 num);
 void func_i3_80116C4C(void);
+void func_i3_80116C74(Racer* arg0);
 void func_i3_8011AEA0(void);
 void func_i3_8011B520(void);
 Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex);

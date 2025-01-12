@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzxthread.h"
 #include "PR/leo.h"
 
 bool D_800CD510 = false;
@@ -25,7 +26,7 @@ void func_8007F500(void) {
     D_800E42CC = 0;
 }
 
-extern OSMesgQueue D_800DCAE0;
+extern OSMesgQueue gMainThreadMesgQueue;
 
 void func_8007F520(void) {
     u8 i;
@@ -35,8 +36,8 @@ void func_8007F520(void) {
     for (i = 0; i < 30; i++) {
     start:
         do {
-            osRecvMesg(&D_800DCAE0, &msg, OS_MESG_BLOCK);
-        } while (msg != (OSMesg) 0x1A);
+            osRecvMesg(&gMainThreadMesgQueue, &msg, OS_MESG_BLOCK);
+        } while (msg != (OSMesg) EVENT_MESG_VI);
 
         LeoResetClear();
         temp_v0 = func_80075534();
@@ -45,10 +46,10 @@ void func_8007F520(void) {
         }
     }
 
-    func_800751C0();
-    func_8007FCB8();
-    func_8007FC68(temp_v0);
-    func_800751C0();
+    LeoDD_ForceWritebackDCacheAll();
+    LeoDD_DrawReferUserGuide();
+    LeoDD_DrawErrorNumber(temp_v0);
+    LeoDD_ForceWritebackDCacheAll();
     while (true) {}
 }
 

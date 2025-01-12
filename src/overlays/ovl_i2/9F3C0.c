@@ -152,7 +152,7 @@ Gfx* func_i2_80103BE0(Gfx* gfx) {
     }
 
     gSPLoadUcodeL(gfx++, gspF3DFLX_Rej_fifo);
-    gfx = func_80076C08(gfx);
+    gfx = Segment_SetTableAddresses(gfx);
     gSPClipRatio(gfx++, FRUSTRATIO_3);
     gDPPipeSync(gfx++);
 

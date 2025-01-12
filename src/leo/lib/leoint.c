@@ -1,17 +1,21 @@
 #include "libultra/ultra64.h"
 #include "libc/stdbool.h"
 #include "leo/leo_internal.h"
+#include "macros.h"
 
 LEOError read_write_track(void);
 u32 leoChk_mecha_int(void);
 void leosetup_BM(void);
 u32 leochk_err_reg(void);
 
+OSMesg LEOc2ctrl_que_buf[1];
+OSMesgQueue LEOc2ctrl_que;
+
 void leointerrupt(void* arg) {
     u32 result;
     u32 tg_blocks;
 
-    osCreateMesgQueue(&LEOc2ctrl_que, (OSMesg) &LEOc2ctrl_que_buf, 1);
+    osCreateMesgQueue(&LEOc2ctrl_que, LEOc2ctrl_que_buf, ARRAY_COUNT(LEOc2ctrl_que_buf));
 
     while (true) {
         osStopThread(&LEOinterruptThread);
@@ -51,7 +55,7 @@ void leointerrupt(void* arg) {
     }
 }
 
-extern u8 LEOC2_Syndrome[2][0x3A0];
+extern u8 LEOC2_Syndrome[2][0xE8 * 4];
 
 LEOError read_write_track(void) {
     LEOError message;

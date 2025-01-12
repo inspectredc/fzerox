@@ -458,10 +458,10 @@ s32 func_i5_80116EEC(void) {
                 D_i5_801190C0 = 4;
                 if (gGameMode == GAMEMODE_800A) {
                     D_800CD3B8 = gCourseIndex;
-                    return GAMEMODE_8008;
+                    return GAMEMODE_FLX_MACHINE_SELECT;
                 }
                 D_800CD3BC = gCourseIndex;
-                return GAMEMODE_6;
+                return GAMEMODE_RECORDS;
             }
             break;
         case 5:
@@ -779,8 +779,6 @@ Gfx* func_i5_80118100(Gfx* gfx, unk_800E3A28* arg1) {
     gfx = func_8007DB28(gfx, 0);
     return func_80078EA0(gfx, sOKCompTexInfo, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
 }
-
-extern f32 gSinTable[];
 
 Gfx* func_i5_80118168(Gfx* gfx, unk_800E3A28* arg1) {
     f32 temp_fv0 = (SIN(arg1->unk_1C) + 1.0) / 2;

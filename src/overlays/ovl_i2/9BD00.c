@@ -416,7 +416,7 @@ s32 func_i2_80101118(s32 arg0) {
     return 0;
 }
 
-extern s32 D_800CCFC0;
+extern s32 gRamDDCompatible;
 void func_i2_80102350(unk_struct_40_2* arg0);
 
 s32 func_i2_801011FC(void) {
@@ -424,7 +424,7 @@ s32 func_i2_801011FC(void) {
     s32 i;
     unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
 
-    if (D_800CCFC0 == 0) {
+    if (!gRamDDCompatible) {
         return 3;
     }
     func_i2_80102350(&var[0].unk_19A0);
@@ -1535,18 +1535,18 @@ OSPiHandle* func_i2_80103698(void) {
     return &D_i2_801117C8;
 }
 
-extern OSMesgQueue D_800DCA68;
+extern OSMesgQueue gDmaMesgQueue;
 
 void func_i2_80103728(s32 arg0, size_t arg1, void* arg2, size_t arg3) {
     osWritebackDCache(arg2, arg3);
     osInvalDCache(osPhysicalToVirtual((uintptr_t) arg2), arg3);
     D_i2_801117B0.hdr.pri = 0;
-    D_i2_801117B0.hdr.retQueue = &D_800DCA68;
+    D_i2_801117B0.hdr.retQueue = &gDmaMesgQueue;
     D_i2_801117B0.dramAddr = arg2;
     D_i2_801117B0.devAddr = arg1 + 0x08000000;
     D_i2_801117B0.size = arg3;
     osEPiStartDma(D_i2_8011183C, &D_i2_801117B0, arg0);
-    osRecvMesg(&D_800DCA68, NULL, OS_MESG_BLOCK);
+    osRecvMesg(&gDmaMesgQueue, NULL, OS_MESG_BLOCK);
 }
 
 void func_i2_8010382C(unk_struct_40* arg0, s32 arg1);

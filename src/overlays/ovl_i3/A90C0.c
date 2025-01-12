@@ -125,36 +125,66 @@ u32 D_i3_8013E628[] = {
 };
 
 unk_8013E7A8 D_i3_8013E7A8[] = {
-    { 61, 4, { 15, 29, 255 }, { 1, 2, 11, 26, 3, 255, 255, 255 } },
-    { 63, 5, { 255, 255, 255 }, { 15, 3, 11, 26, 2, 255, 255, 255 } },
-    { 61, 3, { 255, 255, 255 }, { 1, 15, 16, 11, 26, 14, 255, 255 } },
-    { 61, 1, { 14, 255, 255 }, { 15, 29, 0, 2, 255, 255, 255, 255 } },
-    { 6, 3, { 8, 255, 255 }, { 22, 19, 17, 7, 18, 255, 255, 255 } },
-    { 7, 5, { 255, 255, 255 }, { 6, 28, 23, 255, 255, 255, 255, 255 } },
-    { 4, 1, { 255, 255, 255 }, { 5, 12, 23, 24, 13, 28, 27, 255 } },
-    { 4, 1, { 255, 255, 255 }, { 4, 19, 10, 17, 255, 255, 255, 255 } },
-    { 4, 2, { 4, 255, 255 }, { 20, 7, 10, 9, 18, 255, 255, 255 } },
-    { 6, 2, { 255, 255, 255 }, { 18, 19, 20, 4, 8, 17, 255, 255 } },
-    { 6, 3, { 255, 255, 255 }, { 7, 19, 17, 255, 255, 255, 255, 255 } },
-    { 6, 4, { 255, 255, 255 }, { 1, 16, 29, 14, 255, 255, 255, 255 } },
-    { 29, 4, { 255, 255, 255 }, { 25, 27, 13, 24, 28, 5, 6, 255 } },
-    { 5, 4, { 255, 255, 255 }, { 27, 21, 5, 255, 255, 255, 255, 255 } },
-    { 6, 4, { 3, 255, 255 }, { 26, 11, 29, 16, 255, 255, 255, 255 } },
-    { 61, 3, { 255, 255, 255 }, { 0, 16, 2, 1, 255, 255, 255, 0 } },
-    { 4, 0, { 255, 255, 255 }, { 2, 15, 14, 255, 255, 255, 255, 255 } },
-    { 29, 5, { 255, 255, 255 }, { 10, 4, 20, 22, 9, 255, 255, 255 } },
-    { 63, 1, { 22, 255, 255 }, { 9, 20, 255, 255, 255, 255, 255, 255 } },
-    { 7, 4, { 255, 255, 255 }, { 22, 9, 10, 8, 7, 255, 255, 255 } },
-    { 6, 1, { 255, 255, 255 }, { 8, 18, 22, 10, 7, 17, 9, 255 } },
-    { 6, 0, { 13, 27, 255 }, { 24, 28, 25, 255, 255, 255, 255, 255 } },
-    { 29, 0, { 18, 255, 255 }, { 19, 8, 20, 4, 255, 255, 255, 255 } },
-    { 4, 1, { 255, 255, 255 }, { 25, 27, 6, 24, 255, 255, 255, 255 } },
-    { 6, 5, { 255, 255, 255 }, { 23, 13, 21, 25, 12, 6, 255, 255 } },
-    { 36, 3, { 255, 255, 255 }, { 28, 21, 23, 24, 255, 255, 255, 255 } },
-    { 6, 2, { 255, 255, 255 }, { 16, 14, 1, 29, 255, 255, 255, 255 } },
-    { 4, 2, { 255, 255, 255 }, { 13, 21, 12, 5, 255, 255, 255, 255 } },
-    { 5, 3, { 255, 255, 255 }, { 5, 25, 21, 23, 12, 6, 255, 255 } },
-    { 5, 0, { 255, 255, 255 }, { 0, 3, 26, 11, 255, 255, 255, 255 } },
+    // CAPTAIN_FALCON
+    { 61, 4, { BLACK_SHADOW, BLOOD_FALCON, -1 }, { DR_STEWART, PICO, ROGER_BUSTER, DRAQ, SAMURAI_GOROH, -1, -1, -1 } },
+    // DR_STEWART
+    { 63, 5, { -1, -1, -1 }, { BLACK_SHADOW, SAMURAI_GOROH, ROGER_BUSTER, DRAQ, PICO, -1, -1, -1 } },
+    // PICO
+    { 61, 3, { -1, -1, -1 }, { DR_STEWART, BLACK_SHADOW, MICHAEL_CHAIN, ROGER_BUSTER, DRAQ, ANTONIO_GUSTER, -1, -1 } },
+    // SAMURAI_GOROH
+    { 61, 1, { ANTONIO_GUSTER, -1, -1 }, { BLACK_SHADOW, BLOOD_FALCON, CAPTAIN_FALCON, PICO, -1, -1, -1, -1 } },
+    // JODY_SUMMER
+    { 6, 3, { OCTOMAN, -1, -1 }, { ZODA, MRS_ARROW, JACK_LEVIN, BABA, SUPER_ARROW, -1, -1, -1 } },
+    // MIGHTY_GAZELLE
+    { 7, 5, { -1, -1, -1 }, { MR_EAD, THE_SKULL, DR_CLASH, -1, -1, -1, -1, -1 } },
+    // MR_EAD
+    { 4, 1, { -1, -1, -1 }, { MIGHTY_GAZELLE, JAMES_MCCLOUD, DR_CLASH, SILVER_NEELSEN, LEON, THE_SKULL, BILLY, -1 } },
+    // BABA
+    { 4, 1, { -1, -1, -1 }, { JODY_SUMMER, MRS_ARROW, KATE_ALEN, JACK_LEVIN, -1, -1, -1, -1 } },
+    // OCTOMAN
+    { 4, 2, { JODY_SUMMER, -1, -1 }, { JOHN_TANAKA, BABA, KATE_ALEN, GOMAR_AND_SHIOH, SUPER_ARROW, -1, -1, -1 } },
+    // GOMAR_AND_SHIOH
+    { 6, 2, { -1, -1, -1 }, { SUPER_ARROW, MRS_ARROW, JOHN_TANAKA, JODY_SUMMER, OCTOMAN, JACK_LEVIN, -1, -1 } },
+    // KATE_ALEN
+    { 6, 3, { -1, -1, -1 }, { BABA, MRS_ARROW, JACK_LEVIN, -1, -1, -1, -1, -1 } },
+    // ROGER_BUSTER
+    { 6, 4, { -1, -1, -1 }, { DR_STEWART, MICHAEL_CHAIN, BLOOD_FALCON, ANTONIO_GUSTER, -1, -1, -1, -1 } },
+    // JAMES_MCCLOUD
+    { 29, 4, { -1, -1, -1 }, { BIO_REX, BILLY, LEON, SILVER_NEELSEN, THE_SKULL, MIGHTY_GAZELLE, MR_EAD, -1 } },
+    // LEON
+    { 5, 4, { -1, -1, -1 }, { BILLY, BEASTMAN, MIGHTY_GAZELLE, -1, -1, -1, -1, -1 } },
+    // ANTONIO_GUSTER
+    { 6, 4, { SAMURAI_GOROH, -1, -1 }, { DRAQ, ROGER_BUSTER, BLOOD_FALCON, MICHAEL_CHAIN, -1, -1, -1, -1 } },
+    // BLACK_SHADOW
+    { 61, 3, { -1, -1, -1 }, { CAPTAIN_FALCON, MICHAEL_CHAIN, PICO, DR_STEWART, -1, -1, -1, CAPTAIN_FALCON } },
+    // MICHAEL_CHAIN
+    { 4, 0, { -1, -1, -1 }, { PICO, BLACK_SHADOW, ANTONIO_GUSTER, -1, -1, -1, -1, -1 } },
+    // JACK_LEVIN
+    { 29, 5, { -1, -1, -1 }, { KATE_ALEN, JODY_SUMMER, JOHN_TANAKA, ZODA, GOMAR_AND_SHIOH, -1, -1, -1 } },
+    // SUPER_ARROW
+    { 63, 1, { ZODA, -1, -1 }, { GOMAR_AND_SHIOH, JOHN_TANAKA, -1, -1, -1, -1, -1, -1 } },
+    // MRS_ARROW
+    { 7, 4, { -1, -1, -1 }, { ZODA, GOMAR_AND_SHIOH, KATE_ALEN, OCTOMAN, BABA, -1, -1, -1 } },
+    // JOHN_TANAKA
+    { 6, 1, { -1, -1, -1 }, { OCTOMAN, SUPER_ARROW, ZODA, KATE_ALEN, BABA, JACK_LEVIN, GOMAR_AND_SHIOH, -1 } },
+    // BEASTMAN
+    { 6, 0, { LEON, BILLY, -1 }, { SILVER_NEELSEN, THE_SKULL, BIO_REX, -1, -1, -1, -1, -1 } },
+    // ZODA
+    { 29, 0, { SUPER_ARROW, -1, -1 }, { MRS_ARROW, OCTOMAN, JOHN_TANAKA, JODY_SUMMER, -1, -1, -1, -1 } },
+    // DR_CLASH
+    { 4, 1, { -1, -1, -1 }, { BIO_REX, BILLY, MR_EAD, SILVER_NEELSEN, -1, -1, -1, -1 } },
+    // SILVER_NEELSEN
+    { 6, 5, { -1, -1, -1 }, { DR_CLASH, LEON, BEASTMAN, BIO_REX, JAMES_MCCLOUD, MR_EAD, -1, -1 } },
+    // BIO_REX
+    { 36, 3, { -1, -1, -1 }, { THE_SKULL, BEASTMAN, DR_CLASH, SILVER_NEELSEN, -1, -1, -1, -1 } },
+    // DRAQ
+    { 6, 2, { -1, -1, -1 }, { MICHAEL_CHAIN, ANTONIO_GUSTER, DR_STEWART, BLOOD_FALCON, -1, -1, -1, -1 } },
+    // BILLY
+    { 4, 2, { -1, -1, -1 }, { LEON, BEASTMAN, JAMES_MCCLOUD, MIGHTY_GAZELLE, -1, -1, -1, -1 } },
+    // THE_SKULL
+    { 5, 3, { -1, -1, -1 }, { MIGHTY_GAZELLE, BIO_REX, BEASTMAN, DR_CLASH, JAMES_MCCLOUD, MR_EAD, -1, -1 } },
+    // BLOOD_FALCON
+    { 5, 0, { -1, -1, -1 }, { CAPTAIN_FALCON, SAMURAI_GOROH, DRAQ, ROGER_BUSTER, -1, -1, -1, -1 } },
 };
 
 // fabsf
@@ -242,7 +272,7 @@ void func_i3_80115E74(void) {
                 case GAMEMODE_DEATH_RACE:
                     func_i3_80115E34(var_s0);
                     break;
-                case GAMEMODE_6:
+                case GAMEMODE_RECORDS:
                 case GAMEMODE_11:
                     var_s0->unk_34D = 1;
                     break;
@@ -546,7 +576,7 @@ void func_i3_80116C74(Racer* arg0) {
             }
         }
 
-        if (gGameMode == GAMEMODE_6) {
+        if (gGameMode == GAMEMODE_RECORDS) {
             arg0->unk_1A8 = 0.5f;
         }
 

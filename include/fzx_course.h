@@ -138,61 +138,60 @@ typedef enum Sign {
 } Sign;
 
 typedef enum Road {
-    ROAD_START_LINE,
-    ROAD_1,
-    ROAD_2,
-    ROAD_3,
-    ROAD_4,
-    ROAD_5,
-    ROAD_6,
-    ROAD_7,
-    ROAD_MAX,
+    /* 0 */ ROAD_START_LINE,
+    /* 1 */ ROAD_1,
+    /* 2 */ ROAD_2,
+    /* 3 */ ROAD_3,
+    /* 4 */ ROAD_4,
+    /* 5 */ ROAD_5,
+    /* 6 */ ROAD_6,
+    /* 7 */ ROAD_MAX,
 } Road;
 
 typedef enum WalledRoad {
-    WALLED_ROAD_0,
-    WALLED_ROAD_1,
-    WALLED_ROAD_2,
-    WALLED_ROAD_MAX,
+    /* 0 */ WALLED_ROAD_0,
+    /* 1 */ WALLED_ROAD_1,
+    /* 2 */ WALLED_ROAD_2,
+    /* 3 */ WALLED_ROAD_MAX,
 } WalledRoad;
 
 typedef enum Pipe {
-    PIPE_0,
-    PIPE_1,
-    PIPE_2,
-    PIPE_3,
-    PIPE_MAX,
+    /* 0 */ PIPE_0,
+    /* 1 */ PIPE_1,
+    /* 2 */ PIPE_2,
+    /* 3 */ PIPE_3,
+    /* 4 */ PIPE_MAX,
 } Pipe;
 
 typedef enum Cylinder {
-    CYLINDER_0,
-    CYLINDER_1,
-    CYLINDER_2,
-    CYLINDER_3,
-    CYLINDER_MAX,
+    /* 0 */ CYLINDER_0,
+    /* 1 */ CYLINDER_1,
+    /* 2 */ CYLINDER_2,
+    /* 3 */ CYLINDER_3,
+    /* 4 */ CYLINDER_MAX,
 } Cylinder;
 
 typedef enum HalfPipe {
-    HALF_PIPE_0,
-    HALF_PIPE_1,
-    HALF_PIPE_2,
-    HALF_PIPE_3,
-    HALF_PIPE_MAX,
+    /* 0 */ HALF_PIPE_0,
+    /* 1 */ HALF_PIPE_1,
+    /* 2 */ HALF_PIPE_2,
+    /* 3 */ HALF_PIPE_3,
+    /* 4 */ HALF_PIPE_MAX,
 } HalfPipe;
 
 typedef enum Tunnel {
-    TUNNEL_0,
-    TUNNEL_1,
-    TUNNEL_2,
-    TUNNEL_3,
-    TUNNEL_MAX,
+    /* 0 */ TUNNEL_0,
+    /* 1 */ TUNNEL_1,
+    /* 2 */ TUNNEL_2,
+    /* 3 */ TUNNEL_3,
+    /* 4 */ TUNNEL_MAX,
 } Tunnel;
 
 typedef enum BorderlessRoad {
-    BORDERLESS_ROAD_0,
-    BORDERLESS_ROAD_1,
-    BORDERLESS_ROAD_2,
-    BORDERLESS_ROAD_MAX,
+    /* 0 */ BORDERLESS_ROAD_0,
+    /* 1 */ BORDERLESS_ROAD_1,
+    /* 2 */ BORDERLESS_ROAD_2,
+    /* 3 */ BORDERLESS_ROAD_MAX,
 } BorderlessRoad;
 
 #define TRACK_TYPE_NONE 0x3F
@@ -208,6 +207,8 @@ typedef enum BorderlessRoad {
 #define TRACK_SHAPE_BORDERLESS_ROAD 0x1C0
 
 #define TRACK_SHAPE_MASK 0x1C0
+
+#define TRACK_SHAPE_INDEX(shape) ((shape) >> 6)
 
 #define TRACK_JOIN_PREVIOUS 0x200
 #define TRACK_JOIN_NEXT 0x400

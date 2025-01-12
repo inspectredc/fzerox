@@ -3,9 +3,83 @@
 #include "fzx_game.h"
 #include "fzxthread.h"
 
-extern s32 D_800DCD04;
-extern s32 D_800DCD08;
-extern s32 D_800DCD0C;
+GfxPool* D_800DCCF0;
+OSTask* sGfxTask;
+Gfx* gMasterDisp;
+s32 D_800DCCFC;
+s32 D_800DCD00;
+s32 D_800DCD04;
+s32 D_800DCD08;
+s32 D_800DCD0C;
+OSMesg D_800DCD10;
+u32 D_800DCD14;
+u32 D_800DCD18;
+u32 D_800DCD1C;
+u32 D_800DCD20;
+u32 D_800DCD24;
+u32 D_800DCD28;
+u32 D_800DCD2C;
+u32 D_800DCD30;
+u32 D_800DCD34;
+u32 D_800DCD38;
+u32 D_800DCD3C;
+u32 D_800DCD40;
+u32 D_800DCD44;
+u32 D_800DCD48;
+u32 D_800DCD4C;
+u32 D_800DCD50;
+u32 D_800DCD54;
+u32 D_800DCD58;
+u32 D_800DCD5C;
+u32 D_800DCD60;
+u32 D_800DCD64;
+u32 D_800DCD68;
+UNUSED u32 D_800DCD6C;
+UNUSED u32 D_800DCD70;
+u32 D_800DCD74;
+u32 D_800DCD78;
+u32 D_800DCD7C;
+u32 D_800DCD80;
+u32 D_800DCD84;
+u32 D_800DCD88;
+u32 D_800DCD8C;
+u32 D_800DCD90;
+u32 D_800DCD94;
+u32 D_800DCD98;
+u32 D_800DCD9C;
+u32 D_800DCDA0;
+u32 D_800DCDA4;
+u32 D_800DCDA8;
+u32 D_800DCDAC;
+u32 D_800DCDB0;
+u32 D_800DCDB4;
+u32 D_800DCDB8;
+UNUSED u32 D_800DCDBC;
+UNUSED u32 D_800DCDC0;
+u32 D_800DCDC4;
+u32 D_800DCDC8;
+u32 D_800DCDCC;
+u32 D_800DCDD0;
+u32 D_800DCDD4;
+u32 D_800DCDD8;
+s32 D_800DCDDC;
+s32 D_800DCDE0;
+s32 D_800DCDE4;
+s32 D_800DCDE8;
+u32 D_800DCDEC;
+u32 D_800DCDF0;
+u32 D_800DCDF4;
+u32 D_800DCDF8;
+u32 D_800DCDFC;
+u32 D_800DCE00;
+u32 D_800DCE04;
+u32 D_800DCE08;
+u32 D_800DCE0C;
+u32 D_800DCE10;
+u32 D_800DCE14;
+u32 D_800DCE18;
+u32 D_800DCE1C;
+u32 D_800DCE20;
 
 void func_80067AE0(void) {
     s32 temp_t7;
@@ -16,39 +90,35 @@ void func_80067AE0(void) {
     D_800DCD0C = temp_t7;
 }
 
-void func_80076B80(s32, void*);
-extern GfxPool* D_800DCCF0;
-extern OSTask* D_800DCCF4;
-extern s32 D_800DCCFC;
-extern s32 D_800DCD00;
+void Segment_SetPhysicalAddress(s32, void*);
+
 extern GfxPool D_8024DCE0[2];
 extern OSTask D_802A6AC0[];
-extern Gfx* gMasterDisp;
 
-void func_80067B14(void) {
+void Gfx_InitBuffer(void) {
 
     D_800DCD00 ^= 1;
     D_800DCCFC ^= 1;
-    D_800DCCF4 = &D_802A6AC0[D_800DCCFC];
+    sGfxTask = &D_802A6AC0[D_800DCCFC];
     D_800DCCF0 = &D_8024DCE0[D_800DCCFC];
-    func_80076B80(1, D_800DCCF0);
+    Segment_SetPhysicalAddress(1, D_800DCCF0);
     gMasterDisp = D_800DCCF0->gfxBuffer;
 }
 
-void func_80067BA8(void) {
-    gMasterDisp = func_80076C08(gMasterDisp);
+void Gfx_LoadSegments(void) {
+    gMasterDisp = Segment_SetTableAddresses(gMasterDisp);
 }
 
-void func_80067BD0(void) {
+void Gfx_FullSync(void) {
     gDPFullSync(gMasterDisp++);
     gSPEndDisplayList(gMasterDisp++);
 }
 
-extern OSMesgQueue D_800DCAE0;
+extern OSMesgQueue gMainThreadMesgQueue;
 extern s32 gGameMode;
-extern OSTask* D_800DCCC0;
+extern OSTask* gCurGfxTask;
 
-void func_80067C0C(OSTask* task) {
+void Gfx_SetTask(OSTask* task) {
 
     task->t.type = M_GFXTASK;
     task->t.flags = OS_TASK_LOADABLE;
@@ -56,15 +126,15 @@ void func_80067C0C(OSTask* task) {
     task->t.ucode_boot_size = (uintptr_t) rspbootTextEnd - (uintptr_t) rspbootTextStart;
 
     switch (gGameMode & GAMEMODE_F3D_MASK) {
-        case 0x0:
+        case MODE_F3DEX:
             task->t.ucode = (u64*) gspF3DEX_fifoTextStart;
             task->t.ucode_data = (u64*) gspF3DEX_fifoDataStart;
             break;
-        case 0x4000:
+        case MODE_F3DLX:
             task->t.ucode = (u64*) gspF3DLX_Rej_fifoTextStart;
             task->t.ucode_data = (u64*) gspF3DLX_Rej_fifoDataStart;
             break;
-        case 0x8000:
+        case MODE_F3DFLX:
             task->t.ucode = (u64*) gspF3DFLX_Rej_fifoTextStart;
             task->t.ucode_data = (u64*) gspF3DFLX_Rej_fifoDataStart;
             break;
@@ -80,14 +150,13 @@ void func_80067C0C(OSTask* task) {
     task->t.data_size = (size_t) (gMasterDisp - D_800DCCF0->gfxBuffer) * sizeof(Gfx);
     task->t.yield_data_ptr = (u64*) gOSYieldData;
     task->t.yield_data_size = OS_YIELD_DATA_SIZE;
-    D_800DCCC0 = task;
-    osSendMesg(&D_800DCAE0, (OSMesg) 0x15, OS_MESG_BLOCK);
+    gCurGfxTask = task;
+    osSendMesg(&gMainThreadMesgQueue, (OSMesg) EVENT_MESG_GFX_TASK_SET, OS_MESG_BLOCK);
 }
 
 extern OSMesgQueue D_800DCAB0;
 extern OSMesgQueue D_800DCAC8;
 extern FrameBuffer* D_800DCCD0[];
-extern void* D_800DCD10;
 
 void func_800690FC(void);
 void func_i2_800FD344(void);
@@ -95,14 +164,15 @@ void func_i2_800FD344(void);
 void func_80067D64(void) {
     MQ_WAIT_FOR_MESG(&D_800DCAB0, &D_800DCD10);
     func_800B9E28();
-    func_80067B14();
+    Gfx_InitBuffer();
     func_800690FC();
-    func_80067BA8();
+    Gfx_LoadSegments();
     gMasterDisp = func_80069698(gMasterDisp);
-    func_80067BD0();
+    Gfx_FullSync();
     MQ_WAIT_FOR_MESG(&D_800DCAC8, &D_800DCD10);
 
-    while (osDpGetStatus() & 0x170) {}
+    while (osDpGetStatus() &
+           (DPC_STATUS_DMA_BUSY | DPC_STATUS_CMD_BUSY | DPC_STATUS_PIPE_BUSY | DPC_STATUS_TMEM_BUSY)) {}
 
     func_80077C9C();
     func_i2_800FD344();
@@ -110,19 +180,19 @@ void func_80067D64(void) {
 
     while (osViGetCurrentFramebuffer() != D_800DCCD0[D_800DCD00]) {}
 
-    func_80067C0C(D_800DCCF4);
+    Gfx_SetTask(sGfxTask);
 }
 
 void func_80067E98(void) {
     s32 retries = 100000;
 
     MQ_WAIT_FOR_MESG(&D_800DCAB0, &D_800DCD10);
-    func_80067B14();
+    Gfx_InitBuffer();
     func_800690FC();
     func_80067AE0();
-    func_80067BA8();
+    Gfx_LoadSegments();
     gMasterDisp = func_80069698(gMasterDisp);
-    func_80067BD0();
+    Gfx_FullSync();
     func_800B9E28();
     MQ_WAIT_FOR_MESG(&D_800DCAC8, &D_800DCD10);
     func_i2_800FD344();
@@ -135,88 +205,27 @@ void func_80067E98(void) {
         retries--;
     }
 
-    func_80067C0C(D_800DCCF4);
+    Gfx_SetTask(sGfxTask);
 }
 
 u32 gGameFrameCount = 0;
 s16 D_800CCFE4 = 2;
 s16 D_800CCFE8 = 2;
 
-#ifdef NON_MATCHING
-extern u32 D_800DCD14;
-extern u32 D_800DCD18;
-extern u32 D_800DCD1C;
-extern u32 D_800DCD20;
-extern u32 D_800DCD24;
-extern u32 D_800DCD28;
-extern u32 D_800DCD2C;
-extern u32 D_800DCD30;
-extern u32 D_800DCD34;
-extern u32 D_800DCD38;
-extern u32 D_800DCD3C;
-extern u32 D_800DCD40;
-extern u32 D_800DCD44;
-extern u32 D_800DCD48;
-extern u32 D_800DCD4C;
-extern u32 D_800DCD50;
-extern u32 D_800DCD54;
-extern u32 D_800DCD58;
-extern u32 D_800DCD5C;
-extern u32 D_800DCD60;
-extern u32 D_800DCD64;
-extern u32 D_800DCD68;
-extern u32 D_800DCD74;
-extern u32 D_800DCD78;
-extern u32 D_800DCD7C;
-extern u32 D_800DCD80;
-extern u32 D_800DCD84;
-extern u32 D_800DCD88;
-extern u32 D_800DCD8C;
-extern u32 D_800DCD90;
-extern u32 D_800DCE04;
-extern u32 D_800DCE08;
-extern u32 D_800DCE0C;
-extern u32 D_800DCE10;
-extern u32 D_800DCE14;
-extern u32 D_800DCE18;
-extern u32 D_800DCE1C;
-extern u32 D_800DCE20;
-extern u32 D_800DCD94;
-extern u32 D_800DCD98;
-extern u32 D_800DCD9C;
-extern u32 D_800DCDA0;
-
-extern u32 D_800DCDA4;
-extern u32 D_800DCDA8;
-extern u32 D_800DCDAC;
-extern u32 D_800DCDB0;
-extern u32 D_800DCDB4;
-extern u32 D_800DCDB8;
-extern u32 D_800DCDC4;
-extern u32 D_800DCDC8;
-extern u32 D_800DCDCC;
-extern u32 D_800DCDD0;
-extern u32 D_800DCDD4;
-extern u32 D_800DCDD8;
-extern u32 D_800DCDEC;
-extern u32 D_800DCDF0;
-extern u32 D_800DCDF4;
-extern u32 D_800DCDF8;
-extern u32 D_800DCDFC;
-extern u32 D_800DCE00;
-
-extern s32 D_800CCFC0;
+extern bool gRamDDCompatible;
 extern s16 D_80111840;
 
 extern unk_80225800 D_80225800;
 
-void func_80068008(void* arg0) {
+void Game_ThreadEntry(void* entry) {
     s32 startTime;
-    OSMesg sp80;
+    OSMesg msgBuf[1];
 
     startTime = osGetTime();
     func_800BB46C();
-    osRecvMesg(&D_800DCAB0, &sp80, OS_MESG_BLOCK);
+    osRecvMesg(&D_800DCAB0, msgBuf, OS_MESG_BLOCK);
+
+    // Segment Start and End Pairs
     D_800DCD14 = osVirtualToPhysical(SEGMENT_VRAM_START(main));
     D_800DCD18 = osVirtualToPhysical(SEGMENT_VRAM_END(main));
     D_800DCD1C = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i2));
@@ -258,7 +267,6 @@ void func_80068008(void* arg0) {
     D_800DCD9C = osVirtualToPhysical(SEGMENT_VRAM_START(unk_bss_segment));
     D_800DCDA0 = osVirtualToPhysical(SEGMENT_VRAM_END(unk_bss_segment));
 
-    // Start and End Pairs
     D_800DCDA4 = D_800DCE08;
     D_800DCDA8 = D_800DCDA4 + (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0);
 
@@ -274,7 +282,7 @@ void func_80068008(void* arg0) {
     D_800DCDCC = D_800DCD28;
     D_800DCDD0 = D_800DCDCC + (size_t) SEGMENT_VRAM_SIZE(segment_1E23F0);
 
-    D_800DCDD4 = D_800DCDC4;
+    D_800DCDD4 = D_800DCDB8;
     D_800DCDD8 = D_800DCDD4 + (size_t) SEGMENT_DATA_SIZE_CONST(segment_22B0A0);
 
     D_800DCDFC = D_800DCDB0;
@@ -289,51 +297,62 @@ void func_80068008(void* arg0) {
     D_800DCD64 = osVirtualToPhysical(SEGMENT_VRAM_START(leo));
     D_800DCD68 = osVirtualToPhysical(SEGMENT_VRAM_END(leo));
 
-    func_80076BA0(0, 0);
-    func_80076BA0(2, D_800DCD9C);
-    func_80076BA0(8, D_800DCDA4);
-    func_80076BA0(3, D_800DCDAC);
+    // Setup memory
+    Segment_SetAddress(0, 0);
+    Segment_SetAddress(2, D_800DCD9C);
+    Segment_SetAddress(8, D_800DCDA4);
+    Segment_SetAddress(3, D_800DCDAC);
     func_80076804();
     func_80076848();
 
-    osInvalICache(SEGMENT_TEXT_START(ovl_i2), SEGMENT_TEXT_SIZE(ovl_i2));
+    // clang-format off
+    osInvalICache(SEGMENT_TEXT_START(ovl_i2), SEGMENT_TEXT_SIZE(ovl_i2)); \
     osInvalDCache(SEGMENT_DATA_START(ovl_i2), SEGMENT_DATA_END(ovl_i2) - SEGMENT_DATA_START(ovl_i2));
-    func_80076658(SEGMENT_ROM_START(ovl_i2), SEGMENT_VRAM_START(ovl_i2), SEGMENT_ROM_SIZE(ovl_i2),
-                  SEGMENT_BSS_START(ovl_i2), SEGMENT_BSS_SIZE(ovl_i2));
+    // clang-format on
+    Dma_LoadOverlay(SEGMENT_ROM_START(ovl_i2), SEGMENT_VRAM_START(ovl_i2), SEGMENT_ROM_SIZE(ovl_i2),
+                    SEGMENT_BSS_START(ovl_i2), SEGMENT_BSS_SIZE(ovl_i2));
 
-    osInvalICache(SEGMENT_TEXT_START(ovl_i10), SEGMENT_TEXT_SIZE(ovl_i10));
+    // clang-format off
+    osInvalICache(SEGMENT_TEXT_START(ovl_i10), SEGMENT_TEXT_SIZE(ovl_i10)); \
     osInvalDCache(SEGMENT_DATA_START(ovl_i10), SEGMENT_DATA_SIZE(ovl_i10));
-    func_80076658(SEGMENT_ROM_START(ovl_i10), SEGMENT_VRAM_START(ovl_i10), SEGMENT_ROM_SIZE(ovl_i10),
-                  SEGMENT_BSS_START(ovl_i10), SEGMENT_BSS_SIZE(ovl_i10));
+    // clang-format on
+    Dma_LoadOverlay(SEGMENT_ROM_START(ovl_i10), SEGMENT_VRAM_START(ovl_i10), SEGMENT_ROM_SIZE(ovl_i10),
+                    SEGMENT_BSS_START(ovl_i10), SEGMENT_BSS_SIZE(ovl_i10));
 
     osInvalDCache(osPhysicalToVirtual(D_800DCDA4), SEGMENT_DATA_SIZE_CONST(segment_16C8A0));
-    func_800765CC(SEGMENT_ROM_START(segment_16C8A0),
-                  (uintptr_t) osPhysicalToVirtual(D_800DCDA4) + (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0),
-                  SEGMENT_ROM_SIZE(segment_16C8A0));
-    // mio decode
+    Dma_LoadAssets(SEGMENT_ROM_START(segment_16C8A0),
+                   (uintptr_t) osPhysicalToVirtual(D_800DCDA4) + (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0),
+                   SEGMENT_ROM_SIZE(segment_16C8A0));
+
     mio0Decode((uintptr_t) osPhysicalToVirtual(D_800DCDA4) + (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0),
                osPhysicalToVirtual(D_800DCDA4));
-    func_800765CC(SEGMENT_ROM_START(segment_17B1E0), osPhysicalToVirtual(D_800DCDAC), SEGMENT_ROM_SIZE(segment_17B1E0));
-    func_800765CC(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4), SEGMENT_ROM_SIZE(segment_17B960));
+    Dma_LoadAssets(SEGMENT_ROM_START(segment_17B1E0), osPhysicalToVirtual(D_800DCDAC),
+                   SEGMENT_ROM_SIZE(segment_17B1E0));
+    Dma_LoadAssets(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
+                   SEGMENT_ROM_SIZE(segment_17B960));
+
+    // FrameBuffer Indexes
     D_800DCCFC = 0;
     D_800DCD00 = 1;
     D_800DCD08 = 2;
     D_800DCD04 = 0;
     D_800DCD0C = 1;
+
+    // General Initialisation
     Math_SinTableInit();
-    if (D_800CCFC0 != 0) {
+    if (gRamDDCompatible) {
         func_800742D0();
     }
     func_800742FC();
     func_8006C378(&D_80225800.unk_000, 0, 1.0f, 0, 0, 0, 0.0f, 0.0f, 0.0f);
 
-    func_8006A8F0(osGetTime(), osGetTime() + osGetTime());
-    func_80069D44();
+    Math_Rand1Init(osGetTime(), osGetTime() + osGetTime());
+    Controller_Init();
     func_i10_80115DF0();
     if (D_80111840 == 0) {
-        func_800BA28C(SOUNDMODE_SURROUND);
+        Audio_SetSoundMode(SOUNDMODE_SURROUND);
     } else {
-        func_800BA28C(SOUNDMODE_MONO);
+        Audio_SetSoundMode(SOUNDMODE_MONO);
     }
 
     while (true) {
@@ -342,18 +361,18 @@ void func_80068008(void* arg0) {
         }
     }
 
-    func_8006A904(osGetTime() + osGetTime(), osGetTime());
+    Math_Rand2Init(osGetTime() + osGetTime(), osGetTime());
     osSetTime(0);
     osViSwapBuffer(D_800DCCD0[0]);
-    func_80067B14();
+    Gfx_InitBuffer();
     func_80067AE0();
 
     gMoveWd(gMasterDisp++, 6, 0, 0);
     gDPFullSync(gMasterDisp++);
     gSPEndDisplayList(gMasterDisp++);
 
-    func_80067C0C(D_800DCCF4);
-    func_80068B20();
+    Gfx_SetTask(sGfxTask);
+    Game_Init();
     gGameFrameCount = 0;
 
     while (true) {
@@ -370,6 +389,7 @@ void func_80068008(void* arg0) {
             }
         }
 
+        // Game main loops
         switch (D_800CCFE4) {
             case 2:
                 func_80067D64();
@@ -381,6 +401,3 @@ void func_80068008(void* arg0) {
         gGameFrameCount++;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1AE0/func_80068008.s")
-#endif

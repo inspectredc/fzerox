@@ -38,38 +38,38 @@ u8* D_800CD350[] = {
 void func_80076490(void) {
 }
 
-extern OSMesgQueue D_800DCA68;
+extern OSMesgQueue gDmaMesgQueue;
 extern OSIoMesg D_800DCCA8;
-extern OSPiHandle* D_800DCCDC;
+extern OSPiHandle* gCartRomHandle;
 
-void func_80076498(u32 romAddr, u32 ramAddr, size_t size) {
+void Dma_RomCopy(u32 romAddr, u32 ramAddr, size_t size) {
     OSMesg msgBuf[7];
 
     D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
-    D_800DCCA8.hdr.retQueue = &D_800DCA68;
+    D_800DCCA8.hdr.retQueue = &gDmaMesgQueue;
     D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
     D_800DCCA8.devAddr = romAddr;
     D_800DCCA8.size = size;
-    D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
-    osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
-    MQ_WAIT_FOR_MESG(&D_800DCA68, msgBuf);
+    gCartRomHandle->transferInfo.cmdType = LEO_CMD_TYPE_2;
+    osEPiStartDma(gCartRomHandle, &D_800DCCA8, OS_READ);
+    MQ_WAIT_FOR_MESG(&gDmaMesgQueue, msgBuf);
 }
 
-void func_80076528(u32 romAddr, u32 ramAddr, size_t size, void* bssAddr, size_t bssSize) {
+void Dma_RomCopyWithBssInit(u32 romAddr, u32 ramAddr, size_t size, void* bssAddr, size_t bssSize) {
     OSMesg msgBuf[7];
 
     D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
-    D_800DCCA8.hdr.retQueue = &D_800DCA68;
+    D_800DCCA8.hdr.retQueue = &gDmaMesgQueue;
     D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
     D_800DCCA8.devAddr = romAddr;
     D_800DCCA8.size = size;
-    D_800DCCDC->transferInfo.cmdType = LEO_CMD_TYPE_2;
-    osEPiStartDma(D_800DCCDC, &D_800DCCA8, OS_READ);
+    gCartRomHandle->transferInfo.cmdType = LEO_CMD_TYPE_2;
+    osEPiStartDma(gCartRomHandle, &D_800DCCA8, OS_READ);
     bzero(bssAddr, bssSize);
-    MQ_WAIT_FOR_MESG(&D_800DCA68, msgBuf);
+    MQ_WAIT_FOR_MESG(&gDmaMesgQueue, msgBuf);
 }
 
-void func_800765CC(u8* romAddr, u8* ramAddr, size_t size) {
+void Dma_LoadAssets(u8* romAddr, u8* ramAddr, size_t size) {
     s32 remainder;
     s32 i;
     s32 numBlocks;
@@ -77,18 +77,18 @@ void func_800765CC(u8* romAddr, u8* ramAddr, size_t size) {
     numBlocks = size / 1024;
 
     for (i = 0; i < numBlocks; i++) {
-        func_80076498(romAddr, ramAddr, 0x400);
+        Dma_RomCopy(romAddr, ramAddr, 0x400);
 
         romAddr += 0x400;
         ramAddr += 0x400;
     }
     remainder = size % 1024;
     if (remainder != 0) {
-        func_80076498(romAddr, ramAddr, remainder);
+        Dma_RomCopy(romAddr, ramAddr, remainder);
     }
 }
 
-void func_80076658(u8* romAddr, u8* ramAddr, size_t size, void* bssAddr, size_t bssSize) {
+void Dma_LoadOverlay(u8* romAddr, u8* ramAddr, size_t size, void* bssAddr, size_t bssSize) {
     s32 remainder;
     s32 i;
     s32 numBlocks;
@@ -96,14 +96,14 @@ void func_80076658(u8* romAddr, u8* ramAddr, size_t size, void* bssAddr, size_t 
     numBlocks = size / 1024;
 
     for (i = 0; i < numBlocks; i++) {
-        func_80076498(romAddr, ramAddr, 0x400);
+        Dma_RomCopy(romAddr, ramAddr, 0x400);
 
         romAddr += 0x400;
         ramAddr += 0x400;
     }
     remainder = size % 1024;
     if (remainder != 0) {
-        func_80076528(romAddr, ramAddr, remainder, bssAddr, bssSize);
+        Dma_RomCopyWithBssInit(romAddr, ramAddr, remainder, bssAddr, bssSize);
     }
 }
 
@@ -116,46 +116,48 @@ extern u8 D_8023EAA0[];
 extern u8 D_80115DF0[];
 extern u8 D_8024DC80[];
 
-// FAKE, weird access into array here, perhaps some macro usage?
 void func_800766F0(void) {
-    s32 index1 = 1;
-    s32 index2 = 2;
+    uintptr_t* block1 = &D_800E33C0[0];
+    uintptr_t* block2 = &D_800E33C0[1];
+    uintptr_t* block3 = &D_800E33C0[2];
 
-    D_800E33C0[0] = ALIGN16((uintptr_t) D_80115DF0);
-    D_800E33C0[2] = ALIGN16((uintptr_t) D_8024DC80);
+    *block1 = ALIGN16((uintptr_t) D_80115DF0);
+    *block3 = ALIGN16((uintptr_t) D_8024DC80);
 
     switch (gGameMode) {
         case GAMEMODE_TIME_ATTACK:
-            D_800E33C0[index2] = ALIGN16((uintptr_t) D_8023EAA0);
+            *block3 = ALIGN16((uintptr_t) D_8023EAA0);
         case GAMEMODE_GP_RACE:
         case GAMEMODE_PRACTICE:
         case GAMEMODE_VS_2P:
         case GAMEMODE_VS_3P:
         case GAMEMODE_VS_4P:
-        case GAMEMODE_6:
+        case GAMEMODE_RECORDS:
         case GAMEMODE_D:
         case GAMEMODE_10:
         case GAMEMODE_11:
         case GAMEMODE_DEATH_RACE:
-        case GAMEMODE_4009:
+        case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_4012:
-        case GAMEMODE_8008:
-            D_800E33C0[index1] = ALIGN16((uintptr_t) osPhysicalToVirtual(D_800DCDB8));
+        case GAMEMODE_FLX_MACHINE_SELECT:
+            *block2 = ALIGN16((uintptr_t) osPhysicalToVirtual(D_800DCDB8));
             break;
         default:
-            D_800E33C0[index1] = ALIGN16((uintptr_t) osPhysicalToVirtual(D_800DCDB0));
+            *block2 = ALIGN16((uintptr_t) osPhysicalToVirtual(D_800DCDB0));
             break;
     }
 }
 
 extern u8 D_80115FC0[];
 
+// Init block starts
 void func_80076804(void) {
     D_800E33C0[0] = ALIGN16((uintptr_t) D_80115FC0);
     D_800E33C0[1] = 0x803DA800;
     D_800E33C0[2] = ALIGN16((uintptr_t) D_8024DC80);
 }
 
+// Init block ends
 void func_80076848(void) {
     D_800E33D0[0] = 0x801D9800;
     D_800E33D0[1] = 0x803DA800;
@@ -244,25 +246,25 @@ u8* func_800768F4(s32 arg0, size_t arg1) {
     return sp4C;
 }
 
-s32 func_80076B80(s32 arg0, s32 arg1) {
-    gSegments[arg0] = K0_TO_PHYS(arg1);
-    return gSegments[arg0];
+s32 Segment_SetPhysicalAddress(s32 segment, s32 addr) {
+    gSegments[segment] = K0_TO_PHYS(addr);
+    return gSegments[segment];
 }
 
-s32 func_80076BA0(s32 arg0, s32 arg1) {
-    gSegments[arg0] = arg1;
-    return arg1;
+s32 Segment_SetAddress(s32 segment, s32 addr) {
+    gSegments[segment] = addr;
+    return gSegments[segment];
 }
 
-s32 func_80076BB8(s32 arg0) {
-    return PHYS_TO_K0(gSegments[arg0]);
+s32 Segment_GetAddress(s32 segment) {
+    return PHYS_TO_K0(gSegments[segment]);
 }
 
-s32 func_80076BD4(uintptr_t arg0) {
-    return PHYS_TO_K0(gSegments[SEGMENT_NUMBER(arg0)] + SEGMENT_OFFSET(arg0));
+s32 Segment_SegmentedToVirtual(uintptr_t segmentedAddr) {
+    return PHYS_TO_K0(gSegments[SEGMENT_NUMBER(segmentedAddr)] + SEGMENT_OFFSET(segmentedAddr));
 }
 
-Gfx* func_80076C08(Gfx* gfx) {
+Gfx* Segment_SetTableAddresses(Gfx* gfx) {
     s32 i;
 
     for (i = 0; i < 16; i++) {
@@ -293,21 +295,21 @@ void func_80076CB8(void) {
             segmentSize = SEGMENT_VRAM_SIZE(create_machine_textures);
             D_800CD2E0 = 2;
             break;
-        case GAMEMODE_6:
-        case GAMEMODE_4009:
+        case GAMEMODE_RECORDS:
+        case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_4012:
-        case GAMEMODE_8008:
+        case GAMEMODE_FLX_MACHINE_SELECT:
             D_800CD2E0 = 2;
-            func_80076BA0(4, D_800DCDC4);
+            Segment_SetAddress(4, D_800DCDC4);
             return;
         default:
             D_800CD2E0 = 0;
-            func_80076BA0(4, D_800DCDC4);
+            Segment_SetAddress(4, D_800DCDC4);
             return;
     }
     D_800DCDC4 = osVirtualToPhysical(func_800768F4(0, segmentSize));
     D_800DCDC8 = ALIGN16(D_800DCDC4 + segmentSize);
-    func_80076BA0(4, D_800DCDC4);
+    Segment_SetAddress(4, D_800DCDC4);
 }
 
 extern s32 D_800DCDCC;
@@ -333,13 +335,13 @@ void func_80076E10(void) {
             break;
         default:
             D_800CD2E4 = 0;
-            func_80076BA0(7, D_800DCDCC);
+            Segment_SetAddress(7, D_800DCDCC);
             return;
     }
 
     D_800DCDCC = osVirtualToPhysical(func_800768F4(0, ramSize));
     D_800DCDD0 = ALIGN16(D_800DCDCC + ramSize);
-    func_80076BA0(7, D_800DCDCC);
+    Segment_SetAddress(7, D_800DCDCC);
 }
 
 extern s32 D_800DCDD4;
@@ -352,16 +354,16 @@ void func_80076F00(void) {
     switch (gGameMode) {
         default:
             D_800CD2E8 = 0;
-            func_80076BA0(9, D_800DCDD4);
+            Segment_SetAddress(9, D_800DCDD4);
             break;
         case GAMEMODE_10:
         case GAMEMODE_11:
-        case GAMEMODE_4009:
+        case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_4012:
             segmentSize = SEGMENT_DATA_SIZE_CONST(segment_22B0A0);
             D_800DCDD4 = osVirtualToPhysical(func_800768F4(0, segmentSize));
             D_800DCDD8 = ALIGN16(D_800DCDD4 + segmentSize);
-            func_80076BA0(9, D_800DCDD4);
+            Segment_SetAddress(9, D_800DCDD4);
             break;
     }
 }
@@ -376,14 +378,14 @@ void func_80076FC0(void) {
     switch (gGameMode) {
         default:
             D_800CD2EC = 0;
-            func_80076BA0(10, D_800DCDDC);
+            Segment_SetAddress(10, D_800DCDDC);
             break;
         case GAMEMODE_GP_RACE:
         case GAMEMODE_PRACTICE:
         case GAMEMODE_VS_2P:
         case GAMEMODE_VS_3P:
         case GAMEMODE_VS_4P:
-        case GAMEMODE_6:
+        case GAMEMODE_RECORDS:
         case GAMEMODE_D:
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_11:
@@ -391,7 +393,7 @@ void func_80076FC0(void) {
             segmentSize = SEGMENT_DATA_SIZE_CONST(segment_235130);
             D_800DCDDC = osVirtualToPhysical(func_800768F4(0, segmentSize));
             D_800DCDE0 = ALIGN16(D_800DCDDC + segmentSize);
-            func_80076BA0(10, D_800DCDDC);
+            Segment_SetAddress(10, D_800DCDDC);
             break;
     }
 }
@@ -405,14 +407,14 @@ void func_80077084(void) {
     D_800CD2F4 = 1;
     if (gGameMode != GAMEMODE_11) {
         D_800CD2F4 = 0;
-        func_80076BA0(5, D_800DCDE4);
+        Segment_SetAddress(5, D_800DCDE4);
         return;
     }
     segmentSize = SEGMENT_DATA_SIZE_CONST(segment_2738A0);
     D_800DCDE4 = osVirtualToPhysical(func_800768F4(0, segmentSize));
 
     D_800DCDE8 = ALIGN16(D_800DCDE4 + segmentSize);
-    func_80076BA0(5, D_800DCDE4);
+    Segment_SetAddress(5, D_800DCDE4);
 }
 
 void func_8007712C(void) {
@@ -430,7 +432,7 @@ void func_8007712C(void) {
 
     switch (gGameMode) {
         // ovl_i8
-        case GAMEMODE_6:
+        case GAMEMODE_RECORDS:
             vramTextStart = SEGMENT_TEXT_START(ovl_i8);
             vramStart = SEGMENT_VRAM_START(ovl_i8);
             vramDataStart = SEGMENT_DATA_START(ovl_i8);
@@ -475,7 +477,7 @@ void func_8007712C(void) {
     func_80076884(0, segmentVramSize);
     osInvalICache(vramTextStart, segmentTextSize);
     osInvalDCache(vramDataStart, segmentDataSize);
-    func_80076658(romStart, vramStart, segmentRomSize, vramBssStart, segmentBssSize);
+    Dma_LoadOverlay(romStart, vramStart, segmentRomSize, vramBssStart, segmentBssSize);
 }
 
 void func_80077318(void) {
@@ -497,7 +499,7 @@ void func_80077318(void) {
         case GAMEMODE_VS_2P:
         case GAMEMODE_VS_3P:
         case GAMEMODE_VS_4P:
-        case GAMEMODE_6:
+        case GAMEMODE_RECORDS:
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_11:
         case GAMEMODE_DEATH_RACE:
@@ -513,10 +515,10 @@ void func_80077318(void) {
             segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i3);
             segmentBssSize = SEGMENT_BSS_SIZE(ovl_i3);
             break;
-        case GAMEMODE_4009:
+        case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_4012:
         case GAMEMODE_FLX_TITLE:
-        case GAMEMODE_8008:
+        case GAMEMODE_FLX_MACHINE_SELECT:
             // ovl_i4
             vramTextStart = SEGMENT_TEXT_START(ovl_i4);
             vramStart = SEGMENT_VRAM_START(ovl_i4);
@@ -547,7 +549,7 @@ void func_80077318(void) {
         case GAMEMODE_FLX_MAIN_MENU:
         case GAMEMODE_800B:
         case GAMEMODE_800C:
-        case GAMEMODE_8014:
+        case GAMEMODE_FLX_OPTIONS_MENU:
             // ovl_i6
             vramTextStart = SEGMENT_TEXT_START(ovl_i6);
             vramStart = SEGMENT_VRAM_START(ovl_i6);
@@ -568,7 +570,7 @@ void func_80077318(void) {
     if (1) {}
     osInvalICache(vramTextStart, segmentTextSize);
     osInvalDCache(vramDataStart, segmentDataSize);
-    func_80076658(romStart, vramStart, segmentRomSize, vramBssStart, segmentBssSize);
+    Dma_LoadOverlay(romStart, vramStart, segmentRomSize, vramBssStart, segmentBssSize);
     func_8007712C();
     D_800CD2E0 = 1;
     func_80076CB8();
@@ -612,10 +614,10 @@ void func_80077630(void) {
                 romOffset = SEGMENT_ROM_START(course_edit_textures);
                 ramSize = SEGMENT_VRAM_SIZE(course_edit_textures);
                 break;
-            case GAMEMODE_6:
-            case GAMEMODE_4009:
+            case GAMEMODE_RECORDS:
+            case GAMEMODE_LX_MACHINE_SETTINGS:
             case GAMEMODE_4012:
-            case GAMEMODE_8008:
+            case GAMEMODE_FLX_MACHINE_SELECT:
                 func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                               SEGMENT_ROM_SIZE(segment_17B960));
             default:
@@ -624,7 +626,7 @@ void func_80077630(void) {
         }
 
         osInvalDCache(osPhysicalToVirtual(D_800DCDC4), ramSize);
-        func_800765CC(romOffset, osPhysicalToVirtual(D_800DCDC4), ramSize);
+        Dma_LoadAssets(romOffset, osPhysicalToVirtual(D_800DCDC4), ramSize);
         D_800CD2E0 = 0;
     }
 }
@@ -656,7 +658,7 @@ void func_80077810(void) {
                 return;
         }
         osInvalDCache(osPhysicalToVirtual(D_800DCDCC), ramSize);
-        func_800765CC(romOffset, osPhysicalToVirtual(D_800DCDCC), ramSize);
+        Dma_LoadAssets(romOffset, osPhysicalToVirtual(D_800DCDCC), ramSize);
         D_800CD2E4 = 0;
     }
 }
@@ -671,14 +673,14 @@ void func_800778F8(void) {
         switch (gGameMode) {
             case GAMEMODE_10:
             case GAMEMODE_11:
-            case GAMEMODE_4009:
+            case GAMEMODE_LX_MACHINE_SETTINGS:
             case GAMEMODE_4012:
                 romOffset = SEGMENT_ROM_START(segment_22B0A0);
                 ramSize = SEGMENT_VRAM_SIZE(segment_22B0A0);
                 sp24 = func_800768F4(1, ramSize);
 
                 osInvalDCache(sp24, ramSize);
-                func_800765CC(romOffset, sp24, ramSize);
+                Dma_LoadAssets(romOffset, sp24, ramSize);
                 if (*(s32*) sp24 == (s32) 'MIO0') {
                     mio0Decode(sp24, osPhysicalToVirtual(D_800DCDD4));
                 }
@@ -708,7 +710,7 @@ void func_800779D0(void) {
             case GAMEMODE_VS_2P:
             case GAMEMODE_VS_3P:
             case GAMEMODE_VS_4P:
-            case GAMEMODE_6:
+            case GAMEMODE_RECORDS:
             case GAMEMODE_D:
             case GAMEMODE_TIME_ATTACK:
             case GAMEMODE_11:
@@ -724,7 +726,7 @@ void func_800779D0(void) {
         sp18 = func_800768F4(1, ramSize);
 
         osInvalDCache(sp18, ramSize);
-        func_800765CC(romOffset, sp18, ramSize);
+        Dma_LoadAssets(romOffset, sp18, ramSize);
         if (*(s32*) sp18 == (s32) 'MIO0') {
             mio0Decode(sp18, osPhysicalToVirtual(D_800DCDDC));
         }
@@ -762,7 +764,7 @@ void func_80077B04(void) {
         sp18 = func_800768F4(1, ramSize);
 
         osInvalDCache(sp18, ramSize);
-        func_800765CC(romOffset, sp18, ramSize);
+        Dma_LoadAssets(romOffset, sp18, ramSize);
         if (*(s32*) sp18 == (s32) 'MIO0') {
             mio0Decode(sp18, osPhysicalToVirtual(D_800DCDDC));
         }
@@ -788,7 +790,7 @@ void func_80077BE0(void) {
         sp24 = func_800768F4(1, ramSize);
 
         osInvalDCache(sp24, ramSize);
-        func_800765CC(romOffset, sp24, ramSize);
+        Dma_LoadAssets(romOffset, sp24, ramSize);
         if (*(s32*) sp24 == (s32) 'MIO0') {
             mio0Decode(sp24, osPhysicalToVirtual(D_800DCDE4));
         }

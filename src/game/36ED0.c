@@ -1,6 +1,8 @@
 #include "global.h"
 #include "fzx_racer.h"
 #include "fzx_course.h"
+#include "fzxmath.h"
+#include "fzx_segmentA.h"
 #include "assets/segment_16C8A0.h"
 
 #define VERTEX_MODIFIED_ST(s, t) ((((s) << 15) & 0xFFFF0000) | ((t) &0xFFFF))
@@ -11,7 +13,7 @@ typedef struct unk_800CF528 {
     s32 width;
     s32 tile;
     s32 unk_10;
-    s8 unk_14[0x2];
+    s16 unk_14;
     s16 unk_16;
     s16 unk_18;
     s16 unk_1A;
@@ -34,58 +36,326 @@ typedef struct unk_800F8958 {
     s32 unk_2C;
 } unk_800F8958; // size = 0x30
 
-extern unk_800CF528 D_800CF528[];
-extern unk_800CF528 D_800CF868[];
-extern f32 D_800CF60C;
+typedef struct unk_800A8B74_arg_0 {
+    unk_36ED0* unk_00;
+    unk_36ED0* unk_04;
+    f32 unk_08;
+    s32 unk_0C;
+} unk_800A8B74_arg_0; // size = 0x10
+
+unk_800F8510* D_800F8510;
+s32 gCourseIndex;
+s32 D_800F8518;
+unk_36ED0* D_800F851C;
+Vtx* D_800F8520;
+s32 D_800F8524;
+unk_800A8B74_arg_0 D_800F8528[64];
+s32 D_800F8928;
+s32 D_800F892C;
+s16 D_800F8930[5];
+s32 D_800F893C;
+s32 D_800F8940;
+s32 D_800F8944;
+s32 D_800F8948;
+f32 D_800F894C;
+f32 D_800F8950;
+unk_800F8958 D_800F8958[2];
+unk_800F8958* D_800F89B8;
+unk_800F8958* D_800F89BC;
+s32 D_800F89C0;
+Gfx* D_800F89C4;
+unk_36ED0* D_800F89C8;
+unk_36ED0* D_800F89CC;
+unk_36ED0* D_800F89D0;
+s32 D_800F89D4;
+s32 D_800F89D8;
+s32 D_800F89DC;
+f32 D_800F89E0;
+f32 D_800F89E4;
+f32 D_800F89E8;
+
+s32 D_800CF500 = 0;
+s16 D_800CF504 = -1;
+s32 D_800CF508 = 990;
+UNUSED s32 D_800CF50C = 0;
+
+f32 D_800CF510 = 6000.0f;
+f32 D_800CF514 = 1500.0f;
+f32 D_800CF518 = 3000.0f;
+f32 D_800CF51C = 400.0f;
+f32 D_800CF520 = 5500.0f;
+f32 D_800CF524 = 1000.0f;
+
+// TRACK_SHAPE_ROAD
+unk_800CF528 D_800CF528[] = {
+    { D_A001000, 10.0f, 64, 4, 5, 1023, 32, 0xAE0, 0xF20, 0xF60, 0xFC0 }, // ROAD_START_LINE
+    { D_A000000, 10.0f, 64, 4, 5, 1023, 32, 0xAE0, 0xF20, 0xF60, 0xFC0 }, // ROAD_1
+    { D_A002000, 14.0f, 64, 4, 5, 1023, 32, 0xAE0, 0xF20, 0xF60, 0xFC0 }, // ROAD_2
+    { D_A003000, 14.0f, 64, 4, 5, 1023, 32, 0xAE0, 0xF20, 0xF60, 0xFC0 }, // ROAD_3
+    { D_A004000, 14.0f, 64, 4, 5, 1023, 32, 0xAE0, 0xF20, 0xF60, 0xFC0 }, // ROAD_4
+    { D_A005000, 14.0f, 64, 4, 5, 1023, 32, 0xAE0, 0xF20, 0xF60, 0xFC0 }, // ROAD_5
+    { D_A006000, 14.0f, 64, 4, 5, 1023, 32, 0xAE0, 0xF20, 0xF60, 0xFC0 }, // ROAD_6
+};
+
+// TRACK_SHAPE_WALLED_ROAD
+unk_800CF528 D_800CF608[] = {
+    { D_A007000, 7.0f, 128, 0, 1, 511, 32, 0x1320, 0x1EA0, 0x1F60, 0x1FC0 }, // WALLED_ROAD_0
+    { D_8000008, 7.0f, 128, 0, 1, 511, 32, 0x1320, 0x1EA0, 0x1F60, 0x1FC0 }, // WALLED_ROAD_1
+    { D_8001008, 7.0f, 128, 0, 1, 511, 32, 0x1320, 0x1EA0, 0x1F60, 0x1FC0 }, // WALLED_ROAD_2
+};
+
+// TRACK_SHAPE_PIPE
+unk_800CF528 D_800CF668[] = {
+    { D_8008008, 2.8f, 128, 0, 2, 255, 32, 0x8A0, 0x1120, 0x1A20, 0x1FC0 }, // PIPE_0
+    { D_8009008, 2.8f, 128, 0, 2, 255, 32, 0x8A0, 0x1120, 0x1A20, 0x1FC0 }, // PIPE_1
+    { D_800A008, 2.8f, 128, 0, 2, 255, 32, 0x8A0, 0x1120, 0x1A20, 0x1FC0 }, // PIPE_2
+    { D_800B008, 2.8f, 128, 0, 2, 255, 32, 0x8A0, 0x1120, 0x1A20, 0x1FC0 }, // PIPE_3
+};
+
+// TRACK_SHAPE_CYLINDER
+unk_800CF528 D_800CF6E8[] = {
+    { D_800C008, 9.3f, 128, 0, 1, 511, 32, 0x960, 0x12A0, 0x1B60, 0x1FC0 }, // CYLINDER_0
+    { D_800D008, 9.3f, 128, 0, 1, 511, 32, 0x960, 0x12A0, 0x1B60, 0x1FC0 }, // CYLINDER_1
+    { D_800E008, 9.3f, 128, 0, 1, 511, 32, 0x960, 0x12A0, 0x1B60, 0x1FC0 }, // CYLINDER_2
+    { D_800F008, 9.3f, 128, 0, 1, 511, 32, 0x960, 0x12A0, 0x1B60, 0x1FC0 }, // CYLINDER_3
+};
+
+// TRACK_SHAPE_HALF_PIPE
+unk_800CF528 D_800CF768[] = {
+    { D_8010008, 14.0f, 64, 4, 5, 1023, 32, 0x5E0, 0xBE0, 0xDE0, 0xFC0 }, // HALF_PIPE_0
+    { D_8011008, 4.0f, 64, 4, 5, 1023, 32, 0x5E0, 0xBE0, 0xDE0, 0xFC0 },  // HALF_PIPE_1
+    { D_8012008, 7.0f, 64, 4, 5, 1023, 32, 0x5E0, 0xBE0, 0xDE0, 0xFC0 },  // HALF_PIPE_2
+    { D_8013008, 14.0f, 64, 4, 5, 1023, 32, 0x5E0, 0xBE0, 0xDE0, 0xFC0 }, // HALF_PIPE_3
+};
+
+// TRACK_SHAPE_TUNNEL
+unk_800CF528 D_800CF7E8[] = {
+    { D_8004008, 14.0f, 64, 4, 6, 1023, 32, 0x3A0, 0x660, 0x960, 0xFC0 }, // TUNNEL_0
+    { D_8005008, 14.0f, 64, 4, 6, 1023, 32, 0x3A0, 0x660, 0x960, 0xFC0 }, // TUNNEL_1
+    { D_8006008, 14.0f, 64, 4, 6, 1023, 32, 0x3A0, 0x660, 0x960, 0xFC0 }, // TUNNEL_2
+    { D_8007008, 14.0f, 64, 4, 6, 1023, 32, 0x3A0, 0x660, 0x960, 0xFC0 }, // TUNNEL_3
+};
+
+// TRACK_SHAPE_BORDERLESS_ROAD
+unk_800CF528 D_800CF868[] = {
+    { D_A008000, 14.0f, 64, 4, 5, 1023, 32, 0xB60, 0xEA0, 0xF20, 0xFC0 }, // BORDERLESS_ROAD_0
+    { D_8002008, 14.0f, 64, 4, 5, 1023, 32, 0xB60, 0xEA0, 0xF20, 0xFC0 }, // BORDERLESS_ROAD_1
+    { D_8003008, 14.0f, 64, 4, 5, 1023, 32, 0xB60, 0xEA0, 0xF20, 0xFC0 }, // BORDERLESS_ROAD_2
+};
+
+unk_800CF528* D_800CF8C8[] = {
+    D_800CF528, // TRACK_SHAPE_ROAD
+    D_800CF608, // TRACK_SHAPE_WALLED_ROAD
+    D_800CF668, // TRACK_SHAPE_PIPE
+    D_800CF6E8, // TRACK_SHAPE_CYLINDER
+    D_800CF768, // TRACK_SHAPE_HALF_PIPE
+    D_800CF7E8, // TRACK_SHAPE_TUNNEL
+    NULL,       // TRACK_SHAPE_AIR
+    D_800CF868, // TRACK_SHAPE_BORDERLESS_ROAD
+};
+
+f32 D_800CF8E8[] = {
+    0.0f, 50.0f, 1000.0f, 1000.0f, 1000.0f, 250.0f, 0.0f, 50.0f,
+};
+
+typedef void (*unk_800CF908)(unk_36ED0*, f32, f32, Mtx3F*, Vec3f*, Vec3f*, Vec3f*, Vec3f*, Vec3f*);
+typedef void (*unk_800CF928)(unk_36ED0*, unk_36ED0*, f32);
+
+void func_800A0458(unk_36ED0*, f32, f32, Mtx3F*, Vec3f*, Vec3f*, Vec3f*, Vec3f*, Vec3f*);
+void func_800A04D8(unk_36ED0*, f32, f32, Mtx3F*, Vec3f*, Vec3f*, Vec3f*, Vec3f*, Vec3f*);
+void func_800A0568(unk_36ED0*, f32, f32, Mtx3F*, Vec3f*, Vec3f*, Vec3f*, Vec3f*, Vec3f*);
+void func_800A05CC(unk_36ED0*, f32, f32, Mtx3F*, Vec3f*, Vec3f*, Vec3f*, Vec3f*, Vec3f*);
+void func_800A0900(unk_36ED0*, f32, f32, Mtx3F*, Vec3f*, Vec3f*, Vec3f*, Vec3f*, Vec3f*);
+void func_800A0CF0(unk_36ED0*, f32, f32, Mtx3F*, Vec3f*, Vec3f*, Vec3f*, Vec3f*, Vec3f*);
+void func_800A10E4(unk_36ED0*, f32, f32, Mtx3F*, Vec3f*, Vec3f*, Vec3f*, Vec3f*, Vec3f*);
+
+unk_800CF908 D_800CF908[] = {
+    func_800A0458, // TRACK_SHAPE_ROAD
+    func_800A04D8, // TRACK_SHAPE_WALLED_ROAD
+    func_800A0568, // TRACK_SHAPE_PIPE
+    func_800A05CC, // TRACK_SHAPE_CYLINDER
+    func_800A0900, // TRACK_SHAPE_HALF_PIPE
+    func_800A0CF0, // TRACK_SHAPE_TUNNEL
+    func_800A0458, // TRACK_SHAPE_AIR
+    func_800A10E4, // TRACK_SHAPE_BORDERLESS_ROAD
+};
+
+void func_800A1258(unk_36ED0*, unk_36ED0*, f32);
+void func_800A133C(unk_36ED0*, unk_36ED0*, f32);
+void func_800A14F0(unk_36ED0*, unk_36ED0*, f32);
+
+unk_800CF928 D_800CF928[] = {
+    func_800A14F0, // TRACK_SHAPE_ROAD
+    func_800A14F0, // TRACK_SHAPE_WALLED_ROAD
+    func_800A1258, // TRACK_SHAPE_PIPE
+    func_800A133C, // TRACK_SHAPE_CYLINDER
+    func_800A14F0, // TRACK_SHAPE_HALF_PIPE
+    func_800A1258, // TRACK_SHAPE_TUNNEL
+    func_800A14F0, // TRACK_SHAPE_AIR
+    func_800A14F0, // TRACK_SHAPE_BORDERLESS_ROAD
+};
+
+void func_800A5924(void);
+void func_800A63A0(void);
+void func_800A7764(void);
+void func_800A80D0(void);
+void func_800A894C(void);
+
+void (*D_800CF948[])(void) = {
+    func_800A5924, // TRACK_SHAPE_ROAD
+    func_800A5924, // TRACK_SHAPE_WALLED_ROAD
+    func_800A63A0, // TRACK_SHAPE_PIPE
+    func_800A7764, // TRACK_SHAPE_CYLINDER
+    func_800A80D0, // TRACK_SHAPE_HALF_PIPE
+    func_800A63A0, // TRACK_SHAPE_TUNNEL
+    func_800A894C, // TRACK_SHAPE_AIR
+    func_800A5924, // TRACK_SHAPE_BORDERLESS_ROAD
+};
+
+void func_800A5CF0(void);
+void func_800A6CF4(void);
+void func_800A7BC0(void);
+void func_800A84B8(void);
+void func_800A8A5C(void);
+
+void (*D_800CF968[])(void) = {
+    func_800A5CF0, // TRACK_SHAPE_ROAD
+    func_800A5CF0, // TRACK_SHAPE_WALLED_ROAD
+    func_800A6CF4, // TRACK_SHAPE_PIPE
+    func_800A7BC0, // TRACK_SHAPE_CYLINDER
+    func_800A84B8, // TRACK_SHAPE_HALF_PIPE
+    func_800A6CF4, // TRACK_SHAPE_TUNNEL
+    func_800A8A5C, // TRACK_SHAPE_AIR
+    func_800A5CF0, // TRACK_SHAPE_BORDERLESS_ROAD
+};
+
+f32 D_800CF988[] = {
+    7.5f,
+    15.0f,
+    30.0f,
+    60.0f,
+};
+
+f32 D_800CF998[] = {
+    0.0f,
+    350.0f,
+    700.0f,
+    1400.0f,
+};
+
+s32 D_800CF9A8[] = {
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_2,
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_3,
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_3,
+};
+
+s32 D_800CF9B4[] = {
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_5,
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_6,
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_6,
+};
+
+s32 D_800CF9C0[] = {
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_4,
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_2,
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_2,
+};
+
+s32 D_800CF9CC[] = {
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_4,
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_3,
+    TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_3,
+};
+
+s32 D_800CF9D8[] = {
+    TRACK_FLAG_8000000 | TRACK_SHAPE_BORDERLESS_ROAD | BORDERLESS_ROAD_0,
+    TRACK_FLAG_8000000 | TRACK_SHAPE_BORDERLESS_ROAD | BORDERLESS_ROAD_1,
+    TRACK_FLAG_8000000 | TRACK_SHAPE_BORDERLESS_ROAD | BORDERLESS_ROAD_2,
+};
+
+s32 D_800CF9E4[] = {
+    TRACK_FLAG_8000000 | TRACK_SHAPE_WALLED_ROAD | WALLED_ROAD_0,
+    TRACK_FLAG_8000000 | TRACK_SHAPE_WALLED_ROAD | WALLED_ROAD_1,
+    TRACK_FLAG_8000000 | TRACK_SHAPE_WALLED_ROAD | WALLED_ROAD_2,
+};
+
+s32 D_800CF9F0[] = {
+    TRACK_FLAG_20000000 | TRACK_FLAG_8000000 | TRACK_SHAPE_TUNNEL | TUNNEL_0,
+    TRACK_FLAG_20000000 | TRACK_FLAG_8000000 | TRACK_SHAPE_TUNNEL | TUNNEL_1,
+    TRACK_FLAG_20000000 | TRACK_FLAG_8000000 | TRACK_SHAPE_TUNNEL | TUNNEL_2,
+    TRACK_FLAG_20000000 | TRACK_FLAG_8000000 | TRACK_SHAPE_TUNNEL | TUNNEL_3,
+};
+
+s32 D_800CFA00[] = {
+    TRACK_SHAPE_HALF_PIPE | HALF_PIPE_0,
+    TRACK_SHAPE_HALF_PIPE | HALF_PIPE_1,
+    TRACK_SHAPE_HALF_PIPE | HALF_PIPE_2,
+    TRACK_SHAPE_HALF_PIPE | HALF_PIPE_3,
+};
+
+s32 D_800CFA10[] = {
+    TRACK_FLAG_20000000 | TRACK_SHAPE_PIPE | PIPE_0,
+    TRACK_FLAG_20000000 | TRACK_SHAPE_PIPE | PIPE_1,
+    TRACK_FLAG_20000000 | TRACK_SHAPE_PIPE | PIPE_2,
+    TRACK_FLAG_20000000 | TRACK_SHAPE_PIPE | PIPE_3,
+};
+
+s32 D_800CFA20[] = {
+    TRACK_SHAPE_CYLINDER | CYLINDER_0,
+    TRACK_SHAPE_CYLINDER | CYLINDER_1,
+    TRACK_SHAPE_CYLINDER | CYLINDER_2,
+    TRACK_SHAPE_CYLINDER | CYLINDER_3,
+};
 
 void func_8009CED0(s32 venue) {
     switch (venue) {
         case VENUE_MUTE_CITY:
-            D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[4].unk_04 = D_800CF528[5].unk_04 =
-                D_800CF528[6].unk_04 = 16.0f;
-            D_800CF868[0].unk_04 = 14.0f;
-            D_800CF60C = 7.0f;
+            D_800CF528[ROAD_2].unk_04 = D_800CF528[ROAD_3].unk_04 = D_800CF528[ROAD_4].unk_04 =
+                D_800CF528[ROAD_5].unk_04 = D_800CF528[ROAD_6].unk_04 = 16.0f;
+            D_800CF868[BORDERLESS_ROAD_0].unk_04 = 14.0f;
+            D_800CF608[WALLED_ROAD_0].unk_04 = 7.0f;
             break;
         case VENUE_BIG_BLUE:
-            D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = 14.0f;
-            D_800CF528[5].unk_04 = 1.0f;
-            D_800CF868[0].unk_04 = 1.0f;
-            D_800CF528[4].unk_04 = 2.0f;
-            D_800CF528[6].unk_04 = 6.0f;
-            D_800CF60C = 7.0f;
+            D_800CF528[ROAD_2].unk_04 = D_800CF528[ROAD_3].unk_04 = 14.0f;
+            D_800CF528[ROAD_5].unk_04 = 1.0f;
+            D_800CF868[BORDERLESS_ROAD_0].unk_04 = 1.0f;
+            D_800CF528[ROAD_4].unk_04 = 2.0f;
+            D_800CF528[ROAD_6].unk_04 = 6.0f;
+            D_800CF608[WALLED_ROAD_0].unk_04 = 7.0f;
             break;
         case VENUE_DEVILS_FOREST:
-            D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[4].unk_04 = D_800CF528[5].unk_04 =
-                D_800CF528[6].unk_04 = D_800CF868[0].unk_04 = 14.0f;
-            D_800CF60C = 3.5f;
+            D_800CF528[ROAD_2].unk_04 = D_800CF528[ROAD_3].unk_04 = D_800CF528[ROAD_4].unk_04 =
+                D_800CF528[ROAD_5].unk_04 = D_800CF528[ROAD_6].unk_04 = D_800CF868[BORDERLESS_ROAD_0].unk_04 = 14.0f;
+            D_800CF608[WALLED_ROAD_0].unk_04 = 3.5f;
             break;
         case VENUE_SECTOR:
-            D_800CF868[0].unk_04 = 7.0f;
-            D_800CF528[4].unk_04 = 5.0f;
-            D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[5].unk_04 = D_800CF528[6].unk_04 = 10.0f;
-            D_800CF60C = 3.5f;
+            D_800CF868[BORDERLESS_ROAD_0].unk_04 = 7.0f;
+            D_800CF528[ROAD_4].unk_04 = 5.0f;
+            D_800CF528[ROAD_2].unk_04 = D_800CF528[ROAD_3].unk_04 = D_800CF528[ROAD_5].unk_04 =
+                D_800CF528[ROAD_6].unk_04 = 10.0f;
+            D_800CF608[WALLED_ROAD_0].unk_04 = 3.5f;
             break;
         case VENUE_RED_CANYON:
-            D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[4].unk_04 = D_800CF528[5].unk_04 =
-                D_800CF528[6].unk_04 = D_800CF868[0].unk_04 = 14.0f;
-            D_800CF60C = 3.5f;
+            D_800CF528[ROAD_2].unk_04 = D_800CF528[ROAD_3].unk_04 = D_800CF528[ROAD_4].unk_04 =
+                D_800CF528[ROAD_5].unk_04 = D_800CF528[ROAD_6].unk_04 = D_800CF868[BORDERLESS_ROAD_0].unk_04 = 14.0f;
+            D_800CF608[WALLED_ROAD_0].unk_04 = 3.5f;
             break;
         case VENUE_SILENCE:
-            D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[5].unk_04 = D_800CF528[6].unk_04 =
-                D_800CF868[0].unk_04 = 14.0f;
-            D_800CF528[4].unk_04 = 7.0f;
-            D_800CF60C = 7.0f;
+            D_800CF528[ROAD_2].unk_04 = D_800CF528[ROAD_3].unk_04 = D_800CF528[ROAD_5].unk_04 =
+                D_800CF528[ROAD_6].unk_04 = D_800CF868[BORDERLESS_ROAD_0].unk_04 = 14.0f;
+            D_800CF528[ROAD_4].unk_04 = 7.0f;
+            D_800CF608[WALLED_ROAD_0].unk_04 = 7.0f;
             break;
         case VENUE_ENDING:
-            D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[4].unk_04 = D_800CF528[5].unk_04 =
-                D_800CF528[6].unk_04 = 5.5f;
-            D_800CF868[0].unk_04 = 14.0f;
-            D_800CF60C = 7.0f;
+            D_800CF528[ROAD_2].unk_04 = D_800CF528[ROAD_3].unk_04 = D_800CF528[ROAD_4].unk_04 =
+                D_800CF528[ROAD_5].unk_04 = D_800CF528[ROAD_6].unk_04 = 5.5f;
+            D_800CF868[BORDERLESS_ROAD_0].unk_04 = 14.0f;
+            D_800CF608[WALLED_ROAD_0].unk_04 = 7.0f;
             break;
         default:
-            D_800CF528[2].unk_04 = D_800CF528[3].unk_04 = D_800CF528[4].unk_04 = D_800CF528[5].unk_04 =
-                D_800CF528[6].unk_04 = D_800CF868[0].unk_04 = 14.0f;
-            D_800CF60C = 7.0f;
+            D_800CF528[ROAD_2].unk_04 = D_800CF528[ROAD_3].unk_04 = D_800CF528[ROAD_4].unk_04 =
+                D_800CF528[ROAD_5].unk_04 = D_800CF528[ROAD_6].unk_04 = D_800CF868[BORDERLESS_ROAD_0].unk_04 = 14.0f;
+            D_800CF608[WALLED_ROAD_0].unk_04 = 7.0f;
             break;
     }
 }
@@ -516,8 +786,6 @@ s32 func_8009F334(unk_800F8510* arg0) {
     return 0;
 }
 
-extern f32 D_800CF8E8[];
-
 s32 func_8009F3E0(unk_800F8510* arg0) {
     s32 var_v1 = 0;
     unk_8006FC8C* var_v0 = arg0->unk_10;
@@ -539,13 +807,15 @@ s32 func_8009F3E0(unk_800F8510* arg0) {
         switch (var_v0->trackSegmentInfo & TRACK_JOIN_MASK) {
             case TRACK_JOIN_PREVIOUS:
             case TRACK_JOIN_NEXT:
-                if (var_v0->unk_28 <= (D_800CF8E8[(u32) (var_v0->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6] + 100.0f)) {
+                if (var_v0->unk_28 <=
+                    (D_800CF8E8[TRACK_SHAPE_INDEX((u32) var_v0->trackSegmentInfo & TRACK_SHAPE_MASK)] + 100.0f)) {
                     var_v1 = -1;
                 }
                 break;
             case TRACK_JOIN_BOTH:
                 if (var_v0->unk_28 <=
-                    ((2.0f * D_800CF8E8[(u32) (var_v0->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6]) + 100.0f)) {
+                    ((2.0f * D_800CF8E8[TRACK_SHAPE_INDEX((u32) var_v0->trackSegmentInfo & TRACK_SHAPE_MASK)]) +
+                     100.0f)) {
                     var_v1 = -1;
                 }
                 break;
@@ -804,9 +1074,75 @@ void func_800A0010(unk_800F8510* arg0) {
     } while (var_v0 != arg0->unk_10);
 }
 
+#ifdef NON_MATCHING
+void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
+                   Vec3f* arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD) {
+    s32 pad[2];
+    f32 temp_fs0;
+    f32 temp_fs1;
+    f32 temp_fs2;
+    f32 temp_fs3;
+    f32 temp_fs4;
+    f32 temp_fs5;
+    f32 sp6C;
+
+    temp_fs4 = arg1 + 11.5f;
+    temp_fs5 = arg2 + 11.5f;
+    temp_fs1 = (temp_fs4 - temp_fs5) / 2.0f;
+
+    arg0->unk_26[0] = func_8006A9E0(arg8->x = arg0->unk_14.x + (temp_fs1 * arg3->xz));
+    arg0->unk_26[1] = func_8006A9E0(arg8->y = arg0->unk_14.y + (temp_fs1 * arg3->yz));
+    arg0->unk_26[2] = func_8006A9E0(arg8->z = arg0->unk_14.z + (temp_fs1 * arg3->zz));
+
+    arg0->unk_20[0] = func_8006A9E0(arg8->x + ((argB - argC - argD) * arg3->xy));
+    arg0->unk_20[1] = func_8006A9E0(arg8->y + ((argB - argC - argD) * arg3->yy));
+    arg0->unk_20[2] = func_8006A9E0(arg8->z + ((argB - argC - argD) * arg3->zy));
+
+    temp_fs1 = (temp_fs4 + temp_fs5) / 2.0f;
+
+    arg6->x = (temp_fs2 = arg3->xy * temp_fs1) + arg8->x;
+    arg6->y = (temp_fs3 = arg3->yy * temp_fs1) + arg8->y;
+    arg6->z = (temp_fs0 = arg3->zy * temp_fs1) + arg8->z;
+
+    arg7->x = arg8->x - temp_fs2;
+    arg7->y = arg8->y - temp_fs3;
+    arg7->z = arg8->z - temp_fs0;
+
+    arg0->unk_38[0] = func_8006A9E0(arg4->x = (temp_fs4 = arg3->xz * temp_fs1) + arg8->x);
+    arg0->unk_38[1] = func_8006A9E0(arg4->y = (temp_fs5 = arg3->yz * temp_fs1) + arg8->y);
+    arg0->unk_38[2] = func_8006A9E0(arg4->z = (sp6C = arg3->zz * temp_fs1) + arg8->z);
+
+    arg0->unk_4A[0] = func_8006A9E0(arg5->x = arg8->x - temp_fs4);
+    arg0->unk_4A[1] = func_8006A9E0(arg5->y = arg8->y - temp_fs5);
+    arg0->unk_4A[2] = func_8006A9E0(arg5->z = arg8->z - sp6C);
+
+    temp_fs1 += arg9;
+
+    arg0->unk_32[0] = func_8006A9E0((temp_fs2 = arg8->x + (argB * arg3->xy)) + (temp_fs4 = arg3->xz * temp_fs1));
+    arg0->unk_32[1] = func_8006A9E0((temp_fs3 = arg8->y + (argB * arg3->yy)) + (temp_fs5 = arg3->yz * temp_fs1));
+    arg0->unk_32[2] = func_8006A9E0((temp_fs0 = arg8->z + (argB * arg3->zy)) + (sp6C = arg3->zz * temp_fs1));
+
+    arg0->unk_44[0] = func_8006A9E0(temp_fs2 - temp_fs4);
+    arg0->unk_44[1] = func_8006A9E0(temp_fs3 - temp_fs5);
+    arg0->unk_44[2] = func_8006A9E0(temp_fs0 - sp6C);
+
+    temp_fs1 += argA;
+
+    arg0->unk_2C[0] =
+        func_8006A9E0((temp_fs2 = arg8->x + ((argB - argC) * arg3->xy)) + (temp_fs4 = arg3->xz * temp_fs1));
+    arg0->unk_2C[1] =
+        func_8006A9E0((temp_fs3 = arg8->y + ((argB - argC) * arg3->yy)) + (temp_fs5 = arg3->yz * temp_fs1));
+    arg0->unk_2C[2] = func_8006A9E0((temp_fs0 = arg8->z + ((argB - argC) * arg3->zy)) + (sp6C = arg3->zz * temp_fs1));
+
+    arg0->unk_3E[0] = func_8006A9E0(temp_fs2 - temp_fs4);
+    arg0->unk_3E[1] = func_8006A9E0(temp_fs3 - temp_fs5);
+    arg0->unk_3E[2] = func_8006A9E0(temp_fs0 - sp6C);
+}
+#else
 void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
                    Vec3f* arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_800A0068.s")
+#endif
 
 void func_800A0458(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
                    Vec3f* arg8) {
@@ -820,14 +1156,11 @@ void func_800A04D8(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
 
 void func_800A05CC(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
                    Vec3f* arg8);
-extern f32 D_800DE634;
 
 void func_800A0568(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
                    Vec3f* arg8) {
-    func_800A05CC(arg0, arg1 / D_800DE634, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    func_800A05CC(arg0, arg1 / gSinTable[0x501], arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 }
-
-extern f32 D_800DDA30;
 
 void func_800A05CC(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
                    Vec3f* arg8) {
@@ -858,7 +1191,7 @@ void func_800A05CC(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     arg0->unk_20[1] = Math_Round(arg7->y = arg0->unk_14.y - temp_fs3);
     arg0->unk_20[2] = Math_Round(arg7->z = arg0->unk_14.z - temp_fs4);
 
-    sp64 = D_800DDA30 * arg1;
+    sp64 = gSinTable[0x200] * arg1;
 
     arg0->unk_38[0] = Math_Round((sp60 = (sp54 = arg3->xz * sp64) + arg0->unk_14.x) + (temp_fs2 = arg3->xy * sp64));
     arg0->unk_38[1] = Math_Round((temp_fs1 = (sp50 = arg3->yz * sp64) + arg0->unk_14.y) + (temp_fs3 = arg3->yy * sp64));
@@ -876,8 +1209,6 @@ void func_800A05CC(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     arg0->unk_3E[1] = Math_Round(temp_fs1 - temp_fs3);
     arg0->unk_3E[2] = Math_Round(temp_fs0 - temp_fs4);
 }
-
-extern f32 gSinTable[];
 
 void func_800A0900(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
                    Vec3f* arg8) {
@@ -1077,7 +1408,7 @@ f32 func_800A15C8(unk_8006FC8C* arg0) {
     Vec3f sp58;
 
     arg0->unk_70 = -1.0f;
-    var_fs3 = D_800CF8E8[(u32) (arg0->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6];
+    var_fs3 = D_800CF8E8[TRACK_SHAPE_INDEX((u32) arg0->trackSegmentInfo & TRACK_SHAPE_MASK)];
     if (arg0->trackSegmentInfo & TRACK_JOIN_PREVIOUS) {
         arg0->unk_68 = 0.0f;
         var_fs1 = 0.0f;
@@ -1127,8 +1458,6 @@ f32 func_800A15C8(unk_8006FC8C* arg0) {
     return var_fs3;
 }
 
-extern f32 D_800F89E8;
-
 bool func_800A1818(Vec3f* arg0, Vec3f* arg1, Vec3f* arg2) {
     Vec3f vec;
     f32 temp_fa1;
@@ -1157,13 +1486,12 @@ f32 func_800A18A8(Vec3f* arg0, Vec3f* arg1) {
     return sqrtf(sum);
 }
 
-extern unk_800CF528* D_800CF8C8[];
-
 s32 func_800A18FC(s32 trackSegmentInfo, f32 arg1) {
 
     if ((trackSegmentInfo & TRACK_TYPE_MASK) != TRACK_TYPE_NONE) {
-        return (s32) (D_800CF8C8[(s32) (trackSegmentInfo & TRACK_SHAPE_MASK) >> 6][trackSegmentInfo & TRACK_TYPE_MASK]
-                          .unk_04 *
+        return (s32) (D_800CF8C8[TRACK_SHAPE_INDEX(trackSegmentInfo & TRACK_SHAPE_MASK)]
+                                [trackSegmentInfo & TRACK_TYPE_MASK]
+                                    .unk_04 *
                       arg1) -
                0x8000;
     }
@@ -1298,25 +1626,6 @@ void func_800A4B54(void) {
     }
 }
 
-extern unk_800F8958 D_800F8958[];
-extern Gfx D_80140F0[];
-extern Gfx D_8014138[];
-extern Gfx D_8014180[];
-extern Gfx D_80141C8[];
-extern Gfx D_8014210[];
-extern Gfx D_8014268[];
-extern Gfx D_80142C0[];
-extern Gfx D_8014308[];
-extern Gfx D_8014350[];
-extern Gfx D_8014398[];
-extern Gfx D_80143E0[];
-extern Gfx D_8014430[];
-extern Gfx D_8014480[];
-extern Gfx D_80144D0[];
-extern Gfx D_8014520[];
-extern Gfx D_8014580[];
-extern Gfx D_80145E0[];
-extern Gfx D_8014640[];
 extern Vtx D_8028A3D8[];
 extern Vtx D_8025DCE8[];
 
@@ -1364,12 +1673,6 @@ dummy:;
     func_800A4B54();
 }
 
-extern s32 D_800F8524;
-extern f32 D_800F894C;
-extern f32 D_800F8950;
-extern f32 D_800F89E0;
-extern f32 D_800F89E4;
-
 void func_800A4D0C(s32 arg0) {
     D_800F8524 = arg0;
     switch (D_800F8524) {
@@ -1393,9 +1696,6 @@ void func_800A4D0C(s32 arg0) {
     }
 }
 
-extern unk_800F8510* D_800F8510;
-extern s32 gCourseIndex;
-
 extern CourseData D_8010B7B0;
 s32 Course_CalculateChecksum(void);
 
@@ -1416,8 +1716,6 @@ void func_800A4DF0(void) {
 }
 
 extern s32 gNumPlayers;
-extern f32 D_800CF520;
-extern f32 D_800CF524;
 
 void func_800A4EAC(void) {
     unk_8006FC8C* var_v0;
@@ -1460,8 +1758,6 @@ void func_800A4EAC(void) {
 void func_800A5028(void) {
 }
 
-extern Vtx* D_800F8520;
-
 void func_800A5030(unk_36ED0* arg0) {
     D_800F8520[0].v.ob[0] = arg0->unk_20[0];
     D_800F8520[0].v.ob[1] = arg0->unk_20[1];
@@ -1489,8 +1785,6 @@ void func_800A5030(unk_36ED0* arg0) {
     D_800F8520[7].v.ob[2] = arg0->unk_2C[2];
     D_800F8520 += 8;
 }
-
-extern s16 D_800F8930[];
 
 void func_800A5168(unk_36ED0* arg0) {
     D_800F8520[0].v.tc[0] = D_800F8930[4];
@@ -1589,7 +1883,6 @@ void func_800A5380(unk_36ED0* arg0, s32 arg1) {
     func_800A5030(arg0);
 }
 
-extern Gfx* D_800F89C4;
 extern Vtx* D_800F8520;
 
 void func_800A5560(unk_36ED0* arg0) {
@@ -1672,11 +1965,6 @@ void func_800A57E8(unk_36ED0* arg0, s32 arg1) {
     func_800A5168(arg0);
 }
 
-extern Gfx D_80140F0[];
-extern unk_36ED0* D_800F89CC;
-extern unk_36ED0* D_800F89D0;
-extern unk_36ED0* D_800F8988;
-
 void func_800A587C(void) {
 
     gSPVertex(D_800F89C4++, D_800F8520, 16, 0);
@@ -1685,12 +1973,8 @@ void func_800A587C(void) {
     func_800A52FC(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
     D_800F8958[0].unk_00 = D_800F89CC;
     func_800A52FC(D_800F89D0, 0);
-    D_800F8988 = D_800F89D0;
+    D_800F8958[1].unk_00 = D_800F89D0;
 }
-
-extern unk_800F8958* D_800F89B8;
-extern unk_800F8958* D_800F89BC;
-extern s32 D_800F89C0;
 
 void func_800A5924(void) {
 
@@ -1764,11 +2048,6 @@ void func_800A5CF0(void) {
     }
 }
 
-extern s32 D_800F892C;
-extern s32 D_800F89D4;
-extern s32 D_800F89D8;
-extern s32 D_800F89DC;
-
 void func_800A60CC(void) {
 
     gSPVertex(D_800F89C4++, D_800F8520, 16, 0);
@@ -1811,7 +2090,7 @@ void func_800A60CC(void) {
     func_800A5380(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
     D_800F8958[0].unk_00 = D_800F89CC;
     func_800A5380(D_800F89D0, 0);
-    D_800F8988 = D_800F89D0;
+    D_800F8958[1].unk_00 = D_800F89D0;
 }
 
 void func_800A63A0(void) {
@@ -2021,7 +2300,7 @@ void func_800A7650(void) {
     func_800A573C(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
     D_800F8958[0].unk_00 = D_800F89CC;
     func_800A573C(D_800F89D0, 0);
-    D_800F8988 = D_800F89D0;
+    D_800F8958[1].unk_00 = D_800F89D0;
 }
 
 void func_800A7764(void) {
@@ -2129,7 +2408,7 @@ void func_800A8028(void) {
     func_800A57E8(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
     D_800F8958[0].unk_00 = D_800F89CC;
     func_800A57E8(D_800F89D0, 0);
-    D_800F8988 = D_800F89D0;
+    D_800F8958[1].unk_00 = D_800F89D0;
 }
 
 void func_800A80D0(void) {
@@ -2209,7 +2488,7 @@ void func_800A88AC(void) {
     func_800A52FC(D_800F89CC, 0);
     D_800F8958[0].unk_00 = D_800F89CC;
     func_800A52FC(D_800F89D0, 0);
-    D_800F8988 = D_800F89D0;
+    D_800F8958[1].unk_00 = D_800F89D0;
 }
 
 void func_800A894C(void) {
@@ -2244,18 +2523,7 @@ void func_800A8A5C(void) {
     }
 }
 
-typedef struct unk_800A8B74_arg_0 {
-    unk_36ED0* unk_00;
-    unk_36ED0* unk_04;
-    f32 unk_08;
-    s32 unk_0C;
-} unk_800A8B74_arg_0;
-
 extern unk_36ED0 D_802A9FC0[];
-extern unk_36ED0* D_800F851C;
-extern unk_36ED0* D_800F89C8;
-extern s32 D_800F8928;
-extern void (*D_800CF948[])(void);
 
 void func_800A8B74(unk_800A8B74_arg_0* arg0) {
     f32 var_fv0;
@@ -2298,7 +2566,7 @@ void func_800A8B74(unk_800A8B74_arg_0* arg0) {
             }
         }
 
-        trackShape = (u32) (D_800F89CC->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6;
+        trackShape = TRACK_SHAPE_INDEX((u32) D_800F89CC->trackSegmentInfo & TRACK_SHAPE_MASK);
         trackType = D_800F89CC->trackSegmentInfo & TRACK_TYPE_MASK;
         if (trackType != TRACK_TYPE_NONE) {
             temp_a1 = &D_800CF8C8[trackShape][trackType];
@@ -2333,8 +2601,6 @@ void func_800A8B74(unk_800A8B74_arg_0* arg0) {
         }
     } while (D_800F89CC != arg0->unk_04);
 }
-
-extern void (*D_800CF968[])(void);
 
 void func_800A8F1C(unk_800A8B74_arg_0* arg0) {
     f32 var_fv0;
@@ -2375,7 +2641,7 @@ void func_800A8F1C(unk_800A8B74_arg_0* arg0) {
                 } while (D_800F89CC->trackSegmentInfo & TRACK_FLAG_CONTINUOUS);
             }
         }
-        trackShape = (u32) (D_800F89CC->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6;
+        trackShape = TRACK_SHAPE_INDEX((u32) D_800F89CC->trackSegmentInfo & TRACK_SHAPE_MASK);
         trackType = D_800F89CC->trackSegmentInfo & TRACK_TYPE_MASK;
         if (trackType != TRACK_TYPE_NONE) {
             temp_a2 = &D_800CF8C8[trackShape][trackType];
@@ -2440,7 +2706,6 @@ Gfx* func_800A92FC(Gfx* gfx, Vtx* arg1, s32 arg2) {
 }
 
 extern u32 gGameFrameCount;
-extern s32 D_800F8518;
 extern Gfx D_8014040[];
 extern Gfx D_8014078[];
 
@@ -2464,8 +2729,7 @@ Gfx* func_800A95B4(Gfx* gfx) {
     D_800F89CC = D_802A9FC0;
     D_800F89D0 = &D_802A9FC0[1];
     do {
-
-        trackShape = (u32) (D_800F89CC->trackSegmentInfo & TRACK_SHAPE_MASK) >> 6;
+        trackShape = TRACK_SHAPE_INDEX((u32) D_800F89CC->trackSegmentInfo & TRACK_SHAPE_MASK);
         trackType = D_800F89CC->trackSegmentInfo & TRACK_TYPE_MASK;
         if (trackType != TRACK_TYPE_NONE) {
             temp_a1 = &D_800CF8C8[trackShape][trackType];
@@ -2502,10 +2766,6 @@ Gfx* func_800A95B4(Gfx* gfx) {
 
 extern unk_struct_1DC D_800E5220[];
 extern s32 D_800CCFE0;
-extern s32 D_800CF500;
-extern s32 D_800CF508;
-extern f32 D_800CF51C;
-extern unk_800A8B74_arg_0 D_800F8528[];
 
 #ifdef NON_EQUIVALENT
 Gfx* func_800A9938(Gfx* gfx, s32 arg1) {

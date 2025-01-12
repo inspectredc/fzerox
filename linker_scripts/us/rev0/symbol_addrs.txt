@@ -1,3 +1,8 @@
+entrypoint = 0x80067000;
+
+sBootThreadStack = 0x800D8030;
+sIdleThreadStack = 0x800D8230;
+
 D_800D35D8 = 0x800D35D8; //size:0xB8
 
 D_800D5AA8 = 0x800D5AA8; //force_migration:True
@@ -124,6 +129,8 @@ guScale = 0x800BBE54;
 guOrtho = 0x800C3CD4;
 guRotate = 0x800C3534;
 
+osGetIntMask = 0x800BBD00;
+osSetIntMask = 0x800BBD60;
 osInitialize = 0x800BE3B0;
 osSetEventMesg = 0x800C16F0;
 osCreateThread = 0x800BDE70;
@@ -223,12 +230,17 @@ gSampleBankTableData = 0x800D7FF0;
 gAudioSpecs = 0x800D1C34;
 gSeqTicksPerBeat = 0x800D1C68;
 
+bootproc = 0x80067060;
+
+Math_Rand1Init = 0x8006A8F0;
+Math_Rand2Init = 0x8006A904;
 Math_Rand1 = 0x8006A918;
 Math_Rand2 = 0x8006A978;
 Math_Round = 0x8006A9E0;
 Math_SinTableInit = 0x8006A6E4;
-mio0Decode = 0x800AA620;
+Light_SetLookAtSource = 0x8006B07C;
 Matrix_ToMtx = 0x8006BBE8;
+mio0Decode = 0x800AA620;
 
 gRandSeed1 = 0x800CD170;
 gRandMask1 = 0x800CD174;
@@ -248,21 +260,31 @@ gTotalLapCount = 0x800CD00C;
 gTotalLives = 0x800CE4DC;
 
 gGameMode = 0x800DCE44;
-gSinTable = 0x800DD230;
+gSinTable = 0x800DD230; // size:0x4000
 gCupRaceStats = 0x800E4268;
 gPlayerLives = 0x800E5ED8;
 gRacersKOd = 0x800E5FD2;
 
 gControllerPads = 0x800DCE80;
-gControllers = 0x800DCE98;
+gControllers = 0x800DCE98; // size:0x2E4
 gSharedController = 0x800DD180;
-gPlayerControlPorts = 0x800DD218;
+gPlayerControlPorts = 0x800DD218; // size:0x10
 gControllersConnected = 0x800DD228;
 gInputPressed = 0x800E416C;
 gInputButtonPressed = 0x800E416E;
 gStickPressed = 0x800E4170;
 gSkyboxType = 0x800E4260;
 gBackgroundFloorType = 0x800E4264;
+D_800E5220 = 0x800E5220; // size:0x770
+D_800E5F00 = 0x800E5F00; // size:0x10
+D_800E5F10 = 0x800E5F10; // size:0x10
+D_800E5F20 = 0x800E5F20; // size:0x10
+D_800E5F30 = 0x800E5F30; // size:0x10
+D_800E5FB8 = 0x800E5FB8; // size:0x4
+D_800F5DF0 = 0x800F5DF0; // size:0x9C
+D_800F80A8 = 0x800F80A8; // size:0x10
+D_800F8504 = 0x800F8504; // size:0x7
 gCourseIndex = 0x800F8514;
+D_800F8528 = 0x800F8528; // size:0x400
 
 D_800D4E98 = 0x800D4E98;

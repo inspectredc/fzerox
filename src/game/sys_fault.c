@@ -150,7 +150,7 @@ void Fault_DisplayFloatException(u32 exceptFlags) {
     }
 }
 
-extern OSMesgQueue D_800DCA80;
+extern OSMesgQueue gSerialEventQueue;
 // unk flags
 const u16 D_800D4AE4[] = { 0x8000, 0x0008, 0x0008, 0x4000, 0x0001, 0x0001, 0x4000, 0x0001, 0x4000, 0x0001, 0x1000 };
 extern Controller gSharedController;
@@ -172,8 +172,8 @@ void Fault_DisplayDebugInfo(OSThread* thread) {
     i = 0;
 
     while (true) {
-        osContStartReadData(&D_800DCA80);
-        func_80069820();
+        osContStartReadData(&gSerialEventQueue);
+        Controller_UpdateInputs();
         if (gSharedController.buttonPressed == 0) {
             continue;
         }
@@ -271,6 +271,7 @@ void Fault_Init(void) {
     gFaultMgr.width = SCREEN_WIDTH;
     gFaultMgr.height = 16;
     osCreateMesgQueue(&gFaultMgr.mesgQueue, &gFaultMgr.msg, 1);
-    osCreateThread(&gFaultMgr.thread, 2, Fault_ThreadEntry, 0, gFaultMgr.stack + sizeof(gFaultMgr.stack), 250);
+    osCreateThread(&gFaultMgr.thread, THREAD_ID_FAULT, Fault_ThreadEntry, NULL,
+                   gFaultMgr.stack + sizeof(gFaultMgr.stack), 250);
     osStartThread(&gFaultMgr.thread);
 }

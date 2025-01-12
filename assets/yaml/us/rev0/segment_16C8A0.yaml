@@ -235,9 +235,18 @@ D_8010008:
   ctype: u16
   format: RGBA16
   width: 64
-  height: 64
+  height: 32
   offset: 0x10008
   symbol: D_8010008
+
+D_8011008:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x11008
+  symbol: D_8011008
 
 D_8012008:
   type: TEXTURE

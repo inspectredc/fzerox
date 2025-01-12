@@ -1,50 +1,4 @@
-__leoActive = 0x80428770; //segment:leo
-leoCommand = 0x8040BB44; //segment:leo
-
-LEOcommand_que = 0x8042B2A8; //segment:leo
-LEOcontrol_que = 0x8042B2D8; //segment:leo
-LEOevent_que = 0x8042B2C0; //segment:leo
-LEOdma_que = 0x8042B2F0; //segment:leo
-LEOblock_que = 0x8042B308; //segment:leo
-LEOpost_que = 0x8042A640; //segment:leo
-LEOcontrol_que_buf = 0x8042B324; //segment:leo
-LEOevent_que_buf = 0x8042B320; //segment:leo
-LEOdma_que_buf = 0x8042B328; //segment:leo
-LEOblock_que_buf = 0x8042B330; //segment:leo
-LEOpost_que_buf = 0x8042A658; //segment:leo
-LEOcommandThread = 0x8042A748; //segment:leo
-LEOcommandThreadStack = 0x8042AAA8; //segment:leo
-LEOinterruptThread = 0x8042A8F8; //segment:leo
-LEOinterruptThreadStack = 0x8042AEA8; //segment:leo
-LEOwrite_pointer = 0x8042B334; //segment:leo
-LEOc2ctrl_que_buf = 0x8042B360; //segment:leo
-LEOcur_command = 0x8042B338; //segment:leo
-LEOc2ctrl_que = 0x8042B368; //segment:leo
-LEOtgt_param = 0x8042B350; //segment:leo size:0xC
-LEOrw_flags = 0x8042B346; //segment:leo
-LEO_sys_data = 0x8042A660; //segment:leo size:0xE8
-LEOPiDmaParam = 0x8042B388; //segment:leo
-LEO_country_code = 0x8042B35C; //segment:leo
-LEO_cmd_tbl = 0x804286F0; //segment:leo
-LEOPiInfo = 0x8042B380; //segment:leo
-LEOasic_bm_ctl_shadow = 0x8042B33C; //segment:leo
-LEOasic_seq_ctl_shadow = 0x8042B340; //segment:leo
-LEOC2_Syndrome = 0x8042B490; //segment:leo
-LEOc2_param = 0x8042BBD0; //segment:leo size:0x10
-LEOdisk_type = 0x8042B348; //segment:leo
-LEOdrive_flag = 0x8042B344; //segment:leo
-LEOclr_que_flag = 0x8042B345; //segment:leo
-LEO_TempBuffer = 0x8042B3A0; //segment:leo
-__leoVersion = 0x8042BBE0; //segment:leo size:0x4
-asic_cur_status = 0x8042BC30; //segment:leo
-unit_atten = 0x8042BC34; //segment:leo
-mseq_tbl = 0x8042BBF0; //segment:leo
 D_i1_80411850 = 0x80411850; //segment:leo type:u16
-asc2tbl = 0x8041231C; //segment:leo type:u32
-
-LeoBootGame = 0x800BB4E0; //type:func
-__LeoBootGame2 = 0x800BB61C; //type:func
-__LeoBootGame3 = 0x800BB940; //type:func
 
 LeoGetKAdr = 0x80411760; //segment:leo
 LeoGetAAdr = 0x804122A0; //segment:leo
@@ -66,23 +20,8 @@ leoSetTimer = 0x80411168; //segment:leo
 leoClr_reset = 0x80410AB8; //segment:leo
 
 D_i2_8010AE1C = 0x8010AE1C; //force_migration:True size:0x8 segment:ovl_i2
-gLivesChangeCounter = 0x8010D768; //segment:ovl_i2
-gPreviousLivesCount = 0x8010D76C; //segment:ovl_i2
-
-D_i3_80140F50 = 0x80140F50; //segment:ovl_i3 type:asciz
-D_i3_801417C4 = 0x801417C4; //force_migration:True size:0x8 segment:ovl_i3
-D_i3_801417F8 = 0x801417F8; //force_migration:True size:0x8 segment:ovl_i3
-D_i3_8013F068 = 0x8013F068; //segment:ovl_i3 size:0x10
-D_i3_80141EA8 = 0x80141EA8; //segment:ovl_i3 size:0x120
-sPausePlayerNum = 0x80141DAC; //segment:ovl_i3
 
 func_i3_fabsf = 0x80115DF0; //segment:ovl_i3
-func_i3_DrawBeveledBox = 0x8011B264; //segment:ovl_i3
-func_i3_DrawTimeAttackFinishMenu = 0x80123B24; //segment:ovl_i3
-func_i3_DrawHUD = 0x80131DF4; //segment:ovl_i3
-
-gOptionsInfo = 0x8011EDDC; //segment:ovl_i6 size:0xF4
-sOptionsSelectionState = 0x80124788; //segment:ovl_i6 size:0x1C
 
 func_i7_DrawThanksForPlayingWindow = 0x80146020; //segment:ovl_i7 type:func
 sThanksForPlayingStr = 0x8014A028; //segment:ovl_i7

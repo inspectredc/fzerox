@@ -13,8 +13,8 @@ static char devstr3[] = "Audio:now-max tasklen is %d / %d\n";
 static char devstr4[] = "Audio:Warning:ABI Tasklist length over (%d)\n";
 
 AudioTask* AudioThread_CreateTask(void) {
-    static s32 gMaxAbiCmdCnt = 128;
-    static AudioTask* gWaitingAudioTask = NULL;
+    static s32 sMaxAbiCmdCnt = 128;
+    static AudioTask* sWaitingAudioTask = NULL;
     u32 aiSamplesLeft;
     s32 abiCmdCount;
     s32 aiBufIndex;
@@ -56,7 +56,7 @@ AudioTask* AudioThread_CreateTask(void) {
         if (gResetStatus == 0) {
             osSendMesg(gAudioResetQueuePtr, (OSMesg) (s32) gSpecId, OS_MESG_NOBLOCK);
         }
-        gWaitingAudioTask = NULL;
+        sWaitingAudioTask = NULL;
         return NULL;
     }
     if (gResetTimer > 16) {
@@ -121,8 +121,8 @@ AudioTask* AudioThread_CreateTask(void) {
     task->yield_data_ptr = NULL;
     task->yield_data_size = 0;
 
-    if (gMaxAbiCmdCnt < abiCmdCount) {
-        gMaxAbiCmdCnt = abiCmdCount;
+    if (sMaxAbiCmdCnt < abiCmdCount) {
+        sMaxAbiCmdCnt = abiCmdCount;
     }
 
     return gCurTask;

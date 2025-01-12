@@ -7,34 +7,35 @@
 
 // Course Segment
 typedef struct unk_8006FC8C {
-    Vec3f pos;
-    Vec3f unk_0C;
-    f32 radiusLeft;
-    f32 radiusRight;
-    s32 trackSegmentInfo;
-    f32 unk_24;
-    f32 unk_28;
-    f32 unk_2C;
-    s32 segmentIndex;
-    struct unk_8006FC8C* next;
-    struct unk_8006FC8C* prev;
-    s8 unk_3C[0x18];
-    // s8 unk_3C[0x10];
-    // struct unk_802D3978* unk_4C;
-    // struct unk_802D3978* unk_50;
-    struct unk_802D3E38* unk_54;
-    struct unk_802D3E38* unk_58;
-    s8 unk_5C[0x8];
-    f32 unk_64;
-    f32 unk_68;
-    f32 unk_6C;
-    f32 unk_70;
-    Vec3f unk_74;
-    Vec3f unk_80;
-    Vec3f unk_8C;
-    f32 unk_98;
-    f32 unk_9C;
-    f32 unk_A0;
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ Vec3f unk_0C;
+    /* 0x18 */ f32 radiusLeft;
+    /* 0x1C */ f32 radiusRight;
+    /* 0x20 */ s32 trackSegmentInfo;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ s32 segmentIndex;
+    /* 0x34 */ struct unk_8006FC8C* next;
+    /* 0x38 */ struct unk_8006FC8C* prev;
+    /* 0x3C */ struct unk_36ED0* unk_3C;
+    /* 0x40 */ struct unk_36ED0* unk_40;
+    /* 0x44 */ s8 unk_44[0x8];
+    /* 0x4C */ struct unk_802D3978* unk_4C;
+    /* 0x50 */ struct unk_802D3978* unk_50;
+    /* 0x54 */ struct unk_802D3E38* unk_54;
+    /* 0x58 */ struct unk_802D3E38* unk_58;
+    /* 0x5C */ s8 unk_5C[0x8];
+    /* 0x64 */ f32 unk_64;
+    /* 0x68 */ f32 unk_68;
+    /* 0x6C */ f32 unk_6C;
+    /* 0x70 */ f32 unk_70;
+    /* 0x74 */ Vec3f unk_74;
+    /* 0x80 */ Vec3f unk_80;
+    /* 0x8C */ Vec3f unk_8C;
+    /* 0x98 */ f32 unk_98;
+    /* 0x9C */ f32 unk_9C;
+    /* 0xA0 */ f32 unk_A0;
 } unk_8006FC8C; // size = 0xA4
 
 typedef struct unk_800F8510 {
@@ -627,7 +628,7 @@ typedef struct unk_800DCE48 {
     s32 gameMode;
     s8 unk_04[0xC];
     s32 unk_10;
-} unk_800DCE48;
+} unk_800DCE48; // size = 0x14
 
 typedef struct unk_800F5DF0 {
     s32 unk_00;

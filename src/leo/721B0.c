@@ -2,7 +2,8 @@
 #include "unk_leo.h"
 
 void func_i1_804030A0(void) {
-    LeoByteToLBA(0, 1, 0);
+    //! @bug leads to null pointer dereference
+    LeoByteToLBA(0, 1, NULL);
 }
 
 extern unk_leo_804285D0 D_i1_804285D0;
@@ -63,8 +64,8 @@ void func_i1_804032D0(s32 arg0) {
     D_i1_804285D0.unk_0C = arg0;
 }
 
-extern u8 D_i1_80428654[];
-extern u8 D_i1_80428658[];
+extern char D_i1_80428654[];
+extern char D_i1_80428658[];
 
 void func_i1_804032E8(u16 arg0, s32 arg1) {
     func_i1_804030EC(arg0);
