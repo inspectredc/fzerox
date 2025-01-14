@@ -19,7 +19,7 @@ typedef enum GameMode {
     /*  0xE */ GAMEMODE_TIME_ATTACK,
     /*  0xF */ GAMEMODE_F,
     /* 0x10 */ GAMEMODE_10,
-    /* 0x11 */ GAMEMODE_11,
+    /* 0x11 */ GAMEMODE_GP_END_CS,
     /* 0x12 */ GAMEMODE_12,
     /* 0x13 */ GAMEMODE_13,
     /* 0x14 */ GAMEMODE_OPTIONS_MENU,

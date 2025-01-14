@@ -58,7 +58,7 @@ void func_i2_800FC77C(void) {
         case GAMEMODE_FLX_TITLE:
             func_i2_800FCB84(0, 7);
             break;
-        case GAMEMODE_11:
+        case GAMEMODE_GP_END_CS:
             func_i2_800FCD38(5, 120);
             func_i2_800FCB84(0, 5);
             break;
@@ -131,7 +131,7 @@ void func_i2_800FC9BC(void) {
         case GAMEMODE_FLX_TITLE:
             func_i2_800FCB84(1, 1);
             break;
-        case GAMEMODE_11:
+        case GAMEMODE_GP_END_CS:
             func_i2_800FCB84(1, 5);
             break;
         case GAMEMODE_GP_RACE:

@@ -14,6 +14,18 @@
 #include "other_types.h"
 #include "segment_symbols.h"
 
+
+// FAKE!!
+typedef struct unk_Light_t {
+    s8 unk_00[0x8];
+    s16 unk_08[3];
+} unk_Light_t;
+
+typedef union unk_Light {
+    unk_Light_t l;
+    long long int force_structure_alignment[2];
+} unk_Light;
+
 // ROUGH APPROXIMATIONS OF SIZES, NOT CORRECT!!
 
 typedef struct GfxPool {
@@ -33,7 +45,7 @@ typedef struct GfxPool {
     Mtx unk_21988[1];
     s8 pad_219C8[0xC0];
     Lights1 unk_21A88[4];
-    s8 pad_21AE8[0x40];
+    unk_Light unk_21AE8[4];
     LookAt unk_21B28;
     Vtx unk_21B48[2048];
     Vtx unk_29B48[28];

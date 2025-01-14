@@ -647,7 +647,7 @@ void func_i3_801365E0(void) {
     if (D_i3_80142188 & 1) {
         D_i3_8014219C = func_80078104(D_F2207C8, 0x40, 0, 0, 0);
     }
-    if (gGameMode == GAMEMODE_11) {
+    if (gGameMode == GAMEMODE_GP_END_CS) {
         D_i3_80142174 = 1;
     } else {
         D_i3_80142174 = 0;
@@ -1145,7 +1145,7 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
     gSP2Triangles(gfx++, 0, 3, 1, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 7, 5, 0, 4, 6, 7, 0);
 
-    if (gGameMode == GAMEMODE_11) {
+    if (gGameMode == GAMEMODE_GP_END_CS) {
         gfx = func_i7_80149760(gfx);
         gSPClearGeometryMode(gfx++, 0xFFFFFFFF);
         gSPSetGeometryMode(gfx++, G_SHADE | G_SHADING_SMOOTH | G_CLIPPING);

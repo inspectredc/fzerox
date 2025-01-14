@@ -569,7 +569,7 @@ void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
     Matrix_ToMtx(arg1, arg0);
 }
 
-void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6) {
+void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, Mtx3F* arg5, Vec3f* arg6) {
 
     if (arg0 == NULL) {
         arg0 = &D_800E1230;
@@ -577,18 +577,18 @@ void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
     if (arg1 == NULL) {
         arg1 = &D_800E1270;
     }
-    arg1->m[2][0] = arg5[0] * arg2;
-    arg1->m[2][1] = arg5[1] * arg2;
-    arg1->m[2][2] = arg5[2] * arg2;
-    arg1->m[0][0] = arg5[6] * arg4;
-    arg1->m[0][1] = arg5[7] * arg4;
-    arg1->m[0][2] = arg5[8] * arg4;
-    arg1->m[1][0] = arg5[3] * arg3;
-    arg1->m[1][1] = arg5[4] * arg3;
-    arg1->m[1][2] = arg5[5] * arg3;
-    arg1->m[3][0] = arg6[0];
-    arg1->m[3][1] = arg6[1];
-    arg1->m[3][2] = arg6[2];
+    arg1->m[2][0] = arg5->x.x * arg2;
+    arg1->m[2][1] = arg5->x.y * arg2;
+    arg1->m[2][2] = arg5->x.z * arg2;
+    arg1->m[0][0] = arg5->z.x * arg4;
+    arg1->m[0][1] = arg5->z.y * arg4;
+    arg1->m[0][2] = arg5->z.z * arg4;
+    arg1->m[1][0] = arg5->y.x * arg3;
+    arg1->m[1][1] = arg5->y.y * arg3;
+    arg1->m[1][2] = arg5->y.z * arg3;
+    arg1->m[3][0] = arg6->x;
+    arg1->m[3][1] = arg6->y;
+    arg1->m[3][2] = arg6->z;
     arg1->m[0][3] = 0.0f;
     arg1->m[1][3] = 0.0f;
     arg1->m[2][3] = 0.0f;

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzxthread.h"
 #include "fzx_game.h"
+#include "fzx_course.h"
 #include "segment_symbols.h"
 
 u32 gSegments[16];
@@ -15,24 +16,45 @@ s8 D_800CD2F0 = -1;
 s8 D_800CD2F4 = 0;
 
 RomOffset D_800CD2F8[] = {
-    SEGMENT_ROM_START(segment_235130), SEGMENT_ROM_START(segment_239A80), SEGMENT_ROM_START(segment_23EC50),
-    SEGMENT_ROM_START(segment_243D90), SEGMENT_ROM_START(segment_24A270), SEGMENT_ROM_START(segment_2507F0),
-    SEGMENT_ROM_START(segment_255100), SEGMENT_ROM_START(segment_259600), SEGMENT_ROM_START(segment_25F360),
-    SEGMENT_ROM_START(segment_266C20), SEGMENT_ROM_START(segment_26D780),
+    SEGMENT_ROM_START(segment_235130), // VENUE_MUTE_CITY
+    SEGMENT_ROM_START(segment_239A80), // VENUE_PORT_TOWN
+    SEGMENT_ROM_START(segment_23EC50), // VENUE_BIG_BLUE
+    SEGMENT_ROM_START(segment_243D90), // VENUE_SAND_OCEAN
+    SEGMENT_ROM_START(segment_24A270), // VENUE_DEVILS_FOREST
+    SEGMENT_ROM_START(segment_2507F0), // VENUE_WHITE_LAND
+    SEGMENT_ROM_START(segment_255100), // VENUE_SECTOR
+    SEGMENT_ROM_START(segment_259600), // VENUE_RED_CANYON
+    SEGMENT_ROM_START(segment_25F360), // VENUE_FIRE_FIELD
+    SEGMENT_ROM_START(segment_266C20), // VENUE_SILENCE
+    SEGMENT_ROM_START(segment_26D780), // VENUE_ENDING
 };
 
 u8* D_800CD324[] = {
-    SEGMENT_VRAM_START(segment_235130), SEGMENT_VRAM_START(segment_239A80), SEGMENT_VRAM_START(segment_23EC50),
-    SEGMENT_VRAM_START(segment_243D90), SEGMENT_VRAM_START(segment_24A270), SEGMENT_VRAM_START(segment_2507F0),
-    SEGMENT_VRAM_START(segment_255100), SEGMENT_VRAM_START(segment_259600), SEGMENT_VRAM_START(segment_25F360),
-    SEGMENT_VRAM_START(segment_266C20), SEGMENT_VRAM_START(segment_26D780),
+    SEGMENT_VRAM_START(segment_235130), // VENUE_MUTE_CITY
+    SEGMENT_VRAM_START(segment_239A80), // VENUE_PORT_TOWN
+    SEGMENT_VRAM_START(segment_23EC50), // VENUE_BIG_BLUE
+    SEGMENT_VRAM_START(segment_243D90), // VENUE_SAND_OCEAN
+    SEGMENT_VRAM_START(segment_24A270), // VENUE_DEVILS_FOREST
+    SEGMENT_VRAM_START(segment_2507F0), // VENUE_WHITE_LAND
+    SEGMENT_VRAM_START(segment_255100), // VENUE_SECTOR
+    SEGMENT_VRAM_START(segment_259600), // VENUE_RED_CANYON
+    SEGMENT_VRAM_START(segment_25F360), // VENUE_FIRE_FIELD
+    SEGMENT_VRAM_START(segment_266C20), // VENUE_SILENCE
+    SEGMENT_VRAM_START(segment_26D780), // VENUE_ENDING
 };
 
 u8* D_800CD350[] = {
-    SEGMENT_VRAM_END(segment_235130), SEGMENT_VRAM_END(segment_239A80), SEGMENT_VRAM_END(segment_23EC50),
-    SEGMENT_VRAM_END(segment_243D90), SEGMENT_VRAM_END(segment_24A270), SEGMENT_VRAM_END(segment_2507F0),
-    SEGMENT_VRAM_END(segment_255100), SEGMENT_VRAM_END(segment_259600), SEGMENT_VRAM_END(segment_25F360),
-    SEGMENT_VRAM_END(segment_266C20), SEGMENT_VRAM_END(segment_26D780),
+    SEGMENT_VRAM_END(segment_235130), // VENUE_MUTE_CITY
+    SEGMENT_VRAM_END(segment_239A80), // VENUE_PORT_TOWN
+    SEGMENT_VRAM_END(segment_23EC50), // VENUE_BIG_BLUE
+    SEGMENT_VRAM_END(segment_243D90), // VENUE_SAND_OCEAN
+    SEGMENT_VRAM_END(segment_24A270), // VENUE_DEVILS_FOREST
+    SEGMENT_VRAM_END(segment_2507F0), // VENUE_WHITE_LAND
+    SEGMENT_VRAM_END(segment_255100), // VENUE_SECTOR
+    SEGMENT_VRAM_END(segment_259600), // VENUE_RED_CANYON
+    SEGMENT_VRAM_END(segment_25F360), // VENUE_FIRE_FIELD
+    SEGMENT_VRAM_END(segment_266C20), // VENUE_SILENCE
+    SEGMENT_VRAM_END(segment_26D780), // VENUE_ENDING
 };
 
 void func_80076490(void) {
@@ -135,7 +157,7 @@ void func_800766F0(void) {
         case GAMEMODE_RECORDS:
         case GAMEMODE_D:
         case GAMEMODE_10:
-        case GAMEMODE_11:
+        case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
         case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_4012:
@@ -287,7 +309,7 @@ void func_80076CB8(void) {
         case GAMEMODE_VS_3P:
         case GAMEMODE_VS_4P:
         case GAMEMODE_TIME_ATTACK:
-        case GAMEMODE_11:
+        case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
             segmentSize = SEGMENT_VRAM_SIZE(segment_1B8550);
             break;
@@ -357,7 +379,7 @@ void func_80076F00(void) {
             Segment_SetAddress(9, D_800DCDD4);
             break;
         case GAMEMODE_10:
-        case GAMEMODE_11:
+        case GAMEMODE_GP_END_CS:
         case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_4012:
             segmentSize = SEGMENT_DATA_SIZE_CONST(segment_22B0A0);
@@ -388,7 +410,7 @@ void func_80076FC0(void) {
         case GAMEMODE_RECORDS:
         case GAMEMODE_D:
         case GAMEMODE_TIME_ATTACK:
-        case GAMEMODE_11:
+        case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
             segmentSize = SEGMENT_DATA_SIZE_CONST(segment_235130);
             D_800DCDDC = osVirtualToPhysical(func_800768F4(0, segmentSize));
@@ -405,7 +427,7 @@ void func_80077084(void) {
     size_t segmentSize;
 
     D_800CD2F4 = 1;
-    if (gGameMode != GAMEMODE_11) {
+    if (gGameMode != GAMEMODE_GP_END_CS) {
         D_800CD2F4 = 0;
         Segment_SetAddress(5, D_800DCDE4);
         return;
@@ -445,7 +467,7 @@ void func_8007712C(void) {
             segmentBssSize = SEGMENT_BSS_SIZE(ovl_i8);
             break;
         // ovl_i7
-        case GAMEMODE_11:
+        case GAMEMODE_GP_END_CS:
             vramTextStart = SEGMENT_TEXT_START(ovl_i7);
             vramStart = SEGMENT_VRAM_START(ovl_i7);
             vramDataStart = SEGMENT_DATA_START(ovl_i7);
@@ -501,7 +523,7 @@ void func_80077318(void) {
         case GAMEMODE_VS_4P:
         case GAMEMODE_RECORDS:
         case GAMEMODE_TIME_ATTACK:
-        case GAMEMODE_11:
+        case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
             // ovl_i3
             vramTextStart = SEGMENT_TEXT_START(ovl_i3);
@@ -595,7 +617,7 @@ void func_80077630(void) {
             case GAMEMODE_VS_3P:
             case GAMEMODE_VS_4P:
             case GAMEMODE_TIME_ATTACK:
-            case GAMEMODE_11:
+            case GAMEMODE_GP_END_CS:
             case GAMEMODE_DEATH_RACE:
                 func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                               SEGMENT_ROM_SIZE(segment_17B960));
@@ -672,7 +694,7 @@ void func_800778F8(void) {
     if (D_800CD2E8 != 0) {
         switch (gGameMode) {
             case GAMEMODE_10:
-            case GAMEMODE_11:
+            case GAMEMODE_GP_END_CS:
             case GAMEMODE_LX_MACHINE_SETTINGS:
             case GAMEMODE_4012:
                 romOffset = SEGMENT_ROM_START(segment_22B0A0);
@@ -693,11 +715,11 @@ void func_800778F8(void) {
     }
 }
 
-extern s8 D_8010B7B2;
+extern CourseData D_8010B7B0;
 
 void func_800779D0(void) {
     s32 pad;
-    s32 sp28;
+    s32 venue;
     s32 pad2;
     RomOffset romOffset;
     size_t ramSize;
@@ -713,11 +735,11 @@ void func_800779D0(void) {
             case GAMEMODE_RECORDS:
             case GAMEMODE_D:
             case GAMEMODE_TIME_ATTACK:
-            case GAMEMODE_11:
+            case GAMEMODE_GP_END_CS:
             case GAMEMODE_DEATH_RACE:
-                sp28 = D_8010B7B2;
-                romOffset = D_800CD2F8[sp28];
-                ramSize = D_800CD350[sp28] - D_800CD324[sp28];
+                venue = D_8010B7B0.venue;
+                romOffset = D_800CD2F8[venue];
+                ramSize = D_800CD350[venue] - D_800CD324[venue];
                 break;
             default:
                 D_800CD2EC = 0;
@@ -731,7 +753,7 @@ void func_800779D0(void) {
             mio0Decode(sp18, osPhysicalToVirtual(D_800DCDDC));
         }
         D_800CD2EC = 0;
-        func_8009CED0(sp28);
+        func_8009CED0(venue);
     }
 }
 
@@ -780,7 +802,7 @@ void func_80077BE0(void) {
     u8* sp24;
 
     if (D_800CD2F4 != 0) {
-        if (gGameMode != GAMEMODE_11) {
+        if (gGameMode != GAMEMODE_GP_END_CS) {
             D_800CD2F4 = 0;
             return;
         }
