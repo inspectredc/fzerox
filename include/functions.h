@@ -27,6 +27,7 @@ s32 func_8006AC10(Mtx3F* mtx);
 void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* red, s32* green, s32* blue);
 void Lights_SetSource(Lights1* light, s32 ambientR, s32 ambientG, s32 ambientB, s32 r, s32 g, s32 b, s32 x, s32 y, s32 z);
 void Light_SetLookAtSource(LookAt* lookAt, MtxF* mtx);
+void Matrix_ToMtx(MtxF* src, Mtx* dest2);
 void func_8006BC84(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD);
 void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6, f32* arg7);
 void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, Mtx3F* arg5, Vec3f* arg6);

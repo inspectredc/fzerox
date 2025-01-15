@@ -5277,7 +5277,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                     continue;
                 }
 
-                if (var_v0_3->unk_38 < var_fa1) {
+                if (var_v0_3->unk_30.z < var_fa1) {
                     continue;
                 }
 
@@ -5288,7 +5288,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                     continue;
                 }
 
-                if (var_v0_3->unk_30 < var_fa1) {
+                if (var_v0_3->unk_30.x < var_fa1) {
                     continue;
                 }
 
@@ -5299,7 +5299,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                     continue;
                 }
 
-                if (var_v0_3->unk_34 < var_fa1) {
+                if (var_v0_3->unk_30.y < var_fa1) {
                     continue;
                 }
 
