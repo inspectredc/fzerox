@@ -1205,41 +1205,853 @@ void func_80071260(s32 arg0) {
     for (i = 0; i < var_s2->index; i++) {}
 }
 
-void func_80071790(s32, s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80071790.s")
+extern CourseData D_8010B7B0;
 extern unk_8006FF90_arg_1 D_802D1B70[];
+extern unk_800F8510 D_802A6B40[56];
+
+void func_80071790(s32 courseIndex, s32 trackSegment) {
+    s32 index = D_802D2D70.index;
+    unk_8006FF90_arg_1* var_v1 = &D_802D2D70.unk_00[index];
+    unk_8006FC8C* temp_a0;
+    f32 temp_fs1;
+    f32 temp_fs3;
+
+    // FAKE cast
+    temp_a0 = &D_802A6B40[(s16) courseIndex].unk_10[0];
+    temp_fs3 = (temp_a0->radiusLeft - temp_a0->radiusRight) / 2;
+    temp_fs1 = (temp_a0->next->radiusLeft - temp_a0->next->radiusRight) / 2;
+    temp_fs1 -= temp_fs3;
+
+    switch (D_8010B7B0.pit[trackSegment]) {
+        case PIT_LEFT:
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_04 = 1;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = 100.0f;
+            var_v1->unk_14 = 5000.0f;
+            index++;
+            break;
+        case PIT_RIGHT:
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_04 = 1;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = -5000.0f;
+            var_v1->unk_14 = -100.0f;
+            index++;
+            break;
+        case PIT_BOTH:
+            var_v1->unk_04 = 1;
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = 100.0f;
+            var_v1->unk_14 = 5000.0f;
+            var_v1++;
+            index++;
+            var_v1->unk_04 = 1;
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = -5000.0f;
+            var_v1->unk_14 = -100.0f;
+            index++;
+            break;
+    }
+    D_802D2D70.unk_00 = D_802D1B70;
+    D_802D2D70.index = index;
+}
+
 extern s8 D_i2_8010BD50[];
 
-void func_800718D0(s32, s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_800718D0.s")
+void func_800718D0(s32 courseIndex, s32 trackSegment) {
+    s32 index;
+    unk_8006FF90_arg_1* var_v1;
+    unk_8006FC8C* temp_a0;
+    f32 temp_fs1;
+    f32 temp_fs3;
 
-void func_80071A58(s32, s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80071A58.s")
+    index = D_802D2D70.index;
+    var_v1 = &D_802D2D70.unk_00[index];
+
+    // FAKE cast
+    temp_a0 = &D_802A6B40[(s16) courseIndex].unk_10[0];
+    temp_fs3 = (temp_a0->radiusLeft - temp_a0->radiusRight) / 2;
+    temp_fs1 = (temp_a0->next->radiusLeft - temp_a0->next->radiusRight) / 2;
+    temp_fs1 -= temp_fs3;
+
+    switch (D_8010B7B0.dirt[trackSegment]) {
+        case DIRT_LEFT:
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_04 = 2;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = 100.0f;
+            var_v1->unk_14 = 5000.0f;
+            index++;
+            break;
+        case DIRT_RIGHT:
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_04 = 2;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = -5000.0f;
+            var_v1->unk_14 = -100.0f;
+            index++;
+            break;
+        case DIRT_BOTH:
+            var_v1->unk_04 = 2;
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = 100.0f;
+            var_v1->unk_14 = 5000.0f;
+            var_v1++;
+            index++;
+            var_v1->unk_04 = 2;
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = -5000.0f;
+            var_v1->unk_14 = -100.0f;
+            index++;
+            break;
+        case DIRT_MIDDLE:
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_04 = 2;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = -100.0f;
+            var_v1->unk_14 = 100.0f;
+            index++;
+            break;
+    }
+    D_802D2D70.unk_00 = D_802D1B70;
+    D_802D2D70.index = index;
+}
+
+void func_80071A58(s32 courseIndex, s32 trackSegment) {
+    s32 index;
+    unk_8006FF90_arg_1* var_v1;
+    unk_8006FC8C* temp_a0;
+    f32 temp_fs1;
+    f32 temp_fs3;
+
+    index = D_802D2D70.index;
+    var_v1 = &D_802D2D70.unk_00[index];
+
+    // FAKE cast
+    temp_a0 = &D_802A6B40[(s16) courseIndex].unk_10[0];
+    temp_fs3 = (temp_a0->radiusLeft - temp_a0->radiusRight) / 2;
+    temp_fs1 = (temp_a0->next->radiusLeft - temp_a0->next->radiusRight) / 2;
+    temp_fs1 -= temp_fs3;
+
+    switch (D_8010B7B0.ice[trackSegment]) {
+        case ICE_LEFT:
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_04 = 4;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = 100.0f;
+            var_v1->unk_14 = 5000.0f;
+            index++;
+            break;
+        case ICE_RIGHT:
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_04 = 4;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = -5000.0f;
+            var_v1->unk_14 = -100.0f;
+            index++;
+            break;
+        case ICE_BOTH:
+            var_v1->unk_04 = 4;
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = 100.0f;
+            var_v1->unk_14 = 5000.0f;
+            var_v1++;
+            index++;
+            var_v1->unk_04 = 4;
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = -5000.0f;
+            var_v1->unk_14 = -100.0f;
+            index++;
+            break;
+        case ICE_MIDDLE:
+            var_v1->unk_00 = trackSegment;
+            var_v1->unk_04 = 4;
+            var_v1->unk_08 = 0.0f;
+            var_v1->unk_0C = 1.0f;
+            var_v1->unk_10 = -100.0f;
+            var_v1->unk_14 = 100.0f;
+            index++;
+            break;
+    }
+    D_802D2D70.unk_00 = D_802D1B70;
+    D_802D2D70.index = index;
+}
 
 void func_80071BE4(s32);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80071BE4.s")
 
-extern CourseData D_8010B7B0;
-void func_8007243C(s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8007243C.s")
+void func_8007243C(s32 courseIndex) {
+    unk_802D1B60_unk_00* var_s0;
+    s32 spC0;
+    f32 temp_fa0;
+    f32 temp_fs0;
+    f32 temp_fs1;
+    f32 temp_fs2;
+    f32 temp_fs3;
+    f32 temp_ft3;
+    s32 i;
+    s32 var_s2;
+    s32 var_s3;
+    f32 temp_fv1;
+    unk_8006FC8C* temp_a0;
+    Vec3f sp88;
 
-void func_80072758(s32, s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80072758.s")
+    spC0 = D_802D1B60.unk_08;
+    var_s3 = D_802D1B60.unk_0C;
+    var_s2 = D_802D1B60.unk_04;
 
-void func_80072BB0(s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80072BB0.s")
+    var_s0 = &D_802D1B60.unk_00[var_s2];
 
-void func_80072D00(s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80072D00.s")
+    for (i = 0; i < D_802A6B40[courseIndex].unk_08; i++) {
+        temp_a0 = &D_802A6B40[courseIndex].unk_10[i];
 
-void func_80072ECC(s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80072ECC.s")
+        temp_fs2 = temp_a0->radiusLeft + temp_a0->radiusRight;
+        temp_fs0 = temp_a0->next->radiusLeft + temp_a0->next->radiusRight;
+        temp_fs3 = (temp_a0->radiusLeft - temp_a0->radiusRight) / 2;
+        temp_fs1 = ((temp_a0->next->radiusLeft - temp_a0->next->radiusRight) / 2);
+        temp_fs0 -= temp_fs2;
+        temp_fs1 -= temp_fs3;
 
-void func_800730A4(s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_800730A4.s")
+        temp_fv1 = 0.0f;
 
-void func_8007327C(s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8007327C.s")
+        switch (D_8010B7B0.jump[i]) {
+            case JUMP_ALL:
+                temp_fv1 -= 100.0f / func_8009E538(temp_a0, 1.0f, &sp88);
+                temp_fv1 += 1.0f;
+
+                var_s0->unk_00 = 0x17;
+                var_s0->unk_04 = i;
+                var_s0->unk_08 = temp_fv1;
+                var_s0->unk_0C = (temp_fs1 * temp_fv1) + temp_fs3;
+                var_s0->unk_10.x = temp_fs2 + (temp_fs0 * temp_fv1);
+                var_s0->unk_10.y = 30.0f;
+                var_s0->unk_10.z = 60.0f;
+                var_s0++;
+                var_s2++;
+                var_s3++;
+                break;
+            case JUMP_LEFT:
+                temp_fv1 -= 100.0f / func_8009E538(temp_a0, 1.0f, &sp88);
+                temp_fv1 += 1.0f;
+
+                var_s0->unk_00 = 0x17;
+                var_s0->unk_04 = i;
+                var_s0->unk_08 = temp_fv1;
+                var_s0->unk_0C = ((temp_fs1 * temp_fv1) + temp_fs3) + ((temp_fs2 + (temp_fs0 * temp_fv1)) / 4);
+                var_s0->unk_10.x = (temp_fs2 + (temp_fs0 * temp_fv1)) / 2;
+                var_s0->unk_10.y = 30.0f;
+                var_s0->unk_10.z = 60.0f;
+                var_s0++;
+                var_s2++;
+                var_s3++;
+                break;
+            case JUMP_RIGHT:
+                temp_fv1 -= 100.0f / func_8009E538(temp_a0, 1.0f, &sp88);
+                temp_fv1 += 1.0f;
+
+                var_s0->unk_00 = 0x17;
+                var_s0->unk_04 = i;
+                var_s0->unk_08 = temp_fv1;
+                var_s0->unk_0C = ((temp_fs1 * temp_fv1) + temp_fs3) - ((temp_fs2 + (temp_fs0 * temp_fv1)) / 4);
+                var_s0->unk_10.x = (temp_fs2 + (temp_fs0 * temp_fv1)) / 2;
+                var_s0->unk_10.y = 30.0f;
+                var_s0->unk_10.z = 60.0f;
+                var_s0++;
+                var_s2++;
+                var_s3++;
+                break;
+        }
+    }
+
+    D_802D1B60.unk_08 = spC0;
+    D_802D1B60.unk_0C = var_s3;
+    D_802D1B60.unk_04 = var_s2;
+}
+
+void func_80072758(s32 arg0, s32 arg1) {
+    s32 sp5C;
+    f32 sp58;
+    f32 temp;
+    f32 var_fs0;
+    f32 sp4C;
+    f32 sp48;
+    f32 sp44;
+    f32 sp40;
+    unk_8006FC8C* sp3C;
+    unk_8006FF90_arg_1* sp38;
+    Vec3f sp2C;
+
+    sp5C = D_802D2D70.index;
+    sp38 = &D_802D2D70.unk_00[sp5C];
+    sp3C = &D_802A6B40[arg0].unk_10[arg1];
+    sp4C = sp3C->radiusLeft + sp3C->radiusRight;
+    sp48 = sp3C->next->radiusLeft + sp3C->next->radiusRight;
+    sp44 = (sp3C->radiusLeft - sp3C->radiusRight) / 2;
+    sp40 = (sp3C->next->radiusLeft - sp3C->next->radiusRight) / 2;
+    sp48 -= sp4C;
+    sp40 -= sp44;
+    sp58 = sp3C->unk_28;
+
+    var_fs0 = 0;
+
+    switch (D_8010B7B0.dash[arg1]) {
+        case DASH_MIDDLE:
+            sp58 /= 2;
+            temp = func_8009E538(sp3C, 0, &sp2C);
+            var_fs0 += sp58 / temp;
+            sp38->unk_00 = arg1;
+            sp38->unk_04 = 3;
+            sp38->unk_08 = var_fs0;
+            sp38->unk_0C = 1.0f;
+
+            switch (sp3C->trackSegmentInfo & TRACK_SHAPE_MASK) {
+                case TRACK_SHAPE_HALF_PIPE:
+                    sp38->unk_10 = sp38->unk_14 = 0.0f;
+                    break;
+                case TRACK_SHAPE_PIPE:
+                    sp38->unk_10 = sp38->unk_14 = 22.5f;
+                    break;
+                case TRACK_SHAPE_CYLINDER:
+                    sp38->unk_10 = sp38->unk_14 = 202.5f;
+                    break;
+                default:
+                    sp38->unk_10 = 0.0f;
+                    sp38->unk_14 = 0.0f;
+                    break;
+            }
+            sp5C++;
+            break;
+        case DASH_LEFT:
+            sp58 /= 2;
+            temp = func_8009E538(sp3C, 0, &sp2C);
+            var_fs0 += sp58 / temp;
+            sp4C = (var_fs0 * sp48) + sp4C;
+            sp38->unk_00 = arg1;
+            sp38->unk_04 = 3;
+            sp38->unk_08 = var_fs0;
+            sp38->unk_0C = 1.0f;
+            sp38->unk_10 = (sp4C / 2.0) - 100.0f;
+            sp38->unk_14 = sp38->unk_10;
+            if (sp38->unk_10 < 0.0f) {
+                sp38->unk_10 = 0.0f;
+            }
+            sp38->unk_14 = sp38->unk_10;
+
+            switch (sp3C->trackSegmentInfo & TRACK_SHAPE_MASK) {
+                case TRACK_SHAPE_HALF_PIPE:
+                    sp38->unk_10 = sp38->unk_14 = 45.0f;
+                    break;
+                case TRACK_SHAPE_PIPE:
+                    sp38->unk_10 = sp38->unk_14 = 157.5f;
+                    break;
+                case TRACK_SHAPE_CYLINDER:
+                    sp38->unk_10 = sp38->unk_14 = 337.5f;
+                    break;
+            }
+            sp5C++;
+            break;
+        case DASH_RIGHT:
+            sp58 /= 2;
+            temp = func_8009E538(sp3C, 0, &sp2C);
+            var_fs0 += sp58 / temp;
+            sp4C = (var_fs0 * sp48) + sp4C;
+            sp38->unk_00 = arg1;
+            sp38->unk_04 = 3;
+            sp38->unk_08 = var_fs0;
+            sp38->unk_0C = 1.0f;
+            sp38->unk_10 = ((sp4C / 2.0) - 100.0f) * -1.0f;
+
+            if (sp38->unk_10 > 0.0f) {
+                sp38->unk_10 = 0.0f;
+            }
+            sp38->unk_14 = sp38->unk_10;
+
+            switch (sp3C->trackSegmentInfo & TRACK_SHAPE_MASK) {
+                case TRACK_SHAPE_HALF_PIPE:
+                    sp38->unk_10 = sp38->unk_14 = 315.0f;
+                    break;
+                case TRACK_SHAPE_PIPE:
+                    sp38->unk_10 = sp38->unk_14 = 247.5f;
+                    break;
+                case TRACK_SHAPE_CYLINDER:
+                    sp38->unk_10 = sp38->unk_14 = 67.5f;
+                    break;
+            }
+            sp5C++;
+            break;
+    }
+
+    D_802D2D70.unk_00 = D_802D1B70;
+    D_802D2D70.index = sp5C;
+}
+
+void func_80072BB0(s32 courseIndex) {
+    s32 j;
+    s32 i;
+    s32 var_a1;
+    unk_8006FC8C* temp_t2;
+    unk_802D1B60_unk_00* var_a2;
+    s32 temp_v0 = D_802D1B60.unk_08;
+    s32 temp_v1 = D_802D1B60.unk_0C;
+    f32 temp_fs0;
+    f32 temp_fs1;
+    f32 temp_fs2;
+    f32 temp_fs3;
+
+    var_a1 = D_802D1B60.unk_04;
+
+    var_a2 = &D_802D1B60.unk_00[var_a1];
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < D_802A6B40[courseIndex].unk_08; j++) {
+            temp_t2 = &D_802A6B40[courseIndex].unk_10[j];
+
+            if (i == 3) {}
+
+            temp_fs2 = temp_t2->radiusLeft + temp_t2->radiusRight;
+            temp_fs0 = temp_t2->next->radiusLeft + temp_t2->next->radiusRight;
+            temp_fs3 = (temp_t2->radiusLeft - temp_t2->radiusRight) / 2;
+            temp_fs1 = (temp_t2->next->radiusLeft - temp_t2->next->radiusRight) / 2;
+            temp_fs0 -= temp_fs2;
+            temp_fs1 -= temp_fs3;
+
+            if (i == D_8010B7B0.gate[j]) {
+                switch (D_8010B7B0.gate[j]) {
+                    case GATE_SQUARE:
+                        var_a2->unk_00 = 0;
+                        break;
+                    case GATE_START:
+                        var_a2->unk_00 = 1;
+                        break;
+                    case GATE_HEXAGONAL:
+                        var_a2->unk_00 = 2;
+                        break;
+                }
+                var_a2->unk_04 = j;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_fs3;
+                var_a2->unk_10.x = 0.0f;
+                var_a2->unk_10.y = 0.0f;
+                var_a2->unk_10.z = 0.0f;
+                var_a1++;
+                var_a2++;
+            }
+        }
+    }
+    D_802D1B60.unk_08 = temp_v0;
+    D_802D1B60.unk_0C = temp_v1;
+    D_802D1B60.unk_04 = var_a1;
+}
+
+void func_80072D00(s32 courseIndex) {
+    s32 var_a1;
+    s32 i;
+    unk_8006FC8C* temp_a0;
+    unk_802D1B60_unk_00* var_a2;
+    s32 temp_v0 = D_802D1B60.unk_08;
+    s32 temp_v1 = D_802D1B60.unk_0C;
+    f32 temp_fs0;
+    f32 temp_fs1;
+    f32 temp_fs2;
+    f32 temp_fs3;
+
+    var_a1 = D_802D1B60.unk_04;
+
+    var_a2 = &D_802D1B60.unk_00[var_a1];
+
+    for (i = 0; i < D_802A6B40[courseIndex].unk_08; i++) {
+        temp_a0 = &D_802A6B40[courseIndex].unk_10[i];
+
+        temp_fs2 = temp_a0->radiusLeft + temp_a0->radiusRight;
+        temp_fs0 = temp_a0->next->radiusLeft + temp_a0->next->radiusRight;
+        temp_fs3 = (temp_a0->radiusLeft - temp_a0->radiusRight) / 2;
+        temp_fs1 = (temp_a0->next->radiusLeft - temp_a0->next->radiusRight) / 2;
+        temp_fs0 -= temp_fs2;
+        temp_fs1 -= temp_fs3;
+
+        switch (D_8010B7B0.building[i]) {
+            case BUILDING_TALL_LEFT:
+                var_a2->unk_00 = 12;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_a0->radiusLeft + 500.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_TALL_RIGHT:
+                var_a2->unk_00 = 13;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = (temp_a0->radiusRight + 500.0f) * -1.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_TALL_BOTH:
+                var_a2->unk_00 = 12;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_a0->radiusLeft + 500.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                var_a2->unk_04 = i;
+                var_a2->unk_00 = 13;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = (temp_a0->radiusRight + 500.0f) * -1.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+        }
+    }
+    D_802D1B60.unk_08 = temp_v0;
+    D_802D1B60.unk_0C = temp_v1;
+    D_802D1B60.unk_04 = var_a1;
+}
+
+void func_80072ECC(s32 courseIndex) {
+    s32 var_a1;
+    s32 i;
+    s32 j;
+    unk_8006FC8C* temp_a0;
+    unk_802D1B60_unk_00* var_a2;
+    s32 temp_v0 = D_802D1B60.unk_08;
+    s32 temp_v1 = D_802D1B60.unk_0C;
+    f32 temp_fs0;
+    f32 temp_fs1;
+    f32 temp_fs2;
+    f32 temp_fs3;
+
+    var_a1 = D_802D1B60.unk_04;
+
+    var_a2 = &D_802D1B60.unk_00[var_a1];
+
+    for (i = 0; i < D_802A6B40[courseIndex].unk_08; i++) {
+        temp_a0 = &D_802A6B40[courseIndex].unk_10[i];
+
+        temp_fs2 = temp_a0->radiusLeft + temp_a0->radiusRight;
+        temp_fs0 = temp_a0->next->radiusLeft + temp_a0->next->radiusRight;
+        temp_fs3 = (temp_a0->radiusLeft - temp_a0->radiusRight) / 2;
+        temp_fs1 = (temp_a0->next->radiusLeft - temp_a0->next->radiusRight) / 2;
+        temp_fs0 -= temp_fs2;
+        temp_fs1 -= temp_fs3;
+
+        switch (D_8010B7B0.building[i]) {
+            case BUILDING_SHORT_LEFT:
+                var_a2->unk_00 = 14;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_a0->radiusLeft + 500.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_SHORT_RIGHT:
+                var_a2->unk_00 = 15;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = (temp_a0->radiusRight + 500.0f) * -1.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_SHORT_BOTH:
+                var_a2->unk_00 = 14;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_a0->radiusLeft + 500.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                var_a2->unk_04 = i;
+                var_a2->unk_00 = 15;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = (temp_a0->radiusRight + 500.0f) * -1.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+        }
+    }
+
+    D_802D1B60.unk_08 = temp_v0;
+    D_802D1B60.unk_0C = temp_v1;
+    D_802D1B60.unk_04 = var_a1;
+}
+
+void func_800730A4(s32 courseIndex) {
+    s32 var_a1;
+    s32 i;
+    s32 j;
+    unk_8006FC8C* temp_a0;
+    unk_802D1B60_unk_00* var_a2;
+    s32 temp_v0 = D_802D1B60.unk_08;
+    s32 temp_v1 = D_802D1B60.unk_0C;
+    f32 temp_fs0;
+    f32 temp_fs1;
+    f32 temp_fs2;
+    f32 temp_fs3;
+
+    var_a1 = D_802D1B60.unk_04;
+    var_a2 = &D_802D1B60.unk_00[var_a1];
+
+    for (i = 0; i < D_802A6B40[courseIndex].unk_08; i++) {
+        temp_a0 = &D_802A6B40[courseIndex].unk_10[i];
+
+        temp_fs2 = temp_a0->radiusLeft + temp_a0->radiusRight;
+        temp_fs0 = temp_a0->next->radiusLeft + temp_a0->next->radiusRight;
+        temp_fs3 = (temp_a0->radiusLeft - temp_a0->radiusRight) / 2;
+        temp_fs1 = (temp_a0->next->radiusLeft - temp_a0->next->radiusRight) / 2;
+        temp_fs0 -= temp_fs2;
+        temp_fs1 -= temp_fs3;
+
+        switch (D_8010B7B0.building[i]) {
+            case BUILDING_SPIRE_LEFT:
+                var_a2->unk_00 = 16;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_a0->radiusLeft + 500.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_SPIRE_RIGHT:
+                var_a2->unk_00 = 17;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = (temp_a0->radiusRight + 500.0f) * -1.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_SPIRE_BOTH:
+                var_a2->unk_00 = 16;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_a0->radiusLeft + 500.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                var_a2->unk_04 = i;
+                var_a2->unk_00 = 17;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = (temp_a0->radiusRight + 500.0f) * -1.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+        }
+    }
+
+    D_802D1B60.unk_08 = temp_v0;
+    D_802D1B60.unk_0C = temp_v1;
+    D_802D1B60.unk_04 = var_a1;
+}
+
+void func_8007327C(s32 courseIndex) {
+    s32 var_a1;
+    s32 i;
+    s32 j;
+    unk_8006FC8C* temp_a0;
+    unk_802D1B60_unk_00* var_a2;
+    s32 temp_v0 = D_802D1B60.unk_08;
+    s32 temp_v1 = D_802D1B60.unk_0C;
+    f32 temp_fs0;
+    f32 temp_fs1;
+    f32 temp_fs2;
+    f32 temp_fs3;
+
+    var_a1 = D_802D1B60.unk_04;
+
+    var_a2 = &D_802D1B60.unk_00[var_a1];
+
+    for (i = 0; i < D_802A6B40[courseIndex].unk_08; i++) {
+        temp_a0 = &D_802A6B40[courseIndex].unk_10[i];
+
+        temp_fs2 = temp_a0->radiusLeft + temp_a0->radiusRight;
+        temp_fs0 = temp_a0->next->radiusLeft + temp_a0->next->radiusRight;
+        temp_fs3 = (temp_a0->radiusLeft - temp_a0->radiusRight) / 2;
+        temp_fs1 = (temp_a0->next->radiusLeft - temp_a0->next->radiusRight) / 2;
+        temp_fs0 -= temp_fs2;
+        temp_fs1 -= temp_fs3;
+
+        switch (D_8010B7B0.building[i]) {
+            case BUILDING_MOUNTAIN_BOTH:
+                var_a2->unk_00 = 0x12;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_a0->radiusLeft + 500.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                var_a2->unk_04 = i;
+                var_a2->unk_00 = 0x13;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = (temp_a0->radiusRight + 500.0f) * -1.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_MOUNTAIN_LEFT:
+                var_a2->unk_00 = 0x12;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_a0->radiusLeft + 500.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_MOUNTAIN_RIGHT:
+                var_a2->unk_00 = 0x13;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = (temp_a0->radiusRight + 500.0f) * -1.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_TALL_GOLD_BOTH:
+                var_a2->unk_00 = 0x14;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_a0->radiusLeft + 500.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                var_a2->unk_04 = i;
+                var_a2->unk_00 = 0x15;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = (temp_a0->radiusRight + 500.0f) * -1.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_TALL_GOLD_LEFT:
+                var_a2->unk_00 = 0x14;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = temp_a0->radiusLeft + 500.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+            case BUILDING_TALL_GOLD_RIGHT:
+                var_a2->unk_00 = 0x15;
+                var_a2->unk_04 = i;
+                var_a2->unk_08 = 0.0f;
+                var_a2->unk_0C = (temp_a0->radiusRight + 500.0f) * -1.0f;
+                // clang-format off
+                var_a2->unk_10.x = 0.0f; \
+                var_a2->unk_10.y = 0.0f; \
+                var_a2->unk_10.z = 0.0f;
+                // clang-format on
+                var_a2++;
+                var_a1++;
+                break;
+        }
+    }
+
+    D_802D1B60.unk_08 = temp_v0;
+    D_802D1B60.unk_0C = temp_v1;
+    D_802D1B60.unk_04 = var_a1;
+}
 
 void func_80073510(s32 courseIndex) {
     func_80072D00(courseIndex);
@@ -1248,8 +2060,154 @@ void func_80073510(s32 courseIndex) {
     func_8007327C(courseIndex);
 }
 
-void func_80073548(s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80073548.s")
+void func_80073548(s32 courseIndex) {
+    unk_802D1B60_unk_00* var_a2;
+    s32 var_a1 = D_802D1B60.unk_04;
+    s32 temp_v0 = D_802D1B60.unk_08;
+    s32 temp_v1 = D_802D1B60.unk_0C;
+    f32 temp_fs0;
+    f32 temp_fs1;
+    f32 temp_fs2;
+    f32 temp_fs3;
+    unk_8006FC8C* temp_a0;
+    s32 i;
+    s32 j;
+
+    var_a2 = &D_802D1B60.unk_00[var_a1];
+
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < D_802A6B40[courseIndex].unk_08; j++) {
+            temp_a0 = &D_802A6B40[courseIndex].unk_10[j];
+
+            if (i == 5) {}
+
+            temp_fs2 = temp_a0->radiusLeft + temp_a0->radiusRight;
+            temp_fs0 = temp_a0->next->radiusLeft + temp_a0->next->radiusRight;
+            temp_fs3 = (temp_a0->radiusLeft - temp_a0->radiusRight) / 2;
+            temp_fs1 = (temp_a0->next->radiusLeft - temp_a0->next->radiusRight) / 2;
+            temp_fs0 -= temp_fs2;
+            temp_fs1 -= temp_fs3;
+
+            if (i == D_8010B7B0.sign[j]) {
+                switch (D_8010B7B0.sign[j]) {
+                    case SIGN_TV:
+                        var_a2->unk_00 = 3;
+                        var_a2->unk_04 = j;
+                        var_a2->unk_08 = 0.0f;
+                        var_a2->unk_0C = (temp_a0->radiusRight + 23.0f + 20.0f) * -1.0f;
+                        // clang-format off
+                        var_a2->unk_10.x = 0.0f; \
+                        var_a2->unk_10.y = 0.0f; \
+                        var_a2->unk_10.z = 0.0f;
+                        // clang-format on
+                        var_a2++;
+                        var_a1++;
+                        var_a2->unk_04 = j;
+                        var_a2->unk_00 = 4;
+                        var_a2->unk_08 = 0.0f;
+                        var_a2->unk_0C = temp_a0->radiusLeft + 23.0f + 20.0f;
+                        // clang-format off
+                        var_a2->unk_10.x = 0.0f; \
+                        var_a2->unk_10.y = 0.0f; \
+                        var_a2->unk_10.z = 0.0f;
+                        // clang-format on
+                        var_a2++;
+                        var_a1++;
+                        break;
+                    case SIGN_2:
+                        var_a2->unk_00 = 5;
+                        var_a2->unk_04 = j;
+                        var_a2->unk_08 = 0.0f;
+                        var_a2->unk_0C = (temp_a0->radiusRight + 23.0f + 20.0f) * -1.0f;
+                        // clang-format off
+                        var_a2->unk_10.x = 0.0f; \
+                        var_a2->unk_10.y = 0.0f; \
+                        var_a2->unk_10.z = 0.0f;
+                        // clang-format on
+                        var_a2++;
+                        var_a1++;
+                        var_a2->unk_04 = j;
+                        var_a2->unk_00 = 6;
+                        var_a2->unk_08 = 0.0f;
+                        var_a2->unk_0C = temp_a0->radiusLeft + 23.0f + 20.0f;
+                        // clang-format off
+                        var_a2->unk_10.x = 0.0f; \
+                        var_a2->unk_10.y = 0.0f; \
+                        var_a2->unk_10.z = 0.0f;
+                        // clang-format on
+                        var_a2++;
+                        var_a1++;
+                        break;
+                    case SIGN_1:
+                        var_a2->unk_00 = 7;
+                        var_a2->unk_04 = j;
+                        var_a2->unk_08 = 0.0f;
+                        var_a2->unk_0C = (temp_a0->radiusRight + 23.0f + 20.0f) * -1.0f;
+                        // clang-format off
+                        var_a2->unk_10.x = 0.0f; \
+                        var_a2->unk_10.y = 0.0f; \
+                        var_a2->unk_10.z = 0.0f;
+                        // clang-format on
+                        var_a2++;
+                        var_a1++;
+                        var_a2->unk_04 = j;
+                        var_a2->unk_00 = 8;
+                        var_a2->unk_08 = 0.0f;
+                        var_a2->unk_0C = temp_a0->radiusLeft + 23.0f + 20.0f;
+                        // clang-format off
+                        var_a2->unk_10.x = 0.0f; \
+                        var_a2->unk_10.y = 0.0f; \
+                        var_a2->unk_10.z = 0.0f;
+                        // clang-format on
+                        var_a2++;
+                        var_a1++;
+                        break;
+                    case SIGN_NINTEX:
+                        var_a2->unk_00 = 9;
+                        var_a2->unk_04 = j;
+                        var_a2->unk_08 = 0.0f;
+                        var_a2->unk_0C = (temp_a0->radiusRight + 23.0f + 20.0f) * -1.0f;
+                        // clang-format off
+                        var_a2->unk_10.x = 0.0f; \
+                        var_a2->unk_10.y = 0.0f; \
+                        var_a2->unk_10.z = 0.0f;
+                        // clang-format on
+                        var_a2++;
+                        var_a1++;
+                        var_a2->unk_04 = j;
+                        var_a2->unk_00 = 10;
+                        var_a2->unk_08 = 0.0f;
+                        var_a2->unk_0C = temp_a0->radiusLeft + 23.0f + 20.0f;
+                        // clang-format off
+                        var_a2->unk_10.x = 0.0f; \
+                        var_a2->unk_10.y = 0.0f; \
+                        var_a2->unk_10.z = 0.0f;
+                        // clang-format on
+                        var_a2++;
+                        var_a1++;
+                        break;
+                    case SIGN_OVERHEAD:
+                        var_a2->unk_00 = 11;
+                        var_a2->unk_04 = j;
+                        var_a2->unk_08 = 0.0f;
+                        var_a2->unk_0C = temp_fs3;
+                        // clang-format off
+                        var_a2->unk_10.x = 0.0f; \
+                        var_a2->unk_10.y = 0.0f; \
+                        var_a2->unk_10.z = 0.0f;
+                        // clang-format on
+                        var_a2++;
+                        var_a1++;
+                        break;
+                }
+            }
+        }
+    }
+
+    D_802D1B60.unk_04 = var_a1;
+    D_802D1B60.unk_08 = temp_v0;
+    D_802D1B60.unk_0C = temp_v1;
+}
 
 extern s32 D_802CDFD0;
 

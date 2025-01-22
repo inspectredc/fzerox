@@ -1128,10 +1128,8 @@ void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
 
     temp_fs1 += argA;
 
-    arg0->unk_2C[0] =
-        Math_Round((temp_fs2 = arg8->x + ((argB - argC) * arg3->xy)) + (temp_fs4 = arg3->xz * temp_fs1));
-    arg0->unk_2C[1] =
-        Math_Round((temp_fs3 = arg8->y + ((argB - argC) * arg3->yy)) + (temp_fs5 = arg3->yz * temp_fs1));
+    arg0->unk_2C[0] = Math_Round((temp_fs2 = arg8->x + ((argB - argC) * arg3->xy)) + (temp_fs4 = arg3->xz * temp_fs1));
+    arg0->unk_2C[1] = Math_Round((temp_fs3 = arg8->y + ((argB - argC) * arg3->yy)) + (temp_fs5 = arg3->yz * temp_fs1));
     arg0->unk_2C[2] = Math_Round((temp_fs0 = arg8->z + ((argB - argC) * arg3->zy)) + (sp6C = arg3->zz * temp_fs1));
 
     arg0->unk_3E[0] = Math_Round(temp_fs2 - temp_fs4);
