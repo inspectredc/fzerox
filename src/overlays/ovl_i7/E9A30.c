@@ -1000,7 +1000,7 @@ s32 func_i7_801441A0(void) {
             return GAMEMODE_800C;
         case 0:
         default:
-            return GAMEMODE_11;
+            return GAMEMODE_GP_END_CS;
     }
 }
 

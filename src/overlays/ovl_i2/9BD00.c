@@ -631,8 +631,6 @@ void func_i2_80101EBC(unk_struct_80*, s32);
 void func_i2_80102784(unk_struct_19E0*, s32);
 void func_i2_80103108(unk_struct_19E0*, s32);
 
-#ifdef NON_MATCHING
-// compiler stack
 void func_i2_80101944(unk_801247C0* arg0, s32 arg1) {
     s32 i;
     s32 j;
@@ -642,6 +640,7 @@ void func_i2_80101944(unk_801247C0* arg0, s32 arg1) {
     unk_struct_80* var_s0;
     u8 spB7;
     unk_struct_40_2 sp74;
+    s32 pad;
 
     if ((arg1 != 0) && (arg1 == 1)) {
         func_i2_801004A8(arg0->unk_00);
@@ -651,8 +650,8 @@ void func_i2_80101944(unk_801247C0* arg0, s32 arg1) {
         sp74 = arg0->unk_00[0].unk_19A0;
     }
 
-    for (i = 0, var_v0 = (u64*) arg0; i < (s32) (sizeof(unk_801247C0) / sizeof(u64)); i++) {
-        var_v0[i] = 0;
+    for (i = 0, var_v0 = (u64*) arg0; i < (s32) (sizeof(unk_801247C0) / sizeof(u64)); i++, var_v0++) {
+        *var_v0 = 0;
     }
 
     for (i = 0, var_s4 = arg0->unk_00; i < 2; i++, var_s4++) {
@@ -678,9 +677,6 @@ void func_i2_80101944(unk_801247C0* arg0, s32 arg1) {
         arg0->unk_00[0].unk_19A0 = arg0->unk_00[1].unk_19A0 = sp74;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/9BD00/func_i2_80101944.s")
-#endif
 
 void func_i2_80101B8C(unk_struct_10* arg0, s32 arg1) {
     s32 i;

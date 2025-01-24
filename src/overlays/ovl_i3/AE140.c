@@ -1621,8 +1621,8 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
         D_i3_80141C10[playerIndex] = (1.84f * M_PI);
         D_i3_80141C00[playerIndex] = 0.0f;
     }
-    temp = D_i3_80141C10[playerIndex] * 0x1000;
-    angle = temp / (2 * D_PI);
+    temp = D_i3_80141C10[playerIndex];
+    angle = (temp * 0x1000) / (2 * D_PI);
     spA0 = SIN(angle);
     spA4 = -COS(angle);
     spAC = COS(angle);

@@ -115,7 +115,54 @@ Gfx* func_8006A00C(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006A3AC.s")
+void func_8006A3AC(Vtx* vtx, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 var20;
+    s32 var22;
+    s32 var24;
+    s32 var30;
+    s32 var32;
+    s32 var34;
+    s32 var40;
+    s32 var42;
+    s32 var44;
+    f32 sp48;
+    f32 sp44;
+    f32 sp40;
+    f32 sp3C;
+    Vtx* vtx2;
+
+    vtx2 = &vtx[arg2];
+    var20 = vtx2->v.ob[0];
+    var22 = vtx2->v.ob[1];
+    var24 = vtx2->v.ob[2];
+
+    vtx2 = &vtx[arg3];
+    var30 = vtx2->v.ob[0];
+    var32 = vtx2->v.ob[1];
+    var34 = vtx2->v.ob[2];
+
+    vtx2 = &vtx[arg4];
+    var40 = vtx2->v.ob[0];
+    var42 = vtx2->v.ob[1];
+    var44 = vtx2->v.ob[2];
+
+    sp48 = ((var24 - var34) * (var42 - var32)) - ((var22 - var32) * (var44 - var34));
+    sp44 = ((var20 - var30) * (var44 - var34)) - ((var24 - var34) * (var40 - var30));
+    sp40 = ((var22 - var32) * (var40 - var30)) - ((var20 - var30) * (var42 - var32));
+
+    sp3C = SQ(sp48) + SQ(sp44) + SQ(sp40);
+
+    if (sp3C < 0.1f) {
+        return;
+    }
+
+    sp3C = 110.0f / sqrtf(sp3C);
+
+    vtx2 = &vtx[arg1];
+    vtx2->v.cn[0] = sp48 * sp3C;
+    vtx2->v.cn[1] = sp44 * sp3C;
+    vtx2->v.cn[2] = sp40 * sp3C;
+}
 
 void Math_SinTableInit(void) {
     f64 denominator;
@@ -569,7 +616,7 @@ void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
     Matrix_ToMtx(arg1, arg0);
 }
 
-void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6) {
+void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, Mtx3F* arg5, Vec3f* arg6) {
 
     if (arg0 == NULL) {
         arg0 = &D_800E1230;
@@ -577,18 +624,18 @@ void func_8006C278(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
     if (arg1 == NULL) {
         arg1 = &D_800E1270;
     }
-    arg1->m[2][0] = arg5[0] * arg2;
-    arg1->m[2][1] = arg5[1] * arg2;
-    arg1->m[2][2] = arg5[2] * arg2;
-    arg1->m[0][0] = arg5[6] * arg4;
-    arg1->m[0][1] = arg5[7] * arg4;
-    arg1->m[0][2] = arg5[8] * arg4;
-    arg1->m[1][0] = arg5[3] * arg3;
-    arg1->m[1][1] = arg5[4] * arg3;
-    arg1->m[1][2] = arg5[5] * arg3;
-    arg1->m[3][0] = arg6[0];
-    arg1->m[3][1] = arg6[1];
-    arg1->m[3][2] = arg6[2];
+    arg1->m[2][0] = arg5->x.x * arg2;
+    arg1->m[2][1] = arg5->x.y * arg2;
+    arg1->m[2][2] = arg5->x.z * arg2;
+    arg1->m[0][0] = arg5->z.x * arg4;
+    arg1->m[0][1] = arg5->z.y * arg4;
+    arg1->m[0][2] = arg5->z.z * arg4;
+    arg1->m[1][0] = arg5->y.x * arg3;
+    arg1->m[1][1] = arg5->y.y * arg3;
+    arg1->m[1][2] = arg5->y.z * arg3;
+    arg1->m[3][0] = arg6->x;
+    arg1->m[3][1] = arg6->y;
+    arg1->m[3][2] = arg6->z;
     arg1->m[0][3] = 0.0f;
     arg1->m[1][3] = 0.0f;
     arg1->m[2][3] = 0.0f;

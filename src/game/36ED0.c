@@ -1074,10 +1074,10 @@ void func_800A0010(unk_800F8510* arg0) {
     } while (var_v0 != arg0->unk_10);
 }
 
-#ifdef NON_MATCHING
 void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
                    Vec3f* arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD) {
-    s32 pad[2];
+    f32 temp1;
+    f32 temp2;
     f32 temp_fs0;
     f32 temp_fs1;
     f32 temp_fs2;
@@ -1088,17 +1088,19 @@ void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
 
     temp_fs4 = arg1 + 11.5f;
     temp_fs5 = arg2 + 11.5f;
-    temp_fs1 = (temp_fs4 - temp_fs5) / 2.0f;
+    temp1 = temp_fs4 - temp_fs5;
+    temp2 = temp_fs4 + temp_fs5;
+    temp_fs1 = temp1 / 2.0f;
 
-    arg0->unk_26[0] = func_8006A9E0(arg8->x = arg0->unk_14.x + (temp_fs1 * arg3->xz));
-    arg0->unk_26[1] = func_8006A9E0(arg8->y = arg0->unk_14.y + (temp_fs1 * arg3->yz));
-    arg0->unk_26[2] = func_8006A9E0(arg8->z = arg0->unk_14.z + (temp_fs1 * arg3->zz));
+    arg0->unk_26[0] = Math_Round(arg8->x = arg0->unk_14.x + (temp_fs1 * arg3->xz));
+    arg0->unk_26[1] = Math_Round(arg8->y = arg0->unk_14.y + (temp_fs1 * arg3->yz));
+    arg0->unk_26[2] = Math_Round(arg8->z = arg0->unk_14.z + (temp_fs1 * arg3->zz));
 
-    arg0->unk_20[0] = func_8006A9E0(arg8->x + ((argB - argC - argD) * arg3->xy));
-    arg0->unk_20[1] = func_8006A9E0(arg8->y + ((argB - argC - argD) * arg3->yy));
-    arg0->unk_20[2] = func_8006A9E0(arg8->z + ((argB - argC - argD) * arg3->zy));
+    arg0->unk_20[0] = Math_Round(arg8->x + ((argB - argC - argD) * arg3->xy));
+    arg0->unk_20[1] = Math_Round(arg8->y + ((argB - argC - argD) * arg3->yy));
+    arg0->unk_20[2] = Math_Round(arg8->z + ((argB - argC - argD) * arg3->zy));
 
-    temp_fs1 = (temp_fs4 + temp_fs5) / 2.0f;
+    temp_fs1 = temp2 / 2.0f;
 
     arg6->x = (temp_fs2 = arg3->xy * temp_fs1) + arg8->x;
     arg6->y = (temp_fs3 = arg3->yy * temp_fs1) + arg8->y;
@@ -1108,41 +1110,34 @@ void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     arg7->y = arg8->y - temp_fs3;
     arg7->z = arg8->z - temp_fs0;
 
-    arg0->unk_38[0] = func_8006A9E0(arg4->x = (temp_fs4 = arg3->xz * temp_fs1) + arg8->x);
-    arg0->unk_38[1] = func_8006A9E0(arg4->y = (temp_fs5 = arg3->yz * temp_fs1) + arg8->y);
-    arg0->unk_38[2] = func_8006A9E0(arg4->z = (sp6C = arg3->zz * temp_fs1) + arg8->z);
+    arg0->unk_38[0] = Math_Round(arg4->x = (temp_fs4 = arg3->xz * temp_fs1) + arg8->x);
+    arg0->unk_38[1] = Math_Round(arg4->y = (temp_fs5 = arg3->yz * temp_fs1) + arg8->y);
+    arg0->unk_38[2] = Math_Round(arg4->z = (sp6C = arg3->zz * temp_fs1) + arg8->z);
 
-    arg0->unk_4A[0] = func_8006A9E0(arg5->x = arg8->x - temp_fs4);
-    arg0->unk_4A[1] = func_8006A9E0(arg5->y = arg8->y - temp_fs5);
-    arg0->unk_4A[2] = func_8006A9E0(arg5->z = arg8->z - sp6C);
+    arg0->unk_4A[0] = Math_Round(arg5->x = arg8->x - temp_fs4);
+    arg0->unk_4A[1] = Math_Round(arg5->y = arg8->y - temp_fs5);
+    arg0->unk_4A[2] = Math_Round(arg5->z = arg8->z - sp6C);
 
     temp_fs1 += arg9;
 
-    arg0->unk_32[0] = func_8006A9E0((temp_fs2 = arg8->x + (argB * arg3->xy)) + (temp_fs4 = arg3->xz * temp_fs1));
-    arg0->unk_32[1] = func_8006A9E0((temp_fs3 = arg8->y + (argB * arg3->yy)) + (temp_fs5 = arg3->yz * temp_fs1));
-    arg0->unk_32[2] = func_8006A9E0((temp_fs0 = arg8->z + (argB * arg3->zy)) + (sp6C = arg3->zz * temp_fs1));
+    arg0->unk_32[0] = Math_Round((temp_fs2 = arg8->x + (argB * arg3->xy)) + (temp_fs4 = arg3->xz * temp_fs1));
+    arg0->unk_32[1] = Math_Round((temp_fs3 = arg8->y + (argB * arg3->yy)) + (temp_fs5 = arg3->yz * temp_fs1));
+    arg0->unk_32[2] = Math_Round((temp_fs0 = arg8->z + (argB * arg3->zy)) + (sp6C = arg3->zz * temp_fs1));
 
-    arg0->unk_44[0] = func_8006A9E0(temp_fs2 - temp_fs4);
-    arg0->unk_44[1] = func_8006A9E0(temp_fs3 - temp_fs5);
-    arg0->unk_44[2] = func_8006A9E0(temp_fs0 - sp6C);
+    arg0->unk_44[0] = Math_Round(temp_fs2 - temp_fs4);
+    arg0->unk_44[1] = Math_Round(temp_fs3 - temp_fs5);
+    arg0->unk_44[2] = Math_Round(temp_fs0 - sp6C);
 
     temp_fs1 += argA;
 
-    arg0->unk_2C[0] =
-        func_8006A9E0((temp_fs2 = arg8->x + ((argB - argC) * arg3->xy)) + (temp_fs4 = arg3->xz * temp_fs1));
-    arg0->unk_2C[1] =
-        func_8006A9E0((temp_fs3 = arg8->y + ((argB - argC) * arg3->yy)) + (temp_fs5 = arg3->yz * temp_fs1));
-    arg0->unk_2C[2] = func_8006A9E0((temp_fs0 = arg8->z + ((argB - argC) * arg3->zy)) + (sp6C = arg3->zz * temp_fs1));
+    arg0->unk_2C[0] = Math_Round((temp_fs2 = arg8->x + ((argB - argC) * arg3->xy)) + (temp_fs4 = arg3->xz * temp_fs1));
+    arg0->unk_2C[1] = Math_Round((temp_fs3 = arg8->y + ((argB - argC) * arg3->yy)) + (temp_fs5 = arg3->yz * temp_fs1));
+    arg0->unk_2C[2] = Math_Round((temp_fs0 = arg8->z + ((argB - argC) * arg3->zy)) + (sp6C = arg3->zz * temp_fs1));
 
-    arg0->unk_3E[0] = func_8006A9E0(temp_fs2 - temp_fs4);
-    arg0->unk_3E[1] = func_8006A9E0(temp_fs3 - temp_fs5);
-    arg0->unk_3E[2] = func_8006A9E0(temp_fs0 - sp6C);
+    arg0->unk_3E[0] = Math_Round(temp_fs2 - temp_fs4);
+    arg0->unk_3E[1] = Math_Round(temp_fs3 - temp_fs5);
+    arg0->unk_3E[2] = Math_Round(temp_fs0 - sp6C);
 }
-#else
-void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
-                   Vec3f* arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_800A0068.s")
-#endif
 
 void func_800A0458(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
                    Vec3f* arg8) {
@@ -2765,7 +2760,6 @@ Gfx* func_800A95B4(Gfx* gfx) {
 }
 
 extern unk_struct_1DC D_800E5220[];
-extern s32 D_800CCFE0;
 
 #ifdef NON_EQUIVALENT
 Gfx* func_800A9938(Gfx* gfx, s32 arg1) {
@@ -2801,9 +2795,9 @@ Gfx* func_800A9938(Gfx* gfx, s32 arg1) {
     D_800F89C4 = gfx;
     temp_a2 = temp_ra->unk_0C.unk_00;
 
-    if (temp_a2->unk_20 & 0x20000000) {
-        s32 temp = temp_a2->unk_20 & 0x400;
-        if (((temp_a2->unk_20 & 0x200) && (temp_ra->unk_0C.unk_04 < temp_a2->unk_68)) ||
+    if (temp_a2->trackSegmentInfo & TRACK_FLAG_20000000) {
+        s32 temp = temp_a2->trackSegmentInfo & TRACK_JOIN_NEXT;
+        if (((temp_a2->trackSegmentInfo & TRACK_JOIN_PREVIOUS) && (temp_ra->unk_0C.unk_04 < temp_a2->unk_68)) ||
             ((temp) && (temp_a2->unk_6C < temp_ra->unk_0C.unk_04))) {
             D_800F89D8 = 1;
         } else {
@@ -2959,10 +2953,10 @@ Gfx* func_800A9938(Gfx* gfx, s32 arg1) {
     gSPDisplayList(D_800F89C4++, D_8014008);
     gSPDisplayList(D_800F89C4++, D_8014078);
     gSPFogPosition(D_800F89C4++, D_800CF508, 1000);
-    gDPSetPrimColor(D_800F89C4++, 0, 0, 255 - (D_800CCFE0 * 8), 0, 0, 255);
+    gDPSetPrimColor(D_800F89C4++, 0, 0, 255 - (gGameFrameCount * 8), 0, 0, 255);
 
     temp_a2 = temp_ra->unk_0C.unk_00;
-    if (temp_a2->unk_20 & 0x20000000) {
+    if (temp_a2->trackSegmentInfo & TRACK_FLAG_20000000) {
         if (temp_a2->unk_6C < temp_ra->unk_0C.unk_04) {
             var_fv1 = (1.0f - temp_ra->unk_0C.unk_08) / temp_a2->unk_70;
         } else if (temp_ra->unk_0C.unk_04 < temp_a2->unk_68) {

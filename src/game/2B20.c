@@ -53,7 +53,7 @@ void (*sGamemodeInitFuncs[])(void) = {
     func_i2_80103AD4,  // GAMEMODE_TIME_ATTACK
     func_i5_80116D00,  // GAMEMODE_F
     NULL,              // GAMEMODE_10
-    func_i7_80143A90,  // GAMEMODE_11
+    func_i7_80143A90,  // GAMEMODE_GP_END_CS
     func_i4_801160D8,  // GAMEMODE_12
     func_i5_80116934,  // GAMEMODE_13
     func_i6_8011C050,  // GAMEMODE_OPTIONS_MENU
@@ -78,7 +78,7 @@ s32 (*sGamemodeUpdateFuncs[])(void) = {
     func_i2_80103B8C, // GAMEMODE_TIME_ATTACK
     func_i5_801175D0, // GAMEMODE_F
     NULL,             // GAMEMODE_10
-    func_i7_801441A0, // GAMEMODE_11
+    func_i7_801441A0, // GAMEMODE_GP_END_CS
     func_i4_801168D4, // GAMEMODE_12
     func_i5_80116EEC, // GAMEMODE_13
     func_i6_8011C6DC, // GAMEMODE_OPTIONS_MENU
@@ -103,7 +103,7 @@ Gfx* (*sGamemodeDrawFuncs[])(Gfx*) = {
     func_i2_80103BE0, // GAMEMODE_TIME_ATTACK
     func_i5_80117664, // GAMEMODE_F
     NULL,             // GAMEMODE_10
-    func_i7_801447F4, // GAMEMODE_11
+    func_i7_801447F4, // GAMEMODE_GP_END_CS
     func_i4_80116E10, // GAMEMODE_12
     func_i5_80117664, // GAMEMODE_13
     Menu_OptionsDraw, // GAMEMODE_OPTIONS_MENU
@@ -163,7 +163,7 @@ void func_80068BC0(void) {
             case 4:
                 D_800CD044 = 1;
                 if (gCourseIndex % 6 == 5) {
-                    D_800DCE48.gameMode = GAMEMODE_11;
+                    D_800DCE48.gameMode = GAMEMODE_GP_END_CS;
                 } else {
                     D_800DCE48.gameMode = GAMEMODE_800F;
                     gCourseIndex++;
@@ -238,7 +238,7 @@ void func_80068DCC(void) {
         case GAMEMODE_FLX_TITLE:
             var_v1 = 0xD;
             break;
-        case GAMEMODE_11:
+        case GAMEMODE_GP_END_CS:
             var_v1 = 0x15;
             break;
         case GAMEMODE_800B:
