@@ -584,7 +584,7 @@ void func_i2_800FD58C(unk_8010D778* arg0) {
             }
             break;
         case 2:
-            arg0->unk_0C += 1;
+            arg0->unk_0C++;
             if (arg0->unk_0C >= 3) {
                 arg0->unk_08 = 4;
             }
@@ -1206,7 +1206,7 @@ void func_i2_800FF284(unk_8010D778* arg0) {
             break;
         case 2:
             var_s0 = true;
-            arg0->unk_0C += 1;
+            arg0->unk_0C++;
             if (arg0->unk_0C >= 3) {
                 arg0->unk_08 = 3;
                 arg0->unk_0C = 0;

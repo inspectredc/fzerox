@@ -1,4 +1,5 @@
 #include "global.h"
+#include "src/overlays/ovl_i2/ovl_i2.h"
 #include "ovl_i3.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
@@ -700,7 +701,206 @@ void func_i3_8013C3B4(s32 arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/CCFF0/func_i3_8013C6D8.s")
+void func_i3_8013D214(unk_800F8510* arg0);
+
+extern u32 gGameFrameCount;
+extern u16 gInputPressed;
+extern u16 gInputButtonPressed;
+extern unk_80077D50* sFont1CompTexInfos[];
+
+void func_i3_8013C6D8(void) {
+    unk_801437C0* temp_a1;
+    Vp* vp;
+    s32 i;
+    s32 sp128;
+    s32 temp_t4;
+    bool sp120;
+    s32 sp11C;
+    s32 sp118;
+    s32 temp_ft0;
+    s32 temp_ft4;
+    unk_800F8510* sp10C;
+    s32 sp64;
+    s32 sp60;
+    Vtx* vtx;
+    unk_80077D50* spFC;
+    f32 spEC[4];
+    f32 spDC[4];
+    f32 spCC[4];
+    f32 spBC[4];
+    f32 spB8;
+    f32 temp_fv0;
+    MtxF sp74;
+
+    sp10C = &D_802A6B40[gCourseIndex];
+    temp_t4 = (D_i3_801437B8 * 10) + D_i3_801437B6;
+
+    if (D_i3_801437BA < 3) {
+        if (gInputPressed & BTN_LEFT) {
+            do {
+                if (--D_i3_801437B6 < 0) {
+                    D_i3_801437B6 = 9;
+                }
+                sp128 = (D_i3_801437B8 * 10) + D_i3_801437B6;
+            } while (D_i3_80140F50[sp128] == ' ');
+        }
+        if (gInputPressed & BTN_RIGHT) {
+            do {
+                if (++D_i3_801437B6 > 9) {
+                    D_i3_801437B6 = 0;
+                }
+                sp128 = (D_i3_801437B8 * 10) + D_i3_801437B6;
+            } while (D_i3_80140F50[sp128] == ' ');
+        }
+        if (gInputPressed & BTN_UP) {
+            do {
+                if (--D_i3_801437B8 < 0) {
+                    D_i3_801437B8 = 4;
+                }
+                sp128 = (D_i3_801437B8 * 10) + D_i3_801437B6;
+            } while (D_i3_80140F50[sp128] == ' ');
+        }
+        if (gInputPressed & BTN_DOWN) {
+            do {
+                if (++D_i3_801437B8 > 4) {
+                    D_i3_801437B8 = 0;
+                }
+                sp128 = (D_i3_801437B8 * 10) + D_i3_801437B6;
+            } while (D_i3_80140F50[sp128] == ' ');
+        }
+    }
+
+    sp128 = (D_i3_801437B8 * 10) + D_i3_801437B6;
+    if (temp_t4 != sp128) {
+        func_800BA8D8(0x1E);
+    }
+    if (gInputButtonPressed & BTN_A) {
+        sp120 = false;
+        switch (D_i3_80140F50[sp128]) {
+            case '<':
+                func_i3_8013D214(sp10C);
+                break;
+            case '>':
+                sp120 = true;
+                D_800E42C8[D_i3_801437BA] = ' ';
+                break;
+            default:
+                sp120 = true;
+                D_800E42C8[D_i3_801437BA] = D_i3_80140F50[sp128];
+                break;
+        }
+
+        if (sp120) {
+            temp_a1 = &D_i3_801437C0[D_i3_801437BA];
+            temp_a1->unk_00 = D_800E42C8[D_i3_801437BA];
+            temp_a1->unk_01 = 0;
+            temp_a1->unk_02 = ((s16) (sp128 % 10) * 20) + 62;
+            temp_a1->unk_04 = ((s16) (sp128 / 10) * 20) + 100;
+            D_i3_801439B4[D_i3_801437BA] = 0;
+            D_i3_801437BA++;
+            if (D_i3_801437BA >= 3) {
+                D_i3_801437B6 = D_i3_801437BC % 10;
+                D_i3_801437B8 = D_i3_801437BC / 10;
+            }
+        }
+        func_800BA8D8(0x21);
+    } else if (gInputButtonPressed & BTN_START) {
+        if (D_i3_80140F50[sp128] == '<') {
+            func_i3_8013D214(sp10C);
+        } else {
+            D_i3_801437B6 = D_i3_801437BC % 10;
+            D_i3_801437B8 = D_i3_801437BC / 10;
+        }
+        func_800BA8D8(0x21);
+    } else if (gInputButtonPressed & BTN_B) {
+        D_i3_801437BA--;
+        if (D_i3_801437BA < 0) {
+            D_i3_801437BA = 0;
+        }
+        sp128 = func_i3_8013D1B4(D_800E42C8[D_i3_801437BA]);
+
+        D_i3_801437B6 = sp128 % 10;
+        D_i3_801437B8 = sp128 / 10;
+        D_800E42C8[D_i3_801437BA] = 0;
+        func_800BA8D8(0x10);
+    }
+    if (D_i3_801437B0 == 2) {
+        sp64 = ((s16) (sp128 % 10) * 20) + 62;
+        sp60 = ((s16) (sp128 / 10) * 20) + 100;
+
+        for (i = 0, temp_a1 = D_i3_801437C0; i < 3; i++, temp_a1++) {
+            if (temp_a1->unk_00 != 0) {
+                temp_a1->unk_06 =
+                    ((D_i3_801439B4[i] * ((s16) (((i * 20) + 0x84)) - temp_a1->unk_02)) / 15) + temp_a1->unk_02;
+                temp_a1->unk_08 = ((D_i3_801439B4[i] * (210 - temp_a1->unk_04)) / 15) + temp_a1->unk_04;
+                D_i3_801439B4[i]++;
+                if (D_i3_801439B4[i] >= 15) {
+                    D_i3_801439B4[i] = 0;
+                    temp_a1->unk_00 = 0;
+                }
+            }
+        }
+        spFC = sFont1CompTexInfos[func_i2_80106024(&D_i3_80140F50[sp128], FONT_SET_UPPERCASE_ONLY)];
+        D_i3_801439BC = spFC;
+
+        spEC[0] = spEC[2] = 0.0f - (spFC->width * 0.5f);
+        spEC[1] = spEC[3] = spEC[0] + spFC->width;
+
+        spDC[0] = spDC[1] = spFC->height * 0.5f;
+        spDC[2] = spDC[3] = spDC[0] - spFC->height;
+
+        vtx = D_800DCCF0->unk_29D08;
+        for (i = 0; i < 4; i++) {
+            sp11C = Math_Round(spEC[i]);
+            sp118 = Math_Round(spDC[i]);
+            if (i & 1) {
+                spCC[i] = spFC->width;
+            } else {
+                spCC[i] = 0.0f;
+            }
+
+            if (i >= 2) {
+                spBC[i] = spFC->height;
+            } else {
+                spBC[i] = 0.0f;
+            }
+            temp_ft4 = spCC[i] * 32.0f;
+            temp_ft0 = spBC[i] * 32.0f;
+            SET_VTX(vtx, sp11C, sp118, 0, temp_ft4, temp_ft0, 0, 0, 0, 0);
+            vtx++;
+        }
+        temp_fv0 = (s16) sp60 - spFC->height * 0.5f;
+        spB8 = (s16) sp64 + 8.0f;
+        vp = D_800DCCF0->unk_2C2D8;
+        vp->vp.vscale[0] = 0x500;
+        vp->vp.vscale[1] = 0x3C0;
+        vp->vp.vscale[2] = 0x1FF;
+        vp->vp.vscale[3] = 0;
+        vp->vp.vtrans[0] = spB8 * 4.0f;
+        vp->vp.vtrans[1] = temp_fv0 * 4.0f;
+        vp->vp.vtrans[2] = 0x1FF;
+        vp->vp.vtrans[3] = 0;
+
+        temp_ft0 = gGameFrameCount % 128;
+        i = ((temp_ft0 << 12) / 127) % 4096;
+
+        temp_ft0 = gGameFrameCount % 32;
+        temp_fv0 = temp_ft0 / 31.0f;
+
+        if ((gGameFrameCount / 64) % 2) {
+            temp_fv0 = 1.0f - temp_fv0;
+        }
+        spB8 = (100.0f * temp_fv0) + 400.0f;
+        if (spB8 > 500.0f) {
+            spB8 = 500.0f;
+        }
+
+        func_8006D03C(&D_800DCCF0->unk_2B2C8[1], &sp74, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f,
+                      &D_i3_801439C0);
+        func_8006CC98(&D_800DCCF0->unk_2B2C8[2], &sp74, 0.0f, 0.0f, spB8, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        func_8006C378(&D_800DCCF0->unk_2B2C8[3], &sp74, spB8, 0, i, i, 0.0f, 0.0f, 0.0f);
+    }
+}
 
 s32 func_i3_8013D1B4(s8 arg0) {
     s32 i;

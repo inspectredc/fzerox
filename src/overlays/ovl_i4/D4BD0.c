@@ -627,8 +627,6 @@ extern s32 gPlayerControlPorts[];
 extern Controller gControllers[];
 extern s8 D_800CD3AC[];
 
-#ifdef NON_MATCHING
-// saved register regalloc
 s32 func_i4_8011631C(void) {
     s32 i;
     s32 j;
@@ -649,6 +647,8 @@ s32 func_i4_8011631C(void) {
                 if (D_800CD380 == 2) {
                     return GAMEMODE_FLX_MAIN_MENU;
                 }
+                // FAKE
+                if ((gRacers + i)->character) {}
                 return GAMEMODE_800A;
             }
             continue;
@@ -766,10 +766,6 @@ s32 func_i4_8011631C(void) {
     }
     return gGameMode;
 }
-#else
-s32 func_i4_8011631C(void);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/func_i4_8011631C.s")
-#endif
 
 extern s32 D_i2_80106DA4;
 

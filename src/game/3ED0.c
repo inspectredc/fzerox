@@ -115,7 +115,54 @@ Gfx* func_8006A00C(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006A3AC.s")
+void func_8006A3AC(Vtx* vtx, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 var20;
+    s32 var22;
+    s32 var24;
+    s32 var30;
+    s32 var32;
+    s32 var34;
+    s32 var40;
+    s32 var42;
+    s32 var44;
+    f32 sp48;
+    f32 sp44;
+    f32 sp40;
+    f32 sp3C;
+    Vtx* vtx2;
+
+    vtx2 = &vtx[arg2];
+    var20 = vtx2->v.ob[0];
+    var22 = vtx2->v.ob[1];
+    var24 = vtx2->v.ob[2];
+
+    vtx2 = &vtx[arg3];
+    var30 = vtx2->v.ob[0];
+    var32 = vtx2->v.ob[1];
+    var34 = vtx2->v.ob[2];
+
+    vtx2 = &vtx[arg4];
+    var40 = vtx2->v.ob[0];
+    var42 = vtx2->v.ob[1];
+    var44 = vtx2->v.ob[2];
+
+    sp48 = ((var24 - var34) * (var42 - var32)) - ((var22 - var32) * (var44 - var34));
+    sp44 = ((var20 - var30) * (var44 - var34)) - ((var24 - var34) * (var40 - var30));
+    sp40 = ((var22 - var32) * (var40 - var30)) - ((var20 - var30) * (var42 - var32));
+
+    sp3C = SQ(sp48) + SQ(sp44) + SQ(sp40);
+
+    if (sp3C < 0.1f) {
+        return;
+    }
+
+    sp3C = 110.0f / sqrtf(sp3C);
+
+    vtx2 = &vtx[arg1];
+    vtx2->v.cn[0] = sp48 * sp3C;
+    vtx2->v.cn[1] = sp44 * sp3C;
+    vtx2->v.cn[2] = sp40 * sp3C;
+}
 
 void Math_SinTableInit(void) {
     f64 denominator;

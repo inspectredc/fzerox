@@ -280,6 +280,7 @@ s32 func_i2_801058FC(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
 s32 func_i2_801059B4(f32 arg0, Racer* arg1);
 s32 func_i2_80105A28(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, Mtx3F* arg6, s32 arg7, s32 arg8, s32 arg9, Racer* argA);
 void func_i2_80105DB0(s32 num, s8* str);
+s32 func_i2_80106024(s8* str, s32 fontSetLowercase);
 s32 func_i2_801062E4(s8*, s32, s32);
 Gfx* func_i2_80106450(Gfx*, s32, s32, s8*, s32, s32, s32);
 Gfx* func_i2_80106700(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing, s32 fontSet, s32 arg6, f32 scaleX, f32 scaleY);

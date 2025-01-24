@@ -71,7 +71,7 @@ void func_8006D448(void) {
     if (D_800CD180 != 0) {
         //! @bug vtx uninitialised
     } else {
-        vtx = D_80225800.unk_1C0[0];
+        vtx = D_80225800.unk_1C0;
     }
 
     var->unk_08 = 0;
@@ -184,7 +184,7 @@ void func_8006E478(void) {
     if (D_800CD180 != 0) {
         //! @bug vtx uninitialised
     } else {
-        vtx = D_80225800.unk_040[0];
+        vtx = D_80225800.unk_040;
     }
     var->unk_0C = 0;
 
@@ -1397,8 +1397,316 @@ void func_80071A58(s32 courseIndex, s32 trackSegment) {
     D_802D2D70.index = index;
 }
 
-void func_80071BE4(s32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_80071BE4.s")
+void func_80071BE4(s32 courseIndex) {
+    unk_802D1B60_unk_00* var_s0;
+    s32 i;
+    s32 spBC;
+    unk_8006FC8C* temp_s3;
+    f32 var_fs0;
+    f32 temp_fs2;
+    f32 temp_fs3;
+    f32 temp_fs4;
+    f32 temp_ft4;
+    f32 temp_fs5;
+    s32 var_s1;
+    s32 var_s2;
+    f32 temp;
+    Vec3f sp88;
+
+    var_s1 = D_802D1B60.unk_04;
+    var_s2 = D_802D1B60.unk_08;
+    spBC = D_802D1B60.unk_0C;
+    var_s0 = &D_802D1B60.unk_00[var_s1];
+
+    for (i = 0; i < D_802A6B40[courseIndex].unk_08; i++) {
+        temp_s3 = &D_802A6B40[courseIndex].unk_10[i];
+        temp_fs2 = temp_s3->unk_28;
+
+        temp_fs3 = temp_s3->radiusLeft + temp_s3->radiusRight;
+        temp_ft4 = (temp_s3->next->radiusLeft + temp_s3->next->radiusRight);
+        temp_fs4 = (temp_s3->radiusLeft - temp_s3->radiusRight) / 2;
+        temp_fs5 = (temp_s3->next->radiusLeft - temp_s3->next->radiusRight) / 2;
+        temp_ft4 -= temp_fs3;
+        temp_fs5 -= temp_fs4;
+
+        var_fs0 = 0.0f;
+
+        switch (D_8010B7B0.landmine[i]) {
+            case 0:
+                temp_fs2 /= 5.0f;
+                temp = func_8009E538(temp_s3, 0.0f, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = ((temp_fs5 * var_fs0) + temp_fs4) - ((temp_fs3 + (temp_ft4 * var_fs0)) / 4);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = ((temp_fs5 * var_fs0) + temp_fs4) + ((temp_fs3 + (temp_ft4 * var_fs0)) / 4);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_00 = 22;
+                var_s0->unk_04 = i;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = (temp_fs5 * var_fs0) + temp_fs4;
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = ((temp_fs5 * var_fs0) + temp_fs4) - ((temp_fs3 + (temp_ft4 * var_fs0)) / 4);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = ((temp_fs5 * var_fs0) + temp_fs4) + ((temp_fs3 + (temp_ft4 * var_fs0)) / 4);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_00 = 22;
+                var_s0->unk_04 = i;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = (temp_fs5 * var_fs0) + temp_fs4;
+                var_s0++;
+                var_s1++;
+                var_s2++;
+                break;
+            case 1:
+                temp_fs2 /= 6.0f;
+                var_s0->unk_00 = 22;
+                var_s0->unk_04 = i;
+                var_s0->unk_08 = 0.0f;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_0C = var_fs0 + temp_fs4 + ((temp_fs3 + var_fs0) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, 0.0f, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = (temp_fs5 * var_fs0) + temp_fs4 + (((temp_fs3 + (temp_ft4 * var_fs0)) * 3.0f) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = (temp_fs5 * var_fs0) + temp_fs4 + ((temp_fs3 + (temp_ft4 * var_fs0)) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = (temp_fs5 * var_fs0) + temp_fs4 + (((temp_fs3 + (temp_ft4 * var_fs0)) * 3.0f) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = (temp_fs5 * var_fs0) + temp_fs4 + ((temp_fs3 + (temp_ft4 * var_fs0)) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = (temp_fs5 * var_fs0) + temp_fs4 + (((temp_fs3 + (temp_ft4 * var_fs0)) * 3.0f) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+                break;
+            case 2:
+                temp_fs2 /= 6.0f;
+                var_s0->unk_00 = 22;
+                var_s0->unk_04 = i;
+                var_s0->unk_08 = 0.0f;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_0C = (var_fs0 + temp_fs4) - ((temp_fs3 + var_fs0) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, 0.0f, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = ((temp_fs5 * var_fs0) + temp_fs4) - (((temp_fs3 + (temp_ft4 * var_fs0)) * 3.0f) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = ((temp_fs5 * var_fs0) + temp_fs4) - ((temp_fs3 + (temp_ft4 * var_fs0)) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = ((temp_fs5 * var_fs0) + temp_fs4) - (((temp_fs3 + (temp_ft4 * var_fs0)) * 3.0f) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = ((temp_fs5 * var_fs0) + temp_fs4) - ((temp_fs3 + (temp_ft4 * var_fs0)) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+
+                temp = func_8009E538(temp_s3, var_fs0, &sp88);
+                var_fs0 += temp_fs2 / temp;
+                var_s0->unk_04 = i;
+                var_s0->unk_00 = 22;
+                // clang-format off
+                var_s0->unk_10.x = 0.0f; \
+                var_s0->unk_10.y = 0.0f; \
+                var_s0->unk_10.z = 0.0f;
+                // clang-format on
+                var_s0->unk_08 = var_fs0;
+                var_s0->unk_0C = ((temp_fs5 * var_fs0) + temp_fs4) - (((temp_fs3 + (temp_ft4 * var_fs0)) * 3.0f) / 8);
+                var_s0++;
+                var_s1++;
+                var_s2++;
+                break;
+        }
+    }
+
+    D_802D1B60.unk_08 = var_s2;
+    D_802D1B60.unk_0C = spBC;
+    D_802D1B60.unk_04 = var_s1;
+}
 
 void func_8007243C(s32 courseIndex) {
     unk_802D1B60_unk_00* var_s0;
