@@ -5,9 +5,13 @@
 OSIoMesg sLeoFontIoMsg;
 s16* sLeoPrintFrameBuffer;
 s16* sLeoPrintCurPixel;
+#ifdef VERSION_JP
+s32 sLeoFontOffsets[24];
+#else
 s32 sLeoFontWidths[96];
 s32 sLeoFontHeights[96];
 s32 sLeoFontAlignments[96];
+#endif
 
 s32 sLeoFontCodes[] = {
     0x6CA06F18, 0x6CB82A14, 0x6CBE4314, 0x6CC29A14, 0x6CDE8D16, 0x6CFADB14, 0x6D249B14, 0x6D422314, 0x6D445D14,
@@ -90,7 +94,6 @@ extern u8 gLeoFontBuffer[];
 
 #ifdef VERSION_JP
 extern s32 sLeoErrorMessages[24];
-extern s32 sLeoFontOffsets[];
 
 void LeoDD_LoadFonts(void) {
     func_8007F8F8(ARRAY_COUNT(sLeoErrorMessages), sLeoErrorMessages, gLeoFontBuffer, sLeoFontOffsets);
@@ -246,30 +249,21 @@ void LeoDD_DrawErrorMessage(s32 posX, s32 posY, s8* str) {
 #endif
 
 typedef enum LeoErrorMessageJP {
-    LEO_ERROR_MESSAGE_0,
-    LEO_ERROR_MESSAGE_1,
-    LEO_ERROR_MESSAGE_2,
-    LEO_ERROR_MESSAGE_3,
-    LEO_ERROR_MESSAGE_4,
-    LEO_ERROR_MESSAGE_5,
-    LEO_ERROR_MESSAGE_6,
-    LEO_ERROR_MESSAGE_7,
-    LEO_ERROR_MESSAGE_8,
-    LEO_ERROR_MESSAGE_9,
-    LEO_ERROR_MESSAGE_10,
-    LEO_ERROR_MESSAGE_11,
-    LEO_ERROR_MESSAGE_12,
-    LEO_ERROR_MESSAGE_13,
-    LEO_ERROR_MESSAGE_14,
-    LEO_ERROR_MESSAGE_15,
-    LEO_ERROR_MESSAGE_16,
-    LEO_ERROR_MESSAGE_17,
-    LEO_ERROR_MESSAGE_18,
-    LEO_ERROR_MESSAGE_19,
-    LEO_ERROR_MESSAGE_20,
-    LEO_ERROR_MESSAGE_21,
-    LEO_ERROR_MESSAGE_22,
-    LEO_ERROR_MESSAGE_23,
+    /* Digits 0-9 Are 0-9 */
+    LEO_ERROR_MESSAGE_ERROR_NUMBER = 10,
+    LEO_ERROR_MESSAGE_USER_GUIDE,
+    LEO_ERROR_MESSAGE_CAUTION_WHILE_BLINKING,
+    LEO_ERROR_MESSAGE_DO_NOT_REMOVE_DISC,
+    LEO_ERROR_MESSAGE_INSERT_DISC_AGAIN,
+    LEO_ERROR_MESSAGE_PLEASE,
+    LEO_ERROR_MESSAGE_IS_EJECT_BUTTON,
+    LEO_ERROR_MESSAGE_PRESSED,
+    LEO_ERROR_MESSAGE_PLEASE_REMOVE_DISC_ONCE,
+    LEO_ERROR_MESSAGE_INSERT_IT_PROPERLY,
+    LEO_ERROR_MESSAGE_WRONG_DISK_MAY,
+    LEO_ERROR_MESSAGE_BE_INSERTED_HAVE_YOU_CHECKED,
+    LEO_ERROR_MESSAGE_CHECK_DISK_IS_INSERTED,
+    LEO_ERROR_MESSAGE_INSERT_DISK_AT_STARTUP,
 } LeoErrorMessageJP;
 
 void LeoDD_DrawErrorNumber(s32 errNo) {
@@ -277,7 +271,7 @@ void LeoDD_DrawErrorNumber(s32 errNo) {
 
     sprintf(errNoStr, "%02d", errNo);
 #ifdef VERSION_JP
-    LeoDD_DrawErrorMessage(108, 80, LEO_ERROR_MESSAGE_10);
+    LeoDD_DrawErrorMessage(108, 80, LEO_ERROR_MESSAGE_ERROR_NUMBER);
     LeoDD_DrawErrorMessageNumber(190, 80, errNoStr);
 #else
     LeoDD_DrawErrorMessage(97, 80, "Error Number");
@@ -289,7 +283,7 @@ void LeoDD_DrawReferUserGuide(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
 #ifdef VERSION_JP
-    LeoDD_DrawErrorMessage(36, 110, LEO_ERROR_MESSAGE_11);
+    LeoDD_DrawErrorMessage(36, 110, LEO_ERROR_MESSAGE_USER_GUIDE);
 #else
     LeoDD_DrawErrorMessage(40, 110, "Please refer to the User's Guide.");
 #endif
@@ -299,8 +293,8 @@ void LeoDD_DrawCautionDoNotRemove(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
 #ifdef VERSION_JP
-    LeoDD_DrawErrorMessage(40, 100, LEO_ERROR_MESSAGE_12);
-    LeoDD_DrawErrorMessage(40, 120, LEO_ERROR_MESSAGE_13);
+    LeoDD_DrawErrorMessage(40, 100, LEO_ERROR_MESSAGE_CAUTION_WHILE_BLINKING);
+    LeoDD_DrawErrorMessage(40, 120, LEO_ERROR_MESSAGE_DO_NOT_REMOVE_DISC);
 #else
     LeoDD_DrawErrorMessage(45, 90, "Caution : Please do not remove");
     LeoDD_DrawErrorMessage(45, 110, "the disk while the access lamp");
@@ -312,10 +306,10 @@ void LeoDD_DrawCautionDoNotRemovePleaseInsert(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
 #ifdef VERSION_JP
-    LeoDD_DrawErrorMessage(40, 110, LEO_ERROR_MESSAGE_12);
-    LeoDD_DrawErrorMessage(40, 130, LEO_ERROR_MESSAGE_13);
-    LeoDD_DrawErrorMessage(40, 150, LEO_ERROR_MESSAGE_14);
-    LeoDD_DrawErrorMessage(40, 170, LEO_ERROR_MESSAGE_15);
+    LeoDD_DrawErrorMessage(40, 110, LEO_ERROR_MESSAGE_CAUTION_WHILE_BLINKING);
+    LeoDD_DrawErrorMessage(40, 130, LEO_ERROR_MESSAGE_DO_NOT_REMOVE_DISC);
+    LeoDD_DrawErrorMessage(40, 150, LEO_ERROR_MESSAGE_INSERT_DISC_AGAIN);
+    LeoDD_DrawErrorMessage(40, 170, LEO_ERROR_MESSAGE_PLEASE);
 #else
     LeoDD_DrawErrorMessage(45, 110, "Caution : Please do not remove");
     LeoDD_DrawErrorMessage(45, 130, "the disk while the access lamp");
@@ -328,10 +322,10 @@ void LeoDD_DrawReinsertDisk(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
 #ifdef VERSION_JP
-    LeoDD_DrawErrorMessage(48, 110, LEO_ERROR_MESSAGE_16);
-    LeoDD_DrawErrorMessage(48, 130, LEO_ERROR_MESSAGE_17);
-    LeoDD_DrawErrorMessage(48, 150, LEO_ERROR_MESSAGE_18);
-    LeoDD_DrawErrorMessage(48, 170, LEO_ERROR_MESSAGE_19);
+    LeoDD_DrawErrorMessage(48, 110, LEO_ERROR_MESSAGE_IS_EJECT_BUTTON);
+    LeoDD_DrawErrorMessage(48, 130, LEO_ERROR_MESSAGE_PRESSED);
+    LeoDD_DrawErrorMessage(48, 150, LEO_ERROR_MESSAGE_PLEASE_REMOVE_DISC_ONCE);
+    LeoDD_DrawErrorMessage(48, 170, LEO_ERROR_MESSAGE_INSERT_IT_PROPERLY);
 #else
     LeoDD_DrawErrorMessage(53, 110, "The eject button may have");
     LeoDD_DrawErrorMessage(53, 130, "been pushed. Please remove");
@@ -344,9 +338,9 @@ void LeoDD_DrawWrongDisk(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
 #ifdef VERSION_JP
-    LeoDD_DrawErrorMessage(32, 90, LEO_ERROR_MESSAGE_20);
-    LeoDD_DrawErrorMessage(32, 110, LEO_ERROR_MESSAGE_21);
-    LeoDD_DrawErrorMessage(32, 130, LEO_ERROR_MESSAGE_15);
+    LeoDD_DrawErrorMessage(32, 90, LEO_ERROR_MESSAGE_WRONG_DISK_MAY);
+    LeoDD_DrawErrorMessage(32, 110, LEO_ERROR_MESSAGE_BE_INSERTED_HAVE_YOU_CHECKED);
+    LeoDD_DrawErrorMessage(32, 130, LEO_ERROR_MESSAGE_PLEASE);
 #else
     LeoDD_DrawErrorMessage(56, 100, "The wrong disk may have");
     LeoDD_DrawErrorMessage(56, 120, "been inserted. Please check.");
@@ -357,7 +351,7 @@ void LeoDD_DrawIsDiskInserted(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
 #ifdef VERSION_JP
-    LeoDD_DrawErrorMessage(36, 110, LEO_ERROR_MESSAGE_22);
+    LeoDD_DrawErrorMessage(36, 110, LEO_ERROR_MESSAGE_CHECK_DISK_IS_INSERTED);
 #else
     LeoDD_DrawErrorMessage(59, 110, "Has the disk been inserted?");
 #endif
@@ -367,8 +361,8 @@ void LeoDD_DrawInsertInitialDiskUsed(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
 #ifdef VERSION_JP
-    LeoDD_DrawErrorMessage(56, 100, LEO_ERROR_MESSAGE_23);
-    LeoDD_DrawErrorMessage(56, 120, LEO_ERROR_MESSAGE_15);
+    LeoDD_DrawErrorMessage(56, 100, LEO_ERROR_MESSAGE_INSERT_DISK_AT_STARTUP);
+    LeoDD_DrawErrorMessage(56, 120, LEO_ERROR_MESSAGE_PLEASE);
 #else
     LeoDD_DrawErrorMessage(55, 100, "Please insert initial disk");
     LeoDD_DrawErrorMessage(55, 120, "used when turned power ON.");

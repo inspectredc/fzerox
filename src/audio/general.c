@@ -1099,7 +1099,9 @@ void func_800B9ED4(void) {
     D_800D1A40 = 0;
     D_800D1A58 = 0;
     D_800D1A50 = 0;
+#ifndef VERSION_JP
     D_800D1A48 = 0;
+#endif
 
     for (i = 0; i < 4; i++) {
         D_800D1A64[i] = 0.0f;
@@ -1626,7 +1628,9 @@ void func_800BB370(void) {
 
 void func_800BB39C(s32 arg0) {
     func_800B9ED4();
+#ifndef VERSION_JP
     AudioThread_ScheduleProcessCmds();
+#endif
 }
 
 void func_800BB3C4(u8 racerId, f32 arg1) {
@@ -1680,6 +1684,11 @@ static const char devrostring08[] = "LEVEL SE FINAL CALL! player=%02x SE Number=
 static const char devrostring09[] = "LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n";
 static const char devrostring10[] = "LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n";
 static const char devrostring11[] = "Ouch!! UN-SUPORTED TRG SE NUM WAS CALLED !!!!!!! num = %02x\n";
+#ifdef VERSION_JP
+static const char devjprostring0[] = "PLY TRG MYCAR NUM =  %02x SE NUM =  %02x VOL = %f\n";
+static const char devjprostring1[] = "ENEMY NUMBER = %02x RANK = %d SE num = %02x MOST NEAR ENEMY = %02x\n";
+static const char devjprostring2[] = "DISTANCE = %f PAN = %02x VOLUME = %f TUNING = %f\n\n";
+#endif
 static const char devrostring12[] = "LEVEL SE FADEOUT COMPLETE ROUTINE\n";
 static const char devrostring13[] = "BGM FADEOUT1 COMPLETE ROUTINE\n";
 static const char devrostring14[] = "BGM FADEOUT2 COMPLETE ROUTINE\n";
@@ -1692,6 +1701,9 @@ static const char devrostring20[] = "Player Level SE Start !! player =  %02x SE 
 static const char devrostring21[] = "PLAYER LEVEL SE STACK OVER!!\n";
 static const char devrostring22[] = "Na_PlyLevelSE_Stop Called player = %02x num = %02x \n";
 static const char devrostring23[] = "NON ENTRIED LEVEL SE STOPED! SE NUMBER = %02x\n";
+#ifdef VERSION_JP
+static const char devjprostring3[] = "Player Trger SE Start !! player =  %02x SE number = %02x\n"
+#endif
 static const char devrostring24[] = "VOICE SE STACK OVER!!\n";
 static const char devrostring25[] = "System SE = %02x\n";
 static const char devrostring26[] = "hanabi se called. pan = %02x volume = %02x \n";
