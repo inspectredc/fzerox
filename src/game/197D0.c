@@ -35,8 +35,13 @@ u16 sLeoFontPallete[] = {
 extern OSMesgQueue gDmaMesgQueue;
 extern OSPiHandle* gDriveRomHandle;
 
+#ifdef VERSION_JP
+void LeoDD_CopyFontToRam(s32* code, u8* ramAddr) {
+    uintptr_t fontAddr = LeoGetKAdr(code) + DDROM_FONT_START;
+#else
 void LeoDD_CopyFontToRam(s32* code, u8* ramAddr, s32* width, s32* height, s32* alignment) {
     uintptr_t fontAddr = LeoGetAAdr2(code, width, height, alignment) + DDROM_FONT_START;
+#endif
 
     sLeoFontIoMsg.hdr.pri = OS_MESG_PRI_NORMAL;
     sLeoFontIoMsg.hdr.retQueue = &gDmaMesgQueue;
@@ -48,6 +53,29 @@ void LeoDD_CopyFontToRam(s32* code, u8* ramAddr, s32* width, s32* height, s32* a
     MQ_WAIT_FOR_MESG(&gDmaMesgQueue, NULL);
 }
 
+#ifdef VERSION_JP
+s32 LeoDD_LoadFontSet(u8* codes, s32 fontOffset, s32 fontRamAddr) {
+    s16 i;
+
+    for (i = 0; codes[i] != 0; fontOffset += 0x80, i += 2) {
+        LeoDD_CopyFontToRam((codes[i] << 8) + codes[i + 1], fontRamAddr + fontOffset);
+    }
+
+    return fontOffset;
+}
+
+void func_8007F8F8(u32 messageCount, s32* messages, u8* fontRamAddr, s32* offsets) {
+    s32 fontOffset;
+    s32 i;
+
+    fontOffset = 0;
+
+    for (i = 0; i < messageCount; i++) {
+        offsets[i] = fontOffset;
+        fontOffset = LeoDD_LoadFontSet(messages[i], fontOffset, fontRamAddr);
+    }
+}
+#else
 void LeoDD_LoadFontSet(s32* codes, u8* fontRamAddr, s32* widths, s32* heights, s32* alignments) {
     s32 i;
     s32 fontOffset;
@@ -56,12 +84,22 @@ void LeoDD_LoadFontSet(s32* codes, u8* fontRamAddr, s32* widths, s32* heights, s
         LeoDD_CopyFontToRam(codes[i], fontRamAddr + fontOffset, &widths[i], &heights[i], &alignments[i]);
     }
 }
+#endif
 
 extern u8 gLeoFontBuffer[];
 
+#ifdef VERSION_JP
+extern s32 sLeoErrorMessages[24];
+extern s32 sLeoFontOffsets[];
+
+void LeoDD_LoadFonts(void) {
+    func_8007F8F8(ARRAY_COUNT(sLeoErrorMessages), sLeoErrorMessages, gLeoFontBuffer, sLeoFontOffsets);
+}
+#else
 void LeoDD_LoadFonts(void) {
     LeoDD_LoadFontSet(sLeoFontCodes, gLeoFontBuffer, sLeoFontWidths, sLeoFontHeights, sLeoFontAlignments);
 }
+#endif
 
 void LeoDD_SetFramebuffer(void) {
     sLeoPrintFrameBuffer = osViGetNextFramebuffer();
@@ -94,26 +132,51 @@ void func_8007F9E0(void) {
 
         // FAKE
         while (var_v0 >= temp_v1) {
-            var_v0--;
-            var_v0[1] = 0x0001000100010001;
+            *(--var_v0 + 1) = 0x0001000100010001;
         }
     }
 
     LeoDD_ForceWritebackDCacheAll();
 }
 
+#ifdef VERSION_JP
+void func_8007FA64(s32 posX, s32 posY, u8* fontCharData) {
+    u8 i;
+    u16 j;
+    s32 temp_a3;
+    s32 temp_t1;
+    u8* fontPtr = fontCharData;
+
+    for (i = posY; i < posY + 16; i++) {
+        for (j = posX; j < posX + 16; j += 2, fontPtr++) {
+            temp_a3 = (*fontPtr >> 4) & 0xFF;
+            temp_t1 = *fontPtr & 0xFF;
+            sLeoPrintCurPixel = sLeoPrintFrameBuffer + (i * SCREEN_WIDTH) + j;
+            temp_t1 &= 0xF;
+            if (temp_a3 != 0) {
+                *sLeoPrintCurPixel = sLeoFontPallete[temp_a3];
+            }
+
+            sLeoPrintCurPixel++;
+            if (temp_t1) {
+                *sLeoPrintCurPixel = sLeoFontPallete[temp_t1];
+            }
+        }
+    }
+}
+#else
 void func_8007FA64(s32 posX, s32 posY, u8* fontCharData, s32 width, s32 height, s32 alignment) {
     u8 i;
     u16 j;
-    u8 temp_a3;
-    u32 temp_t1;
+    s32 temp_a3;
+    s32 temp_t1;
     u8* fontPtr = fontCharData;
 
     posY += 12;
 
     for (i = (posY - alignment); i < (posY - alignment) + height; i++) {
         for (j = posX; j < posX + width; j += 2, fontPtr++) {
-            temp_a3 = *fontPtr >> 4;
+            temp_a3 = (*fontPtr >> 4) & 0xFF;
             temp_t1 = *fontPtr & 0xFF;
             sLeoPrintCurPixel = sLeoPrintFrameBuffer + (i * SCREEN_WIDTH) + j;
             temp_t1 &= 0xF;
@@ -129,7 +192,45 @@ void func_8007FA64(s32 posX, s32 posY, u8* fontCharData, s32 width, s32 height, 
         }
     }
 }
+#endif
 
+#ifdef VERSION_JP
+void LeoDD_DrawErrorMessage(s32 posX, s32 posY, u16 messageNo) {
+    s32 messageOffset;
+    s32 offset;
+    s32 i;
+
+    messageOffset = sLeoFontOffsets[messageNo];
+    for (i = 0, offset = 0; sLeoErrorMessages[messageNo][i] != 0; i += 2) {
+        func_8007FAD4(posX, posY, gLeoFontBuffer + messageOffset + offset);
+
+        posX += 16;
+        offset += 0x80;
+    }
+}
+
+void LeoDD_DrawErrorMessageNumber(s32 posX, s32 posY, s8* str) {
+    s8 var_v1;
+    s32 offset;
+    s8* var_s1;
+
+    if (*str == '1') {
+        posX -= 2;
+    }
+
+    var_s1 = str;
+    while (*var_s1 != 0) {
+        offset = sLeoFontOffsets[*var_s1 - '0'];
+        func_8007FAD4(posX, posY, gLeoFontBuffer + offset);
+        if (*var_s1 == '1') {
+            posX += 7;
+        } else {
+            posX += 9;
+        }
+        var_s1++;
+    }
+}
+#else
 void LeoDD_DrawErrorMessage(s32 posX, s32 posY, s8* str) {
     s32 fontChar;
     s32 i;
@@ -142,63 +243,134 @@ void LeoDD_DrawErrorMessage(s32 posX, s32 posY, s8* str) {
         posX = posX + sLeoFontWidths[fontChar] + (0, 1);
     }
 }
+#endif
+
+typedef enum LeoErrorMessageJP {
+    LEO_ERROR_MESSAGE_0,
+    LEO_ERROR_MESSAGE_1,
+    LEO_ERROR_MESSAGE_2,
+    LEO_ERROR_MESSAGE_3,
+    LEO_ERROR_MESSAGE_4,
+    LEO_ERROR_MESSAGE_5,
+    LEO_ERROR_MESSAGE_6,
+    LEO_ERROR_MESSAGE_7,
+    LEO_ERROR_MESSAGE_8,
+    LEO_ERROR_MESSAGE_9,
+    LEO_ERROR_MESSAGE_10,
+    LEO_ERROR_MESSAGE_11,
+    LEO_ERROR_MESSAGE_12,
+    LEO_ERROR_MESSAGE_13,
+    LEO_ERROR_MESSAGE_14,
+    LEO_ERROR_MESSAGE_15,
+    LEO_ERROR_MESSAGE_16,
+    LEO_ERROR_MESSAGE_17,
+    LEO_ERROR_MESSAGE_18,
+    LEO_ERROR_MESSAGE_19,
+    LEO_ERROR_MESSAGE_20,
+    LEO_ERROR_MESSAGE_21,
+    LEO_ERROR_MESSAGE_22,
+    LEO_ERROR_MESSAGE_23,
+} LeoErrorMessageJP;
 
 void LeoDD_DrawErrorNumber(s32 errNo) {
     char errNoStr[4];
 
     sprintf(errNoStr, "%02d", errNo);
+#ifdef VERSION_JP
+    LeoDD_DrawErrorMessage(108, 80, LEO_ERROR_MESSAGE_10);
+    LeoDD_DrawErrorMessageNumber(190, 80, errNoStr);
+#else
     LeoDD_DrawErrorMessage(97, 80, "Error Number");
     LeoDD_DrawErrorMessage(201, 80, errNoStr);
+#endif
 }
 
 void LeoDD_DrawReferUserGuide(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
+#ifdef VERSION_JP
+    LeoDD_DrawErrorMessage(36, 110, LEO_ERROR_MESSAGE_11);
+#else
     LeoDD_DrawErrorMessage(40, 110, "Please refer to the User's Guide.");
+#endif
 }
 
 void LeoDD_DrawCautionDoNotRemove(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
+#ifdef VERSION_JP
+    LeoDD_DrawErrorMessage(40, 100, LEO_ERROR_MESSAGE_12);
+    LeoDD_DrawErrorMessage(40, 120, LEO_ERROR_MESSAGE_13);
+#else
     LeoDD_DrawErrorMessage(45, 90, "Caution : Please do not remove");
     LeoDD_DrawErrorMessage(45, 110, "the disk while the access lamp");
     LeoDD_DrawErrorMessage(45, 130, "is blinking.");
+#endif
 }
 
 void LeoDD_DrawCautionDoNotRemovePleaseInsert(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
+#ifdef VERSION_JP
+    LeoDD_DrawErrorMessage(40, 110, LEO_ERROR_MESSAGE_12);
+    LeoDD_DrawErrorMessage(40, 130, LEO_ERROR_MESSAGE_13);
+    LeoDD_DrawErrorMessage(40, 150, LEO_ERROR_MESSAGE_14);
+    LeoDD_DrawErrorMessage(40, 170, LEO_ERROR_MESSAGE_15);
+#else
     LeoDD_DrawErrorMessage(45, 110, "Caution : Please do not remove");
     LeoDD_DrawErrorMessage(45, 130, "the disk while the access lamp");
     LeoDD_DrawErrorMessage(45, 150, "is blinking.");
     LeoDD_DrawErrorMessage(45, 170, "Please insert the disk.");
+#endif
 }
 
 void LeoDD_DrawReinsertDisk(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
+#ifdef VERSION_JP
+    LeoDD_DrawErrorMessage(48, 110, LEO_ERROR_MESSAGE_16);
+    LeoDD_DrawErrorMessage(48, 130, LEO_ERROR_MESSAGE_17);
+    LeoDD_DrawErrorMessage(48, 150, LEO_ERROR_MESSAGE_18);
+    LeoDD_DrawErrorMessage(48, 170, LEO_ERROR_MESSAGE_19);
+#else
     LeoDD_DrawErrorMessage(53, 110, "The eject button may have");
     LeoDD_DrawErrorMessage(53, 130, "been pushed. Please remove");
     LeoDD_DrawErrorMessage(53, 150, "the Disk once and completely");
     LeoDD_DrawErrorMessage(53, 170, "reinsert it.");
+#endif
 }
 
 void LeoDD_DrawWrongDisk(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
+#ifdef VERSION_JP
+    LeoDD_DrawErrorMessage(32, 90, LEO_ERROR_MESSAGE_20);
+    LeoDD_DrawErrorMessage(32, 110, LEO_ERROR_MESSAGE_21);
+    LeoDD_DrawErrorMessage(32, 130, LEO_ERROR_MESSAGE_15);
+#else
     LeoDD_DrawErrorMessage(56, 100, "The wrong disk may have");
     LeoDD_DrawErrorMessage(56, 120, "been inserted. Please check.");
+#endif
 }
 
 void LeoDD_DrawIsDiskInserted(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
+#ifdef VERSION_JP
+    LeoDD_DrawErrorMessage(36, 110, LEO_ERROR_MESSAGE_22);
+#else
     LeoDD_DrawErrorMessage(59, 110, "Has the disk been inserted?");
+#endif
 }
 
 void LeoDD_DrawInsertInitialDiskUsed(void) {
     LeoDD_SetFramebuffer();
     LeoDD_DrawErrorBox();
+#ifdef VERSION_JP
+    LeoDD_DrawErrorMessage(56, 100, LEO_ERROR_MESSAGE_23);
+    LeoDD_DrawErrorMessage(56, 120, LEO_ERROR_MESSAGE_15);
+#else
     LeoDD_DrawErrorMessage(55, 100, "Please insert initial disk");
     LeoDD_DrawErrorMessage(55, 120, "used when turned power ON.");
+#endif
 }

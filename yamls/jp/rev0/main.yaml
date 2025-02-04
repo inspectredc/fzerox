@@ -1,0 +1,64 @@
+  - name: header
+    type: header
+    start: 0x0
+
+  - name: boot
+    type: bin
+    start: 0x40
+
+  - name: entry
+    type: code
+    start: 0x1000
+    vram: 0x80067000
+    subsegments:
+      - [0x1000, hasm]
+
+  - name: main
+    type: code
+    start: 0x1060
+    vram: 0x80067060
+    follows_vram: entry
+    bss_size: 0x242E0
+    subsegments:
+      - [0x1060, c, game/1060] #sys_boot
+      - [0x1AD0, pad]
+      - [0x1AE0, c, game/1AE0] #sys_main
+      - [0x2A60, c, game/2A60]
+      - [0x2B20, c, game/2B20] #sys_joybus
+      - [0x3ED0, c, game/3ED0]
+      - [0x73F0, c, game/73F0]
+      - [0xEA90, c, game/EA90]
+      - [0xF0B0, c, game/F0B0]
+      - [0xF1C0, c, game/F1C0]
+      - [0x10490, c, game/10490]
+      - [0x11CF0, c, game/11CF0]
+      - [0x14440, c, game/14440]
+      - [0x18410, c, game/18410]
+      - [0x194E0, c, game/194E0]
+      - [0x197D0, c, game/197D0]
+      - [0x19FC0, asm]
+      - [0x36F50, asm]
+      - [0x446A0, asm]
+      - [0x44750, asm]
+      - [0x45A20, asm]
+      - [0x4C4E0, asm]
+      - [0x4EC40, asm]
+      - [0x4ECC0, asm]
+      - [0x50030, asm]
+      - [0x51240, asm]
+      # Microcode
+      - [0x61990, textbin, rspboot]
+      - [0x61A60, textbin, f3dex]
+      - [0x62DD0, textbin, f3dlx]
+      - [0x63F60, textbin, f3dflx]
+      - [0x650F0, textbin, l3dex]
+      - [0x66280, asm, game/66220]
+      - [0x662D0, textbin, aspmain]
+      # Data
+      - [0x67000, data]
+      - { start: 0x72020, type: bss, vram: 0x800D8020 }
+
+  - type: bin
+    start: 0x72020
+    follows_vram: main
+  - [0x1000000]

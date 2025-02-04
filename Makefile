@@ -286,6 +286,9 @@ endif
 $(shell mkdir -p asm bin linker_scripts/$(VERSION)/$(REV)/auto)
 
 SRC_DIRS      := $(shell find src -type d)
+# ifeq ($(VERSION), jp)
+# SRC_DIRS      := $(shell find srcjp -type d)
+# endif
 
 ASM_DIRS      := $(shell find asm/$(VERSION)/$(REV) -type d -not -path "asm/$(VERSION)/$(REV)/nonmatchings/*")
 BIN_DIRS      := $(shell find bin -type d)
