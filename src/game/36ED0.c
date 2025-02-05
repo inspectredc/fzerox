@@ -1621,8 +1621,7 @@ void func_800A4B54(void) {
     }
 }
 
-extern Vtx D_8028A3D8[];
-extern Vtx D_8025DCE8[];
+extern GfxPool D_8024DCE0[];
 
 void func_800A4BAC(void) {
     Vtx* var_a0;
@@ -1652,8 +1651,8 @@ void func_800A4BAC(void) {
     D_800F8958[1].unk_28 = D_8014640;
     D_800F8958[1].unk_2C = 8;
 
-    var_a0 = &D_8025DCE8[0xFFF];
-    var_v1 = &D_8028A3D8[0xFFF];
+    var_a0 = &D_8024DCE0[0].unk_10008[0xFFF];
+    var_v1 = &D_8024DCE0[1].unk_10008[0xFFF];
     // FAKE
     goto dummy;
 dummy:;
@@ -1663,7 +1662,7 @@ dummy:;
 
         var_a0--;
         var_v1--;
-    } while ((u32) var_v1 >= (u32) D_8028A3D8);
+    } while ((u32) var_v1 >= (u32) D_8024DCE0[1].unk_10008);
 
     func_800A4B54();
 }

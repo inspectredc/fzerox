@@ -160,7 +160,7 @@ bool func_8008108C(unk_800E51B8* arg0, s32 arg1);
 
 Gfx* func_800833AC(Gfx* gfx, s32 arg1, s32 playerIndex);
 void func_80083580(unk_800E5D70* arg0, s32 arg1);
-void func_80083734(unk_800E5D70* arg0, unk_8008112C_arg_1* arg1);
+void func_80083734(unk_800E5D70* arg0, unk_redo_3* arg1);
 void func_80084654(unk_800E5D70* arg0, unk_80085434_arg_2* arg1);
 void func_800847B0(unk_800E5D70* arg0, unk_80085434_arg_2* arg1);
 void func_80084860(unk_800E5D70* arg0, unk_80085494_arg_2* arg1);

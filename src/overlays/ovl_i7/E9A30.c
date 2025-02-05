@@ -286,7 +286,7 @@ unk_struct_14 D_i7_8014A4A8[] = {
     { 7, D_i7_8014A444, D_i7_8014A460, D_i7_8014A47C, D_i7_8014A498 },
 };
 
-extern const unk_8008112C_arg_1 D_800D4E98;
+extern const unk_redo_3 D_800D4E98;
 
 unk_struct_C D_i7_8014A4D0[] = {
     { 0, func_80083734, &D_800D4E98 },

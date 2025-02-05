@@ -434,7 +434,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
 
     for (i = 0; i < 5; i++) {
         if (var_s2->timeRecord[i] != MAX_TIMER) {
-            gfx = func_i3_8013BB80(gfx, i, var_s2->unk_34[i]);
+            gfx = func_i3_8013BB80(gfx, i, var_s2->unk_34[i].unk_00);
         }
     }
 
