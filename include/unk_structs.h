@@ -764,7 +764,7 @@ typedef struct unk_80111870 {
     Vec3f unk_00;
     Vec3f unk_0C;
     f32 unk_18;
-    s32 unk_1C;
+    u32 unk_1C;
     Racer* unk_20;
 } unk_80111870; // size = 0x24
 

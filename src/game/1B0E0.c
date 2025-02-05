@@ -3327,7 +3327,104 @@ s32 func_8008B23C(u8* arg0, u8* arg1) {
 }
 
 f32 func_8008B2D8(Racer*, f32);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_8008B2D8.s")
+
+extern f32 D_800CF15C;
+extern f32 D_800CF174[];
+extern f32 D_800CF188[];
+extern f32 D_800CF19C[];
+
+#define PHYS_TO_K1ROM(x) (((u32)(x)|0xB0000000))
+#define ROM_READ(addr) (*(vu32*)PHYS_TO_K1ROM(addr))
+
+f32 func_8008B2D8(Racer* arg0, f32 arg1) {
+    unk_800CF1B0* temp_a1;
+    f32 temp_fs0;
+    f32 temp_fv0;
+    f32 temp_fs1;
+    f32 temp_fv1;
+    f32 temp_ret;
+    f32 temp_fa1;
+
+    temp_fs0 = (arg0->unk_1F0 - 780.0f) / 1560.0f;
+
+    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
+
+    temp_fv0 = ((((f32) ((ROM_READ(0x078) >> 0xF) & 0xFF) * 0.1f) - ((f32) (((ROM_READ(0x50C) >> 0x13) & 0xFF) | 0x600) * 0.001f)) * temp_fs0) + ((f32) (((ROM_READ(0x50C) >> 0x13) & 0xFF) | 0x600) * 0.001f);
+    temp_fv1 = ((((f32) ((ROM_READ(0x780) >> 0x15) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x390) >> 9) & 0xFF) * 0.001f)) * temp_fs0) + ((f32) ((ROM_READ(0x390) >> 9) & 0xFF) * 0.001f);
+
+    arg0->unk_1B4 = ((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv0 - temp_fv1) * (1.0f - SQ((2.0f * arg1) - 1.0f)));
+    temp_fs1 = arg0->unk_1B4;
+    
+    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
+    
+    temp_fv0 = ((((f32) ((ROM_READ(0x0A0) >> 0x15) & 0xFF) * 0.1f) - ((f32) (((ROM_READ(0x540) >> 0xD) & 0xFF) | 0x800) * 0.001f)) * temp_fs0) + ((f32) (((ROM_READ(0x540) >> 0xD) & 0xFF) | 0x800) * 0.001f);
+    temp_fv1 = ((((f32) ((ROM_READ(0x95C) >> 0x13) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x50C) >> 6) & 0xFF) * 0.001f)) * temp_fs0) + ((f32) ((ROM_READ(0x50C) >> 6) & 0xFF) * 0.001f);
+    arg0->unk_1B0 = ((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv0 - temp_fv1) * (1.0f - SQ((2.0f * arg1) - 1.0f)));
+    temp_fs1 += arg0->unk_1B0;
+    
+    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
+    
+    temp_fv0 = ((((f32) ((ROM_READ(0x1BC) >> 0x13) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x57C) >> 0xF) & 0xFF) * 0.1f)) * temp_fs0) + ((f32) ((ROM_READ(0x57C) >> 0xF) & 0xFF) * 0.1f);
+    temp_fv1 = (((((f32) ((ROM_READ(0x978) >> 0x15) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x550) >> 0x13) & 0xFF) * 0.001f)) * temp_fs0)) + ((f32) ((ROM_READ(0x550) >> 0x13) & 0xFF) * 0.001f);
+    arg0->unk_1B8 = ((temp_fv1 - temp_fv0) * arg1) + temp_fv0;
+    temp_fs1 += arg0->unk_1B8;
+    
+    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
+    
+    temp_fv0 = (((f32) ((ROM_READ(0x2C4) >> 0xE) & 0xFF) - (f32) ((ROM_READ(0x5D8) >> 4) & 0xFF)) * temp_fs0) + (f32) ((ROM_READ(0x5D8) >> 4) & 0xFF);
+    temp_fv1 = (((f32) ((ROM_READ(0x988) >> 0x18) & 0xFF) - (f32) ((ROM_READ(0x57C) >> 0xA) & 0xFF)) * temp_fs0) + (f32) ((ROM_READ(0x57C) >> 0xA) & 0xFF);
+    arg0->unk_1BC = ((temp_fv1 - temp_fv0) * arg1) + temp_fv0;
+    temp_fs1 += arg0->unk_1BC;
+    
+    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
+    
+    temp_fv0 = ((((f32) ((ROM_READ(0x2FC) >> 0x12) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x660) >> 0x10) & 0xFF) * 0.001f)) * temp_fs0) + ((f32) ((ROM_READ(0x660) >> 0x10) & 0xFF) * 0.001f);
+    temp_fv1 = (((((f32) ((ROM_READ(0xA20) >> 0xC) & 0xFF) * 0.01f) - ((f32) ((ROM_READ(0x5E4) >> 0x14) & 0xFF) * 0.01f)) * temp_fs0) + ((f32) ((ROM_READ(0x5E4) >> 0x14) & 0xFF) * 0.01f));
+    arg0->unk_1C8 = ((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv1 - temp_fv0) * (1.0f - SQ((2.0f * arg1) - 1.0f)));
+    temp_fs1 += arg0->unk_1C8;
+    
+    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
+    
+    temp_fv0 = (((f32) ((ROM_READ(0x36C) >> 0x10) & 0xFF) - (f32) ((ROM_READ(0x6A0) >> 0xC) & 0xFF)) * temp_fs0) + (f32) ((ROM_READ(0x6A0) >> 0xC) & 0xFF);
+    temp_fv1 = ((((f32) ((ROM_READ(0x1BC) >> 0xA) & 0xFF) - (f32) ((ROM_READ(0x60C) >> 0x16) & 0xFF)) * temp_fs0) + (f32) ((ROM_READ(0x60C) >> 0x16) & 0xFF));
+    arg0->unk_1CC = arg0->unk_1C8 / (((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv1 - temp_fv0) * (1.0f - SQ((2.0f * arg1) - 1.0f))));
+    temp_fs1 += arg0->unk_1CC;
+    
+    
+    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
+    
+    temp_fv0 = ((((ROM_READ(0x374) >> 3) & 0xFF) - ((f32) ((ROM_READ(0x6D8) >> 2) & 0xFF) * 0.01f)) * temp_fs0) + (((ROM_READ(0x6D8) >> 2) & 0xFF) * 0.01f);
+    temp_fv1 = (((((ROM_READ(0x1C8) >> 4) & 0xFF) * 0.01f) - ((f32) ((ROM_READ(0x664) >> 2) & 0xFF) * 0.01f)) * temp_fs0) + (((ROM_READ(0x664) >> 2) & 0xFF) * 0.01f);
+    temp_a1 = &D_800F80C8[arg0->character];
+    arg0->unk_1F8 = D_800CF188[temp_a1->unk_11[2]] + ((temp_fv1 - temp_fv0) * arg1) + temp_fv0;
+    temp_fs1 += arg0->unk_1F8;
+    
+    
+    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
+    
+    temp_fv0 = (((f32) ((ROM_READ(0x384) >> 5) & 0xFF) - ((f32) ((ROM_READ(0x718) >> 0xD) & 0xFF) * 0.001f)) * temp_fs0) + (((ROM_READ(0x718) >> 0xD) & 0xFF) * 0.001f);
+    temp_fv1 = ((((f32) ((ROM_READ(0x248) >> 0xB) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x6A0) >> 0xE) & 0xFF) * 0.01f)) * temp_fs0) + (((ROM_READ(0x6A0) >> 0xE) & 0xFF) * 0.01f);
+    arg0->unk_1FC = D_800CF19C[temp_a1->unk_11[2]] + ((temp_fv1 - temp_fv0) * arg1) + temp_fv0;
+    temp_fs1 += arg0->unk_1FC;
+    
+    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
+
+    temp_fv0 = (((ROM_READ(0x38C) & 0xFF) - (((ROM_READ(0x740) >> 0x12) & 0xFF) * 0.001f)) * temp_fs0) + (((ROM_READ(0x740) >> 0x12) & 0xFF) * 0.001f);
+    temp_fv1 = (((((ROM_READ(0x250) >> 3) & 0xFF) * 0.001f) - (((ROM_READ(0x718) >> 0x17) & 0xFF) * 0.001f)) * temp_fs0) + (((ROM_READ(0x718) >> 0x17) & 0xFF) * 0.001f);
+
+    temp_fa1 = ((temp_fv1 - temp_fv0) * arg0->unk_1A8) + temp_fv0;
+
+    arg0->unk_1C0 = (D_800CF174[temp_a1->unk_11[1]] + temp_fa1) / arg0->unk_1B8;
+    temp_fs1 += arg0->unk_1C0;
+    arg0->unk_1C4 = (D_800CF174[2] + temp_fa1) / arg0->unk_1B8;
+    temp_fs1 += arg0->unk_1C4;
+    temp_ret = func_80089654(arg1);
+    temp_ret = func_80089654(temp_ret);
+    temp_ret = func_80089654(temp_ret);
+    arg0->unk_1D0 = ((D_800CF15C - 1.0f) * temp_ret) + 1.0f;
+
+    return temp_ret;
+}
 
 extern f32 D_800CF160[];
 extern f32 D_800CE778;
