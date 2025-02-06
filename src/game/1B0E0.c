@@ -1659,44 +1659,52 @@ void func_80085510(void) {
 extern s8 D_800CD010;
 extern s32 D_800CD8A0;
 void func_80085B80(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2);
-#ifdef NON_EQUIVALENT
+
+// FAKE! Very hacky tricks to get 1 to load into v0
 void func_80085610(void) {
     s32 i;
-    s32 j;
-    unk_800E5D70* var_s1;
     unk_struct_1DC* var_s0;
-    unk_struct_F8* var_s2;
     Racer* temp_a3;
-
+    s32 v0;
+    
     D_800E5E84 = 0;
     D_800E5E8C = 0;
 
-    for (i = 0; i < 4; i++) {
-        temp_a3 = &gRacers[D_800E5220[i].unk_00];
+    for (i = 0, var_s0 = D_800E5220; i < 4; i++, var_s0++) {
+        temp_a3 = &gRacers[var_s0->unk_00];
         func_80083558(&D_800E5D70[i], &temp_a3->unk_180, &temp_a3->unk_C0, temp_a3);
     }
     switch (gGameMode) {
         case GAMEMODE_FLX_TITLE:
-            D_800E5E80 = 1;
+            v0 = 0;
+            if (1) {}
+            D_800E5E80 = ++v0;
             D_800E5220[0].unk_04 = 0;
             func_80085B80(D_800E5220, D_800E5990, D_800E5D70);
             break;
         case GAMEMODE_10:
         case GAMEMODE_FLX_MACHINE_SELECT:
-            D_800E5220[0].unk_04 = D_800E5E80 = 1;
+            v0 = 0;
+            if (1) {}
+            D_800E5E80 = ++v0;
+            D_800E5220[0].unk_04 = v0;
             func_80085B80(D_800E5220, D_800E5990, D_800E5D70);
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_4012:
+            v0 = 0;
+            if (1) {}
             D_800E5E8C = D_800E5E8A;
-            D_800E5E80 = 1;
+            D_800E5E80 = ++v0;
             D_800E5220[0].unk_04 = 2;
             func_80085B80(D_800E5220, D_800E5990, D_800E5D70);
             break;
         case GAMEMODE_800A:
         case GAMEMODE_800F:
         case GAMEMODE_8013:
-            D_800E5E80 = 1;
+            v0 = 0;
+            if (1) {}
+            D_800E5E80 = ++v0;
             D_800E5220[0].unk_04 = 3;
             func_80085B80(D_800E5220, D_800E5990, D_800E5D70);
             break;
@@ -1710,22 +1718,20 @@ void func_80085610(void) {
         case GAMEMODE_VS_4P:
             D_800CD8A0 = -1;
             D_800E5E80 = gNumPlayers;
-
             for (i = 0; i < D_800E5E80; i++) {
                 if (D_800CD010 != 0) {
-                    D_800E5220[i].unk_04 = 14;
+                    D_800E5220[i].unk_04 = 15;
                 } else {
                     D_800E5220[i].unk_04 = 4;
                 }
-
+    
                 D_800E5220[i].unk_20 = gRacers[i].unk_0C.unk_34;
-                for (j = 0; j < 3; j++) {
-                    D_800E5220[i].unk_2C.v[j] = gRacers[i].unk_C0.v[j];
-                }
 
+                D_800E5220[i].unk_2C = gRacers[i].unk_C0;
+    
                 func_80085B80(&D_800E5220[i], &D_800E5990[i], &D_800E5D70[i]);
             }
-
+    
             break;
         case GAMEMODE_TIME_ATTACK:
             D_800E5E8C = D_800E5E8A;
@@ -1733,41 +1739,41 @@ void func_80085610(void) {
             D_800E5E80 = 2;
             if (D_800CD010 != 0) {
                 D_800E5220[0].unk_04 = 15;
-                D_800E5220[0].unk_04 = 4;
+                // FAKE some kind of override here
+                if (1) {
+                    D_800E5220[0].unk_04 = 4;
+                }
             } else {
                 D_800E5220[0].unk_04 = 4;
             }
             D_800E5220[0].unk_20 = gRacers[0].unk_0C.unk_34;
             D_800E5220[0].unk_2C = gRacers[0].unk_C0;
-
+    
             D_800E5220[1].unk_04 = 12;
-
             for (i = 0; i < D_800E5E80; i++) {
                 func_80085B80(&D_800E5220[i], &D_800E5990[i], &D_800E5D70[i]);
             }
             break;
         case GAMEMODE_RECORDS:
-
+            
             D_800E5E80 = 2;
             D_800E5220[0].unk_04 = 0xB;
             D_800E5220[0].unk_20 = gRacers[0].unk_0C.unk_34;
             D_800E5220[0].unk_2C = gRacers[0].unk_C0;
             D_800E5220[1].unk_04 = 0xC;
-
             for (i = 0; i < D_800E5E80; i++) {
                 func_80085B80(&D_800E5220[i], &D_800E5990[i], &D_800E5D70[i]);
             }
             break;
         case GAMEMODE_GP_END_CS:
-            D_800E5E80 = 1;
+            v0 = 0;
+            if (1) {}
+            D_800E5E80 = ++v0;
             D_800E5220[0].unk_04 = 0xE;
             func_80085B80(D_800E5220, D_800E5990, D_800E5D70);
             break;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_80085610.s")
-#endif
 
 void func_80088408(Vec3f* arg0, unk_8006FC8C* arg1, f32 arg2, unk_800CD970* arg3);
 void func_80086400(unk_struct_1DC* arg0);
