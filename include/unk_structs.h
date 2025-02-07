@@ -520,7 +520,7 @@ typedef struct unk_800CD970 {
     s16 unk_00;
     s16 unk_02;
     f32 unk_04;
-    unk_800CD8B0* unk_08;
+    f32* unk_08;
 } unk_800CD970; // size 0xC
 
 typedef struct Controller {
