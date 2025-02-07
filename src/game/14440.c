@@ -253,7 +253,8 @@ Gfx* func_8007B0A8(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
     return gfx;
 }
 
-Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u32 height, s32 format, s32 size, s32 arg8, s32 arg9, s32 argA, s32 argB) {
+Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u32 height, s32 format, s32 size,
+                   s32 arg8, s32 arg9, s32 argA, s32 argB) {
     s32 i;
     s32 numBlocks;
     s32 blockHeight;
@@ -352,11 +353,12 @@ Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u
         gDPSetTextureImage(gfx++, format, var_t0, blockWidth, texture);
 
         gDPSetTile(gfx++, format, var_t0, 0, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
-               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
 
         if (size == G_IM_SIZ_4b) {
-            gDPSetTile(gfx++, format, size, ((blockWidth >> 1) + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                       G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPSetTile(gfx++, format, size, ((blockWidth >> 1) + 7) >> 3, 0, G_TX_RENDERTILE, 0,
+                       G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                       G_TX_NOLOD);
         } else {
             gDPSetTile(gfx++, format, size, ((blockWidth * spCC) + 7) >> 3, 0, G_TX_RENDERTILE, 0,
                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
@@ -365,20 +367,20 @@ Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u
     } else if (size == G_IM_SIZ_4b) {
         gDPSetTextureImage(gfx++, format, 1, blockWidth >> 1, texture);
 
-        gDPSetTile(gfx++, format, 1, ((blockWidth >> 1) + 7) >> 3, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
-               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPSetTile(gfx++, format, 1, ((blockWidth >> 1) + 7) >> 3, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
 
-        gDPSetTile(gfx++, format, 0, ((blockWidth * size) + 7) >> 3, 0, G_TX_RENDERTILE, 0,
-                       G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                       G_TX_NOLOD);
+        gDPSetTile(gfx++, format, 0, ((blockWidth * size) + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
     } else {
         gDPSetTextureImage(gfx++, format, size, blockWidth, texture);
 
-        gDPSetTile(gfx++, format, size, ((blockWidth * size) + 7) >> 3, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
-               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPSetTile(gfx++, format, size, ((blockWidth * size) + 7) >> 3, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
 
-        gDPSetTile(gfx++, format, size, ((blockWidth * size) + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
-               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPSetTile(gfx++, format, size, ((blockWidth * size) + 7) >> 3, 0, G_TX_RENDERTILE, 0,
+                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                   G_TX_NOLOD);
     }
 
     gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, 0, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
@@ -390,25 +392,39 @@ Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u
             gDPLoadSync(gfx++);
             if (arg9 == 0) {
                 if (size == G_IM_SIZ_4b) {
-                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight, ((blockWidth * blockHeight + spC8) >> spC4) - 1,
-                                 CALC_DXT_4b(blockWidth));
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT_4b(blockWidth));
                 } else {
-                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight, ((blockWidth * blockHeight + spC8) >> spC4) - 1,
-                                 CALC_DXT(blockWidth, spC0));
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT(blockWidth, spC0));
                 }
 
-                gSPScisTextureRectangle(gfx++, left << 2, (s32) (top + ((numBlocks - i - 1) * blockHeight) + (height % blockHeight)) << 2, (left + blockWidth) << 2, (s32) (top + ((numBlocks - i) * blockHeight) + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0, (blockHeight - 1) << 5, dsdx, (64 - 1) * (1 << 10));
+                gSPScisTextureRectangle(gfx++, left << 2,
+                                        (s32) (top + ((numBlocks - i - 1) * blockHeight) + (height % blockHeight)) << 2,
+                                        (left + blockWidth) << 2,
+                                        (s32) (top + ((numBlocks - i) * blockHeight) + (height % blockHeight)) << 2,
+                                        G_TX_RENDERTILE, spE0, (blockHeight - 1) << 5, dsdx, (64 - 1) * (1 << 10));
             } else {
                 if (size == G_IM_SIZ_4b) {
-                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
                 } else {
-                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1), (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((i + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1),
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((i + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
                 }
 
-                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                               (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                               (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
 
                 //! @bug s and t are swapped around from expected
-                gSPScisTextureRectangle(gfx++, left << 2, (s32) (top + ((numBlocks - i - 1) * blockHeight) + (height % blockHeight)) << 2, (left + blockWidth) << 2, (s32) (top + ((numBlocks - i) * blockHeight) + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0, (((i + 1) * blockHeight) - 1) << 5, dsdx, (64 - 1) * (1 << 10));
+                gSPScisTextureRectangle(
+                    gfx++, left << 2, (s32) (top + ((numBlocks - i - 1) * blockHeight) + (height % blockHeight)) << 2,
+                    (left + blockWidth) << 2,
+                    (s32) (top + ((numBlocks - i) * blockHeight) + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0,
+                    (((i + 1) * blockHeight) - 1) << 5, dsdx, (64 - 1) * (1 << 10));
             }
         }
 
@@ -416,24 +432,34 @@ Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u
             gDPLoadSync(gfx++);
             if (arg9 == 0) {
                 if (size == G_IM_SIZ_4b) {
-                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight, ((blockWidth * blockHeight + spC8) >> spC4) - 1,
-                                 CALC_DXT_4b(blockWidth));
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT_4b(blockWidth));
                 } else {
-                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight, ((blockWidth * blockHeight + spC8) >> spC4) - 1,
-                                 CALC_DXT(blockWidth, spC0));
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT(blockWidth, spC0));
                 }
 
-                gSPScisTextureRectangle(gfx++, left << 2, top << 2, (left + blockWidth) << 2, (top + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0, ((height % blockHeight) - 1) << 5, dsdx, (64 - 1) * (1 << 10));
+                gSPScisTextureRectangle(gfx++, left << 2, top << 2, (left + blockWidth) << 2,
+                                        (top + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0,
+                                        ((height % blockHeight) - 1) << 5, dsdx, (64 - 1) * (1 << 10));
             } else {
                 //! @bug, condition blocks switched around from what size would expect
                 if (size == G_IM_SIZ_4b) {
-                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1), (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((numBlocks + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1),
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((numBlocks + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
                 } else {
-                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
                 }
 
-                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
-                gSPScisTextureRectangle(gfx++, left << 2, top << 2, (left + blockWidth) << 2, (top + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0, (height - 1) << 5, dsdx, (64 - 1) * (1 << 10));
+                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                               (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                               (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                gSPScisTextureRectangle(gfx++, left << 2, top << 2, (left + blockWidth) << 2,
+                                        (top + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0, (height - 1) << 5,
+                                        dsdx, (64 - 1) * (1 << 10));
             }
         }
     } else {
@@ -443,24 +469,33 @@ Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u
             gDPLoadSync(gfx++);
             if (arg9 == 0) {
                 if (size == G_IM_SIZ_4b) {
-                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight / 4, ((blockWidth * blockHeight + spC8) >> spC4) - 1,
-                                 CALC_DXT_4b(blockWidth));
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight / 4,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT_4b(blockWidth));
                 } else {
-                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight, ((blockWidth * blockHeight + spC8) >> spC4) - 1,
-                                 CALC_DXT(blockWidth, spC0));
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT(blockWidth, spC0));
                 }
 
-                gSPScisTextureRectangle(gfx++, left << 2, (top + (i * blockHeight)) << 2, (left + blockWidth) << 2, (top + (var * blockHeight)) << 2, G_TX_RENDERTILE, spE0, 0, dsdx, 1 << 10);
+                gSPScisTextureRectangle(gfx++, left << 2, (top + (i * blockHeight)) << 2, (left + blockWidth) << 2,
+                                        (top + (var * blockHeight)) << 2, G_TX_RENDERTILE, spE0, 0, dsdx, 1 << 10);
             } else {
                 //! @bug, condition blocks switched around from what size would expect
                 if (size == G_IM_SIZ_4b) {
-                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1), (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((i + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1),
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((i + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
                 } else {
-                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
                 }
 
-                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
-                gSPScisTextureRectangle(gfx++, left << 2, (top + (i * blockHeight)) << 2, (left + blockWidth) << 2, (top + (var * blockHeight)) << 2, G_TX_RENDERTILE, spE0, (i * blockHeight) << 5, dsdx, 1 << 10);
+                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                               (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                               (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                gSPScisTextureRectangle(gfx++, left << 2, (top + (i * blockHeight)) << 2, (left + blockWidth) << 2,
+                                        (top + (var * blockHeight)) << 2, G_TX_RENDERTILE, spE0, (i * blockHeight) << 5,
+                                        dsdx, 1 << 10);
             }
         }
 
@@ -468,24 +503,36 @@ Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u
             gDPLoadSync(gfx++);
             if (arg9 == 0) {
                 if (size == G_IM_SIZ_4b) {
-                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight / 4, ((blockWidth * blockHeight + spC8) >> spC4) - 1,
-                                 CALC_DXT_4b(blockWidth));
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight / 4,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT_4b(blockWidth));
                 } else {
-                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight, ((blockWidth * blockHeight + spC8) >> spC4) - 1,
-                                 CALC_DXT(blockWidth, spC0));
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT(blockWidth, spC0));
                 }
-                    
-                gSPScisTextureRectangle(gfx++, left << 2, (s32) (top + ((numBlocks * blockHeight))) << 2, (left + blockWidth) << 2, (s32) (top + (numBlocks * blockHeight) + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0, 0, dsdx, 1 << 10);
+
+                gSPScisTextureRectangle(gfx++, left << 2, (s32) (top + ((numBlocks * blockHeight))) << 2,
+                                        (left + blockWidth) << 2,
+                                        (s32) (top + (numBlocks * blockHeight) + (height % blockHeight)) << 2,
+                                        G_TX_RENDERTILE, spE0, 0, dsdx, 1 << 10);
             } else {
                 //! @bug, condition blocks switched around from what size would expect
                 if (size == G_IM_SIZ_4b) {
-                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1), (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((numBlocks + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1),
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((numBlocks + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
                 } else {
-                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
                 }
 
-                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC, (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
-                gSPScisTextureRectangle(gfx++, left << 2, (s32) (top + (numBlocks * blockHeight)) << 2, (left + blockWidth) << 2, (s32) (top + (numBlocks * blockHeight) + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0, (numBlocks * blockHeight) << 5, dsdx, 1 << 10);
+                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                               (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                               (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                gSPScisTextureRectangle(gfx++, left << 2, (s32) (top + (numBlocks * blockHeight)) << 2,
+                                        (left + blockWidth) << 2,
+                                        (s32) (top + (numBlocks * blockHeight) + (height % blockHeight)) << 2,
+                                        G_TX_RENDERTILE, spE0, (numBlocks * blockHeight) << 5, dsdx, 1 << 10);
             }
         }
     }

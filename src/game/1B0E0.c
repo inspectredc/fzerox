@@ -100,62 +100,80 @@ extern unk_800CD970 D_800CD970[];
 
 // unk_redo_1
 const unk_redo_1 D_800D4C80 = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
+    { 0.0f, 0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+      0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
     { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f },
 };
 
 // unk_redo_2
 const unk_redo_2 D_800D4CF8 = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f },
+    { 0.0f, 0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+      0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
+    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+      0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f },
 };
 
 // unk_8008112C_arg_1 PAD
 UNUSED const unk_8008112C_arg_1 D_800D4DA4 = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 120.0f, 120.0f, 1.0f, 35.0f, 35.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 300.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+      0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
+    { 0.0f, 0.0f,   0.0f,   0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,   0.0f,
+      0.0f, 0.0f,   0.0f,   0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,   1.0f,
+      0.0f, 120.0f, 120.0f, 1.0f, 35.0f, 35.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 300.0f, 0.0f },
 };
 
 // unk_redo_3
 const unk_redo_3 D_800D4E98 = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
+    { 0.0f, 0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+      0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
+    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
 };
 
 // unk_redo_2
 const unk_redo_2 D_800D4F58 = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 400.0f, 400.0f, 1.0f, 40.0f, 40.0f, 1.0f, 50.0f, 50.0f, 1.0f },
+    { 0.0f, 0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+      0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
+    { 0.0f, 0.0f,   0.0f,   0.0f, 0.0f,  1.0f,  0.0f, 1.0f,  0.0f,  1.0f, 0.0f,
+      0.0f, 400.0f, 400.0f, 1.0f, 40.0f, 40.0f, 1.0f, 50.0f, 50.0f, 1.0f },
 };
 
 // unk_redo_2
 const unk_redo_2 D_800D5004 = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1500.0f, 1500.0f, 1.0f, 35.0f, 35.0f, 1.0f, 50.0f, 50.0f, 1.0f },
+    { 0.0f, 0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+      0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
+    { 0.0f, 0.0f,    0.0f,    0.0f, 0.0f,  1.0f,  0.0f, 1.0f,  0.0f,  1.0f, 0.0f,
+      0.0f, 1500.0f, 1500.0f, 1.0f, 35.0f, 35.0f, 1.0f, 50.0f, 50.0f, 1.0f },
 };
 
 // unk_redo_2
 const unk_redo_2 D_800D50B0 = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 10500.0f, 10500.0f, 1.0f, 20.0f, 20.0f, 1.0f, 0.0f, 0.0f, 1.0f },
+    { 0.0f, 0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+      0.0f, 1.0f, 60.0f, 60.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
+    { 0.0f, 0.0f,     0.0f,     0.0f, 0.0f,  1.0f,  0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+      0.0f, 10500.0f, 10500.0f, 1.0f, 20.0f, 20.0f, 1.0f, 0.0f, 0.0f, 1.0f },
 };
 
 // unk_redo_1
 const unk_redo_1 D_800D515C = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 4000.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 30.0f, 30.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f,  0.0f,  0.0f, 4000.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+      0.0f, 0.0f, 30.0f, 30.0f, 0.0f, 0.0f,    0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
     { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
 };
 
 // unk_redo_1 PAD
 UNUSED const unk_redo_1 D_800D51D4 = {
-    { 0.0f, 50.0f, 0.0f, 0.0f, 150.0f, 500.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 75.0f, 75.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f },
+    { 0.0f, 50.0f, 0.0f,  0.0f,  150.0f, 500.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+      0.0f, 0.0f,  75.0f, 75.0f, 0.0f,   0.0f,   0.0f, 0.0f, 0.0f, 0.0f, 1.0f },
     { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
 };
 
 // unk_redo_2
 const unk_redo_2 D_800D524C = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 75.0f, 75.0f, 1.0f, 0.0f, 77.0f, 0.0f, 77.0f, 1.0f, 1.0f },
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1000.0f, 1000.0f, 1.0f, 35.0f, 35.0f, 1.0f, 180.0f, 180.0f, 1.0f },
+    { 0.0f, 0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f,  1.0f, 0.0f,  0.0f, 1.0f,
+      0.0f, 1.0f, 75.0f, 75.0f, 1.0f, 0.0f, 77.0f, 0.0f, 77.0f, 1.0f, 1.0f },
+    { 0.0f, 0.0f,    0.0f,    0.0f, 0.0f,  1.0f,  0.0f, 1.0f,   0.0f,   1.0f, 0.0f,
+      0.0f, 1000.0f, 1000.0f, 1.0f, 35.0f, 35.0f, 1.0f, 180.0f, 180.0f, 1.0f },
 };
 
 // Vec3f[]
@@ -176,14 +194,20 @@ const Vec3f D_800D5328[] = {
 
 // unk_8008112C_arg_1
 const unk_8008112C_arg_1 D_800D5358 = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 400.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 80.0f, 80.0f, 0.2f, 0.0f, 77.0f, 0.0f, 77.0f, 0.1f, 0.2f },
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 400.0f, 400.0f, 0.2f, 50.0f, 50.0f, 0.2f, 0.0f, 0.0f, 1.0f, 0.0f, 300.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f,  0.0f,  0.0f, 400.0f, 0.0f,  1.0f, 0.0f,  0.0f, 1.0f,
+      0.0f, 1.0f, 80.0f, 80.0f, 0.2f, 0.0f,   77.0f, 0.0f, 77.0f, 0.1f, 0.2f },
+    { 0.0f, 0.0f,   0.0f,   0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,   0.0f,
+      0.0f, 0.0f,   0.0f,   0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,   1.0f,
+      0.0f, 400.0f, 400.0f, 0.2f, 50.0f, 50.0f, 0.2f, 0.0f, 0.0f, 1.0f, 0.0f, 300.0f, 0.0f },
 };
 
 // unk_8008112C_arg_1
 const unk_8008112C_arg_1 D_800D544C = {
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 400.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 100.0f, 100.0f, 0.2f, 0.0f, -15.0f, 0.0f, -15.0f, 0.1f, 0.2f },
-    { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 400.0f, 400.0f, 0.2f, 50.0f, 50.0f, 0.2f, 0.0f, 0.0f, 1.0f, 0.0f, 300.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f,   0.0f,   0.0f, 400.0f, 0.0f,   1.0f, 0.0f,   0.0f, 1.0f,
+      0.0f, 1.0f, 100.0f, 100.0f, 0.2f, 0.0f,   -15.0f, 0.0f, -15.0f, 0.1f, 0.2f },
+    { 0.0f, 0.0f,   0.0f,   0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,   0.0f,
+      0.0f, 0.0f,   0.0f,   0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,   1.0f,
+      0.0f, 400.0f, 400.0f, 0.2f, 50.0f, 50.0f, 0.2f, 0.0f, 0.0f, 1.0f, 0.0f, 300.0f, 0.0f },
 };
 
 // s32[]
@@ -330,21 +354,22 @@ void func_80081794(unk_struct_F8* arg0, unk_struct_1DC* arg1) {
     temp_s2->unk_68[1] += (temp_s2->unk_68[2] - temp_s2->unk_68[1]) * temp_s2->unk_68[3];
     temp_s2->unk_68[4] += (temp_s2->unk_68[5] - temp_s2->unk_68[4]) * temp_s2->unk_68[6];
     temp_s2->unk_68[7] += (temp_s2->unk_68[8] - temp_s2->unk_68[7]) * temp_s2->unk_68[9];
-    
+
     arg1->unk_20.x = racer->unk_180.x;
     arg1->unk_20.y = racer->unk_180.y;
     arg1->unk_20.z = racer->unk_180.z;
 
-    var_fv1 = (racer->unk_18C.x * racer->unk_A8.x) + (racer->unk_18C.y * racer->unk_A8.y) + (racer->unk_18C.z * racer->unk_A8.z);
+    var_fv1 = (racer->unk_18C.x * racer->unk_A8.x) + (racer->unk_18C.y * racer->unk_A8.y) +
+              (racer->unk_18C.z * racer->unk_A8.z);
     sp98.x = (temp_s2->unk_00.unk_54.x - arg1->unk_20.x) + (var_fv1 * racer->unk_A8.x);
     sp98.y = (temp_s2->unk_00.unk_54.y - arg1->unk_20.y) + (var_fv1 * racer->unk_A8.y);
     sp98.z = (temp_s2->unk_00.unk_54.z - arg1->unk_20.z) + (var_fv1 * racer->unk_A8.z);
     var_fv1 = sqrtf(SQ(sp98.x) + SQ(sp98.y) + SQ(sp98.z));
-    
+
     if (var_fv1 < 0.01f) {
         return;
     }
-    
+
     var_fv1 = 1.0f / var_fv1;
     sp98.x *= var_fv1;
     sp98.y *= var_fv1;
@@ -356,13 +381,14 @@ void func_80081794(unk_struct_F8* arg0, unk_struct_1DC* arg1) {
         temp_s2->unk_00.unk_54.z = arg1->unk_20.z + (temp_fv0 * sp98.z);
     }
 
-    temp_fv0 = (racer->unk_18C.x * arg1->unk_5C.y.x) + (racer->unk_18C.y * arg1->unk_5C.y.y) + (racer->unk_18C.z * arg1->unk_5C.y.z);
+    temp_fv0 = (racer->unk_18C.x * arg1->unk_5C.y.x) + (racer->unk_18C.y * arg1->unk_5C.y.y) +
+               (racer->unk_18C.z * arg1->unk_5C.y.z);
     if (temp_s2->unk_68[8] >= 50.0f) {
         var_fv1 = 0.0f;
     } else {
         var_fv1 = (50.0f - temp_s2->unk_68[8]) * 0.02f;
     }
-    
+
     temp_s1->unk_00.unk_00.x = arg1->unk_20.x + (var_fv1 * (racer->unk_18C.x - (temp_fv0 * arg1->unk_5C.y.x)));
     temp_s1->unk_00.unk_00.y = arg1->unk_20.y + (var_fv1 * (racer->unk_18C.y - (temp_fv0 * arg1->unk_5C.y.y)));
     temp_s1->unk_00.unk_00.z = arg1->unk_20.z + (var_fv1 * (racer->unk_18C.z - (temp_fv0 * arg1->unk_5C.y.z)));
@@ -402,7 +428,8 @@ void func_80081794(unk_struct_F8* arg0, unk_struct_1DC* arg1) {
     sp70.z *= var_fv1;
     angle = Math_Round(DEG_TO_FZXANG2(temp_s2->unk_68[4]));
 
-    var_fv1 = temp_s2->unk_68[1] * SIN(angle) * ((sp70.x * racer->unk_C0.y.x) + (sp70.y * racer->unk_C0.y.y) + (sp70.z * racer->unk_C0.y.z));
+    var_fv1 = temp_s2->unk_68[1] * SIN(angle) *
+              ((sp70.x * racer->unk_C0.y.x) + (sp70.y * racer->unk_C0.y.y) + (sp70.z * racer->unk_C0.y.z));
     spA4 = temp_s2->unk_68[1] * COS(angle);
 
     angle = Math_Round(DEG_TO_FZXANG2(temp_s2->unk_68[8]));
@@ -414,7 +441,7 @@ void func_80081794(unk_struct_F8* arg0, unk_struct_1DC* arg1) {
     temp_s2->unk_00.unk_00.unk_24.x = temp_s1->unk_00.unk_00.x - temp_s1->unk_00.unk_0C.x;
     temp_s2->unk_00.unk_00.unk_24.y = temp_s1->unk_00.unk_00.y - temp_s1->unk_00.unk_0C.y;
     temp_s2->unk_00.unk_00.unk_24.z = temp_s1->unk_00.unk_00.z - temp_s1->unk_00.unk_0C.z;
-    func_8006AA38((Mtx3F* ) &temp_s2->unk_00.unk_00.unk_24);
+    func_8006AA38((Mtx3F*) &temp_s2->unk_00.unk_00.unk_24);
     if (D_800DCE5C == 0) {
         temp_s1->unk_00.unk_18[3] = temp_s1->unk_00.unk_18[0] = temp_s2->unk_00.unk_00.unk_30.x;
         temp_s1->unk_00.unk_18[4] = temp_s1->unk_00.unk_18[1] = temp_s2->unk_00.unk_00.unk_30.y;
@@ -1666,7 +1693,7 @@ void func_80085610(void) {
     unk_struct_1DC* var_s0;
     Racer* temp_a3;
     s32 v0;
-    
+
     D_800E5E84 = 0;
     D_800E5E8C = 0;
 
@@ -1724,14 +1751,14 @@ void func_80085610(void) {
                 } else {
                     D_800E5220[i].unk_04 = 4;
                 }
-    
+
                 D_800E5220[i].unk_20 = gRacers[i].unk_0C.unk_34;
 
                 D_800E5220[i].unk_2C = gRacers[i].unk_C0;
-    
+
                 func_80085B80(&D_800E5220[i], &D_800E5990[i], &D_800E5D70[i]);
             }
-    
+
             break;
         case GAMEMODE_TIME_ATTACK:
             D_800E5E8C = D_800E5E8A;
@@ -1748,14 +1775,14 @@ void func_80085610(void) {
             }
             D_800E5220[0].unk_20 = gRacers[0].unk_0C.unk_34;
             D_800E5220[0].unk_2C = gRacers[0].unk_C0;
-    
+
             D_800E5220[1].unk_04 = 12;
             for (i = 0; i < D_800E5E80; i++) {
                 func_80085B80(&D_800E5220[i], &D_800E5990[i], &D_800E5D70[i]);
             }
             break;
         case GAMEMODE_RECORDS:
-            
+
             D_800E5E80 = 2;
             D_800E5220[0].unk_04 = 0xB;
             D_800E5220[0].unk_20 = gRacers[0].unk_0C.unk_34;
@@ -1908,7 +1935,7 @@ void func_80085B80(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
             arg1->unk_04.unk_58.unk_00.unk_00.unk_3C.x = arg1->unk_04.unk_58.unk_00.unk_00.unk_3C.y = 35.0f;
             arg1->unk_04.unk_58.unk_00.unk_00.unk_48.x = arg1->unk_04.unk_58.unk_00.unk_00.unk_48.y = -50.0f;
 
-            *(Mtx3F*)&arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_0C = racer->unk_C0;
+            *(Mtx3F*) &arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_0C = racer->unk_C0;
 
             arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_18 = racer->unk_B4.x;
             arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_1C = racer->unk_B4.y;
@@ -2234,7 +2261,7 @@ void func_80086B64(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
         } else {
             var_s1 = &D_800D52F8[2];
         }
-        
+
         temp_s0 = &gRacers[arg0->unk_00];
 
         sp48.x.x = 0.0f - (var_s1->y * temp_s0->unk_C0.x.x);
@@ -2253,7 +2280,6 @@ void func_80086B64(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
         sp48.z.y *= temp_fv1;
         sp48.z.z *= temp_fv1;
 
-        
         sp48.y.x = (sp48.x.y * sp48.z.z) - (sp48.x.z * sp48.z.y);
         sp48.y.y = (sp48.x.z * sp48.z.x) - (sp48.x.x * sp48.z.z);
         sp48.y.z = (sp48.x.x * sp48.z.y) - (sp48.x.y * sp48.z.x);
@@ -2264,14 +2290,14 @@ void func_80086B64(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
 
         angle = Math_Round(DEG_TO_FZXANG2(var_s1->z));
 
-        temp_fv0 = (SIN(angle) * var_s1->y) * ((sp48.y.x * temp_s0->unk_C0.y.x) + (sp48.y.y * temp_s0->unk_C0.y.y) + (sp48.y.z * temp_s0->unk_C0.y.z));
+        temp_fv0 = (SIN(angle) * var_s1->y) * ((sp48.y.x * temp_s0->unk_C0.y.x) + (sp48.y.y * temp_s0->unk_C0.y.y) +
+                                               (sp48.y.z * temp_s0->unk_C0.y.z));
         temp_fv1 = COS(angle) * var_s1->y;
-
 
         temp1 = (temp_s0->unk_180.x + (temp_fv1 * sp48.x.x) + (temp_fv0 * sp48.y.x));
         temp2 = (temp_s0->unk_180.y + (temp_fv1 * sp48.x.y) + (temp_fv0 * sp48.y.y));
         temp3 = (temp_s0->unk_180.z + (temp_fv1 * sp48.x.z) + (temp_fv0 * sp48.y.z));
-        
+
         temp_fv0 = (f32) (arg0->unk_1C - 1) / 300.0f;
 
         temp_fv0 = (-2.0f * temp_fv0 * temp_fv0 * temp_fv0) + (3.0f * temp_fv0 * temp_fv0);
@@ -3473,11 +3499,11 @@ void func_80089BD0(void) {
                 D_800E5FE2 = i + 1;
 
                 for (j = 3; j >= i; j--) {
-                
+
                     D_800F8510->timeRecord[j + 1] = D_800F8510->timeRecord[j];
                     D_800F8510->unk_34[j + 1] = D_800F8510->unk_34[j];
                     D_800F8510->unk_98[j + 1] = D_800F8510->unk_98[j];
-                    *(s32*)&D_800F8510->unk_AC[j + 1] = *(s32*)&D_800F8510->unk_AC[j];
+                    *(s32*) &D_800F8510->unk_AC[j + 1] = *(s32*) &D_800F8510->unk_AC[j];
 
                     D_800F8504[j + 1] = D_800F8504[j];
                 }
@@ -3492,8 +3518,6 @@ void func_80089BD0(void) {
             }
         }
 
-
-
         if (D_800F8510->unk_C0 < gRacers[0].maxSpeed) {
             D_800E5FE4 = 1;
             D_800F8510->unk_C0 = gRacers[0].maxSpeed;
@@ -3501,7 +3525,6 @@ void func_80089BD0(void) {
             func_80089A74(D_800F8510->unk_C4);
             D_800F8504[5] = gRacers[0].unk_2C9;
         }
-
 
         var_a1_3 = D_800F8510->unk_D8;
         for (i = 0; i < 3; i++) {
@@ -3519,7 +3542,6 @@ void func_80089BD0(void) {
         }
     }
 
-
     if (D_800F5DEA != 0) {
         for (j = 0; j < 3; j++) {
             if (D_800E5FF8[j].unk_0000 == 0) {
@@ -3530,7 +3552,8 @@ void func_80089BD0(void) {
         var_a1_3 = -1;
         if (j == 3) {
             for (i = 0; i < 3; i++) {
-                if ((D_800E5FF8[i].unk_0000 != D_800F8510->unk_00) || ((D_800CD3CC == 1) && (D_800E5FF8[i].unk_3F68 != 1))) {
+                if ((D_800E5FF8[i].unk_0000 != D_800F8510->unk_00) ||
+                    ((D_800CD3CC == 1) && (D_800E5FF8[i].unk_3F68 != 1))) {
                     j = i;
                     var_a1_3 = D_800E5FF8[i].unk_0004;
                     break;
@@ -3542,7 +3565,8 @@ void func_80089BD0(void) {
 
             if (var_a1_3 != -1) {
                 for (i = j + 1; i < 3; i++) {
-                    if ((D_800F8510->unk_00 != D_800E5FF8[i].unk_0000) || ((D_800CD3CC == 1) && (D_800E5FF8[i].unk_3F68 != 1))) {
+                    if ((D_800F8510->unk_00 != D_800E5FF8[i].unk_0000) ||
+                        ((D_800CD3CC == 1) && (D_800E5FF8[i].unk_3F68 != 1))) {
                         if (var_a1_3 < D_800E5FF8[i].unk_0004) {
                             j = i;
                             var_a1_3 = D_800E5FF8[i].unk_0004;
@@ -3584,30 +3608,29 @@ void func_80089BD0(void) {
             temp_a1->unk_3F68 = 1;
             temp_a1->unk_0000 = D_800F8510->unk_00;
             temp_a1->unk_0004 = gRacers[0].raceTime;
-            
+
             for (i = 0; i < 3; i++) {
                 temp_a1->unk_0008[i] = gRacers[0].lapTimes[i];
             }
-            
+
             temp_a1->unk_0014 = D_800F5DCC;
             temp_a1->unk_0018 = D_800F5DC8;
 
             func_80089A74(temp_a1->unk_3F6A);
 
             i = (D_800F5DC8 - 1) & ~3;
-            var_v1_10 = (s32*)&D_800F1E80[i];
-            var_a0_3 = (s32*)&temp_a1->unk_001C[i];
+            var_v1_10 = (s32*) &D_800F1E80[i];
+            var_a0_3 = (s32*) &temp_a1->unk_001C[i];
             temp_a1->unk_3F64 = 0;
             do {
-                temp_a1->unk_3F64 += *var_a0_3-- = *var_v1_10--;
-            } while (var_v1_10 >= (s32*)D_800F1E80);
+                temp_a1->unk_3F64 += * var_a0_3-- = *var_v1_10--;
+            } while (var_v1_10 >= (s32*) D_800F1E80);
             if ((D_800F1E78 == NULL) || (temp_a1->unk_0004 < D_800F1E78->unk_0004)) {
                 D_800F1E78 = temp_a1;
             }
         }
     }
 }
-
 
 void func_8008A978(void) {
     Racer* var_a1;
@@ -3935,8 +3958,8 @@ extern f32 D_800CF174[];
 extern f32 D_800CF188[];
 extern f32 D_800CF19C[];
 
-#define PHYS_TO_K1ROM(x) (((u32)(x)|0xB0000000))
-#define ROM_READ(addr) (*(vu32*)PHYS_TO_K1ROM(addr))
+#define PHYS_TO_K1ROM(x) (((u32) (x) | 0xB0000000))
+#define ROM_READ(addr) (*(vu32*) PHYS_TO_K1ROM(addr))
 
 f32 func_8008B2D8(Racer* arg0, f32 arg1) {
     unk_800CF1B0* temp_a1;
@@ -3951,68 +3974,109 @@ f32 func_8008B2D8(Racer* arg0, f32 arg1) {
 
     while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
 
-    temp_fv0 = ((((f32) ((ROM_READ(0x078) >> 0xF) & 0xFF) * 0.1f) - ((f32) (((ROM_READ(0x50C) >> 0x13) & 0xFF) | 0x600) * 0.001f)) * temp_fs0) + ((f32) (((ROM_READ(0x50C) >> 0x13) & 0xFF) | 0x600) * 0.001f);
-    temp_fv1 = ((((f32) ((ROM_READ(0x780) >> 0x15) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x390) >> 9) & 0xFF) * 0.001f)) * temp_fs0) + ((f32) ((ROM_READ(0x390) >> 9) & 0xFF) * 0.001f);
+    temp_fv0 = ((((f32) ((ROM_READ(0x078) >> 0xF) & 0xFF) * 0.1f) -
+                 ((f32) (((ROM_READ(0x50C) >> 0x13) & 0xFF) | 0x600) * 0.001f)) *
+                temp_fs0) +
+               ((f32) (((ROM_READ(0x50C) >> 0x13) & 0xFF) | 0x600) * 0.001f);
+    temp_fv1 =
+        ((((f32) ((ROM_READ(0x780) >> 0x15) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x390) >> 9) & 0xFF) * 0.001f)) *
+         temp_fs0) +
+        ((f32) ((ROM_READ(0x390) >> 9) & 0xFF) * 0.001f);
 
-    arg0->unk_1B4 = ((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv0 - temp_fv1) * (1.0f - SQ((2.0f * arg1) - 1.0f)));
+    arg0->unk_1B4 =
+        ((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv0 - temp_fv1) * (1.0f - SQ((2.0f * arg1) - 1.0f)));
     temp_fs1 = arg0->unk_1B4;
-    
+
     while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
-    
-    temp_fv0 = ((((f32) ((ROM_READ(0x0A0) >> 0x15) & 0xFF) * 0.1f) - ((f32) (((ROM_READ(0x540) >> 0xD) & 0xFF) | 0x800) * 0.001f)) * temp_fs0) + ((f32) (((ROM_READ(0x540) >> 0xD) & 0xFF) | 0x800) * 0.001f);
-    temp_fv1 = ((((f32) ((ROM_READ(0x95C) >> 0x13) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x50C) >> 6) & 0xFF) * 0.001f)) * temp_fs0) + ((f32) ((ROM_READ(0x50C) >> 6) & 0xFF) * 0.001f);
-    arg0->unk_1B0 = ((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv0 - temp_fv1) * (1.0f - SQ((2.0f * arg1) - 1.0f)));
+
+    temp_fv0 = ((((f32) ((ROM_READ(0x0A0) >> 0x15) & 0xFF) * 0.1f) -
+                 ((f32) (((ROM_READ(0x540) >> 0xD) & 0xFF) | 0x800) * 0.001f)) *
+                temp_fs0) +
+               ((f32) (((ROM_READ(0x540) >> 0xD) & 0xFF) | 0x800) * 0.001f);
+    temp_fv1 =
+        ((((f32) ((ROM_READ(0x95C) >> 0x13) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x50C) >> 6) & 0xFF) * 0.001f)) *
+         temp_fs0) +
+        ((f32) ((ROM_READ(0x50C) >> 6) & 0xFF) * 0.001f);
+    arg0->unk_1B0 =
+        ((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv0 - temp_fv1) * (1.0f - SQ((2.0f * arg1) - 1.0f)));
     temp_fs1 += arg0->unk_1B0;
-    
+
     while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
-    
-    temp_fv0 = ((((f32) ((ROM_READ(0x1BC) >> 0x13) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x57C) >> 0xF) & 0xFF) * 0.1f)) * temp_fs0) + ((f32) ((ROM_READ(0x57C) >> 0xF) & 0xFF) * 0.1f);
-    temp_fv1 = (((((f32) ((ROM_READ(0x978) >> 0x15) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x550) >> 0x13) & 0xFF) * 0.001f)) * temp_fs0)) + ((f32) ((ROM_READ(0x550) >> 0x13) & 0xFF) * 0.001f);
+
+    temp_fv0 =
+        ((((f32) ((ROM_READ(0x1BC) >> 0x13) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x57C) >> 0xF) & 0xFF) * 0.1f)) *
+         temp_fs0) +
+        ((f32) ((ROM_READ(0x57C) >> 0xF) & 0xFF) * 0.1f);
+    temp_fv1 =
+        (((((f32) ((ROM_READ(0x978) >> 0x15) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x550) >> 0x13) & 0xFF) * 0.001f)) *
+          temp_fs0)) +
+        ((f32) ((ROM_READ(0x550) >> 0x13) & 0xFF) * 0.001f);
     arg0->unk_1B8 = ((temp_fv1 - temp_fv0) * arg1) + temp_fv0;
     temp_fs1 += arg0->unk_1B8;
-    
+
     while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
-    
-    temp_fv0 = (((f32) ((ROM_READ(0x2C4) >> 0xE) & 0xFF) - (f32) ((ROM_READ(0x5D8) >> 4) & 0xFF)) * temp_fs0) + (f32) ((ROM_READ(0x5D8) >> 4) & 0xFF);
-    temp_fv1 = (((f32) ((ROM_READ(0x988) >> 0x18) & 0xFF) - (f32) ((ROM_READ(0x57C) >> 0xA) & 0xFF)) * temp_fs0) + (f32) ((ROM_READ(0x57C) >> 0xA) & 0xFF);
+
+    temp_fv0 = (((f32) ((ROM_READ(0x2C4) >> 0xE) & 0xFF) - (f32) ((ROM_READ(0x5D8) >> 4) & 0xFF)) * temp_fs0) +
+               (f32) ((ROM_READ(0x5D8) >> 4) & 0xFF);
+    temp_fv1 = (((f32) ((ROM_READ(0x988) >> 0x18) & 0xFF) - (f32) ((ROM_READ(0x57C) >> 0xA) & 0xFF)) * temp_fs0) +
+               (f32) ((ROM_READ(0x57C) >> 0xA) & 0xFF);
     arg0->unk_1BC = ((temp_fv1 - temp_fv0) * arg1) + temp_fv0;
     temp_fs1 += arg0->unk_1BC;
-    
+
     while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
-    
-    temp_fv0 = ((((f32) ((ROM_READ(0x2FC) >> 0x12) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x660) >> 0x10) & 0xFF) * 0.001f)) * temp_fs0) + ((f32) ((ROM_READ(0x660) >> 0x10) & 0xFF) * 0.001f);
-    temp_fv1 = (((((f32) ((ROM_READ(0xA20) >> 0xC) & 0xFF) * 0.01f) - ((f32) ((ROM_READ(0x5E4) >> 0x14) & 0xFF) * 0.01f)) * temp_fs0) + ((f32) ((ROM_READ(0x5E4) >> 0x14) & 0xFF) * 0.01f));
-    arg0->unk_1C8 = ((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv1 - temp_fv0) * (1.0f - SQ((2.0f * arg1) - 1.0f)));
+
+    temp_fv0 =
+        ((((f32) ((ROM_READ(0x2FC) >> 0x12) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x660) >> 0x10) & 0xFF) * 0.001f)) *
+         temp_fs0) +
+        ((f32) ((ROM_READ(0x660) >> 0x10) & 0xFF) * 0.001f);
+    temp_fv1 =
+        (((((f32) ((ROM_READ(0xA20) >> 0xC) & 0xFF) * 0.01f) - ((f32) ((ROM_READ(0x5E4) >> 0x14) & 0xFF) * 0.01f)) *
+          temp_fs0) +
+         ((f32) ((ROM_READ(0x5E4) >> 0x14) & 0xFF) * 0.01f));
+    arg0->unk_1C8 =
+        ((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv1 - temp_fv0) * (1.0f - SQ((2.0f * arg1) - 1.0f)));
     temp_fs1 += arg0->unk_1C8;
-    
+
     while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
-    
-    temp_fv0 = (((f32) ((ROM_READ(0x36C) >> 0x10) & 0xFF) - (f32) ((ROM_READ(0x6A0) >> 0xC) & 0xFF)) * temp_fs0) + (f32) ((ROM_READ(0x6A0) >> 0xC) & 0xFF);
-    temp_fv1 = ((((f32) ((ROM_READ(0x1BC) >> 0xA) & 0xFF) - (f32) ((ROM_READ(0x60C) >> 0x16) & 0xFF)) * temp_fs0) + (f32) ((ROM_READ(0x60C) >> 0x16) & 0xFF));
-    arg0->unk_1CC = arg0->unk_1C8 / (((temp_fv1 - temp_fv0) * arg1) + temp_fv0 + (0.2f * (temp_fv1 - temp_fv0) * (1.0f - SQ((2.0f * arg1) - 1.0f))));
+
+    temp_fv0 = (((f32) ((ROM_READ(0x36C) >> 0x10) & 0xFF) - (f32) ((ROM_READ(0x6A0) >> 0xC) & 0xFF)) * temp_fs0) +
+               (f32) ((ROM_READ(0x6A0) >> 0xC) & 0xFF);
+    temp_fv1 = ((((f32) ((ROM_READ(0x1BC) >> 0xA) & 0xFF) - (f32) ((ROM_READ(0x60C) >> 0x16) & 0xFF)) * temp_fs0) +
+                (f32) ((ROM_READ(0x60C) >> 0x16) & 0xFF));
+    arg0->unk_1CC = arg0->unk_1C8 / (((temp_fv1 - temp_fv0) * arg1) + temp_fv0 +
+                                     (0.2f * (temp_fv1 - temp_fv0) * (1.0f - SQ((2.0f * arg1) - 1.0f))));
     temp_fs1 += arg0->unk_1CC;
-    
-    
+
     while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
-    
-    temp_fv0 = ((((ROM_READ(0x374) >> 3) & 0xFF) - ((f32) ((ROM_READ(0x6D8) >> 2) & 0xFF) * 0.01f)) * temp_fs0) + (((ROM_READ(0x6D8) >> 2) & 0xFF) * 0.01f);
-    temp_fv1 = (((((ROM_READ(0x1C8) >> 4) & 0xFF) * 0.01f) - ((f32) ((ROM_READ(0x664) >> 2) & 0xFF) * 0.01f)) * temp_fs0) + (((ROM_READ(0x664) >> 2) & 0xFF) * 0.01f);
+
+    temp_fv0 = ((((ROM_READ(0x374) >> 3) & 0xFF) - ((f32) ((ROM_READ(0x6D8) >> 2) & 0xFF) * 0.01f)) * temp_fs0) +
+               (((ROM_READ(0x6D8) >> 2) & 0xFF) * 0.01f);
+    temp_fv1 =
+        (((((ROM_READ(0x1C8) >> 4) & 0xFF) * 0.01f) - ((f32) ((ROM_READ(0x664) >> 2) & 0xFF) * 0.01f)) * temp_fs0) +
+        (((ROM_READ(0x664) >> 2) & 0xFF) * 0.01f);
     temp_a1 = &D_800F80C8[arg0->character];
     arg0->unk_1F8 = D_800CF188[temp_a1->unk_11[2]] + ((temp_fv1 - temp_fv0) * arg1) + temp_fv0;
     temp_fs1 += arg0->unk_1F8;
-    
-    
-    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
-    
-    temp_fv0 = (((f32) ((ROM_READ(0x384) >> 5) & 0xFF) - ((f32) ((ROM_READ(0x718) >> 0xD) & 0xFF) * 0.001f)) * temp_fs0) + (((ROM_READ(0x718) >> 0xD) & 0xFF) * 0.001f);
-    temp_fv1 = ((((f32) ((ROM_READ(0x248) >> 0xB) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x6A0) >> 0xE) & 0xFF) * 0.01f)) * temp_fs0) + (((ROM_READ(0x6A0) >> 0xE) & 0xFF) * 0.01f);
-    arg0->unk_1FC = D_800CF19C[temp_a1->unk_11[2]] + ((temp_fv1 - temp_fv0) * arg1) + temp_fv0;
-    temp_fs1 += arg0->unk_1FC;
-    
+
     while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
 
-    temp_fv0 = (((ROM_READ(0x38C) & 0xFF) - (((ROM_READ(0x740) >> 0x12) & 0xFF) * 0.001f)) * temp_fs0) + (((ROM_READ(0x740) >> 0x12) & 0xFF) * 0.001f);
-    temp_fv1 = (((((ROM_READ(0x250) >> 3) & 0xFF) * 0.001f) - (((ROM_READ(0x718) >> 0x17) & 0xFF) * 0.001f)) * temp_fs0) + (((ROM_READ(0x718) >> 0x17) & 0xFF) * 0.001f);
+    temp_fv0 =
+        (((f32) ((ROM_READ(0x384) >> 5) & 0xFF) - ((f32) ((ROM_READ(0x718) >> 0xD) & 0xFF) * 0.001f)) * temp_fs0) +
+        (((ROM_READ(0x718) >> 0xD) & 0xFF) * 0.001f);
+    temp_fv1 =
+        ((((f32) ((ROM_READ(0x248) >> 0xB) & 0xFF) * 0.001f) - ((f32) ((ROM_READ(0x6A0) >> 0xE) & 0xFF) * 0.01f)) *
+         temp_fs0) +
+        (((ROM_READ(0x6A0) >> 0xE) & 0xFF) * 0.01f);
+    arg0->unk_1FC = D_800CF19C[temp_a1->unk_11[2]] + ((temp_fv1 - temp_fv0) * arg1) + temp_fv0;
+    temp_fs1 += arg0->unk_1FC;
+
+    while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
+
+    temp_fv0 = (((ROM_READ(0x38C) & 0xFF) - (((ROM_READ(0x740) >> 0x12) & 0xFF) * 0.001f)) * temp_fs0) +
+               (((ROM_READ(0x740) >> 0x12) & 0xFF) * 0.001f);
+    temp_fv1 =
+        (((((ROM_READ(0x250) >> 3) & 0xFF) * 0.001f) - (((ROM_READ(0x718) >> 0x17) & 0xFF) * 0.001f)) * temp_fs0) +
+        (((ROM_READ(0x718) >> 0x17) & 0xFF) * 0.001f);
 
     temp_fa1 = ((temp_fv1 - temp_fv0) * arg0->unk_1A8) + temp_fv0;
 

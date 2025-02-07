@@ -51,6 +51,7 @@ void func_8007402C(s32 courseIndex);
 void func_800741DC(s32 courseIndex);
 void func_800742D0(void);
 void func_800742FC(void);
+void func_80074428(s32 courseIndex);
 void func_80074634(unk_800F8510* arg0);
 void func_800747EC(s32 venue);
 void func_80074A90(f32* arg0, f32* arg1);

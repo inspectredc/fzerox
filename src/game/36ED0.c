@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzx_racer.h"
+#include "fzx_game.h"
 #include "fzx_course.h"
 #include "fzxmath.h"
 #include "fzx_segmentA.h"
@@ -1525,10 +1526,6 @@ Vtx* func_800A2BDC(Vtx* arg0, Vec3f* arg1, Mtx3F* arg2) {
     return ++arg0;
 }
 
-// TODO: figure out migration of unused float
-#ifdef RODATA
-const static f32 D_800D5AA8[2] = { 3000.0f, 131071.0f };
-
 s32 func_800A2D2C(unk_800F8510* arg0, Vtx* arg1) {
     unk_8006FC8C* var_s0;
     f32 spD0;
@@ -1541,7 +1538,6 @@ s32 func_800A2D2C(unk_800F8510* arg0, Vtx* arg1) {
     s32 var_s2;
     Vtx* var_s3;
 
-    // D_800F89E8 = D_800D5AA8[0];
     D_800F89E8 = 3000.0f;
     var_s0 = arg0->unk_10;
     var_fs1 = 0.0f;
@@ -1557,7 +1553,7 @@ s32 func_800A2D2C(unk_800F8510* arg0, Vtx* arg1) {
     while (true) {
         var_fs1 += 300.0f / var_fs2;
         if (var_fs1 >= 1.0f) {
-            var_s0 = var_s0->unk_34;
+            var_s0 = var_s0->next;
             var_fs1 -= 1.0f;
             if (var_s0 != arg0->unk_10) {
                 var_fs1 *= (var_fs2 / func_8009E538(var_s0, 0.0f, &spA4));
@@ -1603,12 +1599,582 @@ s32 func_800A2D2C(unk_800F8510* arg0, Vtx* arg1) {
         return 0;
     }
 }
-#else
-s32 func_800A2D2C(unk_800F8510* arg0, Vtx* arg1);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_800A2D2C.s")
-#endif
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_800A3044.s")
+extern s32 gRandSeed1;
+extern s32 gRandMask1;
+extern s32 gRandSeed2;
+extern s32 gRandMask2;
+extern s8 D_800CD010;
+extern s32 gGameMode;
+extern CourseData D_8010B7B0;
+
+void func_800A3044(void) {
+    s32 var_s4;
+    s32 temp_s3;
+    s32 var_s6;
+    s32 sp108;
+    s32 sp104;
+    unk_8006FC8C* var_s0;
+    unk_8006FC8C* var_s1;
+    unk_8006FC8C* var_s2;
+    ControlPoint* var_s1_2;
+    ControlPoint* var_s0_4;
+    ControlPoint* var_s3;
+    f32 spE8;
+    s32 temp_a0;
+    s32 temp_s2;
+    f32 var_fs4;
+    f32 temp_fs5;
+    Vec3f spCC;
+    f32 temp_fs3;
+    f32 temp_fs2;
+    f32 temp_fv0;
+    f32 temp_fv1;
+    f32 temp_ft5;
+    s32* spB4;
+    ControlPoint* spB0;
+    f32 var_fs0;
+    f32 var_fs1;
+
+    if ((gGameMode == GAMEMODE_GP_RACE) && (D_800CD010 == 0) && (gCourseIndex == D_800CF504)) {
+        Math_Rand1Init(D_800F893C, D_800F8940);
+        Math_Rand2Init(D_800F8944, D_800F8948);
+    }
+    D_800CF504 = gCourseIndex;
+    D_800F893C = gRandSeed1;
+    D_800F8940 = gRandMask1;
+    D_800F8944 = gRandSeed2;
+    D_800F8948 = gRandMask2;
+    do {
+    loop_start:
+        do {
+            if ((Math_Rand1() & 0x1FFFF) < 0x38E3) {
+                if ((Math_Rand2() & 0x1FFFF) < 0x7FFF) {
+                    sp108 = 3;
+                } else if ((Math_Rand2() & 0x1FFFF) < 0xFFFF) {
+                    sp108 = 2;
+                } else {
+                    sp108 = 1;
+                }
+            } else {
+                sp108 = 0;
+            }
+
+            switch (sp108) {
+                case 0:
+                case 3:
+                    D_800CF510 = 1000.0f;
+                    D_800CF514 = 10000.0f;
+                    D_800CF518 = D_800CF998[Math_Rand1() & 3];
+                    var_s4 = 9;
+                    break;
+                default:
+                    D_800CF510 = 6000.0f;
+                    D_800CF514 = 2500.0f;
+                    D_800CF518 = 2500.0f;
+                    var_s4 = 6;
+                    break;
+            }
+
+            D_800F8510->unk_08 = ((Math_Rand2() & 0x1FFFF) % 5) + var_s4;
+            var_s4 = (D_800F8510->unk_08 * 3) + 1;
+            var_s0 = var_s4 + D_800F8510->unk_10;
+            var_s1 = D_800F8510->unk_10;
+            do {
+                var_s0->segmentIndex = var_s4;
+                var_s0->prev = var_s0 - 1;
+                var_s0->next = var_s1;
+                var_s1 = var_s0;
+                var_s0--;
+                var_s4--;
+            } while (var_s4 >= 0);
+
+            var_fs4 = D_800CF514 / 131071.0f;
+            spE8 = 4096.0f / D_800F8510->unk_08;
+            temp_fs5 = D_800CF518 / 131071.0f;
+
+            D_800F8510->unk_08 = (D_800F8510->unk_08 * 3) + 2;
+
+            do {
+                D_800F8510->unk_08 = (D_800F8510->unk_08 - 2) / 3;
+
+                D_800F8510->unk_10[0].prev = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+                D_800F8510->unk_10[0].prev->next = &D_800F8510->unk_10[0];
+                temp_fs2 = 1.0f / (131071.0f * 5.0f);
+
+                do {
+                    var_fs1 = 0.0f;
+                    var_s0 = D_800F8510->unk_10[0].prev;
+
+                    do {
+
+                        var_fs0 = ((Math_Rand2() & 0x1FFFF) * var_fs4) + D_800CF510;
+
+                        temp_a0 = ((((Math_Rand1() & 0x1FFFF) * temp_fs2) + var_fs1) * spE8);
+                        var_s0->pos.x = COS(temp_a0) * var_fs0;
+                        var_s0->pos.z = SIN(temp_a0) * var_fs0;
+                        var_s0->pos.y = (f32) ((Math_Rand2() & 0x1FFFF) * temp_fs5);
+
+                        var_s0--;
+                        var_fs1 += 1.0f;
+                    } while (var_s0 >= D_800F8510->unk_10);
+                } while (func_8009DEAC(D_800F8510) != 0);
+
+                var_s1_2 = D_8010B7B0.controlPoint;
+                var_s0 = D_800F8510->unk_10;
+
+                do {
+                    func_8009E6F0(var_s0, 0.333333f, &spCC);
+                    var_s1_2->pos = spCC;
+                    var_s1_2++;
+                    func_8009E6F0(var_s0, 0.666667f, &spCC);
+                    var_s1_2->pos = spCC;
+                    var_s0 = var_s0->next;
+                    var_s1_2++;
+                    var_s1_2->pos = var_s0->pos;
+                    var_s1_2++;
+                } while (var_s0 != D_800F8510->unk_10);
+
+                var_s1_2 -= 3;
+                var_fs1 = 0.0f;
+                var_s0_4 = var_s1_2 + 1;
+
+                do {
+                    temp_fs2 = var_s0_4->pos.x - var_s1_2->pos.x;
+                    temp_ft5 = var_s0_4->pos.y - var_s1_2->pos.y;
+                    temp_fs3 = var_s0_4->pos.z - var_s1_2->pos.z;
+                    temp_fv0 = SQ(temp_fs2) + SQ(temp_ft5) + SQ(temp_fs3);
+                    if (var_fs1 < temp_fv0) {
+                        var_fs1 = temp_fv0;
+                        spB0 = var_s1_2;
+                    }
+                    var_s1_2 -= 3;
+                    var_s0_4 -= 3;
+                } while (var_s1_2 >= D_8010B7B0.controlPoint);
+
+                var_s0_4 = spB0 + 1;
+                spCC.x = (spB0->pos.x + var_s0_4->pos.x) * 0.5f;
+                spCC.y = (spB0->pos.y + var_s0_4->pos.y) * 0.5f;
+                spCC.z = (spB0->pos.z + var_s0_4->pos.z) * 0.5f;
+                temp_fv0 = sqrtf(var_fs1);
+                temp_fv1 = 1587.5f / temp_fv0;
+                temp_fs2 = (var_s0_4->pos.x - spB0->pos.x) * temp_fv1;
+                temp_ft5 = (var_s0_4->pos.y - spB0->pos.y) * temp_fv1;
+                temp_fs3 = (var_s0_4->pos.z - spB0->pos.z) * temp_fv1;
+
+                if (temp_fv0 < 5000.0f) {
+                    var_s1_2 = &D_8010B7B0.controlPoint[D_800F8510->unk_08 * 3 - 1];
+                    temp_fv1 = 3.1496062f - (temp_fv0 / 1587.5f);
+
+                    do {
+                        if ((((var_s1_2->pos.x - spCC.x) * temp_fs2) + ((var_s1_2->pos.y - spCC.y) * temp_ft5) +
+                             ((var_s1_2->pos.z - spCC.z) * temp_fs3)) < 0.0f) {
+                            var_s1_2->pos.x -= (temp_fv1 * temp_fs2);
+                            var_s1_2->pos.y -= (temp_fv1 * temp_ft5);
+                            var_s1_2->pos.z -= (temp_fv1 * temp_fs3);
+                        }
+                        var_s1_2--;
+                    } while (var_s1_2 >= D_8010B7B0.controlPoint);
+                    spCC.x -= (temp_fv1 * temp_fs2) * 0.5f;
+                    spCC.y -= (temp_fv1 * temp_ft5) * 0.5f;
+                    spCC.z -= (temp_fv1 * temp_fs3) * 0.5f;
+                }
+                D_800F8510->unk_08 = (D_800F8510->unk_08 * 3) + 2;
+
+                D_800F8510->unk_10[0].prev->next = D_800F8510->unk_10[0].prev + 1;
+                D_800F8510->unk_10[0].prev = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+                D_800F8510->unk_10[0].prev->next = &D_800F8510->unk_10[0];
+
+                var_s1_2 = spB0;
+                var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+
+                do {
+                    var_s0->pos = var_s1_2->pos;
+                    var_s0--;
+                    if (--var_s1_2 < D_8010B7B0.controlPoint) {
+                        var_s1_2 = &D_8010B7B0.controlPoint[D_800F8510->unk_08 - 3];
+                    }
+                } while (var_s1_2 != spB0);
+
+                var_s0->pos.x = spCC.x + temp_fs2;
+                var_s0->pos.y = spCC.y + temp_ft5;
+                var_s0->pos.z = spCC.z + temp_fs3;
+                var_s0--;
+                var_s0->pos.x = spCC.x - temp_fs2;
+                var_s0->pos.y = spCC.y - temp_ft5;
+                var_s0->pos.z = spCC.z - temp_fs3;
+            } while (func_8009DEAC(D_800F8510) != 0);
+
+            var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+
+            do {
+                var_s1 = var_s0->next;
+                if ((SQ(var_s0->pos.x - var_s1->pos.x) + SQ(var_s0->pos.y - var_s1->pos.y) +
+                     SQ(var_s0->pos.z - var_s1->pos.z)) < 8500.0f) {
+                    break;
+                }
+                var_s0--;
+            } while (var_s0 >= D_800F8510->unk_10);
+
+            if (var_s0 >= D_800F8510->unk_10) {
+                goto loop_start;
+            }
+
+            spE8 = 0.0f;
+            var_fs4 = 5000.0f;
+            var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+
+            do {
+                if (var_s0->pos.y < var_fs4) {
+                    var_fs4 = var_s0->pos.y;
+                }
+                if (spE8 < var_s0->pos.y) {
+                    spE8 = var_s0->pos.y;
+                }
+                var_s0--;
+            } while (var_s0 >= D_800F8510->unk_10);
+
+            var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+
+            do {
+                var_s0->pos.y += (0 - var_fs4) + ((spE8 - var_fs4) * 0.5f);
+                var_s0--;
+            } while (var_s0 >= D_800F8510->unk_10);
+
+            sp104 = Math_Rand1() % 2;
+            switch (sp108) {
+                case 0:
+                    var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+                    do {
+                        var_s1 = var_s0->next;
+                        var_s2 = var_s0->prev;
+
+                        temp_fs2 = var_s1->pos.x - var_s0->pos.x;
+                        temp_fs3 = var_s1->pos.z - var_s0->pos.z;
+                        spCC.x = var_s0->pos.x - var_s2->pos.x;
+                        spCC.z = var_s0->pos.z - var_s2->pos.z;
+
+                        var_fs0 = ((spCC.x * temp_fs3) - (spCC.z * temp_fs2)) /
+                                  sqrtf((SQ(spCC.x) + SQ(spCC.z)) * (SQ(temp_fs2) + SQ(temp_fs3)));
+
+                        if (((spCC.x * temp_fs2) + (spCC.z * temp_fs3)) < 0.0f) {
+                            if (var_fs0 < 0.0f) {
+                                var_fs0 = -1.0f;
+                            } else {
+                                var_fs0 = 1.0f;
+                            }
+                        }
+                        var_fs1 = ((SQ(var_fs0) * 100.0f) + 500.0f) - 200.0f;
+                        if (sp104 != 0) {
+                            var_s2 = var_s1;
+                        }
+                        var_s0--;
+
+                        var_s2->radiusLeft = ((0.5f - (SQ(var_fs0) * var_fs0 * 0.5f)) * var_fs1) + 100.0f;
+                        var_s2->radiusRight = (((SQ(var_fs0) * var_fs0 * 0.5f) + 0.5f) * var_fs1) + 100.0f;
+
+                    } while (var_s0 >= D_800F8510->unk_10);
+
+                    D_800F8510->unk_10[0].radiusLeft = D_800F8510->unk_10[0].radiusRight =
+                        D_800F8510->unk_10[1].radiusLeft = D_800F8510->unk_10[1].radiusRight =
+                            (D_800F8510->unk_10[0].radiusLeft + D_800F8510->unk_10[0].radiusRight +
+                             D_800F8510->unk_10[1].radiusLeft + D_800F8510->unk_10[1].radiusRight) /
+                            4.0f;
+                    break;
+                case 3:
+                    var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+                    do {
+                        var_s1 = var_s0->next;
+                        var_s2 = var_s0->prev;
+
+                        temp_fs2 = var_s1->pos.x - var_s0->pos.x;
+                        temp_fs3 = var_s1->pos.z - var_s0->pos.z;
+                        spCC.x = var_s0->pos.x - var_s2->pos.x;
+                        spCC.z = var_s0->pos.z - var_s2->pos.z;
+                        var_fs0 = ((spCC.x * temp_fs3) - (spCC.z * temp_fs2)) /
+                                  sqrtf((SQ(spCC.x) + SQ(spCC.z)) * (SQ(temp_fs2) + SQ(temp_fs3)));
+
+                        if (((spCC.x * temp_fs2) + (spCC.z * temp_fs3)) < 0.0f) {
+                            if (var_fs0 < 0.0f) {
+                                var_fs0 = -1.0f;
+                            } else {
+                                var_fs0 = 1.0f;
+                            }
+                        }
+                        if (sp104 != 0) {
+                            var_s2 = var_s1;
+                        }
+                        var_s0--;
+                        var_s2->radiusLeft = var_s2->radiusRight = (SQ(var_fs0) * 50.0f) + 200.0f;
+
+                    } while (var_s0 >= D_800F8510->unk_10);
+                    D_800F8510->unk_10[0].radiusLeft = D_800F8510->unk_10[0].radiusRight =
+                        D_800F8510->unk_10[1].radiusLeft = D_800F8510->unk_10[1].radiusRight =
+                            (D_800F8510->unk_10[0].radiusLeft + D_800F8510->unk_10[1].radiusLeft) * 0.5f;
+                    break;
+                default:
+                    var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+                    do {
+                        var_s0->radiusRight = 250.0f;
+                        var_s0->radiusLeft = 250.0f;
+                        var_s0--;
+                    } while (var_s0 >= D_800F8510->unk_10);
+                    break;
+            }
+
+            D_8010B7B0.creatorId = CREATOR_NINTENDO;
+            D_8010B7B0.controlPointCount = D_800F8510->unk_08;
+            D_8010B7B0.venue = (Math_Rand2() & 0x1FFFF) % 10;
+            D_8010B7B0.skybox = (Math_Rand1() & 0x1FFFF) % 8;
+            D_8010B7B0.flag = 1;
+
+            switch (Math_Rand1() & 3) {
+                case 0: // ROAD GROUP 1
+                    spB4 = D_800CF9A8;
+                    break;
+                case 1: // ROAD GROUP 2
+                    spB4 = D_800CF9B4;
+                    break;
+                case 2: // ROAD GROUP 3
+                    spB4 = D_800CF9C0;
+                    break;
+                case 3: // ROAD GROUP 4
+                    spB4 = D_800CF9CC;
+                    break;
+            }
+            var_s6 = 0;
+            var_s4 = D_8010B7B0.controlPointCount - 1;
+            if (sp104 != 0) {
+                var_s0 = D_800F8510->unk_10[0].prev;
+            } else {
+                var_s0 = D_800F8510->unk_10[1].next;
+            }
+
+            do {
+                var_s3 = &D_8010B7B0.controlPoint[var_s4];
+                var_s3->pos = var_s0->pos;
+                var_s3->radiusLeft = var_s0->radiusLeft;
+                var_s3->radiusRight = var_s0->radiusRight;
+                var_s3->trackSegmentInfo = spB4[var_s6];
+                var_s6++;
+                if (var_s6 >= 3) {
+                    var_s6 = 0;
+                }
+
+                D_8010B7B0.bankAngle[var_s4] = 0;
+                D_8010B7B0.pit[var_s4] = PIT_NONE;
+                D_8010B7B0.dash[var_s4] = DASH_NONE;
+                D_8010B7B0.dirt[var_s4] = DIRT_NONE;
+                D_8010B7B0.ice[var_s4] = ICE_NONE;
+                D_8010B7B0.jump[var_s4] = JUMP_NONE;
+                D_8010B7B0.landmine[var_s4] = LANDMINE_NONE;
+                D_8010B7B0.gate[var_s4] = GATE_NONE;
+                D_8010B7B0.building[var_s4] = BUILDING_NONE;
+                D_8010B7B0.sign[var_s4] = SIGN_NONE;
+
+                if (sp104 != 0) {
+                    var_s0 = var_s0->prev;
+                } else {
+                    var_s0 = var_s0->next;
+                }
+                var_s4--;
+            } while (var_s4 >= 0);
+
+            // Override for start line
+            D_8010B7B0.controlPoint[0].trackSegmentInfo =
+                TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_START_LINE;
+            D_8010B7B0.gate[1] = GATE_START;
+            D_8010B7B0.controlPoint[1].trackSegmentInfo =
+                D_8010B7B0.controlPoint[D_800F8510->unk_08 - 1].trackSegmentInfo = spB4[1];
+            D_8010B7B0.controlPoint[3].trackSegmentInfo =
+                D_8010B7B0.controlPoint[D_800F8510->unk_08 - 3].trackSegmentInfo = spB4[0];
+
+            if (((sp108 == 0) || (sp108 == 3)) && ((Math_Rand1() & 0x1FFFF) >= 0x8000)) {
+                temp_a0 = Math_Rand2() & 3;
+                var_fs1 = D_800CF988[temp_a0];
+                if ((temp_a0 < 2) && ((Math_Rand1() & 0x1FFFF) >= 0x10000)) {
+                    var_s6 = 0;
+                } else {
+                    var_s6 = 1;
+                }
+
+                var_s4 = D_800F8510->unk_08 - 4;
+
+                do {
+                    var_s3 = &D_8010B7B0.controlPoint[var_s4];
+                    var_s1_2 = &D_8010B7B0.controlPoint[var_s4 + 1];
+                    spB0 = &D_8010B7B0.controlPoint[var_s4 - 1];
+                    spCC.x = var_s1_2->pos.x - var_s3->pos.x;
+                    spCC.z = var_s1_2->pos.z - var_s3->pos.z;
+
+                    temp_fv0 = sqrtf(SQ(spCC.x) + SQ(spCC.z));
+                    spCC.x /= temp_fv0;
+                    spCC.z /= temp_fv0;
+
+                    temp_fs2 = var_s3->pos.x - spB0->pos.x;
+                    temp_fs3 = var_s3->pos.z - spB0->pos.z;
+                    temp_fv0 = sqrtf(SQ(temp_fs2) + SQ(temp_fs3));
+
+                    temp_fs2 /= temp_fv0;
+                    temp_fs3 /= temp_fv0;
+
+                    var_fs0 = (spCC.x * temp_fs2) + (spCC.z * temp_fs3);
+                    if (var_fs0 < 0.0f) {
+                        var_fs0 = 0.0f;
+                    }
+                    if ((temp_fs2 * spCC.z) < (spCC.x * temp_fs3)) {
+                        if (var_s6 != 0) {
+                            D_8010B7B0.bankAngle[var_s4] = 360 - (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                        } else {
+                            D_8010B7B0.bankAngle[var_s4] = (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                        }
+                    } else if (var_s6 != 0) {
+                        D_8010B7B0.bankAngle[var_s4] = (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                    } else {
+                        D_8010B7B0.bankAngle[var_s4] = 360 - (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                    }
+                    var_s4--;
+                } while (var_s4 > 1);
+            }
+
+            if (sp108 == 0) {
+                if (1) {}
+                var_s1_2 = &D_8010B7B0.controlPoint[D_800F8510->unk_08 - 4];
+                do {
+                    var_s0_4 = var_s1_2 + 1;
+                    if (((Math_Rand1() & 0x1FFFF) < 0x1112) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000)) {
+                        if ((var_s0_4 + 1)->trackSegmentInfo & 0x10000000) {
+                            var_s1_2->trackSegmentInfo = var_s0_4->trackSegmentInfo =
+                                D_800CF9D8[(Math_Rand1() & 0x1FFFF) % 3];
+                        }
+                    }
+                    var_s1_2 -= 3;
+                } while (var_s1_2 >= &D_8010B7B0.controlPoint[4]);
+
+                var_s1_2 = &D_8010B7B0.controlPoint[D_800F8510->unk_08 - 3];
+                do {
+                    var_s0_4 = var_s1_2 + 1;
+                    if (((Math_Rand1() & 0x1FFFF) < 0x1112) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000)) {
+                        if ((var_s0_4 + 1)->trackSegmentInfo & 0x10000000) {
+                            var_s1_2->trackSegmentInfo = var_s0_4->trackSegmentInfo =
+                                D_800CF9E4[(Math_Rand1() & 0x1FFFF) % 3];
+                        }
+                    }
+                    var_s1_2 -= 3;
+                } while (var_s1_2 >= &D_8010B7B0.controlPoint[2]);
+
+                if ((Math_Rand2() & 0x1FFFF) < 0xFFFF) {
+                    var_s1_2 = &D_8010B7B0.controlPoint[((Math_Rand1() & 0x1FFFF) % (D_800F8510->unk_08 - 1)) + 1];
+                    var_s0_4 = &D_8010B7B0.controlPoint[((Math_Rand2() & 0x1FFFF) % (D_800F8510->unk_08 - 1)) + 1];
+                    if ((var_s1_2 < var_s0_4) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000) &&
+                        ((var_s0_4 + 1)->trackSegmentInfo & 0x10000000)) {
+                        var_s6 = Math_Rand1() & 3;
+                        temp_s2 = D_800CF9F0[var_s6];
+                        temp_a0 = D_800CF9F0[(((Math_Rand2() & 0x1FFFF) % 3) + var_s6 + 1) & 3];
+                        spB0 = var_s1_2;
+                        do {
+                            spB0->trackSegmentInfo = temp_s2;
+                            spB0++;
+                        } while (spB0 <= var_s0_4);
+
+                        var_s4 = (s32) (var_s0_4 - var_s1_2) / 3;
+                        while (var_s4 != 0) {
+                            var_s4--;
+                            (var_s1_2 + var_s4)->trackSegmentInfo = (var_s0_4 - var_s4)->trackSegmentInfo = temp_a0;
+                        }
+                    }
+                }
+
+                // Ensure there are pit zones
+                D_8010B7B0.pit[D_800F8510->unk_08 - 3] = D_8010B7B0.pit[D_800F8510->unk_08 - 4] = PIT_BOTH;
+            } else {
+                if (sp108 == 1) { // PIPE
+                    spB4 = D_800CFA10;
+                } else if (sp108 == 2) { // CYLINDER
+                    spB4 = D_800CFA20;
+                } else { // HALF PIPE
+                    spB4 = D_800CFA00;
+                }
+                var_s6 = Math_Rand2() & 3;
+                temp_s3 = ((Math_Rand1() & 0x1FFFF) % 3) + 1;
+                var_s1_2 = &D_8010B7B0.controlPoint[2];
+                var_s0_4 = &D_8010B7B0.controlPoint[D_800F8510->unk_08 - 5];
+
+                var_s4 = 4;
+                do {
+                    if (var_s0_4 >= var_s1_2) {
+                        var_fs1 = (((Math_Rand1() & 0x1FFFF) / 131071.0f) * 200.0f) + 100.0f;
+
+                        if (sp108 == 2) {
+                            var_fs1 += 30.0f;
+                        }
+                        temp_s2 = spB4[var_s6];
+                        if (sp108 == 3) {
+                            do {
+                                var_s1_2->trackSegmentInfo = temp_s2;
+                                var_s1_2++;
+                            } while (var_s1_2 < var_s0_4);
+                        } else {
+                            do {
+                                var_s1_2->trackSegmentInfo = temp_s2;
+                                var_s1_2->radiusLeft = var_s1_2->radiusRight = var_fs1;
+                                var_s1_2++;
+                            } while (var_s1_2 < var_s0_4);
+                        }
+                        var_s1_2->trackSegmentInfo = temp_s2;
+                    }
+                    var_s6 = (var_s6 + temp_s3) & 3;
+                    var_s1_2 = &D_8010B7B0.controlPoint[((Math_Rand1() & 0x1FFFF) % (D_800F8510->unk_08 - 6)) + 2];
+                    var_s0_4 = &D_8010B7B0.controlPoint[((Math_Rand2() & 0x1FFFF) % (D_800F8510->unk_08 - 6)) + 2];
+                    var_s4--;
+                } while (var_s4 > 0);
+                // Ensure there are pit zones
+                D_8010B7B0.pit[D_800F8510->unk_08 - 1] = D_8010B7B0.pit[D_800F8510->unk_08 - 2] = PIT_BOTH;
+            }
+            temp_s3 = Math_Rand1() & 7;
+            while (temp_s3 != 0) {
+                do {
+                    var_s4 = ((Math_Rand2() & 0x1FFFF) % (D_800F8510->unk_08 - 6)) + 2;
+                    if (D_8010B7B0.controlPoint[var_s4].trackSegmentInfo & 0x08000000) {
+                        break;
+                    }
+                } while (D_8010B7B0.controlPoint[((var_s4 + D_800F8510->unk_08) - 1) % D_800F8510->unk_08]
+                             .trackSegmentInfo !=
+                         D_8010B7B0.controlPoint[(var_s4 + 1) % D_800F8510->unk_08].trackSegmentInfo);
+
+                D_8010B7B0.dash[var_s4] = (Math_Rand1() & 0x1FFFF) % 3;
+                temp_s3--;
+            }
+            var_s6 = (Math_Rand1() & 0x1FFFF) % 3;
+
+            temp_s3 = (Math_Rand2() & 7) - 1;
+            while (temp_s3 >= 0) {
+                var_s4 = ((Math_Rand2() & 0x1FFFF) % (D_800F8510->unk_08 - 2)) + 2;
+                temp_s2 = D_8010B7B0.controlPoint[var_s4].trackSegmentInfo & TRACK_SHAPE_MASK;
+                if ((temp_s2 == TRACK_SHAPE_ROAD) || (temp_s2 == TRACK_SHAPE_BORDERLESS_ROAD)) {
+                    temp_s2 = D_8010B7B0.controlPoint[var_s4 - 1].trackSegmentInfo & TRACK_SHAPE_MASK;
+                    if ((temp_s2 == TRACK_SHAPE_ROAD) || (temp_s2 == TRACK_SHAPE_BORDERLESS_ROAD)) {
+                        if ((Math_Rand2() & 0x1FFFF) < 0xAAAA) {
+                            D_8010B7B0.sign[var_s4] = (Math_Rand1() & 1) + 3;
+                        } else {
+                            D_8010B7B0.sign[var_s4] = var_s6;
+                        }
+                    }
+                }
+                temp_s3--;
+            }
+            func_80074428(gCourseIndex);
+            func_8009F508(D_800F8510);
+        } while (func_8009F3E0(D_800F8510) != 0);
+    } while (func_800A1954(D_800F8510) != 0);
+
+    for (temp_s3 = 0; temp_s3 < 5; temp_s3++) {
+        D_800F8510->timeRecord[temp_s3] = 600000 - 1;
+    }
+
+    D_800F8510->unk_C0 = 0.0f;
+    D_800F8510->unk_D8 = 600000 - 1;
+}
 
 extern unk_8006FC8C D_802C2020[];
 
@@ -1690,7 +2256,6 @@ void func_800A4D0C(s32 arg0) {
     }
 }
 
-extern CourseData D_8010B7B0;
 s32 Course_CalculateChecksum(void);
 
 void func_800A4DF0(void) {
