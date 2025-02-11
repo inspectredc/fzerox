@@ -2011,7 +2011,7 @@ void func_i7_80147EBC(void) {
     if (D_80106F48 >= 4) {
         return;
     }
-    
+
     func_i7_801478E8();
     D_i7_8014AC00++;
 
@@ -2024,7 +2024,6 @@ void func_i7_80147EBC(void) {
                 temp_s4->unk_00 = (Math_Rand1() % 256) - 128.1f;
                 temp_s4->unk_08 = (Math_Rand1() % 256) - 128.1f;
 
-
                 var_fv1 = sqrtf(SQ(temp_s4->unk_00) + SQ(temp_s4->unk_08));
 
                 if (var_fv1 < 0.001f) {
@@ -2035,7 +2034,7 @@ void func_i7_80147EBC(void) {
 
                 temp_s4->unk_00 = temp_s4->unk_00 * var_fv1 * 700.0f;
                 temp_s4->unk_08 = temp_s4->unk_08 * var_fv1 * 700.0f;
-            
+
                 temp_s4->unk_04 = ((Math_Rand1() % 16) + 0x190) * -1.0f;
                 temp_s4->unk_0C = temp_s4->unk_10 = 0x200;
                 temp_s4->unk_1C = 25.0f;
@@ -2114,11 +2113,13 @@ void func_i7_80147EBC(void) {
                         var_fa0 = sqrtf(SQ(temp_s4->unk_00) + SQ(temp_s4->unk_04) + SQ(temp_s4->unk_08));
 
                         if (var_fa0 != 0.0f) {
-                            var_fv1 = -((var_fs0_2 * var->unk_5C.z.x) + (temp_ft4 * var->unk_5C.z.y) + (var->unk_5C.z.z * temp_ft5)) / var_fa0;
+                            var_fv1 = -((var_fs0_2 * var->unk_5C.z.x) + (temp_ft4 * var->unk_5C.z.y) +
+                                        (var->unk_5C.z.z * temp_ft5)) /
+                                      var_fa0;
                             var_fa0 *= var_fv1;
                         }
                         if ((var_fa0 >= -1000) && (var_fa0 <= 1000)) {
-                            func_800BAA88((s32)(f32)(u32)(((var_fa0 + 1000.0f) / 2000.0f) * 127.0f), 0x40);
+                            func_800BAA88((s32) (f32) (u32) (((var_fa0 + 1000.0f) / 2000.0f) * 127.0f), 0x40);
                         }
                     }
                     var_fs1 = sqrtf(SQ(D_800E5220[0].unk_5C.z.x) + SQ(D_800E5220[0].unk_5C.z.z));
@@ -2195,9 +2196,13 @@ void func_i7_80147EBC(void) {
                                 temp_fv0_6 = -(((var_s1 & 0x3F) - 0x20) * 0.12f);
                                 // FAKE
 
-                                temp_s0->unk_18 = ((D_800E5220[0].unk_5C.z.x * var_fs1 * 0.866f) - (D_800E5220[0].unk_5C.z.z * var_fs1 * 0.5f)) * temp_fv0_6;
-                                temp_s0->unk_20 = ((D_800E5220[0].unk_5C.z.z * var_fs1 * 0.866f) + (D_800E5220[0].unk_5C.z.x * var_fs1 * 0.5f)) * temp_fv0_6;
-                                
+                                temp_s0->unk_18 = ((D_800E5220[0].unk_5C.z.x * var_fs1 * 0.866f) -
+                                                   (D_800E5220[0].unk_5C.z.z * var_fs1 * 0.5f)) *
+                                                  temp_fv0_6;
+                                temp_s0->unk_20 = ((D_800E5220[0].unk_5C.z.z * var_fs1 * 0.866f) +
+                                                   (D_800E5220[0].unk_5C.z.x * var_fs1 * 0.5f)) *
+                                                  temp_fv0_6;
+
                                 temp_s0->unk_1C = -(((var_s1 >> 6) - 0x48) * 0.12f);
                                 var_s1++;
                                 break;
@@ -2256,7 +2261,7 @@ void func_i7_80147EBC(void) {
                 }
                 break;
         }
-        
+
         if ((temp_s4->unk_24 >= 3) || ((D_i7_8014C020 != 0) && (temp_s4->unk_24 > 0))) {
             var_fs2 = temp_s4->unk_00;
             var_fs0 = temp_s4->unk_08;
@@ -2289,19 +2294,24 @@ void func_i7_80147EBC(void) {
                 var_fs0_2 = (temp_fv0_12 - var->unk_50.x);
                 temp_ft4 = (temp_fv1_5 - var->unk_50.y);
                 temp_ft5 = (temp_fa1 - var->unk_50.z);
-                if (((var_fs0_2 * var->unk_5C.x.x) + (temp_ft4 * var->unk_5C.x.y) + (temp_ft5 * var->unk_5C.x.z)) <= 0) {
+                if (((var_fs0_2 * var->unk_5C.x.x) + (temp_ft4 * var->unk_5C.x.y) + (temp_ft5 * var->unk_5C.x.z)) <=
+                    0) {
                     temp_s4->unk_0C = temp_s4->unk_10 = 0x200;
                 } else {
-                    var_fs2 = var->unk_19C.xw + ((var->unk_19C.xx * temp_fv0_12) + (var->unk_19C.xy * temp_fv1_5) + (var->unk_19C.xz * temp_fa1));
-                    var_fs1 = var->unk_19C.yw + ((var->unk_19C.yx * temp_fv0_12) + (var->unk_19C.yy * temp_fv1_5) + (var->unk_19C.yz * temp_fa1));
-                    var_fs0 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) + (var->unk_19C.zz * temp_fa1));
+                    var_fs2 = var->unk_19C.xw + ((var->unk_19C.xx * temp_fv0_12) + (var->unk_19C.xy * temp_fv1_5) +
+                                                 (var->unk_19C.xz * temp_fa1));
+                    var_fs1 = var->unk_19C.yw + ((var->unk_19C.yx * temp_fv0_12) + (var->unk_19C.yy * temp_fv1_5) +
+                                                 (var->unk_19C.yz * temp_fa1));
+                    var_fs0 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
+                                                 (var->unk_19C.zz * temp_fa1));
                     if (func_i3_fabsf(var_fs0) < 0.001f) {
                         temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                     } else {
                         temp_s4->unk_0C = var->unk_F0 + ((var_fs2 * var->unk_E8) / var_fs0);
                         temp_s4->unk_10 = var->unk_F4 - ((var_fs1 * var->unk_EC) / var_fs0);
 
-                        if ((temp_s4->unk_0C < var->unk_B0) || (var->unk_B8 < temp_s4->unk_0C) || (temp_s4->unk_10 < var->unk_B4) || (var->unk_BC < temp_s4->unk_10)) {
+                        if ((temp_s4->unk_0C < var->unk_B0) || (var->unk_B8 < temp_s4->unk_0C) ||
+                            (temp_s4->unk_10 < var->unk_B4) || (var->unk_BC < temp_s4->unk_10)) {
                             temp_s4->unk_0C = temp_s4->unk_10 = 0x200;
                         }
                     }
@@ -2316,19 +2326,24 @@ void func_i7_80147EBC(void) {
                     var_fs0_2 = (temp_fv0_12 - var->unk_50.x);
                     temp_ft4 = (temp_fv1_5 - var->unk_50.y);
                     temp_ft5 = (temp_fa1 - var->unk_50.z);
-                    if (((var_fs0_2 * var->unk_5C.x.x) + (temp_ft4 * var->unk_5C.x.y) + (temp_ft5 * var->unk_5C.x.z)) <= 0) {
+                    if (((var_fs0_2 * var->unk_5C.x.x) + (temp_ft4 * var->unk_5C.x.y) + (temp_ft5 * var->unk_5C.x.z)) <=
+                        0) {
                         temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                     } else {
-                        var_fs2 = var->unk_19C.xw + ((var->unk_19C.xx * temp_fv0_12) + (var->unk_19C.xy * temp_fv1_5) + (var->unk_19C.xz * temp_fa1));
-                        var_fs1 = var->unk_19C.yw + ((var->unk_19C.yx * temp_fv0_12) + (var->unk_19C.yy * temp_fv1_5) + (var->unk_19C.yz * temp_fa1));
-                        var_fs0 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) + (var->unk_19C.zz * temp_fa1));
+                        var_fs2 = var->unk_19C.xw + ((var->unk_19C.xx * temp_fv0_12) + (var->unk_19C.xy * temp_fv1_5) +
+                                                     (var->unk_19C.xz * temp_fa1));
+                        var_fs1 = var->unk_19C.yw + ((var->unk_19C.yx * temp_fv0_12) + (var->unk_19C.yy * temp_fv1_5) +
+                                                     (var->unk_19C.yz * temp_fa1));
+                        var_fs0 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
+                                                     (var->unk_19C.zz * temp_fa1));
                         if (func_i3_fabsf(var_fs0) < 0.001f) {
                             temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                         } else {
                             temp_s0->unk_0C = var->unk_F0 + ((var_fs2 * var->unk_E8) / var_fs0);
                             temp_s0->unk_10 = var->unk_F4 - ((var_fs1 * var->unk_EC) / var_fs0);
 
-                            if ((temp_s0->unk_0C < var->unk_B0) || (var->unk_B8 < temp_s0->unk_0C) || (temp_s0->unk_10 < var->unk_B4) || (var->unk_BC < temp_s0->unk_10)) {
+                            if ((temp_s0->unk_0C < var->unk_B0) || (var->unk_B8 < temp_s0->unk_0C) ||
+                                (temp_s0->unk_10 < var->unk_B4) || (var->unk_BC < temp_s0->unk_10)) {
                                 temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                             }
                         }
