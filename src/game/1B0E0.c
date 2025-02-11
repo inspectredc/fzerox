@@ -4780,8 +4780,8 @@ void func_8008C7C8(void) {
     D_800F1E78 = NULL;
     if (gGameMode == GAMEMODE_TIME_ATTACK) {
         D_800F5DD8 = Math_Round(gRacers[0].unk_0C.unk_34.x);
-        D_800F5DDC = Math_Round(gRacers[0].unk_0C.unk_34.v[1]);
-        D_800F5DE0 = Math_Round(gRacers[0].unk_0C.unk_34.v[2]);
+        D_800F5DDC = Math_Round(gRacers[0].unk_0C.unk_34.y);
+        D_800F5DE0 = Math_Round(gRacers[0].unk_0C.unk_34.z);
         if (D_800CD3CC != 0) {
             func_80089A74(sp6C);
             var_a3 = var_t0 = 0x40000000;
@@ -6081,7 +6081,7 @@ void func_80090AFC(Racer* arg0) {
     }
 }
 
-extern s32 gGameFrameCount;
+extern u32 gGameFrameCount;
 
 #ifdef NON_EQUIVALENT
 void func_80090BCC(Racer* arg0, Controller* arg1) {

@@ -471,7 +471,8 @@ void func_i3_80115E74(void) {
 extern unk_800F8510* D_800F8510;
 
 void func_i3_80116974(void) {
-    s32 pad[3];
+    s32 pad[2];
+    s32 timeRecord;
     unk_80141C88 sp1C;
 
     if (gCourseIndex < 0x18) {
@@ -481,9 +482,9 @@ void func_i3_80116974(void) {
             D_i3_80141990 = MAX_TIMER;
         }
         if (gDifficulty >= EXPERT) {
-            if (D_800F8510->timeRecord[0] < sp1C.unk_08) {
-                // FAKE! might need unk_08 as array
-                D_i3_80141990 = D_800F8510->timeRecord[0] + (0, (D_i3_80141990 - sp1C.unk_08));
+            timeRecord = D_800F8510->timeRecord[0];
+            if (timeRecord < sp1C.unk_08) {
+                D_i3_80141990 = timeRecord + (D_i3_80141990 - sp1C.unk_08);
             }
         }
     } else {

@@ -1254,7 +1254,7 @@ void func_i3_80132D78(void) {
     }
 }
 
-extern s32 gGameFrameCount;
+extern u32 gGameFrameCount;
 
 void func_i3_UpdateCharacterPortraits(void);
 

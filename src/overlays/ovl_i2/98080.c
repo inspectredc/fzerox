@@ -181,7 +181,7 @@ void func_i2_800FC9BC(void) {
     }
 }
 
-extern s32 gGameFrameCount;
+extern u32 gGameFrameCount;
 
 s32 func_i2_800FCB84(s32 arg0, s32 arg1) {
     u32 var_a1;
@@ -521,35 +521,36 @@ void func_i2_800FD344(void) {
     u16* var_v1;
     unk_8010D778* var = &D_i2_8010D778;
 
-    if (var->unk_12 & 1) {
-        if (1) {}
-        var->unk_12 &= ~1;
-        var_v1 = var->unk_14;
-        if (D_800CCFE4 == 3) {
-            var_v0 = D_800DCD08;
-        } else {
-            var_v0 = D_800DCD00;
-        }
+    if (!(var->unk_12 & 1)) {
+        return;
+    }
 
-        osInvalDCache(D_800DCCD0[var_v0], 0x25800);
+    var->unk_12 &= ~1;
+    var_v1 = var->unk_14;
+    if (D_800CCFE4 == 3) {
+        var_v0 = D_800DCD08;
+    } else {
+        var_v0 = D_800DCD00;
+    }
 
-        for (var_a2 = 0; var_a2 < 224; var_a2++) {
-            var_v0_2 = &D_800DCCD0[var_v0]->array[var_a2 + 8][12];
+    osInvalDCache(D_800DCCD0[var_v0], 0x25800);
 
-            for (var_a0 = 0; var_a0 < 296; var_a0++, var_v1++, var_v0_2++) {
-                *var_v1 = *var_v0_2;
-            }
-        }
+    for (var_a2 = 0; var_a2 < 224; var_a2++) {
+        var_v0_2 = &D_800DCCD0[var_v0]->array[var_a2 + 8][12];
 
-        if (var->unk_12 & 0x10) {
-            func_8007A59C(var->unk_14, 0x20600);
+        for (var_a0 = 0; var_a0 < 296; var_a0++, var_v1++, var_v0_2++) {
+            *var_v1 = *var_v0_2;
         }
-        if (var->unk_12 & 0x20) {
-            func_8007ECCC(var->unk_14, 0x20600);
-        }
-        if (var->unk_12 & 0x40) {
-            func_8007EFBC(var->unk_14, D_i2_8010D7AC, 0x20600);
-        }
+    }
+
+    if (var->unk_12 & 0x10) {
+        func_8007A59C(var->unk_14, 0x20600);
+    }
+    if (var->unk_12 & 0x20) {
+        func_8007ECCC(var->unk_14, 0x20600);
+    }
+    if (var->unk_12 & 0x40) {
+        func_8007EFBC(var->unk_14, D_i2_8010D7AC, 0x20600);
     }
 }
 
