@@ -247,6 +247,9 @@ gRandMask1 = 0x800CD174;
 gRandSeed2 = 0x800CD178;
 gRandMask2 = 0x800CD17C;
 
+D_800CF174 = 0x800CF174; // size:0x14
+D_800CF4B8 = 0x800CF4B8; // size:0x20
+
 gSegments = 0x800E3380;
 
 gSlowLoads = 0x800F89F0;

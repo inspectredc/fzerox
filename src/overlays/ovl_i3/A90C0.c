@@ -471,7 +471,8 @@ void func_i3_80115E74(void) {
 extern unk_800F8510* D_800F8510;
 
 void func_i3_80116974(void) {
-    s32 pad[3];
+    s32 pad[2];
+    s32 timeRecord;
     unk_80141C88 sp1C;
 
     if (gCourseIndex < 0x18) {
@@ -481,9 +482,9 @@ void func_i3_80116974(void) {
             D_i3_80141990 = MAX_TIMER;
         }
         if (gDifficulty >= EXPERT) {
-            if (D_800F8510->timeRecord[0] < sp1C.unk_08) {
-                // FAKE! might need unk_08 as array
-                D_i3_80141990 = D_800F8510->timeRecord[0] + (0, (D_i3_80141990 - sp1C.unk_08));
+            timeRecord = D_800F8510->timeRecord[0];
+            if (timeRecord < sp1C.unk_08) {
+                D_i3_80141990 = timeRecord + (D_i3_80141990 - sp1C.unk_08);
             }
         }
     } else {
@@ -891,14 +892,12 @@ extern s32 gTotalLapCount;
 extern s32 D_800F80A8[];
 extern CourseData D_8010B7B0;
 
-#ifdef NON_MATCHING
-// regalloc (0.0f vs 0.f vs 0?) and missing branch instruction
 void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     f32 spBC;
     s32 temps;
     f32 spB4;
     s32 i;
-    s32 pad;
+    f32 temp_fa0;
     f32 temp_fa1;
     f32 temp_fv1;
     f32 var_fv0;
@@ -908,8 +907,8 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     f32 temp4;
     f32 temp5;
     f32 temp6;
-    s32 var_a3; // sp84
-    f32 temp1;
+    s32 var_a3;
+    s32 pad;
     s32 sp7C;
     f32 temp2;
     bool sp74;
@@ -942,13 +941,13 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         arg0->unk_1E0 = 0.108f;
         arg0->unk_1E4 = 0.06f;
         if (arg0->id >= gNumPlayers) {
-            arg0->unk_1AC = 0.f;
+            arg0->unk_1AC = 0.0f;
         }
     }
     if ((gGameMode == GAMEMODE_VS_2P) || (gGameMode == GAMEMODE_VS_3P)) {
         if (arg0->id >= gNumPlayers) {
             if (gNumPlayers == 3) {
-                var_a1 = 0x1E;
+                var_a1 = 30;
                 for (i = 0; i < gNumPlayers; i++) {
                     if (gRacers[i].position < var_a1) {
                         var_a1 = gRacers[i].position;
@@ -960,6 +959,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             } else {
                 var_a3 = 1;
             }
+
+            // FAKE
+            if (arg0->unk_1AC == 0.0f) {}
 
             temp_fv1 = (gRacers[var_a3].unk_23C + arg0->unk_38C) - arg0->unk_23C;
             if (temp_fv1 > 0) {
@@ -974,13 +976,13 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
                     arg0->unk_1EC = gRacers[var_a3].unk_98 - (temp_fv1 * 0.002f);
                 }
-                arg0->unk_1E8 = 0.f;
+                arg0->unk_1E8 = 0.0f;
             }
             if ((gTotalLapCount == arg0->lap) &&
                 (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
-                arg0->unk_1E8 = 0.f;
+                arg0->unk_1E8 = 0.0f;
             }
-            arg0->unk_38C = 0.0f;
+            arg0->unk_38C = 0;
         }
     }
     if (D_i3_80141998 != 0) {
@@ -990,7 +992,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         }
     } else if (((gNumPlayers == 1) && (D_i3_80141910->unk_04 & 0x02000000)) || (arg0->unk_04 & 0x02000000) ||
                (arg0->id < gNumPlayers)) {
-        arg0->unk_1E8 = 0.f;
+        arg0->unk_1E8 = 0.0f;
         arg0->unk_1EC = (2500.0f / 27.0f);
         arg0->unk_1B4 = 1.00894f;
         arg0->unk_1B0 = 1.156336f;
@@ -1003,27 +1005,31 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 arg0->unk_1EC = (625.0f / 27.0f);
             } else if ((sp40->id == 0) && (arg0->unk_2C4 < 2000.0f)) {
                 arg0->unk_1E8 = 1.0f;
-                arg1->buttonPressed |= 0x4000;
+                arg1->buttonPressed |= BTN_B;
             }
         }
     } else if ((arg0->unk_274 + arg0->unk_270) < 184.0f) {
-        arg0->unk_1E8 = 0.f;
+        arg0->unk_1E8 = 0.0f;
         arg0->unk_1EC = (2500.0f / 27.0f);
     } else if (gNumPlayers == 1) {
         if (arg0->unk_352 != 0xFF) {
             spBC = (gRacers[arg0->unk_352].unk_23C + arg0->unk_38C) - arg0->unk_23C;
             func_i3_fabsf(D_i3_80141910->unk_23C - arg0->unk_23C);
             if ((func_i3_fabsf(spBC) < 460.0f) && sp70 && (arg0->raceTime > 1000)) {
-                if ((arg0->unk_352 >= gNumPlayers) && ((arg0->id + gGameFrameCount) % 16) < 4) {
-                    spB4 = ((-gRacers[arg0->unk_352].unk_0C.unk_28.x * gRacers[arg0->unk_352].unk_24C.z.x) -
-                            (gRacers[arg0->unk_352].unk_0C.unk_28.y * gRacers[arg0->unk_352].unk_24C.z.y)) -
-                           (gRacers[arg0->unk_352].unk_0C.unk_28.z * gRacers[arg0->unk_352].unk_24C.z.z);
-                    if (Math_Rand2() % 2) {
-                        arg0->unk_33C = spB4 + 23.0f;
+                do {
+                    if ((arg0->unk_352 >= gNumPlayers) && ((arg0->id + gGameFrameCount) % 16) < 4) {
+                        spB4 = ((-gRacers[arg0->unk_352].unk_0C.unk_28.x * gRacers[arg0->unk_352].unk_24C.z.x) -
+                                (gRacers[arg0->unk_352].unk_0C.unk_28.y * gRacers[arg0->unk_352].unk_24C.z.y)) -
+                               (gRacers[arg0->unk_352].unk_0C.unk_28.z * gRacers[arg0->unk_352].unk_24C.z.z);
+                        if (Math_Rand2() % 2) {
+                            arg0->unk_33C = spB4 + 23.0f;
+                        } else {
+                            arg0->unk_33C = spB4 - 23.0f;
+                        }
                     } else {
-                        arg0->unk_33C = spB4 - 23.0f;
+                        if (spB4) {}
                     }
-                }
+                } while (0);
             }
             if (spBC < 2000.0f) {
                 arg0->unk_1EC = gRacers[arg0->unk_352].unk_98 + (spBC * 0.01f);
@@ -1049,9 +1055,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                                (((gDifficulty >= EXPERT) && (D_i3_80141910->unk_23C < arg0->unk_23C)) ||
                                 ((D_i3_80141910->unk_23C + 138.0f) < arg0->unk_23C))) {
                         if (Math_Rand2() % 2) {
-                            arg1->buttonPressed |= 0x80;
+                            arg1->buttonPressed |= STICK_UP;
                         } else {
-                            arg1->buttonPressed |= 0x40;
+                            arg1->buttonPressed |= STICK_DOWN;
                         }
                     }
                 }
@@ -1099,7 +1105,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             if (spBC > 0.0f) {
                 if (spBC > 200.0f) {
                     arg0->unk_1E8 = 0.0f;
-                    arg1->buttonPressed |= 0x4000;
+                    arg1->buttonPressed |= BTN_B;
                     if (spBC > 1000.0f) {
                         arg0->unk_1EC = (2500.0f / 27.0f);
                     }
@@ -1114,9 +1120,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         } else {
             if (arg0->unk_39C != 0) {
                 spBC = (arg0->raceTime * (D_800F8510->unk_0C / arg0->unk_39C)) - arg0->unk_23C;
-                temp_fa1 = ((arg0->raceTime - 0x11) * (D_800F8510->unk_0C / arg0->unk_39C)) - arg0->unk_23C;
+                spB4 = ((arg0->raceTime - 0x11) * (D_800F8510->unk_0C / arg0->unk_39C)) - arg0->unk_23C;
                 if (arg0->unk_23C > 0.0f) {
-                    arg0->unk_1EC = (spBC * 0.05f) + (spBC - temp_fa1);
+                    arg0->unk_1EC = (spBC * 0.05f) + (spBC - spB4);
                     arg0->unk_1E8 = 1.0f;
                 } else {
                     arg0->unk_1EC = (2500.0f / 27.0f);
@@ -1154,9 +1160,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         }
         if (var_fv0 < 500.0f) {
             if (Math_Rand1() % 2) {
-                arg1->buttonPressed |= 0x80;
+                arg1->buttonPressed |= STICK_UP;
             } else {
-                arg1->buttonPressed |= 0x40;
+                arg1->buttonPressed |= STICK_DOWN;
             }
         }
     }
@@ -1167,9 +1173,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             arg0->unk_1E8 = 1.0f;
         }
     }
-    arg1->buttonCurrent |= 0x8000;
+    arg1->buttonCurrent |= BTN_A;
     if (arg0->unk_340 < arg0->unk_20C) {
-        arg1->buttonPressed |= 0x8000;
+        arg1->buttonPressed |= BTN_A;
     }
 
     sp74 = false;
@@ -1202,12 +1208,12 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     arg0->unk_1E8 = 1.0f;
                 }
             }
-            temp1 = (arg0->unk_338 * (((arg0->unk_33C + (arg0->unk_0C.unk_28.x * arg0->unk_24C.z.x)) +
-                                       (arg0->unk_0C.unk_28.y * arg0->unk_24C.z.y)) +
-                                      (arg0->unk_0C.unk_28.z * arg0->unk_24C.z.z))) *
-                    1.2f;
-            temp1 += (arg0->unk_334 * ((temp4 * sp4C.z.x) + (temp5 * sp4C.z.y) + (temp6 * sp4C.z.z)) * 1.2f);
-            var_a3 = Math_Round(temp1);
+            temp_fa0 = (arg0->unk_338 * (((arg0->unk_33C + (arg0->unk_0C.unk_28.x * arg0->unk_24C.z.x)) +
+                                          (arg0->unk_0C.unk_28.y * arg0->unk_24C.z.y)) +
+                                         (arg0->unk_0C.unk_28.z * arg0->unk_24C.z.z))) *
+                       1.2f;
+            temp_fa0 += (arg0->unk_334 * ((temp4 * sp4C.z.x) + (temp5 * sp4C.z.y) + (temp6 * sp4C.z.z)) * 1.2f);
+            var_a3 = Math_Round(temp_fa0);
         } else if (!sp74) {
             var_a3 = Math_Round(-arg0->unk_334 * ((arg0->unk_C0.z.x * sp4C.x.x) + (arg0->unk_C0.z.y * sp4C.x.y) +
                                                   (arg0->unk_C0.z.z * sp4C.x.z)));
@@ -1225,10 +1231,13 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             }
         } else {
             arg0->unk_370 = 0;
-            temp1 = (arg0->unk_338 * DOT_XYZ(&arg0->unk_C0.z, &arg0->unk_24C.y) * 160.0f);
-            var_a3 = Math_Round(temp1 - (arg0->unk_334 * 0.5f *
-                                         ((arg0->unk_C0.z.x * sp4C.x.x) + (arg0->unk_C0.z.y * -sp4C.x.y) +
-                                          (arg0->unk_C0.z.z * sp4C.x.z))));
+            spB4 = (arg0->unk_338 *
+                    (arg0->unk_C0.z.x * arg0->unk_24C.y.x + arg0->unk_C0.z.y * arg0->unk_24C.y.y +
+                     arg0->unk_C0.z.z * arg0->unk_24C.y.z) *
+                    160.0f);
+            var_a3 = Math_Round(spB4 - (arg0->unk_334 * 0.5f *
+                                        ((arg0->unk_C0.z.x * sp4C.x.x) + (arg0->unk_C0.z.y * -sp4C.x.y) +
+                                         (arg0->unk_C0.z.z * sp4C.x.z))));
         }
         if (arg0->unk_04 & 0x04000000) {
             var_a1 = Math_Round(-arg0->unk_334 * 0.1f * DOT_XYZ(&arg0->unk_C0.y, &sp4C.x));
@@ -1276,10 +1285,10 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         }
         if (var_a3 < -0x46) {
             var_a3 = -0x46;
-            arg1->buttonCurrent |= 0x2000;
+            arg1->buttonCurrent |= BTN_Z;
         } else if (var_a3 >= 0x47) {
             var_a3 = 0x46;
-            arg1->buttonCurrent |= 0x10;
+            arg1->buttonCurrent |= STICK_RIGHT;
         }
         arg1->stickX = (var_a3 * 5) / 8;
         arg1->stickY = var_a1;
@@ -1291,9 +1300,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                      ((D_i3_80141910->unk_23C + 138.0f) < arg0->unk_23C)) &&
                     ((Math_Rand2() % 32768) < 16)) {
                     if (Math_Rand2() % 2) {
-                        arg1->buttonPressed |= 0x80;
+                        arg1->buttonPressed |= STICK_UP;
                     } else {
-                        arg1->buttonPressed |= 0x40;
+                        arg1->buttonPressed |= STICK_DOWN;
                     }
                 }
                 if ((arg0->unk_2C4 < 23.0f) && (func_i3_fabsf(sp40->unk_33C - arg0->unk_33C) < 138.0f) &&
@@ -1311,14 +1320,14 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 if (((arg0->unk_390 == -3) || (arg0->unk_390 == -1)) &&
                     ((gDifficulty >= EXPERT) || (func_i3_fabsf(D_i3_80141910->unk_23C - arg0->unk_23C) > 184.0f)) &&
                     (D_i3_80141910->unk_23C < arg0->unk_23C)) {
-                    arg1->buttonPressed |= 0x2000;
+                    arg1->buttonPressed |= BTN_Z;
                 }
             } else if (arg0->unk_390 > 0) {
                 arg0->unk_390--;
                 if (((arg0->unk_390 == 3) || (arg0->unk_390 == 1)) &&
                     ((gDifficulty >= EXPERT) || ((arg0->unk_23C - D_i3_80141910->unk_23C) > 184.0f)) &&
                     (D_i3_80141910->unk_23C < arg0->unk_23C)) {
-                    arg1->buttonPressed |= 0x10;
+                    arg1->buttonPressed |= STICK_RIGHT;
                 }
             }
             if (!(Math_Rand2() % 2048)) {
@@ -1401,9 +1410,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 arg1->stickX = var_a3;
                 if (D_i3_80141910->unk_23C < arg0->unk_23C) {
                     if (Math_Rand2() % 2) {
-                        arg1->buttonPressed |= 0x80;
+                        arg1->buttonPressed |= STICK_UP;
                     } else {
-                        arg1->buttonPressed |= 0x40;
+                        arg1->buttonPressed |= STICK_DOWN;
                     }
                 }
             }
@@ -1444,7 +1453,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     if ((var_a3 != arg0->unk_358) && (sp7C & 1) && (arg0->id < gNumPlayers)) {
                         var_fv0 = arg0->unk_228 / arg0->unk_22C;
                         if (var_fv0 > 0.3f) {
-                            arg1->buttonPressed |= 0xC000;
+                            arg1->buttonPressed |= BTN_A | BTN_B;
                         }
                         arg0->unk_358 = arg0->unk_0C.unk_00->segmentIndex;
                     }
@@ -1761,7 +1770,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         }
         if ((gNumPlayers == 1) && (arg0->id != 0)) {
             var_fv0 = D_i3_80141910->unk_23C - arg0->unk_23C;
-            if ((var_fv0 > 0.0f) && (var_fv0 < spBC) &&
+            if ((var_fv0 > 0.0f) && (var_fv0 < 92.0f) &&
                 (func_i3_fabsf(D_i3_80141910->unk_33C - arg0->unk_33C) < 69.0f)) {
                 if (D_i3_80141910->unk_98 < arg0->unk_1EC) {
                     arg0->unk_1EC = D_i3_80141910->unk_98;
@@ -1774,7 +1783,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         if ((arg0->unk_04 & 0x02000000) || (gGameMode == GAMEMODE_GP_END_CS)) {
             arg0->unk_36C &= ~0xA00;
             if (arg0->id < gNumPlayers) {
-                arg1->buttonPressed &= ~0x4000;
+                arg1->buttonPressed &= ~BTN_B;
             }
             if (D_i3_80141908 != 0) {
                 // FAKE!
@@ -1792,7 +1801,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     }
                     if (D_i3_8014190C > 60) {
                         arg0->unk_1EC = arg0->unk_98 * 0.1f;
-                        arg1->buttonCurrent |= 4;
+                        arg1->buttonCurrent |= BTN_CDOWN;
                         arg1->buttonCurrent &= 0x7FFF;
                         arg1->buttonPressed &= 0x7FFF;
                         arg1->buttonReleased &= 0x7FFF;
@@ -1800,7 +1809,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 }
             }
             if (arg0->unk_36C & 0x1000) {
-                arg1->buttonCurrent |= 4;
+                arg1->buttonCurrent |= BTN_CDOWN;
                 arg1->buttonCurrent &= 0x7FFF;
                 arg1->buttonPressed &= 0x7FFF;
                 arg1->buttonReleased &= 0x7FFF;
@@ -1812,7 +1821,3 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         arg0->unk_380 = arg1->buttonCurrent;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80117BF0.s")
-void func_i3_80117BF0(Racer* arg0, Controller* arg1);
-#endif

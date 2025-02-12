@@ -1,6 +1,7 @@
 // Overlaps with unk_bss_segment and gfxpool segments
 
 #include "global.h"
+#include "unk_gfx.h"
 
 unk_80225800 D_80225800;
 Vtx D_802268C0[0x800];

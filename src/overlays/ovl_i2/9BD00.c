@@ -953,7 +953,7 @@ void func_i2_80102214(unk_struct_110* arg0, s32 courseIndex) {
     for (i = 0; i < 5; i++) {
         arg0->unk_04[i] = temp_s5->timeRecord[i];
         arg0->unk_18[i] = temp_s5->unk_98[i];
-        func_i2_80102110(temp_s5->unk_34[i], arg0->unk_50[i]);
+        func_i2_80102110(temp_s5->unk_34[i].unk_00, arg0->unk_50[i]);
         for (j = 0; j < 4; j++) {
             arg0->unk_34[i][j] = temp_s5->unk_AC[i][j];
         }
@@ -1082,7 +1082,7 @@ void func_i2_80102600(unk_801247C0* arg0) {
             for (j = 0; j < 5; j++) {
                 var_s7->timeRecord[j] = MAX_TIMER;
                 var_s7->unk_98[j] = 0.5f;
-                func_i2_80102A7C(sp60, var_s7->unk_34[j]);
+                func_i2_80102A7C(sp60, var_s7->unk_34[j].unk_00);
             }
 
             var_s7->unk_C0 = 0.0f;
@@ -1306,7 +1306,7 @@ void func_i2_80102CA4(unk_struct_19E0* arg0, s32 courseIndex) {
     for (i = 0; i < 5; i++) {
         var_s3->timeRecord[i] = sp40->unk_04[i];
         var_s3->unk_98[i] = sp40->unk_18[i];
-        func_i2_80102A7C(sp40->unk_50[i], var_s3->unk_34[i]);
+        func_i2_80102A7C(sp40->unk_50[i], var_s3->unk_34[i].unk_00);
         for (j = 0; j < 4; j++) {
             var_s3->unk_AC[i][j] = sp40->unk_34[i][j];
         }

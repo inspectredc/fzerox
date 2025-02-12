@@ -984,8 +984,8 @@ Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1) {
             temp = (200 - temp_t1);
 
             gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
-            gSPScisTextureRectangle(gfx++, temp << 2, (row + var) << 2, (temp + 80) << 2, (row + var + 1) << 2,
-                                    var_t2 * 0, 0, 0, 1 << 10, 1 << 10);
+            gSPScisTextureRectangle(gfx++, temp << 2, (row + var) << 2, (temp + 80) << 2, (row + var + 1) << 2, 0, 0, 0,
+                                    1 << 10, 1 << 10);
         }
         if (arg1->unk_04 != 0) {
             temp_a0 = arg1->unk_1C;

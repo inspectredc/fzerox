@@ -39,6 +39,11 @@ typedef struct unk_8006FC8C {
     /* 0xA0 */ f32 unk_A0;
 } unk_8006FC8C; // size = 0xA4
 
+// Todo fill in array as individual documented u8 variables
+typedef struct unk_800F8510_unk_34 {
+    u8 unk_00[20];
+} unk_800F8510_unk_34;
+
 typedef struct unk_800F8510 {
     s32 unk_00;
     s32 unk_04;
@@ -47,7 +52,7 @@ typedef struct unk_800F8510 {
     unk_8006FC8C* unk_10;
     s16 unk_14[6];
     s32 timeRecord[5];
-    u8 unk_34[5][20];
+    unk_800F8510_unk_34 unk_34[5];
     f32 unk_98[5];
     u8 unk_AC[5][4];
     f32 unk_C0;
@@ -196,7 +201,7 @@ typedef struct unk_struct_9C {
     unk_struct_68 unk_00;
     f32 unk_68[10];
     f32 unk_90;
-    s8 unk_94[0x4];
+    f32 unk_94;
     s32 unk_98;
 } unk_struct_9C; // size = 0x9C
 
@@ -205,6 +210,21 @@ typedef struct unk_struct_58 {
     Vec3f unk_0C;
     f32 unk_18[16];
 } unk_struct_58; // size = 0x58
+
+typedef struct unk_redo_1 {
+    unk_struct_58 unk_00;
+    unk_struct_20 unk_58;
+} unk_redo_1; // size = 0x78
+
+typedef struct unk_redo_2 {
+    unk_struct_58 unk_00;
+    unk_struct_54 unk_58;
+} unk_redo_2; // size = 0xAC
+
+typedef struct unk_redo_3 {
+    unk_struct_58 unk_00;
+    unk_struct_68 unk_58;
+} unk_redo_3; // size = 0xC0
 
 typedef struct unk_8008112C_arg_1 {
     unk_struct_58 unk_00;
@@ -500,7 +520,7 @@ typedef struct unk_800CD970 {
     s16 unk_00;
     s16 unk_02;
     f32 unk_04;
-    unk_800CD8B0* unk_08;
+    f32* unk_08;
 } unk_800CD970; // size 0xC
 
 typedef struct Controller {
@@ -764,7 +784,7 @@ typedef struct unk_80111870 {
     Vec3f unk_00;
     Vec3f unk_0C;
     f32 unk_18;
-    s32 unk_1C;
+    u32 unk_1C;
     Racer* unk_20;
 } unk_80111870; // size = 0x24
 

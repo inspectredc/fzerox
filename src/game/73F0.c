@@ -2713,8 +2713,6 @@ static const char devrostr6[] = "ENTRY CHECK\n";
 extern u8 D_i2_8010D730[][9];
 extern s16 D_80106F48;
 
-void func_80074428(s32 arg0);
-
 void func_8007402C(s32 courseIndex) {
     s32 pad;
     s32 sp28;
@@ -2808,7 +2806,7 @@ void func_800742FC(void) {
     D_802CDFD0 = 0;
 }
 
-void func_80074428(s32 arg0) {
+void func_80074428(s32 courseIndex) {
     s32 i;
     unk_8006FC8C* var_v0;
     CourseData* courseData = &D_8010B7B0;
@@ -2817,8 +2815,8 @@ void func_80074428(s32 arg0) {
         return;
     }
 
-    D_802A6B40[arg0].unk_10 = D_802C2020;
-    D_802A6B40[arg0].unk_08 = courseData->controlPointCount;
+    D_802A6B40[courseIndex].unk_10 = D_802C2020;
+    D_802A6B40[courseIndex].unk_08 = courseData->controlPointCount;
 
     for (i = 0; i < courseData->controlPointCount; i++) {
         D_802C2020[i].pos = courseData->controlPoint[i].pos;
@@ -2841,9 +2839,9 @@ void func_80074428(s32 arg0) {
         return;
     }
 
-    func_8009DEAC(&D_802A6B40[arg0]);
-    func_80074CE4(&D_802A6B40[arg0]);
-    func_8009F508(&D_802A6B40[arg0]);
+    func_8009DEAC(&D_802A6B40[courseIndex]);
+    func_80074CE4(&D_802A6B40[courseIndex]);
+    func_8009F508(&D_802A6B40[courseIndex]);
 }
 
 extern unk_8006FC8C D_802CB6D0[];

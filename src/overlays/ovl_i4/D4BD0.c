@@ -1225,7 +1225,7 @@ Gfx* func_i4_801181C0(Gfx* gfx, unk_800E3A28* arg1) {
                          1.0f, 1.0f);
 }
 
-extern s32 gGameFrameCount;
+extern u32 gGameFrameCount;
 
 Gfx* func_i4_8011821C(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_v0;

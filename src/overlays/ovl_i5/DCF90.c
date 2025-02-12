@@ -655,7 +655,7 @@ Gfx* func_i5_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-extern s32 gGameFrameCount;
+extern u32 gGameFrameCount;
 extern s8 D_800E4174[];
 
 Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
