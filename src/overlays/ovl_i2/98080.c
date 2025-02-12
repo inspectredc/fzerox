@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "ovl_i2.h"
+#include "assets/segment_16C8A0.h"
 
 s16 D_8010D770;
 u16 D_i2_8010D772;
@@ -1524,7 +1525,58 @@ bool func_i2_800FFD4C(unk_8010D778* arg0) {
     return var_v1;
 }
 
+#ifdef NON_EQUIVALENT
+Gfx* func_i2_800FFEEC(Gfx* gfx, unk_8010D778* arg1) {
+    f32* var_t3;
+    u16* var_s5;
+    s32 i;
+    s32 j;
+    s32 sp30[2];
+    s32 width = 296;
+    s32 tileHeight = 4;
+    s32 var;
+    s32 xl;
+    s32 xh;
+    s32 yl;
+    s32 yh;
+    s32 var_t5;
+
+    gSPDisplayList(gfx++, D_8014940);
+
+    sp30[1] = 0x38;
+    sp30[0] = 0;
+
+    var_t5 = 4;
+    var_s5 = arg1->unk_14;
+    var_t3 = arg1->unk_18;
+
+    for (i = 0; i < sp30[1]; i++) {
+        gDPPipeSync(gfx++);
+        gDPLoadTextureTile(gfx++, var_s5 + i * 0x4A0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 296, 4, 0, 0, 296 - 1, 4 - 1, 0,
+                           G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                           G_TX_NOLOD);
+
+        for (j = 0; j < var_t5; j++) {
+            if ((*var_t3 < -284.0f) || (*var_t3 > 308.0f)) {
+                var_t3++;
+                continue;
+            }
+
+            var = (i * 4) + j;
+            xl = *var_t3 * 4.0f;
+            xh = (*var_t3 + width) * 4.0f;
+
+            var_t3++;
+
+            gSPScisTextureRectangle(gfx++, xl, (var + 8) << 2, xh, (var + 9) << 2, 0, 0, j << 5, 1 << 10, 1 << 10);
+        }
+    }
+
+    return gfx;
+}
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/98080/func_i2_800FFEEC.s")
+#endif
 
 void func_i2_80100220(unk_8010D778* arg0) {
     arg0->unk_12 |= 1;

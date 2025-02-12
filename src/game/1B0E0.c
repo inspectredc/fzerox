@@ -6083,52 +6083,35 @@ void func_80090AFC(Racer* arg0) {
 
 extern u32 gGameFrameCount;
 
-#ifdef NON_EQUIVALENT
+#ifdef NON_MATCHING
 void func_80090BCC(Racer* arg0, Controller* arg1) {
+    bool var_v1;
+    s32 i;
     s32 sp13C;
     s32 sp138;
     s32 sp134;
-    f32 sp130;
+    f32 var_fa1; // sp130
     f32 sp12C;
     f32 sp128;
-    f32 sp118;
+    f32 var_fv1;
+    f32 var_fs1;
+    f32 var_fs0;
+    f32 var_ft4; // sp118
     Vec3f sp10C;
     Mtx3F spE8;
     f32 spE4;
-    u16 buttonReleased; // spC6
-    f32 temp_fa0;
-    f32 temp_fa1_14;
-    f32 temp_fa1_32;
-    f32 cos;
-    f32 sin;
-    f32 temp_fv0_21;
-    f32 temp_fv1_12;
-    f32 temp_fv1_21;
-    f32 temp_fv1_23;
-    f32 temp_fv1_24;
-    f32 temp_fv1_25;
-    f32 var_fa1;
-    f32 var_fa1_6;
-    f32 var_fa1_7;
-    f32 var_fs0;
-    f32 var_fs1;
-    f32 var_ft4;
-    f32 var_fv0_3;
-    f32 var_fv1;
-
-    s32 temp_s0;
-    s32 i;
-    s32 var_s0_3;
-
-    bool var_v1;
-    u16 buttonCurrent;
-    u16 buttonPressed;
     unk_8006FC8C* temp_v1;
     unk_802D3E38* temp_a0;
     unk_802D3E38* var_v0;
     unk_802D3978* var_v0_2;
+    unk_802D3978* temp2;
     unk_802D3D38* var_v0_3;
     unk_802D3D38* temp;
+    u16 buttonReleased; // spC6
+    u16 buttonCurrent;
+    u16 buttonPressed;
+    f32 temp_fa0;
+    s32 pad;
 
     if (!(arg0->unk_04 & 0x400000)) {
         buttonReleased = 0;
@@ -6200,23 +6183,23 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                     continue;
                 }
 
-                var_fa1 = (((arg0->unk_0C.unk_28.y * var_v0->unk_0C.z) - (arg0->unk_0C.unk_28.z * var_v0->unk_0C.y)) *
-                           arg0->unk_24C.x.x) +
-                          (((arg0->unk_0C.unk_28.z * var_v0->unk_0C.x) - (arg0->unk_0C.unk_28.x * var_v0->unk_0C.z)) *
-                           arg0->unk_24C.x.y) +
-                          (((arg0->unk_0C.unk_28.x * var_v0->unk_0C.y) - (arg0->unk_0C.unk_28.y * var_v0->unk_0C.x)) *
-                           arg0->unk_24C.x.z);
-                if (var_fa1 < 0.0f) {
+                if ((((arg0->unk_0C.unk_28.y * var_v0->unk_0C.z) - (arg0->unk_0C.unk_28.z * var_v0->unk_0C.y)) *
+                     arg0->unk_24C.x.x) +
+                        (((arg0->unk_0C.unk_28.z * var_v0->unk_0C.x) - (arg0->unk_0C.unk_28.x * var_v0->unk_0C.z)) *
+                         arg0->unk_24C.x.y) +
+                        (((arg0->unk_0C.unk_28.x * var_v0->unk_0C.y) - (arg0->unk_0C.unk_28.y * var_v0->unk_0C.x)) *
+                         arg0->unk_24C.x.z) <
+                    0.0f) {
                     continue;
                 }
 
-                var_fa1 = (((var_v0->unk_18.y * arg0->unk_0C.unk_28.z) - (var_v0->unk_18.z * arg0->unk_0C.unk_28.y)) *
-                           arg0->unk_24C.x.x) +
-                          (((var_v0->unk_18.z * arg0->unk_0C.unk_28.x) - (var_v0->unk_18.x * arg0->unk_0C.unk_28.z)) *
-                           arg0->unk_24C.x.y) +
-                          (((var_v0->unk_18.x * arg0->unk_0C.unk_28.y) - (var_v0->unk_18.y * arg0->unk_0C.unk_28.x)) *
-                           arg0->unk_24C.x.z);
-                if (var_fa1 < 0.0f) {
+                if ((((var_v0->unk_18.y * arg0->unk_0C.unk_28.z) - (var_v0->unk_18.z * arg0->unk_0C.unk_28.y)) *
+                     arg0->unk_24C.x.x) +
+                        (((var_v0->unk_18.z * arg0->unk_0C.unk_28.x) - (var_v0->unk_18.x * arg0->unk_0C.unk_28.z)) *
+                         arg0->unk_24C.x.y) +
+                        (((var_v0->unk_18.x * arg0->unk_0C.unk_28.y) - (var_v0->unk_18.y * arg0->unk_0C.unk_28.x)) *
+                         arg0->unk_24C.x.z) <
+                    0.0f) {
                     continue;
                 }
 
@@ -6230,11 +6213,12 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
         var_fs1 = arg0->unk_C0.x.x;
         var_fs0 = arg0->unk_C0.x.y;
         var_ft4 = arg0->unk_C0.x.z;
+
         if (arg0->unk_21C != 0) {
             var_fa1 = 0.2f;
         } else {
             if (buttonCurrent & (BTN_Z | BTN_R)) {
-                if (arg0->unk_1D8 != 0.0f) {
+                if (arg0->unk_1D8 != 0.f) {
                     var_fa1 = ((arg0->unk_1E0 - arg0->unk_1E4) * 0.4f) + arg0->unk_1E4;
                 } else {
                     var_fa1 = arg0->unk_1E0;
@@ -6266,22 +6250,17 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
         arg0->unk_C0.z.y *= temp_fa0;
         arg0->unk_C0.z.z *= temp_fa0;
 
-        arg0->unk_C0.x.x = (arg0->unk_C0.z.y * arg0->unk_C0.y.z) - (arg0->unk_C0.z.z * arg0->unk_C0.y.y);
-        var_fs1 -= arg0->unk_C0.x.x;
-        arg0->unk_C0.x.y = (arg0->unk_C0.z.z * arg0->unk_C0.y.x) - (arg0->unk_C0.z.x * arg0->unk_C0.y.z);
-        var_fs0 -= arg0->unk_C0.x.y;
-        arg0->unk_C0.x.z = (arg0->unk_C0.z.x * arg0->unk_C0.y.y) - (arg0->unk_C0.z.y * arg0->unk_C0.y.x);
-        var_ft4 -= arg0->unk_C0.x.z;
+        var_fs1 -= arg0->unk_C0.x.x = (arg0->unk_C0.z.y * arg0->unk_C0.y.z) - (arg0->unk_C0.z.z * arg0->unk_C0.y.y);
+        var_fs0 -= arg0->unk_C0.x.y = (arg0->unk_C0.z.z * arg0->unk_C0.y.x) - (arg0->unk_C0.z.x * arg0->unk_C0.y.z);
+        var_ft4 -= arg0->unk_C0.x.z = (arg0->unk_C0.z.x * arg0->unk_C0.y.y) - (arg0->unk_C0.z.y * arg0->unk_C0.y.x);
         spE4 = sqrtf(SQ(var_fs1) + SQ(var_fs0) + SQ(var_ft4));
     } else {
         spE4 = 0.0f;
     }
     if (arg0->unk_21C != 0) {
-        var_fs1 = 0.997f;
-        var_ft4 = 0.997f;
+        var_fs1 = var_ft4 = 0.997f;
     } else if (arg0->unk_04 & 0x08000000) {
-        var_fs1 = 0.98305196f;
-        var_ft4 = 0.98305196f;
+        var_fs1 = var_ft4 = 0.98305196f;
     } else {
         var_ft4 = 0.997f;
         var_fs1 = 0.996f;
@@ -6309,7 +6288,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
     if (buttonCurrent & BTN_CDOWN) {
         var_fs1 *= 0.987f;
         var_ft4 *= 0.987f;
-        if (gGameMode == GAMEMODE_GP_END_CS) {
+        if (gGameMode == 0x11) {
             var_fs1 *= 0.9f;
             var_ft4 *= 0.9f;
         }
@@ -6330,11 +6309,11 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
         }
     }
 
-    var_fs0 = 0.94f;
     var_fs1 *= ((arg0->unk_C0.z.x * arg0->unk_74.x) + (arg0->unk_C0.z.y * arg0->unk_74.y) +
                 (arg0->unk_C0.z.z * arg0->unk_74.z));
-    var_fs0 *= ((arg0->unk_C0.y.x * arg0->unk_74.x) + (arg0->unk_C0.y.y * arg0->unk_74.y) +
-                (arg0->unk_C0.y.z * arg0->unk_74.z));
+    var_fs0 = ((arg0->unk_C0.y.x * arg0->unk_74.x) + (arg0->unk_C0.y.y * arg0->unk_74.y) +
+               (arg0->unk_C0.y.z * arg0->unk_74.z)) *
+              0.94f;
     var_ft4 *= ((arg0->unk_C0.x.x * arg0->unk_74.x) + (arg0->unk_C0.x.y * arg0->unk_74.y) +
                 (arg0->unk_C0.x.z * arg0->unk_74.z));
     arg0->unk_74.x = (arg0->unk_C0.z.x * var_fs1) + (arg0->unk_C0.y.x * var_fs0) + (arg0->unk_C0.x.x * var_ft4);
@@ -6342,23 +6321,23 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
     arg0->unk_74.z = (arg0->unk_C0.z.z * var_fs1) + (arg0->unk_C0.y.z * var_fs0) + (arg0->unk_C0.x.z * var_ft4);
 
     if ((buttonPressed & BTN_B) && (arg0->unk_218 == 0) && (arg0->unk_228 != 0.0) && (arg0->unk_04 & 0x100000)) {
-        arg0->unk_304 = 91.0f;
-        arg0->unk_30C = 91.0f;
         arg0->unk_174 = 1.3f;
+        arg0->unk_304 = arg0->unk_30C = 91.0f;
         arg0->unk_308 = 255.0f;
-        arg0->unk_08 |= 0x1000;
         arg0->unk_218 = D_800CE774;
+        arg0->unk_08 |= 0x1000;
         if (D_800E5FD0 != 0) {
             func_800BA710(arg0->id, 7);
         }
     } else {
 
         if ((arg0->unk_04 & 0x0800000F) == 3) {
-            arg0->unk_04 |= 0x01000000;
-            arg0->unk_30C = 0.0f;
+            buttonCurrent |= BTN_A;
             arg0->unk_174 = 1.3f;
             arg0->unk_304 = 255.0f;
             arg0->unk_308 = 223.0f;
+            arg0->unk_30C = 0.0f;
+            arg0->unk_04 |= 0x01000000;
             arg0->unk_218 = D_800CE774;
             if (!(arg0->unk_08 & 0x1000)) {
                 arg0->unk_08 |= 0x1000;
@@ -6366,7 +6345,6 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                     func_800BA710(arg0->id, 7);
                 }
             }
-            buttonCurrent |= BTN_A;
         } else {
             arg0->unk_08 &= ~0x1000;
         }
@@ -6376,30 +6354,31 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
         temp_v1 = arg0->unk_0C.unk_00;
         var_v0_2 = temp_v1->unk_4C;
         if (var_v0_2 != NULL) {
+            temp2 = temp_v1->unk_50;
             do {
                 var_fs1 = var_v0_2->unk_04.x - arg0->unk_0C.unk_34.x;
                 var_fs0 = var_v0_2->unk_04.y - arg0->unk_0C.unk_34.y;
                 var_ft4 = var_v0_2->unk_04.z - arg0->unk_0C.unk_34.z;
                 if ((SQ(var_fs1) + SQ(var_fs0) + SQ(var_ft4)) < 900.0f) {
-                    arg0->unk_04 |= 0x10000;
                     arg0->unk_8C.x += (15.0f * arg0->unk_B4.x);
                     arg0->unk_8C.y += (15.0f * arg0->unk_B4.y);
                     arg0->unk_8C.z += (15.0f * arg0->unk_B4.z);
+                    arg0->unk_04 |= 0x10000;
                     func_8008DCD8(arg0, 12.5f);
                     if (D_800E5FD0 != 0) {
                         func_800BA710(arg0->id, 1);
                     }
                     break;
                 }
-            } while (++var_v0_2 != temp_v1->unk_50);
+            } while (++var_v0_2 != temp2);
         }
     }
 
     if (!(arg0->unk_04 & 0x200000)) {
-        temp = temp_v1->unk_48;
         temp_v1 = arg0->unk_0C.unk_00;
         var_v0_3 = temp_v1->unk_44;
         if (var_v0_3 != NULL) {
+            temp = temp_v1->unk_48;
             do {
                 var_fs1 = arg0->unk_0C.unk_34.x - var_v0_3->unk_00.x;
                 var_fs0 = arg0->unk_0C.unk_34.y - var_v0_3->unk_00.y;
@@ -6427,7 +6406,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                 }
 
                 var_fa1 = (var_v0_3->unk_0C.y.x * var_fs1) + (var_v0_3->unk_0C.y.y * var_fs0) +
-                          (var_v0_3->unk_0C.y.y * var_ft4);
+                          (var_v0_3->unk_0C.y.z * var_ft4);
 
                 if (var_fa1 < 0.0f) {
                     continue;
@@ -6459,9 +6438,10 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
     if (!(arg0->unk_04 & 0x80000000)) {
         var_fa1 = arg0->unk_17C - arg0->unk_A0;
         if (var_fa1 > 0.0f) {
-            arg0->unk_198 = (var_fa1 - ((arg0->unk_74.x * arg0->unk_19C.x) + (arg0->unk_74.y * arg0->unk_19C.y) +
-                                        (arg0->unk_74.z * arg0->unk_19C.z))) *
-                            0.2f;
+            var_fa1 -= ((arg0->unk_74.x * arg0->unk_19C.x) + (arg0->unk_74.y * arg0->unk_19C.y) +
+                        (arg0->unk_74.z * arg0->unk_19C.z));
+
+            arg0->unk_198 = var_fa1 * 0.2f;
 
             arg0->unk_8C.x += (arg0->unk_198 * arg0->unk_19C.x);
             arg0->unk_8C.y += (arg0->unk_198 * arg0->unk_19C.y);
@@ -6478,13 +6458,13 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
     arg0->unk_278++;
     arg0->unk_27A++;
     if (buttonPressed & 0x80) {
-        arg0->unk_278 = 10;
         buttonPressed |= BTN_Z;
         buttonCurrent |= BTN_R;
+        arg0->unk_278 = 10;
     } else if (buttonPressed & 0x40) {
-        arg0->unk_27A = 10;
         buttonCurrent |= BTN_Z;
         buttonPressed |= BTN_R;
+        arg0->unk_27A = 10;
     }
 
     switch (buttonPressed & (BTN_Z | BTN_R)) {
@@ -6593,7 +6573,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                 arg0->unk_1D8 = 0.0f;
                 break;
             default:
-                if ((buttonCurrent & (BTN_Z | BTN_R)) == BTN_R) {
+                if ((buttonCurrent & (BTN_Z | BTN_R)) == BTN_Z) {
                     var_fa1 = arg0->unk_5C.x;
                     arg0->unk_286 = 0;
                 } else {
@@ -6652,10 +6632,10 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                 (arg0->unk_C0.z.z * arg0->unk_74.z);
 
         if (sp128 < 0.0f) {
-            sp130 = -1.0f;
+            var_fa1 = -1.0f;
             sp128 = -sp128;
         } else {
-            sp130 = 1.0f;
+            var_fa1 = 1.0f;
         }
         if (buttonPressed & BTN_A) {
             arg0->unk_204 = 0x1E;
@@ -6694,7 +6674,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                 }
             } else if (arg0->unk_04 & 0x20000000) {
                 if (arg0->unk_1F8 < sp128) {
-                    arg0->unk_04 &= ~0x40000000;
+                    arg0->unk_04 &= ~0x20000000;
                     sp128 = arg0->unk_1FC;
                 }
             } else {
@@ -6706,9 +6686,10 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
             }
         }
 
-        arg0->unk_74.x -= sp128 * sp130 * arg0->unk_C0.z.x;
-        arg0->unk_74.y -= sp128 * sp130 * arg0->unk_C0.z.y;
-        arg0->unk_74.z -= sp128 * sp130 * arg0->unk_C0.z.z;
+        sp128 *= var_fa1;
+        arg0->unk_74.x -= sp128 * arg0->unk_C0.z.x;
+        arg0->unk_74.y -= sp128 * arg0->unk_C0.z.y;
+        arg0->unk_74.z -= sp128 * arg0->unk_C0.z.z;
         if (((arg0->unk_5C.x < -8.0f) || (arg0->unk_5C.x > 8.0f)) && !(arg0->unk_04 & 0x04000000)) {
 
             arg0->unk_20C++;
@@ -6758,18 +6739,20 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
             arg0->unk_200 = 0.0f;
         }
     } else {
-        var_ft4 = 1.0f;
         var_fs1 = arg0->unk_1B0;
         var_fs0 = arg0->unk_1B8;
+        var_ft4 = 1.0f;
     }
     if ((gNumPlayers >= 2) && (D_800CE4D0 == 2)) {
-        temp_fv1_12 = (D_800E5F40[0]->unk_23C - arg0->unk_23C) / D_800CE4D8;
-        if (temp_fv1_12 >= 1.0f) {
+        var_fv1 = (D_800E5F40[0]->unk_23C - arg0->unk_23C);
+        var_fv1 /= D_800CE4D8;
+
+        if (var_fv1 >= 1.0f) {
             var_fs1 += 0.03f;
             var_fs0 += 0.03f;
         } else {
-            var_fs1 += 0.03f * temp_fv1_12;
-            var_fs0 += 0.03f * temp_fv1_12;
+            var_fs1 += 0.03f * var_fv1;
+            var_fs0 += 0.03f * var_fv1;
         }
     }
     if (arg0->unk_218 != 0) {
@@ -6784,11 +6767,12 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
             if ((gNumPlayers == 1) || (D_800CE4D0 == 0)) {
                 sp128 = arg0->unk_1AC;
             } else {
-                temp_fv0_21 = (D_800E5F40[0]->unk_23C - arg0->unk_23C) / D_800CE4D8;
-                if (temp_fv0_21 >= 1.0f) {
+                sp128 = (D_800E5F40[0]->unk_23C - arg0->unk_23C);
+                sp128 /= D_800CE4D8;
+                if (sp128 >= 1.0f) {
                     sp128 = arg0->unk_1AC * 0.1f;
                 } else {
-                    sp128 = (((1.0f - temp_fv0_21) * 0.9f) + 0.1f) * arg0->unk_1AC;
+                    sp128 = (((1.0f - sp128) * 0.9f) + 0.1f) * arg0->unk_1AC;
                 }
             }
             arg0->unk_228 -= sp128;
@@ -6832,16 +6816,17 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
             var_ft4 = 0.0f;
             var_fv1 = var_fs1;
         } else {
-            if (var_ft4 < arg0->unk_1BC) {
-                temp_fa1_14 = var_ft4 / arg0->unk_1BC;
+            var_fv1 = arg0->unk_1BC;
+            if (var_ft4 < var_fv1) {
+                var_fa1 = var_ft4 / var_fv1;
 
-                sp128 = 1.0f - SQ((2.0f * temp_fa1_14) - 1.0f);
+                sp128 = 1.0f - SQ((2.0f * var_fa1) - 1.0f);
                 if (var_fs1 < var_fs0) {
-                    sp128 = sp128 * ((var_fs0 - var_fs1) * arg0->unk_320);
+                    sp128 *= (var_fs0 - var_fs1) * arg0->unk_320;
                 } else {
                     sp128 *= (var_fs1 - var_fs0) * arg0->unk_320;
                 }
-                var_fv1 = ((var_fs0 - var_fs1) * temp_fa1_14) + var_fs1 + sp128;
+                var_fv1 = ((var_fs0 - var_fs1) * var_fa1) + var_fs1 + sp128;
             } else {
                 if (arg0->unk_1E8 == 0.0f) {
                     var_fv1 = var_fs0;
@@ -6893,7 +6878,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
         arg0->unk_0C.unk_40 = sqrtf(SQ(arg0->unk_0C.unk_28.x) + SQ(arg0->unk_0C.unk_28.y) + SQ(arg0->unk_0C.unk_28.z));
         D_800CF4B8[TRACK_SHAPE_INDEX(TRACK_SHAPE_AIR)](arg0);
         if (arg0->unk_0C.unk_34.y < -2750.0f) {
-            arg0->unk_04 &= ~0x20000000;
+            arg0->unk_04 &= ~0x40000000;
             arg0->unk_04 |= 0x08000000;
             D_800E5FC0++;
             func_800892E0(arg0);
@@ -6936,24 +6921,24 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
             arg0->unk_74.z *= var_fa1;
         }
         if (arg0->id < gNumPlayers) {
-            var_fa1_6 = 1.0f;
+            var_fa1 = 1.0f;
             i = 100;
         } else {
-            var_fa1_6 = 5.0f;
+            var_fa1 = 5.0f;
             i = 3;
         }
 
         if (func_8009EBEC(&arg0->unk_0C, arg0->unk_0C.unk_34.x + arg0->unk_74.x, arg0->unk_0C.unk_34.y + arg0->unk_74.y,
-                          arg0->unk_0C.unk_34.z + arg0->unk_74.z, i, var_fa1_6) == 0) {
+                          arg0->unk_0C.unk_34.z + arg0->unk_74.z, i, var_fa1) == 0) {
             sp128 = arg0->unk_244;
-            temp_v1 = arg0->unk_0C.unk_00;
             arg0->unk_244 = func_8009DFA0(&arg0->unk_0C);
+            temp_v1 = arg0->unk_0C.unk_00;
 
             arg0->unk_270 =
                 (arg0->unk_0C.unk_08 * (temp_v1->next->radiusLeft - temp_v1->radiusLeft)) + temp_v1->radiusLeft;
-
             arg0->unk_274 =
                 (arg0->unk_0C.unk_08 * (temp_v1->next->radiusRight - temp_v1->radiusRight)) + temp_v1->radiusRight;
+
             var_fa1 = 1.0f / arg0->unk_0C.unk_18;
             arg0->unk_24C.x.x = arg0->unk_0C.unk_0C.x * var_fa1;
             arg0->unk_24C.x.y = arg0->unk_0C.unk_0C.y * var_fa1;
@@ -6968,7 +6953,6 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
 
             arg0->unk_24C.z.x = (arg0->unk_24C.y.y * arg0->unk_24C.x.z) - (arg0->unk_24C.y.z * arg0->unk_24C.x.y);
             arg0->unk_24C.z.y = (arg0->unk_24C.y.z * arg0->unk_24C.x.x) - (arg0->unk_24C.y.x * arg0->unk_24C.x.z);
-
             arg0->unk_24C.z.z = (arg0->unk_24C.y.x * arg0->unk_24C.x.y) - (arg0->unk_24C.y.y * arg0->unk_24C.x.x);
 
             temp_fa0 = 1.0f / sqrtf(SQ(arg0->unk_24C.z.x) + SQ(arg0->unk_24C.z.y) + SQ(arg0->unk_24C.z.z));
@@ -6977,27 +6961,26 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
             arg0->unk_24C.z.y *= temp_fa0;
             arg0->unk_24C.z.z *= temp_fa0;
 
-            arg0->unk_24C.y.x = (arg0->unk_24C.x.y * arg0->unk_24C.z.y) - (arg0->unk_24C.x.z * arg0->unk_24C.z.z);
-            arg0->unk_24C.y.y = (arg0->unk_24C.x.z * arg0->unk_24C.z.x) - (arg0->unk_24C.x.x * arg0->unk_24C.z.y);
-            arg0->unk_24C.y.z = (arg0->unk_24C.x.x * arg0->unk_24C.z.z) - (arg0->unk_24C.x.y * arg0->unk_24C.z.x);
-            if (!(arg0->unk_04 & 0x0A080000) && (D_800F5E98 < 0x28) && (gGameMode != GAMEMODE_RECORDS)) {
+            arg0->unk_24C.y.x = (arg0->unk_24C.x.y * arg0->unk_24C.z.z) - (arg0->unk_24C.x.z * arg0->unk_24C.z.y);
+            arg0->unk_24C.y.y = (arg0->unk_24C.x.z * arg0->unk_24C.z.x) - (arg0->unk_24C.x.x * arg0->unk_24C.z.z);
+            arg0->unk_24C.y.z = (arg0->unk_24C.x.x * arg0->unk_24C.z.y) - (arg0->unk_24C.x.y * arg0->unk_24C.z.x);
+            if (!(arg0->unk_04 & 0x0A080000) && (D_800F5E98 < 0x28) && (gGameMode != 6)) {
 
-                temp_fv1_21 = sp128 - arg0->unk_244;
+                sp128 -= arg0->unk_244;
                 arg0->unk_288++;
                 arg0->unk_2A4++;
                 arg0->raceTime = (s32) (arg0->unk_2A4 * 50) / 3;
-                if (D_800F80BC < temp_fv1_21) {
+                if (D_800F80BC < sp128) {
                     arg0->unk_240 += D_800F8510->unk_0C;
                     arg0->lap++;
-                    if (((arg0->unk_2AA + 1) == arg0->lap) && ((gTotalLapCount + 1) >= arg0->lap)) {
+                    if ((arg0->lap == arg0->unk_2AA + 1) && ((gTotalLapCount + 1) >= arg0->lap)) {
                         arg0->unk_2AA = arg0->lap;
                         arg0->unk_04 |= 0x100000;
-                        temp_s0 = arg0->raceTime -
-                                  (s32) ((50.0f * arg0->unk_244) / (3.0f * (D_800F8510->unk_0C - temp_fv1_21)));
-                        arg0->lapTimes[arg0->lap - 2] = (s32) (temp_s0 - arg0->unk_29C);
-                        arg0->unk_29C = temp_s0;
+                        i = arg0->raceTime - (s32) ((50.0f * arg0->unk_244) / (3.0f * (D_800F8510->unk_0C - sp128)));
+                        arg0->lapTimes[arg0->lap - 2] = (s32) (i - arg0->unk_29C);
+                        arg0->unk_29C = i;
                         arg0->unk_2B0 = 1;
-                        if ((gGameMode == GAMEMODE_PRACTICE) || (gGameMode == GAMEMODE_DEATH_RACE)) {
+                        if ((gGameMode == 2) || (gGameMode == 0x15)) {
                             if (arg0 == gRacers) {
                                 if (arg0->lapTimes[arg0->lap - 2] < D_800E5FDC) {
                                     D_800E5FDC = arg0->lapTimes[arg0->lap - 2];
@@ -7009,7 +6992,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                                 arg0->unk_240 = 0;
                             }
                         } else if ((gTotalLapCount + 1) == arg0->lap) {
-                            arg0->raceTime = temp_s0;
+                            arg0->raceTime = i;
                             arg0->unk_04 |= 0x02800000;
                             arg0->unk_228 = arg0->unk_22C;
 
@@ -7034,7 +7017,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                             }
                         }
                     }
-                } else if (temp_fv1_21 < D_800F80C0) {
+                } else if (sp128 < D_800F80C0) {
                     arg0->lap--;
                     arg0->unk_240 -= D_800F8510->unk_0C;
                 }
@@ -7063,31 +7046,33 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
         arg0->unk_C0 = spE8;
     }
     if (arg0->unk_198 != 0.0f) {
-        var_fv0_3 = arg0->unk_A0;
+        sp128 = arg0->unk_A0;
     } else {
         sp128 = arg0->unk_17C;
-        var_fv0_3 = sp128;
     }
 
-    temp_fv1_23 = arg0->unk_0C.unk_34.x - (var_fv0_3 * arg0->unk_C0.y.x);
-    arg0->unk_18C.x = temp_fv1_23 - arg0->unk_180.x;
-    arg0->unk_180.x = temp_fv1_23;
+    var_fa1 = arg0->unk_180.x;
+    var_fv1 = arg0->unk_0C.unk_34.x - (sp128 * arg0->unk_C0.y.x);
+    arg0->unk_180.x = var_fv1;
+    arg0->unk_18C.x = var_fv1 - var_fa1;
 
-    temp_fv1_24 = arg0->unk_0C.unk_34.y - (var_fv0_3 * arg0->unk_C0.y.y);
-    arg0->unk_18C.y = temp_fv1_24 - arg0->unk_180.y;
-    arg0->unk_180.y = temp_fv1_24;
+    var_fa1 = arg0->unk_180.y;
+    var_fv1 = arg0->unk_0C.unk_34.y - (sp128 * arg0->unk_C0.y.y);
+    arg0->unk_180.y = var_fv1;
+    arg0->unk_18C.y = var_fv1 - var_fa1;
 
-    temp_fv1_25 = arg0->unk_0C.unk_34.z - (var_fv0_3 * arg0->unk_C0.y.z);
-    arg0->unk_18C.z = temp_fv1_25 - arg0->unk_180.z;
-    arg0->unk_180.z = temp_fv1_25;
+    var_fa1 = arg0->unk_180.z;
+    var_fv1 = arg0->unk_0C.unk_34.z - (sp128 * arg0->unk_C0.y.z);
+    arg0->unk_180.z = var_fv1;
+    arg0->unk_18C.z = var_fv1 - var_fa1;
 
     arg0->unk_80.x = arg0->unk_0C.unk_34.x - sp10C.x;
     arg0->unk_80.y = arg0->unk_0C.unk_34.y - sp10C.y;
     arg0->unk_80.z = arg0->unk_0C.unk_34.z - sp10C.z;
 
-    arg0->unk_68.x = (arg0->unk_80.x * spE8.z.x) + (spE8.z.y * arg0->unk_80.y) + (spE8.z.z * arg0->unk_80.z);
-    arg0->unk_68.y = (arg0->unk_80.x * spE8.y.x) + (spE8.y.y * arg0->unk_80.y) + (spE8.y.z * arg0->unk_80.z);
-    arg0->unk_68.z = (arg0->unk_80.x * spE8.x.x) + (spE8.x.y * arg0->unk_80.y) + (spE8.x.z * arg0->unk_80.z);
+    arg0->unk_68.x = (spE8.z.x * arg0->unk_80.x) + (spE8.z.y * arg0->unk_80.y) + (spE8.z.z * arg0->unk_80.z);
+    arg0->unk_68.y = (spE8.y.x * arg0->unk_80.x) + (spE8.y.y * arg0->unk_80.y) + (spE8.y.z * arg0->unk_80.z);
+    arg0->unk_68.z = (spE8.x.x * arg0->unk_80.x) + (spE8.x.y * arg0->unk_80.y) + (spE8.x.z * arg0->unk_80.z);
     arg0->unk_5C.x =
         (arg0->unk_C0.z.x * arg0->unk_74.x) + (arg0->unk_C0.z.y * arg0->unk_74.y) + (arg0->unk_C0.z.z * arg0->unk_74.z);
     arg0->unk_5C.y =
@@ -7103,8 +7088,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                     arg1->unk_88 = 0xFA0;
                     arg1->unk_8C = 0;
                     arg1->unk_90 = 0;
-                } else {
-                    goto block_373;
+                    goto skip;
                 }
             } else {
                 if (D_800E5F20[arg0->id] != 0) {
@@ -7112,41 +7096,42 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                 }
                 if (D_800CE774 == (arg0->unk_218 + 1)) {
                     arg1->unk_88 = 0x3E8;
-                    arg1->unk_90 = 0;
-                    arg1->unk_8C = 0;
+                    arg1->unk_8C = arg1->unk_90 = 0;
+                    goto skip;
                 } else if (arg0->unk_218 != 0) {
-                    arg1->unk_8C = (s32) (arg0->unk_218 * 0x12C) / (s32) D_800CE774;
-                } else {
-                block_373:
-
-                    if ((arg0->unk_04 & 0xF) == 2) {
-                        if (D_800E5F30[arg0->id] == 0) {
-                            D_800E5F30[arg0->id] = 0x96;
-                            arg1->unk_88 = 0x7D0;
-                            arg1->unk_8C = 0x12C;
-                            arg1->unk_90 = 1;
-                        } else if (D_800E5F30[arg0->id] >= 2) {
-                            D_800E5F30[arg0->id]--;
-                        } else {
-                            goto block_379;
-                        }
-                    } else {
-                        D_800E5F30[arg0->id] = 0;
-                    block_379:
-                        var_ft4 = arg0->unk_80.x;
-                        var_fs0 = arg0->unk_80.y;
-                        var_fs1 = arg0->unk_80.z;
-                        var_s0_3 = (s32) (sqrtf(SQ(var_ft4) + SQ(var_fs0) + SQ(var_fs1)) * D_800CE754);
-                        if (var_s0_3 > 1000) {
-                            var_s0_3 = 1000;
-                        }
-                        arg1->unk_8C = var_s0_3;
-                        arg1->unk_90 = 0;
-                    }
+                    arg1->unk_8C = (arg0->unk_218 * 0x12C) / D_800CE774;
+                    goto skip;
                 }
             }
+
+            if ((arg0->unk_04 & 0xF) == 2) {
+                if (D_800E5F30[arg0->id] == 0) {
+                    D_800E5F30[arg0->id] = 0x96;
+                    arg1->unk_88 = 0x7D0;
+                    arg1->unk_8C = 0x12C;
+                    arg1->unk_90 = 1;
+                    goto skip;
+                } else if (D_800E5F30[arg0->id] >= 2) {
+                    D_800E5F30[arg0->id]--;
+                    goto skip;
+                }
+            } else {
+                D_800E5F30[arg0->id] = 0;
+            }
+
+            var_ft4 = arg0->unk_80.x;
+            var_fs0 = arg0->unk_80.y;
+            var_fs1 = arg0->unk_80.z;
+            i = (s32) (sqrtf(SQ(var_ft4) + SQ(var_fs0) + SQ(var_fs1)) * D_800CE754);
+            if (i > 1000) {
+                i = 1000;
+            }
+            arg1->unk_8C = i;
+            arg1->unk_90 = 0;
+        skip:;
         }
     }
+
     if ((arg0->unk_04 & 0x0C00400F) == 1) {
         arg0->unk_228 += arg0->unk_32C;
         if (arg0->unk_22C < arg0->unk_228) {
@@ -7180,13 +7165,13 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
     }
     arg0->unk_210 = (arg0->unk_210 + (s32) (arg0->unk_1D4 * 4000.0f)) & 0xFFF;
 
-    var_fa1_7 = SIN(arg0->unk_210) * (arg0->unk_98 * 0.007f);
+    var_fa1 = SIN(arg0->unk_210) * (arg0->unk_98 * 0.007f);
     if (arg0->unk_08 & 0x400) {
-        var_fa1_7 *= 5.0f;
+        var_fa1 *= 5.0f;
     }
-    arg0->unk_10C.x = arg0->unk_0C.unk_34.x + (var_fa1_7 * arg0->unk_E8.y.x);
-    arg0->unk_10C.y = arg0->unk_0C.unk_34.y + (var_fa1_7 * arg0->unk_E8.y.y);
-    arg0->unk_10C.z = arg0->unk_0C.unk_34.z + (var_fa1_7 * arg0->unk_E8.y.z);
+    arg0->unk_10C.x = arg0->unk_0C.unk_34.x + (var_fa1 * arg0->unk_E8.y.x);
+    arg0->unk_10C.y = arg0->unk_0C.unk_34.y + (var_fa1 * arg0->unk_E8.y.y);
+    arg0->unk_10C.z = arg0->unk_0C.unk_34.z + (var_fa1 * arg0->unk_E8.y.z);
     if (arg0->unk_21C != 0) {
         arg0->unk_10C.x += ((f32) (Math_Rand1() & 0xFFFF) * 0.000027466238f) - 0.9f;
         arg0->unk_10C.y += ((f32) (Math_Rand1() & 0xFFFF) * 0.000027466238f) - 0.9f;
@@ -7195,15 +7180,15 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
 
     if (arg0->unk_27C != 0) {
         if (arg0->unk_284 == 1) {
-            arg0->unk_E8.x.z = arg0->unk_C0.x.z;
             arg0->unk_E8.x.x = arg0->unk_C0.x.x;
             arg0->unk_E8.x.y = arg0->unk_C0.x.y;
+            arg0->unk_E8.x.z = arg0->unk_C0.x.z;
         } else {
-            cos = COS(arg0->unk_27C);
-            sin = SIN(arg0->unk_27C);
-            arg0->unk_E8.x.x = (arg0->unk_C0.x.x * cos) + (sin * arg0->unk_C0.z.x);
-            arg0->unk_E8.x.y = (arg0->unk_C0.x.y * cos) + (sin * arg0->unk_C0.z.y);
-            arg0->unk_E8.x.z = (arg0->unk_C0.x.z * cos) + (sin * arg0->unk_C0.z.z);
+            var_fs1 = COS(arg0->unk_27C);
+            var_fs0 = SIN(arg0->unk_27C);
+            arg0->unk_E8.x.x = (arg0->unk_C0.x.x * var_fs1) + (var_fs0 * arg0->unk_C0.z.x);
+            arg0->unk_E8.x.y = (arg0->unk_C0.x.y * var_fs1) + (var_fs0 * arg0->unk_C0.z.y);
+            arg0->unk_E8.x.z = (arg0->unk_C0.x.z * var_fs1) + (var_fs0 * arg0->unk_C0.z.z);
         }
 
         if (arg0->unk_284 == 1) {
@@ -7243,13 +7228,13 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
         arg0->unk_E8.x.x = arg0->unk_C0.x.x;
         arg0->unk_E8.x.y = arg0->unk_C0.x.y;
         arg0->unk_E8.x.z = arg0->unk_C0.x.z;
-        if (gGameMode == GAMEMODE_GP_END_CS) {
-            arg0->unk_10C.x += arg0->unk_A4 * arg0->unk_C0.y.x;
-            arg0->unk_10C.y += arg0->unk_A4 * arg0->unk_C0.y.y;
-            arg0->unk_10C.z += arg0->unk_A4 * arg0->unk_C0.y.z;
-            arg0->unk_168.x += arg0->unk_A4 * arg0->unk_C0.y.x;
-            arg0->unk_168.y += arg0->unk_A4 * arg0->unk_C0.y.y;
-            arg0->unk_168.z += arg0->unk_A4 * arg0->unk_C0.y.z;
+        if (gGameMode == 0x11) {
+            arg0->unk_10C.x += (var_fs1 = arg0->unk_A4 * arg0->unk_C0.y.x);
+            arg0->unk_10C.y += (var_fs0 = arg0->unk_A4 * arg0->unk_C0.y.y);
+            arg0->unk_10C.z += (var_ft4 = arg0->unk_A4 * arg0->unk_C0.y.z);
+            arg0->unk_168.x += var_fs1;
+            arg0->unk_168.y += var_fs0;
+            arg0->unk_168.z += var_ft4;
         }
     }
     var_fa1 = arg0->unk_68.x * 0.6f;
@@ -7272,21 +7257,18 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
     arg0->unk_E8.y.y = (arg0->unk_E8.x.z * arg0->unk_E8.z.x) - (arg0->unk_E8.x.x * arg0->unk_E8.z.z);
     arg0->unk_E8.y.z = (arg0->unk_E8.x.x * arg0->unk_E8.z.y) - (arg0->unk_E8.x.y * arg0->unk_E8.z.x);
     if (arg0->unk_04 & 0x2000) {
-        arg0->unk_118.x *= 0.8f;
-        arg0->unk_E8.y.x += arg0->unk_118.x;
-        arg0->unk_118.y *= 0.8f;
-        arg0->unk_E8.y.y += arg0->unk_118.y;
-        arg0->unk_118.z *= 0.8f;
-        arg0->unk_E8.y.z += arg0->unk_118.z;
+        arg0->unk_E8.y.x += arg0->unk_118.x *= 0.8f;
+        arg0->unk_E8.y.y += arg0->unk_118.y *= 0.8f;
+        arg0->unk_E8.y.z += arg0->unk_118.z *= 0.8f;
 
-        temp_fa0 = 1.0f / sqrtf(SQ(arg0->unk_E8.y.x) + SQ(arg0->unk_E8.y.y) + SQ(arg0->unk_E8.y.z));
-        if (temp_fa0 > 0.99f) {
+        var_fa1 = 1.0f / sqrtf(SQ(arg0->unk_E8.y.x) + SQ(arg0->unk_E8.y.y) + SQ(arg0->unk_E8.y.z));
+        if (var_fa1 > 0.99f) {
             arg0->unk_04 &= ~0x2000;
         }
 
-        arg0->unk_E8.y.x *= temp_fa0;
-        arg0->unk_E8.y.y *= temp_fa0;
-        arg0->unk_E8.y.z *= temp_fa0;
+        arg0->unk_E8.y.x *= var_fa1;
+        arg0->unk_E8.y.y *= var_fa1;
+        arg0->unk_E8.y.z *= var_fa1;
 
         arg0->unk_E8.z.x = (arg0->unk_E8.y.y * arg0->unk_E8.x.z) - (arg0->unk_E8.y.z * arg0->unk_E8.x.y);
         arg0->unk_E8.z.y = (arg0->unk_E8.y.z * arg0->unk_E8.x.x) - (arg0->unk_E8.y.x * arg0->unk_E8.x.z);
@@ -7313,7 +7295,6 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
             sp10C.z = (s32) ((Math_Rand1() & 0x1F) - 0x10) + arg0->unk_0C.unk_34.z;
             func_i2_80105590(sp10C.x, sp10C.y, sp10C.z, arg0->unk_74.x, arg0->unk_74.y, arg0->unk_74.z,
                              (f32) ((Math_Rand2() & 0xF) + ((s32) (arg0->unk_21C * 5) / 150) + 5), arg0);
-
             if (!((arg0->id + gGameFrameCount) & 4) && (D_800E5FD0 != 0)) {
                 func_800BA710(arg0->id, 5);
             }
@@ -7420,10 +7401,10 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
         arg0->unk_2D0 = ((255.0f - var_fs0) * var_fa1) + var_fs0;
         arg0->unk_2D2 = ((255.0f - var_ft4) * var_fa1) + var_ft4;
         if (arg0->unk_284 == 2) {
-            temp_fa1_32 = gSinTable[arg0->unk_27C & 0x7FF];
-            arg0->unk_178 = (0.1f * temp_fa1_32) + 1.05f;
+            var_fa1 = SIN(arg0->unk_27C & 0x7FF);
+            arg0->unk_178 = (0.1f * var_fa1) + 1.05f;
             arg0->unk_2DA = 0xFF;
-            arg0->unk_2DC = 0xFF - (s32) (255.0f * temp_fa1_32);
+            arg0->unk_2DC = 0xFF - (s32) (255.0f * var_fa1);
             arg0->unk_2DE = 0;
         } else if (arg0->unk_284 == 1) {
             arg0->unk_178 = 1.075f;
@@ -7459,10 +7440,9 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
             if (arg0->id < gNumPlayers) {
                 func_800BA710(arg0->id, 0x32);
             }
-            arg0->unk_2DC = 0xFF;
-            arg0->unk_2DE = 0;
             arg0->unk_178 = 1.03f;
-            arg0->unk_2DA = arg0->unk_2DC;
+            arg0->unk_2DA = arg0->unk_2DC = 0xFF;
+            arg0->unk_2DE = 0;
         } else {
             arg0->unk_178 = 0.0f;
         }
@@ -7476,8 +7456,8 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
         }
     } else if ((D_800F80A4 == arg0->unk_17C) && (arg1->buttonCurrent != 0) && (D_800F5E98 < 250)) {
         arg0->unk_04 &= ~0x8000;
-        arg0->unk_304 = 0.0f;
         arg0->unk_174 = 1.3f;
+        arg0->unk_304 = 0.0f;
         arg0->unk_308 = 205.0f;
         arg0->unk_30C = 255.0f;
         if (arg0->id < gNumPlayers) {
@@ -7487,12 +7467,12 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
 
     if (arg0->unk_174 != 1.0f) {
         var_fa1 = (arg0->unk_174 - 1.0f) / 0.29999995f;
-        var_fa1 = var_fa1 * var_fa1;
+        var_fa1 *= var_fa1;
         arg0->unk_2D4 = arg0->unk_304 * var_fa1;
         arg0->unk_2D6 = arg0->unk_308 * var_fa1;
         arg0->unk_2D8 = arg0->unk_30C * var_fa1;
         arg0->unk_174 -= 0.003f;
-        if (arg0->unk_174 < 1.0f) {
+        if (arg0->unk_174 < 1.f) {
             arg0->unk_174 = 1.0f;
         }
     } else {

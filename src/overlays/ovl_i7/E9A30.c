@@ -1765,7 +1765,6 @@ void func_i7_80146920(void) {
 }
 
 #ifdef NON_MATCHING
-// very weird, possibly patched after compilation?
 Gfx* func_i7_80146E28(Gfx* gfx) {
     s32 i;
 

@@ -1567,8 +1567,7 @@ void func_i3_801217F0(s32 playerIndex) {
 extern GfxPool D_1000000;
 extern unk_struct_1DC D_800E5220[];
 extern GfxPool* D_800DCCF0;
-#ifdef NON_MATCHING
-// 0 vs 0.0f -> zero loading float regalloc
+
 Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
     s32 pad[6];
     s32 i;
@@ -1591,16 +1590,16 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
     temp_fa1 = D_800E5220[playerIndex].unk_5C.x.z;
     sqrtf(SQ(temp_fv0) + SQ(temp_fv1) + SQ(temp_fa1));
 
-    if (D_i3_80141BF0[playerIndex] < 0xB) {
+    if (D_i3_80141BF0[playerIndex] < 11) {
         spC0 = 0 * 0;
         spC4 = 0 * -2;
         spC8 = 0 * 2 + 180.0f;
-    } else if (D_i3_80141BF0[playerIndex] >= 0x1E) {
+    } else if (D_i3_80141BF0[playerIndex] >= 30) {
         spC0 = 20.0f * 0;
         spC4 = 20.0f * -2;
         spC8 = 20.0f * 2 + 180.0f;
     } else {
-        temp_fv0_2 = D_i3_80141BF0[playerIndex] - 0xA;
+        temp_fv0_2 = D_i3_80141BF0[playerIndex] - 10;
         spC0 = temp_fv0_2 * 0;
         spC4 = temp_fv0_2 * -2;
         spC8 = (temp_fv0_2 * 2) + 180.0f;
@@ -1612,17 +1611,17 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
         D_i3_80141C00[playerIndex] = 0.08f;
     }
     while (D_i3_80141C10[playerIndex] < 0.0f) {
-        D_i3_80141C10[playerIndex] += 2 * M_PI;
+        D_i3_80141C10[playerIndex] += M_TWO_PI;
     }
-    while (D_i3_80141C10[playerIndex] > 2 * M_PI) {
-        D_i3_80141C10[playerIndex] -= 2 * M_PI;
+    while (D_i3_80141C10[playerIndex] > M_TWO_PI) {
+        D_i3_80141C10[playerIndex] -= M_TWO_PI;
     }
-    if ((D_i3_80141C00[playerIndex] <= 0.08f) && (D_i3_80141C10[playerIndex] >= (1.84f * M_PI))) {
-        D_i3_80141C10[playerIndex] = (1.84f * M_PI);
+    if ((D_i3_80141C00[playerIndex] <= 0.08f) && (D_i3_80141C10[playerIndex] >= (0.92f * M_TWO_PI))) {
+        D_i3_80141C10[playerIndex] = (0.92f * M_TWO_PI);
         D_i3_80141C00[playerIndex] = 0.0f;
     }
     temp = D_i3_80141C10[playerIndex];
-    angle = (temp * 0x1000) / (2 * D_PI);
+    angle = RAD_TO_FZXANG(temp);
     spA0 = SIN(angle);
     spA4 = -COS(angle);
     spAC = COS(angle);
@@ -1636,8 +1635,7 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
     gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BACK);
     gDPPipeSync(gfx++);
     gDPSetRenderMode(gfx++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-    func_8006BC84(D_800DCCF0->unk_21988, NULL, 0.07f, 0.07f, 0.07f, 0.0f, spA0, spA4, 0.0f, spAC, spB0, spC0, spC4,
-                  spC8);
+    func_8006BC84(D_800DCCF0->unk_21988, NULL, 0.07f, 0.07f, 0.07f, 0, spA0, spA4, 0, spAC, spB0, spC0, spC4, spC8);
     gSPMatrix(gfx++, D_800DCCF0->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gfx++, aFinishDL);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
@@ -1671,7 +1669,7 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
         }
     }
 
-    if (D_i3_80141C00[playerIndex] == 0) {
+    if (D_i3_80141C00[playerIndex] == 0.0f) {
         D_i3_80141BF0[playerIndex]++;
         if (D_i3_80141BF0[playerIndex] >= 600) {
             D_i3_80141BF0[playerIndex] = 600;
@@ -1679,10 +1677,6 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
     }
     return gfx;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/AE140/func_i3_80121860.s")
-Gfx* func_i3_80121860(Gfx* gfx, s32 arg1);
-#endif
 
 void func_i3_80121E28(s32 arg0) {
     D_i3_80141C00[arg0] = 0.25f;
