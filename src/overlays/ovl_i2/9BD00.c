@@ -23,7 +23,7 @@ void func_i2_801033B8(unk_struct_60* arg0, u8* arg1);
 void func_i2_8010300C(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3);
 void func_i2_80102F70(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3);
 void func_i2_80102CA4(unk_struct_19E0* arg0, s32 courseIndex);
-void func_i2_80101F9C(void* arg0, s32 arg1);
+void func_i2_80101F9C(void* arg0, s32 size);
 
 extern u8 D_i2_8010D730[6][9];
 
@@ -755,7 +755,7 @@ void func_i2_80101D18(unk_struct_110* arg0, s32 arg1) {
     s32 j;
 
     if (arg1 != 0) {
-        func_i2_80101F9C(arg0, 0x110);
+        func_i2_80101F9C(arg0, sizeof(unk_struct_110));
     }
 
     for (i = 0; i < 5; i++) {
@@ -841,12 +841,12 @@ void func_i2_80101F24(unk_struct_60* arg0, s32 arg1) {
     }
 }
 
-void func_i2_80101F9C(void* arg0, s32 arg1) {
+void func_i2_80101F9C(void* arg0, s32 size) {
     s32 i;
     u8* var_v1;
 
     // clang-format off
-    for (i = 0, var_v1 = arg0; i < arg1; i++, var_v1++) { \
+    for (i = 0, var_v1 = arg0; i < size; i++, var_v1++) { \
         *var_v1 = 0;
     }
     // clang-format on

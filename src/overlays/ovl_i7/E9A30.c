@@ -1981,31 +1981,30 @@ void func_i7_80147CC0(void) {
     }
 }
 
-#ifdef NON_MATCHING
-// probably equivalent, just some float s-reg blowup
 void func_i7_80147EBC(void) {
+    s32 var_s1;
     s32 i;
     s32 j;
     unk_struct_1DC* var = &D_800E5220[0];
     unk_8014BF98* temp_s4;
     unk_8014BF94* temp_s0;
-    s32 var_s1;
     bool var_a1;
     f32 var_fs0;
     f32 var_fs0_2;
     f32 var_fs1;
+    f32 var_fs1_2;
     f32 var_fs2;
+    f32 var_fa0;
     f32 temp_ft4;
     f32 temp_ft5;
-    f32 var_fa0;
     f32 temp_fa1;
     f32 temp_fv0_6;
     f32 temp_fv0_9;
     f32 temp_fv0_12;
     f32 var_fv1;
     f32 temp_fv1_5;
-    f32 temp_fv1_6;
-    f32 temp;
+    f32 temp1;
+    s32 pad[21];
 
     if (D_80106F48 >= 4) {
         return;
@@ -2041,7 +2040,7 @@ void func_i7_80147EBC(void) {
                 temp_s4->unk_20 = ((Math_Rand1() % 256) - 128.0f) * 0.01f;
                 temp_s4->unk_3C = Math_Rand1() % 7;
                 temp_s4->unk_2C = Math_Rand1() % 7;
-                temp_s4->unk_34 = Math_Rand1() % (128 - (D_i7_8014BE1A * 32));
+                temp_s4->unk_34 = Math_Rand1() % (128 - (sCupDifficulty * 32));
                 temp_s4->unk_28 = 1.2f;
                 switch (D_i7_8014C248) {
                     case 0:
@@ -2109,11 +2108,11 @@ void func_i7_80147EBC(void) {
                         var_fs0_2 = temp_s4->unk_00;
                         temp_ft4 = temp_s4->unk_04;
                         temp_ft5 = temp_s4->unk_08;
-                        var_fa0 = sqrtf(SQ(temp_s4->unk_00) + SQ(temp_s4->unk_04) + SQ(temp_s4->unk_08));
+                        var_fa0 = sqrtf(SQ(var_fs0_2) + SQ(temp_ft4) + SQ(temp_ft5));
 
                         if (var_fa0 != 0.0f) {
-                            var_fv1 = -((var_fs0_2 * var->unk_5C.z.x) + (temp_ft4 * var->unk_5C.z.y) +
-                                        (var->unk_5C.z.z * temp_ft5)) /
+                            var_fv1 = -((var->unk_5C.z.z * temp_ft5) +
+                                        ((var_fs0_2 * var->unk_5C.z.x) + (temp_ft4 * var->unk_5C.z.y))) /
                                       var_fa0;
                             var_fa0 *= var_fv1;
                         }
@@ -2121,13 +2120,13 @@ void func_i7_80147EBC(void) {
                             func_800BAA88((s32) (f32) (u32) (((var_fa0 + 1000.0f) / 2000.0f) * 127.0f), 0x40);
                         }
                     }
-                    var_fs1 = sqrtf(SQ(D_800E5220[0].unk_5C.z.x) + SQ(D_800E5220[0].unk_5C.z.z));
+                    var_fs1_2 = sqrtf(SQ(D_800E5220[0].unk_5C.z.x) + SQ(D_800E5220[0].unk_5C.z.z));
 
-                    if (var_fs1 < 0.0001f) {
-                        var_fs1 = 0.0001f;
+                    if (var_fs1_2 < 0.0001f) {
+                        var_fs1_2 = 0.0001f;
                     }
 
-                    var_fs1 = 1.0f / var_fs1;
+                    var_fs1_2 = 1.0f / var_fs1_2;
                     for (j = temp_s4->unk_2E; j < temp_s4->unk_2E + temp_s4->unk_30; j++) {
                         temp_s0 = &D_i7_8014BF94[j];
                         temp_s0->unk_00 = temp_s4->unk_00;
@@ -2193,16 +2192,15 @@ void func_i7_80147EBC(void) {
                                 }
 
                                 temp_fv0_6 = -(((var_s1 & 0x3F) - 0x20) * 0.12f);
-                                // FAKE
 
-                                temp_s0->unk_18 = ((D_800E5220[0].unk_5C.z.x * var_fs1 * 0.866f) -
-                                                   (D_800E5220[0].unk_5C.z.z * var_fs1 * 0.5f)) *
+                                temp_s0->unk_18 = ((D_800E5220[0].unk_5C.z.x * var_fs1_2 * 0.866f) -
+                                                   (D_800E5220[0].unk_5C.z.z * var_fs1_2 * 0.5f)) *
                                                   temp_fv0_6;
-                                temp_s0->unk_20 = ((D_800E5220[0].unk_5C.z.z * var_fs1 * 0.866f) +
-                                                   (D_800E5220[0].unk_5C.z.x * var_fs1 * 0.5f)) *
+                                temp_s0->unk_20 = ((D_800E5220[0].unk_5C.z.z * var_fs1_2 * 0.866f) +
+                                                   (D_800E5220[0].unk_5C.z.x * var_fs1_2 * 0.5f)) *
                                                   temp_fv0_6;
 
-                                temp_s0->unk_1C = -(((var_s1 >> 6) - 0x48) * 0.12f);
+                                temp_s0->unk_1C = ((-(f32) ((var_s1 >> 6) - 0x48)) * 0.12f);
                                 var_s1++;
                                 break;
                             default:
@@ -2293,16 +2291,18 @@ void func_i7_80147EBC(void) {
                 var_fs0_2 = (temp_fv0_12 - var->unk_50.x);
                 temp_ft4 = (temp_fv1_5 - var->unk_50.y);
                 temp_ft5 = (temp_fa1 - var->unk_50.z);
-                if (((var_fs0_2 * var->unk_5C.x.x) + (temp_ft4 * var->unk_5C.x.y) + (temp_ft5 * var->unk_5C.x.z)) <=
-                    0) {
+                var_fa0 = (var_fs0_2 * var->unk_5C.x.x) + (temp_ft4 * var->unk_5C.x.y) + (temp_ft5 * var->unk_5C.x.z);
+                if (var_fa0 <= 0) {
                     temp_s4->unk_0C = temp_s4->unk_10 = 0x200;
                 } else {
                     var_fs2 = var->unk_19C.xw + ((var->unk_19C.xx * temp_fv0_12) + (var->unk_19C.xy * temp_fv1_5) +
                                                  (var->unk_19C.xz * temp_fa1));
                     var_fs1 = var->unk_19C.yw + ((var->unk_19C.yx * temp_fv0_12) + (var->unk_19C.yy * temp_fv1_5) +
                                                  (var->unk_19C.yz * temp_fa1));
-                    var_fs0 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
-                                                 (var->unk_19C.zz * temp_fa1));
+                    temp1 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
+                                               (var->unk_19C.zz * temp_fa1));
+                    var_fs0 = var->unk_19C.ww + ((var->unk_19C.wx * temp_fv0_12) + (var->unk_19C.wy * temp_fv1_5) +
+                                                 (var->unk_19C.wz * temp_fa1));
                     if (func_i3_fabsf(var_fs0) < 0.001f) {
                         temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                     } else {
@@ -2317,24 +2317,27 @@ void func_i7_80147EBC(void) {
                 }
             } else {
                 for (j = temp_s4->unk_2E; j < temp_s4->unk_2E + temp_s4->unk_30; j++) {
-
                     temp_s0 = &D_i7_8014BF94[j];
                     temp_fv0_12 = D_800E5220[0].unk_50.x + temp_s0->unk_00;
                     temp_fv1_5 = temp_s0->unk_04;
                     temp_fa1 = D_800E5220[0].unk_50.z + temp_s0->unk_08;
+
                     var_fs0_2 = (temp_fv0_12 - var->unk_50.x);
                     temp_ft4 = (temp_fv1_5 - var->unk_50.y);
                     temp_ft5 = (temp_fa1 - var->unk_50.z);
-                    if (((var_fs0_2 * var->unk_5C.x.x) + (temp_ft4 * var->unk_5C.x.y) + (temp_ft5 * var->unk_5C.x.z)) <=
-                        0) {
+                    var_fa0 =
+                        (var_fs0_2 * var->unk_5C.x.x) + (temp_ft4 * var->unk_5C.x.y) + (temp_ft5 * var->unk_5C.x.z);
+                    if (var_fa0 <= 0) {
                         temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                     } else {
                         var_fs2 = var->unk_19C.xw + ((var->unk_19C.xx * temp_fv0_12) + (var->unk_19C.xy * temp_fv1_5) +
                                                      (var->unk_19C.xz * temp_fa1));
                         var_fs1 = var->unk_19C.yw + ((var->unk_19C.yx * temp_fv0_12) + (var->unk_19C.yy * temp_fv1_5) +
                                                      (var->unk_19C.yz * temp_fa1));
-                        var_fs0 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
-                                                     (var->unk_19C.zz * temp_fa1));
+                        temp1 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
+                                                   (var->unk_19C.zz * temp_fa1));
+                        var_fs0 = var->unk_19C.ww + ((var->unk_19C.wx * temp_fv0_12) + (var->unk_19C.wy * temp_fv1_5) +
+                                                     (var->unk_19C.wz * temp_fa1));
                         if (func_i3_fabsf(var_fs0) < 0.001f) {
                             temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                         } else {
@@ -2358,9 +2361,6 @@ void func_i7_80147EBC(void) {
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_80147EBC.s")
-#endif
 
 Gfx* func_i7_80149760(Gfx* gfx) {
     unk_8014BF98* temp_s6;

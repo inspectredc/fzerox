@@ -1115,8 +1115,6 @@ Gfx* func_i2_800FEB2C(Gfx* gfx, unk_8010D778* arg1) {
     return gfx;
 }
 
-#ifdef NON_MATCHING
-// vtx assign regalloc
 void func_i2_800FEED8(unk_8010D778* arg0) {
     s32 i;
     s32 j;
@@ -1171,21 +1169,18 @@ void func_i2_800FEED8(unk_8010D778* arg0) {
         }
     }
 
-    for (i = 0; i < 8; i++) {
-        for (j = 0; j < 8; j++) {
-            temp_v0_2 = (unk_8010D778_unk_18_3*) arg0->unk_18 + (j + i * 8);
+    for (j = 0; j < 8; j++) {
+        for (k = 0; k < 8; k++) {
+            temp_v0_2 = (unk_8010D778_unk_18_3*) arg0->unk_18 + (k + j * 8);
             temp_v0_2->unk_00 = 0;
-            temp_v0_2->unk_04 = (j * 66.6f) + -233.09999f;
-            temp_v0_2->unk_08 = 176.4f - (i * 50.399998f);
+            temp_v0_2->unk_04 = (k * 66.6f) + -233.09999f;
+            temp_v0_2->unk_08 = 176.4f - (j * 50.399998f);
             temp_v0_2->unk_0C = 0.0f;
             temp_v0_2->unk_10 = 1.0f;
             temp_v0_2->unk_01 = 0;
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/98080/func_i2_800FEED8.s")
-#endif
 
 bool func_i2_800FF494(unk_8010D778*);
 
