@@ -468,7 +468,7 @@ void func_i3_80115E74(void) {
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115E74.s")
 #endif
 
-extern unk_800F8510* D_800F8510;
+extern CourseRecordInfo* gCurrentCourseRecordInfo;
 
 void func_i3_80116974(void) {
     s32 pad[2];
@@ -482,9 +482,9 @@ void func_i3_80116974(void) {
             D_i3_80141990 = MAX_TIMER;
         }
         if (gDifficulty >= EXPERT) {
-            timeRecord = D_800F8510->timeRecord[0];
-            if (timeRecord < sp1C.unk_08) {
-                D_i3_80141990 = timeRecord + (D_i3_80141990 - sp1C.unk_08);
+            timeRecord = gCurrentCourseRecordInfo->timeRecord[0];
+            if (timeRecord < sp1C.raceTime) {
+                D_i3_80141990 = timeRecord + (D_i3_80141990 - sp1C.raceTime);
             }
         }
     } else {
@@ -516,7 +516,7 @@ void func_i3_80116A50(Racer* arg0) {
     f32 temp_fv0;
     f32 var_fs0;
 
-    temp_ft3 = D_800F8510->unk_0C * gTotalLapCount;
+    temp_ft3 = gCurrentCourseRecordInfo->unk_0C * gTotalLapCount;
 
     if (D_800E5EC0 < arg0->unk_368) {
         for (i = gNumPlayers, var_fs0 = temp_ft3, var_s3 = 0; i < D_800E5EC0; i++) {
@@ -752,7 +752,7 @@ void func_i3_801175A4(void) {
 
     D_i3_80141910 = gRacers;
 
-    temp_fv0 = D_800F8510->unk_0C * gTotalLapCount;
+    temp_fv0 = gCurrentCourseRecordInfo->unk_0C * gTotalLapCount;
     if ((D_800E5F40[0]->lap == 2) && (D_i3_80141904 == 0)) {
         var_a3 = 0;
         var_t0 = 0;
@@ -973,13 +973,13 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             } else {
                 arg0->unk_1EC = gRacers[var_a3].unk_98 - (temp_fv1 * 0.0002f);
                 if ((gTotalLapCount == arg0->lap) &&
-                    (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
+                    (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
                     arg0->unk_1EC = gRacers[var_a3].unk_98 - (temp_fv1 * 0.002f);
                 }
                 arg0->unk_1E8 = 0.0f;
             }
             if ((gTotalLapCount == arg0->lap) &&
-                (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
+                (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
                 arg0->unk_1E8 = 0.0f;
             }
             arg0->unk_38C = 0;
@@ -1082,7 +1082,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             }
 
             if (((gTotalLapCount == arg0->lap) &&
-                 (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) ||
+                 (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) ||
                 ((gRacers[arg0->unk_352].unk_368 == 0xFE) && (gGameMode != GAMEMODE_PRACTICE) &&
                  (gGameMode != GAMEMODE_DEATH_RACE))) {
                 arg0->unk_352 = 255;
@@ -1095,9 +1095,11 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 func_i3_80116A50(arg0);
             }
 
-            var_fv0 = (D_800F8510->unk_0C * (gTotalLapCount - 1)) / (arg0->unk_398 - arg0->lapTimes[0]);
-            spBC = (((arg0->raceTime - arg0->lapTimes[0]) * var_fv0) + D_800F8510->unk_0C) - arg0->unk_23C;
-            spB4 = ((((arg0->raceTime - arg0->lapTimes[0]) - 0x11) * var_fv0) + D_800F8510->unk_0C) - arg0->unk_23C;
+            var_fv0 = (gCurrentCourseRecordInfo->unk_0C * (gTotalLapCount - 1)) / (arg0->unk_398 - arg0->lapTimes[0]);
+            spBC =
+                (((arg0->raceTime - arg0->lapTimes[0]) * var_fv0) + gCurrentCourseRecordInfo->unk_0C) - arg0->unk_23C;
+            spB4 = ((((arg0->raceTime - arg0->lapTimes[0]) - 0x11) * var_fv0) + gCurrentCourseRecordInfo->unk_0C) -
+                   arg0->unk_23C;
 
             var_fv0 = func_i3_fabsf(D_i3_80141910->unk_23C - arg0->unk_23C);
             arg0->unk_1EC = (spBC * 0.05f) + (spBC - spB4);
@@ -1111,7 +1113,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     }
                 }
             } else if ((var_fv0 < 2000.0f) && (gTotalLapCount == arg0->lap) &&
-                       (((s32) (D_800F8510->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
+                       (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
                 spBC = D_i3_80141910->unk_98 - 2.3148148f;
                 if ((var_fv0 < 0.0f) && (arg0->unk_1EC < spBC)) {
                     arg0->unk_1EC = spBC;
@@ -1119,8 +1121,8 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             }
         } else {
             if (arg0->unk_39C != 0) {
-                spBC = (arg0->raceTime * (D_800F8510->unk_0C / arg0->unk_39C)) - arg0->unk_23C;
-                spB4 = ((arg0->raceTime - 0x11) * (D_800F8510->unk_0C / arg0->unk_39C)) - arg0->unk_23C;
+                spBC = (arg0->raceTime * (gCurrentCourseRecordInfo->unk_0C / arg0->unk_39C)) - arg0->unk_23C;
+                spB4 = ((arg0->raceTime - 0x11) * (gCurrentCourseRecordInfo->unk_0C / arg0->unk_39C)) - arg0->unk_23C;
                 if (arg0->unk_23C > 0.0f) {
                     arg0->unk_1EC = (spBC * 0.05f) + (spBC - spB4);
                     arg0->unk_1E8 = 1.0f;
@@ -1147,12 +1149,12 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         (func_i3_fabsf(D_i3_80141910->unk_33C - sp94) < 138.0f)) {
 
         var_fv0 = D_i3_80141910->unk_23C - arg0->unk_23C;
-        while (var_fv0 > D_800F8510->unk_0C * 0.5f) {
-            var_fv0 -= D_800F8510->unk_0C;
+        while (var_fv0 > gCurrentCourseRecordInfo->unk_0C * 0.5f) {
+            var_fv0 -= gCurrentCourseRecordInfo->unk_0C;
         }
 
-        while (var_fv0 < D_800F8510->unk_0C * -0.5f) {
-            var_fv0 += D_800F8510->unk_0C;
+        while (var_fv0 < gCurrentCourseRecordInfo->unk_0C * -0.5f) {
+            var_fv0 += gCurrentCourseRecordInfo->unk_0C;
         }
 
         if (var_fv0 < 0) {
@@ -1358,7 +1360,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             arg0->unk_35C = arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_FORM_MASK;
             arg0->unk_358 = var_a3;
 
-            if (++var_a3 >= D_800F8510->unk_08) {
+            if (++var_a3 >= gCurrentCourseRecordInfo->unk_08) {
                 var_a3 = 0;
             }
             arg0->unk_34A = D_8010B7B0.landmine[var_a3];
@@ -1429,7 +1431,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                         var_a3 += 2;
                     }
                     var_a1 = var_a3 + 2;
-                    if (var_a1 >= (D_800F8510->unk_08 * 4)) {
+                    if (var_a1 >= (gCurrentCourseRecordInfo->unk_08 * 4)) {
                         var_a1 = 0;
                     }
                     sp7C = D_i3_8013DBE8[var_a3 + 1];

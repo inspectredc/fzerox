@@ -284,7 +284,7 @@ s8 D_i3_80140F40[][3] = {
 };
 
 extern s32 gNumPlayers;
-extern unk_800F8510* D_800F8510;
+extern CourseRecordInfo* gCurrentCourseRecordInfo;
 
 void func_i3_801356A0(void) {
     s32 pad[23];
@@ -299,7 +299,7 @@ void func_i3_801356A0(void) {
     f32 sp90;
     Vec3f sp84;
     Vec3f sp78;
-    unk_800F8510* sp74 = D_800F8510;
+    CourseRecordInfo* sp74 = gCurrentCourseRecordInfo;
 
     if (gNumPlayers == 1) {
         sp90 = 1;
@@ -400,7 +400,7 @@ void func_i3_801356A0(void) {
     }
 }
 
-extern s16 D_800CE4D4;
+extern s16 gSettingVsCom;
 extern Controller gControllers[];
 extern s32 gPlayerControlPorts[];
 extern s8 D_800CD010;
@@ -530,7 +530,7 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
         }
     }
     if ((gGameFrameCount % 16) < 8) {
-        if ((arg1 < arg2) && (D_800CE4D4 == 0)) {
+        if ((arg1 < arg2) && (gSettingVsCom == 0)) {
             return gfx;
         }
 
@@ -579,7 +579,7 @@ void func_i3_801365E0(void) {
     s32 i;
     f32 var_fs0;
     f32 var_fs1;
-    unk_800F8510* temp_v0;
+    CourseRecordInfo* temp_v0;
     unk_80141FF0* var_s0;
     unk_struct_1DC* var_s1;
 
@@ -603,7 +603,7 @@ void func_i3_801365E0(void) {
         func_i3_80136974(var_s1, var_s0, D_i3_80142180.unk_00, var_fs1, var_fs0);
     }
 
-    temp_v0 = &D_802A6B40[gCourseIndex];
+    temp_v0 = &gCourseRecordInfos[gCourseIndex];
     temp_v0->unk_14[0] = D_i3_80142180.unk_04->unk_04;
     temp_v0->unk_14[1] = D_i3_80142180.unk_04->unk_05;
     temp_v0->unk_14[2] = D_i3_80142180.unk_04->unk_06;

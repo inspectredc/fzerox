@@ -43,7 +43,7 @@ s32 func_80074BB4(Vec3f* arg0, f32 arg1) {
     return 0;
 }
 
-extern unk_800F8510* D_800F8510;
+extern CourseRecordInfo* gCurrentCourseRecordInfo;
 
 Mtx3F* func_80074C60(Mtx3F* arg0) {
     f32 sp44;
@@ -51,7 +51,7 @@ Mtx3F* func_80074C60(Mtx3F* arg0) {
     unk_8006FC8C* temp_a0;
     Mtx3F sp18;
 
-    temp_a0 = D_800F8510->unk_10;
+    temp_a0 = gCurrentCourseRecordInfo->unk_10;
     sp44 = func_8009E108(temp_a0, 0.0f, &sp40);
     func_8009E85C(temp_a0, 0.0f, &sp18, sp44);
     *arg0 = sp18;
@@ -60,7 +60,7 @@ Mtx3F* func_80074C60(Mtx3F* arg0) {
 
 extern CourseData D_8010B7B0;
 
-void func_80074CE4(unk_800F8510* arg0) {
+void func_80074CE4(CourseRecordInfo* arg0) {
     s32 pad[4];
     f32 spF4;
     f32 spF0;

@@ -6,7 +6,7 @@
 #include "assets/segment_17B1E0.h"
 
 s8 D_i6_8011FAF0[30];
-unk_801247C0* D_i6_8011FB10;
+SaveContext* sSaveContextPtr;
 u8 D_i6_8011FB18[2][0x2580]; // Some kind of vtx buffer space?
 void* D_i6_80124618;
 s16 D_i6_80124620[176];
@@ -2119,13 +2119,13 @@ void func_i6_8011C050(void) {
     func_i6_8011C404();
     func_80080A40(&D_i6_801247A4);
     func_80080A48();
-    D_i6_8011FB10 = &D_801247C0;
+    sSaveContextPtr = &gSaveContext;
 }
 
-extern s16 D_800CE4D0;
-extern s16 D_800CE4D4;
-extern s32 D_i2_80106F40;
-extern s16 D_80111840;
+extern s16 gSettingVsHandicap;
+extern s16 gSettingVsCom;
+extern s32 gSettingVsSlot;
+extern s16 gSettingSoundMode;
 
 void func_i6_8011C404(void) {
     s32 state;
@@ -2135,30 +2135,30 @@ void func_i6_8011C404(void) {
     for (i = 0, option = gOptionsInfo; i < 7; i++, option++) {
         switch (option->row) {
             case OPTIONS_VS_COM:
-                if (D_800CE4D4 == 0) {
+                if (gSettingVsCom == 0) {
                     state = 1;
                 } else {
                     state = 0;
                 }
                 break;
             case OPTIONS_VS_SLOT:
-                if (D_i2_80106F40 == 0) {
+                if (gSettingVsSlot == 0) {
                     state = 1;
                 } else {
                     state = 0;
                 }
                 break;
             case OPTIONS_VS_HANDICAP:
-                if (D_800CE4D0 == 0) {
+                if (gSettingVsHandicap == 0) {
                     state = 0;
-                } else if (D_800CE4D0 == 1) {
+                } else if (gSettingVsHandicap == 1) {
                     state = 1;
                 } else {
                     state = 2;
                 }
                 break;
             case OPTIONS_SOUND_MODE:
-                if (D_80111840 == 0) {
+                if (gSettingSoundMode == 0) {
                     state = 0;
                 } else {
                     state = 1;
@@ -2204,7 +2204,7 @@ Gfx* func_i6_8011D168(Gfx*, s32, s32);
 
 bool func_i6_8011C788(void) {
     s32 lastRow;
-    s32 temp_t0;
+    s32 lastSelectionState;
     bool updateSettings;
     OptionsInfo* option;
 
@@ -2239,7 +2239,7 @@ bool func_i6_8011C788(void) {
     option = &gOptionsInfo[gOptionsCurrentRow];
     updateSettings = false;
     if (!(option->flags & OPTIONS_REQUIRE_SELECTING)) {
-        temp_t0 = sOptionsSelectionState[gOptionsCurrentRow];
+        lastSelectionState = sOptionsSelectionState[gOptionsCurrentRow];
         if (gInputButtonPressed & BTN_LEFT) {
             sOptionsSelectionState[gOptionsCurrentRow]--;
             if (sOptionsSelectionState[gOptionsCurrentRow] < 0) {
@@ -2252,7 +2252,7 @@ bool func_i6_8011C788(void) {
                 sOptionsSelectionState[gOptionsCurrentRow] = 0;
             }
         }
-        if (temp_t0 != sOptionsSelectionState[gOptionsCurrentRow]) {
+        if (lastSelectionState != sOptionsSelectionState[gOptionsCurrentRow]) {
             updateSettings = true;
             func_800BA8D8(0x21);
         }
@@ -2266,39 +2266,39 @@ bool func_i6_8011C788(void) {
         case OPTIONS_VS_COM:
             if (updateSettings) {
                 if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
-                    D_800CE4D4 = 0;
+                    gSettingVsCom = 0;
                 } else {
-                    D_800CE4D4 = 1;
+                    gSettingVsCom = 1;
                 }
             }
             break;
         case OPTIONS_VS_SLOT:
             if (updateSettings) {
                 if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
-                    D_i2_80106F40 = 0;
+                    gSettingVsSlot = 0;
                 } else {
-                    D_i2_80106F40 = 1;
+                    gSettingVsSlot = 1;
                 }
             }
             break;
         case OPTIONS_VS_HANDICAP:
             if (updateSettings) {
                 if (sOptionsSelectionState[gOptionsCurrentRow] == 0) {
-                    D_800CE4D0 = 0;
+                    gSettingVsHandicap = 0;
                 } else if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
-                    D_800CE4D0 = 1;
+                    gSettingVsHandicap = 1;
                 } else {
-                    D_800CE4D0 = 2;
+                    gSettingVsHandicap = 2;
                 }
             }
             break;
         case OPTIONS_SOUND_MODE:
             if (updateSettings) {
                 if (sOptionsSelectionState[gOptionsCurrentRow] == 0) {
-                    D_80111840 = 0;
+                    gSettingSoundMode = 0;
                     Audio_SetSoundMode(SOUNDMODE_SURROUND); // Option says stereo, but sets surround anyway?
                 } else {
-                    D_80111840 = 1;
+                    gSettingSoundMode = 1;
                     Audio_SetSoundMode(SOUNDMODE_MONO);
                 }
             }
@@ -2358,7 +2358,7 @@ void func_i6_8011CBB4(void) {
         if (gInputButtonPressed & (BTN_A | BTN_START)) {
             updateSettings = true;
             if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
-                func_i2_80101784(D_i6_8011FB10, 1);
+                Save_Init(sSaveContextPtr, 1);
                 func_i6_8011C404();
                 for (i = 0; i < 4; i++) {
                     D_800E5F00[i] = D_800E5F10[i] = 0;

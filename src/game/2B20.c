@@ -139,7 +139,7 @@ void Game_Init(void) {
     D_800CD16C = 1;
 }
 
-extern f32 D_800E5EF0;
+extern f32 gPlayerEngine[];
 extern s32 gCourseIndex;
 
 void func_80068BC0(void) {
@@ -168,7 +168,7 @@ void func_80068BC0(void) {
                     D_800DCE48.gameMode = GAMEMODE_800F;
                     gCourseIndex++;
                 }
-                D_800E5EF0 = 0.5f;
+                gPlayerEngine[0] = 0.5f;
                 break;
             case 5:
                 D_800CD044 = 1;

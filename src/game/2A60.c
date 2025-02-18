@@ -1,7 +1,7 @@
 #include "global.h"
 #include "libultra/ultra64.h"
 #include "audio.h"
-#include "fzxthread.h"
+#include "fzx_thread.h"
 
 extern OSMesgQueue gAudioTaskMesgQueue;
 extern OSMesgQueue gMainThreadMesgQueue;

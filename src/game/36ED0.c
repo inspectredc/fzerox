@@ -2,7 +2,7 @@
 #include "fzx_racer.h"
 #include "fzx_game.h"
 #include "fzx_course.h"
-#include "fzxmath.h"
+#include "fzx_math.h"
 #include "fzx_segmentA.h"
 #include "assets/segment_16C8A0.h"
 
@@ -44,7 +44,7 @@ typedef struct unk_800A8B74_arg_0 {
     s32 unk_0C;
 } unk_800A8B74_arg_0; // size = 0x10
 
-unk_800F8510* D_800F8510;
+CourseRecordInfo* gCurrentCourseRecordInfo;
 s32 gCourseIndex;
 s32 D_800F8518;
 unk_36ED0* D_800F851C;
@@ -443,7 +443,7 @@ void func_8009DB28(unk_8006FC8C*, f32*, f32*);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_8009DB28.s")
 #endif
 
-s32 func_8009DEAC(unk_800F8510* arg0) {
+s32 func_8009DEAC(CourseRecordInfo* arg0) {
     f32 sp4C;
     f32 sp48;
     unk_8006FC8C* var_s0 = arg0->unk_10;
@@ -843,7 +843,7 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
     return 0;
 }
 
-s32 func_8009F334(unk_800F8510* arg0) {
+s32 func_8009F334(CourseRecordInfo* arg0) {
     unk_8006FC8C* var_s0 = arg0->unk_10;
     Mtx3F sp30;
 
@@ -864,7 +864,7 @@ s32 func_8009F334(unk_800F8510* arg0) {
     return 0;
 }
 
-s32 func_8009F3E0(unk_800F8510* arg0) {
+s32 func_8009F3E0(CourseRecordInfo* arg0) {
     s32 var_v1 = 0;
     unk_8006FC8C* var_v0 = arg0->unk_10;
 
@@ -906,7 +906,7 @@ s32 func_8009F3E0(unk_800F8510* arg0) {
     return var_v1;
 }
 
-void func_8009F508(unk_800F8510* arg0) {
+void func_8009F508(CourseRecordInfo* arg0) {
     unk_8006FC8C* var_s1 = arg0->unk_10;
     f32 spD8;
     f32 spD4;
@@ -1061,7 +1061,7 @@ dummy_label:;
     return (sqrtf(SQ_SUM(&sp74)) + sqrtf(SQ_SUM(&sp68))) / 2.0f;
 }
 
-void func_8009FC84(unk_800F8510* arg0) {
+void func_8009FC84(CourseRecordInfo* arg0) {
     unk_8006FC8C* var_s0 = arg0->unk_10;
     Mtx3F sp110;
     Mtx3F spEC;
@@ -1136,7 +1136,7 @@ void func_8009FC84(unk_800F8510* arg0) {
     } while (var_s0 != arg0->unk_10);
 }
 
-void func_800A0010(unk_800F8510* arg0) {
+void func_800A0010(CourseRecordInfo* arg0) {
     unk_8006FC8C* var_v0 = arg0->unk_10;
     unk_8006FC8C* var_v1 = var_v0->prev;
 
@@ -1573,7 +1573,7 @@ s32 func_800A18FC(s32 trackSegmentInfo, f32 arg1) {
 
 extern unk_36ED0 D_802A9FC0[];
 #ifdef NON_EQUIVALENT
-s32 func_800A1954(unk_800F8510* arg0) {
+s32 func_800A1954(CourseRecordInfo* arg0) {
     unk_8006FC8C* sp294;
     f32 sp284;
     f32 sp280;
@@ -1961,7 +1961,7 @@ s32 func_800A1954(unk_800F8510* arg0) {
     return spB4;
 }
 #else
-s32 func_800A1954(unk_800F8510* arg0);
+s32 func_800A1954(CourseRecordInfo* arg0);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_800A1954.s")
 #endif
 
@@ -1994,7 +1994,7 @@ Vtx* func_800A2BDC(Vtx* arg0, Vec3f* arg1, Mtx3F* arg2) {
     return ++arg0;
 }
 
-s32 func_800A2D2C(unk_800F8510* arg0, Vtx* arg1) {
+s32 func_800A2D2C(CourseRecordInfo* arg0, Vtx* arg1) {
     unk_8006FC8C* var_s0;
     f32 spD0;
     f32 var_fs1;
@@ -2144,10 +2144,10 @@ void func_800A3044(void) {
                     break;
             }
 
-            D_800F8510->unk_08 = ((Math_Rand2() & 0x1FFFF) % 5) + var_s4;
-            var_s4 = (D_800F8510->unk_08 * 3) + 1;
-            var_s0 = var_s4 + D_800F8510->unk_10;
-            var_s1 = D_800F8510->unk_10;
+            gCurrentCourseRecordInfo->unk_08 = ((Math_Rand2() & 0x1FFFF) % 5) + var_s4;
+            var_s4 = (gCurrentCourseRecordInfo->unk_08 * 3) + 1;
+            var_s0 = var_s4 + gCurrentCourseRecordInfo->unk_10;
+            var_s1 = gCurrentCourseRecordInfo->unk_10;
             do {
                 var_s0->segmentIndex = var_s4;
                 var_s0->prev = var_s0 - 1;
@@ -2158,21 +2158,22 @@ void func_800A3044(void) {
             } while (var_s4 >= 0);
 
             var_fs4 = D_800CF514 / 131071.0f;
-            spE8 = 4096.0f / D_800F8510->unk_08;
+            spE8 = 4096.0f / gCurrentCourseRecordInfo->unk_08;
             temp_fs5 = D_800CF518 / 131071.0f;
 
-            D_800F8510->unk_08 = (D_800F8510->unk_08 * 3) + 2;
+            gCurrentCourseRecordInfo->unk_08 = (gCurrentCourseRecordInfo->unk_08 * 3) + 2;
 
             do {
-                D_800F8510->unk_08 = (D_800F8510->unk_08 - 2) / 3;
+                gCurrentCourseRecordInfo->unk_08 = (gCurrentCourseRecordInfo->unk_08 - 2) / 3;
 
-                D_800F8510->unk_10[0].prev = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
-                D_800F8510->unk_10[0].prev->next = &D_800F8510->unk_10[0];
+                gCurrentCourseRecordInfo->unk_10[0].prev =
+                    &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
+                gCurrentCourseRecordInfo->unk_10[0].prev->next = &gCurrentCourseRecordInfo->unk_10[0];
                 temp_fs2 = 1.0f / (131071.0f * 5.0f);
 
                 do {
                     var_fs1 = 0.0f;
-                    var_s0 = D_800F8510->unk_10[0].prev;
+                    var_s0 = gCurrentCourseRecordInfo->unk_10[0].prev;
 
                     do {
 
@@ -2185,11 +2186,11 @@ void func_800A3044(void) {
 
                         var_s0--;
                         var_fs1 += 1.0f;
-                    } while (var_s0 >= D_800F8510->unk_10);
-                } while (func_8009DEAC(D_800F8510) != 0);
+                    } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
+                } while (func_8009DEAC(gCurrentCourseRecordInfo) != 0);
 
                 var_s1_2 = D_8010B7B0.controlPoint;
-                var_s0 = D_800F8510->unk_10;
+                var_s0 = gCurrentCourseRecordInfo->unk_10;
 
                 do {
                     func_8009E6F0(var_s0, 0.333333f, &spCC);
@@ -2201,7 +2202,7 @@ void func_800A3044(void) {
                     var_s1_2++;
                     var_s1_2->pos = var_s0->pos;
                     var_s1_2++;
-                } while (var_s0 != D_800F8510->unk_10);
+                } while (var_s0 != gCurrentCourseRecordInfo->unk_10);
 
                 var_s1_2 -= 3;
                 var_fs1 = 0.0f;
@@ -2231,7 +2232,7 @@ void func_800A3044(void) {
                 temp_fs3 = (var_s0_4->pos.z - spB0->pos.z) * temp_fv1;
 
                 if (temp_fv0 < 5000.0f) {
-                    var_s1_2 = &D_8010B7B0.controlPoint[D_800F8510->unk_08 * 3 - 1];
+                    var_s1_2 = &D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 * 3 - 1];
                     temp_fv1 = 3.1496062f - (temp_fv0 / 1587.5f);
 
                     do {
@@ -2247,20 +2248,21 @@ void func_800A3044(void) {
                     spCC.y -= (temp_fv1 * temp_ft5) * 0.5f;
                     spCC.z -= (temp_fv1 * temp_fs3) * 0.5f;
                 }
-                D_800F8510->unk_08 = (D_800F8510->unk_08 * 3) + 2;
+                gCurrentCourseRecordInfo->unk_08 = (gCurrentCourseRecordInfo->unk_08 * 3) + 2;
 
-                D_800F8510->unk_10[0].prev->next = D_800F8510->unk_10[0].prev + 1;
-                D_800F8510->unk_10[0].prev = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
-                D_800F8510->unk_10[0].prev->next = &D_800F8510->unk_10[0];
+                gCurrentCourseRecordInfo->unk_10[0].prev->next = gCurrentCourseRecordInfo->unk_10[0].prev + 1;
+                gCurrentCourseRecordInfo->unk_10[0].prev =
+                    &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
+                gCurrentCourseRecordInfo->unk_10[0].prev->next = &gCurrentCourseRecordInfo->unk_10[0];
 
                 var_s1_2 = spB0;
-                var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+                var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
 
                 do {
                     var_s0->pos = var_s1_2->pos;
                     var_s0--;
                     if (--var_s1_2 < D_8010B7B0.controlPoint) {
-                        var_s1_2 = &D_8010B7B0.controlPoint[D_800F8510->unk_08 - 3];
+                        var_s1_2 = &D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 3];
                     }
                 } while (var_s1_2 != spB0);
 
@@ -2271,9 +2273,9 @@ void func_800A3044(void) {
                 var_s0->pos.x = spCC.x - temp_fs2;
                 var_s0->pos.y = spCC.y - temp_ft5;
                 var_s0->pos.z = spCC.z - temp_fs3;
-            } while (func_8009DEAC(D_800F8510) != 0);
+            } while (func_8009DEAC(gCurrentCourseRecordInfo) != 0);
 
-            var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+            var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
 
             do {
                 var_s1 = var_s0->next;
@@ -2282,15 +2284,15 @@ void func_800A3044(void) {
                     break;
                 }
                 var_s0--;
-            } while (var_s0 >= D_800F8510->unk_10);
+            } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
 
-            if (var_s0 >= D_800F8510->unk_10) {
+            if (var_s0 >= gCurrentCourseRecordInfo->unk_10) {
                 goto loop_start;
             }
 
             spE8 = 0.0f;
             var_fs4 = 5000.0f;
-            var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+            var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
 
             do {
                 if (var_s0->pos.y < var_fs4) {
@@ -2300,19 +2302,19 @@ void func_800A3044(void) {
                     spE8 = var_s0->pos.y;
                 }
                 var_s0--;
-            } while (var_s0 >= D_800F8510->unk_10);
+            } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
 
-            var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+            var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
 
             do {
                 var_s0->pos.y += (0 - var_fs4) + ((spE8 - var_fs4) * 0.5f);
                 var_s0--;
-            } while (var_s0 >= D_800F8510->unk_10);
+            } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
 
             sp104 = Math_Rand1() % 2;
             switch (sp108) {
                 case 0:
-                    var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+                    var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
                     do {
                         var_s1 = var_s0->next;
                         var_s2 = var_s0->prev;
@@ -2341,16 +2343,19 @@ void func_800A3044(void) {
                         var_s2->radiusLeft = ((0.5f - (SQ(var_fs0) * var_fs0 * 0.5f)) * var_fs1) + 100.0f;
                         var_s2->radiusRight = (((SQ(var_fs0) * var_fs0 * 0.5f) + 0.5f) * var_fs1) + 100.0f;
 
-                    } while (var_s0 >= D_800F8510->unk_10);
+                    } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
 
-                    D_800F8510->unk_10[0].radiusLeft = D_800F8510->unk_10[0].radiusRight =
-                        D_800F8510->unk_10[1].radiusLeft = D_800F8510->unk_10[1].radiusRight =
-                            (D_800F8510->unk_10[0].radiusLeft + D_800F8510->unk_10[0].radiusRight +
-                             D_800F8510->unk_10[1].radiusLeft + D_800F8510->unk_10[1].radiusRight) /
-                            4.0f;
+                    gCurrentCourseRecordInfo->unk_10[0].radiusLeft = gCurrentCourseRecordInfo->unk_10[0].radiusRight =
+                        gCurrentCourseRecordInfo->unk_10[1].radiusLeft =
+                            gCurrentCourseRecordInfo->unk_10[1].radiusRight =
+                                (gCurrentCourseRecordInfo->unk_10[0].radiusLeft +
+                                 gCurrentCourseRecordInfo->unk_10[0].radiusRight +
+                                 gCurrentCourseRecordInfo->unk_10[1].radiusLeft +
+                                 gCurrentCourseRecordInfo->unk_10[1].radiusRight) /
+                                4.0f;
                     break;
                 case 3:
-                    var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+                    var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
                     do {
                         var_s1 = var_s0->next;
                         var_s2 = var_s0->prev;
@@ -2375,23 +2380,26 @@ void func_800A3044(void) {
                         var_s0--;
                         var_s2->radiusLeft = var_s2->radiusRight = (SQ(var_fs0) * 50.0f) + 200.0f;
 
-                    } while (var_s0 >= D_800F8510->unk_10);
-                    D_800F8510->unk_10[0].radiusLeft = D_800F8510->unk_10[0].radiusRight =
-                        D_800F8510->unk_10[1].radiusLeft = D_800F8510->unk_10[1].radiusRight =
-                            (D_800F8510->unk_10[0].radiusLeft + D_800F8510->unk_10[1].radiusLeft) * 0.5f;
+                    } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
+                    gCurrentCourseRecordInfo->unk_10[0].radiusLeft = gCurrentCourseRecordInfo->unk_10[0].radiusRight =
+                        gCurrentCourseRecordInfo->unk_10[1].radiusLeft =
+                            gCurrentCourseRecordInfo->unk_10[1].radiusRight =
+                                (gCurrentCourseRecordInfo->unk_10[0].radiusLeft +
+                                 gCurrentCourseRecordInfo->unk_10[1].radiusLeft) *
+                                0.5f;
                     break;
                 default:
-                    var_s0 = &D_800F8510->unk_10[D_800F8510->unk_08 - 1];
+                    var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
                     do {
                         var_s0->radiusRight = 250.0f;
                         var_s0->radiusLeft = 250.0f;
                         var_s0--;
-                    } while (var_s0 >= D_800F8510->unk_10);
+                    } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
                     break;
             }
 
             D_8010B7B0.creatorId = CREATOR_NINTENDO;
-            D_8010B7B0.controlPointCount = D_800F8510->unk_08;
+            D_8010B7B0.controlPointCount = gCurrentCourseRecordInfo->unk_08;
             D_8010B7B0.venue = (Math_Rand2() & 0x1FFFF) % 10;
             D_8010B7B0.skybox = (Math_Rand1() & 0x1FFFF) % 8;
             D_8010B7B0.flag = 1;
@@ -2413,9 +2421,9 @@ void func_800A3044(void) {
             var_s6 = 0;
             var_s4 = D_8010B7B0.controlPointCount - 1;
             if (sp104 != 0) {
-                var_s0 = D_800F8510->unk_10[0].prev;
+                var_s0 = gCurrentCourseRecordInfo->unk_10[0].prev;
             } else {
-                var_s0 = D_800F8510->unk_10[1].next;
+                var_s0 = gCurrentCourseRecordInfo->unk_10[1].next;
             }
 
             do {
@@ -2453,9 +2461,9 @@ void func_800A3044(void) {
                 TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_START_LINE;
             D_8010B7B0.gate[1] = GATE_START;
             D_8010B7B0.controlPoint[1].trackSegmentInfo =
-                D_8010B7B0.controlPoint[D_800F8510->unk_08 - 1].trackSegmentInfo = spB4[1];
+                D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 1].trackSegmentInfo = spB4[1];
             D_8010B7B0.controlPoint[3].trackSegmentInfo =
-                D_8010B7B0.controlPoint[D_800F8510->unk_08 - 3].trackSegmentInfo = spB4[0];
+                D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 3].trackSegmentInfo = spB4[0];
 
             if (((sp108 == 0) || (sp108 == 3)) && ((Math_Rand1() & 0x1FFFF) >= 0x8000)) {
                 temp_a0 = Math_Rand2() & 3;
@@ -2466,7 +2474,7 @@ void func_800A3044(void) {
                     var_s6 = 1;
                 }
 
-                var_s4 = D_800F8510->unk_08 - 4;
+                var_s4 = gCurrentCourseRecordInfo->unk_08 - 4;
 
                 do {
                     var_s3 = &D_8010B7B0.controlPoint[var_s4];
@@ -2507,7 +2515,7 @@ void func_800A3044(void) {
 
             if (sp108 == 0) {
                 if (1) {}
-                var_s1_2 = &D_8010B7B0.controlPoint[D_800F8510->unk_08 - 4];
+                var_s1_2 = &D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 4];
                 do {
                     var_s0_4 = var_s1_2 + 1;
                     if (((Math_Rand1() & 0x1FFFF) < 0x1112) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000)) {
@@ -2519,7 +2527,7 @@ void func_800A3044(void) {
                     var_s1_2 -= 3;
                 } while (var_s1_2 >= &D_8010B7B0.controlPoint[4]);
 
-                var_s1_2 = &D_8010B7B0.controlPoint[D_800F8510->unk_08 - 3];
+                var_s1_2 = &D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 3];
                 do {
                     var_s0_4 = var_s1_2 + 1;
                     if (((Math_Rand1() & 0x1FFFF) < 0x1112) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000)) {
@@ -2532,8 +2540,12 @@ void func_800A3044(void) {
                 } while (var_s1_2 >= &D_8010B7B0.controlPoint[2]);
 
                 if ((Math_Rand2() & 0x1FFFF) < 0xFFFF) {
-                    var_s1_2 = &D_8010B7B0.controlPoint[((Math_Rand1() & 0x1FFFF) % (D_800F8510->unk_08 - 1)) + 1];
-                    var_s0_4 = &D_8010B7B0.controlPoint[((Math_Rand2() & 0x1FFFF) % (D_800F8510->unk_08 - 1)) + 1];
+                    var_s1_2 =
+                        &D_8010B7B0
+                             .controlPoint[((Math_Rand1() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 1)) + 1];
+                    var_s0_4 =
+                        &D_8010B7B0
+                             .controlPoint[((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 1)) + 1];
                     if ((var_s1_2 < var_s0_4) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000) &&
                         ((var_s0_4 + 1)->trackSegmentInfo & 0x10000000)) {
                         var_s6 = Math_Rand1() & 3;
@@ -2554,7 +2566,8 @@ void func_800A3044(void) {
                 }
 
                 // Ensure there are pit zones
-                D_8010B7B0.pit[D_800F8510->unk_08 - 3] = D_8010B7B0.pit[D_800F8510->unk_08 - 4] = PIT_BOTH;
+                D_8010B7B0.pit[gCurrentCourseRecordInfo->unk_08 - 3] =
+                    D_8010B7B0.pit[gCurrentCourseRecordInfo->unk_08 - 4] = PIT_BOTH;
             } else {
                 if (sp108 == 1) { // PIPE
                     spB4 = D_800CFA10;
@@ -2566,7 +2579,7 @@ void func_800A3044(void) {
                 var_s6 = Math_Rand2() & 3;
                 temp_s3 = ((Math_Rand1() & 0x1FFFF) % 3) + 1;
                 var_s1_2 = &D_8010B7B0.controlPoint[2];
-                var_s0_4 = &D_8010B7B0.controlPoint[D_800F8510->unk_08 - 5];
+                var_s0_4 = &D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 5];
 
                 var_s4 = 4;
                 do {
@@ -2592,23 +2605,30 @@ void func_800A3044(void) {
                         var_s1_2->trackSegmentInfo = temp_s2;
                     }
                     var_s6 = (var_s6 + temp_s3) & 3;
-                    var_s1_2 = &D_8010B7B0.controlPoint[((Math_Rand1() & 0x1FFFF) % (D_800F8510->unk_08 - 6)) + 2];
-                    var_s0_4 = &D_8010B7B0.controlPoint[((Math_Rand2() & 0x1FFFF) % (D_800F8510->unk_08 - 6)) + 2];
+                    var_s1_2 =
+                        &D_8010B7B0
+                             .controlPoint[((Math_Rand1() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 6)) + 2];
+                    var_s0_4 =
+                        &D_8010B7B0
+                             .controlPoint[((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 6)) + 2];
                     var_s4--;
                 } while (var_s4 > 0);
                 // Ensure there are pit zones
-                D_8010B7B0.pit[D_800F8510->unk_08 - 1] = D_8010B7B0.pit[D_800F8510->unk_08 - 2] = PIT_BOTH;
+                D_8010B7B0.pit[gCurrentCourseRecordInfo->unk_08 - 1] =
+                    D_8010B7B0.pit[gCurrentCourseRecordInfo->unk_08 - 2] = PIT_BOTH;
             }
             temp_s3 = Math_Rand1() & 7;
             while (temp_s3 != 0) {
                 do {
-                    var_s4 = ((Math_Rand2() & 0x1FFFF) % (D_800F8510->unk_08 - 6)) + 2;
+                    var_s4 = ((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 6)) + 2;
                     if (D_8010B7B0.controlPoint[var_s4].trackSegmentInfo & 0x08000000) {
                         break;
                     }
-                } while (D_8010B7B0.controlPoint[((var_s4 + D_800F8510->unk_08) - 1) % D_800F8510->unk_08]
+                } while (D_8010B7B0
+                             .controlPoint[((var_s4 + gCurrentCourseRecordInfo->unk_08) - 1) %
+                                           gCurrentCourseRecordInfo->unk_08]
                              .trackSegmentInfo !=
-                         D_8010B7B0.controlPoint[(var_s4 + 1) % D_800F8510->unk_08].trackSegmentInfo);
+                         D_8010B7B0.controlPoint[(var_s4 + 1) % gCurrentCourseRecordInfo->unk_08].trackSegmentInfo);
 
                 D_8010B7B0.dash[var_s4] = (Math_Rand1() & 0x1FFFF) % 3;
                 temp_s3--;
@@ -2617,7 +2637,7 @@ void func_800A3044(void) {
 
             temp_s3 = (Math_Rand2() & 7) - 1;
             while (temp_s3 >= 0) {
-                var_s4 = ((Math_Rand2() & 0x1FFFF) % (D_800F8510->unk_08 - 2)) + 2;
+                var_s4 = ((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 2)) + 2;
                 temp_s2 = D_8010B7B0.controlPoint[var_s4].trackSegmentInfo & TRACK_SHAPE_MASK;
                 if ((temp_s2 == TRACK_SHAPE_ROAD) || (temp_s2 == TRACK_SHAPE_BORDERLESS_ROAD)) {
                     temp_s2 = D_8010B7B0.controlPoint[var_s4 - 1].trackSegmentInfo & TRACK_SHAPE_MASK;
@@ -2632,16 +2652,16 @@ void func_800A3044(void) {
                 temp_s3--;
             }
             func_80074428(gCourseIndex);
-            func_8009F508(D_800F8510);
-        } while (func_8009F3E0(D_800F8510) != 0);
-    } while (func_800A1954(D_800F8510) != 0);
+            func_8009F508(gCurrentCourseRecordInfo);
+        } while (func_8009F3E0(gCurrentCourseRecordInfo) != 0);
+    } while (func_800A1954(gCurrentCourseRecordInfo) != 0);
 
     for (temp_s3 = 0; temp_s3 < 5; temp_s3++) {
-        D_800F8510->timeRecord[temp_s3] = 600000 - 1;
+        gCurrentCourseRecordInfo->timeRecord[temp_s3] = 600000 - 1;
     }
 
-    D_800F8510->unk_C0 = 0.0f;
-    D_800F8510->unk_D8 = 600000 - 1;
+    gCurrentCourseRecordInfo->maxSpeed = 0.0f;
+    gCurrentCourseRecordInfo->bestTime = 600000 - 1;
 }
 
 extern unk_8006FC8C D_802C2020[];
@@ -2649,9 +2669,9 @@ extern unk_8006FC8C D_802C2020[];
 void func_800A4B54(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_802A6B40); i++) {
-        D_802A6B40[i].unk_04 = i;
-        D_802A6B40[i].unk_10 = D_802C2020;
+    for (i = 0; i < ARRAY_COUNT(gCourseRecordInfos); i++) {
+        gCourseRecordInfos[i].unk_04 = i;
+        gCourseRecordInfos[i].unk_10 = D_802C2020;
     }
 }
 
@@ -2728,18 +2748,18 @@ s32 Course_CalculateChecksum(void);
 
 void func_800A4DF0(void) {
 
-    D_800F8510 = &D_802A6B40[gCourseIndex];
+    gCurrentCourseRecordInfo = &gCourseRecordInfos[gCourseIndex];
     func_8007402C(gCourseIndex);
     func_800747EC(D_8010B7B0.venue);
     func_8009CED0(D_8010B7B0.venue);
-    func_80074634(D_800F8510);
-    func_8009DEAC(D_800F8510);
-    if (D_800F8510->unk_04 >= 24) {
-        D_800F8510->unk_00 = 24;
+    func_80074634(gCurrentCourseRecordInfo);
+    func_8009DEAC(gCurrentCourseRecordInfo);
+    if (gCurrentCourseRecordInfo->unk_04 >= 24) {
+        gCurrentCourseRecordInfo->encodedCourseIndex = 24;
     } else {
-        D_800F8510->unk_00 = D_800F8510->unk_04;
+        gCurrentCourseRecordInfo->encodedCourseIndex = gCurrentCourseRecordInfo->unk_04;
     }
-    D_800F8510->unk_00 |= Course_CalculateChecksum() << 5;
+    gCurrentCourseRecordInfo->encodedCourseIndex |= Course_CalculateChecksum() << 5;
 }
 
 extern s32 gNumPlayers;
@@ -2747,8 +2767,8 @@ extern s32 gNumPlayers;
 void func_800A4EAC(void) {
     unk_8006FC8C* var_v0;
 
-    if (gCourseIndex >= ARRAY_COUNT(D_802A6B40)) {
-        gCourseIndex = ARRAY_COUNT(D_802A6B40) - 1;
+    if (gCourseIndex >= ARRAY_COUNT(gCourseRecordInfos)) {
+        gCourseIndex = ARRAY_COUNT(gCourseRecordInfos) - 1;
     }
     if (gNumPlayers >= 3) {
         func_800A4D0C(2);
@@ -2757,14 +2777,14 @@ void func_800A4EAC(void) {
     }
     func_800A4DF0();
     func_80073A04();
-    func_8009F508(D_800F8510);
+    func_8009F508(gCurrentCourseRecordInfo);
     func_800741DC(gCourseIndex);
-    func_8009F3E0(D_800F8510);
-    func_800A0010(D_800F8510);
-    func_8009FC84(D_800F8510);
-    func_800A1954(D_800F8510);
+    func_8009F3E0(gCurrentCourseRecordInfo);
+    func_800A0010(gCurrentCourseRecordInfo);
+    func_8009FC84(gCurrentCourseRecordInfo);
+    func_800A1954(gCurrentCourseRecordInfo);
     D_800CF524 = 900.0f;
-    var_v0 = D_800F8510->unk_10;
+    var_v0 = gCurrentCourseRecordInfo->unk_10;
     do {
 
         if (D_800CF524 < var_v0->radiusLeft) {
@@ -2775,7 +2795,7 @@ void func_800A4EAC(void) {
             D_800CF524 = var_v0->radiusRight;
         }
         var_v0 = var_v0->next;
-    } while (var_v0 != D_800F8510->unk_10);
+    } while (var_v0 != gCurrentCourseRecordInfo->unk_10);
     D_800CF524 += 100.0f;
     D_800CF520 = D_800CF524 + 4500.0f;
     D_800F894C += D_800CF524 - 1000.0f;
@@ -3997,18 +4017,24 @@ Gfx* func_800A9938(Gfx* gfx, s32 arg1) {
         } else if (temp_ra->unk_0C.unk_04 < temp_a2->unk_68) {
             var_fv1 = temp_ra->unk_0C.unk_08 / temp_a2->unk_70;
         } else {
-            var_a0 = D_800F8510->unk_14[0] >> 2;
-            var_t0 = D_800F8510->unk_14[1] >> 2;
-            var_a2 = D_800F8510->unk_14[2] >> 2;
+            var_a0 = gCurrentCourseRecordInfo->unk_14[0] >> 2;
+            var_t0 = gCurrentCourseRecordInfo->unk_14[1] >> 2;
+            var_a2 = gCurrentCourseRecordInfo->unk_14[2] >> 2;
             goto block_68;
         }
-        var_a0 = D_800F8510->unk_14[0] + Math_Round(((D_800F8510->unk_14[0] >> 2) - D_800F8510->unk_14[0]) * var_fv1);
-        var_t0 = D_800F8510->unk_14[1] + Math_Round(((D_800F8510->unk_14[1] >> 2) - D_800F8510->unk_14[1]) * var_fv1);
-        var_a2 = D_800F8510->unk_14[2] + Math_Round(((D_800F8510->unk_14[2] >> 2) - D_800F8510->unk_14[2]) * var_fv1);
+        var_a0 =
+            gCurrentCourseRecordInfo->unk_14[0] +
+            Math_Round(((gCurrentCourseRecordInfo->unk_14[0] >> 2) - gCurrentCourseRecordInfo->unk_14[0]) * var_fv1);
+        var_t0 =
+            gCurrentCourseRecordInfo->unk_14[1] +
+            Math_Round(((gCurrentCourseRecordInfo->unk_14[1] >> 2) - gCurrentCourseRecordInfo->unk_14[1]) * var_fv1);
+        var_a2 =
+            gCurrentCourseRecordInfo->unk_14[2] +
+            Math_Round(((gCurrentCourseRecordInfo->unk_14[2] >> 2) - gCurrentCourseRecordInfo->unk_14[2]) * var_fv1);
     } else {
-        var_a0 = D_800F8510->unk_14[0];
-        var_t0 = D_800F8510->unk_14[1];
-        var_a2 = D_800F8510->unk_14[2];
+        var_a0 = gCurrentCourseRecordInfo->unk_14[0];
+        var_t0 = gCurrentCourseRecordInfo->unk_14[1];
+        var_a2 = gCurrentCourseRecordInfo->unk_14[2];
     }
 block_68:
 

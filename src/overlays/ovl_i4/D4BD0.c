@@ -379,7 +379,7 @@ unk_80077D50 sMachineAccelerationMaxSpeedSmallCompTexInfo[] = {
     { 18, aMachineAccelerationMaxSpeedSmallTex, 80, 40, 0x33E }, { 0 }
 };
 unk_80077D50 sMachineBodyBoostGripSmallCompTexInfo[] = { { 17, aMachineBodyBoostGripSmallTex, 80, 40, 0x35E }, { 0 } };
-unk_80077D50 sAccelerationSpeedSliderCompTexInfo[] = { { 17, aAccelerationSpeedSliderTex, 16, 16, 0x066 }, { 0 } };
+unk_80077D50 sEngineSliderCompTexInfo[] = { { 17, aEngineSliderTex, 16, 16, 0x066 }, { 0 } };
 unk_80077D50 sNoviceJackTrophyCompTexInfo[] = { { 17, aNoviceJackTrophyTex, 16, 16, 0x092 }, { 0 } };
 unk_80077D50 sNoviceQueenTrophyCompTexInfo[] = { { 17, aNoviceQueenTrophyTex, 16, 16, 0x093 }, { 0 } };
 unk_80077D50 sNoviceKingTrophyCompTexInfo[] = { { 17, aNoviceKingTrophyTex, 16, 16, 0x098 }, { 0 } };
@@ -494,7 +494,7 @@ extern s16 D_800CCFE8;
 extern s32 D_800CD380;
 extern s8 D_800CD3A8[];
 extern s32 D_800CD3B0;
-extern s8 D_800CD3C8;
+extern s8 gSettingEverythingUnlocked;
 extern f32 D_800CE748;
 extern f32 D_800CE74C;
 extern f32 D_800CE750;
@@ -516,11 +516,11 @@ void func_i4_80115DF0(void) {
         D_i4_8011D780[i] = func_8007E11C(gRacers[i].character);
     }
     D_i4_8011D774 = ((func_8007E008() / 3) * 6) + 6;
-    if (D_800CD3C8 != 0) {
-        D_i4_8011D774 = 0x1E;
+    if (gSettingEverythingUnlocked != 0) {
+        D_i4_8011D774 = 30;
     }
-    if (D_i4_8011D774 >= 0x1F) {
-        D_i4_8011D774 = 0x1E;
+    if (D_i4_8011D774 > 30) {
+        D_i4_8011D774 = 30;
     }
     func_800794B0(5, 0, 0, 1);
     func_800794B0(0x1E, 0, 0, 4);
@@ -565,8 +565,8 @@ void func_i4_80115DF0(void) {
 extern s32 D_800CD3B4;
 extern s32 gGameMode;
 extern s32 gCourseIndex;
-extern f32 D_800E40F0[];
-extern f32 D_800E5EF0[];
+extern f32 gCharacterLastEngine[];
+extern f32 gPlayerEngine[];
 
 void func_i4_801160D8(void) {
     s32 i;
@@ -579,13 +579,13 @@ void func_i4_801160D8(void) {
     for (i = 0; i < 4; i++) {
         D_800CD3A8[i] = 0;
         if (gGameMode != GAMEMODE_4012) {
-            D_800E5EF0[i] = 0.5f;
+            gPlayerEngine[i] = 0.5f;
         }
     }
 
     if ((gNumPlayers == 1) && (gCourseIndex < 24)) {
         func_i2_80100C18(gCourseIndex);
-        D_800E5EF0[0] = D_800E40F0[gRacers[0].character];
+        gPlayerEngine[0] = gCharacterLastEngine[gRacers[0].character];
     }
 
     func_800794B0(5, 0, 0, 1);
@@ -697,7 +697,7 @@ s32 func_i4_8011631C(void) {
                 if (temp_v0_2 != D_i4_8011D780[i]) {
                     func_800BA710(i, 0x1E);
                     D_800CD3AC[i] = 1;
-                    D_800E5EF0[i] = 0.5f;
+                    gPlayerEngine[i] = 0.5f;
                 }
 
                 if (gInputButtonPressed & BTN_B) {
@@ -806,7 +806,7 @@ s32 func_i4_801168D4(void) {
                         func_800BA710(i, 0x1E);
                     }
                     var_v0 = temp_s1->stickX;
-                    temp_fa0 = D_800E5EF0[i];
+                    temp_fa0 = gPlayerEngine[i];
                     temp_fv0 = (f32) var_v0 * 0.003;
                     var_fa1 = SQ(temp_fv0);
                     if (var_fa1 < 0.001) {
@@ -819,21 +819,21 @@ s32 func_i4_801168D4(void) {
                         }
                     }
                     if (var_v0 < 0) {
-                        D_800E5EF0[i] -= var_fa1;
-                        if (D_800E5EF0[i] < 0.0) {
-                            D_800E5EF0[i] = 0.0f;
+                        gPlayerEngine[i] -= var_fa1;
+                        if (gPlayerEngine[i] < 0.0) {
+                            gPlayerEngine[i] = 0.0f;
                         }
                     } else {
-                        D_800E5EF0[i] += var_fa1;
-                        if (D_800E5EF0[i] > 1.0) {
-                            D_800E5EF0[i] = 1.0f;
+                        gPlayerEngine[i] += var_fa1;
+                        if (gPlayerEngine[i] > 1.0) {
+                            gPlayerEngine[i] = 1.0f;
                         }
                     }
-                    if ((s32) (temp_fa0 / 0.1f) != (s32) (D_800E5EF0[i] / 0.1f)) {
+                    if ((s32) (temp_fa0 / 0.1f) != (s32) (gPlayerEngine[i] / 0.1f)) {
                         func_800BA710(i, 0x16);
                     }
                     if (gNumPlayers == 1) {
-                        D_800E40F0[gRacers[0].character] = D_800E5EF0[0];
+                        gCharacterLastEngine[gRacers[0].character] = gPlayerEngine[0];
                     }
                 }
                 if (gInputButtonPressed & BTN_B) {
@@ -1071,7 +1071,7 @@ void func_i4_8011770C(unk_800E3A28* arg0) {
 }
 
 void func_i4_8011774C(void) {
-    func_80077D50(sAccelerationSpeedSliderCompTexInfo, 0);
+    func_80077D50(sEngineSliderCompTexInfo, 0);
 }
 
 void func_i4_80117774(unk_800E3A28* arg0) {
@@ -1515,8 +1515,8 @@ Gfx* func_i4_801194F8(Gfx* gfx, unk_800E3A28* arg1) {
 Gfx* func_i4_80119574(Gfx* gfx, unk_800E3A28* arg1) {
     s32 i;
     s32 temp_v1;
-    s32 temp;
-    s32 temp2;
+    s32 left;
+    s32 top;
 
     if (gNumPlayers == 1) {
         switch (D_800CD3B4) {
@@ -1531,8 +1531,8 @@ Gfx* func_i4_80119574(Gfx* gfx, unk_800E3A28* arg1) {
                 break;
         }
 
-        gfx = func_80078EA0(gfx, sAccelerationSpeedSliderCompTexInfo, (s32) (D_800E5EF0[0] * 128.0f) + 0x98, 0x54, 1, 0,
-                            0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sEngineSliderCompTexInfo, (s32) (gPlayerEngine[0] * 128.0f) + 0x98, 0x54, 1, 0, 0,
+                            1.0f, 1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             temp_v1 = 1;
@@ -1548,9 +1548,9 @@ Gfx* func_i4_80119574(Gfx* gfx, unk_800E3A28* arg1) {
                     break;
             }
 
-            temp2 = D_i4_8011D6C4[i * 2 + 1] + 0x2E;
-            temp = D_i4_8011D6C4[i * 2 + 0] + (s32) (D_800E5EF0[i] * 80.0f) + 0x23;
-            gfx = func_80078EA0(gfx, sAccelerationSpeedSliderCompTexInfo, temp, temp2, temp_v1, 0, 0, 1.0f, 1.0f);
+            top = D_i4_8011D6C4[i * 2 + 1] + 0x2E;
+            left = D_i4_8011D6C4[i * 2 + 0] + (s32) (gPlayerEngine[i] * 80.0f) + 0x23;
+            gfx = func_80078EA0(gfx, sEngineSliderCompTexInfo, left, top, temp_v1, 0, 0, 1.0f, 1.0f);
         }
     }
     return gfx;
@@ -1567,7 +1567,7 @@ Gfx* func_i4_801197A0(Gfx* gfx) {
 
 extern s32 gDifficulty;
 extern s8 D_800CD3C0;
-extern s8 D_800CD3C8;
+extern s8 gSettingEverythingUnlocked;
 
 Gfx* func_i4_80119834(Gfx* gfx, unk_800E3A28* arg1) {
     s32 i;
@@ -1585,7 +1585,7 @@ Gfx* func_i4_80119834(Gfx* gfx, unk_800E3A28* arg1) {
         case 3:
             break;
         default:
-            if (((D_800CD3C0 >= 2) || (D_800CD3C8 != 0)) && (gSharedController.buttonCurrent & 8)) {
+            if (((D_800CD3C0 >= 2) || (gSettingEverythingUnlocked != 0)) && (gSharedController.buttonCurrent & 8)) {
                 difficulty = MASTER + 1;
             }
             if (gSharedController.buttonCurrent & 1) {
@@ -1606,7 +1606,7 @@ Gfx* func_i4_80119834(Gfx* gfx, unk_800E3A28* arg1) {
         difficulty = gDifficulty - D_800DCE48.unk_10;
     }
 
-    if ((D_800CD3C0 >= 2) || (D_800CD3C8 != 0)) {
+    if ((D_800CD3C0 >= 2) || (gSettingEverythingUnlocked != 0)) {
         var_t0 = 5;
     } else {
         if (D_800CD3C0 > 0) {

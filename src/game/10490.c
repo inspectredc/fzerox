@@ -1,5 +1,5 @@
 #include "global.h"
-#include "fzxthread.h"
+#include "fzx_thread.h"
 #include "fzx_game.h"
 #include "fzx_course.h"
 #include "segment_symbols.h"

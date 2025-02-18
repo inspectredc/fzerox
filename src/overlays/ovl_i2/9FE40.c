@@ -1,6 +1,6 @@
 #include "global.h"
 
-s32 D_i2_80106F40 = 0;
+s32 gSettingVsSlot = 0;
 s32 D_80106F44 = 0;
 s16 D_80106F48 = 0;
 

@@ -3,6 +3,7 @@
 #include "fzx_racer.h"
 #include "fzx_game.h"
 #include "fzx_course.h"
+#include "fzx_save.h"
 #include "unk_gfx.h"
 #include "assets/segment_16C8A0.h"
 #include "assets/segment_17B960.h"
@@ -36,7 +37,7 @@ Vtx* D_800E5ED0;
 s16 gPlayerLives[4];
 s16 D_800E5EE0[4];
 s16 D_800E5EE8[4];
-f32 D_800E5EF0[4];
+f32 gPlayerEngine[4];
 s32 D_800E5F00[4];
 s32 D_800E5F10[4];
 s32 D_800E5F20[4];
@@ -66,13 +67,13 @@ s16 D_800E5FE6;
 Vec3s* D_800E5FE8;
 Vec3s* D_800E5FEC;
 s32 D_800E5FF0;
-unk_800E5FF8 D_800E5FF8[3];
-unk_800E5FF8* D_800F1E78;
-s8 D_800F1E80[0x3F48];
-s32 D_800F5DC8;
-s32 D_800F5DCC;
+Ghost gGhosts[3];
+Ghost* D_800F1E78;
+s8 sGhostReplayRecordingBuffer[16200];
+s32 sGhostReplayRecordingSize;
+s32 sGhostReplayRecordingEnd;
 s32 D_800F5DD0;
-s8* D_800F5DD4;
+s8* sGhostReplayRecordingPtr;
 s32 D_800F5DD8;
 s32 D_800F5DDC;
 s32 D_800F5DE0;
@@ -466,8 +467,9 @@ u8 D_800CE3D0[] = {
     0xAA, 0x8C, 0x6E, 0x50, 0x32, 0x14, 0x00, 0x00, 0x00,
 };
 
-s16 D_800CE4D0 = 0;
-s16 D_800CE4D4 = 1;
+s16 gSettingVsHandicap = 0;
+s16 gSettingVsCom = 1;
+
 f32 D_800CE4D8 = 2000.0f;
 
 s8 gTotalLives[] = { 5, 4, 3, 2 };
@@ -3036,7 +3038,7 @@ void func_800876A8(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
 extern Controller gControllers[];
 extern s32 gPlayerControlPorts[];
 extern s32 gNumPlayers;
-extern s32 D_800CD3CC;
+extern s32 gCurrentGhostType;
 extern s8 D_800DCE5C;
 extern s32 D_80141C78;
 
@@ -3066,7 +3068,8 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
                 return;
             }
             if (gGameMode == GAMEMODE_TIME_ATTACK) {
-                if ((D_800CD3CC != 2) && (D_800CD3CC != 3) && (D_800CD3CC != 4)) {
+                if ((gCurrentGhostType != GHOST_STAFF) && (gCurrentGhostType != GHOST_CELEBRITY) &&
+                    (gCurrentGhostType != GHOST_CHAMP)) {
                     arg0->unk_04 = 8;
                 } else if (temp_t0->raceTime < D_80141C78) {
                     arg0->unk_04 = 8;
@@ -3536,7 +3539,7 @@ s32 func_8009EBEC(Racer_unk_C*, f32, f32, f32, s32, f32);
 extern s32 gNumPlayers;
 extern s8 D_800CD010;
 
-extern unk_800F8510* D_800F8510;
+extern CourseRecordInfo* gCurrentCourseRecordInfo;
 extern Vec3f D_802C4938;
 
 void func_80088D28(void) {
@@ -3551,7 +3554,7 @@ void func_80088D28(void) {
 
     func_i3_80115E74();
 
-    var_s2 = D_800F8510->unk_10->prev;
+    var_s2 = gCurrentCourseRecordInfo->unk_10->prev;
     var_fs0 = 1.0f;
     for (i = 20; i > 0; i--) {
         var_fs0 -= 7.3f / func_8009E538(var_s2, var_fs0, &D_802C4938);
@@ -3806,7 +3809,7 @@ void func_80089724(void) {
     for (i = gNumPlayers - 1; i >= 0; i--) {
         D_800E5EE0[i] = gRacers[i].character;
         D_800E5EE8[i] = gRacers[i].unk_2CC;
-        gRacers[i].unk_1A8 = func_8008960C(D_800E5EF0[i]);
+        gRacers[i].unk_1A8 = func_8008960C(gPlayerEngine[i]);
     }
 }
 
@@ -3858,35 +3861,36 @@ void func_80089934(void) {
     }
 }
 
-void func_80089A74(u8* arg0) {
+void func_80089A74(CarInfo* arg0) {
     u8 var_v0;
     u8* temp_v0;
 
-    arg0[0] = gRacers[0].character;
-    arg0[8] = (s32) gRacers[0].unk_2E0;
-    arg0[9] = (s32) gRacers[0].unk_2E4;
-    arg0[10] = (s32) gRacers[0].unk_2E8;
-    arg0[1] = var_v0 = gRacers[0].unk_167;
+    arg0->unk_00[0] = gRacers[0].character;
+    arg0->unk_00[8] = (s32) gRacers[0].unk_2E0;
+    arg0->unk_00[9] = (s32) gRacers[0].unk_2E4;
+    arg0->unk_00[10] = (s32) gRacers[0].unk_2E8;
+    arg0->unk_00[1] = var_v0 = gRacers[0].unk_167;
     if (var_v0 == 1) {
         temp_v0 = D_800F8360[gRacers[0].character];
-        arg0[2] = temp_v0[0];
-        arg0[3] = temp_v0[1];
-        arg0[4] = temp_v0[2];
-        arg0[5] = temp_v0[3];
-        arg0[6] = D_800F80C8[gRacers[0].character].unk_10 - 1;
-        arg0[7] = temp_v0[4];
-        arg0[11] = temp_v0[5];
-        arg0[12] = temp_v0[6];
-        arg0[13] = temp_v0[7];
-        arg0[14] = temp_v0[8];
-        arg0[15] = temp_v0[9];
-        arg0[16] = temp_v0[10];
-        arg0[17] = temp_v0[11];
-        arg0[18] = temp_v0[12];
-        arg0[19] = temp_v0[13];
+        arg0->unk_00[2] = temp_v0[0];
+        arg0->unk_00[3] = temp_v0[1];
+        arg0->unk_00[4] = temp_v0[2];
+        arg0->unk_00[5] = temp_v0[3];
+        arg0->unk_00[6] = D_800F80C8[gRacers[0].character].unk_10 - 1;
+        arg0->unk_00[7] = temp_v0[4];
+        arg0->unk_00[11] = temp_v0[5];
+        arg0->unk_00[12] = temp_v0[6];
+        arg0->unk_00[13] = temp_v0[7];
+        arg0->unk_00[14] = temp_v0[8];
+        arg0->unk_00[15] = temp_v0[9];
+        arg0->unk_00[16] = temp_v0[10];
+        arg0->unk_00[17] = temp_v0[11];
+        arg0->unk_00[18] = temp_v0[12];
+        arg0->unk_00[19] = temp_v0[13];
     } else {
-        arg0[2] = arg0[3] = arg0[4] = arg0[5] = arg0[6] = arg0[7] = arg0[11] = arg0[12] = arg0[13] = arg0[14] =
-            arg0[15] = arg0[16] = arg0[17] = arg0[18] = arg0[19] = 0;
+        arg0->unk_00[2] = arg0->unk_00[3] = arg0->unk_00[4] = arg0->unk_00[5] = arg0->unk_00[6] = arg0->unk_00[7] =
+            arg0->unk_00[11] = arg0->unk_00[12] = arg0->unk_00[13] = arg0->unk_00[14] = arg0->unk_00[15] =
+                arg0->unk_00[16] = arg0->unk_00[17] = arg0->unk_00[18] = arg0->unk_00[19] = 0;
     }
 }
 
@@ -3896,42 +3900,42 @@ void func_80089BD0(void) {
     s32 var_a1_3;
     s32* var_a0_3;
     s32* var_v1_10;
-    unk_800E5FF8* temp_a1;
+    Ghost* temp_a1;
 
     if (D_800F5DE8 != 0) {
         for (i = 0; i < 5; i++) {
-            if (gRacers[0].raceTime < D_800F8510->timeRecord[i]) {
+            if (gRacers[0].raceTime < gCurrentCourseRecordInfo->timeRecord[i]) {
                 D_800E5FE2 = i + 1;
 
                 for (j = 3; j >= i; j--) {
 
-                    D_800F8510->timeRecord[j + 1] = D_800F8510->timeRecord[j];
-                    D_800F8510->unk_34[j + 1] = D_800F8510->unk_34[j];
-                    D_800F8510->unk_98[j + 1] = D_800F8510->unk_98[j];
-                    *(s32*) &D_800F8510->unk_AC[j + 1] = *(s32*) &D_800F8510->unk_AC[j];
+                    gCurrentCourseRecordInfo->timeRecord[j + 1] = gCurrentCourseRecordInfo->timeRecord[j];
+                    gCurrentCourseRecordInfo->carInfo[j + 1] = gCurrentCourseRecordInfo->carInfo[j];
+                    gCurrentCourseRecordInfo->engine[j + 1] = gCurrentCourseRecordInfo->engine[j];
+                    *(s32*) &gCurrentCourseRecordInfo->name[j + 1] = *(s32*) &gCurrentCourseRecordInfo->name[j];
 
                     D_800F8504[j + 1] = D_800F8504[j];
                 }
 
-                D_800F8510->timeRecord[i] = gRacers[0].raceTime;
+                gCurrentCourseRecordInfo->timeRecord[i] = gRacers[0].raceTime;
 
-                func_80089A74(D_800F8510->unk_34[i].unk_00);
+                func_80089A74(&gCurrentCourseRecordInfo->carInfo[i]);
 
-                D_800F8510->unk_98[i] = D_800E5EF0[0];
+                gCurrentCourseRecordInfo->engine[i] = gPlayerEngine[0];
                 D_800F8504[i] = gRacers[0].unk_2C9;
                 break;
             }
         }
 
-        if (D_800F8510->unk_C0 < gRacers[0].maxSpeed) {
+        if (gCurrentCourseRecordInfo->maxSpeed < gRacers[0].maxSpeed) {
             D_800E5FE4 = 1;
-            D_800F8510->unk_C0 = gRacers[0].maxSpeed;
+            gCurrentCourseRecordInfo->maxSpeed = gRacers[0].maxSpeed;
 
-            func_80089A74(D_800F8510->unk_C4);
+            func_80089A74(&gCurrentCourseRecordInfo->maxSpeedCar);
             D_800F8504[5] = gRacers[0].unk_2C9;
         }
 
-        var_a1_3 = D_800F8510->unk_D8;
+        var_a1_3 = gCurrentCourseRecordInfo->bestTime;
         for (i = 0; i < 3; i++) {
             if (gRacers[0].lapTimes[i] < var_a1_3) {
                 j = i;
@@ -3939,17 +3943,17 @@ void func_80089BD0(void) {
             }
         }
 
-        if (var_a1_3 < D_800F8510->unk_D8) {
+        if (var_a1_3 < gCurrentCourseRecordInfo->bestTime) {
             D_800E5FE6 = j + 1;
-            D_800F8510->unk_D8 = var_a1_3;
-            func_80089A74(D_800F8510->unk_DC);
+            gCurrentCourseRecordInfo->bestTime = var_a1_3;
+            func_80089A74(&gCurrentCourseRecordInfo->bestTimeCar);
             D_800F8504[6] = gRacers[0].unk_2C9;
         }
     }
 
     if (D_800F5DEA != 0) {
         for (j = 0; j < 3; j++) {
-            if (D_800E5FF8[j].unk_0000 == 0) {
+            if (gGhosts[j].encodedCourseIndex == 0) {
                 break;
             }
         }
@@ -3957,10 +3961,10 @@ void func_80089BD0(void) {
         var_a1_3 = -1;
         if (j == 3) {
             for (i = 0; i < 3; i++) {
-                if ((D_800E5FF8[i].unk_0000 != D_800F8510->unk_00) ||
-                    ((D_800CD3CC == 1) && (D_800E5FF8[i].unk_3F68 != 1))) {
+                if ((gGhosts[i].encodedCourseIndex != gCurrentCourseRecordInfo->encodedCourseIndex) ||
+                    ((gCurrentGhostType == GHOST_PLAYER) && (gGhosts[i].ghostType != GHOST_PLAYER))) {
                     j = i;
-                    var_a1_3 = D_800E5FF8[i].unk_0004;
+                    var_a1_3 = gGhosts[i].raceTime;
                     break;
                 }
             }
@@ -3970,28 +3974,30 @@ void func_80089BD0(void) {
 
             if (var_a1_3 != -1) {
                 for (i = j + 1; i < 3; i++) {
-                    if ((D_800F8510->unk_00 != D_800E5FF8[i].unk_0000) ||
-                        ((D_800CD3CC == 1) && (D_800E5FF8[i].unk_3F68 != 1))) {
-                        if (var_a1_3 < D_800E5FF8[i].unk_0004) {
+                    if ((gCurrentCourseRecordInfo->encodedCourseIndex != gGhosts[i].encodedCourseIndex) ||
+                        ((gCurrentGhostType == GHOST_PLAYER) && (gGhosts[i].ghostType != GHOST_PLAYER))) {
+                        if (var_a1_3 < gGhosts[i].raceTime) {
                             j = i;
-                            var_a1_3 = D_800E5FF8[i].unk_0004;
+                            var_a1_3 = gGhosts[i].raceTime;
                         }
                     }
                 }
             } else {
                 for (i = 0; i < 3; i++) {
-                    if ((D_800F8510->unk_00 == D_800E5FF8[i].unk_0000) && (D_800E5FF8[i].unk_3F68 == 1)) {
+                    if ((gCurrentCourseRecordInfo->encodedCourseIndex == gGhosts[i].encodedCourseIndex) &&
+                        (gGhosts[i].ghostType == GHOST_PLAYER)) {
                         j = i;
-                        var_a1_3 = D_800E5FF8[i].unk_0004;
+                        var_a1_3 = gGhosts[i].raceTime;
                         break;
                     }
                 }
 
                 for (i = j + 1; i < 3; i++) {
-                    if ((D_800F8510->unk_00 == D_800E5FF8[i].unk_0000) && (D_800E5FF8[i].unk_3F68 == 1)) {
-                        if (var_a1_3 < D_800E5FF8[i].unk_0004) {
+                    if ((gCurrentCourseRecordInfo->encodedCourseIndex == gGhosts[i].encodedCourseIndex) &&
+                        (gGhosts[i].ghostType == GHOST_PLAYER)) {
+                        if (var_a1_3 < gGhosts[i].raceTime) {
                             j = i;
-                            var_a1_3 = D_800E5FF8[i].unk_0004;
+                            var_a1_3 = gGhosts[i].raceTime;
                         }
                     }
                 }
@@ -4003,34 +4009,34 @@ void func_80089BD0(void) {
         }
 
         if (j < 3) {
-            temp_a1 = &D_800E5FF8[j];
+            temp_a1 = &gGhosts[j];
 
             for (i = 0; i < 3; i++) {
                 if (temp_a1 == D_800F5DF0[i].unk_04) {
                     D_800F5DF0[i].unk_12 = D_800F5DF0[i].unk_10 = 0;
                 }
             }
-            temp_a1->unk_3F68 = 1;
-            temp_a1->unk_0000 = D_800F8510->unk_00;
-            temp_a1->unk_0004 = gRacers[0].raceTime;
+            temp_a1->ghostType = GHOST_PLAYER;
+            temp_a1->encodedCourseIndex = gCurrentCourseRecordInfo->encodedCourseIndex;
+            temp_a1->raceTime = gRacers[0].raceTime;
 
             for (i = 0; i < 3; i++) {
-                temp_a1->unk_0008[i] = gRacers[0].lapTimes[i];
+                temp_a1->lapTimes[i] = gRacers[0].lapTimes[i];
             }
 
-            temp_a1->unk_0014 = D_800F5DCC;
-            temp_a1->unk_0018 = D_800F5DC8;
+            temp_a1->replayEnd = sGhostReplayRecordingEnd;
+            temp_a1->replaySize = sGhostReplayRecordingSize;
 
-            func_80089A74(temp_a1->unk_3F6A);
+            func_80089A74(&temp_a1->carInfo);
 
-            i = (D_800F5DC8 - 1) & ~3;
-            var_v1_10 = (s32*) &D_800F1E80[i];
-            var_a0_3 = (s32*) &temp_a1->unk_001C[i];
-            temp_a1->unk_3F64 = 0;
+            i = (sGhostReplayRecordingSize - 1) & ~3;
+            var_v1_10 = (s32*) &sGhostReplayRecordingBuffer[i];
+            var_a0_3 = (s32*) &temp_a1->replayData[i];
+            temp_a1->replayChecksum = 0;
             do {
-                temp_a1->unk_3F64 += * var_a0_3-- = *var_v1_10--;
-            } while (var_v1_10 >= (s32*) D_800F1E80);
-            if ((D_800F1E78 == NULL) || (temp_a1->unk_0004 < D_800F1E78->unk_0004)) {
+                temp_a1->replayChecksum += * var_a0_3-- = *var_v1_10--;
+            } while (var_v1_10 >= (s32*) sGhostReplayRecordingBuffer);
+            if ((D_800F1E78 == NULL) || (temp_a1->raceTime < D_800F1E78->raceTime)) {
                 D_800F1E78 = temp_a1;
             }
         }
@@ -4126,8 +4132,9 @@ void func_8008AA8C(void) {
                 var_a1 = 0;
             }
 
-            var_s0->raceTime =
-                (s32) (((var_s0->raceTime - var_a1) * gTotalLapCount) * D_800F8510->unk_0C / var_s0->unk_23C) + var_a1;
+            var_s0->raceTime = (s32) (((var_s0->raceTime - var_a1) * gTotalLapCount) *
+                                      gCurrentCourseRecordInfo->unk_0C / var_s0->unk_23C) +
+                               var_a1;
 
             var_a1 = 0;
             var_a0 = 0;
@@ -4184,11 +4191,11 @@ void func_8008AD38(void) {
 
     if (D_800E5EC0 < 2) {
         gRacers[0].unk_2B8 = gRacers[0].unk_2BC = NULL;
-        gRacers[0].unk_2C0 = gRacers[0].unk_2C4 = D_800F8510->unk_0C;
+        gRacers[0].unk_2C0 = gRacers[0].unk_2C4 = gCurrentCourseRecordInfo->unk_0C;
         return;
     }
 
-    temp_fv0 = D_800F8510->unk_0C * 0.5f;
+    temp_fv0 = gCurrentCourseRecordInfo->unk_0C * 0.5f;
     var_v1 = &D_800F5EA0[((s32) (D_800E5EC0 * (D_800E5EC0 - 1)) >> 1) - 1];
     var_a0 = D_800E5EC4;
 
@@ -4202,22 +4209,22 @@ void func_8008AD38(void) {
                     var_v1->unk_00 = var_a0;
                     var_v1->unk_04 = var_a1;
                     var_v1->unk_08 = temp_fv1;
-                    var_v1->unk_0C = D_800F8510->unk_0C - temp_fv1;
+                    var_v1->unk_0C = gCurrentCourseRecordInfo->unk_0C - temp_fv1;
                 } else {
                     var_v1->unk_00 = var_a1;
                     var_v1->unk_04 = var_a0;
-                    var_v1->unk_08 = D_800F8510->unk_0C - temp_fv1;
+                    var_v1->unk_08 = gCurrentCourseRecordInfo->unk_0C - temp_fv1;
                     var_v1->unk_0C = temp_fv1;
                 }
             } else if (temp_fv1 < temp_fv0) {
                 var_v1->unk_00 = var_a1;
                 var_v1->unk_04 = var_a0;
                 var_v1->unk_08 = temp_fv1;
-                var_v1->unk_0C = D_800F8510->unk_0C - temp_fv1;
+                var_v1->unk_0C = gCurrentCourseRecordInfo->unk_0C - temp_fv1;
             } else {
                 var_v1->unk_00 = var_a0;
                 var_v1->unk_04 = var_a1;
-                var_v1->unk_08 = D_800F8510->unk_0C - temp_fv1;
+                var_v1->unk_08 = gCurrentCourseRecordInfo->unk_0C - temp_fv1;
                 var_v1->unk_0C = temp_fv1;
             }
             var_a1--;
@@ -4229,7 +4236,7 @@ void func_8008AD38(void) {
     var_a0 = D_800E5EC4;
     temp_a2 = (s32) (var_a0->id * (var_a0->id - 1)) >> 1;
 
-    var_fv0 = D_800F8510->unk_0C + 10.0f;
+    var_fv0 = gCurrentCourseRecordInfo->unk_0C + 10.0f;
 
     for (var_a1 = var_a0 - 1; var_a1 >= gRacers; var_a1--) {
 
@@ -4253,7 +4260,7 @@ void func_8008AD38(void) {
 
     for (i = D_800E5EC0 - 2; i > 0; i--) {
         var_a0 = sp14;
-        var_fv0 = D_800F8510->unk_0C + 10.0f;
+        var_fv0 = gCurrentCourseRecordInfo->unk_0C + 10.0f;
         temp_a2 = (s32) (sp14->id * (sp14->id - 1)) >> 1;
 
         for (var_a1 = gRacers; var_a1 < var_a0; var_a1++) {
@@ -4311,7 +4318,7 @@ void func_8008B150(void) {
     s32 i;
     f32 var_fv0;
 
-    var_fv0 = D_800F8510->unk_0C;
+    var_fv0 = gCurrentCourseRecordInfo->unk_0C;
 
     for (i = D_800E5EC0 - 1; i > 0; i--) {
         if (D_800F5EA0[(i * (i - 1)) >> 1].unk_08 < var_fv0) {
@@ -4340,12 +4347,12 @@ void func_8008B1CC(void) {
     gPlayerLives[0] = gPlayerLives[1] = gPlayerLives[2] = gPlayerLives[3] = gTotalLives[gDifficulty];
 }
 
-s32 func_8008B23C(u8* arg0, u8* arg1) {
+s32 func_8008B23C(CarInfo* arg0, CarInfo* arg1) {
     s32 i;
-    u8* var_v0 = arg0;
-    u8* var_v1 = arg1;
+    u8* var_v0 = (u8*) arg0;
+    u8* var_v1 = (u8*) arg1;
 
-    for (i = 20; i > 0; i--, var_v0++, var_v1++) {
+    for (i = sizeof(CarInfo); i > 0; i--, var_v0++, var_v1++) {
         if (*var_v0 != *var_v1) {
             return -1;
         }
@@ -4551,7 +4558,7 @@ void func_8008C14C(Racer* arg0) {
 
     arg0->unk_2B4 = arg0->unk_2B2 = arg0->unk_2B3 = 1;
     arg0->unk_168.y = -54321.0f;
-    arg0->unk_240 = -D_800F8510->unk_0C;
+    arg0->unk_240 = -gCurrentCourseRecordInfo->unk_0C;
     arg0->unk_284 = 0;
     arg0->unk_286 = 0;
     arg0->unk_23C = arg0->unk_248 = arg0->unk_240 + arg0->unk_244;
@@ -4620,7 +4627,7 @@ void func_8008C7C8(void) {
     s32 var_t0;
     Racer* var_s1_2;
     unk_800F5DF0* temp_s0_2;
-    u8 sp6C[20];
+    CarInfo sp6C;
     OSMesg sp68;
 
     D_800E5FE8 = &D_800CE4E0[D_8010B7B0.venue * 4];
@@ -4629,7 +4636,7 @@ void func_8008C7C8(void) {
     D_800F809C = D_800F80A0 = 0.0f;
     D_800E5FD8 = D_800E5FE0 = gRacersKOd = D_800F80C4 = D_800F80B8 = D_800E5FBC = D_800E5FBE = D_800E5FC0 = D_800E5FC2 =
         D_800E5FC4 = D_800E5FC6 = D_800E5FC8 = D_800E5FCA = 0;
-    D_800F80BC = D_800F8510->unk_0C * 0.5;
+    D_800F80BC = gCurrentCourseRecordInfo->unk_0C * 0.5;
     D_800F80C0 = -D_800F80BC;
     if (gGameMode != GAMEMODE_GP_RACE) {
         D_800E5FD6 = 0;
@@ -4671,7 +4678,7 @@ void func_8008C7C8(void) {
                 break;
         }
     } else {
-        if (D_800CE4D4 != 0) {
+        if (gSettingVsCom != 0) {
             D_800E5EC0 = 4;
             func_80089934();
         } else {
@@ -4782,34 +4789,34 @@ void func_8008C7C8(void) {
         D_800F5DD8 = Math_Round(gRacers[0].unk_0C.unk_34.x);
         D_800F5DDC = Math_Round(gRacers[0].unk_0C.unk_34.y);
         D_800F5DE0 = Math_Round(gRacers[0].unk_0C.unk_34.z);
-        if (D_800CD3CC != 0) {
-            func_80089A74(sp6C);
+        if (gCurrentGhostType != GHOST_NONE) {
+            func_80089A74(&sp6C);
             var_a3 = var_t0 = 0x40000000;
 
             for (i = 0; i < 3; i++) {
-                if (D_800F8510->unk_00 != D_800E5FF8[i].unk_0000) {
+                if (gCurrentCourseRecordInfo->encodedCourseIndex != gGhosts[i].encodedCourseIndex) {
                     continue;
                 }
 
-                if (D_800E5FF8[i].unk_3F68 == 1) {
-                    if (D_800E5FF8[i].unk_0004 < var_t0) {
-                        var_t0 = D_800E5FF8[i].unk_0004;
-                        D_800F1E78 = &D_800E5FF8[i];
+                if (gGhosts[i].ghostType == GHOST_PLAYER) {
+                    if (gGhosts[i].raceTime < var_t0) {
+                        var_t0 = gGhosts[i].raceTime;
+                        D_800F1E78 = &gGhosts[i];
                     }
                 }
-                if (D_800E5FF8[i].unk_3F68 != D_800CD3CC) {
+                if (gGhosts[i].ghostType != gCurrentGhostType) {
                     continue;
                 }
 
                 temp_s0_2 = &D_800F5DF0[i];
 
-                if (D_800E5FF8[i].unk_0004 < var_a3) {
-                    var_a3 = D_800E5FF8[i].unk_0004;
+                if (gGhosts[i].raceTime < var_a3) {
+                    var_a3 = gGhosts[i].raceTime;
                     D_800F5E90 = temp_s0_2;
                 }
                 temp_s0_2->unk_12 = 1;
-                temp_s0_2->unk_04 = &D_800E5FF8[i];
-                temp_s0_2->unk_08 = D_800E5FF8[i].unk_001C;
+                temp_s0_2->unk_04 = &gGhosts[i];
+                temp_s0_2->unk_08 = gGhosts[i].replayData;
                 temp_s0_2->unk_00 = 0;
                 temp_s0_2->unk_0C = 0;
                 temp_s0_2->unk_10 = 0;
@@ -4822,9 +4829,9 @@ void func_8008C7C8(void) {
                 var_s1_2 = temp_s0_2->unk_30;
 
                 var_s1_2->id = i + 1;
-                var_s1_2->character = temp_s0_2->unk_04->unk_3F6A[0];
+                var_s1_2->character = temp_s0_2->unk_04->carInfo.unk_00[0];
 
-                if (func_8008B23C(temp_s0_2->unk_04->unk_3F6A, sp6C) != 0) {
+                if (func_8008B23C(&temp_s0_2->unk_04->carInfo, &sp6C) != 0) {
                     var_s1_2->unk_2C9 = i + 7;
                 } else {
                     var_s1_2->unk_2C9 = gRacers[0].unk_2C9;
@@ -4832,13 +4839,13 @@ void func_8008C7C8(void) {
 
                 var_s1_2->unk_2CA = D_800F80C8[var_s1_2->character].unk_02;
                 var_s1_2->unk_2CB = D_800F80C8[var_s1_2->character].unk_03;
-                var_s1_2->unk_2CE = temp_s0_2->unk_04->unk_3F6A[8];
-                var_s1_2->unk_2D0 = temp_s0_2->unk_04->unk_3F6A[9];
-                var_s1_2->unk_2D2 = temp_s0_2->unk_04->unk_3F6A[10];
+                var_s1_2->unk_2CE = temp_s0_2->unk_04->carInfo.unk_00[8];
+                var_s1_2->unk_2D0 = temp_s0_2->unk_04->carInfo.unk_00[9];
+                var_s1_2->unk_2D2 = temp_s0_2->unk_04->carInfo.unk_00[10];
             }
         }
-        D_800F5DD4 = D_800F1E80;
-        D_800F5DE6 = D_800F5DD0 = D_800F5DC8 = 0;
+        sGhostReplayRecordingPtr = sGhostReplayRecordingBuffer;
+        D_800F5DE6 = D_800F5DD0 = sGhostReplayRecordingSize = 0;
     }
 }
 
@@ -4885,28 +4892,30 @@ void func_8008D3C4(s32 arg0, s32 arg1) {
     }
 }
 
-void func_8008D5F4(u8* arg0, s32 arg1) {
+void func_8008D5F4(CarInfo* arg0, s32 arg1) {
     s32 pad[2];
     s32 var_v1;
     Gfx* gfx;
     s32 i;
 
-    if (arg0[1] == 1) {
-        gfx = func_i9_80161050(D_800CDD38[arg1], arg0[5], arg0[6], arg0[7]);
+    if (arg0->unk_00[1] == 1) {
+        gfx = func_i9_80161050(D_800CDD38[arg1], arg0->unk_00[5], arg0->unk_00[6], arg0->unk_00[7]);
         gSPEndDisplayList(gfx);
 
         for (i = 4; i >= 0; i--) {
-            gfx = func_i9_80115DF0(D_800CDDB0[arg1 * 6 + i], i, arg0[2], arg0[3], arg0[4], arg0[14], arg0[15], arg0[16],
-                                   arg0[11], arg0[12], arg0[13], 255, 255, 255, arg0[17], arg0[18], arg0[19]);
+            gfx = func_i9_80115DF0(D_800CDDB0[arg1 * 6 + i], i, arg0->unk_00[2], arg0->unk_00[3], arg0->unk_00[4],
+                                   arg0->unk_00[14], arg0->unk_00[15], arg0->unk_00[16], arg0->unk_00[11],
+                                   arg0->unk_00[12], arg0->unk_00[13], 255, 255, 255, arg0->unk_00[17],
+                                   arg0->unk_00[18], arg0->unk_00[19]);
             gSPEndDisplayList(gfx);
         }
 
         return;
     }
-    if (arg0[1] != 0) {
-        var_v1 = arg0[1] + 28;
+    if (arg0->unk_00[1] != 0) {
+        var_v1 = arg0->unk_00[1] + 28;
     } else {
-        var_v1 = arg0[0];
+        var_v1 = arg0->unk_00[0];
     }
 
     gfx = D_800CE098[var_v1](D_800CDD38[arg1]);
@@ -4929,23 +4938,23 @@ void func_8008D7E8(void) {
 extern s32 gCourseIndex;
 
 void func_8008D824(void) {
-    unk_800F8510* sp2C;
+    CourseRecordInfo* sp2C;
     s32 i;
     u8 var;
 
-    sp2C = &D_802A6B40[gCourseIndex];
+    sp2C = &gCourseRecordInfos[gCourseIndex];
 
     for (i = 4; i >= 0; i--) {
         D_800F8504[i] = i + 1;
-        func_8008D5F4(sp2C->unk_34[i].unk_00, D_800F8504[i]);
+        func_8008D5F4(sp2C->carInfo[i].unk_00, D_800F8504[i]);
     }
 
     var = 5;
     D_800F8504[var] = var + 1;
-    func_8008D5F4(sp2C->unk_C4, D_800F8504[var]);
+    func_8008D5F4(sp2C->maxSpeedCar.unk_00, D_800F8504[var]);
     var = 6;
     D_800F8504[var] = var + 1;
-    func_8008D5F4(sp2C->unk_DC, D_800F8504[var]);
+    func_8008D5F4(sp2C->bestTimeCar.unk_00, D_800F8504[var]);
 }
 
 void func_800A4DF0(void);
@@ -4958,8 +4967,8 @@ void func_8008D8E8(void) {
     func_8008D824();
 
     for (i = 0; i < 3; i++) {
-        if (D_800F8510->unk_00 == D_800E5FF8[i].unk_0000) {
-            func_8008D5F4(D_800E5FF8[i].unk_3F6A, i + 7);
+        if (gCurrentCourseRecordInfo->encodedCourseIndex == gGhosts[i].encodedCourseIndex) {
+            func_8008D5F4(&gGhosts[i].carInfo, i + 7);
         }
     }
 }
@@ -4997,7 +5006,7 @@ void func_8008DA68(void) {
         if (i < 4) {
             D_800E5EE0[i] = (s16) gRacers[i].character;
             D_800E5EE8[i] = gRacers[i].unk_2CC;
-            D_800E5EF0[i] = 0.5f;
+            gPlayerEngine[i] = 0.5f;
         }
     }
     func_8008D33C();
@@ -6743,10 +6752,9 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
         var_fs0 = arg0->unk_1B8;
         var_ft4 = 1.0f;
     }
-    if ((gNumPlayers >= 2) && (D_800CE4D0 == 2)) {
+    if ((gNumPlayers >= 2) && (gSettingVsHandicap == 2)) {
         var_fv1 = (D_800E5F40[0]->unk_23C - arg0->unk_23C);
         var_fv1 /= D_800CE4D8;
-
         if (var_fv1 >= 1.0f) {
             var_fs1 += 0.03f;
             var_fs0 += 0.03f;
@@ -6764,7 +6772,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
             if (var_ft4 < arg0->unk_1C0) {
                 var_ft4 = arg0->unk_1C0;
             }
-            if ((gNumPlayers == 1) || (D_800CE4D0 == 0)) {
+            if ((gNumPlayers == 1) || (gSettingVsHandicap == 0)) {
                 sp128 = arg0->unk_1AC;
             } else {
                 sp128 = (D_800E5F40[0]->unk_23C - arg0->unk_23C);
@@ -6971,12 +6979,13 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                 arg0->unk_2A4++;
                 arg0->raceTime = (s32) (arg0->unk_2A4 * 50) / 3;
                 if (D_800F80BC < sp128) {
-                    arg0->unk_240 += D_800F8510->unk_0C;
+                    arg0->unk_240 += gCurrentCourseRecordInfo->unk_0C;
                     arg0->lap++;
                     if ((arg0->lap == arg0->unk_2AA + 1) && ((gTotalLapCount + 1) >= arg0->lap)) {
                         arg0->unk_2AA = arg0->lap;
                         arg0->unk_04 |= 0x100000;
-                        i = arg0->raceTime - (s32) ((50.0f * arg0->unk_244) / (3.0f * (D_800F8510->unk_0C - sp128)));
+                        i = arg0->raceTime -
+                            (s32) ((50.0f * arg0->unk_244) / (3.0f * (gCurrentCourseRecordInfo->unk_0C - sp128)));
                         arg0->lapTimes[arg0->lap - 2] = (s32) (i - arg0->unk_29C);
                         arg0->unk_29C = i;
                         arg0->unk_2B0 = 1;
@@ -7019,7 +7028,7 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
                     }
                 } else if (sp128 < D_800F80C0) {
                     arg0->lap--;
-                    arg0->unk_240 -= D_800F8510->unk_0C;
+                    arg0->unk_240 -= gCurrentCourseRecordInfo->unk_0C;
                 }
                 arg0->unk_23C = arg0->unk_248 = arg0->unk_240 + arg0->unk_244;
             }
@@ -7501,29 +7510,24 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_80090BCC.s")
 #endif
 
-extern s32 D_800F5DC8;
-extern s8* D_800F5DD4;
-extern s16 D_800F5DE4;
-extern s16 D_800F5DE6;
-
-void func_80094FF4(s32 arg0) {
-    if (!(arg0 > -0x80 && arg0 < 0x80)) {
-        D_800F5DC8 += 3;
-        if (D_800F5DC8 <= 16200) {
-            *D_800F5DD4++ = -0x80;
-            *D_800F5DD4++ = ((arg0 & 0xFFFF) >> 8);
-            *D_800F5DD4++ = arg0 & 0xFF;
+void func_80094FF4(s32 position) {
+    if (!(position > -0x80 && position < 0x80)) {
+        sGhostReplayRecordingSize += 3;
+        if (sGhostReplayRecordingSize <= 16200) {
+            *sGhostReplayRecordingPtr++ = -0x80;
+            *sGhostReplayRecordingPtr++ = ((position & 0xFFFF) >> 8);
+            *sGhostReplayRecordingPtr++ = position & 0xFF;
         } else {
-            D_800F5DC8 -= 3;
+            sGhostReplayRecordingSize -= 3;
             D_800F5DE6 = 1;
             D_800F5DE4 = 0;
         }
     } else {
-        D_800F5DC8++;
-        if (D_800F5DC8 <= 16200) {
-            *D_800F5DD4++ = arg0;
+        sGhostReplayRecordingSize++;
+        if (sGhostReplayRecordingSize <= 16200) {
+            *sGhostReplayRecordingPtr++ = position;
         } else {
-            D_800F5DC8--;
+            sGhostReplayRecordingSize--;
             D_800F5DE6 = 1;
             D_800F5DE4 = 0;
         }
@@ -7883,7 +7887,7 @@ void func_800952F4(void) {
         D_800F5DD0++;
         if ((D_800F5DE4 != 0) && !(D_800F5DD0 & 1)) {
             i = Math_Round(gRacers[0].unk_0C.unk_34.x);
-            func_80094FF4(i - (D_800F5DD8));
+            func_80094FF4(i - D_800F5DD8);
             D_800F5DD8 = i;
             i = Math_Round(gRacers[0].unk_0C.unk_34.y);
             func_80094FF4(i - D_800F5DDC);
@@ -7893,7 +7897,7 @@ void func_800952F4(void) {
             D_800F5DE0 = i;
             if ((D_800F5DE8 != 0) && (D_800F5DE6 == 0) && (D_800F5DEA == 0)) {
                 D_800F5DEA = 1;
-                D_800F5DCC = D_800F5DC8;
+                sGhostReplayRecordingEnd = sGhostReplayRecordingSize;
             }
         }
         for (var_s0 = &D_800F5DF0[2]; var_s0 >= D_800F5DF0; var_s0--) {
@@ -7928,7 +7932,7 @@ void func_800952F4(void) {
                         var_s0->unk_20.x = var_s0->unk_14;
                         var_s0->unk_20.y = var_s0->unk_18;
                         var_s0->unk_20.z = var_s0->unk_1C;
-                        if (var_s0->unk_0C >= var_s0->unk_04->unk_0018) {
+                        if (var_s0->unk_0C >= var_s0->unk_04->replaySize) {
                             var_s0->unk_10 = 0;
                             var_s0->unk_12 = var_s0->unk_10;
                         }
@@ -7985,7 +7989,7 @@ void func_800952F4(void) {
                     racer->unk_E8.y.y += 0.19f * (racer->unk_C0.y.y + (var_fs0 * racer->unk_C0.z.y));
                     racer->unk_E8.y.z += 0.19f * (racer->unk_C0.y.z + (var_fs0 * racer->unk_C0.z.z));
                     func_8006AA38(&racer->unk_E8);
-                    if (var_s0->unk_04->unk_0014 < var_s0->unk_0C) {
+                    if (var_s0->unk_04->replayEnd < var_s0->unk_0C) {
                         if (var_s0->unk_2C != 0.f) {
                             var_s0->unk_2C -= 0.02f;
                             if (var_s0->unk_2C <= 0.0f) {
@@ -8090,7 +8094,7 @@ void func_800952F4(void) {
                         func_800BA8D8(0x3D);
                         break;
                     } else if (gGameMode == GAMEMODE_TIME_ATTACK) {
-                        if ((D_800CD3CC == 1) || (D_800CD3CC == 0)) {
+                        if ((gCurrentGhostType == GHOST_PLAYER) || (gCurrentGhostType == GHOST_NONE)) {
                             func_800BA8D8(0x3D);
                         } else if (gRacers[0].raceTime < D_80141C78) {
                             func_800BA8D8(0x43);
@@ -8541,9 +8545,9 @@ block_115:
         sp560 = 0.57735f;
         sp55C = 0.57735f;
         sp558 = 0.57735f;
-        var_s3 = D_800F8510->unk_14[3];
-        sp5C4 = D_800F8510->unk_14[4];
-        var_s4 = D_800F8510->unk_14[5];
+        var_s3 = gCurrentCourseRecordInfo->unk_14[3];
+        sp5C4 = gCurrentCourseRecordInfo->unk_14[4];
+        var_s4 = gCurrentCourseRecordInfo->unk_14[5];
     }
     if (gGameMode != GAMEMODE_GP_END_CS) {
         D_800DCCF0->unk_21AE8[playerIndex].l.unk_08[0] = Math_Round((sp560 - spA4->unk_5C.x.x) * 16383.0f);
@@ -9321,9 +9325,9 @@ block_115:
                         func_800BA8D8(0xB);
                     }
                     if ((D_800F5E98 == 1) && (D_800CD010 == 0)) {
-                        if (D_800F8510->unk_04 < 0x18) {
-                            func_8007E0AC(D_800CF4D8[D_800F8510->unk_04]);
-                        } else if (D_800F8510->unk_04 == 0x36) {
+                        if (gCurrentCourseRecordInfo->unk_04 < 24) {
+                            func_8007E0AC(D_800CF4D8[gCurrentCourseRecordInfo->unk_04]);
+                        } else if (gCurrentCourseRecordInfo->unk_04 == 48) {
                             func_8007E0AC(0x18);
                         } else {
                             func_8007E0AC(D_800CF4F0[D_8010B7B0.venue]);

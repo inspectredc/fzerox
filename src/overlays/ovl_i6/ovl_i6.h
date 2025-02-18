@@ -1,7 +1,7 @@
 #ifndef OVL_I6_H
 #define OVL_I6_H
 
-#include "unk_structs.h"
+#include "fzx_save.h"
 
 typedef enum OptionsRow {
     /* 0 */ OPTIONS_VS_COM,
@@ -47,10 +47,10 @@ typedef struct OptionsInfo {
     /* 0x18 */ OptionsTextureInfo optionTextureInfo;
 } OptionsInfo; // size = 0x20
 
-extern unk_801247C0 D_801247C0;
+extern SaveContext gSaveContext;
 
 extern s32 D_i6_8011EED0[];
 extern s32 D_i6_8011EEF0[];
-extern u16 D_i6_8011EF10[];
+extern u16 gUnlockEverythingInputs[];
 
 #endif // OVL_I6_H

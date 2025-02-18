@@ -1,14 +1,15 @@
 #include "global.h"
 #include "audio.h"
 #include "fzx_game.h"
+#include "fzx_save.h"
 #include "assets/segment_17B1E0.h"
 
-f32 D_800E40F0[30];
+f32 gCharacterLastEngine[30];
 UNUSED s32 D_800E4168;
 u16 gInputPressed;
 u16 gInputButtonPressed;
 u16 gStickPressed;
-s8 D_800E4174[4];
+s8 gCupNumDifficultiesCleared[4];
 char* gCurrentTrackName;
 char* gTrackNames[55];
 
@@ -26,8 +27,8 @@ s32 D_800CD3B8 = 0;
 s32 D_800CD3BC = 0;
 s8 D_800CD3C0 = 0;
 s8 D_800CD3C4 = 0;
-s8 D_800CD3C8 = 0;
-s32 D_800CD3CC = 1;
+s8 gSettingEverythingUnlocked = 0;
+s32 gCurrentGhostType = GHOST_PLAYER;
 
 const char* sTrackNames[] = { "mute city",
                               "silence",
@@ -694,7 +695,7 @@ Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u
     return gfx;
 }
 
-extern u8 D_i2_8010D730[][9];
+extern u8 gEditCupTrackNames[][9];
 
 void func_8007D9D0(void) {
     s32 i;
@@ -704,10 +705,10 @@ void func_8007D9D0(void) {
     }
 
     for (i = 24; i < 30; i++) {
-        if (D_i2_8010D730[i - 24][0] == '\0') {
+        if (gEditCupTrackNames[i - 24][0] == '\0') {
             gTrackNames[i] = sTrackNames[i];
         } else {
-            gTrackNames[i] = D_i2_8010D730[i - 24];
+            gTrackNames[i] = gEditCupTrackNames[i - 24];
         }
     }
 
@@ -770,7 +771,7 @@ void func_8007DED8(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        D_800E4174[i] = 0;
+        gCupNumDifficultiesCleared[i] = 0;
     }
 }
 
@@ -785,25 +786,25 @@ void func_8007DEF0(void) {
     s32 var_a0;
 
     for (i = 0; i < 4; i++) {
-        if (D_800E4174[i] < 3) {
+        if (gCupNumDifficultiesCleared[i] < 3) {
             var_v1 = 1;
             break;
         }
     }
     var_a0 = gDifficulty + 1;
     //! @bug This always evaluates to true, and instead should use a &&
-    //       The result of this could lead to an OOB array access of D_800E4174
+    //       The result of this could lead to an OOB array access of gCupNumDifficultiesCleared
     if ((gCupType >= JACK_CUP) || (gCupType <= JOKER_CUP)) {
         if (var_a0 > MASTER + 1) {
             var_a0 = MASTER + 1;
         }
 
-        if (D_800E4174[gCupType] < var_a0) {
-            D_800E4174[gCupType] = var_a0;
+        if (gCupNumDifficultiesCleared[gCupType] < var_a0) {
+            gCupNumDifficultiesCleared[gCupType] = var_a0;
         }
         if (var_v1 != 0) {
             for (i = 0; i < 4; i++) {
-                if (D_800E4174[i] < 3) {
+                if (gCupNumDifficultiesCleared[i] < 3) {
                     var_v1 = 0;
                     if (gCupType) {}
                 }
@@ -817,14 +818,14 @@ void func_8007DEF0(void) {
     }
 }
 
-extern s8 D_800E4174[4];
+extern s8 gCupNumDifficultiesCleared[4];
 
 s32 func_8007E008(void) {
     s32 sum = 0;
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        sum += D_800E4174[i];
+        sum += gCupNumDifficultiesCleared[i];
     }
     return sum;
 }
@@ -892,7 +893,7 @@ void func_8007E1C0(void) {
             sp38 = true;
             break;
         } else {
-            if (D_802A6B40[i].timeRecord[0] >= sp40.unk_08) {
+            if (gCourseRecordInfos[i].timeRecord[0] >= sp40.raceTime) {
                 sp38 = true;
                 break;
             }
@@ -918,7 +919,7 @@ void func_8007E2B4(void) {
     } else {
         var_a0 = false;
         for (i = 0; i < 4; i++) {
-            if (D_800E4174[i] < 3) {
+            if (gCupNumDifficultiesCleared[i] < 3) {
                 var_a0 = true;
                 break;
             }
@@ -929,7 +930,7 @@ void func_8007E2B4(void) {
         } else {
             var_a0 = false;
             for (i = 0; i < 3; i++) {
-                if (D_800E4174[i] < 2) {
+                if (gCupNumDifficultiesCleared[i] < 2) {
                     var_a0 = true;
                     break;
                 }
@@ -963,5 +964,5 @@ void func_8007E398(void) {
 
     D_800CD3B8 = 0;
     D_800CD3BC = 0;
-    D_800CD3CC = 1;
+    gCurrentGhostType = GHOST_PLAYER;
 }

@@ -1,5 +1,5 @@
-#ifndef FZX_THREAD_H
-#define FZX_THREAD_H
+#ifndef FZX_RACER_H
+#define FZX_RACER_H
 
 #include "unk_structs.h"
 
@@ -7,4 +7,4 @@
 
 extern Racer gRacers[TOTAL_RACER_COUNT];
 
-#endif // FZX_THREAD_H
+#endif // FZX_RACER_H

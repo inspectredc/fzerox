@@ -2,7 +2,7 @@
 #define FUNCTIONS_H
 
 #include "sys.h"
-#include "fzxmath.h"
+#include "fzx_math.h"
 #include "unk_structs.h"
 #include "PR/leo.h"
 
@@ -52,10 +52,10 @@ void func_800741DC(s32 courseIndex);
 void func_800742D0(void);
 void func_800742FC(void);
 void func_80074428(s32 courseIndex);
-void func_80074634(unk_800F8510* arg0);
+void func_80074634(CourseRecordInfo* arg0);
 void func_800747EC(s32 venue);
 void func_80074A90(f32* arg0, f32* arg1);
-void func_80074CE4(unk_800F8510*);
+void func_80074CE4(CourseRecordInfo*);
 void func_80074844(void);
 
 void func_8007515C(void);
@@ -189,15 +189,15 @@ Gfx* func_8009CEA0(Gfx* gfx, s32 character);
 
 void func_8009CED0(s32 venue);
 s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4);
-s32 func_8009DEAC(unk_800F8510* arg0);
+s32 func_8009DEAC(CourseRecordInfo* arg0);
 f32 func_8009E108(unk_8006FC8C*, f32, f32*);
 f32 func_8009E538(unk_8006FC8C*, f32, Vec3f*);
 void func_8009E6F0(unk_8006FC8C*, f32, Vec3f*);
 f32 func_8009E85C(unk_8006FC8C*, f32, Mtx3F*, f32);
-void func_8009F508(unk_800F8510* arg0);
+void func_8009F508(CourseRecordInfo* arg0);
 f32 func_8009DFA0(Racer_unk_C* arg0);
 
-s32 func_800A2D2C(unk_800F8510* arg0, Vtx* arg1);
+s32 func_800A2D2C(CourseRecordInfo* arg0, Vtx* arg1);
 void func_800A3044(void);
 void func_800A4EAC(void);
 void func_800A5028(void);
@@ -258,14 +258,15 @@ s32 func_i2_800FCE3C(void);
 Gfx* func_i2_800FD184(Gfx*);
 s32 func_i2_80100520(s32);
 s32 func_i2_80100C18(s32 courseIndex);
-s32 func_i2_80100C60(u8* courseIndex);
+s32 func_i2_80100C60(u8* arg0);
 s32 func_i2_80101118(s32);
 s32 func_i2_801012CC(s32);
 s32 func_i2_80101414(void);
 s32 func_i2_801014D4(unk_80141C88*);
-s32 func_i2_80101784(unk_801247C0*, s32);
 s32 func_i2_801017B8(s32 courseIndex);
 s32 func_i2_801018A8(s32 courseIndex);
+OSPiHandle* Sram_Init(void);
+void Sram_ReadWrite(s32 direction, u32 offset, void* dramAddr, size_t size);
 s32 func_i2_801037CC(unk_80141C88*, s32);
 void func_i2_80103A70(void);
 void func_i2_80103AD4(void);

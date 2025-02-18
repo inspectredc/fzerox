@@ -154,7 +154,7 @@ bool func_i8_80143D30(s32 arg0) {
     bool ret = true;
 
     for (i = 0; i < 5; i++) {
-        if (D_802A6B40[arg0].timeRecord[i] != MAX_TIMER) {
+        if (gCourseRecordInfos[arg0].timeRecord[i] != MAX_TIMER) {
             ret = false;
             break;
         }
@@ -171,7 +171,7 @@ bool func_i8_80143D84(s32 arg0) {
 
     func_i2_801014D4(&sp18);
 
-    if (sp18.unk_04 == D_802A6B40[arg0].unk_00) {
+    if (sp18.encodedCourseIndex == gCourseRecordInfos[arg0].encodedCourseIndex) {
         ret = true;
     }
     return ret;

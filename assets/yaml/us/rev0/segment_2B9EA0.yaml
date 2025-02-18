@@ -1209,7 +1209,7 @@ aMachineBodyBoostGripSmallTex:
   compression: MIO0
   symbol: aMachineBodyBoostGripSmallTex
 
-aAccelerationSpeedSliderTex:
+aEngineSliderTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F694
   ctype: u16
@@ -1217,7 +1217,7 @@ aAccelerationSpeedSliderTex:
   width: 16
   height: 16
   compression: MIO0
-  symbol: aAccelerationSpeedSliderTex
+  symbol: aEngineSliderTex
 
 aBoostTex:
   type: COMPRESSED_TEXTURE

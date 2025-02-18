@@ -1,7 +1,7 @@
 #include "global.h"
 #include "audio.h"
 #include "fzx_game.h"
-#include "fzxthread.h"
+#include "fzx_thread.h"
 
 GfxPool* D_800DCCF0;
 OSTask* sGfxTask;
@@ -213,7 +213,7 @@ s16 D_800CCFE4 = 2;
 s16 D_800CCFE8 = 2;
 
 extern bool gRamDDCompatible;
-extern s16 D_80111840;
+extern s16 gSettingSoundMode;
 
 extern unk_80225800 D_80225800;
 
@@ -349,7 +349,7 @@ void Game_ThreadEntry(void* entry) {
     Math_Rand1Init(osGetTime(), osGetTime() + osGetTime());
     Controller_Init();
     func_i10_80115DF0();
-    if (D_80111840 == 0) {
+    if (gSettingSoundMode == 0) {
         Audio_SetSoundMode(SOUNDMODE_SURROUND);
     } else {
         Audio_SetSoundMode(SOUNDMODE_MONO);

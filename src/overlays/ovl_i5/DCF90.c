@@ -143,12 +143,12 @@ void func_i5_80116830(void) {
             sUnlockedGhosts = 1;
         } else {
             // Within 115% of staff ghost time
-            if (D_802A6B40[gCourseIndex].timeRecord[0] < ((sp28.unk_08 * 115) / 100)) {
+            if (gCourseRecordInfos[gCourseIndex].timeRecord[0] < ((sp28.raceTime * 115) / 100)) {
                 sUnlockedGhosts = 2;
             } else {
                 sUnlockedGhosts = 1;
             }
-            if (D_802A6B40[gCourseIndex].timeRecord[0] < sp28.unk_08) {
+            if (gCourseRecordInfos[gCourseIndex].timeRecord[0] < sp28.raceTime) {
                 sStaffGhostTimeBeaten = true;
             }
         }
@@ -168,8 +168,8 @@ extern s32 D_800CD380;
 extern s32 D_800CD3B8;
 extern s32 D_800CD3BC;
 extern s8 D_800CD3C0;
-extern s8 D_800CD3C8;
-extern s32 D_800CD3CC;
+extern s8 gSettingEverythingUnlocked;
+extern s32 gCurrentGhostType;
 extern s32 gGameMode;
 
 void func_i5_80116934(void) {
@@ -179,7 +179,7 @@ void func_i5_80116934(void) {
     s32 var_v1;
 
     D_800CCFE8 = 3;
-    sSelectedGhostOption = D_i5_80119544[D_800CD3CC];
+    sSelectedGhostOption = D_i5_80119544[gCurrentGhostType];
     D_i5_801197E4 = -1;
     if (gGameMode == GAMEMODE_800A) {
         var_v0 = D_800CD3B8;
@@ -201,7 +201,7 @@ void func_i5_80116934(void) {
     }
     func_i5_80116830();
     var_v1 = D_800CD3C0;
-    if ((var_v1 >= 3) || (D_800CD3C8 != 0)) {
+    if ((var_v1 >= 3) || (gSettingEverythingUnlocked != 0)) {
         var_v1 = 2;
     }
 
@@ -232,10 +232,10 @@ void func_i5_80116934(void) {
     func_800794B0(0x83, var_a1, var_a2, 4);
     func_800794B0(0x80, 0, 0, 10);
     func_800794B0(0x79, 0, 0, 8);
-    if (((D_800CD3C8 != 0) || (D_800CD3C0 >= 2)) && (gGameMode != GAMEMODE_8013) && (D_800CD380 != 1)) {
+    if (((gSettingEverythingUnlocked != 0) || (D_800CD3C0 >= 2)) && (gGameMode != GAMEMODE_8013) && (D_800CD380 != 1)) {
         func_800794B0(0x7E, 0, -100, 6);
     }
-    if ((D_800CD3C0 > 0) || (D_800CD3C8 != 0)) {
+    if ((D_800CD3C0 > 0) || (gSettingEverythingUnlocked != 0)) {
         func_800794B0(0x7D, 0, -100, 6);
     }
     func_800794B0(0x7C, 0, -100, 6);
@@ -330,7 +330,7 @@ s32 func_i5_80116EEC(void) {
                     gCupSelectOption++;
                 }
                 var_v1 = D_800CD3C0;
-                if ((var_v1 >= 3) || (D_800CD3C8 != 0)) {
+                if ((var_v1 >= 3) || (gSettingEverythingUnlocked != 0)) {
                     var_v1 = 2;
                 }
 
@@ -413,7 +413,7 @@ s32 func_i5_80116EEC(void) {
                 if (unlockedGhost < sSelectedGhostOption) {
                     sSelectedGhostOption = 0;
                 }
-                D_800CD3CC = D_i5_80119544[sSelectedGhostOption];
+                gCurrentGhostType = D_i5_80119544[sSelectedGhostOption];
             }
 
             if ((gInputPressed & BTN_LEFT) && (sCourseSelectTrackNo > 0)) {
@@ -554,7 +554,7 @@ void func_i5_801177EC(unk_800E3A28* arg0) {
     cupType = arg0->unk_00 - 0x7A;
     if (cupType == JOKER_CUP || cupType == X_CUP) {
         var_v0 = D_800CD3C0;
-        if ((var_v0 >= 3) || (D_800CD3C8 != 0)) {
+        if ((var_v0 >= 3) || (gSettingEverythingUnlocked != 0)) {
             var_v0 = 2;
         }
         if (var_v0 < (cupType - 2)) {
@@ -601,11 +601,11 @@ void func_i5_801179A8(unk_800E3A28* arg0) {
     if (func_i2_801014D4(&sp20) != 0) {
         arg0->unk_00 = 0;
     }
-    if (sp20.unk_04 == 0) {
+    if (sp20.encodedCourseIndex == 0) {
         arg0->unk_00 = 0;
     }
-    arg0->unk_0C += (sp20.unk_00 % 6) * 320;
-    arg0->unk_04 = sp20.unk_00;
+    arg0->unk_0C += (sp20.courseIndex % 6) * 320;
+    arg0->unk_04 = sp20.courseIndex;
     func_80077D50(sHasGhostMarkerCompTexInfo, 0);
 }
 
@@ -656,7 +656,7 @@ Gfx* func_i5_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 extern u32 gGameFrameCount;
-extern s8 D_800E4174[];
+extern s8 gCupNumDifficultiesCleared[];
 
 Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
     s32 i;
@@ -708,14 +708,14 @@ Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
         arg1->unk_1C = 0;
     }
 
-    cupDifficultiesCleared = D_800E4174[i];
+    cupDifficultiesCleared = gCupNumDifficultiesCleared[i];
     sp80 = (SQ(arg1->unk_1C) * 3) / 2;
 
     switch (i) {
         case JOKER_CUP:
         case X_CUP:
             var_v0 = D_800CD3C0;
-            if ((var_v0 >= 3) || (D_800CD3C8 != 0)) {
+            if ((var_v0 >= 3) || (gSettingEverythingUnlocked != 0)) {
                 var_v0 = 2;
             }
             if (var_v0 < (i - 2)) {
@@ -977,7 +977,7 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
                 var_a1 = 0x80;
             } else {
                 var_v0 = D_800CD3C0;
-                if (D_800CD3C8 != 0) {
+                if (gSettingEverythingUnlocked != 0) {
                     var_v0 = 2;
                 }
                 switch (var_v0) {

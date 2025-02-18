@@ -1,11 +1,12 @@
 #include "global.h"
 #include "fzx_game.h"
+#include "fzx_save.h"
 #include "ovl_i2.h"
 
-OSIoMesg D_i2_801117B0;
-OSPiHandle D_i2_801117C8;
-OSPiHandle* D_i2_8011183C;
-s16 D_80111840;
+OSIoMesg sSramIoMesg;
+OSPiHandle sSramPiHandle;
+OSPiHandle* gSramPiHandlePtr;
+s16 gSettingSoundMode;
 u8 D_i2_80111848[30];
 
 uintptr_t D_i2_80106DF0[][3] = {
@@ -19,97 +20,92 @@ uintptr_t D_i2_80106DF0[][3] = {
     { 0x26E10, 0x26E50, 0x26E70 }, { 0x28D00, 0x28D40, 0x28D60 }, { 0x2B130, 0x2B170, 0x2B190 },
 };
 
-void func_i2_801033B8(unk_struct_60* arg0, u8* arg1);
-void func_i2_8010300C(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3);
-void func_i2_80102F70(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3);
-void func_i2_80102CA4(unk_struct_19E0* arg0, s32 courseIndex);
-void func_i2_80101F9C(void* arg0, s32 size);
+void func_i2_801033B8(CupSave*, u8*);
+void func_i2_8010300C(GhostRecord*, GhostData*, Ghost*, bool);
+void func_i2_80102F70(GhostRecord*, GhostData*, Ghost*, bool);
+void func_i2_80102CA4(ProfileSave*, s32);
+void Save_ClearData(void*, s32);
 
-extern u8 D_i2_8010D730[6][9];
+extern u8 gEditCupTrackNames[6][9];
 
-extern unk_801247C0 D_801247C0;
+extern SaveContext gSaveContext;
 
-// alignment issues with jumptable
-extern const char D_i2_8010ADE0[];
-extern const char D_i2_8010ADE8[];
+const char D_i2_8010ADE0[] = { 'F', '-', 'Z', 'E', 'R', 'O', ' ', 'X' };
+const char D_i2_8010ADE8[] = { 'D', 'A', 'I', '&', 'E', 'A', 'D', '!' };
 
-// const char D_i2_8010ADE0[] = "F-ZERO X";
-// const char D_i2_8010ADE8[] = "DAI&EAD!";
-
-void func_i2_80103728(s32, size_t, void*, size_t);
-
-void func_i2_801003B0(unk_struct_40* arg0) {
-    func_i2_80103728(OS_READ, (uintptr_t) &D_801247C0.unk_33C0 - (uintptr_t) &D_801247C0, arg0, sizeof(unk_struct_40));
+void Save_ReadGhostRecord(GhostRecord* ghostRecord) {
+    Sram_ReadWrite(OS_READ, (uintptr_t) &gSaveContext.ghostRecord - (uintptr_t) &gSaveContext, ghostRecord,
+                   sizeof(GhostRecord));
 }
 
-void func_i2_801003EC(unk_struct_3F80* arg0) {
-    func_i2_80103728(OS_READ, (uintptr_t) &D_801247C0.unk_3400 - (uintptr_t) &D_801247C0, arg0,
-                     sizeof(unk_struct_3F80));
+void Save_ReadGhostData(GhostData* ghostData) {
+    Sram_ReadWrite(OS_READ, (uintptr_t) &gSaveContext.ghostData - (uintptr_t) &gSaveContext, ghostData,
+                   sizeof(GhostData));
 }
 
-void func_i2_80100428(unk_struct_80* arg0, s32 arg1) {
-    func_i2_80103728(OS_READ, (uintptr_t) &D_801247C0.unk_7380[arg1] - (uintptr_t) &D_801247C0, arg0,
-                     sizeof(unk_struct_80));
+void Save_ReadCharacterSave(CharacterSave* characterSave, s32 courseIndex) {
+    Sram_ReadWrite(OS_READ, (uintptr_t) &gSaveContext.characterSaves[courseIndex] - (uintptr_t) &gSaveContext,
+                   characterSave, sizeof(CharacterSave));
 }
 
-void func_i2_8010046C(unk_struct_60* arg0) {
-    func_i2_80103728(OS_READ, (uintptr_t) &D_801247C0.unk_7F80 - (uintptr_t) &D_801247C0, arg0, sizeof(unk_struct_60));
+void Save_ReadCupSave(CupSave* cupSave) {
+    Sram_ReadWrite(OS_READ, (uintptr_t) &gSaveContext.cupSave - (uintptr_t) &gSaveContext, cupSave, sizeof(CupSave));
 }
 
-void func_i2_801004A8(unk_struct_19E0* arg0) {
+void Save_ReadProfileSaves(ProfileSave* profileSave) {
     s32 i;
-    unk_struct_19E0* var_s2;
-    unk_struct_19E0* var_s0;
+    ProfileSave* outProfile;
+    ProfileSave* savedProfile;
 
-    for (var_s0 = D_801247C0.unk_00, i = 0, var_s2 = arg0; i < 2 * sizeof(unk_struct_19E0);
-         i += sizeof(unk_struct_19E0), var_s0++, var_s2++) {
-        func_i2_80103728(OS_READ, (uintptr_t) var_s0 - (uintptr_t) &D_801247C0, var_s2, sizeof(unk_struct_19E0));
+    for (savedProfile = gSaveContext.profileSaves, i = 0, outProfile = profileSave; i < 2 * sizeof(ProfileSave);
+         i += sizeof(ProfileSave), savedProfile++, outProfile++) {
+        Sram_ReadWrite(OS_READ, (uintptr_t) savedProfile - (uintptr_t) &gSaveContext, outProfile, sizeof(ProfileSave));
     }
 }
 
-extern unk_800E5FF8 D_800E5FF8[];
-extern u32 D_800CD3CC;
+extern Ghost gGhosts[];
+extern s32 gCurrentGhostType;
 
 s32 func_i2_80100810(s32, s32);
 s32 func_i2_8010387C(s32);
 
-s32 func_i2_80100520(s32 arg0) {
+s32 func_i2_80100520(s32 courseIndex) {
     s32 i;
     s32 sp18;
-    s32 temp_a1 = D_802A6B40[arg0].unk_00;
-    unk_800E5FF8* var_v0 = D_800E5FF8;
+    s32 encodedCourseIndex = gCourseRecordInfos[courseIndex].encodedCourseIndex;
+    Ghost* var_v0 = gGhosts;
 
     for (i = 0; i < 3; i++) {
-        if (temp_a1 != var_v0->unk_0000) {
-            var_v0->unk_0000 = 0;
+        if (encodedCourseIndex != var_v0->encodedCourseIndex) {
+            var_v0->encodedCourseIndex = 0;
         }
         var_v0++;
     }
-    switch (D_800CD3CC) {
-        case 3:
-        case 4:
+    switch (gCurrentGhostType) {
+        case GHOST_CELEBRITY:
+        case GHOST_CHAMP:
             break;
-        case 0:
-        case 1:
-            sp18 = func_i2_80100810(arg0, -1);
+        case GHOST_NONE:
+        case GHOST_PLAYER:
+            sp18 = func_i2_80100810(courseIndex, -1);
             break;
-        case 2:
-            sp18 = func_i2_8010387C(arg0);
+        case GHOST_STAFF:
+            sp18 = func_i2_8010387C(courseIndex);
             break;
     }
     return sp18;
 }
 
-s32 func_i2_801005CC(s32 arg0) {
+s32 func_i2_801005CC(s32 courseIndex) {
     s32 i;
     s32 var_a0;
     s32 var_v1;
-    unk_800E5FF8* var_a1;
+    Ghost* var_a1;
 
     var_v1 = -1;
 
-    for (i = 0, var_a1 = D_800E5FF8; i < 3; i++, var_a1++) {
-        if (var_a1->unk_0000 == 0) {
+    for (i = 0, var_a1 = gGhosts; i < 3; i++, var_a1++) {
+        if (var_a1->encodedCourseIndex == 0) {
             var_v1 = i;
             break;
         }
@@ -119,8 +115,8 @@ s32 func_i2_801005CC(s32 arg0) {
         return var_v1;
     }
 
-    for (i = 0, var_a1 = D_800E5FF8; i < 3; i++, var_a1++) {
-        if (var_a1->unk_3F68 != 1) {
+    for (i = 0, var_a1 = gGhosts; i < 3; i++, var_a1++) {
+        if (var_a1->ghostType != GHOST_PLAYER) {
             var_v1 = i;
             break;
         }
@@ -131,28 +127,28 @@ s32 func_i2_801005CC(s32 arg0) {
         return var_v1;
     }
 
-    for (i = 0, var_a1 = D_800E5FF8; i < 3; i++, var_a1++) {
-        if (arg0 != (var_a1->unk_0000 % 32)) {
+    for (i = 0, var_a1 = gGhosts; i < 3; i++, var_a1++) {
+        if (courseIndex != (var_a1->encodedCourseIndex & 0x1F)) {
             var_v1 = i;
-            var_a0 = var_a1->unk_0004;
+            var_a0 = var_a1->raceTime;
             break;
         }
     }
 
     if (var_a0 != -1) {
-        for (i = var_v1 + 1, var_a1 = &D_800E5FF8[i]; i < 3; i++, var_a1++) {
-            if (arg0 != (var_a1->unk_0000 % 32)) {
-                if (var_a0 < var_a1->unk_0004) {
-                    var_a0 = var_a1->unk_0004;
+        for (i = var_v1 + 1, var_a1 = &gGhosts[i]; i < 3; i++, var_a1++) {
+            if (courseIndex != (var_a1->encodedCourseIndex & 0x1F)) {
+                if (var_a0 < var_a1->raceTime) {
+                    var_a0 = var_a1->raceTime;
                     var_v1 = i;
                 }
             }
         }
     } else {
-        for (i = 0, var_a1 = D_800E5FF8; i < 3; i++, var_a1++) {
-            if (arg0 == (var_a1->unk_0000 % 32)) {
-                if (var_a0 < var_a1->unk_0004) {
-                    var_a0 = var_a1->unk_0004;
+        for (i = 0, var_a1 = gGhosts; i < 3; i++, var_a1++) {
+            if (courseIndex == (var_a1->encodedCourseIndex & 0x1F)) {
+                if (var_a0 < var_a1->raceTime) {
+                    var_a0 = var_a1->raceTime;
                     var_v1 = i;
                 }
             }
@@ -164,9 +160,9 @@ s32 func_i2_801005CC(s32 arg0) {
 bool func_i2_80100B38(unk_80141C88*);
 s32 func_i2_801005CC(s32);
 
-s32 func_i2_80100810(s32 arg0, s32 arg1) {
-    unk_struct_40* var = (unk_struct_40*) D_i2_8010D7F0;
-    unk_struct_3F80* var2 = (unk_struct_3F80*) &D_i2_8010D7F0[sizeof(unk_struct_40)];
+s32 func_i2_80100810(s32 courseIndex, s32 arg1) {
+    GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
+    GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
     s32 var_t0;
     s32 pad2[4];
     unk_80141C88 sp24;
@@ -176,7 +172,7 @@ s32 func_i2_80100810(s32 arg0, s32 arg1) {
     if (temp_v0 != 0) {
         return temp_v0;
     }
-    if (sp24.unk_00 != arg0) {
+    if (sp24.courseIndex != courseIndex) {
         return 2;
     }
 
@@ -184,86 +180,87 @@ s32 func_i2_80100810(s32 arg0, s32 arg1) {
         return 0;
     }
     if (arg1 == -1) {
-        var_t0 = func_i2_801005CC(arg0);
+        var_t0 = func_i2_801005CC(courseIndex);
 
-        if ((D_800E5FF8[var_t0].unk_0000 != 0) && (D_800E5FF8[var_t0].unk_3F68 == 1) &&
-            (sp24.unk_00 == (D_800E5FF8[var_t0].unk_0000 & 0x1F)) && (D_800E5FF8[var_t0].unk_0004 < sp24.unk_08)) {
+        if ((gGhosts[var_t0].encodedCourseIndex != 0) && (gGhosts[var_t0].ghostType == GHOST_PLAYER) &&
+            (sp24.courseIndex == (gGhosts[var_t0].encodedCourseIndex & 0x1F)) &&
+            (gGhosts[var_t0].raceTime < sp24.raceTime)) {
             return 0;
         }
     } else {
         var_t0 = arg1;
     }
 
-    func_i2_801003EC(var2);
-    func_i2_80102F70(var, var2, &D_800E5FF8[var_t0], 1);
-    func_i2_8010300C(var, var2, &D_800E5FF8[var_t0], 1);
+    Save_ReadGhostData(ghostData);
+    func_i2_80102F70(ghostRecord, ghostData, &gGhosts[var_t0], true);
+    func_i2_8010300C(ghostRecord, ghostData, &gGhosts[var_t0], true);
 
     return 0;
 }
 
-bool func_i2_80100950(u8* arg0, u8* arg1) {
-    bool var_v1 = true;
+bool func_i2_80100950(CarInfo* carInfo, unk_80141C88_unk_1D* arg1) {
+    bool matching = true;
 
-    if (arg1[0] != arg0[0]) {
-        var_v1 = false;
-    } else if (arg1[1] != arg0[1]) {
-        var_v1 = false;
-    } else if (arg1[2] != arg0[2]) {
-        var_v1 = false;
-    } else if (arg1[3] != arg0[3]) {
-        var_v1 = false;
-    } else if (arg1[4] != arg0[4]) {
-        var_v1 = false;
-    } else if (arg1[5] != arg0[5]) {
-        var_v1 = false;
-    } else if (arg1[6] != arg0[6]) {
-        var_v1 = false;
-    } else if (arg1[7] != arg0[7]) {
-        var_v1 = false;
-    } else if (arg1[8] != arg0[8]) {
-        var_v1 = false;
-    } else if (arg1[9] != arg0[9]) {
-        var_v1 = false;
-    } else if (arg1[10] != arg0[10]) {
-        var_v1 = false;
-    } else if (arg1[11] != arg0[11]) {
-        var_v1 = false;
-    } else if (arg1[12] != arg0[12]) {
-        var_v1 = false;
-    } else if (arg1[13] != arg0[13]) {
-        var_v1 = false;
-    } else if (arg1[14] != arg0[14]) {
-        var_v1 = false;
-    } else if (arg1[15] != arg0[15]) {
-        var_v1 = false;
-    } else if (arg1[16] != arg0[16]) {
-        var_v1 = false;
-    } else if (arg1[17] != arg0[17]) {
-        var_v1 = false;
-    } else if (arg1[18] != arg0[18]) {
-        var_v1 = false;
-    } else if (arg1[19] != arg0[19]) {
-        var_v1 = false;
+    if (arg1->unk_00.unk_00[0] != carInfo->unk_00[0]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[1] != carInfo->unk_00[1]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[2] != carInfo->unk_00[2]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[3] != carInfo->unk_00[3]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[4] != carInfo->unk_00[4]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[5] != carInfo->unk_00[5]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[6] != carInfo->unk_00[6]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[7] != carInfo->unk_00[7]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[8] != carInfo->unk_00[8]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[9] != carInfo->unk_00[9]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[10] != carInfo->unk_00[10]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[11] != carInfo->unk_00[11]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[12] != carInfo->unk_00[12]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[13] != carInfo->unk_00[13]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[14] != carInfo->unk_00[14]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[15] != carInfo->unk_00[15]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[16] != carInfo->unk_00[16]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[17] != carInfo->unk_00[17]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[18] != carInfo->unk_00[18]) {
+        matching = false;
+    } else if (arg1->unk_00.unk_00[19] != carInfo->unk_00[19]) {
+        matching = false;
     }
-    return var_v1;
+    return matching;
 }
 
 bool func_i2_80100B38(unk_80141C88* arg0) {
     s32 var_s1;
     s32 i;
-    unk_800E5FF8* var_s0 = D_800E5FF8;
+    Ghost* var_s0 = gGhosts;
 
     for (i = 0; i < 3; i++) {
         var_s1 = true;
-        if (var_s0->unk_3F68 != arg0->unk_10) {
+        if (var_s0->ghostType != arg0->ghostType) {
             var_s1 = false;
-        } else if (var_s0->unk_3F64 != arg0->unk_0C) {
+        } else if (var_s0->replayChecksum != arg0->replayChecksum) {
             var_s1 = false;
-        } else if (var_s0->unk_0000 != arg0->unk_04) {
+        } else if (var_s0->encodedCourseIndex != arg0->encodedCourseIndex) {
             var_s1 = false;
-        } else if (var_s0->unk_0004 != arg0->unk_08) {
+        } else if (var_s0->raceTime != arg0->raceTime) {
             var_s1 = false;
-        } else if (!func_i2_80100950(var_s0->unk_3F6A, arg0->unk_1D.unk_00)) {
+        } else if (!func_i2_80100950(&var_s0->carInfo, &arg0->unk_1D)) {
             var_s1 = false;
         }
 
@@ -275,851 +272,856 @@ bool func_i2_80100B38(unk_80141C88* arg0) {
     return var_s1;
 }
 
-void func_i2_80103310(unk_struct_80*, s32);
+void func_i2_80103310(CharacterSave*, s32);
 
 s32 func_i2_80100C18(s32 courseIndex) {
-    unk_struct_80* var = (unk_struct_80*) D_i2_8010D7F0;
+    CharacterSave* characterSaves = (CharacterSave*) gSaveBuffer;
 
-    func_i2_80100428(&var[courseIndex], courseIndex);
-    func_i2_80103310(&var[courseIndex], courseIndex);
+    Save_ReadCharacterSave(&characterSaves[courseIndex], courseIndex);
+    func_i2_80103310(&characterSaves[courseIndex], courseIndex);
     return 0;
 }
 
-s32 func_i2_80100C60(u8* courseIndex) {
-    unk_struct_60* var = (unk_struct_60*) D_i2_8010D7F0;
+s32 func_i2_80100C60(u8* arg0) {
+    CupSave* cupSave = (CupSave*) gSaveBuffer;
 
-    func_i2_8010046C(var);
-    func_i2_801033B8(var, courseIndex);
+    Save_ReadCupSave(cupSave);
+    func_i2_801033B8(cupSave, arg0);
     return 0;
 }
 
-s32 func_i2_8010356C(unk_struct_19E0*);
-s32 func_i2_8010358C(unk_struct_19E0*);
-s32 func_i2_801035B0(unk_struct_19E0*, s32);
-s32 func_i2_801035E4(unk_struct_19E0*);
-s32 func_i2_80103608(unk_struct_40*);
-s32 func_i2_8010362C(unk_struct_3F80*);
-s32 func_i2_80103650(unk_struct_80*);
-s32 func_i2_80103674(unk_struct_60*);
+s32 Save_CalculateSaveSettingsChecksum(ProfileSave*);
+s32 Save_CalculateSaveDeathRaceChecksum(ProfileSave*);
+s32 Save_CalculateSaveCourseRecordChecksum(ProfileSave*, s32);
+s32 Save_CalculateSaveEditCupChecksum(ProfileSave*);
+s32 Save_CalculateGhostRecordChecksum(GhostRecord*);
+s32 Save_CalculateGhostDataChecksum(GhostData*);
+s32 Save_CalculateCharacterSaveChecksum(CharacterSave*);
+s32 Save_CalculateCupSaveChecksum(CupSave*);
 
-void func_i2_80100C9C(unk_801247C0* arg0) {
+void Save_InitWrite(SaveContext* saveContext) {
     s32 i;
     s32 j;
     s32 checksum;
-    unk_struct_80* var_s1;
-    unk_struct_19E0* var_v1;
+    CharacterSave* characterSave;
+    ProfileSave* profileSave;
 
-    checksum = func_i2_8010356C(arg0->unk_00);
+    checksum = Save_CalculateSaveSettingsChecksum(saveContext->profileSaves);
 
-    for (i = 0, var_v1 = arg0->unk_00; i < 2; i++, var_v1++) {
-        var_v1->unk_00.checksum = checksum;
+    for (i = 0, profileSave = saveContext->profileSaves; i < 2; i++, profileSave++) {
+        profileSave->saveSettings.checksum = checksum;
     }
-    checksum = func_i2_8010358C(arg0->unk_00);
+    checksum = Save_CalculateSaveDeathRaceChecksum(saveContext->profileSaves);
 
-    for (i = 0, var_v1 = arg0->unk_00; i < 2; i++, var_v1++) {
-        var_v1->unk_10.checksum = checksum;
+    for (i = 0, profileSave = saveContext->profileSaves; i < 2; i++, profileSave++) {
+        profileSave->deathRace.checksum = checksum;
     }
 
     for (j = 0; j < 24; j++) {
-        checksum = func_i2_801035B0(arg0->unk_00, j);
+        checksum = Save_CalculateSaveCourseRecordChecksum(saveContext->profileSaves, j);
 
-        for (i = 0, var_v1 = arg0->unk_00; i < 2; i++, var_v1++) {
-            var_v1->unk_20[j].checksum = checksum;
+        for (i = 0, profileSave = saveContext->profileSaves; i < 2; i++, profileSave++) {
+            profileSave->courses[j].checksum = checksum;
         }
     }
-    checksum = func_i2_801035E4(arg0->unk_00);
+    checksum = Save_CalculateSaveEditCupChecksum(saveContext->profileSaves);
 
-    for (i = 0, var_v1 = arg0->unk_00; i < 2; i++, var_v1++) {
-        var_v1->unk_19A0.checksum = checksum;
+    for (i = 0, profileSave = saveContext->profileSaves; i < 2; i++, profileSave++) {
+        profileSave->editCup.checksum = checksum;
     }
-    arg0->unk_33C0.checksum = func_i2_80103608(&arg0->unk_33C0);
-    arg0->unk_3400.checksum = func_i2_8010362C(&arg0->unk_3400);
+    saveContext->ghostRecord.checksum = Save_CalculateGhostRecordChecksum(&saveContext->ghostRecord);
+    saveContext->ghostData.checksum = Save_CalculateGhostDataChecksum(&saveContext->ghostData);
 
-    for (i = 0, var_s1 = arg0->unk_7380; i < 24; i++, var_s1++) {
-        var_s1->checksum = func_i2_80103650(var_s1);
+    for (i = 0, characterSave = saveContext->characterSaves; i < 24; i++, characterSave++) {
+        characterSave->checksum = Save_CalculateCharacterSaveChecksum(characterSave);
     }
-    arg0->unk_7F80.checksum = func_i2_80103674(&arg0->unk_7F80);
-    func_i2_80103728(OS_WRITE, 0, arg0, sizeof(unk_801247C0));
+    saveContext->cupSave.checksum = Save_CalculateCupSaveChecksum(&saveContext->cupSave);
+    Sram_ReadWrite(OS_WRITE, 0, saveContext, sizeof(SaveContext));
 }
 
-void func_i2_80100DDC(unk_struct_19E0* arg0, s32 arg1, u16 checksum) {
-    unk_struct_19E0* temp_a2 = &arg0[arg1];
+void Save_WriteSaveSettings(ProfileSave* profileSaves, s32 profileIndex, u16 checksum) {
+    ProfileSave* profileSave = &profileSaves[profileIndex];
 
-    temp_a2->unk_00.checksum = checksum;
-    func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_00[arg1].unk_00 - (uintptr_t) &D_801247C0, temp_a2,
-                     sizeof(unk_struct_10));
+    profileSave->saveSettings.checksum = checksum;
+    Sram_ReadWrite(OS_WRITE,
+                   (uintptr_t) &gSaveContext.profileSaves[profileIndex].saveSettings - (uintptr_t) &gSaveContext,
+                   &profileSave->saveSettings, sizeof(SaveSettings));
 }
 
-void func_i2_80100E64(unk_struct_19E0* arg0, s32 arg1, u16 checksum) {
-    unk_struct_19E0* temp_v1 = &arg0[arg1];
-    temp_v1->unk_10.checksum = checksum;
+void Save_WriteSaveDeathRace(ProfileSave* profileSaves, s32 profileIndex, u16 checksum) {
+    ProfileSave* profileSave = &profileSaves[profileIndex];
 
-    func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_00[arg1].unk_10 - (uintptr_t) &D_801247C0, &temp_v1->unk_10,
-                     sizeof(unk_struct_10_2));
+    profileSave->deathRace.checksum = checksum;
+    Sram_ReadWrite(OS_WRITE, (uintptr_t) &gSaveContext.profileSaves[profileIndex].deathRace - (uintptr_t) &gSaveContext,
+                   &profileSave->deathRace, sizeof(SaveDeathRace));
 }
 
-void func_i2_80100ED4(unk_struct_19E0* arg0, s32 arg1, s32 arg2, u16 checksum) {
-    unk_struct_19E0* temp_v1 = &arg0[arg1];
-    unk_struct_110* temp_v0 = &temp_v1->unk_20[arg2];
+void Save_WriteSaveCourseRecord(ProfileSave* profileSaves, s32 profileIndex, s32 courseIndex, u16 checksum) {
+    ProfileSave* profileSave = &profileSaves[profileIndex];
+    SaveCourseRecords* courseRecord = &profileSave->courses[courseIndex];
 
-    temp_v0->checksum = checksum;
-    func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_00[arg1].unk_20[arg2] - (uintptr_t) &D_801247C0, temp_v0,
-                     sizeof(unk_struct_110));
+    courseRecord->checksum = checksum;
+    Sram_ReadWrite(
+        OS_WRITE, (uintptr_t) &gSaveContext.profileSaves[profileIndex].courses[courseIndex] - (uintptr_t) &gSaveContext,
+        courseRecord, sizeof(SaveCourseRecords));
 }
 
-void func_i2_80100F7C(unk_struct_19E0* arg0, s32 arg1, u16 checksum) {
-    unk_struct_19E0* temp_v1 = &arg0[arg1];
+void Save_WriteSaveEditCup(ProfileSave* profileSaves, s32 profileIndex, u16 checksum) {
+    ProfileSave* profileSave = &profileSaves[profileIndex];
 
-    temp_v1->unk_19A0.checksum = checksum;
-    func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_00[arg1].unk_19A0 - (uintptr_t) &D_801247C0,
-                     &temp_v1->unk_19A0, sizeof(unk_struct_40_2));
+    profileSave->editCup.checksum = checksum;
+    Sram_ReadWrite(OS_WRITE, (uintptr_t) &gSaveContext.profileSaves[profileIndex].editCup - (uintptr_t) &gSaveContext,
+                   &profileSave->editCup, sizeof(SaveEditCup));
 }
 
-void func_i2_80100FEC(unk_struct_40* arg0) {
-    arg0->checksum = func_i2_80103608(arg0);
-    func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_33C0 - (uintptr_t) &D_801247C0, arg0, sizeof(unk_struct_40));
+void Save_WriteGhostRecord(GhostRecord* ghostRecord) {
+    ghostRecord->checksum = Save_CalculateGhostRecordChecksum(ghostRecord);
+    Sram_ReadWrite(OS_WRITE, (uintptr_t) &gSaveContext.ghostRecord - (uintptr_t) &gSaveContext, ghostRecord,
+                   sizeof(GhostRecord));
 }
 
-void func_i2_80101034(unk_struct_3F80* arg0) {
-    arg0->checksum = func_i2_8010362C(arg0);
-    func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_3400 - (uintptr_t) &D_801247C0, arg0,
-                     sizeof(unk_struct_3F80));
+void Save_WriteGhostData(GhostData* ghostData) {
+    ghostData->checksum = Save_CalculateGhostDataChecksum(ghostData);
+    Sram_ReadWrite(OS_WRITE, (uintptr_t) &gSaveContext.ghostData - (uintptr_t) &gSaveContext, ghostData,
+                   sizeof(GhostData));
 }
 
-void func_i2_8010107C(unk_struct_80* arg0, s32 arg1) {
-    arg0->checksum = func_i2_80103650(arg0);
-    func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_7380[arg1] - (uintptr_t) &D_801247C0, arg0,
-                     sizeof(unk_struct_80));
+void Save_WriteCharacterSave(CharacterSave* characterSave, s32 courseIndex) {
+    characterSave->checksum = Save_CalculateCharacterSaveChecksum(characterSave);
+    Sram_ReadWrite(OS_WRITE, (uintptr_t) &gSaveContext.characterSaves[courseIndex] - (uintptr_t) &gSaveContext,
+                   characterSave, sizeof(CharacterSave));
 }
 
-void func_i2_801010D0(unk_struct_60* arg0) {
-    arg0->checksum = func_i2_80103674(arg0);
-    func_i2_80103728(OS_WRITE, (uintptr_t) &D_801247C0.unk_7F80 - (uintptr_t) &D_801247C0, arg0, sizeof(unk_struct_60));
+void Save_WriteCupSave(CupSave* cupSave) {
+    cupSave->checksum = Save_CalculateCupSaveChecksum(cupSave);
+    Sram_ReadWrite(OS_WRITE, (uintptr_t) &gSaveContext.cupSave - (uintptr_t) &gSaveContext, cupSave, sizeof(CupSave));
 }
 
-void func_i2_80102214(unk_struct_110* arg0, s32 courseIndex);
+void func_i2_80102214(SaveCourseRecords*, s32);
 
-s32 func_i2_80101118(s32 arg0) {
+s32 func_i2_80101118(s32 courseIndex) {
     u16 checksum;
     s32 i;
-    unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
+    ProfileSave* profileSaves = (ProfileSave*) gSaveBuffer;
 
-    func_i2_80102214(&var[0].unk_20[arg0], arg0);
-    var[1].unk_20[arg0] = var[0].unk_20[arg0];
+    func_i2_80102214(&profileSaves[0].courses[courseIndex], courseIndex);
+    profileSaves[1].courses[courseIndex] = profileSaves[0].courses[courseIndex];
 
-    checksum = func_i2_801035B0(var, arg0);
+    checksum = Save_CalculateSaveCourseRecordChecksum(profileSaves, courseIndex);
 
     for (i = 0; i < 2; i++) {
-        func_i2_80100ED4(var, i, arg0, checksum);
+        Save_WriteSaveCourseRecord(profileSaves, i, courseIndex, checksum);
     }
 
     return 0;
 }
 
 extern s32 gRamDDCompatible;
-void func_i2_80102350(unk_struct_40_2* arg0);
+void func_i2_80102350(SaveEditCup*);
 
 s32 func_i2_801011FC(void) {
     u16 checksum;
     s32 i;
-    unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
+    ProfileSave* profileSaves = (ProfileSave*) gSaveBuffer;
 
     if (!gRamDDCompatible) {
         return 3;
     }
-    func_i2_80102350(&var[0].unk_19A0);
+    func_i2_80102350(&profileSaves[0].editCup);
 
-    var[1].unk_19A0 = var[0].unk_19A0;
+    profileSaves[1].editCup = profileSaves[0].editCup;
 
-    checksum = func_i2_801035E4(var);
+    checksum = Save_CalculateSaveEditCupChecksum(profileSaves);
 
     for (i = 0; i < 2; i++) {
-        func_i2_80100F7C(var, i, checksum);
+        Save_WriteSaveEditCup(profileSaves, i, checksum);
     }
 
     return 0;
 }
 
-void func_i2_8010259C(unk_struct_80*);
+void func_i2_8010259C(CharacterSave*);
 
-s32 func_i2_801012CC(s32 arg0) {
+s32 func_i2_801012CC(s32 courseIndex) {
     s32 pad[2];
-    unk_struct_80* var = (unk_struct_80*) D_i2_8010D7F0;
+    CharacterSave* characterSaves = (CharacterSave*) gSaveBuffer;
 
-    func_i2_8010259C(&var[arg0]);
-    func_i2_8010107C(&var[arg0], arg0);
+    func_i2_8010259C(&characterSaves[courseIndex]);
+    Save_WriteCharacterSave(&characterSaves[courseIndex], courseIndex);
     return 0;
 }
 
-s32 func_i2_80101310(s32 difficulty, s32 cupType, s32 character) {
+s32 Save_UpdateCupCompletion(s32 difficulty, s32 cupType, s32 character) {
     s32 i;
-    s32 temp;
-    unk_struct_60* var = (unk_struct_60*) D_i2_8010D7F0;
+    s32 cupCompletion;
+    CupSave* cupSave = (CupSave*) gSaveBuffer;
 
-    func_i2_8010046C(var);
-    func_i2_801033B8(var, NULL);
+    Save_ReadCupSave(cupSave);
+    func_i2_801033B8(cupSave, NULL);
 
-    temp = var->unk_10[difficulty][character / 3];
-    temp |= (1 << ((character % 3) * 5)) << cupType;
+    cupCompletion = cupSave->cupCompletion[difficulty][character / 3];
+    cupCompletion |= (1 << ((character % 3) * 5)) << cupType;
 
-    var->unk_10[difficulty][character / 3] = temp;
+    cupSave->cupCompletion[difficulty][character / 3] = cupCompletion;
 
     // clang-format off
     for (i = 0; i < 14; i++) { \
-        var->unk_02[i] = 0;
+        cupSave->unk_02[i] = 0;
     }
     // clang-format on
 
-    func_i2_801010D0(var);
+    Save_WriteCupSave(cupSave);
 
     return 0;
 }
 
-void func_i2_80101FEC(unk_struct_10* arg0);
+void func_i2_80101FEC(SaveSettings*);
 
 s32 func_i2_80101414(void) {
     u16 checksum;
     s32 i;
-    unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
+    ProfileSave* profileSaves = (ProfileSave*) gSaveBuffer;
 
-    func_i2_80101FEC(&var[0].unk_00);
-    var[1].unk_00 = var[0].unk_00;
+    func_i2_80101FEC(&profileSaves[0].saveSettings);
+    profileSaves[1].saveSettings = profileSaves[0].saveSettings;
 
-    checksum = func_i2_8010356C(var);
+    checksum = Save_CalculateSaveSettingsChecksum(profileSaves);
 
     for (i = 0; i < 2; i++) {
-        func_i2_80100DDC(var, i, checksum);
+        Save_WriteSaveSettings(profileSaves, i, checksum);
     }
 
     return 0;
 }
 
-void func_i2_80101590(unk_struct_40* arg0, unk_80141C88* arg1);
-void func_i2_80101E68(unk_struct_3F80* arg0, s32 arg1);
-void func_i2_80101DE8(unk_struct_40* arg0, s32 arg1);
+void func_i2_80101590(GhostRecord*, unk_80141C88*);
+void func_i2_80101E68(GhostData*, bool);
+void func_i2_80101DE8(GhostRecord*, bool);
 
 s32 func_i2_801014D4(unk_80141C88* arg0) {
     s32 pad;
     s32 var_v1;
-    unk_struct_40* var = (unk_struct_40*) D_i2_8010D7F0;
-    unk_struct_3F80* var2 = (unk_struct_3F80*) &D_i2_8010D7F0[sizeof(unk_struct_40)];
+    GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
+    GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
-    func_i2_801003B0(var);
+    Save_ReadGhostRecord(ghostRecord);
     var_v1 = 0;
 
-    if (var->checksum != func_i2_80103608(var) * 1) {
-        func_i2_80101DE8(var, 1);
-        func_i2_80100FEC(var);
-        func_i2_80101E68(var2, 1);
-        func_i2_80101034(var2);
+    if (ghostRecord->checksum != Save_CalculateGhostRecordChecksum(ghostRecord) * 1) {
+        func_i2_80101DE8(ghostRecord, true);
+        Save_WriteGhostRecord(ghostRecord);
+        func_i2_80101E68(ghostData, true);
+        Save_WriteGhostData(ghostData);
         var_v1 = 1;
     }
 
-    if (arg0 != 0) {
-        func_i2_80101590(var, arg0);
+    if (arg0 != NULL) {
+        func_i2_80101590(ghostRecord, arg0);
     }
-    if ((var_v1 == 0) && (var->unk_08 == 0)) {
+    if ((var_v1 == 0) && (ghostRecord->encodedCourseIndex == 0)) {
         var_v1 = 2;
     }
     return var_v1;
 }
 
-void func_i2_80101590(unk_struct_40* arg0, unk_80141C88* arg1) {
+void func_i2_80101590(GhostRecord* ghostRecord, unk_80141C88* arg1) {
     s32 i;
 
-    arg1->unk_00 = arg0->unk_08 % 32U;
+    arg1->courseIndex = ghostRecord->encodedCourseIndex & 0x1F;
 
-    arg1->unk_04 = arg0->unk_08;
-    arg1->unk_08 = arg0->unk_0C;
-    arg1->unk_0C = arg0->unk_04;
-    arg1->unk_10 = arg0->unk_02;
-    arg1->unk_12 = arg0->unk_10;
+    arg1->encodedCourseIndex = ghostRecord->encodedCourseIndex;
+    arg1->raceTime = ghostRecord->raceTime;
+    arg1->replayChecksum = ghostRecord->replayChecksum;
+    arg1->ghostType = ghostRecord->ghostType;
+    arg1->unk_12 = ghostRecord->unk_10;
 
     for (i = 0; i < 9; i++) {
-        arg1->unk_14[i] = arg0->unk_17[i];
+        arg1->trackName[i] = ghostRecord->trackName[i];
     }
-    arg1->unk_1D = arg0->unk_20;
+    arg1->unk_1D = ghostRecord->unk_20;
 }
 
-void func_i2_801023D8(unk_800E5FF8*);
-void func_i2_801024F8(unk_800E5FF8*);
+void func_i2_801023D8(Ghost*);
+void func_i2_801024F8(Ghost*);
 
-s32 func_i2_80101690(s32 arg0, unk_800E5FF8* arg1) {
-    unk_struct_40* var = (unk_struct_40*) D_i2_8010D7F0;
-    unk_struct_3F80* var2 = (unk_struct_3F80*) &D_i2_8010D7F0[sizeof(unk_struct_40)];
+s32 func_i2_80101690(s32 courseIndex, Ghost* arg1) {
+    GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
+    GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
     func_i2_801023D8(arg1);
-    func_i2_80100FEC(var);
+    Save_WriteGhostRecord(ghostRecord);
     func_i2_801024F8(arg1);
-    func_i2_80101034(var2);
+    Save_WriteGhostData(ghostData);
     return 0;
 }
 
-void func_i2_801021B4(unk_struct_10_2* arg0);
+void func_i2_801021B4(SaveDeathRace*);
 
 s32 func_i2_801016DC(void) {
-    u16 temp_s1;
+    u16 checksum;
     s32 i;
-    unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
+    ProfileSave* profileSaves = (ProfileSave*) gSaveBuffer;
 
-    func_i2_801021B4(&var[0].unk_10);
-    var[1].unk_10 = var[0].unk_10;
+    func_i2_801021B4(&profileSaves[0].deathRace);
+    profileSaves[1].deathRace = profileSaves[0].deathRace;
 
-    temp_s1 = func_i2_8010358C(var);
+    checksum = Save_CalculateSaveDeathRaceChecksum(profileSaves);
 
     for (i = 0; i < 2; i++) {
-        func_i2_80100E64(var, i, temp_s1);
+        Save_WriteSaveDeathRace(profileSaves, i, checksum);
     }
 
     return 0;
 }
 
-void func_i2_80102600(unk_801247C0* arg0);
-void func_i2_80101944(unk_801247C0* arg0, s32 arg1);
+void Save_Load(SaveContext*);
+void Save_CreateNew(SaveContext*, s32);
 
-s32 func_i2_80101784(unk_801247C0* arg0, s32 arg1) {
-    func_i2_80101944(arg0, arg1);
-    func_i2_80100C9C(arg0);
-    func_i2_80102600(arg0);
+s32 Save_Init(SaveContext* saveContext, s32 arg1) {
+    Save_CreateNew(saveContext, arg1);
+    Save_InitWrite(saveContext);
+    Save_Load(saveContext);
     return 0;
 }
 
-void func_i2_80101D18(unk_struct_110*, s32);
+void func_i2_80101D18(SaveCourseRecords*, bool);
 
 s32 func_i2_801017B8(s32 courseIndex) {
     u16 checksum;
     s32 i;
-    unk_struct_19E0* var = (unk_struct_19E0*) D_i2_8010D7F0;
+    ProfileSave* profileSaves = (ProfileSave*) gSaveBuffer;
 
-    func_i2_80101D18(&var[0].unk_20[courseIndex], 1);
-    var[1].unk_20[courseIndex] = var[0].unk_20[courseIndex];
+    func_i2_80101D18(&profileSaves[0].courses[courseIndex], true);
+    profileSaves[1].courses[courseIndex] = profileSaves[0].courses[courseIndex];
 
-    checksum = func_i2_801035B0(var, courseIndex);
+    checksum = Save_CalculateSaveCourseRecordChecksum(profileSaves, courseIndex);
 
     for (i = 0; i < 2; i++) {
-        func_i2_80100ED4(var, i, courseIndex, checksum);
+        Save_WriteSaveCourseRecord(profileSaves, i, courseIndex, checksum);
     }
 
-    func_i2_80102CA4(var, courseIndex);
+    func_i2_80102CA4(profileSaves, courseIndex);
 
     return 0;
 }
 
 s32 func_i2_801018A8(s32 courseIndex) {
     s32 i;
-    unk_800E5FF8* var_v0;
-    unk_struct_40* var = (unk_struct_40*) D_i2_8010D7F0;
-    unk_struct_3F80* var2 = (unk_struct_3F80*) &D_i2_8010D7F0[sizeof(unk_struct_40)];
+    Ghost* ghost;
+    GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
+    GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
-    for (i = 0, var_v0 = D_800E5FF8; i < 3; i++, var_v0++) {
-        if (var_v0->unk_0000 == D_802A6B40[courseIndex].unk_00) {
-            var_v0->unk_0000 = 0;
+    for (i = 0, ghost = gGhosts; i < 3; i++, ghost++) {
+        if (ghost->encodedCourseIndex == gCourseRecordInfos[courseIndex].encodedCourseIndex) {
+            ghost->encodedCourseIndex = 0;
         }
     }
-    func_i2_80101DE8(var, 1);
-    func_i2_80100FEC(var);
-    func_i2_80101E68(var2, 1);
-    func_i2_80101034(var2);
+    func_i2_80101DE8(ghostRecord, true);
+    Save_WriteGhostRecord(ghostRecord);
+    func_i2_80101E68(ghostData, true);
+    Save_WriteGhostData(ghostData);
     return 0;
 }
 
-void func_i2_80101B8C(unk_struct_10*, s32);
-void func_i2_80101C04(unk_struct_40_2*, s32);
-void func_i2_80101CCC(unk_struct_10_2*, s32);
-void func_i2_80101E68(unk_struct_3F80*, s32);
-void func_i2_80101EBC(unk_struct_80*, s32);
-void func_i2_80102784(unk_struct_19E0*, s32);
-void func_i2_80103108(unk_struct_19E0*, s32);
+void func_i2_80101B8C(SaveSettings*, bool);
+void func_i2_80101C04(SaveEditCup*, bool);
+void func_i2_80101CCC(SaveDeathRace*, bool);
+void func_i2_80101E68(GhostData*, bool);
+void func_i2_80101EBC(CharacterSave*, bool);
+void func_i2_80102784(ProfileSave*, bool);
+void func_i2_80103108(ProfileSave*, bool);
 
-void func_i2_80101944(unk_801247C0* arg0, s32 arg1) {
+void Save_CreateNew(SaveContext* saveContext, s32 arg1) {
     s32 i;
     s32 j;
-    u64* var_v0;
-    unk_struct_19E0* var_s4;
-    unk_struct_110* var_s1;
-    unk_struct_80* var_s0;
+    u64* ptr;
+    ProfileSave* profileSave;
+    SaveCourseRecords* courseRecord;
+    CharacterSave* characterSave;
     u8 spB7;
-    unk_struct_40_2 sp74;
+    SaveEditCup editCup;
     s32 pad;
 
+    // Load current save and remember n64dd related data that will be restored
     if ((arg1 != 0) && (arg1 == 1)) {
-        func_i2_801004A8(arg0->unk_00);
-        func_i2_80102784(arg0->unk_00, 0);
-        spB7 = arg0->unk_00[0].unk_00.unk_09;
-        func_i2_80103108(arg0->unk_00, 0);
-        sp74 = arg0->unk_00[0].unk_19A0;
+        Save_ReadProfileSaves(saveContext->profileSaves);
+        func_i2_80102784(saveContext->profileSaves, false);
+        spB7 = saveContext->profileSaves[0].saveSettings.unk_09;
+        func_i2_80103108(saveContext->profileSaves, false);
+        editCup = saveContext->profileSaves[0].editCup;
     }
 
-    for (i = 0, var_v0 = (u64*) arg0; i < (s32) (sizeof(unk_801247C0) / sizeof(u64)); i++, var_v0++) {
-        *var_v0 = 0;
+    for (i = 0, ptr = (u64*) saveContext; i < (s32) (sizeof(SaveContext) / sizeof(u64)); i++, ptr++) {
+        *ptr = 0;
     }
 
-    for (i = 0, var_s4 = arg0->unk_00; i < 2; i++, var_s4++) {
-        func_i2_80101B8C(&var_s4->unk_00, 0);
-        func_i2_80101CCC(&var_s4->unk_10, 0);
+    for (i = 0, profileSave = saveContext->profileSaves; i < 2; i++, profileSave++) {
+        func_i2_80101B8C(&profileSave->saveSettings, false);
+        func_i2_80101CCC(&profileSave->deathRace, false);
 
-        for (j = 0, var_s1 = var_s4->unk_20; j < 24; j++, var_s1++) {
-            func_i2_80101D18(var_s1, 0);
+        for (j = 0, courseRecord = profileSave->courses; j < 24; j++, courseRecord++) {
+            func_i2_80101D18(courseRecord, false);
         }
 
-        func_i2_80101C04(&var_s4->unk_19A0, 0);
+        func_i2_80101C04(&profileSave->editCup, false);
     }
 
-    func_i2_80101DE8(&arg0->unk_33C0, 0);
-    func_i2_80101E68(&arg0->unk_3400, 0);
+    func_i2_80101DE8(&saveContext->ghostRecord, false);
+    func_i2_80101E68(&saveContext->ghostData, false);
 
-    for (i = 0, var_s0 = arg0->unk_7380; i < 24; i++, var_s0++) {
-        func_i2_80101EBC(var_s0, 0);
+    for (i = 0, characterSave = saveContext->characterSaves; i < 24; i++, characterSave++) {
+        func_i2_80101EBC(characterSave, false);
     }
 
+    // Restore the n64dd related save data
     if ((arg1 != 0) && (arg1 == 1)) {
-        arg0->unk_00[0].unk_00.unk_09 = arg0->unk_00[1].unk_00.unk_09 = spB7;
-        arg0->unk_00[0].unk_19A0 = arg0->unk_00[1].unk_19A0 = sp74;
+        saveContext->profileSaves[0].saveSettings.unk_09 = saveContext->profileSaves[1].saveSettings.unk_09 = spB7;
+        saveContext->profileSaves[0].editCup = saveContext->profileSaves[1].editCup = editCup;
     }
 }
 
-void func_i2_80101B8C(unk_struct_10* arg0, s32 arg1) {
+void func_i2_80101B8C(SaveSettings* saveSettings, bool shouldClear) {
     s32 i;
 
-    if (arg1 != 0) {
-        func_i2_80101F9C(arg0, sizeof(unk_struct_10));
+    if (shouldClear) {
+        Save_ClearData(saveSettings, sizeof(SaveSettings));
     }
 
     for (i = 0; i < 8; i++) {
-        arg0->unk_00[i] = D_i2_8010ADE0[i];
+        saveSettings->fileName[i] = D_i2_8010ADE0[i];
     }
 
     // clang-format off
     for (i = 0; i < 4; i++) { \
-        arg0->unk_0A[i] = 0;
+        saveSettings->cupDifficultiesCleared[i] = 0;
     }
     // clang-format on
 
-    arg0->unk_08 = 1;
-    arg0->unk_09 = 0;
+    // vs com default on
+    saveSettings->settings = 1;
+    saveSettings->unk_09 = 0;
 }
 
-void func_i2_80101C04(unk_struct_40_2* arg0, s32 arg1) {
+void func_i2_80101C04(SaveEditCup* editCup, bool shouldClear) {
     s32 i;
     s32 j;
 
-    if (arg1 != 0) {
-        func_i2_80101F9C(arg0, sizeof(unk_struct_40_2));
+    if (shouldClear) {
+        Save_ClearData(editCup, sizeof(SaveEditCup));
     }
 
     for (i = 0; i < 6; i++) {
         for (j = 0; j < 9; j++) {
-            arg0->unk_0A[i][j] = 0;
+            editCup->editCupTrackNames[i][j] = 0;
         }
     }
 }
 
-void func_i2_80101C78(u8* arg0) {
+void func_i2_80101C78(unk_80141C88_unk_1D* arg0) {
 
-    arg0[0] = 0;
-    arg0[1] = 0;
-    arg0[2] = 0;
-    arg0[3] = 0;
-    arg0[4] = 0;
-    arg0[5] = 0;
-    arg0[6] = 0;
-    arg0[7] = 0;
-    arg0[8] = 0;
-    arg0[9] = 0;
-    arg0[10] = 0;
-    arg0[11] = 0;
-    arg0[12] = 0;
-    arg0[13] = 0;
-    arg0[14] = 0;
-    arg0[15] = 0;
-    arg0[16] = 0;
-    arg0[17] = 0;
-    arg0[18] = 0;
-    arg0[19] = 0;
+    arg0->unk_00.unk_00[0] = 0;
+    arg0->unk_00.unk_00[1] = 0;
+    arg0->unk_00.unk_00[2] = 0;
+    arg0->unk_00.unk_00[3] = 0;
+    arg0->unk_00.unk_00[4] = 0;
+    arg0->unk_00.unk_00[5] = 0;
+    arg0->unk_00.unk_00[6] = 0;
+    arg0->unk_00.unk_00[7] = 0;
+    arg0->unk_00.unk_00[8] = 0;
+    arg0->unk_00.unk_00[9] = 0;
+    arg0->unk_00.unk_00[10] = 0;
+    arg0->unk_00.unk_00[11] = 0;
+    arg0->unk_00.unk_00[12] = 0;
+    arg0->unk_00.unk_00[13] = 0;
+    arg0->unk_00.unk_00[14] = 0;
+    arg0->unk_00.unk_00[15] = 0;
+    arg0->unk_00.unk_00[16] = 0;
+    arg0->unk_00.unk_00[17] = 0;
+    arg0->unk_00.unk_00[18] = 0;
+    arg0->unk_00.unk_00[19] = 0;
 }
 
-void func_i2_80101CCC(unk_struct_10_2* arg0, s32 arg1) {
+void func_i2_80101CCC(SaveDeathRace* deathRace, bool shouldClear) {
     s32 i;
 
-    if (arg1 != 0) {
-        func_i2_80101F9C(arg0, sizeof(unk_struct_10_2));
+    if (shouldClear) {
+        Save_ClearData(deathRace, sizeof(SaveDeathRace));
     }
 
     for (i = 0; i < 1; i++) {
-        arg0->unk_04[i] = MAX_TIMER;
+        deathRace->timeRecord[i] = MAX_TIMER;
     }
 }
 
-void func_i2_80101D18(unk_struct_110* arg0, s32 arg1) {
+void func_i2_80101D18(SaveCourseRecords* courseRecords, bool shouldClear) {
     s32 i;
     s32 j;
 
-    if (arg1 != 0) {
-        func_i2_80101F9C(arg0, sizeof(unk_struct_110));
+    if (shouldClear) {
+        Save_ClearData(courseRecords, sizeof(SaveCourseRecords));
     }
 
     for (i = 0; i < 5; i++) {
-        arg0->unk_04[i] = MAX_TIMER;
-        arg0->unk_18[i] = 0.5f;
-        func_i2_80101C78(arg0->unk_50[i]);
+        courseRecords->timeRecord[i] = MAX_TIMER;
+        courseRecords->engine[i] = 0.5f;
+        func_i2_80101C78(&courseRecords->unk_50[i]);
         // clang-format off
         for (j = 0; j < 4; j++) { \
-            arg0->unk_34[i][j] = 0;
+            courseRecords->name[i][j] = '\0';
         }
         // clang-format on
     }
 
-    arg0->unk_2C = 0.0f;
-    arg0->unk_30 = MAX_TIMER;
+    courseRecords->maxSpeed = 0.0f;
+    courseRecords->bestTime = MAX_TIMER;
 
-    func_i2_80101C78(arg0->unk_F0);
+    func_i2_80101C78(&courseRecords->unk_F0);
 }
 
-void func_i2_80101DE8(unk_struct_40* arg0, s32 arg1) {
+void func_i2_80101DE8(GhostRecord* ghostRecord, bool shouldClear) {
     s32 i;
 
-    if (arg1 != 0) {
-        func_i2_80101F9C(arg0, sizeof(unk_struct_40));
+    if (shouldClear) {
+        Save_ClearData(ghostRecord, sizeof(GhostRecord));
     }
 
-    arg0->unk_04 = 0;
-    arg0->unk_02 = 0;
-    arg0->unk_08 = 0;
-    arg0->unk_0C = 0;
-    arg0->unk_10 = 0;
+    ghostRecord->replayChecksum = 0;
+    ghostRecord->ghostType = GHOST_NONE;
+    ghostRecord->encodedCourseIndex = 0;
+    ghostRecord->raceTime = 0;
+    ghostRecord->unk_10 = 0;
 
-    func_i2_80101C78(arg0->unk_20.unk_00);
+    func_i2_80101C78(&ghostRecord->unk_20);
 
     for (i = 0; i < 9; i++) {
-        arg0->unk_17[i] = 0;
+        ghostRecord->trackName[i] = 0;
     }
 }
 
-void func_i2_80101E68(unk_struct_3F80* arg0, s32 arg1) {
+void func_i2_80101E68(GhostData* ghostData, bool shouldClear) {
     s32 i;
 
-    if (arg1 != 0) {
-        func_i2_80101F9C(arg0, sizeof(unk_struct_3F80));
+    if (shouldClear) {
+        Save_ClearData(ghostData, sizeof(GhostData));
     }
 
     // clang-format off
     for (i = 0; i < 3; i++) { \
-        arg0->unk_04[i] = 0;
+        ghostData->lapTimes[i] = 0;
     }
     // clang-format on
 
-    arg0->unk_10 = 0;
-    arg0->unk_14 = 0;
+    ghostData->replayEnd = 0;
+    ghostData->replaySize = 0;
 }
 
-void func_i2_80101EBC(unk_struct_80* arg0, s32 arg1) {
+void func_i2_80101EBC(CharacterSave* characterSave, bool shouldClear) {
     s32 i;
 
-    if (arg1 != 0) {
-        func_i2_80101F9C(arg0, sizeof(unk_struct_80));
+    if (shouldClear) {
+        Save_ClearData(characterSave, sizeof(CharacterSave));
     }
 
     for (i = 0; i < 30; i++) {
-        arg0->unk_08[i] = 0.5f;
+        characterSave->characterEngine[i] = 0.5f;
     }
 }
 
-void func_i2_80101F24(unk_struct_60* arg0, s32 arg1) {
+void func_i2_80101F24(CupSave* cupSave, bool shouldClear) {
     s32 i;
     s32 j;
 
-    if (arg1 != 0) {
-        func_i2_80101F9C(arg0, sizeof(unk_struct_60));
+    if (shouldClear) {
+        Save_ClearData(cupSave, sizeof(CupSave));
     }
 
     for (i = 0; i < 4; i++) {
         // clang-format off
         for (j = 0; j < 10; j++) { \
-            arg0->unk_10[i][j] = 0;
+            cupSave->cupCompletion[i][j] = 0;
         }
         // clang-format on
     }
 }
 
-void func_i2_80101F9C(void* arg0, s32 size) {
+void Save_ClearData(void* data, s32 size) {
     s32 i;
-    u8* var_v1;
+    u8* ptr;
 
     // clang-format off
-    for (i = 0, var_v1 = arg0; i < size; i++, var_v1++) { \
-        *var_v1 = 0;
+    for (i = 0, ptr = data; i < size; i++, ptr++) { \
+        *ptr = 0;
     }
     // clang-format on
 }
 
-extern s8 D_800CD3C8;
-extern s16 D_800CE4D0;
-extern s32 D_i2_80106F40;
-extern s8 D_800E4174[];
-extern s16 D_800CE4D4;
+extern s8 gSettingEverythingUnlocked;
+extern s16 gSettingVsHandicap;
+extern s32 gSettingVsSlot;
+extern s8 gCupNumDifficultiesCleared[];
+extern s16 gSettingVsCom;
 
-void func_i2_80101FEC(unk_struct_10* arg0) {
-    u8 var_v1_2;
-    u8 var;
+void func_i2_80101FEC(SaveSettings* saveSettings) {
+    u8 settingLowerFlags;
+    u8 settingHigherFlags;
     s32 i;
 
     for (i = 0; i < 8; i++) {
-        arg0->unk_00[i] = D_i2_8010ADE0[i];
+        saveSettings->fileName[i] = D_i2_8010ADE0[i];
     }
 
-    var = ((u8) D_800CE4D0 * 0x10);
+    settingHigherFlags = ((u8) gSettingVsHandicap << 4);
 
-    var_v1_2 = 0;
+    settingLowerFlags = 0;
 
-    if (D_800CE4D4 != 0) {
-        var_v1_2 |= 1;
+    if (gSettingVsCom != 0) {
+        settingLowerFlags |= 1;
     }
-    if (D_i2_80106F40 != 0) {
-        var_v1_2 |= 2;
+    if (gSettingVsSlot != 0) {
+        settingLowerFlags |= 2;
     }
-    if (D_80111840 != 0) {
-        var_v1_2 |= 4;
+    if (gSettingSoundMode != 0) {
+        settingLowerFlags |= 4;
     }
-    if (D_800CD3C8 != 0) {
-        var_v1_2 |= 8;
+    if (gSettingEverythingUnlocked != 0) {
+        settingLowerFlags |= 8;
     }
 
-    arg0->unk_08 = var | var_v1_2;
+    saveSettings->settings = settingHigherFlags | settingLowerFlags;
 
     for (i = JACK_CUP; i <= JOKER_CUP; i++) {
-        arg0->unk_0A[i] = D_800E4174[i];
+        saveSettings->cupDifficultiesCleared[i] = gCupNumDifficultiesCleared[i];
     }
 
-    arg0->unk_09 = 0;
+    saveSettings->unk_09 = 0;
 
     if (D_i2_80111848[0] != 0) {
-        arg0->unk_09 |= 1;
+        saveSettings->unk_09 |= 1;
     }
     if (D_i2_80111848[3] != 0) {
-        arg0->unk_09 |= 2;
+        saveSettings->unk_09 |= 2;
     }
     if (D_i2_80111848[4] != 0) {
-        arg0->unk_09 |= 4;
+        saveSettings->unk_09 |= 4;
     }
 }
 
-void func_i2_80102110(u8* arg0, u8* arg1) {
+void func_i2_80102110(CarInfo* carInfo, unk_80141C88_unk_1D* arg1) {
 
-    arg1[0] = arg0[0];
-    arg1[1] = arg0[1];
-    arg1[2] = arg0[2];
-    arg1[3] = arg0[3];
-    arg1[4] = arg0[4];
-    arg1[5] = arg0[5];
-    arg1[6] = arg0[6];
-    arg1[7] = arg0[7];
-    arg1[8] = arg0[8];
-    arg1[9] = arg0[9];
-    arg1[10] = arg0[10];
-    arg1[11] = arg0[11];
-    arg1[12] = arg0[12];
-    arg1[13] = arg0[13];
-    arg1[14] = arg0[14];
-    arg1[15] = arg0[15];
-    arg1[16] = arg0[16];
-    arg1[17] = arg0[17];
-    arg1[18] = arg0[18];
-    arg1[19] = arg0[19];
+    arg1->unk_00.unk_00[0] = carInfo->unk_00[0];
+    arg1->unk_00.unk_00[1] = carInfo->unk_00[1];
+    arg1->unk_00.unk_00[2] = carInfo->unk_00[2];
+    arg1->unk_00.unk_00[3] = carInfo->unk_00[3];
+    arg1->unk_00.unk_00[4] = carInfo->unk_00[4];
+    arg1->unk_00.unk_00[5] = carInfo->unk_00[5];
+    arg1->unk_00.unk_00[6] = carInfo->unk_00[6];
+    arg1->unk_00.unk_00[7] = carInfo->unk_00[7];
+    arg1->unk_00.unk_00[8] = carInfo->unk_00[8];
+    arg1->unk_00.unk_00[9] = carInfo->unk_00[9];
+    arg1->unk_00.unk_00[10] = carInfo->unk_00[10];
+    arg1->unk_00.unk_00[11] = carInfo->unk_00[11];
+    arg1->unk_00.unk_00[12] = carInfo->unk_00[12];
+    arg1->unk_00.unk_00[13] = carInfo->unk_00[13];
+    arg1->unk_00.unk_00[14] = carInfo->unk_00[14];
+    arg1->unk_00.unk_00[15] = carInfo->unk_00[15];
+    arg1->unk_00.unk_00[16] = carInfo->unk_00[16];
+    arg1->unk_00.unk_00[17] = carInfo->unk_00[17];
+    arg1->unk_00.unk_00[18] = carInfo->unk_00[18];
+    arg1->unk_00.unk_00[19] = carInfo->unk_00[19];
 }
 
-void func_i2_801021B4(unk_struct_10_2* arg0) {
-    unk_800F8510* var_a1 = &D_802A6B40[54];
+void func_i2_801021B4(SaveDeathRace* deathRace) {
+    CourseRecordInfo* var_a1 = &gCourseRecordInfos[54];
     s32 i;
 
     for (i = 0; i < 1; i++) {
-        arg0->unk_04[i] = var_a1->timeRecord[i];
+        deathRace->timeRecord[i] = var_a1->timeRecord[i];
     }
-    arg0->unk_02 = 0;
+    deathRace->unk_02 = 0;
 
     // clang-format off
     for (i = 0; i < 8; i++) { \
-        arg0->unk_08[i] = 0;
+        deathRace->unk_08[i] = 0;
     }
     // clang-format on
 }
 
-void func_i2_80102214(unk_struct_110* arg0, s32 courseIndex) {
-    unk_800F8510* temp_s5;
+void func_i2_80102214(SaveCourseRecords* courseRecords, s32 courseIndex) {
+    CourseRecordInfo* courseRecordInfo;
     s32 i;
     s32 j;
 
-    temp_s5 = &D_802A6B40[courseIndex];
+    courseRecordInfo = &gCourseRecordInfos[courseIndex];
 
     for (i = 0; i < 5; i++) {
-        arg0->unk_04[i] = temp_s5->timeRecord[i];
-        arg0->unk_18[i] = temp_s5->unk_98[i];
-        func_i2_80102110(temp_s5->unk_34[i].unk_00, arg0->unk_50[i]);
+        courseRecords->timeRecord[i] = courseRecordInfo->timeRecord[i];
+        courseRecords->engine[i] = courseRecordInfo->engine[i];
+        func_i2_80102110(&courseRecordInfo->carInfo[i], &courseRecords->unk_50[i]);
         for (j = 0; j < 4; j++) {
-            arg0->unk_34[i][j] = temp_s5->unk_AC[i][j];
+            courseRecords->name[i][j] = courseRecordInfo->name[i][j];
         }
     }
-    arg0->unk_2C = temp_s5->unk_C0;
-    arg0->unk_30 = temp_s5->unk_D8;
-    func_i2_80102110(temp_s5->unk_C4, arg0->unk_F0);
-    arg0->unk_02 = 0;
+    courseRecords->maxSpeed = courseRecordInfo->maxSpeed;
+    courseRecords->bestTime = courseRecordInfo->bestTime;
+    func_i2_80102110(&courseRecordInfo->maxSpeedCar, &courseRecords->unk_F0);
+    courseRecords->unk_02 = 0;
 
     // clang-format off
     for (i = 0; i < 8; i++) { \
-        arg0->unk_48[i] = 0;
+        courseRecords->unk_48[i] = 0;
     }
     // clang-format on
 }
 
-void func_i2_80102350(unk_struct_40_2* arg0) {
+void func_i2_80102350(SaveEditCup* editCup) {
     s32 i;
     s32 j;
 
     for (i = 0; i < 6; i++) {
         for (j = 0; j < 9; j++) {
-            arg0->unk_0A[i][j] = D_i2_8010D730[i][j];
+            editCup->editCupTrackNames[i][j] = gEditCupTrackNames[i][j];
         }
     }
-    arg0->unk_02 = 0;
-    arg0->unk_04 = 0;
-    arg0->unk_08 = 0;
+    editCup->unk_02 = 0;
+    editCup->unk_04 = 0;
+    editCup->unk_08 = 0;
 }
 
-void func_i2_801023D8(unk_800E5FF8* arg0) {
+void func_i2_801023D8(Ghost* ghost) {
     s32 i;
-    unk_struct_40* var = (unk_struct_40*) D_i2_8010D7F0;
+    GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
 
-    var->unk_04 = arg0->unk_3F64;
-    var->unk_02 = arg0->unk_3F68;
-    var->unk_10 = 0;
-    var->unk_08 = arg0->unk_0000;
+    ghostRecord->replayChecksum = ghost->replayChecksum;
+    ghostRecord->ghostType = ghost->ghostType;
+    ghostRecord->unk_10 = 0;
+    ghostRecord->encodedCourseIndex = ghost->encodedCourseIndex;
 
-    var->unk_0C = arg0->unk_0004;
-    var->unk_20.unk_00[0] = arg0->unk_3F6A[0];
-    var->unk_20.unk_00[1] = arg0->unk_3F6A[1];
-    var->unk_20.unk_00[2] = arg0->unk_3F6A[2];
-    var->unk_20.unk_00[3] = arg0->unk_3F6A[3];
-    var->unk_20.unk_00[4] = arg0->unk_3F6A[4];
-    var->unk_20.unk_00[5] = arg0->unk_3F6A[5];
-    var->unk_20.unk_00[6] = arg0->unk_3F6A[6];
-    var->unk_20.unk_00[7] = arg0->unk_3F6A[7];
-    var->unk_20.unk_00[8] = arg0->unk_3F6A[8];
-    var->unk_20.unk_00[9] = arg0->unk_3F6A[9];
-    var->unk_20.unk_00[10] = arg0->unk_3F6A[10];
-    var->unk_20.unk_00[11] = arg0->unk_3F6A[11];
-    var->unk_20.unk_00[12] = arg0->unk_3F6A[12];
-    var->unk_20.unk_00[13] = arg0->unk_3F6A[13];
-    var->unk_20.unk_00[14] = arg0->unk_3F6A[14];
-    var->unk_20.unk_00[15] = arg0->unk_3F6A[15];
-    var->unk_20.unk_00[16] = arg0->unk_3F6A[16];
-    var->unk_20.unk_00[17] = arg0->unk_3F6A[17];
-    var->unk_20.unk_00[18] = arg0->unk_3F6A[18];
-    var->unk_20.unk_00[19] = arg0->unk_3F6A[19];
+    ghostRecord->raceTime = ghost->raceTime;
+    ghostRecord->unk_20.unk_00.unk_00[0] = ghost->carInfo.unk_00[0];
+    ghostRecord->unk_20.unk_00.unk_00[1] = ghost->carInfo.unk_00[1];
+    ghostRecord->unk_20.unk_00.unk_00[2] = ghost->carInfo.unk_00[2];
+    ghostRecord->unk_20.unk_00.unk_00[3] = ghost->carInfo.unk_00[3];
+    ghostRecord->unk_20.unk_00.unk_00[4] = ghost->carInfo.unk_00[4];
+    ghostRecord->unk_20.unk_00.unk_00[5] = ghost->carInfo.unk_00[5];
+    ghostRecord->unk_20.unk_00.unk_00[6] = ghost->carInfo.unk_00[6];
+    ghostRecord->unk_20.unk_00.unk_00[7] = ghost->carInfo.unk_00[7];
+    ghostRecord->unk_20.unk_00.unk_00[8] = ghost->carInfo.unk_00[8];
+    ghostRecord->unk_20.unk_00.unk_00[9] = ghost->carInfo.unk_00[9];
+    ghostRecord->unk_20.unk_00.unk_00[10] = ghost->carInfo.unk_00[10];
+    ghostRecord->unk_20.unk_00.unk_00[11] = ghost->carInfo.unk_00[11];
+    ghostRecord->unk_20.unk_00.unk_00[12] = ghost->carInfo.unk_00[12];
+    ghostRecord->unk_20.unk_00.unk_00[13] = ghost->carInfo.unk_00[13];
+    ghostRecord->unk_20.unk_00.unk_00[14] = ghost->carInfo.unk_00[14];
+    ghostRecord->unk_20.unk_00.unk_00[15] = ghost->carInfo.unk_00[15];
+    ghostRecord->unk_20.unk_00.unk_00[16] = ghost->carInfo.unk_00[16];
+    ghostRecord->unk_20.unk_00.unk_00[17] = ghost->carInfo.unk_00[17];
+    ghostRecord->unk_20.unk_00.unk_00[18] = ghost->carInfo.unk_00[18];
+    ghostRecord->unk_20.unk_00.unk_00[19] = ghost->carInfo.unk_00[19];
 
     for (i = 0; i < 9; i++) {
-        var->unk_17[i] = 0;
+        ghostRecord->trackName[i] = '\0';
     }
 
     for (i = 0; i < 5; i++) {
-        var->unk_12[i] = 0;
+        ghostRecord->unk_12[i] = 0;
     }
 }
 
-void func_i2_801024F8(unk_800E5FF8* arg0) {
+void func_i2_801024F8(Ghost* ghost) {
     s32 i;
     u8* var_a1;
     s8* var_v1;
-    unk_struct_3F80* var2 = (unk_struct_3F80*) &D_i2_8010D7F0[sizeof(unk_struct_40)];
+    GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
     for (i = 0; i < 3; i++) {
-        var2->unk_04[i] = arg0->unk_0008[i];
+        ghostData->lapTimes[i] = ghost->lapTimes[i];
     }
 
-    var2->unk_10 = arg0->unk_0014;
-    var2->unk_14 = arg0->unk_0018;
+    ghostData->replayEnd = ghost->replayEnd;
+    ghostData->replaySize = ghost->replaySize;
 
-    var_v1 = arg0->unk_001C;
-    var_a1 = var2->unk_20;
+    var_v1 = ghost->replayData;
+    var_a1 = ghostData->replayData;
 
     for (i = 0; i < 16200; i++) {
         *var_a1++ = *var_v1++;
     }
 
-    var2->unk_02 = 0;
-    var2->unk_18 = 0;
-    var2->unk_1C = 0;
+    ghostData->unk_02 = 0;
+    ghostData->unk_18 = 0;
+    ghostData->unk_1C = 0;
 }
 
-extern f32 D_800E40F0[30];
+extern f32 gCharacterLastEngine[30];
 
-void func_i2_8010259C(unk_struct_80* arg0) {
+void func_i2_8010259C(CharacterSave* characterSave) {
     s32 i;
 
     for (i = 0; i < 30; i++) {
-        arg0->unk_08[i] = D_800E40F0[i];
+        characterSave->characterEngine[i] = gCharacterLastEngine[i];
     }
 
-    arg0->unk_02 = 0;
-    arg0->unk_04 = 0;
+    characterSave->unk_02 = 0;
+    characterSave->unk_04 = 0;
 }
 
-void func_i2_80102B20(unk_struct_19E0* arg0);
-void func_i2_80102A7C(u8* arg0, u8* arg1);
+void func_i2_80102B20(ProfileSave*);
+void func_i2_80102A7C(unk_80141C88_unk_1D*, CarInfo* arg1);
 
-void func_i2_80102600(unk_801247C0* arg0) {
+void Save_Load(SaveContext* saveContext) {
     s32 i;
     s32 j;
-    unk_800F8510* var_s7;
-    s32 pad[4];
-    u8 sp60[20];
-    unk_800E5FF8* var_s0;
+    CourseRecordInfo* courseRecordInfo;
+    Ghost* ghost;
+    unk_80141C88_unk_1D sp60;
 
-    for (i = 0, var_s7 = D_802A6B40; i < ARRAY_COUNT(D_802A6B40); i++, var_s7++) {
+    for (i = 0, courseRecordInfo = gCourseRecordInfos; i < ARRAY_COUNT(gCourseRecordInfos); i++, courseRecordInfo++) {
         if (i < 24) {
-            func_i2_80102CA4(arg0->unk_00, i);
+            func_i2_80102CA4(saveContext->profileSaves, i);
         } else {
-            func_i2_80101C78(sp60);
+            func_i2_80101C78(&sp60);
 
             for (j = 0; j < 5; j++) {
-                var_s7->timeRecord[j] = MAX_TIMER;
-                var_s7->unk_98[j] = 0.5f;
-                func_i2_80102A7C(sp60, var_s7->unk_34[j].unk_00);
+                courseRecordInfo->timeRecord[j] = MAX_TIMER;
+                courseRecordInfo->engine[j] = 0.5f;
+                func_i2_80102A7C(&sp60, &courseRecordInfo->carInfo[j]);
             }
 
-            var_s7->unk_C0 = 0.0f;
+            courseRecordInfo->maxSpeed = 0.0f;
 
-            func_i2_80102A7C(sp60, var_s7->unk_C4);
+            func_i2_80102A7C(&sp60, &courseRecordInfo->maxSpeedCar);
             if (i == 54) {
-                func_i2_80102B20(arg0->unk_00);
+                func_i2_80102B20(saveContext->profileSaves);
             }
         }
     }
 
-    func_i2_80102784(arg0->unk_00, 1);
+    func_i2_80102784(saveContext->profileSaves, true);
 
     for (i = 0; i < 30; i++) {
         D_i2_80111848[i] = 0;
     }
 
-    func_i2_8010300C(&arg0->unk_33C0, &arg0->unk_3400, D_800E5FF8, 1);
+    func_i2_8010300C(&saveContext->ghostRecord, &saveContext->ghostData, gGhosts, true);
 
-    for (i = 0, var_s0 = D_800E5FF8; i < 3; i++, var_s0++) {
-        var_s0->unk_0000 = 0;
+    for (i = 0, ghost = gGhosts; i < 3; i++, ghost++) {
+        ghost->encodedCourseIndex = 0;
     }
 }
 
-void func_i2_80102784(unk_struct_19E0* arg0, s32 arg1) {
+void func_i2_80102784(ProfileSave* profileSaves, bool arg1) {
     u16 checksum;
     s32 var_v1;
     s32 sp2C;
     s32 i;
     s32 var_v0;
-    unk_struct_19E0* var_s1;
-    unk_struct_10* var_v1_2;
+    ProfileSave* var_s1;
+    SaveSettings* var_v1_2;
 
     var_v1 = 0;
 
-    for (i = 0, var_s1 = arg0; i < 2; i++) {
-        if (var_s1->unk_00.checksum != func_i2_8010356C(var_s1) * 1) {
+    for (i = 0, var_s1 = profileSaves; i < 2; i++) {
+        if (var_s1->saveSettings.checksum != Save_CalculateSaveSettingsChecksum(var_s1) * 1) {
             var_v1++;
             sp2C = i;
         }
@@ -1127,52 +1129,52 @@ void func_i2_80102784(unk_struct_19E0* arg0, s32 arg1) {
     }
 
     if (var_v1 == 2) {
-        func_i2_80101B8C(&arg0[0].unk_00, 1);
-        arg0[1].unk_00 = arg0[0].unk_00;
+        func_i2_80101B8C(&profileSaves[0].saveSettings, true);
+        profileSaves[1].saveSettings = profileSaves[0].saveSettings;
 
-        checksum = func_i2_8010356C(arg0);
+        checksum = Save_CalculateSaveSettingsChecksum(profileSaves);
 
         for (i = 0; i < 2; i++) {
-            func_i2_80100DDC(arg0, i, checksum);
+            Save_WriteSaveSettings(profileSaves, i, checksum);
         }
     } else if (var_v1 == 1) {
         var_v0 = (sp2C == 0) ? 1 : 0;
 
-        (arg0 + sp2C)->unk_00 = (arg0 + var_v0)->unk_00;
+        (profileSaves + sp2C)->saveSettings = (profileSaves + var_v0)->saveSettings;
 
-        func_i2_80100DDC(arg0, sp2C, func_i2_8010356C(arg0));
+        Save_WriteSaveSettings(profileSaves, sp2C, Save_CalculateSaveSettingsChecksum(profileSaves));
     }
 
-    if (arg1 == 0) {
+    if (!arg1) {
         return;
     }
 
-    var_v1_2 = &arg0->unk_00;
+    var_v1_2 = &profileSaves->saveSettings;
 
-    D_800CE4D0 = ((u8) (var_v1_2->unk_08 >> 4) & 0xFF) & 0xF;
-    if (var_v1_2->unk_08 & 1) {
-        D_800CE4D4 = 1;
+    gSettingVsHandicap = ((u8) (var_v1_2->settings >> 4) & 0xFF) & 0xF;
+    if (var_v1_2->settings & 1) {
+        gSettingVsCom = 1;
     } else {
-        D_800CE4D4 = 0;
+        gSettingVsCom = 0;
     }
-    if (var_v1_2->unk_08 & 2) {
-        D_i2_80106F40 = 1;
+    if (var_v1_2->settings & 2) {
+        gSettingVsSlot = 1;
     } else {
-        D_i2_80106F40 = 0;
+        gSettingVsSlot = 0;
     }
-    if (var_v1_2->unk_08 & 4) {
-        D_80111840 = 1;
+    if (var_v1_2->settings & 4) {
+        gSettingSoundMode = 1;
     } else {
-        D_80111840 = 0;
+        gSettingSoundMode = 0;
     }
-    if (var_v1_2->unk_08 & 8) {
-        D_800CD3C8 = 1;
+    if (var_v1_2->settings & 8) {
+        gSettingEverythingUnlocked = 1;
     } else {
-        D_800CD3C8 = 0;
+        gSettingEverythingUnlocked = 0;
     }
 
     for (i = JACK_CUP; i <= JOKER_CUP; i++) {
-        D_800E4174[i] = var_v1_2->unk_0A[i];
+        gCupNumDifficultiesCleared[i] = var_v1_2->cupDifficultiesCleared[i];
     }
 
     func_8007E2B4();
@@ -1194,44 +1196,44 @@ void func_i2_80102784(unk_struct_19E0* arg0, s32 arg1) {
     }
 }
 
-void func_i2_80102A7C(u8* arg0, u8* arg1) {
+void func_i2_80102A7C(unk_80141C88_unk_1D* arg0, CarInfo* arg1) {
 
-    arg1[0] = arg0[0];
-    arg1[1] = arg0[1];
-    arg1[2] = arg0[2];
-    arg1[3] = arg0[3];
-    arg1[4] = arg0[4];
-    arg1[5] = arg0[5];
-    arg1[6] = arg0[6];
-    arg1[7] = arg0[7];
-    arg1[8] = arg0[8];
-    arg1[9] = arg0[9];
-    arg1[10] = arg0[10];
-    arg1[11] = arg0[11];
-    arg1[12] = arg0[12];
-    arg1[13] = arg0[13];
-    arg1[14] = arg0[14];
-    arg1[15] = arg0[15];
-    arg1[16] = arg0[16];
-    arg1[17] = arg0[17];
-    arg1[18] = arg0[18];
-    arg1[19] = arg0[19];
+    arg1->unk_00[0] = arg0->unk_00.unk_00[0];
+    arg1->unk_00[1] = arg0->unk_00.unk_00[1];
+    arg1->unk_00[2] = arg0->unk_00.unk_00[2];
+    arg1->unk_00[3] = arg0->unk_00.unk_00[3];
+    arg1->unk_00[4] = arg0->unk_00.unk_00[4];
+    arg1->unk_00[5] = arg0->unk_00.unk_00[5];
+    arg1->unk_00[6] = arg0->unk_00.unk_00[6];
+    arg1->unk_00[7] = arg0->unk_00.unk_00[7];
+    arg1->unk_00[8] = arg0->unk_00.unk_00[8];
+    arg1->unk_00[9] = arg0->unk_00.unk_00[9];
+    arg1->unk_00[10] = arg0->unk_00.unk_00[10];
+    arg1->unk_00[11] = arg0->unk_00.unk_00[11];
+    arg1->unk_00[12] = arg0->unk_00.unk_00[12];
+    arg1->unk_00[13] = arg0->unk_00.unk_00[13];
+    arg1->unk_00[14] = arg0->unk_00.unk_00[14];
+    arg1->unk_00[15] = arg0->unk_00.unk_00[15];
+    arg1->unk_00[16] = arg0->unk_00.unk_00[16];
+    arg1->unk_00[17] = arg0->unk_00.unk_00[17];
+    arg1->unk_00[18] = arg0->unk_00.unk_00[18];
+    arg1->unk_00[19] = arg0->unk_00.unk_00[19];
 }
 
-void func_i2_80102B20(unk_struct_19E0* arg0) {
+void func_i2_80102B20(ProfileSave* profileSaves) {
     u16 checksum;
     s32 var_s2;
     s32 var_v0;
     s32 sp30;
-    unk_800F8510* var_v0_2;
-    unk_struct_10_2* var_v1;
-    unk_struct_19E0* var_s1;
+    CourseRecordInfo* var_v0_2;
+    SaveDeathRace* var_v1;
+    ProfileSave* var_s1;
     s32 i;
 
     var_s2 = 0;
 
-    for (i = 0, var_s1 = arg0; i < 2; i++) {
-        if (var_s1->unk_10.checksum != func_i2_8010358C(var_s1) * 1) {
+    for (i = 0, var_s1 = profileSaves; i < 2; i++) {
+        if (var_s1->deathRace.checksum != Save_CalculateSaveDeathRaceChecksum(var_s1) * 1) {
             var_s2++;
             sp30 = i;
         }
@@ -1239,42 +1241,42 @@ void func_i2_80102B20(unk_struct_19E0* arg0) {
     }
 
     if (var_s2 == 2) {
-        func_i2_80101CCC(&arg0[0].unk_10, 1);
-        arg0[1].unk_10 = arg0[0].unk_10;
+        func_i2_80101CCC(&profileSaves[0].deathRace, true);
+        profileSaves[1].deathRace = profileSaves[0].deathRace;
 
-        checksum = func_i2_8010358C(arg0);
+        checksum = Save_CalculateSaveDeathRaceChecksum(profileSaves);
 
         for (i = 0; i < 2; i++) {
-            func_i2_80100E64(arg0, i, checksum);
+            Save_WriteSaveDeathRace(profileSaves, i, checksum);
         }
     } else if (var_s2 == 1) {
         var_v0 = (sp30 == 0) ? 1 : 0;
 
-        (arg0 + sp30)->unk_10 = (arg0 + var_v0)->unk_10;
+        (profileSaves + sp30)->deathRace = (profileSaves + var_v0)->deathRace;
 
-        func_i2_80100E64(arg0, sp30, func_i2_8010358C(arg0));
+        Save_WriteSaveDeathRace(profileSaves, sp30, Save_CalculateSaveDeathRaceChecksum(profileSaves));
     }
-    var_v0_2 = &D_802A6B40[54];
-    var_v1 = &arg0->unk_10;
+    var_v0_2 = &gCourseRecordInfos[54];
+    var_v1 = &profileSaves->deathRace;
     for (i = 0; i < 1; i++) {
-        var_v0_2->timeRecord[i] = var_v1->unk_04[i];
+        var_v0_2->timeRecord[i] = var_v1->timeRecord[i];
     }
 }
 
-void func_i2_80102CA4(unk_struct_19E0* arg0, s32 courseIndex) {
+void func_i2_80102CA4(ProfileSave* profileSaves, s32 courseIndex) {
     u16 checksum;
     s32 j;
     s32 i;
     s32 var_s4;
-    unk_800F8510* var_s3;
-    unk_struct_19E0* var_s0;
+    CourseRecordInfo* var_s3;
+    ProfileSave* var_s0;
     s32 var_v0;
-    unk_struct_110* sp40;
+    SaveCourseRecords* sp40;
 
     j = 0;
 
-    for (i = 0, var_s0 = arg0; i < 2; i++) {
-        if (var_s0->unk_20[courseIndex].checksum != func_i2_801035B0(var_s0, courseIndex)) {
+    for (i = 0, var_s0 = profileSaves; i < 2; i++) {
+        if (var_s0->courses[courseIndex].checksum != Save_CalculateSaveCourseRecordChecksum(var_s0, courseIndex)) {
             j++;
             var_s4 = i;
         }
@@ -1283,103 +1285,104 @@ void func_i2_80102CA4(unk_struct_19E0* arg0, s32 courseIndex) {
 
     if (j == 2) {
 
-        func_i2_80101D18(&arg0[0].unk_20[courseIndex], 1);
-        arg0[1].unk_20[courseIndex] = arg0[0].unk_20[courseIndex];
+        func_i2_80101D18(&profileSaves[0].courses[courseIndex], true);
+        profileSaves[1].courses[courseIndex] = profileSaves[0].courses[courseIndex];
 
-        checksum = func_i2_801035B0(arg0, courseIndex);
+        checksum = Save_CalculateSaveCourseRecordChecksum(profileSaves, courseIndex);
 
         for (i = 0; i < 2; i++) {
-            func_i2_80100ED4(arg0, i, courseIndex, checksum);
+            Save_WriteSaveCourseRecord(profileSaves, i, courseIndex, checksum);
         }
 
     } else if (j == 1) {
         var_v0 = (var_s4 == 0) ? 1 : 0;
 
-        (arg0 + var_s4)->unk_20[courseIndex] = (arg0 + var_v0)->unk_20[courseIndex];
+        (profileSaves + var_s4)->courses[courseIndex] = (profileSaves + var_v0)->courses[courseIndex];
 
-        func_i2_80100ED4(arg0, var_s4, courseIndex, func_i2_801035B0(arg0, courseIndex));
+        Save_WriteSaveCourseRecord(profileSaves, var_s4, courseIndex,
+                                   Save_CalculateSaveCourseRecordChecksum(profileSaves, courseIndex));
     }
 
-    sp40 = &arg0->unk_20[courseIndex];
-    var_s3 = &D_802A6B40[courseIndex];
+    sp40 = &profileSaves->courses[courseIndex];
+    var_s3 = &gCourseRecordInfos[courseIndex];
 
     for (i = 0; i < 5; i++) {
-        var_s3->timeRecord[i] = sp40->unk_04[i];
-        var_s3->unk_98[i] = sp40->unk_18[i];
-        func_i2_80102A7C(sp40->unk_50[i], var_s3->unk_34[i].unk_00);
+        var_s3->timeRecord[i] = sp40->timeRecord[i];
+        var_s3->engine[i] = sp40->engine[i];
+        func_i2_80102A7C(&sp40->unk_50[i], &var_s3->carInfo[i]);
         for (j = 0; j < 4; j++) {
-            var_s3->unk_AC[i][j] = sp40->unk_34[i][j];
+            var_s3->name[i][j] = sp40->name[i][j];
         }
     }
-    var_s3->unk_C0 = sp40->unk_2C;
-    var_s3->unk_D8 = sp40->unk_30;
-    func_i2_80102A7C(sp40->unk_F0, var_s3->unk_C4);
+    var_s3->maxSpeed = sp40->maxSpeed;
+    var_s3->bestTime = sp40->bestTime;
+    func_i2_80102A7C(&sp40->unk_F0, &var_s3->maxSpeedCar);
 }
 
-void func_i2_80102F70(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3) {
+void func_i2_80102F70(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3) {
 
-    if (arg3 != 0) {
-        if (arg0->checksum != func_i2_80103608(arg0) * 1) {
-            func_i2_80101DE8(arg0, 1);
-            func_i2_80100FEC(arg0);
-            func_i2_80101E68(arg1, 1);
-            func_i2_80101034(arg1);
+    if (arg3) {
+        if (ghostRecord->checksum != Save_CalculateGhostRecordChecksum(ghostRecord) * 1) {
+            func_i2_80101DE8(ghostRecord, true);
+            Save_WriteGhostRecord(ghostRecord);
+            func_i2_80101E68(ghostData, true);
+            Save_WriteGhostData(ghostData);
         }
     }
 
-    arg2->unk_3F64 = arg0->unk_04;
-    arg2->unk_3F68 = arg0->unk_02;
-    arg2->unk_0000 = arg0->unk_08;
-    arg2->unk_0004 = arg0->unk_0C;
-    func_i2_80102A7C(arg0->unk_20.unk_00, arg2->unk_3F6A);
+    ghost->replayChecksum = ghostRecord->replayChecksum;
+    ghost->ghostType = ghostRecord->ghostType;
+    ghost->encodedCourseIndex = ghostRecord->encodedCourseIndex;
+    ghost->raceTime = ghostRecord->raceTime;
+    func_i2_80102A7C(&ghostRecord->unk_20, &ghost->carInfo);
 }
 
-void func_i2_8010300C(unk_struct_40* arg0, unk_struct_3F80* arg1, unk_800E5FF8* arg2, s32 arg3) {
+void func_i2_8010300C(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3) {
     s32 i;
     u8* var_v0;
     s8* var_v1;
-    unk_struct_40* var = (unk_struct_40*) D_i2_8010D7F0;
-    unk_struct_3F80* var2 = (unk_struct_3F80*) &D_i2_8010D7F0[sizeof(unk_struct_40)];
+    GhostRecord* ghostRecord2 = (GhostRecord*) gSaveBuffer;
+    GhostData* ghostData2 = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
-    if (arg3 != 0) {
-        if (arg1->checksum != func_i2_8010362C(arg1) * 1) {
-            func_i2_80101DE8(var, 1);
-            func_i2_80100FEC(var);
-            func_i2_80101E68(var2, 1);
-            func_i2_80101034(var2);
-            arg2->unk_0000 = 0;
+    if (arg3) {
+        if (ghostData->checksum != Save_CalculateGhostDataChecksum(ghostData) * 1) {
+            func_i2_80101DE8(ghostRecord2, true);
+            Save_WriteGhostRecord(ghostRecord2);
+            func_i2_80101E68(ghostData2, true);
+            Save_WriteGhostData(ghostData2);
+            ghost->encodedCourseIndex = 0;
         }
     }
 
     for (i = 0; i < 3; i++) {
-        arg2->unk_0008[i] = arg1->unk_04[i];
+        ghost->lapTimes[i] = ghostData->lapTimes[i];
     }
 
-    arg2->unk_0014 = arg1->unk_10;
-    arg2->unk_0018 = arg1->unk_14;
+    ghost->replayEnd = ghostData->replayEnd;
+    ghost->replaySize = ghostData->replaySize;
 
-    var_v0 = arg1->unk_20;
-    var_v1 = arg2->unk_001C;
+    var_v0 = ghostData->replayData;
+    var_v1 = ghost->replayData;
 
     for (i = 0; i < 16200; i++) {
         *var_v1++ = *var_v0++;
     }
 }
 
-void func_i2_80103108(unk_struct_19E0* arg0, s32 arg1) {
-    unk_struct_40_2* var_a3;
+void func_i2_80103108(ProfileSave* profileSaves, bool arg1) {
+    SaveEditCup* var_a3;
     s32 i;
     s32 j;
     s32 sp30;
     u16 checksum;
     s32 var_s2;
     s32 var_v0;
-    unk_struct_19E0* var_s1;
+    ProfileSave* var_s1;
 
     var_s2 = 0;
 
-    for (i = 0, var_s1 = arg0; i < 2; i++) {
-        if (var_s1->unk_19A0.checksum != func_i2_801035E4(var_s1) * 1) {
+    for (i = 0, var_s1 = profileSaves; i < 2; i++) {
+        if (var_s1->editCup.checksum != Save_CalculateSaveEditCupChecksum(var_s1) * 1) {
             var_s2++;
             sp30 = i;
         }
@@ -1387,50 +1390,50 @@ void func_i2_80103108(unk_struct_19E0* arg0, s32 arg1) {
     }
 
     if (var_s2 == 2) {
-        func_i2_80101C04(&arg0[0].unk_19A0, 1);
-        arg0[1].unk_19A0 = arg0[0].unk_19A0;
+        func_i2_80101C04(&profileSaves[0].editCup, true);
+        profileSaves[1].editCup = profileSaves[0].editCup;
 
-        checksum = func_i2_801035E4(arg0);
+        checksum = Save_CalculateSaveEditCupChecksum(profileSaves);
         for (i = 0; i < 2; i++) {
-            func_i2_80100F7C(arg0, i, checksum);
+            Save_WriteSaveEditCup(profileSaves, i, checksum);
         }
     } else if (var_s2 == 1) {
         var_v0 = (sp30 == 0) ? 1 : 0;
 
-        (arg0 + sp30)->unk_19A0 = (arg0 + var_v0)->unk_19A0;
+        (profileSaves + sp30)->editCup = (profileSaves + var_v0)->editCup;
 
-        func_i2_80100F7C(arg0, sp30, func_i2_801035E4(arg0));
+        Save_WriteSaveEditCup(profileSaves, sp30, Save_CalculateSaveEditCupChecksum(profileSaves));
     }
 
-    if (arg1 == 0) {
+    if (!arg1) {
         return;
     }
 
-    var_a3 = &arg0[0].unk_19A0;
+    var_a3 = &profileSaves[0].editCup;
 
     for (i = 0; i < 6; i++) {
         for (j = 0; j < 9; j++) {
-            D_i2_8010D730[i][j] = var_a3->unk_0A[i][j];
+            gEditCupTrackNames[i][j] = var_a3->editCupTrackNames[i][j];
         }
     }
 }
 
-extern f32 D_800E40F0[];
+extern f32 gCharacterLastEngine[];
 
-void func_i2_80103310(unk_struct_80* arg0, s32 arg1) {
+void func_i2_80103310(CharacterSave* characterSave, s32 courseIndex) {
     s32 i;
 
-    if (arg0->checksum != func_i2_80103650(arg0) * 1) {
-        func_i2_80101EBC(arg0, 1);
-        func_i2_8010107C(arg0, arg1);
+    if (characterSave->checksum != Save_CalculateCharacterSaveChecksum(characterSave) * 1) {
+        func_i2_80101EBC(characterSave, true);
+        Save_WriteCharacterSave(characterSave, courseIndex);
     }
 
     for (i = 0; i < 30; i++) {
-        D_800E40F0[i] = arg0->unk_08[i];
+        gCharacterLastEngine[i] = characterSave->characterEngine[i];
     }
 }
 
-void func_i2_801033B8(unk_struct_60* arg0, u8* arg1) {
+void func_i2_801033B8(CupSave* cupSave, u8* arg1) {
     s32 i;
     s32 j;
     s32 k;
@@ -1439,9 +1442,9 @@ void func_i2_801033B8(unk_struct_60* arg0, u8* arg1) {
     s8* var_a0;
     s32 temp;
 
-    if (arg0->checksum != func_i2_80103674(arg0) * 1) {
-        func_i2_80101F24(arg0, 1);
-        func_i2_801010D0(arg0);
+    if (cupSave->checksum != Save_CalculateCupSaveChecksum(cupSave) * 1) {
+        func_i2_80101F24(cupSave, true);
+        Save_WriteCupSave(cupSave);
     }
 
     if (arg1 == NULL) {
@@ -1452,7 +1455,7 @@ void func_i2_801033B8(unk_struct_60* arg0, u8* arg1) {
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 10; j++) {
-            temp = arg0->unk_10[i][j];
+            temp = cupSave->cupCompletion[i][j];
             for (k = 0; k < 3; k++) {
                 temp_v1 = (u32) (temp >> (k * 5)) % 32;
                 for (m = 0; m < 5; m++) {
@@ -1469,8 +1472,7 @@ void func_i2_801033B8(unk_struct_60* arg0, u8* arg1) {
     }
 }
 
-// Basic checksum calculation
-u16 func_i2_801034F8(void* data, s32 size) {
+u16 Save_CalculateChecksum(void* data, s32 size) {
     u8* dataPtr = data;
     u16 checksum = 0;
     s32 i;
@@ -1482,115 +1484,115 @@ u16 func_i2_801034F8(void* data, s32 size) {
     return checksum;
 }
 
-s32 func_i2_8010356C(unk_struct_19E0* arg0) {
-    return func_i2_801034F8(&arg0->unk_00.unk_00, sizeof(unk_struct_10) - sizeof(u16));
+s32 Save_CalculateSaveSettingsChecksum(ProfileSave* profileSave) {
+    return Save_CalculateChecksum(&profileSave->saveSettings.fileName, sizeof(SaveSettings) - sizeof(u16));
 }
 
-s32 func_i2_8010358C(unk_struct_19E0* arg0) {
-    return func_i2_801034F8(&arg0->unk_10.unk_02, sizeof(unk_struct_10_2) - sizeof(u16));
+s32 Save_CalculateSaveDeathRaceChecksum(ProfileSave* profileSave) {
+    return Save_CalculateChecksum(&profileSave->deathRace.unk_02, sizeof(SaveDeathRace) - sizeof(u16));
 }
 
-s32 func_i2_801035B0(unk_struct_19E0* arg0, s32 arg1) {
-    return func_i2_801034F8(&arg0->unk_20[arg1].unk_02, sizeof(unk_struct_110) - sizeof(u16));
+s32 Save_CalculateSaveCourseRecordChecksum(ProfileSave* profileSave, s32 courseIndex) {
+    return Save_CalculateChecksum(&profileSave->courses[courseIndex].unk_02, sizeof(SaveCourseRecords) - sizeof(u16));
 }
 
-s32 func_i2_801035E4(unk_struct_19E0* arg0) {
-    return func_i2_801034F8(&arg0->unk_19A0.unk_02, sizeof(unk_struct_40_2) - sizeof(u16));
+s32 Save_CalculateSaveEditCupChecksum(ProfileSave* profileSave) {
+    return Save_CalculateChecksum(&profileSave->editCup.unk_02, sizeof(SaveEditCup) - sizeof(u16));
 }
 
-s32 func_i2_80103608(unk_struct_40* arg0) {
-    return func_i2_801034F8(&arg0->unk_02, sizeof(unk_struct_40) - sizeof(u16));
+s32 Save_CalculateGhostRecordChecksum(GhostRecord* ghostRecord) {
+    return Save_CalculateChecksum(&ghostRecord->ghostType, sizeof(GhostRecord) - sizeof(u16));
 }
 
-s32 func_i2_8010362C(unk_struct_3F80* arg0) {
-    return func_i2_801034F8(&arg0->unk_02, sizeof(unk_struct_3F80) - sizeof(u16));
+s32 Save_CalculateGhostDataChecksum(GhostData* ghostData) {
+    return Save_CalculateChecksum(&ghostData->unk_02, sizeof(GhostData) - sizeof(u16));
 }
 
-s32 func_i2_80103650(unk_struct_80* arg0) {
-    return func_i2_801034F8(&arg0->unk_02, sizeof(unk_struct_80) - sizeof(u16));
+s32 Save_CalculateCharacterSaveChecksum(CharacterSave* characterSave) {
+    return Save_CalculateChecksum(&characterSave->unk_02, sizeof(CharacterSave) - sizeof(u16));
 }
 
-s32 func_i2_80103674(unk_struct_60* arg0) {
-    return func_i2_801034F8(&arg0->unk_02, sizeof(unk_struct_60) - sizeof(u16));
+s32 Save_CalculateCupSaveChecksum(CupSave* cupSave) {
+    return Save_CalculateChecksum(&cupSave->unk_02, sizeof(CupSave) - sizeof(u16));
 }
 
-OSPiHandle* func_i2_80103698(void) {
-    if (D_i2_801117C8.baseAddress == PHYS_TO_K1(PI_DOM2_ADDR2)) {
-        return &D_i2_801117C8;
+OSPiHandle* Sram_Init(void) {
+    if (sSramPiHandle.baseAddress == PHYS_TO_K1(PI_DOM2_ADDR2)) {
+        return &sSramPiHandle;
     }
-    D_i2_801117C8.type = DEVICE_TYPE_SRAM;
-    D_i2_801117C8.baseAddress = PHYS_TO_K1(PI_DOM2_ADDR2);
-    D_i2_801117C8.latency = 5;
-    D_i2_801117C8.pulse = 12;
-    D_i2_801117C8.pageSize = 13;
-    D_i2_801117C8.relDuration = 2;
-    D_i2_801117C8.domain = PI_DOMAIN2;
-    D_i2_801117C8.speed = 0;
-    bzero(&D_i2_801117C8.transferInfo, sizeof(__OSTranxInfo));
-    osEPiLinkHandle(&D_i2_801117C8);
-    return &D_i2_801117C8;
+    sSramPiHandle.type = DEVICE_TYPE_SRAM;
+    sSramPiHandle.baseAddress = PHYS_TO_K1(PI_DOM2_ADDR2);
+    sSramPiHandle.latency = 5;
+    sSramPiHandle.pulse = 12;
+    sSramPiHandle.pageSize = 13;
+    sSramPiHandle.relDuration = 2;
+    sSramPiHandle.domain = PI_DOMAIN2;
+    sSramPiHandle.speed = 0;
+    bzero(&sSramPiHandle.transferInfo, sizeof(__OSTranxInfo));
+    osEPiLinkHandle(&sSramPiHandle);
+    return &sSramPiHandle;
 }
 
 extern OSMesgQueue gDmaMesgQueue;
 
-void func_i2_80103728(s32 arg0, size_t arg1, void* arg2, size_t arg3) {
-    osWritebackDCache(arg2, arg3);
-    osInvalDCache(osPhysicalToVirtual((uintptr_t) arg2), arg3);
-    D_i2_801117B0.hdr.pri = 0;
-    D_i2_801117B0.hdr.retQueue = &gDmaMesgQueue;
-    D_i2_801117B0.dramAddr = arg2;
-    D_i2_801117B0.devAddr = arg1 + 0x08000000;
-    D_i2_801117B0.size = arg3;
-    osEPiStartDma(D_i2_8011183C, &D_i2_801117B0, arg0);
+void Sram_ReadWrite(s32 direction, u32 offset, void* dramAddr, size_t size) {
+    osWritebackDCache(dramAddr, size);
+    osInvalDCache(osPhysicalToVirtual((uintptr_t) dramAddr), size);
+    sSramIoMesg.hdr.pri = 0;
+    sSramIoMesg.hdr.retQueue = &gDmaMesgQueue;
+    sSramIoMesg.dramAddr = dramAddr;
+    sSramIoMesg.devAddr = offset + OS_K1_TO_PHYSICAL(0xA8000000);
+    sSramIoMesg.size = size;
+    osEPiStartDma(gSramPiHandlePtr, &sSramIoMesg, direction);
     osRecvMesg(&gDmaMesgQueue, NULL, OS_MESG_BLOCK);
 }
 
-void func_i2_8010382C(unk_struct_40* arg0, s32 arg1);
+void func_i2_8010382C(GhostRecord*, s32);
 
-s32 func_i2_801037CC(unk_80141C88* arg0, s32 arg1) {
-    unk_struct_40* var = (unk_struct_40*) D_i2_8010D7F0;
+s32 func_i2_801037CC(unk_80141C88* arg0, s32 courseIndex) {
+    GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
 
-    if ((arg1 < 0) || (arg1 >= 24)) {
+    if ((courseIndex < 0) || (courseIndex >= 24)) {
         return 2;
     }
-    func_i2_8010382C(var, arg1);
+    func_i2_8010382C(ghostRecord, courseIndex);
     if (arg0 != NULL) {
-        func_i2_80101590(var, arg0);
+        func_i2_80101590(ghostRecord, arg0);
     }
     return 0;
 }
 
-void func_i2_8010382C(unk_struct_40* arg0, s32 arg1) {
-    func_80073ED0(SEGMENT_ROM_START(segment_27F200) + D_i2_80106DF0[arg1][0], arg0, sizeof(unk_struct_40));
+void func_i2_8010382C(GhostRecord* ghostRecord, s32 courseIndex) {
+    func_80073ED0(SEGMENT_ROM_START(segment_27F200) + D_i2_80106DF0[courseIndex][0], ghostRecord, sizeof(GhostRecord));
 }
 
-void func_i2_80103930(unk_struct_3F80* arg0, s32 arg1);
+void func_i2_80103930(GhostData*, s32);
 
-s32 func_i2_8010387C(s32 arg0) {
+s32 func_i2_8010387C(s32 courseIndex) {
     s32 sp64;
     unk_80141C88 sp24;
-    unk_struct_40* var = (unk_struct_40*) D_i2_8010D7F0;
-    unk_struct_3F80* var2 = (unk_struct_3F80*) &D_i2_8010D7F0[sizeof(unk_struct_40)];
+    GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
+    GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
-    func_i2_801037CC(&sp24, arg0);
+    func_i2_801037CC(&sp24, courseIndex);
     if (func_i2_80100B38(&sp24) != 0) {
         return 0;
     }
 
-    sp64 = func_i2_801005CC(arg0);
-    func_i2_80103930(var2, arg0);
-    func_i2_80102F70(var, var2, &D_800E5FF8[sp64], 0);
-    func_i2_8010300C(var, var2, &D_800E5FF8[sp64], 0);
+    sp64 = func_i2_801005CC(courseIndex);
+    func_i2_80103930(ghostData, courseIndex);
+    func_i2_80102F70(ghostRecord, ghostData, &gGhosts[sp64], false);
+    func_i2_8010300C(ghostRecord, ghostData, &gGhosts[sp64], false);
 
     return 0;
 }
 
-void func_i2_80103930(unk_struct_3F80* arg0, s32 arg1) {
-    uintptr_t* offsets = D_i2_80106DF0[arg1];
+void func_i2_80103930(GhostData* ghostData, s32 courseIndex) {
+    uintptr_t* offsets = D_i2_80106DF0[courseIndex];
     RomOffset romOffset = SEGMENT_ROM_START(segment_27F200);
 
-    func_80073ED0(romOffset + offsets[1], arg0, 0x20);
-    func_80073ED0(romOffset + offsets[2], arg0->unk_20, ALIGN_2(arg0->unk_14 + 1));
+    func_80073ED0(romOffset + offsets[1], ghostData, 0x20);
+    func_80073ED0(romOffset + offsets[2], ghostData->replayData, ALIGN_2(ghostData->replaySize + 1));
 }
 
 void func_i2_801039BC(void) {
@@ -1599,12 +1601,8 @@ void func_i2_801039BC(void) {
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 8; j++) {
-            ((unk_struct_19E0*) D_i2_8010D7F0)[i].unk_00.unk_00[j] = D_i2_8010ADE8[j];
-            func_i2_80100DDC(((unk_struct_19E0*) D_i2_8010D7F0), i, 0x1234);
+            ((ProfileSave*) gSaveBuffer)[i].saveSettings.fileName[j] = D_i2_8010ADE8[j];
+            Save_WriteSaveSettings(((ProfileSave*) gSaveBuffer), i, 0x1234);
         }
     }
 }
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/9BD00/D_i2_8010ADE0.s")
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/9BD00/D_i2_8010ADE8.s")

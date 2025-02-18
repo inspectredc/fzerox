@@ -174,7 +174,7 @@ extern s16 D_800CD044;
 extern s16 D_800CD048;
 extern s32 D_800CD380;
 extern s8 D_800CD3C0;
-extern s8 D_800CD3C8;
+extern s8 gSettingEverythingUnlocked;
 extern s32 gGameMode;
 extern Controller gSharedController;
 extern s32 gControllersConnected;
@@ -284,7 +284,7 @@ s32 func_i6_80115FF0(void) {
             if (gInputPressed & BTN_DOWN) {
                 D_800CD388[D_800CD380]++;
             }
-            if ((D_800CD3C0 < 2) && (D_800CD3C8 == 0)) {
+            if ((D_800CD3C0 < 2) && (gSettingEverythingUnlocked == 0)) {
                 if (D_i6_8011EED0[D_800CD380] < D_800CD388[D_800CD380]) {
                     D_800CD388[D_800CD380] = D_i6_8011EED0[D_800CD380];
                 }
@@ -856,7 +856,7 @@ Gfx* func_i6_80117760(Gfx* gfx, unk_800E3A28* arg1) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
-        if ((D_800CD3C0 < 2) && (D_800CD3C8 == 0)) {
+        if ((D_800CD3C0 < 2) && (gSettingEverythingUnlocked == 0)) {
             if (i < 3) {
                 gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (arg1->unk_0C - temp_s6) + 0x20,
                                     arg1->unk_10 + (i * 20) + 0xE, 1, 0, 0, 1.0f, 1.0f);
@@ -968,7 +968,6 @@ void func_i6_80117D3C(unk_800E3A28* arg0) {
     }
 }
 
-extern s8 D_800CD3C8;
 extern u16 gInputPressed;
 extern u16 gInputButtonPressed;
 
@@ -976,9 +975,9 @@ void func_i6_80117DE0(unk_800E3A28* arg0) {
     unk_800E3A28* sp1C;
 
     if ((arg0->unk_04 < 8) && (gInputButtonPressed != 0)) {
-        if (D_i6_8011EF10[arg0->unk_04] & gInputPressed) {
+        if (gUnlockEverythingInputs[arg0->unk_04] & gInputPressed) {
             if (++arg0->unk_04 == 8) {
-                D_800CD3C8 = 1;
+                gSettingEverythingUnlocked = 1;
                 func_i2_80101414();
                 func_800BA8D8(0x2E);
                 sp1C = func_80079E88(0x50);
@@ -987,7 +986,7 @@ void func_i6_80117DE0(unk_800E3A28* arg0) {
                 }
             }
         } else {
-            if (D_i6_8011EF10[0] & gInputButtonPressed) {
+            if (gUnlockEverythingInputs[0] & gInputButtonPressed) {
                 arg0->unk_04 = 1;
             } else {
                 arg0->unk_04 = 0;
