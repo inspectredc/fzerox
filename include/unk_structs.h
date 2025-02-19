@@ -42,23 +42,23 @@ typedef struct unk_8006FC8C {
 // Todo fill in array as individual documented u8 variables
 typedef struct CarInfo {
     u8 unk_00[20];
-} CarInfo;
+} CarInfo; // size = 0x14
 
 typedef struct CourseRecordInfo {
-    s32 encodedCourseIndex;
-    s32 unk_04;
-    s32 unk_08;
-    f32 unk_0C;
-    unk_8006FC8C* unk_10;
-    s16 unk_14[6];
-    s32 timeRecord[5];
-    CarInfo carInfo[5];
-    f32 engine[5];
-    u8 name[5][4];
-    f32 maxSpeed;
-    CarInfo maxSpeedCar;
-    s32 bestTime;
-    CarInfo bestTimeCar;
+    /* 0x00 */ s32 encodedCourseIndex;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ unk_8006FC8C* unk_10;
+    /* 0x14 */ s16 unk_14[6];
+    /* 0x20 */ s32 timeRecord[5];
+    /* 0x34 */ CarInfo carInfo[5];
+    /* 0x98 */ f32 engine[5];
+    /* 0xAC */ u8 name[5][4];
+    /* 0xC0 */ f32 maxSpeed;
+    /* 0xC4 */ CarInfo maxSpeedCar;
+    /* 0xD8 */ s32 bestTime;
+    /* 0xDC */ CarInfo bestTimeCar;
 } CourseRecordInfo; // size = 0xF0
 
 typedef struct unk_802D3E38 {
@@ -312,10 +312,10 @@ typedef struct Racer {
     Racer_unk_C unk_0C;
     Vec3f unk_5C;
     Vec3f unk_68;
-    Vec3f unk_74;
+    Vec3f velocity;
     Vec3f unk_80;
-    Vec3f unk_8C;
-    f32 unk_98;
+    Vec3f acceleration;
+    f32 speed;
     f32 maxSpeed;
     f32 unk_A0;
     f32 unk_A4;
@@ -680,14 +680,14 @@ typedef struct unk_80141C88_unk_1D {
 } unk_80141C88_unk_1D;
 
 typedef struct GhostInfo {
-    s32 courseIndex;
-    s32 encodedCourseIndex;
-    s32 raceTime;
-    s32 replayChecksum;
-    u16 ghostType;
-    u16 unk_12;
-    char trackName[9];
-    unk_80141C88_unk_1D unk_1D;
+    /* 0x00 */ s32 courseIndex;
+    /* 0x04 */ s32 encodedCourseIndex;
+    /* 0x08 */ s32 raceTime;
+    /* 0x0C */ s32 replayChecksum;
+    /* 0x10 */ u16 ghostType;
+    /* 0x12 */ u16 unk_12;
+    /* 0x14 */ char trackName[9];
+    /* 0x1D */ unk_80141C88_unk_1D unk_1D;
 } GhostInfo; // size = 0x40
 
 typedef struct unk_80111870 {
@@ -737,7 +737,7 @@ typedef struct unk_800CF1B0 {
     u8 unk_08[4];
     u8 unk_0C[4];
     u8 unk_10;
-    s8 unk_11[3];
+    s8 machineStats[3];
     s16 unk_14;
 } unk_800CF1B0; // size = 0x16
 

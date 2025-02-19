@@ -971,10 +971,10 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     arg0->unk_1E8 = 1.0f;
                 }
             } else {
-                arg0->unk_1EC = gRacers[var_a3].unk_98 - (temp_fv1 * 0.0002f);
+                arg0->unk_1EC = gRacers[var_a3].speed - (temp_fv1 * 0.0002f);
                 if ((gTotalLapCount == arg0->lap) &&
                     (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
-                    arg0->unk_1EC = gRacers[var_a3].unk_98 - (temp_fv1 * 0.002f);
+                    arg0->unk_1EC = gRacers[var_a3].speed - (temp_fv1 * 0.002f);
                 }
                 arg0->unk_1E8 = 0.0f;
             }
@@ -1032,7 +1032,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 } while (0);
             }
             if (spBC < 2000.0f) {
-                arg0->unk_1EC = gRacers[arg0->unk_352].unk_98 + (spBC * 0.01f);
+                arg0->unk_1EC = gRacers[arg0->unk_352].speed + (spBC * 0.01f);
             } else {
                 arg0->unk_1EC = (625.0f / 9.0f);
             }
@@ -1114,7 +1114,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 }
             } else if ((var_fv0 < 2000.0f) && (gTotalLapCount == arg0->lap) &&
                        (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
-                spBC = D_i3_80141910->unk_98 - 2.3148148f;
+                spBC = D_i3_80141910->speed - 2.3148148f;
                 if ((var_fv0 < 0.0f) && (arg0->unk_1EC < spBC)) {
                     arg0->unk_1EC = spBC;
                 }
@@ -1194,9 +1194,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         }
     }
 
-    if (func_8009D16C(&arg0->unk_0C, arg0->unk_0C.unk_34.x + (arg0->unk_330 * arg0->unk_74.x),
-                      arg0->unk_0C.unk_34.y + (arg0->unk_330 * arg0->unk_74.y),
-                      arg0->unk_0C.unk_34.z + (arg0->unk_330 * arg0->unk_74.z), &sp4C) == 0) {
+    if (func_8009D16C(&arg0->unk_0C, arg0->unk_0C.unk_34.x + (arg0->unk_330 * arg0->velocity.x),
+                      arg0->unk_0C.unk_34.y + (arg0->unk_330 * arg0->velocity.y),
+                      arg0->unk_0C.unk_34.z + (arg0->unk_330 * arg0->velocity.z), &sp4C) == 0) {
         if (((arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) &&
             ((arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_CYLINDER)) {
             temp4 = arg0->unk_C0.x.x;
@@ -1206,7 +1206,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 arg0->unk_33C = D_i3_8013ED1C[arg0->id] * 46.0f;
                 if (arg0->id != 0) {
                     temp3 = ((gRacers[0].unk_23C - D_i3_8013ED10[arg0->id]) - arg0->unk_23C);
-                    arg0->unk_1EC = gRacers[0].unk_98 + (temp3 * 0.1f);
+                    arg0->unk_1EC = gRacers[0].speed + (temp3 * 0.1f);
                     arg0->unk_1E8 = 1.0f;
                 }
             }
@@ -1462,7 +1462,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     arg0->unk_388 = var_a3;
                     arg0->unk_330 = 0.1f;
                 } else {
-                    arg0->unk_330 = arg0->unk_98 * 0.1f;
+                    arg0->unk_330 = arg0->speed * 0.1f;
                     sp9C = (arg0->unk_274 - arg0->unk_270) * 0.5f;
                     var_fv0 = arg0->unk_228 / arg0->unk_22C;
                     switch (arg0->unk_34E) {
@@ -1774,8 +1774,8 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             var_fv0 = D_i3_80141910->unk_23C - arg0->unk_23C;
             if ((var_fv0 > 0.0f) && (var_fv0 < 92.0f) &&
                 (func_i3_fabsf(D_i3_80141910->unk_33C - arg0->unk_33C) < 69.0f)) {
-                if (D_i3_80141910->unk_98 < arg0->unk_1EC) {
-                    arg0->unk_1EC = D_i3_80141910->unk_98;
+                if (D_i3_80141910->speed < arg0->unk_1EC) {
+                    arg0->unk_1EC = D_i3_80141910->speed;
                 }
             }
         }
@@ -1802,7 +1802,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                         D_i3_8014190C++;
                     }
                     if (D_i3_8014190C > 60) {
-                        arg0->unk_1EC = arg0->unk_98 * 0.1f;
+                        arg0->unk_1EC = arg0->speed * 0.1f;
                         arg1->buttonCurrent |= BTN_CDOWN;
                         arg1->buttonCurrent &= 0x7FFF;
                         arg1->buttonPressed &= 0x7FFF;

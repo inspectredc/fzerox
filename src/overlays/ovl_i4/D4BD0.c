@@ -1188,7 +1188,7 @@ Gfx* func_i4_80117E98(Gfx* gfx, unk_800E3A28* arg1) {
 
     temp_t2 = arg1->unk_00 - 0x41;
 
-    temp_a3 = &D_800F80C8[gRacers[temp_t2].character].unk_11;
+    temp_a3 = &D_800F80C8[gRacers[temp_t2].character].machineStats;
     temp_fp = D_i4_8011D694[temp_t2 * 2 + 0];
     temp_t0 = D_i4_8011D694[temp_t2 * 2 + 1];
     if (temp_t2 < 2) {
@@ -1462,7 +1462,7 @@ Gfx* func_i4_80119170(Gfx* gfx, unk_800E3A28* arg1) {
         gfx = func_80078EA0(gfx, sMachineBodyBoostGripCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
 
         for (i = 0; i < 3; i++) {
-            temp = D_800F80C8[gRacers[0].character].unk_11;
+            temp = D_800F80C8[gRacers[0].character].machineStats;
             gfx = func_i2_DrawMachineStatValue(gfx, arg1->unk_0C + 0x69, arg1->unk_10 + i * 23 + 3, temp[i]);
         }
     } else {
@@ -1474,7 +1474,7 @@ Gfx* func_i4_80119170(Gfx* gfx, unk_800E3A28* arg1) {
                                 0, 1.0f, 1.0f);
 
             for (j = 0; j < 3; j++) {
-                temp = D_800F80C8[gRacers[i].character].unk_11;
+                temp = D_800F80C8[gRacers[i].character].machineStats;
                 gfx = func_i2_80106450(gfx, leftOffset + 0x6B, topOffset + 0x43 + j * 14, sMachineStatValues[temp[j]],
                                        0, 2, 0);
             }
@@ -1496,7 +1496,7 @@ Gfx* func_i4_801193B8(Gfx* gfx, unk_800E3A28* arg1) {
         var_s1 = D_i4_8011D6C4[i * 2 + 1];
 
         for (j = 0; j < 3; j++) {
-            temp = D_800F80C8[gRacers[i].character].unk_11;
+            temp = D_800F80C8[gRacers[i].character].machineStats;
             temp2 = sMachineStatValues[temp[j]];
             gfx = func_i2_80106450(gfx, var_s3 + 0x6B, var_s1 + 0x43 + j * 14, temp2, 0, 2, 0);
         }

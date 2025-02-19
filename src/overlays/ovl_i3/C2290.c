@@ -662,7 +662,7 @@ Gfx* func_i3_DrawPlayerSpeed(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
     }
 
     digitMask = 1000;
-    speedRemainder = speed = Math_Round(gRacers[playerNum].unk_98 * 21.6f);
+    speedRemainder = speed = Math_Round(gRacers[playerNum].speed * 21.6f);
     left = sSpeedPositions[numPlayersIndex][playerNum][0];
     top = sSpeedPositions[numPlayersIndex][playerNum][1];
 

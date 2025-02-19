@@ -1559,7 +1559,7 @@ Gfx* func_i3_801216C0(Gfx* gfx, s32 playerNum) {
 }
 
 void func_i3_801217F0(s32 playerIndex) {
-    D_i3_80141C00[playerIndex] = gRacers[playerIndex].unk_98 * 0.05f;
+    D_i3_80141C00[playerIndex] = gRacers[playerIndex].speed * 0.05f;
     D_i3_80141C10[playerIndex] = 0.0f;
     D_i3_80141D78[playerIndex] = 0;
     D_i3_80141BF0[playerIndex] = 0;
@@ -4594,13 +4594,13 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     }
     if (gNumPlayers == 1) {
         if (gGameMode == GAMEMODE_DEATH_RACE) {
-            if (gRacers[playerIndex].unk_98 < (500.0f / 27.0f)) {
+            if (gRacers[playerIndex].speed < (500.0f / 27.0f)) {
                 D_80141900++;
             } else {
                 D_80141900 = 0;
             }
         } else {
-            if (gRacers[playerIndex].unk_98 < (250.0f / 27.0f)) {
+            if (gRacers[playerIndex].speed < (250.0f / 27.0f)) {
                 D_80141900++;
             } else {
                 D_80141900 = 0;

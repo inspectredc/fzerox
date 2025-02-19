@@ -1071,7 +1071,7 @@ s32 func_i7_801442A0(void) {
             var_a0 = true;
 
             for (i = 0, racer = gRacers; i < 3; i++) {
-                if (racer->unk_98 > 0.1f) {
+                if (racer->speed > 0.1f) {
                     var_a0 = false;
                     break;
                 }
