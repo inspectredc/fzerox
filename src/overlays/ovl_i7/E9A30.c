@@ -15,7 +15,7 @@ extern s8 D_800DCE5C;
 extern s16 D_800E42CC;
 extern s32 gCourseIndex;
 extern RaceStats gCupRaceStats[1][6];
-extern CourseData D_8010B7B0;
+extern CourseData gCourseData;
 extern s32 D_i2_80106F10;
 extern s16 D_80106F48;
 
@@ -816,7 +816,7 @@ void func_i7_80143A90(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0.venue, D_8010B7B0.skybox);
+    func_8007F4E0(gCourseData.venue, gCourseData.skybox);
     func_i3_801365E0();
     func_i2_801044F0();
     func_8006D448();

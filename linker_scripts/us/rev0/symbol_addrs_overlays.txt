@@ -51,4 +51,4 @@ func_i4_8011B0C8 = 0x8011B0C8; //segment:ovl_i4
 func_i4_8011B134 = 0x8011B134; //segment:ovl_i4
 func_i4_8011B1E4 = 0x8011B1E4; //segment:ovl_i4
 
-D_8010B7B0 = 0x8010B7B0; //segment:ovl_i2 size:0x7E0
+gCourseData = 0x8010B7B0; //segment:ovl_i2 size:0x7E0

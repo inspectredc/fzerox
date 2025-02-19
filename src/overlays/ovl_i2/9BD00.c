@@ -201,45 +201,45 @@ s32 SaveLoadPlayerGhost(s32 courseIndex, s32 ghostIndex) {
 bool func_i2_80100950(CarInfo* carInfo, unk_80141C88_unk_1D* arg1) {
     bool matching = true;
 
-    if (arg1->unk_00.unk_00[0] != carInfo->unk_00[0]) {
+    if (carInfo->character != arg1->unk_00.character) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[1] != carInfo->unk_00[1]) {
+    } else if (carInfo->customType != arg1->unk_00.customType) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[2] != carInfo->unk_00[2]) {
+    } else if (carInfo->frontType != arg1->unk_00.frontType) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[3] != carInfo->unk_00[3]) {
+    } else if (carInfo->rearType != arg1->unk_00.rearType) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[4] != carInfo->unk_00[4]) {
+    } else if (carInfo->wingType != arg1->unk_00.wingType) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[5] != carInfo->unk_00[5]) {
+    } else if (carInfo->logo != arg1->unk_00.logo) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[6] != carInfo->unk_00[6]) {
+    } else if (carInfo->decal != arg1->unk_00.decal) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[7] != carInfo->unk_00[7]) {
+    } else if (carInfo->number != arg1->unk_00.number) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[8] != carInfo->unk_00[8]) {
+    } else if (carInfo->envR2 != arg1->unk_00.envR2) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[9] != carInfo->unk_00[9]) {
+    } else if (carInfo->envG2 != arg1->unk_00.envG2) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[10] != carInfo->unk_00[10]) {
+    } else if (carInfo->envB2 != arg1->unk_00.envB2) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[11] != carInfo->unk_00[11]) {
+    } else if (carInfo->primR1 != arg1->unk_00.primR1) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[12] != carInfo->unk_00[12]) {
+    } else if (carInfo->primG1 != arg1->unk_00.primG1) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[13] != carInfo->unk_00[13]) {
+    } else if (carInfo->primB1 != arg1->unk_00.primB1) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[14] != carInfo->unk_00[14]) {
+    } else if (carInfo->primR2 != arg1->unk_00.primR2) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[15] != carInfo->unk_00[15]) {
+    } else if (carInfo->primG2 != arg1->unk_00.primG2) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[16] != carInfo->unk_00[16]) {
+    } else if (carInfo->primB2 != arg1->unk_00.primB2) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[17] != carInfo->unk_00[17]) {
+    } else if (carInfo->envR1 != arg1->unk_00.envR1) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[18] != carInfo->unk_00[18]) {
+    } else if (carInfo->envG1 != arg1->unk_00.envG1) {
         matching = false;
-    } else if (arg1->unk_00.unk_00[19] != carInfo->unk_00[19]) {
+    } else if (carInfo->envB1 != arg1->unk_00.envB1) {
         matching = false;
     }
     return matching;
@@ -719,26 +719,26 @@ void Save_InitEditCup(SaveEditCup* editCup, bool shouldClear) {
 
 void func_i2_80101C78(unk_80141C88_unk_1D* arg0) {
 
-    arg0->unk_00.unk_00[0] = 0;
-    arg0->unk_00.unk_00[1] = 0;
-    arg0->unk_00.unk_00[2] = 0;
-    arg0->unk_00.unk_00[3] = 0;
-    arg0->unk_00.unk_00[4] = 0;
-    arg0->unk_00.unk_00[5] = 0;
-    arg0->unk_00.unk_00[6] = 0;
-    arg0->unk_00.unk_00[7] = 0;
-    arg0->unk_00.unk_00[8] = 0;
-    arg0->unk_00.unk_00[9] = 0;
-    arg0->unk_00.unk_00[10] = 0;
-    arg0->unk_00.unk_00[11] = 0;
-    arg0->unk_00.unk_00[12] = 0;
-    arg0->unk_00.unk_00[13] = 0;
-    arg0->unk_00.unk_00[14] = 0;
-    arg0->unk_00.unk_00[15] = 0;
-    arg0->unk_00.unk_00[16] = 0;
-    arg0->unk_00.unk_00[17] = 0;
-    arg0->unk_00.unk_00[18] = 0;
-    arg0->unk_00.unk_00[19] = 0;
+    arg0->unk_00.character = 0;
+    arg0->unk_00.customType = 0;
+    arg0->unk_00.frontType = 0;
+    arg0->unk_00.rearType = 0;
+    arg0->unk_00.wingType = 0;
+    arg0->unk_00.logo = 0;
+    arg0->unk_00.decal = 0;
+    arg0->unk_00.number = 0;
+    arg0->unk_00.envR2 = 0;
+    arg0->unk_00.envG2 = 0;
+    arg0->unk_00.envB2 = 0;
+    arg0->unk_00.primR1 = 0;
+    arg0->unk_00.primG1 = 0;
+    arg0->unk_00.primB1 = 0;
+    arg0->unk_00.primR2 = 0;
+    arg0->unk_00.primG2 = 0;
+    arg0->unk_00.primB2 = 0;
+    arg0->unk_00.envR1 = 0;
+    arg0->unk_00.envG1 = 0;
+    arg0->unk_00.envB1 = 0;
 }
 
 void Save_InitDeathRace(SaveDeathRace* deathRace, bool shouldClear) {
@@ -908,26 +908,26 @@ void Save_SaveSettings(SaveSettings* saveSettings) {
 
 void func_i2_80102110(CarInfo* carInfo, unk_80141C88_unk_1D* arg1) {
 
-    arg1->unk_00.unk_00[0] = carInfo->unk_00[0];
-    arg1->unk_00.unk_00[1] = carInfo->unk_00[1];
-    arg1->unk_00.unk_00[2] = carInfo->unk_00[2];
-    arg1->unk_00.unk_00[3] = carInfo->unk_00[3];
-    arg1->unk_00.unk_00[4] = carInfo->unk_00[4];
-    arg1->unk_00.unk_00[5] = carInfo->unk_00[5];
-    arg1->unk_00.unk_00[6] = carInfo->unk_00[6];
-    arg1->unk_00.unk_00[7] = carInfo->unk_00[7];
-    arg1->unk_00.unk_00[8] = carInfo->unk_00[8];
-    arg1->unk_00.unk_00[9] = carInfo->unk_00[9];
-    arg1->unk_00.unk_00[10] = carInfo->unk_00[10];
-    arg1->unk_00.unk_00[11] = carInfo->unk_00[11];
-    arg1->unk_00.unk_00[12] = carInfo->unk_00[12];
-    arg1->unk_00.unk_00[13] = carInfo->unk_00[13];
-    arg1->unk_00.unk_00[14] = carInfo->unk_00[14];
-    arg1->unk_00.unk_00[15] = carInfo->unk_00[15];
-    arg1->unk_00.unk_00[16] = carInfo->unk_00[16];
-    arg1->unk_00.unk_00[17] = carInfo->unk_00[17];
-    arg1->unk_00.unk_00[18] = carInfo->unk_00[18];
-    arg1->unk_00.unk_00[19] = carInfo->unk_00[19];
+    arg1->unk_00.character = carInfo->character;
+    arg1->unk_00.customType = carInfo->customType;
+    arg1->unk_00.frontType = carInfo->frontType;
+    arg1->unk_00.rearType = carInfo->rearType;
+    arg1->unk_00.wingType = carInfo->wingType;
+    arg1->unk_00.logo = carInfo->logo;
+    arg1->unk_00.decal = carInfo->decal;
+    arg1->unk_00.number = carInfo->number;
+    arg1->unk_00.envR2 = carInfo->envR2;
+    arg1->unk_00.envG2 = carInfo->envG2;
+    arg1->unk_00.envB2 = carInfo->envB2;
+    arg1->unk_00.primR1 = carInfo->primR1;
+    arg1->unk_00.primG1 = carInfo->primG1;
+    arg1->unk_00.primB1 = carInfo->primB1;
+    arg1->unk_00.primR2 = carInfo->primR2;
+    arg1->unk_00.primG2 = carInfo->primG2;
+    arg1->unk_00.primB2 = carInfo->primB2;
+    arg1->unk_00.envR1 = carInfo->envR1;
+    arg1->unk_00.envG1 = carInfo->envG1;
+    arg1->unk_00.envB1 = carInfo->envB1;
 }
 
 void Save_SaveDeathRace(SaveDeathRace* deathRace) {
@@ -997,26 +997,26 @@ void Save_SaveGhostRecord(Ghost* ghost) {
     ghostRecord->encodedCourseIndex = ghost->encodedCourseIndex;
 
     ghostRecord->raceTime = ghost->raceTime;
-    ghostRecord->unk_20.unk_00.unk_00[0] = ghost->carInfo.unk_00[0];
-    ghostRecord->unk_20.unk_00.unk_00[1] = ghost->carInfo.unk_00[1];
-    ghostRecord->unk_20.unk_00.unk_00[2] = ghost->carInfo.unk_00[2];
-    ghostRecord->unk_20.unk_00.unk_00[3] = ghost->carInfo.unk_00[3];
-    ghostRecord->unk_20.unk_00.unk_00[4] = ghost->carInfo.unk_00[4];
-    ghostRecord->unk_20.unk_00.unk_00[5] = ghost->carInfo.unk_00[5];
-    ghostRecord->unk_20.unk_00.unk_00[6] = ghost->carInfo.unk_00[6];
-    ghostRecord->unk_20.unk_00.unk_00[7] = ghost->carInfo.unk_00[7];
-    ghostRecord->unk_20.unk_00.unk_00[8] = ghost->carInfo.unk_00[8];
-    ghostRecord->unk_20.unk_00.unk_00[9] = ghost->carInfo.unk_00[9];
-    ghostRecord->unk_20.unk_00.unk_00[10] = ghost->carInfo.unk_00[10];
-    ghostRecord->unk_20.unk_00.unk_00[11] = ghost->carInfo.unk_00[11];
-    ghostRecord->unk_20.unk_00.unk_00[12] = ghost->carInfo.unk_00[12];
-    ghostRecord->unk_20.unk_00.unk_00[13] = ghost->carInfo.unk_00[13];
-    ghostRecord->unk_20.unk_00.unk_00[14] = ghost->carInfo.unk_00[14];
-    ghostRecord->unk_20.unk_00.unk_00[15] = ghost->carInfo.unk_00[15];
-    ghostRecord->unk_20.unk_00.unk_00[16] = ghost->carInfo.unk_00[16];
-    ghostRecord->unk_20.unk_00.unk_00[17] = ghost->carInfo.unk_00[17];
-    ghostRecord->unk_20.unk_00.unk_00[18] = ghost->carInfo.unk_00[18];
-    ghostRecord->unk_20.unk_00.unk_00[19] = ghost->carInfo.unk_00[19];
+    ghostRecord->unk_20.unk_00.character = ghost->carInfo.character;
+    ghostRecord->unk_20.unk_00.customType = ghost->carInfo.customType;
+    ghostRecord->unk_20.unk_00.frontType = ghost->carInfo.frontType;
+    ghostRecord->unk_20.unk_00.rearType = ghost->carInfo.rearType;
+    ghostRecord->unk_20.unk_00.wingType = ghost->carInfo.wingType;
+    ghostRecord->unk_20.unk_00.logo = ghost->carInfo.logo;
+    ghostRecord->unk_20.unk_00.decal = ghost->carInfo.decal;
+    ghostRecord->unk_20.unk_00.number = ghost->carInfo.number;
+    ghostRecord->unk_20.unk_00.envR2 = ghost->carInfo.envR2;
+    ghostRecord->unk_20.unk_00.envG2 = ghost->carInfo.envG2;
+    ghostRecord->unk_20.unk_00.envB2 = ghost->carInfo.envB2;
+    ghostRecord->unk_20.unk_00.primR1 = ghost->carInfo.primR1;
+    ghostRecord->unk_20.unk_00.primG1 = ghost->carInfo.primG1;
+    ghostRecord->unk_20.unk_00.primB1 = ghost->carInfo.primB1;
+    ghostRecord->unk_20.unk_00.primR2 = ghost->carInfo.primR2;
+    ghostRecord->unk_20.unk_00.primG2 = ghost->carInfo.primG2;
+    ghostRecord->unk_20.unk_00.primB2 = ghost->carInfo.primB2;
+    ghostRecord->unk_20.unk_00.envR1 = ghost->carInfo.envR1;
+    ghostRecord->unk_20.unk_00.envG1 = ghost->carInfo.envG1;
+    ghostRecord->unk_20.unk_00.envB1 = ghost->carInfo.envB1;
 
     for (i = 0; i < 9; i++) {
         ghostRecord->trackName[i] = '\0';
@@ -1198,26 +1198,26 @@ void Save_LoadSaveSettings(ProfileSave* profileSaves, bool arg1) {
 
 void func_i2_80102A7C(unk_80141C88_unk_1D* arg0, CarInfo* arg1) {
 
-    arg1->unk_00[0] = arg0->unk_00.unk_00[0];
-    arg1->unk_00[1] = arg0->unk_00.unk_00[1];
-    arg1->unk_00[2] = arg0->unk_00.unk_00[2];
-    arg1->unk_00[3] = arg0->unk_00.unk_00[3];
-    arg1->unk_00[4] = arg0->unk_00.unk_00[4];
-    arg1->unk_00[5] = arg0->unk_00.unk_00[5];
-    arg1->unk_00[6] = arg0->unk_00.unk_00[6];
-    arg1->unk_00[7] = arg0->unk_00.unk_00[7];
-    arg1->unk_00[8] = arg0->unk_00.unk_00[8];
-    arg1->unk_00[9] = arg0->unk_00.unk_00[9];
-    arg1->unk_00[10] = arg0->unk_00.unk_00[10];
-    arg1->unk_00[11] = arg0->unk_00.unk_00[11];
-    arg1->unk_00[12] = arg0->unk_00.unk_00[12];
-    arg1->unk_00[13] = arg0->unk_00.unk_00[13];
-    arg1->unk_00[14] = arg0->unk_00.unk_00[14];
-    arg1->unk_00[15] = arg0->unk_00.unk_00[15];
-    arg1->unk_00[16] = arg0->unk_00.unk_00[16];
-    arg1->unk_00[17] = arg0->unk_00.unk_00[17];
-    arg1->unk_00[18] = arg0->unk_00.unk_00[18];
-    arg1->unk_00[19] = arg0->unk_00.unk_00[19];
+    arg1->character = arg0->unk_00.character;
+    arg1->customType = arg0->unk_00.customType;
+    arg1->frontType = arg0->unk_00.frontType;
+    arg1->rearType = arg0->unk_00.rearType;
+    arg1->wingType = arg0->unk_00.wingType;
+    arg1->logo = arg0->unk_00.logo;
+    arg1->decal = arg0->unk_00.decal;
+    arg1->number = arg0->unk_00.number;
+    arg1->envR2 = arg0->unk_00.envR2;
+    arg1->envG2 = arg0->unk_00.envG2;
+    arg1->envB2 = arg0->unk_00.envB2;
+    arg1->primR1 = arg0->unk_00.primR1;
+    arg1->primG1 = arg0->unk_00.primG1;
+    arg1->primB1 = arg0->unk_00.primB1;
+    arg1->primR2 = arg0->unk_00.primR2;
+    arg1->primG2 = arg0->unk_00.primG2;
+    arg1->primB2 = arg0->unk_00.primB2;
+    arg1->envR1 = arg0->unk_00.envR1;
+    arg1->envG1 = arg0->unk_00.envG1;
+    arg1->envB1 = arg0->unk_00.envB1;
 }
 
 void Save_LoadDeathRace(ProfileSave* profileSaves) {
@@ -1276,7 +1276,8 @@ void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex) {
     j = 0;
 
     for (i = 0, profileSave = profileSaves; i < 2; i++) {
-        if (profileSave->courses[courseIndex].checksum != Save_CalculateSaveCourseRecordChecksum(profileSave, courseIndex)) {
+        if (profileSave->courses[courseIndex].checksum !=
+            Save_CalculateSaveCourseRecordChecksum(profileSave, courseIndex)) {
             j++;
             invalidSaveIndex = i;
         }
@@ -1296,7 +1297,8 @@ void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex) {
     } else if (j == 1) {
         backupSaveIndex = (invalidSaveIndex == 0) ? 1 : 0;
 
-        (profileSaves + invalidSaveIndex)->courses[courseIndex] = (profileSaves + backupSaveIndex)->courses[courseIndex];
+        (profileSaves + invalidSaveIndex)->courses[courseIndex] =
+            (profileSaves + backupSaveIndex)->courses[courseIndex];
 
         Save_WriteSaveCourseRecord(profileSaves, invalidSaveIndex, courseIndex,
                                    Save_CalculateSaveCourseRecordChecksum(profileSaves, courseIndex));
@@ -1562,7 +1564,8 @@ s32 Save_LoadStaffGhostRecord(GhostInfo* arg0, s32 courseIndex) {
 }
 
 void Save_RomCopyGhostRecord(GhostRecord* ghostRecord, s32 courseIndex) {
-    Dma_RomCopyAsync(SEGMENT_ROM_START(segment_27F200) + D_i2_80106DF0[courseIndex][0], ghostRecord, sizeof(GhostRecord));
+    Dma_RomCopyAsync(SEGMENT_ROM_START(segment_27F200) + D_i2_80106DF0[courseIndex][0], ghostRecord,
+                     sizeof(GhostRecord));
 }
 
 void Save_RomCopyGhostData(GhostData*, s32);

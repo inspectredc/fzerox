@@ -890,7 +890,7 @@ f32 D_i3_8013ED1C[] = { 0.0f, 2.0f, -2.0f };
 extern u32 gGameFrameCount;
 extern s32 gTotalLapCount;
 extern s32 D_800F80A8[];
-extern CourseData D_8010B7B0;
+extern CourseData gCourseData;
 
 void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     f32 spBC;
@@ -973,13 +973,13 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             } else {
                 arg0->unk_1EC = gRacers[var_a3].speed - (temp_fv1 * 0.0002f);
                 if ((gTotalLapCount == arg0->lap) &&
-                    (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
+                    (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.courseSegment->segmentIndex)) {
                     arg0->unk_1EC = gRacers[var_a3].speed - (temp_fv1 * 0.002f);
                 }
                 arg0->unk_1E8 = 0.0f;
             }
             if ((gTotalLapCount == arg0->lap) &&
-                (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
+                (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.courseSegment->segmentIndex)) {
                 arg0->unk_1E8 = 0.0f;
             }
             arg0->unk_38C = 0;
@@ -1082,7 +1082,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             }
 
             if (((gTotalLapCount == arg0->lap) &&
-                 (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) ||
+                 (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.courseSegment->segmentIndex)) ||
                 ((gRacers[arg0->unk_352].unk_368 == 0xFE) && (gGameMode != GAMEMODE_PRACTICE) &&
                  (gGameMode != GAMEMODE_DEATH_RACE))) {
                 arg0->unk_352 = 255;
@@ -1113,7 +1113,8 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                     }
                 }
             } else if ((var_fv0 < 2000.0f) && (gTotalLapCount == arg0->lap) &&
-                       (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) < arg0->unk_0C.unk_00->segmentIndex)) {
+                       (((s32) (gCurrentCourseRecordInfo->unk_08 * 2) / 3) <
+                        arg0->unk_0C.courseSegment->segmentIndex)) {
                 spBC = D_i3_80141910->speed - 2.3148148f;
                 if ((var_fv0 < 0.0f) && (arg0->unk_1EC < spBC)) {
                     arg0->unk_1EC = spBC;
@@ -1136,7 +1137,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             }
         }
     }
-    var_a3 = arg0->unk_0C.unk_00->segmentIndex * 4;
+    var_a3 = arg0->unk_0C.courseSegment->segmentIndex * 4;
     if (arg0->unk_0C.unk_08 >= 0.5f) {
         var_a3 += 2;
     }
@@ -1169,7 +1170,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         }
     }
     if (gCourseIndex == 0xC) {
-        sp7C = arg0->unk_0C.unk_00->segmentIndex;
+        sp7C = arg0->unk_0C.courseSegment->segmentIndex;
         if ((sp7C >= 4) && (sp7C < 0x10)) {
             arg0->unk_1EC = (2500.0f / 27.0f);
             arg0->unk_1E8 = 1.0f;
@@ -1181,14 +1182,14 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     }
 
     sp74 = false;
-    if ((arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_PIPE) {
-        if ((arg0->unk_0C.unk_00->next->next->next->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) {
+    if ((arg0->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_PIPE) {
+        if ((arg0->unk_0C.courseSegment->next->next->next->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) {
             sp74 = true;
             arg0->unk_330 = 10.0f;
-        } else if ((arg0->unk_0C.unk_00->next->next->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) {
+        } else if ((arg0->unk_0C.courseSegment->next->next->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) {
             sp74 = true;
             arg0->unk_330 = 10.0f;
-        } else if ((arg0->unk_0C.unk_00->next->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) {
+        } else if ((arg0->unk_0C.courseSegment->next->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) {
             sp74 = true;
             arg0->unk_330 = 10.0f;
         }
@@ -1197,8 +1198,8 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     if (func_8009D16C(&arg0->unk_0C, arg0->unk_0C.unk_34.x + (arg0->unk_330 * arg0->velocity.x),
                       arg0->unk_0C.unk_34.y + (arg0->unk_330 * arg0->velocity.y),
                       arg0->unk_0C.unk_34.z + (arg0->unk_330 * arg0->velocity.z), &sp4C) == 0) {
-        if (((arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) &&
-            ((arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_CYLINDER)) {
+        if (((arg0->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) &&
+            ((arg0->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_CYLINDER)) {
             temp4 = arg0->unk_C0.x.x;
             temp5 = arg0->unk_C0.x.y;
             temp6 = arg0->unk_C0.x.z;
@@ -1245,7 +1246,8 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             var_a1 = Math_Round(-arg0->unk_334 * 0.1f * DOT_XYZ(&arg0->unk_C0.y, &sp4C.x));
 
             if (gCourseIndex == 0xC) {
-                if ((arg0->unk_0C.unk_00->segmentIndex >= 7) && (arg0->unk_0C.unk_00->segmentIndex < 0xF)) {
+                if ((arg0->unk_0C.courseSegment->segmentIndex >= 7) &&
+                    (arg0->unk_0C.courseSegment->segmentIndex < 0xF)) {
                     if (arg0->unk_A0 > 400.0f) {
                         var_a3 = 0;
                     }
@@ -1260,9 +1262,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 var_a1 = 0x46;
             }
             var_a3 /= 5;
-            if (((arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_CYLINDER) ||
-                ((arg0->unk_0C.unk_00->next->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_AIR) ||
-                ((arg0->unk_0C.unk_00->next->next->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_AIR)) {
+            if (((arg0->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_CYLINDER) ||
+                ((arg0->unk_0C.courseSegment->next->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_AIR) ||
+                ((arg0->unk_0C.courseSegment->next->next->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_AIR)) {
                 var_a1 = 0x46;
                 arg1->buttonCurrent &= 0x7FFF;
                 arg1->buttonPressed &= 0x7FFF;
@@ -1280,7 +1282,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             }
         } else {
             var_a1 = 0x46;
-            if (((arg0->unk_0C.unk_00->next->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_AIR) &&
+            if (((arg0->unk_0C.courseSegment->next->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_AIR) &&
                 (arg0->unk_0C.unk_08 > 0.5f)) {
                 arg0->unk_1EC = 69.44444f;
             }
@@ -1344,28 +1346,28 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             arg0->unk_394--;
         }
 
-        var_a3 = arg0->unk_0C.unk_00->segmentIndex;
+        var_a3 = arg0->unk_0C.courseSegment->segmentIndex;
         if (var_a3 != arg0->unk_358) {
-            arg0->unk_344 = D_8010B7B0.landmine[var_a3];
-            arg0->unk_345 = D_8010B7B0.jump[var_a3];
-            arg0->unk_346 = D_8010B7B0.dirt[var_a3];
-            arg0->unk_347 = D_8010B7B0.ice[var_a3];
-            arg0->unk_348 = D_8010B7B0.pit[var_a3];
+            arg0->unk_344 = gCourseData.landmine[var_a3];
+            arg0->unk_345 = gCourseData.jump[var_a3];
+            arg0->unk_346 = gCourseData.dirt[var_a3];
+            arg0->unk_347 = gCourseData.ice[var_a3];
+            arg0->unk_348 = gCourseData.pit[var_a3];
             if (gDifficulty >= EXPERT) {
-                arg0->unk_349 = D_8010B7B0.dash[var_a3];
+                arg0->unk_349 = gCourseData.dash[var_a3];
             } else {
                 arg0->unk_349 = -1;
             }
 
-            arg0->unk_35C = arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_FORM_MASK;
+            arg0->unk_35C = arg0->unk_0C.courseSegment->trackSegmentInfo & TRACK_FORM_MASK;
             arg0->unk_358 = var_a3;
 
             if (++var_a3 >= gCurrentCourseRecordInfo->unk_08) {
                 var_a3 = 0;
             }
-            arg0->unk_34A = D_8010B7B0.landmine[var_a3];
-            arg0->unk_34B = D_8010B7B0.dirt[var_a3];
-            arg0->unk_34C = D_8010B7B0.dash[var_a3];
+            arg0->unk_34A = gCourseData.landmine[var_a3];
+            arg0->unk_34B = gCourseData.dirt[var_a3];
+            arg0->unk_34C = gCourseData.dash[var_a3];
             arg0->unk_34E = 6;
             if (arg0->unk_344 != -1) {
                 arg0->unk_34E = 5;
@@ -1385,7 +1387,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
         }
 
         if (arg0->unk_36C & 0x800) {
-            var_a3 = (arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK);
+            var_a3 = (arg0->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK);
             if ((var_a3 == 0x80) || (var_a3 == 0xC0)) {
                 if (arg0->character & 1) {
                     arg1->stickX += 42;
@@ -1419,14 +1421,14 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                 }
             }
         } else {
-            if (((arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) &&
-                ((arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_CYLINDER) &&
+            if (((arg0->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_PIPE) &&
+                ((arg0->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_CYLINDER) &&
                 (gGameMode != GAMEMODE_GP_END_CS)) {
                 if ((gCourseIndex < 0x18) &&
                     (((arg0->raceTime > 2000) && (((arg0->unk_368 % 6) < 2) ||
                                                   (func_i3_fabsf(arg0->unk_23C - D_i3_80141910->unk_23C) > 5000.0f))) ||
                      (arg0->id < gNumPlayers))) {
-                    var_a3 = arg0->unk_0C.unk_00->segmentIndex * 4;
+                    var_a3 = arg0->unk_0C.courseSegment->segmentIndex * 4;
                     if (arg0->unk_0C.unk_08 >= 0.5f) {
                         var_a3 += 2;
                     }
@@ -1457,7 +1459,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
                         if (var_fv0 > 0.3f) {
                             arg1->buttonPressed |= BTN_A | BTN_B;
                         }
-                        arg0->unk_358 = arg0->unk_0C.unk_00->segmentIndex;
+                        arg0->unk_358 = arg0->unk_0C.courseSegment->segmentIndex;
                     }
                     arg0->unk_388 = var_a3;
                     arg0->unk_330 = 0.1f;
@@ -1725,9 +1727,9 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
             }
         }
 
-        if ((arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_HALF_PIPE) {
+        if ((arg0->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_HALF_PIPE) {
             spBC = 92.0f;
-        } else if ((arg0->unk_0C.unk_00->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_BORDERLESS_ROAD) {
+        } else if ((arg0->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_BORDERLESS_ROAD) {
             if (arg0->unk_35C == TRACK_FORM_STRAIGHT) {
                 spBC = 23.0f;
             } else {

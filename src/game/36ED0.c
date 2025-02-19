@@ -54,10 +54,10 @@ unk_800A8B74_arg_0 D_800F8528[64];
 s32 D_800F8928;
 s32 D_800F892C;
 s16 D_800F8930[5];
-s32 D_800F893C;
-s32 D_800F8940;
-s32 D_800F8944;
-s32 D_800F8948;
+s32 sRandomCourseInitSeed1;
+s32 sRandomCourseInitMask1;
+s32 sRandomCourseInitSeed2;
+s32 sRandomCourseInitMask2;
 f32 D_800F894C;
 f32 D_800F8950;
 unk_800F8958 D_800F8958[2];
@@ -76,7 +76,7 @@ f32 D_800F89E4;
 f32 D_800F89E8;
 
 s32 D_800CF500 = 0;
-s16 D_800CF504 = -1;
+s16 gLastRandomCourseIndex = -1;
 s32 D_800CF508 = 990;
 UNUSED s32 D_800CF50C = 0;
 
@@ -365,7 +365,7 @@ void func_8009CED0(s32 venue) {
 
 #ifdef NON_EQUIVALENT
 // Weird float/double calculations
-void func_8009DB28(unk_8006FC8C* arg0, f32* arg1, f32* arg2) {
+void func_8009DB28(CourseSegment* arg0, f32* arg1, f32* arg2) {
     f64 temp_ft5;
     f64 temp_fs0;
     f64 temp_fs1;
@@ -383,9 +383,9 @@ void func_8009DB28(unk_8006FC8C* arg0, f32* arg1, f32* arg2) {
     f64 temp_ft5_2;
     f64 temp_fv0_6;
     f64 temp_ft4;
-    unk_8006FC8C* temp_v0 = arg0->prev;
-    unk_8006FC8C* temp_v1 = arg0->next;
-    unk_8006FC8C* temp_a1 = temp_v1->next;
+    CourseSegment* temp_v0 = arg0->prev;
+    CourseSegment* temp_v1 = arg0->next;
+    CourseSegment* temp_a1 = temp_v1->next;
 
     temp_ft5 = arg0->pos.x - temp_v1->pos.x;
     temp_fs2 = temp_v0->pos.x - temp_a1->pos.x + temp_ft5;
@@ -439,14 +439,14 @@ void func_8009DB28(unk_8006FC8C* arg0, f32* arg1, f32* arg2) {
     }
 }
 #else
-void func_8009DB28(unk_8006FC8C*, f32*, f32*);
+void func_8009DB28(CourseSegment*, f32*, f32*);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_8009DB28.s")
 #endif
 
 s32 func_8009DEAC(CourseRecordInfo* arg0) {
     f32 sp4C;
     f32 sp48;
-    unk_8006FC8C* var_s0 = arg0->unk_10;
+    CourseSegment* var_s0 = arg0->courseSegments;
 
     do {
         func_8009DB28(var_s0, &sp4C, &sp48);
@@ -455,7 +455,7 @@ s32 func_8009DEAC(CourseRecordInfo* arg0) {
         }
         var_s0->unk_24 = (sp4C + sp48) * 0.5f;
         var_s0 = var_s0->next;
-    } while (var_s0 != arg0->unk_10);
+    } while (var_s0 != arg0->courseSegments);
 
     return 0;
 }
@@ -469,33 +469,33 @@ f32 func_8009DFA0(Racer_unk_C* arg0) {
     if (arg0->unk_04 < 0.5f) {
         if (arg0->unk_04 < 0.25f) {
             var_fv1 = 0.0f;
-            var_fv0 = arg0->unk_1C.x - arg0->unk_00->pos.x;
-            var_fa1 = arg0->unk_1C.y - arg0->unk_00->pos.y;
-            var_ft4 = arg0->unk_1C.z - arg0->unk_00->pos.z;
+            var_fv0 = arg0->unk_1C.x - arg0->courseSegment->pos.x;
+            var_fa1 = arg0->unk_1C.y - arg0->courseSegment->pos.y;
+            var_ft4 = arg0->unk_1C.z - arg0->courseSegment->pos.z;
         } else {
-            var_fv1 = arg0->unk_00->unk_98;
-            var_fv0 = arg0->unk_1C.x - arg0->unk_00->unk_74.x;
-            var_fa1 = arg0->unk_1C.y - arg0->unk_00->unk_74.y;
-            var_ft4 = arg0->unk_1C.z - arg0->unk_00->unk_74.z;
+            var_fv1 = arg0->courseSegment->unk_98;
+            var_fv0 = arg0->unk_1C.x - arg0->courseSegment->unk_74.x;
+            var_fa1 = arg0->unk_1C.y - arg0->courseSegment->unk_74.y;
+            var_ft4 = arg0->unk_1C.z - arg0->courseSegment->unk_74.z;
         }
     } else if (arg0->unk_04 < 0.75f) {
-        var_fv1 = arg0->unk_00->unk_9C;
-        var_fv0 = arg0->unk_1C.x - arg0->unk_00->unk_80.x;
-        var_fa1 = arg0->unk_1C.y - arg0->unk_00->unk_80.y;
-        var_ft4 = arg0->unk_1C.z - arg0->unk_00->unk_80.z;
+        var_fv1 = arg0->courseSegment->unk_9C;
+        var_fv0 = arg0->unk_1C.x - arg0->courseSegment->unk_80.x;
+        var_fa1 = arg0->unk_1C.y - arg0->courseSegment->unk_80.y;
+        var_ft4 = arg0->unk_1C.z - arg0->courseSegment->unk_80.z;
     } else {
-        var_fv1 = arg0->unk_00->unk_A0;
-        var_fv0 = arg0->unk_1C.x - arg0->unk_00->unk_8C.x;
-        var_fa1 = arg0->unk_1C.y - arg0->unk_00->unk_8C.y;
-        var_ft4 = arg0->unk_1C.z - arg0->unk_00->unk_8C.z;
+        var_fv1 = arg0->courseSegment->unk_A0;
+        var_fv0 = arg0->unk_1C.x - arg0->courseSegment->unk_8C.x;
+        var_fa1 = arg0->unk_1C.y - arg0->courseSegment->unk_8C.y;
+        var_ft4 = arg0->unk_1C.z - arg0->courseSegment->unk_8C.z;
     }
 
     var_fv1 += sqrtf(SQ(var_fv0) + SQ(var_fa1) + SQ(var_ft4));
-    arg0->unk_08 = var_fv1 / arg0->unk_00->unk_28;
-    return arg0->unk_00->unk_2C + var_fv1;
+    arg0->unk_08 = var_fv1 / arg0->courseSegment->unk_28;
+    return arg0->courseSegment->unk_2C + var_fv1;
 }
 
-f32 func_8009E108(unk_8006FC8C* arg0, f32 arg1, f32* arg2) {
+f32 func_8009E108(CourseSegment* arg0, f32 arg1, f32* arg2) {
     f32 spDC;
     f32 spD8;
     f32 spD4;
@@ -513,9 +513,9 @@ f32 func_8009E108(unk_8006FC8C* arg0, f32 arg1, f32* arg2) {
     f32 spA4;
     Vec3f sp98;
     Vec3f sp8C;
-    unk_8006FC8C* temp_s0 = arg0->next;
-    unk_8006FC8C* temp_s1 = arg0->prev;
-    unk_8006FC8C* temp_s2 = temp_s0->next;
+    CourseSegment* temp_s0 = arg0->next;
+    CourseSegment* temp_s1 = arg0->prev;
+    CourseSegment* temp_s2 = temp_s0->next;
 
     spDC = arg0->unk_24;
     spD8 = spDC - 2.0f;
@@ -583,16 +583,16 @@ f32 func_8009E108(unk_8006FC8C* arg0, f32 arg1, f32* arg2) {
     return var_fs0;
 }
 
-f32 func_8009E538(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
+f32 func_8009E538(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
     f32 square;
     f32 temp_fv0;
     f32 sp44;
     f32 sp40;
     f32 sp3C;
     f32 sp38;
-    unk_8006FC8C* temp_v0 = arg0->next;
-    unk_8006FC8C* temp_v1 = arg0->prev;
-    unk_8006FC8C* temp_a1 = temp_v0->next;
+    CourseSegment* temp_v0 = arg0->next;
+    CourseSegment* temp_v1 = arg0->prev;
+    CourseSegment* temp_a1 = temp_v0->next;
 
     square = SQ(arg1);
     temp_fv0 = arg0->unk_24;
@@ -609,7 +609,7 @@ f32 func_8009E538(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
     return sqrtf(SQ(arg2->x) + SQ(arg2->y) + SQ(arg2->z));
 }
 
-void func_8009E6F0(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
+void func_8009E6F0(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
     f32 temp_fv0;
     f32 square;
     f32 cube;
@@ -617,9 +617,9 @@ void func_8009E6F0(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
     f32 sp2C;
     f32 sp28;
     f32 sp24;
-    unk_8006FC8C* temp_v0 = arg0->prev;
-    unk_8006FC8C* temp_v1 = arg0->next;
-    unk_8006FC8C* temp_a1 = temp_v1->next;
+    CourseSegment* temp_v0 = arg0->prev;
+    CourseSegment* temp_v1 = arg0->next;
+    CourseSegment* temp_a1 = temp_v1->next;
 
     temp_fv0 = arg0->unk_24;
     square = SQ(arg1);
@@ -634,16 +634,16 @@ void func_8009E6F0(unk_8006FC8C* arg0, f32 arg1, Vec3f* arg2) {
     arg2->z = sp30 * temp_v0->pos.z + sp2C * arg0->pos.z + sp28 * temp_v1->pos.z + sp24 * temp_a1->pos.z;
 }
 
-f32 func_8009E85C(unk_8006FC8C* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
+f32 func_8009E85C(CourseSegment* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
     f32 temp_fa0;
     f32 sp50;
     f32 sp4C;
     f32 sp48;
     f32 sp44;
     f32 sp40;
-    unk_8006FC8C* temp_v0 = arg0->next;
-    unk_8006FC8C* temp_v1 = arg0->prev;
-    unk_8006FC8C* temp_a1 = temp_v0->next;
+    CourseSegment* temp_v0 = arg0->next;
+    CourseSegment* temp_v1 = arg0->prev;
+    CourseSegment* temp_a1 = temp_v0->next;
 
     temp_fa0 = arg0->unk_24;
     sp50 = SQ(arg1);
@@ -700,10 +700,10 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
     f32 var_fs5;
     f32 square;
     f32 temp_fv1;
-    unk_8006FC8C* var_s1;
-    unk_8006FC8C* var_s2;
-    unk_8006FC8C* var_s3;
-    unk_8006FC8C* var_s4;
+    CourseSegment* var_s1;
+    CourseSegment* var_s2;
+    CourseSegment* var_s3;
+    CourseSegment* var_s4;
 
     spD0.x = arg1 - arg0->unk_44.x;
     spD0.y = arg2 - arg0->unk_44.y;
@@ -711,7 +711,7 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
 
     i = arg4 - 1;
 
-    var_s3 = arg0->unk_00;
+    var_s3 = arg0->courseSegment;
     var_s4 = var_s3->next;
     var_s1 = var_s3->prev;
     var_s2 = var_s4->next;
@@ -731,12 +731,12 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
             if (arg0->unk_04 > 1.9f) {
                 return -1;
             }
-            arg0->unk_00 = arg0->unk_00->next;
+            arg0->courseSegment = arg0->courseSegment->next;
             var_s1 = var_s3;
             var_s3 = var_s4;
             var_s4 = var_s2;
-            var_s2 = arg0->unk_00->next->next;
-            var_fs3 = arg0->unk_00->unk_24;
+            var_s2 = arg0->courseSegment->next->next;
+            var_fs3 = arg0->courseSegment->unk_24;
 
             var_fs5 = var_fs3 - 2.0f;
 
@@ -746,17 +746,17 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
             spB4 = sp78 + var_fs3;
             arg0->unk_04 -= 1.0f;
 
-            arg0->unk_04 *= arg0->unk_18 / func_8009E538(arg0->unk_00, 0.0f, &spD0);
+            arg0->unk_04 *= arg0->unk_18 / func_8009E538(arg0->courseSegment, 0.0f, &spD0);
         } else if (arg0->unk_04 < 0.0f) {
             if (arg0->unk_04 < -0.9f) {
                 return -1;
             }
-            arg0->unk_00 = arg0->unk_00->prev;
+            arg0->courseSegment = arg0->courseSegment->prev;
             var_s2 = var_s4;
             var_s4 = var_s3;
             var_s3 = var_s1;
-            var_s1 = arg0->unk_00->prev;
-            var_fs3 = arg0->unk_00->unk_24;
+            var_s1 = arg0->courseSegment->prev;
+            var_fs3 = arg0->courseSegment->unk_24;
 
             var_fs5 = var_fs3 - 2.0f;
 
@@ -764,7 +764,7 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
             sp78 = spBC + var_fs3;
             spB4 = sp78 + var_fs3;
 
-            arg0->unk_04 *= arg0->unk_18 / func_8009E538(arg0->unk_00, 1.0f, &spD0);
+            arg0->unk_04 *= arg0->unk_18 / func_8009E538(arg0->courseSegment, 1.0f, &spD0);
             arg0->unk_04 += 1.0f;
         }
 
@@ -844,7 +844,7 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
 }
 
 s32 func_8009F334(CourseRecordInfo* arg0) {
-    unk_8006FC8C* var_s0 = arg0->unk_10;
+    CourseSegment* var_s0 = arg0->courseSegments;
     Mtx3F sp30;
 
     do {
@@ -859,14 +859,14 @@ s32 func_8009F334(CourseRecordInfo* arg0) {
         var_s0->unk_0C.y = sp30.yy;
         var_s0->unk_0C.z = sp30.zy;
         var_s0 = var_s0->next;
-    } while (var_s0 != arg0->unk_10);
+    } while (var_s0 != arg0->courseSegments);
 
     return 0;
 }
 
 s32 func_8009F3E0(CourseRecordInfo* arg0) {
     s32 var_v1 = 0;
-    unk_8006FC8C* var_v0 = arg0->unk_10;
+    CourseSegment* var_v0 = arg0->courseSegments;
 
     do {
         var_v0->trackSegmentInfo &= ~TRACK_JOIN_MASK;
@@ -901,13 +901,13 @@ s32 func_8009F3E0(CourseRecordInfo* arg0) {
                 break;
         }
 
-    } while ((var_v0 = var_v0->next) != arg0->unk_10);
+    } while ((var_v0 = var_v0->next) != arg0->courseSegments);
 
     return var_v1;
 }
 
 void func_8009F508(CourseRecordInfo* arg0) {
-    unk_8006FC8C* var_s1 = arg0->unk_10;
+    CourseSegment* var_s1 = arg0->courseSegments;
     f32 spD8;
     f32 spD4;
     f32 spD0;
@@ -928,9 +928,9 @@ void func_8009F508(CourseRecordInfo* arg0) {
     arg0->unk_0C = 0.0f;
     do {
         f32 temp_fs2 = var_s1->unk_24;
-        unk_8006FC8C* temp_s4 = var_s1->next;
-        unk_8006FC8C* temp_s2 = var_s1->prev;
-        unk_8006FC8C* temp_s3 = temp_s4->next;
+        CourseSegment* temp_s4 = var_s1->next;
+        CourseSegment* temp_s2 = var_s1->prev;
+        CourseSegment* temp_s3 = temp_s4->next;
 
         spD8 = temp_fs2 - 2.0f;
         spD4 = temp_fs2 - 3.0f;
@@ -962,9 +962,9 @@ void func_8009F508(CourseRecordInfo* arg0) {
         arg0->unk_0C += var_s1->unk_28;
         var_s1 = temp_s4;
         var_s1->unk_2C = arg0->unk_0C;
-    } while (var_s1 != arg0->unk_10);
-    arg0->unk_10->unk_2C = 0.0f;
-    var_s1 = arg0->unk_10;
+    } while (var_s1 != arg0->courseSegments);
+    arg0->courseSegments->unk_2C = 0.0f;
+    var_s1 = arg0->courseSegments;
     do {
         func_8009E6F0(var_s1, 0.25f, &var_s1->unk_74);
         func_8009E6F0(var_s1, 0.5f, &var_s1->unk_80);
@@ -976,7 +976,7 @@ void func_8009F508(CourseRecordInfo* arg0) {
         func_8009E108(var_s1, 0.75f, &var_s1->unk_A0);
         var_s1->unk_A0 -= var_s1->unk_2C;
         var_s1 = var_s1->next;
-    } while (var_s1 != arg0->unk_10);
+    } while (var_s1 != arg0->courseSegments);
 }
 
 f32 func_8009F87C(Mtx3F* arg0, Mtx3F* arg1, Vec3f* arg2, Vec3f* arg3) {
@@ -1062,7 +1062,7 @@ dummy_label:;
 }
 
 void func_8009FC84(CourseRecordInfo* arg0) {
-    unk_8006FC8C* var_s0 = arg0->unk_10;
+    CourseSegment* var_s0 = arg0->courseSegments;
     Mtx3F sp110;
     Mtx3F spEC;
     Mtx3F spC8;
@@ -1133,12 +1133,12 @@ void func_8009FC84(CourseRecordInfo* arg0) {
             var_s0->trackSegmentInfo |= TRACK_FORM_STRAIGHT;
         }
         var_s0 = var_s0->next;
-    } while (var_s0 != arg0->unk_10);
+    } while (var_s0 != arg0->courseSegments);
 }
 
 void func_800A0010(CourseRecordInfo* arg0) {
-    unk_8006FC8C* var_v0 = arg0->unk_10;
-    unk_8006FC8C* var_v1 = var_v0->prev;
+    CourseSegment* var_v0 = arg0->courseSegments;
+    CourseSegment* var_v1 = var_v0->prev;
 
     do {
         if ((var_v1->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) ==
@@ -1149,7 +1149,7 @@ void func_800A0010(CourseRecordInfo* arg0) {
         }
         var_v1 = var_v0;
         var_v0 = var_v0->next;
-    } while (var_v0 != arg0->unk_10);
+    } while (var_v0 != arg0->courseSegments);
 }
 
 void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
@@ -1474,7 +1474,7 @@ void func_800A14F0(unk_36ED0* arg0, unk_36ED0* arg1, f32 arg2) {
     func_800A1178(arg0->unk_4A, arg1->unk_4A, arg2, arg1->unk_4A);
 }
 
-f32 func_800A15C8(unk_8006FC8C* arg0) {
+f32 func_800A15C8(CourseSegment* arg0) {
     f32 temp_fv1;
     f32 var_fs3;
     f32 var_fs1;
@@ -1574,7 +1574,7 @@ s32 func_800A18FC(s32 trackSegmentInfo, f32 arg1) {
 extern unk_36ED0 D_802A9FC0[];
 #ifdef NON_EQUIVALENT
 s32 func_800A1954(CourseRecordInfo* arg0) {
-    unk_8006FC8C* sp294;
+    CourseSegment* sp294;
     f32 sp284;
     f32 sp280;
     f32 sp27C;
@@ -1623,8 +1623,8 @@ s32 func_800A1954(CourseRecordInfo* arg0) {
     unk_36ED0* var_s0;
     unk_36ED0* var_s3;
     unk_36ED0* var_t2;
-    unk_8006FC8C* var_s1;
-    unk_8006FC8C* var_s4;
+    CourseSegment* var_s1;
+    CourseSegment* var_s4;
     unk_800CF528* temp_a3;
 
     spB4 = 0;
@@ -1995,7 +1995,7 @@ Vtx* func_800A2BDC(Vtx* arg0, Vec3f* arg1, Mtx3F* arg2) {
 }
 
 s32 func_800A2D2C(CourseRecordInfo* arg0, Vtx* arg1) {
-    unk_8006FC8C* var_s0;
+    CourseSegment* var_s0;
     f32 spD0;
     f32 var_fs1;
     f32 var_fs2;
@@ -2007,7 +2007,7 @@ s32 func_800A2D2C(CourseRecordInfo* arg0, Vtx* arg1) {
     Vtx* var_s3;
 
     D_800F89E8 = 3000.0f;
-    var_s0 = arg0->unk_10;
+    var_s0 = arg0->courseSegments;
     var_fs1 = 0.0f;
     var_fs2 = func_8009E85C(var_s0, 0.0f, &sp80, 0.0f);
     func_8009E6F0(var_s0, 0.0f, &spA4);
@@ -2023,7 +2023,7 @@ s32 func_800A2D2C(CourseRecordInfo* arg0, Vtx* arg1) {
         if (var_fs1 >= 1.0f) {
             var_s0 = var_s0->next;
             var_fs1 -= 1.0f;
-            if (var_s0 != arg0->unk_10) {
+            if (var_s0 != arg0->courseSegments) {
                 var_fs1 *= (var_fs2 / func_8009E538(var_s0, 0.0f, &spA4));
             } else {
                 break;
@@ -2074,17 +2074,17 @@ extern s32 gRandSeed2;
 extern s32 gRandMask2;
 extern s8 D_800CD010;
 extern s32 gGameMode;
-extern CourseData D_8010B7B0;
+extern CourseData gCourseData;
 
-void func_800A3044(void) {
+void Course_GenerateRandomCourse(void) {
     s32 var_s4;
     s32 temp_s3;
     s32 var_s6;
     s32 sp108;
     s32 sp104;
-    unk_8006FC8C* var_s0;
-    unk_8006FC8C* var_s1;
-    unk_8006FC8C* var_s2;
+    CourseSegment* var_s0;
+    CourseSegment* var_s1;
+    CourseSegment* var_s2;
     ControlPoint* var_s1_2;
     ControlPoint* var_s0_4;
     ControlPoint* var_s3;
@@ -2104,15 +2104,16 @@ void func_800A3044(void) {
     f32 var_fs0;
     f32 var_fs1;
 
-    if ((gGameMode == GAMEMODE_GP_RACE) && (D_800CD010 == 0) && (gCourseIndex == D_800CF504)) {
-        Math_Rand1Init(D_800F893C, D_800F8940);
-        Math_Rand2Init(D_800F8944, D_800F8948);
+    // Restore random generation seeding if track is re-done
+    if ((gGameMode == GAMEMODE_GP_RACE) && (D_800CD010 == 0) && (gCourseIndex == gLastRandomCourseIndex)) {
+        Math_Rand1Init(sRandomCourseInitSeed1, sRandomCourseInitMask1);
+        Math_Rand2Init(sRandomCourseInitSeed2, sRandomCourseInitMask2);
     }
-    D_800CF504 = gCourseIndex;
-    D_800F893C = gRandSeed1;
-    D_800F8940 = gRandMask1;
-    D_800F8944 = gRandSeed2;
-    D_800F8948 = gRandMask2;
+    gLastRandomCourseIndex = gCourseIndex;
+    sRandomCourseInitSeed1 = gRandSeed1;
+    sRandomCourseInitMask1 = gRandMask1;
+    sRandomCourseInitSeed2 = gRandSeed2;
+    sRandomCourseInitMask2 = gRandMask2;
     do {
     loop_start:
         do {
@@ -2146,8 +2147,8 @@ void func_800A3044(void) {
 
             gCurrentCourseRecordInfo->unk_08 = ((Math_Rand2() & 0x1FFFF) % 5) + var_s4;
             var_s4 = (gCurrentCourseRecordInfo->unk_08 * 3) + 1;
-            var_s0 = var_s4 + gCurrentCourseRecordInfo->unk_10;
-            var_s1 = gCurrentCourseRecordInfo->unk_10;
+            var_s0 = var_s4 + gCurrentCourseRecordInfo->courseSegments;
+            var_s1 = gCurrentCourseRecordInfo->courseSegments;
             do {
                 var_s0->segmentIndex = var_s4;
                 var_s0->prev = var_s0 - 1;
@@ -2166,14 +2167,14 @@ void func_800A3044(void) {
             do {
                 gCurrentCourseRecordInfo->unk_08 = (gCurrentCourseRecordInfo->unk_08 - 2) / 3;
 
-                gCurrentCourseRecordInfo->unk_10[0].prev =
-                    &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
-                gCurrentCourseRecordInfo->unk_10[0].prev->next = &gCurrentCourseRecordInfo->unk_10[0];
+                gCurrentCourseRecordInfo->courseSegments[0].prev =
+                    &gCurrentCourseRecordInfo->courseSegments[gCurrentCourseRecordInfo->unk_08 - 1];
+                gCurrentCourseRecordInfo->courseSegments[0].prev->next = &gCurrentCourseRecordInfo->courseSegments[0];
                 temp_fs2 = 1.0f / (131071.0f * 5.0f);
 
                 do {
                     var_fs1 = 0.0f;
-                    var_s0 = gCurrentCourseRecordInfo->unk_10[0].prev;
+                    var_s0 = gCurrentCourseRecordInfo->courseSegments[0].prev;
 
                     do {
 
@@ -2186,11 +2187,11 @@ void func_800A3044(void) {
 
                         var_s0--;
                         var_fs1 += 1.0f;
-                    } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
+                    } while (var_s0 >= gCurrentCourseRecordInfo->courseSegments);
                 } while (func_8009DEAC(gCurrentCourseRecordInfo) != 0);
 
-                var_s1_2 = D_8010B7B0.controlPoint;
-                var_s0 = gCurrentCourseRecordInfo->unk_10;
+                var_s1_2 = gCourseData.controlPoint;
+                var_s0 = gCurrentCourseRecordInfo->courseSegments;
 
                 do {
                     func_8009E6F0(var_s0, 0.333333f, &spCC);
@@ -2202,7 +2203,7 @@ void func_800A3044(void) {
                     var_s1_2++;
                     var_s1_2->pos = var_s0->pos;
                     var_s1_2++;
-                } while (var_s0 != gCurrentCourseRecordInfo->unk_10);
+                } while (var_s0 != gCurrentCourseRecordInfo->courseSegments);
 
                 var_s1_2 -= 3;
                 var_fs1 = 0.0f;
@@ -2219,7 +2220,7 @@ void func_800A3044(void) {
                     }
                     var_s1_2 -= 3;
                     var_s0_4 -= 3;
-                } while (var_s1_2 >= D_8010B7B0.controlPoint);
+                } while (var_s1_2 >= gCourseData.controlPoint);
 
                 var_s0_4 = spB0 + 1;
                 spCC.x = (spB0->pos.x + var_s0_4->pos.x) * 0.5f;
@@ -2232,7 +2233,7 @@ void func_800A3044(void) {
                 temp_fs3 = (var_s0_4->pos.z - spB0->pos.z) * temp_fv1;
 
                 if (temp_fv0 < 5000.0f) {
-                    var_s1_2 = &D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 * 3 - 1];
+                    var_s1_2 = &gCourseData.controlPoint[gCurrentCourseRecordInfo->unk_08 * 3 - 1];
                     temp_fv1 = 3.1496062f - (temp_fv0 / 1587.5f);
 
                     do {
@@ -2243,26 +2244,27 @@ void func_800A3044(void) {
                             var_s1_2->pos.z -= (temp_fv1 * temp_fs3);
                         }
                         var_s1_2--;
-                    } while (var_s1_2 >= D_8010B7B0.controlPoint);
+                    } while (var_s1_2 >= gCourseData.controlPoint);
                     spCC.x -= (temp_fv1 * temp_fs2) * 0.5f;
                     spCC.y -= (temp_fv1 * temp_ft5) * 0.5f;
                     spCC.z -= (temp_fv1 * temp_fs3) * 0.5f;
                 }
                 gCurrentCourseRecordInfo->unk_08 = (gCurrentCourseRecordInfo->unk_08 * 3) + 2;
 
-                gCurrentCourseRecordInfo->unk_10[0].prev->next = gCurrentCourseRecordInfo->unk_10[0].prev + 1;
-                gCurrentCourseRecordInfo->unk_10[0].prev =
-                    &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
-                gCurrentCourseRecordInfo->unk_10[0].prev->next = &gCurrentCourseRecordInfo->unk_10[0];
+                gCurrentCourseRecordInfo->courseSegments[0].prev->next =
+                    gCurrentCourseRecordInfo->courseSegments[0].prev + 1;
+                gCurrentCourseRecordInfo->courseSegments[0].prev =
+                    &gCurrentCourseRecordInfo->courseSegments[gCurrentCourseRecordInfo->unk_08 - 1];
+                gCurrentCourseRecordInfo->courseSegments[0].prev->next = &gCurrentCourseRecordInfo->courseSegments[0];
 
                 var_s1_2 = spB0;
-                var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
+                var_s0 = &gCurrentCourseRecordInfo->courseSegments[gCurrentCourseRecordInfo->unk_08 - 1];
 
                 do {
                     var_s0->pos = var_s1_2->pos;
                     var_s0--;
-                    if (--var_s1_2 < D_8010B7B0.controlPoint) {
-                        var_s1_2 = &D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 3];
+                    if (--var_s1_2 < gCourseData.controlPoint) {
+                        var_s1_2 = &gCourseData.controlPoint[gCurrentCourseRecordInfo->unk_08 - 3];
                     }
                 } while (var_s1_2 != spB0);
 
@@ -2275,7 +2277,7 @@ void func_800A3044(void) {
                 var_s0->pos.z = spCC.z - temp_fs3;
             } while (func_8009DEAC(gCurrentCourseRecordInfo) != 0);
 
-            var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
+            var_s0 = &gCurrentCourseRecordInfo->courseSegments[gCurrentCourseRecordInfo->unk_08 - 1];
 
             do {
                 var_s1 = var_s0->next;
@@ -2284,15 +2286,15 @@ void func_800A3044(void) {
                     break;
                 }
                 var_s0--;
-            } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
+            } while (var_s0 >= gCurrentCourseRecordInfo->courseSegments);
 
-            if (var_s0 >= gCurrentCourseRecordInfo->unk_10) {
+            if (var_s0 >= gCurrentCourseRecordInfo->courseSegments) {
                 goto loop_start;
             }
 
             spE8 = 0.0f;
             var_fs4 = 5000.0f;
-            var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
+            var_s0 = &gCurrentCourseRecordInfo->courseSegments[gCurrentCourseRecordInfo->unk_08 - 1];
 
             do {
                 if (var_s0->pos.y < var_fs4) {
@@ -2302,19 +2304,19 @@ void func_800A3044(void) {
                     spE8 = var_s0->pos.y;
                 }
                 var_s0--;
-            } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
+            } while (var_s0 >= gCurrentCourseRecordInfo->courseSegments);
 
-            var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
+            var_s0 = &gCurrentCourseRecordInfo->courseSegments[gCurrentCourseRecordInfo->unk_08 - 1];
 
             do {
                 var_s0->pos.y += (0 - var_fs4) + ((spE8 - var_fs4) * 0.5f);
                 var_s0--;
-            } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
+            } while (var_s0 >= gCurrentCourseRecordInfo->courseSegments);
 
             sp104 = Math_Rand1() % 2;
             switch (sp108) {
                 case 0:
-                    var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
+                    var_s0 = &gCurrentCourseRecordInfo->courseSegments[gCurrentCourseRecordInfo->unk_08 - 1];
                     do {
                         var_s1 = var_s0->next;
                         var_s2 = var_s0->prev;
@@ -2343,19 +2345,20 @@ void func_800A3044(void) {
                         var_s2->radiusLeft = ((0.5f - (SQ(var_fs0) * var_fs0 * 0.5f)) * var_fs1) + 100.0f;
                         var_s2->radiusRight = (((SQ(var_fs0) * var_fs0 * 0.5f) + 0.5f) * var_fs1) + 100.0f;
 
-                    } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
+                    } while (var_s0 >= gCurrentCourseRecordInfo->courseSegments);
 
-                    gCurrentCourseRecordInfo->unk_10[0].radiusLeft = gCurrentCourseRecordInfo->unk_10[0].radiusRight =
-                        gCurrentCourseRecordInfo->unk_10[1].radiusLeft =
-                            gCurrentCourseRecordInfo->unk_10[1].radiusRight =
-                                (gCurrentCourseRecordInfo->unk_10[0].radiusLeft +
-                                 gCurrentCourseRecordInfo->unk_10[0].radiusRight +
-                                 gCurrentCourseRecordInfo->unk_10[1].radiusLeft +
-                                 gCurrentCourseRecordInfo->unk_10[1].radiusRight) /
-                                4.0f;
+                    gCurrentCourseRecordInfo->courseSegments[0].radiusLeft =
+                        gCurrentCourseRecordInfo->courseSegments[0].radiusRight =
+                            gCurrentCourseRecordInfo->courseSegments[1].radiusLeft =
+                                gCurrentCourseRecordInfo->courseSegments[1].radiusRight =
+                                    (gCurrentCourseRecordInfo->courseSegments[0].radiusLeft +
+                                     gCurrentCourseRecordInfo->courseSegments[0].radiusRight +
+                                     gCurrentCourseRecordInfo->courseSegments[1].radiusLeft +
+                                     gCurrentCourseRecordInfo->courseSegments[1].radiusRight) /
+                                    4.0f;
                     break;
                 case 3:
-                    var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
+                    var_s0 = &gCurrentCourseRecordInfo->courseSegments[gCurrentCourseRecordInfo->unk_08 - 1];
                     do {
                         var_s1 = var_s0->next;
                         var_s2 = var_s0->prev;
@@ -2380,29 +2383,30 @@ void func_800A3044(void) {
                         var_s0--;
                         var_s2->radiusLeft = var_s2->radiusRight = (SQ(var_fs0) * 50.0f) + 200.0f;
 
-                    } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
-                    gCurrentCourseRecordInfo->unk_10[0].radiusLeft = gCurrentCourseRecordInfo->unk_10[0].radiusRight =
-                        gCurrentCourseRecordInfo->unk_10[1].radiusLeft =
-                            gCurrentCourseRecordInfo->unk_10[1].radiusRight =
-                                (gCurrentCourseRecordInfo->unk_10[0].radiusLeft +
-                                 gCurrentCourseRecordInfo->unk_10[1].radiusLeft) *
-                                0.5f;
+                    } while (var_s0 >= gCurrentCourseRecordInfo->courseSegments);
+                    gCurrentCourseRecordInfo->courseSegments[0].radiusLeft =
+                        gCurrentCourseRecordInfo->courseSegments[0].radiusRight =
+                            gCurrentCourseRecordInfo->courseSegments[1].radiusLeft =
+                                gCurrentCourseRecordInfo->courseSegments[1].radiusRight =
+                                    (gCurrentCourseRecordInfo->courseSegments[0].radiusLeft +
+                                     gCurrentCourseRecordInfo->courseSegments[1].radiusLeft) *
+                                    0.5f;
                     break;
                 default:
-                    var_s0 = &gCurrentCourseRecordInfo->unk_10[gCurrentCourseRecordInfo->unk_08 - 1];
+                    var_s0 = &gCurrentCourseRecordInfo->courseSegments[gCurrentCourseRecordInfo->unk_08 - 1];
                     do {
                         var_s0->radiusRight = 250.0f;
                         var_s0->radiusLeft = 250.0f;
                         var_s0--;
-                    } while (var_s0 >= gCurrentCourseRecordInfo->unk_10);
+                    } while (var_s0 >= gCurrentCourseRecordInfo->courseSegments);
                     break;
             }
 
-            D_8010B7B0.creatorId = CREATOR_NINTENDO;
-            D_8010B7B0.controlPointCount = gCurrentCourseRecordInfo->unk_08;
-            D_8010B7B0.venue = (Math_Rand2() & 0x1FFFF) % 10;
-            D_8010B7B0.skybox = (Math_Rand1() & 0x1FFFF) % 8;
-            D_8010B7B0.flag = 1;
+            gCourseData.creatorId = CREATOR_NINTENDO;
+            gCourseData.controlPointCount = gCurrentCourseRecordInfo->unk_08;
+            gCourseData.venue = (Math_Rand2() & 0x1FFFF) % 10;
+            gCourseData.skybox = (Math_Rand1() & 0x1FFFF) % 8;
+            gCourseData.flag = 1;
 
             switch (Math_Rand1() & 3) {
                 case 0: // ROAD GROUP 1
@@ -2419,15 +2423,15 @@ void func_800A3044(void) {
                     break;
             }
             var_s6 = 0;
-            var_s4 = D_8010B7B0.controlPointCount - 1;
+            var_s4 = gCourseData.controlPointCount - 1;
             if (sp104 != 0) {
-                var_s0 = gCurrentCourseRecordInfo->unk_10[0].prev;
+                var_s0 = gCurrentCourseRecordInfo->courseSegments[0].prev;
             } else {
-                var_s0 = gCurrentCourseRecordInfo->unk_10[1].next;
+                var_s0 = gCurrentCourseRecordInfo->courseSegments[1].next;
             }
 
             do {
-                var_s3 = &D_8010B7B0.controlPoint[var_s4];
+                var_s3 = &gCourseData.controlPoint[var_s4];
                 var_s3->pos = var_s0->pos;
                 var_s3->radiusLeft = var_s0->radiusLeft;
                 var_s3->radiusRight = var_s0->radiusRight;
@@ -2437,16 +2441,16 @@ void func_800A3044(void) {
                     var_s6 = 0;
                 }
 
-                D_8010B7B0.bankAngle[var_s4] = 0;
-                D_8010B7B0.pit[var_s4] = PIT_NONE;
-                D_8010B7B0.dash[var_s4] = DASH_NONE;
-                D_8010B7B0.dirt[var_s4] = DIRT_NONE;
-                D_8010B7B0.ice[var_s4] = ICE_NONE;
-                D_8010B7B0.jump[var_s4] = JUMP_NONE;
-                D_8010B7B0.landmine[var_s4] = LANDMINE_NONE;
-                D_8010B7B0.gate[var_s4] = GATE_NONE;
-                D_8010B7B0.building[var_s4] = BUILDING_NONE;
-                D_8010B7B0.sign[var_s4] = SIGN_NONE;
+                gCourseData.bankAngle[var_s4] = 0;
+                gCourseData.pit[var_s4] = PIT_NONE;
+                gCourseData.dash[var_s4] = DASH_NONE;
+                gCourseData.dirt[var_s4] = DIRT_NONE;
+                gCourseData.ice[var_s4] = ICE_NONE;
+                gCourseData.jump[var_s4] = JUMP_NONE;
+                gCourseData.landmine[var_s4] = LANDMINE_NONE;
+                gCourseData.gate[var_s4] = GATE_NONE;
+                gCourseData.building[var_s4] = BUILDING_NONE;
+                gCourseData.sign[var_s4] = SIGN_NONE;
 
                 if (sp104 != 0) {
                     var_s0 = var_s0->prev;
@@ -2457,13 +2461,13 @@ void func_800A3044(void) {
             } while (var_s4 >= 0);
 
             // Override for start line
-            D_8010B7B0.controlPoint[0].trackSegmentInfo =
+            gCourseData.controlPoint[0].trackSegmentInfo =
                 TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_START_LINE;
-            D_8010B7B0.gate[1] = GATE_START;
-            D_8010B7B0.controlPoint[1].trackSegmentInfo =
-                D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 1].trackSegmentInfo = spB4[1];
-            D_8010B7B0.controlPoint[3].trackSegmentInfo =
-                D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 3].trackSegmentInfo = spB4[0];
+            gCourseData.gate[1] = GATE_START;
+            gCourseData.controlPoint[1].trackSegmentInfo =
+                gCourseData.controlPoint[gCurrentCourseRecordInfo->unk_08 - 1].trackSegmentInfo = spB4[1];
+            gCourseData.controlPoint[3].trackSegmentInfo =
+                gCourseData.controlPoint[gCurrentCourseRecordInfo->unk_08 - 3].trackSegmentInfo = spB4[0];
 
             if (((sp108 == 0) || (sp108 == 3)) && ((Math_Rand1() & 0x1FFFF) >= 0x8000)) {
                 temp_a0 = Math_Rand2() & 3;
@@ -2477,9 +2481,9 @@ void func_800A3044(void) {
                 var_s4 = gCurrentCourseRecordInfo->unk_08 - 4;
 
                 do {
-                    var_s3 = &D_8010B7B0.controlPoint[var_s4];
-                    var_s1_2 = &D_8010B7B0.controlPoint[var_s4 + 1];
-                    spB0 = &D_8010B7B0.controlPoint[var_s4 - 1];
+                    var_s3 = &gCourseData.controlPoint[var_s4];
+                    var_s1_2 = &gCourseData.controlPoint[var_s4 + 1];
+                    spB0 = &gCourseData.controlPoint[var_s4 - 1];
                     spCC.x = var_s1_2->pos.x - var_s3->pos.x;
                     spCC.z = var_s1_2->pos.z - var_s3->pos.z;
 
@@ -2500,14 +2504,14 @@ void func_800A3044(void) {
                     }
                     if ((temp_fs2 * spCC.z) < (spCC.x * temp_fs3)) {
                         if (var_s6 != 0) {
-                            D_8010B7B0.bankAngle[var_s4] = 360 - (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                            gCourseData.bankAngle[var_s4] = 360 - (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
                         } else {
-                            D_8010B7B0.bankAngle[var_s4] = (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                            gCourseData.bankAngle[var_s4] = (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
                         }
                     } else if (var_s6 != 0) {
-                        D_8010B7B0.bankAngle[var_s4] = (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                        gCourseData.bankAngle[var_s4] = (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
                     } else {
-                        D_8010B7B0.bankAngle[var_s4] = 360 - (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                        gCourseData.bankAngle[var_s4] = 360 - (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
                     }
                     var_s4--;
                 } while (var_s4 > 1);
@@ -2515,7 +2519,7 @@ void func_800A3044(void) {
 
             if (sp108 == 0) {
                 if (1) {}
-                var_s1_2 = &D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 4];
+                var_s1_2 = &gCourseData.controlPoint[gCurrentCourseRecordInfo->unk_08 - 4];
                 do {
                     var_s0_4 = var_s1_2 + 1;
                     if (((Math_Rand1() & 0x1FFFF) < 0x1112) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000)) {
@@ -2525,9 +2529,9 @@ void func_800A3044(void) {
                         }
                     }
                     var_s1_2 -= 3;
-                } while (var_s1_2 >= &D_8010B7B0.controlPoint[4]);
+                } while (var_s1_2 >= &gCourseData.controlPoint[4]);
 
-                var_s1_2 = &D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 3];
+                var_s1_2 = &gCourseData.controlPoint[gCurrentCourseRecordInfo->unk_08 - 3];
                 do {
                     var_s0_4 = var_s1_2 + 1;
                     if (((Math_Rand1() & 0x1FFFF) < 0x1112) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000)) {
@@ -2537,14 +2541,14 @@ void func_800A3044(void) {
                         }
                     }
                     var_s1_2 -= 3;
-                } while (var_s1_2 >= &D_8010B7B0.controlPoint[2]);
+                } while (var_s1_2 >= &gCourseData.controlPoint[2]);
 
                 if ((Math_Rand2() & 0x1FFFF) < 0xFFFF) {
                     var_s1_2 =
-                        &D_8010B7B0
+                        &gCourseData
                              .controlPoint[((Math_Rand1() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 1)) + 1];
                     var_s0_4 =
-                        &D_8010B7B0
+                        &gCourseData
                              .controlPoint[((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 1)) + 1];
                     if ((var_s1_2 < var_s0_4) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000) &&
                         ((var_s0_4 + 1)->trackSegmentInfo & 0x10000000)) {
@@ -2566,8 +2570,8 @@ void func_800A3044(void) {
                 }
 
                 // Ensure there are pit zones
-                D_8010B7B0.pit[gCurrentCourseRecordInfo->unk_08 - 3] =
-                    D_8010B7B0.pit[gCurrentCourseRecordInfo->unk_08 - 4] = PIT_BOTH;
+                gCourseData.pit[gCurrentCourseRecordInfo->unk_08 - 3] =
+                    gCourseData.pit[gCurrentCourseRecordInfo->unk_08 - 4] = PIT_BOTH;
             } else {
                 if (sp108 == 1) { // PIPE
                     spB4 = D_800CFA10;
@@ -2578,8 +2582,8 @@ void func_800A3044(void) {
                 }
                 var_s6 = Math_Rand2() & 3;
                 temp_s3 = ((Math_Rand1() & 0x1FFFF) % 3) + 1;
-                var_s1_2 = &D_8010B7B0.controlPoint[2];
-                var_s0_4 = &D_8010B7B0.controlPoint[gCurrentCourseRecordInfo->unk_08 - 5];
+                var_s1_2 = &gCourseData.controlPoint[2];
+                var_s0_4 = &gCourseData.controlPoint[gCurrentCourseRecordInfo->unk_08 - 5];
 
                 var_s4 = 4;
                 do {
@@ -2606,31 +2610,31 @@ void func_800A3044(void) {
                     }
                     var_s6 = (var_s6 + temp_s3) & 3;
                     var_s1_2 =
-                        &D_8010B7B0
+                        &gCourseData
                              .controlPoint[((Math_Rand1() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 6)) + 2];
                     var_s0_4 =
-                        &D_8010B7B0
+                        &gCourseData
                              .controlPoint[((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 6)) + 2];
                     var_s4--;
                 } while (var_s4 > 0);
                 // Ensure there are pit zones
-                D_8010B7B0.pit[gCurrentCourseRecordInfo->unk_08 - 1] =
-                    D_8010B7B0.pit[gCurrentCourseRecordInfo->unk_08 - 2] = PIT_BOTH;
+                gCourseData.pit[gCurrentCourseRecordInfo->unk_08 - 1] =
+                    gCourseData.pit[gCurrentCourseRecordInfo->unk_08 - 2] = PIT_BOTH;
             }
             temp_s3 = Math_Rand1() & 7;
             while (temp_s3 != 0) {
                 do {
                     var_s4 = ((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 6)) + 2;
-                    if (D_8010B7B0.controlPoint[var_s4].trackSegmentInfo & 0x08000000) {
+                    if (gCourseData.controlPoint[var_s4].trackSegmentInfo & 0x08000000) {
                         break;
                     }
-                } while (D_8010B7B0
+                } while (gCourseData
                              .controlPoint[((var_s4 + gCurrentCourseRecordInfo->unk_08) - 1) %
                                            gCurrentCourseRecordInfo->unk_08]
                              .trackSegmentInfo !=
-                         D_8010B7B0.controlPoint[(var_s4 + 1) % gCurrentCourseRecordInfo->unk_08].trackSegmentInfo);
+                         gCourseData.controlPoint[(var_s4 + 1) % gCurrentCourseRecordInfo->unk_08].trackSegmentInfo);
 
-                D_8010B7B0.dash[var_s4] = (Math_Rand1() & 0x1FFFF) % 3;
+                gCourseData.dash[var_s4] = (Math_Rand1() & 0x1FFFF) % 3;
                 temp_s3--;
             }
             var_s6 = (Math_Rand1() & 0x1FFFF) % 3;
@@ -2638,14 +2642,14 @@ void func_800A3044(void) {
             temp_s3 = (Math_Rand2() & 7) - 1;
             while (temp_s3 >= 0) {
                 var_s4 = ((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->unk_08 - 2)) + 2;
-                temp_s2 = D_8010B7B0.controlPoint[var_s4].trackSegmentInfo & TRACK_SHAPE_MASK;
+                temp_s2 = gCourseData.controlPoint[var_s4].trackSegmentInfo & TRACK_SHAPE_MASK;
                 if ((temp_s2 == TRACK_SHAPE_ROAD) || (temp_s2 == TRACK_SHAPE_BORDERLESS_ROAD)) {
-                    temp_s2 = D_8010B7B0.controlPoint[var_s4 - 1].trackSegmentInfo & TRACK_SHAPE_MASK;
+                    temp_s2 = gCourseData.controlPoint[var_s4 - 1].trackSegmentInfo & TRACK_SHAPE_MASK;
                     if ((temp_s2 == TRACK_SHAPE_ROAD) || (temp_s2 == TRACK_SHAPE_BORDERLESS_ROAD)) {
                         if ((Math_Rand2() & 0x1FFFF) < 0xAAAA) {
-                            D_8010B7B0.sign[var_s4] = (Math_Rand1() & 1) + 3;
+                            gCourseData.sign[var_s4] = (Math_Rand1() & 1) + 3;
                         } else {
-                            D_8010B7B0.sign[var_s4] = var_s6;
+                            gCourseData.sign[var_s4] = var_s6;
                         }
                     }
                 }
@@ -2664,14 +2668,14 @@ void func_800A3044(void) {
     gCurrentCourseRecordInfo->bestTime = 600000 - 1;
 }
 
-extern unk_8006FC8C D_802C2020[];
+extern CourseSegment D_802C2020[];
 
 void func_800A4B54(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gCourseRecordInfos); i++) {
         gCourseRecordInfos[i].unk_04 = i;
-        gCourseRecordInfos[i].unk_10 = D_802C2020;
+        gCourseRecordInfos[i].courseSegments = D_802C2020;
     }
 }
 
@@ -2750,8 +2754,8 @@ void func_800A4DF0(void) {
 
     gCurrentCourseRecordInfo = &gCourseRecordInfos[gCourseIndex];
     func_8007402C(gCourseIndex);
-    func_800747EC(D_8010B7B0.venue);
-    func_8009CED0(D_8010B7B0.venue);
+    func_800747EC(gCourseData.venue);
+    func_8009CED0(gCourseData.venue);
     func_80074634(gCurrentCourseRecordInfo);
     func_8009DEAC(gCurrentCourseRecordInfo);
     if (gCurrentCourseRecordInfo->unk_04 >= 24) {
@@ -2765,7 +2769,7 @@ void func_800A4DF0(void) {
 extern s32 gNumPlayers;
 
 void func_800A4EAC(void) {
-    unk_8006FC8C* var_v0;
+    CourseSegment* var_v0;
 
     if (gCourseIndex >= ARRAY_COUNT(gCourseRecordInfos)) {
         gCourseIndex = ARRAY_COUNT(gCourseRecordInfos) - 1;
@@ -2784,7 +2788,7 @@ void func_800A4EAC(void) {
     func_8009FC84(gCurrentCourseRecordInfo);
     func_800A1954(gCurrentCourseRecordInfo);
     D_800CF524 = 900.0f;
-    var_v0 = gCurrentCourseRecordInfo->unk_10;
+    var_v0 = gCurrentCourseRecordInfo->courseSegments;
     do {
 
         if (D_800CF524 < var_v0->radiusLeft) {
@@ -2795,7 +2799,7 @@ void func_800A4EAC(void) {
             D_800CF524 = var_v0->radiusRight;
         }
         var_v0 = var_v0->next;
-    } while (var_v0 != gCurrentCourseRecordInfo->unk_10);
+    } while (var_v0 != gCurrentCourseRecordInfo->courseSegments);
     D_800CF524 += 100.0f;
     D_800CF520 = D_800CF524 + 4500.0f;
     D_800F894C += D_800CF524 - 1000.0f;
@@ -3824,7 +3828,7 @@ Gfx* func_800A9938(Gfx* gfx, s32 arg1) {
     unk_36ED0* var_v0;
     unk_36ED0* var_v1;
     unk_800A8B74_arg_0* var_s0;
-    unk_8006FC8C* temp_a2;
+    CourseSegment* temp_a2;
     unk_800A8B74_arg_0* var_v1_3;
     unk_800A8B74_arg_0* temp;
     s32 var_a0;
@@ -3838,7 +3842,7 @@ Gfx* func_800A9938(Gfx* gfx, s32 arg1) {
     temp_ra = &gRacers[temp_v0->unk_00];
 
     D_800F89C4 = gfx;
-    temp_a2 = temp_ra->unk_0C.unk_00;
+    temp_a2 = temp_ra->unk_0C.courseSegment;
 
     if (temp_a2->trackSegmentInfo & 0x20000000) {
         if (((temp_a2->trackSegmentInfo & 0x200) && (temp_ra->unk_0C.unk_04 < temp_a2->unk_68)) ||
@@ -4009,7 +4013,7 @@ Gfx* func_800A9938(Gfx* gfx, s32 arg1) {
     gDPSetPrimColor(D_800F89C4++, 0, 0, 255 - ((gGameFrameCount * 8) & 0xFF), 0, 0, 255);
 
     if (1) {}
-    temp_a2 = temp_ra->unk_0C.unk_00;
+    temp_a2 = temp_ra->unk_0C.courseSegment;
 
     if (temp_a2->trackSegmentInfo & 0x20000000) {
         if (temp_a2->unk_6C < temp_ra->unk_0C.unk_04) {
@@ -4078,31 +4082,32 @@ block_68:
 
 s32 Course_CalculateChecksum(void) {
     s32 i;
-    u32 var_v1 = D_8010B7B0.controlPointCount;
+    u32 var_v1 = gCourseData.controlPointCount;
 
-    for (i = 0; i < D_8010B7B0.controlPointCount; i++) {
+    for (i = 0; i < gCourseData.controlPointCount; i++) {
 
-        D_8010B7B0.controlPoint[i].trackSegmentInfo &= ~TRACK_JOIN_MASK;
-        D_8010B7B0.controlPoint[i].trackSegmentInfo &= ~TRACK_FORM_MASK;
-        D_8010B7B0.controlPoint[i].trackSegmentInfo &= ~TRACK_FLAG_CONTINUOUS;
+        gCourseData.controlPoint[i].trackSegmentInfo &= ~TRACK_JOIN_MASK;
+        gCourseData.controlPoint[i].trackSegmentInfo &= ~TRACK_FORM_MASK;
+        gCourseData.controlPoint[i].trackSegmentInfo &= ~TRACK_FLAG_CONTINUOUS;
 
-        var_v1 += (s32) ((D_8010B7B0.controlPoint[i].pos.x + ((1.1f + (0.7f * i)) * D_8010B7B0.controlPoint[i].pos.y)) +
-                         ((2.2f + (1.2f * i)) * D_8010B7B0.controlPoint[i].pos.z * (4.4f + (0.9f * i))) +
-                         D_8010B7B0.controlPoint[i].radiusLeft +
-                         ((5.5f + (0.8f * i)) * D_8010B7B0.controlPoint[i].radiusRight * 4.8f)) +
-                  D_8010B7B0.controlPoint[i].trackSegmentInfo * (0xFE - i) + D_8010B7B0.bankAngle[i] * (0x93DE - i * 2);
+        var_v1 +=
+            (s32) ((gCourseData.controlPoint[i].pos.x + ((1.1f + (0.7f * i)) * gCourseData.controlPoint[i].pos.y)) +
+                   ((2.2f + (1.2f * i)) * gCourseData.controlPoint[i].pos.z * (4.4f + (0.9f * i))) +
+                   gCourseData.controlPoint[i].radiusLeft +
+                   ((5.5f + (0.8f * i)) * gCourseData.controlPoint[i].radiusRight * 4.8f)) +
+            gCourseData.controlPoint[i].trackSegmentInfo * (0xFE - i) + gCourseData.bankAngle[i] * (0x93DE - i * 2);
     }
 
-    for (i = 0; i < D_8010B7B0.controlPointCount; i++) {
-        var_v1 += (D_8010B7B0.pit[i] * i);
-        var_v1 += (D_8010B7B0.dash[i] * (i + 0x10));
-        var_v1 += (D_8010B7B0.dirt[i] * (i + 0x80));
-        var_v1 += (D_8010B7B0.ice[i] * (i + 0x100));
-        var_v1 += (D_8010B7B0.jump[i] * (i + 0x800));
-        var_v1 += (D_8010B7B0.landmine[i] * (i + 0x1000));
-        var_v1 += (D_8010B7B0.gate[i] * (i + 0x8000));
-        var_v1 += (D_8010B7B0.building[i] * (i + 0x10000));
-        var_v1 += (D_8010B7B0.sign[i] * (i + 0x80000));
+    for (i = 0; i < gCourseData.controlPointCount; i++) {
+        var_v1 += (gCourseData.pit[i] * i);
+        var_v1 += (gCourseData.dash[i] * (i + 0x10));
+        var_v1 += (gCourseData.dirt[i] * (i + 0x80));
+        var_v1 += (gCourseData.ice[i] * (i + 0x100));
+        var_v1 += (gCourseData.jump[i] * (i + 0x800));
+        var_v1 += (gCourseData.landmine[i] * (i + 0x1000));
+        var_v1 += (gCourseData.gate[i] * (i + 0x8000));
+        var_v1 += (gCourseData.building[i] * (i + 0x10000));
+        var_v1 += (gCourseData.sign[i] * (i + 0x80000));
     }
 
     return var_v1;

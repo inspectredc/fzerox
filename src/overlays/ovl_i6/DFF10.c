@@ -453,7 +453,7 @@ void func_i6_801167EC(unk_800E3A28* arg0) {
 extern s16 D_800CD044;
 
 void func_i6_80116894(unk_800E3A28* arg0) {
-    s32 index = arg0->unk_00 - 0x51;
+    s32 index = arg0->id - 0x51;
 
     func_80077D50(sMenuSignCompTexInfos[index], 0);
     if (D_800CD044 == 0x21) {
@@ -519,7 +519,7 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp1;
     s32 temp2;
 
-    temp_t0 = arg1->unk_00 - 0x51;
+    temp_t0 = arg1->id - 0x51;
 
     if ((temp_t0 == 4) || (temp_t0 == 7)) {
         return gfx;

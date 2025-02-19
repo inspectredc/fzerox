@@ -551,7 +551,7 @@ void func_i5_801177EC(unk_800E3A28* arg0) {
     s32 var_v0;
     s32 i;
 
-    cupType = arg0->unk_00 - 0x7A;
+    cupType = arg0->id - 0x7A;
     if (cupType == JOKER_CUP || cupType == X_CUP) {
         var_v0 = D_800CD3C0;
         if ((var_v0 >= 3) || (gSettingEverythingUnlocked != 0)) {
@@ -599,10 +599,10 @@ void func_i5_801179A8(unk_800E3A28* arg0) {
     s32 pad;
 
     if (Save_LoadGhostInfo(&sp20) != 0) {
-        arg0->unk_00 = 0;
+        arg0->id = 0;
     }
     if (sp20.encodedCourseIndex == 0) {
-        arg0->unk_00 = 0;
+        arg0->id = 0;
     }
     arg0->unk_0C += (sp20.courseIndex % 6) * 320;
     arg0->unk_04 = sp20.courseIndex;
@@ -667,7 +667,7 @@ Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
     s32 sp80;
     s32 var_v1;
 
-    i = arg1->unk_00 - 0x7A;
+    i = arg1->id - 0x7A;
     if (gCupSelectOption >= 10) {
         var_s1 = EDIT_CUP;
     } else {
@@ -918,7 +918,7 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
         return;
     }
 
-    var_v1 = arg0->unk_00 - 0x7A;
+    var_v1 = arg0->id - 0x7A;
     switch (arg0->unk_04) {
         case 0:
             if (var_v1 != 5) {

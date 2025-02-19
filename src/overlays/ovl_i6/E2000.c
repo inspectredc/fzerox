@@ -593,7 +593,7 @@ Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
     s8 sp64[2];
     s8* name;
 
-    name = gCreditsNames[arg1->unk_00 - 230];
+    name = gCreditsNames[arg1->id - 230];
 
     if (arg3 != 0) {
         i = func_i2_801062E4(name, 1, 0);
@@ -1101,7 +1101,7 @@ Gfx* func_i6_8011A6CC(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_v0;
     s8* temp_s2;
 
-    temp_v0 = arg1->unk_00 - 198;
+    temp_v0 = arg1->id - 198;
     temp_s2 = gCreditsAttributions[temp_v0];
 
     gDPSetPrimColor(gfx++, 0, 0, 24, 24, 24, 255);
@@ -1136,7 +1136,7 @@ Gfx* func_i6_8011A6CC(Gfx* gfx, unk_800E3A28* arg1) {
 
 Gfx* func_i6_8011A890(Gfx* gfx, unk_800E3A28* arg1) {
     s8* temp_a3;
-    s32 index = arg1->unk_00 - 198;
+    s32 index = arg1->id - 198;
 
     temp_a3 = gCreditsAttributions[index];
 
@@ -1156,7 +1156,7 @@ Gfx* func_i6_8011A944(Gfx* gfx, unk_800E3A28* arg1) {
     s32 pad2[9];
     char* temp_a3;
 
-    temp_v1 = arg1->unk_00 - 230;
+    temp_v1 = arg1->id - 230;
     temp_a3 = gCreditsNames[temp_v1];
 
     switch (arg1->unk_04) {
@@ -1195,7 +1195,7 @@ Gfx* func_i6_8011A944(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 Gfx* func_i6_8011AAC8(Gfx* gfx, unk_800E3A28* arg1) {
-    s32 index = arg1->unk_00 - 0xE6;
+    s32 index = arg1->id - 0xE6;
     char* temp = gCreditsNames[index];
 
     return func_i2_80106450(gfx, arg1->unk_0C, arg1->unk_10, temp, 0, 1, 0);
@@ -1464,7 +1464,7 @@ void func_i6_8011B0CC(unk_800E3A28* arg0) {
                 arg0->unk_04++;
                 break;
             case 21:
-                arg0->unk_00 = 0;
+                arg0->id = 0;
                 break;
             default:
                 break;
@@ -1481,7 +1481,7 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
     s8* sp1C;
     unk_800E3A28* temp_v0_3;
 
-    temp_v0 = arg0->unk_00 - 198;
+    temp_v0 = arg0->id - 198;
     sp1C = gCreditsAttributions[temp_v0];
 
     switch (temp_v0 % 4) {
@@ -1523,11 +1523,11 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
             func_8007A334(arg0, D_i6_8011F4BC[(temp_v0 % 4) * 2], sp28);
             if (sp28 < 0) {
                 if (arg0->unk_0C < -func_i2_801062E4(sp1C, 1, 0)) {
-                    arg0->unk_00 = 0;
+                    arg0->id = 0;
                 }
             } else {
                 if ((func_i2_801062E4(sp1C, 1, 0) + 0x140) < arg0->unk_0C) {
-                    arg0->unk_00 = 0;
+                    arg0->id = 0;
                 }
             }
             break;
@@ -1536,7 +1536,7 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
 
 void func_i6_8011B50C(unk_800E3A28* arg0) {
     if (func_i6_8011B058(arg0, -1, -0x14, 2)) {
-        arg0->unk_00 = 0;
+        arg0->id = 0;
     }
 }
 
@@ -1544,7 +1544,7 @@ void func_i6_8011B544(unk_800E3A28* arg0) {
     s32 temp_a1;
     s32 sp18;
 
-    temp_a1 = arg0->unk_00 - 230;
+    temp_a1 = arg0->id - 230;
 
     switch (temp_a1 % 4) {
         case 0:
@@ -1570,11 +1570,11 @@ void func_i6_8011B544(unk_800E3A28* arg0) {
             func_8007A334(arg0, D_i6_8011F4CC[(temp_a1 % 4) * 2], sp18);
             if (sp18 > 0) {
                 if (arg0->unk_0C > 320) {
-                    arg0->unk_00 = 0;
+                    arg0->id = 0;
                 }
             } else {
                 if (arg0->unk_0C < 0) {
-                    arg0->unk_00 = 0;
+                    arg0->id = 0;
                 }
             }
             break;
@@ -1583,7 +1583,7 @@ void func_i6_8011B544(unk_800E3A28* arg0) {
 
 void func_i6_8011B668(unk_800E3A28* arg0) {
     if (func_i6_8011B058(arg0, -1, -0x14, 2)) {
-        arg0->unk_00 = 0;
+        arg0->id = 0;
     }
 }
 
@@ -1660,7 +1660,7 @@ void func_i6_8011B860(unk_800E3A28* arg0) {
             func_i6_8011BAC0(0xBE, 0, 0, 0);
             func_i6_8011BAC0(0xC0, 0, 0, 4);
             func_i6_8011BAC0(0xC5, 0, 0, 8);
-            arg0->unk_00 = 0;
+            arg0->id = 0;
             break;
         default:
             if (arg0->unk_18 > 300) {
@@ -1742,7 +1742,7 @@ void func_i6_8011BAC0(s32 arg0, s32 arg1, s32 arg2, s8 arg3) {
     unk_800E3A28* var_s0 = D_800E3A28;
 
     while (true) {
-        if (var_s0->unk_00 == 0) {
+        if (var_s0->id == 0) {
             break;
         }
 
@@ -1752,7 +1752,7 @@ void func_i6_8011BAC0(s32 arg0, s32 arg1, s32 arg2, s8 arg3) {
         var_s0++;
     }
 
-    var_s0->unk_00 = arg0;
+    var_s0->id = arg0;
     var_s0->unk_04 = 0;
     var_s0->unk_08 = 0;
     var_s0->unk_0C = arg1;
@@ -1802,7 +1802,7 @@ Gfx* func_i6_8011BBE4(Gfx* gfx) {
                 continue;
             }
 
-            switch (D_800E3A28[j].unk_00) {
+            switch (D_800E3A28[j].id) {
                 case 0:
                     break;
                 case 0x5:
@@ -1923,7 +1923,7 @@ void func_i6_8011BE1C(void) {
 
     for (i = 0; i < 32; i++) {
 
-        switch (D_800E3A28[i].unk_00) {
+        switch (D_800E3A28[i].id) {
             case 0:
                 break;
             case 0x99:

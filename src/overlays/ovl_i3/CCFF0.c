@@ -155,7 +155,7 @@ bool func_i3_8013A004(void) {
     return var_a0;
 }
 
-Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, u8* arg2);
+Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, CarInfo* carInfo);
 Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3);
 
 extern Mtx D_2028480;
@@ -435,12 +435,12 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
 
     for (i = 0; i < 5; i++) {
         if (var_s2->timeRecord[i] != MAX_TIMER) {
-            gfx = func_i3_8013BB80(gfx, i, var_s2->carInfo[i].unk_00);
+            gfx = func_i3_8013BB80(gfx, i, &var_s2->carInfo[i]);
         }
     }
 
     if (var_s2->maxSpeed != 0.0f) {
-        gfx = func_i3_8013BB80(gfx, 5, var_s2->maxSpeedCar.unk_00);
+        gfx = func_i3_8013BB80(gfx, 5, &var_s2->maxSpeedCar);
     }
     return gfx;
 }
@@ -510,10 +510,10 @@ Gfx* func_i3_DrawSpeed(Gfx* gfx, s32 left, s32 top, f32 arg3, bool arg4, bool dr
 
 extern GfxPool D_1000000;
 
-Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, u8* arg2) {
+Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, CarInfo* carInfo) {
     gSPViewport(gfx++, &D_1000000.unk_2C308[arg1]);
 
-    return func_8009CBE8(gfx, arg1 + 1, arg2[8], arg2[9], arg2[10]);
+    return func_8009CBE8(gfx, arg1 + 1, carInfo->envR2, carInfo->envG2, carInfo->envB2);
 }
 
 Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {

@@ -5,8 +5,7 @@
 #include "other_types.h"
 #include "fzx_math.h"
 
-// Course Segment
-typedef struct unk_8006FC8C {
+typedef struct CourseSegment {
     /* 0x00 */ Vec3f pos;
     /* 0x0C */ Vec3f unk_0C;
     /* 0x18 */ f32 radiusLeft;
@@ -16,8 +15,8 @@ typedef struct unk_8006FC8C {
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ s32 segmentIndex;
-    /* 0x34 */ struct unk_8006FC8C* next;
-    /* 0x38 */ struct unk_8006FC8C* prev;
+    /* 0x34 */ struct CourseSegment* next;
+    /* 0x38 */ struct CourseSegment* prev;
     /* 0x3C */ struct unk_36ED0* unk_3C;
     /* 0x40 */ struct unk_36ED0* unk_40;
     /* 0x44 */ struct unk_802D3D38* unk_44;
@@ -37,11 +36,30 @@ typedef struct unk_8006FC8C {
     /* 0x98 */ f32 unk_98;
     /* 0x9C */ f32 unk_9C;
     /* 0xA0 */ f32 unk_A0;
-} unk_8006FC8C; // size = 0xA4
+} CourseSegment; // size = 0xA4
 
 // Todo fill in array as individual documented u8 variables
 typedef struct CarInfo {
-    u8 unk_00[20];
+    /* 0x00 */ u8 character;
+    /* 0x01 */ u8 customType;
+    /* 0x02 */ u8 frontType;
+    /* 0x03 */ u8 rearType;
+    /* 0x04 */ u8 wingType;
+    /* 0x05 */ u8 logo;
+    /* 0x06 */ u8 decal;
+    /* 0x07 */ u8 number;
+    /* 0x08 */ u8 envR2;
+    /* 0x09 */ u8 envG2;
+    /* 0x0A */ u8 envB2;
+    /* 0x0B */ u8 primR1;
+    /* 0x0C */ u8 primG1;
+    /* 0x0D */ u8 primB1;
+    /* 0x0E */ u8 primR2;
+    /* 0x0F */ u8 primG2;
+    /* 0x10 */ u8 primB2;
+    /* 0x11 */ u8 envR1;
+    /* 0x12 */ u8 envG1;
+    /* 0x13 */ u8 envB1;
 } CarInfo; // size = 0x14
 
 typedef struct CourseRecordInfo {
@@ -49,7 +67,7 @@ typedef struct CourseRecordInfo {
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ unk_8006FC8C* unk_10;
+    /* 0x10 */ CourseSegment* courseSegments;
     /* 0x14 */ s16 unk_14[6];
     /* 0x20 */ s32 timeRecord[5];
     /* 0x34 */ CarInfo carInfo[5];
@@ -109,7 +127,7 @@ typedef struct unk_802D08E0 {
 } unk_802D08E0; // size = 0x38
 
 typedef struct unk_800E3A28 {
-    s32 unk_00;
+    s32 id;
     s32 unk_04;
     s32 unk_08;
     s32 unk_0C;
@@ -292,7 +310,7 @@ typedef struct unk_struct_1DC {
 } unk_struct_1DC; // size = 0x1DC
 
 typedef struct Racer_unk_C {
-    unk_8006FC8C* unk_00;
+    CourseSegment* courseSegment;
     f32 unk_04;
     f32 unk_08;
     Vec3f unk_0C;

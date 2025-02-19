@@ -537,18 +537,18 @@ void func_80079480(void) {
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        D_800E3A28[i].unk_00 = 0;
+        D_800E3A28[i].id = 0;
     }
 }
 
-void func_800794B0(s32 arg0, s32 arg1, s32 arg2, s8 arg3) {
+void func_800794B0(s32 id, s32 arg1, s32 arg2, s8 arg3) {
     s32 i = 0;
     unk_800E3A28* var_s0 = D_800E3A28;
 
     while (true) {
         // clang-format off
-        if (var_s0->unk_00 == 0) {   \
-            var_s0->unk_00 = arg0;   \
+        if (var_s0->id == 0) {   \
+            var_s0->id = id;   \
             var_s0->unk_04 = 0;      \
             var_s0->unk_08 = 0;      \
             var_s0->unk_0C = arg1;   \
@@ -560,13 +560,13 @@ void func_800794B0(s32 arg0, s32 arg1, s32 arg2, s8 arg3) {
             break;
         }
         // clang-format on
-        if (++i > 0x20) {
+        if (++i > ARRAY_COUNT(D_800E3A28)) {
             return;
         }
         var_s0++;
     }
 
-    switch (arg0) {
+    switch (id) {
         case 0xA:
             func_i4_8011B06C(var_s0);
             break;
@@ -722,7 +722,7 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
         return gfx;
     }
 
-    switch (arg1->unk_00) {
+    switch (arg1->id) {
         case 0:
             break;
         case 0x5:
@@ -909,7 +909,7 @@ Gfx* func_80079BC8(Gfx* gfx) {
     s32 j;
 
     for (i = 0; i < 32; i++) {
-        switch (D_800E3A28[i].unk_00) {
+        switch (D_800E3A28[i].id) {
             case 0:
                 break;
             case 0xA:
@@ -1010,7 +1010,7 @@ unk_800E3A28* func_80079E88(s32 arg0) {
     var_v1 = D_800E3A28;
 
     while (true) {
-        if (arg0 == var_v1->unk_00) {
+        if (arg0 == var_v1->id) {
             break;
         }
         var_v1++;

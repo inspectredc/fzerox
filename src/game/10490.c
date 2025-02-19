@@ -620,19 +620,19 @@ void func_80077630(void) {
             case GAMEMODE_GP_END_CS:
             case GAMEMODE_DEATH_RACE:
                 Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
-                              SEGMENT_ROM_SIZE(segment_17B960));
+                                    SEGMENT_ROM_SIZE(segment_17B960));
                 romOffset = SEGMENT_ROM_START(segment_1B8550);
                 ramSize = SEGMENT_VRAM_SIZE(segment_1B8550);
                 break;
             case GAMEMODE_10:
                 Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
-                              SEGMENT_ROM_SIZE(segment_17B960));
+                                    SEGMENT_ROM_SIZE(segment_17B960));
                 romOffset = SEGMENT_ROM_START(create_machine_textures);
                 ramSize = SEGMENT_VRAM_SIZE(create_machine_textures);
                 break;
             case GAMEMODE_D:
                 Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
-                              SEGMENT_ROM_SIZE(segment_17B960));
+                                    SEGMENT_ROM_SIZE(segment_17B960));
                 romOffset = SEGMENT_ROM_START(course_edit_textures);
                 ramSize = SEGMENT_VRAM_SIZE(course_edit_textures);
                 break;
@@ -641,7 +641,7 @@ void func_80077630(void) {
             case GAMEMODE_4012:
             case GAMEMODE_FLX_MACHINE_SELECT:
                 Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
-                              SEGMENT_ROM_SIZE(segment_17B960));
+                                    SEGMENT_ROM_SIZE(segment_17B960));
             default:
                 D_800CD2E0 = 0;
                 return;
@@ -715,7 +715,7 @@ void func_800778F8(void) {
     }
 }
 
-extern CourseData D_8010B7B0;
+extern CourseData gCourseData;
 
 void func_800779D0(void) {
     s32 pad;
@@ -737,7 +737,7 @@ void func_800779D0(void) {
             case GAMEMODE_TIME_ATTACK:
             case GAMEMODE_GP_END_CS:
             case GAMEMODE_DEATH_RACE:
-                venue = D_8010B7B0.venue;
+                venue = gCourseData.venue;
                 romOffset = D_800CD2F8[venue];
                 ramSize = D_800CD350[venue] - D_800CD324[venue];
                 break;

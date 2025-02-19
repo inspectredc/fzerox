@@ -3,11 +3,11 @@
 
 CourseRecordInfo gCourseRecordInfos[56]; // 0x3480
 unk_36ED0 D_802A9FC0[1025];              // 0x18060
-unk_8006FC8C D_802C2020[64];             // 0x2900
+CourseSegment D_802C2020[64];            // 0x2900
 Racer gRacers[TOTAL_RACER_COUNT];        // 0x6DB0
-unk_8006FC8C D_802CB6D0[64];             // 0x2900
+CourseSegment D_802CB6D0[64];            // 0x2900
 s32 D_802CDFD0;
-unk_8006FC8C D_802CDFD8[64]; // 0x2900
+CourseSegment D_802CDFD8[64]; // 0x2900
 s32 unkPad802D08D8;
 unk_802D08E0 D_802D08E0[32];         // 0x700
 unk_802D1B60_unk_00 D_802D0FE0[105]; // 0xB7C

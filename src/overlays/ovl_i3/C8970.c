@@ -294,8 +294,8 @@ void func_i3_801356A0(void) {
     f32 var_fs0;
     s32 temp_s0;
     s32 temp_v0;
-    unk_8006FC8C* temp_s5;
-    unk_8006FC8C* var_s1;
+    CourseSegment* temp_s5;
+    CourseSegment* var_s1;
     f32 sp90;
     Vec3f sp84;
     Vec3f sp78;
@@ -310,7 +310,7 @@ void func_i3_801356A0(void) {
     for (i = 0; i < 0x1000; i++) {
         D_i3_8013F700[i] = 0;
     }
-    var_s1 = sp74->unk_10;
+    var_s1 = sp74->courseSegments;
     var_fs0 = 0.0f;
     temp_fs3 = 64.0f * sp90;
 
@@ -349,7 +349,7 @@ void func_i3_801356A0(void) {
         }
     }
 
-    var_s1 = sp74->unk_10;
+    var_s1 = sp74->courseSegments;
     var_fs0 = 0.0f;
     temp_s5 = var_s1;
 
@@ -379,7 +379,7 @@ void func_i3_801356A0(void) {
         }
     }
 
-    var_s1 = sp74->unk_10;
+    var_s1 = sp74->courseSegments;
     func_8009E538(var_s1, 0.0f, &sp84);
     func_8009E6F0(var_s1, 0.0f, &sp78);
     temp_s0 = Math_Round(((sp78.x * 64.0f * sp90) / 16000.0f) + temp_fs3) / 2;

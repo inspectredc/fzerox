@@ -938,7 +938,7 @@ void func_i4_80116E8C(unk_800E3A28* arg0) {
 }
 
 void func_i4_80116F48(unk_800E3A28* arg0) {
-    s32 index = arg0->unk_00 - 60;
+    s32 index = arg0->id - 60;
 
     arg0->unk_04 = gRacers[index].character;
     arg0->unk_04 = func_i4_80116E5C(arg0->unk_04);
@@ -956,7 +956,7 @@ void func_i4_80117008(unk_800E3A28* arg0) {
 }
 
 void func_i4_80117038(unk_800E3A28* arg0) {
-    func_80077D50(sPlayerNumIconCompTexInfos[arg0->unk_00 - 0x28], 0);
+    func_80077D50(sPlayerNumIconCompTexInfos[arg0->id - 0x28], 0);
 }
 
 void func_i4_8011706C(void) {
@@ -1159,7 +1159,7 @@ Gfx* func_i4_80117D10(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_v1;
     const s32* temp_v0;
 
-    temp_v1 = arg1->unk_00 - 0x3C;
+    temp_v1 = arg1->id - 0x3C;
     temp_v0 = &D_i4_8011D6C4[temp_v1 * 2];
     switch (gNumPlayers) {
         case 1:
@@ -1186,7 +1186,7 @@ Gfx* func_i4_80117E98(Gfx* gfx, unk_800E3A28* arg1) {
     s8* temp_a3;
     s32 i;
 
-    temp_t2 = arg1->unk_00 - 0x41;
+    temp_t2 = arg1->id - 0x41;
 
     temp_a3 = &D_800F80C8[gRacers[temp_t2].character].machineStats;
     temp_fp = D_i4_8011D694[temp_t2 * 2 + 0];
@@ -1213,7 +1213,7 @@ Gfx* func_i4_801180EC(Gfx* gfx, unk_800E3A28* arg1) {
     s32 sp3C;
     s32* temp_v1;
 
-    sp3C = arg1->unk_00 - 0x21;
+    sp3C = arg1->id - 0x21;
 
     gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
     return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[sp3C], D_i4_8011D674[sp3C * 2 + 0] + arg1->unk_0C,
@@ -1221,7 +1221,7 @@ Gfx* func_i4_801180EC(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 Gfx* func_i4_801181C0(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[arg1->unk_00 - 0x28], arg1->unk_0C, arg1->unk_10, 0, 0, 0,
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[arg1->id - 0x28], arg1->unk_0C, arg1->unk_10, 0, 0, 0,
                          1.0f, 1.0f);
 }
 
@@ -1655,7 +1655,7 @@ void func_i4_80119BB8(unk_800E3A28* arg0) {
 }
 
 void func_i4_80119BC0(unk_800E3A28* arg0) {
-    s32 index = arg0->unk_00 - 0x3C;
+    s32 index = arg0->id - 0x3C;
     s32 character = gRacers[index].character;
 
     character = func_i4_80116E5C(character);
@@ -1670,7 +1670,7 @@ void func_i4_80119BC0(unk_800E3A28* arg0) {
 }
 
 void func_i4_80119C80(unk_800E3A28* arg0) {
-    s32 index = arg0->unk_00 - 0x21;
+    s32 index = arg0->id - 0x21;
     s32 character = gRacers[index].character;
 
     character = func_i4_80116E5C(character);
@@ -1681,7 +1681,7 @@ void func_i4_80119C80(unk_800E3A28* arg0) {
 }
 
 void func_i4_80119D0C(unk_800E3A28* arg0) {
-    s32 index = arg0->unk_00 - 0x28;
+    s32 index = arg0->id - 0x28;
     s32 temp_v1;
 
     temp_v1 = D_i4_8011D780[index];
