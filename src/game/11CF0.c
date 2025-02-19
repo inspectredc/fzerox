@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzx_game.h"
+#include "fzx_object.h"
 #include "segment_symbols.h"
 
 unk_800E33E0 D_800E33E0[200];
@@ -537,7 +538,7 @@ void func_80079480(void) {
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        D_800E3A28[i].id = 0;
+        D_800E3A28[i].id = OBJECT_FREE;
     }
 }
 
@@ -547,7 +548,7 @@ void func_800794B0(s32 id, s32 arg1, s32 arg2, s8 arg3) {
 
     while (true) {
         // clang-format off
-        if (var_s0->id == 0) {   \
+        if (var_s0->id == OBJECT_FREE) {   \
             var_s0->id = id;   \
             var_s0->unk_04 = 0;      \
             var_s0->unk_08 = 0;      \
@@ -567,148 +568,148 @@ void func_800794B0(s32 id, s32 arg1, s32 arg2, s8 arg3) {
     }
 
     switch (id) {
-        case 0xA:
+        case OBJECT_10:
             func_i4_8011B06C(var_s0);
             break;
-        case 0xE:
+        case OBJECT_14:
             func_i4_8011B0C8();
             break;
-        case 0xF:
+        case OBJECT_15:
             func_i4_8011B0D0(var_s0);
             break;
-        case 0x10:
+        case OBJECT_16:
             func_i4_8011B134();
             break;
-        case 0x11:
+        case OBJECT_17:
             func_i4_8011B13C(var_s0);
             break;
-        case 0x12:
+        case OBJECT_18:
             func_i4_8011B1E4();
             break;
-        case 0x13:
+        case OBJECT_19:
             func_i4_8011B1EC();
             break;
-        case 0x14:
+        case OBJECT_20:
             func_i4_8011B214(var_s0);
             break;
-        case 0x1F:
+        case OBJECT_31:
             func_i4_80116E64();
             break;
-        case 0x20:
+        case OBJECT_32:
             func_i4_80116E8C(var_s0);
             break;
-        case 0x3C:
-        case 0x3D:
-        case 0x3E:
-        case 0x3F:
+        case OBJECT_60_0:
+        case OBJECT_60_1:
+        case OBJECT_60_2:
+        case OBJECT_60_3:
             func_i4_80116F48(var_s0);
             break;
-        case 0x21:
-        case 0x22:
-        case 0x23:
-        case 0x24:
+        case OBJECT_33_0:
+        case OBJECT_33_1:
+        case OBJECT_33_2:
+        case OBJECT_33_3:
             func_i4_80117008(var_s0);
             break;
-        case 0x28:
-        case 0x29:
-        case 0x2A:
-        case 0x2B:
+        case OBJECT_40_0:
+        case OBJECT_40_1:
+        case OBJECT_40_2:
+        case OBJECT_40_3:
             func_i4_80117038(var_s0);
             break;
-        case 0x2C:
+        case OBJECT_44:
             func_i4_8011706C();
             break;
-        case 0x2D:
+        case OBJECT_45:
             func_i4_80117094(var_s0);
             break;
-        case 0x35:
+        case OBJECT_53:
             func_i4_80117400(var_s0);
             break;
-        case 0x33:
+        case OBJECT_51:
             func_i4_8011764C();
             break;
-        case 0x34:
+        case OBJECT_52:
             func_i4_801176BC();
             break;
-        case 0x36:
+        case OBJECT_54:
             func_i4_8011770C(var_s0);
             break;
-        case 0x37:
+        case OBJECT_55:
             func_i4_8011774C();
             break;
-        case 0x2E:
+        case OBJECT_46:
             func_i4_80117854(var_s0);
             break;
-        case 0x39:
+        case OBJECT_57:
             func_i4_8011788C(var_s0);
             break;
-        case 0x2F:
+        case OBJECT_47:
             func_i4_80117774(var_s0);
             break;
-        case 0x41:
-        case 0x42:
-        case 0x43:
-        case 0x44:
+        case OBJECT_65_0:
+        case OBJECT_65_1:
+        case OBJECT_65_2:
+        case OBJECT_65_3:
             func_i4_80117808();
             break;
-        case 0x50:
+        case OBJECT_80:
             func_i6_801167EC(var_s0);
             break;
-        case 0x51:
-        case 0x52:
-        case 0x53:
-        case 0x54:
-        case 0x55:
-        case 0x56:
-        case 0x57:
-        case 0x58:
+        case OBJECT_81_0:
+        case OBJECT_81_1:
+        case OBJECT_81_2:
+        case OBJECT_81_3:
+        case OBJECT_81_4:
+        case OBJECT_81_5:
+        case OBJECT_81_6:
+        case OBJECT_81_7:
             func_i6_80116894(var_s0);
             break;
-        case 0x59:
+        case OBJECT_89:
             func_i6_801168EC(var_s0);
             break;
-        case 0x5A:
+        case OBJECT_90:
             func_i6_80116934();
             break;
-        case 0x5C:
+        case OBJECT_92:
             func_i6_80116990();
             break;
-        case 0x5F:
+        case OBJECT_95:
             func_i6_801169EC();
             break;
-        case 0x5D:
+        case OBJECT_93:
             func_i6_80116A48(var_s0);
             break;
-        case 0x5E:
+        case OBJECT_94:
             func_i6_80116A80(var_s0);
             break;
-        case 0x78:
+        case OBJECT_120:
             func_i5_80117684(var_s0);
             break;
-        case 0x79:
+        case OBJECT_121:
             func_i5_80117758();
             break;
-        case 0x7A:
-        case 0x7B:
-        case 0x7C:
-        case 0x7D:
-        case 0x7E:
-        case 0x7F:
+        case OBJECT_122_0:
+        case OBJECT_122_1:
+        case OBJECT_122_2:
+        case OBJECT_122_3:
+        case OBJECT_122_4:
+        case OBJECT_122_5:
             func_i5_801177EC(var_s0);
             break;
-        case 0x83:
+        case OBJECT_131:
             func_i5_801178D8(var_s0);
             break;
-        case 0x80:
+        case OBJECT_128:
             func_i5_80117934(var_s0);
             break;
-        case 0x81:
+        case OBJECT_129:
             func_i5_8011796C(var_s0);
             break;
-        case 0x84:
+        case OBJECT_132:
             func_i5_801179A8(var_s0);
             break;
-        case 0x85:
+        case OBJECT_133:
             func_i5_80117A2C(var_s0);
             break;
         default:
@@ -723,181 +724,181 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     switch (arg1->id) {
-        case 0:
+        case OBJECT_FREE:
             break;
-        case 0x5:
+        case OBJECT_5:
             gfx = func_8007ABA4(func_8007AE70(func_8007AB88(gfx)));
             break;
-        case 0xA:
+        case OBJECT_10:
             gfx = func_i4_8011B380(gfx, arg1);
             break;
-        case 0xE:
+        case OBJECT_14:
             gfx = func_i4_8011B3DC(gfx, arg1);
             break;
-        case 0xC:
+        case OBJECT_12:
             gfx = func_8007AF40(gfx, 118, 164, 203, 217, 255, 255, 255, 48);
             break;
-        case 0xD:
+        case OBJECT_13:
             gfx = func_8007AE8C(gfx, 12, 8, 307, 231, 0, 0, 0, 0);
             break;
-        case 0xF:
+        case OBJECT_15:
             gfx = func_i4_8011B3E8(gfx, arg1);
             break;
-        case 0x10:
+        case OBJECT_16:
             gfx = func_i4_8011B438(gfx, arg1);
             break;
-        case 0x11:
+        case OBJECT_17:
             gfx = func_i4_8011B444(gfx, arg1);
             break;
-        case 0x12:
+        case OBJECT_18:
             gfx = func_i4_8011B668(gfx, arg1);
             break;
-        case 0x13:
+        case OBJECT_19:
             gfx = func_i4_8011B674(gfx, arg1);
             break;
-        case 0x14:
+        case OBJECT_20:
             gfx = func_i4_8011B6C4(gfx, arg1);
             break;
-        case 0x1E:
+        case OBJECT_30:
             gfx = func_i4_801178C4(gfx);
             break;
-        case 0x3B:
-            gfx = func_8007AC48(gfx, 0x18, 0x18, 0x18);
+        case OBJECT_59:
+            gfx = func_8007AC48(gfx, 24, 24, 24);
             break;
-        case 0x1F:
+        case OBJECT_31:
             gfx = func_i4_80117B74(gfx, arg1);
             break;
-        case 0x20:
+        case OBJECT_32:
             gfx = func_i4_80117BE0(gfx, arg1);
             break;
-        case 0x3C:
-        case 0x3D:
-        case 0x3E:
-        case 0x3F:
+        case OBJECT_60_0:
+        case OBJECT_60_1:
+        case OBJECT_60_2:
+        case OBJECT_60_3:
             gfx = func_i4_80117D10(gfx, arg1);
             break;
-        case 0x21:
-        case 0x22:
-        case 0x23:
-        case 0x24:
+        case OBJECT_33_0:
+        case OBJECT_33_1:
+        case OBJECT_33_2:
+        case OBJECT_33_3:
             gfx = func_i4_801180EC(gfx, arg1);
             break;
-        case 0x28:
-        case 0x29:
-        case 0x2A:
-        case 0x2B:
+        case OBJECT_40_0:
+        case OBJECT_40_1:
+        case OBJECT_40_2:
+        case OBJECT_40_3:
             gfx = func_i4_801181C0(gfx, arg1);
             break;
-        case 0x2C:
+        case OBJECT_44:
             gfx = func_i4_8011821C(gfx, arg1);
             break;
-        case 0x2D:
+        case OBJECT_45:
             gfx = func_i4_80118414(gfx, arg1);
             break;
-        case 0x2E:
+        case OBJECT_46:
             gfx = func_i4_80118734(gfx, arg1);
             break;
-        case 0x41:
-        case 0x42:
-        case 0x43:
-        case 0x44:
+        case OBJECT_65_0:
+        case OBJECT_65_1:
+        case OBJECT_65_2:
+        case OBJECT_65_3:
             gfx = func_i4_80117E98(gfx, arg1);
             break;
-        case 0x35:
+        case OBJECT_53:
             gfx = func_i4_80118918(gfx, arg1);
             break;
-        case 0x32:
+        case OBJECT_50:
             gfx = func_i4_801187C0(gfx);
             break;
-        case 0x33:
+        case OBJECT_51:
             gfx = func_i4_80118EC8(gfx, arg1);
             break;
-        case 0x34:
+        case OBJECT_52:
             gfx = func_i4_80119170(gfx, arg1);
             break;
-        case 0x3A:
+        case OBJECT_58:
             gfx = func_i4_801193B8(gfx, arg1);
             break;
-        case 0x36:
+        case OBJECT_54:
             gfx = func_i4_801194F8(gfx, arg1);
             break;
-        case 0x37:
+        case OBJECT_55:
             gfx = func_i4_80119574(gfx, arg1);
             break;
-        case 0x38:
+        case OBJECT_56:
             gfx = func_i4_801197A0(gfx);
             break;
-        case 0x39:
+        case OBJECT_57:
             gfx = func_i4_80119B50(gfx, arg1);
             break;
-        case 0x2F:
+        case OBJECT_47:
             gfx = func_i4_80119834(gfx, arg1);
             break;
-        case 0x30:
+        case OBJECT_48:
             gfx = func_i4_80119A64(gfx, arg1);
             break;
-        case 0x50:
+        case OBJECT_80:
             gfx = func_i6_80116C78(gfx, arg1);
             break;
-        case 0x51:
-        case 0x52:
-        case 0x53:
-        case 0x54:
-        case 0x55:
-        case 0x56:
-        case 0x57:
-        case 0x58:
+        case OBJECT_81_0:
+        case OBJECT_81_1:
+        case OBJECT_81_2:
+        case OBJECT_81_3:
+        case OBJECT_81_4:
+        case OBJECT_81_5:
+        case OBJECT_81_6:
+        case OBJECT_81_7:
             gfx = func_i6_80116AA8(gfx, arg1);
             break;
-        case 0x59:
+        case OBJECT_89:
             gfx = func_i6_80117400(gfx, arg1);
             break;
-        case 0x5A:
+        case OBJECT_90:
             gfx = func_i6_801174DC(gfx, arg1);
             break;
-        case 0x5C:
+        case OBJECT_92:
             gfx = func_i6_80117760(gfx, arg1);
             break;
-        case 0x5F:
+        case OBJECT_95:
             gfx = func_i6_80117A18(gfx, arg1);
             break;
-        case 0x5D:
+        case OBJECT_93:
             gfx = func_i6_80117C50(gfx, arg1);
             break;
-        case 0x64:
-        case 0x8C:
+        case OBJECT_100:
+        case OBJECT_140:
             gfx = func_8007AC48(gfx, 0, 0, 0);
             break;
-        case 0x78:
+        case OBJECT_120:
             gfx = func_i5_80117A98(gfx, arg1);
             break;
-        case 0x79:
+        case OBJECT_121:
             gfx = func_i5_80117BE0(gfx, arg1);
             break;
-        case 0x7A:
-        case 0x7B:
-        case 0x7C:
-        case 0x7D:
-        case 0x7E:
-        case 0x7F:
+        case OBJECT_122_0:
+        case OBJECT_122_1:
+        case OBJECT_122_2:
+        case OBJECT_122_3:
+        case OBJECT_122_4:
+        case OBJECT_122_5:
             gfx = func_i5_80117C48(gfx, arg1);
             break;
-        case 0x83:
+        case OBJECT_131:
             gfx = func_i5_80117FB4(gfx, arg1);
             break;
-        case 0x80:
+        case OBJECT_128:
             gfx = func_i5_80118100(gfx, arg1);
             break;
-        case 0x81:
+        case OBJECT_129:
             gfx = func_i5_80118168(gfx, arg1);
             break;
-        case 0x82:
+        case OBJECT_130:
             gfx = func_i5_801182DC(gfx);
             break;
-        case 0x84:
+        case OBJECT_132:
             gfx = func_i5_80118674(gfx, arg1);
             break;
-        case 0x85:
+        case OBJECT_133:
             gfx = func_i5_80118790(gfx, arg1);
             break;
     }
@@ -910,84 +911,84 @@ Gfx* func_80079BC8(Gfx* gfx) {
 
     for (i = 0; i < 32; i++) {
         switch (D_800E3A28[i].id) {
-            case 0:
+            case OBJECT_FREE:
                 break;
-            case 0xA:
+            case OBJECT_10:
                 func_i4_8011B2E0(&D_800E3A28[i]);
                 break;
-            case 0x14:
+            case OBJECT_20:
                 func_i4_8011B874(&D_800E3A28[i]);
                 break;
-            case 0x5D:
+            case OBJECT_93:
                 func_i6_80117D3C(&D_800E3A28[i]);
                 break;
-            case 0x5E:
+            case OBJECT_94:
                 func_i6_80117DE0(&D_800E3A28[i]);
                 break;
-            case 0x20:
+            case OBJECT_32:
                 D_800E3F28[D_800E3A28[i].unk_18].unk_04 = 0;
                 func_i4_80119BB8(&D_800E3A28[i]);
                 break;
-            case 0x3C:
-            case 0x3D:
-            case 0x3E:
-            case 0x3F:
+            case OBJECT_60_0:
+            case OBJECT_60_1:
+            case OBJECT_60_2:
+            case OBJECT_60_3:
                 D_800E3F28[D_800E3A28[i].unk_18].unk_04 = 0;
                 func_i4_80119BC0(&D_800E3A28[i]);
                 break;
-            case 0x21:
-            case 0x22:
-            case 0x23:
-            case 0x24:
+            case OBJECT_33_0:
+            case OBJECT_33_1:
+            case OBJECT_33_2:
+            case OBJECT_33_3:
                 D_800E3F28[D_800E3A28[i].unk_18].unk_04 = 0;
                 func_i4_80119C80(&D_800E3A28[i]);
                 break;
-            case 0x28:
-            case 0x29:
-            case 0x2A:
-            case 0x2B:
+            case OBJECT_40_0:
+            case OBJECT_40_1:
+            case OBJECT_40_2:
+            case OBJECT_40_3:
                 func_i4_80119D0C(&D_800E3A28[i]);
                 break;
-            case 0x2C:
+            case OBJECT_44:
                 func_i4_80119D84(&D_800E3A28[i]);
                 break;
-            case 0x2D:
+            case OBJECT_45:
                 func_i4_80119D8C(&D_800E3A28[i]);
                 break;
-            case 0x35:
+            case OBJECT_53:
                 func_i4_8011A08C(&D_800E3A28[i]);
                 break;
-            case 0x36:
+            case OBJECT_54:
                 D_800E3F28[D_800E3A28[i].unk_18].unk_04 = 0;
                 func_i4_8011A73C(&D_800E3A28[i]);
                 break;
-            case 0x2E:
+            case OBJECT_46:
                 func_i4_8011A6A0(&D_800E3A28[i]);
                 break;
-            case 0x39:
+            case OBJECT_57:
                 func_i4_8011A6EC(&D_800E3A28[i]);
                 break;
-            case 0x79:
+            case OBJECT_121:
                 func_i5_80118928(&D_800E3A28[i]);
                 break;
-            case 0x7A:
-            case 0x7B:
-            case 0x7C:
-            case 0x7D:
-            case 0x7E:
-            case 0x7F:
+            case OBJECT_122_0:
+            case OBJECT_122_1:
+            case OBJECT_122_2:
+            case OBJECT_122_3:
+            case OBJECT_122_4:
+            case OBJECT_122_5:
                 func_i5_801189C4(&D_800E3A28[i]);
                 break;
-            case 0x80:
+            case OBJECT_128:
                 func_i5_80118D44(&D_800E3A28[i]);
                 break;
-            case 0x81:
+            case OBJECT_129:
                 func_i5_80118D94(&D_800E3A28[i]);
                 break;
-            case 0x84:
+            case OBJECT_132:
                 func_i5_80118F24(&D_800E3A28[i]);
                 break;
-            case 0x85:
+            case OBJECT_133:
                 func_i5_80118F84(&D_800E3A28[i]);
                 break;
         }
@@ -1004,13 +1005,13 @@ Gfx* func_80079BC8(Gfx* gfx) {
     return gfx;
 }
 
-unk_800E3A28* func_80079E88(s32 arg0) {
+unk_800E3A28* func_80079E88(s32 id) {
     unk_800E3A28* var_v1;
 
     var_v1 = D_800E3A28;
 
     while (true) {
-        if (arg0 == var_v1->id) {
+        if (id == var_v1->id) {
             break;
         }
         var_v1++;

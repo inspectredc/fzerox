@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
+#include "fzx_object.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
 
@@ -522,44 +523,44 @@ void func_i4_80115DF0(void) {
     if (D_i4_8011D774 > 30) {
         D_i4_8011D774 = 30;
     }
-    func_800794B0(5, 0, 0, 1);
-    func_800794B0(0x1E, 0, 0, 4);
-    func_800794B0(0x1F, 0x50, 0xD, 4);
-    func_800794B0(0x2C, 0x3C, 0xA, 8);
-    func_800794B0(0x2D, 0, 0, 0xA);
+    func_800794B0(OBJECT_5, 0, 0, 1);
+    func_800794B0(OBJECT_30, 0, 0, 4);
+    func_800794B0(OBJECT_31, 0x50, 0xD, 4);
+    func_800794B0(OBJECT_44, 0x3C, 0xA, 8);
+    func_800794B0(OBJECT_45, 0, 0, 0xA);
 
     switch (gNumPlayers) {
         case 4:
-            func_800794B0(0x44, 0, 0, 0xC);
-            func_800794B0(0x2B, 0x3C, 0xA, 0xC);
-            func_800794B0(0x24, 0x104, 0xBE, 6);
+            func_800794B0(OBJECT_65_3, 0, 0, 0xC);
+            func_800794B0(OBJECT_40_3, 0x3C, 0xA, 0xC);
+            func_800794B0(OBJECT_33_3, 0x104, 0xBE, 6);
             /* fallthrough */
         case 3:
-            func_800794B0(0x43, 0, 0, 0xC);
-            func_800794B0(0x2A, 0x3C, 0xA, 0xC);
-            func_800794B0(0x23, 0x104, 0xA, 6);
+            func_800794B0(OBJECT_65_2, 0, 0, 0xC);
+            func_800794B0(OBJECT_40_2, 0x3C, 0xA, 0xC);
+            func_800794B0(OBJECT_33_2, 0x104, 0xA, 6);
             /* fallthrough */
         case 2:
-            func_800794B0(0x42, 0, 0, 0xC);
-            func_800794B0(0x29, 0x3C, 0xA, 0xC);
-            func_800794B0(0x22, 0x14, 0xBE, 6);
+            func_800794B0(OBJECT_65_1, 0, 0, 0xC);
+            func_800794B0(OBJECT_40_1, 0x3C, 0xA, 0xC);
+            func_800794B0(OBJECT_33_1, 0x14, 0xBE, 6);
             /* fallthrough */
         case 1:
             break;
     }
 
     if (D_800CD380 == 0) {
-        func_800794B0(0x2F, 0, 0, 0xC);
+        func_800794B0(OBJECT_47, 0, 0, 0xC);
     }
-    func_800794B0(0x41, 0, 0, 0xC);
-    func_800794B0(0x28, 0x3C, 0xA, 0xC);
-    func_800794B0(0x21, 0x14, 0xA, 6);
+    func_800794B0(OBJECT_65_0, 0, 0, 0xC);
+    func_800794B0(OBJECT_40_0, 0x3C, 0xA, 0xC);
+    func_800794B0(OBJECT_33_0, 0x14, 0xA, 6);
 
     if (gNumPlayers == 1) {
-        func_800794B0(0x30, 0, 0, 0xC);
+        func_800794B0(OBJECT_48, 0, 0, 0xC);
     }
 
-    func_800794B0(0x2E, 0, 0, 0xC);
+    func_800794B0(OBJECT_46, 0, 0, 0xC);
 }
 
 extern s32 D_800CD3B4;
@@ -588,32 +589,32 @@ void func_i4_801160D8(void) {
         gPlayerEngine[0] = gCharacterLastEngine[gRacers[0].character];
     }
 
-    func_800794B0(5, 0, 0, 1);
-    func_800794B0(0x3B, 0, 0, 4);
-    func_800794B0(0x32, 0, 0, 0xC);
-    func_800794B0(0x33, 0xA0, 0x22, 0xA);
-    func_800794B0(0x34, 0xA0, 0x61, 0xA);
+    func_800794B0(OBJECT_5, 0, 0, 1);
+    func_800794B0(OBJECT_59, 0, 0, 4);
+    func_800794B0(OBJECT_50, 0, 0, 0xC);
+    func_800794B0(OBJECT_51, 0xA0, 0x22, 0xA);
+    func_800794B0(OBJECT_52, 0xA0, 0x61, 0xA);
     if (gNumPlayers == 2) {
-        func_800794B0(0x3A, 0xA0, 0x61, 0xD);
+        func_800794B0(OBJECT_58, 0xA0, 0x61, 0xD);
     }
-    func_800794B0(0x35, 0, 0, 0xC);
-    func_800794B0(0x36, 0x14, 0xB9, 0xC);
-    func_800794B0(0x37, 0xD0, 0x55, 0xB);
-    func_800794B0(0x39, 0, 0, 0xE);
+    func_800794B0(OBJECT_53, 0, 0, 0xC);
+    func_800794B0(OBJECT_54, 0x14, 0xB9, 0xC);
+    func_800794B0(OBJECT_55, 0xD0, 0x55, 0xB);
+    func_800794B0(OBJECT_57, 0, 0, 0xE);
 
     switch (gNumPlayers) {
         case 4:
-            func_800794B0(0x3F, -6, -5, 8);
+            func_800794B0(OBJECT_60_3, -6, -5, 8);
             /* fallthrough */
         case 3:
-            func_800794B0(0x3E, -6, -5, 8);
+            func_800794B0(OBJECT_60_2, -6, -5, 8);
             /* fallthrough */
         case 2:
-            func_800794B0(0x38, 0, 0, 6);
-            func_800794B0(0x3D, -6, -5, 8);
+            func_800794B0(OBJECT_56, 0, 0, 6);
+            func_800794B0(OBJECT_60_1, -6, -5, 8);
             /* fallthrough */
         case 1:
-            func_800794B0(0x3C, -6, -5, 8);
+            func_800794B0(OBJECT_60_0, -6, -5, 8);
             break;
     }
 }
@@ -656,8 +657,8 @@ s32 func_i4_8011631C(void) {
         if (gInputButtonPressed & (BTN_L | BTN_R | BTN_CLEFT | BTN_CDOWN)) {
             if ((gSharedController.buttonCurrent & 0x20) && (gSharedController.buttonCurrent & 0x10) &&
                 (gSharedController.buttonCurrent & 2) && (gSharedController.buttonCurrent & 4) &&
-                (func_80079E88(0x2D)->unk_20 == 0) && (D_800CD3B0 != 3)) {
-                func_80079E88(0x2D)->unk_20 = 1;
+                (func_80079E88(OBJECT_45)->unk_20 == 0) && (D_800CD3B0 != 3)) {
+                func_80079E88(OBJECT_45)->unk_20 = 1;
                 D_i4_8011D778 = 1.0f;
                 D_i4_8011D77C = 0.0f;
                 func_800BA8D8(0x17);
@@ -938,9 +939,9 @@ void func_i4_80116E8C(unk_800E3A28* arg0) {
 }
 
 void func_i4_80116F48(unk_800E3A28* arg0) {
-    s32 index = arg0->id - 60;
+    s32 playerIndex = arg0->id - OBJECT_60_0;
 
-    arg0->unk_04 = gRacers[index].character;
+    arg0->unk_04 = gRacers[playerIndex].character;
     arg0->unk_04 = func_i4_80116E5C(arg0->unk_04);
 
     if (gNumPlayers == 1) {
@@ -956,7 +957,7 @@ void func_i4_80117008(unk_800E3A28* arg0) {
 }
 
 void func_i4_80117038(unk_800E3A28* arg0) {
-    func_80077D50(sPlayerNumIconCompTexInfos[arg0->id - 0x28], 0);
+    func_80077D50(sPlayerNumIconCompTexInfos[arg0->id - OBJECT_40_0], 0);
 }
 
 void func_i4_8011706C(void) {
@@ -1156,11 +1157,11 @@ Gfx* func_i4_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
 extern unk_800E3F28 D_800E3F28[];
 
 Gfx* func_i4_80117D10(Gfx* gfx, unk_800E3A28* arg1) {
-    s32 temp_v1;
+    s32 playerIndex;
     const s32* temp_v0;
 
-    temp_v1 = arg1->id - 0x3C;
-    temp_v0 = &D_i4_8011D6C4[temp_v1 * 2];
+    playerIndex = arg1->id - OBJECT_60_0;
+    temp_v0 = &D_i4_8011D6C4[playerIndex * 2];
     switch (gNumPlayers) {
         case 1:
             gfx = func_80078EA0(gfx, sPortraitBackgroundCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
@@ -1186,7 +1187,7 @@ Gfx* func_i4_80117E98(Gfx* gfx, unk_800E3A28* arg1) {
     s8* temp_a3;
     s32 i;
 
-    temp_t2 = arg1->id - 0x41;
+    temp_t2 = arg1->id - OBJECT_65_0;
 
     temp_a3 = &D_800F80C8[gRacers[temp_t2].character].machineStats;
     temp_fp = D_i4_8011D694[temp_t2 * 2 + 0];
@@ -1213,7 +1214,7 @@ Gfx* func_i4_801180EC(Gfx* gfx, unk_800E3A28* arg1) {
     s32 sp3C;
     s32* temp_v1;
 
-    sp3C = arg1->id - 0x21;
+    sp3C = arg1->id - OBJECT_33_0;
 
     gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
     return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[sp3C], D_i4_8011D674[sp3C * 2 + 0] + arg1->unk_0C,
@@ -1221,7 +1222,7 @@ Gfx* func_i4_801180EC(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 Gfx* func_i4_801181C0(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[arg1->id - 0x28], arg1->unk_0C, arg1->unk_10, 0, 0, 0,
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[arg1->id - OBJECT_40_0], arg1->unk_0C, arg1->unk_10, 0, 0, 0,
                          1.0f, 1.0f);
 }
 
@@ -1233,7 +1234,7 @@ Gfx* func_i4_8011821C(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_s3 = 30;
 
     for (i = 0; i < 4; i++) {
-        if (func_80079E88(i + 0x28) != NULL) {
+        if (func_80079E88(OBJECT_40_0 + i) != NULL) {
             temp_v0 = (u32) gGameFrameCount % temp_s3;
             if ((D_800CD3A8[i] != 0) || (temp_v0 >= 0xF)) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -1655,7 +1656,7 @@ void func_i4_80119BB8(unk_800E3A28* arg0) {
 }
 
 void func_i4_80119BC0(unk_800E3A28* arg0) {
-    s32 index = arg0->id - 0x3C;
+    s32 index = arg0->id - OBJECT_60_0;
     s32 character = gRacers[index].character;
 
     character = func_i4_80116E5C(character);
@@ -1670,7 +1671,7 @@ void func_i4_80119BC0(unk_800E3A28* arg0) {
 }
 
 void func_i4_80119C80(unk_800E3A28* arg0) {
-    s32 index = arg0->id - 0x21;
+    s32 index = arg0->id - OBJECT_33_0;
     s32 character = gRacers[index].character;
 
     character = func_i4_80116E5C(character);
@@ -1681,7 +1682,7 @@ void func_i4_80119C80(unk_800E3A28* arg0) {
 }
 
 void func_i4_80119D0C(unk_800E3A28* arg0) {
-    s32 index = arg0->id - 0x28;
+    s32 index = arg0->id - OBJECT_40_0;
     s32 temp_v1;
 
     temp_v1 = D_i4_8011D780[index];
@@ -1877,7 +1878,7 @@ void func_i4_8011A73C(unk_800E3A28* arg0) {
 }
 
 void func_i4_8011A7B8(void) {
-    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) && (func_80079E88(0x2D)->unk_20 != 0)) {
+    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) && (func_80079E88(OBJECT_45)->unk_20 != 0)) {
         D_800CE748 = 0.075f;
         D_800CE74C = 0.125f;
         D_800CE750 = 0.105f;
@@ -2017,13 +2018,13 @@ void func_i4_TitleInit(void) {
     gCourseIndex = 0;
     D_i4_8011D790 = 0;
     D_i4_8011D794 = 0;
-    func_800794B0(5, 0, 0, 1);
-    func_800794B0(10, 0, 0, 8);
-    func_800794B0(15, 0, 0, 10);
-    func_800794B0(17, 0, 0, 12);
-    func_800794B0(19, 94, 200, 12);
+    func_800794B0(OBJECT_5, 0, 0, 1);
+    func_800794B0(OBJECT_10, 0, 0, 8);
+    func_800794B0(OBJECT_15, 0, 0, 10);
+    func_800794B0(OBJECT_17, 0, 0, 12);
+    func_800794B0(OBJECT_19, 94, 200, 12);
     if (gLeoDDConnected) {
-        func_800794B0(20, 0, 0, 12);
+        func_800794B0(OBJECT_20, 0, 0, 12);
     }
 }
 
@@ -2037,7 +2038,7 @@ s32 func_i4_8011AE2C(void) {
     }
     func_8007DABC(&gSharedController);
     Math_Rand1();
-    if (gLeoDDConnected && (func_80079E88(20)->unk_1C != 0) && (func_80079E88(20)->unk_04 == 0)) {
+    if (gLeoDDConnected && (func_80079E88(OBJECT_20)->unk_1C != 0) && (func_80079E88(OBJECT_20)->unk_04 == 0)) {
         return gGameMode;
     }
     if (D_i4_8011D794 != 0) {
@@ -2057,7 +2058,7 @@ s32 func_i4_8011AE2C(void) {
         func_800BA8D8(0x3E);
         func_8007E0CC();
         D_i4_8011D790 = -1;
-        if (gLeoDDConnected && (func_80079E88(20)->unk_04 == 1)) {
+        if (gLeoDDConnected && (func_80079E88(OBJECT_20)->unk_04 == 1)) {
             func_800BB370();
         }
         return GAMEMODE_FLX_MAIN_MENU;

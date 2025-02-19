@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzx_game.h"
+#include "fzx_object.h"
 #include "ovl_i6.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B1E0.h"
@@ -136,32 +137,32 @@ void func_i6_80115DF0(void) {
     D_800CD384 = 0;
     gNumPlayers = 1;
     if ((gGameFrameCount % 4) == 0) {
-        func_800794B0(0x5E, 0, 0, 0);
+        func_800794B0(OBJECT_94, 0, 0, 0);
     }
-    func_800794B0(5, 0, 0, 1);
+    func_800794B0(OBJECT_5, 0, 0, 1);
     if ((gGameFrameCount % 4) == 1) {
-        func_800794B0(0x5E, 0, 0, 0);
+        func_800794B0(OBJECT_94, 0, 0, 0);
     }
-    func_800794B0(0x50, 0, 0, 4);
+    func_800794B0(OBJECT_80, 0, 0, 4);
     if ((gGameFrameCount % 4) == 2) {
-        func_800794B0(0x5E, 0, 0, 0);
+        func_800794B0(OBJECT_94, 0, 0, 0);
     }
-    func_800794B0(0x51, 0, 0, 10);
+    func_800794B0(OBJECT_81_0, 0, 0, 10);
     if ((gGameFrameCount % 4) == 3) {
-        func_800794B0(0x5E, 0, 0, 0);
+        func_800794B0(OBJECT_94, 0, 0, 0);
     }
-    func_800794B0(0x52, 0, 0, 0xA);
-    func_800794B0(0x53, 0, 0, 0xA);
-    func_800794B0(0x54, 0, 0, 0xA);
-    func_800794B0(0x55, 0, 0, 0xA);
-    func_800794B0(0x56, 0, 0, 0xA);
-    func_800794B0(0x57, 0, 0, 0xA);
-    func_800794B0(0x58, 0, 0, 0xA);
-    func_800794B0(0x59, 0x64, 0xD, 0xA);
-    func_800794B0(0x5A, 0x60, 0x50, 0xE);
-    func_800794B0(0x5D, 0, 0, 0xE);
-    func_800794B0(0x5C, 0x60, 0x50, 0xE);
-    func_800794B0(0x5F, 0x60, 0x50, 0xE);
+    func_800794B0(OBJECT_81_1, 0, 0, 0xA);
+    func_800794B0(OBJECT_81_2, 0, 0, 0xA);
+    func_800794B0(OBJECT_81_3, 0, 0, 0xA);
+    func_800794B0(OBJECT_81_4, 0, 0, 0xA);
+    func_800794B0(OBJECT_81_5, 0, 0, 0xA);
+    func_800794B0(OBJECT_81_6, 0, 0, 0xA);
+    func_800794B0(OBJECT_81_7, 0, 0, 0xA);
+    func_800794B0(OBJECT_89, 0x64, 0xD, 0xA);
+    func_800794B0(OBJECT_90, 0x60, 0x50, 0xE);
+    func_800794B0(OBJECT_93, 0, 0, 0xE);
+    func_800794B0(OBJECT_92, 0x60, 0x50, 0xE);
+    func_800794B0(OBJECT_95, 0x60, 0x50, 0xE);
 }
 
 extern unk_800DCE48 D_800DCE48;
@@ -193,7 +194,7 @@ s32 func_i6_80115FF0(void) {
     }
 
     func_8007DABC(&gSharedController);
-    if (func_80079E88(0x50)->unk_04 >= 3) {
+    if (func_80079E88(OBJECT_80)->unk_04 >= 3) {
         return gGameMode;
     }
     switch (D_800CD384) {
@@ -240,13 +241,13 @@ s32 func_i6_80115FF0(void) {
                 return GAMEMODE_FLX_TITLE;
             }
 
-            if ((gInputButtonPressed & BTN_START) && (func_80079E88(0x5E)->unk_04 == 7)) {
+            if ((gInputButtonPressed & BTN_START) && (func_80079E88(OBJECT_94)->unk_04 == 7)) {
                 break;
             }
 
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
-                D_800DCE48.unk_10 = (func_80079E88(0x5E)->unk_1C & 0xFFFF) - 39290;
+                D_800DCE48.unk_10 = (func_80079E88(OBJECT_94)->unk_1C & 0xFFFF) - 39290;
                 switch (D_800CD380) {
                     case 0:
                     case 1:
@@ -314,7 +315,7 @@ s32 func_i6_80115FF0(void) {
             if (gInputButtonPressed & BTN_B) {
                 D_800CD384 = 0;
                 func_800BA8D8(0x10);
-            } else if ((gInputButtonPressed & BTN_START) && (func_80079E88(0x5E)->unk_04 == 7)) {
+            } else if ((gInputButtonPressed & BTN_START) && (func_80079E88(OBJECT_94)->unk_04 == 7)) {
                 break;
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x21);
@@ -357,7 +358,7 @@ s32 func_i6_80115FF0(void) {
                 }
                 break;
             }
-            if ((gInputButtonPressed & BTN_START) && (func_80079E88(0x5E)->unk_04 == 7)) {
+            if ((gInputButtonPressed & BTN_START) && (func_80079E88(OBJECT_94)->unk_04 == 7)) {
                 break;
             }
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
@@ -377,22 +378,22 @@ s32 func_i6_80115FF0(void) {
             }
             break;
         case 3:
-            if (func_80079E88(0x54)->unk_1C == 12) {
+            if (func_80079E88(OBJECT_81_3)->unk_1C == 12) {
                 var_v1_2 = false;
                 switch (D_800CD380) {
                     case 1:
-                        if (func_80079E88(0x5F)->unk_1C == 12) {
+                        if (func_80079E88(OBJECT_95)->unk_1C == 12) {
                             var_v1_2 = true;
                         }
                         break;
                     case 0:
                     case 5:
-                        if (func_80079E88(0x5C)->unk_1C == 12) {
+                        if (func_80079E88(OBJECT_92)->unk_1C == 12) {
                             var_v1_2 = true;
                         }
                         break;
                     case 3:
-                        if (func_80079E88(0x5A)->unk_1C == 12) {
+                        if (func_80079E88(OBJECT_90)->unk_1C == 12) {
                             var_v1_2 = true;
                         }
                         break;
@@ -453,7 +454,7 @@ void func_i6_801167EC(unk_800E3A28* arg0) {
 extern s16 D_800CD044;
 
 void func_i6_80116894(unk_800E3A28* arg0) {
-    s32 index = arg0->id - 0x51;
+    s32 index = arg0->id - OBJECT_81_0;
 
     func_80077D50(sMenuSignCompTexInfos[index], 0);
     if (D_800CD044 == 0x21) {
@@ -519,7 +520,7 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp1;
     s32 temp2;
 
-    temp_t0 = arg1->id - 0x51;
+    temp_t0 = arg1->id - OBJECT_81_0;
 
     if ((temp_t0 == 4) || (temp_t0 == 7)) {
         return gfx;
@@ -980,7 +981,7 @@ void func_i6_80117DE0(unk_800E3A28* arg0) {
                 gSettingEverythingUnlocked = 1;
                 Save_SaveSettingsProfiles();
                 func_800BA8D8(0x2E);
-                sp1C = func_80079E88(0x50);
+                sp1C = func_80079E88(OBJECT_80);
                 if (sp1C->unk_04 < 2) {
                     sp1C->unk_04 = (Math_Rand1() % 3) + (sp1C->unk_04 * 10) + 10;
                 }

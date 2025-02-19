@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzx_game.h"
+#include "fzx_object.h"
 #include "ovl_i6.h"
 #include "audio.h"
 #include "assets/segment_2B9EA0.h"
@@ -457,13 +458,24 @@ const s16 D_i6_8011F4CC[] = { 50, 100, 280, 180, 280, 100, 50, 180 };
 
 const s16 D_i6_8011F4DC[] = { 150, 210, 50, 35, 50, 210, 150, 35 };
 
-const s16 D_i6_8011F4EC[] = { 216, 0,   0, 248, 0, 0,   0, 0,   217, 0,   0,   249, 0, 0,   0,   0,   218, 0,
-                              0,   250, 0, 251, 0, 0,   0, 0,   220, 0,   0,   252, 0, 253, 0,   0,   0,   0,
-                              222, 0,   0, 254, 0, 255, 0, 262, 0,   256, 0,   257, 0, 261, 0,   263, 0,   264,
-                              0,   265, 0, 258, 0, 0,   0, 0,   0,   0,   0,   0,   0, 0,   0,   0,   0,   0,
-                              0,   0,   0, 0,   0, 0,   0, 0,   0,   0,   0,   0,   0, 0,   227, 0,   0,   259,
-                              0,   0,   0, 0,   0, 0,   0, 0,   0,   0,   0,   0,   0, 0,   0,   0,   0,   0,
-                              0,   0,   0, 0,   0, 0,   0, 0,   0,   0,   228, 0,   0, 260, -1,  0 };
+const s16 D_i6_8011F4EC[] = {
+    OBJECT_216_0, OBJECT_FREE,   OBJECT_FREE,  OBJECT_248_0,  OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
+    OBJECT_216_1, OBJECT_FREE,   OBJECT_FREE,  OBJECT_248_1,  OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
+    OBJECT_216_2, OBJECT_FREE,   OBJECT_FREE,  OBJECT_248_2,  OBJECT_FREE,  OBJECT_248_3,  OBJECT_FREE,   OBJECT_FREE,
+    OBJECT_FREE,  OBJECT_FREE,   OBJECT_216_4, OBJECT_FREE,   OBJECT_FREE,  OBJECT_248_4,  OBJECT_FREE,   OBJECT_248_5,
+    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_216_6, OBJECT_FREE,   OBJECT_FREE,   OBJECT_248_6,
+    OBJECT_FREE,  OBJECT_248_7,  OBJECT_FREE,  OBJECT_248_14, OBJECT_FREE,  OBJECT_248_8,  OBJECT_FREE,   OBJECT_248_9,
+    OBJECT_FREE,  OBJECT_248_13, OBJECT_FREE,  OBJECT_248_15, OBJECT_FREE,  OBJECT_248_16, OBJECT_FREE,   OBJECT_248_17,
+    OBJECT_FREE,  OBJECT_248_10, OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
+    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
+    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
+    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_216_11, OBJECT_FREE,
+    OBJECT_FREE,  OBJECT_248_11, OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
+    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
+    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
+    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_216_12, OBJECT_FREE,
+    OBJECT_FREE,  OBJECT_248_12, -1,           OBJECT_FREE,
+};
 
 UNUSED s32 D_i6_8011ED7C = 0; // UNUSED?
 
@@ -593,7 +605,7 @@ Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
     s8 sp64[2];
     s8* name;
 
-    name = gCreditsNames[arg1->id - 230];
+    name = gCreditsNames[arg1->id - OBJECT_230_0];
 
     if (arg3 != 0) {
         i = func_i2_801062E4(name, 1, 0);
@@ -923,7 +935,7 @@ Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
                 ;
                 if (arg1->unk_1C < 32) {
                     var_s2 = ((32 - arg1->unk_1C) * var_s2) / 32;
-                    func_80079E88(0xC1)->unk_08 = arg1->unk_1C;
+                    func_80079E88(OBJECT_193)->unk_08 = arg1->unk_1C;
                 } else {
                     var_s2 = 0;
                 }
@@ -1101,7 +1113,7 @@ Gfx* func_i6_8011A6CC(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_v0;
     s8* temp_s2;
 
-    temp_v0 = arg1->id - 198;
+    temp_v0 = arg1->id - OBJECT_198_0;
     temp_s2 = gCreditsAttributions[temp_v0];
 
     gDPSetPrimColor(gfx++, 0, 0, 24, 24, 24, 255);
@@ -1136,7 +1148,7 @@ Gfx* func_i6_8011A6CC(Gfx* gfx, unk_800E3A28* arg1) {
 
 Gfx* func_i6_8011A890(Gfx* gfx, unk_800E3A28* arg1) {
     s8* temp_a3;
-    s32 index = arg1->id - 198;
+    s32 index = arg1->id - OBJECT_198_0;
 
     temp_a3 = gCreditsAttributions[index];
 
@@ -1156,7 +1168,7 @@ Gfx* func_i6_8011A944(Gfx* gfx, unk_800E3A28* arg1) {
     s32 pad2[9];
     char* temp_a3;
 
-    temp_v1 = arg1->id - 230;
+    temp_v1 = arg1->id - OBJECT_230_0;
     temp_a3 = gCreditsNames[temp_v1];
 
     switch (arg1->unk_04) {
@@ -1195,7 +1207,7 @@ Gfx* func_i6_8011A944(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 Gfx* func_i6_8011AAC8(Gfx* gfx, unk_800E3A28* arg1) {
-    s32 index = arg1->id - 0xE6;
+    s32 index = arg1->id - OBJECT_230_0;
     char* temp = gCreditsNames[index];
 
     return func_i2_80106450(gfx, arg1->unk_0C, arg1->unk_10, temp, 0, 1, 0);
@@ -1260,7 +1272,7 @@ void func_i6_8011AC38(unk_800E3A28* arg0) {
             if (++arg0->unk_1C >= 64) {
                 arg0->unk_08 = 3;
                 arg0->unk_1C = 0;
-                temp_v0_2 = func_80079E88(0xBE);
+                temp_v0_2 = func_80079E88(OBJECT_190);
                 var_a2 = 0;
                 if (temp_v0_2 != NULL) {
                     temp_v0_2->unk_08 = 2;
@@ -1301,7 +1313,7 @@ void func_i6_8011AC38(unk_800E3A28* arg0) {
             label:
                 arg0->unk_04 = var_a2;
                 var_a2 = 1;
-                temp_v0_2 = func_80079E88(0xC5);
+                temp_v0_2 = func_80079E88(OBJECT_197);
                 if ((temp_v0_2 != NULL) && (temp_v0_2->unk_08 == 3)) {
                     temp_v0_2->unk_1C = 1;
                 }
@@ -1335,7 +1347,7 @@ void func_i6_8011AEB4(unk_800E3A28* arg0) {
             if (arg0->unk_1C != 0) {
                 arg0->unk_08 = 0;
                 arg0->unk_20++;
-                arg0->unk_04 = func_80079E88(0xC0)->unk_04;
+                arg0->unk_04 = func_80079E88(OBJECT_192)->unk_04;
                 var_v1 = 1;
                 arg0->unk_1C = 0;
             }
@@ -1344,7 +1356,7 @@ void func_i6_8011AEB4(unk_800E3A28* arg0) {
 
     if (D_800E3F28[arg0->unk_18].unk_04 == -1) {
         D_800E3F28[arg0->unk_18].unk_04 = 0;
-        arg0->unk_04 = func_80079E88(0xC0)->unk_04;
+        arg0->unk_04 = func_80079E88(OBJECT_192)->unk_04;
         var_v1++;
     }
     if (var_v1 != 0) {
@@ -1403,7 +1415,7 @@ bool func_i6_8011B058(unk_800E3A28* arg0, s32 arg1, s32 arg2, s32 arg3) {
     return false;
 }
 
-void func_i6_8011BAC0(s32 arg0, s32 arg1, s32 arg2, s8 arg3);
+void func_i6_8011BAC0(s32 id, s32 arg1, s32 arg2, s8 arg3);
 
 void func_i6_8011B0CC(unk_800E3A28* arg0) {
     s32 temp_a0;
@@ -1416,15 +1428,15 @@ void func_i6_8011B0CC(unk_800E3A28* arg0) {
             case 0:
                 switch (arg0->unk_1C) {
                     case 0x1:
-                        func_i6_8011BAC0(arg0->unk_04 + 0xC6, D_i6_8011F4BC[(arg0->unk_04 % 4) * 2 + 0],
+                        func_i6_8011BAC0(OBJECT_198_0 + arg0->unk_04, D_i6_8011F4BC[(arg0->unk_04 % 4) * 2 + 0],
                                          D_i6_8011F4BC[(arg0->unk_04 % 4) * 2 + 1], 0xC);
-                        temp_v0_4 = func_80079E88(0xC0);
+                        temp_v0_4 = func_80079E88(OBJECT_192);
                         if ((temp_v0_4 != NULL) && (temp_v0_4->unk_08 == 3)) {
                             temp_v0_4->unk_1C++;
                         }
                         break;
                     case 0x3C:
-                        func_i6_8011BAC0(arg0->unk_04 + 0xE6, D_i6_8011F4CC[(arg0->unk_04 % 4) * 2 + 0],
+                        func_i6_8011BAC0(OBJECT_230_0 + arg0->unk_04, D_i6_8011F4CC[(arg0->unk_04 % 4) * 2 + 0],
                                          D_i6_8011F4CC[(arg0->unk_04 % 4) * 2 + 1], 0xA);
                         arg0->unk_08 = 1;
                         break;
@@ -1455,16 +1467,16 @@ void func_i6_8011B0CC(unk_800E3A28* arg0) {
                 }
                 break;
             case 19:
-                if (func_80079E88(0x104) == NULL) {
+                if (func_80079E88(OBJECT_248_12) == NULL) {
                     arg0->unk_04++;
                 }
                 break;
             case 20:
-                func_i6_8011BAC0(0xC1, 0xC8, 0x1E, 8);
+                func_i6_8011BAC0(OBJECT_193, 0xC8, 0x1E, 8);
                 arg0->unk_04++;
                 break;
             case 21:
-                arg0->id = 0;
+                arg0->id = OBJECT_FREE;
                 break;
             default:
                 break;
@@ -1481,7 +1493,7 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
     s8* sp1C;
     unk_800E3A28* temp_v0_3;
 
-    temp_v0 = arg0->id - 198;
+    temp_v0 = arg0->id - OBJECT_198_0;
     sp1C = gCreditsAttributions[temp_v0];
 
     switch (temp_v0 % 4) {
@@ -1513,7 +1525,7 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
         case 1:
             if (++arg0->unk_1C > 120) {
                 arg0->unk_04 = 2;
-                temp_v0_3 = func_80079E88(0xC0);
+                temp_v0_3 = func_80079E88(OBJECT_192);
                 if ((temp_v0_3 != NULL) && (temp_v0_3->unk_08 == 1)) {
                     temp_v0_3->unk_08 = 2;
                 }
@@ -1523,11 +1535,11 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
             func_8007A334(arg0, D_i6_8011F4BC[(temp_v0 % 4) * 2], sp28);
             if (sp28 < 0) {
                 if (arg0->unk_0C < -func_i2_801062E4(sp1C, 1, 0)) {
-                    arg0->id = 0;
+                    arg0->id = OBJECT_FREE;
                 }
             } else {
                 if ((func_i2_801062E4(sp1C, 1, 0) + 0x140) < arg0->unk_0C) {
-                    arg0->id = 0;
+                    arg0->id = OBJECT_FREE;
                 }
             }
             break;
@@ -1536,7 +1548,7 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
 
 void func_i6_8011B50C(unk_800E3A28* arg0) {
     if (func_i6_8011B058(arg0, -1, -0x14, 2)) {
-        arg0->id = 0;
+        arg0->id = OBJECT_FREE;
     }
 }
 
@@ -1544,7 +1556,7 @@ void func_i6_8011B544(unk_800E3A28* arg0) {
     s32 temp_a1;
     s32 sp18;
 
-    temp_a1 = arg0->id - 230;
+    temp_a1 = arg0->id - OBJECT_230_0;
 
     switch (temp_a1 % 4) {
         case 0:
@@ -1562,7 +1574,7 @@ void func_i6_8011B544(unk_800E3A28* arg0) {
             arg0->unk_1C++;
             break;
         case 1:
-            if (func_80079E88(temp_a1 + 0xC6)->unk_04 >= 2) {
+            if (func_80079E88(OBJECT_198_0 + temp_a1)->unk_04 >= 2) {
                 arg0->unk_04 = 2;
             }
             break;
@@ -1570,11 +1582,11 @@ void func_i6_8011B544(unk_800E3A28* arg0) {
             func_8007A334(arg0, D_i6_8011F4CC[(temp_a1 % 4) * 2], sp18);
             if (sp18 > 0) {
                 if (arg0->unk_0C > 320) {
-                    arg0->id = 0;
+                    arg0->id = OBJECT_FREE;
                 }
             } else {
                 if (arg0->unk_0C < 0) {
-                    arg0->id = 0;
+                    arg0->id = OBJECT_FREE;
                 }
             }
             break;
@@ -1583,7 +1595,7 @@ void func_i6_8011B544(unk_800E3A28* arg0) {
 
 void func_i6_8011B668(unk_800E3A28* arg0) {
     if (func_i6_8011B058(arg0, -1, -0x14, 2)) {
-        arg0->id = 0;
+        arg0->id = OBJECT_FREE;
     }
 }
 
@@ -1613,7 +1625,7 @@ void func_i6_8011B6A0(unk_800E3A28* arg0) {
             if (++arg0->unk_1C >= 0x12) {
                 arg0->unk_04++;
                 arg0->unk_1C = 0;
-                func_i6_8011BAC0(0xC2, 0x80, 0x40, 8);
+                func_i6_8011BAC0(OBJECT_194, 0x80, 0x40, 8);
                 func_800BA8D8(0x2B);
             }
             break;
@@ -1629,7 +1641,7 @@ void func_i6_8011B7B0(unk_800E3A28* arg0) {
             if (++arg0->unk_1C >= 0xAF) {
                 arg0->unk_04++;
                 arg0->unk_1C = 0;
-                func_i6_8011BAC0(0xC4, 0x60, 0xCD, 8);
+                func_i6_8011BAC0(OBJECT_196, 0x60, 0xCD, 8);
             }
             break;
         case 1:
@@ -1657,10 +1669,10 @@ void func_i6_8011B860(unk_800E3A28* arg0) {
             }
             break;
         case 370:
-            func_i6_8011BAC0(0xBE, 0, 0, 0);
-            func_i6_8011BAC0(0xC0, 0, 0, 4);
-            func_i6_8011BAC0(0xC5, 0, 0, 8);
-            arg0->id = 0;
+            func_i6_8011BAC0(OBJECT_190, 0, 0, 0);
+            func_i6_8011BAC0(OBJECT_192, 0, 0, 4);
+            func_i6_8011BAC0(OBJECT_197, 0, 0, 8);
+            arg0->id = OBJECT_FREE;
             break;
         default:
             if (arg0->unk_18 > 300) {
@@ -1737,12 +1749,12 @@ void func_i6_8011B860(unk_800E3A28* arg0) {
 void func_i6_8011BAB8(unk_800E3A28* arg0) {
 }
 
-void func_i6_8011BAC0(s32 arg0, s32 arg1, s32 arg2, s8 arg3) {
+void func_i6_8011BAC0(s32 id, s32 arg1, s32 arg2, s8 arg3) {
     s32 i = 0;
     unk_800E3A28* var_s0 = D_800E3A28;
 
     while (true) {
-        if (var_s0->id == 0) {
+        if (var_s0->id == OBJECT_FREE) {
             break;
         }
 
@@ -1752,7 +1764,7 @@ void func_i6_8011BAC0(s32 arg0, s32 arg1, s32 arg2, s8 arg3) {
         var_s0++;
     }
 
-    var_s0->id = arg0;
+    var_s0->id = id;
     var_s0->unk_04 = 0;
     var_s0->unk_08 = 0;
     var_s0->unk_0C = arg1;
@@ -1762,30 +1774,30 @@ void func_i6_8011BAC0(s32 arg0, s32 arg1, s32 arg2, s8 arg3) {
     var_s0->unk_1C = 0;
     var_s0->unk_20 = 0;
 
-    switch (arg0) {
-        case 0x99:
+    switch (id) {
+        case OBJECT_153:
             func_i6_80117EE0(var_s0);
             break;
-        case 0xC0:
+        case OBJECT_192:
             func_i6_80117F2C(var_s0);
             break;
-        case 0xC1:
+        case OBJECT_193:
             func_i6_80117FA8(var_s0);
             break;
-        case 0xC2:
+        case OBJECT_194:
             func_i6_80117FE0();
             break;
-        case 0xC3:
+        case OBJECT_195:
             func_i6_80118008(var_s0);
             break;
-        case 0xC4:
+        case OBJECT_196:
             func_i6_80118044();
             break;
-        case 0xC5:
+        case OBJECT_197:
             func_i6_8011806C(var_s0);
             break;
-        case 0xBE:
-        case 0xBF:
+        case OBJECT_190:
+        case OBJECT_191:
         default:
             break;
     }
@@ -1803,113 +1815,113 @@ Gfx* func_i6_8011BBE4(Gfx* gfx) {
             }
 
             switch (D_800E3A28[j].id) {
-                case 0:
+                case OBJECT_FREE:
                     break;
-                case 0x5:
+                case OBJECT_5:
                     gfx = func_8007AB88(gfx);
                     gfx = func_8007AE70(gfx);
                     gfx = func_8007ABA4(gfx);
                     break;
-                case 0x96:
+                case OBJECT_150:
                     gfx = func_8007AC48(gfx, 0, 0, 0);
                     break;
-                case 0x99:
+                case OBJECT_153:
                     gfx = func_i6_801182DC(gfx, &D_800E3A28[j]);
                     break;
-                case 0xBF:
+                case OBJECT_191:
                     gfx = func_8007AC48(gfx, 0, 0, 0);
                     break;
-                case 0xC0:
+                case OBJECT_192:
                     gfx = func_i6_80118354(gfx, &D_800E3A28[j]);
                     break;
-                case 0xC1:
+                case OBJECT_193:
                     gfx = func_i6_80118ED4(gfx, &D_800E3A28[j]);
                     break;
-                case 0xC2:
+                case OBJECT_194:
                     gfx = func_i6_8011946C(gfx, &D_800E3A28[j]);
                     break;
-                case 0xC3:
+                case OBJECT_195:
                     gfx = func_i6_80119908(gfx, &D_800E3A28[j]);
                     break;
-                case 0xC4:
+                case OBJECT_196:
                     gfx = func_i6_8011A248(gfx, &D_800E3A28[j]);
                     break;
-                case 0xC5:
+                case OBJECT_197:
                     gfx = func_i6_8011A59C(gfx, &D_800E3A28[j]);
                     break;
-                case 0xC6:
-                case 0xC7:
-                case 0xC8:
-                case 0xC9:
-                case 0xCA:
-                case 0xCB:
-                case 0xCC:
-                case 0xCD:
-                case 0xCE:
-                case 0xCF:
-                case 0xD0:
-                case 0xD1:
-                case 0xD2:
-                case 0xD3:
-                case 0xD4:
-                case 0xD5:
-                case 0xD6:
-                case 0xD7:
+                case OBJECT_198_0:
+                case OBJECT_198_1:
+                case OBJECT_198_2:
+                case OBJECT_198_3:
+                case OBJECT_198_4:
+                case OBJECT_198_5:
+                case OBJECT_198_6:
+                case OBJECT_198_7:
+                case OBJECT_198_8:
+                case OBJECT_198_9:
+                case OBJECT_198_10:
+                case OBJECT_198_11:
+                case OBJECT_198_12:
+                case OBJECT_198_13:
+                case OBJECT_198_14:
+                case OBJECT_198_15:
+                case OBJECT_198_16:
+                case OBJECT_198_17:
                     gfx = func_i6_8011A6CC(gfx, &D_800E3A28[j]);
                     break;
-                case 0xD8:
-                case 0xD9:
-                case 0xDA:
-                case 0xDB:
-                case 0xDC:
-                case 0xDD:
-                case 0xDE:
-                case 0xDF:
-                case 0xE0:
-                case 0xE1:
-                case 0xE2:
-                case 0xE3:
-                case 0xE4:
+                case OBJECT_216_0:
+                case OBJECT_216_1:
+                case OBJECT_216_2:
+                case OBJECT_216_3:
+                case OBJECT_216_4:
+                case OBJECT_216_5:
+                case OBJECT_216_6:
+                case OBJECT_216_7:
+                case OBJECT_216_8:
+                case OBJECT_216_9:
+                case OBJECT_216_10:
+                case OBJECT_216_11:
+                case OBJECT_216_12:
                     gfx = func_i6_8011A890(gfx, &D_800E3A28[j]);
                     break;
-                case 0xE6:
-                case 0xE7:
-                case 0xE8:
-                case 0xE9:
-                case 0xEA:
-                case 0xEB:
-                case 0xEC:
-                case 0xED:
-                case 0xEE:
-                case 0xEF:
-                case 0xF0:
-                case 0xF1:
-                case 0xF2:
-                case 0xF3:
-                case 0xF4:
-                case 0xF5:
-                case 0xF6:
-                case 0xF7:
+                case OBJECT_230_0:
+                case OBJECT_230_1:
+                case OBJECT_230_2:
+                case OBJECT_230_3:
+                case OBJECT_230_4:
+                case OBJECT_230_5:
+                case OBJECT_230_6:
+                case OBJECT_230_7:
+                case OBJECT_230_8:
+                case OBJECT_230_9:
+                case OBJECT_230_10:
+                case OBJECT_230_11:
+                case OBJECT_230_12:
+                case OBJECT_230_13:
+                case OBJECT_230_14:
+                case OBJECT_230_15:
+                case OBJECT_230_16:
+                case OBJECT_230_17:
                     gfx = func_i6_8011A944(gfx, &D_800E3A28[j]);
                     break;
-                case 0xF8:
-                case 0xF9:
-                case 0xFA:
-                case 0xFB:
-                case 0xFC:
-                case 0xFD:
-                case 0xFE:
-                case 0xFF:
-                case 0x100:
-                case 0x101:
-                case 0x102:
-                case 0x103:
-                case 0x104:
-                case 0x105:
-                case 0x106:
-                case 0x107:
-                case 0x108:
-                case 0x109:
+                case OBJECT_248_0:
+                case OBJECT_248_1:
+                case OBJECT_248_2:
+                case OBJECT_248_3:
+                case OBJECT_248_4:
+                case OBJECT_248_5:
+                case OBJECT_248_6:
+                case OBJECT_248_7:
+                case OBJECT_248_8:
+                case OBJECT_248_9:
+                case OBJECT_248_10:
+                case OBJECT_248_11:
+                case OBJECT_248_12:
+                case OBJECT_248_13:
+                case OBJECT_248_14:
+                case OBJECT_248_15:
+                case OBJECT_248_16:
+                case OBJECT_248_17:
                     gfx = func_i6_8011AAC8(gfx, &D_800E3A28[j]);
                     break;
             }
@@ -1924,105 +1936,105 @@ void func_i6_8011BE1C(void) {
     for (i = 0; i < 32; i++) {
 
         switch (D_800E3A28[i].id) {
-            case 0:
+            case OBJECT_FREE:
                 break;
-            case 0x99:
+            case OBJECT_153:
                 func_i6_8011AB1C(&D_800E3A28[i]);
                 break;
-            case 0xBE:
+            case OBJECT_190:
                 func_i6_8011B0CC(&D_800E3A28[i]);
                 break;
-            case 0xC0:
+            case OBJECT_192:
                 func_i6_8011AC38(&D_800E3A28[i]);
                 break;
-            case 0xC5:
+            case OBJECT_197:
                 func_i6_8011AEB4(&D_800E3A28[i]);
                 break;
-            case 0xC6:
-            case 0xC7:
-            case 0xC8:
-            case 0xC9:
-            case 0xCA:
-            case 0xCB:
-            case 0xCC:
-            case 0xCD:
-            case 0xCE:
-            case 0xCF:
-            case 0xD0:
-            case 0xD1:
-            case 0xD2:
-            case 0xD3:
-            case 0xD4:
-            case 0xD5:
-            case 0xD6:
-            case 0xD7:
+            case OBJECT_198_0:
+            case OBJECT_198_1:
+            case OBJECT_198_2:
+            case OBJECT_198_3:
+            case OBJECT_198_4:
+            case OBJECT_198_5:
+            case OBJECT_198_6:
+            case OBJECT_198_7:
+            case OBJECT_198_8:
+            case OBJECT_198_9:
+            case OBJECT_198_10:
+            case OBJECT_198_11:
+            case OBJECT_198_12:
+            case OBJECT_198_13:
+            case OBJECT_198_14:
+            case OBJECT_198_15:
+            case OBJECT_198_16:
+            case OBJECT_198_17:
                 func_i6_8011B340(&D_800E3A28[i]);
                 break;
-            case 0xD8:
-            case 0xD9:
-            case 0xDA:
-            case 0xDB:
-            case 0xDC:
-            case 0xDD:
-            case 0xDE:
-            case 0xDF:
-            case 0xE0:
-            case 0xE1:
-            case 0xE2:
-            case 0xE3:
-            case 0xE4:
+            case OBJECT_216_0:
+            case OBJECT_216_1:
+            case OBJECT_216_2:
+            case OBJECT_216_3:
+            case OBJECT_216_4:
+            case OBJECT_216_5:
+            case OBJECT_216_6:
+            case OBJECT_216_7:
+            case OBJECT_216_8:
+            case OBJECT_216_9:
+            case OBJECT_216_10:
+            case OBJECT_216_11:
+            case OBJECT_216_12:
                 func_i6_8011B50C(&D_800E3A28[i]);
                 break;
-            case 0xE6:
-            case 0xE7:
-            case 0xE8:
-            case 0xE9:
-            case 0xEA:
-            case 0xEB:
-            case 0xEC:
-            case 0xED:
-            case 0xEE:
-            case 0xEF:
-            case 0xF0:
-            case 0xF1:
-            case 0xF2:
-            case 0xF3:
-            case 0xF4:
-            case 0xF5:
-            case 0xF6:
-            case 0xF7:
+            case OBJECT_230_0:
+            case OBJECT_230_1:
+            case OBJECT_230_2:
+            case OBJECT_230_3:
+            case OBJECT_230_4:
+            case OBJECT_230_5:
+            case OBJECT_230_6:
+            case OBJECT_230_7:
+            case OBJECT_230_8:
+            case OBJECT_230_9:
+            case OBJECT_230_10:
+            case OBJECT_230_11:
+            case OBJECT_230_12:
+            case OBJECT_230_13:
+            case OBJECT_230_14:
+            case OBJECT_230_15:
+            case OBJECT_230_16:
+            case OBJECT_230_17:
                 func_i6_8011B544(&D_800E3A28[i]);
                 break;
-            case 0xF8:
-            case 0xF9:
-            case 0xFA:
-            case 0xFB:
-            case 0xFC:
-            case 0xFD:
-            case 0xFE:
-            case 0xFF:
-            case 0x100:
-            case 0x101:
-            case 0x102:
-            case 0x103:
-            case 0x104:
-            case 0x105:
-            case 0x106:
-            case 0x107:
-            case 0x108:
-            case 0x109:
+            case OBJECT_248_0:
+            case OBJECT_248_1:
+            case OBJECT_248_2:
+            case OBJECT_248_3:
+            case OBJECT_248_4:
+            case OBJECT_248_5:
+            case OBJECT_248_6:
+            case OBJECT_248_7:
+            case OBJECT_248_8:
+            case OBJECT_248_9:
+            case OBJECT_248_10:
+            case OBJECT_248_11:
+            case OBJECT_248_12:
+            case OBJECT_248_13:
+            case OBJECT_248_14:
+            case OBJECT_248_15:
+            case OBJECT_248_16:
+            case OBJECT_248_17:
                 func_i6_8011B668(&D_800E3A28[i]);
                 break;
-            case 0xC1:
+            case OBJECT_193:
                 func_i6_8011B6A0(&D_800E3A28[i]);
                 break;
-            case 0xC2:
+            case OBJECT_194:
                 func_i6_8011B7B0(&D_800E3A28[i]);
                 break;
-            case 0xC3:
+            case OBJECT_195:
                 func_i6_8011B860(&D_800E3A28[i]);
                 break;
-            case 0xC4:
+            case OBJECT_196:
                 func_i6_8011BAB8(&D_800E3A28[i]);
                 break;
         }
@@ -2033,9 +2045,9 @@ extern s16 D_800CCFE8;
 
 void func_i6_8011BF50(void) {
     D_800CCFE8 = 3;
-    func_800794B0(5, 0, 0, 1);
-    func_i6_8011BAC0(0xBF, 0, 0, 1);
-    func_i6_8011BAC0(0xC3, 0, 0, 8);
+    func_800794B0(OBJECT_5, 0, 0, 1);
+    func_i6_8011BAC0(OBJECT_191, 0, 0, 1);
+    func_i6_8011BAC0(OBJECT_195, 0, 0, 8);
 }
 
 extern s32 gGameMode;
@@ -2071,7 +2083,7 @@ void func_i6_8011C050(void) {
     OptionsInfo* option;
 
     D_800CCFE8 = 3;
-    func_800794B0(5, 0, 0, 1);
+    func_800794B0(OBJECT_5, 0, 0, 1);
     func_80078104(aMenuTextTLUT, 0x40, 0, 0, false);
     func_80078104(aOptionsFalconHelmetTex, 0x2000, 0, 1, false);
     func_80078104(aOptionsTex, 0x900, 0, 1, false);

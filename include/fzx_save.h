@@ -4,11 +4,11 @@
 #include "unk_structs.h"
 
 typedef enum GhostType {
-    GHOST_NONE,
-    GHOST_PLAYER,
-    GHOST_STAFF,
-    GHOST_CELEBRITY,
-    GHOST_CHAMP,
+    /* 0 */ GHOST_NONE,
+    /* 1 */ GHOST_PLAYER,
+    /* 2 */ GHOST_STAFF,
+    /* 3 */ GHOST_CELEBRITY,
+    /* 4 */ GHOST_CHAMP,
 } GhostType;
 
 typedef struct SaveCourseRecords {

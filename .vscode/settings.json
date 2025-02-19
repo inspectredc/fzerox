@@ -121,7 +121,8 @@
     "course_data.h": "c",
     "fzx_course.h": "c",
     "fzx_math.h": "c",
-    "segment_1b8550.h": "c"
+    "segment_1b8550.h": "c",
+    "fzx_object.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"

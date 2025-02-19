@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzx_game.h"
+#include "fzx_object.h"
 #include "ovl_i5.h"
 #include "assets/segment_2B9EA0.h"
 
@@ -220,8 +221,8 @@ void func_i5_80116934(void) {
     }
 
     func_80085610();
-    func_800794B0(5, 0, 0, 1);
-    func_800794B0(120, 0, 0, 2);
+    func_800794B0(OBJECT_5, 0, 0, 1);
+    func_800794B0(OBJECT_120, 0, 0, 2);
     if (gGameMode != GAMEMODE_8013) {
         var_a1 = 80;
         var_a2 = 17;
@@ -229,30 +230,30 @@ void func_i5_80116934(void) {
         var_a1 = 112;
         var_a2 = 21;
     }
-    func_800794B0(0x83, var_a1, var_a2, 4);
-    func_800794B0(0x80, 0, 0, 10);
-    func_800794B0(0x79, 0, 0, 8);
+    func_800794B0(OBJECT_131, var_a1, var_a2, 4);
+    func_800794B0(OBJECT_128, 0, 0, 10);
+    func_800794B0(OBJECT_121, 0, 0, 8);
     if (((gSettingEverythingUnlocked != 0) || (D_800CD3C0 >= 2)) && (gGameMode != GAMEMODE_8013) && (D_800CD380 != 1)) {
-        func_800794B0(0x7E, 0, -100, 6);
+        func_800794B0(OBJECT_122_4, 0, -100, 6);
     }
     if ((D_800CD3C0 > 0) || (gSettingEverythingUnlocked != 0)) {
-        func_800794B0(0x7D, 0, -100, 6);
+        func_800794B0(OBJECT_122_3, 0, -100, 6);
     }
-    func_800794B0(0x7C, 0, -100, 6);
-    func_800794B0(0x7B, 0, -100, 6);
-    func_800794B0(0x7A, 0, -100, 6);
+    func_800794B0(OBJECT_122_2, 0, -100, 6);
+    func_800794B0(OBJECT_122_1, 0, -100, 6);
+    func_800794B0(OBJECT_122_0, 0, -100, 6);
     if (D_800CD380 != 0) {
-        func_800794B0(0x81, 0, 0, 8);
+        func_800794B0(OBJECT_129, 0, 0, 8);
     }
-    func_800794B0(0x82, 0, 0, 8);
+    func_800794B0(OBJECT_130, 0, 0, 8);
     switch (D_800CD380) {
         case 1:
             if (gGameMode != GAMEMODE_8013) {
-                func_800794B0(0x85, 0, 0, 10);
+                func_800794B0(OBJECT_133, 0, 0, 10);
             }
             /* fallthrough */
         case 2:
-            func_800794B0(0x84, 190, 160, 10);
+            func_800794B0(OBJECT_132, 190, 160, 10);
             break;
     }
 }
@@ -280,15 +281,15 @@ void func_i5_80116D00(void) {
         sCourseSelectCup = gCupSelectOption;
     }
     func_80085610();
-    func_800794B0(5, 0, 0, 1);
-    func_800794B0(0x78, 0, 0, 2);
-    func_800794B0(0x79, 0, 0, 8);
+    func_800794B0(OBJECT_5, 0, 0, 1);
+    func_800794B0(OBJECT_120, 0, 0, 2);
+    func_800794B0(OBJECT_121, 0, 0, 8);
     if (gCupSelectOption >= 10) {
-        func_800794B0(0x7F, 0, -100, 6);
+        func_800794B0(OBJECT_122_5, 0, -100, 6);
     } else {
-        func_800794B0(gCupSelectOption + 0x7A, 0, -100, 6);
+        func_800794B0(OBJECT_122_0 + gCupSelectOption, 0, -100, 6);
     }
-    func_800794B0(0x82, 0, 0, 8);
+    func_800794B0(OBJECT_130, 0, 0, 8);
 }
 
 void func_i5_80116658(s32 arg0);
@@ -384,7 +385,7 @@ s32 func_i5_80116EEC(void) {
                     D_i5_801190C0 = 3;
                 } else if (D_800CD380 == 0) {
                     if (gCupSelectOption >= 10) {
-                        gCourseIndex = 0x18;
+                        gCourseIndex = 24;
                     } else {
                         gCourseIndex = gCupSelectOption * 6;
                     }
@@ -393,7 +394,7 @@ s32 func_i5_80116EEC(void) {
                 } else {
                     D_i5_801190C0 = 2;
                 }
-                func_80079E88(0x79)->unk_0C = 0x190 - (sCourseSelectTrackNo * 0x500);
+                func_80079E88(OBJECT_121)->unk_0C = 0x190 - (sCourseSelectTrackNo * 0x500);
             }
             break;
         case 2:
@@ -419,7 +420,7 @@ s32 func_i5_80116EEC(void) {
             if ((gInputPressed & BTN_LEFT) && (sCourseSelectTrackNo > 0)) {
                 sCourseSelectTrackNo--;
                 D_800E5220[0].unk_18 = 1;
-                temp_v0_2 = func_80079E88(0x81);
+                temp_v0_2 = func_80079E88(OBJECT_129);
                 temp_v0_2->unk_04 += 0x200;
                 func_800BA8D8(30);
             }
@@ -427,12 +428,12 @@ s32 func_i5_80116EEC(void) {
             if ((gInputPressed & BTN_RIGHT) && (sCourseSelectTrackNo < 5)) {
                 sCourseSelectTrackNo++;
                 D_800E5220[0].unk_18 = 1;
-                temp_v0_2 = func_80079E88(0x81);
+                temp_v0_2 = func_80079E88(OBJECT_129);
                 temp_v0_2->unk_08 += 0x200;
                 func_800BA8D8(30);
             }
             if (gCupSelectOption >= 10) {
-                gCourseIndex = sCourseSelectTrackNo + 0x18;
+                gCourseIndex = sCourseSelectTrackNo + 24;
             } else {
                 gCourseIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
             }
@@ -551,7 +552,7 @@ void func_i5_801177EC(unk_800E3A28* arg0) {
     s32 var_v0;
     s32 i;
 
-    cupType = arg0->id - 0x7A;
+    cupType = arg0->id - OBJECT_122_0;
     if (cupType == JOKER_CUP || cupType == X_CUP) {
         var_v0 = D_800CD3C0;
         if ((var_v0 >= 3) || (gSettingEverythingUnlocked != 0)) {
@@ -599,10 +600,10 @@ void func_i5_801179A8(unk_800E3A28* arg0) {
     s32 pad;
 
     if (Save_LoadGhostInfo(&sp20) != 0) {
-        arg0->id = 0;
+        arg0->id = OBJECT_FREE;
     }
     if (sp20.encodedCourseIndex == 0) {
-        arg0->id = 0;
+        arg0->id = OBJECT_FREE;
     }
     arg0->unk_0C += (sp20.courseIndex % 6) * 320;
     arg0->unk_04 = sp20.courseIndex;
@@ -667,7 +668,7 @@ Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
     s32 sp80;
     s32 var_v1;
 
-    i = arg1->id - 0x7A;
+    i = arg1->id - OBJECT_122_0;
     if (gCupSelectOption >= 10) {
         var_s1 = EDIT_CUP;
     } else {
@@ -918,7 +919,7 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
         return;
     }
 
-    var_v1 = arg0->id - 0x7A;
+    var_v1 = arg0->id - OBJECT_122_0;
     switch (arg0->unk_04) {
         case 0:
             if (var_v1 != 5) {
@@ -1081,7 +1082,7 @@ void func_i5_80118D94(unk_800E3A28* arg0) {
 void func_i5_80118F24(unk_800E3A28* arg0) {
     s32 temp_v1;
 
-    arg0->unk_1C = func_80079E88(0x79)->unk_0C >> 2;
+    arg0->unk_1C = func_80079E88(OBJECT_121)->unk_0C >> 2;
     temp_v1 = arg0->unk_0C + arg0->unk_1C;
 
     if ((temp_v1 < -30) || (temp_v1 > 320)) {
