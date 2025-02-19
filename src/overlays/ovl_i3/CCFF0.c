@@ -941,7 +941,7 @@ void func_i3_8013D214(CourseRecordInfo* arg0) {
 
         arg0->name[D_800E5FE2 - 1][i] = var_v1;
     }
-    func_i2_80101118(gCourseIndex);
+    Save_SaveCourseRecordProfiles(gCourseIndex);
 }
 
 signed char D_i3_80140F84[] = "NAME ENTRY";

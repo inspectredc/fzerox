@@ -57,10 +57,10 @@ u8* sWinnerPalette;
 u8* sLoserTexture;
 u8* sLoserPalette;
 s32 D_80141C78;
-s32 D_i3_80141C7C;
-s32 D_i3_80141C80;
+s32 sFastestGhostTime;
+s32 sFastestGhostIndex;
 s32 D_i3_80141C84;
-unk_80141C88 D_i3_80141C88;
+GhostInfo gSavedGhostInfo;
 f32 D_i3_80141CC8;
 s32 D_i3_80141CD0[4];
 s32 D_i3_80141CE0[4];
@@ -195,7 +195,7 @@ extern s16 D_80115D50[];
 
 void func_i3_8013BF50(s32);
 void func_i3_8013C008(void);
-void func_i2_801016DC(void);
+void Save_SaveDeathRaceProfiles(void);
 
 void func_i3_8011AEA0(void) {
     s32 i;
@@ -223,13 +223,13 @@ void func_i3_8011AEA0(void) {
                     func_i3_8013C008();
                 }
                 if (gCourseIndex < 0x18) {
-                    func_i2_80101118(gCourseIndex);
+                    Save_SaveCourseRecordProfiles(gCourseIndex);
                 }
             } else if (gGameMode == GAMEMODE_GP_RACE) {
                 func_i3_8013BF50(gCourseIndex);
             } else if (gGameMode == GAMEMODE_DEATH_RACE) {
                 func_80089BD0();
-                func_i2_801016DC();
+                Save_SaveDeathRaceProfiles();
             }
             D_i3_801419A0 = 1;
         }
@@ -1971,7 +1971,7 @@ Gfx* func_i3_SetOptionColor(Gfx* gfx, s32 arg1) {
 }
 
 extern Ghost gGhosts[];
-extern Ghost* D_800F1E78;
+extern Ghost* gFastestGhost;
 
 void func_i3_80122C3C(void) {
 
@@ -1979,29 +1979,29 @@ void func_i3_80122C3C(void) {
         D_i3_80141C84 = -1;
         D_80141C78 = MAX_TIMER;
     } else {
-        D_i3_80141C84 = D_800F5E90->unk_04 - gGhosts;
-        D_80141C78 = D_800F5E90->unk_04->raceTime;
+        D_i3_80141C84 = D_800F5E90->ghost - gGhosts;
+        D_80141C78 = D_800F5E90->ghost->raceTime;
     }
-    if (D_800F1E78 == NULL) {
-        D_i3_80141C80 = -1;
+    if (gFastestGhost == NULL) {
+        sFastestGhostIndex = -1;
         return;
     }
-    D_i3_80141C80 = D_800F1E78 - gGhosts;
-    D_i3_80141C7C = D_800F1E78->raceTime;
+    sFastestGhostIndex = gFastestGhost - gGhosts;
+    sFastestGhostTime = gFastestGhost->raceTime;
 }
 
-void func_i2_80101690(s32, Ghost*);
+void Save_SaveGhost(s32, Ghost*);
 
 s32 func_i3_80122CEC(void) {
     func_i3_80122C3C();
-    if (D_i3_80141C80 == -1) {
+    if (sFastestGhostIndex == -1) {
         sCannotSaveGhost = true;
         sSaveGhostMenuOpen = false;
         return -1;
     }
-    if (func_i2_801014D4(&D_i3_80141C88) != 0) {
-        if (gCourseIndex < 0x18) {
-            func_i2_80101690(gCourseIndex, D_800F1E78);
+    if (Save_LoadGhostInfo(&gSavedGhostInfo) != 0) {
+        if (gCourseIndex < 24) {
+            Save_SaveGhost(gCourseIndex, gFastestGhost);
         }
         sSaveGhostMenuOpen = false;
         sGhostSaveTimer = 60;
@@ -2017,15 +2017,15 @@ s32 func_i3_80122D88(void) {
         return 0;
     }
     func_i3_80122C3C();
-    if (D_i3_80141C80 == -1) {
+    if (sFastestGhostIndex == -1) {
         sCannotSaveGhost = true;
         sSaveGhostMenuOpen = false;
         return -1;
     }
-    if (func_i2_801014D4(&D_i3_80141C88) != 0) {
+    if (Save_LoadGhostInfo(&gSavedGhostInfo) != 0) {
         return 0;
     }
-    if ((D_i3_80141C88.courseIndex == gCourseIndex) && (D_i3_80141C7C >= D_i3_80141C88.raceTime)) {
+    if ((gSavedGhostInfo.courseIndex == gCourseIndex) && (sFastestGhostTime >= gSavedGhostInfo.raceTime)) {
         sCannotSaveGhost = true;
     }
     return 0;
@@ -2103,8 +2103,8 @@ Gfx* func_i3_DrawGhostSave(Gfx* gfx) {
     gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gfx = func_i3_DrawTimerScisThousandths(gfx, D_i3_80141C7C, 115, 77, 1.0f);
-    gfx = func_i3_DrawTimerScisThousandths(gfx, D_i3_80141C88.raceTime, 115, 141, 1.0f);
+    gfx = func_i3_DrawTimerScisThousandths(gfx, sFastestGhostTime, 115, 77, 1.0f);
+    gfx = func_i3_DrawTimerScisThousandths(gfx, gSavedGhostInfo.raceTime, 115, 141, 1.0f);
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
@@ -2113,24 +2113,24 @@ Gfx* func_i3_DrawGhostSave(Gfx* gfx) {
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
     gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(gCurrentTrackName, 6, 1) / 2), 77, gCurrentTrackName, 1, 6, 0);
 
-    if ((D_i3_80141C88.courseIndex >= 0) && (D_i3_80141C88.courseIndex < 24)) {
+    if ((gSavedGhostInfo.courseIndex >= 0) && (gSavedGhostInfo.courseIndex < 24)) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-        gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(gTrackNames[D_i3_80141C88.courseIndex], 6, 1) / 2), 142,
-                               gTrackNames[D_i3_80141C88.courseIndex], 1, 6, 0);
+        gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(gTrackNames[gSavedGhostInfo.courseIndex], 6, 1) / 2), 142,
+                               gTrackNames[gSavedGhostInfo.courseIndex], 1, 6, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-        gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(gTrackNames[D_i3_80141C88.courseIndex], 6, 1) / 2), 141,
-                               gTrackNames[D_i3_80141C88.courseIndex], 1, 6, 0);
+        gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(gTrackNames[gSavedGhostInfo.courseIndex], 6, 1) / 2), 141,
+                               gTrackNames[gSavedGhostInfo.courseIndex], 1, 6, 0);
     } else {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-        gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(D_i3_80141C88.trackName, 6, 1) / 2), 142,
-                               D_i3_80141C88.trackName, 1, 6, 0);
+        gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(gSavedGhostInfo.trackName, 6, 1) / 2), 142,
+                               gSavedGhostInfo.trackName, 1, 6, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-        gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(D_i3_80141C88.trackName, 6, 1) / 2), 141,
-                               D_i3_80141C88.trackName, 1, 6, 0);
+        gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(gSavedGhostInfo.trackName, 6, 1) / 2), 141,
+                               gSavedGhostInfo.trackName, 1, 6, 0);
     }
 
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
@@ -2162,7 +2162,7 @@ Gfx* func_i3_DrawGhostSave(Gfx* gfx) {
             if (D_800CD010 == 0) {
                 func_800BA8D8(0x21);
             }
-            func_i2_80101690(gCourseIndex, D_800F1E78);
+            Save_SaveGhost(gCourseIndex, gFastestGhost);
             sSaveGhostMenuOpen = false;
             sGhostSaveTimer = 60;
         }

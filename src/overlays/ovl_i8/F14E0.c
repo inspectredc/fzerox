@@ -167,9 +167,9 @@ bool func_i8_80143D84(s32 arg0) {
     s32 pad;
     bool ret = false;
     s32 pad2[2];
-    unk_80141C88 sp18;
+    GhostInfo sp18;
 
-    func_i2_801014D4(&sp18);
+    Save_LoadGhostInfo(&sp18);
 
     if (sp18.encodedCourseIndex == gCourseRecordInfos[arg0].encodedCourseIndex) {
         ret = true;
@@ -404,7 +404,7 @@ void func_i8_801443D0(void) {
                 if (D_i8_80144FCE == 0) {
                     func_i2_801017B8(gCourseIndex);
                 } else if (D_i8_80144FCE == 1) {
-                    func_i2_801018A8(gCourseIndex);
+                    Save_InitGhost(gCourseIndex);
                     D_i8_80144FD0 = 2;
                 }
                 D_i8_80144FB8[D_i8_80144FC8] = 0;

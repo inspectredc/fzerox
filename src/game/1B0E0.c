@@ -68,7 +68,7 @@ Vec3s* D_800E5FE8;
 Vec3s* D_800E5FEC;
 s32 D_800E5FF0;
 Ghost gGhosts[3];
-Ghost* D_800F1E78;
+Ghost* gFastestGhost;
 s8 sGhostReplayRecordingBuffer[16200];
 s32 sGhostReplayRecordingSize;
 s32 sGhostReplayRecordingEnd;
@@ -3900,7 +3900,7 @@ void func_80089BD0(void) {
     s32 var_a1_3;
     s32* var_a0_3;
     s32* var_v1_10;
-    Ghost* temp_a1;
+    Ghost* ghost;
 
     if (D_800F5DE8 != 0) {
         for (i = 0; i < 5; i++) {
@@ -4009,35 +4009,35 @@ void func_80089BD0(void) {
         }
 
         if (j < 3) {
-            temp_a1 = &gGhosts[j];
+            ghost = &gGhosts[j];
 
             for (i = 0; i < 3; i++) {
-                if (temp_a1 == D_800F5DF0[i].unk_04) {
+                if (ghost == D_800F5DF0[i].ghost) {
                     D_800F5DF0[i].unk_12 = D_800F5DF0[i].unk_10 = 0;
                 }
             }
-            temp_a1->ghostType = GHOST_PLAYER;
-            temp_a1->encodedCourseIndex = gCurrentCourseRecordInfo->encodedCourseIndex;
-            temp_a1->raceTime = gRacers[0].raceTime;
+            ghost->ghostType = GHOST_PLAYER;
+            ghost->encodedCourseIndex = gCurrentCourseRecordInfo->encodedCourseIndex;
+            ghost->raceTime = gRacers[0].raceTime;
 
             for (i = 0; i < 3; i++) {
-                temp_a1->lapTimes[i] = gRacers[0].lapTimes[i];
+                ghost->lapTimes[i] = gRacers[0].lapTimes[i];
             }
 
-            temp_a1->replayEnd = sGhostReplayRecordingEnd;
-            temp_a1->replaySize = sGhostReplayRecordingSize;
+            ghost->replayEnd = sGhostReplayRecordingEnd;
+            ghost->replaySize = sGhostReplayRecordingSize;
 
-            func_80089A74(&temp_a1->carInfo);
+            func_80089A74(&ghost->carInfo);
 
             i = (sGhostReplayRecordingSize - 1) & ~3;
             var_v1_10 = (s32*) &sGhostReplayRecordingBuffer[i];
-            var_a0_3 = (s32*) &temp_a1->replayData[i];
-            temp_a1->replayChecksum = 0;
+            var_a0_3 = (s32*) &ghost->replayData[i];
+            ghost->replayChecksum = 0;
             do {
-                temp_a1->replayChecksum += * var_a0_3-- = *var_v1_10--;
+                ghost->replayChecksum += * var_a0_3-- = *var_v1_10--;
             } while (var_v1_10 >= (s32*) sGhostReplayRecordingBuffer);
-            if ((D_800F1E78 == NULL) || (temp_a1->raceTime < D_800F1E78->raceTime)) {
-                D_800F1E78 = temp_a1;
+            if ((gFastestGhost == NULL) || (ghost->raceTime < gFastestGhost->raceTime)) {
+                gFastestGhost = ghost;
             }
         }
     }
@@ -4784,7 +4784,7 @@ void func_8008C7C8(void) {
     }
     D_800E5FE2 = D_800E5FE4 = D_800E5FE6 = D_800F5DE4 = D_800F5DEA = D_800F5DE8 = 0;
     D_800F5E90 = NULL;
-    D_800F1E78 = NULL;
+    gFastestGhost = NULL;
     if (gGameMode == GAMEMODE_TIME_ATTACK) {
         D_800F5DD8 = Math_Round(gRacers[0].unk_0C.unk_34.x);
         D_800F5DDC = Math_Round(gRacers[0].unk_0C.unk_34.y);
@@ -4801,7 +4801,7 @@ void func_8008C7C8(void) {
                 if (gGhosts[i].ghostType == GHOST_PLAYER) {
                     if (gGhosts[i].raceTime < var_t0) {
                         var_t0 = gGhosts[i].raceTime;
-                        D_800F1E78 = &gGhosts[i];
+                        gFastestGhost = &gGhosts[i];
                     }
                 }
                 if (gGhosts[i].ghostType != gCurrentGhostType) {
@@ -4815,7 +4815,7 @@ void func_8008C7C8(void) {
                     D_800F5E90 = temp_s0_2;
                 }
                 temp_s0_2->unk_12 = 1;
-                temp_s0_2->unk_04 = &gGhosts[i];
+                temp_s0_2->ghost = &gGhosts[i];
                 temp_s0_2->unk_08 = gGhosts[i].replayData;
                 temp_s0_2->unk_00 = 0;
                 temp_s0_2->unk_0C = 0;
@@ -4829,9 +4829,9 @@ void func_8008C7C8(void) {
                 var_s1_2 = temp_s0_2->unk_30;
 
                 var_s1_2->id = i + 1;
-                var_s1_2->character = temp_s0_2->unk_04->carInfo.unk_00[0];
+                var_s1_2->character = temp_s0_2->ghost->carInfo.unk_00[0];
 
-                if (func_8008B23C(&temp_s0_2->unk_04->carInfo, &sp6C) != 0) {
+                if (func_8008B23C(&temp_s0_2->ghost->carInfo, &sp6C) != 0) {
                     var_s1_2->unk_2C9 = i + 7;
                 } else {
                     var_s1_2->unk_2C9 = gRacers[0].unk_2C9;
@@ -4839,9 +4839,9 @@ void func_8008C7C8(void) {
 
                 var_s1_2->unk_2CA = D_800F80C8[var_s1_2->character].unk_02;
                 var_s1_2->unk_2CB = D_800F80C8[var_s1_2->character].unk_03;
-                var_s1_2->unk_2CE = temp_s0_2->unk_04->carInfo.unk_00[8];
-                var_s1_2->unk_2D0 = temp_s0_2->unk_04->carInfo.unk_00[9];
-                var_s1_2->unk_2D2 = temp_s0_2->unk_04->carInfo.unk_00[10];
+                var_s1_2->unk_2CE = temp_s0_2->ghost->carInfo.unk_00[8];
+                var_s1_2->unk_2D0 = temp_s0_2->ghost->carInfo.unk_00[9];
+                var_s1_2->unk_2D2 = temp_s0_2->ghost->carInfo.unk_00[10];
             }
         }
         sGhostReplayRecordingPtr = sGhostReplayRecordingBuffer;
@@ -6466,11 +6466,11 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
     }
     arg0->unk_278++;
     arg0->unk_27A++;
-    if (buttonPressed & 0x80) {
+    if (buttonPressed & STICK_UP) {
         buttonPressed |= BTN_Z;
         buttonCurrent |= BTN_R;
         arg0->unk_278 = 10;
-    } else if (buttonPressed & 0x40) {
+    } else if (buttonPressed & STICK_DOWN) {
         buttonCurrent |= BTN_Z;
         buttonPressed |= BTN_R;
         arg0->unk_27A = 10;

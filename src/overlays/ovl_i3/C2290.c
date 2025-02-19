@@ -1525,7 +1525,7 @@ Gfx* func_i3_UpdateRaceIntervalInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerNum
 
         if (gGameMode == GAMEMODE_TIME_ATTACK) {
             for (i = 0; i < completedLaps; i++) {
-                sLeadRivalRaceTime[playerNum] += D_800F5E90->unk_04->lapTimes[i];
+                sLeadRivalRaceTime[playerNum] += D_800F5E90->ghost->lapTimes[i];
             }
         } else {
             for (i = 0; i < completedLaps; i++) {
@@ -1748,7 +1748,7 @@ void func_i3_ReplaceCharacterPortrait(s32 character) {
     textureOffset = textureIndex * 0x800;
     romOffset = (SEGMENT_ROM_START(segment_2747F0) + SEGMENT_OFFSET(D_276FF0)) + textureOffset;
 
-    func_80073FA0(romOffset, vramOffset, 0x800);
+    Dma_LoadAssetsAsync(romOffset, vramOffset, 0x800);
 }
 
 void func_i3_UpdateCharacterPortraits(void) {

@@ -2666,7 +2666,7 @@ void Dma_ClearRomCopy(void* romAddr, void* ramAddr, size_t size) {
     MQ_WAIT_FOR_MESG(&gDmaMesgQueue, NULL);
 }
 
-void func_80073ED0(void* romAddr, void* ramAddr, size_t size) {
+void Dma_RomCopyAsync(void* romAddr, void* ramAddr, size_t size) {
     OSMesg sp20[8];
 
     if (gDmaMesgQueue.validCount >= gDmaMesgQueue.msgCount) {
@@ -2683,13 +2683,13 @@ void func_80073ED0(void* romAddr, void* ramAddr, size_t size) {
     MQ_WAIT_FOR_MESG(&gDmaMesgQueue, sp20);
 }
 
-void func_80073FA0(u8* romAddr, u8* ramAddr, size_t size) {
+void Dma_LoadAssetsAsync(u8* romAddr, u8* ramAddr, size_t size) {
     s32 remainder;
     s32 i;
     s32 numBlocks = size / 1024;
 
     for (i = 0; i < numBlocks; i++) {
-        func_80073ED0(romAddr, ramAddr, 0x400);
+        Dma_RomCopyAsync(romAddr, ramAddr, 0x400);
 
         romAddr += 0x400;
         ramAddr += 0x400;
@@ -2697,7 +2697,7 @@ void func_80073FA0(u8* romAddr, u8* ramAddr, size_t size) {
 
     remainder = size % 1024;
     if (remainder) {
-        func_80073ED0(romAddr, ramAddr, remainder);
+        Dma_RomCopyAsync(romAddr, ramAddr, remainder);
     }
 }
 
@@ -2718,7 +2718,7 @@ void func_8007402C(s32 courseIndex) {
     s32 sp28;
 
     if (courseIndex >= 54) {
-        func_80073FA0(SEGMENT_ROM_START(course_data) + (courseIndex - 30) * sizeof(CourseData),
+        Dma_LoadAssetsAsync(SEGMENT_ROM_START(course_data) + (courseIndex - 30) * sizeof(CourseData),
                       osVirtualToPhysical(&D_8010B7B0), sizeof(CourseData));
         if ((D_80106F48 >= 4) && (courseIndex == 55)) {
             D_8010B7B0.skybox = SKYBOX_BLUE;
@@ -2741,7 +2741,7 @@ void func_8007402C(s32 courseIndex) {
                              &D_8010B7B0, 0);
         }
     } else {
-        func_80073FA0(SEGMENT_ROM_START(course_data) + courseIndex * sizeof(CourseData),
+        Dma_LoadAssetsAsync(SEGMENT_ROM_START(course_data) + courseIndex * sizeof(CourseData),
                       osVirtualToPhysical(&D_8010B7B0), sizeof(CourseData));
     }
 
@@ -2938,7 +2938,7 @@ s32 D_800CD24C[] = { 1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 void func_800747EC(s32 venue) {
     void* sp1C = (D_800CD220[venue] * 0x800) + SEGMENT_ROM_START(segment_2747F0);
 
-    func_80073FA0(sp1C, Segment_SegmentedToVirtual(D_8014A20), 0x800);
+    Dma_LoadAssetsAsync(sp1C, Segment_SegmentedToVirtual(D_8014A20), 0x800);
 }
 
 extern GfxPool* D_800DCCF0;

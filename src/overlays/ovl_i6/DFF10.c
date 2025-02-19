@@ -978,7 +978,7 @@ void func_i6_80117DE0(unk_800E3A28* arg0) {
         if (gUnlockEverythingInputs[arg0->unk_04] & gInputPressed) {
             if (++arg0->unk_04 == 8) {
                 gSettingEverythingUnlocked = 1;
-                func_i2_80101414();
+                Save_SaveSettingsProfiles();
                 func_800BA8D8(0x2E);
                 sp1C = func_80079E88(0x50);
                 if (sp1C->unk_04 < 2) {

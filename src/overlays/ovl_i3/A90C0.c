@@ -473,10 +473,10 @@ extern CourseRecordInfo* gCurrentCourseRecordInfo;
 void func_i3_80116974(void) {
     s32 pad[2];
     s32 timeRecord;
-    unk_80141C88 sp1C;
+    GhostInfo sp1C;
 
     if (gCourseIndex < 0x18) {
-        if (func_i2_801037CC(&sp1C, gCourseIndex) == 0) {
+        if (Save_LoadStaffGhostRecord(&sp1C, gCourseIndex) == 0) {
             D_i3_80141990 = D_i3_8013E328[gCourseIndex * 4 + gDifficulty];
         } else {
             D_i3_80141990 = MAX_TIMER;
@@ -863,7 +863,7 @@ void func_i3_80117B60(Racer* arg0, Controller* arg1) {
 
 void func_i3_80117B88(Racer* arg0, Controller* arg1) {
     if ((arg0->unk_2B4 != 0) && (D_i3_80141910->unk_23C < arg0->unk_23C) && (arg0->unk_04 & 0x04000000)) {
-        arg1->buttonPressed |= 0x80;
+        arg1->buttonPressed |= STICK_UP;
     }
 }
 
@@ -1144,7 +1144,7 @@ void func_i3_80117BF0(Racer* arg0, Controller* arg1) {
     if (D_i3_8013DBE8[var_a3] < arg0->unk_1EC) {
         arg0->unk_1EC = D_i3_8013DBE8[var_a3];
     }
-    if (((D_80141900 >= 0x15) || (D_800F80A8[0] >= 0x1F)) && (gNumPlayers == 1) && (arg0->id != 0) &&
+    if (((D_80141900 >= 0x15) || (D_800F80A8[0] > 30)) && (gNumPlayers == 1) && (arg0->id != 0) &&
         (arg0->raceTime >= 10001) && !(D_i3_80141910->unk_04 & 0x08000000) &&
         (func_i3_fabsf(D_i3_80141910->unk_33C - sp94) < 138.0f)) {
 

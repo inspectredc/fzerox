@@ -584,7 +584,7 @@ void func_i4_801160D8(void) {
     }
 
     if ((gNumPlayers == 1) && (gCourseIndex < 24)) {
-        func_i2_80100C18(gCourseIndex);
+        Save_UpdateCharacterSave(gCourseIndex);
         gPlayerEngine[0] = gCharacterLastEngine[gRacers[0].character];
     }
 
@@ -1079,7 +1079,7 @@ void func_i4_80117774(unk_800E3A28* arg0) {
 
     arg0->unk_18 = func_800768F4(0, 0x258);
 
-    func_i2_80100C60(arg0->unk_18);
+    Save_UpdateCupSave(arg0->unk_18);
 
     for (i = 0; i < 21; i++) {
         func_80077D50(sTrophyCompTexInfos[i], 0);

@@ -619,19 +619,19 @@ void func_80077630(void) {
             case GAMEMODE_TIME_ATTACK:
             case GAMEMODE_GP_END_CS:
             case GAMEMODE_DEATH_RACE:
-                func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
+                Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                               SEGMENT_ROM_SIZE(segment_17B960));
                 romOffset = SEGMENT_ROM_START(segment_1B8550);
                 ramSize = SEGMENT_VRAM_SIZE(segment_1B8550);
                 break;
             case GAMEMODE_10:
-                func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
+                Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                               SEGMENT_ROM_SIZE(segment_17B960));
                 romOffset = SEGMENT_ROM_START(create_machine_textures);
                 ramSize = SEGMENT_VRAM_SIZE(create_machine_textures);
                 break;
             case GAMEMODE_D:
-                func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
+                Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                               SEGMENT_ROM_SIZE(segment_17B960));
                 romOffset = SEGMENT_ROM_START(course_edit_textures);
                 ramSize = SEGMENT_VRAM_SIZE(course_edit_textures);
@@ -640,7 +640,7 @@ void func_80077630(void) {
             case GAMEMODE_LX_MACHINE_SETTINGS:
             case GAMEMODE_4012:
             case GAMEMODE_FLX_MACHINE_SELECT:
-                func_80073FA0(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
+                Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                               SEGMENT_ROM_SIZE(segment_17B960));
             default:
                 D_800CD2E0 = 0;

@@ -814,7 +814,7 @@ void func_8007DEF0(void) {
                 D_800E42CC = 1;
             }
         }
-        func_i2_80101414();
+        Save_SaveSettingsProfiles();
     }
 }
 
@@ -881,7 +881,7 @@ s32 func_8007E11C(s32 character) {
 }
 
 void func_8007E1C0(void) {
-    unk_80141C88 sp40;
+    GhostInfo sp40;
     s32 pad;
     bool sp38;
     s32 i;
@@ -889,7 +889,7 @@ void func_8007E1C0(void) {
     sp38 = false;
 
     for (i = 0; i < 24; i++) {
-        if (func_i2_801037CC(&sp40, i) != 0) {
+        if (Save_LoadStaffGhostRecord(&sp40, i) != 0) {
             sp38 = true;
             break;
         } else {

@@ -2325,7 +2325,7 @@ bool func_i6_8011C788(void) {
     }
 
     if (updateSettings) {
-        func_i2_80101414();
+        Save_SaveSettingsProfiles();
     }
     return false;
 }

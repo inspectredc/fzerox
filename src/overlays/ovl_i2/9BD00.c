@@ -20,10 +20,10 @@ uintptr_t D_i2_80106DF0[][3] = {
     { 0x26E10, 0x26E50, 0x26E70 }, { 0x28D00, 0x28D40, 0x28D60 }, { 0x2B130, 0x2B170, 0x2B190 },
 };
 
-void func_i2_801033B8(CupSave*, u8*);
-void func_i2_8010300C(GhostRecord*, GhostData*, Ghost*, bool);
-void func_i2_80102F70(GhostRecord*, GhostData*, Ghost*, bool);
-void func_i2_80102CA4(ProfileSave*, s32);
+void Save_LoadCupSave(CupSave*, u8*);
+void Save_LoadGhostData(GhostRecord*, GhostData*, Ghost*, bool);
+void Save_LoadGhostRecord(GhostRecord*, GhostData*, Ghost*, bool);
+void Save_LoadCourseRecord(ProfileSave*, s32);
 void Save_ClearData(void*, s32);
 
 extern u8 gEditCupTrackNames[6][9];
@@ -66,20 +66,20 @@ void Save_ReadProfileSaves(ProfileSave* profileSave) {
 extern Ghost gGhosts[];
 extern s32 gCurrentGhostType;
 
-s32 func_i2_80100810(s32, s32);
-s32 func_i2_8010387C(s32);
+s32 SaveLoadPlayerGhost(s32, s32);
+s32 Save_LoadStaffGhost(s32);
 
-s32 func_i2_80100520(s32 courseIndex) {
+s32 Save_LoadGhost(s32 courseIndex) {
     s32 i;
     s32 sp18;
     s32 encodedCourseIndex = gCourseRecordInfos[courseIndex].encodedCourseIndex;
-    Ghost* var_v0 = gGhosts;
+    Ghost* ghost = gGhosts;
 
     for (i = 0; i < 3; i++) {
-        if (encodedCourseIndex != var_v0->encodedCourseIndex) {
-            var_v0->encodedCourseIndex = 0;
+        if (encodedCourseIndex != ghost->encodedCourseIndex) {
+            ghost->encodedCourseIndex = 0;
         }
-        var_v0++;
+        ghost++;
     }
     switch (gCurrentGhostType) {
         case GHOST_CELEBRITY:
@@ -87,10 +87,10 @@ s32 func_i2_80100520(s32 courseIndex) {
             break;
         case GHOST_NONE:
         case GHOST_PLAYER:
-            sp18 = func_i2_80100810(courseIndex, -1);
+            sp18 = SaveLoadPlayerGhost(courseIndex, -1);
             break;
         case GHOST_STAFF:
-            sp18 = func_i2_8010387C(courseIndex);
+            sp18 = Save_LoadStaffGhost(courseIndex);
             break;
     }
     return sp18;
@@ -100,12 +100,12 @@ s32 func_i2_801005CC(s32 courseIndex) {
     s32 i;
     s32 var_a0;
     s32 var_v1;
-    Ghost* var_a1;
+    Ghost* ghost;
 
     var_v1 = -1;
 
-    for (i = 0, var_a1 = gGhosts; i < 3; i++, var_a1++) {
-        if (var_a1->encodedCourseIndex == 0) {
+    for (i = 0, ghost = gGhosts; i < 3; i++, ghost++) {
+        if (ghost->encodedCourseIndex == 0) {
             var_v1 = i;
             break;
         }
@@ -115,8 +115,8 @@ s32 func_i2_801005CC(s32 courseIndex) {
         return var_v1;
     }
 
-    for (i = 0, var_a1 = gGhosts; i < 3; i++, var_a1++) {
-        if (var_a1->ghostType != GHOST_PLAYER) {
+    for (i = 0, ghost = gGhosts; i < 3; i++, ghost++) {
+        if (ghost->ghostType != GHOST_PLAYER) {
             var_v1 = i;
             break;
         }
@@ -127,28 +127,28 @@ s32 func_i2_801005CC(s32 courseIndex) {
         return var_v1;
     }
 
-    for (i = 0, var_a1 = gGhosts; i < 3; i++, var_a1++) {
-        if (courseIndex != (var_a1->encodedCourseIndex & 0x1F)) {
+    for (i = 0, ghost = gGhosts; i < 3; i++, ghost++) {
+        if (courseIndex != (ghost->encodedCourseIndex & 0x1F)) {
             var_v1 = i;
-            var_a0 = var_a1->raceTime;
+            var_a0 = ghost->raceTime;
             break;
         }
     }
 
     if (var_a0 != -1) {
-        for (i = var_v1 + 1, var_a1 = &gGhosts[i]; i < 3; i++, var_a1++) {
-            if (courseIndex != (var_a1->encodedCourseIndex & 0x1F)) {
-                if (var_a0 < var_a1->raceTime) {
-                    var_a0 = var_a1->raceTime;
+        for (i = var_v1 + 1, ghost = &gGhosts[i]; i < 3; i++, ghost++) {
+            if (courseIndex != (ghost->encodedCourseIndex & 0x1F)) {
+                if (var_a0 < ghost->raceTime) {
+                    var_a0 = ghost->raceTime;
                     var_v1 = i;
                 }
             }
         }
     } else {
-        for (i = 0, var_a1 = gGhosts; i < 3; i++, var_a1++) {
-            if (courseIndex == (var_a1->encodedCourseIndex & 0x1F)) {
-                if (var_a0 < var_a1->raceTime) {
-                    var_a0 = var_a1->raceTime;
+        for (i = 0, ghost = gGhosts; i < 3; i++, ghost++) {
+            if (courseIndex == (ghost->encodedCourseIndex & 0x1F)) {
+                if (var_a0 < ghost->raceTime) {
+                    var_a0 = ghost->raceTime;
                     var_v1 = i;
                 }
             }
@@ -157,18 +157,18 @@ s32 func_i2_801005CC(s32 courseIndex) {
     return var_v1;
 }
 
-bool func_i2_80100B38(unk_80141C88*);
+bool func_i2_80100B38(GhostInfo*);
 s32 func_i2_801005CC(s32);
 
-s32 func_i2_80100810(s32 courseIndex, s32 arg1) {
+s32 SaveLoadPlayerGhost(s32 courseIndex, s32 ghostIndex) {
     GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
     GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
     s32 var_t0;
     s32 pad2[4];
-    unk_80141C88 sp24;
+    GhostInfo sp24;
     s32 temp_v0;
 
-    temp_v0 = func_i2_801014D4(&sp24);
+    temp_v0 = Save_LoadGhostInfo(&sp24);
     if (temp_v0 != 0) {
         return temp_v0;
     }
@@ -179,7 +179,7 @@ s32 func_i2_80100810(s32 courseIndex, s32 arg1) {
     if (func_i2_80100B38(&sp24)) {
         return 0;
     }
-    if (arg1 == -1) {
+    if (ghostIndex == -1) {
         var_t0 = func_i2_801005CC(courseIndex);
 
         if ((gGhosts[var_t0].encodedCourseIndex != 0) && (gGhosts[var_t0].ghostType == GHOST_PLAYER) &&
@@ -188,12 +188,12 @@ s32 func_i2_80100810(s32 courseIndex, s32 arg1) {
             return 0;
         }
     } else {
-        var_t0 = arg1;
+        var_t0 = ghostIndex;
     }
 
     Save_ReadGhostData(ghostData);
-    func_i2_80102F70(ghostRecord, ghostData, &gGhosts[var_t0], true);
-    func_i2_8010300C(ghostRecord, ghostData, &gGhosts[var_t0], true);
+    Save_LoadGhostRecord(ghostRecord, ghostData, &gGhosts[var_t0], true);
+    Save_LoadGhostData(ghostRecord, ghostData, &gGhosts[var_t0], true);
 
     return 0;
 }
@@ -245,48 +245,48 @@ bool func_i2_80100950(CarInfo* carInfo, unk_80141C88_unk_1D* arg1) {
     return matching;
 }
 
-bool func_i2_80100B38(unk_80141C88* arg0) {
-    s32 var_s1;
+bool func_i2_80100B38(GhostInfo* arg0) {
+    bool var_s1;
     s32 i;
-    Ghost* var_s0 = gGhosts;
+    Ghost* ghost = gGhosts;
 
     for (i = 0; i < 3; i++) {
         var_s1 = true;
-        if (var_s0->ghostType != arg0->ghostType) {
+        if (ghost->ghostType != arg0->ghostType) {
             var_s1 = false;
-        } else if (var_s0->replayChecksum != arg0->replayChecksum) {
+        } else if (ghost->replayChecksum != arg0->replayChecksum) {
             var_s1 = false;
-        } else if (var_s0->encodedCourseIndex != arg0->encodedCourseIndex) {
+        } else if (ghost->encodedCourseIndex != arg0->encodedCourseIndex) {
             var_s1 = false;
-        } else if (var_s0->raceTime != arg0->raceTime) {
+        } else if (ghost->raceTime != arg0->raceTime) {
             var_s1 = false;
-        } else if (!func_i2_80100950(&var_s0->carInfo, &arg0->unk_1D)) {
+        } else if (!func_i2_80100950(&ghost->carInfo, &arg0->unk_1D)) {
             var_s1 = false;
         }
 
         if (var_s1) {
             break;
         }
-        var_s0++;
+        ghost++;
     }
     return var_s1;
 }
 
-void func_i2_80103310(CharacterSave*, s32);
+void Save_LoadCharacterSave(CharacterSave*, s32);
 
-s32 func_i2_80100C18(s32 courseIndex) {
+s32 Save_UpdateCharacterSave(s32 courseIndex) {
     CharacterSave* characterSaves = (CharacterSave*) gSaveBuffer;
 
     Save_ReadCharacterSave(&characterSaves[courseIndex], courseIndex);
-    func_i2_80103310(&characterSaves[courseIndex], courseIndex);
+    Save_LoadCharacterSave(&characterSaves[courseIndex], courseIndex);
     return 0;
 }
 
-s32 func_i2_80100C60(u8* arg0) {
+s32 Save_UpdateCupSave(u8* arg0) {
     CupSave* cupSave = (CupSave*) gSaveBuffer;
 
     Save_ReadCupSave(cupSave);
-    func_i2_801033B8(cupSave, arg0);
+    Save_LoadCupSave(cupSave, arg0);
     return 0;
 }
 
@@ -397,14 +397,14 @@ void Save_WriteCupSave(CupSave* cupSave) {
     Sram_ReadWrite(OS_WRITE, (uintptr_t) &gSaveContext.cupSave - (uintptr_t) &gSaveContext, cupSave, sizeof(CupSave));
 }
 
-void func_i2_80102214(SaveCourseRecords*, s32);
+void Save_SaveCourseRecord(SaveCourseRecords*, s32);
 
-s32 func_i2_80101118(s32 courseIndex) {
+s32 Save_SaveCourseRecordProfiles(s32 courseIndex) {
     u16 checksum;
     s32 i;
     ProfileSave* profileSaves = (ProfileSave*) gSaveBuffer;
 
-    func_i2_80102214(&profileSaves[0].courses[courseIndex], courseIndex);
+    Save_SaveCourseRecord(&profileSaves[0].courses[courseIndex], courseIndex);
     profileSaves[1].courses[courseIndex] = profileSaves[0].courses[courseIndex];
 
     checksum = Save_CalculateSaveCourseRecordChecksum(profileSaves, courseIndex);
@@ -417,9 +417,9 @@ s32 func_i2_80101118(s32 courseIndex) {
 }
 
 extern s32 gRamDDCompatible;
-void func_i2_80102350(SaveEditCup*);
+void Save_SaveEditCup(SaveEditCup*);
 
-s32 func_i2_801011FC(void) {
+s32 Save_SaveEditCupProfiles(void) {
     u16 checksum;
     s32 i;
     ProfileSave* profileSaves = (ProfileSave*) gSaveBuffer;
@@ -427,7 +427,7 @@ s32 func_i2_801011FC(void) {
     if (!gRamDDCompatible) {
         return 3;
     }
-    func_i2_80102350(&profileSaves[0].editCup);
+    Save_SaveEditCup(&profileSaves[0].editCup);
 
     profileSaves[1].editCup = profileSaves[0].editCup;
 
@@ -440,13 +440,13 @@ s32 func_i2_801011FC(void) {
     return 0;
 }
 
-void func_i2_8010259C(CharacterSave*);
+void Save_SaveCharacterSave(CharacterSave*);
 
-s32 func_i2_801012CC(s32 courseIndex) {
+s32 Save_UpdateCourseCharacterSave(s32 courseIndex) {
     s32 pad[2];
     CharacterSave* characterSaves = (CharacterSave*) gSaveBuffer;
 
-    func_i2_8010259C(&characterSaves[courseIndex]);
+    Save_SaveCharacterSave(&characterSaves[courseIndex]);
     Save_WriteCharacterSave(&characterSaves[courseIndex], courseIndex);
     return 0;
 }
@@ -457,7 +457,7 @@ s32 Save_UpdateCupCompletion(s32 difficulty, s32 cupType, s32 character) {
     CupSave* cupSave = (CupSave*) gSaveBuffer;
 
     Save_ReadCupSave(cupSave);
-    func_i2_801033B8(cupSave, NULL);
+    Save_LoadCupSave(cupSave, NULL);
 
     cupCompletion = cupSave->cupCompletion[difficulty][character / 3];
     cupCompletion |= (1 << ((character % 3) * 5)) << cupType;
@@ -475,14 +475,14 @@ s32 Save_UpdateCupCompletion(s32 difficulty, s32 cupType, s32 character) {
     return 0;
 }
 
-void func_i2_80101FEC(SaveSettings*);
+void Save_SaveSettings(SaveSettings*);
 
-s32 func_i2_80101414(void) {
+s32 Save_SaveSettingsProfiles(void) {
     u16 checksum;
     s32 i;
     ProfileSave* profileSaves = (ProfileSave*) gSaveBuffer;
 
-    func_i2_80101FEC(&profileSaves[0].saveSettings);
+    Save_SaveSettings(&profileSaves[0].saveSettings);
     profileSaves[1].saveSettings = profileSaves[0].saveSettings;
 
     checksum = Save_CalculateSaveSettingsChecksum(profileSaves);
@@ -494,11 +494,11 @@ s32 func_i2_80101414(void) {
     return 0;
 }
 
-void func_i2_80101590(GhostRecord*, unk_80141C88*);
-void func_i2_80101E68(GhostData*, bool);
-void func_i2_80101DE8(GhostRecord*, bool);
+void func_i2_80101590(GhostRecord*, GhostInfo*);
+void Save_InitGhostData(GhostData*, bool);
+void Save_InitGhostRecord(GhostRecord*, bool);
 
-s32 func_i2_801014D4(unk_80141C88* arg0) {
+s32 Save_LoadGhostInfo(GhostInfo* ghostInfo) {
     s32 pad;
     s32 var_v1;
     GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
@@ -508,15 +508,15 @@ s32 func_i2_801014D4(unk_80141C88* arg0) {
     var_v1 = 0;
 
     if (ghostRecord->checksum != Save_CalculateGhostRecordChecksum(ghostRecord) * 1) {
-        func_i2_80101DE8(ghostRecord, true);
+        Save_InitGhostRecord(ghostRecord, true);
         Save_WriteGhostRecord(ghostRecord);
-        func_i2_80101E68(ghostData, true);
+        Save_InitGhostData(ghostData, true);
         Save_WriteGhostData(ghostData);
         var_v1 = 1;
     }
 
-    if (arg0 != NULL) {
-        func_i2_80101590(ghostRecord, arg0);
+    if (ghostInfo != NULL) {
+        func_i2_80101590(ghostRecord, ghostInfo);
     }
     if ((var_v1 == 0) && (ghostRecord->encodedCourseIndex == 0)) {
         var_v1 = 2;
@@ -524,45 +524,45 @@ s32 func_i2_801014D4(unk_80141C88* arg0) {
     return var_v1;
 }
 
-void func_i2_80101590(GhostRecord* ghostRecord, unk_80141C88* arg1) {
+void func_i2_80101590(GhostRecord* ghostRecord, GhostInfo* ghostInfo) {
     s32 i;
 
-    arg1->courseIndex = ghostRecord->encodedCourseIndex & 0x1F;
+    ghostInfo->courseIndex = ghostRecord->encodedCourseIndex & 0x1F;
 
-    arg1->encodedCourseIndex = ghostRecord->encodedCourseIndex;
-    arg1->raceTime = ghostRecord->raceTime;
-    arg1->replayChecksum = ghostRecord->replayChecksum;
-    arg1->ghostType = ghostRecord->ghostType;
-    arg1->unk_12 = ghostRecord->unk_10;
+    ghostInfo->encodedCourseIndex = ghostRecord->encodedCourseIndex;
+    ghostInfo->raceTime = ghostRecord->raceTime;
+    ghostInfo->replayChecksum = ghostRecord->replayChecksum;
+    ghostInfo->ghostType = ghostRecord->ghostType;
+    ghostInfo->unk_12 = ghostRecord->unk_10;
 
     for (i = 0; i < 9; i++) {
-        arg1->trackName[i] = ghostRecord->trackName[i];
+        ghostInfo->trackName[i] = ghostRecord->trackName[i];
     }
-    arg1->unk_1D = ghostRecord->unk_20;
+    ghostInfo->unk_1D = ghostRecord->unk_20;
 }
 
-void func_i2_801023D8(Ghost*);
-void func_i2_801024F8(Ghost*);
+void Save_SaveGhostRecord(Ghost*);
+void Save_SaveGhostData(Ghost*);
 
-s32 func_i2_80101690(s32 courseIndex, Ghost* arg1) {
+s32 Save_SaveGhost(s32 courseIndex, Ghost* ghost) {
     GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
     GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
-    func_i2_801023D8(arg1);
+    Save_SaveGhostRecord(ghost);
     Save_WriteGhostRecord(ghostRecord);
-    func_i2_801024F8(arg1);
+    Save_SaveGhostData(ghost);
     Save_WriteGhostData(ghostData);
     return 0;
 }
 
-void func_i2_801021B4(SaveDeathRace*);
+void Save_SaveDeathRace(SaveDeathRace*);
 
-s32 func_i2_801016DC(void) {
+s32 Save_SaveDeathRaceProfiles(void) {
     u16 checksum;
     s32 i;
     ProfileSave* profileSaves = (ProfileSave*) gSaveBuffer;
 
-    func_i2_801021B4(&profileSaves[0].deathRace);
+    Save_SaveDeathRace(&profileSaves[0].deathRace);
     profileSaves[1].deathRace = profileSaves[0].deathRace;
 
     checksum = Save_CalculateSaveDeathRaceChecksum(profileSaves);
@@ -584,14 +584,14 @@ s32 Save_Init(SaveContext* saveContext, s32 arg1) {
     return 0;
 }
 
-void func_i2_80101D18(SaveCourseRecords*, bool);
+void Save_InitCourseRecord(SaveCourseRecords*, bool);
 
 s32 func_i2_801017B8(s32 courseIndex) {
     u16 checksum;
     s32 i;
     ProfileSave* profileSaves = (ProfileSave*) gSaveBuffer;
 
-    func_i2_80101D18(&profileSaves[0].courses[courseIndex], true);
+    Save_InitCourseRecord(&profileSaves[0].courses[courseIndex], true);
     profileSaves[1].courses[courseIndex] = profileSaves[0].courses[courseIndex];
 
     checksum = Save_CalculateSaveCourseRecordChecksum(profileSaves, courseIndex);
@@ -600,12 +600,12 @@ s32 func_i2_801017B8(s32 courseIndex) {
         Save_WriteSaveCourseRecord(profileSaves, i, courseIndex, checksum);
     }
 
-    func_i2_80102CA4(profileSaves, courseIndex);
+    Save_LoadCourseRecord(profileSaves, courseIndex);
 
     return 0;
 }
 
-s32 func_i2_801018A8(s32 courseIndex) {
+s32 Save_InitGhost(s32 courseIndex) {
     s32 i;
     Ghost* ghost;
     GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
@@ -616,20 +616,20 @@ s32 func_i2_801018A8(s32 courseIndex) {
             ghost->encodedCourseIndex = 0;
         }
     }
-    func_i2_80101DE8(ghostRecord, true);
+    Save_InitGhostRecord(ghostRecord, true);
     Save_WriteGhostRecord(ghostRecord);
-    func_i2_80101E68(ghostData, true);
+    Save_InitGhostData(ghostData, true);
     Save_WriteGhostData(ghostData);
     return 0;
 }
 
-void func_i2_80101B8C(SaveSettings*, bool);
-void func_i2_80101C04(SaveEditCup*, bool);
-void func_i2_80101CCC(SaveDeathRace*, bool);
-void func_i2_80101E68(GhostData*, bool);
-void func_i2_80101EBC(CharacterSave*, bool);
-void func_i2_80102784(ProfileSave*, bool);
-void func_i2_80103108(ProfileSave*, bool);
+void Save_InitSaveSettings(SaveSettings*, bool);
+void Save_InitEditCup(SaveEditCup*, bool);
+void Save_InitDeathRace(SaveDeathRace*, bool);
+void Save_InitGhostData(GhostData*, bool);
+void Save_InitCharacterSave(CharacterSave*, bool);
+void Save_LoadSaveSettings(ProfileSave*, bool);
+void Save_LoadEditCup(ProfileSave*, bool);
 
 void Save_CreateNew(SaveContext* saveContext, s32 arg1) {
     s32 i;
@@ -645,9 +645,9 @@ void Save_CreateNew(SaveContext* saveContext, s32 arg1) {
     // Load current save and remember n64dd related data that will be restored
     if ((arg1 != 0) && (arg1 == 1)) {
         Save_ReadProfileSaves(saveContext->profileSaves);
-        func_i2_80102784(saveContext->profileSaves, false);
+        Save_LoadSaveSettings(saveContext->profileSaves, false);
         spB7 = saveContext->profileSaves[0].saveSettings.unk_09;
-        func_i2_80103108(saveContext->profileSaves, false);
+        Save_LoadEditCup(saveContext->profileSaves, false);
         editCup = saveContext->profileSaves[0].editCup;
     }
 
@@ -656,21 +656,21 @@ void Save_CreateNew(SaveContext* saveContext, s32 arg1) {
     }
 
     for (i = 0, profileSave = saveContext->profileSaves; i < 2; i++, profileSave++) {
-        func_i2_80101B8C(&profileSave->saveSettings, false);
-        func_i2_80101CCC(&profileSave->deathRace, false);
+        Save_InitSaveSettings(&profileSave->saveSettings, false);
+        Save_InitDeathRace(&profileSave->deathRace, false);
 
         for (j = 0, courseRecord = profileSave->courses; j < 24; j++, courseRecord++) {
-            func_i2_80101D18(courseRecord, false);
+            Save_InitCourseRecord(courseRecord, false);
         }
 
-        func_i2_80101C04(&profileSave->editCup, false);
+        Save_InitEditCup(&profileSave->editCup, false);
     }
 
-    func_i2_80101DE8(&saveContext->ghostRecord, false);
-    func_i2_80101E68(&saveContext->ghostData, false);
+    Save_InitGhostRecord(&saveContext->ghostRecord, false);
+    Save_InitGhostData(&saveContext->ghostData, false);
 
     for (i = 0, characterSave = saveContext->characterSaves; i < 24; i++, characterSave++) {
-        func_i2_80101EBC(characterSave, false);
+        Save_InitCharacterSave(characterSave, false);
     }
 
     // Restore the n64dd related save data
@@ -680,7 +680,7 @@ void Save_CreateNew(SaveContext* saveContext, s32 arg1) {
     }
 }
 
-void func_i2_80101B8C(SaveSettings* saveSettings, bool shouldClear) {
+void Save_InitSaveSettings(SaveSettings* saveSettings, bool shouldClear) {
     s32 i;
 
     if (shouldClear) {
@@ -702,7 +702,7 @@ void func_i2_80101B8C(SaveSettings* saveSettings, bool shouldClear) {
     saveSettings->unk_09 = 0;
 }
 
-void func_i2_80101C04(SaveEditCup* editCup, bool shouldClear) {
+void Save_InitEditCup(SaveEditCup* editCup, bool shouldClear) {
     s32 i;
     s32 j;
 
@@ -741,7 +741,7 @@ void func_i2_80101C78(unk_80141C88_unk_1D* arg0) {
     arg0->unk_00.unk_00[19] = 0;
 }
 
-void func_i2_80101CCC(SaveDeathRace* deathRace, bool shouldClear) {
+void Save_InitDeathRace(SaveDeathRace* deathRace, bool shouldClear) {
     s32 i;
 
     if (shouldClear) {
@@ -753,7 +753,7 @@ void func_i2_80101CCC(SaveDeathRace* deathRace, bool shouldClear) {
     }
 }
 
-void func_i2_80101D18(SaveCourseRecords* courseRecords, bool shouldClear) {
+void Save_InitCourseRecord(SaveCourseRecords* courseRecords, bool shouldClear) {
     s32 i;
     s32 j;
 
@@ -778,7 +778,7 @@ void func_i2_80101D18(SaveCourseRecords* courseRecords, bool shouldClear) {
     func_i2_80101C78(&courseRecords->unk_F0);
 }
 
-void func_i2_80101DE8(GhostRecord* ghostRecord, bool shouldClear) {
+void Save_InitGhostRecord(GhostRecord* ghostRecord, bool shouldClear) {
     s32 i;
 
     if (shouldClear) {
@@ -798,7 +798,7 @@ void func_i2_80101DE8(GhostRecord* ghostRecord, bool shouldClear) {
     }
 }
 
-void func_i2_80101E68(GhostData* ghostData, bool shouldClear) {
+void Save_InitGhostData(GhostData* ghostData, bool shouldClear) {
     s32 i;
 
     if (shouldClear) {
@@ -815,7 +815,7 @@ void func_i2_80101E68(GhostData* ghostData, bool shouldClear) {
     ghostData->replaySize = 0;
 }
 
-void func_i2_80101EBC(CharacterSave* characterSave, bool shouldClear) {
+void Save_InitCharacterSave(CharacterSave* characterSave, bool shouldClear) {
     s32 i;
 
     if (shouldClear) {
@@ -827,7 +827,7 @@ void func_i2_80101EBC(CharacterSave* characterSave, bool shouldClear) {
     }
 }
 
-void func_i2_80101F24(CupSave* cupSave, bool shouldClear) {
+void Save_InitCupSave(CupSave* cupSave, bool shouldClear) {
     s32 i;
     s32 j;
 
@@ -861,7 +861,7 @@ extern s32 gSettingVsSlot;
 extern s8 gCupNumDifficultiesCleared[];
 extern s16 gSettingVsCom;
 
-void func_i2_80101FEC(SaveSettings* saveSettings) {
+void Save_SaveSettings(SaveSettings* saveSettings) {
     u8 settingLowerFlags;
     u8 settingHigherFlags;
     s32 i;
@@ -930,7 +930,7 @@ void func_i2_80102110(CarInfo* carInfo, unk_80141C88_unk_1D* arg1) {
     arg1->unk_00.unk_00[19] = carInfo->unk_00[19];
 }
 
-void func_i2_801021B4(SaveDeathRace* deathRace) {
+void Save_SaveDeathRace(SaveDeathRace* deathRace) {
     CourseRecordInfo* var_a1 = &gCourseRecordInfos[54];
     s32 i;
 
@@ -946,7 +946,7 @@ void func_i2_801021B4(SaveDeathRace* deathRace) {
     // clang-format on
 }
 
-void func_i2_80102214(SaveCourseRecords* courseRecords, s32 courseIndex) {
+void Save_SaveCourseRecord(SaveCourseRecords* courseRecords, s32 courseIndex) {
     CourseRecordInfo* courseRecordInfo;
     s32 i;
     s32 j;
@@ -973,7 +973,7 @@ void func_i2_80102214(SaveCourseRecords* courseRecords, s32 courseIndex) {
     // clang-format on
 }
 
-void func_i2_80102350(SaveEditCup* editCup) {
+void Save_SaveEditCup(SaveEditCup* editCup) {
     s32 i;
     s32 j;
 
@@ -987,7 +987,7 @@ void func_i2_80102350(SaveEditCup* editCup) {
     editCup->unk_08 = 0;
 }
 
-void func_i2_801023D8(Ghost* ghost) {
+void Save_SaveGhostRecord(Ghost* ghost) {
     s32 i;
     GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
 
@@ -1027,7 +1027,7 @@ void func_i2_801023D8(Ghost* ghost) {
     }
 }
 
-void func_i2_801024F8(Ghost* ghost) {
+void Save_SaveGhostData(Ghost* ghost) {
     s32 i;
     u8* var_a1;
     s8* var_v1;
@@ -1054,7 +1054,7 @@ void func_i2_801024F8(Ghost* ghost) {
 
 extern f32 gCharacterLastEngine[30];
 
-void func_i2_8010259C(CharacterSave* characterSave) {
+void Save_SaveCharacterSave(CharacterSave* characterSave) {
     s32 i;
 
     for (i = 0; i < 30; i++) {
@@ -1065,8 +1065,8 @@ void func_i2_8010259C(CharacterSave* characterSave) {
     characterSave->unk_04 = 0;
 }
 
-void func_i2_80102B20(ProfileSave*);
-void func_i2_80102A7C(unk_80141C88_unk_1D*, CarInfo* arg1);
+void Save_LoadDeathRace(ProfileSave*);
+void func_i2_80102A7C(unk_80141C88_unk_1D*, CarInfo*);
 
 void Save_Load(SaveContext* saveContext) {
     s32 i;
@@ -1077,7 +1077,7 @@ void Save_Load(SaveContext* saveContext) {
 
     for (i = 0, courseRecordInfo = gCourseRecordInfos; i < ARRAY_COUNT(gCourseRecordInfos); i++, courseRecordInfo++) {
         if (i < 24) {
-            func_i2_80102CA4(saveContext->profileSaves, i);
+            Save_LoadCourseRecord(saveContext->profileSaves, i);
         } else {
             func_i2_80101C78(&sp60);
 
@@ -1091,45 +1091,45 @@ void Save_Load(SaveContext* saveContext) {
 
             func_i2_80102A7C(&sp60, &courseRecordInfo->maxSpeedCar);
             if (i == 54) {
-                func_i2_80102B20(saveContext->profileSaves);
+                Save_LoadDeathRace(saveContext->profileSaves);
             }
         }
     }
 
-    func_i2_80102784(saveContext->profileSaves, true);
+    Save_LoadSaveSettings(saveContext->profileSaves, true);
 
     for (i = 0; i < 30; i++) {
         D_i2_80111848[i] = 0;
     }
 
-    func_i2_8010300C(&saveContext->ghostRecord, &saveContext->ghostData, gGhosts, true);
+    Save_LoadGhostData(&saveContext->ghostRecord, &saveContext->ghostData, gGhosts, true);
 
     for (i = 0, ghost = gGhosts; i < 3; i++, ghost++) {
         ghost->encodedCourseIndex = 0;
     }
 }
 
-void func_i2_80102784(ProfileSave* profileSaves, bool arg1) {
+void Save_LoadSaveSettings(ProfileSave* profileSaves, bool arg1) {
     u16 checksum;
-    s32 var_v1;
-    s32 sp2C;
+    s32 invalidSaveCount;
+    s32 invalidSaveIndex;
     s32 i;
-    s32 var_v0;
-    ProfileSave* var_s1;
-    SaveSettings* var_v1_2;
+    s32 backupSaveIndex;
+    ProfileSave* profileSave;
+    SaveSettings* saveSettings;
 
-    var_v1 = 0;
+    invalidSaveCount = 0;
 
-    for (i = 0, var_s1 = profileSaves; i < 2; i++) {
-        if (var_s1->saveSettings.checksum != Save_CalculateSaveSettingsChecksum(var_s1) * 1) {
-            var_v1++;
-            sp2C = i;
+    for (i = 0, profileSave = profileSaves; i < 2; i++) {
+        if (profileSave->saveSettings.checksum != Save_CalculateSaveSettingsChecksum(profileSave) * 1) {
+            invalidSaveCount++;
+            invalidSaveIndex = i;
         }
-        var_s1++;
+        profileSave++;
     }
 
-    if (var_v1 == 2) {
-        func_i2_80101B8C(&profileSaves[0].saveSettings, true);
+    if (invalidSaveCount == 2) {
+        Save_InitSaveSettings(&profileSaves[0].saveSettings, true);
         profileSaves[1].saveSettings = profileSaves[0].saveSettings;
 
         checksum = Save_CalculateSaveSettingsChecksum(profileSaves);
@@ -1137,44 +1137,44 @@ void func_i2_80102784(ProfileSave* profileSaves, bool arg1) {
         for (i = 0; i < 2; i++) {
             Save_WriteSaveSettings(profileSaves, i, checksum);
         }
-    } else if (var_v1 == 1) {
-        var_v0 = (sp2C == 0) ? 1 : 0;
+    } else if (invalidSaveCount == 1) {
+        backupSaveIndex = (invalidSaveIndex == 0) ? 1 : 0;
 
-        (profileSaves + sp2C)->saveSettings = (profileSaves + var_v0)->saveSettings;
+        (profileSaves + invalidSaveIndex)->saveSettings = (profileSaves + backupSaveIndex)->saveSettings;
 
-        Save_WriteSaveSettings(profileSaves, sp2C, Save_CalculateSaveSettingsChecksum(profileSaves));
+        Save_WriteSaveSettings(profileSaves, invalidSaveIndex, Save_CalculateSaveSettingsChecksum(profileSaves));
     }
 
     if (!arg1) {
         return;
     }
 
-    var_v1_2 = &profileSaves->saveSettings;
+    saveSettings = &profileSaves->saveSettings;
 
-    gSettingVsHandicap = ((u8) (var_v1_2->settings >> 4) & 0xFF) & 0xF;
-    if (var_v1_2->settings & 1) {
+    gSettingVsHandicap = ((u8) (saveSettings->settings >> 4) & 0xFF) & 0xF;
+    if (saveSettings->settings & 1) {
         gSettingVsCom = 1;
     } else {
         gSettingVsCom = 0;
     }
-    if (var_v1_2->settings & 2) {
+    if (saveSettings->settings & 2) {
         gSettingVsSlot = 1;
     } else {
         gSettingVsSlot = 0;
     }
-    if (var_v1_2->settings & 4) {
+    if (saveSettings->settings & 4) {
         gSettingSoundMode = 1;
     } else {
         gSettingSoundMode = 0;
     }
-    if (var_v1_2->settings & 8) {
+    if (saveSettings->settings & 8) {
         gSettingEverythingUnlocked = 1;
     } else {
         gSettingEverythingUnlocked = 0;
     }
 
     for (i = JACK_CUP; i <= JOKER_CUP; i++) {
-        gCupNumDifficultiesCleared[i] = var_v1_2->cupDifficultiesCleared[i];
+        gCupNumDifficultiesCleared[i] = saveSettings->cupDifficultiesCleared[i];
     }
 
     func_8007E2B4();
@@ -1185,13 +1185,13 @@ void func_i2_80102784(ProfileSave* profileSaves, bool arg1) {
     }
     // clang-format on
 
-    if (var_v1_2->unk_09 & 1) {
+    if (saveSettings->unk_09 & 1) {
         D_i2_80111848[0] = 1;
     }
-    if (var_v1_2->unk_09 & 2) {
+    if (saveSettings->unk_09 & 2) {
         D_i2_80111848[3] = 1;
     }
-    if (var_v1_2->unk_09 & 4) {
+    if (saveSettings->unk_09 & 4) {
         D_i2_80111848[4] = 1;
     }
 }
@@ -1220,28 +1220,28 @@ void func_i2_80102A7C(unk_80141C88_unk_1D* arg0, CarInfo* arg1) {
     arg1->unk_00[19] = arg0->unk_00.unk_00[19];
 }
 
-void func_i2_80102B20(ProfileSave* profileSaves) {
+void Save_LoadDeathRace(ProfileSave* profileSaves) {
     u16 checksum;
-    s32 var_s2;
-    s32 var_v0;
-    s32 sp30;
-    CourseRecordInfo* var_v0_2;
-    SaveDeathRace* var_v1;
-    ProfileSave* var_s1;
+    s32 invalidSaveCount;
+    s32 backupSaveIndex;
+    s32 invalidSaveIndex;
+    CourseRecordInfo* courseRecordInfo;
+    SaveDeathRace* deathRaceSave;
+    ProfileSave* profileSave;
     s32 i;
 
-    var_s2 = 0;
+    invalidSaveCount = 0;
 
-    for (i = 0, var_s1 = profileSaves; i < 2; i++) {
-        if (var_s1->deathRace.checksum != Save_CalculateSaveDeathRaceChecksum(var_s1) * 1) {
-            var_s2++;
-            sp30 = i;
+    for (i = 0, profileSave = profileSaves; i < 2; i++) {
+        if (profileSave->deathRace.checksum != Save_CalculateSaveDeathRaceChecksum(profileSave) * 1) {
+            invalidSaveCount++;
+            invalidSaveIndex = i;
         }
-        var_s1++;
+        profileSave++;
     }
 
-    if (var_s2 == 2) {
-        func_i2_80101CCC(&profileSaves[0].deathRace, true);
+    if (invalidSaveCount == 2) {
+        Save_InitDeathRace(&profileSaves[0].deathRace, true);
         profileSaves[1].deathRace = profileSaves[0].deathRace;
 
         checksum = Save_CalculateSaveDeathRaceChecksum(profileSaves);
@@ -1249,43 +1249,42 @@ void func_i2_80102B20(ProfileSave* profileSaves) {
         for (i = 0; i < 2; i++) {
             Save_WriteSaveDeathRace(profileSaves, i, checksum);
         }
-    } else if (var_s2 == 1) {
-        var_v0 = (sp30 == 0) ? 1 : 0;
+    } else if (invalidSaveCount == 1) {
+        backupSaveIndex = (invalidSaveIndex == 0) ? 1 : 0;
 
-        (profileSaves + sp30)->deathRace = (profileSaves + var_v0)->deathRace;
+        (profileSaves + invalidSaveIndex)->deathRace = (profileSaves + backupSaveIndex)->deathRace;
 
-        Save_WriteSaveDeathRace(profileSaves, sp30, Save_CalculateSaveDeathRaceChecksum(profileSaves));
+        Save_WriteSaveDeathRace(profileSaves, invalidSaveIndex, Save_CalculateSaveDeathRaceChecksum(profileSaves));
     }
-    var_v0_2 = &gCourseRecordInfos[54];
-    var_v1 = &profileSaves->deathRace;
+    courseRecordInfo = &gCourseRecordInfos[54];
+    deathRaceSave = &profileSaves->deathRace;
     for (i = 0; i < 1; i++) {
-        var_v0_2->timeRecord[i] = var_v1->timeRecord[i];
+        courseRecordInfo->timeRecord[i] = deathRaceSave->timeRecord[i];
     }
 }
 
-void func_i2_80102CA4(ProfileSave* profileSaves, s32 courseIndex) {
+void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex) {
     u16 checksum;
     s32 j;
     s32 i;
-    s32 var_s4;
-    CourseRecordInfo* var_s3;
-    ProfileSave* var_s0;
-    s32 var_v0;
-    SaveCourseRecords* sp40;
+    s32 invalidSaveIndex;
+    CourseRecordInfo* courseRecordInfo;
+    ProfileSave* profileSave;
+    s32 backupSaveIndex;
+    SaveCourseRecords* courseRecord;
 
     j = 0;
 
-    for (i = 0, var_s0 = profileSaves; i < 2; i++) {
-        if (var_s0->courses[courseIndex].checksum != Save_CalculateSaveCourseRecordChecksum(var_s0, courseIndex)) {
+    for (i = 0, profileSave = profileSaves; i < 2; i++) {
+        if (profileSave->courses[courseIndex].checksum != Save_CalculateSaveCourseRecordChecksum(profileSave, courseIndex)) {
             j++;
-            var_s4 = i;
+            invalidSaveIndex = i;
         }
-        var_s0++;
+        profileSave++;
     }
 
     if (j == 2) {
-
-        func_i2_80101D18(&profileSaves[0].courses[courseIndex], true);
+        Save_InitCourseRecord(&profileSaves[0].courses[courseIndex], true);
         profileSaves[1].courses[courseIndex] = profileSaves[0].courses[courseIndex];
 
         checksum = Save_CalculateSaveCourseRecordChecksum(profileSaves, courseIndex);
@@ -1295,37 +1294,37 @@ void func_i2_80102CA4(ProfileSave* profileSaves, s32 courseIndex) {
         }
 
     } else if (j == 1) {
-        var_v0 = (var_s4 == 0) ? 1 : 0;
+        backupSaveIndex = (invalidSaveIndex == 0) ? 1 : 0;
 
-        (profileSaves + var_s4)->courses[courseIndex] = (profileSaves + var_v0)->courses[courseIndex];
+        (profileSaves + invalidSaveIndex)->courses[courseIndex] = (profileSaves + backupSaveIndex)->courses[courseIndex];
 
-        Save_WriteSaveCourseRecord(profileSaves, var_s4, courseIndex,
+        Save_WriteSaveCourseRecord(profileSaves, invalidSaveIndex, courseIndex,
                                    Save_CalculateSaveCourseRecordChecksum(profileSaves, courseIndex));
     }
 
-    sp40 = &profileSaves->courses[courseIndex];
-    var_s3 = &gCourseRecordInfos[courseIndex];
+    courseRecord = &profileSaves->courses[courseIndex];
+    courseRecordInfo = &gCourseRecordInfos[courseIndex];
 
     for (i = 0; i < 5; i++) {
-        var_s3->timeRecord[i] = sp40->timeRecord[i];
-        var_s3->engine[i] = sp40->engine[i];
-        func_i2_80102A7C(&sp40->unk_50[i], &var_s3->carInfo[i]);
+        courseRecordInfo->timeRecord[i] = courseRecord->timeRecord[i];
+        courseRecordInfo->engine[i] = courseRecord->engine[i];
+        func_i2_80102A7C(&courseRecord->unk_50[i], &courseRecordInfo->carInfo[i]);
         for (j = 0; j < 4; j++) {
-            var_s3->name[i][j] = sp40->name[i][j];
+            courseRecordInfo->name[i][j] = courseRecord->name[i][j];
         }
     }
-    var_s3->maxSpeed = sp40->maxSpeed;
-    var_s3->bestTime = sp40->bestTime;
-    func_i2_80102A7C(&sp40->unk_F0, &var_s3->maxSpeedCar);
+    courseRecordInfo->maxSpeed = courseRecord->maxSpeed;
+    courseRecordInfo->bestTime = courseRecord->bestTime;
+    func_i2_80102A7C(&courseRecord->unk_F0, &courseRecordInfo->maxSpeedCar);
 }
 
-void func_i2_80102F70(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3) {
+void Save_LoadGhostRecord(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3) {
 
     if (arg3) {
         if (ghostRecord->checksum != Save_CalculateGhostRecordChecksum(ghostRecord) * 1) {
-            func_i2_80101DE8(ghostRecord, true);
+            Save_InitGhostRecord(ghostRecord, true);
             Save_WriteGhostRecord(ghostRecord);
-            func_i2_80101E68(ghostData, true);
+            Save_InitGhostData(ghostData, true);
             Save_WriteGhostData(ghostData);
         }
     }
@@ -1337,7 +1336,7 @@ void func_i2_80102F70(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* gho
     func_i2_80102A7C(&ghostRecord->unk_20, &ghost->carInfo);
 }
 
-void func_i2_8010300C(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3) {
+void Save_LoadGhostData(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3) {
     s32 i;
     u8* var_v0;
     s8* var_v1;
@@ -1346,9 +1345,9 @@ void func_i2_8010300C(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* gho
 
     if (arg3) {
         if (ghostData->checksum != Save_CalculateGhostDataChecksum(ghostData) * 1) {
-            func_i2_80101DE8(ghostRecord2, true);
+            Save_InitGhostRecord(ghostRecord2, true);
             Save_WriteGhostRecord(ghostRecord2);
-            func_i2_80101E68(ghostData2, true);
+            Save_InitGhostData(ghostData2, true);
             Save_WriteGhostData(ghostData2);
             ghost->encodedCourseIndex = 0;
         }
@@ -1369,62 +1368,62 @@ void func_i2_8010300C(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* gho
     }
 }
 
-void func_i2_80103108(ProfileSave* profileSaves, bool arg1) {
-    SaveEditCup* var_a3;
+void Save_LoadEditCup(ProfileSave* profileSaves, bool arg1) {
+    SaveEditCup* editCup;
     s32 i;
     s32 j;
-    s32 sp30;
+    s32 invalidSaveIndex;
     u16 checksum;
-    s32 var_s2;
-    s32 var_v0;
-    ProfileSave* var_s1;
+    s32 invalidSaveCount;
+    s32 backupSaveIndex;
+    ProfileSave* profileSave;
 
-    var_s2 = 0;
+    invalidSaveCount = 0;
 
-    for (i = 0, var_s1 = profileSaves; i < 2; i++) {
-        if (var_s1->editCup.checksum != Save_CalculateSaveEditCupChecksum(var_s1) * 1) {
-            var_s2++;
-            sp30 = i;
+    for (i = 0, profileSave = profileSaves; i < 2; i++) {
+        if (profileSave->editCup.checksum != Save_CalculateSaveEditCupChecksum(profileSave) * 1) {
+            invalidSaveCount++;
+            invalidSaveIndex = i;
         }
-        var_s1++;
+        profileSave++;
     }
 
-    if (var_s2 == 2) {
-        func_i2_80101C04(&profileSaves[0].editCup, true);
+    if (invalidSaveCount == 2) {
+        Save_InitEditCup(&profileSaves[0].editCup, true);
         profileSaves[1].editCup = profileSaves[0].editCup;
 
         checksum = Save_CalculateSaveEditCupChecksum(profileSaves);
         for (i = 0; i < 2; i++) {
             Save_WriteSaveEditCup(profileSaves, i, checksum);
         }
-    } else if (var_s2 == 1) {
-        var_v0 = (sp30 == 0) ? 1 : 0;
+    } else if (invalidSaveCount == 1) {
+        backupSaveIndex = (invalidSaveIndex == 0) ? 1 : 0;
 
-        (profileSaves + sp30)->editCup = (profileSaves + var_v0)->editCup;
+        (profileSaves + invalidSaveIndex)->editCup = (profileSaves + backupSaveIndex)->editCup;
 
-        Save_WriteSaveEditCup(profileSaves, sp30, Save_CalculateSaveEditCupChecksum(profileSaves));
+        Save_WriteSaveEditCup(profileSaves, invalidSaveIndex, Save_CalculateSaveEditCupChecksum(profileSaves));
     }
 
     if (!arg1) {
         return;
     }
 
-    var_a3 = &profileSaves[0].editCup;
+    editCup = &profileSaves[0].editCup;
 
     for (i = 0; i < 6; i++) {
         for (j = 0; j < 9; j++) {
-            gEditCupTrackNames[i][j] = var_a3->editCupTrackNames[i][j];
+            gEditCupTrackNames[i][j] = editCup->editCupTrackNames[i][j];
         }
     }
 }
 
 extern f32 gCharacterLastEngine[];
 
-void func_i2_80103310(CharacterSave* characterSave, s32 courseIndex) {
+void Save_LoadCharacterSave(CharacterSave* characterSave, s32 courseIndex) {
     s32 i;
 
     if (characterSave->checksum != Save_CalculateCharacterSaveChecksum(characterSave) * 1) {
-        func_i2_80101EBC(characterSave, true);
+        Save_InitCharacterSave(characterSave, true);
         Save_WriteCharacterSave(characterSave, courseIndex);
     }
 
@@ -1433,7 +1432,7 @@ void func_i2_80103310(CharacterSave* characterSave, s32 courseIndex) {
     }
 }
 
-void func_i2_801033B8(CupSave* cupSave, u8* arg1) {
+void Save_LoadCupSave(CupSave* cupSave, u8* arg1) {
     s32 i;
     s32 j;
     s32 k;
@@ -1443,7 +1442,7 @@ void func_i2_801033B8(CupSave* cupSave, u8* arg1) {
     s32 temp;
 
     if (cupSave->checksum != Save_CalculateCupSaveChecksum(cupSave) * 1) {
-        func_i2_80101F24(cupSave, true);
+        Save_InitCupSave(cupSave, true);
         Save_WriteCupSave(cupSave);
     }
 
@@ -1547,57 +1546,60 @@ void Sram_ReadWrite(s32 direction, u32 offset, void* dramAddr, size_t size) {
     osRecvMesg(&gDmaMesgQueue, NULL, OS_MESG_BLOCK);
 }
 
-void func_i2_8010382C(GhostRecord*, s32);
+void Save_RomCopyGhostRecord(GhostRecord*, s32);
 
-s32 func_i2_801037CC(unk_80141C88* arg0, s32 courseIndex) {
+s32 Save_LoadStaffGhostRecord(GhostInfo* arg0, s32 courseIndex) {
     GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
 
     if ((courseIndex < 0) || (courseIndex >= 24)) {
         return 2;
     }
-    func_i2_8010382C(ghostRecord, courseIndex);
+    Save_RomCopyGhostRecord(ghostRecord, courseIndex);
     if (arg0 != NULL) {
         func_i2_80101590(ghostRecord, arg0);
     }
     return 0;
 }
 
-void func_i2_8010382C(GhostRecord* ghostRecord, s32 courseIndex) {
-    func_80073ED0(SEGMENT_ROM_START(segment_27F200) + D_i2_80106DF0[courseIndex][0], ghostRecord, sizeof(GhostRecord));
+void Save_RomCopyGhostRecord(GhostRecord* ghostRecord, s32 courseIndex) {
+    Dma_RomCopyAsync(SEGMENT_ROM_START(segment_27F200) + D_i2_80106DF0[courseIndex][0], ghostRecord, sizeof(GhostRecord));
 }
 
-void func_i2_80103930(GhostData*, s32);
+void Save_RomCopyGhostData(GhostData*, s32);
 
-s32 func_i2_8010387C(s32 courseIndex) {
-    s32 sp64;
-    unk_80141C88 sp24;
+s32 Save_LoadStaffGhost(s32 courseIndex) {
+    s32 ghostIndex;
+    GhostInfo sp24;
     GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
     GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
-    func_i2_801037CC(&sp24, courseIndex);
-    if (func_i2_80100B38(&sp24) != 0) {
+    Save_LoadStaffGhostRecord(&sp24, courseIndex);
+    if (func_i2_80100B38(&sp24)) {
         return 0;
     }
 
-    sp64 = func_i2_801005CC(courseIndex);
-    func_i2_80103930(ghostData, courseIndex);
-    func_i2_80102F70(ghostRecord, ghostData, &gGhosts[sp64], false);
-    func_i2_8010300C(ghostRecord, ghostData, &gGhosts[sp64], false);
+    ghostIndex = func_i2_801005CC(courseIndex);
+    Save_RomCopyGhostData(ghostData, courseIndex);
+    Save_LoadGhostRecord(ghostRecord, ghostData, &gGhosts[ghostIndex], false);
+    Save_LoadGhostData(ghostRecord, ghostData, &gGhosts[ghostIndex], false);
 
     return 0;
 }
 
-void func_i2_80103930(GhostData* ghostData, s32 courseIndex) {
+void Save_RomCopyGhostData(GhostData* ghostData, s32 courseIndex) {
     uintptr_t* offsets = D_i2_80106DF0[courseIndex];
     RomOffset romOffset = SEGMENT_ROM_START(segment_27F200);
 
-    func_80073ED0(romOffset + offsets[1], ghostData, 0x20);
-    func_80073ED0(romOffset + offsets[2], ghostData->replayData, ALIGN_2(ghostData->replaySize + 1));
+    Dma_RomCopyAsync(romOffset + offsets[1], ghostData, 0x20);
+    Dma_RomCopyAsync(romOffset + offsets[2], ghostData->replayData, ALIGN_2(ghostData->replaySize + 1));
 }
 
-void func_i2_801039BC(void) {
+void func_i2_801039BC(s32 arg0) {
     s32 i;
     s32 j;
+
+    // FAKE! this needs to be fixed by caller function
+    if (arg0) {}
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 8; j++) {

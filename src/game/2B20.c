@@ -405,7 +405,7 @@ void func_800690FC(void) {
                 case GAMEMODE_LX_MACHINE_SETTINGS:
                 case GAMEMODE_4012:
                     if ((gNumPlayers == 1) && (gCourseIndex < 0x18)) {
-                        func_i2_801012CC(gCourseIndex);
+                        Save_UpdateCourseCharacterSave(gCourseIndex);
                     }
                     break;
                 case GAMEMODE_FLX_MACHINE_SELECT:
@@ -467,7 +467,7 @@ void func_800690FC(void) {
                         func_8008D7E8();
                         break;
                     case 2:
-                        func_i2_80100520(gCourseIndex);
+                        Save_LoadGhost(gCourseIndex);
                         func_8008D8E8();
                         break;
                     case 3:

@@ -134,12 +134,12 @@ s32 D_i5_801197E4;
 extern s32 gCourseIndex;
 
 void func_i5_80116830(void) {
-    unk_80141C88 sp28;
+    GhostInfo sp28;
     s32 pad;
 
     if (D_i5_801197E4 != gCourseIndex) {
         sStaffGhostTimeBeaten = false;
-        if (func_i2_801037CC(&sp28, gCourseIndex) != 0) {
+        if (Save_LoadStaffGhostRecord(&sp28, gCourseIndex) != 0) {
             sUnlockedGhosts = 1;
         } else {
             // Within 115% of staff ghost time
@@ -595,10 +595,10 @@ void func_i5_8011796C(unk_800E3A28* arg0) {
 }
 
 void func_i5_801179A8(unk_800E3A28* arg0) {
-    unk_80141C88 sp20;
+    GhostInfo sp20;
     s32 pad;
 
-    if (func_i2_801014D4(&sp20) != 0) {
+    if (Save_LoadGhostInfo(&sp20) != 0) {
         arg0->unk_00 = 0;
     }
     if (sp20.encodedCourseIndex == 0) {

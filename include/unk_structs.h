@@ -645,7 +645,7 @@ typedef struct unk_800DCE48 {
 
 typedef struct unk_800F5DF0 {
     s32 unk_00;
-    Ghost* unk_04;
+    Ghost* ghost;
     s8* unk_08;
     s32 unk_0C;
     s16 unk_10;
@@ -679,7 +679,7 @@ typedef struct unk_80141C88_unk_1D {
     s8 unk_14[12];
 } unk_80141C88_unk_1D;
 
-typedef struct unk_80141C88 {
+typedef struct GhostInfo {
     s32 courseIndex;
     s32 encodedCourseIndex;
     s32 raceTime;
@@ -688,7 +688,7 @@ typedef struct unk_80141C88 {
     u16 unk_12;
     char trackName[9];
     unk_80141C88_unk_1D unk_1D;
-} unk_80141C88; // size = 0x40
+} GhostInfo; // size = 0x40
 
 typedef struct unk_80111870 {
     Vec3f unk_00;
