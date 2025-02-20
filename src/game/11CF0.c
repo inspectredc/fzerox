@@ -538,26 +538,26 @@ void func_80079480(void) {
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        D_800E3A28[i].id = OBJECT_FREE;
+        D_800E3A28[i].cmdId = OBJECT_FREE;
     }
 }
 
-void func_800794B0(s32 id, s32 arg1, s32 arg2, s8 arg3) {
+void func_800794B0(s32 cmdId, s32 left, s32 top, s8 priority) {
     s32 i = 0;
     unk_800E3A28* var_s0 = D_800E3A28;
 
     while (true) {
         // clang-format off
-        if (var_s0->id == OBJECT_FREE) {   \
-            var_s0->id = id;   \
-            var_s0->unk_04 = 0;      \
-            var_s0->unk_08 = 0;      \
-            var_s0->unk_0C = arg1;   \
-            var_s0->unk_10 = arg2;   \
-            var_s0->unk_14 = arg3;   \
-            var_s0->unk_15 = 1;      \
-            var_s0->unk_1C = 0;      \
-            var_s0->unk_20 = 0;      \
+        if (var_s0->cmdId == OBJECT_FREE) { \
+            var_s0->cmdId = cmdId;          \
+            var_s0->unk_04 = 0;             \
+            var_s0->unk_08 = 0;             \
+            var_s0->left = left;            \
+            var_s0->top = top;              \
+            var_s0->priority = priority;    \
+            var_s0->unk_15 = 1;             \
+            var_s0->unk_1C = 0;             \
+            var_s0->unk_20 = 0;             \
             break;
         }
         // clang-format on
@@ -567,32 +567,32 @@ void func_800794B0(s32 id, s32 arg1, s32 arg2, s8 arg3) {
         var_s0++;
     }
 
-    switch (id) {
-        case OBJECT_10:
+    switch (cmdId) {
+        case OBJECT_TITLE_BACKGROUND:
             func_i4_8011B06C(var_s0);
             break;
         case OBJECT_14:
             func_i4_8011B0C8();
             break;
-        case OBJECT_15:
+        case OBJECT_TITLE_LOGO:
             func_i4_8011B0D0(var_s0);
             break;
         case OBJECT_16:
             func_i4_8011B134();
             break;
-        case OBJECT_17:
+        case OBJECT_PUSH_START:
             func_i4_8011B13C(var_s0);
             break;
         case OBJECT_18:
             func_i4_8011B1E4();
             break;
-        case OBJECT_19:
+        case OBJECT_COPYRIGHT:
             func_i4_8011B1EC();
             break;
-        case OBJECT_20:
+        case OBJECT_TITLE_DISK_DRIVE:
             func_i4_8011B214(var_s0);
             break;
-        case OBJECT_31:
+        case OBJECT_SELECT_MACHINE:
             func_i4_80116E64();
             break;
         case OBJECT_32:
@@ -604,22 +604,22 @@ void func_800794B0(s32 id, s32 arg1, s32 arg2, s8 arg3) {
         case OBJECT_60_3:
             func_i4_80116F48(var_s0);
             break;
-        case OBJECT_33_0:
-        case OBJECT_33_1:
-        case OBJECT_33_2:
-        case OBJECT_33_3:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_0:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_1:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_2:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_3:
             func_i4_80117008(var_s0);
             break;
-        case OBJECT_40_0:
-        case OBJECT_40_1:
-        case OBJECT_40_2:
-        case OBJECT_40_3:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_0:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_1:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_2:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_3:
             func_i4_80117038(var_s0);
             break;
-        case OBJECT_44:
+        case OBJECT_MACHINE_SELECT_CURSOR:
             func_i4_8011706C();
             break;
-        case OBJECT_45:
+        case OBJECT_MACHINE_SELECT_CAR:
             func_i4_80117094(var_s0);
             break;
         case OBJECT_53:
@@ -646,10 +646,10 @@ void func_800794B0(s32 id, s32 arg1, s32 arg2, s8 arg3) {
         case OBJECT_47:
             func_i4_80117774(var_s0);
             break;
-        case OBJECT_65_0:
-        case OBJECT_65_1:
-        case OBJECT_65_2:
-        case OBJECT_65_3:
+        case OBJECT_MACHINE_STATS_0:
+        case OBJECT_MACHINE_STATS_1:
+        case OBJECT_MACHINE_STATS_2:
+        case OBJECT_MACHINE_STATS_3:
             func_i4_80117808();
             break;
         case OBJECT_80:
@@ -723,13 +723,15 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
         return gfx;
     }
 
-    switch (arg1->id) {
+    switch (arg1->cmdId) {
         case OBJECT_FREE:
             break;
-        case OBJECT_5:
-            gfx = func_8007ABA4(func_8007AE70(func_8007AB88(gfx)));
+        case OBJECT_FRAMEBUFFER:
+            gfx = func_8007AB88(gfx);
+            gfx = func_8007AE70(gfx);
+            gfx = func_8007ABA4(gfx);
             break;
-        case OBJECT_10:
+        case OBJECT_TITLE_BACKGROUND:
             gfx = func_i4_8011B380(gfx, arg1);
             break;
         case OBJECT_14:
@@ -741,31 +743,31 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
         case OBJECT_13:
             gfx = func_8007AE8C(gfx, 12, 8, 307, 231, 0, 0, 0, 0);
             break;
-        case OBJECT_15:
+        case OBJECT_TITLE_LOGO:
             gfx = func_i4_8011B3E8(gfx, arg1);
             break;
         case OBJECT_16:
             gfx = func_i4_8011B438(gfx, arg1);
             break;
-        case OBJECT_17:
+        case OBJECT_PUSH_START:
             gfx = func_i4_8011B444(gfx, arg1);
             break;
         case OBJECT_18:
             gfx = func_i4_8011B668(gfx, arg1);
             break;
-        case OBJECT_19:
+        case OBJECT_COPYRIGHT:
             gfx = func_i4_8011B674(gfx, arg1);
             break;
-        case OBJECT_20:
+        case OBJECT_TITLE_DISK_DRIVE:
             gfx = func_i4_8011B6C4(gfx, arg1);
             break;
-        case OBJECT_30:
+        case OBJECT_MACHINE_SELECT_BACKGROUND:
             gfx = func_i4_801178C4(gfx);
             break;
         case OBJECT_59:
             gfx = func_8007AC48(gfx, 24, 24, 24);
             break;
-        case OBJECT_31:
+        case OBJECT_SELECT_MACHINE:
             gfx = func_i4_80117B74(gfx, arg1);
             break;
         case OBJECT_32:
@@ -777,31 +779,31 @@ Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
         case OBJECT_60_3:
             gfx = func_i4_80117D10(gfx, arg1);
             break;
-        case OBJECT_33_0:
-        case OBJECT_33_1:
-        case OBJECT_33_2:
-        case OBJECT_33_3:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_0:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_1:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_2:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_3:
             gfx = func_i4_801180EC(gfx, arg1);
             break;
-        case OBJECT_40_0:
-        case OBJECT_40_1:
-        case OBJECT_40_2:
-        case OBJECT_40_3:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_0:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_1:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_2:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_3:
             gfx = func_i4_801181C0(gfx, arg1);
             break;
-        case OBJECT_44:
+        case OBJECT_MACHINE_SELECT_CURSOR:
             gfx = func_i4_8011821C(gfx, arg1);
             break;
-        case OBJECT_45:
+        case OBJECT_MACHINE_SELECT_CAR:
             gfx = func_i4_80118414(gfx, arg1);
             break;
         case OBJECT_46:
             gfx = func_i4_80118734(gfx, arg1);
             break;
-        case OBJECT_65_0:
-        case OBJECT_65_1:
-        case OBJECT_65_2:
-        case OBJECT_65_3:
+        case OBJECT_MACHINE_STATS_0:
+        case OBJECT_MACHINE_STATS_1:
+        case OBJECT_MACHINE_STATS_2:
+        case OBJECT_MACHINE_STATS_3:
             gfx = func_i4_80117E98(gfx, arg1);
             break;
         case OBJECT_53:
@@ -910,13 +912,13 @@ Gfx* func_80079BC8(Gfx* gfx) {
     s32 j;
 
     for (i = 0; i < 32; i++) {
-        switch (D_800E3A28[i].id) {
+        switch (D_800E3A28[i].cmdId) {
             case OBJECT_FREE:
                 break;
-            case OBJECT_10:
+            case OBJECT_TITLE_BACKGROUND:
                 func_i4_8011B2E0(&D_800E3A28[i]);
                 break;
-            case OBJECT_20:
+            case OBJECT_TITLE_DISK_DRIVE:
                 func_i4_8011B874(&D_800E3A28[i]);
                 break;
             case OBJECT_93:
@@ -936,23 +938,23 @@ Gfx* func_80079BC8(Gfx* gfx) {
                 D_800E3F28[D_800E3A28[i].unk_18].unk_04 = 0;
                 func_i4_80119BC0(&D_800E3A28[i]);
                 break;
-            case OBJECT_33_0:
-            case OBJECT_33_1:
-            case OBJECT_33_2:
-            case OBJECT_33_3:
+            case OBJECT_MACHINE_SELECT_PORTRAIT_0:
+            case OBJECT_MACHINE_SELECT_PORTRAIT_1:
+            case OBJECT_MACHINE_SELECT_PORTRAIT_2:
+            case OBJECT_MACHINE_SELECT_PORTRAIT_3:
                 D_800E3F28[D_800E3A28[i].unk_18].unk_04 = 0;
                 func_i4_80119C80(&D_800E3A28[i]);
                 break;
-            case OBJECT_40_0:
-            case OBJECT_40_1:
-            case OBJECT_40_2:
-            case OBJECT_40_3:
+            case OBJECT_MACHINE_SELECT_CURSOR_NUM_0:
+            case OBJECT_MACHINE_SELECT_CURSOR_NUM_1:
+            case OBJECT_MACHINE_SELECT_CURSOR_NUM_2:
+            case OBJECT_MACHINE_SELECT_CURSOR_NUM_3:
                 func_i4_80119D0C(&D_800E3A28[i]);
                 break;
-            case OBJECT_44:
+            case OBJECT_MACHINE_SELECT_CURSOR:
                 func_i4_80119D84(&D_800E3A28[i]);
                 break;
-            case OBJECT_45:
+            case OBJECT_MACHINE_SELECT_CAR:
                 func_i4_80119D8C(&D_800E3A28[i]);
                 break;
             case OBJECT_53:
@@ -996,7 +998,7 @@ Gfx* func_80079BC8(Gfx* gfx) {
 
     for (j = 0; j < 16; j++) {
         for (i = 0; i < 32; i++) {
-            if (j == D_800E3A28[i].unk_14) {
+            if (j == D_800E3A28[i].priority) {
                 gfx = func_800797CC(gfx, &D_800E3A28[i]);
             }
         }
@@ -1005,13 +1007,13 @@ Gfx* func_80079BC8(Gfx* gfx) {
     return gfx;
 }
 
-unk_800E3A28* func_80079E88(s32 id) {
+unk_800E3A28* func_80079E88(s32 cmdId) {
     unk_800E3A28* var_v1;
 
     var_v1 = D_800E3A28;
 
     while (true) {
-        if (id == var_v1->id) {
+        if (cmdId == var_v1->cmdId) {
             break;
         }
         var_v1++;
@@ -1045,7 +1047,7 @@ void func_80079F1C(void) {
 void func_80079F54(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
 
-    var_v0 = arg1 - arg0->unk_0C;
+    var_v0 = arg1 - arg0->left;
     if (var_v0 != 0) {
         if (var_v0 > 0) {
             var_v0 /= arg2;
@@ -1059,13 +1061,13 @@ void func_80079F54(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
             }
         }
     }
-    arg0->unk_0C += var_v0;
+    arg0->left += var_v0;
 }
 
 void func_80079FFC(unk_800E3A28* arg0, s32 arg1) {
     s32 var_v0;
 
-    var_v0 = arg1 - arg0->unk_10;
+    var_v0 = arg1 - arg0->top;
     if (var_v0 != 0) {
         if (var_v0 > 0) {
             var_v0 /= 4;
@@ -1079,7 +1081,7 @@ void func_80079FFC(unk_800E3A28* arg0, s32 arg1) {
             }
         }
     }
-    arg0->unk_10 += var_v0;
+    arg0->top += var_v0;
 }
 
 void func_8007A06C(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
@@ -1090,7 +1092,7 @@ void func_8007A06C(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
 void func_8007A0A0(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     s32 var_v0;
 
-    var_v0 = arg1 - arg0->unk_0C;
+    var_v0 = arg1 - arg0->left;
     if (var_v0 != 0) {
         if (var_v0 > 0) {
             var_v0 /= 4;
@@ -1100,10 +1102,10 @@ void func_8007A0A0(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
             if (var_v0 < 8) {
                 var_v0 = 8;
             }
-            arg0->unk_0C += var_v0;
+            arg0->left += var_v0;
 
-            if (arg1 < arg0->unk_0C) {
-                arg0->unk_0C = arg1;
+            if (arg1 < arg0->left) {
+                arg0->left = arg1;
             }
         } else {
             var_v0 /= 4;
@@ -1113,10 +1115,10 @@ void func_8007A0A0(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
             if (var_v0 > -8) {
                 var_v0 = -8;
             }
-            arg0->unk_0C += var_v0;
+            arg0->left += var_v0;
 
-            if (arg0->unk_0C < arg1) {
-                arg0->unk_0C = arg1;
+            if (arg0->left < arg1) {
+                arg0->left = arg1;
             }
         }
     }
@@ -1125,33 +1127,33 @@ void func_8007A0A0(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
 void func_8007A154(unk_800E3A28* arg0, s32 arg1) {
     s32 var_v0;
 
-    var_v0 = arg1 - arg0->unk_10;
+    var_v0 = arg1 - arg0->top;
     if (var_v0 != 0) {
         if (var_v0 > 0) {
             var_v0 /= 4;
-            if (++var_v0 > 0xC0) {
-                var_v0 = 0xC0;
+            if (++var_v0 > 192) {
+                var_v0 = 192;
             }
             if (var_v0 < 8) {
                 var_v0 = 8;
             }
-            arg0->unk_10 += var_v0;
+            arg0->top += var_v0;
 
-            if (arg1 < arg0->unk_10) {
-                arg0->unk_10 = arg1;
+            if (arg1 < arg0->top) {
+                arg0->top = arg1;
             }
         } else {
             var_v0 /= 4;
-            if (--var_v0 < -0xC0) {
-                var_v0 = -0xC0;
+            if (--var_v0 < -192) {
+                var_v0 = -192;
             }
             if (var_v0 >= -7) {
                 var_v0 = -8;
             }
-            arg0->unk_10 += var_v0;
+            arg0->top += var_v0;
 
-            if (arg0->unk_10 < arg1) {
-                arg0->unk_10 = arg1;
+            if (arg0->top < arg1) {
+                arg0->top = arg1;
             }
         }
     }
@@ -1160,7 +1162,7 @@ void func_8007A154(unk_800E3A28* arg0, s32 arg1) {
 void func_8007A208(unk_800E3A28* arg0, s32 arg1) {
     s32 var_v0;
 
-    var_v0 = arg1 - arg0->unk_10;
+    var_v0 = arg1 - arg0->top;
     if (var_v0 != 0) {
         if (var_v0 > 0) {
             var_v0 /= 4;
@@ -1174,13 +1176,13 @@ void func_8007A208(unk_800E3A28* arg0, s32 arg1) {
             }
         }
     }
-    arg0->unk_10 += var_v0;
+    arg0->top += var_v0;
 }
 
 void func_8007A278(unk_800E3A28* arg0, s32 arg1) {
     s32 var_v0;
 
-    var_v0 = arg1 - arg0->unk_0C;
+    var_v0 = arg1 - arg0->left;
     if (var_v0 != 0) {
         var_v0 = 200 / var_v0;
         if (var_v0 > 0) {
@@ -1190,10 +1192,10 @@ void func_8007A278(unk_800E3A28* arg0, s32 arg1) {
             if (var_v0 < 16) {
                 var_v0 = 16;
             }
-            arg0->unk_0C += var_v0;
+            arg0->left += var_v0;
 
-            if (arg1 < arg0->unk_0C) {
-                arg0->unk_0C = arg1;
+            if (arg1 < arg0->left) {
+                arg0->left = arg1;
             }
         } else {
             if (var_v0 < -24) {
@@ -1202,22 +1204,22 @@ void func_8007A278(unk_800E3A28* arg0, s32 arg1) {
             if (var_v0 > -16) {
                 var_v0 = -16;
             }
-            arg0->unk_0C += var_v0;
+            arg0->left += var_v0;
 
-            if (arg0->unk_0C < arg1) {
-                arg0->unk_0C = arg1;
+            if (arg0->left < arg1) {
+                arg0->left = arg1;
             }
         }
     }
 }
 
 void func_8007A334(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
-    UNUSED s32 temp = arg0->unk_0C;
+    UNUSED s32 temp = arg0->left;
     s32 var_v1;
 
-    var_v1 = arg1 - arg0->unk_0C;
-    if (arg1 == arg0->unk_0C) {
-        arg0->unk_0C += arg2;
+    var_v1 = arg1 - arg0->left;
+    if (arg1 == arg0->left) {
+        arg0->left += arg2;
         return;
     }
     if (var_v1 != 0) {
@@ -1233,16 +1235,16 @@ void func_8007A334(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
             }
         }
     }
-    arg0->unk_0C -= var_v1;
+    arg0->left -= var_v1;
 }
 
 void func_8007A3B8(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
-    UNUSED s32 temp = arg0->unk_10;
+    UNUSED s32 temp = arg0->top;
     s32 var_v1;
 
-    var_v1 = arg1 - arg0->unk_10;
-    if (arg1 == arg0->unk_10) {
-        arg0->unk_10 += arg2;
+    var_v1 = arg1 - arg0->top;
+    if (arg1 == arg0->top) {
+        arg0->top += arg2;
         return;
     }
     if (var_v1 != 0) {
@@ -1258,5 +1260,5 @@ void func_8007A3B8(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
             }
         }
     }
-    arg0->unk_10 -= var_v1;
+    arg0->top -= var_v1;
 }

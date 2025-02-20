@@ -139,7 +139,7 @@ void func_i6_80115DF0(void) {
     if ((gGameFrameCount % 4) == 0) {
         func_800794B0(OBJECT_94, 0, 0, 0);
     }
-    func_800794B0(OBJECT_5, 0, 0, 1);
+    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
     if ((gGameFrameCount % 4) == 1) {
         func_800794B0(OBJECT_94, 0, 0, 0);
     }
@@ -439,7 +439,7 @@ void func_i6_801167EC(unk_800E3A28* arg0) {
 
     switch (arg0->unk_04) {
         case 0:
-            arg0->unk_0C = 8;
+            arg0->left = 8;
             /* fallthrough */
         case 1:
             for (i = 0; i < 240; i++) {
@@ -454,7 +454,7 @@ void func_i6_801167EC(unk_800E3A28* arg0) {
 extern s16 D_800CD044;
 
 void func_i6_80116894(unk_800E3A28* arg0) {
-    s32 index = arg0->id - OBJECT_81_0;
+    s32 index = arg0->cmdId - OBJECT_81_0;
 
     func_80077D50(sMenuSignCompTexInfos[index], 0);
     if (D_800CD044 == 0x21) {
@@ -502,7 +502,7 @@ void func_i6_801169EC(void) {
 
 void func_i6_80116A48(unk_800E3A28* arg0) {
     func_80077D50(sOkCompTexInfo, 0);
-    arg0->unk_0C = 0x32;
+    arg0->left = 50;
 }
 
 s32 func_i6_8011DBD0(void);
@@ -520,7 +520,7 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp1;
     s32 temp2;
 
-    temp_t0 = arg1->id - OBJECT_81_0;
+    temp_t0 = arg1->cmdId - OBJECT_81_0;
 
     if ((temp_t0 == 4) || (temp_t0 == 7)) {
         return gfx;
@@ -582,19 +582,19 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
 
     if (arg1->unk_04 < 3) {
         sp44 = sTitleBackgroundCompTexInfos[arg1->unk_04];
-        gfx = func_80078EA0(gfx, sp44, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
-        gfx = func_8007A440(gfx, arg1->unk_0C, arg1->unk_10, arg1->unk_0C + sp44->width, arg1->unk_10 + sp44->height,
+        gfx = func_80078EA0(gfx, sp44, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_8007A440(gfx, arg1->left, arg1->top, arg1->left + sp44->width, arg1->top + sp44->height,
                             D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68, D_i6_8011DC6C);
     } else {
         sp44 = sTitleBackgroundCompTexInfos[D_800CD3C4];
-        gfx = func_80078EA0(gfx, sp44, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sp44, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
         var_t1 = (arg1->unk_04 / 10);
         var_ra = sTitleBackgroundCompTexInfos[var_t1 - 1];
 
         texture = func_800783AC(var_ra->unk_04);
 
-        sp58 = arg1->unk_0C;
-        sp54 = arg1->unk_10;
+        sp58 = arg1->left;
+        sp54 = arg1->top;
         gSPDisplayList(gfx++, D_3000088);
 
         switch (arg1->unk_04) {
@@ -689,7 +689,7 @@ Gfx* func_i6_80116C78(Gfx* gfx, unk_800E3A28* arg1) {
                                     1 << 10);
         }
 
-        gfx = func_8007A440(gfx, arg1->unk_0C, arg1->unk_10, arg1->unk_0C + sp44->width, arg1->unk_10 + sp44->height,
+        gfx = func_8007A440(gfx, arg1->left, arg1->top, arg1->left + sp44->width, arg1->top + sp44->height,
                             D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68, D_i6_8011DC6C);
         switch (arg1->unk_04) {
             case 10:
@@ -740,7 +740,7 @@ Gfx* func_i6_80117400(Gfx* gfx, unk_800E3A28* arg1) {
 
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return func_80078EA0(gfx, sSelectModeCompTexInfo, arg1->unk_0C - temp, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sSelectModeCompTexInfo, arg1->left - temp, arg1->top, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
@@ -773,7 +773,7 @@ Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
             break;
     }
     temp_s7 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->unk_0C - temp_s7, arg1->unk_10, 0, 0, 0, 1.0f,
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->left - temp_s7, arg1->top, 0, 0, 0, 1.0f,
                         1.0f);
 
     for (i = 0; i < 3; i++) {
@@ -795,8 +795,8 @@ Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
             }
         }
-        gfx = func_80078EA0(gfx, sNumPlayersCompTexInfos[i], (arg1->unk_0C - temp_s7) + 0x20,
-                            arg1->unk_10 + (i * 20) + 0xC, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sNumPlayersCompTexInfos[i], (arg1->left - temp_s7) + 0x20,
+                            arg1->top + (i * 20) + 0xC, 1, 0, 0, 1.0f, 1.0f);
     }
 
     if (D_800CD384 != 2) {
@@ -839,7 +839,7 @@ Gfx* func_i6_80117760(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     temp_s6 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->unk_0C - temp_s6, arg1->unk_10, 0, 0, 0, 1.0f,
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->left - temp_s6, arg1->top, 0, 0, 0, 1.0f,
                         1.0f);
 
     for (i = 0; i < 4; i++) {
@@ -859,12 +859,12 @@ Gfx* func_i6_80117760(Gfx* gfx, unk_800E3A28* arg1) {
         }
         if ((D_800CD3C0 < 2) && (gSettingEverythingUnlocked == 0)) {
             if (i < 3) {
-                gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (arg1->unk_0C - temp_s6) + 0x20,
-                                    arg1->unk_10 + (i * 20) + 0xE, 1, 0, 0, 1.0f, 1.0f);
+                gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (arg1->left - temp_s6) + 0x20,
+                                    arg1->top + (i * 20) + 0xE, 1, 0, 0, 1.0f, 1.0f);
             }
         } else {
-            gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (arg1->unk_0C - temp_s6) + 0x20,
-                                arg1->unk_10 + (i * 18) + 7, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (arg1->left - temp_s6) + 0x20,
+                                arg1->top + (i * 18) + 7, 1, 0, 0, 1.0f, 1.0f);
         }
     }
 
@@ -902,7 +902,7 @@ Gfx* func_i6_80117A18(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     temp_s7 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->unk_0C - temp_s7, arg1->unk_10, 0, 0, 0, 1.0f,
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->left - temp_s7, arg1->top, 0, 0, 0, 1.0f,
                         1.0f);
 
     for (i = 0; i < 2; i++) {
@@ -921,8 +921,8 @@ Gfx* func_i6_80117A18(Gfx* gfx, unk_800E3A28* arg1) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
         temp_a1 = sTimeAttackModeCompTexInfos[i];
-        gfx = func_80078EA0(gfx, temp_a1, (((s32) (0x80 - temp_a1->width) / 2) + arg1->unk_0C) - temp_s7,
-                            arg1->unk_10 + (i * 28) + 0x15, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, temp_a1, (((s32) (0x80 - temp_a1->width) / 2) + arg1->left) - temp_s7,
+                            arg1->top + (i * 28) + 0x15, 1, 0, 0, 1.0f, 1.0f);
     }
 
     return gfx;
@@ -937,11 +937,11 @@ Gfx* func_i6_80117C50(Gfx* gfx, unk_800E3A28* arg1) {
         case 4:
         case 5:
             gfx = func_8007DB28(gfx, 1);
-            gfx = func_80078EA0(gfx, sOkCompTexInfo, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sOkCompTexInfo, arg1->left + 0x10B, arg1->top + 0xD0, 1, 0, 0, 1.0f, 1.0f);
             break;
         default:
             gfx = func_8007DB28(gfx, 0);
-            gfx = func_80078EA0(gfx, sOkCompTexInfo, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sOkCompTexInfo, arg1->left + 0x10B, arg1->top + 0xD0, 1, 0, 0, 1.0f, 1.0f);
             break;
     }
     return gfx;

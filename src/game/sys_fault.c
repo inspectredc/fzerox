@@ -151,8 +151,7 @@ void Fault_DisplayFloatException(u32 exceptFlags) {
 }
 
 extern OSMesgQueue gSerialEventQueue;
-// unk flags
-const u16 D_800D4AE4[] = { 0x8000, 0x0008, 0x0008, 0x4000, 0x0001, 0x0001, 0x4000, 0x0001, 0x4000, 0x0001, 0x1000 };
+const u16 sCrashDebuggerInputs[] = { BTN_A, BTN_CUP, BTN_CUP, BTN_B, BTN_CRIGHT, BTN_CRIGHT, BTN_B, BTN_CRIGHT, BTN_B, BTN_CRIGHT, BTN_START };
 extern Controller gSharedController;
 #define CAUSE_INDEX(cause) ((cause >> CAUSE_EXCSHIFT) & (CAUSE_EXCMASK >> CAUSE_EXCSHIFT))
 
@@ -177,14 +176,14 @@ void Fault_DisplayDebugInfo(OSThread* thread) {
         if (gSharedController.buttonPressed == 0) {
             continue;
         }
-        if (!(gSharedController.buttonCurrent & 0x2000)) {
+        if (!(gSharedController.buttonCurrent & BTN_Z)) {
             continue;
         }
-        if (!(gSharedController.buttonCurrent & 0x20)) {
+        if (!(gSharedController.buttonCurrent & BTN_L)) {
             continue;
         }
         i++;
-        if (D_800D4AE4[i - 1] & gSharedController.buttonPressed) {
+        if (sCrashDebuggerInputs[i - 1] & gSharedController.buttonPressed) {
             if (i == 11) {
                 break;
             }

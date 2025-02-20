@@ -523,27 +523,27 @@ void func_i4_80115DF0(void) {
     if (D_i4_8011D774 > 30) {
         D_i4_8011D774 = 30;
     }
-    func_800794B0(OBJECT_5, 0, 0, 1);
-    func_800794B0(OBJECT_30, 0, 0, 4);
-    func_800794B0(OBJECT_31, 0x50, 0xD, 4);
-    func_800794B0(OBJECT_44, 0x3C, 0xA, 8);
-    func_800794B0(OBJECT_45, 0, 0, 0xA);
+    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
+    func_800794B0(OBJECT_MACHINE_SELECT_BACKGROUND, 0, 0, 4);
+    func_800794B0(OBJECT_SELECT_MACHINE, 0x50, 0xD, 4);
+    func_800794B0(OBJECT_MACHINE_SELECT_CURSOR, 0x3C, 0xA, 8);
+    func_800794B0(OBJECT_MACHINE_SELECT_CAR, 0, 0, 0xA);
 
     switch (gNumPlayers) {
         case 4:
-            func_800794B0(OBJECT_65_3, 0, 0, 0xC);
-            func_800794B0(OBJECT_40_3, 0x3C, 0xA, 0xC);
-            func_800794B0(OBJECT_33_3, 0x104, 0xBE, 6);
+            func_800794B0(OBJECT_MACHINE_STATS_3, 0, 0, 0xC);
+            func_800794B0(OBJECT_MACHINE_SELECT_CURSOR_NUM_3, 0x3C, 0xA, 0xC);
+            func_800794B0(OBJECT_MACHINE_SELECT_PORTRAIT_3, 0x104, 0xBE, 6);
             /* fallthrough */
         case 3:
-            func_800794B0(OBJECT_65_2, 0, 0, 0xC);
-            func_800794B0(OBJECT_40_2, 0x3C, 0xA, 0xC);
-            func_800794B0(OBJECT_33_2, 0x104, 0xA, 6);
+            func_800794B0(OBJECT_MACHINE_STATS_2, 0, 0, 0xC);
+            func_800794B0(OBJECT_MACHINE_SELECT_CURSOR_NUM_2, 0x3C, 0xA, 0xC);
+            func_800794B0(OBJECT_MACHINE_SELECT_PORTRAIT_2, 0x104, 0xA, 6);
             /* fallthrough */
         case 2:
-            func_800794B0(OBJECT_65_1, 0, 0, 0xC);
-            func_800794B0(OBJECT_40_1, 0x3C, 0xA, 0xC);
-            func_800794B0(OBJECT_33_1, 0x14, 0xBE, 6);
+            func_800794B0(OBJECT_MACHINE_STATS_1, 0, 0, 0xC);
+            func_800794B0(OBJECT_MACHINE_SELECT_CURSOR_NUM_1, 0x3C, 0xA, 0xC);
+            func_800794B0(OBJECT_MACHINE_SELECT_PORTRAIT_1, 0x14, 0xBE, 6);
             /* fallthrough */
         case 1:
             break;
@@ -552,9 +552,9 @@ void func_i4_80115DF0(void) {
     if (D_800CD380 == 0) {
         func_800794B0(OBJECT_47, 0, 0, 0xC);
     }
-    func_800794B0(OBJECT_65_0, 0, 0, 0xC);
-    func_800794B0(OBJECT_40_0, 0x3C, 0xA, 0xC);
-    func_800794B0(OBJECT_33_0, 0x14, 0xA, 6);
+    func_800794B0(OBJECT_MACHINE_STATS_0, 0, 0, 0xC);
+    func_800794B0(OBJECT_MACHINE_SELECT_CURSOR_NUM_0, 0x3C, 0xA, 0xC);
+    func_800794B0(OBJECT_MACHINE_SELECT_PORTRAIT_0, 0x14, 0xA, 6);
 
     if (gNumPlayers == 1) {
         func_800794B0(OBJECT_48, 0, 0, 0xC);
@@ -589,7 +589,7 @@ void func_i4_801160D8(void) {
         gPlayerEngine[0] = gCharacterLastEngine[gRacers[0].character];
     }
 
-    func_800794B0(OBJECT_5, 0, 0, 1);
+    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
     func_800794B0(OBJECT_59, 0, 0, 4);
     func_800794B0(OBJECT_50, 0, 0, 0xC);
     func_800794B0(OBJECT_51, 0xA0, 0x22, 0xA);
@@ -655,10 +655,10 @@ s32 func_i4_8011631C(void) {
             continue;
         }
         if (gInputButtonPressed & (BTN_L | BTN_R | BTN_CLEFT | BTN_CDOWN)) {
-            if ((gSharedController.buttonCurrent & 0x20) && (gSharedController.buttonCurrent & 0x10) &&
-                (gSharedController.buttonCurrent & 2) && (gSharedController.buttonCurrent & 4) &&
-                (func_80079E88(OBJECT_45)->unk_20 == 0) && (D_800CD3B0 != 3)) {
-                func_80079E88(OBJECT_45)->unk_20 = 1;
+            if ((gSharedController.buttonCurrent & BTN_L) && (gSharedController.buttonCurrent & BTN_R) &&
+                (gSharedController.buttonCurrent & BTN_CLEFT) && (gSharedController.buttonCurrent & BTN_CDOWN) &&
+                (func_80079E88(OBJECT_MACHINE_SELECT_CAR)->unk_20 == 0) && (D_800CD3B0 != 3)) {
+                func_80079E88(OBJECT_MACHINE_SELECT_CAR)->unk_20 = 1;
                 D_i4_8011D778 = 1.0f;
                 D_i4_8011D77C = 0.0f;
                 func_800BA8D8(0x17);
@@ -939,7 +939,7 @@ void func_i4_80116E8C(unk_800E3A28* arg0) {
 }
 
 void func_i4_80116F48(unk_800E3A28* arg0) {
-    s32 playerIndex = arg0->id - OBJECT_60_0;
+    s32 playerIndex = arg0->cmdId - OBJECT_60_0;
 
     arg0->unk_04 = gRacers[playerIndex].character;
     arg0->unk_04 = func_i4_80116E5C(arg0->unk_04);
@@ -957,7 +957,7 @@ void func_i4_80117008(unk_800E3A28* arg0) {
 }
 
 void func_i4_80117038(unk_800E3A28* arg0) {
-    func_80077D50(sPlayerNumIconCompTexInfos[arg0->id - OBJECT_40_0], 0);
+    func_80077D50(sPlayerNumIconCompTexInfos[arg0->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], 0);
 }
 
 void func_i4_8011706C(void) {
@@ -973,8 +973,8 @@ void func_i4_80117094(unk_800E3A28* arg0) {
     arg0->unk_1C = temp_v0;
 
     for (i = 0; i < 30; i++) {
-        temp_v0[i].vp.vscale[0] = 0x280;
-        temp_v0[i].vp.vscale[1] = 0x1E0;
+        temp_v0[i].vp.vscale[0] = 640;
+        temp_v0[i].vp.vscale[1] = 480;
         temp_v0[i].vp.vscale[2] = 0x1FF;
         temp_v0[i].vp.vscale[3] = 0;
         temp_v0[i].vp.vtrans[0] = (((i % 6) * 0x28) + 0x39) << 2;
@@ -1101,12 +1101,12 @@ void func_i4_80117808(void) {
 
 void func_i4_80117854(unk_800E3A28* arg0) {
     func_80077D50(sOKCompTexInfo, 0);
-    arg0->unk_10 = 50;
+    arg0->top = 50;
 }
 
 void func_i4_8011788C(unk_800E3A28* arg0) {
     func_80077D50(sOKCompTexInfo, 0);
-    arg0->unk_0C = 50;
+    arg0->left = 50;
 }
 
 #define PACK_5551(r, g, b, a) (((((r) << 11) | ((g) << 6)) | ((b) << 1)) | (a))
@@ -1134,7 +1134,7 @@ Gfx* func_i4_801178C4(Gfx* gfx) {
 Gfx* func_i4_80117B74(Gfx* gfx, unk_800E3A28* arg1) {
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return func_80078EA0(gfx, sSelectMachineCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sSelectMachineCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
@@ -1142,7 +1142,7 @@ Gfx* func_i4_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
     const s32* var_s0;
 
     if (gNumPlayers == 1) {
-        gfx = func_80078EA0(gfx, sPortraitCompTexInfos[gRacers[0].character], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f,
+        gfx = func_80078EA0(gfx, sPortraitCompTexInfos[gRacers[0].character], arg1->left, arg1->top, 0, 0, 0, 1.0f,
                             1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
@@ -1160,12 +1160,12 @@ Gfx* func_i4_80117D10(Gfx* gfx, unk_800E3A28* arg1) {
     s32 playerIndex;
     const s32* temp_v0;
 
-    playerIndex = arg1->id - OBJECT_60_0;
+    playerIndex = arg1->cmdId - OBJECT_60_0;
     temp_v0 = &D_i4_8011D6C4[playerIndex * 2];
     switch (gNumPlayers) {
         case 1:
-            gfx = func_80078EA0(gfx, sPortraitBackgroundCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
-            gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sPortraitBackgroundCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
             break;
         case 2:
             gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], temp_v0[0] - 4, temp_v0[1] + 0x1A, 0, 0, 0, 1.0f, 1.0f);
@@ -1183,16 +1183,16 @@ Gfx* func_i4_80117E98(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_fp;
     s32 temp_s0;
     s32 temp_t0;
-    s32 temp_t2;
+    s32 playerIndex;
     s8* temp_a3;
     s32 i;
 
-    temp_t2 = arg1->id - OBJECT_65_0;
+    playerIndex = arg1->cmdId - OBJECT_MACHINE_STATS_0;
 
-    temp_a3 = &D_800F80C8[gRacers[temp_t2].character].machineStats;
-    temp_fp = D_i4_8011D694[temp_t2 * 2 + 0];
-    temp_t0 = D_i4_8011D694[temp_t2 * 2 + 1];
-    if (temp_t2 < 2) {
+    temp_a3 = &D_800F80C8[gRacers[playerIndex].character].machineStats;
+    temp_fp = D_i4_8011D694[playerIndex * 2 + 0];
+    temp_t0 = D_i4_8011D694[playerIndex * 2 + 1];
+    if (playerIndex < 2) {
         for (i = 0; i < 3; i++) {
             gfx = func_80078EA0(gfx, sMachineStatCompTexInfos[i], temp_fp, (temp_t0 - 7) + i * 20, 0, 0, 0, 1.0f, 1.0f);
             temp_s0 = sMachineStatValues[temp_a3[i]];
@@ -1211,18 +1211,17 @@ Gfx* func_i4_80117E98(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 Gfx* func_i4_801180EC(Gfx* gfx, unk_800E3A28* arg1) {
-    s32 sp3C;
-    s32* temp_v1;
+    s32 playerIndex;
 
-    sp3C = arg1->id - OBJECT_33_0;
+    playerIndex = arg1->cmdId - OBJECT_MACHINE_SELECT_PORTRAIT_0;
 
-    gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[sp3C], D_i4_8011D674[sp3C * 2 + 0] + arg1->unk_0C,
-                         D_i4_8011D674[sp3C * 2 + 1] + arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[playerIndex], D_i4_8011D674[playerIndex * 2 + 0] + arg1->left,
+                         D_i4_8011D674[playerIndex * 2 + 1] + arg1->top, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_801181C0(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[arg1->id - OBJECT_40_0], arg1->unk_0C, arg1->unk_10, 0, 0, 0,
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[arg1->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], arg1->left, arg1->top, 0, 0, 0,
                          1.0f, 1.0f);
 }
 
@@ -1234,7 +1233,7 @@ Gfx* func_i4_8011821C(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_s3 = 30;
 
     for (i = 0; i < 4; i++) {
-        if (func_80079E88(OBJECT_40_0 + i) != NULL) {
+        if (func_80079E88(OBJECT_MACHINE_SELECT_CURSOR_NUM_0 + i) != NULL) {
             temp_v0 = (u32) gGameFrameCount % temp_s3;
             if ((D_800CD3A8[i] != 0) || (temp_v0 >= 0xF)) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -1242,10 +1241,10 @@ Gfx* func_i4_8011821C(Gfx* gfx, unk_800E3A28* arg1) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255 - ((temp_v0 * 510) / temp_s3));
             }
             temp_v0 = D_i4_8011D780[i];
-            arg1->unk_0C = ((temp_v0 % 6) * 0x28) + 0x28;
-            arg1->unk_10 = ((temp_v0 / 6) * 0x22) + 0x25;
+            arg1->left = ((temp_v0 % 6) * 0x28) + 0x28;
+            arg1->top = ((temp_v0 / 6) * 0x22) + 0x25;
 
-            gfx = func_80078EA0(gfx, sMachineSelectCursorCompTexInfo, arg1->unk_0C, arg1->unk_10, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sMachineSelectCursorCompTexInfo, arg1->left, arg1->top, 1, 0, 0, 1.0f, 1.0f);
         }
     }
     return gfx;
@@ -1313,7 +1312,7 @@ Gfx* func_i4_80118734(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, arg1->unk_0C + var_v1, arg1->unk_10 + 0xD1, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, arg1->left + var_v1, arg1->top + 0xD1, 1, 0, 0, 1.0f, 1.0f);
 }
 
 extern const char* gMachineNames[];
@@ -1356,7 +1355,7 @@ Gfx* func_i4_80118918(Gfx* gfx, unk_800E3A28* arg1) {
             continue;
         }
 
-        if (gControllers[gPlayerControlPorts[i]].buttonCurrent & 0xF) {
+        if (gControllers[gPlayerControlPorts[i]].buttonCurrent & (BTN_CUP | BTN_CDOWN | BTN_CLEFT | BTN_CRIGHT)) {
             D_i4_8011D4E4[i] = 0;
             continue;
         }
@@ -1416,8 +1415,8 @@ Gfx* func_i4_80118EC8(Gfx* gfx, unk_800E3A28* arg1) {
 
     if (gNumPlayers == 1) {
         temp_s4 = D_800F80C8[gRacers[0].character].unk_14;
-        gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
-        gfx = func_i2_DrawMachineWeight(gfx, arg1->unk_0C + 0x66, arg1->unk_10 + 0x17, temp_s4);
+        gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_i2_DrawMachineWeight(gfx, arg1->left + 0x66, arg1->top + 0x17, temp_s4);
 
         switch (D_800CD3B4) {
             case 0:
@@ -1429,7 +1428,7 @@ Gfx* func_i4_80118EC8(Gfx* gfx, unk_800E3A28* arg1) {
                 break;
         }
 
-        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, arg1->unk_0C + 3, arg1->unk_10 + 1, 1, 0, 0,
+        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, arg1->left + 3, arg1->top + 1, 1, 0, 0,
                             1.0f, 1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
@@ -1460,11 +1459,11 @@ Gfx* func_i4_80119170(Gfx* gfx, unk_800E3A28* arg1) {
     s32 pad;
 
     if (gNumPlayers == 1) {
-        gfx = func_80078EA0(gfx, sMachineBodyBoostGripCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sMachineBodyBoostGripCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
 
         for (i = 0; i < 3; i++) {
             temp = D_800F80C8[gRacers[0].character].machineStats;
-            gfx = func_i2_DrawMachineStatValue(gfx, arg1->unk_0C + 0x69, arg1->unk_10 + i * 23 + 3, temp[i]);
+            gfx = func_i2_DrawMachineStatValue(gfx, arg1->left + 0x69, arg1->top + i * 23 + 3, temp[i]);
         }
     } else {
         for (i = 0; i < gNumPlayers; i++) {
@@ -1508,7 +1507,7 @@ Gfx* func_i4_801193B8(Gfx* gfx, unk_800E3A28* arg1) {
 Gfx* func_i4_801194F8(Gfx* gfx, unk_800E3A28* arg1) {
 
     if (gNumPlayers == 1) {
-        gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
@@ -1586,16 +1585,16 @@ Gfx* func_i4_80119834(Gfx* gfx, unk_800E3A28* arg1) {
         case 3:
             break;
         default:
-            if (((D_800CD3C0 >= 2) || (gSettingEverythingUnlocked != 0)) && (gSharedController.buttonCurrent & 8)) {
+            if (((D_800CD3C0 >= 2) || (gSettingEverythingUnlocked != 0)) && (gSharedController.buttonCurrent & BTN_CUP)) {
                 difficulty = MASTER + 1;
             }
-            if (gSharedController.buttonCurrent & 1) {
+            if (gSharedController.buttonCurrent & BTN_CRIGHT) {
                 difficulty = EXPERT + 1;
             }
-            if (gSharedController.buttonCurrent & 4) {
+            if (gSharedController.buttonCurrent & BTN_CDOWN) {
                 difficulty = STANDARD + 1;
             }
-            if (gSharedController.buttonCurrent & 2) {
+            if (gSharedController.buttonCurrent & BTN_CLEFT) {
                 difficulty = NOVICE + 1;
             }
             break;
@@ -1649,14 +1648,14 @@ Gfx* func_i4_80119A64(Gfx* gfx, unk_800E3A28* arg1) {
 
 Gfx* func_i4_80119B50(Gfx* gfx, unk_800E3A28* arg1) {
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, arg1->unk_0C + 0x10B, arg1->unk_10 + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, arg1->left + 0x10B, arg1->top + 0xD0, 1, 0, 0, 1.0f, 1.0f);
 }
 
 void func_i4_80119BB8(unk_800E3A28* arg0) {
 }
 
 void func_i4_80119BC0(unk_800E3A28* arg0) {
-    s32 index = arg0->id - OBJECT_60_0;
+    s32 index = arg0->cmdId - OBJECT_60_0;
     s32 character = gRacers[index].character;
 
     character = func_i4_80116E5C(character);
@@ -1671,8 +1670,8 @@ void func_i4_80119BC0(unk_800E3A28* arg0) {
 }
 
 void func_i4_80119C80(unk_800E3A28* arg0) {
-    s32 index = arg0->id - OBJECT_33_0;
-    s32 character = gRacers[index].character;
+    s32 playerIndex = arg0->cmdId - OBJECT_MACHINE_SELECT_PORTRAIT_0;
+    s32 character = gRacers[playerIndex].character;
 
     character = func_i4_80116E5C(character);
     if (character != arg0->unk_04) {
@@ -1682,12 +1681,12 @@ void func_i4_80119C80(unk_800E3A28* arg0) {
 }
 
 void func_i4_80119D0C(unk_800E3A28* arg0) {
-    s32 index = arg0->id - OBJECT_40_0;
+    s32 playerIndex = arg0->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0;
     s32 temp_v1;
 
-    temp_v1 = D_i4_8011D780[index];
-    arg0->unk_0C = ((temp_v1 % 6) * 0x28) + 0x28;
-    arg0->unk_10 = ((temp_v1 / 6) * 0x22) + 0x25;
+    temp_v1 = D_i4_8011D780[playerIndex];
+    arg0->left = ((temp_v1 % 6) * 0x28) + 0x28;
+    arg0->top = ((temp_v1 / 6) * 0x22) + 0x25;
 }
 
 void func_i4_80119D84(unk_800E3A28* arg0) {
@@ -1791,7 +1790,7 @@ void func_i4_8011A08C(unk_800E3A28* arg0) {
         var_fs0 = 0.0f;
         var_fs1 = 0.0f;
         var_fv0 = 0.0f;
-        var_a1 = gControllers[gPlayerControlPorts[i]].buttonCurrent & 0xF;
+        var_a1 = gControllers[gPlayerControlPorts[i]].buttonCurrent & (BTN_CUP | BTN_CDOWN | BTN_CLEFT | BTN_CRIGHT);
         switch (var_a1) {
             case 3:
             case 12:
@@ -1801,16 +1800,16 @@ void func_i4_8011A08C(unk_800E3A28* arg0) {
                 var_fv0 = 0.015f;
                 break;
             default:
-                if (var_a1 & 2) {
+                if (var_a1 & BTN_CLEFT) {
                     var_fs0 = 0.03f;
                 }
-                if (var_a1 & 4) {
+                if (var_a1 & BTN_CDOWN) {
                     var_fs1 = 0.03f;
                 }
-                if (var_a1 & 8) {
+                if (var_a1 & BTN_CUP) {
                     var_fs1 = -0.03f;
                 }
-                if (var_a1 & 1) {
+                if (var_a1 & BTN_CRIGHT) {
                     var_fs0 = -0.03f;
                 }
                 break;
@@ -1878,7 +1877,7 @@ void func_i4_8011A73C(unk_800E3A28* arg0) {
 }
 
 void func_i4_8011A7B8(void) {
-    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) && (func_80079E88(OBJECT_45)->unk_20 != 0)) {
+    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) && (func_80079E88(OBJECT_MACHINE_SELECT_CAR)->unk_20 != 0)) {
         D_800CE748 = 0.075f;
         D_800CE74C = 0.125f;
         D_800CE750 = 0.105f;
@@ -2018,13 +2017,13 @@ void func_i4_TitleInit(void) {
     gCourseIndex = 0;
     D_i4_8011D790 = 0;
     D_i4_8011D794 = 0;
-    func_800794B0(OBJECT_5, 0, 0, 1);
-    func_800794B0(OBJECT_10, 0, 0, 8);
-    func_800794B0(OBJECT_15, 0, 0, 10);
-    func_800794B0(OBJECT_17, 0, 0, 12);
-    func_800794B0(OBJECT_19, 94, 200, 12);
+    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
+    func_800794B0(OBJECT_TITLE_BACKGROUND, 0, 0, 8);
+    func_800794B0(OBJECT_TITLE_LOGO, 0, 0, 10);
+    func_800794B0(OBJECT_PUSH_START, 0, 0, 12);
+    func_800794B0(OBJECT_COPYRIGHT, 94, 200, 12);
     if (gLeoDDConnected) {
-        func_800794B0(OBJECT_20, 0, 0, 12);
+        func_800794B0(OBJECT_TITLE_DISK_DRIVE, 0, 0, 12);
     }
 }
 
@@ -2038,7 +2037,7 @@ s32 func_i4_8011AE2C(void) {
     }
     func_8007DABC(&gSharedController);
     Math_Rand1();
-    if (gLeoDDConnected && (func_80079E88(OBJECT_20)->unk_1C != 0) && (func_80079E88(OBJECT_20)->unk_04 == 0)) {
+    if (gLeoDDConnected && (func_80079E88(OBJECT_TITLE_DISK_DRIVE)->unk_1C != 0) && (func_80079E88(OBJECT_TITLE_DISK_DRIVE)->unk_04 == 0)) {
         return gGameMode;
     }
     if (D_i4_8011D794 != 0) {
@@ -2058,7 +2057,7 @@ s32 func_i4_8011AE2C(void) {
         func_800BA8D8(0x3E);
         func_8007E0CC();
         D_i4_8011D790 = -1;
-        if (gLeoDDConnected && (func_80079E88(OBJECT_20)->unk_04 == 1)) {
+        if (gLeoDDConnected && (func_80079E88(OBJECT_TITLE_DISK_DRIVE)->unk_04 == 1)) {
             func_800BB370();
         }
         return GAMEMODE_FLX_MAIN_MENU;
@@ -2091,7 +2090,7 @@ void func_i4_8011B06C(unk_800E3A28* arg0) {
     arg0->unk_04 = D_800CD3C4;
     func_80077D50(sTitleBackgroundCompTexInfos[arg0->unk_04], 0);
     if (arg0->unk_04 == 0) {
-        arg0->unk_0C = 8;
+        arg0->left = 8;
     }
 }
 
@@ -2100,15 +2099,15 @@ void func_i4_8011B0C8(void) {
 
 void func_i4_8011B0D0(unk_800E3A28* arg0) {
     arg0->unk_04 = D_800CD3C4;
-    arg0->unk_0C = 0x55;
+    arg0->left = 0x55;
 
     switch (arg0->unk_04) {
         case 0:
         case 2:
-            arg0->unk_10 = 0x15;
+            arg0->top = 0x15;
             break;
         case 1:
-            arg0->unk_10 = 0x30;
+            arg0->top = 0x30;
             break;
     }
 
@@ -2124,14 +2123,14 @@ void func_i4_8011B13C(unk_800E3A28* arg0) {
     func_80077D50(sTitleNoControllerCompTexInfo, 0);
     if (gControllersConnected != 0) {
         func_80077D50(sTitlePushStartCompTexInfo, 0);
-        arg0->unk_0C = 120;
+        arg0->left = 120;
         switch (arg0->unk_04) {
             case 0:
-                arg0->unk_10 = 0x96;
+                arg0->top = 0x96;
                 return;
             case 1:
             case 2:
-                arg0->unk_10 = 0xAB;
+                arg0->top = 0xAB;
                 break;
         }
     }
@@ -2149,15 +2148,15 @@ extern s32 gRamDDCompatible;
 void func_i4_8011B214(unk_800E3A28* arg0) {
     s32 var_v0;
 
-    arg0->unk_0C = 0x50;
+    arg0->left = 80;
 
     switch (D_800CD3C4) {
         case 0:
         case 2:
-            arg0->unk_10 = 0x64;
+            arg0->top = 100;
             break;
         case 1:
-            arg0->unk_10 = 0x78;
+            arg0->top = 120;
             break;
     }
 
@@ -2202,7 +2201,7 @@ void func_i4_8011B2E0(unk_800E3A28* arg0) {
 }
 
 Gfx* func_i4_8011B380(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f,
+    return func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->left, arg1->top, 0, 0, 0, 1.0f,
                          1.0f);
 }
 
@@ -2211,7 +2210,7 @@ Gfx* func_i4_8011B3DC(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 Gfx* func_i4_8011B3E8(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, sTitleLogoCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sTitleLogoCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_8011B438(Gfx* gfx, unk_800E3A28* arg1) {
@@ -2222,41 +2221,41 @@ Gfx* func_i4_8011B444(Gfx* gfx, unk_800E3A28* arg1) {
     s32 var_v1;
 
     if (gControllersConnected != 0) {
-        if ((D_i4_8011D790 < 0x5F) && (D_i4_8011D790 >= 0)) {
+        if ((D_i4_8011D790 < 95) && (D_i4_8011D790 >= 0)) {
             return gfx;
         }
         gfx = func_8007DB28(gfx, 0);
-        gfx = func_80078EA0(gfx, sTitlePushStartCompTexInfo, arg1->unk_0C, arg1->unk_10, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitlePushStartCompTexInfo, arg1->left, arg1->top, 1, 0, 0, 1.0f, 1.0f);
     } else {
-        arg1->unk_0C = 0x50;
+        arg1->left = 80;
 
         switch (arg1->unk_04) {
             case 0:
             case 2:
-                arg1->unk_10 = 0x96;
+                arg1->top = 150;
                 break;
             case 1:
-                arg1->unk_10 = 0xA2;
+                arg1->top = 162;
                 break;
         }
 
-        var_v1 = gGameFrameCount % 60U;
+        var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
             var_v1 = 90 - var_v1;
         } else {
             var_v1 = 30 - var_v1;
         }
 
-        gfx = func_8007A440(gfx, arg1->unk_0C, arg1->unk_10, arg1->unk_0C + 0xA0, arg1->unk_10 + 0x20,
-                            (s32) (var_v1 * 0x28) / 60, 0, 0, 0xF0);
-        var_v1 = gGameFrameCount % 60U;
+        gfx = func_8007A440(gfx, arg1->left, arg1->top, arg1->left + 160, arg1->top + 32,
+                            (s32) (var_v1 * 40) / 60, 0, 0, 0xF0);
+        var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
         } else {
-            gDPSetPrimColor(gfx++, 0, 0, ((0x28 - var_v1) * 255) / 40, 0, 0, 255);
+            gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
 
-        gfx = func_80078EA0(gfx, sTitleNoControllerCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleNoControllerCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
@@ -2266,7 +2265,7 @@ Gfx* func_i4_8011B668(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 Gfx* func_i4_8011B674(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, sCopyrightCompTexInfo, arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sCopyrightCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_8011B6C4(Gfx* gfx, unk_800E3A28* arg1) {
@@ -2281,22 +2280,22 @@ Gfx* func_i4_8011B6C4(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     if (var_t0 != 0) {
-        var_v1 = gGameFrameCount % 60U;
+        var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
             var_v1 = 90 - var_v1;
         } else {
             var_v1 = 30 - var_v1;
         }
 
-        gfx = func_8007A440(gfx, arg1->unk_0C, arg1->unk_10, arg1->unk_0C + 0xA0, arg1->unk_10 + 0x20,
-                            (s32) (var_v1 * 0x28) / 60, 0, 0, 0xF0);
-        var_v1 = gGameFrameCount % 60U;
+        gfx = func_8007A440(gfx, arg1->left, arg1->top, arg1->left + 160, arg1->top + 32,
+                            (s32) (var_v1 * 40) / 60, 0, 0, 0xF0);
+        var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
         } else {
-            gDPSetPrimColor(gfx++, 0, 0, ((0x28 - var_v1) * 255) / 40, 0, 0, 255);
+            gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
-        gfx = func_80078EA0(gfx, sTitleWarningCompTexInfos[var_t0], arg1->unk_0C, arg1->unk_10, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleWarningCompTexInfos[var_t0], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }

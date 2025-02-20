@@ -43,8 +43,8 @@ void (*sGamemodeInitFuncs[])(void) = {
     func_i2_80103AD4,  // GAMEMODE_VS_3P
     func_i2_80103AD4,  // GAMEMODE_VS_4P
     func_i8_801439D0,  // GAMEMODE_RECORDS
-    func_i4_80115DF0,  // GAMEMODE_MAIN_MENU
-    func_i6_80115DF0,  // GAMEMODE_MACHINE_SELECT
+    func_i6_80115DF0,  // GAMEMODE_MAIN_MENU
+    func_i4_80115DF0,  // GAMEMODE_MACHINE_SELECT
     func_i4_801160D8,  // GAMEMODE_MACHINE_SETTINGS
     func_i5_80116934,  // GAMEMODE_A
     func_i6_8011BF50,  // GAMEMODE_B

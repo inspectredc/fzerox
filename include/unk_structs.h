@@ -127,12 +127,12 @@ typedef struct unk_802D08E0 {
 } unk_802D08E0; // size = 0x38
 
 typedef struct unk_800E3A28 {
-    s32 id;
+    s32 cmdId;
     s32 unk_04;
     s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-    s8 unk_14;
+    s32 left;
+    s32 top;
+    s8 priority;
     s8 unk_15;
     s8 unk_16[0x2];
     s32 unk_18;

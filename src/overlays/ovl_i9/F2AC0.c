@@ -4905,7 +4905,7 @@ Gfx* func_i9_8012D7CC(Gfx* gfx) {
 }
 
 extern s16 D_800CE784;
-extern f32 D_800CF160[];
+extern f32 gBodyHealthValues[];
 extern OSMesgQueue D_800DCAB0;
 void func_i2_801039BC(s32);
 
@@ -4934,7 +4934,7 @@ Gfx* func_i9_8012D998(Gfx* gfx) {
     if (temp_v1 & 1) {
         D_800CE784++;
         if (D_800CE784 >= 13) {
-            D_800CF160[0] = D_800CF160[1] = D_800CF160[2] = D_800CF160[3] = D_800CF160[4] = 1.0f;
+            gBodyHealthValues[0] = gBodyHealthValues[1] = gBodyHealthValues[2] = gBodyHealthValues[3] = gBodyHealthValues[4] = 1.0f;
             func_i2_801039BC(var_a0);
         }
     }
