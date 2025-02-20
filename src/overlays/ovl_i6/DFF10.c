@@ -44,9 +44,14 @@ unk_80077D50 sMenuSignCourseEditCompTexInfo[] = { { 17, aMenuSignCourseEditTex, 
 unk_80077D50 sMenuSignCreateMachineCompTexInfo[] = { { 17, aMenuSignCreateMachineTex, 64, 86, 0x1012 }, { 0 } };
 
 unk_80077D50* sMenuSignCompTexInfos[] = {
-    sMenuSignGpRaceCompTexInfo,   sMenuSignTimeAttackCompTexInfo,    sMenuSignDeathRaceCompTexInfo,
-    sMenuSignVsBattleCompTexInfo, sMenuSignCourseEditCompTexInfo,    sMenuSignPracticeCompTexInfo,
-    sMenuSignOptionsCompTexInfo,  sMenuSignCreateMachineCompTexInfo,
+    sMenuSignGpRaceCompTexInfo,        // MODE_GP_RACE
+    sMenuSignTimeAttackCompTexInfo,    // MODE_TIME_ATTACK
+    sMenuSignDeathRaceCompTexInfo,     // MODE_DEATH_RACE
+    sMenuSignVsBattleCompTexInfo,      // MODE_VS_BATTLE
+    sMenuSignCourseEditCompTexInfo,    // MODE_COURSE_EDIT
+    sMenuSignPracticeCompTexInfo,      // MODE_PRACTICE
+    sMenuSignOptionsCompTexInfo,       // MODE_OPTIONS
+    sMenuSignCreateMachineCompTexInfo, // MODE_CREATE_MACHINE
 };
 
 /*
@@ -132,48 +137,48 @@ extern s16 D_800CCFE8;
 extern s32 gNumPlayers;
 extern u32 D_800CD384;
 
-void func_i6_80115DF0(void) {
+void MainMenu_Init(void) {
     D_800CCFE8 = 3;
     D_800CD384 = 0;
     gNumPlayers = 1;
     if ((gGameFrameCount % 4) == 0) {
-        func_800794B0(OBJECT_94, 0, 0, 0);
+        Object_Init(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING, 0, 0, 0);
     }
-    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
+    Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
     if ((gGameFrameCount % 4) == 1) {
-        func_800794B0(OBJECT_94, 0, 0, 0);
+        Object_Init(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING, 0, 0, 0);
     }
-    func_800794B0(OBJECT_80, 0, 0, 4);
+    Object_Init(OBJECT_MAIN_MENU_BACKGROUND, 0, 0, 4);
     if ((gGameFrameCount % 4) == 2) {
-        func_800794B0(OBJECT_94, 0, 0, 0);
+        Object_Init(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING, 0, 0, 0);
     }
-    func_800794B0(OBJECT_81_0, 0, 0, 10);
+    Object_Init(OBJECT_MAIN_MENU_MODE_SIGN_0, 0, 0, 10);
     if ((gGameFrameCount % 4) == 3) {
-        func_800794B0(OBJECT_94, 0, 0, 0);
+        Object_Init(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING, 0, 0, 0);
     }
-    func_800794B0(OBJECT_81_1, 0, 0, 0xA);
-    func_800794B0(OBJECT_81_2, 0, 0, 0xA);
-    func_800794B0(OBJECT_81_3, 0, 0, 0xA);
-    func_800794B0(OBJECT_81_4, 0, 0, 0xA);
-    func_800794B0(OBJECT_81_5, 0, 0, 0xA);
-    func_800794B0(OBJECT_81_6, 0, 0, 0xA);
-    func_800794B0(OBJECT_81_7, 0, 0, 0xA);
-    func_800794B0(OBJECT_89, 0x64, 0xD, 0xA);
-    func_800794B0(OBJECT_90, 0x60, 0x50, 0xE);
-    func_800794B0(OBJECT_93, 0, 0, 0xE);
-    func_800794B0(OBJECT_92, 0x60, 0x50, 0xE);
-    func_800794B0(OBJECT_95, 0x60, 0x50, 0xE);
+    Object_Init(OBJECT_MAIN_MENU_MODE_SIGN_1, 0, 0, 0xA);
+    Object_Init(OBJECT_MAIN_MENU_MODE_SIGN_2, 0, 0, 0xA);
+    Object_Init(OBJECT_MAIN_MENU_MODE_SIGN_3, 0, 0, 0xA);
+    Object_Init(OBJECT_MAIN_MENU_MODE_SIGN_4, 0, 0, 0xA);
+    Object_Init(OBJECT_MAIN_MENU_MODE_SIGN_5, 0, 0, 0xA);
+    Object_Init(OBJECT_MAIN_MENU_MODE_SIGN_6, 0, 0, 0xA);
+    Object_Init(OBJECT_MAIN_MENU_MODE_SIGN_7, 0, 0, 0xA);
+    Object_Init(OBJECT_MAIN_MENU_SELECT_MODE, 0x64, 0xD, 0xA);
+    Object_Init(OBJECT_MAIN_MENU_SELECT_NUM_PLAYERS, 0x60, 0x50, 0xE);
+    Object_Init(OBJECT_MAIN_MENU_OK, 0, 0, 0xE);
+    Object_Init(OBJECT_MAIN_MENU_SELECT_DIFFICULTY, 0x60, 0x50, 0xE);
+    Object_Init(OBJECT_MAIN_MENU_SELECT_TIME_ATTACK_MODE, 0x60, 0x50, 0xE);
 }
 
 extern unk_800DCE48 D_800DCE48;
-extern s32 D_800CD388[];
+extern s32 gModeSubOption[];
 extern char* gTrackNames[];
 
 extern s32 gNumPlayers;
 extern s32 gDifficulty;
 extern s16 D_800CD044;
 extern s16 D_800CD048;
-extern s32 D_800CD380;
+extern s32 gSelectedMode;
 extern s8 D_800CD3C0;
 extern s8 gSettingEverythingUnlocked;
 extern s32 gGameMode;
@@ -185,53 +190,53 @@ extern char* gCurrentTrackName;
 extern s32 gCourseIndex;
 extern s32 D_i2_80106DA4;
 
-s32 func_i6_80115FF0(void) {
-    s32 temp_t0;
+s32 MainMenu_Update(void) {
+    s32 previous;
     bool var_v1_2;
 
     if (D_i2_80106DA4 != 0) {
         return gGameMode;
     }
 
-    func_8007DABC(&gSharedController);
-    if (func_80079E88(OBJECT_80)->unk_04 >= 3) {
+    Controller_SetGlobalInputs(&gSharedController);
+    if (func_80079E88(OBJECT_MAIN_MENU_BACKGROUND)->unk_04 >= 3) {
         return gGameMode;
     }
     switch (D_800CD384) {
         case 0:
-            temp_t0 = D_800CD380;
+            previous = gSelectedMode;
             if (gInputPressed & BTN_RIGHT) {
-                if ((D_800CD380 % 4) != 3) {
-                    D_800CD380++;
+                if ((gSelectedMode % 4) != 3) {
+                    gSelectedMode++;
                 }
             }
             if (gInputPressed & BTN_LEFT) {
-                if (D_800CD380 % 4) {
-                    D_800CD380--;
+                if (gSelectedMode % 4) {
+                    gSelectedMode--;
                 }
             }
             if (gInputPressed & BTN_DOWN) {
-                if ((D_800CD380 / 4) == 0) {
-                    D_800CD380 += 4;
+                if ((gSelectedMode / 4) == 0) {
+                    gSelectedMode += 4;
                 }
             }
             if (gInputPressed & BTN_UP) {
-                if ((D_800CD380 / 4) != 0) {
-                    D_800CD380 -= 4;
+                if ((gSelectedMode / 4) != 0) {
+                    gSelectedMode -= 4;
                 }
             }
-            if ((D_800CD380 == 3) && (gControllersConnected < 2)) {
-                D_800CD380 = 2;
+            if ((gSelectedMode == MODE_VS_BATTLE) && (gControllersConnected < 2)) {
+                gSelectedMode = MODE_DEATH_RACE;
             }
-            switch (D_800CD380) {
-                case 4:
-                    D_800CD380 = 5;
+            switch (gSelectedMode) {
+                case MODE_COURSE_EDIT:
+                    gSelectedMode = MODE_PRACTICE;
                     break;
-                case 7:
-                    D_800CD380 = 6;
+                case MODE_CREATE_MACHINE:
+                    gSelectedMode = MODE_OPTIONS;
                     break;
             }
-            if (temp_t0 != D_800CD380) {
+            if (previous != gSelectedMode) {
                 func_800BA8D8(0x1E);
             }
             if (gInputButtonPressed & BTN_B) {
@@ -241,22 +246,22 @@ s32 func_i6_80115FF0(void) {
                 return GAMEMODE_FLX_TITLE;
             }
 
-            if ((gInputButtonPressed & BTN_START) && (func_80079E88(OBJECT_94)->unk_04 == 7)) {
+            if ((gInputButtonPressed & BTN_START) && (func_80079E88(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)->unk_04 == 7)) {
                 break;
             }
 
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
-                D_800DCE48.unk_10 = (func_80079E88(OBJECT_94)->unk_1C & 0xFFFF) - 39290;
-                switch (D_800CD380) {
-                    case 0:
-                    case 1:
-                    case 3:
-                    case 5:
+                D_800DCE48.unk_10 = (func_80079E88(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)->unk_1C & 0xFFFF) - 39290;
+                switch (gSelectedMode) {
+                    case MODE_GP_RACE:
+                    case MODE_TIME_ATTACK:
+                    case MODE_VS_BATTLE:
+                    case MODE_PRACTICE:
                         func_800BA8D8(0x21);
                         D_800CD384 = 1;
                         break;
-                    case 2:
+                    case MODE_DEATH_RACE:
                         D_800CD384 = 5;
                         gCourseIndex = 54;
                         gCurrentTrackName = gTrackNames[gCourseIndex];
@@ -264,14 +269,14 @@ s32 func_i6_80115FF0(void) {
                         func_800BB324(gNumPlayers - 1);
                         gDifficulty = D_800DCE48.unk_10 + 3;
                         return GAMEMODE_FLX_MACHINE_SELECT;
-                    case 6:
+                    case MODE_OPTIONS:
                         D_800CD384 = 5;
                         D_800CD048 = 0xD;
                         break;
-                    case 4:
+                    case MODE_COURSE_EDIT:
                         D_800CD384 = 5;
                         return GAMEMODE_D;
-                    case 7:
+                    case MODE_CREATE_MACHINE:
                         D_800CD384 = 5;
                         return GAMEMODE_10;
                     default:
@@ -281,23 +286,23 @@ s32 func_i6_80115FF0(void) {
             }
             break;
         case 1:
-            temp_t0 = D_800CD388[D_800CD380];
+            previous = gModeSubOption[gSelectedMode];
             if (gInputPressed & BTN_DOWN) {
-                D_800CD388[D_800CD380]++;
+                gModeSubOption[gSelectedMode]++;
             }
             if ((D_800CD3C0 < 2) && (gSettingEverythingUnlocked == 0)) {
-                if (D_i6_8011EED0[D_800CD380] < D_800CD388[D_800CD380]) {
-                    D_800CD388[D_800CD380] = D_i6_8011EED0[D_800CD380];
+                if (D_i6_8011EED0[gSelectedMode] < gModeSubOption[gSelectedMode]) {
+                    gModeSubOption[gSelectedMode] = D_i6_8011EED0[gSelectedMode];
                 }
             } else {
-                if (D_i6_8011EEF0[D_800CD380] < D_800CD388[D_800CD380]) {
-                    D_800CD388[D_800CD380] = D_i6_8011EEF0[D_800CD380];
+                if (D_i6_8011EEF0[gSelectedMode] < gModeSubOption[gSelectedMode]) {
+                    gModeSubOption[gSelectedMode] = D_i6_8011EEF0[gSelectedMode];
                 }
             }
-            if (D_800CD380 == 3 && (gControllersConnected < D_800CD388[D_800CD380] + 2)) {
-                D_800CD388[D_800CD380] = gControllersConnected - 2;
-                if (D_800CD388[D_800CD380] < 0) {
-                    D_800CD388[D_800CD380] = 0;
+            if (gSelectedMode == MODE_VS_BATTLE && (gControllersConnected < gModeSubOption[gSelectedMode] + 2)) {
+                gModeSubOption[gSelectedMode] = gControllersConnected - 2;
+                if (gModeSubOption[gSelectedMode] < 0) {
+                    gModeSubOption[gSelectedMode] = 0;
                     D_800CD384 = 0;
                     func_800BA8D8(0x10);
                     break;
@@ -305,27 +310,27 @@ s32 func_i6_80115FF0(void) {
             }
 
             if (gInputPressed & BTN_UP) {
-                if (D_800CD388[D_800CD380] > 0) {
-                    D_800CD388[D_800CD380]--;
+                if (gModeSubOption[gSelectedMode] > 0) {
+                    gModeSubOption[gSelectedMode]--;
                 }
             }
-            if (temp_t0 != D_800CD388[D_800CD380]) {
+            if (previous != gModeSubOption[gSelectedMode]) {
                 func_800BA8D8(0x1E);
             }
             if (gInputButtonPressed & BTN_B) {
                 D_800CD384 = 0;
                 func_800BA8D8(0x10);
-            } else if ((gInputButtonPressed & BTN_START) && (func_80079E88(OBJECT_94)->unk_04 == 7)) {
+            } else if ((gInputButtonPressed & BTN_START) && (func_80079E88(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)->unk_04 == 7)) {
                 break;
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x21);
                 D_800CD384 = 2;
-                switch (D_800CD380) {
-                    case 3:
-                        gNumPlayers = D_800CD388[3] + 2;
+                switch (gSelectedMode) {
+                    case MODE_VS_BATTLE:
+                        gNumPlayers = gModeSubOption[MODE_VS_BATTLE] + 2;
                         break;
-                    case 1:
-                        if (D_800CD388[1] != 0) {
+                    case MODE_TIME_ATTACK:
+                        if (gModeSubOption[MODE_TIME_ATTACK] != 0) {
                             D_800CD384 = 6;
                             D_800CD048 = 9;
                             func_800BA8D8(0x3E);
@@ -333,10 +338,10 @@ s32 func_i6_80115FF0(void) {
                             gNumPlayers = 1;
                         }
                         break;
-                    case 0:
-                    case 5:
+                    case MODE_GP_RACE:
+                    case MODE_PRACTICE:
                         gNumPlayers = 1;
-                        gDifficulty = D_800DCE48.unk_10 + D_800CD388[D_800CD380];
+                        gDifficulty = D_800DCE48.unk_10 + gModeSubOption[gSelectedMode];
                         break;
                 }
             }
@@ -345,11 +350,11 @@ s32 func_i6_80115FF0(void) {
             Math_Rand1();
             if (gInputButtonPressed & BTN_B) {
                 func_800BA8D8(0x10);
-                switch (D_800CD380) {
-                    case 0:
-                    case 1:
-                    case 3:
-                    case 5:
+                switch (gSelectedMode) {
+                    case MODE_GP_RACE:
+                    case MODE_TIME_ATTACK:
+                    case MODE_VS_BATTLE:
+                    case MODE_PRACTICE:
                         D_800CD384 = 1;
                         break;
                     default:
@@ -358,17 +363,17 @@ s32 func_i6_80115FF0(void) {
                 }
                 break;
             }
-            if ((gInputButtonPressed & BTN_START) && (func_80079E88(OBJECT_94)->unk_04 == 7)) {
+            if ((gInputButtonPressed & BTN_START) && (func_80079E88(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)->unk_04 == 7)) {
                 break;
             }
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
                 func_800BB324(gNumPlayers - 1);
-                switch (D_800CD380) {
-                    case 0:
-                    case 1:
-                    case 3:
-                    case 5:
+                switch (gSelectedMode) {
+                    case MODE_GP_RACE:
+                    case MODE_TIME_ATTACK:
+                    case MODE_VS_BATTLE:
+                    case MODE_PRACTICE:
                         func_8008B1CC();
                         D_800CD384 = 3;
                         break;
@@ -378,22 +383,22 @@ s32 func_i6_80115FF0(void) {
             }
             break;
         case 3:
-            if (func_80079E88(OBJECT_81_3)->unk_1C == 12) {
+            if (func_80079E88(OBJECT_MAIN_MENU_MODE_SIGN_3)->unk_1C == 12) {
                 var_v1_2 = false;
-                switch (D_800CD380) {
-                    case 1:
-                        if (func_80079E88(OBJECT_95)->unk_1C == 12) {
+                switch (gSelectedMode) {
+                    case MODE_TIME_ATTACK:
+                        if (func_80079E88(OBJECT_MAIN_MENU_SELECT_TIME_ATTACK_MODE)->unk_1C == 12) {
                             var_v1_2 = true;
                         }
                         break;
-                    case 0:
-                    case 5:
-                        if (func_80079E88(OBJECT_92)->unk_1C == 12) {
+                    case MODE_GP_RACE:
+                    case MODE_PRACTICE:
+                        if (func_80079E88(OBJECT_MAIN_MENU_SELECT_DIFFICULTY)->unk_1C == 12) {
                             var_v1_2 = true;
                         }
                         break;
-                    case 3:
-                        if (func_80079E88(OBJECT_90)->unk_1C == 12) {
+                    case MODE_VS_BATTLE:
+                        if (func_80079E88(OBJECT_MAIN_MENU_SELECT_NUM_PLAYERS)->unk_1C == 12) {
                             var_v1_2 = true;
                         }
                         break;
@@ -404,11 +409,11 @@ s32 func_i6_80115FF0(void) {
             }
             if (gInputButtonPressed & BTN_B) {
                 func_800BA8D8(0x10);
-                switch (D_800CD380) {
-                    case 0:
-                    case 1:
-                    case 3:
-                    case 5:
+                switch (gSelectedMode) {
+                    case MODE_GP_RACE:
+                    case MODE_TIME_ATTACK:
+                    case MODE_VS_BATTLE:
+                    case MODE_PRACTICE:
                         D_800CD384 = 1;
                         break;
                 }
@@ -425,8 +430,8 @@ s32 func_i6_80115FF0(void) {
     return GAMEMODE_FLX_MAIN_MENU;
 }
 
-Gfx* func_i6_801167CC(Gfx* gfx) {
-    return func_80079BC8(gfx);
+Gfx* MainMenu_Draw(Gfx* gfx) {
+    return Object_UpdateAndDrawAll(gfx);
 }
 
 extern s8 D_800CD3C4;
@@ -454,7 +459,7 @@ void func_i6_801167EC(unk_800E3A28* arg0) {
 extern s16 D_800CD044;
 
 void func_i6_80116894(unk_800E3A28* arg0) {
-    s32 index = arg0->cmdId - OBJECT_81_0;
+    s32 index = arg0->cmdId - OBJECT_MAIN_MENU_MODE_SIGN_0;
 
     func_80077D50(sMenuSignCompTexInfos[index], 0);
     if (D_800CD044 == 0x21) {
@@ -512,21 +517,21 @@ void func_i6_80116A80(unk_800E3A28* arg0) {
 }
 
 extern u32 gGameFrameCount;
-extern s32 D_800CD380;
+extern s32 gSelectedMode;
 
 Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
-    s32 temp_t0;
+    s32 mode;
     s32 var_v1;
     s32 temp1;
     s32 temp2;
 
-    temp_t0 = arg1->cmdId - OBJECT_81_0;
+    mode = arg1->cmdId - OBJECT_MAIN_MENU_MODE_SIGN_0;
 
-    if ((temp_t0 == 4) || (temp_t0 == 7)) {
+    if ((mode == MODE_COURSE_EDIT) || (mode == MODE_CREATE_MACHINE)) {
         return gfx;
     }
 
-    if (temp_t0 == D_800CD380) {
+    if (mode == gSelectedMode) {
         if (D_800CD384 == 0) {
             var_v1 = gGameFrameCount % 30;
 
@@ -560,10 +565,10 @@ Gfx* func_i6_80116AA8(Gfx* gfx, unk_800E3A28* arg1) {
         arg1->unk_1C = 0;
     }
 
-    temp1 = (((temp_t0 % 4) << 6) - (SQ(arg1->unk_1C) * 2)) + 0x20;
-    temp2 = ((temp_t0 / 4) * 0x5B) + 0x26;
+    temp1 = (((mode % 4) * 0x40) - (SQ(arg1->unk_1C) * 2)) + 0x20;
+    temp2 = ((mode / 4) * 0x5B) + 0x26;
 
-    return func_80078EA0(gfx, sMenuSignCompTexInfos[temp_t0], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sMenuSignCompTexInfos[mode], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
 }
 
 extern s8 D_800CD3C4;
@@ -747,7 +752,7 @@ Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
     s32 i;
     s32 temp_s7;
 
-    if (D_800CD380 != 3) {
+    if (gSelectedMode != MODE_VS_BATTLE) {
         return gfx;
     }
 
@@ -773,11 +778,10 @@ Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
             break;
     }
     temp_s7 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->left - temp_s7, arg1->top, 0, 0, 0, 1.0f,
-                        1.0f);
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->left - temp_s7, arg1->top, 0, 0, 0, 1.0f, 1.0f);
 
     for (i = 0; i < 3; i++) {
-        if (D_800CD388[D_800CD380] == i) {
+        if (gModeSubOption[gSelectedMode] == i) {
             switch ((s32) D_800CD384) {
                 case 2:
                 case 3:
@@ -795,8 +799,8 @@ Gfx* func_i6_801174DC(Gfx* gfx, unk_800E3A28* arg1) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
             }
         }
-        gfx = func_80078EA0(gfx, sNumPlayersCompTexInfos[i], (arg1->left - temp_s7) + 0x20,
-                            arg1->top + (i * 20) + 0xC, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sNumPlayersCompTexInfos[i], (arg1->left - temp_s7) + 0x20, arg1->top + (i * 20) + 0xC,
+                            1, 0, 0, 1.0f, 1.0f);
     }
 
     if (D_800CD384 != 2) {
@@ -812,7 +816,7 @@ Gfx* func_i6_80117760(Gfx* gfx, unk_800E3A28* arg1) {
     s32 i;
     s32 temp_s6;
 
-    if (D_800CD380 != 5 && D_800CD380 != 0) {
+    if (gSelectedMode != MODE_PRACTICE && gSelectedMode != MODE_GP_RACE) {
         return gfx;
     }
 
@@ -839,11 +843,10 @@ Gfx* func_i6_80117760(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     temp_s6 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->left - temp_s6, arg1->top, 0, 0, 0, 1.0f,
-                        1.0f);
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->left - temp_s6, arg1->top, 0, 0, 0, 1.0f, 1.0f);
 
     for (i = 0; i < 4; i++) {
-        if (D_800CD388[D_800CD380] == i) {
+        if (gModeSubOption[gSelectedMode] == i) {
             switch ((s32) D_800CD384) {
                 case 2:
                 case 3:
@@ -876,7 +879,7 @@ Gfx* func_i6_80117A18(Gfx* gfx, unk_800E3A28* arg1) {
     s32 temp_s7;
     unk_80077D50* temp_a1;
 
-    if (D_800CD380 != 1) {
+    if (gSelectedMode != MODE_TIME_ATTACK) {
         return gfx;
     }
     switch (D_800CD384) {
@@ -902,11 +905,10 @@ Gfx* func_i6_80117A18(Gfx* gfx, unk_800E3A28* arg1) {
     }
 
     temp_s7 = SQ(arg1->unk_1C) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->left - temp_s7, arg1->top, 0, 0, 0, 1.0f,
-                        1.0f);
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, arg1->left - temp_s7, arg1->top, 0, 0, 0, 1.0f, 1.0f);
 
     for (i = 0; i < 2; i++) {
-        if (D_800CD388[1] == i) {
+        if (gModeSubOption[MODE_TIME_ATTACK] == i) {
             switch ((s32) D_800CD384) {
                 case 2:
                 case 3:
@@ -981,7 +983,7 @@ void func_i6_80117DE0(unk_800E3A28* arg0) {
                 gSettingEverythingUnlocked = 1;
                 Save_SaveSettingsProfiles();
                 func_800BA8D8(0x2E);
-                sp1C = func_80079E88(OBJECT_80);
+                sp1C = func_80079E88(OBJECT_MAIN_MENU_BACKGROUND);
                 if (sp1C->unk_04 < 2) {
                     sp1C->unk_04 = (Math_Rand1() % 3) + (sp1C->unk_04 * 10) + 10;
                 }

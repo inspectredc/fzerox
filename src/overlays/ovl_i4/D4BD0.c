@@ -2,14 +2,15 @@
 #include "fzx_game.h"
 #include "fzx_racer.h"
 #include "fzx_object.h"
+#include "ovl_i4.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
 
 UNUSED s32 D_8011D770;
-s32 D_i4_8011D774;
+s32 sMachinesUnlocked;
 f32 D_i4_8011D778;
 f32 D_i4_8011D77C;
-s16 D_i4_8011D780[8];
+s16 sMachineSelectIndex[8];
 s32 D_i4_8011D790;
 s32 D_i4_8011D794;
 
@@ -492,16 +493,16 @@ const s32 D_i4_8011D694[] = { 19, 60, 19, 136, 299, 60, 299, 136, 42, 10, 42, 12
 const s32 D_i4_8011D6C4[] = { 25, 20, 25, 125, 164, 20, 164, 125 };
 
 extern s16 D_800CCFE8;
-extern s32 D_800CD380;
-extern s8 D_800CD3A8[];
-extern s32 D_800CD3B0;
+extern s32 gSelectedMode;
+extern s8 gPlayerSelectionLock[];
+extern s32 gMachineSelectState;
 extern s8 gSettingEverythingUnlocked;
 extern f32 D_800CE748;
 extern f32 D_800CE74C;
 extern f32 D_800CE750;
 extern s32 gNumPlayers;
 
-void func_i4_80115DF0(void) {
+void MachineSelect_Init(void) {
     s32 i;
 
     D_800CCFE8 = 3;
@@ -510,75 +511,75 @@ void func_i4_80115DF0(void) {
     D_800CE748 = D_800CE74C;
     func_80085610();
     func_8008969C();
-    D_800CD3B0 = 0;
+    gMachineSelectState = MACHINE_SELECT_ACTIVE;
 
     for (i = 0; i < 4; i++) {
-        D_800CD3A8[i] = 0;
-        D_i4_8011D780[i] = func_8007E11C(gRacers[i].character);
+        gPlayerSelectionLock[i] = SELECTION_FREE;
+        sMachineSelectIndex[i] = func_8007E11C(gRacers[i].character);
     }
-    D_i4_8011D774 = ((func_8007E008() / 3) * 6) + 6;
+    sMachinesUnlocked = ((func_8007E008() / 3) * 6) + 6;
     if (gSettingEverythingUnlocked != 0) {
-        D_i4_8011D774 = 30;
+        sMachinesUnlocked = 30;
     }
-    if (D_i4_8011D774 > 30) {
-        D_i4_8011D774 = 30;
+    if (sMachinesUnlocked > 30) {
+        sMachinesUnlocked = 30;
     }
-    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
-    func_800794B0(OBJECT_MACHINE_SELECT_BACKGROUND, 0, 0, 4);
-    func_800794B0(OBJECT_SELECT_MACHINE, 0x50, 0xD, 4);
-    func_800794B0(OBJECT_MACHINE_SELECT_CURSOR, 0x3C, 0xA, 8);
-    func_800794B0(OBJECT_MACHINE_SELECT_CAR, 0, 0, 0xA);
+    Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
+    Object_Init(OBJECT_MACHINE_SELECT_BACKGROUND, 0, 0, 4);
+    Object_Init(OBJECT_SELECT_MACHINE, 0x50, 0xD, 4);
+    Object_Init(OBJECT_MACHINE_SELECT_CURSOR, 0x3C, 0xA, 8);
+    Object_Init(OBJECT_MACHINE_SELECT_CAR, 0, 0, 0xA);
 
     switch (gNumPlayers) {
         case 4:
-            func_800794B0(OBJECT_MACHINE_STATS_3, 0, 0, 0xC);
-            func_800794B0(OBJECT_MACHINE_SELECT_CURSOR_NUM_3, 0x3C, 0xA, 0xC);
-            func_800794B0(OBJECT_MACHINE_SELECT_PORTRAIT_3, 0x104, 0xBE, 6);
+            Object_Init(OBJECT_MACHINE_SELECT_STATS_3, 0, 0, 0xC);
+            Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_3, 0x3C, 0xA, 0xC);
+            Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_3, 0x104, 0xBE, 6);
             /* fallthrough */
         case 3:
-            func_800794B0(OBJECT_MACHINE_STATS_2, 0, 0, 0xC);
-            func_800794B0(OBJECT_MACHINE_SELECT_CURSOR_NUM_2, 0x3C, 0xA, 0xC);
-            func_800794B0(OBJECT_MACHINE_SELECT_PORTRAIT_2, 0x104, 0xA, 6);
+            Object_Init(OBJECT_MACHINE_SELECT_STATS_2, 0, 0, 0xC);
+            Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_2, 0x3C, 0xA, 0xC);
+            Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_2, 0x104, 0xA, 6);
             /* fallthrough */
         case 2:
-            func_800794B0(OBJECT_MACHINE_STATS_1, 0, 0, 0xC);
-            func_800794B0(OBJECT_MACHINE_SELECT_CURSOR_NUM_1, 0x3C, 0xA, 0xC);
-            func_800794B0(OBJECT_MACHINE_SELECT_PORTRAIT_1, 0x14, 0xBE, 6);
+            Object_Init(OBJECT_MACHINE_SELECT_STATS_1, 0, 0, 0xC);
+            Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_1, 0x3C, 0xA, 0xC);
+            Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_1, 0x14, 0xBE, 6);
             /* fallthrough */
         case 1:
             break;
     }
 
-    if (D_800CD380 == 0) {
-        func_800794B0(OBJECT_47, 0, 0, 0xC);
+    if (gSelectedMode == MODE_GP_RACE) {
+        Object_Init(OBJECT_MACHINE_SELECT_DIFFICULTY_CUPS, 0, 0, 0xC);
     }
-    func_800794B0(OBJECT_MACHINE_STATS_0, 0, 0, 0xC);
-    func_800794B0(OBJECT_MACHINE_SELECT_CURSOR_NUM_0, 0x3C, 0xA, 0xC);
-    func_800794B0(OBJECT_MACHINE_SELECT_PORTRAIT_0, 0x14, 0xA, 6);
+    Object_Init(OBJECT_MACHINE_SELECT_STATS_0, 0, 0, 0xC);
+    Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_0, 0x3C, 0xA, 0xC);
+    Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_0, 0x14, 0xA, 6);
 
     if (gNumPlayers == 1) {
-        func_800794B0(OBJECT_48, 0, 0, 0xC);
+        Object_Init(OBJECT_MACHINE_SELECT_NAME, 0, 0, 0xC);
     }
 
-    func_800794B0(OBJECT_46, 0, 0, 0xC);
+    Object_Init(OBJECT_MACHINE_SELECT_OK, 0, 0, 0xC);
 }
 
-extern s32 D_800CD3B4;
+extern s32 gMachineSettingsState;
 extern s32 gGameMode;
 extern s32 gCourseIndex;
 extern f32 gCharacterLastEngine[];
 extern f32 gPlayerEngine[];
 
-void func_i4_801160D8(void) {
+void MachineSettings_Init(void) {
     s32 i;
 
     D_800CCFE8 = 3;
     func_80085610();
     func_8008969C();
-    D_800CD3B4 = 0;
+    gMachineSettingsState = MACHINE_SETTINGS_ACTIVE;
 
     for (i = 0; i < 4; i++) {
-        D_800CD3A8[i] = 0;
+        gPlayerSelectionLock[i] = SELECTION_FREE;
         if (gGameMode != GAMEMODE_4012) {
             gPlayerEngine[i] = 0.5f;
         }
@@ -589,75 +590,76 @@ void func_i4_801160D8(void) {
         gPlayerEngine[0] = gCharacterLastEngine[gRacers[0].character];
     }
 
-    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
-    func_800794B0(OBJECT_59, 0, 0, 4);
-    func_800794B0(OBJECT_50, 0, 0, 0xC);
-    func_800794B0(OBJECT_51, 0xA0, 0x22, 0xA);
-    func_800794B0(OBJECT_52, 0xA0, 0x61, 0xA);
+    Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
+    Object_Init(OBJECT_MACHINE_SETTINGS_BACKGROUND, 0, 0, 4);
+    Object_Init(OBJECT_MACHINE_SETTINGS_NAME, 0, 0, 12);
+    Object_Init(OBJECT_MACHINE_SETTINGS_ENGINE_WEIGHT, 0xA0, 0x22, 10);
+    Object_Init(OBJECT_MACHINE_SETTINGS_STATS, 0xA0, 0x61, 10);
     if (gNumPlayers == 2) {
-        func_800794B0(OBJECT_58, 0xA0, 0x61, 0xD);
+        Object_Init(OBJECT_58, 0xA0, 0x61, 13);
     }
-    func_800794B0(OBJECT_53, 0, 0, 0xC);
-    func_800794B0(OBJECT_54, 0x14, 0xB9, 0xC);
-    func_800794B0(OBJECT_55, 0xD0, 0x55, 0xB);
-    func_800794B0(OBJECT_57, 0, 0, 0xE);
+    Object_Init(OBJECT_MACHINE_SETTINGS_CAR, 0, 0, 12);
+    Object_Init(OBJECT_MACHINE_SETTINGS_NAME_CARD, 0x14, 0xB9, 12);
+    Object_Init(OBJECT_MACHINE_SETTINGS_SLIDER, 0xD0, 0x55, 11);
+    Object_Init(OBJECT_MACHINE_SETTINGS_OK, 0, 0, 14);
 
     switch (gNumPlayers) {
         case 4:
-            func_800794B0(OBJECT_60_3, -6, -5, 8);
+            Object_Init(OBJECT_MACHINE_SETTINGS_PORTRAIT_3, -6, -5, 8);
             /* fallthrough */
         case 3:
-            func_800794B0(OBJECT_60_2, -6, -5, 8);
+            Object_Init(OBJECT_MACHINE_SETTINGS_PORTRAIT_2, -6, -5, 8);
             /* fallthrough */
         case 2:
-            func_800794B0(OBJECT_56, 0, 0, 6);
-            func_800794B0(OBJECT_60_1, -6, -5, 8);
+            Object_Init(OBJECT_MACHINE_SETTINGS_SPLITSCREEN_BARS, 0, 0, 6);
+            Object_Init(OBJECT_MACHINE_SETTINGS_PORTRAIT_1, -6, -5, 8);
             /* fallthrough */
         case 1:
-            func_800794B0(OBJECT_60_0, -6, -5, 8);
+            Object_Init(OBJECT_MACHINE_SETTINGS_PORTRAIT_0, -6, -5, 8);
             break;
     }
 }
 
 extern Controller gSharedController;
-extern s32 D_800CD380;
-extern s32 D_800CD3B0;
 extern u16 gInputPressed;
 extern u16 gInputButtonPressed;
 extern s32 gPlayerControlPorts[];
 extern Controller gControllers[];
 extern s8 D_800CD3AC[];
 
-s32 func_i4_8011631C(void) {
+s32 MachineSelect_Update(void) {
     s32 i;
     s32 j;
     s32 k;
     s32 pad;
     s16 pad2;
-    s16 temp_v0_2;
+    s16 lastMachineIndex;
 
     func_8008675C();
 
     for (i = 3; i >= 0; i--) {
 
-        func_8007DABC(&gControllers[gPlayerControlPorts[i]]);
+        Controller_SetGlobalInputs(&gControllers[gPlayerControlPorts[i]]);
         if (i >= gNumPlayers) {
-            if ((gInputButtonPressed & BTN_B) && (D_800CD3B0 == 0)) {
+            if ((gInputButtonPressed & BTN_B) && (gMachineSelectState == MACHINE_SELECT_ACTIVE)) {
                 func_800BA8D8(0x10);
-                D_800CD3B0 = 1;
-                if (D_800CD380 == 2) {
+                gMachineSelectState = MACHINE_SELECT_EXIT;
+                if (gSelectedMode == MODE_DEATH_RACE) {
                     return GAMEMODE_FLX_MAIN_MENU;
                 }
                 // FAKE
                 if ((gRacers + i)->character) {}
-                return GAMEMODE_800A;
+                return GAMEMODE_FLX_COURSE_SELECT;
             }
             continue;
         }
+
+        // Setup Mini Cars
         if (gInputButtonPressed & (BTN_L | BTN_R | BTN_CLEFT | BTN_CDOWN)) {
             if ((gSharedController.buttonCurrent & BTN_L) && (gSharedController.buttonCurrent & BTN_R) &&
                 (gSharedController.buttonCurrent & BTN_CLEFT) && (gSharedController.buttonCurrent & BTN_CDOWN) &&
-                (func_80079E88(OBJECT_MACHINE_SELECT_CAR)->unk_20 == 0) && (D_800CD3B0 != 3)) {
+                (func_80079E88(OBJECT_MACHINE_SELECT_CAR)->unk_20 == 0) &&
+                (gMachineSelectState != MACHINE_SELECT_CONTINUE)) {
                 func_80079E88(OBJECT_MACHINE_SELECT_CAR)->unk_20 = 1;
                 D_i4_8011D778 = 1.0f;
                 D_i4_8011D77C = 0.0f;
@@ -666,36 +668,36 @@ s32 func_i4_8011631C(void) {
             }
         }
 
-        switch (D_800CD3B0) {
-            case 0:
-                temp_v0_2 = D_i4_8011D780[i];
+        switch (gMachineSelectState) {
+            case MACHINE_SELECT_ACTIVE:
+                lastMachineIndex = sMachineSelectIndex[i];
 
-                if (D_800CD3A8[i] == 0) {
+                if (gPlayerSelectionLock[i] == SELECTION_FREE) {
                     if (gInputPressed & BTN_LEFT) {
-                        if (D_i4_8011D780[i] % 6) {
-                            D_i4_8011D780[i]--;
+                        if (sMachineSelectIndex[i] % 6) {
+                            sMachineSelectIndex[i]--;
                         } else {
-                            D_i4_8011D780[i] += 5;
+                            sMachineSelectIndex[i] += 5;
                         }
                     } else if (gInputPressed & BTN_RIGHT) {
-                        if ((D_i4_8011D780[i] % 6) < 5) {
-                            D_i4_8011D780[i]++;
+                        if ((sMachineSelectIndex[i] % 6) < 5) {
+                            sMachineSelectIndex[i]++;
                         } else {
-                            D_i4_8011D780[i] -= 5;
+                            sMachineSelectIndex[i] -= 5;
                         }
                     }
                     if (gInputPressed & BTN_UP) {
-                        D_i4_8011D780[i] -= 6;
+                        sMachineSelectIndex[i] -= 6;
                     } else if (gInputPressed & BTN_DOWN) {
-                        D_i4_8011D780[i] += 6;
+                        sMachineSelectIndex[i] += 6;
                     }
                 }
 
-                D_i4_8011D780[i] += D_i4_8011D774;
-                D_i4_8011D780[i] %= D_i4_8011D774;
-                gRacers[i].character = func_8007E10C(D_i4_8011D780[i]);
+                sMachineSelectIndex[i] += sMachinesUnlocked;
+                sMachineSelectIndex[i] %= sMachinesUnlocked;
+                gRacers[i].character = func_8007E10C(sMachineSelectIndex[i]);
 
-                if (temp_v0_2 != D_i4_8011D780[i]) {
+                if (lastMachineIndex != sMachineSelectIndex[i]) {
                     func_800BA710(i, 0x1E);
                     D_800CD3AC[i] = 1;
                     gPlayerEngine[i] = 0.5f;
@@ -704,18 +706,18 @@ s32 func_i4_8011631C(void) {
                 if (gInputButtonPressed & BTN_B) {
                     func_800BA710(i, 0x10);
 
-                    if (D_800CD3A8[i] != 0) {
-                        D_800CD3A8[i] = 0;
+                    if (gPlayerSelectionLock[i] != SELECTION_FREE) {
+                        gPlayerSelectionLock[i] = SELECTION_FREE;
                     } else {
-                        D_800CD3B0 = 1;
-                        if (D_800CD380 == 2) {
+                        gMachineSelectState = MACHINE_SELECT_EXIT;
+                        if (gSelectedMode == MODE_DEATH_RACE) {
                             return GAMEMODE_FLX_MAIN_MENU;
                         }
-                        return GAMEMODE_800A;
+                        return GAMEMODE_FLX_COURSE_SELECT;
                     }
                 } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                    if (D_800CD3A8[i] == 0) {
-                        D_800CD3A8[i] = 1;
+                    if (gPlayerSelectionLock[i] == SELECTION_FREE) {
+                        gPlayerSelectionLock[i] = SELECTION_LOCKED;
                         if (D_800CD3AC[i] != 0) {
                             D_800CD3AC[i] = 0;
                             for (j = 0; j < gNumPlayers; j++) {
@@ -740,26 +742,26 @@ s32 func_i4_8011631C(void) {
                 }
 
                 for (j = 0, k = 0; j < gNumPlayers; j++) {
-                    if (D_800CD3A8[j] == 0) {
+                    if (gPlayerSelectionLock[j] == SELECTION_FREE) {
                         k++;
                         break;
                     }
                 }
 
                 if (k == 0) {
-                    D_800CD3B0 = 2;
+                    gMachineSelectState = MACHINE_SELECT_AWAIT_OK;
                 }
                 break;
             case 2:
                 if (gInputButtonPressed & BTN_B) {
-                    D_800CD3A8[i] = 0;
-                    D_800CD3B0 = 0;
+                    gPlayerSelectionLock[i] = SELECTION_FREE;
+                    gMachineSelectState = MACHINE_SELECT_ACTIVE;
                     func_800BA710(i, 0x10);
                     break;
                 }
                 if (gInputButtonPressed & (BTN_A | BTN_START)) {
                     func_800BA710(i, 0x3E);
-                    D_800CD3B0 = 3;
+                    gMachineSelectState = MACHINE_SELECT_CONTINUE;
                     return GAMEMODE_LX_MACHINE_SETTINGS;
                 }
                 break;
@@ -770,7 +772,7 @@ s32 func_i4_8011631C(void) {
 
 extern s32 D_i2_80106DA4;
 
-s32 func_i4_801168D4(void) {
+s32 MachineSettings_Update(void) {
     s32 i;
     s32 j;
     s32 k;
@@ -787,11 +789,11 @@ s32 func_i4_801168D4(void) {
 
     for (i = gNumPlayers - 1; i >= 0; i--) {
         temp_s1 = &gControllers[gPlayerControlPorts[i]];
-        func_8007DABC(temp_s1);
+        Controller_SetGlobalInputs(temp_s1);
 
-        switch (D_800CD3B4) {
-            case 0:
-                if (D_800CD3A8[i] == 0) {
+        switch (gMachineSettingsState) {
+            case MACHINE_SETTINGS_ACTIVE:
+                if (gPlayerSelectionLock[i] == SELECTION_FREE) {
 
                     k = gRacers[i].unk_2CC;
 
@@ -840,55 +842,55 @@ s32 func_i4_801168D4(void) {
                 if (gInputButtonPressed & BTN_B) {
                     func_800BA710(i, 0x10);
 
-                    if (D_800CD3A8[i] != 0) {
-                        D_800CD3A8[i] = 0;
+                    if (gPlayerSelectionLock[i] != SELECTION_FREE) {
+                        gPlayerSelectionLock[i] = SELECTION_FREE;
                     } else {
-                        D_800CD3B4 = 1;
+                        gMachineSettingsState = MACHINE_SETTINGS_EXIT;
                         if (gGameMode == GAMEMODE_LX_MACHINE_SETTINGS) {
                             return GAMEMODE_FLX_MACHINE_SELECT;
                         }
-                        return GAMEMODE_800F;
+                        return GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
                     }
-                } else if ((gInputButtonPressed & (BTN_A | BTN_START)) && (D_800CD3A8[i] == 0)) {
+                } else if ((gInputButtonPressed & (BTN_A | BTN_START)) && (gPlayerSelectionLock[i] == SELECTION_FREE)) {
                     func_800BA710(i, 0x21);
-                    D_800CD3A8[i] = 1;
+                    gPlayerSelectionLock[i] = SELECTION_LOCKED;
                 }
 
                 for (k = 0, j = 0; j < gNumPlayers; j++) {
-                    if (D_800CD3A8[j] == 0) {
+                    if (gPlayerSelectionLock[j] == SELECTION_FREE) {
                         k++;
                         break;
                     }
                 }
 
                 if (k == 0) {
-                    D_800CD3B4 = 2;
+                    gMachineSettingsState = MACHINE_SETTINGS_AWAIT_OK;
                 }
                 break;
-            case 2:
+            case MACHINE_SETTINGS_AWAIT_OK:
                 if (gInputButtonPressed & BTN_B) {
-                    D_800CD3A8[i] = 0;
-                    D_800CD3B4 = 0;
+                    gPlayerSelectionLock[i] = SELECTION_FREE;
+                    gMachineSettingsState = MACHINE_SETTINGS_ACTIVE;
                     func_800BA710(i, 0x10);
                 } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
                     func_800BA710(i, 0x3E);
                     func_8007E0CC();
-                    D_800CD3B4 = 3;
-                    switch (D_800CD380) {
-                        case 0:
+                    gMachineSettingsState = MACHINE_SETTINGS_CONTINUE;
+                    switch (gSelectedMode) {
+                        case MODE_GP_RACE:
                             return GAMEMODE_GP_RACE;
-                        case 1:
+                        case MODE_TIME_ATTACK:
                             return GAMEMODE_TIME_ATTACK;
-                        case 5:
+                        case MODE_PRACTICE:
                             return GAMEMODE_PRACTICE;
-                        case 3:
+                        case MODE_VS_BATTLE:
                             return gNumPlayers + 1;
-                        case 2:
+                        case MODE_DEATH_RACE:
                             return GAMEMODE_DEATH_RACE;
                     }
                 }
-            case 1:
-            case 3:
+            case MACHINE_SETTINGS_EXIT:
+            case MACHINE_SETTINGS_CONTINUE:
             default:
                 break;
         }
@@ -899,8 +901,8 @@ s32 func_i4_801168D4(void) {
 
 extern unk_800DCE48 D_800DCE48;
 
-Gfx* func_i4_80116DC4(Gfx* gfx) {
-    gfx = func_80079BC8(gfx);
+Gfx* MachineSelect_Draw(Gfx* gfx) {
+    gfx = Object_UpdateAndDrawAll(gfx);
     func_800790D4();
     if (gGameMode != D_800DCE48.gameMode) {
         func_80089724();
@@ -908,8 +910,8 @@ Gfx* func_i4_80116DC4(Gfx* gfx) {
     return gfx;
 }
 
-Gfx* func_i4_80116E10(Gfx* gfx) {
-    gfx = func_80079BC8(gfx);
+Gfx* MachineSettings_Draw(Gfx* gfx) {
+    gfx = Object_UpdateAndDrawAll(gfx);
     func_800790D4();
     if (gGameMode != D_800DCE48.gameMode) {
         func_80089724();
@@ -939,7 +941,7 @@ void func_i4_80116E8C(unk_800E3A28* arg0) {
 }
 
 void func_i4_80116F48(unk_800E3A28* arg0) {
-    s32 playerIndex = arg0->cmdId - OBJECT_60_0;
+    s32 playerIndex = arg0->cmdId - OBJECT_MACHINE_SETTINGS_PORTRAIT_0;
 
     arg0->unk_04 = gRacers[playerIndex].character;
     arg0->unk_04 = func_i4_80116E5C(arg0->unk_04);
@@ -1142,8 +1144,8 @@ Gfx* func_i4_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
     const s32* var_s0;
 
     if (gNumPlayers == 1) {
-        gfx = func_80078EA0(gfx, sPortraitCompTexInfos[gRacers[0].character], arg1->left, arg1->top, 0, 0, 0, 1.0f,
-                            1.0f);
+        gfx =
+            func_80078EA0(gfx, sPortraitCompTexInfos[gRacers[0].character], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             var_s0 = &D_i4_8011D6C4[i * 2];
@@ -1160,7 +1162,7 @@ Gfx* func_i4_80117D10(Gfx* gfx, unk_800E3A28* arg1) {
     s32 playerIndex;
     const s32* temp_v0;
 
-    playerIndex = arg1->cmdId - OBJECT_60_0;
+    playerIndex = arg1->cmdId - OBJECT_MACHINE_SETTINGS_PORTRAIT_0;
     temp_v0 = &D_i4_8011D6C4[playerIndex * 2];
     switch (gNumPlayers) {
         case 1:
@@ -1187,7 +1189,7 @@ Gfx* func_i4_80117E98(Gfx* gfx, unk_800E3A28* arg1) {
     s8* temp_a3;
     s32 i;
 
-    playerIndex = arg1->cmdId - OBJECT_MACHINE_STATS_0;
+    playerIndex = arg1->cmdId - OBJECT_MACHINE_SELECT_STATS_0;
 
     temp_a3 = &D_800F80C8[gRacers[playerIndex].character].machineStats;
     temp_fp = D_i4_8011D694[playerIndex * 2 + 0];
@@ -1221,8 +1223,8 @@ Gfx* func_i4_801180EC(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 Gfx* func_i4_801181C0(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[arg1->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], arg1->left, arg1->top, 0, 0, 0,
-                         1.0f, 1.0f);
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[arg1->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], arg1->left,
+                         arg1->top, 0, 0, 0, 1.0f, 1.0f);
 }
 
 extern u32 gGameFrameCount;
@@ -1235,12 +1237,12 @@ Gfx* func_i4_8011821C(Gfx* gfx, unk_800E3A28* arg1) {
     for (i = 0; i < 4; i++) {
         if (func_80079E88(OBJECT_MACHINE_SELECT_CURSOR_NUM_0 + i) != NULL) {
             temp_v0 = (u32) gGameFrameCount % temp_s3;
-            if ((D_800CD3A8[i] != 0) || (temp_v0 >= 0xF)) {
+            if ((gPlayerSelectionLock[i] != SELECTION_FREE) || (temp_v0 >= 0xF)) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
             } else {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255 - ((temp_v0 * 510) / temp_s3));
             }
-            temp_v0 = D_i4_8011D780[i];
+            temp_v0 = sMachineSelectIndex[i];
             arg1->left = ((temp_v0 % 6) * 0x28) + 0x28;
             arg1->top = ((temp_v0 / 6) * 0x22) + 0x25;
 
@@ -1275,7 +1277,7 @@ Gfx* func_i4_80118414(Gfx* gfx, unk_800E3A28* arg1) {
     for (i = 0; i < 30; i++) {
         gDPPipeSync(gfx++);
         var_t0 = false;
-        if (i < D_i4_8011D774) {
+        if (i < sMachinesUnlocked) {
             j = 0;
         } else {
             j = 1;
@@ -1286,7 +1288,7 @@ Gfx* func_i4_80118414(Gfx* gfx, unk_800E3A28* arg1) {
         gSPViewport(gfx++, (Vp*) arg1->unk_1C + i);
 
         for (j = 0; j < gNumPlayers; j++) {
-            if (i == D_i4_8011D780[j]) {
+            if (i == sMachineSelectIndex[j]) {
                 var_t0 = true;
                 break;
             }
@@ -1306,13 +1308,13 @@ Gfx* func_i4_80118734(Gfx* gfx, unk_800E3A28* arg1) {
     s32 var_v1;
 
     if (gNumPlayers == 1) {
-        var_v1 = 0x109;
+        var_v1 = 265;
     } else {
-        var_v1 = 0x90;
+        var_v1 = 144;
     }
 
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, arg1->left + var_v1, arg1->top + 0xD1, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, arg1->left + var_v1, arg1->top + 209, 1, 0, 0, 1.0f, 1.0f);
 }
 
 extern const char* gMachineNames[];
@@ -1418,9 +1420,9 @@ Gfx* func_i4_80118EC8(Gfx* gfx, unk_800E3A28* arg1) {
         gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
         gfx = func_i2_DrawMachineWeight(gfx, arg1->left + 0x66, arg1->top + 0x17, temp_s4);
 
-        switch (D_800CD3B4) {
-            case 0:
-            case 1:
+        switch (gMachineSettingsState) {
+            case MACHINE_SETTINGS_ACTIVE:
+            case MACHINE_SETTINGS_EXIT:
                 gfx = func_8007DB28(gfx, 0);
                 break;
             default:
@@ -1428,8 +1430,8 @@ Gfx* func_i4_80118EC8(Gfx* gfx, unk_800E3A28* arg1) {
                 break;
         }
 
-        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, arg1->left + 3, arg1->top + 1, 1, 0, 0,
-                            1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, arg1->left + 3, arg1->top + 1, 1, 0, 0, 1.0f,
+                            1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             temp_s4 = D_800F80C8[gRacers[i].character].unk_14;
@@ -1438,7 +1440,7 @@ Gfx* func_i4_80118EC8(Gfx* gfx, unk_800E3A28* arg1) {
             gfx = func_80078EA0(gfx, sMachineInfoGraphSmallCompTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA, 0, 0, 0, 1.0f,
                                 1.0f);
             gfx = func_i2_DrawMachineWeight(gfx, temp_s0 + 0x6E, temp_s1 + 0x1C, temp_s4);
-            if (D_800CD3A8[i] == 0) {
+            if (gPlayerSelectionLock[i] == SELECTION_FREE) {
                 gfx = func_8007DB28(gfx, 0);
             } else {
                 gDPSetPrimColor(gfx++, 0, 0, 0, 255, 0, 255);
@@ -1519,9 +1521,9 @@ Gfx* func_i4_80119574(Gfx* gfx, unk_800E3A28* arg1) {
     s32 top;
 
     if (gNumPlayers == 1) {
-        switch (D_800CD3B4) {
-            case 0:
-            case 1:
+        switch (gMachineSettingsState) {
+            case MACHINE_SETTINGS_ACTIVE:
+            case MACHINE_SETTINGS_EXIT:
                 if (1) {
                     gfx = func_8007DB28(gfx, 0);
                 }
@@ -1536,10 +1538,10 @@ Gfx* func_i4_80119574(Gfx* gfx, unk_800E3A28* arg1) {
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             temp_v1 = 1;
-            switch (D_800CD3B4) {
-                case 0:
-                case 1:
-                    if (D_800CD3A8[i] == 0) {
+            switch (gMachineSettingsState) {
+                case MACHINE_SETTINGS_ACTIVE:
+                case MACHINE_SETTINGS_EXIT:
+                    if (gPlayerSelectionLock[i] == SELECTION_FREE) {
                         gfx = func_8007DB28(gfx, 0);
                         break;
                     }
@@ -1578,14 +1580,15 @@ Gfx* func_i4_80119834(Gfx* gfx, unk_800E3A28* arg1) {
     s32 var_t0;
     s8* var_t1;
 
-    temp_v0 = func_8007E10C(D_i4_8011D780[0]);
+    temp_v0 = func_8007E10C(sMachineSelectIndex[0]);
     difficulty = 0;
-    switch (D_800CD3B0) {
-        case 2:
-        case 3:
+    switch (gMachineSelectState) {
+        case MACHINE_SELECT_AWAIT_OK:
+        case MACHINE_SELECT_CONTINUE:
             break;
         default:
-            if (((D_800CD3C0 >= 2) || (gSettingEverythingUnlocked != 0)) && (gSharedController.buttonCurrent & BTN_CUP)) {
+            if (((D_800CD3C0 >= 2) || (gSettingEverythingUnlocked != 0)) &&
+                (gSharedController.buttonCurrent & BTN_CUP)) {
                 difficulty = MASTER + 1;
             }
             if (gSharedController.buttonCurrent & BTN_CRIGHT) {
@@ -1642,7 +1645,7 @@ Gfx* func_i4_80119A64(Gfx* gfx, unk_800E3A28* arg1) {
     machineName = gMachineNames[func_i4_80116E5C(gRacers[0].character)];
 
     gfx = func_i2_80106450(gfx, 160 - (func_i2_801062E4(machineName, 2, 0) / 2), 218, machineName, 0, 2, 0);
-    gfx = func_i2_DrawMachineWeightSmall(gfx, 252, 221, D_800F80C8[func_8007E10C(D_i4_8011D780[0])].unk_14);
+    gfx = func_i2_DrawMachineWeightSmall(gfx, 252, 221, D_800F80C8[func_8007E10C(sMachineSelectIndex[0])].unk_14);
     return func_i2_80106450(gfx, 252, 221, "$", 0, 2, 0);
 }
 
@@ -1655,7 +1658,7 @@ void func_i4_80119BB8(unk_800E3A28* arg0) {
 }
 
 void func_i4_80119BC0(unk_800E3A28* arg0) {
-    s32 index = arg0->cmdId - OBJECT_60_0;
+    s32 index = arg0->cmdId - OBJECT_MACHINE_SETTINGS_PORTRAIT_0;
     s32 character = gRacers[index].character;
 
     character = func_i4_80116E5C(character);
@@ -1684,7 +1687,7 @@ void func_i4_80119D0C(unk_800E3A28* arg0) {
     s32 playerIndex = arg0->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0;
     s32 temp_v1;
 
-    temp_v1 = D_i4_8011D780[playerIndex];
+    temp_v1 = sMachineSelectIndex[playerIndex];
     arg0->left = ((temp_v1 % 6) * 0x28) + 0x28;
     arg0->top = ((temp_v1 / 6) * 0x22) + 0x25;
 }
@@ -1843,9 +1846,9 @@ void func_i4_8011A08C(unk_800E3A28* arg0) {
 }
 
 void func_i4_8011A6A0(unk_800E3A28* arg0) {
-    switch (D_800CD3B0) {
-        case 2:
-        case 3:
+    switch (gMachineSelectState) {
+        case MACHINE_SELECT_AWAIT_OK:
+        case MACHINE_SELECT_CONTINUE:
             func_8007A154(arg0, 0);
             break;
         default:
@@ -1855,9 +1858,9 @@ void func_i4_8011A6A0(unk_800E3A28* arg0) {
 }
 
 void func_i4_8011A6EC(unk_800E3A28* arg0) {
-    switch (D_800CD3B4) {
-        case 2:
-        case 3:
+    switch (gMachineSettingsState) {
+        case MACHINE_SETTINGS_AWAIT_OK:
+        case MACHINE_SETTINGS_CONTINUE:
             func_8007A0A0(arg0, 0, 192);
             break;
         default:
@@ -1877,7 +1880,8 @@ void func_i4_8011A73C(unk_800E3A28* arg0) {
 }
 
 void func_i4_8011A7B8(void) {
-    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) && (func_80079E88(OBJECT_MACHINE_SELECT_CAR)->unk_20 != 0)) {
+    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) &&
+        (func_80079E88(OBJECT_MACHINE_SELECT_CAR)->unk_20 != 0)) {
         D_800CE748 = 0.075f;
         D_800CE74C = 0.125f;
         D_800CE750 = 0.105f;
@@ -2011,33 +2015,34 @@ void func_i4_8011AC24(u16* texture) {
 
 extern s32 gLeoDDConnected;
 
-void func_i4_TitleInit(void) {
+void Title_Init(void) {
     D_800CCFE8 = 3;
     D_i4_8011D638 = 1;
     gCourseIndex = 0;
     D_i4_8011D790 = 0;
     D_i4_8011D794 = 0;
-    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
-    func_800794B0(OBJECT_TITLE_BACKGROUND, 0, 0, 8);
-    func_800794B0(OBJECT_TITLE_LOGO, 0, 0, 10);
-    func_800794B0(OBJECT_PUSH_START, 0, 0, 12);
-    func_800794B0(OBJECT_COPYRIGHT, 94, 200, 12);
+    Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
+    Object_Init(OBJECT_TITLE_BACKGROUND, 0, 0, 8);
+    Object_Init(OBJECT_TITLE_LOGO, 0, 0, 10);
+    Object_Init(OBJECT_PUSH_START, 0, 0, 12);
+    Object_Init(OBJECT_COPYRIGHT, 94, 200, 12);
     if (gLeoDDConnected) {
-        func_800794B0(OBJECT_TITLE_DISK_DRIVE, 0, 0, 12);
+        Object_Init(OBJECT_TITLE_DISK_DRIVE, 0, 0, 12);
     }
 }
 
 extern s32 gControllersConnected;
 extern s16 D_800CD044;
 
-s32 func_i4_8011AE2C(void) {
+s32 Title_Update(void) {
 
     if (gControllersConnected == 0) {
         return gGameMode;
     }
-    func_8007DABC(&gSharedController);
+    Controller_SetGlobalInputs(&gSharedController);
     Math_Rand1();
-    if (gLeoDDConnected && (func_80079E88(OBJECT_TITLE_DISK_DRIVE)->unk_1C != 0) && (func_80079E88(OBJECT_TITLE_DISK_DRIVE)->unk_04 == 0)) {
+    if (gLeoDDConnected && (func_80079E88(OBJECT_TITLE_DISK_DRIVE)->unk_1C != 0) &&
+        (func_80079E88(OBJECT_TITLE_DISK_DRIVE)->unk_04 == 0)) {
         return gGameMode;
     }
     if (D_i4_8011D794 != 0) {
@@ -2066,9 +2071,9 @@ s32 func_i4_8011AE2C(void) {
     }
 }
 
-Gfx* func_i4_8011AF84(Gfx* gfx) {
+Gfx* Title_Draw(Gfx* gfx) {
 
-    gfx = func_80079BC8(gfx);
+    gfx = Object_UpdateAndDrawAll(gfx);
 
     if (D_i4_8011D794 != 0) {
         gDPPipeSync(gfx++);
@@ -2201,8 +2206,7 @@ void func_i4_8011B2E0(unk_800E3A28* arg0) {
 }
 
 Gfx* func_i4_8011B380(Gfx* gfx, unk_800E3A28* arg1) {
-    return func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->left, arg1->top, 0, 0, 0, 1.0f,
-                         1.0f);
+    return func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_8011B3DC(Gfx* gfx, unk_800E3A28* arg1) {
@@ -2246,8 +2250,8 @@ Gfx* func_i4_8011B444(Gfx* gfx, unk_800E3A28* arg1) {
             var_v1 = 30 - var_v1;
         }
 
-        gfx = func_8007A440(gfx, arg1->left, arg1->top, arg1->left + 160, arg1->top + 32,
-                            (s32) (var_v1 * 40) / 60, 0, 0, 0xF0);
+        gfx = func_8007A440(gfx, arg1->left, arg1->top, arg1->left + 160, arg1->top + 32, (s32) (var_v1 * 40) / 60, 0,
+                            0, 0xF0);
         var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
@@ -2287,8 +2291,8 @@ Gfx* func_i4_8011B6C4(Gfx* gfx, unk_800E3A28* arg1) {
             var_v1 = 30 - var_v1;
         }
 
-        gfx = func_8007A440(gfx, arg1->left, arg1->top, arg1->left + 160, arg1->top + 32,
-                            (s32) (var_v1 * 40) / 60, 0, 0, 0xF0);
+        gfx = func_8007A440(gfx, arg1->left, arg1->top, arg1->left + 160, arg1->top + 32, (s32) (var_v1 * 40) / 60, 0,
+                            0, 0xF0);
         var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);

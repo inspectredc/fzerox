@@ -553,9 +553,9 @@ void func_80077318(void) {
             segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i4);
             segmentBssSize = SEGMENT_BSS_SIZE(ovl_i4);
             break;
-        case GAMEMODE_800A:
-        case GAMEMODE_800F:
-        case GAMEMODE_8013:
+        case GAMEMODE_FLX_COURSE_SELECT:
+        case GAMEMODE_FLX_GP_RACE_NEXT_COURSE:
+        case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
             // ovl_i5
             vramTextStart = SEGMENT_TEXT_START(ovl_i5);
             vramStart = SEGMENT_VRAM_START(ovl_i5);
@@ -569,8 +569,8 @@ void func_80077318(void) {
             segmentBssSize = SEGMENT_BSS_SIZE(ovl_i5);
             break;
         case GAMEMODE_FLX_MAIN_MENU:
-        case GAMEMODE_800B:
-        case GAMEMODE_800C:
+        case GAMEMODE_FLX_SKIPPABLE_CREDITS:
+        case GAMEMODE_FLX_UNSKIPPABLE_CREDITS:
         case GAMEMODE_FLX_OPTIONS_MENU:
             // ovl_i6
             vramTextStart = SEGMENT_TEXT_START(ovl_i6);

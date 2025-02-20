@@ -1125,8 +1125,8 @@ Gfx* func_i6_8011A6CC(Gfx* gfx, unk_800E3A28* arg1) {
             break;
         case 1:
         case 2:
-            gfx = func_i2_80106450(gfx, (arg1->left - func_i2_801062E4(temp_s2, 6, 0)) + 1, arg1->top + 1, temp_s2,
-                                   0, 6, 0);
+            gfx = func_i2_80106450(gfx, (arg1->left - func_i2_801062E4(temp_s2, 6, 0)) + 1, arg1->top + 1, temp_s2, 0,
+                                   6, 0);
             break;
     }
 
@@ -1197,8 +1197,8 @@ Gfx* func_i6_8011A944(Gfx* gfx, unk_800E3A28* arg1) {
                     break;
                 case 1:
                 case 2:
-                    gfx = func_i2_80106450(gfx, arg1->left - func_i2_801062E4(temp_a3, 1, 0), arg1->top, temp_a3,
-                                           0, 1, 0);
+                    gfx = func_i2_80106450(gfx, arg1->left - func_i2_801062E4(temp_a3, 1, 0), arg1->top, temp_a3, 0, 1,
+                                           0);
                     break;
             }
             break;
@@ -1415,7 +1415,7 @@ bool func_i6_8011B058(unk_800E3A28* arg0, s32 arg1, s32 arg2, s32 arg3) {
     return false;
 }
 
-void func_i6_8011BAC0(s32 cmdId, s32 arg1, s32 arg2, s8 arg3);
+void func_i6_8011BAC0(s32 cmdId, s32 left, s32 top, s8 priority);
 
 void func_i6_8011B0CC(unk_800E3A28* arg0) {
     s32 temp_a0;
@@ -2043,9 +2043,9 @@ void func_i6_8011BE1C(void) {
 
 extern s16 D_800CCFE8;
 
-void func_i6_8011BF50(void) {
+void Credits_Init(void) {
     D_800CCFE8 = 3;
-    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
+    Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
     func_i6_8011BAC0(OBJECT_191, 0, 0, 1);
     func_i6_8011BAC0(OBJECT_195, 0, 0, 8);
 }
@@ -2053,20 +2053,20 @@ void func_i6_8011BF50(void) {
 extern s32 gGameMode;
 extern Controller gSharedController;
 
-s32 func_i6_8011BFB0(void) {
+s32 Credits_Update(void) {
 
-    func_8007DABC(&gSharedController);
+    Controller_SetGlobalInputs(&gSharedController);
     if (gInputPressed & (BTN_A | BTN_START)) {
         D_i6_8011DFA0 ^= 1;
     }
-    if ((gGameMode != GAMEMODE_800C) && (gInputPressed & BTN_B)) {
+    if ((gGameMode != GAMEMODE_FLX_UNSKIPPABLE_CREDITS) && (gInputPressed & BTN_B)) {
         return GAMEMODE_FLX_MAIN_MENU;
     } else {
         return gGameMode;
     }
 }
 
-Gfx* func_i6_8011C01C(Gfx* gfx) {
+Gfx* Credits_Draw(Gfx* gfx) {
     func_i6_8011BE1C();
     gfx = func_i6_8011BBE4(gfx);
     func_800790D4();
@@ -2078,12 +2078,12 @@ extern s8 D_800CD3C4;
 
 void func_i6_8011C404(void);
 
-void func_i6_8011C050(void) {
+void OptionsMenu_Init(void) {
     s32 i;
     OptionsInfo* option;
 
     D_800CCFE8 = 3;
-    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
+    Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
     func_80078104(aMenuTextTLUT, 0x40, 0, 0, false);
     func_80078104(aOptionsFalconHelmetTex, 0x2000, 0, 1, false);
     func_80078104(aOptionsTex, 0x900, 0, 1, false);
@@ -2191,8 +2191,8 @@ void func_i6_8011D394(void);
 extern s16 D_800CD048;
 extern s32 D_i2_80106DA4;
 
-s32 func_i6_8011C6DC(void) {
-    func_8007DABC(&gSharedController);
+s32 OptionsMenu_Update(void) {
+    Controller_SetGlobalInputs(&gSharedController);
     func_80080C0C();
     func_i6_8011D394();
     if (!sOptionsDataAlreadyCleared) {
@@ -2393,7 +2393,7 @@ void func_i6_8011CBB4(void) {
 
 Gfx* func_i6_8011D8C8(Gfx*);
 
-Gfx* Menu_OptionsDraw(Gfx* gfx) {
+Gfx* OptionsMenu_Draw(Gfx* gfx) {
     s32 temp_s4;
     s32 var_s5;
     s32 i;
@@ -2402,7 +2402,7 @@ Gfx* Menu_OptionsDraw(Gfx* gfx) {
     OptionsTextureInfo* selectionStateTextureInfo;
     OptionsTextureInfo* optionTextureInfo;
 
-    gfx = func_80079BC8(gfx);
+    gfx = Object_UpdateAndDrawAll(gfx);
     if (D_i6_801247A8 != 1) {
         gfx = func_8007B14C(gfx, func_800783AC(aTitleBackgroundMainTex), 8, 0, 304, 240, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0,
                             0, 0, 0);

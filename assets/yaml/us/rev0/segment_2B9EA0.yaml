@@ -4992,7 +4992,7 @@ aRecordsTex:
   height: 24
   symbol: aRecordsTex
 
-aRecordsArrowTex:
+aYellowArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x138994
   ctype: u16
@@ -5000,7 +5000,7 @@ aRecordsArrowTex:
   width: 32
   height: 32
   compression: MIO0
-  symbol: aRecordsArrowTex
+  symbol: aYellowArrowTex
 
 aOptionsFalconHelmetTex:
   type: COMPRESSED_TEXTURE

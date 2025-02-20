@@ -789,7 +789,7 @@ s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 arg2) {
 void func_i7_80147CC0(void);
 void func_i7_801467FC(void);
 
-void func_i7_80143A90(void) {
+void EndingCutscene_Init(void) {
     unk_8014BE28* var_v1;
     s32 cupFirstCourseIndex;
     s32 pad;
@@ -974,9 +974,9 @@ void func_i7_80147EBC(void);
 extern s32 D_800DCCFC;
 extern Controller gSharedController;
 
-s32 func_i7_801441A0(void) {
+s32 EndingCutscene_Update(void) {
 
-    func_8007DABC(&gSharedController);
+    Controller_SetGlobalInputs(&gSharedController);
     D_i7_8014BDF0 = &D_8014B480[D_800DCCFC];
     func_i2_8010466C();
     func_800952F4();
@@ -997,7 +997,7 @@ s32 func_i7_801441A0(void) {
         case 1:
             return GAMEMODE_FLX_MAIN_MENU;
         case 2:
-            return GAMEMODE_800C;
+            return GAMEMODE_FLX_UNSKIPPABLE_CREDITS;
         case 0:
         default:
             return GAMEMODE_GP_END_CS;
@@ -1172,7 +1172,7 @@ Gfx* func_i7_80144B2C(Gfx*);
 Gfx* func_i7_80146E28(Gfx*);
 Gfx* func_i7_80147AC8(Gfx*);
 
-Gfx* func_i7_801447F4(Gfx* gfx) {
+Gfx* EndingCutscene_Draw(Gfx* gfx) {
 
     if (D_i2_80106F10 != 0) {
         D_i2_80106F10--;

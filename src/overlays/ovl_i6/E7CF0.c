@@ -9,7 +9,7 @@ s32 func_i6_8011DBD0(void) {
 
         while (IO_READ(PI_STATUS_REG) & (PI_STATUS_IO_BUSY | PI_STATUS_DMA_BUSY)) {}
 
-        temp_a0 = IO_READ(0x100006E8);
+        temp_a0 = ROM_READ(0x6E8);
 
         if (temp_a0 != var_v1) {
             i = 0;

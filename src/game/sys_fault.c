@@ -151,7 +151,8 @@ void Fault_DisplayFloatException(u32 exceptFlags) {
 }
 
 extern OSMesgQueue gSerialEventQueue;
-const u16 sCrashDebuggerInputs[] = { BTN_A, BTN_CUP, BTN_CUP, BTN_B, BTN_CRIGHT, BTN_CRIGHT, BTN_B, BTN_CRIGHT, BTN_B, BTN_CRIGHT, BTN_START };
+const u16 sCrashDebuggerInputs[] = { BTN_A, BTN_CUP,    BTN_CUP, BTN_B,      BTN_CRIGHT, BTN_CRIGHT,
+                                     BTN_B, BTN_CRIGHT, BTN_B,   BTN_CRIGHT, BTN_START };
 extern Controller gSharedController;
 #define CAUSE_INDEX(cause) ((cause >> CAUSE_EXCSHIFT) & (CAUSE_EXCMASK >> CAUSE_EXCSHIFT))
 

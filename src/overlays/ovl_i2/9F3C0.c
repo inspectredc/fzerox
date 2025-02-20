@@ -25,7 +25,7 @@ UNUSED s8 D_i2_80106F14[] = { 0, 1, 2, 5, 4, 3, 7, 6, 5, 0, 4, 8, 2, 1, 7, 6, 8,
 
 extern CourseData gCourseData;
 
-void func_i2_80103AD4(void) {
+void Race_Init(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
     D_800DCE5C = 0;
     func_800A4EAC();
@@ -47,7 +47,7 @@ void func_i2_80103AD4(void) {
 
 extern s32 gGameMode;
 
-s32 func_i2_80103B8C(void) {
+s32 Race_Update(void) {
     func_i3_8011AEA0();
     func_i2_8010466C();
     func_800952F4();
@@ -71,7 +71,7 @@ extern FrameBuffer* D_800DCCD0[];
 extern s16 D_800CCFE4;
 extern s32 gNumPlayers;
 
-Gfx* func_i2_80103BE0(Gfx* gfx) {
+Gfx* Race_Draw(Gfx* gfx) {
 
     if (D_i2_80106F10 != 0) {
         D_i2_80106F10--;

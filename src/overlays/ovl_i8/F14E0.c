@@ -64,7 +64,7 @@ extern s32 gDifficulty;
 
 void func_i8_80143A78(void);
 
-void func_i8_801439D0(void) {
+void Records_Init(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
     D_800DCE5C = 0;
     gDifficulty = MASTER;
@@ -187,12 +187,12 @@ extern s32 D_800CD3BC;
 extern s32 D_800DCCFC;
 extern Controller gSharedController;
 
-s32 func_i8_80143DDC(void) {
+s32 Records_Update(void) {
     s32 temp_v0;
     s32 gameMode;
     s32 sp1C;
 
-    func_8007DABC(&gSharedController);
+    Controller_SetGlobalInputs(&gSharedController);
     D_i8_80144FD8 = &D_i8_80144FE0[D_800DCCFC];
     func_800952F4();
     func_8008675C();
@@ -214,7 +214,7 @@ s32 func_i8_80143DDC(void) {
                 if (temp_v0 == 1) {
                     sp1C = 1;
                 } else if (temp_v0 == 2) {
-                    gameMode = GAMEMODE_8013;
+                    gameMode = GAMEMODE_FLX_RECORDS_COURSE_SELECT;
                 }
                 if (temp_v0 != 0) {
                     D_i8_80144FD6 = 1;
@@ -224,7 +224,7 @@ s32 func_i8_80143DDC(void) {
                 temp_v0 = func_i8_80144144();
                 gameMode = GAMEMODE_RECORDS;
                 if (temp_v0 == 1) {
-                    gameMode = GAMEMODE_8013;
+                    gameMode = GAMEMODE_FLX_RECORDS_COURSE_SELECT;
                 } else if (temp_v0 == 2) {
                     gameMode = GAMEMODE_FLX_MAIN_MENU;
                 }
@@ -431,7 +431,7 @@ extern GfxPool* D_800DCCF0;
 
 Gfx* func_i8_801449B8(Gfx*);
 
-Gfx* func_i8_80144568(Gfx* gfx) {
+Gfx* Records_Draw(Gfx* gfx) {
 
     if (D_i2_80106F10 != 0) {
         D_i2_80106F10--;

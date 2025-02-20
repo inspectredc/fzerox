@@ -87,7 +87,7 @@ void func_i3_80139D20(void) {
     }
     if (D_i3_80143780 & 0x10) {
         func_i3_8013BF18(1);
-        func_80078104(aRecordsArrowTex, 0x800, 0, 1, 0);
+        func_80078104(aYellowArrowTex, 0x800, 0, 1, 0);
     }
 }
 
@@ -222,9 +222,9 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
             }
             var_s3 = (s32) (10.0f * var_fv0);
 
-            gfx = func_8007B14C(gfx, func_800783AC(aRecordsArrowTex), (-(i / 2) - var_s3) + 0x76, 16, 32, 32,
+            gfx = func_8007B14C(gfx, func_800783AC(aYellowArrowTex), (-(i / 2) - var_s3) + 0x76, 16, 32, 32,
                                 G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 0, 0);
-            gfx = func_8007B14C(gfx, func_800783AC(aRecordsArrowTex), (i / 2) + var_s3 + 0xAA, 16, 32, 32,
+            gfx = func_8007B14C(gfx, func_800783AC(aYellowArrowTex), (i / 2) + var_s3 + 0xAA, 16, 32, 32,
                                 G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 1, 0);
         }
     }
@@ -617,7 +617,7 @@ extern Controller gControllers[];
 extern s32 gPlayerControlPorts[];
 
 void func_i3_8013C15C(void) {
-    func_8007DABC(&gControllers[gPlayerControlPorts[0]]);
+    Controller_SetGlobalInputs(&gControllers[gPlayerControlPorts[0]]);
     switch (D_i3_801437B0) {
         case 0:
             func_i3_8013C380();

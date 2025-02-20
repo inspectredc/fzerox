@@ -2167,9 +2167,9 @@ void func_80085610(void) {
             D_800E5220[0].unk_04 = 2;
             func_80085B80(D_800E5220, D_800E5990, D_800E5D70);
             break;
-        case GAMEMODE_800A:
-        case GAMEMODE_800F:
-        case GAMEMODE_8013:
+        case GAMEMODE_FLX_COURSE_SELECT:
+        case GAMEMODE_FLX_GP_RACE_NEXT_COURSE:
+        case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
             v0 = 0;
             if (1) {}
             D_800E5E80 = ++v0;
@@ -4364,9 +4364,6 @@ s32 func_8008B23C(CarInfo* arg0, CarInfo* arg1) {
 }
 
 f32 func_8008B2D8(Racer*, f32);
-
-#define PHYS_TO_K1ROM(x) (((u32) (x) | 0xB0000000))
-#define ROM_READ(addr) (*(vu32*) PHYS_TO_K1ROM(addr))
 
 f32 func_8008B2D8(Racer* arg0, f32 arg1) {
     unk_800CF1B0* temp_a1;

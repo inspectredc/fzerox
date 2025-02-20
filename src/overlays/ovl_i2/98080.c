@@ -66,7 +66,7 @@ void func_i2_800FC77C(void) {
         case GAMEMODE_D:
             func_i2_800FCB84(0, 10);
             break;
-        case GAMEMODE_800A:
+        case GAMEMODE_FLX_COURSE_SELECT:
             func_i2_800FCD38(5, 40);
             func_i2_800FCB84(0, 5);
             break;
@@ -84,7 +84,7 @@ void func_i2_800FC77C(void) {
             }
             func_i2_800FCB84(0, 1);
             break;
-        case GAMEMODE_8013:
+        case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
         case GAMEMODE_FLX_OPTIONS_MENU:
             if (D_800CD044 == 0x15) {
                 func_i2_800FCB84(0, 10);
@@ -148,7 +148,7 @@ void func_i2_800FC9BC(void) {
         case GAMEMODE_D:
             func_i2_800FCB84(1, 10);
             break;
-        case GAMEMODE_8013:
+        case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
         case GAMEMODE_FLX_OPTIONS_MENU:
             if (D_800CD044 == 0x17) {
                 func_i2_800FCD38(9, 2);
@@ -172,7 +172,7 @@ void func_i2_800FC9BC(void) {
             }
             func_i2_800FCB84(1, 9);
             break;
-        case GAMEMODE_800C:
+        case GAMEMODE_FLX_UNSKIPPABLE_CREDITS:
             func_i2_800FCD38(5, 60);
             func_i2_800FCB84(1, 5);
             break;

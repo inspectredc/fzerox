@@ -42,7 +42,7 @@ unk_80077D50* sCupSelectCompTexInfos[] = {
 unk_80077D50 sSelectCourseCompTexInfo[] = { { 4, aSelectCourseTex, 160, 24, 0 }, { 0 } };
 unk_80077D50 sRecordsCompTexInfo[] = { { 4, aRecordsTex, 96, 24, 0 }, { 0 } };
 static unk_80077D50 sOKCompTexInfo[] = { { 17, aOKTex, 32, 16, 0x112 }, { 0 } };
-unk_80077D50 sRecordsArrowCompTexInfo[] = { { 17, aRecordsArrowTex, 32, 32, 0x120 }, { 0 } };
+unk_80077D50 sYellowArrowCompTexInfo[] = { { 17, aYellowArrowTex, 32, 32, 0x120 }, { 0 } };
 unk_80077D50 sOptionsFalconHelmetCompTexInfo[] = { { 17, aOptionsFalconHelmetTex, 64, 64, 0x9E8 }, { 0 } };
 
 static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = { { 17, aTitleBackgroundMainTex, 304, 240, 0x14A5D }, { 0 } };
@@ -165,7 +165,7 @@ void func_i5_80116910(void) {
 }
 
 extern s16 D_800CCFE8;
-extern s32 D_800CD380;
+extern s32 gSelectedMode;
 extern s32 D_800CD3B8;
 extern s32 D_800CD3BC;
 extern s8 D_800CD3C0;
@@ -173,7 +173,7 @@ extern s8 gSettingEverythingUnlocked;
 extern s32 gCurrentGhostType;
 extern s32 gGameMode;
 
-void func_i5_80116934(void) {
+void CourseSelect_Init(void) {
     s32 var_a1;
     s32 var_a2;
     s32 var_v0;
@@ -182,7 +182,7 @@ void func_i5_80116934(void) {
     D_800CCFE8 = 3;
     sSelectedGhostOption = D_i5_80119544[gCurrentGhostType];
     D_i5_801197E4 = -1;
-    if (gGameMode == GAMEMODE_800A) {
+    if (gGameMode == GAMEMODE_FLX_COURSE_SELECT) {
         var_v0 = D_800CD3B8;
     } else {
         var_v0 = D_800CD3BC;
@@ -209,7 +209,7 @@ void func_i5_80116934(void) {
     if (var_v1 + 2 < gCupSelectOption) {
         gCupSelectOption = var_v1 + 2;
     }
-    if ((gCupSelectOption == 4) && ((gGameMode == GAMEMODE_8013) || (D_800CD380 == 1))) {
+    if ((gCupSelectOption == 4) && ((gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) || (gSelectedMode == MODE_TIME_ATTACK))) {
         gCupSelectOption = 3;
     }
     if (gCupSelectOption >= 10) {
@@ -221,44 +221,45 @@ void func_i5_80116934(void) {
     }
 
     func_80085610();
-    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
-    func_800794B0(OBJECT_120, 0, 0, 2);
-    if (gGameMode != GAMEMODE_8013) {
+    Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
+    Object_Init(OBJECT_COURSE_SELECT_BACKGROUND, 0, 0, 2);
+    if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         var_a1 = 80;
         var_a2 = 17;
     } else {
         var_a1 = 112;
         var_a2 = 21;
     }
-    func_800794B0(OBJECT_131, var_a1, var_a2, 4);
-    func_800794B0(OBJECT_128, 0, 0, 10);
-    func_800794B0(OBJECT_121, 0, 0, 8);
-    if (((gSettingEverythingUnlocked != 0) || (D_800CD3C0 >= 2)) && (gGameMode != GAMEMODE_8013) && (D_800CD380 != 1)) {
-        func_800794B0(OBJECT_122_4, 0, -100, 6);
+    Object_Init(OBJECT_COURSE_SELECT_HEADER, var_a1, var_a2, 4);
+    Object_Init(OBJECT_COURSE_SELECT_OK, 0, 0, 10);
+    Object_Init(OBJECT_COURSE_SELECT_MODEL, 0, 0, 8);
+    if (((gSettingEverythingUnlocked != 0) || (D_800CD3C0 >= 2)) && (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) &&
+        (gSelectedMode != MODE_TIME_ATTACK)) {
+        Object_Init(OBJECT_COURSE_SELECT_CUP_4, 0, -100, 6);
     }
     if ((D_800CD3C0 > 0) || (gSettingEverythingUnlocked != 0)) {
-        func_800794B0(OBJECT_122_3, 0, -100, 6);
+        Object_Init(OBJECT_COURSE_SELECT_CUP_3, 0, -100, 6);
     }
-    func_800794B0(OBJECT_122_2, 0, -100, 6);
-    func_800794B0(OBJECT_122_1, 0, -100, 6);
-    func_800794B0(OBJECT_122_0, 0, -100, 6);
-    if (D_800CD380 != 0) {
-        func_800794B0(OBJECT_129, 0, 0, 8);
+    Object_Init(OBJECT_COURSE_SELECT_CUP_2, 0, -100, 6);
+    Object_Init(OBJECT_COURSE_SELECT_CUP_1, 0, -100, 6);
+    Object_Init(OBJECT_COURSE_SELECT_CUP_0, 0, -100, 6);
+    if (gSelectedMode != MODE_GP_RACE) {
+        Object_Init(OBJECT_COURSE_SELECT_ARROWS, 0, 0, 8);
     }
-    func_800794B0(OBJECT_130, 0, 0, 8);
-    switch (D_800CD380) {
-        case 1:
-            if (gGameMode != GAMEMODE_8013) {
-                func_800794B0(OBJECT_133, 0, 0, 10);
+    Object_Init(OBJECT_COURSE_SELECT_NAME, 0, 0, 8);
+    switch (gSelectedMode) {
+        case MODE_TIME_ATTACK:
+            if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
+                Object_Init(OBJECT_COURSE_SELECT_GHOST_OPTION, 0, 0, 10);
             }
             /* fallthrough */
-        case 2:
-            func_800794B0(OBJECT_132, 190, 160, 10);
+        case MODE_DEATH_RACE:
+            Object_Init(OBJECT_COURSE_SELECT_GHOST_MARKER, 190, 160, 10);
             break;
     }
 }
 
-void func_i5_80116D00(void) {
+void NextCourseSelect_Init(void) {
     D_800CCFE8 = 3;
     D_i5_801190C0 = 10;
     if (gCourseIndex >= 48) {
@@ -281,15 +282,15 @@ void func_i5_80116D00(void) {
         sCourseSelectCup = gCupSelectOption;
     }
     func_80085610();
-    func_800794B0(OBJECT_FRAMEBUFFER, 0, 0, 1);
-    func_800794B0(OBJECT_120, 0, 0, 2);
-    func_800794B0(OBJECT_121, 0, 0, 8);
+    Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
+    Object_Init(OBJECT_COURSE_SELECT_BACKGROUND, 0, 0, 2);
+    Object_Init(OBJECT_COURSE_SELECT_MODEL, 0, 0, 8);
     if (gCupSelectOption >= 10) {
-        func_800794B0(OBJECT_122_5, 0, -100, 6);
+        Object_Init(OBJECT_COURSE_SELECT_CUP_5, 0, -100, 6);
     } else {
-        func_800794B0(OBJECT_122_0 + gCupSelectOption, 0, -100, 6);
+        Object_Init(OBJECT_COURSE_SELECT_CUP_0 + gCupSelectOption, 0, -100, 6);
     }
-    func_800794B0(OBJECT_130, 0, 0, 8);
+    Object_Init(OBJECT_COURSE_SELECT_NAME, 0, 0, 8);
 }
 
 void func_i5_80116658(s32 arg0);
@@ -303,7 +304,7 @@ extern u16 gInputButtonPressed;
 extern unk_struct_1DC D_800E5220[];
 extern s32 D_i2_80106DA4;
 
-s32 func_i5_80116EEC(void) {
+s32 CourseSelect_Update(void) {
     s32 pad[2];
     s32 originalCupSelectOption;
     s8 originalSelectedGhostOption;
@@ -315,10 +316,10 @@ s32 func_i5_80116EEC(void) {
     if (D_i2_80106DA4 != 0) {
         return gGameMode;
     }
-    if ((D_800CD380 == 1) && (gGameMode != GAMEMODE_8013)) {
+    if ((gSelectedMode == MODE_TIME_ATTACK) && (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT)) {
         func_i5_80116830();
     }
-    func_8007DABC(&gSharedController);
+    Controller_SetGlobalInputs(&gSharedController);
     switch (D_i5_801190C0) {
         case 0:
             D_i5_801190D0 = 1;
@@ -338,7 +339,7 @@ s32 func_i5_80116EEC(void) {
                 if (var_v1 + 2 < gCupSelectOption) {
                     gCupSelectOption = var_v1 + 2;
                 }
-                if ((gCupSelectOption == 4) && ((gGameMode == GAMEMODE_8013) || (D_800CD380 == 1))) {
+                if ((gCupSelectOption == 4) && ((gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) || (gSelectedMode == MODE_TIME_ATTACK))) {
                     gCupSelectOption = 3;
                 }
             }
@@ -370,7 +371,7 @@ s32 func_i5_80116EEC(void) {
             }
             if (gInputButtonPressed & BTN_B) {
                 func_800BA8D8(0x10);
-                if (gGameMode == GAMEMODE_800A) {
+                if (gGameMode == GAMEMODE_FLX_COURSE_SELECT) {
                     D_800CD3B8 = gCourseIndex;
                     D_i5_801190C0 = 5;
                 } else {
@@ -383,7 +384,7 @@ s32 func_i5_80116EEC(void) {
                 if (gCupSelectOption == 4) {
                     sCourseSelectTrackNo = 0;
                     D_i5_801190C0 = 3;
-                } else if (D_800CD380 == 0) {
+                } else if (gSelectedMode == MODE_GP_RACE) {
                     if (gCupSelectOption >= 10) {
                         gCourseIndex = 24;
                     } else {
@@ -394,12 +395,12 @@ s32 func_i5_80116EEC(void) {
                 } else {
                     D_i5_801190C0 = 2;
                 }
-                func_80079E88(OBJECT_121)->left = 400 - (sCourseSelectTrackNo * 0x500);
+                func_80079E88(OBJECT_COURSE_SELECT_MODEL)->left = 400 - (sCourseSelectTrackNo * 0x500);
             }
             break;
         case 2:
             D_i5_801190D0 = 1;
-            if ((D_800CD380 == 1) && (gGameMode != GAMEMODE_8013)) {
+            if ((gSelectedMode == MODE_TIME_ATTACK) && (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT)) {
                 unlockedGhost = sUnlockedGhosts;
                 originalSelectedGhostOption = sSelectedGhostOption;
                 if ((gInputPressed & BTN_UP) && (sSelectedGhostOption > 0)) {
@@ -420,7 +421,7 @@ s32 func_i5_80116EEC(void) {
             if ((gInputPressed & BTN_LEFT) && (sCourseSelectTrackNo > 0)) {
                 sCourseSelectTrackNo--;
                 D_800E5220[0].unk_18 = 1;
-                temp_v0_2 = func_80079E88(OBJECT_129);
+                temp_v0_2 = func_80079E88(OBJECT_COURSE_SELECT_ARROWS);
                 temp_v0_2->unk_04 += 0x200;
                 func_800BA8D8(30);
             }
@@ -428,7 +429,7 @@ s32 func_i5_80116EEC(void) {
             if ((gInputPressed & BTN_RIGHT) && (sCourseSelectTrackNo < 5)) {
                 sCourseSelectTrackNo++;
                 D_800E5220[0].unk_18 = 1;
-                temp_v0_2 = func_80079E88(OBJECT_129);
+                temp_v0_2 = func_80079E88(OBJECT_COURSE_SELECT_ARROWS);
                 temp_v0_2->unk_08 += 0x200;
                 func_800BA8D8(30);
             }
@@ -448,7 +449,7 @@ s32 func_i5_80116EEC(void) {
             break;
         case 3:
             if (gInputButtonPressed & BTN_B) {
-                if ((D_800CD380 == 0) || (gCupSelectOption == 4)) {
+                if ((gSelectedMode == MODE_GP_RACE) || (gCupSelectOption == 4)) {
                     D_i5_801190C0 = 0;
                 } else {
                     D_i5_801190C0 = 2;
@@ -457,7 +458,7 @@ s32 func_i5_80116EEC(void) {
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
                 D_i5_801190C0 = 4;
-                if (gGameMode == GAMEMODE_800A) {
+                if (gGameMode == GAMEMODE_FLX_COURSE_SELECT) {
                     D_800CD3B8 = gCourseIndex;
                     return GAMEMODE_FLX_MACHINE_SELECT;
                 }
@@ -484,9 +485,9 @@ s32 func_i5_80116EEC(void) {
     return gGameMode;
 }
 
-s32 func_i5_801175D0(void) {
+s32 NextCourseSelect_Update(void) {
     func_8008675C();
-    func_8007DABC(&gSharedController);
+    Controller_SetGlobalInputs(&gSharedController);
     D_i5_801190D0 = 1;
     switch (D_i5_801190C0) {
         case 10:
@@ -503,8 +504,8 @@ s32 func_i5_801175D0(void) {
     return gGameMode;
 }
 
-Gfx* func_i5_80117664(Gfx* gfx) {
-    return func_80079BC8(gfx);
+Gfx* CourseSelect_Draw(Gfx* gfx) {
+    return Object_UpdateAndDrawAll(gfx);
 }
 
 extern s8 D_800CD3C4;
@@ -520,7 +521,7 @@ void func_i5_80117684(unk_800E3A28* arg0) {
     if (arg0->unk_04 == 0) {
         arg0->left = 8;
     }
-    if (gGameMode == GAMEMODE_8013) {
+    if (gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         func_80077D50(sOptionsFalconHelmetCompTexInfo, 0);
         if (arg0->unk_04 == 0) {
             var_a1 = 0x23A00;
@@ -552,7 +553,7 @@ void func_i5_801177EC(unk_800E3A28* arg0) {
     s32 var_v0;
     s32 i;
 
-    cupType = arg0->cmdId - OBJECT_122_0;
+    cupType = arg0->cmdId - OBJECT_COURSE_SELECT_CUP_0;
     if (cupType == JOKER_CUP || cupType == X_CUP) {
         var_v0 = D_800CD3C0;
         if ((var_v0 >= 3) || (gSettingEverythingUnlocked != 0)) {
@@ -576,7 +577,7 @@ void func_i5_801177EC(unk_800E3A28* arg0) {
 }
 
 void func_i5_801178D8(unk_800E3A28* arg0) {
-    if (gGameMode != GAMEMODE_8013) {
+    if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         func_80077D50(sSelectCourseCompTexInfo, 0);
         arg0->unk_1C = 0xC;
     } else {
@@ -590,7 +591,7 @@ void func_i5_80117934(unk_800E3A28* arg0) {
 }
 
 void func_i5_8011796C(unk_800E3A28* arg0) {
-    func_80077D50(sRecordsArrowCompTexInfo, 0);
+    func_80077D50(sYellowArrowCompTexInfo, 0);
     arg0->unk_04 = 0x80;
     arg0->unk_08 = 0x80;
 }
@@ -624,13 +625,13 @@ void func_i5_80117A2C(unk_800E3A28* arg0) {
 
 Gfx* func_i5_80117A98(Gfx* gfx, unk_800E3A28* arg1) {
 
-    if (gGameMode != GAMEMODE_8013) {
+    if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         gDPSetPrimColor(gfx++, 0, 0, 75, 75, 75, 180);
-        gfx = func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->left, arg1->top, 1, 0, 0, 1.0f,
-                            1.0f);
+        gfx =
+            func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->left, arg1->top, 1, 0, 0, 1.0f, 1.0f);
     } else {
-        gfx = func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->left, arg1->top, 0, 0, 0, 1.0f,
-                            1.0f);
+        gfx =
+            func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
         gfx = func_80078EA0(gfx, sOptionsFalconHelmetCompTexInfo, 0x35, 4, 2, 1, 0, 1.0f, 1.0f);
         gfx = func_80078EA0(gfx, sOptionsFalconHelmetCompTexInfo, 0xCB, 4, 0, 0, 0, 1.0f, 1.0f);
     }
@@ -668,7 +669,7 @@ Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
     s32 sp80;
     s32 var_v1;
 
-    i = arg1->cmdId - OBJECT_122_0;
+    i = arg1->cmdId - OBJECT_COURSE_SELECT_CUP_0;
     if (gCupSelectOption >= 10) {
         var_s1 = EDIT_CUP;
     } else {
@@ -727,7 +728,7 @@ Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
 
     gfx = func_80078EA0(gfx, sCupSelectCompTexInfos[i], arg1->left, arg1->top + sp80, 1, 0, 0, 1.0f, 1.0f);
 
-    if ((D_800CD380 == 0) && (i <= JOKER_CUP)) {
+    if ((gSelectedMode == MODE_GP_RACE) && (i <= JOKER_CUP)) {
         alpha = ((arg1->top - 49) * 255) / 36;
         if (var_s1 == i) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -748,7 +749,7 @@ Gfx* func_i5_80117FB4(Gfx* gfx, unk_800E3A28* arg1) {
 
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    if (gGameMode != GAMEMODE_8013) {
+    if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         switch (D_i5_801190C0) {
             case 5:
             case 6:
@@ -785,10 +786,10 @@ Gfx* func_i5_80118168(Gfx* gfx, unk_800E3A28* arg1) {
     f32 temp_fv0 = (SIN(arg1->unk_1C) + 1.0) / 2;
     f32 temp_fa1 = (SIN(arg1->unk_20) + 1.0) / 2;
 
-    gfx = func_80078EA0(gfx, sRecordsArrowCompTexInfo, arg1->left + 0x2B, (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0,
-                        0, 1.0f, temp_fv0);
-    return func_80078EA0(gfx, sRecordsArrowCompTexInfo, arg1->top + 0xF5, (((1.0 - temp_fa1) * 16.0) + 112.0), 5, 0,
-                         0, 1.0f, temp_fa1);
+    gfx = func_80078EA0(gfx, sYellowArrowCompTexInfo, arg1->left + 0x2B, (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0, 0,
+                        1.0f, temp_fv0);
+    return func_80078EA0(gfx, sYellowArrowCompTexInfo, arg1->top + 0xF5, (((1.0 - temp_fa1) * 16.0) + 112.0), 5, 0, 0,
+                         1.0f, temp_fa1);
 }
 
 Gfx* func_i5_801182DC(Gfx* gfx) {
@@ -856,8 +857,8 @@ Gfx* func_i5_80118674(Gfx* gfx, unk_800E3A28* arg1) {
         case 3:
         case 4:
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            gfx = func_80078EA0(gfx, sHasGhostMarkerCompTexInfo, arg1->left + arg1->unk_1C, arg1->top, 0, 0, 0,
-                                1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sHasGhostMarkerCompTexInfo, arg1->left + arg1->unk_1C, arg1->top, 0, 0, 0, 1.0f,
+                                1.0f);
             break;
     }
 
@@ -882,8 +883,8 @@ Gfx* func_i5_80118790(Gfx* gfx, unk_800E3A28* arg1) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
-        gfx = func_80078EA0(gfx, sTimeAttackGhostOptionCompTexInfos[i], arg1->left + 0xC3, i * 20 + 0x2D, 0, 0, 0,
-                            1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTimeAttackGhostOptionCompTexInfos[i], arg1->left + 0xC3, i * 20 + 0x2D, 0, 0, 0, 1.0f,
+                            1.0f);
 
         if ((i == 2) && sStaffGhostTimeBeaten) {
             gfx = func_80078EA0(gfx, sStaffGhostBeatenCompTexInfo, arg1->left + 0x109, i * 20 + 0x2D, 0, 0, 0, 1.0f,
@@ -900,7 +901,7 @@ void func_i5_80118928(unk_800E3A28* arg0) {
         func_i5_80115E10();
     }
     temp_a1 = -(sCourseSelectTrackNo * 0x500);
-    if (gGameMode == GAMEMODE_800F) {
+    if (gGameMode == GAMEMODE_FLX_GP_RACE_NEXT_COURSE) {
         arg0->left = temp_a1;
     } else {
         func_8007A0A0(arg0, temp_a1, 0xC0);
@@ -913,13 +914,13 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
     s32 var_a1;
     s32 var_v0;
 
-    if (gGameMode == GAMEMODE_800F) {
+    if (gGameMode == GAMEMODE_FLX_GP_RACE_NEXT_COURSE) {
         arg0->left = 0x80;
         arg0->top = 0x31;
         return;
     }
 
-    var_v1 = arg0->cmdId - OBJECT_122_0;
+    var_v1 = arg0->cmdId - OBJECT_COURSE_SELECT_CUP_0;
     switch (arg0->unk_04) {
         case 0:
             if (var_v1 != 5) {
@@ -966,7 +967,7 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
                 case 3:
                 case 4:
                 default:
-                    if (D_800CD380 == 0) {
+                    if (gSelectedMode == MODE_GP_RACE) {
                         func_80079FFC(arg0, 0x31);
                     } else {
                         func_80079FFC(arg0, 0x2D);
@@ -991,7 +992,7 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
                     default:
                     case 2:
                     case 3:
-                        if ((gGameMode != GAMEMODE_8013) && (D_800CD380 != 1)) {
+                        if ((gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) && (gSelectedMode != MODE_TIME_ATTACK)) {
                             var_a1 = ((s32) (var_v1 << 7) / 2) + (var_v1 * -8) + 0x10;
                             break;
                         }
@@ -1082,7 +1083,7 @@ void func_i5_80118D94(unk_800E3A28* arg0) {
 void func_i5_80118F24(unk_800E3A28* arg0) {
     s32 temp_v1;
 
-    arg0->unk_1C = func_80079E88(OBJECT_121)->left >> 2;
+    arg0->unk_1C = func_80079E88(OBJECT_COURSE_SELECT_MODEL)->left >> 2;
     temp_v1 = arg0->left + arg0->unk_1C;
 
     if ((temp_v1 < -30) || (temp_v1 > 320)) {
