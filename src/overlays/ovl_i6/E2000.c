@@ -459,22 +459,130 @@ const s16 D_i6_8011F4CC[] = { 50, 100, 280, 180, 280, 100, 50, 180 };
 const s16 D_i6_8011F4DC[] = { 150, 210, 50, 35, 50, 210, 150, 35 };
 
 const s16 D_i6_8011F4EC[] = {
-    OBJECT_216_0, OBJECT_FREE,   OBJECT_FREE,  OBJECT_248_0,  OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
-    OBJECT_216_1, OBJECT_FREE,   OBJECT_FREE,  OBJECT_248_1,  OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
-    OBJECT_216_2, OBJECT_FREE,   OBJECT_FREE,  OBJECT_248_2,  OBJECT_FREE,  OBJECT_248_3,  OBJECT_FREE,   OBJECT_FREE,
-    OBJECT_FREE,  OBJECT_FREE,   OBJECT_216_4, OBJECT_FREE,   OBJECT_FREE,  OBJECT_248_4,  OBJECT_FREE,   OBJECT_248_5,
-    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_216_6, OBJECT_FREE,   OBJECT_FREE,   OBJECT_248_6,
-    OBJECT_FREE,  OBJECT_248_7,  OBJECT_FREE,  OBJECT_248_14, OBJECT_FREE,  OBJECT_248_8,  OBJECT_FREE,   OBJECT_248_9,
-    OBJECT_FREE,  OBJECT_248_13, OBJECT_FREE,  OBJECT_248_15, OBJECT_FREE,  OBJECT_248_16, OBJECT_FREE,   OBJECT_248_17,
-    OBJECT_FREE,  OBJECT_248_10, OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
-    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
-    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
-    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_216_11, OBJECT_FREE,
-    OBJECT_FREE,  OBJECT_248_11, OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
-    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
-    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,   OBJECT_FREE,
-    OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_FREE,  OBJECT_FREE,   OBJECT_216_12, OBJECT_FREE,
-    OBJECT_FREE,  OBJECT_248_12, -1,           OBJECT_FREE,
+    OBJECT_CREDITS_ROLE_18,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_18,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_ROLE_19,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_19,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_ROLE_20,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_20,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_21,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_ROLE_22,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_22,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_23,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_ROLE_24,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_24,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_25,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_32,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_26,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_27,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_31,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_33,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_34,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_35,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_28,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_ROLE_29,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_29,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_ROLE_30,
+    OBJECT_FREE,
+    OBJECT_FREE,
+    OBJECT_CREDITS_NAME_30,
+    -1,
+    OBJECT_FREE,
 };
 
 UNUSED s32 D_i6_8011ED7C = 0; // UNUSED?
@@ -541,10 +649,10 @@ OptionsInfo gOptionsInfo[] = {
 
 UNUSED char D_i6_8011EEBC[] = "Feel Mie";
 
-extern unk_800E3A28 D_800E3A28[32];
+extern Object gObjects[32];
 extern unk_800E3F28 D_800E3F28[];
 
-void func_i6_80117EE0(unk_800E3A28* arg0) {
+void func_i6_80117EE0(Object* arg0) {
 
     arg0->unk_18 = func_800792D8(D_i6_8011E558[0]);
 
@@ -554,7 +662,7 @@ void func_i6_80117EE0(unk_800E3A28* arg0) {
     D_800E3F28[arg0->unk_18].unk_04 = -1;
 }
 
-void func_i6_80117F2C(unk_800E3A28* arg0) {
+void func_i6_80117F2C(Object* arg0) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_i6_8011FAF0); i++) {
@@ -566,7 +674,7 @@ void func_i6_80117F2C(unk_800E3A28* arg0) {
     D_800E3F28[arg0->unk_18].unk_04 = -1;
 }
 
-void func_i6_80117FA8(unk_800E3A28* arg0) {
+void func_i6_80117FA8(Object* arg0) {
     func_80077D50(sCreditsMenuLadyCompTexInfo, 0);
     arg0->unk_1C = 0xB6;
 }
@@ -575,7 +683,7 @@ void func_i6_80117FE0(void) {
     func_80077D50(sCreditsSeeYouAgainCompTexInfo, 0);
 }
 
-void func_i6_80118008(unk_800E3A28* arg0) {
+void func_i6_80118008(Object* arg0) {
     func_80077D50(sCreditsMrZeroCompTexInfo, 0);
     arg0->unk_1C = 0x100;
     arg0->unk_18 = 0;
@@ -585,7 +693,7 @@ void func_i6_80118044(void) {
     func_80077D50(sCreditsCopyrightCompTexInfo, 0);
 }
 
-void func_i6_8011806C(unk_800E3A28* arg0) {
+void func_i6_8011806C(Object* arg0) {
 
     arg0->unk_18 = func_800792D8(D_i6_8011EBF8[0]);
 
@@ -594,7 +702,7 @@ void func_i6_8011806C(unk_800E3A28* arg0) {
 
 s16 func_i2_801061D4(s8*, s32);
 
-Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
+Gfx* func_i6_801180B4(Gfx* gfx, Object* arg1, s32* arg2, s32 arg3) {
     s32 temp_v0;
     s32 i;
     s32 var_s2;
@@ -605,7 +713,7 @@ Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
     s8 sp64[2];
     s8* name;
 
-    name = gCreditsNames[arg1->cmdId - OBJECT_230_0];
+    name = gCreditsNames[arg1->cmdId - OBJECT_CREDITS_NAME_0];
 
     if (arg3 != 0) {
         i = func_i2_801062E4(name, 1, 0);
@@ -650,7 +758,7 @@ Gfx* func_i6_801180B4(Gfx* gfx, unk_800E3A28* arg1, s32* arg2, s32 arg3) {
     return gfx;
 }
 
-Gfx* func_i6_801182DC(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i6_801182DC(Gfx* gfx, Object* arg1) {
 
     if (!D_i6_8011DFA0) {
         return gfx;
@@ -661,12 +769,12 @@ Gfx* func_i6_801182DC(Gfx* gfx, unk_800E3A28* arg1) {
 
 #define UNK_RAND_MACRO(var, x, y) (((Math_Rand1() >> (var % 4)) % x) - y)
 
-Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i6_80118354(Gfx* gfx, Object* arg1) {
     s32 sp154;
     s32 row;
     s32 var_t5;
     f32 var_fv1;
-    s32 sp144;
+    s32 left;
     unk_800E3F28* temp_s1;
     s32 height;
     s32 width;
@@ -676,15 +784,15 @@ Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
     s32 additionalHeight;
     f32 var_ft4;
     TexturePtr texture;
-    s32 var_s3;
+    s32 top;
 
     temp_s1 = &D_800E3F28[arg1->unk_18];
 
-    sp144 = arg1->left;
-    var_s3 = arg1->top;
+    left = arg1->left;
+    top = arg1->top;
 
     if (arg1->top > 120) {
-        var_s3 = arg1->top - temp_s1->unk_00->unk_00->height;
+        top = arg1->top - temp_s1->unk_00->unk_00->height;
     }
 
     sp154 = arg1->unk_1C;
@@ -708,7 +816,7 @@ Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, (sp154 * 255) / 64);
 
             var_a0 = UNK_RAND_MACRO(row, 13, 6);
-            sp144 += var_a0 * (64 - sp154) / 64;
+            left += var_a0 * (64 - sp154) / 64;
 
             for (row = 0; row < height; row++) {
                 var_a0 = UNK_RAND_MACRO(row, 15, 7);
@@ -734,13 +842,13 @@ Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
                 gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, width, 1 /* unused by macro */, 0,
                                    (row + var_t5), width, (row + var_t5) + 1, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                gSPScisTextureRectangle(gfx++, (sp144 + var_a0) << 2, (var_s3 + row) << 2,
-                                        ((sp144 + var_a0) + width) << 2, (var_s3 + row + 1) << 2, 0, 0, 0, 1 << 10,
+                gSPScisTextureRectangle(gfx++, (left + var_a0) << 2, (top + row) << 2,
+                                        ((left + var_a0) + width) << 2, (top + row + 1) << 2, 0, 0, 0, 1 << 10,
                                         1 << 10);
             }
             break;
         case 1:
-            gfx = func_80078F80(gfx, temp_s1, arg1->left, var_s3, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, temp_s1, arg1->left, top, 0, 0, 0, 1.0f, 1.0f);
             break;
         case 2:
             if (sp154 < 5) {
@@ -750,7 +858,7 @@ Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
                 additionalWidth = (width * (1.0f - var_fv1)) / 2;
                 additionalHeight = (height * (1.0f - var_fv1)) / 2;
 
-                gfx = func_80078F80(gfx, temp_s1, arg1->left + additionalWidth, var_s3 + additionalHeight, 4, 0, 0,
+                gfx = func_80078F80(gfx, temp_s1, arg1->left + additionalWidth, top + additionalHeight, 4, 0, 0,
                                     var_fv1, var_fv1);
             } else {
                 if (temp_s1->unk_0A == 0) {
@@ -787,15 +895,15 @@ Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
                     gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, width, 1 /* unused by macro */, 0,
                                        row, width, row + 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
                                        G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                    gSPScisTextureRectangle(gfx++, (sp144 + additionalWidth) << 2,
-                                            (s32) ((var_s3 + additionalHeight) + (row * var_ft4)) << 2,
-                                            ((sp144 + additionalWidth) + width) << 2,
-                                            (s32) (((var_s3 + additionalHeight) + (row * var_ft4)) + 1.0f) << 2, 0, 0,
+                    gSPScisTextureRectangle(gfx++, (left + additionalWidth) << 2,
+                                            (s32) ((top + additionalHeight) + (row * var_ft4)) << 2,
+                                            ((left + additionalWidth) + width) << 2,
+                                            (s32) (((top + additionalHeight) + (row * var_ft4)) + 1.0f) << 2, 0, 0,
                                             0, var_t5, 1 << 10);
                     gDPPipeSync(gfx++);
-                    gfx = func_8007A440(gfx, (sp144 + additionalWidth), ((var_s3 + additionalHeight) + (row * var_ft4)),
-                                        ((sp144 + additionalWidth) + (width * var_fv1)),
-                                        ((var_s3 + additionalHeight) + (row * var_ft4)) + 1.0f, 0x80, 0x80, 0x80, 0x10);
+                    gfx = func_8007A440(gfx, (left + additionalWidth), ((top + additionalHeight) + (row * var_ft4)),
+                                        ((left + additionalWidth) + (width * var_fv1)),
+                                        ((top + additionalHeight) + (row * var_ft4)) + 1.0f, 0x80, 0x80, 0x80, 0x10);
                 }
             }
             break;
@@ -804,7 +912,7 @@ Gfx* func_i6_80118354(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-Gfx* func_i6_80118ED4(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i6_80118ED4(Gfx* gfx, Object* arg1) {
     s32 row;
     s32 var_a0;
     s32 var_a1;
@@ -895,7 +1003,7 @@ Gfx* func_i6_80118ED4(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i6_8011946C(Gfx* gfx, Object* arg1) {
     s32 row;
     s32 sp50;
     s32 alpha;
@@ -932,10 +1040,10 @@ Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
             case 1:
 
                 var_s2 = UNK_RAND_MACRO(row, 7, 3);
-                ;
+
                 if (arg1->unk_1C < 32) {
                     var_s2 = ((32 - arg1->unk_1C) * var_s2) / 32;
-                    func_80079E88(OBJECT_193)->unk_08 = arg1->unk_1C;
+                    Object_Get(OBJECT_CREDITS_MENU_LADY)->unk_08 = arg1->unk_1C;
                 } else {
                     var_s2 = 0;
                 }
@@ -968,7 +1076,7 @@ Gfx* func_i6_8011946C(Gfx* gfx, unk_800E3A28* arg1) {
 }
 
 #ifdef NON_MATCHING
-Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i6_80119908(Gfx* gfx, Object* arg1) {
     s32 temp_a0;
     s32 temp_t1;
     s32 var_t2;
@@ -1049,11 +1157,11 @@ Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 #else
-Gfx* func_i6_80119908(Gfx* gfx, unk_800E3A28* arg1);
+Gfx* func_i6_80119908(Gfx* gfx, Object* arg1);
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_80119908.s")
 #endif
 
-Gfx* func_i6_8011A248(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i6_8011A248(Gfx* gfx, Object* arg1) {
     s32 var_s2;
     s32 temp_s7;
     s32 var_a2;
@@ -1084,7 +1192,7 @@ Gfx* func_i6_8011A248(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-Gfx* func_i6_8011A59C(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i6_8011A59C(Gfx* gfx, Object* arg1) {
     s32 pad[14];
     unk_800E3F28* sp34;
     s32 temp_v1;
@@ -1108,67 +1216,67 @@ Gfx* func_i6_8011A59C(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-Gfx* func_i6_8011A6CC(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i6_8011A6CC(Gfx* gfx, Object* arg1) {
     s32 pad[3];
-    s32 temp_v0;
-    s8* temp_s2;
+    s32 roleIndex;
+    char* roleName;
 
-    temp_v0 = arg1->cmdId - OBJECT_198_0;
-    temp_s2 = gCreditsAttributions[temp_v0];
+    roleIndex = arg1->cmdId - OBJECT_CREDITS_ROLE_0;
+    roleName = gCreditsAttributions[roleIndex];
 
     gDPSetPrimColor(gfx++, 0, 0, 24, 24, 24, 255);
 
-    switch (temp_v0 % 4) {
+    switch (roleIndex % 4) {
         case 0:
         case 3:
-            gfx = func_i2_80106450(gfx, arg1->left + 1, arg1->top + 1, temp_s2, 0, 6, 0);
+            gfx = func_i2_80106450(gfx, arg1->left + 1, arg1->top + 1, roleName, 0, 6, 0);
             break;
         case 1:
         case 2:
-            gfx = func_i2_80106450(gfx, (arg1->left - func_i2_801062E4(temp_s2, 6, 0)) + 1, arg1->top + 1, temp_s2, 0,
+            gfx = func_i2_80106450(gfx, (arg1->left - func_i2_801062E4(roleName, 6, 0)) + 1, arg1->top + 1, roleName, 0,
                                    6, 0);
             break;
     }
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    switch (temp_v0 % 4) {
+    switch (roleIndex % 4) {
         case 0:
         case 3:
-            gfx = func_i2_80106450(gfx, arg1->left, arg1->top, temp_s2, 0, 6, 0);
+            gfx = func_i2_80106450(gfx, arg1->left, arg1->top, roleName, 0, 6, 0);
             break;
         case 1:
         case 2:
-            gfx = func_i2_80106450(gfx, arg1->left - func_i2_801062E4(temp_s2, 6, 0), arg1->top, temp_s2, 0, 6, 0);
+            gfx = func_i2_80106450(gfx, arg1->left - func_i2_801062E4(roleName, 6, 0), arg1->top, roleName, 0, 6, 0);
             break;
     }
 
     return gfx;
 }
 
-Gfx* func_i6_8011A890(Gfx* gfx, unk_800E3A28* arg1) {
-    s8* temp_a3;
-    s32 index = arg1->cmdId - OBJECT_198_0;
+Gfx* func_i6_8011A890(Gfx* gfx, Object* arg1) {
+    char* roleName;
+    s32 roleIndex = arg1->cmdId - OBJECT_CREDITS_ROLE_0;
 
-    temp_a3 = gCreditsAttributions[index];
+    roleName = gCreditsAttributions[roleIndex];
 
     gDPSetPrimColor(gfx++, 0, 0, 24, 24, 24, 255);
-    gfx = func_i2_80106450(gfx, arg1->left + 1, arg1->top + 1, temp_a3, 0, 6, 0);
+    gfx = func_i2_80106450(gfx, arg1->left + 1, arg1->top + 1, roleName, 0, 6, 0);
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-    gfx = func_i2_80106450(gfx, arg1->left, arg1->top, temp_a3, 0, 6, 0);
+    gfx = func_i2_80106450(gfx, arg1->left, arg1->top, roleName, 0, 6, 0);
 
     return gfx;
 }
 
-Gfx* func_i6_8011A944(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i6_8011A944(Gfx* gfx, Object* arg1) {
     s32 temp_v1;
     s32 pad[2];
     s32 sp60;
     s32 pad2[9];
     char* temp_a3;
 
-    temp_v1 = arg1->cmdId - OBJECT_230_0;
+    temp_v1 = arg1->cmdId - OBJECT_CREDITS_NAME_0;
     temp_a3 = gCreditsNames[temp_v1];
 
     switch (arg1->unk_04) {
@@ -1206,8 +1314,8 @@ Gfx* func_i6_8011A944(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-Gfx* func_i6_8011AAC8(Gfx* gfx, unk_800E3A28* arg1) {
-    s32 index = arg1->cmdId - OBJECT_230_0;
+Gfx* func_i6_8011AAC8(Gfx* gfx, Object* arg1) {
+    s32 index = arg1->cmdId - OBJECT_CREDITS_NAME_0;
     char* temp = gCreditsNames[index];
 
     return func_i2_80106450(gfx, arg1->left, arg1->top, temp, 0, 1, 0);
@@ -1215,7 +1323,7 @@ Gfx* func_i6_8011AAC8(Gfx* gfx, unk_800E3A28* arg1) {
 
 extern u16 gInputPressed;
 
-void func_i6_8011AB1C(unk_800E3A28* arg0) {
+void func_i6_8011AB1C(Object* arg0) {
     s32 var_v1;
     unk_800E3F28* temp_v0;
 
@@ -1249,11 +1357,11 @@ void func_i6_8011AB1C(unk_800E3A28* arg0) {
     }
 }
 
-void func_i6_8011AC38(unk_800E3A28* arg0) {
+void func_i6_8011AC38(Object* arg0) {
     s32 pad;
     s32 var_a2;
     s32 var_v1;
-    unk_800E3A28* temp_v0_2;
+    Object* temp_v0_2;
 
     var_a2 = 0;
 
@@ -1272,7 +1380,7 @@ void func_i6_8011AC38(unk_800E3A28* arg0) {
             if (++arg0->unk_1C >= 64) {
                 arg0->unk_08 = 3;
                 arg0->unk_1C = 0;
-                temp_v0_2 = func_80079E88(OBJECT_190);
+                temp_v0_2 = Object_Get(OBJECT_CREDITS_START);
                 var_a2 = 0;
                 if (temp_v0_2 != NULL) {
                     temp_v0_2->unk_08 = 2;
@@ -1313,7 +1421,7 @@ void func_i6_8011AC38(unk_800E3A28* arg0) {
             label:
                 arg0->unk_04 = var_a2;
                 var_a2 = 1;
-                temp_v0_2 = func_80079E88(OBJECT_197);
+                temp_v0_2 = Object_Get(OBJECT_CREDITS_PORTRAITS);
                 if ((temp_v0_2 != NULL) && (temp_v0_2->unk_08 == 3)) {
                     temp_v0_2->unk_1C = 1;
                 }
@@ -1332,7 +1440,7 @@ void func_i6_8011AC38(unk_800E3A28* arg0) {
     }
 }
 
-void func_i6_8011AEB4(unk_800E3A28* arg0) {
+void func_i6_8011AEB4(Object* arg0) {
     s32 pad;
     s32 var_v1 = 0;
 
@@ -1347,7 +1455,7 @@ void func_i6_8011AEB4(unk_800E3A28* arg0) {
             if (arg0->unk_1C != 0) {
                 arg0->unk_08 = 0;
                 arg0->unk_20++;
-                arg0->unk_04 = func_80079E88(OBJECT_192)->unk_04;
+                arg0->unk_04 = Object_Get(OBJECT_CREDITS_192)->unk_04;
                 var_v1 = 1;
                 arg0->unk_1C = 0;
             }
@@ -1356,7 +1464,7 @@ void func_i6_8011AEB4(unk_800E3A28* arg0) {
 
     if (D_800E3F28[arg0->unk_18].unk_04 == -1) {
         D_800E3F28[arg0->unk_18].unk_04 = 0;
-        arg0->unk_04 = func_80079E88(OBJECT_192)->unk_04;
+        arg0->unk_04 = Object_Get(OBJECT_CREDITS_192)->unk_04;
         var_v1++;
     }
     if (var_v1 != 0) {
@@ -1364,7 +1472,7 @@ void func_i6_8011AEB4(unk_800E3A28* arg0) {
     }
 }
 
-bool func_i6_8011AFC8(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
+bool func_i6_8011AFC8(Object* arg0, s32 arg1, s32 arg2) {
 
     arg0->left += arg1;
     if (arg1 < 0) {
@@ -1379,7 +1487,7 @@ bool func_i6_8011AFC8(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
     return false;
 }
 
-bool func_i6_8011B010(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
+bool func_i6_8011B010(Object* arg0, s32 arg1, s32 arg2) {
 
     arg0->top += arg1;
     if (arg1 < 0) {
@@ -1396,7 +1504,7 @@ bool func_i6_8011B010(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
 
 extern u32 gGameFrameCount;
 
-bool func_i6_8011B058(unk_800E3A28* arg0, s32 arg1, s32 arg2, s32 arg3) {
+bool func_i6_8011B058(Object* arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     if (gGameFrameCount % arg3) {
         return false;
@@ -1415,12 +1523,12 @@ bool func_i6_8011B058(unk_800E3A28* arg0, s32 arg1, s32 arg2, s32 arg3) {
     return false;
 }
 
-void func_i6_8011BAC0(s32 cmdId, s32 left, s32 top, s8 priority);
+void Credits_ObjectInit(s32 cmdId, s32 left, s32 top, s8 priority);
 
-void func_i6_8011B0CC(unk_800E3A28* arg0) {
+void func_i6_8011B0CC(Object* arg0) {
     s32 temp_a0;
     s32 index;
-    unk_800E3A28* temp_v0_4;
+    Object* temp_v0_4;
 
     arg0->unk_1C++;
     if (arg0->unk_04 < 18) {
@@ -1428,16 +1536,18 @@ void func_i6_8011B0CC(unk_800E3A28* arg0) {
             case 0:
                 switch (arg0->unk_1C) {
                     case 0x1:
-                        func_i6_8011BAC0(OBJECT_198_0 + arg0->unk_04, D_i6_8011F4BC[(arg0->unk_04 % 4) * 2 + 0],
-                                         D_i6_8011F4BC[(arg0->unk_04 % 4) * 2 + 1], 0xC);
-                        temp_v0_4 = func_80079E88(OBJECT_192);
+                        Credits_ObjectInit(OBJECT_CREDITS_ROLE_0 + arg0->unk_04,
+                                           D_i6_8011F4BC[(arg0->unk_04 % 4) * 2 + 0],
+                                           D_i6_8011F4BC[(arg0->unk_04 % 4) * 2 + 1], 0xC);
+                        temp_v0_4 = Object_Get(OBJECT_CREDITS_192);
                         if ((temp_v0_4 != NULL) && (temp_v0_4->unk_08 == 3)) {
                             temp_v0_4->unk_1C++;
                         }
                         break;
                     case 0x3C:
-                        func_i6_8011BAC0(OBJECT_230_0 + arg0->unk_04, D_i6_8011F4CC[(arg0->unk_04 % 4) * 2 + 0],
-                                         D_i6_8011F4CC[(arg0->unk_04 % 4) * 2 + 1], 0xA);
+                        Credits_ObjectInit(OBJECT_CREDITS_NAME_0 + arg0->unk_04,
+                                           D_i6_8011F4CC[(arg0->unk_04 % 4) * 2 + 0],
+                                           D_i6_8011F4CC[(arg0->unk_04 % 4) * 2 + 1], 0xA);
                         arg0->unk_08 = 1;
                         break;
                 }
@@ -1460,19 +1570,19 @@ void func_i6_8011B0CC(unk_800E3A28* arg0) {
                     index = arg0->unk_1C / 15;
                     temp_a0 = D_i6_8011F4EC[index - 1];
                     if (temp_a0 > 0) {
-                        func_i6_8011BAC0(temp_a0, 0x32, 0xF0, 0xA);
+                        Credits_ObjectInit(temp_a0, 50, 240, 0xA);
                     } else if (temp_a0 < 0) {
                         arg0->unk_04++;
                     }
                 }
                 break;
             case 19:
-                if (func_80079E88(OBJECT_248_12) == NULL) {
+                if (Object_Get(OBJECT_CREDITS_NAME_30) == NULL) {
                     arg0->unk_04++;
                 }
                 break;
             case 20:
-                func_i6_8011BAC0(OBJECT_193, 0xC8, 0x1E, 8);
+                Credits_ObjectInit(OBJECT_CREDITS_MENU_LADY, 200, 30, 8);
                 arg0->unk_04++;
                 break;
             case 21:
@@ -1484,19 +1594,19 @@ void func_i6_8011B0CC(unk_800E3A28* arg0) {
     }
 }
 
-void func_i6_8011B340(unk_800E3A28* arg0) {
+void func_i6_8011B340(Object* arg0) {
     s32 pad[2];
-    s32 temp_v0;
+    s32 roleIndex;
     s32 sp28;
     s32 var_a2;
     s32 var_a1;
-    s8* sp1C;
-    unk_800E3A28* temp_v0_3;
+    char* roleName;
+    Object* temp_v0_3;
 
-    temp_v0 = arg0->cmdId - OBJECT_198_0;
-    sp1C = gCreditsAttributions[temp_v0];
+    roleIndex = arg0->cmdId - OBJECT_CREDITS_ROLE_0;
+    roleName = gCreditsAttributions[roleIndex];
 
-    switch (temp_v0 % 4) {
+    switch (roleIndex % 4) {
         case 0:
         case 3:
             sp28 = -1;
@@ -1507,7 +1617,7 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
             break;
     }
 
-    if (temp_v0 % 2) {
+    if (roleIndex % 2) {
         var_a2 = 150;
         var_a1 = 1;
     } else {
@@ -1525,20 +1635,20 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
         case 1:
             if (++arg0->unk_1C > 120) {
                 arg0->unk_04 = 2;
-                temp_v0_3 = func_80079E88(OBJECT_192);
+                temp_v0_3 = Object_Get(OBJECT_CREDITS_192);
                 if ((temp_v0_3 != NULL) && (temp_v0_3->unk_08 == 1)) {
                     temp_v0_3->unk_08 = 2;
                 }
             }
             break;
         case 2:
-            func_8007A334(arg0, D_i6_8011F4BC[(temp_v0 % 4) * 2], sp28);
+            Object_LerpPastPosXTarget(arg0, D_i6_8011F4BC[(roleIndex % 4) * 2], sp28);
             if (sp28 < 0) {
-                if (arg0->left < -func_i2_801062E4(sp1C, 1, 0)) {
+                if (arg0->left < -func_i2_801062E4(roleName, 1, 0)) {
                     arg0->cmdId = OBJECT_FREE;
                 }
             } else {
-                if ((func_i2_801062E4(sp1C, 1, 0) + 0x140) < arg0->left) {
+                if ((func_i2_801062E4(roleName, 1, 0) + 320) < arg0->left) {
                     arg0->cmdId = OBJECT_FREE;
                 }
             }
@@ -1546,17 +1656,17 @@ void func_i6_8011B340(unk_800E3A28* arg0) {
     }
 }
 
-void func_i6_8011B50C(unk_800E3A28* arg0) {
+void func_i6_8011B50C(Object* arg0) {
     if (func_i6_8011B058(arg0, -1, -0x14, 2)) {
         arg0->cmdId = OBJECT_FREE;
     }
 }
 
-void func_i6_8011B544(unk_800E3A28* arg0) {
+void func_i6_8011B544(Object* arg0) {
     s32 temp_a1;
     s32 sp18;
 
-    temp_a1 = arg0->cmdId - OBJECT_230_0;
+    temp_a1 = arg0->cmdId - OBJECT_CREDITS_NAME_0;
 
     switch (temp_a1 % 4) {
         case 0:
@@ -1574,12 +1684,12 @@ void func_i6_8011B544(unk_800E3A28* arg0) {
             arg0->unk_1C++;
             break;
         case 1:
-            if (func_80079E88(OBJECT_198_0 + temp_a1)->unk_04 >= 2) {
+            if (Object_Get(OBJECT_CREDITS_ROLE_0 + temp_a1)->unk_04 >= 2) {
                 arg0->unk_04 = 2;
             }
             break;
         case 2:
-            func_8007A334(arg0, D_i6_8011F4CC[(temp_a1 % 4) * 2], sp18);
+            Object_LerpPastPosXTarget(arg0, D_i6_8011F4CC[(temp_a1 % 4) * 2], sp18);
             if (sp18 > 0) {
                 if (arg0->left > 320) {
                     arg0->cmdId = OBJECT_FREE;
@@ -1593,13 +1703,13 @@ void func_i6_8011B544(unk_800E3A28* arg0) {
     }
 }
 
-void func_i6_8011B668(unk_800E3A28* arg0) {
+void func_i6_8011B668(Object* arg0) {
     if (func_i6_8011B058(arg0, -1, -0x14, 2)) {
         arg0->cmdId = OBJECT_FREE;
     }
 }
 
-void func_i6_8011B6A0(unk_800E3A28* arg0) {
+void func_i6_8011B6A0(Object* arg0) {
 
     switch (arg0->unk_04) {
         case 0:
@@ -1625,7 +1735,7 @@ void func_i6_8011B6A0(unk_800E3A28* arg0) {
             if (++arg0->unk_1C >= 0x12) {
                 arg0->unk_04++;
                 arg0->unk_1C = 0;
-                func_i6_8011BAC0(OBJECT_194, 0x80, 0x40, 8);
+                Credits_ObjectInit(OBJECT_CREDITS_SEE_YOU_AGAIN, 0x80, 0x40, 8);
                 func_800BA8D8(0x2B);
             }
             break;
@@ -1634,14 +1744,14 @@ void func_i6_8011B6A0(unk_800E3A28* arg0) {
     }
 }
 
-void func_i6_8011B7B0(unk_800E3A28* arg0) {
+void func_i6_8011B7B0(Object* arg0) {
 
     switch (arg0->unk_04) {
         case 0:
             if (++arg0->unk_1C >= 0xAF) {
                 arg0->unk_04++;
                 arg0->unk_1C = 0;
-                func_i6_8011BAC0(OBJECT_196, 0x60, 0xCD, 8);
+                Credits_ObjectInit(OBJECT_CREDITS_COPYRIGHT, 0x60, 0xCD, 8);
             }
             break;
         case 1:
@@ -1655,7 +1765,7 @@ void func_i6_8011B7B0(unk_800E3A28* arg0) {
     }
 }
 
-void func_i6_8011B860(unk_800E3A28* arg0) {
+void func_i6_8011B860(Object* arg0) {
 
     switch (++arg0->unk_18) {
         case 30:
@@ -1669,9 +1779,9 @@ void func_i6_8011B860(unk_800E3A28* arg0) {
             }
             break;
         case 370:
-            func_i6_8011BAC0(OBJECT_190, 0, 0, 0);
-            func_i6_8011BAC0(OBJECT_192, 0, 0, 4);
-            func_i6_8011BAC0(OBJECT_197, 0, 0, 8);
+            Credits_ObjectInit(OBJECT_CREDITS_START, 0, 0, 0);
+            Credits_ObjectInit(OBJECT_CREDITS_192, 0, 0, 4);
+            Credits_ObjectInit(OBJECT_CREDITS_PORTRAITS, 0, 0, 8);
             arg0->cmdId = OBJECT_FREE;
             break;
         default:
@@ -1746,19 +1856,19 @@ void func_i6_8011B860(unk_800E3A28* arg0) {
     }
 }
 
-void func_i6_8011BAB8(unk_800E3A28* arg0) {
+void func_i6_8011BAB8(Object* arg0) {
 }
 
-void func_i6_8011BAC0(s32 cmdId, s32 left, s32 top, s8 priority) {
+void Credits_ObjectInit(s32 cmdId, s32 left, s32 top, s8 priority) {
     s32 i = 0;
-    unk_800E3A28* var_s0 = D_800E3A28;
+    Object* var_s0 = gObjects;
 
     while (true) {
         if (var_s0->cmdId == OBJECT_FREE) {
             break;
         }
 
-        if (++i > ARRAY_COUNT(D_800E3A28)) {
+        if (++i > ARRAY_COUNT(gObjects)) {
             return;
         }
         var_s0++;
@@ -1778,43 +1888,43 @@ void func_i6_8011BAC0(s32 cmdId, s32 left, s32 top, s8 priority) {
         case OBJECT_153:
             func_i6_80117EE0(var_s0);
             break;
-        case OBJECT_192:
+        case OBJECT_CREDITS_192:
             func_i6_80117F2C(var_s0);
             break;
-        case OBJECT_193:
+        case OBJECT_CREDITS_MENU_LADY:
             func_i6_80117FA8(var_s0);
             break;
-        case OBJECT_194:
+        case OBJECT_CREDITS_SEE_YOU_AGAIN:
             func_i6_80117FE0();
             break;
-        case OBJECT_195:
+        case OBJECT_CREDITS_STAFF_INTRO:
             func_i6_80118008(var_s0);
             break;
-        case OBJECT_196:
+        case OBJECT_CREDITS_COPYRIGHT:
             func_i6_80118044();
             break;
-        case OBJECT_197:
+        case OBJECT_CREDITS_PORTRAITS:
             func_i6_8011806C(var_s0);
             break;
-        case OBJECT_190:
-        case OBJECT_191:
+        case OBJECT_CREDITS_START:
+        case OBJECT_CREDITS_BACKGROUND:
         default:
             break;
     }
 }
 
-Gfx* func_i6_8011BBE4(Gfx* gfx) {
+Gfx* Credits_ObjectDraw(Gfx* gfx) {
     s32 i;
     s32 j;
 
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 32; j++) {
 
-            if ((D_800E3A28[j].priority != i) || (D_800E3A28[j].unk_15 == 0)) {
+            if ((gObjects[j].priority != i) || (gObjects[j].unk_15 == 0)) {
                 continue;
             }
 
-            switch (D_800E3A28[j].cmdId) {
+            switch (gObjects[j].cmdId) {
                 case OBJECT_FREE:
                     break;
                 case OBJECT_FRAMEBUFFER:
@@ -1826,103 +1936,103 @@ Gfx* func_i6_8011BBE4(Gfx* gfx) {
                     gfx = func_8007AC48(gfx, 0, 0, 0);
                     break;
                 case OBJECT_153:
-                    gfx = func_i6_801182DC(gfx, &D_800E3A28[j]);
+                    gfx = func_i6_801182DC(gfx, &gObjects[j]);
                     break;
-                case OBJECT_191:
+                case OBJECT_CREDITS_BACKGROUND:
                     gfx = func_8007AC48(gfx, 0, 0, 0);
                     break;
-                case OBJECT_192:
-                    gfx = func_i6_80118354(gfx, &D_800E3A28[j]);
+                case OBJECT_CREDITS_192:
+                    gfx = func_i6_80118354(gfx, &gObjects[j]);
                     break;
-                case OBJECT_193:
-                    gfx = func_i6_80118ED4(gfx, &D_800E3A28[j]);
+                case OBJECT_CREDITS_MENU_LADY:
+                    gfx = func_i6_80118ED4(gfx, &gObjects[j]);
                     break;
-                case OBJECT_194:
-                    gfx = func_i6_8011946C(gfx, &D_800E3A28[j]);
+                case OBJECT_CREDITS_SEE_YOU_AGAIN:
+                    gfx = func_i6_8011946C(gfx, &gObjects[j]);
                     break;
-                case OBJECT_195:
-                    gfx = func_i6_80119908(gfx, &D_800E3A28[j]);
+                case OBJECT_CREDITS_STAFF_INTRO:
+                    gfx = func_i6_80119908(gfx, &gObjects[j]);
                     break;
-                case OBJECT_196:
-                    gfx = func_i6_8011A248(gfx, &D_800E3A28[j]);
+                case OBJECT_CREDITS_COPYRIGHT:
+                    gfx = func_i6_8011A248(gfx, &gObjects[j]);
                     break;
-                case OBJECT_197:
-                    gfx = func_i6_8011A59C(gfx, &D_800E3A28[j]);
+                case OBJECT_CREDITS_PORTRAITS:
+                    gfx = func_i6_8011A59C(gfx, &gObjects[j]);
                     break;
-                case OBJECT_198_0:
-                case OBJECT_198_1:
-                case OBJECT_198_2:
-                case OBJECT_198_3:
-                case OBJECT_198_4:
-                case OBJECT_198_5:
-                case OBJECT_198_6:
-                case OBJECT_198_7:
-                case OBJECT_198_8:
-                case OBJECT_198_9:
-                case OBJECT_198_10:
-                case OBJECT_198_11:
-                case OBJECT_198_12:
-                case OBJECT_198_13:
-                case OBJECT_198_14:
-                case OBJECT_198_15:
-                case OBJECT_198_16:
-                case OBJECT_198_17:
-                    gfx = func_i6_8011A6CC(gfx, &D_800E3A28[j]);
+                case OBJECT_CREDITS_ROLE_0:
+                case OBJECT_CREDITS_ROLE_1:
+                case OBJECT_CREDITS_ROLE_2:
+                case OBJECT_CREDITS_ROLE_3:
+                case OBJECT_CREDITS_ROLE_4:
+                case OBJECT_CREDITS_ROLE_5:
+                case OBJECT_CREDITS_ROLE_6:
+                case OBJECT_CREDITS_ROLE_7:
+                case OBJECT_CREDITS_ROLE_8:
+                case OBJECT_CREDITS_ROLE_9:
+                case OBJECT_CREDITS_ROLE_10:
+                case OBJECT_CREDITS_ROLE_11:
+                case OBJECT_CREDITS_ROLE_12:
+                case OBJECT_CREDITS_ROLE_13:
+                case OBJECT_CREDITS_ROLE_14:
+                case OBJECT_CREDITS_ROLE_15:
+                case OBJECT_CREDITS_ROLE_16:
+                case OBJECT_CREDITS_ROLE_17:
+                    gfx = func_i6_8011A6CC(gfx, &gObjects[j]);
                     break;
-                case OBJECT_216_0:
-                case OBJECT_216_1:
-                case OBJECT_216_2:
-                case OBJECT_216_3:
-                case OBJECT_216_4:
-                case OBJECT_216_5:
-                case OBJECT_216_6:
-                case OBJECT_216_7:
-                case OBJECT_216_8:
-                case OBJECT_216_9:
-                case OBJECT_216_10:
-                case OBJECT_216_11:
-                case OBJECT_216_12:
-                    gfx = func_i6_8011A890(gfx, &D_800E3A28[j]);
+                case OBJECT_CREDITS_ROLE_18:
+                case OBJECT_CREDITS_ROLE_19:
+                case OBJECT_CREDITS_ROLE_20:
+                case OBJECT_CREDITS_ROLE_21:
+                case OBJECT_CREDITS_ROLE_22:
+                case OBJECT_CREDITS_ROLE_23:
+                case OBJECT_CREDITS_ROLE_24:
+                case OBJECT_CREDITS_ROLE_25:
+                case OBJECT_CREDITS_ROLE_26:
+                case OBJECT_CREDITS_ROLE_27:
+                case OBJECT_CREDITS_ROLE_28:
+                case OBJECT_CREDITS_ROLE_29:
+                case OBJECT_CREDITS_ROLE_30:
+                    gfx = func_i6_8011A890(gfx, &gObjects[j]);
                     break;
-                case OBJECT_230_0:
-                case OBJECT_230_1:
-                case OBJECT_230_2:
-                case OBJECT_230_3:
-                case OBJECT_230_4:
-                case OBJECT_230_5:
-                case OBJECT_230_6:
-                case OBJECT_230_7:
-                case OBJECT_230_8:
-                case OBJECT_230_9:
-                case OBJECT_230_10:
-                case OBJECT_230_11:
-                case OBJECT_230_12:
-                case OBJECT_230_13:
-                case OBJECT_230_14:
-                case OBJECT_230_15:
-                case OBJECT_230_16:
-                case OBJECT_230_17:
-                    gfx = func_i6_8011A944(gfx, &D_800E3A28[j]);
+                case OBJECT_CREDITS_NAME_0:
+                case OBJECT_CREDITS_NAME_1:
+                case OBJECT_CREDITS_NAME_2:
+                case OBJECT_CREDITS_NAME_3:
+                case OBJECT_CREDITS_NAME_4:
+                case OBJECT_CREDITS_NAME_5:
+                case OBJECT_CREDITS_NAME_6:
+                case OBJECT_CREDITS_NAME_7:
+                case OBJECT_CREDITS_NAME_8:
+                case OBJECT_CREDITS_NAME_9:
+                case OBJECT_CREDITS_NAME_10:
+                case OBJECT_CREDITS_NAME_11:
+                case OBJECT_CREDITS_NAME_12:
+                case OBJECT_CREDITS_NAME_13:
+                case OBJECT_CREDITS_NAME_14:
+                case OBJECT_CREDITS_NAME_15:
+                case OBJECT_CREDITS_NAME_16:
+                case OBJECT_CREDITS_NAME_17:
+                    gfx = func_i6_8011A944(gfx, &gObjects[j]);
                     break;
-                case OBJECT_248_0:
-                case OBJECT_248_1:
-                case OBJECT_248_2:
-                case OBJECT_248_3:
-                case OBJECT_248_4:
-                case OBJECT_248_5:
-                case OBJECT_248_6:
-                case OBJECT_248_7:
-                case OBJECT_248_8:
-                case OBJECT_248_9:
-                case OBJECT_248_10:
-                case OBJECT_248_11:
-                case OBJECT_248_12:
-                case OBJECT_248_13:
-                case OBJECT_248_14:
-                case OBJECT_248_15:
-                case OBJECT_248_16:
-                case OBJECT_248_17:
-                    gfx = func_i6_8011AAC8(gfx, &D_800E3A28[j]);
+                case OBJECT_CREDITS_NAME_18:
+                case OBJECT_CREDITS_NAME_19:
+                case OBJECT_CREDITS_NAME_20:
+                case OBJECT_CREDITS_NAME_21:
+                case OBJECT_CREDITS_NAME_22:
+                case OBJECT_CREDITS_NAME_23:
+                case OBJECT_CREDITS_NAME_24:
+                case OBJECT_CREDITS_NAME_25:
+                case OBJECT_CREDITS_NAME_26:
+                case OBJECT_CREDITS_NAME_27:
+                case OBJECT_CREDITS_NAME_28:
+                case OBJECT_CREDITS_NAME_29:
+                case OBJECT_CREDITS_NAME_30:
+                case OBJECT_CREDITS_NAME_31:
+                case OBJECT_CREDITS_NAME_32:
+                case OBJECT_CREDITS_NAME_33:
+                case OBJECT_CREDITS_NAME_34:
+                case OBJECT_CREDITS_NAME_35:
+                    gfx = func_i6_8011AAC8(gfx, &gObjects[j]);
                     break;
             }
         }
@@ -1930,112 +2040,112 @@ Gfx* func_i6_8011BBE4(Gfx* gfx) {
     return gfx;
 }
 
-void func_i6_8011BE1C(void) {
+void Credits_ObjectUpdate(void) {
     s32 i;
 
     for (i = 0; i < 32; i++) {
 
-        switch (D_800E3A28[i].cmdId) {
+        switch (gObjects[i].cmdId) {
             case OBJECT_FREE:
                 break;
             case OBJECT_153:
-                func_i6_8011AB1C(&D_800E3A28[i]);
+                func_i6_8011AB1C(&gObjects[i]);
                 break;
-            case OBJECT_190:
-                func_i6_8011B0CC(&D_800E3A28[i]);
+            case OBJECT_CREDITS_START:
+                func_i6_8011B0CC(&gObjects[i]);
                 break;
-            case OBJECT_192:
-                func_i6_8011AC38(&D_800E3A28[i]);
+            case OBJECT_CREDITS_192:
+                func_i6_8011AC38(&gObjects[i]);
                 break;
-            case OBJECT_197:
-                func_i6_8011AEB4(&D_800E3A28[i]);
+            case OBJECT_CREDITS_PORTRAITS:
+                func_i6_8011AEB4(&gObjects[i]);
                 break;
-            case OBJECT_198_0:
-            case OBJECT_198_1:
-            case OBJECT_198_2:
-            case OBJECT_198_3:
-            case OBJECT_198_4:
-            case OBJECT_198_5:
-            case OBJECT_198_6:
-            case OBJECT_198_7:
-            case OBJECT_198_8:
-            case OBJECT_198_9:
-            case OBJECT_198_10:
-            case OBJECT_198_11:
-            case OBJECT_198_12:
-            case OBJECT_198_13:
-            case OBJECT_198_14:
-            case OBJECT_198_15:
-            case OBJECT_198_16:
-            case OBJECT_198_17:
-                func_i6_8011B340(&D_800E3A28[i]);
+            case OBJECT_CREDITS_ROLE_0:
+            case OBJECT_CREDITS_ROLE_1:
+            case OBJECT_CREDITS_ROLE_2:
+            case OBJECT_CREDITS_ROLE_3:
+            case OBJECT_CREDITS_ROLE_4:
+            case OBJECT_CREDITS_ROLE_5:
+            case OBJECT_CREDITS_ROLE_6:
+            case OBJECT_CREDITS_ROLE_7:
+            case OBJECT_CREDITS_ROLE_8:
+            case OBJECT_CREDITS_ROLE_9:
+            case OBJECT_CREDITS_ROLE_10:
+            case OBJECT_CREDITS_ROLE_11:
+            case OBJECT_CREDITS_ROLE_12:
+            case OBJECT_CREDITS_ROLE_13:
+            case OBJECT_CREDITS_ROLE_14:
+            case OBJECT_CREDITS_ROLE_15:
+            case OBJECT_CREDITS_ROLE_16:
+            case OBJECT_CREDITS_ROLE_17:
+                func_i6_8011B340(&gObjects[i]);
                 break;
-            case OBJECT_216_0:
-            case OBJECT_216_1:
-            case OBJECT_216_2:
-            case OBJECT_216_3:
-            case OBJECT_216_4:
-            case OBJECT_216_5:
-            case OBJECT_216_6:
-            case OBJECT_216_7:
-            case OBJECT_216_8:
-            case OBJECT_216_9:
-            case OBJECT_216_10:
-            case OBJECT_216_11:
-            case OBJECT_216_12:
-                func_i6_8011B50C(&D_800E3A28[i]);
+            case OBJECT_CREDITS_ROLE_18:
+            case OBJECT_CREDITS_ROLE_19:
+            case OBJECT_CREDITS_ROLE_20:
+            case OBJECT_CREDITS_ROLE_21:
+            case OBJECT_CREDITS_ROLE_22:
+            case OBJECT_CREDITS_ROLE_23:
+            case OBJECT_CREDITS_ROLE_24:
+            case OBJECT_CREDITS_ROLE_25:
+            case OBJECT_CREDITS_ROLE_26:
+            case OBJECT_CREDITS_ROLE_27:
+            case OBJECT_CREDITS_ROLE_28:
+            case OBJECT_CREDITS_ROLE_29:
+            case OBJECT_CREDITS_ROLE_30:
+                func_i6_8011B50C(&gObjects[i]);
                 break;
-            case OBJECT_230_0:
-            case OBJECT_230_1:
-            case OBJECT_230_2:
-            case OBJECT_230_3:
-            case OBJECT_230_4:
-            case OBJECT_230_5:
-            case OBJECT_230_6:
-            case OBJECT_230_7:
-            case OBJECT_230_8:
-            case OBJECT_230_9:
-            case OBJECT_230_10:
-            case OBJECT_230_11:
-            case OBJECT_230_12:
-            case OBJECT_230_13:
-            case OBJECT_230_14:
-            case OBJECT_230_15:
-            case OBJECT_230_16:
-            case OBJECT_230_17:
-                func_i6_8011B544(&D_800E3A28[i]);
+            case OBJECT_CREDITS_NAME_0:
+            case OBJECT_CREDITS_NAME_1:
+            case OBJECT_CREDITS_NAME_2:
+            case OBJECT_CREDITS_NAME_3:
+            case OBJECT_CREDITS_NAME_4:
+            case OBJECT_CREDITS_NAME_5:
+            case OBJECT_CREDITS_NAME_6:
+            case OBJECT_CREDITS_NAME_7:
+            case OBJECT_CREDITS_NAME_8:
+            case OBJECT_CREDITS_NAME_9:
+            case OBJECT_CREDITS_NAME_10:
+            case OBJECT_CREDITS_NAME_11:
+            case OBJECT_CREDITS_NAME_12:
+            case OBJECT_CREDITS_NAME_13:
+            case OBJECT_CREDITS_NAME_14:
+            case OBJECT_CREDITS_NAME_15:
+            case OBJECT_CREDITS_NAME_16:
+            case OBJECT_CREDITS_NAME_17:
+                func_i6_8011B544(&gObjects[i]);
                 break;
-            case OBJECT_248_0:
-            case OBJECT_248_1:
-            case OBJECT_248_2:
-            case OBJECT_248_3:
-            case OBJECT_248_4:
-            case OBJECT_248_5:
-            case OBJECT_248_6:
-            case OBJECT_248_7:
-            case OBJECT_248_8:
-            case OBJECT_248_9:
-            case OBJECT_248_10:
-            case OBJECT_248_11:
-            case OBJECT_248_12:
-            case OBJECT_248_13:
-            case OBJECT_248_14:
-            case OBJECT_248_15:
-            case OBJECT_248_16:
-            case OBJECT_248_17:
-                func_i6_8011B668(&D_800E3A28[i]);
+            case OBJECT_CREDITS_NAME_18:
+            case OBJECT_CREDITS_NAME_19:
+            case OBJECT_CREDITS_NAME_20:
+            case OBJECT_CREDITS_NAME_21:
+            case OBJECT_CREDITS_NAME_22:
+            case OBJECT_CREDITS_NAME_23:
+            case OBJECT_CREDITS_NAME_24:
+            case OBJECT_CREDITS_NAME_25:
+            case OBJECT_CREDITS_NAME_26:
+            case OBJECT_CREDITS_NAME_27:
+            case OBJECT_CREDITS_NAME_28:
+            case OBJECT_CREDITS_NAME_29:
+            case OBJECT_CREDITS_NAME_30:
+            case OBJECT_CREDITS_NAME_31:
+            case OBJECT_CREDITS_NAME_32:
+            case OBJECT_CREDITS_NAME_33:
+            case OBJECT_CREDITS_NAME_34:
+            case OBJECT_CREDITS_NAME_35:
+                func_i6_8011B668(&gObjects[i]);
                 break;
-            case OBJECT_193:
-                func_i6_8011B6A0(&D_800E3A28[i]);
+            case OBJECT_CREDITS_MENU_LADY:
+                func_i6_8011B6A0(&gObjects[i]);
                 break;
-            case OBJECT_194:
-                func_i6_8011B7B0(&D_800E3A28[i]);
+            case OBJECT_CREDITS_SEE_YOU_AGAIN:
+                func_i6_8011B7B0(&gObjects[i]);
                 break;
-            case OBJECT_195:
-                func_i6_8011B860(&D_800E3A28[i]);
+            case OBJECT_CREDITS_STAFF_INTRO:
+                func_i6_8011B860(&gObjects[i]);
                 break;
-            case OBJECT_196:
-                func_i6_8011BAB8(&D_800E3A28[i]);
+            case OBJECT_CREDITS_COPYRIGHT:
+                func_i6_8011BAB8(&gObjects[i]);
                 break;
         }
     }
@@ -2046,8 +2156,8 @@ extern s16 D_800CCFE8;
 void Credits_Init(void) {
     D_800CCFE8 = 3;
     Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
-    func_i6_8011BAC0(OBJECT_191, 0, 0, 1);
-    func_i6_8011BAC0(OBJECT_195, 0, 0, 8);
+    Credits_ObjectInit(OBJECT_CREDITS_BACKGROUND, 0, 0, 1);
+    Credits_ObjectInit(OBJECT_CREDITS_STAFF_INTRO, 0, 0, 8);
 }
 
 extern s32 gGameMode;
@@ -2067,8 +2177,8 @@ s32 Credits_Update(void) {
 }
 
 Gfx* Credits_Draw(Gfx* gfx) {
-    func_i6_8011BE1C();
-    gfx = func_i6_8011BBE4(gfx);
+    Credits_ObjectUpdate();
+    gfx = Credits_ObjectDraw(gfx);
     func_800790D4();
     return gfx;
 }

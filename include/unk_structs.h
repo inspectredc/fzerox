@@ -126,7 +126,7 @@ typedef struct unk_802D08E0 {
     struct unk_36ED0* unk_34;
 } unk_802D08E0; // size = 0x38
 
-typedef struct unk_800E3A28 {
+typedef struct Object {
     s32 cmdId;
     s32 unk_04;
     s32 unk_08;
@@ -139,7 +139,7 @@ typedef struct unk_800E3A28 {
     s32 unk_1C;
     s32 unk_20;
     s8 unk_24[0x4];
-} unk_800E3A28; // size = 0x28
+} Object; // size = 0x28
 
 typedef Gfx* (*unk_800E51B8_unk_1C_func)(Gfx*, s32, s32);
 

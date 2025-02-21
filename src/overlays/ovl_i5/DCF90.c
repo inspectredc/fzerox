@@ -209,7 +209,8 @@ void CourseSelect_Init(void) {
     if (var_v1 + 2 < gCupSelectOption) {
         gCupSelectOption = var_v1 + 2;
     }
-    if ((gCupSelectOption == 4) && ((gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) || (gSelectedMode == MODE_TIME_ATTACK))) {
+    if ((gCupSelectOption == 4) &&
+        ((gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) || (gSelectedMode == MODE_TIME_ATTACK))) {
         gCupSelectOption = 3;
     }
     if (gCupSelectOption >= 10) {
@@ -310,7 +311,7 @@ s32 CourseSelect_Update(void) {
     s8 originalSelectedGhostOption;
     s32 unlockedGhost;
     s32 var_v1;
-    unk_800E3A28* temp_v0_2;
+    Object* temp_v0_2;
 
     func_8008675C();
     if (D_i2_80106DA4 != 0) {
@@ -339,7 +340,8 @@ s32 CourseSelect_Update(void) {
                 if (var_v1 + 2 < gCupSelectOption) {
                     gCupSelectOption = var_v1 + 2;
                 }
-                if ((gCupSelectOption == 4) && ((gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) || (gSelectedMode == MODE_TIME_ATTACK))) {
+                if ((gCupSelectOption == 4) &&
+                    ((gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) || (gSelectedMode == MODE_TIME_ATTACK))) {
                     gCupSelectOption = 3;
                 }
             }
@@ -395,7 +397,7 @@ s32 CourseSelect_Update(void) {
                 } else {
                     D_i5_801190C0 = 2;
                 }
-                func_80079E88(OBJECT_COURSE_SELECT_MODEL)->left = 400 - (sCourseSelectTrackNo * 0x500);
+                Object_Get(OBJECT_COURSE_SELECT_MODEL)->left = 400 - (sCourseSelectTrackNo * 0x500);
             }
             break;
         case 2:
@@ -421,7 +423,7 @@ s32 CourseSelect_Update(void) {
             if ((gInputPressed & BTN_LEFT) && (sCourseSelectTrackNo > 0)) {
                 sCourseSelectTrackNo--;
                 D_800E5220[0].unk_18 = 1;
-                temp_v0_2 = func_80079E88(OBJECT_COURSE_SELECT_ARROWS);
+                temp_v0_2 = Object_Get(OBJECT_COURSE_SELECT_ARROWS);
                 temp_v0_2->unk_04 += 0x200;
                 func_800BA8D8(30);
             }
@@ -429,7 +431,7 @@ s32 CourseSelect_Update(void) {
             if ((gInputPressed & BTN_RIGHT) && (sCourseSelectTrackNo < 5)) {
                 sCourseSelectTrackNo++;
                 D_800E5220[0].unk_18 = 1;
-                temp_v0_2 = func_80079E88(OBJECT_COURSE_SELECT_ARROWS);
+                temp_v0_2 = Object_Get(OBJECT_COURSE_SELECT_ARROWS);
                 temp_v0_2->unk_08 += 0x200;
                 func_800BA8D8(30);
             }
@@ -510,7 +512,7 @@ Gfx* CourseSelect_Draw(Gfx* gfx) {
 
 extern s8 D_800CD3C4;
 
-void func_i5_80117684(unk_800E3A28* arg0) {
+void func_i5_80117684(Object* arg0) {
     size_t var_a1;
     unk_80077D50* sp20;
 
@@ -548,7 +550,7 @@ void func_i5_80117758(void) {
     }
 }
 
-void func_i5_801177EC(unk_800E3A28* arg0) {
+void func_i5_801177EC(Object* arg0) {
     s32 cupType;
     s32 var_v0;
     s32 i;
@@ -576,7 +578,7 @@ void func_i5_801177EC(unk_800E3A28* arg0) {
     arg0->top = 0x55;
 }
 
-void func_i5_801178D8(unk_800E3A28* arg0) {
+void func_i5_801178D8(Object* arg0) {
     if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         func_80077D50(sSelectCourseCompTexInfo, 0);
         arg0->unk_1C = 0xC;
@@ -585,18 +587,18 @@ void func_i5_801178D8(unk_800E3A28* arg0) {
     }
 }
 
-void func_i5_80117934(unk_800E3A28* arg0) {
+void func_i5_80117934(Object* arg0) {
     func_80077D50(sOKCompTexInfo, 0);
     arg0->left = 50;
 }
 
-void func_i5_8011796C(unk_800E3A28* arg0) {
+void func_i5_8011796C(Object* arg0) {
     func_80077D50(sYellowArrowCompTexInfo, 0);
     arg0->unk_04 = 0x80;
     arg0->unk_08 = 0x80;
 }
 
-void func_i5_801179A8(unk_800E3A28* arg0) {
+void func_i5_801179A8(Object* arg0) {
     GhostInfo sp20;
     s32 pad;
 
@@ -611,7 +613,7 @@ void func_i5_801179A8(unk_800E3A28* arg0) {
     func_80077D50(sHasGhostMarkerCompTexInfo, 0);
 }
 
-void func_i5_80117A2C(unk_800E3A28* arg0) {
+void func_i5_80117A2C(Object* arg0) {
     s32 i;
 
     func_80077D50(sStaffGhostBeatenCompTexInfo, 0);
@@ -623,7 +625,7 @@ void func_i5_80117A2C(unk_800E3A28* arg0) {
     arg0->left = 150;
 }
 
-Gfx* func_i5_80117A98(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i5_80117A98(Gfx* gfx, Object* arg1) {
 
     if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         gDPSetPrimColor(gfx++, 0, 0, 75, 75, 75, 180);
@@ -638,7 +640,7 @@ Gfx* func_i5_80117A98(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-Gfx* func_i5_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i5_80117BE0(Gfx* gfx, Object* arg1) {
 
     switch (D_i5_801190C0) {
         case 2:
@@ -660,7 +662,7 @@ Gfx* func_i5_80117BE0(Gfx* gfx, unk_800E3A28* arg1) {
 extern u32 gGameFrameCount;
 extern s8 gCupNumDifficultiesCleared[];
 
-Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i5_80117C48(Gfx* gfx, Object* arg1) {
     s32 i;
     s32 alpha;
     s32 cupDifficultiesCleared;
@@ -744,7 +746,7 @@ Gfx* func_i5_80117C48(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-Gfx* func_i5_80117FB4(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i5_80117FB4(Gfx* gfx, Object* arg1) {
     s32 temp_v1;
 
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
@@ -777,12 +779,12 @@ Gfx* func_i5_80117FB4(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-Gfx* func_i5_80118100(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i5_80118100(Gfx* gfx, Object* arg1) {
     gfx = func_8007DB28(gfx, 0);
     return func_80078EA0(gfx, sOKCompTexInfo, arg1->left + 0x10B, arg1->top + 0xD0, 1, 0, 0, 1.0f, 1.0f);
 }
 
-Gfx* func_i5_80118168(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i5_80118168(Gfx* gfx, Object* arg1) {
     f32 temp_fv0 = (SIN(arg1->unk_1C) + 1.0) / 2;
     f32 temp_fa1 = (SIN(arg1->unk_20) + 1.0) / 2;
 
@@ -840,7 +842,7 @@ Gfx* func_i5_801182DC(Gfx* gfx) {
     return gfx;
 }
 
-Gfx* func_i5_80118674(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i5_80118674(Gfx* gfx, Object* arg1) {
 
     // If Cup Does Not Match
     if ((arg1->unk_04 / 6) != (gCourseIndex / 6)) {
@@ -865,7 +867,7 @@ Gfx* func_i5_80118674(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-Gfx* func_i5_80118790(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* func_i5_80118790(Gfx* gfx, Object* arg1) {
     s32 i;
     s32 numUnlockedGhosts = sUnlockedGhosts + 1;
 
@@ -894,7 +896,7 @@ Gfx* func_i5_80118790(Gfx* gfx, unk_800E3A28* arg1) {
     return gfx;
 }
 
-void func_i5_80118928(unk_800E3A28* arg0) {
+void func_i5_80118928(Object* arg0) {
     s32 temp_a1;
 
     if (((D_i5_801190C0 != 0) && (D_i5_801190C0 != 1)) || (gCupSelectOption < 4)) {
@@ -904,12 +906,12 @@ void func_i5_80118928(unk_800E3A28* arg0) {
     if (gGameMode == GAMEMODE_FLX_GP_RACE_NEXT_COURSE) {
         arg0->left = temp_a1;
     } else {
-        func_8007A0A0(arg0, temp_a1, 0xC0);
+        Object_LerpPosXToClampedTargetMaxStep(arg0, temp_a1, 0xC0);
     }
     func_i5_801164A8(arg0->left);
 }
 
-void func_i5_801189C4(unk_800E3A28* arg0) {
+void func_i5_801189C4(Object* arg0) {
     s32 var_v1;
     s32 var_a1;
     s32 var_v0;
@@ -925,12 +927,12 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
         case 0:
             if (var_v1 != 5) {
                 if (arg0->top < 85) {
-                    func_80079FFC(arg0, 85);
+                    Object_LerpPosYToTarget(arg0, 85);
                 } else {
                     arg0->unk_04 = 1;
                 }
             } else if (arg0->top > 170) {
-                func_80079FFC(arg0, 170);
+                Object_LerpPosYToTarget(arg0, 170);
             } else {
                 arg0->unk_04 = 1;
             }
@@ -957,7 +959,7 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
                     } else {
                         var_a1 = 170;
                     }
-                    func_80079FFC(arg0, var_a1);
+                    Object_LerpPosYToTarget(arg0, var_a1);
 
                     if (arg0->unk_04 == 2) {
                         arg0->unk_04 = 3;
@@ -968,9 +970,9 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
                 case 4:
                 default:
                     if (gSelectedMode == MODE_GP_RACE) {
-                        func_80079FFC(arg0, 0x31);
+                        Object_LerpPosYToTarget(arg0, 0x31);
                     } else {
-                        func_80079FFC(arg0, 0x2D);
+                        Object_LerpPosYToTarget(arg0, 0x2D);
                     }
                     arg0->unk_04 = 2;
                     break;
@@ -1008,27 +1010,27 @@ void func_i5_801189C4(unk_800E3A28* arg0) {
             if (arg0->unk_1C == 0xB) {
                 arg0->left = var_a1;
             } else if (arg0->unk_04 >= 2) {
-                func_8007A0A0(arg0, var_a1, 0x80);
+                Object_LerpPosXToClampedTargetMaxStep(arg0, var_a1, 0x80);
             } else {
-                func_80079F54(arg0, var_a1, 0x10 / arg0->unk_04);
+                Object_LerpPosXToTarget(arg0, var_a1, 0x10 / arg0->unk_04);
             }
             break;
     }
 }
 
-void func_i5_80118D44(unk_800E3A28* arg0) {
+void func_i5_80118D44(Object* arg0) {
     switch (D_i5_801190C0) {
         case 3:
         case 4:
-            func_8007A0A0(arg0, 0, 0xC0);
+            Object_LerpPosXToClampedTargetMaxStep(arg0, 0, 0xC0);
             break;
         default:
-            func_8007A0A0(arg0, 50, 0xC0);
+            Object_LerpPosXToClampedTargetMaxStep(arg0, 50, 0xC0);
             break;
     }
 }
 
-void func_i5_80118D94(unk_800E3A28* arg0) {
+void func_i5_80118D94(Object* arg0) {
 
     switch (D_i5_801190C0) {
         case 0:
@@ -1067,23 +1069,23 @@ void func_i5_80118D94(unk_800E3A28* arg0) {
 
             arg0->unk_15 = 1;
             if ((sCourseSelectTrackNo == 0) || (D_i5_801190C0 == 3) || (D_i5_801190C0 == 4)) {
-                func_8007A0A0(arg0, -100, 0xC0);
+                Object_LerpPosXToClampedTargetMaxStep(arg0, -100, 0xC0);
             } else {
-                func_8007A0A0(arg0, 0, 0xC0);
+                Object_LerpPosXToClampedTargetMaxStep(arg0, 0, 0xC0);
             }
             if ((sCourseSelectTrackNo == 5) || (D_i5_801190C0 == 3) || (D_i5_801190C0 == 4)) {
-                func_8007A154(arg0, 100);
+                Object_LerpPosYToClampedTarget(arg0, 100);
             } else {
-                func_8007A154(arg0, 0);
+                Object_LerpPosYToClampedTarget(arg0, 0);
             }
             break;
     }
 }
 
-void func_i5_80118F24(unk_800E3A28* arg0) {
+void func_i5_80118F24(Object* arg0) {
     s32 temp_v1;
 
-    arg0->unk_1C = func_80079E88(OBJECT_COURSE_SELECT_MODEL)->left >> 2;
+    arg0->unk_1C = Object_Get(OBJECT_COURSE_SELECT_MODEL)->left >> 2;
     temp_v1 = arg0->left + arg0->unk_1C;
 
     if ((temp_v1 < -30) || (temp_v1 > 320)) {
@@ -1093,19 +1095,19 @@ void func_i5_80118F24(unk_800E3A28* arg0) {
     }
 }
 
-void func_i5_80118F84(unk_800E3A28* arg0) {
+void func_i5_80118F84(Object* arg0) {
     switch (D_i5_801190C0) {
         case 0:
         case 1:
         case 5:
         case 6:
-            func_8007A0A0(arg0, 150, 0xC0);
+            Object_LerpPosXToClampedTargetMaxStep(arg0, 150, 0xC0);
             break;
         case 2:
         case 3:
         case 4:
         default:
-            func_8007A0A0(arg0, 0, 0xC0);
+            Object_LerpPosXToClampedTargetMaxStep(arg0, 0, 0xC0);
             break;
     }
 }

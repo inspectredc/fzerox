@@ -224,8 +224,8 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
 
             gfx = func_8007B14C(gfx, func_800783AC(aYellowArrowTex), (-(i / 2) - var_s3) + 0x76, 16, 32, 32,
                                 G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 0, 0);
-            gfx = func_8007B14C(gfx, func_800783AC(aYellowArrowTex), (i / 2) + var_s3 + 0xAA, 16, 32, 32,
-                                G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 1, 0);
+            gfx = func_8007B14C(gfx, func_800783AC(aYellowArrowTex), (i / 2) + var_s3 + 0xAA, 16, 32, 32, G_IM_FMT_RGBA,
+                                G_IM_SIZ_16b, 0, 0, 1, 0);
         }
     }
 
