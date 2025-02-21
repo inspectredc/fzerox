@@ -1,24 +1,13 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_object.h"
+#include "src/overlays/ovl_i2/ovl_i2.h"
 #include "ovl_i6.h"
 #include "audio.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B1E0.h"
 
 s8 D_i6_8011FAF0[30];
-SaveContext* sSaveContextPtr;
-u8 D_i6_8011FB18[2][0x2580]; // Some kind of vtx buffer space?
-void* D_i6_80124618;
-s16 D_i6_80124620[176];
-s32 sOptionsDataClearMenu;
-s16 sOptionsDataAlreadyCleared;
-s32 sOptionsSelectionState[7];
-unk_800E51B8* D_i6_801247A4;
-s16 D_i6_801247A8;
-s16 D_i6_801247AA;
-TexturePtr D_i6_801247AC;
-s16 D_i6_801247B0;
 
 s8 D_i6_8011DFA0 = 0;
 UNUSED s32 D_i6_8011DFA4 = 64;
@@ -452,13 +441,13 @@ const char* gCreditsNames[] = {
     "jim wornell",
 };
 
-const s16 D_i6_8011F4BC[] = { 50, 240, 280, -20, 280, 240, 50, -20 };
+const s16 kStartRolesInitialPositions[] = { 50, 240, 280, -20, 280, 240, 50, -20 };
 
-const s16 D_i6_8011F4CC[] = { 50, 100, 280, 180, 280, 100, 50, 180 };
+const s16 kStartNamesInitialPositions[] = { 50, 100, 280, 180, 280, 100, 50, 180 };
 
 const s16 D_i6_8011F4DC[] = { 150, 210, 50, 35, 50, 210, 150, 35 };
 
-const s16 D_i6_8011F4EC[] = {
+const s16 kCreditsObjectScrollScript[] = {
     OBJECT_CREDITS_ROLE_18,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -582,194 +571,128 @@ const s16 D_i6_8011F4EC[] = {
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_30,
     -1,
-    OBJECT_FREE,
 };
-
-UNUSED s32 D_i6_8011ED7C = 0; // UNUSED?
-
-/*
-    OPTIONS MENU
- */
-
-// 'WITH', 'W/O'
-OptionsTextureInfo gOptionsVsComSelection[] = {
-    { aMenuWithTex, 32, 16 },
-    { aMenuWithoutTex, 32, 16 },
-};
-
-// 'WITH', 'W/O'
-OptionsTextureInfo gOptionsVsSlotSelection[] = {
-    { aMenuWithTex, 32, 16 },
-    { aMenuWithoutTex, 32, 16 },
-};
-
-// 'W/O', '+1', '+2'
-OptionsTextureInfo gOptionsVsHandicapSelection[] = {
-    { aMenuWithoutTex, 32, 16 },
-    { aMenuPlusOneTex, 32, 16 },
-    { aMenuPlusTwoTex, 32, 16 },
-};
-
-// 'Stereo', 'Mono'
-OptionsTextureInfo gOptionsSoundModeSelection[] = {
-    { aMenuStereoTex, 64, 16 },
-    { aMenuMonoTex, 64, 16 },
-};
-
-// 'No', 'Yes'
-OptionsTextureInfo gOptionsAllDataClearSelection[] = {
-    { aMenuNoTex, 32, 16 },
-    { aMenuYesTex, 32, 16 },
-};
-
-s32 gOptionsCurrentRow = 0;
-
-OptionsInfo gOptionsInfo[] = {
-    // 'VS COM (2P,3P)'
-    { OPTIONS_VS_COM, OPTIONS_SHOWN, 2, 0, 0, gOptionsVsComSelection, { aOptionsVsCom2P3PTex, 128, 16 } },
-    // 'VS Slot'
-    { OPTIONS_VS_SLOT, OPTIONS_SHOWN, 2, 0, 0, gOptionsVsSlotSelection, { aOptionsVsSlotTex, 96, 16 } },
-    // 'VS Handicap'
-    { OPTIONS_VS_HANDICAP, OPTIONS_SHOWN, 3, 0, 0, gOptionsVsHandicapSelection, { aOptionsVsHandicapTex, 96, 16 } },
-    // 'Sound Mode'
-    { OPTIONS_SOUND_MODE, OPTIONS_SHOWN, 2, 0, 0, gOptionsSoundModeSelection, { aOptionsSoundModeTex, 96, 16 } },
-    // 'All data clear'
-    { OPTIONS_DATA_CLEAR,
-      OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN,
-      0,
-      0,
-      0,
-      NULL,
-      { aOptionsAllDataClearTex, 96, 16 } },
-    // 'Copying ghost'
-    { OPTIONS_GHOST_COPY, OPTIONS_REQUIRE_SELECTING, 0, 0, 0, NULL, { aOptionsCopyingGhostTex, 96, 16 } },
-    // 'EXIT'
-    { OPTIONS_EXIT, OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN, 0, 0, 0, NULL, { aOptionsExitTex, 40, 16 } },
-};
-
-UNUSED char D_i6_8011EEBC[] = "Feel Mie";
 
 extern Object gObjects[32];
 extern unk_800E3F28 D_800E3F28[];
 
-void func_i6_80117EE0(Object* arg0) {
+void Credits_OldCarsInit(Object* oldCarsObj) {
 
-    arg0->unk_18 = func_800792D8(D_i6_8011E558[0]);
+    oldCarsObj->unk_18 = func_800792D8(D_i6_8011E558[0]);
 
-    arg0->unk_04 = 0;
+    oldCarsObj->unk_04 = 0;
 
     //! @bug the case where func_800792D8 returns -1 is unhandled
-    D_800E3F28[arg0->unk_18].unk_04 = -1;
+    D_800E3F28[oldCarsObj->unk_18].unk_04 = -1;
 }
 
-void func_i6_80117F2C(Object* arg0) {
+void Credits_CarsInit(Object* carsObj) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_i6_8011FAF0); i++) {
         D_i6_8011FAF0[i] = 0;
     }
-    arg0->unk_18 = func_800792D8(D_i6_8011E558[0]);
+    carsObj->unk_18 = func_800792D8(D_i6_8011E558[0]);
 
     //! @bug the case where func_800792D8 returns -1 is unhandled
-    D_800E3F28[arg0->unk_18].unk_04 = -1;
+    D_800E3F28[carsObj->unk_18].unk_04 = -1;
 }
 
-void func_i6_80117FA8(Object* arg0) {
+void Credits_MenuLadyInit(Object* menuLadyObj) {
     func_80077D50(sCreditsMenuLadyCompTexInfo, 0);
-    arg0->unk_1C = 0xB6;
+    menuLadyObj->unk_1C = 0xB6;
 }
 
-void func_i6_80117FE0(void) {
+void Credits_SeeYouAgainInit(void) {
     func_80077D50(sCreditsSeeYouAgainCompTexInfo, 0);
 }
 
-void func_i6_80118008(Object* arg0) {
+void Credits_IntroInit(Object* introObj) {
     func_80077D50(sCreditsMrZeroCompTexInfo, 0);
-    arg0->unk_1C = 0x100;
-    arg0->unk_18 = 0;
+    introObj->unk_1C = 0x100;
+    introObj->unk_18 = 0;
 }
 
-void func_i6_80118044(void) {
+void Credits_CopyrightInit(void) {
     func_80077D50(sCreditsCopyrightCompTexInfo, 0);
 }
 
-void func_i6_8011806C(Object* arg0) {
+void Credits_PortraitsInit(Object* portraitsObj) {
 
-    arg0->unk_18 = func_800792D8(D_i6_8011EBF8[0]);
+    portraitsObj->unk_18 = func_800792D8(D_i6_8011EBF8[0]);
 
-    D_800E3F28[arg0->unk_18].unk_04 = -1;
+    D_800E3F28[portraitsObj->unk_18].unk_04 = -1;
 }
 
-s16 func_i2_801061D4(s8*, s32);
-
-Gfx* func_i6_801180B4(Gfx* gfx, Object* arg1, s32* arg2, s32 arg3) {
-    s32 temp_v0;
+Gfx* Credits_FadeInNameByLetter(Gfx* gfx, Object* startNameObj, bool* wordFadeInProgress, bool isRightJustified) {
+    s32 letterPosOffset;
     s32 i;
-    s32 var_s2;
-    s32 var_v0;
-    s32 sp7C;
-    s32 var_v1;
+    s32 left;
+    s32 letterCount;
+    s32 top;
+    s32 letterCompletion;
     s32 pad[4]; // possibly part of buffer
-    s8 sp64[2];
+    signed char letterStr[2];
     s8* name;
 
-    name = gCreditsNames[arg1->cmdId - OBJECT_CREDITS_NAME_0];
+    name = gCreditsNames[startNameObj->cmdId - OBJECT_CREDITS_NAME_0];
 
-    if (arg3 != 0) {
-        i = func_i2_801062E4(name, 1, 0);
+    if (isRightJustified) {
+        i = Font_GetStringWidth(name, FONT_SET_1, 0);
     } else {
         i = 0;
     }
 
-    var_s2 = arg1->left - i;
-    sp7C = arg1->top;
+    left = startNameObj->left - i;
+    top = startNameObj->top;
 
-    var_v0 = arg1->unk_1C / 5;
-    if (var_v0 >= 23) {
-        var_v0 = 23;
+    letterCount = startNameObj->unk_1C / 5;
+    if (letterCount >= 23) {
+        letterCount = 23;
     }
-    *arg2 = 0;
+    *wordFadeInProgress = false;
 
-    for (i = 0; i < var_v0 + 1; i++) {
+    for (i = 0; i < letterCount + 1; i++) {
 
-        sp64[0] = *name++;
-        if (sp64[0] == '\0') {
+        letterStr[0] = *name++;
+        if (letterStr[0] == '\0') {
             break;
         }
 
-        sp64[1] = '\0';
-        var_v1 = arg1->unk_1C - (i * 5);
-        if (var_v1 >= 5) {
-            var_v1 = 5;
+        letterStr[1] = '\0';
+        letterCompletion = startNameObj->unk_1C - (i * 5);
+        if (letterCompletion >= 5) {
+            letterCompletion = 5;
         } else {
-            *arg2 = 1;
+            *wordFadeInProgress = true;
         }
-        if (var_v1 < 0) {
+        if (letterCompletion < 0) {
             break;
         }
 
-        temp_v0 = 5 - var_v1;
-        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, (var_v1 * 255) / 5);
-        gfx = func_i2_80106450(gfx, (temp_v0 * 2) + var_s2, sp7C - SQ(temp_v0), sp64, 0, 1, 1);
+        letterPosOffset = 5 - letterCompletion;
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, (letterCompletion * 255) / 5);
+        gfx =
+            Font_DrawString(gfx, left + (letterPosOffset * 2), top - SQ(letterPosOffset), letterStr, 0, FONT_SET_1, 1);
 
-        var_s2 += func_i2_801061D4(sp64, 1);
+        left += Font_GetCharacterWidth(letterStr, FONT_SET_1);
     }
 
     return gfx;
 }
 
-Gfx* func_i6_801182DC(Gfx* gfx, Object* arg1) {
+Gfx* Credits_OldCarsDraw(Gfx* gfx, Object* oldCarsObj) {
 
     if (!D_i6_8011DFA0) {
         return gfx;
     }
 
-    return func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078F80(gfx, &D_800E3F28[oldCarsObj->unk_18], oldCarsObj->left, oldCarsObj->top, 0, 0, 0, 1.0f, 1.0f);
 }
 
 #define UNK_RAND_MACRO(var, x, y) (((Math_Rand1() >> (var % 4)) % x) - y)
 
-Gfx* func_i6_80118354(Gfx* gfx, Object* arg1) {
+Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
     s32 sp154;
     s32 row;
     s32 var_t5;
@@ -786,16 +709,16 @@ Gfx* func_i6_80118354(Gfx* gfx, Object* arg1) {
     TexturePtr texture;
     s32 top;
 
-    temp_s1 = &D_800E3F28[arg1->unk_18];
+    temp_s1 = &D_800E3F28[carsObj->unk_18];
 
-    left = arg1->left;
-    top = arg1->top;
+    left = carsObj->left;
+    top = carsObj->top;
 
-    if (arg1->top > 120) {
-        top = arg1->top - temp_s1->unk_00->unk_00->height;
+    if (carsObj->top > 120) {
+        top = carsObj->top - temp_s1->unk_00->unk_00->height;
     }
 
-    sp154 = arg1->unk_1C;
+    sp154 = carsObj->unk_1C;
     if (sp154 > 64) {
         sp154 = 64;
     }
@@ -803,7 +726,7 @@ Gfx* func_i6_80118354(Gfx* gfx, Object* arg1) {
     width = temp_s1->unk_00->unk_00->width;
     height = temp_s1->unk_00->unk_00->height;
 
-    switch (arg1->unk_08) {
+    switch (carsObj->unk_08) {
         case 0:
 
             if (temp_s1->unk_0A == 0) {
@@ -842,13 +765,12 @@ Gfx* func_i6_80118354(Gfx* gfx, Object* arg1) {
                 gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, width, 1 /* unused by macro */, 0,
                                    (row + var_t5), width, (row + var_t5) + 1, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                gSPScisTextureRectangle(gfx++, (left + var_a0) << 2, (top + row) << 2,
-                                        ((left + var_a0) + width) << 2, (top + row + 1) << 2, 0, 0, 0, 1 << 10,
-                                        1 << 10);
+                gSPScisTextureRectangle(gfx++, (left + var_a0) << 2, (top + row) << 2, ((left + var_a0) + width) << 2,
+                                        (top + row + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
             }
             break;
         case 1:
-            gfx = func_80078F80(gfx, temp_s1, arg1->left, top, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, temp_s1, carsObj->left, top, 0, 0, 0, 1.0f, 1.0f);
             break;
         case 2:
             if (sp154 < 5) {
@@ -858,7 +780,7 @@ Gfx* func_i6_80118354(Gfx* gfx, Object* arg1) {
                 additionalWidth = (width * (1.0f - var_fv1)) / 2;
                 additionalHeight = (height * (1.0f - var_fv1)) / 2;
 
-                gfx = func_80078F80(gfx, temp_s1, arg1->left + additionalWidth, top + additionalHeight, 4, 0, 0,
+                gfx = func_80078F80(gfx, temp_s1, carsObj->left + additionalWidth, top + additionalHeight, 4, 0, 0,
                                     var_fv1, var_fv1);
             } else {
                 if (temp_s1->unk_0A == 0) {
@@ -895,11 +817,10 @@ Gfx* func_i6_80118354(Gfx* gfx, Object* arg1) {
                     gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, width, 1 /* unused by macro */, 0,
                                        row, width, row + 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
                                        G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                    gSPScisTextureRectangle(gfx++, (left + additionalWidth) << 2,
-                                            (s32) ((top + additionalHeight) + (row * var_ft4)) << 2,
-                                            ((left + additionalWidth) + width) << 2,
-                                            (s32) (((top + additionalHeight) + (row * var_ft4)) + 1.0f) << 2, 0, 0,
-                                            0, var_t5, 1 << 10);
+                    gSPScisTextureRectangle(
+                        gfx++, (left + additionalWidth) << 2, (s32) ((top + additionalHeight) + (row * var_ft4)) << 2,
+                        ((left + additionalWidth) + width) << 2,
+                        (s32) (((top + additionalHeight) + (row * var_ft4)) + 1.0f) << 2, 0, 0, 0, var_t5, 1 << 10);
                     gDPPipeSync(gfx++);
                     gfx = func_8007A440(gfx, (left + additionalWidth), ((top + additionalHeight) + (row * var_ft4)),
                                         ((left + additionalWidth) + (width * var_fv1)),
@@ -912,7 +833,7 @@ Gfx* func_i6_80118354(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* func_i6_80118ED4(Gfx* gfx, Object* arg1) {
+Gfx* Credits_MenuLadyDraw(Gfx* gfx, Object* menuLadyObj) {
     s32 row;
     s32 var_a0;
     s32 var_a1;
@@ -923,17 +844,17 @@ Gfx* func_i6_80118ED4(Gfx* gfx, Object* arg1) {
     TexturePtr texture;
 
     texture = func_800783AC(aCreditsMenuLadyTex);
-    spB0 = arg1->left;
-    var_s1 = arg1->top;
+    spB0 = menuLadyObj->left;
+    var_s1 = menuLadyObj->top;
 
     gSPDisplayList(gfx++, D_3000088);
 
     for (row = 0; row < 182; row++) {
         var_t5 = 0;
 
-        switch (arg1->unk_04) {
+        switch (menuLadyObj->unk_04) {
             case 0:
-                alpha = row - arg1->unk_1C;
+                alpha = row - menuLadyObj->unk_1C;
                 if (alpha < 0) {
                     alpha = -alpha;
                 }
@@ -957,7 +878,7 @@ Gfx* func_i6_80118ED4(Gfx* gfx, Object* arg1) {
                 break;
             case 2:
                 var_a1 = row - 0x17;
-                var_a0 = arg1->unk_1C - 0x17;
+                var_a0 = menuLadyObj->unk_1C - 0x17;
                 if (var_a0 < 0) {
                     var_a0 = -var_a0;
                 }
@@ -978,9 +899,9 @@ Gfx* func_i6_80118ED4(Gfx* gfx, Object* arg1) {
                 break;
             case 4:
                 alpha = 255;
-                if (arg1->unk_08 != 0) {
+                if (menuLadyObj->unk_08 != 0) {
                     var_a0 = UNK_RAND_MACRO(row, 7, 3);
-                    var_t5 = (s32) ((0x20 - arg1->unk_08) * var_a0) / 32;
+                    var_t5 = (s32) ((0x20 - menuLadyObj->unk_08) * var_a0) / 32;
                 }
                 break;
             default:
@@ -994,16 +915,17 @@ Gfx* func_i6_80118ED4(Gfx* gfx, Object* arg1) {
                            G_TX_NOLOD, G_TX_NOLOD);
         gSPScisTextureRectangle(gfx++, (spB0 + var_t5) << 2, (var_s1 + row) << 2, (spB0 + var_t5 + 80) << 2,
                                 (var_s1 + row + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
-        gSPScisTextureRectangle(gfx++, ((240 - spB0) + var_t5) << 2, (var_s1 + row) << 2, ((320 - spB0) + var_t5) << 2,
-                                (var_s1 + row + 1) << 2, 0, 0x9E0, 0, 0xFC00, 1 << 10);
+        gSPScisTextureRectangle(gfx++, ((SCREEN_WIDTH - 80 - spB0) + var_t5) << 2, (var_s1 + row) << 2,
+                                ((SCREEN_WIDTH - spB0) + var_t5) << 2, (var_s1 + row + 1) << 2, 0, 0x9E0, 0, 0xFC00,
+                                1 << 10);
     }
 
-    arg1->unk_08 = 0;
+    menuLadyObj->unk_08 = 0;
 
     return gfx;
 }
 
-Gfx* func_i6_8011946C(Gfx* gfx, Object* arg1) {
+Gfx* Credits_SeeYouAgainDraw(Gfx* gfx, Object* seeYouAgainObj) {
     s32 row;
     s32 sp50;
     s32 alpha;
@@ -1011,28 +933,28 @@ Gfx* func_i6_8011946C(Gfx* gfx, Object* arg1) {
     s32 var_s5;
     TexturePtr texture;
 
-    arg1->unk_1C++;
+    seeYouAgainObj->unk_1C++;
     texture = func_800783AC(aCreditsSeeYouAgainTex);
-    sp50 = arg1->left;
-    var_s5 = arg1->top;
+    sp50 = seeYouAgainObj->left;
+    var_s5 = seeYouAgainObj->top;
 
     gSPDisplayList(gfx++, D_3000088);
 
-    if (arg1->unk_04 == 1) {
+    if (seeYouAgainObj->unk_04 == 1) {
         gDPSetAlphaCompare(gfx++, G_AC_DITHER);
     }
 
     for (row = 0; row < 64; row++) {
-        switch (arg1->unk_04) {
+        switch (seeYouAgainObj->unk_04) {
             case 0:
                 var_s2 = UNK_RAND_MACRO(row, 11, 5);
-                if (arg1->unk_1C < 64) {
-                    var_s2 = (s32) ((64 - arg1->unk_1C) * var_s2) / 64;
+                if (seeYouAgainObj->unk_1C < 64) {
+                    var_s2 = (s32) ((64 - seeYouAgainObj->unk_1C) * var_s2) / 64;
                 } else {
                     var_s2 = 0;
                 }
-                if (arg1->unk_1C < 6) {
-                    alpha = arg1->unk_1C * 50;
+                if (seeYouAgainObj->unk_1C < 6) {
+                    alpha = seeYouAgainObj->unk_1C * 50;
                 } else {
                     alpha = 255;
                 }
@@ -1041,17 +963,17 @@ Gfx* func_i6_8011946C(Gfx* gfx, Object* arg1) {
 
                 var_s2 = UNK_RAND_MACRO(row, 7, 3);
 
-                if (arg1->unk_1C < 32) {
-                    var_s2 = ((32 - arg1->unk_1C) * var_s2) / 32;
-                    Object_Get(OBJECT_CREDITS_MENU_LADY)->unk_08 = arg1->unk_1C;
+                if (seeYouAgainObj->unk_1C < 32) {
+                    var_s2 = ((32 - seeYouAgainObj->unk_1C) * var_s2) / 32;
+                    Object_Get(OBJECT_CREDITS_MENU_LADY)->unk_08 = seeYouAgainObj->unk_1C;
                 } else {
                     var_s2 = 0;
                 }
-                if (arg1->unk_1C < 20) {
-                    if (arg1->unk_1C < 10) {
-                        alpha = 255 - (arg1->unk_1C * 10);
+                if (seeYouAgainObj->unk_1C < 20) {
+                    if (seeYouAgainObj->unk_1C < 10) {
+                        alpha = 255 - (seeYouAgainObj->unk_1C * 10);
                     } else {
-                        alpha = (arg1->unk_1C * 10) + 55;
+                        alpha = (seeYouAgainObj->unk_1C * 10) + 55;
                     }
                 } else {
                     alpha = 255;
@@ -1076,7 +998,7 @@ Gfx* func_i6_8011946C(Gfx* gfx, Object* arg1) {
 }
 
 #ifdef NON_MATCHING
-Gfx* func_i6_80119908(Gfx* gfx, Object* arg1) {
+Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
     s32 temp_a0;
     s32 temp_t1;
     s32 var_t2;
@@ -1096,8 +1018,8 @@ Gfx* func_i6_80119908(Gfx* gfx, Object* arg1) {
                            row + 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                            G_TX_NOLOD, G_TX_NOLOD);
 
-        if (arg1->unk_08 != 0) {
-            temp_a0 = arg1->unk_20;
+        if (introObj->unk_08 != 0) {
+            temp_a0 = introObj->unk_20;
             var_t2 = 255 - temp_a0;
             temp = ((((row * 0x1000) * (temp_a0 + 64)) / 64) / 72);
             temp_t1 = ((SIN(temp) * (temp_a0 + 4)) / 4);
@@ -1107,8 +1029,8 @@ Gfx* func_i6_80119908(Gfx* gfx, Object* arg1) {
             gSPScisTextureRectangle(gfx++, temp << 2, (row + var) << 2, (temp + 80) << 2, (row + var + 1) << 2, 0, 0, 0,
                                     1 << 10, 1 << 10);
         }
-        if (arg1->unk_04 != 0) {
-            temp_a0 = arg1->unk_1C;
+        if (introObj->unk_04 != 0) {
+            temp_a0 = introObj->unk_1C;
             var_t2 = 255 - temp_a0;
             temp = ((((row * 0x1000) * (temp_a0 + 64)) / 64) / 72);
             temp_t1 = ((SIN(temp) * (temp_a0 + 4)) / 4);
@@ -1118,8 +1040,8 @@ Gfx* func_i6_80119908(Gfx* gfx, Object* arg1) {
         }
     }
 
-    if (arg1->unk_18 > 290) {
-        var_t2 = 0xA10 - (arg1->unk_18 * 8);
+    if (introObj->unk_18 > 290) {
+        var_t2 = 0xA10 - (introObj->unk_18 * 8);
         if (var_t2 > 255) {
             var_t2 = 255;
         }
@@ -1131,53 +1053,56 @@ Gfx* func_i6_80119908(Gfx* gfx, Object* arg1) {
 
         gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
 
-        gfx = func_i2_80106700(gfx, (s32) (160.0f - (((f32) func_i2_801062E4("f-zero x", 1, 0) * scale) / 2)),
-                               D_i6_8011DFAC + D_i6_8011DFB0, "f-zero x", 0, 1, 1, scale, scale);
-        gfx = func_i2_80106700(gfx, (s32) (160.0f - (((f32) func_i2_801062E4("staff", 1, 0) * scale) / 2)),
-                               D_i6_8011DFAC + D_i6_8011DFB4, "staff", 0, 1, 1, scale, scale);
-    } else if (arg1->unk_18 > 120) {
-        var_t2 = (arg1->unk_18 * 3) - 0x168;
+        gfx = Font_DrawScaledString(
+            gfx, (s32) (160.0f - (((f32) Font_GetStringWidth("f-zero x", FONT_SET_1, 0) * scale) / 2)),
+            D_i6_8011DFAC + D_i6_8011DFB0, "f-zero x", 0, FONT_SET_1, 1, scale, scale);
+        gfx = Font_DrawScaledString(gfx,
+                                    (s32) (160.0f - (((f32) Font_GetStringWidth("staff", FONT_SET_1, 0) * scale) / 2)),
+                                    D_i6_8011DFAC + D_i6_8011DFB4, "staff", 0, FONT_SET_1, 1, scale, scale);
+    } else if (introObj->unk_18 > 120) {
+        var_t2 = (introObj->unk_18 * 3) - 0x168;
         if (var_t2 > 255) {
             var_t2 = 255;
         }
 
-        scale = (f32) (628 - (arg1->unk_18 * 2)) / 192.0f;
+        scale = (f32) (628 - (introObj->unk_18 * 2)) / 192.0f;
 
         if (scale < 1.0) {
             scale = 1.0f;
         }
         gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
 
-        gfx =
-            func_i2_80106700(gfx, (s32) (160.0f - (((f32) func_i2_801062E4("f-zero x", 1, 0) * scale) / 2)),
-                             (D_i6_8011DFAC + D_i6_8011DFB0) - (scale - 1.0) * 20.0, "f-zero x", 0, 1, 1, scale, scale);
-        gfx = func_i2_80106700(gfx, (s32) (160.0f - (((f32) func_i2_801062E4("staff", 1, 0) * scale) / 2)),
-                               (D_i6_8011DFAC + D_i6_8011DFB4) + (scale - 1.0) * 20.0, "staff", 0, 1, 1, scale, scale);
+        gfx = Font_DrawScaledString(
+            gfx, (s32) (160.0f - (((f32) Font_GetStringWidth("f-zero x", FONT_SET_1, 0) * scale) / 2)),
+            (D_i6_8011DFAC + D_i6_8011DFB0) - (scale - 1.0) * 20.0, "f-zero x", 0, FONT_SET_1, 1, scale, scale);
+        gfx = Font_DrawScaledString(
+            gfx, (s32) (160.0f - (((f32) Font_GetStringWidth("staff", FONT_SET_1, 0) * scale) / 2)),
+            (D_i6_8011DFAC + D_i6_8011DFB4) + (scale - 1.0) * 20.0, "staff", 0, FONT_SET_1, 1, scale, scale);
     }
     return gfx;
 }
 #else
-Gfx* func_i6_80119908(Gfx* gfx, Object* arg1);
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_80119908.s")
+Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj);
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
 #endif
 
-Gfx* func_i6_8011A248(Gfx* gfx, Object* arg1) {
+Gfx* Credits_CopyrightDraw(Gfx* gfx, Object* copyRightObj) {
     s32 var_s2;
     s32 temp_s7;
     s32 var_a2;
     s32 row;
     TexturePtr texture;
 
-    arg1->unk_1C++;
+    copyRightObj->unk_1C++;
     texture = func_800783AC(aCopyrightTex);
-    var_s2 = arg1->top;
-    temp_s7 = arg1->left;
+    var_s2 = copyRightObj->top;
+    temp_s7 = copyRightObj->left;
     gSPDisplayList(gfx++, D_3000088);
 
     for (row = 0; row < 14; row++) {
         var_a2 = UNK_RAND_MACRO(row, 11, 5);
-        if (arg1->unk_1C < 32) {
-            var_a2 = ((32 - arg1->unk_1C) * var_a2) / 32;
+        if (copyRightObj->unk_1C < 32) {
+            var_a2 = ((32 - copyRightObj->unk_1C) * var_a2) / 32;
         } else {
             var_a2 = 0;
         }
@@ -1192,36 +1117,36 @@ Gfx* func_i6_8011A248(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* func_i6_8011A59C(Gfx* gfx, Object* arg1) {
+Gfx* Credits_PortraitsDraw(Gfx* gfx, Object* portraitsObj) {
     s32 pad[14];
     unk_800E3F28* sp34;
     s32 temp_v1;
     s32 var_a2;
     s32 temp;
 
-    sp34 = &D_800E3F28[arg1->unk_18];
-    temp_v1 = arg1->unk_1C;
-    temp = D_i6_8011F4DC[(arg1->unk_20 % 4) * 2];
+    sp34 = &D_800E3F28[portraitsObj->unk_18];
+    temp_v1 = portraitsObj->unk_1C;
+    temp = D_i6_8011F4DC[(portraitsObj->unk_20 % 4) * 2];
 
     if (temp < 100) {
-        var_a2 = 320 - (temp_v1 / 1.2);
+        var_a2 = SCREEN_WIDTH - (temp_v1 / 1.2);
     } else {
         var_a2 = (temp_v1 / 1.2) - 180;
     }
 
-    if (arg1->unk_08 == 0) {
+    if (portraitsObj->unk_08 == 0) {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255 - temp_v1);
         gfx = func_80078F80(gfx, sp34, var_a2, -5, 1, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
 
-Gfx* func_i6_8011A6CC(Gfx* gfx, Object* arg1) {
+Gfx* Credits_StartRolesDraw(Gfx* gfx, Object* startRolesObj) {
     s32 pad[3];
     s32 roleIndex;
     char* roleName;
 
-    roleIndex = arg1->cmdId - OBJECT_CREDITS_ROLE_0;
+    roleIndex = startRolesObj->cmdId - OBJECT_CREDITS_ROLE_0;
     roleName = gCreditsAttributions[roleIndex];
 
     gDPSetPrimColor(gfx++, 0, 0, 24, 24, 24, 255);
@@ -1229,12 +1154,12 @@ Gfx* func_i6_8011A6CC(Gfx* gfx, Object* arg1) {
     switch (roleIndex % 4) {
         case 0:
         case 3:
-            gfx = func_i2_80106450(gfx, arg1->left + 1, arg1->top + 1, roleName, 0, 6, 0);
+            gfx = Font_DrawString(gfx, startRolesObj->left + 1, startRolesObj->top + 1, roleName, 0, FONT_SET_6, 0);
             break;
         case 1:
         case 2:
-            gfx = func_i2_80106450(gfx, (arg1->left - func_i2_801062E4(roleName, 6, 0)) + 1, arg1->top + 1, roleName, 0,
-                                   6, 0);
+            gfx = Font_DrawString(gfx, (startRolesObj->left - Font_GetStringWidth(roleName, FONT_SET_6, 0)) + 1,
+                                  startRolesObj->top + 1, roleName, 0, FONT_SET_6, 0);
             break;
     }
 
@@ -1243,57 +1168,58 @@ Gfx* func_i6_8011A6CC(Gfx* gfx, Object* arg1) {
     switch (roleIndex % 4) {
         case 0:
         case 3:
-            gfx = func_i2_80106450(gfx, arg1->left, arg1->top, roleName, 0, 6, 0);
+            gfx = Font_DrawString(gfx, startRolesObj->left, startRolesObj->top, roleName, 0, FONT_SET_6, 0);
             break;
         case 1:
         case 2:
-            gfx = func_i2_80106450(gfx, arg1->left - func_i2_801062E4(roleName, 6, 0), arg1->top, roleName, 0, 6, 0);
+            gfx = Font_DrawString(gfx, startRolesObj->left - Font_GetStringWidth(roleName, FONT_SET_6, 0),
+                                  startRolesObj->top, roleName, 0, FONT_SET_6, 0);
             break;
     }
 
     return gfx;
 }
 
-Gfx* func_i6_8011A890(Gfx* gfx, Object* arg1) {
+Gfx* Credits_EndRolesDraw(Gfx* gfx, Object* endRolesObj) {
     char* roleName;
-    s32 roleIndex = arg1->cmdId - OBJECT_CREDITS_ROLE_0;
+    s32 roleIndex = endRolesObj->cmdId - OBJECT_CREDITS_ROLE_0;
 
     roleName = gCreditsAttributions[roleIndex];
 
     gDPSetPrimColor(gfx++, 0, 0, 24, 24, 24, 255);
-    gfx = func_i2_80106450(gfx, arg1->left + 1, arg1->top + 1, roleName, 0, 6, 0);
+    gfx = Font_DrawString(gfx, endRolesObj->left + 1, endRolesObj->top + 1, roleName, 0, FONT_SET_6, 0);
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-    gfx = func_i2_80106450(gfx, arg1->left, arg1->top, roleName, 0, 6, 0);
+    gfx = Font_DrawString(gfx, endRolesObj->left, endRolesObj->top, roleName, 0, FONT_SET_6, 0);
 
     return gfx;
 }
 
-Gfx* func_i6_8011A944(Gfx* gfx, Object* arg1) {
+Gfx* Credits_StartNameDraw(Gfx* gfx, Object* startNameObj) {
     s32 temp_v1;
     s32 pad[2];
-    s32 sp60;
+    bool wordFadeInProgress;
     s32 pad2[9];
     char* temp_a3;
 
-    temp_v1 = arg1->cmdId - OBJECT_CREDITS_NAME_0;
+    temp_v1 = startNameObj->cmdId - OBJECT_CREDITS_NAME_0;
     temp_a3 = gCreditsNames[temp_v1];
 
-    switch (arg1->unk_04) {
+    switch (startNameObj->unk_04) {
         case 0:
-            sp60 = 0;
+            wordFadeInProgress = false;
             switch (temp_v1 % 4) {
                 case 0:
                 case 3:
-                    gfx = func_i6_801180B4(gfx, arg1, &sp60, 0);
+                    gfx = Credits_FadeInNameByLetter(gfx, startNameObj, &wordFadeInProgress, false);
                     break;
                 case 1:
                 case 2:
-                    gfx = func_i6_801180B4(gfx, arg1, &sp60, 1);
+                    gfx = Credits_FadeInNameByLetter(gfx, startNameObj, &wordFadeInProgress, true);
                     break;
             }
-            if (sp60 == 0) {
-                arg1->unk_04 = 1;
+            if (!wordFadeInProgress) {
+                startNameObj->unk_04 = 1;
             }
             break;
         case 1:
@@ -1301,12 +1227,12 @@ Gfx* func_i6_8011A944(Gfx* gfx, Object* arg1) {
             switch (temp_v1 % 4) {
                 case 0:
                 case 3:
-                    gfx = func_i2_80106450(gfx, arg1->left, arg1->top, temp_a3, 0, 1, 0);
+                    gfx = Font_DrawString(gfx, startNameObj->left, startNameObj->top, temp_a3, 0, FONT_SET_1, 0);
                     break;
                 case 1:
                 case 2:
-                    gfx = func_i2_80106450(gfx, arg1->left - func_i2_801062E4(temp_a3, 1, 0), arg1->top, temp_a3, 0, 1,
-                                           0);
+                    gfx = Font_DrawString(gfx, startNameObj->left - Font_GetStringWidth(temp_a3, FONT_SET_1, 0),
+                                          startNameObj->top, temp_a3, 0, FONT_SET_1, 0);
                     break;
             }
             break;
@@ -1314,50 +1240,50 @@ Gfx* func_i6_8011A944(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* func_i6_8011AAC8(Gfx* gfx, Object* arg1) {
-    s32 index = arg1->cmdId - OBJECT_CREDITS_NAME_0;
+Gfx* Credits_EndNameDraw(Gfx* gfx, Object* endNamesObj) {
+    s32 index = endNamesObj->cmdId - OBJECT_CREDITS_NAME_0;
     char* temp = gCreditsNames[index];
 
-    return func_i2_80106450(gfx, arg1->left, arg1->top, temp, 0, 1, 0);
+    return Font_DrawString(gfx, endNamesObj->left, endNamesObj->top, temp, 0, FONT_SET_1, 0);
 }
 
 extern u16 gInputPressed;
 
-void func_i6_8011AB1C(Object* arg0) {
+void Credits_OldCarsUpdate(Object* oldCarsObj) {
     s32 var_v1;
     unk_800E3F28* temp_v0;
 
-    temp_v0 = &D_800E3F28[arg0->unk_18];
+    temp_v0 = &D_800E3F28[oldCarsObj->unk_18];
     var_v1 = 0;
     if (temp_v0->unk_04 == -1) {
         temp_v0->unk_04 = 0;
-        arg0->unk_04 = 0;
+        oldCarsObj->unk_04 = 0;
         var_v1 = 1;
     }
     if (D_i6_8011DFA0) {
         if (gInputPressed & BTN_LEFT) {
             func_800BA8D8(30);
-            if (arg0->unk_04 != 0) {
-                arg0->unk_04--;
+            if (oldCarsObj->unk_04 != 0) {
+                oldCarsObj->unk_04--;
             } else {
-                arg0->unk_04 = 29;
+                oldCarsObj->unk_04 = 29;
             }
             var_v1++;
         }
 
         if (gInputPressed & BTN_RIGHT) {
             func_800BA8D8(30);
-            arg0->unk_04++;
-            arg0->unk_04 = arg0->unk_04 % 30;
+            oldCarsObj->unk_04++;
+            oldCarsObj->unk_04 = oldCarsObj->unk_04 % 30;
             var_v1++;
         }
     }
     if (var_v1 != 0) {
-        func_800793E8(arg0->unk_18, 0, D_i6_8011E560[arg0->unk_04]);
+        func_800793E8(oldCarsObj->unk_18, 0, D_i6_8011E560[oldCarsObj->unk_04]);
     }
 }
 
-void func_i6_8011AC38(Object* arg0) {
+void Credits_CarsUpdate(Object* carsObj) {
     s32 pad;
     s32 var_a2;
     s32 var_v1;
@@ -1365,22 +1291,22 @@ void func_i6_8011AC38(Object* arg0) {
 
     var_a2 = 0;
 
-    arg0->left = D_i6_8011F4DC[(arg0->unk_20 % 4) * 2 + 0];
-    arg0->top = D_i6_8011F4DC[(arg0->unk_20 % 4) * 2 + 1];
-    switch (arg0->unk_08) {
+    carsObj->left = D_i6_8011F4DC[(carsObj->unk_20 % 4) * 2 + 0];
+    carsObj->top = D_i6_8011F4DC[(carsObj->unk_20 % 4) * 2 + 1];
+    switch (carsObj->unk_08) {
         case 0:
-            if (++arg0->unk_1C >= 64) {
-                arg0->unk_08 = 1;
+            if (++carsObj->unk_1C >= 64) {
+                carsObj->unk_08 = 1;
             }
             break;
         case 1:
-            arg0->unk_1C = 0;
+            carsObj->unk_1C = 0;
             break;
         case 2:
-            if (++arg0->unk_1C >= 64) {
-                arg0->unk_08 = 3;
-                arg0->unk_1C = 0;
-                temp_v0_2 = Object_Get(OBJECT_CREDITS_START);
+            if (++carsObj->unk_1C >= 64) {
+                carsObj->unk_08 = 3;
+                carsObj->unk_1C = 0;
+                temp_v0_2 = Object_Get(OBJECT_CREDITS_SCRIPT);
                 var_a2 = 0;
                 if (temp_v0_2 != NULL) {
                     temp_v0_2->unk_08 = 2;
@@ -1388,11 +1314,11 @@ void func_i6_8011AC38(Object* arg0) {
             }
             break;
         case 3:
-            if (arg0->unk_1C != 0) {
-                arg0->unk_08 = 0;
-                arg0->unk_20++;
+            if (carsObj->unk_1C != 0) {
+                carsObj->unk_08 = 0;
+                carsObj->unk_20++;
                 var_v1 = 0;
-                if ((arg0->unk_20 == 5) && (D_i6_8011FAF0[9] == 0)) {
+                if ((carsObj->unk_20 == 5) && (D_i6_8011FAF0[9] == 0)) {
                     var_a2 = 9;
                     D_i6_8011FAF0[9] = 1;
                     var_v1 = 1;
@@ -1419,7 +1345,7 @@ void func_i6_8011AC38(Object* arg0) {
                     }
                 }
             label:
-                arg0->unk_04 = var_a2;
+                carsObj->unk_04 = var_a2;
                 var_a2 = 1;
                 temp_v0_2 = Object_Get(OBJECT_CREDITS_PORTRAITS);
                 if ((temp_v0_2 != NULL) && (temp_v0_2->unk_08 == 3)) {
@@ -1429,73 +1355,73 @@ void func_i6_8011AC38(Object* arg0) {
             break;
     }
 
-    if (D_800E3F28[arg0->unk_18].unk_04 == -1) {
-        D_800E3F28[arg0->unk_18].unk_04 = 0;
-        arg0->unk_04 = Math_Rand1() % 30;
-        D_i6_8011FAF0[arg0->unk_04] = 1;
+    if (D_800E3F28[carsObj->unk_18].unk_04 == -1) {
+        D_800E3F28[carsObj->unk_18].unk_04 = 0;
+        carsObj->unk_04 = Math_Rand1() % 30;
+        D_i6_8011FAF0[carsObj->unk_04] = 1;
         var_a2++;
     }
     if (var_a2 != 0) {
-        func_800793E8(arg0->unk_18, 0, D_i6_8011E560[arg0->unk_04]);
+        func_800793E8(carsObj->unk_18, 0, D_i6_8011E560[carsObj->unk_04]);
     }
 }
 
-void func_i6_8011AEB4(Object* arg0) {
+void Credits_PortraitsUpdate(Object* portraitsObj) {
     s32 pad;
     s32 var_v1 = 0;
 
-    switch (arg0->unk_08) {
+    switch (portraitsObj->unk_08) {
         case 0:
-            if (++arg0->unk_1C >= 255) {
-                arg0->unk_1C = 0;
-                arg0->unk_08 = 3;
+            if (++portraitsObj->unk_1C >= 255) {
+                portraitsObj->unk_1C = 0;
+                portraitsObj->unk_08 = 3;
             }
             break;
         case 3:
-            if (arg0->unk_1C != 0) {
-                arg0->unk_08 = 0;
-                arg0->unk_20++;
-                arg0->unk_04 = Object_Get(OBJECT_CREDITS_192)->unk_04;
+            if (portraitsObj->unk_1C != 0) {
+                portraitsObj->unk_08 = 0;
+                portraitsObj->unk_20++;
+                portraitsObj->unk_04 = Object_Get(OBJECT_CREDITS_CARS)->unk_04;
                 var_v1 = 1;
-                arg0->unk_1C = 0;
+                portraitsObj->unk_1C = 0;
             }
             break;
     }
 
-    if (D_800E3F28[arg0->unk_18].unk_04 == -1) {
-        D_800E3F28[arg0->unk_18].unk_04 = 0;
-        arg0->unk_04 = Object_Get(OBJECT_CREDITS_192)->unk_04;
+    if (D_800E3F28[portraitsObj->unk_18].unk_04 == -1) {
+        D_800E3F28[portraitsObj->unk_18].unk_04 = 0;
+        portraitsObj->unk_04 = Object_Get(OBJECT_CREDITS_CARS)->unk_04;
         var_v1++;
     }
     if (var_v1 != 0) {
-        func_800793E8(arg0->unk_18, 0, D_i6_8011EBF8[arg0->unk_04]);
+        func_800793E8(portraitsObj->unk_18, 0, D_i6_8011EBF8[portraitsObj->unk_04]);
     }
 }
 
-bool func_i6_8011AFC8(Object* arg0, s32 arg1, s32 arg2) {
+bool Object_MovePosXAndCheckTarget(Object* object, s32 step, s32 target) {
 
-    arg0->left += arg1;
-    if (arg1 < 0) {
-        if (arg2 >= arg0->left) {
+    object->left += step;
+    if (step < 0) {
+        if (target >= object->left) {
             return true;
         }
     } else {
-        if (arg0->left >= arg2) {
+        if (object->left >= target) {
             return true;
         }
     }
     return false;
 }
 
-bool func_i6_8011B010(Object* arg0, s32 arg1, s32 arg2) {
+bool Object_MovePosYAndCheckTarget(Object* object, s32 step, s32 target) {
 
-    arg0->top += arg1;
-    if (arg1 < 0) {
-        if (arg2 >= arg0->top) {
+    object->top += step;
+    if (step < 0) {
+        if (target >= object->top) {
             return true;
         }
     } else {
-        if (arg0->top >= arg2) {
+        if (object->top >= target) {
             return true;
         }
     }
@@ -1504,19 +1430,19 @@ bool func_i6_8011B010(Object* arg0, s32 arg1, s32 arg2) {
 
 extern u32 gGameFrameCount;
 
-bool func_i6_8011B058(Object* arg0, s32 arg1, s32 arg2, s32 arg3) {
+bool Object_OnIntervalMovePosYAndCheckTarget(Object* object, s32 step, s32 target, s32 frameInterval) {
 
-    if (gGameFrameCount % arg3) {
+    if (gGameFrameCount % frameInterval) {
         return false;
     }
 
-    arg0->top += arg1;
-    if (arg1 < 0) {
-        if (arg2 >= arg0->top) {
+    object->top += step;
+    if (step < 0) {
+        if (target >= object->top) {
             return true;
         }
     } else {
-        if (arg0->top >= arg2) {
+        if (object->top >= target) {
             return true;
         }
     }
@@ -1525,68 +1451,68 @@ bool func_i6_8011B058(Object* arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 void Credits_ObjectInit(s32 cmdId, s32 left, s32 top, s8 priority);
 
-void func_i6_8011B0CC(Object* arg0) {
+void Credits_ScriptUpdate(Object* scriptObj) {
     s32 temp_a0;
     s32 index;
     Object* temp_v0_4;
 
-    arg0->unk_1C++;
-    if (arg0->unk_04 < 18) {
-        switch (arg0->unk_08) {
+    scriptObj->unk_1C++;
+    if (scriptObj->unk_04 < 18) {
+        switch (scriptObj->unk_08) {
             case 0:
-                switch (arg0->unk_1C) {
+                switch (scriptObj->unk_1C) {
                     case 0x1:
-                        Credits_ObjectInit(OBJECT_CREDITS_ROLE_0 + arg0->unk_04,
-                                           D_i6_8011F4BC[(arg0->unk_04 % 4) * 2 + 0],
-                                           D_i6_8011F4BC[(arg0->unk_04 % 4) * 2 + 1], 0xC);
-                        temp_v0_4 = Object_Get(OBJECT_CREDITS_192);
+                        Credits_ObjectInit(OBJECT_CREDITS_ROLE_0 + scriptObj->unk_04,
+                                           kStartRolesInitialPositions[(scriptObj->unk_04 % 4) * 2 + 0],
+                                           kStartRolesInitialPositions[(scriptObj->unk_04 % 4) * 2 + 1], 12);
+                        temp_v0_4 = Object_Get(OBJECT_CREDITS_CARS);
                         if ((temp_v0_4 != NULL) && (temp_v0_4->unk_08 == 3)) {
                             temp_v0_4->unk_1C++;
                         }
                         break;
                     case 0x3C:
-                        Credits_ObjectInit(OBJECT_CREDITS_NAME_0 + arg0->unk_04,
-                                           D_i6_8011F4CC[(arg0->unk_04 % 4) * 2 + 0],
-                                           D_i6_8011F4CC[(arg0->unk_04 % 4) * 2 + 1], 0xA);
-                        arg0->unk_08 = 1;
+                        Credits_ObjectInit(OBJECT_CREDITS_NAME_0 + scriptObj->unk_04,
+                                           kStartNamesInitialPositions[(scriptObj->unk_04 % 4) * 2 + 0],
+                                           kStartNamesInitialPositions[(scriptObj->unk_04 % 4) * 2 + 1], 10);
+                        scriptObj->unk_08 = 1;
                         break;
                 }
                 break;
             case 1:
-                arg0->unk_1C = 0;
+                scriptObj->unk_1C = 0;
                 break;
             case 2:
-                if (arg0->unk_1C >= 0x1F) {
-                    arg0->unk_04++;
-                    arg0->unk_08 = 0;
-                    arg0->unk_1C = 0;
+                if (scriptObj->unk_1C > 30) {
+                    scriptObj->unk_04++;
+                    scriptObj->unk_08 = 0;
+                    scriptObj->unk_1C = 0;
                 }
                 break;
         }
     } else {
-        switch (arg0->unk_04) {
+        switch (scriptObj->unk_04) {
             case 18:
-                if ((arg0->unk_1C % 15) == 0) {
-                    index = arg0->unk_1C / 15;
-                    temp_a0 = D_i6_8011F4EC[index - 1];
+                if ((scriptObj->unk_1C % 15) == 0) {
+                    index = scriptObj->unk_1C / 15;
+                    temp_a0 = kCreditsObjectScrollScript[index - 1];
                     if (temp_a0 > 0) {
                         Credits_ObjectInit(temp_a0, 50, 240, 0xA);
                     } else if (temp_a0 < 0) {
-                        arg0->unk_04++;
+                        scriptObj->unk_04++;
                     }
                 }
                 break;
             case 19:
                 if (Object_Get(OBJECT_CREDITS_NAME_30) == NULL) {
-                    arg0->unk_04++;
+                    scriptObj->unk_04++;
                 }
                 break;
             case 20:
                 Credits_ObjectInit(OBJECT_CREDITS_MENU_LADY, 200, 30, 8);
-                arg0->unk_04++;
+                scriptObj->unk_04++;
                 break;
             case 21:
-                arg0->cmdId = OBJECT_FREE;
+                scriptObj->cmdId = OBJECT_FREE;
                 break;
             default:
                 break;
@@ -1594,7 +1520,7 @@ void func_i6_8011B0CC(Object* arg0) {
     }
 }
 
-void func_i6_8011B340(Object* arg0) {
+void Credits_StartRoleUpdate(Object* startRoleObj) {
     s32 pad[2];
     s32 roleIndex;
     s32 sp28;
@@ -1603,7 +1529,7 @@ void func_i6_8011B340(Object* arg0) {
     char* roleName;
     Object* temp_v0_3;
 
-    roleIndex = arg0->cmdId - OBJECT_CREDITS_ROLE_0;
+    roleIndex = startRoleObj->cmdId - OBJECT_CREDITS_ROLE_0;
     roleName = gCreditsAttributions[roleIndex];
 
     switch (roleIndex % 4) {
@@ -1625,116 +1551,116 @@ void func_i6_8011B340(Object* arg0) {
         var_a1 = -1;
     }
 
-    switch (arg0->unk_04) {
+    switch (startRoleObj->unk_04) {
         case 0:
-            if (func_i6_8011B010(arg0, var_a1, var_a2)) {
-                arg0->unk_04 = 1;
-                arg0->unk_1C = 0;
+            if (Object_MovePosYAndCheckTarget(startRoleObj, var_a1, var_a2)) {
+                startRoleObj->unk_04 = 1;
+                startRoleObj->unk_1C = 0;
             }
             break;
         case 1:
-            if (++arg0->unk_1C > 120) {
-                arg0->unk_04 = 2;
-                temp_v0_3 = Object_Get(OBJECT_CREDITS_192);
+            if (++startRoleObj->unk_1C > 120) {
+                startRoleObj->unk_04 = 2;
+                temp_v0_3 = Object_Get(OBJECT_CREDITS_CARS);
                 if ((temp_v0_3 != NULL) && (temp_v0_3->unk_08 == 1)) {
                     temp_v0_3->unk_08 = 2;
                 }
             }
             break;
         case 2:
-            Object_LerpPastPosXTarget(arg0, D_i6_8011F4BC[(roleIndex % 4) * 2], sp28);
+            Object_LerpAwayFromPosX(startRoleObj, kStartRolesInitialPositions[(roleIndex % 4) * 2], sp28);
             if (sp28 < 0) {
-                if (arg0->left < -func_i2_801062E4(roleName, 1, 0)) {
-                    arg0->cmdId = OBJECT_FREE;
+                if (startRoleObj->left < -Font_GetStringWidth(roleName, FONT_SET_1, 0)) {
+                    startRoleObj->cmdId = OBJECT_FREE;
                 }
             } else {
-                if ((func_i2_801062E4(roleName, 1, 0) + 320) < arg0->left) {
-                    arg0->cmdId = OBJECT_FREE;
+                if ((Font_GetStringWidth(roleName, FONT_SET_1, 0) + SCREEN_WIDTH) < startRoleObj->left) {
+                    startRoleObj->cmdId = OBJECT_FREE;
                 }
             }
             break;
     }
 }
 
-void func_i6_8011B50C(Object* arg0) {
-    if (func_i6_8011B058(arg0, -1, -0x14, 2)) {
-        arg0->cmdId = OBJECT_FREE;
+void Credits_EndRoleUpdate(Object* endRoleObj) {
+    if (Object_OnIntervalMovePosYAndCheckTarget(endRoleObj, -1, -20, 2)) {
+        endRoleObj->cmdId = OBJECT_FREE;
     }
 }
 
-void func_i6_8011B544(Object* arg0) {
-    s32 temp_a1;
-    s32 sp18;
+void Credits_StartNameUpdate(Object* startNameObj) {
+    s32 nameIndex;
+    s32 initialStep;
 
-    temp_a1 = arg0->cmdId - OBJECT_CREDITS_NAME_0;
+    nameIndex = startNameObj->cmdId - OBJECT_CREDITS_NAME_0;
 
-    switch (temp_a1 % 4) {
+    switch (nameIndex % 4) {
         case 0:
         case 3:
-            sp18 = 1;
+            initialStep = 1;
             break;
         case 1:
         case 2:
-            sp18 = -1;
+            initialStep = -1;
             break;
     }
 
-    switch (arg0->unk_04) {
+    switch (startNameObj->unk_04) {
         case 0:
-            arg0->unk_1C++;
+            startNameObj->unk_1C++;
             break;
         case 1:
-            if (Object_Get(OBJECT_CREDITS_ROLE_0 + temp_a1)->unk_04 >= 2) {
-                arg0->unk_04 = 2;
+            if (Object_Get(OBJECT_CREDITS_ROLE_0 + nameIndex)->unk_04 >= 2) {
+                startNameObj->unk_04 = 2;
             }
             break;
         case 2:
-            Object_LerpPastPosXTarget(arg0, D_i6_8011F4CC[(temp_a1 % 4) * 2], sp18);
-            if (sp18 > 0) {
-                if (arg0->left > 320) {
-                    arg0->cmdId = OBJECT_FREE;
+            Object_LerpAwayFromPosX(startNameObj, kStartNamesInitialPositions[(nameIndex % 4) * 2], initialStep);
+            if (initialStep > 0) {
+                if (startNameObj->left > SCREEN_WIDTH) {
+                    startNameObj->cmdId = OBJECT_FREE;
                 }
             } else {
-                if (arg0->left < 0) {
-                    arg0->cmdId = OBJECT_FREE;
+                if (startNameObj->left < 0) {
+                    startNameObj->cmdId = OBJECT_FREE;
                 }
             }
             break;
     }
 }
 
-void func_i6_8011B668(Object* arg0) {
-    if (func_i6_8011B058(arg0, -1, -0x14, 2)) {
-        arg0->cmdId = OBJECT_FREE;
+void Credits_EndNameUpdate(Object* endNameObj) {
+    if (Object_OnIntervalMovePosYAndCheckTarget(endNameObj, -1, -20, 2)) {
+        endNameObj->cmdId = OBJECT_FREE;
     }
 }
 
-void func_i6_8011B6A0(Object* arg0) {
+void Credits_MenuLadyUpdate(Object* menuLadyObj) {
 
-    switch (arg0->unk_04) {
+    switch (menuLadyObj->unk_04) {
         case 0:
-            if (--arg0->unk_1C < 0x18) {
-                arg0->unk_04++;
-                arg0->unk_1C = 0;
+            if (--menuLadyObj->unk_1C < 0x18) {
+                menuLadyObj->unk_04++;
+                menuLadyObj->unk_1C = 0;
             }
             break;
         case 1:
-            if (++arg0->unk_1C >= 0x3C) {
-                arg0->unk_04++;
-                arg0->unk_1C = 0x17;
+            if (++menuLadyObj->unk_1C >= 0x3C) {
+                menuLadyObj->unk_04++;
+                menuLadyObj->unk_1C = 0x17;
             }
             break;
         case 2:
-            arg0->unk_1C += arg0->unk_1C / 11;
-            if (arg0->unk_1C >= 0xB6) {
-                arg0->unk_04++;
-                arg0->unk_1C = 0;
+            menuLadyObj->unk_1C += menuLadyObj->unk_1C / 11;
+            if (menuLadyObj->unk_1C >= 0xB6) {
+                menuLadyObj->unk_04++;
+                menuLadyObj->unk_1C = 0;
             }
             break;
         case 3:
-            if (++arg0->unk_1C >= 0x12) {
-                arg0->unk_04++;
-                arg0->unk_1C = 0;
+            if (++menuLadyObj->unk_1C >= 0x12) {
+                menuLadyObj->unk_04++;
+                menuLadyObj->unk_1C = 0;
                 Credits_ObjectInit(OBJECT_CREDITS_SEE_YOU_AGAIN, 0x80, 0x40, 8);
                 func_800BA8D8(0x2B);
             }
@@ -1744,20 +1670,20 @@ void func_i6_8011B6A0(Object* arg0) {
     }
 }
 
-void func_i6_8011B7B0(Object* arg0) {
+void Credits_SeeYouAgainUpdate(Object* seeYouAgainObj) {
 
-    switch (arg0->unk_04) {
+    switch (seeYouAgainObj->unk_04) {
         case 0:
-            if (++arg0->unk_1C >= 0xAF) {
-                arg0->unk_04++;
-                arg0->unk_1C = 0;
+            if (++seeYouAgainObj->unk_1C >= 175) {
+                seeYouAgainObj->unk_04++;
+                seeYouAgainObj->unk_1C = 0;
                 Credits_ObjectInit(OBJECT_CREDITS_COPYRIGHT, 0x60, 0xCD, 8);
             }
             break;
         case 1:
-            if (++arg0->unk_1C >= 0x64) {
-                arg0->unk_04++;
-                arg0->unk_1C = 0;
+            if (++seeYouAgainObj->unk_1C >= 100) {
+                seeYouAgainObj->unk_04++;
+                seeYouAgainObj->unk_1C = 0;
             }
             break;
         case 2:
@@ -1765,98 +1691,98 @@ void func_i6_8011B7B0(Object* arg0) {
     }
 }
 
-void func_i6_8011B860(Object* arg0) {
+void Credits_IntroUpdate(Object* introObj) {
 
-    switch (++arg0->unk_18) {
+    switch (++introObj->unk_18) {
         case 30:
-            if (arg0->unk_04 == 0) {
-                arg0->unk_04 = 1;
+            if (introObj->unk_04 == 0) {
+                introObj->unk_04 = 1;
             }
             break;
         case 60:
-            if (arg0->unk_08 == 0) {
-                arg0->unk_08 = 1;
+            if (introObj->unk_08 == 0) {
+                introObj->unk_08 = 1;
             }
             break;
         case 370:
-            Credits_ObjectInit(OBJECT_CREDITS_START, 0, 0, 0);
-            Credits_ObjectInit(OBJECT_CREDITS_192, 0, 0, 4);
+            Credits_ObjectInit(OBJECT_CREDITS_SCRIPT, 0, 0, 0);
+            Credits_ObjectInit(OBJECT_CREDITS_CARS, 0, 0, 4);
             Credits_ObjectInit(OBJECT_CREDITS_PORTRAITS, 0, 0, 8);
-            arg0->cmdId = OBJECT_FREE;
+            introObj->cmdId = OBJECT_FREE;
             break;
         default:
-            if (arg0->unk_18 > 300) {
-                if (arg0->unk_08 == 2) {
-                    arg0->unk_08 = 3;
+            if (introObj->unk_18 > 300) {
+                if (introObj->unk_08 == 2) {
+                    introObj->unk_08 = 3;
                 }
-                if (arg0->unk_04 == 2) {
-                    arg0->unk_04 = 3;
+                if (introObj->unk_04 == 2) {
+                    introObj->unk_04 = 3;
                 }
             }
             break;
     }
 
-    switch (arg0->unk_04) {
+    switch (introObj->unk_04) {
         case 0:
-            arg0->unk_1C = 256;
+            introObj->unk_1C = 256;
             break;
         case 1:
-            if (arg0->unk_1C > 0) {
-                arg0->unk_1C -= 4;
+            if (introObj->unk_1C > 0) {
+                introObj->unk_1C -= 4;
             }
-            if (arg0->unk_1C <= 0) {
-                arg0->unk_1C = 0;
-                arg0->unk_04 = 2;
+            if (introObj->unk_1C <= 0) {
+                introObj->unk_1C = 0;
+                introObj->unk_04 = 2;
             }
             break;
         case 3:
-            if (arg0->unk_1C < 255) {
-                arg0->unk_1C += 4;
+            if (introObj->unk_1C < 255) {
+                introObj->unk_1C += 4;
             }
-            if (arg0->unk_1C >= 255) {
-                arg0->unk_1C = 255;
-                arg0->unk_04 = 4;
+            if (introObj->unk_1C >= 255) {
+                introObj->unk_1C = 255;
+                introObj->unk_04 = 4;
             }
             break;
         case 4:
-            arg0->unk_1C = 255;
+            introObj->unk_1C = 255;
             break;
         default:
-            arg0->unk_1C = 0;
+            introObj->unk_1C = 0;
             break;
     }
-    switch (arg0->unk_08) {
+    switch (introObj->unk_08) {
         case 0:
-            arg0->unk_20 = 256;
+            introObj->unk_20 = 256;
             break;
         case 1:
-            if (arg0->unk_20 > 0) {
-                arg0->unk_20 -= 4;
+            if (introObj->unk_20 > 0) {
+                introObj->unk_20 -= 4;
             }
-            if (arg0->unk_20 <= 0) {
-                arg0->unk_20 = 0;
-                arg0->unk_08 = 2;
+            if (introObj->unk_20 <= 0) {
+                introObj->unk_20 = 0;
+                introObj->unk_08 = 2;
             }
             break;
         case 3:
-            if (arg0->unk_20 < 255) {
-                arg0->unk_20 += 4;
+            if (introObj->unk_20 < 255) {
+                introObj->unk_20 += 4;
             }
-            if (arg0->unk_20 >= 256) {
-                arg0->unk_20 = 255;
-                arg0->unk_08 = 4;
+            if (introObj->unk_20 >= 256) {
+                introObj->unk_20 = 255;
+                introObj->unk_08 = 4;
             }
             break;
         case 4:
-            arg0->unk_20 = 255;
+            introObj->unk_20 = 255;
             break;
         default:
-            arg0->unk_20 = 0;
+            introObj->unk_20 = 0;
             break;
     }
 }
 
-void func_i6_8011BAB8(Object* arg0) {
+void Credits_CopyrightUpdate(Object* copyrightObj) {
 }
 
 void Credits_ObjectInit(s32 cmdId, s32 left, s32 top, s8 priority) {
@@ -1880,33 +1806,33 @@ void Credits_ObjectInit(s32 cmdId, s32 left, s32 top, s8 priority) {
     var_s0->left = left;
     var_s0->top = top;
     var_s0->priority = priority;
-    var_s0->unk_15 = 1;
+    var_s0->shouldDraw = true;
     var_s0->unk_1C = 0;
     var_s0->unk_20 = 0;
 
     switch (cmdId) {
-        case OBJECT_153:
-            func_i6_80117EE0(var_s0);
+        case OBJECT_CREDITS_OLD_CARS:
+            Credits_OldCarsInit(var_s0);
             break;
-        case OBJECT_CREDITS_192:
-            func_i6_80117F2C(var_s0);
+        case OBJECT_CREDITS_CARS:
+            Credits_CarsInit(var_s0);
             break;
         case OBJECT_CREDITS_MENU_LADY:
-            func_i6_80117FA8(var_s0);
+            Credits_MenuLadyInit(var_s0);
             break;
         case OBJECT_CREDITS_SEE_YOU_AGAIN:
-            func_i6_80117FE0();
+            Credits_SeeYouAgainInit();
             break;
-        case OBJECT_CREDITS_STAFF_INTRO:
-            func_i6_80118008(var_s0);
+        case OBJECT_CREDITS_INTRO:
+            Credits_IntroInit(var_s0);
             break;
         case OBJECT_CREDITS_COPYRIGHT:
-            func_i6_80118044();
+            Credits_CopyrightInit();
             break;
         case OBJECT_CREDITS_PORTRAITS:
-            func_i6_8011806C(var_s0);
+            Credits_PortraitsInit(var_s0);
             break;
-        case OBJECT_CREDITS_START:
+        case OBJECT_CREDITS_SCRIPT:
         case OBJECT_CREDITS_BACKGROUND:
         default:
             break;
@@ -1920,7 +1846,7 @@ Gfx* Credits_ObjectDraw(Gfx* gfx) {
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 32; j++) {
 
-            if ((gObjects[j].priority != i) || (gObjects[j].unk_15 == 0)) {
+            if ((gObjects[j].priority != i) || !gObjects[j].shouldDraw) {
                 continue;
             }
 
@@ -1935,29 +1861,29 @@ Gfx* Credits_ObjectDraw(Gfx* gfx) {
                 case OBJECT_150:
                     gfx = func_8007AC48(gfx, 0, 0, 0);
                     break;
-                case OBJECT_153:
-                    gfx = func_i6_801182DC(gfx, &gObjects[j]);
+                case OBJECT_CREDITS_OLD_CARS:
+                    gfx = Credits_OldCarsDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_BACKGROUND:
                     gfx = func_8007AC48(gfx, 0, 0, 0);
                     break;
-                case OBJECT_CREDITS_192:
-                    gfx = func_i6_80118354(gfx, &gObjects[j]);
+                case OBJECT_CREDITS_CARS:
+                    gfx = Credits_CarsDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_MENU_LADY:
-                    gfx = func_i6_80118ED4(gfx, &gObjects[j]);
+                    gfx = Credits_MenuLadyDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_SEE_YOU_AGAIN:
-                    gfx = func_i6_8011946C(gfx, &gObjects[j]);
+                    gfx = Credits_SeeYouAgainDraw(gfx, &gObjects[j]);
                     break;
-                case OBJECT_CREDITS_STAFF_INTRO:
-                    gfx = func_i6_80119908(gfx, &gObjects[j]);
+                case OBJECT_CREDITS_INTRO:
+                    gfx = Credits_IntroDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_COPYRIGHT:
-                    gfx = func_i6_8011A248(gfx, &gObjects[j]);
+                    gfx = Credits_CopyrightDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_PORTRAITS:
-                    gfx = func_i6_8011A59C(gfx, &gObjects[j]);
+                    gfx = Credits_PortraitsDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_ROLE_0:
                 case OBJECT_CREDITS_ROLE_1:
@@ -1977,7 +1903,7 @@ Gfx* Credits_ObjectDraw(Gfx* gfx) {
                 case OBJECT_CREDITS_ROLE_15:
                 case OBJECT_CREDITS_ROLE_16:
                 case OBJECT_CREDITS_ROLE_17:
-                    gfx = func_i6_8011A6CC(gfx, &gObjects[j]);
+                    gfx = Credits_StartRolesDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_ROLE_18:
                 case OBJECT_CREDITS_ROLE_19:
@@ -1992,7 +1918,7 @@ Gfx* Credits_ObjectDraw(Gfx* gfx) {
                 case OBJECT_CREDITS_ROLE_28:
                 case OBJECT_CREDITS_ROLE_29:
                 case OBJECT_CREDITS_ROLE_30:
-                    gfx = func_i6_8011A890(gfx, &gObjects[j]);
+                    gfx = Credits_EndRolesDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_NAME_0:
                 case OBJECT_CREDITS_NAME_1:
@@ -2012,7 +1938,7 @@ Gfx* Credits_ObjectDraw(Gfx* gfx) {
                 case OBJECT_CREDITS_NAME_15:
                 case OBJECT_CREDITS_NAME_16:
                 case OBJECT_CREDITS_NAME_17:
-                    gfx = func_i6_8011A944(gfx, &gObjects[j]);
+                    gfx = Credits_StartNameDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_NAME_18:
                 case OBJECT_CREDITS_NAME_19:
@@ -2032,7 +1958,7 @@ Gfx* Credits_ObjectDraw(Gfx* gfx) {
                 case OBJECT_CREDITS_NAME_33:
                 case OBJECT_CREDITS_NAME_34:
                 case OBJECT_CREDITS_NAME_35:
-                    gfx = func_i6_8011AAC8(gfx, &gObjects[j]);
+                    gfx = Credits_EndNameDraw(gfx, &gObjects[j]);
                     break;
             }
         }
@@ -2048,17 +1974,17 @@ void Credits_ObjectUpdate(void) {
         switch (gObjects[i].cmdId) {
             case OBJECT_FREE:
                 break;
-            case OBJECT_153:
-                func_i6_8011AB1C(&gObjects[i]);
+            case OBJECT_CREDITS_OLD_CARS:
+                Credits_OldCarsUpdate(&gObjects[i]);
                 break;
-            case OBJECT_CREDITS_START:
-                func_i6_8011B0CC(&gObjects[i]);
+            case OBJECT_CREDITS_SCRIPT:
+                Credits_ScriptUpdate(&gObjects[i]);
                 break;
-            case OBJECT_CREDITS_192:
-                func_i6_8011AC38(&gObjects[i]);
+            case OBJECT_CREDITS_CARS:
+                Credits_CarsUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_PORTRAITS:
-                func_i6_8011AEB4(&gObjects[i]);
+                Credits_PortraitsUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_ROLE_0:
             case OBJECT_CREDITS_ROLE_1:
@@ -2078,7 +2004,7 @@ void Credits_ObjectUpdate(void) {
             case OBJECT_CREDITS_ROLE_15:
             case OBJECT_CREDITS_ROLE_16:
             case OBJECT_CREDITS_ROLE_17:
-                func_i6_8011B340(&gObjects[i]);
+                Credits_StartRoleUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_ROLE_18:
             case OBJECT_CREDITS_ROLE_19:
@@ -2093,7 +2019,7 @@ void Credits_ObjectUpdate(void) {
             case OBJECT_CREDITS_ROLE_28:
             case OBJECT_CREDITS_ROLE_29:
             case OBJECT_CREDITS_ROLE_30:
-                func_i6_8011B50C(&gObjects[i]);
+                Credits_EndRoleUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_NAME_0:
             case OBJECT_CREDITS_NAME_1:
@@ -2113,7 +2039,7 @@ void Credits_ObjectUpdate(void) {
             case OBJECT_CREDITS_NAME_15:
             case OBJECT_CREDITS_NAME_16:
             case OBJECT_CREDITS_NAME_17:
-                func_i6_8011B544(&gObjects[i]);
+                Credits_StartNameUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_NAME_18:
             case OBJECT_CREDITS_NAME_19:
@@ -2133,19 +2059,19 @@ void Credits_ObjectUpdate(void) {
             case OBJECT_CREDITS_NAME_33:
             case OBJECT_CREDITS_NAME_34:
             case OBJECT_CREDITS_NAME_35:
-                func_i6_8011B668(&gObjects[i]);
+                Credits_EndNameUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_MENU_LADY:
-                func_i6_8011B6A0(&gObjects[i]);
+                Credits_MenuLadyUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_SEE_YOU_AGAIN:
-                func_i6_8011B7B0(&gObjects[i]);
+                Credits_SeeYouAgainUpdate(&gObjects[i]);
                 break;
-            case OBJECT_CREDITS_STAFF_INTRO:
-                func_i6_8011B860(&gObjects[i]);
+            case OBJECT_CREDITS_INTRO:
+                Credits_IntroUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_COPYRIGHT:
-                func_i6_8011BAB8(&gObjects[i]);
+                Credits_CopyrightUpdate(&gObjects[i]);
                 break;
         }
     }
@@ -2157,7 +2083,7 @@ void Credits_Init(void) {
     D_800CCFE8 = 3;
     Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
     Credits_ObjectInit(OBJECT_CREDITS_BACKGROUND, 0, 0, 1);
-    Credits_ObjectInit(OBJECT_CREDITS_STAFF_INTRO, 0, 0, 8);
+    Credits_ObjectInit(OBJECT_CREDITS_INTRO, 0, 0, 8);
 }
 
 extern s32 gGameMode;
@@ -2180,464 +2106,5 @@ Gfx* Credits_Draw(Gfx* gfx) {
     Credits_ObjectUpdate();
     gfx = Credits_ObjectDraw(gfx);
     func_800790D4();
-    return gfx;
-}
-
-extern s16 D_800CCFE8;
-extern s8 D_800CD3C4;
-
-void func_i6_8011C404(void);
-
-void OptionsMenu_Init(void) {
-    s32 i;
-    OptionsInfo* option;
-
-    D_800CCFE8 = 3;
-    Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
-    func_80078104(aMenuTextTLUT, 0x40, 0, 0, false);
-    func_80078104(aOptionsFalconHelmetTex, 0x2000, 0, 1, false);
-    func_80078104(aOptionsTex, 0x900, 0, 1, false);
-    func_80078104(aOptionsEraseAllSavedDataTex, 0x1000, 0, 1, false);
-    func_80078104(aMenuWithoutTex, 0x200, 0, 1, false);
-    func_80078104(aMenuWithTex, 0x200, 0, 1, false);
-    func_80078104(aMenuPlusOneTex, 0x200, 0, 1, false);
-    func_80078104(aMenuPlusTwoTex, 0x200, 0, 1, false);
-    func_80078104(aMenuStereoTex, 0x400, 0, 1, false);
-    func_80078104(aMenuMonoTex, 0x400, 0, 1, false);
-    func_80078104(aMenuLeftArrowTex, 0x100, 0, 1, false);
-    func_80078104(aMenuRightArrowTex, 0x100, 0, 1, false);
-    func_80078104(aMenuNoTex, 0x200, 0, 1, false);
-    func_80078104(aMenuYesTex, 0x200, 0, 1, false);
-
-    for (i = 0, option = gOptionsInfo; i < OPTIONS_MAX; i++, option++) {
-        func_80078104(option->optionTextureInfo.textureOffset,
-                      option->optionTextureInfo.width * option->optionTextureInfo.height, 0, 1, 0);
-    }
-
-    func_80078104(aTitleBackgroundMainTex, 0x23A00, 0, 1, false);
-    func_8007A828(func_800783AC(aTitleBackgroundMainTex), 0x23A00, 0xC3, 0x5F, 0x5F);
-
-    if (D_800CD3C4 == 1) {
-        D_i6_801247AC = func_80078104(aTitleBackgroundComicTex, 0x25800, 0, 1, false);
-        func_8007A828(D_i6_801247AC, 0x25800, 0xC3, 0x5F, 0x5F);
-    } else if (D_800CD3C4 == 2) {
-        D_i6_801247AC = func_80078104(aTitleBackgroundFalconTex, 0x25800, 0, 1, false);
-        func_8007A828(D_i6_801247AC, 0x25800, 0xC3, 0x5F, 0x5F);
-    }
-    if (D_800CD3C4 != 0) {
-        D_i6_801247A8 = 1;
-        // clang-format off
-        for (i = 0; i < ARRAY_COUNT(D_i6_80124620); i++) { \
-            D_i6_80124620[i] = 255;
-        }
-        // clang-format on
-    } else {
-        D_i6_801247A8 = 0;
-    }
-    sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_CLOSED;
-    sOptionsDataAlreadyCleared = false;
-    D_i6_801247B0 = 0;
-    gOptionsCurrentRow = 0;
-    func_i6_8011C404();
-    func_80080A40(&D_i6_801247A4);
-    func_80080A48();
-    sSaveContextPtr = &gSaveContext;
-}
-
-extern s16 gSettingVsHandicap;
-extern s16 gSettingVsCom;
-extern s32 gSettingVsSlot;
-extern s16 gSettingSoundMode;
-
-void func_i6_8011C404(void) {
-    s32 state;
-    s32 i;
-    OptionsInfo* option;
-
-    for (i = 0, option = gOptionsInfo; i < 7; i++, option++) {
-        switch (option->row) {
-            case OPTIONS_VS_COM:
-                if (gSettingVsCom == 0) {
-                    state = 1;
-                } else {
-                    state = 0;
-                }
-                break;
-            case OPTIONS_VS_SLOT:
-                if (gSettingVsSlot == 0) {
-                    state = 1;
-                } else {
-                    state = 0;
-                }
-                break;
-            case OPTIONS_VS_HANDICAP:
-                if (gSettingVsHandicap == 0) {
-                    state = 0;
-                } else if (gSettingVsHandicap == 1) {
-                    state = 1;
-                } else {
-                    state = 2;
-                }
-                break;
-            case OPTIONS_SOUND_MODE:
-                if (gSettingSoundMode == 0) {
-                    state = 0;
-                } else {
-                    state = 1;
-                }
-                break;
-            default:
-                state = 0;
-                break;
-        }
-
-        sOptionsSelectionState[i] = state;
-    }
-}
-
-bool func_i6_8011C788(void);
-void func_i6_8011CBB4(void);
-void func_i6_8011D394(void);
-extern s16 D_800CD048;
-extern s32 D_i2_80106DA4;
-
-s32 OptionsMenu_Update(void) {
-    Controller_SetGlobalInputs(&gSharedController);
-    func_80080C0C();
-    func_i6_8011D394();
-    if (!sOptionsDataAlreadyCleared) {
-        switch (sOptionsDataClearMenu) {
-            case OPTIONS_DATA_CLEAR_MENU_CLOSED:
-                if (D_i2_80106DA4 == 0 && func_i6_8011C788()) {
-                    sOptionsDataAlreadyCleared = true;
-                    D_800CD048 = 0xE;
-                }
-                break;
-            case OPTIONS_DATA_CLEAR_MENU_OPEN:
-                func_i6_8011CBB4();
-                break;
-        }
-    }
-    return GAMEMODE_FLX_OPTIONS_MENU;
-}
-
-extern u16 gInputButtonPressed;
-Gfx* func_i6_8011D168(Gfx*, s32, s32);
-
-bool func_i6_8011C788(void) {
-    s32 lastRow;
-    s32 lastSelectionState;
-    bool updateSettings;
-    OptionsInfo* option;
-
-    if (func_8008108C(D_i6_801247A4, 0)) {
-        return false;
-    }
-    lastRow = gOptionsCurrentRow;
-    if (gInputPressed & BTN_UP) {
-        if (--gOptionsCurrentRow < OPTIONS_VS_COM) {
-            gOptionsCurrentRow = OPTIONS_EXIT;
-        }
-        while (!(gOptionsInfo[gOptionsCurrentRow].flags & OPTIONS_SHOWN)) {
-            if (--gOptionsCurrentRow < OPTIONS_VS_COM) {
-                gOptionsCurrentRow = OPTIONS_EXIT;
-            }
-        }
-    }
-    if (gInputPressed & BTN_DOWN) {
-        if (++gOptionsCurrentRow > OPTIONS_EXIT) {
-            gOptionsCurrentRow = OPTIONS_VS_COM;
-        }
-        while (!(gOptionsInfo[gOptionsCurrentRow].flags & OPTIONS_SHOWN)) {
-            if (++gOptionsCurrentRow > OPTIONS_EXIT) {
-                gOptionsCurrentRow = OPTIONS_VS_COM;
-            }
-        }
-    }
-    if (lastRow != gOptionsCurrentRow) {
-        func_800BA8D8(0x1E);
-        return false;
-    }
-    option = &gOptionsInfo[gOptionsCurrentRow];
-    updateSettings = false;
-    if (!(option->flags & OPTIONS_REQUIRE_SELECTING)) {
-        lastSelectionState = sOptionsSelectionState[gOptionsCurrentRow];
-        if (gInputButtonPressed & BTN_LEFT) {
-            sOptionsSelectionState[gOptionsCurrentRow]--;
-            if (sOptionsSelectionState[gOptionsCurrentRow] < 0) {
-                sOptionsSelectionState[gOptionsCurrentRow] = option->totalSelectionStates - 1;
-            }
-        }
-        if (gInputButtonPressed & BTN_RIGHT) {
-            sOptionsSelectionState[gOptionsCurrentRow]++;
-            if (sOptionsSelectionState[gOptionsCurrentRow] > option->totalSelectionStates - 1) {
-                sOptionsSelectionState[gOptionsCurrentRow] = 0;
-            }
-        }
-        if (lastSelectionState != sOptionsSelectionState[gOptionsCurrentRow]) {
-            updateSettings = true;
-            func_800BA8D8(0x21);
-        }
-    }
-    if (gInputButtonPressed & BTN_B) {
-        func_800BA8D8(0x10);
-        return true;
-    }
-
-    switch (option->row) {
-        case OPTIONS_VS_COM:
-            if (updateSettings) {
-                if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
-                    gSettingVsCom = 0;
-                } else {
-                    gSettingVsCom = 1;
-                }
-            }
-            break;
-        case OPTIONS_VS_SLOT:
-            if (updateSettings) {
-                if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
-                    gSettingVsSlot = 0;
-                } else {
-                    gSettingVsSlot = 1;
-                }
-            }
-            break;
-        case OPTIONS_VS_HANDICAP:
-            if (updateSettings) {
-                if (sOptionsSelectionState[gOptionsCurrentRow] == 0) {
-                    gSettingVsHandicap = 0;
-                } else if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
-                    gSettingVsHandicap = 1;
-                } else {
-                    gSettingVsHandicap = 2;
-                }
-            }
-            break;
-        case OPTIONS_SOUND_MODE:
-            if (updateSettings) {
-                if (sOptionsSelectionState[gOptionsCurrentRow] == 0) {
-                    gSettingSoundMode = 0;
-                    Audio_SetSoundMode(SOUNDMODE_SURROUND); // Option says stereo, but sets surround anyway?
-                } else {
-                    gSettingSoundMode = 1;
-                    Audio_SetSoundMode(SOUNDMODE_MONO);
-                }
-            }
-            break;
-        case OPTIONS_DATA_CLEAR:
-            if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                D_i6_801247A4 =
-                    func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, GPACK_RGBA5551(255, 0, 0, 1), func_i6_8011D168);
-                if (D_i6_801247A4 != NULL) {
-                    sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_OPEN;
-                    sOptionsSelectionState[gOptionsCurrentRow] = 0;
-                    func_800BA8D8(0x21);
-                }
-            }
-            break;
-        case OPTIONS_EXIT:
-            if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x10);
-                return true;
-            }
-            break;
-        default:
-            break;
-    }
-
-    if (updateSettings) {
-        Save_SaveSettingsProfiles();
-    }
-    return false;
-}
-
-extern s32 D_800E5F00[];
-extern s32 D_800E5F10[];
-
-void func_i6_8011CBB4(void) {
-    s32 lastSelectionState;
-    s32 pad;
-    s32 i;
-    bool updateSettings;
-
-    if (func_8008108C(D_i6_801247A4, 1) != 0) {
-        lastSelectionState = sOptionsSelectionState[gOptionsCurrentRow];
-        if (gInputButtonPressed & BTN_LEFT) {
-            if (--sOptionsSelectionState[gOptionsCurrentRow] < 0) {
-                sOptionsSelectionState[gOptionsCurrentRow] = 1;
-            }
-        }
-        if (gInputButtonPressed & BTN_RIGHT) {
-            if (++sOptionsSelectionState[gOptionsCurrentRow] > 1) {
-                sOptionsSelectionState[gOptionsCurrentRow] = 0;
-            }
-        }
-        if (lastSelectionState != sOptionsSelectionState[gOptionsCurrentRow]) {
-            func_800BA8D8(0x1E);
-        }
-        updateSettings = false;
-        if (gInputButtonPressed & (BTN_A | BTN_START)) {
-            updateSettings = true;
-            if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
-                Save_Init(sSaveContextPtr, 1);
-                func_i6_8011C404();
-                for (i = 0; i < 4; i++) {
-                    D_800E5F00[i] = D_800E5F10[i] = 0;
-                }
-                func_8007E398();
-                func_800BA8D8(5);
-            } else {
-                func_800BA8D8(0x10);
-            }
-        } else if (gInputButtonPressed & BTN_B) {
-            updateSettings = true;
-            func_800BA8D8(0x10);
-        }
-        if (updateSettings) {
-            sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_CLOSED;
-            func_80080BDC(D_i6_801247A4);
-        }
-    }
-}
-
-Gfx* func_i6_8011D8C8(Gfx*);
-
-Gfx* OptionsMenu_Draw(Gfx* gfx) {
-    s32 temp_s4;
-    s32 var_s5;
-    s32 i;
-    s32 var_s7;
-    OptionsInfo* option;
-    OptionsTextureInfo* selectionStateTextureInfo;
-    OptionsTextureInfo* optionTextureInfo;
-
-    gfx = Object_UpdateAndDrawAll(gfx);
-    if (D_i6_801247A8 != 1) {
-        gfx = func_8007B14C(gfx, func_800783AC(aTitleBackgroundMainTex), 8, 0, 304, 240, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0,
-                            0, 0, 0);
-    }
-    if (D_i6_801247A8 != 0) {
-        gfx = func_i6_8011D8C8(gfx);
-    }
-    gfx = func_8007B14C(gfx, func_800783AC(aOptionsFalconHelmetTex), 50, 4, 64, 64, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
-                        1, 0);
-    gfx = func_8007B14C(gfx, func_800783AC(aOptionsFalconHelmetTex), 206, 4, 64, 64, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
-                        0, 0);
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_8007E410(gfx, func_800783AC(aOptionsTex), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1, 112, 22, 96, 24,
-                        3);
-
-    var_s5 = 60;
-
-    if (D_i6_801247B0 != 0) {
-        var_s7 = 0x17;
-    } else {
-        var_s7 = 0x1B;
-    }
-
-    for (i = 0, option = gOptionsInfo; i < 7; i++, option++) {
-        if (!(option->flags & OPTIONS_SHOWN)) {
-            continue;
-        }
-
-        gDPPipeSync(gfx++);
-        if (gOptionsCurrentRow != i) {
-            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-        } else {
-            gfx = func_8007DB28(gfx, 0);
-        }
-        optionTextureInfo = &option->optionTextureInfo;
-        gfx = func_8007E410(gfx, func_800783AC(optionTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
-                            option->unk_0C + 0x1E, var_s5, optionTextureInfo->width, optionTextureInfo->height, 0);
-
-        if (!(option->flags & OPTIONS_REQUIRE_SELECTING)) {
-            gfx =
-                func_8007E410(gfx, func_800783AC(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1, 0xBE, var_s5, 0x10, 0x10, 0);
-            gfx = func_8007E410(gfx, func_800783AC(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1, 0x109, var_s5, 0x10, 0x10,
-                                0);
-            selectionStateTextureInfo = &option->selectionStateTextureInfo[sOptionsSelectionState[i]];
-            temp_s4 = ((60 - selectionStateTextureInfo->width) / 2) + option->unk_10;
-            gfx = func_8007E410(gfx, func_800783AC(selectionStateTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
-                                temp_s4 + 0xD0, var_s5, selectionStateTextureInfo->width,
-                                selectionStateTextureInfo->height, 0);
-        }
-        var_s5 += var_s7;
-    }
-
-    return func_80080E90(gfx);
-}
-
-Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
-    s32 sp54;
-    OptionsTextureInfo* dataClearTextureInfo;
-
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-
-    gfx = func_8007E410(gfx, func_800783AC(aOptionsEraseAllSavedDataTex), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1,
-                        arg1 + 0xC, arg2 + 0xA, 128, 32, 3);
-
-    gDPPipeSync(gfx++);
-    gfx = func_8007DB28(gfx, 0);
-    gfx =
-        func_8007E410(gfx, func_800783AC(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1, arg1 + 0x18, arg2 + 0x32, 16, 16, 0);
-    gfx = func_8007E410(gfx, func_800783AC(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1, arg1 + 0x63, arg2 + 0x32, 16, 16,
-                        0);
-    dataClearTextureInfo = &gOptionsAllDataClearSelection[sOptionsSelectionState[gOptionsCurrentRow]];
-    sp54 = (60 - dataClearTextureInfo->width) / 2;
-    return func_8007E410(gfx, func_800783AC(dataClearTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
-                         arg1 + sp54 + 0x2A, arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);
-}
-
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/E2000/func_i6_8011D394.s")
-
-extern GfxPool D_1000000;
-extern Mtx D_2000000[];
-extern Gfx D_8014810[];
-
-Gfx* func_i6_8011D8C8(Gfx* gfx) {
-    s32 pad[27];
-    s32 sp40;
-    s32 lrt;
-    s32 uls;
-    s32 lrs;
-    s32 ult;
-    s32 var_s3;
-    s32 var_s2;
-    s32 var_s4;
-    s32 var_s5;
-    s32 var_t5;
-
-    if ((D_i6_801247A8 == 1) || (D_i6_801247A8 == 2)) {
-        gfx = func_8006A00C(gfx, 0);
-        gSPDisplayList(gfx++, D_8014810);
-        gDPSetTextureFilter(gfx++, G_TF_POINT);
-        gDPSetRenderMode(gfx++, G_RM_XLU_SURF, G_RM_NOOP2);
-        gDPSetCombineMode(gfx++, G_CC_DECALRGB, G_CC_DECALRGB);
-        gSPMatrix(gfx++, D_1000000.unk_2B248, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-        gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-
-        for (sp40 = 0, var_s5 = 0x10, var_s4 = -1; var_s4 < SCREEN_HEIGHT - 1; var_s4 += 16, sp40 += 10, var_s5 += 16) {
-
-            var_s3 = sp40 << 2;
-
-            for (var_s2 = 32, var_t5 = -1; var_t5 < SCREEN_WIDTH - 1; var_t5 += 32, var_s3 += 4, var_s2 += 32) {
-                uls = MAX(var_t5, 0);
-                lrs = MIN(var_s2, SCREEN_WIDTH - 1);
-                ult = MAX(var_s4, 0);
-                lrt = MIN(var_s5, SCREEN_HEIGHT - 1);
-
-                gSPVertex(gfx++, (u8*) D_i6_80124618 + (var_s3 << 4), 4, 0);
-                gDPPipeSync(gfx++);
-                gDPLoadTextureTile(gfx++, D_i6_801247AC, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
-                                   SCREEN_HEIGHT /* unused by macro */, uls, ult, lrs, lrt, 0,
-                                   G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
-                                   G_TX_NOLOD, G_TX_NOLOD);
-                gSP2Triangles(gfx++, 0, 3, 1, 0, 0, 2, 3, 0);
-            }
-        }
-    }
     return gfx;
 }

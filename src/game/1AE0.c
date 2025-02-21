@@ -234,8 +234,8 @@ void Game_ThreadEntry(void* entry) {
     D_800DCD28 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i3));
     D_800DCD2C = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i4));
     D_800DCD30 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i4));
-    D_800DCD34 = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i5));
-    D_800DCD38 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i5));
+    D_800DCD34 = osVirtualToPhysical(SEGMENT_VRAM_START(course_select));
+    D_800DCD38 = osVirtualToPhysical(SEGMENT_VRAM_END(course_select));
     D_800DCD3C = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i6));
     D_800DCD40 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i6));
     D_800DCD44 = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i7));

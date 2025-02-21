@@ -11,9 +11,9 @@ void func_i5_801164A8(s32 arg0);
 void func_i5_80116678(s32 cupType);
 
 extern Vp D_i5_80118FF0[2][6];
-extern s32 D_i5_801190B0;
+extern s32 gCourseModelCupType;
 extern s32 D_i5_801190B4;
-extern s32 D_i5_801190B8;
+extern s32 gCourseModelCupCourseNo;
 extern s8 gCupSelectOption;
 
 #endif // OVL_I5_H

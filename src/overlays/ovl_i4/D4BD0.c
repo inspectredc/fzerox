@@ -2,6 +2,7 @@
 #include "fzx_game.h"
 #include "fzx_racer.h"
 #include "fzx_object.h"
+#include "src/overlays/ovl_i2/ovl_i2.h"
 #include "ovl_i4.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
@@ -1198,15 +1199,15 @@ Gfx* MachineSelect_StatsDraw(Gfx* gfx, Object* arg1) {
         for (i = 0; i < 3; i++) {
             gfx = func_80078EA0(gfx, sMachineStatCompTexInfos[i], temp_fp, (temp_t0 - 7) + i * 20, 0, 0, 0, 1.0f, 1.0f);
             temp_s0 = sMachineStatValues[temp_a3[i]];
-            gfx = func_i2_80106450(gfx, temp_fp + 5, (temp_t0 + 10) + i * 20, temp_s0, 0, 2, 0);
+            gfx = Font_DrawString(gfx, temp_fp + 5, (temp_t0 + 10) + i * 20, temp_s0, 0, FONT_SET_2, 0);
         }
     } else {
         for (i = 0; i < 3; i++) {
             gfx = func_80078EA0(gfx, sMachineStatCompTexInfos[i], temp_fp - 0x14, (temp_t0 - 7) + i * 20, 0, 0, 0, 1.0f,
                                 1.0f);
             temp_s0 = sMachineStatValues[temp_a3[i]];
-            gfx = func_i2_80106450(gfx, (temp_fp - func_i2_801062E4(temp_s0, 2, 0)) - 5, (temp_t0 + 10) + i * 20,
-                                   temp_s0, 0, 2, 0);
+            gfx = Font_DrawString(gfx, (temp_fp - Font_GetStringWidth(temp_s0, FONT_SET_2, 0)) - 5,
+                                  (temp_t0 + 10) + i * 20, temp_s0, 0, FONT_SET_2, 0);
         }
     }
     return gfx;
@@ -1319,20 +1320,21 @@ Gfx* MachineSelect_OkDraw(Gfx* gfx, Object* arg1) {
 
 extern const char* gMachineNames[];
 
-Gfx* func_i4_801187C0(Gfx* gfx) {
+Gfx* MachineSettings_NameDraw(Gfx* gfx) {
     s32 i;
     const char* temp_s1;
     const s32* var_s0;
 
     if (gNumPlayers == 1) {
         temp_s1 = gMachineNames[func_i4_80116E5C(gRacers[0].character)];
-        gfx = func_i2_80106450(gfx, 0x122 - func_i2_801062E4(temp_s1, 1, 0), 0x22, temp_s1, 0, 1, 0);
+        gfx =
+            Font_DrawString(gfx, 0x122 - Font_GetStringWidth(temp_s1, FONT_SET_1, 0), 0x22, temp_s1, 0, FONT_SET_1, 0);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             var_s0 = &D_i4_8011D6C4[i * 2];
             temp_s1 = gMachineNames[func_i4_80116E5C(gRacers[i].character)];
-            gfx = func_i2_80106450(gfx, (var_s0[0] - func_i2_801062E4(temp_s1, 2, 0)) + 0x82, var_s0[1] + 0xA, temp_s1,
-                                   0, 2, 0);
+            gfx = Font_DrawString(gfx, (var_s0[0] - Font_GetStringWidth(temp_s1, FONT_SET_2, 0)) + 0x82,
+                                  var_s0[1] + 0xA, temp_s1, 0, FONT_SET_2, 0);
         }
     }
     return gfx;
@@ -1418,7 +1420,7 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* arg1) {
     if (gNumPlayers == 1) {
         temp_s4 = D_800F80C8[gRacers[0].character].unk_14;
         gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
-        gfx = func_i2_DrawMachineWeight(gfx, arg1->left + 0x66, arg1->top + 0x17, temp_s4);
+        gfx = Font_DrawMachineWeight(gfx, arg1->left + 0x66, arg1->top + 0x17, temp_s4);
 
         switch (gMachineSettingsState) {
             case MACHINE_SETTINGS_ACTIVE:
@@ -1439,7 +1441,7 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* arg1) {
             temp_s1 = D_i4_8011D6C4[i * 2 + 1];
             gfx = func_80078EA0(gfx, sMachineInfoGraphSmallCompTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA, 0, 0, 0, 1.0f,
                                 1.0f);
-            gfx = func_i2_DrawMachineWeight(gfx, temp_s0 + 0x6E, temp_s1 + 0x1C, temp_s4);
+            gfx = Font_DrawMachineWeight(gfx, temp_s0 + 0x6E, temp_s1 + 0x1C, temp_s4);
             if (gPlayerSelectionLock[i] == SELECTION_FREE) {
                 gfx = func_8007DB28(gfx, 0);
             } else {
@@ -1465,7 +1467,7 @@ Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* arg1) {
 
         for (i = 0; i < 3; i++) {
             temp = D_800F80C8[gRacers[0].character].machineStats;
-            gfx = func_i2_DrawMachineStatValue(gfx, arg1->left + 0x69, arg1->top + i * 23 + 3, temp[i]);
+            gfx = Font_DrawMachineStatValue(gfx, arg1->left + 0x69, arg1->top + i * 23 + 3, temp[i]);
         }
     } else {
         for (i = 0; i < gNumPlayers; i++) {
@@ -1477,8 +1479,8 @@ Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* arg1) {
 
             for (j = 0; j < 3; j++) {
                 temp = D_800F80C8[gRacers[i].character].machineStats;
-                gfx = func_i2_80106450(gfx, leftOffset + 0x6B, topOffset + 0x43 + j * 14, sMachineStatValues[temp[j]],
-                                       0, 2, 0);
+                gfx = Font_DrawString(gfx, leftOffset + 0x6B, topOffset + 0x43 + j * 14, sMachineStatValues[temp[j]], 0,
+                                      FONT_SET_2, 0);
             }
         }
     }
@@ -1500,7 +1502,7 @@ Gfx* func_i4_801193B8(Gfx* gfx, Object* arg1) {
         for (j = 0; j < 3; j++) {
             temp = D_800F80C8[gRacers[i].character].machineStats;
             temp2 = sMachineStatValues[temp[j]];
-            gfx = func_i2_80106450(gfx, var_s3 + 0x6B, var_s1 + 0x43 + j * 14, temp2, 0, 2, 0);
+            gfx = Font_DrawString(gfx, var_s3 + 0x6B, var_s1 + 0x43 + j * 14, temp2, 0, FONT_SET_2, 0);
         }
     }
     return gfx;
@@ -1644,9 +1646,10 @@ Gfx* MachineSelect_NameDraw(Gfx* gfx, Object* arg1) {
 
     machineName = gMachineNames[func_i4_80116E5C(gRacers[0].character)];
 
-    gfx = func_i2_80106450(gfx, 160 - (func_i2_801062E4(machineName, 2, 0) / 2), 218, machineName, 0, 2, 0);
-    gfx = func_i2_DrawMachineWeightSmall(gfx, 252, 221, D_800F80C8[func_8007E10C(sMachineSelectIndex[0])].unk_14);
-    return func_i2_80106450(gfx, 252, 221, "$", 0, 2, 0);
+    gfx = Font_DrawString(gfx, 160 - (Font_GetStringWidth(machineName, FONT_SET_2, 0) / 2), 218, machineName, 0,
+                          FONT_SET_2, 0);
+    gfx = Font_DrawMachineWeightSmall(gfx, 252, 221, D_800F80C8[func_8007E10C(sMachineSelectIndex[0])].unk_14);
+    return Font_DrawString(gfx, 252, 221, "$", 0, FONT_SET_2, 0);
 }
 
 Gfx* MachineSettings_OkDraw(Gfx* gfx, Object* arg1) {

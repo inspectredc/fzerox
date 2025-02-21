@@ -1,14 +1,15 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_object.h"
-#include "ovl_i5.h"
+#include "src/overlays/ovl_i2/ovl_i2.h"
+#include "course_select.h"
 #include "assets/segment_2B9EA0.h"
 
 /* potentially in a shared data file */
 Vp D_i5_80118FF0[2][6] = { 0 };
-s32 D_i5_801190B0 = 0;
+s32 gCourseModelCupType = 0;
 s32 D_i5_801190B4 = 0;
-s32 D_i5_801190B8 = 0;
+s32 gCourseModelCupCourseNo = 0;
 UNUSED s32 D_i5_801190BC = 0;
 
 s32 D_i5_801190C0 = 0;
@@ -512,20 +513,20 @@ Gfx* CourseSelect_Draw(Gfx* gfx) {
 
 extern s8 D_800CD3C4;
 
-void func_i5_80117684(Object* arg0) {
+void CourseSelect_BackgroundInit(Object* backgroundObj) {
     size_t var_a1;
     unk_80077D50* sp20;
 
-    arg0->unk_04 = D_800CD3C4;
-    sp20 = sTitleBackgroundCompTexInfos[arg0->unk_04];
+    backgroundObj->unk_04 = D_800CD3C4;
+    sp20 = sTitleBackgroundCompTexInfos[backgroundObj->unk_04];
     func_80077D50(sp20, 0);
 
-    if (arg0->unk_04 == 0) {
-        arg0->left = 8;
+    if (backgroundObj->unk_04 == 0) {
+        backgroundObj->left = 8;
     }
     if (gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         func_80077D50(sOptionsFalconHelmetCompTexInfo, 0);
-        if (arg0->unk_04 == 0) {
+        if (backgroundObj->unk_04 == 0) {
             var_a1 = 0x23A00;
         } else {
             var_a1 = 0x25800;
@@ -535,7 +536,7 @@ void func_i5_80117684(Object* arg0) {
     }
 }
 
-void func_i5_80117758(void) {
+void CourseSelect_ModelInit(void) {
     s32 i;
 
     func_i5_80115DF0();
@@ -544,18 +545,18 @@ void func_i5_80117758(void) {
         D_i5_801190B4 -= 2;
 
         for (i = 0; i < 6; i++) {
-            func_i5_80116678(D_i5_801190B0);
+            func_i5_80116678(gCourseModelCupType);
             D_i5_801190B4--;
         }
     }
 }
 
-void func_i5_801177EC(Object* arg0) {
+void CourseSelect_CupInit(Object* cupObj) {
     s32 cupType;
     s32 var_v0;
     s32 i;
 
-    cupType = arg0->cmdId - OBJECT_COURSE_SELECT_CUP_0;
+    cupType = cupObj->cmdId - OBJECT_COURSE_SELECT_CUP_0;
     if (cupType == JOKER_CUP || cupType == X_CUP) {
         var_v0 = D_800CD3C0;
         if ((var_v0 >= 3) || (gSettingEverythingUnlocked != 0)) {
@@ -572,48 +573,48 @@ void func_i5_801177EC(Object* arg0) {
     }
 
     if (D_800CD044 == 0x21) {
-        arg0->unk_1C = 0xC;
+        cupObj->unk_1C = 0xC;
     }
-    arg0->left = 0x80;
-    arg0->top = 0x55;
+    cupObj->left = 0x80;
+    cupObj->top = 0x55;
 }
 
-void func_i5_801178D8(Object* arg0) {
+void CourseSelect_HeaderInit(Object* headerObj) {
     if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         func_80077D50(sSelectCourseCompTexInfo, 0);
-        arg0->unk_1C = 0xC;
+        headerObj->unk_1C = 0xC;
     } else {
         func_80077D50(sRecordsCompTexInfo, 0);
     }
 }
 
-void func_i5_80117934(Object* arg0) {
+void CourseSelect_OkInit(Object* okObj) {
     func_80077D50(sOKCompTexInfo, 0);
-    arg0->left = 50;
+    okObj->left = 50;
 }
 
-void func_i5_8011796C(Object* arg0) {
+void CourseSelect_ArrowsInit(Object* arrowsObj) {
     func_80077D50(sYellowArrowCompTexInfo, 0);
-    arg0->unk_04 = 0x80;
-    arg0->unk_08 = 0x80;
+    arrowsObj->unk_04 = 0x80;
+    arrowsObj->unk_08 = 0x80;
 }
 
-void func_i5_801179A8(Object* arg0) {
+void CourseSelect_GhostMarkerInit(Object* ghostMarkerObj) {
     GhostInfo sp20;
     s32 pad;
 
     if (Save_LoadGhostInfo(&sp20) != 0) {
-        arg0->cmdId = OBJECT_FREE;
+        ghostMarkerObj->cmdId = OBJECT_FREE;
     }
     if (sp20.encodedCourseIndex == 0) {
-        arg0->cmdId = OBJECT_FREE;
+        ghostMarkerObj->cmdId = OBJECT_FREE;
     }
-    arg0->left += (sp20.courseIndex % 6) * 320;
-    arg0->unk_04 = sp20.courseIndex;
+    ghostMarkerObj->left += (sp20.courseIndex % 6) * 320;
+    ghostMarkerObj->unk_04 = sp20.courseIndex;
     func_80077D50(sHasGhostMarkerCompTexInfo, 0);
 }
 
-void func_i5_80117A2C(Object* arg0) {
+void CourseSelect_GhostOptionInit(Object* ghostOptionObj) {
     s32 i;
 
     func_80077D50(sStaffGhostBeatenCompTexInfo, 0);
@@ -622,25 +623,25 @@ void func_i5_80117A2C(Object* arg0) {
         func_80077D50(sTimeAttackGhostOptionCompTexInfos[i], 0);
     }
 
-    arg0->left = 150;
+    ghostOptionObj->left = 150;
 }
 
-Gfx* func_i5_80117A98(Gfx* gfx, Object* arg1) {
+Gfx* CourseSelect_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
 
     if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         gDPSetPrimColor(gfx++, 0, 0, 75, 75, 75, 180);
-        gfx =
-            func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->left, arg1->top, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleBackgroundCompTexInfos[backgroundObj->unk_04], backgroundObj->left,
+                            backgroundObj->top, 1, 0, 0, 1.0f, 1.0f);
     } else {
-        gfx =
-            func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleBackgroundCompTexInfos[backgroundObj->unk_04], backgroundObj->left,
+                            backgroundObj->top, 0, 0, 0, 1.0f, 1.0f);
         gfx = func_80078EA0(gfx, sOptionsFalconHelmetCompTexInfo, 0x35, 4, 2, 1, 0, 1.0f, 1.0f);
         gfx = func_80078EA0(gfx, sOptionsFalconHelmetCompTexInfo, 0xCB, 4, 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
 
-Gfx* func_i5_80117BE0(Gfx* gfx, Object* arg1) {
+Gfx* CourseSelect_ModelDraw(Gfx* gfx, Object* modelObj) {
 
     switch (D_i5_801190C0) {
         case 2:
@@ -662,7 +663,7 @@ Gfx* func_i5_80117BE0(Gfx* gfx, Object* arg1) {
 extern u32 gGameFrameCount;
 extern s8 gCupNumDifficultiesCleared[];
 
-Gfx* func_i5_80117C48(Gfx* gfx, Object* arg1) {
+Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
     s32 i;
     s32 alpha;
     s32 cupDifficultiesCleared;
@@ -671,7 +672,7 @@ Gfx* func_i5_80117C48(Gfx* gfx, Object* arg1) {
     s32 sp80;
     s32 var_v1;
 
-    i = arg1->cmdId - OBJECT_COURSE_SELECT_CUP_0;
+    i = cupObj->cmdId - OBJECT_COURSE_SELECT_CUP_0;
     if (gCupSelectOption >= 10) {
         var_s1 = EDIT_CUP;
     } else {
@@ -695,25 +696,25 @@ Gfx* func_i5_80117C48(Gfx* gfx, Object* arg1) {
     switch (D_i5_801190C0) {
         case 5:
         case 6:
-            arg1->unk_1C++;
-            if (arg1->unk_1C > 12) {
+            cupObj->unk_1C++;
+            if (cupObj->unk_1C > 12) {
                 D_i5_801190C0 = 6;
-                arg1->unk_1C = 12;
+                cupObj->unk_1C = 12;
             }
             break;
         default:
-            if (arg1->unk_1C > 0) {
-                arg1->unk_1C--;
+            if (cupObj->unk_1C > 0) {
+                cupObj->unk_1C--;
             }
             break;
     }
 
-    if (arg1->unk_1C < 0) {
-        arg1->unk_1C = 0;
+    if (cupObj->unk_1C < 0) {
+        cupObj->unk_1C = 0;
     }
 
     cupDifficultiesCleared = gCupNumDifficultiesCleared[i];
-    sp80 = (SQ(arg1->unk_1C) * 3) / 2;
+    sp80 = (SQ(cupObj->unk_1C) * 3) / 2;
 
     switch (i) {
         case JOKER_CUP:
@@ -728,10 +729,10 @@ Gfx* func_i5_80117C48(Gfx* gfx, Object* arg1) {
             break;
     }
 
-    gfx = func_80078EA0(gfx, sCupSelectCompTexInfos[i], arg1->left, arg1->top + sp80, 1, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, sCupSelectCompTexInfos[i], cupObj->left, cupObj->top + sp80, 1, 0, 0, 1.0f, 1.0f);
 
     if ((gSelectedMode == MODE_GP_RACE) && (i <= JOKER_CUP)) {
-        alpha = ((arg1->top - 49) * 255) / 36;
+        alpha = ((cupObj->top - 49) * 255) / 36;
         if (var_s1 == i) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         } else {
@@ -739,14 +740,14 @@ Gfx* func_i5_80117C48(Gfx* gfx, Object* arg1) {
         }
 
         for (i = 0; i < cupDifficultiesCleared; i++) {
-            gfx = func_80078EA0(gfx, sCupClearedDifficultyCompTexInfos[i], arg1->left + (i * 16) + ((12 - i * 8) / 2),
-                                (arg1->top + sp80) - 12, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sCupClearedDifficultyCompTexInfos[i], cupObj->left + (i * 16) + ((12 - i * 8) / 2),
+                                (cupObj->top + sp80) - 12, 1, 0, 0, 1.0f, 1.0f);
         }
     }
     return gfx;
 }
 
-Gfx* func_i5_80117FB4(Gfx* gfx, Object* arg1) {
+Gfx* CourseSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
     s32 temp_v1;
 
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
@@ -755,46 +756,48 @@ Gfx* func_i5_80117FB4(Gfx* gfx, Object* arg1) {
         switch (D_i5_801190C0) {
             case 5:
             case 6:
-                arg1->unk_1C++;
-                if (arg1->unk_1C > 12) {
+                headerObj->unk_1C++;
+                if (headerObj->unk_1C > 12) {
                     D_i5_801190C0 = 6;
-                    arg1->unk_1C = 12;
+                    headerObj->unk_1C = 12;
                 }
                 break;
             default:
-                if (arg1->unk_1C > 0) {
-                    arg1->unk_1C--;
+                if (headerObj->unk_1C > 0) {
+                    headerObj->unk_1C--;
                 }
                 break;
         }
-        if (arg1->unk_1C < 0) {
-            arg1->unk_1C = 0;
+        if (headerObj->unk_1C < 0) {
+            headerObj->unk_1C = 0;
         }
-        temp_v1 = (SQ(arg1->unk_1C) * 3) / 2;
+        temp_v1 = (SQ(headerObj->unk_1C) * 3) / 2;
 
-        gfx = func_80078EA0(gfx, sSelectCourseCompTexInfo, arg1->left, arg1->top + temp_v1, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sSelectCourseCompTexInfo, headerObj->left, headerObj->top + temp_v1, 0, 0, 0, 1.0f,
+                            1.0f);
     } else {
-        gfx = func_80078EA0(gfx, sRecordsCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sRecordsCompTexInfo, headerObj->left, headerObj->top, 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
 
-Gfx* func_i5_80118100(Gfx* gfx, Object* arg1) {
+Gfx* CourseSelect_OkDraw(Gfx* gfx, Object* okObj) {
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, arg1->left + 0x10B, arg1->top + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, okObj->left + 0x10B, okObj->top + 0xD0, 1, 0, 0, 1.0f, 1.0f);
 }
 
-Gfx* func_i5_80118168(Gfx* gfx, Object* arg1) {
-    f32 temp_fv0 = (SIN(arg1->unk_1C) + 1.0) / 2;
-    f32 temp_fa1 = (SIN(arg1->unk_20) + 1.0) / 2;
+Gfx* CourseSelect_ArrowsDraw(Gfx* gfx, Object* arrowsObj) {
+    f32 temp_fv0 = (SIN(arrowsObj->unk_1C) + 1.0) / 2;
+    f32 temp_fa1 = (SIN(arrowsObj->unk_20) + 1.0) / 2;
 
-    gfx = func_80078EA0(gfx, sYellowArrowCompTexInfo, arg1->left + 0x2B, (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0, 0,
-                        1.0f, temp_fv0);
-    return func_80078EA0(gfx, sYellowArrowCompTexInfo, arg1->top + 0xF5, (((1.0 - temp_fa1) * 16.0) + 112.0), 5, 0, 0,
-                         1.0f, temp_fa1);
+    // left and top represent x positions for left and right arrows for this object
+    gfx = func_80078EA0(gfx, sYellowArrowCompTexInfo, arrowsObj->left + 0x2B, (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0,
+                        0, 1.0f, temp_fv0);
+    return func_80078EA0(gfx, sYellowArrowCompTexInfo, arrowsObj->top + 0xF5, (((1.0 - temp_fa1) * 16.0) + 112.0), 5, 0,
+                         0, 1.0f, temp_fa1);
 }
 
-Gfx* func_i5_801182DC(Gfx* gfx) {
+Gfx* CourseSelect_NameDraw(Gfx* gfx) {
     char cupTrackNoStr[4];
     s32 cupTrackNoWidth;
     s32 trackNameWidth;
@@ -809,43 +812,47 @@ Gfx* func_i5_801182DC(Gfx* gfx) {
         case 4:
         case 10:
         case 11:
-            func_i2_80105DB0(sCourseSelectTrackNo + 1, cupTrackNoStr);
+            Font_IntToString(sCourseSelectTrackNo + 1, cupTrackNoStr);
             cupTrackNoStr[1] = ':';
             cupTrackNoStr[2] = ' ';
             cupTrackNoStr[3] = '\0';
-            cupTrackNoWidth = func_i2_801062E4(cupTrackNoStr, 3, 0);
+            cupTrackNoWidth = Font_GetStringWidth(cupTrackNoStr, FONT_SET_3, 0);
             if (sCourseSelectCup == EDIT_CUP) {
-                trackNameWidth = func_i2_801062E4(gCurrentTrackName, 3, 0);
+                trackNameWidth = Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 0);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-                gfx = func_i2_80106450(gfx, (-(trackNameWidth / 2) - (func_i2_801062E4(cupTrackNoStr, 3, 0) / 2)) + 160,
-                                       200, cupTrackNoStr, 0, 3, 0);
-                gfx = func_i2_80106450(gfx,
-                                       ((cupTrackNoWidth / 2) - (func_i2_801062E4(gCurrentTrackName, 3, 0) / 2)) + 160,
-                                       200, gCurrentTrackName, 0, 3, 0);
+                gfx = Font_DrawString(
+                    gfx, (-(trackNameWidth / 2) - (Font_GetStringWidth(cupTrackNoStr, FONT_SET_3, 0) / 2)) + 160, 200,
+                    cupTrackNoStr, 0, FONT_SET_3, 0);
+                gfx = Font_DrawString(
+                    gfx, ((cupTrackNoWidth / 2) - (Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 0) / 2)) + 160,
+                    200, gCurrentTrackName, 0, FONT_SET_3, 0);
             } else {
-                trackNameWidth = func_i2_801062E4(gCurrentTrackName, 3, 0);
+                trackNameWidth = Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 0);
                 cupColors = &sCourseSelectCupColors[sCourseSelectCup * 3];
                 gDPSetPrimColor(gfx++, 0, 0, cupColors[0], cupColors[1], cupColors[2], 255);
-                gfx = func_i2_80106450(gfx, (-(trackNameWidth / 2) - (func_i2_801062E4(cupTrackNoStr, 3, 0) / 2)) + 160,
-                                       200, cupTrackNoStr, 0, 3, 0);
+                gfx = Font_DrawString(
+                    gfx, (-(trackNameWidth / 2) - (Font_GetStringWidth(cupTrackNoStr, FONT_SET_3, 0) / 2)) + 160, 200,
+                    cupTrackNoStr, 0, FONT_SET_3, 0);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-                gfx = func_i2_80106450(gfx,
-                                       ((cupTrackNoWidth / 2) - (func_i2_801062E4(gCurrentTrackName, 3, 0) / 2)) + 160,
-                                       200, gCurrentTrackName, 0, 3, 0);
-                gfx = func_i2_80106450(
+                gfx = Font_DrawString(
+                    gfx, ((cupTrackNoWidth / 2) - (Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 0) / 2)) + 160,
+                    200, gCurrentTrackName, 0, FONT_SET_3, 0);
+                gfx = Font_DrawString(
                     gfx,
-                    160 - (func_i2_801062E4(sTrackSubtitles[sCourseSelectCup * 6 + sCourseSelectTrackNo], 4, 0) / 2),
-                    210, sTrackSubtitles[sCourseSelectCup * 6 + sCourseSelectTrackNo], 0, 4, 0);
+                    160 - (Font_GetStringWidth(sTrackSubtitles[sCourseSelectCup * 6 + sCourseSelectTrackNo], FONT_SET_4,
+                                               0) /
+                           2),
+                    210, sTrackSubtitles[sCourseSelectCup * 6 + sCourseSelectTrackNo], 0, FONT_SET_4, 0);
             }
             break;
     }
     return gfx;
 }
 
-Gfx* func_i5_80118674(Gfx* gfx, Object* arg1) {
+Gfx* CourseSelect_GhostMarkerDraw(Gfx* gfx, Object* ghostMarkerObj) {
 
     // If Cup Does Not Match
-    if ((arg1->unk_04 / 6) != (gCourseIndex / 6)) {
+    if ((ghostMarkerObj->unk_04 / 6) != (gCourseIndex / 6)) {
         return gfx;
     }
 
@@ -859,15 +866,15 @@ Gfx* func_i5_80118674(Gfx* gfx, Object* arg1) {
         case 3:
         case 4:
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            gfx = func_80078EA0(gfx, sHasGhostMarkerCompTexInfo, arg1->left + arg1->unk_1C, arg1->top, 0, 0, 0, 1.0f,
-                                1.0f);
+            gfx = func_80078EA0(gfx, sHasGhostMarkerCompTexInfo, ghostMarkerObj->left + ghostMarkerObj->unk_1C,
+                                ghostMarkerObj->top, 0, 0, 0, 1.0f, 1.0f);
             break;
     }
 
     return gfx;
 }
 
-Gfx* func_i5_80118790(Gfx* gfx, Object* arg1) {
+Gfx* CourseSelect_GhostOptionDraw(Gfx* gfx, Object* ghostOptionObj) {
     s32 i;
     s32 numUnlockedGhosts = sUnlockedGhosts + 1;
 
@@ -885,18 +892,18 @@ Gfx* func_i5_80118790(Gfx* gfx, Object* arg1) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
-        gfx = func_80078EA0(gfx, sTimeAttackGhostOptionCompTexInfos[i], arg1->left + 0xC3, i * 20 + 0x2D, 0, 0, 0, 1.0f,
-                            1.0f);
+        gfx = func_80078EA0(gfx, sTimeAttackGhostOptionCompTexInfos[i], ghostOptionObj->left + 0xC3, i * 20 + 0x2D, 0,
+                            0, 0, 1.0f, 1.0f);
 
         if ((i == 2) && sStaffGhostTimeBeaten) {
-            gfx = func_80078EA0(gfx, sStaffGhostBeatenCompTexInfo, arg1->left + 0x109, i * 20 + 0x2D, 0, 0, 0, 1.0f,
-                                1.0f);
+            gfx = func_80078EA0(gfx, sStaffGhostBeatenCompTexInfo, ghostOptionObj->left + 0x109, i * 20 + 0x2D, 0, 0, 0,
+                                1.0f, 1.0f);
         }
     }
     return gfx;
 }
 
-void func_i5_80118928(Object* arg0) {
+void CourseSelect_ModelUpdate(Object* modelObj) {
     s32 temp_a1;
 
     if (((D_i5_801190C0 != 0) && (D_i5_801190C0 != 1)) || (gCupSelectOption < 4)) {
@@ -904,14 +911,14 @@ void func_i5_80118928(Object* arg0) {
     }
     temp_a1 = -(sCourseSelectTrackNo * 0x500);
     if (gGameMode == GAMEMODE_FLX_GP_RACE_NEXT_COURSE) {
-        arg0->left = temp_a1;
+        modelObj->left = temp_a1;
     } else {
-        Object_LerpPosXToClampedTargetMaxStep(arg0, temp_a1, 0xC0);
+        Object_LerpPosXToClampedTargetMaxStep(modelObj, temp_a1, 0xC0);
     }
-    func_i5_801164A8(arg0->left);
+    func_i5_801164A8(modelObj->left);
 }
 
-void func_i5_801189C4(Object* arg0) {
+void CourseSelect_CupUpdate(Object* arg0) {
     s32 var_v1;
     s32 var_a1;
     s32 var_v0;
@@ -1018,7 +1025,7 @@ void func_i5_801189C4(Object* arg0) {
     }
 }
 
-void func_i5_80118D44(Object* arg0) {
+void CourseSelect_OkUpdate(Object* arg0) {
     switch (D_i5_801190C0) {
         case 3:
         case 4:
@@ -1030,14 +1037,14 @@ void func_i5_80118D44(Object* arg0) {
     }
 }
 
-void func_i5_80118D94(Object* arg0) {
+void CourseSelect_ArrowsUpdate(Object* arg0) {
 
     switch (D_i5_801190C0) {
         case 0:
         case 1:
         case 5:
         case 6:
-            arg0->unk_15 = 0;
+            arg0->shouldDraw = false;
             arg0->left = -100;
             arg0->top = 100;
             arg0->unk_04 = 0x80;
@@ -1067,7 +1074,7 @@ void func_i5_80118D94(Object* arg0) {
             }
             arg0->unk_20 += arg0->unk_08;
 
-            arg0->unk_15 = 1;
+            arg0->shouldDraw = true;
             if ((sCourseSelectTrackNo == 0) || (D_i5_801190C0 == 3) || (D_i5_801190C0 == 4)) {
                 Object_LerpPosXToClampedTargetMaxStep(arg0, -100, 0xC0);
             } else {
@@ -1082,20 +1089,20 @@ void func_i5_80118D94(Object* arg0) {
     }
 }
 
-void func_i5_80118F24(Object* arg0) {
+void CourseSelect_GhostMarkerUpdate(Object* arg0) {
     s32 temp_v1;
 
     arg0->unk_1C = Object_Get(OBJECT_COURSE_SELECT_MODEL)->left >> 2;
     temp_v1 = arg0->left + arg0->unk_1C;
 
     if ((temp_v1 < -30) || (temp_v1 > 320)) {
-        arg0->unk_15 = 0;
+        arg0->shouldDraw = false;
     } else {
-        arg0->unk_15 = 1;
+        arg0->shouldDraw = true;
     }
 }
 
-void func_i5_80118F84(Object* arg0) {
+void CourseSelect_GhostOptionUpdate(Object* arg0) {
     switch (D_i5_801190C0) {
         case 0:
         case 1:

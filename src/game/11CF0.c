@@ -184,7 +184,7 @@ void* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) 
         }
     } else {
         // FAKE
-        return ((unk_800E33E0*) (var_v1 + var_a3))->unk_04;
+        return (var_v1 + var_a3)->unk_04;
     }
     return var_s0;
 }
@@ -534,7 +534,7 @@ void func_800793E8(s32 arg0, s32 arg1, unk_800792D8* arg2) {
     }
 }
 
-void func_80079480(void) {
+void Object_ClearAll(void) {
     s32 i;
 
     for (i = 0; i < 32; i++) {
@@ -555,7 +555,7 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
             object->left = left;            \
             object->top = top;              \
             object->priority = priority;    \
-            object->unk_15 = 1;             \
+            object->shouldDraw = true;      \
             object->unk_1C = 0;             \
             object->unk_20 = 0;             \
             break;
@@ -669,25 +669,25 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
             MainMenu_HeaderInit(object);
             break;
         case OBJECT_MAIN_MENU_SELECT_NUM_PLAYERS:
-            func_i6_80116934();
+            MainMenu_NumPlayersInit();
             break;
         case OBJECT_MAIN_MENU_SELECT_DIFFICULTY:
-            func_i6_80116990();
+            MainMenu_DifficultyInit();
             break;
         case OBJECT_MAIN_MENU_SELECT_TIME_ATTACK_MODE:
-            func_i6_801169EC();
+            MainMenu_TimeAttackModeInit();
             break;
         case OBJECT_MAIN_MENU_OK:
-            func_i6_80116A48(object);
+            MainMenu_OkInit(object);
             break;
         case OBJECT_MAIN_MENU_UNLOCK_EVERYTHING:
-            func_i6_80116A80(object);
+            MainMenu_UnlockEverythingInit(object);
             break;
         case OBJECT_COURSE_SELECT_BACKGROUND:
-            func_i5_80117684(object);
+            CourseSelect_BackgroundInit(object);
             break;
         case OBJECT_COURSE_SELECT_MODEL:
-            func_i5_80117758();
+            CourseSelect_ModelInit();
             break;
         case OBJECT_COURSE_SELECT_CUP_0:
         case OBJECT_COURSE_SELECT_CUP_1:
@@ -695,22 +695,22 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
         case OBJECT_COURSE_SELECT_CUP_3:
         case OBJECT_COURSE_SELECT_CUP_4:
         case OBJECT_COURSE_SELECT_CUP_5:
-            func_i5_801177EC(object);
+            CourseSelect_CupInit(object);
             break;
         case OBJECT_COURSE_SELECT_HEADER:
-            func_i5_801178D8(object);
+            CourseSelect_HeaderInit(object);
             break;
         case OBJECT_COURSE_SELECT_OK:
-            func_i5_80117934(object);
+            CourseSelect_OkInit(object);
             break;
         case OBJECT_COURSE_SELECT_ARROWS:
-            func_i5_8011796C(object);
+            CourseSelect_ArrowsInit(object);
             break;
         case OBJECT_COURSE_SELECT_GHOST_MARKER:
-            func_i5_801179A8(object);
+            CourseSelect_GhostMarkerInit(object);
             break;
         case OBJECT_COURSE_SELECT_GHOST_OPTION:
-            func_i5_80117A2C(object);
+            CourseSelect_GhostOptionInit(object);
             break;
         default:
             break;
@@ -719,7 +719,7 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
 
 Gfx* Object_Draw(Gfx* gfx, Object* object) {
 
-    if (object->unk_15 == 0) {
+    if (!object->shouldDraw) {
         return gfx;
     }
 
@@ -810,7 +810,7 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
             gfx = MachineSettings_CarDraw(gfx, object);
             break;
         case OBJECT_MACHINE_SETTINGS_NAME:
-            gfx = func_i4_801187C0(gfx);
+            gfx = MachineSettings_NameDraw(gfx);
             break;
         case OBJECT_MACHINE_SETTINGS_ENGINE_WEIGHT:
             gfx = MachineSettings_EngineWeightDraw(gfx, object);
@@ -856,26 +856,26 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
             gfx = MainMenu_HeaderDraw(gfx, object);
             break;
         case OBJECT_MAIN_MENU_SELECT_NUM_PLAYERS:
-            gfx = func_i6_801174DC(gfx, object);
+            gfx = MainMenu_NumPlayersDraw(gfx, object);
             break;
         case OBJECT_MAIN_MENU_SELECT_DIFFICULTY:
-            gfx = func_i6_80117760(gfx, object);
+            gfx = MainMenu_DifficultyDraw(gfx, object);
             break;
         case OBJECT_MAIN_MENU_SELECT_TIME_ATTACK_MODE:
-            gfx = func_i6_80117A18(gfx, object);
+            gfx = MainMenu_TimeAttackModeDraw(gfx, object);
             break;
         case OBJECT_MAIN_MENU_OK:
-            gfx = func_i6_80117C50(gfx, object);
+            gfx = MainMenu_OkDraw(gfx, object);
             break;
         case OBJECT_100:
         case OBJECT_140:
             gfx = func_8007AC48(gfx, 0, 0, 0);
             break;
         case OBJECT_COURSE_SELECT_BACKGROUND:
-            gfx = func_i5_80117A98(gfx, object);
+            gfx = CourseSelect_BackgroundDraw(gfx, object);
             break;
         case OBJECT_COURSE_SELECT_MODEL:
-            gfx = func_i5_80117BE0(gfx, object);
+            gfx = CourseSelect_ModelDraw(gfx, object);
             break;
         case OBJECT_COURSE_SELECT_CUP_0:
         case OBJECT_COURSE_SELECT_CUP_1:
@@ -883,25 +883,25 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
         case OBJECT_COURSE_SELECT_CUP_3:
         case OBJECT_COURSE_SELECT_CUP_4:
         case OBJECT_COURSE_SELECT_CUP_5:
-            gfx = func_i5_80117C48(gfx, object);
+            gfx = CourseSelect_CupDraw(gfx, object);
             break;
         case OBJECT_COURSE_SELECT_HEADER:
-            gfx = func_i5_80117FB4(gfx, object);
+            gfx = CourseSelect_HeaderDraw(gfx, object);
             break;
         case OBJECT_COURSE_SELECT_OK:
-            gfx = func_i5_80118100(gfx, object);
+            gfx = CourseSelect_OkDraw(gfx, object);
             break;
         case OBJECT_COURSE_SELECT_ARROWS:
-            gfx = func_i5_80118168(gfx, object);
+            gfx = CourseSelect_ArrowsDraw(gfx, object);
             break;
         case OBJECT_COURSE_SELECT_NAME:
-            gfx = func_i5_801182DC(gfx);
+            gfx = CourseSelect_NameDraw(gfx);
             break;
         case OBJECT_COURSE_SELECT_GHOST_MARKER:
-            gfx = func_i5_80118674(gfx, object);
+            gfx = CourseSelect_GhostMarkerDraw(gfx, object);
             break;
         case OBJECT_COURSE_SELECT_GHOST_OPTION:
-            gfx = func_i5_80118790(gfx, object);
+            gfx = CourseSelect_GhostOptionDraw(gfx, object);
             break;
     }
     return gfx;
@@ -922,10 +922,10 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
                 Title_DiskDriveUpdate(&gObjects[i]);
                 break;
             case OBJECT_MAIN_MENU_OK:
-                func_i6_80117D3C(&gObjects[i]);
+                MainMenu_OkUpdate(&gObjects[i]);
                 break;
             case OBJECT_MAIN_MENU_UNLOCK_EVERYTHING:
-                func_i6_80117DE0(&gObjects[i]);
+                MainMenu_UnlockEverythingUpdate(&gObjects[i]);
                 break;
             case OBJECT_32:
                 D_800E3F28[gObjects[i].unk_18].unk_04 = 0;
@@ -971,7 +971,7 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
                 MachineSettings_OkUpdate(&gObjects[i]);
                 break;
             case OBJECT_COURSE_SELECT_MODEL:
-                func_i5_80118928(&gObjects[i]);
+                CourseSelect_ModelUpdate(&gObjects[i]);
                 break;
             case OBJECT_COURSE_SELECT_CUP_0:
             case OBJECT_COURSE_SELECT_CUP_1:
@@ -979,19 +979,19 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
             case OBJECT_COURSE_SELECT_CUP_3:
             case OBJECT_COURSE_SELECT_CUP_4:
             case OBJECT_COURSE_SELECT_CUP_5:
-                func_i5_801189C4(&gObjects[i]);
+                CourseSelect_CupUpdate(&gObjects[i]);
                 break;
             case OBJECT_COURSE_SELECT_OK:
-                func_i5_80118D44(&gObjects[i]);
+                CourseSelect_OkUpdate(&gObjects[i]);
                 break;
             case OBJECT_COURSE_SELECT_ARROWS:
-                func_i5_80118D94(&gObjects[i]);
+                CourseSelect_ArrowsUpdate(&gObjects[i]);
                 break;
             case OBJECT_COURSE_SELECT_GHOST_MARKER:
-                func_i5_80118F24(&gObjects[i]);
+                CourseSelect_GhostMarkerUpdate(&gObjects[i]);
                 break;
             case OBJECT_COURSE_SELECT_GHOST_OPTION:
-                func_i5_80118F84(&gObjects[i]);
+                CourseSelect_GhostOptionUpdate(&gObjects[i]);
                 break;
         }
     }
@@ -1029,7 +1029,7 @@ extern s32 gGameMode;
 
 void func_80079EC8(void) {
     func_80077D44();
-    func_80079480();
+    Object_ClearAll();
     func_800792A8();
     func_80079080();
     if (gGameMode != GAMEMODE_10) {
@@ -1038,7 +1038,7 @@ void func_80079EC8(void) {
 }
 
 void func_80079F1C(void) {
-    func_80079480();
+    Object_ClearAll();
     func_800792A8();
     func_80079080();
     func_8007E2B4();
@@ -1084,7 +1084,7 @@ void Object_LerpPosYToTarget(Object* object, s32 target) {
     object->top += step;
 }
 
-void func_8007A06C(Object* object, s32 xTarget, s32 yTarget) {
+void Object_LerpToPos(Object* object, s32 xTarget, s32 yTarget) {
     Object_LerpPosXToTarget(object, xTarget, 4);
     Object_LerpPosYToTarget(object, yTarget);
 }
@@ -1214,13 +1214,13 @@ void Object_LerpPosXToClampedTarget(Object* object, s32 target) {
     }
 }
 
-void Object_LerpPastPosXTarget(Object* object, s32 target, s32 offset) {
+void Object_LerpAwayFromPosX(Object* object, s32 origin, s32 initialStep) {
     UNUSED s32 temp = object->left;
     s32 step;
 
-    step = target - object->left;
-    if (target == object->left) {
-        object->left += offset;
+    step = origin - object->left;
+    if (origin == object->left) {
+        object->left += initialStep;
         return;
     }
     if (step != 0) {
@@ -1239,13 +1239,13 @@ void Object_LerpPastPosXTarget(Object* object, s32 target, s32 offset) {
     object->left -= step;
 }
 
-void Object_LerpPastPosYTarget(Object* object, s32 target, s32 offset) {
+void Object_LerpAwayFromPosY(Object* object, s32 origin, s32 initialStep) {
     UNUSED s32 temp = object->top;
     s32 step;
 
-    step = target - object->top;
-    if (target == object->top) {
-        object->top += offset;
+    step = origin - object->top;
+    if (origin == object->top) {
+        object->top += initialStep;
         return;
     }
     if (step != 0) {

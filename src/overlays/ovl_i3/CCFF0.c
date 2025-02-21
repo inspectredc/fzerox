@@ -196,19 +196,19 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
     }
     if (D_i3_80143780 & 1) {
         var = gTrackNames[courseIndex];
-        i = func_i2_801062E4(var, 3, 1);
+        i = Font_GetStringWidth(var, FONT_SET_3, 1);
 
         gfx = func_i3_DrawBeveledBox(gfx, 0x99 - i / 2, 0x15, i / 2 + 0xA7, 0x2B, 0, 0, 0xC8, 0x7F);
 
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
 
-        gfx = func_i2_80106450(gfx, 0xA2 - (func_i2_801062E4(var, 3, 1) / 2), 0x2A, var, 1, 3, 0);
+        gfx = Font_DrawString(gfx, 0xA2 - (Font_GetStringWidth(var, FONT_SET_3, 1) / 2), 0x2A, var, 1, FONT_SET_3, 0);
 
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-        gfx = func_i2_80106450(gfx, 0xA0 - (func_i2_801062E4(var, 3, 1) / 2), 0x28, var, 1, 3, 0);
+        gfx = Font_DrawString(gfx, 0xA0 - (Font_GetStringWidth(var, FONT_SET_3, 1) / 2), 0x28, var, 1, FONT_SET_3, 0);
 
         if ((D_i3_80143780 & 0x10) && (D_i3_80143780 & 0x20)) {
             temp2 = (gGameFrameCount % 40);
@@ -238,7 +238,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
                 var_s3 = D_i3_80143788;
             }
             if (var_s2->timeRecord[i] != MAX_TIMER) {
-                xl = func_i2_801062E4(var_s2->name[i], 1, 1);
+                xl = Font_GetStringWidth(var_s2->name[i], FONT_SET_1, 1);
                 if (xl > 0) {
                     gfx = func_i3_DrawBeveledBox(gfx, (var_s3 + D_i3_80143790) + 0x4A,
                                                  (D_i3_80143794 + (D_i3_80143798 * i)) + 3,
@@ -272,8 +272,8 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
 
-        gfx =
-            func_i2_80106450(gfx, var_s3 + D_i3_80143790 + 2, (D_i3_80143798 * i) + D_i3_80143794 + 2, sp174, 1, 3, 0);
+        gfx = Font_DrawString(gfx, var_s3 + D_i3_80143790 + 2, (D_i3_80143798 * i) + D_i3_80143794 + 2, sp174, 1,
+                              FONT_SET_3, 0);
 
         if (D_i3_80143780 & 8) {
             if (D_800E5FE2 == i + 1) {
@@ -292,7 +292,8 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 250, 250, 255, 255);
         }
-        gfx = func_i2_80106450(gfx, var_s3 + D_i3_80143790, (D_i3_80143798 * i) + D_i3_80143794, sp174, 1, 3, 0);
+        gfx =
+            Font_DrawString(gfx, var_s3 + D_i3_80143790, (D_i3_80143798 * i) + D_i3_80143794, sp174, 1, FONT_SET_3, 0);
     }
     gSPDisplayList(gfx++, D_8014940);
 
@@ -381,13 +382,13 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
             var_s3 = D_i3_80143788;
         }
         if (var_s2->timeRecord[i] == MAX_TIMER) {
-            gfx = func_i2_80106450(gfx, var_s3 + D_i3_80143790 + 0x4B, (D_i3_80143794 + (D_i3_80143798 * i)) - 2,
-                                   "--------", 1, 4, 0);
+            gfx = Font_DrawString(gfx, var_s3 + D_i3_80143790 + 0x4B, (D_i3_80143794 + (D_i3_80143798 * i)) - 2,
+                                  "--------", 1, FONT_SET_4, 0);
         }
     }
 
     if (var_s2->bestTime == MAX_TIMER) {
-        gfx = func_i2_80106450(gfx, D_i3_801437A8 + D_i3_80143788, D_i3_801437AA + 0xC, "--------", 1, 4, 0);
+        gfx = Font_DrawString(gfx, D_i3_801437A8 + D_i3_80143788, D_i3_801437AA + 0xC, "--------", 1, FONT_SET_4, 0);
     }
 
     for (i = 0; i < 5; i++) {
@@ -397,8 +398,8 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
             var_s3 = D_i3_80143788;
         }
         if (var_s2->timeRecord[i] != MAX_TIMER) {
-            gfx = func_i2_80106450(gfx, var_s3 + D_i3_80143790 + 0x4B, D_i3_80143794 + (D_i3_80143798 * i) + 0x12,
-                                   var_s2->name[i], 1, 1, 0);
+            gfx = Font_DrawString(gfx, var_s3 + D_i3_80143790 + 0x4B, D_i3_80143794 + (D_i3_80143798 * i) + 0x12,
+                                  var_s2->name[i], 1, FONT_SET_1, 0);
         }
     }
 
@@ -676,11 +677,11 @@ void func_i3_8013C3B4(s32 arg0) {
             var_s3 = var_s0->unk_04;
             var_s4 = ((i / 10) * 20) + 100;
             var_v1 = ((i % 10) * 20) + 62;
-            var_v1 += ((16 - func_i2_801062E4(&var_s0->unk_00, 1, 1)) / 2);
+            var_v1 += ((16 - Font_GetStringWidth(&var_s0->unk_00, FONT_SET_1, 1)) / 2);
         } else {
             var_s3 = ((i / 10) * 20) + 100;
             var_s2 = ((i % 10) * 20) + 62;
-            var_s2 += ((16 - func_i2_801062E4(&var_s0->unk_00, 1, 1)) / 2);
+            var_s2 += ((16 - Font_GetStringWidth(&var_s0->unk_00, FONT_SET_1, 1)) / 2);
             var_v1 = var_s0->unk_02;
             var_s4 = var_s0->unk_04;
         }
@@ -841,7 +842,7 @@ void func_i3_8013C6D8(void) {
                 }
             }
         }
-        spFC = sFont1CompTexInfos[func_i2_80106024(&sNameKeyboardCharacters[keyboardIndex], FONT_SET_UPPERCASE_ONLY)];
+        spFC = sFont1CompTexInfos[Font_GetCharIndex(&sNameKeyboardCharacters[keyboardIndex], FONT_SET_UPPERCASE_ONLY)];
         D_i3_801439BC = spFC;
 
         spEC[0] = spEC[2] = 0.0f - (spFC->width * 0.5f);
@@ -974,22 +975,22 @@ Gfx* func_i3_8013D2BC(Gfx* gfx) {
         case 2:
             spF4 = (sKeyboardCursorY * 10) + sKeyboardCursorX;
             gfx = func_i3_DrawBeveledBox(gfx, 0x34, 0x36, 0x10C, 0xDC, 0, 0, 0, 0x80);
-            temp_v0 = func_i2_801062E4(D_i3_80140F84, 3, 1);
+            temp_v0 = Font_GetStringWidth(D_i3_80140F84, FONT_SET_3, 1);
             temp_v1 = (320 - temp_v0) / 2;
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-            gfx = func_i2_80106450(gfx, temp_v1 + 2, 0x51, D_i3_80140F84, 1, 3, 0);
+            gfx = Font_DrawString(gfx, temp_v1 + 2, 0x51, D_i3_80140F84, 1, FONT_SET_3, 0);
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-            gfx = func_i2_80106450(gfx, temp_v1, 0x4F, D_i3_80140F84, 1, 3, 0);
+            gfx = Font_DrawString(gfx, temp_v1, 0x4F, D_i3_80140F84, 1, FONT_SET_3, 0);
 
             spDC[1] = 0;
             for (i = 0; i < 50; i++) {
                 spDC[0] = sNameKeyboardCharacters[i];
-                temp = (0x10 - func_i2_801062E4(spDC, 1, 1)) / 2;
+                temp = (0x10 - Font_GetStringWidth(spDC, FONT_SET_1, 1)) / 2;
                 temp_s0 = ((i % 10) * 20) + temp + 62;
                 if (spF4 != i) {
-                    gfx = func_i2_80106450(gfx, temp_s0, ((i / 10) * 20) + 100, spDC, 1, 1, 0);
+                    gfx = Font_DrawString(gfx, temp_s0, ((i / 10) * 20) + 100, spDC, 1, FONT_SET_1, 0);
                 }
             }
 
@@ -1001,11 +1002,11 @@ Gfx* func_i3_8013D2BC(Gfx* gfx) {
                     gfx = func_8007F090(gfx, 255, 0, 0);
                 }
                 temp_s0 = (i * 20) + 0x84;
-                gfx = func_i2_80106450(gfx, temp_s0, 0xD6, "_", 1, 1, 1);
+                gfx = Font_DrawString(gfx, temp_s0, 0xD6, "_", 1, FONT_SET_1, 1);
                 if (D_i3_801437C0[i].unk_00 == 0) {
                     spDC[0] = gRecordNameEntered[i];
-                    temp_s0 += (0x10 - func_i2_801062E4(spDC, 1, 1)) / 2;
-                    gfx = func_i2_80106450(gfx, temp_s0, 0xD2, spDC, 1, 1, 0);
+                    temp_s0 += (0x10 - Font_GetStringWidth(spDC, FONT_SET_1, 1)) / 2;
+                    gfx = Font_DrawString(gfx, temp_s0, 0xD2, spDC, 1, FONT_SET_1, 0);
                 }
             }
 
@@ -1014,7 +1015,7 @@ Gfx* func_i3_8013D2BC(Gfx* gfx) {
                     if (0) {}
                     gDPPipeSync(gfx++);
                     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 128);
-                    gfx = func_i2_80106450(gfx, var_s0->unk_06, var_s0->unk_08, &var_s0->unk_00, 1, 1, 1);
+                    gfx = Font_DrawString(gfx, var_s0->unk_06, var_s0->unk_08, &var_s0->unk_00, 1, FONT_SET_1, 1);
                 }
             }
 
@@ -1043,7 +1044,7 @@ Gfx* func_i3_8013D2BC(Gfx* gfx) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, alpha);
 
             for (i = 0, var_s0 = D_i3_801437C0; i < 50; i++, var_s0++) {
-                gfx = func_i2_80106450(gfx, var_s0->unk_06, var_s0->unk_08, &var_s0->unk_00, 1, 1, 1);
+                gfx = Font_DrawString(gfx, var_s0->unk_06, var_s0->unk_08, &var_s0->unk_00, 1, FONT_SET_1, 1);
             }
             break;
         case 3:
@@ -1058,7 +1059,7 @@ Gfx* func_i3_8013D2BC(Gfx* gfx) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, alpha);
 
             for (i = 0, var_s0 = D_i3_801437C0; i < 50; i++, var_s0++) {
-                gfx = func_i2_80106450(gfx, var_s0->unk_06, var_s0->unk_08, &var_s0->unk_00, 1, 1, 1);
+                gfx = Font_DrawString(gfx, var_s0->unk_06, var_s0->unk_08, &var_s0->unk_00, 1, FONT_SET_1, 1);
             }
             break;
     }

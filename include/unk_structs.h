@@ -133,7 +133,7 @@ typedef struct Object {
     s32 left;
     s32 top;
     s8 priority;
-    s8 unk_15;
+    s8 shouldDraw;
     s8 unk_16[0x2];
     s32 unk_18;
     s32 unk_1C;

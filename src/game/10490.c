@@ -556,17 +556,17 @@ void func_80077318(void) {
         case GAMEMODE_FLX_COURSE_SELECT:
         case GAMEMODE_FLX_GP_RACE_NEXT_COURSE:
         case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
-            // ovl_i5
-            vramTextStart = SEGMENT_TEXT_START(ovl_i5);
-            vramStart = SEGMENT_VRAM_START(ovl_i5);
-            vramDataStart = SEGMENT_DATA_START(ovl_i5);
-            vramBssStart = SEGMENT_BSS_START(ovl_i5);
-            romStart = SEGMENT_ROM_START(ovl_i5);
-            segmentTextSize = SEGMENT_TEXT_SIZE(ovl_i5);
-            segmentDataSize = SEGMENT_DATA_SIZE(ovl_i5);
-            segmentRomSize = SEGMENT_BSS_START(ovl_i5) - SEGMENT_VRAM_START(ovl_i5);
-            segmentVramSize = SEGMENT_VRAM_SIZE(ovl_i5);
-            segmentBssSize = SEGMENT_BSS_SIZE(ovl_i5);
+            // course_select
+            vramTextStart = SEGMENT_TEXT_START(course_select);
+            vramStart = SEGMENT_VRAM_START(course_select);
+            vramDataStart = SEGMENT_DATA_START(course_select);
+            vramBssStart = SEGMENT_BSS_START(course_select);
+            romStart = SEGMENT_ROM_START(course_select);
+            segmentTextSize = SEGMENT_TEXT_SIZE(course_select);
+            segmentDataSize = SEGMENT_DATA_SIZE(course_select);
+            segmentRomSize = SEGMENT_BSS_START(course_select) - SEGMENT_VRAM_START(course_select);
+            segmentVramSize = SEGMENT_VRAM_SIZE(course_select);
+            segmentBssSize = SEGMENT_BSS_SIZE(course_select);
             break;
         case GAMEMODE_FLX_MAIN_MENU:
         case GAMEMODE_FLX_SKIPPABLE_CREDITS:
