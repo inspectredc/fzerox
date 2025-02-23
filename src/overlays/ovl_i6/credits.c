@@ -687,7 +687,8 @@ Gfx* Credits_OldCarsDraw(Gfx* gfx, Object* oldCarsObj) {
         return gfx;
     }
 
-    return func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(oldCarsObj)], OBJECT_LEFT(oldCarsObj), OBJECT_TOP(oldCarsObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(oldCarsObj)], OBJECT_LEFT(oldCarsObj),
+                         OBJECT_TOP(oldCarsObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
 #define UNK_RAND_MACRO(var, x, y) (((Math_Rand1() >> (var % 4)) % x) - y)
@@ -780,8 +781,8 @@ Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
                 additionalWidth = (width * (1.0f - var_fv1)) / 2;
                 additionalHeight = (height * (1.0f - var_fv1)) / 2;
 
-                gfx = func_80078F80(gfx, temp_s1, OBJECT_LEFT(carsObj) + additionalWidth, top + additionalHeight, 4, 0, 0,
-                                    var_fv1, var_fv1);
+                gfx = func_80078F80(gfx, temp_s1, OBJECT_LEFT(carsObj) + additionalWidth, top + additionalHeight, 4, 0,
+                                    0, var_fv1, var_fv1);
             } else {
                 if (temp_s1->unk_0A == 0) {
                     texture = temp_s1->unk_0C;
@@ -1154,7 +1155,8 @@ Gfx* Credits_StartRolesDraw(Gfx* gfx, Object* startRolesObj) {
     switch (roleIndex % 4) {
         case 0:
         case 3:
-            gfx = Font_DrawString(gfx, OBJECT_LEFT(startRolesObj) + 1, OBJECT_TOP(startRolesObj) + 1, roleName, 0, FONT_SET_6, 0);
+            gfx = Font_DrawString(gfx, OBJECT_LEFT(startRolesObj) + 1, OBJECT_TOP(startRolesObj) + 1, roleName, 0,
+                                  FONT_SET_6, 0);
             break;
         case 1:
         case 2:
@@ -1168,7 +1170,8 @@ Gfx* Credits_StartRolesDraw(Gfx* gfx, Object* startRolesObj) {
     switch (roleIndex % 4) {
         case 0:
         case 3:
-            gfx = Font_DrawString(gfx, OBJECT_LEFT(startRolesObj), OBJECT_TOP(startRolesObj), roleName, 0, FONT_SET_6, 0);
+            gfx =
+                Font_DrawString(gfx, OBJECT_LEFT(startRolesObj), OBJECT_TOP(startRolesObj), roleName, 0, FONT_SET_6, 0);
             break;
         case 1:
         case 2:
@@ -1227,7 +1230,8 @@ Gfx* Credits_StartNameDraw(Gfx* gfx, Object* startNameObj) {
             switch (temp_v1 % 4) {
                 case 0:
                 case 3:
-                    gfx = Font_DrawString(gfx, OBJECT_LEFT(startNameObj), OBJECT_TOP(startNameObj), temp_a3, 0, FONT_SET_1, 0);
+                    gfx = Font_DrawString(gfx, OBJECT_LEFT(startNameObj), OBJECT_TOP(startNameObj), temp_a3, 0,
+                                          FONT_SET_1, 0);
                     break;
                 case 1:
                 case 2:

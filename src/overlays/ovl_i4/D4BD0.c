@@ -1137,7 +1137,8 @@ Gfx* MachineSelect_BackgroundDraw(Gfx* gfx) {
 Gfx* MachineSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return func_80078EA0(gfx, sSelectMachineCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sSelectMachineCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0, 0, 0, 1.0f,
+                         1.0f);
 }
 
 Gfx* func_i4_80117BE0(Gfx* gfx, Object* arg1) {
@@ -1145,8 +1146,8 @@ Gfx* func_i4_80117BE0(Gfx* gfx, Object* arg1) {
     const s32* var_s0;
 
     if (gNumPlayers == 1) {
-        gfx =
-            func_80078EA0(gfx, sPortraitCompTexInfos[gRacers[0].character], OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sPortraitCompTexInfos[gRacers[0].character], OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0,
+                            0, 1.0f, 1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             var_s0 = &D_i4_8011D6C4[i * 2];
@@ -1167,14 +1168,18 @@ Gfx* MachineSettings_PortraitDraw(Gfx* gfx, Object* portraitObj) {
     positions = &D_i4_8011D6C4[playerIndex * 2];
     switch (gNumPlayers) {
         case 1:
-            gfx = func_80078EA0(gfx, sPortraitBackgroundCompTexInfo, OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
-            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sPortraitBackgroundCompTexInfo, OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj),
+                                0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj),
+                                OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
             break;
         case 2:
-            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], positions[0] - 4, positions[1] + 0x1A, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], positions[0] - 4,
+                                positions[1] + 0x1A, 0, 0, 0, 1.0f, 1.0f);
             break;
         default:
-            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], positions[0], positions[1] + 0x37, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], positions[0], positions[1] + 0x37, 0,
+                                0, 0, 1.0f, 1.0f);
             break;
     }
     return gfx;
@@ -1218,14 +1223,16 @@ Gfx* MachineSelect_PortraitDraw(Gfx* gfx, Object* portraitObj) {
 
     playerIndex = portraitObj->cmdId - OBJECT_MACHINE_SELECT_PORTRAIT_0;
 
-    gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[playerIndex], D_i4_8011D674[playerIndex * 2 + 0] + OBJECT_LEFT(portraitObj),
+    gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj),
+                        OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[playerIndex],
+                         D_i4_8011D674[playerIndex * 2 + 0] + OBJECT_LEFT(portraitObj),
                          D_i4_8011D674[playerIndex * 2 + 1] + OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* MachineSelect_CursorNumDraw(Gfx* gfx, Object* portraitObj) {
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[portraitObj->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], OBJECT_LEFT(portraitObj),
-                         OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[portraitObj->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0],
+                         OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
 extern u32 gGameFrameCount;
@@ -1247,7 +1254,8 @@ Gfx* MachineSelect_CursorDraw(Gfx* gfx, Object* cursorObj) {
             OBJECT_LEFT(cursorObj) = ((temp_v0 % 6) * 0x28) + 0x28;
             OBJECT_TOP(cursorObj) = ((temp_v0 / 6) * 0x22) + 0x25;
 
-            gfx = func_80078EA0(gfx, sMachineSelectCursorCompTexInfo, OBJECT_LEFT(cursorObj), OBJECT_TOP(cursorObj), 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sMachineSelectCursorCompTexInfo, OBJECT_LEFT(cursorObj), OBJECT_TOP(cursorObj), 1,
+                                0, 0, 1.0f, 1.0f);
         }
     }
     return gfx;
@@ -1315,7 +1323,8 @@ Gfx* MachineSelect_OkDraw(Gfx* gfx, Object* okObj) {
     }
 
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + var_v1, OBJECT_TOP(okObj) + 209, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + var_v1, OBJECT_TOP(okObj) + 209, 1, 0, 0, 1.0f,
+                         1.0f);
 }
 
 extern const char* gMachineNames[];
@@ -1419,8 +1428,10 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
 
     if (gNumPlayers == 1) {
         temp_s4 = D_800F80C8[gRacers[0].character].unk_14;
-        gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, OBJECT_LEFT(engineWeightObj), OBJECT_TOP(engineWeightObj), 0, 0, 0, 1.0f, 1.0f);
-        gfx = Font_DrawMachineWeight(gfx, OBJECT_LEFT(engineWeightObj) + 0x66, OBJECT_TOP(engineWeightObj) + 0x17, temp_s4);
+        gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, OBJECT_LEFT(engineWeightObj),
+                            OBJECT_TOP(engineWeightObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = Font_DrawMachineWeight(gfx, OBJECT_LEFT(engineWeightObj) + 0x66, OBJECT_TOP(engineWeightObj) + 0x17,
+                                     temp_s4);
 
         switch (gMachineSettingsState) {
             case MACHINE_SETTINGS_ACTIVE:
@@ -1432,8 +1443,8 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
                 break;
         }
 
-        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj) + 3, OBJECT_TOP(engineWeightObj) + 1, 1, 0, 0, 1.0f,
-                            1.0f);
+        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj) + 3,
+                            OBJECT_TOP(engineWeightObj) + 1, 1, 0, 0, 1.0f, 1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             temp_s4 = D_800F80C8[gRacers[i].character].unk_14;
@@ -1463,11 +1474,13 @@ Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* statsObj) {
     s32 pad;
 
     if (gNumPlayers == 1) {
-        gfx = func_80078EA0(gfx, sMachineBodyBoostGripCompTexInfo, OBJECT_LEFT(statsObj), OBJECT_TOP(statsObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sMachineBodyBoostGripCompTexInfo, OBJECT_LEFT(statsObj), OBJECT_TOP(statsObj), 0, 0, 0,
+                            1.0f, 1.0f);
 
         for (i = 0; i < 3; i++) {
             temp = D_800F80C8[gRacers[0].character].machineStats;
-            gfx = Font_DrawMachineStatValue(gfx, OBJECT_LEFT(statsObj) + 0x69, OBJECT_TOP(statsObj) + i * 23 + 3, temp[i]);
+            gfx = Font_DrawMachineStatValue(gfx, OBJECT_LEFT(statsObj) + 0x69, OBJECT_TOP(statsObj) + i * 23 + 3,
+                                            temp[i]);
         }
     } else {
         for (i = 0; i < gNumPlayers; i++) {
@@ -1511,7 +1524,8 @@ Gfx* func_i4_801193B8(Gfx* gfx, Object* arg1) {
 Gfx* MachineSettings_NameCardDraw(Gfx* gfx, Object* nameCardObj) {
 
     if (gNumPlayers == 1) {
-        gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(nameCardObj)], OBJECT_LEFT(nameCardObj), OBJECT_TOP(nameCardObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(nameCardObj)], OBJECT_LEFT(nameCardObj),
+                            OBJECT_TOP(nameCardObj), 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
@@ -1654,7 +1668,8 @@ Gfx* MachineSelect_NameDraw(Gfx* gfx, Object* nameObj) {
 
 Gfx* MachineSettings_OkDraw(Gfx* gfx, Object* okObj) {
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f,
+                         1.0f);
 }
 
 void func_i4_80119BB8(Object* arg0) {
@@ -1883,7 +1898,8 @@ void MachineSettings_NameCardUpdate(Object* nameCardObj) {
 }
 
 void func_i4_8011A7B8(void) {
-    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) && (CAR_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_CAR)) != 0)) {
+    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) &&
+        (CAR_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_CAR)) != 0)) {
         D_800CE748 = 0.075f;
         D_800CE74C = 0.125f;
         D_800CE750 = 0.105f;
@@ -2208,7 +2224,8 @@ void Title_BackgroundUpdate(Object* backgroundObj) {
 }
 
 Gfx* Title_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
-    return func_80078EA0(gfx, sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], OBJECT_LEFT(backgroundObj),
+                         OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_8011B3DC(Gfx* gfx, Object* arg1) {
@@ -2231,7 +2248,8 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
             return gfx;
         }
         gfx = func_8007DB28(gfx, 0);
-        gfx = func_80078EA0(gfx, sTitlePushStartCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitlePushStartCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 1, 0, 0, 1.0f,
+                            1.0f);
     } else {
         OBJECT_LEFT(startObj) = 80;
 
@@ -2252,8 +2270,8 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
             var_v1 = 30 - var_v1;
         }
 
-        gfx = func_8007A440(gfx, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), OBJECT_LEFT(startObj) + 160, OBJECT_TOP(startObj) + 32, (s32) (var_v1 * 40) / 60, 0,
-                            0, 0xF0);
+        gfx = func_8007A440(gfx, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), OBJECT_LEFT(startObj) + 160,
+                            OBJECT_TOP(startObj) + 32, (s32) (var_v1 * 40) / 60, 0, 0, 0xF0);
         var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
@@ -2261,7 +2279,8 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
             gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
 
-        gfx = func_80078EA0(gfx, sTitleNoControllerCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleNoControllerCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 0, 0, 0,
+                            1.0f, 1.0f);
     }
     return gfx;
 }
@@ -2271,7 +2290,8 @@ Gfx* func_i4_8011B668(Gfx* gfx, Object* arg1) {
 }
 
 Gfx* Title_CopyrightDraw(Gfx* gfx, Object* copyrightObj) {
-    return func_80078EA0(gfx, sCopyrightCompTexInfo, OBJECT_LEFT(copyrightObj), OBJECT_TOP(copyrightObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sCopyrightCompTexInfo, OBJECT_LEFT(copyrightObj), OBJECT_TOP(copyrightObj), 0, 0, 0, 1.0f,
+                         1.0f);
 }
 
 Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* diskDriveObj) {
@@ -2293,15 +2313,16 @@ Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* diskDriveObj) {
             var_v1 = 30 - var_v1;
         }
 
-        gfx = func_8007A440(gfx, OBJECT_LEFT(diskDriveObj), OBJECT_TOP(diskDriveObj), OBJECT_LEFT(diskDriveObj) + 160, OBJECT_TOP(diskDriveObj) + 32, (s32) (var_v1 * 40) / 60, 0,
-                            0, 0xF0);
+        gfx = func_8007A440(gfx, OBJECT_LEFT(diskDriveObj), OBJECT_TOP(diskDriveObj), OBJECT_LEFT(diskDriveObj) + 160,
+                            OBJECT_TOP(diskDriveObj) + 32, (s32) (var_v1 * 40) / 60, 0, 0, 0xF0);
         var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
         } else {
             gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
-        gfx = func_80078EA0(gfx, sTitleWarningCompTexInfos[var_t0], OBJECT_LEFT(diskDriveObj), OBJECT_TOP(diskDriveObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleWarningCompTexInfos[var_t0], OBJECT_LEFT(diskDriveObj), OBJECT_TOP(diskDriveObj),
+                            0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }

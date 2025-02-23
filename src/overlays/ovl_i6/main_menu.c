@@ -246,13 +246,15 @@ s32 MainMenu_Update(void) {
                 return GAMEMODE_FLX_TITLE;
             }
 
-            if ((gInputButtonPressed & BTN_START) && (OBJECT_STATE(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) == 7)) {
+            if ((gInputButtonPressed & BTN_START) &&
+                (OBJECT_STATE(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) == 7)) {
                 break;
             }
 
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
-                D_800DCE48.unk_10 = (UNLOCK_EVERYTHING_ROMDATA(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) & 0xFFFF) - 0x997A;
+                D_800DCE48.unk_10 =
+                    (UNLOCK_EVERYTHING_ROMDATA(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) & 0xFFFF) - 0x997A;
                 switch (gSelectedMode) {
                     case MODE_GP_RACE:
                     case MODE_TIME_ATTACK:
@@ -364,7 +366,8 @@ s32 MainMenu_Update(void) {
                 }
                 break;
             }
-            if ((gInputButtonPressed & BTN_START) && (OBJECT_STATE(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) == 7)) {
+            if ((gInputButtonPressed & BTN_START) &&
+                (OBJECT_STATE(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) == 7)) {
                 break;
             }
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
@@ -589,9 +592,9 @@ Gfx* MainMenu_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
     if (OBJECT_STATE(backgroundObj) < 3) {
         sp44 = sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)];
         gfx = func_80078EA0(gfx, sp44, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f);
-        gfx = func_8007A440(gfx, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), OBJECT_LEFT(backgroundObj) + sp44->width,
-                            OBJECT_TOP(backgroundObj) + sp44->height, D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68,
-                            D_i6_8011DC6C);
+        gfx = func_8007A440(gfx, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj),
+                            OBJECT_LEFT(backgroundObj) + sp44->width, OBJECT_TOP(backgroundObj) + sp44->height,
+                            D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68, D_i6_8011DC6C);
     } else {
         sp44 = sTitleBackgroundCompTexInfos[D_800CD3C4];
         gfx = func_80078EA0(gfx, sp44, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f);
@@ -696,9 +699,9 @@ Gfx* MainMenu_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
                                     1 << 10);
         }
 
-        gfx = func_8007A440(gfx, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), OBJECT_LEFT(backgroundObj) + sp44->width,
-                            OBJECT_TOP(backgroundObj) + sp44->height, D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68,
-                            D_i6_8011DC6C);
+        gfx = func_8007A440(gfx, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj),
+                            OBJECT_LEFT(backgroundObj) + sp44->width, OBJECT_TOP(backgroundObj) + sp44->height,
+                            D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68, D_i6_8011DC6C);
         switch (OBJECT_STATE(backgroundObj)) {
             case 10:
             case 20:
@@ -748,7 +751,8 @@ Gfx* MainMenu_HeaderDraw(Gfx* gfx, Object* headerObj) {
 
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return func_80078EA0(gfx, sSelectModeCompTexInfo, OBJECT_LEFT(headerObj) - temp, OBJECT_TOP(headerObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sSelectModeCompTexInfo, OBJECT_LEFT(headerObj) - temp, OBJECT_TOP(headerObj), 0, 0, 0,
+                         1.0f, 1.0f);
 }
 
 Gfx* MainMenu_NumPlayersDraw(Gfx* gfx, Object* numPlayersObj) {
@@ -781,8 +785,8 @@ Gfx* MainMenu_NumPlayersDraw(Gfx* gfx, Object* numPlayersObj) {
             break;
     }
     temp_s7 = SQ(OBJECT_COUNTER(numPlayersObj)) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, OBJECT_LEFT(numPlayersObj) - temp_s7, OBJECT_TOP(numPlayersObj), 0,
-                        0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, OBJECT_LEFT(numPlayersObj) - temp_s7,
+                        OBJECT_TOP(numPlayersObj), 0, 0, 0, 1.0f, 1.0f);
 
     for (i = 0; i < 3; i++) {
         if (gModeSubOption[gSelectedMode] == i) {
@@ -847,8 +851,8 @@ Gfx* MainMenu_DifficultyDraw(Gfx* gfx, Object* difficultyObj) {
     }
 
     temp_s6 = SQ(OBJECT_COUNTER(difficultyObj)) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, OBJECT_LEFT(difficultyObj) - temp_s6, OBJECT_TOP(difficultyObj), 0,
-                        0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, OBJECT_LEFT(difficultyObj) - temp_s6,
+                        OBJECT_TOP(difficultyObj), 0, 0, 0, 1.0f, 1.0f);
 
     for (i = 0; i < 4; i++) {
         if (gModeSubOption[gSelectedMode] == i) {
@@ -929,7 +933,8 @@ Gfx* MainMenu_TimeAttackModeDraw(Gfx* gfx, Object* timeAttackModeObj) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
         temp_a1 = sTimeAttackModeCompTexInfos[i];
-        gfx = func_80078EA0(gfx, temp_a1, (((s32) (0x80 - temp_a1->width) / 2) + OBJECT_LEFT(timeAttackModeObj)) - temp_s7,
+        gfx = func_80078EA0(gfx, temp_a1,
+                            (((s32) (0x80 - temp_a1->width) / 2) + OBJECT_LEFT(timeAttackModeObj)) - temp_s7,
                             OBJECT_TOP(timeAttackModeObj) + (i * 28) + 0x15, 1, 0, 0, 1.0f, 1.0f);
     }
 
@@ -945,11 +950,13 @@ Gfx* MainMenu_OkDraw(Gfx* gfx, Object* okObj) {
         case 4:
         case 5:
             gfx = func_8007DB28(gfx, 1);
-            gfx = func_80078EA0(gfx, sOkCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sOkCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0,
+                                1.0f, 1.0f);
             break;
         default:
             gfx = func_8007DB28(gfx, 0);
-            gfx = func_80078EA0(gfx, sOkCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sOkCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0,
+                                1.0f, 1.0f);
             break;
     }
     return gfx;

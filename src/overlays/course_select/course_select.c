@@ -235,8 +235,8 @@ void CourseSelect_Init(void) {
     Object_Init(OBJECT_COURSE_SELECT_HEADER, var_a1, var_a2, 4);
     Object_Init(OBJECT_COURSE_SELECT_OK, 0, 0, 10);
     Object_Init(OBJECT_COURSE_SELECT_MODEL, 0, 0, 8);
-    if (((gSettingEverythingUnlocked != 0) || (gUnlockableLevel >= 2)) && (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) &&
-        (gSelectedMode != MODE_TIME_ATTACK)) {
+    if (((gSettingEverythingUnlocked != 0) || (gUnlockableLevel >= 2)) &&
+        (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) && (gSelectedMode != MODE_TIME_ATTACK)) {
         Object_Init(OBJECT_COURSE_SELECT_CUP_4, 0, -100, 6);
     }
     if ((gUnlockableLevel >= 1) || (gSettingEverythingUnlocked != 0)) {
@@ -729,7 +729,8 @@ Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
             break;
     }
 
-    gfx = func_80078EA0(gfx, sCupSelectCompTexInfos[i], OBJECT_LEFT(cupObj), OBJECT_TOP(cupObj) + yOffset, 1, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, sCupSelectCompTexInfos[i], OBJECT_LEFT(cupObj), OBJECT_TOP(cupObj) + yOffset, 1, 0, 0,
+                        1.0f, 1.0f);
 
     if ((gSelectedMode == MODE_GP_RACE) && (i <= JOKER_CUP)) {
         alpha = ((OBJECT_TOP(cupObj) - 49) * 255) / 36;
@@ -740,7 +741,8 @@ Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
         }
 
         for (i = 0; i < cupDifficultiesCleared; i++) {
-            gfx = func_80078EA0(gfx, sCupClearedDifficultyCompTexInfos[i], OBJECT_LEFT(cupObj) + (i * 16) + ((12 - i * 8) / 2),
+            gfx = func_80078EA0(gfx, sCupClearedDifficultyCompTexInfos[i],
+                                OBJECT_LEFT(cupObj) + (i * 16) + ((12 - i * 8) / 2),
                                 (OBJECT_TOP(cupObj) + yOffset) - 12, 1, 0, 0, 1.0f, 1.0f);
         }
     }
@@ -773,17 +775,19 @@ Gfx* CourseSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
         }
         temp_v1 = (SQ(OBJECT_COUNTER(headerObj)) * 3) / 2;
 
-        gfx = func_80078EA0(gfx, sSelectCourseCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj) + temp_v1, 0, 0, 0, 1.0f,
-                            1.0f);
+        gfx = func_80078EA0(gfx, sSelectCourseCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj) + temp_v1, 0,
+                            0, 0, 1.0f, 1.0f);
     } else {
-        gfx = func_80078EA0(gfx, sRecordsCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx =
+            func_80078EA0(gfx, sRecordsCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
 
 Gfx* CourseSelect_OkDraw(Gfx* gfx, Object* okObj) {
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f,
+                         1.0f);
 }
 
 Gfx* CourseSelect_ArrowsDraw(Gfx* gfx, Object* arrowsObj) {
@@ -791,10 +795,10 @@ Gfx* CourseSelect_ArrowsDraw(Gfx* gfx, Object* arrowsObj) {
     f32 temp_fa1 = (SIN(RIGHT_ARROW_ROTATION(arrowsObj)) + 1.0) / 2;
 
     // left and top represent x positions for left and right arrows for this object
-    gfx = func_80078EA0(gfx, sYellowArrowCompTexInfo, LEFT_ARROW_LEFT(arrowsObj) + 0x2B, (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0,
-                        0, 1.0f, temp_fv0);
-    return func_80078EA0(gfx, sYellowArrowCompTexInfo, RIGHT_ARROW_LEFT(arrowsObj) + 0xF5, (((1.0 - temp_fa1) * 16.0) + 112.0), 5, 0,
-                         0, 1.0f, temp_fa1);
+    gfx = func_80078EA0(gfx, sYellowArrowCompTexInfo, LEFT_ARROW_LEFT(arrowsObj) + 0x2B,
+                        (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0, 0, 1.0f, temp_fv0);
+    return func_80078EA0(gfx, sYellowArrowCompTexInfo, RIGHT_ARROW_LEFT(arrowsObj) + 0xF5,
+                         (((1.0 - temp_fa1) * 16.0) + 112.0), 5, 0, 0, 1.0f, temp_fa1);
 }
 
 Gfx* CourseSelect_NameDraw(Gfx* gfx) {
@@ -866,7 +870,8 @@ Gfx* CourseSelect_GhostMarkerDraw(Gfx* gfx, Object* ghostMarkerObj) {
         case COURSE_SELECT_AWAIT_OK:
         case COURSE_SELECT_CONTINUE:
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            gfx = func_80078EA0(gfx, sHasGhostMarkerCompTexInfo, OBJECT_LEFT(ghostMarkerObj) + GHOST_MARKER_OFFSET(ghostMarkerObj),
+            gfx = func_80078EA0(gfx, sHasGhostMarkerCompTexInfo,
+                                OBJECT_LEFT(ghostMarkerObj) + GHOST_MARKER_OFFSET(ghostMarkerObj),
                                 OBJECT_TOP(ghostMarkerObj), 0, 0, 0, 1.0f, 1.0f);
             break;
     }
@@ -892,12 +897,12 @@ Gfx* CourseSelect_GhostOptionDraw(Gfx* gfx, Object* ghostOptionObj) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
-        gfx = func_80078EA0(gfx, sTimeAttackGhostOptionCompTexInfos[i], OBJECT_LEFT(ghostOptionObj) + 195, i * 20 + 0x2D, 0,
-                            0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTimeAttackGhostOptionCompTexInfos[i], OBJECT_LEFT(ghostOptionObj) + 195,
+                            i * 20 + 0x2D, 0, 0, 0, 1.0f, 1.0f);
 
         if ((i == 2) && sStaffGhostTimeBeaten) {
-            gfx = func_80078EA0(gfx, sStaffGhostBeatenCompTexInfo, OBJECT_LEFT(ghostOptionObj) + 265, i * 20 + 0x2D, 0, 0, 0,
-                                1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sStaffGhostBeatenCompTexInfo, OBJECT_LEFT(ghostOptionObj) + 265, i * 20 + 0x2D, 0,
+                                0, 0, 1.0f, 1.0f);
         }
     }
     return gfx;
@@ -906,7 +911,8 @@ Gfx* CourseSelect_GhostOptionDraw(Gfx* gfx, Object* ghostOptionObj) {
 void CourseSelect_ModelUpdate(Object* modelObj) {
     s32 temp_a1;
 
-    if (((sCourseSelectState != COURSE_SELECT_CUP_SELECT) && (sCourseSelectState != COURSE_SELECT_EXIT_RECORDS)) || (gCupSelectOption < 4)) {
+    if (((sCourseSelectState != COURSE_SELECT_CUP_SELECT) && (sCourseSelectState != COURSE_SELECT_EXIT_RECORDS)) ||
+        (gCupSelectOption < 4)) {
         func_i5_80115E10();
     }
     temp_a1 = -(sCourseSelectTrackNo * 0x500);
@@ -943,7 +949,8 @@ void CourseSelect_CupUpdate(Object* cupObj) {
             } else {
                 OBJECT_STATE(cupObj) = 1;
             }
-            if ((sCourseSelectState != COURSE_SELECT_CUP_SELECT) && (sCourseSelectState != COURSE_SELECT_EXIT_RECORDS)) {
+            if ((sCourseSelectState != COURSE_SELECT_CUP_SELECT) &&
+                (sCourseSelectState != COURSE_SELECT_EXIT_RECORDS)) {
                 OBJECT_STATE(cupObj) = 1;
             }
             break;
@@ -1075,12 +1082,14 @@ void CourseSelect_ArrowsUpdate(Object* arrowsObj) {
             RIGHT_ARROW_ROTATION(arrowsObj) += RIGHT_ARROW_ROTATION_CHANGE(arrowsObj);
 
             arrowsObj->shouldDraw = true;
-            if ((sCourseSelectTrackNo == 0) || (sCourseSelectState == COURSE_SELECT_AWAIT_OK) || (sCourseSelectState == COURSE_SELECT_CONTINUE)) {
+            if ((sCourseSelectTrackNo == 0) || (sCourseSelectState == COURSE_SELECT_AWAIT_OK) ||
+                (sCourseSelectState == COURSE_SELECT_CONTINUE)) {
                 Object_LerpPosXToClampedTargetMaxStep(arrowsObj, -100, 192);
             } else {
                 Object_LerpPosXToClampedTargetMaxStep(arrowsObj, 0, 192);
             }
-            if ((sCourseSelectTrackNo == 5) || (sCourseSelectState == COURSE_SELECT_AWAIT_OK) || (sCourseSelectState == COURSE_SELECT_CONTINUE)) {
+            if ((sCourseSelectTrackNo == 5) || (sCourseSelectState == COURSE_SELECT_AWAIT_OK) ||
+                (sCourseSelectState == COURSE_SELECT_CONTINUE)) {
                 Object_LerpPosYToClampedTarget(arrowsObj, 100);
             } else {
                 Object_LerpPosYToClampedTarget(arrowsObj, 0);
