@@ -656,4 +656,6 @@ Gfx* func_i9_801685B4(Gfx* gfx);
 
 s32 func_i10_80115DF0(void);
 
+void func_i11_800FC730(void);
+
 #endif // FUNCTIONS_H

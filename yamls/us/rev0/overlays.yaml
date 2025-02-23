@@ -177,10 +177,13 @@
     bss_size: 0x30
     symbol_name_format: i4_$VRAM
     subsegments:
-      - [0xD4BD0, c]
-      - [0xDA760, .data, D4BD0]
-      - [0xDC440, .rodata, D4BD0]
-      - { type: .bss, vram: 0x8011D770, name: D4BD0 }
+      - [0xD4BD0, c, machine]
+      - [0xD9640, c, title]
+      - [0xDA760, .data, machine]
+      - [0xDC2D0, .data, title]
+      - [0xDC440, .rodata, machine]
+      - { type: .bss, vram: 0x8011D770, name: machine }
+      - { type: .bss, vram: 0x8011D790, name: title }
 
   - name: course_select
     exclusive_ram_id: overlay
@@ -232,10 +235,10 @@
     bss_size: 0xDD0
     symbol_name_format: i7_$VRAM
     subsegments:
-      - [0xE9A30, c]
-      - [0xEFEF0, .data, E9A30]
-      - [0xF13A0, .rodata, E9A30]
-      - { type: bss, vram: 0x8014B480, name: E9A30 }
+      - [0xE9A30, c, ending]
+      - [0xEFEF0, .data, ending]
+      - [0xF13A0, .rodata, ending]
+      - { type: bss, vram: 0x8014B480, name: ending }
 
   - name: ovl_i8
     exclusive_ram_id: overlay
@@ -246,10 +249,10 @@
     bss_size: 0x130
     symbol_name_format: i8_$VRAM
     subsegments:
-      - [0xF14E0, c]
-      - [0xF2A50, .data, F14E0]
-      - [0xF2AB0, .rodata, F14E0]
-      - { type: .bss, vram: 0x80144FB0, name: F14E0 }
+      - [0xF14E0, c, records]
+      - [0xF2A50, .data, records]
+      - [0xF2AB0, .rodata, records]
+      - { type: .bss, vram: 0x80144FB0, name: records }
 
   - name: ovl_i9
     exclusive_ram_id: overlay
@@ -260,9 +263,9 @@
     bss_size: 0x10
     symbol_name_format: i9_$VRAM
     subsegments:
-      - [0xF2AC0, c]
-      - [0x145740, .data, F2AC0]
-      - { type: .bss, vram: 0x80168CD0, name: F2AC0 }
+      - [0xF2AC0, c, car_draw]
+      - [0x145740, .data, car_draw]
+      - { type: .bss, vram: 0x80168CD0, name: car_draw }
 
   - name: ovl_i10
     exclusive_ram_id: overlay

@@ -607,12 +607,12 @@ typedef struct Ghost {
 } Ghost; // size = 0x3F80
 
 typedef struct unk_80077D50 {
-    s16 unk_00;
-    void* unk_04; // segmented address
-    u16 width;
-    u16 height;
-    size_t compressedSize;
-} unk_80077D50;
+    /* 0x00 */ s16 unk_00;
+    /* 0x04 */ void* unk_04; // segmented address
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ size_t compressedSize;
+} unk_80077D50; // size = 0x10
 
 typedef struct unk_800E33E0 {
     void* unk_00; // segmented address
