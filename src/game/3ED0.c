@@ -429,7 +429,123 @@ void func_8006B18C(LookAt* lookAt, s32* arg1, MtxF* arg2, f32 arg3, f32 arg4, f3
     arg1[1] = arg7 * 2;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006B33C.s")
+#define FTO32(x) (long) ((x) *65536.0f)
+#define MTXTOMTXF(mtx, i1, i2) ((((s16) mtx->u.i[(i1)][(i2)] << 0x10) | mtx->u.f[(i1)][(i2)]) / 65536.0f)
+
+void func_8006B33C(Mtx* arg0, Mtx* arg1, Mtx* dest, f32 arg3) {
+    f32 temp_fa0;
+    f32 temp_fv1;
+    s32 x2;
+    s32 y2;
+    s32 z2;
+    f32 x5;
+    f32 y5;
+    f32 z5;
+    f32 x1;
+    f32 y1;
+    f32 z1;
+    f32 x4;
+    f32 y4;
+    f32 z4;
+
+    temp_fa0 = MTXTOMTXF(arg0, 1, 0);
+    temp_fv1 = MTXTOMTXF(arg1, 1, 0);
+    x1 = ((temp_fv1 - temp_fa0) * arg3) + temp_fa0;
+
+    temp_fa0 = MTXTOMTXF(arg0, 1, 1);
+    temp_fv1 = MTXTOMTXF(arg1, 1, 1);
+    y1 = ((temp_fv1 - temp_fa0) * arg3) + temp_fa0;
+
+    temp_fa0 = MTXTOMTXF(arg0, 1, 2);
+    temp_fv1 = MTXTOMTXF(arg1, 1, 2);
+    z1 = ((temp_fv1 - temp_fa0) * arg3) + temp_fa0;
+
+    temp_fa0 = SQ(x1) + SQ(y1) + SQ(z1);
+    if (temp_fa0 == 0.0f) {
+        return;
+    }
+
+    temp_fa0 = 65536.0f / sqrtf(temp_fa0);
+    x2 = (s32) (x1 * temp_fa0);
+    y2 = (s32) (y1 * temp_fa0);
+    z2 = (s32) (z1 * temp_fa0);
+
+    dest->m[0][2] = (x2 & 0xFFFF0000) | ((u32) y2 >> 0x10);
+    dest->m[0][3] = z2 & 0xFFFF0000;
+    dest->m[2][2] = (x2 << 0x10) | (y2 & 0xFFFF);
+    dest->m[2][3] = z2 << 0x10;
+
+    temp_fa0 = MTXTOMTXF(arg0, 2, 0);
+    temp_fv1 = MTXTOMTXF(arg1, 2, 0);
+    x4 = ((temp_fv1 - temp_fa0) * arg3) + temp_fa0;
+
+    temp_fa0 = MTXTOMTXF(arg0, 2, 1);
+    temp_fv1 = MTXTOMTXF(arg1, 2, 1);
+    y4 = ((temp_fv1 - temp_fa0) * arg3) + temp_fa0;
+
+    temp_fa0 = MTXTOMTXF(arg0, 2, 2);
+    temp_fv1 = MTXTOMTXF(arg1, 2, 2);
+    z4 = ((temp_fv1 - temp_fa0) * arg3) + temp_fa0;
+
+    x5 = ((z4 - z1) * y1) - (z1 * (y4 - y1));
+    y5 = ((x4 - x1) * z1) - (x1 * (z4 - z1));
+    z5 = ((y4 - y1) * x1) - (y1 * (x4 - x1));
+
+    temp_fa0 = SQ(x5) + SQ(y5) + SQ(z5);
+
+    if (temp_fa0 == 0.0f) {
+        return;
+    }
+
+    temp_fa0 = 65536.0f / sqrtf(temp_fa0);
+
+    x2 = (s32) (x5 * temp_fa0);
+    y2 = (s32) (y5 * temp_fa0);
+    z2 = (s32) (z5 * temp_fa0);
+
+    dest->m[0][0] = (x2 & 0xFFFF0000) | ((u32) y2 >> 0x10);
+    dest->m[0][1] = z2 & 0xFFFF0000;
+    dest->m[2][0] = (x2 << 0x10) | (y2 & 0xFFFF);
+    dest->m[2][1] = z2 << 0x10;
+
+    x4 = ((z1 - z5) * y5) - (z5 * (y1 - y5));
+    y4 = ((x1 - x5) * z5) - (x5 * (z1 - z5));
+    z4 = ((y1 - y5) * x5) - (y5 * (x1 - x5));
+
+    temp_fa0 = SQ(x4) + SQ(y4) + SQ(z4);
+
+    if (temp_fa0 == 0.0f) {
+        return;
+    }
+
+    temp_fa0 = 65536.0f / sqrtf(temp_fa0);
+
+    x2 = (s32) (x4 * temp_fa0);
+    y2 = (s32) (y4 * temp_fa0);
+    z2 = (s32) (z4 * temp_fa0);
+
+    dest->m[1][0] = (x2 & 0xFFFF0000) | ((u32) y2 >> 0x10);
+    dest->m[1][1] = z2 & 0xFFFF0000;
+    dest->m[3][0] = (x2 << 0x10) | (y2 & 0xFFFF);
+    dest->m[3][1] = z2 << 0x10;
+
+    temp_fa0 = MTXTOMTXF(arg0, 3, 0);
+    temp_fv1 = MTXTOMTXF(arg1, 3, 0);
+    x2 = FTO32(((temp_fv1 - temp_fa0) * arg3) + temp_fa0);
+
+    temp_fa0 = MTXTOMTXF(arg0, 3, 1);
+    temp_fv1 = MTXTOMTXF(arg1, 3, 1);
+    y2 = FTO32(((temp_fv1 - temp_fa0) * arg3) + temp_fa0);
+
+    temp_fa0 = MTXTOMTXF(arg0, 3, 2);
+    temp_fv1 = MTXTOMTXF(arg1, 3, 2);
+    z2 = FTO32(((temp_fv1 - temp_fa0) * arg3) + temp_fa0);
+
+    dest->m[1][2] = (x2 & 0xFFFF0000) | ((u32) y2 >> 0x10);
+    dest->m[1][3] = (z2 & 0xFFFF0000) | 1;
+    dest->m[3][2] = (x2 << 0x10) | (y2 & 0xFFFF);
+    dest->m[3][3] = z2 << 0x10;
+}
 
 void func_8006B908(MtxF* arg0, MtxF* arg1, MtxF* arg2) {
     arg2->m[0][0] = arg0->m[0][0] * arg1->m[0][0] + arg0->m[1][0] * arg1->m[0][1] + arg0->m[2][0] * arg1->m[0][2];

@@ -29,10 +29,8 @@ typedef union unk_Light {
 // ROUGH APPROXIMATIONS OF SIZES, NOT CORRECT!!
 
 typedef struct GfxPool {
-    Gfx gfxBuffer[1];
-    s8 pad_00008[0x10000];
-    Vtx unk_10008[1];
-    s8 pad_10018[0xFFF0];
+    Gfx gfxBuffer[8193];
+    Vtx unk_10008[4096];
     Mtx unk_20008[4];
     Mtx unk_20108[4];
     Mtx unk_20208[4];

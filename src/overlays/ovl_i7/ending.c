@@ -3,6 +3,7 @@
 #include "fzx_hud.h"
 #include "fzx_racer.h"
 #include "fzx_course.h"
+#include "src/overlays/ovl_i2/ovl_i2.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"
 #include "assets/segment_2738A0.h"
@@ -10,12 +11,12 @@
 
 extern s16 D_800CCFE8;
 extern s32 gCupType;
-extern s8 D_800CD3C0;
+extern s8 gUnlockableLevel;
 extern s8 D_800DCE5C;
 extern s16 D_800E42CC;
 extern s32 gCourseIndex;
 extern RaceStats gCupRaceStats[1][6];
-extern CourseData D_8010B7B0;
+extern CourseData gCourseData;
 extern s32 D_i2_80106F10;
 extern s16 D_80106F48;
 
@@ -286,7 +287,7 @@ unk_struct_14 D_i7_8014A4A8[] = {
     { 7, D_i7_8014A444, D_i7_8014A460, D_i7_8014A47C, D_i7_8014A498 },
 };
 
-extern const unk_8008112C_arg_1 D_800D4E98;
+extern const unk_redo_3 D_800D4E98;
 
 unk_struct_C D_i7_8014A4D0[] = {
     { 0, func_80083734, &D_800D4E98 },
@@ -789,7 +790,7 @@ s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 arg2) {
 void func_i7_80147CC0(void);
 void func_i7_801467FC(void);
 
-void func_i7_80143A90(void) {
+void EndingCutscene_Init(void) {
     unk_8014BE28* var_v1;
     s32 cupFirstCourseIndex;
     s32 pad;
@@ -816,7 +817,7 @@ void func_i7_80143A90(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0.venue, D_8010B7B0.skybox);
+    func_8007F4E0(gCourseData.venue, gCourseData.skybox);
     func_i3_801365E0();
     func_i2_801044F0();
     func_8006D448();
@@ -837,7 +838,7 @@ void func_i7_80143A90(void) {
     if (D_800E42CC != 0) {
         D_800E42CC = 0;
         D_i7_8014BDF6 |= 0x10;
-    } else if (D_800CD3C0 >= 2) {
+    } else if (gUnlockableLevel >= 2) {
         switch (sCupDifficulty) {
             case EXPERT:
             case MASTER:
@@ -883,7 +884,7 @@ void func_i7_80143A90(void) {
             sCupNameIndex = 4;
             break;
     }
-    D_i7_8014BE18 = func_i2_801062E4(sCupNames[sCupNameIndex], 3, 1);
+    D_i7_8014BE18 = Font_GetStringWidth(sCupNames[sCupNameIndex], FONT_SET_3, 1);
     D_i7_8014BE1C = 0;
     sThanksForPlayingFade = 0;
     D_i7_8014BF28 = 0;
@@ -974,9 +975,9 @@ void func_i7_80147EBC(void);
 extern s32 D_800DCCFC;
 extern Controller gSharedController;
 
-s32 func_i7_801441A0(void) {
+s32 EndingCutscene_Update(void) {
 
-    func_8007DABC(&gSharedController);
+    Controller_SetGlobalInputs(&gSharedController);
     D_i7_8014BDF0 = &D_8014B480[D_800DCCFC];
     func_i2_8010466C();
     func_800952F4();
@@ -997,7 +998,7 @@ s32 func_i7_801441A0(void) {
         case 1:
             return GAMEMODE_FLX_MAIN_MENU;
         case 2:
-            return GAMEMODE_800C;
+            return GAMEMODE_FLX_UNSKIPPABLE_CREDITS;
         case 0:
         default:
             return GAMEMODE_GP_END_CS;
@@ -1071,7 +1072,7 @@ s32 func_i7_801442A0(void) {
             var_a0 = true;
 
             for (i = 0, racer = gRacers; i < 3; i++) {
-                if (racer->unk_98 > 0.1f) {
+                if (racer->speed > 0.1f) {
                     var_a0 = false;
                     break;
                 }
@@ -1172,7 +1173,7 @@ Gfx* func_i7_80144B2C(Gfx*);
 Gfx* func_i7_80146E28(Gfx*);
 Gfx* func_i7_80147AC8(Gfx*);
 
-Gfx* func_i7_801447F4(Gfx* gfx) {
+Gfx* EndingCutscene_Draw(Gfx* gfx) {
 
     if (D_i2_80106F10 != 0) {
         D_i2_80106F10--;
@@ -1301,14 +1302,14 @@ Gfx* func_i7_DrawFinalResultsRaceResult(Gfx* gfx, unk_8014BE28* arg1, f32 baseYP
 
     var_fv0 = 160.0f;
 
-    gfx = func_i2_80106450(gfx, (var_fv0 + 2.0f) - (func_i2_801062E4(trackName, 3, 1) / 2), (baseYPos + 16.0f) + 2.0f,
-                           trackName, 1, 3, 0);
+    gfx = Font_DrawString(gfx, (var_fv0 + 2.0f) - (Font_GetStringWidth(trackName, FONT_SET_3, 1) / 2),
+                          (baseYPos + 16.0f) + 2.0f, trackName, 1, FONT_SET_3, 0);
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    gfx = func_i2_80106450(gfx, var_fv0 - (func_i2_801062E4(trackName, 3, 1) / 2), (baseYPos + 16.0f), trackName, 1, 3,
-                           0);
+    gfx = Font_DrawString(gfx, var_fv0 - (Font_GetStringWidth(trackName, FONT_SET_3, 1) / 2), (baseYPos + 16.0f),
+                          trackName, 1, FONT_SET_3, 0);
     gSPDisplayList(gfx++, D_8014940);
 
     if (raceStats->position == 1) {
@@ -1421,12 +1422,12 @@ Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     left = 160.0f;
     temp_fa1 = arg2 + 16.0f;
 
-    gfx = func_i2_80106450(gfx, (left + 2.0f) - (func_i2_801062E4(sTotalRankingStr, 3, 1) / 2), temp_fa1 + 2.0f,
-                           sTotalRankingStr, 1, 3, 0);
+    gfx = Font_DrawString(gfx, (left + 2.0f) - (Font_GetStringWidth(sTotalRankingStr, FONT_SET_3, 1) / 2),
+                          temp_fa1 + 2.0f, sTotalRankingStr, 1, FONT_SET_3, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 250, 0, 255);
-    gfx = func_i2_80106450(gfx, left - (func_i2_801062E4(sTotalRankingStr, 3, 1) / 2), temp_fa1, sTotalRankingStr, 1, 3,
-                           0);
+    gfx = Font_DrawString(gfx, left - (Font_GetStringWidth(sTotalRankingStr, FONT_SET_3, 1) / 2), temp_fa1,
+                          sTotalRankingStr, 1, FONT_SET_3, 0);
     temp_fa1 += 10.0f;
     left = 122.0f;
     gDPPipeSync(gfx++);
@@ -1475,7 +1476,7 @@ Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
         if (sTotalRacersKOd % 10) {
             i++;
         }
-        gfx = func_i2_80106450(gfx, 0x6E, (arg2 + 70.0f) + 20.0f + (i * 10), racersKOdStr, 1, 3, 0);
+        gfx = Font_DrawString(gfx, 0x6E, (arg2 + 70.0f) + 20.0f + (i * 10), racersKOdStr, 1, FONT_SET_3, 0);
     }
     return gfx;
 }
@@ -1496,12 +1497,14 @@ Gfx* func_i7_DrawFinalResultsCupInfo(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     var_fv0 = 160.0f;
     temp_fa1 = arg2 + 16.0f;
 
-    gfx = func_i2_80106450(gfx, (var_fv0 + 2.0f) - (func_i2_801062E4(name, 3, 1) / 2), temp_fa1 + 2.0f, name, 1, 3, 0);
+    gfx = Font_DrawString(gfx, (var_fv0 + 2.0f) - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1 + 2.0f, name,
+                          1, FONT_SET_3, 0);
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_i2_80106450(gfx, var_fv0 - (func_i2_801062E4(name, 3, 1) / 2), temp_fa1, name, 1, 3, 0);
+    gfx = Font_DrawString(gfx, var_fv0 - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1, name, 1, FONT_SET_3,
+                          0);
 
     temp_fa1 += 20.0f;
     name = sDifficultyNames[sCupDifficulty];
@@ -1509,12 +1512,14 @@ Gfx* func_i7_DrawFinalResultsCupInfo(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
 
-    gfx = func_i2_80106450(gfx, (var_fv0 + 2.0f) - (func_i2_801062E4(name, 3, 1) / 2), temp_fa1 + 2.0f, name, 1, 3, 0);
+    gfx = Font_DrawString(gfx, (var_fv0 + 2.0f) - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1 + 2.0f, name,
+                          1, FONT_SET_3, 0);
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    return func_i2_80106450(gfx, var_fv0 - (func_i2_801062E4(name, 3, 1) / 2), temp_fa1, name, 1, 3, 0);
+    return Font_DrawString(gfx, var_fv0 - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1, name, 1, FONT_SET_3,
+                           0);
 }
 
 void func_i7_FadeInThanksForPlaying(void) {
@@ -1536,14 +1541,14 @@ Gfx* func_i7_DrawThanksForPlayingWindow(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sThanksForPlayingBackgroundAlpha);
 
-    sThanksForPlayingWidth = func_i2_801062E4(sThanksForPlayingStr, 1, 1);
+    sThanksForPlayingWidth = Font_GetStringWidth(sThanksForPlayingStr, FONT_SET_1, 1);
     sThanksForPlayingLeft = (SCREEN_WIDTH - sThanksForPlayingWidth) / 2;
     sThanksForPlayingTop = SCREEN_HEIGHT / 2;
 
-    return func_i2_80106450(gfx, sThanksForPlayingLeft, sThanksForPlayingTop, sThanksForPlayingStr, 1, 1, 1);
+    return Font_DrawString(gfx, sThanksForPlayingLeft, sThanksForPlayingTop, sThanksForPlayingStr, 1, FONT_SET_1, 1);
 }
 #else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_DrawThanksForPlayingWindow.s")
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_DrawThanksForPlayingWindow.s")
 #endif
 
 void func_i7_FadeEndScreen(void) {
@@ -1681,7 +1686,7 @@ void func_i7_801467FC(void) {
     var++;
 }
 #else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_801467FC.s")
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_801467FC.s")
 #endif
 
 extern Vec3f D_i7_8014BF30[];
@@ -1765,7 +1770,6 @@ void func_i7_80146920(void) {
 }
 
 #ifdef NON_MATCHING
-// very weird, possibly patched after compilation?
 Gfx* func_i7_80146E28(Gfx* gfx) {
     s32 i;
 
@@ -1816,7 +1820,7 @@ Gfx* func_i7_80146E28(Gfx* gfx) {
     return gfx;
 }
 #else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_80146E28.s")
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_80146E28.s")
 #endif
 
 extern s32 D_800E5EC0;
@@ -1982,29 +1986,30 @@ void func_i7_80147CC0(void) {
     }
 }
 
-#ifdef NON_EQUIVALENT
-// probably equivalent, just some float s-reg blowup
 void func_i7_80147EBC(void) {
+    s32 var_s1;
     s32 i;
     s32 j;
     unk_struct_1DC* var = &D_800E5220[0];
     unk_8014BF98* temp_s4;
     unk_8014BF94* temp_s0;
-    s32 var_s1;
     bool var_a1;
     f32 var_fs0;
+    f32 var_fs0_2;
     f32 var_fs1;
+    f32 var_fs1_2;
     f32 var_fs2;
+    f32 var_fa0;
     f32 temp_ft4;
     f32 temp_ft5;
-    f32 var_fa0;
     f32 temp_fa1;
     f32 temp_fv0_6;
     f32 temp_fv0_9;
     f32 temp_fv0_12;
     f32 var_fv1;
     f32 temp_fv1_5;
-    f32 temp_fv1_6;
+    f32 temp1;
+    s32 pad[21];
 
     if (D_80106F48 >= 4) {
         return;
@@ -2027,7 +2032,9 @@ void func_i7_80147EBC(void) {
                 if (var_fv1 < 0.001f) {
                     var_fv1 = 0.001f;
                 }
+
                 var_fv1 = 1.0f / var_fv1;
+
                 temp_s4->unk_00 = temp_s4->unk_00 * var_fv1 * 700.0f;
                 temp_s4->unk_08 = temp_s4->unk_08 * var_fv1 * 700.0f;
 
@@ -2051,8 +2058,8 @@ void func_i7_80147EBC(void) {
                     case 2:
                         if (i == 0) {
                             var_a1 = false;
-                            for (j = 0; j < D_i7_8014BF90; j++) {
-                                if (D_i7_8014BF98[j].unk_24 != 0) {
+                            for (var_s1 = 0; var_s1 < D_i7_8014BF90; var_s1++) {
+                                if (D_i7_8014BF98[var_s1].unk_24 != 0) {
                                     var_a1 = true;
                                 }
                             }
@@ -2103,28 +2110,28 @@ void func_i7_80147EBC(void) {
                     if (temp_s4->unk_2C == 0x20) {
                         func_800BAA88(0x40, 0x7F);
                     } else {
-                        var_fs0 = temp_s4->unk_00;
+                        var_fs0_2 = temp_s4->unk_00;
                         temp_ft4 = temp_s4->unk_04;
                         temp_ft5 = temp_s4->unk_08;
-                        var_fa0 = sqrtf(SQ(var_fs0) + SQ(temp_ft4) + SQ(temp_ft5));
+                        var_fa0 = sqrtf(SQ(var_fs0_2) + SQ(temp_ft4) + SQ(temp_ft5));
 
                         if (var_fa0 != 0.0f) {
-                            var_fa0 *= -((var_fs0 * var->unk_5C.z.x) + (temp_ft4 * var->unk_5C.z.y) +
-                                         (var->unk_5C.z.z * temp_ft5)) /
-                                       var_fa0;
+                            var_fv1 = -((var->unk_5C.z.z * temp_ft5) +
+                                        ((var_fs0_2 * var->unk_5C.z.x) + (temp_ft4 * var->unk_5C.z.y))) /
+                                      var_fa0;
+                            var_fa0 *= var_fv1;
                         }
-                        if ((var_fa0 >= -1000.0f) && (var_fa0 <= 1000.0f)) {
-                            // var_ft3 = (u32) (((var_fa0 + 1000.0f) / 2000.0f) * 127.0f);
+                        if ((var_fa0 >= -1000) && (var_fa0 <= 1000)) {
                             func_800BAA88((s32) (f32) (u32) (((var_fa0 + 1000.0f) / 2000.0f) * 127.0f), 0x40);
                         }
                     }
-                    var_fs1 = sqrtf(SQ(D_800E5220[0].unk_5C.z.x) + SQ(D_800E5220[0].unk_5C.z.z));
+                    var_fs1_2 = sqrtf(SQ(D_800E5220[0].unk_5C.z.x) + SQ(D_800E5220[0].unk_5C.z.z));
 
-                    if (var_fs1 < 0.0001f) {
-                        var_fs1 = 0.0001f;
+                    if (var_fs1_2 < 0.0001f) {
+                        var_fs1_2 = 0.0001f;
                     }
 
-                    var_fs1 = 1.0f / var_fs1;
+                    var_fs1_2 = 1.0f / var_fs1_2;
                     for (j = temp_s4->unk_2E; j < temp_s4->unk_2E + temp_s4->unk_30; j++) {
                         temp_s0 = &D_i7_8014BF94[j];
                         temp_s0->unk_00 = temp_s4->unk_00;
@@ -2190,13 +2197,15 @@ void func_i7_80147EBC(void) {
                                 }
 
                                 temp_fv0_6 = -(((var_s1 & 0x3F) - 0x20) * 0.12f);
-                                temp_s0->unk_18 = ((D_800E5220[0].unk_5C.z.x * var_fs1 * 0.866f) -
-                                                   (D_800E5220[0].unk_5C.z.z * var_fs1 * 0.5f)) *
+
+                                temp_s0->unk_18 = ((D_800E5220[0].unk_5C.z.x * var_fs1_2 * 0.866f) -
+                                                   (D_800E5220[0].unk_5C.z.z * var_fs1_2 * 0.5f)) *
                                                   temp_fv0_6;
-                                temp_s0->unk_20 = ((D_800E5220[0].unk_5C.z.z * var_fs1 * 0.866f) +
-                                                   (D_800E5220[0].unk_5C.z.x * var_fs1 * 0.5f)) *
+                                temp_s0->unk_20 = ((D_800E5220[0].unk_5C.z.z * var_fs1_2 * 0.866f) +
+                                                   (D_800E5220[0].unk_5C.z.x * var_fs1_2 * 0.5f)) *
                                                   temp_fv0_6;
-                                temp_s0->unk_1C = -(f32) ((var_s1 >> 6) - 0x48) * 0.12f;
+
+                                temp_s0->unk_1C = ((-(f32) ((var_s1 >> 6) - 0x48)) * 0.12f);
                                 var_s1++;
                                 break;
                             default:
@@ -2213,9 +2222,9 @@ void func_i7_80147EBC(void) {
                             }
 
                             temp_fv0_9 = (((Math_Rand1() % 100) / 100.0f) - 0.5f) + 4.0f;
-                            temp_s0->unk_18 = (f32) ((temp_s0->unk_18 / var_fs0) * temp_fv0_9);
-                            temp_s0->unk_1C = (f32) ((temp_s0->unk_1C / var_fs0) * temp_fv0_9);
-                            temp_s0->unk_20 = (f32) ((temp_s0->unk_20 / var_fs0) * temp_fv0_9);
+                            temp_s0->unk_18 = (temp_s0->unk_18 / var_fs0) * temp_fv0_9;
+                            temp_s0->unk_1C = (temp_s0->unk_1C / var_fs0) * temp_fv0_9;
+                            temp_s0->unk_20 = (temp_s0->unk_20 / var_fs0) * temp_fv0_9;
                         }
                     }
                 }
@@ -2227,12 +2236,12 @@ void func_i7_80147EBC(void) {
                     temp_s0->unk_04 += temp_s0->unk_1C;
                     temp_s0->unk_08 += temp_s0->unk_20;
                     if (temp_s4->unk_2C != 0x20) {
-                        temp_s0->unk_18 = temp_s0->unk_18 * 0.98f;
                         temp_s0->unk_1C = (temp_s0->unk_1C * 0.98f) - 0.05f;
+                        temp_s0->unk_18 = temp_s0->unk_18 * 0.98f;
                         temp_s0->unk_20 = temp_s0->unk_20 * 0.98f;
                     } else {
-                        temp_s0->unk_18 = temp_s0->unk_18 * 0.985f;
                         temp_s0->unk_1C = (temp_s0->unk_1C * 0.985f) - 0.04f;
+                        temp_s0->unk_18 = temp_s0->unk_18 * 0.985f;
                         temp_s0->unk_20 = temp_s0->unk_20 * 0.985f;
                     }
                 }
@@ -2241,11 +2250,11 @@ void func_i7_80147EBC(void) {
                 } else {
                     temp_s4->unk_28 -= 0.007f;
                 }
-                if (temp_s4->unk_28 <= 0.0f) {
+                if (temp_s4->unk_28 <= 0) {
                     temp_s4->unk_24 = 0;
                     temp_s4->unk_10 = 0x200;
                     temp_s4->unk_0C = 0x200;
-                    temp_s4->unk_28 = 0.0f;
+                    temp_s4->unk_28 = 0;
                     for (j = temp_s4->unk_2E; j < temp_s4->unk_2E + temp_s4->unk_30; j++) {
                         temp_s0 = &D_i7_8014BF94[j];
                         temp_s0->unk_10 = 0x200;
@@ -2264,9 +2273,11 @@ void func_i7_80147EBC(void) {
                 var_fa0 = 0.001f;
             }
             var_fa0 = 1.0f / var_fa0;
-            if (((var_fs2 * var_fa0 * var->unk_5C.x.x) + (var_fs0 * var_fa0 * var->unk_5C.x.z)) < 0.4f) {
+            var_fs2 *= var_fa0;
+            var_fs0 *= var_fa0;
+            if (((var_fs0 * var->unk_5C.x.z) + (var_fs2 * var->unk_5C.x.x)) < 0.4f) {
                 temp_s4->unk_24 = 0;
-                temp_s4->unk_28 = 0.0f;
+                temp_s4->unk_28 = 0;
                 temp_s4->unk_0C = temp_s4->unk_10 = 0x200;
                 for (j = temp_s4->unk_2E; j < temp_s4->unk_2E + temp_s4->unk_30; j++) {
                     temp_s0 = &D_i7_8014BF94[j];
@@ -2276,68 +2287,71 @@ void func_i7_80147EBC(void) {
         }
 
         if (temp_s4->unk_24 >= 2) {
-            j = temp_s4->unk_2E;
             if (temp_s4->unk_24 != 3) {
-                temp_s0 = &D_i7_8014BF94[j];
+                temp_s0 = &D_i7_8014BF94[temp_s4->unk_2E];
                 temp_fv0_12 = var->unk_50.x + temp_s4->unk_00;
                 temp_fv1_5 = temp_s4->unk_04;
                 temp_fa1 = var->unk_50.z + temp_s4->unk_08;
-                if (((var->unk_5C.x.x * (temp_fv0_12 - var->unk_50.x)) +
-                     ((temp_fv1_5 - var->unk_50.y) * var->unk_5C.x.y) +
-                     ((temp_fa1 - var->unk_50.z) * var->unk_5C.x.z)) <= 0.0f) {
-                    temp_s4->unk_10 = 0x200;
-                    temp_s4->unk_0C = 0x200;
+
+                var_fs0_2 = (temp_fv0_12 - var->unk_50.x);
+                temp_ft4 = (temp_fv1_5 - var->unk_50.y);
+                temp_ft5 = (temp_fa1 - var->unk_50.z);
+                var_fa0 = (var_fs0_2 * var->unk_5C.x.x) + (temp_ft4 * var->unk_5C.x.y) + (temp_ft5 * var->unk_5C.x.z);
+                if (var_fa0 <= 0) {
+                    temp_s4->unk_0C = temp_s4->unk_10 = 0x200;
                 } else {
                     var_fs2 = var->unk_19C.xw + ((var->unk_19C.xx * temp_fv0_12) + (var->unk_19C.xy * temp_fv1_5) +
                                                  (var->unk_19C.xz * temp_fa1));
                     var_fs1 = var->unk_19C.yw + ((var->unk_19C.yx * temp_fv0_12) + (var->unk_19C.yy * temp_fv1_5) +
                                                  (var->unk_19C.yz * temp_fa1));
-                    var_fs0 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
-                                                 (var->unk_19C.zz * temp_fa1));
+                    temp1 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
+                                               (var->unk_19C.zz * temp_fa1));
+                    var_fs0 = var->unk_19C.ww + ((var->unk_19C.wx * temp_fv0_12) + (var->unk_19C.wy * temp_fv1_5) +
+                                                 (var->unk_19C.wz * temp_fa1));
                     if (func_i3_fabsf(var_fs0) < 0.001f) {
-                        temp_s0->unk_10 = 0x200;
-                        temp_s0->unk_0C = 0x200;
+                        temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                     } else {
-                        temp_s4->unk_0C = (s32) (var->unk_F0 + ((var_fs2 * var->unk_E8) / var_fs0));
-                        temp_s4->unk_10 = (s32) (var->unk_F4 - ((var_fs1 * var->unk_EC) / var_fs0));
+                        temp_s4->unk_0C = var->unk_F0 + ((var_fs2 * var->unk_E8) / var_fs0);
+                        temp_s4->unk_10 = var->unk_F4 - ((var_fs1 * var->unk_EC) / var_fs0);
 
                         if ((temp_s4->unk_0C < var->unk_B0) || (var->unk_B8 < temp_s4->unk_0C) ||
                             (temp_s4->unk_10 < var->unk_B4) || (var->unk_BC < temp_s4->unk_10)) {
-                            temp_s4->unk_10 = 0x200;
-                            temp_s4->unk_0C = 0x200;
+                            temp_s4->unk_0C = temp_s4->unk_10 = 0x200;
                         }
                     }
                 }
             } else {
                 for (j = temp_s4->unk_2E; j < temp_s4->unk_2E + temp_s4->unk_30; j++) {
-
                     temp_s0 = &D_i7_8014BF94[j];
                     temp_fv0_12 = D_800E5220[0].unk_50.x + temp_s0->unk_00;
                     temp_fv1_5 = temp_s0->unk_04;
                     temp_fa1 = D_800E5220[0].unk_50.z + temp_s0->unk_08;
-                    if (((var->unk_5C.x.x * (temp_fv0_12 - var->unk_50.x)) +
-                         ((temp_fv1_5 - var->unk_50.y) * var->unk_5C.x.y) +
-                         ((temp_fa1 - var->unk_50.z) * var->unk_5C.x.z)) <= 0.0f) {
-                        temp_s0->unk_10 = 0x200;
-                        temp_s0->unk_0C = 0x200;
+
+                    var_fs0_2 = (temp_fv0_12 - var->unk_50.x);
+                    temp_ft4 = (temp_fv1_5 - var->unk_50.y);
+                    temp_ft5 = (temp_fa1 - var->unk_50.z);
+                    var_fa0 =
+                        (var_fs0_2 * var->unk_5C.x.x) + (temp_ft4 * var->unk_5C.x.y) + (temp_ft5 * var->unk_5C.x.z);
+                    if (var_fa0 <= 0) {
+                        temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                     } else {
                         var_fs2 = var->unk_19C.xw + ((var->unk_19C.xx * temp_fv0_12) + (var->unk_19C.xy * temp_fv1_5) +
                                                      (var->unk_19C.xz * temp_fa1));
                         var_fs1 = var->unk_19C.yw + ((var->unk_19C.yx * temp_fv0_12) + (var->unk_19C.yy * temp_fv1_5) +
                                                      (var->unk_19C.yz * temp_fa1));
-                        var_fs0 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
-                                                     (var->unk_19C.zz * temp_fa1));
+                        temp1 = var->unk_19C.zw + ((var->unk_19C.zx * temp_fv0_12) + (var->unk_19C.zy * temp_fv1_5) +
+                                                   (var->unk_19C.zz * temp_fa1));
+                        var_fs0 = var->unk_19C.ww + ((var->unk_19C.wx * temp_fv0_12) + (var->unk_19C.wy * temp_fv1_5) +
+                                                     (var->unk_19C.wz * temp_fa1));
                         if (func_i3_fabsf(var_fs0) < 0.001f) {
-                            temp_s0->unk_10 = 0x200;
-                            temp_s0->unk_0C = 0x200;
+                            temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                         } else {
                             temp_s0->unk_0C = var->unk_F0 + ((var_fs2 * var->unk_E8) / var_fs0);
                             temp_s0->unk_10 = var->unk_F4 - ((var_fs1 * var->unk_EC) / var_fs0);
 
                             if ((temp_s0->unk_0C < var->unk_B0) || (var->unk_B8 < temp_s0->unk_0C) ||
                                 (temp_s0->unk_10 < var->unk_B4) || (var->unk_BC < temp_s0->unk_10)) {
-                                temp_s0->unk_10 = 0x200;
-                                temp_s0->unk_0C = 0x200;
+                                temp_s0->unk_0C = temp_s0->unk_10 = 0x200;
                             }
                         }
                     }
@@ -2352,9 +2366,6 @@ void func_i7_80147EBC(void) {
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/E9A30/func_i7_80147EBC.s")
-#endif
 
 Gfx* func_i7_80149760(Gfx* gfx) {
     unk_8014BF98* temp_s6;

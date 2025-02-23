@@ -86,7 +86,7 @@ extern f32 D_i7_8014BE10;
 extern s16 D_i7_8014BE14;
 extern s16 D_i7_8014BE16;
 extern s16 D_i7_8014BE18;
-extern s16 D_i7_8014BE1A;
+extern s16 sCupDifficulty;
 extern s16 D_i7_8014BE1C;
 extern s16 D_i7_8014BE1E;
 extern s16 D_i7_8014BE20;
@@ -101,6 +101,6 @@ typedef enum EndScreenState {
     /* 1 */ END_SCREEN_FADE_IN,
     /* 2 */ END_SCREEN_WAIT,
     /* 3 */ END_SCREEN_FADE_OUT,
-};
+} EndScreenState;
 
 #endif // OVL_I7_H

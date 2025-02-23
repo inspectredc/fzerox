@@ -84,6 +84,6 @@ typedef enum FontChar {
     /* 48 ->, a-z/katakana */
 } FontChar;
 
-extern u8 D_i2_8010D7F0[];
+extern u8 gSaveBuffer[];
 
 #endif // OVL_I2_H

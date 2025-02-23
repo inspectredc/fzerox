@@ -1,7 +1,7 @@
 #ifndef FZX_COURSE_H
 #define FZX_COURSE_H
 
-#include "fzxmath.h"
+#include "fzx_math.h"
 
 typedef struct ControlPoint {
     /* 0x00 */ Vec3f pos;

@@ -1209,7 +1209,7 @@ aMachineBodyBoostGripSmallTex:
   compression: MIO0
   symbol: aMachineBodyBoostGripSmallTex
 
-aAccelerationSpeedSliderTex:
+aEngineSliderTex:
   type: COMPRESSED_TEXTURE
   offset: 0x11F694
   ctype: u16
@@ -1217,7 +1217,7 @@ aAccelerationSpeedSliderTex:
   width: 16
   height: 16
   compression: MIO0
-  symbol: aAccelerationSpeedSliderTex
+  symbol: aEngineSliderTex
 
 aBoostTex:
   type: COMPRESSED_TEXTURE
@@ -4992,7 +4992,7 @@ aRecordsTex:
   height: 24
   symbol: aRecordsTex
 
-aRecordsArrowTex:
+aYellowArrowTex:
   type: COMPRESSED_TEXTURE
   offset: 0x138994
   ctype: u16
@@ -5000,7 +5000,7 @@ aRecordsArrowTex:
   width: 32
   height: 32
   compression: MIO0
-  symbol: aRecordsArrowTex
+  symbol: aYellowArrowTex
 
 aOptionsFalconHelmetTex:
   type: COMPRESSED_TEXTURE

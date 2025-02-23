@@ -117,23 +117,23 @@
     symbol_name_format: i2_$VRAM
     subsegments:
       - [0x98080, c]
-      - [0x9BD00, c]
+      - [0x9BD00, c, save]
       - [0x9F3C0, c]
       - [0x9FE40, c]
-      - [0xA1700, c]
+      - [0xA1700, c, font]
       - [0xA26F0, .data, 98080]
-      - [0xA2740, .data, 9BD00]
+      - [0xA2740, .data, save]
       - [0xA2860, .data, 9F3C0]
       - [0xA2860, .data, 9FE40]
-      - [0xA28A0, .data, A1700]
+      - [0xA28A0, .data, font]
       - [0xA64B0, .rodata, 98080]
-      - [0xA6730, .rodata, 9BD00]
+      - [0xA6730, .rodata, save]
       - [0xA6760, .rodata, 9FE40]
-      - [0xA67C0, .rodata, A1700]
+      - [0xA67C0, .rodata, font]
       - [0xA7100, .data, ovl_i2_data]
       - { type: .bss, vram: 0x8010D770, name: 98080 }
       - { type: .bss, vram: 0x8010D7F0, name: ovl_i2_buffers }
-      - { type: .bss, vram: 0x801117B0, name: 9BD00 }
+      - { type: .bss, vram: 0x801117B0, name: save }
       - { type: .bss, vram: 0x80111870, name: 9FE40 }
 
   - name: ovl_i3
@@ -177,26 +177,29 @@
     bss_size: 0x30
     symbol_name_format: i4_$VRAM
     subsegments:
-      - [0xD4BD0, c]
-      - [0xDA760, .data, D4BD0]
-      - [0xDC440, .rodata, D4BD0]
-      - { type: .bss, vram: 0x8011D770, name: D4BD0 }
+      - [0xD4BD0, c, machine]
+      - [0xD9640, c, title]
+      - [0xDA760, .data, machine]
+      - [0xDC2D0, .data, title]
+      - [0xDC440, .rodata, machine]
+      - { type: .bss, vram: 0x8011D770, name: machine }
+      - { type: .bss, vram: 0x8011D790, name: title }
 
-  - name: ovl_i5
+  - name: course_select
     exclusive_ram_id: overlay
     type: code
-    dir: overlays/ovl_i5
+    dir: overlays/course_select
     start: 0xDC550
     vram: 0x80115DF0
     bss_size: 0x40
     symbol_name_format: i5_$VRAM
     subsegments:
-      - [0xDC550, c]
-      - [0xDCF90, c]
-      - [0xDF750, .data, DCF90]
-      - [0xDFCB0, .rodata, DCF90]
-      - { type: .bss, vram: 0x801197B0, name: DC550 }
-      - { type: .bss, vram: 0x801197E0, name: DCF90}
+      - [0xDC550, c, course_model]
+      - [0xDCF90, c, course_select]
+      - [0xDF750, .data, course_select]
+      - [0xDFCB0, .rodata, course_select]
+      - { type: .bss, vram: 0x801197B0, name: course_model }
+      - { type: .bss, vram: 0x801197E0, name: course_select}
 
   - name: ovl_i6
     exclusive_ram_id: overlay
@@ -207,16 +210,20 @@
     bss_size: 0xCEB0
     symbol_name_format: i6_$VRAM
     subsegments:
-      - [0xDFF10, c]
-      - [0xE2000, c]
+      - [0xDFF10, c, main_menu]
+      - [0xE2000, c, credits]
+      - [0xE6170, c, options_menu]
       - [0xE7CF0, c]
-      - [0xE7D60, .data, DFF10]
-      - [0xE80CC, .data, E2000]
+      - [0xE7D60, .data, main_menu]
+      - [0xE80CC, .data, credits]
+      - [0xE8EA0, .data, options_menu]
       - [0xE8FF0, .data, ovl_i6_data]
-      - [0xE9040, .rodata, DFF10]
-      - [0xE9180, .rodata, E2000]
-      - { type: .bss, vram: 0x8011F910, name: DFF10 }
-      - { type: .bss, vram: 0x8011FAF0, name: E2000 }
+      - [0xE9040, .rodata, main_menu]
+      - [0xE9180, .rodata, credits]
+      - [0xE9A10, .rodata, options_menu]
+      - { type: .bss, vram: 0x8011F910, name: main_menu }
+      - { type: .bss, vram: 0x8011FAF0, name: credits }
+      - { type: .bss, vram: 0x8011FB10, name: options_menu}
       - { type: .bss, vram: 0x801247C0, name: ovl_i6_data }
 
   - name: ovl_i7
@@ -228,10 +235,10 @@
     bss_size: 0xDD0
     symbol_name_format: i7_$VRAM
     subsegments:
-      - [0xE9A30, c]
-      - [0xEFEF0, .data, E9A30]
-      - [0xF13A0, .rodata, E9A30]
-      - { type: bss, vram: 0x8014B480, name: E9A30 }
+      - [0xE9A30, c, ending]
+      - [0xEFEF0, .data, ending]
+      - [0xF13A0, .rodata, ending]
+      - { type: bss, vram: 0x8014B480, name: ending }
 
   - name: ovl_i8
     exclusive_ram_id: overlay
@@ -242,10 +249,10 @@
     bss_size: 0x130
     symbol_name_format: i8_$VRAM
     subsegments:
-      - [0xF14E0, c]
-      - [0xF2A50, .data, F14E0]
-      - [0xF2AB0, .rodata, F14E0]
-      - { type: .bss, vram: 0x80144FB0, name: F14E0 }
+      - [0xF14E0, c, records]
+      - [0xF2A50, .data, records]
+      - [0xF2AB0, .rodata, records]
+      - { type: .bss, vram: 0x80144FB0, name: records }
 
   - name: ovl_i9
     exclusive_ram_id: overlay
@@ -256,9 +263,9 @@
     bss_size: 0x10
     symbol_name_format: i9_$VRAM
     subsegments:
-      - [0xF2AC0, c]
-      - [0x145740, .data, F2AC0]
-      - { type: .bss, vram: 0x80168CD0, name: F2AC0 }
+      - [0xF2AC0, c, car_draw]
+      - [0x145740, .data, car_draw]
+      - { type: .bss, vram: 0x80168CD0, name: car_draw }
 
   - name: ovl_i10
     exclusive_ram_id: overlay

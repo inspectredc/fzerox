@@ -1,6 +1,6 @@
 #include "global.h"
 #include "audio.h"
-#include "fzxthread.h"
+#include "fzx_thread.h"
 
 AudioSlowLoadBuffer gSlowLoads;
 UNUSED s32 D_800F8AB4;

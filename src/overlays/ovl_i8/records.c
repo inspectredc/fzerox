@@ -22,7 +22,7 @@ typedef struct unk_80144FE0 {
 } unk_80144FE0; // size = 0x80
 
 s32 D_80144FB0;
-s32 D_i8_80144FB4;
+s32 sUnlockedCourseCount;
 s16 D_i8_80144FB8[4];
 unk_800E51B8* D_i8_80144FC0;
 unk_800E51B8* D_i8_80144FC4;
@@ -59,12 +59,12 @@ unk_80144F74 D_i8_80144F84[] = {
 extern s16 D_800CCFE8;
 extern s8 D_800DCE5C;
 extern s32 D_i2_80106F10;
-extern CourseData D_8010B7B0;
+extern CourseData gCourseData;
 extern s32 gDifficulty;
 
 void func_i8_80143A78(void);
 
-void func_i8_801439D0(void) {
+void Records_Init(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
     D_800DCE5C = 0;
     gDifficulty = MASTER;
@@ -73,7 +73,7 @@ void func_i8_801439D0(void) {
     func_i3_80116C4C();
     func_8008C7C8();
     func_80085610();
-    func_8007F4E0(D_8010B7B0.venue, D_8010B7B0.skybox);
+    func_8007F4E0(gCourseData.venue, gCourseData.skybox);
     func_i3_801365E0();
     func_8006D448();
     func_8006E478();
@@ -85,7 +85,7 @@ void func_i8_801439D0(void) {
 bool func_i8_80143D30(s32);
 bool func_i8_80143D84(s32);
 
-extern s8 D_800CD3C0;
+extern s8 gUnlockableLevel;
 extern s8 D_800CD3C8;
 extern s32 gCourseIndex;
 
@@ -94,10 +94,10 @@ void func_i8_80143A78(void) {
     unk_80144F44* var_s0;
 
     D_i8_80144F40 = gCourseIndex;
-    if ((D_800CD3C0 == 0) && (D_800CD3C8 == 0)) {
-        D_i8_80144FB4 = 0x12;
+    if ((gUnlockableLevel == 0) && (D_800CD3C8 == 0)) {
+        sUnlockedCourseCount = 18;
     } else {
-        D_i8_80144FB4 = 0x18;
+        sUnlockedCourseCount = 24;
     }
 
     for (i = 0; i < 4; i++, var_s0++) {
@@ -154,7 +154,7 @@ bool func_i8_80143D30(s32 arg0) {
     bool ret = true;
 
     for (i = 0; i < 5; i++) {
-        if (D_802A6B40[arg0].timeRecord[i] != MAX_TIMER) {
+        if (gCourseRecordInfos[arg0].timeRecord[i] != MAX_TIMER) {
             ret = false;
             break;
         }
@@ -167,11 +167,11 @@ bool func_i8_80143D84(s32 arg0) {
     s32 pad;
     bool ret = false;
     s32 pad2[2];
-    unk_80141C88 sp18;
+    GhostInfo sp18;
 
-    func_i2_801014D4(&sp18);
+    Save_LoadGhostInfo(&sp18);
 
-    if (sp18.unk_04 == D_802A6B40[arg0].unk_00) {
+    if (sp18.encodedCourseIndex == gCourseRecordInfos[arg0].encodedCourseIndex) {
         ret = true;
     }
     return ret;
@@ -187,12 +187,12 @@ extern s32 D_800CD3BC;
 extern s32 D_800DCCFC;
 extern Controller gSharedController;
 
-s32 func_i8_80143DDC(void) {
+s32 Records_Update(void) {
     s32 temp_v0;
     s32 gameMode;
     s32 sp1C;
 
-    func_8007DABC(&gSharedController);
+    Controller_SetGlobalInputs(&gSharedController);
     D_i8_80144FD8 = &D_i8_80144FE0[D_800DCCFC];
     func_800952F4();
     func_8008675C();
@@ -214,7 +214,7 @@ s32 func_i8_80143DDC(void) {
                 if (temp_v0 == 1) {
                     sp1C = 1;
                 } else if (temp_v0 == 2) {
-                    gameMode = GAMEMODE_8013;
+                    gameMode = GAMEMODE_FLX_RECORDS_COURSE_SELECT;
                 }
                 if (temp_v0 != 0) {
                     D_i8_80144FD6 = 1;
@@ -224,7 +224,7 @@ s32 func_i8_80143DDC(void) {
                 temp_v0 = func_i8_80144144();
                 gameMode = GAMEMODE_RECORDS;
                 if (temp_v0 == 1) {
-                    gameMode = GAMEMODE_8013;
+                    gameMode = GAMEMODE_FLX_RECORDS_COURSE_SELECT;
                 } else if (temp_v0 == 2) {
                     gameMode = GAMEMODE_FLX_MAIN_MENU;
                 }
@@ -269,14 +269,14 @@ s32 func_i8_80143F94(void) {
     sp28 = gCourseIndex;
     if (gInputPressed & BTN_RIGHT) {
         gCourseIndex++;
-        if (gCourseIndex >= D_i8_80144FB4) {
+        if (gCourseIndex >= sUnlockedCourseCount) {
             gCourseIndex = 0;
         }
         func_i2_800FCD38(9, 0);
     } else if (gInputPressed & BTN_LEFT) {
         gCourseIndex--;
         if (gCourseIndex < 0) {
-            gCourseIndex = D_i8_80144FB4 - 1;
+            gCourseIndex = sUnlockedCourseCount - 1;
         }
         func_i2_800FCD38(9, 1);
     }
@@ -404,7 +404,7 @@ void func_i8_801443D0(void) {
                 if (D_i8_80144FCE == 0) {
                     func_i2_801017B8(gCourseIndex);
                 } else if (D_i8_80144FCE == 1) {
-                    func_i2_801018A8(gCourseIndex);
+                    Save_InitGhost(gCourseIndex);
                     D_i8_80144FD0 = 2;
                 }
                 D_i8_80144FB8[D_i8_80144FC8] = 0;
@@ -431,7 +431,7 @@ extern GfxPool* D_800DCCF0;
 
 Gfx* func_i8_801449B8(Gfx*);
 
-Gfx* func_i8_80144568(Gfx* gfx) {
+Gfx* Records_Draw(Gfx* gfx) {
 
     if (D_i2_80106F10 != 0) {
         D_i2_80106F10--;

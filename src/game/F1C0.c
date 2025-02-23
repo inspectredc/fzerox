@@ -1,6 +1,6 @@
 #include "global.h"
 #include "PR/leo.h"
-#include "fzxthread.h"
+#include "fzx_thread.h"
 
 LEOStatus D_800E32E0;
 LEOCmd D_800E32E8;

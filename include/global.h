@@ -8,7 +8,7 @@
 #include "macros.h"
 #include "sys.h"
 #include "controller.h"
-#include "fzxmath.h"
+#include "fzx_math.h"
 #include "unk_structs.h"
 #include "leo/leo_internal.h"
 

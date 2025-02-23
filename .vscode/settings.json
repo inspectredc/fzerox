@@ -103,7 +103,7 @@
     "leo.h": "c",
     "leo_internal.h": "c",
     "other_types.h": "c",
-    "fzxthread.h": "c",
+    "fzx_thread.h": "c",
     "fzx_racer.h": "c",
     "ovl_i3.h": "c",
     "segment_symbols.h": "c",
@@ -120,7 +120,9 @@
     "fzx_game.h": "c",
     "course_data.h": "c",
     "fzx_course.h": "c",
-    "fzxmath.h": "c",
+    "fzx_math.h": "c",
+    "segment_1b8550.h": "c",
+    "fzx_object.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"

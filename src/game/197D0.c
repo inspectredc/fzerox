@@ -1,5 +1,5 @@
 #include "global.h"
-#include "fzxthread.h"
+#include "fzx_thread.h"
 #include "PR/leo.h"
 
 OSIoMesg sLeoFontIoMsg;

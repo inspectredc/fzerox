@@ -24,6 +24,9 @@
 
 #define MAX_TIMER (60 * 60 * 1000 - 1)
 
+#define PHYS_TO_K1ROM(x) (((u32) (x) | 0xB0000000))
+#define ROM_READ(addr) (*(vu32*) PHYS_TO_K1ROM(addr))
+
 /*
  * Macros for libultra
  */

@@ -247,16 +247,22 @@ gRandMask1 = 0x800CD174;
 gRandSeed2 = 0x800CD178;
 gRandMask2 = 0x800CD17C;
 
+D_800CF174 = 0x800CF174; // size:0x14
+D_800CF4B8 = 0x800CF4B8; // size:0x20
+
 gSegments = 0x800E3380;
 
 gSlowLoads = 0x800F89F0;
 
+gCourseRecordInfos = 0x802A6B40;
 gRacers = 0x802C4920; // size:0x6DB0
 
 gGameFrameCount = 0x800CCFE0;
 gNumPlayers = 0x800CD000;
 gDifficulty = 0x800CD008;
 gTotalLapCount = 0x800CD00C;
+gCurrentGhostType = 0x800CD3CC;
+gSettingVsHandicap = 0x800CE4D0;
 gTotalLives = 0x800CE4DC;
 
 gGameMode = 0x800DCE44;
@@ -281,9 +287,12 @@ D_800E5F10 = 0x800E5F10; // size:0x10
 D_800E5F20 = 0x800E5F20; // size:0x10
 D_800E5F30 = 0x800E5F30; // size:0x10
 D_800E5FB8 = 0x800E5FB8; // size:0x4
+sGhostReplayRecordingSize = 0x800F5DC8;
+sGhostReplayRecordingEnd = 0x800F5DCC;
 D_800F5DF0 = 0x800F5DF0; // size:0x9C
 D_800F80A8 = 0x800F80A8; // size:0x10
 D_800F8504 = 0x800F8504; // size:0x7
+gCurrentCourseRecordInfo = 0x800F8510;
 gCourseIndex = 0x800F8514;
 D_800F8528 = 0x800F8528; // size:0x400
 

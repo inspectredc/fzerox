@@ -27,10 +27,8 @@ s32 func_800750B0(s32 startLBA, void* arg1, u32 numBytes, size_t size) {
     return sp50;
 }
 
-void func_i2_800FC730(void);
-
 void func_8007515C(void) {
     Dma_ClearRomCopy(SEGMENT_ROM_START(ovl_i11), SEGMENT_VRAM_START(ovl_i11), SEGMENT_ROM_SIZE(ovl_i11));
     bzero(SEGMENT_BSS_START(ovl_i11), SEGMENT_BSS_SIZE(ovl_i11));
-    func_i2_800FC730();
+    func_i11_800FC730();
 }

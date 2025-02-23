@@ -1,33 +1,35 @@
 #include "global.h"
 #include "audio.h"
 #include "fzx_game.h"
+#include "fzx_save.h"
+#include "src/overlays/ovl_i4/ovl_i4.h"
 #include "assets/segment_17B1E0.h"
 
-f32 D_800E40F0[30];
+f32 gCharacterLastEngine[30];
 UNUSED s32 D_800E4168;
 u16 gInputPressed;
 u16 gInputButtonPressed;
 u16 gStickPressed;
-s8 D_800E4174[4];
+s8 gCupNumDifficultiesCleared[4];
 char* gCurrentTrackName;
 char* gTrackNames[55];
 
-s32 D_800CD380 = 0;
+s32 gSelectedMode = MODE_GP_RACE;
 u32 D_800CD384 = 0;
 
-s32 D_800CD388[8] = { 0 };
+s32 gModeSubOption[8] = { 0 };
 
-s8 D_800CD3A8[] = { 0, 0, 0, 0 };
+s8 gPlayerSelectionLock[] = { SELECTION_FREE, SELECTION_FREE, SELECTION_FREE, SELECTION_FREE };
 s8 D_800CD3AC[] = { 1, 1, 1, 1 };
 
-s32 D_800CD3B0 = 0;
-s32 D_800CD3B4 = 0;
+s32 gMachineSelectState = MACHINE_SELECT_ACTIVE;
+s32 gMachineSettingsState = MACHINE_SETTINGS_ACTIVE;
 s32 D_800CD3B8 = 0;
 s32 D_800CD3BC = 0;
-s8 D_800CD3C0 = 0;
+s8 gUnlockableLevel = 0;
 s8 D_800CD3C4 = 0;
-s8 D_800CD3C8 = 0;
-s32 D_800CD3CC = 1;
+s8 gSettingEverythingUnlocked = 0;
+s32 gCurrentGhostType = GHOST_PLAYER;
 
 const char* sTrackNames[] = { "mute city",
                               "silence",
@@ -132,12 +134,12 @@ void func_8007A59C(u16* arg0, s32 arg1) {
     }
 }
 
-void func_8007A828(u16* arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+void func_8007A828(u16* arg0, size_t size, s32 arg2, s32 arg3, s32 arg4) {
     u32 i;
     u32 colorBlend;
     u32 red, green, blue, alpha;
 
-    for (i = 0; i < (arg1 / 2); i++, arg0++) {
+    for (i = 0; i < (size / sizeof(u16)); i++, arg0++) {
         red = ((*arg0 & 0xF800) >> 11) * 77;
         green = ((*arg0 & 0x7C0) >> 6) * 150;
         blue = ((*arg0 & 0x3E) >> 1) * 29;
@@ -253,7 +255,292 @@ Gfx* func_8007B0A8(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom) {
     return gfx;
 }
 
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/14440/func_8007B14C.s")
+Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u32 height, s32 format, s32 size,
+                   s32 arg8, s32 arg9, s32 argA, s32 argB) {
+    s32 i;
+    s32 numBlocks;
+    s32 blockHeight;
+    s32 blockWidth = width;
+    s32 pad[1];
+    s32 sp48;
+    s32 var;
+    s32 var_t0;
+    s32 spE4;
+    s32 spE0;
+    s32 var_a0;
+    s32 dsdx;
+    s32 dtdy;
+    s32 spCC;
+    s32 spC8;
+    s32 spC4;
+    s32 spC0;
+    s32 sTemp = 1;
+
+    if (blockWidth & 3) {
+        return gfx;
+    }
+
+    switch (size) {
+        case G_IM_SIZ_4b:
+            var_t0 = G_IM_SIZ_4b_LOAD_BLOCK;
+            spC8 = G_IM_SIZ_4b_INCR;
+            spC4 = G_IM_SIZ_4b_SHIFT;
+            spC0 = G_IM_SIZ_4b_BYTES;
+            var_a0 = 0x1000;
+            break;
+        case G_IM_SIZ_8b:
+            var_t0 = G_IM_SIZ_8b_LOAD_BLOCK;
+            spCC = G_IM_SIZ_8b_LINE_BYTES;
+            spC8 = G_IM_SIZ_8b_INCR;
+            spC4 = G_IM_SIZ_8b_SHIFT;
+            spC0 = G_IM_SIZ_8b_BYTES;
+            var_a0 = 0x800;
+            break;
+        case G_IM_SIZ_16b:
+            var_t0 = G_IM_SIZ_16b_LOAD_BLOCK;
+            spCC = G_IM_SIZ_16b_LINE_BYTES;
+            spC8 = G_IM_SIZ_16b_INCR;
+            spC4 = G_IM_SIZ_16b_SHIFT;
+            spC0 = G_IM_SIZ_16b_BYTES;
+            var_a0 = 0x400;
+            break;
+        case G_IM_SIZ_32b:
+            var_t0 = G_IM_SIZ_32b_LOAD_BLOCK;
+            spCC = G_IM_SIZ_32b_LINE_BYTES;
+            spC8 = G_IM_SIZ_32b_INCR;
+            spC4 = G_IM_SIZ_32b_SHIFT;
+            spC0 = G_IM_SIZ_32b_BYTES;
+            var_a0 = 0x200;
+            break;
+        default:
+            return gfx;
+    }
+
+    blockHeight = var_a0 / blockWidth;
+    while (height < blockHeight / 2) {
+        blockHeight /= 2;
+    }
+
+    if ((blockHeight % 4) && (size == G_IM_SIZ_4b)) {
+        blockHeight /= 4;
+        blockHeight *= 4;
+    }
+    numBlocks = height / blockHeight;
+
+    if (argA != 0) {
+        dsdx = -0x400;
+        spE0 = (blockWidth - sTemp) << 5;
+    } else {
+        dsdx = 0x400;
+        spE0 = 0;
+    }
+
+    switch (arg8) {
+        case 1:
+            gSPDisplayList(gfx++, D_3000088);
+            break;
+        case 2:
+            gSPDisplayList(gfx++, D_3000100);
+            break;
+        case 3:
+            gSPDisplayList(gfx++, D_3000138);
+            break;
+        case 0:
+        default:
+            gSPDisplayList(gfx++, D_3000050);
+            break;
+    }
+
+    if (arg9 == 0) {
+        gDPSetTextureImage(gfx++, format, var_t0, blockWidth, texture);
+
+        gDPSetTile(gfx++, format, var_t0, 0, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+
+        if (size == G_IM_SIZ_4b) {
+            gDPSetTile(gfx++, format, size, ((blockWidth >> 1) + 7) >> 3, 0, G_TX_RENDERTILE, 0,
+                       G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                       G_TX_NOLOD);
+        } else {
+            gDPSetTile(gfx++, format, size, ((blockWidth * spCC) + 7) >> 3, 0, G_TX_RENDERTILE, 0,
+                       G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                       G_TX_NOLOD);
+        }
+    } else if (size == G_IM_SIZ_4b) {
+        gDPSetTextureImage(gfx++, format, 1, blockWidth >> 1, texture);
+
+        gDPSetTile(gfx++, format, 1, ((blockWidth >> 1) + 7) >> 3, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+
+        gDPSetTile(gfx++, format, 0, ((blockWidth * size) + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    } else {
+        gDPSetTextureImage(gfx++, format, size, blockWidth, texture);
+
+        gDPSetTile(gfx++, format, size, ((blockWidth * size) + 7) >> 3, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+
+        gDPSetTile(gfx++, format, size, ((blockWidth * size) + 7) >> 3, 0, G_TX_RENDERTILE, 0,
+                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                   G_TX_NOLOD);
+    }
+
+    gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, 0, (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                   (blockHeight - 1) << G_TEXTURE_IMAGE_FRAC);
+
+    if (argB != 0) {
+        sp48 = height % blockHeight;
+        for (i = 0; i < numBlocks; i++) {
+            gDPLoadSync(gfx++);
+            if (arg9 == 0) {
+                if (size == G_IM_SIZ_4b) {
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT_4b(blockWidth));
+                } else {
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT(blockWidth, spC0));
+                }
+
+                gSPScisTextureRectangle(gfx++, left << 2,
+                                        (s32) (top + ((numBlocks - i - 1) * blockHeight) + (height % blockHeight)) << 2,
+                                        (left + blockWidth) << 2,
+                                        (s32) (top + ((numBlocks - i) * blockHeight) + (height % blockHeight)) << 2,
+                                        G_TX_RENDERTILE, spE0, (blockHeight - 1) << 5, dsdx, (64 - 1) * (1 << 10));
+            } else {
+                if (size == G_IM_SIZ_4b) {
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                } else {
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1),
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((i + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
+                }
+
+                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                               (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                               (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+
+                //! @bug s and t are swapped around from expected
+                gSPScisTextureRectangle(
+                    gfx++, left << 2, (s32) (top + ((numBlocks - i - 1) * blockHeight) + (height % blockHeight)) << 2,
+                    (left + blockWidth) << 2,
+                    (s32) (top + ((numBlocks - i) * blockHeight) + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0,
+                    (((i + 1) * blockHeight) - 1) << 5, dsdx, (64 - 1) * (1 << 10));
+            }
+        }
+
+        if (height % blockHeight) {
+            gDPLoadSync(gfx++);
+            if (arg9 == 0) {
+                if (size == G_IM_SIZ_4b) {
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT_4b(blockWidth));
+                } else {
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT(blockWidth, spC0));
+                }
+
+                gSPScisTextureRectangle(gfx++, left << 2, top << 2, (left + blockWidth) << 2,
+                                        (top + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0,
+                                        ((height % blockHeight) - 1) << 5, dsdx, (64 - 1) * (1 << 10));
+            } else {
+                //! @bug, condition blocks switched around from what size would expect
+                if (size == G_IM_SIZ_4b) {
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1),
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((numBlocks + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
+                } else {
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                }
+
+                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                               (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                               (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                gSPScisTextureRectangle(gfx++, left << 2, top << 2, (left + blockWidth) << 2,
+                                        (top + (height % blockHeight)) << 2, G_TX_RENDERTILE, spE0, (height - 1) << 5,
+                                        dsdx, (64 - 1) * (1 << 10));
+            }
+        }
+    } else {
+        for (i = 0; i < numBlocks; i++) {
+            // FAKE?
+            var = i + 1;
+            gDPLoadSync(gfx++);
+            if (arg9 == 0) {
+                if (size == G_IM_SIZ_4b) {
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight / 4,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT_4b(blockWidth));
+                } else {
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, i * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT(blockWidth, spC0));
+                }
+
+                gSPScisTextureRectangle(gfx++, left << 2, (top + (i * blockHeight)) << 2, (left + blockWidth) << 2,
+                                        (top + (var * blockHeight)) << 2, G_TX_RENDERTILE, spE0, 0, dsdx, 1 << 10);
+            } else {
+                //! @bug, condition blocks switched around from what size would expect
+                if (size == G_IM_SIZ_4b) {
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1),
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((i + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
+                } else {
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                }
+
+                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (i * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                               (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                               (((i + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                gSPScisTextureRectangle(gfx++, left << 2, (top + (i * blockHeight)) << 2, (left + blockWidth) << 2,
+                                        (top + (var * blockHeight)) << 2, G_TX_RENDERTILE, spE0, (i * blockHeight) << 5,
+                                        dsdx, 1 << 10);
+            }
+        }
+
+        if (height % blockHeight) {
+            gDPLoadSync(gfx++);
+            if (arg9 == 0) {
+                if (size == G_IM_SIZ_4b) {
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight / 4,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT_4b(blockWidth));
+                } else {
+                    gDPLoadBlock(gfx++, G_TX_LOADTILE, 0, numBlocks * blockHeight,
+                                 ((blockWidth * blockHeight + spC8) >> spC4) - 1, CALC_DXT(blockWidth, spC0));
+                }
+
+                gSPScisTextureRectangle(gfx++, left << 2, (s32) (top + ((numBlocks * blockHeight))) << 2,
+                                        (left + blockWidth) << 2,
+                                        (s32) (top + (numBlocks * blockHeight) + (height % blockHeight)) << 2,
+                                        G_TX_RENDERTILE, spE0, 0, dsdx, 1 << 10);
+            } else {
+                //! @bug, condition blocks switched around from what size would expect
+                if (size == G_IM_SIZ_4b) {
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << (G_TEXTURE_IMAGE_FRAC - 1),
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((numBlocks + 1) * blockHeight) - 1) << (G_TEXTURE_IMAGE_FRAC - 1));
+                } else {
+                    gDPLoadTile(gfx++, G_TX_LOADTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                                (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                                (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                }
+
+                gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, (numBlocks * blockHeight) << G_TEXTURE_IMAGE_FRAC,
+                               (blockWidth - 1) << G_TEXTURE_IMAGE_FRAC,
+                               (((numBlocks + 1) * blockHeight) - 1) << G_TEXTURE_IMAGE_FRAC);
+                gSPScisTextureRectangle(gfx++, left << 2, (s32) (top + (numBlocks * blockHeight)) << 2,
+                                        (left + blockWidth) << 2,
+                                        (s32) (top + (numBlocks * blockHeight) + (height % blockHeight)) << 2,
+                                        G_TX_RENDERTILE, spE0, (numBlocks * blockHeight) << 5, dsdx, 1 << 10);
+            }
+        }
+    }
+
+    return gfx;
+}
 
 Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u32 height, f32 arg6, f32 arg7,
                    s32 format, s32 size, s32 argA, s32 argB, s32 argC) {
@@ -409,7 +696,7 @@ Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u
     return gfx;
 }
 
-extern u8 D_i2_8010D730[][9];
+extern u8 gEditCupTrackNames[][9];
 
 void func_8007D9D0(void) {
     s32 i;
@@ -419,10 +706,10 @@ void func_8007D9D0(void) {
     }
 
     for (i = 24; i < 30; i++) {
-        if (D_i2_8010D730[i - 24][0] == '\0') {
+        if (gEditCupTrackNames[i - 24][0] == '\0') {
             gTrackNames[i] = sTrackNames[i];
         } else {
-            gTrackNames[i] = D_i2_8010D730[i - 24];
+            gTrackNames[i] = gEditCupTrackNames[i - 24];
         }
     }
 
@@ -437,7 +724,7 @@ void func_8007D9D0(void) {
     gTrackNames[54] = sTrackNames[31];
 }
 
-void func_8007DABC(Controller* controller) {
+void Controller_SetGlobalInputs(Controller* controller) {
     gInputButtonPressed = controller->buttonPressed | STICK_TO_BUTTON(controller->stickPressed);
     if (controller->unk_82 != 0) {
         gStickPressed = controller->buttonCurrent | STICK_TO_BUTTON(controller->stickCurrent);
@@ -485,7 +772,7 @@ void func_8007DED8(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        D_800E4174[i] = 0;
+        gCupNumDifficultiesCleared[i] = 0;
     }
 }
 
@@ -500,25 +787,25 @@ void func_8007DEF0(void) {
     s32 var_a0;
 
     for (i = 0; i < 4; i++) {
-        if (D_800E4174[i] < 3) {
+        if (gCupNumDifficultiesCleared[i] < 3) {
             var_v1 = 1;
             break;
         }
     }
     var_a0 = gDifficulty + 1;
     //! @bug This always evaluates to true, and instead should use a &&
-    //       The result of this could lead to an OOB array access of D_800E4174
+    //       The result of this could lead to an OOB array access of gCupNumDifficultiesCleared
     if ((gCupType >= JACK_CUP) || (gCupType <= JOKER_CUP)) {
         if (var_a0 > MASTER + 1) {
             var_a0 = MASTER + 1;
         }
 
-        if (D_800E4174[gCupType] < var_a0) {
-            D_800E4174[gCupType] = var_a0;
+        if (gCupNumDifficultiesCleared[gCupType] < var_a0) {
+            gCupNumDifficultiesCleared[gCupType] = var_a0;
         }
         if (var_v1 != 0) {
             for (i = 0; i < 4; i++) {
-                if (D_800E4174[i] < 3) {
+                if (gCupNumDifficultiesCleared[i] < 3) {
                     var_v1 = 0;
                     if (gCupType) {}
                 }
@@ -528,18 +815,18 @@ void func_8007DEF0(void) {
                 D_800E42CC = 1;
             }
         }
-        func_i2_80101414();
+        Save_SaveSettingsProfiles();
     }
 }
 
-extern s8 D_800E4174[4];
+extern s8 gCupNumDifficultiesCleared[4];
 
 s32 func_8007E008(void) {
     s32 sum = 0;
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        sum += D_800E4174[i];
+        sum += gCupNumDifficultiesCleared[i];
     }
     return sum;
 }
@@ -570,23 +857,23 @@ void func_8007E0EC(void) {
     func_800BB078();
 }
 
-const s8 kCharacterList[] = { CAPTAIN_FALCON, DR_STEWART,   PICO,           SAMURAI_GOROH,   JODY_SUMMER,
-                              MIGHTY_GAZELLE, BABA,         OCTOMAN,        DR_CLASH,        MR_EAD,
-                              BIO_REX,        BILLY,        SILVER_NEELSEN, GOMAR_AND_SHIOH, JOHN_TANAKA,
-                              MRS_ARROW,      BLOOD_FALCON, JACK_LEVIN,     JAMES_MCCLOUD,   ZODA,
-                              MICHAEL_CHAIN,  SUPER_ARROW,  KATE_ALEN,      ROGER_BUSTER,    LEON,
-                              DRAQ,           BEASTMAN,     ANTONIO_GUSTER, BLACK_SHADOW,    THE_SKULL,
-                              MAX_CHARACTER };
+const s8 kMachineSelectCharacterList[] = { CAPTAIN_FALCON, DR_STEWART,   PICO,           SAMURAI_GOROH,   JODY_SUMMER,
+                                           MIGHTY_GAZELLE, BABA,         OCTOMAN,        DR_CLASH,        MR_EAD,
+                                           BIO_REX,        BILLY,        SILVER_NEELSEN, GOMAR_AND_SHIOH, JOHN_TANAKA,
+                                           MRS_ARROW,      BLOOD_FALCON, JACK_LEVIN,     JAMES_MCCLOUD,   ZODA,
+                                           MICHAEL_CHAIN,  SUPER_ARROW,  KATE_ALEN,      ROGER_BUSTER,    LEON,
+                                           DRAQ,           BEASTMAN,     ANTONIO_GUSTER, BLACK_SHADOW,    THE_SKULL,
+                                           MAX_CHARACTER };
 
 s8 func_8007E10C(s32 i) {
-    return kCharacterList[i];
+    return kMachineSelectCharacterList[i];
 }
 
 s32 func_8007E11C(s32 character) {
     s32 i;
 
     for (i = 0; i < 30; i++) {
-        if (character == kCharacterList[i]) {
+        if (character == kMachineSelectCharacterList[i]) {
             return i;
         }
     }
@@ -595,7 +882,7 @@ s32 func_8007E11C(s32 character) {
 }
 
 void func_8007E1C0(void) {
-    unk_80141C88 sp40;
+    GhostInfo sp40;
     s32 pad;
     bool sp38;
     s32 i;
@@ -603,57 +890,57 @@ void func_8007E1C0(void) {
     sp38 = false;
 
     for (i = 0; i < 24; i++) {
-        if (func_i2_801037CC(&sp40, i) != 0) {
+        if (Save_LoadStaffGhostRecord(&sp40, i) != 0) {
             sp38 = true;
             break;
         } else {
-            if (D_802A6B40[i].timeRecord[0] >= sp40.unk_08) {
+            if (gCourseRecordInfos[i].timeRecord[0] >= sp40.raceTime) {
                 sp38 = true;
                 break;
             }
         }
     }
-    if (!sp38 || (D_800CD3C0 >= 3)) {
+    if (!sp38 || (gUnlockableLevel >= 3)) {
         D_800CD3C4 = 2;
-    } else if (D_800CD3C0 >= 2) {
+    } else if (gUnlockableLevel >= 2) {
         D_800CD3C4 = 1;
     } else {
         D_800CD3C4 = 0;
     }
 }
 
-extern s8 D_800CD3C0;
+extern s8 gUnlockableLevel;
 
 void func_8007E2B4(void) {
     bool var_a0;
     s32 i;
 
-    if (func_8007E008() >= 0x10) {
-        D_800CD3C0 = 3;
+    if (func_8007E008() >= 16) {
+        gUnlockableLevel = 3;
     } else {
         var_a0 = false;
-        for (i = 0; i < 4; i++) {
-            if (D_800E4174[i] < 3) {
+        for (i = JACK_CUP; i <= JOKER_CUP; i++) {
+            if (gCupNumDifficultiesCleared[i] < 3) {
                 var_a0 = true;
                 break;
             }
         }
 
         if (!var_a0) {
-            D_800CD3C0 = 2;
+            gUnlockableLevel = 2;
         } else {
             var_a0 = false;
-            for (i = 0; i < 3; i++) {
-                if (D_800E4174[i] < 2) {
+            for (i = JACK_CUP; i <= KING_CUP; i++) {
+                if (gCupNumDifficultiesCleared[i] < 2) {
                     var_a0 = true;
                     break;
                 }
             }
 
             if (!var_a0) {
-                D_800CD3C0 = 1;
+                gUnlockableLevel = 1;
             } else {
-                D_800CD3C0 = 0;
+                gUnlockableLevel = 0;
             }
         }
     }
@@ -673,10 +960,10 @@ void func_8007E398(void) {
     }
 
     for (i = 0; i < 8; i++) {
-        D_800CD388[i] = 0;
+        gModeSubOption[i] = 0;
     }
 
     D_800CD3B8 = 0;
     D_800CD3BC = 0;
-    D_800CD3CC = 1;
+    gCurrentGhostType = GHOST_PLAYER;
 }

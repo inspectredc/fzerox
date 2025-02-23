@@ -36,78 +36,78 @@ s16 D_800CD044 = 0;
 s16 D_800CD048 = 0;
 
 void (*sGamemodeInitFuncs[])(void) = {
-    func_i4_TitleInit, // GAMEMODE_TITLE
-    func_i2_80103AD4,  // GAMEMODE_GP_RACE
-    func_i2_80103AD4,  // GAMEMODE_PRACTICE
-    func_i2_80103AD4,  // GAMEMODE_VS_2P
-    func_i2_80103AD4,  // GAMEMODE_VS_3P
-    func_i2_80103AD4,  // GAMEMODE_VS_4P
-    func_i8_801439D0,  // GAMEMODE_RECORDS
-    func_i4_80115DF0,  // GAMEMODE_MAIN_MENU
-    func_i6_80115DF0,  // GAMEMODE_MACHINE_SELECT
-    func_i4_801160D8,  // GAMEMODE_MACHINE_SETTINGS
-    func_i5_80116934,  // GAMEMODE_A
-    func_i6_8011BF50,  // GAMEMODE_B
-    func_i6_8011BF50,  // GAMEMODE_C
-    NULL,              // GAMEMODE_D
-    func_i2_80103AD4,  // GAMEMODE_TIME_ATTACK
-    func_i5_80116D00,  // GAMEMODE_F
-    NULL,              // GAMEMODE_10
-    func_i7_80143A90,  // GAMEMODE_GP_END_CS
-    func_i4_801160D8,  // GAMEMODE_12
-    func_i5_80116934,  // GAMEMODE_13
-    func_i6_8011C050,  // GAMEMODE_OPTIONS_MENU
-    func_i2_80103AD4,  // GAMEMODE_DEATH_RACE
+    Title_Init,            // GAMEMODE_TITLE
+    Race_Init,             // GAMEMODE_GP_RACE
+    Race_Init,             // GAMEMODE_PRACTICE
+    Race_Init,             // GAMEMODE_VS_2P
+    Race_Init,             // GAMEMODE_VS_3P
+    Race_Init,             // GAMEMODE_VS_4P
+    Records_Init,          // GAMEMODE_RECORDS
+    MainMenu_Init,         // GAMEMODE_MAIN_MENU
+    MachineSelect_Init,    // GAMEMODE_MACHINE_SELECT
+    MachineSettings_Init,  // GAMEMODE_MACHINE_SETTINGS
+    CourseSelect_Init,     // GAMEMODE_COURSE_SELECT
+    Credits_Init,          // GAMEMODE_SKIPPABLE_CREDITS
+    Credits_Init,          // GAMEMODE_UNSKIPPABLE_CREDITS
+    NULL,                  // GAMEMODE_COURSE_EDIT
+    Race_Init,             // GAMEMODE_TIME_ATTACK
+    NextCourseSelect_Init, // GAMEMODE_GP_RACE_NEXT_COURSE
+    NULL,                  // GAMEMODE_CREATE_MACHINE
+    EndingCutscene_Init,   // GAMEMODE_GP_END_CS
+    MachineSettings_Init,  // GAMEMODE_GP_RACE_NEXT_MACHINE_SETTINGS
+    CourseSelect_Init,     // GAMEMODE_RECORDS_COURSE_SELECT
+    OptionsMenu_Init,      // GAMEMODE_OPTIONS_MENU
+    Race_Init,             // GAMEMODE_DEATH_RACE
 };
 
 s32 (*sGamemodeUpdateFuncs[])(void) = {
-    func_i4_8011AE2C, // GAMEMODE_TITLE
-    func_i2_80103B8C, // GAMEMODE_GP_RACE
-    func_i2_80103B8C, // GAMEMODE_PRACTICE
-    func_i2_80103B8C, // GAMEMODE_VS_2P
-    func_i2_80103B8C, // GAMEMODE_VS_3P
-    func_i2_80103B8C, // GAMEMODE_VS_4P
-    func_i8_80143DDC, // GAMEMODE_RECORDS
-    func_i6_80115FF0, // GAMEMODE_MAIN_MENU
-    func_i4_8011631C, // GAMEMODE_MACHINE_SELECT
-    func_i4_801168D4, // GAMEMODE_MACHINE_SETTINGS
-    func_i5_80116EEC, // GAMEMODE_A
-    func_i6_8011BFB0, // GAMEMODE_B
-    func_i6_8011BFB0, // GAMEMODE_C
-    NULL,             // GAMEMODE_D
-    func_i2_80103B8C, // GAMEMODE_TIME_ATTACK
-    func_i5_801175D0, // GAMEMODE_F
-    NULL,             // GAMEMODE_10
-    func_i7_801441A0, // GAMEMODE_GP_END_CS
-    func_i4_801168D4, // GAMEMODE_12
-    func_i5_80116EEC, // GAMEMODE_13
-    func_i6_8011C6DC, // GAMEMODE_OPTIONS_MENU
-    func_i2_80103B8C, // GAMEMODE_DEATH_RACE
+    Title_Update,            // GAMEMODE_TITLE
+    Race_Update,             // GAMEMODE_GP_RACE
+    Race_Update,             // GAMEMODE_PRACTICE
+    Race_Update,             // GAMEMODE_VS_2P
+    Race_Update,             // GAMEMODE_VS_3P
+    Race_Update,             // GAMEMODE_VS_4P
+    Records_Update,          // GAMEMODE_RECORDS
+    MainMenu_Update,         // GAMEMODE_MAIN_MENU
+    MachineSelect_Update,    // GAMEMODE_MACHINE_SELECT
+    MachineSettings_Update,  // GAMEMODE_MACHINE_SETTINGS
+    CourseSelect_Update,     // GAMEMODE_COURSE_SELECT
+    Credits_Update,          // GAMEMODE_SKIPPABLE_CREDITS
+    Credits_Update,          // GAMEMODE_UNSKIPPABLE_CREDITS
+    NULL,                    // GAMEMODE_COURSE_EDIT
+    Race_Update,             // GAMEMODE_TIME_ATTACK
+    NextCourseSelect_Update, // GAMEMODE_GP_RACE_NEXT_COURSE
+    NULL,                    // GAMEMODE_CREATE_MACHINE
+    EndingCutscene_Update,   // GAMEMODE_GP_END_CS
+    MachineSettings_Update,  // GAMEMODE_GP_RACE_NEXT_MACHINE_SETTINGS
+    CourseSelect_Update,     // GAMEMODE_RECORDS_COURSE_SELECT
+    OptionsMenu_Update,      // GAMEMODE_OPTIONS_MENU
+    Race_Update,             // GAMEMODE_DEATH_RACE
 };
 
 Gfx* (*sGamemodeDrawFuncs[])(Gfx*) = {
-    func_i4_8011AF84, // GAMEMODE_TITLE
-    func_i2_80103BE0, // GAMEMODE_GP_RACE
-    func_i2_80103BE0, // GAMEMODE_PRACTICE
-    func_i2_80103BE0, // GAMEMODE_VS_2P
-    func_i2_80103BE0, // GAMEMODE_VS_3P
-    func_i2_80103BE0, // GAMEMODE_VS_4P
-    func_i8_80144568, // GAMEMODE_RECORDS
-    func_i6_801167CC, // GAMEMODE_MAIN_MENU
-    func_i4_80116DC4, // GAMEMODE_MACHINE_SELECT
-    func_i4_80116E10, // GAMEMODE_MACHINE_SETTINGS
-    func_i5_80117664, // GAMEMODE_A
-    func_i6_8011C01C, // GAMEMODE_B
-    func_i6_8011C01C, // GAMEMODE_C
-    NULL,             // GAMEMODE_D
-    func_i2_80103BE0, // GAMEMODE_TIME_ATTACK
-    func_i5_80117664, // GAMEMODE_F
-    NULL,             // GAMEMODE_10
-    func_i7_801447F4, // GAMEMODE_GP_END_CS
-    func_i4_80116E10, // GAMEMODE_12
-    func_i5_80117664, // GAMEMODE_13
-    Menu_OptionsDraw, // GAMEMODE_OPTIONS_MENU
-    func_i2_80103BE0, // GAMEMODE_DEATH_RACE
+    Title_Draw,           // GAMEMODE_TITLE
+    Race_Draw,            // GAMEMODE_GP_RACE
+    Race_Draw,            // GAMEMODE_PRACTICE
+    Race_Draw,            // GAMEMODE_VS_2P
+    Race_Draw,            // GAMEMODE_VS_3P
+    Race_Draw,            // GAMEMODE_VS_4P
+    Records_Draw,         // GAMEMODE_RECORDS
+    MainMenu_Draw,        // GAMEMODE_MAIN_MENU
+    MachineSelect_Draw,   // GAMEMODE_MACHINE_SELECT
+    MachineSettings_Draw, // GAMEMODE_MACHINE_SETTINGS
+    CourseSelect_Draw,    // GAMEMODE_COURSE_SELECT
+    Credits_Draw,         // GAMEMODE_SKIPPABLE_CREDITS
+    Credits_Draw,         // GAMEMODE_UNSKIPPABLE_CREDITS
+    NULL,                 // GAMEMODE_COURSE_EDIT
+    Race_Draw,            // GAMEMODE_TIME_ATTACK
+    CourseSelect_Draw,    // GAMEMODE_GP_RACE_NEXT_COURSE
+    NULL,                 // GAMEMODE_CREATE_MACHINE
+    EndingCutscene_Draw,  // GAMEMODE_GP_END_CS
+    MachineSettings_Draw, // GAMEMODE_GP_RACE_NEXT_MACHINE_SETTINGS
+    CourseSelect_Draw,    // GAMEMODE_RECORDS_COURSE_SELECT
+    OptionsMenu_Draw,     // GAMEMODE_OPTIONS_MENU
+    Race_Draw,            // GAMEMODE_DEATH_RACE
 };
 
 void func_80076848(void);
@@ -139,7 +139,7 @@ void Game_Init(void) {
     D_800CD16C = 1;
 }
 
-extern f32 D_800E5EF0;
+extern f32 gPlayerEngine[];
 extern s32 gCourseIndex;
 
 void func_80068BC0(void) {
@@ -154,7 +154,7 @@ void func_80068BC0(void) {
                 break;
             case 3:
                 D_800CD044 = 1;
-                D_800DCE48.gameMode = GAMEMODE_800A;
+                D_800DCE48.gameMode = GAMEMODE_FLX_COURSE_SELECT;
                 break;
             case 7:
                 D_800CD044 = 1;
@@ -165,54 +165,54 @@ void func_80068BC0(void) {
                 if (gCourseIndex % 6 == 5) {
                     D_800DCE48.gameMode = GAMEMODE_GP_END_CS;
                 } else {
-                    D_800DCE48.gameMode = GAMEMODE_800F;
+                    D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
                     gCourseIndex++;
                 }
-                D_800E5EF0 = 0.5f;
+                gPlayerEngine[0] = 0.5f;
                 break;
             case 5:
                 D_800CD044 = 1;
-                D_800DCE48.gameMode = GAMEMODE_800F;
+                D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
                 break;
             case 6:
-                D_800CD044 = 0xB;
-                D_800DCE48.gameMode = GAMEMODE_800F;
+                D_800CD044 = 11;
+                D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
                 break;
             case 8:
-                D_800CD044 = 0x15;
+                D_800CD044 = 21;
                 D_800DCE48.gameMode = GAMEMODE_RECORDS;
                 break;
             case 9:
-                D_800CD044 = 0x15;
-                D_800DCE48.gameMode = GAMEMODE_8013;
+                D_800CD044 = 21;
+                D_800DCE48.gameMode = GAMEMODE_FLX_RECORDS_COURSE_SELECT;
                 break;
             case 10:
             case 14:
-                D_800CD044 = 0x15;
+                D_800CD044 = 21;
                 D_800DCE48.gameMode = GAMEMODE_FLX_MAIN_MENU;
                 break;
             case 11:
-                D_800CD044 = 0x1F;
-                D_800DCE48.gameMode = GAMEMODE_800A;
+                D_800CD044 = 31;
+                D_800DCE48.gameMode = GAMEMODE_FLX_COURSE_SELECT;
                 break;
             case 12:
-                D_800CD044 = 0x1F;
+                D_800CD044 = 31;
                 D_800DCE48.gameMode = GAMEMODE_FLX_MAIN_MENU;
                 break;
             case 13:
-                D_800CD044 = 0x15;
+                D_800CD044 = 21;
                 D_800DCE48.gameMode = GAMEMODE_FLX_OPTIONS_MENU;
                 break;
             case 15:
-                D_800CD044 = 0xB;
+                D_800CD044 = 11;
                 if (gGameMode == GAMEMODE_GP_RACE) {
-                    D_800DCE48.gameMode = GAMEMODE_4012;
+                    D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS;
                 } else {
                     D_800DCE48.gameMode = GAMEMODE_LX_MACHINE_SETTINGS;
                 }
                 break;
             case 16:
-                D_800CD044 = 0xB;
+                D_800CD044 = 11;
                 D_800DCE48.gameMode = gGameMode;
                 break;
         }
@@ -241,24 +241,24 @@ void func_80068DCC(void) {
         case GAMEMODE_GP_END_CS:
             var_v1 = 0x15;
             break;
-        case GAMEMODE_800B:
-        case GAMEMODE_800C:
+        case GAMEMODE_FLX_SKIPPABLE_CREDITS:
+        case GAMEMODE_FLX_UNSKIPPABLE_CREDITS:
             var_v1 = 0x16;
             break;
-        case GAMEMODE_8013:
+        case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
         case GAMEMODE_FLX_OPTIONS_MENU:
             var_v1 = 0xF;
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_4012:
+        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
         case GAMEMODE_FLX_MAIN_MENU:
         case GAMEMODE_FLX_MACHINE_SELECT:
-        case GAMEMODE_800A:
-        case GAMEMODE_800F:
+        case GAMEMODE_FLX_COURSE_SELECT:
+        case GAMEMODE_FLX_GP_RACE_NEXT_COURSE:
             var_v1 = 0xE;
             break;
-        case 0xD:
-        case 0x10:
+        case GAMEMODE_COURSE_EDIT:
+        case GAMEMODE_CREATE_MACHINE:
             D_800CD154 = 0;
             return;
         default:
@@ -287,7 +287,7 @@ void func_80068F04(void) {
         D_800CD020 = 0;
         return;
     }
-    func_8007DABC(&gSharedController);
+    Controller_SetGlobalInputs(&gSharedController);
     switch (gGameMode) {
         case GAMEMODE_FLX_TITLE:
             if (gControllersConnected != 0) {
@@ -403,9 +403,9 @@ void func_800690FC(void) {
             func_80069700();
             switch (gGameMode) {
                 case GAMEMODE_LX_MACHINE_SETTINGS:
-                case GAMEMODE_4012:
-                    if ((gNumPlayers == 1) && (gCourseIndex < 0x18)) {
-                        func_i2_801012CC(gCourseIndex);
+                case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+                    if ((gNumPlayers == 1) && (gCourseIndex < 24)) {
+                        Save_UpdateCourseCharacterSave(gCourseIndex);
                     }
                     break;
                 case GAMEMODE_FLX_MACHINE_SELECT:
@@ -425,9 +425,9 @@ void func_800690FC(void) {
                 case GAMEMODE_VS_2P:
                 case GAMEMODE_VS_3P:
                 case GAMEMODE_VS_4P:
-                case GAMEMODE_D:
+                case GAMEMODE_COURSE_EDIT:
                 case GAMEMODE_TIME_ATTACK:
-                case GAMEMODE_10:
+                case GAMEMODE_CREATE_MACHINE:
                 case GAMEMODE_DEATH_RACE:
                     if (D_800CD010 == 0) {
                         func_8007E08C();
@@ -441,10 +441,10 @@ void func_800690FC(void) {
                 case GAMEMODE_VS_2P:
                 case GAMEMODE_VS_3P:
                 case GAMEMODE_VS_4P:
-                case GAMEMODE_D:
+                case GAMEMODE_COURSE_EDIT:
                 case GAMEMODE_DEATH_RACE:
                 case GAMEMODE_LX_MACHINE_SETTINGS:
-                case GAMEMODE_4012:
+                case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
                 case GAMEMODE_FLX_MACHINE_SELECT:
                     sp24 = 1;
                     break;
@@ -467,7 +467,7 @@ void func_800690FC(void) {
                         func_8008D7E8();
                         break;
                     case 2:
-                        func_i2_80100520(gCourseIndex);
+                        Save_LoadGhost(gCourseIndex);
                         func_8008D8E8();
                         break;
                     case 3:
