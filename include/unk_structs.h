@@ -3,10 +3,9 @@
 
 #include "libultra/ultra64.h"
 #include "other_types.h"
-#include "fzxmath.h"
+#include "fzx_math.h"
 
-// Course Segment
-typedef struct unk_8006FC8C {
+typedef struct CourseSegment {
     /* 0x00 */ Vec3f pos;
     /* 0x0C */ Vec3f unk_0C;
     /* 0x18 */ f32 radiusLeft;
@@ -16,8 +15,8 @@ typedef struct unk_8006FC8C {
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ s32 segmentIndex;
-    /* 0x34 */ struct unk_8006FC8C* next;
-    /* 0x38 */ struct unk_8006FC8C* prev;
+    /* 0x34 */ struct CourseSegment* next;
+    /* 0x38 */ struct CourseSegment* prev;
     /* 0x3C */ struct unk_36ED0* unk_3C;
     /* 0x40 */ struct unk_36ED0* unk_40;
     /* 0x44 */ struct unk_802D3D38* unk_44;
@@ -37,29 +36,48 @@ typedef struct unk_8006FC8C {
     /* 0x98 */ f32 unk_98;
     /* 0x9C */ f32 unk_9C;
     /* 0xA0 */ f32 unk_A0;
-} unk_8006FC8C; // size = 0xA4
+} CourseSegment; // size = 0xA4
 
 // Todo fill in array as individual documented u8 variables
-typedef struct unk_800F8510_unk_34 {
-    u8 unk_00[20];
-} unk_800F8510_unk_34;
+typedef struct CarInfo {
+    /* 0x00 */ u8 character;
+    /* 0x01 */ u8 customType;
+    /* 0x02 */ u8 frontType;
+    /* 0x03 */ u8 rearType;
+    /* 0x04 */ u8 wingType;
+    /* 0x05 */ u8 logo;
+    /* 0x06 */ u8 decal;
+    /* 0x07 */ u8 number;
+    /* 0x08 */ u8 envR2;
+    /* 0x09 */ u8 envG2;
+    /* 0x0A */ u8 envB2;
+    /* 0x0B */ u8 primR1;
+    /* 0x0C */ u8 primG1;
+    /* 0x0D */ u8 primB1;
+    /* 0x0E */ u8 primR2;
+    /* 0x0F */ u8 primG2;
+    /* 0x10 */ u8 primB2;
+    /* 0x11 */ u8 envR1;
+    /* 0x12 */ u8 envG1;
+    /* 0x13 */ u8 envB1;
+} CarInfo; // size = 0x14
 
-typedef struct unk_800F8510 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    f32 unk_0C;
-    unk_8006FC8C* unk_10;
-    s16 unk_14[6];
-    s32 timeRecord[5];
-    unk_800F8510_unk_34 unk_34[5];
-    f32 unk_98[5];
-    u8 unk_AC[5][4];
-    f32 unk_C0;
-    u8 unk_C4[20];
-    s32 unk_D8;
-    u8 unk_DC[20];
-} unk_800F8510; // size = 0xF0
+typedef struct CourseRecordInfo {
+    /* 0x00 */ s32 encodedCourseIndex;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ CourseSegment* courseSegments;
+    /* 0x14 */ s16 unk_14[6];
+    /* 0x20 */ s32 timeRecord[5];
+    /* 0x34 */ CarInfo carInfo[5];
+    /* 0x98 */ f32 engine[5];
+    /* 0xAC */ u8 name[5][4];
+    /* 0xC0 */ f32 maxSpeed;
+    /* 0xC4 */ CarInfo maxSpeedCar;
+    /* 0xD8 */ s32 bestTime;
+    /* 0xDC */ CarInfo bestTimeCar;
+} CourseRecordInfo; // size = 0xF0
 
 typedef struct unk_802D3E38 {
     s32 unk_00;
@@ -107,21 +125,6 @@ typedef struct unk_802D08E0 {
     f32 unk_30;
     struct unk_36ED0* unk_34;
 } unk_802D08E0; // size = 0x38
-
-typedef struct unk_800E3A28 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-    s8 unk_14;
-    s8 unk_15;
-    s8 unk_16[0x2];
-    s32 unk_18;
-    s32 unk_1C;
-    s32 unk_20;
-    s8 unk_24[0x4];
-} unk_800E3A28; // size = 0x28
 
 typedef Gfx* (*unk_800E51B8_unk_1C_func)(Gfx*, s32, s32);
 
@@ -292,7 +295,7 @@ typedef struct unk_struct_1DC {
 } unk_struct_1DC; // size = 0x1DC
 
 typedef struct Racer_unk_C {
-    unk_8006FC8C* unk_00;
+    CourseSegment* courseSegment;
     f32 unk_04;
     f32 unk_08;
     Vec3f unk_0C;
@@ -312,10 +315,10 @@ typedef struct Racer {
     Racer_unk_C unk_0C;
     Vec3f unk_5C;
     Vec3f unk_68;
-    Vec3f unk_74;
+    Vec3f velocity;
     Vec3f unk_80;
-    Vec3f unk_8C;
-    f32 unk_98;
+    Vec3f acceleration;
+    f32 speed;
     f32 maxSpeed;
     f32 unk_A0;
     f32 unk_A4;
@@ -591,17 +594,17 @@ typedef struct unk_802D3978 {
     s8 unk_10[0x4];
 } unk_802D3978; // size = 0x14
 
-typedef struct unk_800E5FF8 {
-    u32 unk_0000;
-    s32 unk_0004;
-    s32 unk_0008[3];
-    s32 unk_0014;
-    s32 unk_0018;
-    s8 unk_001C[16200];
-    s32 unk_3F64;
-    s16 unk_3F68;
-    u8 unk_3F6A[20];
-} unk_800E5FF8; // size = 0x3F80
+typedef struct Ghost {
+    /* 0x0000 */ s32 encodedCourseIndex;
+    /* 0x0004 */ s32 raceTime;
+    /* 0x0008 */ s32 lapTimes[3];
+    /* 0x0014 */ s32 replayEnd;
+    /* 0x0018 */ s32 replaySize;
+    /* 0x001C */ s8 replayData[16200];
+    /* 0x3F64 */ s32 replayChecksum;
+    /* 0x3F68 */ s16 ghostType;
+    /* 0x3F6A */ CarInfo carInfo;
+} Ghost; // size = 0x3F80
 
 typedef struct unk_80077D50 {
     s16 unk_00;
@@ -632,8 +635,8 @@ typedef struct unk_800E3F28 {
     s16 unk_06;
     s16 unk_08;
     s16 unk_0A;
-    TexturePtr unk_0C;
-    TexturePtr unk_10;
+    TexturePtr unk_0C; // primary texture
+    TexturePtr unk_10; // alternate texture (defaults to primary)
 } unk_800E3F28; // size = 0x14
 
 
@@ -645,7 +648,7 @@ typedef struct unk_800DCE48 {
 
 typedef struct unk_800F5DF0 {
     s32 unk_00;
-    unk_800E5FF8* unk_04;
+    Ghost* ghost;
     s8* unk_08;
     s32 unk_0C;
     s16 unk_10;
@@ -675,110 +678,20 @@ typedef struct RaceStats {
 } RaceStats; // size = 0x10
 
 typedef struct unk_80141C88_unk_1D {
-    u8 unk_00[20];
+    CarInfo unk_00;
     s8 unk_14[12];
 } unk_80141C88_unk_1D;
 
-typedef struct unk_80141C88 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    u16 unk_10;
-    u16 unk_12;
-    char unk_14[9];
-    unk_80141C88_unk_1D unk_1D;
-} unk_80141C88; // size = 0x40
-
-typedef struct unk_struct_110 {
-    u16 checksum;
-    s16 unk_02;
-    s32 unk_04[5];
-    f32 unk_18[5];
-    f32 unk_2C;
-    s32 unk_30;
-    u8 unk_34[5][4];
-    u8 unk_48[8];
-    u8 unk_50[5][32];
-    u8 unk_F0[20];
-    s8 unk_104[0xC];
-} unk_struct_110; // size = 0x110
-
-typedef struct unk_struct_80 {
-    u16 checksum;
-    u16 unk_02;
-    s32 unk_04;
-    f32 unk_08[30];
-} unk_struct_80; // size = 0x80
-
-typedef struct unk_struct_40_2 {
-    u16 checksum;
-    s16 unk_02;
-    s32 unk_04;
-    s16 unk_08;
-    u8 unk_0A[6][9];
-} unk_struct_40_2; // size = 0x40
-
-typedef struct unk_struct_10 {
-    u8 unk_00[8];
-    u8 unk_08;
-    u8 unk_09;
-    u8 unk_0A[4];
-    u16 checksum;
-} unk_struct_10; // size = 0x10
-
-typedef struct unk_struct_10_2 {
-    u16 checksum;
-    s16 unk_02;
-    s32 unk_04[1];
-    u8 unk_08[8];
-} unk_struct_10_2; // size = 0x10
-
-typedef struct unk_struct_19E0 {
-    unk_struct_10 unk_00;
-    unk_struct_10_2 unk_10;
-    unk_struct_110 unk_20[24];
-    unk_struct_40_2 unk_19A0;
-} unk_struct_19E0; // size = 0x19E0
-
-typedef struct unk_struct_40 {
-    u16 checksum;
-    u16 unk_02;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    u16 unk_10;
-    s8 unk_12[5];
-    u8 unk_17[9];
-    unk_80141C88_unk_1D unk_20;
-} unk_struct_40; // size = 0x40
-
-typedef struct unk_struct_3F80 {
-    u16 checksum;
-    s16 unk_02;
-    s32 unk_04[3];
-    s32 unk_10;
-    u32 unk_14;
-    s32 unk_18;
-    s32 unk_1C;
-    u8 unk_20[16200];
-    s8 unk_3F68[0x18];
-} unk_struct_3F80; // size = 0x3F80
-
-typedef struct unk_struct_60 {
-    u16 checksum;
-    s8 unk_02[0xE];
-    u16 unk_10[4][10];
-} unk_struct_60; // size = 0x60
-
-typedef struct unk_801247C0 {
-    unk_struct_19E0 unk_00[2];
-    unk_struct_40 unk_33C0;
-    unk_struct_3F80 unk_3400;
-    unk_struct_80 unk_7380[24];
-    unk_struct_60 unk_7F80;
-    s8 unk_7FE0[0x20];
-} unk_801247C0; // size = 0x8000
+typedef struct GhostInfo {
+    /* 0x00 */ s32 courseIndex;
+    /* 0x04 */ s32 encodedCourseIndex;
+    /* 0x08 */ s32 raceTime;
+    /* 0x0C */ s32 replayChecksum;
+    /* 0x10 */ u16 ghostType;
+    /* 0x12 */ u16 unk_12;
+    /* 0x14 */ char trackName[9];
+    /* 0x1D */ unk_80141C88_unk_1D unk_1D;
+} GhostInfo; // size = 0x40
 
 typedef struct unk_80111870 {
     Vec3f unk_00;
@@ -827,7 +740,7 @@ typedef struct unk_800CF1B0 {
     u8 unk_08[4];
     u8 unk_0C[4];
     u8 unk_10;
-    s8 unk_11[3];
+    s8 machineStats[3];
     s16 unk_14;
 } unk_800CF1B0; // size = 0x16
 

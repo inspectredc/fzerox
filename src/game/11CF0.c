@@ -1,10 +1,11 @@
 #include "global.h"
 #include "fzx_game.h"
+#include "fzx_object.h"
 #include "segment_symbols.h"
 
 unk_800E33E0 D_800E33E0[200];
 s32 D_800E3A20;
-unk_800E3A28 D_800E3A28[32];
+Object gObjects[32];
 unk_800E3F28 D_800E3F28[16];
 unk_800E4068 D_800E4068[16];
 
@@ -183,7 +184,7 @@ void* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) 
         }
     } else {
         // FAKE
-        return ((unk_800E33E0*) (var_v1 + var_a3))->unk_04;
+        return (var_v1 + var_a3)->unk_04;
     }
     return var_s0;
 }
@@ -521,7 +522,7 @@ void func_800793E8(s32 arg0, s32 arg1, unk_800792D8* arg2) {
     D_800E3F28[arg0].unk_04 = arg1;
     D_800E3F28[arg0].unk_00 = arg2;
     // FAKE
-    D_800E3F28[arg0].unk_06 = ((unk_800E33E0*) (arg2 + arg1))->unk_04;
+    D_800E3F28[arg0].unk_06 = (arg2 + arg1)->unk_04;
     temp_a3 = arg2[D_800E3F28[arg0].unk_04].unk_00;
 
     if (D_800E3F28[arg0].unk_0A != 0) {
@@ -533,470 +534,472 @@ void func_800793E8(s32 arg0, s32 arg1, unk_800792D8* arg2) {
     }
 }
 
-void func_80079480(void) {
+void Object_ClearAll(void) {
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        D_800E3A28[i].unk_00 = 0;
+        gObjects[i].cmdId = OBJECT_FREE;
     }
 }
 
-void func_800794B0(s32 arg0, s32 arg1, s32 arg2, s8 arg3) {
+void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
     s32 i = 0;
-    unk_800E3A28* var_s0 = D_800E3A28;
+    Object* object = gObjects;
 
     while (true) {
         // clang-format off
-        if (var_s0->unk_00 == 0) {   \
-            var_s0->unk_00 = arg0;   \
-            var_s0->unk_04 = 0;      \
-            var_s0->unk_08 = 0;      \
-            var_s0->unk_0C = arg1;   \
-            var_s0->unk_10 = arg2;   \
-            var_s0->unk_14 = arg3;   \
-            var_s0->unk_15 = 1;      \
-            var_s0->unk_1C = 0;      \
-            var_s0->unk_20 = 0;      \
+        if (object->cmdId == OBJECT_FREE) { \
+            object->cmdId = cmdId;          \
+            object->state = 0;              \
+            object->state2 = 0;             \
+            object->left = left;            \
+            object->top = top;              \
+            object->priority = priority;    \
+            object->shouldDraw = true;      \
+            object->counter = 0;            \
+            object->counter2 = 0;           \
             break;
         }
         // clang-format on
-        if (++i > 0x20) {
+        if (++i > ARRAY_COUNT(gObjects)) {
             return;
         }
-        var_s0++;
+        object++;
     }
 
-    switch (arg0) {
-        case 0xA:
-            func_i4_8011B06C(var_s0);
+    switch (cmdId) {
+        case OBJECT_TITLE_BACKGROUND:
+            Title_BackgroundInit(object);
             break;
-        case 0xE:
+        case OBJECT_14:
             func_i4_8011B0C8();
             break;
-        case 0xF:
-            func_i4_8011B0D0(var_s0);
+        case OBJECT_TITLE_LOGO:
+            Title_LogoInit(object);
             break;
-        case 0x10:
+        case OBJECT_16:
             func_i4_8011B134();
             break;
-        case 0x11:
-            func_i4_8011B13C(var_s0);
+        case OBJECT_TITLE_PUSH_START:
+            Title_StartInit(object);
             break;
-        case 0x12:
+        case OBJECT_18:
             func_i4_8011B1E4();
             break;
-        case 0x13:
-            func_i4_8011B1EC();
+        case OBJECT_TITLE_COPYRIGHT:
+            Title_CopyrightInit();
             break;
-        case 0x14:
-            func_i4_8011B214(var_s0);
+        case OBJECT_TITLE_DISK_DRIVE:
+            Title_DiskDriveInit(object);
             break;
-        case 0x1F:
-            func_i4_80116E64();
+        case OBJECT_MACHINE_SELECT_HEADER:
+            MachineSelect_HeaderInit();
             break;
-        case 0x20:
-            func_i4_80116E8C(var_s0);
+        case OBJECT_32:
+            func_i4_80116E8C(object);
             break;
-        case 0x3C:
-        case 0x3D:
-        case 0x3E:
-        case 0x3F:
-            func_i4_80116F48(var_s0);
+        case OBJECT_MACHINE_SETTINGS_PORTRAIT_0:
+        case OBJECT_MACHINE_SETTINGS_PORTRAIT_1:
+        case OBJECT_MACHINE_SETTINGS_PORTRAIT_2:
+        case OBJECT_MACHINE_SETTINGS_PORTRAIT_3:
+            MachineSettings_PortraitInit(object);
             break;
-        case 0x21:
-        case 0x22:
-        case 0x23:
-        case 0x24:
-            func_i4_80117008(var_s0);
+        case OBJECT_MACHINE_SELECT_PORTRAIT_0:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_1:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_2:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_3:
+            MachineSelect_PortraitInit(object);
             break;
-        case 0x28:
-        case 0x29:
-        case 0x2A:
-        case 0x2B:
-            func_i4_80117038(var_s0);
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_0:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_1:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_2:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_3:
+            MachineSelect_CursorNumInit(object);
             break;
-        case 0x2C:
-            func_i4_8011706C();
+        case OBJECT_MACHINE_SELECT_CURSOR:
+            MachineSelect_CursorInit();
             break;
-        case 0x2D:
-            func_i4_80117094(var_s0);
+        case OBJECT_MACHINE_SELECT_CAR:
+            MachineSelect_CarInit(object);
             break;
-        case 0x35:
-            func_i4_80117400(var_s0);
+        case OBJECT_MACHINE_SETTINGS_CAR:
+            MachineSettings_CarInit(object);
             break;
-        case 0x33:
-            func_i4_8011764C();
+        case OBJECT_MACHINE_SETTINGS_ENGINE_WEIGHT:
+            MachineSettings_EngineWeightInit();
             break;
-        case 0x34:
-            func_i4_801176BC();
+        case OBJECT_MACHINE_SETTINGS_STATS:
+            MachineSettings_StatsInit();
             break;
-        case 0x36:
-            func_i4_8011770C(var_s0);
+        case OBJECT_MACHINE_SETTINGS_NAME_CARD:
+            MachineSettings_NameCardInit(object);
             break;
-        case 0x37:
-            func_i4_8011774C();
+        case OBJECT_MACHINE_SETTINGS_SLIDER:
+            MachineSettings_SliderInit();
             break;
-        case 0x2E:
-            func_i4_80117854(var_s0);
+        case OBJECT_MACHINE_SELECT_OK:
+            MachineSelect_OkInit(object);
             break;
-        case 0x39:
-            func_i4_8011788C(var_s0);
+        case OBJECT_MACHINE_SETTINGS_OK:
+            MachineSettings_OkInit(object);
             break;
-        case 0x2F:
-            func_i4_80117774(var_s0);
+        case OBJECT_MACHINE_SELECT_DIFFICULTY_CUPS:
+            MachineSelect_DifficultyCupsInit(object);
             break;
-        case 0x41:
-        case 0x42:
-        case 0x43:
-        case 0x44:
-            func_i4_80117808();
+        case OBJECT_MACHINE_SELECT_STATS_0:
+        case OBJECT_MACHINE_SELECT_STATS_1:
+        case OBJECT_MACHINE_SELECT_STATS_2:
+        case OBJECT_MACHINE_SELECT_STATS_3:
+            MachineSelect_StatsInit();
             break;
-        case 0x50:
-            func_i6_801167EC(var_s0);
+        case OBJECT_MAIN_MENU_BACKGROUND:
+            MainMenu_BackgroundInit(object);
             break;
-        case 0x51:
-        case 0x52:
-        case 0x53:
-        case 0x54:
-        case 0x55:
-        case 0x56:
-        case 0x57:
-        case 0x58:
-            func_i6_80116894(var_s0);
+        case OBJECT_MAIN_MENU_MODE_SIGN_0:
+        case OBJECT_MAIN_MENU_MODE_SIGN_1:
+        case OBJECT_MAIN_MENU_MODE_SIGN_2:
+        case OBJECT_MAIN_MENU_MODE_SIGN_3:
+        case OBJECT_MAIN_MENU_MODE_SIGN_4:
+        case OBJECT_MAIN_MENU_MODE_SIGN_5:
+        case OBJECT_MAIN_MENU_MODE_SIGN_6:
+        case OBJECT_MAIN_MENU_MODE_SIGN_7:
+            MainMenu_SignInit(object);
             break;
-        case 0x59:
-            func_i6_801168EC(var_s0);
+        case OBJECT_MAIN_MENU_HEADER:
+            MainMenu_HeaderInit(object);
             break;
-        case 0x5A:
-            func_i6_80116934();
+        case OBJECT_MAIN_MENU_SELECT_NUM_PLAYERS:
+            MainMenu_NumPlayersInit();
             break;
-        case 0x5C:
-            func_i6_80116990();
+        case OBJECT_MAIN_MENU_SELECT_DIFFICULTY:
+            MainMenu_DifficultyInit();
             break;
-        case 0x5F:
-            func_i6_801169EC();
+        case OBJECT_MAIN_MENU_SELECT_TIME_ATTACK_MODE:
+            MainMenu_TimeAttackModeInit();
             break;
-        case 0x5D:
-            func_i6_80116A48(var_s0);
+        case OBJECT_MAIN_MENU_OK:
+            MainMenu_OkInit(object);
             break;
-        case 0x5E:
-            func_i6_80116A80(var_s0);
+        case OBJECT_MAIN_MENU_UNLOCK_EVERYTHING:
+            MainMenu_UnlockEverythingInit(object);
             break;
-        case 0x78:
-            func_i5_80117684(var_s0);
+        case OBJECT_COURSE_SELECT_BACKGROUND:
+            CourseSelect_BackgroundInit(object);
             break;
-        case 0x79:
-            func_i5_80117758();
+        case OBJECT_COURSE_SELECT_MODEL:
+            CourseSelect_ModelInit();
             break;
-        case 0x7A:
-        case 0x7B:
-        case 0x7C:
-        case 0x7D:
-        case 0x7E:
-        case 0x7F:
-            func_i5_801177EC(var_s0);
+        case OBJECT_COURSE_SELECT_CUP_0:
+        case OBJECT_COURSE_SELECT_CUP_1:
+        case OBJECT_COURSE_SELECT_CUP_2:
+        case OBJECT_COURSE_SELECT_CUP_3:
+        case OBJECT_COURSE_SELECT_CUP_4:
+        case OBJECT_COURSE_SELECT_CUP_5:
+            CourseSelect_CupInit(object);
             break;
-        case 0x83:
-            func_i5_801178D8(var_s0);
+        case OBJECT_COURSE_SELECT_HEADER:
+            CourseSelect_HeaderInit(object);
             break;
-        case 0x80:
-            func_i5_80117934(var_s0);
+        case OBJECT_COURSE_SELECT_OK:
+            CourseSelect_OkInit(object);
             break;
-        case 0x81:
-            func_i5_8011796C(var_s0);
+        case OBJECT_COURSE_SELECT_ARROWS:
+            CourseSelect_ArrowsInit(object);
             break;
-        case 0x84:
-            func_i5_801179A8(var_s0);
+        case OBJECT_COURSE_SELECT_GHOST_MARKER:
+            CourseSelect_GhostMarkerInit(object);
             break;
-        case 0x85:
-            func_i5_80117A2C(var_s0);
+        case OBJECT_COURSE_SELECT_GHOST_OPTION:
+            CourseSelect_GhostOptionInit(object);
             break;
         default:
             break;
     }
 }
 
-Gfx* func_800797CC(Gfx* gfx, unk_800E3A28* arg1) {
+Gfx* Object_Draw(Gfx* gfx, Object* object) {
 
-    if (arg1->unk_15 == 0) {
+    if (!object->shouldDraw) {
         return gfx;
     }
 
-    switch (arg1->unk_00) {
-        case 0:
+    switch (object->cmdId) {
+        case OBJECT_FREE:
             break;
-        case 0x5:
-            gfx = func_8007ABA4(func_8007AE70(func_8007AB88(gfx)));
+        case OBJECT_FRAMEBUFFER:
+            gfx = func_8007AB88(gfx);
+            gfx = func_8007AE70(gfx);
+            gfx = func_8007ABA4(gfx);
             break;
-        case 0xA:
-            gfx = func_i4_8011B380(gfx, arg1);
+        case OBJECT_TITLE_BACKGROUND:
+            gfx = Title_BackgroundDraw(gfx, object);
             break;
-        case 0xE:
-            gfx = func_i4_8011B3DC(gfx, arg1);
+        case OBJECT_14:
+            gfx = func_i4_8011B3DC(gfx, object);
             break;
-        case 0xC:
+        case OBJECT_12:
             gfx = func_8007AF40(gfx, 118, 164, 203, 217, 255, 255, 255, 48);
             break;
-        case 0xD:
+        case OBJECT_13:
             gfx = func_8007AE8C(gfx, 12, 8, 307, 231, 0, 0, 0, 0);
             break;
-        case 0xF:
-            gfx = func_i4_8011B3E8(gfx, arg1);
+        case OBJECT_TITLE_LOGO:
+            gfx = Title_LogoDraw(gfx, object);
             break;
-        case 0x10:
-            gfx = func_i4_8011B438(gfx, arg1);
+        case OBJECT_16:
+            gfx = func_i4_8011B438(gfx, object);
             break;
-        case 0x11:
-            gfx = func_i4_8011B444(gfx, arg1);
+        case OBJECT_TITLE_PUSH_START:
+            gfx = Title_StartDraw(gfx, object);
             break;
-        case 0x12:
-            gfx = func_i4_8011B668(gfx, arg1);
+        case OBJECT_18:
+            gfx = func_i4_8011B668(gfx, object);
             break;
-        case 0x13:
-            gfx = func_i4_8011B674(gfx, arg1);
+        case OBJECT_TITLE_COPYRIGHT:
+            gfx = Title_CopyrightDraw(gfx, object);
             break;
-        case 0x14:
-            gfx = func_i4_8011B6C4(gfx, arg1);
+        case OBJECT_TITLE_DISK_DRIVE:
+            gfx = Title_DiskDriveDraw(gfx, object);
             break;
-        case 0x1E:
-            gfx = func_i4_801178C4(gfx);
+        case OBJECT_MACHINE_SELECT_BACKGROUND:
+            gfx = MachineSelect_BackgroundDraw(gfx);
             break;
-        case 0x3B:
-            gfx = func_8007AC48(gfx, 0x18, 0x18, 0x18);
+        case OBJECT_MACHINE_SETTINGS_BACKGROUND:
+            gfx = func_8007AC48(gfx, 24, 24, 24);
             break;
-        case 0x1F:
-            gfx = func_i4_80117B74(gfx, arg1);
+        case OBJECT_MACHINE_SELECT_HEADER:
+            gfx = MachineSelect_HeaderDraw(gfx, object);
             break;
-        case 0x20:
-            gfx = func_i4_80117BE0(gfx, arg1);
+        case OBJECT_32:
+            gfx = func_i4_80117BE0(gfx, object);
             break;
-        case 0x3C:
-        case 0x3D:
-        case 0x3E:
-        case 0x3F:
-            gfx = func_i4_80117D10(gfx, arg1);
+        case OBJECT_MACHINE_SETTINGS_PORTRAIT_0:
+        case OBJECT_MACHINE_SETTINGS_PORTRAIT_1:
+        case OBJECT_MACHINE_SETTINGS_PORTRAIT_2:
+        case OBJECT_MACHINE_SETTINGS_PORTRAIT_3:
+            gfx = MachineSettings_PortraitDraw(gfx, object);
             break;
-        case 0x21:
-        case 0x22:
-        case 0x23:
-        case 0x24:
-            gfx = func_i4_801180EC(gfx, arg1);
+        case OBJECT_MACHINE_SELECT_PORTRAIT_0:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_1:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_2:
+        case OBJECT_MACHINE_SELECT_PORTRAIT_3:
+            gfx = MachineSelect_PortraitDraw(gfx, object);
             break;
-        case 0x28:
-        case 0x29:
-        case 0x2A:
-        case 0x2B:
-            gfx = func_i4_801181C0(gfx, arg1);
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_0:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_1:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_2:
+        case OBJECT_MACHINE_SELECT_CURSOR_NUM_3:
+            gfx = MachineSelect_CursorNumDraw(gfx, object);
             break;
-        case 0x2C:
-            gfx = func_i4_8011821C(gfx, arg1);
+        case OBJECT_MACHINE_SELECT_CURSOR:
+            gfx = MachineSelect_CursorDraw(gfx, object);
             break;
-        case 0x2D:
-            gfx = func_i4_80118414(gfx, arg1);
+        case OBJECT_MACHINE_SELECT_CAR:
+            gfx = MachineSelect_CarDraw(gfx, object);
             break;
-        case 0x2E:
-            gfx = func_i4_80118734(gfx, arg1);
+        case OBJECT_MACHINE_SELECT_OK:
+            gfx = MachineSelect_OkDraw(gfx, object);
             break;
-        case 0x41:
-        case 0x42:
-        case 0x43:
-        case 0x44:
-            gfx = func_i4_80117E98(gfx, arg1);
+        case OBJECT_MACHINE_SELECT_STATS_0:
+        case OBJECT_MACHINE_SELECT_STATS_1:
+        case OBJECT_MACHINE_SELECT_STATS_2:
+        case OBJECT_MACHINE_SELECT_STATS_3:
+            gfx = MachineSelect_StatsDraw(gfx, object);
             break;
-        case 0x35:
-            gfx = func_i4_80118918(gfx, arg1);
+        case OBJECT_MACHINE_SETTINGS_CAR:
+            gfx = MachineSettings_CarDraw(gfx, object);
             break;
-        case 0x32:
-            gfx = func_i4_801187C0(gfx);
+        case OBJECT_MACHINE_SETTINGS_NAME:
+            gfx = MachineSettings_NameDraw(gfx);
             break;
-        case 0x33:
-            gfx = func_i4_80118EC8(gfx, arg1);
+        case OBJECT_MACHINE_SETTINGS_ENGINE_WEIGHT:
+            gfx = MachineSettings_EngineWeightDraw(gfx, object);
             break;
-        case 0x34:
-            gfx = func_i4_80119170(gfx, arg1);
+        case OBJECT_MACHINE_SETTINGS_STATS:
+            gfx = MachineSettings_StatsDraw(gfx, object);
             break;
-        case 0x3A:
-            gfx = func_i4_801193B8(gfx, arg1);
+        case OBJECT_58:
+            gfx = func_i4_801193B8(gfx, object);
             break;
-        case 0x36:
-            gfx = func_i4_801194F8(gfx, arg1);
+        case OBJECT_MACHINE_SETTINGS_NAME_CARD:
+            gfx = MachineSettings_NameCardDraw(gfx, object);
             break;
-        case 0x37:
-            gfx = func_i4_80119574(gfx, arg1);
+        case OBJECT_MACHINE_SETTINGS_SLIDER:
+            gfx = MachineSettings_SliderDraw(gfx, object);
             break;
-        case 0x38:
-            gfx = func_i4_801197A0(gfx);
+        case OBJECT_MACHINE_SETTINGS_SPLITSCREEN_BARS:
+            gfx = MachineSettings_SplitscreenDraw(gfx);
             break;
-        case 0x39:
-            gfx = func_i4_80119B50(gfx, arg1);
+        case OBJECT_MACHINE_SETTINGS_OK:
+            gfx = MachineSettings_OkDraw(gfx, object);
             break;
-        case 0x2F:
-            gfx = func_i4_80119834(gfx, arg1);
+        case OBJECT_MACHINE_SELECT_DIFFICULTY_CUPS:
+            gfx = MachineSelect_DifficultyCupsDraw(gfx, object);
             break;
-        case 0x30:
-            gfx = func_i4_80119A64(gfx, arg1);
+        case OBJECT_MACHINE_SELECT_NAME:
+            gfx = MachineSelect_NameDraw(gfx, object);
             break;
-        case 0x50:
-            gfx = func_i6_80116C78(gfx, arg1);
+        case OBJECT_MAIN_MENU_BACKGROUND:
+            gfx = MainMenu_BackgroundDraw(gfx, object);
             break;
-        case 0x51:
-        case 0x52:
-        case 0x53:
-        case 0x54:
-        case 0x55:
-        case 0x56:
-        case 0x57:
-        case 0x58:
-            gfx = func_i6_80116AA8(gfx, arg1);
+        case OBJECT_MAIN_MENU_MODE_SIGN_0:
+        case OBJECT_MAIN_MENU_MODE_SIGN_1:
+        case OBJECT_MAIN_MENU_MODE_SIGN_2:
+        case OBJECT_MAIN_MENU_MODE_SIGN_3:
+        case OBJECT_MAIN_MENU_MODE_SIGN_4:
+        case OBJECT_MAIN_MENU_MODE_SIGN_5:
+        case OBJECT_MAIN_MENU_MODE_SIGN_6:
+        case OBJECT_MAIN_MENU_MODE_SIGN_7:
+            gfx = MainMenu_SignDraw(gfx, object);
             break;
-        case 0x59:
-            gfx = func_i6_80117400(gfx, arg1);
+        case OBJECT_MAIN_MENU_HEADER:
+            gfx = MainMenu_HeaderDraw(gfx, object);
             break;
-        case 0x5A:
-            gfx = func_i6_801174DC(gfx, arg1);
+        case OBJECT_MAIN_MENU_SELECT_NUM_PLAYERS:
+            gfx = MainMenu_NumPlayersDraw(gfx, object);
             break;
-        case 0x5C:
-            gfx = func_i6_80117760(gfx, arg1);
+        case OBJECT_MAIN_MENU_SELECT_DIFFICULTY:
+            gfx = MainMenu_DifficultyDraw(gfx, object);
             break;
-        case 0x5F:
-            gfx = func_i6_80117A18(gfx, arg1);
+        case OBJECT_MAIN_MENU_SELECT_TIME_ATTACK_MODE:
+            gfx = MainMenu_TimeAttackModeDraw(gfx, object);
             break;
-        case 0x5D:
-            gfx = func_i6_80117C50(gfx, arg1);
+        case OBJECT_MAIN_MENU_OK:
+            gfx = MainMenu_OkDraw(gfx, object);
             break;
-        case 0x64:
-        case 0x8C:
+        case OBJECT_100:
+        case OBJECT_140:
             gfx = func_8007AC48(gfx, 0, 0, 0);
             break;
-        case 0x78:
-            gfx = func_i5_80117A98(gfx, arg1);
+        case OBJECT_COURSE_SELECT_BACKGROUND:
+            gfx = CourseSelect_BackgroundDraw(gfx, object);
             break;
-        case 0x79:
-            gfx = func_i5_80117BE0(gfx, arg1);
+        case OBJECT_COURSE_SELECT_MODEL:
+            gfx = CourseSelect_ModelDraw(gfx, object);
             break;
-        case 0x7A:
-        case 0x7B:
-        case 0x7C:
-        case 0x7D:
-        case 0x7E:
-        case 0x7F:
-            gfx = func_i5_80117C48(gfx, arg1);
+        case OBJECT_COURSE_SELECT_CUP_0:
+        case OBJECT_COURSE_SELECT_CUP_1:
+        case OBJECT_COURSE_SELECT_CUP_2:
+        case OBJECT_COURSE_SELECT_CUP_3:
+        case OBJECT_COURSE_SELECT_CUP_4:
+        case OBJECT_COURSE_SELECT_CUP_5:
+            gfx = CourseSelect_CupDraw(gfx, object);
             break;
-        case 0x83:
-            gfx = func_i5_80117FB4(gfx, arg1);
+        case OBJECT_COURSE_SELECT_HEADER:
+            gfx = CourseSelect_HeaderDraw(gfx, object);
             break;
-        case 0x80:
-            gfx = func_i5_80118100(gfx, arg1);
+        case OBJECT_COURSE_SELECT_OK:
+            gfx = CourseSelect_OkDraw(gfx, object);
             break;
-        case 0x81:
-            gfx = func_i5_80118168(gfx, arg1);
+        case OBJECT_COURSE_SELECT_ARROWS:
+            gfx = CourseSelect_ArrowsDraw(gfx, object);
             break;
-        case 0x82:
-            gfx = func_i5_801182DC(gfx);
+        case OBJECT_COURSE_SELECT_NAME:
+            gfx = CourseSelect_NameDraw(gfx);
             break;
-        case 0x84:
-            gfx = func_i5_80118674(gfx, arg1);
+        case OBJECT_COURSE_SELECT_GHOST_MARKER:
+            gfx = CourseSelect_GhostMarkerDraw(gfx, object);
             break;
-        case 0x85:
-            gfx = func_i5_80118790(gfx, arg1);
+        case OBJECT_COURSE_SELECT_GHOST_OPTION:
+            gfx = CourseSelect_GhostOptionDraw(gfx, object);
             break;
     }
     return gfx;
 }
 
-Gfx* func_80079BC8(Gfx* gfx) {
+Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
     s32 i;
     s32 j;
 
     for (i = 0; i < 32; i++) {
-        switch (D_800E3A28[i].unk_00) {
-            case 0:
+        switch (gObjects[i].cmdId) {
+            case OBJECT_FREE:
                 break;
-            case 0xA:
-                func_i4_8011B2E0(&D_800E3A28[i]);
+            case OBJECT_TITLE_BACKGROUND:
+                Title_BackgroundUpdate(&gObjects[i]);
                 break;
-            case 0x14:
-                func_i4_8011B874(&D_800E3A28[i]);
+            case OBJECT_TITLE_DISK_DRIVE:
+                Title_DiskDriveUpdate(&gObjects[i]);
                 break;
-            case 0x5D:
-                func_i6_80117D3C(&D_800E3A28[i]);
+            case OBJECT_MAIN_MENU_OK:
+                MainMenu_OkUpdate(&gObjects[i]);
                 break;
-            case 0x5E:
-                func_i6_80117DE0(&D_800E3A28[i]);
+            case OBJECT_MAIN_MENU_UNLOCK_EVERYTHING:
+                MainMenu_UnlockEverythingUpdate(&gObjects[i]);
                 break;
-            case 0x20:
-                D_800E3F28[D_800E3A28[i].unk_18].unk_04 = 0;
-                func_i4_80119BB8(&D_800E3A28[i]);
+            case OBJECT_32:
+                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                func_i4_80119BB8(&gObjects[i]);
                 break;
-            case 0x3C:
-            case 0x3D:
-            case 0x3E:
-            case 0x3F:
-                D_800E3F28[D_800E3A28[i].unk_18].unk_04 = 0;
-                func_i4_80119BC0(&D_800E3A28[i]);
+            case OBJECT_MACHINE_SETTINGS_PORTRAIT_0:
+            case OBJECT_MACHINE_SETTINGS_PORTRAIT_1:
+            case OBJECT_MACHINE_SETTINGS_PORTRAIT_2:
+            case OBJECT_MACHINE_SETTINGS_PORTRAIT_3:
+                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                MachineSettings_PortraitUpdate(&gObjects[i]);
                 break;
-            case 0x21:
-            case 0x22:
-            case 0x23:
-            case 0x24:
-                D_800E3F28[D_800E3A28[i].unk_18].unk_04 = 0;
-                func_i4_80119C80(&D_800E3A28[i]);
+            case OBJECT_MACHINE_SELECT_PORTRAIT_0:
+            case OBJECT_MACHINE_SELECT_PORTRAIT_1:
+            case OBJECT_MACHINE_SELECT_PORTRAIT_2:
+            case OBJECT_MACHINE_SELECT_PORTRAIT_3:
+                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                MachineSelect_PortraitUpdate(&gObjects[i]);
                 break;
-            case 0x28:
-            case 0x29:
-            case 0x2A:
-            case 0x2B:
-                func_i4_80119D0C(&D_800E3A28[i]);
+            case OBJECT_MACHINE_SELECT_CURSOR_NUM_0:
+            case OBJECT_MACHINE_SELECT_CURSOR_NUM_1:
+            case OBJECT_MACHINE_SELECT_CURSOR_NUM_2:
+            case OBJECT_MACHINE_SELECT_CURSOR_NUM_3:
+                MachineSelect_CursorNumUpdate(&gObjects[i]);
                 break;
-            case 0x2C:
-                func_i4_80119D84(&D_800E3A28[i]);
+            case OBJECT_MACHINE_SELECT_CURSOR:
+                MachineSelect_CursorUpdate(&gObjects[i]);
                 break;
-            case 0x2D:
-                func_i4_80119D8C(&D_800E3A28[i]);
+            case OBJECT_MACHINE_SELECT_CAR:
+                MachineSelect_CarUpdate(&gObjects[i]);
                 break;
-            case 0x35:
-                func_i4_8011A08C(&D_800E3A28[i]);
+            case OBJECT_MACHINE_SETTINGS_CAR:
+                MachineSettings_CarUpdate(&gObjects[i]);
                 break;
-            case 0x36:
-                D_800E3F28[D_800E3A28[i].unk_18].unk_04 = 0;
-                func_i4_8011A73C(&D_800E3A28[i]);
+            case OBJECT_MACHINE_SETTINGS_NAME_CARD:
+                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                MachineSettings_NameCardUpdate(&gObjects[i]);
                 break;
-            case 0x2E:
-                func_i4_8011A6A0(&D_800E3A28[i]);
+            case OBJECT_MACHINE_SELECT_OK:
+                MachineSelect_OkUpdate(&gObjects[i]);
                 break;
-            case 0x39:
-                func_i4_8011A6EC(&D_800E3A28[i]);
+            case OBJECT_MACHINE_SETTINGS_OK:
+                MachineSettings_OkUpdate(&gObjects[i]);
                 break;
-            case 0x79:
-                func_i5_80118928(&D_800E3A28[i]);
+            case OBJECT_COURSE_SELECT_MODEL:
+                CourseSelect_ModelUpdate(&gObjects[i]);
                 break;
-            case 0x7A:
-            case 0x7B:
-            case 0x7C:
-            case 0x7D:
-            case 0x7E:
-            case 0x7F:
-                func_i5_801189C4(&D_800E3A28[i]);
+            case OBJECT_COURSE_SELECT_CUP_0:
+            case OBJECT_COURSE_SELECT_CUP_1:
+            case OBJECT_COURSE_SELECT_CUP_2:
+            case OBJECT_COURSE_SELECT_CUP_3:
+            case OBJECT_COURSE_SELECT_CUP_4:
+            case OBJECT_COURSE_SELECT_CUP_5:
+                CourseSelect_CupUpdate(&gObjects[i]);
                 break;
-            case 0x80:
-                func_i5_80118D44(&D_800E3A28[i]);
+            case OBJECT_COURSE_SELECT_OK:
+                CourseSelect_OkUpdate(&gObjects[i]);
                 break;
-            case 0x81:
-                func_i5_80118D94(&D_800E3A28[i]);
+            case OBJECT_COURSE_SELECT_ARROWS:
+                CourseSelect_ArrowsUpdate(&gObjects[i]);
                 break;
-            case 0x84:
-                func_i5_80118F24(&D_800E3A28[i]);
+            case OBJECT_COURSE_SELECT_GHOST_MARKER:
+                CourseSelect_GhostMarkerUpdate(&gObjects[i]);
                 break;
-            case 0x85:
-                func_i5_80118F84(&D_800E3A28[i]);
+            case OBJECT_COURSE_SELECT_GHOST_OPTION:
+                CourseSelect_GhostOptionUpdate(&gObjects[i]);
                 break;
         }
     }
 
     for (j = 0; j < 16; j++) {
         for (i = 0; i < 32; i++) {
-            if (j == D_800E3A28[i].unk_14) {
-                gfx = func_800797CC(gfx, &D_800E3A28[i]);
+            if (j == gObjects[i].priority) {
+                gfx = Object_Draw(gfx, &gObjects[i]);
             }
         }
     }
@@ -1004,258 +1007,259 @@ Gfx* func_80079BC8(Gfx* gfx) {
     return gfx;
 }
 
-unk_800E3A28* func_80079E88(s32 arg0) {
-    unk_800E3A28* var_v1;
+Object* Object_Get(s32 cmdId) {
+    Object* object;
 
-    var_v1 = D_800E3A28;
+    object = gObjects;
 
     while (true) {
-        if (arg0 == var_v1->unk_00) {
+        if (cmdId == object->cmdId) {
             break;
         }
-        var_v1++;
+        object++;
         //! @bug this allows for an iteration out of the bounds of the array
-        if (var_v1 > &D_800E3A28[ARRAY_COUNT(D_800E3A28)]) {
+        if (object > &gObjects[ARRAY_COUNT(gObjects)]) {
             return NULL;
         }
     }
-    return var_v1;
+    return object;
 }
 
 extern s32 gGameMode;
 
 void func_80079EC8(void) {
     func_80077D44();
-    func_80079480();
+    Object_ClearAll();
     func_800792A8();
     func_80079080();
-    if (gGameMode != GAMEMODE_10) {
+    if (gGameMode != GAMEMODE_CREATE_MACHINE) {
         func_8007E2B4();
     }
 }
 
 void func_80079F1C(void) {
-    func_80079480();
+    Object_ClearAll();
     func_800792A8();
     func_80079080();
     func_8007E2B4();
 }
 
-void func_80079F54(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
-    s32 var_v0;
+void Object_LerpPosXToTarget(Object* object, s32 target, s32 stepScale) {
+    s32 step;
 
-    var_v0 = arg1 - arg0->unk_0C;
-    if (var_v0 != 0) {
-        if (var_v0 > 0) {
-            var_v0 /= arg2;
-            if (++var_v0 > 8) {
-                var_v0 = 8;
+    step = target - OBJECT_LEFT(object);
+    if (step != 0) {
+        if (step > 0) {
+            step /= stepScale;
+            if (++step > 8) {
+                step = 8;
             }
         } else {
-            var_v0 /= arg2;
-            if (--var_v0 < -8) {
-                var_v0 = -8;
+            step /= stepScale;
+            if (--step < -8) {
+                step = -8;
             }
         }
     }
-    arg0->unk_0C += var_v0;
+    OBJECT_LEFT(object) += step;
 }
 
-void func_80079FFC(unk_800E3A28* arg0, s32 arg1) {
-    s32 var_v0;
+void Object_LerpPosYToTarget(Object* object, s32 target) {
+    s32 step;
 
-    var_v0 = arg1 - arg0->unk_10;
-    if (var_v0 != 0) {
-        if (var_v0 > 0) {
-            var_v0 /= 4;
-            if (++var_v0 > 16) {
-                var_v0 = 16;
+    step = target - OBJECT_TOP(object);
+    if (step != 0) {
+        if (step > 0) {
+            step /= 4;
+            if (++step > 16) {
+                step = 16;
             }
         } else {
-            var_v0 /= 4;
-            if (--var_v0 < -16) {
-                var_v0 = -16;
+            step /= 4;
+            if (--step < -16) {
+                step = -16;
             }
         }
     }
-    arg0->unk_10 += var_v0;
+    OBJECT_TOP(object) += step;
 }
 
-void func_8007A06C(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
-    func_80079F54(arg0, arg1, 4);
-    func_80079FFC(arg0, arg2);
+void Object_LerpToPos(Object* object, s32 xTarget, s32 yTarget) {
+    Object_LerpPosXToTarget(object, xTarget, 4);
+    Object_LerpPosYToTarget(object, yTarget);
 }
 
-void func_8007A0A0(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
-    s32 var_v0;
+void Object_LerpPosXToClampedTargetMaxStep(Object* object, s32 target, s32 maxStep) {
+    s32 step;
 
-    var_v0 = arg1 - arg0->unk_0C;
-    if (var_v0 != 0) {
-        if (var_v0 > 0) {
-            var_v0 /= 4;
-            if (arg2 < ++var_v0) {
-                var_v0 = arg2;
+    step = target - OBJECT_LEFT(object);
+    if (step != 0) {
+        if (step > 0) {
+            step /= 4;
+            if (maxStep < ++step) {
+                step = maxStep;
             }
-            if (var_v0 < 8) {
-                var_v0 = 8;
+            if (step < 8) {
+                step = 8;
             }
-            arg0->unk_0C += var_v0;
+            OBJECT_LEFT(object) += step;
 
-            if (arg1 < arg0->unk_0C) {
-                arg0->unk_0C = arg1;
+            if (target < OBJECT_LEFT(object)) {
+                OBJECT_LEFT(object) = target;
             }
         } else {
-            var_v0 /= 4;
-            if (--var_v0 < -arg2) {
-                var_v0 = -arg2;
+            step /= 4;
+            if (--step < -maxStep) {
+                step = -maxStep;
             }
-            if (var_v0 > -8) {
-                var_v0 = -8;
+            if (step > -8) {
+                step = -8;
             }
-            arg0->unk_0C += var_v0;
+            OBJECT_LEFT(object) += step;
 
-            if (arg0->unk_0C < arg1) {
-                arg0->unk_0C = arg1;
-            }
-        }
-    }
-}
-
-void func_8007A154(unk_800E3A28* arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = arg1 - arg0->unk_10;
-    if (var_v0 != 0) {
-        if (var_v0 > 0) {
-            var_v0 /= 4;
-            if (++var_v0 > 0xC0) {
-                var_v0 = 0xC0;
-            }
-            if (var_v0 < 8) {
-                var_v0 = 8;
-            }
-            arg0->unk_10 += var_v0;
-
-            if (arg1 < arg0->unk_10) {
-                arg0->unk_10 = arg1;
-            }
-        } else {
-            var_v0 /= 4;
-            if (--var_v0 < -0xC0) {
-                var_v0 = -0xC0;
-            }
-            if (var_v0 >= -7) {
-                var_v0 = -8;
-            }
-            arg0->unk_10 += var_v0;
-
-            if (arg0->unk_10 < arg1) {
-                arg0->unk_10 = arg1;
+            if (OBJECT_LEFT(object) < target) {
+                OBJECT_LEFT(object) = target;
             }
         }
     }
 }
 
-void func_8007A208(unk_800E3A28* arg0, s32 arg1) {
-    s32 var_v0;
+void Object_LerpPosYToClampedTarget(Object* object, s32 target) {
+    s32 step;
 
-    var_v0 = arg1 - arg0->unk_10;
-    if (var_v0 != 0) {
-        if (var_v0 > 0) {
-            var_v0 /= 4;
-            if (++var_v0 > 16) {
-                var_v0 = 16;
+    step = target - OBJECT_TOP(object);
+    if (step != 0) {
+        if (step > 0) {
+            step /= 4;
+            if (++step > 192) {
+                step = 192;
+            }
+            if (step < 8) {
+                step = 8;
+            }
+            OBJECT_TOP(object) += step;
+
+            if (target < OBJECT_TOP(object)) {
+                OBJECT_TOP(object) = target;
             }
         } else {
-            var_v0 /= 4;
-            if (--var_v0 < -16) {
-                var_v0 = -16;
+            step /= 4;
+            if (--step < -192) {
+                step = -192;
             }
-        }
-    }
-    arg0->unk_10 += var_v0;
-}
+            if (step >= -7) {
+                step = -8;
+            }
+            OBJECT_TOP(object) += step;
 
-void func_8007A278(unk_800E3A28* arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = arg1 - arg0->unk_0C;
-    if (var_v0 != 0) {
-        var_v0 = 200 / var_v0;
-        if (var_v0 > 0) {
-            if (var_v0 > 24) {
-                var_v0 = 24;
-            }
-            if (var_v0 < 16) {
-                var_v0 = 16;
-            }
-            arg0->unk_0C += var_v0;
-
-            if (arg1 < arg0->unk_0C) {
-                arg0->unk_0C = arg1;
-            }
-        } else {
-            if (var_v0 < -24) {
-                var_v0 = -24;
-            }
-            if (var_v0 > -16) {
-                var_v0 = -16;
-            }
-            arg0->unk_0C += var_v0;
-
-            if (arg0->unk_0C < arg1) {
-                arg0->unk_0C = arg1;
+            if (OBJECT_TOP(object) < target) {
+                OBJECT_TOP(object) = target;
             }
         }
     }
 }
 
-void func_8007A334(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
-    UNUSED s32 temp = arg0->unk_0C;
-    s32 var_v1;
+// Duplicate function
+void Object_LerpPosYToTarget2(Object* object, s32 target) {
+    s32 step;
 
-    var_v1 = arg1 - arg0->unk_0C;
-    if (arg1 == arg0->unk_0C) {
-        arg0->unk_0C += arg2;
+    step = target - OBJECT_TOP(object);
+    if (step != 0) {
+        if (step > 0) {
+            step /= 4;
+            if (++step > 16) {
+                step = 16;
+            }
+        } else {
+            step /= 4;
+            if (--step < -16) {
+                step = -16;
+            }
+        }
+    }
+    OBJECT_TOP(object) += step;
+}
+
+void Object_LerpPosXToClampedTarget(Object* object, s32 target) {
+    s32 step;
+
+    step = target - OBJECT_LEFT(object);
+    if (step != 0) {
+        step = 200 / step;
+        if (step > 0) {
+            if (step > 24) {
+                step = 24;
+            }
+            if (step < 16) {
+                step = 16;
+            }
+            OBJECT_LEFT(object) += step;
+
+            if (target < OBJECT_LEFT(object)) {
+                OBJECT_LEFT(object) = target;
+            }
+        } else {
+            if (step < -24) {
+                step = -24;
+            }
+            if (step > -16) {
+                step = -16;
+            }
+            OBJECT_LEFT(object) += step;
+
+            if (OBJECT_LEFT(object) < target) {
+                OBJECT_LEFT(object) = target;
+            }
+        }
+    }
+}
+
+void Object_LerpAwayFromPosX(Object* object, s32 origin, s32 initialStep) {
+    UNUSED s32 temp = OBJECT_LEFT(object);
+    s32 step;
+
+    step = origin - OBJECT_LEFT(object);
+    if (origin == OBJECT_LEFT(object)) {
+        OBJECT_LEFT(object) += initialStep;
         return;
     }
-    if (var_v1 != 0) {
-        if (var_v1 > 0) {
-            var_v1 /= 8;
-            if (++var_v1 > 16) {
-                var_v1 = 16;
+    if (step != 0) {
+        if (step > 0) {
+            step /= 8;
+            if (++step > 16) {
+                step = 16;
             }
         } else {
-            var_v1 /= 8;
-            if (--var_v1 < -16) {
-                var_v1 = -16;
+            step /= 8;
+            if (--step < -16) {
+                step = -16;
             }
         }
     }
-    arg0->unk_0C -= var_v1;
+    OBJECT_LEFT(object) -= step;
 }
 
-void func_8007A3B8(unk_800E3A28* arg0, s32 arg1, s32 arg2) {
-    UNUSED s32 temp = arg0->unk_10;
-    s32 var_v1;
+void Object_LerpAwayFromPosY(Object* object, s32 origin, s32 initialStep) {
+    UNUSED s32 temp = OBJECT_TOP(object);
+    s32 step;
 
-    var_v1 = arg1 - arg0->unk_10;
-    if (arg1 == arg0->unk_10) {
-        arg0->unk_10 += arg2;
+    step = origin - OBJECT_TOP(object);
+    if (origin == OBJECT_TOP(object)) {
+        OBJECT_TOP(object) += initialStep;
         return;
     }
-    if (var_v1 != 0) {
-        if (var_v1 > 0) {
-            var_v1 /= 8;
-            if (++var_v1 > 16) {
-                var_v1 = 16;
+    if (step != 0) {
+        if (step > 0) {
+            step /= 8;
+            if (++step > 16) {
+                step = 16;
             }
         } else {
-            var_v1 /= 8;
-            if (--var_v1 < -16) {
-                var_v1 = -16;
+            step /= 8;
+            if (--step < -16) {
+                step = -16;
             }
         }
     }
-    arg0->unk_10 -= var_v1;
+    OBJECT_TOP(object) -= step;
 }

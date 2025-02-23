@@ -3,25 +3,6 @@ D_i1_80411850 = 0x80411850; //segment:leo type:u16
 LeoGetKAdr = 0x80411760; //segment:leo
 LeoGetAAdr = 0x804122A0; //segment:leo
 LeoGetAAdr2 = 0x80403040; //segment:leo
-leoClr_queue = 0x80410A20; //segment:leo
-leoInquiry = 0x8040D6D0; //segment:leo
-leoTest_unit_rdy = 0x80414EE0; //segment:leo
-leoRezero = 0x80410790; //segment:leo
-leoRead = 0x8040D2F0; //segment:leo
-leoWrite = 0x80414740; //segment:leo
-leoSeek = 0x80414FD0; //segment:leo
-leoStart_stop = 0x8040F5F0; //segment:leo
-leoRd_capacity = 0x804102A0; //segment:leo
-leoTranslate = 0x80410D00; //segment:leo
-leoMode_sel = 0x804101A0; //segment:leo
-leoReadDiskId = 0x8040D850; //segment:leo
-leoReadTimer = 0x80411060; //segment:leo
-leoSetTimer = 0x80411168; //segment:leo
-leoClr_reset = 0x80410AB8; //segment:leo
-
-D_i2_8010AE1C = 0x8010AE1C; //force_migration:True size:0x8 segment:ovl_i2
-
-func_i3_fabsf = 0x80115DF0; //segment:ovl_i3
 
 func_i7_DrawThanksForPlayingWindow = 0x80146020; //segment:ovl_i7 type:func
 sThanksForPlayingStr = 0x8014A028; //segment:ovl_i7
@@ -47,8 +28,8 @@ sCupNameIndex = 0x8014BE16; //segment:ovl_i7
 sCupDifficulty = 0x8014BE1A; //segment:ovl_i7
 sThanksForPlayingFade = 0x8014BE1E; //segment:ovl_i7
 
-func_i4_8011B0C8 = 0x8011B0C8; //segment:ovl_i4
-func_i4_8011B134 = 0x8011B134; //segment:ovl_i4
-func_i4_8011B1E4 = 0x8011B1E4; //segment:ovl_i4
+MachineSelect_BackgroundDraw = 0x801178C4; //segment:ovl_i4
 
-D_8010B7B0 = 0x8010B7B0; //segment:ovl_i2 size:0x7E0
+Credits_IntroDraw = 0x80119908; //segment:ovl_i6
+
+gCourseData = 0x8010B7B0; //segment:ovl_i2 size:0x7E0

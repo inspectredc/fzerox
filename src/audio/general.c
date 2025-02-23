@@ -562,7 +562,7 @@ void func_800B8640(void) {
             D_800D1A28 = D_800D1A30;
             D_800D1A24 = D_800D1A20;
 
-            D_800D1A38 = ((gRacers[D_800D1A20].unk_98 + 0.01f) * (1.0f / 21.0f)) + 0.5f + D_800D1A2C;
+            D_800D1A38 = ((gRacers[D_800D1A20].speed + 0.01f) * (1.0f / 21.0f)) + 0.5f + D_800D1A2C;
             if (D_800D1A38 < 0.1f) {
                 D_800D1A38 = 0.1f;
             }
@@ -586,14 +586,14 @@ void func_800B899C(u8 arg0) {
             }
         }
 
-        if (gRacers[arg0].unk_98 < D_800D1A7C[arg0]) {
+        if (gRacers[arg0].speed < D_800D1A7C[arg0]) {
             D_800D1A78[arg0] = 1;
         } else {
             D_800D1A78[arg0] = 0;
         }
-        D_800D1A7C[arg0] = gRacers[arg0].unk_98;
+        D_800D1A7C[arg0] = gRacers[arg0].speed;
         if (D_800D1A94[arg0] == 0) {
-            if ((gRacers[arg0].unk_1D4 != 0.0f) && (gRacers[arg0].unk_98 > 27.0f)) {
+            if ((gRacers[arg0].unk_1D4 != 0.0f) && (gRacers[arg0].speed > 27.0f)) {
                 if (D_800D1A78[arg0] == 1) {
                     if (D_800D1A64[arg0] > -0.5f) {
                         D_800D1A64[arg0] -= 0.004f;
@@ -611,7 +611,7 @@ void func_800B899C(u8 arg0) {
             // FAKE
         }
 
-        freqScale = (((0.01f + gRacers[arg0].unk_98) * (1.0f / 21.0f)) + 0.25f) + D_800D1A64[arg0];
+        freqScale = (((0.01f + gRacers[arg0].speed) * (1.0f / 21.0f)) + 0.25f) + D_800D1A64[arg0];
         AUDIOCMD_CHANNEL_SET_FREQ_SCALE(0, arg0 + 2, freqScale);
 
         if ((gRacers[arg0].unk_1D4 == 0.0f) && (gRacers[arg0].unk_1D8 == 0.0f)) {
@@ -687,8 +687,8 @@ void func_800B8DAC(u8 arg0) {
             case 5:
             case 15:
             case 25:
-                volumeScale = (gRacers[arg0].unk_98 * (1.0f / 45.0f)) + 0.5f;
-                if (gRacers[arg0].unk_98 < 0.1f) {
+                volumeScale = (gRacers[arg0].speed * (1.0f / 45.0f)) + 0.5f;
+                if (gRacers[arg0].speed < 0.1f) {
                     volumeScale = 0.0f;
                 }
                 if (volumeScale > 1.0f) {
@@ -702,8 +702,8 @@ void func_800B8DAC(u8 arg0) {
             case 11:
             case 21:
             case 31:
-                volumeScale = (gRacers[arg0].unk_98 * (1.0f / 45.0f)) + 0.5f;
-                if (gRacers[arg0].unk_98 < 0.1f) {
+                volumeScale = (gRacers[arg0].speed * (1.0f / 45.0f)) + 0.5f;
+                if (gRacers[arg0].speed < 0.1f) {
                     volumeScale = 0.0f;
                 }
                 if (volumeScale > 1.0f) {
@@ -718,7 +718,7 @@ void func_800B8DAC(u8 arg0) {
             case 18:
             case 28:
                 volumeScale = 0.8f;
-                freqScale = (gRacers[arg0].unk_98 * (1.0f / 30.0f)) - (8.0f / 10.0f);
+                freqScale = (gRacers[arg0].speed * (1.0f / 30.0f)) - (8.0f / 10.0f);
                 if (freqScale > 2.5f) {
                     freqScale = 2.5f;
                 }
@@ -730,7 +730,7 @@ void func_800B8DAC(u8 arg0) {
             case 19:
             case 29:
                 volumeScale = 0.85f;
-                freqScale = gRacers[arg0].unk_98 * (1.0f / 20.0f);
+                freqScale = gRacers[arg0].speed * (1.0f / 20.0f);
                 if (freqScale > 8.0f) {
                     freqScale = 8.0f;
                 }

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "ovl_i5.h"
+#include "course_select.h"
 #include "fzx_game.h"
 #include "assets/segment_17B1E0.h"
 
@@ -11,7 +11,7 @@ void func_i5_80115E10(void) {
 
     if (D_i5_801190B4 > 0) {
         if (D_i5_801190B4 < 7) {
-            func_i5_80116678(D_i5_801190B0);
+            func_i5_80116678(gCourseModelCupType);
         }
         D_i5_801190B4--;
     }
@@ -64,7 +64,7 @@ Gfx* func_i5_80115E64(Gfx* gfx) {
     gSPMatrix(gfx++, K0_TO_PHYS(D_800DCCF0->unk_20308), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     if (D_i5_801190B4 < 6) {
-        for (i = 0; i < D_i5_801190B8; i++) {
+        for (i = 0; i < gCourseModelCupCourseNo; i++) {
             gSPViewport(gfx++, &D_i5_80118FF0[D_800DCCFC][i]);
             gfx = func_800A92FC(gfx, &D_i5_801197D0[i * 0xC00], D_801197B0[i]);
         }
@@ -114,27 +114,27 @@ void func_i5_801164A8(s32 arg0) {
     }
 }
 
-void func_i5_80116658(s32 cupType) {
-    D_i5_801190B0 = cupType;
+void CourseModel_Init(s32 cupType) {
+    gCourseModelCupType = cupType;
     D_i5_801190B4 = 8;
-    D_i5_801190B8 = 0;
+    gCourseModelCupCourseNo = 0;
 }
 
 void func_i5_80116678(s32 cupType) {
 
     if (cupType == X_CUP) {
-        func_8007402C(cupType * 6 + D_i5_801190B8);
-        func_80074634(&D_802A6B40[cupType * 6 + D_i5_801190B8]);
-        func_8009F508(&D_802A6B40[cupType * 6 + D_i5_801190B8]);
-        D_801197B0[D_i5_801190B8] =
-            func_800A2D2C(&D_802A6B40[cupType * 6 + D_i5_801190B8], &D_i5_801197D0[D_i5_801190B8 * 0xC00]);
-        D_i5_801190B8++;
+        func_8007402C(cupType * 6 + gCourseModelCupCourseNo);
+        func_80074634(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo]);
+        func_8009F508(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo]);
+        D_801197B0[gCourseModelCupCourseNo] = func_800A2D2C(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo],
+                                                            &D_i5_801197D0[gCourseModelCupCourseNo * 0xC00]);
+        gCourseModelCupCourseNo++;
     } else {
-        func_8007402C(cupType * 6 + D_i5_801190B8);
-        func_80074634(&D_802A6B40[cupType * 6 + D_i5_801190B8]);
-        func_8009F508(&D_802A6B40[cupType * 6 + D_i5_801190B8]);
-        D_801197B0[D_i5_801190B8] =
-            func_800A2D2C(&D_802A6B40[cupType * 6 + D_i5_801190B8], &D_i5_801197D0[D_i5_801190B8 * 0xC00]);
-        D_i5_801190B8++;
+        func_8007402C(cupType * 6 + gCourseModelCupCourseNo);
+        func_80074634(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo]);
+        func_8009F508(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo]);
+        D_801197B0[gCourseModelCupCourseNo] = func_800A2D2C(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo],
+                                                            &D_i5_801197D0[gCourseModelCupCourseNo * 0xC00]);
+        gCourseModelCupCourseNo++;
     }
 }

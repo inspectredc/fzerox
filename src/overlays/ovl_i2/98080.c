@@ -50,7 +50,7 @@ extern s32 gGameMode;
 void func_i2_800FC77C(void) {
     D_i2_80106DA4 = 2;
 
-    if (D_800CD044 == 0x1F) {
+    if (D_800CD044 == 31) {
         func_i2_800FCB84(0, 10);
         return;
     }
@@ -63,10 +63,10 @@ void func_i2_800FC77C(void) {
             func_i2_800FCD38(5, 120);
             func_i2_800FCB84(0, 5);
             break;
-        case GAMEMODE_D:
+        case GAMEMODE_COURSE_EDIT:
             func_i2_800FCB84(0, 10);
             break;
-        case GAMEMODE_800A:
+        case GAMEMODE_FLX_COURSE_SELECT:
             func_i2_800FCD38(5, 40);
             func_i2_800FCB84(0, 5);
             break;
@@ -78,15 +78,15 @@ void func_i2_800FC77C(void) {
             func_i2_800FCB84(0, 5);
             break;
         case GAMEMODE_FLX_MAIN_MENU:
-            if (D_800CD044 == 0x15) {
+            if (D_800CD044 == 21) {
                 func_i2_800FCB84(0, 10);
                 break;
             }
             func_i2_800FCB84(0, 1);
             break;
-        case GAMEMODE_8013:
+        case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
         case GAMEMODE_FLX_OPTIONS_MENU:
-            if (D_800CD044 == 0x15) {
+            if (D_800CD044 == 21) {
                 func_i2_800FCB84(0, 10);
                 break;
             }
@@ -102,11 +102,11 @@ void func_i2_800FC77C(void) {
             func_i2_800FCB84(0, 5);
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_4012:
+        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
             func_i2_800FCB84(0, 6);
             break;
         case GAMEMODE_RECORDS:
-            if (D_800CD044 != 0x15) {
+            if (D_800CD044 != 21) {
                 func_i2_800FCD4C(0, 1);
                 break;
             }
@@ -123,7 +123,7 @@ extern unk_800DCE48 D_800DCE48;
 void func_i2_800FC9BC(void) {
     D_i2_80106DA4 = 1;
 
-    if (D_800CD044 == 0x21) {
+    if (D_800CD044 == 33) {
         func_i2_800FCB84(1, 10);
         return;
     }
@@ -145,12 +145,12 @@ void func_i2_800FC9BC(void) {
         case GAMEMODE_FLX_MACHINE_SELECT:
             func_i2_800FCB84(1, 5);
             break;
-        case GAMEMODE_D:
+        case GAMEMODE_COURSE_EDIT:
             func_i2_800FCB84(1, 10);
             break;
-        case GAMEMODE_8013:
+        case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
         case GAMEMODE_FLX_OPTIONS_MENU:
-            if (D_800CD044 == 0x17) {
+            if (D_800CD044 == 23) {
                 func_i2_800FCD38(9, 2);
                 func_i2_800FCB84(1, 9);
                 break;
@@ -158,7 +158,7 @@ void func_i2_800FC9BC(void) {
             func_i2_800FCD4C(1, 1);
             break;
         case GAMEMODE_FLX_MAIN_MENU:
-            if (D_800CD044 == 0x17) {
+            if (D_800CD044 == 23) {
                 func_i2_800FCD38(9, 3);
                 func_i2_800FCB84(1, 9);
                 break;
@@ -166,13 +166,13 @@ void func_i2_800FC9BC(void) {
             func_i2_800FCB84(1, 7);
             break;
         case GAMEMODE_RECORDS:
-            if (D_800CD044 != 0x17) {
+            if (D_800CD044 != 23) {
                 func_i2_800FCD4C(1, 1);
                 break;
             }
             func_i2_800FCB84(1, 9);
             break;
-        case GAMEMODE_800C:
+        case GAMEMODE_FLX_UNSKIPPABLE_CREDITS:
             func_i2_800FCD38(5, 60);
             func_i2_800FCB84(1, 5);
             break;
@@ -1115,8 +1115,6 @@ Gfx* func_i2_800FEB2C(Gfx* gfx, unk_8010D778* arg1) {
     return gfx;
 }
 
-#ifdef NON_MATCHING
-// vtx assign regalloc
 void func_i2_800FEED8(unk_8010D778* arg0) {
     s32 i;
     s32 j;
@@ -1171,21 +1169,18 @@ void func_i2_800FEED8(unk_8010D778* arg0) {
         }
     }
 
-    for (i = 0; i < 8; i++) {
-        for (j = 0; j < 8; j++) {
-            temp_v0_2 = (unk_8010D778_unk_18_3*) arg0->unk_18 + (j + i * 8);
+    for (j = 0; j < 8; j++) {
+        for (k = 0; k < 8; k++) {
+            temp_v0_2 = (unk_8010D778_unk_18_3*) arg0->unk_18 + (k + j * 8);
             temp_v0_2->unk_00 = 0;
-            temp_v0_2->unk_04 = (j * 66.6f) + -233.09999f;
-            temp_v0_2->unk_08 = 176.4f - (i * 50.399998f);
+            temp_v0_2->unk_04 = (k * 66.6f) + -233.09999f;
+            temp_v0_2->unk_08 = 176.4f - (j * 50.399998f);
             temp_v0_2->unk_0C = 0.0f;
             temp_v0_2->unk_10 = 1.0f;
             temp_v0_2->unk_01 = 0;
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/98080/func_i2_800FEED8.s")
-#endif
 
 bool func_i2_800FF494(unk_8010D778*);
 

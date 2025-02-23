@@ -1,7 +1,7 @@
 #include "global.h"
 #include "audio.h"
 #include "fzx_game.h"
-#include "fzxthread.h"
+#include "fzx_thread.h"
 
 GfxPool* D_800DCCF0;
 OSTask* sGfxTask;
@@ -126,15 +126,15 @@ void Gfx_SetTask(OSTask* task) {
     task->t.ucode_boot_size = (uintptr_t) rspbootTextEnd - (uintptr_t) rspbootTextStart;
 
     switch (gGameMode & GAMEMODE_F3D_MASK) {
-        case MODE_F3DEX:
+        case GFXMODE_F3DEX:
             task->t.ucode = (u64*) gspF3DEX_fifoTextStart;
             task->t.ucode_data = (u64*) gspF3DEX_fifoDataStart;
             break;
-        case MODE_F3DLX:
+        case GFXMODE_F3DLX:
             task->t.ucode = (u64*) gspF3DLX_Rej_fifoTextStart;
             task->t.ucode_data = (u64*) gspF3DLX_Rej_fifoDataStart;
             break;
-        case MODE_F3DFLX:
+        case GFXMODE_F3DFLX:
             task->t.ucode = (u64*) gspF3DFLX_Rej_fifoTextStart;
             task->t.ucode_data = (u64*) gspF3DFLX_Rej_fifoDataStart;
             break;
@@ -213,7 +213,7 @@ s16 D_800CCFE4 = 2;
 s16 D_800CCFE8 = 2;
 
 extern bool gRamDDCompatible;
-extern s16 D_80111840;
+extern s16 gSettingSoundMode;
 
 extern unk_80225800 D_80225800;
 
@@ -234,8 +234,8 @@ void Game_ThreadEntry(void* entry) {
     D_800DCD28 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i3));
     D_800DCD2C = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i4));
     D_800DCD30 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i4));
-    D_800DCD34 = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i5));
-    D_800DCD38 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i5));
+    D_800DCD34 = osVirtualToPhysical(SEGMENT_VRAM_START(course_select));
+    D_800DCD38 = osVirtualToPhysical(SEGMENT_VRAM_END(course_select));
     D_800DCD3C = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i6));
     D_800DCD40 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i6));
     D_800DCD44 = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i7));
@@ -349,7 +349,7 @@ void Game_ThreadEntry(void* entry) {
     Math_Rand1Init(osGetTime(), osGetTime() + osGetTime());
     Controller_Init();
     func_i10_80115DF0();
-    if (D_80111840 == 0) {
+    if (gSettingSoundMode == 0) {
         Audio_SetSoundMode(SOUNDMODE_SURROUND);
     } else {
         Audio_SetSoundMode(SOUNDMODE_MONO);

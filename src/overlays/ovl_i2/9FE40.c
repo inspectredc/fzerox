@@ -1,6 +1,6 @@
 #include "global.h"
 
-s32 D_i2_80106F40 = 0;
+s32 gSettingVsSlot = 0;
 s32 D_80106F44 = 0;
 s16 D_80106F48 = 0;
 
@@ -207,11 +207,11 @@ void func_i2_8010466C(void) {
             func_i2_801058FC(((s32) (Math_Rand1() % 16) - 8) + racer->unk_0C.unk_34.x,
                              ((s32) (Math_Rand1() % 16) - 8) + racer->unk_0C.unk_34.y,
                              ((s32) (Math_Rand1() % 16) - 8) + racer->unk_0C.unk_34.z,
-                             racer->unk_74.x + (temp_fs2 * racer->unk_C0.z.x) + (temp_fs0 * racer->unk_C0.y.x) +
+                             racer->velocity.x + (temp_fs2 * racer->unk_C0.z.x) + (temp_fs0 * racer->unk_C0.y.x) +
                                  (temp_fs1 * racer->unk_C0.x.x),
-                             racer->unk_74.y + (temp_fs2 * racer->unk_C0.z.y) + (temp_fs0 * racer->unk_C0.y.y) +
+                             racer->velocity.y + (temp_fs2 * racer->unk_C0.z.y) + (temp_fs0 * racer->unk_C0.y.y) +
                                  (temp_fs1 * racer->unk_C0.x.y),
-                             racer->unk_74.z + (temp_fs2 * racer->unk_C0.z.z) + (temp_fs0 * racer->unk_C0.y.z) +
+                             racer->velocity.z + (temp_fs2 * racer->unk_C0.z.z) + (temp_fs0 * racer->unk_C0.y.z) +
                                  (temp_fs1 * racer->unk_C0.x.z),
                              30.0f, var3->unk_08);
         }

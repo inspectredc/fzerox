@@ -1,5 +1,5 @@
 #include "global.h"
-#include "fzxthread.h"
+#include "fzx_thread.h"
 #include "PR/leo.h"
 
 bool D_800CD510 = false;
@@ -13,14 +13,14 @@ void func_8007F4E0(s32 venue, s32 skybox) {
     gSkyboxType = skybox;
 }
 
-s8 D_800E42C8[4];
+s8 gRecordNameEntered[4];
 s16 D_800E42CC;
 
 void func_8007F500(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        D_800E42C8[i] = 0;
+        gRecordNameEntered[i] = 0;
     }
 
     D_800E42CC = 0;

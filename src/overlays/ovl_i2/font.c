@@ -1003,8 +1003,7 @@ unk_80077D50* sMachineWeightDigitCompTexInfos[] = {
     sMachineWeight8CompTexInfo, sMachineWeight9CompTexInfo,
 };
 
-// Converts int to string
-void func_i2_80105DB0(s32 num, s8* str) {
+void Font_IntToString(s32 num, s8* str) {
     s32 numDigits;
     s32 digitMask;
     s32 i;
@@ -1031,7 +1030,7 @@ void func_i2_80105DB0(s32 num, s8* str) {
         num %= digitMask;
     }
 
-    *str = 0;
+    *str = '\0';
 }
 
 s32 func_i2_80105EE4(s8* str) {
@@ -1105,7 +1104,7 @@ s32 func_i2_80105F6C(s8* str) {
     return ret;
 }
 
-s32 func_i2_80106024(s8* str, s32 fontSetLowercase) {
+s32 Font_GetCharIndex(s8* str, s32 fontSetLowercase) {
     s32 fontChar = 1;
 
     if ((*str >= 'a') && (*str <= 'z')) {
@@ -1246,7 +1245,7 @@ const s16 kFont6CharWidths[] = {
 
 const s16 kMachineWeightDigitWidths[] = { 9, 5, 9, 9, 9, 9, 9, 9, 9, 9 };
 
-s32 func_i2_801061D4(s8* str, s32 fontSet) {
+s32 Font_GetCharacterWidth(s8* str, s32 fontSet) {
     s32 strWidth;
     s32 fontChar;
     const s16* fontCharWidths;
@@ -1281,9 +1280,9 @@ s32 func_i2_801061D4(s8* str, s32 fontSet) {
     }
     strWidth = 0;
     if (fontSet == FONT_SET_4) {
-        fontChar = func_i2_80106024(str, FONT_SET_HAS_LOWERCASE);
+        fontChar = Font_GetCharIndex(str, FONT_SET_HAS_LOWERCASE);
     } else {
-        fontChar = func_i2_80106024(str, FONT_SET_UPPERCASE_ONLY);
+        fontChar = Font_GetCharIndex(str, FONT_SET_UPPERCASE_ONLY);
     }
 
     if (fontChar >= 0) {
@@ -1294,7 +1293,7 @@ s32 func_i2_801061D4(s8* str, s32 fontSet) {
     return strWidth;
 }
 
-s32 func_i2_801062E4(s8* str, s32 fontSet, s32 additionalSpacing) {
+s32 Font_GetStringWidth(s8* str, s32 fontSet, s32 additionalSpacing) {
     const s16* fontCharWidths;
     s32 strWidth;
     s32 fontSpaceWidth;
@@ -1331,9 +1330,9 @@ s32 func_i2_801062E4(s8* str, s32 fontSet, s32 additionalSpacing) {
 
     while (*str != '\0') {
         if (fontSet == FONT_SET_4) {
-            fontChar = func_i2_80106024(str, FONT_SET_HAS_LOWERCASE);
+            fontChar = Font_GetCharIndex(str, FONT_SET_HAS_LOWERCASE);
         } else {
-            fontChar = func_i2_80106024(str, FONT_SET_UPPERCASE_ONLY);
+            fontChar = Font_GetCharIndex(str, FONT_SET_UPPERCASE_ONLY);
         }
         if (fontChar >= 0) {
             strWidth += fontCharWidths[fontChar];
@@ -1351,7 +1350,7 @@ s32 func_i2_801062E4(s8* str, s32 fontSet, s32 additionalSpacing) {
     return strWidth;
 }
 
-Gfx* func_i2_80106450(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing, s32 fontSet, s32 arg6) {
+Gfx* Font_DrawString(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing, s32 fontSet, s32 arg6) {
     const s16* fontCharWidths;
     s32 strWidth;
     s32 fontChar;
@@ -1400,9 +1399,9 @@ Gfx* func_i2_80106450(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacin
     strWidth = 0;
     while (*str != '\0') {
         if (fontSet == FONT_SET_4) {
-            fontChar = func_i2_80106024(str, FONT_SET_HAS_LOWERCASE);
+            fontChar = Font_GetCharIndex(str, FONT_SET_HAS_LOWERCASE);
         } else {
-            fontChar = func_i2_80106024(str, FONT_SET_UPPERCASE_ONLY);
+            fontChar = Font_GetCharIndex(str, FONT_SET_UPPERCASE_ONLY);
         }
         if (fontChar >= 0) {
             func_80077D50(fontCharTexInfos[fontChar], 0);
@@ -1433,8 +1432,8 @@ Gfx* func_i2_80106450(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacin
     return gfx;
 }
 
-Gfx* func_i2_80106700(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing, s32 fontSet, s32 arg6, f32 scaleX,
-                      f32 scaleY) {
+Gfx* Font_DrawScaledString(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing, s32 fontSet, s32 arg6,
+                           f32 scaleX, f32 scaleY) {
     const s16* fontCharWidths;
     s32 strWidth;
     s32 fontChar;
@@ -1483,9 +1482,9 @@ Gfx* func_i2_80106700(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacin
     strWidth = 0;
     while (*str != '\0') {
         if (fontSet == FONT_SET_4) {
-            fontChar = func_i2_80106024(str, FONT_SET_HAS_LOWERCASE);
+            fontChar = Font_GetCharIndex(str, FONT_SET_HAS_LOWERCASE);
         } else {
-            fontChar = func_i2_80106024(str, FONT_SET_UPPERCASE_ONLY);
+            fontChar = Font_GetCharIndex(str, FONT_SET_UPPERCASE_ONLY);
         }
         if (fontChar >= 0) {
             func_80077D50(fontCharTexInfos[fontChar], 0);
@@ -1518,7 +1517,7 @@ Gfx* func_i2_80106700(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacin
     return gfx;
 }
 
-Gfx* func_i2_DrawMachineStatValue(Gfx* gfx, s32 left, s32 top, s32 statValue) {
+Gfx* Font_DrawMachineStatValue(Gfx* gfx, s32 left, s32 top, s32 statValue) {
 
     if ((statValue < 0) && (statValue >= 5)) {
         return gfx;
@@ -1528,7 +1527,7 @@ Gfx* func_i2_DrawMachineStatValue(Gfx* gfx, s32 left, s32 top, s32 statValue) {
     return func_80078EA0(gfx, sMachineStatValueCompTexInfos[statValue], left, top, 0, 0, 0, 1.0f, 1.0f);
 }
 
-Gfx* func_i2_DrawMachineStatValueSmall(Gfx* gfx, s32 left, s32 top, s32 statValue) {
+Gfx* Font_DrawMachineStatValueSmall(Gfx* gfx, s32 left, s32 top, s32 statValue) {
 
     if ((statValue < 0) && (statValue >= 5)) {
         return gfx;
@@ -1538,7 +1537,7 @@ Gfx* func_i2_DrawMachineStatValueSmall(Gfx* gfx, s32 left, s32 top, s32 statValu
     return func_80078EA0(gfx, sMachineStatValueCompTexInfos[statValue], left, top, 3, 0, 0, 0.5f, 0.5f);
 }
 
-Gfx* func_i2_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight) {
+Gfx* Font_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight) {
     s32 width;
     s32 digit;
 
@@ -1554,7 +1553,7 @@ Gfx* func_i2_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight) {
     return gfx;
 }
 
-Gfx* func_i2_DrawMachineWeightSmall(Gfx* gfx, s32 left, s32 top, u32 weight) {
+Gfx* Font_DrawMachineWeightSmall(Gfx* gfx, s32 left, s32 top, u32 weight) {
     s32 width;
     s32 digit;
     f32 scale = 0.75f;

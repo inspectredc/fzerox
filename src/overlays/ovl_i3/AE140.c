@@ -1,6 +1,8 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
+#include "fzx_save.h"
+#include "src/overlays/ovl_i2/ovl_i2.h"
 #include "ovl_i3.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"
@@ -56,10 +58,10 @@ u8* sWinnerPalette;
 u8* sLoserTexture;
 u8* sLoserPalette;
 s32 D_80141C78;
-s32 D_i3_80141C7C;
-s32 D_i3_80141C80;
+s32 sFastestGhostTime;
+s32 sFastestGhostIndex;
 s32 D_i3_80141C84;
-unk_80141C88 D_i3_80141C88;
+GhostInfo gSavedGhostInfo;
 f32 D_i3_80141CC8;
 s32 D_i3_80141CD0[4];
 s32 D_i3_80141CE0[4];
@@ -194,7 +196,7 @@ extern s16 D_80115D50[];
 
 void func_i3_8013BF50(s32);
 void func_i3_8013C008(void);
-void func_i2_801016DC(void);
+void Save_SaveDeathRaceProfiles(void);
 
 void func_i3_8011AEA0(void) {
     s32 i;
@@ -222,13 +224,13 @@ void func_i3_8011AEA0(void) {
                     func_i3_8013C008();
                 }
                 if (gCourseIndex < 0x18) {
-                    func_i2_80101118(gCourseIndex);
+                    Save_SaveCourseRecordProfiles(gCourseIndex);
                 }
             } else if (gGameMode == GAMEMODE_GP_RACE) {
                 func_i3_8013BF50(gCourseIndex);
             } else if (gGameMode == GAMEMODE_DEATH_RACE) {
                 func_80089BD0();
-                func_i2_801016DC();
+                Save_SaveDeathRaceProfiles();
             }
             D_i3_801419A0 = 1;
         }
@@ -326,7 +328,7 @@ extern unk_800F5DF0* D_800F5E90;
 extern s16 gPlayerLives[];
 extern s16 D_80115DE0;
 
-extern unk_800F8510* D_800F8510;
+extern CourseRecordInfo* gCurrentCourseRecordInfo;
 extern s32 D_80141900;
 
 void func_i3_8011B520(void) {
@@ -413,7 +415,7 @@ void func_i3_8011B520(void) {
         if (D_i3_80141C84 >= 0) {
             D_i3_80141DD0 = D_800F5E90->unk_30;
             D_i3_80141DD8 = D_i3_80141DD0->unk_244;
-            D_i3_80141DDC = D_800F8510->unk_0C * -1.0f;
+            D_i3_80141DDC = gCurrentCourseRecordInfo->unk_0C * -1.0f;
         }
     }
 
@@ -1558,7 +1560,7 @@ Gfx* func_i3_801216C0(Gfx* gfx, s32 playerNum) {
 }
 
 void func_i3_801217F0(s32 playerIndex) {
-    D_i3_80141C00[playerIndex] = gRacers[playerIndex].unk_98 * 0.05f;
+    D_i3_80141C00[playerIndex] = gRacers[playerIndex].speed * 0.05f;
     D_i3_80141C10[playerIndex] = 0.0f;
     D_i3_80141D78[playerIndex] = 0;
     D_i3_80141BF0[playerIndex] = 0;
@@ -1969,8 +1971,8 @@ Gfx* func_i3_SetOptionColor(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-extern unk_800E5FF8 D_800E5FF8[];
-extern unk_800E5FF8* D_800F1E78;
+extern Ghost gGhosts[];
+extern Ghost* gFastestGhost;
 
 void func_i3_80122C3C(void) {
 
@@ -1978,29 +1980,29 @@ void func_i3_80122C3C(void) {
         D_i3_80141C84 = -1;
         D_80141C78 = MAX_TIMER;
     } else {
-        D_i3_80141C84 = D_800F5E90->unk_04 - D_800E5FF8;
-        D_80141C78 = D_800F5E90->unk_04->unk_0004;
+        D_i3_80141C84 = D_800F5E90->ghost - gGhosts;
+        D_80141C78 = D_800F5E90->ghost->raceTime;
     }
-    if (D_800F1E78 == NULL) {
-        D_i3_80141C80 = -1;
+    if (gFastestGhost == NULL) {
+        sFastestGhostIndex = -1;
         return;
     }
-    D_i3_80141C80 = D_800F1E78 - D_800E5FF8;
-    D_i3_80141C7C = D_800F1E78->unk_0004;
+    sFastestGhostIndex = gFastestGhost - gGhosts;
+    sFastestGhostTime = gFastestGhost->raceTime;
 }
 
-void func_i2_80101690(s32, unk_800E5FF8*);
+void Save_SaveGhost(s32, Ghost*);
 
 s32 func_i3_80122CEC(void) {
     func_i3_80122C3C();
-    if (D_i3_80141C80 == -1) {
+    if (sFastestGhostIndex == -1) {
         sCannotSaveGhost = true;
         sSaveGhostMenuOpen = false;
         return -1;
     }
-    if (func_i2_801014D4(&D_i3_80141C88) != 0) {
-        if (gCourseIndex < 0x18) {
-            func_i2_80101690(gCourseIndex, D_800F1E78);
+    if (Save_LoadGhostInfo(&gSavedGhostInfo) != 0) {
+        if (gCourseIndex < 24) {
+            Save_SaveGhost(gCourseIndex, gFastestGhost);
         }
         sSaveGhostMenuOpen = false;
         sGhostSaveTimer = 60;
@@ -2016,15 +2018,15 @@ s32 func_i3_80122D88(void) {
         return 0;
     }
     func_i3_80122C3C();
-    if (D_i3_80141C80 == -1) {
+    if (sFastestGhostIndex == -1) {
         sCannotSaveGhost = true;
         sSaveGhostMenuOpen = false;
         return -1;
     }
-    if (func_i2_801014D4(&D_i3_80141C88) != 0) {
+    if (Save_LoadGhostInfo(&gSavedGhostInfo) != 0) {
         return 0;
     }
-    if ((D_i3_80141C88.unk_00 == gCourseIndex) && (D_i3_80141C7C >= D_i3_80141C88.unk_08)) {
+    if ((gSavedGhostInfo.courseIndex == gCourseIndex) && (sFastestGhostTime >= gSavedGhostInfo.raceTime)) {
         sCannotSaveGhost = true;
     }
     return 0;
@@ -2102,34 +2104,38 @@ Gfx* func_i3_DrawGhostSave(Gfx* gfx) {
     gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gfx = func_i3_DrawTimerScisThousandths(gfx, D_i3_80141C7C, 115, 77, 1.0f);
-    gfx = func_i3_DrawTimerScisThousandths(gfx, D_i3_80141C88.unk_08, 115, 141, 1.0f);
+    gfx = func_i3_DrawTimerScisThousandths(gfx, sFastestGhostTime, 115, 77, 1.0f);
+    gfx = func_i3_DrawTimerScisThousandths(gfx, gSavedGhostInfo.raceTime, 115, 141, 1.0f);
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-    gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(gCurrentTrackName, 6, 1) / 2), 78, gCurrentTrackName, 1, 6, 0);
+    gfx = Font_DrawString(gfx, 124 - (Font_GetStringWidth(gCurrentTrackName, FONT_SET_6, 1) / 2), 78, gCurrentTrackName,
+                          1, FONT_SET_6, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(gCurrentTrackName, 6, 1) / 2), 77, gCurrentTrackName, 1, 6, 0);
+    gfx = Font_DrawString(gfx, 123 - (Font_GetStringWidth(gCurrentTrackName, FONT_SET_6, 1) / 2), 77, gCurrentTrackName,
+                          1, FONT_SET_6, 0);
 
-    if ((D_i3_80141C88.unk_00 >= 0) && (D_i3_80141C88.unk_00 < 24)) {
+    if ((gSavedGhostInfo.courseIndex >= 0) && (gSavedGhostInfo.courseIndex < 24)) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-        gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(gTrackNames[D_i3_80141C88.unk_00], 6, 1) / 2), 142,
-                               gTrackNames[D_i3_80141C88.unk_00], 1, 6, 0);
+        gfx = Font_DrawString(gfx,
+                              124 - (Font_GetStringWidth(gTrackNames[gSavedGhostInfo.courseIndex], FONT_SET_6, 1) / 2),
+                              142, gTrackNames[gSavedGhostInfo.courseIndex], 1, FONT_SET_6, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-        gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(gTrackNames[D_i3_80141C88.unk_00], 6, 1) / 2), 141,
-                               gTrackNames[D_i3_80141C88.unk_00], 1, 6, 0);
+        gfx = Font_DrawString(gfx,
+                              123 - (Font_GetStringWidth(gTrackNames[gSavedGhostInfo.courseIndex], FONT_SET_6, 1) / 2),
+                              141, gTrackNames[gSavedGhostInfo.courseIndex], 1, FONT_SET_6, 0);
     } else {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-        gfx = func_i2_80106450(gfx, 124 - (func_i2_801062E4(D_i3_80141C88.unk_14, 6, 1) / 2), 142, D_i3_80141C88.unk_14,
-                               1, 6, 0);
+        gfx = Font_DrawString(gfx, 124 - (Font_GetStringWidth(gSavedGhostInfo.trackName, FONT_SET_6, 1) / 2), 142,
+                              gSavedGhostInfo.trackName, 1, FONT_SET_6, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-        gfx = func_i2_80106450(gfx, 123 - (func_i2_801062E4(D_i3_80141C88.unk_14, 6, 1) / 2), 141, D_i3_80141C88.unk_14,
-                               1, 6, 0);
+        gfx = Font_DrawString(gfx, 123 - (Font_GetStringWidth(gSavedGhostInfo.trackName, FONT_SET_6, 1) / 2), 141,
+                              gSavedGhostInfo.trackName, 1, FONT_SET_6, 0);
     }
 
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
@@ -2161,7 +2167,7 @@ Gfx* func_i3_DrawGhostSave(Gfx* gfx) {
             if (D_800CD010 == 0) {
                 func_800BA8D8(0x21);
             }
-            func_i2_80101690(gCourseIndex, D_800F1E78);
+            Save_SaveGhost(gCourseIndex, gFastestGhost);
             sSaveGhostMenuOpen = false;
             sGhostSaveTimer = 60;
         }
@@ -2231,7 +2237,7 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gDPPipeSync(gfx++);
     gfx = func_i3_SetOptionColor(gfx, sSaveGhostMenuOpen + sGhostSaveTimer);
-    gfx = func_i2_80106700(gfx, 215, (sRaceMenuOptionIndex * 12) + 157, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 215, (sRaceMenuOptionIndex * 12) + 157, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
 
     if (sSaveGhostMenuOpen) {
         gfx = func_i3_DrawGhostSave(gfx);
@@ -2371,7 +2377,7 @@ Gfx* func_i3_80124370(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_i3_SetOptionColor(gfx, 0);
-    gfx = func_i2_80106700(gfx, 215, (D_i3_80141D9C * 15) + 157, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 215, (D_i3_80141D9C * 15) + 157, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
     if ((D_i3_80141DA0 == 0) && (D_i3_801419A2 == 0)) {
         D_i3_80141D9C = func_i3_801228F8(0, D_i3_80141D9C, 4);
         if (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) {
@@ -2474,7 +2480,7 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
-    gfx = func_i2_80106700(gfx, 215, (sRaceMenuOptionIndex * 15) + 157, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 215, (sRaceMenuOptionIndex * 15) + 157, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
     if ((D_i3_80141D98 == 0) && (D_i3_801419A2 == 0)) {
         sRaceMenuOptionIndex = func_i3_801228F8(0, sRaceMenuOptionIndex, 4);
         if (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) {
@@ -2579,7 +2585,7 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
-    gfx = func_i2_80106700(gfx, 215, (sRaceMenuOptionIndex * 15) + 157, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 215, (sRaceMenuOptionIndex * 15) + 157, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
     if ((D_i3_80141D98 == 0) && (D_i3_801419A2 == 0)) {
         sRaceMenuOptionIndex = func_i3_801228F8(0, sRaceMenuOptionIndex, 3);
         if (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) {
@@ -2673,13 +2679,13 @@ Gfx* func_i3_8012548C(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
-    gfx = func_i2_80106700(gfx, 125, (D_i3_80141DA4 * 15) + 97, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 125, (D_i3_80141DA4 * 15) + 97, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-    gfx = func_i2_80106450(gfx, 166 - (func_i2_801062E4("PAUSE", 6, 1) / 2), 78, "PAUSE", 1, 6, 0);
+    gfx = Font_DrawString(gfx, 166 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 78, "PAUSE", 1, FONT_SET_6, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_i2_80106450(gfx, 165 - (func_i2_801062E4("PAUSE", 6, 1) / 2), 77, "PAUSE", 1, 6, 0);
+    gfx = Font_DrawString(gfx, 165 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 77, "PAUSE", 1, FONT_SET_6, 0);
     if ((D_i3_80141DA8 == 0) && (D_i3_801419A2 == 0)) {
         D_i3_80141DA4 = func_i3_801228F8(sPausePlayerNum, D_i3_80141DA4, 5);
         if (gControllers[gPlayerControlPorts[sPausePlayerNum]].buttonPressed & (BTN_A | BTN_START)) {
@@ -2803,13 +2809,13 @@ Gfx* func_i3_80125C34(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
-    gfx = func_i2_80106700(gfx, 125, (D_i3_80141DA4 * 15) + 97, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 125, (D_i3_80141DA4 * 15) + 97, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-    gfx = func_i2_80106450(gfx, 166 - (func_i2_801062E4("PAUSE", 6, 1) / 2), 78, "PAUSE", 1, 6, 0);
+    gfx = Font_DrawString(gfx, 166 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 78, "PAUSE", 1, FONT_SET_6, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_i2_80106450(gfx, 165 - (func_i2_801062E4("PAUSE", 6, 1) / 2), 77, "PAUSE", 1, 6, 0);
+    gfx = Font_DrawString(gfx, 165 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 77, "PAUSE", 1, FONT_SET_6, 0);
     if ((D_i3_80141DA8 == 0) && (D_i3_801419A2 == 0)) {
         D_i3_80141DA4 = func_i3_801228F8(sPausePlayerNum, D_i3_80141DA4, 4);
         if (gControllers[gPlayerControlPorts[sPausePlayerNum]].buttonPressed & (BTN_A | BTN_START)) {
@@ -2927,13 +2933,13 @@ Gfx* func_i3_80126330(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
-    gfx = func_i2_80106700(gfx, 125, (D_i3_80141DA4 * 15) + 97, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 125, (D_i3_80141DA4 * 15) + 97, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-    gfx = func_i2_80106450(gfx, 162 - (func_i2_801062E4("PAUSE", 6, 1) / 2), 78, "PAUSE", 1, 6, 0);
+    gfx = Font_DrawString(gfx, 162 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 78, "PAUSE", 1, FONT_SET_6, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_i2_80106450(gfx, 161 - (func_i2_801062E4("PAUSE", 6, 1) / 2), 77, "PAUSE", 1, 6, 0);
+    gfx = Font_DrawString(gfx, 161 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 77, "PAUSE", 1, FONT_SET_6, 0);
     if ((D_i3_80141DA8 == 0) && (D_i3_801419A2 == 0)) {
         D_i3_80141DA4 = func_i3_801228F8(sPausePlayerNum, D_i3_80141DA4, 3);
         if (((D_i3_80141DA4 == 1) || (D_i3_80141DA4 == 2)) && (D_i3_801419B8 <= 0)) {
@@ -3145,7 +3151,7 @@ Gfx* func_i3_8012757C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_t3;
     s32 var_t4;
 
-    temp_ra = func_i2_801062E4(gCurrentTrackName, 3, 1);
+    temp_ra = Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 1);
 
     gDPPipeSync(gfx++);
 
@@ -3173,12 +3179,12 @@ Gfx* func_i3_8012757C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
                                  200, 128);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-    gfx = func_i2_80106450(gfx, (arg1 - (func_i2_801062E4(gCurrentTrackName, 3, 1) / 2)) + 2, arg2 + 2,
-                           gCurrentTrackName, 1, 3, 0);
+    gfx = Font_DrawString(gfx, (arg1 - (Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 1) / 2)) + 2, arg2 + 2,
+                          gCurrentTrackName, 1, FONT_SET_3, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx =
-        func_i2_80106450(gfx, arg1 - (func_i2_801062E4(gCurrentTrackName, 3, 1) / 2), arg2, gCurrentTrackName, 1, 3, 0);
+    gfx = Font_DrawString(gfx, arg1 - (Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 1) / 2), arg2,
+                          gCurrentTrackName, 1, FONT_SET_3, 0);
     gDPPipeSync(gfx++);
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 16, 308, 224);
     return gfx;
@@ -3191,7 +3197,7 @@ Gfx* func_i3_80127854(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_t3;
     s32 var_t4;
 
-    temp_ra = func_i2_801062E4("TIME ATTACK", 3, 1);
+    temp_ra = Font_GetStringWidth("TIME ATTACK", FONT_SET_3, 1);
 
     gDPPipeSync(gfx++);
 
@@ -3219,11 +3225,12 @@ Gfx* func_i3_80127854(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
                                  150, 0, 200);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-    gfx = func_i2_80106450(gfx, (arg1 - (func_i2_801062E4("TIME ATTACK", 3, 1) / 2)) + 2, arg2 + 2, "TIME ATTACK", 1, 3,
-                           0);
+    gfx = Font_DrawString(gfx, (arg1 - (Font_GetStringWidth("TIME ATTACK", FONT_SET_3, 1) / 2)) + 2, arg2 + 2,
+                          "TIME ATTACK", 1, FONT_SET_3, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_i2_80106450(gfx, arg1 - (func_i2_801062E4("TIME ATTACK", 3, 1) / 2), arg2, "TIME ATTACK", 1, 3, 0);
+    gfx = Font_DrawString(gfx, arg1 - (Font_GetStringWidth("TIME ATTACK", FONT_SET_3, 1) / 2), arg2, "TIME ATTACK", 1,
+                          FONT_SET_3, 0);
     gDPPipeSync(gfx++);
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 16, 308, 224);
     return gfx;
@@ -3265,16 +3272,16 @@ Gfx* func_i3_80127B2C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_i3_DrawTimerScisThousandths(gfx, D_800F8510->timeRecord[0], ((s32) (var_t2 + var_t4) / 2) - 60,
-                                           (s32) (var_t3 + var_t5) / 2, 1.0f);
+    gfx = func_i3_DrawTimerScisThousandths(gfx, gCurrentCourseRecordInfo->timeRecord[0],
+                                           ((s32) (var_t2 + var_t4) / 2) - 60, (s32) (var_t3 + var_t5) / 2, 1.0f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 255);
 
-    gfx = func_i2_80106450(gfx, arg1 - 39, arg2 - 1, "BEST TIME", 1, 6, 0);
+    gfx = Font_DrawString(gfx, arg1 - 39, arg2 - 1, "BEST TIME", 1, FONT_SET_6, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_i2_80106450(gfx, arg1 - 41, arg2 - 3, "BEST TIME", 1, 6, 0);
-    gfx = func_i2_80106450(gfx, arg1 + 19, arg2 + 16, D_800F8510->unk_AC, 1, 1, 0);
+    gfx = Font_DrawString(gfx, arg1 - 41, arg2 - 3, "BEST TIME", 1, FONT_SET_6, 0);
+    gfx = Font_DrawString(gfx, arg1 + 19, arg2 + 16, gCurrentCourseRecordInfo->name[0], 1, 1, 0);
     gDPPipeSync(gfx++);
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 16, 308, 224);
     return gfx;
@@ -3316,15 +3323,15 @@ Gfx* func_i3_80127E88(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_i3_DrawTimerScisThousandths(gfx, D_800F8510->timeRecord[0], ((s32) (var_t2 + var_t4) / 2) - 35,
-                                           (s32) (var_t3 + var_t5) / 2, 1.0f);
+    gfx = func_i3_DrawTimerScisThousandths(gfx, gCurrentCourseRecordInfo->timeRecord[0],
+                                           ((s32) (var_t2 + var_t4) / 2) - 35, (s32) (var_t3 + var_t5) / 2, 1.0f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 255);
 
-    gfx = func_i2_80106450(gfx, arg1 - 39, arg2 - 1, "BEST TIME", 1, 6, 0);
+    gfx = Font_DrawString(gfx, arg1 - 39, arg2 - 1, "BEST TIME", 1, FONT_SET_6, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_i2_80106450(gfx, arg1 - 41, arg2 - 3, "BEST TIME", 1, 6, 0);
+    gfx = Font_DrawString(gfx, arg1 - 41, arg2 - 3, "BEST TIME", 1, FONT_SET_6, 0);
     gDPPipeSync(gfx++);
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 16, 308, 224);
     return gfx;
@@ -3345,13 +3352,13 @@ Gfx* func_i3_801281B4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_t5;
 
     if (gGameMode == GAMEMODE_GP_RACE) {
-        sp38 = func_i2_801062E4("GP RACE", 3, 1);
-        sp3C = func_i2_801062E4(sDifficultyNames[gDifficulty], 3, 1);
+        sp38 = Font_GetStringWidth("GP RACE", FONT_SET_3, 1);
+        sp3C = Font_GetStringWidth(sDifficultyNames[gDifficulty], 3, 1);
     } else if (gGameMode == GAMEMODE_PRACTICE) {
-        sp38 = func_i2_801062E4("PRACTICE", 3, 1);
-        sp3C = func_i2_801062E4(sDifficultyNames[gDifficulty], 3, 1);
+        sp38 = Font_GetStringWidth("PRACTICE", FONT_SET_3, 1);
+        sp3C = Font_GetStringWidth(sDifficultyNames[gDifficulty], 3, 1);
     } else if (gGameMode == GAMEMODE_DEATH_RACE) {
-        sp38 = func_i2_801062E4("DEATH RACE", 3, 1);
+        sp38 = Font_GetStringWidth("DEATH RACE", FONT_SET_3, 1);
         sp3C = 0;
         arg2 += 0x10;
     }
@@ -3396,39 +3403,41 @@ Gfx* func_i3_801281B4(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     if (gGameMode == GAMEMODE_GP_RACE) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx =
-            func_i2_80106450(gfx, (arg1 - (func_i2_801062E4("GP RACE", 3, 1) / 2)) + 2, arg2 - 14, "GP RACE", 1, 3, 0);
+        gfx = Font_DrawString(gfx, (arg1 - (Font_GetStringWidth("GP RACE", FONT_SET_3, 1) / 2)) + 2, arg2 - 14,
+                              "GP RACE", 1, FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-        gfx = func_i2_80106450(gfx, arg1 - (func_i2_801062E4("GP RACE", 3, 1) / 2), arg2 - 16, "GP RACE", 1, 3, 0);
+        gfx = Font_DrawString(gfx, arg1 - (Font_GetStringWidth("GP RACE", FONT_SET_3, 1) / 2), arg2 - 16, "GP RACE", 1,
+                              FONT_SET_3, 0);
     } else if (gGameMode == GAMEMODE_PRACTICE) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx = func_i2_80106450(gfx, (arg1 - (func_i2_801062E4("PRACTICE", 3, 1) / 2)) + 2, arg2 - 14, "PRACTICE", 1, 3,
-                               0);
+        gfx = Font_DrawString(gfx, (arg1 - (Font_GetStringWidth("PRACTICE", FONT_SET_3, 1) / 2)) + 2, arg2 - 14,
+                              "PRACTICE", 1, FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-        gfx = func_i2_80106450(gfx, arg1 - (func_i2_801062E4("PRACTICE", 3, 1) / 2), arg2 - 16, "PRACTICE", 1, 3, 0);
+        gfx = Font_DrawString(gfx, arg1 - (Font_GetStringWidth("PRACTICE", FONT_SET_3, 1) / 2), arg2 - 16, "PRACTICE",
+                              1, FONT_SET_3, 0);
     } else if (gGameMode == GAMEMODE_DEATH_RACE) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx = func_i2_80106450(gfx, (arg1 - (func_i2_801062E4("DEATH RACE", 3, 1) / 2)) + 2, arg2 - 14, "DEATH RACE", 1,
-                               3, 0);
+        gfx = Font_DrawString(gfx, (arg1 - (Font_GetStringWidth("DEATH RACE", FONT_SET_3, 1) / 2)) + 2, arg2 - 14,
+                              "DEATH RACE", 1, FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-        gfx =
-            func_i2_80106450(gfx, arg1 - (func_i2_801062E4("DEATH RACE", 3, 1) / 2), arg2 - 16, "DEATH RACE", 1, 3, 0);
+        gfx = Font_DrawString(gfx, arg1 - (Font_GetStringWidth("DEATH RACE", FONT_SET_3, 1) / 2), arg2 - 16,
+                              "DEATH RACE", 1, FONT_SET_3, 0);
     }
 
     if (gGameMode != GAMEMODE_DEATH_RACE) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx = func_i2_80106450(gfx, (arg1 - (func_i2_801062E4(sDifficultyNames[gDifficulty], 3, 1) / 2)) + 2, arg2 + 2,
-                               sDifficultyNames[gDifficulty], 1, 3, 0);
+        gfx = Font_DrawString(gfx, (arg1 - (Font_GetStringWidth(sDifficultyNames[gDifficulty], FONT_SET_3, 1) / 2)) + 2,
+                              arg2 + 2, sDifficultyNames[gDifficulty], 1, FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-        gfx = func_i2_80106450(gfx, arg1 - (func_i2_801062E4(sDifficultyNames[gDifficulty], 3, 1) / 2), arg2,
-                               sDifficultyNames[gDifficulty], 1, 3, 0);
+        gfx = Font_DrawString(gfx, arg1 - (Font_GetStringWidth(sDifficultyNames[gDifficulty], FONT_SET_3, 1) / 2), arg2,
+                              sDifficultyNames[gDifficulty], 1, FONT_SET_3, 0);
     }
     gDPPipeSync(gfx++);
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 16, 308, 224);
@@ -3666,12 +3675,12 @@ const char* sCharacterNames[] = { "CAPTAIN FALCON", "Dr. STEWART",   "PICO",    
 
 Gfx* func_i3_ResultsDrawCharacterName(Gfx* gfx, s32 arg1, s32 character, s32 arg3, s32 arg4) {
     gfx = func_i3_SetOptionColor(gfx, arg1);
-    return func_i2_80106450(gfx, arg3, arg4, sCharacterNames[character], 1, 4, 0);
+    return Font_DrawString(gfx, arg3, arg4, sCharacterNames[character], 1, FONT_SET_4, 0);
 }
 
 Gfx* func_i3_ResultsDrawRetireStatus(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gfx = func_i3_SetOptionColor(gfx, arg1);
-    return func_i2_80106450(gfx, arg2, arg3, "RETIRE", 1, 4, 0);
+    return Font_DrawString(gfx, arg2, arg3, "RETIRE", 1, FONT_SET_4, 0);
 }
 
 void func_i3_801296E8(s32 num) {
@@ -3712,17 +3721,19 @@ void func_i3_801296E8(s32 num) {
 Gfx* func_i3_80129800(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     gfx = func_i3_SetOptionColor(gfx, arg1);
     func_i3_801296E8(arg2);
-    return func_i2_80106450(gfx, arg3 - func_i2_801062E4(D_i3_80141E08, 4, 0), arg4, D_i3_80141E08, 0, 4, 0);
+    return Font_DrawString(gfx, arg3 - Font_GetStringWidth(D_i3_80141E08, FONT_SET_4, 0), arg4, D_i3_80141E08, 0,
+                           FONT_SET_4, 0);
 }
 
 Gfx* func_i3_80129870(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gfx = func_i3_SetOptionColor(gfx, arg1);
-    return func_i2_80106450(gfx, arg2 - func_i2_801062E4("+     $", 4, 1), arg3, "+     $", 1, 4, 0);
+    return Font_DrawString(gfx, arg2 - Font_GetStringWidth("+     $", FONT_SET_4, 1), arg3, "+     $", 1, FONT_SET_4,
+                           0);
 }
 
 Gfx* func_i3_801298DC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gfx = func_i3_SetOptionColor(gfx, arg1);
-    return func_i2_80106450(gfx, arg2 - func_i2_801062E4("    $", 4, 1), arg3, "    $", 1, 4, 0);
+    return Font_DrawString(gfx, arg2 - Font_GetStringWidth("    $", FONT_SET_4, 1), arg3, "    $", 1, FONT_SET_4, 0);
 }
 
 extern s16 D_800E5FE2;
@@ -3734,17 +3745,17 @@ Gfx* func_i3_DrawDeathRaceResultsS(Gfx* gfx) {
     s32 yl;
     s32 pad[5];
 
-    temp_v1 = func_i2_801062E4("death race  results", 3, 1) / 2;
+    temp_v1 = Font_GetStringWidth("death race  results", FONT_SET_3, 1) / 2;
     gfx = func_i3_DrawBeveledBox(gfx, 155 - temp_v1, 25, temp_v1 + 169, 43, 0, 0, 200, 127);
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-    gfx = func_i2_80106450(gfx, 0xA2 - (func_i2_801062E4("death race  results", 3, 1) / 2), 0x2C, "death race  results",
-                           1, 3, 0);
+    gfx = Font_DrawString(gfx, 0xA2 - (Font_GetStringWidth("death race  results", FONT_SET_3, 1) / 2), 0x2C,
+                          "death race  results", 1, FONT_SET_3, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-    gfx = func_i2_80106450(gfx, 0xA0 - (func_i2_801062E4("death race  results", 3, 1) / 2), 0x2A, "death race  results",
-                           1, 3, 0);
+    gfx = Font_DrawString(gfx, 0xA0 - (Font_GetStringWidth("death race  results", FONT_SET_3, 1) / 2), 0x2A,
+                          "death race  results", 1, FONT_SET_3, 0);
     gSPDisplayList(gfx++, D_8014940);
     gDPLoadTextureBlock(gfx++, aHudTimeTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 24, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -3778,7 +3789,7 @@ Gfx* func_i3_DrawDeathRaceResultsS(Gfx* gfx) {
     gDPSetCombineLERP(gfx++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0,
                       TEXEL0, 0);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-    return func_i3_DrawTimerScisThousandths(gfx, D_800F8510->timeRecord[0], 0xD5, 0x72, 1.0f);
+    return func_i3_DrawTimerScisThousandths(gfx, gCurrentCourseRecordInfo->timeRecord[0], 0xD5, 0x72, 1.0f);
 }
 
 extern s32 D_800E5F00[];
@@ -3822,25 +3833,27 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
     }
 
     if ((D_i3_80141D10 > 30) && (D_i3_80141D10 < 30030)) {
-        temp_v1_2 = func_i2_801062E4("vs results", 3, 1) / 2;
+        temp_v1_2 = Font_GetStringWidth("vs results", FONT_SET_3, 1) / 2;
         gfx = func_i3_DrawBeveledBox(gfx, 0x9B - temp_v1_2, 0x21, temp_v1_2 + 0xA9, 0x33, 0, 0, 0xC8, 0x7F);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx = func_i2_80106450(gfx, 0xA2 - (func_i2_801062E4("vs results", 3, 1) / 2), 0x34, "vs results", 1, 3, 0);
+        gfx = Font_DrawString(gfx, 0xA2 - (Font_GetStringWidth("vs results", FONT_SET_3, 1) / 2), 0x34, "vs results", 1,
+                              FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-        gfx = func_i2_80106450(gfx, 0xA0 - (func_i2_801062E4("vs results", 3, 1) / 2), 0x32, "vs results", 1, 3, 0);
+        gfx = Font_DrawString(gfx, 0xA0 - (Font_GetStringWidth("vs results", FONT_SET_3, 1) / 2), 0x32, "vs results", 1,
+                              FONT_SET_3, 0);
     } else if ((D_i3_80141D10 > 30030) && (D_i3_80141D10 < 60030)) {
-        temp_v1_2 = func_i2_801062E4("vs total ranking", 3, 1) / 2;
+        temp_v1_2 = Font_GetStringWidth("vs total ranking", FONT_SET_3, 1) / 2;
         gfx = func_i3_DrawBeveledBox(gfx, 0x9B - temp_v1_2, 0x21, temp_v1_2 + 0xA9, 0x33, 0, 0, 0xC8, 0x7F);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx = func_i2_80106450(gfx, 0xA2 - (func_i2_801062E4("vs total ranking", 3, 1) / 2), 0x34, "vs total ranking",
-                               1, 3, 0);
+        gfx = Font_DrawString(gfx, 0xA2 - (Font_GetStringWidth("vs total ranking", FONT_SET_3, 1) / 2), 0x34,
+                              "vs total ranking", 1, FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-        gfx = func_i2_80106450(gfx, 0xA0 - (func_i2_801062E4("vs total ranking", 3, 1) / 2), 0x32, "vs total ranking",
-                               1, 3, 0);
+        gfx = Font_DrawString(gfx, 0xA0 - (Font_GetStringWidth("vs total ranking", FONT_SET_3, 1) / 2), 0x32,
+                              "vs total ranking", 1, FONT_SET_3, 0);
     }
     if ((D_i3_80141D10 >= 30) && (D_i3_80141D10 < 30030)) {
         var_a1 = 0;
@@ -3939,14 +3952,14 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-        gfx = func_i2_80106450(gfx, 0x30, 0x50, "1Ｓ", 1, 5, 0);
-        gfx = func_i2_80106450(gfx, 0x30, 0x69, "2Ｎ", 1, 5, 0);
+        gfx = Font_DrawString(gfx, 0x30, 0x50, "1Ｓ", 1, FONT_SET_5, 0);
+        gfx = Font_DrawString(gfx, 0x30, 0x69, "2Ｎ", 1, FONT_SET_5, 0);
 
         if (D_800E5EC0 >= 3) {
-            gfx = func_i2_80106450(gfx, 0x30, 0x82, "3Ｒ", 1, 5, 0);
+            gfx = Font_DrawString(gfx, 0x30, 0x82, "3Ｒ", 1, FONT_SET_5, 0);
         }
         if (D_800E5EC0 >= 4) {
-            gfx = func_i2_80106450(gfx, 0x30, 0x9B, "4Ｔ", 1, 5, 0);
+            gfx = Font_DrawString(gfx, 0x30, 0x9B, "4Ｔ", 1, FONT_SET_5, 0);
         }
 
         for (i = 0; i < D_800E5EC0; i++) {
@@ -3956,9 +3969,9 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
             j = D_i3_80141D48[i];
 
             if (gRacers[j].id < gNumPlayers) {
-                gfx = func_i2_80106450(gfx, 0x4D, 80 + i * 25, "Ｐ", 1, 5, 0);
+                gfx = Font_DrawString(gfx, 0x4D, 80 + i * 25, "Ｐ", 1, FONT_SET_5, 0);
             } else {
-                gfx = func_i2_80106450(gfx, 0x4D, 80 + i * 25, "Ａ", 1, 5, 0);
+                gfx = Font_DrawString(gfx, 0x4D, 80 + i * 25, "Ａ", 1, FONT_SET_5, 0);
             }
 
             if (gRacers[j].id < gNumPlayers) {
@@ -3967,23 +3980,23 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                 func_i3_801296E8((gRacers[j].id - gNumPlayers) + 1);
             }
 
-            gfx = func_i2_80106450(gfx, 0x93, 80 + i * 25, D_i3_80141E08, 1, 5, 0);
+            gfx = Font_DrawString(gfx, 0x93, 80 + i * 25, D_i3_80141E08, 1, FONT_SET_5, 0);
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
             func_i3_801296E8(D_i3_80141D18[gRacers[j].id]);
-            gfx = func_i2_80106450(gfx, 0xD3 - func_i2_801062E4(D_i3_80141E08, 5, 1), 80 + i * 25, D_i3_80141E08, 1, 5,
-                                   0);
-            gfx = func_i2_80106450(gfx, 0xD3, 80 + i * 25, "$", 1, 5, 0);
+            gfx = Font_DrawString(gfx, 0xD3 - Font_GetStringWidth(D_i3_80141E08, FONT_SET_5, 1), 80 + i * 25,
+                                  D_i3_80141E08, 1, FONT_SET_5, 0);
+            gfx = Font_DrawString(gfx, 0xD3, 80 + i * 25, "$", 1, FONT_SET_5, 0);
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 100, 100, 255, 255);
-            gfx = func_i2_80106450(gfx, 0xED, 80 + i * 25, "+", 1, 5, 0);
+            gfx = Font_DrawString(gfx, 0xED, 80 + i * 25, "+", 1, FONT_SET_5, 0);
             func_i3_801296E8(D_i3_80141D28[gRacers[j].id]);
-            gfx = func_i2_80106450(gfx, 0xFA, 80 + i * 25, D_i3_80141E08, 1, 5, 0);
+            gfx = Font_DrawString(gfx, 0xFA, 80 + i * 25, D_i3_80141E08, 1, FONT_SET_5, 0);
 
             if (gRacers[j].position == 1) {
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-                gfx = func_i2_80106450(gfx, 0x10E, 80 + i * 25, "v", 1, 5, 0);
+                gfx = Font_DrawString(gfx, 0x10E, 80 + i * 25, "v", 1, FONT_SET_5, 0);
             }
         }
     } else if (D_i3_80141D10 >= 30030) {
@@ -4000,19 +4013,19 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
             if (D_i3_80141D68 == 0) {
                 gDPPipeSync(gfx++);
                 gfx = func_8007DB28(gfx, 0);
-                gfx = func_i2_80106700(gfx, 0x82, 0xC3, "Ｃ", 1, 5, 0, 0.8f, 0.8f);
-                gfx = func_i2_80106700(gfx, 0x6E, 0xC3, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 0x82, 0xC3, "Ｃ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 0x6E, 0xC3, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-                gfx = func_i2_80106700(gfx, 0x82, 0xD2, "Ｅ", 1, 5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 0x82, 0xD2, "Ｅ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
             } else {
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-                gfx = func_i2_80106700(gfx, 0x82, 0xC3, "Ｃ", 1, 5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 0x82, 0xC3, "Ｃ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
                 gDPPipeSync(gfx++);
                 gfx = func_8007DB28(gfx, 0);
-                gfx = func_i2_80106700(gfx, 0x82, 0xD2, "Ｅ", 1, 5, 0, 0.8f, 0.8f);
-                gfx = func_i2_80106700(gfx, 0x6E, 0xD2, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 0x82, 0xD2, "Ｅ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 0x6E, 0xD2, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
             }
 
             for (i = 0; i < 4; i++) {
@@ -4044,14 +4057,14 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
 
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            gfx = func_i2_80106450(gfx, 0x30, 0x50, "1Ｓ", 1, 5, 0);
-            gfx = func_i2_80106450(gfx, 0x30, 0x69, "2Ｎ", 1, 5, 0);
+            gfx = Font_DrawString(gfx, 0x30, 0x50, "1Ｓ", 1, FONT_SET_5, 0);
+            gfx = Font_DrawString(gfx, 0x30, 0x69, "2Ｎ", 1, FONT_SET_5, 0);
 
             if (D_800E5EC0 >= 3) {
-                gfx = func_i2_80106450(gfx, 0x30, 0x82, "3Ｒ", 1, 5, 0);
+                gfx = Font_DrawString(gfx, 0x30, 0x82, "3Ｒ", 1, FONT_SET_5, 0);
             }
             if (D_800E5EC0 >= 4) {
-                gfx = func_i2_80106450(gfx, 0x30, 0x9B, "4Ｔ", 1, 5, 0);
+                gfx = Font_DrawString(gfx, 0x30, 0x9B, "4Ｔ", 1, FONT_SET_5, 0);
             }
 
             for (i = 0; i < D_800E5EC0; i++) {
@@ -4060,9 +4073,9 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                                 D_i3_8013EFB4[D_i3_80141D38[i]], 255);
 
                 if (D_i3_80141D38[i] < gNumPlayers) {
-                    gfx = func_i2_80106450(gfx, 0x4D, 80 + i * 25, "Ｐ", 1, 5, 0);
+                    gfx = Font_DrawString(gfx, 0x4D, 80 + i * 25, "Ｐ", 1, FONT_SET_5, 0);
                 } else {
-                    gfx = func_i2_80106450(gfx, 0x4D, 80 + i * 25, "Ａ", 1, 5, 0);
+                    gfx = Font_DrawString(gfx, 0x4D, 80 + i * 25, "Ａ", 1, FONT_SET_5, 0);
                 }
 
                 if (D_i3_80141D38[i] < gNumPlayers) {
@@ -4071,24 +4084,24 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                     func_i3_801296E8((D_i3_80141D38[i] - gNumPlayers) + 1);
                 }
 
-                gfx = func_i2_80106450(gfx, 0x93, 80 + i * 25, D_i3_80141E08, 1, 5, 0);
+                gfx = Font_DrawString(gfx, 0x93, 80 + i * 25, D_i3_80141E08, 1, FONT_SET_5, 0);
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
                 func_i3_801296E8(D_800E5F10[D_i3_80141D38[i]]);
-                gfx = func_i2_80106450(gfx, 0xD3 - func_i2_801062E4(D_i3_80141E08, 5, 1), 80 + i * 25, D_i3_80141E08, 1,
-                                       5, 0);
-                gfx = func_i2_80106450(gfx, 0xD3, 80 + i * 25, "$", 1, 5, 0);
+                gfx = Font_DrawString(gfx, 0xD3 - Font_GetStringWidth(D_i3_80141E08, FONT_SET_5, 1), 80 + i * 25,
+                                      D_i3_80141E08, 1, FONT_SET_5, 0);
+                gfx = Font_DrawString(gfx, 0xD3, 80 + i * 25, "$", 1, FONT_SET_5, 0);
 
                 if (D_800E5F00[D_i3_80141D38[i]] > 0) {
                     gDPPipeSync(gfx++);
                     gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-                    gfx = func_i2_80106450(gfx, 0xF0, 80 + i * 25, "v", 1, 5, 0);
+                    gfx = Font_DrawString(gfx, 0xF0, 80 + i * 25, "v", 1, FONT_SET_5, 0);
                     j = D_800E5F00[D_i3_80141D38[i]];
                     if (j > 99) {
                         j = 99;
                     }
                     func_i3_801296E8(j);
-                    gfx = func_i2_80106450(gfx, 0xFE, 80 + i * 25, D_i3_80141E08, 1, 5, 0);
+                    gfx = Font_DrawString(gfx, 0xFE, 80 + i * 25, D_i3_80141E08, 1, FONT_SET_5, 0);
                 }
 
                 if (sp58 != 1) {
@@ -4101,13 +4114,13 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                     if (var_s1 < i) {
                         gDPPipeSync(gfx++);
                         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
-                        gfx = func_i2_80106450(gfx, 0x21, 80 + i * 25, "Ｄ", 1, 5, 0);
+                        gfx = Font_DrawString(gfx, 0x21, 80 + i * 25, "Ｄ", 1, FONT_SET_5, 0);
                     }
 
                     if (var_s1 > i) {
                         gDPPipeSync(gfx++);
                         gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-                        gfx = func_i2_80106450(gfx, 0x21, 80 + i * 25, "Ｕ", 1, 5, 0);
+                        gfx = Font_DrawString(gfx, 0x21, 80 + i * 25, "Ｕ", 1, FONT_SET_5, 0);
                     }
                 }
 
@@ -4210,10 +4223,12 @@ Gfx* func_i3_DrawGPResultsScreen(Gfx* gfx, s32 arg1) {
     if ((D_i3_80141B88[arg1] > 30) && (D_i3_80141B88[arg1] < 30030)) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx = func_i2_80106450(gfx, 0xA2 - (func_i2_801062E4("results", 3, 1) / 2), 0x34, "results", 1, 3, 0);
+        gfx = Font_DrawString(gfx, 0xA2 - (Font_GetStringWidth("results", FONT_SET_3, 1) / 2), 0x34, "results", 1,
+                              FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-        gfx = func_i2_80106450(gfx, 0xA0 - (func_i2_801062E4("results", 3, 1) / 2), 0x32, "results", 1, 3, 0);
+        gfx = Font_DrawString(gfx, 0xA0 - (Font_GetStringWidth("results", FONT_SET_3, 1) / 2), 0x32, "results", 1,
+                              FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 30, 55, 290, 204);
 
@@ -4314,7 +4329,7 @@ Gfx* func_i3_DrawGPResultsScreen(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-void func_i2_80101310(s32, s32, s32);
+void Save_UpdateCupCompletion(s32, s32, s32);
 extern s32 gCupType;
 extern s16 D_80106F48;
 extern s16 D_80115D90[];
@@ -4340,12 +4355,12 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
     if ((D_i3_80141B88[playerIndex] > 30) && (D_i3_80141B88[playerIndex] < 40030)) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx =
-            func_i2_80106450(gfx, 0xA2 - (func_i2_801062E4("total ranking", 3, 1) / 2), 0x34, "total ranking", 1, 3, 0);
+        gfx = Font_DrawString(gfx, 0xA2 - (Font_GetStringWidth("total ranking", FONT_SET_3, 1) / 2), 0x34,
+                              "total ranking", 1, FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-        gfx =
-            func_i2_80106450(gfx, 0xA0 - (func_i2_801062E4("total ranking", 3, 1) / 2), 0x32, "total ranking", 1, 3, 0);
+        gfx = Font_DrawString(gfx, 0xA0 - (Font_GetStringWidth("total ranking", FONT_SET_3, 1) / 2), 0x32,
+                              "total ranking", 1, FONT_SET_3, 0);
 
         for (i = 0; i < D_800E5EC0; i++) {
             D_i3_801419D0[i] = i;
@@ -4395,7 +4410,7 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
                     if (D_80115D90[D_i3_801419D0[i]] < i + 1) {
                         gDPPipeSync(gfx++);
                         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
-                        gfx = func_i2_80106450(gfx, 0x2F, temp_ft2 + 0x13, "Ｄ", 1, 5, 0);
+                        gfx = Font_DrawString(gfx, 0x2F, temp_ft2 + 0x13, "Ｄ", 1, FONT_SET_5, 0);
                         var_s0 = 0x3D;
                         if ((i - D_80115D90[D_i3_801419D0[i]]) + 1 < 0xA) {
                             var_s0 = 0x3A;
@@ -4405,7 +4420,7 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
                     if (D_80115D90[D_i3_801419D0[i]] > i + 1) {
                         gDPPipeSync(gfx++);
                         gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-                        gfx = func_i2_80106450(gfx, 0x2F, temp_ft2 + 0x16, "Ｕ", 1, 5, 0);
+                        gfx = Font_DrawString(gfx, 0x2F, temp_ft2 + 0x16, "Ｕ", 1, FONT_SET_5, 0);
                         var_s0 = 0x3D;
                         if ((i - D_80115D90[D_i3_801419D0[i]]) + 1 > -10) {
                             var_s0 = 0x3A;
@@ -4434,7 +4449,7 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
         ((gCourseIndex % 6) == 5) && (gCupType <= X_CUP)) {
         func_8007DEF0();
         if (gRacers[0].unk_167 == 0) {
-            func_i2_80101310(gDifficulty, gCupType, gRacers[0].character);
+            Save_UpdateCupCompletion(gDifficulty, gCupType, gRacers[0].character);
         }
     }
 
@@ -4483,13 +4498,14 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
 }
 
 extern s32 gTotalLapCount;
-extern s32 D_800CD3CC;
+extern s32 gCurrentGhostType;
 
 Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
     s32 i;
 
     if (D_800E5220[playerIndex].unk_04 == 10) {
-        if ((gGameMode != GAMEMODE_TIME_ATTACK) || ((gGameMode == GAMEMODE_TIME_ATTACK) && (D_800CD3CC < 2))) {
+        if ((gGameMode != GAMEMODE_TIME_ATTACK) ||
+            ((gGameMode == GAMEMODE_TIME_ATTACK) && (gCurrentGhostType < GHOST_STAFF))) {
             if (D_i3_80141BD0[playerIndex] == 0) {
                 D_i3_80141BD0[playerIndex] = 1;
                 func_i3_801217F0(playerIndex);
@@ -4527,7 +4543,8 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
         }
         D_i3_80141D78[playerIndex]++;
     } else if (D_i3_80141DF0[playerIndex] == 1) {
-        if ((gGameMode != GAMEMODE_TIME_ATTACK) || ((gGameMode == GAMEMODE_TIME_ATTACK) && (D_800CD3CC < 2))) {
+        if ((gGameMode != GAMEMODE_TIME_ATTACK) ||
+            ((gGameMode == GAMEMODE_TIME_ATTACK) && (gCurrentGhostType < GHOST_STAFF))) {
             if (D_i3_80141BD0[playerIndex] == 0) {
                 D_i3_80141BD0[playerIndex] = 1;
                 func_i3_801217F0(playerIndex);
@@ -4591,13 +4608,13 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     }
     if (gNumPlayers == 1) {
         if (gGameMode == GAMEMODE_DEATH_RACE) {
-            if (gRacers[playerIndex].unk_98 < (500.0f / 27.0f)) {
+            if (gRacers[playerIndex].speed < (500.0f / 27.0f)) {
                 D_80141900++;
             } else {
                 D_80141900 = 0;
             }
         } else {
-            if (gRacers[playerIndex].unk_98 < (250.0f / 27.0f)) {
+            if (gRacers[playerIndex].speed < (250.0f / 27.0f)) {
                 D_80141900++;
             } else {
                 D_80141900 = 0;
@@ -4631,12 +4648,14 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
             gfx = func_i3_DrawBeveledBox(gfx, 0xA0, 0x78, 0x131, 0xE8, 0, 0, 0, 0xFF);
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 0, 0, 250, 255);
-            gfx = func_i2_80106700(gfx, (234.0f - ((func_i2_801062E4(gCurrentTrackName, 3, 1) * 0.7f) / 2)), 0x94,
-                                   gCurrentTrackName, 1, 3, 0, 0.7f, 0.7f);
+            gfx = Font_DrawScaledString(gfx,
+                                        (234.0f - ((Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 1) * 0.7f) / 2)),
+                                        0x94, gCurrentTrackName, 1, FONT_SET_3, 0, 0.7f, 0.7f);
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-            gfx = func_i2_80106700(gfx, (232.0f - ((func_i2_801062E4(gCurrentTrackName, 3, 1) * 0.7f) / 2)), 0x92,
-                                   gCurrentTrackName, 1, 3, 0, 0.7f, 0.7f);
+            gfx = Font_DrawScaledString(gfx,
+                                        (232.0f - ((Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 1) * 0.7f) / 2)),
+                                        0x92, gCurrentTrackName, 1, FONT_SET_3, 0, 0.7f, 0.7f);
         }
 
         gDPPipeSync(gfx++);
@@ -4706,7 +4725,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         }
                         if (D_800E5F40[0]->unk_04 & 0x02000000) {
                             var_fa0 = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].unk_23C) *
-                                       D_800F8510->unk_0C * gTotalLapCount) -
+                                       gCurrentCourseRecordInfo->unk_0C * gTotalLapCount) -
                                       D_800E5F40[0]->raceTime;
                         }
                         if ((var_fa0 < 30000.0f) && (var_fa0 > -30000.0f) && (D_800F80A8[0] < 10)) {
@@ -4726,20 +4745,20 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 }
             } else if ((gGameMode == GAMEMODE_TIME_ATTACK) && (D_i3_80141C84 >= 0)) {
 
-                if (D_i3_80141DD0->unk_244 - D_i3_80141DD8 < -(D_800F8510->unk_0C * 0.5f)) {
-                    D_i3_80141DDC += D_800F8510->unk_0C;
+                if (D_i3_80141DD0->unk_244 - D_i3_80141DD8 < -(gCurrentCourseRecordInfo->unk_0C * 0.5f)) {
+                    D_i3_80141DDC += gCurrentCourseRecordInfo->unk_0C;
                 }
 
-                if (D_800F8510->unk_0C * 0.5f < D_i3_80141DD0->unk_244 - D_i3_80141DD8) {
-                    D_i3_80141DDC -= D_800F8510->unk_0C;
+                if (gCurrentCourseRecordInfo->unk_0C * 0.5f < D_i3_80141DD0->unk_244 - D_i3_80141DD8) {
+                    D_i3_80141DDC -= gCurrentCourseRecordInfo->unk_0C;
                 }
                 D_i3_80141DD0->unk_23C = D_i3_80141DD0->unk_244 + D_i3_80141DDC;
                 if (D_80106F44 != 0) {
                     if (temp_ft5 > 0.1f) {
                         var_fa0 = ((D_i3_80141DD0->unk_23C - gRacers[playerIndex].unk_23C) / temp_ft5) * 0.8892f;
-                        if ((D_800F8510->unk_0C * (gTotalLapCount - 0.01f)) <= D_i3_80141DD0->unk_23C) {
+                        if ((gCurrentCourseRecordInfo->unk_0C * (gTotalLapCount - 0.01f)) <= D_i3_80141DD0->unk_23C) {
                             var_fa0 = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].unk_23C) *
-                                       D_800F8510->unk_0C * gTotalLapCount) -
+                                       gCurrentCourseRecordInfo->unk_0C * gTotalLapCount) -
                                       D_80141C78;
                         }
                         if ((var_fa0 < 30000.0f) && (var_fa0 > -30000.0f) && (D_800F80A8[0] < 0xA)) {
@@ -4806,7 +4825,8 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                     if ((gGameMode == GAMEMODE_GP_RACE) || (gGameMode == GAMEMODE_PRACTICE) ||
                         (gGameMode == GAMEMODE_DEATH_RACE)) {
                         gfx = func_i3_801281B4(gfx, i, 93, j);
-                        if ((gGameMode == GAMEMODE_DEATH_RACE) && (D_800F8510->timeRecord[0] != MAX_TIMER)) {
+                        if ((gGameMode == GAMEMODE_DEATH_RACE) &&
+                            (gCurrentCourseRecordInfo->timeRecord[0] != MAX_TIMER)) {
                             i = 300 - (D_i3_80141D8C * 8);
                             if (i < 160) {
                                 i = 140;
@@ -4815,7 +4835,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         }
                     } else {
                         gfx = func_i3_80127854(gfx, i, 86, j);
-                        if (D_800F8510->timeRecord[0] != MAX_TIMER) {
+                        if (gCurrentCourseRecordInfo->timeRecord[0] != MAX_TIMER) {
                             i = 320 - (D_i3_80141D8C * 8);
                             if (i < 160) {
                                 i = 160;

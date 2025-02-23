@@ -662,7 +662,7 @@ Gfx* func_i3_DrawPlayerSpeed(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
     }
 
     digitMask = 1000;
-    speedRemainder = speed = Math_Round(gRacers[playerNum].unk_98 * 21.6f);
+    speedRemainder = speed = Math_Round(gRacers[playerNum].speed * 21.6f);
     left = sSpeedPositions[numPlayersIndex][playerNum][0];
     top = sSpeedPositions[numPlayersIndex][playerNum][1];
 
@@ -1525,7 +1525,7 @@ Gfx* func_i3_UpdateRaceIntervalInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerNum
 
         if (gGameMode == GAMEMODE_TIME_ATTACK) {
             for (i = 0; i < completedLaps; i++) {
-                sLeadRivalRaceTime[playerNum] += D_800F5E90->unk_04->unk_0008[i];
+                sLeadRivalRaceTime[playerNum] += D_800F5E90->ghost->lapTimes[i];
             }
         } else {
             for (i = 0; i < completedLaps; i++) {
@@ -1748,7 +1748,7 @@ void func_i3_ReplaceCharacterPortrait(s32 character) {
     textureOffset = textureIndex * 0x800;
     romOffset = (SEGMENT_ROM_START(segment_2747F0) + SEGMENT_OFFSET(D_276FF0)) + textureOffset;
 
-    func_80073FA0(romOffset, vramOffset, 0x800);
+    Dma_LoadAssetsAsync(romOffset, vramOffset, 0x800);
 }
 
 void func_i3_UpdateCharacterPortraits(void) {
@@ -1914,7 +1914,7 @@ Gfx* func_i3_DrawDeathRaceBest(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
     return gfx;
 }
 
-extern unk_800F8510* D_800F8510;
+extern CourseRecordInfo* gCurrentCourseRecordInfo;
 
 Gfx* func_i3_DrawDeathRaceBestTime(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
     s32 left;
@@ -1927,14 +1927,14 @@ Gfx* func_i3_DrawDeathRaceBestTime(Gfx* gfx, s32 numPlayersIndex, s32 playerNum)
     left = sPlayerTimePositions[numPlayersIndex][playerNum][0] + 32;
     top = sPlayerTimePositions[numPlayersIndex][playerNum][1] + 16;
 
-    if (D_800F8510->timeRecord[0] == MAX_TIMER) {
+    if (gCurrentCourseRecordInfo->timeRecord[0] == MAX_TIMER) {
         gDPPipeSync(gfx++);
         gDPSetCombineLERP(gfx++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE,
                           0, TEXEL0, 0);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
         gfx = func_i3_DrawBlankTimeHundredths(gfx, left, top);
     } else {
-        gfx = func_i3_DrawTimerWithPosition(gfx, D_800F8510->timeRecord[0] + 5, left, top, 1.0f);
+        gfx = func_i3_DrawTimerWithPosition(gfx, gCurrentCourseRecordInfo->timeRecord[0] + 5, left, top, 1.0f);
     }
 
     return gfx;

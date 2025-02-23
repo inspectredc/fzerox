@@ -1,33 +1,35 @@
 #include "global.h"
 #include "audio.h"
 #include "fzx_game.h"
+#include "fzx_save.h"
+#include "src/overlays/ovl_i4/ovl_i4.h"
 #include "assets/segment_17B1E0.h"
 
-f32 D_800E40F0[30];
+f32 gCharacterLastEngine[30];
 UNUSED s32 D_800E4168;
 u16 gInputPressed;
 u16 gInputButtonPressed;
 u16 gStickPressed;
-s8 D_800E4174[4];
+s8 gCupNumDifficultiesCleared[4];
 char* gCurrentTrackName;
 char* gTrackNames[55];
 
-s32 D_800CD380 = 0;
+s32 gSelectedMode = MODE_GP_RACE;
 u32 D_800CD384 = 0;
 
-s32 D_800CD388[8] = { 0 };
+s32 gModeSubOption[8] = { 0 };
 
-s8 D_800CD3A8[] = { 0, 0, 0, 0 };
+s8 gPlayerSelectionLock[] = { SELECTION_FREE, SELECTION_FREE, SELECTION_FREE, SELECTION_FREE };
 s8 D_800CD3AC[] = { 1, 1, 1, 1 };
 
-s32 D_800CD3B0 = 0;
-s32 D_800CD3B4 = 0;
+s32 gMachineSelectState = MACHINE_SELECT_ACTIVE;
+s32 gMachineSettingsState = MACHINE_SETTINGS_ACTIVE;
 s32 D_800CD3B8 = 0;
 s32 D_800CD3BC = 0;
-s8 D_800CD3C0 = 0;
+s8 gUnlockableLevel = 0;
 s8 D_800CD3C4 = 0;
-s8 D_800CD3C8 = 0;
-s32 D_800CD3CC = 1;
+s8 gSettingEverythingUnlocked = 0;
+s32 gCurrentGhostType = GHOST_PLAYER;
 
 const char* sTrackNames[] = { "mute city",
                               "silence",
@@ -132,12 +134,12 @@ void func_8007A59C(u16* arg0, s32 arg1) {
     }
 }
 
-void func_8007A828(u16* arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+void func_8007A828(u16* arg0, size_t size, s32 arg2, s32 arg3, s32 arg4) {
     u32 i;
     u32 colorBlend;
     u32 red, green, blue, alpha;
 
-    for (i = 0; i < (arg1 / 2); i++, arg0++) {
+    for (i = 0; i < (size / sizeof(u16)); i++, arg0++) {
         red = ((*arg0 & 0xF800) >> 11) * 77;
         green = ((*arg0 & 0x7C0) >> 6) * 150;
         blue = ((*arg0 & 0x3E) >> 1) * 29;
@@ -694,7 +696,7 @@ Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u
     return gfx;
 }
 
-extern u8 D_i2_8010D730[][9];
+extern u8 gEditCupTrackNames[][9];
 
 void func_8007D9D0(void) {
     s32 i;
@@ -704,10 +706,10 @@ void func_8007D9D0(void) {
     }
 
     for (i = 24; i < 30; i++) {
-        if (D_i2_8010D730[i - 24][0] == '\0') {
+        if (gEditCupTrackNames[i - 24][0] == '\0') {
             gTrackNames[i] = sTrackNames[i];
         } else {
-            gTrackNames[i] = D_i2_8010D730[i - 24];
+            gTrackNames[i] = gEditCupTrackNames[i - 24];
         }
     }
 
@@ -722,7 +724,7 @@ void func_8007D9D0(void) {
     gTrackNames[54] = sTrackNames[31];
 }
 
-void func_8007DABC(Controller* controller) {
+void Controller_SetGlobalInputs(Controller* controller) {
     gInputButtonPressed = controller->buttonPressed | STICK_TO_BUTTON(controller->stickPressed);
     if (controller->unk_82 != 0) {
         gStickPressed = controller->buttonCurrent | STICK_TO_BUTTON(controller->stickCurrent);
@@ -770,7 +772,7 @@ void func_8007DED8(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        D_800E4174[i] = 0;
+        gCupNumDifficultiesCleared[i] = 0;
     }
 }
 
@@ -785,25 +787,25 @@ void func_8007DEF0(void) {
     s32 var_a0;
 
     for (i = 0; i < 4; i++) {
-        if (D_800E4174[i] < 3) {
+        if (gCupNumDifficultiesCleared[i] < 3) {
             var_v1 = 1;
             break;
         }
     }
     var_a0 = gDifficulty + 1;
     //! @bug This always evaluates to true, and instead should use a &&
-    //       The result of this could lead to an OOB array access of D_800E4174
+    //       The result of this could lead to an OOB array access of gCupNumDifficultiesCleared
     if ((gCupType >= JACK_CUP) || (gCupType <= JOKER_CUP)) {
         if (var_a0 > MASTER + 1) {
             var_a0 = MASTER + 1;
         }
 
-        if (D_800E4174[gCupType] < var_a0) {
-            D_800E4174[gCupType] = var_a0;
+        if (gCupNumDifficultiesCleared[gCupType] < var_a0) {
+            gCupNumDifficultiesCleared[gCupType] = var_a0;
         }
         if (var_v1 != 0) {
             for (i = 0; i < 4; i++) {
-                if (D_800E4174[i] < 3) {
+                if (gCupNumDifficultiesCleared[i] < 3) {
                     var_v1 = 0;
                     if (gCupType) {}
                 }
@@ -813,18 +815,18 @@ void func_8007DEF0(void) {
                 D_800E42CC = 1;
             }
         }
-        func_i2_80101414();
+        Save_SaveSettingsProfiles();
     }
 }
 
-extern s8 D_800E4174[4];
+extern s8 gCupNumDifficultiesCleared[4];
 
 s32 func_8007E008(void) {
     s32 sum = 0;
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        sum += D_800E4174[i];
+        sum += gCupNumDifficultiesCleared[i];
     }
     return sum;
 }
@@ -855,23 +857,23 @@ void func_8007E0EC(void) {
     func_800BB078();
 }
 
-const s8 kCharacterList[] = { CAPTAIN_FALCON, DR_STEWART,   PICO,           SAMURAI_GOROH,   JODY_SUMMER,
-                              MIGHTY_GAZELLE, BABA,         OCTOMAN,        DR_CLASH,        MR_EAD,
-                              BIO_REX,        BILLY,        SILVER_NEELSEN, GOMAR_AND_SHIOH, JOHN_TANAKA,
-                              MRS_ARROW,      BLOOD_FALCON, JACK_LEVIN,     JAMES_MCCLOUD,   ZODA,
-                              MICHAEL_CHAIN,  SUPER_ARROW,  KATE_ALEN,      ROGER_BUSTER,    LEON,
-                              DRAQ,           BEASTMAN,     ANTONIO_GUSTER, BLACK_SHADOW,    THE_SKULL,
-                              MAX_CHARACTER };
+const s8 kMachineSelectCharacterList[] = { CAPTAIN_FALCON, DR_STEWART,   PICO,           SAMURAI_GOROH,   JODY_SUMMER,
+                                           MIGHTY_GAZELLE, BABA,         OCTOMAN,        DR_CLASH,        MR_EAD,
+                                           BIO_REX,        BILLY,        SILVER_NEELSEN, GOMAR_AND_SHIOH, JOHN_TANAKA,
+                                           MRS_ARROW,      BLOOD_FALCON, JACK_LEVIN,     JAMES_MCCLOUD,   ZODA,
+                                           MICHAEL_CHAIN,  SUPER_ARROW,  KATE_ALEN,      ROGER_BUSTER,    LEON,
+                                           DRAQ,           BEASTMAN,     ANTONIO_GUSTER, BLACK_SHADOW,    THE_SKULL,
+                                           MAX_CHARACTER };
 
 s8 func_8007E10C(s32 i) {
-    return kCharacterList[i];
+    return kMachineSelectCharacterList[i];
 }
 
 s32 func_8007E11C(s32 character) {
     s32 i;
 
     for (i = 0; i < 30; i++) {
-        if (character == kCharacterList[i]) {
+        if (character == kMachineSelectCharacterList[i]) {
             return i;
         }
     }
@@ -880,7 +882,7 @@ s32 func_8007E11C(s32 character) {
 }
 
 void func_8007E1C0(void) {
-    unk_80141C88 sp40;
+    GhostInfo sp40;
     s32 pad;
     bool sp38;
     s32 i;
@@ -888,57 +890,57 @@ void func_8007E1C0(void) {
     sp38 = false;
 
     for (i = 0; i < 24; i++) {
-        if (func_i2_801037CC(&sp40, i) != 0) {
+        if (Save_LoadStaffGhostRecord(&sp40, i) != 0) {
             sp38 = true;
             break;
         } else {
-            if (D_802A6B40[i].timeRecord[0] >= sp40.unk_08) {
+            if (gCourseRecordInfos[i].timeRecord[0] >= sp40.raceTime) {
                 sp38 = true;
                 break;
             }
         }
     }
-    if (!sp38 || (D_800CD3C0 >= 3)) {
+    if (!sp38 || (gUnlockableLevel >= 3)) {
         D_800CD3C4 = 2;
-    } else if (D_800CD3C0 >= 2) {
+    } else if (gUnlockableLevel >= 2) {
         D_800CD3C4 = 1;
     } else {
         D_800CD3C4 = 0;
     }
 }
 
-extern s8 D_800CD3C0;
+extern s8 gUnlockableLevel;
 
 void func_8007E2B4(void) {
     bool var_a0;
     s32 i;
 
-    if (func_8007E008() >= 0x10) {
-        D_800CD3C0 = 3;
+    if (func_8007E008() >= 16) {
+        gUnlockableLevel = 3;
     } else {
         var_a0 = false;
-        for (i = 0; i < 4; i++) {
-            if (D_800E4174[i] < 3) {
+        for (i = JACK_CUP; i <= JOKER_CUP; i++) {
+            if (gCupNumDifficultiesCleared[i] < 3) {
                 var_a0 = true;
                 break;
             }
         }
 
         if (!var_a0) {
-            D_800CD3C0 = 2;
+            gUnlockableLevel = 2;
         } else {
             var_a0 = false;
-            for (i = 0; i < 3; i++) {
-                if (D_800E4174[i] < 2) {
+            for (i = JACK_CUP; i <= KING_CUP; i++) {
+                if (gCupNumDifficultiesCleared[i] < 2) {
                     var_a0 = true;
                     break;
                 }
             }
 
             if (!var_a0) {
-                D_800CD3C0 = 1;
+                gUnlockableLevel = 1;
             } else {
-                D_800CD3C0 = 0;
+                gUnlockableLevel = 0;
             }
         }
     }
@@ -958,10 +960,10 @@ void func_8007E398(void) {
     }
 
     for (i = 0; i < 8; i++) {
-        D_800CD388[i] = 0;
+        gModeSubOption[i] = 0;
     }
 
     D_800CD3B8 = 0;
     D_800CD3BC = 0;
-    D_800CD3CC = 1;
+    gCurrentGhostType = GHOST_PLAYER;
 }

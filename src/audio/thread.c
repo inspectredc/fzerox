@@ -1,7 +1,7 @@
 #include "global.h"
 #include "audio.h"
 #include "audiothread_cmd.h"
-#include "fzxthread.h"
+#include "fzx_thread.h"
 
 void AudioThread_ProcessCmds(u32 msg);
 void AudioThread_ProcessSeqPlayerCmd(SequenceChannel* channel, AudioCmd* cmd);
