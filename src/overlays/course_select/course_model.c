@@ -114,7 +114,7 @@ void func_i5_801164A8(s32 arg0) {
     }
 }
 
-void func_i5_80116658(s32 cupType) {
+void CourseModel_Init(s32 cupType) {
     gCourseModelCupType = cupType;
     D_i5_801190B4 = 8;
     gCourseModelCupCourseNo = 0;

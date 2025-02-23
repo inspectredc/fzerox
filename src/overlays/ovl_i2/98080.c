@@ -50,7 +50,7 @@ extern s32 gGameMode;
 void func_i2_800FC77C(void) {
     D_i2_80106DA4 = 2;
 
-    if (D_800CD044 == 0x1F) {
+    if (D_800CD044 == 31) {
         func_i2_800FCB84(0, 10);
         return;
     }
@@ -63,7 +63,7 @@ void func_i2_800FC77C(void) {
             func_i2_800FCD38(5, 120);
             func_i2_800FCB84(0, 5);
             break;
-        case GAMEMODE_D:
+        case GAMEMODE_COURSE_EDIT:
             func_i2_800FCB84(0, 10);
             break;
         case GAMEMODE_FLX_COURSE_SELECT:
@@ -78,7 +78,7 @@ void func_i2_800FC77C(void) {
             func_i2_800FCB84(0, 5);
             break;
         case GAMEMODE_FLX_MAIN_MENU:
-            if (D_800CD044 == 0x15) {
+            if (D_800CD044 == 21) {
                 func_i2_800FCB84(0, 10);
                 break;
             }
@@ -86,7 +86,7 @@ void func_i2_800FC77C(void) {
             break;
         case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
         case GAMEMODE_FLX_OPTIONS_MENU:
-            if (D_800CD044 == 0x15) {
+            if (D_800CD044 == 21) {
                 func_i2_800FCB84(0, 10);
                 break;
             }
@@ -102,11 +102,11 @@ void func_i2_800FC77C(void) {
             func_i2_800FCB84(0, 5);
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_4012:
+        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
             func_i2_800FCB84(0, 6);
             break;
         case GAMEMODE_RECORDS:
-            if (D_800CD044 != 0x15) {
+            if (D_800CD044 != 21) {
                 func_i2_800FCD4C(0, 1);
                 break;
             }
@@ -123,7 +123,7 @@ extern unk_800DCE48 D_800DCE48;
 void func_i2_800FC9BC(void) {
     D_i2_80106DA4 = 1;
 
-    if (D_800CD044 == 0x21) {
+    if (D_800CD044 == 33) {
         func_i2_800FCB84(1, 10);
         return;
     }
@@ -145,12 +145,12 @@ void func_i2_800FC9BC(void) {
         case GAMEMODE_FLX_MACHINE_SELECT:
             func_i2_800FCB84(1, 5);
             break;
-        case GAMEMODE_D:
+        case GAMEMODE_COURSE_EDIT:
             func_i2_800FCB84(1, 10);
             break;
         case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
         case GAMEMODE_FLX_OPTIONS_MENU:
-            if (D_800CD044 == 0x17) {
+            if (D_800CD044 == 23) {
                 func_i2_800FCD38(9, 2);
                 func_i2_800FCB84(1, 9);
                 break;
@@ -158,7 +158,7 @@ void func_i2_800FC9BC(void) {
             func_i2_800FCD4C(1, 1);
             break;
         case GAMEMODE_FLX_MAIN_MENU:
-            if (D_800CD044 == 0x17) {
+            if (D_800CD044 == 23) {
                 func_i2_800FCD38(9, 3);
                 func_i2_800FCB84(1, 9);
                 break;
@@ -166,7 +166,7 @@ void func_i2_800FC9BC(void) {
             func_i2_800FCB84(1, 7);
             break;
         case GAMEMODE_RECORDS:
-            if (D_800CD044 != 0x17) {
+            if (D_800CD044 != 23) {
                 func_i2_800FCD4C(1, 1);
                 break;
             }

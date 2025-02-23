@@ -209,7 +209,7 @@ s32 OptionsMenu_Update(void) {
             case OPTIONS_DATA_CLEAR_MENU_CLOSED:
                 if (D_i2_80106DA4 == 0 && func_i6_8011C788()) {
                     sOptionsDataAlreadyCleared = true;
-                    D_800CD048 = 0xE;
+                    D_800CD048 = 14;
                 }
                 break;
             case OPTIONS_DATA_CLEAR_MENU_OPEN:

@@ -2150,7 +2150,7 @@ void func_80085610(void) {
             D_800E5220[0].unk_04 = 0;
             func_80085B80(D_800E5220, D_800E5990, D_800E5D70);
             break;
-        case GAMEMODE_10:
+        case GAMEMODE_CREATE_MACHINE:
         case GAMEMODE_FLX_MACHINE_SELECT:
             v0 = 0;
             if (1) {}
@@ -2159,7 +2159,7 @@ void func_80085610(void) {
             func_80085B80(D_800E5220, D_800E5990, D_800E5D70);
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_4012:
+        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
             v0 = 0;
             if (1) {}
             D_800E5E8C = D_800E5E8A;

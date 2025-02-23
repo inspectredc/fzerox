@@ -1,6 +1,64 @@
 #ifndef FZX_OBJECT_H
 #define FZX_OBJECT_H
 
+// Default to Most Common Names, Macros should always be used for variable fields
+typedef struct Object {
+    s32 cmdId;
+    s32 state;
+    s32 state2;
+    s32 left;
+    s32 top;
+    s8 priority; // maybe depth is better
+    s8 shouldDraw;
+    union {
+        s32 cacheIndex;
+        u8* buffer;
+    };
+    union {
+        s32 counter;
+        Vp* vp;
+    };
+    s32 counter2;
+    s8 unk_24[0x4];
+} Object; // size = 0x28
+
+// General Object Usage Macros
+
+#define OBJECT_STATE(obj) ((obj)->state)
+#define OBJECT_STATE2(obj) ((obj)->state2)
+#define OBJECT_LEFT(obj) ((obj)->left)
+#define OBJECT_TOP(obj) ((obj)->top)
+#define OBJECT_CACHE_INDEX(obj) ((obj)->cacheIndex)
+#define OBJECT_COUNTER(obj) ((obj)->counter)
+#define OBJECT_COUNTER2(obj) ((obj)->counter2)
+
+// Specific Object Macros
+
+#define OBJECT_BUFFER(obj) ((obj)->buffer)
+
+// Machine Select/Settings
+#define CAR_VIEWPORT(carObj) ((carObj)->vp)
+#define CAR_MINI_STATE(carObj) ((carObj)->counter2)
+#define PORTRAIT_CHARACTER(portraitObj) ((portraitObj)->state)
+#define NAME_CARD_CHARACTER(nameCardObj) ((nameCardObj)->state)
+
+// Credits
+#define INTRO_TIMER(obj) ((introObj)->cacheIndex)
+#define CAR_NUMBER(carObj) ((carObj)->counter2)
+#define PORTRAIT_CAR_NUMBER(portraitObj) ((portraitObj)->counter2)
+#define MENU_LADY_DITHER_SCALE(menuLadyObj) ((menuLadyObj)->state2)
+
+// Course Select
+#define LEFT_ARROW_LEFT(arrowsObj) ((arrowsObj)->left)
+#define RIGHT_ARROW_LEFT(arrowsObj) ((arrowsObj)->top)
+#define LEFT_ARROW_ROTATION_CHANGE(arrowsObj) ((arrowsObj)->state)
+#define RIGHT_ARROW_ROTATION_CHANGE(arrowsObj) ((arrowsObj)->state2)
+#define LEFT_ARROW_ROTATION(arrowsObj) ((arrowsObj)->counter)
+#define RIGHT_ARROW_ROTATION(arrowsObj) ((arrowsObj)->counter2)
+#define GHOST_MARKER_COURSE(ghostMarkerObj) ((ghostMarkerObj)->state)
+#define GHOST_MARKER_OFFSET(ghostMarkerObj) ((ghostMarkerObj)->counter)
+#define UNLOCK_EVERYTHING_ROMDATA(unlockEverythingObj) ((unlockEverythingObj)->counter)
+
 typedef enum ObjectIds {
     OBJECT_FREE,
     OBJECT_FRAMEBUFFER = 5,

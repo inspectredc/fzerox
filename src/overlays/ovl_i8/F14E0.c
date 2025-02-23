@@ -22,7 +22,7 @@ typedef struct unk_80144FE0 {
 } unk_80144FE0; // size = 0x80
 
 s32 D_80144FB0;
-s32 D_i8_80144FB4;
+s32 sUnlockedCourseCount;
 s16 D_i8_80144FB8[4];
 unk_800E51B8* D_i8_80144FC0;
 unk_800E51B8* D_i8_80144FC4;
@@ -85,7 +85,7 @@ void Records_Init(void) {
 bool func_i8_80143D30(s32);
 bool func_i8_80143D84(s32);
 
-extern s8 D_800CD3C0;
+extern s8 gUnlockableLevel;
 extern s8 D_800CD3C8;
 extern s32 gCourseIndex;
 
@@ -94,10 +94,10 @@ void func_i8_80143A78(void) {
     unk_80144F44* var_s0;
 
     D_i8_80144F40 = gCourseIndex;
-    if ((D_800CD3C0 == 0) && (D_800CD3C8 == 0)) {
-        D_i8_80144FB4 = 0x12;
+    if ((gUnlockableLevel == 0) && (D_800CD3C8 == 0)) {
+        sUnlockedCourseCount = 18;
     } else {
-        D_i8_80144FB4 = 0x18;
+        sUnlockedCourseCount = 24;
     }
 
     for (i = 0; i < 4; i++, var_s0++) {
@@ -269,14 +269,14 @@ s32 func_i8_80143F94(void) {
     sp28 = gCourseIndex;
     if (gInputPressed & BTN_RIGHT) {
         gCourseIndex++;
-        if (gCourseIndex >= D_i8_80144FB4) {
+        if (gCourseIndex >= sUnlockedCourseCount) {
             gCourseIndex = 0;
         }
         func_i2_800FCD38(9, 0);
     } else if (gInputPressed & BTN_LEFT) {
         gCourseIndex--;
         if (gCourseIndex < 0) {
-            gCourseIndex = D_i8_80144FB4 - 1;
+            gCourseIndex = sUnlockedCourseCount - 1;
         }
         func_i2_800FCD38(9, 1);
     }

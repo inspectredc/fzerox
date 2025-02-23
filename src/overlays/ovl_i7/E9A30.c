@@ -11,7 +11,7 @@
 
 extern s16 D_800CCFE8;
 extern s32 gCupType;
-extern s8 D_800CD3C0;
+extern s8 gUnlockableLevel;
 extern s8 D_800DCE5C;
 extern s16 D_800E42CC;
 extern s32 gCourseIndex;
@@ -838,7 +838,7 @@ void EndingCutscene_Init(void) {
     if (D_800E42CC != 0) {
         D_800E42CC = 0;
         D_i7_8014BDF6 |= 0x10;
-    } else if (D_800CD3C0 >= 2) {
+    } else if (gUnlockableLevel >= 2) {
         switch (sCupDifficulty) {
             case EXPERT:
             case MASTER:

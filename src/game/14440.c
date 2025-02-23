@@ -26,7 +26,7 @@ s32 gMachineSelectState = MACHINE_SELECT_ACTIVE;
 s32 gMachineSettingsState = MACHINE_SETTINGS_ACTIVE;
 s32 D_800CD3B8 = 0;
 s32 D_800CD3BC = 0;
-s8 D_800CD3C0 = 0;
+s8 gUnlockableLevel = 0;
 s8 D_800CD3C4 = 0;
 s8 gSettingEverythingUnlocked = 0;
 s32 gCurrentGhostType = GHOST_PLAYER;
@@ -134,12 +134,12 @@ void func_8007A59C(u16* arg0, s32 arg1) {
     }
 }
 
-void func_8007A828(u16* arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+void func_8007A828(u16* arg0, size_t size, s32 arg2, s32 arg3, s32 arg4) {
     u32 i;
     u32 colorBlend;
     u32 red, green, blue, alpha;
 
-    for (i = 0; i < (arg1 / 2); i++, arg0++) {
+    for (i = 0; i < (size / sizeof(u16)); i++, arg0++) {
         red = ((*arg0 & 0xF800) >> 11) * 77;
         green = ((*arg0 & 0x7C0) >> 6) * 150;
         blue = ((*arg0 & 0x3E) >> 1) * 29;
@@ -900,26 +900,26 @@ void func_8007E1C0(void) {
             }
         }
     }
-    if (!sp38 || (D_800CD3C0 >= 3)) {
+    if (!sp38 || (gUnlockableLevel >= 3)) {
         D_800CD3C4 = 2;
-    } else if (D_800CD3C0 >= 2) {
+    } else if (gUnlockableLevel >= 2) {
         D_800CD3C4 = 1;
     } else {
         D_800CD3C4 = 0;
     }
 }
 
-extern s8 D_800CD3C0;
+extern s8 gUnlockableLevel;
 
 void func_8007E2B4(void) {
     bool var_a0;
     s32 i;
 
-    if (func_8007E008() >= 0x10) {
-        D_800CD3C0 = 3;
+    if (func_8007E008() >= 16) {
+        gUnlockableLevel = 3;
     } else {
         var_a0 = false;
-        for (i = 0; i < 4; i++) {
+        for (i = JACK_CUP; i <= JOKER_CUP; i++) {
             if (gCupNumDifficultiesCleared[i] < 3) {
                 var_a0 = true;
                 break;
@@ -927,10 +927,10 @@ void func_8007E2B4(void) {
         }
 
         if (!var_a0) {
-            D_800CD3C0 = 2;
+            gUnlockableLevel = 2;
         } else {
             var_a0 = false;
-            for (i = 0; i < 3; i++) {
+            for (i = JACK_CUP; i <= KING_CUP; i++) {
                 if (gCupNumDifficultiesCleared[i] < 2) {
                     var_a0 = true;
                     break;
@@ -938,9 +938,9 @@ void func_8007E2B4(void) {
             }
 
             if (!var_a0) {
-                D_800CD3C0 = 1;
+                gUnlockableLevel = 1;
             } else {
-                D_800CD3C0 = 0;
+                gUnlockableLevel = 0;
             }
         }
     }

@@ -126,21 +126,6 @@ typedef struct unk_802D08E0 {
     struct unk_36ED0* unk_34;
 } unk_802D08E0; // size = 0x38
 
-typedef struct Object {
-    s32 cmdId;
-    s32 unk_04;
-    s32 unk_08;
-    s32 left;
-    s32 top;
-    s8 priority;
-    s8 shouldDraw;
-    s8 unk_16[0x2];
-    s32 unk_18;
-    s32 unk_1C;
-    s32 unk_20;
-    s8 unk_24[0x4];
-} Object; // size = 0x28
-
 typedef Gfx* (*unk_800E51B8_unk_1C_func)(Gfx*, s32, s32);
 
 typedef struct unk_800E51B8 {
@@ -650,8 +635,8 @@ typedef struct unk_800E3F28 {
     s16 unk_06;
     s16 unk_08;
     s16 unk_0A;
-    TexturePtr unk_0C;
-    TexturePtr unk_10;
+    TexturePtr unk_0C; // primary texture
+    TexturePtr unk_10; // alternate texture (defaults to primary)
 } unk_800E3F28; // size = 0x14
 
 

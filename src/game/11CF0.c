@@ -550,14 +550,14 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
         // clang-format off
         if (object->cmdId == OBJECT_FREE) { \
             object->cmdId = cmdId;          \
-            object->unk_04 = 0;             \
-            object->unk_08 = 0;             \
+            object->state = 0;              \
+            object->state2 = 0;             \
             object->left = left;            \
             object->top = top;              \
             object->priority = priority;    \
             object->shouldDraw = true;      \
-            object->unk_1C = 0;             \
-            object->unk_20 = 0;             \
+            object->counter = 0;            \
+            object->counter2 = 0;           \
             break;
         }
         // clang-format on
@@ -928,21 +928,21 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
                 MainMenu_UnlockEverythingUpdate(&gObjects[i]);
                 break;
             case OBJECT_32:
-                D_800E3F28[gObjects[i].unk_18].unk_04 = 0;
+                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
                 func_i4_80119BB8(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SETTINGS_PORTRAIT_0:
             case OBJECT_MACHINE_SETTINGS_PORTRAIT_1:
             case OBJECT_MACHINE_SETTINGS_PORTRAIT_2:
             case OBJECT_MACHINE_SETTINGS_PORTRAIT_3:
-                D_800E3F28[gObjects[i].unk_18].unk_04 = 0;
+                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
                 MachineSettings_PortraitUpdate(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SELECT_PORTRAIT_0:
             case OBJECT_MACHINE_SELECT_PORTRAIT_1:
             case OBJECT_MACHINE_SELECT_PORTRAIT_2:
             case OBJECT_MACHINE_SELECT_PORTRAIT_3:
-                D_800E3F28[gObjects[i].unk_18].unk_04 = 0;
+                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
                 MachineSelect_PortraitUpdate(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SELECT_CURSOR_NUM_0:
@@ -961,7 +961,7 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
                 MachineSettings_CarUpdate(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SETTINGS_NAME_CARD:
-                D_800E3F28[gObjects[i].unk_18].unk_04 = 0;
+                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
                 MachineSettings_NameCardUpdate(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SELECT_OK:
@@ -1032,7 +1032,7 @@ void func_80079EC8(void) {
     Object_ClearAll();
     func_800792A8();
     func_80079080();
-    if (gGameMode != GAMEMODE_10) {
+    if (gGameMode != GAMEMODE_CREATE_MACHINE) {
         func_8007E2B4();
     }
 }
@@ -1047,7 +1047,7 @@ void func_80079F1C(void) {
 void Object_LerpPosXToTarget(Object* object, s32 target, s32 stepScale) {
     s32 step;
 
-    step = target - object->left;
+    step = target - OBJECT_LEFT(object);
     if (step != 0) {
         if (step > 0) {
             step /= stepScale;
@@ -1061,13 +1061,13 @@ void Object_LerpPosXToTarget(Object* object, s32 target, s32 stepScale) {
             }
         }
     }
-    object->left += step;
+    OBJECT_LEFT(object) += step;
 }
 
 void Object_LerpPosYToTarget(Object* object, s32 target) {
     s32 step;
 
-    step = target - object->top;
+    step = target - OBJECT_TOP(object);
     if (step != 0) {
         if (step > 0) {
             step /= 4;
@@ -1081,7 +1081,7 @@ void Object_LerpPosYToTarget(Object* object, s32 target) {
             }
         }
     }
-    object->top += step;
+    OBJECT_TOP(object) += step;
 }
 
 void Object_LerpToPos(Object* object, s32 xTarget, s32 yTarget) {
@@ -1092,7 +1092,7 @@ void Object_LerpToPos(Object* object, s32 xTarget, s32 yTarget) {
 void Object_LerpPosXToClampedTargetMaxStep(Object* object, s32 target, s32 maxStep) {
     s32 step;
 
-    step = target - object->left;
+    step = target - OBJECT_LEFT(object);
     if (step != 0) {
         if (step > 0) {
             step /= 4;
@@ -1102,10 +1102,10 @@ void Object_LerpPosXToClampedTargetMaxStep(Object* object, s32 target, s32 maxSt
             if (step < 8) {
                 step = 8;
             }
-            object->left += step;
+            OBJECT_LEFT(object) += step;
 
-            if (target < object->left) {
-                object->left = target;
+            if (target < OBJECT_LEFT(object)) {
+                OBJECT_LEFT(object) = target;
             }
         } else {
             step /= 4;
@@ -1115,10 +1115,10 @@ void Object_LerpPosXToClampedTargetMaxStep(Object* object, s32 target, s32 maxSt
             if (step > -8) {
                 step = -8;
             }
-            object->left += step;
+            OBJECT_LEFT(object) += step;
 
-            if (object->left < target) {
-                object->left = target;
+            if (OBJECT_LEFT(object) < target) {
+                OBJECT_LEFT(object) = target;
             }
         }
     }
@@ -1127,7 +1127,7 @@ void Object_LerpPosXToClampedTargetMaxStep(Object* object, s32 target, s32 maxSt
 void Object_LerpPosYToClampedTarget(Object* object, s32 target) {
     s32 step;
 
-    step = target - object->top;
+    step = target - OBJECT_TOP(object);
     if (step != 0) {
         if (step > 0) {
             step /= 4;
@@ -1137,10 +1137,10 @@ void Object_LerpPosYToClampedTarget(Object* object, s32 target) {
             if (step < 8) {
                 step = 8;
             }
-            object->top += step;
+            OBJECT_TOP(object) += step;
 
-            if (target < object->top) {
-                object->top = target;
+            if (target < OBJECT_TOP(object)) {
+                OBJECT_TOP(object) = target;
             }
         } else {
             step /= 4;
@@ -1150,10 +1150,10 @@ void Object_LerpPosYToClampedTarget(Object* object, s32 target) {
             if (step >= -7) {
                 step = -8;
             }
-            object->top += step;
+            OBJECT_TOP(object) += step;
 
-            if (object->top < target) {
-                object->top = target;
+            if (OBJECT_TOP(object) < target) {
+                OBJECT_TOP(object) = target;
             }
         }
     }
@@ -1163,7 +1163,7 @@ void Object_LerpPosYToClampedTarget(Object* object, s32 target) {
 void Object_LerpPosYToTarget2(Object* object, s32 target) {
     s32 step;
 
-    step = target - object->top;
+    step = target - OBJECT_TOP(object);
     if (step != 0) {
         if (step > 0) {
             step /= 4;
@@ -1177,13 +1177,13 @@ void Object_LerpPosYToTarget2(Object* object, s32 target) {
             }
         }
     }
-    object->top += step;
+    OBJECT_TOP(object) += step;
 }
 
 void Object_LerpPosXToClampedTarget(Object* object, s32 target) {
     s32 step;
 
-    step = target - object->left;
+    step = target - OBJECT_LEFT(object);
     if (step != 0) {
         step = 200 / step;
         if (step > 0) {
@@ -1193,10 +1193,10 @@ void Object_LerpPosXToClampedTarget(Object* object, s32 target) {
             if (step < 16) {
                 step = 16;
             }
-            object->left += step;
+            OBJECT_LEFT(object) += step;
 
-            if (target < object->left) {
-                object->left = target;
+            if (target < OBJECT_LEFT(object)) {
+                OBJECT_LEFT(object) = target;
             }
         } else {
             if (step < -24) {
@@ -1205,22 +1205,22 @@ void Object_LerpPosXToClampedTarget(Object* object, s32 target) {
             if (step > -16) {
                 step = -16;
             }
-            object->left += step;
+            OBJECT_LEFT(object) += step;
 
-            if (object->left < target) {
-                object->left = target;
+            if (OBJECT_LEFT(object) < target) {
+                OBJECT_LEFT(object) = target;
             }
         }
     }
 }
 
 void Object_LerpAwayFromPosX(Object* object, s32 origin, s32 initialStep) {
-    UNUSED s32 temp = object->left;
+    UNUSED s32 temp = OBJECT_LEFT(object);
     s32 step;
 
-    step = origin - object->left;
-    if (origin == object->left) {
-        object->left += initialStep;
+    step = origin - OBJECT_LEFT(object);
+    if (origin == OBJECT_LEFT(object)) {
+        OBJECT_LEFT(object) += initialStep;
         return;
     }
     if (step != 0) {
@@ -1236,16 +1236,16 @@ void Object_LerpAwayFromPosX(Object* object, s32 origin, s32 initialStep) {
             }
         }
     }
-    object->left -= step;
+    OBJECT_LEFT(object) -= step;
 }
 
 void Object_LerpAwayFromPosY(Object* object, s32 origin, s32 initialStep) {
-    UNUSED s32 temp = object->top;
+    UNUSED s32 temp = OBJECT_TOP(object);
     s32 step;
 
-    step = origin - object->top;
-    if (origin == object->top) {
-        object->top += initialStep;
+    step = origin - OBJECT_TOP(object);
+    if (origin == OBJECT_TOP(object)) {
+        OBJECT_TOP(object) += initialStep;
         return;
     }
     if (step != 0) {
@@ -1261,5 +1261,5 @@ void Object_LerpAwayFromPosY(Object* object, s32 origin, s32 initialStep) {
             }
         }
     }
-    object->top -= step;
+    OBJECT_TOP(object) -= step;
 }

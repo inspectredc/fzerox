@@ -9,7 +9,7 @@
 
 s8 D_i6_8011FAF0[30];
 
-s8 D_i6_8011DFA0 = 0;
+s8 sDebugCreditsOldCars = false;
 UNUSED s32 D_i6_8011DFA4 = 64;
 UNUSED s32 D_i6_8011DFA8 = 40;
 
@@ -445,7 +445,7 @@ const s16 kStartRolesInitialPositions[] = { 50, 240, 280, -20, 280, 240, 50, -20
 
 const s16 kStartNamesInitialPositions[] = { 50, 100, 280, 180, 280, 100, 50, 180 };
 
-const s16 D_i6_8011F4DC[] = { 150, 210, 50, 35, 50, 210, 150, 35 };
+const s16 kCreditsCarPositions[] = { 150, 210, 50, 35, 50, 210, 150, 35 };
 
 const s16 kCreditsObjectScrollScript[] = {
     OBJECT_CREDITS_ROLE_18,
@@ -578,12 +578,12 @@ extern unk_800E3F28 D_800E3F28[];
 
 void Credits_OldCarsInit(Object* oldCarsObj) {
 
-    oldCarsObj->unk_18 = func_800792D8(D_i6_8011E558[0]);
+    OBJECT_CACHE_INDEX(oldCarsObj) = func_800792D8(D_i6_8011E558[0]);
 
-    oldCarsObj->unk_04 = 0;
+    OBJECT_STATE(oldCarsObj) = 0;
 
     //! @bug the case where func_800792D8 returns -1 is unhandled
-    D_800E3F28[oldCarsObj->unk_18].unk_04 = -1;
+    D_800E3F28[OBJECT_CACHE_INDEX(oldCarsObj)].unk_04 = -1;
 }
 
 void Credits_CarsInit(Object* carsObj) {
@@ -592,15 +592,15 @@ void Credits_CarsInit(Object* carsObj) {
     for (i = 0; i < ARRAY_COUNT(D_i6_8011FAF0); i++) {
         D_i6_8011FAF0[i] = 0;
     }
-    carsObj->unk_18 = func_800792D8(D_i6_8011E558[0]);
+    OBJECT_CACHE_INDEX(carsObj) = func_800792D8(D_i6_8011E558[0]);
 
     //! @bug the case where func_800792D8 returns -1 is unhandled
-    D_800E3F28[carsObj->unk_18].unk_04 = -1;
+    D_800E3F28[OBJECT_CACHE_INDEX(carsObj)].unk_04 = -1;
 }
 
 void Credits_MenuLadyInit(Object* menuLadyObj) {
     func_80077D50(sCreditsMenuLadyCompTexInfo, 0);
-    menuLadyObj->unk_1C = 0xB6;
+    OBJECT_COUNTER(menuLadyObj) = 0xB6;
 }
 
 void Credits_SeeYouAgainInit(void) {
@@ -609,8 +609,8 @@ void Credits_SeeYouAgainInit(void) {
 
 void Credits_IntroInit(Object* introObj) {
     func_80077D50(sCreditsMrZeroCompTexInfo, 0);
-    introObj->unk_1C = 0x100;
-    introObj->unk_18 = 0;
+    OBJECT_COUNTER(introObj) = 0x100;
+    INTRO_TIMER(introObj) = 0;
 }
 
 void Credits_CopyrightInit(void) {
@@ -619,9 +619,9 @@ void Credits_CopyrightInit(void) {
 
 void Credits_PortraitsInit(Object* portraitsObj) {
 
-    portraitsObj->unk_18 = func_800792D8(D_i6_8011EBF8[0]);
+    OBJECT_CACHE_INDEX(portraitsObj) = func_800792D8(D_i6_8011EBF8[0]);
 
-    D_800E3F28[portraitsObj->unk_18].unk_04 = -1;
+    D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)].unk_04 = -1;
 }
 
 Gfx* Credits_FadeInNameByLetter(Gfx* gfx, Object* startNameObj, bool* wordFadeInProgress, bool isRightJustified) {
@@ -643,10 +643,10 @@ Gfx* Credits_FadeInNameByLetter(Gfx* gfx, Object* startNameObj, bool* wordFadeIn
         i = 0;
     }
 
-    left = startNameObj->left - i;
-    top = startNameObj->top;
+    left = OBJECT_LEFT(startNameObj) - i;
+    top = OBJECT_TOP(startNameObj);
 
-    letterCount = startNameObj->unk_1C / 5;
+    letterCount = OBJECT_COUNTER(startNameObj) / 5;
     if (letterCount >= 23) {
         letterCount = 23;
     }
@@ -660,7 +660,7 @@ Gfx* Credits_FadeInNameByLetter(Gfx* gfx, Object* startNameObj, bool* wordFadeIn
         }
 
         letterStr[1] = '\0';
-        letterCompletion = startNameObj->unk_1C - (i * 5);
+        letterCompletion = OBJECT_COUNTER(startNameObj) - (i * 5);
         if (letterCompletion >= 5) {
             letterCompletion = 5;
         } else {
@@ -683,11 +683,11 @@ Gfx* Credits_FadeInNameByLetter(Gfx* gfx, Object* startNameObj, bool* wordFadeIn
 
 Gfx* Credits_OldCarsDraw(Gfx* gfx, Object* oldCarsObj) {
 
-    if (!D_i6_8011DFA0) {
+    if (!sDebugCreditsOldCars) {
         return gfx;
     }
 
-    return func_80078F80(gfx, &D_800E3F28[oldCarsObj->unk_18], oldCarsObj->left, oldCarsObj->top, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(oldCarsObj)], OBJECT_LEFT(oldCarsObj), OBJECT_TOP(oldCarsObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
 #define UNK_RAND_MACRO(var, x, y) (((Math_Rand1() >> (var % 4)) % x) - y)
@@ -709,16 +709,16 @@ Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
     TexturePtr texture;
     s32 top;
 
-    temp_s1 = &D_800E3F28[carsObj->unk_18];
+    temp_s1 = &D_800E3F28[OBJECT_CACHE_INDEX(carsObj)];
 
-    left = carsObj->left;
-    top = carsObj->top;
+    left = OBJECT_LEFT(carsObj);
+    top = OBJECT_TOP(carsObj);
 
-    if (carsObj->top > 120) {
-        top = carsObj->top - temp_s1->unk_00->unk_00->height;
+    if (OBJECT_TOP(carsObj) > 120) {
+        top = OBJECT_TOP(carsObj) - temp_s1->unk_00->unk_00->height;
     }
 
-    sp154 = carsObj->unk_1C;
+    sp154 = OBJECT_COUNTER(carsObj);
     if (sp154 > 64) {
         sp154 = 64;
     }
@@ -726,7 +726,7 @@ Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
     width = temp_s1->unk_00->unk_00->width;
     height = temp_s1->unk_00->unk_00->height;
 
-    switch (carsObj->unk_08) {
+    switch (OBJECT_STATE2(carsObj)) {
         case 0:
 
             if (temp_s1->unk_0A == 0) {
@@ -770,7 +770,7 @@ Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
             }
             break;
         case 1:
-            gfx = func_80078F80(gfx, temp_s1, carsObj->left, top, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, temp_s1, OBJECT_LEFT(carsObj), top, 0, 0, 0, 1.0f, 1.0f);
             break;
         case 2:
             if (sp154 < 5) {
@@ -780,7 +780,7 @@ Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
                 additionalWidth = (width * (1.0f - var_fv1)) / 2;
                 additionalHeight = (height * (1.0f - var_fv1)) / 2;
 
-                gfx = func_80078F80(gfx, temp_s1, carsObj->left + additionalWidth, top + additionalHeight, 4, 0, 0,
+                gfx = func_80078F80(gfx, temp_s1, OBJECT_LEFT(carsObj) + additionalWidth, top + additionalHeight, 4, 0, 0,
                                     var_fv1, var_fv1);
             } else {
                 if (temp_s1->unk_0A == 0) {
@@ -837,24 +837,24 @@ Gfx* Credits_MenuLadyDraw(Gfx* gfx, Object* menuLadyObj) {
     s32 row;
     s32 var_a0;
     s32 var_a1;
-    s32 spB0;
-    s32 var_s1;
+    s32 left;
+    s32 top;
     s32 alpha;
     s32 var_t5;
     TexturePtr texture;
 
     texture = func_800783AC(aCreditsMenuLadyTex);
-    spB0 = menuLadyObj->left;
-    var_s1 = menuLadyObj->top;
+    left = OBJECT_LEFT(menuLadyObj);
+    top = OBJECT_TOP(menuLadyObj);
 
     gSPDisplayList(gfx++, D_3000088);
 
     for (row = 0; row < 182; row++) {
         var_t5 = 0;
 
-        switch (menuLadyObj->unk_04) {
+        switch (OBJECT_STATE(menuLadyObj)) {
             case 0:
-                alpha = row - menuLadyObj->unk_1C;
+                alpha = row - OBJECT_COUNTER(menuLadyObj);
                 if (alpha < 0) {
                     alpha = -alpha;
                 }
@@ -878,7 +878,7 @@ Gfx* Credits_MenuLadyDraw(Gfx* gfx, Object* menuLadyObj) {
                 break;
             case 2:
                 var_a1 = row - 0x17;
-                var_a0 = menuLadyObj->unk_1C - 0x17;
+                var_a0 = OBJECT_COUNTER(menuLadyObj) - 23;
                 if (var_a0 < 0) {
                     var_a0 = -var_a0;
                 }
@@ -899,9 +899,9 @@ Gfx* Credits_MenuLadyDraw(Gfx* gfx, Object* menuLadyObj) {
                 break;
             case 4:
                 alpha = 255;
-                if (menuLadyObj->unk_08 != 0) {
+                if (MENU_LADY_DITHER_SCALE(menuLadyObj) != 0) {
                     var_a0 = UNK_RAND_MACRO(row, 7, 3);
-                    var_t5 = (s32) ((0x20 - menuLadyObj->unk_08) * var_a0) / 32;
+                    var_t5 = ((32 - MENU_LADY_DITHER_SCALE(menuLadyObj)) * var_a0) / 32;
                 }
                 break;
             default:
@@ -913,14 +913,14 @@ Gfx* Credits_MenuLadyDraw(Gfx* gfx, Object* menuLadyObj) {
         gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 1 /* unused by macro */, 0, row, 80,
                            row + 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                            G_TX_NOLOD, G_TX_NOLOD);
-        gSPScisTextureRectangle(gfx++, (spB0 + var_t5) << 2, (var_s1 + row) << 2, (spB0 + var_t5 + 80) << 2,
-                                (var_s1 + row + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
-        gSPScisTextureRectangle(gfx++, ((SCREEN_WIDTH - 80 - spB0) + var_t5) << 2, (var_s1 + row) << 2,
-                                ((SCREEN_WIDTH - spB0) + var_t5) << 2, (var_s1 + row + 1) << 2, 0, 0x9E0, 0, 0xFC00,
+        gSPScisTextureRectangle(gfx++, (left + var_t5) << 2, (top + row) << 2, (left + var_t5 + 80) << 2,
+                                (top + row + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+        gSPScisTextureRectangle(gfx++, ((SCREEN_WIDTH - 80 - left) + var_t5) << 2, (top + row) << 2,
+                                ((SCREEN_WIDTH - left) + var_t5) << 2, (top + row + 1) << 2, 0, 0x9E0, 0, 0xFC00,
                                 1 << 10);
     }
 
-    menuLadyObj->unk_08 = 0;
+    MENU_LADY_DITHER_SCALE(menuLadyObj) = 0;
 
     return gfx;
 }
@@ -933,28 +933,28 @@ Gfx* Credits_SeeYouAgainDraw(Gfx* gfx, Object* seeYouAgainObj) {
     s32 var_s5;
     TexturePtr texture;
 
-    seeYouAgainObj->unk_1C++;
+    OBJECT_COUNTER(seeYouAgainObj)++;
     texture = func_800783AC(aCreditsSeeYouAgainTex);
-    sp50 = seeYouAgainObj->left;
-    var_s5 = seeYouAgainObj->top;
+    sp50 = OBJECT_LEFT(seeYouAgainObj);
+    var_s5 = OBJECT_TOP(seeYouAgainObj);
 
     gSPDisplayList(gfx++, D_3000088);
 
-    if (seeYouAgainObj->unk_04 == 1) {
+    if (OBJECT_STATE(seeYouAgainObj) == 1) {
         gDPSetAlphaCompare(gfx++, G_AC_DITHER);
     }
 
     for (row = 0; row < 64; row++) {
-        switch (seeYouAgainObj->unk_04) {
+        switch (OBJECT_STATE(seeYouAgainObj)) {
             case 0:
                 var_s2 = UNK_RAND_MACRO(row, 11, 5);
-                if (seeYouAgainObj->unk_1C < 64) {
-                    var_s2 = (s32) ((64 - seeYouAgainObj->unk_1C) * var_s2) / 64;
+                if (OBJECT_COUNTER(seeYouAgainObj) < 64) {
+                    var_s2 = (s32) ((64 - OBJECT_COUNTER(seeYouAgainObj)) * var_s2) / 64;
                 } else {
                     var_s2 = 0;
                 }
-                if (seeYouAgainObj->unk_1C < 6) {
-                    alpha = seeYouAgainObj->unk_1C * 50;
+                if (OBJECT_COUNTER(seeYouAgainObj) < 6) {
+                    alpha = OBJECT_COUNTER(seeYouAgainObj) * 50;
                 } else {
                     alpha = 255;
                 }
@@ -963,17 +963,17 @@ Gfx* Credits_SeeYouAgainDraw(Gfx* gfx, Object* seeYouAgainObj) {
 
                 var_s2 = UNK_RAND_MACRO(row, 7, 3);
 
-                if (seeYouAgainObj->unk_1C < 32) {
-                    var_s2 = ((32 - seeYouAgainObj->unk_1C) * var_s2) / 32;
-                    Object_Get(OBJECT_CREDITS_MENU_LADY)->unk_08 = seeYouAgainObj->unk_1C;
+                if (OBJECT_COUNTER(seeYouAgainObj) < 32) {
+                    var_s2 = ((32 - OBJECT_COUNTER(seeYouAgainObj)) * var_s2) / 32;
+                    MENU_LADY_DITHER_SCALE(Object_Get(OBJECT_CREDITS_MENU_LADY)) = OBJECT_COUNTER(seeYouAgainObj);
                 } else {
                     var_s2 = 0;
                 }
-                if (seeYouAgainObj->unk_1C < 20) {
-                    if (seeYouAgainObj->unk_1C < 10) {
-                        alpha = 255 - (seeYouAgainObj->unk_1C * 10);
+                if (OBJECT_COUNTER(seeYouAgainObj) < 20) {
+                    if (OBJECT_COUNTER(seeYouAgainObj) < 10) {
+                        alpha = 255 - (OBJECT_COUNTER(seeYouAgainObj) * 10);
                     } else {
-                        alpha = (seeYouAgainObj->unk_1C * 10) + 55;
+                        alpha = (OBJECT_COUNTER(seeYouAgainObj) * 10) + 55;
                     }
                 } else {
                     alpha = 255;
@@ -1018,8 +1018,8 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
                            row + 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                            G_TX_NOLOD, G_TX_NOLOD);
 
-        if (introObj->unk_08 != 0) {
-            temp_a0 = introObj->unk_20;
+        if (OBJECT_STATE2(introObj) != 0) {
+            temp_a0 = OBJECT_COUNTER2(introObj);
             var_t2 = 255 - temp_a0;
             temp = ((((row * 0x1000) * (temp_a0 + 64)) / 64) / 72);
             temp_t1 = ((SIN(temp) * (temp_a0 + 4)) / 4);
@@ -1029,8 +1029,8 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
             gSPScisTextureRectangle(gfx++, temp << 2, (row + var) << 2, (temp + 80) << 2, (row + var + 1) << 2, 0, 0, 0,
                                     1 << 10, 1 << 10);
         }
-        if (introObj->unk_04 != 0) {
-            temp_a0 = introObj->unk_1C;
+        if (OBJECT_STATE(introObj) != 0) {
+            temp_a0 = OBJECT_COUNTER(introObj);
             var_t2 = 255 - temp_a0;
             temp = ((((row * 0x1000) * (temp_a0 + 64)) / 64) / 72);
             temp_t1 = ((SIN(temp) * (temp_a0 + 4)) / 4);
@@ -1040,8 +1040,8 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
         }
     }
 
-    if (introObj->unk_18 > 290) {
-        var_t2 = 0xA10 - (introObj->unk_18 * 8);
+    if (INTRO_TIMER(introObj) > 290) {
+        var_t2 = 0xA10 - (INTRO_TIMER(introObj) * 8);
         if (var_t2 > 255) {
             var_t2 = 255;
         }
@@ -1059,13 +1059,13 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
         gfx = Font_DrawScaledString(gfx,
                                     (s32) (160.0f - (((f32) Font_GetStringWidth("staff", FONT_SET_1, 0) * scale) / 2)),
                                     D_i6_8011DFAC + D_i6_8011DFB4, "staff", 0, FONT_SET_1, 1, scale, scale);
-    } else if (introObj->unk_18 > 120) {
-        var_t2 = (introObj->unk_18 * 3) - 0x168;
+    } else if (INTRO_TIMER(introObj) > 120) {
+        var_t2 = (INTRO_TIMER(introObj) * 3) - 0x168;
         if (var_t2 > 255) {
             var_t2 = 255;
         }
 
-        scale = (f32) (628 - (introObj->unk_18 * 2)) / 192.0f;
+        scale = (f32) (628 - (INTRO_TIMER(introObj) * 2)) / 192.0f;
 
         if (scale < 1.0) {
             scale = 1.0f;
@@ -1093,16 +1093,16 @@ Gfx* Credits_CopyrightDraw(Gfx* gfx, Object* copyRightObj) {
     s32 row;
     TexturePtr texture;
 
-    copyRightObj->unk_1C++;
+    OBJECT_COUNTER(copyRightObj)++;
     texture = func_800783AC(aCopyrightTex);
-    var_s2 = copyRightObj->top;
-    temp_s7 = copyRightObj->left;
+    var_s2 = OBJECT_TOP(copyRightObj);
+    temp_s7 = OBJECT_LEFT(copyRightObj);
     gSPDisplayList(gfx++, D_3000088);
 
     for (row = 0; row < 14; row++) {
         var_a2 = UNK_RAND_MACRO(row, 11, 5);
-        if (copyRightObj->unk_1C < 32) {
-            var_a2 = ((32 - copyRightObj->unk_1C) * var_a2) / 32;
+        if (OBJECT_COUNTER(copyRightObj) < 32) {
+            var_a2 = ((32 - OBJECT_COUNTER(copyRightObj)) * var_a2) / 32;
         } else {
             var_a2 = 0;
         }
@@ -1121,22 +1121,22 @@ Gfx* Credits_PortraitsDraw(Gfx* gfx, Object* portraitsObj) {
     s32 pad[14];
     unk_800E3F28* sp34;
     s32 temp_v1;
-    s32 var_a2;
-    s32 temp;
+    s32 left;
+    s32 carLeftPos;
 
-    sp34 = &D_800E3F28[portraitsObj->unk_18];
-    temp_v1 = portraitsObj->unk_1C;
-    temp = D_i6_8011F4DC[(portraitsObj->unk_20 % 4) * 2];
+    sp34 = &D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)];
+    temp_v1 = OBJECT_COUNTER(portraitsObj);
+    carLeftPos = kCreditsCarPositions[(PORTRAIT_CAR_NUMBER(portraitsObj) % 4) * 2];
 
-    if (temp < 100) {
-        var_a2 = SCREEN_WIDTH - (temp_v1 / 1.2);
+    if (carLeftPos < 100) {
+        left = SCREEN_WIDTH - (temp_v1 / 1.2);
     } else {
-        var_a2 = (temp_v1 / 1.2) - 180;
+        left = (temp_v1 / 1.2) - 180;
     }
 
-    if (portraitsObj->unk_08 == 0) {
+    if (OBJECT_STATE2(portraitsObj) == 0) {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255 - temp_v1);
-        gfx = func_80078F80(gfx, sp34, var_a2, -5, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078F80(gfx, sp34, left, -5, 1, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
@@ -1154,12 +1154,12 @@ Gfx* Credits_StartRolesDraw(Gfx* gfx, Object* startRolesObj) {
     switch (roleIndex % 4) {
         case 0:
         case 3:
-            gfx = Font_DrawString(gfx, startRolesObj->left + 1, startRolesObj->top + 1, roleName, 0, FONT_SET_6, 0);
+            gfx = Font_DrawString(gfx, OBJECT_LEFT(startRolesObj) + 1, OBJECT_TOP(startRolesObj) + 1, roleName, 0, FONT_SET_6, 0);
             break;
         case 1:
         case 2:
-            gfx = Font_DrawString(gfx, (startRolesObj->left - Font_GetStringWidth(roleName, FONT_SET_6, 0)) + 1,
-                                  startRolesObj->top + 1, roleName, 0, FONT_SET_6, 0);
+            gfx = Font_DrawString(gfx, (OBJECT_LEFT(startRolesObj) - Font_GetStringWidth(roleName, FONT_SET_6, 0)) + 1,
+                                  OBJECT_TOP(startRolesObj) + 1, roleName, 0, FONT_SET_6, 0);
             break;
     }
 
@@ -1168,12 +1168,12 @@ Gfx* Credits_StartRolesDraw(Gfx* gfx, Object* startRolesObj) {
     switch (roleIndex % 4) {
         case 0:
         case 3:
-            gfx = Font_DrawString(gfx, startRolesObj->left, startRolesObj->top, roleName, 0, FONT_SET_6, 0);
+            gfx = Font_DrawString(gfx, OBJECT_LEFT(startRolesObj), OBJECT_TOP(startRolesObj), roleName, 0, FONT_SET_6, 0);
             break;
         case 1:
         case 2:
-            gfx = Font_DrawString(gfx, startRolesObj->left - Font_GetStringWidth(roleName, FONT_SET_6, 0),
-                                  startRolesObj->top, roleName, 0, FONT_SET_6, 0);
+            gfx = Font_DrawString(gfx, OBJECT_LEFT(startRolesObj) - Font_GetStringWidth(roleName, FONT_SET_6, 0),
+                                  OBJECT_TOP(startRolesObj), roleName, 0, FONT_SET_6, 0);
             break;
     }
 
@@ -1187,10 +1187,10 @@ Gfx* Credits_EndRolesDraw(Gfx* gfx, Object* endRolesObj) {
     roleName = gCreditsAttributions[roleIndex];
 
     gDPSetPrimColor(gfx++, 0, 0, 24, 24, 24, 255);
-    gfx = Font_DrawString(gfx, endRolesObj->left + 1, endRolesObj->top + 1, roleName, 0, FONT_SET_6, 0);
+    gfx = Font_DrawString(gfx, OBJECT_LEFT(endRolesObj) + 1, OBJECT_TOP(endRolesObj) + 1, roleName, 0, FONT_SET_6, 0);
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-    gfx = Font_DrawString(gfx, endRolesObj->left, endRolesObj->top, roleName, 0, FONT_SET_6, 0);
+    gfx = Font_DrawString(gfx, OBJECT_LEFT(endRolesObj), OBJECT_TOP(endRolesObj), roleName, 0, FONT_SET_6, 0);
 
     return gfx;
 }
@@ -1205,7 +1205,7 @@ Gfx* Credits_StartNameDraw(Gfx* gfx, Object* startNameObj) {
     temp_v1 = startNameObj->cmdId - OBJECT_CREDITS_NAME_0;
     temp_a3 = gCreditsNames[temp_v1];
 
-    switch (startNameObj->unk_04) {
+    switch (OBJECT_STATE(startNameObj)) {
         case 0:
             wordFadeInProgress = false;
             switch (temp_v1 % 4) {
@@ -1219,7 +1219,7 @@ Gfx* Credits_StartNameDraw(Gfx* gfx, Object* startNameObj) {
                     break;
             }
             if (!wordFadeInProgress) {
-                startNameObj->unk_04 = 1;
+                OBJECT_STATE(startNameObj) = 1;
             }
             break;
         case 1:
@@ -1227,12 +1227,12 @@ Gfx* Credits_StartNameDraw(Gfx* gfx, Object* startNameObj) {
             switch (temp_v1 % 4) {
                 case 0:
                 case 3:
-                    gfx = Font_DrawString(gfx, startNameObj->left, startNameObj->top, temp_a3, 0, FONT_SET_1, 0);
+                    gfx = Font_DrawString(gfx, OBJECT_LEFT(startNameObj), OBJECT_TOP(startNameObj), temp_a3, 0, FONT_SET_1, 0);
                     break;
                 case 1:
                 case 2:
-                    gfx = Font_DrawString(gfx, startNameObj->left - Font_GetStringWidth(temp_a3, FONT_SET_1, 0),
-                                          startNameObj->top, temp_a3, 0, FONT_SET_1, 0);
+                    gfx = Font_DrawString(gfx, OBJECT_LEFT(startNameObj) - Font_GetStringWidth(temp_a3, FONT_SET_1, 0),
+                                          OBJECT_TOP(startNameObj), temp_a3, 0, FONT_SET_1, 0);
                     break;
             }
             break;
@@ -1244,7 +1244,7 @@ Gfx* Credits_EndNameDraw(Gfx* gfx, Object* endNamesObj) {
     s32 index = endNamesObj->cmdId - OBJECT_CREDITS_NAME_0;
     char* temp = gCreditsNames[index];
 
-    return Font_DrawString(gfx, endNamesObj->left, endNamesObj->top, temp, 0, FONT_SET_1, 0);
+    return Font_DrawString(gfx, OBJECT_LEFT(endNamesObj), OBJECT_TOP(endNamesObj), temp, 0, FONT_SET_1, 0);
 }
 
 extern u16 gInputPressed;
@@ -1253,72 +1253,72 @@ void Credits_OldCarsUpdate(Object* oldCarsObj) {
     s32 var_v1;
     unk_800E3F28* temp_v0;
 
-    temp_v0 = &D_800E3F28[oldCarsObj->unk_18];
+    temp_v0 = &D_800E3F28[OBJECT_CACHE_INDEX(oldCarsObj)];
     var_v1 = 0;
     if (temp_v0->unk_04 == -1) {
         temp_v0->unk_04 = 0;
-        oldCarsObj->unk_04 = 0;
+        OBJECT_STATE(oldCarsObj) = 0;
         var_v1 = 1;
     }
-    if (D_i6_8011DFA0) {
+    if (sDebugCreditsOldCars) {
         if (gInputPressed & BTN_LEFT) {
             func_800BA8D8(30);
-            if (oldCarsObj->unk_04 != 0) {
-                oldCarsObj->unk_04--;
+            if (OBJECT_STATE(oldCarsObj) != 0) {
+                OBJECT_STATE(oldCarsObj)--;
             } else {
-                oldCarsObj->unk_04 = 29;
+                OBJECT_STATE(oldCarsObj) = 29;
             }
             var_v1++;
         }
 
         if (gInputPressed & BTN_RIGHT) {
             func_800BA8D8(30);
-            oldCarsObj->unk_04++;
-            oldCarsObj->unk_04 = oldCarsObj->unk_04 % 30;
+            OBJECT_STATE(oldCarsObj)++;
+            OBJECT_STATE(oldCarsObj) = OBJECT_STATE(oldCarsObj) % 30;
             var_v1++;
         }
     }
     if (var_v1 != 0) {
-        func_800793E8(oldCarsObj->unk_18, 0, D_i6_8011E560[oldCarsObj->unk_04]);
+        func_800793E8(OBJECT_CACHE_INDEX(oldCarsObj), 0, D_i6_8011E560[OBJECT_STATE(oldCarsObj)]);
     }
 }
 
 void Credits_CarsUpdate(Object* carsObj) {
-    s32 pad;
+    Object* scriptObj;
     s32 var_a2;
     s32 var_v1;
-    Object* temp_v0_2;
+    Object* portraitsObj;
 
     var_a2 = 0;
 
-    carsObj->left = D_i6_8011F4DC[(carsObj->unk_20 % 4) * 2 + 0];
-    carsObj->top = D_i6_8011F4DC[(carsObj->unk_20 % 4) * 2 + 1];
-    switch (carsObj->unk_08) {
+    OBJECT_LEFT(carsObj) = kCreditsCarPositions[(CAR_NUMBER(carsObj) % 4) * 2 + 0];
+    OBJECT_TOP(carsObj) = kCreditsCarPositions[(CAR_NUMBER(carsObj) % 4) * 2 + 1];
+    switch (OBJECT_STATE2(carsObj)) {
         case 0:
-            if (++carsObj->unk_1C >= 64) {
-                carsObj->unk_08 = 1;
+            if (++OBJECT_COUNTER(carsObj) >= 64) {
+                OBJECT_STATE2(carsObj) = 1;
             }
             break;
         case 1:
-            carsObj->unk_1C = 0;
+            OBJECT_COUNTER(carsObj) = 0;
             break;
         case 2:
-            if (++carsObj->unk_1C >= 64) {
-                carsObj->unk_08 = 3;
-                carsObj->unk_1C = 0;
-                temp_v0_2 = Object_Get(OBJECT_CREDITS_SCRIPT);
+            if (++OBJECT_COUNTER(carsObj) >= 64) {
+                OBJECT_STATE2(carsObj) = 3;
+                OBJECT_COUNTER(carsObj) = 0;
+                scriptObj = Object_Get(OBJECT_CREDITS_SCRIPT);
                 var_a2 = 0;
-                if (temp_v0_2 != NULL) {
-                    temp_v0_2->unk_08 = 2;
+                if (scriptObj != NULL) {
+                    OBJECT_STATE2(scriptObj) = 2;
                 }
             }
             break;
         case 3:
-            if (carsObj->unk_1C != 0) {
-                carsObj->unk_08 = 0;
-                carsObj->unk_20++;
+            if (OBJECT_COUNTER(carsObj) != 0) {
+                OBJECT_STATE2(carsObj) = 0;
+                CAR_NUMBER(carsObj)++;
                 var_v1 = 0;
-                if ((carsObj->unk_20 == 5) && (D_i6_8011FAF0[9] == 0)) {
+                if ((CAR_NUMBER(carsObj) == 5) && (D_i6_8011FAF0[9] == 0)) {
                     var_a2 = 9;
                     D_i6_8011FAF0[9] = 1;
                     var_v1 = 1;
@@ -1345,24 +1345,24 @@ void Credits_CarsUpdate(Object* carsObj) {
                     }
                 }
             label:
-                carsObj->unk_04 = var_a2;
+                OBJECT_STATE(carsObj) = var_a2;
                 var_a2 = 1;
-                temp_v0_2 = Object_Get(OBJECT_CREDITS_PORTRAITS);
-                if ((temp_v0_2 != NULL) && (temp_v0_2->unk_08 == 3)) {
-                    temp_v0_2->unk_1C = 1;
+                portraitsObj = Object_Get(OBJECT_CREDITS_PORTRAITS);
+                if ((portraitsObj != NULL) && (OBJECT_STATE2(portraitsObj) == 3)) {
+                    OBJECT_COUNTER(portraitsObj) = 1;
                 }
             }
             break;
     }
 
-    if (D_800E3F28[carsObj->unk_18].unk_04 == -1) {
-        D_800E3F28[carsObj->unk_18].unk_04 = 0;
-        carsObj->unk_04 = Math_Rand1() % 30;
-        D_i6_8011FAF0[carsObj->unk_04] = 1;
+    if (D_800E3F28[OBJECT_CACHE_INDEX(carsObj)].unk_04 == -1) {
+        D_800E3F28[OBJECT_CACHE_INDEX(carsObj)].unk_04 = 0;
+        OBJECT_STATE(carsObj) = Math_Rand1() % 30;
+        D_i6_8011FAF0[OBJECT_STATE(carsObj)] = 1;
         var_a2++;
     }
     if (var_a2 != 0) {
-        func_800793E8(carsObj->unk_18, 0, D_i6_8011E560[carsObj->unk_04]);
+        func_800793E8(OBJECT_CACHE_INDEX(carsObj), 0, D_i6_8011E560[OBJECT_STATE(carsObj)]);
     }
 }
 
@@ -1370,43 +1370,43 @@ void Credits_PortraitsUpdate(Object* portraitsObj) {
     s32 pad;
     s32 var_v1 = 0;
 
-    switch (portraitsObj->unk_08) {
+    switch (OBJECT_STATE2(portraitsObj)) {
         case 0:
-            if (++portraitsObj->unk_1C >= 255) {
-                portraitsObj->unk_1C = 0;
-                portraitsObj->unk_08 = 3;
+            if (++OBJECT_COUNTER(portraitsObj) >= 255) {
+                OBJECT_COUNTER(portraitsObj) = 0;
+                OBJECT_STATE2(portraitsObj) = 3;
             }
             break;
         case 3:
-            if (portraitsObj->unk_1C != 0) {
-                portraitsObj->unk_08 = 0;
-                portraitsObj->unk_20++;
-                portraitsObj->unk_04 = Object_Get(OBJECT_CREDITS_CARS)->unk_04;
+            if (OBJECT_COUNTER(portraitsObj) != 0) {
+                OBJECT_STATE2(portraitsObj) = 0;
+                PORTRAIT_CAR_NUMBER(portraitsObj)++;
+                OBJECT_STATE(portraitsObj) = OBJECT_STATE(Object_Get(OBJECT_CREDITS_CARS));
                 var_v1 = 1;
-                portraitsObj->unk_1C = 0;
+                OBJECT_COUNTER(portraitsObj) = 0;
             }
             break;
     }
 
-    if (D_800E3F28[portraitsObj->unk_18].unk_04 == -1) {
-        D_800E3F28[portraitsObj->unk_18].unk_04 = 0;
-        portraitsObj->unk_04 = Object_Get(OBJECT_CREDITS_CARS)->unk_04;
+    if (D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)].unk_04 == -1) {
+        D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)].unk_04 = 0;
+        OBJECT_STATE(portraitsObj) = OBJECT_STATE(Object_Get(OBJECT_CREDITS_CARS));
         var_v1++;
     }
     if (var_v1 != 0) {
-        func_800793E8(portraitsObj->unk_18, 0, D_i6_8011EBF8[portraitsObj->unk_04]);
+        func_800793E8(OBJECT_CACHE_INDEX(portraitsObj), 0, D_i6_8011EBF8[OBJECT_STATE(portraitsObj)]);
     }
 }
 
 bool Object_MovePosXAndCheckTarget(Object* object, s32 step, s32 target) {
 
-    object->left += step;
+    OBJECT_LEFT(object) += step;
     if (step < 0) {
-        if (target >= object->left) {
+        if (target >= OBJECT_LEFT(object)) {
             return true;
         }
     } else {
-        if (object->left >= target) {
+        if (OBJECT_LEFT(object) >= target) {
             return true;
         }
     }
@@ -1415,13 +1415,13 @@ bool Object_MovePosXAndCheckTarget(Object* object, s32 step, s32 target) {
 
 bool Object_MovePosYAndCheckTarget(Object* object, s32 step, s32 target) {
 
-    object->top += step;
+    OBJECT_TOP(object) += step;
     if (step < 0) {
-        if (target >= object->top) {
+        if (target >= OBJECT_TOP(object)) {
             return true;
         }
     } else {
-        if (object->top >= target) {
+        if (OBJECT_TOP(object) >= target) {
             return true;
         }
     }
@@ -1436,13 +1436,13 @@ bool Object_OnIntervalMovePosYAndCheckTarget(Object* object, s32 step, s32 targe
         return false;
     }
 
-    object->top += step;
+    OBJECT_TOP(object) += step;
     if (step < 0) {
-        if (target >= object->top) {
+        if (target >= OBJECT_TOP(object)) {
             return true;
         }
     } else {
-        if (object->top >= target) {
+        if (OBJECT_TOP(object) >= target) {
             return true;
         }
     }
@@ -1452,64 +1452,64 @@ bool Object_OnIntervalMovePosYAndCheckTarget(Object* object, s32 step, s32 targe
 void Credits_ObjectInit(s32 cmdId, s32 left, s32 top, s8 priority);
 
 void Credits_ScriptUpdate(Object* scriptObj) {
-    s32 temp_a0;
+    s32 objId;
     s32 index;
-    Object* temp_v0_4;
+    Object* carsObj;
 
-    scriptObj->unk_1C++;
-    if (scriptObj->unk_04 < 18) {
-        switch (scriptObj->unk_08) {
+    OBJECT_COUNTER(scriptObj)++;
+    if (OBJECT_STATE(scriptObj) < 18) {
+        switch (OBJECT_STATE2(scriptObj)) {
             case 0:
-                switch (scriptObj->unk_1C) {
-                    case 0x1:
-                        Credits_ObjectInit(OBJECT_CREDITS_ROLE_0 + scriptObj->unk_04,
-                                           kStartRolesInitialPositions[(scriptObj->unk_04 % 4) * 2 + 0],
-                                           kStartRolesInitialPositions[(scriptObj->unk_04 % 4) * 2 + 1], 12);
-                        temp_v0_4 = Object_Get(OBJECT_CREDITS_CARS);
-                        if ((temp_v0_4 != NULL) && (temp_v0_4->unk_08 == 3)) {
-                            temp_v0_4->unk_1C++;
+                switch (OBJECT_COUNTER(scriptObj)) {
+                    case 1:
+                        Credits_ObjectInit(OBJECT_CREDITS_ROLE_0 + OBJECT_STATE(scriptObj),
+                                           kStartRolesInitialPositions[(OBJECT_STATE(scriptObj) % 4) * 2 + 0],
+                                           kStartRolesInitialPositions[(OBJECT_STATE(scriptObj) % 4) * 2 + 1], 12);
+                        carsObj = Object_Get(OBJECT_CREDITS_CARS);
+                        if ((carsObj != NULL) && (OBJECT_STATE2(carsObj) == 3)) {
+                            OBJECT_COUNTER(carsObj)++;
                         }
                         break;
-                    case 0x3C:
-                        Credits_ObjectInit(OBJECT_CREDITS_NAME_0 + scriptObj->unk_04,
-                                           kStartNamesInitialPositions[(scriptObj->unk_04 % 4) * 2 + 0],
-                                           kStartNamesInitialPositions[(scriptObj->unk_04 % 4) * 2 + 1], 10);
-                        scriptObj->unk_08 = 1;
+                    case 60:
+                        Credits_ObjectInit(OBJECT_CREDITS_NAME_0 + OBJECT_STATE(scriptObj),
+                                           kStartNamesInitialPositions[(OBJECT_STATE(scriptObj) % 4) * 2 + 0],
+                                           kStartNamesInitialPositions[(OBJECT_STATE(scriptObj) % 4) * 2 + 1], 10);
+                        OBJECT_STATE2(scriptObj) = 1;
                         break;
                 }
                 break;
             case 1:
-                scriptObj->unk_1C = 0;
+                OBJECT_COUNTER(scriptObj) = 0;
                 break;
             case 2:
-                if (scriptObj->unk_1C > 30) {
-                    scriptObj->unk_04++;
-                    scriptObj->unk_08 = 0;
-                    scriptObj->unk_1C = 0;
+                if (OBJECT_COUNTER(scriptObj) > 30) {
+                    OBJECT_STATE(scriptObj)++;
+                    OBJECT_STATE2(scriptObj) = 0;
+                    OBJECT_COUNTER(scriptObj) = 0;
                 }
                 break;
         }
     } else {
-        switch (scriptObj->unk_04) {
+        switch (OBJECT_STATE(scriptObj)) {
             case 18:
-                if ((scriptObj->unk_1C % 15) == 0) {
-                    index = scriptObj->unk_1C / 15;
-                    temp_a0 = kCreditsObjectScrollScript[index - 1];
-                    if (temp_a0 > 0) {
-                        Credits_ObjectInit(temp_a0, 50, 240, 0xA);
-                    } else if (temp_a0 < 0) {
-                        scriptObj->unk_04++;
+                if ((OBJECT_COUNTER(scriptObj) % 15) == 0) {
+                    index = OBJECT_COUNTER(scriptObj) / 15;
+                    objId = kCreditsObjectScrollScript[index - 1];
+                    if (objId > 0) {
+                        Credits_ObjectInit(objId, 50, 240, 10);
+                    } else if (objId < 0) {
+                        OBJECT_STATE(scriptObj)++;
                     }
                 }
                 break;
             case 19:
                 if (Object_Get(OBJECT_CREDITS_NAME_30) == NULL) {
-                    scriptObj->unk_04++;
+                    OBJECT_STATE(scriptObj)++;
                 }
                 break;
             case 20:
                 Credits_ObjectInit(OBJECT_CREDITS_MENU_LADY, 200, 30, 8);
-                scriptObj->unk_04++;
+                OBJECT_STATE(scriptObj)++;
                 break;
             case 21:
                 scriptObj->cmdId = OBJECT_FREE;
@@ -1523,11 +1523,11 @@ void Credits_ScriptUpdate(Object* scriptObj) {
 void Credits_StartRoleUpdate(Object* startRoleObj) {
     s32 pad[2];
     s32 roleIndex;
-    s32 sp28;
-    s32 var_a2;
-    s32 var_a1;
+    s32 initialStep;
+    s32 targetTop;
+    s32 step;
     char* roleName;
-    Object* temp_v0_3;
+    Object* carsObj;
 
     roleIndex = startRoleObj->cmdId - OBJECT_CREDITS_ROLE_0;
     roleName = gCreditsAttributions[roleIndex];
@@ -1535,46 +1535,46 @@ void Credits_StartRoleUpdate(Object* startRoleObj) {
     switch (roleIndex % 4) {
         case 0:
         case 3:
-            sp28 = -1;
+            initialStep = -1;
             break;
         case 1:
         case 2:
-            sp28 = 1;
+            initialStep = 1;
             break;
     }
 
     if (roleIndex % 2) {
-        var_a2 = 150;
-        var_a1 = 1;
+        targetTop = 150;
+        step = 1;
     } else {
-        var_a2 = 70;
-        var_a1 = -1;
+        targetTop = 70;
+        step = -1;
     }
 
-    switch (startRoleObj->unk_04) {
+    switch (OBJECT_STATE(startRoleObj)) {
         case 0:
-            if (Object_MovePosYAndCheckTarget(startRoleObj, var_a1, var_a2)) {
-                startRoleObj->unk_04 = 1;
-                startRoleObj->unk_1C = 0;
+            if (Object_MovePosYAndCheckTarget(startRoleObj, step, targetTop)) {
+                OBJECT_STATE(startRoleObj) = 1;
+                OBJECT_COUNTER(startRoleObj) = 0;
             }
             break;
         case 1:
-            if (++startRoleObj->unk_1C > 120) {
-                startRoleObj->unk_04 = 2;
-                temp_v0_3 = Object_Get(OBJECT_CREDITS_CARS);
-                if ((temp_v0_3 != NULL) && (temp_v0_3->unk_08 == 1)) {
-                    temp_v0_3->unk_08 = 2;
+            if (++OBJECT_COUNTER(startRoleObj) > 120) {
+                OBJECT_STATE(startRoleObj) = 2;
+                carsObj = Object_Get(OBJECT_CREDITS_CARS);
+                if ((carsObj != NULL) && (OBJECT_STATE2(carsObj) == 1)) {
+                    OBJECT_STATE2(carsObj) = 2;
                 }
             }
             break;
         case 2:
-            Object_LerpAwayFromPosX(startRoleObj, kStartRolesInitialPositions[(roleIndex % 4) * 2], sp28);
-            if (sp28 < 0) {
-                if (startRoleObj->left < -Font_GetStringWidth(roleName, FONT_SET_1, 0)) {
+            Object_LerpAwayFromPosX(startRoleObj, kStartRolesInitialPositions[(roleIndex % 4) * 2], initialStep);
+            if (initialStep < 0) {
+                if (OBJECT_LEFT(startRoleObj) < -Font_GetStringWidth(roleName, FONT_SET_1, 0)) {
                     startRoleObj->cmdId = OBJECT_FREE;
                 }
             } else {
-                if ((Font_GetStringWidth(roleName, FONT_SET_1, 0) + SCREEN_WIDTH) < startRoleObj->left) {
+                if ((Font_GetStringWidth(roleName, FONT_SET_1, 0) + SCREEN_WIDTH) < OBJECT_LEFT(startRoleObj)) {
                     startRoleObj->cmdId = OBJECT_FREE;
                 }
             }
@@ -1605,23 +1605,23 @@ void Credits_StartNameUpdate(Object* startNameObj) {
             break;
     }
 
-    switch (startNameObj->unk_04) {
+    switch (OBJECT_STATE(startNameObj)) {
         case 0:
-            startNameObj->unk_1C++;
+            OBJECT_COUNTER(startNameObj)++;
             break;
         case 1:
-            if (Object_Get(OBJECT_CREDITS_ROLE_0 + nameIndex)->unk_04 >= 2) {
-                startNameObj->unk_04 = 2;
+            if (OBJECT_STATE(Object_Get(OBJECT_CREDITS_ROLE_0 + nameIndex)) >= 2) {
+                OBJECT_STATE(startNameObj) = 2;
             }
             break;
         case 2:
             Object_LerpAwayFromPosX(startNameObj, kStartNamesInitialPositions[(nameIndex % 4) * 2], initialStep);
             if (initialStep > 0) {
-                if (startNameObj->left > SCREEN_WIDTH) {
+                if (OBJECT_LEFT(startNameObj) > SCREEN_WIDTH) {
                     startNameObj->cmdId = OBJECT_FREE;
                 }
             } else {
-                if (startNameObj->left < 0) {
+                if (OBJECT_LEFT(startNameObj) < 0) {
                     startNameObj->cmdId = OBJECT_FREE;
                 }
             }
@@ -1637,30 +1637,30 @@ void Credits_EndNameUpdate(Object* endNameObj) {
 
 void Credits_MenuLadyUpdate(Object* menuLadyObj) {
 
-    switch (menuLadyObj->unk_04) {
+    switch (OBJECT_STATE(menuLadyObj)) {
         case 0:
-            if (--menuLadyObj->unk_1C < 0x18) {
-                menuLadyObj->unk_04++;
-                menuLadyObj->unk_1C = 0;
+            if (--OBJECT_COUNTER(menuLadyObj) < 24) {
+                OBJECT_STATE(menuLadyObj)++;
+                OBJECT_COUNTER(menuLadyObj) = 0;
             }
             break;
         case 1:
-            if (++menuLadyObj->unk_1C >= 0x3C) {
-                menuLadyObj->unk_04++;
-                menuLadyObj->unk_1C = 0x17;
+            if (++OBJECT_COUNTER(menuLadyObj) >= 60) {
+                OBJECT_STATE(menuLadyObj)++;
+                OBJECT_COUNTER(menuLadyObj) = 23;
             }
             break;
         case 2:
-            menuLadyObj->unk_1C += menuLadyObj->unk_1C / 11;
-            if (menuLadyObj->unk_1C >= 0xB6) {
-                menuLadyObj->unk_04++;
-                menuLadyObj->unk_1C = 0;
+            OBJECT_COUNTER(menuLadyObj) += OBJECT_COUNTER(menuLadyObj) / 11;
+            if (OBJECT_COUNTER(menuLadyObj) >= 182) {
+                OBJECT_STATE(menuLadyObj)++;
+                OBJECT_COUNTER(menuLadyObj) = 0;
             }
             break;
         case 3:
-            if (++menuLadyObj->unk_1C >= 0x12) {
-                menuLadyObj->unk_04++;
-                menuLadyObj->unk_1C = 0;
+            if (++OBJECT_COUNTER(menuLadyObj) >= 18) {
+                OBJECT_STATE(menuLadyObj)++;
+                OBJECT_COUNTER(menuLadyObj) = 0;
                 Credits_ObjectInit(OBJECT_CREDITS_SEE_YOU_AGAIN, 0x80, 0x40, 8);
                 func_800BA8D8(0x2B);
             }
@@ -1672,18 +1672,18 @@ void Credits_MenuLadyUpdate(Object* menuLadyObj) {
 
 void Credits_SeeYouAgainUpdate(Object* seeYouAgainObj) {
 
-    switch (seeYouAgainObj->unk_04) {
+    switch (OBJECT_STATE(seeYouAgainObj)) {
         case 0:
-            if (++seeYouAgainObj->unk_1C >= 175) {
-                seeYouAgainObj->unk_04++;
-                seeYouAgainObj->unk_1C = 0;
+            if (++OBJECT_COUNTER(seeYouAgainObj) >= 175) {
+                OBJECT_STATE(seeYouAgainObj)++;
+                OBJECT_COUNTER(seeYouAgainObj) = 0;
                 Credits_ObjectInit(OBJECT_CREDITS_COPYRIGHT, 0x60, 0xCD, 8);
             }
             break;
         case 1:
-            if (++seeYouAgainObj->unk_1C >= 100) {
-                seeYouAgainObj->unk_04++;
-                seeYouAgainObj->unk_1C = 0;
+            if (++OBJECT_COUNTER(seeYouAgainObj) >= 100) {
+                OBJECT_STATE(seeYouAgainObj)++;
+                OBJECT_COUNTER(seeYouAgainObj) = 0;
             }
             break;
         case 2:
@@ -1693,15 +1693,15 @@ void Credits_SeeYouAgainUpdate(Object* seeYouAgainObj) {
 
 void Credits_IntroUpdate(Object* introObj) {
 
-    switch (++introObj->unk_18) {
+    switch (++INTRO_TIMER(introObj)) {
         case 30:
-            if (introObj->unk_04 == 0) {
-                introObj->unk_04 = 1;
+            if (OBJECT_STATE(introObj) == 0) {
+                OBJECT_STATE(introObj) = 1;
             }
             break;
         case 60:
-            if (introObj->unk_08 == 0) {
-                introObj->unk_08 = 1;
+            if (OBJECT_STATE2(introObj) == 0) {
+                OBJECT_STATE2(introObj) = 1;
             }
             break;
         case 370:
@@ -1711,73 +1711,73 @@ void Credits_IntroUpdate(Object* introObj) {
             introObj->cmdId = OBJECT_FREE;
             break;
         default:
-            if (introObj->unk_18 > 300) {
-                if (introObj->unk_08 == 2) {
-                    introObj->unk_08 = 3;
+            if (INTRO_TIMER(introObj) > 300) {
+                if (OBJECT_STATE2(introObj) == 2) {
+                    OBJECT_STATE2(introObj) = 3;
                 }
-                if (introObj->unk_04 == 2) {
-                    introObj->unk_04 = 3;
+                if (OBJECT_STATE(introObj) == 2) {
+                    OBJECT_STATE(introObj) = 3;
                 }
             }
             break;
     }
 
-    switch (introObj->unk_04) {
+    switch (OBJECT_STATE(introObj)) {
         case 0:
-            introObj->unk_1C = 256;
+            OBJECT_COUNTER(introObj) = 256;
             break;
         case 1:
-            if (introObj->unk_1C > 0) {
-                introObj->unk_1C -= 4;
+            if (OBJECT_COUNTER(introObj) > 0) {
+                OBJECT_COUNTER(introObj) -= 4;
             }
-            if (introObj->unk_1C <= 0) {
-                introObj->unk_1C = 0;
-                introObj->unk_04 = 2;
+            if (OBJECT_COUNTER(introObj) <= 0) {
+                OBJECT_COUNTER(introObj) = 0;
+                OBJECT_STATE(introObj) = 2;
             }
             break;
         case 3:
-            if (introObj->unk_1C < 255) {
-                introObj->unk_1C += 4;
+            if (OBJECT_COUNTER(introObj) < 255) {
+                OBJECT_COUNTER(introObj) += 4;
             }
-            if (introObj->unk_1C >= 255) {
-                introObj->unk_1C = 255;
-                introObj->unk_04 = 4;
+            if (OBJECT_COUNTER(introObj) >= 255) {
+                OBJECT_COUNTER(introObj) = 255;
+                OBJECT_STATE(introObj) = 4;
             }
             break;
         case 4:
-            introObj->unk_1C = 255;
+            OBJECT_COUNTER(introObj) = 255;
             break;
         default:
-            introObj->unk_1C = 0;
+            OBJECT_COUNTER(introObj) = 0;
             break;
     }
-    switch (introObj->unk_08) {
+    switch (OBJECT_STATE2(introObj)) {
         case 0:
-            introObj->unk_20 = 256;
+            OBJECT_COUNTER2(introObj) = 256;
             break;
         case 1:
-            if (introObj->unk_20 > 0) {
-                introObj->unk_20 -= 4;
+            if (OBJECT_COUNTER2(introObj) > 0) {
+                OBJECT_COUNTER2(introObj) -= 4;
             }
-            if (introObj->unk_20 <= 0) {
-                introObj->unk_20 = 0;
-                introObj->unk_08 = 2;
+            if (OBJECT_COUNTER2(introObj) <= 0) {
+                OBJECT_COUNTER2(introObj) = 0;
+                OBJECT_STATE2(introObj) = 2;
             }
             break;
         case 3:
-            if (introObj->unk_20 < 255) {
-                introObj->unk_20 += 4;
+            if (OBJECT_COUNTER2(introObj) < 255) {
+                OBJECT_COUNTER2(introObj) += 4;
             }
-            if (introObj->unk_20 >= 256) {
-                introObj->unk_20 = 255;
-                introObj->unk_08 = 4;
+            if (OBJECT_COUNTER2(introObj) >= 256) {
+                OBJECT_COUNTER2(introObj) = 255;
+                OBJECT_STATE2(introObj) = 4;
             }
             break;
         case 4:
-            introObj->unk_20 = 255;
+            OBJECT_COUNTER2(introObj) = 255;
             break;
         default:
-            introObj->unk_20 = 0;
+            OBJECT_COUNTER2(introObj) = 0;
             break;
     }
 }
@@ -1787,50 +1787,50 @@ void Credits_CopyrightUpdate(Object* copyrightObj) {
 
 void Credits_ObjectInit(s32 cmdId, s32 left, s32 top, s8 priority) {
     s32 i = 0;
-    Object* var_s0 = gObjects;
+    Object* object = gObjects;
 
     while (true) {
-        if (var_s0->cmdId == OBJECT_FREE) {
+        if (object->cmdId == OBJECT_FREE) {
             break;
         }
 
         if (++i > ARRAY_COUNT(gObjects)) {
             return;
         }
-        var_s0++;
+        object++;
     }
 
-    var_s0->cmdId = cmdId;
-    var_s0->unk_04 = 0;
-    var_s0->unk_08 = 0;
-    var_s0->left = left;
-    var_s0->top = top;
-    var_s0->priority = priority;
-    var_s0->shouldDraw = true;
-    var_s0->unk_1C = 0;
-    var_s0->unk_20 = 0;
+    object->cmdId = cmdId;
+    object->state = 0;
+    object->state2 = 0;
+    object->left = left;
+    object->top = top;
+    object->priority = priority;
+    object->shouldDraw = true;
+    object->counter = 0;
+    object->counter2 = 0;
 
     switch (cmdId) {
         case OBJECT_CREDITS_OLD_CARS:
-            Credits_OldCarsInit(var_s0);
+            Credits_OldCarsInit(object);
             break;
         case OBJECT_CREDITS_CARS:
-            Credits_CarsInit(var_s0);
+            Credits_CarsInit(object);
             break;
         case OBJECT_CREDITS_MENU_LADY:
-            Credits_MenuLadyInit(var_s0);
+            Credits_MenuLadyInit(object);
             break;
         case OBJECT_CREDITS_SEE_YOU_AGAIN:
             Credits_SeeYouAgainInit();
             break;
         case OBJECT_CREDITS_INTRO:
-            Credits_IntroInit(var_s0);
+            Credits_IntroInit(object);
             break;
         case OBJECT_CREDITS_COPYRIGHT:
             Credits_CopyrightInit();
             break;
         case OBJECT_CREDITS_PORTRAITS:
-            Credits_PortraitsInit(var_s0);
+            Credits_PortraitsInit(object);
             break;
         case OBJECT_CREDITS_SCRIPT:
         case OBJECT_CREDITS_BACKGROUND:
@@ -2093,7 +2093,7 @@ s32 Credits_Update(void) {
 
     Controller_SetGlobalInputs(&gSharedController);
     if (gInputPressed & (BTN_A | BTN_START)) {
-        D_i6_8011DFA0 ^= 1;
+        sDebugCreditsOldCars ^= 1;
     }
     if ((gGameMode != GAMEMODE_FLX_UNSKIPPABLE_CREDITS) && (gInputPressed & BTN_B)) {
         return GAMEMODE_FLX_MAIN_MENU;

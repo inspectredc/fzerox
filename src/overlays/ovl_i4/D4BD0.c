@@ -527,42 +527,42 @@ void MachineSelect_Init(void) {
     }
     Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
     Object_Init(OBJECT_MACHINE_SELECT_BACKGROUND, 0, 0, 4);
-    Object_Init(OBJECT_MACHINE_SELECT_HEADER, 0x50, 0xD, 4);
-    Object_Init(OBJECT_MACHINE_SELECT_CURSOR, 0x3C, 0xA, 8);
-    Object_Init(OBJECT_MACHINE_SELECT_CAR, 0, 0, 0xA);
+    Object_Init(OBJECT_MACHINE_SELECT_HEADER, 80, 13, 4);
+    Object_Init(OBJECT_MACHINE_SELECT_CURSOR, 60, 10, 8);
+    Object_Init(OBJECT_MACHINE_SELECT_CAR, 0, 0, 10);
 
     switch (gNumPlayers) {
         case 4:
-            Object_Init(OBJECT_MACHINE_SELECT_STATS_3, 0, 0, 0xC);
-            Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_3, 0x3C, 0xA, 0xC);
-            Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_3, 0x104, 0xBE, 6);
+            Object_Init(OBJECT_MACHINE_SELECT_STATS_3, 0, 0, 12);
+            Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_3, 60, 10, 12);
+            Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_3, 260, 190, 6);
             /* fallthrough */
         case 3:
-            Object_Init(OBJECT_MACHINE_SELECT_STATS_2, 0, 0, 0xC);
-            Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_2, 0x3C, 0xA, 0xC);
-            Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_2, 0x104, 0xA, 6);
+            Object_Init(OBJECT_MACHINE_SELECT_STATS_2, 0, 0, 12);
+            Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_2, 60, 10, 12);
+            Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_2, 260, 10, 6);
             /* fallthrough */
         case 2:
-            Object_Init(OBJECT_MACHINE_SELECT_STATS_1, 0, 0, 0xC);
-            Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_1, 0x3C, 0xA, 0xC);
-            Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_1, 0x14, 0xBE, 6);
+            Object_Init(OBJECT_MACHINE_SELECT_STATS_1, 0, 0, 12);
+            Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_1, 60, 10, 12);
+            Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_1, 20, 190, 6);
             /* fallthrough */
         case 1:
             break;
     }
 
     if (gSelectedMode == MODE_GP_RACE) {
-        Object_Init(OBJECT_MACHINE_SELECT_DIFFICULTY_CUPS, 0, 0, 0xC);
+        Object_Init(OBJECT_MACHINE_SELECT_DIFFICULTY_CUPS, 0, 0, 12);
     }
-    Object_Init(OBJECT_MACHINE_SELECT_STATS_0, 0, 0, 0xC);
-    Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_0, 0x3C, 0xA, 0xC);
-    Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_0, 0x14, 0xA, 6);
+    Object_Init(OBJECT_MACHINE_SELECT_STATS_0, 0, 0, 12);
+    Object_Init(OBJECT_MACHINE_SELECT_CURSOR_NUM_0, 60, 10, 12);
+    Object_Init(OBJECT_MACHINE_SELECT_PORTRAIT_0, 20, 10, 6);
 
     if (gNumPlayers == 1) {
-        Object_Init(OBJECT_MACHINE_SELECT_NAME, 0, 0, 0xC);
+        Object_Init(OBJECT_MACHINE_SELECT_NAME, 0, 0, 12);
     }
 
-    Object_Init(OBJECT_MACHINE_SELECT_OK, 0, 0, 0xC);
+    Object_Init(OBJECT_MACHINE_SELECT_OK, 0, 0, 12);
 }
 
 extern s32 gMachineSettingsState;
@@ -581,7 +581,7 @@ void MachineSettings_Init(void) {
 
     for (i = 0; i < 4; i++) {
         gPlayerSelectionLock[i] = SELECTION_FREE;
-        if (gGameMode != GAMEMODE_4012) {
+        if (gGameMode != GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS) {
             gPlayerEngine[i] = 0.5f;
         }
     }
@@ -594,14 +594,14 @@ void MachineSettings_Init(void) {
     Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
     Object_Init(OBJECT_MACHINE_SETTINGS_BACKGROUND, 0, 0, 4);
     Object_Init(OBJECT_MACHINE_SETTINGS_NAME, 0, 0, 12);
-    Object_Init(OBJECT_MACHINE_SETTINGS_ENGINE_WEIGHT, 0xA0, 0x22, 10);
-    Object_Init(OBJECT_MACHINE_SETTINGS_STATS, 0xA0, 0x61, 10);
+    Object_Init(OBJECT_MACHINE_SETTINGS_ENGINE_WEIGHT, 160, 34, 10);
+    Object_Init(OBJECT_MACHINE_SETTINGS_STATS, 160, 97, 10);
     if (gNumPlayers == 2) {
-        Object_Init(OBJECT_58, 0xA0, 0x61, 13);
+        Object_Init(OBJECT_58, 160, 97, 13);
     }
     Object_Init(OBJECT_MACHINE_SETTINGS_CAR, 0, 0, 12);
-    Object_Init(OBJECT_MACHINE_SETTINGS_NAME_CARD, 0x14, 0xB9, 12);
-    Object_Init(OBJECT_MACHINE_SETTINGS_SLIDER, 0xD0, 0x55, 11);
+    Object_Init(OBJECT_MACHINE_SETTINGS_NAME_CARD, 20, 185, 12);
+    Object_Init(OBJECT_MACHINE_SETTINGS_SLIDER, 208, 85, 11);
     Object_Init(OBJECT_MACHINE_SETTINGS_OK, 0, 0, 14);
 
     switch (gNumPlayers) {
@@ -659,9 +659,9 @@ s32 MachineSelect_Update(void) {
         if (gInputButtonPressed & (BTN_L | BTN_R | BTN_CLEFT | BTN_CDOWN)) {
             if ((gSharedController.buttonCurrent & BTN_L) && (gSharedController.buttonCurrent & BTN_R) &&
                 (gSharedController.buttonCurrent & BTN_CLEFT) && (gSharedController.buttonCurrent & BTN_CDOWN) &&
-                (Object_Get(OBJECT_MACHINE_SELECT_CAR)->unk_20 == 0) &&
+                (CAR_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_CAR)) == 0) &&
                 (gMachineSelectState != MACHINE_SELECT_CONTINUE)) {
-                Object_Get(OBJECT_MACHINE_SELECT_CAR)->unk_20 = 1;
+                CAR_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_CAR)) = 1;
                 D_i4_8011D778 = 1.0f;
                 D_i4_8011D77C = 0.0f;
                 func_800BA8D8(0x17);
@@ -781,7 +781,7 @@ s32 MachineSettings_Update(void) {
     f32 temp_fa0;
     f32 temp_fv0;
     f32 var_fa1;
-    s32 var_v0;
+    s32 stickX;
 
     func_8008675C();
     if (D_i2_80106DA4 != 0) {
@@ -809,20 +809,20 @@ s32 MachineSettings_Update(void) {
                     if (k != gRacers[i].unk_2CC) {
                         func_800BA710(i, 0x1E);
                     }
-                    var_v0 = temp_s1->stickX;
+                    stickX = temp_s1->stickX;
                     temp_fa0 = gPlayerEngine[i];
-                    temp_fv0 = (f32) var_v0 * 0.003;
+                    temp_fv0 = (f32) stickX * 0.003;
                     var_fa1 = SQ(temp_fv0);
                     if (var_fa1 < 0.001) {
                         var_fa1 = 0.0078125f;
-                        var_v0 = 0;
-                        if (gInputPressed & 0x200) {
-                            var_v0 = -1;
-                        } else if (!(gInputPressed & 0x100)) {
+                        stickX = 0;
+                        if (gInputPressed & BTN_LEFT) {
+                            stickX = -1;
+                        } else if (!(gInputPressed & BTN_RIGHT)) {
                             var_fa1 = 0.0f;
                         }
                     }
-                    if (var_v0 < 0) {
+                    if (stickX < 0) {
                         gPlayerEngine[i] -= var_fa1;
                         if (gPlayerEngine[i] < 0.0) {
                             gPlayerEngine[i] = 0.0f;
@@ -920,8 +920,8 @@ Gfx* MachineSettings_Draw(Gfx* gfx) {
     return gfx;
 }
 
-s32 func_i4_80116E5C(s32 arg0) {
-    return arg0;
+s32 MachineSettings_GetCharacter(s32 character) {
+    return character;
 }
 
 void MachineSelect_HeaderInit(void) {
@@ -941,49 +941,49 @@ void func_i4_80116E8C(Object* arg0) {
     }
 }
 
-void MachineSettings_PortraitInit(Object* arg0) {
-    s32 playerIndex = arg0->cmdId - OBJECT_MACHINE_SETTINGS_PORTRAIT_0;
+void MachineSettings_PortraitInit(Object* portraitObj) {
+    s32 playerIndex = portraitObj->cmdId - OBJECT_MACHINE_SETTINGS_PORTRAIT_0;
 
-    arg0->unk_04 = gRacers[playerIndex].character;
-    arg0->unk_04 = func_i4_80116E5C(arg0->unk_04);
+    OBJECT_STATE(portraitObj) = gRacers[playerIndex].character;
+    OBJECT_STATE(portraitObj) = MachineSettings_GetCharacter(OBJECT_STATE(portraitObj));
 
     if (gNumPlayers == 1) {
         func_80077D50(sPortraitBackgroundCompTexInfo, 0);
-        arg0->unk_18 = func_800792D8(D_i4_8011C05C[arg0->unk_04]);
+        OBJECT_CACHE_INDEX(portraitObj) = func_800792D8(D_i4_8011C05C[OBJECT_STATE(portraitObj)]);
     } else {
-        arg0->unk_18 = func_800792D8(D_i4_8011C7A4[arg0->unk_04]);
+        OBJECT_CACHE_INDEX(portraitObj) = func_800792D8(D_i4_8011C7A4[OBJECT_STATE(portraitObj)]);
     }
 }
 
-void MachineSelect_PortraitInit(Object* arg0) {
-    arg0->unk_18 = func_800792D8(D_i4_8011C7A4[0]);
+void MachineSelect_PortraitInit(Object* portraitObj) {
+    OBJECT_CACHE_INDEX(portraitObj) = func_800792D8(D_i4_8011C7A4[0]);
 }
 
-void MachineSelect_CursorNumInit(Object* arg0) {
-    func_80077D50(sPlayerNumIconCompTexInfos[arg0->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], 0);
+void MachineSelect_CursorNumInit(Object* cursorNumObj) {
+    func_80077D50(sPlayerNumIconCompTexInfos[cursorNumObj->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], 0);
 }
 
 void MachineSelect_CursorInit(void) {
     func_80077D50(sMachineSelectCursorCompTexInfo, 0);
 }
 
-void MachineSelect_CarInit(Object* arg0) {
-    Vp* temp_v0;
+void MachineSelect_CarInit(Object* carObj) {
+    Vp* vp;
     s32 i;
     s32 j;
 
-    temp_v0 = (Vp*) func_800768F4(0, 30 * sizeof(Vp));
-    arg0->unk_1C = temp_v0;
+    vp = (Vp*) func_800768F4(0, 30 * sizeof(Vp));
+    CAR_VIEWPORT(carObj) = vp;
 
     for (i = 0; i < 30; i++) {
-        temp_v0[i].vp.vscale[0] = 640;
-        temp_v0[i].vp.vscale[1] = 480;
-        temp_v0[i].vp.vscale[2] = 0x1FF;
-        temp_v0[i].vp.vscale[3] = 0;
-        temp_v0[i].vp.vtrans[0] = (((i % 6) * 0x28) + 0x39) << 2;
-        temp_v0[i].vp.vtrans[1] = (((i / 6) * 0x22) + 0x39) << 2;
-        temp_v0[i].vp.vtrans[2] = 0x1FF;
-        temp_v0[i].vp.vtrans[3] = 0;
+        vp[i].vp.vscale[0] = 640;
+        vp[i].vp.vscale[1] = 480;
+        vp[i].vp.vscale[2] = 0x1FF;
+        vp[i].vp.vscale[3] = 0;
+        vp[i].vp.vtrans[0] = (((i % 6) * 0x28) + 0x39) << 2;
+        vp[i].vp.vtrans[1] = (((i / 6) * 0x22) + 0x39) << 2;
+        vp[i].vp.vtrans[2] = 0x1FF;
+        vp[i].vp.vtrans[3] = 0;
     }
 
     for (j = 3; j >= 0; j--) {
@@ -1000,39 +1000,39 @@ void MachineSelect_CarInit(Object* arg0) {
     }
 }
 
-void MachineSettings_CarInit(Object* arg0) {
-    Vp* temp_v0;
+void MachineSettings_CarInit(Object* carObj) {
+    Vp* vp;
     s32 i;
     s32 j;
     s32 k;
 
-    temp_v0 = (Vp*) func_800768F4(0, 2 * 4 * sizeof(Vp));
-    arg0->unk_1C = temp_v0;
+    vp = (Vp*) func_800768F4(0, 2 * 4 * sizeof(Vp));
+    CAR_VIEWPORT(carObj) = vp;
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 4; j++) {
-            temp_v0[i * 4 + j].vp.vscale[0] = 0x280;
-            temp_v0[i * 4 + j].vp.vscale[1] = 0x1E0;
-            temp_v0[i * 4 + j].vp.vscale[2] = 0x1FF;
-            temp_v0[i * 4 + j].vp.vscale[3] = 0;
+            vp[i * 4 + j].vp.vscale[0] = 0x280;
+            vp[i * 4 + j].vp.vscale[1] = 0x1E0;
+            vp[i * 4 + j].vp.vscale[2] = 0x1FF;
+            vp[i * 4 + j].vp.vscale[3] = 0;
 
             switch (gNumPlayers) {
                 case 1:
-                    temp_v0[i * 4 + j].vp.vtrans[0] = ((i * -4) + 0xDC) << 2;
-                    temp_v0[i * 4 + j].vp.vtrans[1] = ((i * 0xA) + 0xC8) << 2;
+                    vp[i * 4 + j].vp.vtrans[0] = ((i * -4) + 0xDC) << 2;
+                    vp[i * 4 + j].vp.vtrans[1] = ((i * 0xA) + 0xC8) << 2;
                     break;
                 case 2:
-                    temp_v0[i * 4 + j].vp.vtrans[0] = ((i * -6) + 0xE9) << 2;
-                    temp_v0[i * 4 + j].vp.vtrans[1] = (((j % 2) * 0x69) + (i * 0xE) + 0x50) << 2;
+                    vp[i * 4 + j].vp.vtrans[0] = ((i * -6) + 0xE9) << 2;
+                    vp[i * 4 + j].vp.vtrans[1] = (((j % 2) * 0x69) + (i * 0xE) + 0x50) << 2;
                     break;
                 default:
-                    temp_v0[i * 4 + j].vp.vtrans[0] = (((j / 2) * 0x8C) + (i * -2) + 0x2B) << 2;
-                    temp_v0[i * 4 + j].vp.vtrans[1] = (((j % 2) * 0x69) + (i * 5) + 0x35) << 2;
+                    vp[i * 4 + j].vp.vtrans[0] = (((j / 2) * 0x8C) + (i * -2) + 0x2B) << 2;
+                    vp[i * 4 + j].vp.vtrans[1] = (((j % 2) * 0x69) + (i * 5) + 0x35) << 2;
                     break;
             }
 
-            temp_v0[i * 4 + j].vp.vtrans[2] = 0x1FF;
-            temp_v0[i * 4 + j].vp.vtrans[3] = 0;
+            vp[i * 4 + j].vp.vtrans[2] = 0x1FF;
+            vp[i * 4 + j].vp.vtrans[3] = 0;
         }
     }
 
@@ -1068,9 +1068,9 @@ void MachineSettings_StatsInit(void) {
     }
 }
 
-void MachineSettings_NameCardInit(Object* arg0) {
+void MachineSettings_NameCardInit(Object* nameCardObj) {
     if (gNumPlayers == 1) {
-        arg0->unk_18 = func_800792D8(D_i4_8011CE50[0]);
+        OBJECT_CACHE_INDEX(nameCardObj) = func_800792D8(D_i4_8011CE50[0]);
     }
 }
 
@@ -1078,12 +1078,12 @@ void MachineSettings_SliderInit(void) {
     func_80077D50(sEngineSliderCompTexInfo, 0);
 }
 
-void MachineSelect_DifficultyCupsInit(Object* arg0) {
+void MachineSelect_DifficultyCupsInit(Object* difficultyCupsObj) {
     s32 i;
 
-    arg0->unk_18 = func_800768F4(0, 0x258);
+    OBJECT_BUFFER(difficultyCupsObj) = func_800768F4(0, 0x258);
 
-    Save_UpdateCupSave(arg0->unk_18);
+    Save_UpdateCupSave(OBJECT_BUFFER(difficultyCupsObj));
 
     for (i = 0; i < 21; i++) {
         func_80077D50(sTrophyCompTexInfos[i], 0);
@@ -1102,14 +1102,14 @@ void MachineSelect_StatsInit(void) {
     }
 }
 
-void MachineSelect_OkInit(Object* arg0) {
+void MachineSelect_OkInit(Object* okObj) {
     func_80077D50(sOKCompTexInfo, 0);
-    arg0->top = 50;
+    OBJECT_TOP(okObj) = 50;
 }
 
-void MachineSettings_OkInit(Object* arg0) {
+void MachineSettings_OkInit(Object* okObj) {
     func_80077D50(sOKCompTexInfo, 0);
-    arg0->left = 50;
+    OBJECT_LEFT(okObj) = 50;
 }
 
 #define PACK_5551(r, g, b, a) (((((r) << 11) | ((g) << 6)) | ((b) << 1)) | (a))
@@ -1134,10 +1134,10 @@ Gfx* MachineSelect_BackgroundDraw(Gfx* gfx) {
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/D4BD0/MachineSelect_BackgroundDraw.s")
 #endif
 
-Gfx* MachineSelect_HeaderDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return func_80078EA0(gfx, sSelectMachineCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sSelectMachineCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_80117BE0(Gfx* gfx, Object* arg1) {
@@ -1146,7 +1146,7 @@ Gfx* func_i4_80117BE0(Gfx* gfx, Object* arg1) {
 
     if (gNumPlayers == 1) {
         gfx =
-            func_80078EA0(gfx, sPortraitCompTexInfos[gRacers[0].character], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+            func_80078EA0(gfx, sPortraitCompTexInfos[gRacers[0].character], OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0, 0, 1.0f, 1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             var_s0 = &D_i4_8011D6C4[i * 2];
@@ -1159,22 +1159,22 @@ Gfx* func_i4_80117BE0(Gfx* gfx, Object* arg1) {
 
 extern unk_800E3F28 D_800E3F28[];
 
-Gfx* MachineSettings_PortraitDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSettings_PortraitDraw(Gfx* gfx, Object* portraitObj) {
     s32 playerIndex;
-    const s32* temp_v0;
+    const s32* positions;
 
-    playerIndex = arg1->cmdId - OBJECT_MACHINE_SETTINGS_PORTRAIT_0;
-    temp_v0 = &D_i4_8011D6C4[playerIndex * 2];
+    playerIndex = portraitObj->cmdId - OBJECT_MACHINE_SETTINGS_PORTRAIT_0;
+    positions = &D_i4_8011D6C4[playerIndex * 2];
     switch (gNumPlayers) {
         case 1:
-            gfx = func_80078EA0(gfx, sPortraitBackgroundCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
-            gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sPortraitBackgroundCompTexInfo, OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
             break;
         case 2:
-            gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], temp_v0[0] - 4, temp_v0[1] + 0x1A, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], positions[0] - 4, positions[1] + 0x1A, 0, 0, 0, 1.0f, 1.0f);
             break;
         default:
-            gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], temp_v0[0], temp_v0[1] + 0x37, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], positions[0], positions[1] + 0x37, 0, 0, 0, 1.0f, 1.0f);
             break;
     }
     return gfx;
@@ -1182,7 +1182,7 @@ Gfx* MachineSettings_PortraitDraw(Gfx* gfx, Object* arg1) {
 
 extern unk_800CF1B0 D_800F80C8[];
 
-Gfx* MachineSelect_StatsDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSelect_StatsDraw(Gfx* gfx, Object* statsObj) {
     s32 temp_fp;
     s32 temp_s0;
     s32 temp_t0;
@@ -1190,7 +1190,7 @@ Gfx* MachineSelect_StatsDraw(Gfx* gfx, Object* arg1) {
     s8* temp_a3;
     s32 i;
 
-    playerIndex = arg1->cmdId - OBJECT_MACHINE_SELECT_STATS_0;
+    playerIndex = statsObj->cmdId - OBJECT_MACHINE_SELECT_STATS_0;
 
     temp_a3 = &D_800F80C8[gRacers[playerIndex].character].machineStats;
     temp_fp = D_i4_8011D694[playerIndex * 2 + 0];
@@ -1213,24 +1213,24 @@ Gfx* MachineSelect_StatsDraw(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* MachineSelect_PortraitDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSelect_PortraitDraw(Gfx* gfx, Object* portraitObj) {
     s32 playerIndex;
 
-    playerIndex = arg1->cmdId - OBJECT_MACHINE_SELECT_PORTRAIT_0;
+    playerIndex = portraitObj->cmdId - OBJECT_MACHINE_SELECT_PORTRAIT_0;
 
-    gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[playerIndex], D_i4_8011D674[playerIndex * 2 + 0] + arg1->left,
-                         D_i4_8011D674[playerIndex * 2 + 1] + arg1->top, 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[playerIndex], D_i4_8011D674[playerIndex * 2 + 0] + OBJECT_LEFT(portraitObj),
+                         D_i4_8011D674[playerIndex * 2 + 1] + OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
-Gfx* MachineSelect_CursorNumDraw(Gfx* gfx, Object* arg1) {
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[arg1->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], arg1->left,
-                         arg1->top, 0, 0, 0, 1.0f, 1.0f);
+Gfx* MachineSelect_CursorNumDraw(Gfx* gfx, Object* portraitObj) {
+    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[portraitObj->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], OBJECT_LEFT(portraitObj),
+                         OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
 extern u32 gGameFrameCount;
 
-Gfx* MachineSelect_CursorDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSelect_CursorDraw(Gfx* gfx, Object* cursorObj) {
     s32 temp_v0;
     s32 i;
     s32 temp_s3 = 30;
@@ -1244,10 +1244,10 @@ Gfx* MachineSelect_CursorDraw(Gfx* gfx, Object* arg1) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255 - ((temp_v0 * 510) / temp_s3));
             }
             temp_v0 = sMachineSelectIndex[i];
-            arg1->left = ((temp_v0 % 6) * 0x28) + 0x28;
-            arg1->top = ((temp_v0 / 6) * 0x22) + 0x25;
+            OBJECT_LEFT(cursorObj) = ((temp_v0 % 6) * 0x28) + 0x28;
+            OBJECT_TOP(cursorObj) = ((temp_v0 / 6) * 0x22) + 0x25;
 
-            gfx = func_80078EA0(gfx, sMachineSelectCursorCompTexInfo, arg1->left, arg1->top, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0(gfx, sMachineSelectCursorCompTexInfo, OBJECT_LEFT(cursorObj), OBJECT_TOP(cursorObj), 1, 0, 0, 1.0f, 1.0f);
         }
     }
     return gfx;
@@ -1257,7 +1257,7 @@ extern unk_struct_1DC D_800E5220[];
 extern GfxPool D_1000000;
 extern GfxPool* D_800DCCF0;
 
-Gfx* MachineSelect_CarDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSelect_CarDraw(Gfx* gfx, Object* carObj) {
     bool var_t0;
     s32 i;
     s32 j;
@@ -1286,7 +1286,7 @@ Gfx* MachineSelect_CarDraw(Gfx* gfx, Object* arg1) {
 
         gSPLight(gfx++, &D_1000000.unk_21A88[j].l[0], 1);
         gSPLight(gfx++, &D_1000000.unk_21A88[j].a, 2);
-        gSPViewport(gfx++, (Vp*) arg1->unk_1C + i);
+        gSPViewport(gfx++, CAR_VIEWPORT(carObj) + i);
 
         for (j = 0; j < gNumPlayers; j++) {
             if (i == sMachineSelectIndex[j]) {
@@ -1305,7 +1305,7 @@ Gfx* MachineSelect_CarDraw(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* MachineSelect_OkDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSelect_OkDraw(Gfx* gfx, Object* okObj) {
     s32 var_v1;
 
     if (gNumPlayers == 1) {
@@ -1315,7 +1315,7 @@ Gfx* MachineSelect_OkDraw(Gfx* gfx, Object* arg1) {
     }
 
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, arg1->left + var_v1, arg1->top + 209, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + var_v1, OBJECT_TOP(okObj) + 209, 1, 0, 0, 1.0f, 1.0f);
 }
 
 extern const char* gMachineNames[];
@@ -1326,13 +1326,13 @@ Gfx* MachineSettings_NameDraw(Gfx* gfx) {
     const s32* var_s0;
 
     if (gNumPlayers == 1) {
-        temp_s1 = gMachineNames[func_i4_80116E5C(gRacers[0].character)];
+        temp_s1 = gMachineNames[MachineSettings_GetCharacter(gRacers[0].character)];
         gfx =
             Font_DrawString(gfx, 0x122 - Font_GetStringWidth(temp_s1, FONT_SET_1, 0), 0x22, temp_s1, 0, FONT_SET_1, 0);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             var_s0 = &D_i4_8011D6C4[i * 2];
-            temp_s1 = gMachineNames[func_i4_80116E5C(gRacers[i].character)];
+            temp_s1 = gMachineNames[MachineSettings_GetCharacter(gRacers[i].character)];
             gfx = Font_DrawString(gfx, (var_s0[0] - Font_GetStringWidth(temp_s1, FONT_SET_2, 0)) + 0x82,
                                   var_s0[1] + 0xA, temp_s1, 0, FONT_SET_2, 0);
         }
@@ -1343,7 +1343,7 @@ Gfx* MachineSettings_NameDraw(Gfx* gfx) {
 extern u16 D_9000008[];
 extern Gfx D_90186C8[];
 
-Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* carObj) {
     s32 i;
 
     gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
@@ -1364,7 +1364,7 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* arg1) {
             continue;
         }
 
-        gSPViewport(gfx++, (Vp*) arg1->unk_1C + i + 4);
+        gSPViewport(gfx++, CAR_VIEWPORT(carObj) + i + 4);
         gSPMatrix(gfx++, &D_1000000.unk_20A88[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gfx = func_8009CD60(gfx, gRacers[i].character);
     }
@@ -1373,7 +1373,7 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* arg1) {
     gDPSetBlendColor(gfx++, 0, 0, 0, 255);
 
     for (i = 0; i < gNumPlayers; i++) {
-        gSPViewport(gfx++, (Vp*) arg1->unk_1C + i);
+        gSPViewport(gfx++, CAR_VIEWPORT(carObj) + i);
         gSPMatrix(gfx++, &D_1000000.unk_21208[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gfx = func_8009CE70(gfx, gRacers[i].character);
     }
@@ -1385,7 +1385,7 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* arg1) {
     gSPLight(gfx++, &D_1000000.unk_21A88[0].a, 2);
 
     for (i = 0; i < gNumPlayers; i++) {
-        gSPViewport(gfx++, (Vp*) arg1->unk_1C + i);
+        gSPViewport(gfx++, CAR_VIEWPORT(carObj) + i);
         gSPMatrix(gfx++, &D_1000000.unk_20308[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gfx = func_8009CCBC(gfx, gRacers[i].character, gRacers[i].unk_2CC);
     }
@@ -1403,7 +1403,7 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* arg1) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i4_8011D4DC);
 
     for (i = 0; i < gNumPlayers; i++) {
-        gSPViewport(gfx++, (Vp*) arg1->unk_1C + i);
+        gSPViewport(gfx++, CAR_VIEWPORT(carObj) + i);
         gSPMatrix(gfx++, &D_1000000.unk_20308[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gfx = func_8009CEA0(gfx, gRacers[i].character);
     }
@@ -1411,7 +1411,7 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
     s32 i;
     s16 temp_s4;
     s32 temp_s0;
@@ -1419,8 +1419,8 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* arg1) {
 
     if (gNumPlayers == 1) {
         temp_s4 = D_800F80C8[gRacers[0].character].unk_14;
-        gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
-        gfx = Font_DrawMachineWeight(gfx, arg1->left + 0x66, arg1->top + 0x17, temp_s4);
+        gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, OBJECT_LEFT(engineWeightObj), OBJECT_TOP(engineWeightObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = Font_DrawMachineWeight(gfx, OBJECT_LEFT(engineWeightObj) + 0x66, OBJECT_TOP(engineWeightObj) + 0x17, temp_s4);
 
         switch (gMachineSettingsState) {
             case MACHINE_SETTINGS_ACTIVE:
@@ -1432,7 +1432,7 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* arg1) {
                 break;
         }
 
-        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, arg1->left + 3, arg1->top + 1, 1, 0, 0, 1.0f,
+        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj) + 3, OBJECT_TOP(engineWeightObj) + 1, 1, 0, 0, 1.0f,
                             1.0f);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
@@ -1454,7 +1454,7 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* statsObj) {
     s32 i;
     s32 j;
     s32 leftOffset;
@@ -1463,11 +1463,11 @@ Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* arg1) {
     s32 pad;
 
     if (gNumPlayers == 1) {
-        gfx = func_80078EA0(gfx, sMachineBodyBoostGripCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sMachineBodyBoostGripCompTexInfo, OBJECT_LEFT(statsObj), OBJECT_TOP(statsObj), 0, 0, 0, 1.0f, 1.0f);
 
         for (i = 0; i < 3; i++) {
             temp = D_800F80C8[gRacers[0].character].machineStats;
-            gfx = Font_DrawMachineStatValue(gfx, arg1->left + 0x69, arg1->top + i * 23 + 3, temp[i]);
+            gfx = Font_DrawMachineStatValue(gfx, OBJECT_LEFT(statsObj) + 0x69, OBJECT_TOP(statsObj) + i * 23 + 3, temp[i]);
         }
     } else {
         for (i = 0; i < gNumPlayers; i++) {
@@ -1508,15 +1508,15 @@ Gfx* func_i4_801193B8(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* MachineSettings_NameCardDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSettings_NameCardDraw(Gfx* gfx, Object* nameCardObj) {
 
     if (gNumPlayers == 1) {
-        gfx = func_80078F80(gfx, &D_800E3F28[arg1->unk_18], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(nameCardObj)], OBJECT_LEFT(nameCardObj), OBJECT_TOP(nameCardObj), 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
 
-Gfx* MachineSettings_SliderDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSettings_SliderDraw(Gfx* gfx, Object* sliderObj) {
     s32 i;
     s32 temp_v1;
     s32 left;
@@ -1570,10 +1570,10 @@ Gfx* MachineSettings_SplitscreenDraw(Gfx* gfx) {
 }
 
 extern s32 gDifficulty;
-extern s8 D_800CD3C0;
+extern s8 gUnlockableLevel;
 extern s8 gSettingEverythingUnlocked;
 
-Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* difficultyCupsObj) {
     s32 i;
     s32 temp_v0;
     s32 difficulty;
@@ -1589,7 +1589,7 @@ Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* arg1) {
         case MACHINE_SELECT_CONTINUE:
             break;
         default:
-            if (((D_800CD3C0 >= 2) || (gSettingEverythingUnlocked != 0)) &&
+            if (((gUnlockableLevel >= 2) || (gSettingEverythingUnlocked != 0)) &&
                 (gSharedController.buttonCurrent & BTN_CUP)) {
                 difficulty = MASTER + 1;
             }
@@ -1611,17 +1611,17 @@ Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* arg1) {
         difficulty = gDifficulty - D_800DCE48.unk_10;
     }
 
-    if ((D_800CD3C0 >= 2) || (gSettingEverythingUnlocked != 0)) {
+    if ((gUnlockableLevel >= 2) || (gSettingEverythingUnlocked != 0)) {
         var_t0 = 5;
     } else {
-        if (D_800CD3C0 > 0) {
+        if (gUnlockableLevel > 0) {
             var_t0 = 4;
         } else {
             var_t0 = 3;
         }
     }
 
-    var_t1 = arg1->unk_18 + difficulty * 150 + temp_v0 * 5;
+    var_t1 = OBJECT_BUFFER(difficultyCupsObj) + difficulty * 150 + temp_v0 * 5;
 
     for (i = 0; i < var_t0; i++) {
 
@@ -1640,11 +1640,11 @@ Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* arg1) {
     return func_80078EA0(gfx, sDifficultyCompTexInfos[difficulty], 30, 0xD1, 0, 0, 0, 1.0f, 1.0f);
 }
 
-Gfx* MachineSelect_NameDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSelect_NameDraw(Gfx* gfx, Object* nameObj) {
     s32 pad[2];
     const char* machineName;
 
-    machineName = gMachineNames[func_i4_80116E5C(gRacers[0].character)];
+    machineName = gMachineNames[MachineSettings_GetCharacter(gRacers[0].character)];
 
     gfx = Font_DrawString(gfx, 160 - (Font_GetStringWidth(machineName, FONT_SET_2, 0) / 2), 218, machineName, 0,
                           FONT_SET_2, 0);
@@ -1652,58 +1652,58 @@ Gfx* MachineSelect_NameDraw(Gfx* gfx, Object* arg1) {
     return Font_DrawString(gfx, 252, 221, "$", 0, FONT_SET_2, 0);
 }
 
-Gfx* MachineSettings_OkDraw(Gfx* gfx, Object* arg1) {
+Gfx* MachineSettings_OkDraw(Gfx* gfx, Object* okObj) {
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, arg1->left + 0x10B, arg1->top + 0xD0, 1, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f, 1.0f);
 }
 
 void func_i4_80119BB8(Object* arg0) {
 }
 
-void MachineSettings_PortraitUpdate(Object* arg0) {
-    s32 index = arg0->cmdId - OBJECT_MACHINE_SETTINGS_PORTRAIT_0;
+void MachineSettings_PortraitUpdate(Object* portraitObj) {
+    s32 index = portraitObj->cmdId - OBJECT_MACHINE_SETTINGS_PORTRAIT_0;
     s32 character = gRacers[index].character;
 
-    character = func_i4_80116E5C(character);
-    if (character != arg0->unk_04) {
+    character = MachineSettings_GetCharacter(character);
+    if (character != PORTRAIT_CHARACTER(portraitObj)) {
         if (gNumPlayers == 1) {
-            func_800793E8(arg0->unk_18, 0, D_i4_8011C05C[character]);
+            func_800793E8(OBJECT_CACHE_INDEX(portraitObj), 0, D_i4_8011C05C[character]);
         } else {
-            func_800793E8(arg0->unk_18, 0, D_i4_8011C7A4[character]);
+            func_800793E8(OBJECT_CACHE_INDEX(portraitObj), 0, D_i4_8011C7A4[character]);
         }
     }
-    arg0->unk_04 = character;
+    PORTRAIT_CHARACTER(portraitObj) = character;
 }
 
-void MachineSelect_PortraitUpdate(Object* arg0) {
-    s32 playerIndex = arg0->cmdId - OBJECT_MACHINE_SELECT_PORTRAIT_0;
+void MachineSelect_PortraitUpdate(Object* portraitObj) {
+    s32 playerIndex = portraitObj->cmdId - OBJECT_MACHINE_SELECT_PORTRAIT_0;
     s32 character = gRacers[playerIndex].character;
 
-    character = func_i4_80116E5C(character);
-    if (character != arg0->unk_04) {
-        func_800793E8(arg0->unk_18, 0, D_i4_8011C7A4[character]);
+    character = MachineSettings_GetCharacter(character);
+    if (character != PORTRAIT_CHARACTER(portraitObj)) {
+        func_800793E8(OBJECT_CACHE_INDEX(portraitObj), 0, D_i4_8011C7A4[character]);
     }
-    arg0->unk_04 = character;
+    PORTRAIT_CHARACTER(portraitObj) = character;
 }
 
-void MachineSelect_CursorNumUpdate(Object* arg0) {
-    s32 playerIndex = arg0->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0;
+void MachineSelect_CursorNumUpdate(Object* cursorNumObj) {
+    s32 playerIndex = cursorNumObj->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0;
     s32 temp_v1;
 
     temp_v1 = sMachineSelectIndex[playerIndex];
-    arg0->left = ((temp_v1 % 6) * 0x28) + 0x28;
-    arg0->top = ((temp_v1 / 6) * 0x22) + 0x25;
+    OBJECT_LEFT(cursorNumObj) = ((temp_v1 % 6) * 0x28) + 0x28;
+    OBJECT_TOP(cursorNumObj) = ((temp_v1 / 6) * 0x22) + 0x25;
 }
 
-void MachineSelect_CursorUpdate(Object* arg0) {
+void MachineSelect_CursorUpdate(Object* cursorObj) {
 }
 
-void MachineSelect_CarUpdate(Object* arg0) {
+void MachineSelect_CarUpdate(Object* carObj) {
     Racer* var_s0;
     f32 var_fv0;
     s32 i;
 
-    if (arg0->unk_20 == 1) {
+    if (CAR_MINI_STATE(carObj) == 1) {
         if (D_i4_8011D778 >= 0) {
             D_i4_8011D77C -= 0.05f;
         } else {
@@ -1718,7 +1718,7 @@ void MachineSelect_CarUpdate(Object* arg0) {
                 var_fv0 = D_i4_8011D77C;
             }
             if (var_fv0 < 0.1f) {
-                arg0->unk_20 = 2;
+                CAR_MINI_STATE(carObj) = 2;
                 D_800CE750 = 0.105f;
                 D_800CE74C = 0.125f;
                 D_800CE748 = 0.075f;
@@ -1751,7 +1751,7 @@ void MachineSelect_CarUpdate(Object* arg0) {
     }
 }
 
-void MachineSettings_CarUpdate(Object* arg0) {
+void MachineSettings_CarUpdate(Object* carObj) {
     Racer* var_s0;
     f32 var_fs0;
     f32 var_fs1;
@@ -1761,7 +1761,7 @@ void MachineSettings_CarUpdate(Object* arg0) {
     s32 var_a1;
     Vp* var_v0;
 
-    var_v0 = (Vp*) arg0->unk_1C;
+    var_v0 = CAR_VIEWPORT(carObj);
     for (var_a1 = 4; var_a1 < 8; var_a1++) {
         switch (gNumPlayers) {
             case 1:
@@ -1848,42 +1848,42 @@ void MachineSettings_CarUpdate(Object* arg0) {
     }
 }
 
-void MachineSelect_OkUpdate(Object* arg0) {
+void MachineSelect_OkUpdate(Object* okObj) {
     switch (gMachineSelectState) {
         case MACHINE_SELECT_AWAIT_OK:
         case MACHINE_SELECT_CONTINUE:
-            Object_LerpPosYToClampedTarget(arg0, 0);
+            Object_LerpPosYToClampedTarget(okObj, 0);
             break;
         default:
-            Object_LerpPosYToClampedTarget(arg0, 50);
+            Object_LerpPosYToClampedTarget(okObj, 50);
             break;
     }
 }
 
-void MachineSettings_OkUpdate(Object* arg0) {
+void MachineSettings_OkUpdate(Object* okObj) {
     switch (gMachineSettingsState) {
         case MACHINE_SETTINGS_AWAIT_OK:
         case MACHINE_SETTINGS_CONTINUE:
-            Object_LerpPosXToClampedTargetMaxStep(arg0, 0, 192);
+            Object_LerpPosXToClampedTargetMaxStep(okObj, 0, 192);
             break;
         default:
-            Object_LerpPosXToClampedTargetMaxStep(arg0, 50, 192);
+            Object_LerpPosXToClampedTargetMaxStep(okObj, 50, 192);
             break;
     }
 }
 
-void MachineSettings_NameCardUpdate(Object* arg0) {
+void MachineSettings_NameCardUpdate(Object* nameCardObj) {
 
-    if (arg0->unk_04 != gRacers[0].character) {
+    if (NAME_CARD_CHARACTER(nameCardObj) != gRacers[0].character) {
         if (gNumPlayers == 1) {
-            func_800793E8(arg0->unk_18, 0, D_i4_8011CE50[gRacers[0].character % 30]);
+            func_800793E8(OBJECT_CACHE_INDEX(nameCardObj), 0, D_i4_8011CE50[gRacers[0].character % 30]);
         }
     }
-    arg0->unk_04 = gRacers[0].character;
+    NAME_CARD_CHARACTER(nameCardObj) = gRacers[0].character;
 }
 
 void func_i4_8011A7B8(void) {
-    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) && (Object_Get(OBJECT_MACHINE_SELECT_CAR)->unk_20 != 0)) {
+    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) && (CAR_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_CAR)) != 0)) {
         D_800CE748 = 0.075f;
         D_800CE74C = 0.125f;
         D_800CE750 = 0.105f;
@@ -2043,8 +2043,8 @@ s32 Title_Update(void) {
     }
     Controller_SetGlobalInputs(&gSharedController);
     Math_Rand1();
-    if (gLeoDDConnected && (Object_Get(OBJECT_TITLE_DISK_DRIVE)->unk_1C != 0) &&
-        (Object_Get(OBJECT_TITLE_DISK_DRIVE)->unk_04 == 0)) {
+    if (gLeoDDConnected && (OBJECT_COUNTER(Object_Get(OBJECT_TITLE_DISK_DRIVE)) != 0) &&
+        (OBJECT_STATE(Object_Get(OBJECT_TITLE_DISK_DRIVE)) == 0)) {
         return gGameMode;
     }
     if (D_i4_8011D794 != 0) {
@@ -2064,7 +2064,7 @@ s32 Title_Update(void) {
         func_800BA8D8(0x3E);
         func_8007E0CC();
         D_i4_8011D790 = -1;
-        if (gLeoDDConnected && (Object_Get(OBJECT_TITLE_DISK_DRIVE)->unk_04 == 1)) {
+        if (gLeoDDConnected && (OBJECT_STATE(Object_Get(OBJECT_TITLE_DISK_DRIVE)) == 1)) {
             func_800BB370();
         }
         return GAMEMODE_FLX_MAIN_MENU;
@@ -2093,28 +2093,28 @@ Gfx* Title_Draw(Gfx* gfx) {
 
 extern s8 D_800CD3C4;
 
-void Title_BackgroundInit(Object* arg0) {
-    arg0->unk_04 = D_800CD3C4;
-    func_80077D50(sTitleBackgroundCompTexInfos[arg0->unk_04], 0);
-    if (arg0->unk_04 == 0) {
-        arg0->left = 8;
+void Title_BackgroundInit(Object* backgroundObj) {
+    OBJECT_STATE(backgroundObj) = D_800CD3C4;
+    func_80077D50(sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], 0);
+    if (OBJECT_STATE(backgroundObj) == 0) {
+        OBJECT_LEFT(backgroundObj) = 8;
     }
 }
 
 void func_i4_8011B0C8(void) {
 }
 
-void Title_LogoInit(Object* arg0) {
-    arg0->unk_04 = D_800CD3C4;
-    arg0->left = 0x55;
+void Title_LogoInit(Object* logoObj) {
+    OBJECT_STATE(logoObj) = D_800CD3C4;
+    OBJECT_LEFT(logoObj) = 0x55;
 
-    switch (arg0->unk_04) {
+    switch (OBJECT_STATE(logoObj)) {
         case 0:
         case 2:
-            arg0->top = 0x15;
+            OBJECT_TOP(logoObj) = 0x15;
             break;
         case 1:
-            arg0->top = 0x30;
+            OBJECT_TOP(logoObj) = 0x30;
             break;
     }
 
@@ -2124,20 +2124,20 @@ void Title_LogoInit(Object* arg0) {
 void func_i4_8011B134(void) {
 }
 
-void Title_StartInit(Object* arg0) {
+void Title_StartInit(Object* startObj) {
 
-    arg0->unk_04 = D_800CD3C4;
+    OBJECT_STATE(startObj) = D_800CD3C4;
     func_80077D50(sTitleNoControllerCompTexInfo, 0);
     if (gControllersConnected != 0) {
         func_80077D50(sTitlePushStartCompTexInfo, 0);
-        arg0->left = 120;
-        switch (arg0->unk_04) {
+        OBJECT_LEFT(startObj) = 120;
+        switch (OBJECT_STATE(startObj)) {
             case 0:
-                arg0->top = 0x96;
+                OBJECT_TOP(startObj) = 150;
                 return;
             case 1:
             case 2:
-                arg0->top = 0xAB;
+                OBJECT_TOP(startObj) = 171;
                 break;
         }
     }
@@ -2152,18 +2152,18 @@ void Title_CopyrightInit(void) {
 
 extern s32 gRamDDCompatible;
 
-void Title_DiskDriveInit(Object* arg0) {
+void Title_DiskDriveInit(Object* diskDriveObj) {
     s32 var_v0;
 
-    arg0->left = 80;
+    OBJECT_LEFT(diskDriveObj) = 80;
 
     switch (D_800CD3C4) {
         case 0:
         case 2:
-            arg0->top = 100;
+            OBJECT_TOP(diskDriveObj) = 100;
             break;
         case 1:
-            arg0->top = 120;
+            OBJECT_TOP(diskDriveObj) = 120;
             break;
     }
 
@@ -2175,7 +2175,7 @@ void Title_DiskDriveInit(Object* arg0) {
 
     func_80077D50(sTitleWarningCompTexInfos[var_v0], 0);
     if (gRamDDCompatible && (func_800758F8() != 1)) {
-        arg0->unk_1C++;
+        OBJECT_COUNTER(diskDriveObj)++;
         D_i4_8011D794 = 1;
         func_800BB334();
     }
@@ -2185,17 +2185,17 @@ void (*sTitleBackgroundEffectFuncs[])(u16*) = {
     func_i4_8011A860, func_i4_8011A860, func_i4_8011A868, func_i4_8011A98C, func_i4_8011AAD8, func_i4_8011AC24,
 };
 
-void Title_BackgroundUpdate(Object* arg0) {
+void Title_BackgroundUpdate(Object* backgroundObj) {
     void (*backgroundEffect)(u16*);
     s32 i;
     u16* backgroundTexture;
 
     if (D_i4_8011D638 == 0) {
-        arg0->unk_04++;
-        if (arg0->unk_04 > 5) {
-            arg0->unk_04 = 1;
+        OBJECT_STATE(backgroundObj)++;
+        if (OBJECT_STATE(backgroundObj) > 5) {
+            OBJECT_STATE(backgroundObj) = 1;
         }
-        backgroundEffect = sTitleBackgroundEffectFuncs[arg0->unk_04];
+        backgroundEffect = sTitleBackgroundEffectFuncs[OBJECT_STATE(backgroundObj)];
     } else {
         backgroundEffect = sTitleBackgroundEffectFuncs[D_i4_8011D638];
     }
@@ -2207,23 +2207,23 @@ void Title_BackgroundUpdate(Object* arg0) {
     }
 }
 
-Gfx* Title_BackgroundDraw(Gfx* gfx, Object* arg1) {
-    return func_80078EA0(gfx, sTitleBackgroundCompTexInfos[arg1->unk_04], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+Gfx* Title_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
+    return func_80078EA0(gfx, sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_8011B3DC(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* Title_LogoDraw(Gfx* gfx, Object* arg1) {
-    return func_80078EA0(gfx, sTitleLogoCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+Gfx* Title_LogoDraw(Gfx* gfx, Object* logoObj) {
+    return func_80078EA0(gfx, sTitleLogoCompTexInfo, OBJECT_LEFT(logoObj), OBJECT_TOP(logoObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
 Gfx* func_i4_8011B438(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* Title_StartDraw(Gfx* gfx, Object* arg1) {
+Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
     s32 var_v1;
 
     if (gControllersConnected != 0) {
@@ -2231,17 +2231,17 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* arg1) {
             return gfx;
         }
         gfx = func_8007DB28(gfx, 0);
-        gfx = func_80078EA0(gfx, sTitlePushStartCompTexInfo, arg1->left, arg1->top, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitlePushStartCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 1, 0, 0, 1.0f, 1.0f);
     } else {
-        arg1->left = 80;
+        OBJECT_LEFT(startObj) = 80;
 
-        switch (arg1->unk_04) {
+        switch (OBJECT_STATE(startObj)) {
             case 0:
             case 2:
-                arg1->top = 150;
+                OBJECT_TOP(startObj) = 150;
                 break;
             case 1:
-                arg1->top = 162;
+                OBJECT_TOP(startObj) = 162;
                 break;
         }
 
@@ -2252,7 +2252,7 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* arg1) {
             var_v1 = 30 - var_v1;
         }
 
-        gfx = func_8007A440(gfx, arg1->left, arg1->top, arg1->left + 160, arg1->top + 32, (s32) (var_v1 * 40) / 60, 0,
+        gfx = func_8007A440(gfx, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), OBJECT_LEFT(startObj) + 160, OBJECT_TOP(startObj) + 32, (s32) (var_v1 * 40) / 60, 0,
                             0, 0xF0);
         var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
@@ -2261,7 +2261,7 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* arg1) {
             gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
 
-        gfx = func_80078EA0(gfx, sTitleNoControllerCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleNoControllerCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
@@ -2270,18 +2270,18 @@ Gfx* func_i4_8011B668(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-Gfx* Title_CopyrightDraw(Gfx* gfx, Object* arg1) {
-    return func_80078EA0(gfx, sCopyrightCompTexInfo, arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+Gfx* Title_CopyrightDraw(Gfx* gfx, Object* copyrightObj) {
+    return func_80078EA0(gfx, sCopyrightCompTexInfo, OBJECT_LEFT(copyrightObj), OBJECT_TOP(copyrightObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
-Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* arg1) {
+Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* diskDriveObj) {
     s32 var_t0;
     s32 var_v1;
 
     var_t0 = 0;
     if (!gRamDDCompatible) {
         var_t0 = 1;
-    } else if (arg1->unk_04 != 0) {
+    } else if (OBJECT_STATE(diskDriveObj) != 0) {
         var_t0 = 2;
     }
 
@@ -2293,7 +2293,7 @@ Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* arg1) {
             var_v1 = 30 - var_v1;
         }
 
-        gfx = func_8007A440(gfx, arg1->left, arg1->top, arg1->left + 160, arg1->top + 32, (s32) (var_v1 * 40) / 60, 0,
+        gfx = func_8007A440(gfx, OBJECT_LEFT(diskDriveObj), OBJECT_TOP(diskDriveObj), OBJECT_LEFT(diskDriveObj) + 160, OBJECT_TOP(diskDriveObj) + 32, (s32) (var_v1 * 40) / 60, 0,
                             0, 0xF0);
         var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
@@ -2301,31 +2301,31 @@ Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* arg1) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
-        gfx = func_80078EA0(gfx, sTitleWarningCompTexInfos[var_t0], arg1->left, arg1->top, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0(gfx, sTitleWarningCompTexInfos[var_t0], OBJECT_LEFT(diskDriveObj), OBJECT_TOP(diskDriveObj), 0, 0, 0, 1.0f, 1.0f);
     }
     return gfx;
 }
 
 extern s8 D_800CD010;
 
-void Title_DiskDriveUpdate(Object* arg0) {
+void Title_DiskDriveUpdate(Object* diskDriveObj) {
 
     if (gRamDDCompatible && (D_i4_8011D790 != -1) && (D_800CD010 == 0)) {
         if (func_800758F8() == 1) {
-            if (arg0->unk_1C != 0) {
+            if (OBJECT_COUNTER(diskDriveObj) != 0) {
                 func_800BB370();
                 func_800BAFA4(0xD);
             }
-            arg0->unk_1C = 0;
-            arg0->unk_04 = 0;
+            OBJECT_COUNTER(diskDriveObj) = 0;
+            OBJECT_STATE(diskDriveObj) = 0;
             D_i4_8011D794 = 0;
             return;
         }
 
-        if (arg0->unk_1C < 30) {
-            arg0->unk_1C++;
+        if (OBJECT_COUNTER(diskDriveObj) < 30) {
+            OBJECT_COUNTER(diskDriveObj)++;
         }
-        switch (arg0->unk_1C) {
+        switch (OBJECT_COUNTER(diskDriveObj)) {
             case 1:
                 func_800BB334();
                 break;
@@ -2334,7 +2334,7 @@ void Title_DiskDriveUpdate(Object* arg0) {
                     func_8007F9E0();
                     func_8007515C();
                 } else {
-                    arg0->unk_04 = 1;
+                    OBJECT_STATE(diskDriveObj) = 1;
                     D_i4_8011D794 = 0;
                 }
                 break;

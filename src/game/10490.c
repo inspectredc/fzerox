@@ -155,12 +155,12 @@ void func_800766F0(void) {
         case GAMEMODE_VS_3P:
         case GAMEMODE_VS_4P:
         case GAMEMODE_RECORDS:
-        case GAMEMODE_D:
-        case GAMEMODE_10:
+        case GAMEMODE_COURSE_EDIT:
+        case GAMEMODE_CREATE_MACHINE:
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_4012:
+        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
         case GAMEMODE_FLX_MACHINE_SELECT:
             *block2 = ALIGN16((uintptr_t) osPhysicalToVirtual(D_800DCDB8));
             break;
@@ -313,13 +313,13 @@ void func_80076CB8(void) {
         case GAMEMODE_DEATH_RACE:
             segmentSize = SEGMENT_VRAM_SIZE(segment_1B8550);
             break;
-        case GAMEMODE_10:
+        case GAMEMODE_CREATE_MACHINE:
             segmentSize = SEGMENT_VRAM_SIZE(create_machine_textures);
             D_800CD2E0 = 2;
             break;
         case GAMEMODE_RECORDS:
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_4012:
+        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
         case GAMEMODE_FLX_MACHINE_SELECT:
             D_800CD2E0 = 2;
             Segment_SetAddress(4, D_800DCDC4);
@@ -351,8 +351,8 @@ void func_80076E10(void) {
         case GAMEMODE_DEATH_RACE:
             ramSize = SEGMENT_VRAM_SIZE(segment_1E23F0);
             break;
-        case GAMEMODE_D:
-        case GAMEMODE_10:
+        case GAMEMODE_COURSE_EDIT:
+        case GAMEMODE_CREATE_MACHINE:
             ramSize = SEGMENT_VRAM_SIZE(segment_145B70);
             break;
         default:
@@ -378,10 +378,10 @@ void func_80076F00(void) {
             D_800CD2E8 = 0;
             Segment_SetAddress(9, D_800DCDD4);
             break;
-        case GAMEMODE_10:
+        case GAMEMODE_CREATE_MACHINE:
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_4012:
+        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
             segmentSize = SEGMENT_DATA_SIZE_CONST(segment_22B0A0);
             D_800DCDD4 = osVirtualToPhysical(func_800768F4(0, segmentSize));
             D_800DCDD8 = ALIGN16(D_800DCDD4 + segmentSize);
@@ -408,7 +408,7 @@ void func_80076FC0(void) {
         case GAMEMODE_VS_3P:
         case GAMEMODE_VS_4P:
         case GAMEMODE_RECORDS:
-        case GAMEMODE_D:
+        case GAMEMODE_COURSE_EDIT:
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
@@ -480,7 +480,7 @@ void func_8007712C(void) {
             segmentBssSize = SEGMENT_BSS_SIZE(ovl_i7);
             break;
         // ovl_i9
-        case GAMEMODE_10:
+        case GAMEMODE_CREATE_MACHINE:
             vramTextStart = SEGMENT_TEXT_START(ovl_i9);
             vramStart = SEGMENT_VRAM_START(ovl_i9);
             vramDataStart = SEGMENT_DATA_START(ovl_i9);
@@ -538,7 +538,7 @@ void func_80077318(void) {
             segmentBssSize = SEGMENT_BSS_SIZE(ovl_i3);
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_4012:
+        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
         case GAMEMODE_FLX_TITLE:
         case GAMEMODE_FLX_MACHINE_SELECT:
             // ovl_i4
@@ -624,13 +624,13 @@ void func_80077630(void) {
                 romOffset = SEGMENT_ROM_START(segment_1B8550);
                 ramSize = SEGMENT_VRAM_SIZE(segment_1B8550);
                 break;
-            case GAMEMODE_10:
+            case GAMEMODE_CREATE_MACHINE:
                 Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                                     SEGMENT_ROM_SIZE(segment_17B960));
                 romOffset = SEGMENT_ROM_START(create_machine_textures);
                 ramSize = SEGMENT_VRAM_SIZE(create_machine_textures);
                 break;
-            case GAMEMODE_D:
+            case GAMEMODE_COURSE_EDIT:
                 Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                                     SEGMENT_ROM_SIZE(segment_17B960));
                 romOffset = SEGMENT_ROM_START(course_edit_textures);
@@ -638,7 +638,7 @@ void func_80077630(void) {
                 break;
             case GAMEMODE_RECORDS:
             case GAMEMODE_LX_MACHINE_SETTINGS:
-            case GAMEMODE_4012:
+            case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
             case GAMEMODE_FLX_MACHINE_SELECT:
                 Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
                                     SEGMENT_ROM_SIZE(segment_17B960));
@@ -670,8 +670,8 @@ void func_80077810(void) {
                 romOffset = SEGMENT_ROM_START(segment_1E23F0);
                 ramSize = SEGMENT_VRAM_SIZE(segment_1E23F0);
                 break;
-            case GAMEMODE_D:
-            case GAMEMODE_10:
+            case GAMEMODE_COURSE_EDIT:
+            case GAMEMODE_CREATE_MACHINE:
                 romOffset = SEGMENT_ROM_START(segment_145B70);
                 ramSize = SEGMENT_VRAM_SIZE(segment_145B70);
                 break;
@@ -693,10 +693,10 @@ void func_800778F8(void) {
 
     if (D_800CD2E8 != 0) {
         switch (gGameMode) {
-            case GAMEMODE_10:
+            case GAMEMODE_CREATE_MACHINE:
             case GAMEMODE_GP_END_CS:
             case GAMEMODE_LX_MACHINE_SETTINGS:
-            case GAMEMODE_4012:
+            case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
                 romOffset = SEGMENT_ROM_START(segment_22B0A0);
                 ramSize = SEGMENT_VRAM_SIZE(segment_22B0A0);
                 sp24 = func_800768F4(1, ramSize);
@@ -733,7 +733,7 @@ void func_800779D0(void) {
             case GAMEMODE_VS_3P:
             case GAMEMODE_VS_4P:
             case GAMEMODE_RECORDS:
-            case GAMEMODE_D:
+            case GAMEMODE_COURSE_EDIT:
             case GAMEMODE_TIME_ATTACK:
             case GAMEMODE_GP_END_CS:
             case GAMEMODE_DEATH_RACE:
@@ -775,7 +775,7 @@ void func_80077B04(void) {
         sp28 = D_800CD2F0;
 
         switch (gGameMode) {
-            case GAMEMODE_D:
+            case GAMEMODE_COURSE_EDIT:
                 romOffset = D_800CD2F8[sp28];
                 ramSize = D_800CD350[sp28] - D_800CD324[sp28];
                 break;

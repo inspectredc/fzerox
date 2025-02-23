@@ -49,12 +49,12 @@ void (*sGamemodeInitFuncs[])(void) = {
     CourseSelect_Init,     // GAMEMODE_COURSE_SELECT
     Credits_Init,          // GAMEMODE_SKIPPABLE_CREDITS
     Credits_Init,          // GAMEMODE_UNSKIPPABLE_CREDITS
-    NULL,                  // GAMEMODE_D
+    NULL,                  // GAMEMODE_COURSE_EDIT
     Race_Init,             // GAMEMODE_TIME_ATTACK
     NextCourseSelect_Init, // GAMEMODE_GP_RACE_NEXT_COURSE
-    NULL,                  // GAMEMODE_10
+    NULL,                  // GAMEMODE_CREATE_MACHINE
     EndingCutscene_Init,   // GAMEMODE_GP_END_CS
-    MachineSettings_Init,  // GAMEMODE_12
+    MachineSettings_Init,  // GAMEMODE_GP_RACE_NEXT_MACHINE_SETTINGS
     CourseSelect_Init,     // GAMEMODE_RECORDS_COURSE_SELECT
     OptionsMenu_Init,      // GAMEMODE_OPTIONS_MENU
     Race_Init,             // GAMEMODE_DEATH_RACE
@@ -74,12 +74,12 @@ s32 (*sGamemodeUpdateFuncs[])(void) = {
     CourseSelect_Update,     // GAMEMODE_COURSE_SELECT
     Credits_Update,          // GAMEMODE_SKIPPABLE_CREDITS
     Credits_Update,          // GAMEMODE_UNSKIPPABLE_CREDITS
-    NULL,                    // GAMEMODE_D
+    NULL,                    // GAMEMODE_COURSE_EDIT
     Race_Update,             // GAMEMODE_TIME_ATTACK
     NextCourseSelect_Update, // GAMEMODE_GP_RACE_NEXT_COURSE
-    NULL,                    // GAMEMODE_10
+    NULL,                    // GAMEMODE_CREATE_MACHINE
     EndingCutscene_Update,   // GAMEMODE_GP_END_CS
-    MachineSettings_Update,  // GAMEMODE_12
+    MachineSettings_Update,  // GAMEMODE_GP_RACE_NEXT_MACHINE_SETTINGS
     CourseSelect_Update,     // GAMEMODE_RECORDS_COURSE_SELECT
     OptionsMenu_Update,      // GAMEMODE_OPTIONS_MENU
     Race_Update,             // GAMEMODE_DEATH_RACE
@@ -99,12 +99,12 @@ Gfx* (*sGamemodeDrawFuncs[])(Gfx*) = {
     CourseSelect_Draw,    // GAMEMODE_COURSE_SELECT
     Credits_Draw,         // GAMEMODE_SKIPPABLE_CREDITS
     Credits_Draw,         // GAMEMODE_UNSKIPPABLE_CREDITS
-    NULL,                 // GAMEMODE_D
+    NULL,                 // GAMEMODE_COURSE_EDIT
     Race_Draw,            // GAMEMODE_TIME_ATTACK
     CourseSelect_Draw,    // GAMEMODE_GP_RACE_NEXT_COURSE
-    NULL,                 // GAMEMODE_10
+    NULL,                 // GAMEMODE_CREATE_MACHINE
     EndingCutscene_Draw,  // GAMEMODE_GP_END_CS
-    MachineSettings_Draw, // GAMEMODE_12
+    MachineSettings_Draw, // GAMEMODE_GP_RACE_NEXT_MACHINE_SETTINGS
     CourseSelect_Draw,    // GAMEMODE_RECORDS_COURSE_SELECT
     OptionsMenu_Draw,     // GAMEMODE_OPTIONS_MENU
     Race_Draw,            // GAMEMODE_DEATH_RACE
@@ -175,44 +175,44 @@ void func_80068BC0(void) {
                 D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
                 break;
             case 6:
-                D_800CD044 = 0xB;
+                D_800CD044 = 11;
                 D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
                 break;
             case 8:
-                D_800CD044 = 0x15;
+                D_800CD044 = 21;
                 D_800DCE48.gameMode = GAMEMODE_RECORDS;
                 break;
             case 9:
-                D_800CD044 = 0x15;
+                D_800CD044 = 21;
                 D_800DCE48.gameMode = GAMEMODE_FLX_RECORDS_COURSE_SELECT;
                 break;
             case 10:
             case 14:
-                D_800CD044 = 0x15;
+                D_800CD044 = 21;
                 D_800DCE48.gameMode = GAMEMODE_FLX_MAIN_MENU;
                 break;
             case 11:
-                D_800CD044 = 0x1F;
+                D_800CD044 = 31;
                 D_800DCE48.gameMode = GAMEMODE_FLX_COURSE_SELECT;
                 break;
             case 12:
-                D_800CD044 = 0x1F;
+                D_800CD044 = 31;
                 D_800DCE48.gameMode = GAMEMODE_FLX_MAIN_MENU;
                 break;
             case 13:
-                D_800CD044 = 0x15;
+                D_800CD044 = 21;
                 D_800DCE48.gameMode = GAMEMODE_FLX_OPTIONS_MENU;
                 break;
             case 15:
-                D_800CD044 = 0xB;
+                D_800CD044 = 11;
                 if (gGameMode == GAMEMODE_GP_RACE) {
-                    D_800DCE48.gameMode = GAMEMODE_4012;
+                    D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS;
                 } else {
                     D_800DCE48.gameMode = GAMEMODE_LX_MACHINE_SETTINGS;
                 }
                 break;
             case 16:
-                D_800CD044 = 0xB;
+                D_800CD044 = 11;
                 D_800DCE48.gameMode = gGameMode;
                 break;
         }
@@ -250,15 +250,15 @@ void func_80068DCC(void) {
             var_v1 = 0xF;
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_4012:
+        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
         case GAMEMODE_FLX_MAIN_MENU:
         case GAMEMODE_FLX_MACHINE_SELECT:
         case GAMEMODE_FLX_COURSE_SELECT:
         case GAMEMODE_FLX_GP_RACE_NEXT_COURSE:
             var_v1 = 0xE;
             break;
-        case GAMEMODE_D:
-        case GAMEMODE_10:
+        case GAMEMODE_COURSE_EDIT:
+        case GAMEMODE_CREATE_MACHINE:
             D_800CD154 = 0;
             return;
         default:
@@ -403,8 +403,8 @@ void func_800690FC(void) {
             func_80069700();
             switch (gGameMode) {
                 case GAMEMODE_LX_MACHINE_SETTINGS:
-                case GAMEMODE_4012:
-                    if ((gNumPlayers == 1) && (gCourseIndex < 0x18)) {
+                case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+                    if ((gNumPlayers == 1) && (gCourseIndex < 24)) {
                         Save_UpdateCourseCharacterSave(gCourseIndex);
                     }
                     break;
@@ -425,9 +425,9 @@ void func_800690FC(void) {
                 case GAMEMODE_VS_2P:
                 case GAMEMODE_VS_3P:
                 case GAMEMODE_VS_4P:
-                case GAMEMODE_D:
+                case GAMEMODE_COURSE_EDIT:
                 case GAMEMODE_TIME_ATTACK:
-                case GAMEMODE_10:
+                case GAMEMODE_CREATE_MACHINE:
                 case GAMEMODE_DEATH_RACE:
                     if (D_800CD010 == 0) {
                         func_8007E08C();
@@ -441,10 +441,10 @@ void func_800690FC(void) {
                 case GAMEMODE_VS_2P:
                 case GAMEMODE_VS_3P:
                 case GAMEMODE_VS_4P:
-                case GAMEMODE_D:
+                case GAMEMODE_COURSE_EDIT:
                 case GAMEMODE_DEATH_RACE:
                 case GAMEMODE_LX_MACHINE_SETTINGS:
-                case GAMEMODE_4012:
+                case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
                 case GAMEMODE_FLX_MACHINE_SELECT:
                     sp24 = 1;
                     break;

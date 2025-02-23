@@ -3,6 +3,7 @@
 
 #include "sys.h"
 #include "fzx_math.h"
+#include "fzx_object.h"
 #include "unk_structs.h"
 #include "PR/leo.h"
 
@@ -105,7 +106,7 @@ void Object_LerpAwayFromPosX(Object* object, s32 origin, s32 initialStep);
 
 Gfx* func_8007A440(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
 void func_8007A59C(u16* arg0, s32 arg1);
-void func_8007A828(u16* arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void func_8007A828(u16* arg0, size_t size, s32 arg2, s32 arg3, s32 arg4);
 Gfx* func_8007AB88(Gfx*);
 Gfx* func_8007ABA4(Gfx*);
 Gfx* func_8007AD44(Gfx* gfx, u16 red, u16 green, u16 blue, s32 left, s32 top, s32 right, s32 bottom);
