@@ -1,6 +1,7 @@
 #include "global.h"
 #include "audio.h"
 
+#ifndef VERSION_JP
 static char D_800D1130[] = "Warning:Kill Note  %x \n";
 static char D_800D1148[] = "Kill Voice %d (ID %d) %d\n";
 static char D_800D1164[] = "Warning: Running Sequence's data disappear!\n";
@@ -57,6 +58,7 @@ static char D_800D1670[] = "Request--------Single-Stay, %d\n";
 static char D_800D1690[] = "Try Kill %d \n";
 static char D_800D16A0[] = "Try Kill %x %x\n";
 static char D_800D16B0[] = "Try Kill %x %x %x\n";
+#endif
 
 #define CALCULATE_ADSR_DECAY(scaleInv) ((256.0f * gAudioBufferParams.ticksPerUpdateInvScaled) / (scaleInv))
 

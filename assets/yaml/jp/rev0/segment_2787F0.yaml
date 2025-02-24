@@ -1,0 +1,20 @@
+:config:
+  header:
+    code:
+      - '#include "assets/segment_2787F0.h"'
+    header:
+      - '#include "gfx.h"'
+
+D_2787F0:
+  type: GFX
+  offset: 0x278C70
+  symbol: D_2787F0
+
+D_2787F8:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 128
+  height: 106
+  offset: 0x278C78
+  symbol: D_2787F8

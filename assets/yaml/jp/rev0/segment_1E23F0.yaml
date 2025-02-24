@@ -1,0 +1,6539 @@
+:config:
+  segments:
+    - [0x07,  0x1E2870]
+  header:
+    code:
+      - '#include "assets/segment_1E23F0.h"'
+    header:
+      - '#include "gfx.h"'
+
+D_7000000:
+  type: GFX
+  offset: 0x0
+  symbol: D_7000000
+
+D_7000008:
+  type: VTX
+  count: 12
+  offset: 0x8
+  symbol: D_7000008
+
+D_70000C8:
+  type: VTX
+  count: 32
+  offset: 0xC8
+  symbol: D_70000C8
+
+D_70002C8:
+  type: VTX
+  count: 20
+  offset: 0x2C8
+  symbol: D_70002C8
+
+D_7000408:
+  type: VTX
+  count: 6
+  offset: 0x408
+  symbol: D_7000408
+
+D_7000468:
+  type: VTX
+  count: 93
+  offset: 0x468
+  symbol: D_7000468
+
+D_7000A38:
+  type: VTX
+  count: 12
+  offset: 0xA38
+  symbol: D_7000A38
+
+D_7000AF8:
+  type: VTX
+  count: 65
+  offset: 0xAF8
+  symbol: D_7000AF8
+
+D_7000F08:
+  type: VTX
+  count: 11
+  offset: 0xF08
+  symbol: D_7000F08
+
+D_7000FB8:
+  type: VTX
+  count: 29
+  offset: 0xFB8
+  symbol: D_7000FB8
+
+D_7001188:
+  type: VTX
+  count: 10
+  offset: 0x1188
+  symbol: D_7001188
+
+D_7001228:
+  type: VTX
+  count: 6
+  offset: 0x1228
+  symbol: D_7001228
+
+D_7001288:
+  type: VTX
+  count: 85
+  offset: 0x1288
+  symbol: D_7001288
+
+D_70017D8:
+  type: VTX
+  count: 12
+  offset: 0x17D8
+  symbol: D_70017D8
+
+D_7001898:
+  type: VTX
+  count: 30
+  offset: 0x1898
+  symbol: D_7001898
+
+D_7001A78:
+  type: VTX
+  count: 14
+  offset: 0x1A78
+  symbol: D_7001A78
+
+D_7001B58:
+  type: VTX
+  count: 10
+  offset: 0x1B58
+  symbol: D_7001B58
+
+D_7001BF8:
+  type: VTX
+  count: 38
+  offset: 0x1BF8
+  symbol: D_7001BF8
+
+D_7001E58:
+  type: VTX
+  count: 12
+  offset: 0x1E58
+  symbol: D_7001E58
+
+D_7001F18:
+  type: VTX
+  count: 11
+  offset: 0x1F18
+  symbol: D_7001F18
+
+D_7001FC8:
+  type: VTX
+  count: 9
+  offset: 0x1FC8
+  symbol: D_7001FC8
+
+D_7002058:
+  type: VTX
+  count: 10
+  offset: 0x2058
+  symbol: D_7002058
+
+D_70020F8:
+  type: VTX
+  count: 25
+  offset: 0x20F8
+  symbol: D_70020F8
+
+D_7002288:
+  type: VTX
+  count: 12
+  offset: 0x2288
+  symbol: D_7002288
+
+D_7002348:
+  type: VTX
+  count: 6
+  offset: 0x2348
+  symbol: D_7002348
+
+D_70023A8:
+  type: VTX
+  count: 10
+  offset: 0x23A8
+  symbol: D_70023A8
+
+D_7002448:
+  type: VTX
+  count: 22
+  offset: 0x2448
+  symbol: D_7002448
+
+D_70025A8:
+  type: VTX
+  count: 21
+  offset: 0x25A8
+  symbol: D_70025A8
+
+D_70026F8:
+  type: VTX
+  count: 8
+  offset: 0x26F8
+  symbol: D_70026F8
+
+D_7002778:
+  type: VTX
+  count: 10
+  offset: 0x2778
+  symbol: D_7002778
+
+D_7002818:
+  type: VTX
+  count: 4
+  offset: 0x2818
+  symbol: D_7002818
+
+D_7002858:
+  type: VTX
+  count: 106
+  offset: 0x2858
+  symbol: D_7002858
+
+D_7002EF8:
+  type: VTX
+  count: 10
+  offset: 0x2EF8
+  symbol: D_7002EF8
+
+D_7002F98:
+  type: VTX
+  count: 16
+  offset: 0x2F98
+  symbol: D_7002F98
+
+D_7003098:
+  type: VTX
+  count: 19
+  offset: 0x3098
+  symbol: D_7003098
+
+D_70031C8:
+  type: VTX
+  count: 10
+  offset: 0x31C8
+  symbol: D_70031C8
+
+D_7003268:
+  type: VTX
+  count: 4
+  offset: 0x3268
+  symbol: D_7003268
+
+D_70032A8:
+  type: VTX
+  count: 79
+  offset: 0x32A8
+  symbol: D_70032A8
+
+D_7003798:
+  type: VTX
+  count: 6
+  offset: 0x3798
+  symbol: D_7003798
+
+D_70037F8:
+  type: VTX
+  count: 6
+  offset: 0x37F8
+  symbol: D_70037F8
+
+D_7003858:
+  type: VTX
+  count: 9
+  offset: 0x3858
+  symbol: D_7003858
+
+D_70038E8:
+  type: VTX
+  count: 10
+  offset: 0x38E8
+  symbol: D_70038E8
+
+D_7003988:
+  type: VTX
+  count: 33
+  offset: 0x3988
+  symbol: D_7003988
+
+D_7003B98:
+  type: VTX
+  count: 4
+  offset: 0x3B98
+  symbol: D_7003B98
+
+D_7003BD8:
+  type: VTX
+  count: 33
+  offset: 0x3BD8
+  symbol: D_7003BD8
+
+D_7003DE8:
+  type: VTX
+  count: 14
+  offset: 0x3DE8
+  symbol: D_7003DE8
+
+D_7003EC8:
+  type: VTX
+  count: 8
+  offset: 0x3EC8
+  symbol: D_7003EC8
+
+D_7003F48:
+  type: VTX
+  count: 12
+  offset: 0x3F48
+  symbol: D_7003F48
+
+D_7004008:
+  type: VTX
+  count: 34
+  offset: 0x4008
+  symbol: D_7004008
+
+D_7004228:
+  type: VTX
+  count: 83
+  offset: 0x4228
+  symbol: D_7004228
+
+D_7004758:
+  type: VTX
+  count: 10
+  offset: 0x4758
+  symbol: D_7004758
+
+D_70047F8:
+  type: VTX
+  count: 6
+  offset: 0x47F8
+  symbol: D_70047F8
+
+D_7004858:
+  type: VTX
+  count: 12
+  offset: 0x4858
+  symbol: D_7004858
+
+D_7004918:
+  type: VTX
+  count: 15
+  offset: 0x4918
+  symbol: D_7004918
+
+D_7004A08:
+  type: VTX
+  count: 12
+  offset: 0x4A08
+  symbol: D_7004A08
+
+D_7004AC8:
+  type: VTX
+  count: 8
+  offset: 0x4AC8
+  symbol: D_7004AC8
+
+D_7004B48:
+  type: VTX
+  count: 32
+  offset: 0x4B48
+  symbol: D_7004B48
+
+D_7004D48:
+  type: VTX
+  count: 80
+  offset: 0x4D48
+  symbol: D_7004D48
+
+D_7005248:
+  type: VTX
+  count: 10
+  offset: 0x5248
+  symbol: D_7005248
+
+D_70052E8:
+  type: VTX
+  count: 6
+  offset: 0x52E8
+  symbol: D_70052E8
+
+D_7005348:
+  type: VTX
+  count: 14
+  offset: 0x5348
+  symbol: D_7005348
+
+D_7005428:
+  type: VTX
+  count: 6
+  offset: 0x5428
+  symbol: D_7005428
+
+D_7005488:
+  type: VTX
+  count: 4
+  offset: 0x5488
+  symbol: D_7005488
+
+D_70054C8:
+  type: VTX
+  count: 24
+  offset: 0x54C8
+  symbol: D_70054C8
+
+D_7005648:
+  type: VTX
+  count: 41
+  offset: 0x5648
+  symbol: D_7005648
+
+D_70058D8:
+  type: VTX
+  count: 6
+  offset: 0x58D8
+  symbol: D_70058D8
+
+D_7005938:
+  type: VTX
+  count: 3
+  offset: 0x5938
+  symbol: D_7005938
+
+D_7005968:
+  type: VTX
+  count: 21
+  offset: 0x5968
+  symbol: D_7005968
+
+D_7005AB8:
+  type: VTX
+  count: 22
+  offset: 0x5AB8
+  symbol: D_7005AB8
+
+D_7005C18:
+  type: VTX
+  count: 6
+  offset: 0x5C18
+  symbol: D_7005C18
+
+D_7005C78:
+  type: VTX
+  count: 8
+  offset: 0x5C78
+  symbol: D_7005C78
+
+D_7005CF8:
+  type: VTX
+  count: 15
+  offset: 0x5CF8
+  symbol: D_7005CF8
+
+D_7005DE8:
+  type: VTX
+  count: 6
+  offset: 0x5DE8
+  symbol: D_7005DE8
+
+D_7005E48:
+  type: VTX
+  count: 112
+  offset: 0x5E48
+  symbol: D_7005E48
+
+D_7006548:
+  type: VTX
+  count: 20
+  offset: 0x6548
+  symbol: D_7006548
+
+D_7006688:
+  type: VTX
+  count: 4
+  offset: 0x6688
+  symbol: D_7006688
+
+D_70066C8:
+  type: VTX
+  count: 12
+  offset: 0x66C8
+  symbol: D_70066C8
+
+D_7006788:
+  type: VTX
+  count: 35
+  offset: 0x6788
+  symbol: D_7006788
+
+D_70069B8:
+  type: VTX
+  count: 8
+  offset: 0x69B8
+  symbol: D_70069B8
+
+D_7006A38:
+  type: VTX
+  count: 13
+  offset: 0x6A38
+  symbol: D_7006A38
+
+D_7006B08:
+  type: VTX
+  count: 61
+  offset: 0x6B08
+  symbol: D_7006B08
+
+D_7006ED8:
+  type: VTX
+  count: 6
+  offset: 0x6ED8
+  symbol: D_7006ED8
+
+D_7006F38:
+  type: VTX
+  count: 20
+  offset: 0x6F38
+  symbol: D_7006F38
+
+D_7007078:
+  type: VTX
+  count: 6
+  offset: 0x7078
+  symbol: D_7007078
+
+D_70070D8:
+  type: VTX
+  count: 12
+  offset: 0x70D8
+  symbol: D_70070D8
+
+D_7007198:
+  type: VTX
+  count: 30
+  offset: 0x7198
+  symbol: D_7007198
+
+D_7007378:
+  type: VTX
+  count: 4
+  offset: 0x7378
+  symbol: D_7007378
+
+D_70073B8:
+  type: VTX
+  count: 6
+  offset: 0x73B8
+  symbol: D_70073B8
+
+D_7007418:
+  type: VTX
+  count: 10
+  offset: 0x7418
+  symbol: D_7007418
+
+D_70074B8:
+  type: VTX
+  count: 12
+  offset: 0x74B8
+  symbol: D_70074B8
+
+D_7007578:
+  type: VTX
+  count: 32
+  offset: 0x7578
+  symbol: D_7007578
+
+D_7007778:
+  type: VTX
+  count: 4
+  offset: 0x7778
+  symbol: D_7007778
+
+D_70077B8:
+  type: VTX
+  count: 12
+  offset: 0x77B8
+  symbol: D_70077B8
+
+D_7007878:
+  type: VTX
+  count: 14
+  offset: 0x7878
+  symbol: D_7007878
+
+D_7007958:
+  type: VTX
+  count: 23
+  offset: 0x7958
+  symbol: D_7007958
+
+D_7007AC8:
+  type: VTX
+  count: 20
+  offset: 0x7AC8
+  symbol: D_7007AC8
+
+D_7007C08:
+  type: VTX
+  count: 20
+  offset: 0x7C08
+  symbol: D_7007C08
+
+D_7007D48:
+  type: VTX
+  count: 4
+  offset: 0x7D48
+  symbol: D_7007D48
+
+D_7007D88:
+  type: VTX
+  count: 8
+  offset: 0x7D88
+  symbol: D_7007D88
+
+D_7007E08:
+  type: VTX
+  count: 26
+  offset: 0x7E08
+  symbol: D_7007E08
+
+D_7007FA8:
+  type: VTX
+  count: 37
+  offset: 0x7FA8
+  symbol: D_7007FA8
+
+D_70081F8:
+  type: VTX
+  count: 39
+  offset: 0x81F8
+  symbol: D_70081F8
+
+D_7008468:
+  type: VTX
+  count: 17
+  offset: 0x8468
+  symbol: D_7008468
+
+D_7008578:
+  type: VTX
+  count: 10
+  offset: 0x8578
+  symbol: D_7008578
+
+D_7008618:
+  type: VTX
+  count: 16
+  offset: 0x8618
+  symbol: D_7008618
+
+D_7008718:
+  type: VTX
+  count: 31
+  offset: 0x8718
+  symbol: D_7008718
+
+D_7008908:
+  type: VTX
+  count: 8
+  offset: 0x8908
+  symbol: D_7008908
+
+D_7008988:
+  type: VTX
+  count: 26
+  offset: 0x8988
+  symbol: D_7008988
+
+D_7008B28:
+  type: VTX
+  count: 20
+  offset: 0x8B28
+  symbol: D_7008B28
+
+D_7008C68:
+  type: VTX
+  count: 4
+  offset: 0x8C68
+  symbol: D_7008C68
+
+D_7008CA8:
+  type: VTX
+  count: 18
+  offset: 0x8CA8
+  symbol: D_7008CA8
+
+D_7008DC8:
+  type: VTX
+  count: 6
+  offset: 0x8DC8
+  symbol: D_7008DC8
+
+D_7008E28:
+  type: VTX
+  count: 8
+  offset: 0x8E28
+  symbol: D_7008E28
+
+D_7008EA8:
+  type: VTX
+  count: 16
+  offset: 0x8EA8
+  symbol: D_7008EA8
+
+D_7008FA8:
+  type: VTX
+  count: 3
+  offset: 0x8FA8
+  symbol: D_7008FA8
+
+D_7008FD8:
+  type: VTX
+  count: 6
+  offset: 0x8FD8
+  symbol: D_7008FD8
+
+D_7009038:
+  type: VTX
+  count: 16
+  offset: 0x9038
+  symbol: D_7009038
+
+D_7009138:
+  type: VTX
+  count: 28
+  offset: 0x9138
+  symbol: D_7009138
+
+D_70092F8:
+  type: VTX
+  count: 16
+  offset: 0x92F8
+  symbol: D_70092F8
+
+D_70093F8:
+  type: VTX
+  count: 20
+  offset: 0x93F8
+  symbol: D_70093F8
+
+D_7009538:
+  type: VTX
+  count: 53
+  offset: 0x9538
+  symbol: D_7009538
+
+D_7009888:
+  type: VTX
+  count: 14
+  offset: 0x9888
+  symbol: D_7009888
+
+D_7009968:
+  type: VTX
+  count: 4
+  offset: 0x9968
+  symbol: D_7009968
+
+D_70099A8:
+  type: VTX
+  count: 12
+  offset: 0x99A8
+  symbol: D_70099A8
+
+D_7009A68:
+  type: VTX
+  count: 20
+  offset: 0x9A68
+  symbol: D_7009A68
+
+D_7009BA8:
+  type: VTX
+  count: 19
+  offset: 0x9BA8
+  symbol: D_7009BA8
+
+D_7009CD8:
+  type: VTX
+  count: 14
+  offset: 0x9CD8
+  symbol: D_7009CD8
+
+D_7009DB8:
+  type: VTX
+  count: 20
+  offset: 0x9DB8
+  symbol: D_7009DB8
+
+D_7009EF8:
+  type: VTX
+  count: 42
+  offset: 0x9EF8
+  symbol: D_7009EF8
+
+D_700A198:
+  type: VTX
+  count: 6
+  offset: 0xA198
+  symbol: D_700A198
+
+D_700A1F8:
+  type: VTX
+  count: 4
+  offset: 0xA1F8
+  symbol: D_700A1F8
+
+D_700A238:
+  type: VTX
+  count: 24
+  offset: 0xA238
+  symbol: D_700A238
+
+D_700A3B8:
+  type: VTX
+  count: 8
+  offset: 0xA3B8
+  symbol: D_700A3B8
+
+D_700A438:
+  type: VTX
+  count: 7
+  offset: 0xA438
+  symbol: D_700A438
+
+D_700A4A8:
+  type: VTX
+  count: 3
+  offset: 0xA4A8
+  symbol: D_700A4A8
+
+D_700A4D8:
+  type: VTX
+  count: 45
+  offset: 0xA4D8
+  symbol: D_700A4D8
+
+D_700A7A8:
+  type: VTX
+  count: 3
+  offset: 0xA7A8
+  symbol: D_700A7A8
+
+D_700A7D8:
+  type: VTX
+  count: 19
+  offset: 0xA7D8
+  symbol: D_700A7D8
+
+D_700A908:
+  type: VTX
+  count: 10
+  offset: 0xA908
+  symbol: D_700A908
+
+D_700A9A8:
+  type: VTX
+  count: 24
+  offset: 0xA9A8
+  symbol: D_700A9A8
+
+D_700AB28:
+  type: VTX
+  count: 21
+  offset: 0xAB28
+  symbol: D_700AB28
+
+D_700AC78:
+  type: VTX
+  count: 8
+  offset: 0xAC78
+  symbol: D_700AC78
+
+D_700ACF8:
+  type: VTX
+  count: 10
+  offset: 0xACF8
+  symbol: D_700ACF8
+
+D_700AD98:
+  type: VTX
+  count: 4
+  offset: 0xAD98
+  symbol: D_700AD98
+
+D_700ADD8:
+  type: VTX
+  count: 90
+  offset: 0xADD8
+  symbol: D_700ADD8
+
+D_700B378:
+  type: VTX
+  count: 10
+  offset: 0xB378
+  symbol: D_700B378
+
+D_700B418:
+  type: VTX
+  count: 18
+  offset: 0xB418
+  symbol: D_700B418
+
+D_700B538:
+  type: VTX
+  count: 19
+  offset: 0xB538
+  symbol: D_700B538
+
+D_700B668:
+  type: VTX
+  count: 10
+  offset: 0xB668
+  symbol: D_700B668
+
+D_700B708:
+  type: VTX
+  count: 4
+  offset: 0xB708
+  symbol: D_700B708
+
+D_700B748:
+  type: VTX
+  count: 58
+  offset: 0xB748
+  symbol: D_700B748
+
+D_700BAE8:
+  type: VTX
+  count: 6
+  offset: 0xBAE8
+  symbol: D_700BAE8
+
+D_700BB48:
+  type: VTX
+  count: 6
+  offset: 0xBB48
+  symbol: D_700BB48
+
+D_700BBA8:
+  type: VTX
+  count: 9
+  offset: 0xBBA8
+  symbol: D_700BBA8
+
+D_700BC38:
+  type: VTX
+  count: 10
+  offset: 0xBC38
+  symbol: D_700BC38
+
+D_700BCD8:
+  type: VTX
+  count: 22
+  offset: 0xBCD8
+  symbol: D_700BCD8
+
+D_700BE38:
+  type: VTX
+  count: 6
+  offset: 0xBE38
+  symbol: D_700BE38
+
+D_700BE98:
+  type: VTX
+  count: 22
+  offset: 0xBE98
+  symbol: D_700BE98
+
+D_700BFF8:
+  type: VTX
+  count: 14
+  offset: 0xBFF8
+  symbol: D_700BFF8
+
+D_700C0D8:
+  type: VTX
+  count: 8
+  offset: 0xC0D8
+  symbol: D_700C0D8
+
+D_700C158:
+  type: VTX
+  count: 36
+  offset: 0xC158
+  symbol: D_700C158
+
+D_700C398:
+  type: VTX
+  count: 57
+  offset: 0xC398
+  symbol: D_700C398
+
+D_700C728:
+  type: VTX
+  count: 10
+  offset: 0xC728
+  symbol: D_700C728
+
+D_700C7C8:
+  type: VTX
+  count: 6
+  offset: 0xC7C8
+  symbol: D_700C7C8
+
+D_700C828:
+  type: VTX
+  count: 12
+  offset: 0xC828
+  symbol: D_700C828
+
+D_700C8E8:
+  type: VTX
+  count: 16
+  offset: 0xC8E8
+  symbol: D_700C8E8
+
+D_700C9E8:
+  type: VTX
+  count: 12
+  offset: 0xC9E8
+  symbol: D_700C9E8
+
+D_700CAA8:
+  type: VTX
+  count: 8
+  offset: 0xCAA8
+  symbol: D_700CAA8
+
+D_700CB28:
+  type: VTX
+  count: 29
+  offset: 0xCB28
+  symbol: D_700CB28
+
+D_700CCF8:
+  type: VTX
+  count: 54
+  offset: 0xCCF8
+  symbol: D_700CCF8
+
+D_700D058:
+  type: VTX
+  count: 10
+  offset: 0xD058
+  symbol: D_700D058
+
+D_700D0F8:
+  type: VTX
+  count: 6
+  offset: 0xD0F8
+  symbol: D_700D0F8
+
+D_700D158:
+  type: VTX
+  count: 14
+  offset: 0xD158
+  symbol: D_700D158
+
+D_700D238:
+  type: VTX
+  count: 6
+  offset: 0xD238
+  symbol: D_700D238
+
+D_700D298:
+  type: VTX
+  count: 4
+  offset: 0xD298
+  symbol: D_700D298
+
+D_700D2D8:
+  type: VTX
+  count: 22
+  offset: 0xD2D8
+  symbol: D_700D2D8
+
+D_700D438:
+  type: VTX
+  count: 26
+  offset: 0xD438
+  symbol: D_700D438
+
+D_700D5D8:
+  type: VTX
+  count: 6
+  offset: 0xD5D8
+  symbol: D_700D5D8
+
+D_700D638:
+  type: VTX
+  count: 3
+  offset: 0xD638
+  symbol: D_700D638
+
+D_700D668:
+  type: VTX
+  count: 21
+  offset: 0xD668
+  symbol: D_700D668
+
+D_700D7B8:
+  type: VTX
+  count: 10
+  offset: 0xD7B8
+  symbol: D_700D7B8
+
+D_700D858:
+  type: VTX
+  count: 58
+  offset: 0xD858
+  symbol: D_700D858
+
+D_700DBF8:
+  type: VTX
+  count: 8
+  offset: 0xDBF8
+  symbol: D_700DBF8
+
+D_700DC78:
+  type: VTX
+  count: 12
+  offset: 0xDC78
+  symbol: D_700DC78
+
+D_700DD38:
+  type: VTX
+  count: 25
+  offset: 0xDD38
+  symbol: D_700DD38
+
+D_700DEC8:
+  type: VTX
+  count: 14
+  offset: 0xDEC8
+  symbol: D_700DEC8
+
+D_700DFA8:
+  type: VTX
+  count: 20
+  offset: 0xDFA8
+  symbol: D_700DFA8
+
+D_700E0E8:
+  type: VTX
+  count: 27
+  offset: 0xE0E8
+  symbol: D_700E0E8
+
+D_700E298:
+  type: VTX
+  count: 45
+  offset: 0xE298
+  symbol: D_700E298
+
+D_700E568:
+  type: VTX
+  count: 8
+  offset: 0xE568
+  symbol: D_700E568
+
+D_700E5E8:
+  type: VTX
+  count: 12
+  offset: 0xE5E8
+  symbol: D_700E5E8
+
+D_700E6A8:
+  type: VTX
+  count: 16
+  offset: 0xE6A8
+  symbol: D_700E6A8
+
+D_700E7A8:
+  type: VTX
+  count: 4
+  offset: 0xE7A8
+  symbol: D_700E7A8
+
+D_700E7E8:
+  type: VTX
+  count: 10
+  offset: 0xE7E8
+  symbol: D_700E7E8
+
+D_700E888:
+  type: VTX
+  count: 24
+  offset: 0xE888
+  symbol: D_700E888
+
+D_700EA08:
+  type: VTX
+  count: 38
+  offset: 0xEA08
+  symbol: D_700EA08
+
+D_700EC68:
+  type: VTX
+  count: 4
+  offset: 0xEC68
+  symbol: D_700EC68
+
+D_700ECA8:
+  type: VTX
+  count: 10
+  offset: 0xECA8
+  symbol: D_700ECA8
+
+D_700ED48:
+  type: VTX
+  count: 21
+  offset: 0xED48
+  symbol: D_700ED48
+
+D_700EE98:
+  type: VTX
+  count: 23
+  offset: 0xEE98
+  symbol: D_700EE98
+
+D_700F008:
+  type: VTX
+  count: 3
+  offset: 0xF008
+  symbol: D_700F008
+
+D_700F038:
+  type: VTX
+  count: 10
+  offset: 0xF038
+  symbol: D_700F038
+
+D_700F0D8:
+  type: VTX
+  count: 12
+  offset: 0xF0D8
+  symbol: D_700F0D8
+
+D_700F198:
+  type: VTX
+  count: 99
+  offset: 0xF198
+  symbol: D_700F198
+
+D_700F7C8:
+  type: VTX
+  count: 20
+  offset: 0xF7C8
+  symbol: D_700F7C8
+
+D_700F908:
+  type: VTX
+  count: 36
+  offset: 0xF908
+  symbol: D_700F908
+
+D_700FB48:
+  type: VTX
+  count: 13
+  offset: 0xFB48
+  symbol: D_700FB48
+
+D_700FC18:
+  type: VTX
+  count: 10
+  offset: 0xFC18
+  symbol: D_700FC18
+
+D_700FCB8:
+  type: VTX
+  count: 71
+  offset: 0xFCB8
+  symbol: D_700FCB8
+
+D_7010128:
+  type: VTX
+  count: 10
+  offset: 0x10128
+  symbol: D_7010128
+
+D_70101C8:
+  type: VTX
+  count: 36
+  offset: 0x101C8
+  symbol: D_70101C8
+
+D_7010408:
+  type: VTX
+  count: 13
+  offset: 0x10408
+  symbol: D_7010408
+
+D_70104D8:
+  type: VTX
+  count: 4
+  offset: 0x104D8
+  symbol: D_70104D8
+
+D_7010518:
+  type: VTX
+  count: 54
+  offset: 0x10518
+  symbol: D_7010518
+
+D_7010878:
+  type: VTX
+  count: 4
+  offset: 0x10878
+  symbol: D_7010878
+
+D_70108B8:
+  type: VTX
+  count: 6
+  offset: 0x108B8
+  symbol: D_70108B8
+
+D_7010918:
+  type: VTX
+  count: 3
+  offset: 0x10918
+  symbol: D_7010918
+
+D_7010948:
+  type: VTX
+  count: 27
+  offset: 0x10948
+  symbol: D_7010948
+
+D_7010AF8:
+  type: VTX
+  count: 3
+  offset: 0x10AF8
+  symbol: D_7010AF8
+
+D_7010B28:
+  type: VTX
+  count: 25
+  offset: 0x10B28
+  symbol: D_7010B28
+
+D_7010CB8:
+  type: VTX
+  count: 63
+  offset: 0x10CB8
+  symbol: D_7010CB8
+
+D_70110A8:
+  type: VTX
+  count: 4
+  offset: 0x110A8
+  symbol: D_70110A8
+
+D_70110E8:
+  type: VTX
+  count: 12
+  offset: 0x110E8
+  symbol: D_70110E8
+
+D_70111A8:
+  type: VTX
+  count: 19
+  offset: 0x111A8
+  symbol: D_70111A8
+
+D_70112D8:
+  type: VTX
+  count: 12
+  offset: 0x112D8
+  symbol: D_70112D8
+
+D_7011398:
+  type: VTX
+  count: 8
+  offset: 0x11398
+  symbol: D_7011398
+
+D_7011418:
+  type: VTX
+  count: 30
+  offset: 0x11418
+  symbol: D_7011418
+
+D_70115F8:
+  type: VTX
+  count: 20
+  offset: 0x115F8
+  symbol: D_70115F8
+
+D_7011738:
+  type: VTX
+  count: 43
+  offset: 0x11738
+  symbol: D_7011738
+
+D_70119E8:
+  type: VTX
+  count: 12
+  offset: 0x119E8
+  symbol: D_70119E8
+
+D_7011AA8:
+  type: VTX
+  count: 6
+  offset: 0x11AA8
+  symbol: D_7011AA8
+
+D_7011B08:
+  type: VTX
+  count: 14
+  offset: 0x11B08
+  symbol: D_7011B08
+
+D_7011BE8:
+  type: VTX
+  count: 12
+  offset: 0x11BE8
+  symbol: D_7011BE8
+
+D_7011CA8:
+  type: VTX
+  count: 8
+  offset: 0x11CA8
+  symbol: D_7011CA8
+
+D_7011D28:
+  type: VTX
+  count: 21
+  offset: 0x11D28
+  symbol: D_7011D28
+
+D_7011E78:
+  type: VTX
+  count: 27
+  offset: 0x11E78
+  symbol: D_7011E78
+
+D_7012028:
+  type: VTX
+  count: 4
+  offset: 0x12028
+  symbol: D_7012028
+
+D_7012068:
+  type: VTX
+  count: 6
+  offset: 0x12068
+  symbol: D_7012068
+
+D_70120C8:
+  type: VTX
+  count: 14
+  offset: 0x120C8
+  symbol: D_70120C8
+
+D_70121A8:
+  type: VTX
+  count: 6
+  offset: 0x121A8
+  symbol: D_70121A8
+
+D_7012208:
+  type: VTX
+  count: 6
+  offset: 0x12208
+  symbol: D_7012208
+
+D_7012268:
+  type: VTX
+  count: 14
+  offset: 0x12268
+  symbol: D_7012268
+
+D_7012348:
+  type: VTX
+  count: 20
+  offset: 0x12348
+  symbol: D_7012348
+
+D_7012488:
+  type: VTX
+  count: 3
+  offset: 0x12488
+  symbol: D_7012488
+
+D_70124B8:
+  type: VTX
+  count: 6
+  offset: 0x124B8
+  symbol: D_70124B8
+
+D_7012518:
+  type: VTX
+  count: 6
+  offset: 0x12518
+  symbol: D_7012518
+
+D_7012578:
+  type: VTX
+  count: 36
+  offset: 0x12578
+  symbol: D_7012578
+
+D_70127B8:
+  type: VTX
+  count: 22
+  offset: 0x127B8
+  symbol: D_70127B8
+
+D_7012918:
+  type: VTX
+  count: 10
+  offset: 0x12918
+  symbol: D_7012918
+
+D_70129B8:
+  type: VTX
+  count: 6
+  offset: 0x129B8
+  symbol: D_70129B8
+
+D_7012A18:
+  type: VTX
+  count: 34
+  offset: 0x12A18
+  symbol: D_7012A18
+
+D_7012C38:
+  type: VTX
+  count: 54
+  offset: 0x12C38
+  symbol: D_7012C38
+
+D_7012F98:
+  type: VTX
+  count: 26
+  offset: 0x12F98
+  symbol: D_7012F98
+
+D_7013138:
+  type: VTX
+  count: 15
+  offset: 0x13138
+  symbol: D_7013138
+
+D_7013228:
+  type: VTX
+  count: 10
+  offset: 0x13228
+  symbol: D_7013228
+
+D_70132C8:
+  type: VTX
+  count: 6
+  offset: 0x132C8
+  symbol: D_70132C8
+
+D_7013328:
+  type: VTX
+  count: 29
+  offset: 0x13328
+  symbol: D_7013328
+
+D_70134F8:
+  type: VTX
+  count: 47
+  offset: 0x134F8
+  symbol: D_70134F8
+
+D_70137E8:
+  type: VTX
+  count: 12
+  offset: 0x137E8
+  symbol: D_70137E8
+
+D_70138A8:
+  type: VTX
+  count: 9
+  offset: 0x138A8
+  symbol: D_70138A8
+
+D_7013938:
+  type: VTX
+  count: 6
+  offset: 0x13938
+  symbol: D_7013938
+
+D_7013998:
+  type: VTX
+  count: 12
+  offset: 0x13998
+  symbol: D_7013998
+
+D_7013A58:
+  type: VTX
+  count: 33
+  offset: 0x13A58
+  symbol: D_7013A58
+
+D_7013C68:
+  type: VTX
+  count: 3
+  offset: 0x13C68
+  symbol: D_7013C68
+
+D_7013C98:
+  type: VTX
+  count: 3
+  offset: 0x13C98
+  symbol: D_7013C98
+
+D_7013CC8:
+  type: VTX
+  count: 3
+  offset: 0x13CC8
+  symbol: D_7013CC8
+
+D_7013CF8:
+  type: VTX
+  count: 12
+  offset: 0x13CF8
+  symbol: D_7013CF8
+
+D_7013DB8:
+  type: VTX
+  count: 18
+  offset: 0x13DB8
+  symbol: D_7013DB8
+
+D_7013ED8:
+  type: VTX
+  count: 86
+  offset: 0x13ED8
+  symbol: D_7013ED8
+
+D_7014438:
+  type: VTX
+  count: 16
+  offset: 0x14438
+  symbol: D_7014438
+
+D_7014538:
+  type: VTX
+  count: 30
+  offset: 0x14538
+  symbol: D_7014538
+
+D_7014718:
+  type: VTX
+  count: 8
+  offset: 0x14718
+  symbol: D_7014718
+
+D_7014798:
+  type: VTX
+  count: 16
+  offset: 0x14798
+  symbol: D_7014798
+
+D_7014898:
+  type: VTX
+  count: 8
+  offset: 0x14898
+  symbol: D_7014898
+
+D_7014918:
+  type: VTX
+  count: 38
+  offset: 0x14918
+  symbol: D_7014918
+
+D_7014B78:
+  type: VTX
+  count: 60
+  offset: 0x14B78
+  symbol: D_7014B78
+
+D_7014F38:
+  type: VTX
+  count: 16
+  offset: 0x14F38
+  symbol: D_7014F38
+
+D_7015038:
+  type: VTX
+  count: 8
+  offset: 0x15038
+  symbol: D_7015038
+
+D_70150B8:
+  type: VTX
+  count: 12
+  offset: 0x150B8
+  symbol: D_70150B8
+
+D_7015178:
+  type: VTX
+  count: 8
+  offset: 0x15178
+  symbol: D_7015178
+
+D_70151F8:
+  type: VTX
+  count: 18
+  offset: 0x151F8
+  symbol: D_70151F8
+
+D_7015318:
+  type: VTX
+  count: 30
+  offset: 0x15318
+  symbol: D_7015318
+
+D_70154F8:
+  type: VTX
+  count: 48
+  offset: 0x154F8
+  symbol: D_70154F8
+
+D_70157F8:
+  type: VTX
+  count: 24
+  offset: 0x157F8
+  symbol: D_70157F8
+
+D_7015978:
+  type: VTX
+  count: 8
+  offset: 0x15978
+  symbol: D_7015978
+
+D_70159F8:
+  type: VTX
+  count: 18
+  offset: 0x159F8
+  symbol: D_70159F8
+
+D_7015B18:
+  type: VTX
+  count: 12
+  offset: 0x15B18
+  symbol: D_7015B18
+
+D_7015BD8:
+  type: VTX
+  count: 36
+  offset: 0x15BD8
+  symbol: D_7015BD8
+
+D_7015E18:
+  type: VTX
+  count: 12
+  offset: 0x15E18
+  symbol: D_7015E18
+
+D_7015ED8:
+  type: VTX
+  count: 59
+  offset: 0x15ED8
+  symbol: D_7015ED8
+
+D_7016288:
+  type: VTX
+  count: 4
+  offset: 0x16288
+  symbol: D_7016288
+
+D_70162C8:
+  type: VTX
+  count: 36
+  offset: 0x162C8
+  symbol: D_70162C8
+
+D_7016508:
+  type: VTX
+  count: 10
+  offset: 0x16508
+  symbol: D_7016508
+
+D_70165A8:
+  type: VTX
+  count: 16
+  offset: 0x165A8
+  symbol: D_70165A8
+
+D_70166A8:
+  type: VTX
+  count: 26
+  offset: 0x166A8
+  symbol: D_70166A8
+
+D_7016848:
+  type: VTX
+  count: 8
+  offset: 0x16848
+  symbol: D_7016848
+
+D_70168C8:
+  type: VTX
+  count: 8
+  offset: 0x168C8
+  symbol: D_70168C8
+
+D_7016948:
+  type: VTX
+  count: 61
+  offset: 0x16948
+  symbol: D_7016948
+
+D_7016D18:
+  type: VTX
+  count: 4
+  offset: 0x16D18
+  symbol: D_7016D18
+
+D_7016D58:
+  type: VTX
+  count: 28
+  offset: 0x16D58
+  symbol: D_7016D58
+
+D_7016F18:
+  type: VTX
+  count: 8
+  offset: 0x16F18
+  symbol: D_7016F18
+
+D_7016F98:
+  type: VTX
+  count: 9
+  offset: 0x16F98
+  symbol: D_7016F98
+
+D_7017028:
+  type: VTX
+  count: 20
+  offset: 0x17028
+  symbol: D_7017028
+
+D_7017168:
+  type: VTX
+  count: 4
+  offset: 0x17168
+  symbol: D_7017168
+
+D_70171A8:
+  type: VTX
+  count: 8
+  offset: 0x171A8
+  symbol: D_70171A8
+
+D_7017228:
+  type: VTX
+  count: 36
+  offset: 0x17228
+  symbol: D_7017228
+
+D_7017468:
+  type: VTX
+  count: 10
+  offset: 0x17468
+  symbol: D_7017468
+
+D_7017508:
+  type: VTX
+  count: 12
+  offset: 0x17508
+  symbol: D_7017508
+
+D_70175C8:
+  type: VTX
+  count: 3
+  offset: 0x175C8
+  symbol: D_70175C8
+
+D_70175F8:
+  type: VTX
+  count: 16
+  offset: 0x175F8
+  symbol: D_70175F8
+
+D_70176F8:
+  type: VTX
+  count: 4
+  offset: 0x176F8
+  symbol: D_70176F8
+
+D_7017738:
+  type: VTX
+  count: 29
+  offset: 0x17738
+  symbol: D_7017738
+
+D_7017908:
+  type: VTX
+  count: 6
+  offset: 0x17908
+  symbol: D_7017908
+
+D_7017968:
+  type: VTX
+  count: 6
+  offset: 0x17968
+  symbol: D_7017968
+
+D_70179C8:
+  type: VTX
+  count: 6
+  offset: 0x179C8
+  symbol: D_70179C8
+
+D_7017A28:
+  type: VTX
+  count: 95
+  offset: 0x17A28
+  symbol: D_7017A28
+
+D_7018018:
+  type: VTX
+  count: 6
+  offset: 0x18018
+  symbol: D_7018018
+
+D_7018078:
+  type: VTX
+  count: 6
+  offset: 0x18078
+  symbol: D_7018078
+
+D_70180D8:
+  type: VTX
+  count: 4
+  offset: 0x180D8
+  symbol: D_70180D8
+
+D_7018118:
+  type: VTX
+  count: 10
+  offset: 0x18118
+  symbol: D_7018118
+
+D_70181B8:
+  type: VTX
+  count: 8
+  offset: 0x181B8
+  symbol: D_70181B8
+
+D_7018238:
+  type: VTX
+  count: 28
+  offset: 0x18238
+  symbol: D_7018238
+
+D_70183F8:
+  type: VTX
+  count: 4
+  offset: 0x183F8
+  symbol: D_70183F8
+
+D_7018438:
+  type: VTX
+  count: 86
+  offset: 0x18438
+  symbol: D_7018438
+
+D_7018998:
+  type: VTX
+  count: 6
+  offset: 0x18998
+  symbol: D_7018998
+
+D_70189F8:
+  type: VTX
+  count: 6
+  offset: 0x189F8
+  symbol: D_70189F8
+
+D_7018A58:
+  type: VTX
+  count: 4
+  offset: 0x18A58
+  symbol: D_7018A58
+
+D_7018A98:
+  type: VTX
+  count: 10
+  offset: 0x18A98
+  symbol: D_7018A98
+
+D_7018B38:
+  type: VTX
+  count: 8
+  offset: 0x18B38
+  symbol: D_7018B38
+
+D_7018BB8:
+  type: VTX
+  count: 4
+  offset: 0x18BB8
+  symbol: D_7018BB8
+
+D_7018BF8:
+  type: VTX
+  count: 52
+  offset: 0x18BF8
+  symbol: D_7018BF8
+
+D_7018F38:
+  type: VTX
+  count: 10
+  offset: 0x18F38
+  symbol: D_7018F38
+
+D_7018FD8:
+  type: VTX
+  count: 8
+  offset: 0x18FD8
+  symbol: D_7018FD8
+
+D_7019058:
+  type: VTX
+  count: 4
+  offset: 0x19058
+  symbol: D_7019058
+
+D_7019098:
+  type: VTX
+  count: 40
+  offset: 0x19098
+  symbol: D_7019098
+
+D_7019318:
+  type: VTX
+  count: 3
+  offset: 0x19318
+  symbol: D_7019318
+
+D_7019348:
+  type: VTX
+  count: 8
+  offset: 0x19348
+  symbol: D_7019348
+
+D_70193C8:
+  type: VTX
+  count: 6
+  offset: 0x193C8
+  symbol: D_70193C8
+
+D_7019428:
+  type: VTX
+  count: 10
+  offset: 0x19428
+  symbol: D_7019428
+
+D_70194C8:
+  type: VTX
+  count: 16
+  offset: 0x194C8
+  symbol: D_70194C8
+
+D_70195C8:
+  type: VTX
+  count: 20
+  offset: 0x195C8
+  symbol: D_70195C8
+
+D_7019708:
+  type: VTX
+  count: 16
+  offset: 0x19708
+  symbol: D_7019708
+
+D_7019808:
+  type: VTX
+  count: 51
+  offset: 0x19808
+  symbol: D_7019808
+
+D_7019B38:
+  type: VTX
+  count: 48
+  offset: 0x19B38
+  symbol: D_7019B38
+
+D_7019E38:
+  type: VTX
+  count: 8
+  offset: 0x19E38
+  symbol: D_7019E38
+
+D_7019EB8:
+  type: VTX
+  count: 6
+  offset: 0x19EB8
+  symbol: D_7019EB8
+
+D_7019F18:
+  type: VTX
+  count: 4
+  offset: 0x19F18
+  symbol: D_7019F18
+
+D_7019F58:
+  type: VTX
+  count: 8
+  offset: 0x19F58
+  symbol: D_7019F58
+
+D_7019FD8:
+  type: VTX
+  count: 10
+  offset: 0x19FD8
+  symbol: D_7019FD8
+
+D_701A078:
+  type: VTX
+  count: 10
+  offset: 0x1A078
+  symbol: D_701A078
+
+D_701A118:
+  type: VTX
+  count: 49
+  offset: 0x1A118
+  symbol: D_701A118
+
+D_701A428:
+  type: VTX
+  count: 40
+  offset: 0x1A428
+  symbol: D_701A428
+
+D_701A6A8:
+  type: VTX
+  count: 6
+  offset: 0x1A6A8
+  symbol: D_701A6A8
+
+D_701A708:
+  type: VTX
+  count: 4
+  offset: 0x1A708
+  symbol: D_701A708
+
+D_701A748:
+  type: VTX
+  count: 8
+  offset: 0x1A748
+  symbol: D_701A748
+
+D_701A7C8:
+  type: VTX
+  count: 10
+  offset: 0x1A7C8
+  symbol: D_701A7C8
+
+D_701A868:
+  type: VTX
+  count: 4
+  offset: 0x1A868
+  symbol: D_701A868
+
+D_701A8A8:
+  type: VTX
+  count: 37
+  offset: 0x1A8A8
+  symbol: D_701A8A8
+
+D_701AAF8:
+  type: VTX
+  count: 32
+  offset: 0x1AAF8
+  symbol: D_701AAF8
+
+D_701ACF8:
+  type: VTX
+  count: 26
+  offset: 0x1ACF8
+  symbol: D_701ACF8
+
+D_701AE98:
+  type: VTX
+  count: 4
+  offset: 0x1AE98
+  symbol: D_701AE98
+
+D_701AED8:
+  type: VTX
+  count: 20
+  offset: 0x1AED8
+  symbol: D_701AED8
+
+D_701B018:
+  type: VTX
+  count: 70
+  offset: 0x1B018
+  symbol: D_701B018
+
+D_701B478:
+  type: VTX
+  count: 14
+  offset: 0x1B478
+  symbol: D_701B478
+
+D_701B558:
+  type: VTX
+  count: 6
+  offset: 0x1B558
+  symbol: D_701B558
+
+D_701B5B8:
+  type: VTX
+  count: 8
+  offset: 0x1B5B8
+  symbol: D_701B5B8
+
+D_701B638:
+  type: VTX
+  count: 6
+  offset: 0x1B638
+  symbol: D_701B638
+
+D_701B698:
+  type: VTX
+  count: 4
+  offset: 0x1B698
+  symbol: D_701B698
+
+D_701B6D8:
+  type: VTX
+  count: 10
+  offset: 0x1B6D8
+  symbol: D_701B6D8
+
+D_701B778:
+  type: VTX
+  count: 58
+  offset: 0x1B778
+  symbol: D_701B778
+
+D_701BB18:
+  type: VTX
+  count: 11
+  offset: 0x1BB18
+  symbol: D_701BB18
+
+D_701BBC8:
+  type: VTX
+  count: 6
+  offset: 0x1BBC8
+  symbol: D_701BBC8
+
+D_701BC28:
+  type: VTX
+  count: 8
+  offset: 0x1BC28
+  symbol: D_701BC28
+
+D_701BCA8:
+  type: VTX
+  count: 6
+  offset: 0x1BCA8
+  symbol: D_701BCA8
+
+D_701BD08:
+  type: VTX
+  count: 4
+  offset: 0x1BD08
+  symbol: D_701BD08
+
+D_701BD48:
+  type: VTX
+  count: 10
+  offset: 0x1BD48
+  symbol: D_701BD48
+
+D_701BDE8:
+  type: VTX
+  count: 50
+  offset: 0x1BDE8
+  symbol: D_701BDE8
+
+D_701C108:
+  type: VTX
+  count: 14
+  offset: 0x1C108
+  symbol: D_701C108
+
+D_701C1E8:
+  type: VTX
+  count: 6
+  offset: 0x1C1E8
+  symbol: D_701C1E8
+
+D_701C248:
+  type: VTX
+  count: 6
+  offset: 0x1C248
+  symbol: D_701C248
+
+D_701C2A8:
+  type: VTX
+  count: 3
+  offset: 0x1C2A8
+  symbol: D_701C2A8
+
+D_701C2D8:
+  type: VTX
+  count: 10
+  offset: 0x1C2D8
+  symbol: D_701C2D8
+
+D_701C378:
+  type: VTX
+  count: 36
+  offset: 0x1C378
+  symbol: D_701C378
+
+D_701C5B8:
+  type: VTX
+  count: 8
+  offset: 0x1C5B8
+  symbol: D_701C5B8
+
+D_701C638:
+  type: VTX
+  count: 6
+  offset: 0x1C638
+  symbol: D_701C638
+
+D_701C698:
+  type: VTX
+  count: 3
+  offset: 0x1C698
+  symbol: D_701C698
+
+D_701C6C8:
+  type: VTX
+  count: 3
+  offset: 0x1C6C8
+  symbol: D_701C6C8
+
+D_701C6F8:
+  type: VTX
+  count: 14
+  offset: 0x1C6F8
+  symbol: D_701C6F8
+
+D_701C7D8:
+  type: VTX
+  count: 30
+  offset: 0x1C7D8
+  symbol: D_701C7D8
+
+D_701C9B8:
+  type: VTX
+  count: 10
+  offset: 0x1C9B8
+  symbol: D_701C9B8
+
+D_701CA58:
+  type: VTX
+  count: 14
+  offset: 0x1CA58
+  symbol: D_701CA58
+
+D_701CB38:
+  type: VTX
+  count: 20
+  offset: 0x1CB38
+  symbol: D_701CB38
+
+D_701CC78:
+  type: VTX
+  count: 26
+  offset: 0x1CC78
+  symbol: D_701CC78
+
+D_701CE18:
+  type: VTX
+  count: 12
+  offset: 0x1CE18
+  symbol: D_701CE18
+
+D_701CED8:
+  type: VTX
+  count: 27
+  offset: 0x1CED8
+  symbol: D_701CED8
+
+D_701D088:
+  type: VTX
+  count: 10
+  offset: 0x1D088
+  symbol: D_701D088
+
+D_701D128:
+  type: VTX
+  count: 4
+  offset: 0x1D128
+  symbol: D_701D128
+
+D_701D168:
+  type: VTX
+  count: 16
+  offset: 0x1D168
+  symbol: D_701D168
+
+D_701D268:
+  type: VTX
+  count: 20
+  offset: 0x1D268
+  symbol: D_701D268
+
+D_701D3A8:
+  type: VTX
+  count: 26
+  offset: 0x1D3A8
+  symbol: D_701D3A8
+
+D_701D548:
+  type: VTX
+  count: 10
+  offset: 0x1D548
+  symbol: D_701D548
+
+D_701D5E8:
+  type: VTX
+  count: 4
+  offset: 0x1D5E8
+  symbol: D_701D5E8
+
+D_701D628:
+  type: VTX
+  count: 12
+  offset: 0x1D628
+  symbol: D_701D628
+
+D_701D6E8:
+  type: VTX
+  count: 8
+  offset: 0x1D6E8
+  symbol: D_701D6E8
+
+D_701D768:
+  type: VTX
+  count: 13
+  offset: 0x1D768
+  symbol: D_701D768
+
+D_701D838:
+  type: VTX
+  count: 10
+  offset: 0x1D838
+  symbol: D_701D838
+
+D_701D8D8:
+  type: VTX
+  count: 4
+  offset: 0x1D8D8
+  symbol: D_701D8D8
+
+D_701D918:
+  type: VTX
+  count: 12
+  offset: 0x1D918
+  symbol: D_701D918
+
+D_701D9D8:
+  type: VTX
+  count: 4
+  offset: 0x1D9D8
+  symbol: D_701D9D8
+
+D_701DA18:
+  type: VTX
+  count: 10
+  offset: 0x1DA18
+  symbol: D_701DA18
+
+D_701DAB8:
+  type: VTX
+  count: 6
+  offset: 0x1DAB8
+  symbol: D_701DAB8
+
+D_701DB18:
+  type: VTX
+  count: 10
+  offset: 0x1DB18
+  symbol: D_701DB18
+
+D_701DBB8:
+  type: VTX
+  count: 8
+  offset: 0x1DBB8
+  symbol: D_701DBB8
+
+D_701DC38:
+  type: VTX
+  count: 114
+  offset: 0x1DC38
+  symbol: D_701DC38
+
+D_701E358:
+  type: VTX
+  count: 20
+  offset: 0x1E358
+  symbol: D_701E358
+
+D_701E498:
+  type: VTX
+  count: 21
+  offset: 0x1E498
+  symbol: D_701E498
+
+D_701E5E8:
+  type: VTX
+  count: 10
+  offset: 0x1E5E8
+  symbol: D_701E5E8
+
+D_701E688:
+  type: VTX
+  count: 6
+  offset: 0x1E688
+  symbol: D_701E688
+
+D_701E6E8:
+  type: VTX
+  count: 10
+  offset: 0x1E6E8
+  symbol: D_701E6E8
+
+D_701E788:
+  type: VTX
+  count: 8
+  offset: 0x1E788
+  symbol: D_701E788
+
+D_701E808:
+  type: VTX
+  count: 90
+  offset: 0x1E808
+  symbol: D_701E808
+
+D_701EDA8:
+  type: VTX
+  count: 22
+  offset: 0x1EDA8
+  symbol: D_701EDA8
+
+D_701EF08:
+  type: VTX
+  count: 17
+  offset: 0x1EF08
+  symbol: D_701EF08
+
+D_701F018:
+  type: VTX
+  count: 10
+  offset: 0x1F018
+  symbol: D_701F018
+
+D_701F0B8:
+  type: VTX
+  count: 8
+  offset: 0x1F0B8
+  symbol: D_701F0B8
+
+D_701F138:
+  type: VTX
+  count: 36
+  offset: 0x1F138
+  symbol: D_701F138
+
+D_701F378:
+  type: VTX
+  count: 42
+  offset: 0x1F378
+  symbol: D_701F378
+
+D_701F618:
+  type: VTX
+  count: 7
+  offset: 0x1F618
+  symbol: D_701F618
+
+D_701F688:
+  type: VTX
+  count: 7
+  offset: 0x1F688
+  symbol: D_701F688
+
+D_701F6F8:
+  type: VTX
+  count: 6
+  offset: 0x1F6F8
+  symbol: D_701F6F8
+
+D_701F758:
+  type: VTX
+  count: 24
+  offset: 0x1F758
+  symbol: D_701F758
+
+D_701F8D8:
+  type: VTX
+  count: 22
+  offset: 0x1F8D8
+  symbol: D_701F8D8
+
+D_701FA38:
+  type: VTX
+  count: 12
+  offset: 0x1FA38
+  symbol: D_701FA38
+
+D_701FAF8:
+  type: VTX
+  count: 10
+  offset: 0x1FAF8
+  symbol: D_701FAF8
+
+D_701FB98:
+  type: VTX
+  count: 22
+  offset: 0x1FB98
+  symbol: D_701FB98
+
+D_701FCF8:
+  type: VTX
+  count: 70
+  offset: 0x1FCF8
+  symbol: D_701FCF8
+
+D_7020158:
+  type: VTX
+  count: 10
+  offset: 0x20158
+  symbol: D_7020158
+
+D_70201F8:
+  type: VTX
+  count: 12
+  offset: 0x201F8
+  symbol: D_70201F8
+
+D_70202B8:
+  type: VTX
+  count: 27
+  offset: 0x202B8
+  symbol: D_70202B8
+
+D_7020468:
+  type: VTX
+  count: 9
+  offset: 0x20468
+  symbol: D_7020468
+
+D_70204F8:
+  type: VTX
+  count: 10
+  offset: 0x204F8
+  symbol: D_70204F8
+
+D_7020598:
+  type: VTX
+  count: 22
+  offset: 0x20598
+  symbol: D_7020598
+
+D_70206F8:
+  type: VTX
+  count: 51
+  offset: 0x206F8
+  symbol: D_70206F8
+
+D_7020A28:
+  type: VTX
+  count: 9
+  offset: 0x20A28
+  symbol: D_7020A28
+
+D_7020AB8:
+  type: VTX
+  count: 14
+  offset: 0x20AB8
+  symbol: D_7020AB8
+
+D_7020B98:
+  type: VTX
+  count: 23
+  offset: 0x20B98
+  symbol: D_7020B98
+
+D_7020D08:
+  type: VTX
+  count: 10
+  offset: 0x20D08
+  symbol: D_7020D08
+
+D_7020DA8:
+  type: VTX
+  count: 12
+  offset: 0x20DA8
+  symbol: D_7020DA8
+
+D_7020E68:
+  type: VTX
+  count: 34
+  offset: 0x20E68
+  symbol: D_7020E68
+
+D_7021088:
+  type: VTX
+  count: 3
+  offset: 0x21088
+  symbol: D_7021088
+
+D_70210B8:
+  type: VTX
+  count: 18
+  offset: 0x210B8
+  symbol: D_70210B8
+
+D_70211D8:
+  type: VTX
+  count: 6
+  offset: 0x211D8
+  symbol: D_70211D8
+
+D_7021238:
+  type: VTX
+  count: 3
+  offset: 0x21238
+  symbol: D_7021238
+
+D_7021268:
+  type: VTX
+  count: 10
+  offset: 0x21268
+  symbol: D_7021268
+
+D_7021308:
+  type: VTX
+  count: 3
+  offset: 0x21308
+  symbol: D_7021308
+
+D_7021338:
+  type: VTX
+  count: 13
+  offset: 0x21338
+  symbol: D_7021338
+
+D_7021408:
+  type: VTX
+  count: 8
+  offset: 0x21408
+  symbol: D_7021408
+
+D_7021488:
+  type: VTX
+  count: 4
+  offset: 0x21488
+  symbol: D_7021488
+
+D_70214C8:
+  type: VTX
+  count: 23
+  offset: 0x214C8
+  symbol: D_70214C8
+
+D_7021638:
+  type: VTX
+  count: 10
+  offset: 0x21638
+  symbol: D_7021638
+
+D_70216D8:
+  type: VTX
+  count: 88
+  offset: 0x216D8
+  symbol: D_70216D8
+
+D_7021C58:
+  type: VTX
+  count: 14
+  offset: 0x21C58
+  symbol: D_7021C58
+
+D_7021D38:
+  type: VTX
+  count: 22
+  offset: 0x21D38
+  symbol: D_7021D38
+
+D_7021E98:
+  type: VTX
+  count: 8
+  offset: 0x21E98
+  symbol: D_7021E98
+
+D_7021F18:
+  type: VTX
+  count: 4
+  offset: 0x21F18
+  symbol: D_7021F18
+
+D_7021F58:
+  type: VTX
+  count: 8
+  offset: 0x21F58
+  symbol: D_7021F58
+
+D_7021FD8:
+  type: VTX
+  count: 10
+  offset: 0x21FD8
+  symbol: D_7021FD8
+
+D_7022078:
+  type: VTX
+  count: 71
+  offset: 0x22078
+  symbol: D_7022078
+
+D_70224E8:
+  type: VTX
+  count: 14
+  offset: 0x224E8
+  symbol: D_70224E8
+
+D_70225C8:
+  type: VTX
+  count: 20
+  offset: 0x225C8
+  symbol: D_70225C8
+
+D_7022708:
+  type: VTX
+  count: 4
+  offset: 0x22708
+  symbol: D_7022708
+
+D_7022748:
+  type: VTX
+  count: 8
+  offset: 0x22748
+  symbol: D_7022748
+
+D_70227C8:
+  type: VTX
+  count: 10
+  offset: 0x227C8
+  symbol: D_70227C8
+
+D_7022868:
+  type: VTX
+  count: 58
+  offset: 0x22868
+  symbol: D_7022868
+
+D_7022C08:
+  type: VTX
+  count: 4
+  offset: 0x22C08
+  symbol: D_7022C08
+
+D_7022C48:
+  type: VTX
+  count: 12
+  offset: 0x22C48
+  symbol: D_7022C48
+
+D_7022D08:
+  type: VTX
+  count: 11
+  offset: 0x22D08
+  symbol: D_7022D08
+
+D_7022DB8:
+  type: VTX
+  count: 32
+  offset: 0x22DB8
+  symbol: D_7022DB8
+
+D_7022FB8:
+  type: VTX
+  count: 4
+  offset: 0x22FB8
+  symbol: D_7022FB8
+
+D_7022FF8:
+  type: VTX
+  count: 8
+  offset: 0x22FF8
+  symbol: D_7022FF8
+
+D_7023078:
+  type: VTX
+  count: 41
+  offset: 0x23078
+  symbol: D_7023078
+
+D_7023308:
+  type: VTX
+  count: 10
+  offset: 0x23308
+  symbol: D_7023308
+
+D_70233A8:
+  type: VTX
+  count: 34
+  offset: 0x233A8
+  symbol: D_70233A8
+
+D_70235C8:
+  type: VTX
+  count: 16
+  offset: 0x235C8
+  symbol: D_70235C8
+
+D_70236C8:
+  type: VTX
+  count: 21
+  offset: 0x236C8
+  symbol: D_70236C8
+
+D_7023818:
+  type: VTX
+  count: 18
+  offset: 0x23818
+  symbol: D_7023818
+
+D_7023938:
+  type: VTX
+  count: 16
+  offset: 0x23938
+  symbol: D_7023938
+
+D_7023A38:
+  type: VTX
+  count: 33
+  offset: 0x23A38
+  symbol: D_7023A38
+
+D_7023C48:
+  type: VTX
+  count: 12
+  offset: 0x23C48
+  symbol: D_7023C48
+
+D_7023D08:
+  type: VTX
+  count: 28
+  offset: 0x23D08
+  symbol: D_7023D08
+
+D_7023EC8:
+  type: VTX
+  count: 15
+  offset: 0x23EC8
+  symbol: D_7023EC8
+
+D_7023FB8:
+  type: VTX
+  count: 15
+  offset: 0x23FB8
+  symbol: D_7023FB8
+
+D_70240A8:
+  type: VTX
+  count: 18
+  offset: 0x240A8
+  symbol: D_70240A8
+
+D_70241C8:
+  type: VTX
+  count: 16
+  offset: 0x241C8
+  symbol: D_70241C8
+
+D_70242C8:
+  type: VTX
+  count: 26
+  offset: 0x242C8
+  symbol: D_70242C8
+
+D_7024468:
+  type: VTX
+  count: 20
+  offset: 0x24468
+  symbol: D_7024468
+
+D_70245A8:
+  type: VTX
+  count: 12
+  offset: 0x245A8
+  symbol: D_70245A8
+
+D_7024668:
+  type: VTX
+  count: 15
+  offset: 0x24668
+  symbol: D_7024668
+
+D_7024758:
+  type: VTX
+  count: 13
+  offset: 0x24758
+  symbol: D_7024758
+
+D_7024828:
+  type: VTX
+  count: 12
+  offset: 0x24828
+  symbol: D_7024828
+
+D_70248E8:
+  type: VTX
+  count: 12
+  offset: 0x248E8
+  symbol: D_70248E8
+
+D_70249A8:
+  type: VTX
+  count: 16
+  offset: 0x249A8
+  symbol: D_70249A8
+
+D_7024AA8:
+  type: VTX
+  count: 6
+  offset: 0x24AA8
+  symbol: D_7024AA8
+
+D_7024B08:
+  type: VTX
+  count: 3
+  offset: 0x24B08
+  symbol: D_7024B08
+
+D_7024B38:
+  type: VTX
+  count: 9
+  offset: 0x24B38
+  symbol: D_7024B38
+
+D_7024BC8:
+  type: VTX
+  count: 30
+  offset: 0x24BC8
+  symbol: D_7024BC8
+
+D_7024DA8:
+  type: VTX
+  count: 16
+  offset: 0x24DA8
+  symbol: D_7024DA8
+
+D_7024EA8:
+  type: VTX
+  count: 7
+  offset: 0x24EA8
+  symbol: D_7024EA8
+
+D_7024F18:
+  type: VTX
+  count: 33
+  offset: 0x24F18
+  symbol: D_7024F18
+
+D_7025128:
+  type: VTX
+  count: 22
+  offset: 0x25128
+  symbol: D_7025128
+
+D_7025288:
+  type: VTX
+  count: 13
+  offset: 0x25288
+  symbol: D_7025288
+
+D_7025358:
+  type: VTX
+  count: 61
+  offset: 0x25358
+  symbol: D_7025358
+
+D_7025728:
+  type: VTX
+  count: 29
+  offset: 0x25728
+  symbol: D_7025728
+
+D_70258F8:
+  type: VTX
+  count: 16
+  offset: 0x258F8
+  symbol: D_70258F8
+
+D_70259F8:
+  type: VTX
+  count: 6
+  offset: 0x259F8
+  symbol: D_70259F8
+
+D_7025A58:
+  type: VTX
+  count: 20
+  offset: 0x25A58
+  symbol: D_7025A58
+
+D_7025B98:
+  type: VTX
+  count: 17
+  offset: 0x25B98
+  symbol: D_7025B98
+
+D_7025CA8:
+  type: VTX
+  count: 13
+  offset: 0x25CA8
+  symbol: D_7025CA8
+
+D_7025D78:
+  type: VTX
+  count: 40
+  offset: 0x25D78
+  symbol: D_7025D78
+
+D_7025FF8:
+  type: VTX
+  count: 29
+  offset: 0x25FF8
+  symbol: D_7025FF8
+
+D_70261C8:
+  type: VTX
+  count: 6
+  offset: 0x261C8
+  symbol: D_70261C8
+
+D_7026228:
+  type: VTX
+  count: 18
+  offset: 0x26228
+  symbol: D_7026228
+
+D_7026348:
+  type: VTX
+  count: 18
+  offset: 0x26348
+  symbol: D_7026348
+
+D_7026468:
+  type: VTX
+  count: 9
+  offset: 0x26468
+  symbol: D_7026468
+
+D_70264F8:
+  type: VTX
+  count: 34
+  offset: 0x264F8
+  symbol: D_70264F8
+
+D_7026718:
+  type: VTX
+  count: 13
+  offset: 0x26718
+  symbol: D_7026718
+
+D_70267E8:
+  type: VTX
+  count: 12
+  offset: 0x267E8
+  symbol: D_70267E8
+
+D_70268A8:
+  type: VTX
+  count: 7
+  offset: 0x268A8
+  symbol: D_70268A8
+
+D_7026918:
+  type: VTX
+  count: 3
+  offset: 0x26918
+  symbol: D_7026918
+
+D_7026948:
+  type: VTX
+  count: 12
+  offset: 0x26948
+  symbol: D_7026948
+
+D_7026A08:
+  type: VTX
+  count: 10
+  offset: 0x26A08
+  symbol: D_7026A08
+
+D_7026AA8:
+  type: VTX
+  count: 8
+  offset: 0x26AA8
+  symbol: D_7026AA8
+
+D_7026B28:
+  type: VTX
+  count: 10
+  offset: 0x26B28
+  symbol: D_7026B28
+
+D_7026BC8:
+  type: VTX
+  count: 12
+  offset: 0x26BC8
+  symbol: D_7026BC8
+
+D_7026C88:
+  type: VTX
+  count: 64
+  offset: 0x26C88
+  symbol: D_7026C88
+
+D_7027088:
+  type: VTX
+  count: 20
+  offset: 0x27088
+  symbol: D_7027088
+
+D_70271C8:
+  type: VTX
+  count: 9
+  offset: 0x271C8
+  symbol: D_70271C8
+
+D_7027258:
+  type: VTX
+  count: 30
+  offset: 0x27258
+  symbol: D_7027258
+
+D_7027438:
+  type: VTX
+  count: 10
+  offset: 0x27438
+  symbol: D_7027438
+
+D_70274D8:
+  type: VTX
+  count: 8
+  offset: 0x274D8
+  symbol: D_70274D8
+
+D_7027558:
+  type: VTX
+  count: 6
+  offset: 0x27558
+  symbol: D_7027558
+
+D_70275B8:
+  type: VTX
+  count: 12
+  offset: 0x275B8
+  symbol: D_70275B8
+
+D_7027678:
+  type: VTX
+  count: 52
+  offset: 0x27678
+  symbol: D_7027678
+
+D_70279B8:
+  type: VTX
+  count: 20
+  offset: 0x279B8
+  symbol: D_70279B8
+
+D_7027AF8:
+  type: VTX
+  count: 9
+  offset: 0x27AF8
+  symbol: D_7027AF8
+
+D_7027B88:
+  type: VTX
+  count: 22
+  offset: 0x27B88
+  symbol: D_7027B88
+
+D_7027CE8:
+  type: VTX
+  count: 10
+  offset: 0x27CE8
+  symbol: D_7027CE8
+
+D_7027D88:
+  type: VTX
+  count: 12
+  offset: 0x27D88
+  symbol: D_7027D88
+
+D_7027E48:
+  type: VTX
+  count: 52
+  offset: 0x27E48
+  symbol: D_7027E48
+
+D_7028188:
+  type: VTX
+  count: 4
+  offset: 0x28188
+  symbol: D_7028188
+
+D_70281C8:
+  type: VTX
+  count: 14
+  offset: 0x281C8
+  symbol: D_70281C8
+
+D_70282A8:
+  type: VTX
+  count: 4
+  offset: 0x282A8
+  symbol: D_70282A8
+
+D_70282E8:
+  type: VTX
+  count: 6
+  offset: 0x282E8
+  symbol: D_70282E8
+
+D_7028348:
+  type: VTX
+  count: 18
+  offset: 0x28348
+  symbol: D_7028348
+
+D_7028468:
+  type: VTX
+  count: 4
+  offset: 0x28468
+  symbol: D_7028468
+
+D_70284A8:
+  type: VTX
+  count: 8
+  offset: 0x284A8
+  symbol: D_70284A8
+
+D_7028528:
+  type: VTX
+  count: 12
+  offset: 0x28528
+  symbol: D_7028528
+
+D_70285E8:
+  type: VTX
+  count: 51
+  offset: 0x285E8
+  symbol: D_70285E8
+
+D_7028918:
+  type: VTX
+  count: 18
+  offset: 0x28918
+  symbol: D_7028918
+
+D_7028A38:
+  type: VTX
+  count: 12
+  offset: 0x28A38
+  symbol: D_7028A38
+
+D_7028AF8:
+  type: VTX
+  count: 15
+  offset: 0x28AF8
+  symbol: D_7028AF8
+
+D_7028BE8:
+  type: VTX
+  count: 19
+  offset: 0x28BE8
+  symbol: D_7028BE8
+
+D_7028D18:
+  type: VTX
+  count: 34
+  offset: 0x28D18
+  symbol: D_7028D18
+
+D_7028F38:
+  type: VTX
+  count: 12
+  offset: 0x28F38
+  symbol: D_7028F38
+
+D_7028FF8:
+  type: VTX
+  count: 47
+  offset: 0x28FF8
+  symbol: D_7028FF8
+
+D_70292E8:
+  type: VTX
+  count: 18
+  offset: 0x292E8
+  symbol: D_70292E8
+
+D_7029408:
+  type: VTX
+  count: 12
+  offset: 0x29408
+  symbol: D_7029408
+
+D_70294C8:
+  type: VTX
+  count: 9
+  offset: 0x294C8
+  symbol: D_70294C8
+
+D_7029558:
+  type: VTX
+  count: 17
+  offset: 0x29558
+  symbol: D_7029558
+
+D_7029668:
+  type: VTX
+  count: 13
+  offset: 0x29668
+  symbol: D_7029668
+
+D_7029738:
+  type: VTX
+  count: 47
+  offset: 0x29738
+  symbol: D_7029738
+
+D_7029A28:
+  type: VTX
+  count: 12
+  offset: 0x29A28
+  symbol: D_7029A28
+
+D_7029AE8:
+  type: VTX
+  count: 12
+  offset: 0x29AE8
+  symbol: D_7029AE8
+
+D_7029BA8:
+  type: VTX
+  count: 3
+  offset: 0x29BA8
+  symbol: D_7029BA8
+
+D_7029BD8:
+  type: VTX
+  count: 16
+  offset: 0x29BD8
+  symbol: D_7029BD8
+
+D_7029CD8:
+  type: VTX
+  count: 10
+  offset: 0x29CD8
+  symbol: D_7029CD8
+
+D_7029D78:
+  type: VTX
+  count: 24
+  offset: 0x29D78
+  symbol: D_7029D78
+
+D_7029EF8:
+  type: VTX
+  count: 10
+  offset: 0x29EF8
+  symbol: D_7029EF8
+
+D_7029F98:
+  type: VTX
+  count: 3
+  offset: 0x29F98
+  symbol: D_7029F98
+
+D_7029FC8:
+  type: VTX
+  count: 6
+  offset: 0x29FC8
+  symbol: D_7029FC8
+
+D_702A028:
+  type: VTX
+  count: 6
+  offset: 0x2A028
+  symbol: D_702A028
+
+D_702A088:
+  type: VTX
+  count: 10
+  offset: 0x2A088
+  symbol: D_702A088
+
+D_702A128:
+  type: VTX
+  count: 6
+  offset: 0x2A128
+  symbol: D_702A128
+
+D_702A188:
+  type: VTX
+  count: 16
+  offset: 0x2A188
+  symbol: D_702A188
+
+D_702A288:
+  type: VTX
+  count: 39
+  offset: 0x2A288
+  symbol: D_702A288
+
+D_702A4F8:
+  type: VTX
+  count: 49
+  offset: 0x2A4F8
+  symbol: D_702A4F8
+
+D_702A808:
+  type: VTX
+  count: 10
+  offset: 0x2A808
+  symbol: D_702A808
+
+D_702A8A8:
+  type: VTX
+  count: 12
+  offset: 0x2A8A8
+  symbol: D_702A8A8
+
+D_702A968:
+  type: VTX
+  count: 16
+  offset: 0x2A968
+  symbol: D_702A968
+
+D_702AA68:
+  type: VTX
+  count: 6
+  offset: 0x2AA68
+  symbol: D_702AA68
+
+D_702AAC8:
+  type: VTX
+  count: 6
+  offset: 0x2AAC8
+  symbol: D_702AAC8
+
+D_702AB28:
+  type: VTX
+  count: 26
+  offset: 0x2AB28
+  symbol: D_702AB28
+
+D_702ACC8:
+  type: VTX
+  count: 47
+  offset: 0x2ACC8
+  symbol: D_702ACC8
+
+D_702AFB8:
+  type: VTX
+  count: 10
+  offset: 0x2AFB8
+  symbol: D_702AFB8
+
+D_702B058:
+  type: VTX
+  count: 12
+  offset: 0x2B058
+  symbol: D_702B058
+
+D_702B118:
+  type: VTX
+  count: 16
+  offset: 0x2B118
+  symbol: D_702B118
+
+D_702B218:
+  type: VTX
+  count: 6
+  offset: 0x2B218
+  symbol: D_702B218
+
+D_702B278:
+  type: VTX
+  count: 17
+  offset: 0x2B278
+  symbol: D_702B278
+
+D_702B388:
+  type: VTX
+  count: 36
+  offset: 0x2B388
+  symbol: D_702B388
+
+D_702B5C8:
+  type: VTX
+  count: 10
+  offset: 0x2B5C8
+  symbol: D_702B5C8
+
+D_702B668:
+  type: VTX
+  count: 12
+  offset: 0x2B668
+  symbol: D_702B668
+
+D_702B728:
+  type: VTX
+  count: 12
+  offset: 0x2B728
+  symbol: D_702B728
+
+D_702B7E8:
+  type: VTX
+  count: 7
+  offset: 0x2B7E8
+  symbol: D_702B7E8
+
+D_702B858:
+  type: VTX
+  count: 37
+  offset: 0x2B858
+  symbol: D_702B858
+
+D_702BAA8:
+  type: VTX
+  count: 6
+  offset: 0x2BAA8
+  symbol: D_702BAA8
+
+D_702BB08:
+  type: VTX
+  count: 4
+  offset: 0x2BB08
+  symbol: D_702BB08
+
+D_702BB48:
+  type: VTX
+  count: 4
+  offset: 0x2BB48
+  symbol: D_702BB48
+
+D_702BB88:
+  type: VTX
+  count: 34
+  offset: 0x2BB88
+  symbol: D_702BB88
+
+D_702BDA8:
+  type: VTX
+  count: 18
+  offset: 0x2BDA8
+  symbol: D_702BDA8
+
+D_702BEC8:
+  type: VTX
+  count: 64
+  offset: 0x2BEC8
+  symbol: D_702BEC8
+
+D_702C2C8:
+  type: VTX
+  count: 16
+  offset: 0x2C2C8
+  symbol: D_702C2C8
+
+D_702C3C8:
+  type: VTX
+  count: 12
+  offset: 0x2C3C8
+  symbol: D_702C3C8
+
+D_702C488:
+  type: VTX
+  count: 4
+  offset: 0x2C488
+  symbol: D_702C488
+
+D_702C4C8:
+  type: VTX
+  count: 4
+  offset: 0x2C4C8
+  symbol: D_702C4C8
+
+D_702C508:
+  type: VTX
+  count: 4
+  offset: 0x2C508
+  symbol: D_702C508
+
+D_702C548:
+  type: VTX
+  count: 24
+  offset: 0x2C548
+  symbol: D_702C548
+
+D_702C6C8:
+  type: VTX
+  count: 18
+  offset: 0x2C6C8
+  symbol: D_702C6C8
+
+D_702C7E8:
+  type: VTX
+  count: 44
+  offset: 0x2C7E8
+  symbol: D_702C7E8
+
+D_702CAA8:
+  type: VTX
+  count: 10
+  offset: 0x2CAA8
+  symbol: D_702CAA8
+
+D_702CB48:
+  type: VTX
+  count: 12
+  offset: 0x2CB48
+  symbol: D_702CB48
+
+D_702CC08:
+  type: VTX
+  count: 4
+  offset: 0x2CC08
+  symbol: D_702CC08
+
+D_702CC48:
+  type: VTX
+  count: 4
+  offset: 0x2CC48
+  symbol: D_702CC48
+
+D_702CC88:
+  type: VTX
+  count: 22
+  offset: 0x2CC88
+  symbol: D_702CC88
+
+D_702CDE8:
+  type: VTX
+  count: 14
+  offset: 0x2CDE8
+  symbol: D_702CDE8
+
+D_702CEC8:
+  type: VTX
+  count: 22
+  offset: 0x2CEC8
+  symbol: D_702CEC8
+
+D_702D028:
+  type: VTX
+  count: 10
+  offset: 0x2D028
+  symbol: D_702D028
+
+D_702D0C8:
+  type: VTX
+  count: 12
+  offset: 0x2D0C8
+  symbol: D_702D0C8
+
+D_702D188:
+  type: VTX
+  count: 4
+  offset: 0x2D188
+  symbol: D_702D188
+
+D_702D1C8:
+  type: VTX
+  count: 4
+  offset: 0x2D1C8
+  symbol: D_702D1C8
+
+D_702D208:
+  type: VTX
+  count: 6
+  offset: 0x2D208
+  symbol: D_702D208
+
+D_702D268:
+  type: VTX
+  count: 28
+  offset: 0x2D268
+  symbol: D_702D268
+
+D_702D428:
+  type: VTX
+  count: 4
+  offset: 0x2D428
+  symbol: D_702D428
+
+D_702D468:
+  type: VTX
+  count: 4
+  offset: 0x2D468
+  symbol: D_702D468
+
+D_702D4A8:
+  type: VTX
+  count: 20
+  offset: 0x2D4A8
+  symbol: D_702D4A8
+
+D_702D5E8:
+  type: VTX
+  count: 6
+  offset: 0x2D5E8
+  symbol: D_702D5E8
+
+D_702D648:
+  type: VTX
+  count: 8
+  offset: 0x2D648
+  symbol: D_702D648
+
+D_702D6C8:
+  type: VTX
+  count: 4
+  offset: 0x2D6C8
+  symbol: D_702D6C8
+
+D_702D708:
+  type: VTX
+  count: 84
+  offset: 0x2D708
+  symbol: D_702D708
+
+D_702DC48:
+  type: VTX
+  count: 12
+  offset: 0x2DC48
+  symbol: D_702DC48
+
+D_702DD08:
+  type: VTX
+  count: 20
+  offset: 0x2DD08
+  symbol: D_702DD08
+
+D_702DE48:
+  type: VTX
+  count: 22
+  offset: 0x2DE48
+  symbol: D_702DE48
+
+D_702DFA8:
+  type: VTX
+  count: 6
+  offset: 0x2DFA8
+  symbol: D_702DFA8
+
+D_702E008:
+  type: VTX
+  count: 4
+  offset: 0x2E008
+  symbol: D_702E008
+
+D_702E048:
+  type: VTX
+  count: 4
+  offset: 0x2E048
+  symbol: D_702E048
+
+D_702E088:
+  type: VTX
+  count: 66
+  offset: 0x2E088
+  symbol: D_702E088
+
+D_702E4A8:
+  type: VTX
+  count: 12
+  offset: 0x2E4A8
+  symbol: D_702E4A8
+
+D_702E568:
+  type: VTX
+  count: 16
+  offset: 0x2E568
+  symbol: D_702E568
+
+D_702E668:
+  type: VTX
+  count: 26
+  offset: 0x2E668
+  symbol: D_702E668
+
+D_702E808:
+  type: VTX
+  count: 6
+  offset: 0x2E808
+  symbol: D_702E808
+
+D_702E868:
+  type: VTX
+  count: 4
+  offset: 0x2E868
+  symbol: D_702E868
+
+D_702E8A8:
+  type: VTX
+  count: 41
+  offset: 0x2E8A8
+  symbol: D_702E8A8
+
+D_702EB38:
+  type: VTX
+  count: 15
+  offset: 0x2EB38
+  symbol: D_702EB38
+
+D_702EC28:
+  type: VTX
+  count: 12
+  offset: 0x2EC28
+  symbol: D_702EC28
+
+D_702ECE8:
+  type: VTX
+  count: 17
+  offset: 0x2ECE8
+  symbol: D_702ECE8
+
+D_702EDF8:
+  type: VTX
+  count: 3
+  offset: 0x2EDF8
+  symbol: D_702EDF8
+
+D_702EE28:
+  type: VTX
+  count: 18
+  offset: 0x2EE28
+  symbol: D_702EE28
+
+D_702EF48:
+  type: VTX
+  count: 6
+  offset: 0x2EF48
+  symbol: D_702EF48
+
+D_702EFA8:
+  type: VTX
+  count: 12
+  offset: 0x2EFA8
+  symbol: D_702EFA8
+
+D_702F068:
+  type: VTX
+  count: 69
+  offset: 0x2F068
+  symbol: D_702F068
+
+D_702F4B8:
+  type: VTX
+  count: 8
+  offset: 0x2F4B8
+  symbol: D_702F4B8
+
+D_702F538:
+  type: VTX
+  count: 11
+  offset: 0x2F538
+  symbol: D_702F538
+
+D_702F5E8:
+  type: VTX
+  count: 15
+  offset: 0x2F5E8
+  symbol: D_702F5E8
+
+D_702F6D8:
+  type: VTX
+  count: 20
+  offset: 0x2F6D8
+  symbol: D_702F6D8
+
+D_702F818:
+  type: VTX
+  count: 24
+  offset: 0x2F818
+  symbol: D_702F818
+
+D_702F998:
+  type: VTX
+  count: 33
+  offset: 0x2F998
+  symbol: D_702F998
+
+D_702FBA8:
+  type: VTX
+  count: 53
+  offset: 0x2FBA8
+  symbol: D_702FBA8
+
+D_702FEF8:
+  type: VTX
+  count: 6
+  offset: 0x2FEF8
+  symbol: D_702FEF8
+
+D_702FF58:
+  type: VTX
+  count: 11
+  offset: 0x2FF58
+  symbol: D_702FF58
+
+D_7030008:
+  type: VTX
+  count: 15
+  offset: 0x30008
+  symbol: D_7030008
+
+D_70300F8:
+  type: VTX
+  count: 19
+  offset: 0x300F8
+  symbol: D_70300F8
+
+D_7030228:
+  type: VTX
+  count: 24
+  offset: 0x30228
+  symbol: D_7030228
+
+D_70303A8:
+  type: VTX
+  count: 30
+  offset: 0x303A8
+  symbol: D_70303A8
+
+D_7030588:
+  type: VTX
+  count: 20
+  offset: 0x30588
+  symbol: D_7030588
+
+D_70306C8:
+  type: VTX
+  count: 15
+  offset: 0x306C8
+  symbol: D_70306C8
+
+D_70307B8:
+  type: VTX
+  count: 19
+  offset: 0x307B8
+  symbol: D_70307B8
+
+D_70308E8:
+  type: VTX
+  count: 18
+  offset: 0x308E8
+  symbol: D_70308E8
+
+D_7030A08:
+  type: VTX
+  count: 28
+  offset: 0x30A08
+  symbol: D_7030A08
+
+D_7030BC8:
+  type: VTX
+  count: 5
+  offset: 0x30BC8
+  symbol: D_7030BC8
+
+D_7030C18:
+  type: VTX
+  count: 3
+  offset: 0x30C18
+  symbol: D_7030C18
+
+D_7030C48:
+  type: VTX
+  count: 6
+  offset: 0x30C48
+  symbol: D_7030C48
+
+D_7030CA8:
+  type: VTX
+  count: 24
+  offset: 0x30CA8
+  symbol: D_7030CA8
+
+D_7030E28:
+  type: VTX
+  count: 4
+  offset: 0x30E28
+  symbol: D_7030E28
+
+D_7030E68:
+  type: VTX
+  count: 6
+  offset: 0x30E68
+  symbol: D_7030E68
+
+D_7030EC8:
+  type: VTX
+  count: 12
+  offset: 0x30EC8
+  symbol: D_7030EC8
+
+D_7030F88:
+  type: VTX
+  count: 12
+  offset: 0x30F88
+  symbol: D_7030F88
+
+D_7031048:
+  type: VTX
+  count: 20
+  offset: 0x31048
+  symbol: D_7031048
+
+D_7031188:
+  type: VTX
+  count: 28
+  offset: 0x31188
+  symbol: D_7031188
+
+D_7031348:
+  type: VTX
+  count: 112
+  offset: 0x31348
+  symbol: D_7031348
+
+D_7031A48:
+  type: VTX
+  count: 4
+  offset: 0x31A48
+  symbol: D_7031A48
+
+D_7031A88:
+  type: VTX
+  count: 6
+  offset: 0x31A88
+  symbol: D_7031A88
+
+D_7031AE8:
+  type: VTX
+  count: 8
+  offset: 0x31AE8
+  symbol: D_7031AE8
+
+D_7031B68:
+  type: VTX
+  count: 12
+  offset: 0x31B68
+  symbol: D_7031B68
+
+D_7031C28:
+  type: VTX
+  count: 10
+  offset: 0x31C28
+  symbol: D_7031C28
+
+D_7031CC8:
+  type: VTX
+  count: 24
+  offset: 0x31CC8
+  symbol: D_7031CC8
+
+D_7031E48:
+  type: VTX
+  count: 96
+  offset: 0x31E48
+  symbol: D_7031E48
+
+D_7032448:
+  type: VTX
+  count: 6
+  offset: 0x32448
+  symbol: D_7032448
+
+D_70324A8:
+  type: VTX
+  count: 8
+  offset: 0x324A8
+  symbol: D_70324A8
+
+D_7032528:
+  type: VTX
+  count: 12
+  offset: 0x32528
+  symbol: D_7032528
+
+D_70325E8:
+  type: VTX
+  count: 10
+  offset: 0x325E8
+  symbol: D_70325E8
+
+D_7032688:
+  type: VTX
+  count: 18
+  offset: 0x32688
+  symbol: D_7032688
+
+D_70327A8:
+  type: VTX
+  count: 46
+  offset: 0x327A8
+  symbol: D_70327A8
+
+D_7032A88:
+  type: VTX
+  count: 3
+  offset: 0x32A88
+  symbol: D_7032A88
+
+D_7032AB8:
+  type: VTX
+  count: 12
+  offset: 0x32AB8
+  symbol: D_7032AB8
+
+D_7032B78:
+  type: VTX
+  count: 9
+  offset: 0x32B78
+  symbol: D_7032B78
+
+D_7032C08:
+  type: VTX
+  count: 6
+  offset: 0x32C08
+  symbol: D_7032C08
+
+D_7032C68:
+  type: VTX
+  count: 32
+  offset: 0x32C68
+  symbol: D_7032C68
+
+D_7032E68:
+  type: VTX
+  count: 10
+  offset: 0x32E68
+  symbol: D_7032E68
+
+D_7032F08:
+  type: VTX
+  count: 8
+  offset: 0x32F08
+  symbol: D_7032F08
+
+D_7032F88:
+  type: VTX
+  count: 39
+  offset: 0x32F88
+  symbol: D_7032F88
+
+D_70331F8:
+  type: VTX
+  count: 20
+  offset: 0x331F8
+  symbol: D_70331F8
+
+D_7033338:
+  type: VTX
+  count: 4
+  offset: 0x33338
+  symbol: D_7033338
+
+D_7033378:
+  type: VTX
+  count: 8
+  offset: 0x33378
+  symbol: D_7033378
+
+D_70333F8:
+  type: VTX
+  count: 66
+  offset: 0x333F8
+  symbol: D_70333F8
+
+D_7033818:
+  type: VTX
+  count: 10
+  offset: 0x33818
+  symbol: D_7033818
+
+D_70338B8:
+  type: VTX
+  count: 6
+  offset: 0x338B8
+  symbol: D_70338B8
+
+D_7033918:
+  type: VTX
+  count: 39
+  offset: 0x33918
+  symbol: D_7033918
+
+D_7033B88:
+  type: VTX
+  count: 9
+  offset: 0x33B88
+  symbol: D_7033B88
+
+D_7033C18:
+  type: VTX
+  count: 4
+  offset: 0x33C18
+  symbol: D_7033C18
+
+D_7033C58:
+  type: VTX
+  count: 8
+  offset: 0x33C58
+  symbol: D_7033C58
+
+D_7033CD8:
+  type: VTX
+  count: 58
+  offset: 0x33CD8
+  symbol: D_7033CD8
+
+D_7034078:
+  type: VTX
+  count: 10
+  offset: 0x34078
+  symbol: D_7034078
+
+D_7034118:
+  type: VTX
+  count: 3
+  offset: 0x34118
+  symbol: D_7034118
+
+D_7034148:
+  type: VTX
+  count: 34
+  offset: 0x34148
+  symbol: D_7034148
+
+D_7034368:
+  type: VTX
+  count: 9
+  offset: 0x34368
+  symbol: D_7034368
+
+D_70343F8:
+  type: VTX
+  count: 3
+  offset: 0x343F8
+  symbol: D_70343F8
+
+D_7034428:
+  type: VTX
+  count: 43
+  offset: 0x34428
+  symbol: D_7034428
+
+D_70346D8:
+  type: VTX
+  count: 10
+  offset: 0x346D8
+  symbol: D_70346D8
+
+D_7034778:
+  type: VTX
+  count: 6
+  offset: 0x34778
+  symbol: D_7034778
+
+D_70347D8:
+  type: VTX
+  count: 3
+  offset: 0x347D8
+  symbol: D_70347D8
+
+D_7034808:
+  type: VTX
+  count: 28
+  offset: 0x34808
+  symbol: D_7034808
+
+D_70349C8:
+  type: VTX
+  count: 10
+  offset: 0x349C8
+  symbol: D_70349C8
+
+D_7034A68:
+  type: VTX
+  count: 17
+  offset: 0x34A68
+  symbol: D_7034A68
+
+D_7034B78:
+  type: VTX
+  count: 8
+  offset: 0x34B78
+  symbol: D_7034B78
+
+D_7034BF8:
+  type: VTX
+  count: 46
+  offset: 0x34BF8
+  symbol: D_7034BF8
+
+D_7034ED8:
+  type: VTX
+  count: 15
+  offset: 0x34ED8
+  symbol: D_7034ED8
+
+D_7034FC8:
+  type: VTX
+  count: 68
+  offset: 0x34FC8
+  symbol: D_7034FC8
+
+D_7035408:
+  type: VTX
+  count: 8
+  offset: 0x35408
+  symbol: D_7035408
+
+D_7035488:
+  type: VTX
+  count: 17
+  offset: 0x35488
+  symbol: D_7035488
+
+D_7035598:
+  type: VTX
+  count: 33
+  offset: 0x35598
+  symbol: D_7035598
+
+D_70357A8:
+  type: VTX
+  count: 15
+  offset: 0x357A8
+  symbol: D_70357A8
+
+D_7035898:
+  type: VTX
+  count: 64
+  offset: 0x35898
+  symbol: D_7035898
+
+D_7035C98:
+  type: VTX
+  count: 14
+  offset: 0x35C98
+  symbol: D_7035C98
+
+D_7035D78:
+  type: VTX
+  count: 30
+  offset: 0x35D78
+  symbol: D_7035D78
+
+D_7035F58:
+  type: VTX
+  count: 9
+  offset: 0x35F58
+  symbol: D_7035F58
+
+D_7035FE8:
+  type: VTX
+  count: 46
+  offset: 0x35FE8
+  symbol: D_7035FE8
+
+D_70362C8:
+  type: VTX
+  count: 9
+  offset: 0x362C8
+  symbol: D_70362C8
+
+D_7036358:
+  type: VTX
+  count: 16
+  offset: 0x36358
+  symbol: D_7036358
+
+D_7036458:
+  type: VTX
+  count: 6
+  offset: 0x36458
+  symbol: D_7036458
+
+D_70364B8:
+  type: VTX
+  count: 27
+  offset: 0x364B8
+  symbol: D_70364B8
+
+D_7036668:
+  type: VTX
+  count: 12
+  offset: 0x36668
+  symbol: D_7036668
+
+D_7036728:
+  type: VTX
+  count: 12
+  offset: 0x36728
+  symbol: D_7036728
+
+D_70367E8:
+  type: VTX
+  count: 8
+  offset: 0x367E8
+  symbol: D_70367E8
+
+D_7036868:
+  type: VTX
+  count: 8
+  offset: 0x36868
+  symbol: D_7036868
+
+D_70368E8:
+  type: VTX
+  count: 63
+  offset: 0x368E8
+  symbol: D_70368E8
+
+D_7036CD8:
+  type: VTX
+  count: 12
+  offset: 0x36CD8
+  symbol: D_7036CD8
+
+D_7036D98:
+  type: VTX
+  count: 16
+  offset: 0x36D98
+  symbol: D_7036D98
+
+D_7036E98:
+  type: VTX
+  count: 6
+  offset: 0x36E98
+  symbol: D_7036E98
+
+D_7036EF8:
+  type: VTX
+  count: 4
+  offset: 0x36EF8
+  symbol: D_7036EF8
+
+D_7036F38:
+  type: VTX
+  count: 10
+  offset: 0x36F38
+  symbol: D_7036F38
+
+D_7036FD8:
+  type: VTX
+  count: 8
+  offset: 0x36FD8
+  symbol: D_7036FD8
+
+D_7037058:
+  type: VTX
+  count: 8
+  offset: 0x37058
+  symbol: D_7037058
+
+D_70370D8:
+  type: VTX
+  count: 60
+  offset: 0x370D8
+  symbol: D_70370D8
+
+D_7037498:
+  type: VTX
+  count: 12
+  offset: 0x37498
+  symbol: D_7037498
+
+D_7037558:
+  type: VTX
+  count: 12
+  offset: 0x37558
+  symbol: D_7037558
+
+D_7037618:
+  type: VTX
+  count: 4
+  offset: 0x37618
+  symbol: D_7037618
+
+D_7037658:
+  type: VTX
+  count: 7
+  offset: 0x37658
+  symbol: D_7037658
+
+D_70376C8:
+  type: VTX
+  count: 6
+  offset: 0x376C8
+  symbol: D_70376C8
+
+D_7037728:
+  type: VTX
+  count: 41
+  offset: 0x37728
+  symbol: D_7037728
+
+D_70379B8:
+  type: VTX
+  count: 12
+  offset: 0x379B8
+  symbol: D_70379B8
+
+D_7037A78:
+  type: VTX
+  count: 11
+  offset: 0x37A78
+  symbol: D_7037A78
+
+D_7037B28:
+  type: VTX
+  count: 4
+  offset: 0x37B28
+  symbol: D_7037B28
+
+D_7037B68:
+  type: VTX
+  count: 3
+  offset: 0x37B68
+  symbol: D_7037B68
+
+D_7037B98:
+  type: VTX
+  count: 20
+  offset: 0x37B98
+  symbol: D_7037B98
+
+D_7037CD8:
+  type: VTX
+  count: 4
+  offset: 0x37CD8
+  symbol: D_7037CD8
+
+D_7037D18:
+  type: VTX
+  count: 10
+  offset: 0x37D18
+  symbol: D_7037D18
+
+D_7037DB8:
+  type: VTX
+  count: 7
+  offset: 0x37DB8
+  symbol: D_7037DB8
+
+D_7037E28:
+  type: VTX
+  count: 15
+  offset: 0x37E28
+  symbol: D_7037E28
+
+D_7037F18:
+  type: VTX
+  count: 27
+  offset: 0x37F18
+  symbol: D_7037F18
+
+D_70380C8:
+  type: VTX
+  count: 5
+  offset: 0x380C8
+  symbol: D_70380C8
+
+D_7038118:
+  type: VTX
+  count: 7
+  offset: 0x38118
+  symbol: D_7038118
+
+D_7038188:
+  type: VTX
+  count: 15
+  offset: 0x38188
+  symbol: D_7038188
+
+D_7038278:
+  type: VTX
+  count: 17
+  offset: 0x38278
+  symbol: D_7038278
+
+D_7038388:
+  type: VTX
+  count: 6
+  offset: 0x38388
+  symbol: D_7038388
+
+D_70383E8:
+  type: VTX
+  count: 12
+  offset: 0x383E8
+  symbol: D_70383E8
+
+D_70384A8:
+  type: VTX
+  count: 13
+  offset: 0x384A8
+  symbol: D_70384A8
+
+D_7038578:
+  type: VTX
+  count: 3
+  offset: 0x38578
+  symbol: D_7038578
+
+D_70385A8:
+  type: VTX
+  count: 6
+  offset: 0x385A8
+  symbol: D_70385A8
+
+D_7038608:
+  type: VTX
+  count: 8
+  offset: 0x38608
+  symbol: D_7038608
+
+D_7038688:
+  type: VTX
+  count: 4
+  offset: 0x38688
+  symbol: D_7038688
+
+D_70386C8:
+  type: VTX
+  count: 8
+  offset: 0x386C8
+  symbol: D_70386C8
+
+D_7038748:
+  type: VTX
+  count: 20
+  offset: 0x38748
+  symbol: D_7038748
+
+D_7038888:
+  type: VTX
+  count: 26
+  offset: 0x38888
+  symbol: D_7038888
+
+D_7038A28:
+  type: VTX
+  count: 4
+  offset: 0x38A28
+  symbol: D_7038A28
+
+D_7038A68:
+  type: VTX
+  count: 4
+  offset: 0x38A68
+  symbol: D_7038A68
+
+D_7038AA8:
+  type: VTX
+  count: 14
+  offset: 0x38AA8
+  symbol: D_7038AA8
+
+D_7038B88:
+  type: VTX
+  count: 28
+  offset: 0x38B88
+  symbol: D_7038B88
+
+D_7038D48:
+  type: VTX
+  count: 9
+  offset: 0x38D48
+  symbol: D_7038D48
+
+D_7038DD8:
+  type: VTX
+  count: 28
+  offset: 0x38DD8
+  symbol: D_7038DD8
+
+D_7038F98:
+  type: VTX
+  count: 3
+  offset: 0x38F98
+  symbol: D_7038F98
+
+D_7038FC8:
+  type: VTX
+  count: 16
+  offset: 0x38FC8
+  symbol: D_7038FC8
+
+D_70390C8:
+  type: VTX
+  count: 7
+  offset: 0x390C8
+  symbol: D_70390C8
+
+D_7039138:
+  type: VTX
+  count: 20
+  offset: 0x39138
+  symbol: D_7039138
+
+D_7039278:
+  type: VTX
+  count: 34
+  offset: 0x39278
+  symbol: D_7039278
+
+D_7039498:
+  type: VTX
+  count: 11
+  offset: 0x39498
+  symbol: D_7039498
+
+D_7039548:
+  type: VTX
+  count: 7
+  offset: 0x39548
+  symbol: D_7039548
+
+D_70395B8:
+  type: VTX
+  count: 18
+  offset: 0x395B8
+  symbol: D_70395B8
+
+D_70396D8:
+  type: VTX
+  count: 24
+  offset: 0x396D8
+  symbol: D_70396D8
+
+D_7039858:
+  type: VTX
+  count: 5
+  offset: 0x39858
+  symbol: D_7039858
+
+D_70398A8:
+  type: VTX
+  count: 12
+  offset: 0x398A8
+  symbol: D_70398A8
+
+D_7039968:
+  type: VTX
+  count: 18
+  offset: 0x39968
+  symbol: D_7039968
+
+D_7039A88:
+  type: VTX
+  count: 5
+  offset: 0x39A88
+  symbol: D_7039A88
+
+D_7039AD8:
+  type: VTX
+  count: 3
+  offset: 0x39AD8
+  symbol: D_7039AD8
+
+D_7039B08:
+  type: VTX
+  count: 18
+  offset: 0x39B08
+  symbol: D_7039B08
+
+D_7039C28:
+  type: VTX
+  count: 3
+  offset: 0x39C28
+  symbol: D_7039C28
+
+D_7039C58:
+  type: VTX
+  count: 7
+  offset: 0x39C58
+  symbol: D_7039C58
+
+D_7039CC8:
+  type: VTX
+  count: 15
+  offset: 0x39CC8
+  symbol: D_7039CC8
+
+D_7039DB8:
+  type: VTX
+  count: 50
+  offset: 0x39DB8
+  symbol: D_7039DB8
+
+D_703A0D8:
+  type: VTX
+  count: 7
+  offset: 0x3A0D8
+  symbol: D_703A0D8
+
+D_703A148:
+  type: VTX
+  count: 15
+  offset: 0x3A148
+  symbol: D_703A148
+
+D_703A238:
+  type: VTX
+  count: 32
+  offset: 0x3A238
+  symbol: D_703A238
+
+D_703A438:
+  type: VTX
+  count: 12
+  offset: 0x3A438
+  symbol: D_703A438
+
+D_703A4F8:
+  type: VTX
+  count: 28
+  offset: 0x3A4F8
+  symbol: D_703A4F8
+
+D_703A6B8:
+  type: VTX
+  count: 9
+  offset: 0x3A6B8
+  symbol: D_703A6B8
+
+D_703A748:
+  type: VTX
+  count: 17
+  offset: 0x3A748
+  symbol: D_703A748
+
+D_703A858:
+  type: VTX
+  count: 4
+  offset: 0x3A858
+  symbol: D_703A858
+
+D_703A898:
+  type: VTX
+  count: 4
+  offset: 0x3A898
+  symbol: D_703A898
+
+D_703A8D8:
+  type: VTX
+  count: 12
+  offset: 0x3A8D8
+  symbol: D_703A8D8
+
+D_703A998:
+  type: VTX
+  count: 30
+  offset: 0x3A998
+  symbol: D_703A998
+
+D_703AB78:
+  type: VTX
+  count: 3
+  offset: 0x3AB78
+  symbol: D_703AB78
+
+D_703ABA8:
+  type: VTX
+  count: 4
+  offset: 0x3ABA8
+  symbol: D_703ABA8
+
+D_703ABE8:
+  type: VTX
+  count: 4
+  offset: 0x3ABE8
+  symbol: D_703ABE8
+
+D_703AC28:
+  type: VTX
+  count: 12
+  offset: 0x3AC28
+  symbol: D_703AC28
+
+D_703ACE8:
+  type: VTX
+  count: 26
+  offset: 0x3ACE8
+  symbol: D_703ACE8
+
+D_703AE88:
+  type: VTX
+  count: 3
+  offset: 0x3AE88
+  symbol: D_703AE88
+
+D_703AEB8:
+  type: VTX
+  count: 12
+  offset: 0x3AEB8
+  symbol: D_703AEB8
+
+D_703AF78:
+  type: VTX
+  count: 23
+  offset: 0x3AF78
+  symbol: D_703AF78
+
+D_703B0E8:
+  type: VTX
+  count: 3
+  offset: 0x3B0E8
+  symbol: D_703B0E8
+
+D_703B118:
+  type: VTX
+  count: 6
+  offset: 0x3B118
+  symbol: D_703B118
+
+D_703B178:
+  type: VTX
+  count: 18
+  offset: 0x3B178
+  symbol: D_703B178
+
+D_703B298:
+  type: VTX
+  count: 3
+  offset: 0x3B298
+  symbol: D_703B298
+
+D_703B2C8:
+  type: VTX
+  count: 4
+  offset: 0x3B2C8
+  symbol: D_703B2C8
+
+D_703B308:
+  type: VTX
+  count: 9
+  offset: 0x3B308
+  symbol: D_703B308
+
+D_703B398:
+  type: VTX
+  count: 4
+  offset: 0x3B398
+  symbol: D_703B398
+
+D_703B3D8:
+  type: VTX
+  count: 20
+  offset: 0x3B3D8
+  symbol: D_703B3D8
+
+D_703B518:
+  type: VTX
+  count: 23
+  offset: 0x3B518
+  symbol: D_703B518
+
+D_703B688:
+  type: VTX
+  count: 4
+  offset: 0x3B688
+  symbol: D_703B688
+
+D_703B6C8:
+  type: VTX
+  count: 7
+  offset: 0x3B6C8
+  symbol: D_703B6C8
+
+D_703B738:
+  type: VTX
+  count: 4
+  offset: 0x3B738
+  symbol: D_703B738
+
+D_703B778:
+  type: VTX
+  count: 10
+  offset: 0x3B778
+  symbol: D_703B778
+
+D_703B818:
+  type: VTX
+  count: 22
+  offset: 0x3B818
+  symbol: D_703B818
+
+D_703B978:
+  type: VTX
+  count: 4
+  offset: 0x3B978
+  symbol: D_703B978
+
+D_703B9B8:
+  type: VTX
+  count: 6
+  offset: 0x3B9B8
+  symbol: D_703B9B8
+
+D_703BA18:
+  type: VTX
+  count: 8
+  offset: 0x3BA18
+  symbol: D_703BA18
+
+D_703BA98:
+  type: VTX
+  count: 19
+  offset: 0x3BA98
+  symbol: D_703BA98
+
+D_703BBC8:
+  type: VTX
+  count: 4
+  offset: 0x3BBC8
+  symbol: D_703BBC8
+
+D_703BC08:
+  type: VTX
+  count: 7
+  offset: 0x3BC08
+  symbol: D_703BC08
+
+D_703BC78:
+  type: VTX
+  count: 6
+  offset: 0x3BC78
+  symbol: D_703BC78
+
+D_703BCD8:
+  type: VTX
+  count: 8
+  offset: 0x3BCD8
+  symbol: D_703BCD8
+
+D_703BD58:
+  type: VTX
+  count: 6
+  offset: 0x3BD58
+  symbol: D_703BD58
+
+D_703BDB8:
+  type: VTX
+  count: 8
+  offset: 0x3BDB8
+  symbol: D_703BDB8
+
+D_703BE38:
+  type: VTX
+  count: 20
+  offset: 0x3BE38
+  symbol: D_703BE38
+
+D_703BF78:
+  type: VTX
+  count: 16
+  offset: 0x3BF78
+  symbol: D_703BF78
+
+D_703C078:
+  type: VTX
+  count: 4
+  offset: 0x3C078
+  symbol: D_703C078
+
+D_703C0B8:
+  type: VTX
+  count: 6
+  offset: 0x3C0B8
+  symbol: D_703C0B8
+
+D_703C118:
+  type: VTX
+  count: 4
+  offset: 0x3C118
+  symbol: D_703C118
+
+D_703C158:
+  type: VTX
+  count: 20
+  offset: 0x3C158
+  symbol: D_703C158
+
+D_703C298:
+  type: VTX
+  count: 14
+  offset: 0x3C298
+  symbol: D_703C298
+
+D_703C378:
+  type: VTX
+  count: 4
+  offset: 0x3C378
+  symbol: D_703C378
+
+D_703C3B8:
+  type: VTX
+  count: 6
+  offset: 0x3C3B8
+  symbol: D_703C3B8
+
+D_703C418:
+  type: VTX
+  count: 19
+  offset: 0x3C418
+  symbol: D_703C418
+
+D_703C548:
+  type: VTX
+  count: 14
+  offset: 0x3C548
+  symbol: D_703C548
+
+D_703C628:
+  type: VTX
+  count: 4
+  offset: 0x3C628
+  symbol: D_703C628
+
+D_703C668:
+  type: VTX
+  count: 12
+  offset: 0x3C668
+  symbol: D_703C668
+
+D_703C728:
+  type: VTX
+  count: 6
+  offset: 0x3C728
+  symbol: D_703C728
+
+D_703C788:
+  type: VTX
+  count: 8
+  offset: 0x3C788
+  symbol: D_703C788
+
+D_703C808:
+  type: VTX
+  count: 6
+  offset: 0x3C808
+  symbol: D_703C808
+
+D_703C868:
+  type: VTX
+  count: 18
+  offset: 0x3C868
+  symbol: D_703C868
+
+D_703C988:
+  type: VTX
+  count: 4
+  offset: 0x3C988
+  symbol: D_703C988
+
+D_703C9C8:
+  type: VTX
+  count: 10
+  offset: 0x3C9C8
+  symbol: D_703C9C8
+
+D_703CA68:
+  type: VTX
+  count: 28
+  offset: 0x3CA68
+  symbol: D_703CA68
+
+D_703CC28:
+  type: VTX
+  count: 10
+  offset: 0x3CC28
+  symbol: D_703CC28
+
+D_703CCC8:
+  type: VTX
+  count: 6
+  offset: 0x3CCC8
+  symbol: D_703CCC8
+
+D_703CD28:
+  type: VTX
+  count: 18
+  offset: 0x3CD28
+  symbol: D_703CD28
+
+D_703CE48:
+  type: VTX
+  count: 4
+  offset: 0x3CE48
+  symbol: D_703CE48
+
+D_703CE88:
+  type: VTX
+  count: 10
+  offset: 0x3CE88
+  symbol: D_703CE88
+
+D_703CF28:
+  type: VTX
+  count: 27
+  offset: 0x3CF28
+  symbol: D_703CF28
+
+D_703D0D8:
+  type: VTX
+  count: 10
+  offset: 0x3D0D8
+  symbol: D_703D0D8
+
+D_703D178:
+  type: VTX
+  count: 6
+  offset: 0x3D178
+  symbol: D_703D178
+
+D_703D1D8:
+  type: VTX
+  count: 12
+  offset: 0x3D1D8
+  symbol: D_703D1D8
+
+D_703D298:
+  type: VTX
+  count: 10
+  offset: 0x3D298
+  symbol: D_703D298
+
+D_703D338:
+  type: VTX
+  count: 17
+  offset: 0x3D338
+  symbol: D_703D338
+
+D_703D448:
+  type: VTX
+  count: 10
+  offset: 0x3D448
+  symbol: D_703D448
+
+D_703D4E8:
+  type: VTX
+  count: 12
+  offset: 0x3D4E8
+  symbol: D_703D4E8
+
+D_703D5A8:
+  type: VTX
+  count: 4
+  offset: 0x3D5A8
+  symbol: D_703D5A8
+
+D_703D5E8:
+  type: VTX
+  count: 9
+  offset: 0x3D5E8
+  symbol: D_703D5E8
+
+D_703D678:
+  type: VTX
+  count: 6
+  offset: 0x3D678
+  symbol: D_703D678
+
+D_703D6D8:
+  type: VTX
+  count: 16
+  offset: 0x3D6D8
+  symbol: D_703D6D8
+
+D_703D7D8:
+  type: VTX
+  count: 8
+  offset: 0x3D7D8
+  symbol: D_703D7D8
+
+D_703D858:
+  type: VTX
+  count: 4
+  offset: 0x3D858
+  symbol: D_703D858
+
+D_703D898:
+  type: VTX
+  count: 10
+  offset: 0x3D898
+  symbol: D_703D898
+
+D_703D938:
+  type: VTX
+  count: 34
+  offset: 0x3D938
+  symbol: D_703D938
+
+D_703DB58:
+  type: VTX
+  count: 10
+  offset: 0x3DB58
+  symbol: D_703DB58
+
+D_703DBF8:
+  type: VTX
+  count: 15
+  offset: 0x3DBF8
+  symbol: D_703DBF8
+
+D_703DCE8:
+  type: VTX
+  count: 8
+  offset: 0x3DCE8
+  symbol: D_703DCE8
+
+D_703DD68:
+  type: VTX
+  count: 4
+  offset: 0x3DD68
+  symbol: D_703DD68
+
+D_703DDA8:
+  type: VTX
+  count: 10
+  offset: 0x3DDA8
+  symbol: D_703DDA8
+
+D_703DE48:
+  type: VTX
+  count: 33
+  offset: 0x3DE48
+  symbol: D_703DE48
+
+D_703E058:
+  type: VTX
+  count: 10
+  offset: 0x3E058
+  symbol: D_703E058
+
+D_703E0F8:
+  type: VTX
+  count: 12
+  offset: 0x3E0F8
+  symbol: D_703E0F8
+
+D_703E1B8:
+  type: VTX
+  count: 8
+  offset: 0x3E1B8
+  symbol: D_703E1B8
+
+D_703E238:
+  type: VTX
+  count: 10
+  offset: 0x3E238
+  symbol: D_703E238
+
+D_703E2D8:
+  type: VTX
+  count: 27
+  offset: 0x3E2D8
+  symbol: D_703E2D8
+
+D_703E488:
+  type: VTX
+  count: 10
+  offset: 0x3E488
+  symbol: D_703E488
+
+D_703E528:
+  type: VTX
+  count: 6
+  offset: 0x3E528
+  symbol: D_703E528
+
+D_703E588:
+  type: VTX
+  count: 8
+  offset: 0x3E588
+  symbol: D_703E588
+
+D_703E608:
+  type: VTX
+  count: 10
+  offset: 0x3E608
+  symbol: D_703E608
+
+D_703E6A8:
+  type: VTX
+  count: 3
+  offset: 0x3E6A8
+  symbol: D_703E6A8
+
+D_703E6D8:
+  type: VTX
+  count: 6
+  offset: 0x3E6D8
+  symbol: D_703E6D8
+
+D_703E738:
+  type: VTX
+  count: 18
+  offset: 0x3E738
+  symbol: D_703E738
+
+D_703E858:
+  type: VTX
+  count: 8
+  offset: 0x3E858
+  symbol: D_703E858
+
+D_703E8D8:
+  type: VTX
+  count: 10
+  offset: 0x3E8D8
+  symbol: D_703E8D8
+
+D_703E978:
+  type: VTX
+  count: 10
+  offset: 0x3E978
+  symbol: D_703E978
+
+D_703EA18:
+  type: VTX
+  count: 21
+  offset: 0x3EA18
+  symbol: D_703EA18
+
+D_703EB68:
+  type: VTX
+  count: 9
+  offset: 0x3EB68
+  symbol: D_703EB68
+
+D_703EBF8:
+  type: VTX
+  count: 17
+  offset: 0x3EBF8
+  symbol: D_703EBF8
+
+D_703ED08:
+  type: VTX
+  count: 8
+  offset: 0x3ED08
+  symbol: D_703ED08
+
+D_703ED88:
+  type: VTX
+  count: 10
+  offset: 0x3ED88
+  symbol: D_703ED88
+
+D_703EE28:
+  type: VTX
+  count: 10
+  offset: 0x3EE28
+  symbol: D_703EE28
+
+D_703EEC8:
+  type: VTX
+  count: 18
+  offset: 0x3EEC8
+  symbol: D_703EEC8
+
+D_703EFE8:
+  type: VTX
+  count: 9
+  offset: 0x3EFE8
+  symbol: D_703EFE8
+
+D_703F078:
+  type: VTX
+  count: 14
+  offset: 0x3F078
+  symbol: D_703F078
+
+D_703F158:
+  type: VTX
+  count: 8
+  offset: 0x3F158
+  symbol: D_703F158
+
+D_703F1D8:
+  type: VTX
+  count: 10
+  offset: 0x3F1D8
+  symbol: D_703F1D8
+
+D_703F278:
+  type: VTX
+  count: 18
+  offset: 0x3F278
+  symbol: D_703F278
+
+D_703F398:
+  type: VTX
+  count: 9
+  offset: 0x3F398
+  symbol: D_703F398
+
+D_703F428:
+  type: VTX
+  count: 6
+  offset: 0x3F428
+  symbol: D_703F428
+
+D_703F488:
+  type: VTX
+  count: 9
+  offset: 0x3F488
+  symbol: D_703F488
+
+D_703F518:
+  type: VTX
+  count: 10
+  offset: 0x3F518
+  symbol: D_703F518
+
+D_703F5B8:
+  type: VTX
+  count: 9
+  offset: 0x3F5B8
+  symbol: D_703F5B8
+
+D_703F648:
+  type: VTX
+  count: 6
+  offset: 0x3F648
+  symbol: D_703F648
+
+D_703F6A8:
+  type: VTX
+  count: 20
+  offset: 0x3F6A8
+  symbol: D_703F6A8
+
+D_703F7E8:
+  type: VTX
+  count: 10
+  offset: 0x3F7E8
+  symbol: D_703F7E8
+
+D_703F888:
+  type: VTX
+  count: 20
+  offset: 0x3F888
+  symbol: D_703F888
+
+D_703F9C8:
+  type: VTX
+  count: 9
+  offset: 0x3F9C8
+  symbol: D_703F9C8
+
+D_703FA58:
+  type: VTX
+  count: 25
+  offset: 0x3FA58
+  symbol: D_703FA58
+
+D_703FBE8:
+  type: VTX
+  count: 10
+  offset: 0x3FBE8
+  symbol: D_703FBE8
+
+D_703FC88:
+  type: VTX
+  count: 20
+  offset: 0x3FC88
+  symbol: D_703FC88
+
+D_703FDC8:
+  type: VTX
+  count: 10
+  offset: 0x3FDC8
+  symbol: D_703FDC8
+
+D_703FE68:
+  type: VTX
+  count: 20
+  offset: 0x3FE68
+  symbol: D_703FE68
+
+D_703FFA8:
+  type: VTX
+  count: 9
+  offset: 0x3FFA8
+  symbol: D_703FFA8
+
+D_7040038:
+  type: VTX
+  count: 25
+  offset: 0x40038
+  symbol: D_7040038
+
+D_70401C8:
+  type: VTX
+  count: 10
+  offset: 0x401C8
+  symbol: D_70401C8
+
+D_7040268:
+  type: VTX
+  count: 10
+  offset: 0x40268
+  symbol: D_7040268
+
+D_7040308:
+  type: VTX
+  count: 10
+  offset: 0x40308
+  symbol: D_7040308
+
+D_70403A8:
+  type: VTX
+  count: 9
+  offset: 0x403A8
+  symbol: D_70403A8
+
+D_7040438:
+  type: VTX
+  count: 15
+  offset: 0x40438
+  symbol: D_7040438
+
+D_7040528:
+  type: VTX
+  count: 9
+  offset: 0x40528
+  symbol: D_7040528
+
+D_70405B8:
+  type: VTX
+  count: 4
+  offset: 0x405B8
+  symbol: D_70405B8
+
+D_70405F8:
+  type: VTX
+  count: 9
+  offset: 0x405F8
+  symbol: D_70405F8
+
+D_7040688:
+  type: VTX
+  count: 6
+  offset: 0x40688
+  symbol: D_7040688
+
+D_70406E8:
+  type: VTX
+  count: 3
+  offset: 0x406E8
+  symbol: D_70406E8
+
+D_7040718:
+  type: VTX
+  count: 6
+  offset: 0x40718
+  symbol: D_7040718
+
+D_7040778:
+  type: VTX
+  count: 10
+  offset: 0x40778
+  symbol: D_7040778
+
+D_7040818:
+  type: VTX
+  count: 16
+  offset: 0x40818
+  symbol: D_7040818
+
+D_7040918:
+  type: VTX
+  count: 12
+  offset: 0x40918
+  symbol: D_7040918
+
+D_70409D8:
+  type: VTX
+  count: 8
+  offset: 0x409D8
+  symbol: D_70409D8
+
+D_7040A58:
+  type: VTX
+  count: 38
+  offset: 0x40A58
+  symbol: D_7040A58
+
+D_7040CB8:
+  type: VTX
+  count: 10
+  offset: 0x40CB8
+  symbol: D_7040CB8
+
+D_7040D58:
+  type: VTX
+  count: 9
+  offset: 0x40D58
+  symbol: D_7040D58
+
+D_7040DE8:
+  type: VTX
+  count: 16
+  offset: 0x40DE8
+  symbol: D_7040DE8
+
+D_7040EE8:
+  type: VTX
+  count: 12
+  offset: 0x40EE8
+  symbol: D_7040EE8
+
+D_7040FA8:
+  type: VTX
+  count: 8
+  offset: 0x40FA8
+  symbol: D_7040FA8
+
+D_7041028:
+  type: VTX
+  count: 27
+  offset: 0x41028
+  symbol: D_7041028
+
+D_70411D8:
+  type: VTX
+  count: 9
+  offset: 0x411D8
+  symbol: D_70411D8
+
+D_7041268:
+  type: VTX
+  count: 6
+  offset: 0x41268
+  symbol: D_7041268
+
+D_70412C8:
+  type: VTX
+  count: 13
+  offset: 0x412C8
+  symbol: D_70412C8
+
+D_7041398:
+  type: VTX
+  count: 8
+  offset: 0x41398
+  symbol: D_7041398
+
+D_7041418:
+  type: VTX
+  count: 12
+  offset: 0x41418
+  symbol: D_7041418
+
+D_70414D8:
+  type: VTX
+  count: 9
+  offset: 0x414D8
+  symbol: D_70414D8
+
+D_7041568:
+  type: VTX
+  count: 10
+  offset: 0x41568
+  symbol: D_7041568
+
+D_7041608:
+  type: VTX
+  count: 4
+  offset: 0x41608
+  symbol: D_7041608
+
+D_7041648:
+  type: VTX
+  count: 3
+  offset: 0x41648
+  symbol: D_7041648
+
+D_7041678:
+  type: VTX
+  count: 6
+  offset: 0x41678
+  symbol: D_7041678
+
+D_70416D8:
+  type: VTX
+  count: 24
+  offset: 0x416D8
+  symbol: D_70416D8
+
+D_7041858:
+  type: VTX
+  count: 30
+  offset: 0x41858
+  symbol: D_7041858
+
+D_7041A38:
+  type: VTX
+  count: 4
+  offset: 0x41A38
+  symbol: D_7041A38
+
+D_7041A78:
+  type: VTX
+  count: 4
+  offset: 0x41A78
+  symbol: D_7041A78
+
+D_7041AB8:
+  type: VTX
+  count: 33
+  offset: 0x41AB8
+  symbol: D_7041AB8
+
+D_7041CC8:
+  type: VTX
+  count: 10
+  offset: 0x41CC8
+  symbol: D_7041CC8
+
+D_7041D68:
+  type: VTX
+  count: 11
+  offset: 0x41D68
+  symbol: D_7041D68
+
+D_7041E18:
+  type: VTX
+  count: 28
+  offset: 0x41E18
+  symbol: D_7041E18
+
+D_7041FD8:
+  type: VTX
+  count: 4
+  offset: 0x41FD8
+  symbol: D_7041FD8
+
+D_7042018:
+  type: VTX
+  count: 4
+  offset: 0x42018
+  symbol: D_7042018
+
+D_7042058:
+  type: VTX
+  count: 34
+  offset: 0x42058
+  symbol: D_7042058
+
+D_7042278:
+  type: VTX
+  count: 9
+  offset: 0x42278
+  symbol: D_7042278
+
+D_7042308:
+  type: VTX
+  count: 6
+  offset: 0x42308
+  symbol: D_7042308
+
+D_7042368:
+  type: VTX
+  count: 12
+  offset: 0x42368
+  symbol: D_7042368
+
+D_7042428:
+  type: VTX
+  count: 4
+  offset: 0x42428
+  symbol: D_7042428
+
+D_7042468:
+  type: VTX
+  count: 30
+  offset: 0x42468
+  symbol: D_7042468
+
+D_7042648:
+  type: VTX
+  count: 9
+  offset: 0x42648
+  symbol: D_7042648
+
+D_70426D8:
+  type: VTX
+  count: 6
+  offset: 0x426D8
+  symbol: D_70426D8
+
+D_7042738:
+  type: VTX
+  count: 12
+  offset: 0x42738
+  symbol: D_7042738
+
+D_70427F8:
+  type: VTX
+  count: 4
+  offset: 0x427F8
+  symbol: D_70427F8
+
+D_7042838:
+  type: VTX
+  count: 15
+  offset: 0x42838
+  symbol: D_7042838
+
+D_7042928:
+  type: VTX
+  count: 6
+  offset: 0x42928
+  symbol: D_7042928
+
+D_7042988:
+  type: VTX
+  count: 8
+  offset: 0x42988
+  symbol: D_7042988
+
+D_7042A08:
+  type: VTX
+  count: 36
+  offset: 0x42A08
+  symbol: D_7042A08
+
+D_7042C48:
+  type: VTX
+  count: 4
+  offset: 0x42C48
+  symbol: D_7042C48
+
+D_7042C88:
+  type: VTX
+  count: 12
+  offset: 0x42C88
+  symbol: D_7042C88
+
+D_7042D48:
+  type: VTX
+  count: 49
+  offset: 0x42D48
+  symbol: D_7042D48
+
+D_7043058:
+  type: VTX
+  count: 10
+  offset: 0x43058
+  symbol: D_7043058
+
+D_70430F8:
+  type: VTX
+  count: 8
+  offset: 0x430F8
+  symbol: D_70430F8
+
+D_7043178:
+  type: VTX
+  count: 32
+  offset: 0x43178
+  symbol: D_7043178
+
+D_7043378:
+  type: VTX
+  count: 8
+  offset: 0x43378
+  symbol: D_7043378
+
+D_70433F8:
+  type: VTX
+  count: 33
+  offset: 0x433F8
+  symbol: D_70433F8
+
+D_7043608:
+  type: VTX
+  count: 9
+  offset: 0x43608
+  symbol: D_7043608
+
+D_7043698:
+  type: VTX
+  count: 6
+  offset: 0x43698
+  symbol: D_7043698
+
+D_70436F8:
+  type: VTX
+  count: 16
+  offset: 0x436F8
+  symbol: D_70436F8
+
+D_70437F8:
+  type: VTX
+  count: 6
+  offset: 0x437F8
+  symbol: D_70437F8
+
+D_7043858:
+  type: VTX
+  count: 25
+  offset: 0x43858
+  symbol: D_7043858
+
+D_70439E8:
+  type: VTX
+  count: 9
+  offset: 0x439E8
+  symbol: D_70439E8
+
+D_7043A78:
+  type: VTX
+  count: 12
+  offset: 0x43A78
+  symbol: D_7043A78
+
+D_7043B38:
+  type: VTX
+  count: 6
+  offset: 0x43B38
+  symbol: D_7043B38
+
+D_7043B98:
+  type: VTX
+  count: 12
+  offset: 0x43B98
+  symbol: D_7043B98
+
+D_7043C58:
+  type: VTX
+  count: 9
+  offset: 0x43C58
+  symbol: D_7043C58
+
+D_7043CE8:
+  type: VTX
+  count: 11
+  offset: 0x43CE8
+  symbol: D_7043CE8
+
+D_7043D98:
+  type: VTX
+  count: 8
+  offset: 0x43D98
+  symbol: D_7043D98
+
+D_7043E18:
+  type: VTX
+  count: 6
+  offset: 0x43E18
+  symbol: D_7043E18
+
+D_7043E78:
+  type: VTX
+  count: 16
+  offset: 0x43E78
+  symbol: D_7043E78
+
+D_7043F78:
+  type: VTX
+  count: 12
+  offset: 0x43F78
+  symbol: D_7043F78
+
+D_7044038:
+  type: VTX
+  count: 12
+  offset: 0x44038
+  symbol: D_7044038
+
+D_70440F8:
+  type: VTX
+  count: 20
+  offset: 0x440F8
+  symbol: D_70440F8
+
+D_7044238:
+  type: VTX
+  count: 18
+  offset: 0x44238
+  symbol: D_7044238
+
+D_7044358:
+  type: VTX
+  count: 10
+  offset: 0x44358
+  symbol: D_7044358
+
+D_70443F8:
+  type: VTX
+  count: 4
+  offset: 0x443F8
+  symbol: D_70443F8
+
+D_7044438:
+  type: VTX
+  count: 16
+  offset: 0x44438
+  symbol: D_7044438
+
+D_7044538:
+  type: VTX
+  count: 14
+  offset: 0x44538
+  symbol: D_7044538
+
+D_7044618:
+  type: VTX
+  count: 12
+  offset: 0x44618
+  symbol: D_7044618
+
+D_70446D8:
+  type: VTX
+  count: 14
+  offset: 0x446D8
+  symbol: D_70446D8
+
+D_70447B8:
+  type: VTX
+  count: 12
+  offset: 0x447B8
+  symbol: D_70447B8
+
+D_7044878:
+  type: VTX
+  count: 9
+  offset: 0x44878
+  symbol: D_7044878
+
+D_7044908:
+  type: VTX
+  count: 3
+  offset: 0x44908
+  symbol: D_7044908
+
+D_7044938:
+  type: VTX
+  count: 20
+  offset: 0x44938
+  symbol: D_7044938
+
+D_7044A78:
+  type: VTX
+  count: 14
+  offset: 0x44A78
+  symbol: D_7044A78
+
+D_7044B58:
+  type: VTX
+  count: 12
+  offset: 0x44B58
+  symbol: D_7044B58
+
+D_7044C18:
+  type: VTX
+  count: 6
+  offset: 0x44C18
+  symbol: D_7044C18
+
+D_7044C78:
+  type: VTX
+  count: 30
+  offset: 0x44C78
+  symbol: D_7044C78
+
+D_7044E58:
+  type: VTX
+  count: 24
+  offset: 0x44E58
+  symbol: D_7044E58
+
+D_7044FD8:
+  type: VTX
+  count: 12
+  offset: 0x44FD8
+  symbol: D_7044FD8
+
+
+
+D_7045098:
+  type: GFX
+  offset: 0x45098
+  symbol: D_7045098
+
+D_70450C0:
+  type: VTX
+  count: 9
+  offset: 0x450C0
+  symbol: D_70450C0
+
+D_7045150:
+  type: GFX
+  offset: 0x45150
+  symbol: D_7045150
+
+D_7045278:
+  type: GFX
+  offset: 0x45278
+  symbol: D_7045278
+
+D_7045468:
+  type: VTX
+  count: 3
+  offset: 0x45468
+  symbol: D_7045468
+
+D_7045498:
+  type: VTX
+  count: 24
+  offset: 0x45498
+  symbol: D_7045498
+
+D_7045618:
+  type: VTX
+  count: 40
+  offset: 0x45618
+  symbol: D_7045618
+
+D_7045898:
+  type: VTX
+  count: 18
+  offset: 0x45898
+  symbol: D_7045898
+
+D_70459B8:
+  type: VTX
+  count: 37
+  offset: 0x459B8
+  symbol: D_70459B8
+
+D_7045C08:
+  type: VTX
+  count: 85
+  offset: 0x45C08
+  symbol: D_7045C08
+
+D_7046158:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x46158
+  symbol: D_7046158
+
+D_7046958:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x46958
+  symbol: D_7046958
+
+D_70469D8:
+  type: GFX
+  offset: 0x469D8
+  symbol: D_70469D8
+
+D_7046B98:
+  type: VTX
+  count: 3
+  offset: 0x46B98
+  symbol: D_7046B98
+
+D_7046BC8:
+  type: VTX
+  count: 17
+  offset: 0x46BC8
+  symbol: D_7046BC8
+
+D_7046CD8:
+  type: VTX
+  count: 40
+  offset: 0x46CD8
+  symbol: D_7046CD8
+
+D_7046F58:
+  type: VTX
+  count: 18
+  offset: 0x46F58
+  symbol: D_7046F58
+
+D_7047078:
+  type: VTX
+  count: 28
+  offset: 0x47078
+  symbol: D_7047078
+
+D_7047238:
+  type: VTX
+  count: 74
+  offset: 0x47238
+  symbol: D_7047238
+
+D_70476D8:
+  type: GFX
+  offset: 0x476D8
+  symbol: D_70476D8
+
+D_7047840:
+  type: VTX
+  count: 3
+  offset: 0x47840
+  symbol: D_7047840
+
+D_7047870:
+  type: VTX
+  count: 12
+  offset: 0x47870
+  symbol: D_7047870
+
+D_7047930:
+  type: VTX
+  count: 25
+  offset: 0x47930
+  symbol: D_7047930
+
+D_7047AC0:
+  type: VTX
+  count: 12
+  offset: 0x47AC0
+  symbol: D_7047AC0
+
+D_7047B80:
+  type: VTX
+  count: 15
+  offset: 0x47B80
+  symbol: D_7047B80
+
+D_7047C70:
+  type: VTX
+  count: 48
+  offset: 0x47C70
+  symbol: D_7047C70
+
+D_7047F70:
+  type: GFX
+  offset: 0x47F70
+  symbol: D_7047F70
+
+D_70480A0:
+  type: VTX
+  count: 3
+  offset: 0x480A0
+  symbol: D_70480A0
+
+D_70480D0:
+  type: VTX
+  count: 3
+  offset: 0x480D0
+  symbol: D_70480D0
+
+D_7048100:
+  type: VTX
+  count: 16
+  offset: 0x48100
+  symbol: D_7048100
+
+D_7048200:
+  type: VTX
+  count: 6
+  offset: 0x48200
+  symbol: D_7048200
+
+D_7048260:
+  type: VTX
+  count: 9
+  offset: 0x48260
+  symbol: D_7048260
+
+D_70482F0:
+  type: VTX
+  count: 38
+  offset: 0x482F0
+  symbol: D_70482F0
+
+D_7048550:
+  type: GFX
+  offset: 0x48550
+  symbol: D_7048550
+
+D_70485F8:
+  type: VTX
+  count: 3
+  offset: 0x485F8
+  symbol: D_70485F8
+
+D_7048628:
+  type: VTX
+  count: 6
+  offset: 0x48628
+  symbol: D_7048628
+
+D_7048688:
+  type: VTX
+  count: 30
+  offset: 0x48688
+  symbol: D_7048688
+
+D_7048868:
+  type: VTX
+  count: 4
+  offset: 0x48868
+  symbol: D_7048868
+
+D_70488A8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x488A8
+  symbol: D_70488A8

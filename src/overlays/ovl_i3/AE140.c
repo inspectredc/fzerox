@@ -3666,12 +3666,21 @@ Gfx* func_i3_8012952C(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
+#ifdef VERSION_JP
 const char* sCharacterNames[] = { "CAPTAIN FALCON", "Dr. STEWART",   "PICO",          "SAMURAI GOROH", "JODY SUMMER",
                                   "MIGHTY GAZELLE", "Mr. EAD",       "BABA",          "OCTOMAN",       "GOMAR&SHIOH",
                                   "KATE ALEN",      "ROGER BUSTER",  "JAMES McCLOUD", "LEON",          "ANTONIO GUSTER",
                                   "BLACK SHADOW",   "MICHAEL CHAIN", "JACK LEVIN",    "SUPER ARROW",   "Mrs. ARROW",
                                   "JOHN TANAKA",    "BEASTMAN",      "ZODA",          "Dr. CLASH",     "SILVER NEELSEN",
                                   "BIO REX",        "DRAQ",          "BILLY",         "THE SKULL",     "BLOOD FALCON" };
+#else
+const char* sCharacterNames[] = { "CAPTAIN FALCON", "Dr. STEWART",   "PICO",          "SAMURAI GOROH", "JODY SUMMER",
+                                  "MIGHTY GAZELLE", "Mr. EAD",       "BABA",          "OCTOMAN",       "GOMAR&SHIOH",
+                                  "KATE ALEN",      "ROGER BUSTER",  "JAMES McCLOUD", "LEON",          "ANTONIO GUSTER",
+                                  "BLACK SHADOW",   "MICHAEL CHAIN", "JACK LEVIN",    "SUPER ARROW",   "Mrs. ARROW",
+                                  "JOHN TANAKA",    "BEASTMAN",      "ZODA",          "Dr. CLASH",     "SILVER NEELSEN",
+                                  "BIO REX",        "DRAQ",          "BILLY",         "THE SKULL",     "BLOOD FALCON" };
+#endif
 
 Gfx* func_i3_ResultsDrawCharacterName(Gfx* gfx, s32 arg1, s32 character, s32 arg3, s32 arg4) {
     gfx = func_i3_SetOptionColor(gfx, arg1);

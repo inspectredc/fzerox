@@ -9,7 +9,7 @@
   - name: leo_font
     type: code
     vram: 0x80400000
-    bss_size: 0x3000
+    bss_size: 0x3010
     subsegments:
       - { type: .bss, vram: 0x80400000, name: leo_font }
 

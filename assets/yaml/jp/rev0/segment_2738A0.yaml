@@ -1,0 +1,200 @@
+:config:
+  segments:
+    - [0x05,  0x273D20]
+  header:
+    code:
+      - '#include "assets/segment_2738A0.h"'
+    header:
+      - '#include "gfx.h"'
+
+D_5000000:
+  type: GFX
+  offset: 0x0
+  symbol: D_5000000
+
+D_5000158:
+  type: GFX
+  offset: 0x158
+  symbol: D_5000158
+
+D_5000168:
+  type: GFX
+  offset: 0x168
+  symbol: D_5000168
+
+D_5000178:
+  type: GFX
+  offset: 0x178
+  symbol: D_5000178
+
+D_5000188:
+  type: GFX
+  offset: 0x188
+  symbol: D_5000188
+
+D_5000190:
+  type: VTX
+  count: 30
+  offset: 0x190
+  symbol: D_5000190
+
+D_5000370:
+  type: VTX
+  count: 11
+  offset: 0x370
+  symbol: D_5000370
+
+D_5000420:
+  type: VTX
+  count: 4
+  offset: 0x420
+  symbol: D_5000420
+
+D_5000460:
+  type: VTX
+  count: 6
+  offset: 0x460
+  symbol: D_5000460
+
+D_50004C0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x4C0
+  symbol: D_50004C0
+
+D_5000CC0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0xCC0
+  symbol: D_5000CC0
+
+D_50014C0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x14C0
+  symbol: D_50014C0
+
+D_5001CC0:
+  type: GFX
+  offset: 0x1CC0
+  symbol: D_5001CC0
+
+D_5001E18:
+  type: GFX
+  offset: 0x1E18
+  symbol: D_5001E18
+
+D_5001E28:
+  type: GFX
+  offset: 0x1E28
+  symbol: D_5001E28
+
+D_5001E38:
+  type: GFX
+  offset: 0x1E38
+  symbol: D_5001E38
+
+D_5001E48:
+  type: GFX
+  offset: 0x1E48
+  symbol: D_5001E48
+
+D_5001E50:
+  type: VTX
+  count: 4
+  offset: 0x1E50
+  symbol: D_5001E50
+
+D_5001E90:
+  type: VTX
+  count: 31
+  offset: 0x1E90
+  symbol: D_5001E90
+
+D_5002080:
+  type: VTX
+  count: 12
+  offset: 0x2080
+  symbol: D_5002080
+
+D_5002140:
+  type: VTX
+  count: 6
+  offset: 0x2140
+  symbol: D_5002140
+
+D_50021A0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x21A0
+  symbol: D_50021A0
+
+D_50029A0:
+  type: GFX
+  offset: 0x29A0
+  symbol: D_50029A0
+
+D_5002AF8:
+  type: GFX
+  offset: 0x2AF8
+  symbol: D_5002AF8
+
+D_5002B08:
+  type: GFX
+  offset: 0x2B08
+  symbol: D_5002B08
+
+D_5002B18:
+  type: GFX
+  offset: 0x2B18
+  symbol: D_5002B18
+
+D_5002B28:
+  type: GFX
+  offset: 0x2B28
+  symbol: D_5002B28
+
+D_5002B30:
+  type: VTX
+  count: 4
+  offset: 0x2B30
+  symbol: D_5002B30
+
+D_5002B70:
+  type: VTX
+  count: 31
+  offset: 0x2B70
+  symbol: D_5002B70
+
+D_5002D60:
+  type: VTX
+  count: 12
+  offset: 0x2D60
+  symbol: D_5002D60
+
+D_5002E20:
+  type: VTX
+  count: 6
+  offset: 0x2E20
+  symbol: D_5002E20
+
+D_5002E80:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2E80
+  symbol: D_5002E80

@@ -1704,7 +1704,7 @@ static const char devrostring23[] = "NON ENTRIED LEVEL SE STOPED! SE NUMBER = %0
 #ifdef VERSION_JP
 static const char devjprostring3[] = "Player Trger SE Start !! player =  %02x SE number = %02x\n"
 #endif
-static const char devrostring24[] = "VOICE SE STACK OVER!!\n";
+    static const char devrostring24[] = "VOICE SE STACK OVER!!\n";
 static const char devrostring25[] = "System SE = %02x\n";
 static const char devrostring26[] = "hanabi se called. pan = %02x volume = %02x \n";
 static const char devrostring27[] = "ENGINE SOUND ECHO START MACHINE NO = %02x\n";
