@@ -1365,7 +1365,7 @@ s32 Font_GetCharIndex(s8* str, s32 fontSetLowercase) {
     } else if (*str == ' ') {
         fontChar = FONT_CHAR_SPACE;
     } else if (*str < 0) {
-        // Shift-JIS
+        // EUC-JP
         switch (*str) {
             case (s8) 0xA4:
                 fontChar = func_i2_80105EE4(str + 1);
