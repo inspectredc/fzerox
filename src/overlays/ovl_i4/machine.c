@@ -1411,9 +1411,13 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
                 gDPSetPrimColor(gfx++, 0, 0, 0, 255, 0, 255);
                 break;
         }
-
+#ifdef VERSION_JP
+        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj),
+                            OBJECT_TOP(engineWeightObj), 1, 0, 0, 1.0f, 1.0f);
+#else
         gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj) + 3,
                             OBJECT_TOP(engineWeightObj) + 1, 1, 0, 0, 1.0f, 1.0f);
+#endif
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             temp_s4 = D_800F80C8[gRacers[i].character].unk_14;

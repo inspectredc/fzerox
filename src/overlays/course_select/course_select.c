@@ -94,6 +94,41 @@ s32 sCourseSelectCupColors[] = {
 };
 // clang-format on
 
+#ifdef VERSION_JP
+const char* sTrackSubtitles[] = {
+    "エイトロード",
+    "ハイスピード",
+    "パイプ",
+    "スクリュー",
+    "シリンダー",
+    "ハイジャンプ",
+    "ロールオーバー",
+    "ジャンプジャンプ",
+    "アップダウン",
+    "テクニカル",
+    "クイックターン",
+    "ステップアップロード",
+    "ジグザグジャンプ",
+    "ウェーブロード",
+    "ムーンサルト",
+    "スリムライン",
+    "ハーフパイプ",
+    "クランククランク",
+    "レインボーロード",
+    "ミラーロード",
+    "シリンダー&ハイジャンプ",
+    "ウェーブパニック",
+    "スネークロード",
+    "ビッグハンド",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+};
+#else
 const char* sTrackSubtitles[] = {
     "FIGURE EIGHT",
     "HIGH SPEED",
@@ -127,6 +162,7 @@ const char* sTrackSubtitles[] = {
     "",
     "",
 };
+#endif
 
 s8 sGhostOptionTypeMap[] = { 1, 0, 2, 3, 4 };
 

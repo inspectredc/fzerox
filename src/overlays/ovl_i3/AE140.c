@@ -3667,12 +3667,38 @@ Gfx* func_i3_8012952C(Gfx* gfx, s32 arg1) {
 }
 
 #ifdef VERSION_JP
-const char* sCharacterNames[] = { "CAPTAIN FALCON", "Dr. STEWART",   "PICO",          "SAMURAI GOROH", "JODY SUMMER",
-                                  "MIGHTY GAZELLE", "Mr. EAD",       "BABA",          "OCTOMAN",       "GOMAR&SHIOH",
-                                  "KATE ALEN",      "ROGER BUSTER",  "JAMES McCLOUD", "LEON",          "ANTONIO GUSTER",
-                                  "BLACK SHADOW",   "MICHAEL CHAIN", "JACK LEVIN",    "SUPER ARROW",   "Mrs. ARROW",
-                                  "JOHN TANAKA",    "BEASTMAN",      "ZODA",          "Dr. CLASH",     "SILVER NEELSEN",
-                                  "BIO REX",        "DRAQ",          "BILLY",         "THE SKULL",     "BLOOD FALCON" };
+const char* sCharacterNames[] = {
+    "キャプテンファルコン",
+    "ドクター スチュワート",
+    "ピコ",
+    "サムライ ゴロー",
+    "ジョディ サマー",
+    "MM ガゼル",
+    "ミスター EAD",
+    "ババ",
+    "オクトマン",
+    "ゴマー&シオー",
+    "ケイト アレン",
+    "ロジャー バスター",
+    "ジェームズ マクラウド",
+    "レオン",
+    "アントニオ ガスター",
+    "ブラック シャドー",
+    "マイケル チェーン",
+    "ジャック レビン",
+    "スーパー アロー",
+    "ミセス アロー",
+    "ジョン タナカ",
+    "ビーストマン",
+    "ゾーダ",
+    "ドクター クラッシュ",
+    "シルバー ニールセン",
+    "バイオレックス",
+    "ドラク",
+    "ビリー",
+    "アービン ゴードン",
+    "ブラッド ファルコン",
+};
 #else
 const char* sCharacterNames[] = { "CAPTAIN FALCON", "Dr. STEWART",   "PICO",          "SAMURAI GOROH", "JODY SUMMER",
                                   "MIGHTY GAZELLE", "Mr. EAD",       "BABA",          "OCTOMAN",       "GOMAR&SHIOH",
@@ -3689,7 +3715,11 @@ Gfx* func_i3_ResultsDrawCharacterName(Gfx* gfx, s32 arg1, s32 character, s32 arg
 
 Gfx* func_i3_ResultsDrawRetireStatus(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gfx = func_i3_SetOptionColor(gfx, arg1);
+#ifdef VERSION_JP
+    return Font_DrawString(gfx, arg2, arg3, "リタイア", 1, FONT_SET_4, 0);
+#else
     return Font_DrawString(gfx, arg2, arg3, "RETIRE", 1, FONT_SET_4, 0);
+#endif
 }
 
 void func_i3_801296E8(s32 num) {
