@@ -212,23 +212,22 @@
     bss_size: 0xCEB0
     symbol_name_format: i6_$VRAM
     subsegments:
-      - [0xDFC00, asm]
-      - { type: bss, vram: 0x8011F260 }
-      # - [0xDFF10, c, main_menu]
-      # - [0xE2000, c, credits]
-      # - [0xE6170, c, options_menu]
-      # - [0xE7CF0, c]
-      # - [0xE7D60, .data, main_menu]
-      # - [0xE80CC, .data, credits]
-      # - [0xE8EA0, .data, options_menu]
-      # - [0xE8FF0, .data, ovl_i6_data]
-      # - [0xE9040, .rodata, main_menu]
-      # - [0xE9180, .rodata, credits]
-      # - [0xE9A10, .rodata, options_menu]
-      # - { type: .bss, vram: 0x8011F910, name: main_menu }
-      # - { type: .bss, vram: 0x8011FAF0, name: credits }
-      # - { type: .bss, vram: 0x8011FB10, name: options_menu}
-      # - { type: .bss, vram: 0x801247C0, name: ovl_i6_data }
+      - [0xDFC00, c, main_menu]
+      - [0xE1D00, pad]
+      - [0xE1D10, c, credits]
+      - [0xE6170, c, options_menu]
+      - [0xE7A00, c, E7CF0]
+      - [0xE7A70, data]
+      - [0xE7A70, .data, main_menu]
+      - [0xE7DF0, .data, credits]
+      - [0xE8BD0, .data, options_menu]
+      - [0xE8D20, .rodata, main_menu]
+      - [0xE8F30, .rodata, credits]
+      - [0xE97C0, .rodata, options_menu]
+      - { type: .bss, vram: 0x8011F260, name: main_menu }
+      - { type: .bss, vram: 0x8011F440, name: credits }
+      - { type: .bss, vram: 0x8011F460, name: options_menu}
+      - { type: .bss, vram: 0x80124110, name: save_context }
 
   - name: ovl_i7
     exclusive_ram_id: overlay
@@ -254,6 +253,7 @@
     symbol_name_format: i8_$VRAM
     subsegments:
       - [0xF1290, asm]
+      - [0xF27D0, data]
       - { type: bss, vram: 0x80144880 }
       # - [0xF14E0, c, records]
       # - [0xF2A50, .data, records]
@@ -281,4 +281,4 @@
     vram: 0x80115680
     symbol_name_format: i10_$VRAM
     subsegments:
-      - [0x145720, c]
+      - [0x145720, c, 1459A0]

@@ -15,7 +15,7 @@ char* gCurrentTrackName;
 char* gTrackNames[55];
 
 s32 gSelectedMode = MODE_GP_RACE;
-u32 D_800CD384 = 0;
+s32 D_800CD384 = 0;
 
 s32 gModeSubOption[8] = { 0 };
 

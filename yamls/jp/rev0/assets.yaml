@@ -238,7 +238,7 @@
     vram: 0x800FC730
     symbol_name_format: i11_$VRAM
     subsegments:
-      - [0x51F450, c]
+      - [0x51F450, c, 524920]
       - [0x51F710, .data, 524920]
       - [0x51F720, .rodata, 524920]
 

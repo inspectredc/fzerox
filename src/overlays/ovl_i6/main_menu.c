@@ -135,7 +135,11 @@ static unk_80077D50 sOkCompTexInfo[] = { { 17, aOKTex, 32, 16, 0x112 }, { 0 } };
 extern u32 gGameFrameCount;
 extern s16 D_800CCFE8;
 extern s32 gNumPlayers;
-extern u32 D_800CD384;
+extern s32 D_800CD384;
+
+const s32 gDefaultSubOptionLimits[] = { 2, 1, 0, 2, 0, 2, 0, 0 };
+
+const s32 gMaxSubOptionLimits[] = { 3, 1, 0, 2, 0, 3, 0, 0 };
 
 void MainMenu_Init(void) {
     D_800CCFE8 = 3;
@@ -225,9 +229,11 @@ s32 MainMenu_Update(void) {
                     gSelectedMode -= 4;
                 }
             }
+#ifndef VERSION_JP
             if ((gSelectedMode == MODE_VS_BATTLE) && (gControllersConnected < 2)) {
                 gSelectedMode = MODE_DEATH_RACE;
             }
+#endif
             switch (gSelectedMode) {
                 case MODE_COURSE_EDIT:
                     gSelectedMode = MODE_PRACTICE;
@@ -301,6 +307,7 @@ s32 MainMenu_Update(void) {
                     gModeSubOption[gSelectedMode] = gMaxSubOptionLimits[gSelectedMode];
                 }
             }
+#ifndef VERSION_JP
             if (gSelectedMode == MODE_VS_BATTLE && (gControllersConnected < gModeSubOption[gSelectedMode] + 2)) {
                 gModeSubOption[gSelectedMode] = gControllersConnected - 2;
                 if (gModeSubOption[gSelectedMode] < 0) {
@@ -310,6 +317,7 @@ s32 MainMenu_Update(void) {
                     break;
                 }
             }
+#endif
 
             if (gInputPressed & BTN_UP) {
                 if (gModeSubOption[gSelectedMode] > 0) {
@@ -523,6 +531,19 @@ void MainMenu_UnlockEverythingInit(Object* unlockEverythingObj) {
 extern u32 gGameFrameCount;
 extern s32 gSelectedMode;
 
+#ifdef VERSION_JP
+const char* D_i6_8011D850[] = {
+    "グランプリ",        // Grand Prix
+    "タイムアタック",     // Time Attack
+    "デスレース",        // Death Race
+    "バーサス",         // Versus
+    "コースエディット",   // Course Edit
+    "プラクティス",      // Practice
+    "オプション",       // Options
+    "クリエイトマシン",  // Create Machine
+};
+#endif
+
 Gfx* MainMenu_SignDraw(Gfx* gfx, Object* signObj) {
     s32 mode;
     s32 var_v1;
@@ -551,7 +572,7 @@ Gfx* MainMenu_SignDraw(Gfx* gfx, Object* signObj) {
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 180);
     }
 
-    switch ((s32) D_800CD384) {
+    switch (D_800CD384) {
         case 3:
         case 4:
             if (++OBJECT_COUNTER(signObj) > 12) {
@@ -572,7 +593,15 @@ Gfx* MainMenu_SignDraw(Gfx* gfx, Object* signObj) {
     temp1 = (((mode % 4) * 0x40) - (SQ(OBJECT_COUNTER(signObj)) * 2)) + 0x20;
     temp2 = ((mode / 4) * 0x5B) + 0x26;
 
-    return func_80078EA0(gfx, sMenuSignCompTexInfos[mode], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0(gfx, sMenuSignCompTexInfos[mode], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
+
+#ifdef VERSION_JP
+    if (mode == gSelectedMode) {
+        gfx = Font_DrawString(gfx, (temp1 - (Font_GetStringWidth(D_i6_8011D850[mode], FONT_SET_4, 0) / 2)) + 0x20, temp2 + 0x5B, D_i6_8011D850[mode], 0, FONT_SET_4, 0);
+    }
+#endif
+
+    return gfx;
 }
 
 extern s8 D_800CD3C4;
@@ -790,7 +819,7 @@ Gfx* MainMenu_NumPlayersDraw(Gfx* gfx, Object* numPlayersObj) {
 
     for (i = 0; i < 3; i++) {
         if (gModeSubOption[gSelectedMode] == i) {
-            switch ((s32) D_800CD384) {
+            switch (D_800CD384) {
                 case 2:
                 case 3:
                 case 4:
@@ -801,11 +830,15 @@ Gfx* MainMenu_NumPlayersDraw(Gfx* gfx, Object* numPlayersObj) {
                     break;
             }
         } else {
+#ifdef VERSION_JP
+            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+#else
             if ((gControllersConnected - 2) < i) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 128);
             } else {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
             }
+#endif
         }
         gfx = func_80078EA0(gfx, sNumPlayersCompTexInfos[i], (OBJECT_LEFT(numPlayersObj) - temp_s7) + 0x20,
                             OBJECT_TOP(numPlayersObj) + (i * 20) + 0xC, 1, 0, 0, 1.0f, 1.0f);
@@ -856,7 +889,7 @@ Gfx* MainMenu_DifficultyDraw(Gfx* gfx, Object* difficultyObj) {
 
     for (i = 0; i < 4; i++) {
         if (gModeSubOption[gSelectedMode] == i) {
-            switch ((s32) D_800CD384) {
+            switch (D_800CD384) {
                 case 2:
                 case 3:
                 case 4:
@@ -919,7 +952,7 @@ Gfx* MainMenu_TimeAttackModeDraw(Gfx* gfx, Object* timeAttackModeObj) {
 
     for (i = 0; i < 2; i++) {
         if (gModeSubOption[MODE_TIME_ATTACK] == i) {
-            switch ((s32) D_800CD384) {
+            switch (D_800CD384) {
                 case 2:
                 case 3:
                 case 4:
@@ -986,6 +1019,8 @@ void MainMenu_OkUpdate(Object* okObj) {
 
 extern u16 gInputPressed;
 extern u16 gInputButtonPressed;
+
+const u16 gUnlockEverythingInputs[] = { BTN_L, BTN_Z, BTN_R, BTN_CUP, BTN_CDOWN, BTN_CLEFT, BTN_CRIGHT, BTN_START };
 
 void MainMenu_UnlockEverythingUpdate(Object* unlockEverythingObj) {
     Object* backgroundObj;

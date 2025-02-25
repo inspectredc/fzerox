@@ -19,7 +19,7 @@ options:
     - linker_scripts/jp/rev0/symbol_addrs_nlib_vars.txt
 
   asm_path: asm/jp/rev0
-  src_path: srcjp
+  src_path: src
   asset_path: bin/jp/rev0
 
   build_path: build
