@@ -55,7 +55,7 @@ aTitleLogoTex:
 
 aTitleNoControllerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x3281C
+  offset: 0x32A78
   ctype: u8
   format: I4
   width: 160
@@ -65,7 +65,7 @@ aTitleNoControllerTex:
 
 aTitleExpansionPakWarningTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x32A7C
+  offset: 0x32F80
   ctype: u8
   format: I4
   width: 160
@@ -75,7 +75,7 @@ aTitleExpansionPakWarningTex:
 
 aTitleDiskWarningTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x32F6C
+  offset: 0x33484
   ctype: u8
   format: I4
   width: 160
@@ -85,7 +85,7 @@ aTitleDiskWarningTex:
 
 aTitlePushStartTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x33328
+  offset: 0x33998
   ctype: u16
   format: RGBA16
   width: 80
@@ -95,7 +95,7 @@ aTitlePushStartTex:
 
 aCopyrightTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x336B8
+  offset: 0x33D28
   ctype: u16
   format: RGBA16
   width: 128
@@ -111,7 +111,7 @@ pad_segment_2B9EA0_F033AA4:
 
 aFullPortraitDrStewartTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x33AB4
+  offset: 0x34124
   ctype: u16
   format: RGBA16
   width: 180
@@ -121,7 +121,7 @@ aFullPortraitDrStewartTex:
 
 aFullPortraitCaptainFalconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x385AC
+  offset: 0x38C1C
   ctype: u16
   format: RGBA16
   width: 180
@@ -131,7 +131,7 @@ aFullPortraitCaptainFalconTex:
 
 aFullPortraitJodySummerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x3EBB4
+  offset: 0x3F224
   ctype: u16
   format: RGBA16
   width: 180
@@ -141,7 +141,7 @@ aFullPortraitJodySummerTex:
 
 aFullPortraitSamuraiGorohTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x4412C
+  offset: 0x4479C
   ctype: u16
   format: RGBA16
   width: 180
@@ -151,7 +151,7 @@ aFullPortraitSamuraiGorohTex:
 
 aFullPortraitMightyGazelleTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x4B7E4
+  offset: 0x4BE54
   ctype: u16
   format: RGBA16
   width: 180
@@ -161,7 +161,7 @@ aFullPortraitMightyGazelleTex:
 
 aFullPortraitPicoTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x51FDC
+  offset: 0x5264C
   ctype: u16
   format: RGBA16
   width: 180
@@ -171,7 +171,7 @@ aFullPortraitPicoTex:
 
 aFullPortraitBabaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x5839C
+  offset: 0x58A0C
   ctype: u16
   format: RGBA16
   width: 180
@@ -181,7 +181,7 @@ aFullPortraitBabaTex:
 
 aFullPortraitMrEadTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x5E28C
+  offset: 0x5E8FC
   ctype: u16
   format: RGBA16
   width: 180
@@ -191,7 +191,7 @@ aFullPortraitMrEadTex:
 
 aFullPortraitOctomanTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x65414
+  offset: 0x65A84
   ctype: u16
   format: RGBA16
   width: 180
@@ -201,7 +201,7 @@ aFullPortraitOctomanTex:
 
 aFullPortraitTheSkullTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x6AA80
+  offset: 0x6B0F0
   ctype: u16
   format: RGBA16
   width: 180
@@ -211,7 +211,7 @@ aFullPortraitTheSkullTex:
 
 aFullPortraitBeastmanTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x704D0
+  offset: 0x70B40
   ctype: u16
   format: RGBA16
   width: 180
@@ -221,7 +221,7 @@ aFullPortraitBeastmanTex:
 
 aFullPortraitAntonioGusterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x75A98
+  offset: 0x76108
   ctype: u16
   format: RGBA16
   width: 180
@@ -231,7 +231,7 @@ aFullPortraitAntonioGusterTex:
 
 aFullPortraitDraqTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x7B3EC
+  offset: 0x7BA5C
   ctype: u16
   format: RGBA16
   width: 180
@@ -241,7 +241,7 @@ aFullPortraitDraqTex:
 
 aFullPortraitRogerBusterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x82E6C
+  offset: 0x834DC
   ctype: u16
   format: RGBA16
   width: 180
@@ -251,7 +251,7 @@ aFullPortraitRogerBusterTex:
 
 aFullPortraitSilverNeelsenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x892B4
+  offset: 0x89924
   ctype: u16
   format: RGBA16
   width: 180
@@ -261,7 +261,7 @@ aFullPortraitSilverNeelsenTex:
 
 aFullPortraitSuperArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x8F4F4
+  offset: 0x8FB64
   ctype: u16
   format: RGBA16
   width: 180
@@ -271,7 +271,7 @@ aFullPortraitSuperArrowTex:
 
 aFullPortraitMrsArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x96470
+  offset: 0x96AE0
   ctype: u16
   format: RGBA16
   width: 180
@@ -281,7 +281,7 @@ aFullPortraitMrsArrowTex:
 
 aFullPortraitZodaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x9C0CC
+  offset: 0x9C73C
   ctype: u16
   format: RGBA16
   width: 180
@@ -291,7 +291,7 @@ aFullPortraitZodaTex:
 
 aFullPortraitJohnTanakaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xA1AB8
+  offset: 0xA2128
   ctype: u16
   format: RGBA16
   width: 180
@@ -301,7 +301,7 @@ aFullPortraitJohnTanakaTex:
 
 aFullPortraitBioRexTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xA7614
+  offset: 0xA7C84
   ctype: u16
   format: RGBA16
   width: 180
@@ -311,7 +311,7 @@ aFullPortraitBioRexTex:
 
 aFullPortraitKateAlenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xAE148
+  offset: 0xAE7B8
   ctype: u16
   format: RGBA16
   width: 180
@@ -321,7 +321,7 @@ aFullPortraitKateAlenTex:
 
 aFullPortraitGomarAndShiohTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xB2F94
+  offset: 0xB3604
   ctype: u16
   format: RGBA16
   width: 180
@@ -331,7 +331,7 @@ aFullPortraitGomarAndShiohTex:
 
 aFullPortraitMichaelChainTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xB9D2C
+  offset: 0xBA39C
   ctype: u16
   format: RGBA16
   width: 180
@@ -341,7 +341,7 @@ aFullPortraitMichaelChainTex:
 
 aFullPortraitBillyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xBF7E4
+  offset: 0xBFE54
   ctype: u16
   format: RGBA16
   width: 180
@@ -351,7 +351,7 @@ aFullPortraitBillyTex:
 
 aFullPortraitDrClashTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xC5624
+  offset: 0xC5C94
   ctype: u16
   format: RGBA16
   width: 180
@@ -361,7 +361,7 @@ aFullPortraitDrClashTex:
 
 aFullPortraitJackLevinTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xCC4D4
+  offset: 0xCCB44
   ctype: u16
   format: RGBA16
   width: 180
@@ -371,7 +371,7 @@ aFullPortraitJackLevinTex:
 
 aFullPortraitBloodFalconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xD120C
+  offset: 0xD187C
   ctype: u16
   format: RGBA16
   width: 180
@@ -381,7 +381,7 @@ aFullPortraitBloodFalconTex:
 
 aFullPortraitLeonTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xD724C
+  offset: 0xD78BC
   ctype: u16
   format: RGBA16
   width: 180
@@ -391,7 +391,7 @@ aFullPortraitLeonTex:
 
 aFullPortraitJamesMcCloudTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xDD308
+  offset: 0xDD978
   ctype: u16
   format: RGBA16
   width: 180
@@ -401,7 +401,7 @@ aFullPortraitJamesMcCloudTex:
 
 aFullPortraitBlackShadowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xE2840
+  offset: 0xE2EB0
   ctype: u16
   format: RGBA16
   width: 180
@@ -411,7 +411,7 @@ aFullPortraitBlackShadowTex:
 
 aFullPortraitCaptainFalconAltTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xE85EC
+  offset: 0xE8C5C
   ctype: u16
   format: RGBA16
   width: 180
@@ -421,7 +421,7 @@ aFullPortraitCaptainFalconAltTex:
 
 aFullPortraitSamuraiGorohAltTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xEE2A4
+  offset: 0xEE914
   ctype: u16
   format: RGBA16
   width: 180
@@ -431,7 +431,7 @@ aFullPortraitSamuraiGorohAltTex:
 
 aFullPortraitJodySummerAltTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xF4838
+  offset: 0xF4EA8
   ctype: u16
   format: RGBA16
   width: 180
@@ -441,7 +441,7 @@ aFullPortraitJodySummerAltTex:
 
 aFullPortraitBackgroundTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xF9860
+  offset: 0xF9ED0
   ctype: u16
   format: RGBA16
   width: 180
@@ -457,7 +457,7 @@ pad_segment_2B9EA0_F0FF154:
 
 aSmallPortraitDrStewartTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xFF164
+  offset: 0xFF7D4
   ctype: u16
   format: RGBA16
   width: 40
@@ -467,7 +467,7 @@ aSmallPortraitDrStewartTex:
 
 aSmallPortraitCaptainFalconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0xFF8E8
+  offset: 0xFFF58
   ctype: u16
   format: RGBA16
   width: 40
@@ -477,7 +477,7 @@ aSmallPortraitCaptainFalconTex:
 
 aSmallPortraitJodySummerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10019C
+  offset: 0x10080C
   ctype: u16
   format: RGBA16
   width: 40
@@ -487,7 +487,7 @@ aSmallPortraitJodySummerTex:
 
 aSmallPortraitSamuraiGorohTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x100A18
+  offset: 0x101088
   ctype: u16
   format: RGBA16
   width: 40
@@ -497,7 +497,7 @@ aSmallPortraitSamuraiGorohTex:
 
 aSmallPortraitMightyGazelleTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x101354
+  offset: 0x1019C4
   ctype: u16
   format: RGBA16
   width: 40
@@ -507,7 +507,7 @@ aSmallPortraitMightyGazelleTex:
 
 aSmallPortraitPicoTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x101C44
+  offset: 0x1022B4
   ctype: u16
   format: RGBA16
   width: 40
@@ -517,7 +517,7 @@ aSmallPortraitPicoTex:
 
 aSmallPortraitBabaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x102550
+  offset: 0x102BC0
   ctype: u16
   format: RGBA16
   width: 40
@@ -527,7 +527,7 @@ aSmallPortraitBabaTex:
 
 aSmallPortraitMrEadTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x102E70
+  offset: 0x1034E0
   ctype: u16
   format: RGBA16
   width: 40
@@ -537,7 +537,7 @@ aSmallPortraitMrEadTex:
 
 aSmallPortraitOctomanTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x103800
+  offset: 0x103E70
   ctype: u16
   format: RGBA16
   width: 40
@@ -547,7 +547,7 @@ aSmallPortraitOctomanTex:
 
 aSmallPortraitTheSkullTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x104034
+  offset: 0x1046A4
   ctype: u16
   format: RGBA16
   width: 40
@@ -557,7 +557,7 @@ aSmallPortraitTheSkullTex:
 
 aSmallPortraitBeastmanTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x104930
+  offset: 0x104FA0
   ctype: u16
   format: RGBA16
   width: 40
@@ -567,7 +567,7 @@ aSmallPortraitBeastmanTex:
 
 aSmallPortraitAntonioGusterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10523C
+  offset: 0x1058AC
   ctype: u16
   format: RGBA16
   width: 40
@@ -577,7 +577,7 @@ aSmallPortraitAntonioGusterTex:
 
 aSmallPortraitDraqTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x105B30
+  offset: 0x1061A0
   ctype: u16
   format: RGBA16
   width: 40
@@ -587,7 +587,7 @@ aSmallPortraitDraqTex:
 
 aSmallPortraitRogerBusterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1064E4
+  offset: 0x106B54
   ctype: u16
   format: RGBA16
   width: 40
@@ -597,7 +597,7 @@ aSmallPortraitRogerBusterTex:
 
 aSmallPortraitSilverNeelsenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x106E0C
+  offset: 0x10747C
   ctype: u16
   format: RGBA16
   width: 40
@@ -607,7 +607,7 @@ aSmallPortraitSilverNeelsenTex:
 
 aSmallPortraitSuperArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10774C
+  offset: 0x107DBC
   ctype: u16
   format: RGBA16
   width: 40
@@ -617,7 +617,7 @@ aSmallPortraitSuperArrowTex:
 
 aSmallPortraitMrsArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1080D0
+  offset: 0x108740
   ctype: u16
   format: RGBA16
   width: 40
@@ -627,7 +627,7 @@ aSmallPortraitMrsArrowTex:
 
 aSmallPortraitZodaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x108B14
+  offset: 0x109184
   ctype: u16
   format: RGBA16
   width: 40
@@ -637,7 +637,7 @@ aSmallPortraitZodaTex:
 
 aSmallPortraitJohnTanakaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1093C4
+  offset: 0x109A34
   ctype: u16
   format: RGBA16
   width: 40
@@ -647,7 +647,7 @@ aSmallPortraitJohnTanakaTex:
 
 aSmallPortraitBioRexTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x109C68
+  offset: 0x10A2D8
   ctype: u16
   format: RGBA16
   width: 40
@@ -657,7 +657,7 @@ aSmallPortraitBioRexTex:
 
 aSmallPortraitKateAlenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10A508
+  offset: 0x10AB78
   ctype: u16
   format: RGBA16
   width: 40
@@ -667,7 +667,7 @@ aSmallPortraitKateAlenTex:
 
 aSmallPortraitGomarAndShiohTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10ABE0
+  offset: 0x10B250
   ctype: u16
   format: RGBA16
   width: 40
@@ -677,7 +677,7 @@ aSmallPortraitGomarAndShiohTex:
 
 aSmallPortraitMichaelChainTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10B53C
+  offset: 0x10BBAC
   ctype: u16
   format: RGBA16
   width: 40
@@ -687,7 +687,7 @@ aSmallPortraitMichaelChainTex:
 
 aSmallPortraitBillyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10BE18
+  offset: 0x10C488
   ctype: u16
   format: RGBA16
   width: 40
@@ -697,7 +697,7 @@ aSmallPortraitBillyTex:
 
 aSmallPortraitDrClashTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10C704
+  offset: 0x10CD74
   ctype: u16
   format: RGBA16
   width: 40
@@ -707,7 +707,7 @@ aSmallPortraitDrClashTex:
 
 aSmallPortraitJackLevinTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10D114
+  offset: 0x10D784
   ctype: u16
   format: RGBA16
   width: 40
@@ -717,7 +717,7 @@ aSmallPortraitJackLevinTex:
 
 aSmallPortraitBloodFalconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10D8B0
+  offset: 0x10DF20
   ctype: u16
   format: RGBA16
   width: 40
@@ -727,7 +727,7 @@ aSmallPortraitBloodFalconTex:
 
 aSmallPortraitLeonTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10E14C
+  offset: 0x10E7BC
   ctype: u16
   format: RGBA16
   width: 40
@@ -737,7 +737,7 @@ aSmallPortraitLeonTex:
 
 aSmallPortraitJamesMcCloudTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10EA0C
+  offset: 0x10F07C
   ctype: u16
   format: RGBA16
   width: 40
@@ -747,7 +747,7 @@ aSmallPortraitJamesMcCloudTex:
 
 aSmallPortraitBlackShadowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10F28C
+  offset: 0x10F8FC
   ctype: u16
   format: RGBA16
   width: 40
@@ -757,7 +757,7 @@ aSmallPortraitBlackShadowTex:
 
 aSmallPortraitCaptainFalconAltTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x10FA3C
+  offset: 0x1100AC
   ctype: u16
   format: RGBA16
   width: 40
@@ -767,7 +767,7 @@ aSmallPortraitCaptainFalconAltTex:
 
 aSmallPortraitSamuraiGorohAltTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11029C
+  offset: 0x11090C
   ctype: u16
   format: RGBA16
   width: 40
@@ -777,7 +777,7 @@ aSmallPortraitSamuraiGorohAltTex:
 
 aSmallPortraitJodySummerAltTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x110AB4
+  offset: 0x111124
   ctype: u16
   format: RGBA16
   width: 40
@@ -787,7 +787,7 @@ aSmallPortraitJodySummerAltTex:
 
 aNameCardCaptainFalconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x111314
+  offset: 0x111984
   ctype: u16
   format: RGBA16
   width: 80
@@ -797,7 +797,7 @@ aNameCardCaptainFalconTex:
 
 aNameCardDrStewartTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1119CC
+  offset: 0x11203C
   ctype: u16
   format: RGBA16
   width: 80
@@ -807,7 +807,7 @@ aNameCardDrStewartTex:
 
 aNameCardPicoTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x112024
+  offset: 0x112694
   ctype: u16
   format: RGBA16
   width: 80
@@ -817,7 +817,7 @@ aNameCardPicoTex:
 
 aNameCardSamuraiGorohTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1124E8
+  offset: 0x112B58
   ctype: u16
   format: RGBA16
   width: 80
@@ -827,7 +827,7 @@ aNameCardSamuraiGorohTex:
 
 aNameCardJodySummerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x112C5C
+  offset: 0x1132CC
   ctype: u16
   format: RGBA16
   width: 80
@@ -837,7 +837,7 @@ aNameCardJodySummerTex:
 
 aNameCardMrEadTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x113254
+  offset: 0x1138C4
   ctype: u16
   format: RGBA16
   width: 80
@@ -847,7 +847,7 @@ aNameCardMrEadTex:
 
 aNameCardBabaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x113760
+  offset: 0x113DD0
   ctype: u16
   format: RGBA16
   width: 80
@@ -857,7 +857,7 @@ aNameCardBabaTex:
 
 aNameCardOctomanTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x113D00
+  offset: 0x114370
   ctype: u16
   format: RGBA16
   width: 80
@@ -867,7 +867,7 @@ aNameCardOctomanTex:
 
 aNameCardGomarAndShiohTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x114254
+  offset: 0x1148A4
   ctype: u16
   format: RGBA16
   width: 80
@@ -877,7 +877,7 @@ aNameCardGomarAndShiohTex:
 
 aNameCardKateAlenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x114894
+  offset: 0x114EE4
   ctype: u16
   format: RGBA16
   width: 80
@@ -887,7 +887,7 @@ aNameCardKateAlenTex:
 
 aNameCardRogerBusterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x114EEC
+  offset: 0x11553C
   ctype: u16
   format: RGBA16
   width: 80
@@ -897,7 +897,7 @@ aNameCardRogerBusterTex:
 
 aNameCardJamesMcCloudTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1154D4
+  offset: 0x115B24
   ctype: u16
   format: RGBA16
   width: 80
@@ -907,7 +907,7 @@ aNameCardJamesMcCloudTex:
 
 aNameCardLeonTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x115A7C
+  offset: 0x1160CC
   ctype: u16
   format: RGBA16
   width: 80
@@ -917,7 +917,7 @@ aNameCardLeonTex:
 
 aNameCardAntonioGusterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x116064
+  offset: 0x1166B4
   ctype: u16
   format: RGBA16
   width: 80
@@ -927,7 +927,7 @@ aNameCardAntonioGusterTex:
 
 aNameCardBlackShadowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x116664
+  offset: 0x116CB4
   ctype: u16
   format: RGBA16
   width: 80
@@ -937,7 +937,7 @@ aNameCardBlackShadowTex:
 
 aNameCardMichaelChainTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x116D9C
+  offset: 0x1173EC
   ctype: u16
   format: RGBA16
   width: 80
@@ -947,7 +947,7 @@ aNameCardMichaelChainTex:
 
 aNameCardJackLevinTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1173C8
+  offset: 0x117A18
   ctype: u16
   format: RGBA16
   width: 80
@@ -957,7 +957,7 @@ aNameCardJackLevinTex:
 
 aNameCardSuperArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1179B4
+  offset: 0x118004
   ctype: u16
   format: RGBA16
   width: 80
@@ -967,7 +967,7 @@ aNameCardSuperArrowTex:
 
 aNameCardJohnTanakaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x118008
+  offset: 0x118658
   ctype: u16
   format: RGBA16
   width: 80
@@ -977,7 +977,7 @@ aNameCardJohnTanakaTex:
 
 aNameCardMrsArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11855C
+  offset: 0x118BAC
   ctype: u16
   format: RGBA16
   width: 80
@@ -987,7 +987,7 @@ aNameCardMrsArrowTex:
 
 aNameCardBeastmanTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x118B60
+  offset: 0x1191B0
   ctype: u16
   format: RGBA16
   width: 80
@@ -997,7 +997,7 @@ aNameCardBeastmanTex:
 
 aNameCardZodaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x119228
+  offset: 0x119878
   ctype: u16
   format: RGBA16
   width: 80
@@ -1007,7 +1007,7 @@ aNameCardZodaTex:
 
 aNameCardDrClashTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1196F8
+  offset: 0x119D48
   ctype: u16
   format: RGBA16
   width: 80
@@ -1017,7 +1017,7 @@ aNameCardDrClashTex:
 
 aNameCardSilverNeelsenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x119CEC
+  offset: 0x11A33C
   ctype: u16
   format: RGBA16
   width: 80
@@ -1027,7 +1027,7 @@ aNameCardSilverNeelsenTex:
 
 aNameCardBioRexTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11A494
+  offset: 0x11AAE4
   ctype: u16
   format: RGBA16
   width: 80
@@ -1037,7 +1037,7 @@ aNameCardBioRexTex:
 
 aNameCardDraqTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11A980
+  offset: 0x11AFD0
   ctype: u16
   format: RGBA16
   width: 80
@@ -1047,7 +1047,7 @@ aNameCardDraqTex:
 
 aNameCardBillyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11ADEC
+  offset: 0x11B43C
   ctype: u16
   format: RGBA16
   width: 80
@@ -1057,7 +1057,7 @@ aNameCardBillyTex:
 
 aNameCardBloodFalconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11B2FC
+  offset: 0x11B94C
   ctype: u16
   format: RGBA16
   width: 80
@@ -1067,7 +1067,7 @@ aNameCardBloodFalconTex:
 
 a1PIconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11B9C0
+  offset: 0x11C010
   ctype: u16
   format: RGBA16
   width: 40
@@ -1077,7 +1077,7 @@ a1PIconTex:
 
 a2PIconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11BB64
+  offset: 0x11C1B4
   ctype: u16
   format: RGBA16
   width: 40
@@ -1087,7 +1087,7 @@ a2PIconTex:
 
 a3PIconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11BD04
+  offset: 0x11C354
   ctype: u16
   format: RGBA16
   width: 40
@@ -1097,7 +1097,7 @@ a3PIconTex:
 
 a4PIconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11BEA4
+  offset: 0x11C4F4
   ctype: u16
   format: RGBA16
   width: 40
@@ -1107,7 +1107,7 @@ a4PIconTex:
 
 aMachineSelectCursorTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11C044
+  offset: 0x11C694
   ctype: u16
   format: RGBA16
   width: 40
@@ -1117,7 +1117,7 @@ aMachineSelectCursorTex:
 
 aMachineInfoGraphTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11C2C0
+  offset: 0x11C910
   ctype: u16
   format: RGBA16
   width: 128
@@ -1127,7 +1127,7 @@ aMachineInfoGraphTex:
 
 aNameCardMightyGazelleTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11CAFC
+  offset: 0x11D14C
   ctype: u16
   format: RGBA16
   width: 80
@@ -1137,7 +1137,7 @@ aNameCardMightyGazelleTex:
 
 aNameCardTheSkullTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11CF68
+  offset: 0x11D6F4
   ctype: u16
   format: RGBA16
   width: 80
@@ -1161,7 +1161,7 @@ aSelectMachineTex:
 
 aMachineAccelerationMaxSpeedTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11DB4C
+  offset: 0x11E50C
   ctype: u16
   format: RGBA16
   width: 128
@@ -1171,7 +1171,7 @@ aMachineAccelerationMaxSpeedTex:
 
 aMachineBodyBoostGripTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11E33C
+  offset: 0x11EE74
   ctype: u16
   format: RGBA16
   width: 128
@@ -1181,7 +1181,7 @@ aMachineBodyBoostGripTex:
 
 aMachineInfoGraphSmallTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11EB24
+  offset: 0x11F744
   ctype: u16
   format: RGBA16
   width: 80
@@ -1191,7 +1191,7 @@ aMachineInfoGraphSmallTex:
 
 aMachineAccelerationMaxSpeedSmallTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11EFEC
+  offset: 0x11FC0C
   ctype: u16
   format: RGBA16
   width: 80
@@ -1201,7 +1201,7 @@ aMachineAccelerationMaxSpeedSmallTex:
 
 aMachineBodyBoostGripSmallTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11F330
+  offset: 0x1200AC
   ctype: u16
   format: RGBA16
   width: 80
@@ -1211,7 +1211,7 @@ aMachineBodyBoostGripSmallTex:
 
 aEngineSliderTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11F694
+  offset: 0x1205D0
   ctype: u16
   format: RGBA16
   width: 16
@@ -1221,7 +1221,7 @@ aEngineSliderTex:
 
 aBoostTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11F700
+  offset: 0x12063C
   ctype: u16
   format: RGBA16
   width: 20
@@ -1231,7 +1231,7 @@ aBoostTex:
 
 aBodyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11F764
+  offset: 0x1206A0
   ctype: u16
   format: RGBA16
   width: 16
@@ -1241,7 +1241,7 @@ aBodyTex:
 
 aGripTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11F7B0
+  offset: 0x1206EC
   ctype: u16
   format: RGBA16
   width: 16
@@ -1251,7 +1251,7 @@ aGripTex:
 
 aNoviceJackTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11F804
+  offset: 0x120740
   ctype: u16
   format: RGBA16
   width: 16
@@ -1261,7 +1261,7 @@ aNoviceJackTrophyTex:
 
 aNoviceQueenTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11F89C
+  offset: 0x1207D8
   ctype: u16
   format: RGBA16
   width: 16
@@ -1271,7 +1271,7 @@ aNoviceQueenTrophyTex:
 
 aNoviceKingTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11F934
+  offset: 0x120870
   ctype: u16
   format: RGBA16
   width: 16
@@ -1281,7 +1281,7 @@ aNoviceKingTrophyTex:
 
 aNoviceJokerTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11F9D0
+  offset: 0x12090C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1291,7 +1291,7 @@ aNoviceJokerTrophyTex:
 
 aNoviceXTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11FA68
+  offset: 0x1209A4
   ctype: u16
   format: RGBA16
   width: 16
@@ -1301,7 +1301,7 @@ aNoviceXTrophyTex:
 
 aStandardJackTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11FB04
+  offset: 0x120A40
   ctype: u16
   format: RGBA16
   width: 16
@@ -1311,7 +1311,7 @@ aStandardJackTrophyTex:
 
 aStandardQueenTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11FBB0
+  offset: 0x120AEC
   ctype: u16
   format: RGBA16
   width: 16
@@ -1321,7 +1321,7 @@ aStandardQueenTrophyTex:
 
 aStandardKingTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11FC58
+  offset: 0x120B94
   ctype: u16
   format: RGBA16
   width: 16
@@ -1331,7 +1331,7 @@ aStandardKingTrophyTex:
 
 aStandardJokerTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11FD10
+  offset: 0x120C4C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1341,7 +1341,7 @@ aStandardJokerTrophyTex:
 
 aStandardXTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11FDB0
+  offset: 0x120CEC
   ctype: u16
   format: RGBA16
   width: 16
@@ -1351,7 +1351,7 @@ aStandardXTrophyTex:
 
 aExpertJackTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11FE58
+  offset: 0x120D94
   ctype: u16
   format: RGBA16
   width: 16
@@ -1361,7 +1361,7 @@ aExpertJackTrophyTex:
 
 aExpertQueenTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11FF08
+  offset: 0x120E44
   ctype: u16
   format: RGBA16
   width: 16
@@ -1371,7 +1371,7 @@ aExpertQueenTrophyTex:
 
 aExpertKingTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x11FFC0
+  offset: 0x120EFC
   ctype: u16
   format: RGBA16
   width: 16
@@ -1381,7 +1381,7 @@ aExpertKingTrophyTex:
 
 aExpertJokerTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12007C
+  offset: 0x120FB8
   ctype: u16
   format: RGBA16
   width: 16
@@ -1391,7 +1391,7 @@ aExpertJokerTrophyTex:
 
 aExpertXTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120128
+  offset: 0x121064
   ctype: u16
   format: RGBA16
   width: 16
@@ -1401,7 +1401,7 @@ aExpertXTrophyTex:
 
 aMasterJackTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1201C4
+  offset: 0x121100
   ctype: u16
   format: RGBA16
   width: 16
@@ -1411,7 +1411,7 @@ aMasterJackTrophyTex:
 
 aMasterQueenTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120294
+  offset: 0x1211D0
   ctype: u16
   format: RGBA16
   width: 16
@@ -1421,7 +1421,7 @@ aMasterQueenTrophyTex:
 
 aMasterKingTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12036C
+  offset: 0x1212A8
   ctype: u16
   format: RGBA16
   width: 16
@@ -1431,7 +1431,7 @@ aMasterKingTrophyTex:
 
 aMasterJokerTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120450
+  offset: 0x12138C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1441,7 +1441,7 @@ aMasterJokerTrophyTex:
 
 aMasterXTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12051C
+  offset: 0x121458
   ctype: u16
   format: RGBA16
   width: 16
@@ -1451,7 +1451,7 @@ aMasterXTrophyTex:
 
 aNoTrophyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1205E0
+  offset: 0x12151C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1461,7 +1461,7 @@ aNoTrophyTex:
 
 aFont1ATex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120644
+  offset: 0x121584
   ctype: u16
   format: RGBA16
   width: 16
@@ -1471,7 +1471,7 @@ aFont1ATex:
 
 aFont1BTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120720
+  offset: 0x121660
   ctype: u16
   format: RGBA16
   width: 16
@@ -1481,7 +1481,7 @@ aFont1BTex:
 
 aFont1CTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1207FC
+  offset: 0x12173C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1491,7 +1491,7 @@ aFont1CTex:
 
 aFont1DTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1208DC
+  offset: 0x12181C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1501,7 +1501,7 @@ aFont1DTex:
 
 aFont1ETex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1209C0
+  offset: 0x121900
   ctype: u16
   format: RGBA16
   width: 16
@@ -1511,7 +1511,7 @@ aFont1ETex:
 
 aFont1FTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120A80
+  offset: 0x1219C0
   ctype: u16
   format: RGBA16
   width: 16
@@ -1521,7 +1521,7 @@ aFont1FTex:
 
 aFont1GTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120B3C
+  offset: 0x121A7C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1531,7 +1531,7 @@ aFont1GTex:
 
 aFont1HTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120C34
+  offset: 0x121B74
   ctype: u16
   format: RGBA16
   width: 16
@@ -1541,7 +1541,7 @@ aFont1HTex:
 
 aFont1ITex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120D00
+  offset: 0x121C40
   ctype: u16
   format: RGBA16
   width: 8
@@ -1551,7 +1551,7 @@ aFont1ITex:
 
 aFont1JTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120D94
+  offset: 0x121CD4
   ctype: u16
   format: RGBA16
   width: 16
@@ -1561,7 +1561,7 @@ aFont1JTex:
 
 aFont1KTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120E68
+  offset: 0x121DA8
   ctype: u16
   format: RGBA16
   width: 16
@@ -1571,7 +1571,7 @@ aFont1KTex:
 
 aFont1LTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x120F5C
+  offset: 0x121E9C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1581,7 +1581,7 @@ aFont1LTex:
 
 aFont1MTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12100C
+  offset: 0x121F4C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1591,7 +1591,7 @@ aFont1MTex:
 
 aFont1NTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12111C
+  offset: 0x12205C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1601,7 +1601,7 @@ aFont1NTex:
 
 aFont1OTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121214
+  offset: 0x122154
   ctype: u16
   format: RGBA16
   width: 16
@@ -1611,7 +1611,7 @@ aFont1OTex:
 
 aFont1PTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121300
+  offset: 0x122240
   ctype: u16
   format: RGBA16
   width: 16
@@ -1621,7 +1621,7 @@ aFont1PTex:
 
 aFont1QTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1213CC
+  offset: 0x12230C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1631,7 +1631,7 @@ aFont1QTex:
 
 aFont1RTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1214D4
+  offset: 0x122414
   ctype: u16
   format: RGBA16
   width: 16
@@ -1641,7 +1641,7 @@ aFont1RTex:
 
 aFont1STex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1215B4
+  offset: 0x1224F4
   ctype: u16
   format: RGBA16
   width: 16
@@ -1651,7 +1651,7 @@ aFont1STex:
 
 aFont1TTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121698
+  offset: 0x1225D8
   ctype: u16
   format: RGBA16
   width: 16
@@ -1661,7 +1661,7 @@ aFont1TTex:
 
 aFont1UTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121758
+  offset: 0x122698
   ctype: u16
   format: RGBA16
   width: 16
@@ -1671,7 +1671,7 @@ aFont1UTex:
 
 aFont1VTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121840
+  offset: 0x122780
   ctype: u16
   format: RGBA16
   width: 16
@@ -1681,7 +1681,7 @@ aFont1VTex:
 
 aFont1WTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12191C
+  offset: 0x12285C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1691,7 +1691,7 @@ aFont1WTex:
 
 aFont1XTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121A20
+  offset: 0x122960
   ctype: u16
   format: RGBA16
   width: 16
@@ -1701,7 +1701,7 @@ aFont1XTex:
 
 aFont1YTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121AFC
+  offset: 0x122A3C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1711,7 +1711,7 @@ aFont1YTex:
 
 aFont1ZTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121BD4
+  offset: 0x122B14
   ctype: u16
   format: RGBA16
   width: 16
@@ -1721,7 +1721,7 @@ aFont1ZTex:
 
 aFont1CommaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121C84
+  offset: 0x122BC4
   ctype: u16
   format: RGBA16
   width: 8
@@ -1731,7 +1731,7 @@ aFont1CommaTex:
 
 aFont1PeriodTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121CF8
+  offset: 0x122C38
   ctype: u16
   format: RGBA16
   width: 8
@@ -1741,7 +1741,7 @@ aFont1PeriodTex:
 
 aFont1PrimeTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121D54
+  offset: 0x122C94
   ctype: u16
   format: RGBA16
   width: 8
@@ -1751,7 +1751,7 @@ aFont1PrimeTex:
 
 aFont1ExclamationMarkTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121DB4
+  offset: 0x122CF4
   ctype: u16
   format: RGBA16
   width: 8
@@ -1761,7 +1761,7 @@ aFont1ExclamationMarkTex:
 
 aFont1UnderscoreTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121E38
+  offset: 0x122D78
   ctype: u16
   format: RGBA16
   width: 16
@@ -1771,7 +1771,7 @@ aFont1UnderscoreTex:
 
 aFont1EndTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121E94
+  offset: 0x122DD4
   ctype: u16
   format: RGBA16
   width: 16
@@ -1781,7 +1781,7 @@ aFont1EndTex:
 
 aFont1BoxTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121F30
+  offset: 0x122E70
   ctype: u16
   format: RGBA16
   width: 16
@@ -1791,7 +1791,7 @@ aFont1BoxTex:
 
 aFont1DashTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x121FA0
+  offset: 0x122EE0
   ctype: u16
   format: RGBA16
   width: 16
@@ -1801,7 +1801,7 @@ aFont1DashTex:
 
 aFont1AmpersandTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122004
+  offset: 0x122F44
   ctype: u16
   format: RGBA16
   width: 16
@@ -1811,7 +1811,7 @@ aFont1AmpersandTex:
 
 aFont1Num0Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122108
+  offset: 0x123048
   ctype: u16
   format: RGBA16
   width: 16
@@ -1821,7 +1821,7 @@ aFont1Num0Tex:
 
 aFont1Num1Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1221E8
+  offset: 0x123128
   ctype: u16
   format: RGBA16
   width: 8
@@ -1831,7 +1831,7 @@ aFont1Num1Tex:
 
 aFont1Num2Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12227C
+  offset: 0x1231BC
   ctype: u16
   format: RGBA16
   width: 16
@@ -1841,7 +1841,7 @@ aFont1Num2Tex:
 
 aFont1Num3Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12235C
+  offset: 0x12329C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1851,7 +1851,7 @@ aFont1Num3Tex:
 
 aFont1Num4Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122444
+  offset: 0x123384
   ctype: u16
   format: RGBA16
   width: 16
@@ -1861,7 +1861,7 @@ aFont1Num4Tex:
 
 aFont1Num5Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12250C
+  offset: 0x12344C
   ctype: u16
   format: RGBA16
   width: 16
@@ -1871,7 +1871,7 @@ aFont1Num5Tex:
 
 aFont1Num6Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1225E8
+  offset: 0x123528
   ctype: u16
   format: RGBA16
   width: 16
@@ -1881,7 +1881,7 @@ aFont1Num6Tex:
 
 aFont1Num7Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1226C8
+  offset: 0x123608
   ctype: u16
   format: RGBA16
   width: 16
@@ -1891,7 +1891,7 @@ aFont1Num7Tex:
 
 aFont1Num8Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122784
+  offset: 0x1236C4
   ctype: u16
   format: RGBA16
   width: 16
@@ -1901,7 +1901,7 @@ aFont1Num8Tex:
 
 aFont1Num9Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12287C
+  offset: 0x1237BC
   ctype: u16
   format: RGBA16
   width: 16
@@ -1911,7 +1911,7 @@ aFont1Num9Tex:
 
 aMachineStatATex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12296C
+  offset: 0x1238AC
   ctype: u16
   format: RGBA16
   width: 16
@@ -1921,7 +1921,7 @@ aMachineStatATex:
 
 aMachineStatBTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122A24
+  offset: 0x123964
   ctype: u16
   format: RGBA16
   width: 16
@@ -1931,7 +1931,7 @@ aMachineStatBTex:
 
 aMachineStatCTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122AE8
+  offset: 0x123A28
   ctype: u16
   format: RGBA16
   width: 16
@@ -1941,7 +1941,7 @@ aMachineStatCTex:
 
 aMachineStatDTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122BA4
+  offset: 0x123AE4
   ctype: u16
   format: RGBA16
   width: 16
@@ -1951,7 +1951,7 @@ aMachineStatDTex:
 
 aMachineStatETex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122C74
+  offset: 0x123BB4
   ctype: u16
   format: RGBA16
   width: 16
@@ -1961,7 +1961,7 @@ aMachineStatETex:
 
 aMachineWeight0Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122D10
+  offset: 0x123C50
   ctype: u16
   format: RGBA16
   width: 8
@@ -1971,7 +1971,7 @@ aMachineWeight0Tex:
 
 aMachineWeight1Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122DE4
+  offset: 0x123D24
   ctype: u16
   format: RGBA16
   width: 4
@@ -1981,7 +1981,7 @@ aMachineWeight1Tex:
 
 aMachineWeight2Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122E44
+  offset: 0x123D84
   ctype: u16
   format: RGBA16
   width: 8
@@ -1991,7 +1991,7 @@ aMachineWeight2Tex:
 
 aMachineWeight3Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122ECC
+  offset: 0x123E0C
   ctype: u16
   format: RGBA16
   width: 8
@@ -2001,7 +2001,7 @@ aMachineWeight3Tex:
 
 aMachineWeight4Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122F50
+  offset: 0x123E90
   ctype: u16
   format: RGBA16
   width: 8
@@ -2011,7 +2011,7 @@ aMachineWeight4Tex:
 
 aMachineWeight5Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x122FE4
+  offset: 0x123F24
   ctype: u16
   format: RGBA16
   width: 8
@@ -2021,7 +2021,7 @@ aMachineWeight5Tex:
 
 aMachineWeight6Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123068
+  offset: 0x123FA8
   ctype: u16
   format: RGBA16
   width: 8
@@ -2031,7 +2031,7 @@ aMachineWeight6Tex:
 
 aMachineWeight7Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123104
+  offset: 0x124044
   ctype: u16
   format: RGBA16
   width: 8
@@ -2041,7 +2041,7 @@ aMachineWeight7Tex:
 
 aMachineWeight8Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123178
+  offset: 0x1240B8
   ctype: u16
   format: RGBA16
   width: 8
@@ -2051,7 +2051,7 @@ aMachineWeight8Tex:
 
 aMachineWeight9Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123228
+  offset: 0x124168
   ctype: u16
   format: RGBA16
   width: 8
@@ -2061,7 +2061,7 @@ aMachineWeight9Tex:
 
 aFont2ATex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1232C4
+  offset: 0x124204
   ctype: u16
   format: RGBA16
   width: 8
@@ -2071,7 +2071,7 @@ aFont2ATex:
 
 aFont2BTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123304
+  offset: 0x124244
   ctype: u16
   format: RGBA16
   width: 8
@@ -2081,7 +2081,7 @@ aFont2BTex:
 
 aFont2CTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123348
+  offset: 0x124288
   ctype: u16
   format: RGBA16
   width: 8
@@ -2091,7 +2091,7 @@ aFont2CTex:
 
 aFont2DTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12338C
+  offset: 0x1242CC
   ctype: u16
   format: RGBA16
   width: 8
@@ -2101,7 +2101,7 @@ aFont2DTex:
 
 aFont2ETex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1233D0
+  offset: 0x124310
   ctype: u16
   format: RGBA16
   width: 8
@@ -2111,7 +2111,7 @@ aFont2ETex:
 
 aFont2FTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12340C
+  offset: 0x12434C
   ctype: u16
   format: RGBA16
   width: 8
@@ -2121,7 +2121,7 @@ aFont2FTex:
 
 aFont2GTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123448
+  offset: 0x124388
   ctype: u16
   format: RGBA16
   width: 8
@@ -2131,7 +2131,7 @@ aFont2GTex:
 
 aFont2HTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123490
+  offset: 0x1243D0
   ctype: u16
   format: RGBA16
   width: 8
@@ -2141,7 +2141,7 @@ aFont2HTex:
 
 aFont2ITex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1234D0
+  offset: 0x124410
   ctype: u16
   format: RGBA16
   width: 4
@@ -2151,7 +2151,7 @@ aFont2ITex:
 
 aFont2JTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123504
+  offset: 0x124444
   ctype: u16
   format: RGBA16
   width: 8
@@ -2161,7 +2161,7 @@ aFont2JTex:
 
 aFont2KTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123544
+  offset: 0x124484
   ctype: u16
   format: RGBA16
   width: 8
@@ -2171,7 +2171,7 @@ aFont2KTex:
 
 aFont2LTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123584
+  offset: 0x1244C4
   ctype: u16
   format: RGBA16
   width: 8
@@ -2181,7 +2181,7 @@ aFont2LTex:
 
 aFont2MTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1235C0
+  offset: 0x124500
   ctype: u16
   format: RGBA16
   width: 8
@@ -2191,7 +2191,7 @@ aFont2MTex:
 
 aFont2NTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123600
+  offset: 0x124540
   ctype: u16
   format: RGBA16
   width: 8
@@ -2201,7 +2201,7 @@ aFont2NTex:
 
 aFont2OTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123644
+  offset: 0x124584
   ctype: u16
   format: RGBA16
   width: 8
@@ -2211,7 +2211,7 @@ aFont2OTex:
 
 aFont2PTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123688
+  offset: 0x1245C8
   ctype: u16
   format: RGBA16
   width: 8
@@ -2221,7 +2221,7 @@ aFont2PTex:
 
 aFont2QTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1236C8
+  offset: 0x124608
   ctype: u16
   format: RGBA16
   width: 8
@@ -2231,7 +2231,7 @@ aFont2QTex:
 
 aFont2RTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123710
+  offset: 0x124650
   ctype: u16
   format: RGBA16
   width: 8
@@ -2241,7 +2241,7 @@ aFont2RTex:
 
 aFont2STex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123750
+  offset: 0x124690
   ctype: u16
   format: RGBA16
   width: 8
@@ -2251,7 +2251,7 @@ aFont2STex:
 
 aFont2TTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123794
+  offset: 0x1246D4
   ctype: u16
   format: RGBA16
   width: 8
@@ -2261,7 +2261,7 @@ aFont2TTex:
 
 aFont2UTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1237D0
+  offset: 0x124710
   ctype: u16
   format: RGBA16
   width: 8
@@ -2271,7 +2271,7 @@ aFont2UTex:
 
 aFont2VTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123814
+  offset: 0x124754
   ctype: u16
   format: RGBA16
   width: 8
@@ -2281,7 +2281,7 @@ aFont2VTex:
 
 aFont2WTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123858
+  offset: 0x124798
   ctype: u16
   format: RGBA16
   width: 8
@@ -2291,7 +2291,7 @@ aFont2WTex:
 
 aFont2XTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12389C
+  offset: 0x1247DC
   ctype: u16
   format: RGBA16
   width: 8
@@ -2301,7 +2301,7 @@ aFont2XTex:
 
 aFont2YTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1238EC
+  offset: 0x12482C
   ctype: u16
   format: RGBA16
   width: 8
@@ -2311,7 +2311,7 @@ aFont2YTex:
 
 aFont2ZTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123928
+  offset: 0x124868
   ctype: u16
   format: RGBA16
   width: 8
@@ -2321,7 +2321,7 @@ aFont2ZTex:
 
 aFont2CommaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123964
+  offset: 0x1248A4
   ctype: u16
   format: RGBA16
   width: 8
@@ -2331,7 +2331,7 @@ aFont2CommaTex:
 
 aFont2PeriodTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123998
+  offset: 0x1248D8
   ctype: u16
   format: RGBA16
   width: 8
@@ -2341,7 +2341,7 @@ aFont2PeriodTex:
 
 aFont2PrimeTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1239CC
+  offset: 0x12490C
   ctype: u16
   format: RGBA16
   width: 8
@@ -2351,7 +2351,7 @@ aFont2PrimeTex:
 
 aFont2DashTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123A04
+  offset: 0x124944
   ctype: u16
   format: RGBA16
   width: 8
@@ -2361,7 +2361,7 @@ aFont2DashTex:
 
 aFont2KgTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123A30
+  offset: 0x124970
   ctype: u16
   format: RGBA16
   width: 8
@@ -2371,7 +2371,7 @@ aFont2KgTex:
 
 aFont2AmpersandTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123A84
+  offset: 0x1249C4
   ctype: u16
   format: RGBA16
   width: 8
@@ -2381,7 +2381,7 @@ aFont2AmpersandTex:
 
 aFont2Num0Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123AC8
+  offset: 0x124A08
   ctype: u16
   format: RGBA16
   width: 8
@@ -2391,7 +2391,7 @@ aFont2Num0Tex:
 
 aFont2Num1Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123B04
+  offset: 0x124A44
   ctype: u16
   format: RGBA16
   width: 8
@@ -2401,7 +2401,7 @@ aFont2Num1Tex:
 
 aFont2Num2Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123B40
+  offset: 0x124A80
   ctype: u16
   format: RGBA16
   width: 8
@@ -2411,7 +2411,7 @@ aFont2Num2Tex:
 
 aFont2Num3Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123B80
+  offset: 0x124AC0
   ctype: u16
   format: RGBA16
   width: 8
@@ -2421,7 +2421,7 @@ aFont2Num3Tex:
 
 aFont2Num4Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123BC0
+  offset: 0x124B00
   ctype: u16
   format: RGBA16
   width: 8
@@ -2431,7 +2431,7 @@ aFont2Num4Tex:
 
 aFont2Num5Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123C04
+  offset: 0x124B44
   ctype: u16
   format: RGBA16
   width: 8
@@ -2441,7 +2441,7 @@ aFont2Num5Tex:
 
 aFont2Num6Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123C44
+  offset: 0x124B84
   ctype: u16
   format: RGBA16
   width: 8
@@ -2451,7 +2451,7 @@ aFont2Num6Tex:
 
 aFont2Num7Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123C84
+  offset: 0x124BC4
   ctype: u16
   format: RGBA16
   width: 8
@@ -2461,7 +2461,7 @@ aFont2Num7Tex:
 
 aFont2Num8Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123CBC
+  offset: 0x124BFC
   ctype: u16
   format: RGBA16
   width: 8
@@ -2471,7 +2471,7 @@ aFont2Num8Tex:
 
 aFont2Num9Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x123CF8
+  offset: 0x124C38
   ctype: u16
   format: RGBA16
   width: 8
@@ -4219,7 +4219,7 @@ aFont5PlusTex:
 
 aFont5PointsTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x127D78
+  offset: 0x128638
   ctype: u8
   format: I4
   width: 32
@@ -4247,7 +4247,7 @@ aFont5DownArrowTex:
 
 aFont5PlayerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x127EF8
+  offset: 0x1287B8
   ctype: u8
   format: I4
   width: 80
@@ -4257,7 +4257,7 @@ aFont5PlayerTex:
 
 aFont5ComputerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x128068
+  offset: 0x1288B4
   ctype: u8
   format: I4
   width: 80
@@ -4267,7 +4267,7 @@ aFont5ComputerTex:
 
 aFont5SelectCourseTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x128234
+  offset: 0x1289EC
   ctype: u8
   format: I4
   width: 96
@@ -4277,10 +4277,10 @@ aFont5SelectCourseTex:
 
 aFont5QuitTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12840C
+  offset: 0x128BD0
   ctype: u8
   format: I4
-  width: 32
+  width: 48
   height: 16
   compression: MIO0
   symbol: aFont5QuitTex
@@ -4710,7 +4710,7 @@ aFont6UnderscoreTex:
 
 aMenuSignGpRaceTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x129C54
+  offset: 0x12A494
   ctype: u16
   format: RGBA16
   width: 64
@@ -4720,7 +4720,7 @@ aMenuSignGpRaceTex:
 
 aMenuSignTimeAttackTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12ABB0
+  offset: 0x12B3F0
   ctype: u16
   format: RGBA16
   width: 64
@@ -4730,7 +4730,7 @@ aMenuSignTimeAttackTex:
 
 aMenuSignVsBattleTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12BC00
+  offset: 0x12C440
   ctype: u16
   format: RGBA16
   width: 64
@@ -4740,7 +4740,7 @@ aMenuSignVsBattleTex:
 
 aMenuSignPracticeTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12CB9C
+  offset: 0x12D3DC
   ctype: u16
   format: RGBA16
   width: 64
@@ -4750,7 +4750,7 @@ aMenuSignPracticeTex:
 
 aMenuSignDeathRaceTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12DB18
+  offset: 0x12E358
   ctype: u16
   format: RGBA16
   width: 64
@@ -4760,7 +4760,7 @@ aMenuSignDeathRaceTex:
 
 aMenuSignOptionsTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12E9A0
+  offset: 0x12F1E0
   ctype: u16
   format: RGBA16
   width: 64
@@ -4770,7 +4770,7 @@ aMenuSignOptionsTex:
 
 aMenuSignCourseEditTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x12F934
+  offset: 0x130174
   ctype: u16
   format: RGBA16
   width: 64
@@ -4780,7 +4780,7 @@ aMenuSignCourseEditTex:
 
 aMenuSignCreateMachineTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x130950
+  offset: 0x131190
   ctype: u16
   format: RGBA16
   width: 64
@@ -4790,7 +4790,7 @@ aMenuSignCreateMachineTex:
 
 aSelectModeOptionFlamesTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x131968
+  offset: 0x1321A8
   ctype: u16
   format: RGBA16
   width: 128
@@ -4800,7 +4800,7 @@ aSelectModeOptionFlamesTex:
 
 a2PlayersTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x13437C
+  offset: 0x134BBC
   ctype: u16
   format: RGBA16
   width: 64
@@ -4810,7 +4810,7 @@ a2PlayersTex:
 
 a3PlayersTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1344C8
+  offset: 0x134D08
   ctype: u16
   format: RGBA16
   width: 64
@@ -4820,7 +4820,7 @@ a3PlayersTex:
 
 a4PlayersTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x134610
+  offset: 0x134E50
   ctype: u16
   format: RGBA16
   width: 64
@@ -4844,7 +4844,7 @@ aSelectModeTex:
 
 aNoviceTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x134D64
+  offset: 0x1355A4
   ctype: u16
   format: RGBA16
   width: 64
@@ -4854,7 +4854,7 @@ aNoviceTex:
 
 aStandardTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x134EAC
+  offset: 0x1356F8
   ctype: u16
   format: RGBA16
   width: 64
@@ -4864,7 +4864,7 @@ aStandardTex:
 
 aExpertTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x134FFC
+  offset: 0x13585C
   ctype: u16
   format: RGBA16
   width: 64
@@ -4874,7 +4874,7 @@ aExpertTex:
 
 aMasterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x13514C
+  offset: 0x1359C4
   ctype: u16
   format: RGBA16
   width: 64
@@ -4884,7 +4884,7 @@ aMasterTex:
 
 aTimeAttackTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1352A0
+  offset: 0x135B20
   ctype: u16
   format: RGBA16
   width: 88
@@ -4894,7 +4894,7 @@ aTimeAttackTex:
 
 aRecordsOptionTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x135458
+  offset: 0x135CEC
   ctype: u16
   format: RGBA16
   width: 64
@@ -4910,7 +4910,7 @@ pad_segment_2B9EA0_F1355A4:
 
 aCupSelectJackTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1355B4
+  offset: 0x135E54
   ctype: u16
   format: RGBA16
   width: 64
@@ -4920,7 +4920,7 @@ aCupSelectJackTex:
 
 aCupSelectQueenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x135C98
+  offset: 0x136538
   ctype: u16
   format: RGBA16
   width: 64
@@ -4930,7 +4930,7 @@ aCupSelectQueenTex:
 
 aCupSelectKingTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1363CC
+  offset: 0x136C6C
   ctype: u16
   format: RGBA16
   width: 64
@@ -4940,7 +4940,7 @@ aCupSelectKingTex:
 
 aCupSelectJokerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x136B08
+  offset: 0x1373A8
   ctype: u16
   format: RGBA16
   width: 64
@@ -4950,7 +4950,7 @@ aCupSelectJokerTex:
 
 aCupSelectEditTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1371E0
+  offset: 0x137A80
   ctype: u16
   format: RGBA16
   width: 64
@@ -4960,7 +4960,7 @@ aCupSelectEditTex:
 
 aCupSelectXTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x137668
+  offset: 0x137F08
   ctype: u16
   format: RGBA16
   width: 64
@@ -4970,7 +4970,7 @@ aCupSelectXTex:
 
 aCupSelectQuestionMarkTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x137D34
+  offset: 0x1385D4
   ctype: u16
   format: RGBA16
   width: 64
@@ -4994,7 +4994,7 @@ aRecordsTex:
 
 aYellowArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x138994
+  offset: 0x139234
   ctype: u16
   format: RGBA16
   width: 32
@@ -5004,7 +5004,7 @@ aYellowArrowTex:
 
 aOptionsFalconHelmetTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x138AB8
+  offset: 0x139358
   ctype: u16
   format: RGBA16
   width: 64
@@ -5014,7 +5014,7 @@ aOptionsFalconHelmetTex:
 
 aCupCleared1Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1394A4
+  offset: 0x139D44
   ctype: u16
   format: RGBA16
   width: 16
@@ -5024,7 +5024,7 @@ aCupCleared1Tex:
 
 aCupCleared2Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x139520
+  offset: 0x139DC0
   ctype: u16
   format: RGBA16
   width: 16
@@ -5034,7 +5034,7 @@ aCupCleared2Tex:
 
 aCupCleared3Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x13959C
+  offset: 0x139E3C
   ctype: u16
   format: RGBA16
   width: 16
@@ -5044,7 +5044,7 @@ aCupCleared3Tex:
 
 aCupCleared4Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x139618
+  offset: 0x139EB8
   ctype: u16
   format: RGBA16
   width: 16
@@ -5054,7 +5054,7 @@ aCupCleared4Tex:
 
 aStaffGhostBeatenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x139694
+  offset: 0x139F34
   ctype: u16
   format: RGBA16
   width: 16
@@ -5064,7 +5064,7 @@ aStaffGhostBeatenTex:
 
 aOKTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x139710
+  offset: 0x139FB0
   ctype: u16
   format: RGBA16
   width: 32
@@ -5172,7 +5172,7 @@ aHasGhostMarkerTex:
 
 aEndingCaptainFalconMasterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x13AAE4
+  offset: 0x13B384
   ctype: u16
   format: RGBA16
   width: 168
@@ -5182,7 +5182,7 @@ aEndingCaptainFalconMasterTex:
 
 aEndingAntonioGusterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x13EC40
+  offset: 0x13F4E0
   ctype: u16
   format: RGBA16
   width: 168
@@ -5192,7 +5192,7 @@ aEndingAntonioGusterTex:
 
 aEndingSuperArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x142BF0
+  offset: 0x143490
   ctype: u16
   format: RGBA16
   width: 168
@@ -5202,7 +5202,7 @@ aEndingSuperArrowTex:
 
 aEndingBabaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x146944
+  offset: 0x1471E4
   ctype: u16
   format: RGBA16
   width: 168
@@ -5212,7 +5212,7 @@ aEndingBabaTex:
 
 aEndingBeastmanTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x14A3CC
+  offset: 0x14AC6C
   ctype: u16
   format: RGBA16
   width: 168
@@ -5222,7 +5222,7 @@ aEndingBeastmanTex:
 
 aEndingBillyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x14E458
+  offset: 0x14ECF8
   ctype: u16
   format: RGBA16
   width: 168
@@ -5232,7 +5232,7 @@ aEndingBillyTex:
 
 aEndingBlackShadowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x151B38
+  offset: 0x1523D8
   ctype: u16
   format: RGBA16
   width: 168
@@ -5242,7 +5242,7 @@ aEndingBlackShadowTex:
 
 aEndingBloodFalconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x15538C
+  offset: 0x155C2C
   ctype: u16
   format: RGBA16
   width: 168
@@ -5252,7 +5252,7 @@ aEndingBloodFalconTex:
 
 aEndingDrClashTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x159288
+  offset: 0x159B28
   ctype: u16
   format: RGBA16
   width: 168
@@ -5262,7 +5262,7 @@ aEndingDrClashTex:
 
 aEndingDrStewartTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x15DEA8
+  offset: 0x15E748
   ctype: u16
   format: RGBA16
   width: 168
@@ -5272,7 +5272,7 @@ aEndingDrStewartTex:
 
 aEndingDraqTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1619EC
+  offset: 0x16228C
   ctype: u16
   format: RGBA16
   width: 168
@@ -5282,7 +5282,7 @@ aEndingDraqTex:
 
 aEndingMrEadTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x166A40
+  offset: 0x1672E0
   ctype: u16
   format: RGBA16
   width: 168
@@ -5292,7 +5292,7 @@ aEndingMrEadTex:
 
 aEndingGomarAndShiohTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x16B94C
+  offset: 0x16C1EC
   ctype: u16
   format: RGBA16
   width: 168
@@ -5302,7 +5302,7 @@ aEndingGomarAndShiohTex:
 
 aEndingSamuraiGorohTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x16FEEC
+  offset: 0x17078C
   ctype: u16
   format: RGBA16
   width: 168
@@ -5312,7 +5312,7 @@ aEndingSamuraiGorohTex:
 
 aEndingTheSkullTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x174BF0
+  offset: 0x175490
   ctype: u16
   format: RGBA16
   width: 168
@@ -5322,7 +5322,7 @@ aEndingTheSkullTex:
 
 aEndingJackLevinTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x179494
+  offset: 0x179D34
   ctype: u16
   format: RGBA16
   width: 168
@@ -5332,7 +5332,7 @@ aEndingJackLevinTex:
 
 aEndingJamesMcCloudTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x17CDC8
+  offset: 0x17D668
   ctype: u16
   format: RGBA16
   width: 168
@@ -5342,7 +5342,7 @@ aEndingJamesMcCloudTex:
 
 aEndingJodySummerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x180754
+  offset: 0x180FF4
   ctype: u16
   format: RGBA16
   width: 168
@@ -5352,7 +5352,7 @@ aEndingJodySummerTex:
 
 aEndingJohnTanakaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x184744
+  offset: 0x184FE4
   ctype: u16
   format: RGBA16
   width: 168
@@ -5362,7 +5362,7 @@ aEndingJohnTanakaTex:
 
 aEndingKateAlenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1882F0
+  offset: 0x188B90
   ctype: u16
   format: RGBA16
   width: 168
@@ -5372,7 +5372,7 @@ aEndingKateAlenTex:
 
 aEndingLeonTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x18BDDC
+  offset: 0x18C67C
   ctype: u16
   format: RGBA16
   width: 168
@@ -5382,7 +5382,7 @@ aEndingLeonTex:
 
 aEndingMichaelChainTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x18FFC0
+  offset: 0x190860
   ctype: u16
   format: RGBA16
   width: 168
@@ -5392,7 +5392,7 @@ aEndingMichaelChainTex:
 
 aEndingMightyGazelleTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x193DC4
+  offset: 0x194664
   ctype: u16
   format: RGBA16
   width: 168
@@ -5402,7 +5402,7 @@ aEndingMightyGazelleTex:
 
 aEndingMrsArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x198B8C
+  offset: 0x19942C
   ctype: u16
   format: RGBA16
   width: 168
@@ -5412,7 +5412,7 @@ aEndingMrsArrowTex:
 
 aEndingOctomanTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x19CD38
+  offset: 0x19D5D8
   ctype: u16
   format: RGBA16
   width: 168
@@ -5422,7 +5422,7 @@ aEndingOctomanTex:
 
 aEndingPicoTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1A1758
+  offset: 0x1A1FF8
   ctype: u16
   format: RGBA16
   width: 168
@@ -5432,7 +5432,7 @@ aEndingPicoTex:
 
 aEndingBioRexTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1A5D74
+  offset: 0x1A6614
   ctype: u16
   format: RGBA16
   width: 168
@@ -5442,7 +5442,7 @@ aEndingBioRexTex:
 
 aEndingRogerBusterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1A9E6C
+  offset: 0x1AA70C
   ctype: u16
   format: RGBA16
   width: 168
@@ -5452,7 +5452,7 @@ aEndingRogerBusterTex:
 
 aEndingSilverNeelsenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1AE278
+  offset: 0x1AEB18
   ctype: u16
   format: RGBA16
   width: 168
@@ -5462,7 +5462,7 @@ aEndingSilverNeelsenTex:
 
 aEndingZodaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1B2DBC
+  offset: 0x1B365C
   ctype: u16
   format: RGBA16
   width: 168
@@ -5472,7 +5472,7 @@ aEndingZodaTex:
 
 aEndingCaptainFalconAltTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1B72F0
+  offset: 0x1B7B90
   ctype: u16
   format: RGBA16
   width: 168
@@ -5482,7 +5482,7 @@ aEndingCaptainFalconAltTex:
 
 aEndingSamuraiGorohAltTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1B9F4C
+  offset: 0x1BA7EC
   ctype: u16
   format: RGBA16
   width: 168
@@ -5492,7 +5492,7 @@ aEndingSamuraiGorohAltTex:
 
 aEndingJodySummerAltTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1BD278
+  offset: 0x1BDB18
   ctype: u16
   format: RGBA16
   width: 168
@@ -5502,7 +5502,7 @@ aEndingJodySummerAltTex:
 
 aEndingCaptainFalconStandardExpertTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1C0524
+  offset: 0x1C0DC4
   ctype: u16
   format: RGBA16
   width: 168
@@ -5512,7 +5512,7 @@ aEndingCaptainFalconStandardExpertTex:
 
 aCreditsMenuLadyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1C417C
+  offset: 0x1C4A1C
   ctype: u16
   format: RGBA16
   width: 80
@@ -5522,7 +5522,7 @@ aCreditsMenuLadyTex:
 
 aCreditsSeeYouAgainTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1C6754
+  offset: 0x1C6FF4
   ctype: u16
   format: RGBA16
   width: 64
@@ -5532,7 +5532,7 @@ aCreditsSeeYouAgainTex:
 
 aCreditsMrZeroTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1C70B4
+  offset: 0x1C7954
   ctype: u16
   format: RGBA16
   width: 80
@@ -5542,7 +5542,7 @@ aCreditsMrZeroTex:
 
 aCreditsBlueFalconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1C871C
+  offset: 0x1C8FBC
   ctype: u16
   format: RGBA16
   width: 128
@@ -5552,7 +5552,7 @@ aCreditsBlueFalconTex:
 
 aCreditsWildGooseTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1CA9AC
+  offset: 0x1CB24C
   ctype: u16
   format: RGBA16
   width: 128
@@ -5562,7 +5562,7 @@ aCreditsWildGooseTex:
 
 aCreditsFireStingrayTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1CD2B8
+  offset: 0x1CDB58
   ctype: u16
   format: RGBA16
   width: 128
@@ -5572,7 +5572,7 @@ aCreditsFireStingrayTex:
 
 aCreditsGoldenFoxTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1D0078
+  offset: 0x1D0918
   ctype: u16
   format: RGBA16
   width: 128
@@ -5582,7 +5582,7 @@ aCreditsGoldenFoxTex:
 
 aCreditsRedGazelleTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1D2B04
+  offset: 0x1D33A4
   ctype: u16
   format: RGBA16
   width: 128
@@ -5592,7 +5592,7 @@ aCreditsRedGazelleTex:
 
 aCreditsWhiteFoxTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1D48E4
+  offset: 0x1D5184
   ctype: u16
   format: RGBA16
   width: 128
@@ -5602,7 +5602,7 @@ aCreditsWhiteFoxTex:
 
 aCreditsIronTigerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1D6DE0
+  offset: 0x1D7680
   ctype: u16
   format: RGBA16
   width: 128
@@ -5612,7 +5612,7 @@ aCreditsIronTigerTex:
 
 aCreditsDeepClawTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1D9A60
+  offset: 0x1DA300
   ctype: u16
   format: RGBA16
   width: 128
@@ -5622,7 +5622,7 @@ aCreditsDeepClawTex:
 
 aCreditsCrazyBearTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1DC46C
+  offset: 0x1DCD0C
   ctype: u16
   format: RGBA16
   width: 128
@@ -5632,7 +5632,7 @@ aCreditsCrazyBearTex:
 
 aCreditsGreatStarTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1DF4E8
+  offset: 0x1DFD88
   ctype: u16
   format: RGBA16
   width: 128
@@ -5642,7 +5642,7 @@ aCreditsGreatStarTex:
 
 aCreditsBigFangTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1E1C18
+  offset: 0x1E24B8
   ctype: u16
   format: RGBA16
   width: 128
@@ -5652,7 +5652,7 @@ aCreditsBigFangTex:
 
 aCreditsMadWolfTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1E4928
+  offset: 0x1E51C8
   ctype: u16
   format: RGBA16
   width: 128
@@ -5662,7 +5662,7 @@ aCreditsMadWolfTex:
 
 aCreditsNightThunderTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1E7FC0
+  offset: 0x1E8860
   ctype: u16
   format: RGBA16
   width: 128
@@ -5672,7 +5672,7 @@ aCreditsNightThunderTex:
 
 aCreditsTwinNorittaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1EA638
+  offset: 0x1EAED8
   ctype: u16
   format: RGBA16
   width: 128
@@ -5682,7 +5682,7 @@ aCreditsTwinNorittaTex:
 
 aCreditsWonderWaspTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1ECC14
+  offset: 0x1ED4B4
   ctype: u16
   format: RGBA16
   width: 128
@@ -5692,7 +5692,7 @@ aCreditsWonderWaspTex:
 
 aCreditsQueenMeteorTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1EEDBC
+  offset: 0x1EF65C
   ctype: u16
   format: RGBA16
   width: 128
@@ -5702,7 +5702,7 @@ aCreditsQueenMeteorTex:
 
 aCreditsBloodHawkTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1F1030
+  offset: 0x1F18D0
   ctype: u16
   format: RGBA16
   width: 128
@@ -5712,7 +5712,7 @@ aCreditsBloodHawkTex:
 
 aCreditsAstroRobinTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1F3E70
+  offset: 0x1F4710
   ctype: u16
   format: RGBA16
   width: 128
@@ -5722,7 +5722,7 @@ aCreditsAstroRobinTex:
 
 aCreditsDeathAnchorTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1F6F14
+  offset: 0x1F77B4
   ctype: u16
   format: RGBA16
   width: 128
@@ -5732,7 +5732,7 @@ aCreditsDeathAnchorTex:
 
 aCreditsWildBoarTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1F9A94
+  offset: 0x1FA334
   ctype: u16
   format: RGBA16
   width: 128
@@ -5742,7 +5742,7 @@ aCreditsWildBoarTex:
 
 aCreditsKingMeteorTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1FC98C
+  offset: 0x1FD22C
   ctype: u16
   format: RGBA16
   width: 128
@@ -5752,7 +5752,7 @@ aCreditsKingMeteorTex:
 
 aCreditsSuperPiranhaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x1FF6FC
+  offset: 0x1FFF9C
   ctype: u16
   format: RGBA16
   width: 128
@@ -5762,7 +5762,7 @@ aCreditsSuperPiranhaTex:
 
 aCreditsMightyHurricaneTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x202560
+  offset: 0x202E00
   ctype: u16
   format: RGBA16
   width: 128
@@ -5772,7 +5772,7 @@ aCreditsMightyHurricaneTex:
 
 aCreditsSpaceAnglerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x204998
+  offset: 0x205238
   ctype: u16
   format: RGBA16
   width: 128
@@ -5782,7 +5782,7 @@ aCreditsSpaceAnglerTex:
 
 aCreditsMightyTyphoonTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x207650
+  offset: 0x207EF0
   ctype: u16
   format: RGBA16
   width: 128
@@ -5792,7 +5792,7 @@ aCreditsMightyTyphoonTex:
 
 aCreditsHyperSpeederTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x209920
+  offset: 0x20A1C0
   ctype: u16
   format: RGBA16
   width: 128
@@ -5802,7 +5802,7 @@ aCreditsHyperSpeederTex:
 
 aCreditsGreenPantherTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x20C454
+  offset: 0x20CCF4
   ctype: u16
   format: RGBA16
   width: 128
@@ -5812,7 +5812,7 @@ aCreditsGreenPantherTex:
 
 aCreditsBlackBullTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x20ECD8
+  offset: 0x20F578
   ctype: u16
   format: RGBA16
   width: 128
@@ -5822,7 +5822,7 @@ aCreditsBlackBullTex:
 
 aCreditsLittleWyvernTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x211164
+  offset: 0x211A04
   ctype: u16
   format: RGBA16
   width: 128
@@ -5832,7 +5832,7 @@ aCreditsLittleWyvernTex:
 
 aCreditsSonicPhantomTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x213444
+  offset: 0x213CE4
   ctype: u16
   format: RGBA16
   width: 128
@@ -7505,311 +7505,311 @@ aFinalResultPositionSuffixTHTex:
 
 aEndingTextCaptainFalconStandardExpertTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x244F14
+  offset: 0x2457B4
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextCaptainFalconStandardExpertTex
 
 aEndingTextDrStewartTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2457C4
+  offset: 0x245DBC
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextDrStewartTex
 
 aEndingTextPicoTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2461CC
+  offset: 0x2463B8
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextPicoTex
 
 aEndingTextSamuraiGorohTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x246C18
+  offset: 0x2469E4
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextSamuraiGorohTex
 
 aEndingTextJodySummerTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x247590
+  offset: 0x246FC4
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextJodySummerTex
 
 aEndingTextMightyGazelleTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x247F40
+  offset: 0x2475F0
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextMightyGazelleTex
 
 aEndingTextMrEadTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x248844
+  offset: 0x247BC0
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextMrEadTex
 
 aEndingTextBabaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2490D0
+  offset: 0x248120
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextBabaTex
 
 aEndingTextOctomanTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x249A78
+  offset: 0x24875C
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextOctomanTex
 
 aEndingTextGomarAndShiohTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24A294
+  offset: 0x248D04
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextGomarAndShiohTex
 
 aEndingTextKateAlenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24AC0C
+  offset: 0x2492C8
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextKateAlenTex
 
 aEndingTextRogerBusterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24B444
+  offset: 0x2498AC
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextRogerBusterTex
 
 aEndingTextJamesMcCloudTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24BD9C
+  offset: 0x249E00
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextJamesMcCloudTex
 
 aEndingTextLeonTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24C588
+  offset: 0x24A3C4
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextLeonTex
 
 aEndingTextAntonioGusterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24CE20
+  offset: 0x24A9A0
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextAntonioGusterTex
 
 aEndingTextBlackShadowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24D864
+  offset: 0x24AF10
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextBlackShadowTex
 
 aEndingTextMichaelChainTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24E224
+  offset: 0x24B494
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextMichaelChainTex
 
 aEndingTextJackLevinTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24EC48
+  offset: 0x24BA04
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextJackLevinTex
 
 aEndingTextSuperArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24F4A0
+  offset: 0x24C01C
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextSuperArrowTex
 
 aEndingTextMrsArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x24FD5C
+  offset: 0x24C5EC
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextMrsArrowTex
 
 aEndingTextJohnTanakaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2505E8
+  offset: 0x24CBF8
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextJohnTanakaTex
 
 aEndingTextBeastmanTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x250D64
+  offset: 0x24D198
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextBeastmanTex
 
 aEndingTextZodaTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x251718
+  offset: 0x24D7E8
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextZodaTex
 
 aEndingTextDrClashTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x252134
+  offset: 0x24DDA4
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextDrClashTex
 
 aEndingTextSilverNeelsenTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x252AF8
+  offset: 0x24E424
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextSilverNeelsenTex
 
 aEndingTextBioRexTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2532F0
+  offset: 0x24EA1C
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextBioRexTex
 
 aEndingTextDraqTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x253C68
+  offset: 0x24F03C
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextDraqTex
 
 aEndingTextBillyTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x254468
+  offset: 0x24F660
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextBillyTex
 
 aEndingTextTheSkullTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x254EF0
+  offset: 0x24FC40
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextTheSkullTex
 
 aEndingTextBloodFalconTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x25577C
+  offset: 0x2501E4
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextBloodFalconTex
 
 aEndingTextCaptainFalconMasterTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x255FF8
+  offset: 0x2507E4
   ctype: u16
   format: RGBA16
   width: 196
-  height: 32
+  height: 16
   compression: MIO0
   symbol: aEndingTextCaptainFalconMasterTex
 
@@ -7933,7 +7933,7 @@ aMenuTextTLUT:
 
 aMenuRetryTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x25F0B0
+  offset: 0x2595E0
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -7944,7 +7944,7 @@ aMenuRetryTex:
 
 aMenuSettingsTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x25F1B0
+  offset: 0x259724
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -7955,18 +7955,18 @@ aMenuSettingsTex:
 
 aMenuQuitTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x25F334
+  offset: 0x2598C8
   ctype: u8
   format: CI8
   tlut: 0xF25F070
-  width: 24
+  width: 32
   height: 16
   compression: MIO0
   symbol: aMenuQuitTex
 
 aMenuChangeMachineTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x25F400
+  offset: 0x2599EC
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -7977,7 +7977,7 @@ aMenuChangeMachineTex:
 
 aMenuChangeCourseTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x25F69C
+  offset: 0x259BF4
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -7988,7 +7988,7 @@ aMenuChangeCourseTex:
 
 aMenuGhostSaveTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x25F914
+  offset: 0x259DC0
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -7999,7 +7999,7 @@ aMenuGhostSaveTex:
 
 aMenuOverwriteData1Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x25FAD0
+  offset: 0x259F68
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8010,18 +8010,18 @@ aMenuOverwriteData1Tex:
 
 aMenuSavingTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x25FD70
+  offset: 0x25A278
   ctype: u8
   format: CI8
   tlut: 0xF25F070
-  width: 40
+  width: 64
   height: 16
   compression: MIO0
   symbol: aMenuSavingTex
 
 aMenuNoGamePakTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x25FE94
+  offset: 0x25A45C
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8032,18 +8032,18 @@ aMenuNoGamePakTex:
 
 aMenuNoDiskTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x26008C
+  offset: 0x25A5D8
   ctype: u8
   format: CI8
   tlut: 0xF25F070
-  width: 40
+  width: 64
   height: 16
   compression: MIO0
   symbol: aMenuNoDiskTex
 
 aMenuOverwriteData2Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2601C0
+  offset: 0x25A73C
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8054,7 +8054,7 @@ aMenuOverwriteData2Tex:
 
 aMenuClearRecordTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x260460
+  offset: 0x25AA28
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8065,18 +8065,18 @@ aMenuClearRecordTex:
 
 aMenuEraseCourseSavedData1Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x26064C
+  offset: 0x25AC00
   ctype: u8
   format: CI8
   tlut: 0xF25F070
-  width: 96
+  width: 128
   height: 32
   compression: MIO0
   symbol: aMenuEraseCourseSavedData1Tex
 
 aMenuClearGhostTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x260A98
+  offset: 0x25B2C0
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8087,18 +8087,18 @@ aMenuClearGhostTex:
 
 aMenuEraseCourseSavedData2Tex:
   type: COMPRESSED_TEXTURE
-  offset: 0x260C64
+  offset: 0x25B4A0
   ctype: u8
   format: CI8
   tlut: 0xF25F070
-  width: 96
+  width: 128
   height: 32
   compression: MIO0
   symbol: aMenuEraseCourseSavedData2Tex
 
 aMenuContinueTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2610B0
+  offset: 0x25BB30
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8109,7 +8109,7 @@ aMenuContinueTex:
 
 aMenuSavedTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x261224
+  offset: 0x25BC9C
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8120,7 +8120,7 @@ aMenuSavedTex:
 
 aMenuNewGhostTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x261364
+  offset: 0x25BE90
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8131,7 +8131,7 @@ aMenuNewGhostTex:
 
 aMenuSavedGhostTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x261528
+  offset: 0x25C000
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8142,7 +8142,7 @@ aMenuSavedGhostTex:
 
 aOptionsTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x26176C
+  offset: 0x25C2CC
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8153,7 +8153,7 @@ aOptionsTex:
 
 aOptionsVsCom2P3PTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x261AD4
+  offset: 0x25C634
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8164,7 +8164,7 @@ aOptionsVsCom2P3PTex:
 
 aOptionsVsHandicapTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x261E80
+  offset: 0x25CA38
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8175,7 +8175,7 @@ aOptionsVsHandicapTex:
 
 aOptionsVsSlotTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x262184
+  offset: 0x25CD24
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8186,7 +8186,7 @@ aOptionsVsSlotTex:
 
 aOptionsSoundModeTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x262398
+  offset: 0x25CF50
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8197,7 +8197,7 @@ aOptionsSoundModeTex:
 
 aOptionsAllDataClearTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x262688
+  offset: 0x25D190
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8208,7 +8208,7 @@ aOptionsAllDataClearTex:
 
 aOptionsEraseAllSavedDataTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2629A8
+  offset: 0x25D428
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8219,7 +8219,7 @@ aOptionsEraseAllSavedDataTex:
 
 aMenuWithoutTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x262ED0
+  offset: 0x25D928
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8230,7 +8230,7 @@ aMenuWithoutTex:
 
 aMenuWithTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x262FB4
+  offset: 0x25D9D0
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8241,7 +8241,7 @@ aMenuWithTex:
 
 aOptionsExitTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2630C8
+  offset: 0x25DA78
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8252,7 +8252,7 @@ aOptionsExitTex:
 
 aMenuPlusOneTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x263190
+  offset: 0x25DB40
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8263,7 +8263,7 @@ aMenuPlusOneTex:
 
 aMenuPlusTwoTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x263230
+  offset: 0x25DBE0
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8274,7 +8274,7 @@ aMenuPlusTwoTex:
 
 aMenuStereoTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2632E8
+  offset: 0x25DC98
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8285,7 +8285,7 @@ aMenuStereoTex:
 
 aMenuMonoTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2634A4
+  offset: 0x25DDA0
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8296,7 +8296,7 @@ aMenuMonoTex:
 
 aMenuLeftArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x263648
+  offset: 0x25DE8C
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8307,7 +8307,7 @@ aMenuLeftArrowTex:
 
 aMenuRightArrowTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x26369C
+  offset: 0x25DEE0
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8318,7 +8318,7 @@ aMenuRightArrowTex:
 
 aMenuYesTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2636F0
+  offset: 0x25DF34
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8329,7 +8329,7 @@ aMenuYesTex:
 
 aMenuNoTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2637DC
+  offset: 0x25E00C
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8340,7 +8340,7 @@ aMenuNoTex:
 
 aMenuCannotSaveGhostTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x2638B4
+  offset: 0x25E0E0
   ctype: u8
   format: CI8
   tlut: 0xF25F070
@@ -8351,7 +8351,7 @@ aMenuCannotSaveGhostTex:
 
 aOptionsCopyingGhostTex:
   type: COMPRESSED_TEXTURE
-  offset: 0x263DA8
+  offset: 0x25E5AC
   ctype: u8
   format: CI8
   tlut: 0xF25F070
