@@ -260,11 +260,11 @@ unk_80077D50 sFont4WCompTexInfo[] = { { 4, aFont4WTex, 8, 8, 0 }, { 0 } };
 unk_80077D50 sFont4XCompTexInfo[] = { { 4, aFont4XTex, 8, 8, 0 }, { 0 } };
 unk_80077D50 sFont4YCompTexInfo[] = { { 4, aFont4YTex, 8, 8, 0 }, { 0 } };
 unk_80077D50 sFont4ZCompTexInfo[] = { { 4, aFont4ZTex, 8, 8, 0 }, { 0 } };
-#endif
 unk_80077D50 sFont4LowerCCompTexInfo[] = { { 4, aFont4LowerCTex, 8, 8, 0 }, { 0 } };
 unk_80077D50 sFont4LowerRCompTexInfo[] = { { 4, aFont4LowerRTex, 8, 8, 0 }, { 0 } };
 unk_80077D50 sFont4LowerSCompTexInfo[] = { { 4, aFont4LowerSTex, 8, 8, 0 }, { 0 } };
 unk_80077D50 sFont4PeriodCompTexInfo[] = { { 4, aFont4PeriodTex, 8, 8, 0 }, { 0 } };
+#endif
 unk_80077D50 sFont4KatakanaACompTexInfo[] = { { 4, aFont4KatakanaATex, 8, 8, 0 }, { 0 } };
 unk_80077D50 sFont4KatakanaICompTexInfo[] = { { 4, aFont4KatakanaITex, 8, 8, 0 }, { 0 } };
 unk_80077D50 sFont4KatakanaUCompTexInfo[] = { { 4, aFont4KatakanaUTex, 8, 8, 0 }, { 0 } };
@@ -416,7 +416,7 @@ unk_80077D50* sFont4CompTexInfos[] = {
     sFont4ACompTexInfo,
     sFont4KatakanaDigraphACompTexInfo,
     sFont4KatakanaACompTexInfo,
-    sFont4LowerCCompTexInfo,
+    sFont4KatakanaDigraphICompTexInfo,
     sFont4KatakanaICompTexInfo,
     sFont4KatakanaUCompTexInfo,
     sFont4KatakanaUCompTexInfo,
@@ -431,8 +431,8 @@ unk_80077D50* sFont4CompTexInfos[] = {
     sFont4KatakanaKuCompTexInfo,
     sFont4KatakanaGuCompTexInfo,
     sFont4KatakanaKeCompTexInfo,
-    sFont4LowerRCompTexInfo,
-    sFont4LowerSCompTexInfo,
+    sFont4KatakanaGeCompTexInfo,
+    sFont4KatakanaKoCompTexInfo,
     sFont4KatakanaGoCompTexInfo,
     sFont4KatakanaSaCompTexInfo,
     sFont4KatakanaZaCompTexInfo,

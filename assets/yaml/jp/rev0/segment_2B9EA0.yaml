@@ -105,7 +105,7 @@ aCopyrightTex:
 
 pad_segment_2B9EA0_F033AA4:
   type: BLOB
-  offset: 0x33AA4
+  offset: 0x34114
   size: 0x10
   symbol: pad_segment_2B9EA0_F033AA4
 
@@ -451,7 +451,7 @@ aFullPortraitBackgroundTex:
 
 pad_segment_2B9EA0_F0FF154:
   type: BLOB
-  offset: 0xFF154
+  offset: 0xFF7C4
   size: 0x10
   symbol: pad_segment_2B9EA0_F0FF154
 
@@ -1147,12 +1147,12 @@ aNameCardTheSkullTex:
 
 D_F11D3C0:
   type: GFX
-  offset: 0x11D3C0
+  offset: 0x11DD80
   symbol: D_F11D3C0
 
 aSelectMachineTex:
   type: TEXTURE
-  offset: 0x11D3C8
+  offset: 0x11DD88
   ctype: u8
   format: I4
   width: 160
@@ -2481,7 +2481,7 @@ aFont2Num9Tex:
 
 aFont3ATex:
   type: TEXTURE
-  offset: 0x123D34
+  offset: 0x124C74
   ctype: u8
   format: I4
   width: 16
@@ -2490,7 +2490,7 @@ aFont3ATex:
 
 aFont3BTex:
   type: TEXTURE
-  offset: 0x123DB4
+  offset: 0x124CF4
   ctype: u8
   format: I4
   width: 16
@@ -2499,7 +2499,7 @@ aFont3BTex:
 
 aFont3CTex:
   type: TEXTURE
-  offset: 0x123E34
+  offset: 0x124D74
   ctype: u8
   format: I4
   width: 16
@@ -2508,7 +2508,7 @@ aFont3CTex:
 
 aFont3DTex:
   type: TEXTURE
-  offset: 0x123EB4
+  offset: 0x124DF4
   ctype: u8
   format: I4
   width: 16
@@ -2517,7 +2517,7 @@ aFont3DTex:
 
 aFont3ETex:
   type: TEXTURE
-  offset: 0x123F34
+  offset: 0x124E74
   ctype: u8
   format: I4
   width: 16
@@ -2526,7 +2526,7 @@ aFont3ETex:
 
 aFont3FTex:
   type: TEXTURE
-  offset: 0x123FB4
+  offset: 0x124EF4
   ctype: u8
   format: I4
   width: 16
@@ -2535,7 +2535,7 @@ aFont3FTex:
 
 aFont3GTex:
   type: TEXTURE
-  offset: 0x124034
+  offset: 0x124F74
   ctype: u8
   format: I4
   width: 16
@@ -2544,7 +2544,7 @@ aFont3GTex:
 
 aFont3HTex:
   type: TEXTURE
-  offset: 0x1240B4
+  offset: 0x124FF4
   ctype: u8
   format: I4
   width: 16
@@ -2553,7 +2553,7 @@ aFont3HTex:
 
 aFont3ITex:
   type: TEXTURE
-  offset: 0x124134
+  offset: 0x125074
   ctype: u8
   format: I4
   width: 16
@@ -2562,7 +2562,7 @@ aFont3ITex:
 
 aFont3JTex:
   type: TEXTURE
-  offset: 0x1241B4
+  offset: 0x1250F4
   ctype: u8
   format: I4
   width: 16
@@ -2571,7 +2571,7 @@ aFont3JTex:
 
 aFont3KTex:
   type: TEXTURE
-  offset: 0x124234
+  offset: 0x125174
   ctype: u8
   format: I4
   width: 16
@@ -2580,7 +2580,7 @@ aFont3KTex:
 
 aFont3LTex:
   type: TEXTURE
-  offset: 0x1242B4
+  offset: 0x1251F4
   ctype: u8
   format: I4
   width: 16
@@ -2589,7 +2589,7 @@ aFont3LTex:
 
 aFont3MTex:
   type: TEXTURE
-  offset: 0x124334
+  offset: 0x125274
   ctype: u8
   format: I4
   width: 16
@@ -2598,7 +2598,7 @@ aFont3MTex:
 
 aFont3NTex:
   type: TEXTURE
-  offset: 0x1243B4
+  offset: 0x1252F4
   ctype: u8
   format: I4
   width: 16
@@ -2607,7 +2607,7 @@ aFont3NTex:
 
 aFont3OTex:
   type: TEXTURE
-  offset: 0x124434
+  offset: 0x125374
   ctype: u8
   format: I4
   width: 16
@@ -2616,7 +2616,7 @@ aFont3OTex:
 
 aFont3PTex:
   type: TEXTURE
-  offset: 0x1244B4
+  offset: 0x1253F4
   ctype: u8
   format: I4
   width: 16
@@ -2625,7 +2625,7 @@ aFont3PTex:
 
 aFont3QTex:
   type: TEXTURE
-  offset: 0x124534
+  offset: 0x125474
   ctype: u8
   format: I4
   width: 16
@@ -2634,7 +2634,7 @@ aFont3QTex:
 
 aFont3RTex:
   type: TEXTURE
-  offset: 0x1245B4
+  offset: 0x1254F4
   ctype: u8
   format: I4
   width: 16
@@ -2643,7 +2643,7 @@ aFont3RTex:
 
 aFont3STex:
   type: TEXTURE
-  offset: 0x124634
+  offset: 0x125574
   ctype: u8
   format: I4
   width: 16
@@ -2652,7 +2652,7 @@ aFont3STex:
 
 aFont3TTex:
   type: TEXTURE
-  offset: 0x1246B4
+  offset: 0x1255F4
   ctype: u8
   format: I4
   width: 16
@@ -2661,7 +2661,7 @@ aFont3TTex:
 
 aFont3UTex:
   type: TEXTURE
-  offset: 0x124734
+  offset: 0x125674
   ctype: u8
   format: I4
   width: 16
@@ -2670,7 +2670,7 @@ aFont3UTex:
 
 aFont3VTex:
   type: TEXTURE
-  offset: 0x1247B4
+  offset: 0x1256F4
   ctype: u8
   format: I4
   width: 16
@@ -2679,7 +2679,7 @@ aFont3VTex:
 
 aFont3WTex:
   type: TEXTURE
-  offset: 0x124834
+  offset: 0x125774
   ctype: u8
   format: I4
   width: 16
@@ -2688,7 +2688,7 @@ aFont3WTex:
 
 aFont3XTex:
   type: TEXTURE
-  offset: 0x1248B4
+  offset: 0x1257F4
   ctype: u8
   format: I4
   width: 16
@@ -2697,7 +2697,7 @@ aFont3XTex:
 
 aFont3YTex:
   type: TEXTURE
-  offset: 0x124934
+  offset: 0x125874
   ctype: u8
   format: I4
   width: 16
@@ -2706,7 +2706,7 @@ aFont3YTex:
 
 aFont3ZTex:
   type: TEXTURE
-  offset: 0x1249B4
+  offset: 0x1258F4
   ctype: u8
   format: I4
   width: 16
@@ -2715,7 +2715,7 @@ aFont3ZTex:
 
 aFont3AlphaTex:
   type: TEXTURE
-  offset: 0x124A34
+  offset: 0x125974
   ctype: u8
   format: I4
   width: 16
@@ -2724,7 +2724,7 @@ aFont3AlphaTex:
 
 aFont3BetaTex:
   type: TEXTURE
-  offset: 0x124AB4
+  offset: 0x1259F4
   ctype: u8
   format: I4
   width: 16
@@ -2733,7 +2733,7 @@ aFont3BetaTex:
 
 aFont3GammaTex:
   type: TEXTURE
-  offset: 0x124B34
+  offset: 0x125A74
   ctype: u8
   format: I4
   width: 16
@@ -2742,7 +2742,7 @@ aFont3GammaTex:
 
 aFont3PrimeTex:
   type: TEXTURE
-  offset: 0x124BB4
+  offset: 0x125AF4
   ctype: u8
   format: I4
   width: 16
@@ -2751,7 +2751,7 @@ aFont3PrimeTex:
 
 aFont3EllipsisTex:
   type: TEXTURE
-  offset: 0x124C34
+  offset: 0x125B74
   ctype: u8
   format: I4
   width: 16
@@ -2760,7 +2760,7 @@ aFont3EllipsisTex:
 
 aFont3ColonTex:
   type: TEXTURE
-  offset: 0x124CB4
+  offset: 0x125BF4
   ctype: u8
   format: I4
   width: 16
@@ -2769,7 +2769,7 @@ aFont3ColonTex:
 
 aFont3PeriodTex:
   type: TEXTURE
-  offset: 0x124D34
+  offset: 0x125C74
   ctype: u8
   format: I4
   width: 16
@@ -2778,7 +2778,7 @@ aFont3PeriodTex:
 
 aFont3AmpersandTex:
   type: TEXTURE
-  offset: 0x124DB4
+  offset: 0x125CF4
   ctype: u8
   format: I4
   width: 16
@@ -2787,7 +2787,7 @@ aFont3AmpersandTex:
 
 aFont3CommaTex:
   type: TEXTURE
-  offset: 0x124E34
+  offset: 0x125D74
   ctype: u8
   format: I4
   width: 16
@@ -2796,7 +2796,7 @@ aFont3CommaTex:
 
 aFont3DashTex:
   type: TEXTURE
-  offset: 0x124EB4
+  offset: 0x125DF4
   ctype: u8
   format: I4
   width: 16
@@ -2805,7 +2805,7 @@ aFont3DashTex:
 
 aFont3Num0Tex:
   type: TEXTURE
-  offset: 0x124F34
+  offset: 0x125E74
   ctype: u8
   format: I4
   width: 16
@@ -2814,7 +2814,7 @@ aFont3Num0Tex:
 
 aFont3Num1Tex:
   type: TEXTURE
-  offset: 0x124FB4
+  offset: 0x125EF4
   ctype: u8
   format: I4
   width: 16
@@ -2823,7 +2823,7 @@ aFont3Num1Tex:
 
 aFont3Num2Tex:
   type: TEXTURE
-  offset: 0x125034
+  offset: 0x125F74
   ctype: u8
   format: I4
   width: 16
@@ -2832,7 +2832,7 @@ aFont3Num2Tex:
 
 aFont3Num3Tex:
   type: TEXTURE
-  offset: 0x1250B4
+  offset: 0x125FF4
   ctype: u8
   format: I4
   width: 16
@@ -2841,7 +2841,7 @@ aFont3Num3Tex:
 
 aFont3Num4Tex:
   type: TEXTURE
-  offset: 0x125134
+  offset: 0x126074
   ctype: u8
   format: I4
   width: 16
@@ -2850,7 +2850,7 @@ aFont3Num4Tex:
 
 aFont3Num5Tex:
   type: TEXTURE
-  offset: 0x1251B4
+  offset: 0x1260F4
   ctype: u8
   format: I4
   width: 16
@@ -2859,7 +2859,7 @@ aFont3Num5Tex:
 
 aFont3Num6Tex:
   type: TEXTURE
-  offset: 0x125234
+  offset: 0x126174
   ctype: u8
   format: I4
   width: 16
@@ -2868,7 +2868,7 @@ aFont3Num6Tex:
 
 aFont3Num7Tex:
   type: TEXTURE
-  offset: 0x1252B4
+  offset: 0x1261F4
   ctype: u8
   format: I4
   width: 16
@@ -2877,7 +2877,7 @@ aFont3Num7Tex:
 
 aFont3Num8Tex:
   type: TEXTURE
-  offset: 0x125334
+  offset: 0x126274
   ctype: u8
   format: I4
   width: 16
@@ -2886,7 +2886,7 @@ aFont3Num8Tex:
 
 aFont3Num9Tex:
   type: TEXTURE
-  offset: 0x1253B4
+  offset: 0x1262F4
   ctype: u8
   format: I4
   width: 16
@@ -2895,7 +2895,7 @@ aFont3Num9Tex:
 
 aFont4ATex:
   type: TEXTURE
-  offset: 0x125434
+  offset: 0x126374
   ctype: u8
   format: I4
   width: 16
@@ -2904,7 +2904,7 @@ aFont4ATex:
 
 aFont4DTex:
   type: TEXTURE
-  offset: 0x125474
+  offset: 0x1263B4
   ctype: u8
   format: I4
   width: 16
@@ -2913,7 +2913,7 @@ aFont4DTex:
 
 aFont4ETex:
   type: TEXTURE
-  offset: 0x1254B4
+  offset: 0x1263F4
   ctype: u8
   format: I4
   width: 16
@@ -2922,7 +2922,7 @@ aFont4ETex:
 
 aFont4MTex:
   type: TEXTURE
-  offset: 0x1254F4
+  offset: 0x126434
   ctype: u8
   format: I4
   width: 16
@@ -2931,250 +2931,16 @@ aFont4MTex:
 
 aFont4AmpersandTex:
   type: TEXTURE
-  offset: 0x125534
+  offset: 0x126474
   ctype: u8
   format: I4
   width: 16
   height: 8
   symbol: aFont4AmpersandTex
 
-aFont4BTex:
-  type: TEXTURE
-  offset: 0x125574
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4BTex
-
-aFont4CTex:
-  type: TEXTURE
-  offset: 0x1255B4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4CTex
-
-aFont4FTex:
-  type: TEXTURE
-  offset: 0x1255F4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4FTex
-
-aFont4GTex:
-  type: TEXTURE
-  offset: 0x125634
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4GTex
-
-aFont4HTex:
-  type: TEXTURE
-  offset: 0x125674
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4HTex
-
-aFont4ITex:
-  type: TEXTURE
-  offset: 0x1256B4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4ITex
-
-aFont4JTex:
-  type: TEXTURE
-  offset: 0x1256F4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4JTex
-
-aFont4KTex:
-  type: TEXTURE
-  offset: 0x125734
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4KTex
-
-aFont4LTex:
-  type: TEXTURE
-  offset: 0x125774
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4LTex
-
-aFont4NTex:
-  type: TEXTURE
-  offset: 0x1257B4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4NTex
-
-aFont4OTex:
-  type: TEXTURE
-  offset: 0x1257F4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4OTex
-
-aFont4PTex:
-  type: TEXTURE
-  offset: 0x125834
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4PTex
-
-aFont4QTex:
-  type: TEXTURE
-  offset: 0x125874
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4QTex
-
-aFont4RTex:
-  type: TEXTURE
-  offset: 0x1258B4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4RTex
-
-aFont4STex:
-  type: TEXTURE
-  offset: 0x1258F4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4STex
-
-aFont4TTex:
-  type: TEXTURE
-  offset: 0x125934
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4TTex
-
-aFont4UTex:
-  type: TEXTURE
-  offset: 0x125974
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4UTex
-
-aFont4VTex:
-  type: TEXTURE
-  offset: 0x1259B4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4VTex
-
-aFont4WTex:
-  type: TEXTURE
-  offset: 0x1259F4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4WTex
-
-aFont4XTex:
-  type: TEXTURE
-  offset: 0x125A34
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4XTex
-
-aFont4YTex:
-  type: TEXTURE
-  offset: 0x125A74
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4YTex
-
-aFont4ZTex:
-  type: TEXTURE
-  offset: 0x125AB4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4ZTex
-
-aFont4LowerCTex:
-  type: TEXTURE
-  offset: 0x125AF4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4LowerCTex
-
-aFont4LowerRTex:
-  type: TEXTURE
-  offset: 0x125B34
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4LowerRTex
-
-aFont4LowerSTex:
-  type: TEXTURE
-  offset: 0x125B74
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4LowerSTex
-
-aFont4PeriodTex:
-  type: TEXTURE
-  offset: 0x125BB4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4PeriodTex
-
 aFont4KatakanaATex:
   type: TEXTURE
-  offset: 0x125BF4
+  offset: 0x1264B4
   ctype: u8
   format: I4
   width: 16
@@ -3183,7 +2949,7 @@ aFont4KatakanaATex:
 
 aFont4KatakanaITex:
   type: TEXTURE
-  offset: 0x125C34
+  offset: 0x1264F4
   ctype: u8
   format: I4
   width: 16
@@ -3192,7 +2958,7 @@ aFont4KatakanaITex:
 
 aFont4KatakanaUTex:
   type: TEXTURE
-  offset: 0x125C74
+  offset: 0x126534
   ctype: u8
   format: I4
   width: 16
@@ -3201,7 +2967,7 @@ aFont4KatakanaUTex:
 
 aFont4KatakanaETex:
   type: TEXTURE
-  offset: 0x125CB4
+  offset: 0x126574
   ctype: u8
   format: I4
   width: 16
@@ -3210,7 +2976,7 @@ aFont4KatakanaETex:
 
 aFont4KatakanaOTex:
   type: TEXTURE
-  offset: 0x125CF4
+  offset: 0x1265B4
   ctype: u8
   format: I4
   width: 16
@@ -3219,7 +2985,7 @@ aFont4KatakanaOTex:
 
 aFont4KatakanaKaTex:
   type: TEXTURE
-  offset: 0x125D34
+  offset: 0x1265F4
   ctype: u8
   format: I4
   width: 16
@@ -3228,7 +2994,7 @@ aFont4KatakanaKaTex:
 
 aFont4KatakanaKiTex:
   type: TEXTURE
-  offset: 0x125D74
+  offset: 0x126634
   ctype: u8
   format: I4
   width: 16
@@ -3237,7 +3003,7 @@ aFont4KatakanaKiTex:
 
 aFont4KatakanaKuTex:
   type: TEXTURE
-  offset: 0x125DB4
+  offset: 0x126674
   ctype: u8
   format: I4
   width: 16
@@ -3246,7 +3012,7 @@ aFont4KatakanaKuTex:
 
 aFont4KatakanaKeTex:
   type: TEXTURE
-  offset: 0x125DF4
+  offset: 0x1266B4
   ctype: u8
   format: I4
   width: 16
@@ -3255,7 +3021,7 @@ aFont4KatakanaKeTex:
 
 aFont4KatakanaKoTex:
   type: TEXTURE
-  offset: 0x125E34
+  offset: 0x1266F4
   ctype: u8
   format: I4
   width: 16
@@ -3264,7 +3030,7 @@ aFont4KatakanaKoTex:
 
 aFont4KatakanaSaTex:
   type: TEXTURE
-  offset: 0x125E74
+  offset: 0x126734
   ctype: u8
   format: I4
   width: 16
@@ -3273,7 +3039,7 @@ aFont4KatakanaSaTex:
 
 aFont4KatakanaShiTex:
   type: TEXTURE
-  offset: 0x125EB4
+  offset: 0x126774
   ctype: u8
   format: I4
   width: 16
@@ -3282,7 +3048,7 @@ aFont4KatakanaShiTex:
 
 aFont4KatakanaSuTex:
   type: TEXTURE
-  offset: 0x125EF4
+  offset: 0x1267B4
   ctype: u8
   format: I4
   width: 16
@@ -3291,7 +3057,7 @@ aFont4KatakanaSuTex:
 
 aFont4KatakanaSeTex:
   type: TEXTURE
-  offset: 0x125F34
+  offset: 0x1267F4
   ctype: u8
   format: I4
   width: 16
@@ -3300,7 +3066,7 @@ aFont4KatakanaSeTex:
 
 aFont4KatakanaSoTex:
   type: TEXTURE
-  offset: 0x125F74
+  offset: 0x126834
   ctype: u8
   format: I4
   width: 16
@@ -3309,7 +3075,7 @@ aFont4KatakanaSoTex:
 
 aFont4KatakanaTaTex:
   type: TEXTURE
-  offset: 0x125FB4
+  offset: 0x126874
   ctype: u8
   format: I4
   width: 16
@@ -3318,7 +3084,7 @@ aFont4KatakanaTaTex:
 
 aFont4KatakanaChiTex:
   type: TEXTURE
-  offset: 0x125FF4
+  offset: 0x1268B4
   ctype: u8
   format: I4
   width: 16
@@ -3327,7 +3093,7 @@ aFont4KatakanaChiTex:
 
 aFont4KatakanaTsuTex:
   type: TEXTURE
-  offset: 0x126034
+  offset: 0x1268F4
   ctype: u8
   format: I4
   width: 16
@@ -3336,7 +3102,7 @@ aFont4KatakanaTsuTex:
 
 aFont4KatakanaTeTex:
   type: TEXTURE
-  offset: 0x1260B4
+  offset: 0x126934
   ctype: u8
   format: I4
   width: 16
@@ -3345,7 +3111,7 @@ aFont4KatakanaTeTex:
 
 aFont4KatakanaToTex:
   type: TEXTURE
-  offset: 0x1260F4
+  offset: 0x126974
   ctype: u8
   format: I4
   width: 16
@@ -3354,7 +3120,7 @@ aFont4KatakanaToTex:
 
 aFont4KatakanaSoukonTex:
   type: TEXTURE
-  offset: 0x126074
+  offset: 0x1269B4
   ctype: u8
   format: I4
   width: 16
@@ -3363,7 +3129,7 @@ aFont4KatakanaSoukonTex:
 
 aFont4KatakanaNaTex:
   type: TEXTURE
-  offset: 0x126134
+  offset: 0x1269F4
   ctype: u8
   format: I4
   width: 16
@@ -3372,7 +3138,7 @@ aFont4KatakanaNaTex:
 
 aFont4KatakanaNiTex:
   type: TEXTURE
-  offset: 0x126174
+  offset: 0x126A34
   ctype: u8
   format: I4
   width: 16
@@ -3381,7 +3147,7 @@ aFont4KatakanaNiTex:
 
 aFont4KatakanaNuTex:
   type: TEXTURE
-  offset: 0x1261B4
+  offset: 0x126A74
   ctype: u8
   format: I4
   width: 16
@@ -3390,7 +3156,7 @@ aFont4KatakanaNuTex:
 
 aFont4KatakanaNeTex:
   type: TEXTURE
-  offset: 0x1261F4
+  offset: 0x126AB4
   ctype: u8
   format: I4
   width: 16
@@ -3399,7 +3165,7 @@ aFont4KatakanaNeTex:
 
 aFont4KatakanaNoTex:
   type: TEXTURE
-  offset: 0x126234
+  offset: 0x126AF4
   ctype: u8
   format: I4
   width: 16
@@ -3408,7 +3174,7 @@ aFont4KatakanaNoTex:
 
 aFont4KatakanaHaTex:
   type: TEXTURE
-  offset: 0x126274
+  offset: 0x126B34
   ctype: u8
   format: I4
   width: 16
@@ -3417,7 +3183,7 @@ aFont4KatakanaHaTex:
 
 aFont4KatakanaHiTex:
   type: TEXTURE
-  offset: 0x1262B4
+  offset: 0x126B74
   ctype: u8
   format: I4
   width: 16
@@ -3426,7 +3192,7 @@ aFont4KatakanaHiTex:
 
 aFont4KatakanaFuTex:
   type: TEXTURE
-  offset: 0x1262F4
+  offset: 0x126BB4
   ctype: u8
   format: I4
   width: 16
@@ -3435,7 +3201,7 @@ aFont4KatakanaFuTex:
 
 aFont4KatakanaHeTex:
   type: TEXTURE
-  offset: 0x126334
+  offset: 0x126BF4
   ctype: u8
   format: I4
   width: 16
@@ -3444,7 +3210,7 @@ aFont4KatakanaHeTex:
 
 aFont4KatakanaHoTex:
   type: TEXTURE
-  offset: 0x126374
+  offset: 0x126C34
   ctype: u8
   format: I4
   width: 16
@@ -3453,7 +3219,7 @@ aFont4KatakanaHoTex:
 
 aFont4KatakanaMaTex:
   type: TEXTURE
-  offset: 0x1263B4
+  offset: 0x126C74
   ctype: u8
   format: I4
   width: 16
@@ -3462,7 +3228,7 @@ aFont4KatakanaMaTex:
 
 aFont4KatakanaMiTex:
   type: TEXTURE
-  offset: 0x1263F4
+  offset: 0x126CB4
   ctype: u8
   format: I4
   width: 16
@@ -3471,7 +3237,7 @@ aFont4KatakanaMiTex:
 
 aFont4KatakanaMuTex:
   type: TEXTURE
-  offset: 0x126434
+  offset: 0x126CF4
   ctype: u8
   format: I4
   width: 16
@@ -3480,7 +3246,7 @@ aFont4KatakanaMuTex:
 
 aFont4KatakanaMeTex:
   type: TEXTURE
-  offset: 0x126474
+  offset: 0x126D34
   ctype: u8
   format: I4
   width: 16
@@ -3489,7 +3255,7 @@ aFont4KatakanaMeTex:
 
 aFont4KatakanaMoTex:
   type: TEXTURE
-  offset: 0x1264B4
+  offset: 0x126D74
   ctype: u8
   format: I4
   width: 16
@@ -3498,7 +3264,7 @@ aFont4KatakanaMoTex:
 
 aFont4KatakanaYaTex:
   type: TEXTURE
-  offset: 0x1264F4
+  offset: 0x126DB4
   ctype: u8
   format: I4
   width: 16
@@ -3507,7 +3273,7 @@ aFont4KatakanaYaTex:
 
 aFont4KatakanaYuTex:
   type: TEXTURE
-  offset: 0x126534
+  offset: 0x126DF4
   ctype: u8
   format: I4
   width: 16
@@ -3516,7 +3282,7 @@ aFont4KatakanaYuTex:
 
 aFont4KatakanaYoTex:
   type: TEXTURE
-  offset: 0x126574
+  offset: 0x126E34
   ctype: u8
   format: I4
   width: 16
@@ -3525,7 +3291,7 @@ aFont4KatakanaYoTex:
 
 aFont4KatakanaYoonYaTex:
   type: TEXTURE
-  offset: 0x1265B4
+  offset: 0x126E74
   ctype: u8
   format: I4
   width: 16
@@ -3534,7 +3300,7 @@ aFont4KatakanaYoonYaTex:
 
 aFont4KatakanaYoonYuTex:
   type: TEXTURE
-  offset: 0x1265F4
+  offset: 0x126EB4
   ctype: u8
   format: I4
   width: 16
@@ -3543,7 +3309,7 @@ aFont4KatakanaYoonYuTex:
 
 aFont4KatakanaYoonYoTex:
   type: TEXTURE
-  offset: 0x126634
+  offset: 0x126EF4
   ctype: u8
   format: I4
   width: 16
@@ -3552,7 +3318,7 @@ aFont4KatakanaYoonYoTex:
 
 aFont4KatakanaRaTex:
   type: TEXTURE
-  offset: 0x126674
+  offset: 0x126F34
   ctype: u8
   format: I4
   width: 16
@@ -3561,7 +3327,7 @@ aFont4KatakanaRaTex:
 
 aFont4KatakanaRiTex:
   type: TEXTURE
-  offset: 0x1266B4
+  offset: 0x126F74
   ctype: u8
   format: I4
   width: 16
@@ -3570,7 +3336,7 @@ aFont4KatakanaRiTex:
 
 aFont4KatakanaRuTex:
   type: TEXTURE
-  offset: 0x1266F4
+  offset: 0x126FB4
   ctype: u8
   format: I4
   width: 16
@@ -3579,7 +3345,7 @@ aFont4KatakanaRuTex:
 
 aFont4KatakanaReTex:
   type: TEXTURE
-  offset: 0x126734
+  offset: 0x126FF4
   ctype: u8
   format: I4
   width: 16
@@ -3588,7 +3354,7 @@ aFont4KatakanaReTex:
 
 aFont4KatakanaRoTex:
   type: TEXTURE
-  offset: 0x126774
+  offset: 0x127034
   ctype: u8
   format: I4
   width: 16
@@ -3597,7 +3363,7 @@ aFont4KatakanaRoTex:
 
 aFont4KatakanaWaTex:
   type: TEXTURE
-  offset: 0x1267B4
+  offset: 0x127074
   ctype: u8
   format: I4
   width: 16
@@ -3606,7 +3372,7 @@ aFont4KatakanaWaTex:
 
 aFont4KatakanaWoTex:
   type: TEXTURE
-  offset: 0x1267F4
+  offset: 0x1270B4
   ctype: u8
   format: I4
   width: 16
@@ -3615,7 +3381,7 @@ aFont4KatakanaWoTex:
 
 aFont4KatakanaNTex:
   type: TEXTURE
-  offset: 0x126834
+  offset: 0x1270F4
   ctype: u8
   format: I4
   width: 16
@@ -3624,7 +3390,7 @@ aFont4KatakanaNTex:
 
 aFont4KatakanaGaTex:
   type: TEXTURE
-  offset: 0x126874
+  offset: 0x127134
   ctype: u8
   format: I4
   width: 16
@@ -3633,7 +3399,7 @@ aFont4KatakanaGaTex:
 
 aFont4KatakanaGiTex:
   type: TEXTURE
-  offset: 0x1268B4
+  offset: 0x127174
   ctype: u8
   format: I4
   width: 16
@@ -3642,7 +3408,7 @@ aFont4KatakanaGiTex:
 
 aFont4KatakanaGuTex:
   type: TEXTURE
-  offset: 0x1268F4
+  offset: 0x1271B4
   ctype: u8
   format: I4
   width: 16
@@ -3651,7 +3417,7 @@ aFont4KatakanaGuTex:
 
 aFont4KatakanaGeTex:
   type: TEXTURE
-  offset: 0x126934
+  offset: 0x1271F4
   ctype: u8
   format: I4
   width: 16
@@ -3660,7 +3426,7 @@ aFont4KatakanaGeTex:
 
 aFont4KatakanaGoTex:
   type: TEXTURE
-  offset: 0x126974
+  offset: 0x127234
   ctype: u8
   format: I4
   width: 16
@@ -3669,7 +3435,7 @@ aFont4KatakanaGoTex:
 
 aFont4KatakanaZaTex:
   type: TEXTURE
-  offset: 0x1269B4
+  offset: 0x127274
   ctype: u8
   format: I4
   width: 16
@@ -3678,7 +3444,7 @@ aFont4KatakanaZaTex:
 
 aFont4KatakanaJiTex:
   type: TEXTURE
-  offset: 0x1269F4
+  offset: 0x1272B4
   ctype: u8
   format: I4
   width: 16
@@ -3687,7 +3453,7 @@ aFont4KatakanaJiTex:
 
 aFont4KatakanaZuTex:
   type: TEXTURE
-  offset: 0x126A34
+  offset: 0x1272F4
   ctype: u8
   format: I4
   width: 16
@@ -3696,7 +3462,7 @@ aFont4KatakanaZuTex:
 
 aFont4KatakanaZeTex:
   type: TEXTURE
-  offset: 0x126A74
+  offset: 0x127334
   ctype: u8
   format: I4
   width: 16
@@ -3705,7 +3471,7 @@ aFont4KatakanaZeTex:
 
 aFont4KatakanaZoTex:
   type: TEXTURE
-  offset: 0x126AB4
+  offset: 0x127374
   ctype: u8
   format: I4
   width: 16
@@ -3714,7 +3480,7 @@ aFont4KatakanaZoTex:
 
 aFont4KatakanaDaTex:
   type: TEXTURE
-  offset: 0x126AF4
+  offset: 0x1273B4
   ctype: u8
   format: I4
   width: 16
@@ -3723,7 +3489,7 @@ aFont4KatakanaDaTex:
 
 aFont4KatakanaDjiTex:
   type: TEXTURE
-  offset: 0x126B34
+  offset: 0x1273F4
   ctype: u8
   format: I4
   width: 16
@@ -3732,7 +3498,7 @@ aFont4KatakanaDjiTex:
 
 aFont4KatakanaDzuTex:
   type: TEXTURE
-  offset: 0x126B74
+  offset: 0x127434
   ctype: u8
   format: I4
   width: 16
@@ -3741,7 +3507,7 @@ aFont4KatakanaDzuTex:
 
 aFont4KatakanaDeTex:
   type: TEXTURE
-  offset: 0x126BB4
+  offset: 0x127474
   ctype: u8
   format: I4
   width: 16
@@ -3750,7 +3516,7 @@ aFont4KatakanaDeTex:
 
 aFont4KatakanaDoTex:
   type: TEXTURE
-  offset: 0x126BF4
+  offset: 0x1274B4
   ctype: u8
   format: I4
   width: 16
@@ -3759,7 +3525,7 @@ aFont4KatakanaDoTex:
 
 aFont4KatakanaBaTex:
   type: TEXTURE
-  offset: 0x126C34
+  offset: 0x1274F4
   ctype: u8
   format: I4
   width: 16
@@ -3768,7 +3534,7 @@ aFont4KatakanaBaTex:
 
 aFont4KatakanaBiTex:
   type: TEXTURE
-  offset: 0x126C74
+  offset: 0x127534
   ctype: u8
   format: I4
   width: 16
@@ -3777,7 +3543,7 @@ aFont4KatakanaBiTex:
 
 aFont4KatakanaBuTex:
   type: TEXTURE
-  offset: 0x126CB4
+  offset: 0x127574
   ctype: u8
   format: I4
   width: 16
@@ -3786,7 +3552,7 @@ aFont4KatakanaBuTex:
 
 aFont4KatakanaBeTex:
   type: TEXTURE
-  offset: 0x126CF4
+  offset: 0x1275B4
   ctype: u8
   format: I4
   width: 16
@@ -3795,7 +3561,7 @@ aFont4KatakanaBeTex:
 
 aFont4KatakanaBoTex:
   type: TEXTURE
-  offset: 0x126D34
+  offset: 0x1275F4
   ctype: u8
   format: I4
   width: 16
@@ -3804,7 +3570,7 @@ aFont4KatakanaBoTex:
 
 aFont4KatakanaPaTex:
   type: TEXTURE
-  offset: 0x126D74
+  offset: 0x127634
   ctype: u8
   format: I4
   width: 16
@@ -3813,7 +3579,7 @@ aFont4KatakanaPaTex:
 
 aFont4KatakanaPiTex:
   type: TEXTURE
-  offset: 0x126DB4
+  offset: 0x127674
   ctype: u8
   format: I4
   width: 16
@@ -3822,7 +3588,7 @@ aFont4KatakanaPiTex:
 
 aFont4KatakanaPuTex:
   type: TEXTURE
-  offset: 0x126DF4
+  offset: 0x1276B4
   ctype: u8
   format: I4
   width: 16
@@ -3831,7 +3597,7 @@ aFont4KatakanaPuTex:
 
 aFont4KatakanaPeTex:
   type: TEXTURE
-  offset: 0x126E34
+  offset: 0x1276F4
   ctype: u8
   format: I4
   width: 16
@@ -3840,7 +3606,7 @@ aFont4KatakanaPeTex:
 
 aFont4KatakanaPoTex:
   type: TEXTURE
-  offset: 0x126E74
+  offset: 0x127734
   ctype: u8
   format: I4
   width: 16
@@ -3849,7 +3615,7 @@ aFont4KatakanaPoTex:
 
 aFont4KatakanaDigraphATex:
   type: TEXTURE
-  offset: 0x126EB4
+  offset: 0x127774
   ctype: u8
   format: I4
   width: 16
@@ -3858,7 +3624,7 @@ aFont4KatakanaDigraphATex:
 
 aFont4KatakanaDigraphITex:
   type: TEXTURE
-  offset: 0x126EF4
+  offset: 0x1277B4
   ctype: u8
   format: I4
   width: 16
@@ -3867,7 +3633,7 @@ aFont4KatakanaDigraphITex:
 
 aFont4KatakanaDigraphETex:
   type: TEXTURE
-  offset: 0x126F34
+  offset: 0x1277F4
   ctype: u8
   format: I4
   width: 16
@@ -3876,7 +3642,7 @@ aFont4KatakanaDigraphETex:
 
 aFont4DashTex:
   type: TEXTURE
-  offset: 0x126F74
+  offset: 0x127834
   ctype: u8
   format: I4
   width: 16
@@ -3885,7 +3651,7 @@ aFont4DashTex:
 
 aFont4Num0Tex:
   type: TEXTURE
-  offset: 0x126FB4
+  offset: 0x127874
   ctype: u8
   format: I4
   width: 16
@@ -3894,7 +3660,7 @@ aFont4Num0Tex:
 
 aFont4Num1Tex:
   type: TEXTURE
-  offset: 0x126FF4
+  offset: 0x1278B4
   ctype: u8
   format: I4
   width: 16
@@ -3903,7 +3669,7 @@ aFont4Num1Tex:
 
 aFont4Num2Tex:
   type: TEXTURE
-  offset: 0x127034
+  offset: 0x1278F4
   ctype: u8
   format: I4
   width: 16
@@ -3912,7 +3678,7 @@ aFont4Num2Tex:
 
 aFont4Num3Tex:
   type: TEXTURE
-  offset: 0x127074
+  offset: 0x127934
   ctype: u8
   format: I4
   width: 16
@@ -3921,7 +3687,7 @@ aFont4Num3Tex:
 
 aFont4Num4Tex:
   type: TEXTURE
-  offset: 0x1270B4
+  offset: 0x127974
   ctype: u8
   format: I4
   width: 16
@@ -3930,7 +3696,7 @@ aFont4Num4Tex:
 
 aFont4Num5Tex:
   type: TEXTURE
-  offset: 0x1270F4
+  offset: 0x1279B4
   ctype: u8
   format: I4
   width: 16
@@ -3939,7 +3705,7 @@ aFont4Num5Tex:
 
 aFont4Num6Tex:
   type: TEXTURE
-  offset: 0x127134
+  offset: 0x1279F4
   ctype: u8
   format: I4
   width: 16
@@ -3948,7 +3714,7 @@ aFont4Num6Tex:
 
 aFont4Num7Tex:
   type: TEXTURE
-  offset: 0x127174
+  offset: 0x127A34
   ctype: u8
   format: I4
   width: 16
@@ -3957,7 +3723,7 @@ aFont4Num7Tex:
 
 aFont4Num8Tex:
   type: TEXTURE
-  offset: 0x1271B4
+  offset: 0x127A74
   ctype: u8
   format: I4
   width: 16
@@ -3966,7 +3732,7 @@ aFont4Num8Tex:
 
 aFont4Num9Tex:
   type: TEXTURE
-  offset: 0x1271F4
+  offset: 0x127AB4
   ctype: u8
   format: I4
   width: 16
@@ -3975,7 +3741,7 @@ aFont4Num9Tex:
 
 aFont4PrimeTex:
   type: TEXTURE
-  offset: 0x127234
+  offset: 0x127AF4
   ctype: u8
   format: I4
   width: 16
@@ -3984,52 +3750,16 @@ aFont4PrimeTex:
 
 aFont4DoublePrimeTex:
   type: TEXTURE
-  offset: 0x127274
+  offset: 0x127B34
   ctype: u8
   format: I4
   width: 16
   height: 8
   symbol: aFont4DoublePrimeTex
 
-aFont4STTex:
-  type: TEXTURE
-  offset: 0x127374
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4STTex
-
-aFont4NDTex:
-  type: TEXTURE
-  offset: 0x1273B4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4NDTex
-
-aFont4RDTex:
-  type: TEXTURE
-  offset: 0x1273F4
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4RDTex
-
-aFont4THTex:
-  type: TEXTURE
-  offset: 0x127434
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4THTex
-
 aFont4PlusTex:
   type: TEXTURE
-  offset: 0x1272B4
+  offset: 0x127B74
   ctype: u8
   format: I4
   width: 16
@@ -4038,7 +3768,7 @@ aFont4PlusTex:
 
 aFont4MinusTex:
   type: TEXTURE
-  offset: 0x1272F4
+  offset: 0x127BB4
   ctype: u8
   format: I4
   width: 16
@@ -4047,16 +3777,52 @@ aFont4MinusTex:
 
 aFont4PointsTex:
   type: TEXTURE
-  offset: 0x127334
+  offset: 0x127BF4
   ctype: u8
   format: I4
   width: 16
   height: 8
   symbol: aFont4PointsTex
 
+aFont4STTex:
+  type: TEXTURE
+  offset: 0x127C34
+  ctype: u8
+  format: I4
+  width: 16
+  height: 8
+  symbol: aFont4STTex
+
+aFont4NDTex:
+  type: TEXTURE
+  offset: 0x127C74
+  ctype: u8
+  format: I4
+  width: 16
+  height: 8
+  symbol: aFont4NDTex
+
+aFont4RDTex:
+  type: TEXTURE
+  offset: 0x127CB4
+  ctype: u8
+  format: I4
+  width: 16
+  height: 8
+  symbol: aFont4RDTex
+
+aFont4THTex:
+  type: TEXTURE
+  offset: 0x127CF4
+  ctype: u8
+  format: I4
+  width: 16
+  height: 8
+  symbol: aFont4THTex
+
 aFont5Num0Tex:
   type: TEXTURE
-  offset: 0x127474
+  offset: 0x127D34
   ctype: u8
   format: I4
   width: 16
@@ -4065,7 +3831,7 @@ aFont5Num0Tex:
 
 aFont5Num1Tex:
   type: TEXTURE
-  offset: 0x1274F4
+  offset: 0x127DB4
   ctype: u8
   format: I4
   width: 16
@@ -4074,7 +3840,7 @@ aFont5Num1Tex:
 
 aFont5Num2Tex:
   type: TEXTURE
-  offset: 0x127574
+  offset: 0x127E34
   ctype: u8
   format: I4
   width: 16
@@ -4083,7 +3849,7 @@ aFont5Num2Tex:
 
 aFont5Num3Tex:
   type: TEXTURE
-  offset: 0x1275F4
+  offset: 0x127EB4
   ctype: u8
   format: I4
   width: 16
@@ -4092,7 +3858,7 @@ aFont5Num3Tex:
 
 aFont5Num4Tex:
   type: TEXTURE
-  offset: 0x127674
+  offset: 0x127F34
   ctype: u8
   format: I4
   width: 16
@@ -4101,7 +3867,7 @@ aFont5Num4Tex:
 
 aFont5Num5Tex:
   type: TEXTURE
-  offset: 0x1276F4
+  offset: 0x127FB4
   ctype: u8
   format: I4
   width: 16
@@ -4110,7 +3876,7 @@ aFont5Num5Tex:
 
 aFont5Num6Tex:
   type: TEXTURE
-  offset: 0x127774
+  offset: 0x128034
   ctype: u8
   format: I4
   width: 16
@@ -4119,7 +3885,7 @@ aFont5Num6Tex:
 
 aFont5Num7Tex:
   type: TEXTURE
-  offset: 0x1277F4
+  offset: 0x1280B4
   ctype: u8
   format: I4
   width: 16
@@ -4128,7 +3894,7 @@ aFont5Num7Tex:
 
 aFont5Num8Tex:
   type: TEXTURE
-  offset: 0x127874
+  offset: 0x128134
   ctype: u8
   format: I4
   width: 16
@@ -4137,7 +3903,7 @@ aFont5Num8Tex:
 
 aFont5Num9Tex:
   type: TEXTURE
-  offset: 0x1278F4
+  offset: 0x1281B4
   ctype: u8
   format: I4
   width: 16
@@ -4146,7 +3912,7 @@ aFont5Num9Tex:
 
 aFont5VTex:
   type: TEXTURE
-  offset: 0x127974
+  offset: 0x128234
   ctype: u8
   format: I4
   width: 16
@@ -4155,7 +3921,7 @@ aFont5VTex:
 
 aFont5OpenParenthesisTex:
   type: TEXTURE
-  offset: 0x1279F4
+  offset: 0x1282B4
   ctype: u8
   format: I4
   width: 16
@@ -4164,7 +3930,7 @@ aFont5OpenParenthesisTex:
 
 aFont5CloseParenthesisTex:
   type: TEXTURE
-  offset: 0x127A74
+  offset: 0x128334
   ctype: u8
   format: I4
   width: 16
@@ -4173,7 +3939,7 @@ aFont5CloseParenthesisTex:
 
 aFont5STTex:
   type: TEXTURE
-  offset: 0x127AF4
+  offset: 0x1283B4
   ctype: u8
   format: I4
   width: 16
@@ -4182,7 +3948,7 @@ aFont5STTex:
 
 aFont5NDTex:
   type: TEXTURE
-  offset: 0x127B74
+  offset: 0x128434
   ctype: u8
   format: I4
   width: 16
@@ -4191,7 +3957,7 @@ aFont5NDTex:
 
 aFont5RDTex:
   type: TEXTURE
-  offset: 0x127BF4
+  offset: 0x1284B4
   ctype: u8
   format: I4
   width: 16
@@ -4200,7 +3966,7 @@ aFont5RDTex:
 
 aFont5THTex:
   type: TEXTURE
-  offset: 0x127C74
+  offset: 0x128534
   ctype: u8
   format: I4
   width: 16
@@ -4209,7 +3975,7 @@ aFont5THTex:
 
 aFont5PlusTex:
   type: TEXTURE
-  offset: 0x127CF4
+  offset: 0x1285B4
   ctype: u8
   format: I4
   width: 16
@@ -4229,7 +3995,7 @@ aFont5PointsTex:
 
 aFont5UpArrowTex:
   type: TEXTURE
-  offset: 0x127DF4
+  offset: 0x1286B4
   ctype: u8
   format: I4
   width: 16
@@ -4238,7 +4004,7 @@ aFont5UpArrowTex:
 
 aFont5DownArrowTex:
   type: TEXTURE
-  offset: 0x127E74
+  offset: 0x128734
   ctype: u8
   format: I4
   width: 16
@@ -4287,7 +4053,7 @@ aFont5QuitTex:
 
 aFont5SideArrowTex:
   type: TEXTURE
-  offset: 0x1284CC
+  offset: 0x128D0C
   ctype: u8
   format: I4
   width: 16
@@ -4296,7 +4062,7 @@ aFont5SideArrowTex:
 
 aFont6Num0Tex:
   type: TEXTURE
-  offset: 0x12854C
+  offset: 0x128D8C
   ctype: u8
   format: I4
   width: 16
@@ -4305,7 +4071,7 @@ aFont6Num0Tex:
 
 aFont6Num1Tex:
   type: TEXTURE
-  offset: 0x1285CC
+  offset: 0x128E0C
   ctype: u8
   format: I4
   width: 16
@@ -4314,7 +4080,7 @@ aFont6Num1Tex:
 
 aFont6Num2Tex:
   type: TEXTURE
-  offset: 0x12864C
+  offset: 0x128E8C
   ctype: u8
   format: I4
   width: 16
@@ -4323,7 +4089,7 @@ aFont6Num2Tex:
 
 aFont6Num3Tex:
   type: TEXTURE
-  offset: 0x1286CC
+  offset: 0x128F0C
   ctype: u8
   format: I4
   width: 16
@@ -4332,7 +4098,7 @@ aFont6Num3Tex:
 
 aFont6Num4Tex:
   type: TEXTURE
-  offset: 0x12874C
+  offset: 0x128F8C
   ctype: u8
   format: I4
   width: 16
@@ -4341,7 +4107,7 @@ aFont6Num4Tex:
 
 aFont6Num5Tex:
   type: TEXTURE
-  offset: 0x1287CC
+  offset: 0x12900C
   ctype: u8
   format: I4
   width: 16
@@ -4350,7 +4116,7 @@ aFont6Num5Tex:
 
 aFont6Num6Tex:
   type: TEXTURE
-  offset: 0x12884C
+  offset: 0x12908C
   ctype: u8
   format: I4
   width: 16
@@ -4359,7 +4125,7 @@ aFont6Num6Tex:
 
 aFont6Num7Tex:
   type: TEXTURE
-  offset: 0x1288CC
+  offset: 0x12910C
   ctype: u8
   format: I4
   width: 16
@@ -4368,7 +4134,7 @@ aFont6Num7Tex:
 
 aFont6Num8Tex:
   type: TEXTURE
-  offset: 0x12894C
+  offset: 0x12918C
   ctype: u8
   format: I4
   width: 16
@@ -4377,7 +4143,7 @@ aFont6Num8Tex:
 
 aFont6Num9Tex:
   type: TEXTURE
-  offset: 0x1289CC
+  offset: 0x12920C
   ctype: u8
   format: I4
   width: 16
@@ -4386,7 +4152,7 @@ aFont6Num9Tex:
 
 aFont6ATex:
   type: TEXTURE
-  offset: 0x128A4C
+  offset: 0x12928C
   ctype: u8
   format: I4
   width: 16
@@ -4395,7 +4161,7 @@ aFont6ATex:
 
 aFont6BTex:
   type: TEXTURE
-  offset: 0x128ACC
+  offset: 0x12930C
   ctype: u8
   format: I4
   width: 16
@@ -4404,7 +4170,7 @@ aFont6BTex:
 
 aFont6CTex:
   type: TEXTURE
-  offset: 0x128B4C
+  offset: 0x12938C
   ctype: u8
   format: I4
   width: 16
@@ -4413,7 +4179,7 @@ aFont6CTex:
 
 aFont6DTex:
   type: TEXTURE
-  offset: 0x128BCC
+  offset: 0x12940C
   ctype: u8
   format: I4
   width: 16
@@ -4422,7 +4188,7 @@ aFont6DTex:
 
 aFont6ETex:
   type: TEXTURE
-  offset: 0x128C4C
+  offset: 0x12948C
   ctype: u8
   format: I4
   width: 16
@@ -4431,7 +4197,7 @@ aFont6ETex:
 
 aFont6FTex:
   type: TEXTURE
-  offset: 0x128CCC
+  offset: 0x12950C
   ctype: u8
   format: I4
   width: 16
@@ -4440,7 +4206,7 @@ aFont6FTex:
 
 aFont6GTex:
   type: TEXTURE
-  offset: 0x128D4C
+  offset: 0x12958C
   ctype: u8
   format: I4
   width: 16
@@ -4449,7 +4215,7 @@ aFont6GTex:
 
 aFont6HTex:
   type: TEXTURE
-  offset: 0x128DCC
+  offset: 0x12960C
   ctype: u8
   format: I4
   width: 16
@@ -4458,7 +4224,7 @@ aFont6HTex:
 
 aFont6ITex:
   type: TEXTURE
-  offset: 0x128E4C
+  offset: 0x12968C
   ctype: u8
   format: I4
   width: 16
@@ -4467,7 +4233,7 @@ aFont6ITex:
 
 aFont6JTex:
   type: TEXTURE
-  offset: 0x128ECC
+  offset: 0x12970C
   ctype: u8
   format: I4
   width: 16
@@ -4476,7 +4242,7 @@ aFont6JTex:
 
 aFont6KTex:
   type: TEXTURE
-  offset: 0x128F4C
+  offset: 0x12978C
   ctype: u8
   format: I4
   width: 16
@@ -4485,7 +4251,7 @@ aFont6KTex:
 
 aFont6LTex:
   type: TEXTURE
-  offset: 0x128FCC
+  offset: 0x12980C
   ctype: u8
   format: I4
   width: 16
@@ -4494,7 +4260,7 @@ aFont6LTex:
 
 aFont6MTex:
   type: TEXTURE
-  offset: 0x12904C
+  offset: 0x12988C
   ctype: u8
   format: I4
   width: 16
@@ -4503,7 +4269,7 @@ aFont6MTex:
 
 aFont6NTex:
   type: TEXTURE
-  offset: 0x1290CC
+  offset: 0x12990C
   ctype: u8
   format: I4
   width: 16
@@ -4512,7 +4278,7 @@ aFont6NTex:
 
 aFont6OTex:
   type: TEXTURE
-  offset: 0x12914C
+  offset: 0x12998C
   ctype: u8
   format: I4
   width: 16
@@ -4521,7 +4287,7 @@ aFont6OTex:
 
 aFont6PTex:
   type: TEXTURE
-  offset: 0x1291CC
+  offset: 0x129A0C
   ctype: u8
   format: I4
   width: 16
@@ -4530,7 +4296,7 @@ aFont6PTex:
 
 aFont6QTex:
   type: TEXTURE
-  offset: 0x12924C
+  offset: 0x129A8C
   ctype: u8
   format: I4
   width: 16
@@ -4539,7 +4305,7 @@ aFont6QTex:
 
 aFont6RTex:
   type: TEXTURE
-  offset: 0x1292CC
+  offset: 0x129B0C
   ctype: u8
   format: I4
   width: 16
@@ -4548,7 +4314,7 @@ aFont6RTex:
 
 aFont6STex:
   type: TEXTURE
-  offset: 0x12934C
+  offset: 0x129B8C
   ctype: u8
   format: I4
   width: 16
@@ -4557,7 +4323,7 @@ aFont6STex:
 
 aFont6TTex:
   type: TEXTURE
-  offset: 0x1293CC
+  offset: 0x129C0C
   ctype: u8
   format: I4
   width: 16
@@ -4566,7 +4332,7 @@ aFont6TTex:
 
 aFont6UTex:
   type: TEXTURE
-  offset: 0x12944C
+  offset: 0x129C8C
   ctype: u8
   format: I4
   width: 16
@@ -4575,7 +4341,7 @@ aFont6UTex:
 
 aFont6VTex:
   type: TEXTURE
-  offset: 0x1294CC
+  offset: 0x129D0C
   ctype: u8
   format: I4
   width: 16
@@ -4584,7 +4350,7 @@ aFont6VTex:
 
 aFont6WTex:
   type: TEXTURE
-  offset: 0x12954C
+  offset: 0x129D8C
   ctype: u8
   format: I4
   width: 16
@@ -4593,7 +4359,7 @@ aFont6WTex:
 
 aFont6XTex:
   type: TEXTURE
-  offset: 0x1295CC
+  offset: 0x129E0C
   ctype: u8
   format: I4
   width: 16
@@ -4602,7 +4368,7 @@ aFont6XTex:
 
 aFont6YTex:
   type: TEXTURE
-  offset: 0x12964C
+  offset: 0x129E8C
   ctype: u8
   format: I4
   width: 16
@@ -4611,7 +4377,7 @@ aFont6YTex:
 
 aFont6ZTex:
   type: TEXTURE
-  offset: 0x1296CC
+  offset: 0x129F0C
   ctype: u8
   format: I4
   width: 16
@@ -4620,7 +4386,7 @@ aFont6ZTex:
 
 aFont6AlphaTex:
   type: TEXTURE
-  offset: 0x12974C
+  offset: 0x129F8C
   ctype: u8
   format: I4
   width: 16
@@ -4629,7 +4395,7 @@ aFont6AlphaTex:
 
 aFont6BetaTex:
   type: TEXTURE
-  offset: 0x1297CC
+  offset: 0x12A00C
   ctype: u8
   format: I4
   width: 16
@@ -4638,7 +4404,7 @@ aFont6BetaTex:
 
 aFont6HiraganaNiTex:
   type: TEXTURE
-  offset: 0x12984C
+  offset: 0x12A08C
   ctype: u8
   format: I4
   width: 16
@@ -4647,7 +4413,7 @@ aFont6HiraganaNiTex:
 
 aFont6AmpersandTex:
   type: TEXTURE
-  offset: 0x1298CC
+  offset: 0x12A10C
   ctype: u8
   format: I4
   width: 16
@@ -4656,7 +4422,7 @@ aFont6AmpersandTex:
 
 aFont6CommaTex:
   type: TEXTURE
-  offset: 0x12994C
+  offset: 0x12A18C
   ctype: u8
   format: I4
   width: 16
@@ -4665,7 +4431,7 @@ aFont6CommaTex:
 
 aFont6DoublePrimeTex:
   type: TEXTURE
-  offset: 0x1299CC
+  offset: 0x12A20C
   ctype: u8
   format: I4
   width: 16
@@ -4674,7 +4440,7 @@ aFont6DoublePrimeTex:
 
 aFont6DashTex:
   type: TEXTURE
-  offset: 0x129A4C
+  offset: 0x12A28C
   ctype: u8
   format: I4
   width: 16
@@ -4683,7 +4449,7 @@ aFont6DashTex:
 
 aFont6PeriodTex:
   type: TEXTURE
-  offset: 0x129ACC
+  offset: 0x12A30C
   ctype: u8
   format: I4
   width: 16
@@ -4692,7 +4458,7 @@ aFont6PeriodTex:
 
 aFont6PrimeTex:
   type: TEXTURE
-  offset: 0x129B4C
+  offset: 0x12A38C
   ctype: u8
   format: I4
   width: 16
@@ -4701,7 +4467,7 @@ aFont6PrimeTex:
 
 aFont6UnderscoreTex:
   type: TEXTURE
-  offset: 0x129BCC
+  offset: 0x12A40C
   ctype: u8
   format: I4
   width: 16
@@ -4830,12 +4596,12 @@ a4PlayersTex:
 
 D_F134758:
   type: GFX
-  offset: 0x134758
+  offset: 0x134F98
   symbol: D_F134758
 
 aSelectModeTex:
   type: TEXTURE
-  offset: 0x134760
+  offset: 0x134FA0
   ctype: u8
   format: I4
   width: 128
@@ -4904,7 +4670,7 @@ aRecordsOptionTex:
 
 pad_segment_2B9EA0_F1355A4:
   type: BLOB
-  offset: 0x1355A4
+  offset: 0x135E44
   size: 0x10
   symbol: pad_segment_2B9EA0_F1355A4
 
@@ -4980,12 +4746,12 @@ aCupSelectQuestionMarkTex:
 
 D_F138508:
   type: GFX
-  offset: 0x138508
+  offset: 0x138DA8
   symbol: D_F138508
 
 aRecordsTex:
   type: TEXTURE
-  offset: 0x138510
+  offset: 0x138DB0
   ctype: u8
   format: I4
   width: 96
@@ -5074,12 +4840,12 @@ aOKTex:
 
 D_F139828:
   type: GFX
-  offset: 0x139828
+  offset: 0x13A0C8
   symbol: D_F139828
 
 aSelectCourseTex:
   type: TEXTURE
-  offset: 0x139830
+  offset: 0x13A0D0
   ctype: u8
   format: I4
   width: 160
@@ -5088,12 +4854,12 @@ aSelectCourseTex:
 
 D_F139FB0:
   type: GFX
-  offset: 0x139FB0
+  offset: 0x13A850
   symbol: D_F139FB0
 
 aMenuWithGhostTex:
   type: TEXTURE
-  offset: 0x139FB8
+  offset: 0x13A858
   ctype: u8
   format: I4
   width: 64
@@ -5102,12 +4868,12 @@ aMenuWithGhostTex:
 
 D_F13A1B8:
   type: GFX
-  offset: 0x13A1B8
+  offset: 0x13AA58
   symbol: D_F13A1B8
 
 aMenuWithoutGhostTex:
   type: TEXTURE
-  offset: 0x13A1C0
+  offset: 0x13AA60
   ctype: u8
   format: I4
   width: 64
@@ -5116,12 +4882,12 @@ aMenuWithoutGhostTex:
 
 D_F13A3C0:
   type: GFX
-  offset: 0x13A3C0
+  offset: 0x13AC60
   symbol: D_F13A3C0
 
 aMenuStaffGhostTex:
   type: TEXTURE
-  offset: 0x13A3C8
+  offset: 0x13AC68
   ctype: u8
   format: I4
   width: 64
@@ -5130,12 +4896,12 @@ aMenuStaffGhostTex:
 
 D_F13A5C8:
   type: GFX
-  offset: 0x13A5C8
+  offset: 0x13AE68
   symbol: D_F13A5C8
 
 aMenuCelebrityGhostTex:
   type: TEXTURE
-  offset: 0x13A5D0
+  offset: 0x13AE70
   ctype: u8
   format: I4
   width: 64
@@ -5144,12 +4910,12 @@ aMenuCelebrityGhostTex:
 
 D_F13A7D0:
   type: GFX
-  offset: 0x13A7D0
+  offset: 0x13B070
   symbol: D_F13A7D0
 
 aMenuChampGhostTex:
   type: TEXTURE
-  offset: 0x13A7D8
+  offset: 0x13B078
   ctype: u8
   format: I4
   width: 64
@@ -5158,12 +4924,12 @@ aMenuChampGhostTex:
 
 D_F13A9D8:
   type: GFX
-  offset: 0x13A9D8
+  offset: 0x13B278
   symbol: D_F13A9D8
 
 aHasGhostMarkerTex:
   type: TEXTURE
-  offset: 0x13A9E0
+  offset: 0x13B280
   ctype: u8
   format: I4
   width: 32
@@ -5842,7 +5608,7 @@ aCreditsSonicPhantomTex:
 
 aSkyboxSkyBlueTex:
   type: TEXTURE
-  offset: 0x215BB0
+  offset: 0x216450
   ctype: u16
   format: RGBA16
   width: 64
@@ -5851,7 +5617,7 @@ aSkyboxSkyBlueTex:
 
 aSkyboxTurquoiseTex:
   type: TEXTURE
-  offset: 0x215C30
+  offset: 0x2164D0
   ctype: u16
   format: RGBA16
   width: 64
@@ -5860,7 +5626,7 @@ aSkyboxTurquoiseTex:
 
 aSkyboxOrangeTex:
   type: TEXTURE
-  offset: 0x215CB0
+  offset: 0x216550
   ctype: u16
   format: RGBA16
   width: 64
@@ -5869,7 +5635,7 @@ aSkyboxOrangeTex:
 
 aSkyboxBlueTex:
   type: TEXTURE
-  offset: 0x215D30
+  offset: 0x2165D0
   ctype: u16
   format: RGBA16
   width: 64
@@ -5878,7 +5644,7 @@ aSkyboxBlueTex:
 
 aSkyboxDesertTex:
   type: TEXTURE
-  offset: 0x215DB0
+  offset: 0x216650
   ctype: u16
   format: RGBA16
   width: 64
@@ -5887,7 +5653,7 @@ aSkyboxDesertTex:
 
 aSkyboxNightTex:
   type: TEXTURE
-  offset: 0x215E30
+  offset: 0x2166D0
   ctype: u16
   format: RGBA16
   width: 64
@@ -5896,7 +5662,7 @@ aSkyboxNightTex:
 
 aSkyboxSunsetTex:
   type: TEXTURE
-  offset: 0x215EB0
+  offset: 0x216750
   ctype: u16
   format: RGBA16
   width: 64
@@ -5905,7 +5671,7 @@ aSkyboxSunsetTex:
 
 aSkyboxPurpleTex:
   type: TEXTURE
-  offset: 0x215F30
+  offset: 0x2167D0
   ctype: u16
   format: RGBA16
   width: 64
@@ -5914,7 +5680,7 @@ aSkyboxPurpleTex:
 
 aVenueMuteCityTex:
   type: TEXTURE
-  offset: 0x215FB0
+  offset: 0x216850
   ctype: u16
   format: RGBA16
   width: 64
@@ -5923,7 +5689,7 @@ aVenueMuteCityTex:
 
 aVenuePortTownTex:
   type: TEXTURE
-  offset: 0x216FB0
+  offset: 0x217850
   ctype: u16
   format: RGBA16
   width: 64
@@ -5932,7 +5698,7 @@ aVenuePortTownTex:
 
 aVenueBigBlueTex:
   type: TEXTURE
-  offset: 0x217FB0
+  offset: 0x218850
   ctype: u16
   format: RGBA16
   width: 64
@@ -5941,7 +5707,7 @@ aVenueBigBlueTex:
 
 aVenueSandOceanTex:
   type: TEXTURE
-  offset: 0x218FB0
+  offset: 0x219850
   ctype: u16
   format: RGBA16
   width: 64
@@ -5950,7 +5716,7 @@ aVenueSandOceanTex:
 
 aVenueDevilsForestTex:
   type: TEXTURE
-  offset: 0x219FB0
+  offset: 0x21A850
   ctype: u16
   format: RGBA16
   width: 64
@@ -5959,7 +5725,7 @@ aVenueDevilsForestTex:
 
 aVenueWhiteLandTex:
   type: TEXTURE
-  offset: 0x21AFB0
+  offset: 0x21B850
   ctype: u16
   format: RGBA16
   width: 64
@@ -5968,7 +5734,7 @@ aVenueWhiteLandTex:
 
 aVenueSectorTex:
   type: TEXTURE
-  offset: 0x21BFB0
+  offset: 0x21C850
   ctype: u16
   format: RGBA16
   width: 64
@@ -5977,7 +5743,7 @@ aVenueSectorTex:
 
 aVenueRedCanyonTex:
   type: TEXTURE
-  offset: 0x21CFB0
+  offset: 0x21D850
   ctype: u16
   format: RGBA16
   width: 64
@@ -5986,7 +5752,7 @@ aVenueRedCanyonTex:
 
 aVenueFireFieldTex:
   type: TEXTURE
-  offset: 0x21DFB0
+  offset: 0x21E850
   ctype: u16
   format: RGBA16
   width: 64
@@ -5995,7 +5761,7 @@ aVenueFireFieldTex:
 
 aVenueSilenceTex:
   type: TEXTURE
-  offset: 0x21EFB0
+  offset: 0x21F850
   ctype: u16
   format: RGBA16
   width: 64
@@ -6004,12 +5770,12 @@ aVenueSilenceTex:
 
 D_F21FFB0:
   type: GFX
-  offset: 0x21FFB0
+  offset: 0x220850
   symbol: D_F21FFB0
 
 aCloudTex:
   type: TEXTURE
-  offset: 0x21FFB8
+  offset: 0x220858
   ctype: u8
   format: IA8
   width: 64
@@ -6018,12 +5784,12 @@ aCloudTex:
 
 D_F2207C0:
   type: GFX
-  offset: 0x2207C0
+  offset: 0x221060
   symbol: D_F2207C0
 
 D_F2207C8:
   type: TEXTURE
-  offset: 0x2207C8
+  offset: 0x221068
   ctype: u8
   format: IA8
   width: 8
@@ -6032,17 +5798,17 @@ D_F2207C8:
 
 D_F220810:
   type: TEXTURE
-  offset: 0x220810
+  offset: 0x2210B0
   ctype: u8
   format: CI4
-  tlut: 0xF221010
+  tlut: 0xF2218B0
   width: 64
   height: 64
   symbol: D_F220810
 
 D_F221010:
   type: TEXTURE
-  offset: 0x221010
+  offset: 0x2218B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6050,23 +5816,23 @@ D_F221010:
 
 pad_segment_2B9EA0_F221030:
   type: BLOB
-  offset: 0x221030
+  offset: 0x2218D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F221030
 
 D_F221210:
   type: TEXTURE
-  offset: 0x221210
+  offset: 0x221AB0
   ctype: u8
   format: CI4
-  tlut: 0xF221A10
+  tlut: 0xF2222B0
   width: 64
   height: 64
   symbol: D_F221210
 
 D_F221A10:
   type: TEXTURE
-  offset: 0x221A10
+  offset: 0x2222B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6074,23 +5840,23 @@ D_F221A10:
 
 pad_segment_2B9EA0_F221A30:
   type: BLOB
-  offset: 0x221A30
+  offset: 0x2222D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F221A30
 
 D_F221C10:
   type: TEXTURE
-  offset: 0x221C10
+  offset: 0x2224B0
   ctype: u8
   format: CI4
-  tlut: 0xF222410
+  tlut: 0xF222CB0
   width: 64
   height: 64
   symbol: D_F221C10
 
 D_F222410:
   type: TEXTURE
-  offset: 0x222410
+  offset: 0x222CB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6098,23 +5864,23 @@ D_F222410:
 
 pad_segment_2B9EA0_F222430:
   type: BLOB
-  offset: 0x222430
+  offset: 0x222CD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F222430
 
 D_F222610:
   type: TEXTURE
-  offset: 0x222610
+  offset: 0x222EB0
   ctype: u8
   format: CI4
-  tlut: 0xF222E10
+  tlut: 0xF2236B0
   width: 64
   height: 64
   symbol: D_F222610
 
 D_F222E10:
   type: TEXTURE
-  offset: 0x222E10
+  offset: 0x2236B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6122,23 +5888,23 @@ D_F222E10:
 
 pad_segment_2B9EA0_F222E30:
   type: BLOB
-  offset: 0x222E30
+  offset: 0x2236D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F222E30
 
 D_F223010:
   type: TEXTURE
-  offset: 0x223010
+  offset: 0x2238B0
   ctype: u8
   format: CI4
-  tlut: 0xF223810
+  tlut: 0xF2240B0
   width: 64
   height: 64
   symbol: D_F223010
 
 D_F223810:
   type: TEXTURE
-  offset: 0x223810
+  offset: 0x2240B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6146,23 +5912,23 @@ D_F223810:
 
 pad_segment_2B9EA0_F223830:
   type: BLOB
-  offset: 0x223830
+  offset: 0x2240D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F223830
 
 D_F223A10:
   type: TEXTURE
-  offset: 0x223A10
+  offset: 0x2242B0
   ctype: u8
   format: CI4
-  tlut: 0xF224210
+  tlut: 0xF224AB0
   width: 64
   height: 64
   symbol: D_F223A10
 
 D_F224210:
   type: TEXTURE
-  offset: 0x224210
+  offset: 0x224AB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6170,23 +5936,23 @@ D_F224210:
 
 pad_segment_2B9EA0_F224230:
   type: BLOB
-  offset: 0x224230
+  offset: 0x224AD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F224230
 
 D_F224410:
   type: TEXTURE
-  offset: 0x224410
+  offset: 0x224CB0
   ctype: u8
   format: CI4
-  tlut: 0xF224C10
+  tlut: 0xF2254B0
   width: 64
   height: 64
   symbol: D_F224410
 
 D_F224C10:
   type: TEXTURE
-  offset: 0x224C10
+  offset: 0x2254B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6194,23 +5960,23 @@ D_F224C10:
 
 pad_segment_2B9EA0_F224C30:
   type: BLOB
-  offset: 0x224C30
+  offset: 0x2254D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F224C30
 
 D_F224E10:
   type: TEXTURE
-  offset: 0x224E10
+  offset: 0x2256B0
   ctype: u8
   format: CI4
-  tlut: 0xF225610
+  tlut: 0xF225EB0
   width: 64
   height: 64
   symbol: D_F224E10
 
 D_F225610:
   type: TEXTURE
-  offset: 0x225610
+  offset: 0x225EB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6218,23 +5984,23 @@ D_F225610:
 
 pad_segment_2B9EA0_F225630:
   type: BLOB
-  offset: 0x225630
+  offset: 0x225ED0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F225630
 
 D_F225810:
   type: TEXTURE
-  offset: 0x225810
+  offset: 0x2260B0
   ctype: u8
   format: CI4
-  tlut: 0xF226010
+  tlut: 0xF2268B0
   width: 64
   height: 64
   symbol: D_F225810
 
 D_F226010:
   type: TEXTURE
-  offset: 0x226010
+  offset: 0x2268B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6242,23 +6008,23 @@ D_F226010:
 
 pad_segment_2B9EA0_F226030:
   type: BLOB
-  offset: 0x226030
+  offset: 0x2268D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F226030
 
 D_F226210:
   type: TEXTURE
-  offset: 0x226210
+  offset: 0x226AB0
   ctype: u8
   format: CI4
-  tlut: 0xF226A10
+  tlut: 0xF2272B0
   width: 64
   height: 64
   symbol: D_F226210
 
 D_F226A10:
   type: TEXTURE
-  offset: 0x226A10
+  offset: 0x2272B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6266,23 +6032,23 @@ D_F226A10:
 
 pad_segment_2B9EA0_F226A30:
   type: BLOB
-  offset: 0x226A30
+  offset: 0x2272D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F226A30
 
 D_F226C10:
   type: TEXTURE
-  offset: 0x226C10
+  offset: 0x2274B0
   ctype: u8
   format: CI4
-  tlut: 0xF227410
+  tlut: 0xF227CB0
   width: 64
   height: 64
   symbol: D_F226C10
 
 D_F227410:
   type: TEXTURE
-  offset: 0x227410
+  offset: 0x227CB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6290,23 +6056,23 @@ D_F227410:
 
 pad_segment_2B9EA0_F227430:
   type: BLOB
-  offset: 0x227430
+  offset: 0x227CD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F227430
 
 D_F227610:
   type: TEXTURE
-  offset: 0x227610
+  offset: 0x227EB0
   ctype: u8
   format: CI4
-  tlut: 0xF227E10
+  tlut: 0xF2286B0
   width: 64
   height: 64
   symbol: D_F227610
 
 D_F227E10:
   type: TEXTURE
-  offset: 0x227E10
+  offset: 0x2286B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6314,23 +6080,23 @@ D_F227E10:
 
 pad_segment_2B9EA0_F227E30:
   type: BLOB
-  offset: 0x227E30
+  offset: 0x2286D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F227E30
 
 D_F228010:
   type: TEXTURE
-  offset: 0x228010
+  offset: 0x2288B0
   ctype: u8
   format: CI4
-  tlut: 0xF228810
+  tlut: 0xF2290B0
   width: 64
   height: 64
   symbol: D_F228010
 
 D_F228810:
   type: TEXTURE
-  offset: 0x228810
+  offset: 0x2290B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6338,23 +6104,23 @@ D_F228810:
 
 pad_segment_2B9EA0_F228830:
   type: BLOB
-  offset: 0x228830
+  offset: 0x2290D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F228830
 
 D_F228A10:
   type: TEXTURE
-  offset: 0x228A10
+  offset: 0x2292B0
   ctype: u8
   format: CI4
-  tlut: 0xF229210
+  tlut: 0xF229AB0
   width: 64
   height: 64
   symbol: D_F228A10
 
 D_F229210:
   type: TEXTURE
-  offset: 0x229210
+  offset: 0x229AB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6362,23 +6128,23 @@ D_F229210:
 
 pad_segment_2B9EA0_F229230:
   type: BLOB
-  offset: 0x229230
+  offset: 0x229AD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F229230
 
 D_F229410:
   type: TEXTURE
-  offset: 0x229410
+  offset: 0x229CB0
   ctype: u8
   format: CI4
-  tlut: 0xF229C10
+  tlut: 0xF22A4B0
   width: 64
   height: 64
   symbol: D_F229410
 
 D_F229C10:
   type: TEXTURE
-  offset: 0x229C10
+  offset: 0x22A4B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6386,23 +6152,23 @@ D_F229C10:
 
 pad_segment_2B9EA0_F229C30:
   type: BLOB
-  offset: 0x229C30
+  offset: 0x22A4D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F229C30
 
 D_F229E10:
   type: TEXTURE
-  offset: 0x229E10
+  offset: 0x22A6B0
   ctype: u8
   format: CI4
-  tlut: 0xF22A610
+  tlut: 0xF22AEB0
   width: 64
   height: 64
   symbol: D_F229E10
 
 D_F22A610:
   type: TEXTURE
-  offset: 0x22A610
+  offset: 0x22AEB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6410,23 +6176,23 @@ D_F22A610:
 
 pad_segment_2B9EA0_F22A630:
   type: BLOB
-  offset: 0x22A630
+  offset: 0x22AED0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F22A630
 
 D_F22A810:
   type: TEXTURE
-  offset: 0x22A810
+  offset: 0x22B0B0
   ctype: u8
   format: CI4
-  tlut: 0xF22B010
+  tlut: 0xF22B8B0
   width: 64
   height: 64
   symbol: D_F22A810
 
 D_F22B010:
   type: TEXTURE
-  offset: 0x22B010
+  offset: 0x22B8B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6434,23 +6200,23 @@ D_F22B010:
 
 pad_segment_2B9EA0_F22B030:
   type: BLOB
-  offset: 0x22B030
+  offset: 0x22B8D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F22B030
 
 D_F22B210:
   type: TEXTURE
-  offset: 0x22B210
+  offset: 0x22BAB0
   ctype: u8
   format: CI4
-  tlut: 0xF22BA10
+  tlut: 0xF22C2B0
   width: 64
   height: 64
   symbol: D_F22B210
 
 D_F22BA10:
   type: TEXTURE
-  offset: 0x22BA10
+  offset: 0x22C2B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6458,23 +6224,23 @@ D_F22BA10:
 
 pad_segment_2B9EA0_F22BA30:
   type: BLOB
-  offset: 0x22BA30
+  offset: 0x22C2D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F22BA30
 
 D_F22BC10:
   type: TEXTURE
-  offset: 0x22BC10
+  offset: 0x22C4B0
   ctype: u8
   format: CI4
-  tlut: 0xF22C410
+  tlut: 0xF22CCB0
   width: 64
   height: 64
   symbol: D_F22BC10
 
 D_F22C410:
   type: TEXTURE
-  offset: 0x22C410
+  offset: 0x22CCB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6482,23 +6248,23 @@ D_F22C410:
 
 pad_segment_2B9EA0_F22C430:
   type: BLOB
-  offset: 0x22C430
+  offset: 0x22CCD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F22C430
 
 D_F22C610:
   type: TEXTURE
-  offset: 0x22C610
+  offset: 0x22CEB0
   ctype: u8
   format: CI4
-  tlut: 0xF22CE10
+  tlut: 0xF22D6B0
   width: 64
   height: 64
   symbol: D_F22C610
 
 D_F22CE10:
   type: TEXTURE
-  offset: 0x22CE10
+  offset: 0x22D6B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6506,23 +6272,23 @@ D_F22CE10:
 
 pad_segment_2B9EA0_F22CE30:
   type: BLOB
-  offset: 0x22CE30
+  offset: 0x22D6D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F22CE30
 
 D_F22D010:
   type: TEXTURE
-  offset: 0x22D010
+  offset: 0x22D8B0
   ctype: u8
   format: CI4
-  tlut: 0xF22D810
+  tlut: 0xF22E0B0
   width: 64
   height: 64
   symbol: D_F22D010
 
 D_F22D810:
   type: TEXTURE
-  offset: 0x22D810
+  offset: 0x22E0B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6530,23 +6296,23 @@ D_F22D810:
 
 pad_segment_2B9EA0_F22D830:
   type: BLOB
-  offset: 0x22D830
+  offset: 0x22E0D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F22D830
 
 D_F22DA10:
   type: TEXTURE
-  offset: 0x22DA10
+  offset: 0x22E2B0
   ctype: u8
   format: CI4
-  tlut: 0xF22E210
+  tlut: 0xF22EAB0
   width: 64
   height: 64
   symbol: D_F22DA10
 
 D_F22E210:
   type: TEXTURE
-  offset: 0x22E210
+  offset: 0x22EAB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6554,23 +6320,23 @@ D_F22E210:
 
 pad_segment_2B9EA0_F22E230:
   type: BLOB
-  offset: 0x22E230
+  offset: 0x22EAD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F22E230
 
 D_F22E410:
   type: TEXTURE
-  offset: 0x22E410
+  offset: 0x22ECB0
   ctype: u8
   format: CI4
-  tlut: 0xF22EC10
+  tlut: 0xF22F4B0
   width: 64
   height: 64
   symbol: D_F22E410
 
 D_F22EC10:
   type: TEXTURE
-  offset: 0x22EC10
+  offset: 0x22F4B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6578,23 +6344,23 @@ D_F22EC10:
 
 pad_segment_2B9EA0_F22EC30:
   type: BLOB
-  offset: 0x22EC30
+  offset: 0x22F4D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F22EC30
 
 D_F22EE10:
   type: TEXTURE
-  offset: 0x22EE10
+  offset: 0x22F6B0
   ctype: u8
   format: CI4
-  tlut: 0xF22F610
+  tlut: 0xF22FEB0
   width: 64
   height: 64
   symbol: D_F22EE10
 
 D_F22F610:
   type: TEXTURE
-  offset: 0x22F610
+  offset: 0x22FEB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6602,23 +6368,23 @@ D_F22F610:
 
 pad_segment_2B9EA0_F22F630:
   type: BLOB
-  offset: 0x22F630
+  offset: 0x22FED0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F22F630
 
 D_F22F810:
   type: TEXTURE
-  offset: 0x22F810
+  offset: 0x2300B0
   ctype: u8
   format: CI4
-  tlut: 0xF230010
+  tlut: 0xF2308B0
   width: 64
   height: 64
   symbol: D_F22F810
 
 D_F230010:
   type: TEXTURE
-  offset: 0x230010
+  offset: 0x2308B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6626,23 +6392,23 @@ D_F230010:
 
 pad_segment_2B9EA0_F230030:
   type: BLOB
-  offset: 0x230030
+  offset: 0x2308D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F230030
 
 D_F230210:
   type: TEXTURE
-  offset: 0x230210
+  offset: 0x230AB0
   ctype: u8
   format: CI4
-  tlut: 0xF230A10
+  tlut: 0xF2312B0
   width: 64
   height: 64
   symbol: D_F230210
 
 D_F230A10:
   type: TEXTURE
-  offset: 0x230A10
+  offset: 0x2312B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6650,23 +6416,23 @@ D_F230A10:
 
 pad_segment_2B9EA0_F230A30:
   type: BLOB
-  offset: 0x230A30
+  offset: 0x2312D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F230A30
 
 D_F230C10:
   type: TEXTURE
-  offset: 0x230C10
+  offset: 0x2314B0
   ctype: u8
   format: CI4
-  tlut: 0xF231410
+  tlut: 0xF231CB0
   width: 64
   height: 64
   symbol: D_F230C10
 
 D_F231410:
   type: TEXTURE
-  offset: 0x231410
+  offset: 0x231CB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6674,23 +6440,23 @@ D_F231410:
 
 pad_segment_2B9EA0_F231430:
   type: BLOB
-  offset: 0x231430
+  offset: 0x231CD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F231430
 
 D_F231610:
   type: TEXTURE
-  offset: 0x231610
+  offset: 0x231EB0
   ctype: u8
   format: CI4
-  tlut: 0xF231E10
+  tlut: 0xF2326B0
   width: 64
   height: 64
   symbol: D_F231610
 
 D_F231E10:
   type: TEXTURE
-  offset: 0x231E10
+  offset: 0x2326B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6698,23 +6464,23 @@ D_F231E10:
 
 pad_segment_2B9EA0_F231E30:
   type: BLOB
-  offset: 0x231E30
+  offset: 0x2326D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F231E30
 
 D_F232010:
   type: TEXTURE
-  offset: 0x232010
+  offset: 0x2328B0
   ctype: u8
   format: CI4
-  tlut: 0xF232810
+  tlut: 0xF2330B0
   width: 64
   height: 64
   symbol: D_F232010
 
 D_F232810:
   type: TEXTURE
-  offset: 0x232810
+  offset: 0x2330B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6722,23 +6488,23 @@ D_F232810:
 
 pad_segment_2B9EA0_F232830:
   type: BLOB
-  offset: 0x232830
+  offset: 0x2330D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F232830
 
 D_F232A10:
   type: TEXTURE
-  offset: 0x232A10
+  offset: 0x2332B0
   ctype: u8
   format: CI4
-  tlut: 0xF233210
+  tlut: 0xF233AB0
   width: 64
   height: 64
   symbol: D_F232A10
 
 D_F233210:
   type: TEXTURE
-  offset: 0x233210
+  offset: 0x233AB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6746,23 +6512,23 @@ D_F233210:
 
 pad_segment_2B9EA0_F233230:
   type: BLOB
-  offset: 0x233230
+  offset: 0x233AD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F233230
 
 D_F233410:
   type: TEXTURE
-  offset: 0x233410
+  offset: 0x233CB0
   ctype: u8
   format: CI4
-  tlut: 0xF233C10
+  tlut: 0xF2344B0
   width: 64
   height: 64
   symbol: D_F233410
 
 D_F233C10:
   type: TEXTURE
-  offset: 0x233C10
+  offset: 0x2344B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6770,23 +6536,23 @@ D_F233C10:
 
 pad_segment_2B9EA0_F233C30:
   type: BLOB
-  offset: 0x233C30
+  offset: 0x2344D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F233C30
 
 D_F233E10:
   type: TEXTURE
-  offset: 0x233E10
+  offset: 0x2346B0
   ctype: u8
   format: CI4
-  tlut: 0xF234610
+  tlut: 0xF234EB0
   width: 64
   height: 64
   symbol: D_F233E10
 
 D_F234610:
   type: TEXTURE
-  offset: 0x234610
+  offset: 0x234EB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6794,23 +6560,23 @@ D_F234610:
 
 pad_segment_2B9EA0_F234630:
   type: BLOB
-  offset: 0x234630
+  offset: 0x234ED0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F234630
 
 D_F234810:
   type: TEXTURE
-  offset: 0x234810
+  offset: 0x2350B0
   ctype: u8
   format: CI4
-  tlut: 0xF235010
+  tlut: 0xF2358B0
   width: 64
   height: 64
   symbol: D_F234810
 
 D_F235010:
   type: TEXTURE
-  offset: 0x235010
+  offset: 0x2358B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6818,23 +6584,23 @@ D_F235010:
 
 pad_segment_2B9EA0_F235030:
   type: BLOB
-  offset: 0x235030
+  offset: 0x2358D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F235030
 
 D_F235210:
   type: TEXTURE
-  offset: 0x235210
+  offset: 0x235AB0
   ctype: u8
   format: CI4
-  tlut: 0xF235A10
+  tlut: 0xF2362B0
   width: 64
   height: 64
   symbol: D_F235210
 
 D_F235A10:
   type: TEXTURE
-  offset: 0x235A10
+  offset: 0x2362B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6842,23 +6608,23 @@ D_F235A10:
 
 pad_segment_2B9EA0_F235A30:
   type: BLOB
-  offset: 0x235A30
+  offset: 0x2362D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F235A30
 
 D_F235C10:
   type: TEXTURE
-  offset: 0x235C10
+  offset: 0x2364B0
   ctype: u8
   format: CI4
-  tlut: 0xF236410
+  tlut: 0xF236CB0
   width: 64
   height: 64
   symbol: D_F235C10
 
 D_F236410:
   type: TEXTURE
-  offset: 0x236410
+  offset: 0x236CB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6866,23 +6632,23 @@ D_F236410:
 
 pad_segment_2B9EA0_F236430:
   type: BLOB
-  offset: 0x236430
+  offset: 0x236CD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F236430
 
 D_F236610:
   type: TEXTURE
-  offset: 0x236610
+  offset: 0x236EB0
   ctype: u8
   format: CI4
-  tlut: 0xF236E10
+  tlut: 0xF2376B0
   width: 64
   height: 64
   symbol: D_F236610
 
 D_F236E10:
   type: TEXTURE
-  offset: 0x236E10
+  offset: 0x2376B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6890,23 +6656,23 @@ D_F236E10:
 
 pad_segment_2B9EA0_F236E30:
   type: BLOB
-  offset: 0x236E30
+  offset: 0x2376D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F236E30
 
 D_F237010:
   type: TEXTURE
-  offset: 0x237010
+  offset: 0x2378B0
   ctype: u8
   format: CI4
-  tlut: 0xF237810
+  tlut: 0xF2380B0
   width: 64
   height: 64
   symbol: D_F237010
 
 D_F237810:
   type: TEXTURE
-  offset: 0x237810
+  offset: 0x2380B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6914,23 +6680,23 @@ D_F237810:
 
 pad_segment_2B9EA0_F237830:
   type: BLOB
-  offset: 0x237830
+  offset: 0x2380D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F237830
 
 D_F237A10:
   type: TEXTURE
-  offset: 0x237A10
+  offset: 0x2382B0
   ctype: u8
   format: CI4
-  tlut: 0xF238210
+  tlut: 0xF238AB0
   width: 64
   height: 64
   symbol: D_F237A10
 
 D_F238210:
   type: TEXTURE
-  offset: 0x238210
+  offset: 0x238AB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6938,23 +6704,23 @@ D_F238210:
 
 pad_segment_2B9EA0_F238230:
   type: BLOB
-  offset: 0x238230
+  offset: 0x238AD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F238230
 
 D_F238410:
   type: TEXTURE
-  offset: 0x238410
+  offset: 0x238CB0
   ctype: u8
   format: CI4
-  tlut: 0xF238C10
+  tlut: 0xF2394B0
   width: 64
   height: 64
   symbol: D_F238410
 
 D_F238C10:
   type: TEXTURE
-  offset: 0x238C10
+  offset: 0x2394B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6962,23 +6728,23 @@ D_F238C10:
 
 pad_segment_2B9EA0_F238C30:
   type: BLOB
-  offset: 0x238C30
+  offset: 0x2394D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F238C30
 
 D_F238E10:
   type: TEXTURE
-  offset: 0x238E10
+  offset: 0x2396B0
   ctype: u8
   format: CI4
-  tlut: 0xF239610
+  tlut: 0xF239EB0
   width: 64
   height: 64
   symbol: D_F238E10
 
 D_F239610:
   type: TEXTURE
-  offset: 0x239610
+  offset: 0x239EB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -6986,23 +6752,23 @@ D_F239610:
 
 pad_segment_2B9EA0_F239630:
   type: BLOB
-  offset: 0x239630
+  offset: 0x239ED0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F239630
 
 D_F239810:
   type: TEXTURE
-  offset: 0x239810
+  offset: 0x23A0B0
   ctype: u8
   format: CI4
-  tlut: 0xF23A010
+  tlut: 0xF23A8B0
   width: 64
   height: 64
   symbol: D_F239810
 
 D_F23A010:
   type: TEXTURE
-  offset: 0x23A010
+  offset: 0x23A8B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7010,23 +6776,23 @@ D_F23A010:
 
 pad_segment_2B9EA0_F23A030:
   type: BLOB
-  offset: 0x23A030
+  offset: 0x23A8D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F23A030
 
 D_F23A210:
   type: TEXTURE
-  offset: 0x23A210
+  offset: 0x23AAB0
   ctype: u8
   format: CI4
-  tlut: 0xF23AA10
+  tlut: 0xF23B2B0
   width: 64
   height: 64
   symbol: D_F23A210
 
 D_F23AA10:
   type: TEXTURE
-  offset: 0x23AA10
+  offset: 0x23B2B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7034,23 +6800,23 @@ D_F23AA10:
 
 pad_segment_2B9EA0_F23AA30:
   type: BLOB
-  offset: 0x23AA30
+  offset: 0x23B2D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F23AA30
 
 D_F23AC10:
   type: TEXTURE
-  offset: 0x23AC10
+  offset: 0x23B4B0
   ctype: u8
   format: CI4
-  tlut: 0xF23B410
+  tlut: 0xF23BCB0
   width: 64
   height: 64
   symbol: D_F23AC10
 
 D_F23B410:
   type: TEXTURE
-  offset: 0x23B410
+  offset: 0x23BCB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7058,23 +6824,23 @@ D_F23B410:
 
 pad_segment_2B9EA0_F23B430:
   type: BLOB
-  offset: 0x23B430
+  offset: 0x23BCD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F23B430
 
 D_F23B610:
   type: TEXTURE
-  offset: 0x23B610
+  offset: 0x23BEB0
   ctype: u8
   format: CI4
-  tlut: 0xF23BE10
+  tlut: 0xF23C6B0
   width: 64
   height: 64
   symbol: D_F23B610
 
 D_F23BE10:
   type: TEXTURE
-  offset: 0x23BE10
+  offset: 0x23C6B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7082,23 +6848,23 @@ D_F23BE10:
 
 pad_segment_2B9EA0_F23BE30:
   type: BLOB
-  offset: 0x23BE30
+  offset: 0x23C6D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F23BE30
 
 D_F23C010:
   type: TEXTURE
-  offset: 0x23C010
+  offset: 0x23C8B0
   ctype: u8
   format: CI4
-  tlut: 0xF23C810
+  tlut: 0xF23D0B0
   width: 64
   height: 64
   symbol: D_F23C010
 
 D_F23C810:
   type: TEXTURE
-  offset: 0x23C810
+  offset: 0x23D0B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7106,23 +6872,23 @@ D_F23C810:
 
 pad_segment_2B9EA0_F23C830:
   type: BLOB
-  offset: 0x23C830
+  offset: 0x23D0D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F23C830
 
 D_F23CA10:
   type: TEXTURE
-  offset: 0x23CA10
+  offset: 0x23D2B0
   ctype: u8
   format: CI4
-  tlut: 0xF23D210
+  tlut: 0xF23DAB0
   width: 64
   height: 64
   symbol: D_F23CA10
 
 D_F23D210:
   type: TEXTURE
-  offset: 0x23D210
+  offset: 0x23DAB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7130,23 +6896,23 @@ D_F23D210:
 
 pad_segment_2B9EA0_F23D230:
   type: BLOB
-  offset: 0x23D230
+  offset: 0x23DAD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F23D230
 
 D_F23D410:
   type: TEXTURE
-  offset: 0x23D410
+  offset: 0x23DCB0
   ctype: u8
   format: CI4
-  tlut: 0xF23DC10
+  tlut: 0xF23E4B0
   width: 64
   height: 64
   symbol: D_F23D410
 
 D_F23DC10:
   type: TEXTURE
-  offset: 0x23DC10
+  offset: 0x23E4B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7154,23 +6920,23 @@ D_F23DC10:
 
 pad_segment_2B9EA0_F23DC30:
   type: BLOB
-  offset: 0x23DC30
+  offset: 0x23E4D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F23DC30
 
 D_F23DE10:
   type: TEXTURE
-  offset: 0x23DE10
+  offset: 0x23E6B0
   ctype: u8
   format: CI4
-  tlut: 0xF23E610
+  tlut: 0xF23EEB0
   width: 64
   height: 64
   symbol: D_F23DE10
 
 D_F23E610:
   type: TEXTURE
-  offset: 0x23E610
+  offset: 0x23EEB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7178,23 +6944,23 @@ D_F23E610:
 
 pad_segment_2B9EA0_F23E630:
   type: BLOB
-  offset: 0x23E630
+  offset: 0x23EED0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F23E630
 
 D_F23E810:
   type: TEXTURE
-  offset: 0x23E810
+  offset: 0x23F0B0
   ctype: u8
   format: CI4
-  tlut: 0xF23F010
+  tlut: 0xF23F8B0
   width: 64
   height: 64
   symbol: D_F23E810
 
 D_F23F010:
   type: TEXTURE
-  offset: 0x23F010
+  offset: 0x23F8B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7202,23 +6968,23 @@ D_F23F010:
 
 pad_segment_2B9EA0_F23F030:
   type: BLOB
-  offset: 0x23F030
+  offset: 0x23F8D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F23F030
 
 D_F23F210:
   type: TEXTURE
-  offset: 0x23F210
+  offset: 0x23FAB0
   ctype: u8
   format: CI4
-  tlut: 0xF23FA10
+  tlut: 0xF2402B0
   width: 64
   height: 64
   symbol: D_F23F210
 
 D_F23FA10:
   type: TEXTURE
-  offset: 0x23FA10
+  offset: 0x2402B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7226,23 +6992,23 @@ D_F23FA10:
 
 pad_segment_2B9EA0_F23FA30:
   type: BLOB
-  offset: 0x23FA30
+  offset: 0x2402D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F23FA30
 
 D_F23FC10:
   type: TEXTURE
-  offset: 0x23FC10
+  offset: 0x2404B0
   ctype: u8
   format: CI4
-  tlut: 0xF240410
+  tlut: 0xF240CB0
   width: 64
   height: 64
   symbol: D_F23FC10
 
 D_F240410:
   type: TEXTURE
-  offset: 0x240410
+  offset: 0x240CB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7250,23 +7016,23 @@ D_F240410:
 
 pad_segment_2B9EA0_F240430:
   type: BLOB
-  offset: 0x240430
+  offset: 0x240CD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F240430
 
 D_F240610:
   type: TEXTURE
-  offset: 0x240610
+  offset: 0x240EB0
   ctype: u8
   format: CI4
-  tlut: 0xF240E10
+  tlut: 0xF2416B0
   width: 64
   height: 64
   symbol: D_F240610
 
 D_F240E10:
   type: TEXTURE
-  offset: 0x240E10
+  offset: 0x2416B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7274,23 +7040,23 @@ D_F240E10:
 
 pad_segment_2B9EA0_F240E30:
   type: BLOB
-  offset: 0x240E30
+  offset: 0x2416D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F240E30
 
 D_F241010:
   type: TEXTURE
-  offset: 0x241010
+  offset: 0x2418B0
   ctype: u8
   format: CI4
-  tlut: 0xF241810
+  tlut: 0xF2420B0
   width: 64
   height: 64
   symbol: D_F241010
 
 D_F241810:
   type: TEXTURE
-  offset: 0x241810
+  offset: 0x2420B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7298,23 +7064,23 @@ D_F241810:
 
 pad_segment_2B9EA0_F241830:
   type: BLOB
-  offset: 0x241830
+  offset: 0x2420D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F241830
 
 D_F241A10:
   type: TEXTURE
-  offset: 0x241A10
+  offset: 0x2422B0
   ctype: u8
   format: CI4
-  tlut: 0xF242210
+  tlut: 0xF242AB0
   width: 64
   height: 64
   symbol: D_F241A10
 
 D_F242210:
   type: TEXTURE
-  offset: 0x242210
+  offset: 0x242AB0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7322,23 +7088,23 @@ D_F242210:
 
 pad_segment_2B9EA0_F242230:
   type: BLOB
-  offset: 0x242230
+  offset: 0x242AD0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F242230
 
 D_F242410:
   type: TEXTURE
-  offset: 0x242410
+  offset: 0x242CB0
   ctype: u8
   format: CI4
-  tlut: 0xF242C10
+  tlut: 0xF2434B0
   width: 64
   height: 64
   symbol: D_F242410
 
 D_F242C10:
   type: TEXTURE
-  offset: 0x242C10
+  offset: 0x2434B0
   ctype: u16
   format: TLUT
   colors: 16
@@ -7346,13 +7112,13 @@ D_F242C10:
 
 pad_segment_2B9EA0_F242C30:
   type: BLOB
-  offset: 0x242C30
+  offset: 0x2434D0
   size: 0x1E0
   symbol: pad_segment_2B9EA0_F242C30
 
 aRecordsAccelerationSpeedGraphTex:
   type: TEXTURE
-  offset: 0x242E10
+  offset: 0x2436B0
   ctype: u16
   format: RGBA16
   width: 32
@@ -7361,7 +7127,7 @@ aRecordsAccelerationSpeedGraphTex:
 
 aRecordsAccelerationSpeedSliderTex:
   type: TEXTURE
-  offset: 0x243210
+  offset: 0x243AB0
   ctype: u16
   format: RGBA16
   width: 8
@@ -7370,7 +7136,7 @@ aRecordsAccelerationSpeedSliderTex:
 
 aBestTex:
   type: TEXTURE
-  offset: 0x243290
+  offset: 0x243B30
   ctype: u16
   format: RGBA16
   width: 16
@@ -7379,7 +7145,7 @@ aBestTex:
 
 aFinalResultPosition0Tex:
   type: TEXTURE
-  offset: 0x243410
+  offset: 0x243CB0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7388,7 +7154,7 @@ aFinalResultPosition0Tex:
 
 aFinalResultPosition1Tex:
   type: TEXTURE
-  offset: 0x243610
+  offset: 0x243EB0
   ctype: u16
   format: RGBA16
   width: 8
@@ -7397,7 +7163,7 @@ aFinalResultPosition1Tex:
 
 aFinalResultPosition2Tex:
   type: TEXTURE
-  offset: 0x243710
+  offset: 0x243FB0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7406,7 +7172,7 @@ aFinalResultPosition2Tex:
 
 aFinalResultPosition3Tex:
   type: TEXTURE
-  offset: 0x243910
+  offset: 0x2441B0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7415,7 +7181,7 @@ aFinalResultPosition3Tex:
 
 aFinalResultPosition4Tex:
   type: TEXTURE
-  offset: 0x243B10
+  offset: 0x2443B0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7424,7 +7190,7 @@ aFinalResultPosition4Tex:
 
 aFinalResultPosition5Tex:
   type: TEXTURE
-  offset: 0x243D10
+  offset: 0x2445B0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7433,7 +7199,7 @@ aFinalResultPosition5Tex:
 
 aFinalResultPosition6Tex:
   type: TEXTURE
-  offset: 0x243F10
+  offset: 0x2447B0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7442,7 +7208,7 @@ aFinalResultPosition6Tex:
 
 aFinalResultPosition7Tex:
   type: TEXTURE
-  offset: 0x244110
+  offset: 0x2449B0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7451,7 +7217,7 @@ aFinalResultPosition7Tex:
 
 aFinalResultPosition8Tex:
   type: TEXTURE
-  offset: 0x244310
+  offset: 0x244BB0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7460,7 +7226,7 @@ aFinalResultPosition8Tex:
 
 aFinalResultPosition9Tex:
   type: TEXTURE
-  offset: 0x244510
+  offset: 0x244DB0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7469,7 +7235,7 @@ aFinalResultPosition9Tex:
 
 aFinalResultPositionSuffixSTTex:
   type: TEXTURE
-  offset: 0x244710
+  offset: 0x244FB0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7478,7 +7244,7 @@ aFinalResultPositionSuffixSTTex:
 
 aFinalResultPositionSuffixNDTex:
   type: TEXTURE
-  offset: 0x244910
+  offset: 0x2451B0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7487,7 +7253,7 @@ aFinalResultPositionSuffixNDTex:
 
 aFinalResultPositionSuffixRDTex:
   type: TEXTURE
-  offset: 0x244B10
+  offset: 0x2453B0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7496,7 +7262,7 @@ aFinalResultPositionSuffixRDTex:
 
 aFinalResultPositionSuffixTHTex:
   type: TEXTURE
-  offset: 0x244D10
+  offset: 0x2455B0
   ctype: u16
   format: RGBA16
   width: 16
@@ -7815,7 +7581,7 @@ aEndingTextCaptainFalconMasterTex:
 
 aCongratulationsTex:
   type: TEXTURE
-  offset: 0x256900
+  offset: 0x250E30
   ctype: u16
   format: RGBA16
   width: 264
@@ -7824,17 +7590,17 @@ aCongratulationsTex:
 
 aRetireTex:
   type: TEXTURE
-  offset: 0x25A8F0
+  offset: 0x254E20
   ctype: u8
   format: CI8
-  tlut: 0xF25B8F0
+  tlut: 0xF255E20
   width: 128
   height: 32
   symbol: aRetireTex
 
 aRetireTLUT:
   type: TEXTURE
-  offset: 0x25B8F0
+  offset: 0x255E20
   ctype: u16
   format: TLUT
   colors: 256
@@ -7842,17 +7608,17 @@ aRetireTLUT:
 
 aWinnerTex:
   type: TEXTURE
-  offset: 0x25BAF0
+  offset: 0x256020
   ctype: u8
   format: CI8
-  tlut: 0xF25CAF0
+  tlut: 0xF257020
   width: 128
   height: 32
   symbol: aWinnerTex
 
 aWinnerTLUT:
   type: TEXTURE
-  offset: 0x25CAF0
+  offset: 0x257020
   ctype: u16
   format: TLUT
   colors: 256
@@ -7860,17 +7626,17 @@ aWinnerTLUT:
 
 aLoserTex:
   type: TEXTURE
-  offset: 0x25CCF0
+  offset: 0x257220
   ctype: u8
   format: CI8
-  tlut: 0xF25D650
+  tlut: 0xF257B80
   width: 80
   height: 30
   symbol: aLoserTex
 
 aLoserTLUT:
   type: TEXTURE
-  offset: 0x25D650
+  offset: 0x257B80
   ctype: u16
   format: TLUT
   colors: 256
@@ -7878,12 +7644,12 @@ aLoserTLUT:
 
 D_F25D850:
   type: GFX
-  offset: 0x25D850
+  offset: 0x257D80
   symbol: D_F25D850
 
 D_F25D858:
   type: TEXTURE
-  offset: 0x25D858
+  offset: 0x257D88
   ctype: u16
   format: RGBA16
   width: 32
@@ -7892,12 +7658,12 @@ D_F25D858:
 
 D_F25E058:
   type: GFX
-  offset: 0x25E058
+  offset: 0x258588
   symbol: D_F25E058
 
 D_F25E060:
   type: TEXTURE
-  offset: 0x25E060
+  offset: 0x258590
   ctype: u16
   format: RGBA16
   width: 32
@@ -7906,12 +7672,12 @@ D_F25E060:
 
 D_F25E860:
   type: GFX
-  offset: 0x25E860
+  offset: 0x258D90
   symbol: D_F25E860
 
 D_F25E868:
   type: TEXTURE
-  offset: 0x25E868
+  offset: 0x258D98
   ctype: u16
   format: RGBA16
   width: 32
@@ -7920,12 +7686,12 @@ D_F25E868:
 
 D_F25F068:
   type: GFX
-  offset: 0x25F068
+  offset: 0x259598
   symbol: D_F25F068
 
 aMenuTextTLUT:
   type: TEXTURE
-  offset: 0x25F070
+  offset: 0x2595A0
   ctype: u16
   format: TLUT
   colors: 32
@@ -7936,7 +7702,7 @@ aMenuRetryTex:
   offset: 0x2595E0
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 40
   height: 16
   compression: MIO0
@@ -7947,7 +7713,7 @@ aMenuSettingsTex:
   offset: 0x259724
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -7958,7 +7724,7 @@ aMenuQuitTex:
   offset: 0x2598C8
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 32
   height: 16
   compression: MIO0
@@ -7969,7 +7735,7 @@ aMenuChangeMachineTex:
   offset: 0x2599EC
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -7980,7 +7746,7 @@ aMenuChangeCourseTex:
   offset: 0x259BF4
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -7991,7 +7757,7 @@ aMenuGhostSaveTex:
   offset: 0x259DC0
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8002,7 +7768,7 @@ aMenuOverwriteData1Tex:
   offset: 0x259F68
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 128
   height: 16
   compression: MIO0
@@ -8013,7 +7779,7 @@ aMenuSavingTex:
   offset: 0x25A278
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8024,7 +7790,7 @@ aMenuNoGamePakTex:
   offset: 0x25A45C
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8035,7 +7801,7 @@ aMenuNoDiskTex:
   offset: 0x25A5D8
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8046,7 +7812,7 @@ aMenuOverwriteData2Tex:
   offset: 0x25A73C
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 128
   height: 16
   compression: MIO0
@@ -8057,7 +7823,7 @@ aMenuClearRecordTex:
   offset: 0x25AA28
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8068,7 +7834,7 @@ aMenuEraseCourseSavedData1Tex:
   offset: 0x25AC00
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 128
   height: 32
   compression: MIO0
@@ -8079,7 +7845,7 @@ aMenuClearGhostTex:
   offset: 0x25B2C0
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8090,7 +7856,7 @@ aMenuEraseCourseSavedData2Tex:
   offset: 0x25B4A0
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 128
   height: 32
   compression: MIO0
@@ -8101,7 +7867,7 @@ aMenuContinueTex:
   offset: 0x25BB30
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8112,7 +7878,7 @@ aMenuSavedTex:
   offset: 0x25BC9C
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8123,7 +7889,7 @@ aMenuNewGhostTex:
   offset: 0x25BE90
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8134,7 +7900,7 @@ aMenuSavedGhostTex:
   offset: 0x25C000
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 128
   height: 16
   compression: MIO0
@@ -8145,7 +7911,7 @@ aOptionsTex:
   offset: 0x25C2CC
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 96
   height: 24
   compression: MIO0
@@ -8156,7 +7922,7 @@ aOptionsVsCom2P3PTex:
   offset: 0x25C634
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 128
   height: 16
   compression: MIO0
@@ -8167,7 +7933,7 @@ aOptionsVsHandicapTex:
   offset: 0x25CA38
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 96
   height: 16
   compression: MIO0
@@ -8178,7 +7944,7 @@ aOptionsVsSlotTex:
   offset: 0x25CD24
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 96
   height: 16
   compression: MIO0
@@ -8189,7 +7955,7 @@ aOptionsSoundModeTex:
   offset: 0x25CF50
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 96
   height: 16
   compression: MIO0
@@ -8200,7 +7966,7 @@ aOptionsAllDataClearTex:
   offset: 0x25D190
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 96
   height: 16
   compression: MIO0
@@ -8211,7 +7977,7 @@ aOptionsEraseAllSavedDataTex:
   offset: 0x25D428
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 128
   height: 32
   compression: MIO0
@@ -8222,7 +7988,7 @@ aMenuWithoutTex:
   offset: 0x25D928
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 32
   height: 16
   compression: MIO0
@@ -8233,7 +7999,7 @@ aMenuWithTex:
   offset: 0x25D9D0
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 32
   height: 16
   compression: MIO0
@@ -8244,7 +8010,7 @@ aOptionsExitTex:
   offset: 0x25DA78
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 40
   height: 16
   compression: MIO0
@@ -8255,7 +8021,7 @@ aMenuPlusOneTex:
   offset: 0x25DB40
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 32
   height: 16
   compression: MIO0
@@ -8266,7 +8032,7 @@ aMenuPlusTwoTex:
   offset: 0x25DBE0
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 32
   height: 16
   compression: MIO0
@@ -8277,7 +8043,7 @@ aMenuStereoTex:
   offset: 0x25DC98
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8288,7 +8054,7 @@ aMenuMonoTex:
   offset: 0x25DDA0
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 64
   height: 16
   compression: MIO0
@@ -8299,7 +8065,7 @@ aMenuLeftArrowTex:
   offset: 0x25DE8C
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 16
   height: 16
   compression: MIO0
@@ -8310,7 +8076,7 @@ aMenuRightArrowTex:
   offset: 0x25DEE0
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 16
   height: 16
   compression: MIO0
@@ -8321,7 +8087,7 @@ aMenuYesTex:
   offset: 0x25DF34
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 32
   height: 16
   compression: MIO0
@@ -8332,7 +8098,7 @@ aMenuNoTex:
   offset: 0x25E00C
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 32
   height: 16
   compression: MIO0
@@ -8343,7 +8109,7 @@ aMenuCannotSaveGhostTex:
   offset: 0x25E0E0
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 128
   height: 32
   compression: MIO0
@@ -8354,7 +8120,7 @@ aOptionsCopyingGhostTex:
   offset: 0x25E5AC
   ctype: u8
   format: CI8
-  tlut: 0xF25F070
+  tlut: 0xF2595A0
   width: 96
   height: 16
   compression: MIO0
@@ -8362,434 +8128,434 @@ aOptionsCopyingGhostTex:
 
 D_F264110:
   type: ARRAY
-  offset: 0x264110
+  offset: 0x25E7C0
   array_type: s16
   count: 100
   symbol: D_F264110
 
 D_F2641D8:
   type: ARRAY
-  offset: 0x2641D8
+  offset: 0x25E888
   array_type: s16
   count: 180
   symbol: D_F2641D8
 
 D_F264340:
   type: ARRAY
-  offset: 0x264340
+  offset: 0x25E9F0
   array_type: s16
   count: 136
   symbol: D_F264340
 
 D_F264450:
   type: ARRAY
-  offset: 0x264450
+  offset: 0x25EB00
   array_type: s16
   count: 120
   symbol: D_F264450
 
 D_F264540:
   type: ARRAY
-  offset: 0x264540
+  offset: 0x25EBF0
   array_type: s16
   count: 168
   symbol: D_F264540
 
 D_F264690:
   type: ARRAY
-  offset: 0x264690
+  offset: 0x25ED40
   array_type: s16
   count: 88
   symbol: D_F264690
 
 D_F264740:
   type: ARRAY
-  offset: 0x264740
+  offset: 0x25EDF0
   array_type: s16
   count: 144
   symbol: D_F264740
 
 D_F264860:
   type: ARRAY
-  offset: 0x264860
+  offset: 0x25EF10
   array_type: s16
   count: 96
   symbol: D_F264860
 
 D_F264920:
   type: ARRAY
-  offset: 0x264920
+  offset: 0x25EFD0
   array_type: s16
   count: 156
   symbol: D_F264920
 
 D_F264A58:
   type: ARRAY
-  offset: 0x264A58
+  offset: 0x25F108
   array_type: s16
   count: 116
   symbol: D_F264A58
 
 D_F264B40:
   type: ARRAY
-  offset: 0x264B40
+  offset: 0x25F1F0
   array_type: s16
   count: 160
   symbol: D_F264B40
 
 D_F264C80:
   type: ARRAY
-  offset: 0x264C80
+  offset: 0x25F330
   array_type: s16
   count: 176
   symbol: D_F264C80
 
 D_F264DE0:
   type: ARRAY
-  offset: 0x264DE0
+  offset: 0x25F490
   array_type: s16
   count: 148
   symbol: D_F264DE0
 
 D_F264F08:
   type: ARRAY
-  offset: 0x264F08
+  offset: 0x25F5B8
   array_type: s16
   count: 212
   symbol: D_F264F08
 
 D_F2650B0:
   type: ARRAY
-  offset: 0x2650B0
+  offset: 0x25F760
   array_type: s16
   count: 140
   symbol: D_F2650B0
 
 D_F2651C8:
   type: ARRAY
-  offset: 0x2651C8
+  offset: 0x25F878
   array_type: s16
   count: 116
   symbol: D_F2651C8
 
 D_F2652B0:
   type: ARRAY
-  offset: 0x2652B0
+  offset: 0x25F960
   array_type: s16
   count: 156
   symbol: D_F2652B0
 
 D_F2653E8:
   type: ARRAY
-  offset: 0x2653E8
+  offset: 0x25FA98
   array_type: s16
   count: 164
   symbol: D_F2653E8
 
 D_F265530:
   type: ARRAY
-  offset: 0x265530
+  offset: 0x25FBE0
   array_type: s16
   count: 204
   symbol: D_F265530
 
 D_F2656C8:
   type: ARRAY
-  offset: 0x2656C8
+  offset: 0x25FD78
   array_type: s16
   count: 260
   symbol: D_F2656C8
 
 D_F2658D0:
   type: ARRAY
-  offset: 0x2658D0
+  offset: 0x25FF80
   array_type: s16
   count: 136
   symbol: D_F2658D0
 
 D_F2659E0:
   type: ARRAY
-  offset: 0x2659E0
+  offset: 0x260090
   array_type: s16
   count: 200
   symbol: D_F2659E0
 
 D_F265B70:
   type: ARRAY
-  offset: 0x265B70
+  offset: 0x260220
   array_type: s16
   count: 204
   symbol: D_F265B70
 
 D_F265D08:
   type: ARRAY
-  offset: 0x265D08
+  offset: 0x2603B8
   array_type: s16
   count: 188
   symbol: D_F265D08
 
 D_F265E80:
   type: ARRAY
-  offset: 0x265E80
+  offset: 0x260530
   array_type: u8
   count: 512
   symbol: D_F265E80
 
 D_F266080:
   type: ARRAY
-  offset: 0x266080
+  offset: 0x260730
   array_type: u8
   count: 512
   symbol: D_F266080
 
 D_F266280:
   type: ARRAY
-  offset: 0x266280
+  offset: 0x260930
   array_type: u8
   count: 512
   symbol: D_F266280
 
 D_F266480:
   type: ARRAY
-  offset: 0x266480
+  offset: 0x260B30
   array_type: u8
   count: 512
   symbol: D_F266480
 
 D_F266680:
   type: ARRAY
-  offset: 0x266680
+  offset: 0x260D30
   array_type: u8
   count: 512
   symbol: D_F266680
 
 D_F266880:
   type: ARRAY
-  offset: 0x266880
+  offset: 0x260F30
   array_type: u8
   count: 512
   symbol: D_F266880
 
 D_F266A80:
   type: ARRAY
-  offset: 0x266A80
+  offset: 0x261130
   array_type: u8
   count: 512
   symbol: D_F266A80
 
 D_F266C80:
   type: ARRAY
-  offset: 0x266C80
+  offset: 0x261330
   array_type: u8
   count: 512
   symbol: D_F266C80
 
 D_F266E80:
   type: ARRAY
-  offset: 0x266E80
+  offset: 0x261530
   array_type: u8
   count: 512
   symbol: D_F266E80
 
 D_F267080:
   type: ARRAY
-  offset: 0x267080
+  offset: 0x261730
   array_type: u8
   count: 512
   symbol: D_F267080
 
 D_F267280:
   type: ARRAY
-  offset: 0x267280
+  offset: 0x261930
   array_type: u8
   count: 512
   symbol: D_F267280
 
 D_F267480:
   type: ARRAY
-  offset: 0x267480
+  offset: 0x261B30
   array_type: u8
   count: 512
   symbol: D_F267480
 
 D_F267680:
   type: ARRAY
-  offset: 0x267680
+  offset: 0x261D30
   array_type: u8
   count: 512
   symbol: D_F267680
 
 D_F267880:
   type: ARRAY
-  offset: 0x267880
+  offset: 0x261F30
   array_type: u8
   count: 512
   symbol: D_F267880
 
 D_F267A80:
   type: ARRAY
-  offset: 0x267A80
+  offset: 0x262130
   array_type: u8
   count: 512
   symbol: D_F267A80
 
 D_F267C80:
   type: ARRAY
-  offset: 0x267C80
+  offset: 0x262330
   array_type: u8
   count: 512
   symbol: D_F267C80
 
 D_F267E80:
   type: ARRAY
-  offset: 0x267E80
+  offset: 0x262530
   array_type: u8
   count: 512
   symbol: D_F267E80
 
 D_F268080:
   type: ARRAY
-  offset: 0x268080
+  offset: 0x262730
   array_type: u8
   count: 512
   symbol: D_F268080
 
 D_F268280:
   type: ARRAY
-  offset: 0x268280
+  offset: 0x262930
   array_type: u8
   count: 512
   symbol: D_F268280
 
 D_F268480:
   type: ARRAY
-  offset: 0x268480
+  offset: 0x262B30
   array_type: u8
   count: 512
   symbol: D_F268480
 
 D_F268680:
   type: ARRAY
-  offset: 0x268680
+  offset: 0x262D30
   array_type: u8
   count: 512
   symbol: D_F268680
 
 D_F268880:
   type: ARRAY
-  offset: 0x268880
+  offset: 0x262F30
   array_type: u8
   count: 512
   symbol: D_F268880
 
 D_F268A80:
   type: ARRAY
-  offset: 0x268A80
+  offset: 0x263130
   array_type: u8
   count: 512
   symbol: D_F268A80
 
 D_F268C80:
   type: ARRAY
-  offset: 0x268C80
+  offset: 0x263330
   array_type: u8
   count: 512
   symbol: D_F268C80
 
 D_F268E80:
   type: ARRAY
-  offset: 0x268E80
+  offset: 0x263530
   array_type: u8
   count: 512
   symbol: D_F268E80
 
 D_F269080:
   type: ARRAY
-  offset: 0x269080
+  offset: 0x263730
   array_type: u8
   count: 512
   symbol: D_F269080
 
 D_F269280:
   type: ARRAY
-  offset: 0x269280
+  offset: 0x263930
   array_type: u8
   count: 512
   symbol: D_F269280
 
 D_F269480:
   type: ARRAY
-  offset: 0x269480
+  offset: 0x263B30
   array_type: u8
   count: 512
   symbol: D_F269480
 
 D_F269680:
   type: ARRAY
-  offset: 0x269680
+  offset: 0x263D30
   array_type: u8
   count: 512
   symbol: D_F269680
 
 D_F269880:
   type: ARRAY
-  offset: 0x269880
+  offset: 0x263F30
   array_type: u8
   count: 512
   symbol: D_F269880
 
 D_F269A80:
   type: ARRAY
-  offset: 0x269A80
+  offset: 0x264130
   array_type: u8
   count: 512
   symbol: D_F269A80
 
 D_F269C80:
   type: ARRAY
-  offset: 0x269C80
+  offset: 0x264330
   array_type: u8
   count: 512
   symbol: D_F269C80
 
 D_F269E80:
   type: ARRAY
-  offset: 0x269E80
+  offset: 0x264530
   array_type: u8
   count: 512
   symbol: D_F269E80
 
 D_F26A080:
   type: ARRAY
-  offset: 0x26A080
+  offset: 0x264730
   array_type: u8
   count: 512
   symbol: D_F26A080
 
 D_F26A280:
   type: ARRAY
-  offset: 0x26A280
+  offset: 0x264930
   array_type: u8
   count: 512
   symbol: D_F26A280
 
 D_F26A480:
   type: ARRAY
-  offset: 0x26A480
+  offset: 0x264B30
   array_type: u8
   count: 512
   symbol: D_F26A480
 
 D_F26A680:
   type: ARRAY
-  offset: 0x26A680
+  offset: 0x264D30
   array_type: u8
   count: 512
   symbol: D_F26A680
 
 D_F26A880:
   type: ARRAY
-  offset: 0x26A880
+  offset: 0x264F30
   array_type: u8
   count: 512
   symbol: D_F26A880
