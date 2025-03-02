@@ -1100,7 +1100,11 @@ Gfx* MachineSelect_BackgroundDraw(Gfx* gfx) {
     return gfx;
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i4/machine/MachineSelect_BackgroundDraw.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/machine/MachineSelect_BackgroundDraw.s")
+#endif
 #endif
 
 Gfx* MachineSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {

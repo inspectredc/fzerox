@@ -86,7 +86,7 @@ bool func_i8_80143D30(s32);
 bool func_i8_80143D84(s32);
 
 extern s8 gUnlockableLevel;
-extern s8 D_800CD3C8;
+extern s8 gSettingEverythingUnlocked;
 extern s32 gCourseIndex;
 
 void func_i8_80143A78(void) {
@@ -94,7 +94,7 @@ void func_i8_80143A78(void) {
     unk_80144F44* var_s0;
 
     D_i8_80144F40 = gCourseIndex;
-    if ((gUnlockableLevel == 0) && (D_800CD3C8 == 0)) {
+    if ((gUnlockableLevel == 0) && (gSettingEverythingUnlocked == 0)) {
         sUnlockedCourseCount = 18;
     } else {
         sUnlockedCourseCount = 24;
@@ -577,10 +577,16 @@ Gfx* func_i8_80144CDC(Gfx* gfx, s32 arg1, s32 arg2) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
 
     temp_s0 = &D_i8_80144F74[D_i8_80144FCE];
+
+#ifdef VERSION_JP
+    gfx = func_8007E410(gfx, func_800783AC(temp_s0->unk_00), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1,
+                        arg1 + 12, arg2 + 10, temp_s0->width, temp_s0->height, 3);
+#else
     sp58 = (0x7C - temp_s0->width) / 2;
 
     gfx = func_8007E410(gfx, func_800783AC(temp_s0->unk_00), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1,
                         arg1 + sp58 + 12, arg2 + 10, temp_s0->width, temp_s0->height, 3);
+#endif
 
     gDPPipeSync(gfx++);
     gfx = func_8007DB28(gfx, 0);

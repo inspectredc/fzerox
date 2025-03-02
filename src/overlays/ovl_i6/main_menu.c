@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_object.h"
+#include "src/overlays/ovl_i2/ovl_i2.h"
 #include "ovl_i6.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B1E0.h"

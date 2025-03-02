@@ -1548,7 +1548,11 @@ Gfx* func_i7_DrawThanksForPlayingWindow(Gfx* gfx) {
     return Font_DrawString(gfx, sThanksForPlayingLeft, sThanksForPlayingTop, sThanksForPlayingStr, 1, FONT_SET_1, 1);
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_DrawThanksForPlayingWindow.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_DrawThanksForPlayingWindow.s")
+#endif
 #endif
 
 void func_i7_FadeEndScreen(void) {
@@ -1686,7 +1690,11 @@ void func_i7_801467FC(void) {
     var++;
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_801467FC.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_801467FC.s")
+#endif
 #endif
 
 extern Vec3f D_i7_8014BF30[];
@@ -1820,7 +1828,11 @@ Gfx* func_i7_80146E28(Gfx* gfx) {
     return gfx;
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_80146E28.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_80146E28.s")
+#endif
 #endif
 
 extern s32 D_800E5EC0;

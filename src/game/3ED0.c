@@ -804,7 +804,11 @@ void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5
     Matrix_ToMtx(arg1, arg0);
 }
 
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/3ED0/func_8006C520.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006C520.s")
+#endif
 
 void func_8006CB0C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,
                    f32 arg9, f32 argA) {

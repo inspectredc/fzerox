@@ -252,13 +252,10 @@
     bss_size: 0x130
     symbol_name_format: i8_$VRAM
     subsegments:
-      - [0xF1290, asm]
-      - [0xF27D0, data]
-      - { type: bss, vram: 0x80144880 }
-      # - [0xF14E0, c, records]
-      # - [0xF2A50, .data, records]
-      # - [0xF2AB0, .rodata, records]
-      # - { type: .bss, vram: 0x80144FB0, name: records }
+      - [0xF1290, c, records]
+      - [0xF27D0, .data, records]
+      - [0xF2830, .rodata, records]
+      - { type: .bss, vram: 0x80144880, name: records }
 
   - name: ovl_i9
     exclusive_ram_id: overlay

@@ -25,41 +25,14 @@ aDDNoTex:
   offset: 0x100
   symbol: aDDNoTex
 
-D_7000200:
-  type: TEXTURE
-  ctype: u16
-  format: RGBA16
-  width: 48
-  height: 16
-  offset: 0x200
-  symbol: D_7000200
-
 D_7000800:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 48
   height: 16
-  offset: 0x800
+  offset: 0x200
   symbol: D_7000800
-
-D_7000E00:
-  type: TEXTURE
-  ctype: u8
-  format: I8
-  width: 24
-  height: 16
-  offset: 0xE00
-  symbol: D_7000E00
-
-D_7000F80:
-  type: TEXTURE
-  ctype: u8
-  format: I8
-  width: 24
-  height: 16
-  offset: 0xF80
-  symbol: D_7000F80
 
 D_7001100:
   type: TEXTURE
@@ -67,7 +40,7 @@ D_7001100:
   format: RGBA16
   width: 16
   height: 16
-  offset: 0x1100
+  offset: 0x800
   symbol: D_7001100
 
 D_7001300:
@@ -76,7 +49,7 @@ D_7001300:
   format: RGBA16
   width: 16
   height: 16
-  offset: 0x1300
+  offset: 0xA00
   symbol: D_7001300
 
 D_7001500:
@@ -85,7 +58,7 @@ D_7001500:
   format: RGBA16
   width: 24
   height: 24
-  offset: 0x1500
+  offset: 0xC00
   symbol: D_7001500
 
 D_7001980:
@@ -94,7 +67,7 @@ D_7001980:
   format: RGBA16
   width: 48
   height: 16
-  offset: 0x1980
+  offset: 0x1080
   symbol: D_7001980
 
 D_7001F80:
@@ -103,7 +76,7 @@ D_7001F80:
   format: RGBA16
   width: 48
   height: 16
-  offset: 0x1F80
+  offset: 0x1680
   symbol: D_7001F80
 
 D_7002580:
@@ -112,7 +85,7 @@ D_7002580:
   format: RGBA16
   width: 48
   height: 16
-  offset: 0x2580
+  offset: 0x1C80
   symbol: D_7002580
 
 D_7002B80:
@@ -121,7 +94,7 @@ D_7002B80:
   format: RGBA16
   width: 48
   height: 16
-  offset: 0x2B80
+  offset: 0x2280
   symbol: D_7002B80
 
 D_7003180:
@@ -130,7 +103,7 @@ D_7003180:
   format: RGBA16
   width: 48
   height: 16
-  offset: 0x3180
+  offset: 0x2880
   symbol: D_7003180
 
 D_7003780:
@@ -139,7 +112,7 @@ D_7003780:
   format: RGBA16
   width: 48
   height: 16
-  offset: 0x3780
+  offset: 0x2E80
   symbol: D_7003780
 
 D_7003D80:
@@ -148,7 +121,7 @@ D_7003D80:
   format: RGBA16
   width: 48
   height: 16
-  offset: 0x3D80
+  offset: 0x3480
   symbol: D_7003D80
 
 D_7004380:
@@ -157,7 +130,7 @@ D_7004380:
   format: RGBA16
   width: 48
   height: 16
-  offset: 0x4380
+  offset: 0x3A80
   symbol: D_7004380
 
 D_7004980:
@@ -166,7 +139,7 @@ D_7004980:
   format: RGBA16
   width: 48
   height: 16
-  offset: 0x4980
+  offset: 0x4080
   symbol: D_7004980
 
 D_7004F80:
@@ -175,7 +148,7 @@ D_7004F80:
   format: I8
   width: 8
   height: 16
-  offset: 0x4F80
+  offset: 0x4680
   symbol: D_7004F80
 
 D_7005000:
@@ -184,7 +157,7 @@ D_7005000:
   format: I8
   width: 8
   height: 16
-  offset: 0x5000
+  offset: 0x4700
   symbol: D_7005000
 
 D_7005080:
@@ -193,7 +166,7 @@ D_7005080:
   format: I8
   width: 8
   height: 16
-  offset: 0x5080
+  offset: 0x4780
   symbol: D_7005080
 
 D_7005100:
@@ -202,7 +175,7 @@ D_7005100:
   format: I8
   width: 8
   height: 16
-  offset: 0x5100
+  offset: 0x4800
   symbol: D_7005100
 
 D_7005180:
@@ -211,7 +184,7 @@ D_7005180:
   format: I8
   width: 8
   height: 16
-  offset: 0x5180
+  offset: 0x4880
   symbol: D_7005180
 
 D_7005200:
@@ -220,7 +193,7 @@ D_7005200:
   format: I8
   width: 8
   height: 16
-  offset: 0x5200
+  offset: 0x4900
   symbol: D_7005200
 
 D_7005280:
@@ -229,7 +202,7 @@ D_7005280:
   format: I8
   width: 8
   height: 16
-  offset: 0x5280
+  offset: 0x4980
   symbol: D_7005280
 
 D_7005300:
@@ -238,7 +211,7 @@ D_7005300:
   format: I8
   width: 8
   height: 16
-  offset: 0x5300
+  offset: 0x4A00
   symbol: D_7005300
 
 D_7005380:
@@ -247,7 +220,7 @@ D_7005380:
   format: I8
   width: 8
   height: 16
-  offset: 0x5380
+  offset: 0x4A80
   symbol: D_7005380
 
 D_7005400:
@@ -256,7 +229,7 @@ D_7005400:
   format: I8
   width: 8
   height: 16
-  offset: 0x5400
+  offset: 0x4B00
   symbol: D_7005400
 
 D_7005480:
@@ -265,7 +238,7 @@ D_7005480:
   format: I8
   width: 8
   height: 16
-  offset: 0x5480
+  offset: 0x4B80
   symbol: D_7005480
 
 D_7005500:
@@ -274,7 +247,7 @@ D_7005500:
   format: I8
   width: 8
   height: 16
-  offset: 0x5500
+  offset: 0x4C00
   symbol: D_7005500
 
 D_7005580:
@@ -283,7 +256,7 @@ D_7005580:
   format: I8
   width: 8
   height: 16
-  offset: 0x5580
+  offset: 0x4C80
   symbol: D_7005580
 
 D_7005600:
@@ -292,7 +265,7 @@ D_7005600:
   format: I8
   width: 8
   height: 16
-  offset: 0x5600
+  offset: 0x4D00
   symbol: D_7005600
 
 D_7005680:
@@ -301,7 +274,7 @@ D_7005680:
   format: I8
   width: 8
   height: 16
-  offset: 0x5680
+  offset: 0x4D80
   symbol: D_7005680
 
 D_7005700:
@@ -310,7 +283,7 @@ D_7005700:
   format: I4
   width: 128
   height: 32
-  offset: 0x5700
+  offset: 0x4E00
   symbol: D_7005700
 
 D_7005F00:
@@ -319,7 +292,7 @@ D_7005F00:
   format: I4
   width: 128
   height: 16
-  offset: 0x5F00
+  offset: 0x5600
   symbol: D_7005F00
 
 D_7006300:
@@ -328,7 +301,7 @@ D_7006300:
   format: I4
   width: 128
   height: 16
-  offset: 0x6300
+  offset: 0x5A00
   symbol: D_7006300
 
 D_7006700:
@@ -337,7 +310,7 @@ D_7006700:
   format: I4
   width: 128
   height: 32
-  offset: 0x6700
+  offset: 0x5E00
   symbol: D_7006700
 
 D_7006F00:
@@ -346,7 +319,7 @@ D_7006F00:
   format: I4
   width: 128
   height: 16
-  offset: 0x6F00
+  offset: 0x6600
   symbol: D_7006F00
 
 D_7007300:
@@ -355,17 +328,17 @@ D_7007300:
   format: I4
   width: 128
   height: 32
-  offset: 0x7300
+  offset: 0x6A00
   symbol: D_7007300
 
 D_7007B00:
   type: TEXTURE
   ctype: u8
   format: CI8
-  tlut: 0x700C600
+  tlut: 0x700BD00
   width: 160
   height: 120
-  offset: 0x7B00
+  offset: 0x7200
   symbol: D_7007B00
 
 D_700C600:
@@ -373,7 +346,7 @@ D_700C600:
   ctype: u16
   format: TLUT
   colors: 32
-  offset: 0xC600
+  offset: 0xBD00
   symbol: D_700C600
 
 D_700C640:
@@ -382,7 +355,7 @@ D_700C640:
   format: RGBA16
   width: 32
   height: 16
-  offset: 0xC640
+  offset: 0xBD40
   symbol: D_700C640
 
 D_700CA40:
@@ -391,7 +364,7 @@ D_700CA40:
   format: RGBA16
   width: 16
   height: 16
-  offset: 0xCA40
+  offset: 0xC140
   symbol: D_700CA40
 
 D_700CC40:
@@ -400,7 +373,7 @@ D_700CC40:
   format: RGBA16
   width: 32
   height: 16
-  offset: 0xCC40
+  offset: 0xC340
   symbol: D_700CC40
 
 D_700D040:
@@ -409,7 +382,7 @@ D_700D040:
   format: RGBA16
   width: 32
   height: 16
-  offset: 0xD040
+  offset: 0xC740
   symbol: D_700D040
 
 D_700D440:
@@ -418,5 +391,5 @@ D_700D440:
   format: IA16
   width: 48
   height: 16
-  offset: 0xD440
+  offset: 0xCB40
   symbol: D_700D440

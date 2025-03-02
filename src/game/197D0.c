@@ -14,7 +14,7 @@ s32 sLeoFontAlignments[96];
 #endif
 
 #ifdef VERSION_JP
-#define SHIFT_JIS(x) ((((x) &0xFF00) >> 8), ((x) &0xFF))
+#define SHIFT_JIS(x) (((x) & (0xFF00)) >> 8), ((x) & (0xFF))
 u8 D_800CD580[] = { SHIFT_JIS(0x824F), SHIFT_JIS(0) }; // 0
 
 u8 D_800CD584[] = { SHIFT_JIS(0x8250), SHIFT_JIS(0) }; // 1
@@ -323,7 +323,7 @@ void LeoDD_DrawErrorMessage(s32 posX, s32 posY, u16 messageNo) {
 
     messageOffset = sLeoFontOffsets[messageNo];
     for (i = 0, offset = 0; sLeoErrorMessages[messageNo][i] != 0; i += 2) {
-        func_8007FAD4(posX, posY, gLeoFontBuffer + messageOffset + offset);
+        func_8007FA64(posX, posY, gLeoFontBuffer + messageOffset + offset);
 
         posX += 16;
         offset += 0x80;
@@ -342,7 +342,7 @@ void LeoDD_DrawErrorMessageNumber(s32 posX, s32 posY, s8* str) {
     var_s1 = str;
     while (*var_s1 != 0) {
         offset = sLeoFontOffsets[*var_s1 - '0'];
-        func_8007FAD4(posX, posY, gLeoFontBuffer + offset);
+        func_8007FA64(posX, posY, gLeoFontBuffer + offset);
         if (*var_s1 == '1') {
             posX += 7;
         } else {

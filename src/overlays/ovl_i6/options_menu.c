@@ -491,7 +491,11 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
                          arg1 + sp54 + 0x2A, arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);
 }
 
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i6/options_menu/func_i6_8011D394.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/options_menu/func_i6_8011D394.s")
+#endif
 
 extern GfxPool D_1000000;
 extern Mtx D_2000000[];

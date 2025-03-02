@@ -2,7 +2,7 @@
   segments:
     - [0x04,  0x1B89D0]
   external_files:
-    - "assets/yaml/us/rev0/segment_16C8A0.yaml"
+    - "assets/yaml/jp/rev0/segment_16C8A0.yaml"
   header:
     code:
       - '#include "assets/segment_1B8550.h"'

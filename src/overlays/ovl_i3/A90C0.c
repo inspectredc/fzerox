@@ -465,7 +465,11 @@ void func_i3_80115E74(void) {
     }
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115E74.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115E74.s")
+#endif
 #endif
 
 extern CourseRecordInfo* gCurrentCourseRecordInfo;

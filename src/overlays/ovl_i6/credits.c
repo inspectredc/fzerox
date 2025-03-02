@@ -1084,7 +1084,11 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
 }
 #else
 Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj);
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
+#endif
 #endif
 
 Gfx* Credits_CopyrightDraw(Gfx* gfx, Object* copyRightObj) {
