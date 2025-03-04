@@ -569,7 +569,9 @@ void func_i3_80116C74(Racer* arg0) {
     s32 j;
 
     D_i3_80141910 = gRacers;
+#ifndef VERSION_JP
     D_80141900 = 0;
+#endif
     if (arg0->id == 0) {
         func_i3_80116974();
         if (gCourseIndex < ARRAY_COUNT(D_i3_8013DB80)) {

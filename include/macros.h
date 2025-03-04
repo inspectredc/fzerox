@@ -24,6 +24,12 @@
 
 #define MAX_TIMER (60 * 60 * 1000 - 1)
 
+#define TEX_COMPRESSED_SIZE(tex) (_ ## tex ## _COMPRESSED_SIZE)
+#define TEX_WIDTH(tex) (_ ## tex ## _WIDTH)
+#define TEX_HEIGHT(tex) (_ ## tex ## _HEIGHT)
+#define TEX_SIZE(tex, depth) (TEX_WIDTH(tex) * TEX_HEIGHT(tex) * (depth))
+#define TEX_SIZE_4B(tex) (TEX_WIDTH(tex) * TEX_HEIGHT(tex) / 2)
+
 #define PHYS_TO_K1ROM(x) (((u32) (x) | 0xB0000000))
 #define ROM_READ(addr) (*(vu32*) PHYS_TO_K1ROM(addr))
 

@@ -147,6 +147,7 @@
     symbol_name_format: i3_$VRAM
     subsegments:
       - [0xA8CF0, c, A90C0]
+      - [0xADD50, pad]
       - [0xADD70, c, AE140]
       - [0xC1D90, c, C2160]
       - [0xC1EC0, c, C2290]
@@ -178,7 +179,7 @@
     bss_size: 0x30
     symbol_name_format: i4_$VRAM
     subsegments:
-      - [0xD4870, pad]
+      - [0xD4870, asm] # padding
       - [0xD4880, c, machine]
       - [0xD92F0, c, title]
       - [0xDA410, .data, machine]
@@ -217,7 +218,6 @@
       - [0xE1D10, c, credits]
       - [0xE6170, c, options_menu]
       - [0xE7A00, c, E7CF0]
-      - [0xE7A70, data]
       - [0xE7A70, .data, main_menu]
       - [0xE7DF0, .data, credits]
       - [0xE8BD0, .data, options_menu]

@@ -3100,9 +3100,18 @@ aFont4KatakanaTsuTex:
   height: 8
   symbol: aFont4KatakanaTsuTex
 
-aFont4KatakanaTeTex:
+aFont4KatakanaSoukonTex:
   type: TEXTURE
   offset: 0x126934
+  ctype: u8
+  format: I4
+  width: 16
+  height: 8
+  symbol: aFont4KatakanaSoukonTex
+
+aFont4KatakanaTeTex:
+  type: TEXTURE
+  offset: 0x126974
   ctype: u8
   format: I4
   width: 16
@@ -3111,21 +3120,12 @@ aFont4KatakanaTeTex:
 
 aFont4KatakanaToTex:
   type: TEXTURE
-  offset: 0x126974
-  ctype: u8
-  format: I4
-  width: 16
-  height: 8
-  symbol: aFont4KatakanaToTex
-
-aFont4KatakanaSoukonTex:
-  type: TEXTURE
   offset: 0x1269B4
   ctype: u8
   format: I4
   width: 16
   height: 8
-  symbol: aFont4KatakanaSoukonTex
+  symbol: aFont4KatakanaToTex
 
 aFont4KatakanaNaTex:
   type: TEXTURE

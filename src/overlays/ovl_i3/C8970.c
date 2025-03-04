@@ -638,14 +638,14 @@ void func_i3_801365E0(void) {
     }
     func_i3_801387EC();
 
-    sSkyboxTexture = func_80078104(D_i3_80142180.unk_04->unk_00, 0x80, 0, 0, 0);
-    sVenueTexture = func_80078104(D_i3_80142180.unk_00->unk_00, 0x1000, 0, 0, 0);
+    sSkyboxTexture = func_80078104(D_i3_80142180.unk_04->unk_00, 64 * 1 * sizeof(u16), 0, 0, 0);
+    sVenueTexture = func_80078104(D_i3_80142180.unk_00->unk_00, 64 * 32 * sizeof(u16), 0, 0, 0);
 
     if (D_i3_80142188 & 2) {
-        sCloudTexture = func_80078104(aCloudTex, 0x800, 0, 0, 0);
+        sCloudTexture = func_80078104(aCloudTex, TEX_SIZE(aCloudTex, sizeof(u8)), 0, 0, 0);
     }
     if (D_i3_80142188 & 1) {
-        D_i3_8014219C = func_80078104(D_F2207C8, 0x40, 0, 0, 0);
+        D_i3_8014219C = func_80078104(D_F2207C8, TEX_SIZE(D_F2207C8, sizeof(u8)), 0, 0, 0);
     }
     if (gGameMode == GAMEMODE_GP_END_CS) {
         D_i3_80142174 = 1;
@@ -1261,8 +1261,8 @@ void func_i3_801387EC(void) {
 
         temp1 = D_i3_80140940[var_s1->unk_00];
 
-        var_s1->unk_14 = func_80078104(temp1[0], 0x800, 0, 0, 0);
-        var_s1->unk_18 = func_80078104(temp1[1], 0x20, 0, 0, 0);
+        var_s1->unk_14 = func_80078104(temp1[0], 64 * 64 / 2, 0, 0, 0);
+        var_s1->unk_18 = func_80078104(temp1[1], 16 * 1 * sizeof(u16), 0, 0, 0);
         D_i3_80142176++;
         var_s1++;
         var_s3++;

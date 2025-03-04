@@ -235,7 +235,7 @@
     type: code
     dir: overlays/ovl_i11
     start: 0x51F450
-    vram: 0x800FC730
+    vram: 0x800FC300
     symbol_name_format: i11_$VRAM
     subsegments:
       - [0x51F450, c, 524920]

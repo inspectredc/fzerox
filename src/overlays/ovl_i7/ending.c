@@ -904,8 +904,13 @@ void EndingCutscene_Init(void) {
             case 2:
                 var_v1->track = 0;
                 var_v1->unk_08 = 76.0f;
+#ifdef VERSION_JP
+                var_v1->unk_06 = 0xC3;
+                var_v1->unk_0C = 70.0f;
+#else
                 var_v1->unk_06 = 0xCB;
                 var_v1->unk_0C = 62.0f;
+#endif
                 break;
             case 3:
                 var_v1->track = 0;
@@ -936,30 +941,34 @@ void EndingCutscene_Init(void) {
         var_v1++;
     }
     D_i7_8014BE20 = var_v1 - D_i7_8014BE28;
-    func_80078104(aCongratulationsTex, 0x3FF0, 0, 0, 0);
-    func_80078104(aFinalResultPosition0Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition1Tex, 0x100, 0, 0, 0);
-    func_80078104(aFinalResultPosition2Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition3Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition4Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition5Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition6Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition7Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition8Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition9Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixSTTex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixNDTex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixRDTex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixTHTex, 0x200, 0, 0, 0);
+    func_80078104(aCongratulationsTex, TEX_SIZE(aCongratulationsTex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition0Tex, TEX_SIZE(aFinalResultPosition0Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition1Tex, TEX_SIZE(aFinalResultPosition1Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition2Tex, TEX_SIZE(aFinalResultPosition2Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition3Tex, TEX_SIZE(aFinalResultPosition3Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition4Tex, TEX_SIZE(aFinalResultPosition4Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition5Tex, TEX_SIZE(aFinalResultPosition5Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition6Tex, TEX_SIZE(aFinalResultPosition6Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition7Tex, TEX_SIZE(aFinalResultPosition7Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition8Tex, TEX_SIZE(aFinalResultPosition8Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition9Tex, TEX_SIZE(aFinalResultPosition9Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixSTTex, TEX_SIZE(aFinalResultPositionSuffixSTTex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixNDTex, TEX_SIZE(aFinalResultPositionSuffixNDTex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixRDTex, TEX_SIZE(aFinalResultPositionSuffixRDTex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixTHTex, TEX_SIZE(aFinalResultPositionSuffixTHTex, sizeof(u16)), 0, 0, 0);
 
     if (D_i7_8014BDF6 & 0x20) {
 
         endingTextures = sEndingTextures[func_i7_GetEndScreenIndex(sCupDifficulty, player->character, player->unk_167)];
 
-        sEndingTex = func_80078104(endingTextures[0], 0x81F0, 0, 1, 0);
+        sEndingTex = func_80078104(endingTextures[0], 168 * 99 * sizeof(u16), 0, 1, 0);
 
         if (endingTextures[1] != NULL) {
-            sEndingTextTex = func_80078104(endingTextures[1], 0x3100, 0, 1, 0);
+#ifdef VERSION_JP
+            sEndingTextTex = func_80078104(endingTextures[1], 196 * 16 * sizeof(u16), 0, 1, 0);
+#else
+            sEndingTextTex = func_80078104(endingTextures[1], 196 * 32 * sizeof(u16), 0, 1, 0);
+#endif
         } else {
             sEndingTextTex = NULL;
         }
@@ -1257,8 +1266,13 @@ Gfx* func_i7_80144B2C(Gfx* gfx) {
                                     1, 1, 0, 0);
 
                 if (sEndingTextTex != NULL) {
+#ifdef VERSION_JP
+                    gfx = func_8007B14C(gfx, sEndingTextTex, var_s1->unk_08 + -14.0f, textureTop + 99.0f + 10.0f, 196,
+                                        16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#else
                     gfx = func_8007B14C(gfx, sEndingTextTex, var_s1->unk_08 + -14.0f, textureTop + 99.0f + 10.0f, 196,
                                         32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#endif
                 }
                 break;
             case 3:
@@ -1590,9 +1604,17 @@ Gfx* func_i7_DrawEndScreen(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sEndScreenAlpha);
 
+#ifdef VERSION_JP
+    gfx = func_8007B14C(gfx, sEndingTex, 76, 70, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#else
     gfx = func_8007B14C(gfx, sEndingTex, 76, 62, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#endif
     if (sEndingTextTex != NULL) {
+#ifdef VERSION_JP
+        gfx = func_8007B14C(gfx, sEndingTextTex, 62, 179, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#else
         gfx = func_8007B14C(gfx, sEndingTextTex, 62, 171, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#endif
     }
     return gfx;
 }
@@ -1866,7 +1888,7 @@ void func_i7_801471C0(void) {
             } else if ((character == JODY_SUMMER) && (gRacers[i].unk_167 >= 2)) {
                 j = 32;
             }
-            D_i7_8014C034 = func_80078104(sFullPortraits[j], 0x15888, 0, 1, 1);
+            D_i7_8014C034 = func_80078104(sFullPortraits[j], 180 * 245 * sizeof(u16), 0, 1, 1);
 
             for (j = 0; j != 0x2A; j++) {
                 for (var_a0 = 0; var_a0 < 32; var_a0++) {

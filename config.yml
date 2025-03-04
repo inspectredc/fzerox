@@ -5,6 +5,7 @@
     gbi: F3DEX2
     sort: OFFSET
     logging: ERROR
+    textures: ADDITIONAL_DEFINES
     output:
       code: src/assets
       headers: include/assets
@@ -17,6 +18,7 @@ a418b0151521b76691fa03f8658c8b567c69498b:
     gbi: F3DEX2
     sort: OFFSET
     logging: ERROR
+    textures: ADDITIONAL_DEFINES
     output:
       code: src/assets
       headers: include/assets

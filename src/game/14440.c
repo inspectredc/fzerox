@@ -64,6 +64,16 @@ const char* sTrackNames[] = { "mute city",
                               "x",
                               "\0" };
 
+#ifdef VERSION_JP
+const char* gMachineNames[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
+                                "red gazelle",   "great star",       "iron tiger",    "deep claw",      "twin noritta",
+                                "super piranha", "mighty hurricane", "little wyvern", "space angler",   "green panther",
+                                "black bull",    "wild boar",        "astro robin",   "king meteor",    "queen meteor",
+                                "wonder wasp",   "hyper speeder",    "death anchor",  "crazy bear",     "night thunder",
+                                "big fang",      "mighty typhoon",   "mad wolf",      "sonic phantom",  "hell hawk",
+                                "super falcon",  "golden fox",       "wild goose",    "super stingray", "super cat",
+                                "red gazelle" };
+#else
 const char* gMachineNames[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
                                 "red gazelle",   "great star",       "iron tiger",    "deep claw",      "twin noritta",
                                 "super piranha", "mighty hurricane", "little wyvern", "space angler",   "green panther",
@@ -72,6 +82,7 @@ const char* gMachineNames[] = { "blue falcon",   "golden fox",       "wild goose
                                 "big fang",      "mighty typhoon",   "mad wolf",      "sonic phantom",  "blood hawk",
                                 "super falcon",  "golden fox",       "wild goose",    "super stingray", "super cat",
                                 "red gazelle" };
+#endif
 
 // clang-format off
 s32 D_800CD4E0[] = {

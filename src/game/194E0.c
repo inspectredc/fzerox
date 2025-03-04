@@ -45,11 +45,17 @@ void func_8007F520(void) {
             return;
         }
     }
-
+#ifdef VERSION_JP
+    osWritebackDCacheAll();
+    LeoDD_DrawReferUserGuide();
+    LeoDD_DrawErrorNumber(temp_v0);
+    osWritebackDCacheAll();
+#else
     LeoDD_ForceWritebackDCacheAll();
     LeoDD_DrawReferUserGuide();
     LeoDD_DrawErrorNumber(temp_v0);
     LeoDD_ForceWritebackDCacheAll();
+#endif
     while (true) {}
 }
 

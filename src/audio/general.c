@@ -434,24 +434,40 @@ void func_800B82C8(void) {
         case 0:
             break;
         case 1:
+#ifdef VERSION_JP
+            if (++D_800D1A4C == (100 / 2) - 1) {
+#else
             if (++D_800D1A4C == (70 / 2) - 1) {
+#endif
                 D_800D1A48 = 0;
                 D_800D1A4C = 0;
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 0.0f);
                 func_800BAEDC(0);
             } else {
+#ifdef VERSION_JP
+                volumeScale = 1.0f - (D_800D1A4C * (2.0f / 100.0f));
+#else
                 volumeScale = 1.0f - (D_800D1A4C * (2.0f / 70.0f));
+#endif
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, volumeScale);
             }
             break;
         case 2:
+#ifdef VERSION_JP
+            if (++D_800D1A4C == (80 / 1) - 1) {
+#else
             if (++D_800D1A4C == (70 / 1) - 1) {
+#endif
                 D_800D1A48 = 0;
                 D_800D1A4C = 0;
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 0.0f);
                 func_800BAEDC(0);
             } else {
+#ifdef VERSION_JP
+                volumeScale = 1.0f - (D_800D1A4C * (1.0f / 80.0f));
+#else
                 volumeScale = 1.0f - (D_800D1A4C * (1.0f / 70.0f));
+#endif
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, volumeScale);
             }
             break;
@@ -1685,9 +1701,9 @@ static const char devrostring09[] = "LEVEL SE FINAL CALL! player=%02x SE Number=
 static const char devrostring10[] = "LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n";
 static const char devrostring11[] = "Ouch!! UN-SUPORTED TRG SE NUM WAS CALLED !!!!!!! num = %02x\n";
 #ifdef VERSION_JP
-static const char devjprostring0[] = "PLY TRG MYCAR NUM =  %02x SE NUM =  %02x VOL = %f\n";
-static const char devjprostring1[] = "ENEMY NUMBER = %02x RANK = %d SE num = %02x MOST NEAR ENEMY = %02x\n";
-static const char devjprostring2[] = "DISTANCE = %f PAN = %02x VOLUME = %f TUNING = %f\n\n";
+static const char devjprostring0[] = "PLY TRG MYCAR NUM =  %02x SE NUM =  %02x VOL = %f \n";
+static const char devjprostring1[] = "ENEMY NUMBER = %02x RANK = %d SE num = %02x MOST NEAR ENEMY = %02x \n";
+static const char devjprostring2[] = "DISTANCE = %f PAN = %02x VOLUME = %f TUNING = %f \n\n";
 #endif
 static const char devrostring12[] = "LEVEL SE FADEOUT COMPLETE ROUTINE\n";
 static const char devrostring13[] = "BGM FADEOUT1 COMPLETE ROUTINE\n";

@@ -79,15 +79,17 @@ void func_i3_80139D20(void) {
     func_8006BC84(&D_8024DC80, NULL, 0.7f * D_800CE748, 0.7f * D_800CE74C, 0.7f * D_800CE750, 0.0f, 0.0f, 1.0f, 0.0f,
                   1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
     Lights_SetSource(&D_8024DCC0, 0, 0, 0, 255, 255, 255, 100, 50, 69);
-    func_80078104(aBestTex, 0x180, 0, 0, 0);
+    func_80078104(aBestTex, TEX_SIZE(aBestTex, sizeof(u16)), 0, 0, 0);
 
     if (D_i3_80143780 & 4) {
-        func_80078104(aRecordsAccelerationSpeedGraphTex, 0x400, 0, 0, 0);
-        func_80078104(aRecordsAccelerationSpeedSliderTex, 0x80, 0, 0, 0);
+        func_80078104(aRecordsAccelerationSpeedGraphTex, TEX_SIZE(aRecordsAccelerationSpeedGraphTex, sizeof(u16)), 0, 0,
+                      0);
+        func_80078104(aRecordsAccelerationSpeedSliderTex, TEX_SIZE(aRecordsAccelerationSpeedSliderTex, sizeof(u16)), 0,
+                      0, 0);
     }
     if (D_i3_80143780 & 0x10) {
         func_i3_8013BF18(1);
-        func_80078104(aYellowArrowTex, 0x800, 0, 1, 0);
+        func_80078104(aYellowArrowTex, TEX_SIZE(aYellowArrowTex, sizeof(u16)), 0, 1, 0);
     }
 }
 
