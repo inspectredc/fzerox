@@ -237,7 +237,8 @@
       - [0xE9A30, c, ending]
       - [0xEFEF0, .data, ending]
       - [0xF13A0, .rodata, ending]
-      - { type: bss, vram: 0x8014B480, name: ending }
+      - { type: .bss, vram: 0x8014B480, name: ovl_i7_data }
+      - { type: .bss, vram: 0x8014BDE0, name: ending }
 
   - name: ovl_i8
     exclusive_ram_id: overlay

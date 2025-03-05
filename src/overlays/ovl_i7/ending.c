@@ -1,4 +1,6 @@
 #include "global.h"
+#include "ovl_i7.h"
+#include "macros.h"
 #include "fzx_game.h"
 #include "fzx_hud.h"
 #include "fzx_racer.h"
@@ -8,6 +10,44 @@
 #include "assets/segment_1B8550.h"
 #include "assets/segment_2738A0.h"
 #include "assets/segment_2B9EA0.h"
+
+unk_8014B480* D_i7_8014BDF0;
+s16 sTotalRacersKOd;
+u16 D_i7_8014BDF6;
+void* sEndingTex;
+void* sEndingTextTex;
+s16 sEndScreenState;
+s16 sEndScreenFade;
+s16 sEndScreenAlpha;
+s32 D_i7_8014BE08; // state
+s16 D_i7_8014BE0C; // counter
+f32 D_i7_8014BE10; // scroll top
+s16 D_i7_8014BE14; // congrats/ending alpha
+s16 sCupNameIndex;
+s16 D_i7_8014BE18;
+s16 sCupDifficulty;
+s16 D_i7_8014BE1C; // thanks for playing state
+s16 sThanksForPlayingFade;
+s16 D_i7_8014BE20;
+unk_8014BE28 D_i7_8014BE28[10];
+unk_8014BEC8 D_i7_8014BEC8[3];
+u16 D_i7_8014BF28;
+Vec3f D_i7_8014BF30[8];
+s16 D_i7_8014BF90;
+s16 D_i7_8014BF92;
+unk_8014BF94* D_i7_8014BF94;
+unk_8014BF98* D_i7_8014BF98;
+UNUSED u8 D_i7_8014BFA0[0x80];
+s32 D_i7_8014C020;
+UNUSED s32 D_i7_8014C024;
+u16* D_i7_8014C028[3];
+u16* D_i7_8014C034;
+u16* D_i7_8014C038;
+u16* D_i7_8014C03C;
+u16* D_i7_8014C040;
+s32 D_i7_8014C044;
+u8 D_i7_8014C048[0x200];
+s32 D_i7_8014C248;
 
 extern s16 D_800CCFE8;
 extern s32 gCupType;
@@ -36,48 +76,6 @@ extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
 
 extern GfxPool D_1000000;
-
-// #include "prevent_bss_reordering.h"
-#include "ovl_i7.h"
-
-extern unk_8014B480 D_8014B480[2];
-extern unk_8014B480* D_i7_8014BDF0;
-extern s16 sTotalRacersKOd;
-extern u16 D_i7_8014BDF6;
-extern void* sEndingTex;
-extern void* sEndingTextTex;
-extern s16 sEndScreenState;
-extern s16 sEndScreenFade;
-extern s16 sEndScreenAlpha;
-extern s32 D_i7_8014BE08; // state
-extern s16 D_i7_8014BE0C; // counter
-extern f32 D_i7_8014BE10; // scroll top
-extern s16 D_i7_8014BE14; // congrats/ending alpha
-extern s16 sCupNameIndex;
-extern s16 D_i7_8014BE18;
-extern s16 sCupDifficulty;
-extern s16 D_i7_8014BE1C; // thanks for playing state
-extern s16 sThanksForPlayingFade;
-extern s16 D_i7_8014BE20;
-extern unk_8014BE28 D_i7_8014BE28[10];
-extern unk_8014BEC8 D_i7_8014BEC8[3];
-extern u16 D_i7_8014BF28;
-extern Vec3f D_i7_8014BF30[8];
-extern s16 D_i7_8014BF90;
-extern s16 D_i7_8014BF92;
-extern unk_8014BF94* D_i7_8014BF94;
-extern unk_8014BF98* D_i7_8014BF98;
-extern UNUSED u8 D_i7_8014BFA0[0x80];
-extern s32 D_i7_8014C020;
-extern UNUSED s32 D_i7_8014C024;
-extern u16* D_i7_8014C028[3];
-extern u16* D_i7_8014C034;
-extern u16* D_i7_8014C038;
-extern u16* D_i7_8014C03C;
-extern u16* D_i7_8014C040;
-extern s32 D_i7_8014C044;
-extern u8 D_i7_8014C048[0x200];
-extern s32 D_i7_8014C248;
 
 void* sEndingTextures[][2] = {
     { aEndingCaptainFalconMasterTex, aEndingTextCaptainFalconMasterTex },                 // CAPTAIN_FALCON
@@ -137,615 +135,6 @@ char sTotalRankingStr[] = "TOTAL RANKING";
 const char* sCupNames[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP", "EDIT CUP", "X CUP" };
 
 char sThanksForPlayingStr[] = "THANKS FOR PLAYING!!";
-
-f32 D_i7_8014A040[] = { 0.0f, -40.0f, -60.0f, 0.0f };
-
-f32 D_i7_8014A050[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A060[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A070[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014A080[] = { 360 };
-
-f32 D_i7_8014A084[] = { 53.0f, -36.0f, -75.0f, -75.0f, -75.0f };
-
-f32 D_i7_8014A098[] = { 20.0f, 61.0f, 9.0f, 9.0f, 9.0f };
-
-f32 D_i7_8014A0AC[] = { -700.0f, 87.0f, 92.0f, 92.0f, 92.0f };
-
-s32 D_i7_8014A0C0[] = { 180, 180 };
-
-unk_struct_14 D_i7_8014A0C8[] = {
-    { 4, D_i7_8014A050, D_i7_8014A060, D_i7_8014A070, D_i7_8014A080 },
-    { 5, D_i7_8014A084, D_i7_8014A098, D_i7_8014A0AC, D_i7_8014A0C0 },
-};
-
-f32 D_i7_8014A0F0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A108[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A120[] = { 0.0f, 0.0f, 61.0f, 61.0f, 61.0f, 61.0f };
-
-s32 D_i7_8014A138[] = { 180, 180, 180 };
-
-f32 D_i7_8014A144[] = { 375.0f, 375.0f, 375.0f, -49.0f, -223.0f, -223.0f, -223.0f, -223.0f };
-
-f32 D_i7_8014A164[] = { 140.0f, 140.0f, 140.0f, 57.0f, 11.0f, 11.0f, 11.0f, 11.0f };
-
-f32 D_i7_8014A184[] = { 56.0f, 56.0f, 56.0f, -53.0f, -1.0f, -1.0f, -1.0f, -1.0f };
-
-s32 D_i7_8014A1A4[] = { 60, 60, 60, 180, 180 };
-
-f32 D_i7_8014A1B8[] = { 60.0f, 60.0f, 60.0f, 60.0f };
-
-s32 D_i7_8014A1C8[] = { 540 };
-
-unk_80085434_arg_2 D_i7_8014A1CC = {
-    {
-        { 6, D_i7_8014A0F0, D_i7_8014A108, D_i7_8014A120, D_i7_8014A138 },
-        { 8, D_i7_8014A144, D_i7_8014A164, D_i7_8014A184, D_i7_8014A1A4 },
-    },
-    { 4, D_i7_8014A1B8, D_i7_8014A1C8 },
-};
-
-f32 D_i7_8014A200[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A210[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A220[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014A230[] = { 120 };
-
-f32 D_i7_8014A234[] = { -60.0f, -56.0f, -56.0f, -56.0f };
-
-f32 D_i7_8014A244[] = { 17.0f, 14.0f, 14.0f, 14.0f };
-
-f32 D_i7_8014A254[] = { 229.0f, -85.0f, -85.0f, -85.0f };
-
-s32 D_i7_8014A264[] = { 120 };
-
-f32 D_i7_8014A268[] = { 60.0f, 79.0f, 79.0f, 79.0f };
-
-s32 D_i7_8014A278[] = { 120 };
-
-unk_80085434_arg_2 D_i7_8014A27C = {
-    {
-        { 4, D_i7_8014A200, D_i7_8014A210, D_i7_8014A220, D_i7_8014A230 },
-        { 4, D_i7_8014A234, D_i7_8014A244, D_i7_8014A254, D_i7_8014A264 },
-    },
-    { 4, D_i7_8014A268, D_i7_8014A278 },
-};
-
-f32 D_i7_8014A2B0[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A2C0[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A2D0[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014A2E0[] = { 120 };
-
-f32 D_i7_8014A2E4[] = { 149.0f, -45.0f, -45.0f, -45.0f };
-
-f32 D_i7_8014A2F4[] = { 9.0f, 12.0f, 12.0f, 12.0f };
-
-f32 D_i7_8014A304[] = { 42.0f, 98.0f, 98.0f, 98.0f };
-
-s32 D_i7_8014A314[] = { 120 };
-
-unk_struct_14 D_i7_8014A318[] = {
-    { 4, D_i7_8014A2B0, D_i7_8014A2C0, D_i7_8014A2D0, D_i7_8014A2E0 },
-    { 4, D_i7_8014A2E4, D_i7_8014A2F4, D_i7_8014A304, D_i7_8014A314 },
-};
-
-f32 D_i7_8014A340[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A350[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A360[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014A370[] = { 300 };
-
-f32 D_i7_8014A374[] = { 43.0f, 43.0f, 43.0f, 43.0f, 43.0f };
-
-f32 D_i7_8014A388[] = { 8.0f, 10.0f, 10.0f, 10.0f, 10.0f };
-
-f32 D_i7_8014A39C[] = { 110.0f, -94.0f, -94.0f, -94.0f, -94.0f };
-
-s32 D_i7_8014A3B0[] = { 120, 180 };
-
-f32 D_i7_8014A3B8[] = { 60.0f, 74.0f, 74.0f, 74.0f };
-
-s32 D_i7_8014A3C8[] = { 300 };
-
-unk_80085434_arg_2 D_i7_8014A3CC = {
-    {
-        { 4, D_i7_8014A340, D_i7_8014A350, D_i7_8014A360, D_i7_8014A370 },
-        { 5, D_i7_8014A374, D_i7_8014A388, D_i7_8014A39C, D_i7_8014A3B0 },
-    },
-    { 4, D_i7_8014A3B8, D_i7_8014A3C8 },
-};
-
-f32 D_i7_8014A400[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A414[] = { 29.0f, 29.0f, 29.0f, 29.0f, 29.0f };
-
-f32 D_i7_8014A428[] = { -220.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014A43C[] = { 240, 180 };
-
-f32 D_i7_8014A444[] = { 4.0f, 4.0f, 4.0f, -18.0f, -18.0f, -18.0f, -18.0f };
-
-f32 D_i7_8014A460[] = { 6.0f, -18.0f, -18.0f, 7.0f, 7.0f, 7.0f, 7.0f };
-
-f32 D_i7_8014A47C[] = { -110.0f, -34.0f, 38.0f, 108.0f, 108.0f, 108.0f, 108.0f };
-
-s32 D_i7_8014A498[] = { 120, 60, 60, 180 };
-
-unk_struct_14 D_i7_8014A4A8[] = {
-    { 5, D_i7_8014A400, D_i7_8014A414, D_i7_8014A428, D_i7_8014A43C },
-    { 7, D_i7_8014A444, D_i7_8014A460, D_i7_8014A47C, D_i7_8014A498 },
-};
-
-extern const unk_redo_3 D_800D4E98;
-
-unk_struct_C D_i7_8014A4D0[] = {
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 360, func_80084654, D_i7_8014A0C8 },
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 540, func_80084654, &D_i7_8014A1CC },
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 120, func_80084654, &D_i7_8014A27C },
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 120, func_80084654, D_i7_8014A318 },
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 300, func_80084654, &D_i7_8014A3CC },
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 420, func_80084654, D_i7_8014A4A8 },
-    { -2, NULL, 0 },
-    { 0, NULL, 0 },
-};
-
-f32 D_i7_8014A5C0[] = { 0.0f, 0.0f, 0.0f, -125.0f, -125.0f, -125.0f, -125.0f, -125.0f };
-
-f32 D_i7_8014A5E0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A600[] = { 0.0f, 0.0f, 0.0f, 141.0f, 141.0f, 141.0f, 141.0f, 141.0f };
-
-s32 D_i7_8014A620[] = { 300, 150, 150, 150, 150 };
-
-f32 D_i7_8014A634[] = { 98.0f, 98.0f, 98.0f, 62.0f, 62.0f, 62.0f, 62.0f, 62.0f };
-
-f32 D_i7_8014A654[] = { 20.0f, 20.0f, 20.0f, 38.0f, 38.0f, 38.0f, 38.0f, 38.0f };
-
-f32 D_i7_8014A674[] = { -74.0f, -74.0f, -74.0f, -63.0f, -63.0f, -63.0f, -63.0f, -63.0f };
-
-s32 D_i7_8014A694[] = { 300, 150, 150, 150, 150 };
-
-f32 D_i7_8014A6A8[] = { 70.0f, 70.0f, 70.0f, 70.0f };
-
-s32 D_i7_8014A6B8[] = { 900 };
-
-unk_80085434_arg_2 D_i7_8014A6BC = {
-    {
-        { 8, D_i7_8014A5C0, D_i7_8014A5E0, D_i7_8014A600, D_i7_8014A620 },
-        { 8, D_i7_8014A634, D_i7_8014A654, D_i7_8014A674, D_i7_8014A694 },
-    },
-    { 4, D_i7_8014A6A8, D_i7_8014A6B8 },
-};
-
-f32 D_i7_8014A6F0[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A700[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A710[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014A720[] = { 960 };
-
-f32 D_i7_8014A724[] = { -1.0f, -1.0f, -1.0f, -38.0f, -38.0f, -38.0f, -38.0f, -38.0f };
-
-f32 D_i7_8014A744[] = { 450.0f, 450.0f, 450.0f, 53.0f, 53.0f, 53.0f, 53.0f, 53.0f };
-
-f32 D_i7_8014A764[] = { 79.0f, 79.0f, 79.0f, 79.0f, 79.0f, 79.0f, 79.0f, 79.0f };
-
-s32 D_i7_8014A784[] = { 300, 150, 150, 150, 210 };
-
-f32 D_i7_8014A798[] = { 70.0f, 60.0f, 60.0f, 60.0f };
-
-s32 D_i7_8014A7A8[] = { 960 };
-
-unk_80085434_arg_2 D_i7_8014A7AC = {
-    {
-        { 4, D_i7_8014A6F0, D_i7_8014A700, D_i7_8014A710, D_i7_8014A720 },
-        { 8, D_i7_8014A724, D_i7_8014A744, D_i7_8014A764, D_i7_8014A784 },
-    },
-    { 4, D_i7_8014A798, D_i7_8014A7A8 },
-};
-
-unk_struct_C D_i7_8014A7E0[] = {
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 900, func_800847B0, &D_i7_8014A6BC },
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 960, func_800847B0, &D_i7_8014A7AC },
-    { -2, NULL, 0 },
-    { 0, NULL, 0 },
-};
-
-f32 D_i7_8014A840[] = { 146.0f, 146.0f, 146.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A858[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A870[] = { 194.0f, 194.0f, 194.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014A888[] = { 300, 150, 150 };
-
-f32 D_i7_8014A894[] = { -72.0f, -72.0f, -72.0f, -79.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014A8B4[] = { 30.0f, 30.0f, 30.0f, 30.0f, 30.0f, 30.0f, 30.0f, 30.0f };
-
-f32 D_i7_8014A8D4[] = { -82.0f, -82.0f, -82.0f, 27.0f, 113.0f, 113.0f, 113.0f, 113.0f };
-
-s32 D_i7_8014A8F4[] = { 250, 125, 75, 75, 75 };
-
-unk_struct_14 D_i7_8014A908[] = {
-    { 6, D_i7_8014A840, D_i7_8014A858, D_i7_8014A870, D_i7_8014A888 },
-    { 8, D_i7_8014A894, D_i7_8014A8B4, D_i7_8014A8D4, D_i7_8014A8F4 },
-};
-
-f32 D_i7_8014A930[] = { 0.0f, 0.0f, 0.0f, -29.0f, -29.0f, -29.0f };
-
-f32 D_i7_8014A948[] = { 0.0f, 0.0f, 0.0f, 22.0f, 22.0f, 22.0f };
-
-f32 D_i7_8014A960[] = { 0.0f, 0.0f, 0.0f, 2.0f, 2.0f, 2.0f };
-
-s32 D_i7_8014A978[] = { 300, 150, 150 };
-
-f32 D_i7_8014A984[] = { 0.0f, 0.0f, 86.0f, 86.0f, 86.0f, 86.0f };
-
-f32 D_i7_8014A99C[] = { 30.0f, 45.0f, 41.0f, 41.0f, 41.0f, 41.0f };
-
-f32 D_i7_8014A9B4[] = { 113.0f, 27.0f, 13.0f, 13.0f, 13.0f, 13.0f };
-
-s32 D_i7_8014A9CC[] = { 300, 150, 150 };
-
-unk_struct_14 D_i7_8014A9D8[] = {
-    { 6, D_i7_8014A930, D_i7_8014A948, D_i7_8014A960, D_i7_8014A978 },
-    { 6, D_i7_8014A984, D_i7_8014A99C, D_i7_8014A9B4, D_i7_8014A9CC },
-};
-
-f32 D_i7_8014AA00[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014AA10[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014AA20[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014AA30[] = { 300 };
-
-f32 D_i7_8014AA34[] = { -10.0f, -10.0f, -10.0f, -10.0f, -10.0f, -10.0f };
-
-f32 D_i7_8014AA4C[] = { 222.0f, 222.0f, 222.0f, 222.0f, 222.0f, 222.0f };
-
-f32 D_i7_8014AA64[] = { -498.0f, -498.0f, -498.0f, 563.0f, 563.0f, 563.0f };
-
-s32 D_i7_8014AA7C[] = { 100, 100, 100 };
-
-f32 D_i7_8014AA88[] = { 90.0f, 60.0f, 60.0f, 60.0f };
-
-s32 D_i7_8014AA98[] = { 300 };
-
-unk_80085434_arg_2 D_i7_8014AA9C = {
-    {
-        { 4, D_i7_8014AA00, D_i7_8014AA10, D_i7_8014AA20, D_i7_8014AA30 },
-        { 6, D_i7_8014AA34, D_i7_8014AA4C, D_i7_8014AA64, D_i7_8014AA7C },
-    },
-    { 4, D_i7_8014AA88, D_i7_8014AA98 },
-};
-
-f32 D_i7_8014AAD0[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014AAE0[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014AAF0[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014AB00[] = { 360 };
-
-f32 D_i7_8014AB04[] = { -10.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014AB14[] = { 222.0f, 37.0f, 37.0f, 37.0f };
-
-f32 D_i7_8014AB24[] = { 563.0f, 132.0f, 132.0f, 132.0f };
-
-s32 D_i7_8014AB34[] = { 360 };
-
-unk_struct_14 D_i7_8014AB38[] = {
-    { 4, D_i7_8014AAD0, D_i7_8014AAE0, D_i7_8014AAF0, D_i7_8014AB00 },
-    { 4, D_i7_8014AB04, D_i7_8014AB14, D_i7_8014AB24, D_i7_8014AB34 },
-};
-
-unk_struct_C D_i7_8014AB60[] = {
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 600, func_80084654, D_i7_8014A908 },
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 600, func_80084654, D_i7_8014A9D8 },
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 300, func_80084654, &D_i7_8014AA9C },
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 360, func_80084654, D_i7_8014AB38 },
-    { -2, NULL, 0 },
-};
-
-UNUSED s32 D_i7_8014ABFC = 0;
-s32 D_i7_8014AC00 = 0;
-UNUSED s32 D_i7_8014AC04 = 0x800;
-
-void* sFullPortraits[] = {
-    aFullPortraitCaptainFalconTex, // CAPTAIN_FALCON
-    aFullPortraitDrStewartTex,     // DR_STEWART
-    aFullPortraitPicoTex,          // PICO
-    aFullPortraitSamuraiGorohTex,  // SAMURAI_GOROH
-    aFullPortraitJodySummerTex,    // JODY_SUMMER
-    aFullPortraitMightyGazelleTex, // MIGHTY_GAZELLE
-    aFullPortraitMrEadTex,         // MR_EAD
-    aFullPortraitBabaTex,          // BABA
-    aFullPortraitOctomanTex,       // OCTOMAN
-    aFullPortraitGomarAndShiohTex, // GOMAR_AND_SHIOH
-    aFullPortraitKateAlenTex,      // KATE_ALEN
-    aFullPortraitRogerBusterTex,   // ROGER_BUSTER
-    aFullPortraitJamesMcCloudTex,  // JAMES_MCCLOUD
-    aFullPortraitLeonTex,          // LEON
-    aFullPortraitAntonioGusterTex, // ANTONIO_GUSTER
-    aFullPortraitBlackShadowTex,   // BLACK_SHADOW
-    aFullPortraitMichaelChainTex,  // MICHAEL_CHAIN
-    aFullPortraitJackLevinTex,     // JACK_LEVIN
-    aFullPortraitSuperArrowTex,    // SUPER_ARROW
-    aFullPortraitMrsArrowTex,      // MRS_ARROW
-    aFullPortraitJohnTanakaTex,    // JOHN_TANAKA
-    aFullPortraitBeastmanTex,      // BEASTMAN
-    aFullPortraitZodaTex,          // ZODA
-    aFullPortraitDrClashTex,       // DR_CLASH
-    aFullPortraitSilverNeelsenTex, // SILVER_NEELSEN
-    aFullPortraitBioRexTex,        // BIO_REX
-    aFullPortraitDraqTex,          // DRAQ
-    aFullPortraitBillyTex,         // BILLY
-    aFullPortraitTheSkullTex,      // THE_SKULL
-    aFullPortraitBloodFalconTex,   // BLOOD_FALCON
-    aFullPortraitCaptainFalconAltTex,
-    aFullPortraitSamuraiGorohAltTex,
-    aFullPortraitJodySummerAltTex,
-};
-
-u8 D_i7_8014AC8C[] = { 1 << 7, 1 << 6, 1 << 5, 1 << 4, 1 << 3, 1 << 2, 1 << 1, 1 << 0 };
-
-// Icon Textures (Less than 4b size), used as some kind of mask
-// Fireworks?
-void* D_i7_8014AC94[] = {
-    D_F265E80, // CAPTAIN_FALCON
-    D_F268A80, // DR_STEWART
-    D_F266880, // PICO
-    D_F267A80, // SAMURAI_GOROH
-    D_F268680, // JODY_SUMMER
-    D_F266280, // MIGHTY_GAZELLE
-    D_F267C80, // MR_EAD
-    D_F266080, // BABA
-    D_F267880, // OCTOMAN
-    D_F267080, // GOMAR_AND_SHIOH
-    D_F269680, // KATE_ALEN
-    D_F266480, // ROGER_BUSTER
-    D_F268080, // JAMES_MCCLOUD
-    D_F269280, // LEON
-    D_F268C80, // ANTONIO_GUSTER
-    D_F266A80, // BLACK_SHADOW
-    D_F269480, // MICHAEL_CHAIN
-    D_F266680, // JACK_LEVIN
-    D_F267280, // SUPER_ARROW
-    D_F268880, // MRS_ARROW
-    D_F269080, // JOHN_TANAKA
-    D_F267480, // BEASTMAN
-    D_F268E80, // ZODA
-    D_F266E80, // DR_CLASH
-    D_F269880, // SILVER_NEELSEN
-    D_F268480, // BIO_REX
-    D_F266C80, // DRAQ
-    D_F267680, // BILLY
-    D_F268280, // THE_SKULL
-    D_F267E80, // BLOOD_FALCON
-};
-
-void* D_i7_8014AD0C = D_F269A80;
-void* D_i7_8014AD10 = D_F269C80;
-void* D_i7_8014AD14 = D_F269E80;
-
-void* D_i7_8014AD18[] = { D_F26A080, D_F26A280, D_F26A480, D_F26A680 };
-
-void* D_i7_8014AD28 = D_F26A880;
-
-u8 D_i7_8014AD2C[][3] = {
-    { 255, 255, 255 }, { 255, 248, 248 }, { 255, 240, 240 }, { 255, 232, 232 }, { 255, 224, 224 }, { 255, 216, 216 },
-    { 255, 208, 208 }, { 255, 200, 200 }, { 255, 192, 192 }, { 255, 184, 184 }, { 255, 176, 176 }, { 255, 168, 168 },
-    { 255, 160, 160 }, { 255, 152, 152 }, { 255, 144, 144 }, { 255, 136, 136 }, { 255, 128, 128 }, { 255, 120, 120 },
-    { 255, 112, 112 }, { 255, 104, 104 }, { 255, 96, 96 },   { 255, 88, 88 },   { 255, 80, 80 },   { 255, 72, 72 },
-    { 255, 64, 64 },   { 255, 56, 56 },   { 255, 48, 48 },   { 255, 40, 40 },   { 255, 32, 32 },   { 255, 24, 24 },
-    { 255, 16, 16 },   { 255, 8, 8 },
-};
-
-TexturePtr D_i7_8014AD8C[] = {
-    D_i7_8014ADA8,
-    D_i7_8014AE30,
-    D_i7_8014AEB8,
-    NULL,
-};
-
-UNUSED Gfx D_i7_8014ADA0[] = {
-    gsSPEndDisplayList(),
-};
-
-u16 D_i7_8014ADA8[] = {
-    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFF, 0xFFFF,
-    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFF,
-    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
-    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF,
-    0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
-};
-
-UNUSED Gfx D_i7_8014AE28[] = {
-    gsSPEndDisplayList(),
-};
-
-u16 D_i7_8014AE30[] = {
-    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF,
-    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
-    0xFFFE, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFE,
-    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
-    0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
-};
-
-UNUSED Gfx D_i7_8014AEB0[] = {
-    gsSPEndDisplayList(),
-};
-
-u16 D_i7_8014AEB8[] = {
-    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
-    0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
-    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
-    0xFFFE, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
-    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
-};
-
-Vtx D_i7_8014AF38[] = {
-    VTX(-160, 420, 0, 0, 0, 0, 0, 0, 255),
-    VTX(160, 420, 0, 992, 0, 0, 0, 0, 255),
-    VTX(160, 0, 0, 992, 1312, 0, 0, 0, 255),
-    VTX(-160, 0, 0, 0, 1312, 0, 0, 0, 255),
-};
-
-Gfx D_i7_8014AF78[] = {
-    gsSPVertex(D_i7_8014AF38, 4, 0),
-    gsSP1Triangle(0, 2, 1, 0),
-    gsSP1Triangle(0, 3, 2, 0),
-    gsSPEndDisplayList(),
-};
-
-UNUSED s32 D_i7_8014AF98 = 0;
-UNUSED s32 D_i7_8014AF9C = 0;
-
-f32 D_i7_8014AFA0[] = { 0.0f, 0.0f, 0.0f, -25.0f, -25.0f, -25.0f };
-
-f32 D_i7_8014AFB8[] = { 0.0f, 0.0f, 0.0f, 300.0f, 300.0f, 300.0f };
-
-f32 D_i7_8014AFD0[] = { 0.0f, 0.0f, 0.0f, -285.0f, -285.0f, -285.0f };
-
-s32 D_i7_8014AFE8[] = { 160, 130, 190 };
-
-f32 D_i7_8014AFF4[] = { 0.0f, 0.0f, -27.0f, -27.0f, -27.0f, -27.0f };
-
-f32 D_i7_8014B00C[] = { 20.0f, 20.0f, 20.0f, 196.0f, 196.0f, 196.0f };
-
-f32 D_i7_8014B024[] = { 199.0f, 199.0f, 154.0f, 154.0f, 154.0f, 154.0f };
-
-s32 D_i7_8014B03C[] = { 160, 160, 160 };
-
-unk_struct_14 D_i7_8014B048[] = {
-    { 6, D_i7_8014AFA0, D_i7_8014AFB8, D_i7_8014AFD0, D_i7_8014AFE8 },
-    { 6, D_i7_8014AFF4, D_i7_8014B00C, D_i7_8014B024, D_i7_8014B03C },
-};
-
-unk_struct_C D_i7_8014B070[] = {
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 480, func_80084654, D_i7_8014B048 },
-    { -2, NULL, 0 },
-};
-
-f32 D_i7_8014B0A0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014B0B8[] = { 0.0f, 0.0f, 0.0f, 80.0f, 80.0f, 80.0f };
-
-f32 D_i7_8014B0D0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014B0E8[] = { 125, 100, 75 };
-
-f32 D_i7_8014B0F4[] = { 0.0f, 125.0f, 113.0f, -36.0f, -36.0f, -36.0f };
-
-f32 D_i7_8014B10C[] = { 42.0f, 35.0f, 59.0f, 86.0f, 86.0f, 86.0f };
-
-f32 D_i7_8014B124[] = { -139.0f, -63.0f, 74.0f, 138.0f, 138.0f, 138.0f };
-
-s32 D_i7_8014B13C[] = { 125, 120, 75 };
-
-f32 D_i7_8014B148[] = { 60.0f, 74.0f, 74.0f, 74.0f };
-
-s32 D_i7_8014B158[] = { 300 };
-
-unk_80085434_arg_2 D_i7_8014B15C = {
-    {
-        { 6, D_i7_8014B0A0, D_i7_8014B0B8, D_i7_8014B0D0, D_i7_8014B0E8 },
-        { 6, D_i7_8014B0F4, D_i7_8014B10C, D_i7_8014B124, D_i7_8014B13C },
-    },
-    { 4, D_i7_8014B148, D_i7_8014B158 },
-};
-
-unk_struct_C D_i7_8014B190[] = {
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 300, func_800847B0, &D_i7_8014B15C },
-    { -2, NULL, 0 },
-};
-
-f32 D_i7_8014B1C0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014B1D8[] = { 0.0f, 0.0f, 0.0f, 60.0f, 60.0f, 60.0f };
-
-f32 D_i7_8014B1F0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014B208[] = { 170, 150, 130 };
-
-f32 D_i7_8014B214[] = { 325.0f, 325.0f, 33.0f, 48.0f, 48.0f, 48.0f };
-
-f32 D_i7_8014B22C[] = { 60.0f, 60.0f, 26.0f, 87.0f, 87.0f, 87.0f };
-
-f32 D_i7_8014B244[] = { 162.0f, 162.0f, 140.0f, 140.0f, 140.0f, 140.0f };
-
-s32 D_i7_8014B25C[] = { 170, 150, 130 };
-
-f32 D_i7_8014B268[] = { -1.0f, -1.0f, 0.0f, 0.0f, 0.0f };
-
-f32 D_i7_8014B27C[] = { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
-
-f32 D_i7_8014B290[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
-s32 D_i7_8014B2A4[] = { 130, 170 };
-
-f32 D_i7_8014B2AC[] = { 75.0f, 75.0f, 60.0f, 60.0f, 91.4f };
-
-s32 D_i7_8014B2C0[] = { 130, 170 };
-
-unk_80085494_arg_2 D_i7_8014B2C8 = {
-    {
-        { 6, D_i7_8014B1C0, D_i7_8014B1D8, D_i7_8014B1F0, D_i7_8014B208 },
-        { 6, D_i7_8014B214, D_i7_8014B22C, D_i7_8014B244, D_i7_8014B25C },
-        { 5, D_i7_8014B268, D_i7_8014B27C, D_i7_8014B290, D_i7_8014B2A4 },
-    },
-    { 5, D_i7_8014B2AC, D_i7_8014B2C0 },
-};
-
-unk_struct_C D_i7_8014B310[] = {
-    { 0, func_80083734, &D_800D4E98 },
-    { 0, func_80083580, 4 },
-    { 300, func_80084860, &D_i7_8014B2C8 },
-    { -2, 0, 0 },
-};
 
 s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 arg2) {
     s32 endScreenCharacterIndex;
@@ -1542,7 +931,6 @@ void func_i7_FadeInThanksForPlaying(void) {
     }
 }
 
-#ifdef IMPORT_BSS
 Gfx* func_i7_DrawThanksForPlayingWindow(Gfx* gfx) {
     static s32 sThanksForPlayingLeft;
     static s32 sThanksForPlayingTop;
@@ -1561,13 +949,615 @@ Gfx* func_i7_DrawThanksForPlayingWindow(Gfx* gfx) {
 
     return Font_DrawString(gfx, sThanksForPlayingLeft, sThanksForPlayingTop, sThanksForPlayingStr, 1, FONT_SET_1, 1);
 }
-#else
-#ifdef VERSION_JP
-#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_DrawThanksForPlayingWindow.s")
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_DrawThanksForPlayingWindow.s")
-#endif
-#endif
+
+f32 D_i7_8014A040[] = { 0.0f, -40.0f, -60.0f, 0.0f };
+
+f32 D_i7_8014A050[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A060[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A070[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014A080[] = { 360 };
+
+f32 D_i7_8014A084[] = { 53.0f, -36.0f, -75.0f, -75.0f, -75.0f };
+
+f32 D_i7_8014A098[] = { 20.0f, 61.0f, 9.0f, 9.0f, 9.0f };
+
+f32 D_i7_8014A0AC[] = { -700.0f, 87.0f, 92.0f, 92.0f, 92.0f };
+
+s32 D_i7_8014A0C0[] = { 180, 180 };
+
+unk_struct_14 D_i7_8014A0C8[] = {
+    { 4, D_i7_8014A050, D_i7_8014A060, D_i7_8014A070, D_i7_8014A080 },
+    { 5, D_i7_8014A084, D_i7_8014A098, D_i7_8014A0AC, D_i7_8014A0C0 },
+};
+
+f32 D_i7_8014A0F0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A108[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A120[] = { 0.0f, 0.0f, 61.0f, 61.0f, 61.0f, 61.0f };
+
+s32 D_i7_8014A138[] = { 180, 180, 180 };
+
+f32 D_i7_8014A144[] = { 375.0f, 375.0f, 375.0f, -49.0f, -223.0f, -223.0f, -223.0f, -223.0f };
+
+f32 D_i7_8014A164[] = { 140.0f, 140.0f, 140.0f, 57.0f, 11.0f, 11.0f, 11.0f, 11.0f };
+
+f32 D_i7_8014A184[] = { 56.0f, 56.0f, 56.0f, -53.0f, -1.0f, -1.0f, -1.0f, -1.0f };
+
+s32 D_i7_8014A1A4[] = { 60, 60, 60, 180, 180 };
+
+f32 D_i7_8014A1B8[] = { 60.0f, 60.0f, 60.0f, 60.0f };
+
+s32 D_i7_8014A1C8[] = { 540 };
+
+unk_80085434_arg_2 D_i7_8014A1CC = {
+    {
+        { 6, D_i7_8014A0F0, D_i7_8014A108, D_i7_8014A120, D_i7_8014A138 },
+        { 8, D_i7_8014A144, D_i7_8014A164, D_i7_8014A184, D_i7_8014A1A4 },
+    },
+    { 4, D_i7_8014A1B8, D_i7_8014A1C8 },
+};
+
+f32 D_i7_8014A200[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A210[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A220[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014A230[] = { 120 };
+
+f32 D_i7_8014A234[] = { -60.0f, -56.0f, -56.0f, -56.0f };
+
+f32 D_i7_8014A244[] = { 17.0f, 14.0f, 14.0f, 14.0f };
+
+f32 D_i7_8014A254[] = { 229.0f, -85.0f, -85.0f, -85.0f };
+
+s32 D_i7_8014A264[] = { 120 };
+
+f32 D_i7_8014A268[] = { 60.0f, 79.0f, 79.0f, 79.0f };
+
+s32 D_i7_8014A278[] = { 120 };
+
+unk_80085434_arg_2 D_i7_8014A27C = {
+    {
+        { 4, D_i7_8014A200, D_i7_8014A210, D_i7_8014A220, D_i7_8014A230 },
+        { 4, D_i7_8014A234, D_i7_8014A244, D_i7_8014A254, D_i7_8014A264 },
+    },
+    { 4, D_i7_8014A268, D_i7_8014A278 },
+};
+
+f32 D_i7_8014A2B0[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A2C0[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A2D0[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014A2E0[] = { 120 };
+
+f32 D_i7_8014A2E4[] = { 149.0f, -45.0f, -45.0f, -45.0f };
+
+f32 D_i7_8014A2F4[] = { 9.0f, 12.0f, 12.0f, 12.0f };
+
+f32 D_i7_8014A304[] = { 42.0f, 98.0f, 98.0f, 98.0f };
+
+s32 D_i7_8014A314[] = { 120 };
+
+unk_struct_14 D_i7_8014A318[] = {
+    { 4, D_i7_8014A2B0, D_i7_8014A2C0, D_i7_8014A2D0, D_i7_8014A2E0 },
+    { 4, D_i7_8014A2E4, D_i7_8014A2F4, D_i7_8014A304, D_i7_8014A314 },
+};
+
+f32 D_i7_8014A340[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A350[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A360[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014A370[] = { 300 };
+
+f32 D_i7_8014A374[] = { 43.0f, 43.0f, 43.0f, 43.0f, 43.0f };
+
+f32 D_i7_8014A388[] = { 8.0f, 10.0f, 10.0f, 10.0f, 10.0f };
+
+f32 D_i7_8014A39C[] = { 110.0f, -94.0f, -94.0f, -94.0f, -94.0f };
+
+s32 D_i7_8014A3B0[] = { 120, 180 };
+
+f32 D_i7_8014A3B8[] = { 60.0f, 74.0f, 74.0f, 74.0f };
+
+s32 D_i7_8014A3C8[] = { 300 };
+
+unk_80085434_arg_2 D_i7_8014A3CC = {
+    {
+        { 4, D_i7_8014A340, D_i7_8014A350, D_i7_8014A360, D_i7_8014A370 },
+        { 5, D_i7_8014A374, D_i7_8014A388, D_i7_8014A39C, D_i7_8014A3B0 },
+    },
+    { 4, D_i7_8014A3B8, D_i7_8014A3C8 },
+};
+
+f32 D_i7_8014A400[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A414[] = { 29.0f, 29.0f, 29.0f, 29.0f, 29.0f };
+
+f32 D_i7_8014A428[] = { -220.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014A43C[] = { 240, 180 };
+
+f32 D_i7_8014A444[] = { 4.0f, 4.0f, 4.0f, -18.0f, -18.0f, -18.0f, -18.0f };
+
+f32 D_i7_8014A460[] = { 6.0f, -18.0f, -18.0f, 7.0f, 7.0f, 7.0f, 7.0f };
+
+f32 D_i7_8014A47C[] = { -110.0f, -34.0f, 38.0f, 108.0f, 108.0f, 108.0f, 108.0f };
+
+s32 D_i7_8014A498[] = { 120, 60, 60, 180 };
+
+unk_struct_14 D_i7_8014A4A8[] = {
+    { 5, D_i7_8014A400, D_i7_8014A414, D_i7_8014A428, D_i7_8014A43C },
+    { 7, D_i7_8014A444, D_i7_8014A460, D_i7_8014A47C, D_i7_8014A498 },
+};
+
+extern const unk_redo_3 D_800D4E98;
+
+unk_struct_C D_i7_8014A4D0[] = {
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 360, func_80084654, D_i7_8014A0C8 },
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 540, func_80084654, &D_i7_8014A1CC },
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 120, func_80084654, &D_i7_8014A27C },
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 120, func_80084654, D_i7_8014A318 },
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 300, func_80084654, &D_i7_8014A3CC },
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 420, func_80084654, D_i7_8014A4A8 },
+    { -2, NULL, 0 },
+    { 0, NULL, 0 },
+};
+
+f32 D_i7_8014A5C0[] = { 0.0f, 0.0f, 0.0f, -125.0f, -125.0f, -125.0f, -125.0f, -125.0f };
+
+f32 D_i7_8014A5E0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A600[] = { 0.0f, 0.0f, 0.0f, 141.0f, 141.0f, 141.0f, 141.0f, 141.0f };
+
+s32 D_i7_8014A620[] = { 300, 150, 150, 150, 150 };
+
+f32 D_i7_8014A634[] = { 98.0f, 98.0f, 98.0f, 62.0f, 62.0f, 62.0f, 62.0f, 62.0f };
+
+f32 D_i7_8014A654[] = { 20.0f, 20.0f, 20.0f, 38.0f, 38.0f, 38.0f, 38.0f, 38.0f };
+
+f32 D_i7_8014A674[] = { -74.0f, -74.0f, -74.0f, -63.0f, -63.0f, -63.0f, -63.0f, -63.0f };
+
+s32 D_i7_8014A694[] = { 300, 150, 150, 150, 150 };
+
+f32 D_i7_8014A6A8[] = { 70.0f, 70.0f, 70.0f, 70.0f };
+
+s32 D_i7_8014A6B8[] = { 900 };
+
+unk_80085434_arg_2 D_i7_8014A6BC = {
+    {
+        { 8, D_i7_8014A5C0, D_i7_8014A5E0, D_i7_8014A600, D_i7_8014A620 },
+        { 8, D_i7_8014A634, D_i7_8014A654, D_i7_8014A674, D_i7_8014A694 },
+    },
+    { 4, D_i7_8014A6A8, D_i7_8014A6B8 },
+};
+
+f32 D_i7_8014A6F0[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A700[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A710[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014A720[] = { 960 };
+
+f32 D_i7_8014A724[] = { -1.0f, -1.0f, -1.0f, -38.0f, -38.0f, -38.0f, -38.0f, -38.0f };
+
+f32 D_i7_8014A744[] = { 450.0f, 450.0f, 450.0f, 53.0f, 53.0f, 53.0f, 53.0f, 53.0f };
+
+f32 D_i7_8014A764[] = { 79.0f, 79.0f, 79.0f, 79.0f, 79.0f, 79.0f, 79.0f, 79.0f };
+
+s32 D_i7_8014A784[] = { 300, 150, 150, 150, 210 };
+
+f32 D_i7_8014A798[] = { 70.0f, 60.0f, 60.0f, 60.0f };
+
+s32 D_i7_8014A7A8[] = { 960 };
+
+unk_80085434_arg_2 D_i7_8014A7AC = {
+    {
+        { 4, D_i7_8014A6F0, D_i7_8014A700, D_i7_8014A710, D_i7_8014A720 },
+        { 8, D_i7_8014A724, D_i7_8014A744, D_i7_8014A764, D_i7_8014A784 },
+    },
+    { 4, D_i7_8014A798, D_i7_8014A7A8 },
+};
+
+unk_struct_C D_i7_8014A7E0[] = {
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 900, func_800847B0, &D_i7_8014A6BC },
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 960, func_800847B0, &D_i7_8014A7AC },
+    { -2, NULL, 0 },
+    { 0, NULL, 0 },
+};
+
+f32 D_i7_8014A840[] = { 146.0f, 146.0f, 146.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A858[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A870[] = { 194.0f, 194.0f, 194.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014A888[] = { 300, 150, 150 };
+
+f32 D_i7_8014A894[] = { -72.0f, -72.0f, -72.0f, -79.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014A8B4[] = { 30.0f, 30.0f, 30.0f, 30.0f, 30.0f, 30.0f, 30.0f, 30.0f };
+
+f32 D_i7_8014A8D4[] = { -82.0f, -82.0f, -82.0f, 27.0f, 113.0f, 113.0f, 113.0f, 113.0f };
+
+s32 D_i7_8014A8F4[] = { 250, 125, 75, 75, 75 };
+
+unk_struct_14 D_i7_8014A908[] = {
+    { 6, D_i7_8014A840, D_i7_8014A858, D_i7_8014A870, D_i7_8014A888 },
+    { 8, D_i7_8014A894, D_i7_8014A8B4, D_i7_8014A8D4, D_i7_8014A8F4 },
+};
+
+f32 D_i7_8014A930[] = { 0.0f, 0.0f, 0.0f, -29.0f, -29.0f, -29.0f };
+
+f32 D_i7_8014A948[] = { 0.0f, 0.0f, 0.0f, 22.0f, 22.0f, 22.0f };
+
+f32 D_i7_8014A960[] = { 0.0f, 0.0f, 0.0f, 2.0f, 2.0f, 2.0f };
+
+s32 D_i7_8014A978[] = { 300, 150, 150 };
+
+f32 D_i7_8014A984[] = { 0.0f, 0.0f, 86.0f, 86.0f, 86.0f, 86.0f };
+
+f32 D_i7_8014A99C[] = { 30.0f, 45.0f, 41.0f, 41.0f, 41.0f, 41.0f };
+
+f32 D_i7_8014A9B4[] = { 113.0f, 27.0f, 13.0f, 13.0f, 13.0f, 13.0f };
+
+s32 D_i7_8014A9CC[] = { 300, 150, 150 };
+
+unk_struct_14 D_i7_8014A9D8[] = {
+    { 6, D_i7_8014A930, D_i7_8014A948, D_i7_8014A960, D_i7_8014A978 },
+    { 6, D_i7_8014A984, D_i7_8014A99C, D_i7_8014A9B4, D_i7_8014A9CC },
+};
+
+f32 D_i7_8014AA00[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014AA10[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014AA20[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014AA30[] = { 300 };
+
+f32 D_i7_8014AA34[] = { -10.0f, -10.0f, -10.0f, -10.0f, -10.0f, -10.0f };
+
+f32 D_i7_8014AA4C[] = { 222.0f, 222.0f, 222.0f, 222.0f, 222.0f, 222.0f };
+
+f32 D_i7_8014AA64[] = { -498.0f, -498.0f, -498.0f, 563.0f, 563.0f, 563.0f };
+
+s32 D_i7_8014AA7C[] = { 100, 100, 100 };
+
+f32 D_i7_8014AA88[] = { 90.0f, 60.0f, 60.0f, 60.0f };
+
+s32 D_i7_8014AA98[] = { 300 };
+
+unk_80085434_arg_2 D_i7_8014AA9C = {
+    {
+        { 4, D_i7_8014AA00, D_i7_8014AA10, D_i7_8014AA20, D_i7_8014AA30 },
+        { 6, D_i7_8014AA34, D_i7_8014AA4C, D_i7_8014AA64, D_i7_8014AA7C },
+    },
+    { 4, D_i7_8014AA88, D_i7_8014AA98 },
+};
+
+f32 D_i7_8014AAD0[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014AAE0[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014AAF0[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014AB00[] = { 360 };
+
+f32 D_i7_8014AB04[] = { -10.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014AB14[] = { 222.0f, 37.0f, 37.0f, 37.0f };
+
+f32 D_i7_8014AB24[] = { 563.0f, 132.0f, 132.0f, 132.0f };
+
+s32 D_i7_8014AB34[] = { 360 };
+
+unk_struct_14 D_i7_8014AB38[] = {
+    { 4, D_i7_8014AAD0, D_i7_8014AAE0, D_i7_8014AAF0, D_i7_8014AB00 },
+    { 4, D_i7_8014AB04, D_i7_8014AB14, D_i7_8014AB24, D_i7_8014AB34 },
+};
+
+unk_struct_C D_i7_8014AB60[] = {
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 600, func_80084654, D_i7_8014A908 },
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 600, func_80084654, D_i7_8014A9D8 },
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 300, func_80084654, &D_i7_8014AA9C },
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 360, func_80084654, D_i7_8014AB38 },
+    { -2, NULL, 0 },
+};
+
+UNUSED s32 D_i7_8014ABFC = 0;
+s32 D_i7_8014AC00 = 0;
+UNUSED s32 D_i7_8014AC04 = 0x800;
+
+void* sFullPortraits[] = {
+    aFullPortraitCaptainFalconTex, // CAPTAIN_FALCON
+    aFullPortraitDrStewartTex,     // DR_STEWART
+    aFullPortraitPicoTex,          // PICO
+    aFullPortraitSamuraiGorohTex,  // SAMURAI_GOROH
+    aFullPortraitJodySummerTex,    // JODY_SUMMER
+    aFullPortraitMightyGazelleTex, // MIGHTY_GAZELLE
+    aFullPortraitMrEadTex,         // MR_EAD
+    aFullPortraitBabaTex,          // BABA
+    aFullPortraitOctomanTex,       // OCTOMAN
+    aFullPortraitGomarAndShiohTex, // GOMAR_AND_SHIOH
+    aFullPortraitKateAlenTex,      // KATE_ALEN
+    aFullPortraitRogerBusterTex,   // ROGER_BUSTER
+    aFullPortraitJamesMcCloudTex,  // JAMES_MCCLOUD
+    aFullPortraitLeonTex,          // LEON
+    aFullPortraitAntonioGusterTex, // ANTONIO_GUSTER
+    aFullPortraitBlackShadowTex,   // BLACK_SHADOW
+    aFullPortraitMichaelChainTex,  // MICHAEL_CHAIN
+    aFullPortraitJackLevinTex,     // JACK_LEVIN
+    aFullPortraitSuperArrowTex,    // SUPER_ARROW
+    aFullPortraitMrsArrowTex,      // MRS_ARROW
+    aFullPortraitJohnTanakaTex,    // JOHN_TANAKA
+    aFullPortraitBeastmanTex,      // BEASTMAN
+    aFullPortraitZodaTex,          // ZODA
+    aFullPortraitDrClashTex,       // DR_CLASH
+    aFullPortraitSilverNeelsenTex, // SILVER_NEELSEN
+    aFullPortraitBioRexTex,        // BIO_REX
+    aFullPortraitDraqTex,          // DRAQ
+    aFullPortraitBillyTex,         // BILLY
+    aFullPortraitTheSkullTex,      // THE_SKULL
+    aFullPortraitBloodFalconTex,   // BLOOD_FALCON
+    aFullPortraitCaptainFalconAltTex,
+    aFullPortraitSamuraiGorohAltTex,
+    aFullPortraitJodySummerAltTex,
+};
+
+u8 D_i7_8014AC8C[] = { 1 << 7, 1 << 6, 1 << 5, 1 << 4, 1 << 3, 1 << 2, 1 << 1, 1 << 0 };
+
+// Icon Textures (Less than 4b size), used as some kind of mask
+// Fireworks?
+void* D_i7_8014AC94[] = {
+    D_F265E80, // CAPTAIN_FALCON
+    D_F268A80, // DR_STEWART
+    D_F266880, // PICO
+    D_F267A80, // SAMURAI_GOROH
+    D_F268680, // JODY_SUMMER
+    D_F266280, // MIGHTY_GAZELLE
+    D_F267C80, // MR_EAD
+    D_F266080, // BABA
+    D_F267880, // OCTOMAN
+    D_F267080, // GOMAR_AND_SHIOH
+    D_F269680, // KATE_ALEN
+    D_F266480, // ROGER_BUSTER
+    D_F268080, // JAMES_MCCLOUD
+    D_F269280, // LEON
+    D_F268C80, // ANTONIO_GUSTER
+    D_F266A80, // BLACK_SHADOW
+    D_F269480, // MICHAEL_CHAIN
+    D_F266680, // JACK_LEVIN
+    D_F267280, // SUPER_ARROW
+    D_F268880, // MRS_ARROW
+    D_F269080, // JOHN_TANAKA
+    D_F267480, // BEASTMAN
+    D_F268E80, // ZODA
+    D_F266E80, // DR_CLASH
+    D_F269880, // SILVER_NEELSEN
+    D_F268480, // BIO_REX
+    D_F266C80, // DRAQ
+    D_F267680, // BILLY
+    D_F268280, // THE_SKULL
+    D_F267E80, // BLOOD_FALCON
+};
+
+void* D_i7_8014AD0C = D_F269A80;
+void* D_i7_8014AD10 = D_F269C80;
+void* D_i7_8014AD14 = D_F269E80;
+
+void* D_i7_8014AD18[] = { D_F26A080, D_F26A280, D_F26A480, D_F26A680 };
+
+void* D_i7_8014AD28 = D_F26A880;
+
+u8 D_i7_8014AD2C[][3] = {
+    { 255, 255, 255 }, { 255, 248, 248 }, { 255, 240, 240 }, { 255, 232, 232 }, { 255, 224, 224 }, { 255, 216, 216 },
+    { 255, 208, 208 }, { 255, 200, 200 }, { 255, 192, 192 }, { 255, 184, 184 }, { 255, 176, 176 }, { 255, 168, 168 },
+    { 255, 160, 160 }, { 255, 152, 152 }, { 255, 144, 144 }, { 255, 136, 136 }, { 255, 128, 128 }, { 255, 120, 120 },
+    { 255, 112, 112 }, { 255, 104, 104 }, { 255, 96, 96 },   { 255, 88, 88 },   { 255, 80, 80 },   { 255, 72, 72 },
+    { 255, 64, 64 },   { 255, 56, 56 },   { 255, 48, 48 },   { 255, 40, 40 },   { 255, 32, 32 },   { 255, 24, 24 },
+    { 255, 16, 16 },   { 255, 8, 8 },
+};
+
+TexturePtr D_i7_8014AD8C[] = {
+    D_i7_8014ADA8,
+    D_i7_8014AE30,
+    D_i7_8014AEB8,
+    NULL,
+};
+
+UNUSED Gfx D_i7_8014ADA0[] = {
+    gsSPEndDisplayList(),
+};
+
+u16 D_i7_8014ADA8[] = {
+    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFF, 0xFFFF,
+    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFF,
+    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
+    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF,
+    0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
+};
+
+UNUSED Gfx D_i7_8014AE28[] = {
+    gsSPEndDisplayList(),
+};
+
+u16 D_i7_8014AE30[] = {
+    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF,
+    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
+    0xFFFE, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFE,
+    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
+    0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
+};
+
+UNUSED Gfx D_i7_8014AEB0[] = {
+    gsSPEndDisplayList(),
+};
+
+u16 D_i7_8014AEB8[] = {
+    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
+    0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
+    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
+    0xFFFE, 0xFFFE, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
+    0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE,
+};
+
+Vtx D_i7_8014AF38[] = {
+    VTX(-160, 420, 0, 0, 0, 0, 0, 0, 255),
+    VTX(160, 420, 0, 992, 0, 0, 0, 0, 255),
+    VTX(160, 0, 0, 992, 1312, 0, 0, 0, 255),
+    VTX(-160, 0, 0, 0, 1312, 0, 0, 0, 255),
+};
+
+Gfx D_i7_8014AF78[] = {
+    gsSPVertex(D_i7_8014AF38, 4, 0),
+    gsSP1Triangle(0, 2, 1, 0),
+    gsSP1Triangle(0, 3, 2, 0),
+    gsSPEndDisplayList(),
+};
+
+UNUSED s32 D_i7_8014AF98 = 0;
+UNUSED s32 D_i7_8014AF9C = 0;
+
+f32 D_i7_8014AFA0[] = { 0.0f, 0.0f, 0.0f, -25.0f, -25.0f, -25.0f };
+
+f32 D_i7_8014AFB8[] = { 0.0f, 0.0f, 0.0f, 300.0f, 300.0f, 300.0f };
+
+f32 D_i7_8014AFD0[] = { 0.0f, 0.0f, 0.0f, -285.0f, -285.0f, -285.0f };
+
+s32 D_i7_8014AFE8[] = { 160, 130, 190 };
+
+f32 D_i7_8014AFF4[] = { 0.0f, 0.0f, -27.0f, -27.0f, -27.0f, -27.0f };
+
+f32 D_i7_8014B00C[] = { 20.0f, 20.0f, 20.0f, 196.0f, 196.0f, 196.0f };
+
+f32 D_i7_8014B024[] = { 199.0f, 199.0f, 154.0f, 154.0f, 154.0f, 154.0f };
+
+s32 D_i7_8014B03C[] = { 160, 160, 160 };
+
+unk_struct_14 D_i7_8014B048[] = {
+    { 6, D_i7_8014AFA0, D_i7_8014AFB8, D_i7_8014AFD0, D_i7_8014AFE8 },
+    { 6, D_i7_8014AFF4, D_i7_8014B00C, D_i7_8014B024, D_i7_8014B03C },
+};
+
+unk_struct_C D_i7_8014B070[] = {
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 480, func_80084654, D_i7_8014B048 },
+    { -2, NULL, 0 },
+};
+
+f32 D_i7_8014B0A0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014B0B8[] = { 0.0f, 0.0f, 0.0f, 80.0f, 80.0f, 80.0f };
+
+f32 D_i7_8014B0D0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014B0E8[] = { 125, 100, 75 };
+
+f32 D_i7_8014B0F4[] = { 0.0f, 125.0f, 113.0f, -36.0f, -36.0f, -36.0f };
+
+f32 D_i7_8014B10C[] = { 42.0f, 35.0f, 59.0f, 86.0f, 86.0f, 86.0f };
+
+f32 D_i7_8014B124[] = { -139.0f, -63.0f, 74.0f, 138.0f, 138.0f, 138.0f };
+
+s32 D_i7_8014B13C[] = { 125, 120, 75 };
+
+f32 D_i7_8014B148[] = { 60.0f, 74.0f, 74.0f, 74.0f };
+
+s32 D_i7_8014B158[] = { 300 };
+
+unk_80085434_arg_2 D_i7_8014B15C = {
+    {
+        { 6, D_i7_8014B0A0, D_i7_8014B0B8, D_i7_8014B0D0, D_i7_8014B0E8 },
+        { 6, D_i7_8014B0F4, D_i7_8014B10C, D_i7_8014B124, D_i7_8014B13C },
+    },
+    { 4, D_i7_8014B148, D_i7_8014B158 },
+};
+
+unk_struct_C D_i7_8014B190[] = {
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 300, func_800847B0, &D_i7_8014B15C },
+    { -2, NULL, 0 },
+};
+
+f32 D_i7_8014B1C0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014B1D8[] = { 0.0f, 0.0f, 0.0f, 60.0f, 60.0f, 60.0f };
+
+f32 D_i7_8014B1F0[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014B208[] = { 170, 150, 130 };
+
+f32 D_i7_8014B214[] = { 325.0f, 325.0f, 33.0f, 48.0f, 48.0f, 48.0f };
+
+f32 D_i7_8014B22C[] = { 60.0f, 60.0f, 26.0f, 87.0f, 87.0f, 87.0f };
+
+f32 D_i7_8014B244[] = { 162.0f, 162.0f, 140.0f, 140.0f, 140.0f, 140.0f };
+
+s32 D_i7_8014B25C[] = { 170, 150, 130 };
+
+f32 D_i7_8014B268[] = { -1.0f, -1.0f, 0.0f, 0.0f, 0.0f };
+
+f32 D_i7_8014B27C[] = { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
+
+f32 D_i7_8014B290[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+s32 D_i7_8014B2A4[] = { 130, 170 };
+
+f32 D_i7_8014B2AC[] = { 75.0f, 75.0f, 60.0f, 60.0f, 91.4f };
+
+s32 D_i7_8014B2C0[] = { 130, 170 };
+
+unk_80085494_arg_2 D_i7_8014B2C8 = {
+    {
+        { 6, D_i7_8014B1C0, D_i7_8014B1D8, D_i7_8014B1F0, D_i7_8014B208 },
+        { 6, D_i7_8014B214, D_i7_8014B22C, D_i7_8014B244, D_i7_8014B25C },
+        { 5, D_i7_8014B268, D_i7_8014B27C, D_i7_8014B290, D_i7_8014B2A4 },
+    },
+    { 5, D_i7_8014B2AC, D_i7_8014B2C0 },
+};
+
+unk_struct_C D_i7_8014B310[] = {
+    { 0, func_80083734, &D_800D4E98 },
+    { 0, func_80083580, 4 },
+    { 300, func_80084860, &D_i7_8014B2C8 },
+    { -2, 0, 0 },
+};
 
 void func_i7_FadeEndScreen(void) {
     switch (sEndScreenState) {
@@ -1653,7 +1643,6 @@ Gfx* func_i7_DrawResultsRacersKOd(Gfx* gfx, s32 left, s32 top, s32 racersKOd) {
     return gfx;
 }
 
-#ifdef IMPORT_BSS
 void func_i7_801467FC(void) {
     f32 temp_fa0;
     s32 i;
@@ -1711,13 +1700,6 @@ void func_i7_801467FC(void) {
     var->z = 0.0f;
     var++;
 }
-#else
-#ifdef VERSION_JP
-#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_801467FC.s")
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_801467FC.s")
-#endif
-#endif
 
 extern Vec3f D_i7_8014BF30[];
 

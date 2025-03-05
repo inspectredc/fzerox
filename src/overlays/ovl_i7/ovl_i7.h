@@ -72,29 +72,7 @@ extern u16 D_i7_8014ADA8[];
 extern u16 D_i7_8014AE30[];
 extern u16 D_i7_8014AEB8[];
 
-extern unk_8014B480* D_i7_8014BDF0;
-extern s16 D_i7_8014BDF4;
-extern u16 D_i7_8014BDF6;
-extern void* D_i7_8014BDF8;
-extern void* D_i7_8014BDFC;
-extern s16 D_i7_8014BE00;
-extern s16 D_i7_8014BE02;
-extern s16 D_i7_8014BE04;
-extern s32 D_i7_8014BE08;
-extern s16 D_i7_8014BE0C;
-extern f32 D_i7_8014BE10;
-extern s16 D_i7_8014BE14;
-extern s16 D_i7_8014BE16;
-extern s16 D_i7_8014BE18;
-extern s16 sCupDifficulty;
-extern s16 D_i7_8014BE1C;
-extern s16 D_i7_8014BE1E;
-extern s16 D_i7_8014BE20;
-extern unk_8014BE28 D_i7_8014BE28[];
-extern unk_8014BEC8 D_i7_8014BEC8[];
-extern u16 D_i7_8014BF28;
-extern s16 D_i7_8014BF92;
-extern s32 D_i7_8014C248;
+extern unk_8014B480 D_8014B480[];
 
 typedef enum EndScreenState {
     /* 0 */ END_SCREEN_INACTIVE,
