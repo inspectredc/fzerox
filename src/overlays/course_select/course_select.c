@@ -26,13 +26,31 @@ UNUSED s32 D_i5_801190E8 = 60;
 UNUSED s32 D_i5_801190EC = 40;
 UNUSED s32 D_i5_801190F0 = 70;
 
-unk_80077D50 sCupSelectJackCompTexInfo[] = { { 17, aCupSelectJackTex, 64, 96, 0x6DF }, { 0 } };
-unk_80077D50 sCupSelectQueenCompTexInfo[] = { { 17, aCupSelectQueenTex, 64, 96, 0x72D }, { 0 } };
-unk_80077D50 sCupSelectKingCompTexInfo[] = { { 17, aCupSelectKingTex, 64, 96, 0x738 }, { 0 } };
-unk_80077D50 sCupSelectJokerCompTexInfo[] = { { 17, aCupSelectJokerTex, 64, 96, 0x6D4 }, { 0 } };
-unk_80077D50 sCupSelectXCompTexInfo[] = { { 17, aCupSelectXTex, 64, 96, 0x6C5 }, { 0 } };
-unk_80077D50 sCupSelectEditCompTexInfo[] = { { 17, aCupSelectEditTex, 64, 64, 0x483 }, { 0 } };
-unk_80077D50 sCupSelectQuestionMarkCompTexInfo[] = { { 17, aCupSelectQuestionMarkTex, 64, 96, 0x7CE }, { 0 } };
+unk_80077D50 sCupSelectJackCompTexInfo[] = { { 17, aCupSelectJackTex, TEX_WIDTH(aCupSelectJackTex),
+                                               TEX_HEIGHT(aCupSelectJackTex), TEX_COMPRESSED_SIZE(aCupSelectJackTex) },
+                                             { 0 } };
+unk_80077D50 sCupSelectQueenCompTexInfo[] = { { 17, aCupSelectQueenTex, TEX_WIDTH(aCupSelectQueenTex),
+                                                TEX_HEIGHT(aCupSelectQueenTex),
+                                                TEX_COMPRESSED_SIZE(aCupSelectQueenTex) },
+                                              { 0 } };
+unk_80077D50 sCupSelectKingCompTexInfo[] = { { 17, aCupSelectKingTex, TEX_WIDTH(aCupSelectKingTex),
+                                               TEX_HEIGHT(aCupSelectKingTex), TEX_COMPRESSED_SIZE(aCupSelectKingTex) },
+                                             { 0 } };
+unk_80077D50 sCupSelectJokerCompTexInfo[] = { { 17, aCupSelectJokerTex, TEX_WIDTH(aCupSelectJokerTex),
+                                                TEX_HEIGHT(aCupSelectJokerTex),
+                                                TEX_COMPRESSED_SIZE(aCupSelectJokerTex) },
+                                              { 0 } };
+unk_80077D50 sCupSelectXCompTexInfo[] = { { 17, aCupSelectXTex, TEX_WIDTH(aCupSelectXTex), TEX_HEIGHT(aCupSelectXTex),
+                                            TEX_COMPRESSED_SIZE(aCupSelectXTex) },
+                                          { 0 } };
+unk_80077D50 sCupSelectEditCompTexInfo[] = { { 17, aCupSelectEditTex, TEX_WIDTH(aCupSelectEditTex),
+                                               TEX_HEIGHT(aCupSelectEditTex), TEX_COMPRESSED_SIZE(aCupSelectEditTex) },
+                                             { 0 } };
+unk_80077D50 sCupSelectQuestionMarkCompTexInfo[] = {
+    { 17, aCupSelectQuestionMarkTex, TEX_WIDTH(aCupSelectQuestionMarkTex), TEX_HEIGHT(aCupSelectQuestionMarkTex),
+      TEX_COMPRESSED_SIZE(aCupSelectQuestionMarkTex) },
+    { 0 }
+};
 
 unk_80077D50* sCupSelectCompTexInfos[] = {
     sCupSelectJackCompTexInfo,         sCupSelectQueenCompTexInfo, sCupSelectKingCompTexInfo,
@@ -40,16 +58,36 @@ unk_80077D50* sCupSelectCompTexInfos[] = {
     sCupSelectQuestionMarkCompTexInfo,
 };
 
-unk_80077D50 sSelectCourseCompTexInfo[] = { { 4, aSelectCourseTex, 160, 24, 0 }, { 0 } };
-unk_80077D50 sRecordsCompTexInfo[] = { { 4, aRecordsTex, 96, 24, 0 }, { 0 } };
-static unk_80077D50 sOKCompTexInfo[] = { { 17, aOKTex, 32, 16, 0x112 }, { 0 } };
-unk_80077D50 sYellowArrowCompTexInfo[] = { { 17, aYellowArrowTex, 32, 32, 0x120 }, { 0 } };
-unk_80077D50 sOptionsFalconHelmetCompTexInfo[] = { { 17, aOptionsFalconHelmetTex, 64, 64, 0x9E8 }, { 0 } };
+unk_80077D50 sSelectCourseCompTexInfo[] = {
+    { 4, aSelectCourseTex, TEX_WIDTH(aSelectCourseTex), TEX_HEIGHT(aSelectCourseTex), 0 }, { 0 }
+};
+unk_80077D50 sRecordsCompTexInfo[] = { { 4, aRecordsTex, TEX_WIDTH(aRecordsTex), TEX_HEIGHT(aRecordsTex), 0 }, { 0 } };
+static unk_80077D50 sOKCompTexInfo[] = {
+    { 17, aOKTex, TEX_WIDTH(aOKTex), TEX_HEIGHT(aOKTex), TEX_COMPRESSED_SIZE(aOKTex) }, { 0 }
+};
+unk_80077D50 sYellowArrowCompTexInfo[] = { { 17, aYellowArrowTex, TEX_WIDTH(aYellowArrowTex),
+                                             TEX_HEIGHT(aYellowArrowTex), TEX_COMPRESSED_SIZE(aYellowArrowTex) },
+                                           { 0 } };
+unk_80077D50 sOptionsFalconHelmetCompTexInfo[] = { { 17, aOptionsFalconHelmetTex, TEX_WIDTH(aOptionsFalconHelmetTex),
+                                                     TEX_HEIGHT(aOptionsFalconHelmetTex),
+                                                     TEX_COMPRESSED_SIZE(aOptionsFalconHelmetTex) },
+                                                   { 0 } };
 
-static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = { { 17, aTitleBackgroundMainTex, 304, 240, 0x14A5D }, { 0 } };
-static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = { { 17, aTitleBackgroundComicTex, 320, 240, 0x118DB }, { 0 } };
-static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = { { 17, aTitleBackgroundFalconTex, 320, 240, 0x9E0A },
-                                                            { 0 } };
+static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = {
+    { 17, aTitleBackgroundMainTex, TEX_WIDTH(aTitleBackgroundMainTex), TEX_HEIGHT(aTitleBackgroundMainTex),
+      TEX_COMPRESSED_SIZE(aTitleBackgroundMainTex) },
+    { 0 }
+};
+static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = {
+    { 17, aTitleBackgroundComicTex, TEX_WIDTH(aTitleBackgroundComicTex), TEX_HEIGHT(aTitleBackgroundComicTex),
+      TEX_COMPRESSED_SIZE(aTitleBackgroundComicTex) },
+    { 0 }
+};
+static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = {
+    { 17, aTitleBackgroundFalconTex, TEX_WIDTH(aTitleBackgroundFalconTex), TEX_HEIGHT(aTitleBackgroundFalconTex),
+      TEX_COMPRESSED_SIZE(aTitleBackgroundFalconTex) },
+    { 0 }
+};
 
 static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
     sTitleBackgroundMainCompTexInfo,
@@ -57,10 +95,18 @@ static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
     sTitleBackgroundFalconCompTexInfo,
 };
 
-unk_80077D50 sCupCleared1CompTexInfo[] = { { 17, aCupCleared1Tex, 16, 16, 0x75 }, { 0 } };
-unk_80077D50 sCupCleared2CompTexInfo[] = { { 17, aCupCleared2Tex, 16, 16, 0x75 }, { 0 } };
-unk_80077D50 sCupCleared3CompTexInfo[] = { { 17, aCupCleared3Tex, 16, 16, 0x76 }, { 0 } };
-unk_80077D50 sCupCleared4CompTexInfo[] = { { 17, aCupCleared4Tex, 16, 16, 0x75 }, { 0 } };
+unk_80077D50 sCupCleared1CompTexInfo[] = { { 17, aCupCleared1Tex, TEX_WIDTH(aCupCleared1Tex),
+                                             TEX_HEIGHT(aCupCleared1Tex), TEX_COMPRESSED_SIZE(aCupCleared1Tex) },
+                                           { 0 } };
+unk_80077D50 sCupCleared2CompTexInfo[] = { { 17, aCupCleared2Tex, TEX_WIDTH(aCupCleared2Tex),
+                                             TEX_HEIGHT(aCupCleared2Tex), TEX_COMPRESSED_SIZE(aCupCleared2Tex) },
+                                           { 0 } };
+unk_80077D50 sCupCleared3CompTexInfo[] = { { 17, aCupCleared3Tex, TEX_WIDTH(aCupCleared3Tex),
+                                             TEX_HEIGHT(aCupCleared3Tex), TEX_COMPRESSED_SIZE(aCupCleared3Tex) },
+                                           { 0 } };
+unk_80077D50 sCupCleared4CompTexInfo[] = { { 17, aCupCleared4Tex, TEX_WIDTH(aCupCleared4Tex),
+                                             TEX_HEIGHT(aCupCleared4Tex), TEX_COMPRESSED_SIZE(aCupCleared4Tex) },
+                                           { 0 } };
 
 unk_80077D50* sCupClearedDifficultyCompTexInfos[] = {
     sCupCleared1CompTexInfo,
@@ -69,14 +115,29 @@ unk_80077D50* sCupClearedDifficultyCompTexInfos[] = {
     sCupCleared4CompTexInfo,
 };
 
-unk_80077D50 sHasGhostMarkerCompTexInfo[] = { { 4, aHasGhostMarkerTex, 32, 16, 0 }, { 0 } };
-unk_80077D50 sStaffGhostBeatenCompTexInfo[] = { { 17, aStaffGhostBeatenTex, 16, 16, 0x75 }, { 0 } };
+unk_80077D50 sHasGhostMarkerCompTexInfo[] = {
+    { 4, aHasGhostMarkerTex, TEX_WIDTH(aHasGhostMarkerTex), TEX_HEIGHT(aHasGhostMarkerTex), 0 }, { 0 }
+};
+unk_80077D50 sStaffGhostBeatenCompTexInfo[] = { { 17, aStaffGhostBeatenTex, TEX_WIDTH(aStaffGhostBeatenTex),
+                                                  TEX_HEIGHT(aStaffGhostBeatenTex),
+                                                  TEX_COMPRESSED_SIZE(aStaffGhostBeatenTex) },
+                                                { 0 } };
 
-unk_80077D50 sMenuWithGhostCompTexInfo[] = { { 4, aMenuWithGhostTex, 64, 16, 0 }, { 0 } };
-unk_80077D50 sMenuWithoutGhostCompTexInfo[] = { { 4, aMenuWithoutGhostTex, 64, 16, 0 }, { 0 } };
-unk_80077D50 sMenuStaffGhostCompTexInfo[] = { { 4, aMenuStaffGhostTex, 64, 16, 0 }, { 0 } };
-unk_80077D50 sMenuCelebrityGhostCompTexInfo[] = { { 4, aMenuCelebrityGhostTex, 64, 16, 0 }, { 0 } };
-unk_80077D50 sMenuChampGhostCompTexInfo[] = { { 4, aMenuChampGhostTex, 64, 16, 0 }, { 0 } };
+unk_80077D50 sMenuWithGhostCompTexInfo[] = {
+    { 4, aMenuWithGhostTex, TEX_WIDTH(aMenuWithGhostTex), TEX_HEIGHT(aMenuWithGhostTex), 0 }, { 0 }
+};
+unk_80077D50 sMenuWithoutGhostCompTexInfo[] = {
+    { 4, aMenuWithoutGhostTex, TEX_WIDTH(aMenuWithoutGhostTex), TEX_HEIGHT(aMenuWithoutGhostTex), 0 }, { 0 }
+};
+unk_80077D50 sMenuStaffGhostCompTexInfo[] = {
+    { 4, aMenuStaffGhostTex, TEX_WIDTH(aMenuStaffGhostTex), TEX_HEIGHT(aMenuStaffGhostTex), 0 }, { 0 }
+};
+unk_80077D50 sMenuCelebrityGhostCompTexInfo[] = {
+    { 4, aMenuCelebrityGhostTex, TEX_WIDTH(aMenuCelebrityGhostTex), TEX_HEIGHT(aMenuCelebrityGhostTex), 0 }, { 0 }
+};
+unk_80077D50 sMenuChampGhostCompTexInfo[] = {
+    { 4, aMenuChampGhostTex, TEX_WIDTH(aMenuChampGhostTex), TEX_HEIGHT(aMenuChampGhostTex), 0 }, { 0 }
+};
 
 unk_80077D50* sTimeAttackGhostOptionCompTexInfos[] = {
     sMenuWithGhostCompTexInfo,      sMenuWithoutGhostCompTexInfo, sMenuStaffGhostCompTexInfo,
@@ -94,6 +155,41 @@ s32 sCourseSelectCupColors[] = {
 };
 // clang-format on
 
+#ifdef VERSION_JP
+const char* sTrackSubtitles[] = {
+    "エイトロード",
+    "ハイスピード",
+    "パイプ",
+    "スクリュー",
+    "シリンダー",
+    "ハイジャンプ",
+    "ロールオーバー",
+    "ジャンプジャンプ",
+    "アップダウン",
+    "テクニカル",
+    "クイックターン",
+    "ステップアップロード",
+    "ジグザグジャンプ",
+    "ウェーブロード",
+    "ムーンサルト",
+    "スリムライン",
+    "ハーフパイプ",
+    "クランククランク",
+    "レインボーロード",
+    "ミラーロード",
+    "シリンダー&ハイジャンプ",
+    "ウェーブパニック",
+    "スネークロード",
+    "ビッグハンド",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+};
+#else
 const char* sTrackSubtitles[] = {
     "FIGURE EIGHT",
     "HIGH SPEED",
@@ -127,6 +223,7 @@ const char* sTrackSubtitles[] = {
     "",
     "",
 };
+#endif
 
 s8 sGhostOptionTypeMap[] = { 1, 0, 2, 3, 4 };
 

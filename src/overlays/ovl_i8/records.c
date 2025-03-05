@@ -40,20 +40,22 @@ unk_80144FE0 D_i8_80144FE0[2];
 s32 D_i8_80144F40 = 0;
 
 unk_80144F44 D_i8_80144F44[] = {
-    { 3, { aMenuChangeCourseTex, 64, 16 } }, // CHANGE COURSE
-    { 2, { aMenuQuitTex, 24, 16 } },         // QUIT
-    { 0, { aMenuClearRecordTex, 64, 16 } },  // CLEAR RECORD
-    { 1, { aMenuClearGhostTex, 64, 16 } },   // CLEAR GHOST
+    { 3, { aMenuChangeCourseTex, TEX_WIDTH(aMenuChangeCourseTex), TEX_HEIGHT(aMenuChangeCourseTex) } }, // CHANGE COURSE
+    { 2, { aMenuQuitTex, TEX_WIDTH(aMenuQuitTex), TEX_HEIGHT(aMenuQuitTex) } },                         // QUIT
+    { 0, { aMenuClearRecordTex, TEX_WIDTH(aMenuClearRecordTex), TEX_HEIGHT(aMenuClearRecordTex) } },    // CLEAR RECORD
+    { 1, { aMenuClearGhostTex, TEX_WIDTH(aMenuClearGhostTex), TEX_HEIGHT(aMenuClearGhostTex) } },       // CLEAR GHOST
 };
 
 unk_80144F74 D_i8_80144F74[] = {
-    { aMenuEraseCourseSavedData1Tex, 96, 32 }, // ERASE COURSE DATA? (1)
-    { aMenuEraseCourseSavedData2Tex, 96, 32 }, // ERASE COURSE DATA? (2)
+    { aMenuEraseCourseSavedData1Tex, TEX_WIDTH(aMenuEraseCourseSavedData1Tex),
+      TEX_HEIGHT(aMenuEraseCourseSavedData1Tex) }, // ERASE COURSE DATA? (1)
+    { aMenuEraseCourseSavedData2Tex, TEX_WIDTH(aMenuEraseCourseSavedData2Tex),
+      TEX_HEIGHT(aMenuEraseCourseSavedData2Tex) }, // ERASE COURSE DATA? (2)
 };
 
 unk_80144F74 D_i8_80144F84[] = {
-    { aMenuNoTex, 32, 16 },  // NO
-    { aMenuYesTex, 32, 16 }, // YES
+    { aMenuNoTex, TEX_WIDTH(aMenuNoTex), TEX_HEIGHT(aMenuNoTex) },    // NO
+    { aMenuYesTex, TEX_WIDTH(aMenuYesTex), TEX_HEIGHT(aMenuYesTex) }, // YES
 };
 
 extern s16 D_800CCFE8;
@@ -86,7 +88,7 @@ bool func_i8_80143D30(s32);
 bool func_i8_80143D84(s32);
 
 extern s8 gUnlockableLevel;
-extern s8 D_800CD3C8;
+extern s8 gSettingEverythingUnlocked;
 extern s32 gCourseIndex;
 
 void func_i8_80143A78(void) {
@@ -94,7 +96,7 @@ void func_i8_80143A78(void) {
     unk_80144F44* var_s0;
 
     D_i8_80144F40 = gCourseIndex;
-    if ((gUnlockableLevel == 0) && (D_800CD3C8 == 0)) {
+    if ((gUnlockableLevel == 0) && (gSettingEverythingUnlocked == 0)) {
         sUnlockedCourseCount = 18;
     } else {
         sUnlockedCourseCount = 24;
@@ -130,19 +132,19 @@ void func_i8_80143A78(void) {
     }
     D_80144FB0 = 0;
     D_i8_80144FD6 = 0;
-    func_80078104(aMenuTextTLUT, 0x40, 0, 0, false);
+    func_80078104(aMenuTextTLUT, TEX_SIZE(aMenuTextTLUT, sizeof(u16)), 0, 0, false);
 
     var_s0 = D_i8_80144F44;
     for (i = 0; i < 4; i++, var_s0++) {
-        func_80078104(var_s0->unk_04.unk_00, var_s0->unk_04.width * var_s0->unk_04.height, 0, 1, false);
+        func_80078104(var_s0->unk_04.unk_00, var_s0->unk_04.width * var_s0->unk_04.height * sizeof(u8), 0, 1, false);
     }
-    func_80078104(aMenuEraseCourseSavedData1Tex, 0xC00, 0, 1, false);
-    func_80078104(aMenuEraseCourseSavedData2Tex, 0xC00, 0, 1, false);
-    func_80078104(aMenuLeftArrowTex, 0x100, 0, 1, false);
-    func_80078104(aMenuRightArrowTex, 0x100, 0, 1, false);
-    func_80078104(aMenuNoTex, 0x200, 0, 1, false);
-    func_80078104(aMenuYesTex, 0x200, 0, 1, false);
-    func_80078104(aHasGhostMarkerTex, 0x100, 0, 0, false);
+    func_80078104(aMenuEraseCourseSavedData1Tex, TEX_SIZE(aMenuEraseCourseSavedData1Tex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuEraseCourseSavedData2Tex, TEX_SIZE(aMenuEraseCourseSavedData2Tex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuLeftArrowTex, TEX_SIZE(aMenuLeftArrowTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuRightArrowTex, TEX_SIZE(aMenuRightArrowTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuNoTex, TEX_SIZE(aMenuNoTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuYesTex, TEX_SIZE(aMenuYesTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aHasGhostMarkerTex, TEX_SIZE_4B(aHasGhostMarkerTex), 0, 0, false);
     func_i3_80139D20();
     func_80080A40(&D_i8_80144FC0);
     func_80080A40(&D_i8_80144FC4);
@@ -577,10 +579,16 @@ Gfx* func_i8_80144CDC(Gfx* gfx, s32 arg1, s32 arg2) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
 
     temp_s0 = &D_i8_80144F74[D_i8_80144FCE];
+
+#ifdef VERSION_JP
+    gfx = func_8007E410(gfx, func_800783AC(temp_s0->unk_00), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1, arg1 + 12,
+                        arg2 + 10, temp_s0->width, temp_s0->height, 3);
+#else
     sp58 = (0x7C - temp_s0->width) / 2;
 
     gfx = func_8007E410(gfx, func_800783AC(temp_s0->unk_00), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1,
                         arg1 + sp58 + 12, arg2 + 10, temp_s0->width, temp_s0->height, 3);
+#endif
 
     gDPPipeSync(gfx++);
     gfx = func_8007DB28(gfx, 0);

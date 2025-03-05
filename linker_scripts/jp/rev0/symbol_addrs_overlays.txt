@@ -1,0 +1,63 @@
+// non matching and referenced functions
+
+func_i2_800FFEEC = 0x800FFABC; // segment:ovl_i2
+
+func_i3_80115E34 = 0x801156C4; // segment:ovl_i3
+func_i3_80115E74 = 0x80115704; // segment:ovl_i3
+
+MachineSelect_BackgroundDraw = 0x80117164; // segment:ovl_i4
+
+Credits_IntroDraw = 0x801191B8; // segment:ovl_i6
+func_i6_8011D394 = 0x8011CC44; // segment:ovl_i6
+
+func_i7_80146E28 = 0x80146728; // segment:ovl_i7
+
+LeoGetKAdr = 0x80414160; // segment:leo
+D_i1_80411850 = 0x80414250; // segment:leo type:u16
+LeoGetAAdr = 0x80414CA0; // segment:leo
+
+// referenced data/bss
+
+D_80112178 = 0x80111A08; // segment:ovl_i2
+D_8011217C = 0x80111A0C; // segment:ovl_i2
+D_80111CF8 = 0x80111588; // segment:ovl_i2
+D_801122A0 = 0x80111B30; // segment:ovl_i2
+D_801122A4 = 0x80111B34; // segment:ovl_i2
+D_80112180 = 0x80111A10; // segment:ovl_i2
+D_80115D40 = 0x801155D0; // segment:ovl_i2
+D_80115D44 = 0x801155D4; // segment:ovl_i2
+D_80113140 = 0x801129D0; // segment:ovl_i2
+D_80112B28 = 0x801123B8; // segment:ovl_i2
+D_80112B2C = 0x801123BC; // segment:ovl_i2
+D_801122A8 = 0x80111B38; // segment:ovl_i2
+D_80111CF0 = 0x80111580; // segment:ovl_i2
+D_80111CF4 = 0x80111584; // segment:ovl_i2
+D_80111870 = 0x80111100; // segment:ovl_i2
+D_80112FB0 = 0x80112840; // segment:ovl_i2
+D_80112FB4 = 0x80112844; // segment:ovl_i2
+D_80112B30 = 0x801123C0; // segment:ovl_i2
+D_80113138 = 0x801129C8; // segment:ovl_i2
+D_8011313C = 0x801129CC; // segment:ovl_i2
+D_80112FB8 = 0x80112848; // segment:ovl_i2
+
+D_i3_8013DBEC = 0x8013D47C; // segment:ovl_i3
+D_i3_8013E7A8 = 0x8013E038; // segment:ovl_i3
+D_i3_8013E94C = 0x8013E1DC; // segment:ovl_i3
+D_i3_80141998 = 0x80141298; // segment:ovl_i3
+D_i3_80141908 = 0x80141208; // segment:ovl_i3
+D_i3_8014190C = 0x8014120C; // segment:ovl_i3
+D_i3_80141910 = 0x80141210; // segment:ovl_i3
+D_80141C78 = 0x80141578; // segment:ovl_i3
+
+D_i6_8011DFAC = 0x8011D87C; // segment:ovl_i6
+D_i6_8011DFB0 = 0x8011D880; // segment:ovl_i6
+D_i6_8011DFB4 = 0x8011D884; // segment:ovl_i6
+D_i6_8011FB18 = 0x8011F468; // segment:ovl_i6
+D_i6_80124618 = 0x80123F68; // segment:ovl_i6
+D_i6_80124620 = 0x80123F70; // segment:ovl_i6
+D_i6_801247A8 = 0x801240F8; // segment:ovl_i6
+D_i6_801247AA = 0x801240FA; // segment:ovl_i6
+
+D_i7_80149FD8 = 0x801498D8; // segment:ovl_i7
+D_i7_8014BDF0 = 0x8014B6F0; // segment:ovl_i7
+D_i7_8014BEC8 = 0x8014B7C8; // segment:ovl_i7

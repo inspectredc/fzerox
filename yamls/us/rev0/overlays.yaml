@@ -9,7 +9,7 @@
   - name: leo_font
     type: code
     vram: 0x80400000
-    bss_size: 0x3000
+    bss_size: 0x3010
     subsegments:
       - { type: .bss, vram: 0x80400000, name: leo_font }
 
@@ -215,16 +215,15 @@
       - [0xE6170, c, options_menu]
       - [0xE7CF0, c]
       - [0xE7D60, .data, main_menu]
-      - [0xE80CC, .data, credits]
+      - [0xE80C0, .data, credits]
       - [0xE8EA0, .data, options_menu]
-      - [0xE8FF0, .data, ovl_i6_data]
-      - [0xE9040, .rodata, main_menu]
+      - [0xE8FF0, .rodata, main_menu]
       - [0xE9180, .rodata, credits]
       - [0xE9A10, .rodata, options_menu]
       - { type: .bss, vram: 0x8011F910, name: main_menu }
       - { type: .bss, vram: 0x8011FAF0, name: credits }
       - { type: .bss, vram: 0x8011FB10, name: options_menu}
-      - { type: .bss, vram: 0x801247C0, name: ovl_i6_data }
+      - { type: .bss, vram: 0x801247C0, name: save_context }
 
   - name: ovl_i7
     exclusive_ram_id: overlay
@@ -238,7 +237,8 @@
       - [0xE9A30, c, ending]
       - [0xEFEF0, .data, ending]
       - [0xF13A0, .rodata, ending]
-      - { type: bss, vram: 0x8014B480, name: ending }
+      - { type: .bss, vram: 0x8014B480, name: ovl_i7_data }
+      - { type: .bss, vram: 0x8014BDE0, name: ending }
 
   - name: ovl_i8
     exclusive_ram_id: overlay

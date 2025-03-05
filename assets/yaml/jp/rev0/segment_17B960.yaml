@@ -1,0 +1,3582 @@
+:config:
+  segments:
+    - [0x03,  0x17B660]
+  header:
+    code:
+      - '#include "assets/segment_17B1E0.h"'
+    header:
+      - '#include "gfx.h"'
+
+D_3000780:
+  type: GFX
+  offset: 0x780
+  symbol: D_3000780
+
+D_3000788:
+  type: VTX
+  count: 14
+  offset: 0x788
+  symbol: D_3000788
+
+D_3000868:
+  type: VTX
+  count: 33
+  offset: 0x868
+  symbol: D_3000868
+
+D_3000A78:
+  type: VTX
+  count: 8
+  offset: 0xA78
+  symbol: D_3000A78
+
+D_3000AF8:
+  type: VTX
+  count: 20
+  offset: 0xAF8
+  symbol: D_3000AF8
+
+D_3000C38:
+  type: VTX
+  count: 6
+  offset: 0xC38
+  symbol: D_3000C38
+
+D_3000C98:
+  type: VTX
+  count: 115
+  offset: 0xC98
+  symbol: D_3000C98
+
+D_30013C8:
+  type: VTX
+  count: 12
+  offset: 0x13C8
+  symbol: D_30013C8
+
+D_3001488:
+  type: VTX
+  count: 53
+  offset: 0x1488
+  symbol: D_3001488
+
+D_30017D8:
+  type: VTX
+  count: 8
+  offset: 0x17D8
+  symbol: D_30017D8
+
+D_3001858:
+  type: VTX
+  count: 22
+  offset: 0x1858
+  symbol: D_3001858
+
+D_30019B8:
+  type: VTX
+  count: 23
+  offset: 0x19B8
+  symbol: D_30019B8
+
+D_3001B28:
+  type: VTX
+  count: 8
+  offset: 0x1B28
+  symbol: D_3001B28
+
+D_3001BA8:
+  type: VTX
+  count: 20
+  offset: 0x1BA8
+  symbol: D_3001BA8
+
+D_3001CE8:
+  type: VTX
+  count: 4
+  offset: 0x1CE8
+  symbol: D_3001CE8
+
+D_3001D28:
+  type: VTX
+  count: 118
+  offset: 0x1D28
+  symbol: D_3001D28
+
+D_3002488:
+  type: VTX
+  count: 14
+  offset: 0x2488
+  symbol: D_3002488
+
+D_3002568:
+  type: VTX
+  count: 8
+  offset: 0x2568
+  symbol: D_3002568
+
+D_30025E8:
+  type: VTX
+  count: 36
+  offset: 0x25E8
+  symbol: D_30025E8
+
+D_3002828:
+  type: VTX
+  count: 46
+  offset: 0x2828
+  symbol: D_3002828
+
+D_3002B08:
+  type: VTX
+  count: 102
+  offset: 0x2B08
+  symbol: D_3002B08
+
+D_3003168:
+  type: VTX
+  count: 12
+  offset: 0x3168
+  symbol: D_3003168
+
+D_3003228:
+  type: VTX
+  count: 22
+  offset: 0x3228
+  symbol: D_3003228
+
+D_3003388:
+  type: VTX
+  count: 14
+  offset: 0x3388
+  symbol: D_3003388
+
+D_3003468:
+  type: VTX
+  count: 8
+  offset: 0x3468
+  symbol: D_3003468
+
+D_30034E8:
+  type: VTX
+  count: 39
+  offset: 0x34E8
+  symbol: D_30034E8
+
+D_3003758:
+  type: VTX
+  count: 8
+  offset: 0x3758
+  symbol: D_3003758
+
+D_30037D8:
+  type: VTX
+  count: 20
+  offset: 0x37D8
+  symbol: D_30037D8
+
+D_3003918:
+  type: VTX
+  count: 6
+  offset: 0x3918
+  symbol: D_3003918
+
+D_3003978:
+  type: VTX
+  count: 120
+  offset: 0x3978
+  symbol: D_3003978
+
+D_30040F8:
+  type: VTX
+  count: 20
+  offset: 0x40F8
+  symbol: D_30040F8
+
+D_3004238:
+  type: VTX
+  count: 38
+  offset: 0x4238
+  symbol: D_3004238
+
+D_3004498:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 32
+  offset: 0x4498
+  symbol: D_3004498
+
+D_3004598:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x4598
+  symbol: D_3004598
+
+D_3004618:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x4618
+  symbol: D_3004618
+
+D_3004698:
+  type: TEXTURE
+  ctype: u8
+  format: IA4
+  width: 16
+  height: 16
+  offset: 0x4698
+  symbol: D_3004698
+
+D_3004718:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 16
+  offset: 0x4718
+  symbol: D_3004718
+
+D_3004918:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x4918
+  symbol: D_3004918
+
+D_3004B18:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x4B18
+  symbol: D_3004B18
+
+D_3004D18:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x4D18
+  symbol: D_3004D18
+
+D_3004F18:
+  type: VTX
+  count: 4
+  offset: 0x4F18
+  symbol: D_3004F18
+
+D_3004F58:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x4F58
+  symbol: D_3004F58
+
+D_3005358:
+  type: VTX
+  count: 25
+  offset: 0x5358
+  symbol: D_3005358
+
+D_30054E8:
+  type: VTX
+  count: 8
+  offset: 0x54E8
+  symbol: D_30054E8
+
+D_3005568:
+  type: VTX
+  count: 26
+  offset: 0x5568
+  symbol: D_3005568
+
+D_3005708:
+  type: VTX
+  count: 72
+  offset: 0x5708
+  symbol: D_3005708
+
+D_3005B88:
+  type: VTX
+  count: 8
+  offset: 0x5B88
+  symbol: D_3005B88
+
+D_3005C08:
+  type: VTX
+  count: 26
+  offset: 0x5C08
+  symbol: D_3005C08
+
+D_3005DA8:
+  type: VTX
+  count: 5
+  offset: 0x5DA8
+  symbol: D_3005DA8
+
+D_3005DF8:
+  type: VTX
+  count: 40
+  offset: 0x5DF8
+  symbol: D_3005DF8
+
+D_3006078:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 32
+  offset: 0x6078
+  symbol: D_3006078
+
+D_3006178:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 16
+  offset: 0x6178
+  symbol: D_3006178
+
+D_3006278:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x6278
+  symbol: D_3006278
+
+D_3006478:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x6478
+  symbol: D_3006478
+
+D_3006678:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x6678
+  symbol: D_3006678
+
+D_3006878:
+  type: TEXTURE
+  ctype: u8
+  format: IA4
+  width: 32
+  height: 32
+  offset: 0x6878
+  symbol: D_3006878
+
+D_3006A78:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x6A78
+  symbol: D_3006A78
+
+D_3006C78:
+  type: VTX
+  count: 4
+  offset: 0x6C78
+  symbol: D_3006C78
+
+D_3006CB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x6CB8
+  symbol: D_3006CB8
+
+D_30070B8:
+  type: VTX
+  count: 34
+  offset: 0x70B8
+  symbol: D_30070B8
+
+D_30072D8:
+  type: VTX
+  count: 26
+  offset: 0x72D8
+  symbol: D_30072D8
+
+D_3007478:
+  type: VTX
+  count: 56
+  offset: 0x7478
+  symbol: D_3007478
+
+D_30077F8:
+  type: VTX
+  count: 14
+  offset: 0x77F8
+  symbol: D_30077F8
+
+D_30078D8:
+  type: VTX
+  count: 4
+  offset: 0x78D8
+  symbol: D_30078D8
+
+D_3007918:
+  type: VTX
+  count: 48
+  offset: 0x7918
+  symbol: D_3007918
+
+D_3007C18:
+  type: VTX
+  count: 12
+  offset: 0x7C18
+  symbol: D_3007C18
+
+D_3007CD8:
+  type: VTX
+  count: 20
+  offset: 0x7CD8
+  symbol: D_3007CD8
+
+D_3007E18:
+  type: TEXTURE
+  ctype: u8
+  format: IA4
+  width: 16
+  height: 16
+  offset: 0x7E18
+  symbol: D_3007E18
+
+D_3007E98:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x7E98
+  symbol: D_3007E98
+
+D_3008698:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8698
+  symbol: D_3008698
+
+D_3008718:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x8718
+  symbol: D_3008718
+
+D_3008918:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 32
+  offset: 0x8918
+  symbol: D_3008918
+
+D_3008A18:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x8A18
+  symbol: D_3008A18
+
+D_3008C18:
+  type: VTX
+  count: 4
+  offset: 0x8C18
+  symbol: D_3008C18
+
+D_3008C58:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x8C58
+  symbol: D_3008C58
+
+D_3009058:
+  type: VTX
+  count: 8
+  offset: 0x9058
+  symbol: D_3009058
+
+D_30090D8:
+  type: VTX
+  count: 22
+  offset: 0x90D8
+  symbol: D_30090D8
+
+D_3009238:
+  type: VTX
+  count: 23
+  offset: 0x9238
+  symbol: D_3009238
+
+D_30093A8:
+  type: VTX
+  count: 8
+  offset: 0x93A8
+  symbol: D_30093A8
+
+D_3009428:
+  type: VTX
+  count: 10
+  offset: 0x9428
+  symbol: D_3009428
+
+D_30094C8:
+  type: VTX
+  count: 4
+  offset: 0x94C8
+  symbol: D_30094C8
+
+D_3009508:
+  type: VTX
+  count: 110
+  offset: 0x9508
+  symbol: D_3009508
+
+D_3009BE8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 32
+  offset: 0x9BE8
+  symbol: D_3009BE8
+
+D_3009CE8:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x9CE8
+  symbol: D_3009CE8
+
+D_300A4E8:
+  type: VTX
+  count: 4
+  offset: 0xA4E8
+  symbol: D_300A4E8
+
+D_300A528:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0xA528
+  symbol: D_300A528
+
+D_300A928:
+  type: VTX
+  count: 14
+  offset: 0xA928
+  symbol: D_300A928
+
+D_300AA08:
+  type: VTX
+  count: 8
+  offset: 0xAA08
+  symbol: D_300AA08
+
+D_300AA88:
+  type: VTX
+  count: 20
+  offset: 0xAA88
+  symbol: D_300AA88
+
+D_300ABC8:
+  type: VTX
+  count: 48
+  offset: 0xABC8
+  symbol: D_300ABC8
+
+D_300AEC8:
+  type: VTX
+  count: 67
+  offset: 0xAEC8
+  symbol: D_300AEC8
+
+D_300B2F8:
+  type: VTX
+  count: 12
+  offset: 0xB2F8
+  symbol: D_300B2F8
+
+D_300B3B8:
+  type: VTX
+  count: 22
+  offset: 0xB3B8
+  symbol: D_300B3B8
+
+D_300B518:
+  type: VTX
+  count: 14
+  offset: 0xB518
+  symbol: D_300B518
+
+D_300B5F8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0xB5F8
+  symbol: D_300B5F8
+
+D_300B678:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 32
+  offset: 0xB678
+  symbol: D_300B678
+
+D_300BA78:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 32
+  offset: 0xBA78
+  symbol: D_300BA78
+
+D_300BB78:
+  type: VTX
+  count: 4
+  offset: 0xBB78
+  symbol: D_300BB78
+
+D_300BBB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0xBBB8
+  symbol: D_300BBB8
+
+D_300BFB8:
+  type: VTX
+  count: 101
+  offset: 0xBFB8
+  symbol: D_300BFB8
+
+D_300C608:
+  type: VTX
+  count: 8
+  offset: 0xC608
+  symbol: D_300C608
+
+D_300C688:
+  type: VTX
+  count: 4
+  offset: 0xC688
+  symbol: D_300C688
+
+D_300C6C8:
+  type: VTX
+  count: 12
+  offset: 0xC6C8
+  symbol: D_300C6C8
+
+D_300C788:
+  type: VTX
+  count: 22
+  offset: 0xC788
+  symbol: D_300C788
+
+D_300C8E8:
+  type: VTX
+  count: 14
+  offset: 0xC8E8
+  symbol: D_300C8E8
+
+D_300C9C8:
+  type: VTX
+  count: 20
+  offset: 0xC9C8
+  symbol: D_300C9C8
+
+D_300CB08:
+  type: VTX
+  count: 39
+  offset: 0xCB08
+  symbol: D_300CB08
+
+D_300CD78:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0xCD78
+  symbol: D_300CD78
+
+D_300CDF8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 32
+  offset: 0xCDF8
+  symbol: D_300CDF8
+
+D_300CEF8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 32
+  offset: 0xCEF8
+  symbol: D_300CEF8
+
+D_300D2F8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 32
+  offset: 0xD2F8
+  symbol: D_300D2F8
+
+D_300D3F8:
+  type: VTX
+  count: 4
+  offset: 0xD3F8
+  symbol: D_300D3F8
+
+D_300D438:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0xD438
+  symbol: D_300D438
+
+D_300D838:
+  type: VTX
+  count: 10
+  offset: 0xD838
+  symbol: D_300D838
+
+D_300D8D8:
+  type: VTX
+  count: 8
+  offset: 0xD8D8
+  symbol: D_300D8D8
+
+D_300D958:
+  type: VTX
+  count: 34
+  offset: 0xD958
+  symbol: D_300D958
+
+D_300DB78:
+  type: VTX
+  count: 115
+  offset: 0xDB78
+  symbol: D_300DB78
+
+D_300E2A8:
+  type: VTX
+  count: 22
+  offset: 0xE2A8
+  symbol: D_300E2A8
+
+D_300E408:
+  type: VTX
+  count: 8
+  offset: 0xE408
+  symbol: D_300E408
+
+D_300E488:
+  type: VTX
+  count: 12
+  offset: 0xE488
+  symbol: D_300E488
+
+D_300E548:
+  type: VTX
+  count: 54
+  offset: 0xE548
+  symbol: D_300E548
+
+D_300E8A8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 32
+  offset: 0xE8A8
+  symbol: D_300E8A8
+
+D_300E9A8:
+  type: VTX
+  count: 4
+  offset: 0xE9A8
+  symbol: D_300E9A8
+
+D_300E9E8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0xE9E8
+  symbol: D_300E9E8
+
+D_300EDE8:
+  type: VTX
+  count: 27
+  offset: 0xEDE8
+  symbol: D_300EDE8
+
+D_300EF98:
+  type: VTX
+  count: 68
+  offset: 0xEF98
+  symbol: D_300EF98
+
+D_300F3D8:
+  type: VTX
+  count: 14
+  offset: 0xF3D8
+  symbol: D_300F3D8
+
+D_300F4B8:
+  type: VTX
+  count: 21
+  offset: 0xF4B8
+  symbol: D_300F4B8
+
+D_300F608:
+  type: VTX
+  count: 23
+  offset: 0xF608
+  symbol: D_300F608
+
+D_300F778:
+  type: VTX
+  count: 18
+  offset: 0xF778
+  symbol: D_300F778
+
+D_300F898:
+  type: VTX
+  count: 8
+  offset: 0xF898
+  symbol: D_300F898
+
+D_300F918:
+  type: VTX
+  count: 30
+  offset: 0xF918
+  symbol: D_300F918
+
+D_300FAF8:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0xFAF8
+  symbol: D_300FAF8
+
+D_30102F8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 16
+  offset: 0x102F8
+  symbol: D_30102F8
+
+D_30103F8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 32
+  offset: 0x103F8
+  symbol: D_30103F8
+
+D_30104F8:
+  type: VTX
+  count: 4
+  offset: 0x104F8
+  symbol: D_30104F8
+
+D_3010538:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x10538
+  symbol: D_3010538
+
+D_3010938:
+  type: VTX
+  count: 4
+  offset: 0x10938
+  symbol: D_3010938
+
+D_3010978:
+  type: VTX
+  count: 36
+  offset: 0x10978
+  symbol: D_3010978
+
+D_3010BB8:
+  type: VTX
+  count: 25
+  offset: 0x10BB8
+  symbol: D_3010BB8
+
+D_3010D48:
+  type: VTX
+  count: 10
+  offset: 0x10D48
+  symbol: D_3010D48
+
+D_3010DE8:
+  type: VTX
+  count: 10
+  offset: 0x10DE8
+  symbol: D_3010DE8
+
+D_3010E88:
+  type: VTX
+  count: 34
+  offset: 0x10E88
+  symbol: D_3010E88
+
+D_30110A8:
+  type: VTX
+  count: 77
+  offset: 0x110A8
+  symbol: D_30110A8
+
+D_3011578:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x11578
+  symbol: D_3011578
+
+D_3011778:
+  type: VTX
+  count: 4
+  offset: 0x11778
+  symbol: D_3011778
+
+D_30117B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x117B8
+  symbol: D_30117B8
+
+D_3011BB8:
+  type: VTX
+  count: 100
+  offset: 0x11BB8
+  symbol: D_3011BB8
+
+D_30121F8:
+  type: VTX
+  count: 16
+  offset: 0x121F8
+  symbol: D_30121F8
+
+D_30122F8:
+  type: VTX
+  count: 20
+  offset: 0x122F8
+  symbol: D_30122F8
+
+D_3012438:
+  type: VTX
+  count: 41
+  offset: 0x12438
+  symbol: D_3012438
+
+D_30126C8:
+  type: VTX
+  count: 8
+  offset: 0x126C8
+  symbol: D_30126C8
+
+D_3012748:
+  type: VTX
+  count: 50
+  offset: 0x12748
+  symbol: D_3012748
+
+D_3012A68:
+  type: VTX
+  count: 22
+  offset: 0x12A68
+  symbol: D_3012A68
+
+D_3012BC8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x12BC8
+  symbol: D_3012BC8
+
+D_3012C48:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x12C48
+  symbol: D_3012C48
+
+D_3012CC8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x12CC8
+  symbol: D_3012CC8
+
+D_3012EC8:
+  type: VTX
+  count: 4
+  offset: 0x12EC8
+  symbol: D_3012EC8
+
+D_3012F08:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x12F08
+  symbol: D_3012F08
+
+D_3013308:
+  type: VTX
+  count: 60
+  offset: 0x13308
+  symbol: D_3013308
+
+D_30136C8:
+  type: VTX
+  count: 4
+  offset: 0x136C8
+  symbol: D_30136C8
+
+D_3013708:
+  type: VTX
+  count: 36
+  offset: 0x13708
+  symbol: D_3013708
+
+D_3013948:
+  type: VTX
+  count: 10
+  offset: 0x13948
+  symbol: D_3013948
+
+D_30139E8:
+  type: VTX
+  count: 16
+  offset: 0x139E8
+  symbol: D_30139E8
+
+D_3013AE8:
+  type: VTX
+  count: 47
+  offset: 0x13AE8
+  symbol: D_3013AE8
+
+D_3013DD8:
+  type: VTX
+  count: 8
+  offset: 0x13DD8
+  symbol: D_3013DD8
+
+D_3013E58:
+  type: VTX
+  count: 8
+  offset: 0x13E58
+  symbol: D_3013E58
+
+D_3013ED8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x13ED8
+  symbol: D_3013ED8
+
+D_30140D8:
+  type: VTX
+  count: 4
+  offset: 0x140D8
+  symbol: D_30140D8
+
+D_3014118:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x14118
+  symbol: D_3014118
+
+D_3014518:
+  type: VTX
+  count: 104
+  offset: 0x14518
+  symbol: D_3014518
+
+D_3014B98:
+  type: VTX
+  count: 6
+  offset: 0x14B98
+  symbol: D_3014B98
+
+D_3014BF8:
+  type: VTX
+  count: 12
+  offset: 0x14BF8
+  symbol: D_3014BF8
+
+D_3014CB8:
+  type: VTX
+  count: 12
+  offset: 0x14CB8
+  symbol: D_3014CB8
+
+D_3014D78:
+  type: VTX
+  count: 22
+  offset: 0x14D78
+  symbol: D_3014D78
+
+D_3014ED8:
+  type: VTX
+  count: 8
+  offset: 0x14ED8
+  symbol: D_3014ED8
+
+D_3014F58:
+  type: VTX
+  count: 32
+  offset: 0x14F58
+  symbol: D_3014F58
+
+D_3015158:
+  type: VTX
+  count: 4
+  offset: 0x15158
+  symbol: D_3015158
+
+D_3015198:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x15198
+  symbol: D_3015198
+
+D_3015218:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x15218
+  symbol: D_3015218
+
+D_3015418:
+  type: VTX
+  count: 4
+  offset: 0x15418
+  symbol: D_3015418
+
+D_3015458:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x15458
+  symbol: D_3015458
+
+D_3015858:
+  type: VTX
+  count: 10
+  offset: 0x15858
+  symbol: D_3015858
+
+D_30158F8:
+  type: VTX
+  count: 8
+  offset: 0x158F8
+  symbol: D_30158F8
+
+D_3015978:
+  type: VTX
+  count: 13
+  offset: 0x15978
+  symbol: D_3015978
+
+D_3015A48:
+  type: VTX
+  count: 22
+  offset: 0x15A48
+  symbol: D_3015A48
+
+D_3015BA8:
+  type: VTX
+  count: 20
+  offset: 0x15BA8
+  symbol: D_3015BA8
+
+D_3015CE8:
+  type: VTX
+  count: 26
+  offset: 0x15CE8
+  symbol: D_3015CE8
+
+D_3015E88:
+  type: VTX
+  count: 61
+  offset: 0x15E88
+  symbol: D_3015E88
+
+D_3016258:
+  type: VTX
+  count: 48
+  offset: 0x16258
+  symbol: D_3016258
+
+D_3016558:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x16558
+  symbol: D_3016558
+
+D_3016758:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x16758
+  symbol: D_3016758
+
+D_3016958:
+  type: VTX
+  count: 4
+  offset: 0x16958
+  symbol: D_3016958
+
+D_3016998:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x16998
+  symbol: D_3016998
+
+D_3016D98:
+  type: VTX
+  count: 74
+  offset: 0x16D98
+  symbol: D_3016D98
+
+D_3017238:
+  type: VTX
+  count: 14
+  offset: 0x17238
+  symbol: D_3017238
+
+D_3017318:
+  type: VTX
+  count: 6
+  offset: 0x17318
+  symbol: D_3017318
+
+D_3017378:
+  type: VTX
+  count: 8
+  offset: 0x17378
+  symbol: D_3017378
+
+D_30173F8:
+  type: VTX
+  count: 6
+  offset: 0x173F8
+  symbol: D_30173F8
+
+D_3017458:
+  type: VTX
+  count: 4
+  offset: 0x17458
+  symbol: D_3017458
+
+D_3017498:
+  type: VTX
+  count: 20
+  offset: 0x17498
+  symbol: D_3017498
+
+D_30175D8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x175D8
+  symbol: D_30175D8
+
+D_30177D8:
+  type: VTX
+  count: 4
+  offset: 0x177D8
+  symbol: D_30177D8
+
+D_3017818:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x17818
+  symbol: D_3017818
+
+D_3017C18:
+  type: VTX
+  count: 16
+  offset: 0x17C18
+  symbol: D_3017C18
+
+D_3017D18:
+  type: VTX
+  count: 38
+  offset: 0x17D18
+  symbol: D_3017D18
+
+D_3017F78:
+  type: VTX
+  count: 10
+  offset: 0x17F78
+  symbol: D_3017F78
+
+D_3018018:
+  type: VTX
+  count: 14
+  offset: 0x18018
+  symbol: D_3018018
+
+D_30180F8:
+  type: VTX
+  count: 32
+  offset: 0x180F8
+  symbol: D_30180F8
+
+D_30182F8:
+  type: VTX
+  count: 26
+  offset: 0x182F8
+  symbol: D_30182F8
+
+D_3018498:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x18498
+  symbol: D_3018498
+
+D_3018698:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x18698
+  symbol: D_3018698
+
+D_3018E98:
+  type: VTX
+  count: 4
+  offset: 0x18E98
+  symbol: D_3018E98
+
+D_3018ED8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x18ED8
+  symbol: D_3018ED8
+
+D_30192D8:
+  type: VTX
+  count: 10
+  offset: 0x192D8
+  symbol: D_30192D8
+
+D_3019378:
+  type: VTX
+  count: 6
+  offset: 0x19378
+  symbol: D_3019378
+
+D_30193D8:
+  type: VTX
+  count: 12
+  offset: 0x193D8
+  symbol: D_30193D8
+
+D_3019498:
+  type: VTX
+  count: 8
+  offset: 0x19498
+  symbol: D_3019498
+
+D_3019518:
+  type: VTX
+  count: 132
+  offset: 0x19518
+  symbol: D_3019518
+
+D_3019D58:
+  type: VTX
+  count: 20
+  offset: 0x19D58
+  symbol: D_3019D58
+
+D_3019E98:
+  type: VTX
+  count: 21
+  offset: 0x19E98
+  symbol: D_3019E98
+
+D_3019FE8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x19FE8
+  symbol: D_3019FE8
+
+D_301A068:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x1A068
+  symbol: D_301A068
+
+D_301A268:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x1A268
+  symbol: D_301A268
+
+D_301A2E8:
+  type: VTX
+  count: 4
+  offset: 0x1A2E8
+  symbol: D_301A2E8
+
+D_301A328:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x1A328
+  symbol: D_301A328
+
+D_301A728:
+  type: VTX
+  count: 13
+  offset: 0x1A728
+  symbol: D_301A728
+
+D_301A7F8:
+  type: VTX
+  count: 14
+  offset: 0x1A7F8
+  symbol: D_301A7F8
+
+D_301A8D8:
+  type: VTX
+  count: 31
+  offset: 0x1A8D8
+  symbol: D_301A8D8
+
+D_301AAC8:
+  type: VTX
+  count: 62
+  offset: 0x1AAC8
+  symbol: D_301AAC8
+
+D_301AEA8:
+  type: VTX
+  count: 10
+  offset: 0x1AEA8
+  symbol: D_301AEA8
+
+D_301AF48:
+  type: VTX
+  count: 12
+  offset: 0x1AF48
+  symbol: D_301AF48
+
+D_301B008:
+  type: VTX
+  count: 27
+  offset: 0x1B008
+  symbol: D_301B008
+
+D_301B1B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 32
+  offset: 0x1B1B8
+  symbol: D_301B1B8
+
+D_301B5B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x1B5B8
+  symbol: D_301B5B8
+
+D_301B7B8:
+  type: VTX
+  count: 4
+  offset: 0x1B7B8
+  symbol: D_301B7B8
+
+D_301B7F8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x1B7F8
+  symbol: D_301B7F8
+
+D_301BBF8:
+  type: VTX
+  count: 8
+  offset: 0x1BBF8
+  symbol: D_301BBF8
+
+D_301BC78:
+  type: VTX
+  count: 4
+  offset: 0x1BC78
+  symbol: D_301BC78
+
+D_301BCB8:
+  type: VTX
+  count: 25
+  offset: 0x1BCB8
+  symbol: D_301BCB8
+
+D_301BE48:
+  type: VTX
+  count: 10
+  offset: 0x1BE48
+  symbol: D_301BE48
+
+D_301BEE8:
+  type: VTX
+  count: 101
+  offset: 0x1BEE8
+  symbol: D_301BEE8
+
+D_301C538:
+  type: VTX
+  count: 16
+  offset: 0x1C538
+  symbol: D_301C538
+
+D_301C638:
+  type: VTX
+  count: 30
+  offset: 0x1C638
+  symbol: D_301C638
+
+D_301C818:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x1C818
+  symbol: D_301C818
+
+D_301C898:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x1C898
+  symbol: D_301C898
+
+D_301CA98:
+  type: VTX
+  count: 4
+  offset: 0x1CA98
+  symbol: D_301CA98
+
+D_301CAD8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x1CAD8
+  symbol: D_301CAD8
+
+D_301CED8:
+  type: VTX
+  count: 60
+  offset: 0x1CED8
+  symbol: D_301CED8
+
+D_301D298:
+  type: VTX
+  count: 10
+  offset: 0x1D298
+  symbol: D_301D298
+
+D_301D338:
+  type: VTX
+  count: 38
+  offset: 0x1D338
+  symbol: D_301D338
+
+D_301D598:
+  type: VTX
+  count: 18
+  offset: 0x1D598
+  symbol: D_301D598
+
+D_301D6B8:
+  type: VTX
+  count: 21
+  offset: 0x1D6B8
+  symbol: D_301D6B8
+
+D_301D808:
+  type: VTX
+  count: 18
+  offset: 0x1D808
+  symbol: D_301D808
+
+D_301D928:
+  type: VTX
+  count: 19
+  offset: 0x1D928
+  symbol: D_301D928
+
+D_301DA58:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x1DA58
+  symbol: D_301DA58
+
+D_301DE58:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x1DE58
+  symbol: D_301DE58
+
+D_301E058:
+  type: VTX
+  count: 4
+  offset: 0x1E058
+  symbol: D_301E058
+
+D_301E098:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x1E098
+  symbol: D_301E098
+
+D_301E498:
+  type: VTX
+  count: 34
+  offset: 0x1E498
+  symbol: D_301E498
+
+D_301E6B8:
+  type: VTX
+  count: 16
+  offset: 0x1E6B8
+  symbol: D_301E6B8
+
+D_301E7B8:
+  type: VTX
+  count: 8
+  offset: 0x1E7B8
+  symbol: D_301E7B8
+
+D_301E838:
+  type: VTX
+  count: 30
+  offset: 0x1E838
+  symbol: D_301E838
+
+D_301EA18:
+  type: VTX
+  count: 22
+  offset: 0x1EA18
+  symbol: D_301EA18
+
+D_301EB78:
+  type: VTX
+  count: 18
+  offset: 0x1EB78
+  symbol: D_301EB78
+
+D_301EC98:
+  type: VTX
+  count: 73
+  offset: 0x1EC98
+  symbol: D_301EC98
+
+D_301F128:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x1F128
+  symbol: D_301F128
+
+D_301F328:
+  type: VTX
+  count: 4
+  offset: 0x1F328
+  symbol: D_301F328
+
+D_301F368:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x1F368
+  symbol: D_301F368
+
+D_301F768:
+  type: VTX
+  count: 10
+  offset: 0x1F768
+  symbol: D_301F768
+
+D_301F808:
+  type: VTX
+  count: 8
+  offset: 0x1F808
+  symbol: D_301F808
+
+D_301F888:
+  type: VTX
+  count: 12
+  offset: 0x1F888
+  symbol: D_301F888
+
+D_301F948:
+  type: VTX
+  count: 12
+  offset: 0x1F948
+  symbol: D_301F948
+
+D_301FA08:
+  type: VTX
+  count: 69
+  offset: 0x1FA08
+  symbol: D_301FA08
+
+D_301FE58:
+  type: VTX
+  count: 20
+  offset: 0x1FE58
+  symbol: D_301FE58
+
+D_301FF98:
+  type: VTX
+  count: 9
+  offset: 0x1FF98
+  symbol: D_301FF98
+
+D_3020028:
+  type: VTX
+  count: 35
+  offset: 0x20028
+  symbol: D_3020028
+
+D_3020258:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 32
+  offset: 0x20258
+  symbol: D_3020258
+
+D_3020658:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 32
+  offset: 0x20658
+  symbol: D_3020658
+
+D_3020758:
+  type: VTX
+  count: 4
+  offset: 0x20758
+  symbol: D_3020758
+
+D_3020798:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x20798
+  symbol: D_3020798
+
+D_3020B98:
+  type: VTX
+  count: 20
+  offset: 0x20B98
+  symbol: D_3020B98
+
+D_3020CD8:
+  type: VTX
+  count: 60
+  offset: 0x20CD8
+  symbol: D_3020CD8
+
+D_3021098:
+  type: VTX
+  count: 29
+  offset: 0x21098
+  symbol: D_3021098
+
+D_3021268:
+  type: VTX
+  count: 12
+  offset: 0x21268
+  symbol: D_3021268
+
+D_3021328:
+  type: VTX
+  count: 18
+  offset: 0x21328
+  symbol: D_3021328
+
+D_3021448:
+  type: VTX
+  count: 19
+  offset: 0x21448
+  symbol: D_3021448
+
+D_3021578:
+  type: VTX
+  count: 32
+  offset: 0x21578
+  symbol: D_3021578
+
+D_3021778:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x21778
+  symbol: D_3021778
+
+D_3021F78:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x21F78
+  symbol: D_3021F78
+
+D_3022178:
+  type: VTX
+  count: 4
+  offset: 0x22178
+  symbol: D_3022178
+
+D_30221B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x221B8
+  symbol: D_30221B8
+
+D_30225B8:
+  type: VTX
+  count: 6
+  offset: 0x225B8
+  symbol: D_30225B8
+
+D_3022618:
+  type: VTX
+  count: 16
+  offset: 0x22618
+  symbol: D_3022618
+
+D_3022718:
+  type: VTX
+  count: 39
+  offset: 0x22718
+  symbol: D_3022718
+
+D_3022988:
+  type: VTX
+  count: 51
+  offset: 0x22988
+  symbol: D_3022988
+
+D_3022CB8:
+  type: VTX
+  count: 10
+  offset: 0x22CB8
+  symbol: D_3022CB8
+
+D_3022D58:
+  type: VTX
+  count: 12
+  offset: 0x22D58
+  symbol: D_3022D58
+
+D_3022E18:
+  type: VTX
+  count: 20
+  offset: 0x22E18
+  symbol: D_3022E18
+
+D_3022F58:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x22F58
+  symbol: D_3022F58
+
+D_3023158:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x23158
+  symbol: D_3023158
+
+D_3023358:
+  type: VTX
+  count: 4
+  offset: 0x23358
+  symbol: D_3023358
+
+D_3023398:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x23398
+  symbol: D_3023398
+
+D_3023798:
+  type: VTX
+  count: 10
+  offset: 0x23798
+  symbol: D_3023798
+
+D_3023838:
+  type: VTX
+  count: 4
+  offset: 0x23838
+  symbol: D_3023838
+
+D_3023878:
+  type: VTX
+  count: 35
+  offset: 0x23878
+  symbol: D_3023878
+
+D_3023AA8:
+  type: VTX
+  count: 26
+  offset: 0x23AA8
+  symbol: D_3023AA8
+
+D_3023C48:
+  type: VTX
+  count: 75
+  offset: 0x23C48
+  symbol: D_3023C48
+
+D_30240F8:
+  type: VTX
+  count: 16
+  offset: 0x240F8
+  symbol: D_30240F8
+
+D_30241F8:
+  type: VTX
+  count: 12
+  offset: 0x241F8
+  symbol: D_30241F8
+
+D_30242B8:
+  type: VTX
+  count: 4
+  offset: 0x242B8
+  symbol: D_30242B8
+
+D_30242F8:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x242F8
+  symbol: D_30242F8
+
+D_3024AF8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x24AF8
+  symbol: D_3024AF8
+
+D_3024B78:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x24B78
+  symbol: D_3024B78
+
+D_3024D78:
+  type: VTX
+  count: 4
+  offset: 0x24D78
+  symbol: D_3024D78
+
+D_3024DB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x24DB8
+  symbol: D_3024DB8
+
+D_30251B8:
+  type: VTX
+  count: 22
+  offset: 0x251B8
+  symbol: D_30251B8
+
+D_3025318:
+  type: VTX
+  count: 6
+  offset: 0x25318
+  symbol: D_3025318
+
+D_3025378:
+  type: VTX
+  count: 8
+  offset: 0x25378
+  symbol: D_3025378
+
+D_30253F8:
+  type: VTX
+  count: 4
+  offset: 0x253F8
+  symbol: D_30253F8
+
+D_3025438:
+  type: VTX
+  count: 88
+  offset: 0x25438
+  symbol: D_3025438
+
+D_30259B8:
+  type: VTX
+  count: 12
+  offset: 0x259B8
+  symbol: D_30259B8
+
+D_3025A78:
+  type: VTX
+  count: 20
+  offset: 0x25A78
+  symbol: D_3025A78
+
+D_3025BB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x25BB8
+  symbol: D_3025BB8
+
+D_3025DB8:
+  type: VTX
+  count: 4
+  offset: 0x25DB8
+  symbol: D_3025DB8
+
+D_3025DF8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x25DF8
+  symbol: D_3025DF8
+
+D_30261F8:
+  type: VTX
+  count: 70
+  offset: 0x261F8
+  symbol: D_30261F8
+
+D_3026658:
+  type: VTX
+  count: 8
+  offset: 0x26658
+  symbol: D_3026658
+
+D_30266D8:
+  type: VTX
+  count: 11
+  offset: 0x266D8
+  symbol: D_30266D8
+
+D_3026788:
+  type: VTX
+  count: 15
+  offset: 0x26788
+  symbol: D_3026788
+
+D_3026878:
+  type: VTX
+  count: 20
+  offset: 0x26878
+  symbol: D_3026878
+
+D_30269B8:
+  type: VTX
+  count: 24
+  offset: 0x269B8
+  symbol: D_30269B8
+
+D_3026B38:
+  type: VTX
+  count: 43
+  offset: 0x26B38
+  symbol: D_3026B38
+
+D_3026DE8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x26DE8
+  symbol: D_3026DE8
+
+D_3026E68:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x26E68
+  symbol: D_3026E68
+
+D_3027068:
+  type: VTX
+  count: 4
+  offset: 0x27068
+  symbol: D_3027068
+
+D_30270A8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x270A8
+  symbol: D_30270A8
+
+D_30274A8:
+  type: VTX
+  count: 6
+  offset: 0x274A8
+  symbol: D_30274A8
+
+D_3027508:
+  type: VTX
+  count: 6
+  offset: 0x27508
+  symbol: D_3027508
+
+D_3027568:
+  type: VTX
+  count: 28
+  offset: 0x27568
+  symbol: D_3027568
+
+D_3027728:
+  type: VTX
+  count: 8
+  offset: 0x27728
+  symbol: D_3027728
+
+D_30277A8:
+  type: VTX
+  count: 20
+  offset: 0x277A8
+  symbol: D_30277A8
+
+D_30278E8:
+  type: VTX
+  count: 32
+  offset: 0x278E8
+  symbol: D_30278E8
+
+D_3027AE8:
+  type: VTX
+  count: 142
+  offset: 0x27AE8
+  symbol: D_3027AE8
+
+D_30283C8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x283C8
+  symbol: D_30283C8
+
+D_30285C8:
+  type: VTX
+  count: 4
+  offset: 0x285C8
+  symbol: D_30285C8
+
+D_3028608:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x28608
+  symbol: D_3028608
+
+D_3028A08:
+  type: VTX
+  count: 8
+  offset: 0x28A08
+  symbol: D_3028A08
+
+D_3028A88:
+  type: VTX
+  count: 8
+  offset: 0x28A88
+  symbol: D_3028A88
+
+D_3028B08:
+  type: VTX
+  count: 38
+  offset: 0x28B08
+  symbol: D_3028B08
+
+D_3028D68:
+  type: VTX
+  count: 20
+  offset: 0x28D68
+  symbol: D_3028D68
+
+D_3028EA8:
+  type: VTX
+  count: 4
+  offset: 0x28EA8
+  symbol: D_3028EA8
+
+D_3028EE8:
+  type: VTX
+  count: 12
+  offset: 0x28EE8
+  symbol: D_3028EE8
+
+D_3028FA8:
+  type: VTX
+  count: 66
+  offset: 0x28FA8
+  symbol: D_3028FA8
+
+D_30293C8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x293C8
+  symbol: D_30293C8
+
+D_30295C8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x295C8
+  symbol: D_30295C8
+
+D_3029648:
+  type: VTX
+  count: 4
+  offset: 0x29648
+  symbol: D_3029648
+
+D_3029688:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x29688
+  symbol: D_3029688
+
+D_3029A88:
+  type: VTX
+  count: 12
+  offset: 0x29A88
+  symbol: D_3029A88
+
+D_3029B48:
+  type: VTX
+  count: 19
+  offset: 0x29B48
+  symbol: D_3029B48
+
+D_3029C78:
+  type: VTX
+  count: 8
+  offset: 0x29C78
+  symbol: D_3029C78
+
+D_3029CF8:
+  type: VTX
+  count: 46
+  offset: 0x29CF8
+  symbol: D_3029CF8
+
+D_3029FD8:
+  type: VTX
+  count: 21
+  offset: 0x29FD8
+  symbol: D_3029FD8
+
+D_302A128:
+  type: VTX
+  count: 80
+  offset: 0x2A128
+  symbol: D_302A128
+
+D_302A628:
+  type: VTX
+  count: 6
+  offset: 0x2A628
+  symbol: D_302A628
+
+D_302A688:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x2A688
+  symbol: D_302A688
+
+D_302A708:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x2A708
+  symbol: D_302A708
+
+D_302A908:
+  type: VTX
+  count: 4
+  offset: 0x2A908
+  symbol: D_302A908
+
+D_302A948:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x2A948
+  symbol: D_302A948
+
+D_302AD48:
+  type: VTX
+  count: 14
+  offset: 0x2AD48
+  symbol: D_302AD48
+
+D_302AE28:
+  type: VTX
+  count: 14
+  offset: 0x2AE28
+  symbol: D_302AE28
+
+D_302AF08:
+  type: VTX
+  count: 4
+  offset: 0x2AF08
+  symbol: D_302AF08
+
+D_302AF48:
+  type: VTX
+  count: 12
+  offset: 0x2AF48
+  symbol: D_302AF48
+
+D_302B008:
+  type: VTX
+  count: 93
+  offset: 0x2B008
+  symbol: D_302B008
+
+D_302B5D8:
+  type: VTX
+  count: 12
+  offset: 0x2B5D8
+  symbol: D_302B5D8
+
+D_302B698:
+  type: VTX
+  count: 16
+  offset: 0x2B698
+  symbol: D_302B698
+
+D_302B798:
+  type: VTX
+  count: 6
+  offset: 0x2B798
+  symbol: D_302B798
+
+D_302B7F8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x2B7F8
+  symbol: D_302B7F8
+
+D_302B9F8:
+  type: VTX
+  count: 4
+  offset: 0x2B9F8
+  symbol: D_302B9F8
+
+D_302BA38:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x2BA38
+  symbol: D_302BA38
+
+D_302BE38:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2BE38
+  symbol: D_302BE38
+
+D_302C638:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2C638
+  symbol: D_302C638
+
+D_302CE38:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2CE38
+  symbol: D_302CE38
+
+D_302D638:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2D638
+  symbol: D_302D638
+
+D_302DE38:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2DE38
+  symbol: D_302DE38
+
+D_302E638:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2E638
+  symbol: D_302E638
+
+D_302EE38:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2EE38
+  symbol: D_302EE38
+
+D_302F638:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x2F638
+  symbol: D_302F638
+
+D_302FE38:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x2FE38
+  symbol: D_302FE38
+
+D_302FEB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x2FEB8
+  symbol: D_302FEB8
+
+D_302FF38:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x2FF38
+  symbol: D_302FF38
+
+D_302FFB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x2FFB8
+  symbol: D_302FFB8
+
+D_3030038:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x30038
+  symbol: D_3030038
+
+D_30300B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x300B8
+  symbol: D_30300B8
+
+D_30302B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x302B8
+  symbol: D_30302B8
+
+D_30304B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x304B8
+  symbol: D_30304B8
+
+D_30306B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x306B8
+  symbol: D_30306B8
+
+D_30308B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x308B8
+  symbol: D_30308B8
+
+D_3030AB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x30AB8
+  symbol: D_3030AB8
+
+D_3030CB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x30CB8
+  symbol: D_3030CB8
+
+D_3030EB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x30EB8
+  symbol: D_3030EB8
+
+D_30310B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x310B8
+  symbol: D_30310B8
+
+D_30312B8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x312B8
+  symbol: D_30312B8
+
+D_30314B8:
+  type: VTX
+  count: 9
+  offset: 0x314B8
+  symbol: D_30314B8
+
+D_3031548:
+  type: VTX
+  count: 18
+  offset: 0x31548
+  symbol: D_3031548
+
+D_3031668:
+  type: VTX
+  count: 30
+  offset: 0x31668
+  symbol: D_3031668
+
+D_3031848:
+  type: VTX
+  count: 5
+  offset: 0x31848
+  symbol: D_3031848
+
+D_3031898:
+  type: VTX
+  count: 4
+  offset: 0x31898
+  symbol: D_3031898
+
+D_30318D8:
+  type: VTX
+  count: 8
+  offset: 0x318D8
+  symbol: D_30318D8
+
+D_3031958:
+  type: VTX
+  count: 20
+  offset: 0x31958
+  symbol: D_3031958
+
+D_3031A98:
+  type: VTX
+  count: 37
+  offset: 0x31A98
+  symbol: D_3031A98
+
+D_3031CE8:
+  type: VTX
+  count: 9
+  offset: 0x31CE8
+  symbol: D_3031CE8
+
+D_3031D78:
+  type: VTX
+  count: 27
+  offset: 0x31D78
+  symbol: D_3031D78
+
+D_3031F28:
+  type: VTX
+  count: 35
+  offset: 0x31F28
+  symbol: D_3031F28
+
+D_3032158:
+  type: VTX
+  count: 8
+  offset: 0x32158
+  symbol: D_3032158
+
+D_30321D8:
+  type: VTX
+  count: 9
+  offset: 0x321D8
+  symbol: D_30321D8
+
+D_3032268:
+  type: VTX
+  count: 15
+  offset: 0x32268
+  symbol: D_3032268
+
+D_3032358:
+  type: VTX
+  count: 58
+  offset: 0x32358
+  symbol: D_3032358
+
+D_30326F8:
+  type: VTX
+  count: 4
+  offset: 0x326F8
+  symbol: D_30326F8
+
+D_3032738:
+  type: VTX
+  count: 4
+  offset: 0x32738
+  symbol: D_3032738
+
+D_3032778:
+  type: VTX
+  count: 16
+  offset: 0x32778
+  symbol: D_3032778
+
+D_3032878:
+  type: VTX
+  count: 30
+  offset: 0x32878
+  symbol: D_3032878
+
+D_3032A58:
+  type: VTX
+  count: 4
+  offset: 0x32A58
+  symbol: D_3032A58
+
+D_3032A98:
+  type: VTX
+  count: 4
+  offset: 0x32A98
+  symbol: D_3032A98
+
+D_3032AD8:
+  type: VTX
+  count: 12
+  offset: 0x32AD8
+  symbol: D_3032AD8
+
+D_3032B98:
+  type: VTX
+  count: 8
+  offset: 0x32B98
+  symbol: D_3032B98
+
+D_3032C18:
+  type: VTX
+  count: 20
+  offset: 0x32C18
+  symbol: D_3032C18
+
+D_3032D58:
+  type: VTX
+  count: 27
+  offset: 0x32D58
+  symbol: D_3032D58
+
+D_3032F08:
+  type: VTX
+  count: 6
+  offset: 0x32F08
+  symbol: D_3032F08
+
+D_3032F68:
+  type: VTX
+  count: 8
+  offset: 0x32F68
+  symbol: D_3032F68
+
+D_3032FE8:
+  type: VTX
+  count: 20
+  offset: 0x32FE8
+  symbol: D_3032FE8
+
+D_3033128:
+  type: VTX
+  count: 20
+  offset: 0x33128
+  symbol: D_3033128
+
+D_3033268:
+  type: VTX
+  count: 4
+  offset: 0x33268
+  symbol: D_3033268
+
+D_30332A8:
+  type: VTX
+  count: 6
+  offset: 0x332A8
+  symbol: D_30332A8
+
+D_3033308:
+  type: VTX
+  count: 22
+  offset: 0x33308
+  symbol: D_3033308
+
+D_3033468:
+  type: VTX
+  count: 4
+  offset: 0x33468
+  symbol: D_3033468
+
+D_30334A8:
+  type: VTX
+  count: 10
+  offset: 0x334A8
+  symbol: D_30334A8
+
+D_3033548:
+  type: VTX
+  count: 28
+  offset: 0x33548
+  symbol: D_3033548
+
+D_3033708:
+  type: VTX
+  count: 10
+  offset: 0x33708
+  symbol: D_3033708
+
+D_30337A8:
+  type: VTX
+  count: 16
+  offset: 0x337A8
+  symbol: D_30337A8
+
+D_30338A8:
+  type: VTX
+  count: 8
+  offset: 0x338A8
+  symbol: D_30338A8
+
+D_3033928:
+  type: VTX
+  count: 4
+  offset: 0x33928
+  symbol: D_3033928
+
+D_3033968:
+  type: VTX
+  count: 10
+  offset: 0x33968
+  symbol: D_3033968
+
+D_3033A08:
+  type: VTX
+  count: 38
+  offset: 0x33A08
+  symbol: D_3033A08
+
+D_3033C68:
+  type: VTX
+  count: 10
+  offset: 0x33C68
+  symbol: D_3033C68
+
+D_3033D08:
+  type: VTX
+  count: 18
+  offset: 0x33D08
+  symbol: D_3033D08
+
+D_3033E28:
+  type: VTX
+  count: 8
+  offset: 0x33E28
+  symbol: D_3033E28
+
+D_3033EA8:
+  type: VTX
+  count: 10
+  offset: 0x33EA8
+  symbol: D_3033EA8
+
+D_3033F48:
+  type: VTX
+  count: 10
+  offset: 0x33F48
+  symbol: D_3033F48
+
+D_3033FE8:
+  type: VTX
+  count: 22
+  offset: 0x33FE8
+  symbol: D_3033FE8
+
+D_3034148:
+  type: VTX
+  count: 10
+  offset: 0x34148
+  symbol: D_3034148
+
+D_30341E8:
+  type: VTX
+  count: 20
+  offset: 0x341E8
+  symbol: D_30341E8
+
+D_3034328:
+  type: VTX
+  count: 10
+  offset: 0x34328
+  symbol: D_3034328
+
+D_30343C8:
+  type: VTX
+  count: 20
+  offset: 0x343C8
+  symbol: D_30343C8
+
+D_3034508:
+  type: VTX
+  count: 9
+  offset: 0x34508
+  symbol: D_3034508
+
+D_3034598:
+  type: VTX
+  count: 40
+  offset: 0x34598
+  symbol: D_3034598
+
+D_3034818:
+  type: VTX
+  count: 10
+  offset: 0x34818
+  symbol: D_3034818
+
+D_30348B8:
+  type: VTX
+  count: 10
+  offset: 0x348B8
+  symbol: D_30348B8
+
+D_3034958:
+  type: VTX
+  count: 14
+  offset: 0x34958
+  symbol: D_3034958
+
+D_3034A38:
+  type: VTX
+  count: 17
+  offset: 0x34A38
+  symbol: D_3034A38
+
+D_3034B48:
+  type: VTX
+  count: 8
+  offset: 0x34B48
+  symbol: D_3034B48
+
+D_3034BC8:
+  type: VTX
+  count: 48
+  offset: 0x34BC8
+  symbol: D_3034BC8
+
+D_3034EC8:
+  type: VTX
+  count: 10
+  offset: 0x34EC8
+  symbol: D_3034EC8
+
+D_3034F68:
+  type: VTX
+  count: 26
+  offset: 0x34F68
+  symbol: D_3034F68
+
+D_3035108:
+  type: VTX
+  count: 32
+  offset: 0x35108
+  symbol: D_3035108
+
+D_3035308:
+  type: VTX
+  count: 4
+  offset: 0x35308
+  symbol: D_3035308
+
+D_3035348:
+  type: VTX
+  count: 4
+  offset: 0x35348
+  symbol: D_3035348
+
+D_3035388:
+  type: VTX
+  count: 38
+  offset: 0x35388
+  symbol: D_3035388
+
+D_30355E8:
+  type: VTX
+  count: 10
+  offset: 0x355E8
+  symbol: D_30355E8
+
+D_3035688:
+  type: VTX
+  count: 16
+  offset: 0x35688
+  symbol: D_3035688
+
+D_3035788:
+  type: VTX
+  count: 44
+  offset: 0x35788
+  symbol: D_3035788
+
+D_3035A48:
+  type: VTX
+  count: 4
+  offset: 0x35A48
+  symbol: D_3035A48
+
+D_3035A88:
+  type: VTX
+  count: 12
+  offset: 0x35A88
+  symbol: D_3035A88
+
+D_3035B48:
+  type: VTX
+  count: 74
+  offset: 0x35B48
+  symbol: D_3035B48
+
+D_3035FE8:
+  type: VTX
+  count: 10
+  offset: 0x35FE8
+  symbol: D_3035FE8
+
+D_3036088:
+  type: VTX
+  count: 11
+  offset: 0x36088
+  symbol: D_3036088
+
+D_3036138:
+  type: VTX
+  count: 16
+  offset: 0x36138
+  symbol: D_3036138
+
+D_3036238:
+  type: VTX
+  count: 22
+  offset: 0x36238
+  symbol: D_3036238
+
+D_3036398:
+  type: VTX
+  count: 24
+  offset: 0x36398
+  symbol: D_3036398
+
+D_3036518:
+  type: VTX
+  count: 23
+  offset: 0x36518
+  symbol: D_3036518
+
+D_3036688:
+  type: VTX
+  count: 24
+  offset: 0x36688
+  symbol: D_3036688
+
+D_3036808:
+  type: VTX
+  count: 39
+  offset: 0x36808
+  symbol: D_3036808
+
+D_3036A78:
+  type: VTX
+  count: 4
+  offset: 0x36A78
+  symbol: D_3036A78
+
+D_3036AB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x36AB8
+  symbol: D_3036AB8
+
+D_3036EB8:
+  type: VTX
+  count: 4
+  offset: 0x36EB8
+  symbol: D_3036EB8
+
+D_3036EF8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x36EF8
+  symbol: D_3036EF8
+
+D_30372F8:
+  type: VTX
+  count: 4
+  offset: 0x372F8
+  symbol: D_30372F8
+
+D_3037338:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x37338
+  symbol: D_3037338
+
+D_3037738:
+  type: VTX
+  count: 4
+  offset: 0x37738
+  symbol: D_3037738
+
+D_3037778:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x37778
+  symbol: D_3037778
+
+D_3037B78:
+  type: VTX
+  count: 4
+  offset: 0x37B78
+  symbol: D_3037B78
+
+D_3037BB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x37BB8
+  symbol: D_3037BB8
+
+D_3037FB8:
+  type: VTX
+  count: 4
+  offset: 0x37FB8
+  symbol: D_3037FB8
+
+D_3037FF8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x37FF8
+  symbol: D_3037FF8
+
+D_30383F8:
+  type: VTX
+  count: 4
+  offset: 0x383F8
+  symbol: D_30383F8
+
+D_3038438:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x38438
+  symbol: D_3038438
+
+D_3038838:
+  type: VTX
+  count: 4
+  offset: 0x38838
+  symbol: D_3038838
+
+D_3038878:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x38878
+  symbol: D_3038878
+
+D_3038C78:
+  type: VTX
+  count: 4
+  offset: 0x38C78
+  symbol: D_3038C78
+
+D_3038CB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x38CB8
+  symbol: D_3038CB8
+
+D_30390B8:
+  type: VTX
+  count: 4
+  offset: 0x390B8
+  symbol: D_30390B8
+
+D_30390F8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x390F8
+  symbol: D_30390F8
+
+D_30394F8:
+  type: VTX
+  count: 4
+  offset: 0x394F8
+  symbol: D_30394F8
+
+D_3039538:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x39538
+  symbol: D_3039538
+
+D_3039938:
+  type: VTX
+  count: 4
+  offset: 0x39938
+  symbol: D_3039938
+
+D_3039978:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x39978
+  symbol: D_3039978
+
+D_3039D78:
+  type: VTX
+  count: 4
+  offset: 0x39D78
+  symbol: D_3039D78
+
+D_3039DB8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x39DB8
+  symbol: D_3039DB8
+
+D_303A1B8:
+  type: VTX
+  count: 4
+  offset: 0x3A1B8
+  symbol: D_303A1B8
+
+D_303A1F8:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 64
+  offset: 0x3A1F8
+  symbol: D_303A1F8
+
+D_303A5F8:
+  type: GFX
+  offset: 0x3A5F8
+  symbol: D_303A5F8
+
+D_303A6A8:
+  type: GFX
+  offset: 0x3A6A8
+  symbol: D_303A6A8
+
+D_303A758:
+  type: GFX
+  offset: 0x3A758
+  symbol: D_303A758
+
+D_303A7D8:
+  type: GFX
+  offset: 0x3A7D8
+  symbol: D_303A7D8
+
+D_303A810:
+  type: GFX
+  offset: 0x3A810
+  symbol: D_303A810
+
+D_303A8F8:
+  type: GFX
+  offset: 0x3A8F8
+  symbol: D_303A8F8
+
+D_303A9E0:
+  type: GFX
+  offset: 0x3A9E0
+  symbol: D_303A9E0
+
+D_303AA18:
+  type: GFX
+  offset: 0x3AA18
+  symbol: D_303AA18
+
+D_303AA40:
+  type: GFX
+  offset: 0x3AA40
+  symbol: D_303AA40
+
+D_303AA70:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 16
+  offset: 0x3AA70
+  symbol: D_303AA70
+
+D_303B270:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 12
+  height: 160
+  offset: 0x3B270
+  symbol: D_303B270
+
+D_303C170:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 20
+  height: 16
+  offset: 0x3C170
+  symbol: D_303C170
+
+D_303C3F0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 224
+  offset: 0x3C3F0
+  symbol: D_303C3F0
+
+D_303D1F0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 12
+  offset: 0x3D1F0
+  symbol: D_303D1F0
+
+# size = 0x3CBF0, end = 0x3D370

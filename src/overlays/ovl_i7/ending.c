@@ -1,4 +1,6 @@
 #include "global.h"
+#include "ovl_i7.h"
+#include "macros.h"
 #include "fzx_game.h"
 #include "fzx_hud.h"
 #include "fzx_racer.h"
@@ -8,6 +10,44 @@
 #include "assets/segment_1B8550.h"
 #include "assets/segment_2738A0.h"
 #include "assets/segment_2B9EA0.h"
+
+unk_8014B480* D_i7_8014BDF0;
+s16 sTotalRacersKOd;
+u16 D_i7_8014BDF6;
+void* sEndingTex;
+void* sEndingTextTex;
+s16 sEndScreenState;
+s16 sEndScreenFade;
+s16 sEndScreenAlpha;
+s32 D_i7_8014BE08; // state
+s16 D_i7_8014BE0C; // counter
+f32 D_i7_8014BE10; // scroll top
+s16 D_i7_8014BE14; // congrats/ending alpha
+s16 sCupNameIndex;
+s16 D_i7_8014BE18;
+s16 sCupDifficulty;
+s16 D_i7_8014BE1C; // thanks for playing state
+s16 sThanksForPlayingFade;
+s16 D_i7_8014BE20;
+unk_8014BE28 D_i7_8014BE28[10];
+unk_8014BEC8 D_i7_8014BEC8[3];
+u16 D_i7_8014BF28;
+Vec3f D_i7_8014BF30[8];
+s16 D_i7_8014BF90;
+s16 D_i7_8014BF92;
+unk_8014BF94* D_i7_8014BF94;
+unk_8014BF98* D_i7_8014BF98;
+UNUSED u8 D_i7_8014BFA0[0x80];
+s32 D_i7_8014C020;
+UNUSED s32 D_i7_8014C024;
+u16* D_i7_8014C028[3];
+u16* D_i7_8014C034;
+u16* D_i7_8014C038;
+u16* D_i7_8014C03C;
+u16* D_i7_8014C040;
+s32 D_i7_8014C044;
+u8 D_i7_8014C048[0x200];
+s32 D_i7_8014C248;
 
 extern s16 D_800CCFE8;
 extern s32 gCupType;
@@ -36,48 +76,6 @@ extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
 
 extern GfxPool D_1000000;
-
-// #include "prevent_bss_reordering.h"
-#include "ovl_i7.h"
-
-extern unk_8014B480 D_8014B480[2];
-extern unk_8014B480* D_i7_8014BDF0;
-extern s16 sTotalRacersKOd;
-extern u16 D_i7_8014BDF6;
-extern void* sEndingTex;
-extern void* sEndingTextTex;
-extern s16 sEndScreenState;
-extern s16 sEndScreenFade;
-extern s16 sEndScreenAlpha;
-extern s32 D_i7_8014BE08; // state
-extern s16 D_i7_8014BE0C; // counter
-extern f32 D_i7_8014BE10; // scroll top
-extern s16 D_i7_8014BE14; // congrats/ending alpha
-extern s16 sCupNameIndex;
-extern s16 D_i7_8014BE18;
-extern s16 sCupDifficulty;
-extern s16 D_i7_8014BE1C; // thanks for playing state
-extern s16 sThanksForPlayingFade;
-extern s16 D_i7_8014BE20;
-extern unk_8014BE28 D_i7_8014BE28[10];
-extern unk_8014BEC8 D_i7_8014BEC8[3];
-extern u16 D_i7_8014BF28;
-extern Vec3f D_i7_8014BF30[8];
-extern s16 D_i7_8014BF90;
-extern s16 D_i7_8014BF92;
-extern unk_8014BF94* D_i7_8014BF94;
-extern unk_8014BF98* D_i7_8014BF98;
-extern UNUSED u8 D_i7_8014BFA0[0x80];
-extern s32 D_i7_8014C020;
-extern UNUSED s32 D_i7_8014C024;
-extern u16* D_i7_8014C028[3];
-extern u16* D_i7_8014C034;
-extern u16* D_i7_8014C038;
-extern u16* D_i7_8014C03C;
-extern u16* D_i7_8014C040;
-extern s32 D_i7_8014C044;
-extern u8 D_i7_8014C048[0x200];
-extern s32 D_i7_8014C248;
 
 void* sEndingTextures[][2] = {
     { aEndingCaptainFalconMasterTex, aEndingTextCaptainFalconMasterTex },                 // CAPTAIN_FALCON
@@ -137,6 +135,820 @@ char sTotalRankingStr[] = "TOTAL RANKING";
 const char* sCupNames[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP", "EDIT CUP", "X CUP" };
 
 char sThanksForPlayingStr[] = "THANKS FOR PLAYING!!";
+
+s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 arg2) {
+    s32 endScreenCharacterIndex;
+
+    switch (character) {
+        case CAPTAIN_FALCON:
+            if (arg2 >= 2) {
+                endScreenCharacterIndex = 30;
+            } else {
+                switch (difficulty) {
+                    case STANDARD:
+                    case EXPERT:
+                        endScreenCharacterIndex = 31;
+                        break;
+                    case MASTER:
+                        endScreenCharacterIndex = character;
+                        break;
+                }
+            }
+            break;
+        case SAMURAI_GOROH:
+            if (arg2 >= 2) {
+                endScreenCharacterIndex = 32;
+            } else {
+                endScreenCharacterIndex = character;
+            }
+            break;
+        case JODY_SUMMER:
+            if (arg2 >= 2) {
+                endScreenCharacterIndex = 33;
+            } else {
+                endScreenCharacterIndex = character;
+            }
+            break;
+        default:
+            endScreenCharacterIndex = character;
+            break;
+    }
+    return endScreenCharacterIndex;
+}
+
+void func_i7_80147CC0(void);
+void func_i7_801467FC(void);
+
+void EndingCutscene_Init(void) {
+    unk_8014BE28* var_v1;
+    s32 cupFirstCourseIndex;
+    s32 pad;
+    Racer* player = &gRacers[0];
+    s32 i;
+    s32 j;
+    void** endingTextures;
+    s32 var_a0;
+
+    D_800CCFE8 = D_i2_80106F10 = 3;
+    D_800DCE5C = 0;
+    gNumPlayers = 1;
+    cupFirstCourseIndex = (gCourseIndex / 6) * 6;
+    gCourseIndex = 55;
+    sCupDifficulty = gDifficulty;
+    gDifficulty = MASTER;
+    sTotalRacersKOd = 0;
+
+    for (j = 0; j < 6; j++) {
+        sTotalRacersKOd += gCupRaceStats[0][j].racersKOd;
+    }
+
+    func_800A4EAC();
+    func_i3_80116C4C();
+    func_8008C7C8();
+    func_80085610();
+    func_8007F4E0(gCourseData.venue, gCourseData.skybox);
+    func_i3_801365E0();
+    func_i2_801044F0();
+    func_8006D448();
+    func_8006E478();
+    func_8006EC7C();
+    func_80071260(0);
+    func_i7_80147CC0();
+    func_i7_801467FC();
+    sEndScreenState = END_SCREEN_INACTIVE;
+    sEndScreenFade = 0;
+    sEndScreenAlpha = 0;
+    D_i7_8014BDF6 = 0;
+    if (D_80106F48 < 4) {
+        D_i7_8014BDF6 |= 0xF;
+    } else {
+        D_i7_8014BDF6 |= 0x40;
+    }
+    if (D_800E42CC != 0) {
+        D_800E42CC = 0;
+        D_i7_8014BDF6 |= 0x10;
+    } else if (gUnlockableLevel >= 2) {
+        switch (sCupDifficulty) {
+            case EXPERT:
+            case MASTER:
+                if (gCupType == JOKER_CUP && D_80106F48 == 1) {
+                    D_i7_8014BDF6 |= 0x10;
+                }
+                break;
+        }
+    }
+
+    if (D_80106F48 == 1) {
+        switch (sCupDifficulty) {
+            case STANDARD:
+            case EXPERT:
+            case MASTER:
+                D_i7_8014BDF6 |= 0x20;
+                break;
+        }
+    }
+
+    D_i7_8014BE10 = 0.0f;
+    D_i7_8014BE14 = 0;
+    D_i7_8014BE08 = 0;
+    D_i7_8014BE0C = 0;
+
+    switch (gCupType) {
+        case JACK_CUP:
+            sCupNameIndex = 0;
+            break;
+        case QUEEN_CUP:
+            sCupNameIndex = 1;
+            break;
+        case KING_CUP:
+            sCupNameIndex = 2;
+            break;
+        case JOKER_CUP:
+            sCupNameIndex = 3;
+            break;
+        case X_CUP:
+            sCupNameIndex = 5;
+            break;
+        case EDIT_CUP:
+            sCupNameIndex = 4;
+            break;
+    }
+    D_i7_8014BE18 = Font_GetStringWidth(sCupNames[sCupNameIndex], FONT_SET_3, 1);
+    D_i7_8014BE1C = 0;
+    sThanksForPlayingFade = 0;
+    D_i7_8014BF28 = 0;
+    var_a0 = 0;
+
+    var_v1 = D_i7_8014BE28;
+    for (i = 0; D_i7_80149FEC[i] != -1; i++) {
+        var_v1->unk_04 = 0;
+        var_v1->unk_00 = D_i7_80149FEC[i];
+        switch (var_v1->unk_00) {
+            case 1:
+                var_v1->track = 0;
+                var_v1->unk_08 = 28.0f;
+                var_v1->unk_0C = 104.0f;
+                var_v1->unk_06 = 0x1F;
+                break;
+            case 2:
+                var_v1->track = 0;
+                var_v1->unk_08 = 76.0f;
+#ifdef VERSION_JP
+                var_v1->unk_06 = 0xC3;
+                var_v1->unk_0C = 70.0f;
+#else
+                var_v1->unk_06 = 0xCB;
+                var_v1->unk_0C = 62.0f;
+#endif
+                break;
+            case 3:
+                var_v1->track = 0;
+                var_v1->unk_08 = 0.0f;
+                var_v1->unk_06 = 0x34;
+                var_v1->unk_0C = 236.0f;
+                break;
+            case 5:
+                var_v1->track = 0;
+                var_v1->unk_08 = 0.0f;
+                var_v1->unk_0C = 100.0f;
+                var_v1->unk_06 = 0x10A;
+                break;
+            case 4:
+                var_v1->track = (s16) (cupFirstCourseIndex + var_a0);
+                var_v1->unk_08 = 76.0f;
+
+                if (var_a0 != 0) {
+                    var_v1->unk_0C = 120.0f;
+                } else {
+                    var_v1->unk_0C = 120.0f;
+                }
+
+                var_v1->unk_06 = 0x50;
+                var_a0++;
+                break;
+        }
+        var_v1++;
+    }
+    D_i7_8014BE20 = var_v1 - D_i7_8014BE28;
+    func_80078104(aCongratulationsTex, TEX_SIZE(aCongratulationsTex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition0Tex, TEX_SIZE(aFinalResultPosition0Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition1Tex, TEX_SIZE(aFinalResultPosition1Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition2Tex, TEX_SIZE(aFinalResultPosition2Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition3Tex, TEX_SIZE(aFinalResultPosition3Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition4Tex, TEX_SIZE(aFinalResultPosition4Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition5Tex, TEX_SIZE(aFinalResultPosition5Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition6Tex, TEX_SIZE(aFinalResultPosition6Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition7Tex, TEX_SIZE(aFinalResultPosition7Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition8Tex, TEX_SIZE(aFinalResultPosition8Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPosition9Tex, TEX_SIZE(aFinalResultPosition9Tex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixSTTex, TEX_SIZE(aFinalResultPositionSuffixSTTex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixNDTex, TEX_SIZE(aFinalResultPositionSuffixNDTex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixRDTex, TEX_SIZE(aFinalResultPositionSuffixRDTex, sizeof(u16)), 0, 0, 0);
+    func_80078104(aFinalResultPositionSuffixTHTex, TEX_SIZE(aFinalResultPositionSuffixTHTex, sizeof(u16)), 0, 0, 0);
+
+    if (D_i7_8014BDF6 & 0x20) {
+
+        endingTextures = sEndingTextures[func_i7_GetEndScreenIndex(sCupDifficulty, player->character, player->unk_167)];
+
+        sEndingTex = func_80078104(endingTextures[0], 168 * 99 * sizeof(u16), 0, 1, 0);
+
+        if (endingTextures[1] != NULL) {
+#ifdef VERSION_JP
+            sEndingTextTex = func_80078104(endingTextures[1], 196 * 16 * sizeof(u16), 0, 1, 0);
+#else
+            sEndingTextTex = func_80078104(endingTextures[1], 196 * 32 * sizeof(u16), 0, 1, 0);
+#endif
+        } else {
+            sEndingTextTex = NULL;
+        }
+    }
+}
+
+s32 func_i7_801442A0(void);
+void func_i7_FadeInThanksForPlaying(void);
+void func_i7_FadeEndScreen(void);
+void func_i7_80146920(void);
+void func_i7_80147EBC(void);
+
+extern s32 D_800DCCFC;
+extern Controller gSharedController;
+
+s32 EndingCutscene_Update(void) {
+
+    Controller_SetGlobalInputs(&gSharedController);
+    D_i7_8014BDF0 = &D_8014B480[D_800DCCFC];
+    func_i2_8010466C();
+    func_800952F4();
+    func_8008675C();
+    func_i3_80136A6C();
+    func_800A5028();
+    func_80074844();
+    func_i7_80147EBC();
+    if (D_i7_8014BE1C != 0) {
+        func_i7_FadeInThanksForPlaying();
+    }
+    if (sEndScreenState != END_SCREEN_INACTIVE) {
+        func_i7_FadeEndScreen();
+    }
+    func_i7_80146920();
+
+    switch (func_i7_801442A0()) {
+        case 1:
+            return GAMEMODE_FLX_MAIN_MENU;
+        case 2:
+            return GAMEMODE_FLX_UNSKIPPABLE_CREDITS;
+        case 0:
+        default:
+            return GAMEMODE_GP_END_CS;
+    }
+}
+
+extern u16 gInputButtonPressed;
+extern s32 D_i3_80141908;
+
+s32 func_i7_801442A0(void) {
+    unk_8014BE28* var_v0;
+    Racer* racer;
+    s32 sp1C;
+    f32 var_fv0;
+    bool var_a0;
+    s32 i;
+
+    sp1C = 0;
+    switch (D_i7_8014BE08) {
+        case 0:
+            if (D_i7_8014BE0C >= 120) {
+                D_i7_8014BE08 = 1;
+                D_i7_8014BE0C = 0;
+            } else {
+                D_i7_8014BE0C++;
+            }
+            break;
+        case 1:
+            D_i7_8014BE0C++;
+            var_fv0 = (f32) D_i7_8014BE0C / 30.0f;
+            if (var_fv0 >= 1.0f) {
+                var_fv0 = 1.0f;
+            }
+            D_i7_8014BE14 = 255.0f * var_fv0;
+            if (D_i7_8014BE0C >= 120) {
+                D_i7_8014BE08 = 2;
+                D_i7_8014BE14 = 255;
+                D_i7_8014BE0C = 0;
+                func_80088CAC(1);
+            }
+            break;
+        case 2:
+            D_i7_8014BE14 = 255;
+            if (D_i7_8014BE0C <= 300) {
+                D_i7_8014BE0C++;
+            }
+            if ((D_i7_8014BE0C == 300) && (D_i7_8014BDF6 & 8)) {
+                D_i7_8014C248 = 1;
+            }
+            D_i7_8014BE10 -= 0.5f;
+
+            var_a0 = true;
+            var_v0 = D_i7_8014BE28;
+            for (i = 0; i < D_i7_8014BE20; i++) {
+                if (var_v0->unk_00 != 0) {
+                    var_a0 = false;
+                }
+                var_v0++;
+            }
+            if (var_a0) {
+                D_i7_8014BE08 = 6;
+                D_i7_8014BE0C = 0;
+                D_i7_8014C248 = 0;
+                if (D_i7_8014BDF6 & 2) {
+                    D_i3_80141908 = 1;
+                    D_i7_8014BE08 = 3;
+                }
+            }
+            break;
+        case 3:
+            var_a0 = true;
+
+            for (i = 0, racer = gRacers; i < 3; i++) {
+                if (racer->speed > 0.1f) {
+                    var_a0 = false;
+                    break;
+                }
+                racer++;
+            }
+
+            if (var_a0) {
+                D_i7_8014BE08 = 4;
+                D_i7_8014BE0C = 0;
+            }
+            break;
+        case 4:
+            D_i7_8014BE0C++;
+
+            if (D_i7_8014BE0C == 1) {
+                D_i7_8014BF28 |= 4;
+                func_80088CAC(4);
+            }
+            if (D_i7_8014BE0C == 271) {
+                D_i7_8014BF28 |= 2;
+                func_80088CAC(3);
+            }
+            if (D_i7_8014BE0C == 541) {
+                D_i7_8014BF28 |= 1;
+                func_80088CAC(2);
+            }
+            if (D_i7_8014BE0C > 1020) {
+                if (D_i7_8014BDF6 & 0x20) {
+                    D_i7_8014BE08 = 5;
+                    sEndScreenState = END_SCREEN_FADE_IN;
+                } else {
+                    D_i7_8014BE08 = 6;
+                }
+                D_i7_8014BE0C = 0;
+            }
+            break;
+        case 5:
+            if (sEndScreenState == END_SCREEN_INACTIVE) {
+                D_i7_8014BE08 = 6;
+                D_i7_8014BE0C = 0;
+            }
+            break;
+        case 6:
+            D_i7_8014BE0C++;
+            if (D_i7_8014BE0C > 0) {
+                D_i7_8014BE08 = 7;
+                D_i7_8014BE0C = 0;
+                if (D_i7_8014BDF6 & 1) {
+                    D_i7_8014C248 = 2;
+                }
+            }
+            break;
+        case 7:
+            if ((D_i7_8014C248 == 0) && (D_i7_8014BF92 == 0)) {
+                D_i7_8014BE0C++;
+                if (D_i7_8014BE0C == 0x3C) {
+                    D_i7_8014BE1C = 1;
+                    func_800BB09C();
+                }
+            }
+            if (D_i7_8014BE0C >= 360) {
+                D_i7_8014BE0C = 360;
+                if (gInputButtonPressed & (BTN_A | BTN_START)) {
+                    sp1C = 1;
+                }
+            }
+            break;
+    }
+
+    var_v0 = D_i7_8014BE28;
+    for (i = 0; i < D_i7_8014BE20; i++) {
+        switch (var_v0->unk_00) {
+            case 1:
+                if ((D_i7_8014BE08 != 0) && (var_v0->unk_04 == 0)) {
+                    var_v0->unk_04 = 1;
+                }
+                break;
+            case 2:
+                if ((D_i7_8014BE08 != 0) && (var_v0->unk_04 == 0)) {
+                    var_v0->unk_04 = 1;
+                }
+                break;
+            default:
+                if ((D_i7_8014BE08 == 2) && (var_v0->unk_04 == 0)) {
+                    var_v0->unk_04 = 1;
+                }
+                break;
+        }
+        var_v0++;
+    }
+    if ((sp1C != 0) && (D_i7_8014BDF6 & 0x10)) {
+        sp1C = 2;
+    }
+    return sp1C;
+}
+
+Gfx* func_i7_80144B2C(Gfx*);
+Gfx* func_i7_80146E28(Gfx*);
+Gfx* func_i7_80147AC8(Gfx*);
+
+Gfx* EndingCutscene_Draw(Gfx* gfx) {
+
+    if (D_i2_80106F10 != 0) {
+        D_i2_80106F10--;
+        gDPPipeSync(gfx++);
+        gDPSetCycleType(gfx++, G_CYC_FILL);
+        gDPPipelineMode(gfx++, G_PM_NPRIMITIVE);
+        gDPSetRenderMode(gfx++, G_RM_NOOP, G_RM_NOOP2);
+        gDPSetCombineMode(gfx++, G_CC_SHADE, G_CC_SHADE);
+        gDPSetAlphaCompare(gfx++, G_AC_NONE);
+        gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+        gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+    }
+
+    gSPDisplayList(gfx++, D_303A810);
+    gDPPipeSync(gfx++);
+    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+
+    D_800F8520 = D_800DCCF0->unk_10008;
+    D_800E5ECC = D_800DCCF0->unk_21B48;
+    D_800E5ED0 = &D_800DCCF0->unk_21B48[0x7FF];
+    gfx = func_i3_801381DC(gfx, 0, 0);
+    gfx = func_800A9938(gfx, 0);
+    gfx = func_8006DAAC(gfx, 0);
+    gfx = func_i7_80146E28(gfx);
+
+    gSPLoadUcodeL(gfx++, gspF3DLX_Rej_fifo);
+    gfx = Segment_SetTableAddresses(gfx);
+    gSPClipRatio(gfx++, FRUSTRATIO_3);
+    gDPPipeSync(gfx++);
+    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+    gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+    gSPMatrix(gfx++, D_1000000.unk_20208, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+
+    gfx = func_800833AC(gfx, 0, 0);
+    gfx = func_80096CE8(gfx, 0);
+    gfx = func_i7_80147AC8(gfx);
+    return func_i7_80144B2C(gfx);
+}
+
+Gfx* func_i7_DrawFinalResultsRaceResult(Gfx*, unk_8014BE28*, f32);
+Gfx* func_i7_801454B4(Gfx*, unk_8014BE28*, f32);
+Gfx* func_i7_DrawFinalResultsCupInfo(Gfx*, unk_8014BE28*, f32);
+Gfx* func_i7_DrawThanksForPlayingWindow(Gfx*);
+Gfx* func_i7_DrawEndScreen(Gfx*);
+
+Gfx* func_i7_80144B2C(Gfx* gfx) {
+    unk_8014BE28* var_s1;
+    f32 textureTop;
+    s32 i;
+
+    textureTop = D_i7_8014BE10;
+
+    var_s1 = D_i7_8014BE28;
+    for (i = 0; i < D_i7_8014BE20; i++, var_s1++) {
+        textureTop += var_s1->unk_0C;
+        if ((var_s1->unk_00 == 0) || (var_s1->unk_04 == 0) || textureTop > 232.0f) {
+            continue;
+        }
+
+        if ((var_s1->unk_06 + textureTop) < 8.0f) {
+            var_s1->unk_00 = 0;
+            continue;
+        }
+        switch (var_s1->unk_00) {
+            case 1:
+                if (D_i7_8014BDF6 & 4) {
+                    gDPPipeSync(gfx++);
+                    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i7_8014BE14);
+
+                    gfx = func_8007B14C(gfx, func_800783AC(aCongratulationsTex), var_s1->unk_08, textureTop, 264, 31,
+                                        G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+                }
+                break;
+            case 2:
+                gDPPipeSync(gfx++);
+                gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i7_8014BE14);
+
+                gfx = func_8007B14C(gfx, sEndingTex, var_s1->unk_08, textureTop, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                    1, 1, 0, 0);
+
+                if (sEndingTextTex != NULL) {
+#ifdef VERSION_JP
+                    gfx = func_8007B14C(gfx, sEndingTextTex, var_s1->unk_08 + -14.0f, textureTop + 99.0f + 10.0f, 196,
+                                        16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#else
+                    gfx = func_8007B14C(gfx, sEndingTextTex, var_s1->unk_08 + -14.0f, textureTop + 99.0f + 10.0f, 196,
+                                        32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#endif
+                }
+                break;
+            case 3:
+                gfx = func_i7_DrawFinalResultsCupInfo(gfx, var_s1, textureTop);
+                break;
+            case 4:
+                gfx = func_i7_DrawFinalResultsRaceResult(gfx, var_s1, textureTop);
+                break;
+            case 5:
+                gfx = func_i7_801454B4(gfx, var_s1, textureTop);
+                break;
+        }
+    }
+
+    if (D_i7_8014BE1C != 0) {
+        gfx = func_i7_DrawThanksForPlayingWindow(gfx);
+    }
+    if (sEndScreenState != END_SCREEN_INACTIVE) {
+        gfx = func_i7_DrawEndScreen(gfx);
+    }
+    return gfx;
+}
+
+Gfx* func_i7_DrawFinalResultsPosition(Gfx*, s32, s32, s32, bool);
+Gfx* func_i7_DrawResultsRacersKOd(Gfx*, s32, s32, s32);
+
+Gfx* func_i7_DrawFinalResultsRaceResult(Gfx* gfx, unk_8014BE28* arg1, f32 baseYPos) {
+    s32 cupTrackNo;
+    f32 var_fv0;
+    bool shouldHighlight;
+    s32 pad[2];
+    RaceStats* raceStats;
+    const char* trackName;
+
+    cupTrackNo = arg1->track % 6;
+    raceStats = &gCupRaceStats[0][cupTrackNo];
+    trackName = gTrackNames[arg1->track];
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+
+    var_fv0 = 160.0f;
+
+    gfx = Font_DrawString(gfx, (var_fv0 + 2.0f) - (Font_GetStringWidth(trackName, FONT_SET_3, 1) / 2),
+                          (baseYPos + 16.0f) + 2.0f, trackName, 1, FONT_SET_3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
+
+    gfx = Font_DrawString(gfx, var_fv0 - (Font_GetStringWidth(trackName, FONT_SET_3, 1) / 2), (baseYPos + 16.0f),
+                          trackName, 1, FONT_SET_3, 0);
+    gSPDisplayList(gfx++, D_8014940);
+
+    if (raceStats->position == 1) {
+        shouldHighlight = true;
+    } else {
+        shouldHighlight = false;
+    }
+
+    gfx = func_i7_DrawFinalResultsPosition(gfx, 50, baseYPos + 26.0f, raceStats->position, shouldHighlight);
+    gDPPipeSync(gfx++);
+    if (0) {}
+    gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    if (0) {}
+    gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+    gfx = func_i3_DrawTimerScisThousandths(gfx, raceStats->raceTime, 110, (baseYPos + 28.0f), 1.0f);
+    gDPPipeSync(gfx++);
+    gfx = func_i3_DrawSpeed(gfx, 194, (baseYPos + 28.0f), raceStats->maxSpeed, false, false);
+    gDPPipeSync(gfx++);
+    return func_i7_DrawResultsRacersKOd(gfx, 110, (baseYPos + 48.0f), raceStats->racersKOd);
+}
+
+Gfx* func_i7_DrawFinalResultsPosition(Gfx* gfx, s32 xPos, s32 yPos, s32 position, bool shouldHighlight) {
+    s32 i;
+    s32 xOffset;
+    s32 width;
+    s32 positionSuffix;
+    s32 digits[2];
+    s32 positionVar;
+    s32 digit;
+
+    positionVar = position;
+
+    if ((position == 1) || (position == 21)) {
+        positionSuffix = POSITION_SUFFIX_ST;
+    } else if ((position == 2) || (position == 22)) {
+        positionSuffix = POSITION_SUFFIX_ND;
+    } else if ((position == 3) || (position == 23)) {
+        positionSuffix = POSITION_SUFFIX_RD;
+    } else {
+        positionSuffix = POSITION_SUFFIX_TH;
+    }
+
+    for (i = 0; i < 2; i++) {
+        digits[i] = positionVar % 10;
+        positionVar /= 10;
+    }
+
+    gDPPipeSync(gfx++);
+
+    if (shouldHighlight) {
+        gfx = func_8007DB28(gfx, 0);
+    } else {
+        gDPSetPrimColor(gfx++, 0, 0, 250, 250, 255, 255);
+    }
+
+    for (i = 0; i < 2; i++) {
+        digit = digits[1 - i];
+        if ((i == 0) && (digit == 0)) {
+            xPos += 16;
+            continue;
+        }
+
+        if (digit != 1) {
+            xOffset = 0;
+            width = 16;
+        } else {
+            xOffset = 8;
+            width = 8;
+        }
+        gfx = func_8007B14C(gfx, func_800783AC(sFinalResultPositionDigitTexs[digit]), xPos + xOffset, yPos, width, 16,
+                            G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0, 0, 0);
+        xPos += 16;
+    }
+
+    return func_8007B14C(gfx, func_800783AC(sFinalResultsPositionSuffixTexs[positionSuffix]), xPos, yPos, 16, 16,
+                         G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0, 0, 0);
+}
+
+Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
+    s32 i;
+    f32 temp_fa1;
+    f32 left;
+    s32 positionDigits[2];
+    s32 ordinalSuffix;
+    s32 position;
+    s32 positionDigit;
+    char racersKOdStr[4];
+
+    position = D_80106F48;
+    if ((position == 1) || (position == 21)) {
+        ordinalSuffix = POSITION_SUFFIX_ST;
+    } else if ((position == 2) || (position == 22)) {
+        ordinalSuffix = POSITION_SUFFIX_ND;
+    } else if ((position == 3) || (position == 23)) {
+        ordinalSuffix = POSITION_SUFFIX_RD;
+    } else {
+        ordinalSuffix = POSITION_SUFFIX_TH;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(positionDigits); i++) {
+        positionDigits[i] = position % 10;
+        position /= 10;
+    }
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+
+    left = 160.0f;
+    temp_fa1 = arg2 + 16.0f;
+
+    gfx = Font_DrawString(gfx, (left + 2.0f) - (Font_GetStringWidth(sTotalRankingStr, FONT_SET_3, 1) / 2),
+                          temp_fa1 + 2.0f, sTotalRankingStr, 1, FONT_SET_3, 0);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 250, 0, 255);
+    gfx = Font_DrawString(gfx, left - (Font_GetStringWidth(sTotalRankingStr, FONT_SET_3, 1) / 2), temp_fa1,
+                          sTotalRankingStr, 1, FONT_SET_3, 0);
+    temp_fa1 += 10.0f;
+    left = 122.0f;
+    gDPPipeSync(gfx++);
+    gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+
+    for (i = 0; i < ARRAY_COUNT(positionDigits); i++) {
+        positionDigit = positionDigits[1 - i];
+        if ((i == 0) && (positionDigit == 0)) {
+            left += 28.0f;
+            continue;
+        }
+
+        gDPPipeSync(gfx++);
+
+        gDPLoadTextureBlock(gfx++, aPositionDigitTexs[positionDigit], G_IM_FMT_RGBA, G_IM_SIZ_16b, 28, 32, 0,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                            G_TX_NOLOD);
+
+        gSPScisTextureRectangle(gfx++, (s32) (left) << 2, (s32) (temp_fa1) << 2, (s32) (left + 28.0f) << 2,
+                                (s32) (temp_fa1 + 32.0f) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+
+        left += 28.0f;
+    }
+
+    gDPLoadTextureBlock(gfx++, aPositionOrdinalSuffixTexs[ordinalSuffix], G_IM_FMT_RGBA, G_IM_SIZ_16b, 20, 20, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
+
+    gSPScisTextureRectangle(gfx++, (s32) (left) << 2, (s32) ((temp_fa1 + 12.0f)) << 2, (s32) (left + 20.0f) << 2,
+                            (s32) ((temp_fa1 + 12.0f) + 20.0f) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+
+    gfx = func_i7_DrawResultsRacersKOd(gfx, 0x6E, arg2 + 70.0f, sTotalRacersKOd);
+
+    if (sTotalRacersKOd > 0) {
+
+        for (i = 0; i < 4; i++) {
+            racersKOdStr[i] = 0;
+        }
+
+        sprintf(racersKOdStr, "%d", sTotalRacersKOd);
+
+        gDPPipeSync(gfx++);
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+
+        i = sTotalRacersKOd / 10;
+        if (sTotalRacersKOd % 10) {
+            i++;
+        }
+        gfx = Font_DrawString(gfx, 0x6E, (arg2 + 70.0f) + 20.0f + (i * 10), racersKOdStr, 1, FONT_SET_3, 0);
+    }
+    return gfx;
+}
+
+extern const char* sDifficultyNames[];
+
+Gfx* func_i7_DrawFinalResultsCupInfo(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
+    UNUSED s32 pad;
+    f32 var_fv0;
+    f32 temp_fa1;
+    const char* name;
+
+    name = sCupNames[sCupNameIndex];
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+
+    var_fv0 = 160.0f;
+    temp_fa1 = arg2 + 16.0f;
+
+    gfx = Font_DrawString(gfx, (var_fv0 + 2.0f) - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1 + 2.0f, name,
+                          1, FONT_SET_3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+
+    gfx = Font_DrawString(gfx, var_fv0 - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1, name, 1, FONT_SET_3,
+                          0);
+
+    temp_fa1 += 20.0f;
+    name = sDifficultyNames[sCupDifficulty];
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
+
+    gfx = Font_DrawString(gfx, (var_fv0 + 2.0f) - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1 + 2.0f, name,
+                          1, FONT_SET_3, 0);
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+
+    return Font_DrawString(gfx, var_fv0 - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1, name, 1, FONT_SET_3,
+                           0);
+}
+
+void func_i7_FadeInThanksForPlaying(void) {
+    if (sThanksForPlayingFade < 120) {
+        sThanksForPlayingFade++;
+    }
+}
+
+Gfx* func_i7_DrawThanksForPlayingWindow(Gfx* gfx) {
+    static s32 sThanksForPlayingLeft;
+    static s32 sThanksForPlayingTop;
+    static s32 sThanksForPlayingWidth;
+    static s32 sThanksForPlayingBackgroundAlpha;
+
+    sThanksForPlayingBackgroundAlpha = (sThanksForPlayingFade * 255) / 120;
+
+    gfx = func_8007A440(gfx, 12, 8, 308, 232, 0, 0, 0, sThanksForPlayingBackgroundAlpha);
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sThanksForPlayingBackgroundAlpha);
+
+    sThanksForPlayingWidth = Font_GetStringWidth(sThanksForPlayingStr, FONT_SET_1, 1);
+    sThanksForPlayingLeft = (SCREEN_WIDTH - sThanksForPlayingWidth) / 2;
+    sThanksForPlayingTop = SCREEN_HEIGHT / 2;
+
+    return Font_DrawString(gfx, sThanksForPlayingLeft, sThanksForPlayingTop, sThanksForPlayingStr, 1, FONT_SET_1, 1);
+}
 
 f32 D_i7_8014A040[] = { 0.0f, -40.0f, -60.0f, 0.0f };
 
@@ -747,810 +1559,6 @@ unk_struct_C D_i7_8014B310[] = {
     { -2, 0, 0 },
 };
 
-s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 arg2) {
-    s32 endScreenCharacterIndex;
-
-    switch (character) {
-        case CAPTAIN_FALCON:
-            if (arg2 >= 2) {
-                endScreenCharacterIndex = 30;
-            } else {
-                switch (difficulty) {
-                    case STANDARD:
-                    case EXPERT:
-                        endScreenCharacterIndex = 31;
-                        break;
-                    case MASTER:
-                        endScreenCharacterIndex = character;
-                        break;
-                }
-            }
-            break;
-        case SAMURAI_GOROH:
-            if (arg2 >= 2) {
-                endScreenCharacterIndex = 32;
-            } else {
-                endScreenCharacterIndex = character;
-            }
-            break;
-        case JODY_SUMMER:
-            if (arg2 >= 2) {
-                endScreenCharacterIndex = 33;
-            } else {
-                endScreenCharacterIndex = character;
-            }
-            break;
-        default:
-            endScreenCharacterIndex = character;
-            break;
-    }
-    return endScreenCharacterIndex;
-}
-
-void func_i7_80147CC0(void);
-void func_i7_801467FC(void);
-
-void EndingCutscene_Init(void) {
-    unk_8014BE28* var_v1;
-    s32 cupFirstCourseIndex;
-    s32 pad;
-    Racer* player = &gRacers[0];
-    s32 i;
-    s32 j;
-    void** endingTextures;
-    s32 var_a0;
-
-    D_800CCFE8 = D_i2_80106F10 = 3;
-    D_800DCE5C = 0;
-    gNumPlayers = 1;
-    cupFirstCourseIndex = (gCourseIndex / 6) * 6;
-    gCourseIndex = 55;
-    sCupDifficulty = gDifficulty;
-    gDifficulty = MASTER;
-    sTotalRacersKOd = 0;
-
-    for (j = 0; j < 6; j++) {
-        sTotalRacersKOd += gCupRaceStats[0][j].racersKOd;
-    }
-
-    func_800A4EAC();
-    func_i3_80116C4C();
-    func_8008C7C8();
-    func_80085610();
-    func_8007F4E0(gCourseData.venue, gCourseData.skybox);
-    func_i3_801365E0();
-    func_i2_801044F0();
-    func_8006D448();
-    func_8006E478();
-    func_8006EC7C();
-    func_80071260(0);
-    func_i7_80147CC0();
-    func_i7_801467FC();
-    sEndScreenState = END_SCREEN_INACTIVE;
-    sEndScreenFade = 0;
-    sEndScreenAlpha = 0;
-    D_i7_8014BDF6 = 0;
-    if (D_80106F48 < 4) {
-        D_i7_8014BDF6 |= 0xF;
-    } else {
-        D_i7_8014BDF6 |= 0x40;
-    }
-    if (D_800E42CC != 0) {
-        D_800E42CC = 0;
-        D_i7_8014BDF6 |= 0x10;
-    } else if (gUnlockableLevel >= 2) {
-        switch (sCupDifficulty) {
-            case EXPERT:
-            case MASTER:
-                if (gCupType == JOKER_CUP && D_80106F48 == 1) {
-                    D_i7_8014BDF6 |= 0x10;
-                }
-                break;
-        }
-    }
-
-    if (D_80106F48 == 1) {
-        switch (sCupDifficulty) {
-            case STANDARD:
-            case EXPERT:
-            case MASTER:
-                D_i7_8014BDF6 |= 0x20;
-                break;
-        }
-    }
-
-    D_i7_8014BE10 = 0.0f;
-    D_i7_8014BE14 = 0;
-    D_i7_8014BE08 = 0;
-    D_i7_8014BE0C = 0;
-
-    switch (gCupType) {
-        case JACK_CUP:
-            sCupNameIndex = 0;
-            break;
-        case QUEEN_CUP:
-            sCupNameIndex = 1;
-            break;
-        case KING_CUP:
-            sCupNameIndex = 2;
-            break;
-        case JOKER_CUP:
-            sCupNameIndex = 3;
-            break;
-        case X_CUP:
-            sCupNameIndex = 5;
-            break;
-        case EDIT_CUP:
-            sCupNameIndex = 4;
-            break;
-    }
-    D_i7_8014BE18 = Font_GetStringWidth(sCupNames[sCupNameIndex], FONT_SET_3, 1);
-    D_i7_8014BE1C = 0;
-    sThanksForPlayingFade = 0;
-    D_i7_8014BF28 = 0;
-    var_a0 = 0;
-
-    var_v1 = D_i7_8014BE28;
-    for (i = 0; D_i7_80149FEC[i] != -1; i++) {
-        var_v1->unk_04 = 0;
-        var_v1->unk_00 = D_i7_80149FEC[i];
-        switch (var_v1->unk_00) {
-            case 1:
-                var_v1->track = 0;
-                var_v1->unk_08 = 28.0f;
-                var_v1->unk_0C = 104.0f;
-                var_v1->unk_06 = 0x1F;
-                break;
-            case 2:
-                var_v1->track = 0;
-                var_v1->unk_08 = 76.0f;
-                var_v1->unk_06 = 0xCB;
-                var_v1->unk_0C = 62.0f;
-                break;
-            case 3:
-                var_v1->track = 0;
-                var_v1->unk_08 = 0.0f;
-                var_v1->unk_06 = 0x34;
-                var_v1->unk_0C = 236.0f;
-                break;
-            case 5:
-                var_v1->track = 0;
-                var_v1->unk_08 = 0.0f;
-                var_v1->unk_0C = 100.0f;
-                var_v1->unk_06 = 0x10A;
-                break;
-            case 4:
-                var_v1->track = (s16) (cupFirstCourseIndex + var_a0);
-                var_v1->unk_08 = 76.0f;
-
-                if (var_a0 != 0) {
-                    var_v1->unk_0C = 120.0f;
-                } else {
-                    var_v1->unk_0C = 120.0f;
-                }
-
-                var_v1->unk_06 = 0x50;
-                var_a0++;
-                break;
-        }
-        var_v1++;
-    }
-    D_i7_8014BE20 = var_v1 - D_i7_8014BE28;
-    func_80078104(aCongratulationsTex, 0x3FF0, 0, 0, 0);
-    func_80078104(aFinalResultPosition0Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition1Tex, 0x100, 0, 0, 0);
-    func_80078104(aFinalResultPosition2Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition3Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition4Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition5Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition6Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition7Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition8Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPosition9Tex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixSTTex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixNDTex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixRDTex, 0x200, 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixTHTex, 0x200, 0, 0, 0);
-
-    if (D_i7_8014BDF6 & 0x20) {
-
-        endingTextures = sEndingTextures[func_i7_GetEndScreenIndex(sCupDifficulty, player->character, player->unk_167)];
-
-        sEndingTex = func_80078104(endingTextures[0], 0x81F0, 0, 1, 0);
-
-        if (endingTextures[1] != NULL) {
-            sEndingTextTex = func_80078104(endingTextures[1], 0x3100, 0, 1, 0);
-        } else {
-            sEndingTextTex = NULL;
-        }
-    }
-}
-
-s32 func_i7_801442A0(void);
-void func_i7_FadeInThanksForPlaying(void);
-void func_i7_FadeEndScreen(void);
-void func_i7_80146920(void);
-void func_i7_80147EBC(void);
-
-extern s32 D_800DCCFC;
-extern Controller gSharedController;
-
-s32 EndingCutscene_Update(void) {
-
-    Controller_SetGlobalInputs(&gSharedController);
-    D_i7_8014BDF0 = &D_8014B480[D_800DCCFC];
-    func_i2_8010466C();
-    func_800952F4();
-    func_8008675C();
-    func_i3_80136A6C();
-    func_800A5028();
-    func_80074844();
-    func_i7_80147EBC();
-    if (D_i7_8014BE1C != 0) {
-        func_i7_FadeInThanksForPlaying();
-    }
-    if (sEndScreenState != END_SCREEN_INACTIVE) {
-        func_i7_FadeEndScreen();
-    }
-    func_i7_80146920();
-
-    switch (func_i7_801442A0()) {
-        case 1:
-            return GAMEMODE_FLX_MAIN_MENU;
-        case 2:
-            return GAMEMODE_FLX_UNSKIPPABLE_CREDITS;
-        case 0:
-        default:
-            return GAMEMODE_GP_END_CS;
-    }
-}
-
-extern u16 gInputButtonPressed;
-extern s32 D_i3_80141908;
-
-s32 func_i7_801442A0(void) {
-    unk_8014BE28* var_v0;
-    Racer* racer;
-    s32 sp1C;
-    f32 var_fv0;
-    bool var_a0;
-    s32 i;
-
-    sp1C = 0;
-    switch (D_i7_8014BE08) {
-        case 0:
-            if (D_i7_8014BE0C >= 120) {
-                D_i7_8014BE08 = 1;
-                D_i7_8014BE0C = 0;
-            } else {
-                D_i7_8014BE0C++;
-            }
-            break;
-        case 1:
-            D_i7_8014BE0C++;
-            var_fv0 = (f32) D_i7_8014BE0C / 30.0f;
-            if (var_fv0 >= 1.0f) {
-                var_fv0 = 1.0f;
-            }
-            D_i7_8014BE14 = 255.0f * var_fv0;
-            if (D_i7_8014BE0C >= 120) {
-                D_i7_8014BE08 = 2;
-                D_i7_8014BE14 = 255;
-                D_i7_8014BE0C = 0;
-                func_80088CAC(1);
-            }
-            break;
-        case 2:
-            D_i7_8014BE14 = 255;
-            if (D_i7_8014BE0C <= 300) {
-                D_i7_8014BE0C++;
-            }
-            if ((D_i7_8014BE0C == 300) && (D_i7_8014BDF6 & 8)) {
-                D_i7_8014C248 = 1;
-            }
-            D_i7_8014BE10 -= 0.5f;
-
-            var_a0 = true;
-            var_v0 = D_i7_8014BE28;
-            for (i = 0; i < D_i7_8014BE20; i++) {
-                if (var_v0->unk_00 != 0) {
-                    var_a0 = false;
-                }
-                var_v0++;
-            }
-            if (var_a0) {
-                D_i7_8014BE08 = 6;
-                D_i7_8014BE0C = 0;
-                D_i7_8014C248 = 0;
-                if (D_i7_8014BDF6 & 2) {
-                    D_i3_80141908 = 1;
-                    D_i7_8014BE08 = 3;
-                }
-            }
-            break;
-        case 3:
-            var_a0 = true;
-
-            for (i = 0, racer = gRacers; i < 3; i++) {
-                if (racer->speed > 0.1f) {
-                    var_a0 = false;
-                    break;
-                }
-                racer++;
-            }
-
-            if (var_a0) {
-                D_i7_8014BE08 = 4;
-                D_i7_8014BE0C = 0;
-            }
-            break;
-        case 4:
-            D_i7_8014BE0C++;
-
-            if (D_i7_8014BE0C == 1) {
-                D_i7_8014BF28 |= 4;
-                func_80088CAC(4);
-            }
-            if (D_i7_8014BE0C == 271) {
-                D_i7_8014BF28 |= 2;
-                func_80088CAC(3);
-            }
-            if (D_i7_8014BE0C == 541) {
-                D_i7_8014BF28 |= 1;
-                func_80088CAC(2);
-            }
-            if (D_i7_8014BE0C > 1020) {
-                if (D_i7_8014BDF6 & 0x20) {
-                    D_i7_8014BE08 = 5;
-                    sEndScreenState = END_SCREEN_FADE_IN;
-                } else {
-                    D_i7_8014BE08 = 6;
-                }
-                D_i7_8014BE0C = 0;
-            }
-            break;
-        case 5:
-            if (sEndScreenState == END_SCREEN_INACTIVE) {
-                D_i7_8014BE08 = 6;
-                D_i7_8014BE0C = 0;
-            }
-            break;
-        case 6:
-            D_i7_8014BE0C++;
-            if (D_i7_8014BE0C > 0) {
-                D_i7_8014BE08 = 7;
-                D_i7_8014BE0C = 0;
-                if (D_i7_8014BDF6 & 1) {
-                    D_i7_8014C248 = 2;
-                }
-            }
-            break;
-        case 7:
-            if ((D_i7_8014C248 == 0) && (D_i7_8014BF92 == 0)) {
-                D_i7_8014BE0C++;
-                if (D_i7_8014BE0C == 0x3C) {
-                    D_i7_8014BE1C = 1;
-                    func_800BB09C();
-                }
-            }
-            if (D_i7_8014BE0C >= 360) {
-                D_i7_8014BE0C = 360;
-                if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                    sp1C = 1;
-                }
-            }
-            break;
-    }
-
-    var_v0 = D_i7_8014BE28;
-    for (i = 0; i < D_i7_8014BE20; i++) {
-        switch (var_v0->unk_00) {
-            case 1:
-                if ((D_i7_8014BE08 != 0) && (var_v0->unk_04 == 0)) {
-                    var_v0->unk_04 = 1;
-                }
-                break;
-            case 2:
-                if ((D_i7_8014BE08 != 0) && (var_v0->unk_04 == 0)) {
-                    var_v0->unk_04 = 1;
-                }
-                break;
-            default:
-                if ((D_i7_8014BE08 == 2) && (var_v0->unk_04 == 0)) {
-                    var_v0->unk_04 = 1;
-                }
-                break;
-        }
-        var_v0++;
-    }
-    if ((sp1C != 0) && (D_i7_8014BDF6 & 0x10)) {
-        sp1C = 2;
-    }
-    return sp1C;
-}
-
-Gfx* func_i7_80144B2C(Gfx*);
-Gfx* func_i7_80146E28(Gfx*);
-Gfx* func_i7_80147AC8(Gfx*);
-
-Gfx* EndingCutscene_Draw(Gfx* gfx) {
-
-    if (D_i2_80106F10 != 0) {
-        D_i2_80106F10--;
-        gDPPipeSync(gfx++);
-        gDPSetCycleType(gfx++, G_CYC_FILL);
-        gDPPipelineMode(gfx++, G_PM_NPRIMITIVE);
-        gDPSetRenderMode(gfx++, G_RM_NOOP, G_RM_NOOP2);
-        gDPSetCombineMode(gfx++, G_CC_SHADE, G_CC_SHADE);
-        gDPSetAlphaCompare(gfx++, G_AC_NONE);
-        gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1));
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
-        gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
-    }
-
-    gSPDisplayList(gfx++, D_303A810);
-    gDPPipeSync(gfx++);
-    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
-
-    D_800F8520 = D_800DCCF0->unk_10008;
-    D_800E5ECC = D_800DCCF0->unk_21B48;
-    D_800E5ED0 = &D_800DCCF0->unk_21B48[0x7FF];
-    gfx = func_i3_801381DC(gfx, 0, 0);
-    gfx = func_800A9938(gfx, 0);
-    gfx = func_8006DAAC(gfx, 0);
-    gfx = func_i7_80146E28(gfx);
-
-    gSPLoadUcodeL(gfx++, gspF3DLX_Rej_fifo);
-    gfx = Segment_SetTableAddresses(gfx);
-    gSPClipRatio(gfx++, FRUSTRATIO_3);
-    gDPPipeSync(gfx++);
-    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
-    gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
-    gSPMatrix(gfx++, D_1000000.unk_20208, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-
-    gfx = func_800833AC(gfx, 0, 0);
-    gfx = func_80096CE8(gfx, 0);
-    gfx = func_i7_80147AC8(gfx);
-    return func_i7_80144B2C(gfx);
-}
-
-Gfx* func_i7_DrawFinalResultsRaceResult(Gfx*, unk_8014BE28*, f32);
-Gfx* func_i7_801454B4(Gfx*, unk_8014BE28*, f32);
-Gfx* func_i7_DrawFinalResultsCupInfo(Gfx*, unk_8014BE28*, f32);
-Gfx* func_i7_DrawThanksForPlayingWindow(Gfx*);
-Gfx* func_i7_DrawEndScreen(Gfx*);
-
-Gfx* func_i7_80144B2C(Gfx* gfx) {
-    unk_8014BE28* var_s1;
-    f32 textureTop;
-    s32 i;
-
-    textureTop = D_i7_8014BE10;
-
-    var_s1 = D_i7_8014BE28;
-    for (i = 0; i < D_i7_8014BE20; i++, var_s1++) {
-        textureTop += var_s1->unk_0C;
-        if ((var_s1->unk_00 == 0) || (var_s1->unk_04 == 0) || textureTop > 232.0f) {
-            continue;
-        }
-
-        if ((var_s1->unk_06 + textureTop) < 8.0f) {
-            var_s1->unk_00 = 0;
-            continue;
-        }
-        switch (var_s1->unk_00) {
-            case 1:
-                if (D_i7_8014BDF6 & 4) {
-                    gDPPipeSync(gfx++);
-                    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i7_8014BE14);
-
-                    gfx = func_8007B14C(gfx, func_800783AC(aCongratulationsTex), var_s1->unk_08, textureTop, 264, 31,
-                                        G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
-                }
-                break;
-            case 2:
-                gDPPipeSync(gfx++);
-                gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i7_8014BE14);
-
-                gfx = func_8007B14C(gfx, sEndingTex, var_s1->unk_08, textureTop, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b,
-                                    1, 1, 0, 0);
-
-                if (sEndingTextTex != NULL) {
-                    gfx = func_8007B14C(gfx, sEndingTextTex, var_s1->unk_08 + -14.0f, textureTop + 99.0f + 10.0f, 196,
-                                        32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
-                }
-                break;
-            case 3:
-                gfx = func_i7_DrawFinalResultsCupInfo(gfx, var_s1, textureTop);
-                break;
-            case 4:
-                gfx = func_i7_DrawFinalResultsRaceResult(gfx, var_s1, textureTop);
-                break;
-            case 5:
-                gfx = func_i7_801454B4(gfx, var_s1, textureTop);
-                break;
-        }
-    }
-
-    if (D_i7_8014BE1C != 0) {
-        gfx = func_i7_DrawThanksForPlayingWindow(gfx);
-    }
-    if (sEndScreenState != END_SCREEN_INACTIVE) {
-        gfx = func_i7_DrawEndScreen(gfx);
-    }
-    return gfx;
-}
-
-Gfx* func_i7_DrawFinalResultsPosition(Gfx*, s32, s32, s32, bool);
-Gfx* func_i7_DrawResultsRacersKOd(Gfx*, s32, s32, s32);
-
-Gfx* func_i7_DrawFinalResultsRaceResult(Gfx* gfx, unk_8014BE28* arg1, f32 baseYPos) {
-    s32 cupTrackNo;
-    f32 var_fv0;
-    bool shouldHighlight;
-    s32 pad[2];
-    RaceStats* raceStats;
-    const char* trackName;
-
-    cupTrackNo = arg1->track % 6;
-    raceStats = &gCupRaceStats[0][cupTrackNo];
-    trackName = gTrackNames[arg1->track];
-
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-
-    var_fv0 = 160.0f;
-
-    gfx = Font_DrawString(gfx, (var_fv0 + 2.0f) - (Font_GetStringWidth(trackName, FONT_SET_3, 1) / 2),
-                          (baseYPos + 16.0f) + 2.0f, trackName, 1, FONT_SET_3, 0);
-
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-
-    gfx = Font_DrawString(gfx, var_fv0 - (Font_GetStringWidth(trackName, FONT_SET_3, 1) / 2), (baseYPos + 16.0f),
-                          trackName, 1, FONT_SET_3, 0);
-    gSPDisplayList(gfx++, D_8014940);
-
-    if (raceStats->position == 1) {
-        shouldHighlight = true;
-    } else {
-        shouldHighlight = false;
-    }
-
-    gfx = func_i7_DrawFinalResultsPosition(gfx, 50, baseYPos + 26.0f, raceStats->position, shouldHighlight);
-    gDPPipeSync(gfx++);
-    if (0) {}
-    gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
-    if (0) {}
-    gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-
-    gfx = func_i3_DrawTimerScisThousandths(gfx, raceStats->raceTime, 110, (baseYPos + 28.0f), 1.0f);
-    gDPPipeSync(gfx++);
-    gfx = func_i3_DrawSpeed(gfx, 194, (baseYPos + 28.0f), raceStats->maxSpeed, false, false);
-    gDPPipeSync(gfx++);
-    return func_i7_DrawResultsRacersKOd(gfx, 110, (baseYPos + 48.0f), raceStats->racersKOd);
-}
-
-Gfx* func_i7_DrawFinalResultsPosition(Gfx* gfx, s32 xPos, s32 yPos, s32 position, bool shouldHighlight) {
-    s32 i;
-    s32 xOffset;
-    s32 width;
-    s32 positionSuffix;
-    s32 digits[2];
-    s32 positionVar;
-    s32 digit;
-
-    positionVar = position;
-
-    if ((position == 1) || (position == 21)) {
-        positionSuffix = POSITION_SUFFIX_ST;
-    } else if ((position == 2) || (position == 22)) {
-        positionSuffix = POSITION_SUFFIX_ND;
-    } else if ((position == 3) || (position == 23)) {
-        positionSuffix = POSITION_SUFFIX_RD;
-    } else {
-        positionSuffix = POSITION_SUFFIX_TH;
-    }
-
-    for (i = 0; i < 2; i++) {
-        digits[i] = positionVar % 10;
-        positionVar /= 10;
-    }
-
-    gDPPipeSync(gfx++);
-
-    if (shouldHighlight) {
-        gfx = func_8007DB28(gfx, 0);
-    } else {
-        gDPSetPrimColor(gfx++, 0, 0, 250, 250, 255, 255);
-    }
-
-    for (i = 0; i < 2; i++) {
-        digit = digits[1 - i];
-        if ((i == 0) && (digit == 0)) {
-            xPos += 16;
-            continue;
-        }
-
-        if (digit != 1) {
-            xOffset = 0;
-            width = 16;
-        } else {
-            xOffset = 8;
-            width = 8;
-        }
-        gfx = func_8007B14C(gfx, func_800783AC(sFinalResultPositionDigitTexs[digit]), xPos + xOffset, yPos, width, 16,
-                            G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0, 0, 0);
-        xPos += 16;
-    }
-
-    return func_8007B14C(gfx, func_800783AC(sFinalResultsPositionSuffixTexs[positionSuffix]), xPos, yPos, 16, 16,
-                         G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0, 0, 0);
-}
-
-Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
-    s32 i;
-    f32 temp_fa1;
-    f32 left;
-    s32 positionDigits[2];
-    s32 ordinalSuffix;
-    s32 position;
-    s32 positionDigit;
-    char racersKOdStr[4];
-
-    position = D_80106F48;
-    if ((position == 1) || (position == 21)) {
-        ordinalSuffix = POSITION_SUFFIX_ST;
-    } else if ((position == 2) || (position == 22)) {
-        ordinalSuffix = POSITION_SUFFIX_ND;
-    } else if ((position == 3) || (position == 23)) {
-        ordinalSuffix = POSITION_SUFFIX_RD;
-    } else {
-        ordinalSuffix = POSITION_SUFFIX_TH;
-    }
-
-    for (i = 0; i < ARRAY_COUNT(positionDigits); i++) {
-        positionDigits[i] = position % 10;
-        position /= 10;
-    }
-
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-
-    left = 160.0f;
-    temp_fa1 = arg2 + 16.0f;
-
-    gfx = Font_DrawString(gfx, (left + 2.0f) - (Font_GetStringWidth(sTotalRankingStr, FONT_SET_3, 1) / 2),
-                          temp_fa1 + 2.0f, sTotalRankingStr, 1, FONT_SET_3, 0);
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 0, 250, 0, 255);
-    gfx = Font_DrawString(gfx, left - (Font_GetStringWidth(sTotalRankingStr, FONT_SET_3, 1) / 2), temp_fa1,
-                          sTotalRankingStr, 1, FONT_SET_3, 0);
-    temp_fa1 += 10.0f;
-    left = 122.0f;
-    gDPPipeSync(gfx++);
-    gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
-
-    for (i = 0; i < ARRAY_COUNT(positionDigits); i++) {
-        positionDigit = positionDigits[1 - i];
-        if ((i == 0) && (positionDigit == 0)) {
-            left += 28.0f;
-            continue;
-        }
-
-        gDPPipeSync(gfx++);
-
-        gDPLoadTextureBlock(gfx++, aPositionDigitTexs[positionDigit], G_IM_FMT_RGBA, G_IM_SIZ_16b, 28, 32, 0,
-                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
-                            G_TX_NOLOD);
-
-        gSPScisTextureRectangle(gfx++, (s32) (left) << 2, (s32) (temp_fa1) << 2, (s32) (left + 28.0f) << 2,
-                                (s32) (temp_fa1 + 32.0f) << 2, 0, 0, 0, 1 << 10, 1 << 10);
-
-        left += 28.0f;
-    }
-
-    gDPLoadTextureBlock(gfx++, aPositionOrdinalSuffixTexs[ordinalSuffix], G_IM_FMT_RGBA, G_IM_SIZ_16b, 20, 20, 0,
-                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
-                        G_TX_NOLOD);
-
-    gSPScisTextureRectangle(gfx++, (s32) (left) << 2, (s32) ((temp_fa1 + 12.0f)) << 2, (s32) (left + 20.0f) << 2,
-                            (s32) ((temp_fa1 + 12.0f) + 20.0f) << 2, 0, 0, 0, 1 << 10, 1 << 10);
-
-    gfx = func_i7_DrawResultsRacersKOd(gfx, 0x6E, arg2 + 70.0f, sTotalRacersKOd);
-
-    if (sTotalRacersKOd > 0) {
-
-        for (i = 0; i < 4; i++) {
-            racersKOdStr[i] = 0;
-        }
-
-        sprintf(racersKOdStr, "%d", sTotalRacersKOd);
-
-        gDPPipeSync(gfx++);
-        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-
-        i = sTotalRacersKOd / 10;
-        if (sTotalRacersKOd % 10) {
-            i++;
-        }
-        gfx = Font_DrawString(gfx, 0x6E, (arg2 + 70.0f) + 20.0f + (i * 10), racersKOdStr, 1, FONT_SET_3, 0);
-    }
-    return gfx;
-}
-
-extern const char* sDifficultyNames[];
-
-Gfx* func_i7_DrawFinalResultsCupInfo(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
-    UNUSED s32 pad;
-    f32 var_fv0;
-    f32 temp_fa1;
-    const char* name;
-
-    name = sCupNames[sCupNameIndex];
-
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-
-    var_fv0 = 160.0f;
-    temp_fa1 = arg2 + 16.0f;
-
-    gfx = Font_DrawString(gfx, (var_fv0 + 2.0f) - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1 + 2.0f, name,
-                          1, FONT_SET_3, 0);
-
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-
-    gfx = Font_DrawString(gfx, var_fv0 - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1, name, 1, FONT_SET_3,
-                          0);
-
-    temp_fa1 += 20.0f;
-    name = sDifficultyNames[sCupDifficulty];
-
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-
-    gfx = Font_DrawString(gfx, (var_fv0 + 2.0f) - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1 + 2.0f, name,
-                          1, FONT_SET_3, 0);
-
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-
-    return Font_DrawString(gfx, var_fv0 - (Font_GetStringWidth(name, FONT_SET_3, 1) / 2), temp_fa1, name, 1, FONT_SET_3,
-                           0);
-}
-
-void func_i7_FadeInThanksForPlaying(void) {
-    if (sThanksForPlayingFade < 120) {
-        sThanksForPlayingFade++;
-    }
-}
-
-#ifdef IMPORT_BSS
-Gfx* func_i7_DrawThanksForPlayingWindow(Gfx* gfx) {
-    static s32 sThanksForPlayingLeft;
-    static s32 sThanksForPlayingTop;
-    static s32 sThanksForPlayingWidth;
-    static s32 sThanksForPlayingBackgroundAlpha;
-
-    sThanksForPlayingBackgroundAlpha = (sThanksForPlayingFade * 255) / 120;
-
-    gfx = func_8007A440(gfx, 12, 8, 308, 232, 0, 0, 0, sThanksForPlayingBackgroundAlpha);
-    gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sThanksForPlayingBackgroundAlpha);
-
-    sThanksForPlayingWidth = Font_GetStringWidth(sThanksForPlayingStr, FONT_SET_1, 1);
-    sThanksForPlayingLeft = (SCREEN_WIDTH - sThanksForPlayingWidth) / 2;
-    sThanksForPlayingTop = SCREEN_HEIGHT / 2;
-
-    return Font_DrawString(gfx, sThanksForPlayingLeft, sThanksForPlayingTop, sThanksForPlayingStr, 1, FONT_SET_1, 1);
-}
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_DrawThanksForPlayingWindow.s")
-#endif
-
 void func_i7_FadeEndScreen(void) {
     switch (sEndScreenState) {
         case END_SCREEN_FADE_IN:
@@ -1586,9 +1594,17 @@ Gfx* func_i7_DrawEndScreen(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sEndScreenAlpha);
 
+#ifdef VERSION_JP
+    gfx = func_8007B14C(gfx, sEndingTex, 76, 70, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#else
     gfx = func_8007B14C(gfx, sEndingTex, 76, 62, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#endif
     if (sEndingTextTex != NULL) {
+#ifdef VERSION_JP
+        gfx = func_8007B14C(gfx, sEndingTextTex, 62, 179, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#else
         gfx = func_8007B14C(gfx, sEndingTextTex, 62, 171, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+#endif
     }
     return gfx;
 }
@@ -1627,7 +1643,6 @@ Gfx* func_i7_DrawResultsRacersKOd(Gfx* gfx, s32 left, s32 top, s32 racersKOd) {
     return gfx;
 }
 
-#ifdef IMPORT_BSS
 void func_i7_801467FC(void) {
     f32 temp_fa0;
     s32 i;
@@ -1685,9 +1700,6 @@ void func_i7_801467FC(void) {
     var->z = 0.0f;
     var++;
 }
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_801467FC.s")
-#endif
 
 extern Vec3f D_i7_8014BF30[];
 
@@ -1820,7 +1832,11 @@ Gfx* func_i7_80146E28(Gfx* gfx) {
     return gfx;
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_80146E28.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_80146E28.s")
+#endif
 #endif
 
 extern s32 D_800E5EC0;
@@ -1854,7 +1870,7 @@ void func_i7_801471C0(void) {
             } else if ((character == JODY_SUMMER) && (gRacers[i].unk_167 >= 2)) {
                 j = 32;
             }
-            D_i7_8014C034 = func_80078104(sFullPortraits[j], 0x15888, 0, 1, 1);
+            D_i7_8014C034 = func_80078104(sFullPortraits[j], 180 * 245 * sizeof(u16), 0, 1, 1);
 
             for (j = 0; j != 0x2A; j++) {
                 for (var_a0 = 0; var_a0 < 32; var_a0++) {

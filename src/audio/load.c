@@ -917,7 +917,9 @@ void AudioLoad_SetUnusedHandler(void* callback) {
 
 void AudioHeap_InitMainPools(s32);
 
+#ifndef VERSION_JP
 bool gAudioContextInitialized = false;
+#endif
 static char D_800D0CC8[] = "Clear Workarea %x -%x size %x \n";
 static char D_800D0CE8[] = "AudioHeap is %x\n";
 static char D_800D0CFC[] = "Heap reset.Synth Change %x \n";
@@ -1055,7 +1057,9 @@ void AudioLoad_Init(void* heap, size_t heapSize) {
     }
 
     AudioHeap_InitPool(&gPermanentCache.pool, ramAddr, gPermanentPoolSize);
+#ifndef VERSION_JP
     gAudioContextInitialized = true;
+#endif
 }
 
 Sample* AudioLoad_GetFontSample(s32, s32);
@@ -1731,3 +1735,62 @@ void AudioLoad_LoadPermanentSamples(void) {
         }
     }
 }
+
+#ifdef VERSION_JP
+static char D_800D1130[] = "Warning:Kill Note  %x \n";
+static char D_800D1148[] = "Kill Voice %d (ID %d) %d\n";
+static char D_800D1164[] = "Warning: Running Sequence's data disappear!\n";
+static char D_800D1194[] = "%x %x %x\n";
+static char D_800D11A0[] = "Audio:Memory:Heap OverFlow : Not Allocate %d!\n";
+static char D_800D11D0[] = "%x %x %x\n";
+static char D_800D11DC[] = "Audio:Memory:Heap OverFlow : Not Allocate %d!\n";
+static char D_800D120C[] = "Audio:Memory:DataHeap Not Allocate \n";
+static char D_800D1234[] = "StayHeap Not Allocate %d\n";
+static char D_800D1250[] = "AutoHeap Not Allocate %d\n";
+static char D_800D126C[] = "Status ID0 : %d  ID1 : %d\n";
+static char D_800D1288[] = "id 0 is Stopping\n";
+static char D_800D129C[] = "id 0 is Stop\n";
+static char D_800D12AC[] = "id 1 is Stopping\n";
+static char D_800D12C0[] = "id 1 is Stop\n";
+static char D_800D12D0[] = "WARNING: NO FREE AUTOSEQ AREA.\n";
+static char D_800D12F0[] = "WARNING: NO STOP AUTO AREA.\n";
+static char D_800D1310[] = "         AND TRY FORCE TO STOP SIDE \n";
+static char D_800D1338[] = "Check ID0  (seq ID %d) Useing ...\n";
+static char D_800D135C[] = "Check ID1  (seq ID %d) Useing ...\n";
+static char D_800D1380[] = "No Free Seq area.\n";
+static char D_800D1394[] = "CH %d: ID %d\n";
+static char D_800D13A4[] = "TWO SIDES ARE LOADING... ALLOC CANCELED.\n";
+static char D_800D13D0[] = "WARNING: Before Area Overlaid After.";
+static char D_800D13F8[] = "WARNING: After Area Overlaid Before.";
+static char D_800D1420[] = "MEMORY:SzHeapAlloc ERROR: sza->side %d\n";
+static char D_800D1448[] = "Audio:MEMORY:SzHeap Overflow error. (%d bytes)\n";
+static char D_800D1478[] = "Auto Heap Unhit for ID %d\n";
+static char D_800D1494[] = "Heap Reconstruct Start %x\n";
+static char D_800D14B0[] = "---------------------------------------TEMPO %d %f\n";
+static char D_800D14E4[] = "%f \n";
+static char D_800D14EC[] = "%f \n";
+static char D_800D14F4[] = "AHPBASE %x\n";
+static char D_800D1500[] = "AHPCUR  %x\n";
+static char D_800D150C[] = "HeapTop %x\n";
+static char D_800D1518[] = "SynoutRate %d / %d \n";
+static char D_800D1530[] = "FXSIZE %d\n";
+static char D_800D153C[] = "FXCOMP %d\n";
+static char D_800D1548[] = "FXDOWN %d\n";
+static char D_800D1554[] = "WaveCacheLen: %d\n";
+static char D_800D1568[] = "SpecChange Finished\n";
+static char D_800D1580[] = "Warning:Emem Over,not alloc %d\n";
+static char D_800D15A0[] = "Single AutoSize %d\n";
+static char D_800D15B4[] = "Single Ptr %x\n";
+static char D_800D15C4[] = "Request--------Single-Auto, %d\n";
+static char D_800D15E4[] = "Retry %x, %x, len %x\n";
+static char D_800D15FC[] = "DMAing list %d is killed.\n";
+static char D_800D1618[] = "Try Kill %d \n";
+static char D_800D1628[] = "Try Kill %x %x\n";
+static char D_800D1638[] = "Try Kill %x %x %x\n";
+static char D_800D164C[] = "Rom back %x %x \n";
+static char D_800D1660[] = "Error sw NULL \n";
+static char D_800D1670[] = "Request--------Single-Stay, %d\n";
+static char D_800D1690[] = "Try Kill %d \n";
+static char D_800D16A0[] = "Try Kill %x %x\n";
+static char D_800D16B0[] = "Try Kill %x %x %x\n";
+#endif

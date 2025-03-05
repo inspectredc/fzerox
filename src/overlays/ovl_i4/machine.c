@@ -13,42 +13,160 @@ f32 D_i4_8011D778;
 f32 D_i4_8011D77C;
 s16 sMachineSelectIndex[8];
 
-unk_80077D50 sPortraitDrStewartCompTexInfo[] = { { 17, aFullPortraitDrStewartTex, 180, 245, 0x4AF4 }, { 0 } };
-unk_80077D50 sPortraitCaptainFalconCompTexInfo[] = { { 17, aFullPortraitCaptainFalconTex, 180, 245, 0x6604 }, { 0 } };
-unk_80077D50 sPortraitJodySummerCompTexInfo[] = { { 17, aFullPortraitJodySummerTex, 180, 245, 0x5573 }, { 0 } };
-unk_80077D50 sPortraitSamuraiGorohCompTexInfo[] = { { 17, aFullPortraitSamuraiGorohTex, 180, 245, 0x76B4 }, { 0 } };
-unk_80077D50 sPortraitMightyGazelleCompTexInfo[] = { { 17, aFullPortraitMightyGazelleTex, 180, 245, 0x67F2 }, { 0 } };
-unk_80077D50 sPortraitPicoCompTexInfo[] = { { 17, aFullPortraitPicoTex, 180, 245, 0x63BB }, { 0 } };
-unk_80077D50 sPortraitBabaCompTexInfo[] = { { 17, aFullPortraitBabaTex, 180, 245, 0x5EE9 }, { 0 } };
-unk_80077D50 sPortraitMrEadCompTexInfo[] = { { 17, aFullPortraitMrEadTex, 180, 245, 0x7184 }, { 0 } };
-unk_80077D50 sPortraitOctomanCompTexInfo[] = { { 17, aFullPortraitOctomanTex, 180, 245, 0x5666 }, { 0 } };
-unk_80077D50 sPortraitTheSkullCompTexInfo[] = { { 17, aFullPortraitTheSkullTex, 180, 245, 0x5A49 }, { 0 } };
-unk_80077D50 sPortraitBeastmanCompTexInfo[] = { { 17, aFullPortraitBeastmanTex, 180, 245, 0x55C1 }, { 0 } };
-unk_80077D50 sPortraitAntonioGusterCompTexInfo[] = { { 17, aFullPortraitAntonioGusterTex, 180, 245, 0x594F }, { 0 } };
-unk_80077D50 sPortraitDraqCompTexInfo[] = { { 17, aFullPortraitDraqTex, 180, 245, 0x7A7A }, { 0 } };
-unk_80077D50 sPortraitRogerBusterCompTexInfo[] = { { 17, aFullPortraitRogerBusterTex, 180, 245, 0x6444 }, { 0 } };
-unk_80077D50 sPortraitSilverNeelsenCompTexInfo[] = { { 17, aFullPortraitSilverNeelsenTex, 180, 245, 0x623A }, { 0 } };
-unk_80077D50 sPortraitSuperArrowCompTexInfo[] = { { 17, aFullPortraitSuperArrowTex, 180, 245, 0x6F78 }, { 0 } };
-unk_80077D50 sPortraitMrsArrowCompTexInfo[] = { { 17, aFullPortraitMrsArrowTex, 180, 245, 0x5C56 }, { 0 } };
-unk_80077D50 sPortraitZodaCompTexInfo[] = { { 17, aFullPortraitZodaTex, 180, 245, 0x59E6 }, { 0 } };
-unk_80077D50 sPortraitJohnTanakaCompTexInfo[] = { { 17, aFullPortraitJohnTanakaTex, 180, 245, 0x5B58 }, { 0 } };
-unk_80077D50 sPortraitBioRexCompTexInfo[] = { { 17, aFullPortraitBioRexTex, 180, 245, 0x6B2D }, { 0 } };
-unk_80077D50 sPortraitKateAlenCompTexInfo[] = { { 17, aFullPortraitKateAlenTex, 180, 245, 0x4E48 }, { 0 } };
-unk_80077D50 sPortraitGomarAndShiohCompTexInfo[] = { { 17, aFullPortraitGomarAndShiohTex, 180, 245, 0x6D92 }, { 0 } };
-unk_80077D50 sPortraitMichaelChainCompTexInfo[] = { { 17, aFullPortraitMichaelChainTex, 180, 245, 0x5AB3 }, { 0 } };
-unk_80077D50 sPortraitBillyCompTexInfo[] = { { 17, aFullPortraitBillyTex, 180, 245, 0x5E3B }, { 0 } };
-unk_80077D50 sPortraitDrClashCompTexInfo[] = { { 17, aFullPortraitDrClashTex, 180, 245, 0x6EAC }, { 0 } };
-unk_80077D50 sPortraitJackLevinCompTexInfo[] = { { 17, aFullPortraitJackLevinTex, 180, 245, 0x4D32 }, { 0 } };
-unk_80077D50 sPortraitBloodFalconCompTexInfo[] = { { 17, aFullPortraitBloodFalconTex, 180, 245, 0x603A }, { 0 } };
-unk_80077D50 sPortraitLeonCompTexInfo[] = { { 17, aFullPortraitLeonTex, 180, 245, 0x60B6 }, { 0 } };
-unk_80077D50 sPortraitJamesMcCloudCompTexInfo[] = { { 17, aFullPortraitJamesMcCloudTex, 180, 245, 0x5534 }, { 0 } };
-unk_80077D50 sPortraitBlackShadowCompTexInfo[] = { { 17, aFullPortraitBlackShadowTex, 180, 245, 0x5DA7 }, { 0 } };
-unk_80077D50 sPortraitCaptainFalconAltCompTexInfo[] = { { 17, aFullPortraitCaptainFalconAltTex, 180, 245, 0x5CB2 },
-                                                        { 0 } };
-unk_80077D50 sPortraitSamuraiGorohAltCompTexInfo[] = { { 17, aFullPortraitSamuraiGorohAltTex, 180, 245, 0x6590 },
-                                                       { 0 } };
-unk_80077D50 sPortraitJodySummerAltCompTexInfo[] = { { 17, aFullPortraitJodySummerAltTex, 180, 245, 0x5022 }, { 0 } };
-unk_80077D50 sPortraitBackgroundCompTexInfo[] = { { 17, aFullPortraitBackgroundTex, 180, 245, 0x58F4 }, { 0 } };
+unk_80077D50 sPortraitDrStewartCompTexInfo[] = { { 17, aFullPortraitDrStewartTex, TEX_WIDTH(aFullPortraitDrStewartTex),
+                                                   TEX_HEIGHT(aFullPortraitDrStewartTex),
+                                                   TEX_COMPRESSED_SIZE(aFullPortraitDrStewartTex) },
+                                                 { 0 } };
+unk_80077D50 sPortraitCaptainFalconCompTexInfo[] = {
+    { 17, aFullPortraitCaptainFalconTex, TEX_WIDTH(aFullPortraitCaptainFalconTex),
+      TEX_HEIGHT(aFullPortraitCaptainFalconTex), TEX_COMPRESSED_SIZE(aFullPortraitCaptainFalconTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitJodySummerCompTexInfo[] = {
+    { 17, aFullPortraitJodySummerTex, TEX_WIDTH(aFullPortraitJodySummerTex), TEX_HEIGHT(aFullPortraitJodySummerTex),
+      TEX_COMPRESSED_SIZE(aFullPortraitJodySummerTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitSamuraiGorohCompTexInfo[] = {
+    { 17, aFullPortraitSamuraiGorohTex, TEX_WIDTH(aFullPortraitSamuraiGorohTex),
+      TEX_HEIGHT(aFullPortraitSamuraiGorohTex), TEX_COMPRESSED_SIZE(aFullPortraitSamuraiGorohTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitMightyGazelleCompTexInfo[] = {
+    { 17, aFullPortraitMightyGazelleTex, TEX_WIDTH(aFullPortraitMightyGazelleTex),
+      TEX_HEIGHT(aFullPortraitMightyGazelleTex), TEX_COMPRESSED_SIZE(aFullPortraitMightyGazelleTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitPicoCompTexInfo[] = { { 17, aFullPortraitPicoTex, TEX_WIDTH(aFullPortraitPicoTex),
+                                              TEX_HEIGHT(aFullPortraitPicoTex),
+                                              TEX_COMPRESSED_SIZE(aFullPortraitPicoTex) },
+                                            { 0 } };
+unk_80077D50 sPortraitBabaCompTexInfo[] = { { 17, aFullPortraitBabaTex, TEX_WIDTH(aFullPortraitBabaTex),
+                                              TEX_HEIGHT(aFullPortraitBabaTex),
+                                              TEX_COMPRESSED_SIZE(aFullPortraitBabaTex) },
+                                            { 0 } };
+unk_80077D50 sPortraitMrEadCompTexInfo[] = { { 17, aFullPortraitMrEadTex, TEX_WIDTH(aFullPortraitMrEadTex),
+                                               TEX_HEIGHT(aFullPortraitMrEadTex),
+                                               TEX_COMPRESSED_SIZE(aFullPortraitMrEadTex) },
+                                             { 0 } };
+unk_80077D50 sPortraitOctomanCompTexInfo[] = { { 17, aFullPortraitOctomanTex, TEX_WIDTH(aFullPortraitOctomanTex),
+                                                 TEX_HEIGHT(aFullPortraitOctomanTex),
+                                                 TEX_COMPRESSED_SIZE(aFullPortraitOctomanTex) },
+                                               { 0 } };
+unk_80077D50 sPortraitTheSkullCompTexInfo[] = { { 17, aFullPortraitTheSkullTex, TEX_WIDTH(aFullPortraitTheSkullTex),
+                                                  TEX_HEIGHT(aFullPortraitTheSkullTex),
+                                                  TEX_COMPRESSED_SIZE(aFullPortraitTheSkullTex) },
+                                                { 0 } };
+unk_80077D50 sPortraitBeastmanCompTexInfo[] = { { 17, aFullPortraitBeastmanTex, TEX_WIDTH(aFullPortraitBeastmanTex),
+                                                  TEX_HEIGHT(aFullPortraitBeastmanTex),
+                                                  TEX_COMPRESSED_SIZE(aFullPortraitBeastmanTex) },
+                                                { 0 } };
+unk_80077D50 sPortraitAntonioGusterCompTexInfo[] = {
+    { 17, aFullPortraitAntonioGusterTex, TEX_WIDTH(aFullPortraitAntonioGusterTex),
+      TEX_HEIGHT(aFullPortraitAntonioGusterTex), TEX_COMPRESSED_SIZE(aFullPortraitAntonioGusterTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitDraqCompTexInfo[] = { { 17, aFullPortraitDraqTex, TEX_WIDTH(aFullPortraitDraqTex),
+                                              TEX_HEIGHT(aFullPortraitDraqTex),
+                                              TEX_COMPRESSED_SIZE(aFullPortraitDraqTex) },
+                                            { 0 } };
+unk_80077D50 sPortraitRogerBusterCompTexInfo[] = {
+    { 17, aFullPortraitRogerBusterTex, TEX_WIDTH(aFullPortraitRogerBusterTex), TEX_HEIGHT(aFullPortraitRogerBusterTex),
+      TEX_COMPRESSED_SIZE(aFullPortraitRogerBusterTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitSilverNeelsenCompTexInfo[] = {
+    { 17, aFullPortraitSilverNeelsenTex, TEX_WIDTH(aFullPortraitSilverNeelsenTex),
+      TEX_HEIGHT(aFullPortraitSilverNeelsenTex), TEX_COMPRESSED_SIZE(aFullPortraitSilverNeelsenTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitSuperArrowCompTexInfo[] = {
+    { 17, aFullPortraitSuperArrowTex, TEX_WIDTH(aFullPortraitSuperArrowTex), TEX_HEIGHT(aFullPortraitSuperArrowTex),
+      TEX_COMPRESSED_SIZE(aFullPortraitSuperArrowTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitMrsArrowCompTexInfo[] = { { 17, aFullPortraitMrsArrowTex, TEX_WIDTH(aFullPortraitMrsArrowTex),
+                                                  TEX_HEIGHT(aFullPortraitMrsArrowTex),
+                                                  TEX_COMPRESSED_SIZE(aFullPortraitMrsArrowTex) },
+                                                { 0 } };
+unk_80077D50 sPortraitZodaCompTexInfo[] = { { 17, aFullPortraitZodaTex, TEX_WIDTH(aFullPortraitZodaTex),
+                                              TEX_HEIGHT(aFullPortraitZodaTex),
+                                              TEX_COMPRESSED_SIZE(aFullPortraitZodaTex) },
+                                            { 0 } };
+unk_80077D50 sPortraitJohnTanakaCompTexInfo[] = {
+    { 17, aFullPortraitJohnTanakaTex, TEX_WIDTH(aFullPortraitJohnTanakaTex), TEX_HEIGHT(aFullPortraitJohnTanakaTex),
+      TEX_COMPRESSED_SIZE(aFullPortraitJohnTanakaTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitBioRexCompTexInfo[] = { { 17, aFullPortraitBioRexTex, TEX_WIDTH(aFullPortraitBioRexTex),
+                                                TEX_HEIGHT(aFullPortraitBioRexTex),
+                                                TEX_COMPRESSED_SIZE(aFullPortraitBioRexTex) },
+                                              { 0 } };
+unk_80077D50 sPortraitKateAlenCompTexInfo[] = { { 17, aFullPortraitKateAlenTex, TEX_WIDTH(aFullPortraitKateAlenTex),
+                                                  TEX_HEIGHT(aFullPortraitKateAlenTex),
+                                                  TEX_COMPRESSED_SIZE(aFullPortraitKateAlenTex) },
+                                                { 0 } };
+unk_80077D50 sPortraitGomarAndShiohCompTexInfo[] = {
+    { 17, aFullPortraitGomarAndShiohTex, TEX_WIDTH(aFullPortraitGomarAndShiohTex),
+      TEX_HEIGHT(aFullPortraitGomarAndShiohTex), TEX_COMPRESSED_SIZE(aFullPortraitGomarAndShiohTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitMichaelChainCompTexInfo[] = {
+    { 17, aFullPortraitMichaelChainTex, TEX_WIDTH(aFullPortraitMichaelChainTex),
+      TEX_HEIGHT(aFullPortraitMichaelChainTex), TEX_COMPRESSED_SIZE(aFullPortraitMichaelChainTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitBillyCompTexInfo[] = { { 17, aFullPortraitBillyTex, TEX_WIDTH(aFullPortraitBillyTex),
+                                               TEX_HEIGHT(aFullPortraitBillyTex),
+                                               TEX_COMPRESSED_SIZE(aFullPortraitBillyTex) },
+                                             { 0 } };
+unk_80077D50 sPortraitDrClashCompTexInfo[] = { { 17, aFullPortraitDrClashTex, TEX_WIDTH(aFullPortraitDrClashTex),
+                                                 TEX_HEIGHT(aFullPortraitDrClashTex),
+                                                 TEX_COMPRESSED_SIZE(aFullPortraitDrClashTex) },
+                                               { 0 } };
+unk_80077D50 sPortraitJackLevinCompTexInfo[] = { { 17, aFullPortraitJackLevinTex, TEX_WIDTH(aFullPortraitJackLevinTex),
+                                                   TEX_HEIGHT(aFullPortraitJackLevinTex),
+                                                   TEX_COMPRESSED_SIZE(aFullPortraitJackLevinTex) },
+                                                 { 0 } };
+unk_80077D50 sPortraitBloodFalconCompTexInfo[] = {
+    { 17, aFullPortraitBloodFalconTex, TEX_WIDTH(aFullPortraitBloodFalconTex), TEX_HEIGHT(aFullPortraitBloodFalconTex),
+      TEX_COMPRESSED_SIZE(aFullPortraitBloodFalconTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitLeonCompTexInfo[] = { { 17, aFullPortraitLeonTex, TEX_WIDTH(aFullPortraitLeonTex),
+                                              TEX_HEIGHT(aFullPortraitLeonTex),
+                                              TEX_COMPRESSED_SIZE(aFullPortraitLeonTex) },
+                                            { 0 } };
+unk_80077D50 sPortraitJamesMcCloudCompTexInfo[] = {
+    { 17, aFullPortraitJamesMcCloudTex, TEX_WIDTH(aFullPortraitJamesMcCloudTex),
+      TEX_HEIGHT(aFullPortraitJamesMcCloudTex), TEX_COMPRESSED_SIZE(aFullPortraitJamesMcCloudTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitBlackShadowCompTexInfo[] = {
+    { 17, aFullPortraitBlackShadowTex, TEX_WIDTH(aFullPortraitBlackShadowTex), TEX_HEIGHT(aFullPortraitBlackShadowTex),
+      TEX_COMPRESSED_SIZE(aFullPortraitBlackShadowTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitCaptainFalconAltCompTexInfo[] = {
+    { 17, aFullPortraitCaptainFalconAltTex, TEX_WIDTH(aFullPortraitCaptainFalconAltTex),
+      TEX_HEIGHT(aFullPortraitCaptainFalconAltTex), TEX_COMPRESSED_SIZE(aFullPortraitCaptainFalconAltTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitSamuraiGorohAltCompTexInfo[] = {
+    { 17, aFullPortraitSamuraiGorohAltTex, TEX_WIDTH(aFullPortraitSamuraiGorohAltTex),
+      TEX_HEIGHT(aFullPortraitSamuraiGorohAltTex), TEX_COMPRESSED_SIZE(aFullPortraitSamuraiGorohAltTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitJodySummerAltCompTexInfo[] = {
+    { 17, aFullPortraitJodySummerAltTex, TEX_WIDTH(aFullPortraitJodySummerAltTex),
+      TEX_HEIGHT(aFullPortraitJodySummerAltTex), TEX_COMPRESSED_SIZE(aFullPortraitJodySummerAltTex) },
+    { 0 }
+};
+unk_80077D50 sPortraitBackgroundCompTexInfo[] = {
+    { 17, aFullPortraitBackgroundTex, TEX_WIDTH(aFullPortraitBackgroundTex), TEX_HEIGHT(aFullPortraitBackgroundTex),
+      TEX_COMPRESSED_SIZE(aFullPortraitBackgroundTex) },
+    { 0 }
+};
 
 unk_80077D50* sPortraitCompTexInfos[] = {
     sPortraitCaptainFalconCompTexInfo,    // CAPTAIN_FALCON
@@ -130,47 +248,161 @@ unk_800792D8* D_i4_8011C05C[] = {
     D_i4_8011BEDC, D_i4_8011BFEC, D_i4_8011C02C, D_i4_8011C02C, D_i4_8011C02C, D_i4_8011C03C, D_i4_8011C04C,
 };
 
-unk_80077D50 sSmallPortraitDrStewartCompTexInfo[] = { { 17, aSmallPortraitDrStewartTex, 40, 40, 0x77F }, { 0 } };
-unk_80077D50 sSmallPortraitCaptainFalconCompTexInfo[] = { { 17, aSmallPortraitCaptainFalconTex, 40, 40, 0x8AF },
-                                                          { 0 } };
-unk_80077D50 sSmallPortraitJodySummerCompTexInfo[] = { { 17, aSmallPortraitJodySummerTex, 40, 40, 0x875 }, { 0 } };
-unk_80077D50 sSmallPortraitSamuraiGorohCompTexInfo[] = { { 17, aSmallPortraitSamuraiGorohTex, 40, 40, 0x935 }, { 0 } };
-unk_80077D50 sSmallPortraitMightyGazelleCompTexInfo[] = { { 17, aSmallPortraitMightyGazelleTex, 40, 40, 0x8EB },
-                                                          { 0 } };
-unk_80077D50 sSmallPortraitPicoCompTexInfo[] = { { 17, aSmallPortraitPicoTex, 40, 40, 0x908 }, { 0 } };
-unk_80077D50 sSmallPortraitBabaCompTexInfo[] = { { 17, aSmallPortraitBabaTex, 40, 40, 0x919 }, { 0 } };
-unk_80077D50 sSmallPortraitMrEadCompTexInfo[] = { { 17, aSmallPortraitMrEadTex, 40, 40, 0x989 }, { 0 } };
-unk_80077D50 sSmallPortraitOctomanCompTexInfo[] = { { 17, aSmallPortraitOctomanTex, 40, 40, 0x82D }, { 0 } };
-unk_80077D50 sSmallPortraitTheSkullCompTexInfo[] = { { 17, aSmallPortraitTheSkullTex, 40, 40, 0x8F8 }, { 0 } };
-unk_80077D50 sSmallPortraitBeastmanCompTexInfo[] = { { 17, aSmallPortraitBeastmanTex, 40, 40, 0x908 }, { 0 } };
-unk_80077D50 sSmallPortraitAntonioGusterCompTexInfo[] = { { 17, aSmallPortraitAntonioGusterTex, 40, 40, 0x8EE },
-                                                          { 0 } };
-unk_80077D50 sSmallPortraitDraqCompTexInfo[] = { { 17, aSmallPortraitDraqTex, 40, 40, 0x9AD }, { 0 } };
-unk_80077D50 sSmallPortraitRogerBusterCompTexInfo[] = { { 17, aSmallPortraitRogerBusterTex, 40, 40, 0x923 }, { 0 } };
-unk_80077D50 sSmallPortraitSilverNeelsenCompTexInfo[] = { { 17, aSmallPortraitSilverNeelsenTex, 40, 40, 0x93A },
-                                                          { 0 } };
-unk_80077D50 sSmallPortraitSuperArrowCompTexInfo[] = { { 17, aSmallPortraitSuperArrowTex, 40, 40, 0x97F }, { 0 } };
-unk_80077D50 sSmallPortraitMrsArrowCompTexInfo[] = { { 17, aSmallPortraitMrsArrowTex, 40, 40, 0xA3D }, { 0 } };
-unk_80077D50 sSmallPortraitZodaCompTexInfo[] = { { 17, aSmallPortraitZodaTex, 40, 40, 0x8AB }, { 0 } };
-unk_80077D50 sSmallPortraitJohnTanakaCompTexInfo[] = { { 17, aSmallPortraitJohnTanakaTex, 40, 40, 0x8A0 }, { 0 } };
-unk_80077D50 sSmallPortraitBioRexCompTexInfo[] = { { 17, aSmallPortraitBioRexTex, 40, 40, 0x89B }, { 0 } };
-unk_80077D50 sSmallPortraitKateAlenCompTexInfo[] = { { 17, aSmallPortraitKateAlenTex, 40, 40, 0x6D1 }, { 0 } };
-unk_80077D50 sSmallPortraitGomarAndShiohCompTexInfo[] = { { 17, aSmallPortraitGomarAndShiohTex, 40, 40, 0x958 },
-                                                          { 0 } };
-unk_80077D50 sSmallPortraitMichaelChainCompTexInfo[] = { { 17, aSmallPortraitMichaelChainTex, 40, 40, 0x8D8 }, { 0 } };
-unk_80077D50 sSmallPortraitBillyCompTexInfo[] = { { 17, aSmallPortraitBillyTex, 40, 40, 0x8E8 }, { 0 } };
-unk_80077D50 sSmallPortraitDrClashCompTexInfo[] = { { 17, aSmallPortraitDrClashTex, 40, 40, 0xA0A }, { 0 } };
-unk_80077D50 sSmallPortraitJackLevinCompTexInfo[] = { { 17, aSmallPortraitJackLevinTex, 40, 40, 0x797 }, { 0 } };
-unk_80077D50 sSmallPortraitBloodFalconCompTexInfo[] = { { 17, aSmallPortraitBloodFalconTex, 40, 40, 0x896 }, { 0 } };
-unk_80077D50 sSmallPortraitLeonCompTexInfo[] = { { 17, aSmallPortraitLeonTex, 40, 40, 0x8BC }, { 0 } };
-unk_80077D50 sSmallPortraitJamesMcCloudCompTexInfo[] = { { 17, aSmallPortraitJamesMcCloudTex, 40, 40, 0x879 }, { 0 } };
-unk_80077D50 sSmallPortraitBlackShadowCompTexInfo[] = { { 17, aSmallPortraitBlackShadowTex, 40, 40, 0x7AB }, { 0 } };
-unk_80077D50 sSmallPortraitCaptainFalconAltCompTexInfo[] = { { 17, aSmallPortraitCaptainFalconAltTex, 40, 40, 0x859 },
-                                                             { 0 } };
-unk_80077D50 sSmallPortraitSamuraiGorohAltCompTexInfo[] = { { 17, aSmallPortraitSamuraiGorohAltTex, 40, 40, 0x813 },
-                                                            { 0 } };
-unk_80077D50 sSmallPortraitJodySummerAltCompTexInfo[] = { { 17, aSmallPortraitJodySummerAltTex, 40, 40, 0x859 },
-                                                          { 0 } };
+unk_80077D50 sSmallPortraitDrStewartCompTexInfo[] = {
+    { 17, aSmallPortraitDrStewartTex, TEX_WIDTH(aSmallPortraitDrStewartTex), TEX_HEIGHT(aSmallPortraitDrStewartTex),
+      TEX_COMPRESSED_SIZE(aSmallPortraitDrStewartTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitCaptainFalconCompTexInfo[] = {
+    { 17, aSmallPortraitCaptainFalconTex, TEX_WIDTH(aSmallPortraitCaptainFalconTex),
+      TEX_HEIGHT(aSmallPortraitCaptainFalconTex), TEX_COMPRESSED_SIZE(aSmallPortraitCaptainFalconTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitJodySummerCompTexInfo[] = {
+    { 17, aSmallPortraitJodySummerTex, TEX_WIDTH(aSmallPortraitJodySummerTex), TEX_HEIGHT(aSmallPortraitJodySummerTex),
+      TEX_COMPRESSED_SIZE(aSmallPortraitJodySummerTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitSamuraiGorohCompTexInfo[] = {
+    { 17, aSmallPortraitSamuraiGorohTex, TEX_WIDTH(aSmallPortraitSamuraiGorohTex),
+      TEX_HEIGHT(aSmallPortraitSamuraiGorohTex), TEX_COMPRESSED_SIZE(aSmallPortraitSamuraiGorohTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitMightyGazelleCompTexInfo[] = {
+    { 17, aSmallPortraitMightyGazelleTex, TEX_WIDTH(aSmallPortraitMightyGazelleTex),
+      TEX_HEIGHT(aSmallPortraitMightyGazelleTex), TEX_COMPRESSED_SIZE(aSmallPortraitMightyGazelleTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitPicoCompTexInfo[] = { { 17, aSmallPortraitPicoTex, TEX_WIDTH(aSmallPortraitPicoTex),
+                                                   TEX_HEIGHT(aSmallPortraitPicoTex),
+                                                   TEX_COMPRESSED_SIZE(aSmallPortraitPicoTex) },
+                                                 { 0 } };
+unk_80077D50 sSmallPortraitBabaCompTexInfo[] = { { 17, aSmallPortraitBabaTex, TEX_WIDTH(aSmallPortraitBabaTex),
+                                                   TEX_HEIGHT(aSmallPortraitBabaTex),
+                                                   TEX_COMPRESSED_SIZE(aSmallPortraitBabaTex) },
+                                                 { 0 } };
+unk_80077D50 sSmallPortraitMrEadCompTexInfo[] = { { 17, aSmallPortraitMrEadTex, TEX_WIDTH(aSmallPortraitMrEadTex),
+                                                    TEX_HEIGHT(aSmallPortraitMrEadTex),
+                                                    TEX_COMPRESSED_SIZE(aSmallPortraitMrEadTex) },
+                                                  { 0 } };
+unk_80077D50 sSmallPortraitOctomanCompTexInfo[] = { { 17, aSmallPortraitOctomanTex, TEX_WIDTH(aSmallPortraitOctomanTex),
+                                                      TEX_HEIGHT(aSmallPortraitOctomanTex),
+                                                      TEX_COMPRESSED_SIZE(aSmallPortraitOctomanTex) },
+                                                    { 0 } };
+unk_80077D50 sSmallPortraitTheSkullCompTexInfo[] = {
+    { 17, aSmallPortraitTheSkullTex, TEX_WIDTH(aSmallPortraitTheSkullTex), TEX_HEIGHT(aSmallPortraitTheSkullTex),
+      TEX_COMPRESSED_SIZE(aSmallPortraitTheSkullTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitBeastmanCompTexInfo[] = {
+    { 17, aSmallPortraitBeastmanTex, TEX_WIDTH(aSmallPortraitBeastmanTex), TEX_HEIGHT(aSmallPortraitBeastmanTex),
+      TEX_COMPRESSED_SIZE(aSmallPortraitBeastmanTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitAntonioGusterCompTexInfo[] = {
+    { 17, aSmallPortraitAntonioGusterTex, TEX_WIDTH(aSmallPortraitAntonioGusterTex),
+      TEX_HEIGHT(aSmallPortraitAntonioGusterTex), TEX_COMPRESSED_SIZE(aSmallPortraitAntonioGusterTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitDraqCompTexInfo[] = { { 17, aSmallPortraitDraqTex, TEX_WIDTH(aSmallPortraitDraqTex),
+                                                   TEX_HEIGHT(aSmallPortraitDraqTex),
+                                                   TEX_COMPRESSED_SIZE(aSmallPortraitDraqTex) },
+                                                 { 0 } };
+unk_80077D50 sSmallPortraitRogerBusterCompTexInfo[] = {
+    { 17, aSmallPortraitRogerBusterTex, TEX_WIDTH(aSmallPortraitRogerBusterTex),
+      TEX_HEIGHT(aSmallPortraitRogerBusterTex), TEX_COMPRESSED_SIZE(aSmallPortraitRogerBusterTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitSilverNeelsenCompTexInfo[] = {
+    { 17, aSmallPortraitSilverNeelsenTex, TEX_WIDTH(aSmallPortraitSilverNeelsenTex),
+      TEX_HEIGHT(aSmallPortraitSilverNeelsenTex), TEX_COMPRESSED_SIZE(aSmallPortraitSilverNeelsenTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitSuperArrowCompTexInfo[] = {
+    { 17, aSmallPortraitSuperArrowTex, TEX_WIDTH(aSmallPortraitSuperArrowTex), TEX_HEIGHT(aSmallPortraitSuperArrowTex),
+      TEX_COMPRESSED_SIZE(aSmallPortraitSuperArrowTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitMrsArrowCompTexInfo[] = {
+    { 17, aSmallPortraitMrsArrowTex, TEX_WIDTH(aSmallPortraitMrsArrowTex), TEX_HEIGHT(aSmallPortraitMrsArrowTex),
+      TEX_COMPRESSED_SIZE(aSmallPortraitMrsArrowTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitZodaCompTexInfo[] = { { 17, aSmallPortraitZodaTex, TEX_WIDTH(aSmallPortraitZodaTex),
+                                                   TEX_HEIGHT(aSmallPortraitZodaTex),
+                                                   TEX_COMPRESSED_SIZE(aSmallPortraitZodaTex) },
+                                                 { 0 } };
+unk_80077D50 sSmallPortraitJohnTanakaCompTexInfo[] = {
+    { 17, aSmallPortraitJohnTanakaTex, TEX_WIDTH(aSmallPortraitJohnTanakaTex), TEX_HEIGHT(aSmallPortraitJohnTanakaTex),
+      TEX_COMPRESSED_SIZE(aSmallPortraitJohnTanakaTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitBioRexCompTexInfo[] = { { 17, aSmallPortraitBioRexTex, TEX_WIDTH(aSmallPortraitBioRexTex),
+                                                     TEX_HEIGHT(aSmallPortraitBioRexTex),
+                                                     TEX_COMPRESSED_SIZE(aSmallPortraitBioRexTex) },
+                                                   { 0 } };
+unk_80077D50 sSmallPortraitKateAlenCompTexInfo[] = {
+    { 17, aSmallPortraitKateAlenTex, TEX_WIDTH(aSmallPortraitKateAlenTex), TEX_HEIGHT(aSmallPortraitKateAlenTex),
+      TEX_COMPRESSED_SIZE(aSmallPortraitKateAlenTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitGomarAndShiohCompTexInfo[] = {
+    { 17, aSmallPortraitGomarAndShiohTex, TEX_WIDTH(aSmallPortraitGomarAndShiohTex),
+      TEX_HEIGHT(aSmallPortraitGomarAndShiohTex), TEX_COMPRESSED_SIZE(aSmallPortraitGomarAndShiohTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitMichaelChainCompTexInfo[] = {
+    { 17, aSmallPortraitMichaelChainTex, TEX_WIDTH(aSmallPortraitMichaelChainTex),
+      TEX_HEIGHT(aSmallPortraitMichaelChainTex), TEX_COMPRESSED_SIZE(aSmallPortraitMichaelChainTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitBillyCompTexInfo[] = { { 17, aSmallPortraitBillyTex, TEX_WIDTH(aSmallPortraitBillyTex),
+                                                    TEX_HEIGHT(aSmallPortraitBillyTex),
+                                                    TEX_COMPRESSED_SIZE(aSmallPortraitBillyTex) },
+                                                  { 0 } };
+unk_80077D50 sSmallPortraitDrClashCompTexInfo[] = { { 17, aSmallPortraitDrClashTex, TEX_WIDTH(aSmallPortraitDrClashTex),
+                                                      TEX_HEIGHT(aSmallPortraitDrClashTex),
+                                                      TEX_COMPRESSED_SIZE(aSmallPortraitDrClashTex) },
+                                                    { 0 } };
+unk_80077D50 sSmallPortraitJackLevinCompTexInfo[] = {
+    { 17, aSmallPortraitJackLevinTex, TEX_WIDTH(aSmallPortraitJackLevinTex), TEX_HEIGHT(aSmallPortraitJackLevinTex),
+      TEX_COMPRESSED_SIZE(aSmallPortraitJackLevinTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitBloodFalconCompTexInfo[] = {
+    { 17, aSmallPortraitBloodFalconTex, TEX_WIDTH(aSmallPortraitBloodFalconTex),
+      TEX_HEIGHT(aSmallPortraitBloodFalconTex), TEX_COMPRESSED_SIZE(aSmallPortraitBloodFalconTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitLeonCompTexInfo[] = { { 17, aSmallPortraitLeonTex, TEX_WIDTH(aSmallPortraitLeonTex),
+                                                   TEX_HEIGHT(aSmallPortraitLeonTex),
+                                                   TEX_COMPRESSED_SIZE(aSmallPortraitLeonTex) },
+                                                 { 0 } };
+unk_80077D50 sSmallPortraitJamesMcCloudCompTexInfo[] = {
+    { 17, aSmallPortraitJamesMcCloudTex, TEX_WIDTH(aSmallPortraitJamesMcCloudTex),
+      TEX_HEIGHT(aSmallPortraitJamesMcCloudTex), TEX_COMPRESSED_SIZE(aSmallPortraitJamesMcCloudTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitBlackShadowCompTexInfo[] = {
+    { 17, aSmallPortraitBlackShadowTex, TEX_WIDTH(aSmallPortraitBlackShadowTex),
+      TEX_HEIGHT(aSmallPortraitBlackShadowTex), TEX_COMPRESSED_SIZE(aSmallPortraitBlackShadowTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitCaptainFalconAltCompTexInfo[] = {
+    { 17, aSmallPortraitCaptainFalconAltTex, TEX_WIDTH(aSmallPortraitCaptainFalconAltTex),
+      TEX_HEIGHT(aSmallPortraitCaptainFalconAltTex), TEX_COMPRESSED_SIZE(aSmallPortraitCaptainFalconAltTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitSamuraiGorohAltCompTexInfo[] = {
+    { 17, aSmallPortraitSamuraiGorohAltTex, TEX_WIDTH(aSmallPortraitSamuraiGorohAltTex),
+      TEX_HEIGHT(aSmallPortraitSamuraiGorohAltTex), TEX_COMPRESSED_SIZE(aSmallPortraitSamuraiGorohAltTex) },
+    { 0 }
+};
+unk_80077D50 sSmallPortraitJodySummerAltCompTexInfo[] = {
+    { 17, aSmallPortraitJodySummerAltTex, TEX_WIDTH(aSmallPortraitJodySummerAltTex),
+      TEX_HEIGHT(aSmallPortraitJodySummerAltTex), TEX_COMPRESSED_SIZE(aSmallPortraitJodySummerAltTex) },
+    { 0 }
+};
 
 unk_80077D50* sSmallPortraitCompTexInfos[] = {
     sSmallPortraitCaptainFalconCompTexInfo,    // CAPTAIN_FALCON
@@ -253,36 +485,124 @@ unk_800792D8* D_i4_8011C7A4[] = {
     D_i4_8011C774, D_i4_8011C774, D_i4_8011C774, D_i4_8011C784, D_i4_8011C794, D_i4_8011C774,
 };
 
-unk_80077D50 sNameCardCaptainFalconCompTexInfo[] = { { 18, aNameCardCaptainFalconTex, 80, 40, 0x6B4 }, { 0 } };
-unk_80077D50 sNameCardDrStewartCompTexInfo[] = { { 18, aNameCardDrStewartTex, 80, 40, 0x653 }, { 0 } };
-unk_80077D50 sNameCardPicoCompTexInfo[] = { { 18, aNameCardPicoTex, 80, 40, 0x4BD }, { 0 } };
-unk_80077D50 sNameCardSamuraiGorohCompTexInfo[] = { { 18, aNameCardSamuraiGorohTex, 80, 40, 0x770 }, { 0 } };
-unk_80077D50 sNameCardJodySummerCompTexInfo[] = { { 18, aNameCardJodySummerTex, 80, 40, 0x5F4 }, { 0 } };
-unk_80077D50 sNameCardMrEadCompTexInfo[] = { { 18, aNameCardMrEadTex, 80, 40, 0x505 }, { 0 } };
-unk_80077D50 sNameCardBabaCompTexInfo[] = { { 18, aNameCardBabaTex, 80, 40, 0x59A }, { 0 } };
-unk_80077D50 sNameCardOctomanCompTexInfo[] = { { 18, aNameCardOctomanTex, 80, 40, 0x54E }, { 0 } };
-unk_80077D50 sNameCardGomarAndShiohCompTexInfo[] = { { 18, aNameCardGomarAndShiohTex, 80, 40, 0x639 }, { 0 } };
-unk_80077D50 sNameCardKateAlenCompTexInfo[] = { { 18, aNameCardKateAlenTex, 80, 40, 0x651 }, { 0 } };
-unk_80077D50 sNameCardRogerBusterCompTexInfo[] = { { 18, aNameCardRogerBusterTex, 80, 40, 0x5E1 }, { 0 } };
-unk_80077D50 sNameCardJamesMcCloudCompTexInfo[] = { { 18, aNameCardJamesMcCloudTex, 80, 40, 0x5A4 }, { 0 } };
-unk_80077D50 sNameCardLeonCompTexInfo[] = { { 18, aNameCardLeonTex, 80, 40, 0x5E4 }, { 0 } };
-unk_80077D50 sNameCardAntonioGusterCompTexInfo[] = { { 18, aNameCardAntonioGusterTex, 80, 40, 0x5FA }, { 0 } };
-unk_80077D50 sNameCardBlackShadowCompTexInfo[] = { { 18, aNameCardBlackShadowTex, 80, 40, 0x734 }, { 0 } };
-unk_80077D50 sNameCardMichaelChainCompTexInfo[] = { { 18, aNameCardMichaelChainTex, 80, 40, 0x626 }, { 0 } };
-unk_80077D50 sNameCardJackLevinCompTexInfo[] = { { 18, aNameCardJackLevinTex, 80, 40, 0x5E7 }, { 0 } };
-unk_80077D50 sNameCardSuperArrowCompTexInfo[] = { { 18, aNameCardSuperArrowTex, 80, 40, 0x64D }, { 0 } };
-unk_80077D50 sNameCardMrsArrowCompTexInfo[] = { { 18, aNameCardMrsArrowTex, 80, 40, 0x5FF }, { 0 } };
-unk_80077D50 sNameCardJohnTanakaCompTexInfo[] = { { 18, aNameCardJohnTanakaTex, 80, 40, 0x54E }, { 0 } };
-unk_80077D50 sNameCardBeastmanCompTexInfo[] = { { 18, aNameCardBeastmanTex, 80, 40, 0x6C2 }, { 0 } };
-unk_80077D50 sNameCardZodaCompTexInfo[] = { { 18, aNameCardZodaTex, 80, 40, 0x4CB }, { 0 } };
-unk_80077D50 sNameCardDrClashCompTexInfo[] = { { 18, aNameCardDrClashTex, 80, 40, 0x5ED }, { 0 } };
-unk_80077D50 sNameCardSilverNeelsenCompTexInfo[] = { { 18, aNameCardSilverNeelsenTex, 80, 40, 0x7A4 }, { 0 } };
-unk_80077D50 sNameCardBioRexCompTexInfo[] = { { 18, aNameCardBioRexTex, 80, 40, 0x4E6 }, { 0 } };
-unk_80077D50 sNameCardDraqCompTexInfo[] = { { 18, aNameCardDraqTex, 80, 40, 0x465 }, { 0 } };
-unk_80077D50 sNameCardBillyCompTexInfo[] = { { 18, aNameCardBillyTex, 80, 40, 0x50A }, { 0 } };
-unk_80077D50 sNameCardBloodFalconCompTexInfo[] = { { 18, aNameCardBloodFalconTex, 80, 40, 0x6BF }, { 0 } };
-unk_80077D50 sNameCardMightyGazelleCompTexInfo[] = { { 18, aNameCardMightyGazelleTex, 80, 40, 0x468 }, { 0 } };
-unk_80077D50 sNameCardTheSkullCompTexInfo[] = { { 18, aNameCardTheSkullTex, 80, 40, 0x454 }, { 0 } };
+unk_80077D50 sNameCardCaptainFalconCompTexInfo[] = {
+    { 18, aNameCardCaptainFalconTex, TEX_WIDTH(aNameCardCaptainFalconTex), TEX_HEIGHT(aNameCardCaptainFalconTex),
+      TEX_COMPRESSED_SIZE(aNameCardCaptainFalconTex) },
+    { 0 }
+};
+unk_80077D50 sNameCardDrStewartCompTexInfo[] = { { 18, aNameCardDrStewartTex, TEX_WIDTH(aNameCardDrStewartTex),
+                                                   TEX_HEIGHT(aNameCardDrStewartTex),
+                                                   TEX_COMPRESSED_SIZE(aNameCardDrStewartTex) },
+                                                 { 0 } };
+unk_80077D50 sNameCardPicoCompTexInfo[] = { { 18, aNameCardPicoTex, TEX_WIDTH(aNameCardPicoTex),
+                                              TEX_HEIGHT(aNameCardPicoTex), TEX_COMPRESSED_SIZE(aNameCardPicoTex) },
+                                            { 0 } };
+unk_80077D50 sNameCardSamuraiGorohCompTexInfo[] = { { 18, aNameCardSamuraiGorohTex, TEX_WIDTH(aNameCardSamuraiGorohTex),
+                                                      TEX_HEIGHT(aNameCardSamuraiGorohTex),
+                                                      TEX_COMPRESSED_SIZE(aNameCardSamuraiGorohTex) },
+                                                    { 0 } };
+unk_80077D50 sNameCardJodySummerCompTexInfo[] = { { 18, aNameCardJodySummerTex, TEX_WIDTH(aNameCardJodySummerTex),
+                                                    TEX_HEIGHT(aNameCardJodySummerTex),
+                                                    TEX_COMPRESSED_SIZE(aNameCardJodySummerTex) },
+                                                  { 0 } };
+unk_80077D50 sNameCardMrEadCompTexInfo[] = { { 18, aNameCardMrEadTex, TEX_WIDTH(aNameCardMrEadTex),
+                                               TEX_HEIGHT(aNameCardMrEadTex), TEX_COMPRESSED_SIZE(aNameCardMrEadTex) },
+                                             { 0 } };
+unk_80077D50 sNameCardBabaCompTexInfo[] = { { 18, aNameCardBabaTex, TEX_WIDTH(aNameCardBabaTex),
+                                              TEX_HEIGHT(aNameCardBabaTex), TEX_COMPRESSED_SIZE(aNameCardBabaTex) },
+                                            { 0 } };
+unk_80077D50 sNameCardOctomanCompTexInfo[] = { { 18, aNameCardOctomanTex, TEX_WIDTH(aNameCardOctomanTex),
+                                                 TEX_HEIGHT(aNameCardOctomanTex),
+                                                 TEX_COMPRESSED_SIZE(aNameCardOctomanTex) },
+                                               { 0 } };
+unk_80077D50 sNameCardGomarAndShiohCompTexInfo[] = {
+    { 18, aNameCardGomarAndShiohTex, TEX_WIDTH(aNameCardGomarAndShiohTex), TEX_HEIGHT(aNameCardGomarAndShiohTex),
+      TEX_COMPRESSED_SIZE(aNameCardGomarAndShiohTex) },
+    { 0 }
+};
+unk_80077D50 sNameCardKateAlenCompTexInfo[] = { { 18, aNameCardKateAlenTex, TEX_WIDTH(aNameCardKateAlenTex),
+                                                  TEX_HEIGHT(aNameCardKateAlenTex),
+                                                  TEX_COMPRESSED_SIZE(aNameCardKateAlenTex) },
+                                                { 0 } };
+unk_80077D50 sNameCardRogerBusterCompTexInfo[] = { { 18, aNameCardRogerBusterTex, TEX_WIDTH(aNameCardRogerBusterTex),
+                                                     TEX_HEIGHT(aNameCardRogerBusterTex),
+                                                     TEX_COMPRESSED_SIZE(aNameCardRogerBusterTex) },
+                                                   { 0 } };
+unk_80077D50 sNameCardJamesMcCloudCompTexInfo[] = { { 18, aNameCardJamesMcCloudTex, TEX_WIDTH(aNameCardJamesMcCloudTex),
+                                                      TEX_HEIGHT(aNameCardJamesMcCloudTex),
+                                                      TEX_COMPRESSED_SIZE(aNameCardJamesMcCloudTex) },
+                                                    { 0 } };
+unk_80077D50 sNameCardLeonCompTexInfo[] = { { 18, aNameCardLeonTex, TEX_WIDTH(aNameCardLeonTex),
+                                              TEX_HEIGHT(aNameCardLeonTex), TEX_COMPRESSED_SIZE(aNameCardLeonTex) },
+                                            { 0 } };
+unk_80077D50 sNameCardAntonioGusterCompTexInfo[] = {
+    { 18, aNameCardAntonioGusterTex, TEX_WIDTH(aNameCardAntonioGusterTex), TEX_HEIGHT(aNameCardAntonioGusterTex),
+      TEX_COMPRESSED_SIZE(aNameCardAntonioGusterTex) },
+    { 0 }
+};
+unk_80077D50 sNameCardBlackShadowCompTexInfo[] = { { 18, aNameCardBlackShadowTex, TEX_WIDTH(aNameCardBlackShadowTex),
+                                                     TEX_HEIGHT(aNameCardBlackShadowTex),
+                                                     TEX_COMPRESSED_SIZE(aNameCardBlackShadowTex) },
+                                                   { 0 } };
+unk_80077D50 sNameCardMichaelChainCompTexInfo[] = { { 18, aNameCardMichaelChainTex, TEX_WIDTH(aNameCardMichaelChainTex),
+                                                      TEX_HEIGHT(aNameCardMichaelChainTex),
+                                                      TEX_COMPRESSED_SIZE(aNameCardMichaelChainTex) },
+                                                    { 0 } };
+unk_80077D50 sNameCardJackLevinCompTexInfo[] = { { 18, aNameCardJackLevinTex, TEX_WIDTH(aNameCardJackLevinTex),
+                                                   TEX_HEIGHT(aNameCardJackLevinTex),
+                                                   TEX_COMPRESSED_SIZE(aNameCardJackLevinTex) },
+                                                 { 0 } };
+unk_80077D50 sNameCardSuperArrowCompTexInfo[] = { { 18, aNameCardSuperArrowTex, TEX_WIDTH(aNameCardSuperArrowTex),
+                                                    TEX_HEIGHT(aNameCardSuperArrowTex),
+                                                    TEX_COMPRESSED_SIZE(aNameCardSuperArrowTex) },
+                                                  { 0 } };
+unk_80077D50 sNameCardMrsArrowCompTexInfo[] = { { 18, aNameCardMrsArrowTex, TEX_WIDTH(aNameCardMrsArrowTex),
+                                                  TEX_HEIGHT(aNameCardMrsArrowTex),
+                                                  TEX_COMPRESSED_SIZE(aNameCardMrsArrowTex) },
+                                                { 0 } };
+unk_80077D50 sNameCardJohnTanakaCompTexInfo[] = { { 18, aNameCardJohnTanakaTex, TEX_WIDTH(aNameCardJohnTanakaTex),
+                                                    TEX_HEIGHT(aNameCardJohnTanakaTex),
+                                                    TEX_COMPRESSED_SIZE(aNameCardJohnTanakaTex) },
+                                                  { 0 } };
+unk_80077D50 sNameCardBeastmanCompTexInfo[] = { { 18, aNameCardBeastmanTex, TEX_WIDTH(aNameCardBeastmanTex),
+                                                  TEX_HEIGHT(aNameCardBeastmanTex),
+                                                  TEX_COMPRESSED_SIZE(aNameCardBeastmanTex) },
+                                                { 0 } };
+unk_80077D50 sNameCardZodaCompTexInfo[] = { { 18, aNameCardZodaTex, TEX_WIDTH(aNameCardZodaTex),
+                                              TEX_HEIGHT(aNameCardZodaTex), TEX_COMPRESSED_SIZE(aNameCardZodaTex) },
+                                            { 0 } };
+unk_80077D50 sNameCardDrClashCompTexInfo[] = { { 18, aNameCardDrClashTex, TEX_WIDTH(aNameCardDrClashTex),
+                                                 TEX_HEIGHT(aNameCardDrClashTex),
+                                                 TEX_COMPRESSED_SIZE(aNameCardDrClashTex) },
+                                               { 0 } };
+unk_80077D50 sNameCardSilverNeelsenCompTexInfo[] = {
+    { 18, aNameCardSilverNeelsenTex, TEX_WIDTH(aNameCardSilverNeelsenTex), TEX_HEIGHT(aNameCardSilverNeelsenTex),
+      TEX_COMPRESSED_SIZE(aNameCardSilverNeelsenTex) },
+    { 0 }
+};
+unk_80077D50 sNameCardBioRexCompTexInfo[] = { { 18, aNameCardBioRexTex, TEX_WIDTH(aNameCardBioRexTex),
+                                                TEX_HEIGHT(aNameCardBioRexTex),
+                                                TEX_COMPRESSED_SIZE(aNameCardBioRexTex) },
+                                              { 0 } };
+unk_80077D50 sNameCardDraqCompTexInfo[] = { { 18, aNameCardDraqTex, TEX_WIDTH(aNameCardDraqTex),
+                                              TEX_HEIGHT(aNameCardDraqTex), TEX_COMPRESSED_SIZE(aNameCardDraqTex) },
+                                            { 0 } };
+unk_80077D50 sNameCardBillyCompTexInfo[] = { { 18, aNameCardBillyTex, TEX_WIDTH(aNameCardBillyTex),
+                                               TEX_HEIGHT(aNameCardBillyTex), TEX_COMPRESSED_SIZE(aNameCardBillyTex) },
+                                             { 0 } };
+unk_80077D50 sNameCardBloodFalconCompTexInfo[] = { { 18, aNameCardBloodFalconTex, TEX_WIDTH(aNameCardBloodFalconTex),
+                                                     TEX_HEIGHT(aNameCardBloodFalconTex),
+                                                     TEX_COMPRESSED_SIZE(aNameCardBloodFalconTex) },
+                                                   { 0 } };
+unk_80077D50 sNameCardMightyGazelleCompTexInfo[] = {
+    { 18, aNameCardMightyGazelleTex, TEX_WIDTH(aNameCardMightyGazelleTex), TEX_HEIGHT(aNameCardMightyGazelleTex),
+      TEX_COMPRESSED_SIZE(aNameCardMightyGazelleTex) },
+    { 0 }
+};
+unk_80077D50 sNameCardTheSkullCompTexInfo[] = { { 18, aNameCardTheSkullTex, TEX_WIDTH(aNameCardTheSkullTex),
+                                                  TEX_HEIGHT(aNameCardTheSkullTex),
+                                                  TEX_COMPRESSED_SIZE(aNameCardTheSkullTex) },
+                                                { 0 } };
 
 unk_80077D50* sNameCardCompTexInfos[] = {
     sNameCardCaptainFalconCompTexInfo, // CAPTAIN_FALCON
@@ -357,11 +677,21 @@ unk_800792D8* D_i4_8011CE50[] = {
     D_i4_8011CE30, D_i4_8011CE40, D_i4_8011CC70,
 };
 
-unk_80077D50 sSelectMachineCompTexInfo[] = { { 4, aSelectMachineTex, 160, 24, 0 }, { 0 } };
-unk_80077D50 s1PIconCompTexInfo[] = { { 17, a1PIconTex, 40, 40, 0x19E }, { 0 } };
-unk_80077D50 s2PIconCompTexInfo[] = { { 17, a2PIconTex, 40, 40, 0x19C }, { 0 } };
-unk_80077D50 s3PIconCompTexInfo[] = { { 17, a3PIconTex, 40, 40, 0x19A }, { 0 } };
-unk_80077D50 s4PIconCompTexInfo[] = { { 17, a4PIconTex, 40, 40, 0x19A }, { 0 } };
+unk_80077D50 sSelectMachineCompTexInfo[] = {
+    { 4, aSelectMachineTex, TEX_WIDTH(aSelectMachineTex), TEX_HEIGHT(aSelectMachineTex), 0 }, { 0 }
+};
+unk_80077D50 s1PIconCompTexInfo[] = {
+    { 17, a1PIconTex, TEX_WIDTH(a1PIconTex), TEX_HEIGHT(a1PIconTex), TEX_COMPRESSED_SIZE(a1PIconTex) }, { 0 }
+};
+unk_80077D50 s2PIconCompTexInfo[] = {
+    { 17, a2PIconTex, TEX_WIDTH(a2PIconTex), TEX_HEIGHT(a2PIconTex), TEX_COMPRESSED_SIZE(a2PIconTex) }, { 0 }
+};
+unk_80077D50 s3PIconCompTexInfo[] = {
+    { 17, a3PIconTex, TEX_WIDTH(a3PIconTex), TEX_HEIGHT(a3PIconTex), TEX_COMPRESSED_SIZE(a3PIconTex) }, { 0 }
+};
+unk_80077D50 s4PIconCompTexInfo[] = {
+    { 17, a4PIconTex, TEX_WIDTH(a4PIconTex), TEX_HEIGHT(a4PIconTex), TEX_COMPRESSED_SIZE(a4PIconTex) }, { 0 }
+};
 
 unk_80077D50* sPlayerNumIconCompTexInfos[] = {
     s1PIconCompTexInfo,
@@ -370,38 +700,121 @@ unk_80077D50* sPlayerNumIconCompTexInfos[] = {
     s4PIconCompTexInfo,
 };
 
-unk_80077D50 sMachineSelectCursorCompTexInfo[] = { { 17, aMachineSelectCursorTex, 40, 40, 0x277 }, { 0 } };
-unk_80077D50 sMachineInfoGraphCompTexInfo[] = { { 17, aMachineInfoGraphTex, 128, 64, 0x837 }, { 0 } };
-unk_80077D50 sMachineAccelerationMaxSpeedCompTexInfo[] = { { 17, aMachineAccelerationMaxSpeedTex, 128, 64, 0x7E9 },
-                                                           { 0 } };
-unk_80077D50 sMachineBodyBoostGripCompTexInfo[] = { { 17, aMachineBodyBoostGripTex, 128, 64, 0x7E4 }, { 0 } };
-unk_80077D50 sMachineInfoGraphSmallCompTexInfo[] = { { 18, aMachineInfoGraphSmallTex, 80, 40, 0x4C2 }, { 0 } };
-unk_80077D50 sMachineAccelerationMaxSpeedSmallCompTexInfo[] = {
-    { 18, aMachineAccelerationMaxSpeedSmallTex, 80, 40, 0x33E }, { 0 }
+unk_80077D50 sMachineSelectCursorCompTexInfo[] = { { 17, aMachineSelectCursorTex, TEX_WIDTH(aMachineSelectCursorTex),
+                                                     TEX_HEIGHT(aMachineSelectCursorTex),
+                                                     TEX_COMPRESSED_SIZE(aMachineSelectCursorTex) },
+                                                   { 0 } };
+unk_80077D50 sMachineInfoGraphCompTexInfo[] = { { 17, aMachineInfoGraphTex, TEX_WIDTH(aMachineInfoGraphTex),
+                                                  TEX_HEIGHT(aMachineInfoGraphTex),
+                                                  TEX_COMPRESSED_SIZE(aMachineInfoGraphTex) },
+                                                { 0 } };
+unk_80077D50 sMachineAccelerationMaxSpeedCompTexInfo[] = {
+    { 17, aMachineAccelerationMaxSpeedTex, TEX_WIDTH(aMachineAccelerationMaxSpeedTex),
+      TEX_HEIGHT(aMachineAccelerationMaxSpeedTex), TEX_COMPRESSED_SIZE(aMachineAccelerationMaxSpeedTex) },
+    { 0 }
 };
-unk_80077D50 sMachineBodyBoostGripSmallCompTexInfo[] = { { 17, aMachineBodyBoostGripSmallTex, 80, 40, 0x35E }, { 0 } };
-unk_80077D50 sEngineSliderCompTexInfo[] = { { 17, aEngineSliderTex, 16, 16, 0x066 }, { 0 } };
-unk_80077D50 sNoviceJackTrophyCompTexInfo[] = { { 17, aNoviceJackTrophyTex, 16, 16, 0x092 }, { 0 } };
-unk_80077D50 sNoviceQueenTrophyCompTexInfo[] = { { 17, aNoviceQueenTrophyTex, 16, 16, 0x093 }, { 0 } };
-unk_80077D50 sNoviceKingTrophyCompTexInfo[] = { { 17, aNoviceKingTrophyTex, 16, 16, 0x098 }, { 0 } };
-unk_80077D50 sNoviceJokerTrophyCompTexInfo[] = { { 17, aNoviceJokerTrophyTex, 16, 16, 0x091 }, { 0 } };
-unk_80077D50 sNoviceXTrophyCompTexInfo[] = { { 17, aNoviceXTrophyTex, 16, 16, 0x097 }, { 0 } };
-unk_80077D50 sStandardJackTrophyCompTexInfo[] = { { 17, aStandardJackTrophyTex, 16, 16, 0x0A6 }, { 0 } };
-unk_80077D50 sStandardQueenTrophyCompTexInfo[] = { { 17, aStandardQueenTrophyTex, 16, 16, 0x0A3 }, { 0 } };
-unk_80077D50 sStandardKingTrophyCompTexInfo[] = { { 17, aStandardKingTrophyTex, 16, 16, 0x0B4 }, { 0 } };
-unk_80077D50 sStandardJokerTrophyCompTexInfo[] = { { 17, aStandardJokerTrophyTex, 16, 16, 0x09C }, { 0 } };
-unk_80077D50 sStandardXTrophyCompTexInfo[] = { { 17, aStandardXTrophyTex, 16, 16, 0x0A2 }, { 0 } };
-unk_80077D50 sExpertJackTrophyCompTexInfo[] = { { 17, aExpertJackTrophyTex, 16, 16, 0x0AA }, { 0 } };
-unk_80077D50 sExpertQueenTrophyCompTexInfo[] = { { 17, aExpertQueenTrophyTex, 16, 16, 0x0B1 }, { 0 } };
-unk_80077D50 sExpertKingTrophyCompTexInfo[] = { { 17, aExpertKingTrophyTex, 16, 16, 0x0B6 }, { 0 } };
-unk_80077D50 sExpertJokerTrophyCompTexInfo[] = { { 17, aExpertJokerTrophyTex, 16, 16, 0x0A8 }, { 0 } };
-unk_80077D50 sExpertXTrophyCompTexInfo[] = { { 17, aExpertXTrophyTex, 16, 16, 0x097 }, { 0 } };
-unk_80077D50 sMasterJackTrophyCompTexInfo[] = { { 17, aMasterJackTrophyTex, 16, 16, 0x0CB }, { 0 } };
-unk_80077D50 sMasterQueenTrophyCompTexInfo[] = { { 17, aMasterQueenTrophyTex, 16, 16, 0x0D4 }, { 0 } };
-unk_80077D50 sMasterKingTrophyCompTexInfo[] = { { 17, aMasterKingTrophyTex, 16, 16, 0x0DD }, { 0 } };
-unk_80077D50 sMasterJokerTrophyCompTexInfo[] = { { 17, aMasterJokerTrophyTex, 16, 16, 0x0C8 }, { 0 } };
-unk_80077D50 sMasterXTrophyCompTexInfo[] = { { 17, aMasterXTrophyTex, 16, 16, 0x0BF }, { 0 } };
-unk_80077D50 sNoTrophyCompTexInfo[] = { { 17, aNoTrophyTex, 16, 16, 0x059 }, { 0 } };
+unk_80077D50 sMachineBodyBoostGripCompTexInfo[] = { { 17, aMachineBodyBoostGripTex, TEX_WIDTH(aMachineBodyBoostGripTex),
+                                                      TEX_HEIGHT(aMachineBodyBoostGripTex),
+                                                      TEX_COMPRESSED_SIZE(aMachineBodyBoostGripTex) },
+                                                    { 0 } };
+unk_80077D50 sMachineInfoGraphSmallCompTexInfo[] = {
+    { 18, aMachineInfoGraphSmallTex, TEX_WIDTH(aMachineInfoGraphSmallTex), TEX_HEIGHT(aMachineInfoGraphSmallTex),
+      TEX_COMPRESSED_SIZE(aMachineInfoGraphSmallTex) },
+    { 0 }
+};
+unk_80077D50 sMachineAccelerationMaxSpeedSmallCompTexInfo[] = {
+    { 18, aMachineAccelerationMaxSpeedSmallTex, TEX_WIDTH(aMachineAccelerationMaxSpeedSmallTex),
+      TEX_HEIGHT(aMachineAccelerationMaxSpeedSmallTex), TEX_COMPRESSED_SIZE(aMachineAccelerationMaxSpeedSmallTex) },
+    { 0 }
+};
+unk_80077D50 sMachineBodyBoostGripSmallCompTexInfo[] = {
+    { 17, aMachineBodyBoostGripSmallTex, TEX_WIDTH(aMachineBodyBoostGripSmallTex),
+      TEX_HEIGHT(aMachineBodyBoostGripSmallTex), TEX_COMPRESSED_SIZE(aMachineBodyBoostGripSmallTex) },
+    { 0 }
+};
+unk_80077D50 sEngineSliderCompTexInfo[] = { { 17, aEngineSliderTex, TEX_WIDTH(aEngineSliderTex),
+                                              TEX_HEIGHT(aEngineSliderTex), TEX_COMPRESSED_SIZE(aEngineSliderTex) },
+                                            { 0 } };
+unk_80077D50 sNoviceJackTrophyCompTexInfo[] = { { 17, aNoviceJackTrophyTex, TEX_WIDTH(aNoviceJackTrophyTex),
+                                                  TEX_HEIGHT(aNoviceJackTrophyTex),
+                                                  TEX_COMPRESSED_SIZE(aNoviceJackTrophyTex) },
+                                                { 0 } };
+unk_80077D50 sNoviceQueenTrophyCompTexInfo[] = { { 17, aNoviceQueenTrophyTex, TEX_WIDTH(aNoviceQueenTrophyTex),
+                                                   TEX_HEIGHT(aNoviceQueenTrophyTex),
+                                                   TEX_COMPRESSED_SIZE(aNoviceQueenTrophyTex) },
+                                                 { 0 } };
+unk_80077D50 sNoviceKingTrophyCompTexInfo[] = { { 17, aNoviceKingTrophyTex, TEX_WIDTH(aNoviceKingTrophyTex),
+                                                  TEX_HEIGHT(aNoviceKingTrophyTex),
+                                                  TEX_COMPRESSED_SIZE(aNoviceKingTrophyTex) },
+                                                { 0 } };
+unk_80077D50 sNoviceJokerTrophyCompTexInfo[] = { { 17, aNoviceJokerTrophyTex, TEX_WIDTH(aNoviceJokerTrophyTex),
+                                                   TEX_HEIGHT(aNoviceJokerTrophyTex),
+                                                   TEX_COMPRESSED_SIZE(aNoviceJokerTrophyTex) },
+                                                 { 0 } };
+unk_80077D50 sNoviceXTrophyCompTexInfo[] = { { 17, aNoviceXTrophyTex, TEX_WIDTH(aNoviceXTrophyTex),
+                                               TEX_HEIGHT(aNoviceXTrophyTex), TEX_COMPRESSED_SIZE(aNoviceXTrophyTex) },
+                                             { 0 } };
+unk_80077D50 sStandardJackTrophyCompTexInfo[] = { { 17, aStandardJackTrophyTex, TEX_WIDTH(aStandardJackTrophyTex),
+                                                    TEX_HEIGHT(aStandardJackTrophyTex),
+                                                    TEX_COMPRESSED_SIZE(aStandardJackTrophyTex) },
+                                                  { 0 } };
+unk_80077D50 sStandardQueenTrophyCompTexInfo[] = { { 17, aStandardQueenTrophyTex, TEX_WIDTH(aStandardQueenTrophyTex),
+                                                     TEX_HEIGHT(aStandardQueenTrophyTex),
+                                                     TEX_COMPRESSED_SIZE(aStandardQueenTrophyTex) },
+                                                   { 0 } };
+unk_80077D50 sStandardKingTrophyCompTexInfo[] = { { 17, aStandardKingTrophyTex, TEX_WIDTH(aStandardKingTrophyTex),
+                                                    TEX_HEIGHT(aStandardKingTrophyTex),
+                                                    TEX_COMPRESSED_SIZE(aStandardKingTrophyTex) },
+                                                  { 0 } };
+unk_80077D50 sStandardJokerTrophyCompTexInfo[] = { { 17, aStandardJokerTrophyTex, TEX_WIDTH(aStandardJokerTrophyTex),
+                                                     TEX_HEIGHT(aStandardJokerTrophyTex),
+                                                     TEX_COMPRESSED_SIZE(aStandardJokerTrophyTex) },
+                                                   { 0 } };
+unk_80077D50 sStandardXTrophyCompTexInfo[] = { { 17, aStandardXTrophyTex, TEX_WIDTH(aStandardXTrophyTex),
+                                                 TEX_HEIGHT(aStandardXTrophyTex),
+                                                 TEX_COMPRESSED_SIZE(aStandardXTrophyTex) },
+                                               { 0 } };
+unk_80077D50 sExpertJackTrophyCompTexInfo[] = { { 17, aExpertJackTrophyTex, TEX_WIDTH(aExpertJackTrophyTex),
+                                                  TEX_HEIGHT(aExpertJackTrophyTex),
+                                                  TEX_COMPRESSED_SIZE(aExpertJackTrophyTex) },
+                                                { 0 } };
+unk_80077D50 sExpertQueenTrophyCompTexInfo[] = { { 17, aExpertQueenTrophyTex, TEX_WIDTH(aExpertQueenTrophyTex),
+                                                   TEX_HEIGHT(aExpertQueenTrophyTex),
+                                                   TEX_COMPRESSED_SIZE(aExpertQueenTrophyTex) },
+                                                 { 0 } };
+unk_80077D50 sExpertKingTrophyCompTexInfo[] = { { 17, aExpertKingTrophyTex, TEX_WIDTH(aExpertKingTrophyTex),
+                                                  TEX_HEIGHT(aExpertKingTrophyTex),
+                                                  TEX_COMPRESSED_SIZE(aExpertKingTrophyTex) },
+                                                { 0 } };
+unk_80077D50 sExpertJokerTrophyCompTexInfo[] = { { 17, aExpertJokerTrophyTex, TEX_WIDTH(aExpertJokerTrophyTex),
+                                                   TEX_HEIGHT(aExpertJokerTrophyTex),
+                                                   TEX_COMPRESSED_SIZE(aExpertJokerTrophyTex) },
+                                                 { 0 } };
+unk_80077D50 sExpertXTrophyCompTexInfo[] = { { 17, aExpertXTrophyTex, TEX_WIDTH(aExpertXTrophyTex),
+                                               TEX_HEIGHT(aExpertXTrophyTex), TEX_COMPRESSED_SIZE(aExpertXTrophyTex) },
+                                             { 0 } };
+unk_80077D50 sMasterJackTrophyCompTexInfo[] = { { 17, aMasterJackTrophyTex, TEX_WIDTH(aMasterJackTrophyTex),
+                                                  TEX_HEIGHT(aMasterJackTrophyTex),
+                                                  TEX_COMPRESSED_SIZE(aMasterJackTrophyTex) },
+                                                { 0 } };
+unk_80077D50 sMasterQueenTrophyCompTexInfo[] = { { 17, aMasterQueenTrophyTex, TEX_WIDTH(aMasterQueenTrophyTex),
+                                                   TEX_HEIGHT(aMasterQueenTrophyTex),
+                                                   TEX_COMPRESSED_SIZE(aMasterQueenTrophyTex) },
+                                                 { 0 } };
+unk_80077D50 sMasterKingTrophyCompTexInfo[] = { { 17, aMasterKingTrophyTex, TEX_WIDTH(aMasterKingTrophyTex),
+                                                  TEX_HEIGHT(aMasterKingTrophyTex),
+                                                  TEX_COMPRESSED_SIZE(aMasterKingTrophyTex) },
+                                                { 0 } };
+unk_80077D50 sMasterJokerTrophyCompTexInfo[] = { { 17, aMasterJokerTrophyTex, TEX_WIDTH(aMasterJokerTrophyTex),
+                                                   TEX_HEIGHT(aMasterJokerTrophyTex),
+                                                   TEX_COMPRESSED_SIZE(aMasterJokerTrophyTex) },
+                                                 { 0 } };
+unk_80077D50 sMasterXTrophyCompTexInfo[] = { { 17, aMasterXTrophyTex, TEX_WIDTH(aMasterXTrophyTex),
+                                               TEX_HEIGHT(aMasterXTrophyTex), TEX_COMPRESSED_SIZE(aMasterXTrophyTex) },
+                                             { 0 } };
+unk_80077D50 sNoTrophyCompTexInfo[] = {
+    { 17, aNoTrophyTex, TEX_WIDTH(aNoTrophyTex), TEX_HEIGHT(aNoTrophyTex), TEX_COMPRESSED_SIZE(aNoTrophyTex) }, { 0 }
+};
 
 unk_80077D50* sTrophyCompTexInfos[] = {
     sNoviceJackTrophyCompTexInfo,    sNoviceQueenTrophyCompTexInfo,  sNoviceKingTrophyCompTexInfo,
@@ -413,10 +826,18 @@ unk_80077D50* sTrophyCompTexInfos[] = {
     sMasterJokerTrophyCompTexInfo,   sMasterXTrophyCompTexInfo,      sNoTrophyCompTexInfo,
 };
 
-static unk_80077D50 sNoviceCompTexInfo[] = { { 17, aNoviceTex, 64, 18, 0x144 }, { 0 } };
-static unk_80077D50 sStandardCompTexInfo[] = { { 17, aStandardTex, 64, 18, 0x14C }, { 0 } };
-static unk_80077D50 sExpertCompTexInfo[] = { { 17, aExpertTex, 64, 18, 0x149 }, { 0 } };
-static unk_80077D50 sMasterCompTexInfo[] = { { 17, aMasterTex, 64, 18, 0x14E }, { 0 } };
+static unk_80077D50 sNoviceCompTexInfo[] = {
+    { 17, aNoviceTex, TEX_WIDTH(aNoviceTex), TEX_HEIGHT(aNoviceTex), TEX_COMPRESSED_SIZE(aNoviceTex) }, { 0 }
+};
+static unk_80077D50 sStandardCompTexInfo[] = {
+    { 17, aStandardTex, TEX_WIDTH(aStandardTex), TEX_HEIGHT(aStandardTex), TEX_COMPRESSED_SIZE(aStandardTex) }, { 0 }
+};
+static unk_80077D50 sExpertCompTexInfo[] = {
+    { 17, aExpertTex, TEX_WIDTH(aExpertTex), TEX_HEIGHT(aExpertTex), TEX_COMPRESSED_SIZE(aExpertTex) }, { 0 }
+};
+static unk_80077D50 sMasterCompTexInfo[] = {
+    { 17, aMasterTex, TEX_WIDTH(aMasterTex), TEX_HEIGHT(aMasterTex), TEX_COMPRESSED_SIZE(aMasterTex) }, { 0 }
+};
 
 static unk_80077D50* sDifficultyCompTexInfos[] = {
     sNoviceCompTexInfo,
@@ -425,9 +846,15 @@ static unk_80077D50* sDifficultyCompTexInfos[] = {
     sMasterCompTexInfo,
 };
 
-unk_80077D50 sBoostCompTexInfo[] = { { 17, aBoostTex, 20, 8, 0x5E }, { 0 } };
-unk_80077D50 sBodyCompTexInfo[] = { { 17, aBodyTex, 16, 8, 0x46 }, { 0 } };
-unk_80077D50 sGripCompTexInfo[] = { { 17, aGripTex, 16, 8, 0x4F }, { 0 } };
+unk_80077D50 sBoostCompTexInfo[] = {
+    { 17, aBoostTex, TEX_WIDTH(aBoostTex), TEX_HEIGHT(aBoostTex), TEX_COMPRESSED_SIZE(aBoostTex) }, { 0 }
+};
+unk_80077D50 sBodyCompTexInfo[] = {
+    { 17, aBodyTex, TEX_WIDTH(aBodyTex), TEX_HEIGHT(aBodyTex), TEX_COMPRESSED_SIZE(aBodyTex) }, { 0 }
+};
+unk_80077D50 sGripCompTexInfo[] = {
+    { 17, aGripTex, TEX_WIDTH(aGripTex), TEX_HEIGHT(aGripTex), TEX_COMPRESSED_SIZE(aGripTex) }, { 0 }
+};
 
 unk_80077D50* sMachineStatCompTexInfos[] = {
     sBodyCompTexInfo,
@@ -435,7 +862,9 @@ unk_80077D50* sMachineStatCompTexInfos[] = {
     sGripCompTexInfo,
 };
 
-static unk_80077D50 sOKCompTexInfo[] = { { 17, aOKTex, 32, 16, 0x112 }, { 0 } };
+static unk_80077D50 sOKCompTexInfo[] = {
+    { 17, aOKTex, TEX_WIDTH(aOKTex), TEX_HEIGHT(aOKTex), TEX_COMPRESSED_SIZE(aOKTex) }, { 0 }
+};
 
 const char* sMachineStatValues[] = { "a", "b", "c", "d", "e" };
 
@@ -1100,7 +1529,11 @@ Gfx* MachineSelect_BackgroundDraw(Gfx* gfx) {
     return gfx;
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i4/machine/MachineSelect_BackgroundDraw.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i4/machine/MachineSelect_BackgroundDraw.s")
+#endif
 #endif
 
 Gfx* MachineSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
@@ -1411,9 +1844,13 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
                 gDPSetPrimColor(gfx++, 0, 0, 0, 255, 0, 255);
                 break;
         }
-
+#ifdef VERSION_JP
+        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj),
+                            OBJECT_TOP(engineWeightObj), 1, 0, 0, 1.0f, 1.0f);
+#else
         gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj) + 3,
                             OBJECT_TOP(engineWeightObj) + 1, 1, 0, 0, 1.0f, 1.0f);
+#endif
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             temp_s4 = D_800F80C8[gRacers[i].character].unk_14;

@@ -58,13 +58,48 @@ s32 gOptionsCurrentRow = 0;
 
 OptionsInfo gOptionsInfo[] = {
     // 'VS COM (2P,3P)'
-    { OPTIONS_VS_COM, OPTIONS_SHOWN, 2, 0, 0, gOptionsVsComSelection, { aOptionsVsCom2P3PTex, 128, 16 } },
+    { OPTIONS_VS_COM,
+      OPTIONS_SHOWN,
+      2,
+      0,
+      0,
+      gOptionsVsComSelection,
+      { aOptionsVsCom2P3PTex, TEX_WIDTH(aOptionsVsCom2P3PTex), TEX_HEIGHT(aOptionsVsCom2P3PTex) } },
     // 'VS Slot'
-    { OPTIONS_VS_SLOT, OPTIONS_SHOWN, 2, 0, 0, gOptionsVsSlotSelection, { aOptionsVsSlotTex, 96, 16 } },
+    { OPTIONS_VS_SLOT,
+      OPTIONS_SHOWN,
+      2,
+      0,
+      0,
+      gOptionsVsSlotSelection,
+      { aOptionsVsSlotTex, TEX_WIDTH(aOptionsVsSlotTex), TEX_HEIGHT(aOptionsVsSlotTex) } },
     // 'VS Handicap'
-    { OPTIONS_VS_HANDICAP, OPTIONS_SHOWN, 3, 0, 0, gOptionsVsHandicapSelection, { aOptionsVsHandicapTex, 96, 16 } },
+    { OPTIONS_VS_HANDICAP,
+      OPTIONS_SHOWN,
+      3,
+      0,
+      0,
+      gOptionsVsHandicapSelection,
+      { aOptionsVsHandicapTex, TEX_WIDTH(aOptionsVsHandicapTex), TEX_HEIGHT(aOptionsVsHandicapTex) } },
+#ifdef VERSION_JP
     // 'Sound Mode'
-    { OPTIONS_SOUND_MODE, OPTIONS_SHOWN, 2, 0, 0, gOptionsSoundModeSelection, { aOptionsSoundModeTex, 96, 16 } },
+    { OPTIONS_SOUND_MODE,
+      OPTIONS_SHOWN,
+      2,
+      0,
+      4,
+      gOptionsSoundModeSelection,
+      { aOptionsSoundModeTex, TEX_WIDTH(aOptionsSoundModeTex), TEX_HEIGHT(aOptionsSoundModeTex) } },
+#else
+    // 'Sound Mode'
+    { OPTIONS_SOUND_MODE,
+      OPTIONS_SHOWN,
+      2,
+      0,
+      0,
+      gOptionsSoundModeSelection,
+      { aOptionsSoundModeTex, TEX_WIDTH(aOptionsSoundModeTex), TEX_HEIGHT(aOptionsSoundModeTex) } },
+#endif
     // 'All data clear'
     { OPTIONS_DATA_CLEAR,
       OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN,
@@ -72,11 +107,23 @@ OptionsInfo gOptionsInfo[] = {
       0,
       0,
       NULL,
-      { aOptionsAllDataClearTex, 96, 16 } },
+      { aOptionsAllDataClearTex, TEX_WIDTH(aOptionsAllDataClearTex), TEX_HEIGHT(aOptionsAllDataClearTex) } },
     // 'Copying ghost'
-    { OPTIONS_GHOST_COPY, OPTIONS_REQUIRE_SELECTING, 0, 0, 0, NULL, { aOptionsCopyingGhostTex, 96, 16 } },
+    { OPTIONS_GHOST_COPY,
+      OPTIONS_REQUIRE_SELECTING,
+      0,
+      0,
+      0,
+      NULL,
+      { aOptionsCopyingGhostTex, TEX_WIDTH(aOptionsCopyingGhostTex), TEX_HEIGHT(aOptionsCopyingGhostTex) } },
     // 'EXIT'
-    { OPTIONS_EXIT, OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN, 0, 0, 0, NULL, { aOptionsExitTex, 40, 16 } },
+    { OPTIONS_EXIT,
+      OPTIONS_REQUIRE_SELECTING | OPTIONS_SHOWN,
+      0,
+      0,
+      0,
+      NULL,
+      { aOptionsExitTex, TEX_WIDTH(aOptionsExitTex), TEX_HEIGHT(aOptionsExitTex) } },
 };
 
 UNUSED char D_i6_8011EEBC[] = "Feel Mie";
@@ -92,35 +139,38 @@ void OptionsMenu_Init(void) {
 
     D_800CCFE8 = 3;
     Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
-    func_80078104(aMenuTextTLUT, 0x40, 0, 0, false);
-    func_80078104(aOptionsFalconHelmetTex, 0x2000, 0, 1, false);
-    func_80078104(aOptionsTex, 0x900, 0, 1, false);
-    func_80078104(aOptionsEraseAllSavedDataTex, 0x1000, 0, 1, false);
-    func_80078104(aMenuWithoutTex, 0x200, 0, 1, false);
-    func_80078104(aMenuWithTex, 0x200, 0, 1, false);
-    func_80078104(aMenuPlusOneTex, 0x200, 0, 1, false);
-    func_80078104(aMenuPlusTwoTex, 0x200, 0, 1, false);
-    func_80078104(aMenuStereoTex, 0x400, 0, 1, false);
-    func_80078104(aMenuMonoTex, 0x400, 0, 1, false);
-    func_80078104(aMenuLeftArrowTex, 0x100, 0, 1, false);
-    func_80078104(aMenuRightArrowTex, 0x100, 0, 1, false);
-    func_80078104(aMenuNoTex, 0x200, 0, 1, false);
-    func_80078104(aMenuYesTex, 0x200, 0, 1, false);
+    func_80078104(aMenuTextTLUT, TEX_SIZE(aMenuTextTLUT, sizeof(u16)), 0, 0, false);
+    func_80078104(aOptionsFalconHelmetTex, TEX_SIZE(aOptionsFalconHelmetTex, sizeof(u16)), 0, 1, false);
+    func_80078104(aOptionsTex, TEX_SIZE(aOptionsTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aOptionsEraseAllSavedDataTex, TEX_SIZE(aOptionsEraseAllSavedDataTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuWithoutTex, TEX_SIZE(aMenuWithoutTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuWithTex, TEX_SIZE(aMenuWithTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuPlusOneTex, TEX_SIZE(aMenuPlusOneTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuPlusTwoTex, TEX_SIZE(aMenuPlusTwoTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuStereoTex, TEX_SIZE(aMenuStereoTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuMonoTex, TEX_SIZE(aMenuMonoTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuLeftArrowTex, TEX_SIZE(aMenuLeftArrowTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuRightArrowTex, TEX_SIZE(aMenuRightArrowTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuNoTex, TEX_SIZE(aMenuNoTex, sizeof(u8)), 0, 1, false);
+    func_80078104(aMenuYesTex, TEX_SIZE(aMenuYesTex, sizeof(u8)), 0, 1, false);
 
     for (i = 0, option = gOptionsInfo; i < OPTIONS_MAX; i++, option++) {
         func_80078104(option->optionTextureInfo.textureOffset,
-                      option->optionTextureInfo.width * option->optionTextureInfo.height, 0, 1, 0);
+                      option->optionTextureInfo.width * option->optionTextureInfo.height * sizeof(u8), 0, 1, 0);
     }
 
-    func_80078104(aTitleBackgroundMainTex, 0x23A00, 0, 1, false);
-    func_8007A828(func_800783AC(aTitleBackgroundMainTex), 0x23A00, 0xC3, 0x5F, 0x5F);
+    func_80078104(aTitleBackgroundMainTex, TEX_SIZE(aTitleBackgroundMainTex, sizeof(u16)), 0, 1, false);
+    func_8007A828(func_800783AC(aTitleBackgroundMainTex), TEX_SIZE(aTitleBackgroundMainTex, sizeof(u16)), 0xC3, 0x5F,
+                  0x5F);
 
     if (D_800CD3C4 == 1) {
-        D_i6_801247AC = func_80078104(aTitleBackgroundComicTex, 0x25800, 0, 1, false);
-        func_8007A828(D_i6_801247AC, 0x25800, 0xC3, 0x5F, 0x5F);
+        D_i6_801247AC =
+            func_80078104(aTitleBackgroundComicTex, TEX_SIZE(aTitleBackgroundComicTex, sizeof(u16)), 0, 1, false);
+        func_8007A828(D_i6_801247AC, TEX_SIZE(aTitleBackgroundComicTex, sizeof(u16)), 0xC3, 0x5F, 0x5F);
     } else if (D_800CD3C4 == 2) {
-        D_i6_801247AC = func_80078104(aTitleBackgroundFalconTex, 0x25800, 0, 1, false);
-        func_8007A828(D_i6_801247AC, 0x25800, 0xC3, 0x5F, 0x5F);
+        D_i6_801247AC =
+            func_80078104(aTitleBackgroundFalconTex, TEX_SIZE(aTitleBackgroundFalconTex, sizeof(u16)), 0, 1, false);
+        func_8007A828(D_i6_801247AC, TEX_SIZE(aTitleBackgroundFalconTex, sizeof(u16)), 0xC3, 0x5F, 0x5F);
     }
     if (D_800CD3C4 != 0) {
         D_i6_801247A8 = 1;
@@ -491,7 +541,11 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
                          arg1 + sp54 + 0x2A, arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);
 }
 
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i6/options_menu/func_i6_8011D394.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/options_menu/func_i6_8011D394.s")
+#endif
 
 extern GfxPool D_1000000;
 extern Mtx D_2000000[];

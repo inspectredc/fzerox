@@ -49,8 +49,4 @@ typedef struct OptionsInfo {
 
 extern SaveContext gSaveContext;
 
-extern s32 gDefaultSubOptionLimits[];
-extern s32 gMaxSubOptionLimits[];
-extern u16 gUnlockEverythingInputs[];
-
 #endif // OVL_I6_H

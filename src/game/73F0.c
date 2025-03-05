@@ -165,7 +165,11 @@ void func_8006D448(void) {
     }
 }
 
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/73F0/func_8006DAAC.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8006DAAC.s")
+#endif
 
 void func_8006E478(void) {
     unk_802D1B60* var = &D_802D1B60;

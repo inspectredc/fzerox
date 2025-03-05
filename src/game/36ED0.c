@@ -361,7 +361,11 @@ void func_8009CED0(s32 venue) {
     }
 }
 
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/36ED0/func_8009D16C.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_8009D16C.s")
+#endif
 
 #ifdef NON_EQUIVALENT
 // Weird float/double calculations
@@ -440,7 +444,11 @@ void func_8009DB28(CourseSegment* arg0, f32* arg1, f32* arg2) {
 }
 #else
 void func_8009DB28(CourseSegment*, f32*, f32*);
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/36ED0/func_8009DB28.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_8009DB28.s")
+#endif
 #endif
 
 s32 func_8009DEAC(CourseRecordInfo* arg0) {
@@ -1962,7 +1970,11 @@ s32 func_800A1954(CourseRecordInfo* arg0) {
 }
 #else
 s32 func_800A1954(CourseRecordInfo* arg0);
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/36ED0/func_800A1954.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_800A1954.s")
+#endif
 #endif
 
 Vtx* func_800A2BDC(Vtx* arg0, Vec3f* arg1, Mtx3F* arg2) {

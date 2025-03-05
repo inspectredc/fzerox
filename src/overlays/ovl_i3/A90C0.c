@@ -465,7 +465,11 @@ void func_i3_80115E74(void) {
     }
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115E74.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115E74.s")
+#endif
 #endif
 
 extern CourseRecordInfo* gCurrentCourseRecordInfo;
@@ -565,7 +569,9 @@ void func_i3_80116C74(Racer* arg0) {
     s32 j;
 
     D_i3_80141910 = gRacers;
+#ifndef VERSION_JP
     D_80141900 = 0;
+#endif
     if (arg0->id == 0) {
         func_i3_80116974();
         if (gCourseIndex < ARRAY_COUNT(D_i3_8013DB80)) {

@@ -7,6 +7,9 @@ LEOCmd D_800E32E8;
 OSMesgQueue gLeoMesgQueue;
 OSMesg sLeoMsgBuf[1];
 OSMesg sLeoErrMsg;
+#ifdef VERSION_JP
+UNUSED s32 D_800E3318_JP;
+#endif
 OSMesg D_800E3328;
 u8 D_800E332C[4];
 OSMesg sLeoCmdMsgBuf[16];
@@ -455,7 +458,11 @@ void func_80076310(void) {
 s32 func_80076340(void) {
 
     osCreateMesgQueue(&gLeoMesgQueue, sLeoMsgBuf, ARRAY_COUNT(sLeoMsgBuf));
+#ifdef VERSION_JP
+    sLeoErrMsg = LeoCJCreateLeoManager(149, 150, sLeoCmdMsgBuf, ARRAY_COUNT(sLeoCmdMsgBuf));
+#else
     sLeoErrMsg = LeoCACreateLeoManager(149, 150, sLeoCmdMsgBuf, ARRAY_COUNT(sLeoCmdMsgBuf));
+#endif
 
     if ((s32) sLeoErrMsg == LEO_ERROR_DEVICE_COMMUNICATION_FAILURE) {
         return -1;

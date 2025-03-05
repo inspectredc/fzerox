@@ -1,0 +1,457 @@
+  - name: header
+    type: header
+    start: 0x0
+
+  - name: boot
+    type: bin
+    start: 0x40
+
+  - name: entry
+    type: code
+    start: 0x1000
+    vram: 0x80067000
+    subsegments:
+      - [0x1000, hasm, entrypoint]
+
+  - name: framebuffer_unused
+    dir: framebuffers
+    type: code
+    vram: 0x80000400
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x80000400, name: framebuffer_unused }
+
+  - name: audio_context
+    type: code
+    vram: 0x80025C00
+    bss_size: 0x57D0
+    subsegments:
+      - { type: .bss, vram: 0x80025C00, name: audio/audio_context }
+
+  - name: audio_heap
+    type: code
+    vram: 0x8002B400
+    bss_size: 0x3B000
+    subsegments:
+      - { type: .bss, vram: 0x8002B400, name: audio/audio_heap }
+
+  - name: main
+    type: code
+    start: 0x1060
+    vram: 0x80067060
+    follows_vram: entry
+    bss_size: 0x242E0
+    subsegments:
+      - [0x1060, c, game/1060] #sys_boot
+      - [0x1AD0, pad]
+      - [0x1AE0, c, game/1AE0] #sys_main
+      - [0x2A60, c, game/2A60]
+      - [0x2B20, c, game/2B20] #sys_joybus
+      - [0x3ED0, c, game/3ED0]
+      - [0x73F0, c, game/73F0]
+      - [0xEA90, c, game/EA90]
+      - [0xF0B0, c, game/F0B0]
+      - [0xF1C0, c, game/F1C0]
+      - [0x10490, c, game/10490]
+      - [0x11CF0, c, game/11CF0]
+      - [0x14440, c, game/14440]
+      - [0x18410, c, game/18410]
+      - [0x194E0, c, game/194E0]
+      - [0x197D0, c, game/197D0]
+      - [0x19FC0, c, game/sys_fault]
+      - [0x1AAC0, c, game/1AA40]
+      - [0x1B160, c, game/1B0E0]
+      - [0x36F50, c, game/36ED0]
+      - [0x446A0, hasm, game/mio0Decode]
+      - [0x44750, c, audio/playback]
+      - [0x45A20, c, audio/effects]
+      - [0x46050, c, audio/seqplayer]
+      - [0x48A90, c, audio/load]
+      - [0x4C4E0, c, audio/heap]
+      - [0x4EC40, c, audio/aisetnextbuf]
+      - [0x4ECC0, c, audio/synthesis]
+      - [0x50030, c, audio/thread]
+      - [0x51240, c, audio/general]
+
+      # Leo Boot
+      - [0x55540, c, leo_bootdisk]
+      - [0x559A0, hasm, ../../../src/leo_bootstrap] # have to redirect to unextracted hasm
+
+      # Libultra
+      - [0x55A00, hasm, libultra/os/setcause]
+      - [0x55A10, c, libultra/os/sendmesg]
+      - [0x55B60, c, libultra/os/stopthread]
+      - [0x55C20, c, libultra/os/recvmesg]
+      - [0x55D60, hasm, libultra/os/getintmask]
+      - [0x55DC0, hasm, libultra/os/setintmask]
+      - [0x55E60, c, libultra/gu/scale]
+      - [0x55F00, c, libultra/io/sptask]
+      - [0x561F0, c, libultra/libc/ll]
+      - [0x564B0, hasm, libultra/os/exceptasm]
+      - [0x56DC0, c, libultra/os/thread]
+      - [0x56E00, c, libultra/os/destroythread]
+      - [0x56F10, hasm, libultra/libc/bzero]
+      - [0x56FB0, c, libultra/io/leointerrupt]
+      - [0x576A0, c, libultra/io/motor]
+      - [0x57A70, c, libultra/io/siacs]
+      - [0x57B30, c, libultra/io/controller]
+      - [0x57E70, pad]
+      - [0x57ED0, c, libultra/os/createthread]
+      - [0x58020, c, libultra/io/contreaddata]
+      - [0x58200, hasm, libultra/os/setcount]
+      - [0x58210, c, libultra/io/driverominit]
+      - [0x582F0, c, libultra/os/virtualtophysical]
+      - [0x58370, c, libultra/os/physicaltovirtual]
+      - [0x58380, hasm, libultra/os/setsr]
+      - [0x58390, hasm, libultra/os/writebackdcache]
+      - [0x58410, c, libultra/os/initialize]
+      - [0x586A0, c, libultra/io/pirawread]
+      - [0x58700, hasm, libultra/os/getsr]
+      - [0x58710, c, libultra/io/vigetnextframebuf]
+      - [0x58750, c, libultra/gu/perspective]
+      - [0x589E0, c, libultra/gu/sinf]
+      - [0x58BA0, c, libultra/io/sprawdma]
+      - [0x58C30, c, libultra/io/sirawdma]
+      - [0x58CE0, c, libultra/io/epilinkhandle]
+      - [0x58D30, c, libultra/io/viblack]
+      - [0x58DA0, c, libultra/io/sirawread]
+      - [0x58DF0, c, libultra/io/sptaskyield]
+      - [0x58E10, pad]
+      - [0x58E20, c, libultra/io/pfsreadwritefile]
+      - [0x59270, c, libultra/gu/mtxutil]
+      - [0x594E0, c, libultra/io/visetmode]
+      - [0x59550, c, libultra/gu/lookat]
+      - [0x59880, c, libultra/io/pfsallocatefile]
+      - [0x59D00, c, libultra/io/pfsfreeblocks]
+      - [0x59EA0, hasm, libultra/os/probetlb]
+      - [0x59F60, c, libultra/libc/llcvt]
+      - [0x5A170, hasm, libultra/os/getcount]
+      - [0x5A180, c, libultra/io/contpfs]
+      - [0x5AD00, c, libultra/os/getmemsize]
+      - [0x5AD90, c, libultra/io/pfssearchfile]
+      - [0x5AF40, c, libultra/io/pimgr]
+      - [0x5B130, c, libultra/io/piacs]
+      - [0x5B1F0, pad]
+      - [0x5B200, c, libultra/io/devmgr]
+      - [0x5B690, c, libultra/io/pirawdma]
+      - [0x5B770, c, libultra/os/seteventmesg]
+      - [0x5B7E0, hasm, libultra/gu/sqrtf]
+      - [0x5B7F0, c, libultra/libc/xprintf]
+      - [0x5C4B0, c, libultra/libc/sprintf]
+      - [0x5C530, c, libultra/io/epidma]
+      - [0x5C610, c, libultra/io/leodiskinit]
+      - [0x5C6B0, c, libultra/libc/string]
+      - [0x5C750, c, libultra/os/createmesgqueue]
+      - [0x5C780, hasm, libultra/os/invaldcache]
+      - [0x5C830, hasm, libultra/os/invalicache]
+      - [0x5C8B0, c, libultra/io/sp]
+      - [0x5C8E0, c, libultra/io/si]
+      - [0x5C910, c, libultra/os/jammesg]
+      - [0x5CA60, c, libultra/os/setthreadpri]
+      - [0x5CB40, c, libultra/os/getthreadpri]
+      - [0x5CB60, c, libultra/io/viswapbuf]
+      - [0x5CBB0, c, libultra/io/epirawdma]
+      - [0x5CDE0, c, libultra/io/sptaskyielded]
+      - [0x5CE60, hasm, libultra/libc/bcmp]
+      - [0x5CF80, c, libultra/os/gettime]
+      - [0x5D010, c, libultra/os/timerintr]
+      - [0x5D410, c, libultra/gu/rotate]
+      - [0x5D600, c, libultra/os/setglobalintmask]
+      - [0x5D650, c, libultra/io/aisetfreq]
+      - [0x5D7B0, c, libultra/os/getactivequeue]
+      - [0x5D7C0, hasm, libultra/gu/normalize]
+      - [0x5D850, hasm, libultra/os/setcompare]
+      - [0x5D860, c, libultra/io/dpsetstat]
+      - [0x5D870, c, libultra/io/dpgetstat]
+      - [0x5D880, hasm, libultra/libc/bcopy]
+      - [0x5DB90, c, libultra/os/resetglobalintmask]
+      - [0x5DBF0, c, libultra/gu/ortho]
+      - [0x5DDB0, hasm, libultra/os/interrupt]
+      - [0x5DDF0, c, libultra/io/vi]
+      - [0x5DF30, c, libultra/io/viswapcontext]
+      - [0x5E230, c, libultra/io/pigetcmdq]
+      - [0x5E260, c, libultra/gu/cosf]
+      - [0x5E3D0, c, libultra/io/epiread]
+      - [0x5E420, c, libultra/io/visetspecial]
+      - [0x5E5E0, c, libultra/os/settime]
+      - [0x5E610, c, libultra/io/visetevent]
+      - [0x5E680, c, libultra/io/cartrominit]
+      - [0x5E780, c, libultra/io/pfsselectbank]
+      - [0x5E800, hasm, libultra/os/setfpccsr]
+      - [0x5E810, c, libultra/io/pfsinitpak]
+      - [0x5EA00, c, libultra/io/pfsgetstatus]
+      - [0x5EC30, c, libultra/io/pfschecker]
+      - [0x5F5D0, c, libultra/io/pfsisplug]
+      - [0x5F910, c, libultra/io/aigetlen]
+      - [0x5F920, c, libultra/io/epiwrite]
+      - [0x5F970, c, libultra/io/epirawread]
+      - [0x5FB10, hasm, libultra/os/maptlbrdb]
+      - [0x5FB70, c, libultra/os/yieldthread]
+      - [0x5FBC0, c, libultra/gu/translate]
+      - [0x5FC60, c, libultra/io/contramwrite]
+      - [0x5FE80, c, libultra/io/contramread]
+      - [0x60080, c, libultra/io/crc]
+      - [0x601F0, c, libultra/io/epirawwrite]
+      - [0x60380, c, libultra/os/settimer]
+      - [0x60460, c, libultra/libc/xldtob]
+      - [0x60F20, c, libultra/libc/ldiv]
+      - [0x610B0, c, libultra/libc/xlitob]
+      - [0x61350, c, libultra/io/sirawwrite]
+      - [0x613A0, c, libultra/io/spsetstat]
+      - [0x613B0, c, libultra/io/spgetstat]
+      - [0x613C0, c, libultra/io/vimgr]
+      - [0x616D0, c, libultra/io/vigetcurrcontext]
+      - [0x616E0, hasm, libultra/os/writebackdcacheall]
+      - [0x61710, c, libultra/os/startthread]
+      - [0x61860, c, libultra/io/visetyscale]
+      - [0x618C0, c, libultra/io/vigetcurrframebuf]
+      - [0x61900, c, libultra/io/spsetpc]
+      - [0x61940, c, libultra/os/sethwinterrupt]
+
+      # Microcode
+      - [0x61990, textbin, rspboot]
+      - [0x61A60, textbin, f3dex]
+      - [0x62DD0, textbin, f3dlx]
+      - [0x63F60, textbin, f3dflx]
+      - [0x650F0, textbin, l3dex]
+      - [0x66280, c, game/66220]
+      - [0x662D0, textbin, aspmain]
+
+      # Data
+      - [0x67000, .data, game/1060]
+      - [0x67040, .data, game/1AE0]
+      - [0x67050, .data, game/2A60]
+      - [0x67060, .data, game/2B20]
+      - [0x671D0, .data, game/3ED0]
+      - [0x671E0, .data, game/73F0]
+      - [0x67310, .data, game/F1C0]
+      - [0x67340, .data, game/10490]
+      - [0x673E0, .data, game/14440]
+      - [0x67570, .data, game/194E0]
+      - [0x67580, .data, game/197D0]
+      - [0x677B0, .data, game/sys_fault]
+      - [0x67990, .data, game/1B0E0]
+      - [0x695F0, .data, game/36ED0]
+      - [0x69B20, .data, audio/note_data]
+      - [0x6A770, .data, audio/playback]
+      - [0x6A930, .data, audio/effects]
+      - [0x6A950, .data, audio/seqplayer]
+      - [0x6ABB0, .data, audio/load]
+      - [0x6B7B0, .data, audio/aisetnextbuf]
+      - [0x6B7C0, .data, audio/synthesis]
+      - [0x6B7F0, .data, audio/thread]
+      - [0x6BAC0, .data, audio/general]
+      - [0x6BD00, .data, audio/audio_context]
+      - [0x6BD60, data, libultra/os/exceptasm]
+      - [0x6BD80, .data, libultra/os/thread]
+      - [0x6BDB0, .data, libultra/io/controller]
+      - [0x6BDC0, .data, libultra/os/initialize]
+      - [0x6BDE0, .data, libultra/vimodes/vimodentsclpn1]
+      - [0x6BE30, .data, libultra/vimodes/vimodentsclpf1]
+      - [0x6BE80, .data, libultra/vimodes/vimodentsclan1]
+      - [0x6BED0, .data, libultra/vimodes/vimodentsclaf1]
+      - [0x6BF20, .data, libultra/vimodes/vimodentsclpn2]
+      - [0x6BF70, .data, libultra/vimodes/vimodentsclpf2]
+      - [0x6BFC0, .data, libultra/vimodes/vimodentsclan2]
+      - [0x6C010, .data, libultra/vimodes/vimodentsclaf2]
+      - [0x6C060, .data, libultra/vimodes/vimodentschpn1]
+      - [0x6C0B0, .data, libultra/vimodes/vimodentschpf1]
+      - [0x6C100, .data, libultra/vimodes/vimodentschan1]
+      - [0x6C150, .data, libultra/vimodes/vimodentschaf1]
+      - [0x6C1A0, .data, libultra/vimodes/vimodentschpn2]
+      - [0x6C1F0, .data, libultra/vimodes/vimodentschpf2]
+      - [0x6C240, .data, libultra/vimodes/vimodepallpn1]
+      - [0x6C290, .data, libultra/vimodes/vimodepallpf1]
+      - [0x6C2E0, .data, libultra/vimodes/vimodepallan1]
+      - [0x6C330, .data, libultra/vimodes/vimodepallaf1]
+      - [0x6C380, .data, libultra/vimodes/vimodepallpn2]
+      - [0x6C3D0, .data, libultra/vimodes/vimodepallpf2]
+      - [0x6C420, .data, libultra/vimodes/vimodepallan2]
+      - [0x6C470, .data, libultra/vimodes/vimodepallaf2]
+      - [0x6C4C0, .data, libultra/vimodes/vimodepalhpn1]
+      - [0x6C510, .data, libultra/vimodes/vimodepalhpf1]
+      - [0x6C560, .data, libultra/vimodes/vimodepalhan1]
+      - [0x6C5B0, .data, libultra/vimodes/vimodepalhaf1]
+      - [0x6C600, .data, libultra/vimodes/vimodepalhpn2]
+      - [0x6C650, .data, libultra/vimodes/vimodepalhpf2]
+      - [0x6C6A0, .data, libultra/vimodes/vimodempallpn1]
+      - [0x6C6F0, .data, libultra/vimodes/vimodempallpf1]
+      - [0x6C740, .data, libultra/vimodes/vimodempallan1]
+      - [0x6C790, .data, libultra/vimodes/vimodempallaf1]
+      - [0x6C7E0, .data, libultra/vimodes/vimodempallpn2]
+      - [0x6C830, .data, libultra/vimodes/vimodempallpf2]
+      - [0x6C880, .data, libultra/vimodes/vimodempallan2]
+      - [0x6C8D0, .data, libultra/vimodes/vimodempallaf2]
+      - [0x6C920, .data, libultra/vimodes/vimodempalhpn1]
+      - [0x6C970, .data, libultra/vimodes/vimodempalhpf1]
+      - [0x6C9C0, .data, libultra/vimodes/vimodempalhan1]
+      - [0x6CA10, .data, libultra/vimodes/vimodempalhaf1]
+      - [0x6CA60, .data, libultra/vimodes/vimodempalhpn2]
+      - [0x6CAB0, .data, libultra/vimodes/vimodempalhpf2]
+      - [0x6CB00, .data, libultra/vimodes/vimodefpallpn1]
+      - [0x6CB50, .data, libultra/vimodes/vimodefpallpf1]
+      - [0x6CBA0, .data, libultra/vimodes/vimodefpallan1]
+      - [0x6CBF0, .data, libultra/vimodes/vimodefpallaf1]
+      - [0x6CC40, .data, libultra/vimodes/vimodefpallpn2]
+      - [0x6CC90, .data, libultra/vimodes/vimodefpallpf2]
+      - [0x6CCE0, .data, libultra/vimodes/vimodefpallan2]
+      - [0x6CD30, .data, libultra/vimodes/vimodefpallaf2]
+      - [0x6CD80, .data, libultra/vimodes/vimodefpalhpn1]
+      - [0x6CDD0, .data, libultra/vimodes/vimodefpalhpf1]
+      - [0x6CE20, .data, libultra/vimodes/vimodefpalhan1]
+      - [0x6CE70, .data, libultra/vimodes/vimodefpalhaf1]
+      - [0x6CEC0, .data, libultra/vimodes/vimodefpalhpn2]
+      - [0x6CF10, .data, libultra/vimodes/vimodefpalhpf2]
+      - [0x6CF60, .data, libultra/io/contpfs]
+      - [0x6CF70, .data, libultra/io/pimgr]
+      - [0x6CFA0, .data, libultra/io/piacs]
+      - [0x6CFB0, .data, libultra/libc/xprintf]
+      - [0x6D000, .data, libultra/os/timerintr]
+      - [0x6D010, .data, libultra/io/vi]
+      - [0x6D080, .data, libultra/vimodescopy/vimodepallan1]
+      - [0x6D0D0, .data, libultra/vimodescopy/vimodentsclan1]
+      - [0x6D120, .data, libultra/vimodescopy/vimodempallan1]
+      - [0x6D170, .data, libultra/io/contramread]
+      - [0x6D180, .data, libultra/libc/xlitob]
+      - [0x6D1B0, .data, libultra/io/vimgr]
+
+      # RODATA - Game/Sys
+      - [0x6D1D0, .rodata, game/1060]
+      - [0x6D1E0, .rodata, game/1AE0]
+      - [0x6D1F0, .rodata, game/2B20]
+      - [0x6D460, .rodata, game/3ED0]
+      - [0x6D4E0, .rodata, game/73F0]
+      - [0x6D6B0, .rodata, game/EA90]
+      - [0x6D6D0, .rodata, game/F1C0]
+      - [0x6D940, .rodata, game/10490]
+      - [0x6DC40, .rodata, game/11CF0]
+      - [0x6E3F0, .rodata, game/14440]
+      - [0x6E790, .rodata, game/194E0]
+      - [0x6E7A0, .rodata, game/197D0]
+      - [0x6E7B0, .rodata, game/sys_fault]
+      - [0x6EB60, .rodata, game/1AA40]
+      - [0x6EB80, .rodata, game/1B0E0]
+      - [0x6F910, .rodata, game/36ED0]
+      - [0x6FA40, .rodata, audio/playback]
+      - [0x6FA50, .rodata, audio/effects]
+      - [0x6FA80, .rodata, audio/seqplayer]
+      - [0x6FE40, .rodata, audio/load]
+      - [0x6FE70, .rodata, audio/heap]
+      - [0x6FE90, .rodata, audio/thread]
+      - [0x6FF50, .rodata, audio/general]
+
+      # RODATA - Libultra
+      - [0x70990, rodata, libultra/libc/setintmask]
+      - [0x70A30, rodata, libultra/os/exceptasm]
+      - [0x70A60, .rodata, libultra/gu/perspective]
+      - [0x70A70, .rodata, libultra/gu/sinf]
+      - [0x70AC0, .rodata, libultra/libc/llcvt]
+      - [0x70AD0, .rodata, libultra/io/devmgr]
+      - [0x70AF0, .rodata, libultra/libc/xprintf]
+      - [0x70BF0, .rodata, libultra/gu/rotate]
+      - [0x70C00, .rodata, libultra/gu/cosf]
+      - [0x70C50, rodata, libultra/gu/libm_vals]
+      - [0x70C60, .rodata, libultra/libc/xldtob]
+
+      # DATA - Microcode
+      - [0x70CC0, data, f3dex]
+      - [0x710E0, data, f3dlx]
+      - [0x714F0, data, f3dflx]
+      - [0x718C0, data, l3dex]
+      - [0x71C90, data, aspmain]
+      - [0x71F70, data, audio/audio_tables]
+
+      - { type: .bss, vram: 0x800D8020, name: game/1060 }
+      - { type: .bss, vram: 0x800DCCE0, name: game/1AE0 }
+      - { type: .bss, vram: 0x800DCE20, name: game/2A60 }
+      - { type: .bss, vram: 0x800DCE30, name: game/2B20 }
+      - { type: .bss, vram: 0x800DD220, name: game/3ED0 }
+      - { type: .bss, vram: 0x800E12A0, name: game/73F0 }
+      - { type: .bss, vram: 0x800E32D0, name: game/F1C0 }
+      - { type: .bss, vram: 0x800E3370, name: game/10490 }
+      - { type: .bss, vram: 0x800E33D0, name: game/11CF0 }
+      - { type: .bss, vram: 0x800E40E0, name: game/14440 }
+      - { type: .bss, vram: 0x800E4250, name: game/194E0 }
+      - { type: .bss, vram: 0x800E4320, name: game/197D0 }
+      - { type: .bss, vram: 0x800E43A0, name: game/sys_fault }
+      - { type: .bss, vram: 0x800E4D80, name: game/1AA40 }
+      - { type: .bss, vram: 0x800E4DF0, name: game/1B0E0 }
+      - { type: .bss, vram: 0x800F80E0, name: game/36ED0 }
+      - { type: .bss, vram: 0x800F85C0, name: audio/load }
+      - { type: .bss, vram: 0x800F86C0, name: libultra/io/sptask }
+      - { type: .bss, vram: 0x800F8700, name: libultra/io/leointerrupt }
+      - { type: .bss, vram: 0x800F9700, name: libultra/io/motor }
+      - { type: .bss, vram: 0x800F9800, name: libultra/io/siacs }
+      - { type: .bss, vram: 0x800F9820, name: libultra/io/controller }
+      - { type: .bss, vram: 0x800F98B0, name: libultra/io/driverominit }
+      - { type: .bss, vram: 0x800F9940, name: libultra/debug/kdebugserver }
+      - { type: .bss, vram: 0x800F9AF0, name: libultra/io/contpfs }
+      - { type: .bss, vram: 0x800F9BF0, name: libultra/io/pimgr }
+      - { type: .bss, vram: 0x800FAEB0, name: libultra/io/piacs }
+      - { type: .bss, vram: 0x800FAED0, name: libultra/os/seteventmesg }
+      - { type: .bss, vram: 0x800FAF50, name: libultra/io/leodiskinit }
+      - { type: .bss, vram: 0x800FAFD0, name: libultra/os/timerintr }
+      - { type: .bss, vram: 0x800FB010, name: libultra/gu/rotate }
+      - { type: .bss, vram: 0x800FB020, name: libultra/io/cartrominit }
+      - { type: .bss, vram: 0x800FB0A0, name: libultra/io/pfsisplug }
+      - { type: .bss, vram: 0x800FB0E0, name: libultra/io/vimgr }
+
+  - name: framebuffer1
+    type: code
+    dir: framebuffers
+    vram: 0x801D9800
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x801D9800, name: framebuffer1 }
+
+  - name: framebuffer2
+    type: code
+    dir: framebuffers
+    vram: 0x80200000
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x80200000, name: framebuffer2 }
+
+  - name: unk_gfx_segment
+    type: code
+    vram: 0x80225800
+    bss_size: 0x81340
+    subsegments:
+      - { type: .bss, vram: 0x80225800, name: unk_gfx_segment}
+
+  - name: unk_bss_segment
+    type: code
+    vram: 0x80225800
+    bss_size: 0x284C0
+    subsegments:
+      - { type: .bss, vram: 0x80225800, name: unk_bss_segment}
+
+  - name: gfxpool
+    type: code
+    vram: 0x8024DCE0
+    bss_size: 0x58D60
+    subsegments:
+      - { type: .bss, vram: 0x8024DCE0, name: gfxpool}
+
+  - name: unk_context
+    type: code
+    vram: 0x802A6B40
+    bss_size: 0x2F100
+    subsegments:
+      - { type: .bss, vram: 0x802A6B40, name: unk_context }
+
+  - name: buffers
+    exclusive_ram_id: buffer
+    type: code
+    vram: 0x802D5C40
+    bss_size: 0x55000
+    subsegments:
+      - { type: .bss, vram: 0x802D5C40, name: buffers }
+
+  - name: framebuffer3
+    type: code
+    dir: framebuffers
+    vram: 0x803DA800
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x803DA800, name: framebuffer3 }

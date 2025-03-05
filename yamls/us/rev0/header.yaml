@@ -2,8 +2,6 @@ name: F-ZERO X US REV 0 (v1.0)
 sha1: 5f658e88ffa9de23cba6986a8fd3d3a90d7b4340
 options:
   basename: fzerox
-  # todo: fix compression
-  # target_path: baserom.us.rev0.uncompressed.z64
   target_path: baserom.us.rev0.z64
   elf_path: build/fzerox.us.rev0.elf
   ld_script_path: linker_scripts/us/rev0/fzerox.ld

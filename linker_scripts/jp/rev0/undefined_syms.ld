@@ -1,0 +1,25 @@
+// UNKNOWN
+// not sure which overlay this references / covers multiple overlays?
+// is also ovl_i10 start and end..
+D_80115DF0 = 0x80115680;
+D_80115FC0 = 0x80115850;
+
+// Segment A Textures are used like a track palette system and so need generalised references
+D_A000000 = 0x0A000000;
+D_A001000 = 0x0A001000;
+D_A002000 = 0x0A002000;
+D_A003000 = 0x0A003000;
+D_A004000 = 0x0A004000;
+D_A005000 = 0x0A005000;
+D_A006000 = 0x0A006000;
+D_A007000 = 0x0A007000;
+D_A008000 = 0x0A008000;
+D_A009000 = 0x0A009000;
+D_A00A000 = 0x0A00A000;
+D_A00B000 = 0x0A00B000;
+D_A00B240 = 0x0A00B240;
+D_A00B480 = 0x0A00B480;
+D_A00B6C0 = 0x0A00B6C0;
+D_A00B900 = 0x0A00B900;
+D_A00BB40 = 0x0A00BB40;
+D_A00BD80 = 0x0A00BD80;

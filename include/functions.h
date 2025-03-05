@@ -71,6 +71,8 @@ s32 func_800760F8(void);
 s32 func_800761D4(void);
 s32 func_80076340(void);
 void func_800763A8(void);
+void func_8007647C(void);
+
 void Dma_LoadAssets(u8* romAddr, u8* ramAddr, size_t size);
 void Dma_LoadOverlay(u8* romAddr, u8* ramAddr, size_t size, void* bssAddr, size_t bssSize);
 void func_800766F0(void);

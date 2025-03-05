@@ -1,0 +1,145 @@
+:config:
+  segments:
+    - [0x03,  0x17B660]
+  external_files:
+    - "assets/yaml/jp/rev0/segment_16C8A0.yaml"
+  header:
+    code:
+      - '#include "assets/segment_17B1E0.h"'
+      - '#include "assets/segment_16C8A0.h"'
+    header:
+      - '#include "gfx.h"'
+
+D_3000000:
+  type: GFX
+  offset: 0x0
+  symbol: D_3000000
+
+D_3000028:
+  type: GFX
+  offset: 0x28
+  symbol: D_3000028
+
+D_3000050:
+  type: GFX
+  offset: 0x50
+  symbol: D_3000050
+
+D_3000088:
+  type: GFX
+  offset: 0x88
+  symbol: D_3000088
+
+D_30000C0:
+  type: GFX
+  offset: 0xC0
+  symbol: D_30000C0
+
+D_3000100:
+  type: GFX
+  offset: 0x100
+  symbol: D_3000100
+
+D_3000138:
+  type: GFX
+  offset: 0x138
+  symbol: D_3000138
+
+D_3000170:
+  type: GFX
+  offset: 0x170
+  symbol: D_3000170
+
+D_30001A8:
+  type: GFX
+  offset: 0x1A8
+  symbol: D_30001A8
+
+D_3000270:
+  type: GFX
+  offset: 0x270
+  symbol: D_3000270
+
+D_30002D0:
+  type: VP
+  offset: 0x2D0
+  symbol: D_30002D0
+
+D_30002E0:
+  type: GFX
+  offset: 0x2E0
+  symbol: D_30002E0
+
+D_3000338:
+  type: GFX
+  offset: 0x338
+  symbol: D_3000338
+
+D_3000400:
+  type: GFX
+  offset: 0x400
+  symbol: D_3000400
+
+D_3000438:
+  type: GFX
+  offset: 0x438
+  symbol: D_3000438
+
+D_3000470:
+  type: GFX
+  offset: 0x470
+  symbol: D_3000470
+
+D_30004A8:
+  type: GFX
+  offset: 0x4A8
+  symbol: D_30004A8
+
+D_30004E0:
+  type: GFX
+  offset: 0x4E0
+  symbol: D_30004E0
+
+D_3000510:
+  type: GFX
+  offset: 0x510
+  symbol: D_3000510
+
+D_3000540:
+  type: GFX
+  offset: 0x540
+  symbol: D_3000540
+
+D_3000590:
+  type: GFX
+  offset: 0x590
+  symbol: D_3000590
+
+D_30005D8:
+  type: GFX
+  offset: 0x5D8
+  symbol: D_30005D8
+
+D_3000608:
+  type: VTX
+  count: 8
+  offset: 0x608
+  symbol: D_3000608
+
+D_3000688:
+  type: GFX
+  offset: 0x688
+  symbol: D_3000688
+
+D_30006D0:
+  type: GFX
+  offset: 0x6D0
+  symbol: D_30006D0
+
+D_30006F8:
+  type: VTX
+  count: 8
+  offset: 0x6F8
+  symbol: D_30006F8
+
+# size = 0x778

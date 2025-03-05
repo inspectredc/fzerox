@@ -7,10 +7,21 @@
 s32 D_i4_8011D790;
 s32 D_i4_8011D794;
 
-static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = { { 17, aTitleBackgroundMainTex, 304, 240, 0x14A5D }, { 0 } };
-static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = { { 17, aTitleBackgroundComicTex, 320, 240, 0x118DB }, { 0 } };
-static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = { { 17, aTitleBackgroundFalconTex, 320, 240, 0x9E0A },
-                                                            { 0 } };
+static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = {
+    { 17, aTitleBackgroundMainTex, TEX_WIDTH(aTitleBackgroundMainTex), TEX_HEIGHT(aTitleBackgroundMainTex),
+      TEX_COMPRESSED_SIZE(aTitleBackgroundMainTex) },
+    { 0 }
+};
+static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = {
+    { 17, aTitleBackgroundComicTex, TEX_WIDTH(aTitleBackgroundComicTex), TEX_HEIGHT(aTitleBackgroundComicTex),
+      TEX_COMPRESSED_SIZE(aTitleBackgroundComicTex) },
+    { 0 }
+};
+static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = {
+    { 17, aTitleBackgroundFalconTex, TEX_WIDTH(aTitleBackgroundFalconTex), TEX_HEIGHT(aTitleBackgroundFalconTex),
+      TEX_COMPRESSED_SIZE(aTitleBackgroundFalconTex) },
+    { 0 }
+};
 
 static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
     sTitleBackgroundMainCompTexInfo,
@@ -18,11 +29,26 @@ static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
     sTitleBackgroundFalconCompTexInfo,
 };
 
-unk_80077D50 sTitleLogoCompTexInfo[] = { { 18, aTitleLogoTex, 160, 65, 0x26C0 }, { 0 } };
-unk_80077D50 sTitlePushStartCompTexInfo[] = { { 18, aTitlePushStartTex, 80, 40, 0x389 }, { 0 } };
-unk_80077D50 sTitleNoControllerCompTexInfo[] = { { 20, aTitleNoControllerTex, 160, 32, 0x259 }, { 0 } };
-unk_80077D50 sTitleExpansionPakWarningCompTexInfo[] = { { 20, aTitleExpansionPakWarningTex, 160, 32, 0x4EA }, { 0 } };
-unk_80077D50 sTitleDiskWarningCompTexInfo[] = { { 20, aTitleDiskWarningTex, 160, 32, 0x3B7 }, { 0 } };
+unk_80077D50 sTitleLogoCompTexInfo[] = { { 18, aTitleLogoTex, TEX_WIDTH(aTitleLogoTex), TEX_HEIGHT(aTitleLogoTex),
+                                           TEX_COMPRESSED_SIZE(aTitleLogoTex) },
+                                         { 0 } };
+unk_80077D50 sTitlePushStartCompTexInfo[] = { { 18, aTitlePushStartTex, TEX_WIDTH(aTitlePushStartTex),
+                                                TEX_HEIGHT(aTitlePushStartTex),
+                                                TEX_COMPRESSED_SIZE(aTitlePushStartTex) },
+                                              { 0 } };
+unk_80077D50 sTitleNoControllerCompTexInfo[] = { { 20, aTitleNoControllerTex, TEX_WIDTH(aTitleNoControllerTex),
+                                                   TEX_HEIGHT(aTitleNoControllerTex),
+                                                   TEX_COMPRESSED_SIZE(aTitleNoControllerTex) },
+                                                 { 0 } };
+unk_80077D50 sTitleExpansionPakWarningCompTexInfo[] = {
+    { 20, aTitleExpansionPakWarningTex, TEX_WIDTH(aTitleExpansionPakWarningTex),
+      TEX_HEIGHT(aTitleExpansionPakWarningTex), TEX_COMPRESSED_SIZE(aTitleExpansionPakWarningTex) },
+    { 0 }
+};
+unk_80077D50 sTitleDiskWarningCompTexInfo[] = { { 20, aTitleDiskWarningTex, TEX_WIDTH(aTitleDiskWarningTex),
+                                                  TEX_HEIGHT(aTitleDiskWarningTex),
+                                                  TEX_COMPRESSED_SIZE(aTitleDiskWarningTex) },
+                                                { 0 } };
 
 unk_80077D50* sTitleWarningCompTexInfos[] = {
     sTitleNoControllerCompTexInfo,
@@ -30,7 +56,9 @@ unk_80077D50* sTitleWarningCompTexInfos[] = {
     sTitleDiskWarningCompTexInfo,
 };
 
-unk_80077D50 sCopyrightCompTexInfo[] = { { 17, aCopyrightTex, 128, 14, 0x3EC }, { 0 } };
+unk_80077D50 sCopyrightCompTexInfo[] = { { 17, aCopyrightTex, TEX_WIDTH(aCopyrightTex), TEX_HEIGHT(aCopyrightTex),
+                                           TEX_COMPRESSED_SIZE(aCopyrightTex) },
+                                         { 0 } };
 
 UNUSED s32 D_i4_8011D628[] = { 85, 21, 120, 150 };
 

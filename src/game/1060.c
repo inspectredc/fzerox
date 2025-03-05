@@ -152,7 +152,11 @@ void Main_ThreadEntry(void* arg0) {
         if (gLeoDDConnected) {
             LeoDD_LoadFonts();
         }
+#ifdef VERSION_JP
+        func_800751FC("EFZJ");
+#else
         func_800751FC("EFZE");
+#endif
         if (gLeoDDConnected) {
             func_80076340();
         }
@@ -181,6 +185,9 @@ void Main_ThreadEntry(void* arg0) {
 
     if (gRamDDCompatible && gLeoDDConnected) {
         LeoDD_LoadFonts();
+#ifdef VERSION_JP
+        func_8007647C();
+#endif
     }
     func_80075230(&sGameThread);
 

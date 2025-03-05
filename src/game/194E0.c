@@ -45,11 +45,17 @@ void func_8007F520(void) {
             return;
         }
     }
-
+#ifdef VERSION_JP
+    osWritebackDCacheAll();
+    LeoDD_DrawReferUserGuide();
+    LeoDD_DrawErrorNumber(temp_v0);
+    osWritebackDCacheAll();
+#else
     LeoDD_ForceWritebackDCacheAll();
     LeoDD_DrawReferUserGuide();
     LeoDD_DrawErrorNumber(temp_v0);
     LeoDD_ForceWritebackDCacheAll();
+#endif
     while (true) {}
 }
 
@@ -68,7 +74,11 @@ void func_8007F5EC(void) {
 
     func_80076310();
     osCreateMesgQueue(&D_800E42D0, D_800E42E8, ARRAY_COUNT(D_800E42E8));
+#ifdef VERSION_JP
+    func_i1_80404AEC("01", "EFZJ");
+#else
     func_i1_80404AEC("01", "EFZE");
+#endif
     if (func_i1_80403F4C(0x101, D_800E42E8, ARRAY_COUNT(D_800E42E8)) < 0) {
         switch (D_i1_80428610) {
             case 0x29:

@@ -10,7 +10,7 @@
 aCreateMachinePartsTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0x0
@@ -19,7 +19,7 @@ aCreateMachinePartsTex:
 aCreateMachineDesignTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0x180
@@ -28,7 +28,7 @@ aCreateMachineDesignTex:
 aCreateMachineSettingsTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0x300
@@ -37,7 +37,7 @@ aCreateMachineSettingsTex:
 aCreateMachineMarkTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0x480
@@ -46,7 +46,7 @@ aCreateMachineMarkTex:
 aCreateMachineColorTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0x600
@@ -55,7 +55,7 @@ aCreateMachineColorTex:
 aCreateMachineBodyTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0x780
@@ -64,7 +64,7 @@ aCreateMachineBodyTex:
 aCreateMachineLineTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0x900
@@ -73,7 +73,7 @@ aCreateMachineLineTex:
 aCreateMachineNumberTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0xA80
@@ -82,7 +82,7 @@ aCreateMachineNumberTex:
 aCreateMachineCockpitTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0xC00
@@ -91,7 +91,7 @@ aCreateMachineCockpitTex:
 aCreateMachineSaveAsTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0xD80
@@ -100,7 +100,7 @@ aCreateMachineSaveAsTex:
 aCreateMachineUseTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0xF00
@@ -109,7 +109,7 @@ aCreateMachineUseTex:
 aCreateMachineClearTex:
   type: TEXTURE
   ctype: u8
-  format: IA8
+  format: I8
   width: 24
   height: 16
   offset: 0x1080

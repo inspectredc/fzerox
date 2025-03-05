@@ -1,0 +1,641 @@
+:config:
+  compression:
+    offset: 0x22B520
+  segments:
+    - [0x09,  0x22B520]
+  header:
+    code:
+      - '#include "assets/segment_22B0A0.h"'
+    header:
+      - '#include "gfx.h"'
+
+D_9000000:
+  type: GFX
+  offset: 0x0
+  symbol: D_9000000
+
+D_9000008:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x8
+  symbol: D_9000008
+
+D_9000208:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x208
+  symbol: D_9000208
+
+D_9000A08:
+  type: GFX
+  offset: 0xA08
+  symbol: D_9000A08
+
+D_9000A10:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0xA10
+  symbol: D_9000A10
+
+D_9001210:
+  type: GFX
+  offset: 0x1210
+  symbol: D_9001210
+
+D_90013E0:
+  type: VTX
+  count: 156
+  offset: 0x13E0
+  symbol: D_90013E0
+
+D_9001DA0:
+  type: GFX
+  offset: 0x1DA0
+  symbol: D_9001DA0
+
+D_9001F10:
+  type: VTX
+  count: 140
+  offset: 0x1F10
+  symbol: D_9001F10
+
+D_90027D0:
+  type: GFX
+  offset: 0x27D0
+  symbol: D_90027D0
+
+D_9002970:
+  type: VTX
+  count: 110
+  offset: 0x2970
+  symbol: D_9002970
+
+D_9003050:
+  type: GFX
+  offset: 0x3050
+  symbol: D_9003050
+
+D_9003190:
+  type: VTX
+  count: 110
+  offset: 0x3190
+  symbol: D_9003190
+
+D_9003870:
+  type: GFX
+  offset: 0x3870
+  symbol: D_9003870
+
+D_90039D0:
+  type: VTX
+  count: 92
+  offset: 0x39D0
+  symbol: D_90039D0
+
+D_9003F90:
+  type: GFX
+  offset: 0x3F90
+  symbol: D_9003F90
+
+D_9004138:
+  type: VTX
+  count: 166
+  offset: 0x4138
+  symbol: D_9004138
+
+D_9004B98:
+  type: GFX
+  offset: 0x4B98
+  symbol: D_9004B98
+
+D_9004D48:
+  type: VTX
+  count: 166
+  offset: 0x4D48
+  symbol: D_9004D48
+
+D_90057A8:
+  type: GFX
+  offset: 0x57A8
+  symbol: D_90057A8
+
+D_9005900:
+  type: VTX
+  count: 138
+  offset: 0x5900
+  symbol: D_9005900
+
+D_90061A0:
+  type: GFX
+  offset: 0x61A0
+  symbol: D_90061A0
+
+D_90062E0:
+  type: VTX
+  count: 121
+  offset: 0x62E0
+  symbol: D_90062E0
+
+D_9006A70:
+  type: GFX
+  offset: 0x6A70
+  symbol: D_9006A70
+
+D_9006C20:
+  type: VTX
+  count: 205
+  offset: 0x6C20
+  symbol: D_9006C20
+
+D_90078F0:
+  type: GFX
+  offset: 0x78F0
+  symbol: D_90078F0
+
+D_9007A10:
+  type: VTX
+  count: 101
+  offset: 0x7A10
+  symbol: D_9007A10
+
+D_9008060:
+  type: GFX
+  offset: 0x8060
+  symbol: D_9008060
+
+D_90081C0:
+  type: VTX
+  count: 126
+  offset: 0x81C0
+  symbol: D_90081C0
+
+D_90089A0:
+  type: GFX
+  offset: 0x89A0
+  symbol: D_90089A0
+
+D_9008B18:
+  type: VTX
+  count: 132
+  offset: 0x8B18
+  symbol: D_9008B18
+
+D_9009358:
+  type: GFX
+  offset: 0x9358
+  symbol: D_9009358
+
+D_9009460:
+  type: VTX
+  count: 82
+  offset: 0x9460
+  symbol: D_9009460
+
+D_9009980:
+  type: GFX
+  offset: 0x9980
+  symbol: D_9009980
+
+D_9009AB0:
+  type: VTX
+  count: 106
+  offset: 0x9AB0
+  symbol: D_9009AB0
+
+D_900A150:
+  type: GFX
+  offset: 0xA150
+  symbol: D_900A150
+
+D_900A2D0:
+  type: VTX
+  count: 151
+  offset: 0xA2D0
+  symbol: D_900A2D0
+
+D_900AC40:
+  type: GFX
+  offset: 0xAC40
+  symbol: D_900AC40
+
+D_900AD48:
+  type: VTX
+  count: 84
+  offset: 0xAD48
+  symbol: D_900AD48
+
+D_900B288:
+  type: GFX
+  offset: 0xB288
+  symbol: D_900B288
+
+D_900B418:
+  type: VTX
+  count: 145
+  offset: 0xB418
+  symbol: D_900B418
+
+D_900BD28:
+  type: GFX
+  offset: 0xBD28
+  symbol: D_900BD28
+
+D_900BE40:
+  type: VTX
+  count: 113
+  offset: 0xBE40
+  symbol: D_900BE40
+
+D_900C550:
+  type: GFX
+  offset: 0xC550
+  symbol: D_900C550
+
+D_900C698:
+  type: VTX
+  count: 139
+  offset: 0xC698
+  symbol: D_900C698
+
+D_900CF48:
+  type: GFX
+  offset: 0xCF48
+  symbol: D_900CF48
+
+D_900D078:
+  type: VTX
+  count: 130
+  offset: 0xD078
+  symbol: D_900D078
+
+D_900D898:
+  type: GFX
+  offset: 0xD898
+  symbol: D_900D898
+
+D_900D988:
+  type: VTX
+  count: 103
+  offset: 0xD988
+  symbol: D_900D988
+
+D_900DFF8:
+  type: GFX
+  offset: 0xDFF8
+  symbol: D_900DFF8
+
+D_900E0E8:
+  type: VTX
+  count: 91
+  offset: 0xE0E8
+  symbol: D_900E0E8
+
+D_900E698:
+  type: GFX
+  offset: 0xE698
+  symbol: D_900E698
+
+D_900E7E8:
+  type: VTX
+  count: 128
+  offset: 0xE7E8
+  symbol: D_900E7E8
+
+D_900EFE8:
+  type: GFX
+  offset: 0xEFE8
+  symbol: D_900EFE8
+
+D_900F0E0:
+  type: VTX
+  count: 107
+  offset: 0xF0E0
+  symbol: D_900F0E0
+
+D_900F790:
+  type: GFX
+  offset: 0xF790
+  symbol: D_900F790
+
+D_900F8B8:
+  type: VTX
+  count: 132
+  offset: 0xF8B8
+  symbol: D_900F8B8
+
+D_90100F8:
+  type: GFX
+  offset: 0x100F8
+  symbol: D_90100F8
+
+D_9010288:
+  type: VTX
+  count: 155
+  offset: 0x10288
+  symbol: D_9010288
+
+D_9010C38:
+  type: GFX
+  offset: 0x10C38
+  symbol: D_9010C38
+
+D_9010D48:
+  type: VTX
+  count: 105
+  offset: 0x10D48
+  symbol: D_9010D48
+
+D_90113D8:
+  type: GFX
+  offset: 0x113D8
+  symbol: D_90113D8
+
+D_9011568:
+  type: VTX
+  count: 148
+  offset: 0x11568
+  symbol: D_9011568
+
+D_9011EA8:
+  type: GFX
+  offset: 0x11EA8
+  symbol: D_9011EA8
+
+D_9012008:
+  type: VTX
+  count: 113
+  offset: 0x12008
+  symbol: D_9012008
+
+D_9012718:
+  type: GFX
+  offset: 0x12718
+  symbol: D_9012718
+
+D_90128F0:
+  type: VTX
+  count: 183
+  offset: 0x128F0
+  symbol: D_90128F0
+
+D_9013460:
+  type: GFX
+  offset: 0x13460
+  symbol: D_9013460
+
+D_90135B8:
+  type: VTX
+  offset: 0x135B8
+  count: 122
+  symbol: D_90135B8
+
+D_9013D58:
+  type: GFX
+  offset: 0x13D58
+  symbol: D_9013D58
+
+D_9013F18:
+  type: VTX
+  offset: 0x13F18
+  count: 158
+  symbol: D_9013F18
+
+D_90148F8:
+  type: GFX
+  offset: 0x148F8
+  symbol: D_90148F8
+
+D_9014970:
+  type: VTX
+  count: 29
+  offset: 0x14970
+  symbol: D_9014970
+
+D_9014B40:
+  type: GFX
+  offset: 0x14B40
+  symbol: D_9014B40
+
+D_9014BB0:
+  type: VTX
+  count: 35
+  offset: 0x14BB0
+  symbol: D_9014BB0
+
+D_9014DE0:
+  type: GFX
+  offset: 0x14DE0
+  symbol: D_9014DE0
+
+D_9014E88:
+  type: VTX
+  count: 32
+  offset: 0x14E88
+  symbol: D_9014E88
+
+D_9015088:
+  type: GFX
+  offset: 0x15088
+  symbol: D_9015088
+
+D_9015130:
+  type: VTX
+  count: 45
+  offset: 0x15130
+  symbol: D_9015130
+
+D_9015400:
+  type: GFX
+  offset: 0x15400
+  symbol: D_9015400
+
+D_9015478:
+  type: VTX
+  count: 30
+  offset: 0x15478
+  symbol: D_9015478
+
+D_9015658:
+  type: GFX
+  offset: 0x15658
+  symbol: D_9015658
+
+D_90156E8:
+  type: VTX
+  count: 37
+  offset: 0x156E8
+  symbol: D_90156E8
+
+D_9015938:
+  type: GFX
+  offset: 0x15938
+  symbol: D_9015938
+
+D_90159A8:
+  type: VTX
+  count: 27
+  offset: 0x159A8
+  symbol: D_90159A8
+
+D_9015B58:
+  type: GFX
+  offset: 0x15B58
+  symbol: D_9015B58
+
+D_9015BE0:
+  type: VTX
+  count: 55
+  offset: 0x15BE0
+  symbol: D_9015BE0
+
+D_9015F50:
+  type: GFX
+  offset: 0x15F50
+  symbol: D_9015F50
+
+D_9015FC8:
+  type: VTX
+  count: 45
+  offset: 0x15FC8
+  symbol: D_9015FC8
+
+D_9016298:
+  type: GFX
+  offset: 0x16298
+  symbol: D_9016298
+
+D_90162F0:
+  type: VTX
+  count: 36
+  offset: 0x162F0
+  symbol: D_90162F0
+
+D_9016530:
+  type: GFX
+  offset: 0x16530
+  symbol: D_9016530
+
+D_90165B8:
+  type: VTX
+  count: 57
+  offset: 0x165B8
+  symbol: D_90165B8
+
+D_9016948:
+  type: GFX
+  offset: 0x16948
+  symbol: D_9016948
+
+D_90169E0:
+  type: VTX
+  count: 60
+  offset: 0x169E0
+  symbol: D_90169E0
+
+D_9016DA0:
+  type: GFX
+  offset: 0x16DA0
+  symbol: D_9016DA0
+
+D_9016E50:
+  type: VTX
+  count: 80
+  offset: 0x16E50
+  symbol: D_9016E50
+
+D_9017350:
+  type: GFX
+  offset: 0x17350
+  symbol: D_9017350
+
+D_9017468:
+  type: VTX
+  count: 107
+  offset: 0x17468
+  symbol: D_9017468
+
+D_9017B18:
+  type: GFX
+  offset: 0x17B18
+  symbol: D_9017B18
+
+D_9017B40:
+  type: VTX
+  count: 11
+  offset: 0x17B40
+  symbol: D_9017B40
+
+D_9017BF0:
+  type: GFX
+  offset: 0x17BF0
+  symbol: D_9017BF0
+
+D_9017C20:
+  type: VTX
+  count: 16
+  offset: 0x17C20
+  symbol: D_9017C20
+
+D_9017D20:
+  type: GFX
+  offset: 0x17D20
+  symbol: D_9017D20
+
+D_9017D68:
+  type: VTX
+  count: 22
+  offset: 0x17D68
+  symbol: D_9017D68
+
+D_9017EC8:
+  type: GFX
+  offset: 0x17EC8
+  symbol: D_9017EC8
+
+D_9017F50:
+  type: VTX
+  count: 46
+  offset: 0x17F50
+  symbol: D_9017F50
+
+D_9018230:
+  type: GFX
+  offset: 0x18230
+  symbol: D_9018230
+
+D_9018270:
+  type: VTX
+  count: 24
+  offset: 0x18270
+  symbol: D_9018270
+
+D_90183F0:
+  type: GFX
+  offset: 0x183F0
+  symbol: D_90183F0
+
+D_9018450:
+  type: VTX
+  count: 39
+  offset: 0x18450
+  symbol: D_9018450
+
+D_90186C0:
+  type: GFX
+  offset: 0x186C0
+  symbol: D_90186C0
+
+D_90186C8:
+  type: GFX
+  offset: 0x186C8
+  symbol: D_90186C8
+

@@ -1570,7 +1570,11 @@ Gfx* func_i2_800FFEEC(Gfx* gfx, unk_8010D778* arg1) {
     return gfx;
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i2/98080/func_i2_800FFEEC.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/98080/func_i2_800FFEEC.s")
+#endif
 #endif
 
 void func_i2_80100220(unk_8010D778* arg0) {

@@ -38,7 +38,6 @@ typedef struct CourseSegment {
     /* 0xA0 */ f32 unk_A0;
 } CourseSegment; // size = 0xA4
 
-// Todo fill in array as individual documented u8 variables
 typedef struct CarInfo {
     /* 0x00 */ u8 character;
     /* 0x01 */ u8 customType;

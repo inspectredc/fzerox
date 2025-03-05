@@ -226,7 +226,7 @@ void func_i3_8012F324(void) {
     sSecondLapStarted = false;
     sFinalLapStarted = false;
 
-    func_80078104(aBestTex, 0x180, 0, 0, 0);
+    func_80078104(aBestTex, TEX_SIZE(aBestTex, sizeof(u16)), 0, 0, 0);
 
     if (gGameMode == GAMEMODE_PRACTICE) {
         D_i3_8013EFFC = 360;

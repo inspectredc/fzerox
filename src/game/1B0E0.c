@@ -2964,9 +2964,6 @@ void func_80086FD0(void) {
     }
 }
 
-extern unk_struct_9C D_800D53B0;
-extern unk_struct_9C D_800D54A4;
-
 void func_800876A8(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
     Vec3f* var_v1;
     f32 temp_fv0;
@@ -2988,10 +2985,10 @@ void func_800876A8(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
 
     if (arg0->unk_1C >= 0x12C) {
         if (gNumPlayers == 2) {
-            func_800811B0(arg1, &D_800D54A4);
+            func_800811B0(arg1, &D_800D544C.unk_58);
             var_v1 = &D_800D5328[2];
         } else {
-            func_800811B0(arg1, &D_800D53B0);
+            func_800811B0(arg1, &D_800D5358.unk_58);
             var_v1 = &D_800D52F8[2];
         }
         arg0->unk_04 = 5;
@@ -3145,13 +3142,13 @@ void func_80087DB8(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
     }
 }
 
-extern s8 D_801190D0;
+extern s8 D_i5_801190D0;
 
 void func_80087E14(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
     s32 i;
     unk_struct_9C* temp_v0 = &arg1->unk_04.unk_58;
 
-    if (D_801190D0 != 0) {
+    if (D_i5_801190D0 != 0) {
         temp_v0->unk_00.unk_00.unk_48.y += 1.0f;
         if (temp_v0->unk_00.unk_00.unk_48.y >= 360.0f) {
             temp_v0->unk_00.unk_00.unk_48.y -= 360.0f;
@@ -3183,9 +3180,6 @@ void func_80087E14(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
 void func_80087F60(unk_struct_1DC* arg0, unk_struct_F8* arg1) {
     arg1->unk_04.unk_58.unk_00.unk_00.unk_00.unk_00 = gRacers[arg0->unk_00].unk_0C.unk_34;
 }
-
-extern unk_struct_20 D_800D4CD8;
-extern unk_struct_68 D_800D4EF0;
 
 void func_80087FAC(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2) {
     unk_struct_9C* temp_v1 = &arg1->unk_04.unk_58;
@@ -3255,7 +3249,7 @@ void func_80087FAC(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
         switch (temp_a3->unk_00) {
             case 0:
                 if (temp_t1 != temp_a3->unk_00) {
-                    func_800810E0(arg1, &D_800D4CD8);
+                    func_800810E0(arg1, &D_800D4C80.unk_58);
                 }
                 temp_t0->unk_00.unk_18[3] = 0.0f;
                 temp_t0->unk_00.unk_18[4] = 1.0f;
@@ -3268,7 +3262,7 @@ void func_80087FAC(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
                 break;
             case 1:
                 if (temp_t1 != temp_a3->unk_00) {
-                    func_80081318(arg1, &D_800D4EF0);
+                    func_80081318(arg1, &D_800D4E98.unk_58);
                 }
                 temp_v0_2 = (unk_800CD8B0*) temp_a3->unk_08;
                 temp_v1->unk_00.unk_00.unk_3C = temp_v0_2->unk_00;
@@ -3427,7 +3421,7 @@ void func_800888D0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
                     if (D_i7_8014BDF6 & 0x40) {
                         var_s3 = true;
                         arg0->unk_18 = 2;
-                        func_80081318(arg1, &D_800D4EF0);
+                        func_80081318(arg1, &D_800D4E98.unk_58);
                         arg1->unk_04.unk_58.unk_00.unk_00.unk_3C.z = 0.0f;
                         arg1->unk_04.unk_58.unk_00.unk_00.unk_3C.y = 0.0f;
                         arg1->unk_04.unk_58.unk_00.unk_00.unk_3C.x = 0.0f;
@@ -5742,7 +5736,11 @@ void func_8008F550(Racer* arg0) {
     }
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/1B0E0/func_8008F550.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_8008F550.s")
+#endif
 #endif
 
 void func_8008FC80(Racer* arg0) {
@@ -7508,7 +7506,11 @@ void func_80090BCC(Racer* arg0, Controller* arg1) {
     }
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/1B0E0/func_80090BCC.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_80090BCC.s")
+#endif
 #endif
 
 void func_80094FF4(s32 position) {
@@ -8114,7 +8116,11 @@ void func_800952F4(void) {
     }
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/1B0E0/func_800952F4.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_800952F4.s")
+#endif
 #endif
 
 extern unk_80111870 D_80111870[32];
@@ -9521,7 +9527,11 @@ end:
     return gfx;
 }
 #else
+#ifdef VERSION_JP
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/1B0E0/func_80096CE8.s")
+#else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_80096CE8.s")
+#endif
 #endif
 
 Gfx* func_8009CBE8(Gfx* gfx, s32 arg1, s32 red, s32 green, s32 blue) {

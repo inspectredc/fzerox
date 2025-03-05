@@ -1,0 +1,136 @@
+:config:
+  header:
+    code:
+      - '#include "assets/course_data.h"'
+    header:
+      - '#include "fzx_course.h"'
+
+aCourseMuteCity1:
+  type: FZX:COURSE
+  offset: 0x2AD660
+  symbol: aCourseMuteCity1
+
+aCourseSilence1:
+  type: FZX:COURSE
+  offset: 0x2ADE40
+  symbol: aCourseSilence1
+
+aCourseSandOcean1:
+  type: FZX:COURSE
+  offset: 0x2AE620
+  symbol: aCourseSandOcean1
+
+aCourseDevilsForest1:
+  type: FZX:COURSE
+  offset: 0x2AEE00
+  symbol: aCourseDevilsForest1
+
+aCourseBigBlue1:
+  type: FZX:COURSE
+  offset: 0x2AF5E0
+  symbol: aCourseBigBlue1
+
+aCoursePortTown1:
+  type: FZX:COURSE
+  offset: 0x2AFDC0
+  symbol: aCoursePortTown1
+
+aCourseSectorAlpha:
+  type: FZX:COURSE
+  offset: 0x2B05A0
+  symbol: aCourseSectorAlpha
+
+aCourseRedCanyon1:
+  type: FZX:COURSE
+  offset: 0x2B0D80
+  symbol: aCourseRedCanyon1
+
+aCourseDevilsForest2:
+  type: FZX:COURSE
+  offset: 0x2B1560
+  symbol: aCourseDevilsForest2
+
+aCourseMuteCity2:
+  type: FZX:COURSE
+  offset: 0x2B1D40
+  symbol: aCourseMuteCity2
+
+aCourseBigBlue2:
+  type: FZX:COURSE
+  offset: 0x2B2520
+  symbol: aCourseBigBlue2
+
+aCourseWhiteLand1:
+  type: FZX:COURSE
+  offset: 0x2B2D00
+  symbol: aCourseWhiteLand1
+
+aCourseFireField:
+  type: FZX:COURSE
+  offset: 0x2B34E0
+  symbol: aCourseFireField
+
+aCourseSilence2:
+  type: FZX:COURSE
+  offset: 0x2B3CC0
+  symbol: aCourseSilence2
+
+aCourseSectorBeta:
+  type: FZX:COURSE
+  offset: 0x2B44A0
+  symbol: aCourseSectorBeta
+
+aCourseRedCanyon2:
+  type: FZX:COURSE
+  offset: 0x2B4C80
+  symbol: aCourseRedCanyon2
+
+aCourseWhiteLand2:
+  type: FZX:COURSE
+  offset: 0x2B5460
+  symbol: aCourseWhiteLand2
+
+aCourseMuteCity3:
+  type: FZX:COURSE
+  offset: 0x2B5C40
+  symbol: aCourseMuteCity3
+
+aCourseRainbowRoad:
+  type: FZX:COURSE
+  offset: 0x2B6420
+  symbol: aCourseRainbowRoad
+
+aCourseDevilsForest3:
+  type: FZX:COURSE
+  offset: 0x2B6C00
+  symbol: aCourseDevilsForest3
+
+aCourseSpacePlant:
+  type: FZX:COURSE
+  offset: 0x2B73E0
+  symbol: aCourseSpacePlant
+
+aCourseSandOcean2:
+  type: FZX:COURSE
+  offset: 0x2B7BC0
+  symbol: aCourseSandOcean2
+
+aCoursePortTown2:
+  type: FZX:COURSE
+  offset: 0x2B83A0
+  symbol: aCoursePortTown2
+
+aCourseBigHand:
+  type: FZX:COURSE
+  offset: 0x2B8B80
+  symbol: aCourseBigHand
+
+aCourseBattle:
+  type: FZX:COURSE
+  offset: 0x2B9360
+  symbol: aCourseBattle
+
+aCourseEnding:
+  type: FZX:COURSE
+  offset: 0x2B9B40
+  symbol: aCourseEnding

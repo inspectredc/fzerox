@@ -5,6 +5,20 @@
     gbi: F3DEX2
     sort: OFFSET
     logging: ERROR
+    textures: ADDITIONAL_DEFINES
+    output:
+      code: src/assets
+      headers: include/assets
+      modding: src/assets
+
+a418b0151521b76691fa03f8658c8b567c69498b:
+  name: F-ZERO X JP REV 0 (v1.0)
+  path: assets/yaml/jp/rev0
+  config:
+    gbi: F3DEX2
+    sort: OFFSET
+    logging: ERROR
+    textures: ADDITIONAL_DEFINES
     output:
       code: src/assets
       headers: include/assets
