@@ -4,9 +4,10 @@
 
 This is a WIP Matching Decompilation for F-Zero X.
 
-It currently builds the following ROM:
+It currently builds the following ROMs:
 
 * fzerox.us.rev0.z64 `MD5: 753437d0d8ada1d12f3f9cf0f0a5171f`
+* fzerox.jp.rev0.z64 `MD5: 58d200d43620007314304f4e6c9e6528`
 
 **This repo does not include any assets or assembly code necessary for compiling the ROM. A prior copy of the game is required to extract the required assets.**
 
@@ -82,7 +83,7 @@ make toolchain
 #### 5. Prepare a base ROM
 
 Copy your ROM to the root of this new project directory, and rename the file of the baserom to reflect the version of ROM you are using. ex: `baserom.us.rev0.z64`
-* Make sure the ROM is the US version, revision 1.0
+* Make sure the ROM is the US or JP version, revision 1.0
 
 #### 6. Make and Build the ROM
 
@@ -110,6 +111,8 @@ fzerox.us.rev0.z64 FAILED
 This means that something is wrong with the ROM's contents. Either the base files are incorrect due to a bad ROM, or some of the code is not matching.
 
 From now on you should be able to build the rom by running `make`.
+
+For building the japanese version, make commands must all contain this additional define `VERSION=jp`.
 
 [discord]: https://discord.gg/f2gmBaHySA
 [discord-badge]: https://img.shields.io/discord/1252984267471061053?logo=discord&logoColor=ffffff
