@@ -40,4 +40,4 @@ jobs:
       run: cp -r fzerox-secret/baserom.jp.rev0.z64 ./
 
     - name: Compile
-      run: make init
+      run: make init VERSION=jp
