@@ -74,7 +74,7 @@ void func_80074CE4(CourseRecordInfo* arg0) {
     CourseSegment* var_s0;
 
     var_s0 = arg0->courseSegments;
-    for (i = 0; i < arg0->unk_08; i++) {
+    for (i = 0; i < arg0->segmentCount; i++) {
         func_8009E538(var_s0, 0.0f, &spD4);
         func_80074BB4(&spD4, 1);
         if ((SQ(spD4.x) + SQ(spD4.z)) != 0.0f) {

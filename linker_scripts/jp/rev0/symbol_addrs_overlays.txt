@@ -47,7 +47,7 @@ D_i3_80141998 = 0x80141298; // segment:ovl_i3
 D_i3_80141908 = 0x80141208; // segment:ovl_i3
 D_i3_8014190C = 0x8014120C; // segment:ovl_i3
 D_i3_80141910 = 0x80141210; // segment:ovl_i3
-D_80141C78 = 0x80141578; // segment:ovl_i3
+gFastestGhostTime = 0x80141578; // segment:ovl_i3
 
 D_i6_8011DFAC = 0x8011D87C; // segment:ovl_i6
 D_i6_8011DFB0 = 0x8011D880; // segment:ovl_i6

@@ -57,10 +57,10 @@ u8* sWinnerTexture;
 u8* sWinnerPalette;
 u8* sLoserTexture;
 u8* sLoserPalette;
-s32 D_80141C78;
+s32 gFastestGhostTime;
 s32 sFastestGhostTime;
 s32 sFastestGhostIndex;
-s32 D_i3_80141C84;
+s32 gFastestGhostIndex;
 GhostInfo gSavedGhostInfo;
 f32 D_i3_80141CC8;
 s32 D_i3_80141CD0[4];
@@ -348,7 +348,7 @@ void func_i3_80122C3C(void);
 void func_i3_8013C080(void);
 extern unk_800CD970 D_800CD970[];
 
-extern unk_800F5DF0* D_800F5E90;
+extern GhostRacer* gFastestGhostRacer;
 extern s16 gPlayerLives[];
 extern s16 D_80115DE0;
 
@@ -436,10 +436,10 @@ void func_i3_8011B520(void) {
         sLoserTexture = func_80078104(aLoserTex, TEX_SIZE(aLoserTex, sizeof(u8)), 0, 0, 0);
         sLoserPalette = func_80078104(aLoserTLUT, TEX_SIZE(aLoserTLUT, sizeof(u16)), 0, 0, 0);
         func_i3_80122C3C();
-        if (D_i3_80141C84 >= 0) {
-            D_i3_80141DD0 = D_800F5E90->unk_30;
+        if (gFastestGhostIndex >= 0) {
+            D_i3_80141DD0 = gFastestGhostRacer->racer;
             D_i3_80141DD8 = D_i3_80141DD0->unk_244;
-            D_i3_80141DDC = gCurrentCourseRecordInfo->unk_0C * -1.0f;
+            D_i3_80141DDC = gCurrentCourseRecordInfo->length * -1.0f;
         }
     }
 
@@ -632,28 +632,28 @@ Gfx* func_i3_8011C25C(Gfx* gfx, s32 playerNum) {
                     var_v1 = 0;
                     for (i = 0; i < D_800E5EC0; i++) {
                         if ((D_i3_80141B40[D_i3_80141A50[playerNum][0]][0] == gRacers[i].character) &&
-                            (!(gRacers[i].unk_04 & 0x08000000))) {
-                            gRacers[i].unk_228 = 0.0f;
+                            (!(gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000))) {
+                            gRacers[i].energy = 0.0f;
                             var_v1++;
                         }
                     }
 
                     if ((var_v1 == 0) && (D_i3_80141B40[D_i3_80141A50[playerNum][0]][0] < 30)) {
                         for (i = 0; i < D_800E5EC0; i++) {
-                            gRacers[i].unk_228 /= 2.0f;
+                            gRacers[i].energy /= 2.0f;
                         }
                     }
                     if (D_i3_80141B40[D_i3_80141A50[playerNum][0]][0] == 30) {
-                        D_800E5F40[0]->unk_228 = 0.0f;
+                        D_800E5F40[0]->energy = 0.0f;
                     }
                     if (D_i3_80141B40[D_i3_80141A50[playerNum][0]][0] == 31) {
                         for (i = 0; i < D_800E5EC0; i++) {
-                            gRacers[i].unk_228 = 0.0f;
+                            gRacers[i].energy = 0.0f;
                         }
                     }
                     if (D_i3_80141B40[D_i3_80141A50[playerNum][0]][0] == 32) {
                         for (i = 0; i < D_800E5EC0; i++) {
-                            gRacers[i].unk_228 /= 2.0f;
+                            gRacers[i].energy /= 2.0f;
                         }
                     }
                 }
@@ -1263,7 +1263,7 @@ Gfx* func_i3_8012040C(Gfx* gfx, s32 arg1) {
         if (arg1 == sp60[0]) {
             if (D_i3_80141BE0[arg1] == 60) {
 
-                if (gRacers[arg1].unk_04 & 0x08000000) {
+                if (gRacers[arg1].stateFlags & RACER_STATE_FLAGS_8000000) {
                     if (D_800CD010 == 0) {
                         func_800BAFA4(0x13);
                     }
@@ -1271,7 +1271,7 @@ Gfx* func_i3_8012040C(Gfx* gfx, s32 arg1) {
                     func_800BAFA4(0x11);
                 }
                 for (i = 0; i < gNumPlayers; i++) {
-                    if ((gRacers[i].unk_04 & 0x08000000) || (gRacers[arg1].unk_04 & 0x02000000)) {
+                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) || (gRacers[arg1].stateFlags & RACER_STATE_FLAGS_2000000)) {
                         func_800BA3E4(i, 3);
                         func_800BA3E4(i, 4);
                         func_800BA3E4(i, 5);
@@ -1683,7 +1683,7 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
             func_800BAFA4(0x11);
         }
         for (i = 0; i < gNumPlayers; i++) {
-            if ((gRacers[i].unk_04 & 0x08000000) || (gRacers[playerIndex].unk_04 & 0x02000000)) {
+            if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) || (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
                 func_800BA3E4(i, 3);
                 func_800BA3E4(i, 4);
                 func_800BA3E4(i, 5);
@@ -1763,7 +1763,7 @@ Gfx* func_i3_80121E70(Gfx* gfx, s32 arg1) {
         }
     }
 
-    if (gRacers[arg1].unk_04 & 0x02000000) {
+    if (gRacers[arg1].stateFlags & RACER_STATE_FLAGS_2000000) {
         if (D_i3_80141BF0[arg1] <= 10) {
             sp80 = 0;
             sp84 = 0.f;
@@ -2000,12 +2000,12 @@ extern Ghost* gFastestGhost;
 
 void func_i3_80122C3C(void) {
 
-    if (D_800F5E90 == NULL) {
-        D_i3_80141C84 = -1;
-        D_80141C78 = MAX_TIMER;
+    if (gFastestGhostRacer == NULL) {
+        gFastestGhostIndex = -1;
+        gFastestGhostTime = MAX_TIMER;
     } else {
-        D_i3_80141C84 = D_800F5E90->ghost - gGhosts;
-        D_80141C78 = D_800F5E90->ghost->raceTime;
+        gFastestGhostIndex = gFastestGhostRacer->ghost - gGhosts;
+        gFastestGhostTime = gFastestGhostRacer->ghost->raceTime;
     }
     if (gFastestGhost == NULL) {
         sFastestGhostIndex = -1;
@@ -2597,7 +2597,7 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_i3_80141D98 + 205, D_i3_80141D98 + 132, 305 - D_i3_80141D98,
                   210 - D_i3_80141D98);
-    if (gRacers[0].unk_04 & 0x02000000) {
+    if (gRacers[0].stateFlags & RACER_STATE_FLAGS_2000000) {
         gfx = func_i3_DrawBeveledBox(gfx, 210, 137, 300, 205, 0, 0, 0, 180);
     } else {
         gfx = func_i3_DrawBeveledBox(gfx, 210, 137, 300, 205, 0, 0, 200, 127);
@@ -4594,7 +4594,7 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
-                    if ((gRacers[i].unk_04 & 0x08000000) || (gRacers[playerIndex].unk_04 & 0x02000000)) {
+                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) || (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
                         func_800BA3E4(i, 3);
                         func_800BA3E4(i, 4);
                         func_800BA3E4(i, 5);
@@ -4630,7 +4630,7 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
-                    if ((gRacers[i].unk_04 & 0x08000000) || (gRacers[playerIndex].unk_04 & 0x02000000)) {
+                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) || (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
                         func_800BA3E4(i, 3);
                         func_800BA3E4(i, 4);
                         func_800BA3E4(i, 5);
@@ -4692,7 +4692,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     }
 
     for (i = 0; i < gNumPlayers; i++) {
-        if (gRacers[i].unk_04 & 0x02000000) {
+        if (gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000) {
             D_i3_80141DE0[i]++;
             if (D_i3_80141DE0[i] > 36000) {
                 D_i3_80141DE0[i] = 36000;
@@ -4746,7 +4746,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         gfx = func_i3_DrawRacePortraits(gfx);
                     }
                     if ((gGameMode != GAMEMODE_DEATH_RACE) && (D_i3_80141C20[i] == 0) &&
-                        !(gRacers[i].unk_04 & 0x02000000)) {
+                        !(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000)) {
                         gfx = func_i3_80135B20(gfx, gNumPlayers - 1, i);
                     }
                     if (gNumPlayers == 3) {
@@ -4754,7 +4754,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                     }
                     gfx = func_i3_DrawPosition(gfx, gNumPlayers - 1, i);
                 }
-                if (((gNumPlayers != 1) || (D_i3_80141C20[i] == 0)) && !(gRacers[i].unk_04 & 0x02000000)) {
+                if (((gNumPlayers != 1) || (D_i3_80141C20[i] == 0)) && !(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000)) {
                     gfx = func_i3_DrawPlayerSpeed(gfx, gNumPlayers - 1, i);
                 }
             }
@@ -4762,7 +4762,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     }
     if (((gGameFrameCount % 120) == 0) && (D_800DCE5C == 0)) {
         for (i = 0; i < D_800E5EC0; i++) {
-            if (!(gRacers[i].unk_04 & 0x02000000) && (gRacers[i].unk_04 & 0x08000000)) {
+            if (!(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000) && (gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000)) {
                 gRacers[i].unk_368 = 254;
             }
         }
@@ -4770,7 +4770,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
         if (D_800CD010 != 0) {
             j = 0;
             for (i = 0; i < gNumPlayers; i++) {
-                if (gRacers[i].unk_04 & 0x08000000) {
+                if (gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) {
                     j++;
                 }
             }
@@ -4792,9 +4792,9 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         } else {
                             var_fa0 = ((D_800E5F40[1]->unk_23C - gRacers[playerIndex].unk_23C) / temp_ft5) * 0.8892f;
                         }
-                        if (D_800E5F40[0]->unk_04 & 0x02000000) {
+                        if (D_800E5F40[0]->stateFlags & RACER_STATE_FLAGS_2000000) {
                             var_fa0 = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].unk_23C) *
-                                       gCurrentCourseRecordInfo->unk_0C * gTotalLapCount) -
+                                       gCurrentCourseRecordInfo->length * gTotalLapCount) -
                                       D_800E5F40[0]->raceTime;
                         }
                         if ((var_fa0 < 30000.0f) && (var_fa0 > -30000.0f) && (D_800F80A8[0] < 10)) {
@@ -4812,23 +4812,23 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         func_800BA8D8(0x31);
                     }
                 }
-            } else if ((gGameMode == GAMEMODE_TIME_ATTACK) && (D_i3_80141C84 >= 0)) {
+            } else if ((gGameMode == GAMEMODE_TIME_ATTACK) && (gFastestGhostIndex >= 0)) {
 
-                if (D_i3_80141DD0->unk_244 - D_i3_80141DD8 < -(gCurrentCourseRecordInfo->unk_0C * 0.5f)) {
-                    D_i3_80141DDC += gCurrentCourseRecordInfo->unk_0C;
+                if (D_i3_80141DD0->unk_244 - D_i3_80141DD8 < -(gCurrentCourseRecordInfo->length * 0.5f)) {
+                    D_i3_80141DDC += gCurrentCourseRecordInfo->length;
                 }
 
-                if (gCurrentCourseRecordInfo->unk_0C * 0.5f < D_i3_80141DD0->unk_244 - D_i3_80141DD8) {
-                    D_i3_80141DDC -= gCurrentCourseRecordInfo->unk_0C;
+                if (gCurrentCourseRecordInfo->length * 0.5f < D_i3_80141DD0->unk_244 - D_i3_80141DD8) {
+                    D_i3_80141DDC -= gCurrentCourseRecordInfo->length;
                 }
                 D_i3_80141DD0->unk_23C = D_i3_80141DD0->unk_244 + D_i3_80141DDC;
                 if (D_80106F44 != 0) {
                     if (temp_ft5 > 0.1f) {
                         var_fa0 = ((D_i3_80141DD0->unk_23C - gRacers[playerIndex].unk_23C) / temp_ft5) * 0.8892f;
-                        if ((gCurrentCourseRecordInfo->unk_0C * (gTotalLapCount - 0.01f)) <= D_i3_80141DD0->unk_23C) {
+                        if ((gCurrentCourseRecordInfo->length * (gTotalLapCount - 0.01f)) <= D_i3_80141DD0->unk_23C) {
                             var_fa0 = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].unk_23C) *
-                                       gCurrentCourseRecordInfo->unk_0C * gTotalLapCount) -
-                                      D_80141C78;
+                                       gCurrentCourseRecordInfo->length * gTotalLapCount) -
+                                      gFastestGhostTime;
                         }
                         if ((var_fa0 < 30000.0f) && (var_fa0 > -30000.0f) && (D_800F80A8[0] < 0xA)) {
                             gfx = func_i3_8011DB98(gfx, var_fa0, 0xDE, 0x36);
@@ -5010,7 +5010,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 gfx = func_i3_80124EEC(gfx);
             }
         }
-        if (!(gRacers[playerIndex].unk_04 & 0x02000000) && (gRacers[playerIndex].unk_04 & 0x08000000)) {
+        if (!(gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000) && (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_8000000)) {
             if (D_i3_80141C20[0] == 0) {
                 D_i3_80141C30[0] = 0;
                 D_i3_80141C50[0] = 200.0f;
@@ -5088,7 +5088,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 // FAKE
                 if (1) {}
 
-                if (((racer->unk_04 & 0x02000000) && (i < gNumPlayers)) || (D_800E5FBC == 1)) {
+                if (((racer->stateFlags & RACER_STATE_FLAGS_2000000) && (i < gNumPlayers)) || (D_800E5FBC == 1)) {
                     gfx = func_i3_8012040C(gfx, i);
                 }
 
@@ -5104,9 +5104,9 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 } else {
                     D_i3_80141D58[i] = 0;
                 }
-                if ((racer->unk_04 & 0x02000000) && (i < gNumPlayers) && !(racer->unk_04 & 0x08000000)) {
+                if ((racer->stateFlags & RACER_STATE_FLAGS_2000000) && (i < gNumPlayers) && !(racer->stateFlags & RACER_STATE_FLAGS_8000000)) {
                     gfx = func_i3_80126B40(gfx, i);
-                } else if ((racer->unk_04 & 0x08000000) && !(racer->unk_04 & 0x02000000) && (i < gNumPlayers) &&
+                } else if ((racer->stateFlags & RACER_STATE_FLAGS_8000000) && !(racer->stateFlags & RACER_STATE_FLAGS_2000000) && (i < gNumPlayers) &&
                            (D_i3_80141DF0[i] != 2)) {
                     if (D_i3_80141C20[i] == 0) {
                         D_i3_80141C30[i] = 0;
@@ -5140,7 +5140,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     }
     if ((gSettingVsSlot != 0) && (D_800E5FBC != 1) && (gNumPlayers >= 2)) {
         for (i = 0; i < gNumPlayers; i++) {
-            if ((gRacers[i].unk_04 & 0x08000000) && !(gRacers[i].unk_04 & 0x02000000)) {
+            if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) && !(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000)) {
                 gfx = func_i3_8011C25C(gfx, i);
             }
         }

@@ -243,7 +243,7 @@ s32 Records_Update(void) {
     if (sp1C != 0) {
         D_800CD3BC = gCourseIndex;
         D_800CD048 = 8;
-    } else if ((gameMode == GAMEMODE_RECORDS) && (D_i8_80144FD6 == 0) && (gRacers[0].unk_04 & 0x80000)) {
+    } else if ((gameMode == GAMEMODE_RECORDS) && (D_i8_80144FD6 == 0) && (gRacers[0].stateFlags & RACER_STATE_FLAGS_80000)) {
         D_800CD048 = 1;
     }
     return gameMode;

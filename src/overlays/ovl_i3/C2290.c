@@ -551,7 +551,7 @@ Gfx* func_i3_DrawEnergyBar(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
     s32 height;
     f32 scale;
 
-    if (gRacers[playerNum].unk_04 & 0x02000000) {
+    if (gRacers[playerNum].stateFlags & RACER_STATE_FLAGS_2000000) {
         return gfx;
     }
 
@@ -572,13 +572,13 @@ Gfx* func_i3_DrawEnergyBar(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
             break;
     }
 
-    energyWidth = Math_Round((gRacers[playerNum].unk_228 / gRacers[playerNum].unk_22C) * 68.0f * scale);
+    energyWidth = Math_Round((gRacers[playerNum].energy / gRacers[playerNum].maxEnergy) * 68.0f * scale);
 
     gSPDisplayList(gfx++, D_80149A0);
 
     for (i = 0; i < height; i++) {
         gDPPipeSync(gfx++);
-        if (gRacers[playerNum].unk_04 & 0x100000) {
+        if (gRacers[playerNum].stateFlags & RACER_STATE_FLAGS_100000) {
             gDPSetFillColor(gfx++, sEnergyBarFillColors[i + 5]);
         } else {
             gDPSetFillColor(gfx++, sEnergyBarFillColors[i]);
@@ -601,7 +601,7 @@ Gfx* func_i3_DrawEnergyOutlineRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playe
     s32 height;
     f32 scale;
 
-    if (gRacers[playerNum].unk_04 & 0x02000000) {
+    if (gRacers[playerNum].stateFlags & RACER_STATE_FLAGS_2000000) {
         return gfx;
     }
 
@@ -792,7 +792,7 @@ Gfx* func_i3_DrawPosition(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
         return gfx;
     }
 
-    if (gRacers[playerNum].unk_04 & 0x02040000) {
+    if (gRacers[playerNum].stateFlags & (RACER_STATE_FLAGS_2000000 | RACER_STATE_FLAGS_40000)) {
         sPositionScales[playerNum] += 0.04f;
     }
 
@@ -915,7 +915,7 @@ Gfx* func_i3_DrawLapRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
     if (gGameMode == GAMEMODE_DEATH_RACE) {
         return gfx;
     }
-    if (gRacers[playerNum].unk_04 & 0x02000000) {
+    if (gRacers[playerNum].stateFlags & RACER_STATE_FLAGS_2000000) {
         return gfx;
     }
     if ((D_i3_80140788[playerNum] != 0) && (numPlayersIndex >= 2)) {
@@ -941,7 +941,7 @@ Gfx* func_i3_DrawLapCounter(Gfx* gfx, s32 numPlayersIndex, s32 playerNum) {
     if (gGameMode == GAMEMODE_DEATH_RACE) {
         return gfx;
     }
-    if (gRacers[playerNum].unk_04 & 0x02000000) {
+    if (gRacers[playerNum].stateFlags & RACER_STATE_FLAGS_2000000) {
         return gfx;
     }
     if ((D_i3_80140788[playerNum] != 0) && (numPlayersIndex >= 2)) {
@@ -1216,9 +1216,9 @@ void func_i3_UpdatePortraitScales(void) {
     s32 i;
 
     for (i = 0; i < D_800E5EC0; i++) {
-        if (gRacers[i].unk_04 & 0x2000000) {
+        if (gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000) {
             sPortraitTextureScale[i] = 1.0f;
-        } else if (gRacers[i].unk_04 & 0x80000) {
+        } else if (gRacers[i].stateFlags & RACER_STATE_FLAGS_80000) {
             sPortraitTextureScale[i] -= 0.01f;
             if (sPortraitTextureScale[i] < 0.01f) {
                 sPortraitTextureScale[i] = 0.01f;
@@ -1236,7 +1236,7 @@ void func_i3_80132D78(void) {
 
     for (i = 0; i < 6; i++) {
         racer = D_800E5F40[i];
-        if (racer->unk_04 & 0x80000 && racer->position < 6) {
+        if (racer->stateFlags & RACER_STATE_FLAGS_80000 && racer->position < 6) {
             D_i3_8013F020[i][1] = 90;
             D_i3_8013F020[i][2] = racer->character;
         }
@@ -1488,7 +1488,7 @@ Gfx* func_i3_DrawRaceTimeInterval(Gfx* gfx, s32 time, s32 left, s32 top, f32 sca
     return gfx;
 }
 
-extern unk_800F5DF0* D_800F5E90;
+extern GhostRacer* gFastestGhostRacer;
 
 Gfx* func_i3_UpdateRaceIntervalInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerNum, f32 scale) {
     Racer* leadRivalRacer;
@@ -1505,7 +1505,7 @@ Gfx* func_i3_UpdateRaceIntervalInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerNum
     if (gGameMode == GAMEMODE_PRACTICE) {
         return gfx;
     }
-    if ((gGameMode == GAMEMODE_TIME_ATTACK) && (D_800F5E90 == NULL)) {
+    if ((gGameMode == GAMEMODE_TIME_ATTACK) && (gFastestGhostRacer == NULL)) {
         return gfx;
     }
 
@@ -1525,7 +1525,7 @@ Gfx* func_i3_UpdateRaceIntervalInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerNum
 
         if (gGameMode == GAMEMODE_TIME_ATTACK) {
             for (i = 0; i < completedLaps; i++) {
-                sLeadRivalRaceTime[playerNum] += D_800F5E90->ghost->lapTimes[i];
+                sLeadRivalRaceTime[playerNum] += gFastestGhostRacer->ghost->lapTimes[i];
             }
         } else {
             for (i = 0; i < completedLaps; i++) {

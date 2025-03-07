@@ -409,7 +409,7 @@ extern Gfx D_80149A0[];
 extern s32 gGameMode;
 extern s32 D_800E5EC0;
 extern Racer* D_800E5F40[];
-extern unk_800F5DF0* D_800F5E90;
+extern GhostRacer* gFastestGhostRacer;
 extern u32 gGameFrameCount;
 
 Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
@@ -516,10 +516,10 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
             gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 0, 255, 1) << 16 | GPACK_RGBA5551(0, 0, 255, 1));
             gDPFillRectangle(gfx++, temp_s2 - 1, temp_v0 - 1, temp_s2 + 1, temp_v0 + 1);
 
-        } else if (D_800F5E90 != NULL) {
+        } else if (gFastestGhostRacer != NULL) {
             temp_s2 =
-                Math_Round(((D_800F5E90->unk_30->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
-            temp_v0 = Math_Round(((D_800F5E90->unk_30->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
+                Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
+            temp_v0 = Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
             temp_s2 += sp104;
             temp_v0 /= 2;
             temp_v0 += sp100;

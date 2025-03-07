@@ -240,6 +240,7 @@ Math_Round = 0x8006A9E0;
 Math_SinTableInit = 0x8006A6E4;
 Light_SetLookAtSource = 0x8006B07C;
 Matrix_ToMtx = 0x8006BBE8;
+CourseFeature_IsDecorational = 0x8006D3F0;
 mio0Decode = 0x800AA620;
 
 gRandSeed1 = 0x800CD170;
@@ -263,6 +264,7 @@ gDifficulty = 0x800CD008;
 gTotalLapCount = 0x800CD00C;
 gCurrentGhostType = 0x800CD3CC;
 gSettingVsHandicap = 0x800CE4D0;
+sInitialBoostTimer = 0x800CE774;
 gTotalLives = 0x800CE4DC;
 
 gGameMode = 0x800DCE44;
@@ -289,7 +291,7 @@ D_800E5F30 = 0x800E5F30; // size:0x10
 D_800E5FB8 = 0x800E5FB8; // size:0x4
 sGhostReplayRecordingSize = 0x800F5DC8;
 sGhostReplayRecordingEnd = 0x800F5DCC;
-D_800F5DF0 = 0x800F5DF0; // size:0x9C
+gGhostRacers = 0x800F5DF0; // size:0x9C
 D_800F80A8 = 0x800F80A8; // size:0x10
 D_800F8504 = 0x800F8504; // size:0x7
 gCurrentCourseRecordInfo = 0x800F8510;

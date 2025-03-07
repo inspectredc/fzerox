@@ -4,6 +4,8 @@ LeoGetKAdr = 0x80411760; //segment:leo
 LeoGetAAdr = 0x804122A0; //segment:leo
 LeoGetAAdr2 = 0x80403040; //segment:leo
 
+gFastestGhostTime = 0x80141C78; //segment:ovl_i3
+
 MachineSelect_BackgroundDraw = 0x801178C4; //segment:ovl_i4
 
 Credits_IntroDraw = 0x80119908; //segment:ovl_i6
