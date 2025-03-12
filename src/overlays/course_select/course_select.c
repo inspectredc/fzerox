@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_object.h"
+#include "fzx_course.h"
 #include "src/overlays/ovl_i2/ovl_i2.h"
 #include "course_select.h"
 #include "assets/segment_2B9EA0.h"
@@ -285,13 +286,13 @@ void CourseSelect_Init(void) {
     } else {
         var_v0 = D_800CD3BC;
     }
-    if (var_v0 >= 48) {
+    if (var_v0 >= COURSE_X_1) {
         gCupSelectOption = 4;
         sCourseSelectTrackNo = 0;
-        gCourseIndex = 48;
+        gCourseIndex = COURSE_X_1;
     } else {
         sCourseSelectTrackNo = var_v0 % 6;
-        if (var_v0 >= 24) {
+        if (var_v0 >= COURSE_EDIT_1) {
             gCupSelectOption = 10;
         } else {
             gCupSelectOption = var_v0 / 6;
@@ -312,9 +313,9 @@ void CourseSelect_Init(void) {
         gCupSelectOption = 3;
     }
     if (gCupSelectOption >= 10) {
-        sCourseSelectCup = X_CUP;
+        sCourseSelectCup = 4;
     } else if (gCupSelectOption == 4) {
-        sCourseSelectCup = EDIT_CUP;
+        sCourseSelectCup = 5;
     } else {
         sCourseSelectCup = gCupSelectOption;
     }
@@ -361,12 +362,12 @@ void CourseSelect_Init(void) {
 void NextCourseSelect_Init(void) {
     D_800CCFE8 = 3;
     sCourseSelectState = COURSE_SELECT_NEXT_COURSE_AWAIT_INPUT;
-    if (gCourseIndex >= 48) {
+    if (gCourseIndex >= COURSE_X_1) {
         gCupSelectOption = 4;
         sCourseSelectTrackNo = gCourseIndex % 6;
     } else {
         sCourseSelectTrackNo = gCourseIndex % 6;
-        if (gCourseIndex >= 24) {
+        if (gCourseIndex >= COURSE_EDIT_1) {
             gCupSelectOption = 10;
         } else {
             gCupSelectOption = gCourseIndex / 6;
@@ -374,9 +375,9 @@ void NextCourseSelect_Init(void) {
     }
     func_i5_80116910();
     if (gCupSelectOption >= 10) {
-        sCourseSelectCup = X_CUP;
+        sCourseSelectCup = 4;
     } else if (gCupSelectOption == 4) {
-        sCourseSelectCup = EDIT_CUP;
+        sCourseSelectCup = 5;
     } else {
         sCourseSelectCup = gCupSelectOption;
     }
@@ -444,15 +445,15 @@ s32 CourseSelect_Update(void) {
                 }
             }
             if (gCupSelectOption >= 10) {
-                sCourseSelectCup = X_CUP;
+                sCourseSelectCup = 4;
             } else if (gCupSelectOption == 4) {
-                sCourseSelectCup = EDIT_CUP;
+                sCourseSelectCup = 5;
             } else {
                 sCourseSelectCup = gCupSelectOption;
             }
             if (originalCupSelectOption != gCupSelectOption) {
                 sCourseSelectTrackNo = 0;
-                if (sCourseSelectCup <= X_CUP) {
+                if (sCourseSelectCup <= 4) {
                     CourseModel_Init(sCourseSelectCup);
                 }
                 func_800BA8D8(30);
@@ -463,9 +464,9 @@ s32 CourseSelect_Update(void) {
                 gCupType = EDIT_CUP;
             }
             if (gCupSelectOption >= 10) {
-                gCourseIndex = sCourseSelectTrackNo + 24;
+                gCourseIndex = sCourseSelectTrackNo + COURSE_EDIT_1;
             } else if (gCupSelectOption == 4) {
-                gCourseIndex = 48;
+                gCourseIndex = COURSE_X_1;
             } else {
                 gCourseIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
             }
@@ -486,7 +487,7 @@ s32 CourseSelect_Update(void) {
                     sCourseSelectState = COURSE_SELECT_AWAIT_OK;
                 } else if (gSelectedMode == MODE_GP_RACE) {
                     if (gCupSelectOption >= 10) {
-                        gCourseIndex = 24;
+                        gCourseIndex = COURSE_EDIT_1;
                     } else {
                         gCourseIndex = gCupSelectOption * 6;
                     }
@@ -534,7 +535,7 @@ s32 CourseSelect_Update(void) {
                 func_800BA8D8(30);
             }
             if (gCupSelectOption >= 10) {
-                gCourseIndex = sCourseSelectTrackNo + 24;
+                gCourseIndex = sCourseSelectTrackNo + COURSE_EDIT_1;
             } else {
                 gCourseIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
             }
@@ -637,7 +638,7 @@ void CourseSelect_ModelInit(void) {
     s32 i;
 
     func_i5_80115DF0();
-    if (sCourseSelectCup <= X_CUP) {
+    if (sCourseSelectCup <= 4) {
         CourseModel_Init(sCourseSelectCup);
         D_i5_801190B4 -= 2;
 
@@ -746,7 +747,7 @@ Gfx* CourseSelect_ModelDraw(Gfx* gfx, Object* modelObj) {
         case COURSE_SELECT_CONTINUE:
         case COURSE_SELECT_NEXT_COURSE_AWAIT_INPUT:
         case COURSE_SELECT_NEXT_COURSE_CONTINUE:
-            if (sCourseSelectCup <= X_CUP) {
+            if (sCourseSelectCup <= 4) {
                 gfx = func_i5_80115E64(gfx);
             }
             break;

@@ -673,15 +673,15 @@ void func_8006BC84(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
     Matrix_ToMtx(arg1, arg0);
 }
 
-void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg5, f32* arg6, f32* arg7) {
+void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7) {
     f32 sp84;
     f32 sp80;
-    f32 sp70;
     f32 sp6C;
+    f32 sp5C;
     f32 sp68;
     f32 sp64;
     f32 sp60;
-    f32 sp5C;
+    s32 pad;
 
     if (arg0 == NULL) {
         arg0 = &D_800E1230;
@@ -689,16 +689,16 @@ void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
     if (arg1 == NULL) {
         arg1 = &D_800E1270;
     }
-    arg1->m[2][0] = arg5[0] * arg2;
-    arg1->m[2][1] = arg5[1] * arg2;
-    arg1->m[2][2] = arg5[2] * arg2;
+    arg1->m[2][0] = arg5->x * arg2;
+    arg1->m[2][1] = arg5->y * arg2;
+    arg1->m[2][2] = arg5->z * arg2;
 
-    sp80 = (arg6[1] * arg5[2]) - (arg5[1] * arg6[2]);
-    sp6C = (arg6[2] * arg5[0]) - (arg5[2] * arg6[0]);
-    sp5C = (arg6[0] * arg5[1]) - (arg5[0] * arg6[1]);
+    sp80 = (arg6->y * arg5->z) - (arg6->z * arg5->y);
+    sp6C = (arg6->z * arg5->x) - (arg6->x * arg5->z);
+    sp5C = (arg6->x * arg5->y) - (arg6->y * arg5->x);
     sp84 = SQ(sp80) + SQ(sp6C) + SQ(sp5C);
     if (sp84 < 0.001f) {
-        func_8006C378(arg0, arg1, arg2, 0, 0, 0, arg7[0], arg7[1], arg7[2]);
+        func_8006C378(arg0, arg1, arg2, 0, 0, 0, arg7->x, arg7->y, arg7->z);
         return;
     }
 
@@ -707,24 +707,22 @@ void func_8006BFCC(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32* arg
     arg1->m[0][1] = sp84 * sp6C;
     arg1->m[0][2] = sp84 * sp5C;
 
-    sp68 = (arg5[1] * sp5C) - (arg5[2] * sp6C);
-
-    sp64 = (arg5[2] * sp80) - (arg5[0] * sp5C);
-
-    sp60 = (arg5[0] * sp6C) - (arg5[1] * sp80);
+    sp68 = (arg5->y * sp5C) - (arg5->z * sp6C);
+    sp64 = (arg5->z * sp80) - (arg5->x * sp5C);
+    sp60 = (arg5->x * sp6C) - (arg5->y * sp80);
 
     sp84 = SQ(sp68) + SQ(sp64) + SQ(sp60);
     if (sp84 < 0.001f) {
-        func_8006C378(arg0, arg1, arg2, 0, 0, 0, arg7[0], arg7[1], arg7[2]);
+        func_8006C378(arg0, arg1, arg2, 0, 0, 0, arg7->x, arg7->y, arg7->z);
         return;
     }
     sp84 = arg3 / sqrtf(sp84);
     arg1->m[1][0] = sp84 * sp68;
     arg1->m[1][1] = sp84 * sp64;
     arg1->m[1][2] = sp84 * sp60;
-    arg1->m[3][0] = arg7[0];
-    arg1->m[3][1] = arg7[1];
-    arg1->m[3][2] = arg7[2];
+    arg1->m[3][0] = arg7->x;
+    arg1->m[3][1] = arg7->y;
+    arg1->m[3][2] = arg7->z;
     arg1->m[0][3] = 0.0f;
     arg1->m[1][3] = 0.0f;
     arg1->m[2][3] = 0.0f;

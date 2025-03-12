@@ -1,6 +1,7 @@
 #include "global.h"
 #include "audio.h"
 #include "fzx_game.h"
+#include "fzx_course.h"
 
 UNUSED s32 D_800DCE40;
 s32 gGameMode;
@@ -25,13 +26,13 @@ s32 gCupType = JACK_CUP;
 s32 gDifficulty = NOVICE;
 s32 gTotalLapCount = 3;
 s8 D_800CD010 = 0;
-s8 D_800CD014 = 0;
-s8 D_800CD018 = 0;
+s8 sTitleDemoNumPlayerState = 0;
+s8 sTitleDemoCoursesState = 0;
 UNUSED s32 D_800CD01C = 0;
 u16 D_800CD020 = 0;
-s32 D_800CD024[] = { GAMEMODE_GP_RACE, GAMEMODE_VS_2P, GAMEMODE_VS_4P };
-s32 D_800CD030[] = { 1, 2, 4 };
-s8 D_800CD03C[] = { 3, 1, 2, 4, 16 };
+s32 sTitleDemoGameModes[] = { GAMEMODE_GP_RACE, GAMEMODE_VS_2P, GAMEMODE_VS_4P };
+s32 sTitleDemoNumPlayers[] = { 1, 2, 4 };
+s8 sTitleDemoCourses[] = { COURSE_DEVILS_FOREST, COURSE_SILENCE, COURSE_SAND_OCEAN, COURSE_BIG_BLUE, COURSE_WHITE_LAND_2 };
 s16 D_800CD044 = 0;
 s16 D_800CD048 = 0;
 
@@ -295,16 +296,16 @@ void func_80068F04(void) {
             }
             if ((D_800CD010 != 0) && (gControllersConnected != 0)) {
 
-                D_800DCE48.gameMode = D_800CD024[D_800CD014];
-                gNumPlayers = D_800CD030[D_800CD014];
-                gCourseIndex = D_800CD03C[D_800CD018];
-                D_800CD014++;
-                D_800CD018++;
-                if (D_800CD014 >= ARRAY_COUNT(D_800CD030)) {
-                    D_800CD014 = 0;
+                D_800DCE48.gameMode = sTitleDemoGameModes[sTitleDemoNumPlayerState];
+                gNumPlayers = sTitleDemoNumPlayers[sTitleDemoNumPlayerState];
+                gCourseIndex = sTitleDemoCourses[sTitleDemoCoursesState];
+                sTitleDemoNumPlayerState++;
+                sTitleDemoCoursesState++;
+                if (sTitleDemoNumPlayerState >= ARRAY_COUNT(sTitleDemoNumPlayers)) {
+                    sTitleDemoNumPlayerState = 0;
                 }
-                if (D_800CD018 >= ARRAY_COUNT(D_800CD03C)) {
-                    D_800CD018 = 0;
+                if (sTitleDemoCoursesState >= ARRAY_COUNT(sTitleDemoCourses)) {
+                    sTitleDemoCoursesState = 0;
                 }
                 D_800CD020 = 0;
                 D_800CD010 = 1;
@@ -404,7 +405,7 @@ void func_800690FC(void) {
             switch (gGameMode) {
                 case GAMEMODE_LX_MACHINE_SETTINGS:
                 case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
-                    if ((gNumPlayers == 1) && (gCourseIndex < 24)) {
+                    if ((gNumPlayers == 1) && (gCourseIndex < COURSE_EDIT_1)) {
                         Save_UpdateCourseCharacterSave(gCourseIndex);
                     }
                     break;

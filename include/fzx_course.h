@@ -31,6 +31,47 @@ typedef struct CourseData {
     /* 0x7A0 */ s8 sign[64];
 } CourseData; // size = 0x7E0
 
+typedef enum Courses {
+    /*  0 */ COURSE_MUTE_CITY,
+    /*  1 */ COURSE_SILENCE,
+    /*  2 */ COURSE_SAND_OCEAN,
+    /*  3 */ COURSE_DEVILS_FOREST,
+    /*  4 */ COURSE_BIG_BLUE,
+    /*  5 */ COURSE_PORT_TOWN,
+    /*  6 */ COURSE_SECTOR_ALPHA,
+    /*  7 */ COURSE_RED_CANYON,
+    /*  8 */ COURSE_DEVILS_FOREST_2,
+    /*  9 */ COURSE_MUTE_CITY_2,
+    /* 10 */ COURSE_BIG_BLUE_2,
+    /* 11 */ COURSE_WHITE_LAND,
+    /* 12 */ COURSE_FIRE_FIELD,
+    /* 13 */ COURSE_SILENCE_2,
+    /* 14 */ COURSE_SECTOR_BETA,
+    /* 15 */ COURSE_RED_CANYON_2,
+    /* 16 */ COURSE_WHITE_LAND_2,
+    /* 17 */ COURSE_MUTE_CITY_3,
+    /* 18 */ COURSE_RAINBOW_ROAD,
+    /* 19 */ COURSE_DEVILS_FOREST_3,
+    /* 20 */ COURSE_SPACE_PLANT,
+    /* 21 */ COURSE_SAND_OCEAN_2,
+    /* 22 */ COURSE_PORT_TOWN_2,
+    /* 23 */ COURSE_BIG_HAND,
+    /* 24 */ COURSE_EDIT_1,
+    /* 25 */ COURSE_EDIT_2,
+    /* 26 */ COURSE_EDIT_3,
+    /* 27 */ COURSE_EDIT_4,
+    /* 28 */ COURSE_EDIT_5,
+    /* 29 */ COURSE_EDIT_6,
+    /* 48 */ COURSE_X_1 = 48,
+    /* 49 */ COURSE_X_2,
+    /* 50 */ COURSE_X_3,
+    /* 51 */ COURSE_X_4,
+    /* 52 */ COURSE_X_5,
+    /* 53 */ COURSE_X_6,
+    /* 54 */ COURSE_DEATH_RACE,
+    /* 55 */ COURSE_ENDING,
+} Courses;
+
 #define CREATOR_NINTENDO 4
 
 typedef enum Venue {

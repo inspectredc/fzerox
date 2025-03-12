@@ -667,34 +667,34 @@ f32 func_8009E85C(CourseSegment* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
     sp44 = (3.0f * temp_fa0 - 6.0f) * sp50 + (6.0f - 4.0f * temp_fa0) * arg1 + temp_fa0;
     sp40 = (3.0f * sp50 - 2.0f * arg1) * temp_fa0;
 
-    arg2->xx = sp4C * temp_v1->pos.x + sp48 * arg0->pos.x + sp44 * temp_v0->pos.x + sp40 * temp_a1->pos.x;
-    arg2->yx = sp4C * temp_v1->pos.y + sp48 * arg0->pos.y + sp44 * temp_v0->pos.y + sp40 * temp_a1->pos.y;
-    arg2->zx = sp4C * temp_v1->pos.z + sp48 * arg0->pos.z + sp44 * temp_v0->pos.z + sp40 * temp_a1->pos.z;
+    arg2->x.x = sp4C * temp_v1->pos.x + sp48 * arg0->pos.x + sp44 * temp_v0->pos.x + sp40 * temp_a1->pos.x;
+    arg2->x.y = sp4C * temp_v1->pos.y + sp48 * arg0->pos.y + sp44 * temp_v0->pos.y + sp40 * temp_a1->pos.y;
+    arg2->x.z = sp4C * temp_v1->pos.z + sp48 * arg0->pos.z + sp44 * temp_v0->pos.z + sp40 * temp_a1->pos.z;
 
-    sp50 = sqrtf(SQ(arg2->xx) + SQ(arg2->yx) + SQ(arg2->zx));
+    sp50 = sqrtf(SQ(arg2->x.x) + SQ(arg2->x.y) + SQ(arg2->x.z));
     temp_fa0 = 1.0f / sp50;
 
-    arg2->xx *= temp_fa0;
-    arg2->yx *= temp_fa0;
-    arg2->zx *= temp_fa0;
+    arg2->x.x *= temp_fa0;
+    arg2->x.y *= temp_fa0;
+    arg2->x.z *= temp_fa0;
 
-    arg2->xy = (arg0->next->unk_0C.x - arg0->unk_0C.x) * arg3 + arg0->unk_0C.x;
-    arg2->yy = (arg0->next->unk_0C.y - arg0->unk_0C.y) * arg3 + arg0->unk_0C.y;
-    arg2->zy = (arg0->next->unk_0C.z - arg0->unk_0C.z) * arg3 + arg0->unk_0C.z;
+    arg2->y.x = (arg0->next->unk_0C.x - arg0->unk_0C.x) * arg3 + arg0->unk_0C.x;
+    arg2->y.y = (arg0->next->unk_0C.y - arg0->unk_0C.y) * arg3 + arg0->unk_0C.y;
+    arg2->y.z = (arg0->next->unk_0C.z - arg0->unk_0C.z) * arg3 + arg0->unk_0C.z;
 
-    arg2->xz = arg2->yy * arg2->zx - arg2->zy * arg2->yx;
-    arg2->yz = arg2->zy * arg2->xx - arg2->xy * arg2->zx;
-    arg2->zz = arg2->xy * arg2->yx - arg2->yy * arg2->xx;
+    arg2->z.x = arg2->y.y * arg2->x.z - arg2->y.z * arg2->x.y;
+    arg2->z.y = arg2->y.z * arg2->x.x - arg2->y.x * arg2->x.z;
+    arg2->z.z = arg2->y.x * arg2->x.y - arg2->y.y * arg2->x.x;
 
-    temp_fa0 = 1.0f / sqrtf(SQ(arg2->xz) + SQ(arg2->yz) + SQ(arg2->zz));
+    temp_fa0 = 1.0f / sqrtf(SQ(arg2->z.x) + SQ(arg2->z.y) + SQ(arg2->z.z));
 
-    arg2->xz *= temp_fa0;
-    arg2->yz *= temp_fa0;
-    arg2->zz *= temp_fa0;
+    arg2->z.x *= temp_fa0;
+    arg2->z.y *= temp_fa0;
+    arg2->z.z *= temp_fa0;
 
-    arg2->xy = arg2->yx * arg2->zz - arg2->zx * arg2->yz;
-    arg2->yy = arg2->zx * arg2->xz - arg2->xx * arg2->zz;
-    arg2->zy = arg2->xx * arg2->yz - arg2->yx * arg2->xz;
+    arg2->y.x = arg2->x.y * arg2->z.z - arg2->x.z * arg2->z.y;
+    arg2->y.y = arg2->x.z * arg2->z.x - arg2->x.x * arg2->z.z;
+    arg2->y.z = arg2->x.x * arg2->z.y - arg2->x.y * arg2->z.x;
 
     return sp50;
 }
@@ -863,16 +863,16 @@ s32 func_8009F334(CourseRecordInfo* arg0) {
     Mtx3F sp30;
 
     do {
-        sp30.xy = var_s0->unk_0C.x;
-        sp30.yy = var_s0->unk_0C.y;
-        sp30.zy = var_s0->unk_0C.z;
+        sp30.y.x = var_s0->unk_0C.x;
+        sp30.y.y = var_s0->unk_0C.y;
+        sp30.y.z = var_s0->unk_0C.z;
         func_8009E538(var_s0, 0.0f, &sp30.x);
         if (func_8006AA38(&sp30) != 0) {
             return -1;
         }
-        var_s0->unk_0C.x = sp30.xy;
-        var_s0->unk_0C.y = sp30.yy;
-        var_s0->unk_0C.z = sp30.zy;
+        var_s0->unk_0C.x = sp30.y.x;
+        var_s0->unk_0C.y = sp30.y.y;
+        var_s0->unk_0C.z = sp30.y.z;
         var_s0 = var_s0->next;
     } while (var_s0 != arg0->courseSegments);
 
@@ -1000,9 +1000,9 @@ f32 func_8009F87C(Mtx3F* arg0, Mtx3F* arg1, Vec3f* arg2, Vec3f* arg3) {
     Vec3fFlip sp74;
     Vec3fFlip sp68;
 
-    sp80.x = arg0->xy + arg1->xy;
-    sp80.y = arg0->yy + arg1->yy;
-    sp80.z = arg0->zy + arg1->zy;
+    sp80.x = arg0->y.x + arg1->y.x;
+    sp80.y = arg0->y.y + arg1->y.y;
+    sp80.z = arg0->y.z + arg1->y.z;
 
     // normalize sp80
     if (SQ_SUM(&sp80) < 0.1f) {
@@ -1185,27 +1185,27 @@ void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     temp2 = temp_fs4 + temp_fs5;
     temp_fs1 = temp1 / 2.0f;
 
-    arg0->unk_26[0] = Math_Round(arg8->x = arg0->unk_14.x + (temp_fs1 * arg3->xz));
-    arg0->unk_26[1] = Math_Round(arg8->y = arg0->unk_14.y + (temp_fs1 * arg3->yz));
-    arg0->unk_26[2] = Math_Round(arg8->z = arg0->unk_14.z + (temp_fs1 * arg3->zz));
+    arg0->unk_26[0] = Math_Round(arg8->x = arg0->unk_14.x + (temp_fs1 * arg3->z.x));
+    arg0->unk_26[1] = Math_Round(arg8->y = arg0->unk_14.y + (temp_fs1 * arg3->z.y));
+    arg0->unk_26[2] = Math_Round(arg8->z = arg0->unk_14.z + (temp_fs1 * arg3->z.z));
 
-    arg0->unk_20[0] = Math_Round(arg8->x + ((argB - argC - argD) * arg3->xy));
-    arg0->unk_20[1] = Math_Round(arg8->y + ((argB - argC - argD) * arg3->yy));
-    arg0->unk_20[2] = Math_Round(arg8->z + ((argB - argC - argD) * arg3->zy));
+    arg0->unk_20[0] = Math_Round(arg8->x + ((argB - argC - argD) * arg3->y.x));
+    arg0->unk_20[1] = Math_Round(arg8->y + ((argB - argC - argD) * arg3->y.y));
+    arg0->unk_20[2] = Math_Round(arg8->z + ((argB - argC - argD) * arg3->y.z));
 
     temp_fs1 = temp2 / 2.0f;
 
-    arg6->x = (temp_fs2 = arg3->xy * temp_fs1) + arg8->x;
-    arg6->y = (temp_fs3 = arg3->yy * temp_fs1) + arg8->y;
-    arg6->z = (temp_fs0 = arg3->zy * temp_fs1) + arg8->z;
+    arg6->x = (temp_fs2 = arg3->y.x * temp_fs1) + arg8->x;
+    arg6->y = (temp_fs3 = arg3->y.y * temp_fs1) + arg8->y;
+    arg6->z = (temp_fs0 = arg3->y.z * temp_fs1) + arg8->z;
 
     arg7->x = arg8->x - temp_fs2;
     arg7->y = arg8->y - temp_fs3;
     arg7->z = arg8->z - temp_fs0;
 
-    arg0->unk_38[0] = Math_Round(arg4->x = (temp_fs4 = arg3->xz * temp_fs1) + arg8->x);
-    arg0->unk_38[1] = Math_Round(arg4->y = (temp_fs5 = arg3->yz * temp_fs1) + arg8->y);
-    arg0->unk_38[2] = Math_Round(arg4->z = (sp6C = arg3->zz * temp_fs1) + arg8->z);
+    arg0->unk_38[0] = Math_Round(arg4->x = (temp_fs4 = arg3->z.x * temp_fs1) + arg8->x);
+    arg0->unk_38[1] = Math_Round(arg4->y = (temp_fs5 = arg3->z.y * temp_fs1) + arg8->y);
+    arg0->unk_38[2] = Math_Round(arg4->z = (sp6C = arg3->z.z * temp_fs1) + arg8->z);
 
     arg0->unk_4A[0] = Math_Round(arg5->x = arg8->x - temp_fs4);
     arg0->unk_4A[1] = Math_Round(arg5->y = arg8->y - temp_fs5);
@@ -1213,9 +1213,9 @@ void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
 
     temp_fs1 += arg9;
 
-    arg0->unk_32[0] = Math_Round((temp_fs2 = arg8->x + (argB * arg3->xy)) + (temp_fs4 = arg3->xz * temp_fs1));
-    arg0->unk_32[1] = Math_Round((temp_fs3 = arg8->y + (argB * arg3->yy)) + (temp_fs5 = arg3->yz * temp_fs1));
-    arg0->unk_32[2] = Math_Round((temp_fs0 = arg8->z + (argB * arg3->zy)) + (sp6C = arg3->zz * temp_fs1));
+    arg0->unk_32[0] = Math_Round((temp_fs2 = arg8->x + (argB * arg3->y.x)) + (temp_fs4 = arg3->z.x * temp_fs1));
+    arg0->unk_32[1] = Math_Round((temp_fs3 = arg8->y + (argB * arg3->y.y)) + (temp_fs5 = arg3->z.y * temp_fs1));
+    arg0->unk_32[2] = Math_Round((temp_fs0 = arg8->z + (argB * arg3->y.z)) + (sp6C = arg3->z.z * temp_fs1));
 
     arg0->unk_44[0] = Math_Round(temp_fs2 - temp_fs4);
     arg0->unk_44[1] = Math_Round(temp_fs3 - temp_fs5);
@@ -1223,9 +1223,9 @@ void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
 
     temp_fs1 += argA;
 
-    arg0->unk_2C[0] = Math_Round((temp_fs2 = arg8->x + ((argB - argC) * arg3->xy)) + (temp_fs4 = arg3->xz * temp_fs1));
-    arg0->unk_2C[1] = Math_Round((temp_fs3 = arg8->y + ((argB - argC) * arg3->yy)) + (temp_fs5 = arg3->yz * temp_fs1));
-    arg0->unk_2C[2] = Math_Round((temp_fs0 = arg8->z + ((argB - argC) * arg3->zy)) + (sp6C = arg3->zz * temp_fs1));
+    arg0->unk_2C[0] = Math_Round((temp_fs2 = arg8->x + ((argB - argC) * arg3->y.x)) + (temp_fs4 = arg3->z.x * temp_fs1));
+    arg0->unk_2C[1] = Math_Round((temp_fs3 = arg8->y + ((argB - argC) * arg3->y.y)) + (temp_fs5 = arg3->z.y * temp_fs1));
+    arg0->unk_2C[2] = Math_Round((temp_fs0 = arg8->z + ((argB - argC) * arg3->y.z)) + (sp6C = arg3->z.z * temp_fs1));
 
     arg0->unk_3E[0] = Math_Round(temp_fs2 - temp_fs4);
     arg0->unk_3E[1] = Math_Round(temp_fs3 - temp_fs5);
@@ -1263,17 +1263,17 @@ void func_800A05CC(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     f32 temp_fs3;
     f32 temp_fs4;
 
-    arg0->unk_32[0] = Math_Round(arg4->x = (arg8->x = arg0->unk_14.x) + (sp54 = arg3->xz * arg1));
-    arg0->unk_32[1] = Math_Round(arg4->y = (arg8->y = arg0->unk_14.y) + (sp50 = arg3->yz * arg1));
-    arg0->unk_32[2] = Math_Round(arg4->z = (arg8->z = arg0->unk_14.z) + (sp4C = arg3->zz * arg1));
+    arg0->unk_32[0] = Math_Round(arg4->x = (arg8->x = arg0->unk_14.x) + (sp54 = arg3->z.x * arg1));
+    arg0->unk_32[1] = Math_Round(arg4->y = (arg8->y = arg0->unk_14.y) + (sp50 = arg3->z.y * arg1));
+    arg0->unk_32[2] = Math_Round(arg4->z = (arg8->z = arg0->unk_14.z) + (sp4C = arg3->z.z * arg1));
 
     arg0->unk_44[0] = Math_Round(arg5->x = arg0->unk_14.x - sp54);
     arg0->unk_44[1] = Math_Round(arg5->y = arg0->unk_14.y - sp50);
     arg0->unk_44[2] = Math_Round(arg5->z = arg0->unk_14.z - sp4C);
 
-    arg0->unk_26[0] = Math_Round(arg6->x = (temp_fs2 = arg3->xy * arg1) + arg0->unk_14.x);
-    arg0->unk_26[1] = Math_Round(arg6->y = (temp_fs3 = arg3->yy * arg1) + arg0->unk_14.y);
-    arg0->unk_26[2] = Math_Round(arg6->z = (temp_fs4 = arg3->zy * arg1) + arg0->unk_14.z);
+    arg0->unk_26[0] = Math_Round(arg6->x = (temp_fs2 = arg3->y.x * arg1) + arg0->unk_14.x);
+    arg0->unk_26[1] = Math_Round(arg6->y = (temp_fs3 = arg3->y.y * arg1) + arg0->unk_14.y);
+    arg0->unk_26[2] = Math_Round(arg6->z = (temp_fs4 = arg3->y.z * arg1) + arg0->unk_14.z);
 
     arg0->unk_20[0] = Math_Round(arg7->x = arg0->unk_14.x - temp_fs2);
     arg0->unk_20[1] = Math_Round(arg7->y = arg0->unk_14.y - temp_fs3);
@@ -1281,9 +1281,9 @@ void func_800A05CC(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
 
     sp64 = gSinTable[0x200] * arg1;
 
-    arg0->unk_38[0] = Math_Round((sp60 = (sp54 = arg3->xz * sp64) + arg0->unk_14.x) + (temp_fs2 = arg3->xy * sp64));
-    arg0->unk_38[1] = Math_Round((temp_fs1 = (sp50 = arg3->yz * sp64) + arg0->unk_14.y) + (temp_fs3 = arg3->yy * sp64));
-    arg0->unk_38[2] = Math_Round((temp_fs0 = (sp4C = arg3->zz * sp64) + arg0->unk_14.z) + (temp_fs4 = arg3->zy * sp64));
+    arg0->unk_38[0] = Math_Round((sp60 = (sp54 = arg3->z.x * sp64) + arg0->unk_14.x) + (temp_fs2 = arg3->y.x * sp64));
+    arg0->unk_38[1] = Math_Round((temp_fs1 = (sp50 = arg3->z.y * sp64) + arg0->unk_14.y) + (temp_fs3 = arg3->y.y * sp64));
+    arg0->unk_38[2] = Math_Round((temp_fs0 = (sp4C = arg3->z.z * sp64) + arg0->unk_14.z) + (temp_fs4 = arg3->y.z * sp64));
 
     arg0->unk_2C[0] = Math_Round(sp60 - temp_fs2);
     arg0->unk_2C[1] = Math_Round(temp_fs1 - temp_fs3);
@@ -1315,11 +1315,11 @@ void func_800A0900(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     temp_fs2 = gSinTable[0x900] * sp64;
 
     arg0->unk_44[0] =
-        Math_Round(arg5->x = (sp58 = arg0->unk_14.x + (temp_fs2 * arg3->xy)) + (temp_fs3 = arg3->xz * temp_fs1));
+        Math_Round(arg5->x = (sp58 = arg0->unk_14.x + (temp_fs2 * arg3->y.x)) + (temp_fs3 = arg3->z.x * temp_fs1));
     arg0->unk_44[1] =
-        Math_Round(arg5->y = (sp54 = arg0->unk_14.y + (temp_fs2 * arg3->yy)) + (temp_fs4 = arg3->yz * temp_fs1));
+        Math_Round(arg5->y = (sp54 = arg0->unk_14.y + (temp_fs2 * arg3->y.y)) + (temp_fs4 = arg3->z.y * temp_fs1));
     arg0->unk_44[2] =
-        Math_Round(arg5->z = (temp_fs0 = arg0->unk_14.z + (temp_fs2 * arg3->zy)) + (temp_fs5 = arg3->zz * temp_fs1));
+        Math_Round(arg5->z = (temp_fs0 = arg0->unk_14.z + (temp_fs2 * arg3->y.z)) + (temp_fs5 = arg3->z.z * temp_fs1));
 
     arg0->unk_32[0] = Math_Round(arg4->x = sp58 - temp_fs3);
     arg0->unk_32[1] = Math_Round(arg4->y = sp54 - temp_fs4);
@@ -1328,35 +1328,35 @@ void func_800A0900(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     temp_fs1 = gSinTable[0xE80] * sp64;
     temp_fs2 = gSinTable[0xA80] * sp64;
 
-    arg0->unk_4A[0] = Math_Round((sp58 = arg0->unk_14.x + (temp_fs2 * arg3->xy)) + (temp_fs3 = arg3->xz * temp_fs1));
-    arg0->unk_4A[1] = Math_Round((sp54 = arg0->unk_14.y + (temp_fs2 * arg3->yy)) + (temp_fs4 = arg3->yz * temp_fs1));
+    arg0->unk_4A[0] = Math_Round((sp58 = arg0->unk_14.x + (temp_fs2 * arg3->y.x)) + (temp_fs3 = arg3->z.x * temp_fs1));
+    arg0->unk_4A[1] = Math_Round((sp54 = arg0->unk_14.y + (temp_fs2 * arg3->y.y)) + (temp_fs4 = arg3->z.y * temp_fs1));
     arg0->unk_4A[2] =
-        Math_Round((temp_fs0 = arg0->unk_14.z + (temp_fs2 * arg3->zy)) + (temp_fs5 = arg3->zz * temp_fs1));
+        Math_Round((temp_fs0 = arg0->unk_14.z + (temp_fs2 * arg3->y.z)) + (temp_fs5 = arg3->z.z * temp_fs1));
 
     arg0->unk_38[0] = Math_Round(sp58 - temp_fs3);
     arg0->unk_38[1] = Math_Round(sp54 - temp_fs4);
     arg0->unk_38[2] = Math_Round(temp_fs0 - temp_fs5);
 
-    arg0->unk_26[0] = Math_Round(arg7->x = arg0->unk_14.x - (sp64 * arg3->xy));
-    arg0->unk_26[1] = Math_Round(arg7->y = arg0->unk_14.y - (sp64 * arg3->yy));
-    arg0->unk_26[2] = Math_Round(arg7->z = arg0->unk_14.z - (sp64 * arg3->zy));
+    arg0->unk_26[0] = Math_Round(arg7->x = arg0->unk_14.x - (sp64 * arg3->y.x));
+    arg0->unk_26[1] = Math_Round(arg7->y = arg0->unk_14.y - (sp64 * arg3->y.y));
+    arg0->unk_26[2] = Math_Round(arg7->z = arg0->unk_14.z - (sp64 * arg3->y.z));
 
     sp64 *= 1.2f;
     temp_fs1 = gSinTable[0xE80] * sp64;
     temp_fs2 = gSinTable[0xA80] * sp64;
 
-    arg0->unk_3E[0] = Math_Round((sp58 = arg0->unk_14.x + (temp_fs2 * arg3->xy)) + (temp_fs3 = arg3->xz * temp_fs1));
-    arg0->unk_3E[1] = Math_Round((sp54 = arg0->unk_14.y + (temp_fs2 * arg3->yy)) + (temp_fs4 = arg3->yz * temp_fs1));
+    arg0->unk_3E[0] = Math_Round((sp58 = arg0->unk_14.x + (temp_fs2 * arg3->y.x)) + (temp_fs3 = arg3->z.x * temp_fs1));
+    arg0->unk_3E[1] = Math_Round((sp54 = arg0->unk_14.y + (temp_fs2 * arg3->y.y)) + (temp_fs4 = arg3->z.y * temp_fs1));
     arg0->unk_3E[2] =
-        Math_Round((temp_fs0 = arg0->unk_14.z + (temp_fs2 * arg3->zy)) + (temp_fs5 = arg3->zz * temp_fs1));
+        Math_Round((temp_fs0 = arg0->unk_14.z + (temp_fs2 * arg3->y.z)) + (temp_fs5 = arg3->z.z * temp_fs1));
 
     arg0->unk_2C[0] = Math_Round(sp58 - temp_fs3);
     arg0->unk_2C[1] = Math_Round(sp54 - temp_fs4);
     arg0->unk_2C[2] = Math_Round(temp_fs0 - temp_fs5);
 
-    arg0->unk_20[0] = Math_Round((arg6->x = arg8->x = arg0->unk_14.x) - (sp64 * arg3->xy));
-    arg0->unk_20[1] = Math_Round((arg6->y = arg8->y = arg0->unk_14.y) - (sp64 * arg3->yy));
-    arg0->unk_20[2] = Math_Round((arg6->z = arg8->z = arg0->unk_14.z) - (sp64 * arg3->zy));
+    arg0->unk_20[0] = Math_Round((arg6->x = arg8->x = arg0->unk_14.x) - (sp64 * arg3->y.x));
+    arg0->unk_20[1] = Math_Round((arg6->y = arg8->y = arg0->unk_14.y) - (sp64 * arg3->y.y));
+    arg0->unk_20[2] = Math_Round((arg6->z = arg8->z = arg0->unk_14.z) - (sp64 * arg3->y.z));
 }
 
 void func_800A0CF0(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4, Vec3f* arg5, Vec3f* arg6, Vec3f* arg7,
@@ -1376,30 +1376,30 @@ void func_800A0CF0(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
 
     temp_fs1 = (temp_fs4 - temp_fs5) / 2.0f;
 
-    arg0->unk_20[0] = Math_Round(arg8->x = arg0->unk_14.x + (temp_fs1 * arg3->xz));
-    arg0->unk_20[1] = Math_Round(arg8->y = arg0->unk_14.y + (temp_fs1 * arg3->yz));
-    arg0->unk_20[2] = Math_Round(arg8->z = arg0->unk_14.z + (temp_fs1 * arg3->zz));
+    arg0->unk_20[0] = Math_Round(arg8->x = arg0->unk_14.x + (temp_fs1 * arg3->z.x));
+    arg0->unk_20[1] = Math_Round(arg8->y = arg0->unk_14.y + (temp_fs1 * arg3->z.y));
+    arg0->unk_20[2] = Math_Round(arg8->z = arg0->unk_14.z + (temp_fs1 * arg3->z.z));
 
-    arg0->unk_26[0] = Math_Round(arg6->x = (temp_fs2 = arg3->xy * 185.0f) + arg8->x);
-    arg0->unk_26[1] = Math_Round(arg6->y = (temp_fs3 = arg3->yy * 185.0f) + arg8->y);
-    arg0->unk_26[2] = Math_Round(arg6->z = (sp68 = arg3->zy * 185.0f) + arg8->z);
+    arg0->unk_26[0] = Math_Round(arg6->x = (temp_fs2 = arg3->y.x * 185.0f) + arg8->x);
+    arg0->unk_26[1] = Math_Round(arg6->y = (temp_fs3 = arg3->y.y * 185.0f) + arg8->y);
+    arg0->unk_26[2] = Math_Round(arg6->z = (sp68 = arg3->y.z * 185.0f) + arg8->z);
 
     arg7->x = arg8->x - temp_fs2;
     arg7->y = arg8->y - temp_fs3;
     arg7->z = arg8->z - sp68;
     temp_fs1 = (temp_fs4 + temp_fs5) / 2.0f;
 
-    arg0->unk_2C[0] = Math_Round(arg4->x = (sp64 = arg3->xz * temp_fs1) + arg8->x);
-    arg0->unk_2C[1] = Math_Round(arg4->y = (sp60 = arg3->yz * temp_fs1) + arg8->y);
-    arg0->unk_2C[2] = Math_Round(arg4->z = (sp5C = arg3->zz * temp_fs1) + arg8->z);
+    arg0->unk_2C[0] = Math_Round(arg4->x = (sp64 = arg3->z.x * temp_fs1) + arg8->x);
+    arg0->unk_2C[1] = Math_Round(arg4->y = (sp60 = arg3->z.y * temp_fs1) + arg8->y);
+    arg0->unk_2C[2] = Math_Round(arg4->z = (sp5C = arg3->z.z * temp_fs1) + arg8->z);
 
     arg0->unk_3E[0] = Math_Round(arg5->x = arg8->x - sp64);
     arg0->unk_3E[1] = Math_Round(arg5->y = arg8->y - sp60);
     arg0->unk_3E[2] = Math_Round(arg5->z = arg8->z - sp5C);
 
-    arg0->unk_32[0] = Math_Round((temp_fs2 = arg3->xy * 85.0f) + arg4->x);
-    arg0->unk_32[1] = Math_Round((temp_fs3 = arg3->yy * 85.0f) + arg4->y);
-    arg0->unk_32[2] = Math_Round((sp68 = arg3->zy * 85.0f) + arg4->z);
+    arg0->unk_32[0] = Math_Round((temp_fs2 = arg3->y.x * 85.0f) + arg4->x);
+    arg0->unk_32[1] = Math_Round((temp_fs3 = arg3->y.y * 85.0f) + arg4->y);
+    arg0->unk_32[2] = Math_Round((sp68 = arg3->y.z * 85.0f) + arg4->z);
 
     arg0->unk_44[0] = Math_Round(arg5->x + temp_fs2);
     arg0->unk_44[1] = Math_Round(arg5->y + temp_fs3);
@@ -1407,9 +1407,9 @@ void func_800A0CF0(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
 
     temp_fs1 *= 0.625f;
 
-    arg0->unk_38[0] = Math_Round((temp_fs2 = arg8->x + (160.0f * arg3->xy)) + (sp64 = arg3->xz * temp_fs1));
-    arg0->unk_38[1] = Math_Round((temp_fs3 = arg8->y + (160.0f * arg3->yy)) + (sp60 = arg3->yz * temp_fs1));
-    arg0->unk_38[2] = Math_Round((sp68 = arg8->z + (160.0f * arg3->zy)) + (sp5C = arg3->zz * temp_fs1));
+    arg0->unk_38[0] = Math_Round((temp_fs2 = arg8->x + (160.0f * arg3->y.x)) + (sp64 = arg3->z.x * temp_fs1));
+    arg0->unk_38[1] = Math_Round((temp_fs3 = arg8->y + (160.0f * arg3->y.y)) + (sp60 = arg3->z.y * temp_fs1));
+    arg0->unk_38[2] = Math_Round((sp68 = arg8->z + (160.0f * arg3->y.z)) + (sp5C = arg3->z.z * temp_fs1));
 
     arg0->unk_4A[0] = Math_Round(temp_fs2 - sp64);
     arg0->unk_4A[1] = Math_Round(temp_fs3 - sp60);
@@ -1992,12 +1992,12 @@ Vtx* func_800A2BDC(Vtx* arg0, Vec3f* arg1, Mtx3F* arg2) {
     f32 sp3C;
     f32 sp38;
 
-    temp_fs0 = arg2->xy * 115.47f;
-    temp_fs1 = arg2->yy * 115.47f;
-    temp_fs2 = arg2->zy * 115.47f;
-    sp40 = arg2->xz * 200.0f;
-    sp3C = arg2->yz * 200.0f;
-    sp38 = arg2->zz * 200.0f;
+    temp_fs0 = arg2->y.x * 115.47f;
+    temp_fs1 = arg2->y.y * 115.47f;
+    temp_fs2 = arg2->y.z * 115.47f;
+    sp40 = arg2->z.x * 200.0f;
+    sp3C = arg2->z.y * 200.0f;
+    sp38 = arg2->z.z * 200.0f;
 
     arg0->v.ob[0] = Math_Round(arg1->x + temp_fs0 + temp_fs0);
     arg0->v.ob[1] = Math_Round(arg1->y + temp_fs1 + temp_fs1);
@@ -2693,7 +2693,7 @@ void func_800A4B54(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gCourseRecordInfos); i++) {
-        gCourseRecordInfos[i].unk_04 = i;
+        gCourseRecordInfos[i].courseIndex = i;
         gCourseRecordInfos[i].courseSegments = D_802C2020;
     }
 }
@@ -2777,10 +2777,10 @@ void func_800A4DF0(void) {
     func_8009CED0(gCourseData.venue);
     func_80074634(gCurrentCourseRecordInfo);
     func_8009DEAC(gCurrentCourseRecordInfo);
-    if (gCurrentCourseRecordInfo->unk_04 >= 24) {
-        gCurrentCourseRecordInfo->encodedCourseIndex = 24;
+    if (gCurrentCourseRecordInfo->courseIndex >= COURSE_EDIT_1) {
+        gCurrentCourseRecordInfo->encodedCourseIndex = COURSE_EDIT_1;
     } else {
-        gCurrentCourseRecordInfo->encodedCourseIndex = gCurrentCourseRecordInfo->unk_04;
+        gCurrentCourseRecordInfo->encodedCourseIndex = gCurrentCourseRecordInfo->courseIndex;
     }
     gCurrentCourseRecordInfo->encodedCourseIndex |= Course_CalculateChecksum() << 5;
 }
@@ -3858,7 +3858,7 @@ Gfx* func_800A9938(Gfx* gfx, s32 arg1) {
     s32 i;
 
     temp_v0 = &D_800E5220[arg1];
-    temp_ra = &gRacers[temp_v0->unk_00];
+    temp_ra = &gRacers[temp_v0->playerIndex];
 
     D_800F89C4 = gfx;
     temp_a2 = temp_ra->unk_0C.courseSegment;
@@ -3874,9 +3874,9 @@ Gfx* func_800A9938(Gfx* gfx, s32 arg1) {
         D_800F89D8 = 1;
     }
 
-    temp_fv1 = (temp_v0->unk_5C.xx * D_800CF524) - temp_v0->unk_50.x;
-    temp_fa0 = (temp_v0->unk_5C.yx * D_800CF524) - temp_v0->unk_50.y;
-    temp_fa1 = (temp_v0->unk_5C.zx * D_800CF524) - temp_v0->unk_50.z;
+    temp_fv1 = (temp_v0->unk_5C.x.x * D_800CF524) - temp_v0->unk_50.x;
+    temp_fa0 = (temp_v0->unk_5C.x.y * D_800CF524) - temp_v0->unk_50.y;
+    temp_fa1 = (temp_v0->unk_5C.x.z * D_800CF524) - temp_v0->unk_50.z;
 
     sp60.m[3][2] = temp_v0->unk_11C.m[3][2] -
                    (temp_v0->unk_11C.m[2][2] *

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
+#include "fzx_course.h"
 #include "ovl_i3.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
@@ -407,8 +408,8 @@ extern s8 D_800CD010;
 extern Gfx D_8014940[];
 extern Gfx D_80149A0[];
 extern s32 gGameMode;
-extern s32 D_800E5EC0;
-extern Racer* D_800E5F40[];
+extern s32 gTotalRacers;
+extern Racer* gRacersByPosition[];
 extern GhostRacer* gFastestGhostRacer;
 extern u32 gGameFrameCount;
 
@@ -466,7 +467,7 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
     gDPSetCombineMode(gfx++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
 
     if ((gGameMode == GAMEMODE_VS_2P) || (gGameMode == GAMEMODE_VS_3P)) {
-        sp108 = D_800E5EC0;
+        sp108 = gTotalRacers;
     } else {
         sp108 = arg1 + 1;
     }
@@ -502,9 +503,9 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
     if (arg1 == 0) {
         if (gGameMode == GAMEMODE_GP_RACE) {
             if (gRacers[0].position == 1) {
-                racer = D_800E5F40[1];
+                racer = gRacersByPosition[1];
             } else {
-                racer = D_800E5F40[0];
+                racer = gRacersByPosition[0];
             }
             temp_s2 = Math_Round(((racer->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
             temp_v0 = Math_Round(((racer->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
@@ -1169,7 +1170,7 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
     return gfx;
 }
 
-extern s16 D_80106F48;
+extern s16 gPlayer1OverallPosition;
 extern s32 gCupType;
 extern GfxPool D_8024DCE0[2];
 
@@ -1193,9 +1194,9 @@ void func_i3_801387EC(void) {
         return;
     }
 
-    if (gCourseIndex < 24) {
+    if (gCourseIndex < COURSE_EDIT_1) {
         var_s3 = D_i3_80140E58[gCourseIndex];
-    } else if ((gCourseIndex >= 48) && (gCourseIndex < 54)) {
+    } else if ((gCourseIndex >= COURSE_X_1) && (gCourseIndex <= COURSE_X_6)) {
         j = Math_Rand1() % 7;
         var_s3 = sp54;
         if (j > 0) {
@@ -1217,14 +1218,14 @@ void func_i3_801387EC(void) {
         var_s3->unk_00 = 0;
         var_s3->unk_04 = 0.0f;
         var_s3 = sp54;
-    } else if (gCourseIndex != 55) {
+    } else if (gCourseIndex != COURSE_ENDING) {
         return;
     } else {
         // FAKE
         if (1) {
             var_s3 = D_i3_80140E20;
         }
-        if (D_80106F48 >= 4) {
+        if (gPlayer1OverallPosition >= 4) {
             return;
         }
     }
@@ -1272,49 +1273,10 @@ void func_i3_801387EC(void) {
         u16 minus32 = -32;
         // FAKE! Not sure how to generate 0xFFE0 directly
 
-        gfxPool->unk_2C4E8[0].v.ob[0] = minus32;
-        gfxPool->unk_2C4E8[0].v.ob[1] = 32;
-        gfxPool->unk_2C4E8[0].v.ob[2] = 0;
-        gfxPool->unk_2C4E8[0].v.flag = 0;
-        gfxPool->unk_2C4E8[0].v.tc[0] = 0;
-        gfxPool->unk_2C4E8[0].v.tc[1] = 0;
-        gfxPool->unk_2C4E8[0].v.cn[0] = -1;
-        gfxPool->unk_2C4E8[0].v.cn[1] = -1;
-        gfxPool->unk_2C4E8[0].v.cn[2] = -1;
-        gfxPool->unk_2C4E8[0].v.cn[3] = -1;
-
-        gfxPool->unk_2C4E8[1].v.ob[0] = 32;
-        gfxPool->unk_2C4E8[1].v.ob[1] = 32;
-        gfxPool->unk_2C4E8[1].v.ob[2] = 0;
-        gfxPool->unk_2C4E8[1].v.flag = 0;
-        gfxPool->unk_2C4E8[1].v.tc[0] = 0x800;
-        gfxPool->unk_2C4E8[1].v.tc[1] = 0;
-        gfxPool->unk_2C4E8[1].v.cn[0] = -1;
-        gfxPool->unk_2C4E8[1].v.cn[1] = -1;
-        gfxPool->unk_2C4E8[1].v.cn[2] = -1;
-        gfxPool->unk_2C4E8[1].v.cn[3] = -1;
-
-        gfxPool->unk_2C4E8[2].v.ob[0] = minus32;
-        gfxPool->unk_2C4E8[2].v.ob[1] = minus32;
-        gfxPool->unk_2C4E8[2].v.ob[2] = 0;
-        gfxPool->unk_2C4E8[2].v.flag = 0;
-        gfxPool->unk_2C4E8[2].v.tc[0] = 0;
-        gfxPool->unk_2C4E8[2].v.tc[1] = 0x800;
-        gfxPool->unk_2C4E8[2].v.cn[0] = -1;
-        gfxPool->unk_2C4E8[2].v.cn[1] = -1;
-        gfxPool->unk_2C4E8[2].v.cn[2] = -1;
-        gfxPool->unk_2C4E8[2].v.cn[3] = 0;
-
-        gfxPool->unk_2C4E8[3].v.ob[0] = 32;
-        gfxPool->unk_2C4E8[3].v.ob[1] = minus32;
-        gfxPool->unk_2C4E8[3].v.ob[2] = 0;
-        gfxPool->unk_2C4E8[3].v.flag = 0;
-        gfxPool->unk_2C4E8[3].v.tc[0] = 0x800;
-        gfxPool->unk_2C4E8[3].v.tc[1] = 0x800;
-        gfxPool->unk_2C4E8[3].v.cn[0] = -1;
-        gfxPool->unk_2C4E8[3].v.cn[1] = -1;
-        gfxPool->unk_2C4E8[3].v.cn[2] = -1;
-        gfxPool->unk_2C4E8[3].v.cn[3] = 0;
+        SET_VTX(&gfxPool->unk_2C4E8[0], minus32, 32, 0, 0, 0, 255, 255, 255, 255);
+        SET_VTX(&gfxPool->unk_2C4E8[1], 32, 32, 0, 0x800, 0, 255, 255, 255, 255);
+        SET_VTX(&gfxPool->unk_2C4E8[2], minus32, minus32, 0, 0, 0x800, 255, 255, 255, 0);
+        SET_VTX(&gfxPool->unk_2C4E8[3], 32, minus32, 0, 0x800, 0x800, 255, 255, 255, 0);
     }
     D_i3_80142178 = 0;
 
@@ -1362,34 +1324,34 @@ void func_i3_80138D80(void) {
     s32 i;
     s32 j;
     s32 temp_v0;
-    f32 spA0[3];
-    f32 sp94[3];
-    f32 sp88[3];
+    Vec3f spA0;
+    Vec3f sp94;
+    Vec3f sp88;
     unk_801421A0* var_s2;
     unk_80142248* temp_a0;
     s32 playerIndex = 0;
 
     for (i = 0, var_s2 = D_i3_801421A0; i < D_i3_80142176; i++, var_s2++) {
 
-        spA0[0] = 0.0f - D_800E5220[playerIndex].unk_5C.x.x;
-        spA0[1] = 0.0f - D_800E5220[playerIndex].unk_5C.x.y;
-        spA0[2] = 0.0f - D_800E5220[playerIndex].unk_5C.x.z;
+        spA0.x = 0.0f - D_800E5220[playerIndex].unk_5C.x.x;
+        spA0.y = 0.0f - D_800E5220[playerIndex].unk_5C.x.y;
+        spA0.z = 0.0f - D_800E5220[playerIndex].unk_5C.x.z;
 
-        sp94[0] = 0.0f - spA0[2];
-        sp94[2] = spA0[0];
+        sp94.x = 0.0f - spA0.z;
+        sp94.z = spA0.x;
 
-        sp88[0] = 0.0f - (spA0[1] * spA0[0]);
-        sp88[1] = (spA0[0] * sp94[2]) - (spA0[2] * sp94[0]);
-        sp88[2] = spA0[1] * sp94[0];
+        sp88.x = 0.0f - (sp94.z * spA0.y);
+        sp88.y = (sp94.z * spA0.x) - (sp94.x * spA0.z);
+        sp88.z = (sp94.x * spA0.y) - 0.0f;
 
-        sp94[0] = D_800E5220[playerIndex].unk_50.x + var_s2->unk_08;
-        sp94[1] = 400.0f;
-        sp94[2] = D_800E5220[playerIndex].unk_50.z + var_s2->unk_10;
+        sp94.x = D_800E5220[playerIndex].unk_50.x + var_s2->unk_08;
+        sp94.y = 400.0f;
+        sp94.z = D_800E5220[playerIndex].unk_50.z + var_s2->unk_10;
 
-        if ((sp94[0] <= 23000.0f) && (sp94[0] >= -23000.0f) && (sp94[2] <= 23000.0f) && (sp94[2] >= -23000.0f)) {
+        if ((sp94.x <= 23000.0f) && (sp94.x >= -23000.0f) && (sp94.z <= 23000.0f) && (sp94.z >= -23000.0f)) {
             var_s2->unk_02 = 1;
-            func_8006BFCC(&D_800DCCF0->unk_2C368[i], NULL, D_i3_801407A0, D_i3_801407A0, D_i3_801407A0, spA0, sp88,
-                          sp94);
+            func_8006BFCC(&D_800DCCF0->unk_2C368[i], NULL, D_i3_801407A0, D_i3_801407A0, D_i3_801407A0, &spA0, &sp88,
+                          &sp94);
         } else {
             var_s2->unk_02 = 0;
         }

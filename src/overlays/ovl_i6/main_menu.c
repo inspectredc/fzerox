@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_object.h"
+#include "fzx_course.h"
 #include "src/overlays/ovl_i2/ovl_i2.h"
 #include "ovl_i6.h"
 #include "assets/segment_2B9EA0.h"
@@ -334,7 +335,7 @@ s32 MainMenu_Update(void) {
                         break;
                     case MODE_DEATH_RACE:
                         D_800CD384 = 5;
-                        gCourseIndex = 54;
+                        gCourseIndex = COURSE_DEATH_RACE;
                         gCurrentTrackName = gTrackNames[gCourseIndex];
                         gNumPlayers = 1;
                         func_800BB324(gNumPlayers - 1);

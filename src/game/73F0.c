@@ -703,9 +703,9 @@ void func_8006FC8C(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
     func_8009E6F0(arg0, arg1, arg2);
     sp58 = (sp54 - sp50) / 2.0f;
 
-    arg2->x += sp58 * sp28.xz;
-    arg2->y += sp58 * sp28.yz;
-    arg2->z += sp58 * sp28.zz;
+    arg2->x += sp58 * sp28.z.x;
+    arg2->y += sp58 * sp28.z.y;
+    arg2->z += sp58 * sp28.z.z;
 }
 
 void func_8006FD7C(s32 arg0, s32 arg1, f32 arg2) {
@@ -803,24 +803,24 @@ void func_8006FF90(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     sp74 = func_8009E538(sp2C, sp78, &sp54);
     func_8009E85C(sp2C, arg1->unk_08, &sp30, func_8009E108(sp2C, arg1->unk_08, &sp6C));
     func_8006FC8C(sp2C, arg1->unk_08, &sp60);
-    sp60.x += 5.0f * sp30.xy;
-    sp60.y += 5.0f * sp30.yy;
-    sp60.z += 5.0f * sp30.zy;
-    vtx->v.ob[0] = Math_Round(((arg1->unk_10 * sp30.xz) + sp60.x) + (sp30.xx * D_800CD1E4));
-    vtx->v.ob[1] = Math_Round(((arg1->unk_10 * sp30.yz) + sp60.y) + (sp30.yx * D_800CD1E4));
-    vtx->v.ob[2] = Math_Round(((arg1->unk_10 * sp30.zz) + sp60.z) + (sp30.zx * D_800CD1E4));
+    sp60.x += 5.0f * sp30.y.x;
+    sp60.y += 5.0f * sp30.y.y;
+    sp60.z += 5.0f * sp30.y.z;
+    vtx->v.ob[0] = Math_Round(((arg1->unk_10 * sp30.z.x) + sp60.x) + (sp30.x.x * D_800CD1E4));
+    vtx->v.ob[1] = Math_Round(((arg1->unk_10 * sp30.z.y) + sp60.y) + (sp30.x.y * D_800CD1E4));
+    vtx->v.ob[2] = Math_Round(((arg1->unk_10 * sp30.z.z) + sp60.z) + (sp30.x.z * D_800CD1E4));
     vtx->v.tc[0] = 0x400;
     vtx->v.tc[1] = 0x200;
     vtx++;
-    vtx->v.ob[0] = Math_Round(((arg1->unk_10 + D_800CD1E0) * sp30.xz) + sp60.x);
-    vtx->v.ob[1] = Math_Round(((arg1->unk_10 + D_800CD1E0) * sp30.yz) + sp60.y);
-    vtx->v.ob[2] = Math_Round(((arg1->unk_10 + D_800CD1E0) * sp30.zz) + sp60.z);
+    vtx->v.ob[0] = Math_Round(((arg1->unk_10 + D_800CD1E0) * sp30.z.x) + sp60.x);
+    vtx->v.ob[1] = Math_Round(((arg1->unk_10 + D_800CD1E0) * sp30.z.y) + sp60.y);
+    vtx->v.ob[2] = Math_Round(((arg1->unk_10 + D_800CD1E0) * sp30.z.z) + sp60.z);
     vtx->v.tc[0] = 0;
     vtx->v.tc[1] = 0;
     vtx++;
-    vtx->v.ob[0] = Math_Round(((arg1->unk_10 - D_800CD1E0) * sp30.xz) + sp60.x);
-    vtx->v.ob[1] = Math_Round(((arg1->unk_10 - D_800CD1E0) * sp30.yz) + sp60.y);
-    vtx->v.ob[2] = Math_Round(((arg1->unk_10 - D_800CD1E0) * sp30.zz) + sp60.z);
+    vtx->v.ob[0] = Math_Round(((arg1->unk_10 - D_800CD1E0) * sp30.z.x) + sp60.x);
+    vtx->v.ob[1] = Math_Round(((arg1->unk_10 - D_800CD1E0) * sp30.z.y) + sp60.y);
+    vtx->v.ob[2] = Math_Round(((arg1->unk_10 - D_800CD1E0) * sp30.z.z) + sp60.z);
     vtx->v.tc[0] = 0x800;
     vtx->v.tc[1] = 0;
 
@@ -829,26 +829,26 @@ void func_8006FF90(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     D_802D3E38[arg0].unk_0C.x = arg1->unk_10 - D_800CD1E0;
     D_802D3E38[arg0].unk_18.x = arg1->unk_10 + D_800CD1E0;
 
-    sp60.x = sp60.x + sp30.xx * D_800CD1DC;
-    sp60.y = sp60.y + sp30.yx * D_800CD1DC;
-    sp60.z = sp60.z + sp30.zx * D_800CD1DC;
+    sp60.x = sp60.x + sp30.x.x * D_800CD1DC;
+    sp60.y = sp60.y + sp30.x.y * D_800CD1DC;
+    sp60.z = sp60.z + sp30.x.z * D_800CD1DC;
 
     vtx++;
-    vtx->v.ob[0] = Math_Round((arg1->unk_10 * sp30.xz) + sp60.x);
-    vtx->v.ob[1] = Math_Round((arg1->unk_10 * sp30.yz) + sp60.y);
-    vtx->v.ob[2] = Math_Round((arg1->unk_10 * sp30.zz) + sp60.z);
+    vtx->v.ob[0] = Math_Round((arg1->unk_10 * sp30.z.x) + sp60.x);
+    vtx->v.ob[1] = Math_Round((arg1->unk_10 * sp30.z.y) + sp60.y);
+    vtx->v.ob[2] = Math_Round((arg1->unk_10 * sp30.z.z) + sp60.z);
     vtx->v.tc[0] = 0x400;
     vtx->v.tc[1] = 0x800;
     vtx++;
-    vtx->v.ob[0] = Math_Round((((arg1->unk_10 + D_800CD1E0) * sp30.xz) + sp60.x) - (sp30.xx * D_800CD1E4));
-    vtx->v.ob[1] = Math_Round((((arg1->unk_10 + D_800CD1E0) * sp30.yz) + sp60.y) - (sp30.yx * D_800CD1E4));
-    vtx->v.ob[2] = Math_Round((((arg1->unk_10 + D_800CD1E0) * sp30.zz) + sp60.z) - (sp30.zx * D_800CD1E4));
+    vtx->v.ob[0] = Math_Round((((arg1->unk_10 + D_800CD1E0) * sp30.z.x) + sp60.x) - (sp30.x.x * D_800CD1E4));
+    vtx->v.ob[1] = Math_Round((((arg1->unk_10 + D_800CD1E0) * sp30.z.y) + sp60.y) - (sp30.x.y * D_800CD1E4));
+    vtx->v.ob[2] = Math_Round((((arg1->unk_10 + D_800CD1E0) * sp30.z.z) + sp60.z) - (sp30.x.z * D_800CD1E4));
     vtx->v.tc[0] = 0;
     vtx->v.tc[1] = 0x600;
     vtx++;
-    vtx->v.ob[0] = Math_Round((((arg1->unk_10 - D_800CD1E0) * sp30.xz) + sp60.x) - (sp30.xx * D_800CD1E4));
-    vtx->v.ob[1] = Math_Round((((arg1->unk_10 - D_800CD1E0) * sp30.yz) + sp60.y) - (sp30.yx * D_800CD1E4));
-    vtx->v.ob[2] = Math_Round((((arg1->unk_10 - D_800CD1E0) * sp30.zz) + sp60.z) - (sp30.zx * D_800CD1E4));
+    vtx->v.ob[0] = Math_Round((((arg1->unk_10 - D_800CD1E0) * sp30.z.x) + sp60.x) - (sp30.x.x * D_800CD1E4));
+    vtx->v.ob[1] = Math_Round((((arg1->unk_10 - D_800CD1E0) * sp30.z.y) + sp60.y) - (sp30.x.y * D_800CD1E4));
+    vtx->v.ob[2] = Math_Round((((arg1->unk_10 - D_800CD1E0) * sp30.z.z) + sp60.z) - (sp30.x.z * D_800CD1E4));
     vtx->v.tc[0] = 0x800;
     vtx->v.tc[1] = 0x600;
     D_802D2D78[arg0].effectType = arg1->effectType;
@@ -886,35 +886,35 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     spE0 /= 2;
 
     func_8006FC8C(sp88, arg1->unk_08, &spC8);
-    func_8006C520(NULL, &sp44, 1.0f, DEG_TO_FZXANG(arg1->unk_10), sp8C.xx, sp8C.yx, sp8C.zx, 0.0f, 0.0f, 0.0f);
-    spBC.x = sp44.m[0][0] * sp8C.xz + sp44.m[1][0] * sp8C.yz + sp44.m[2][0] * sp8C.zz;
-    spBC.y = sp44.m[0][1] * sp8C.xz + sp44.m[1][1] * sp8C.yz + sp44.m[2][1] * sp8C.zz;
-    spBC.z = sp44.m[0][2] * sp8C.xz + sp44.m[1][2] * sp8C.yz + sp44.m[2][2] * sp8C.zz;
+    func_8006C520(NULL, &sp44, 1.0f, DEG_TO_FZXANG(arg1->unk_10), sp8C.x.x, sp8C.x.y, sp8C.x.z, 0.0f, 0.0f, 0.0f);
+    spBC.x = sp44.m[0][0] * sp8C.z.x + sp44.m[1][0] * sp8C.z.y + sp44.m[2][0] * sp8C.z.z;
+    spBC.y = sp44.m[0][1] * sp8C.z.x + sp44.m[1][1] * sp8C.z.y + sp44.m[2][1] * sp8C.z.z;
+    spBC.z = sp44.m[0][2] * sp8C.z.x + sp44.m[1][2] * sp8C.z.y + sp44.m[2][2] * sp8C.z.z;
     func_80074BB4(&spBC, 1.0f);
-    sp8C.xz = spBC.x;
-    sp8C.yz = spBC.y;
-    sp8C.zz = spBC.z;
-    spBC.x = sp44.m[0][0] * sp8C.xy + sp44.m[1][0] * sp8C.yy + sp44.m[2][0] * sp8C.zy;
-    spBC.y = sp44.m[0][1] * sp8C.xy + sp44.m[1][1] * sp8C.yy + sp44.m[2][1] * sp8C.zy;
-    spBC.z = sp44.m[0][2] * sp8C.xy + sp44.m[1][2] * sp8C.yy + sp44.m[2][2] * sp8C.zy;
+    sp8C.z.x = spBC.x;
+    sp8C.z.y = spBC.y;
+    sp8C.z.z = spBC.z;
+    spBC.x = sp44.m[0][0] * sp8C.y.x + sp44.m[1][0] * sp8C.y.y + sp44.m[2][0] * sp8C.y.z;
+    spBC.y = sp44.m[0][1] * sp8C.y.x + sp44.m[1][1] * sp8C.y.y + sp44.m[2][1] * sp8C.y.z;
+    spBC.z = sp44.m[0][2] * sp8C.y.x + sp44.m[1][2] * sp8C.y.y + sp44.m[2][2] * sp8C.y.z;
     func_80074BB4(&spBC, 1.0f);
-    sp8C.xy = spBC.x;
-    sp8C.yy = spBC.y;
-    sp8C.zy = spBC.z;
+    sp8C.y.x = spBC.x;
+    sp8C.y.y = spBC.y;
+    sp8C.y.z = spBC.z;
     spD4 = spC8;
     spC8.x += (5.0f - spE0) * spBC.x;
     spC8.y += (5.0f - spE0) * spBC.y;
     spC8.z += (5.0f - spE0) * spBC.z;
 
-    vtx->v.ob[0] = Math_Round((sp8C.xx * 50.0f) + spC8.x);
-    vtx->v.ob[1] = Math_Round((sp8C.yx * 50.0f) + spC8.y);
-    vtx->v.ob[2] = Math_Round((sp8C.zx * 50.0f) + spC8.z);
+    vtx->v.ob[0] = Math_Round((sp8C.x.x * 50.0f) + spC8.x);
+    vtx->v.ob[1] = Math_Round((sp8C.x.y * 50.0f) + spC8.y);
+    vtx->v.ob[2] = Math_Round((sp8C.x.z * 50.0f) + spC8.z);
     vtx->v.tc[0] = 0x400;
     vtx->v.tc[1] = 0x200;
     vtx++;
-    vtx->v.ob[0] = Math_Round((sp8C.xz * 50.0f) + spC8.x);
-    vtx->v.ob[1] = Math_Round((sp8C.yz * 50.0f) + spC8.y);
-    vtx->v.ob[2] = Math_Round((sp8C.zz * 50.0f) + spC8.z);
+    vtx->v.ob[0] = Math_Round((sp8C.z.x * 50.0f) + spC8.x);
+    vtx->v.ob[1] = Math_Round((sp8C.z.y * 50.0f) + spC8.y);
+    vtx->v.ob[2] = Math_Round((sp8C.z.z * 50.0f) + spC8.z);
     vtx->v.tc[0] = 0;
     vtx->v.tc[1] = 0;
     spB0.x = vtx->v.ob[0] - spD4.x;
@@ -925,9 +925,9 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     D_802D3E38[arg0].unk_0C = spB0;
     vtx++;
 
-    vtx->v.ob[0] = Math_Round(spC8.x - (sp8C.xz * 50.0f));
-    vtx->v.ob[1] = Math_Round(spC8.y - (sp8C.yz * 50.0f));
-    vtx->v.ob[2] = Math_Round(spC8.z - (sp8C.zz * 50.0f));
+    vtx->v.ob[0] = Math_Round(spC8.x - (sp8C.z.x * 50.0f));
+    vtx->v.ob[1] = Math_Round(spC8.y - (sp8C.z.y * 50.0f));
+    vtx->v.ob[2] = Math_Round(spC8.z - (sp8C.z.z * 50.0f));
     vtx->v.tc[0] = 0x800;
     vtx->v.tc[1] = 0;
     spB0.x = vtx->v.ob[0] - spD4.x;
@@ -938,9 +938,9 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     D_802D3E38[arg0].unk_04 = spF0;
     spF0 += (150.0f / spEC);
     D_802D3E38[arg0].unk_08 = spF0;
-    spC8.x = spC8.x + sp8C.xx * 150.0f;
-    spC8.y = spC8.y + sp8C.yx * 150.0f;
-    spC8.z = spC8.z + sp8C.zx * 150.0f;
+    spC8.x = spC8.x + sp8C.x.x * 150.0f;
+    spC8.y = spC8.y + sp8C.x.y * 150.0f;
+    spC8.z = spC8.z + sp8C.x.z * 150.0f;
 
     vtx++;
     vtx->v.ob[0] = Math_Round(spC8.x);
@@ -949,15 +949,15 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     vtx->v.tc[0] = 0x400;
     vtx->v.tc[1] = 0x800;
     vtx++;
-    vtx->v.ob[0] = Math_Round(((sp8C.xz * 50.0f) + spC8.x) - (sp8C.xx * 50.0f));
-    vtx->v.ob[1] = Math_Round(((sp8C.yz * 50.0f) + spC8.y) - (sp8C.yx * 50.0f));
-    vtx->v.ob[2] = Math_Round(((sp8C.zz * 50.0f) + spC8.z) - (sp8C.zx * 50.0f));
+    vtx->v.ob[0] = Math_Round(((sp8C.z.x * 50.0f) + spC8.x) - (sp8C.x.x * 50.0f));
+    vtx->v.ob[1] = Math_Round(((sp8C.z.y * 50.0f) + spC8.y) - (sp8C.x.y * 50.0f));
+    vtx->v.ob[2] = Math_Round(((sp8C.z.z * 50.0f) + spC8.z) - (sp8C.x.z * 50.0f));
     vtx->v.tc[0] = 0;
     vtx->v.tc[1] = 0x600;
     vtx++;
-    vtx->v.ob[0] = Math_Round((spC8.x - (sp8C.xz * 50.0f)) - (sp8C.xx * 50.0f));
-    vtx->v.ob[1] = Math_Round((spC8.y - (sp8C.yz * 50.0f)) - (sp8C.yx * 50.0f));
-    vtx->v.ob[2] = Math_Round((spC8.z - (sp8C.zz * 50.0f)) - (sp8C.zx * 50.0f));
+    vtx->v.ob[0] = Math_Round((spC8.x - (sp8C.z.x * 50.0f)) - (sp8C.x.x * 50.0f));
+    vtx->v.ob[1] = Math_Round((spC8.y - (sp8C.z.y * 50.0f)) - (sp8C.x.y * 50.0f));
+    vtx->v.ob[2] = Math_Round((spC8.z - (sp8C.z.z * 50.0f)) - (sp8C.x.z * 50.0f));
     vtx->v.tc[0] = 0x800;
     vtx->v.tc[1] = 0x600;
     D_802D2D78[arg0].effectType = arg1->effectType;
@@ -2715,23 +2715,23 @@ static const char devrostr5[] = "index %d\n";
 static const char devrostr6[] = "ENTRY CHECK\n";
 
 extern u8 gEditCupTrackNames[][9];
-extern s16 D_80106F48;
+extern s16 gPlayer1OverallPosition;
 
 void func_8007402C(s32 courseIndex) {
     s32 pad;
     s32 sp28;
 
-    if (courseIndex >= 54) {
+    if (courseIndex >= COURSE_DEATH_RACE) {
         Dma_LoadAssetsAsync(SEGMENT_ROM_START(course_data) + (courseIndex - 30) * sizeof(CourseData),
                             osVirtualToPhysical(&gCourseData), sizeof(CourseData));
-        if ((D_80106F48 >= 4) && (courseIndex == 55)) {
+        if ((gPlayer1OverallPosition >= 4) && (courseIndex == COURSE_ENDING)) {
             gCourseData.skybox = SKYBOX_BLUE;
         }
-    } else if (courseIndex >= 48) {
+    } else if (courseIndex >= COURSE_X_1) {
         Course_GenerateRandomCourse();
         return;
-    } else if (courseIndex >= 24) {
-        sp28 = courseIndex - 24;
+    } else if (courseIndex >= COURSE_EDIT_1) {
+        sp28 = courseIndex - COURSE_EDIT_1;
         if (func_800760F8() != 2) {
             osWritebackDCacheAll();
             LeoDD_DrawIsDiskInserted();

@@ -1,8 +1,8 @@
 #include "global.h"
 
 s32 gSettingVsSlot = 0;
-s32 D_80106F44 = 0;
-s16 D_80106F48 = 0;
+s32 gRaceTimeIntervalToggle = 0;
+s16 gPlayer1OverallPosition = 0;
 
 unk_80111870 D_80111870[32];
 s32 D_80111CF0;
@@ -29,7 +29,7 @@ s32 D_80115D44;
 // TODO: move to new file
 UNUSED u8 D_80115D48[8];
 s16 D_80115D50[30];
-s16 D_80115D90[30];
+s16 gRacerPositionsById[30];
 s32 D_80115DD0[4];
 s16 D_80115DE0;
 

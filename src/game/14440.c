@@ -874,7 +874,7 @@ const s8 kMachineSelectCharacterList[] = { CAPTAIN_FALCON, DR_STEWART,   PICO,  
                                            MRS_ARROW,      BLOOD_FALCON, JACK_LEVIN,     JAMES_MCCLOUD,   ZODA,
                                            MICHAEL_CHAIN,  SUPER_ARROW,  KATE_ALEN,      ROGER_BUSTER,    LEON,
                                            DRAQ,           BEASTMAN,     ANTONIO_GUSTER, BLACK_SHADOW,    THE_SKULL,
-                                           MAX_CHARACTER };
+                                           30 };
 
 s8 func_8007E10C(s32 i) {
     return kMachineSelectCharacterList[i];

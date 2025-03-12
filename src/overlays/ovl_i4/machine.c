@@ -2,6 +2,7 @@
 #include "fzx_game.h"
 #include "fzx_racer.h"
 #include "fzx_object.h"
+#include "fzx_course.h"
 #include "src/overlays/ovl_i2/ovl_i2.h"
 #include "ovl_i4.h"
 #include "assets/segment_2B9EA0.h"
@@ -984,7 +985,7 @@ void MachineSettings_Init(void) {
         }
     }
 
-    if ((gNumPlayers == 1) && (gCourseIndex < 24)) {
+    if ((gNumPlayers == 1) && (gCourseIndex < COURSE_EDIT_1)) {
         Save_UpdateCharacterSave(gCourseIndex);
         gPlayerEngine[0] = gCharacterLastEngine[gRacers[0].character];
     }

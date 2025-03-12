@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_save.h"
+#include "fzx_course.h"
 #include "ovl_i2.h"
 
 OSIoMesg sSramIoMesg;
@@ -1553,7 +1554,7 @@ void Save_RomCopyGhostRecord(GhostRecord*, s32);
 s32 Save_LoadStaffGhostRecord(GhostInfo* arg0, s32 courseIndex) {
     GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
 
-    if ((courseIndex < 0) || (courseIndex >= 24)) {
+    if (!((courseIndex >= COURSE_MUTE_CITY) && (courseIndex < COURSE_EDIT_1))) {
         return 2;
     }
     Save_RomCopyGhostRecord(ghostRecord, courseIndex);

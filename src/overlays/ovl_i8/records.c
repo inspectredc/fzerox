@@ -258,7 +258,7 @@ extern u16 gInputButtonPressed;
 
 s32 func_i8_80143F94(void) {
     s32 sp2C;
-    s32 sp28;
+    s32 lastCourseIndex;
 
     if (D_i2_80106DA4 != 0) {
         return 0;
@@ -268,7 +268,7 @@ s32 func_i8_80143F94(void) {
     }
     func_i3_8013BF18(1);
 
-    sp28 = gCourseIndex;
+    lastCourseIndex = gCourseIndex;
     if (gInputPressed & BTN_RIGHT) {
         gCourseIndex++;
         if (gCourseIndex >= sUnlockedCourseCount) {
@@ -283,7 +283,7 @@ s32 func_i8_80143F94(void) {
         func_i2_800FCD38(9, 1);
     }
 
-    if (sp28 != gCourseIndex) {
+    if (lastCourseIndex != gCourseIndex) {
         sp2C = 1;
         func_800BA8D8(0x1E);
     } else {

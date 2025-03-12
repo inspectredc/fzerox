@@ -63,7 +63,7 @@ typedef struct CarInfo {
 
 typedef struct CourseRecordInfo {
     /* 0x00 */ s32 encodedCourseIndex;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ s32 courseIndex;
     /* 0x08 */ s32 segmentCount;
     /* 0x0C */ f32 length;
     /* 0x10 */ CourseSegment* courseSegments;
@@ -239,7 +239,7 @@ typedef struct unk_struct_F8 {
 } unk_struct_F8; // size = 0xF8
 
 typedef struct unk_struct_1DC {
-    s32 unk_00;
+    s32 playerIndex;
     u32 unk_04;
     s32 unk_08;
     s32 unk_0C;
@@ -310,7 +310,7 @@ typedef struct Racer {
     s32 id;
     s32 stateFlags;
     u16 unk_08;
-    s16 unk_0A;
+    s16 points;
     Racer_unk_C unk_0C;
     Vec3f unk_5C;
     Vec3f unk_68;
@@ -332,7 +332,7 @@ typedef struct Racer {
     s8 unk_164;
     s8 unk_165;
     s8 unk_166;
-    s8 unk_167;
+    s8 customType;
     Vec3f unk_168;
     f32 shadowColorStrength;
     f32 unk_178;
@@ -378,10 +378,10 @@ typedef struct Racer {
     f32 unk_230;
     f32 unk_234;
     f32 unk_238;
-    f32 unk_23C;
-    f32 unk_240;
-    f32 unk_244;
-    f32 unk_248;
+    f32 raceDistance;
+    f32 lapsCompletedDistance;
+    f32 lapDistance;
+    f32 raceDistancePosition;
     Mtx3F unk_24C;
     f32 unk_270;
     f32 unk_274;
@@ -394,13 +394,13 @@ typedef struct Racer {
     s32 unk_288;
     struct Racer* unk_28C;
     s32 lapTimes[3];
-    s32 unk_29C;
+    s32 completedLapsTime;
     s32 raceTime;
     s32 unk_2A4;
     s16 lap;
-    s16 unk_2AA;
+    s16 lapsCompleted;
     s32 position;
-    s16 unk_2B0;
+    s16 startNewPracticeLap;
     s8 unk_2B2;
     s8 unk_2B3;
     s32 unk_2B4;
@@ -466,10 +466,10 @@ typedef struct Racer {
     u32 unk_368;
     s32 unk_36C;
     s32 unk_370;
-    s32 unk_374;
-    s32 unk_378;
-    s32 unk_37C;
-    s32 unk_380;
+    s32 lastStickX;
+    s32 lastStickY;
+    s32 lastButtonsPressed;
+    s32 lastButtonsCurrent;
     s32 unk_384;
     f32 unk_388;
     f32 unk_38C;
