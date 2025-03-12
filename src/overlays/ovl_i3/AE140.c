@@ -1272,7 +1272,8 @@ Gfx* func_i3_8012040C(Gfx* gfx, s32 arg1) {
                     func_800BAFA4(0x11);
                 }
                 for (i = 0; i < gNumPlayers; i++) {
-                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) || (gRacers[arg1].stateFlags & RACER_STATE_FLAGS_2000000)) {
+                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) ||
+                        (gRacers[arg1].stateFlags & RACER_STATE_FLAGS_2000000)) {
                         func_800BA3E4(i, 3);
                         func_800BA3E4(i, 4);
                         func_800BA3E4(i, 5);
@@ -1684,7 +1685,8 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
             func_800BAFA4(0x11);
         }
         for (i = 0; i < gNumPlayers; i++) {
-            if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) || (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
+            if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) ||
+                (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
                 func_800BA3E4(i, 3);
                 func_800BA3E4(i, 4);
                 func_800BA3E4(i, 5);
@@ -4308,23 +4310,28 @@ Gfx* func_i3_DrawGPResultsScreen(Gfx* gfx, s32 arg1) {
                 if (gGameMode == GAMEMODE_GP_RACE) {
                     gfx = func_i3_8011F560(gfx, gRacersByPosition[i]->id, gRacersByPosition[i]->character, 0x2D,
                                            (s32) ((55 + i * 25) - D_i3_80141D08), 0.75f);
-                    gfx = func_i3_80129800(gfx, gRacersByPosition[i]->id, i + 1, 0x2C, (s32) ((64 + i * 25) - D_i3_80141D08));
-                    gfx = func_i3_ResultsDrawCharacterName(gfx, gRacersByPosition[i]->id, gRacersByPosition[i]->character, 0x49,
-                                                           (s32) ((70 + i * 25) - D_i3_80141D08));
+                    gfx = func_i3_80129800(gfx, gRacersByPosition[i]->id, i + 1, 0x2C,
+                                           (s32) ((64 + i * 25) - D_i3_80141D08));
+                    gfx =
+                        func_i3_ResultsDrawCharacterName(gfx, gRacersByPosition[i]->id, gRacersByPosition[i]->character,
+                                                         0x49, (s32) ((70 + i * 25) - D_i3_80141D08));
                     gfx = func_i3_80129870(gfx, gRacersByPosition[i]->id, 0xD8, (s32) ((70 + i * 25) - D_i3_80141D08));
                     if (gRacersByPosition[i]->raceTime != 0) {
                         gfx = func_i3_80129800(gfx, gRacersByPosition[i]->id, gRacePositionPoints[i], 0xC7,
                                                (s32) ((70 + i * 25) - D_i3_80141D08));
                     } else {
-                        gfx = func_i3_80129800(gfx, gRacersByPosition[i]->id, 0, 0xC7, (s32) ((70 + i * 25) - D_i3_80141D08));
+                        gfx = func_i3_80129800(gfx, gRacersByPosition[i]->id, 0, 0xC7,
+                                               (s32) ((70 + i * 25) - D_i3_80141D08));
                         gfx = func_i3_ResultsDrawRetireStatus(gfx, gRacersByPosition[i]->id, 0xDC,
                                                               (s32) ((70 + i * 25) - D_i3_80141D08));
                     }
                 } else {
                     gfx = func_i3_8011F560(gfx, gRacersByPosition[i]->id, (s32) gRacersByPosition[i]->character, 0x39,
                                            (s32) ((55 + i * 25) - D_i3_80141D08), 0.75f);
-                    gfx = func_i3_80129800(gfx, gRacersByPosition[i]->id, i + 1, 0x38, (s32) ((64 + i * 25) - D_i3_80141D08));
-                    gfx = func_i3_ResultsDrawCharacterName(gfx, gRacersByPosition[i]->id, (s32) gRacersByPosition[i]->character, 0x55,
+                    gfx = func_i3_80129800(gfx, gRacersByPosition[i]->id, i + 1, 0x38,
+                                           (s32) ((64 + i * 25) - D_i3_80141D08));
+                    gfx = func_i3_ResultsDrawCharacterName(gfx, gRacersByPosition[i]->id,
+                                                           (s32) gRacersByPosition[i]->character, 0x55,
                                                            (s32) ((70 + i * 25) - D_i3_80141D08));
                     if (gRacersByPosition[i]->raceTime == 0) {
                         gfx = func_i3_ResultsDrawRetireStatus(gfx, gRacersByPosition[i]->id, 0xBE,
@@ -4486,7 +4493,8 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
                         if ((i - gRacerPositionsById[gRacerIdsByPosition[i]]) + 1 < 10) {
                             var_s0 = 58;
                         }
-                        gfx = func_i3_80129800(gfx, 1, (i - gRacerPositionsById[gRacerIdsByPosition[i]]) + 1, var_s0, temp_ft2 + 0x10);
+                        gfx = func_i3_80129800(gfx, 1, (i - gRacerPositionsById[gRacerIdsByPosition[i]]) + 1, var_s0,
+                                               temp_ft2 + 0x10);
                     }
                     if (gRacerPositionsById[gRacerIdsByPosition[i]] > i + 1) {
                         gDPPipeSync(gfx++);
@@ -4496,18 +4504,19 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
                         if ((i - gRacerPositionsById[gRacerIdsByPosition[i]]) + 1 > -10) {
                             var_s0 = 58;
                         }
-                        gfx = func_i3_80129800(gfx, 1, (gRacerPositionsById[gRacerIdsByPosition[i]] - i) - 1, var_s0, temp_ft2 + 0x13);
+                        gfx = func_i3_80129800(gfx, 1, (gRacerPositionsById[gRacerIdsByPosition[i]] - i) - 1, var_s0,
+                                               temp_ft2 + 0x13);
                     }
                 }
 
-                gfx = func_i3_8011F560(gfx, gRacers[gRacerIdsByPosition[i]].id, gRacers[gRacerIdsByPosition[i]].character, 0x51,
-                                       temp_ft2, 0.75f);
+                gfx = func_i3_8011F560(gfx, gRacers[gRacerIdsByPosition[i]].id,
+                                       gRacers[gRacerIdsByPosition[i]].character, 0x51, temp_ft2, 0.75f);
                 gfx = func_i3_80129800(gfx, gRacers[gRacerIdsByPosition[i]].id, i + 1, 0x51, temp_ft2 + 9);
                 gfx = func_i3_ResultsDrawCharacterName(gfx, gRacers[gRacerIdsByPosition[i]].id,
                                                        gRacers[gRacerIdsByPosition[i]].character, 0x6D, temp_ft2 + 0xF);
                 gfx = func_i3_801298DC(gfx, gRacers[gRacerIdsByPosition[i]].id, 0x103, temp_ft2 + 0xF);
-                gfx = func_i3_80129800(gfx, gRacers[gRacerIdsByPosition[i]].id, gRacers[gRacerIdsByPosition[i]].points, 0xF3,
-                                       temp_ft2 + 0xF);
+                gfx = func_i3_80129800(gfx, gRacers[gRacerIdsByPosition[i]].id, gRacers[gRacerIdsByPosition[i]].points,
+                                       0xF3, temp_ft2 + 0xF);
             }
 
             if (gRacerIdsByPosition[i] == 0) {
@@ -4596,7 +4605,8 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
-                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) || (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
+                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) ||
+                        (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
                         func_800BA3E4(i, 3);
                         func_800BA3E4(i, 4);
                         func_800BA3E4(i, 5);
@@ -4632,7 +4642,8 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
-                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) || (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
+                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) ||
+                        (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
                         func_800BA3E4(i, 3);
                         func_800BA3E4(i, 4);
                         func_800BA3E4(i, 5);
@@ -4756,7 +4767,8 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                     }
                     gfx = func_i3_DrawPosition(gfx, gNumPlayers - 1, i);
                 }
-                if (((gNumPlayers != 1) || (D_i3_80141C20[i] == 0)) && !(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000)) {
+                if (((gNumPlayers != 1) || (D_i3_80141C20[i] == 0)) &&
+                    !(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000)) {
                     gfx = func_i3_DrawPlayerSpeed(gfx, gNumPlayers - 1, i);
                 }
             }
@@ -4764,7 +4776,8 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     }
     if (((gGameFrameCount % 120) == 0) && (D_800DCE5C == 0)) {
         for (i = 0; i < gTotalRacers; i++) {
-            if (!(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000) && (gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000)) {
+            if (!(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000) &&
+                (gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000)) {
                 gRacers[i].unk_368 = 254;
             }
         }
@@ -4790,9 +4803,13 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 if (gRaceTimeIntervalToggle) {
                     if ((temp_ft5 > 0.1f) && (D_80115DE0 >= 2)) {
                         if (gRacers[playerIndex].position != 1) {
-                            var_fa0 = ((gRacersByPosition[0]->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) * 0.8892f;
+                            var_fa0 =
+                                ((gRacersByPosition[0]->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) *
+                                0.8892f;
                         } else {
-                            var_fa0 = ((gRacersByPosition[1]->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) * 0.8892f;
+                            var_fa0 =
+                                ((gRacersByPosition[1]->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) *
+                                0.8892f;
                         }
                         if (gRacersByPosition[0]->stateFlags & RACER_STATE_FLAGS_2000000) {
                             var_fa0 = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].raceDistance) *
@@ -4826,8 +4843,10 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 D_i3_80141DD0->raceDistance = D_i3_80141DD0->lapDistance + D_i3_80141DDC;
                 if (gRaceTimeIntervalToggle) {
                     if (temp_ft5 > 0.1f) {
-                        var_fa0 = ((D_i3_80141DD0->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) * 0.8892f;
-                        if ((gCurrentCourseRecordInfo->length * (gTotalLapCount - 0.01f)) <= D_i3_80141DD0->raceDistance) {
+                        var_fa0 =
+                            ((D_i3_80141DD0->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) * 0.8892f;
+                        if ((gCurrentCourseRecordInfo->length * (gTotalLapCount - 0.01f)) <=
+                            D_i3_80141DD0->raceDistance) {
                             var_fa0 = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].raceDistance) *
                                        gCurrentCourseRecordInfo->length * gTotalLapCount) -
                                       gFastestGhostTime;
@@ -5012,7 +5031,8 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 gfx = func_i3_80124EEC(gfx);
             }
         }
-        if (!(gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000) && (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_8000000)) {
+        if (!(gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000) &&
+            (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_8000000)) {
             if (D_i3_80141C20[0] == 0) {
                 D_i3_80141C30[0] = 0;
                 D_i3_80141C50[0] = 200.0f;
@@ -5106,9 +5126,11 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 } else {
                     D_i3_80141D58[i] = 0;
                 }
-                if ((racer->stateFlags & RACER_STATE_FLAGS_2000000) && (i < gNumPlayers) && !(racer->stateFlags & RACER_STATE_FLAGS_8000000)) {
+                if ((racer->stateFlags & RACER_STATE_FLAGS_2000000) && (i < gNumPlayers) &&
+                    !(racer->stateFlags & RACER_STATE_FLAGS_8000000)) {
                     gfx = func_i3_80126B40(gfx, i);
-                } else if ((racer->stateFlags & RACER_STATE_FLAGS_8000000) && !(racer->stateFlags & RACER_STATE_FLAGS_2000000) && (i < gNumPlayers) &&
+                } else if ((racer->stateFlags & RACER_STATE_FLAGS_8000000) &&
+                           !(racer->stateFlags & RACER_STATE_FLAGS_2000000) && (i < gNumPlayers) &&
                            (D_i3_80141DF0[i] != 2)) {
                     if (D_i3_80141C20[i] == 0) {
                         D_i3_80141C30[i] = 0;
@@ -5142,7 +5164,8 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     }
     if ((gSettingVsSlot != 0) && (D_800E5FBC != 1) && (gNumPlayers >= 2)) {
         for (i = 0; i < gNumPlayers; i++) {
-            if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) && !(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000)) {
+            if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) &&
+                !(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000)) {
                 gfx = func_i3_8011C25C(gfx, i);
             }
         }

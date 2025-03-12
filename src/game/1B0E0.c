@@ -1259,8 +1259,8 @@ void func_80082C80(unk_struct_1DC* arg0) {
     var_fv1 = sqrtf(SQ(temp_fa1) + SQ(temp_ft4) + SQ(temp_ft5));
 
     if (var_fv1 != 0.0f) {
-        temp_fa0 =
-            (-((temp_fa1 * arg0->unk_5C.z.x) + (temp_ft4 * arg0->unk_5C.z.y) + (temp_ft5 * arg0->unk_5C.z.z))) / var_fv1;
+        temp_fa0 = (-((temp_fa1 * arg0->unk_5C.z.x) + (temp_ft4 * arg0->unk_5C.z.y) + (temp_ft5 * arg0->unk_5C.z.z))) /
+                   var_fv1;
         var_fv1 *= temp_fa0;
     }
     if ((var_fv1 >= -1000.0f) && (var_fv1 <= 1000.0f)) {
@@ -1406,7 +1406,8 @@ Gfx* func_800833AC(Gfx* gfx, s32 arg1, s32 playerIndex) {
     switch (temp_v0->unk_E0) {
         case 1:
             gSPViewport(gfx++, &D_1000000.unk_2C2C8[playerIndex]);
-            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, temp_v0->unk_B0, temp_v0->unk_B4, temp_v0->unk_B8, temp_v0->unk_BC);
+            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, temp_v0->unk_B0, temp_v0->unk_B4, temp_v0->unk_B8,
+                          temp_v0->unk_BC);
             break;
         default:
             gfx = func_8006A00C(gfx, arg1);
@@ -1583,12 +1584,12 @@ void func_8008397C(unk_800E5D70* arg0, unk_struct_14* arg1) {
     sp3C.y = sp48[0].y + arg0->unk_10->y;
     sp3C.z = sp48[0].z + arg0->unk_10->z;
 
-    sp30.x = arg0->unk_1C->x + arg0->unk_20->x.x * sp48[1].z + arg0->unk_20->y.x * sp48[1].y +
-             arg0->unk_20->z.x * sp48[1].x;
-    sp30.y = arg0->unk_1C->y + arg0->unk_20->x.y * sp48[1].z + arg0->unk_20->y.y * sp48[1].y +
-             arg0->unk_20->z.y * sp48[1].x;
-    sp30.z = arg0->unk_1C->z + arg0->unk_20->x.z * sp48[1].z + arg0->unk_20->y.z * sp48[1].y +
-             arg0->unk_20->z.z * sp48[1].x;
+    sp30.x =
+        arg0->unk_1C->x + arg0->unk_20->x.x * sp48[1].z + arg0->unk_20->y.x * sp48[1].y + arg0->unk_20->z.x * sp48[1].x;
+    sp30.y =
+        arg0->unk_1C->y + arg0->unk_20->x.y * sp48[1].z + arg0->unk_20->y.y * sp48[1].y + arg0->unk_20->z.y * sp48[1].x;
+    sp30.z =
+        arg0->unk_1C->z + arg0->unk_20->x.z * sp48[1].z + arg0->unk_20->y.z * sp48[1].y + arg0->unk_20->z.z * sp48[1].x;
     func_800820F4(arg0->unk_00, &sp3C, &sp30, NULL, NULL);
 }
 
@@ -1602,12 +1603,12 @@ void func_80083AAC(unk_800E5D70* arg0, unk_struct_14* arg1) {
     sp38.y = sp44[0].y + arg0->unk_10->y;
     sp38.z = sp44[0].z + arg0->unk_10->z;
 
-    sp2C.x = arg0->unk_1C->x + arg0->unk_20->x.x * sp44[1].z + arg0->unk_20->y.x * sp44[1].y +
-             arg0->unk_20->z.x * sp44[1].x;
-    sp2C.y = arg0->unk_1C->y + arg0->unk_20->x.y * sp44[1].z + arg0->unk_20->y.y * sp44[1].y +
-             arg0->unk_20->z.y * sp44[1].x;
-    sp2C.z = arg0->unk_1C->z + arg0->unk_20->x.z * sp44[1].z + arg0->unk_20->y.z * sp44[1].y +
-             arg0->unk_20->z.z * sp44[1].x;
+    sp2C.x =
+        arg0->unk_1C->x + arg0->unk_20->x.x * sp44[1].z + arg0->unk_20->y.x * sp44[1].y + arg0->unk_20->z.x * sp44[1].x;
+    sp2C.y =
+        arg0->unk_1C->y + arg0->unk_20->x.y * sp44[1].z + arg0->unk_20->y.y * sp44[1].y + arg0->unk_20->z.y * sp44[1].x;
+    sp2C.z =
+        arg0->unk_1C->z + arg0->unk_20->x.z * sp44[1].z + arg0->unk_20->y.z * sp44[1].y + arg0->unk_20->z.z * sp44[1].x;
     func_800820F4(arg0->unk_00, &sp38, &sp2C, &sp44[2], NULL);
 }
 
@@ -2364,7 +2365,8 @@ void func_80085B80(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
             }
 
             racer = &gRacers[arg0->playerIndex];
-            func_80088408(&D_800E5E90[arg0->playerIndex], racer->unk_0C.courseSegment, racer->unk_0C.unk_04, &D_800CD970[0]);
+            func_80088408(&D_800E5E90[arg0->playerIndex], racer->unk_0C.courseSegment, racer->unk_0C.unk_04,
+                          &D_800CD970[0]);
             break;
         case 9:
             racer = &gRacers[arg0->playerIndex];
@@ -3591,8 +3593,8 @@ void func_80088D28(void) {
         func_8009EBEC(&temp_s1->unk_0C,
                       temp_s1->unk_0C.unk_34.x + (var_fs4 * temp_s1->unk_24C.y.x) + (var_fv0 * temp_s1->unk_24C.z.x),
                       temp_s1->unk_0C.unk_34.y + (var_fs4 * temp_s1->unk_24C.y.y) + (var_fv0 * temp_s1->unk_24C.z.y),
-                      temp_s1->unk_0C.unk_34.z + (var_fs4 * temp_s1->unk_24C.y.z) + (var_fv0 * temp_s1->unk_24C.z.z), 100,
-                      1.0f);
+                      temp_s1->unk_0C.unk_34.z + (var_fs4 * temp_s1->unk_24C.y.z) + (var_fv0 * temp_s1->unk_24C.z.z),
+                      100, 1.0f);
         if (gNumPlayers == 1) {
             var_fv0 = 100.0f;
         } else {
@@ -4522,7 +4524,8 @@ void func_8008C14C(Racer* arg0) {
     arg0->unk_2FC = arg0->unk_2E4 - arg0->unk_2F0;
     arg0->unk_300 = arg0->unk_2E8 - arg0->unk_2F4;
     if ((D_800CD010 != 0) || (gGameMode == GAMEMODE_PRACTICE) || (gGameMode == GAMEMODE_DEATH_RACE)) {
-        arg0->stateFlags = RACER_STATE_FLAGS_40000000 | RACER_STATE_FLAGS_20000000 | RACER_STATE_FLAGS_100000 | RACER_STATE_FLAGS_8000;
+        arg0->stateFlags =
+            RACER_STATE_FLAGS_40000000 | RACER_STATE_FLAGS_20000000 | RACER_STATE_FLAGS_100000 | RACER_STATE_FLAGS_8000;
     } else {
         arg0->stateFlags = RACER_STATE_FLAGS_40000000 | RACER_STATE_FLAGS_20000000 | RACER_STATE_FLAGS_8000;
     }
@@ -4561,9 +4564,9 @@ void func_8008C14C(Racer* arg0) {
     arg0->lapsCompleted = 1;
     arg0->unk_28C = NULL;
     arg0->unk_08 = 0x8000;
-    arg0->startNewPracticeLap = arg0->unk_288 = arg0->unk_278 = arg0->unk_27A = arg0->unk_27C = arg0->unk_220 = arg0->unk_21C =
-        arg0->completedLapsTime = arg0->raceTime = arg0->lap = arg0->unk_204 = arg0->unk_208 = arg0->unk_20C = arg0->boostTimer =
-            arg0->unk_214 = arg0->unk_210 = 0;
+    arg0->startNewPracticeLap = arg0->unk_288 = arg0->unk_278 = arg0->unk_27A = arg0->unk_27C = arg0->unk_220 =
+        arg0->unk_21C = arg0->completedLapsTime = arg0->raceTime = arg0->lap = arg0->unk_204 = arg0->unk_208 =
+            arg0->unk_20C = arg0->boostTimer = arg0->unk_214 = arg0->unk_210 = 0;
     arg0->unk_118.x = arg0->unk_118.y = arg0->unk_118.z = arg0->unk_224 = arg0->unk_1DC = arg0->unk_E4 = arg0->unk_238 =
         arg0->unk_200 = arg0->unk_A0 = arg0->unk_1D4 = arg0->unk_1D8 = arg0->speed = arg0->maxSpeed = arg0->unk_198 =
             arg0->unk_18C.x = arg0->unk_18C.y = arg0->unk_18C.z = arg0->unk_68.x = arg0->unk_68.y = arg0->unk_68.z =
@@ -4631,8 +4634,8 @@ void func_8008C7C8(void) {
     D_800E5FEC = &D_800CE5D0[gCourseData.venue * 4];
     gPracticeBestLap = 600000 - 1;
     D_800F809C = D_800F80A0 = 0.0f;
-    sRaceFrameCount = gStartNewBestLap = gRacersKOd = D_800F80C4 = D_800F80B8 = D_800E5FBC = D_800E5FBE = D_800E5FC0 = gRacersRetired =
-        gRacersFinished = gCpuRacersRetired = gPlayerRacersRetired = gPlayerRacersFinished = 0;
+    sRaceFrameCount = gStartNewBestLap = gRacersKOd = D_800F80C4 = D_800F80B8 = D_800E5FBC = D_800E5FBE = D_800E5FC0 =
+        gRacersRetired = gRacersFinished = gCpuRacersRetired = gPlayerRacersRetired = gPlayerRacersFinished = 0;
     D_800F80BC = gCurrentCourseRecordInfo->length * 0.5;
     D_800F80C0 = -D_800F80BC;
     if (gGameMode != GAMEMODE_GP_RACE) {
@@ -5019,7 +5022,8 @@ void func_8008DBB8(Racer* arg0, s32 arg1) {
 
     if (arg1 >= arg0->unk_288) {
         temp_v0 = arg0->unk_28C;
-        if ((temp_v0 != NULL) && !(temp_v0->stateFlags & (RACER_STATE_FLAGS_2000000 | RACER_STATE_RETIRED | RACER_STATE_FLAGS_4000))) {
+        if ((temp_v0 != NULL) &&
+            !(temp_v0->stateFlags & (RACER_STATE_FLAGS_2000000 | RACER_STATE_RETIRED | RACER_STATE_FLAGS_4000))) {
             D_800E5FD4++;
             gRacersKOd++;
             if ((gGameMode == GAMEMODE_GP_RACE) && (gRacersKOd == 5)) {
@@ -5050,7 +5054,9 @@ void func_8008DCD8(Racer* arg0, f32 arg1) {
     s32 i;
 
     if (arg0->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_FLAGS_2000000)) {
-        if (((arg0->stateFlags & (RACER_STATE_FLAGS_40000000 | RACER_STATE_FLAGS_8000000)) == (RACER_STATE_FLAGS_40000000 | RACER_STATE_FLAGS_8000000)) && (D_800CE770 < arg1)) {
+        if (((arg0->stateFlags & (RACER_STATE_FLAGS_40000000 | RACER_STATE_FLAGS_8000000)) ==
+             (RACER_STATE_FLAGS_40000000 | RACER_STATE_FLAGS_8000000)) &&
+            (D_800CE770 < arg1)) {
             arg0->stateFlags &= ~RACER_STATE_FLAGS_40000000;
             arg0->unk_C0 = arg0->unk_24C;
             D_800E5FC0++;
@@ -5812,12 +5818,12 @@ void func_8008FC80(Racer* arg0) {
             arg0->unk_19C.x = arg0->unk_24C.y.x;
             arg0->unk_19C.y = arg0->unk_24C.y.y;
             arg0->unk_19C.z = arg0->unk_24C.y.z;
-            arg0->unk_B4.x =
-                (D_800CF8E8[TRACK_SHAPE_INDEX(TRACK_SHAPE_HALF_PIPE)] * arg0->unk_19C.x) + (var_fs0 * arg0->unk_24C.x.x);
-            arg0->unk_B4.y =
-                (D_800CF8E8[TRACK_SHAPE_INDEX(TRACK_SHAPE_HALF_PIPE)] * arg0->unk_19C.y) + (var_fs0 * arg0->unk_24C.x.y);
-            arg0->unk_B4.z =
-                (D_800CF8E8[TRACK_SHAPE_INDEX(TRACK_SHAPE_HALF_PIPE)] * arg0->unk_19C.z) + (var_fs0 * arg0->unk_24C.x.z);
+            arg0->unk_B4.x = (D_800CF8E8[TRACK_SHAPE_INDEX(TRACK_SHAPE_HALF_PIPE)] * arg0->unk_19C.x) +
+                             (var_fs0 * arg0->unk_24C.x.x);
+            arg0->unk_B4.y = (D_800CF8E8[TRACK_SHAPE_INDEX(TRACK_SHAPE_HALF_PIPE)] * arg0->unk_19C.y) +
+                             (var_fs0 * arg0->unk_24C.x.y);
+            arg0->unk_B4.z = (D_800CF8E8[TRACK_SHAPE_INDEX(TRACK_SHAPE_HALF_PIPE)] * arg0->unk_19C.z) +
+                             (var_fs0 * arg0->unk_24C.x.z);
 
             temp_fv1 = 1.0f / sqrtf(SQ(arg0->unk_B4.x) + SQ(arg0->unk_B4.y) + SQ(arg0->unk_B4.z));
 
@@ -6259,9 +6265,12 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         racer->unk_C0.z.y *= temp_fa0;
         racer->unk_C0.z.z *= temp_fa0;
 
-        var_fs1 -= racer->unk_C0.x.x = (racer->unk_C0.z.y * racer->unk_C0.y.z) - (racer->unk_C0.z.z * racer->unk_C0.y.y);
-        var_fs0 -= racer->unk_C0.x.y = (racer->unk_C0.z.z * racer->unk_C0.y.x) - (racer->unk_C0.z.x * racer->unk_C0.y.z);
-        var_ft4 -= racer->unk_C0.x.z = (racer->unk_C0.z.x * racer->unk_C0.y.y) - (racer->unk_C0.z.y * racer->unk_C0.y.x);
+        var_fs1 -= racer->unk_C0.x.x =
+            (racer->unk_C0.z.y * racer->unk_C0.y.z) - (racer->unk_C0.z.z * racer->unk_C0.y.y);
+        var_fs0 -= racer->unk_C0.x.y =
+            (racer->unk_C0.z.z * racer->unk_C0.y.x) - (racer->unk_C0.z.x * racer->unk_C0.y.z);
+        var_ft4 -= racer->unk_C0.x.z =
+            (racer->unk_C0.z.x * racer->unk_C0.y.y) - (racer->unk_C0.z.y * racer->unk_C0.y.x);
         spE4 = sqrtf(SQ(var_fs1) + SQ(var_fs0) + SQ(var_ft4));
     } else {
         spE4 = 0.0f;
@@ -6274,7 +6283,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         var_ft4 = 0.997f;
         var_fs1 = 0.996f;
     }
-    if ((racer->boostTimer == 0) && ((racer->stateFlags & (RACER_STATE_AIRBORNE | COURSE_EFFECT_MASK)) == COURSE_EFFECT_DIRT)) {
+    if ((racer->boostTimer == 0) &&
+        ((racer->stateFlags & (RACER_STATE_AIRBORNE | COURSE_EFFECT_MASK)) == COURSE_EFFECT_DIRT)) {
         var_fs1 *= 0.987f;
         var_ft4 *= 0.987f;
         if (racer->id < gNumPlayers) {
@@ -6329,7 +6339,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
     racer->velocity.y = (racer->unk_C0.z.y * var_fs1) + (racer->unk_C0.y.y * var_fs0) + (racer->unk_C0.x.y * var_ft4);
     racer->velocity.z = (racer->unk_C0.z.z * var_fs1) + (racer->unk_C0.y.z * var_fs0) + (racer->unk_C0.x.z * var_ft4);
 
-    if ((buttonPressed & BTN_B) && (racer->boostTimer == 0) && (racer->energy != 0.0) && (racer->stateFlags & RACER_STATE_FLAGS_100000)) {
+    if ((buttonPressed & BTN_B) && (racer->boostTimer == 0) && (racer->energy != 0.0) &&
+        (racer->stateFlags & RACER_STATE_FLAGS_100000)) {
         racer->shadowColorStrength = 1.3f;
         racer->shadowBaseR = racer->shadowBaseB = 91.0f;
         racer->shadowBaseG = 255.0f;
@@ -6635,7 +6646,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         }
     }
 
-    if (!(racer->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_FLAGS_4000)) && ((racer->stateFlags & COURSE_EFFECT_MASK) != COURSE_EFFECT_ICE)) {
+    if (!(racer->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_FLAGS_4000)) &&
+        ((racer->stateFlags & COURSE_EFFECT_MASK) != COURSE_EFFECT_ICE)) {
         sp128 = (racer->unk_C0.z.x * racer->velocity.x) + (racer->unk_C0.z.y * racer->velocity.y) +
                 (racer->unk_C0.z.z * racer->velocity.z);
 
@@ -6656,7 +6668,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 racer->unk_214--;
             }
         }
-        if ((racer->stateFlags & (RACER_STATE_AIRBORNE | RACER_STATE_FLAGS_20000)) || (racer->unk_208 != 0) || (buttonCurrent & (BTN_Z | BTN_R))) {
+        if ((racer->stateFlags & (RACER_STATE_AIRBORNE | RACER_STATE_FLAGS_20000)) || (racer->unk_208 != 0) ||
+            (buttonCurrent & (BTN_Z | BTN_R))) {
 
             if (racer->unk_208 != 0) {
                 racer->unk_208--;
@@ -6882,7 +6895,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         racer->unk_0C.unk_28.x += racer->velocity.x;
         racer->unk_0C.unk_28.y += racer->velocity.y;
         racer->unk_0C.unk_28.z += racer->velocity.z;
-        racer->unk_0C.unk_40 = sqrtf(SQ(racer->unk_0C.unk_28.x) + SQ(racer->unk_0C.unk_28.y) + SQ(racer->unk_0C.unk_28.z));
+        racer->unk_0C.unk_40 =
+            sqrtf(SQ(racer->unk_0C.unk_28.x) + SQ(racer->unk_0C.unk_28.y) + SQ(racer->unk_0C.unk_28.z));
         D_800CF4B8[TRACK_SHAPE_INDEX(TRACK_SHAPE_AIR)](racer);
         if (racer->unk_0C.unk_34.y < -2750.0f) {
             racer->stateFlags &= ~RACER_STATE_FLAGS_40000000;
@@ -6894,8 +6908,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 func_800894C0(racer);
             }
             if ((racer->id < gNumPlayers) || (gRacers[0].stateFlags & RACER_STATE_FLAGS_80000)) {
-                func_i2_80105590(racer->unk_0C.unk_34.x, racer->unk_0C.unk_34.y, racer->unk_0C.unk_34.z, 0.0f, 0.0f, 0.0f,
-                                 600.0f, racer);
+                func_i2_80105590(racer->unk_0C.unk_34.x, racer->unk_0C.unk_34.y, racer->unk_0C.unk_34.z, 0.0f, 0.0f,
+                                 0.0f, 600.0f, racer);
                 if (D_800E5FD0 != 0) {
                     func_800BA710(racer->id, 8);
                     if ((racer->id == 0) && (gNumPlayers == 1)) {
@@ -6972,7 +6986,9 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             racer->unk_24C.y.x = (racer->unk_24C.x.y * racer->unk_24C.z.z) - (racer->unk_24C.x.z * racer->unk_24C.z.y);
             racer->unk_24C.y.y = (racer->unk_24C.x.z * racer->unk_24C.z.x) - (racer->unk_24C.x.x * racer->unk_24C.z.z);
             racer->unk_24C.y.z = (racer->unk_24C.x.x * racer->unk_24C.z.y) - (racer->unk_24C.x.y * racer->unk_24C.z.x);
-            if (!(racer->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_FLAGS_2000000 | RACER_STATE_FLAGS_80000)) && (gRaceIntroTimer < 40) && (gGameMode != GAMEMODE_RECORDS)) {
+            if (!(racer->stateFlags &
+                  (RACER_STATE_FLAGS_8000000 | RACER_STATE_FLAGS_2000000 | RACER_STATE_FLAGS_80000)) &&
+                (gRaceIntroTimer < 40) && (gGameMode != GAMEMODE_RECORDS)) {
 
                 sp128 -= racer->lapDistance;
                 racer->unk_288++;
@@ -7033,7 +7049,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 racer->raceDistance = racer->raceDistancePosition = racer->lapsCompletedDistance + racer->lapDistance;
             }
 
-            D_800CF4B8[TRACK_SHAPE_INDEX((u32) racer->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK)](racer);
+            D_800CF4B8[TRACK_SHAPE_INDEX((u32) racer->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK)](
+                racer);
             if (racer->stateFlags & RACER_STATE_FLAGS_80000000) {
                 if ((racer->unk_0C.unk_34.x < -20000.0f) || (racer->unk_0C.unk_34.x > 20000.0f) ||
                     (racer->unk_0C.unk_34.z < -20000.0f) || (racer->unk_0C.unk_34.z > 20000.0f) ||
@@ -7083,11 +7100,11 @@ void func_80090BCC(Racer* racer, Controller* controller) {
     racer->unk_68.y = (spE8.y.x * racer->unk_80.x) + (spE8.y.y * racer->unk_80.y) + (spE8.y.z * racer->unk_80.z);
     racer->unk_68.z = (spE8.x.x * racer->unk_80.x) + (spE8.x.y * racer->unk_80.y) + (spE8.x.z * racer->unk_80.z);
     racer->unk_5C.x = (racer->unk_C0.z.x * racer->velocity.x) + (racer->unk_C0.z.y * racer->velocity.y) +
-                     (racer->unk_C0.z.z * racer->velocity.z);
+                      (racer->unk_C0.z.z * racer->velocity.z);
     racer->unk_5C.y = (racer->unk_C0.y.x * racer->velocity.x) + (racer->unk_C0.y.y * racer->velocity.y) +
-                     (racer->unk_C0.y.z * racer->velocity.z);
+                      (racer->unk_C0.y.z * racer->velocity.z);
     racer->unk_5C.z = (racer->unk_C0.x.x * racer->velocity.x) + (racer->unk_C0.x.y * racer->velocity.y) +
-                     (racer->unk_C0.x.z * racer->velocity.z);
+                      (racer->unk_C0.x.z * racer->velocity.z);
     if ((racer->id < gNumPlayers) && (controller->unk_74 != 0)) {
 
         if (!(racer->stateFlags & (RACER_STATE_RETIRED | RACER_STATE_FLAGS_4000))) {
@@ -7141,7 +7158,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         }
     }
 
-    if ((racer->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_AIRBORNE | RACER_STATE_FLAGS_4000 | COURSE_EFFECT_MASK)) == COURSE_EFFECT_PIT) {
+    if ((racer->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_AIRBORNE | RACER_STATE_FLAGS_4000 |
+                              COURSE_EFFECT_MASK)) == COURSE_EFFECT_PIT) {
         racer->energy += racer->energyIncrease;
         if (racer->maxEnergy < racer->energy) {
             racer->energy = racer->maxEnergy;
@@ -7338,8 +7356,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             D_800E5FBE++;
             func_800892E0(racer);
             if (racer->unk_2B4 != 0) {
-                func_i2_80105648(racer->unk_0C.unk_34.x, racer->unk_0C.unk_34.y, racer->unk_0C.unk_34.z, racer->velocity.x,
-                                 racer->velocity.y, racer->velocity.z, 80.0f, racer);
+                func_i2_80105648(racer->unk_0C.unk_34.x, racer->unk_0C.unk_34.y, racer->unk_0C.unk_34.z,
+                                 racer->velocity.x, racer->velocity.y, racer->velocity.z, 80.0f, racer);
                 if (racer->id < gNumPlayers) {
                     i = 60;
                 } else {
@@ -7488,7 +7506,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         racer->shadowR = racer->shadowG = racer->shadowB = 0;
     }
     if (racer->id < gNumPlayers) {
-        if ((racer->unk_0C.courseSegment->trackSegmentInfo & TRACK_FLAG_20000000) && !(racer->stateFlags & RACER_STATE_FLAGS_80000000)) {
+        if ((racer->unk_0C.courseSegment->trackSegmentInfo & TRACK_FLAG_20000000) &&
+            !(racer->stateFlags & RACER_STATE_FLAGS_80000000)) {
             if (!(racer->unk_08 & 0x100)) {
                 racer->unk_08 |= 0x100;
                 if (D_800E5FD0 != 0) {
@@ -7590,7 +7609,7 @@ void func_800951DC(Racer* racer) {
     } else {
         func_80090BCC(racer, &gControllers[gPlayerControlPorts[racer->id]]);
         racer->unk_33C = -racer->unk_0C.unk_28.x * racer->unk_24C.z.x - racer->unk_0C.unk_28.y * racer->unk_24C.z.y -
-                        racer->unk_0C.unk_28.z * racer->unk_24C.z.z;
+                         racer->unk_0C.unk_28.z * racer->unk_24C.z.z;
     }
 }
 
@@ -7648,7 +7667,7 @@ void func_800952F4(void) {
                 for (var_s0 = &gGhostRacers[2]; var_s0 >= gGhostRacers; var_s0--) {
                     if (var_s0->exists) {
                         var_s0->initialized = true;
-                        var_s0->frameCount= 0;
+                        var_s0->frameCount = 0;
                         posDiff = func_800950E8(var_s0);
                         var_s0->replayPosX = posDiff + sReplayRecordPosX;
                         var_s0->pos.x = gRacers[0].unk_0C.unk_34.x + (posDiff * 0.5f);
@@ -7882,7 +7901,10 @@ void func_800952F4(void) {
 
     for (i = 0; i < gNumPlayers; i++) {
         racer2 = &gRacers[i];
-        if ((racer2->maxSpeed < racer2->speed) && !(racer2->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_AIRBORNE | RACER_STATE_FLAGS_2000000 | RACER_STATE_FLAGS_80000)) && (D_800F80A8[i] == 0)) {
+        if ((racer2->maxSpeed < racer2->speed) &&
+            !(racer2->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_AIRBORNE | RACER_STATE_FLAGS_2000000 |
+                                    RACER_STATE_FLAGS_80000)) &&
+            (D_800F80A8[i] == 0)) {
             racer2->maxSpeed = racer2->speed;
         }
     }
@@ -8107,7 +8129,8 @@ void func_800952F4(void) {
                 }
                 break;
             case 120:
-                if ((gGameMode == GAMEMODE_GP_RACE) && (gRacers[0].stateFlags & RACER_STATE_FLAGS_2000000) && (gRacers[0].position == 1)) {
+                if ((gGameMode == GAMEMODE_GP_RACE) && (gRacers[0].stateFlags & RACER_STATE_FLAGS_2000000) &&
+                    (gRacers[0].position == 1)) {
                     func_800BA8D8(0x33);
                 }
                 break;
@@ -8425,8 +8448,9 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
                         var_fs0 = D_800CE750;
                     }
 
-                    func_8006BFCC(&D_800DCCF0->unk_20A88[racer->id], NULL, racer->shadowColorStrength * D_800CE748, 0.1f,
-                                  racer->shadowColorStrength * var_fs0, &racer->unk_E8.x, &racer->unk_19C, &racer->unk_168);
+                    func_8006BFCC(&D_800DCCF0->unk_20A88[racer->id], NULL, racer->shadowColorStrength * D_800CE748,
+                                  0.1f, racer->shadowColorStrength * var_fs0, &racer->unk_E8.x, &racer->unk_19C,
+                                  &racer->unk_168);
                     racer->unk_165 = 1;
                 }
                 gSPMatrix(gfx++, &D_1000000.unk_20A88[racer->id], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -8532,7 +8556,8 @@ block_115:
     gSPLight(gfx++, &D_1000000.unk_21A88[playerIndex].l[0], 1);
     gSPLight(gfx++, &D_1000000.unk_21A88[playerIndex].a, 2);
 
-    if ((sp9C->unk_0C.courseSegment->trackSegmentInfo & TRACK_FLAG_20000000) && !(sp9C->stateFlags & RACER_STATE_FLAGS_80000000)) {
+    if ((sp9C->unk_0C.courseSegment->trackSegmentInfo & TRACK_FLAG_20000000) &&
+        !(sp9C->stateFlags & RACER_STATE_FLAGS_80000000)) {
         sp560 = sp9C->unk_24C.y.x;
         D_800DCCF0->unk_21A88[playerIndex].l[0].l.dir[0] = Math_Round(sp560 * 120.0f);
         sp55C = sp9C->unk_24C.y.y;
@@ -9294,7 +9319,8 @@ block_115:
 
         gSPDisplayList(gfx++, aCountdownSignDL);
 
-        if (((gRaceIntroTimer <= 220) && (gRaceIntroTimer >= 210)) || ((gRaceIntroTimer <= 160) && (gRaceIntroTimer >= 150)) ||
+        if (((gRaceIntroTimer <= 220) && (gRaceIntroTimer >= 210)) ||
+            ((gRaceIntroTimer <= 160) && (gRaceIntroTimer >= 150)) ||
             ((gRaceIntroTimer <= 100) && (gRaceIntroTimer >= 90)) || (gRaceIntroTimer <= 40)) {
             var_s2 = aCountdownMrZeroMouthOpenTex;
         } else {
@@ -9351,7 +9377,8 @@ block_115:
         }
         gSPVertex(gfx++, D_400AA28, 4, 0);
         gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
-    } else if ((gTotalRacers >= 2) && !(sp9C->stateFlags & (RACER_STATE_FLAGS_2000000 | RACER_STATE_RETIRED)) && (gGameMode != GAMEMODE_GP_END_CS)) {
+    } else if ((gTotalRacers >= 2) && !(sp9C->stateFlags & (RACER_STATE_FLAGS_2000000 | RACER_STATE_RETIRED)) &&
+               (gGameMode != GAMEMODE_GP_END_CS)) {
         gSPDisplayList(gfx++, D_4007EA8);
         if ((gGameMode != GAMEMODE_PRACTICE) && (gGameMode != GAMEMODE_DEATH_RACE)) {
             if (gTotalRacers < 3) {
@@ -9364,7 +9391,8 @@ block_115:
 
                 racer = gRacersByPosition[i];
                 if (racer->unk_2B4 != 0) {
-                    if ((playerIndex != racer->id) && !(racer->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_FLAGS_2000000))) {
+                    if ((playerIndex != racer->id) &&
+                        !(racer->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_FLAGS_2000000))) {
                         if (racer->id < playerIndex) {
                             var_s7 = ((s32) ((playerIndex - 1) * playerIndex) >> 1) + racer->id;
                         } else {
@@ -9416,7 +9444,8 @@ block_115:
                 }
             }
             if ((gGameMode == GAMEMODE_GP_RACE) && (D_800E5EC8 != NULL) && (D_800E5EC8->unk_2B4 != 0) &&
-                !(D_800E5EC8->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_FLAGS_2000000)) && (gRacers[0].position >= D_800E5EC8->position)) {
+                !(D_800E5EC8->stateFlags & (RACER_STATE_FLAGS_8000000 | RACER_STATE_FLAGS_2000000)) &&
+                (gRacers[0].position >= D_800E5EC8->position)) {
                 temp_fs4 = D_800E5EC8->unk_0C.unk_34.x + (20.0f * D_800E5EC8->unk_C0.y.x);
                 temp_fs5 = D_800E5EC8->unk_0C.unk_34.y + (20.0f * D_800E5EC8->unk_C0.y.y);
                 temp_fv0_19 = D_800E5EC8->unk_0C.unk_34.z + (20.0f * D_800E5EC8->unk_C0.y.z);

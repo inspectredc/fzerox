@@ -868,7 +868,8 @@ void Cpu_BehaviorJohnTanaka(Racer* racer, Controller* controller) {
 }
 
 void Cpu_BehaviorBilly(Racer* racer, Controller* controller) {
-    if ((racer->unk_2B4 != 0) && (sPlayerRacer->raceDistance < racer->raceDistance) && (racer->stateFlags & RACER_STATE_AIRBORNE)) {
+    if ((racer->unk_2B4 != 0) && (sPlayerRacer->raceDistance < racer->raceDistance) &&
+        (racer->stateFlags & RACER_STATE_AIRBORNE)) {
         controller->buttonPressed |= BTN_R_Z_COMBO;
     }
 }
@@ -1003,14 +1004,14 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                 }
             } else {
                 racer->unk_1EC = gRacers[var_a3].speed - (temp_fv1 * 0.0002f);
-                if ((gTotalLapCount == racer->lap) &&
-                    (((s32) (gCurrentCourseRecordInfo->segmentCount * 2) / 3) < racer->unk_0C.courseSegment->segmentIndex)) {
+                if ((gTotalLapCount == racer->lap) && (((s32) (gCurrentCourseRecordInfo->segmentCount * 2) / 3) <
+                                                       racer->unk_0C.courseSegment->segmentIndex)) {
                     racer->unk_1EC = gRacers[var_a3].speed - (temp_fv1 * 0.002f);
                 }
                 racer->unk_1E8 = 0.0f;
             }
-            if ((gTotalLapCount == racer->lap) &&
-                (((s32) (gCurrentCourseRecordInfo->segmentCount * 2) / 3) < racer->unk_0C.courseSegment->segmentIndex)) {
+            if ((gTotalLapCount == racer->lap) && (((s32) (gCurrentCourseRecordInfo->segmentCount * 2) / 3) <
+                                                   racer->unk_0C.courseSegment->segmentIndex)) {
                 racer->unk_1E8 = 0.0f;
             }
             racer->unk_38C = 0;
@@ -1021,8 +1022,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
             racer->unk_1EC = func_i3_801179DC(racer);
             racer->unk_1E8 = func_i3_80117A1C(racer);
         }
-    } else if (((gNumPlayers == 1) && (sPlayerRacer->stateFlags & RACER_STATE_FLAGS_2000000)) || (racer->stateFlags & RACER_STATE_FLAGS_2000000) ||
-               (racer->id < gNumPlayers)) {
+    } else if (((gNumPlayers == 1) && (sPlayerRacer->stateFlags & RACER_STATE_FLAGS_2000000)) ||
+               (racer->stateFlags & RACER_STATE_FLAGS_2000000) || (racer->id < gNumPlayers)) {
         racer->unk_1E8 = 0.0f;
         racer->unk_1EC = (2500.0f / 27.0f);
         racer->unk_1B4 = 1.00894f;
@@ -1031,7 +1032,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
         racer->unk_1BC = 36.769516f;
         racer->unk_1C4 = 1.726068f;
         racer->unk_1D0 = 0.198282f;
-        if ((gNumPlayers == 1) && (gTotalRacers != 1) && (racer->id != 0) && (sPlayerRacer->stateFlags & RACER_STATE_FLAGS_2000000)) {
+        if ((gNumPlayers == 1) && (gTotalRacers != 1) && (racer->id != 0) &&
+            (sPlayerRacer->stateFlags & RACER_STATE_FLAGS_2000000)) {
             if ((sp44->id == 0) && (racer->unk_2C0 < 2000.0f)) {
                 racer->unk_1EC = (625.0f / 27.0f);
             } else if ((sp40->id == 0) && (racer->unk_2C4 < 2000.0f)) {
@@ -1073,7 +1075,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                 spB4 = ((f32) (Math_Rand1() % 32768) / 32767.0f) + 0.00001f;
 
                 if (func_i3_fabsf(gRacers[racer->unk_352].unk_33C - racer->unk_33C) < 92.0f) {
-                    if (((racer->unk_352 != 0) && (spB4 < 0.15f) && (racer->unk_36C & 0x200)) || (spB4 < racer->unk_360)) {
+                    if (((racer->unk_352 != 0) && (spB4 < 0.15f) && (racer->unk_36C & 0x200)) ||
+                        (spB4 < racer->unk_360)) {
                         if (racer->unk_390 == 0) {
                             if (racer->unk_33C < gRacers[racer->unk_352].unk_33C) {
                                 racer->unk_390 = 5;
@@ -1112,8 +1115,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                 }
             }
 
-            if (((gTotalLapCount == racer->lap) &&
-                 (((s32) (gCurrentCourseRecordInfo->segmentCount * 2) / 3) < racer->unk_0C.courseSegment->segmentIndex)) ||
+            if (((gTotalLapCount == racer->lap) && (((s32) (gCurrentCourseRecordInfo->segmentCount * 2) / 3) <
+                                                    racer->unk_0C.courseSegment->segmentIndex)) ||
                 ((gRacers[racer->unk_352].unk_368 == 254) && (gGameMode != GAMEMODE_PRACTICE) &&
                  (gGameMode != GAMEMODE_DEATH_RACE))) {
                 racer->unk_352 = 255;
@@ -1127,8 +1130,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
             }
 
             var_fv0 = (gCurrentCourseRecordInfo->length * (gTotalLapCount - 1)) / (racer->unk_398 - racer->lapTimes[0]);
-            spBC =
-                (((racer->raceTime - racer->lapTimes[0]) * var_fv0) + gCurrentCourseRecordInfo->length) - racer->raceDistance;
+            spBC = (((racer->raceTime - racer->lapTimes[0]) * var_fv0) + gCurrentCourseRecordInfo->length) -
+                   racer->raceDistance;
             spB4 = ((((racer->raceTime - racer->lapTimes[0]) - 0x11) * var_fv0) + gCurrentCourseRecordInfo->length) -
                    racer->raceDistance;
 
@@ -1154,7 +1157,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
         } else {
             if (racer->unk_39C != 0) {
                 spBC = (racer->raceTime * (gCurrentCourseRecordInfo->length / racer->unk_39C)) - racer->raceDistance;
-                spB4 = ((racer->raceTime - 0x11) * (gCurrentCourseRecordInfo->length / racer->unk_39C)) - racer->raceDistance;
+                spB4 = ((racer->raceTime - 0x11) * (gCurrentCourseRecordInfo->length / racer->unk_39C)) -
+                       racer->raceDistance;
                 if (racer->raceDistance > 0.0f) {
                     racer->unk_1EC = (spBC * 0.05f) + (spBC - spB4);
                     racer->unk_1E8 = 1.0f;
@@ -1243,14 +1247,14 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                 }
             }
             temp_fa0 = (racer->unk_338 * (((racer->unk_33C + (racer->unk_0C.unk_28.x * racer->unk_24C.z.x)) +
-                                          (racer->unk_0C.unk_28.y * racer->unk_24C.z.y)) +
-                                         (racer->unk_0C.unk_28.z * racer->unk_24C.z.z))) *
+                                           (racer->unk_0C.unk_28.y * racer->unk_24C.z.y)) +
+                                          (racer->unk_0C.unk_28.z * racer->unk_24C.z.z))) *
                        1.2f;
             temp_fa0 += (racer->unk_334 * ((temp4 * sp4C.z.x) + (temp5 * sp4C.z.y) + (temp6 * sp4C.z.z)) * 1.2f);
             var_a3 = Math_Round(temp_fa0);
         } else if (!sp74) {
             var_a3 = Math_Round(-racer->unk_334 * ((racer->unk_C0.z.x * sp4C.x.x) + (racer->unk_C0.z.y * sp4C.x.y) +
-                                                  (racer->unk_C0.z.z * sp4C.x.z)));
+                                                   (racer->unk_C0.z.z * sp4C.x.z)));
             if (!(Math_Rand2() % 64)) {
                 if (Math_Rand1() % 2) {
                     racer->unk_370 = (Math_Rand2() % 16) + 20;
@@ -1328,8 +1332,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
         controller->stickX = (var_a3 * 5) / 8;
         controller->stickY = var_a1;
         if (gNumPlayers == 1) {
-            if (sp70 && (racer->raceTime > 1000) && (gDifficulty >= EXPERT) && (racer->id != 0) && (gTotalRacers != 1) &&
-                (racer->unk_36C & 0x200)) {
+            if (sp70 && (racer->raceTime > 1000) && (gDifficulty >= EXPERT) && (racer->id != 0) &&
+                (gTotalRacers != 1) && (racer->unk_36C & 0x200)) {
                 if ((racer->unk_2C4 < 23.0f) &&
                     (((gDifficulty >= EXPERT) && (sPlayerRacer->raceDistance < racer->raceDistance)) ||
                      ((sPlayerRacer->raceDistance + 138.0f) < racer->raceDistance)) &&
@@ -1353,7 +1357,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
             if (racer->unk_390 < 0) {
                 racer->unk_390++;
                 if (((racer->unk_390 == -3) || (racer->unk_390 == -1)) &&
-                    ((gDifficulty >= EXPERT) || (func_i3_fabsf(sPlayerRacer->raceDistance - racer->raceDistance) > 184.0f)) &&
+                    ((gDifficulty >= EXPERT) ||
+                     (func_i3_fabsf(sPlayerRacer->raceDistance - racer->raceDistance) > 184.0f)) &&
                     (sPlayerRacer->raceDistance < racer->raceDistance)) {
                     controller->buttonPressed |= BTN_Z;
                 }
@@ -1456,8 +1461,9 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                 ((racer->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK) != TRACK_SHAPE_CYLINDER) &&
                 (gGameMode != GAMEMODE_GP_END_CS)) {
                 if ((gCourseIndex < COURSE_EDIT_1) &&
-                    (((racer->raceTime > 2000) && (((racer->unk_368 % 6) < 2) ||
-                                                  (func_i3_fabsf(racer->raceDistance - sPlayerRacer->raceDistance) > 5000.0f))) ||
+                    (((racer->raceTime > 2000) &&
+                      (((racer->unk_368 % 6) < 2) ||
+                       (func_i3_fabsf(racer->raceDistance - sPlayerRacer->raceDistance) > 5000.0f))) ||
                      (racer->id < gNumPlayers))) {
                     var_a3 = racer->unk_0C.courseSegment->segmentIndex * 4;
                     if (racer->unk_0C.unk_08 >= 0.5f) {
@@ -1524,8 +1530,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                         case 3:
                             if ((racer->unk_348 == 0) && (var_fv0 < 0.99f)) {
                                 racer->unk_33C = ((-racer->unk_0C.unk_28.x * racer->unk_24C.z.x) -
-                                                 (racer->unk_0C.unk_28.y * racer->unk_24C.z.y)) -
-                                                (racer->unk_0C.unk_28.z * racer->unk_24C.z.z);
+                                                  (racer->unk_0C.unk_28.y * racer->unk_24C.z.y)) -
+                                                 (racer->unk_0C.unk_28.z * racer->unk_24C.z.z);
 
                                 if (func_i3_fabsf(sp9C - racer->unk_33C) < 146.0f) {
                                     if (racer->unk_33C > sp9C) {
@@ -1722,7 +1728,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                                     break;
                                 } else {
                                     if ((racer->unk_34C == 1) && (racer->unk_0C.unk_08 < 0.5f) &&
-                                        (func_i3_fabsf(racer->unk_33C - ((-1.0f * racer->unk_270) + 100.0f)) < 230.0f)) {
+                                        (func_i3_fabsf(racer->unk_33C - ((-1.0f * racer->unk_270) + 100.0f)) <
+                                         230.0f)) {
                                         racer->unk_33C = (racer->unk_270 * -1.0f) + 100.0f;
                                         break;
                                     }
@@ -1769,7 +1776,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
         } else {
             spBC = 92.0f;
         }
-        if ((racer->unk_35C == TRACK_FORM_RIGHT) || ((racer->unk_35C == TRACK_FORM_S) && (racer->unk_0C.unk_08 > 0.6f)) ||
+        if ((racer->unk_35C == TRACK_FORM_RIGHT) ||
+            ((racer->unk_35C == TRACK_FORM_S) && (racer->unk_0C.unk_08 > 0.6f)) ||
             ((racer->unk_35C == TRACK_FORM_S_FLIPPED) && (racer->unk_0C.unk_08 < 0.4f))) {
             if (racer->unk_33C < 0.0f) {
                 if (racer->unk_270 < ((racer->unk_33C * -1.0f) + spBC)) {

@@ -547,10 +547,10 @@ f32 func_8009E108(CourseSegment* arg0, f32 arg1, f32* arg2) {
 
     square = SQ(var_fs0);
     cube = square * var_fs0;
-    temp_fa0 = (2.0f * square - var_fs0 - cube) * spDC;
-    temp_fa1 = spD4 * square - spD8 * cube + 1.0f;
-    temp_ft4 = spD8 * cube + spD0 * square + spDC * var_fs0;
-    spA4 = (cube - square) * spDC;
+    temp_fa0 = (2.0f * square - var_fs0 - cube) * spDC;      // spDC . -x(1-x)^2
+    temp_fa1 = spD4 * square - spD8 * cube + 1.0f;           // spDC . x^2(1-x) + (2x+1)(1-x)^2
+    temp_ft4 = spD8 * cube + spD0 * square + spDC * var_fs0; // spDC . x(1-x)^2 - x^2(2x-3)
+    spA4 = (cube - square) * spDC;                           // spDC . -x^2(1-x)
 
     sp98.x = temp_fa0 * temp_s1->pos.x + temp_fa1 * arg0->pos.x + temp_ft4 * temp_s0->pos.x + spA4 * temp_s2->pos.x;
     sp98.y = temp_fa0 * temp_s1->pos.y + temp_fa1 * arg0->pos.y + temp_ft4 * temp_s0->pos.y + spA4 * temp_s2->pos.y;
@@ -612,10 +612,12 @@ f32 func_8009E538(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
     square = SQ(arg1);
     temp_fv0 = arg0->unk_24;
 
-    sp44 = (4.0f * arg1 - 1.0f - 3.0f * square) * temp_fv0;
-    sp40 = (6.0f - 3.0f * temp_fv0) * square + (2.0f * temp_fv0 - 6.0f) * arg1;
-    sp3C = (3.0f * temp_fv0 - 6.0f) * square + (6.0f - 4.0f * temp_fv0) * arg1 + temp_fv0;
-    sp38 = (3.0f * square - 2.0f * arg1) * temp_fv0;
+    sp44 = (4.0f * arg1 - 1.0f - 3.0f * square) * temp_fv0; // (temp_fv0 . -x(1-x)^2)'
+    sp40 =
+        (6.0f - 3.0f * temp_fv0) * square + (2.0f * temp_fv0 - 6.0f) * arg1; // (temp_fv0 . x^2(1-x) + (2x+1)(1-x)^2)'
+    sp3C = (3.0f * temp_fv0 - 6.0f) * square + (6.0f - 4.0f * temp_fv0) * arg1 +
+           temp_fv0;                                 // (temp_fv0 . x(1-x)^2 - x^2(2x-3))'
+    sp38 = (3.0f * square - 2.0f * arg1) * temp_fv0; // (temp_fv0 . -x^2(1-x))'
 
     arg2->x = sp44 * temp_v1->pos.x + sp40 * arg0->pos.x + sp3C * temp_v0->pos.x + sp38 * temp_a1->pos.x;
     arg2->y = sp44 * temp_v1->pos.y + sp40 * arg0->pos.y + sp3C * temp_v0->pos.y + sp38 * temp_a1->pos.y;
@@ -1223,8 +1225,10 @@ void func_800A0068(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
 
     temp_fs1 += argA;
 
-    arg0->unk_2C[0] = Math_Round((temp_fs2 = arg8->x + ((argB - argC) * arg3->y.x)) + (temp_fs4 = arg3->z.x * temp_fs1));
-    arg0->unk_2C[1] = Math_Round((temp_fs3 = arg8->y + ((argB - argC) * arg3->y.y)) + (temp_fs5 = arg3->z.y * temp_fs1));
+    arg0->unk_2C[0] =
+        Math_Round((temp_fs2 = arg8->x + ((argB - argC) * arg3->y.x)) + (temp_fs4 = arg3->z.x * temp_fs1));
+    arg0->unk_2C[1] =
+        Math_Round((temp_fs3 = arg8->y + ((argB - argC) * arg3->y.y)) + (temp_fs5 = arg3->z.y * temp_fs1));
     arg0->unk_2C[2] = Math_Round((temp_fs0 = arg8->z + ((argB - argC) * arg3->y.z)) + (sp6C = arg3->z.z * temp_fs1));
 
     arg0->unk_3E[0] = Math_Round(temp_fs2 - temp_fs4);
@@ -1282,8 +1286,10 @@ void func_800A05CC(unk_36ED0* arg0, f32 arg1, f32 arg2, Mtx3F* arg3, Vec3f* arg4
     sp64 = gSinTable[0x200] * arg1;
 
     arg0->unk_38[0] = Math_Round((sp60 = (sp54 = arg3->z.x * sp64) + arg0->unk_14.x) + (temp_fs2 = arg3->y.x * sp64));
-    arg0->unk_38[1] = Math_Round((temp_fs1 = (sp50 = arg3->z.y * sp64) + arg0->unk_14.y) + (temp_fs3 = arg3->y.y * sp64));
-    arg0->unk_38[2] = Math_Round((temp_fs0 = (sp4C = arg3->z.z * sp64) + arg0->unk_14.z) + (temp_fs4 = arg3->y.z * sp64));
+    arg0->unk_38[1] =
+        Math_Round((temp_fs1 = (sp50 = arg3->z.y * sp64) + arg0->unk_14.y) + (temp_fs3 = arg3->y.y * sp64));
+    arg0->unk_38[2] =
+        Math_Round((temp_fs0 = (sp4C = arg3->z.z * sp64) + arg0->unk_14.z) + (temp_fs4 = arg3->y.z * sp64));
 
     arg0->unk_2C[0] = Math_Round(sp60 - temp_fs2);
     arg0->unk_2C[1] = Math_Round(temp_fs1 - temp_fs3);
@@ -2565,10 +2571,12 @@ void Course_GenerateRandomCourse(void) {
                 if ((Math_Rand2() & 0x1FFFF) < 0xFFFF) {
                     var_s1_2 =
                         &gCourseData
-                             .controlPoint[((Math_Rand1() & 0x1FFFF) % (gCurrentCourseRecordInfo->segmentCount - 1)) + 1];
+                             .controlPoint[((Math_Rand1() & 0x1FFFF) % (gCurrentCourseRecordInfo->segmentCount - 1)) +
+                                           1];
                     var_s0_4 =
                         &gCourseData
-                             .controlPoint[((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->segmentCount - 1)) + 1];
+                             .controlPoint[((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->segmentCount - 1)) +
+                                           1];
                     if ((var_s1_2 < var_s0_4) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000) &&
                         ((var_s0_4 + 1)->trackSegmentInfo & 0x10000000)) {
                         var_s6 = Math_Rand1() & 3;
@@ -2630,10 +2638,12 @@ void Course_GenerateRandomCourse(void) {
                     var_s6 = (var_s6 + temp_s3) & 3;
                     var_s1_2 =
                         &gCourseData
-                             .controlPoint[((Math_Rand1() & 0x1FFFF) % (gCurrentCourseRecordInfo->segmentCount - 6)) + 2];
+                             .controlPoint[((Math_Rand1() & 0x1FFFF) % (gCurrentCourseRecordInfo->segmentCount - 6)) +
+                                           2];
                     var_s0_4 =
                         &gCourseData
-                             .controlPoint[((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->segmentCount - 6)) + 2];
+                             .controlPoint[((Math_Rand2() & 0x1FFFF) % (gCurrentCourseRecordInfo->segmentCount - 6)) +
+                                           2];
                     var_s4--;
                 } while (var_s4 > 0);
                 // Ensure there are pit zones
@@ -2647,11 +2657,12 @@ void Course_GenerateRandomCourse(void) {
                     if (gCourseData.controlPoint[var_s4].trackSegmentInfo & 0x08000000) {
                         break;
                     }
-                } while (gCourseData
-                             .controlPoint[((var_s4 + gCurrentCourseRecordInfo->segmentCount) - 1) %
-                                           gCurrentCourseRecordInfo->segmentCount]
-                             .trackSegmentInfo !=
-                         gCourseData.controlPoint[(var_s4 + 1) % gCurrentCourseRecordInfo->segmentCount].trackSegmentInfo);
+                } while (
+                    gCourseData
+                        .controlPoint[((var_s4 + gCurrentCourseRecordInfo->segmentCount) - 1) %
+                                      gCurrentCourseRecordInfo->segmentCount]
+                        .trackSegmentInfo !=
+                    gCourseData.controlPoint[(var_s4 + 1) % gCurrentCourseRecordInfo->segmentCount].trackSegmentInfo);
 
                 gCourseData.dash[var_s4] = (Math_Rand1() & 0x1FFFF) % 3;
                 temp_s3--;

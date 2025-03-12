@@ -12,74 +12,74 @@ s32 D_800DCD04;
 s32 D_800DCD08;
 s32 D_800DCD0C;
 OSMesg D_800DCD10;
-u32 D_800DCD14;
-u32 D_800DCD18;
-u32 D_800DCD1C;
-u32 D_800DCD20;
-u32 D_800DCD24;
-u32 D_800DCD28;
-u32 D_800DCD2C;
-u32 D_800DCD30;
-u32 D_800DCD34;
-u32 D_800DCD38;
-u32 D_800DCD3C;
-u32 D_800DCD40;
-u32 D_800DCD44;
-u32 D_800DCD48;
-u32 D_800DCD4C;
-u32 D_800DCD50;
-u32 D_800DCD54;
-u32 D_800DCD58;
-u32 D_800DCD5C;
-u32 D_800DCD60;
-u32 D_800DCD64;
-u32 D_800DCD68;
+u32 gMainVramStart;
+u32 gMainVramEnd;
+u32 gOvl2VramStart;
+u32 gOvl2VramEnd;
+u32 gOvl3VramStart;
+u32 gOvl3VramEnd;
+u32 gOvl4VramStart;
+u32 gOvl4VramEnd;
+u32 gOvlCourseSelectVramStart;
+u32 gOvlCourseSelectVramEnd;
+u32 gOvl6VramStart;
+u32 gOvl6VramEnd;
+u32 gOvl7VramStart;
+u32 gOvl7VramEnd;
+u32 gOvl8VramStart;
+u32 gOvl8VramEnd;
+u32 gOvl9VramStart;
+u32 gOvl9VramEnd;
+u32 gOvl10VramStart;
+u32 gOvl10VramEnd;
+u32 gLeoVramStart;
+u32 gLeoVramEnd;
 UNUSED u32 D_800DCD6C;
 UNUSED u32 D_800DCD70;
-u32 D_800DCD74;
-u32 D_800DCD78;
-u32 D_800DCD7C;
-u32 D_800DCD80;
-u32 D_800DCD84;
-u32 D_800DCD88;
-u32 D_800DCD8C;
-u32 D_800DCD90;
-u32 D_800DCD94;
-u32 D_800DCD98;
-u32 D_800DCD9C;
-u32 D_800DCDA0;
-u32 D_800DCDA4;
-u32 D_800DCDA8;
-u32 D_800DCDAC;
-u32 D_800DCDB0;
-u32 D_800DCDB4;
-u32 D_800DCDB8;
+u32 gFramebuffer1VramStart;
+u32 gFramebuffer1VramEnd;
+u32 gFramebuffer2VramStart;
+u32 gFramebuffer2VramEnd;
+u32 gFramebuffer3VramStart;
+u32 gFramebuffer3VramEnd;
+u32 gFramebufferUnusedVramStart;
+u32 gFramebufferUnusedVramEnd;
+u32 gGfxPoolVramStart;
+u32 gGfxPoolVramEnd;
+u32 gUnkBssVramStart;
+u32 gUnkBssVramEnd;
+u32 gSegment16C8A0VramStart;
+u32 gSegment16C8A0VramEnd;
+u32 gSegment17B1E0VramStart;
+u32 gSegment17B1E0VramEnd;
+u32 gSegment17B960VramStart;
+u32 gSegment17B960VramEnd;
 UNUSED u32 D_800DCDBC;
 UNUSED u32 D_800DCDC0;
-u32 D_800DCDC4;
-u32 D_800DCDC8;
-u32 D_800DCDCC;
-u32 D_800DCDD0;
-u32 D_800DCDD4;
-u32 D_800DCDD8;
-s32 D_800DCDDC;
-s32 D_800DCDE0;
-s32 D_800DCDE4;
-s32 D_800DCDE8;
-u32 D_800DCDEC;
-u32 D_800DCDF0;
-u32 D_800DCDF4;
-u32 D_800DCDF8;
+u32 gSegment1B8550VramStart;
+u32 gSegment1B8550VramEnd;
+u32 gSegment1E23F0VramStart;
+u32 gSegment1E23F0VramEnd;
+u32 gSegment22B0A0VramStart;
+u32 gSegment22B0A0VramEnd;
+s32 gSegment235130VramStart;
+s32 gSegment235130VramEnd;
+s32 gSegment2738A0VramStart;
+s32 gSegment2738A0VramEnd;
+u32 gCourseEditTexturesVramStart;
+u32 gCourseEditTexturesVramEnd;
+u32 gCreateMachineTexturesVramStart;
+u32 gCreateMachineTexturesVramEnd;
 u32 D_800DCDFC;
 u32 D_800DCE00;
-u32 D_800DCE04;
-u32 D_800DCE08;
-u32 D_800DCE0C;
-u32 D_800DCE10;
-u32 D_800DCE14;
-u32 D_800DCE18;
-u32 D_800DCE1C;
-u32 D_800DCE20;
+u32 gBuffersVramStart;
+u32 gBuffersVramEnd;
+u32 gUnkGfxVramStart;
+u32 gUnkGfxVramEnd;
+u32 gUnkContextVramStart;
+u32 gUnkContextVramEnd;
+u32 gAudioContextVramStart;
+u32 gAudioContextVramEnd;
 
 void func_80067AE0(void) {
     s32 temp_t7;
@@ -226,82 +226,83 @@ void Game_ThreadEntry(void* entry) {
     osRecvMesg(&D_800DCAB0, msgBuf, OS_MESG_BLOCK);
 
     // Segment Start and End Pairs
-    D_800DCD14 = osVirtualToPhysical(SEGMENT_VRAM_START(main));
-    D_800DCD18 = osVirtualToPhysical(SEGMENT_VRAM_END(main));
-    D_800DCD1C = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i2));
-    D_800DCD20 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i2));
-    D_800DCD24 = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i3));
-    D_800DCD28 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i3));
-    D_800DCD2C = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i4));
-    D_800DCD30 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i4));
-    D_800DCD34 = osVirtualToPhysical(SEGMENT_VRAM_START(course_select));
-    D_800DCD38 = osVirtualToPhysical(SEGMENT_VRAM_END(course_select));
-    D_800DCD3C = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i6));
-    D_800DCD40 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i6));
-    D_800DCD44 = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i7));
-    D_800DCD48 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i7));
-    D_800DCD4C = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i8));
-    D_800DCD50 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i8));
-    D_800DCD54 = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i9));
-    D_800DCD58 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i9));
-    D_800DCD5C = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i10));
-    D_800DCD60 = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i10));
-    D_800DCD74 = osVirtualToPhysical(SEGMENT_VRAM_START(framebuffer1));
-    D_800DCD78 = osVirtualToPhysical(SEGMENT_VRAM_END(framebuffer1));
-    D_800DCD7C = osVirtualToPhysical(SEGMENT_VRAM_START(framebuffer2));
-    D_800DCD80 = osVirtualToPhysical(SEGMENT_VRAM_END(framebuffer2));
-    D_800DCD84 = osVirtualToPhysical(SEGMENT_VRAM_START(framebuffer3));
-    D_800DCD88 = osVirtualToPhysical(SEGMENT_VRAM_END(framebuffer3));
-    D_800DCD8C = osVirtualToPhysical(SEGMENT_VRAM_START(framebuffer_unused));
-    D_800DCD90 = osVirtualToPhysical(SEGMENT_VRAM_END(framebuffer_unused));
-    D_800DCE04 = osVirtualToPhysical(SEGMENT_VRAM_START(buffers));
-    D_800DCE08 = osVirtualToPhysical(SEGMENT_VRAM_END(buffers));
-    D_800DCE0C = osVirtualToPhysical(SEGMENT_VRAM_START(unk_gfx_segment));
-    D_800DCE10 = osVirtualToPhysical(SEGMENT_VRAM_END(unk_gfx_segment));
-    D_800DCE14 = osVirtualToPhysical(SEGMENT_VRAM_START(unk_context));
-    D_800DCE18 = osVirtualToPhysical(SEGMENT_VRAM_END(unk_context));
-    D_800DCE1C = osVirtualToPhysical(SEGMENT_VRAM_START(audio_context));
-    D_800DCE20 = osVirtualToPhysical(SEGMENT_VRAM_END(audio_context) + 0x10);
-    D_800DCD94 = osVirtualToPhysical(SEGMENT_VRAM_START(gfxpool));
-    D_800DCD98 = osVirtualToPhysical(SEGMENT_VRAM_END(gfxpool));
-    D_800DCD9C = osVirtualToPhysical(SEGMENT_VRAM_START(unk_bss_segment));
-    D_800DCDA0 = osVirtualToPhysical(SEGMENT_VRAM_END(unk_bss_segment));
+    gMainVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(main));
+    gMainVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(main));
+    gOvl2VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i2));
+    gOvl2VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i2));
+    gOvl3VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i3));
+    gOvl3VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i3));
+    gOvl4VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i4));
+    gOvl4VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i4));
+    gOvlCourseSelectVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(course_select));
+    gOvlCourseSelectVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(course_select));
+    gOvl6VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i6));
+    gOvl6VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i6));
+    gOvl7VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i7));
+    gOvl7VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i7));
+    gOvl8VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i8));
+    gOvl8VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i8));
+    gOvl9VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i9));
+    gOvl9VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i9));
+    gOvl10VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i10));
+    gOvl10VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i10));
+    gFramebuffer1VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(framebuffer1));
+    gFramebuffer1VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(framebuffer1));
+    gFramebuffer2VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(framebuffer2));
+    gFramebuffer2VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(framebuffer2));
+    gFramebuffer3VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(framebuffer3));
+    gFramebuffer3VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(framebuffer3));
+    gFramebufferUnusedVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(framebuffer_unused));
+    gFramebufferUnusedVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(framebuffer_unused));
+    gBuffersVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(buffers));
+    gBuffersVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(buffers));
+    gUnkGfxVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(unk_gfx_segment));
+    gUnkGfxVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(unk_gfx_segment));
+    gUnkContextVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(unk_context));
+    gUnkContextVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(unk_context));
+    gAudioContextVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(audio_context));
+    gAudioContextVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(audio_context) + 0x10);
+    gGfxPoolVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(gfxpool));
+    gGfxPoolVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(gfxpool));
+    gUnkBssVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(unk_bss_segment));
+    gUnkBssVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(unk_bss_segment));
 
-    D_800DCDA4 = D_800DCE08;
-    D_800DCDA8 = D_800DCDA4 + (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0);
+    gSegment16C8A0VramStart = gBuffersVramEnd;
+    gSegment16C8A0VramEnd = gSegment16C8A0VramStart + (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0);
 
-    D_800DCDAC = D_800DCDA8;
-    D_800DCDB0 = D_800DCDAC + (size_t) SEGMENT_VRAM_SIZE(segment_17B1E0);
+    gSegment17B1E0VramStart = gSegment16C8A0VramEnd;
+    gSegment17B1E0VramEnd = gSegment17B1E0VramStart + (size_t) SEGMENT_VRAM_SIZE(segment_17B1E0);
 
-    D_800DCDB4 = D_800DCDB0;
-    D_800DCDB8 = D_800DCDB4 + (size_t) SEGMENT_VRAM_SIZE(segment_17B960);
+    gSegment17B960VramStart = gSegment17B1E0VramEnd;
+    gSegment17B960VramEnd = gSegment17B960VramStart + (size_t) SEGMENT_VRAM_SIZE(segment_17B960);
 
-    D_800DCDC4 = D_800DCDB8;
-    D_800DCDC8 = D_800DCDC4 + (size_t) SEGMENT_VRAM_SIZE(segment_1B8550);
+    gSegment1B8550VramStart = gSegment17B960VramEnd;
+    gSegment1B8550VramEnd = gSegment1B8550VramStart + (size_t) SEGMENT_VRAM_SIZE(segment_1B8550);
 
-    D_800DCDCC = D_800DCD28;
-    D_800DCDD0 = D_800DCDCC + (size_t) SEGMENT_VRAM_SIZE(segment_1E23F0);
+    gSegment1E23F0VramStart = gOvl3VramEnd;
+    gSegment1E23F0VramEnd = gSegment1E23F0VramStart + (size_t) SEGMENT_VRAM_SIZE(segment_1E23F0);
 
-    D_800DCDD4 = D_800DCDB8;
-    D_800DCDD8 = D_800DCDD4 + (size_t) SEGMENT_DATA_SIZE_CONST(segment_22B0A0);
+    gSegment22B0A0VramStart = gSegment17B960VramEnd;
+    gSegment22B0A0VramEnd = gSegment22B0A0VramStart + (size_t) SEGMENT_DATA_SIZE_CONST(segment_22B0A0);
 
-    D_800DCDFC = D_800DCDB0;
+    D_800DCDFC = gSegment17B1E0VramEnd;
     D_800DCE00 = D_800DCDFC + 0x1F820;
 
-    D_800DCDEC = D_800DCE00;
-    D_800DCDF0 = D_800DCDEC + (size_t) SEGMENT_VRAM_SIZE(course_edit_textures);
+    gCourseEditTexturesVramStart = D_800DCE00;
+    gCourseEditTexturesVramEnd = gCourseEditTexturesVramStart + (size_t) SEGMENT_VRAM_SIZE(course_edit_textures);
 
-    D_800DCDF4 = D_800DCE00;
-    D_800DCDF8 = D_800DCDF4 + (size_t) SEGMENT_VRAM_SIZE(create_machine_textures);
+    gCreateMachineTexturesVramStart = D_800DCE00;
+    gCreateMachineTexturesVramEnd =
+        gCreateMachineTexturesVramStart + (size_t) SEGMENT_VRAM_SIZE(create_machine_textures);
 
-    D_800DCD64 = osVirtualToPhysical(SEGMENT_VRAM_START(leo));
-    D_800DCD68 = osVirtualToPhysical(SEGMENT_VRAM_END(leo));
+    gLeoVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(leo));
+    gLeoVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(leo));
 
     // Setup memory
     Segment_SetAddress(0, 0);
-    Segment_SetAddress(2, D_800DCD9C);
-    Segment_SetAddress(8, D_800DCDA4);
-    Segment_SetAddress(3, D_800DCDAC);
+    Segment_SetAddress(2, gUnkBssVramStart);
+    Segment_SetAddress(8, gSegment16C8A0VramStart);
+    Segment_SetAddress(3, gSegment17B1E0VramStart);
     func_80076804();
     func_80076848();
 
@@ -319,16 +320,18 @@ void Game_ThreadEntry(void* entry) {
     Dma_LoadOverlay(SEGMENT_ROM_START(ovl_i10), SEGMENT_VRAM_START(ovl_i10), SEGMENT_ROM_SIZE(ovl_i10),
                     SEGMENT_BSS_START(ovl_i10), SEGMENT_BSS_SIZE(ovl_i10));
 
-    osInvalDCache(osPhysicalToVirtual(D_800DCDA4), SEGMENT_DATA_SIZE_CONST(segment_16C8A0));
+    osInvalDCache(osPhysicalToVirtual(gSegment16C8A0VramStart), SEGMENT_DATA_SIZE_CONST(segment_16C8A0));
     Dma_LoadAssets(SEGMENT_ROM_START(segment_16C8A0),
-                   (uintptr_t) osPhysicalToVirtual(D_800DCDA4) + (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0),
+                   (uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +
+                       (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0),
                    SEGMENT_ROM_SIZE(segment_16C8A0));
 
-    mio0Decode((uintptr_t) osPhysicalToVirtual(D_800DCDA4) + (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0),
-               osPhysicalToVirtual(D_800DCDA4));
-    Dma_LoadAssets(SEGMENT_ROM_START(segment_17B1E0), osPhysicalToVirtual(D_800DCDAC),
+    mio0Decode((uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +
+                   (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0),
+               osPhysicalToVirtual(gSegment16C8A0VramStart));
+    Dma_LoadAssets(SEGMENT_ROM_START(segment_17B1E0), osPhysicalToVirtual(gSegment17B1E0VramStart),
                    SEGMENT_ROM_SIZE(segment_17B1E0));
-    Dma_LoadAssets(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(D_800DCDB4),
+    Dma_LoadAssets(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(gSegment17B960VramStart),
                    SEGMENT_ROM_SIZE(segment_17B960));
 
     // FrameBuffer Indexes

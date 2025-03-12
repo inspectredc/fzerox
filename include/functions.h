@@ -53,7 +53,7 @@ void func_800741DC(s32 courseIndex);
 void func_800742D0(void);
 void func_800742FC(void);
 void func_80074428(s32 courseIndex);
-void func_80074634(CourseRecordInfo* arg0);
+void func_80074634(CourseRecordInfo* courseRecordInfo);
 void func_800747EC(s32 venue);
 void func_80074A90(f32* arg0, f32* arg1);
 void func_80074CE4(CourseRecordInfo*);

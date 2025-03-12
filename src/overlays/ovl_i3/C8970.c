@@ -518,9 +518,11 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
             gDPFillRectangle(gfx++, temp_s2 - 1, temp_v0 - 1, temp_s2 + 1, temp_v0 + 1);
 
         } else if (gFastestGhostRacer != NULL) {
-            temp_s2 =
-                Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
-            temp_v0 = Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
+            temp_s2 = Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) +
+                                 (64 * var_fs0)) /
+                      2;
+            temp_v0 = Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) +
+                                 (64 * var_fs0));
             temp_s2 += sp104;
             temp_v0 /= 2;
             temp_v0 += sp100;

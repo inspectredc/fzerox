@@ -348,7 +348,8 @@ void EndingCutscene_Init(void) {
 
     if (D_i7_8014BDF6 & 0x20) {
 
-        endingTextures = sEndingTextures[func_i7_GetEndScreenIndex(sCupDifficulty, playerRacer->character, playerRacer->customType)];
+        endingTextures =
+            sEndingTextures[func_i7_GetEndScreenIndex(sCupDifficulty, playerRacer->character, playerRacer->customType)];
 
         sEndingTex = func_80078104(endingTextures[0], 168 * 99 * sizeof(u16), 0, 1, 0);
 
