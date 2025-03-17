@@ -475,41 +475,42 @@ s32 func_8009DEAC(CourseRecordInfo* arg0) {
     return 0;
 }
 
+// Get Rough Racer Lap Distance
 f32 func_8009DFA0(Racer_unk_C* arg0) {
-    f32 var_fv1;
-    f32 var_ft4;
-    f32 var_fa1;
-    f32 var_fv0;
+    f32 length;
+    Vec3f posDiff;
 
     if (arg0->unk_04 < 0.5f) {
         if (arg0->unk_04 < 0.25f) {
-            var_fv1 = 0.0f;
-            var_fv0 = arg0->unk_1C.x - arg0->courseSegment->pos.x;
-            var_fa1 = arg0->unk_1C.y - arg0->courseSegment->pos.y;
-            var_ft4 = arg0->unk_1C.z - arg0->courseSegment->pos.z;
+            length = 0.0f;
+            posDiff.x = arg0->unk_1C.x - arg0->courseSegment->pos.x;
+            posDiff.y = arg0->unk_1C.y - arg0->courseSegment->pos.y;
+            posDiff.z = arg0->unk_1C.z - arg0->courseSegment->pos.z;
         } else {
-            var_fv1 = arg0->courseSegment->unk_98;
-            var_fv0 = arg0->unk_1C.x - arg0->courseSegment->unk_74.x;
-            var_fa1 = arg0->unk_1C.y - arg0->courseSegment->unk_74.y;
-            var_ft4 = arg0->unk_1C.z - arg0->courseSegment->unk_74.z;
+            length = arg0->courseSegment->quarterMarkLength;
+            posDiff.x = arg0->unk_1C.x - arg0->courseSegment->quarterMarkPos.x;
+            posDiff.y = arg0->unk_1C.y - arg0->courseSegment->quarterMarkPos.y;
+            posDiff.z = arg0->unk_1C.z - arg0->courseSegment->quarterMarkPos.z;
         }
     } else if (arg0->unk_04 < 0.75f) {
-        var_fv1 = arg0->courseSegment->unk_9C;
-        var_fv0 = arg0->unk_1C.x - arg0->courseSegment->unk_80.x;
-        var_fa1 = arg0->unk_1C.y - arg0->courseSegment->unk_80.y;
-        var_ft4 = arg0->unk_1C.z - arg0->courseSegment->unk_80.z;
+        length = arg0->courseSegment->halfMarkLength;
+        posDiff.x = arg0->unk_1C.x - arg0->courseSegment->halfMarkPos.x;
+        posDiff.y = arg0->unk_1C.y - arg0->courseSegment->halfMarkPos.y;
+        posDiff.z = arg0->unk_1C.z - arg0->courseSegment->halfMarkPos.z;
     } else {
-        var_fv1 = arg0->courseSegment->unk_A0;
-        var_fv0 = arg0->unk_1C.x - arg0->courseSegment->unk_8C.x;
-        var_fa1 = arg0->unk_1C.y - arg0->courseSegment->unk_8C.y;
-        var_ft4 = arg0->unk_1C.z - arg0->courseSegment->unk_8C.z;
+        length = arg0->courseSegment->threeQuarterMarkLength;
+        posDiff.x = arg0->unk_1C.x - arg0->courseSegment->threeQuarterMarkPos.x;
+        posDiff.y = arg0->unk_1C.y - arg0->courseSegment->threeQuarterMarkPos.y;
+        posDiff.z = arg0->unk_1C.z - arg0->courseSegment->threeQuarterMarkPos.z;
     }
 
-    var_fv1 += sqrtf(SQ(var_fv0) + SQ(var_fa1) + SQ(var_ft4));
-    arg0->unk_08 = var_fv1 / arg0->courseSegment->length;
-    return arg0->courseSegment->lengthFromStart + var_fv1;
+    length += sqrtf(SQ(posDiff.x) + SQ(posDiff.y) + SQ(posDiff.z));
+    arg0->unk_08 = length / arg0->courseSegment->length;
+    return arg0->courseSegment->lengthFromStart + length;
 }
 
+// Get Length Into Course Segment
+// Returns Length proprtion along the track
 f32 func_8009E108(CourseSegment* arg0, f32 arg1, f32* arg2) {
     f32 spDC;
     f32 spD8;
@@ -598,6 +599,7 @@ f32 func_8009E108(CourseSegment* arg0, f32 arg1, f32* arg2) {
     return var_fs0;
 }
 
+// Get un-normalised tangent vector along course segment (and magnitude)
 f32 func_8009E538(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
     f32 square;
     f32 temp_fv0;
@@ -626,31 +628,34 @@ f32 func_8009E538(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
     return sqrtf(SQ(arg2->x) + SQ(arg2->y) + SQ(arg2->z));
 }
 
-void func_8009E6F0(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
+// Get position along course segment
+void func_8009E6F0(CourseSegment* segment, f32 t, Vec3f* pos) {
     f32 temp_fv0;
-    f32 square;
-    f32 cube;
+    f32 tSquare;
+    f32 tCube;
     f32 sp30;
     f32 sp2C;
     f32 sp28;
     f32 sp24;
-    CourseSegment* temp_v0 = arg0->prev;
-    CourseSegment* temp_v1 = arg0->next;
-    CourseSegment* temp_a1 = temp_v1->next;
+    CourseSegment* prevSegment = segment->prev;
+    CourseSegment* nextSegment = segment->next;
+    CourseSegment* nextNextSegment = nextSegment->next;
 
-    temp_fv0 = arg0->unk_24;
-    square = SQ(arg1);
-    cube = square * arg1;
-    sp30 = (2.0f * square - arg1 - cube) * temp_fv0;
-    sp2C = (2.0f - temp_fv0) * cube + (temp_fv0 - 3.0f) * square + 1.0f;
-    sp28 = (temp_fv0 - 2.0f) * cube + (3.0f - 2.0f * temp_fv0) * square + temp_fv0 * arg1;
-    sp24 = (cube - square) * temp_fv0;
+    temp_fv0 = segment->unk_24;
+    tSquare = SQ(t);
+    tCube = tSquare * t;
+    sp30 = (2.0f * tSquare - t - tCube) * temp_fv0;
+    sp2C = (2.0f - temp_fv0) * tCube + (temp_fv0 - 3.0f) * tSquare + 1.0f;
+    sp28 = (temp_fv0 - 2.0f) * tCube + (3.0f - 2.0f * temp_fv0) * tSquare + temp_fv0 * t;
+    sp24 = (tCube - tSquare) * temp_fv0;
 
-    arg2->x = sp30 * temp_v0->pos.x + sp2C * arg0->pos.x + sp28 * temp_v1->pos.x + sp24 * temp_a1->pos.x;
-    arg2->y = sp30 * temp_v0->pos.y + sp2C * arg0->pos.y + sp28 * temp_v1->pos.y + sp24 * temp_a1->pos.y;
-    arg2->z = sp30 * temp_v0->pos.z + sp2C * arg0->pos.z + sp28 * temp_v1->pos.z + sp24 * temp_a1->pos.z;
+    pos->x = sp30 * prevSegment->pos.x + sp2C * segment->pos.x + sp28 * nextSegment->pos.x + sp24 * nextNextSegment->pos.x;
+    pos->y = sp30 * prevSegment->pos.y + sp2C * segment->pos.y + sp28 * nextSegment->pos.y + sp24 * nextNextSegment->pos.y;
+    pos->z = sp30 * prevSegment->pos.z + sp2C * segment->pos.z + sp28 * nextSegment->pos.z + sp24 * nextNextSegment->pos.z;
 }
 
+// Get tangent matrix (forward = tangent vector, up = up, left-right = horizontal road slope vector)
+// Returns magnitude of tangent
 f32 func_8009E85C(CourseSegment* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
     f32 temp_fa0;
     f32 sp50;
@@ -983,15 +988,15 @@ void func_8009F508(CourseRecordInfo* arg0) {
     arg0->courseSegments->lengthFromStart = 0.0f;
     var_s1 = arg0->courseSegments;
     do {
-        func_8009E6F0(var_s1, 0.25f, &var_s1->unk_74);
-        func_8009E6F0(var_s1, 0.5f, &var_s1->unk_80);
-        func_8009E6F0(var_s1, 0.75f, &var_s1->unk_8C);
-        func_8009E108(var_s1, 0.25f, &var_s1->unk_98);
-        var_s1->unk_98 -= var_s1->lengthFromStart;
-        func_8009E108(var_s1, 0.5f, &var_s1->unk_9C);
-        var_s1->unk_9C -= var_s1->lengthFromStart;
-        func_8009E108(var_s1, 0.75f, &var_s1->unk_A0);
-        var_s1->unk_A0 -= var_s1->lengthFromStart;
+        func_8009E6F0(var_s1, 0.25f, &var_s1->quarterMarkPos);
+        func_8009E6F0(var_s1, 0.5f, &var_s1->halfMarkPos);
+        func_8009E6F0(var_s1, 0.75f, &var_s1->threeQuarterMarkPos);
+        func_8009E108(var_s1, 0.25f, &var_s1->quarterMarkLength);
+        var_s1->quarterMarkLength -= var_s1->lengthFromStart;
+        func_8009E108(var_s1, 0.5f, &var_s1->halfMarkLength);
+        var_s1->halfMarkLength -= var_s1->lengthFromStart;
+        func_8009E108(var_s1, 0.75f, &var_s1->threeQuarterMarkLength);
+        var_s1->threeQuarterMarkLength -= var_s1->lengthFromStart;
         var_s1 = var_s1->next;
     } while (var_s1 != arg0->courseSegments);
 }

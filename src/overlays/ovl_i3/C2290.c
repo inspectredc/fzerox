@@ -468,7 +468,7 @@ Gfx* func_i3_DrawTimeRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
 extern s32 gTotalLapCount;
 extern s16 D_800E5FBC;
 extern s16 D_800E5FD0;
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 
 Gfx* func_i3_UpdatePlayerHudInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     UNUSED s32 pad[2];
@@ -518,7 +518,7 @@ Gfx* func_i3_UpdatePlayerHudInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex)
     func_i3_8012F450(&D_i3_80141EA8[playerIndex].unk_0C);
 
     if (D_i3_80141EA8[playerIndex].unk_04 > 0) {
-        if (D_800DCE5C == 0) {
+        if (!gGamePaused) {
             D_i3_80141EA8[playerIndex].unk_04--;
         }
         if ((D_i3_80141EA8[playerIndex].unk_04 % 20) >= 5) {
@@ -1572,7 +1572,7 @@ Gfx* func_i3_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
         }
         return gfx;
     }
-    if (D_800DCE5C != 0) {
+    if (gGamePaused) {
         return gfx;
     }
     switch (numPlayersIndex) {
@@ -1779,7 +1779,7 @@ Gfx* func_i3_DrawPracticeBestLap(Gfx* gfx) {
     }
 
     if (sPracticeBestLapCounter != 0) {
-        if (D_800DCE5C == 0) {
+        if (!gGamePaused) {
             sPracticeBestLapCounter--;
         }
         if ((sPracticeBestLapCounter % 20) >= 5) {

@@ -305,7 +305,7 @@ void func_i3_8012F324(void);
 Gfx* func_i3_DrawTimerScisThousandths(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale);
 void func_i3_InitRacePortraits(void);
 void func_i3_ResetLivesChangeCounter(void);
-void func_i3_801356A0(void);
+void func_i3_InitCourseMinimap(void);
 void func_i3_801365E0(void);
 void func_i3_80136A6C(void);
 Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2);

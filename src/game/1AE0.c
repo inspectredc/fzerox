@@ -3,7 +3,7 @@
 #include "fzx_game.h"
 #include "fzx_thread.h"
 
-GfxPool* D_800DCCF0;
+GfxPool* gGfxPool;
 OSTask* sGfxTask;
 Gfx* gMasterDisp;
 s32 D_800DCCFC;
@@ -100,9 +100,9 @@ void Gfx_InitBuffer(void) {
     D_800DCD00 ^= 1;
     D_800DCCFC ^= 1;
     sGfxTask = &D_802A6AC0[D_800DCCFC];
-    D_800DCCF0 = &D_8024DCE0[D_800DCCFC];
-    Segment_SetPhysicalAddress(1, D_800DCCF0);
-    gMasterDisp = D_800DCCF0->gfxBuffer;
+    gGfxPool = &D_8024DCE0[D_800DCCFC];
+    Segment_SetPhysicalAddress(1, gGfxPool);
+    gMasterDisp = gGfxPool->gfxBuffer;
 }
 
 void Gfx_LoadSegments(void) {
@@ -146,8 +146,8 @@ void Gfx_SetTask(OSTask* task) {
     task->t.dram_stack_size = SP_DRAM_STACK_SIZE8;
     task->t.output_buff = (u64*) gTaskOutputBuffer;
     task->t.output_buff_size = (u64*) (gTaskOutputBuffer + ARRAY_COUNT(gTaskOutputBuffer));
-    task->t.data_ptr = (u64*) D_800DCCF0->gfxBuffer;
-    task->t.data_size = (size_t) (gMasterDisp - D_800DCCF0->gfxBuffer) * sizeof(Gfx);
+    task->t.data_ptr = (u64*) gGfxPool->gfxBuffer;
+    task->t.data_size = (size_t) (gMasterDisp - gGfxPool->gfxBuffer) * sizeof(Gfx);
     task->t.yield_data_ptr = (u64*) gOSYieldData;
     task->t.yield_data_size = OS_YIELD_DATA_SIZE;
     gCurGfxTask = task;

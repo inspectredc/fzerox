@@ -779,7 +779,7 @@ void func_80081550(unk_struct_F8* arg0) {
 }
 
 extern s32 gNumPlayers;
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 
 void func_80081794(unk_struct_F8* arg0, unk_struct_1DC* arg1) {
     s32 angle;
@@ -817,7 +817,7 @@ void func_80081794(unk_struct_F8* arg0, unk_struct_1DC* arg1) {
     sp98.x *= var_fv1;
     sp98.y *= var_fv1;
     sp98.z *= var_fv1;
-    if (D_800DCE5C == 0) {
+    if (!gGamePaused) {
         temp_fv0 = temp_s2->unk_68[1];
         temp_s2->unk_00.unk_54.x = arg1->unk_20.x + (temp_fv0 * sp98.x);
         temp_s2->unk_00.unk_54.y = arg1->unk_20.y + (temp_fv0 * sp98.y);
@@ -885,7 +885,7 @@ void func_80081794(unk_struct_F8* arg0, unk_struct_1DC* arg1) {
     temp_s2->unk_00.unk_00.unk_24.y = temp_s1->unk_00.unk_00.y - temp_s1->unk_00.unk_0C.y;
     temp_s2->unk_00.unk_00.unk_24.z = temp_s1->unk_00.unk_00.z - temp_s1->unk_00.unk_0C.z;
     func_8006AA38((Mtx3F*) &temp_s2->unk_00.unk_00.unk_24);
-    if (D_800DCE5C == 0) {
+    if (!gGamePaused) {
         temp_s1->unk_00.unk_18[3] = temp_s1->unk_00.unk_18[0] = temp_s2->unk_00.unk_00.unk_30.x;
         temp_s1->unk_00.unk_18[4] = temp_s1->unk_00.unk_18[1] = temp_s2->unk_00.unk_00.unk_30.y;
         temp_s1->unk_00.unk_18[5] = temp_s1->unk_00.unk_18[2] = temp_s2->unk_00.unk_00.unk_30.z;
@@ -2551,7 +2551,7 @@ void func_800885F0(unk_struct_1DC*, unk_struct_F8*, unk_800E5D70*);
 void func_80088660(unk_struct_1DC*, unk_struct_F8*, unk_800E5D70*);
 void func_800888D0(unk_struct_1DC*, unk_struct_F8*, unk_800E5D70*);
 
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 
 void func_8008681C(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2) {
     f32 temp_fa0;
@@ -2579,7 +2579,7 @@ void func_8008681C(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
                 func_80087E14(arg0, arg1);
                 break;
             case 4:
-                if (D_800DCE5C == 0) {
+                if (!gGamePaused) {
                     func_800876A8(arg0, arg1);
                 }
                 break;
@@ -2624,22 +2624,22 @@ void func_8008681C(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
                 func_80087DB8(arg0, arg1, arg2);
                 break;
             case 7:
-                if (D_800DCE5C == 0) {
+                if (!gGamePaused) {
                     func_80087F60(arg0, arg1);
                 }
                 break;
             case 8:
-                if (D_800DCE5C == 0) {
+                if (!gGamePaused) {
                     func_80087FAC(arg0, arg1, arg2);
                 }
                 break;
             case 9:
-                if (D_800DCE5C == 0) {
+                if (!gGamePaused) {
                     func_80088660(arg0, arg1, arg2);
                 }
                 break;
             case 10:
-                if (D_800DCE5C == 0) {
+                if (!gGamePaused) {
                     func_800885F0(arg0, arg1, arg2);
                 }
                 break;
@@ -2654,7 +2654,7 @@ void func_8008681C(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
     func_80086B64(arg0, arg1);
     func_800826B8(arg0, arg1);
     func_8008271C(arg0);
-    func_80082A6C(D_800DCCF0, arg0);
+    func_80082A6C(gGfxPool, arg0);
     if ((gGameMode == GAMEMODE_GP_RACE) || (gGameMode == GAMEMODE_PRACTICE) || (gGameMode == GAMEMODE_TIME_ATTACK) ||
         (gGameMode == GAMEMODE_DEATH_RACE)) {
         func_80082C80(arg0);
@@ -2756,7 +2756,7 @@ void func_80086FD0(void) {
 
     if (D_800CD8A0 == -1) {
         if ((D_800E5FBC != 0) && (D_80141D6C != 0)) {
-            D_i2_80106F10 = 0x1E;
+            D_i2_80106F10 = 30;
 
             for (i = 0, var_a0 = D_800E5220; i < D_800E5E80; i++, var_a0++) {
                 var_a1 = &gRacers[i];
@@ -2955,7 +2955,7 @@ void func_80086FD0(void) {
             var_a0->unk_F0 = var_a0->unk_100 + ((var_a0->unk_110 - var_a0->unk_100) * temp_fv0) + var_a0->unk_E8;
             var_a0->unk_F4 = var_a0->unk_104 + ((var_a0->unk_114 - var_a0->unk_104) * temp_fv0) + var_a0->unk_EC;
 
-            vp = &D_800DCCF0->unk_2C2C8[i];
+            vp = &gGfxPool->unk_2C2C8[i];
             vp->vp.vscale[0] = var_a0->unk_E8 * 4.0f;
             vp->vp.vscale[1] = var_a0->unk_EC * 4.0f;
             vp->vp.vscale[2] = 0x1FF;
@@ -3040,7 +3040,7 @@ extern Controller gControllers[];
 extern s32 gPlayerControlPorts[];
 extern s32 gNumPlayers;
 extern s32 gCurrentGhostType;
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 extern s32 gFastestGhostTime;
 
 void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2) {
@@ -3056,7 +3056,7 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
 
     playerIndex = arg0->playerIndex;
     temp_t0 = &gRacers[playerIndex];
-    if (D_800DCE5C == 0) {
+    if (!gGamePaused) {
         if (temp_t0->stateFlags & RACER_STATE_FLAGS_80000) {
             arg0->unk_04 = 7;
             func_80085B80(arg0, arg1, arg2);
@@ -3098,7 +3098,7 @@ void func_800879E0(unk_struct_1DC* arg0, unk_struct_F8* arg1, unk_800E5D70* arg2
         func_80082624(arg0, &arg1->unk_04, temp_a2, gNumPlayers);
     }
     temp_a1 = &arg1->unk_04;
-    if ((D_800CD8A4 != 0) && (D_800DCE5C == 0)) {
+    if ((D_800CD8A4 != 0) && (!gGamePaused)) {
         if ((controller->buttonCurrent & BTN_CUP) && !(temp_t0->stateFlags & RACER_STATE_RETIRED)) {
             if (++arg0->unk_0C > D_800CDA9C) {
                 arg0->unk_0C = D_800CDA9C;
@@ -3538,8 +3538,8 @@ extern s32 gNumPlayers;
 extern s8 D_800CD010;
 
 extern CourseRecordInfo* gCurrentCourseRecordInfo;
-extern Vec3f D_802C4938;
 
+// Set up racer positions before the start line
 void func_80088D28(void) {
     f32 var_fs0;
     f32 var_fs4;
@@ -3555,7 +3555,7 @@ void func_80088D28(void) {
     var_s2 = gCurrentCourseRecordInfo->courseSegments->prev;
     var_fs0 = 1.0f;
     for (i = 20; i > 0; i--) {
-        var_fs0 -= 7.3f / func_8009E538(var_s2, var_fs0, &D_802C4938);
+        var_fs0 -= 7.3f / func_8009E538(var_s2, var_fs0, &gRacers[0].unk_0C.unk_0C);
     }
 
     if ((gGameMode != GAMEMODE_RECORDS) && (gGameMode != GAMEMODE_GP_END_CS) && (D_800CD010 == 0)) {
@@ -7641,7 +7641,7 @@ void func_800952F4(void) {
 
     sRaceFrameCount++;
     if (gRaceIntroTimer != 0) {
-        if (D_800DCE5C == 0) {
+        if (!gGamePaused) {
             if (gRaceIntroTimer == 460) {
                 func_8007E08C();
                 if (D_800CD010 == 0) {
@@ -7701,7 +7701,7 @@ void func_800952F4(void) {
             }
             var_fs0 = (1500.0f * var_fs0 * var_fs0) + 33.0f;
             var_fs2 = var_fs0 - racer2->unk_A0;
-            func_8006BC84(&D_800DCCF0->unk_21988[i], NULL, 0.2f, 0.2f, 0.2f, spCC.x.x, spCC.x.y, spCC.x.z, spCC.y.x,
+            func_8006BC84(&gGfxPool->unk_21988[i], NULL, 0.2f, 0.2f, 0.2f, spCC.x.x, spCC.x.y, spCC.x.z, spCC.y.x,
                           spCC.y.y, spCC.y.z,
                           (racer2->unk_0C.unk_34.x + (var_fs2 * racer2->unk_C0.y.x) + (50.0f * racer2->unk_C0.x.x)) -
                               (var_fs0 * var_s1_2->unk_5C.x.x),
@@ -7712,7 +7712,7 @@ void func_800952F4(void) {
         }
     }
 
-    if (D_800DCE5C != 0) {
+    if (gGamePaused) {
         for (racer = gLastRacer; racer >= gRacers; racer--) {
             racer->unk_164 = racer->unk_165 = racer->unk_166 = 0;
         }
@@ -8448,7 +8448,7 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
                         var_fs0 = D_800CE750;
                     }
 
-                    func_8006BFCC(&D_800DCCF0->unk_20A88[racer->id], NULL, racer->shadowColorStrength * D_800CE748,
+                    func_8006BFCC(&gGfxPool->unk_20A88[racer->id], NULL, racer->shadowColorStrength * D_800CE748,
                                   0.1f, racer->shadowColorStrength * var_fs0, &racer->unk_E8.x, &racer->unk_19C,
                                   &racer->unk_168);
                     racer->unk_165 = 1;
@@ -8478,7 +8478,7 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
                 if (sp4F8->exists) {
                     racer = sp4F8->racer;
                     if ((racer->unk_2B2 != 0) && (racer->unk_168.y != -54321.0f)) {
-                        func_8006BFCC(&D_800DCCF0->unk_20A88[racer->id], NULL, sp4F8->scale * D_800CE748, 0.1f,
+                        func_8006BFCC(&gGfxPool->unk_20A88[racer->id], NULL, sp4F8->scale * D_800CE748, 0.1f,
                                       sp4F8->scale * D_800CE750, &racer->unk_E8.x, &racer->unk_19C, &racer->unk_168);
                         gSPMatrix(gfx++, &D_1000000.unk_20A88[racer->id], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                         gDPLoadTextureBlock_4b(gfx++, D_800CDC54[racer->unk_2CA], G_IM_FMT_I, 32, 64, 0,
@@ -8500,7 +8500,7 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
         if (racer->unk_178 != 0.0f) {
             if ((racer->unk_2B4 != 0) && (racer->unk_2B4 < 6)) {
                 if (racer->unk_166 == 0) {
-                    func_8006C278(&D_800DCCF0->unk_21208[racer->id], NULL, racer->unk_178 * D_800CE748,
+                    func_8006C278(&gGfxPool->unk_21208[racer->id], NULL, racer->unk_178 * D_800CE748,
                                   racer->unk_178 * D_800CE74C, racer->unk_178 * D_800CE750, &racer->unk_E8,
                                   &racer->unk_10C);
                     racer->unk_166 = 1;
@@ -8540,7 +8540,7 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
         sp5C4 = 100;
     }
 block_115:
-    temp_v0_7 = &D_800DCCF0->unk_21A88[playerIndex];
+    temp_v0_7 = &gGfxPool->unk_21A88[playerIndex];
     temp_v0_7->a.l.colc[0] = var_s3;
     temp_v0_7->a.l.col[0] = var_s3;
     temp_v0_7->a.l.colc[1] = var_s4;
@@ -8559,11 +8559,11 @@ block_115:
     if ((sp9C->unk_0C.courseSegment->trackSegmentInfo & TRACK_FLAG_20000000) &&
         !(sp9C->stateFlags & RACER_STATE_FLAGS_80000000)) {
         sp560 = sp9C->unk_24C.y.x;
-        D_800DCCF0->unk_21A88[playerIndex].l[0].l.dir[0] = Math_Round(sp560 * 120.0f);
+        gGfxPool->unk_21A88[playerIndex].l[0].l.dir[0] = Math_Round(sp560 * 120.0f);
         sp55C = sp9C->unk_24C.y.y;
-        D_800DCCF0->unk_21A88[playerIndex].l[0].l.dir[1] = Math_Round(sp55C * 120.0f);
+        gGfxPool->unk_21A88[playerIndex].l[0].l.dir[1] = Math_Round(sp55C * 120.0f);
         sp558 = sp9C->unk_24C.y.z;
-        D_800DCCF0->unk_21A88[playerIndex].l[0].l.dir[2] = Math_Round(sp558 * 120.0f);
+        gGfxPool->unk_21A88[playerIndex].l[0].l.dir[2] = Math_Round(sp558 * 120.0f);
         if ((sp9C->unk_0C.courseSegment->trackSegmentInfo & TRACK_SHAPE_MASK) == TRACK_SHAPE_PIPE) {
             var_v0 = &D_800E5FE8[sp9C->unk_0C.courseSegment->trackSegmentInfo & TRACK_TYPE_MASK];
         } else {
@@ -8573,8 +8573,8 @@ block_115:
         sp5C4 = var_v0->y;
         var_s4 = var_v0->z;
     } else {
-        D_800DCCF0->unk_21A88[playerIndex].l[0].l.dir[0] = D_800DCCF0->unk_21A88[playerIndex].l[0].l.dir[1] =
-            D_800DCCF0->unk_21A88[playerIndex].l[0].l.dir[2] = 0x45;
+        gGfxPool->unk_21A88[playerIndex].l[0].l.dir[0] = gGfxPool->unk_21A88[playerIndex].l[0].l.dir[1] =
+            gGfxPool->unk_21A88[playerIndex].l[0].l.dir[2] = 0x45;
         sp560 = 0.57735f;
         sp55C = 0.57735f;
         sp558 = 0.57735f;
@@ -8583,9 +8583,9 @@ block_115:
         var_s4 = gCurrentCourseRecordInfo->unk_14[5];
     }
     if (gGameMode != GAMEMODE_GP_END_CS) {
-        D_800DCCF0->unk_21AE8[playerIndex].l.unk_08[0] = Math_Round((sp560 - spA4->unk_5C.x.x) * 16383.0f);
-        D_800DCCF0->unk_21AE8[playerIndex].l.unk_08[1] = Math_Round((sp55C - spA4->unk_5C.x.y) * 16383.0f);
-        D_800DCCF0->unk_21AE8[playerIndex].l.unk_08[2] = Math_Round((sp558 - spA4->unk_5C.x.z) * 16383.0f);
+        gGfxPool->unk_21AE8[playerIndex].l.unk_08[0] = Math_Round((sp560 - spA4->unk_5C.x.x) * 16383.0f);
+        gGfxPool->unk_21AE8[playerIndex].l.unk_08[1] = Math_Round((sp55C - spA4->unk_5C.x.y) * 16383.0f);
+        gGfxPool->unk_21AE8[playerIndex].l.unk_08[2] = Math_Round((sp558 - spA4->unk_5C.x.z) * 16383.0f);
         gSPDmaRead(gfx++, 0x8B0, D_800CE3D0, ARRAY_COUNT(D_800CE3D0));
         gSPLookAtY(gfx++, &D_1000000.unk_21AE8[playerIndex]);
         gDPSetFogColor(gfx++, var_s3, sp5C4, var_s4, 255);
@@ -8594,7 +8594,7 @@ block_115:
     for (racer = gLastRacer; racer >= gRacers; racer--) {
         if (racer->unk_2B4 != 0) {
             if (racer->unk_164 == 0) {
-                func_8006C278(&D_800DCCF0->unk_20308[racer->id], &racer->unk_124, D_800CE748, D_800CE74C, D_800CE750,
+                func_8006C278(&gGfxPool->unk_20308[racer->id], &racer->unk_124, D_800CE748, D_800CE74C, D_800CE750,
                               &racer->unk_E8, &racer->unk_10C);
                 racer->unk_164 = 1;
             }
@@ -8608,8 +8608,8 @@ block_115:
     }
     if (gGameMode == GAMEMODE_GP_END_CS) {
         gSPDisplayList(gfx++, D_90186C8);
-        Light_SetLookAtSource(&D_800DCCF0->unk_21B28, &spA4->unk_15C);
-        gSPLookAt(gfx++, &D_800DCCF0->unk_21B28);
+        Light_SetLookAtSource(&gGfxPool->unk_21B28, &spA4->unk_15C);
+        gSPLookAt(gfx++, &gGfxPool->unk_21B28);
         gSPTexture(gfx++, D_800CE768, D_800CE768, 0, G_TX_RENDERTILE, G_ON);
 
         gDPSetTile(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, G_TX_RENDERTILE, 0, G_TX_MIRROR | G_TX_WRAP, 5,
@@ -8672,7 +8672,7 @@ block_115:
             if (sp4F8->exists) {
                 racer = sp4F8->racer;
                 if (racer->unk_2B4 != 0) {
-                    func_8006C278(&D_800DCCF0->unk_20308[racer->id], &racer->unk_124, sp4F8->scale * D_800CE748,
+                    func_8006C278(&gGfxPool->unk_20308[racer->id], &racer->unk_124, sp4F8->scale * D_800CE748,
                                   sp4F8->scale * D_800CE74C, sp4F8->scale * D_800CE750, &racer->unk_E8,
                                   &racer->unk_10C);
                     gSPMatrix(gfx++, &D_1000000.unk_20308[racer->id], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -8692,7 +8692,7 @@ block_115:
 
     gSPDisplayList(gfx++, D_4007F08);
 
-    if (D_800DCE5C == 0) {
+    if (!gGamePaused) {
         sp5C4 = gGameFrameCount;
     } else {
         sp5C4 = 1;
@@ -9172,7 +9172,7 @@ block_115:
 
     gSPDisplayList(gfx++, D_4008180);
 
-    if (D_800DCE5C == 0) {
+    if (!gGamePaused) {
         var_s3_6 = gGameFrameCount & 7;
     } else {
         var_s3_6 = 0;
@@ -9340,22 +9340,22 @@ block_115:
         } else {
             if (gRaceIntroTimer > 160) {
                 var_s2 = aCountdown3Tex;
-                if ((playerIndex == 0) && (D_800DCE5C == 0) && (gRaceIntroTimer == 220)) {
+                if ((playerIndex == 0) && (!gGamePaused) && (gRaceIntroTimer == 220)) {
                     func_800BA8D8(0x2F);
                 }
             } else if (gRaceIntroTimer > 100) {
                 var_s2 = aCountdown2Tex;
-                if ((playerIndex == 0) && (D_800DCE5C == 0) && (gRaceIntroTimer == 160)) {
+                if ((playerIndex == 0) && (!gGamePaused) && (gRaceIntroTimer == 160)) {
                     func_800BA8D8(9);
                 }
             } else if (gRaceIntroTimer > 40) {
                 var_s2 = aCountdown1Tex;
-                if ((playerIndex == 0) && (D_800DCE5C == 0) && (gRaceIntroTimer == 100)) {
+                if ((playerIndex == 0) && (!gGamePaused) && (gRaceIntroTimer == 100)) {
                     func_800BA8D8(0xA);
                 }
             } else {
                 var_s2 = aCountdownGoTex;
-                if ((playerIndex == 0) && (D_800DCE5C == 0)) {
+                if ((playerIndex == 0) && (!gGamePaused)) {
                     if (gRaceIntroTimer == 40) {
                         func_800BA8D8(0xB);
                     }
@@ -9510,7 +9510,7 @@ block_115:
                 gDPSetRenderMode(gfx++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
                 gDPSetCombineMode(gfx++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
 
-                if (D_800DCE5C != 0) {
+                if (gGamePaused) {
                     var_s7 = 255;
                 } else {
                     var_s7 = 255 - ((gGameFrameCount & 0xF) * 0x10);

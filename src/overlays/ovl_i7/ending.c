@@ -52,7 +52,7 @@ s32 D_i7_8014C248;
 extern s16 D_800CCFE8;
 extern s32 gCupType;
 extern s8 gUnlockableLevel;
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 extern s16 D_800E42CC;
 extern s32 gCourseIndex;
 extern RaceStats gCupRaceStats[1][6];
@@ -68,7 +68,7 @@ extern char* gTrackNames[55];
 extern Gfx D_8014940[];
 
 extern FrameBuffer* D_800DCCD0[];
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 extern s32 D_800DCD04;
 extern unk_struct_1DC D_800E5220[];
 extern Vtx* D_800E5ECC;
@@ -190,7 +190,7 @@ void EndingCutscene_Init(void) {
     s32 var_a0;
 
     D_800CCFE8 = D_i2_80106F10 = 3;
-    D_800DCE5C = 0;
+    gGamePaused = false;
     gNumPlayers = 1;
     cupFirstCourseIndex = (gCourseIndex / 6) * 6;
     gCourseIndex = COURSE_ENDING;
@@ -592,9 +592,9 @@ Gfx* EndingCutscene_Draw(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
 
-    D_800F8520 = D_800DCCF0->unk_10008;
-    D_800E5ECC = D_800DCCF0->unk_21B48;
-    D_800E5ED0 = &D_800DCCF0->unk_21B48[0x7FF];
+    D_800F8520 = gGfxPool->unk_10008;
+    D_800E5ECC = gGfxPool->unk_21B48;
+    D_800E5ED0 = &gGfxPool->unk_21B48[0x7FF];
     gfx = func_i3_801381DC(gfx, 0, 0);
     gfx = func_800A9938(gfx, 0);
     gfx = func_8006DAAC(gfx, 0);
@@ -1965,12 +1965,12 @@ Gfx* func_i7_80147AC8(Gfx* gfx) {
     return gfx;
 }
 
-extern s16 D_80115DE0;
+extern s16 gRacersRemaining;
 
 void func_i7_80147CC0(void) {
     s32 i;
 
-    D_80115DE0 = gTotalRacers;
+    gRacersRemaining = gTotalRacers;
     if (gPlayer1OverallPosition < 4) {
         func_i7_801471C0();
         D_i7_8014BF94 = func_800768F4(0, 0xCB20);

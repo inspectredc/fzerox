@@ -26,11 +26,11 @@ unk_80142248 D_i3_80142248[6];
 unk_80142320 D_i3_80142320[100];
 s32 D_i3_80143770;
 
-u8 D_i3_8013F700[0x1000] = { 0 };
+u8 sCourseMinimapTex[0x1000] = { 0 };
 
-u8 D_i3_80140700[] = { 0, 0, 0, 1, 255, 255, 99, 25 };
+u16 sCourseMinimapPalette[] = { GPACK_RGBA5551(0, 0, 0, 0), GPACK_RGBA5551(0, 0, 0, 1), GPACK_RGBA5551(255, 255, 255, 1), GPACK_RGBA5551(100, 100, 100, 1) };
 
-s32 D_i3_80140708[][4][2] = {
+s32 sPlayerMinimapPositions[][4][2] = {
     { { 232, 132 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
     { { 246, 40 }, { 246, 152 }, { 0, 0 }, { 0, 0 } },
     { { 106, 58 }, { 106, 170 }, { 248, 58 }, { 210, 152 } },
@@ -287,7 +287,7 @@ s8 D_i3_80140F40[][3] = {
 extern s32 gNumPlayers;
 extern CourseRecordInfo* gCurrentCourseRecordInfo;
 
-void func_i3_801356A0(void) {
+void func_i3_InitCourseMinimap(void) {
     s32 pad[23];
     s32 i;
     f32 temp_fs1;
@@ -309,7 +309,7 @@ void func_i3_801356A0(void) {
     }
 
     for (i = 0; i < 0x1000; i++) {
-        D_i3_8013F700[i] = 0;
+        sCourseMinimapTex[i] = 0;
     }
     var_s1 = sp74->courseSegments;
     var_fs0 = 0.0f;
@@ -326,16 +326,16 @@ void func_i3_801356A0(void) {
             temp_v0 /= 2;
             if ((temp_v0 >= 0) && (temp_v0 < 64)) {
                 if (temp_s0 > 0) {
-                    D_i3_8013F700[temp_v0 * 64 + temp_s0 - 1] = 1;
+                    sCourseMinimapTex[temp_v0 * 64 + temp_s0 - 1] = 1;
                 }
                 if (temp_s0 < 63) {
-                    D_i3_8013F700[temp_v0 * 64 + temp_s0 + 1] = 1;
+                    sCourseMinimapTex[temp_v0 * 64 + temp_s0 + 1] = 1;
                 }
                 if (temp_v0 > 0) {
-                    D_i3_8013F700[temp_v0 * 64 + temp_s0 - 64] = 1;
+                    sCourseMinimapTex[temp_v0 * 64 + temp_s0 - 64] = 1;
                 }
                 if (temp_v0 < 63) {
-                    D_i3_8013F700[temp_v0 * 64 + temp_s0 + 64] = 1;
+                    sCourseMinimapTex[temp_v0 * 64 + temp_s0 + 64] = 1;
                 }
             }
         }
@@ -363,9 +363,9 @@ void func_i3_801356A0(void) {
             temp_v0 /= 2;
             if ((temp_v0 > 0) && (temp_v0 < 64)) {
                 if (temp_s5 == var_s1->next) {
-                    D_i3_8013F700[temp_v0 * 64 + temp_s0 + 0] = 3;
+                    sCourseMinimapTex[temp_v0 * 64 + temp_s0 + 0] = 3;
                 } else {
-                    D_i3_8013F700[temp_v0 * 64 + temp_s0 + 0] = 2;
+                    sCourseMinimapTex[temp_v0 * 64 + temp_s0 + 0] = 2;
                 }
             }
         }
@@ -388,15 +388,15 @@ void func_i3_801356A0(void) {
     if ((temp_s0 > 0) && (temp_s0 < 63)) {
         temp_v0 /= 2;
         if ((temp_v0 > 0) && (temp_v0 < 63)) {
-            D_i3_8013F700[temp_v0 * 64 + temp_s0 + 0] = 1;
-            D_i3_8013F700[temp_v0 * 64 + temp_s0 - 1] = 1;
-            D_i3_8013F700[temp_v0 * 64 + temp_s0 + 1] = 1;
-            D_i3_8013F700[temp_v0 * 64 + temp_s0 - 64] = 1;
-            D_i3_8013F700[temp_v0 * 64 + temp_s0 + 64] = 1;
-            D_i3_8013F700[temp_v0 * 64 + temp_s0 - 65] = 1;
-            D_i3_8013F700[temp_v0 * 64 + temp_s0 + 63] = 1;
-            D_i3_8013F700[temp_v0 * 64 + temp_s0 - 63] = 1;
-            D_i3_8013F700[temp_v0 * 64 + temp_s0 + 65] = 1;
+            sCourseMinimapTex[temp_v0 * 64 + temp_s0 + 0] = 1;
+            sCourseMinimapTex[temp_v0 * 64 + temp_s0 - 1] = 1;
+            sCourseMinimapTex[temp_v0 * 64 + temp_s0 + 1] = 1;
+            sCourseMinimapTex[temp_v0 * 64 + temp_s0 - 64] = 1;
+            sCourseMinimapTex[temp_v0 * 64 + temp_s0 + 64] = 1;
+            sCourseMinimapTex[temp_v0 * 64 + temp_s0 - 65] = 1;
+            sCourseMinimapTex[temp_v0 * 64 + temp_s0 + 63] = 1;
+            sCourseMinimapTex[temp_v0 * 64 + temp_s0 - 63] = 1;
+            sCourseMinimapTex[temp_v0 * 64 + temp_s0 + 65] = 1;
         }
     }
 }
@@ -413,53 +413,53 @@ extern Racer* gRacersByPosition[];
 extern GhostRacer* gFastestGhostRacer;
 extern u32 gGameFrameCount;
 
-Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
-    Controller* controller = &gControllers[gPlayerControlPorts[arg2]];
+Gfx* func_i3_DrawCourseMinimap(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+    Controller* controller = &gControllers[gPlayerControlPorts[playerIndex]];
     Racer* racer;
     s32 i;
-    s32 sp108;
-    s32 sp104;
-    s32 sp100;
-    f32 var_fs0;
-    s32 temp_s2;
-    s32 temp_v0;
+    s32 numPlayers;
+    s32 left;
+    s32 top;
+    f32 minimapScale;
+    s32 playerMarkerLeftPos;
+    s32 playerMarkerRightPos;
 
-    if ((controller->buttonPressed & BTN_CLEFT) && (arg1 >= 2)) {
+    if ((controller->buttonPressed & BTN_CLEFT) && (numPlayersIndex >= 2)) {
         if (D_800CD010 == 0) {
-            D_i3_80140788[arg2] = (D_i3_80140788[arg2] + 1) % 2;
+            D_i3_80140788[playerIndex] = (D_i3_80140788[playerIndex] + 1) % 2;
         }
     }
-    if (((arg1 != 2) || (arg2 != 3)) && (D_i3_80140788[arg2] == 0) && (arg1 >= 2)) {
+    if (((numPlayersIndex != 2) || (playerIndex != 3)) && (D_i3_80140788[playerIndex] == 0) && (numPlayersIndex >= 2)) {
         return gfx;
     }
 
-    switch (arg1) {
+    switch (numPlayersIndex) {
         case 0:
-            var_fs0 = 1.0f;
+            minimapScale = 1.0f;
             break;
         case 1:
-            var_fs0 = 0.75f;
+            minimapScale = 0.75f;
             break;
         case 2:
         case 3:
-            var_fs0 = 0.75f;
+            minimapScale = 0.75f;
             break;
     }
 
-    sp104 = D_i3_80140708[arg1][arg2][0];
-    sp100 = D_i3_80140708[arg1][arg2][1];
+    left = sPlayerMinimapPositions[numPlayersIndex][playerIndex][0];
+    top = sPlayerMinimapPositions[numPlayersIndex][playerIndex][1];
 
     gSPDisplayList(gfx++, D_8014940);
-    gDPLoadTLUT_pal256(gfx++, D_i3_80140700);
+    gDPLoadTLUT_pal256(gfx++, sCourseMinimapPalette);
     gDPSetTextureLUT(gfx++, G_TT_RGBA16);
 
     for (i = 0; i < 2; i++) {
         gDPPipeSync(gfx++);
-        gDPLoadTextureBlock(gfx++, (D_i3_8013F700 + (i * 64 * (s32) (64 * var_fs0)) / 2), G_IM_FMT_CI, G_IM_SIZ_8b, 64,
-                            (s32) (64 * var_fs0) / 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+        gDPLoadTextureBlock(gfx++, (sCourseMinimapTex + (i * 64 * (s32) (64 * minimapScale)) / 2), G_IM_FMT_CI, G_IM_SIZ_8b, 64,
+                            (s32) (64 * minimapScale) / 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
                             G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-        gSPTextureRectangle(gfx++, sp104 << 2, (s32) (sp100 + (((i * 64) / 2) * var_fs0)) << 2,
-                            (s32) (sp104 + 64 * var_fs0) << 2, (s32) (sp100 + ((i * 64) / 2 + 0x20) * var_fs0) << 2, 0,
+        gSPTextureRectangle(gfx++, left << 2, (s32) (top + (((i * 64) / 2) * minimapScale)) << 2,
+                            (s32) (left + 64 * minimapScale) << 2, (s32) (top + ((i * 64) / 2 + 32) * minimapScale) << 2, 0,
                             0, 0, 1 << 10, 1 << 10);
     }
 
@@ -467,22 +467,22 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
     gDPSetCombineMode(gfx++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
 
     if ((gGameMode == GAMEMODE_VS_2P) || (gGameMode == GAMEMODE_VS_3P)) {
-        sp108 = gTotalRacers;
+        numPlayers = gTotalRacers;
     } else {
-        sp108 = arg1 + 1;
+        numPlayers = numPlayersIndex + 1;
     }
 
-    for (i = 0; i < sp108; i++) {
-        if (i == arg2) {
+    for (i = 0; i < numPlayers; i++) {
+        if (i == playerIndex) {
             continue;
         }
-        temp_s2 = Math_Round(((gRacers[i].unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
-        temp_v0 = Math_Round(((gRacers[i].unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
-        temp_s2 += sp104;
-        temp_v0 /= 2;
-        temp_v0 += sp100;
+        playerMarkerLeftPos = Math_Round(((gRacers[i].unk_0C.unk_1C.x * 64.0f * minimapScale) / 16000.0f) + (64 * minimapScale)) / 2;
+        playerMarkerRightPos = Math_Round(((gRacers[i].unk_0C.unk_1C.z * 64.0f * minimapScale) / 16000.0f) + (64 * minimapScale)) / 2;
+        playerMarkerLeftPos += left;
+        playerMarkerRightPos += top;
         gDPPipeSync(gfx++);
 
+        // Player Markers
         switch (i) {
             case 0:
                 gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 255, 255, 1) << 16 | GPACK_RGBA5551(0, 255, 255, 1));
@@ -498,54 +498,53 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
                 break;
         }
 
-        gDPFillRectangle(gfx++, temp_s2 - 1, temp_v0 - 1, temp_s2 + 1, temp_v0 + 1);
+        gDPFillRectangle(gfx++, playerMarkerLeftPos - 1, playerMarkerRightPos - 1, playerMarkerLeftPos + 1, playerMarkerRightPos + 1);
     }
-    if (arg1 == 0) {
+    if (numPlayersIndex == 0) {
         if (gGameMode == GAMEMODE_GP_RACE) {
+            // Lead Non-Player Racer Marker
             if (gRacers[0].position == 1) {
                 racer = gRacersByPosition[1];
             } else {
                 racer = gRacersByPosition[0];
             }
-            temp_s2 = Math_Round(((racer->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
-            temp_v0 = Math_Round(((racer->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
-            temp_s2 += sp104;
-            temp_v0 /= 2;
-            temp_v0 += sp100;
+            playerMarkerLeftPos = Math_Round(((racer->unk_0C.unk_1C.x * 64.0f * minimapScale) / 16000.0f) + (64 * minimapScale)) / 2;
+            playerMarkerRightPos = Math_Round(((racer->unk_0C.unk_1C.z * 64.0f * minimapScale) / 16000.0f) + (64 * minimapScale)) / 2;
+            playerMarkerLeftPos += left;
+            playerMarkerRightPos += top;
 
             gDPPipeSync(gfx++);
             gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 0, 255, 1) << 16 | GPACK_RGBA5551(0, 0, 255, 1));
-            gDPFillRectangle(gfx++, temp_s2 - 1, temp_v0 - 1, temp_s2 + 1, temp_v0 + 1);
+            gDPFillRectangle(gfx++, playerMarkerLeftPos - 1, playerMarkerRightPos - 1, playerMarkerLeftPos + 1, playerMarkerRightPos + 1);
 
         } else if (gFastestGhostRacer != NULL) {
-            temp_s2 = Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) +
-                                 (64 * var_fs0)) /
+            // Ghost Racer Marker
+            playerMarkerLeftPos = Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.x * 64.0f * minimapScale) / 16000.0f) +
+                                 (64 * minimapScale)) /
                       2;
-            temp_v0 = Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) +
-                                 (64 * var_fs0));
-            temp_s2 += sp104;
-            temp_v0 /= 2;
-            temp_v0 += sp100;
+            playerMarkerRightPos = Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.z * 64.0f * minimapScale) / 16000.0f) +
+                                 (64 * minimapScale)) / 2;
+            playerMarkerLeftPos += left;
+            playerMarkerRightPos += top;
 
             gDPPipeSync(gfx++);
             gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1));
-            gDPFillRectangle(gfx++, temp_s2 - 1, temp_v0 - 1, temp_s2 + 1, temp_v0 + 1);
+            gDPFillRectangle(gfx++, playerMarkerLeftPos - 1, playerMarkerRightPos - 1, playerMarkerLeftPos + 1, playerMarkerRightPos + 1);
         }
     }
     if ((gGameFrameCount % 16) < 8) {
-        if ((arg1 < arg2) && (gSettingVsCom == 0)) {
+        if ((numPlayersIndex < playerIndex) && (gSettingVsCom == 0)) {
             return gfx;
         }
 
-        temp_s2 = Math_Round(((gRacers[arg2].unk_0C.unk_1C.x * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0)) / 2;
-        temp_v0 = Math_Round(((gRacers[arg2].unk_0C.unk_1C.z * 64.0f * var_fs0) / 16000.0f) + (64 * var_fs0));
-        temp_s2 += sp104;
-        temp_v0 /= 2;
-        temp_v0 += sp100;
+        playerMarkerLeftPos = Math_Round(((gRacers[playerIndex].unk_0C.unk_1C.x * 64.0f * minimapScale) / 16000.0f) + (64 * minimapScale)) / 2;
+        playerMarkerRightPos = Math_Round(((gRacers[playerIndex].unk_0C.unk_1C.z * 64.0f * minimapScale) / 16000.0f) + (64 * minimapScale)) / 2;
+        playerMarkerLeftPos += left;
+        playerMarkerRightPos += top;
 
         gDPPipeSync(gfx++);
 
-        switch (arg2) {
+        switch (playerIndex) {
             case 0:
                 gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 255, 255, 1) << 16 | GPACK_RGBA5551(0, 255, 255, 1));
                 break;
@@ -560,7 +559,7 @@ Gfx* func_i3_80135B20(Gfx* gfx, s32 arg1, s32 arg2) {
                 break;
         }
 
-        gDPFillRectangle(gfx++, temp_s2 - 1, temp_v0 - 1, temp_s2 + 1, temp_v0 + 1);
+        gDPFillRectangle(gfx++, playerMarkerLeftPos - 1, playerMarkerRightPos - 1, playerMarkerLeftPos + 1, playerMarkerRightPos + 1);
     }
 
     return gfx;
@@ -691,7 +690,7 @@ void func_i3_80137AC4(Vtx*, unk_80141FF0*, unk_struct_1DC*, unk_80141860*, f32, 
 void func_i3_80138D80(void);
 void func_i3_801398D0(s32, unk_80141FF0*, unk_struct_1DC*);
 
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 
 void func_i3_80136A6C(void) {
     s32 pad[3];
@@ -729,13 +728,13 @@ void func_i3_80136A6C(void) {
         temp_fs1 = var_s1->unk_0C * temp;
         temp_fs2 = var_s1->unk_0C * (0.0f - temp2);
 
-        vtx = &D_800DCCF0->unk_29B48[i * 28 + 2 * 4];
+        vtx = &gGfxPool->unk_29B48[i * 28 + 2 * 4];
         func_i3_80136E74(vtx, var_s1, var_s2, temp_fa0);
 
-        vtx = &D_800DCCF0->unk_29B48[i * 28 + 0 * 4];
+        vtx = &gGfxPool->unk_29B48[i * 28 + 0 * 4];
         func_i3_801374D4(vtx, var_s1, var_s2, temp_fs3, temp_fs4, 0.0f, 0.0f, temp_fs1, temp_fs2, 255, 0);
 
-        vtx = &D_800DCCF0->unk_29B48[i * 28 + 1 * 4];
+        vtx = &gGfxPool->unk_29B48[i * 28 + 1 * 4];
         func_i3_801374D4(vtx, var_s1, var_s2, 0.0f, 0.0f, 0.0f - temp_fs3, 0.0f - temp_fs4, temp_fs1, temp_fs2, 0, 255);
 
         if (D_i3_8014218C > 0) {
@@ -756,11 +755,11 @@ void func_i3_80136A6C(void) {
                     var_s3 = false;
                 }
 
-                vtx = &D_800DCCF0->unk_29B48[i * 28 + 3 * 4];
+                vtx = &gGfxPool->unk_29B48[i * 28 + 3 * 4];
                 func_i3_80137AC4(vtx, var_s1, var_s2, &var_s1->unk_3C, temp_fs3, temp_fs4, 0.0f, 0.0f, temp_fs1,
                                  temp_fs2, 255, ((1.0f - var_fv0) * 255.0f), var_s3);
 
-                vtx = &D_800DCCF0->unk_29B48[i * 28 + 4 * 4];
+                vtx = &gGfxPool->unk_29B48[i * 28 + 4 * 4];
                 func_i3_80137AC4(vtx, var_s1, var_s2, &var_s1->unk_3C, 0.0f, 0.0f, 0.0f - temp_fs3, 0.0f - temp_fs4,
                                  temp_fs1, temp_fs2, ((1.0f - var_fv0) * 255.0f), 255, var_s3);
 
@@ -880,7 +879,7 @@ void func_i3_80136E74(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, f32 ar
     }
 }
 
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6,
                       f32 arg7, f32 arg8, s32 arg9, s32 argA) {
     unk_80141860* temp_v0;
@@ -912,7 +911,7 @@ void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, f32 ar
 
     temp_fv0 = (temp_v0->unk_04 - arg2->unk_50.y) / (temp_fa1 - arg2->unk_50.y);
 
-    if (D_800DCE5C == 0) {
+    if (!gGamePaused) {
         temp_v0->unk_10 += temp_v0->unk_18;
         if (temp_v0->unk_10 >= 1024.0f) {
             temp_v0->unk_10 -= 1024.0f;
@@ -920,7 +919,7 @@ void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, f32 ar
             temp_v0->unk_10 += 1024.0f;
         }
     }
-    if (D_800DCE5C == 0) {
+    if (!gGamePaused) {
         temp_v0->unk_14 += temp_v0->unk_1C;
 
         if (temp_v0->unk_14 >= 1024.0f) {
@@ -1014,7 +1013,7 @@ void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, unk_80
     sp58[3] = arg1->unk_00 + arg6 - arg8;
     sp44[3] = arg1->unk_08 + arg7 - arg9;
 
-    if (D_800DCE5C == 0) {
+    if (!gGamePaused) {
         arg3->unk_10 += arg3->unk_18;
         if (arg3->unk_10 >= 1024.0f) {
             arg3->unk_10 -= 1024.0f;
@@ -1022,7 +1021,7 @@ void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, unk_struct_1DC* arg2, unk_80
             arg3->unk_10 += 1024.0f;
         }
     }
-    if (D_800DCE5C == 0) {
+    if (!gGamePaused) {
         arg3->unk_14 += arg3->unk_1C;
         if (arg3->unk_14 >= 1024.0f) {
             arg3->unk_14 -= 1024.0f;
@@ -1352,7 +1351,7 @@ void func_i3_80138D80(void) {
 
         if ((sp94.x <= 23000.0f) && (sp94.x >= -23000.0f) && (sp94.z <= 23000.0f) && (sp94.z >= -23000.0f)) {
             var_s2->unk_02 = 1;
-            func_8006BFCC(&D_800DCCF0->unk_2C368[i], NULL, D_i3_801407A0, D_i3_801407A0, D_i3_801407A0, &spA0, &sp88,
+            func_8006BFCC(&gGfxPool->unk_2C368[i], NULL, D_i3_801407A0, D_i3_801407A0, D_i3_801407A0, &spA0, &sp88,
                           &sp94);
         } else {
             var_s2->unk_02 = 0;
@@ -1368,7 +1367,7 @@ void func_i3_80138D80(void) {
             }
 
             for (j = 0; j < 16; j++) {
-                D_800DCCF0->unk_2C528[i][j] = temp_a0->unk_04[j];
+                gGfxPool->unk_2C528[i][j] = temp_a0->unk_04[j];
             }
         }
     }

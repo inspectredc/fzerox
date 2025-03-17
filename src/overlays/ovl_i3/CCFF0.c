@@ -97,7 +97,7 @@ void func_i3_80139FF4(void) {
     D_i3_80143782 = 1;
 }
 
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 
 bool func_i3_8013A004(void) {
     Vp* v0;
@@ -130,7 +130,7 @@ bool func_i3_8013A004(void) {
             break;
     }
 
-    v0 = D_800DCCF0->unk_2C308;
+    v0 = gGfxPool->unk_2C308;
     for (i = 0; i < 5; i++) {
         var_a2 = (i & 1) ? -D_i3_80143788 : D_i3_80143788;
 
@@ -853,7 +853,7 @@ void func_i3_8013C6D8(void) {
         spDC[0] = spDC[1] = spFC->height * 0.5f;
         spDC[2] = spDC[3] = spDC[0] - spFC->height;
 
-        vtx = D_800DCCF0->unk_29D08;
+        vtx = gGfxPool->unk_29D08;
         for (i = 0; i < 4; i++) {
             sp11C = Math_Round(spEC[i]);
             sp118 = Math_Round(spDC[i]);
@@ -875,7 +875,7 @@ void func_i3_8013C6D8(void) {
         }
         temp_fv0 = (s16) sp60 - spFC->height * 0.5f;
         spB8 = (s16) sp64 + 8.0f;
-        vp = D_800DCCF0->unk_2C2D8;
+        vp = gGfxPool->unk_2C2D8;
         vp->vp.vscale[0] = 0x500;
         vp->vp.vscale[1] = 0x3C0;
         vp->vp.vscale[2] = 0x1FF;
@@ -899,10 +899,10 @@ void func_i3_8013C6D8(void) {
             spB8 = 500.0f;
         }
 
-        func_8006D03C(&D_800DCCF0->unk_2B2C8[1], &sp74, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f,
+        func_8006D03C(&gGfxPool->unk_2B2C8[1], &sp74, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f,
                       &D_i3_801439C0);
-        func_8006CC98(&D_800DCCF0->unk_2B2C8[2], &sp74, 0.0f, 0.0f, spB8, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-        func_8006C378(&D_800DCCF0->unk_2B2C8[3], &sp74, spB8, 0, i, i, 0.0f, 0.0f, 0.0f);
+        func_8006CC98(&gGfxPool->unk_2B2C8[2], &sp74, 0.0f, 0.0f, spB8, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        func_8006C378(&gGfxPool->unk_2B2C8[3], &sp74, spB8, 0, i, i, 0.0f, 0.0f, 0.0f);
     }
 }
 

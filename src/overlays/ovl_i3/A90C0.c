@@ -740,7 +740,7 @@ void func_i3_80116C74(Racer* arg0) {
 }
 
 extern s32 gTotalLapCount;
-extern s16 D_80115DE0;
+extern s16 gRacersRemaining;
 extern Racer* gRacersByPosition[];
 
 void func_i3_801175A4(void) {
@@ -779,7 +779,7 @@ void func_i3_801175A4(void) {
                 D_i3_80141990 = var_v0_2;
                 D_i3_80141994 = D_i3_80141990;
             }
-            if (var_t0 >= D_80115DE0) {
+            if (var_t0 >= gRacersRemaining) {
                 D_i3_80141904 = 1;
             }
         }

@@ -29,10 +29,30 @@ Gfx* func_8006FB90(Gfx* gfx);
 
 s32 D_800CD180 = 0; // must always be set to 0!
 
-Gfx* (*D_800CD184[])(Gfx*) = { func_8006F3D8, func_8006F444, func_8006F478, func_8006F4E4, func_8006F4E4, func_8006F514,
-                               func_8006F514, func_8006F57C, func_8006F57C, func_8006F5E4, func_8006F68C, func_8006F6FC,
-                               func_8006F7A4, func_8006F7A4, func_8006F89C, func_8006F89C, func_8006F998, func_8006F998,
-                               func_8006FA94, func_8006FA94, func_8006FB90, func_8006FB90 };
+Gfx* (*D_800CD184[])(Gfx*) = { 
+    func_8006F3D8, // COURSE_FEATURE_GATE_SQUARE
+    func_8006F444, // COURSE_FEATURE_GATE_START
+    func_8006F478, // COURSE_FEATURE_GATE_HEXAGONAL
+    func_8006F4E4, // COURSE_FEATURE_SIGN_TV_RIGHT
+    func_8006F4E4, // COURSE_FEATURE_SIGN_TV_LEFT
+    func_8006F514, // COURSE_FEATURE_SIGN_2_RIGHT
+    func_8006F514, // COURSE_FEATURE_SIGN_2_LEFT
+    func_8006F57C, // COURSE_FEATURE_SIGN_1_RIGHT
+    func_8006F57C, // COURSE_FEATURE_SIGN_1_LEFT
+    func_8006F5E4, // COURSE_FEATURE_SIGN_NINTEX_RIGHT
+    func_8006F68C, // COURSE_FEATURE_SIGN_NINTEX_LEFT
+    func_8006F6FC, // COURSE_FEATURE_SIGN_OVERHEAD
+    func_8006F7A4, // COURSE_FEATURE_BUILDING_TALL_LEFT
+    func_8006F7A4, // COURSE_FEATURE_BUILDING_TALL_RIGHT
+    func_8006F89C, // COURSE_FEATURE_BUILDING_SHORT_LEFT
+    func_8006F89C, // COURSE_FEATURE_BUILDING_SHORT_RIGHT
+    func_8006F998, // COURSE_FEATURE_BUILDING_SPIRE_LEFT
+    func_8006F998, // COURSE_FEATURE_BUILDING_SPIRE_RIGHT
+    func_8006FA94, // COURSE_FEATURE_BUILDING_MOUNTAIN_LEFT
+    func_8006FA94, // COURSE_FEATURE_BUILDING_MOUNTAIN_RIGHT
+    func_8006FB90, // COURSE_FEATURE_BUILDING_TALL_GOLD_LEFT
+    func_8006FB90, // COURSE_FEATURE_BUILDING_TALL_GOLD_RIGHT
+};
 
 bool CourseFeature_IsDecorational(s32 courseFeature) {
     if ((courseFeature >= COURSE_FEATURE_GATE_SQUARE) && (courseFeature <= COURSE_FEATURE_BUILDING_TALL_GOLD_RIGHT)) {
@@ -2945,8 +2965,8 @@ void func_800747EC(s32 venue) {
     Dma_LoadAssetsAsync(sp1C, Segment_SegmentedToVirtual(D_8014A20), 0x800);
 }
 
-extern GfxPool* D_800DCCF0;
-extern s8 D_800DCE5C;
+extern GfxPool* gGfxPool;
+extern s8 gGamePaused;
 
 void func_80074844(void) {
     static s32 D_800CD298 = 0;
@@ -2954,7 +2974,7 @@ void func_80074844(void) {
     f32 temp;
     MtxF sp3C;
 
-    if (D_800DCE5C == 0) {
+    if (!gGamePaused) {
         D_800CD298 = (D_800CD298 + 0xFE9) & 0xFFF;
         D_800CD29C = (D_800CD29C + 0xFDE) & 0xFFF;
     }
@@ -2969,20 +2989,20 @@ void func_80074844(void) {
 
     sp3C.m[0][0] = sp3C.m[2][2] = temp = COS(0x1000 - D_800CD298);
 
-    Matrix_ToMtx(&sp3C, D_800DCCF0->unk_2C5E8);
+    Matrix_ToMtx(&sp3C, gGfxPool->unk_2C5E8);
 
     sp3C.m[2][0] = temp = SIN(D_800CD298);
     sp3C.m[0][2] = -temp;
     sp3C.m[0][0] = sp3C.m[2][2] = temp = COS(D_800CD298);
 
-    Matrix_ToMtx(&sp3C, D_800DCCF0->unk_2C628);
+    Matrix_ToMtx(&sp3C, gGfxPool->unk_2C628);
     sp3C.m[1][2] = temp = SIN(D_800CD29C);
     sp3C.m[2][1] = -temp;
     sp3C.m[2][2] = sp3C.m[1][1] = temp = COS(D_800CD29C);
 
     sp3C.m[2][0] = sp3C.m[0][2] = 0.0f;
     sp3C.m[0][0] = 1.0f;
-    Matrix_ToMtx(&sp3C, D_800DCCF0->unk_2C668);
+    Matrix_ToMtx(&sp3C, gGfxPool->unk_2C668);
 }
 
 UNUSED s32 D_800CD2A0 = -1;

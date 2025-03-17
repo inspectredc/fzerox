@@ -118,7 +118,7 @@ void func_i2_800FC77C(void) {
     }
 }
 
-extern unk_800DCE48 D_800DCE48;
+extern s32 gQueuedGameMode;
 
 void func_i2_800FC9BC(void) {
     D_i2_80106DA4 = 1;
@@ -128,7 +128,7 @@ void func_i2_800FC9BC(void) {
         return;
     }
 
-    switch (D_800DCE48.gameMode) {
+    switch (gQueuedGameMode) {
         case GAMEMODE_FLX_TITLE:
             func_i2_800FCB84(1, 1);
             break;
@@ -942,7 +942,7 @@ void func_i2_800FE13C(unk_8010D778* arg0) {
     }
 }
 
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 bool func_i2_800FE6F0(unk_8010D778* arg0);
 
 void func_i2_800FE4E4(unk_8010D778* arg0) {
@@ -977,12 +977,12 @@ void func_i2_800FE4E4(unk_8010D778* arg0) {
             break;
     }
     if (var_s0 != 0) {
-        func_8006D03C(D_800DCCF0->unk_2B248, &sp70, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f, &D_i2_8010D772);
-        func_8006CC98(D_800DCCF0->unk_2B288, &sp70, 0.0f, 0.0f, 500.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        func_8006D03C(gGfxPool->unk_2B248, &sp70, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f, &D_i2_8010D772);
+        func_8006CC98(gGfxPool->unk_2B288, &sp70, 0.0f, 0.0f, 500.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
         var_s0_2 = arg0->unk_18;
         for (i = 0; i < 64; i++) {
-            func_8006BC84(&D_800DCCF0->unk_2B2C8[i], &sp70, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+            func_8006BC84(&gGfxPool->unk_2B2C8[i], &sp70, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
                           var_s0_2->unk_04, var_s0_2->unk_08, var_s0_2->unk_0C);
             var_s0_2++;
         }
@@ -1215,12 +1215,12 @@ void func_i2_800FF284(unk_8010D778* arg0) {
     }
 
     if (var_s0) {
-        func_8006D03C(D_800DCCF0->unk_2B248, &sp74, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f, &D_i2_8010D772);
-        func_8006CC98(D_800DCCF0->unk_2B288, &sp74, 0.0f, 0.0f, 500.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        func_8006D03C(gGfxPool->unk_2B248, &sp74, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f, &D_i2_8010D772);
+        func_8006CC98(gGfxPool->unk_2B288, &sp74, 0.0f, 0.0f, 500.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
         var_s0_2 = arg0->unk_18;
         for (i = 0; i < 64; i++) {
-            func_8006BC84(&D_800DCCF0->unk_2B2C8[i], &sp74, var_s0_2->unk_10, var_s0_2->unk_10, var_s0_2->unk_10, 0.0f,
+            func_8006BC84(&gGfxPool->unk_2B2C8[i], &sp74, var_s0_2->unk_10, var_s0_2->unk_10, var_s0_2->unk_10, 0.0f,
                           0.0f, 1.0f, 0.0f, 1.0f, 0.0f, var_s0_2->unk_04, var_s0_2->unk_08, var_s0_2->unk_0C);
             var_s0_2++;
         }

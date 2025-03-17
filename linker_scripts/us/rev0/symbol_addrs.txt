@@ -273,6 +273,8 @@ gCupRaceStats = 0x800E4268;
 gPlayerLives = 0x800E5ED8;
 gRacersKOd = 0x800E5FD2;
 
+gGfxPool = 0x800DCCF0;
+gGamePaused = 0x800DCE5C;
 gControllerPads = 0x800DCE80;
 gControllers = 0x800DCE98; // size:0x2E4
 gSharedController = 0x800DD180;

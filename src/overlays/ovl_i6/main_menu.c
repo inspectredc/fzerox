@@ -238,7 +238,7 @@ void MainMenu_Init(void) {
     Object_Init(OBJECT_MAIN_MENU_SELECT_TIME_ATTACK_MODE, 96, 80, 14);
 }
 
-extern unk_800DCE48 D_800DCE48;
+extern s32 gAntiPiracyAddedDifficulty;
 extern s32 gModeSubOption[];
 extern char* gTrackNames[];
 
@@ -323,7 +323,7 @@ s32 MainMenu_Update(void) {
 
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 func_800BA8D8(0x3E);
-                D_800DCE48.unk_10 =
+                gAntiPiracyAddedDifficulty =
                     (UNLOCK_EVERYTHING_ROMDATA(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) & 0xFFFF) - 0x997A;
                 switch (gSelectedMode) {
                     case MODE_GP_RACE:
@@ -339,7 +339,7 @@ s32 MainMenu_Update(void) {
                         gCurrentTrackName = gTrackNames[gCourseIndex];
                         gNumPlayers = 1;
                         func_800BB324(gNumPlayers - 1);
-                        gDifficulty = D_800DCE48.unk_10 + MASTER;
+                        gDifficulty = gAntiPiracyAddedDifficulty + MASTER;
                         return GAMEMODE_FLX_MACHINE_SELECT;
                     case MODE_OPTIONS:
                         D_800CD384 = 5;
@@ -416,7 +416,7 @@ s32 MainMenu_Update(void) {
                     case MODE_GP_RACE:
                     case MODE_PRACTICE:
                         gNumPlayers = 1;
-                        gDifficulty = D_800DCE48.unk_10 + gModeSubOption[gSelectedMode];
+                        gDifficulty = gAntiPiracyAddedDifficulty + gModeSubOption[gSelectedMode];
                         break;
                 }
             }

@@ -1299,12 +1299,12 @@ s32 MachineSettings_Update(void) {
     return gGameMode;
 }
 
-extern unk_800DCE48 D_800DCE48;
+extern s32 gQueuedGameMode;
 
 Gfx* MachineSelect_Draw(Gfx* gfx) {
     gfx = Object_UpdateAndDrawAll(gfx);
     func_800790D4();
-    if (gGameMode != D_800DCE48.gameMode) {
+    if (gGameMode != gQueuedGameMode) {
         func_80089724();
     }
     return gfx;
@@ -1313,7 +1313,7 @@ Gfx* MachineSelect_Draw(Gfx* gfx) {
 Gfx* MachineSettings_Draw(Gfx* gfx) {
     gfx = Object_UpdateAndDrawAll(gfx);
     func_800790D4();
-    if (gGameMode != D_800DCE48.gameMode) {
+    if (gGameMode != gQueuedGameMode) {
         func_80089724();
     }
     return gfx;
@@ -1666,7 +1666,7 @@ Gfx* MachineSelect_CursorDraw(Gfx* gfx, Object* cursorObj) {
 
 extern unk_struct_1DC D_800E5220[];
 extern GfxPool D_1000000;
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 
 Gfx* MachineSelect_CarDraw(Gfx* gfx, Object* carObj) {
     bool var_t0;
@@ -1683,8 +1683,8 @@ Gfx* MachineSelect_CarDraw(Gfx* gfx, Object* carObj) {
     gSPLight(gfx++, &D_1000000.unk_21A88[0].a, 2);
     gSPNumLights(gfx++, NUMLIGHTS_1);
 
-    Lights_SetSource(&D_800DCCF0->unk_21A88[0], 0, 0, 0, 255, 255, 255, 100, 50, 69);
-    Lights_SetSource(&D_800DCCF0->unk_21A88[1], 0, 0, 0, 100, 70, 70, 100, 50, 69);
+    Lights_SetSource(&gGfxPool->unk_21A88[0], 0, 0, 0, 255, 255, 255, 100, 50, 69);
+    Lights_SetSource(&gGfxPool->unk_21A88[1], 0, 0, 0, 100, 70, 70, 100, 50, 69);
 
     for (i = 0; i < 30; i++) {
         gDPPipeSync(gfx++);
@@ -1792,7 +1792,7 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* carObj) {
 
     gSPDisplayList(gfx++, D_303A5F8);
 
-    Lights_SetSource(D_800DCCF0->unk_21A88, 0, 0, 0, 255, 255, 255, 50, 25, 34);
+    Lights_SetSource(gGfxPool->unk_21A88, 0, 0, 0, 255, 255, 255, 50, 25, 34);
     gSPLight(gfx++, &D_1000000.unk_21A88[0].l[0], 1);
     gSPLight(gfx++, &D_1000000.unk_21A88[0].a, 2);
 
@@ -1804,8 +1804,8 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* carObj) {
 
     gSPDisplayList(gfx++, D_90186C8);
 
-    Light_SetLookAtSource(&D_800DCCF0->unk_21B28, &D_800E5220[0].unk_15C);
-    gSPLookAt(gfx++, &D_800DCCF0->unk_21B28);
+    Light_SetLookAtSource(&gGfxPool->unk_21B28, &D_800E5220[0].unk_15C);
+    gSPLookAt(gfx++, &gGfxPool->unk_21B28);
 
     gSPTexture(gfx++, D_i4_8011D4E0, D_i4_8011D4E0, 0, G_TX_RENDERTILE, G_ON);
 
@@ -1993,6 +1993,7 @@ Gfx* MachineSettings_SplitscreenDraw(Gfx* gfx) {
 extern s32 gDifficulty;
 extern s8 gUnlockableLevel;
 extern s8 gSettingEverythingUnlocked;
+extern s32 gAntiPiracyAddedDifficulty;
 
 Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* difficultyCupsObj) {
     s32 i;
@@ -2029,7 +2030,7 @@ Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* difficultyCupsObj) {
     if (difficulty != 0) {
         difficulty--;
     } else {
-        difficulty = gDifficulty - D_800DCE48.unk_10;
+        difficulty = gDifficulty - gAntiPiracyAddedDifficulty;
     }
 
     if ((gUnlockableLevel >= 2) || (gSettingEverythingUnlocked != 0)) {
@@ -2165,7 +2166,7 @@ void MachineSelect_CarUpdate(Object* carObj) {
         var_s0->unk_C0.x.y += var_fv0 * var_s0->unk_C0.z.y;
         var_s0->unk_C0.x.z += var_fv0 * var_s0->unk_C0.z.z;
         func_8006AA38(&var_s0->unk_C0);
-        func_8006BC84(&D_800DCCF0->unk_20308[i], NULL, D_800CE748, D_800CE74C, D_800CE750, var_s0->unk_C0.x.x,
+        func_8006BC84(&gGfxPool->unk_20308[i], NULL, D_800CE748, D_800CE74C, D_800CE750, var_s0->unk_C0.x.x,
                       var_s0->unk_C0.x.y, var_s0->unk_C0.x.z, var_s0->unk_C0.y.x, var_s0->unk_C0.y.y,
                       var_s0->unk_C0.y.z, var_s0->unk_0C.unk_34.x, var_s0->unk_0C.unk_34.y, var_s0->unk_0C.unk_34.z);
         var_s0--;
@@ -2253,15 +2254,15 @@ void MachineSettings_CarUpdate(Object* carObj) {
         var_s0->unk_C0.y.y = var_s0->unk_C0.y.y + (var_fs0 * var_s0->unk_C0.z.y);
         var_s0->unk_C0.y.z = var_s0->unk_C0.y.z + (var_fs0 * var_s0->unk_C0.z.z);
         func_8006AA38(&var_s0->unk_C0);
-        func_8006BC84(&D_800DCCF0->unk_20308[i], NULL, var_fs2 * D_800CE748, var_fs2 * D_800CE74C, var_fs2 * D_800CE750,
+        func_8006BC84(&gGfxPool->unk_20308[i], NULL, var_fs2 * D_800CE748, var_fs2 * D_800CE74C, var_fs2 * D_800CE750,
                       var_s0->unk_C0.x.x, var_s0->unk_C0.x.y, var_s0->unk_C0.x.z, var_s0->unk_C0.y.x,
                       var_s0->unk_C0.y.y, var_s0->unk_C0.y.z, var_s0->unk_0C.unk_34.x, var_s0->unk_0C.unk_34.y,
                       var_s0->unk_0C.unk_34.z);
-        func_8006BC84(&D_800DCCF0->unk_21208[i], NULL, (var_fs2 * 1.05f) * D_800CE748, (var_fs2 * 1.05f) * D_800CE74C,
+        func_8006BC84(&gGfxPool->unk_21208[i], NULL, (var_fs2 * 1.05f) * D_800CE748, (var_fs2 * 1.05f) * D_800CE74C,
                       (var_fs2 * 1.05f) * D_800CE750, var_s0->unk_C0.x.x, var_s0->unk_C0.x.y, var_s0->unk_C0.x.z,
                       var_s0->unk_C0.y.x, var_s0->unk_C0.y.y, var_s0->unk_C0.y.z, var_s0->unk_0C.unk_34.x,
                       var_s0->unk_0C.unk_34.y, var_s0->unk_0C.unk_34.z);
-        func_8006BC84(&D_800DCCF0->unk_20A88[i], NULL, var_fs2 * D_800CE748, var_fs2 * D_800CE74C, var_fs2 * D_800CE750,
+        func_8006BC84(&gGfxPool->unk_20A88[i], NULL, var_fs2 * D_800CE748, var_fs2 * D_800CE74C, var_fs2 * D_800CE750,
                       var_s0->unk_C0.x.x, var_s0->unk_C0.x.y, var_s0->unk_C0.x.z, var_s0->unk_C0.y.x,
                       var_s0->unk_C0.y.y, var_s0->unk_C0.y.z, var_s0->unk_0C.unk_34.x, var_s0->unk_0C.unk_34.y,
                       var_s0->unk_0C.unk_34.z);
@@ -2305,7 +2306,7 @@ void MachineSettings_NameCardUpdate(Object* nameCardObj) {
 }
 
 void func_i4_8011A7B8(void) {
-    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) &&
+    if ((gQueuedGameMode == GAMEMODE_LX_MACHINE_SETTINGS) &&
         (CAR_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_CAR)) != 0)) {
         D_800CE748 = 0.075f;
         D_800CE74C = 0.125f;

@@ -9,15 +9,15 @@
 #include "assets/segment_1B8550.h"
 #include "assets/segment_2B9EA0.h"
 
-s16 D_i3_801419A0;
-s16 D_i3_801419A2;
-s16 D_i3_801419A4;
+s16 sRaceFinishSaveTriggered;
+s16 sMenuIsBusy;
+s16 sMenuOptionTriggered;
 s16 D_i3_801419A6;
 s32 D_i3_801419A8;
 s32 D_i3_801419AC;
-s32 D_i3_801419B0;
+s32 sMenuStateFlags;
 s32 D_i3_801419B4;
-s32 D_i3_801419B8;
+s32 sPlayer1Lives;
 bool D_i3_801419BC;
 UNUSED s32 D_i3_801419C0[4];
 s32 gRacerIdsByPosition[30];
@@ -88,8 +88,8 @@ s32 sRaceMenuOptionIndex;
 s32 D_i3_80141D98;
 s32 D_i3_80141D9C;
 s32 D_i3_80141DA0;
-s32 D_i3_80141DA4;
-s32 D_i3_80141DA8;
+s32 sPauseMenuOptionIndex;
+s32 sPauseMenuScissorBoxTimer;
 s32 sPausePlayerNum;
 bool sSaveGhostMenuOpen;
 s32 D_i3_80141DB4;
@@ -199,17 +199,17 @@ s32 sRaceMenuDimensions[RACE_MENU_MAX * 2] = {
 };
 
 void func_i3_8011AE70(void) {
-    D_i3_801419B0 = D_i3_801419B4 = 0;
+    sMenuStateFlags = D_i3_801419B4 = 0;
 }
 
 void func_i3_8011AE88(void) {
     D_i3_801419A8 = D_i3_801419AC = 0;
 }
 
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 extern s32 gPlayerControlPorts[];
 extern s32 D_i2_80106F10;
-extern s32 D_i3_801419B0;
+extern s32 sMenuStateFlags;
 extern Controller gControllers[];
 extern s32 gPlayerControlPorts[];
 extern s32 gNumPlayers;
@@ -226,15 +226,15 @@ void Save_SaveDeathRaceProfiles(void);
 void func_i3_8011AEA0(void) {
     s32 i;
 
-    if (D_i3_801419B0 != 0) {
-        if (D_i3_801419B0 & 1) {
-            D_800DCE5C = 1;
+    if (sMenuStateFlags != 0) {
+        if (sMenuStateFlags & MENU_STATE_PAUSE_GAME) {
+            gGamePaused = true;
             func_800BB0C0(1);
             func_800BA8D8(12);
             func_80069700();
         }
-        if (D_i3_801419B0 & 2) {
-            D_800DCE5C = 0;
+        if (sMenuStateFlags & MENU_STATE_UNPAUSE_GAME) {
+            gGamePaused = false;
             D_i2_80106F10 = 4;
             for (i = 0; i < gNumPlayers; i++) {
                 gControllers[gPlayerControlPorts[i]].unk_72 = 1;
@@ -242,7 +242,7 @@ void func_i3_8011AEA0(void) {
             func_800BB0C0(0);
             func_800BA8D8(13);
         }
-        if ((D_i3_801419B0 & 4) && (D_i3_801419A0 == 0)) {
+        if ((sMenuStateFlags & MENU_STATE_RACE_FINISH_SAVE) && !sRaceFinishSaveTriggered) {
             if (gGameMode == GAMEMODE_TIME_ATTACK) {
                 if (gCourseIndex < COURSE_X_1) {
                     func_80089BD0();
@@ -257,40 +257,40 @@ void func_i3_8011AEA0(void) {
                 func_80089BD0();
                 Save_SaveDeathRaceProfiles();
             }
-            D_i3_801419A0 = 1;
+            sRaceFinishSaveTriggered = true;
         }
-        if ((D_i3_801419A4 == 0) && (D_i3_801419A6 == 0)) {
-            if (D_i3_801419B0 & 8) {
+        if (!sMenuOptionTriggered && (D_i3_801419A6 == 0)) {
+            if (sMenuStateFlags & MENU_STATE_RETRY) {
                 func_80095144();
                 D_800CD048 = 1;
-                D_i3_801419A4 = 1;
+                sMenuOptionTriggered = true;
             }
-            if (D_i3_801419B0 & 0x10) {
+            if (sMenuStateFlags & MENU_STATE_QUIT) {
                 func_80095144();
                 D_800CD048 = 2;
-                D_i3_801419A4 = 1;
+                sMenuOptionTriggered = true;
             }
-            if (D_i3_801419B0 & 0x20) {
+            if (sMenuStateFlags & MENU_STATE_CHANGE_MACHINE) {
                 func_80095144();
                 D_800CD048 = 7;
-                D_i3_801419A4 = 1;
+                sMenuOptionTriggered = true;
             }
-            if (D_i3_801419B0 & 0x40) {
+            if (sMenuStateFlags & MENU_STATE_CHANGE_COURSE) {
                 func_80095144();
                 D_800CD048 = 3;
-                D_i3_801419A4 = 1;
+                sMenuOptionTriggered = true;
             }
-            if (D_i3_801419B0 & 0x80) {
+            if (sMenuStateFlags & MENU_STATE_SETTINGS) {
                 func_80095144();
                 D_800CD048 = 15;
-                D_i3_801419A4 = 1;
+                sMenuOptionTriggered = true;
             }
-            if (D_i3_801419B0 & 0x100) {
+            if (sMenuStateFlags & MENU_STATE_100) {
                 func_80095144();
                 D_800CD048 = 6;
-                D_i3_801419A4 = 1;
+                sMenuOptionTriggered = true;
             }
-            if (D_i3_801419B0 & 0x200) {
+            if (sMenuStateFlags & MENU_STATE_GP_NEXT_COURSE) {
                 if ((gNumPlayers == 1) && (gGameMode == GAMEMODE_GP_RACE)) {
                     for (i = 0; i < gTotalRacers; i++) {
                         D_80115D50[i] = gRacers[i].position;
@@ -298,12 +298,12 @@ void func_i3_8011AEA0(void) {
                 }
                 func_80095144();
                 D_800CD048 = 4;
-                D_i3_801419A4 = 1;
+                sMenuOptionTriggered = true;
             }
-            if (D_i3_801419B0 & 0x400) {
+            if (sMenuStateFlags & MENU_STATE_400) {
                 func_80095144();
                 D_800CD048 = 5;
-                D_i3_801419A4 = 1;
+                sMenuOptionTriggered = true;
             }
         }
     }
@@ -351,7 +351,7 @@ extern unk_800CD970 D_800CD970[];
 
 extern GhostRacer* gFastestGhostRacer;
 extern s16 gPlayerLives[];
-extern s16 D_80115DE0;
+extern s16 gRacersRemaining;
 
 extern CourseRecordInfo* gCurrentCourseRecordInfo;
 extern s32 D_80141900;
@@ -368,7 +368,7 @@ void func_i3_8011B520(void) {
     D_i3_80141AD0.y = Math_Rand1() % 256 / 255.0f * 0.3f + 4.18f - 0.15f;
     D_i3_80141AD0.z = Math_Rand2() % 256 / 255.0f * 0.3f + 5.12f - 0.15f;
 
-    D_80115DE0 = gTotalRacers;
+    gRacersRemaining = gTotalRacers;
     D_i3_80141E00 = 0;
 
     for (i = 0; i < 5; i++) {
@@ -400,14 +400,14 @@ void func_i3_8011B520(void) {
 
     sGhostSaveTimer = sOverwriteGhostOption = sSaveGhostMenuOpen = D_i3_80141DC4 = D_i3_80141DBC = D_i3_80141B98 =
         D_i3_80141B9C = D_80141D6C = D_i3_80141D88 = D_i3_80141D8C = sRaceMenuOptionIndex = D_i3_80141D9C =
-            D_i3_801419A2 = D_i3_801419A0 = D_i3_80141DCC = D_i3_801419A4 = D_i3_801419A6 = D_i3_801419BC = D_80141900 =
+            sMenuIsBusy = sRaceFinishSaveTriggered = D_i3_80141DCC = sMenuOptionTriggered = D_i3_801419A6 = D_i3_801419BC = D_80141900 =
                 D_i3_80141D90 = 0;
 
     D_i3_80141D08 = D_i3_80141CC8 = 0.0f;
     D_i3_80141DC0 = D_i3_80141DB4 = 90;
     D_i3_80141DA0 = D_i3_80141D98 = 60;
     D_i3_80141DCC = 0;
-    D_i3_801419B8 = gPlayerLives[0];
+    sPlayer1Lives = gPlayerLives[0];
     sRetireTexture = func_80078104(aRetireTex, TEX_SIZE(aRetireTex, sizeof(u8)), 0, 0, 0);
     sRetirePalette = func_80078104(aRetireTLUT, TEX_SIZE(aRetireTLUT, sizeof(u16)), 0, 0, 0);
     func_80078104(aMenuTextTLUT, 0x200, 0, 0, 0);
@@ -534,7 +534,7 @@ Gfx* func_i3_8011C25C(Gfx* gfx, s32 playerNum) {
     s32 temp_ft0;
     s32 pad[2];
 
-    if ((D_800DCE5C == 0) && (D_800CD010 == 0)) {
+    if (!gGamePaused && (D_800CD010 == 0)) {
         if (D_i3_80141AA0[playerNum].x != 0.0f) {
             D_i3_80141A70[playerNum][0] += D_i3_80141AA0[playerNum].x;
             if (D_i3_80141A70[playerNum][0] > 0.0f) {
@@ -1594,7 +1594,7 @@ void func_i3_801217F0(s32 playerIndex) {
 
 extern GfxPool D_1000000;
 extern unk_struct_1DC D_800E5220[];
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 
 Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
     s32 pad[6];
@@ -1663,8 +1663,8 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
     gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BACK);
     gDPPipeSync(gfx++);
     gDPSetRenderMode(gfx++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-    func_8006BC84(D_800DCCF0->unk_21988, NULL, 0.07f, 0.07f, 0.07f, 0, spA0, spA4, 0, spAC, spB0, spC0, spC4, spC8);
-    gSPMatrix(gfx++, D_800DCCF0->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    func_8006BC84(gGfxPool->unk_21988, NULL, 0.07f, 0.07f, 0.07f, 0, spA0, spA4, 0, spAC, spB0, spC0, spC4, spC8);
+    gSPMatrix(gfx++, gGfxPool->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gfx++, aFinishDL);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
@@ -1673,10 +1673,10 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
     if (D_i3_80141BE0[playerIndex] == 2) {
         if ((gGameMode == GAMEMODE_TIME_ATTACK) || (gGameMode == GAMEMODE_GP_RACE)) {
             if (gTotalLapCount == 3) {
-                D_i3_801419B0 |= 4;
+                sMenuStateFlags |= MENU_STATE_RACE_FINISH_SAVE;
             }
         } else if (gGameMode == GAMEMODE_DEATH_RACE) {
-            D_i3_801419B0 |= 4;
+            sMenuStateFlags |= MENU_STATE_RACE_FINISH_SAVE;
         }
     }
 
@@ -1823,21 +1823,21 @@ Gfx* func_i3_80121E70(Gfx* gfx, s32 arg1) {
     if (D_i3_80141D0C >= 0.009f) {
         D_i3_80141D0C = 0.009f;
         if ((gControllers[gPlayerControlPorts[arg1]].buttonPressed & (BTN_A | BTN_START)) &&
-            (D_i3_80141BF0[arg1] >= 60) && (D_i3_801419A2 == 0)) {
+            (D_i3_80141BF0[arg1] >= 60) && !sMenuIsBusy) {
             if (D_800CD010 == 0) {
                 func_800BB048();
             }
             if (D_800CD010 == 0) {
                 func_8007E0CC();
             }
-            D_i3_801419A2 = 1;
-            D_i3_801419B0 |= 0x10;
+            sMenuIsBusy = true;
+            sMenuStateFlags |= MENU_STATE_QUIT;
         }
     }
 
-    func_8006BC84(D_800DCCF0->unk_21988, NULL, D_i3_80141D0C, D_i3_80141D0C, D_i3_80141D0C, sp5C, 0.0f, sp64, 0.0f,
+    func_8006BC84(gGfxPool->unk_21988, NULL, D_i3_80141D0C, D_i3_80141D0C, D_i3_80141D0C, sp5C, 0.0f, sp64, 0.0f,
                   1.0f, 0.0f, sp80, sp84, sp88);
-    gSPMatrix(gfx++, D_800DCCF0->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, gGfxPool->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gfx++, aExecuteGameoverDL);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
@@ -2289,7 +2289,7 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
     }
     if ((D_i3_80141D98 == 0) && !sSaveGhostMenuOpen && (D_i3_80141DB4 != 0) && (sGhostSaveTimer == 0) &&
         (D_i3_80141DCC == 0) && !sp4C) {
-        if (D_i3_801419A2 == 0) {
+        if (!sMenuIsBusy) {
             sRaceMenuOptionIndex = func_i3_801228F8(0, sRaceMenuOptionIndex, 5);
             // Skip over save ghost option when greyed out
             if ((sRaceMenuOptionIndex == TIME_ATTACK_SAVE_GHOST) && (sCannotSaveGhost)) {
@@ -2301,7 +2301,7 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                 }
             }
         }
-        if ((gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) && (D_i3_801419A2 == 0) &&
+        if ((gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) && !sMenuIsBusy &&
             (D_i3_80141DCC == 0)) {
             switch (sRaceMenuOptionIndex) {
                 case TIME_ATTACK_RETRY:
@@ -2314,8 +2314,8 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 8;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_RETRY;
                     break;
                 case TIME_ATTACK_QUIT:
                     if (D_800CD010 == 0) {
@@ -2327,8 +2327,8 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x10;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_QUIT;
                     break;
                 case TIME_ATTACK_SAVE_GHOST:
                     if (D_800CD010 == 0) {
@@ -2348,8 +2348,8 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x80;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_SETTINGS;
                     break;
                 case TIME_ATTACK_CHANGE_MACHINE:
                     if (D_800CD010 == 0) {
@@ -2361,8 +2361,8 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x20;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_CHANGE_MACHINE;
                     break;
                 case TIME_ATTACK_CHANGE_COURSE:
                     if (D_800CD010 == 0) {
@@ -2374,8 +2374,8 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x40;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_CHANGE_COURSE;
                     break;
             }
         }
@@ -2411,7 +2411,7 @@ Gfx* func_i3_80124370(Gfx* gfx) {
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_i3_SetOptionColor(gfx, 0);
     gfx = Font_DrawScaledString(gfx, 215, (D_i3_80141D9C * 15) + 157, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
-    if ((D_i3_80141DA0 == 0) && (D_i3_801419A2 == 0)) {
+    if ((D_i3_80141DA0 == 0) && !sMenuIsBusy) {
         D_i3_80141D9C = func_i3_801228F8(0, D_i3_80141D9C, 4);
         if (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) {
             switch (D_i3_80141D9C) {
@@ -2425,8 +2425,8 @@ Gfx* func_i3_80124370(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 8;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_RETRY;
                     break;
                 case 1:
                     if (D_800CD010 == 0) {
@@ -2438,8 +2438,8 @@ Gfx* func_i3_80124370(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x80;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_SETTINGS;
                     break;
                 case 4:
                     if (D_800CD010 == 0) {
@@ -2451,8 +2451,8 @@ Gfx* func_i3_80124370(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x10;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_QUIT;
                     break;
                 case 2:
                     if (D_800CD010 == 0) {
@@ -2464,8 +2464,8 @@ Gfx* func_i3_80124370(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x20;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_CHANGE_MACHINE;
                     break;
                 case 3:
                     if (D_800CD010 == 0) {
@@ -2477,8 +2477,8 @@ Gfx* func_i3_80124370(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x40;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_CHANGE_COURSE;
                     break;
             }
         }
@@ -2514,7 +2514,7 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
     gfx = Font_DrawScaledString(gfx, 215, (sRaceMenuOptionIndex * 15) + 157, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
-    if ((D_i3_80141D98 == 0) && (D_i3_801419A2 == 0)) {
+    if ((D_i3_80141D98 == 0) && !sMenuIsBusy) {
         sRaceMenuOptionIndex = func_i3_801228F8(0, sRaceMenuOptionIndex, 4);
         if (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) {
             switch (sRaceMenuOptionIndex) {
@@ -2528,8 +2528,8 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 8;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_RETRY;
                     break;
                 case 4:
                     if (D_800CD010 == 0) {
@@ -2541,8 +2541,8 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x10;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_QUIT;
                     break;
                 case 2:
                     if (D_800CD010 == 0) {
@@ -2554,8 +2554,8 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x20;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_CHANGE_MACHINE;
                     break;
                 case 3:
                     if (D_800CD010 == 0) {
@@ -2567,8 +2567,8 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x40;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_CHANGE_COURSE;
                     break;
                 case 1:
                     if (D_800CD010 == 0) {
@@ -2580,8 +2580,8 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x80;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_SETTINGS;
                     break;
             }
         }
@@ -2619,7 +2619,7 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
     gfx = Font_DrawScaledString(gfx, 215, (sRaceMenuOptionIndex * 15) + 157, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
-    if ((D_i3_80141D98 == 0) && (D_i3_801419A2 == 0)) {
+    if ((D_i3_80141D98 == 0) && !sMenuIsBusy) {
         sRaceMenuOptionIndex = func_i3_801228F8(0, sRaceMenuOptionIndex, 3);
         if (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) {
             switch (sRaceMenuOptionIndex) {
@@ -2633,8 +2633,8 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 8;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_RETRY;
                     break;
                 case 3:
                     if (D_800CD010 == 0) {
@@ -2646,8 +2646,8 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x10;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_QUIT;
                     break;
                 case 2:
                     if (D_800CD010 == 0) {
@@ -2659,8 +2659,8 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x20;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_CHANGE_MACHINE;
                     break;
                 case 1:
                     if (D_800CD010 == 0) {
@@ -2672,8 +2672,8 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x80;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_SETTINGS;
                     break;
             }
         }
@@ -2681,52 +2681,52 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
     return gfx;
 }
 
-Gfx* func_i3_8012548C(Gfx* gfx) {
+Gfx* func_i3_DrawGeneralPause(Gfx* gfx) {
     s32 pad[2];
 
-    if (D_i3_80141DA8 > 0) {
-        D_i3_80141DA8 -= 8;
+    if (sPauseMenuScissorBoxTimer > 0) {
+        sPauseMenuScissorBoxTimer -= 8;
     } else {
-        D_i3_80141DA8 = 0;
+        sPauseMenuScissorBoxTimer = 0;
     }
 
     gDPPipeSync(gfx++);
-    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_i3_80141DA8 + 100, D_i3_80141DA8 + 41, 230 - D_i3_80141DA8,
-                  197 - D_i3_80141DA8);
+    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sPauseMenuScissorBoxTimer + 100, sPauseMenuScissorBoxTimer + 41, 230 - sPauseMenuScissorBoxTimer,
+                  197 - sPauseMenuScissorBoxTimer);
     gfx = func_i3_DrawBeveledBox(gfx, 120, 61, 210, 177, 0, 0, 0, 220);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
 
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GENERAL_CONTINUE);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_CONTINUE, 140, 80);
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 1);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GENERAL_RETRY);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 140, 95);
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 2);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GENERAL_SETTINGS);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_SETTINGS, 140, 110);
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 5);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GENERAL_QUIT);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_QUIT, 140, 155);
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 3);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GENERAL_CHANGE_MACHINE);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_CHANGE_MACHINE, 140, 125);
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 4);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GENERAL_CHANGE_COURSE);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_CHANGE_COURSE, 140, 140);
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
-    gfx = Font_DrawScaledString(gfx, 125, (D_i3_80141DA4 * 15) + 97, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 125, (sPauseMenuOptionIndex * 15) + 97, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
     gfx = Font_DrawString(gfx, 166 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 78, "PAUSE", 1, FONT_SET_6, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
     gfx = Font_DrawString(gfx, 165 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 77, "PAUSE", 1, FONT_SET_6, 0);
-    if ((D_i3_80141DA8 == 0) && (D_i3_801419A2 == 0)) {
-        D_i3_80141DA4 = func_i3_801228F8(sPausePlayerNum, D_i3_80141DA4, 5);
+    if ((sPauseMenuScissorBoxTimer == 0) && !sMenuIsBusy) {
+        sPauseMenuOptionIndex = func_i3_801228F8(sPausePlayerNum, sPauseMenuOptionIndex, 5);
         if (gControllers[gPlayerControlPorts[sPausePlayerNum]].buttonPressed & (BTN_A | BTN_START)) {
-            switch (D_i3_80141DA4) {
-                case 0:
-                    D_i3_801419B0 |= 2;
+            switch (sPauseMenuOptionIndex) {
+                case PAUSE_GENERAL_CONTINUE:
+                    sMenuStateFlags |= MENU_STATE_UNPAUSE_GAME;
                     break;
-                case 1:
+                case PAUSE_GENERAL_RETRY:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -2739,10 +2739,10 @@ Gfx* func_i3_8012548C(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_800BA8D8(0xE);
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 8;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_RETRY;
                     break;
-                case 5:
+                case PAUSE_GENERAL_QUIT:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -2755,10 +2755,10 @@ Gfx* func_i3_8012548C(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_800BA8D8(0xE);
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x10;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_QUIT;
                     break;
-                case 3:
+                case PAUSE_GENERAL_CHANGE_MACHINE:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -2771,10 +2771,10 @@ Gfx* func_i3_8012548C(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_800BA8D8(0xE);
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x20;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_CHANGE_MACHINE;
                     break;
-                case 4:
+                case PAUSE_GENERAL_CHANGE_COURSE:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -2787,10 +2787,10 @@ Gfx* func_i3_8012548C(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_800BA8D8(0xE);
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x40;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_CHANGE_COURSE;
                     break;
-                case 2:
+                case PAUSE_GENERAL_SETTINGS:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -2803,8 +2803,8 @@ Gfx* func_i3_8012548C(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_800BA8D8(0xE);
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x80;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_SETTINGS;
                     break;
             }
         }
@@ -2814,49 +2814,49 @@ Gfx* func_i3_8012548C(Gfx* gfx) {
     return gfx;
 }
 
-Gfx* func_i3_80125C34(Gfx* gfx) {
+Gfx* func_i3_DrawDeathRacePause(Gfx* gfx) {
     s32 pad[2];
 
-    if (D_i3_80141DA8 > 0) {
-        D_i3_80141DA8 -= 8;
+    if (sPauseMenuScissorBoxTimer > 0) {
+        sPauseMenuScissorBoxTimer -= 8;
     } else {
-        D_i3_80141DA8 = 0;
+        sPauseMenuScissorBoxTimer = 0;
     }
     gDPPipeSync(gfx++);
-    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_i3_80141DA8 + 100, D_i3_80141DA8 + 56, 230 - D_i3_80141DA8,
-                  166 - D_i3_80141DA8);
+    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sPauseMenuScissorBoxTimer + 100, sPauseMenuScissorBoxTimer + 56, 230 - sPauseMenuScissorBoxTimer,
+                  166 - sPauseMenuScissorBoxTimer);
     gfx = func_i3_DrawBeveledBox(gfx, 120, 61, 210, 161, 0, 0, 0, 220);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
 
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_DEATH_RACE_CONTINUE);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_CONTINUE, 140, 80);
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 1);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_DEATH_RACE_RETRY);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 140, 95);
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 2);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_DEATH_RACE_SETTINGS);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_SETTINGS, 140, 110);
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 4);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_DEATH_RACE_QUIT);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_QUIT, 140, 140);
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 3);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_DEATH_RACE_CHANGE_MACHINE);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_CHANGE_MACHINE, 140, 125);
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
-    gfx = Font_DrawScaledString(gfx, 125, (D_i3_80141DA4 * 15) + 97, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 125, (sPauseMenuOptionIndex * 15) + 97, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
     gfx = Font_DrawString(gfx, 166 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 78, "PAUSE", 1, FONT_SET_6, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
     gfx = Font_DrawString(gfx, 165 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 77, "PAUSE", 1, FONT_SET_6, 0);
-    if ((D_i3_80141DA8 == 0) && (D_i3_801419A2 == 0)) {
-        D_i3_80141DA4 = func_i3_801228F8(sPausePlayerNum, D_i3_80141DA4, 4);
+    if ((sPauseMenuScissorBoxTimer == 0) && !sMenuIsBusy) {
+        sPauseMenuOptionIndex = func_i3_801228F8(sPausePlayerNum, sPauseMenuOptionIndex, 4);
         if (gControllers[gPlayerControlPorts[sPausePlayerNum]].buttonPressed & (BTN_A | BTN_START)) {
-            switch (D_i3_80141DA4) {
-                case 0:
-                    D_i3_801419B0 |= 2;
+            switch (sPauseMenuOptionIndex) {
+                case PAUSE_DEATH_RACE_CONTINUE:
+                    sMenuStateFlags |= MENU_STATE_UNPAUSE_GAME;
                     break;
-                case 1:
+                case PAUSE_DEATH_RACE_RETRY:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -2869,10 +2869,10 @@ Gfx* func_i3_80125C34(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_800BA8D8(0xE);
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 8;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_RETRY;
                     break;
-                case 4:
+                case PAUSE_DEATH_RACE_QUIT:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -2885,10 +2885,10 @@ Gfx* func_i3_80125C34(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_800BA8D8(0xE);
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x10;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_QUIT;
                     break;
-                case 3:
+                case PAUSE_DEATH_RACE_CHANGE_MACHINE:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -2901,10 +2901,10 @@ Gfx* func_i3_80125C34(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_800BA8D8(0xE);
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x20;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_CHANGE_MACHINE;
                     break;
-                case 2:
+                case PAUSE_DEATH_RACE_SETTINGS:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -2917,8 +2917,8 @@ Gfx* func_i3_80125C34(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_800BA8D8(0xE);
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x80;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_SETTINGS;
                     break;
             }
         }
@@ -2930,65 +2930,65 @@ Gfx* func_i3_80125C34(Gfx* gfx) {
 
 void func_i3_TriggerLivesDecrease(void);
 
-Gfx* func_i3_80126330(Gfx* gfx) {
+Gfx* func_i3_DrawGpRacePause(Gfx* gfx) {
     s32 pad[2];
 
-    if (D_i3_80141DA8 > 0) {
-        D_i3_80141DA8 -= 8;
+    if (sPauseMenuScissorBoxTimer > 0) {
+        sPauseMenuScissorBoxTimer -= 8;
     } else {
-        D_i3_80141DA8 = 0;
+        sPauseMenuScissorBoxTimer = 0;
     }
     gDPPipeSync(gfx++);
-    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_i3_80141DA8 + 100, D_i3_80141DA8 + 56, 220 - D_i3_80141DA8,
-                  150 - D_i3_80141DA8);
+    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sPauseMenuScissorBoxTimer + 100, sPauseMenuScissorBoxTimer + 56, 220 - sPauseMenuScissorBoxTimer,
+                  150 - sPauseMenuScissorBoxTimer);
     gfx = func_i3_DrawBeveledBox(gfx, 120, 61, 200, 145, 0, 0, 0, 220);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
 
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GP_CONTINUE);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_CONTINUE, 140, 80);
-    if (D_i3_801419B8 <= 0) {
+    if (sPlayer1Lives <= 0) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
     } else {
-        gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 1);
+        gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GP_RETRY);
     }
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 140, 95);
-    gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 3);
+    gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GP_QUIT);
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_QUIT, 140, 125);
-    if (D_i3_801419B8 <= 0) {
+    if (sPlayer1Lives <= 0) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
     } else {
-        gfx = func_i3_SetOptionColor(gfx, D_i3_80141DA4 - 2);
+        gfx = func_i3_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GP_SETTINGS);
     }
     gfx = func_i3_DrawRaceMenuTexture(gfx, RACE_MENU_SETTINGS, 140, 110);
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
-    gfx = Font_DrawScaledString(gfx, 125, (D_i3_80141DA4 * 15) + 97, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 125, (sPauseMenuOptionIndex * 15) + 97, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
     gfx = Font_DrawString(gfx, 162 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 78, "PAUSE", 1, FONT_SET_6, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
     gfx = Font_DrawString(gfx, 161 - (Font_GetStringWidth("PAUSE", FONT_SET_6, 1) / 2), 77, "PAUSE", 1, FONT_SET_6, 0);
-    if ((D_i3_80141DA8 == 0) && (D_i3_801419A2 == 0)) {
-        D_i3_80141DA4 = func_i3_801228F8(sPausePlayerNum, D_i3_80141DA4, 3);
-        if (((D_i3_80141DA4 == 1) || (D_i3_80141DA4 == 2)) && (D_i3_801419B8 <= 0)) {
+    if ((sPauseMenuScissorBoxTimer == 0) && !sMenuIsBusy) {
+        sPauseMenuOptionIndex = func_i3_801228F8(sPausePlayerNum, sPauseMenuOptionIndex, 3);
+        if (((sPauseMenuOptionIndex == 1) || (sPauseMenuOptionIndex == 2)) && (sPlayer1Lives <= 0)) {
             if ((gControllers[gPlayerControlPorts[0]].stickY > 40) ||
                 (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_UP)) {
-                D_i3_80141DA4 = 0;
+                sPauseMenuOptionIndex = 0;
             } else {
-                D_i3_80141DA4 = 3;
+                sPauseMenuOptionIndex = 3;
             }
         }
         if (gControllers[gPlayerControlPorts[sPausePlayerNum]].buttonPressed & (BTN_A | BTN_START)) {
-            switch (D_i3_80141DA4) {
-                case 0:
-                    D_i3_801419B0 |= 2;
+            switch (sPauseMenuOptionIndex) {
+                case PAUSE_GP_CONTINUE:
+                    sMenuStateFlags |= MENU_STATE_UNPAUSE_GAME;
                     break;
-                case 1:
+                case PAUSE_GP_RETRY:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -3007,10 +3007,10 @@ Gfx* func_i3_80126330(Gfx* gfx) {
                             func_800BA8D8(0x2C);
                         }
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 8;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_RETRY;
                     break;
-                case 3:
+                case PAUSE_GP_QUIT:
                     if (D_800CD010 == 0) {
                         func_800BA8D8(0xE);
                     }
@@ -3023,10 +3023,10 @@ Gfx* func_i3_80126330(Gfx* gfx) {
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x10;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_QUIT;
                     break;
-                case 2:
+                case PAUSE_GP_SETTINGS:
                     if (D_800CD010 == 0) {
                         func_800BB0C0(2);
                     }
@@ -3045,8 +3045,8 @@ Gfx* func_i3_80126330(Gfx* gfx) {
                             func_800BA8D8(0x2C);
                         }
                     }
-                    D_i3_801419A2 = 1;
-                    D_i3_801419B0 |= 0x80;
+                    sMenuIsBusy = true;
+                    sMenuStateFlags |= MENU_STATE_SETTINGS;
                     break;
             }
         }
@@ -3502,7 +3502,7 @@ Gfx* func_i3_DrawRetire(Gfx* gfx, s32 left, s32 top, f32 scale) {
 }
 
 void func_i3_80128D8C(void) {
-    D_i3_801419B8++;
+    sPlayer1Lives++;
 }
 
 Gfx* func_i3_80128DA4(Gfx* gfx, s32 arg1) {
@@ -3520,7 +3520,7 @@ Gfx* func_i3_80128DA4(Gfx* gfx, s32 arg1) {
     s32 pad[2];
     f32 sp58;
 
-    if ((gNumPlayers == 1) && ((gGameMode != GAMEMODE_GP_RACE) || (D_i3_801419B8 > 0)) && (D_i3_80141C30[0] > 120)) {
+    if ((gNumPlayers == 1) && ((gGameMode != GAMEMODE_GP_RACE) || (sPlayer1Lives > 0)) && (D_i3_80141C30[0] > 120)) {
         gControllers[gGameFrameCount % 4].unk_78 = 1;
 
         D_i3_80141BC0[0] += 2;
@@ -4196,7 +4196,7 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                     }
                 }
 
-                if (D_i3_801419A2 == 0) {
+                if (!sMenuIsBusy) {
                     j = gControllers[gPlayerControlPorts[i]].stickY;
                     if (D_i3_80141D68 == 1) {
                         if (j > 50) {
@@ -4234,7 +4234,7 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
 
     if (D_i3_80141D10) {}
 
-    if (D_i3_801419A2 == 0) {
+    if (!sMenuIsBusy) {
         for (i = 0; i < gNumPlayers; i++) {
             if (gControllers[gPlayerControlPorts[i]].buttonPressed & (BTN_A | BTN_START)) {
                 if ((D_i3_80141D10 > 60) && (D_i3_80141D10 < 30000)) {
@@ -4252,7 +4252,7 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
         }
     }
 
-    if ((D_i3_80141D10 == 60060) && (D_i3_801419A2 == 0)) {
+    if ((D_i3_80141D10 == 60060) && !sMenuIsBusy) {
         for (i = 0; i < gTotalRacers; i++) {
             D_80115DD0[i] = gRacers[i].position;
         }
@@ -4262,11 +4262,11 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
         }
 
         if (D_i3_80141D68 == 0) {
-            D_i3_801419A2 = 1;
-            D_i3_801419B0 |= 0x40;
+            sMenuIsBusy = true;
+            sMenuStateFlags |= MENU_STATE_CHANGE_COURSE;
         } else {
-            D_i3_801419A2 = 1;
-            D_i3_801419B0 |= 0x10;
+            sMenuIsBusy = true;
+            sMenuStateFlags |= MENU_STATE_QUIT;
         }
     }
     gDPPipeSync(gfx++);
@@ -4619,7 +4619,7 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
             }
 
             if ((D_i3_80141D78[playerIndex] == 2) && (gCourseIndex < COURSE_X_1) && (gTotalLapCount == 3)) {
-                D_i3_801419B0 |= 4;
+                sMenuStateFlags |= MENU_STATE_RACE_FINISH_SAVE;
             }
         }
         D_i3_80141D78[playerIndex]++;
@@ -4655,7 +4655,7 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
                 }
             }
             if ((D_i3_80141BE0[playerIndex] == 2) && (gCourseIndex < COURSE_X_1) && (gTotalLapCount == 3)) {
-                D_i3_801419B0 |= 4;
+                sMenuStateFlags |= MENU_STATE_RACE_FINISH_SAVE;
             }
         }
     } else {
@@ -4684,8 +4684,8 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     f32 var_fa0;
     s32 playerIndex = 0;
 
-    D_80115DE0 = gTotalRacers - gRacersRetired;
-    if ((gNumPlayers == 1) && (gTotalRacers != 1) && !(gGameFrameCount % 64) && (D_800DCE5C == 0)) {
+    gRacersRemaining = gTotalRacers - gRacersRetired;
+    if ((gNumPlayers == 1) && (gTotalRacers != 1) && !(gGameFrameCount % 64) && !gGamePaused) {
         func_i3_801175A4();
     }
     if (gNumPlayers == 1) {
@@ -4747,7 +4747,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
             gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 8, 308, 232);
         }
 
-        if ((gNumPlayers != 1) || (gGameMode != GAMEMODE_GP_RACE) || (D_i3_801419B8 > 0) || (D_i3_80141C20[0] < 2)) {
+        if ((gNumPlayers != 1) || (gGameMode != GAMEMODE_GP_RACE) || (sPlayer1Lives > 0) || (D_i3_80141C20[0] < 2)) {
             if (((gNumPlayers != 1) || (D_i3_80141DF0[0] != 2)) &&
                 ((gNumPlayers != 1) || (D_800E5220[playerIndex].unk_04 != 10) || (D_i3_80141D78[0] < 300))) {
                 gfx = func_i3_DrawHUD(gfx);
@@ -4760,10 +4760,10 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                     }
                     if ((gGameMode != GAMEMODE_DEATH_RACE) && (D_i3_80141C20[i] == 0) &&
                         !(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000)) {
-                        gfx = func_i3_80135B20(gfx, gNumPlayers - 1, i);
+                        gfx = func_i3_DrawCourseMinimap(gfx, gNumPlayers - 1, i);
                     }
                     if (gNumPlayers == 3) {
-                        gfx = func_i3_80135B20(gfx, gNumPlayers - 1, 3);
+                        gfx = func_i3_DrawCourseMinimap(gfx, gNumPlayers - 1, 3);
                     }
                     gfx = func_i3_DrawPosition(gfx, gNumPlayers - 1, i);
                 }
@@ -4774,7 +4774,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
             }
         }
     }
-    if (((gGameFrameCount % 120) == 0) && (D_800DCE5C == 0)) {
+    if (((gGameFrameCount % 120) == 0) && !gGamePaused) {
         for (i = 0; i < gTotalRacers; i++) {
             if (!(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000) &&
                 (gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000)) {
@@ -4801,7 +4801,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
             temp_ft5 = gRacers[playerIndex].raceDistance / gRacers[playerIndex].raceTime;
             if (gGameMode == GAMEMODE_GP_RACE) {
                 if (gRaceTimeIntervalToggle) {
-                    if ((temp_ft5 > 0.1f) && (D_80115DE0 >= 2)) {
+                    if ((temp_ft5 > 0.1f) && (gRacersRemaining >= 2)) {
                         if (gRacers[playerIndex].position != 1) {
                             var_fa0 =
                                 ((gRacersByPosition[0]->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) *
@@ -4870,19 +4870,19 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
             }
         }
 
-        if ((gGameMode == GAMEMODE_TIME_ATTACK) && (D_800DCE5C == 0) && (D_800F5DE6 != 0) &&
+        if ((gGameMode == GAMEMODE_TIME_ATTACK) && !gGamePaused && (D_800F5DE6 != 0) &&
             (D_800E5220[playerIndex].unk_04 == 6) && (D_i3_80141C20[0] == 0)) {
             gfx = func_i3_801239D0(gfx);
         }
         if (gGameMode != GAMEMODE_PRACTICE) {
             if ((gRacers[playerIndex].lap == gTotalLapCount) && (D_800CD010 == 0) &&
-                (D_i3_80141EA8[playerIndex].unk_04 > 0) && (D_800DCE5C == 0)) {
+                (D_i3_80141EA8[playerIndex].unk_04 > 0) && !gGamePaused) {
                 if (((D_i3_80141EA8[playerIndex].unk_04 % 20) >= 5) && (D_i3_80141EA8[playerIndex].unk_04 > 120)) {
                     gfx = func_i3_80121178(gfx, 0);
                 }
                 D_i3_80141CD0[playerIndex]++;
             }
-            if ((gRacers[playerIndex].lap == 2) && (D_800CD010 == 0) && (D_800DCE5C == 0) &&
+            if ((gRacers[playerIndex].lap == 2) && (D_800CD010 == 0) && !gGamePaused &&
                 (D_i3_80141EA8[playerIndex].unk_04 > 0)) {
                 if (((D_i3_80141EA8[playerIndex].unk_04 % 20) >= 5) && (D_i3_80141EA8[playerIndex].unk_04 > 120)) {
                     gfx = func_i3_801216C0(gfx, 0);
@@ -4890,7 +4890,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 D_i3_80141CE0[playerIndex]++;
             }
         }
-        if ((D_800DCE5C == 0) && (D_800E5220[playerIndex].unk_04 == 4)) {
+        if (!gGamePaused && (D_800E5220[playerIndex].unk_04 == 4)) {
             gDPPipeSync(gfx++);
             gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 16, 308, 224);
             D_i3_80141D8C++;
@@ -5004,9 +5004,9 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         if (D_800CD010 == 0) {
                             func_8007E0EC();
                         }
-                        D_i3_801419A2 = 1;
+                        sMenuIsBusy = true;
                         D_i3_801419A6 = 30;
-                        D_i3_801419B0 |= 0x200;
+                        sMenuStateFlags |= MENU_STATE_GP_NEXT_COURSE;
                         D_i3_80141B98 = 255;
                         break;
                     case 3:
@@ -5019,8 +5019,8 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         if (D_800CD010 == 0) {
                             func_8007E0CC();
                         }
-                        D_i3_801419A2 = 1;
-                        D_i3_801419B0 |= 0x10;
+                        sMenuIsBusy = true;
+                        sMenuStateFlags |= MENU_STATE_QUIT;
                         D_i3_80141B98 = 255;
                         break;
                     case 255:
@@ -5039,7 +5039,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 D_i3_80141C40[0] = -20.0f;
                 D_i3_80141C20[0] = 1;
             }
-            if ((gGameMode == GAMEMODE_GP_RACE) && (D_i3_801419B8 <= 0)) {
+            if ((gGameMode == GAMEMODE_GP_RACE) && (sPlayer1Lives <= 0)) {
                 switch (D_i3_80141C20[0]) {
                     case 1:
                         gfx = func_i3_80128DA4(gfx, 0);
@@ -5070,8 +5070,8 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                             if (D_800CD010 == 0) {
                                 func_8007E0CC();
                             }
-                            D_i3_801419A2 = 1;
-                            D_i3_801419B0 |= 0x400;
+                            sMenuIsBusy = true;
+                            sMenuStateFlags |= MENU_STATE_400;
                         }
                     } else if (D_i3_80141C30[0] > 200) {
                         if (gGameMode != GAMEMODE_DEATH_RACE) {
@@ -5089,7 +5089,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 racer = &gRacers[i];
                 if (i < gNumPlayers) {
                     if (racer->lap == gTotalLapCount) {
-                        if ((D_i3_80141EA8[i].unk_04 > 0) && (D_800DCE5C == 0)) {
+                        if ((D_i3_80141EA8[i].unk_04 > 0) && !gGamePaused) {
                             if (((D_i3_80141EA8[i].unk_04 % 20) >= 5) && (D_i3_80141EA8[i].unk_04 > 120)) {
                                 gfx = func_i3_80121178(gfx, i);
                             }
@@ -5097,7 +5097,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         }
                     }
 
-                    if ((racer->lap == 2) && (D_800CD010 == 0) && (D_800DCE5C == 0)) {
+                    if ((racer->lap == 2) && (D_800CD010 == 0) && !gGamePaused) {
                         if (D_i3_80141EA8[i].unk_04 > 0) {
                             if (((D_i3_80141EA8[i].unk_04 % 20) >= 5) && (D_i3_80141EA8[i].unk_04 > 120)) {
                                 gfx = func_i3_801216C0(gfx, i);
@@ -5171,21 +5171,21 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
         }
     }
     if (D_800CD010 == 0) {
-        if (D_800DCE5C != 0) {
+        if (gGamePaused) {
             if (gGameMode == GAMEMODE_GP_RACE) {
-                gfx = func_i3_80126330(gfx);
+                gfx = func_i3_DrawGpRacePause(gfx);
             } else if (gGameMode == GAMEMODE_DEATH_RACE) {
-                gfx = func_i3_80125C34(gfx);
+                gfx = func_i3_DrawDeathRacePause(gfx);
             } else {
-                gfx = func_i3_8012548C(gfx);
+                gfx = func_i3_DrawGeneralPause(gfx);
             }
         } else {
-            D_i3_80141DA8 = 60;
-            D_i3_80141DA4 = 0;
+            sPauseMenuScissorBoxTimer = 60;
+            sPauseMenuOptionIndex = 0;
             for (i = 0; i < gNumPlayers; i++) {
                 if ((gControllers[gPlayerControlPorts[i]].buttonPressed & BTN_START) && (D_800CD010 == 0) &&
                     (D_800E5FBC == 0) && (gRaceIntroTimer < 320)) {
-                    D_i3_801419B0 |= 1;
+                    sMenuStateFlags |= MENU_STATE_PAUSE_GAME;
                     sPausePlayerNum = i;
                     break;
                 }

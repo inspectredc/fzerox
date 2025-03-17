@@ -2,7 +2,7 @@
 #include "fzx_course.h"
 #include "assets/segment_17B960.h"
 
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 
 void func_i2_80103A70(void) {
     func_i3_8012F324();
@@ -11,7 +11,7 @@ void func_i2_80103A70(void) {
     func_80085610();
     func_i2_801044F0();
     func_8006D414();
-    D_800DCE5C = 0;
+    gGamePaused = false;
     func_i3_8011B520();
     func_i3_ResetLivesChangeCounter();
     func_i3_InitRacePortraits();
@@ -27,7 +27,7 @@ extern CourseData gCourseData;
 
 void Race_Init(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
-    D_800DCE5C = 0;
+    gGamePaused = false;
     func_800A4EAC();
     func_i3_80116C4C();
     func_8008C7C8();
@@ -40,7 +40,7 @@ void Race_Init(void) {
     func_8006EC7C();
     func_80071260(0);
     func_i3_8012F324();
-    func_i3_801356A0();
+    func_i3_InitCourseMinimap();
     func_i3_8011B520();
     func_i3_InitRacePortraits();
 }
@@ -65,7 +65,7 @@ extern Vtx* D_800E5ECC;
 extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
 extern GfxPool D_1000000;
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 extern unk_struct_1DC D_800E5220[];
 extern FrameBuffer* D_800DCCD0[];
 extern s16 D_800CCFE4;
@@ -107,9 +107,9 @@ Gfx* Race_Draw(Gfx* gfx) {
     } else {
         gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
     }
-    D_800F8520 = D_800DCCF0->unk_10008;
-    D_800E5ECC = D_800DCCF0->unk_21B48;
-    D_800E5ED0 = &D_800DCCF0->unk_21B48[0x7FF];
+    D_800F8520 = gGfxPool->unk_10008;
+    D_800E5ECC = gGfxPool->unk_21B48;
+    D_800E5ED0 = &gGfxPool->unk_21B48[0x7FF];
     switch (gNumPlayers) {
         case 1:
             gfx = func_i3_801381DC(gfx, 0, 0);

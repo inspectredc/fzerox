@@ -30,12 +30,12 @@ typedef struct CourseSegment {
     /* 0x68 */ f32 unk_68;
     /* 0x6C */ f32 unk_6C;
     /* 0x70 */ f32 unk_70;
-    /* 0x74 */ Vec3f unk_74;
-    /* 0x80 */ Vec3f unk_80;
-    /* 0x8C */ Vec3f unk_8C;
-    /* 0x98 */ f32 unk_98;
-    /* 0x9C */ f32 unk_9C;
-    /* 0xA0 */ f32 unk_A0;
+    /* 0x74 */ Vec3f quarterMarkPos;
+    /* 0x80 */ Vec3f halfMarkPos;
+    /* 0x8C */ Vec3f threeQuarterMarkPos;
+    /* 0x98 */ f32 quarterMarkLength;
+    /* 0x9C */ f32 halfMarkLength;
+    /* 0xA0 */ f32 threeQuarterMarkLength;
 } CourseSegment; // size = 0xA4
 
 typedef struct CarInfo {

@@ -59,7 +59,7 @@ unk_80144F74 D_i8_80144F84[] = {
 };
 
 extern s16 D_800CCFE8;
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 extern s32 D_i2_80106F10;
 extern CourseData gCourseData;
 extern s32 gDifficulty;
@@ -68,7 +68,7 @@ void func_i8_80143A78(void);
 
 void Records_Init(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
-    D_800DCE5C = 0;
+    gGamePaused = false;
     gDifficulty = MASTER;
     gRacers[0].character = CAPTAIN_FALCON;
     func_800A4EAC();
@@ -430,7 +430,7 @@ extern s32 D_800DCD04;
 extern Vtx* D_800E5ECC;
 extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 
 Gfx* func_i8_801449B8(Gfx*);
 
@@ -454,9 +454,9 @@ Gfx* Records_Draw(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
 
-    D_800F8520 = D_800DCCF0->unk_10008;
-    D_800E5ECC = D_800DCCF0->unk_21B48;
-    D_800E5ED0 = &D_800DCCF0->unk_21B48[0x7FF];
+    D_800F8520 = gGfxPool->unk_10008;
+    D_800E5ECC = gGfxPool->unk_21B48;
+    D_800E5ED0 = &gGfxPool->unk_21B48[0x7FF];
     gfx = func_i3_801381DC(gfx, 0, 0);
     gfx = func_800A9938(gfx, 0);
     gfx = func_8006DAAC(gfx, 0);
