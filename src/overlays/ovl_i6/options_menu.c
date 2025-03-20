@@ -541,10 +541,149 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
                          arg1 + sp54 + 0x2A, arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);
 }
 
+extern GfxPool* gGfxPool;
+extern s32 D_800DCCFC;
+
+#ifdef NON_EQUIVALENT
+void func_i6_8011D394(void) {
+    s32 i;
+    s32 j;
+    MtxF mtxF;
+    f32 sp80;
+    Vtx* vtx;
+    f32 temp_fs0;
+    f32 temp_fs0_2;
+    f32 temp_fs1;
+    f32 temp_fs2;
+    f32 temp_fs2_2;
+    f32 temp_fs3;
+    f32 temp_fs4;
+    f32 temp_fs5;
+    f32 temp_ft0;
+    f32 temp_ft5;
+    f32 temp_ft5_2;
+    f32* var_t1;
+    f32* var_t2;
+    f32* var_t3;
+    f32* var_t4;
+    s16* temp_t8;
+    s16* temp_v0;
+    s16* temp_v0_2;
+    s16* var_ra;
+    s16* var_s5;
+    s32 temp_a3;
+    s32 temp_ft2;
+    s32 temp_lo;
+    s32 temp_t0;
+    s32 var_a0;
+    s32 var_a3;
+    s32 var_s2;
+    s32 var_s4;
+    s32 var_v1;
+    void* temp_v0_3;
+    s32 temp;
+
+    switch (D_i6_801247A8) {
+        case 0:
+            break;
+        case 1:
+            if (D_800CD3C4 == 0) {
+                D_i6_801247A8 = 2;
+                D_i6_801247AA = 0;
+            }
+            break;
+        case 2:
+            temp_a3 = (11 - ((D_i6_801247AA * 11) / 120));
+            temp = (16 - ((D_i6_801247AA * 16) / 120));
+            for (i = 0; i < 16; i++) {
+
+                if (i < temp) {
+                    continue;
+                }
+                // unrolls
+                for (j = 0; j < 11; j++) {
+                    if (j < temp_a3) {
+                        continue;
+                    }
+                    D_i6_80124620[i * 11 + j] -= 5;
+                    if (D_i6_80124620[i * 11 + j] < 0) {
+                        D_i6_80124620[i * 11 + j] = 0;
+                    }
+                }
+            }
+            D_i6_801247AA++;
+            break;
+    }
+    if (D_i6_801247A8 == 0) {
+        return;
+    }
+
+    D_i6_80124618 = D_i6_8011FB18[D_800DCCFC];
+    func_8006D2E0(gGfxPool->unk_2B248, NULL, 1.0f, 0.0f, 319.0f, 239.0f, 0.0f, -100.0f, 100.0f);
+    vtx = D_i6_80124618;
+    var_s5 = D_i6_80124620;
+
+    for (var_s4 = 0; var_s4 < 240; var_s4 += 16) {
+
+        var_ra = var_s5;
+
+        for (var_s2 = 0; var_s2 < 320; var_s2 += 32) {
+            // temp_fs2 = var_s4 - 0.5f;
+            // temp_fs1 = var_s4 - 2.0f;
+            // temp_fs0 = var_s2 - 0.5f;
+            // temp_ft5 = var_s2 - 2.0f;
+            mtxF.m[0][1] = var_s4 - 0.5f;
+            mtxF.m[2][1] = var_s4 - 2.0f;
+            mtxF.m[0][0] = var_s4 - 0.5f;
+            mtxF.m[2][0] = var_s4 - 2.0f;
+            mtxF.m[1][2] = var_s2 - 0.5f;
+            mtxF.m[1][0] = var_s2 - 0.5f;
+            mtxF.m[3][2] = var_s2 - 2.0f;
+            mtxF.m[3][0] = var_s2 - 2.0f;
+            // temp_fs0 += 0x20;
+            // temp_fs2 += 0x10;
+            // temp_ft5 += 0x20;
+            // temp_fs1 += 0x10;
+            mtxF.m[1][3] = var_s2 - 0.5f + 0x20;
+            mtxF.m[1][1] = var_s2 - 0.5f + 0x20;
+            mtxF.m[0][3] = var_s4 - 0.5f + 0x10;
+            mtxF.m[0][2] = var_s4 - 0.5f + 0x10;
+            mtxF.m[3][3] = var_s2 - 2.0f + 0x20;
+            mtxF.m[3][1] = var_s2 - 2.0f + 0x20;
+            mtxF.m[2][3] = var_s4 - 2.0f + 0x10;
+            mtxF.m[2][2] = var_s4 - 2.0f + 0x10;
+
+            var_t1 = &mtxF.m[3][0];
+            var_t2 = &mtxF.m[2][0];
+            var_t3 = &mtxF.m[1][0];
+            var_t4 = &mtxF.m[0][0];
+
+            for (var_a3 = 0; var_a3 < 4; var_a3++) {
+                s32 x, y, s, t;
+                x = (s32) *var_t1;
+                y = (s32) *var_t2;
+                s = (s32) (*var_t3 * 32.0f);
+                t = (s32) (*var_t4 * 32.0f);
+                temp_lo = (var_a3 >> 1) * 11 * ((var_a3 % 2U) + 1);
+                temp_t8 = &var_ra[var_a3 % 2U];
+                SET_VTX(vtx, x, y, 0, s, t, 255, 255, 255, temp_t8[temp_lo])
+                vtx++;
+                var_t1++;
+                var_t2++;
+                var_t3++;
+                var_t4++;
+            }
+            var_ra++;
+        }
+        var_s5 += 0x16;
+    }
+}
+#else
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i6/options_menu/func_i6_8011D394.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/options_menu/func_i6_8011D394.s")
+#endif
 #endif
 
 extern GfxPool D_1000000;

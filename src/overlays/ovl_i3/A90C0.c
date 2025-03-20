@@ -1180,7 +1180,7 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
     if (D_i3_8013DBE8[var_a3] < racer->unk_1EC) {
         racer->unk_1EC = D_i3_8013DBE8[var_a3];
     }
-    if (((D_80141900 >= 0x15) || (D_800F80A8[0] > 30)) && (gNumPlayers == 1) && (racer->id != 0) &&
+    if (((D_80141900 > 20) || (D_800F80A8[0] > 30)) && (gNumPlayers == 1) && (racer->id != 0) &&
         (racer->raceTime > 10000) && !(sPlayerRacer->stateFlags & RACER_STATE_FLAGS_8000000) &&
         (func_i3_fabsf(sPlayerRacer->unk_33C - sp94) < 138.0f)) {
 

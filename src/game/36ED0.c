@@ -368,10 +368,189 @@ void func_8009CED0(s32 venue) {
     }
 }
 
+#ifdef NON_MATCHING
+// Stack issues
+s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) {
+    s32 i;
+    Vec3f sp130;
+    CourseSegment* var_s1_2;
+    CourseSegment* var_v1;
+    CourseSegment* var_v0;
+    CourseSegment* var_a0;
+    f32 square;
+    f32 temp_fv1;
+    f32 sp114;
+    f32 sp110;
+    f32 sp10C;
+    f32 temp_fv1_2;
+    f32 temp_fa0;
+    f32 temp_fa1;
+    f32 temp_ft4;
+    f32 sp78;
+    f32 sp74;
+    f32 temp_fs5;
+    f32 var_fs4;
+    f32 spE8;
+    CourseSegment* var_s0;
+    CourseSegment* var_s1;
+    CourseSegment* var_s2;
+    CourseSegment* var_s3;
+    Racer_unk_C sp88;
+
+    i = 3;
+
+    sp130.x = arg1 - arg0->unk_44.x;
+    sp130.y = arg2 - arg0->unk_44.y;
+    sp130.z = arg3 - arg0->unk_44.z;
+
+    var_s0 = arg0->courseSegment;
+    var_s1 = var_s0->next;
+    var_s2 = var_s0->prev;
+    var_s3 = var_s1->next;
+    var_fs4 = var_s0->unk_24;
+
+    sp114 = var_fs4 - 2.0f;
+    sp110 = sp114 - 1.0f;
+    sp10C = sp110 + var_fs4;
+
+    sp88.unk_04 = arg0->unk_04;
+    sp88.courseSegment = arg0->courseSegment;
+    sp88.unk_0C = arg0->unk_0C;
+    sp88.unk_18 = arg0->unk_18;
+
+    while ((SQ_SUM(&sp130) > 5.0f) && (--i != 0)) {
+        sp88.unk_04 += (DOT_XYZ(&sp130, &sp88.unk_0C) / SQ(sp88.unk_18));
+        if (sp88.unk_04 >= 1.0f) {
+            if (sp88.unk_04 > 1.9f) {
+                return -1;
+            }
+            sp88.courseSegment = sp88.courseSegment->next;
+            var_s2 = var_s0;
+            var_s0 = var_s1;
+            var_s1 = var_s3;
+            var_s3 = sp88.courseSegment->next->next;
+            var_fs4 = sp88.courseSegment->unk_24;
+            sp114 = var_fs4 - 2.0f;
+            sp110 = sp114 - 1.0f;
+            sp10C = sp110 + var_fs4;
+            sp88.unk_04 -= 1.0f;
+            sp88.unk_04 *= (sp88.unk_18 / func_8009E538(sp88.courseSegment, 0.0f, &sp130));
+        } else if (sp88.unk_04 < 0.0f) {
+            if (sp88.unk_04 < -0.9f) {
+                return -1;
+            }
+            sp88.courseSegment = sp88.courseSegment->prev;
+            var_s3 = var_s1;
+            var_s1 = var_s0;
+            var_s0 = var_s2;
+            var_s2 = sp88.courseSegment->prev;
+            var_fs4 = sp88.courseSegment->unk_24;
+            sp114 = var_fs4 - 2.0f;
+            sp110 = sp114 - 1.0f;
+            sp10C = sp110 + var_fs4;
+
+            sp88.unk_04 *= (sp88.unk_18 / func_8009E538(sp88.courseSegment, 1.0f, &sp130));
+            sp88.unk_04 += 1.0f;
+        }
+        square = SQ(sp88.unk_04);
+        temp_fv1_2 = square * sp88.unk_04;
+        temp_fa0 = (((2.0f * square) - sp88.unk_04) - temp_fv1_2) * var_fs4;
+        temp_fa1 = ((sp110 * square) - sp114 * temp_fv1_2) + 1.0f;
+        temp_ft4 = (sp114 * temp_fv1_2 - (sp10C * square)) + (var_fs4 * sp88.unk_04);
+        spE8 = (temp_fv1_2 - square) * var_fs4;
+
+        sp88.unk_1C.x = (temp_fa0 * var_s2->pos.x) + (temp_fa1 * var_s0->pos.x) + (temp_ft4 * var_s1->pos.x) +
+                        (spE8 * var_s3->pos.x);
+        sp88.unk_1C.y = (temp_fa0 * var_s2->pos.y) + (temp_fa1 * var_s0->pos.y) + (temp_ft4 * var_s1->pos.y) +
+                        (spE8 * var_s3->pos.y);
+        sp88.unk_1C.z = (temp_fa0 * var_s2->pos.z) + (temp_fa1 * var_s0->pos.z) + (temp_ft4 * var_s1->pos.z) +
+                        (spE8 * var_s3->pos.z);
+
+        temp_fs5 = (sp110 + var_fs4) - 3.0f;
+        sp78 = temp_fs5 + var_fs4;
+        sp74 = sp78 + var_fs4;
+
+        temp_fa0 = (((4.0f * sp88.unk_04) - 1.0f) - (3.0f * square)) * var_fs4;
+        temp_fa1 = (temp_fs5 * sp88.unk_04) - sp78 * square;
+        temp_ft4 = (sp78 * square - (sp74 * sp88.unk_04)) + var_fs4;
+        spE8 = ((3.0f * square) - (2.0f * sp88.unk_04)) * var_fs4;
+
+        sp88.unk_0C.x = (temp_fa0 * var_s2->pos.x) + (temp_fa1 * var_s0->pos.x) + (temp_ft4 * var_s1->pos.x) +
+                        (spE8 * var_s3->pos.x);
+        sp88.unk_0C.y = (temp_fa0 * var_s2->pos.y) + (temp_fa1 * var_s0->pos.y) + (temp_ft4 * var_s1->pos.y) +
+                        (spE8 * var_s3->pos.y);
+        sp88.unk_0C.z = (temp_fa0 * var_s2->pos.z) + (temp_fa1 * var_s0->pos.z) + (temp_ft4 * var_s1->pos.z) +
+                        (spE8 * var_s3->pos.z);
+
+        sp88.unk_18 = sqrtf(SQ_SUM(&sp88.unk_0C));
+
+        sp88.unk_28.x = arg1 - sp88.unk_1C.x;
+        sp88.unk_28.y = arg2 - sp88.unk_1C.y;
+        sp88.unk_28.z = arg3 - sp88.unk_1C.z;
+
+        sp88.unk_40 = sqrtf(SQ_SUM(&sp88.unk_28));
+
+        if (sp88.unk_40 < 0.001f) {
+            break;
+        }
+        sp88.unk_34.x = CROSS_X(&sp88.unk_28, &sp88.unk_0C);
+        sp88.unk_34.y = CROSS_Y(&sp88.unk_28, &sp88.unk_0C);
+        sp88.unk_34.z = CROSS_Z(&sp88.unk_28, &sp88.unk_0C);
+
+        sp88.unk_28.x = CROSS_X(&sp88.unk_0C, &sp88.unk_34);
+        sp88.unk_28.y = CROSS_Y(&sp88.unk_0C, &sp88.unk_34);
+        sp88.unk_28.z = CROSS_Z(&sp88.unk_0C, &sp88.unk_34);
+
+        temp_fv1 = sp88.unk_40 / sqrtf(SQ_SUM(&sp88.unk_28));
+        sp130.x = arg1 - ((sp88.unk_28.x * temp_fv1) + sp88.unk_1C.x);
+        sp130.y = arg2 - ((sp88.unk_28.y * temp_fv1) + sp88.unk_1C.y);
+        sp130.z = arg3 - ((sp88.unk_28.z * temp_fv1) + sp88.unk_1C.z);
+    }
+
+    var_s1_2 = sp88.courseSegment;
+    var_v0 = var_s1_2->next;
+    var_v1 = var_s1_2->prev;
+    var_a0 = var_v0->next;
+
+    square = SQ(sp88.unk_04);
+
+    var_fs4 = var_s1_2->unk_24;
+    temp_fa0 = (((4.0f * sp88.unk_04) - 1.0f) - (3.0f * square)) * var_fs4;
+    temp_fa1 = ((6.0f - 3.0f * var_fs4) * square) + (((2.0f * var_fs4) - 6.0f) * sp88.unk_04);
+    temp_ft4 = ((3.0f * var_fs4 - 6.0f) * square) + ((6.0f - (4.0f * var_fs4)) * sp88.unk_04) + var_fs4;
+    spE8 = ((3.0f * square) - (2.0f * sp88.unk_04)) * var_fs4;
+
+    arg4->x.x =
+        (temp_fa0 * var_v1->pos.x) + (temp_fa1 * var_s1_2->pos.x) + (temp_ft4 * var_v0->pos.x) + (spE8 * var_a0->pos.x);
+    arg4->x.y =
+        (temp_fa0 * var_v1->pos.y) + (temp_fa1 * var_s1_2->pos.y) + (temp_ft4 * var_v0->pos.y) + (spE8 * var_a0->pos.y);
+    arg4->x.z =
+        (temp_fa0 * var_v1->pos.z) + (temp_fa1 * var_s1_2->pos.z) + (temp_ft4 * var_v0->pos.z) + (spE8 * var_a0->pos.z);
+
+    temp_fv1 = 1.0f / sqrtf(SQ_SUM(&arg4->x));
+    arg4->x.x *= temp_fv1;
+    arg4->x.y *= temp_fv1;
+    arg4->x.z *= temp_fv1;
+
+    arg4->y.x = ((var_s1_2->next->unk_0C.x - var_s1_2->unk_0C.x) * sp88.unk_04) + var_s1_2->unk_0C.x;
+    arg4->y.y = ((var_s1_2->next->unk_0C.y - var_s1_2->unk_0C.y) * sp88.unk_04) + var_s1_2->unk_0C.y;
+    arg4->y.z = ((var_s1_2->next->unk_0C.z - var_s1_2->unk_0C.z) * sp88.unk_04) + var_s1_2->unk_0C.z;
+
+    arg4->z.x = CROSS_X(&arg4->y, &arg4->x);
+    arg4->z.y = CROSS_Y(&arg4->y, &arg4->x);
+    arg4->z.z = CROSS_Z(&arg4->y, &arg4->x);
+    temp_fv1 = 1.0f / sqrtf(SQ_SUM(&arg4->z));
+    arg4->z.x *= temp_fv1;
+    arg4->z.y *= temp_fv1;
+    arg4->z.z *= temp_fv1;
+    return 0;
+}
+#else
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/36ED0/func_8009D16C.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_8009D16C.s")
+#endif
 #endif
 
 #ifdef NON_EQUIVALENT
@@ -550,7 +729,7 @@ f32 func_8009E108(CourseSegment* arg0, f32 arg1, f32* arg2) {
     cube = square * var_fs0;
     temp_fa0 = (2.0f * square - var_fs0 - cube) * spDC;      // spDC . -x(1-x)^2
     temp_fa1 = spD4 * square - spD8 * cube + 1.0f;           // spDC . x^2(1-x) + (2x+1)(1-x)^2
-    temp_ft4 = spD8 * cube + spD0 * square + spDC * var_fs0; // spDC . x(1-x)^2 - x^2(2x-3)
+    temp_ft4 = spD8 * cube + spD0 * square + spDC * var_fs0; // spDC . x(1-x)^2 + x^2(3-2x)
     spA4 = (cube - square) * spDC;                           // spDC . -x^2(1-x)
 
     sp98.x = temp_fa0 * temp_s1->pos.x + temp_fa1 * arg0->pos.x + temp_ft4 * temp_s0->pos.x + spA4 * temp_s2->pos.x;
@@ -614,12 +793,10 @@ f32 func_8009E538(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
     square = SQ(arg1);
     temp_fv0 = arg0->unk_24;
 
-    sp44 = (4.0f * arg1 - 1.0f - 3.0f * square) * temp_fv0; // (temp_fv0 . -x(1-x)^2)'
-    sp40 =
-        (6.0f - 3.0f * temp_fv0) * square + (2.0f * temp_fv0 - 6.0f) * arg1; // (temp_fv0 . x^2(1-x) + (2x+1)(1-x)^2)'
-    sp3C = (3.0f * temp_fv0 - 6.0f) * square + (6.0f - 4.0f * temp_fv0) * arg1 +
-           temp_fv0;                                 // (temp_fv0 . x(1-x)^2 - x^2(2x-3))'
-    sp38 = (3.0f * square - 2.0f * arg1) * temp_fv0; // (temp_fv0 . -x^2(1-x))'
+    sp44 = (4.0f * arg1 - 1.0f - (3.0f * square)) * temp_fv0;
+    sp40 = (6.0f - 3.0f * temp_fv0) * square + (2.0f * temp_fv0 - 6.0f) * arg1;
+    sp3C = (3.0f * temp_fv0 - 6.0f) * square + (6.0f - 4.0f * temp_fv0) * arg1 + temp_fv0;
+    sp38 = ((3.0f * square) - 2.0f * arg1) * temp_fv0;
 
     arg2->x = sp44 * temp_v1->pos.x + sp40 * arg0->pos.x + sp3C * temp_v0->pos.x + sp38 * temp_a1->pos.x;
     arg2->y = sp44 * temp_v1->pos.y + sp40 * arg0->pos.y + sp3C * temp_v0->pos.y + sp38 * temp_a1->pos.y;
@@ -649,9 +826,12 @@ void func_8009E6F0(CourseSegment* segment, f32 t, Vec3f* pos) {
     sp28 = (temp_fv0 - 2.0f) * tCube + (3.0f - 2.0f * temp_fv0) * tSquare + temp_fv0 * t;
     sp24 = (tCube - tSquare) * temp_fv0;
 
-    pos->x = sp30 * prevSegment->pos.x + sp2C * segment->pos.x + sp28 * nextSegment->pos.x + sp24 * nextNextSegment->pos.x;
-    pos->y = sp30 * prevSegment->pos.y + sp2C * segment->pos.y + sp28 * nextSegment->pos.y + sp24 * nextNextSegment->pos.y;
-    pos->z = sp30 * prevSegment->pos.z + sp2C * segment->pos.z + sp28 * nextSegment->pos.z + sp24 * nextNextSegment->pos.z;
+    pos->x =
+        sp30 * prevSegment->pos.x + sp2C * segment->pos.x + sp28 * nextSegment->pos.x + sp24 * nextNextSegment->pos.x;
+    pos->y =
+        sp30 * prevSegment->pos.y + sp2C * segment->pos.y + sp28 * nextSegment->pos.y + sp24 * nextNextSegment->pos.y;
+    pos->z =
+        sp30 * prevSegment->pos.z + sp2C * segment->pos.z + sp28 * nextSegment->pos.z + sp24 * nextNextSegment->pos.z;
 }
 
 // Get tangent matrix (forward = tangent vector, up = up, left-right = horizontal road slope vector)
@@ -706,8 +886,8 @@ f32 func_8009E85C(CourseSegment* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
     return sp50;
 }
 
-s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32 arg5) {
-    s32 i;
+s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 i, f32 arg5) {
+    s32 pad2;
     Vec3f spD0;
     f32 temp_ft4;
     f32 temp_ft5;
@@ -722,30 +902,28 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
     f32 var_fs5;
     f32 square;
     f32 temp_fv1;
-    CourseSegment* var_s1;
-    CourseSegment* var_s2;
-    CourseSegment* var_s3;
-    CourseSegment* var_s4;
+    CourseSegment* prevSegment;
+    CourseSegment* nextNextSegment;
+    CourseSegment* segment;
+    CourseSegment* nextSegment;
 
     spD0.x = arg1 - arg0->unk_44.x;
     spD0.y = arg2 - arg0->unk_44.y;
     spD0.z = arg3 - arg0->unk_44.z;
 
-    i = arg4 - 1;
+    segment = arg0->courseSegment;
+    nextSegment = segment->next;
+    prevSegment = segment->prev;
+    nextNextSegment = nextSegment->next;
 
-    var_s3 = arg0->courseSegment;
-    var_s4 = var_s3->next;
-    var_s1 = var_s3->prev;
-    var_s2 = var_s4->next;
-
-    var_fs3 = var_s3->unk_24;
+    var_fs3 = segment->unk_24;
     var_fs5 = var_fs3 - 2.0f;
 
     spBC = ((var_fs5 - 1.0f) + var_fs3) - 3.0f;
     sp78 = spBC + var_fs3;
 
     spB4 = sp78 + var_fs3;
-    while ((arg5 < (SQ_SUM(&spD0))) && (i != 0)) {
+    while ((arg5 < (SQ_SUM(&spD0))) && (--i != 0)) {
 
         arg0->unk_04 += DOT_XYZ(&spD0, &arg0->unk_0C) / SQ(arg0->unk_18);
 
@@ -754,10 +932,10 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
                 return -1;
             }
             arg0->courseSegment = arg0->courseSegment->next;
-            var_s1 = var_s3;
-            var_s3 = var_s4;
-            var_s4 = var_s2;
-            var_s2 = arg0->courseSegment->next->next;
+            prevSegment = segment;
+            segment = nextSegment;
+            nextSegment = nextNextSegment;
+            nextNextSegment = arg0->courseSegment->next->next;
             var_fs3 = arg0->courseSegment->unk_24;
 
             var_fs5 = var_fs3 - 2.0f;
@@ -774,10 +952,10 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
                 return -1;
             }
             arg0->courseSegment = arg0->courseSegment->prev;
-            var_s2 = var_s4;
-            var_s4 = var_s3;
-            var_s3 = var_s1;
-            var_s1 = arg0->courseSegment->prev;
+            nextNextSegment = nextSegment;
+            nextSegment = segment;
+            segment = prevSegment;
+            prevSegment = arg0->courseSegment->prev;
             var_fs3 = arg0->courseSegment->unk_24;
 
             var_fs5 = var_fs3 - 2.0f;
@@ -798,25 +976,24 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
         temp_fs1 = (var_fs5 * temp_fv1 - (((var_fs5 - 1.0f) + var_fs3) * square)) + (var_fs3 * arg0->unk_04);
         temp_fs2 = (temp_fv1 - square) * var_fs3;
 
-        arg0->unk_1C.x = (temp_ft4 * var_s1->pos.x) + (temp_ft5 * var_s3->pos.x) + (temp_fs1 * var_s4->pos.x) +
-                         (temp_fs2 * var_s2->pos.x);
-        arg0->unk_1C.y = (temp_ft4 * var_s1->pos.y) + (temp_ft5 * var_s3->pos.y) + (temp_fs1 * var_s4->pos.y) +
-                         (temp_fs2 * var_s2->pos.y);
-        arg0->unk_1C.z = (temp_ft4 * var_s1->pos.z) + (temp_ft5 * var_s3->pos.z) + (temp_fs1 * var_s4->pos.z) +
-                         (temp_fs2 * var_s2->pos.z);
+        arg0->unk_1C.x = (temp_ft4 * prevSegment->pos.x) + (temp_ft5 * segment->pos.x) +
+                         (temp_fs1 * nextSegment->pos.x) + (temp_fs2 * nextNextSegment->pos.x);
+        arg0->unk_1C.y = (temp_ft4 * prevSegment->pos.y) + (temp_ft5 * segment->pos.y) +
+                         (temp_fs1 * nextSegment->pos.y) + (temp_fs2 * nextNextSegment->pos.y);
+        arg0->unk_1C.z = (temp_ft4 * prevSegment->pos.z) + (temp_ft5 * segment->pos.z) +
+                         (temp_fs1 * nextSegment->pos.z) + (temp_fs2 * nextNextSegment->pos.z);
 
-        temp_fv1 = 3.0f * square;
-        temp_ft4 = (((arg0->unk_04 * 4.0f) - 1.0f) - temp_fv1) * var_fs3;
+        temp_ft4 = (((arg0->unk_04 * 4.0f) - 1.0f) - (3.0f * square)) * var_fs3;
         temp_ft5 = (arg0->unk_04 * spBC) - sp78 * square;
         temp_fs1 = (sp78 * square - (spB4 * arg0->unk_04)) + var_fs3;
-        temp_fs2 = (temp_fv1 - (2.0f * arg0->unk_04)) * var_fs3;
+        temp_fs2 = ((3.0f * square) - (2.0f * arg0->unk_04)) * var_fs3;
 
-        arg0->unk_0C.x = (temp_ft4 * var_s1->pos.x) + (temp_ft5 * var_s3->pos.x) + (temp_fs1 * var_s4->pos.x) +
-                         (temp_fs2 * var_s2->pos.x);
-        arg0->unk_0C.y = (temp_ft4 * var_s1->pos.y) + (temp_ft5 * var_s3->pos.y) + (temp_fs1 * var_s4->pos.y) +
-                         (temp_fs2 * var_s2->pos.y);
-        arg0->unk_0C.z = (temp_ft4 * var_s1->pos.z) + (temp_ft5 * var_s3->pos.z) + (temp_fs1 * var_s4->pos.z) +
-                         (temp_fs2 * var_s2->pos.z);
+        arg0->unk_0C.x = (temp_ft4 * prevSegment->pos.x) + (temp_ft5 * segment->pos.x) +
+                         (temp_fs1 * nextSegment->pos.x) + (temp_fs2 * nextNextSegment->pos.x);
+        arg0->unk_0C.y = (temp_ft4 * prevSegment->pos.y) + (temp_ft5 * segment->pos.y) +
+                         (temp_fs1 * nextSegment->pos.y) + (temp_fs2 * nextNextSegment->pos.y);
+        arg0->unk_0C.z = (temp_ft4 * prevSegment->pos.z) + (temp_ft5 * segment->pos.z) +
+                         (temp_fs1 * nextSegment->pos.z) + (temp_fs2 * nextNextSegment->pos.z);
 
         arg0->unk_18 = sqrtf(SQ_SUM(&arg0->unk_0C));
         arg0->unk_28.x = arg1 - arg0->unk_1C.x;
@@ -849,8 +1026,6 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32
         arg0->unk_28.z *= temp_fa0;
         arg0->unk_44.z = temp_fv1 = arg0->unk_28.z + arg0->unk_1C.z;
         spD0.z = arg3 - arg0->unk_44.z;
-
-        i--;
     }
 
     arg0->unk_28.x = arg1 - arg0->unk_1C.x;

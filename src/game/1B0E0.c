@@ -8448,8 +8448,8 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
                         var_fs0 = D_800CE750;
                     }
 
-                    func_8006BFCC(&gGfxPool->unk_20A88[racer->id], NULL, racer->shadowColorStrength * D_800CE748,
-                                  0.1f, racer->shadowColorStrength * var_fs0, &racer->unk_E8.x, &racer->unk_19C,
+                    func_8006BFCC(&gGfxPool->unk_20A88[racer->id], NULL, racer->shadowColorStrength * D_800CE748, 0.1f,
+                                  racer->shadowColorStrength * var_fs0, &racer->unk_E8.x, &racer->unk_19C,
                                   &racer->unk_168);
                     racer->unk_165 = 1;
                 }

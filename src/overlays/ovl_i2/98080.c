@@ -511,7 +511,7 @@ Gfx* func_i2_800FD184(Gfx* gfx) {
 extern s16 D_800CCFE4;
 extern s32 D_800DCD00;
 extern s32 D_800DCD08;
-extern FrameBuffer* D_800DCCD0[];
+extern FrameBuffer* gFrameBuffers[];
 
 void func_i2_800FD344(void) {
     s32 pad;
@@ -534,10 +534,10 @@ void func_i2_800FD344(void) {
         var_v0 = D_800DCD00;
     }
 
-    osInvalDCache(D_800DCCD0[var_v0], 0x25800);
+    osInvalDCache(gFrameBuffers[var_v0], 0x25800);
 
     for (var_a2 = 0; var_a2 < 224; var_a2++) {
-        var_v0_2 = &D_800DCCD0[var_v0]->array[var_a2 + 8][12];
+        var_v0_2 = &gFrameBuffers[var_v0]->array[var_a2 + 8][12];
 
         for (var_a0 = 0; var_a0 < 296; var_a0++, var_v1++, var_v0_2++) {
             *var_v1 = *var_v0_2;

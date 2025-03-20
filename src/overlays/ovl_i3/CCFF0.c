@@ -162,7 +162,7 @@ Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3);
 
 extern Mtx D_2028480;
 extern Lights0 D_20284C0;
-extern FrameBuffer* D_800DCCD0[];
+extern FrameBuffer* gFrameBuffers[];
 extern char* gTrackNames[55];
 extern Gfx D_8014940[];
 extern unk_struct_1DC D_800E5220[];
@@ -191,7 +191,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
 
     gSPDisplayList(gfx++, D_303A810);
     gDPPipeSync(gfx++);
-    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
 
     if (D_i3_80143780 & 2) {
         gfx = func_8007A440(gfx, 0xC, 8, 0x134, 0xE8, 0, 0, 0, 0xBF);

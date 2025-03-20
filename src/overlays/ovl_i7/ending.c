@@ -67,7 +67,7 @@ extern char* gTrackNames[55];
 
 extern Gfx D_8014940[];
 
-extern FrameBuffer* D_800DCCD0[];
+extern FrameBuffer* gFrameBuffers[];
 extern GfxPool* gGfxPool;
 extern s32 D_800DCD04;
 extern unk_struct_1DC D_800E5220[];
@@ -584,13 +584,14 @@ Gfx* EndingCutscene_Draw(Gfx* gfx) {
         gDPSetAlphaCompare(gfx++, G_AC_NONE);
         gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1));
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
         gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     }
 
     gSPDisplayList(gfx++, D_303A810);
     gDPPipeSync(gfx++);
-    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
 
     D_800F8520 = gGfxPool->unk_10008;
     D_800E5ECC = gGfxPool->unk_21B48;
@@ -604,7 +605,7 @@ Gfx* EndingCutscene_Draw(Gfx* gfx) {
     gfx = Segment_SetTableAddresses(gfx);
     gSPClipRatio(gfx++, FRUSTRATIO_3);
     gDPPipeSync(gfx++);
-    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
     gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
     gSPMatrix(gfx++, D_1000000.unk_20208, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 

@@ -156,7 +156,7 @@ void Gfx_SetTask(OSTask* task) {
 
 extern OSMesgQueue D_800DCAB0;
 extern OSMesgQueue D_800DCAC8;
-extern FrameBuffer* D_800DCCD0[];
+extern FrameBuffer* gFrameBuffers[];
 
 void func_800690FC(void);
 void func_i2_800FD344(void);
@@ -176,9 +176,9 @@ void func_80067D64(void) {
 
     func_80077C9C();
     func_i2_800FD344();
-    osViSwapBuffer(D_800DCCD0[D_800DCD00]);
+    osViSwapBuffer(gFrameBuffers[D_800DCD00]);
 
-    while (osViGetCurrentFramebuffer() != D_800DCCD0[D_800DCD00]) {}
+    while (osViGetCurrentFramebuffer() != gFrameBuffers[D_800DCD00]) {}
 
     Gfx_SetTask(sGfxTask);
 }
@@ -196,12 +196,12 @@ void func_80067E98(void) {
     func_800B9E28();
     MQ_WAIT_FOR_MESG(&D_800DCAC8, &D_800DCD10);
     func_i2_800FD344();
-    osViSwapBuffer(D_800DCCD0[D_800DCD08]);
+    osViSwapBuffer(gFrameBuffers[D_800DCD08]);
     func_80077C9C();
 
-    while (
-        (osViGetCurrentFramebuffer() == D_800DCCD0[D_800DCD04] || osViGetNextFramebuffer() == D_800DCCD0[D_800DCD04]) &&
-        retries != 0) {
+    while ((osViGetCurrentFramebuffer() == gFrameBuffers[D_800DCD04] ||
+            osViGetNextFramebuffer() == gFrameBuffers[D_800DCD04]) &&
+           retries != 0) {
         retries--;
     }
 
@@ -366,7 +366,7 @@ void Game_ThreadEntry(void* entry) {
 
     Math_Rand2Init(osGetTime() + osGetTime(), osGetTime());
     osSetTime(0);
-    osViSwapBuffer(D_800DCCD0[0]);
+    osViSwapBuffer(gFrameBuffers[0]);
     Gfx_InitBuffer();
     func_80067AE0();
 

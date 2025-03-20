@@ -802,10 +802,144 @@ void func_8006C378(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5
     Matrix_ToMtx(arg1, arg0);
 }
 
+#ifdef NON_EQUIVALENT
+void func_8006C520(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,
+                   f32 arg9) {
+    f32 sin;
+    f32 cos;
+    f32 sp8C;
+    f32 sp84;
+    f32 sp7C;
+    f32 sp70;
+    f32 sp6C;
+    f32 temp_fa0;
+    f32 temp_fa1;
+    f32 temp_fs0;
+    f32 temp_fs3;
+    f32 temp_fs4;
+    f32 temp_ft4;
+    f32 temp_ft5;
+    f32 temp_fv0;
+    f32 temp_fv1;
+
+    if (arg0 == NULL) {
+        arg0 = &D_800E1230;
+    }
+    if (arg1 == NULL) {
+        arg1 = &D_800E1270;
+    }
+    cos = COS(arg3);
+    sin = SIN(arg3);
+    if (arg5 == 0.0f) {
+        if (arg4 == 0.0f) {
+            if (arg6 < 0.0f) {
+                func_8006C378(arg0, arg1, arg2, 0, 0, -arg3, arg7, arg8, arg9);
+            } else {
+
+                func_8006C378(arg0, arg1, arg2, 0, 0, arg3, arg7, arg8, arg9);
+            }
+            return;
+        }
+        temp_fv0 = sqrtf(SQ(arg4) + SQ(arg6));
+        temp_fv1 = arg4 / temp_fv0;
+        temp_ft4 = arg2 * sin;
+        temp_fa0 = arg6 / temp_fv0;
+        temp_fa1 = -temp_fv1;
+        temp_ft5 = temp_ft4 * temp_fa0;
+        temp_fs0 = temp_ft4 * temp_fa1;
+        temp_fs3 = cos * temp_fa0;
+        arg1->m[0][1] = temp_ft5;
+        arg1->m[1][0] = -temp_ft5;
+        arg1->m[2][1] = temp_fs0;
+        arg1->m[1][1] = arg2 * cos;
+        arg1->m[1][2] = -temp_fs0;
+        arg1->m[0][0] = ((temp_fs3 * temp_fa0) + SQ(temp_fv1)) * arg2;
+        arg1->m[2][2] = ((cos * temp_fa1 * temp_fa1) + SQ(temp_fa0)) * arg2;
+        temp_fs4 = ((temp_fs3 * temp_fa1) + (temp_fv1 * temp_fa0)) * arg2;
+        arg1->m[2][0] = temp_fs4;
+        arg1->m[0][2] = temp_fs4;
+    } else if (arg6 == 0.0f) {
+        temp_fv0 = sqrtf(SQ(arg4) + SQ(arg5));
+        temp_fa1 = arg5 / temp_fv0;
+        temp_ft4 = arg2 * sin;
+        temp_fv1 = arg4 / temp_fv0;
+        temp_fs0 = -temp_fa1;
+        temp_fa0 = temp_ft4 * temp_fs0;
+        arg1->m[0][2] = temp_fa0;
+        temp_ft5 = temp_ft4 * temp_fv1;
+        arg1->m[2][0] = -temp_fa0;
+        arg1->m[1][2] = temp_ft5;
+        arg1->m[2][1] = -temp_ft5;
+        arg1->m[2][2] = arg2 * cos;
+        sp7C = cos * temp_fs0;
+        arg1->m[0][0] = ((sp7C * temp_fs0) + SQ(temp_fv1)) * arg2;
+        arg1->m[1][1] = ((cos * temp_fv1 * temp_fv1) + SQ(temp_fa1)) * arg2;
+        temp_fs4 = ((sp7C * temp_fv1) + (temp_fv1 * temp_fa1)) * arg2;
+        arg1->m[1][0] = temp_fs4;
+        arg1->m[0][1] = temp_fs4;
+    } else if (arg4 == 0.0f) {
+        temp_fv0 = sqrtf(SQ(arg5) + SQ(arg6));
+        temp_fa1 = arg5 / temp_fv0;
+        temp_ft4 = arg2 * sin;
+        temp_fa0 = arg6 / temp_fv0;
+        temp_fv1 = -temp_fa0;
+        temp_ft5 = temp_ft4 * temp_fv1;
+        temp_fs0 = temp_ft4 * temp_fa1;
+        arg1->m[1][0] = temp_ft5;
+        arg1->m[0][1] = -temp_ft5;
+        arg1->m[0][2] = -temp_fs0;
+        arg1->m[2][0] = temp_fs0;
+        arg1->m[0][0] = arg2 * cos;
+        sp7C = cos * temp_fv1;
+        arg1->m[1][1] = ((sp7C * temp_fv1) + SQ(temp_fa1)) * arg2;
+        arg1->m[2][2] = ((cos * temp_fa1 * temp_fa1) + SQ(temp_fa0)) * arg2;
+        temp_fs4 = ((sp7C * temp_fa1) + (temp_fa1 * temp_fa0)) * arg2;
+        arg1->m[2][1] = temp_fs4;
+        arg1->m[1][2] = temp_fs4;
+    } else {
+        temp_fv0 = sqrtf(SQ(arg4) + SQ(arg5) + SQ(arg6));
+        temp_fs4 = arg5 / temp_fv0;
+        temp_ft5 = arg4 / temp_fv0;
+        temp_ft4 = -temp_fs4;
+        sp8C = temp_ft5;
+        sp84 = arg6 / temp_fv0;
+        temp_fv0 = sqrtf(SQ(temp_ft4) + SQ(temp_ft5));
+        temp_ft5 /= temp_fv0;
+        temp_ft4 /= temp_fv0;
+        temp_fv1 = temp_ft5 * sp84;
+        temp_fs3 = ((temp_fs4 - temp_ft5) * temp_ft4) - (temp_ft5 * (sp8C - temp_ft4));
+        temp_fv0 = -temp_ft4 * sp84;
+        arg1->m[0][0] = (((SQ(temp_fv1) + SQ(temp_ft4)) * cos) + SQ(sp8C)) * arg2;
+        arg1->m[1][1] = (((SQ(temp_fv0) + SQ(temp_ft5)) * cos) + SQ(temp_fs4)) * arg2;
+        arg1->m[2][2] = ((cos * temp_fs3 * temp_fs3) + SQ(sp84)) * arg2;
+        temp_fa0 = (((temp_fv1 * temp_fv0) + (temp_ft4 * temp_ft5)) * cos) + (sp8C * temp_fs4);
+        temp_fa1 = ((temp_fv0 * temp_ft4) - (temp_fv1 * temp_ft5)) * sin;
+        arg1->m[1][0] = (temp_fa0 + temp_fa1) * arg2;
+        arg1->m[0][1] = (temp_fa0 - temp_fa1) * arg2;
+        sp6C = (cos * temp_fv1 * temp_fs3) + (sp8C * sp84);
+        sp8C = sin * temp_fs3;
+        sp70 = sp8C * temp_ft4;
+        arg1->m[2][0] = (sp6C + sp70) * arg2;
+        arg1->m[0][2] = (sp6C - sp70) * arg2;
+        temp_fa0 = (cos * temp_fv0 * temp_fs3) + (temp_fs4 * sp84);
+        temp_fv1 = sp8C * temp_ft5;
+        arg1->m[2][1] = (temp_fa0 + temp_fv1) * arg2;
+        arg1->m[1][2] = (temp_fa0 - temp_fv1) * arg2;
+    }
+
+    arg1->m[3][0] = arg7;
+    arg1->m[3][1] = arg8;
+    arg1->m[3][2] = arg9;
+    arg1->m[3][3] = 1.0f;
+    arg1->m[0][3] = arg1->m[1][3] = arg1->m[2][3] = 0.0f;
+    Matrix_ToMtx(arg1, arg0);
+}
+#else
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/3ED0/func_8006C520.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/3ED0/func_8006C520.s")
+#endif
 #endif
 
 void func_8006CB0C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,

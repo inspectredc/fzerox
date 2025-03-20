@@ -3,6 +3,7 @@
 #include "fzx_thread.h"
 #include "fzx_course.h"
 #include "segment_symbols.h"
+#include "assets/segment_16C8A0.h"
 #include "assets/segment_17B1E0.h"
 
 OSMesg D_800E12B0;
@@ -29,7 +30,7 @@ Gfx* func_8006FB90(Gfx* gfx);
 
 s32 D_800CD180 = 0; // must always be set to 0!
 
-Gfx* (*D_800CD184[])(Gfx*) = { 
+Gfx* (*D_800CD184[])(Gfx*) = {
     func_8006F3D8, // COURSE_FEATURE_GATE_SQUARE
     func_8006F444, // COURSE_FEATURE_GATE_START
     func_8006F478, // COURSE_FEATURE_GATE_HEXAGONAL
@@ -186,10 +187,229 @@ void func_8006D448(void) {
     }
 }
 
+extern CourseData gCourseData;
+extern unk_802D08E0 D_802D08E0[];
+extern Mtx D_8022F0C0[];
+extern unk_36ED0 D_802A9FC0[];
+extern Vtx D_8022E8C0[];
+extern unk_802D2D70 D_802D2D70;
+extern unk_802D2D78 D_802D2D78[];
+
+// Draw Course Effects and Features
+#ifdef NON_EQUIVALENT
+#define VERTEX_MODIFIED_ST(s, t) ((((s) << 15) & 0xFFFF0000) | ((t) &0xFFFF))
+
+Gfx* func_8006DAAC(Gfx* gfx, s32 arg1) {
+    u32 i;
+    s32 j;
+    s32 k;
+    s32* sp44;
+    Mtx* var_s3;
+    Vtx* var_fp;
+    unk_802D2D78* var_s4;
+    s32 temp_a0;
+    s32 temp_a0_3;
+    s32 totalVtxGroups;
+    s32 temp_a1_3;
+    s32 temp_a1_5;
+    s32 temp_a2;
+    s32 temp_a2_2;
+    s32 temp_a2_3;
+    s32 temp_s3;
+    s32 temp_s3_2;
+    u32 numVtxs;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
+    s32 temp_v0_4;
+    s32 temp_v0_5;
+    s32 temp_v0_6;
+    s32 temp_v0_7;
+    s32 totalWholeVtxGroups;
+    s32 var_a3;
+    s32 var_a3_2;
+    s32 var_s2;
+    u32 remainderVtxGroupNum;
+    Vtx* vtx;
+    s32* var_t0;
+    s32* var_t0_2;
+    u32 temp_s4;
+    unk_802D1B60_unk_00* var_s1;
+    u32 var_s1_2;
+    unk_802D08E0* var_s2_2;
+    void* temp_a0_2;
+    Vtx* temp_a1_2;
+    void* temp_a1_4;
+    void* var_t3;
+    void* var_t3_2;
+    unk_802D1B60* var;
+    unk_80225800* var2;
+    unk_802D2D70* var3;
+
+    var = &D_802D1B60;
+    var2 = &D_80225800;
+
+    gSPDisplayList(gfx++, D_8022380);
+
+    if ((var->unk_08 != 0) && (D_800CD180 == 0)) {
+        if (1) {}
+        i = var->unk_08;
+        do {
+            gSPVertex(gfx++, &D_80225800.unk_1C0[i - 1], 5, 0);
+            gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+            gSP2Triangles(gfx++, 0, 3, 4, 0, 0, 4, 1, 0);
+            i--;
+        } while (i > 0);
+    }
+    if (var->unk_0C != 0) {
+        gDPLoadTextureBlock(gfx++, D_8015A20, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+        if (D_800CD180 == 0) {
+            i = var->unk_0C;
+            do {
+                gSPVertex(gfx++, &D_80225800.unk_040[i - 1], 6, 0);
+                gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 5, 4, 0);
+                gSP2Triangles(gfx++, 0, 3, 1, 0, 1, 3, 4, 0);
+                gSP2Triangles(gfx++, 0, 5, 3, 0, 0, 2, 5, 0);
+                i--;
+            } while (i > 0);
+        }
+    }
+
+    var3 = &D_802D2D70;
+    if (1) {}
+
+    if (var3->count != 0) {
+
+        gSPDisplayList(gfx++, aSetupCourseEffectTextureDL);
+
+        var_s4 = D_802D2D78;
+        if (D_800CD180 == 0) {
+            var_fp = D_8022E8C0;
+            for (i = 0; i < var3->count; i++, var_s4++) {
+                gSPTexture(gfx++, 0x8000, 0x8000, 0, var_s4->effectType, G_ON);
+                if (var_s4->effectType == COURSE_EFFECT_DASH) {
+                    gSPVertex(gfx++, var_fp, 6, 0);
+                    gSP2Triangles(gfx++, 0, 4, 1, 0, 0, 3, 4, 0);
+                    gSP2Triangles(gfx++, 0, 2, 3, 0, 2, 5, 3, 0);
+                    var_fp += 6;
+                } else {
+
+                    var_s2 = 0;
+                    numVtxs = var_s4->vtxEnd - var_s4->vtxStart;
+                    totalVtxGroups = (numVtxs / 32) + 1;
+                    remainderVtxGroupNum = numVtxs % 32;
+                    totalWholeVtxGroups = totalVtxGroups;
+                    if (remainderVtxGroupNum == 0) {
+                        remainderVtxGroupNum = 32;
+                        totalWholeVtxGroups = totalVtxGroups - 1;
+                    }
+
+                    vtx = var_s4->vtxStart;
+                    for (j = 0; j < totalWholeVtxGroups - 1; j++) {
+                        gSPVertex(gfx++, vtx, 32, 0);
+
+                        var_t0 = &D_800E12C8[var_s4->vtxStart - D_80225800.unk_1C0[j]];
+
+                        for (k = 0; k < 15; k++) {
+                            if (D_802A9FC0[var_t0[k]].unk_10 == 0) {
+                                continue;
+                            }
+                            if ((vtx[k * 2 + 2].v.tc[1] < vtx[k * 2 + 0].v.tc[1]) ||
+                                (vtx[k * 2 + 3].v.tc[1] < vtx[k * 2 + 1].v.tc[1])) {
+                                gSPModifyVertex(gfx++, k, G_MWO_POINT_ST,
+                                                VERTEX_MODIFIED_ST(vtx[k * 2 + 0].v.tc[0], 0x8000));
+                                gSPModifyVertex(gfx++, k + 1, G_MWO_POINT_ST,
+                                                VERTEX_MODIFIED_ST(vtx[k * 2 + 1].v.tc[0], 0x8000));
+                            }
+                            gSP2Triangles(gfx++, k, k + 2, k + 1, 0, k + 1, k + 2, k + 3, 0);
+                        }
+                        vtx += 32;
+                    }
+
+                    gSPVertex(gfx++, var_s4->vtxStart + (j * 32), remainderVtxGroupNum, 0);
+
+                    var_t0 = &D_800E12C8[var_s4->vtxStart - D_80225800.unk_1C0[j]];
+                    for (k = 0; k < (remainderVtxGroupNum / 2) - 1; k++) {
+                        if (D_802A9FC0[var_t0[k]].unk_10 == 0) {
+                            continue;
+                        }
+                        if ((vtx[k * 2 + 2].v.tc[1] < vtx[k * 2 + 0].v.tc[1]) ||
+                            (vtx[k * 2 + 3].v.tc[1] < vtx[k * 2 + 1].v.tc[1])) {
+                            gSPModifyVertex(gfx++, k, G_MWO_POINT_ST,
+                                            VERTEX_MODIFIED_ST(vtx[k * 2 + 0].v.tc[0], 0x8000));
+                            gSPModifyVertex(gfx++, k + 1, G_MWO_POINT_ST,
+                                            VERTEX_MODIFIED_ST(vtx[k * 2 + 1].v.tc[0], 0x8000));
+                        }
+                        gSP2Triangles(gfx++, k, k + 2, k + 1, 0, k + 1, k + 2, k + 3, 0);
+                    }
+                }
+            }
+        }
+    }
+    gSPSetGeometryMode(gfx++, G_CULL_BACK);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+    gSPFogPosition(gfx++, 980, 1000);
+    gDPPipeSync(gfx++);
+
+    if (gCourseData.skybox == SKYBOX_NIGHT) {
+        gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+        gDPSetRenderMode(gfx++, G_RM_ZB_OPA_SURF, G_RM_ZB_OPA_SURF2);
+    } else {
+        gDPSetCombineMode(gfx++, G_CC_BLENDRGBA, G_CC_BLENDRGBA);
+        gDPSetRenderMode(gfx++, Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | ALPHA_CVG_SEL | FORCE_BL | G_RM_FOG_SHADE_A,
+                         Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | ALPHA_CVG_SEL | FORCE_BL |
+                             GBL_c2(G_BL_CLR_FOG, G_BL_A_SHADE, G_BL_CLR_IN, G_BL_1MA));
+    }
+
+    var_s2_2 = D_802D08E0;
+    D_800E32C8 = -1;
+    if (D_800CD180 == 0) {
+        var_s3 = D_8022F0C0;
+        var_s1 = D_802D1B60.unk_00;
+        for (i = 0; i < D_802D1B60.unk_04; i++, var_s1++) {
+            if (CourseFeature_IsDecorational(var_s1->featureType) != 0) {
+                if ((var_s2_2->unk_34->unk_10 != 0) && (var_s1->featureType <= COURSE_FEATURE_SIGN_OVERHEAD)) {
+                    gSPMatrix(gfx++, K0_TO_PHYS(var_s3), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+                    gfx = D_800CD184[var_s1->featureType](gfx);
+                }
+                var_s3++;
+                var_s2_2++;
+            }
+        }
+        var_s3 = D_8022F0C0;
+        var_s2_2 = D_802D08E0;
+        if (gCourseData.skybox == SKYBOX_NIGHT) {
+            gDPPipeSync(gfx++);
+            gDPSetCombineMode(gfx++, G_CC_BLENDRGBA, G_CC_BLENDRGBA);
+            gDPSetRenderMode(gfx++,
+                             Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | ALPHA_CVG_SEL | FORCE_BL | G_RM_FOG_SHADE_A,
+                             Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | ALPHA_CVG_SEL | FORCE_BL |
+                                 GBL_c2(G_BL_CLR_FOG, G_BL_A_SHADE, G_BL_CLR_IN, G_BL_1MA));
+        }
+
+        var_s1 = D_802D1B60.unk_00;
+        for (i = 0; i < D_802D1B60.unk_04; i++, var_s1++) {
+            if (CourseFeature_IsDecorational(var_s1->featureType) == 0) {
+                continue;
+            }
+
+            if ((var_s2_2->unk_34->unk_10 != 0) && COURSE_FEATURE_IS_BUILDING(var_s1->featureType)) {
+                gSPMatrix(gfx++, K0_TO_PHYS(var_s3), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+                gfx = D_800CD184[var_s1->featureType](gfx);
+            }
+            var_s3++;
+            var_s2_2++;
+        }
+    }
+    return gfx;
+}
+#else
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/73F0/func_8006DAAC.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8006DAAC.s")
+#endif
 #endif
 
 void func_8006E478(void) {
@@ -314,9 +534,6 @@ void func_8006E478(void) {
 }
 
 extern s32 D_800F8518;
-extern unk_36ED0 D_802A9FC0[];
-extern unk_802D08E0 D_802D08E0[];
-extern Mtx D_8022F0C0[];
 
 void func_8006EC7C(void) {
     CourseSegment* courseSegment;
@@ -796,7 +1013,6 @@ next:
     return D_802A9FC0[i].unk_08;
 }
 
-extern unk_802D2D78 D_802D2D78[];
 extern unk_802D3E38 D_802D3E38[];
 
 s32 func_80074BB4(Vec3f* arg0, f32 arg1);
@@ -1105,8 +1321,6 @@ Vtx* func_80070B5C(CourseSegment* arg0, f32 arg1, unk_8006FF90_arg_1* arg2, Vtx*
 }
 
 extern Vtx D_802268C0[];
-extern Vtx D_8022E8C0[];
-extern unk_802D2D70 D_802D2D70;
 
 void func_80071260(s32 arg0) {
     s32 i;
@@ -1146,7 +1360,7 @@ void func_80071260(s32 arg0) {
         courseSegment = &gCurrentCourseRecordInfo->courseSegments[temp_s0->segmentIndex];
 
         D_802D2D78[i].effectType = temp_s0->effectType;
-        D_802D2D78[i].unk_04 = spA8;
+        D_802D2D78[i].vtxStart = spA8;
         D_802D3E38[i].effectType = temp_s0->effectType;
         D_802D3E38[i].unk_04 = temp_s0->unk_08;
         D_802D3E38[i].unk_08 = temp_s0->unk_0C;
@@ -1182,10 +1396,9 @@ void func_80071260(s32 arg0) {
                 if ((temp_s0->segmentIndex == (var_s2->unk_00[j].segmentIndex + 1)) &&
                     (temp_s0->effectType == var_s2->unk_00[j].effectType) && (var_s2->unk_00[j].unk_0C == 1.0f) &&
                     (temp_s0->unk_10 == var_s2->unk_00[j].unk_10) && (temp_s0->unk_14 == var_s2->unk_00[j].unk_14)) {
-                    // UB?
                     // float calculation just needs to be 1.0f
-                    var_fv0 = (D_802D2D78[j].unk_08 - 2)->v.tc[1] / (2.0f - 1.0f);
-                    var_fv1 = (D_802D2D78[j].unk_08 - 1)->v.tc[1] / (2.0f - 1.0f);
+                    var_fv0 = (D_802D2D78[j].vtxEnd - 2)->v.tc[1] / (2.0f - 1.0f);
+                    var_fv1 = (D_802D2D78[j].vtxEnd - 1)->v.tc[1] / (2.0f - 1.0f);
                     while (true) {
                         var_fv0 -= 1024.0f;
                         var_fv1 -= 1024.0f;
@@ -1202,7 +1415,7 @@ void func_80071260(s32 arg0) {
             D_802D2D78[i].effectType = temp_s0->effectType;
         }
 
-        D_802D2D78[i].unk_08 = spA8;
+        D_802D2D78[i].vtxEnd = spA8;
     }
 
     for (i = 0; i < gCurrentCourseRecordInfo->segmentCount; i++) {
@@ -1231,7 +1444,6 @@ void func_80071260(s32 arg0) {
     for (i = 0; i < var_s2->count; i++) {}
 }
 
-extern CourseData gCourseData;
 extern unk_8006FF90_arg_1 D_802D1B70[];
 extern CourseRecordInfo gCourseRecordInfos[56];
 

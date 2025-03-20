@@ -400,8 +400,8 @@ void func_i3_8011B520(void) {
 
     sGhostSaveTimer = sOverwriteGhostOption = sSaveGhostMenuOpen = D_i3_80141DC4 = D_i3_80141DBC = D_i3_80141B98 =
         D_i3_80141B9C = D_80141D6C = D_i3_80141D88 = D_i3_80141D8C = sRaceMenuOptionIndex = D_i3_80141D9C =
-            sMenuIsBusy = sRaceFinishSaveTriggered = D_i3_80141DCC = sMenuOptionTriggered = D_i3_801419A6 = D_i3_801419BC = D_80141900 =
-                D_i3_80141D90 = 0;
+            sMenuIsBusy = sRaceFinishSaveTriggered = D_i3_80141DCC = sMenuOptionTriggered = D_i3_801419A6 =
+                D_i3_801419BC = D_80141900 = D_i3_80141D90 = 0;
 
     D_i3_80141D08 = D_i3_80141CC8 = 0.0f;
     D_i3_80141DC0 = D_i3_80141DB4 = 90;
@@ -1835,8 +1835,8 @@ Gfx* func_i3_80121E70(Gfx* gfx, s32 arg1) {
         }
     }
 
-    func_8006BC84(gGfxPool->unk_21988, NULL, D_i3_80141D0C, D_i3_80141D0C, D_i3_80141D0C, sp5C, 0.0f, sp64, 0.0f,
-                  1.0f, 0.0f, sp80, sp84, sp88);
+    func_8006BC84(gGfxPool->unk_21988, NULL, D_i3_80141D0C, D_i3_80141D0C, D_i3_80141D0C, sp5C, 0.0f, sp64, 0.0f, 1.0f,
+                  0.0f, sp80, sp84, sp88);
     gSPMatrix(gfx++, gGfxPool->unk_21988, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gfx++, aExecuteGameoverDL);
     gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
@@ -2691,8 +2691,8 @@ Gfx* func_i3_DrawGeneralPause(Gfx* gfx) {
     }
 
     gDPPipeSync(gfx++);
-    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sPauseMenuScissorBoxTimer + 100, sPauseMenuScissorBoxTimer + 41, 230 - sPauseMenuScissorBoxTimer,
-                  197 - sPauseMenuScissorBoxTimer);
+    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sPauseMenuScissorBoxTimer + 100, sPauseMenuScissorBoxTimer + 41,
+                  230 - sPauseMenuScissorBoxTimer, 197 - sPauseMenuScissorBoxTimer);
     gfx = func_i3_DrawBeveledBox(gfx, 120, 61, 210, 177, 0, 0, 0, 220);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
@@ -2823,8 +2823,8 @@ Gfx* func_i3_DrawDeathRacePause(Gfx* gfx) {
         sPauseMenuScissorBoxTimer = 0;
     }
     gDPPipeSync(gfx++);
-    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sPauseMenuScissorBoxTimer + 100, sPauseMenuScissorBoxTimer + 56, 230 - sPauseMenuScissorBoxTimer,
-                  166 - sPauseMenuScissorBoxTimer);
+    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sPauseMenuScissorBoxTimer + 100, sPauseMenuScissorBoxTimer + 56,
+                  230 - sPauseMenuScissorBoxTimer, 166 - sPauseMenuScissorBoxTimer);
     gfx = func_i3_DrawBeveledBox(gfx, 120, 61, 210, 161, 0, 0, 0, 220);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
@@ -2939,8 +2939,8 @@ Gfx* func_i3_DrawGpRacePause(Gfx* gfx) {
         sPauseMenuScissorBoxTimer = 0;
     }
     gDPPipeSync(gfx++);
-    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sPauseMenuScissorBoxTimer + 100, sPauseMenuScissorBoxTimer + 56, 220 - sPauseMenuScissorBoxTimer,
-                  150 - sPauseMenuScissorBoxTimer);
+    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sPauseMenuScissorBoxTimer + 100, sPauseMenuScissorBoxTimer + 56,
+                  220 - sPauseMenuScissorBoxTimer, 150 - sPauseMenuScissorBoxTimer);
     gfx = func_i3_DrawBeveledBox(gfx, 120, 61, 200, 145, 0, 0, 0, 220);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));

@@ -1,3 +1,3 @@
 #include "gfx.h"
 
-UNUSED FrameBuffer D_80000400;
+UNUSED FrameBuffer gFrameBufferUnused;

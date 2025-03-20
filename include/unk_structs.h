@@ -582,8 +582,8 @@ typedef struct unk_802D2D70 {
 
 typedef struct unk_802D2D78 {
     s32 effectType;
-    Vtx* unk_04;
-    Vtx* unk_08;
+    Vtx* vtxStart;
+    Vtx* vtxEnd;
     s8 unk_0C[0x4];
 } unk_802D2D78; // size = 0x10
 
@@ -745,8 +745,8 @@ typedef struct unk_800CF1B0 {
 
 typedef struct unk_80225800 {
     Mtx unk_000;
-    Vtx unk_040[4 * 6];
-    Vtx unk_1C0[48 * 5];
+    Vtx unk_040[4][6];
+    Vtx unk_1C0[48][5];
 } unk_80225800; // size = 0x10C0
 
 #endif // UNK_STRUCTS_H

@@ -169,7 +169,7 @@ Gfx* func_8007AB88(Gfx* gfx) {
 }
 
 extern s16 D_800CCFE4;
-extern FrameBuffer* D_800DCCD0[];
+extern FrameBuffer* gFrameBuffers[];
 extern s32 D_800DCCFC;
 extern s32 D_800DCD04;
 
@@ -178,9 +178,11 @@ Gfx* func_8007ABA4(Gfx* gfx) {
     gDPPipeSync(gfx++);
 
     if (D_800CCFE4 == 2) {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCCFC]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCCFC]));
     } else {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
     }
     return gfx;
 }

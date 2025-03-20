@@ -67,7 +67,7 @@ extern Vtx* D_800F8520;
 extern GfxPool D_1000000;
 extern GfxPool* gGfxPool;
 extern unk_struct_1DC D_800E5220[];
-extern FrameBuffer* D_800DCCD0[];
+extern FrameBuffer* gFrameBuffers[];
 extern s16 D_800CCFE4;
 extern s32 gNumPlayers;
 
@@ -86,10 +86,10 @@ Gfx* Race_Draw(Gfx* gfx) {
 
         if (D_800CCFE4 == 2) {
             gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
-                             OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCCFC]));
+                             OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCCFC]));
         } else {
             gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
-                             OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+                             OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
         }
 
         gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
@@ -103,9 +103,11 @@ Gfx* Race_Draw(Gfx* gfx) {
     gDPPipeSync(gfx++);
 
     if (D_800CCFE4 == 2) {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCCFC]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCCFC]));
     } else {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
     }
     D_800F8520 = gGfxPool->unk_10008;
     D_800E5ECC = gGfxPool->unk_21B48;
@@ -157,9 +159,11 @@ Gfx* Race_Draw(Gfx* gfx) {
     gDPPipeSync(gfx++);
 
     if (D_800CCFE4 == 2) {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCCFC]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCCFC]));
     } else {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
     }
 
     switch (gNumPlayers) {
