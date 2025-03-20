@@ -368,8 +368,6 @@ void func_8009CED0(s32 venue) {
     }
 }
 
-#ifdef NON_MATCHING
-// Stack issues
 s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) {
     s32 i;
     Vec3f sp130;
@@ -377,19 +375,19 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
     CourseSegment* var_v1;
     CourseSegment* var_v0;
     CourseSegment* var_a0;
-    f32 square;
-    f32 temp_fv1;
+    f32 tSquare;
+    f32 tCube;
     f32 sp114;
     f32 sp110;
     f32 sp10C;
-    f32 temp_fv1_2;
+    f32 temp_fv1;
+    f32 sp78;
+    f32 sp74;
+    s32 pad;
+    f32 var_fs4;
     f32 temp_fa0;
     f32 temp_fa1;
     f32 temp_ft4;
-    f32 sp78;
-    f32 sp74;
-    f32 temp_fs5;
-    f32 var_fs4;
     f32 spE8;
     CourseSegment* var_s0;
     CourseSegment* var_s1;
@@ -412,6 +410,8 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
     sp114 = var_fs4 - 2.0f;
     sp110 = sp114 - 1.0f;
     sp10C = sp110 + var_fs4;
+    sp78 = (sp10C - 3.0f) + var_fs4;
+    sp74 = sp78 + var_fs4;
 
     sp88.unk_04 = arg0->unk_04;
     sp88.courseSegment = arg0->courseSegment;
@@ -452,12 +452,12 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
             sp88.unk_04 *= (sp88.unk_18 / func_8009E538(sp88.courseSegment, 1.0f, &sp130));
             sp88.unk_04 += 1.0f;
         }
-        square = SQ(sp88.unk_04);
-        temp_fv1_2 = square * sp88.unk_04;
-        temp_fa0 = (((2.0f * square) - sp88.unk_04) - temp_fv1_2) * var_fs4;
-        temp_fa1 = ((sp110 * square) - sp114 * temp_fv1_2) + 1.0f;
-        temp_ft4 = (sp114 * temp_fv1_2 - (sp10C * square)) + (var_fs4 * sp88.unk_04);
-        spE8 = (temp_fv1_2 - square) * var_fs4;
+        tSquare = SQ(sp88.unk_04);
+        tCube = tSquare * sp88.unk_04;
+        temp_fa0 = (((2.0f * tSquare) - sp88.unk_04) - tCube) * var_fs4;
+        temp_fa1 = ((sp110 * tSquare) - sp114 * tCube) + 1.0f;
+        temp_ft4 = (sp114 * tCube - (sp10C * tSquare)) + (var_fs4 * sp88.unk_04);
+        spE8 = (tCube - tSquare) * var_fs4;
 
         sp88.unk_1C.x = (temp_fa0 * var_s2->pos.x) + (temp_fa1 * var_s0->pos.x) + (temp_ft4 * var_s1->pos.x) +
                         (spE8 * var_s3->pos.x);
@@ -466,14 +466,13 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
         sp88.unk_1C.z = (temp_fa0 * var_s2->pos.z) + (temp_fa1 * var_s0->pos.z) + (temp_ft4 * var_s1->pos.z) +
                         (spE8 * var_s3->pos.z);
 
-        temp_fs5 = (sp110 + var_fs4) - 3.0f;
-        sp78 = temp_fs5 + var_fs4;
+        sp78 = (sp10C - 3.0f) + var_fs4;
         sp74 = sp78 + var_fs4;
 
-        temp_fa0 = (((4.0f * sp88.unk_04) - 1.0f) - (3.0f * square)) * var_fs4;
-        temp_fa1 = (temp_fs5 * sp88.unk_04) - sp78 * square;
-        temp_ft4 = (sp78 * square - (sp74 * sp88.unk_04)) + var_fs4;
-        spE8 = ((3.0f * square) - (2.0f * sp88.unk_04)) * var_fs4;
+        temp_fa0 = (((4.0f * sp88.unk_04) - 1.0f) - (3.0f * tSquare)) * var_fs4;
+        temp_fa1 = ((sp10C - 3.0f) * sp88.unk_04) - sp78 * tSquare;
+        temp_ft4 = (sp78 * tSquare - (sp74 * sp88.unk_04)) + var_fs4;
+        spE8 = ((3.0f * tSquare) - (2.0f * sp88.unk_04)) * var_fs4;
 
         sp88.unk_0C.x = (temp_fa0 * var_s2->pos.x) + (temp_fa1 * var_s0->pos.x) + (temp_ft4 * var_s1->pos.x) +
                         (spE8 * var_s3->pos.x);
@@ -512,13 +511,13 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
     var_v1 = var_s1_2->prev;
     var_a0 = var_v0->next;
 
-    square = SQ(sp88.unk_04);
+    tSquare = SQ(sp88.unk_04);
 
     var_fs4 = var_s1_2->unk_24;
-    temp_fa0 = (((4.0f * sp88.unk_04) - 1.0f) - (3.0f * square)) * var_fs4;
-    temp_fa1 = ((6.0f - 3.0f * var_fs4) * square) + (((2.0f * var_fs4) - 6.0f) * sp88.unk_04);
-    temp_ft4 = ((3.0f * var_fs4 - 6.0f) * square) + ((6.0f - (4.0f * var_fs4)) * sp88.unk_04) + var_fs4;
-    spE8 = ((3.0f * square) - (2.0f * sp88.unk_04)) * var_fs4;
+    temp_fa0 = (((4.0f * sp88.unk_04) - 1.0f) - 3.0f * tSquare) * var_fs4;
+    temp_fa1 = ((6.0f - 3.0f * var_fs4) * tSquare) + (((2.0f * var_fs4) - 6.0f) * sp88.unk_04);
+    temp_ft4 = ((3.0f * var_fs4 - 6.0f) * tSquare) + ((6.0f - (4.0f * var_fs4)) * sp88.unk_04) + var_fs4;
+    spE8 = (3.0f * tSquare - (2.0f * sp88.unk_04)) * var_fs4;
 
     arg4->x.x =
         (temp_fa0 * var_v1->pos.x) + (temp_fa1 * var_s1_2->pos.x) + (temp_ft4 * var_v0->pos.x) + (spE8 * var_a0->pos.x);
@@ -545,13 +544,6 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
     arg4->z.z *= temp_fv1;
     return 0;
 }
-#else
-#ifdef VERSION_JP
-#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/36ED0/func_8009D16C.s")
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/36ED0/func_8009D16C.s")
-#endif
-#endif
 
 #ifdef NON_EQUIVALENT
 // Weird float/double calculations
