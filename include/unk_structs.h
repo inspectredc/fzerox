@@ -370,9 +370,9 @@ typedef struct Racer {
     s32 unk_210;
     s32 unk_214;
     s32 boostTimer;
-    s32 unk_21C;
+    s32 spinOutTimer;
     s32 unk_220;
-    f32 unk_224;
+    f32 pitForceFieldSize;
     f32 energy;
     f32 maxEnergy;
     f32 unk_230;
@@ -410,8 +410,8 @@ typedef struct Racer {
     f32 unk_2C4;
     s8 character;
     s8 unk_2C9;
-    u8 unk_2CA;
-    u8 unk_2CB;
+    u8 shadowType;
+    u8 boostersType;
     s16 unk_2CC;
     s16 unk_2CE;
     s16 unk_2D0;
@@ -733,8 +733,8 @@ typedef struct unk_80113140 {
 
 typedef struct unk_800CF1B0 {
     s16 unk_00;
-    u8 unk_02;
-    u8 unk_03;
+    u8 shadowType;
+    u8 boostersType;
     u8 unk_04[4];
     u8 unk_08[4];
     u8 unk_0C[4];
@@ -748,5 +748,11 @@ typedef struct unk_80225800 {
     Vtx unk_040[4][6];
     Vtx unk_1C0[48][5];
 } unk_80225800; // size = 0x10C0
+
+typedef struct BoosterInfo {
+    s32 count;
+    Vec3f pos[4];
+    f32 size[4];
+} BoosterInfo;
 
 #endif // UNK_STRUCTS_H

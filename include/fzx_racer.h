@@ -18,7 +18,7 @@ typedef enum CourseEffects {
 #define COURSE_EFFECT_MASK 0xF
 
 #define RACER_STATE_FLAGS_2000 (1 << 13)
-#define RACER_STATE_FLAGS_4000 (1 << 14)
+#define RACER_STATE_SPINNING_OUT (1 << 14)
 #define RACER_STATE_FLAGS_8000 (1 << 15)
 #define RACER_STATE_FLAGS_10000 (1 << 16)
 #define RACER_STATE_FLAGS_20000 (1 << 17)
@@ -31,7 +31,7 @@ typedef enum CourseEffects {
 #define RACER_STATE_DASH_PAD_BOOST (1 << 24)
 #define RACER_STATE_FLAGS_2000000 (1 << 25)
 #define RACER_STATE_AIRBORNE (1 << 26)
-#define RACER_STATE_FLAGS_8000000 (1 << 27)
+#define RACER_STATE_CRASHED (1 << 27)
 #define RACER_STATE_FLAGS_10000000 (1 << 28)
 #define RACER_STATE_FLAGS_20000000 (1 << 29)
 #define RACER_STATE_FLAGS_40000000 (1 << 30)

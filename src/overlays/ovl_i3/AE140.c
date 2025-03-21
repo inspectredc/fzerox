@@ -633,7 +633,7 @@ Gfx* func_i3_8011C25C(Gfx* gfx, s32 playerNum) {
                     var_v1 = 0;
                     for (i = 0; i < gTotalRacers; i++) {
                         if ((D_i3_80141B40[D_i3_80141A50[playerNum][0]][0] == gRacers[i].character) &&
-                            (!(gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000))) {
+                            (!(gRacers[i].stateFlags & RACER_STATE_CRASHED))) {
                             gRacers[i].energy = 0.0f;
                             var_v1++;
                         }
@@ -1264,7 +1264,7 @@ Gfx* func_i3_8012040C(Gfx* gfx, s32 arg1) {
         if (arg1 == sp60[0]) {
             if (D_i3_80141BE0[arg1] == 60) {
 
-                if (gRacers[arg1].stateFlags & RACER_STATE_FLAGS_8000000) {
+                if (gRacers[arg1].stateFlags & RACER_STATE_CRASHED) {
                     if (D_800CD010 == 0) {
                         func_800BAFA4(0x13);
                     }
@@ -1272,7 +1272,7 @@ Gfx* func_i3_8012040C(Gfx* gfx, s32 arg1) {
                     func_800BAFA4(0x11);
                 }
                 for (i = 0; i < gNumPlayers; i++) {
-                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) ||
+                    if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
                         (gRacers[arg1].stateFlags & RACER_STATE_FLAGS_2000000)) {
                         func_800BA3E4(i, 3);
                         func_800BA3E4(i, 4);
@@ -1685,7 +1685,7 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
             func_800BAFA4(0x11);
         }
         for (i = 0; i < gNumPlayers; i++) {
-            if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) ||
+            if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
                 (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
                 func_800BA3E4(i, 3);
                 func_800BA3E4(i, 4);
@@ -4605,7 +4605,7 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
-                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) ||
+                    if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
                         (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
                         func_800BA3E4(i, 3);
                         func_800BA3E4(i, 4);
@@ -4642,7 +4642,7 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
-                    if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) ||
+                    if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
                         (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
                         func_800BA3E4(i, 3);
                         func_800BA3E4(i, 4);
@@ -4776,8 +4776,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     }
     if (((gGameFrameCount % 120) == 0) && !gGamePaused) {
         for (i = 0; i < gTotalRacers; i++) {
-            if (!(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000) &&
-                (gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000)) {
+            if (!(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000) && (gRacers[i].stateFlags & RACER_STATE_CRASHED)) {
                 gRacers[i].unk_368 = 254;
             }
         }
@@ -4785,7 +4784,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
         if (D_800CD010 != 0) {
             j = 0;
             for (i = 0; i < gNumPlayers; i++) {
-                if (gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) {
+                if (gRacers[i].stateFlags & RACER_STATE_CRASHED) {
                     j++;
                 }
             }
@@ -5032,7 +5031,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
             }
         }
         if (!(gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000) &&
-            (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_8000000)) {
+            (gRacers[playerIndex].stateFlags & RACER_STATE_CRASHED)) {
             if (D_i3_80141C20[0] == 0) {
                 D_i3_80141C30[0] = 0;
                 D_i3_80141C50[0] = 200.0f;
@@ -5127,9 +5126,9 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                     D_i3_80141D58[i] = 0;
                 }
                 if ((racer->stateFlags & RACER_STATE_FLAGS_2000000) && (i < gNumPlayers) &&
-                    !(racer->stateFlags & RACER_STATE_FLAGS_8000000)) {
+                    !(racer->stateFlags & RACER_STATE_CRASHED)) {
                     gfx = func_i3_80126B40(gfx, i);
-                } else if ((racer->stateFlags & RACER_STATE_FLAGS_8000000) &&
+                } else if ((racer->stateFlags & RACER_STATE_CRASHED) &&
                            !(racer->stateFlags & RACER_STATE_FLAGS_2000000) && (i < gNumPlayers) &&
                            (D_i3_80141DF0[i] != 2)) {
                     if (D_i3_80141C20[i] == 0) {
@@ -5164,8 +5163,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
     }
     if ((gSettingVsSlot != 0) && (D_800E5FBC != 1) && (gNumPlayers >= 2)) {
         for (i = 0; i < gNumPlayers; i++) {
-            if ((gRacers[i].stateFlags & RACER_STATE_FLAGS_8000000) &&
-                !(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000)) {
+            if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) && !(gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000)) {
                 gfx = func_i3_8011C25C(gfx, i);
             }
         }

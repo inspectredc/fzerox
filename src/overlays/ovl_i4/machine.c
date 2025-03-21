@@ -906,9 +906,7 @@ void MachineSelect_Init(void) {
     s32 i;
 
     D_800CCFE8 = 3;
-    D_800CE750 = 0.1f;
-    D_800CE74C = D_800CE750;
-    D_800CE748 = D_800CE74C;
+    D_800CE748 = D_800CE74C = D_800CE750 = 0.1f;
     func_80085610();
     func_8008969C();
     gMachineSelectState = MACHINE_SELECT_ACTIVE;

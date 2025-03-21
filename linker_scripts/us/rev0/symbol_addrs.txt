@@ -264,8 +264,9 @@ gDifficulty = 0x800CD008;
 gTotalLapCount = 0x800CD00C;
 gCurrentGhostType = 0x800CD3CC;
 gSettingVsHandicap = 0x800CE4D0;
-sInitialBoostTimer = 0x800CE774;
 gTotalLives = 0x800CE4DC;
+sInitialBoostTimer = 0x800CE774;
+sBoosterInfos = 0x800CE788;
 
 gGameMode = 0x800DCE44;
 gSinTable = 0x800DD230; // size:0x4000

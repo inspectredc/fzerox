@@ -10,6 +10,9 @@
     header:
       - '#include "gfx.h"'
   tables:
+    # aPitForceFieldTexs:
+    #   range: [0x4005EA8, 0x4006CA8]
+    #   mode: APPEND
     aPositionDigitTexs:
       range: [0x4013DE0, 0x4017CE0]
       mode: APPEND
@@ -103,14 +106,14 @@ aDownMarkerTex:
   offset: 0x1C58
   symbol: aDownMarkerTex
 
-D_4001CA8:
+aBoosterTrailTex:
   type: TEXTURE
   ctype: u16
   format: IA16
   width: 16
   height: 16
   offset: 0x1CA8
-  symbol: D_4001CA8
+  symbol: aBoosterTrailTex
 
 aExplosion1Tex:
   type: TEXTURE
@@ -337,106 +340,105 @@ aSmokeEffect8Tex:
   offset: 0x5CA8
   symbol: aSmokeEffect8Tex
 
-# Boost refill effect?
-D_4005EA8:
+aPitForceField1Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x5EA8
-  symbol: D_4005EA8
+  symbol: aPitForceField1Tex
 
-D_40060A8:
+aPitForceField2Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x60A8
-  symbol: D_40060A8
+  symbol: aPitForceField2Tex
 
-D_40062A8:
+aPitForceField3Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x62A8
-  symbol: D_40062A8
+  symbol: aPitForceField3Tex
 
-D_40064A8:
+aPitForceField4Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x64A8
-  symbol: D_40064A8
+  symbol: aPitForceField4Tex
 
-D_40066A8:
+aPitForceField5Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x66A8
-  symbol: D_40066A8
+  symbol: aPitForceField5Tex
 
-D_40068A8:
+aPitForceField6Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x68A8
-  symbol: D_40068A8
+  symbol: aPitForceField6Tex
 
-D_4006AA8:
+aPitForceField7Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x6AA8
-  symbol: D_4006AA8
+  symbol: aPitForceField7Tex
 
-D_4006CA8:
+aPitForceField8Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x6CA8
-  symbol: D_4006CA8
+  symbol: aPitForceField8Tex
 
-D_4006EA8:
+aFallExplosion1Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 64
   height: 64
   offset: 0x6EA8
-  symbol: D_4006EA8
+  symbol: aFallExplosion1Tex
 
-D_40076A8:
+aFallExplosion2Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 64
   height: 64
   offset: 0x76A8
-  symbol: D_40076A8
+  symbol: aFallExplosion2Tex
 
 D_4007EA8:
   type: GFX
   offset: 0x7EA8
   symbol: D_4007EA8
 
-D_4007F08:
+aSetupBoosterDL:
   type: GFX
   offset: 0x7F08
-  symbol: D_4007F08
+  symbol: aSetupBoosterDL
 
 D_4007FB8:
   type: GFX
@@ -463,15 +465,15 @@ D_4008130:
   offset: 0x8130
   symbol: D_4008130
 
-D_4008180:
+aSetupPitForceFieldDL:
   type: GFX
   offset: 0x8180
-  symbol: D_4008180
+  symbol: aSetupPitForceFieldDL
 
-D_40081D8:
+aSetupFallExplosionDL:
   type: GFX
   offset: 0x81D8
-  symbol: D_40081D8
+  symbol: aSetupFallExplosionDL
 
 D_4008250:
   type: GFX
