@@ -918,7 +918,7 @@ Gfx* func_i3_DrawLapRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     if (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000) {
         return gfx;
     }
-    if ((D_i3_80140788[playerIndex] != 0) && (numPlayersIndex >= 2)) {
+    if ((gPlayerMinimapLapCounterToggle[playerIndex] != 0) && (numPlayersIndex >= 2)) {
         return gfx;
     }
 
@@ -944,7 +944,7 @@ Gfx* func_i3_DrawLapCounter(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     if (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000) {
         return gfx;
     }
-    if ((D_i3_80140788[playerIndex] != 0) && (numPlayersIndex >= 2)) {
+    if ((gPlayerMinimapLapCounterToggle[playerIndex] != 0) && (numPlayersIndex >= 2)) {
         return gfx;
     }
 
@@ -1915,7 +1915,7 @@ Gfx* func_i3_DrawDeathRaceBest(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     return gfx;
 }
 
-extern CourseRecordInfo* gCurrentCourseRecordInfo;
+extern CourseInfo* gCurrentCourseInfo;
 
 Gfx* func_i3_DrawDeathRaceBestTime(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 left;
@@ -1928,14 +1928,14 @@ Gfx* func_i3_DrawDeathRaceBestTime(Gfx* gfx, s32 numPlayersIndex, s32 playerInde
     left = sPlayerTimePositions[numPlayersIndex][playerIndex][0] + 32;
     top = sPlayerTimePositions[numPlayersIndex][playerIndex][1] + 16;
 
-    if (gCurrentCourseRecordInfo->timeRecord[0] == MAX_TIMER) {
+    if (gCurrentCourseInfo->timeRecord[0] == MAX_TIMER) {
         gDPPipeSync(gfx++);
         gDPSetCombineLERP(gfx++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE,
                           0, TEXEL0, 0);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
         gfx = func_i3_DrawBlankTimeHundredths(gfx, left, top);
     } else {
-        gfx = func_i3_DrawTimerWithPosition(gfx, gCurrentCourseRecordInfo->timeRecord[0] + 5, left, top, 1.0f);
+        gfx = func_i3_DrawTimerWithPosition(gfx, gCurrentCourseInfo->timeRecord[0] + 5, left, top, 1.0f);
     }
 
     return gfx;

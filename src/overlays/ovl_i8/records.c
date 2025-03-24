@@ -156,7 +156,7 @@ bool func_i8_80143D30(s32 arg0) {
     bool ret = true;
 
     for (i = 0; i < 5; i++) {
-        if (gCourseRecordInfos[arg0].timeRecord[i] != MAX_TIMER) {
+        if (gCourseInfos[arg0].timeRecord[i] != MAX_TIMER) {
             ret = false;
             break;
         }
@@ -173,7 +173,7 @@ bool func_i8_80143D84(s32 arg0) {
 
     Save_LoadGhostInfo(&sp18);
 
-    if (sp18.encodedCourseIndex == gCourseRecordInfos[arg0].encodedCourseIndex) {
+    if (sp18.encodedCourseIndex == gCourseInfos[arg0].encodedCourseIndex) {
         ret = true;
     }
     return ret;

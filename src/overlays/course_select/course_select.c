@@ -243,12 +243,12 @@ void CourseSelect_UpdateUnlockedGhosts(void) {
             sUnlockedGhosts = 1;
         } else {
             // Within 115% of staff ghost time
-            if (gCourseRecordInfos[gCourseIndex].timeRecord[0] < ((ghostInfo.raceTime * 115) / 100)) {
+            if (gCourseInfos[gCourseIndex].timeRecord[0] < ((ghostInfo.raceTime * 115) / 100)) {
                 sUnlockedGhosts = 2;
             } else {
                 sUnlockedGhosts = 1;
             }
-            if (gCourseRecordInfos[gCourseIndex].timeRecord[0] < ghostInfo.raceTime) {
+            if (gCourseInfos[gCourseIndex].timeRecord[0] < ghostInfo.raceTime) {
                 sStaffGhostTimeBeaten = true;
             }
         }
@@ -401,7 +401,7 @@ extern s16 D_800CD048;
 extern Controller gSharedController;
 extern u16 gInputPressed;
 extern u16 gInputButtonPressed;
-extern unk_struct_1DC D_800E5220[];
+extern Player gPlayers[];
 extern s32 D_i2_80106DA4;
 
 s32 CourseSelect_Update(void) {
@@ -521,7 +521,7 @@ s32 CourseSelect_Update(void) {
 
             if ((gInputPressed & BTN_LEFT) && (sCourseSelectTrackNo > 0)) {
                 sCourseSelectTrackNo--;
-                D_800E5220[0].unk_18 = 1;
+                gPlayers[0].unk_18 = 1;
                 arrowsObj = Object_Get(OBJECT_COURSE_SELECT_ARROWS);
                 LEFT_ARROW_ROTATION_CHANGE(arrowsObj) += 0x200;
                 func_800BA8D8(30);
@@ -529,7 +529,7 @@ s32 CourseSelect_Update(void) {
 
             if ((gInputPressed & BTN_RIGHT) && (sCourseSelectTrackNo < 5)) {
                 sCourseSelectTrackNo++;
-                D_800E5220[0].unk_18 = 1;
+                gPlayers[0].unk_18 = 1;
                 arrowsObj = Object_Get(OBJECT_COURSE_SELECT_ARROWS);
                 RIGHT_ARROW_ROTATION_CHANGE(arrowsObj) += 0x200;
                 func_800BA8D8(30);

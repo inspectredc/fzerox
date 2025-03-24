@@ -212,6 +212,6 @@ extern unk_80141EA8 D_i3_80141EA8[];
 extern s32 gPlayerLapNumbers[];
 extern TexturePtr gCharacterPortraitTextures[];
 
-extern s32 D_i3_80140788[];
+extern s32 gPlayerMinimapLapCounterToggle[];
 
 #endif // OVL_I3_H

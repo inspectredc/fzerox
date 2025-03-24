@@ -61,7 +61,7 @@ typedef struct CarInfo {
     /* 0x13 */ u8 envB1;
 } CarInfo; // size = 0x14
 
-typedef struct CourseRecordInfo {
+typedef struct CourseInfo {
     /* 0x00 */ s32 encodedCourseIndex;
     /* 0x04 */ s32 courseIndex;
     /* 0x08 */ s32 segmentCount;
@@ -76,7 +76,7 @@ typedef struct CourseRecordInfo {
     /* 0xC4 */ CarInfo maxSpeedCar;
     /* 0xD8 */ s32 bestTime;
     /* 0xDC */ CarInfo bestTimeCar;
-} CourseRecordInfo; // size = 0xF0
+} CourseInfo; // size = 0xF0
 
 typedef struct unk_802D3E38 {
     s32 effectType;
@@ -238,11 +238,11 @@ typedef struct unk_struct_F8 {
     unk_8008112C_arg_1 unk_04;
 } unk_struct_F8; // size = 0xF8
 
-typedef struct unk_struct_1DC {
-    s32 playerIndex;
+typedef struct Player {
+    s32 id;
     u32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
+    s32 cameraSetting;
+    s32 cameraLookBackRotate;
     s32 unk_10;
     f32 unk_14;
     s32 unk_18;
@@ -291,7 +291,7 @@ typedef struct unk_struct_1DC {
     MtxF unk_11C;
     MtxF unk_15C;
     MtxF unk_19C;
-} unk_struct_1DC; // size = 0x1DC
+} Player; // size = 0x1DC
 
 typedef struct Racer_unk_C {
     CourseSegment* courseSegment;
@@ -404,10 +404,10 @@ typedef struct Racer {
     s8 unk_2B2;
     s8 unk_2B3;
     s32 unk_2B4;
-    struct Racer* unk_2B8;
-    struct Racer* unk_2BC;
-    f32 unk_2C0;
-    f32 unk_2C4;
+    struct Racer* racerAhead;
+    struct Racer* racerBehind;
+    f32 distanceToRacerAhead;
+    f32 distanceFromRacerBehind;
     s8 character;
     s8 unk_2C9;
     u8 shadowType;
@@ -445,26 +445,26 @@ typedef struct Racer {
     f32 unk_338;
     f32 unk_33C;
     s32 unk_340;
-    s8 unk_344;
-    s8 unk_345;
-    s8 unk_346;
-    s8 unk_347;
-    s8 unk_348;
-    s8 unk_349;
-    s8 unk_34A;
-    s8 unk_34B;
-    s8 unk_34C;
+    s8 segmentLandmine;
+    s8 segmentJump;
+    s8 segmentDirt;
+    s8 segmentIce;
+    s8 segmentPit;
+    s8 segmentDash;
+    s8 nextSegmentLandmine;
+    s8 nextSegmentDirt;
+    s8 nextSegmentDash;
     s8 unk_34D;
-    s16 unk_34E;
+    s16 obstaclePriorityState;
     s16 unk_350;
     s16 unk_352;
     f32 unk_354;
-    s32 unk_358;
-    s32 unk_35C;
+    s32 lastSegmentIndex;
+    s32 trackSegmentForm;
     f32 unk_360;
     f32 unk_364;
     u32 unk_368;
-    s32 unk_36C;
+    s32 awarenessFlags;
     s32 unk_370;
     s32 lastStickX;
     s32 lastStickY;
@@ -473,7 +473,7 @@ typedef struct Racer {
     s32 unk_384;
     f32 unk_388;
     f32 unk_38C;
-    s32 unk_390;
+    s32 driftingCounter;
     s32 unk_394;
     s32 unk_398;
     s32 unk_39C;
@@ -754,5 +754,13 @@ typedef struct BoosterInfo {
     Vec3f pos[4];
     f32 size[4];
 } BoosterInfo;
+
+typedef struct RacerPairInfo {
+    Racer* leadRacer;
+    Racer* trailRacer;
+    f32 trailToLeadDistance;
+    f32 leadToTrailDistance;
+    s32 unk_10;
+} RacerPairInfo; // size = 0x14
 
 #endif // UNK_STRUCTS_H

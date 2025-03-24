@@ -165,7 +165,7 @@ extern Lights0 D_20284C0;
 extern FrameBuffer* gFrameBuffers[];
 extern char* gTrackNames[55];
 extern Gfx D_8014940[];
-extern unk_struct_1DC D_800E5220[];
+extern Player gPlayers[];
 extern GfxPool D_1000000;
 
 extern u32 gGameFrameCount;
@@ -175,7 +175,7 @@ extern s16 D_800E5FE4;
 extern s16 D_800E5FE6;
 
 Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
-    CourseRecordInfo* var_s2;
+    CourseInfo* var_s2;
     s32 sp1A8;
     s32 xl;
     s32 yl;
@@ -232,7 +232,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
     }
 
     if (D_i3_80143780 & 0x40) {
-        var_s2 = &gCourseRecordInfos[courseIndex];
+        var_s2 = &gCourseInfos[courseIndex];
         for (i = 0; i < 5; i++) {
             if (i & 1) {
                 var_s3 = -D_i3_80143788;
@@ -252,7 +252,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
     }
 
     sp1A8 = 1;
-    var_s2 = &gCourseRecordInfos[courseIndex];
+    var_s2 = &gCourseInfos[courseIndex];
     for (i = 0; i < 5; i++) {
 
         if (i & 1) {
@@ -428,7 +428,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
     gSPLoadUcodeL(gfx++, gspF3DFLX_Rej_fifo);
     gfx = Segment_SetTableAddresses(gfx);
     gSPClipRatio(gfx++, FRUSTRATIO_3);
-    gSPPerspNormalize(gfx++, D_800E5220[1].unk_118);
+    gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
     gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPDisplayList(gfx++, D_303A5F8);
     gSPNumLights(gfx++, NUMLIGHTS_1);
@@ -579,11 +579,11 @@ extern s16 D_800E5FE2;
 extern s32 gCourseIndex;
 
 void func_i3_8013C008(void) {
-    CourseRecordInfo* temp_v1;
+    CourseInfo* temp_v1;
     s32 i;
 
     if (D_800E5FE2 != 0) {
-        temp_v1 = &gCourseRecordInfos[gCourseIndex];
+        temp_v1 = &gCourseInfos[gCourseIndex];
         for (i = 0; i < 4; i++) {
             temp_v1->name[D_800E5FE2 - 1][i] = 0;
         }
@@ -705,7 +705,7 @@ void func_i3_8013C3B4(s32 arg0) {
     }
 }
 
-void func_i3_8013D214(CourseRecordInfo* arg0);
+void func_i3_8013D214(CourseInfo* arg0);
 
 extern u32 gGameFrameCount;
 extern u16 gInputPressed;
@@ -723,7 +723,7 @@ void func_i3_8013C6D8(void) {
     s32 sp118;
     s32 temp_ft0;
     s32 temp_ft4;
-    CourseRecordInfo* sp10C;
+    CourseInfo* sp10C;
     s32 sp64;
     s32 sp60;
     Vtx* vtx;
@@ -736,7 +736,7 @@ void func_i3_8013C6D8(void) {
     f32 temp_fv0;
     MtxF sp74;
 
-    sp10C = &gCourseRecordInfos[gCourseIndex];
+    sp10C = &gCourseInfos[gCourseIndex];
     previousKeyboardIndex = (sKeyboardCursorY * 10) + sKeyboardCursorX;
 
     if (gRecordNameEnteredLength < 3) {
@@ -927,7 +927,7 @@ s32 func_i3_8013D1B4(s8 character) {
     return characterKeyboardIndex;
 }
 
-void func_i3_8013D214(CourseRecordInfo* arg0) {
+void func_i3_8013D214(CourseInfo* arg0) {
     s32 i;
     s32 var_v1;
 

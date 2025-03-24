@@ -70,7 +70,7 @@ extern Gfx D_8014940[];
 extern FrameBuffer* gFrameBuffers[];
 extern GfxPool* gGfxPool;
 extern s32 D_800DCD04;
-extern unk_struct_1DC D_800E5220[];
+extern Player gPlayers[];
 extern Vtx* D_800E5ECC;
 extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
@@ -606,7 +606,7 @@ Gfx* EndingCutscene_Draw(Gfx* gfx) {
     gSPClipRatio(gfx++, FRUSTRATIO_3);
     gDPPipeSync(gfx++);
     gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
-    gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+    gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
     gSPMatrix(gfx++, D_1000000.unk_20208, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
     gfx = func_800833AC(gfx, 0, 0);
@@ -1933,8 +1933,8 @@ void func_i7_801478E8(void) {
         for (i = 0; i < gTotalRacers; i++) {
             racer = &gRacers[i];
             func_8006BC84(
-                &D_i7_8014BDF0->unk_3F0[i], NULL, 0.04f, 0.04f, 0.04f, -D_800E5220[0].unk_5C.x.x,
-                -D_800E5220[0].unk_5C.x.y, -D_800E5220[0].unk_5C.x.z, racer->unk_C0.y.x, racer->unk_C0.y.y,
+                &D_i7_8014BDF0->unk_3F0[i], NULL, 0.04f, 0.04f, 0.04f, -gPlayers[0].unk_5C.x.x,
+                -gPlayers[0].unk_5C.x.y, -gPlayers[0].unk_5C.x.z, racer->unk_C0.y.x, racer->unk_C0.y.y,
                 racer->unk_C0.y.z,
                 racer->unk_168.x + ((racer->unk_C0.x.x * 23.0f * 3.0f) / 2) + (racer->unk_C0.z.x * 23.0f * 0.8f),
                 (D_i7_8014BEC8[i].unk_0C + 120.0f) - 1.0f,
@@ -2006,7 +2006,7 @@ void func_i7_80147EBC(void) {
     s32 var_s1;
     s32 i;
     s32 j;
-    unk_struct_1DC* var = &D_800E5220[0];
+    Player* var = &gPlayers[0];
     unk_8014BF98* temp_s4;
     unk_8014BF94* temp_s0;
     bool var_a1;
@@ -2141,7 +2141,7 @@ void func_i7_80147EBC(void) {
                             func_800BAA88((s32) (f32) (u32) (((var_fa0 + 1000.0f) / 2000.0f) * 127.0f), 0x40);
                         }
                     }
-                    var_fs1_2 = sqrtf(SQ(D_800E5220[0].unk_5C.z.x) + SQ(D_800E5220[0].unk_5C.z.z));
+                    var_fs1_2 = sqrtf(SQ(gPlayers[0].unk_5C.z.x) + SQ(gPlayers[0].unk_5C.z.z));
 
                     if (var_fs1_2 < 0.0001f) {
                         var_fs1_2 = 0.0001f;
@@ -2214,11 +2214,11 @@ void func_i7_80147EBC(void) {
 
                                 temp_fv0_6 = -(((var_s1 & 0x3F) - 0x20) * 0.12f);
 
-                                temp_s0->unk_18 = ((D_800E5220[0].unk_5C.z.x * var_fs1_2 * 0.866f) -
-                                                   (D_800E5220[0].unk_5C.z.z * var_fs1_2 * 0.5f)) *
+                                temp_s0->unk_18 = ((gPlayers[0].unk_5C.z.x * var_fs1_2 * 0.866f) -
+                                                   (gPlayers[0].unk_5C.z.z * var_fs1_2 * 0.5f)) *
                                                   temp_fv0_6;
-                                temp_s0->unk_20 = ((D_800E5220[0].unk_5C.z.z * var_fs1_2 * 0.866f) +
-                                                   (D_800E5220[0].unk_5C.z.x * var_fs1_2 * 0.5f)) *
+                                temp_s0->unk_20 = ((gPlayers[0].unk_5C.z.z * var_fs1_2 * 0.866f) +
+                                                   (gPlayers[0].unk_5C.z.x * var_fs1_2 * 0.5f)) *
                                                   temp_fv0_6;
 
                                 temp_s0->unk_1C = ((-(f32) ((var_s1 >> 6) - 0x48)) * 0.12f);
@@ -2339,9 +2339,9 @@ void func_i7_80147EBC(void) {
             } else {
                 for (j = temp_s4->unk_2E; j < temp_s4->unk_2E + temp_s4->unk_30; j++) {
                     temp_s0 = &D_i7_8014BF94[j];
-                    temp_fv0_12 = D_800E5220[0].unk_50.x + temp_s0->unk_00;
+                    temp_fv0_12 = gPlayers[0].unk_50.x + temp_s0->unk_00;
                     temp_fv1_5 = temp_s0->unk_04;
-                    temp_fa1 = D_800E5220[0].unk_50.z + temp_s0->unk_08;
+                    temp_fa1 = gPlayers[0].unk_50.z + temp_s0->unk_08;
 
                     var_fs0_2 = (temp_fv0_12 - var->unk_50.x);
                     temp_ft4 = (temp_fv1_5 - var->unk_50.y);

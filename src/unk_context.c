@@ -1,7 +1,7 @@
 #include "global.h"
 #include "fzx_racer.h"
 
-CourseRecordInfo gCourseRecordInfos[56]; // 0x3480
+CourseInfo gCourseInfos[56]; // 0x3480
 unk_36ED0 D_802A9FC0[1025];              // 0x18060
 CourseSegment D_802C2020[64];            // 0x2900
 Racer gRacers[TOTAL_RACER_COUNT];        // 0x6DB0

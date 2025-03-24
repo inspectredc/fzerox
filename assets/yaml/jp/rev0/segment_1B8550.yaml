@@ -88,23 +88,23 @@ aRivalMarkerTex:
   offset: 0x16E8
   symbol: aRivalMarkerTex
 
-aCheckMarkerTex:
+aCheckMarker1PTex:
   type: TEXTURE
   ctype: u8
   format: IA4
   width: 32
   height: 23
   offset: 0x1AE8
-  symbol: aCheckMarkerTex
+  symbol: aCheckMarker1PTex
 
-aDownMarkerTex:
+aCheckMarkerMPTex:
   type: TEXTURE
   ctype: u8
   format: IA4
   width: 16
   height: 10
   offset: 0x1C58
-  symbol: aDownMarkerTex
+  symbol: aCheckMarkerMPTex
 
 aBoosterTrailTex:
   type: TEXTURE

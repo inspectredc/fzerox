@@ -66,7 +66,7 @@ extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
 extern GfxPool D_1000000;
 extern GfxPool* gGfxPool;
-extern unk_struct_1DC D_800E5220[];
+extern Player gPlayers[];
 extern FrameBuffer* gFrameBuffers[];
 extern s16 D_800CCFE4;
 extern s32 gNumPlayers;
@@ -168,50 +168,50 @@ Gfx* Race_Draw(Gfx* gfx) {
 
     switch (gNumPlayers) {
         case 1:
-            gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 0, 0);
             gfx = func_80096CE8(gfx, 0);
             gfx = func_i3_8012CF34(gfx, 0);
             break;
         case 2:
-            gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 1, 0);
             gfx = func_80096CE8(gfx, 0);
-            gSPPerspNormalize(gfx++, D_800E5220[1].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 2, 1);
             gfx = func_80096CE8(gfx, 1);
             break;
         case 3:
-            gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 5, 0);
             gfx = func_80096CE8(gfx, 0);
-            gSPPerspNormalize(gfx++, D_800E5220[1].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 7, 1);
             gfx = func_80096CE8(gfx, 1);
-            gSPPerspNormalize(gfx++, D_800E5220[2].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[2].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[2], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 6, 2);
             gfx = func_80096CE8(gfx, 2);
             break;
         case 4:
-            gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 5, 0);
             gfx = func_80096CE8(gfx, 0);
-            gSPPerspNormalize(gfx++, D_800E5220[1].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 7, 1);
             gfx = func_80096CE8(gfx, 1);
-            gSPPerspNormalize(gfx++, D_800E5220[2].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[2].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[2], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 6, 2);
             gfx = func_80096CE8(gfx, 2);
-            gSPPerspNormalize(gfx++, D_800E5220[3].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[3].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[3], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 8, 3);
             gfx = func_80096CE8(gfx, 3);

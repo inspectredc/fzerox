@@ -1662,7 +1662,7 @@ Gfx* MachineSelect_CursorDraw(Gfx* gfx, Object* cursorObj) {
     return gfx;
 }
 
-extern unk_struct_1DC D_800E5220[];
+extern Player gPlayers[];
 extern GfxPool D_1000000;
 extern GfxPool* gGfxPool;
 
@@ -1671,7 +1671,7 @@ Gfx* MachineSelect_CarDraw(Gfx* gfx, Object* carObj) {
     s32 i;
     s32 j;
 
-    gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+    gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
 
     gSPMatrix(gfx++, D_1000000.unk_20208, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
@@ -1756,7 +1756,7 @@ extern Gfx D_90186C8[];
 Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* carObj) {
     s32 i;
 
-    gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+    gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
 
     gSPMatrix(gfx++, D_1000000.unk_20208, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
@@ -1802,7 +1802,7 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* carObj) {
 
     gSPDisplayList(gfx++, D_90186C8);
 
-    Light_SetLookAtSource(&gGfxPool->unk_21B28, &D_800E5220[0].unk_15C);
+    Light_SetLookAtSource(&gGfxPool->unk_21B28, &gPlayers[0].unk_15C);
     gSPLookAt(gfx++, &gGfxPool->unk_21B28);
 
     gSPTexture(gfx++, D_i4_8011D4E0, D_i4_8011D4E0, 0, G_TX_RENDERTILE, G_ON);
@@ -2248,9 +2248,9 @@ void MachineSettings_CarUpdate(Object* carObj) {
         var_s0->unk_C0.x.x += var_fs1 * var_s0->unk_C0.y.x;
         var_s0->unk_C0.x.y += var_fs1 * var_s0->unk_C0.y.y;
         var_s0->unk_C0.x.z += var_fs1 * var_s0->unk_C0.y.z;
-        var_s0->unk_C0.y.x = var_s0->unk_C0.y.x + (var_fs0 * var_s0->unk_C0.z.x);
-        var_s0->unk_C0.y.y = var_s0->unk_C0.y.y + (var_fs0 * var_s0->unk_C0.z.y);
-        var_s0->unk_C0.y.z = var_s0->unk_C0.y.z + (var_fs0 * var_s0->unk_C0.z.z);
+        var_s0->unk_C0.y.x += var_fs0 * var_s0->unk_C0.z.x;
+        var_s0->unk_C0.y.y += var_fs0 * var_s0->unk_C0.z.y;
+        var_s0->unk_C0.y.z += var_fs0 * var_s0->unk_C0.z.z;
         func_8006AA38(&var_s0->unk_C0);
         func_8006BC84(&gGfxPool->unk_20308[i], NULL, var_fs2 * D_800CE748, var_fs2 * D_800CE74C, var_fs2 * D_800CE750,
                       var_s0->unk_C0.x.x, var_s0->unk_C0.x.y, var_s0->unk_C0.x.z, var_s0->unk_C0.y.x,

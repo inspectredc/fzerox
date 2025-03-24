@@ -53,10 +53,10 @@ void func_800741DC(s32 courseIndex);
 void func_800742D0(void);
 void func_800742FC(void);
 void func_80074428(s32 courseIndex);
-void func_80074634(CourseRecordInfo* courseRecordInfo);
+void func_80074634(CourseInfo* courseInfo);
 void func_800747EC(s32 venue);
 void func_80074A90(f32* arg0, f32* arg1);
-void func_80074CE4(CourseRecordInfo*);
+void func_80074CE4(CourseInfo*);
 void func_80074844(void);
 
 void func_8007515C(void);
@@ -192,15 +192,15 @@ Gfx* func_8009CEA0(Gfx* gfx, s32 character);
 
 void func_8009CED0(s32 venue);
 s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4);
-s32 func_8009DEAC(CourseRecordInfo* arg0);
+s32 func_8009DEAC(CourseInfo* arg0);
 f32 func_8009E108(CourseSegment*, f32, f32*);
 f32 func_8009E538(CourseSegment*, f32, Vec3f*);
 void func_8009E6F0(CourseSegment*, f32, Vec3f*);
 f32 func_8009E85C(CourseSegment*, f32, Mtx3F*, f32);
-void func_8009F508(CourseRecordInfo* arg0);
+void func_8009F508(CourseInfo* arg0);
 f32 func_8009DFA0(Racer_unk_C* arg0);
 
-s32 func_800A2D2C(CourseRecordInfo* arg0, Vtx* arg1);
+s32 func_800A2D2C(CourseInfo* arg0, Vtx* arg1);
 void Course_GenerateRandomCourse(void);
 void func_800A4EAC(void);
 void func_800A5028(void);

@@ -73,7 +73,7 @@ s32 Save_LoadStaffGhost(s32);
 s32 Save_LoadGhost(s32 courseIndex) {
     s32 i;
     s32 sp18;
-    s32 encodedCourseIndex = gCourseRecordInfos[courseIndex].encodedCourseIndex;
+    s32 encodedCourseIndex = gCourseInfos[courseIndex].encodedCourseIndex;
     Ghost* ghost = gGhosts;
 
     for (i = 0; i < 3; i++) {
@@ -613,7 +613,7 @@ s32 Save_InitGhost(s32 courseIndex) {
     GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
     for (i = 0, ghost = gGhosts; i < 3; i++, ghost++) {
-        if (ghost->encodedCourseIndex == gCourseRecordInfos[courseIndex].encodedCourseIndex) {
+        if (ghost->encodedCourseIndex == gCourseInfos[courseIndex].encodedCourseIndex) {
             ghost->encodedCourseIndex = 0;
         }
     }
@@ -932,7 +932,7 @@ void func_i2_80102110(CarInfo* carInfo, unk_80141C88_unk_1D* arg1) {
 }
 
 void Save_SaveDeathRace(SaveDeathRace* deathRace) {
-    CourseRecordInfo* var_a1 = &gCourseRecordInfos[54];
+    CourseInfo* var_a1 = &gCourseInfos[54];
     s32 i;
 
     for (i = 0; i < 1; i++) {
@@ -948,23 +948,23 @@ void Save_SaveDeathRace(SaveDeathRace* deathRace) {
 }
 
 void Save_SaveCourseRecord(SaveCourseRecords* courseRecords, s32 courseIndex) {
-    CourseRecordInfo* courseRecordInfo;
+    CourseInfo* courseInfo;
     s32 i;
     s32 j;
 
-    courseRecordInfo = &gCourseRecordInfos[courseIndex];
+    courseInfo = &gCourseInfos[courseIndex];
 
     for (i = 0; i < 5; i++) {
-        courseRecords->timeRecord[i] = courseRecordInfo->timeRecord[i];
-        courseRecords->engine[i] = courseRecordInfo->engine[i];
-        func_i2_80102110(&courseRecordInfo->carInfo[i], &courseRecords->unk_50[i]);
+        courseRecords->timeRecord[i] = courseInfo->timeRecord[i];
+        courseRecords->engine[i] = courseInfo->engine[i];
+        func_i2_80102110(&courseInfo->carInfo[i], &courseRecords->unk_50[i]);
         for (j = 0; j < 4; j++) {
-            courseRecords->name[i][j] = courseRecordInfo->name[i][j];
+            courseRecords->name[i][j] = courseInfo->name[i][j];
         }
     }
-    courseRecords->maxSpeed = courseRecordInfo->maxSpeed;
-    courseRecords->bestTime = courseRecordInfo->bestTime;
-    func_i2_80102110(&courseRecordInfo->maxSpeedCar, &courseRecords->unk_F0);
+    courseRecords->maxSpeed = courseInfo->maxSpeed;
+    courseRecords->bestTime = courseInfo->bestTime;
+    func_i2_80102110(&courseInfo->maxSpeedCar, &courseRecords->unk_F0);
     courseRecords->unk_02 = 0;
 
     // clang-format off
@@ -1072,25 +1072,25 @@ void func_i2_80102A7C(unk_80141C88_unk_1D*, CarInfo*);
 void Save_Load(SaveContext* saveContext) {
     s32 i;
     s32 j;
-    CourseRecordInfo* courseRecordInfo;
+    CourseInfo* courseInfo;
     Ghost* ghost;
     unk_80141C88_unk_1D sp60;
 
-    for (i = 0, courseRecordInfo = gCourseRecordInfos; i < ARRAY_COUNT(gCourseRecordInfos); i++, courseRecordInfo++) {
+    for (i = 0, courseInfo = gCourseInfos; i < ARRAY_COUNT(gCourseInfos); i++, courseInfo++) {
         if (i < 24) {
             Save_LoadCourseRecord(saveContext->profileSaves, i);
         } else {
             func_i2_80101C78(&sp60);
 
             for (j = 0; j < 5; j++) {
-                courseRecordInfo->timeRecord[j] = MAX_TIMER;
-                courseRecordInfo->engine[j] = 0.5f;
-                func_i2_80102A7C(&sp60, &courseRecordInfo->carInfo[j]);
+                courseInfo->timeRecord[j] = MAX_TIMER;
+                courseInfo->engine[j] = 0.5f;
+                func_i2_80102A7C(&sp60, &courseInfo->carInfo[j]);
             }
 
-            courseRecordInfo->maxSpeed = 0.0f;
+            courseInfo->maxSpeed = 0.0f;
 
-            func_i2_80102A7C(&sp60, &courseRecordInfo->maxSpeedCar);
+            func_i2_80102A7C(&sp60, &courseInfo->maxSpeedCar);
             if (i == 54) {
                 Save_LoadDeathRace(saveContext->profileSaves);
             }
@@ -1226,7 +1226,7 @@ void Save_LoadDeathRace(ProfileSave* profileSaves) {
     s32 invalidSaveCount;
     s32 backupSaveIndex;
     s32 invalidSaveIndex;
-    CourseRecordInfo* courseRecordInfo;
+    CourseInfo* courseInfo;
     SaveDeathRace* deathRaceSave;
     ProfileSave* profileSave;
     s32 i;
@@ -1257,10 +1257,10 @@ void Save_LoadDeathRace(ProfileSave* profileSaves) {
 
         Save_WriteSaveDeathRace(profileSaves, invalidSaveIndex, Save_CalculateSaveDeathRaceChecksum(profileSaves));
     }
-    courseRecordInfo = &gCourseRecordInfos[54];
+    courseInfo = &gCourseInfos[54];
     deathRaceSave = &profileSaves->deathRace;
     for (i = 0; i < 1; i++) {
-        courseRecordInfo->timeRecord[i] = deathRaceSave->timeRecord[i];
+        courseInfo->timeRecord[i] = deathRaceSave->timeRecord[i];
     }
 }
 
@@ -1269,7 +1269,7 @@ void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex) {
     s32 j;
     s32 i;
     s32 invalidSaveIndex;
-    CourseRecordInfo* courseRecordInfo;
+    CourseInfo* courseInfo;
     ProfileSave* profileSave;
     s32 backupSaveIndex;
     SaveCourseRecords* courseRecord;
@@ -1306,19 +1306,19 @@ void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex) {
     }
 
     courseRecord = &profileSaves->courses[courseIndex];
-    courseRecordInfo = &gCourseRecordInfos[courseIndex];
+    courseInfo = &gCourseInfos[courseIndex];
 
     for (i = 0; i < 5; i++) {
-        courseRecordInfo->timeRecord[i] = courseRecord->timeRecord[i];
-        courseRecordInfo->engine[i] = courseRecord->engine[i];
-        func_i2_80102A7C(&courseRecord->unk_50[i], &courseRecordInfo->carInfo[i]);
+        courseInfo->timeRecord[i] = courseRecord->timeRecord[i];
+        courseInfo->engine[i] = courseRecord->engine[i];
+        func_i2_80102A7C(&courseRecord->unk_50[i], &courseInfo->carInfo[i]);
         for (j = 0; j < 4; j++) {
-            courseRecordInfo->name[i][j] = courseRecord->name[i][j];
+            courseInfo->name[i][j] = courseRecord->name[i][j];
         }
     }
-    courseRecordInfo->maxSpeed = courseRecord->maxSpeed;
-    courseRecordInfo->bestTime = courseRecord->bestTime;
-    func_i2_80102A7C(&courseRecord->unk_F0, &courseRecordInfo->maxSpeedCar);
+    courseInfo->maxSpeed = courseRecord->maxSpeed;
+    courseInfo->bestTime = courseRecord->bestTime;
+    func_i2_80102A7C(&courseRecord->unk_F0, &courseInfo->maxSpeedCar);
 }
 
 void Save_LoadGhostRecord(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3) {

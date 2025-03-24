@@ -931,7 +931,7 @@ void func_8007E1C0(void) {
             sp38 = true;
             break;
         } else {
-            if (gCourseRecordInfos[i].timeRecord[0] >= sp40.raceTime) {
+            if (gCourseInfos[i].timeRecord[0] >= sp40.raceTime) {
                 sp38 = true;
                 break;
             }
