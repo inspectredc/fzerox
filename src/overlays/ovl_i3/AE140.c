@@ -3,6 +3,7 @@
 #include "fzx_racer.h"
 #include "fzx_save.h"
 #include "fzx_course.h"
+#include "fzx_machine.h"
 #include "src/overlays/ovl_i2/ovl_i2.h"
 #include "ovl_i3.h"
 #include "assets/segment_17B960.h"
@@ -3305,8 +3306,8 @@ Gfx* func_i3_80127B2C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_i3_DrawTimerScisThousandths(gfx, gCurrentCourseInfo->timeRecord[0],
-                                           ((s32) (var_t2 + var_t4) / 2) - 60, (s32) (var_t3 + var_t5) / 2, 1.0f);
+    gfx = func_i3_DrawTimerScisThousandths(gfx, gCurrentCourseInfo->timeRecord[0], ((s32) (var_t2 + var_t4) / 2) - 60,
+                                           (s32) (var_t3 + var_t5) / 2, 1.0f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 255);
 
@@ -3314,7 +3315,7 @@ Gfx* func_i3_80127B2C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
     gfx = Font_DrawString(gfx, arg1 - 41, arg2 - 3, "BEST TIME", 1, FONT_SET_6, 0);
-    gfx = Font_DrawString(gfx, arg1 + 19, arg2 + 16, gCurrentCourseInfo->name[0], 1, 1, 0);
+    gfx = Font_DrawString(gfx, arg1 + 19, arg2 + 16, gCurrentCourseInfo->recordNames[0], 1, 1, 0);
     gDPPipeSync(gfx++);
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 16, 308, 224);
     return gfx;
@@ -3356,8 +3357,8 @@ Gfx* func_i3_80127E88(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_i3_DrawTimerScisThousandths(gfx, gCurrentCourseInfo->timeRecord[0],
-                                           ((s32) (var_t2 + var_t4) / 2) - 35, (s32) (var_t3 + var_t5) / 2, 1.0f);
+    gfx = func_i3_DrawTimerScisThousandths(gfx, gCurrentCourseInfo->timeRecord[0], ((s32) (var_t2 + var_t4) / 2) - 35,
+                                           (s32) (var_t3 + var_t5) / 2, 1.0f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 255);
 
@@ -4528,7 +4529,7 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
     if ((gGameMode == GAMEMODE_GP_RACE) && (D_i3_80141B88[playerIndex] == 60) && (gRacerIdsByPosition[0] == 0) &&
         ((gCourseIndex % 6) == 5) && (gCupType <= X_CUP)) {
         func_8007DEF0();
-        if (gRacers[0].customType == 0) {
+        if (gRacers[0].customType == CUSTOM_MACHINE_DEFAULT) {
             Save_UpdateCupCompletion(gDifficulty, gCupType, gRacers[0].character);
         }
     }
@@ -4795,8 +4796,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
         }
     }
     if (gNumPlayers == 1) {
-        if (((gPlayers[playerIndex].unk_04 == 4) || (gPlayers[playerIndex].unk_04 == 6)) &&
-            (D_i3_80141C20[0] == 0)) {
+        if (((gPlayers[playerIndex].unk_04 == 4) || (gPlayers[playerIndex].unk_04 == 6)) && (D_i3_80141C20[0] == 0)) {
             temp_ft5 = gRacers[playerIndex].raceDistance / gRacers[playerIndex].raceTime;
             if (gGameMode == GAMEMODE_GP_RACE) {
                 if (gRaceTimeIntervalToggle) {
@@ -4844,8 +4844,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                     if (temp_ft5 > 0.1f) {
                         var_fa0 =
                             ((D_i3_80141DD0->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) * 0.8892f;
-                        if ((gCurrentCourseInfo->length * (gTotalLapCount - 0.01f)) <=
-                            D_i3_80141DD0->raceDistance) {
+                        if ((gCurrentCourseInfo->length * (gTotalLapCount - 0.01f)) <= D_i3_80141DD0->raceDistance) {
                             var_fa0 = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].raceDistance) *
                                        gCurrentCourseInfo->length * gTotalLapCount) -
                                       gFastestGhostTime;
@@ -4914,8 +4913,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                     if ((gGameMode == GAMEMODE_GP_RACE) || (gGameMode == GAMEMODE_PRACTICE) ||
                         (gGameMode == GAMEMODE_DEATH_RACE)) {
                         gfx = func_i3_801281B4(gfx, i, 93, j);
-                        if ((gGameMode == GAMEMODE_DEATH_RACE) &&
-                            (gCurrentCourseInfo->timeRecord[0] != MAX_TIMER)) {
+                        if ((gGameMode == GAMEMODE_DEATH_RACE) && (gCurrentCourseInfo->timeRecord[0] != MAX_TIMER)) {
                             i = 300 - (D_i3_80141D8C * 8);
                             if (i < 160) {
                                 i = 140;

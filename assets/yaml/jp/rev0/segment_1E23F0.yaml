@@ -1,9 +1,12 @@
 :config:
   segments:
     - [0x07,  0x1E2870]
+  external_files:
+    - "assets/yaml/jp/rev0/segment_17B960.yaml"
   header:
     code:
       - '#include "assets/segment_1E23F0.h"'
+      - '#include "assets/segment_17B960.h"'
     header:
       - '#include "gfx.h"'
 
@@ -6299,8 +6302,6 @@ D_7044FD8:
   count: 12
   offset: 0x44FD8
   symbol: D_7044FD8
-
-
 
 D_7045098:
   type: GFX

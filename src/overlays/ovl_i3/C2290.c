@@ -2,6 +2,7 @@
 #include "fzx_game.h"
 #include "fzx_hud.h"
 #include "fzx_racer.h"
+#include "fzx_machine.h"
 #include "ovl_i3.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"
@@ -1755,7 +1756,7 @@ void func_i3_UpdateCharacterPortraits(void) {
     s32 i;
 
     for (i = 0; i < gTotalRacers; i++) {
-        if (gRacers[i].customType >= 2) {
+        if (IS_SUPER_MACHINE(gRacers[i].customType)) {
             func_i3_ReplaceCharacterPortrait(gRacers[i].character);
         }
     }

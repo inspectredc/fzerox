@@ -3,7 +3,7 @@
     - [0x03,  0x17B1E0]
   header:
     code:
-      - '#include "assets/segment_17B1E0.h"'
+      - '#include "assets/segment_17B960.h"'
     header:
       - '#include "gfx.h"'
 
@@ -996,14 +996,14 @@ D_30110A8:
   offset: 0x110A8
   symbol: D_30110A8
 
-D_3011578:
+aMachineNumber26Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x11578
-  symbol: D_3011578
+  symbol: aMachineNumber26Tex
 
 D_3011778:
   type: VTX
@@ -1080,14 +1080,14 @@ D_3012C48:
   offset: 0x12C48
   symbol: D_3012C48
 
-D_3012CC8:
+aMachineNumber22Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x12CC8
-  symbol: D_3012CC8
+  symbol: aMachineNumber22Tex
 
 D_3012EC8:
   type: VTX
@@ -1152,14 +1152,14 @@ D_3013E58:
   offset: 0x13E58
   symbol: D_3013E58
 
-D_3013ED8:
+aMachineNumber12Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x13ED8
-  symbol: D_3013ED8
+  symbol: aMachineNumber12Tex
 
 D_30140D8:
   type: VTX
@@ -1233,14 +1233,14 @@ D_3015198:
   offset: 0x15198
   symbol: D_3015198
 
-D_3015218:
+aMachineNumber28Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x15218
-  symbol: D_3015218
+  symbol: aMachineNumber28Tex
 
 D_3015418:
   type: VTX
@@ -1314,14 +1314,14 @@ D_3016558:
   offset: 0x16558
   symbol: D_3016558
 
-D_3016758:
+aMachineNumber10Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x16758
-  symbol: D_3016758
+  symbol: aMachineNumber10Tex
 
 D_3016958:
   type: VTX
@@ -1380,14 +1380,14 @@ D_3017498:
   offset: 0x17498
   symbol: D_3017498
 
-D_30175D8:
+aMachineNumber19Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x175D8
-  symbol: D_30175D8
+  symbol: aMachineNumber19Tex
 
 D_30177D8:
   type: VTX
@@ -1440,14 +1440,14 @@ D_30182F8:
   offset: 0x182F8
   symbol: D_30182F8
 
-D_3018498:
+aMachineNumber17Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x18498
-  symbol: D_3018498
+  symbol: aMachineNumber17Tex
 
 D_3018698:
   type: TEXTURE
@@ -1524,14 +1524,14 @@ D_3019FE8:
   offset: 0x19FE8
   symbol: D_3019FE8
 
-D_301A068:
+aMachineNumber30Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x1A068
-  symbol: D_301A068
+  symbol: aMachineNumber30Tex
 
 D_301A268:
   type: TEXTURE
@@ -1608,14 +1608,14 @@ D_301B1B8:
   offset: 0x1B1B8
   symbol: D_301B1B8
 
-D_301B5B8:
+aMachineNumber24Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x1B5B8
-  symbol: D_301B5B8
+  symbol: aMachineNumber24Tex
 
 D_301B7B8:
   type: VTX
@@ -1683,14 +1683,14 @@ D_301C818:
   offset: 0x1C818
   symbol: D_301C818
 
-D_301C898:
+aMachineNumber14Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x1C898
-  symbol: D_301C898
+  symbol: aMachineNumber14Tex
 
 D_301CA98:
   type: VTX
@@ -1758,14 +1758,14 @@ D_301DA58:
   offset: 0x1DA58
   symbol: D_301DA58
 
-D_301DE58:
+aMachineNumber20Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x1DE58
-  symbol: D_301DE58
+  symbol: aMachineNumber20Tex
 
 D_301E058:
   type: VTX
@@ -1824,14 +1824,14 @@ D_301EC98:
   offset: 0x1EC98
   symbol: D_301EC98
 
-D_301F128:
+aMachineNumber21Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x1F128
-  symbol: D_301F128
+  symbol: aMachineNumber21Tex
 
 D_301F328:
   type: VTX
@@ -1980,14 +1980,14 @@ D_3021778:
   offset: 0x21778
   symbol: D_3021778
 
-D_3021F78:
+aMachineNumber18Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x21F78
-  symbol: D_3021F78
+  symbol: aMachineNumber18Tex
 
 D_3022178:
   type: VTX
@@ -2055,14 +2055,14 @@ D_3022F58:
   offset: 0x22F58
   symbol: D_3022F58
 
-D_3023158:
+aMachineNumber13Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x23158
-  symbol: D_3023158
+  symbol: aMachineNumber13Tex
 
 D_3023358:
   type: VTX
@@ -2145,14 +2145,14 @@ D_3024AF8:
   offset: 0x24AF8
   symbol: D_3024AF8
 
-D_3024B78:
+aMachineNumber29Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x24B78
-  symbol: D_3024B78
+  symbol: aMachineNumber29Tex
 
 D_3024D78:
   type: VTX
@@ -2211,14 +2211,14 @@ D_3025A78:
   offset: 0x25A78
   symbol: D_3025A78
 
-D_3025BB8:
+aMachineNumber23Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x25BB8
-  symbol: D_3025BB8
+  symbol: aMachineNumber23Tex
 
 D_3025DB8:
   type: VTX
@@ -2286,14 +2286,14 @@ D_3026DE8:
   offset: 0x26DE8
   symbol: D_3026DE8
 
-D_3026E68:
+aMachineNumber15Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x26E68
-  symbol: D_3026E68
+  symbol: aMachineNumber15Tex
 
 D_3027068:
   type: VTX
@@ -2352,14 +2352,14 @@ D_3027AE8:
   offset: 0x27AE8
   symbol: D_3027AE8
 
-D_30283C8:
+aMachineNumber27Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x283C8
-  symbol: D_30283C8
+  symbol: aMachineNumber27Tex
 
 D_30285C8:
   type: VTX
@@ -2418,14 +2418,14 @@ D_3028FA8:
   offset: 0x28FA8
   symbol: D_3028FA8
 
-D_30293C8:
+aMachineNumber11Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x293C8
-  symbol: D_30293C8
+  symbol: aMachineNumber11Tex
 
 D_30295C8:
   type: TEXTURE
@@ -2502,14 +2502,14 @@ D_302A688:
   offset: 0x2A688
   symbol: D_302A688
 
-D_302A708:
+aMachineNumber16Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x2A708
-  symbol: D_302A708
+  symbol: aMachineNumber16Tex
 
 D_302A908:
   type: VTX
@@ -2574,14 +2574,14 @@ D_302B798:
   offset: 0x2B798
   symbol: D_302B798
 
-D_302B7F8:
+aMachineNumber25Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x2B7F8
-  symbol: D_302B7F8
+  symbol: aMachineNumber25Tex
 
 D_302B9F8:
   type: VTX
@@ -2715,95 +2715,95 @@ D_3030038:
   offset: 0x30038
   symbol: D_3030038
 
-D_30300B8:
+aMachineNumber31Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x300B8
-  symbol: D_30300B8
+  symbol: aMachineNumber31Tex
 
-D_30302B8:
+aMachineNumber1WideTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x302B8
-  symbol: D_30302B8
+  symbol: aMachineNumber1WideTex
 
-D_30304B8:
+aMachineNumber2WideTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x304B8
-  symbol: D_30304B8
+  symbol: aMachineNumber2WideTex
 
-D_30306B8:
+aMachineNumber3WideTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x306B8
-  symbol: D_30306B8
+  symbol: aMachineNumber3WideTex
 
-D_30308B8:
+aMachineNumber4WideTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x308B8
-  symbol: D_30308B8
+  symbol: aMachineNumber4WideTex
 
-D_3030AB8:
+aMachineNumber5WideTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x30AB8
-  symbol: D_3030AB8
+  symbol: aMachineNumber5WideTex
 
-D_3030CB8:
+aMachineNumber6WideTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x30CB8
-  symbol: D_3030CB8
+  symbol: aMachineNumber6WideTex
 
-D_3030EB8:
+aMachineNumber7WideTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x30EB8
-  symbol: D_3030EB8
+  symbol: aMachineNumber7WideTex
 
-D_30310B8:
+aMachineNumber8WideTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x310B8
-  symbol: D_30310B8
+  symbol: aMachineNumber8WideTex
 
-D_30312B8:
+aMachineNumber9WideTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x312B8
-  symbol: D_30312B8
+  symbol: aMachineNumber9WideTex
 
 D_30314B8:
   type: VTX

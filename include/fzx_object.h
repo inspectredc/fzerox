@@ -37,15 +37,15 @@ typedef struct Object {
 #define OBJECT_BUFFER(obj) ((obj)->buffer)
 
 // Machine Select/Settings
-#define CAR_VIEWPORT(carObj) ((carObj)->vp)
-#define CAR_MINI_STATE(carObj) ((carObj)->counter2)
+#define MACHINE_VIEWPORT(machineObj) ((machineObj)->vp)
+#define MACHINE_MINI_STATE(machineObj) ((machineObj)->counter2)
 #define PORTRAIT_CHARACTER(portraitObj) ((portraitObj)->state)
 #define NAME_CARD_CHARACTER(nameCardObj) ((nameCardObj)->state)
 
 // Credits
 #define INTRO_TIMER(obj) ((introObj)->cacheIndex)
-#define CAR_NUMBER(carObj) ((carObj)->counter2)
-#define PORTRAIT_CAR_NUMBER(portraitObj) ((portraitObj)->counter2)
+#define MACHINE_NUMBER(machineObj) ((machineObj)->counter2)
+#define PORTRAIT_MACHINE_NUMBER(portraitObj) ((portraitObj)->counter2)
 #define MENU_LADY_DITHER_SCALE(menuLadyObj) ((menuLadyObj)->state2)
 
 // Course Select
@@ -84,14 +84,14 @@ typedef enum ObjectIds {
     OBJECT_MACHINE_SELECT_CURSOR_NUM_2,
     OBJECT_MACHINE_SELECT_CURSOR_NUM_3,
     OBJECT_MACHINE_SELECT_CURSOR,
-    OBJECT_MACHINE_SELECT_CAR,
+    OBJECT_MACHINE_SELECT_MACHINE,
     OBJECT_MACHINE_SELECT_OK,
     OBJECT_MACHINE_SELECT_DIFFICULTY_CUPS,
     OBJECT_MACHINE_SELECT_NAME,
     OBJECT_MACHINE_SETTINGS_NAME = 50,
     OBJECT_MACHINE_SETTINGS_ENGINE_WEIGHT,
     OBJECT_MACHINE_SETTINGS_STATS,
-    OBJECT_MACHINE_SETTINGS_CAR,
+    OBJECT_MACHINE_SETTINGS_MACHINE,
     OBJECT_MACHINE_SETTINGS_NAME_CARD,
     OBJECT_MACHINE_SETTINGS_SLIDER,
     OBJECT_MACHINE_SETTINGS_SPLITSCREEN_BARS,
@@ -138,10 +138,10 @@ typedef enum ObjectIds {
     OBJECT_COURSE_SELECT_GHOST_OPTION,
     OBJECT_140 = 140,
     OBJECT_150 = 150,
-    OBJECT_CREDITS_OLD_CARS = 153,
+    OBJECT_CREDITS_MACHINES_OLD = 153,
     OBJECT_CREDITS_SCRIPT = 190,
     OBJECT_CREDITS_BACKGROUND,
-    OBJECT_CREDITS_CARS,
+    OBJECT_CREDITS_MACHINES,
     OBJECT_CREDITS_MENU_LADY,
     OBJECT_CREDITS_SEE_YOU_AGAIN,
     OBJECT_CREDITS_INTRO,

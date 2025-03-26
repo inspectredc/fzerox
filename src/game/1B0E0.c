@@ -3,6 +3,7 @@
 #include "fzx_racer.h"
 #include "fzx_game.h"
 #include "fzx_course.h"
+#include "fzx_machine.h"
 #include "fzx_save.h"
 #include "unk_gfx.h"
 #include "assets/segment_16C8A0.h"
@@ -87,8 +88,8 @@ s32 D_800F80B8;
 f32 D_800F80BC;
 f32 D_800F80C0;
 s16 D_800F80C4;
-unk_800CF1B0 D_800F80C8[30];
-u8 D_800F8360[30][14];
+Machine gMachines[30];
+CustomMachineInfo sCustomMachineInfo[30];
 u8 D_800F8504[7];
 
 const unk_redo_1 D_800D4C80 = {
@@ -272,7 +273,7 @@ TexturePtr D_800CDAB8[] = {
     aExplosion5Tex, aExplosion6Tex, aExplosion7Tex, aExplosion8Tex,
 };
 
-// Car Models
+// Machine Models
 Gfx* D_800CDAD8[] = {
     D_9001210, D_9001DA0, D_90027D0, D_9003050, D_9003870, D_9003F90, D_900CF48, D_90057A8, D_90061A0,
     D_9006A70, D_90078F0, D_9008060, D_90089A0, D_9009358, D_9009980, D_900A150, D_900AC40, D_900B288,
@@ -303,7 +304,7 @@ UNUSED u8 D_800CDD04[] = { 0x25, 0x2B, 0x2A, 0x26, 0x27, 0x28, 0x29, 0x25, 0x2B,
                            0x28, 0x29, 0x1E, 0x24, 0x23, 0x1F, 0x20, 0x21, 0x22, 0x1E, 0x24, 0x23, 0x1F,
                            0x20, 0x21, 0x22, 0x1E, 0x24, 0x23, 0x1F, 0x20, 0x21, 0x22 };
 
-// Custom Cars Models?
+// Machine Load Textures
 Gfx* D_800CDD38[] = {
     D_8022F8C0, D_802308E0, D_80231900, D_80232920, D_80233940, D_80234960, D_80235980, D_802369A0,
     D_802379C0, D_802389E0, D_80239A00, D_8023AA20, D_8023BA40, D_8023CA60, D_8023DA80, D_8023EAA0,
@@ -311,6 +312,7 @@ Gfx* D_800CDD38[] = {
     D_80247BC0, D_80248BE0, D_80249C00, D_8024AC20, D_8024BC40, D_8024CC60,
 };
 
+// Machine Models (6 Different LOD)
 Gfx* D_800CDDB0[] = {
     D_8022FA58, D_8022FE48, D_80230198, D_80230480, D_802306F0, D_7045098,  D_80230A78, D_80230E68, D_802311B8,
     D_802314A0, D_80231710, D_7045098,  D_80231A98, D_80231E88, D_802321D8, D_802324C0, D_80232730, D_7045098,
@@ -331,114 +333,152 @@ Gfx* D_800CDDB0[] = {
     D_80247D58, D_80248148, D_80248498, D_80248780, D_802489F0, D_7045098,  D_80248D78, D_80249168, D_802494B8,
     D_802497A0, D_80249A10, D_7045098,  D_80249D98, D_8024A188, D_8024A4D8, D_8024A7C0, D_8024AA30, D_7045098,
     D_8024ADB8, D_8024B1A8, D_8024B4F8, D_8024B7E0, D_8024BA50, D_7045098,  D_8024BDD8, D_8024C1C8, D_8024C518,
-    D_8024C800, D_8024CA70, D_7045098,  D_8024CDF8, D_8024D1E8, D_8024D538, D_8024D820, D_8024DA90,
+    D_8024C800, D_8024CA70, D_7045098,  D_8024CDF8, D_8024D1E8, D_8024D538, D_8024D820, D_8024DA90, D_7045098,
 };
 
-Gfx* D_800CE07C[] = {
-    D_7045098, D_7045278, D_70469D8, D_70476D8, D_7047F70, D_7048550, D_7045098,
+Gfx* D_800CE080[] = {
+    D_7045278, D_70469D8, D_70476D8, D_7047F70, D_7048550, D_7045098,
 };
 
-Gfx* (*D_800CE098[])(Gfx*) = {
-    func_i9_801685B4, // CAPTAIN_FALCON
-    func_i9_801680E8, // DR_STEWART
-    func_i9_80167C1C, // PICO
-    func_i9_80167898, // SAMURAI_GOROH
-    func_i9_80167530, // JODY_SUMMER
-    func_i9_80167068, // MIGHTY_GAZELLE
-    func_i9_801636F4, // MR_EAD
-    func_i9_801667F8, // BABA
-    func_i9_80166468, // OCTOMAN
-    func_i9_801660BC, // GOMAR_AND_SHIOH
-    func_i9_80165D28, // KATE_ALEN
-    func_i9_80165858, // ROGER_BUSTER
-    func_i9_80165494, // JAMES_MCCLOUD
-    func_i9_80165124, // LEON
-    func_i9_80164E34, // ANTONIO_GUSTER
-    func_i9_8016497C, // BLACK_SHADOW
-    func_i9_80164608, // MICHAEL_CHAIN
-    func_i9_801642A4, // JACK_LEVIN
-    func_i9_80163F28, // SUPER_ARROW
-    func_i9_80163BAC, // MRS_ARROW
-    func_i9_80166CF4, // JOHN_TANAKA
-    func_i9_80163374, // BEASTMAN
-    func_i9_80162FE0, // ZODA
-    func_i9_80162B08, // DR_CLASH
-    func_i9_80162768, // SILVER_NEELSEN
-    func_i9_80162370, // BIO_REX
-    func_i9_80161FF8, // DRAQ
-    func_i9_80161C78, // BILLY
-    func_i9_8016197C, // THE_SKULL
-    func_i9_801614D0, // BLOOD_FALCON
-    func_i9_801685B4, func_i9_80167898, func_i9_80167530,
+Gfx* (*sMachineLoadTexturesFuncs[])(Gfx*) = {
+    Machine_DrawLoadBlueFalconTextures,      // CAPTAIN_FALCON
+    Machine_DrawLoadGoldenFoxTextures,       // DR_STEWART
+    Machine_DrawLoadWildGooseTextures,       // PICO
+    Machine_DrawLoadFireStingrayTextures,    // SAMURAI_GOROH
+    Machine_DrawLoadWhiteCatTextures,        // JODY_SUMMER
+    Machine_DrawLoadRedGazelleTextures,      // MIGHTY_GAZELLE
+    Machine_DrawLoadGreatStarTextures,       // MR_EAD
+    Machine_DrawLoadIronTigerTextures,       // BABA
+    Machine_DrawLoadDeepClawTextures,        // OCTOMAN
+    Machine_DrawLoadTwinNorittaTextures,     // GOMAR_AND_SHIOH
+    Machine_DrawLoadSuperPiranhaTextures,    // KATE_ALEN
+    Machine_DrawLoadMightyHurricaneTextures, // ROGER_BUSTER
+    Machine_DrawLoadLittleWyvernTextures,    // JAMES_MCCLOUD
+    Machine_DrawLoadSpaceAnglerTextures,     // LEON
+    Machine_DrawLoadGreenPantherTextures,    // ANTONIO_GUSTER
+    Machine_DrawLoadBlackBullTextures,       // BLACK_SHADOW
+    Machine_DrawLoadWildBoarTextures,        // MICHAEL_CHAIN
+    Machine_DrawLoadAstroRobinTextures,      // JACK_LEVIN
+    Machine_DrawLoadKingMeteorTextures,      // SUPER_ARROW
+    Machine_DrawLoadQueenMeteorTextures,     // MRS_ARROW
+    Machine_DrawLoadWonderWaspTextures,      // JOHN_TANAKA
+    Machine_DrawLoadHyperSpeederTextures,    // BEASTMAN
+    Machine_DrawLoadDeathAnchorTextures,     // ZODA
+    Machine_DrawLoadCrazyBearTextures,       // DR_CLASH
+    Machine_DrawLoadNightThunderTextures,    // SILVER_NEELSEN
+    Machine_DrawLoadBigFangTextures,         // BIO_REX
+    Machine_DrawLoadMightyTyphoonTextures,   // DRAQ
+    Machine_DrawLoadMadWolfTextures,         // BILLY
+    Machine_DrawLoadSonicPhantomTextures,    // THE_SKULL
+    Machine_DrawLoadBloodHawkTextures,       // BLOOD_FALCON
+    Machine_DrawLoadBlueFalconTextures,      // Super Falcon
+    Machine_DrawLoadFireStingrayTextures,    // Super Stingray
+    Machine_DrawLoadWhiteCatTextures,        // Super Cat
 };
 
-Gfx* (*D_800CE11C[][5])(Gfx*) = {
-    { func_i9_8012D998, func_i9_8012E4E4, func_i9_8012ECF4, func_i9_8012F30C, func_i9_8012F608 }, // CAPTAIN_FALCON
-    { func_i9_8012F7BC, func_i9_801300FC, func_i9_80130840, func_i9_80130E44, func_i9_80131130 }, // DR_STEWART
-    { func_i9_801312F0, func_i9_80131D18, func_i9_8013251C, func_i9_80132B40, func_i9_80132E04 }, // PICO
-    { func_i9_80132F44, func_i9_80133744, func_i9_80133E58, func_i9_80134468, func_i9_80134734 }, // SAMURAI_GOROH
-    { func_i9_80134880, func_i9_80135180, func_i9_80135894, func_i9_80135F5C, func_i9_801361B8 }, // JODY_SUMMER
-    { func_i9_80136350, func_i9_80136C74, func_i9_8013737C, func_i9_80137968, func_i9_80137C68 }, // MIGHTY_GAZELLE
-    { func_i9_8014FCC0, func_i9_80150414, func_i9_80150AEC, func_i9_801511A8, func_i9_8015156C }, // MR_EAD
-    { func_i9_8013996C, func_i9_8013A25C, func_i9_8013A9A8, func_i9_8013AFD4, func_i9_8013B34C }, // BABA
-    { func_i9_8013B57C, func_i9_8013BD04, func_i9_8013C360, func_i9_8013C8EC, func_i9_8013CC0C }, // OCTOMAN
-    { func_i9_8013CED0, func_i9_8013D814, func_i9_8013DF88, func_i9_8013E5A8, func_i9_8013E964 }, // GOMAR_AND_SHIOH
-    { func_i9_8013EB2C, func_i9_8013F248, func_i9_8013F8E0, func_i9_8013FF20, func_i9_801403C4 }, // KATE_ALEN
-    { func_i9_8014061C, func_i9_80140E54, func_i9_80141590, func_i9_80141BC8, func_i9_80141ECC }, // ROGER_BUSTER
-    { func_i9_80142078, func_i9_80142950, func_i9_80143080, func_i9_801436A4, func_i9_80143BB8 }, // JAMES_MCCLOUD
-    { func_i9_80143E40, func_i9_80144518, func_i9_80144B30, func_i9_801450C4, func_i9_8014553C }, // LEON
-    { func_i9_80145860, func_i9_80145F34, func_i9_8014651C, func_i9_80146A4C, func_i9_80146DB8 }, // ANTONIO_GUSTER
-    { func_i9_80147074, func_i9_801479B8, func_i9_8014812C, func_i9_80148778, func_i9_80148BF0 }, // BLACK_SHADOW
-    { func_i9_80148E3C, func_i9_801495B8, func_i9_80149CBC, func_i9_8014A31C, func_i9_8014A6D4 }, // MICHAEL_CHAIN
-    { func_i9_8014A98C, func_i9_8014B174, func_i9_8014B874, func_i9_8014BE8C, func_i9_8014C32C }, // JACK_LEVIN
-    { func_i9_8014C5D4, func_i9_8014CD1C, func_i9_8014D3A0, func_i9_8014D9A4, func_i9_8014DE64 }, // SUPER_ARROW
-    { func_i9_8014E104, func_i9_8014E8E0, func_i9_8014EFAC, func_i9_8014F580, func_i9_8014FA30 }, // MRS_ARROW
-    { func_i9_80137DBC, func_i9_801387D4, func_i9_80138F38, func_i9_801394EC, func_i9_801397B0 }, // JOHN_TANAKA
-    { func_i9_801517FC, func_i9_80151FE0, func_i9_801526BC, func_i9_80152CA8, func_i9_801531A4 }, // BEASTMAN
-    { func_i9_80153538, func_i9_80153BD4, func_i9_80154234, func_i9_8015483C, func_i9_80154CE4 }, // ZODA
-    { func_i9_80154F14, func_i9_801556FC, func_i9_80155EB8, func_i9_801564E8, func_i9_801569C8 }, // DR_CLASH
-    { func_i9_80156CAC, func_i9_80157390, func_i9_80157A50, func_i9_8015805C, func_i9_801584F0 }, // SILVER_NEELSEN
-    { func_i9_80158800, func_i9_80158EEC, func_i9_801595B0, func_i9_80159BE0, func_i9_80159F7C }, // BIO_REX
-    { func_i9_8015A1B4, func_i9_8015AAE8, func_i9_8015B1F4, func_i9_8015B7E8, func_i9_8015BC90 }, // DRAQ
-    { func_i9_8015BF44, func_i9_8015C634, func_i9_8015CD18, func_i9_8015D344, func_i9_8015D814 }, // BILLY
-    { func_i9_8015DA94, func_i9_8015E268, func_i9_8015E910, func_i9_8015EE84, func_i9_8015F214 }, // THE_SKULL
-    { func_i9_8015F46C, func_i9_8015FC70, func_i9_80160314, func_i9_801608D8, func_i9_80160D90 }, // BLOOD_FALCON
-    { func_i9_80127F54, func_i9_801289DC, func_i9_801292C0, func_i9_80129974, func_i9_80129D04 },
-    { func_i9_80129FC4, func_i9_8012A8B0, func_i9_8012B010, func_i9_8012B6C4, func_i9_8012B9C4 },
-    { func_i9_8012BB50, func_i9_8012C564, func_i9_8012CD8C, func_i9_8012D524, func_i9_8012D7CC },
+Gfx* (*sMachineDrawFuncs[][5])(Gfx*) = {
+    { Machine_DrawBlueFalconLod1, Machine_DrawBlueFalconLod2, Machine_DrawBlueFalconLod3, Machine_DrawBlueFalconLod4,
+      Machine_DrawBlueFalconLod5 }, // CAPTAIN_FALCON
+    { Machine_DrawGoldenFoxLod1, Machine_DrawGoldenFoxLod2, Machine_DrawGoldenFoxLod3, Machine_DrawGoldenFoxLod4,
+      Machine_DrawGoldenFoxLod5 }, // DR_STEWART
+    { Machine_DrawWildGooseLod1, Machine_DrawWildGooseLod2, Machine_DrawWildGooseLod3, Machine_DrawWildGooseLod4,
+      Machine_DrawWildGooseLod5 }, // PICO
+    { Machine_DrawFireStingrayLod1, Machine_DrawFireStingrayLod2, Machine_DrawFireStingrayLod3,
+      Machine_DrawFireStingrayLod4, Machine_DrawFireStingrayLod5 }, // SAMURAI_GOROH
+    { Machine_DrawWhiteCatLod1, Machine_DrawWhiteCatLod2, Machine_DrawWhiteCatLod3, Machine_DrawWhiteCatLod4,
+      Machine_DrawWhiteCatLod5 }, // JODY_SUMMER
+    { Machine_DrawRedGazelleLod1, Machine_DrawRedGazelleLod2, Machine_DrawRedGazelleLod3, Machine_DrawRedGazelleLod4,
+      Machine_DrawRedGazelleLod5 }, // MIGHTY_GAZELLE
+    { Machine_DrawGreatStarLod1, Machine_DrawGreatStarLod2, Machine_DrawGreatStarLod3, Machine_DrawGreatStarLod4,
+      Machine_DrawGreatStarLod5 }, // MR_EAD
+    { Machine_DrawIronTigerLod1, Machine_DrawIronTigerLod2, Machine_DrawIronTigerLod3, Machine_DrawIronTigerLod4,
+      Machine_DrawIronTigerLod5 }, // BABA
+    { Machine_DrawDeepClawLod1, Machine_DrawDeepClawLod2, Machine_DrawDeepClawLod3, Machine_DrawDeepClawLod4,
+      Machine_DrawDeepClawLod5 }, // OCTOMAN
+    { Machine_DrawTwinNorittaLod1, Machine_DrawTwinNorittaLod2, Machine_DrawTwinNorittaLod3,
+      Machine_DrawTwinNorittaLod4, Machine_DrawTwinNorittaLod5 }, // GOMAR_AND_SHIOH
+    { Machine_DrawSuperPiranhaLod1, Machine_DrawSuperPiranhaLod2, Machine_DrawSuperPiranhaLod3,
+      Machine_DrawSuperPiranhaLod4, Machine_DrawSuperPiranhaLod5 }, // KATE_ALEN
+    { Machine_DrawMightyHurricaneLod1, Machine_DrawMightyHurricaneLod2, Machine_DrawMightyHurricaneLod3,
+      Machine_DrawMightyHurricaneLod4, Machine_DrawMightyHurricaneLod5 }, // ROGER_BUSTER
+    { Machine_DrawLittleWyvernLod1, Machine_DrawLittleWyvernLod2, Machine_DrawLittleWyvernLod3,
+      Machine_DrawLittleWyvernLod4, Machine_DrawLittleWyvernLod5 }, // JAMES_MCCLOUD
+    { Machine_DrawSpaceAnglerLod1, Machine_DrawSpaceAnglerLod2, Machine_DrawSpaceAnglerLod3,
+      Machine_DrawSpaceAnglerLod4, Machine_DrawSpaceAnglerLod5 }, // LEON
+    { Machine_DrawGreenPantherLod1, Machine_DrawGreenPantherLod2, Machine_DrawGreenPantherLod3,
+      Machine_DrawGreenPantherLod4, Machine_DrawGreenPantherLod5 }, // ANTONIO_GUSTER
+    { Machine_DrawBlackBullLod1, Machine_DrawBlackBullLod2, Machine_DrawBlackBullLod3, Machine_DrawBlackBullLod4,
+      Machine_DrawBlackBullLod5 }, // BLACK_SHADOW
+    { Machine_DrawWildBoarLod1, Machine_DrawWildBoarLod2, Machine_DrawWildBoarLod3, Machine_DrawWildBoarLod4,
+      Machine_DrawWildBoarLod5 }, // MICHAEL_CHAIN
+    { Machine_DrawAstroRobinLod1, Machine_DrawAstroRobinLod2, Machine_DrawAstroRobinLod3, Machine_DrawAstroRobinLod4,
+      Machine_DrawAstroRobinLod5 }, // JACK_LEVIN
+    { Machine_DrawKingMeteorLod1, Machine_DrawKingMeteorLod2, Machine_DrawKingMeteorLod3, Machine_DrawKingMeteorLod4,
+      Machine_DrawKingMeteorLod5 }, // SUPER_ARROW
+    { Machine_DrawQueenMeteorLod1, Machine_DrawQueenMeteorLod2, Machine_DrawQueenMeteorLod3,
+      Machine_DrawQueenMeteorLod4, Machine_DrawQueenMeteorLod5 }, // MRS_ARROW
+    { Machine_DrawWonderWaspLod1, Machine_DrawWonderWaspLod2, Machine_DrawWonderWaspLod3, Machine_DrawWonderWaspLod4,
+      Machine_DrawWonderWaspLod5 }, // JOHN_TANAKA
+    { Machine_DrawHyperSpeederLod1, Machine_DrawHyperSpeederLod2, Machine_DrawHyperSpeederLod3,
+      Machine_DrawHyperSpeederLod4, Machine_DrawHyperSpeederLod5 }, // BEASTMAN
+    { Machine_DrawDeathAnchorLod1, Machine_DrawDeathAnchorLod2, Machine_DrawDeathAnchorLod3,
+      Machine_DrawDeathAnchorLod4, Machine_DrawDeathAnchorLod5 }, // ZODA
+    { Machine_DrawCrazyBearLod1, Machine_DrawCrazyBearLod2, Machine_DrawCrazyBearLod3, Machine_DrawCrazyBearLod4,
+      Machine_DrawCrazyBearLod5 }, // DR_CLASH
+    { Machine_DrawNightThunderLod1, Machine_DrawNightThunderLod2, Machine_DrawNightThunderLod3,
+      Machine_DrawNightThunderLod4, Machine_DrawNightThunderLod5 }, // SILVER_NEELSEN
+    { Machine_DrawBigFangLod1, Machine_DrawBigFangLod2, Machine_DrawBigFangLod3, Machine_DrawBigFangLod4,
+      Machine_DrawBigFangLod5 }, // BIO_REX
+    { Machine_DrawMightyTyphoonLod1, Machine_DrawMightyTyphoonLod2, Machine_DrawMightyTyphoonLod3,
+      Machine_DrawMightyTyphoonLod4, Machine_DrawMightyTyphoonLod5 }, // DRAQ
+    { Machine_DrawMadWolfLod1, Machine_DrawMadWolfLod2, Machine_DrawMadWolfLod3, Machine_DrawMadWolfLod4,
+      Machine_DrawMadWolfLod5 }, // BILLY
+    { Machine_DrawSonicPhantomLod1, Machine_DrawSonicPhantomLod2, Machine_DrawSonicPhantomLod3,
+      Machine_DrawSonicPhantomLod4, Machine_DrawSonicPhantomLod5 }, // THE_SKULL
+    { Machine_DrawBloodHawkLod1, Machine_DrawBloodHawkLod2, Machine_DrawBloodHawkLod3, Machine_DrawBloodHawkLod4,
+      Machine_DrawBloodHawkLod5 }, // BLOOD_FALCON
+    { Machine_DrawSuperFalconLod1, Machine_DrawSuperFalconLod2, Machine_DrawSuperFalconLod3,
+      Machine_DrawSuperFalconLod4, Machine_DrawSuperFalconLod5 }, // Super Falcon
+    { Machine_DrawSuperStingrayLod1, Machine_DrawSuperStingrayLod2, Machine_DrawSuperStingrayLod3,
+      Machine_DrawSuperStingrayLod4, Machine_DrawSuperStingrayLod5 }, // Super Stingray
+    { Machine_DrawSuperCatLod1, Machine_DrawSuperCatLod2, Machine_DrawSuperCatLod3, Machine_DrawSuperCatLod4,
+      Machine_DrawSuperCatLod5 }, // Super Cat
 };
 
-u8 D_800CE3B0[] = {
-    true,  // CAPTAIN_FALCON
-    true,  // DR_STEWART
-    true,  // PICO
-    true,  // SAMURAI_GOROH
-    false, // JODY_SUMMER
-    true,  // MIGHTY_GAZELLE
-    true,  // MR_EAD
-    false, // BABA
-    true,  // OCTOMAN
-    true,  // GOMAR_AND_SHIOH
-    false, // KATE_ALEN
-    true,  // ROGER_BUSTER
-    true,  // JAMES_MCCLOUD
-    true,  // LEON
-    true,  // ANTONIO_GUSTER
-    true,  // BLACK_SHADOW
-    true,  // MICHAEL_CHAIN
-    true,  // JACK_LEVIN
-    true,  // SUPER_ARROW
-    false, // MRS_ARROW
-    true,  // JOHN_TANAKA
-    true,  // BEASTMAN
-    true,  // ZODA
-    true,  // DR_CLASH
-    true,  // SILVER_NEELSEN
-    true,  // BIO_REX
-    true,  // DRAQ
-    true,  // BILLY
-    true,  // THE_SKULL
-    true,  // BLOOD_FALCON
+#define VOICE_FEMALE 0
+#define VOICE_MALE 1
+
+u8 sCharacterVoices[] = {
+    VOICE_MALE,   // CAPTAIN_FALCON
+    VOICE_MALE,   // DR_STEWART
+    VOICE_MALE,   // PICO
+    VOICE_MALE,   // SAMURAI_GOROH
+    VOICE_FEMALE, // JODY_SUMMER
+    VOICE_MALE,   // MIGHTY_GAZELLE
+    VOICE_MALE,   // MR_EAD
+    VOICE_FEMALE, // BABA
+    VOICE_MALE,   // OCTOMAN
+    VOICE_MALE,   // GOMAR_AND_SHIOH
+    VOICE_FEMALE, // KATE_ALEN
+    VOICE_MALE,   // ROGER_BUSTER
+    VOICE_MALE,   // JAMES_MCCLOUD
+    VOICE_MALE,   // LEON
+    VOICE_MALE,   // ANTONIO_GUSTER
+    VOICE_MALE,   // BLACK_SHADOW
+    VOICE_MALE,   // MICHAEL_CHAIN
+    VOICE_MALE,   // JACK_LEVIN
+    VOICE_MALE,   // SUPER_ARROW
+    VOICE_FEMALE, // MRS_ARROW
+    VOICE_MALE,   // JOHN_TANAKA
+    VOICE_MALE,   // BEASTMAN
+    VOICE_MALE,   // ZODA
+    VOICE_MALE,   // DR_CLASH
+    VOICE_MALE,   // SILVER_NEELSEN
+    VOICE_MALE,   // BIO_REX
+    VOICE_MALE,   // DRAQ
+    VOICE_MALE,   // BILLY
+    VOICE_MALE,   // THE_SKULL
+    VOICE_MALE,   // BLOOD_FALCON
 };
 
 // Dma Read Data
@@ -572,40 +612,40 @@ f32 D_800CF19C[] = {
 };
 
 // clang-format off
-unk_800CF1B0 D_800CF1B0[] = {
-    { 0, 0, 0, { 0, 211, 0, 77 }, { 0, 0, 87, 77 }, { 255, 102, 48, 77 }, 7, { BODY_B, BOOST_C, GRIP_B }, 1260 },                // CAPTAIN_FALCON
-    { 0, 1, 1, { 255, 226, 43, 120 }, { 205, 255, 133, 80 }, { 25, 255, 255, 160 }, 3, { BODY_D, BOOST_A, GRIP_D }, 1420 },      // DR_STEWART
-    { 0, 2, 2, { 0, 75, 190, 100 }, { 134, 81, 65, 100 }, { 73, 163, 16, 100 }, 6, { BODY_B, BOOST_B, GRIP_C }, 1620 },          // PICO
-    { 0, 3, 3, { 245, 52, 72, 43 }, { 72, 52, 121, 120 }, { 146, 52, 245, 65 }, 5, { BODY_A, BOOST_D, GRIP_B }, 1960 },          // SAMURAI_GOROH
-    { 0, 4, 4, { 111, 255, 0, 255 }, { 79, 0, 182, 168 }, { 184, 0, 133, 0 }, 2, { BODY_C, BOOST_C, GRIP_A }, 1150 },            // JODY_SUMMER
-    { 0, 5, 5, { 255, 0, 74, 36 }, { 0, 0, 74, 101 }, { 0, 190, 74, 46 }, 1, { BODY_E, BOOST_A, GRIP_C }, 1330 },                // MIGHTY_GAZELLE
-    { 0, 6, 6, { 143, 255, 77, 57 }, { 73, 104, 198, 188 }, { 232, 3, 216, 35 }, 9, { BODY_E, BOOST_A, GRIP_D }, 1870 },         // MR_EAD
-    { 0, 7, 7, { 143, 60, 146, 220 }, { 144, 60, 216, 220 }, { 192, 60, 146, 146 }, 4, { BODY_B, BOOST_D, GRIP_A }, 1780 },      // BABA
-    { 0, 8, 8, { 146, 255, 14, 44 }, { 0, 108, 75, 148 }, { 17, 0, 26, 196 }, 8, { BODY_B, BOOST_B, GRIP_C }, 990 },             // OCTOMAN
-    { 0, 9, 9, { 100, 240, 239, 92 }, { 100, 201, 98, 184 }, { 100, 64, 195, 227 }, 22, { BODY_E, BOOST_A, GRIP_C }, 780 },      // GOMAR_AND_SHIOH
-    { 0, 10, 10, { 71, 255, 58, 99 }, { 202, 240, 58, 223 }, { 196, 0, 58, 102 }, 12, { BODY_B, BOOST_C, GRIP_B }, 1010 },       // KATE_ALEN
-    { 0, 11, 11, { 0, 196, 20, 121 }, { 90, 33, 41, 101 }, { 90, 33, 121, 20 }, 28, { BODY_E, BOOST_B, GRIP_B }, 1780 },         // ROGER_BUSTER
-    { 0, 12, 12, { 160, 255, 223, 123 }, { 160, 168, 112, 251 }, { 180, 0, 255, 255 }, 10, { BODY_E, BOOST_B, GRIP_B }, 1390 },  // JAMES_MCCLOUD
-    { 0, 13, 13, { 71, 255, 255, 150 }, { 79, 198, 84, 150 }, { 151, 0, 144, 150 }, 19, { BODY_C, BOOST_C, GRIP_A }, 910 },      // LEON
-    { 0, 14, 14, { 10, 53, 255, 92 }, { 50, 201, 240, 238 }, { 20, 255, 0, 63 }, 17, { BODY_A, BOOST_B, GRIP_D }, 2060 },        // ANTONIO_GUSTER
-    { 0, 15, 15, { 30, 54, 82, 122 }, { 30, 35, 54, 107 }, { 30, 192, 82, 14 }, 30, { BODY_A, BOOST_E, GRIP_A }, 2340 },         // BLACK_SHADOW
-    { 0, 16, 16, { 206, 25, 249, 22 }, { 84, 168, 218, 217 }, { 22, 29, 3, 174 }, 24, { BODY_A, BOOST_C, GRIP_C }, 2110 },       // MICHAEL_CHAIN
-    { 0, 17, 17, { 71, 255, 28, 56 }, { 79, 0, 80, 56 }, { 151, 0, 42, 56 }, 14, { BODY_B, BOOST_D, GRIP_A }, 1050 },            // JACK_LEVIN
-    { 0, 18, 18, { 141, 29, 46, 38 }, { 15, 21, 46, 130 }, { 36, 184, 46, 29 }, 20, { BODY_E, BOOST_B, GRIP_B }, 860 },          // SUPER_ARROW
-    { 0, 19, 19, { 141, 29, 46, 38 }, { 15, 21, 46, 130 }, { 36, 184, 46, 29 }, 21, { BODY_E, BOOST_B, GRIP_B }, 1140 },         // MRS_ARROW
-    { 0, 20, 20, { 14, 200, 213, 22 }, { 145, 51, 14, 95 }, { 213, 195, 14, 38 }, 26, { BODY_D, BOOST_A, GRIP_D }, 900 },        // JOHN_TANAKA
-    { 0, 21, 21, { 19, 190, 165, 20 }, { 64, 190, 12, 60 }, { 90, 190, 12, 20 }, 18, { BODY_C, BOOST_C, GRIP_A }, 1460 },        // BEASTMAN
-    { 0, 22, 22, { 26, 219, 217, 155 }, { 30, 230, 0, 24 }, { 57, 255, 0, 156 }, 13, { BODY_E, BOOST_A, GRIP_C }, 1620 },        // ZODA
-    { 0, 23, 23, { 203, 121, 255, 255 }, { 203, 205, 255, 149 }, { 84, 212, 255, 244 }, 29, { BODY_A, BOOST_B, GRIP_E }, 2220 }, // DR_CLASH
-    { 0, 24, 24, { 3, 218, 28, 118 }, { 3, 17, 181, 118 }, { 46, 17, 104, 118 }, 23, { BODY_B, BOOST_A, GRIP_E }, 1530 },        // SILVER_NEELSEN
-    { 0, 25, 25, { 51, 203, 0, 9 }, { 48, 0, 126, 131 }, { 28, 0, 20, 166 }, 15, { BODY_B, BOOST_D, GRIP_A }, 1520 },            // BIO_REX
-    { 0, 26, 26, { 72, 21, 179, 69 }, { 90, 120, 49, 72 }, { 0, 149, 67, 137 }, 27, { BODY_C, BOOST_A, GRIP_D }, 950 },          // DRAQ
-    { 0, 27, 27, { 254, 227, 20, 104 }, { 244, 62, 72, 99 }, { 65, 34, 24, 150 }, 11, { BODY_B, BOOST_B, GRIP_C }, 1490 },       // BILLY
-    { 0, 28, 28, { 31, 232, 192, 91 }, { 63, 0, 0, 91 }, { 223, 0, 176, 91 }, 16, { BODY_C, BOOST_A, GRIP_D }, 1010 },           // THE_SKULL
-    { 0, 29, 29, { 200, 0, 63, 40 }, { 0, 72, 214, 38 }, { 0, 255, 42, 105 }, 25, { BODY_B, BOOST_A, GRIP_E }, 1170 },           // BLOOD_FALCON
-    { 2, 0, 0, { 223, 34, 12, 224 }, { 199, 34, 50, 239 }, { 33, 34, 109, 240 }, 7, { BODY_A, BOOST_B, GRIP_A }, 790 },
-    { 3, 3, 3, { 55, 42, 85, 10 }, { 55, 59, 11, 123 }, { 55, 136, 24, 125 }, 5, { BODY_B, BOOST_A, GRIP_A }, 2210 },
-    { 4, 4, 4, { 33, 42, 0, 134 }, { 55, 42, 134, 0 }, { 137, 42, 73, 72 }, 2, { BODY_A, BOOST_A, GRIP_B }, 1840 },
+Machine sDefaultMachines[] = {
+    { CUSTOM_MACHINE_DEFAULT, 0, 0, { 0, 211, 0, 77 }, { 0, 0, 87, 77 }, { 255, 102, 48, 77 }, 7, { BODY_B, BOOST_C, GRIP_B }, 1260 },                // CAPTAIN_FALCON
+    { CUSTOM_MACHINE_DEFAULT, 1, 1, { 255, 226, 43, 120 }, { 205, 255, 133, 80 }, { 25, 255, 255, 160 }, 3, { BODY_D, BOOST_A, GRIP_D }, 1420 },      // DR_STEWART
+    { CUSTOM_MACHINE_DEFAULT, 2, 2, { 0, 75, 190, 100 }, { 134, 81, 65, 100 }, { 73, 163, 16, 100 }, 6, { BODY_B, BOOST_B, GRIP_C }, 1620 },          // PICO
+    { CUSTOM_MACHINE_DEFAULT, 3, 3, { 245, 52, 72, 43 }, { 72, 52, 121, 120 }, { 146, 52, 245, 65 }, 5, { BODY_A, BOOST_D, GRIP_B }, 1960 },          // SAMURAI_GOROH
+    { CUSTOM_MACHINE_DEFAULT, 4, 4, { 111, 255, 0, 255 }, { 79, 0, 182, 168 }, { 184, 0, 133, 0 }, 2, { BODY_C, BOOST_C, GRIP_A }, 1150 },            // JODY_SUMMER
+    { CUSTOM_MACHINE_DEFAULT, 5, 5, { 255, 0, 74, 36 }, { 0, 0, 74, 101 }, { 0, 190, 74, 46 }, 1, { BODY_E, BOOST_A, GRIP_C }, 1330 },                // MIGHTY_GAZELLE
+    { CUSTOM_MACHINE_DEFAULT, 6, 6, { 143, 255, 77, 57 }, { 73, 104, 198, 188 }, { 232, 3, 216, 35 }, 9, { BODY_E, BOOST_A, GRIP_D }, 1870 },         // MR_EAD
+    { CUSTOM_MACHINE_DEFAULT, 7, 7, { 143, 60, 146, 220 }, { 144, 60, 216, 220 }, { 192, 60, 146, 146 }, 4, { BODY_B, BOOST_D, GRIP_A }, 1780 },      // BABA
+    { CUSTOM_MACHINE_DEFAULT, 8, 8, { 146, 255, 14, 44 }, { 0, 108, 75, 148 }, { 17, 0, 26, 196 }, 8, { BODY_B, BOOST_B, GRIP_C }, 990 },             // OCTOMAN
+    { CUSTOM_MACHINE_DEFAULT, 9, 9, { 100, 240, 239, 92 }, { 100, 201, 98, 184 }, { 100, 64, 195, 227 }, 22, { BODY_E, BOOST_A, GRIP_C }, 780 },      // GOMAR_AND_SHIOH
+    { CUSTOM_MACHINE_DEFAULT, 10, 10, { 71, 255, 58, 99 }, { 202, 240, 58, 223 }, { 196, 0, 58, 102 }, 12, { BODY_B, BOOST_C, GRIP_B }, 1010 },       // KATE_ALEN
+    { CUSTOM_MACHINE_DEFAULT, 11, 11, { 0, 196, 20, 121 }, { 90, 33, 41, 101 }, { 90, 33, 121, 20 }, 28, { BODY_E, BOOST_B, GRIP_B }, 1780 },         // ROGER_BUSTER
+    { CUSTOM_MACHINE_DEFAULT, 12, 12, { 160, 255, 223, 123 }, { 160, 168, 112, 251 }, { 180, 0, 255, 255 }, 10, { BODY_E, BOOST_B, GRIP_B }, 1390 },  // JAMES_MCCLOUD
+    { CUSTOM_MACHINE_DEFAULT, 13, 13, { 71, 255, 255, 150 }, { 79, 198, 84, 150 }, { 151, 0, 144, 150 }, 19, { BODY_C, BOOST_C, GRIP_A }, 910 },      // LEON
+    { CUSTOM_MACHINE_DEFAULT, 14, 14, { 10, 53, 255, 92 }, { 50, 201, 240, 238 }, { 20, 255, 0, 63 }, 17, { BODY_A, BOOST_B, GRIP_D }, 2060 },        // ANTONIO_GUSTER
+    { CUSTOM_MACHINE_DEFAULT, 15, 15, { 30, 54, 82, 122 }, { 30, 35, 54, 107 }, { 30, 192, 82, 14 }, 30, { BODY_A, BOOST_E, GRIP_A }, 2340 },         // BLACK_SHADOW
+    { CUSTOM_MACHINE_DEFAULT, 16, 16, { 206, 25, 249, 22 }, { 84, 168, 218, 217 }, { 22, 29, 3, 174 }, 24, { BODY_A, BOOST_C, GRIP_C }, 2110 },       // MICHAEL_CHAIN
+    { CUSTOM_MACHINE_DEFAULT, 17, 17, { 71, 255, 28, 56 }, { 79, 0, 80, 56 }, { 151, 0, 42, 56 }, 14, { BODY_B, BOOST_D, GRIP_A }, 1050 },            // JACK_LEVIN
+    { CUSTOM_MACHINE_DEFAULT, 18, 18, { 141, 29, 46, 38 }, { 15, 21, 46, 130 }, { 36, 184, 46, 29 }, 20, { BODY_E, BOOST_B, GRIP_B }, 860 },          // SUPER_ARROW
+    { CUSTOM_MACHINE_DEFAULT, 19, 19, { 141, 29, 46, 38 }, { 15, 21, 46, 130 }, { 36, 184, 46, 29 }, 21, { BODY_E, BOOST_B, GRIP_B }, 1140 },         // MRS_ARROW
+    { CUSTOM_MACHINE_DEFAULT, 20, 20, { 14, 200, 213, 22 }, { 145, 51, 14, 95 }, { 213, 195, 14, 38 }, 26, { BODY_D, BOOST_A, GRIP_D }, 900 },        // JOHN_TANAKA
+    { CUSTOM_MACHINE_DEFAULT, 21, 21, { 19, 190, 165, 20 }, { 64, 190, 12, 60 }, { 90, 190, 12, 20 }, 18, { BODY_C, BOOST_C, GRIP_A }, 1460 },        // BEASTMAN
+    { CUSTOM_MACHINE_DEFAULT, 22, 22, { 26, 219, 217, 155 }, { 30, 230, 0, 24 }, { 57, 255, 0, 156 }, 13, { BODY_E, BOOST_A, GRIP_C }, 1620 },        // ZODA
+    { CUSTOM_MACHINE_DEFAULT, 23, 23, { 203, 121, 255, 255 }, { 203, 205, 255, 149 }, { 84, 212, 255, 244 }, 29, { BODY_A, BOOST_B, GRIP_E }, 2220 }, // DR_CLASH
+    { CUSTOM_MACHINE_DEFAULT, 24, 24, { 3, 218, 28, 118 }, { 3, 17, 181, 118 }, { 46, 17, 104, 118 }, 23, { BODY_B, BOOST_A, GRIP_E }, 1530 },        // SILVER_NEELSEN
+    { CUSTOM_MACHINE_DEFAULT, 25, 25, { 51, 203, 0, 9 }, { 48, 0, 126, 131 }, { 28, 0, 20, 166 }, 15, { BODY_B, BOOST_D, GRIP_A }, 1520 },            // BIO_REX
+    { CUSTOM_MACHINE_DEFAULT, 26, 26, { 72, 21, 179, 69 }, { 90, 120, 49, 72 }, { 0, 149, 67, 137 }, 27, { BODY_C, BOOST_A, GRIP_D }, 950 },          // DRAQ
+    { CUSTOM_MACHINE_DEFAULT, 27, 27, { 254, 227, 20, 104 }, { 244, 62, 72, 99 }, { 65, 34, 24, 150 }, 11, { BODY_B, BOOST_B, GRIP_C }, 1490 },       // BILLY
+    { CUSTOM_MACHINE_DEFAULT, 28, 28, { 31, 232, 192, 91 }, { 63, 0, 0, 91 }, { 223, 0, 176, 91 }, 16, { BODY_C, BOOST_A, GRIP_D }, 1010 },           // THE_SKULL
+    { CUSTOM_MACHINE_DEFAULT, 29, 29, { 200, 0, 63, 40 }, { 0, 72, 214, 38 }, { 0, 255, 42, 105 }, 25, { BODY_B, BOOST_A, GRIP_E }, 1170 },           // BLOOD_FALCON
+    { CUSTOM_MACHINE_SUPER_FALCON, 0, 0, { 223, 34, 12, 224 }, { 199, 34, 50, 239 }, { 33, 34, 109, 240 }, 7, { BODY_A, BOOST_B, GRIP_A }, 790 },
+    { CUSTOM_MACHINE_SUPER_STINGRAY, 3, 3, { 55, 42, 85, 10 }, { 55, 59, 11, 123 }, { 55, 136, 24, 125 }, 5, { BODY_B, BOOST_A, GRIP_A }, 2210 },
+    { CUSTOM_MACHINE_SUPER_CAT, 4, 4, { 33, 42, 0, 134 }, { 55, 42, 134, 0 }, { 137, 42, 73, 72 }, 2, { BODY_A, BOOST_A, GRIP_B }, 1840 },
 };
 // clang-format on
 
@@ -1245,8 +1285,9 @@ void func_80082C80(Player* player) {
     var_fv1 = sqrtf(SQ(temp_fa1) + SQ(temp_ft4) + SQ(temp_ft5));
 
     if (var_fv1 != 0.0f) {
-        temp_fa0 = (-((temp_fa1 * player->unk_5C.z.x) + (temp_ft4 * player->unk_5C.z.y) + (temp_ft5 * player->unk_5C.z.z))) /
-                   var_fv1;
+        temp_fa0 =
+            (-((temp_fa1 * player->unk_5C.z.x) + (temp_ft4 * player->unk_5C.z.y) + (temp_ft5 * player->unk_5C.z.z))) /
+            var_fv1;
         var_fv1 *= temp_fa0;
     }
     if ((var_fv1 >= -1000.0f) && (var_fv1 <= 1000.0f)) {
@@ -2351,8 +2392,7 @@ void func_80085B80(Player* player, unk_struct_F8* arg1, unk_800E5D70* arg2) {
             }
 
             racer = &gRacers[player->id];
-            func_80088408(&D_800E5E90[player->id], racer->unk_0C.courseSegment, racer->unk_0C.unk_04,
-                          &D_800CD970[0]);
+            func_80088408(&D_800E5E90[player->id], racer->unk_0C.courseSegment, racer->unk_0C.unk_04, &D_800CD970[0]);
             break;
         case 9:
             racer = &gRacers[player->id];
@@ -3205,23 +3245,29 @@ void func_80087FAC(Player* player, unk_struct_F8* arg1, unk_800E5D70* arg2) {
 
             temp_v1->unk_00.unk_00.unk_3C.x =
                 temp_v0_2->unk_00.x +
-                ((((temp_v0_2->unk_0C.x - temp_v0_2->unk_00.x) * player->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_30);
+                ((((temp_v0_2->unk_0C.x - temp_v0_2->unk_00.x) * player->unk_1C) / temp_a3->unk_02) *
+                 temp_v0_2->unk_30);
             temp_v1->unk_00.unk_00.unk_3C.y =
                 temp_v0_2->unk_00.y +
-                ((((temp_v0_2->unk_0C.y - temp_v0_2->unk_00.y) * player->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_30);
+                ((((temp_v0_2->unk_0C.y - temp_v0_2->unk_00.y) * player->unk_1C) / temp_a3->unk_02) *
+                 temp_v0_2->unk_30);
             temp_v1->unk_00.unk_00.unk_3C.z =
                 temp_v0_2->unk_00.z +
-                ((((temp_v0_2->unk_0C.z - temp_v0_2->unk_00.z) * player->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_30);
+                ((((temp_v0_2->unk_0C.z - temp_v0_2->unk_00.z) * player->unk_1C) / temp_a3->unk_02) *
+                 temp_v0_2->unk_30);
 
             temp_v1->unk_00.unk_54.x =
                 temp_v0_2->unk_18.x +
-                ((((temp_v0_2->unk_24.x - temp_v0_2->unk_18.x) * player->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_34);
+                ((((temp_v0_2->unk_24.x - temp_v0_2->unk_18.x) * player->unk_1C) / temp_a3->unk_02) *
+                 temp_v0_2->unk_34);
             temp_v1->unk_00.unk_54.y =
                 temp_v0_2->unk_18.y +
-                ((((temp_v0_2->unk_24.y - temp_v0_2->unk_18.y) * player->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_34);
+                ((((temp_v0_2->unk_24.y - temp_v0_2->unk_18.y) * player->unk_1C) / temp_a3->unk_02) *
+                 temp_v0_2->unk_34);
             temp_v1->unk_00.unk_54.z =
                 temp_v0_2->unk_18.z +
-                ((((temp_v0_2->unk_24.z - temp_v0_2->unk_18.z) * player->unk_1C) / temp_a3->unk_02) * temp_v0_2->unk_34);
+                ((((temp_v0_2->unk_24.z - temp_v0_2->unk_18.z) * player->unk_1C) / temp_a3->unk_02) *
+                 temp_v0_2->unk_34);
         default:
             break;
     }
@@ -3785,7 +3831,7 @@ void func_8008969C(void) {
 
     for (i = gNumPlayers - 1; i >= 0; i--) {
         gRacers[i].character = D_800E5EE0[i];
-        gRacers[i].unk_2CC = D_800E5EE8[i];
+        gRacers[i].machineSkinIndex = D_800E5EE8[i];
     }
 }
 
@@ -3794,7 +3840,7 @@ void func_80089724(void) {
 
     for (i = gNumPlayers - 1; i >= 0; i--) {
         D_800E5EE0[i] = gRacers[i].character;
-        D_800E5EE8[i] = gRacers[i].unk_2CC;
+        D_800E5EE8[i] = gRacers[i].machineSkinIndex;
         gRacers[i].unk_1A8 = func_8008960C(gPlayerEngine[i]);
     }
 }
@@ -3812,7 +3858,7 @@ void func_80089800(void) {
             j++;
         }
         gRacers[i].character = j++;
-        gRacers[i].unk_2CC = 0;
+        gRacers[i].machineSkinIndex = 0;
     }
 
     for (i = 0; i < 28; i++) {
@@ -3836,9 +3882,10 @@ void func_80089934(void) {
         if (i >= gNumPlayers) {
             do {
                 gRacers[i].character = (Math_Rand2() & 0x1FFFF) % 30;
-                gRacers[i].unk_2CC = (Math_Rand1() & 0x1FFFF) % 4;
+                gRacers[i].machineSkinIndex = (Math_Rand1() & 0x1FFFF) % 4;
                 for (j = 0; j < gNumPlayers; j++) {
-                    if ((gRacers[i].character == gRacers[j].character) && (gRacers[i].unk_2CC == gRacers[j].unk_2CC)) {
+                    if ((gRacers[i].character == gRacers[j].character) &&
+                        (gRacers[i].machineSkinIndex == gRacers[j].machineSkinIndex)) {
                         break;
                     }
                 }
@@ -3847,36 +3894,36 @@ void func_80089934(void) {
     }
 }
 
-void func_80089A74(CarInfo* arg0) {
-    u8 var_v0;
-    u8* temp_v0;
+void func_80089A74(MachineInfo* arg0) {
+    u8 customType;
+    CustomMachineInfo* temp_v0;
 
     arg0->character = gRacers[0].character;
-    arg0->envR2 = (s32) gRacers[0].unk_2E0;
-    arg0->envG2 = (s32) gRacers[0].unk_2E4;
-    arg0->envB2 = (s32) gRacers[0].unk_2E8;
-    arg0->customType = var_v0 = gRacers[0].customType;
-    if (var_v0 == 1) {
-        temp_v0 = D_800F8360[gRacers[0].character];
-        arg0->frontType = temp_v0[0];
-        arg0->rearType = temp_v0[1];
-        arg0->wingType = temp_v0[2];
-        arg0->logo = temp_v0[3];
-        arg0->decal = D_800F80C8[gRacers[0].character].unk_10 - 1;
-        arg0->number = temp_v0[4];
-        arg0->primR1 = temp_v0[5];
-        arg0->primG1 = temp_v0[6];
-        arg0->primB1 = temp_v0[7];
-        arg0->primR2 = temp_v0[8];
-        arg0->primG2 = temp_v0[9];
-        arg0->primB2 = temp_v0[10];
-        arg0->envR1 = temp_v0[11];
-        arg0->envG1 = temp_v0[12];
-        arg0->envB1 = temp_v0[13];
+    arg0->bodyR = (s32) gRacers[0].bodyRF;
+    arg0->bodyG = (s32) gRacers[0].bodyGF;
+    arg0->bodyB = (s32) gRacers[0].bodyBF;
+    arg0->customType = customType = gRacers[0].customType;
+    if (customType == CUSTOM_MACHINE_EDITED) {
+        temp_v0 = &sCustomMachineInfo[gRacers[0].character];
+        arg0->frontType = temp_v0->frontType;
+        arg0->rearType = temp_v0->rearType;
+        arg0->wingType = temp_v0->wingType;
+        arg0->logo = temp_v0->logo;
+        arg0->number = gMachines[gRacers[0].character].number - 1;
+        arg0->decal = temp_v0->decal;
+        arg0->numberR = temp_v0->numberR;
+        arg0->numberG = temp_v0->numberG;
+        arg0->numberB = temp_v0->numberB;
+        arg0->decalR = temp_v0->decalR;
+        arg0->decalG = temp_v0->decalG;
+        arg0->decalB = temp_v0->decalB;
+        arg0->cockpitR = temp_v0->cockpitR;
+        arg0->cockpitG = temp_v0->cockpitG;
+        arg0->cockpitB = temp_v0->cockpitB;
     } else {
-        arg0->frontType = arg0->rearType = arg0->wingType = arg0->logo = arg0->decal = arg0->number = arg0->primR1 =
-            arg0->primG1 = arg0->primB1 = arg0->primR2 = arg0->primG2 = arg0->primB2 = arg0->envR1 = arg0->envG1 =
-                arg0->envB1 = 0;
+        arg0->frontType = arg0->rearType = arg0->wingType = arg0->logo = arg0->number = arg0->decal = arg0->numberR =
+            arg0->numberG = arg0->numberB = arg0->decalR = arg0->decalG = arg0->decalB = arg0->cockpitR =
+                arg0->cockpitG = arg0->cockpitB = 0;
     }
 }
 
@@ -3896,19 +3943,19 @@ void func_80089BD0(void) {
                 for (j = 3; j >= i; j--) {
 
                     gCurrentCourseInfo->timeRecord[j + 1] = gCurrentCourseInfo->timeRecord[j];
-                    gCurrentCourseInfo->carInfo[j + 1] = gCurrentCourseInfo->carInfo[j];
-                    gCurrentCourseInfo->engine[j + 1] = gCurrentCourseInfo->engine[j];
-                    *(s32*) &gCurrentCourseInfo->name[j + 1] = *(s32*) &gCurrentCourseInfo->name[j];
+                    gCurrentCourseInfo->recordMachineInfos[j + 1] = gCurrentCourseInfo->recordMachineInfos[j];
+                    gCurrentCourseInfo->recordEngines[j + 1] = gCurrentCourseInfo->recordEngines[j];
+                    *(s32*) &gCurrentCourseInfo->recordNames[j + 1] = *(s32*) &gCurrentCourseInfo->recordNames[j];
 
                     D_800F8504[j + 1] = D_800F8504[j];
                 }
 
                 gCurrentCourseInfo->timeRecord[i] = gRacers[0].raceTime;
 
-                func_80089A74(&gCurrentCourseInfo->carInfo[i]);
+                func_80089A74(&gCurrentCourseInfo->recordMachineInfos[i]);
 
-                gCurrentCourseInfo->engine[i] = gPlayerEngine[0];
-                D_800F8504[i] = gRacers[0].unk_2C9;
+                gCurrentCourseInfo->recordEngines[i] = gPlayerEngine[0];
+                D_800F8504[i] = gRacers[0].machineIndex;
                 break;
             }
         }
@@ -3917,8 +3964,8 @@ void func_80089BD0(void) {
             D_800E5FE4 = 1;
             gCurrentCourseInfo->maxSpeed = gRacers[0].maxSpeed;
 
-            func_80089A74(&gCurrentCourseInfo->maxSpeedCar);
-            D_800F8504[5] = gRacers[0].unk_2C9;
+            func_80089A74(&gCurrentCourseInfo->maxSpeedMachine);
+            D_800F8504[5] = gRacers[0].machineIndex;
         }
 
         var_a1_3 = gCurrentCourseInfo->bestTime;
@@ -3932,8 +3979,8 @@ void func_80089BD0(void) {
         if (var_a1_3 < gCurrentCourseInfo->bestTime) {
             D_800E5FE6 = j + 1;
             gCurrentCourseInfo->bestTime = var_a1_3;
-            func_80089A74(&gCurrentCourseInfo->bestTimeCar);
-            D_800F8504[6] = gRacers[0].unk_2C9;
+            func_80089A74(&gCurrentCourseInfo->bestTimeMachine);
+            D_800F8504[6] = gRacers[0].machineIndex;
         }
     }
 
@@ -4013,7 +4060,7 @@ void func_80089BD0(void) {
             ghost->replayEnd = sGhostReplayRecordingEnd;
             ghost->replaySize = sGhostReplayRecordingSize;
 
-            func_80089A74(&ghost->carInfo);
+            func_80089A74(&ghost->machineInfo);
 
             i = (sGhostReplayRecordingSize - 1) & ~3;
             var_v1_10 = (s32*) &sGhostReplayRecordingBuffer[i];
@@ -4117,9 +4164,9 @@ void func_8008AA8C(void) {
                 var_a1 = 0;
             }
 
-            racer->raceTime = (s32) (((racer->raceTime - var_a1) * gTotalLapCount) *
-                                      gCurrentCourseInfo->length / racer->raceDistance) +
-                               var_a1;
+            racer->raceTime = (s32) (((racer->raceTime - var_a1) * gTotalLapCount) * gCurrentCourseInfo->length /
+                                     racer->raceDistance) +
+                              var_a1;
 
             var_a1 = 0;
             var_a0 = 0;
@@ -4334,12 +4381,12 @@ void func_8008B1CC(void) {
     gPlayerLives[0] = gPlayerLives[1] = gPlayerLives[2] = gPlayerLives[3] = gTotalLives[gDifficulty];
 }
 
-s32 func_8008B23C(CarInfo* arg0, CarInfo* arg1) {
+s32 func_8008B23C(MachineInfo* arg0, MachineInfo* arg1) {
     s32 i;
     u8* var_v0 = (u8*) arg0;
     u8* var_v1 = (u8*) arg1;
 
-    for (i = sizeof(CarInfo); i > 0; i--, var_v0++, var_v1++) {
+    for (i = sizeof(MachineInfo); i > 0; i--, var_v0++, var_v1++) {
         if (*var_v0 != *var_v1) {
             return -1;
         }
@@ -4351,7 +4398,7 @@ s32 func_8008B23C(CarInfo* arg0, CarInfo* arg1) {
 f32 func_8008B2D8(Racer*, f32);
 
 f32 func_8008B2D8(Racer* arg0, f32 arg1) {
-    unk_800CF1B0* temp_a1;
+    Machine* temp_a1;
     f32 temp_fs0;
     f32 temp_fv0;
     f32 temp_fs1;
@@ -4443,7 +4490,7 @@ f32 func_8008B2D8(Racer* arg0, f32 arg1) {
     temp_fv1 =
         (((((ROM_READ(0x1C8) >> 4) & 0xFF) * 0.01f) - ((f32) ((ROM_READ(0x664) >> 2) & 0xFF) * 0.01f)) * temp_fs0) +
         (((ROM_READ(0x664) >> 2) & 0xFF) * 0.01f);
-    temp_a1 = &D_800F80C8[arg0->character];
+    temp_a1 = &gMachines[arg0->character];
     arg0->unk_1F8 = D_800CF188[temp_a1->machineStats[GRIP_STAT]] + ((temp_fv1 - temp_fv0) * arg1) + temp_fv0;
     temp_fs1 += arg0->unk_1F8;
 
@@ -4488,28 +4535,28 @@ void func_8008C14C(Racer* arg0) {
     f32 var_fs0;
     s32 i;
     Mtx3F spE8;
-    unk_800CF1B0* temp_s2;
+    Machine* temp_s2;
 
-    temp_s2 = &D_800F80C8[arg0->character];
-    arg0->customType = temp_s2->unk_00;
+    temp_s2 = &gMachines[arg0->character];
+    arg0->customType = temp_s2->customType;
     if (gGameMode == GAMEMODE_TIME_ATTACK) {
-        arg0->unk_2C9 = 0;
+        arg0->machineIndex = 0;
     } else {
-        arg0->unk_2C9 = arg0->character;
+        arg0->machineIndex = arg0->character;
     }
 
     arg0->shadowType = temp_s2->shadowType;
     arg0->boostersType = temp_s2->boostersType;
-    arg0->unk_2E0 = arg0->unk_2CE = temp_s2->unk_04[arg0->unk_2CC];
-    arg0->unk_2E4 = arg0->unk_2D0 = temp_s2->unk_08[arg0->unk_2CC];
-    arg0->unk_2E8 = arg0->unk_2D2 = temp_s2->unk_0C[arg0->unk_2CC];
+    arg0->bodyRF = arg0->bodyR = temp_s2->red[arg0->machineSkinIndex];
+    arg0->bodyGF = arg0->bodyG = temp_s2->green[arg0->machineSkinIndex];
+    arg0->bodyBF = arg0->bodyB = temp_s2->blue[arg0->machineSkinIndex];
     arg0->unk_2DA = arg0->unk_2DC = arg0->unk_2DE = arg0->shadowR = arg0->shadowG = arg0->shadowB = 0;
     arg0->unk_2EC = 255.0f;
     arg0->unk_2F0 = 0.0f;
     arg0->unk_2F4 = 0.0f;
-    arg0->unk_2F8 = arg0->unk_2E0 - arg0->unk_2EC;
-    arg0->unk_2FC = arg0->unk_2E4 - arg0->unk_2F0;
-    arg0->unk_300 = arg0->unk_2E8 - arg0->unk_2F4;
+    arg0->unk_2F8 = arg0->bodyRF - arg0->unk_2EC;
+    arg0->unk_2FC = arg0->bodyGF - arg0->unk_2F0;
+    arg0->unk_300 = arg0->bodyBF - arg0->unk_2F4;
     if ((D_800CD010 != 0) || (gGameMode == GAMEMODE_PRACTICE) || (gGameMode == GAMEMODE_DEATH_RACE)) {
         arg0->stateFlags =
             RACER_STATE_FLAGS_40000000 | RACER_STATE_FLAGS_20000000 | RACER_STATE_FLAGS_100000 | RACER_STATE_FLAGS_8000;
@@ -4541,7 +4588,7 @@ void func_8008C14C(Racer* arg0) {
         arg0->lapTimes[i] = NULL;
     }
 
-    arg0->unk_2B4 = arg0->unk_2B2 = arg0->unk_2B3 = 1;
+    arg0->machineLod = arg0->unk_2B2 = arg0->unk_2B3 = 1;
     arg0->unk_168.y = -54321.0f;
     arg0->lapsCompletedDistance = -gCurrentCourseInfo->length;
     arg0->unk_284 = 0;
@@ -4564,11 +4611,11 @@ void func_8008C14C(Racer* arg0) {
     arg0->unk_1EC = 2500.0f / 27.0f;
     arg0->unk_17C = D_800F80A4;
 
-    arg0->unk_1E0 = (((temp_s2->unk_14 - 780.0f) * -0.0050000027f) / 1560.0f) + 0.054f;
-    arg0->unk_1E4 = (((temp_s2->unk_14 - 780.0f) * -0.004999999f) / 1560.0f) + 0.03f;
-    arg0->unk_1F0 = temp_s2->unk_14;
+    arg0->unk_1E0 = (((temp_s2->weight - 780.0f) * -0.0050000027f) / 1560.0f) + 0.054f;
+    arg0->unk_1E4 = (((temp_s2->weight - 780.0f) * -0.004999999f) / 1560.0f) + 0.03f;
+    arg0->unk_1F0 = temp_s2->weight;
     arg0->unk_1F4 =
-        ((4 - temp_s2->machineStats[BODY_STAT]) * 312.0f) + 780.0f + ((312.0f * (temp_s2->unk_14 - 780.0f)) / 1560.0f);
+        ((4 - temp_s2->machineStats[BODY_STAT]) * 312.0f) + 780.0f + ((312.0f * (temp_s2->weight - 780.0f)) / 1560.0f);
 
     // arg0->unk_1F4 = SQ(arg0->unk_1F4);
     // FAKE
@@ -4614,7 +4661,7 @@ void func_8008C7C8(void) {
     s32 var_t0;
     Racer* var_s1_2;
     GhostRacer* temp_s0_2;
-    CarInfo sp6C;
+    MachineInfo sp6C;
     OSMesg sp68;
 
     D_800E5FE8 = &D_800CE4E0[gCourseData.venue * 4];
@@ -4646,12 +4693,12 @@ void func_8008C7C8(void) {
                                 break;
                             }
                         }
-                        gRacers[0].lapTimes[i - 1] = (gRacers[j].character << 0x10) | gRacers[j].unk_2CC;
+                        gRacers[0].lapTimes[i - 1] = (gRacers[j].character << 0x10) | gRacers[j].machineSkinIndex;
                     }
 
                     for (i = 0; i < 3; i++) {
                         gRacers[i].character = (gRacers[0].lapTimes[i] >> 0x10);
-                        gRacers[i].unk_2CC = gRacers[0].lapTimes[i] & 0xFFFF;
+                        gRacers[i].machineSkinIndex = gRacers[0].lapTimes[i] & 0xFFFF;
                     }
                 } else {
                     gTotalRacers = 1;
@@ -4683,7 +4730,7 @@ void func_8008C7C8(void) {
     if (D_800CD010 != 0) {
         for (i = 29; i >= 0; i--) {
             gRacers[i].character = i;
-            gRacers[i].unk_2CC = 0;
+            gRacers[i].machineSkinIndex = 0;
         }
         var_a3 = 0x21;
         for (var_a3 = 33; var_a3 > 0; var_a3--) {
@@ -4816,19 +4863,19 @@ void func_8008C7C8(void) {
                 var_s1_2 = temp_s0_2->racer;
 
                 var_s1_2->id = i + 1;
-                var_s1_2->character = temp_s0_2->ghost->carInfo.character;
+                var_s1_2->character = temp_s0_2->ghost->machineInfo.character;
 
-                if (func_8008B23C(&temp_s0_2->ghost->carInfo, &sp6C) != 0) {
-                    var_s1_2->unk_2C9 = i + 7;
+                if (func_8008B23C(&temp_s0_2->ghost->machineInfo, &sp6C) != 0) {
+                    var_s1_2->machineIndex = i + 7;
                 } else {
-                    var_s1_2->unk_2C9 = gRacers[0].unk_2C9;
+                    var_s1_2->machineIndex = gRacers[0].machineIndex;
                 }
 
-                var_s1_2->shadowType = D_800F80C8[var_s1_2->character].shadowType;
-                var_s1_2->boostersType = D_800F80C8[var_s1_2->character].boostersType;
-                var_s1_2->unk_2CE = temp_s0_2->ghost->carInfo.envR2;
-                var_s1_2->unk_2D0 = temp_s0_2->ghost->carInfo.envG2;
-                var_s1_2->unk_2D2 = temp_s0_2->ghost->carInfo.envB2;
+                var_s1_2->shadowType = gMachines[var_s1_2->character].shadowType;
+                var_s1_2->boostersType = gMachines[var_s1_2->character].boostersType;
+                var_s1_2->bodyR = temp_s0_2->ghost->machineInfo.bodyR;
+                var_s1_2->bodyG = temp_s0_2->ghost->machineInfo.bodyG;
+                var_s1_2->bodyB = temp_s0_2->ghost->machineInfo.bodyB;
             }
         }
         sGhostReplayRecordingPtr = sGhostReplayRecordingBuffer;
@@ -4840,75 +4887,78 @@ void func_8008D33C(void) {
     s32 i;
 
     for (i = 29; i >= 0; i--) {
-        D_800F80C8[i] = D_800CF1B0[i];
+        gMachines[i] = sDefaultMachines[i];
     }
 }
 
-void func_8008D3C4(s32 arg0, s32 arg1) {
-    s32 pad[2];
+void func_8008D3C4(s32 character, s32 arg1) {
     Gfx* gfx;
     s32 i;
-    unk_800CF1B0* temp_v0 = &D_800F80C8[arg0];
+    Machine* temp_v0 = &gMachines[character];
 
-    if (temp_v0->unk_00 == 1) {
-        gfx = func_i9_80161050(D_800CDD38[arg1], D_800F8360[arg0][3], temp_v0->unk_10 - 1, D_800F8360[arg0][4]);
+    if (temp_v0->customType == CUSTOM_MACHINE_EDITED) {
+        gfx = Machine_DrawLoadCustomTextures(D_800CDD38[arg1], sCustomMachineInfo[character].logo, temp_v0->number - 1,
+                                             sCustomMachineInfo[character].decal);
         gSPEndDisplayList(gfx);
 
         for (i = 4; i >= 0; i--) {
-            gfx = func_i9_80115DF0(D_800CDDB0[arg1 * 6 + i], i, D_800F8360[arg0][0], D_800F8360[arg0][1],
-                                   D_800F8360[arg0][2], D_800F8360[arg0][8], D_800F8360[arg0][9], D_800F8360[arg0][10],
-                                   D_800F8360[arg0][5], D_800F8360[arg0][6], D_800F8360[arg0][7], 255, 255, 255,
-                                   D_800F8360[arg0][11], D_800F8360[arg0][12], D_800F8360[arg0][13]);
+            gfx = Machine_DrawCustom(D_800CDDB0[arg1 * 6 + i], i, sCustomMachineInfo[character].frontType,
+                                     sCustomMachineInfo[character].rearType, sCustomMachineInfo[character].wingType,
+                                     sCustomMachineInfo[character].decalR, sCustomMachineInfo[character].decalG,
+                                     sCustomMachineInfo[character].decalB, sCustomMachineInfo[character].numberR,
+                                     sCustomMachineInfo[character].numberG, sCustomMachineInfo[character].numberB, 255,
+                                     255, 255, sCustomMachineInfo[character].cockpitR,
+                                     sCustomMachineInfo[character].cockpitG, sCustomMachineInfo[character].cockpitB);
             gSPEndDisplayList(gfx);
         }
 
         return;
     }
-    if (temp_v0->unk_00 != 0) {
-        arg0 = temp_v0->unk_00 + 28;
+    if (temp_v0->customType != CUSTOM_MACHINE_DEFAULT) {
+        character = temp_v0->customType - CUSTOM_MACHINE_SUPER_FALCON + 30;
     } else {
-        arg0 = arg0;
+        character = character;
     }
 
-    gfx = D_800CE098[arg0](D_800CDD38[arg1]);
+    gfx = sMachineLoadTexturesFuncs[character](D_800CDD38[arg1]);
     gSPEndDisplayList(gfx);
 
     for (i = 4; i >= 0; i--) {
-        gfx = D_800CE11C[arg0][i](D_800CDDB0[arg1 * 6 + i]);
+        gfx = sMachineDrawFuncs[character][i](D_800CDDB0[arg1 * 6 + i]);
         gSPEndDisplayList(gfx);
     }
 }
 
-void func_8008D5F4(CarInfo* arg0, s32 arg1) {
+void func_8008D5F4(MachineInfo* arg0, s32 arg1) {
     s32 pad[2];
     s32 var_v1;
     Gfx* gfx;
     s32 i;
 
-    if (arg0->customType == 1) {
-        gfx = func_i9_80161050(D_800CDD38[arg1], arg0->logo, arg0->decal, arg0->number);
+    if (arg0->customType == CUSTOM_MACHINE_EDITED) {
+        gfx = Machine_DrawLoadCustomTextures(D_800CDD38[arg1], arg0->logo, arg0->number, arg0->decal);
         gSPEndDisplayList(gfx);
 
         for (i = 4; i >= 0; i--) {
-            gfx = func_i9_80115DF0(D_800CDDB0[arg1 * 6 + i], i, arg0->frontType, arg0->rearType, arg0->wingType,
-                                   arg0->primR2, arg0->primG2, arg0->primB2, arg0->primR1, arg0->primG1, arg0->primB1,
-                                   255, 255, 255, arg0->envR1, arg0->envG1, arg0->envB1);
+            gfx = Machine_DrawCustom(D_800CDDB0[arg1 * 6 + i], i, arg0->frontType, arg0->rearType, arg0->wingType,
+                                     arg0->decalR, arg0->decalG, arg0->decalB, arg0->numberR, arg0->numberG,
+                                     arg0->numberB, 255, 255, 255, arg0->cockpitR, arg0->cockpitG, arg0->cockpitB);
             gSPEndDisplayList(gfx);
         }
 
         return;
     }
-    if (arg0->customType != 0) {
-        var_v1 = arg0->customType - 2 + 30;
+    if (arg0->customType != CUSTOM_MACHINE_DEFAULT) {
+        var_v1 = arg0->customType - CUSTOM_MACHINE_SUPER_FALCON + 30;
     } else {
         var_v1 = arg0->character;
     }
 
-    gfx = D_800CE098[var_v1](D_800CDD38[arg1]);
+    gfx = sMachineLoadTexturesFuncs[var_v1](D_800CDD38[arg1]);
     gSPEndDisplayList(gfx);
 
     for (i = 4; i >= 0; i--) {
-        gfx = D_800CE11C[var_v1][i](D_800CDDB0[arg1 * 6 + i]);
+        gfx = sMachineDrawFuncs[var_v1][i](D_800CDDB0[arg1 * 6 + i]);
         gSPEndDisplayList(gfx);
     }
 }
@@ -4932,15 +4982,15 @@ void func_8008D824(void) {
 
     for (i = 4; i >= 0; i--) {
         D_800F8504[i] = i + 1;
-        func_8008D5F4(&sp2C->carInfo[i], D_800F8504[i]);
+        func_8008D5F4(&sp2C->recordMachineInfos[i], D_800F8504[i]);
     }
 
     var = 5;
     D_800F8504[var] = var + 1;
-    func_8008D5F4(&sp2C->maxSpeedCar, D_800F8504[var]);
+    func_8008D5F4(&sp2C->maxSpeedMachine, D_800F8504[var]);
     var = 6;
     D_800F8504[var] = var + 1;
-    func_8008D5F4(&sp2C->bestTimeCar, D_800F8504[var]);
+    func_8008D5F4(&sp2C->bestTimeMachine, D_800F8504[var]);
 }
 
 void func_800A4DF0(void);
@@ -4954,7 +5004,7 @@ void func_8008D8E8(void) {
 
     for (i = 0; i < 3; i++) {
         if (gCurrentCourseInfo->encodedCourseIndex == gGhosts[i].encodedCourseIndex) {
-            func_8008D5F4(&gGhosts[i].carInfo, i + 7);
+            func_8008D5F4(&gGhosts[i].machineInfo, i + 7);
         }
     }
 }
@@ -4967,10 +5017,10 @@ void func_8008D97C(void) {
 
     for (i = 29; i >= 0; i--) {
         index = i;
-        gfx = D_800CE098[index](D_800CDD38[i]);
+        gfx = sMachineLoadTexturesFuncs[index](D_800CDD38[i]);
         gSPEndDisplayList(gfx);
         for (j = 4; j >= 0; j--) {
-            gfx = D_800CE11C[index][j](D_800CDDB0[i * 6 + j]);
+            gfx = sMachineDrawFuncs[index][j](D_800CDDB0[i * 6 + j]);
             gSPEndDisplayList(gfx);
         }
     }
@@ -4987,11 +5037,11 @@ void func_8008DA68(void) {
 
     for (i = 0; i < ARRAY_COUNT(gRacers); i++) {
         gRacers[i].character = (s8) (i % ARRAY_COUNT(gRacers));
-        gRacers[i].unk_2CC = 0;
+        gRacers[i].machineSkinIndex = 0;
         gRacers[i].unk_1A8 = func_8008960C(0.5f);
         if (i < 4) {
             D_800E5EE0[i] = (s16) gRacers[i].character;
-            D_800E5EE8[i] = gRacers[i].unk_2CC;
+            D_800E5EE8[i] = gRacers[i].machineSkinIndex;
             gPlayerEngine[i] = 0.5f;
         }
     }
@@ -5053,7 +5103,7 @@ void func_8008DCD8(Racer* arg0, f32 arg1) {
             if (D_800E5FD0 != 0) {
                 func_800BA710(arg0->id, 8);
             }
-            if (arg0->unk_2B4 != 0) {
+            if (arg0->machineLod != 0) {
                 if (arg0->unk_28C == NULL) {
                     sp90.x = 0.0f;
                     sp90.y = 0.0f;
@@ -5066,9 +5116,9 @@ void func_8008DCD8(Racer* arg0, f32 arg1) {
                 func_i2_80105648(arg0->unk_0C.unk_34.x, arg0->unk_0C.unk_34.y, arg0->unk_0C.unk_34.z, sp90.z, sp90.y,
                                  sp90.x, 40.0f, arg0);
 
-                temp_s5 = arg0->unk_2E0;
-                temp_s6 = arg0->unk_2E4;
-                temp_s7 = arg0->unk_2E8;
+                temp_s5 = arg0->bodyRF;
+                temp_s6 = arg0->bodyGF;
+                temp_s7 = arg0->bodyBF;
 
                 i = (arg0->id < gNumPlayers) ? 60 : 30;
                 do {
@@ -5097,7 +5147,7 @@ void func_8008DCD8(Racer* arg0, f32 arg1) {
         arg0->stateFlags |= RACER_STATE_FLAGS_20000;
         arg0->energy -= arg1;
         if (arg0->energy < 0.0f) {
-            if (arg0->unk_2B4 == 0) {
+            if (arg0->machineLod == 0) {
                 arg0->energy = 0.1f;
                 return;
             }
@@ -5148,7 +5198,7 @@ void func_8008E188(Racer* arg0, f32 arg1, f32 arg2, f32 arg3) {
     }
 
     if (arg1 * arg2 > 0.01f) {
-        if (arg0->unk_2B4 != 0) {
+        if (arg0->machineLod != 0) {
             func_i2_801054C0(arg0->unk_0C.unk_34.x + ((arg2 * 15.0f) * arg0->unk_24C.z.x),
                              arg0->unk_0C.unk_34.y + ((arg2 * 15.0f) * arg0->unk_24C.z.y),
                              arg0->unk_0C.unk_34.z + ((arg2 * 15.0f) * arg0->unk_24C.z.z), arg0->velocity.x,
@@ -6074,7 +6124,7 @@ void func_80090AFC(Racer* arg0) {
     arg0->stateFlags = (arg0->stateFlags & ~RACER_STATE_FLAGS_400000) | RACER_STATE_FLAGS_80000;
 
     if ((arg0->id < gNumPlayers) && (D_800E5FD0 != 0)) {
-        if (D_800CE3B0[arg0->character]) {
+        if (sCharacterVoices[arg0->character] != VOICE_FEMALE) {
             func_800BA710(arg0->id, 52);
         } else {
             func_800BA710(arg0->id, 53);
@@ -7302,7 +7352,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         racer->unk_220--;
     }
     if (racer->spinOutTimer != 0) {
-        if (!((racer->id + gGameFrameCount) & 3) && (racer->unk_2B4 != 0)) {
+        if (!((racer->id + gGameFrameCount) & 3) && (racer->machineLod != 0)) {
             sp10C.x = (s32) ((Math_Rand1() & 0x1F) - 0x10) + racer->unk_0C.unk_34.x;
             sp10C.y = (s32) ((Math_Rand1() & 0x1F) - 0x10) + racer->unk_0C.unk_34.y;
             sp10C.z = (s32) ((Math_Rand1() & 0x1F) - 0x10) + racer->unk_0C.unk_34.z;
@@ -7341,7 +7391,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             racer->unk_17C = 10.0f;
             D_800E5FBE++;
             func_800892E0(racer);
-            if (racer->unk_2B4 != 0) {
+            if (racer->machineLod != 0) {
                 func_i2_80105648(racer->unk_0C.unk_34.x, racer->unk_0C.unk_34.y, racer->unk_0C.unk_34.z,
                                  racer->velocity.x, racer->velocity.y, racer->velocity.z, 80.0f, racer);
                 if (racer->id < gNumPlayers) {
@@ -7349,9 +7399,9 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 } else {
                     i = 30;
                 }
-                sp13C = racer->unk_2E0;
-                sp138 = racer->unk_2E4;
-                sp134 = racer->unk_2E8;
+                sp13C = racer->bodyRF;
+                sp138 = racer->bodyGF;
+                sp134 = racer->bodyBF;
                 do {
                     var_fs1 = ((f32) (Math_Rand1() & 0x1FFFF) * 0.00011444179f) - 7.5f;
                     var_fs0 = ((f32) (Math_Rand1() & 0x1FFFF) * 0.00005340617f) + 3.5f;
@@ -7400,19 +7450,19 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             var_fs0 = (racer->unk_2FC * var_fa1) + racer->unk_2F0;
             var_ft4 = (racer->unk_300 * var_fa1) + racer->unk_2F4;
             var_fa1 = (f32) ((u32) gGameFrameCount & 7) / 7.0f;
-            var_fs1 += ((racer->unk_2E0 - var_fs1) * var_fa1);
-            var_fs0 += ((racer->unk_2E4 - var_fs0) * var_fa1);
-            var_ft4 += ((racer->unk_2E8 - var_ft4) * var_fa1);
+            var_fs1 += ((racer->bodyRF - var_fs1) * var_fa1);
+            var_fs0 += ((racer->bodyGF - var_fs0) * var_fa1);
+            var_ft4 += ((racer->bodyBF - var_ft4) * var_fa1);
         } else {
-            var_fs1 = racer->unk_2E0;
-            var_fs0 = racer->unk_2E4;
-            var_ft4 = racer->unk_2E8;
+            var_fs1 = racer->bodyRF;
+            var_fs0 = racer->bodyGF;
+            var_ft4 = racer->bodyBF;
         }
 
         var_fa1 = racer->unk_220 / 5.0f;
-        racer->unk_2CE = ((255.0f - var_fs1) * var_fa1) + var_fs1;
-        racer->unk_2D0 = ((255.0f - var_fs0) * var_fa1) + var_fs0;
-        racer->unk_2D2 = ((255.0f - var_ft4) * var_fa1) + var_ft4;
+        racer->bodyR = ((255.0f - var_fs1) * var_fa1) + var_fs1;
+        racer->bodyG = ((255.0f - var_fs0) * var_fa1) + var_fs0;
+        racer->bodyB = ((255.0f - var_ft4) * var_fa1) + var_ft4;
         if (racer->unk_284 == 2) {
             var_fa1 = SIN(racer->unk_27C & 0x7FF);
             racer->unk_178 = (0.1f * var_fa1) + 1.05f;
@@ -7428,10 +7478,10 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             racer->unk_178 = 0.0f;
         }
     } else {
-        racer->unk_2CE = racer->unk_2E0;
-        racer->unk_2D0 = racer->unk_2E4;
-        racer->unk_2D2 = racer->unk_2E8;
-        if (((Math_Rand1() & 0x1FFFF) < 0x444) && (racer->unk_2B4 != 0)) {
+        racer->bodyR = racer->bodyRF;
+        racer->bodyG = racer->bodyGF;
+        racer->bodyB = racer->bodyBF;
+        if (((Math_Rand1() & 0x1FFFF) < 0x444) && (racer->machineLod != 0)) {
             var_fs1 = (((f32) (Math_Rand1() & 0x1FFFF) / 131071.0f) * 3.0f) - 1.5f;
             var_fs0 = (((f32) (Math_Rand2() & 0x1FFFF) / 131071.0f) * 1.5f) + 0.5f;
             var_ft4 = (((f32) (Math_Rand2() & 0x1FFFF) / 131071.0f) * 3.0f) - 1.5f;
@@ -7721,7 +7771,7 @@ void func_800952F4(void) {
 
     if (gNumPlayers != 1) {
         for (racer = sLastRacer; racer >= gRacers; racer--) {
-            racer->unk_2B4 = racer->unk_2B2 = racer->unk_2B3 = 1;
+            racer->machineLod = racer->unk_2B2 = racer->unk_2B3 = 1;
         }
     }
     if (gTotalRacers >= 2) {
@@ -7791,7 +7841,7 @@ void func_800952F4(void) {
                                     if (var_fs0 < 0.0f) {
                                         var_fs0 = -var_fs0;
                                     }
-                                    if ((racer2->unk_2B4 != 0) &&
+                                    if ((racer2->machineLod != 0) &&
                                         (func_i2_801054C0(((racer->unk_0C.unk_34.x + racer2->unk_0C.unk_34.x) * 0.5f) +
                                                               (6.0f * racer->unk_C0.y.x),
                                                           ((racer->unk_0C.unk_34.y + racer2->unk_0C.unk_34.y) * 0.5f) +
@@ -8177,7 +8227,7 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
     f32 sp538;
     f32 sp534;
     GhostRacer* sp4F8;
-    Player* spA4;
+    Player* player;
     Racer* playerRacer;
     f32 sp84;
     s32 i;
@@ -8270,35 +8320,35 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
     unk_80113140* temp_v0_13;
     s32 temp;
 
-    spA4 = &gPlayers[playerIndex];
+    player = &gPlayers[playerIndex];
 
-    temp_fv1 = (spA4->unk_5C.x.x * 100.0f) - spA4->unk_50.x;
-    temp_fv0 = (spA4->unk_5C.x.y * 100.0f) - spA4->unk_50.y;
-    temp_fa0 = (spA4->unk_5C.x.z * 100.0f) - spA4->unk_50.z;
-    temp_fa1 = ((-temp_fv1 * spA4->unk_15C.zx) - (temp_fv0 * spA4->unk_15C.zy)) - (spA4->unk_15C.zz * temp_fa0);
+    temp_fv1 = (player->unk_5C.x.x * 100.0f) - player->unk_50.x;
+    temp_fv0 = (player->unk_5C.x.y * 100.0f) - player->unk_50.y;
+    temp_fa0 = (player->unk_5C.x.z * 100.0f) - player->unk_50.z;
+    temp_fa1 = ((-temp_fv1 * player->unk_15C.zx) - (temp_fv0 * player->unk_15C.zy)) - (player->unk_15C.zz * temp_fa0);
     sp580.ww = temp_fa1;
-    sp580.zw = spA4->unk_11C.zw - (temp_fa1 * spA4->unk_11C.zz);
-    sp580.xw = (spA4->unk_11C.xx *
-                ((temp_fv1 * spA4->unk_15C.xx) + (temp_fv0 * spA4->unk_15C.xy) + (temp_fa0 * spA4->unk_15C.xz))) -
-               (temp_fa1 * spA4->unk_11C.xz);
-    sp580.xx = spA4->unk_19C.xx;
-    sp580.xy = spA4->unk_19C.xy;
-    sp580.yw = (spA4->unk_11C.yy *
-                ((temp_fv1 * spA4->unk_15C.yx) + (temp_fv0 * spA4->unk_15C.yy) + (temp_fa0 * spA4->unk_15C.yz))) -
-               (temp_fa1 * spA4->unk_11C.yz);
-    sp580.yx = spA4->unk_19C.yx;
-    sp580.zx = spA4->unk_19C.zx;
-    sp580.wx = spA4->unk_19C.wx;
-    sp580.yy = spA4->unk_19C.yy;
-    sp580.zy = spA4->unk_19C.zy;
-    sp580.wy = spA4->unk_19C.wy;
-    sp580.xz = spA4->unk_19C.xz;
-    sp580.yz = spA4->unk_19C.yz;
-    sp580.zz = spA4->unk_19C.zz;
-    sp580.wz = spA4->unk_19C.wz;
+    sp580.zw = player->unk_11C.zw - (temp_fa1 * player->unk_11C.zz);
+    sp580.xw = (player->unk_11C.xx *
+                ((temp_fv1 * player->unk_15C.xx) + (temp_fv0 * player->unk_15C.xy) + (temp_fa0 * player->unk_15C.xz))) -
+               (temp_fa1 * player->unk_11C.xz);
+    sp580.xx = player->unk_19C.xx;
+    sp580.xy = player->unk_19C.xy;
+    sp580.yw = (player->unk_11C.yy *
+                ((temp_fv1 * player->unk_15C.yx) + (temp_fv0 * player->unk_15C.yy) + (temp_fa0 * player->unk_15C.yz))) -
+               (temp_fa1 * player->unk_11C.yz);
+    sp580.yx = player->unk_19C.yx;
+    sp580.zx = player->unk_19C.zx;
+    sp580.wx = player->unk_19C.wx;
+    sp580.yy = player->unk_19C.yy;
+    sp580.zy = player->unk_19C.zy;
+    sp580.wy = player->unk_19C.wy;
+    sp580.xz = player->unk_19C.xz;
+    sp580.yz = player->unk_19C.yz;
+    sp580.zz = player->unk_19C.zz;
+    sp580.wz = player->unk_19C.wz;
     if (gGameMode != GAMEMODE_GP_END_CS) {
         for (racer = sLastRacer; racer >= gRacers; racer--) {
-            racer->unk_2B4 = racer->unk_2B2 = racer->unk_2B3 = 0;
+            racer->machineLod = racer->unk_2B2 = racer->unk_2B3 = 0;
             if (racer->stateFlags & RACER_STATE_FLAGS_40000000) {
                 temp_fv0_2 = racer->unk_0C.unk_34.x;
                 temp_fv1_2 = racer->unk_0C.unk_34.y;
@@ -8323,17 +8373,17 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
                 }
 
                 if (temp_fa0_2 < 230.0f) {
-                    racer->unk_2B4 = 1;
+                    racer->machineLod = 1;
                 } else if (temp_fa0_2 < 290.0f) {
-                    racer->unk_2B4 = 2;
+                    racer->machineLod = 2;
                 } else if (temp_fa0_2 < 380.0f) {
-                    racer->unk_2B4 = 3;
+                    racer->machineLod = 3;
                 } else if (temp_fa0_2 < 470.0f) {
-                    racer->unk_2B4 = 4;
+                    racer->machineLod = 4;
                 } else if (temp_fa0_2 < 1500.0f) {
-                    racer->unk_2B4 = 5;
+                    racer->machineLod = 5;
                 } else {
-                    racer->unk_2B4 = 6;
+                    racer->machineLod = 6;
                 }
 
                 if (temp_fa0_2 < 800.0f) {
@@ -8348,14 +8398,14 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
         }
     } else {
         for (racer = sLastRacer; racer >= gRacers; racer--) {
-            racer->unk_2B4 = racer->unk_2B2 = 1;
+            racer->machineLod = racer->unk_2B2 = 1;
             racer->unk_2B3 = 2;
         }
     }
     if (gNumPlayers >= 3) {
         for (racer = &gRacers[gNumPlayers - 1]; racer >= gRacers; racer--) {
-            if ((racer->unk_2B4 != 0) && (racer->unk_2B4 < 6)) {
-                racer->unk_2B4++;
+            if ((racer->machineLod != 0) && (racer->machineLod < 6)) {
+                racer->machineLod++;
             }
             if (racer->unk_2B3 == 2) {
                 racer->unk_2B3 = 1;
@@ -8365,7 +8415,7 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
         for (var_v1 = &gGhostRacers[2]; var_v1 >= gGhostRacers; var_v1--) {
             if (var_v1->exists) {
                 racer = var_v1->racer;
-                racer->unk_2B4 = racer->unk_2B2 = racer->unk_2B3 = 0;
+                racer->machineLod = racer->unk_2B2 = racer->unk_2B3 = 0;
                 if (var_v1->exists) {
                     temp_fv0_3 = racer->unk_0C.unk_34.x;
                     temp_fv1_3 = racer->unk_0C.unk_34.y;
@@ -8392,17 +8442,17 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
                     }
 
                     if (temp_fa0_2 < 230.0f) {
-                        racer->unk_2B4 = 1;
+                        racer->machineLod = 1;
                     } else if (temp_fa0_2 < 290.0f) {
-                        racer->unk_2B4 = 2;
+                        racer->machineLod = 2;
                     } else if (temp_fa0_2 < 380.0f) {
-                        racer->unk_2B4 = 3;
+                        racer->machineLod = 3;
                     } else if (temp_fa0_2 < 470.0f) {
-                        racer->unk_2B4 = 4;
+                        racer->machineLod = 4;
                     } else if (temp_fa0_2 < 1500.0f) {
-                        racer->unk_2B4 = 5;
+                        racer->machineLod = 5;
                     } else {
-                        racer->unk_2B4 = 6;
+                        racer->machineLod = 6;
                     }
 
                     if (temp_fa0_2 < 800.0f) {
@@ -8484,7 +8534,7 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
 
     for (racer = sLastRacer; racer >= gRacers; racer--) {
         if (racer->unk_178 != 0.0f) {
-            if ((racer->unk_2B4 != 0) && (racer->unk_2B4 < 6)) {
+            if ((racer->machineLod != 0) && (racer->machineLod < 6)) {
                 if (racer->unk_166 == 0) {
                     func_8006C278(&gGfxPool->unk_21208[racer->id], NULL, racer->unk_178 * D_800CE748,
                                   racer->unk_178 * D_800CE74C, racer->unk_178 * D_800CE750, &racer->unk_E8,
@@ -8496,9 +8546,9 @@ Gfx* func_80096CE8(Gfx* gfx, s32 playerIndex) {
                 gDPSetBlendColor(gfx++, racer->unk_2DA, racer->unk_2DC, racer->unk_2DE, 255);
 
                 if (!(racer->stateFlags & RACER_STATE_CRASHED)) {
-                    gSPDisplayList(gfx++, D_800CDDB0[racer->unk_2C9 * 6 + racer->unk_2B4 - 1]);
+                    gSPDisplayList(gfx++, D_800CDDB0[racer->machineIndex * 6 + racer->machineLod - 1]);
                 } else {
-                    gSPDisplayList(gfx++, D_800CE07C[racer->unk_2B4]);
+                    gSPDisplayList(gfx++, D_800CE080[racer->machineLod - 1]);
                 }
             }
         }
@@ -8569,16 +8619,16 @@ block_115:
         var_s4 = gCurrentCourseInfo->unk_14[5];
     }
     if (gGameMode != GAMEMODE_GP_END_CS) {
-        gGfxPool->unk_21AE8[playerIndex].l.unk_08[0] = Math_Round((sp560 - spA4->unk_5C.x.x) * 16383.0f);
-        gGfxPool->unk_21AE8[playerIndex].l.unk_08[1] = Math_Round((sp55C - spA4->unk_5C.x.y) * 16383.0f);
-        gGfxPool->unk_21AE8[playerIndex].l.unk_08[2] = Math_Round((sp558 - spA4->unk_5C.x.z) * 16383.0f);
+        gGfxPool->unk_21AE8[playerIndex].l.unk_08[0] = Math_Round((sp560 - player->unk_5C.x.x) * 16383.0f);
+        gGfxPool->unk_21AE8[playerIndex].l.unk_08[1] = Math_Round((sp55C - player->unk_5C.x.y) * 16383.0f);
+        gGfxPool->unk_21AE8[playerIndex].l.unk_08[2] = Math_Round((sp558 - player->unk_5C.x.z) * 16383.0f);
         gSPDmaRead(gfx++, 0x8B0, D_800CE3D0, ARRAY_COUNT(D_800CE3D0));
         gSPLookAtY(gfx++, &D_1000000.unk_21AE8[playerIndex]);
         gDPSetFogColor(gfx++, var_s3, sp5C4, var_s4, 255);
     }
 
     for (racer = sLastRacer; racer >= gRacers; racer--) {
-        if (racer->unk_2B4 != 0) {
+        if (racer->machineLod != 0) {
             if (racer->unk_164 == 0) {
                 func_8006C278(&gGfxPool->unk_20308[racer->id], &racer->unk_124, D_800CE748, D_800CE74C, D_800CE750,
                               &racer->unk_E8, &racer->unk_10C);
@@ -8586,15 +8636,15 @@ block_115:
             }
             if (!(racer->stateFlags & RACER_STATE_CRASHED)) {
                 gSPMatrix(gfx++, &D_1000000.unk_20308[racer->id], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-                gSPDisplayList(gfx++, D_800CDD38[racer->unk_2C9]);
-                gDPSetEnvColor(gfx++, racer->unk_2CE, racer->unk_2D0, racer->unk_2D2, 255);
-                gSPDisplayList(gfx++, D_800CDDB0[racer->unk_2C9 * 6 + racer->unk_2B4 - 1]);
+                gSPDisplayList(gfx++, D_800CDD38[racer->machineIndex]);
+                gDPSetEnvColor(gfx++, racer->bodyR, racer->bodyG, racer->bodyB, 255);
+                gSPDisplayList(gfx++, D_800CDDB0[racer->machineIndex * 6 + racer->machineLod - 1]);
             }
         }
     }
     if (gGameMode == GAMEMODE_GP_END_CS) {
         gSPDisplayList(gfx++, D_90186C8);
-        Light_SetLookAtSource(&gGfxPool->unk_21B28, &spA4->unk_15C);
+        Light_SetLookAtSource(&gGfxPool->unk_21B28, &player->unk_15C);
         gSPLookAt(gfx++, &gGfxPool->unk_21B28);
         gSPTexture(gfx++, D_800CE768, D_800CE768, 0, G_TX_RENDERTILE, G_ON);
 
@@ -8613,13 +8663,13 @@ block_115:
         gDPSetTile(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0x0000, G_TX_RENDERTILE, 0, G_TX_MIRROR | G_TX_WRAP, 5,
                    G_TX_NOLOD, G_TX_MIRROR | G_TX_WRAP, 5, G_TX_NOLOD);
 
-        D_800F809C += ((spA4->unk_5C.z.x * gRacers->velocity.x) + (spA4->unk_5C.z.y * gRacers->velocity.y) +
-                       (spA4->unk_5C.z.z * gRacers->velocity.z)) *
+        D_800F809C += ((player->unk_5C.z.x * gRacers->velocity.x) + (player->unk_5C.z.y * gRacers->velocity.y) +
+                       (player->unk_5C.z.z * gRacers->velocity.z)) *
                       D_800CE76C;
         temp_a1_2 = (s32) (D_800F809C * 4.0f) & 0xFF;
 
-        D_800F80A0 += ((spA4->unk_5C.y.x * gRacers->velocity.x) + (spA4->unk_5C.y.y * gRacers->velocity.y) +
-                       (spA4->unk_5C.y.z * gRacers->velocity.z)) *
+        D_800F80A0 += ((player->unk_5C.y.x * gRacers->velocity.x) + (player->unk_5C.y.y * gRacers->velocity.y) +
+                       (player->unk_5C.y.z * gRacers->velocity.z)) *
                       D_800CE76C;
         temp_v1_2 = (s32) (D_800F80A0 * 4.0f) & 0xFF;
 
@@ -8635,15 +8685,15 @@ block_115:
 
     var_s7 = 0;
     for (racer = sLastRacer; racer >= gRacers; racer--) {
-        if ((racer->unk_2B4 != 0) && (racer->stateFlags & RACER_STATE_CRASHED)) {
+        if ((racer->machineLod != 0) && (racer->stateFlags & RACER_STATE_CRASHED)) {
             if (var_s7 == 0) {
                 gSPDisplayList(gfx++, D_7045150);
                 var_s7 = 1;
             }
             gSPMatrix(gfx++, &D_1000000.unk_20308[racer->id], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gDPPipeSync(gfx++);
-            gDPSetEnvColor(gfx++, racer->unk_2CE, racer->unk_2D0, racer->unk_2D2, 255);
-            gSPDisplayList(gfx++, D_800CE07C[racer->unk_2B4]);
+            gDPSetEnvColor(gfx++, racer->bodyR, racer->bodyG, racer->bodyB, 255);
+            gSPDisplayList(gfx++, D_800CE080[racer->machineLod - 1]);
         }
     }
     if (gGameMode == GAMEMODE_TIME_ATTACK) {
@@ -8657,24 +8707,24 @@ block_115:
         for (sp4F8 = &gGhostRacers[2]; sp4F8 >= gGhostRacers; sp4F8--) {
             if (sp4F8->exists) {
                 racer = sp4F8->racer;
-                if (racer->unk_2B4 != 0) {
+                if (racer->machineLod != 0) {
                     func_8006C278(&gGfxPool->unk_20308[racer->id], &racer->unk_124, sp4F8->scale * D_800CE748,
                                   sp4F8->scale * D_800CE74C, sp4F8->scale * D_800CE750, &racer->unk_E8,
                                   &racer->unk_10C);
                     gSPMatrix(gfx++, &D_1000000.unk_20308[racer->id], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-                    gSPDisplayList(gfx++, D_800CDD38[racer->unk_2C9]);
-                    gDPSetEnvColor(gfx++, racer->unk_2CE, racer->unk_2D0, racer->unk_2D2, 240);
-                    gSPDisplayList(gfx++, D_800CDDB0[racer->unk_2C9 * 6 + racer->unk_2B4 - 1]);
+                    gSPDisplayList(gfx++, D_800CDD38[racer->machineIndex]);
+                    gDPSetEnvColor(gfx++, racer->bodyR, racer->bodyG, racer->bodyB, 240);
+                    gSPDisplayList(gfx++, D_800CDDB0[racer->machineIndex * 6 + racer->machineLod - 1]);
                 }
             }
         }
     }
-    sp560 = spA4->unk_5C.z.x;
-    sp55C = spA4->unk_5C.z.y;
-    sp558 = spA4->unk_5C.z.z;
-    sp56C = spA4->unk_5C.y.x;
-    sp568 = spA4->unk_5C.y.y;
-    sp564 = spA4->unk_5C.y.z;
+    sp560 = player->unk_5C.z.x;
+    sp55C = player->unk_5C.z.y;
+    sp558 = player->unk_5C.z.z;
+    sp56C = player->unk_5C.y.x;
+    sp568 = player->unk_5C.y.y;
+    sp564 = player->unk_5C.y.z;
 
     gSPDisplayList(gfx++, aSetupBoosterDL);
 
@@ -9376,7 +9426,7 @@ block_115:
             for (i = 0; i < var_s4_5; i++) {
 
                 racer = gRacersByPosition[i];
-                if (racer->unk_2B4 != 0) {
+                if (racer->machineLod != 0) {
                     if ((playerIndex != racer->id) &&
                         !(racer->stateFlags & (RACER_STATE_CRASHED | RACER_STATE_FLAGS_2000000))) {
                         if (racer->id < playerIndex) {
@@ -9392,18 +9442,21 @@ block_115:
                         temp_fs4 = racer->unk_0C.unk_34.x + (20.0f * racer->unk_C0.y.x);
                         temp_fs5 = racer->unk_0C.unk_34.y + (20.0f * racer->unk_C0.y.y);
                         temp_fv0_19 = racer->unk_0C.unk_34.z + (20.0f * racer->unk_C0.y.z);
-                        temp_fv1_7 =
-                            1.0f / (spA4->unk_19C.ww + ((spA4->unk_19C.wx * temp_fs4) + (spA4->unk_19C.wy * temp_fs5) +
-                                                        (spA4->unk_19C.wz * temp_fv0_19)));
-                        sp56C = (spA4->unk_19C.xw + ((spA4->unk_19C.xx * temp_fs4) + (spA4->unk_19C.xy * temp_fs5) +
-                                                     (spA4->unk_19C.xz * temp_fv0_19))) *
-                                temp_fv1_7;
-                        sp568 = (spA4->unk_19C.yw + ((spA4->unk_19C.yx * temp_fs4) + (spA4->unk_19C.yy * temp_fs5) +
-                                                     (spA4->unk_19C.yz * temp_fv0_19))) *
-                                temp_fv1_7;
-                        sp564 = (spA4->unk_19C.zw + ((spA4->unk_19C.zx * temp_fs4) + (spA4->unk_19C.zy * temp_fs5) +
-                                                     (spA4->unk_19C.zz * temp_fv0_19))) *
-                                temp_fv1_7;
+                        temp_fv1_7 = 1.0f / (player->unk_19C.ww +
+                                             ((player->unk_19C.wx * temp_fs4) + (player->unk_19C.wy * temp_fs5) +
+                                              (player->unk_19C.wz * temp_fv0_19)));
+                        sp56C =
+                            (player->unk_19C.xw + ((player->unk_19C.xx * temp_fs4) + (player->unk_19C.xy * temp_fs5) +
+                                                   (player->unk_19C.xz * temp_fv0_19))) *
+                            temp_fv1_7;
+                        sp568 =
+                            (player->unk_19C.yw + ((player->unk_19C.yx * temp_fs4) + (player->unk_19C.yy * temp_fs5) +
+                                                   (player->unk_19C.yz * temp_fv0_19))) *
+                            temp_fv1_7;
+                        sp564 =
+                            (player->unk_19C.zw + ((player->unk_19C.zx * temp_fs4) + (player->unk_19C.zy * temp_fs5) +
+                                                   (player->unk_19C.zz * temp_fv0_19))) *
+                            temp_fv1_7;
                         gDPPipeSync(gfx++);
                         gDPSetPrimDepth(gfx++, (s32) ((sp564 * 16352.0f) + 16352.0f), 0);
 
@@ -9412,8 +9465,8 @@ block_115:
                                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
                                                 G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-                            temp_s7_7 = ((s32) ((spA4->unk_E8 * sp56C) + spA4->unk_F0 + 0.5f) - 0xC) << 2;
-                            sp5C4 = ((s32) ((-spA4->unk_EC * sp568) + spA4->unk_F4 + 0.5f) - 0x1E) << 2;
+                            temp_s7_7 = ((s32) ((player->unk_E8 * sp56C) + player->unk_F0 + 0.5f) - 0xC) << 2;
+                            sp5C4 = ((s32) ((-player->unk_EC * sp568) + player->unk_F4 + 0.5f) - 0x1E) << 2;
                             gSPScisTextureRectangle(gfx++, temp_s7_7, sp5C4, temp_s7_7 + (24 * 4 - 1),
                                                     sp5C4 + (30 * 4 - 1), 0, 0, 0, 1 << 10, 1 << 10);
                         } else {
@@ -9421,30 +9474,31 @@ block_115:
                                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
                                                 G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-                            temp_s7_7 = ((s32) ((spA4->unk_E8 * sp56C) + spA4->unk_F0 + 0.5f) - 8) << 2;
-                            sp5C4 = ((s32) ((-spA4->unk_EC * sp568) + spA4->unk_F4 + 0.5f) - 0x10) << 2;
+                            temp_s7_7 = ((s32) ((player->unk_E8 * sp56C) + player->unk_F0 + 0.5f) - 8) << 2;
+                            sp5C4 = ((s32) ((-player->unk_EC * sp568) + player->unk_F4 + 0.5f) - 0x10) << 2;
                             gSPScisTextureRectangle(gfx++, temp_s7_7, sp5C4, temp_s7_7 + (16 * 4 - 1),
                                                     sp5C4 + (16 * 4 - 1), 0, 0, 0, 1 << 10, 1 << 10);
                         }
                     }
                 }
             }
-            if ((gGameMode == GAMEMODE_GP_RACE) && (sRivalRacer != NULL) && (sRivalRacer->unk_2B4 != 0) &&
+            if ((gGameMode == GAMEMODE_GP_RACE) && (sRivalRacer != NULL) && (sRivalRacer->machineLod != 0) &&
                 !(sRivalRacer->stateFlags & (RACER_STATE_CRASHED | RACER_STATE_FLAGS_2000000)) &&
                 (gRacers[0].position >= sRivalRacer->position)) {
                 temp_fs4 = sRivalRacer->unk_0C.unk_34.x + (20.0f * sRivalRacer->unk_C0.y.x);
                 temp_fs5 = sRivalRacer->unk_0C.unk_34.y + (20.0f * sRivalRacer->unk_C0.y.y);
                 temp_fv0_19 = sRivalRacer->unk_0C.unk_34.z + (20.0f * sRivalRacer->unk_C0.y.z);
-                temp_fv1_7 = 1.0f / (spA4->unk_19C.ww + ((spA4->unk_19C.wx * temp_fs4) + (spA4->unk_19C.wy * temp_fs5) +
-                                                         (spA4->unk_19C.wz * temp_fv0_19)));
-                sp56C = (spA4->unk_19C.xw + ((spA4->unk_19C.xx * temp_fs4) + (spA4->unk_19C.xy * temp_fs5) +
-                                             (spA4->unk_19C.xz * temp_fv0_19))) *
+                temp_fv1_7 =
+                    1.0f / (player->unk_19C.ww + ((player->unk_19C.wx * temp_fs4) + (player->unk_19C.wy * temp_fs5) +
+                                                  (player->unk_19C.wz * temp_fv0_19)));
+                sp56C = (player->unk_19C.xw + ((player->unk_19C.xx * temp_fs4) + (player->unk_19C.xy * temp_fs5) +
+                                               (player->unk_19C.xz * temp_fv0_19))) *
                         temp_fv1_7;
-                sp568 = (spA4->unk_19C.yw + ((spA4->unk_19C.yx * temp_fs4) + (spA4->unk_19C.yy * temp_fs5) +
-                                             (spA4->unk_19C.yz * temp_fv0_19))) *
+                sp568 = (player->unk_19C.yw + ((player->unk_19C.yx * temp_fs4) + (player->unk_19C.yy * temp_fs5) +
+                                               (player->unk_19C.yz * temp_fv0_19))) *
                         temp_fv1_7;
-                sp564 = (spA4->unk_19C.zw + ((spA4->unk_19C.zx * temp_fs4) + (spA4->unk_19C.zy * temp_fs5) +
-                                             (spA4->unk_19C.zz * temp_fv0_19))) *
+                sp564 = (player->unk_19C.zw + ((player->unk_19C.zx * temp_fs4) + (player->unk_19C.zy * temp_fs5) +
+                                               (player->unk_19C.zz * temp_fv0_19))) *
                         temp_fv1_7;
                 gDPPipeSync(gfx++);
                 gDPSetPrimDepth(gfx++, (s32) ((sp564 * 16352.0f) + 16352.0f), 0);
@@ -9452,8 +9506,8 @@ block_115:
                                     G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                     G_TX_NOLOD, G_TX_NOLOD);
 
-                temp_s7_7 = ((s32) ((spA4->unk_E8 * sp56C) + spA4->unk_F0 + 0.5f) - 0x10) << 2;
-                sp5C4 = ((s32) ((-spA4->unk_EC * sp568) + spA4->unk_F4 + 0.5f) - 0x10) << 2;
+                temp_s7_7 = ((s32) ((player->unk_E8 * sp56C) + player->unk_F0 + 0.5f) - 0x10) << 2;
+                sp5C4 = ((s32) ((-player->unk_EC * sp568) + player->unk_F4 + 0.5f) - 0x10) << 2;
                 gSPScisTextureRectangle(gfx++, temp_s7_7, sp5C4, temp_s7_7 + (32 * 4 - 1), sp5C4 + (16 * 4 - 1), 0, 0,
                                         0, 1 << 10, 1 << 10);
             }
@@ -9464,25 +9518,26 @@ block_115:
 
         if (playerRacer->distanceFromRacerBehind < 3000.0f) {
             temp_v0_27 = playerRacer->racerBehind;
-            if ((temp_v0_27->position == (playerRacer->position + 1)) && !(temp_v0_27->stateFlags & RACER_STATE_RETIRED)) {
+            if ((temp_v0_27->position == (playerRacer->position + 1)) &&
+                !(temp_v0_27->stateFlags & RACER_STATE_RETIRED)) {
                 temp_fa0_6 = playerRacer->unk_0C.unk_34.x - temp_v0_27->unk_0C.unk_34.x;
                 temp_fv1_9 = playerRacer->unk_0C.unk_34.y - temp_v0_27->unk_0C.unk_34.y;
                 sp564 = playerRacer->unk_0C.unk_34.z - temp_v0_27->unk_0C.unk_34.z;
-                if ((((spA4->unk_5C.x.x * temp_fa0_6) + (temp_fv1_9 * spA4->unk_5C.x.y) + (sp564 * spA4->unk_5C.x.z)) <
-                     0.0f)) {
+                if ((((player->unk_5C.x.x * temp_fa0_6) + (temp_fv1_9 * player->unk_5C.x.y) +
+                      (sp564 * player->unk_5C.x.z)) < 0.0f)) {
                     goto end;
                 }
-                var_fs1 =
-                    (spA4->unk_5C.z.x * temp_fa0_6) + (temp_fv1_9 * spA4->unk_5C.z.y) + (sp564 * spA4->unk_5C.z.z);
-                var_fs3 =
-                    (spA4->unk_5C.y.x * temp_fa0_6) + (temp_fv1_9 * spA4->unk_5C.y.y) + (sp564 * spA4->unk_5C.y.z);
+                var_fs1 = (player->unk_5C.z.x * temp_fa0_6) + (temp_fv1_9 * player->unk_5C.z.y) +
+                          (sp564 * player->unk_5C.z.z);
+                var_fs3 = (player->unk_5C.y.x * temp_fa0_6) + (temp_fv1_9 * player->unk_5C.y.y) +
+                          (sp564 * player->unk_5C.y.z);
                 temp_fv0_21 = SQ(var_fs1) + SQ(var_fs3);
 
                 if ((temp_fv0_21 < 0.1f)) {
                     goto end;
                 }
-                temp_fa1_4 = ((spA4->unk_B8 - spA4->unk_B0) * 0.5f) + 4.0f;
-                sp568 = ((spA4->unk_BC - spA4->unk_B4) * 0.5f) - 4.0f;
+                temp_fa1_4 = ((player->unk_B8 - player->unk_B0) * 0.5f) + 4.0f;
+                sp568 = ((player->unk_BC - player->unk_B4) * 0.5f) - 4.0f;
                 temp_fv0_22 = sqrtf((SQ(temp_fa1_4) + SQ(sp568)) / temp_fv0_21);
                 var_fs1 *= temp_fv0_22;
                 var_fs3 *= temp_fv0_22;
@@ -9502,14 +9557,15 @@ block_115:
                     var_s7 = 255 - ((gGameFrameCount & 0xF) * 0x10);
                 }
 
-                gDPSetPrimColor(gfx++, 0, 0, 255, var_s7, 0, (255 - (s32) (playerRacer->distanceFromRacerBehind * 0.085f)));
+                gDPSetPrimColor(gfx++, 0, 0, 255, var_s7, 0,
+                                (255 - (s32) (playerRacer->distanceFromRacerBehind * 0.085f)));
 
                 if (gNumPlayers < 2) {
                     gDPLoadTextureBlock_4b(gfx++, aCheckMarker1PTex, G_IM_FMT_IA, 32, 23, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-                    temp_s7_7 = ((s32) (((spA4->unk_B0 + spA4->unk_B8) * 0.5f) + var_fs1 + 0.5f) - 0x10) << 2;
-                    temp_a3_4 = ((s32) (((spA4->unk_B4 + spA4->unk_BC) * 0.5f) + var_fs3 + 0.5f) - 0x1C) << 2;
+                    temp_s7_7 = ((s32) (((player->unk_B0 + player->unk_B8) * 0.5f) + var_fs1 + 0.5f) - 0x10) << 2;
+                    temp_a3_4 = ((s32) (((player->unk_B4 + player->unk_BC) * 0.5f) + var_fs3 + 0.5f) - 0x1C) << 2;
 
                     gSPScisTextureRectangle(gfx++, temp_s7_7, temp_a3_4, temp_s7_7 + (32 * 4 - 1),
                                             temp_a3_4 + (23 * 4 - 1), 0, 0, 0, 1 << 10, 1 << 10);
@@ -9517,8 +9573,8 @@ block_115:
                     gDPLoadTextureBlock_4b(gfx++, aCheckMarkerMPTex, G_IM_FMT_IA, 16, 10, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-                    temp_s7_7 = ((s32) (((spA4->unk_B0 + spA4->unk_B8) * 0.5f) + var_fs1 + 0.5f) - 8) << 2;
-                    temp_a3_4 = ((s32) (((spA4->unk_B4 + spA4->unk_BC) * 0.5f) + var_fs3 + 0.5f) - 0xA) << 2;
+                    temp_s7_7 = ((s32) (((player->unk_B0 + player->unk_B8) * 0.5f) + var_fs1 + 0.5f) - 8) << 2;
+                    temp_a3_4 = ((s32) (((player->unk_B4 + player->unk_BC) * 0.5f) + var_fs3 + 0.5f) - 0xA) << 2;
                     gSPScisTextureRectangle(gfx++, temp_s7_7, temp_a3_4, temp_s7_7 + (16 * 4 - 1),
                                             temp_a3_4 + (10 * 4 - 1), 0, 0, 0, 1 << 10, 1 << 10);
                 }
@@ -9567,16 +9623,16 @@ Gfx* func_8009CBE8(Gfx* gfx, s32 arg1, s32 red, s32 green, s32 blue) {
 }
 
 Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2) {
-    unk_800CF1B0* temp_t0 = &D_800F80C8[character];
+    Machine* temp_t0 = &gMachines[character];
 
     gSPDisplayList(gfx++, D_800CDD38[character]);
-    gDPSetEnvColor(gfx++, temp_t0->unk_04[arg2], temp_t0->unk_08[arg2], temp_t0->unk_0C[arg2], 255);
+    gDPSetEnvColor(gfx++, temp_t0->red[arg2], temp_t0->green[arg2], temp_t0->blue[arg2], 255);
     gSPDisplayList(gfx++, D_800CDDB0[character * 6]);
     return gfx;
 }
 
 Gfx* func_8009CD60(Gfx* gfx, s32 character) {
-    unk_800CF1B0* temp_v1 = &D_800F80C8[character];
+    Machine* temp_v1 = &gMachines[character];
 
     gDPLoadTextureBlock_4b(gfx++, D_800CDC54[temp_v1->shadowType], G_IM_FMT_I, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP,
                            G_TX_MIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);

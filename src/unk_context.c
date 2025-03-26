@@ -1,11 +1,11 @@
 #include "global.h"
 #include "fzx_racer.h"
 
-CourseInfo gCourseInfos[56]; // 0x3480
-unk_36ED0 D_802A9FC0[1025];              // 0x18060
-CourseSegment D_802C2020[64];            // 0x2900
-Racer gRacers[TOTAL_RACER_COUNT];        // 0x6DB0
-CourseSegment D_802CB6D0[64];            // 0x2900
+CourseInfo gCourseInfos[56];      // 0x3480
+unk_36ED0 D_802A9FC0[1025];       // 0x18060
+CourseSegment D_802C2020[64];     // 0x2900
+Racer gRacers[TOTAL_RACER_COUNT]; // 0x6DB0
+CourseSegment D_802CB6D0[64];     // 0x2900
 s32 D_802CDFD0;
 CourseSegment D_802CDFD8[64]; // 0x2900
 s32 unkPad802D08D8;

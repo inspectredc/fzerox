@@ -15,7 +15,7 @@ typedef struct SaveCourseRecords {
     u16 checksum;
     s16 unk_02;
     s32 timeRecord[5];
-    f32 engine[5];
+    f32 engines[5];
     f32 maxSpeed;
     s32 bestTime;
     u8 name[5][4];

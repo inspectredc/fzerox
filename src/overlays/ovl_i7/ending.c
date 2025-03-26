@@ -5,6 +5,7 @@
 #include "fzx_hud.h"
 #include "fzx_racer.h"
 #include "fzx_course.h"
+#include "fzx_machine.h"
 #include "src/overlays/ovl_i2/ovl_i2.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"
@@ -136,12 +137,12 @@ const char* sCupNames[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP", "E
 
 char sThanksForPlayingStr[] = "THANKS FOR PLAYING!!";
 
-s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 arg2) {
+s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 customType) {
     s32 endScreenCharacterIndex;
 
     switch (character) {
         case CAPTAIN_FALCON:
-            if (arg2 >= 2) {
+            if (IS_SUPER_MACHINE(customType)) {
                 endScreenCharacterIndex = 30;
             } else {
                 switch (difficulty) {
@@ -156,14 +157,14 @@ s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 arg2) {
             }
             break;
         case SAMURAI_GOROH:
-            if (arg2 >= 2) {
+            if (IS_SUPER_MACHINE(customType)) {
                 endScreenCharacterIndex = 32;
             } else {
                 endScreenCharacterIndex = character;
             }
             break;
         case JODY_SUMMER:
-            if (arg2 >= 2) {
+            if (IS_SUPER_MACHINE(customType)) {
                 endScreenCharacterIndex = 33;
             } else {
                 endScreenCharacterIndex = character;
@@ -1863,11 +1864,11 @@ void func_i7_801471C0(void) {
 
             character = gRacers[i].character;
             j = character;
-            if ((character == CAPTAIN_FALCON) && (gRacers[i].customType >= 2)) {
+            if ((character == CAPTAIN_FALCON) && IS_SUPER_MACHINE(gRacers[i].customType)) {
                 j = 30;
-            } else if ((character == SAMURAI_GOROH) && (gRacers[i].customType >= 2)) {
+            } else if ((character == SAMURAI_GOROH) && IS_SUPER_MACHINE(gRacers[i].customType)) {
                 j = 31;
-            } else if ((character == JODY_SUMMER) && (gRacers[i].customType >= 2)) {
+            } else if ((character == JODY_SUMMER) && IS_SUPER_MACHINE(gRacers[i].customType)) {
                 j = 32;
             }
             D_i7_8014C034 = func_80078104(sFullPortraits[j], 180 * 245 * sizeof(u16), 0, 1, 1);
@@ -1933,9 +1934,8 @@ void func_i7_801478E8(void) {
         for (i = 0; i < gTotalRacers; i++) {
             racer = &gRacers[i];
             func_8006BC84(
-                &D_i7_8014BDF0->unk_3F0[i], NULL, 0.04f, 0.04f, 0.04f, -gPlayers[0].unk_5C.x.x,
-                -gPlayers[0].unk_5C.x.y, -gPlayers[0].unk_5C.x.z, racer->unk_C0.y.x, racer->unk_C0.y.y,
-                racer->unk_C0.y.z,
+                &D_i7_8014BDF0->unk_3F0[i], NULL, 0.04f, 0.04f, 0.04f, -gPlayers[0].unk_5C.x.x, -gPlayers[0].unk_5C.x.y,
+                -gPlayers[0].unk_5C.x.z, racer->unk_C0.y.x, racer->unk_C0.y.y, racer->unk_C0.y.z,
                 racer->unk_168.x + ((racer->unk_C0.x.x * 23.0f * 3.0f) / 2) + (racer->unk_C0.z.x * 23.0f * 0.8f),
                 (D_i7_8014BEC8[i].unk_0C + 120.0f) - 1.0f,
                 racer->unk_168.z + ((racer->unk_C0.x.z * 23.0f * 3.0f) / 2) + (racer->unk_C0.z.z * 23.0f * 0.8f));
@@ -1987,11 +1987,11 @@ void func_i7_80147CC0(void) {
         if (gPlayer1OverallPosition == 1) {
             if (gCupType == X_CUP) {
                 func_80077CF0(D_i7_8014AD18[Math_Rand1() % 4], 0x200, D_i7_8014C048);
-            } else if ((gRacers[0].character == CAPTAIN_FALCON) && (gRacers[0].customType >= 2)) {
+            } else if ((gRacers[0].character == CAPTAIN_FALCON) && IS_SUPER_MACHINE(gRacers[0].customType)) {
                 func_80077CF0(D_i7_8014AD0C, 0x200, D_i7_8014C048);
-            } else if ((gRacers[0].character == SAMURAI_GOROH) && (gRacers[0].customType >= 2)) {
+            } else if ((gRacers[0].character == SAMURAI_GOROH) && IS_SUPER_MACHINE(gRacers[0].customType)) {
                 func_80077CF0(D_i7_8014AD10, 0x200, D_i7_8014C048);
-            } else if ((gRacers[0].character == JODY_SUMMER) && (gRacers[0].customType >= 2)) {
+            } else if ((gRacers[0].character == JODY_SUMMER) && IS_SUPER_MACHINE(gRacers[0].customType)) {
                 func_80077CF0(D_i7_8014AD14, 0x200, D_i7_8014C048);
             } else {
                 func_80077CF0(D_i7_8014AC94[gRacers[0].character], 0x200, D_i7_8014C048);

@@ -38,28 +38,28 @@ typedef struct CourseSegment {
     /* 0xA0 */ f32 threeQuarterMarkLength;
 } CourseSegment; // size = 0xA4
 
-typedef struct CarInfo {
+typedef struct MachineInfo {
     /* 0x00 */ u8 character;
     /* 0x01 */ u8 customType;
     /* 0x02 */ u8 frontType;
     /* 0x03 */ u8 rearType;
     /* 0x04 */ u8 wingType;
     /* 0x05 */ u8 logo;
-    /* 0x06 */ u8 decal;
-    /* 0x07 */ u8 number;
-    /* 0x08 */ u8 envR2;
-    /* 0x09 */ u8 envG2;
-    /* 0x0A */ u8 envB2;
-    /* 0x0B */ u8 primR1;
-    /* 0x0C */ u8 primG1;
-    /* 0x0D */ u8 primB1;
-    /* 0x0E */ u8 primR2;
-    /* 0x0F */ u8 primG2;
-    /* 0x10 */ u8 primB2;
-    /* 0x11 */ u8 envR1;
-    /* 0x12 */ u8 envG1;
-    /* 0x13 */ u8 envB1;
-} CarInfo; // size = 0x14
+    /* 0x06 */ u8 number;
+    /* 0x07 */ u8 decal;
+    /* 0x08 */ u8 bodyR;
+    /* 0x09 */ u8 bodyG;
+    /* 0x0A */ u8 bodyB;
+    /* 0x0B */ u8 numberR;
+    /* 0x0C */ u8 numberG;
+    /* 0x0D */ u8 numberB;
+    /* 0x0E */ u8 decalR;
+    /* 0x0F */ u8 decalG;
+    /* 0x10 */ u8 decalB;
+    /* 0x11 */ u8 cockpitR;
+    /* 0x12 */ u8 cockpitG;
+    /* 0x13 */ u8 cockpitB;
+} MachineInfo; // size = 0x14
 
 typedef struct CourseInfo {
     /* 0x00 */ s32 encodedCourseIndex;
@@ -69,13 +69,13 @@ typedef struct CourseInfo {
     /* 0x10 */ CourseSegment* courseSegments;
     /* 0x14 */ s16 unk_14[6];
     /* 0x20 */ s32 timeRecord[5];
-    /* 0x34 */ CarInfo carInfo[5];
-    /* 0x98 */ f32 engine[5];
-    /* 0xAC */ u8 name[5][4];
+    /* 0x34 */ MachineInfo recordMachineInfos[5];
+    /* 0x98 */ f32 recordEngines[5];
+    /* 0xAC */ u8 recordNames[5][4];
     /* 0xC0 */ f32 maxSpeed;
-    /* 0xC4 */ CarInfo maxSpeedCar;
+    /* 0xC4 */ MachineInfo maxSpeedMachine;
     /* 0xD8 */ s32 bestTime;
-    /* 0xDC */ CarInfo bestTimeCar;
+    /* 0xDC */ MachineInfo bestTimeMachine;
 } CourseInfo; // size = 0xF0
 
 typedef struct unk_802D3E38 {
@@ -403,28 +403,28 @@ typedef struct Racer {
     s16 startNewPracticeLap;
     s8 unk_2B2;
     s8 unk_2B3;
-    s32 unk_2B4;
+    s32 machineLod;
     struct Racer* racerAhead;
     struct Racer* racerBehind;
     f32 distanceToRacerAhead;
     f32 distanceFromRacerBehind;
     s8 character;
-    s8 unk_2C9;
+    s8 machineIndex;
     u8 shadowType;
     u8 boostersType;
-    s16 unk_2CC;
-    s16 unk_2CE;
-    s16 unk_2D0;
-    s16 unk_2D2;
+    s16 machineSkinIndex;
+    s16 bodyR;
+    s16 bodyG;
+    s16 bodyB;
     s16 shadowR;
     s16 shadowG;
     s16 shadowB;
     s16 unk_2DA;
     s16 unk_2DC;
     s16 unk_2DE;
-    f32 unk_2E0;
-    f32 unk_2E4;
-    f32 unk_2E8;
+    f32 bodyRF;
+    f32 bodyGF;
+    f32 bodyBF;
     f32 unk_2EC;
     f32 unk_2F0;
     f32 unk_2F4;
@@ -602,7 +602,7 @@ typedef struct Ghost {
     /* 0x001C */ s8 replayData[16200];
     /* 0x3F64 */ s32 replayChecksum;
     /* 0x3F68 */ s16 ghostType;
-    /* 0x3F6A */ CarInfo carInfo;
+    /* 0x3F6A */ MachineInfo machineInfo;
 } Ghost; // size = 0x3F80
 
 typedef struct unk_80077D50 {
@@ -677,7 +677,7 @@ typedef struct RaceStats {
 } RaceStats; // size = 0x10
 
 typedef struct unk_80141C88_unk_1D {
-    CarInfo unk_00;
+    MachineInfo unk_00;
     s8 unk_14[12];
 } unk_80141C88_unk_1D;
 
@@ -731,17 +731,17 @@ typedef struct unk_80113140 {
     Racer* unk_54;
 } unk_80113140; // size = 0x58
 
-typedef struct unk_800CF1B0 {
-    s16 unk_00;
+typedef struct Machine {
+    s16 customType;
     u8 shadowType;
     u8 boostersType;
-    u8 unk_04[4];
-    u8 unk_08[4];
-    u8 unk_0C[4];
-    u8 unk_10;
+    u8 red[4];
+    u8 green[4];
+    u8 blue[4];
+    u8 number;
     s8 machineStats[3];
-    s16 unk_14;
-} unk_800CF1B0; // size = 0x16
+    s16 weight;
+} Machine; // size = 0x16
 
 typedef struct unk_80225800 {
     Mtx unk_000;

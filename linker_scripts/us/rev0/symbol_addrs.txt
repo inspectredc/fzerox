@@ -265,6 +265,7 @@ gTotalLapCount = 0x800CD00C;
 gCurrentGhostType = 0x800CD3CC;
 sPosition1PMarkerTexs = 0x800CDAA0;
 sPositionMPMarkerTexs = 0x800CDAAC;
+D_800CDDB0 = 0x800CDDB0; // size:0x2D0
 gSettingVsHandicap = 0x800CE4D0;
 gTotalLives = 0x800CE4DC;
 sInitialBoostTimer = 0x800CE774;

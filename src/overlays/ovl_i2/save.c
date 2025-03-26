@@ -2,6 +2,7 @@
 #include "fzx_game.h"
 #include "fzx_save.h"
 #include "fzx_course.h"
+#include "fzx_machine.h"
 #include "ovl_i2.h"
 
 OSIoMesg sSramIoMesg;
@@ -199,48 +200,48 @@ s32 SaveLoadPlayerGhost(s32 courseIndex, s32 ghostIndex) {
     return 0;
 }
 
-bool func_i2_80100950(CarInfo* carInfo, unk_80141C88_unk_1D* arg1) {
+bool func_i2_80100950(MachineInfo* machineInfo, unk_80141C88_unk_1D* arg1) {
     bool matching = true;
 
-    if (carInfo->character != arg1->unk_00.character) {
+    if (machineInfo->character != arg1->unk_00.character) {
         matching = false;
-    } else if (carInfo->customType != arg1->unk_00.customType) {
+    } else if (machineInfo->customType != arg1->unk_00.customType) {
         matching = false;
-    } else if (carInfo->frontType != arg1->unk_00.frontType) {
+    } else if (machineInfo->frontType != arg1->unk_00.frontType) {
         matching = false;
-    } else if (carInfo->rearType != arg1->unk_00.rearType) {
+    } else if (machineInfo->rearType != arg1->unk_00.rearType) {
         matching = false;
-    } else if (carInfo->wingType != arg1->unk_00.wingType) {
+    } else if (machineInfo->wingType != arg1->unk_00.wingType) {
         matching = false;
-    } else if (carInfo->logo != arg1->unk_00.logo) {
+    } else if (machineInfo->logo != arg1->unk_00.logo) {
         matching = false;
-    } else if (carInfo->decal != arg1->unk_00.decal) {
+    } else if (machineInfo->number != arg1->unk_00.number) {
         matching = false;
-    } else if (carInfo->number != arg1->unk_00.number) {
+    } else if (machineInfo->decal != arg1->unk_00.decal) {
         matching = false;
-    } else if (carInfo->envR2 != arg1->unk_00.envR2) {
+    } else if (machineInfo->bodyR != arg1->unk_00.bodyR) {
         matching = false;
-    } else if (carInfo->envG2 != arg1->unk_00.envG2) {
+    } else if (machineInfo->bodyG != arg1->unk_00.bodyG) {
         matching = false;
-    } else if (carInfo->envB2 != arg1->unk_00.envB2) {
+    } else if (machineInfo->bodyB != arg1->unk_00.bodyB) {
         matching = false;
-    } else if (carInfo->primR1 != arg1->unk_00.primR1) {
+    } else if (machineInfo->numberR != arg1->unk_00.numberR) {
         matching = false;
-    } else if (carInfo->primG1 != arg1->unk_00.primG1) {
+    } else if (machineInfo->numberG != arg1->unk_00.numberG) {
         matching = false;
-    } else if (carInfo->primB1 != arg1->unk_00.primB1) {
+    } else if (machineInfo->numberB != arg1->unk_00.numberB) {
         matching = false;
-    } else if (carInfo->primR2 != arg1->unk_00.primR2) {
+    } else if (machineInfo->decalR != arg1->unk_00.decalR) {
         matching = false;
-    } else if (carInfo->primG2 != arg1->unk_00.primG2) {
+    } else if (machineInfo->decalG != arg1->unk_00.decalG) {
         matching = false;
-    } else if (carInfo->primB2 != arg1->unk_00.primB2) {
+    } else if (machineInfo->decalB != arg1->unk_00.decalB) {
         matching = false;
-    } else if (carInfo->envR1 != arg1->unk_00.envR1) {
+    } else if (machineInfo->cockpitR != arg1->unk_00.cockpitR) {
         matching = false;
-    } else if (carInfo->envG1 != arg1->unk_00.envG1) {
+    } else if (machineInfo->cockpitG != arg1->unk_00.cockpitG) {
         matching = false;
-    } else if (carInfo->envB1 != arg1->unk_00.envB1) {
+    } else if (machineInfo->cockpitB != arg1->unk_00.cockpitB) {
         matching = false;
     }
     return matching;
@@ -261,7 +262,7 @@ bool func_i2_80100B38(GhostInfo* arg0) {
             var_s1 = false;
         } else if (ghost->raceTime != arg0->raceTime) {
             var_s1 = false;
-        } else if (!func_i2_80100950(&ghost->carInfo, &arg0->unk_1D)) {
+        } else if (!func_i2_80100950(&ghost->machineInfo, &arg0->unk_1D)) {
             var_s1 = false;
         }
 
@@ -720,26 +721,26 @@ void Save_InitEditCup(SaveEditCup* editCup, bool shouldClear) {
 
 void func_i2_80101C78(unk_80141C88_unk_1D* arg0) {
 
-    arg0->unk_00.character = 0;
-    arg0->unk_00.customType = 0;
+    arg0->unk_00.character = CAPTAIN_FALCON;
+    arg0->unk_00.customType = CUSTOM_MACHINE_DEFAULT;
     arg0->unk_00.frontType = 0;
     arg0->unk_00.rearType = 0;
     arg0->unk_00.wingType = 0;
     arg0->unk_00.logo = 0;
-    arg0->unk_00.decal = 0;
     arg0->unk_00.number = 0;
-    arg0->unk_00.envR2 = 0;
-    arg0->unk_00.envG2 = 0;
-    arg0->unk_00.envB2 = 0;
-    arg0->unk_00.primR1 = 0;
-    arg0->unk_00.primG1 = 0;
-    arg0->unk_00.primB1 = 0;
-    arg0->unk_00.primR2 = 0;
-    arg0->unk_00.primG2 = 0;
-    arg0->unk_00.primB2 = 0;
-    arg0->unk_00.envR1 = 0;
-    arg0->unk_00.envG1 = 0;
-    arg0->unk_00.envB1 = 0;
+    arg0->unk_00.decal = 0;
+    arg0->unk_00.bodyR = 0;
+    arg0->unk_00.bodyG = 0;
+    arg0->unk_00.bodyB = 0;
+    arg0->unk_00.numberR = 0;
+    arg0->unk_00.numberG = 0;
+    arg0->unk_00.numberB = 0;
+    arg0->unk_00.decalR = 0;
+    arg0->unk_00.decalG = 0;
+    arg0->unk_00.decalB = 0;
+    arg0->unk_00.cockpitR = 0;
+    arg0->unk_00.cockpitG = 0;
+    arg0->unk_00.cockpitB = 0;
 }
 
 void Save_InitDeathRace(SaveDeathRace* deathRace, bool shouldClear) {
@@ -764,7 +765,7 @@ void Save_InitCourseRecord(SaveCourseRecords* courseRecords, bool shouldClear) {
 
     for (i = 0; i < 5; i++) {
         courseRecords->timeRecord[i] = MAX_TIMER;
-        courseRecords->engine[i] = 0.5f;
+        courseRecords->engines[i] = 0.5f;
         func_i2_80101C78(&courseRecords->unk_50[i]);
         // clang-format off
         for (j = 0; j < 4; j++) { \
@@ -907,28 +908,28 @@ void Save_SaveSettings(SaveSettings* saveSettings) {
     }
 }
 
-void func_i2_80102110(CarInfo* carInfo, unk_80141C88_unk_1D* arg1) {
+void func_i2_80102110(MachineInfo* machineInfo, unk_80141C88_unk_1D* arg1) {
 
-    arg1->unk_00.character = carInfo->character;
-    arg1->unk_00.customType = carInfo->customType;
-    arg1->unk_00.frontType = carInfo->frontType;
-    arg1->unk_00.rearType = carInfo->rearType;
-    arg1->unk_00.wingType = carInfo->wingType;
-    arg1->unk_00.logo = carInfo->logo;
-    arg1->unk_00.decal = carInfo->decal;
-    arg1->unk_00.number = carInfo->number;
-    arg1->unk_00.envR2 = carInfo->envR2;
-    arg1->unk_00.envG2 = carInfo->envG2;
-    arg1->unk_00.envB2 = carInfo->envB2;
-    arg1->unk_00.primR1 = carInfo->primR1;
-    arg1->unk_00.primG1 = carInfo->primG1;
-    arg1->unk_00.primB1 = carInfo->primB1;
-    arg1->unk_00.primR2 = carInfo->primR2;
-    arg1->unk_00.primG2 = carInfo->primG2;
-    arg1->unk_00.primB2 = carInfo->primB2;
-    arg1->unk_00.envR1 = carInfo->envR1;
-    arg1->unk_00.envG1 = carInfo->envG1;
-    arg1->unk_00.envB1 = carInfo->envB1;
+    arg1->unk_00.character = machineInfo->character;
+    arg1->unk_00.customType = machineInfo->customType;
+    arg1->unk_00.frontType = machineInfo->frontType;
+    arg1->unk_00.rearType = machineInfo->rearType;
+    arg1->unk_00.wingType = machineInfo->wingType;
+    arg1->unk_00.logo = machineInfo->logo;
+    arg1->unk_00.number = machineInfo->number;
+    arg1->unk_00.decal = machineInfo->decal;
+    arg1->unk_00.bodyR = machineInfo->bodyR;
+    arg1->unk_00.bodyG = machineInfo->bodyG;
+    arg1->unk_00.bodyB = machineInfo->bodyB;
+    arg1->unk_00.numberR = machineInfo->numberR;
+    arg1->unk_00.numberG = machineInfo->numberG;
+    arg1->unk_00.numberB = machineInfo->numberB;
+    arg1->unk_00.decalR = machineInfo->decalR;
+    arg1->unk_00.decalG = machineInfo->decalG;
+    arg1->unk_00.decalB = machineInfo->decalB;
+    arg1->unk_00.cockpitR = machineInfo->cockpitR;
+    arg1->unk_00.cockpitG = machineInfo->cockpitG;
+    arg1->unk_00.cockpitB = machineInfo->cockpitB;
 }
 
 void Save_SaveDeathRace(SaveDeathRace* deathRace) {
@@ -956,15 +957,15 @@ void Save_SaveCourseRecord(SaveCourseRecords* courseRecords, s32 courseIndex) {
 
     for (i = 0; i < 5; i++) {
         courseRecords->timeRecord[i] = courseInfo->timeRecord[i];
-        courseRecords->engine[i] = courseInfo->engine[i];
-        func_i2_80102110(&courseInfo->carInfo[i], &courseRecords->unk_50[i]);
+        courseRecords->engines[i] = courseInfo->recordEngines[i];
+        func_i2_80102110(&courseInfo->recordMachineInfos[i], &courseRecords->unk_50[i]);
         for (j = 0; j < 4; j++) {
-            courseRecords->name[i][j] = courseInfo->name[i][j];
+            courseRecords->name[i][j] = courseInfo->recordNames[i][j];
         }
     }
     courseRecords->maxSpeed = courseInfo->maxSpeed;
     courseRecords->bestTime = courseInfo->bestTime;
-    func_i2_80102110(&courseInfo->maxSpeedCar, &courseRecords->unk_F0);
+    func_i2_80102110(&courseInfo->maxSpeedMachine, &courseRecords->unk_F0);
     courseRecords->unk_02 = 0;
 
     // clang-format off
@@ -998,26 +999,26 @@ void Save_SaveGhostRecord(Ghost* ghost) {
     ghostRecord->encodedCourseIndex = ghost->encodedCourseIndex;
 
     ghostRecord->raceTime = ghost->raceTime;
-    ghostRecord->unk_20.unk_00.character = ghost->carInfo.character;
-    ghostRecord->unk_20.unk_00.customType = ghost->carInfo.customType;
-    ghostRecord->unk_20.unk_00.frontType = ghost->carInfo.frontType;
-    ghostRecord->unk_20.unk_00.rearType = ghost->carInfo.rearType;
-    ghostRecord->unk_20.unk_00.wingType = ghost->carInfo.wingType;
-    ghostRecord->unk_20.unk_00.logo = ghost->carInfo.logo;
-    ghostRecord->unk_20.unk_00.decal = ghost->carInfo.decal;
-    ghostRecord->unk_20.unk_00.number = ghost->carInfo.number;
-    ghostRecord->unk_20.unk_00.envR2 = ghost->carInfo.envR2;
-    ghostRecord->unk_20.unk_00.envG2 = ghost->carInfo.envG2;
-    ghostRecord->unk_20.unk_00.envB2 = ghost->carInfo.envB2;
-    ghostRecord->unk_20.unk_00.primR1 = ghost->carInfo.primR1;
-    ghostRecord->unk_20.unk_00.primG1 = ghost->carInfo.primG1;
-    ghostRecord->unk_20.unk_00.primB1 = ghost->carInfo.primB1;
-    ghostRecord->unk_20.unk_00.primR2 = ghost->carInfo.primR2;
-    ghostRecord->unk_20.unk_00.primG2 = ghost->carInfo.primG2;
-    ghostRecord->unk_20.unk_00.primB2 = ghost->carInfo.primB2;
-    ghostRecord->unk_20.unk_00.envR1 = ghost->carInfo.envR1;
-    ghostRecord->unk_20.unk_00.envG1 = ghost->carInfo.envG1;
-    ghostRecord->unk_20.unk_00.envB1 = ghost->carInfo.envB1;
+    ghostRecord->unk_20.unk_00.character = ghost->machineInfo.character;
+    ghostRecord->unk_20.unk_00.customType = ghost->machineInfo.customType;
+    ghostRecord->unk_20.unk_00.frontType = ghost->machineInfo.frontType;
+    ghostRecord->unk_20.unk_00.rearType = ghost->machineInfo.rearType;
+    ghostRecord->unk_20.unk_00.wingType = ghost->machineInfo.wingType;
+    ghostRecord->unk_20.unk_00.logo = ghost->machineInfo.logo;
+    ghostRecord->unk_20.unk_00.number = ghost->machineInfo.number;
+    ghostRecord->unk_20.unk_00.decal = ghost->machineInfo.decal;
+    ghostRecord->unk_20.unk_00.bodyR = ghost->machineInfo.bodyR;
+    ghostRecord->unk_20.unk_00.bodyG = ghost->machineInfo.bodyG;
+    ghostRecord->unk_20.unk_00.bodyB = ghost->machineInfo.bodyB;
+    ghostRecord->unk_20.unk_00.numberR = ghost->machineInfo.numberR;
+    ghostRecord->unk_20.unk_00.numberG = ghost->machineInfo.numberG;
+    ghostRecord->unk_20.unk_00.numberB = ghost->machineInfo.numberB;
+    ghostRecord->unk_20.unk_00.decalR = ghost->machineInfo.decalR;
+    ghostRecord->unk_20.unk_00.decalG = ghost->machineInfo.decalG;
+    ghostRecord->unk_20.unk_00.decalB = ghost->machineInfo.decalB;
+    ghostRecord->unk_20.unk_00.cockpitR = ghost->machineInfo.cockpitR;
+    ghostRecord->unk_20.unk_00.cockpitG = ghost->machineInfo.cockpitG;
+    ghostRecord->unk_20.unk_00.cockpitB = ghost->machineInfo.cockpitB;
 
     for (i = 0; i < 9; i++) {
         ghostRecord->trackName[i] = '\0';
@@ -1067,7 +1068,7 @@ void Save_SaveCharacterSave(CharacterSave* characterSave) {
 }
 
 void Save_LoadDeathRace(ProfileSave*);
-void func_i2_80102A7C(unk_80141C88_unk_1D*, CarInfo*);
+void func_i2_80102A7C(unk_80141C88_unk_1D*, MachineInfo*);
 
 void Save_Load(SaveContext* saveContext) {
     s32 i;
@@ -1084,13 +1085,13 @@ void Save_Load(SaveContext* saveContext) {
 
             for (j = 0; j < 5; j++) {
                 courseInfo->timeRecord[j] = MAX_TIMER;
-                courseInfo->engine[j] = 0.5f;
-                func_i2_80102A7C(&sp60, &courseInfo->carInfo[j]);
+                courseInfo->recordEngines[j] = 0.5f;
+                func_i2_80102A7C(&sp60, &courseInfo->recordMachineInfos[j]);
             }
 
             courseInfo->maxSpeed = 0.0f;
 
-            func_i2_80102A7C(&sp60, &courseInfo->maxSpeedCar);
+            func_i2_80102A7C(&sp60, &courseInfo->maxSpeedMachine);
             if (i == 54) {
                 Save_LoadDeathRace(saveContext->profileSaves);
             }
@@ -1197,7 +1198,7 @@ void Save_LoadSaveSettings(ProfileSave* profileSaves, bool arg1) {
     }
 }
 
-void func_i2_80102A7C(unk_80141C88_unk_1D* arg0, CarInfo* arg1) {
+void func_i2_80102A7C(unk_80141C88_unk_1D* arg0, MachineInfo* arg1) {
 
     arg1->character = arg0->unk_00.character;
     arg1->customType = arg0->unk_00.customType;
@@ -1205,20 +1206,20 @@ void func_i2_80102A7C(unk_80141C88_unk_1D* arg0, CarInfo* arg1) {
     arg1->rearType = arg0->unk_00.rearType;
     arg1->wingType = arg0->unk_00.wingType;
     arg1->logo = arg0->unk_00.logo;
-    arg1->decal = arg0->unk_00.decal;
     arg1->number = arg0->unk_00.number;
-    arg1->envR2 = arg0->unk_00.envR2;
-    arg1->envG2 = arg0->unk_00.envG2;
-    arg1->envB2 = arg0->unk_00.envB2;
-    arg1->primR1 = arg0->unk_00.primR1;
-    arg1->primG1 = arg0->unk_00.primG1;
-    arg1->primB1 = arg0->unk_00.primB1;
-    arg1->primR2 = arg0->unk_00.primR2;
-    arg1->primG2 = arg0->unk_00.primG2;
-    arg1->primB2 = arg0->unk_00.primB2;
-    arg1->envR1 = arg0->unk_00.envR1;
-    arg1->envG1 = arg0->unk_00.envG1;
-    arg1->envB1 = arg0->unk_00.envB1;
+    arg1->decal = arg0->unk_00.decal;
+    arg1->bodyR = arg0->unk_00.bodyR;
+    arg1->bodyG = arg0->unk_00.bodyG;
+    arg1->bodyB = arg0->unk_00.bodyB;
+    arg1->numberR = arg0->unk_00.numberR;
+    arg1->numberG = arg0->unk_00.numberG;
+    arg1->numberB = arg0->unk_00.numberB;
+    arg1->decalR = arg0->unk_00.decalR;
+    arg1->decalG = arg0->unk_00.decalG;
+    arg1->decalB = arg0->unk_00.decalB;
+    arg1->cockpitR = arg0->unk_00.cockpitR;
+    arg1->cockpitG = arg0->unk_00.cockpitG;
+    arg1->cockpitB = arg0->unk_00.cockpitB;
 }
 
 void Save_LoadDeathRace(ProfileSave* profileSaves) {
@@ -1310,15 +1311,15 @@ void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex) {
 
     for (i = 0; i < 5; i++) {
         courseInfo->timeRecord[i] = courseRecord->timeRecord[i];
-        courseInfo->engine[i] = courseRecord->engine[i];
-        func_i2_80102A7C(&courseRecord->unk_50[i], &courseInfo->carInfo[i]);
+        courseInfo->recordEngines[i] = courseRecord->engines[i];
+        func_i2_80102A7C(&courseRecord->unk_50[i], &courseInfo->recordMachineInfos[i]);
         for (j = 0; j < 4; j++) {
-            courseInfo->name[i][j] = courseRecord->name[i][j];
+            courseInfo->recordNames[i][j] = courseRecord->name[i][j];
         }
     }
     courseInfo->maxSpeed = courseRecord->maxSpeed;
     courseInfo->bestTime = courseRecord->bestTime;
-    func_i2_80102A7C(&courseRecord->unk_F0, &courseInfo->maxSpeedCar);
+    func_i2_80102A7C(&courseRecord->unk_F0, &courseInfo->maxSpeedMachine);
 }
 
 void Save_LoadGhostRecord(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3) {
@@ -1336,7 +1337,7 @@ void Save_LoadGhostRecord(GhostRecord* ghostRecord, GhostData* ghostData, Ghost*
     ghost->ghostType = ghostRecord->ghostType;
     ghost->encodedCourseIndex = ghostRecord->encodedCourseIndex;
     ghost->raceTime = ghostRecord->raceTime;
-    func_i2_80102A7C(&ghostRecord->unk_20, &ghost->carInfo);
+    func_i2_80102A7C(&ghostRecord->unk_20, &ghost->machineInfo);
 }
 
 void Save_LoadGhostData(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3) {

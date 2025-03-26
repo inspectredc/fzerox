@@ -157,7 +157,7 @@ bool func_i3_8013A004(void) {
     return var_a0;
 }
 
-Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, CarInfo* carInfo);
+Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, MachineInfo* machineInfo);
 Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3);
 
 extern Mtx D_2028480;
@@ -240,7 +240,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
                 var_s3 = D_i3_80143788;
             }
             if (var_s2->timeRecord[i] != MAX_TIMER) {
-                xl = Font_GetStringWidth(var_s2->name[i], FONT_SET_1, 1);
+                xl = Font_GetStringWidth(var_s2->recordNames[i], FONT_SET_1, 1);
                 if (xl > 0) {
                     gfx = func_i3_DrawBeveledBox(gfx, (var_s3 + D_i3_80143790) + 0x4A,
                                                  (D_i3_80143794 + (D_i3_80143798 * i)) + 3,
@@ -401,14 +401,14 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
         }
         if (var_s2->timeRecord[i] != MAX_TIMER) {
             gfx = Font_DrawString(gfx, var_s3 + D_i3_80143790 + 0x4B, D_i3_80143794 + (D_i3_80143798 * i) + 0x12,
-                                  var_s2->name[i], 1, FONT_SET_1, 0);
+                                  var_s2->recordNames[i], 1, FONT_SET_1, 0);
         }
     }
 
     if (D_i3_80143780 & 4) {
         for (i = 0; i < 5; i++) {
             if (var_s2->timeRecord[i] != MAX_TIMER) {
-                gfx = func_i3_8013BBF8(gfx, 0xB2, (i * 0x23) + 0x33, var_s2->engine[i]);
+                gfx = func_i3_8013BBF8(gfx, 0xB2, (i * 0x23) + 0x33, var_s2->recordEngines[i]);
             }
         }
     }
@@ -438,12 +438,12 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
 
     for (i = 0; i < 5; i++) {
         if (var_s2->timeRecord[i] != MAX_TIMER) {
-            gfx = func_i3_8013BB80(gfx, i, &var_s2->carInfo[i]);
+            gfx = func_i3_8013BB80(gfx, i, &var_s2->recordMachineInfos[i]);
         }
     }
 
     if (var_s2->maxSpeed != 0.0f) {
-        gfx = func_i3_8013BB80(gfx, 5, &var_s2->maxSpeedCar);
+        gfx = func_i3_8013BB80(gfx, 5, &var_s2->maxSpeedMachine);
     }
     return gfx;
 }
@@ -513,10 +513,10 @@ Gfx* func_i3_DrawSpeed(Gfx* gfx, s32 left, s32 top, f32 arg3, bool arg4, bool dr
 
 extern GfxPool D_1000000;
 
-Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, CarInfo* carInfo) {
+Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, MachineInfo* machineInfo) {
     gSPViewport(gfx++, &D_1000000.unk_2C308[arg1]);
 
-    return func_8009CBE8(gfx, arg1 + 1, carInfo->envR2, carInfo->envG2, carInfo->envB2);
+    return func_8009CBE8(gfx, arg1 + 1, machineInfo->bodyR, machineInfo->bodyG, machineInfo->bodyB);
 }
 
 Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {
@@ -585,7 +585,7 @@ void func_i3_8013C008(void) {
     if (D_800E5FE2 != 0) {
         temp_v1 = &gCourseInfos[gCourseIndex];
         for (i = 0; i < 4; i++) {
-            temp_v1->name[D_800E5FE2 - 1][i] = 0;
+            temp_v1->recordNames[D_800E5FE2 - 1][i] = 0;
         }
     }
 }
@@ -942,7 +942,7 @@ void func_i3_8013D214(CourseInfo* arg0) {
             var_v1 = 0;
         }
 
-        arg0->name[D_800E5FE2 - 1][i] = var_v1;
+        arg0->recordNames[D_800E5FE2 - 1][i] = var_v1;
     }
     Save_SaveCourseRecordProfiles(gCourseIndex);
 }
