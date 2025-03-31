@@ -1,13 +1,17 @@
 #include "global.h"
 #include "audio.h"
 #include "fzx_game.h"
+#include "fzx_course.h"
 
 UNUSED s32 D_800DCE40;
 s32 gGameMode;
-unk_800DCE48 D_800DCE48;
-s8 D_800DCE5C;
+s32 gQueuedGameMode;
+UNUSED s32 D_800DCE4C;
+UNUSED s32 D_800DCE50;
+UNUSED s32 D_800DCE54;
+s32 gAntiPiracyAddedDifficulty;
+s8 gGamePaused;
 s32 D_800DCE60;
-// File split?
 UNUSED s32 D_800DCE64;
 UNUSED s32 D_800DCE68;
 OSContStatus D_800DCE70[MAXCONTROLLERS];
@@ -25,13 +29,14 @@ s32 gCupType = JACK_CUP;
 s32 gDifficulty = NOVICE;
 s32 gTotalLapCount = 3;
 s8 D_800CD010 = 0;
-s8 D_800CD014 = 0;
-s8 D_800CD018 = 0;
+s8 sTitleDemoNumPlayerState = 0;
+s8 sTitleDemoCoursesState = 0;
 UNUSED s32 D_800CD01C = 0;
 u16 D_800CD020 = 0;
-s32 D_800CD024[] = { GAMEMODE_GP_RACE, GAMEMODE_VS_2P, GAMEMODE_VS_4P };
-s32 D_800CD030[] = { 1, 2, 4 };
-s8 D_800CD03C[] = { 3, 1, 2, 4, 16 };
+s32 sTitleDemoGameModes[] = { GAMEMODE_GP_RACE, GAMEMODE_VS_2P, GAMEMODE_VS_4P };
+s32 sTitleDemoNumPlayers[] = { 1, 2, 4 };
+s8 sTitleDemoCourses[] = { COURSE_DEVILS_FOREST, COURSE_SILENCE, COURSE_SAND_OCEAN, COURSE_BIG_BLUE,
+                           COURSE_WHITE_LAND_2 };
 s16 D_800CD044 = 0;
 s16 D_800CD048 = 0;
 
@@ -122,7 +127,7 @@ void func_i2_800FC730(void);
 
 void Game_Init(void) {
     gGameMode = -1;
-    D_800DCE48.gameMode = GAMEMODE_FLX_TITLE;
+    gQueuedGameMode = GAMEMODE_FLX_TITLE;
     if (D_800DCE60 != 0x20DE1529) {
         D_800DCE60 = 0x20DE1529;
         func_8008DB98();
@@ -150,70 +155,70 @@ void func_80068BC0(void) {
                 break;
             case 2:
                 D_800CD044 = 1;
-                D_800DCE48.gameMode = GAMEMODE_FLX_MAIN_MENU;
+                gQueuedGameMode = GAMEMODE_FLX_MAIN_MENU;
                 break;
             case 3:
                 D_800CD044 = 1;
-                D_800DCE48.gameMode = GAMEMODE_FLX_COURSE_SELECT;
+                gQueuedGameMode = GAMEMODE_FLX_COURSE_SELECT;
                 break;
             case 7:
                 D_800CD044 = 1;
-                D_800DCE48.gameMode = GAMEMODE_FLX_MACHINE_SELECT;
+                gQueuedGameMode = GAMEMODE_FLX_MACHINE_SELECT;
                 break;
             case 4:
                 D_800CD044 = 1;
                 if (gCourseIndex % 6 == 5) {
-                    D_800DCE48.gameMode = GAMEMODE_GP_END_CS;
+                    gQueuedGameMode = GAMEMODE_GP_END_CS;
                 } else {
-                    D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
+                    gQueuedGameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
                     gCourseIndex++;
                 }
                 gPlayerEngine[0] = 0.5f;
                 break;
             case 5:
                 D_800CD044 = 1;
-                D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
+                gQueuedGameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
                 break;
             case 6:
                 D_800CD044 = 11;
-                D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
+                gQueuedGameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
                 break;
             case 8:
                 D_800CD044 = 21;
-                D_800DCE48.gameMode = GAMEMODE_RECORDS;
+                gQueuedGameMode = GAMEMODE_RECORDS;
                 break;
             case 9:
                 D_800CD044 = 21;
-                D_800DCE48.gameMode = GAMEMODE_FLX_RECORDS_COURSE_SELECT;
+                gQueuedGameMode = GAMEMODE_FLX_RECORDS_COURSE_SELECT;
                 break;
             case 10:
             case 14:
                 D_800CD044 = 21;
-                D_800DCE48.gameMode = GAMEMODE_FLX_MAIN_MENU;
+                gQueuedGameMode = GAMEMODE_FLX_MAIN_MENU;
                 break;
             case 11:
                 D_800CD044 = 31;
-                D_800DCE48.gameMode = GAMEMODE_FLX_COURSE_SELECT;
+                gQueuedGameMode = GAMEMODE_FLX_COURSE_SELECT;
                 break;
             case 12:
                 D_800CD044 = 31;
-                D_800DCE48.gameMode = GAMEMODE_FLX_MAIN_MENU;
+                gQueuedGameMode = GAMEMODE_FLX_MAIN_MENU;
                 break;
             case 13:
                 D_800CD044 = 21;
-                D_800DCE48.gameMode = GAMEMODE_FLX_OPTIONS_MENU;
+                gQueuedGameMode = GAMEMODE_FLX_OPTIONS_MENU;
                 break;
             case 15:
                 D_800CD044 = 11;
                 if (gGameMode == GAMEMODE_GP_RACE) {
-                    D_800DCE48.gameMode = GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS;
+                    gQueuedGameMode = GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS;
                 } else {
-                    D_800DCE48.gameMode = GAMEMODE_LX_MACHINE_SETTINGS;
+                    gQueuedGameMode = GAMEMODE_LX_MACHINE_SETTINGS;
                 }
                 break;
             case 16:
                 D_800CD044 = 11;
-                D_800DCE48.gameMode = gGameMode;
+                gQueuedGameMode = gGameMode;
                 break;
         }
     }
@@ -282,7 +287,7 @@ extern u16 gInputButtonPressed;
 
 void func_80068F04(void) {
 
-    if (gGameMode != D_800DCE48.gameMode) {
+    if (gGameMode != gQueuedGameMode) {
         D_800CD010 = 0;
         D_800CD020 = 0;
         return;
@@ -295,16 +300,16 @@ void func_80068F04(void) {
             }
             if ((D_800CD010 != 0) && (gControllersConnected != 0)) {
 
-                D_800DCE48.gameMode = D_800CD024[D_800CD014];
-                gNumPlayers = D_800CD030[D_800CD014];
-                gCourseIndex = D_800CD03C[D_800CD018];
-                D_800CD014++;
-                D_800CD018++;
-                if (D_800CD014 >= ARRAY_COUNT(D_800CD030)) {
-                    D_800CD014 = 0;
+                gQueuedGameMode = sTitleDemoGameModes[sTitleDemoNumPlayerState];
+                gNumPlayers = sTitleDemoNumPlayers[sTitleDemoNumPlayerState];
+                gCourseIndex = sTitleDemoCourses[sTitleDemoCoursesState];
+                sTitleDemoNumPlayerState++;
+                sTitleDemoCoursesState++;
+                if (sTitleDemoNumPlayerState >= ARRAY_COUNT(sTitleDemoNumPlayers)) {
+                    sTitleDemoNumPlayerState = 0;
                 }
-                if (D_800CD018 >= ARRAY_COUNT(D_800CD03C)) {
-                    D_800CD018 = 0;
+                if (sTitleDemoCoursesState >= ARRAY_COUNT(sTitleDemoCourses)) {
+                    sTitleDemoCoursesState = 0;
                 }
                 D_800CD020 = 0;
                 D_800CD010 = 1;
@@ -327,7 +332,7 @@ void func_80068F04(void) {
                         }
                         /* fallthrough */
                     case 3:
-                        D_800DCE48.gameMode = GAMEMODE_FLX_TITLE;
+                        gQueuedGameMode = GAMEMODE_FLX_TITLE;
                         D_800CD020 = 0;
                         D_800CD010 = 2;
                         break;
@@ -344,7 +349,7 @@ extern OSMesgQueue gSerialEventQueue;
 void func_800690FC(void) {
     s32 sp24;
 
-    if (gGameMode != D_800DCE48.gameMode) {
+    if (gGameMode != gQueuedGameMode) {
         if (D_800CD044 == 0) {
             if (gGameMode == -1) {
                 D_800CD044 = 3;
@@ -404,7 +409,7 @@ void func_800690FC(void) {
             switch (gGameMode) {
                 case GAMEMODE_LX_MACHINE_SETTINGS:
                 case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
-                    if ((gNumPlayers == 1) && (gCourseIndex < 24)) {
+                    if ((gNumPlayers == 1) && (gCourseIndex < COURSE_EDIT_1)) {
                         Save_UpdateCourseCharacterSave(gCourseIndex);
                     }
                     break;
@@ -412,11 +417,11 @@ void func_800690FC(void) {
                     func_i4_8011A7B8();
                     break;
             }
-            gGameMode = D_800DCE48.gameMode;
+            gGameMode = gQueuedGameMode;
             if (D_800CD010 == 2) {
                 D_800CD010 = 0;
             }
-            D_800DCE5C = 0;
+            gGamePaused = false;
             func_800766F0();
 
             switch (gGameMode) {
@@ -509,7 +514,7 @@ void func_800690FC(void) {
         Controller_UpdateInputs();
         D_800CD168 = 0;
     }
-    D_800DCE48.gameMode = sGamemodeUpdateFuncs[GET_MODE(gGameMode)]();
+    gQueuedGameMode = sGamemodeUpdateFuncs[GET_MODE(gGameMode)]();
     func_80068F04();
     switch (D_800CD044) {
         case 6:

@@ -3,6 +3,6 @@
 
 #include "unk_structs.h"
 
-extern CourseRecordInfo gCourseRecordInfos[56];
+extern CourseInfo gCourseInfos[56];
 
 #endif // VARIABLES_H

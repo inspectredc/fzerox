@@ -20,9 +20,9 @@ void func_i5_80115E10(void) {
 
 extern GfxPool D_1000000;
 
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 extern s32 D_800DCCFC;
-extern unk_struct_1DC D_800E5220[];
+extern Player gPlayers[];
 
 s32 D_801197B0[8];
 Vtx* D_i5_801197D0;
@@ -56,12 +56,12 @@ Gfx* func_i5_80115E64(Gfx* gfx) {
 
     gDPSetRenderMode(gfx++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gDPSetCombineMode(gfx++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-    gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+    gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
     gSPMatrix(gfx++, D_1000000.unk_20008, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gfx++, D_1000000.unk_20108, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    guScale(D_800DCCF0->unk_20308, 0.25f, 0.25f, 0.25f);
-    gSPMatrix(gfx++, K0_TO_PHYS(D_800DCCF0->unk_20308), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    guScale(gGfxPool->unk_20308, 0.25f, 0.25f, 0.25f);
+    gSPMatrix(gfx++, K0_TO_PHYS(gGfxPool->unk_20308), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     if (D_i5_801190B4 < 6) {
         for (i = 0; i < gCourseModelCupCourseNo; i++) {
@@ -124,16 +124,16 @@ void func_i5_80116678(s32 cupType) {
 
     if (cupType == X_CUP) {
         func_8007402C(cupType * 6 + gCourseModelCupCourseNo);
-        func_80074634(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo]);
-        func_8009F508(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo]);
-        D_801197B0[gCourseModelCupCourseNo] = func_800A2D2C(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo],
+        func_80074634(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo]);
+        func_8009F508(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo]);
+        D_801197B0[gCourseModelCupCourseNo] = func_800A2D2C(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo],
                                                             &D_i5_801197D0[gCourseModelCupCourseNo * 0xC00]);
         gCourseModelCupCourseNo++;
     } else {
         func_8007402C(cupType * 6 + gCourseModelCupCourseNo);
-        func_80074634(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo]);
-        func_8009F508(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo]);
-        D_801197B0[gCourseModelCupCourseNo] = func_800A2D2C(&gCourseRecordInfos[cupType * 6 + gCourseModelCupCourseNo],
+        func_80074634(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo]);
+        func_8009F508(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo]);
+        D_801197B0[gCourseModelCupCourseNo] = func_800A2D2C(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo],
                                                             &D_i5_801197D0[gCourseModelCupCourseNo * 0xC00]);
         gCourseModelCupCourseNo++;
     }

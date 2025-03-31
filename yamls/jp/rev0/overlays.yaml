@@ -267,9 +267,9 @@
     bss_size: 0x10
     symbol_name_format: i9_$VRAM
     subsegments:
-      - [0xF2840, c, car_draw]
-      - [0x1454C0, .data, car_draw]
-      - { type: .bss, vram: 0x80168560, name: car_draw }
+      - [0xF2840, c, machine_draw]
+      - [0x1454C0, .data, machine_draw]
+      - { type: .bss, vram: 0x80168560, name: machine_draw }
 
   - name: ovl_i10
     exclusive_ram_id: overlay

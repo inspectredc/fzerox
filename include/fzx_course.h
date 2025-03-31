@@ -31,6 +31,47 @@ typedef struct CourseData {
     /* 0x7A0 */ s8 sign[64];
 } CourseData; // size = 0x7E0
 
+typedef enum Courses {
+    /*  0 */ COURSE_MUTE_CITY,
+    /*  1 */ COURSE_SILENCE,
+    /*  2 */ COURSE_SAND_OCEAN,
+    /*  3 */ COURSE_DEVILS_FOREST,
+    /*  4 */ COURSE_BIG_BLUE,
+    /*  5 */ COURSE_PORT_TOWN,
+    /*  6 */ COURSE_SECTOR_ALPHA,
+    /*  7 */ COURSE_RED_CANYON,
+    /*  8 */ COURSE_DEVILS_FOREST_2,
+    /*  9 */ COURSE_MUTE_CITY_2,
+    /* 10 */ COURSE_BIG_BLUE_2,
+    /* 11 */ COURSE_WHITE_LAND,
+    /* 12 */ COURSE_FIRE_FIELD,
+    /* 13 */ COURSE_SILENCE_2,
+    /* 14 */ COURSE_SECTOR_BETA,
+    /* 15 */ COURSE_RED_CANYON_2,
+    /* 16 */ COURSE_WHITE_LAND_2,
+    /* 17 */ COURSE_MUTE_CITY_3,
+    /* 18 */ COURSE_RAINBOW_ROAD,
+    /* 19 */ COURSE_DEVILS_FOREST_3,
+    /* 20 */ COURSE_SPACE_PLANT,
+    /* 21 */ COURSE_SAND_OCEAN_2,
+    /* 22 */ COURSE_PORT_TOWN_2,
+    /* 23 */ COURSE_BIG_HAND,
+    /* 24 */ COURSE_EDIT_1,
+    /* 25 */ COURSE_EDIT_2,
+    /* 26 */ COURSE_EDIT_3,
+    /* 27 */ COURSE_EDIT_4,
+    /* 28 */ COURSE_EDIT_5,
+    /* 29 */ COURSE_EDIT_6,
+    /* 48 */ COURSE_X_1 = 48,
+    /* 49 */ COURSE_X_2,
+    /* 50 */ COURSE_X_3,
+    /* 51 */ COURSE_X_4,
+    /* 52 */ COURSE_X_5,
+    /* 53 */ COURSE_X_6,
+    /* 54 */ COURSE_DEATH_RACE,
+    /* 55 */ COURSE_ENDING,
+} Courses;
+
 #define CREATOR_NINTENDO 4
 
 typedef enum Venue {
@@ -57,6 +98,35 @@ typedef enum Skybox {
     /* 6 */ SKYBOX_SUNSET,
     /* 7 */ SKYBOX_SKY_BLUE,
 } Skybox;
+
+typedef enum CourseFeatures {
+    /*  0 */ COURSE_FEATURE_GATE_SQUARE,
+    /*  1 */ COURSE_FEATURE_GATE_START,
+    /*  2 */ COURSE_FEATURE_GATE_HEXAGONAL,
+    /*  3 */ COURSE_FEATURE_SIGN_TV_RIGHT,
+    /*  4 */ COURSE_FEATURE_SIGN_TV_LEFT,
+    /*  5 */ COURSE_FEATURE_SIGN_2_RIGHT,
+    /*  6 */ COURSE_FEATURE_SIGN_2_LEFT,
+    /*  7 */ COURSE_FEATURE_SIGN_1_RIGHT,
+    /*  8 */ COURSE_FEATURE_SIGN_1_LEFT,
+    /*  9 */ COURSE_FEATURE_SIGN_NINTEX_RIGHT,
+    /* 10 */ COURSE_FEATURE_SIGN_NINTEX_LEFT,
+    /* 11 */ COURSE_FEATURE_SIGN_OVERHEAD,
+    /* 12 */ COURSE_FEATURE_BUILDING_TALL_LEFT,
+    /* 13 */ COURSE_FEATURE_BUILDING_TALL_RIGHT,
+    /* 14 */ COURSE_FEATURE_BUILDING_SHORT_LEFT,
+    /* 15 */ COURSE_FEATURE_BUILDING_SHORT_RIGHT,
+    /* 16 */ COURSE_FEATURE_BUILDING_SPIRE_LEFT,
+    /* 17 */ COURSE_FEATURE_BUILDING_SPIRE_RIGHT,
+    /* 18 */ COURSE_FEATURE_BUILDING_MOUNTAIN_LEFT,
+    /* 19 */ COURSE_FEATURE_BUILDING_MOUNTAIN_RIGHT,
+    /* 20 */ COURSE_FEATURE_BUILDING_TALL_GOLD_LEFT,
+    /* 21 */ COURSE_FEATURE_BUILDING_TALL_GOLD_RIGHT,
+    /* 22 */ COURSE_FEATURE_LANDMINE,
+    /* 23 */ COURSE_FEATURE_JUMP,
+} CourseFeatures;
+
+#define COURSE_FEATURE_IS_BUILDING(feature) (((feature) >= COURSE_FEATURE_BUILDING_TALL_LEFT) && ((feature) <= COURSE_FEATURE_BUILDING_TALL_GOLD_RIGHT))
 
 typedef enum PitZone {
     /* -1 */ PIT_NONE = -1,

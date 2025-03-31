@@ -59,7 +59,7 @@ unk_80144F74 D_i8_80144F84[] = {
 };
 
 extern s16 D_800CCFE8;
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 extern s32 D_i2_80106F10;
 extern CourseData gCourseData;
 extern s32 gDifficulty;
@@ -68,7 +68,7 @@ void func_i8_80143A78(void);
 
 void Records_Init(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
-    D_800DCE5C = 0;
+    gGamePaused = false;
     gDifficulty = MASTER;
     gRacers[0].character = CAPTAIN_FALCON;
     func_800A4EAC();
@@ -156,7 +156,7 @@ bool func_i8_80143D30(s32 arg0) {
     bool ret = true;
 
     for (i = 0; i < 5; i++) {
-        if (gCourseRecordInfos[arg0].timeRecord[i] != MAX_TIMER) {
+        if (gCourseInfos[arg0].timeRecord[i] != MAX_TIMER) {
             ret = false;
             break;
         }
@@ -173,7 +173,7 @@ bool func_i8_80143D84(s32 arg0) {
 
     Save_LoadGhostInfo(&sp18);
 
-    if (sp18.encodedCourseIndex == gCourseRecordInfos[arg0].encodedCourseIndex) {
+    if (sp18.encodedCourseIndex == gCourseInfos[arg0].encodedCourseIndex) {
         ret = true;
     }
     return ret;
@@ -243,7 +243,8 @@ s32 Records_Update(void) {
     if (sp1C != 0) {
         D_800CD3BC = gCourseIndex;
         D_800CD048 = 8;
-    } else if ((gameMode == GAMEMODE_RECORDS) && (D_i8_80144FD6 == 0) && (gRacers[0].unk_04 & 0x80000)) {
+    } else if ((gameMode == GAMEMODE_RECORDS) && (D_i8_80144FD6 == 0) &&
+               (gRacers[0].stateFlags & RACER_STATE_FLAGS_80000)) {
         D_800CD048 = 1;
     }
     return gameMode;
@@ -258,7 +259,7 @@ extern u16 gInputButtonPressed;
 
 s32 func_i8_80143F94(void) {
     s32 sp2C;
-    s32 sp28;
+    s32 lastCourseIndex;
 
     if (D_i2_80106DA4 != 0) {
         return 0;
@@ -268,7 +269,7 @@ s32 func_i8_80143F94(void) {
     }
     func_i3_8013BF18(1);
 
-    sp28 = gCourseIndex;
+    lastCourseIndex = gCourseIndex;
     if (gInputPressed & BTN_RIGHT) {
         gCourseIndex++;
         if (gCourseIndex >= sUnlockedCourseCount) {
@@ -283,7 +284,7 @@ s32 func_i8_80143F94(void) {
         func_i2_800FCD38(9, 1);
     }
 
-    if (sp28 != gCourseIndex) {
+    if (lastCourseIndex != gCourseIndex) {
         sp2C = 1;
         func_800BA8D8(0x1E);
     } else {
@@ -424,12 +425,12 @@ void func_i8_801443D0(void) {
     }
 }
 
-extern FrameBuffer* D_800DCCD0[];
+extern FrameBuffer* gFrameBuffers[];
 extern s32 D_800DCD04;
 extern Vtx* D_800E5ECC;
 extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 
 Gfx* func_i8_801449B8(Gfx*);
 
@@ -445,17 +446,18 @@ Gfx* Records_Draw(Gfx* gfx) {
         gDPSetAlphaCompare(gfx++, G_AC_NONE);
         gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1));
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
         gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     }
 
     gSPDisplayList(gfx++, D_303A810);
     gDPPipeSync(gfx++);
-    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
 
-    D_800F8520 = D_800DCCF0->unk_10008;
-    D_800E5ECC = D_800DCCF0->unk_21B48;
-    D_800E5ED0 = &D_800DCCF0->unk_21B48[0x7FF];
+    D_800F8520 = gGfxPool->unk_10008;
+    D_800E5ECC = gGfxPool->unk_21B48;
+    D_800E5ED0 = &gGfxPool->unk_21B48[0x7FF];
     gfx = func_i3_801381DC(gfx, 0, 0);
     gfx = func_800A9938(gfx, 0);
     gfx = func_8006DAAC(gfx, 0);

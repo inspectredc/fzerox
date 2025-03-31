@@ -5,6 +5,7 @@
 #include "fzx_hud.h"
 #include "fzx_racer.h"
 #include "fzx_course.h"
+#include "fzx_machine.h"
 #include "src/overlays/ovl_i2/ovl_i2.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"
@@ -24,7 +25,7 @@ s16 D_i7_8014BE0C; // counter
 f32 D_i7_8014BE10; // scroll top
 s16 D_i7_8014BE14; // congrats/ending alpha
 s16 sCupNameIndex;
-s16 D_i7_8014BE18;
+s16 sCupNameWidth;
 s16 sCupDifficulty;
 s16 D_i7_8014BE1C; // thanks for playing state
 s16 sThanksForPlayingFade;
@@ -52,13 +53,13 @@ s32 D_i7_8014C248;
 extern s16 D_800CCFE8;
 extern s32 gCupType;
 extern s8 gUnlockableLevel;
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 extern s16 D_800E42CC;
 extern s32 gCourseIndex;
 extern RaceStats gCupRaceStats[1][6];
 extern CourseData gCourseData;
 extern s32 D_i2_80106F10;
-extern s16 D_80106F48;
+extern s16 gPlayer1OverallPosition;
 
 extern s32 gNumPlayers;
 extern s32 gDifficulty;
@@ -67,10 +68,10 @@ extern char* gTrackNames[55];
 
 extern Gfx D_8014940[];
 
-extern FrameBuffer* D_800DCCD0[];
-extern GfxPool* D_800DCCF0;
+extern FrameBuffer* gFrameBuffers[];
+extern GfxPool* gGfxPool;
 extern s32 D_800DCD04;
-extern unk_struct_1DC D_800E5220[];
+extern Player gPlayers[];
 extern Vtx* D_800E5ECC;
 extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
@@ -136,12 +137,12 @@ const char* sCupNames[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP", "E
 
 char sThanksForPlayingStr[] = "THANKS FOR PLAYING!!";
 
-s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 arg2) {
+s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 customType) {
     s32 endScreenCharacterIndex;
 
     switch (character) {
         case CAPTAIN_FALCON:
-            if (arg2 >= 2) {
+            if (IS_SUPER_MACHINE(customType)) {
                 endScreenCharacterIndex = 30;
             } else {
                 switch (difficulty) {
@@ -156,14 +157,14 @@ s32 func_i7_GetEndScreenIndex(s32 difficulty, s16 character, s8 arg2) {
             }
             break;
         case SAMURAI_GOROH:
-            if (arg2 >= 2) {
+            if (IS_SUPER_MACHINE(customType)) {
                 endScreenCharacterIndex = 32;
             } else {
                 endScreenCharacterIndex = character;
             }
             break;
         case JODY_SUMMER:
-            if (arg2 >= 2) {
+            if (IS_SUPER_MACHINE(customType)) {
                 endScreenCharacterIndex = 33;
             } else {
                 endScreenCharacterIndex = character;
@@ -183,17 +184,17 @@ void EndingCutscene_Init(void) {
     unk_8014BE28* var_v1;
     s32 cupFirstCourseIndex;
     s32 pad;
-    Racer* player = &gRacers[0];
+    Racer* playerRacer = &gRacers[0];
     s32 i;
     s32 j;
     void** endingTextures;
     s32 var_a0;
 
     D_800CCFE8 = D_i2_80106F10 = 3;
-    D_800DCE5C = 0;
+    gGamePaused = false;
     gNumPlayers = 1;
     cupFirstCourseIndex = (gCourseIndex / 6) * 6;
-    gCourseIndex = 55;
+    gCourseIndex = COURSE_ENDING;
     sCupDifficulty = gDifficulty;
     gDifficulty = MASTER;
     sTotalRacersKOd = 0;
@@ -219,7 +220,7 @@ void EndingCutscene_Init(void) {
     sEndScreenFade = 0;
     sEndScreenAlpha = 0;
     D_i7_8014BDF6 = 0;
-    if (D_80106F48 < 4) {
+    if (gPlayer1OverallPosition < 4) {
         D_i7_8014BDF6 |= 0xF;
     } else {
         D_i7_8014BDF6 |= 0x40;
@@ -231,14 +232,14 @@ void EndingCutscene_Init(void) {
         switch (sCupDifficulty) {
             case EXPERT:
             case MASTER:
-                if (gCupType == JOKER_CUP && D_80106F48 == 1) {
+                if (gCupType == JOKER_CUP && gPlayer1OverallPosition == 1) {
                     D_i7_8014BDF6 |= 0x10;
                 }
                 break;
         }
     }
 
-    if (D_80106F48 == 1) {
+    if (gPlayer1OverallPosition == 1) {
         switch (sCupDifficulty) {
             case STANDARD:
             case EXPERT:
@@ -273,7 +274,7 @@ void EndingCutscene_Init(void) {
             sCupNameIndex = 4;
             break;
     }
-    D_i7_8014BE18 = Font_GetStringWidth(sCupNames[sCupNameIndex], FONT_SET_3, 1);
+    sCupNameWidth = Font_GetStringWidth(sCupNames[sCupNameIndex], FONT_SET_3, 1);
     D_i7_8014BE1C = 0;
     sThanksForPlayingFade = 0;
     D_i7_8014BF28 = 0;
@@ -348,7 +349,8 @@ void EndingCutscene_Init(void) {
 
     if (D_i7_8014BDF6 & 0x20) {
 
-        endingTextures = sEndingTextures[func_i7_GetEndScreenIndex(sCupDifficulty, player->character, player->unk_167)];
+        endingTextures =
+            sEndingTextures[func_i7_GetEndScreenIndex(sCupDifficulty, playerRacer->character, playerRacer->customType)];
 
         sEndingTex = func_80078104(endingTextures[0], 168 * 99 * sizeof(u16), 0, 1, 0);
 
@@ -583,17 +585,18 @@ Gfx* EndingCutscene_Draw(Gfx* gfx) {
         gDPSetAlphaCompare(gfx++, G_AC_NONE);
         gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1));
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
         gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     }
 
     gSPDisplayList(gfx++, D_303A810);
     gDPPipeSync(gfx++);
-    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
 
-    D_800F8520 = D_800DCCF0->unk_10008;
-    D_800E5ECC = D_800DCCF0->unk_21B48;
-    D_800E5ED0 = &D_800DCCF0->unk_21B48[0x7FF];
+    D_800F8520 = gGfxPool->unk_10008;
+    D_800E5ECC = gGfxPool->unk_21B48;
+    D_800E5ED0 = &gGfxPool->unk_21B48[0x7FF];
     gfx = func_i3_801381DC(gfx, 0, 0);
     gfx = func_800A9938(gfx, 0);
     gfx = func_8006DAAC(gfx, 0);
@@ -603,8 +606,8 @@ Gfx* EndingCutscene_Draw(Gfx* gfx) {
     gfx = Segment_SetTableAddresses(gfx);
     gSPClipRatio(gfx++, FRUSTRATIO_3);
     gDPPipeSync(gfx++);
-    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
-    gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
+    gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
     gSPMatrix(gfx++, D_1000000.unk_20208, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
     gfx = func_800833AC(gfx, 0, 0);
@@ -803,7 +806,7 @@ Gfx* func_i7_801454B4(Gfx* gfx, unk_8014BE28* arg1, f32 arg2) {
     s32 positionDigit;
     char racersKOdStr[4];
 
-    position = D_80106F48;
+    position = gPlayer1OverallPosition;
     if ((position == 1) || (position == 21)) {
         ordinalSuffix = POSITION_SUFFIX_ST;
     } else if ((position == 2) || (position == 22)) {
@@ -1701,8 +1704,6 @@ void func_i7_801467FC(void) {
     var++;
 }
 
-extern Vec3f D_i7_8014BF30[];
-
 void func_i7_80146920(void) {
     unk_8014BEC8* var_s2;
     Racer* var_s4;
@@ -1839,7 +1840,7 @@ Gfx* func_i7_80146E28(Gfx* gfx) {
 #endif
 #endif
 
-extern s32 D_800E5EC0;
+extern s32 gTotalRacers;
 
 void func_i7_801471C0(void) {
     s32 var_a0;
@@ -1849,7 +1850,7 @@ void func_i7_801471C0(void) {
     s32 character;
 
     D_i7_8014C044 = 0;
-    if ((sCupDifficulty > NOVICE) && (D_80106F48 < 4)) {
+    if ((sCupDifficulty > NOVICE) && (gPlayer1OverallPosition < 4)) {
         D_i7_8014C044 = 1;
         D_i7_8014C038 = func_800768F4(0, 0xA80);
         D_i7_8014C03C = func_800768F4(0, 0xA80);
@@ -1859,15 +1860,15 @@ void func_i7_801471C0(void) {
             D_i7_8014C038[j] = D_i7_8014C03C[j] = D_i7_8014C040[j] = 0;
         }
 
-        for (i = D_800E5EC0 - 1; i >= 0; i--) {
+        for (i = gTotalRacers - 1; i >= 0; i--) {
 
             character = gRacers[i].character;
             j = character;
-            if ((character == CAPTAIN_FALCON) && (gRacers[i].unk_167 >= 2)) {
+            if ((character == CAPTAIN_FALCON) && IS_SUPER_MACHINE(gRacers[i].customType)) {
                 j = 30;
-            } else if ((character == SAMURAI_GOROH) && (gRacers[i].unk_167 >= 2)) {
+            } else if ((character == SAMURAI_GOROH) && IS_SUPER_MACHINE(gRacers[i].customType)) {
                 j = 31;
-            } else if ((character == JODY_SUMMER) && (gRacers[i].unk_167 >= 2)) {
+            } else if ((character == JODY_SUMMER) && IS_SUPER_MACHINE(gRacers[i].customType)) {
                 j = 32;
             }
             D_i7_8014C034 = func_80078104(sFullPortraits[j], 180 * 245 * sizeof(u16), 0, 1, 1);
@@ -1930,12 +1931,11 @@ void func_i7_801478E8(void) {
     s32 i;
 
     if (D_i7_8014C044 == 1) {
-        for (i = 0; i < D_800E5EC0; i++) {
+        for (i = 0; i < gTotalRacers; i++) {
             racer = &gRacers[i];
             func_8006BC84(
-                &D_i7_8014BDF0->unk_3F0[i], NULL, 0.04f, 0.04f, 0.04f, -D_800E5220[0].unk_5C.x.x,
-                -D_800E5220[0].unk_5C.x.y, -D_800E5220[0].unk_5C.x.z, racer->unk_C0.y.x, racer->unk_C0.y.y,
-                racer->unk_C0.y.z,
+                &D_i7_8014BDF0->unk_3F0[i], NULL, 0.04f, 0.04f, 0.04f, -gPlayers[0].unk_5C.x.x, -gPlayers[0].unk_5C.x.y,
+                -gPlayers[0].unk_5C.x.z, racer->unk_C0.y.x, racer->unk_C0.y.y, racer->unk_C0.y.z,
                 racer->unk_168.x + ((racer->unk_C0.x.x * 23.0f * 3.0f) / 2) + (racer->unk_C0.z.x * 23.0f * 0.8f),
                 (D_i7_8014BEC8[i].unk_0C + 120.0f) - 1.0f,
                 racer->unk_168.z + ((racer->unk_C0.x.z * 23.0f * 3.0f) / 2) + (racer->unk_C0.z.z * 23.0f * 0.8f));
@@ -1951,7 +1951,7 @@ Gfx* func_i7_80147AC8(Gfx* gfx) {
         gDPPipeSync(gfx++);
         gDPSetRenderMode(gfx++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
 
-        for (i = 0; i < D_800E5EC0; i++) {
+        for (i = 0; i < gTotalRacers; i++) {
             gDPPipeSync(gfx++);
 
             gDPLoadTextureBlock(gfx++, D_i7_8014C028[i], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 42, 0,
@@ -1966,13 +1966,13 @@ Gfx* func_i7_80147AC8(Gfx* gfx) {
     return gfx;
 }
 
-extern s16 D_80115DE0;
+extern s16 gRacersRemaining;
 
 void func_i7_80147CC0(void) {
     s32 i;
 
-    D_80115DE0 = D_800E5EC0;
-    if (D_80106F48 < 4) {
+    gRacersRemaining = gTotalRacers;
+    if (gPlayer1OverallPosition < 4) {
         func_i7_801471C0();
         D_i7_8014BF94 = func_800768F4(0, 0xCB20);
         D_i7_8014BF98 = func_800768F4(0, 0x280);
@@ -1984,14 +1984,14 @@ void func_i7_80147CC0(void) {
 
         D_i7_8014C248 = 0;
         D_i7_8014C020 = 0;
-        if (D_80106F48 == 1) {
+        if (gPlayer1OverallPosition == 1) {
             if (gCupType == X_CUP) {
                 func_80077CF0(D_i7_8014AD18[Math_Rand1() % 4], 0x200, D_i7_8014C048);
-            } else if ((gRacers[0].character == CAPTAIN_FALCON) && (gRacers[0].unk_167 >= 2)) {
+            } else if ((gRacers[0].character == CAPTAIN_FALCON) && IS_SUPER_MACHINE(gRacers[0].customType)) {
                 func_80077CF0(D_i7_8014AD0C, 0x200, D_i7_8014C048);
-            } else if ((gRacers[0].character == SAMURAI_GOROH) && (gRacers[0].unk_167 >= 2)) {
+            } else if ((gRacers[0].character == SAMURAI_GOROH) && IS_SUPER_MACHINE(gRacers[0].customType)) {
                 func_80077CF0(D_i7_8014AD10, 0x200, D_i7_8014C048);
-            } else if ((gRacers[0].character == JODY_SUMMER) && (gRacers[0].unk_167 >= 2)) {
+            } else if ((gRacers[0].character == JODY_SUMMER) && IS_SUPER_MACHINE(gRacers[0].customType)) {
                 func_80077CF0(D_i7_8014AD14, 0x200, D_i7_8014C048);
             } else {
                 func_80077CF0(D_i7_8014AC94[gRacers[0].character], 0x200, D_i7_8014C048);
@@ -2006,7 +2006,7 @@ void func_i7_80147EBC(void) {
     s32 var_s1;
     s32 i;
     s32 j;
-    unk_struct_1DC* var = &D_800E5220[0];
+    Player* var = &gPlayers[0];
     unk_8014BF98* temp_s4;
     unk_8014BF94* temp_s0;
     bool var_a1;
@@ -2027,7 +2027,7 @@ void func_i7_80147EBC(void) {
     f32 temp1;
     s32 pad[21];
 
-    if (D_80106F48 >= 4) {
+    if (gPlayer1OverallPosition >= 4) {
         return;
     }
 
@@ -2141,7 +2141,7 @@ void func_i7_80147EBC(void) {
                             func_800BAA88((s32) (f32) (u32) (((var_fa0 + 1000.0f) / 2000.0f) * 127.0f), 0x40);
                         }
                     }
-                    var_fs1_2 = sqrtf(SQ(D_800E5220[0].unk_5C.z.x) + SQ(D_800E5220[0].unk_5C.z.z));
+                    var_fs1_2 = sqrtf(SQ(gPlayers[0].unk_5C.z.x) + SQ(gPlayers[0].unk_5C.z.z));
 
                     if (var_fs1_2 < 0.0001f) {
                         var_fs1_2 = 0.0001f;
@@ -2214,11 +2214,11 @@ void func_i7_80147EBC(void) {
 
                                 temp_fv0_6 = -(((var_s1 & 0x3F) - 0x20) * 0.12f);
 
-                                temp_s0->unk_18 = ((D_800E5220[0].unk_5C.z.x * var_fs1_2 * 0.866f) -
-                                                   (D_800E5220[0].unk_5C.z.z * var_fs1_2 * 0.5f)) *
+                                temp_s0->unk_18 = ((gPlayers[0].unk_5C.z.x * var_fs1_2 * 0.866f) -
+                                                   (gPlayers[0].unk_5C.z.z * var_fs1_2 * 0.5f)) *
                                                   temp_fv0_6;
-                                temp_s0->unk_20 = ((D_800E5220[0].unk_5C.z.z * var_fs1_2 * 0.866f) +
-                                                   (D_800E5220[0].unk_5C.z.x * var_fs1_2 * 0.5f)) *
+                                temp_s0->unk_20 = ((gPlayers[0].unk_5C.z.z * var_fs1_2 * 0.866f) +
+                                                   (gPlayers[0].unk_5C.z.x * var_fs1_2 * 0.5f)) *
                                                   temp_fv0_6;
 
                                 temp_s0->unk_1C = ((-(f32) ((var_s1 >> 6) - 0x48)) * 0.12f);
@@ -2339,9 +2339,9 @@ void func_i7_80147EBC(void) {
             } else {
                 for (j = temp_s4->unk_2E; j < temp_s4->unk_2E + temp_s4->unk_30; j++) {
                     temp_s0 = &D_i7_8014BF94[j];
-                    temp_fv0_12 = D_800E5220[0].unk_50.x + temp_s0->unk_00;
+                    temp_fv0_12 = gPlayers[0].unk_50.x + temp_s0->unk_00;
                     temp_fv1_5 = temp_s0->unk_04;
-                    temp_fa1 = D_800E5220[0].unk_50.z + temp_s0->unk_08;
+                    temp_fa1 = gPlayers[0].unk_50.z + temp_s0->unk_08;
 
                     var_fs0_2 = (temp_fv0_12 - var->unk_50.x);
                     temp_ft4 = (temp_fv1_5 - var->unk_50.y);
@@ -2399,7 +2399,7 @@ Gfx* func_i7_80149760(Gfx* gfx) {
     unk_8014BF94* temp_a0;
     unk_8014BF98* temp_v0;
 
-    if (D_80106F48 >= 4) {
+    if (gPlayer1OverallPosition >= 4) {
         return gfx;
     }
 

@@ -9,7 +9,7 @@
 
 s8 D_i6_8011FAF0[30];
 
-s8 sDebugCreditsOldCars = false;
+s8 sDebugCreditsOldMachines = false;
 UNUSED s32 D_i6_8011DFA4 = 64;
 UNUSED s32 D_i6_8011DFA8 = 40;
 
@@ -649,7 +649,7 @@ const s16 kStartRolesInitialPositions[] = { 50, 240, 280, -20, 280, 240, 50, -20
 
 const s16 kStartNamesInitialPositions[] = { 50, 100, 280, 180, 280, 100, 50, 180 };
 
-const s16 kCreditsCarPositions[] = { 150, 210, 50, 35, 50, 210, 150, 35 };
+const s16 kCreditsMachinePositions[] = { 150, 210, 50, 35, 50, 210, 150, 35 };
 
 const s16 kCreditsObjectScrollScript[] = {
     OBJECT_CREDITS_ROLE_18,
@@ -780,26 +780,26 @@ const s16 kCreditsObjectScrollScript[] = {
 extern Object gObjects[32];
 extern unk_800E3F28 D_800E3F28[];
 
-void Credits_OldCarsInit(Object* oldCarsObj) {
+void Credits_OldMachinesInit(Object* oldMachinesObj) {
 
-    OBJECT_CACHE_INDEX(oldCarsObj) = func_800792D8(D_i6_8011E558[0]);
+    OBJECT_CACHE_INDEX(oldMachinesObj) = func_800792D8(D_i6_8011E558[0]);
 
-    OBJECT_STATE(oldCarsObj) = 0;
+    OBJECT_STATE(oldMachinesObj) = 0;
 
     //! @bug the case where func_800792D8 returns -1 is unhandled
-    D_800E3F28[OBJECT_CACHE_INDEX(oldCarsObj)].unk_04 = -1;
+    D_800E3F28[OBJECT_CACHE_INDEX(oldMachinesObj)].unk_04 = -1;
 }
 
-void Credits_CarsInit(Object* carsObj) {
+void Credits_MachinesInit(Object* machinesObj) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_i6_8011FAF0); i++) {
         D_i6_8011FAF0[i] = 0;
     }
-    OBJECT_CACHE_INDEX(carsObj) = func_800792D8(D_i6_8011E558[0]);
+    OBJECT_CACHE_INDEX(machinesObj) = func_800792D8(D_i6_8011E558[0]);
 
     //! @bug the case where func_800792D8 returns -1 is unhandled
-    D_800E3F28[OBJECT_CACHE_INDEX(carsObj)].unk_04 = -1;
+    D_800E3F28[OBJECT_CACHE_INDEX(machinesObj)].unk_04 = -1;
 }
 
 void Credits_MenuLadyInit(Object* menuLadyObj) {
@@ -885,19 +885,19 @@ Gfx* Credits_FadeInNameByLetter(Gfx* gfx, Object* startNameObj, bool* wordFadeIn
     return gfx;
 }
 
-Gfx* Credits_OldCarsDraw(Gfx* gfx, Object* oldCarsObj) {
+Gfx* Credits_OldMachinesDraw(Gfx* gfx, Object* oldMachinesObj) {
 
-    if (!sDebugCreditsOldCars) {
+    if (!sDebugCreditsOldMachines) {
         return gfx;
     }
 
-    return func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(oldCarsObj)], OBJECT_LEFT(oldCarsObj),
-                         OBJECT_TOP(oldCarsObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(oldMachinesObj)], OBJECT_LEFT(oldMachinesObj),
+                         OBJECT_TOP(oldMachinesObj), 0, 0, 0, 1.0f, 1.0f);
 }
 
 #define UNK_RAND_MACRO(var, x, y) (((Math_Rand1() >> (var % 4)) % x) - y)
 
-Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
+Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
     s32 sp154;
     s32 row;
     s32 var_t5;
@@ -914,16 +914,16 @@ Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
     TexturePtr texture;
     s32 top;
 
-    temp_s1 = &D_800E3F28[OBJECT_CACHE_INDEX(carsObj)];
+    temp_s1 = &D_800E3F28[OBJECT_CACHE_INDEX(machinesObj)];
 
-    left = OBJECT_LEFT(carsObj);
-    top = OBJECT_TOP(carsObj);
+    left = OBJECT_LEFT(machinesObj);
+    top = OBJECT_TOP(machinesObj);
 
-    if (OBJECT_TOP(carsObj) > 120) {
-        top = OBJECT_TOP(carsObj) - temp_s1->unk_00->unk_00->height;
+    if (OBJECT_TOP(machinesObj) > 120) {
+        top = OBJECT_TOP(machinesObj) - temp_s1->unk_00->unk_00->height;
     }
 
-    sp154 = OBJECT_COUNTER(carsObj);
+    sp154 = OBJECT_COUNTER(machinesObj);
     if (sp154 > 64) {
         sp154 = 64;
     }
@@ -931,7 +931,7 @@ Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
     width = temp_s1->unk_00->unk_00->width;
     height = temp_s1->unk_00->unk_00->height;
 
-    switch (OBJECT_STATE2(carsObj)) {
+    switch (OBJECT_STATE2(machinesObj)) {
         case 0:
 
             if (temp_s1->unk_0A == 0) {
@@ -975,7 +975,7 @@ Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
             }
             break;
         case 1:
-            gfx = func_80078F80(gfx, temp_s1, OBJECT_LEFT(carsObj), top, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80(gfx, temp_s1, OBJECT_LEFT(machinesObj), top, 0, 0, 0, 1.0f, 1.0f);
             break;
         case 2:
             if (sp154 < 5) {
@@ -985,8 +985,8 @@ Gfx* Credits_CarsDraw(Gfx* gfx, Object* carsObj) {
                 additionalWidth = (width * (1.0f - var_fv1)) / 2;
                 additionalHeight = (height * (1.0f - var_fv1)) / 2;
 
-                gfx = func_80078F80(gfx, temp_s1, OBJECT_LEFT(carsObj) + additionalWidth, top + additionalHeight, 4, 0,
-                                    0, var_fv1, var_fv1);
+                gfx = func_80078F80(gfx, temp_s1, OBJECT_LEFT(machinesObj) + additionalWidth, top + additionalHeight, 4,
+                                    0, 0, var_fv1, var_fv1);
             } else {
                 if (temp_s1->unk_0A == 0) {
                     texture = temp_s1->unk_0C;
@@ -1331,13 +1331,13 @@ Gfx* Credits_PortraitsDraw(Gfx* gfx, Object* portraitsObj) {
     unk_800E3F28* sp34;
     s32 temp_v1;
     s32 left;
-    s32 carLeftPos;
+    s32 machineLeftPos;
 
     sp34 = &D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)];
     temp_v1 = OBJECT_COUNTER(portraitsObj);
-    carLeftPos = kCreditsCarPositions[(PORTRAIT_CAR_NUMBER(portraitsObj) % 4) * 2];
+    machineLeftPos = kCreditsMachinePositions[(PORTRAIT_MACHINE_NUMBER(portraitsObj) % 4) * 2];
 
-    if (carLeftPos < 100) {
+    if (machineLeftPos < 100) {
         left = SCREEN_WIDTH - (temp_v1 / 1.2);
     } else {
         left = (temp_v1 / 1.2) - 180;
@@ -1461,41 +1461,41 @@ Gfx* Credits_EndNameDraw(Gfx* gfx, Object* endNamesObj) {
 
 extern u16 gInputPressed;
 
-void Credits_OldCarsUpdate(Object* oldCarsObj) {
+void Credits_OldMachinesUpdate(Object* oldMachinesObj) {
     s32 var_v1;
     unk_800E3F28* temp_v0;
 
-    temp_v0 = &D_800E3F28[OBJECT_CACHE_INDEX(oldCarsObj)];
+    temp_v0 = &D_800E3F28[OBJECT_CACHE_INDEX(oldMachinesObj)];
     var_v1 = 0;
     if (temp_v0->unk_04 == -1) {
         temp_v0->unk_04 = 0;
-        OBJECT_STATE(oldCarsObj) = 0;
+        OBJECT_STATE(oldMachinesObj) = 0;
         var_v1 = 1;
     }
-    if (sDebugCreditsOldCars) {
+    if (sDebugCreditsOldMachines) {
         if (gInputPressed & BTN_LEFT) {
             func_800BA8D8(30);
-            if (OBJECT_STATE(oldCarsObj) != 0) {
-                OBJECT_STATE(oldCarsObj)--;
+            if (OBJECT_STATE(oldMachinesObj) != 0) {
+                OBJECT_STATE(oldMachinesObj)--;
             } else {
-                OBJECT_STATE(oldCarsObj) = 29;
+                OBJECT_STATE(oldMachinesObj) = 29;
             }
             var_v1++;
         }
 
         if (gInputPressed & BTN_RIGHT) {
             func_800BA8D8(30);
-            OBJECT_STATE(oldCarsObj)++;
-            OBJECT_STATE(oldCarsObj) = OBJECT_STATE(oldCarsObj) % 30;
+            OBJECT_STATE(oldMachinesObj)++;
+            OBJECT_STATE(oldMachinesObj) = OBJECT_STATE(oldMachinesObj) % 30;
             var_v1++;
         }
     }
     if (var_v1 != 0) {
-        func_800793E8(OBJECT_CACHE_INDEX(oldCarsObj), 0, D_i6_8011E560[OBJECT_STATE(oldCarsObj)]);
+        func_800793E8(OBJECT_CACHE_INDEX(oldMachinesObj), 0, D_i6_8011E560[OBJECT_STATE(oldMachinesObj)]);
     }
 }
 
-void Credits_CarsUpdate(Object* carsObj) {
+void Credits_MachinesUpdate(Object* machinesObj) {
     Object* scriptObj;
     s32 var_a2;
     s32 var_v1;
@@ -1503,21 +1503,21 @@ void Credits_CarsUpdate(Object* carsObj) {
 
     var_a2 = 0;
 
-    OBJECT_LEFT(carsObj) = kCreditsCarPositions[(CAR_NUMBER(carsObj) % 4) * 2 + 0];
-    OBJECT_TOP(carsObj) = kCreditsCarPositions[(CAR_NUMBER(carsObj) % 4) * 2 + 1];
-    switch (OBJECT_STATE2(carsObj)) {
+    OBJECT_LEFT(machinesObj) = kCreditsMachinePositions[(MACHINE_NUMBER(machinesObj) % 4) * 2 + 0];
+    OBJECT_TOP(machinesObj) = kCreditsMachinePositions[(MACHINE_NUMBER(machinesObj) % 4) * 2 + 1];
+    switch (OBJECT_STATE2(machinesObj)) {
         case 0:
-            if (++OBJECT_COUNTER(carsObj) >= 64) {
-                OBJECT_STATE2(carsObj) = 1;
+            if (++OBJECT_COUNTER(machinesObj) >= 64) {
+                OBJECT_STATE2(machinesObj) = 1;
             }
             break;
         case 1:
-            OBJECT_COUNTER(carsObj) = 0;
+            OBJECT_COUNTER(machinesObj) = 0;
             break;
         case 2:
-            if (++OBJECT_COUNTER(carsObj) >= 64) {
-                OBJECT_STATE2(carsObj) = 3;
-                OBJECT_COUNTER(carsObj) = 0;
+            if (++OBJECT_COUNTER(machinesObj) >= 64) {
+                OBJECT_STATE2(machinesObj) = 3;
+                OBJECT_COUNTER(machinesObj) = 0;
                 scriptObj = Object_Get(OBJECT_CREDITS_SCRIPT);
                 var_a2 = 0;
                 if (scriptObj != NULL) {
@@ -1526,11 +1526,11 @@ void Credits_CarsUpdate(Object* carsObj) {
             }
             break;
         case 3:
-            if (OBJECT_COUNTER(carsObj) != 0) {
-                OBJECT_STATE2(carsObj) = 0;
-                CAR_NUMBER(carsObj)++;
+            if (OBJECT_COUNTER(machinesObj) != 0) {
+                OBJECT_STATE2(machinesObj) = 0;
+                MACHINE_NUMBER(machinesObj)++;
                 var_v1 = 0;
-                if ((CAR_NUMBER(carsObj) == 5) && (D_i6_8011FAF0[9] == 0)) {
+                if ((MACHINE_NUMBER(machinesObj) == 5) && (D_i6_8011FAF0[9] == 0)) {
                     var_a2 = 9;
                     D_i6_8011FAF0[9] = 1;
                     var_v1 = 1;
@@ -1557,7 +1557,7 @@ void Credits_CarsUpdate(Object* carsObj) {
                     }
                 }
             label:
-                OBJECT_STATE(carsObj) = var_a2;
+                OBJECT_STATE(machinesObj) = var_a2;
                 var_a2 = 1;
                 portraitsObj = Object_Get(OBJECT_CREDITS_PORTRAITS);
                 if ((portraitsObj != NULL) && (OBJECT_STATE2(portraitsObj) == 3)) {
@@ -1567,14 +1567,14 @@ void Credits_CarsUpdate(Object* carsObj) {
             break;
     }
 
-    if (D_800E3F28[OBJECT_CACHE_INDEX(carsObj)].unk_04 == -1) {
-        D_800E3F28[OBJECT_CACHE_INDEX(carsObj)].unk_04 = 0;
-        OBJECT_STATE(carsObj) = Math_Rand1() % 30;
-        D_i6_8011FAF0[OBJECT_STATE(carsObj)] = 1;
+    if (D_800E3F28[OBJECT_CACHE_INDEX(machinesObj)].unk_04 == -1) {
+        D_800E3F28[OBJECT_CACHE_INDEX(machinesObj)].unk_04 = 0;
+        OBJECT_STATE(machinesObj) = Math_Rand1() % 30;
+        D_i6_8011FAF0[OBJECT_STATE(machinesObj)] = 1;
         var_a2++;
     }
     if (var_a2 != 0) {
-        func_800793E8(OBJECT_CACHE_INDEX(carsObj), 0, D_i6_8011E560[OBJECT_STATE(carsObj)]);
+        func_800793E8(OBJECT_CACHE_INDEX(machinesObj), 0, D_i6_8011E560[OBJECT_STATE(machinesObj)]);
     }
 }
 
@@ -1592,8 +1592,8 @@ void Credits_PortraitsUpdate(Object* portraitsObj) {
         case 3:
             if (OBJECT_COUNTER(portraitsObj) != 0) {
                 OBJECT_STATE2(portraitsObj) = 0;
-                PORTRAIT_CAR_NUMBER(portraitsObj)++;
-                OBJECT_STATE(portraitsObj) = OBJECT_STATE(Object_Get(OBJECT_CREDITS_CARS));
+                PORTRAIT_MACHINE_NUMBER(portraitsObj)++;
+                OBJECT_STATE(portraitsObj) = OBJECT_STATE(Object_Get(OBJECT_CREDITS_MACHINES));
                 var_v1 = 1;
                 OBJECT_COUNTER(portraitsObj) = 0;
             }
@@ -1602,7 +1602,7 @@ void Credits_PortraitsUpdate(Object* portraitsObj) {
 
     if (D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)].unk_04 == -1) {
         D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)].unk_04 = 0;
-        OBJECT_STATE(portraitsObj) = OBJECT_STATE(Object_Get(OBJECT_CREDITS_CARS));
+        OBJECT_STATE(portraitsObj) = OBJECT_STATE(Object_Get(OBJECT_CREDITS_MACHINES));
         var_v1++;
     }
     if (var_v1 != 0) {
@@ -1666,7 +1666,7 @@ void Credits_ObjectInit(s32 cmdId, s32 left, s32 top, s8 priority);
 void Credits_ScriptUpdate(Object* scriptObj) {
     s32 objId;
     s32 index;
-    Object* carsObj;
+    Object* machinesObj;
 
     OBJECT_COUNTER(scriptObj)++;
     if (OBJECT_STATE(scriptObj) < 18) {
@@ -1677,9 +1677,9 @@ void Credits_ScriptUpdate(Object* scriptObj) {
                         Credits_ObjectInit(OBJECT_CREDITS_ROLE_0 + OBJECT_STATE(scriptObj),
                                            kStartRolesInitialPositions[(OBJECT_STATE(scriptObj) % 4) * 2 + 0],
                                            kStartRolesInitialPositions[(OBJECT_STATE(scriptObj) % 4) * 2 + 1], 12);
-                        carsObj = Object_Get(OBJECT_CREDITS_CARS);
-                        if ((carsObj != NULL) && (OBJECT_STATE2(carsObj) == 3)) {
-                            OBJECT_COUNTER(carsObj)++;
+                        machinesObj = Object_Get(OBJECT_CREDITS_MACHINES);
+                        if ((machinesObj != NULL) && (OBJECT_STATE2(machinesObj) == 3)) {
+                            OBJECT_COUNTER(machinesObj)++;
                         }
                         break;
                     case 60:
@@ -1739,7 +1739,7 @@ void Credits_StartRoleUpdate(Object* startRoleObj) {
     s32 targetTop;
     s32 step;
     char* roleName;
-    Object* carsObj;
+    Object* machinesObj;
 
     roleIndex = startRoleObj->cmdId - OBJECT_CREDITS_ROLE_0;
     roleName = gCreditsAttributions[roleIndex];
@@ -1773,9 +1773,9 @@ void Credits_StartRoleUpdate(Object* startRoleObj) {
         case 1:
             if (++OBJECT_COUNTER(startRoleObj) > 120) {
                 OBJECT_STATE(startRoleObj) = 2;
-                carsObj = Object_Get(OBJECT_CREDITS_CARS);
-                if ((carsObj != NULL) && (OBJECT_STATE2(carsObj) == 1)) {
-                    OBJECT_STATE2(carsObj) = 2;
+                machinesObj = Object_Get(OBJECT_CREDITS_MACHINES);
+                if ((machinesObj != NULL) && (OBJECT_STATE2(machinesObj) == 1)) {
+                    OBJECT_STATE2(machinesObj) = 2;
                 }
             }
             break;
@@ -1918,7 +1918,7 @@ void Credits_IntroUpdate(Object* introObj) {
             break;
         case 370:
             Credits_ObjectInit(OBJECT_CREDITS_SCRIPT, 0, 0, 0);
-            Credits_ObjectInit(OBJECT_CREDITS_CARS, 0, 0, 4);
+            Credits_ObjectInit(OBJECT_CREDITS_MACHINES, 0, 0, 4);
             Credits_ObjectInit(OBJECT_CREDITS_PORTRAITS, 0, 0, 8);
             introObj->cmdId = OBJECT_FREE;
             break;
@@ -2023,11 +2023,11 @@ void Credits_ObjectInit(s32 cmdId, s32 left, s32 top, s8 priority) {
     object->counter2 = 0;
 
     switch (cmdId) {
-        case OBJECT_CREDITS_OLD_CARS:
-            Credits_OldCarsInit(object);
+        case OBJECT_CREDITS_MACHINES_OLD:
+            Credits_OldMachinesInit(object);
             break;
-        case OBJECT_CREDITS_CARS:
-            Credits_CarsInit(object);
+        case OBJECT_CREDITS_MACHINES:
+            Credits_MachinesInit(object);
             break;
         case OBJECT_CREDITS_MENU_LADY:
             Credits_MenuLadyInit(object);
@@ -2073,14 +2073,14 @@ Gfx* Credits_ObjectDraw(Gfx* gfx) {
                 case OBJECT_150:
                     gfx = func_8007AC48(gfx, 0, 0, 0);
                     break;
-                case OBJECT_CREDITS_OLD_CARS:
-                    gfx = Credits_OldCarsDraw(gfx, &gObjects[j]);
+                case OBJECT_CREDITS_MACHINES_OLD:
+                    gfx = Credits_OldMachinesDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_BACKGROUND:
                     gfx = func_8007AC48(gfx, 0, 0, 0);
                     break;
-                case OBJECT_CREDITS_CARS:
-                    gfx = Credits_CarsDraw(gfx, &gObjects[j]);
+                case OBJECT_CREDITS_MACHINES:
+                    gfx = Credits_MachinesDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_MENU_LADY:
                     gfx = Credits_MenuLadyDraw(gfx, &gObjects[j]);
@@ -2186,14 +2186,14 @@ void Credits_ObjectUpdate(void) {
         switch (gObjects[i].cmdId) {
             case OBJECT_FREE:
                 break;
-            case OBJECT_CREDITS_OLD_CARS:
-                Credits_OldCarsUpdate(&gObjects[i]);
+            case OBJECT_CREDITS_MACHINES_OLD:
+                Credits_OldMachinesUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_SCRIPT:
                 Credits_ScriptUpdate(&gObjects[i]);
                 break;
-            case OBJECT_CREDITS_CARS:
-                Credits_CarsUpdate(&gObjects[i]);
+            case OBJECT_CREDITS_MACHINES:
+                Credits_MachinesUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_PORTRAITS:
                 Credits_PortraitsUpdate(&gObjects[i]);
@@ -2305,7 +2305,7 @@ s32 Credits_Update(void) {
 
     Controller_SetGlobalInputs(&gSharedController);
     if (gInputPressed & (BTN_A | BTN_START)) {
-        sDebugCreditsOldCars ^= 1;
+        sDebugCreditsOldMachines ^= 1;
     }
     if ((gGameMode != GAMEMODE_FLX_UNSKIPPABLE_CREDITS) && (gInputPressed & BTN_B)) {
         return GAMEMODE_FLX_MAIN_MENU;

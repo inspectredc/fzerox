@@ -40,7 +40,7 @@ OSTask* gCurGfxTask;
 OSTask* gCurAudioOSTask;
 bool gResetStarted;
 bool gLeoDDConnected;
-FrameBuffer* D_800DCCD0[3];
+FrameBuffer* gFrameBuffers[3];
 OSPiHandle* gCartRomHandle;
 OSPiHandle* gDriveRomHandle;
 
@@ -118,7 +118,7 @@ void Main_ThreadEntry(void* arg0) {
     osViSetEvent(&gMainThreadMesgQueue, (OSMesg) EVENT_MESG_VI, 1);
     gResetStarted = false;
     gLeoDDConnected = LeoDD_CheckPresence();
-    var_v1 = (u64*) D_800DCCD0[0];
+    var_v1 = (u64*) gFrameBuffers[0];
 
     // clang-format off
     for (var_a0 = 0; var_a0 < (SCREEN_WIDTH * SCREEN_HEIGHT) / 4; var_a0++) { \
@@ -126,11 +126,11 @@ void Main_ThreadEntry(void* arg0) {
     }
     // clang-format on
 
-    func_80069F5C(D_800DCCD0[1]);
-    func_80069F5C(D_800DCCD0[2]);
-    osViSwapBuffer(D_800DCCD0[0]);
+    func_80069F5C(gFrameBuffers[1]);
+    func_80069F5C(gFrameBuffers[2]);
+    osViSwapBuffer(gFrameBuffers[0]);
 
-    while (osViGetCurrentFramebuffer() != D_800DCCD0[0]) {}
+    while (osViGetCurrentFramebuffer() != gFrameBuffers[0]) {}
 
     osViBlack(false);
 
@@ -172,14 +172,14 @@ void Main_ThreadEntry(void* arg0) {
     if (gRamDDCompatible && gLeoDDConnected && (func_800761D4() == 2)) {
         func_8007515C();
     }
-    osViSwapBuffer(D_800DCCD0[1]);
+    osViSwapBuffer(gFrameBuffers[1]);
 
-    while (osViGetCurrentFramebuffer() != D_800DCCD0[1]) {}
+    while (osViGetCurrentFramebuffer() != gFrameBuffers[1]) {}
 
-    func_80069F5C(D_800DCCD0[0]);
-    osViSwapBuffer(D_800DCCD0[0]);
+    func_80069F5C(gFrameBuffers[0]);
+    osViSwapBuffer(gFrameBuffers[0]);
 
-    while (osViGetCurrentFramebuffer() != D_800DCCD0[0]) {}
+    while (osViGetCurrentFramebuffer() != gFrameBuffers[0]) {}
 
     osViBlack(false);
 
@@ -259,14 +259,14 @@ void Main_ThreadEntry(void* arg0) {
     }
 }
 
-extern FrameBuffer D_801D9800;
-extern FrameBuffer D_80200000;
-extern FrameBuffer D_803DA800;
+extern FrameBuffer gFrameBuffer1;
+extern FrameBuffer gFrameBuffer2;
+extern FrameBuffer gFrameBuffer3;
 
 void Idle_ThreadEntry(void* arg0) {
-    D_800DCCD0[0] = &D_801D9800;
-    D_800DCCD0[1] = &D_80200000;
-    D_800DCCD0[2] = &D_803DA800;
+    gFrameBuffers[0] = &gFrameBuffer1;
+    gFrameBuffers[1] = &gFrameBuffer2;
+    gFrameBuffers[2] = &gFrameBuffer3;
     osCreateViManager(OS_PRIORITY_VIMGR);
     if (osTvType == OS_TV_TYPE_NTSC) {
         osViSetMode(&osViModeNtscLan1);
@@ -282,7 +282,7 @@ void Idle_ThreadEntry(void* arg0) {
     gCartRomHandle = osCartRomInit();
     gDriveRomHandle = osDriveRomInit();
     Fault_Init();
-    Fault_SetFrameBuffer(&D_801D9800, SCREEN_WIDTH, 16);
+    Fault_SetFrameBuffer(&gFrameBuffer1, SCREEN_WIDTH, 16);
     osCreateThread(&sMainThread, THREAD_ID_MAIN, Main_ThreadEntry, NULL, sMainThreadStack + sizeof(sMainThreadStack),
                    99);
     if (sMainThreadStartEnabled) {

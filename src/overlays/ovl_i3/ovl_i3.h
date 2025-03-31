@@ -152,6 +152,42 @@ typedef enum TimeAttackFinishOptions {
     /* 5 */ TIME_ATTACK_QUIT,
 } TimeAttackFinishOptions;
 
+typedef enum PauseGeneralOptions {
+    /* 0 */ PAUSE_GENERAL_CONTINUE,
+    /* 1 */ PAUSE_GENERAL_RETRY,
+    /* 2 */ PAUSE_GENERAL_SETTINGS,
+    /* 3 */ PAUSE_GENERAL_CHANGE_MACHINE,
+    /* 4 */ PAUSE_GENERAL_CHANGE_COURSE,
+    /* 5 */ PAUSE_GENERAL_QUIT,
+} PauseGeneralOptions;
+
+typedef enum PauseDeathRaceOptions {
+    /* 0 */ PAUSE_DEATH_RACE_CONTINUE,
+    /* 1 */ PAUSE_DEATH_RACE_RETRY,
+    /* 2 */ PAUSE_DEATH_RACE_SETTINGS,
+    /* 3 */ PAUSE_DEATH_RACE_CHANGE_MACHINE,
+    /* 4 */ PAUSE_DEATH_RACE_QUIT,
+} PauseDeathRaceOptions;
+
+typedef enum PauseGpOptions {
+    /* 0 */ PAUSE_GP_CONTINUE,
+    /* 1 */ PAUSE_GP_RETRY,
+    /* 2 */ PAUSE_GP_SETTINGS,
+    /* 3 */ PAUSE_GP_QUIT,
+} PauseGpOptions;
+
+#define MENU_STATE_PAUSE_GAME (1 << 0)
+#define MENU_STATE_UNPAUSE_GAME (1 << 1)
+#define MENU_STATE_RACE_FINISH_SAVE (1 << 2)
+#define MENU_STATE_RETRY (1 << 3)
+#define MENU_STATE_QUIT (1 << 4)
+#define MENU_STATE_CHANGE_MACHINE (1 << 5)
+#define MENU_STATE_CHANGE_COURSE (1 << 6)
+#define MENU_STATE_SETTINGS (1 << 7)
+#define MENU_STATE_100 (1 << 8)
+#define MENU_STATE_GP_NEXT_COURSE (1 << 9)
+#define MENU_STATE_400 (1 << 10)
+
 void func_i3_801175A4(void);
 Gfx* func_i3_DrawBeveledBox(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
 
@@ -162,7 +198,7 @@ Gfx* func_i3_DrawPosition(Gfx*, s32, s32);
 Gfx* func_i3_DrawHUD(Gfx*);
 Gfx* func_i3_DrawRacePortraits(Gfx*);
 Gfx* func_i3_DrawRaceTimeInterval(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale);
-Gfx* func_i3_80135B20(Gfx*, s32, s32);
+Gfx* func_i3_DrawCourseMinimap(Gfx*, s32, s32);
 void func_i3_80139FF4(void);
 void func_i3_8013C15C(void);
 Gfx* func_i3_8013D2BC(Gfx*);
@@ -176,6 +212,6 @@ extern unk_80141EA8 D_i3_80141EA8[];
 extern s32 gPlayerLapNumbers[];
 extern TexturePtr gCharacterPortraitTextures[];
 
-extern s32 D_i3_80140788[];
+extern s32 gPlayerMinimapLapCounterToggle[];
 
 #endif // OVL_I3_H

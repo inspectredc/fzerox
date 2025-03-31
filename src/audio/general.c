@@ -192,7 +192,7 @@ void func_800B759C(u8 arg0) {
     }
 }
 
-extern unk_struct_1DC D_800E5220[];
+extern Player gPlayers[];
 
 void func_800B7600(u8 arg0, u8 arg1) {
     f32 volumeScale;
@@ -220,9 +220,9 @@ void func_800B7600(u8 arg0, u8 arg1) {
                     if (arg0 == D_800D1A20) {
                         var_fv1 = D_800D1A30;
                     } else {
-                        vec.x = gRacers[arg0].unk_0C.unk_34.x - D_800E5220[0].unk_50.x;
-                        vec.y = gRacers[arg0].unk_0C.unk_34.y - D_800E5220[0].unk_50.y;
-                        vec.z = gRacers[arg0].unk_0C.unk_34.z - D_800E5220[0].unk_50.z;
+                        vec.x = gRacers[arg0].unk_0C.unk_34.x - gPlayers[0].unk_50.x;
+                        vec.y = gRacers[arg0].unk_0C.unk_34.y - gPlayers[0].unk_50.y;
+                        vec.z = gRacers[arg0].unk_0C.unk_34.z - gPlayers[0].unk_50.z;
 
                         var_fv1 = sqrtf(SQ_SUM(&vec));
                     }
@@ -543,9 +543,9 @@ void func_800B8640(void) {
     if ((D_800D19E0 != 1) && (D_800D1A18 == 0) && (D_800D1A20 != 0) && (D_800D1A40 != 1) && (D_800D1A40 != 2) &&
         ((gGameMode == GAMEMODE_GP_RACE) || (gGameMode == GAMEMODE_PRACTICE) || (gGameMode == GAMEMODE_DEATH_RACE)) &&
         (D_800D1A58 == 0)) {
-        vec.x = gRacers[D_800D1A20].unk_0C.unk_34.x - D_800E5220[0].unk_50.x;
-        vec.y = gRacers[D_800D1A20].unk_0C.unk_34.y - D_800E5220[0].unk_50.y;
-        vec.z = gRacers[D_800D1A20].unk_0C.unk_34.z - D_800E5220[0].unk_50.z;
+        vec.x = gRacers[D_800D1A20].unk_0C.unk_34.x - gPlayers[0].unk_50.x;
+        vec.y = gRacers[D_800D1A20].unk_0C.unk_34.y - gPlayers[0].unk_50.y;
+        vec.z = gRacers[D_800D1A20].unk_0C.unk_34.z - gPlayers[0].unk_50.z;
         D_800D1A30 = sqrtf(SQ_SUM(&vec));
         if ((D_800D1A30 < 820.0f) && (D_800D1A30 != 0.0f)) {
             if (D_800D1A1C == 0) {
@@ -635,9 +635,9 @@ void func_800B899C(u8 arg0) {
                 Vec3f vec;
                 f32 temp;
 
-                vec.x = gRacers[arg0].unk_0C.unk_34.x - D_800E5220[arg0].unk_50.x;
-                vec.y = gRacers[arg0].unk_0C.unk_34.y - D_800E5220[arg0].unk_50.y;
-                vec.z = gRacers[arg0].unk_0C.unk_34.z - D_800E5220[arg0].unk_50.z;
+                vec.x = gRacers[arg0].unk_0C.unk_34.x - gPlayers[arg0].unk_50.x;
+                vec.y = gRacers[arg0].unk_0C.unk_34.y - gPlayers[arg0].unk_50.y;
+                vec.z = gRacers[arg0].unk_0C.unk_34.z - gPlayers[arg0].unk_50.z;
                 temp = sqrtf(SQ_SUM(&vec));
                 volumeScale = (-0.002f * temp + 1.2f) * 0.65f;
 
@@ -654,9 +654,9 @@ void func_800B899C(u8 arg0) {
             Vec3f vec;
             f32 temp;
 
-            vec.x = gRacers[arg0].unk_0C.unk_34.x - D_800E5220[arg0].unk_50.x;
-            vec.y = gRacers[arg0].unk_0C.unk_34.y - D_800E5220[arg0].unk_50.y;
-            vec.z = gRacers[arg0].unk_0C.unk_34.z - D_800E5220[arg0].unk_50.z;
+            vec.x = gRacers[arg0].unk_0C.unk_34.x - gPlayers[arg0].unk_50.x;
+            vec.y = gRacers[arg0].unk_0C.unk_34.y - gPlayers[arg0].unk_50.y;
+            vec.z = gRacers[arg0].unk_0C.unk_34.z - gPlayers[arg0].unk_50.z;
             temp = sqrtf(SQ_SUM(&vec));
             volumeScale = -0.002f * temp + 1.2f;
 

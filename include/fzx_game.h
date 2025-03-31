@@ -98,7 +98,6 @@ typedef enum Character {
     /* 27 */ BILLY,
     /* 28 */ THE_SKULL,
     /* 29 */ BLOOD_FALCON,
-    /* 30 */ MAX_CHARACTER
 } Character;
 
 typedef enum Cup {

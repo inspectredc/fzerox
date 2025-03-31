@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_object.h"
+#include "fzx_course.h"
 #include "ovl_i4.h"
 #include "assets/segment_2B9EA0.h"
 
@@ -198,7 +199,7 @@ void func_i4_8011AC24(u16* texture) {
 void Title_Init(void) {
     D_800CCFE8 = 3;
     D_i4_8011D638 = 1;
-    gCourseIndex = 0;
+    gCourseIndex = COURSE_MUTE_CITY;
     D_i4_8011D790 = 0;
     D_i4_8011D794 = 0;
     Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);

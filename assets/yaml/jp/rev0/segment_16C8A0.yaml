@@ -508,41 +508,41 @@ D_8015A20:
   offset: 0x15A20
   symbol: D_8015A20
 
-D_8016220:
+aPitEffectTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x16220
-  symbol: D_8016220
+  symbol: aPitEffectTex
 
-D_8016A20:
+aDashEffectTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
   offset: 0x16A20
-  symbol: D_8016A20
+  symbol: aDashEffectTex
 
-D_8016C20:
+aDirtEffectTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 16
   offset: 0x16C20
-  symbol: D_8016C20
+  symbol: aDirtEffectTex
 
-D_8017020:
+aIceEffectTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
   offset: 0x17020
-  symbol: D_8017020
+  symbol: aIceEffectTex
 
 D_8017220:
   type: GFX
@@ -783,9 +783,9 @@ D_8022380:
   offset: 0x22380
   symbol: D_8022380
 
-D_80223F8:
+aSetupCourseEffectTextureDL:
   type: GFX
   offset: 0x223F8
-  symbol: D_80223F8
+  symbol: aSetupCourseEffectTextureDL
 
 # size = 0x22500

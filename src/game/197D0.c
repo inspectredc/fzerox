@@ -238,7 +238,7 @@ void LeoDD_DrawErrorBox(void) {
     }
 }
 
-extern FrameBuffer* D_800DCCD0[];
+extern FrameBuffer* gFrameBuffers[];
 
 void func_8007F9E0(void) {
     u8 i;
@@ -248,7 +248,7 @@ void func_8007F9E0(void) {
     LeoDD_ForceWritebackDCacheAll();
 
     for (i = 0; i < 3; i++) {
-        temp_v1 = (u64*) D_800DCCD0[i];
+        temp_v1 = (u64*) gFrameBuffers[i];
         var_v0 = &temp_v1[19199];
 
         // FAKE

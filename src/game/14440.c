@@ -169,7 +169,7 @@ Gfx* func_8007AB88(Gfx* gfx) {
 }
 
 extern s16 D_800CCFE4;
-extern FrameBuffer* D_800DCCD0[];
+extern FrameBuffer* gFrameBuffers[];
 extern s32 D_800DCCFC;
 extern s32 D_800DCD04;
 
@@ -178,9 +178,11 @@ Gfx* func_8007ABA4(Gfx* gfx) {
     gDPPipeSync(gfx++);
 
     if (D_800CCFE4 == 2) {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCCFC]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCCFC]));
     } else {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
     }
     return gfx;
 }
@@ -868,13 +870,37 @@ void func_8007E0EC(void) {
     func_800BB078();
 }
 
-const s8 kMachineSelectCharacterList[] = { CAPTAIN_FALCON, DR_STEWART,   PICO,           SAMURAI_GOROH,   JODY_SUMMER,
-                                           MIGHTY_GAZELLE, BABA,         OCTOMAN,        DR_CLASH,        MR_EAD,
-                                           BIO_REX,        BILLY,        SILVER_NEELSEN, GOMAR_AND_SHIOH, JOHN_TANAKA,
-                                           MRS_ARROW,      BLOOD_FALCON, JACK_LEVIN,     JAMES_MCCLOUD,   ZODA,
-                                           MICHAEL_CHAIN,  SUPER_ARROW,  KATE_ALEN,      ROGER_BUSTER,    LEON,
-                                           DRAQ,           BEASTMAN,     ANTONIO_GUSTER, BLACK_SHADOW,    THE_SKULL,
-                                           MAX_CHARACTER };
+const s8 kMachineSelectCharacterList[] = { CAPTAIN_FALCON,
+                                           DR_STEWART,
+                                           PICO,
+                                           SAMURAI_GOROH,
+                                           JODY_SUMMER,
+                                           MIGHTY_GAZELLE,
+                                           BABA,
+                                           OCTOMAN,
+                                           DR_CLASH,
+                                           MR_EAD,
+                                           BIO_REX,
+                                           BILLY,
+                                           SILVER_NEELSEN,
+                                           GOMAR_AND_SHIOH,
+                                           JOHN_TANAKA,
+                                           MRS_ARROW,
+                                           BLOOD_FALCON,
+                                           JACK_LEVIN,
+                                           JAMES_MCCLOUD,
+                                           ZODA,
+                                           MICHAEL_CHAIN,
+                                           SUPER_ARROW,
+                                           KATE_ALEN,
+                                           ROGER_BUSTER,
+                                           LEON,
+                                           DRAQ,
+                                           BEASTMAN,
+                                           ANTONIO_GUSTER,
+                                           BLACK_SHADOW,
+                                           THE_SKULL,
+                                           30 };
 
 s8 func_8007E10C(s32 i) {
     return kMachineSelectCharacterList[i];
@@ -905,7 +931,7 @@ void func_8007E1C0(void) {
             sp38 = true;
             break;
         } else {
-            if (gCourseRecordInfos[i].timeRecord[0] >= sp40.raceTime) {
+            if (gCourseInfos[i].timeRecord[0] >= sp40.raceTime) {
                 sp38 = true;
                 break;
             }

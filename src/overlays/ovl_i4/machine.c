@@ -2,6 +2,7 @@
 #include "fzx_game.h"
 #include "fzx_racer.h"
 #include "fzx_object.h"
+#include "fzx_course.h"
 #include "src/overlays/ovl_i2/ovl_i2.h"
 #include "ovl_i4.h"
 #include "assets/segment_2B9EA0.h"
@@ -905,9 +906,7 @@ void MachineSelect_Init(void) {
     s32 i;
 
     D_800CCFE8 = 3;
-    D_800CE750 = 0.1f;
-    D_800CE74C = D_800CE750;
-    D_800CE748 = D_800CE74C;
+    D_800CE748 = D_800CE74C = D_800CE750 = 0.1f;
     func_80085610();
     func_8008969C();
     gMachineSelectState = MACHINE_SELECT_ACTIVE;
@@ -927,7 +926,7 @@ void MachineSelect_Init(void) {
     Object_Init(OBJECT_MACHINE_SELECT_BACKGROUND, 0, 0, 4);
     Object_Init(OBJECT_MACHINE_SELECT_HEADER, 80, 13, 4);
     Object_Init(OBJECT_MACHINE_SELECT_CURSOR, 60, 10, 8);
-    Object_Init(OBJECT_MACHINE_SELECT_CAR, 0, 0, 10);
+    Object_Init(OBJECT_MACHINE_SELECT_MACHINE, 0, 0, 10);
 
     switch (gNumPlayers) {
         case 4:
@@ -984,7 +983,7 @@ void MachineSettings_Init(void) {
         }
     }
 
-    if ((gNumPlayers == 1) && (gCourseIndex < 24)) {
+    if ((gNumPlayers == 1) && (gCourseIndex < COURSE_EDIT_1)) {
         Save_UpdateCharacterSave(gCourseIndex);
         gPlayerEngine[0] = gCharacterLastEngine[gRacers[0].character];
     }
@@ -997,7 +996,7 @@ void MachineSettings_Init(void) {
     if (gNumPlayers == 2) {
         Object_Init(OBJECT_58, 160, 97, 13);
     }
-    Object_Init(OBJECT_MACHINE_SETTINGS_CAR, 0, 0, 12);
+    Object_Init(OBJECT_MACHINE_SETTINGS_MACHINE, 0, 0, 12);
     Object_Init(OBJECT_MACHINE_SETTINGS_NAME_CARD, 20, 185, 12);
     Object_Init(OBJECT_MACHINE_SETTINGS_SLIDER, 208, 85, 11);
     Object_Init(OBJECT_MACHINE_SETTINGS_OK, 0, 0, 14);
@@ -1057,9 +1056,9 @@ s32 MachineSelect_Update(void) {
         if (gInputButtonPressed & (BTN_L | BTN_R | BTN_CLEFT | BTN_CDOWN)) {
             if ((gSharedController.buttonCurrent & BTN_L) && (gSharedController.buttonCurrent & BTN_R) &&
                 (gSharedController.buttonCurrent & BTN_CLEFT) && (gSharedController.buttonCurrent & BTN_CDOWN) &&
-                (CAR_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_CAR)) == 0) &&
+                (MACHINE_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_MACHINE)) == 0) &&
                 (gMachineSelectState != MACHINE_SELECT_CONTINUE)) {
-                CAR_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_CAR)) = 1;
+                MACHINE_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_MACHINE)) = 1;
                 D_i4_8011D778 = 1.0f;
                 D_i4_8011D77C = 0.0f;
                 func_800BA8D8(0x17);
@@ -1122,18 +1121,18 @@ s32 MachineSelect_Update(void) {
                             for (j = 0; j < gNumPlayers; j++) {
                                 for (k = 0; k < 4; k++) {
                                     if (i != k && gRacers[k].character == gRacers[i].character && D_800CD3AC[k] == 0 &&
-                                        j == gRacers[k].unk_2CC) {
+                                        j == gRacers[k].machineSkinIndex) {
                                         break;
                                     }
                                 }
 
                                 if (k >= 4) {
-                                    gRacers[i].unk_2CC = j;
+                                    gRacers[i].machineSkinIndex = j;
                                     break;
                                 }
                             }
                             if (j >= 4) {
-                                gRacers[i].unk_2CC = 0;
+                                gRacers[i].machineSkinIndex = 0;
                             }
                         }
                         func_800BA710(i, 0x21);
@@ -1194,17 +1193,17 @@ s32 MachineSettings_Update(void) {
             case MACHINE_SETTINGS_ACTIVE:
                 if (gPlayerSelectionLock[i] == SELECTION_FREE) {
 
-                    k = gRacers[i].unk_2CC;
+                    k = gRacers[i].machineSkinIndex;
 
                     if (gInputButtonPressed & BTN_Z) {
-                        gRacers[i].unk_2CC--;
-                        gRacers[i].unk_2CC &= 3;
+                        gRacers[i].machineSkinIndex--;
+                        gRacers[i].machineSkinIndex &= 3;
                     }
                     if (gInputButtonPressed & BTN_R) {
-                        gRacers[i].unk_2CC++;
-                        gRacers[i].unk_2CC &= 3;
+                        gRacers[i].machineSkinIndex++;
+                        gRacers[i].machineSkinIndex &= 3;
                     }
-                    if (k != gRacers[i].unk_2CC) {
+                    if (k != gRacers[i].machineSkinIndex) {
                         func_800BA710(i, 0x1E);
                     }
                     stickX = temp_s1->stickX;
@@ -1298,12 +1297,12 @@ s32 MachineSettings_Update(void) {
     return gGameMode;
 }
 
-extern unk_800DCE48 D_800DCE48;
+extern s32 gQueuedGameMode;
 
 Gfx* MachineSelect_Draw(Gfx* gfx) {
     gfx = Object_UpdateAndDrawAll(gfx);
     func_800790D4();
-    if (gGameMode != D_800DCE48.gameMode) {
+    if (gGameMode != gQueuedGameMode) {
         func_80089724();
     }
     return gfx;
@@ -1312,7 +1311,7 @@ Gfx* MachineSelect_Draw(Gfx* gfx) {
 Gfx* MachineSettings_Draw(Gfx* gfx) {
     gfx = Object_UpdateAndDrawAll(gfx);
     func_800790D4();
-    if (gGameMode != D_800DCE48.gameMode) {
+    if (gGameMode != gQueuedGameMode) {
         func_80089724();
     }
     return gfx;
@@ -1365,13 +1364,13 @@ void MachineSelect_CursorInit(void) {
     func_80077D50(sMachineSelectCursorCompTexInfo, 0);
 }
 
-void MachineSelect_CarInit(Object* carObj) {
+void MachineSelect_MachineInit(Object* machineObj) {
     Vp* vp;
     s32 i;
     s32 j;
 
     vp = (Vp*) func_800768F4(0, 30 * sizeof(Vp));
-    CAR_VIEWPORT(carObj) = vp;
+    MACHINE_VIEWPORT(machineObj) = vp;
 
     for (i = 0; i < 30; i++) {
         vp[i].vp.vscale[0] = 640;
@@ -1398,14 +1397,14 @@ void MachineSelect_CarInit(Object* carObj) {
     }
 }
 
-void MachineSettings_CarInit(Object* carObj) {
+void MachineSettings_MachineInit(Object* machineObj) {
     Vp* vp;
     s32 i;
     s32 j;
     s32 k;
 
     vp = (Vp*) func_800768F4(0, 2 * 4 * sizeof(Vp));
-    CAR_VIEWPORT(carObj) = vp;
+    MACHINE_VIEWPORT(machineObj) = vp;
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 4; j++) {
@@ -1587,7 +1586,7 @@ Gfx* MachineSettings_PortraitDraw(Gfx* gfx, Object* portraitObj) {
     return gfx;
 }
 
-extern unk_800CF1B0 D_800F80C8[];
+extern Machine gMachines[];
 
 Gfx* MachineSelect_StatsDraw(Gfx* gfx, Object* statsObj) {
     s32 temp_fp;
@@ -1599,7 +1598,7 @@ Gfx* MachineSelect_StatsDraw(Gfx* gfx, Object* statsObj) {
 
     playerIndex = statsObj->cmdId - OBJECT_MACHINE_SELECT_STATS_0;
 
-    temp_a3 = &D_800F80C8[gRacers[playerIndex].character].machineStats;
+    temp_a3 = &gMachines[gRacers[playerIndex].character].machineStats;
     temp_fp = D_i4_8011D694[playerIndex * 2 + 0];
     temp_t0 = D_i4_8011D694[playerIndex * 2 + 1];
     if (playerIndex < 2) {
@@ -1663,16 +1662,16 @@ Gfx* MachineSelect_CursorDraw(Gfx* gfx, Object* cursorObj) {
     return gfx;
 }
 
-extern unk_struct_1DC D_800E5220[];
+extern Player gPlayers[];
 extern GfxPool D_1000000;
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 
-Gfx* MachineSelect_CarDraw(Gfx* gfx, Object* carObj) {
+Gfx* MachineSelect_MachineDraw(Gfx* gfx, Object* machineObj) {
     bool var_t0;
     s32 i;
     s32 j;
 
-    gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+    gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
 
     gSPMatrix(gfx++, D_1000000.unk_20208, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
@@ -1682,8 +1681,8 @@ Gfx* MachineSelect_CarDraw(Gfx* gfx, Object* carObj) {
     gSPLight(gfx++, &D_1000000.unk_21A88[0].a, 2);
     gSPNumLights(gfx++, NUMLIGHTS_1);
 
-    Lights_SetSource(&D_800DCCF0->unk_21A88[0], 0, 0, 0, 255, 255, 255, 100, 50, 69);
-    Lights_SetSource(&D_800DCCF0->unk_21A88[1], 0, 0, 0, 100, 70, 70, 100, 50, 69);
+    Lights_SetSource(&gGfxPool->unk_21A88[0], 0, 0, 0, 255, 255, 255, 100, 50, 69);
+    Lights_SetSource(&gGfxPool->unk_21A88[1], 0, 0, 0, 100, 70, 70, 100, 50, 69);
 
     for (i = 0; i < 30; i++) {
         gDPPipeSync(gfx++);
@@ -1696,7 +1695,7 @@ Gfx* MachineSelect_CarDraw(Gfx* gfx, Object* carObj) {
 
         gSPLight(gfx++, &D_1000000.unk_21A88[j].l[0], 1);
         gSPLight(gfx++, &D_1000000.unk_21A88[j].a, 2);
-        gSPViewport(gfx++, CAR_VIEWPORT(carObj) + i);
+        gSPViewport(gfx++, MACHINE_VIEWPORT(machineObj) + i);
 
         for (j = 0; j < gNumPlayers; j++) {
             if (i == sMachineSelectIndex[j]) {
@@ -1754,10 +1753,10 @@ Gfx* MachineSettings_NameDraw(Gfx* gfx) {
 extern u16 D_9000008[];
 extern Gfx D_90186C8[];
 
-Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* carObj) {
+Gfx* MachineSettings_MachineDraw(Gfx* gfx, Object* machineObj) {
     s32 i;
 
-    gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+    gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
 
     gSPMatrix(gfx++, D_1000000.unk_20208, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
@@ -1775,7 +1774,7 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* carObj) {
             continue;
         }
 
-        gSPViewport(gfx++, CAR_VIEWPORT(carObj) + i + 4);
+        gSPViewport(gfx++, MACHINE_VIEWPORT(machineObj) + i + 4);
         gSPMatrix(gfx++, &D_1000000.unk_20A88[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gfx = func_8009CD60(gfx, gRacers[i].character);
     }
@@ -1784,27 +1783,27 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* carObj) {
     gDPSetBlendColor(gfx++, 0, 0, 0, 255);
 
     for (i = 0; i < gNumPlayers; i++) {
-        gSPViewport(gfx++, CAR_VIEWPORT(carObj) + i);
+        gSPViewport(gfx++, MACHINE_VIEWPORT(machineObj) + i);
         gSPMatrix(gfx++, &D_1000000.unk_21208[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gfx = func_8009CE70(gfx, gRacers[i].character);
     }
 
     gSPDisplayList(gfx++, D_303A5F8);
 
-    Lights_SetSource(D_800DCCF0->unk_21A88, 0, 0, 0, 255, 255, 255, 50, 25, 34);
+    Lights_SetSource(gGfxPool->unk_21A88, 0, 0, 0, 255, 255, 255, 50, 25, 34);
     gSPLight(gfx++, &D_1000000.unk_21A88[0].l[0], 1);
     gSPLight(gfx++, &D_1000000.unk_21A88[0].a, 2);
 
     for (i = 0; i < gNumPlayers; i++) {
-        gSPViewport(gfx++, CAR_VIEWPORT(carObj) + i);
+        gSPViewport(gfx++, MACHINE_VIEWPORT(machineObj) + i);
         gSPMatrix(gfx++, &D_1000000.unk_20308[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gfx = func_8009CCBC(gfx, gRacers[i].character, gRacers[i].unk_2CC);
+        gfx = func_8009CCBC(gfx, gRacers[i].character, gRacers[i].machineSkinIndex);
     }
 
     gSPDisplayList(gfx++, D_90186C8);
 
-    Light_SetLookAtSource(&D_800DCCF0->unk_21B28, &D_800E5220[0].unk_15C);
-    gSPLookAt(gfx++, &D_800DCCF0->unk_21B28);
+    Light_SetLookAtSource(&gGfxPool->unk_21B28, &gPlayers[0].unk_15C);
+    gSPLookAt(gfx++, &gGfxPool->unk_21B28);
 
     gSPTexture(gfx++, D_i4_8011D4E0, D_i4_8011D4E0, 0, G_TX_RENDERTILE, G_ON);
 
@@ -1814,7 +1813,7 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* carObj) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, D_i4_8011D4DC);
 
     for (i = 0; i < gNumPlayers; i++) {
-        gSPViewport(gfx++, CAR_VIEWPORT(carObj) + i);
+        gSPViewport(gfx++, MACHINE_VIEWPORT(machineObj) + i);
         gSPMatrix(gfx++, &D_1000000.unk_20308[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gfx = func_8009CEA0(gfx, gRacers[i].character);
     }
@@ -1824,16 +1823,16 @@ Gfx* MachineSettings_CarDraw(Gfx* gfx, Object* carObj) {
 
 Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
     s32 i;
-    s16 temp_s4;
+    s16 weight;
     s32 temp_s0;
     s32 temp_s1;
 
     if (gNumPlayers == 1) {
-        temp_s4 = D_800F80C8[gRacers[0].character].unk_14;
+        weight = gMachines[gRacers[0].character].weight;
         gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, OBJECT_LEFT(engineWeightObj),
                             OBJECT_TOP(engineWeightObj), 0, 0, 0, 1.0f, 1.0f);
         gfx = Font_DrawMachineWeight(gfx, OBJECT_LEFT(engineWeightObj) + 0x66, OBJECT_TOP(engineWeightObj) + 0x17,
-                                     temp_s4);
+                                     weight);
 
         switch (gMachineSettingsState) {
             case MACHINE_SETTINGS_ACTIVE:
@@ -1853,12 +1852,12 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
 #endif
     } else {
         for (i = 0; i < gNumPlayers; i++) {
-            temp_s4 = D_800F80C8[gRacers[i].character].unk_14;
+            weight = gMachines[gRacers[i].character].weight;
             temp_s0 = D_i4_8011D6C4[i * 2 + 0];
             temp_s1 = D_i4_8011D6C4[i * 2 + 1];
             gfx = func_80078EA0(gfx, sMachineInfoGraphSmallCompTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA, 0, 0, 0, 1.0f,
                                 1.0f);
-            gfx = Font_DrawMachineWeight(gfx, temp_s0 + 0x6E, temp_s1 + 0x1C, temp_s4);
+            gfx = Font_DrawMachineWeight(gfx, temp_s0 + 0x6E, temp_s1 + 0x1C, weight);
             if (gPlayerSelectionLock[i] == SELECTION_FREE) {
                 gfx = func_8007DB28(gfx, 0);
             } else {
@@ -1884,7 +1883,7 @@ Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* statsObj) {
                             1.0f, 1.0f);
 
         for (i = 0; i < 3; i++) {
-            temp = D_800F80C8[gRacers[0].character].machineStats;
+            temp = gMachines[gRacers[0].character].machineStats;
             gfx = Font_DrawMachineStatValue(gfx, OBJECT_LEFT(statsObj) + 0x69, OBJECT_TOP(statsObj) + i * 23 + 3,
                                             temp[i]);
         }
@@ -1897,7 +1896,7 @@ Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* statsObj) {
                                 0, 1.0f, 1.0f);
 
             for (j = 0; j < 3; j++) {
-                temp = D_800F80C8[gRacers[i].character].machineStats;
+                temp = gMachines[gRacers[i].character].machineStats;
                 gfx = Font_DrawString(gfx, leftOffset + 0x6B, topOffset + 0x43 + j * 14, sMachineStatValues[temp[j]], 0,
                                       FONT_SET_2, 0);
             }
@@ -1919,7 +1918,7 @@ Gfx* func_i4_801193B8(Gfx* gfx, Object* arg1) {
         var_s1 = D_i4_8011D6C4[i * 2 + 1];
 
         for (j = 0; j < 3; j++) {
-            temp = D_800F80C8[gRacers[i].character].machineStats;
+            temp = gMachines[gRacers[i].character].machineStats;
             temp2 = sMachineStatValues[temp[j]];
             gfx = Font_DrawString(gfx, var_s3 + 0x6B, var_s1 + 0x43 + j * 14, temp2, 0, FONT_SET_2, 0);
         }
@@ -1992,6 +1991,7 @@ Gfx* MachineSettings_SplitscreenDraw(Gfx* gfx) {
 extern s32 gDifficulty;
 extern s8 gUnlockableLevel;
 extern s8 gSettingEverythingUnlocked;
+extern s32 gAntiPiracyAddedDifficulty;
 
 Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* difficultyCupsObj) {
     s32 i;
@@ -2028,7 +2028,7 @@ Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* difficultyCupsObj) {
     if (difficulty != 0) {
         difficulty--;
     } else {
-        difficulty = gDifficulty - D_800DCE48.unk_10;
+        difficulty = gDifficulty - gAntiPiracyAddedDifficulty;
     }
 
     if ((gUnlockableLevel >= 2) || (gSettingEverythingUnlocked != 0)) {
@@ -2068,7 +2068,7 @@ Gfx* MachineSelect_NameDraw(Gfx* gfx, Object* nameObj) {
 
     gfx = Font_DrawString(gfx, 160 - (Font_GetStringWidth(machineName, FONT_SET_2, 0) / 2), 218, machineName, 0,
                           FONT_SET_2, 0);
-    gfx = Font_DrawMachineWeightSmall(gfx, 252, 221, D_800F80C8[func_8007E10C(sMachineSelectIndex[0])].unk_14);
+    gfx = Font_DrawMachineWeightSmall(gfx, 252, 221, gMachines[func_8007E10C(sMachineSelectIndex[0])].weight);
     return Font_DrawString(gfx, 252, 221, "$", 0, FONT_SET_2, 0);
 }
 
@@ -2119,12 +2119,12 @@ void MachineSelect_CursorNumUpdate(Object* cursorNumObj) {
 void MachineSelect_CursorUpdate(Object* cursorObj) {
 }
 
-void MachineSelect_CarUpdate(Object* carObj) {
+void MachineSelect_MachineUpdate(Object* machineObj) {
     Racer* var_s0;
     f32 var_fv0;
     s32 i;
 
-    if (CAR_MINI_STATE(carObj) == 1) {
+    if (MACHINE_MINI_STATE(machineObj) == 1) {
         if (D_i4_8011D778 >= 0) {
             D_i4_8011D77C -= 0.05f;
         } else {
@@ -2139,7 +2139,7 @@ void MachineSelect_CarUpdate(Object* carObj) {
                 var_fv0 = D_i4_8011D77C;
             }
             if (var_fv0 < 0.1f) {
-                CAR_MINI_STATE(carObj) = 2;
+                MACHINE_MINI_STATE(machineObj) = 2;
                 D_800CE750 = 0.105f;
                 D_800CE74C = 0.125f;
                 D_800CE748 = 0.075f;
@@ -2164,7 +2164,7 @@ void MachineSelect_CarUpdate(Object* carObj) {
         var_s0->unk_C0.x.y += var_fv0 * var_s0->unk_C0.z.y;
         var_s0->unk_C0.x.z += var_fv0 * var_s0->unk_C0.z.z;
         func_8006AA38(&var_s0->unk_C0);
-        func_8006BC84(&D_800DCCF0->unk_20308[i], NULL, D_800CE748, D_800CE74C, D_800CE750, var_s0->unk_C0.x.x,
+        func_8006BC84(&gGfxPool->unk_20308[i], NULL, D_800CE748, D_800CE74C, D_800CE750, var_s0->unk_C0.x.x,
                       var_s0->unk_C0.x.y, var_s0->unk_C0.x.z, var_s0->unk_C0.y.x, var_s0->unk_C0.y.y,
                       var_s0->unk_C0.y.z, var_s0->unk_0C.unk_34.x, var_s0->unk_0C.unk_34.y, var_s0->unk_0C.unk_34.z);
         var_s0--;
@@ -2172,7 +2172,7 @@ void MachineSelect_CarUpdate(Object* carObj) {
     }
 }
 
-void MachineSettings_CarUpdate(Object* carObj) {
+void MachineSettings_MachineUpdate(Object* machineObj) {
     Racer* var_s0;
     f32 var_fs0;
     f32 var_fs1;
@@ -2182,7 +2182,7 @@ void MachineSettings_CarUpdate(Object* carObj) {
     s32 var_a1;
     Vp* var_v0;
 
-    var_v0 = CAR_VIEWPORT(carObj);
+    var_v0 = MACHINE_VIEWPORT(machineObj);
     for (var_a1 = 4; var_a1 < 8; var_a1++) {
         switch (gNumPlayers) {
             case 1:
@@ -2248,19 +2248,19 @@ void MachineSettings_CarUpdate(Object* carObj) {
         var_s0->unk_C0.x.x += var_fs1 * var_s0->unk_C0.y.x;
         var_s0->unk_C0.x.y += var_fs1 * var_s0->unk_C0.y.y;
         var_s0->unk_C0.x.z += var_fs1 * var_s0->unk_C0.y.z;
-        var_s0->unk_C0.y.x = var_s0->unk_C0.y.x + (var_fs0 * var_s0->unk_C0.z.x);
-        var_s0->unk_C0.y.y = var_s0->unk_C0.y.y + (var_fs0 * var_s0->unk_C0.z.y);
-        var_s0->unk_C0.y.z = var_s0->unk_C0.y.z + (var_fs0 * var_s0->unk_C0.z.z);
+        var_s0->unk_C0.y.x += var_fs0 * var_s0->unk_C0.z.x;
+        var_s0->unk_C0.y.y += var_fs0 * var_s0->unk_C0.z.y;
+        var_s0->unk_C0.y.z += var_fs0 * var_s0->unk_C0.z.z;
         func_8006AA38(&var_s0->unk_C0);
-        func_8006BC84(&D_800DCCF0->unk_20308[i], NULL, var_fs2 * D_800CE748, var_fs2 * D_800CE74C, var_fs2 * D_800CE750,
+        func_8006BC84(&gGfxPool->unk_20308[i], NULL, var_fs2 * D_800CE748, var_fs2 * D_800CE74C, var_fs2 * D_800CE750,
                       var_s0->unk_C0.x.x, var_s0->unk_C0.x.y, var_s0->unk_C0.x.z, var_s0->unk_C0.y.x,
                       var_s0->unk_C0.y.y, var_s0->unk_C0.y.z, var_s0->unk_0C.unk_34.x, var_s0->unk_0C.unk_34.y,
                       var_s0->unk_0C.unk_34.z);
-        func_8006BC84(&D_800DCCF0->unk_21208[i], NULL, (var_fs2 * 1.05f) * D_800CE748, (var_fs2 * 1.05f) * D_800CE74C,
+        func_8006BC84(&gGfxPool->unk_21208[i], NULL, (var_fs2 * 1.05f) * D_800CE748, (var_fs2 * 1.05f) * D_800CE74C,
                       (var_fs2 * 1.05f) * D_800CE750, var_s0->unk_C0.x.x, var_s0->unk_C0.x.y, var_s0->unk_C0.x.z,
                       var_s0->unk_C0.y.x, var_s0->unk_C0.y.y, var_s0->unk_C0.y.z, var_s0->unk_0C.unk_34.x,
                       var_s0->unk_0C.unk_34.y, var_s0->unk_0C.unk_34.z);
-        func_8006BC84(&D_800DCCF0->unk_20A88[i], NULL, var_fs2 * D_800CE748, var_fs2 * D_800CE74C, var_fs2 * D_800CE750,
+        func_8006BC84(&gGfxPool->unk_20A88[i], NULL, var_fs2 * D_800CE748, var_fs2 * D_800CE74C, var_fs2 * D_800CE750,
                       var_s0->unk_C0.x.x, var_s0->unk_C0.x.y, var_s0->unk_C0.x.z, var_s0->unk_C0.y.x,
                       var_s0->unk_C0.y.y, var_s0->unk_C0.y.z, var_s0->unk_0C.unk_34.x, var_s0->unk_0C.unk_34.y,
                       var_s0->unk_0C.unk_34.z);
@@ -2304,8 +2304,8 @@ void MachineSettings_NameCardUpdate(Object* nameCardObj) {
 }
 
 void func_i4_8011A7B8(void) {
-    if ((D_800DCE48.gameMode == GAMEMODE_LX_MACHINE_SETTINGS) &&
-        (CAR_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_CAR)) != 0)) {
+    if ((gQueuedGameMode == GAMEMODE_LX_MACHINE_SETTINGS) &&
+        (MACHINE_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_MACHINE)) != 0)) {
         D_800CE748 = 0.075f;
         D_800CE74C = 0.125f;
         D_800CE750 = 0.105f;

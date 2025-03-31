@@ -43,7 +43,7 @@ s32 func_80074BB4(Vec3f* arg0, f32 arg1) {
     return 0;
 }
 
-extern CourseRecordInfo* gCurrentCourseRecordInfo;
+extern CourseInfo* gCurrentCourseInfo;
 
 Mtx3F* func_80074C60(Mtx3F* arg0) {
     f32 sp44;
@@ -51,7 +51,7 @@ Mtx3F* func_80074C60(Mtx3F* arg0) {
     CourseSegment* temp_a0;
     Mtx3F sp18;
 
-    temp_a0 = gCurrentCourseRecordInfo->courseSegments;
+    temp_a0 = gCurrentCourseInfo->courseSegments;
     sp44 = func_8009E108(temp_a0, 0.0f, &sp40);
     func_8009E85C(temp_a0, 0.0f, &sp18, sp44);
     *arg0 = sp18;
@@ -60,7 +60,7 @@ Mtx3F* func_80074C60(Mtx3F* arg0) {
 
 extern CourseData gCourseData;
 
-void func_80074CE4(CourseRecordInfo* arg0) {
+void func_80074CE4(CourseInfo* arg0) {
     s32 pad[4];
     f32 spF4;
     f32 spF0;
@@ -74,7 +74,7 @@ void func_80074CE4(CourseRecordInfo* arg0) {
     CourseSegment* var_s0;
 
     var_s0 = arg0->courseSegments;
-    for (i = 0; i < arg0->unk_08; i++) {
+    for (i = 0; i < arg0->segmentCount; i++) {
         func_8009E538(var_s0, 0.0f, &spD4);
         func_80074BB4(&spD4, 1);
         if ((SQ(spD4.x) + SQ(spD4.z)) != 0.0f) {

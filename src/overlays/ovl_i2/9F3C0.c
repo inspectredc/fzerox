@@ -2,7 +2,7 @@
 #include "fzx_course.h"
 #include "assets/segment_17B960.h"
 
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 
 void func_i2_80103A70(void) {
     func_i3_8012F324();
@@ -11,7 +11,7 @@ void func_i2_80103A70(void) {
     func_80085610();
     func_i2_801044F0();
     func_8006D414();
-    D_800DCE5C = 0;
+    gGamePaused = false;
     func_i3_8011B520();
     func_i3_ResetLivesChangeCounter();
     func_i3_InitRacePortraits();
@@ -27,7 +27,7 @@ extern CourseData gCourseData;
 
 void Race_Init(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
-    D_800DCE5C = 0;
+    gGamePaused = false;
     func_800A4EAC();
     func_i3_80116C4C();
     func_8008C7C8();
@@ -40,7 +40,7 @@ void Race_Init(void) {
     func_8006EC7C();
     func_80071260(0);
     func_i3_8012F324();
-    func_i3_801356A0();
+    func_i3_InitCourseMinimap();
     func_i3_8011B520();
     func_i3_InitRacePortraits();
 }
@@ -65,9 +65,9 @@ extern Vtx* D_800E5ECC;
 extern Vtx* D_800E5ED0;
 extern Vtx* D_800F8520;
 extern GfxPool D_1000000;
-extern GfxPool* D_800DCCF0;
-extern unk_struct_1DC D_800E5220[];
-extern FrameBuffer* D_800DCCD0[];
+extern GfxPool* gGfxPool;
+extern Player gPlayers[];
+extern FrameBuffer* gFrameBuffers[];
 extern s16 D_800CCFE4;
 extern s32 gNumPlayers;
 
@@ -86,10 +86,10 @@ Gfx* Race_Draw(Gfx* gfx) {
 
         if (D_800CCFE4 == 2) {
             gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
-                             OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCCFC]));
+                             OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCCFC]));
         } else {
             gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
-                             OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+                             OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
         }
 
         gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
@@ -103,13 +103,15 @@ Gfx* Race_Draw(Gfx* gfx) {
     gDPPipeSync(gfx++);
 
     if (D_800CCFE4 == 2) {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCCFC]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCCFC]));
     } else {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
     }
-    D_800F8520 = D_800DCCF0->unk_10008;
-    D_800E5ECC = D_800DCCF0->unk_21B48;
-    D_800E5ED0 = &D_800DCCF0->unk_21B48[0x7FF];
+    D_800F8520 = gGfxPool->unk_10008;
+    D_800E5ECC = gGfxPool->unk_21B48;
+    D_800E5ED0 = &gGfxPool->unk_21B48[0x7FF];
     switch (gNumPlayers) {
         case 1:
             gfx = func_i3_801381DC(gfx, 0, 0);
@@ -157,57 +159,59 @@ Gfx* Race_Draw(Gfx* gfx) {
     gDPPipeSync(gfx++);
 
     if (D_800CCFE4 == 2) {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCCFC]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCCFC]));
     } else {
-        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+        gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                         OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
     }
 
     switch (gNumPlayers) {
         case 1:
-            gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 0, 0);
             gfx = func_80096CE8(gfx, 0);
             gfx = func_i3_8012CF34(gfx, 0);
             break;
         case 2:
-            gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 1, 0);
             gfx = func_80096CE8(gfx, 0);
-            gSPPerspNormalize(gfx++, D_800E5220[1].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 2, 1);
             gfx = func_80096CE8(gfx, 1);
             break;
         case 3:
-            gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 5, 0);
             gfx = func_80096CE8(gfx, 0);
-            gSPPerspNormalize(gfx++, D_800E5220[1].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 7, 1);
             gfx = func_80096CE8(gfx, 1);
-            gSPPerspNormalize(gfx++, D_800E5220[2].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[2].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[2], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 6, 2);
             gfx = func_80096CE8(gfx, 2);
             break;
         case 4:
-            gSPPerspNormalize(gfx++, D_800E5220[0].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 5, 0);
             gfx = func_80096CE8(gfx, 0);
-            gSPPerspNormalize(gfx++, D_800E5220[1].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 7, 1);
             gfx = func_80096CE8(gfx, 1);
-            gSPPerspNormalize(gfx++, D_800E5220[2].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[2].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[2], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 6, 2);
             gfx = func_80096CE8(gfx, 2);
-            gSPPerspNormalize(gfx++, D_800E5220[3].unk_118);
+            gSPPerspNormalize(gfx++, gPlayers[3].unk_118);
             gSPMatrix(gfx++, &D_1000000.unk_20208[3], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gfx = func_800833AC(gfx, 8, 3);
             gfx = func_80096CE8(gfx, 3);

@@ -1,8 +1,8 @@
 #include "global.h"
 
 s32 gSettingVsSlot = 0;
-s32 D_80106F44 = 0;
-s16 D_80106F48 = 0;
+s32 gRaceTimeIntervalToggle = 0;
+s16 gPlayer1OverallPosition = 0;
 
 unk_80111870 D_80111870[32];
 s32 D_80111CF0;
@@ -29,9 +29,9 @@ s32 D_80115D44;
 // TODO: move to new file
 UNUSED u8 D_80115D48[8];
 s16 D_80115D50[30];
-s16 D_80115D90[30];
+s16 gRacerPositionsById[30];
 s32 D_80115DD0[4];
-s16 D_80115DE0;
+s16 gRacersRemaining;
 
 void func_i2_801044F0(void) {
     s32 i;
@@ -79,7 +79,7 @@ void func_i2_801044F0(void) {
     }
 }
 
-extern s8 D_800DCE5C;
+extern s8 gGamePaused;
 
 void func_i2_8010466C(void) {
     u32 var_s2;
@@ -94,7 +94,7 @@ void func_i2_8010466C(void) {
     unk_80112FB8* var3;
     unk_80113140* var4;
 
-    if (D_800DCE5C != 0) {
+    if (gGamePaused) {
         return;
     }
 

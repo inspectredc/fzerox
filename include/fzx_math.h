@@ -60,17 +60,8 @@ typedef struct Vec3fFlip {
 
 typedef float Mtx3F_t[3][3];
 typedef union {
-    Mtx3F_t mf;
     struct {
         Vec3f x,y,z;
-    };
-    struct {
-        Vec3f v[3];
-    };
-    struct {
-        float xx, yx, zx,
-              xy, yy, zy,
-              xz, yz, zz;
     };
 } Mtx3F; // size = 0x24
 

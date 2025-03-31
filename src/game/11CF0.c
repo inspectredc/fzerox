@@ -619,11 +619,11 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
         case OBJECT_MACHINE_SELECT_CURSOR:
             MachineSelect_CursorInit();
             break;
-        case OBJECT_MACHINE_SELECT_CAR:
-            MachineSelect_CarInit(object);
+        case OBJECT_MACHINE_SELECT_MACHINE:
+            MachineSelect_MachineInit(object);
             break;
-        case OBJECT_MACHINE_SETTINGS_CAR:
-            MachineSettings_CarInit(object);
+        case OBJECT_MACHINE_SETTINGS_MACHINE:
+            MachineSettings_MachineInit(object);
             break;
         case OBJECT_MACHINE_SETTINGS_ENGINE_WEIGHT:
             MachineSettings_EngineWeightInit();
@@ -794,8 +794,8 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
         case OBJECT_MACHINE_SELECT_CURSOR:
             gfx = MachineSelect_CursorDraw(gfx, object);
             break;
-        case OBJECT_MACHINE_SELECT_CAR:
-            gfx = MachineSelect_CarDraw(gfx, object);
+        case OBJECT_MACHINE_SELECT_MACHINE:
+            gfx = MachineSelect_MachineDraw(gfx, object);
             break;
         case OBJECT_MACHINE_SELECT_OK:
             gfx = MachineSelect_OkDraw(gfx, object);
@@ -806,8 +806,8 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
         case OBJECT_MACHINE_SELECT_STATS_3:
             gfx = MachineSelect_StatsDraw(gfx, object);
             break;
-        case OBJECT_MACHINE_SETTINGS_CAR:
-            gfx = MachineSettings_CarDraw(gfx, object);
+        case OBJECT_MACHINE_SETTINGS_MACHINE:
+            gfx = MachineSettings_MachineDraw(gfx, object);
             break;
         case OBJECT_MACHINE_SETTINGS_NAME:
             gfx = MachineSettings_NameDraw(gfx);
@@ -954,11 +954,11 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
             case OBJECT_MACHINE_SELECT_CURSOR:
                 MachineSelect_CursorUpdate(&gObjects[i]);
                 break;
-            case OBJECT_MACHINE_SELECT_CAR:
-                MachineSelect_CarUpdate(&gObjects[i]);
+            case OBJECT_MACHINE_SELECT_MACHINE:
+                MachineSelect_MachineUpdate(&gObjects[i]);
                 break;
-            case OBJECT_MACHINE_SETTINGS_CAR:
-                MachineSettings_CarUpdate(&gObjects[i]);
+            case OBJECT_MACHINE_SETTINGS_MACHINE:
+                MachineSettings_MachineUpdate(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SETTINGS_NAME_CARD:
                 D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;

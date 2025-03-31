@@ -97,7 +97,7 @@ void func_i3_80139FF4(void) {
     D_i3_80143782 = 1;
 }
 
-extern GfxPool* D_800DCCF0;
+extern GfxPool* gGfxPool;
 
 bool func_i3_8013A004(void) {
     Vp* v0;
@@ -130,7 +130,7 @@ bool func_i3_8013A004(void) {
             break;
     }
 
-    v0 = D_800DCCF0->unk_2C308;
+    v0 = gGfxPool->unk_2C308;
     for (i = 0; i < 5; i++) {
         var_a2 = (i & 1) ? -D_i3_80143788 : D_i3_80143788;
 
@@ -157,15 +157,15 @@ bool func_i3_8013A004(void) {
     return var_a0;
 }
 
-Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, CarInfo* carInfo);
+Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, MachineInfo* machineInfo);
 Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3);
 
 extern Mtx D_2028480;
 extern Lights0 D_20284C0;
-extern FrameBuffer* D_800DCCD0[];
+extern FrameBuffer* gFrameBuffers[];
 extern char* gTrackNames[55];
 extern Gfx D_8014940[];
-extern unk_struct_1DC D_800E5220[];
+extern Player gPlayers[];
 extern GfxPool D_1000000;
 
 extern u32 gGameFrameCount;
@@ -175,7 +175,7 @@ extern s16 D_800E5FE4;
 extern s16 D_800E5FE6;
 
 Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
-    CourseRecordInfo* var_s2;
+    CourseInfo* var_s2;
     s32 sp1A8;
     s32 xl;
     s32 yl;
@@ -191,7 +191,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
 
     gSPDisplayList(gfx++, D_303A810);
     gDPPipeSync(gfx++);
-    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(D_800DCCD0[D_800DCD04]));
+    gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
 
     if (D_i3_80143780 & 2) {
         gfx = func_8007A440(gfx, 0xC, 8, 0x134, 0xE8, 0, 0, 0, 0xBF);
@@ -232,7 +232,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
     }
 
     if (D_i3_80143780 & 0x40) {
-        var_s2 = &gCourseRecordInfos[courseIndex];
+        var_s2 = &gCourseInfos[courseIndex];
         for (i = 0; i < 5; i++) {
             if (i & 1) {
                 var_s3 = -D_i3_80143788;
@@ -240,7 +240,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
                 var_s3 = D_i3_80143788;
             }
             if (var_s2->timeRecord[i] != MAX_TIMER) {
-                xl = Font_GetStringWidth(var_s2->name[i], FONT_SET_1, 1);
+                xl = Font_GetStringWidth(var_s2->recordNames[i], FONT_SET_1, 1);
                 if (xl > 0) {
                     gfx = func_i3_DrawBeveledBox(gfx, (var_s3 + D_i3_80143790) + 0x4A,
                                                  (D_i3_80143794 + (D_i3_80143798 * i)) + 3,
@@ -252,7 +252,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
     }
 
     sp1A8 = 1;
-    var_s2 = &gCourseRecordInfos[courseIndex];
+    var_s2 = &gCourseInfos[courseIndex];
     for (i = 0; i < 5; i++) {
 
         if (i & 1) {
@@ -401,14 +401,14 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
         }
         if (var_s2->timeRecord[i] != MAX_TIMER) {
             gfx = Font_DrawString(gfx, var_s3 + D_i3_80143790 + 0x4B, D_i3_80143794 + (D_i3_80143798 * i) + 0x12,
-                                  var_s2->name[i], 1, FONT_SET_1, 0);
+                                  var_s2->recordNames[i], 1, FONT_SET_1, 0);
         }
     }
 
     if (D_i3_80143780 & 4) {
         for (i = 0; i < 5; i++) {
             if (var_s2->timeRecord[i] != MAX_TIMER) {
-                gfx = func_i3_8013BBF8(gfx, 0xB2, (i * 0x23) + 0x33, var_s2->engine[i]);
+                gfx = func_i3_8013BBF8(gfx, 0xB2, (i * 0x23) + 0x33, var_s2->recordEngines[i]);
             }
         }
     }
@@ -428,7 +428,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
     gSPLoadUcodeL(gfx++, gspF3DFLX_Rej_fifo);
     gfx = Segment_SetTableAddresses(gfx);
     gSPClipRatio(gfx++, FRUSTRATIO_3);
-    gSPPerspNormalize(gfx++, D_800E5220[1].unk_118);
+    gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
     gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPDisplayList(gfx++, D_303A5F8);
     gSPNumLights(gfx++, NUMLIGHTS_1);
@@ -438,12 +438,12 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
 
     for (i = 0; i < 5; i++) {
         if (var_s2->timeRecord[i] != MAX_TIMER) {
-            gfx = func_i3_8013BB80(gfx, i, &var_s2->carInfo[i]);
+            gfx = func_i3_8013BB80(gfx, i, &var_s2->recordMachineInfos[i]);
         }
     }
 
     if (var_s2->maxSpeed != 0.0f) {
-        gfx = func_i3_8013BB80(gfx, 5, &var_s2->maxSpeedCar);
+        gfx = func_i3_8013BB80(gfx, 5, &var_s2->maxSpeedMachine);
     }
     return gfx;
 }
@@ -513,10 +513,10 @@ Gfx* func_i3_DrawSpeed(Gfx* gfx, s32 left, s32 top, f32 arg3, bool arg4, bool dr
 
 extern GfxPool D_1000000;
 
-Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, CarInfo* carInfo) {
+Gfx* func_i3_8013BB80(Gfx* gfx, s32 arg1, MachineInfo* machineInfo) {
     gSPViewport(gfx++, &D_1000000.unk_2C308[arg1]);
 
-    return func_8009CBE8(gfx, arg1 + 1, carInfo->envR2, carInfo->envG2, carInfo->envB2);
+    return func_8009CBE8(gfx, arg1 + 1, machineInfo->bodyR, machineInfo->bodyG, machineInfo->bodyB);
 }
 
 Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {
@@ -579,13 +579,13 @@ extern s16 D_800E5FE2;
 extern s32 gCourseIndex;
 
 void func_i3_8013C008(void) {
-    CourseRecordInfo* temp_v1;
+    CourseInfo* temp_v1;
     s32 i;
 
     if (D_800E5FE2 != 0) {
-        temp_v1 = &gCourseRecordInfos[gCourseIndex];
+        temp_v1 = &gCourseInfos[gCourseIndex];
         for (i = 0; i < 4; i++) {
-            temp_v1->name[D_800E5FE2 - 1][i] = 0;
+            temp_v1->recordNames[D_800E5FE2 - 1][i] = 0;
         }
     }
 }
@@ -705,7 +705,7 @@ void func_i3_8013C3B4(s32 arg0) {
     }
 }
 
-void func_i3_8013D214(CourseRecordInfo* arg0);
+void func_i3_8013D214(CourseInfo* arg0);
 
 extern u32 gGameFrameCount;
 extern u16 gInputPressed;
@@ -723,7 +723,7 @@ void func_i3_8013C6D8(void) {
     s32 sp118;
     s32 temp_ft0;
     s32 temp_ft4;
-    CourseRecordInfo* sp10C;
+    CourseInfo* sp10C;
     s32 sp64;
     s32 sp60;
     Vtx* vtx;
@@ -736,7 +736,7 @@ void func_i3_8013C6D8(void) {
     f32 temp_fv0;
     MtxF sp74;
 
-    sp10C = &gCourseRecordInfos[gCourseIndex];
+    sp10C = &gCourseInfos[gCourseIndex];
     previousKeyboardIndex = (sKeyboardCursorY * 10) + sKeyboardCursorX;
 
     if (gRecordNameEnteredLength < 3) {
@@ -853,7 +853,7 @@ void func_i3_8013C6D8(void) {
         spDC[0] = spDC[1] = spFC->height * 0.5f;
         spDC[2] = spDC[3] = spDC[0] - spFC->height;
 
-        vtx = D_800DCCF0->unk_29D08;
+        vtx = gGfxPool->unk_29D08;
         for (i = 0; i < 4; i++) {
             sp11C = Math_Round(spEC[i]);
             sp118 = Math_Round(spDC[i]);
@@ -875,7 +875,7 @@ void func_i3_8013C6D8(void) {
         }
         temp_fv0 = (s16) sp60 - spFC->height * 0.5f;
         spB8 = (s16) sp64 + 8.0f;
-        vp = D_800DCCF0->unk_2C2D8;
+        vp = gGfxPool->unk_2C2D8;
         vp->vp.vscale[0] = 0x500;
         vp->vp.vscale[1] = 0x3C0;
         vp->vp.vscale[2] = 0x1FF;
@@ -899,10 +899,10 @@ void func_i3_8013C6D8(void) {
             spB8 = 500.0f;
         }
 
-        func_8006D03C(&D_800DCCF0->unk_2B2C8[1], &sp74, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f,
+        func_8006D03C(&gGfxPool->unk_2B2C8[1], &sp74, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f,
                       &D_i3_801439C0);
-        func_8006CC98(&D_800DCCF0->unk_2B2C8[2], &sp74, 0.0f, 0.0f, spB8, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-        func_8006C378(&D_800DCCF0->unk_2B2C8[3], &sp74, spB8, 0, i, i, 0.0f, 0.0f, 0.0f);
+        func_8006CC98(&gGfxPool->unk_2B2C8[2], &sp74, 0.0f, 0.0f, spB8, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        func_8006C378(&gGfxPool->unk_2B2C8[3], &sp74, spB8, 0, i, i, 0.0f, 0.0f, 0.0f);
     }
 }
 
@@ -927,7 +927,7 @@ s32 func_i3_8013D1B4(s8 character) {
     return characterKeyboardIndex;
 }
 
-void func_i3_8013D214(CourseRecordInfo* arg0) {
+void func_i3_8013D214(CourseInfo* arg0) {
     s32 i;
     s32 var_v1;
 
@@ -942,7 +942,7 @@ void func_i3_8013D214(CourseRecordInfo* arg0) {
             var_v1 = 0;
         }
 
-        arg0->name[D_800E5FE2 - 1][i] = var_v1;
+        arg0->recordNames[D_800E5FE2 - 1][i] = var_v1;
     }
     Save_SaveCourseRecordProfiles(gCourseIndex);
 }
