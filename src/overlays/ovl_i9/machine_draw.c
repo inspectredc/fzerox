@@ -10,11 +10,13 @@ typedef Gfx* (*RearMachineDraw)(Gfx*, s32, s32, s32, s32, s32, s32);
 typedef Gfx* (*WingMachineDraw)(Gfx*, s32, s32, s32, s32, s32, s32);
 
 TexturePtr sLogoTextures[] = {
-    aCustomLogoShieldTex, aCustomLogoBoostArrowPlaneTex, aCustomLogoCircleTex, aCustomLogoAnimalSkullTex, aCustomLogoYellowGreenTex, aCustomLogoKanjiTex, aCustomLogoXTex, aCustomLogoN64Tex,
+    aCustomLogoShieldTex,      aCustomLogoBoostArrowPlaneTex, aCustomLogoCircleTex, aCustomLogoAnimalSkullTex,
+    aCustomLogoYellowGreenTex, aCustomLogoKanjiTex,           aCustomLogoXTex,      aCustomLogoN64Tex,
 };
 
 TexturePtr sDecalTextures[] = {
-    aCustomDecalStripeTex, aCustomDecalThinStripeTex, aCustomDecalDoubleStripeTex, aCustomDecalTripleStripeUnevenTex, aCustomDecalBlockTex,
+    aCustomDecalStripeTex, aCustomDecalThinStripeTex, aCustomDecalDoubleStripeTex, aCustomDecalTripleStripeUnevenTex,
+    aCustomDecalBlockTex,
 };
 
 TexturePtr sMachineNumberTextures[] = {
@@ -14812,18 +14814,18 @@ Gfx* Machine_DrawLoadCustomTextures(Gfx* gfx, s32 logo, s32 number, s32 decal) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, sLogoTextures[logo], 0x10, MACHINE_TILE_CUSTOM_LOGO, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
-                      G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, sMachineNumberTextures[number], 0x110, MACHINE_TILE_CUSTOM_NUMBER, G_IM_FMT_I, 32, 32, 0,
-                         G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, sDecalTextures[decal], 0x150, MACHINE_TILE_CUSTOM_DECAL, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
-                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x160, MACHINE_TILE_CUSTOM_AIR_DUCT, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
-                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x180, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
-                         G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x1C0, MACHINE_TILE_CUSTOM_BOOSTER, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock(gfx++, sLogoTextures[logo], 0x10, MACHINE_TILE_CUSTOM_LOGO, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32,
+                      0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, sMachineNumberTextures[number], 0x110, MACHINE_TILE_CUSTOM_NUMBER, G_IM_FMT_I, 32, 32,
+                         0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, sDecalTextures[decal], 0x150, MACHINE_TILE_CUSTOM_DECAL, G_IM_FMT_I, 16, 16, 0,
+                         G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x160, MACHINE_TILE_CUSTOM_AIR_DUCT, G_IM_FMT_I, 32, 16, 0,
+                         G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x180, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_IM_FMT_I, 32, 32, 0,
+                         G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x1C0, MACHINE_TILE_CUSTOM_BOOSTER, G_IM_FMT_I, 32, 32, 0,
+                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
 }
@@ -14952,8 +14954,8 @@ Gfx* Machine_DrawLoadCrazyBearTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalCrazyBearEyeTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP,
-                      G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock(gfx++, aDecalCrazyBearEyeTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                      G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber29Tex, 0x120, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -14994,8 +14996,8 @@ Gfx* Machine_DrawLoadHyperSpeederTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalBeastFaceTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
-                      G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock(gfx++, aDecalBeastFaceTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                      G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x130, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15138,8 +15140,8 @@ Gfx* Machine_DrawLoadGreenPantherTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalGreenPantherCamoTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                      G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock(gfx++, aDecalGreenPantherCamoTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                      G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber17Tex, 0x130, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15176,8 +15178,8 @@ Gfx* Machine_DrawLoadLittleWyvernTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalLittleWyvernStripeEndsTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
-                      G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock(gfx++, aDecalLittleWyvernStripeEndsTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
+                      G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber10Tex, 0x60, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15218,8 +15220,8 @@ Gfx* Machine_DrawLoadSuperPiranhaTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, aDecalTripleStripeIncreasingTex, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
-                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, aDecalTripleStripeIncreasingTex, 0x10, 1, G_IM_FMT_I, 16, 32, 0,
+                         G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x30, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber12Tex, 0x50, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15258,8 +15260,8 @@ Gfx* Machine_DrawLoadDeepClawTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, aDecalTripleStripeIncreasingTex, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
-                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, aDecalTripleStripeIncreasingTex, 0x10, 1, G_IM_FMT_I, 16, 32, 0,
+                         G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x30, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x50, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15278,8 +15280,8 @@ Gfx* Machine_DrawLoadIronTigerTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalLeopardTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                      G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock(gfx++, aDecalLeopardTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                      G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x130, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15320,8 +15322,8 @@ Gfx* Machine_DrawLoadRedGazelleTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, aDecalTripleStripeIncreasingTex, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
-                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock_4b(gfx++, aDecalTripleStripeIncreasingTex, 0x10, 1, G_IM_FMT_I, 16, 32, 0,
+                         G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aDecalStripeAngleTex, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x40, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15362,8 +15364,8 @@ Gfx* Machine_DrawLoadFireStingrayTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalFlamesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                      G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock(gfx++, aDecalFlamesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                      G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x120, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15382,8 +15384,8 @@ Gfx* Machine_DrawLoadWildGooseTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalWildGooseLightningTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
-                      G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock(gfx++, aDecalWildGooseLightningTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                      G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeTex, 0x110, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber6Tex, 0x120, 3, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15404,8 +15406,8 @@ Gfx* Machine_DrawLoadGoldenFoxTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalGoldenFoxStripesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                      G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock(gfx++, aDecalGoldenFoxStripesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
+                      G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aLogoGoldenFoxTex, 0x50, 2, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x90, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15426,8 +15428,8 @@ Gfx* Machine_DrawLoadBlueFalconTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalBlueFalconWingCheckeredTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
-                      G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadMultiBlock(gfx++, aDecalBlueFalconWingCheckeredTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
+                      G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aDecalBlueFalconArrowTex, 0x60, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
