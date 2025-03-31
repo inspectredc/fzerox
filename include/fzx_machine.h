@@ -68,6 +68,15 @@ typedef enum WingType {
     /* 6 */ WING_6,
 } WingType;
 
+typedef enum CustomMachineTile {
+    MACHINE_TILE_CUSTOM_LOGO = 1,
+    MACHINE_TILE_CUSTOM_NUMBER,
+    MACHINE_TILE_CUSTOM_DECAL,
+    MACHINE_TILE_CUSTOM_AIR_DUCT,
+    MACHINE_TILE_CUSTOM_FLOOR_DUCT,
+    MACHINE_TILE_CUSTOM_BOOSTER,
+} CustomMachineTile;
+
 #define IS_SUPER_MACHINE(customType) ((customType) >= CUSTOM_MACHINE_SUPER_FALCON)
 
 #endif // FZX_MACHINE_H

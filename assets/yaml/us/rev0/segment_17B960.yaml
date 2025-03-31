@@ -198,23 +198,23 @@ D_3004238:
   offset: 0x4238
   symbol: D_3004238
 
-D_3004498:
+aMachineNumber7Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 32
   offset: 0x4498
-  symbol: D_3004498
+  symbol: aMachineNumber7Tex
 
-D_3004598:
+aDecalBlueFalconArrowTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x4598
-  symbol: D_3004598
+  symbol: aDecalBlueFalconArrowTex
 
 D_3004618:
   type: TEXTURE
@@ -225,50 +225,50 @@ D_3004618:
   offset: 0x4618
   symbol: D_3004618
 
-D_3004698:
+aDecalStripeTex:
   type: TEXTURE
   ctype: u8
   format: IA4
   width: 16
   height: 16
   offset: 0x4698
-  symbol: D_3004698
+  symbol: aDecalStripeTex
 
-D_3004718:
+aLogoBlueFalconTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 64
   height: 16
   offset: 0x4718
-  symbol: D_3004718
+  symbol: aLogoBlueFalconTex
 
-D_3004918:
+aDecalBlueFalconWingCheckeredTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
   offset: 0x4918
-  symbol: D_3004918
+  symbol: aDecalBlueFalconWingCheckeredTex
 
-D_3004B18:
+aBooster1Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x4B18
-  symbol: D_3004B18
+  symbol: aBooster1Tex
 
-D_3004D18:
+aRearDuctTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x4D18
-  symbol: D_3004D18
+  symbol: aRearDuctTex
 
 D_3004F18:
   type: VTX
@@ -333,68 +333,68 @@ D_3005DF8:
   offset: 0x5DF8
   symbol: D_3005DF8
 
-D_3006078:
+aMachineNumber3Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 32
   offset: 0x6078
-  symbol: D_3006078
+  symbol: aMachineNumber3Tex
 
-D_3006178:
+aAirDuct1Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 16
   offset: 0x6178
-  symbol: D_3006178
+  symbol: aAirDuct1Tex
 
-D_3006278:
+aDecalGoldenFoxStripesTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
   offset: 0x6278
-  symbol: D_3006278
+  symbol: aDecalGoldenFoxStripesTex
 
-D_3006478:
+aBooster2Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x6478
-  symbol: D_3006478
+  symbol: aBooster2Tex
 
-D_3006678:
+aLogoGoldenFoxTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x6678
-  symbol: D_3006678
+  symbol: aLogoGoldenFoxTex
 
-D_3006878:
+aCompartmentLatchTex:
   type: TEXTURE
   ctype: u8
   format: IA4
   width: 32
   height: 32
   offset: 0x6878
-  symbol: D_3006878
+  symbol: aCompartmentLatchTex
 
-D_3006A78:
+aFloorDuct1Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x6A78
-  symbol: D_3006A78
+  symbol: aFloorDuct1Tex
 
 D_3006C78:
   type: VTX
@@ -459,59 +459,59 @@ D_3007CD8:
   offset: 0x7CD8
   symbol: D_3007CD8
 
-D_3007E18:
+aDecalDoubleStripeTex:
   type: TEXTURE
   ctype: u8
   format: IA4
   width: 16
   height: 16
   offset: 0x7E18
-  symbol: D_3007E18
+  symbol: aDecalDoubleStripeTex
 
-D_3007E98:
+aDecalWildGooseLightningTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x7E98
-  symbol: D_3007E98
+  symbol: aDecalWildGooseLightningTex
 
-D_3008698:
+aAirDuct2Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x8698
-  symbol: D_3008698
+  symbol: aAirDuct2Tex
 
-D_3008718:
+aFloorDuct2Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x8718
-  symbol: D_3008718
+  symbol: aFloorDuct2Tex
 
-D_3008918:
+aMachineNumber6Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 32
   offset: 0x8918
-  symbol: D_3008918
+  symbol: aMachineNumber6Tex
 
-D_3008A18:
+aBooster3Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x8A18
-  symbol: D_3008A18
+  symbol: aBooster3Tex
 
 D_3008C18:
   type: VTX
@@ -570,23 +570,23 @@ D_3009508:
   offset: 0x9508
   symbol: D_3009508
 
-D_3009BE8:
+aMachineNumber5Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 32
   offset: 0x9BE8
-  symbol: D_3009BE8
+  symbol: aMachineNumber5Tex
 
-D_3009CE8:
+aDecalFlamesTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x9CE8
-  symbol: D_3009CE8
+  symbol: aDecalFlamesTex
 
 D_300A4E8:
   type: VTX
@@ -651,32 +651,32 @@ D_300B518:
   offset: 0xB518
   symbol: D_300B518
 
-D_300B5F8:
+aMetalPlatingTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0xB5F8
-  symbol: D_300B5F8
+  symbol: aMetalPlatingTex
 
-D_300B678:
+aLogoWhiteCatTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 64
   height: 32
   offset: 0xB678
-  symbol: D_300B678
+  symbol: aLogoWhiteCatTex
 
-D_300BA78:
+aMachineNumber2Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 32
   offset: 0xBA78
-  symbol: D_300BA78
+  symbol: aMachineNumber2Tex
 
 D_300BB78:
   type: VTX
@@ -741,41 +741,41 @@ D_300CB08:
   offset: 0xCB08
   symbol: D_300CB08
 
-D_300CD78:
+aDecalStripeAngleTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0xCD78
-  symbol: D_300CD78
+  symbol: aDecalStripeAngleTex
 
-D_300CDF8:
+aDecalTripleStripeIncreasingTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 32
   offset: 0xCDF8
-  symbol: D_300CDF8
+  symbol: aDecalTripleStripeIncreasingTex
 
-D_300CEF8:
+aLogoRedGazelleTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 64
   height: 32
   offset: 0xCEF8
-  symbol: D_300CEF8
+  symbol: aLogoRedGazelleTex
 
-D_300D2F8:
+aMachineNumber1Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 32
   offset: 0xD2F8
-  symbol: D_300D2F8
+  symbol: aMachineNumber1Tex
 
 D_300D3F8:
   type: VTX
@@ -840,14 +840,14 @@ D_300E548:
   offset: 0xE548
   symbol: D_300E548
 
-D_300E8A8:
+aMachineNumber8Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 32
   offset: 0xE8A8
-  symbol: D_300E8A8
+  symbol: aMachineNumber8Tex
 
 D_300E9A8:
   type: VTX
@@ -912,32 +912,32 @@ D_300F918:
   offset: 0xF918
   symbol: D_300F918
 
-D_300FAF8:
+aDecalLeopardTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0xFAF8
-  symbol: D_300FAF8
+  symbol: aDecalLeopardTex
 
-D_30102F8:
+aLogoIronTigerTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 16
   offset: 0x102F8
-  symbol: D_30102F8
+  symbol: aLogoIronTigerTex
 
-D_30103F8:
+aMachineNumber4Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 32
   offset: 0x103F8
-  symbol: D_30103F8
+  symbol: aMachineNumber4Tex
 
 D_30104F8:
   type: VTX
@@ -1062,23 +1062,23 @@ D_3012A68:
   offset: 0x12A68
   symbol: D_3012A68
 
-D_3012BC8:
+aDecalCheckeredTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x12BC8
-  symbol: D_3012BC8
+  symbol: aDecalCheckeredTex
 
-D_3012C48:
+aDecalDoubleStripeUnevenTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x12C48
-  symbol: D_3012C48
+  symbol: aDecalDoubleStripeUnevenTex
 
 aMachineNumber22Tex:
   type: TEXTURE
@@ -1224,14 +1224,14 @@ D_3015158:
   offset: 0x15158
   symbol: D_3015158
 
-D_3015198:
+aDecalCircle1Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x15198
-  symbol: D_3015198
+  symbol: aDecalCircle1Tex
 
 aMachineNumber28Tex:
   type: TEXTURE
@@ -1305,14 +1305,14 @@ D_3016258:
   offset: 0x16258
   symbol: D_3016258
 
-D_3016558:
+aDecalLittleWyvernStripeEndsTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
   offset: 0x16558
-  symbol: D_3016558
+  symbol: aDecalLittleWyvernStripeEndsTex
 
 aMachineNumber10Tex:
   type: TEXTURE
@@ -1449,14 +1449,14 @@ aMachineNumber17Tex:
   offset: 0x18498
   symbol: aMachineNumber17Tex
 
-D_3018698:
+aDecalGreenPantherCamoTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x18698
-  symbol: D_3018698
+  symbol: aDecalGreenPantherCamoTex
 
 D_3018E98:
   type: VTX
@@ -1515,14 +1515,14 @@ D_3019E98:
   offset: 0x19E98
   symbol: D_3019E98
 
-D_3019FE8:
+aDecalArchTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x19FE8
-  symbol: D_3019FE8
+  symbol: aDecalArchTex
 
 aMachineNumber30Tex:
   type: TEXTURE
@@ -1533,14 +1533,14 @@ aMachineNumber30Tex:
   offset: 0x1A068
   symbol: aMachineNumber30Tex
 
-D_301A268:
+aDecalCircle2Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x1A268
-  symbol: D_301A268
+  symbol: aDecalCircle2Tex
 
 D_301A2E8:
   type: VTX
@@ -1599,14 +1599,14 @@ D_301B008:
   offset: 0x1B008
   symbol: D_301B008
 
-D_301B1B8:
+aLogoWildBoarWhiskersTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 64
   height: 32
   offset: 0x1B1B8
-  symbol: D_301B1B8
+  symbol: aLogoWildBoarWhiskersTex
 
 aMachineNumber24Tex:
   type: TEXTURE
@@ -1674,14 +1674,14 @@ D_301C638:
   offset: 0x1C638
   symbol: D_301C638
 
-D_301C818:
+aDecalTripleStripeUnevenTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x1C818
-  symbol: D_301C818
+  symbol: aDecalTripleStripeUnevenTex
 
 aMachineNumber14Tex:
   type: TEXTURE
@@ -1749,14 +1749,14 @@ D_301D928:
   offset: 0x1D928
   symbol: D_301D928
 
-D_301DA58:
+aLogoArrowTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 64
   offset: 0x1DA58
-  symbol: D_301DA58
+  symbol: aLogoArrowTex
 
 aMachineNumber20Tex:
   type: TEXTURE
@@ -1896,23 +1896,23 @@ D_3020028:
   offset: 0x20028
   symbol: D_3020028
 
-D_3020258:
+aLogoGreatStarTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 64
   height: 32
   offset: 0x20258
-  symbol: D_3020258
+  symbol: aLogoGreatStarTex
 
-D_3020658:
+aMachineNumber9Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 32
   offset: 0x20658
-  symbol: D_3020658
+  symbol: aMachineNumber9Tex
 
 D_3020758:
   type: VTX
@@ -1971,14 +1971,14 @@ D_3021578:
   offset: 0x21578
   symbol: D_3021578
 
-D_3021778:
+aDecalBeastFaceTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x21778
-  symbol: D_3021778
+  symbol: aDecalBeastFaceTex
 
 aMachineNumber18Tex:
   type: TEXTURE
@@ -2046,14 +2046,14 @@ D_3022E18:
   offset: 0x22E18
   symbol: D_3022E18
 
-D_3022F58:
+aDecalLightningTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
   height: 32
   offset: 0x22F58
-  symbol: D_3022F58
+  symbol: aDecalLightningTex
 
 aMachineNumber13Tex:
   type: TEXTURE
@@ -2127,23 +2127,23 @@ D_30242B8:
   offset: 0x242B8
   symbol: D_30242B8
 
-D_30242F8:
+aDecalCrazyBearEyeTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x242F8
-  symbol: D_30242F8
+  symbol: aDecalCrazyBearEyeTex
 
-D_3024AF8:
+aAirDuct3Tex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x24AF8
-  symbol: D_3024AF8
+  symbol: aAirDuct3Tex
 
 aMachineNumber29Tex:
   type: TEXTURE
@@ -2277,14 +2277,14 @@ D_3026B38:
   offset: 0x26B38
   symbol: D_3026B38
 
-D_3026DE8:
+aDecalFadeTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x26DE8
-  symbol: D_3026DE8
+  symbol: aDecalFadeTex
 
 aMachineNumber15Tex:
   type: TEXTURE
@@ -2427,14 +2427,14 @@ aMachineNumber11Tex:
   offset: 0x293C8
   symbol: aMachineNumber11Tex
 
-D_30295C8:
+aMadWolfRidgeTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x295C8
-  symbol: D_30295C8
+  symbol: aMadWolfRidgeTex
 
 D_3029648:
   type: VTX
@@ -2493,14 +2493,14 @@ D_302A628:
   offset: 0x2A628
   symbol: D_302A628
 
-D_302A688:
+aDecalSonicPhantomStripesTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x2A688
-  symbol: D_302A688
+  symbol: aDecalSonicPhantomStripesTex
 
 aMachineNumber16Tex:
   type: TEXTURE
@@ -2598,122 +2598,122 @@ D_302BA38:
   offset: 0x2BA38
   symbol: D_302BA38
 
-D_302BE38:
+aCustomLogoShieldTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x2BE38
-  symbol: D_302BE38
+  symbol: aCustomLogoShieldTex
 
-D_302C638:
+aCustomLogoBoostArrowPlaneTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x2C638
-  symbol: D_302C638
+  symbol: aCustomLogoBoostArrowPlaneTex
 
-D_302CE38:
+aCustomLogoCircleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x2CE38
-  symbol: D_302CE38
+  symbol: aCustomLogoCircleTex
 
-D_302D638:
+aCustomLogoAnimalSkullTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x2D638
-  symbol: D_302D638
+  symbol: aCustomLogoAnimalSkullTex
 
-D_302DE38:
+aCustomLogoYellowGreenTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x2DE38
-  symbol: D_302DE38
+  symbol: aCustomLogoYellowGreenTex
 
-D_302E638:
+aCustomLogoKanjiTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x2E638
-  symbol: D_302E638
+  symbol: aCustomLogoKanjiTex
 
-D_302EE38:
+aCustomLogoXTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x2EE38
-  symbol: D_302EE38
+  symbol: aCustomLogoXTex
 
-D_302F638:
+aCustomLogoN64Tex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x2F638
-  symbol: D_302F638
+  symbol: aCustomLogoN64Tex
 
-D_302FE38:
+aCustomDecalStripeTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x2FE38
-  symbol: D_302FE38
+  symbol: aCustomDecalStripeTex
 
-D_302FEB8:
+aCustomDecalThinStripeTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x2FEB8
-  symbol: D_302FEB8
+  symbol: aCustomDecalThinStripeTex
 
-D_302FF38:
+aCustomDecalDoubleStripeTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x2FF38
-  symbol: D_302FF38
+  symbol: aCustomDecalDoubleStripeTex
 
-D_302FFB8:
+aCustomDecalTripleStripeUnevenTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x2FFB8
-  symbol: D_302FFB8
+  symbol: aCustomDecalTripleStripeUnevenTex
 
-D_3030038:
+aCustomDecalBlockTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 16
   height: 16
   offset: 0x30038
-  symbol: D_3030038
+  symbol: aCustomDecalBlockTex
 
 aMachineNumber31Tex:
   type: TEXTURE

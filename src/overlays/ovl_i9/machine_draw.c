@@ -10,11 +10,11 @@ typedef Gfx* (*RearMachineDraw)(Gfx*, s32, s32, s32, s32, s32, s32);
 typedef Gfx* (*WingMachineDraw)(Gfx*, s32, s32, s32, s32, s32, s32);
 
 TexturePtr sLogoTextures[] = {
-    D_302BE38, D_302C638, D_302CE38, D_302D638, D_302DE38, D_302E638, D_302EE38, D_302F638,
+    aCustomLogoShieldTex, aCustomLogoBoostArrowPlaneTex, aCustomLogoCircleTex, aCustomLogoAnimalSkullTex, aCustomLogoYellowGreenTex, aCustomLogoKanjiTex, aCustomLogoXTex, aCustomLogoN64Tex,
 };
 
 TexturePtr sDecalTextures[] = {
-    D_302FE38, D_302FEB8, D_302FF38, D_302FFB8, D_3030038,
+    aCustomDecalStripeTex, aCustomDecalThinStripeTex, aCustomDecalDoubleStripeTex, aCustomDecalTripleStripeUnevenTex, aCustomDecalBlockTex,
 };
 
 TexturePtr sMachineNumberTextures[] = {
@@ -192,7 +192,7 @@ Gfx* Machine_DrawFront6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -200,7 +200,7 @@ Gfx* Machine_DrawFront6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
     gSP1Triangle(gfx++, 4, 1, 0, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_30314B8, 9, 0);
@@ -208,7 +208,7 @@ Gfx* Machine_DrawFront6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 1, 0, 3, 0, 5, 6, 7, 0);
     gSP1Triangle(gfx++, 5, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -239,21 +239,21 @@ Gfx* Machine_DrawFront6Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_70380C8, 5, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 1, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7037DB8, 7, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 3, 5, 6, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -282,21 +282,21 @@ Gfx* Machine_DrawFront6Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7038388, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7038118, 7, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 3, 5, 6, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -323,14 +323,14 @@ Gfx* Machine_DrawFront6Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7038578, 3, 0);
     gSP1Triangle(gfx++, 0, 1, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -356,7 +356,7 @@ Gfx* Machine_DrawFront6Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -379,21 +379,21 @@ Gfx* Machine_DrawFront3Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_3031898, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_30318D8, 8, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -428,21 +428,21 @@ Gfx* Machine_DrawFront3Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_7038688, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_70386C8, 8, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -473,20 +473,20 @@ Gfx* Machine_DrawFront3Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_7038A28, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7038A68, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -515,7 +515,7 @@ Gfx* Machine_DrawFront3Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -543,7 +543,7 @@ Gfx* Machine_DrawFront3Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -568,7 +568,7 @@ Gfx* Machine_DrawFront4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -577,7 +577,7 @@ Gfx* Machine_DrawFront4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 6, 3, 1, 0, 7, 3, 5, 0);
     gSP1Triangle(gfx++, 3, 6, 4, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3031CE8, 9, 0);
@@ -585,7 +585,7 @@ Gfx* Machine_DrawFront4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
     gSP1Triangle(gfx++, 5, 4, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -622,7 +622,7 @@ Gfx* Machine_DrawFront4Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -630,14 +630,14 @@ Gfx* Machine_DrawFront4Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 3, 7, 0, 8, 9, 10, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_70390C8, 7, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP1Triangle(gfx++, 4, 5, 6, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -671,21 +671,21 @@ Gfx* Machine_DrawFront4Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7039858, 5, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 4, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7039548, 7, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP1Triangle(gfx++, 4, 5, 6, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -715,14 +715,14 @@ Gfx* Machine_DrawFront4Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7039A88, 5, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 4, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -748,14 +748,14 @@ Gfx* Machine_DrawFront4Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7039C28, 3, 0);
     gSP1Triangle(gfx++, 0, 1, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -780,7 +780,7 @@ Gfx* Machine_DrawFront5Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_30321D8, 9, 0);
@@ -788,7 +788,7 @@ Gfx* Machine_DrawFront5Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 1, 0, 3, 0, 5, 6, 7, 0);
     gSP1Triangle(gfx++, 5, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -827,14 +827,14 @@ Gfx* Machine_DrawFront5Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7039C58, 7, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 3, 5, 6, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -870,14 +870,14 @@ Gfx* Machine_DrawFront5Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703A0D8, 7, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 3, 5, 6, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -907,7 +907,7 @@ Gfx* Machine_DrawFront5Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -935,7 +935,7 @@ Gfx* Machine_DrawFront5Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -961,27 +961,27 @@ Gfx* Machine_DrawFront0Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3032A58, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_30326F8, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3032738, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1012,27 +1012,27 @@ Gfx* Machine_DrawFront0Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703AB78, 3, 0);
     gSP1Triangle(gfx++, 0, 1, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_703A858, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703A898, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1062,27 +1062,27 @@ Gfx* Machine_DrawFront0Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703AE88, 3, 0);
     gSP1Triangle(gfx++, 0, 1, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_703ABA8, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703ABE8, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1110,14 +1110,14 @@ Gfx* Machine_DrawFront0Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703B0E8, 3, 0);
     gSP1Triangle(gfx++, 0, 1, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1144,14 +1144,14 @@ Gfx* Machine_DrawFront0Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703B298, 3, 0);
     gSP1Triangle(gfx++, 0, 1, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1175,7 +1175,7 @@ Gfx* Machine_DrawFront2Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1186,21 +1186,21 @@ Gfx* Machine_DrawFront2Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 5, 7, 3, 0, 6, 8, 9, 0);
     gSP2Triangles(gfx++, 8, 10, 9, 0, 8, 11, 10, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_3032A98, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3032B98, 8, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 3, 5, 6, 0, 0, 7, 1, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1231,7 +1231,7 @@ Gfx* Machine_DrawFront2Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1240,20 +1240,20 @@ Gfx* Machine_DrawFront2Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
     gSP2Triangles(gfx++, 1, 4, 5, 0, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_703B2C8, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703B398, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1283,7 +1283,7 @@ Gfx* Machine_DrawFront2Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1292,20 +1292,20 @@ Gfx* Machine_DrawFront2Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
     gSP2Triangles(gfx++, 1, 5, 3, 0, 5, 6, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_703B688, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703B738, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1333,7 +1333,7 @@ Gfx* Machine_DrawFront2Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1342,14 +1342,14 @@ Gfx* Machine_DrawFront2Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
     gSP1Triangle(gfx++, 1, 5, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_703B978, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1377,7 +1377,7 @@ Gfx* Machine_DrawFront2Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1386,14 +1386,14 @@ Gfx* Machine_DrawFront2Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
     gSP1Triangle(gfx++, 1, 5, 6, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_703BBC8, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 0, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1416,14 +1416,14 @@ Gfx* Machine_DrawFront1Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3033268, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1431,14 +1431,14 @@ Gfx* Machine_DrawFront1Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSPVertex(gfx++, D_3032F08, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3032F68, 8, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1468,14 +1468,14 @@ Gfx* Machine_DrawFront1Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703C078, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1483,14 +1483,14 @@ Gfx* Machine_DrawFront1Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSPVertex(gfx++, D_703BD58, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703BDB8, 8, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1518,14 +1518,14 @@ Gfx* Machine_DrawFront1Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703C378, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1533,13 +1533,13 @@ Gfx* Machine_DrawFront1Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSPVertex(gfx++, D_703C0B8, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703C118, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1566,14 +1566,14 @@ Gfx* Machine_DrawFront1Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703C628, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1581,7 +1581,7 @@ Gfx* Machine_DrawFront1Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSPVertex(gfx++, D_703C3B8, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1608,7 +1608,7 @@ Gfx* Machine_DrawFront1Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
                             s32 cockpitPrimR, s32 cockpitPrimG, s32 cockpitPrimB, s32 cockpitEnvR, s32 cockpitEnvG,
                             s32 cockpitEnvB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -1616,7 +1616,7 @@ Gfx* Machine_DrawFront1Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
     gSP2Triangles(gfx++, 0, 1, 2, 0, 1, 3, 4, 0);
     gSP1Triangle(gfx++, 5, 6, 7, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1637,7 +1637,7 @@ Gfx* Machine_DrawFront1Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 nu
 
 Gfx* Machine_DrawRear0Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -1645,7 +1645,7 @@ Gfx* Machine_DrawRear0Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1657,7 +1657,7 @@ Gfx* Machine_DrawRear0Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
     gSP2Triangles(gfx++, 18, 19, 20, 0, 19, 21, 20, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_3033548, 28, 0);
@@ -1669,14 +1669,14 @@ Gfx* Machine_DrawRear0Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
     gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_30332A8, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3033468, 4, 0);
@@ -1692,7 +1692,7 @@ Gfx* Machine_DrawRear0Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear0Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -1700,7 +1700,7 @@ Gfx* Machine_DrawRear0Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1710,7 +1710,7 @@ Gfx* Machine_DrawRear0Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
     gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703CA68, 28, 0);
@@ -1722,14 +1722,14 @@ Gfx* Machine_DrawRear0Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
     gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_703C808, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703C988, 4, 0);
@@ -1745,7 +1745,7 @@ Gfx* Machine_DrawRear0Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear0Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -1753,7 +1753,7 @@ Gfx* Machine_DrawRear0Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1763,7 +1763,7 @@ Gfx* Machine_DrawRear0Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
     gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703CF28, 27, 0);
@@ -1774,14 +1774,14 @@ Gfx* Machine_DrawRear0Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 15, 16, 17, 0, 18, 19, 20, 0);
     gSP2Triangles(gfx++, 21, 22, 23, 0, 24, 25, 26, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
     gSPVertex(gfx++, D_703CCC8, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703CE48, 4, 0);
@@ -1797,7 +1797,7 @@ Gfx* Machine_DrawRear0Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear0Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -1805,7 +1805,7 @@ Gfx* Machine_DrawRear0Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1814,7 +1814,7 @@ Gfx* Machine_DrawRear0Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703D338, 17, 0);
@@ -1823,7 +1823,7 @@ Gfx* Machine_DrawRear0Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
     gSP1Triangle(gfx++, 14, 15, 16, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -1842,14 +1842,14 @@ Gfx* Machine_DrawRear0Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear0Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703D678, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1858,7 +1858,7 @@ Gfx* Machine_DrawRear0Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703D5E8, 9, 0);
@@ -1876,7 +1876,7 @@ Gfx* Machine_DrawRear0Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear3Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -1884,7 +1884,7 @@ Gfx* Machine_DrawRear3Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1893,7 +1893,7 @@ Gfx* Machine_DrawRear3Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 0, 6, 1, 0, 7, 3, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_3033A08, 38, 0);
@@ -1906,7 +1906,7 @@ Gfx* Machine_DrawRear3Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 30, 31, 32, 0, 30, 32, 33, 0);
     gSP2Triangles(gfx++, 34, 35, 36, 0, 34, 36, 37, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -1915,7 +1915,7 @@ Gfx* Machine_DrawRear3Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
     gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3033928, 4, 0);
@@ -1931,7 +1931,7 @@ Gfx* Machine_DrawRear3Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear3Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -1939,7 +1939,7 @@ Gfx* Machine_DrawRear3Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -1948,7 +1948,7 @@ Gfx* Machine_DrawRear3Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 0, 6, 1, 0, 7, 3, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703D938, 34, 0);
@@ -1959,7 +1959,7 @@ Gfx* Machine_DrawRear3Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
     gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -1968,7 +1968,7 @@ Gfx* Machine_DrawRear3Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
     gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703D858, 4, 0);
@@ -1984,7 +1984,7 @@ Gfx* Machine_DrawRear3Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear3Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -1992,7 +1992,7 @@ Gfx* Machine_DrawRear3Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2001,7 +2001,7 @@ Gfx* Machine_DrawRear3Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 0, 6, 1, 0, 7, 3, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703DE48, 33, 0);
@@ -2012,7 +2012,7 @@ Gfx* Machine_DrawRear3Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
     gSP1Triangle(gfx++, 30, 31, 32, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2021,7 +2021,7 @@ Gfx* Machine_DrawRear3Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
     gSP1Triangle(gfx++, 12, 13, 14, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703DD68, 4, 0);
@@ -2037,7 +2037,7 @@ Gfx* Machine_DrawRear3Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear3Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2045,7 +2045,7 @@ Gfx* Machine_DrawRear3Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2054,7 +2054,7 @@ Gfx* Machine_DrawRear3Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 1, 6, 2, 0, 3, 7, 4, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703E2D8, 27, 0);
@@ -2064,7 +2064,7 @@ Gfx* Machine_DrawRear3Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
     gSP1Triangle(gfx++, 24, 25, 26, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2084,14 +2084,14 @@ Gfx* Machine_DrawRear3Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear3Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703E6D8, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2100,13 +2100,13 @@ Gfx* Machine_DrawRear3Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 0, 2, 0, 3, 5, 7, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703E6A8, 3, 0);
     gSP1Triangle(gfx++, 0, 1, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2125,7 +2125,7 @@ Gfx* Machine_DrawRear3Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2133,7 +2133,7 @@ Gfx* Machine_DrawRear4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2142,7 +2142,7 @@ Gfx* Machine_DrawRear4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 0, 2, 6, 0, 4, 7, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_3033FE8, 22, 0);
@@ -2151,7 +2151,7 @@ Gfx* Machine_DrawRear4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
     gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2161,7 +2161,7 @@ Gfx* Machine_DrawRear4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
     gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3033EA8, 10, 0);
@@ -2178,7 +2178,7 @@ Gfx* Machine_DrawRear4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear4Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2186,7 +2186,7 @@ Gfx* Machine_DrawRear4Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2195,7 +2195,7 @@ Gfx* Machine_DrawRear4Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 0, 2, 6, 0, 4, 7, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703EA18, 21, 0);
@@ -2204,7 +2204,7 @@ Gfx* Machine_DrawRear4Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
     gSP1Triangle(gfx++, 18, 19, 20, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2214,7 +2214,7 @@ Gfx* Machine_DrawRear4Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 11, 9, 0);
     gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703E8D8, 10, 0);
@@ -2231,7 +2231,7 @@ Gfx* Machine_DrawRear4Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear4Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2239,7 +2239,7 @@ Gfx* Machine_DrawRear4Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2248,7 +2248,7 @@ Gfx* Machine_DrawRear4Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 0, 2, 6, 0, 4, 7, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703EEC8, 18, 0);
@@ -2256,7 +2256,7 @@ Gfx* Machine_DrawRear4Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
     gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2266,7 +2266,7 @@ Gfx* Machine_DrawRear4Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 7, 10, 8, 0, 11, 12, 13, 0);
     gSP1Triangle(gfx++, 14, 15, 16, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703ED88, 10, 0);
@@ -2283,7 +2283,7 @@ Gfx* Machine_DrawRear4Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear4Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2291,7 +2291,7 @@ Gfx* Machine_DrawRear4Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2300,7 +2300,7 @@ Gfx* Machine_DrawRear4Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 0, 2, 0, 3, 5, 7, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703F278, 18, 0);
@@ -2308,7 +2308,7 @@ Gfx* Machine_DrawRear4Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
     gSP2Triangles(gfx++, 12, 13, 14, 0, 15, 16, 17, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2329,14 +2329,14 @@ Gfx* Machine_DrawRear4Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear4Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703F648, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2345,14 +2345,14 @@ Gfx* Machine_DrawRear4Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 2, 0, 3, 5, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703F5B8, 9, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2371,7 +2371,7 @@ Gfx* Machine_DrawRear4Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear5Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2379,7 +2379,7 @@ Gfx* Machine_DrawRear5Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2389,7 +2389,7 @@ Gfx* Machine_DrawRear5Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 1, 0, 6, 0, 3, 7, 4, 0);
     gSP2Triangles(gfx++, 8, 1, 6, 0, 4, 7, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_3034598, 40, 0);
@@ -2401,7 +2401,7 @@ Gfx* Machine_DrawRear5Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
     gSP2Triangles(gfx++, 34, 35, 36, 0, 37, 38, 39, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2411,7 +2411,7 @@ Gfx* Machine_DrawRear5Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
     gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_30343C8, 20, 0);
@@ -2430,7 +2430,7 @@ Gfx* Machine_DrawRear5Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear5Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2438,7 +2438,7 @@ Gfx* Machine_DrawRear5Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2448,7 +2448,7 @@ Gfx* Machine_DrawRear5Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 1, 0, 6, 0, 3, 7, 4, 0);
     gSP2Triangles(gfx++, 8, 1, 6, 0, 4, 7, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_703FA58, 25, 0);
@@ -2458,7 +2458,7 @@ Gfx* Machine_DrawRear5Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 13, 14, 15, 0, 16, 17, 18, 0);
     gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 24, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2468,7 +2468,7 @@ Gfx* Machine_DrawRear5Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
     gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703F888, 20, 0);
@@ -2487,7 +2487,7 @@ Gfx* Machine_DrawRear5Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear5Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2495,7 +2495,7 @@ Gfx* Machine_DrawRear5Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2505,7 +2505,7 @@ Gfx* Machine_DrawRear5Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 1, 0, 6, 0, 3, 7, 4, 0);
     gSP2Triangles(gfx++, 8, 1, 6, 0, 4, 7, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7040038, 25, 0);
@@ -2515,7 +2515,7 @@ Gfx* Machine_DrawRear5Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 13, 14, 15, 0, 16, 17, 18, 0);
     gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 24, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2525,7 +2525,7 @@ Gfx* Machine_DrawRear5Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
     gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_703FE68, 20, 0);
@@ -2544,7 +2544,7 @@ Gfx* Machine_DrawRear5Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear5Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2552,7 +2552,7 @@ Gfx* Machine_DrawRear5Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2562,7 +2562,7 @@ Gfx* Machine_DrawRear5Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 5, 8, 0);
     gSP2Triangles(gfx++, 0, 2, 9, 0, 5, 4, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7040438, 15, 0);
@@ -2570,7 +2570,7 @@ Gfx* Machine_DrawRear5Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
     gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 6, 14, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2590,14 +2590,14 @@ Gfx* Machine_DrawRear5Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear5Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7040718, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2606,13 +2606,13 @@ Gfx* Machine_DrawRear5Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 1, 0, 8, 3, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_70406E8, 3, 0);
     gSP1Triangle(gfx++, 0, 1, 2, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2630,7 +2630,7 @@ Gfx* Machine_DrawRear5Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2638,7 +2638,7 @@ Gfx* Machine_DrawRear6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2650,7 +2650,7 @@ Gfx* Machine_DrawRear6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 7, 3, 5, 0, 10, 1, 0, 0);
     gSP2Triangles(gfx++, 2, 1, 12, 0, 13, 10, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_3034BC8, 48, 0);
@@ -2664,7 +2664,7 @@ Gfx* Machine_DrawRear6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 35, 37, 38, 0, 39, 40, 41, 0);
     gSP2Triangles(gfx++, 42, 43, 44, 0, 45, 46, 47, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2672,7 +2672,7 @@ Gfx* Machine_DrawRear6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3034A38, 17, 0);
@@ -2691,7 +2691,7 @@ Gfx* Machine_DrawRear6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear6Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2699,7 +2699,7 @@ Gfx* Machine_DrawRear6Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2710,7 +2710,7 @@ Gfx* Machine_DrawRear6Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 3, 10, 4, 0, 11, 12, 13, 0);
     gSP2Triangles(gfx++, 14, 7, 9, 0, 15, 12, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7040A58, 38, 0);
@@ -2723,7 +2723,7 @@ Gfx* Machine_DrawRear6Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 33, 34, 35, 0, 36, 2, 1, 0);
     gSP1Triangle(gfx++, 3, 37, 4, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2731,7 +2731,7 @@ Gfx* Machine_DrawRear6Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7040918, 12, 0);
@@ -2749,7 +2749,7 @@ Gfx* Machine_DrawRear6Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear6Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2757,7 +2757,7 @@ Gfx* Machine_DrawRear6Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2768,7 +2768,7 @@ Gfx* Machine_DrawRear6Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 3, 10, 4, 0, 11, 12, 13, 0);
     gSP2Triangles(gfx++, 14, 7, 9, 0, 15, 12, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7041028, 27, 0);
@@ -2778,7 +2778,7 @@ Gfx* Machine_DrawRear6Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
     gSP1Triangle(gfx++, 24, 25, 26, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2786,7 +2786,7 @@ Gfx* Machine_DrawRear6Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7040EE8, 12, 0);
@@ -2804,7 +2804,7 @@ Gfx* Machine_DrawRear6Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear6Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2812,7 +2812,7 @@ Gfx* Machine_DrawRear6Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2823,14 +2823,14 @@ Gfx* Machine_DrawRear6Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 1, 0, 9, 0, 10, 5, 4, 0);
     gSP2Triangles(gfx++, 2, 1, 11, 0, 9, 0, 12, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7041418, 12, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2849,14 +2849,14 @@ Gfx* Machine_DrawRear6Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear6Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7041678, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2866,7 +2866,7 @@ Gfx* Machine_DrawRear6Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 5, 6, 7, 0, 7, 8, 9, 0);
     gSP2Triangles(gfx++, 1, 0, 3, 0, 6, 8, 7, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7041648, 3, 0);
@@ -2883,7 +2883,7 @@ Gfx* Machine_DrawRear6Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear2Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2891,7 +2891,7 @@ Gfx* Machine_DrawRear2Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2906,7 +2906,7 @@ Gfx* Machine_DrawRear2Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 24, 26, 25, 0, 27, 28, 29, 0);
     gSP2Triangles(gfx++, 27, 29, 30, 0, 20, 31, 21, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_3035388, 38, 0);
@@ -2919,7 +2919,7 @@ Gfx* Machine_DrawRear2Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 28, 29, 30, 0, 28, 30, 31, 0);
     gSP2Triangles(gfx++, 32, 33, 34, 0, 35, 36, 37, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2931,7 +2931,7 @@ Gfx* Machine_DrawRear2Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
     gSP2Triangles(gfx++, 22, 23, 24, 0, 22, 24, 25, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3035308, 4, 0);
@@ -2946,7 +2946,7 @@ Gfx* Machine_DrawRear2Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear2Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -2954,7 +2954,7 @@ Gfx* Machine_DrawRear2Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -2968,7 +2968,7 @@ Gfx* Machine_DrawRear2Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 22, 24, 23, 0, 25, 26, 27, 0);
     gSP2Triangles(gfx++, 25, 27, 28, 0, 18, 29, 19, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7041AB8, 33, 0);
@@ -2979,7 +2979,7 @@ Gfx* Machine_DrawRear2Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 23, 24, 25, 0, 23, 25, 26, 0);
     gSP2Triangles(gfx++, 27, 28, 29, 0, 30, 31, 32, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -2990,7 +2990,7 @@ Gfx* Machine_DrawRear2Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 13, 15, 16, 0, 17, 18, 19, 0);
     gSP2Triangles(gfx++, 20, 21, 22, 0, 20, 22, 23, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7041A38, 4, 0);
@@ -3005,7 +3005,7 @@ Gfx* Machine_DrawRear2Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear2Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -3013,7 +3013,7 @@ Gfx* Machine_DrawRear2Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3026,7 +3026,7 @@ Gfx* Machine_DrawRear2Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 18, 19, 20, 0, 19, 21, 20, 0);
     gSP2Triangles(gfx++, 22, 23, 24, 0, 25, 26, 27, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7042058, 34, 0);
@@ -3037,7 +3037,7 @@ Gfx* Machine_DrawRear2Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 23, 24, 3, 0, 25, 26, 27, 0);
     gSP2Triangles(gfx++, 28, 29, 30, 0, 31, 32, 33, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -3046,7 +3046,7 @@ Gfx* Machine_DrawRear2Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
     gSP1Triangle(gfx++, 8, 9, 10, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7041FD8, 4, 0);
@@ -3061,7 +3061,7 @@ Gfx* Machine_DrawRear2Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear2Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -3069,7 +3069,7 @@ Gfx* Machine_DrawRear2Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3078,7 +3078,7 @@ Gfx* Machine_DrawRear2Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7042468, 30, 0);
@@ -3088,7 +3088,7 @@ Gfx* Machine_DrawRear2Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 18, 19, 20, 0, 21, 22, 23, 0);
     gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -3106,14 +3106,14 @@ Gfx* Machine_DrawRear2Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear2Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7042928, 6, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3122,7 +3122,7 @@ Gfx* Machine_DrawRear2Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7042838, 15, 0);
@@ -3130,7 +3130,7 @@ Gfx* Machine_DrawRear2Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
     gSP1Triangle(gfx++, 12, 13, 14, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -3148,7 +3148,7 @@ Gfx* Machine_DrawRear2Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear1Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -3156,7 +3156,7 @@ Gfx* Machine_DrawRear1Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3173,7 +3173,7 @@ Gfx* Machine_DrawRear1Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 36, 37, 38, 0, 36, 38, 39, 0);
     gSP2Triangles(gfx++, 40, 41, 42, 0, 40, 43, 41, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_3035B48, 64, 0);
@@ -3194,7 +3194,7 @@ Gfx* Machine_DrawRear1Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -3204,7 +3204,7 @@ Gfx* Machine_DrawRear1Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
     gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_3035A48, 4, 0);
@@ -3222,7 +3222,7 @@ Gfx* Machine_DrawRear1Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear1Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -3230,7 +3230,7 @@ Gfx* Machine_DrawRear1Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3247,7 +3247,7 @@ Gfx* Machine_DrawRear1Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 30, 31, 32, 0, 30, 32, 33, 0);
     gSP2Triangles(gfx++, 12, 34, 10, 0, 12, 35, 34, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7042D48, 49, 0);
@@ -3262,7 +3262,7 @@ Gfx* Machine_DrawRear1Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 37, 38, 39, 0, 40, 41, 42, 0);
     gSP2Triangles(gfx++, 43, 44, 45, 0, 46, 47, 48, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -3270,7 +3270,7 @@ Gfx* Machine_DrawRear1Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 1, 0, TEXEL0, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPVertex(gfx++, D_7042C48, 4, 0);
@@ -3288,7 +3288,7 @@ Gfx* Machine_DrawRear1Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear1Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -3296,7 +3296,7 @@ Gfx* Machine_DrawRear1Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3311,7 +3311,7 @@ Gfx* Machine_DrawRear1Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 15, 26, 13, 0, 27, 28, 29, 0);
     gSP2Triangles(gfx++, 27, 29, 30, 0, 12, 31, 10, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_70433F8, 33, 0);
@@ -3323,7 +3323,7 @@ Gfx* Machine_DrawRear1Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 24, 25, 26, 0, 27, 28, 29, 0);
     gSP1Triangle(gfx++, 30, 31, 32, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -3343,7 +3343,7 @@ Gfx* Machine_DrawRear1Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear1Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -3351,7 +3351,7 @@ Gfx* Machine_DrawRear1Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3362,7 +3362,7 @@ Gfx* Machine_DrawRear1Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 10, 11, 12, 0, 5, 13, 3, 0);
     gSP2Triangles(gfx++, 12, 14, 10, 0, 2, 15, 0, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7043858, 25, 0);
@@ -3372,7 +3372,7 @@ Gfx* Machine_DrawRear1Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 13, 14, 15, 0, 16, 17, 18, 0);
     gSP2Triangles(gfx++, 19, 20, 21, 0, 22, 23, 24, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_AIR_DUCT, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, 0, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0,
                       COMBINED);
@@ -3390,7 +3390,7 @@ Gfx* Machine_DrawRear1Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawRear1Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_LOGO, G_ON);
     gDPPipeSync(gfx++);
     gDPSetCombineLERP(gfx++, TEXEL0, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE,
                       0, 0, 0, 0, COMBINED);
@@ -3398,7 +3398,7 @@ Gfx* Machine_DrawRear1Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP1Triangle(gfx++, 6, 7, 8, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3407,7 +3407,7 @@ Gfx* Machine_DrawRear1Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7043B98, 12, 0);
@@ -3426,7 +3426,7 @@ Gfx* Machine_DrawRear1Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing1Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3440,7 +3440,7 @@ Gfx* Machine_DrawWing1Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing1Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3455,7 +3455,7 @@ Gfx* Machine_DrawWing1Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing1Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3469,7 +3469,7 @@ Gfx* Machine_DrawWing1Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing1LodFurthest(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3482,7 +3482,7 @@ Gfx* Machine_DrawWing1LodFurthest(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, 
 
 Gfx* Machine_DrawWing3Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3498,7 +3498,7 @@ Gfx* Machine_DrawWing3Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing3Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3514,7 +3514,7 @@ Gfx* Machine_DrawWing3Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing3Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3528,7 +3528,7 @@ Gfx* Machine_DrawWing3Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing3LodFurthest(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3542,7 +3542,7 @@ Gfx* Machine_DrawWing3LodFurthest(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, 
 
 Gfx* Machine_DrawWing5Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3561,7 +3561,7 @@ Gfx* Machine_DrawWing5Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing5Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3579,7 +3579,7 @@ Gfx* Machine_DrawWing5Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing5Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3596,7 +3596,7 @@ Gfx* Machine_DrawWing5Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing5Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3610,7 +3610,7 @@ Gfx* Machine_DrawWing5Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing5Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3623,7 +3623,7 @@ Gfx* Machine_DrawWing5Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3638,7 +3638,7 @@ Gfx* Machine_DrawWing6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 20, 21, 0, 0, 21, 1, 0);
     gSP2Triangles(gfx++, 6, 22, 23, 0, 6, 23, 7, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_3036518, 23, 0);
@@ -3655,7 +3655,7 @@ Gfx* Machine_DrawWing6Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing6Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3666,7 +3666,7 @@ Gfx* Machine_DrawWing6Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
     gSP2Triangles(gfx++, 12, 13, 14, 0, 12, 14, 15, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7044538, 14, 0);
@@ -3679,7 +3679,7 @@ Gfx* Machine_DrawWing6Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing6Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3688,7 +3688,7 @@ Gfx* Machine_DrawWing6Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_70446D8, 14, 0);
@@ -3701,7 +3701,7 @@ Gfx* Machine_DrawWing6Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing6Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3710,7 +3710,7 @@ Gfx* Machine_DrawWing6Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
     gSP2Triangles(gfx++, 6, 7, 8, 0, 9, 10, 11, 0);
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gSPVertex(gfx++, D_7044878, 9, 0);
@@ -3722,7 +3722,7 @@ Gfx* Machine_DrawWing6Lod4(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing6Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_NUMBER, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, numberR, numberG, numberB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3735,7 +3735,7 @@ Gfx* Machine_DrawWing6Lod5(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing2Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3753,7 +3753,7 @@ Gfx* Machine_DrawWing2Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing2Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3769,7 +3769,7 @@ Gfx* Machine_DrawWing2Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing2Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3784,7 +3784,7 @@ Gfx* Machine_DrawWing2Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing2LodFurthest(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3799,7 +3799,7 @@ Gfx* Machine_DrawWing2LodFurthest(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, 
 // Would be Lod 5 if used
 Gfx* Machine_DrawWing2LodUnused(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3812,7 +3812,7 @@ Gfx* Machine_DrawWing2LodUnused(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s3
 
 Gfx* Machine_DrawWing4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3834,7 +3834,7 @@ Gfx* Machine_DrawWing4Lod1(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing4Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3852,7 +3852,7 @@ Gfx* Machine_DrawWing4Lod2(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing4Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -3868,7 +3868,7 @@ Gfx* Machine_DrawWing4Lod3(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 num
 
 Gfx* Machine_DrawWing4LodFurthest(Gfx* gfx, s32 decalR, s32 decalG, s32 decalB, s32 numberR, s32 numberG, s32 numberB) {
 
-    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
+    gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, MACHINE_TILE_CUSTOM_DECAL, G_ON);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, decalR, decalG, decalB, 255);
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -14812,17 +14812,17 @@ Gfx* Machine_DrawLoadCustomTextures(Gfx* gfx, s32 logo, s32 number, s32 decal) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, sLogoTextures[logo], 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+    gDPLoadMultiBlock(gfx++, sLogoTextures[logo], 0x10, MACHINE_TILE_CUSTOM_LOGO, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                       G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, sMachineNumberTextures[number], 0x110, 2, G_IM_FMT_I, 32, 32, 0,
+    gDPLoadMultiBlock_4b(gfx++, sMachineNumberTextures[number], 0x110, MACHINE_TILE_CUSTOM_NUMBER, G_IM_FMT_I, 32, 32, 0,
                          G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, sDecalTextures[decal], 0x150, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, sDecalTextures[decal], 0x150, MACHINE_TILE_CUSTOM_DECAL, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x160, 4, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x160, MACHINE_TILE_CUSTOM_AIR_DUCT, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x180, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x180, MACHINE_TILE_CUSTOM_FLOOR_DUCT, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x1C0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x1C0, MACHINE_TILE_CUSTOM_BOOSTER, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -14832,19 +14832,19 @@ Gfx* Machine_DrawLoadBloodHawkTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3026DE8, 0x40, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalFadeTex, 0x40, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber25Tex, 0x50, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_301A268, 0x90, 5, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalCircle2Tex, 0x90, 5, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xA0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0xA0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0xE0, 7, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0xE0, 7, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -14854,15 +14854,15 @@ Gfx* Machine_DrawLoadSonicPhantomTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3024AF8, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct3Tex, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber16Tex, 0x20, 2, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_302A688, 0x60, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalSonicPhantomStripesTex, 0x60, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x70, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x70, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0xB0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster1Tex, 0xB0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -14872,17 +14872,17 @@ Gfx* Machine_DrawLoadMadWolfTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_30295C8, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aMadWolfRidgeTex, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber11Tex, 0x30, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004D18, 0x70, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aRearDuctTex, 0x70, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0xB0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster1Tex, 0xB0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xF0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0xF0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -14892,17 +14892,17 @@ Gfx* Machine_DrawLoadMightyTyphoonTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0x10, 1, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x10, 1, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3007E18, 0x20, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeTex, 0x20, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x30, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x30, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber27Tex, 0x50, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster1Tex, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -14914,15 +14914,15 @@ Gfx* Machine_DrawLoadBigFangTextures(Gfx* gfx) {
 
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber15Tex, 0x10, 1, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x50, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x50, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0x60, 3, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x60, 3, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3026DE8, 0x70, 4, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalFadeTex, 0x70, 4, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x80, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x80, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0xC0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster2Tex, 0xC0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -14932,17 +14932,17 @@ Gfx* Machine_DrawLoadNightThunderTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3022F58, 0x10, 1, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalLightningTex, 0x10, 1, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x50, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x50, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x70, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x70, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber23Tex, 0x80, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xC0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0xC0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x100, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0x100, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -14952,19 +14952,19 @@ Gfx* Machine_DrawLoadCrazyBearTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, D_30242F8, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock(gfx++, aDecalCrazyBearEyeTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP,
                       G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber29Tex, 0x120, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3024AF8, 0x160, 4, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct3Tex, 0x160, 4, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x170, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x170, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x1B0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0x1B0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300B5F8, 0x1F0, 7, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aMetalPlatingTex, 0x1F0, 7, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -14974,17 +14974,17 @@ Gfx* Machine_DrawLoadDeathAnchorTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber13Tex, 0x20, 2, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3022F58, 0x60, 3, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalLightningTex, 0x60, 3, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0xA0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0xA0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster1Tex, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300B5F8, 0x120, 6, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aMetalPlatingTex, 0x120, 6, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -14994,17 +14994,17 @@ Gfx* Machine_DrawLoadHyperSpeederTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, D_3021778, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock(gfx++, aDecalBeastFaceTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                       G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x130, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x130, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber18Tex, 0x140, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x180, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x180, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x1C0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster2Tex, 0x1C0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15014,19 +15014,19 @@ Gfx* Machine_DrawLoadGreatStarTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3020258, 0x10, 1, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aLogoGreatStarTex, 0x10, 1, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x90, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x90, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0xA0, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0xA0, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3020658, 0xC0, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aMachineNumber9Tex, 0xC0, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x120, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0x120, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300B5F8, 0x160, 7, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aMetalPlatingTex, 0x160, 7, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15036,17 +15036,17 @@ Gfx* Machine_DrawLoadQueenMeteorTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_301DA58, 0x30, 3, G_IM_FMT_I, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aLogoArrowTex, 0x30, 3, G_IM_FMT_I, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber21Tex, 0xB0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xF0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0xF0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x130, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster2Tex, 0x130, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15056,17 +15056,17 @@ Gfx* Machine_DrawLoadKingMeteorTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_301DA58, 0x30, 3, G_IM_FMT_I, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aLogoArrowTex, 0x30, 3, G_IM_FMT_I, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber20Tex, 0xB0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xF0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0xF0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x130, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster2Tex, 0x130, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15076,17 +15076,17 @@ Gfx* Machine_DrawLoadAstroRobinTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_301C818, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalTripleStripeUnevenTex, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x30, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x30, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber14Tex, 0x50, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15096,17 +15096,17 @@ Gfx* Machine_DrawLoadWildBoarTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_301B1B8, 0x10, 1, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aLogoWildBoarWhiskersTex, 0x10, 1, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x90, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x90, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0xA0, 3, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0xA0, 3, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber24Tex, 0xB0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xF0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0xF0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x130, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x130, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15116,19 +15116,19 @@ Gfx* Machine_DrawLoadBlackBullTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_301A268, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalCircle2Tex, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3019FE8, 0x30, 3, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalArchTex, 0x30, 3, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber30Tex, 0x40, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x80, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x80, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0xC0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0xC0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300B5F8, 0x100, 7, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aMetalPlatingTex, 0x100, 7, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15138,15 +15138,15 @@ Gfx* Machine_DrawLoadGreenPantherTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, D_3018698, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock(gfx++, aDecalGreenPantherCamoTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                       G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber17Tex, 0x130, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x170, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0x170, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x1B0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x1B0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15156,17 +15156,17 @@ Gfx* Machine_DrawLoadSpaceAnglerTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x10, 1, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x20, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x20, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x40, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x40, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber19Tex, 0x50, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster2Tex, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15176,17 +15176,17 @@ Gfx* Machine_DrawLoadLittleWyvernTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, D_3016558, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock(gfx++, aDecalLittleWyvernStripeEndsTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                       G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber10Tex, 0x60, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xA0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0xA0, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x120, 6, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x120, 6, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15196,19 +15196,19 @@ Gfx* Machine_DrawLoadMightyHurricaneTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3007E18, 0x10, 1, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeTex, 0x10, 1, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3015198, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalCircle1Tex, 0x20, 2, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006878, 0x30, 3, G_IM_FMT_IA, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aCompartmentLatchTex, 0x30, 3, G_IM_FMT_IA, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x70, 4, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x70, 4, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber28Tex, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster2Tex, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x110, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x110, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15218,17 +15218,17 @@ Gfx* Machine_DrawLoadSuperPiranhaTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_300CDF8, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalTripleStripeIncreasingTex, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x30, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x30, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber12Tex, 0x50, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x90, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x90, 4, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xD0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0xD0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004D18, 0x110, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aRearDuctTex, 0x110, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15238,17 +15238,17 @@ Gfx* Machine_DrawLoadTwinNorittaTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3012C48, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber22Tex, 0x40, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x80, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x80, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0xC0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster1Tex, 0xC0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3012BC8, 0x100, 6, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalCheckeredTex, 0x100, 6, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15258,17 +15258,17 @@ Gfx* Machine_DrawLoadDeepClawTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_300CDF8, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalTripleStripeIncreasingTex, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x30, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x30, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x50, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x50, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300E8A8, 0x60, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aMachineNumber8Tex, 0x60, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x80, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0x80, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0xC0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0xC0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15278,19 +15278,19 @@ Gfx* Machine_DrawLoadIronTigerTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, D_300FAF8, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock(gfx++, aDecalLeopardTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                       G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x130, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x130, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_30103F8, 0x140, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aMachineNumber4Tex, 0x140, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_30102F8, 0x160, 5, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aLogoIronTigerTex, 0x160, 5, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x180, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0x180, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0x1C0, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster1Tex, 0x1C0, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15300,17 +15300,17 @@ Gfx* Machine_DrawLoadWonderWaspTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0x40, 3, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x40, 3, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber26Tex, 0x50, 4, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x90, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15320,19 +15320,19 @@ Gfx* Machine_DrawLoadRedGazelleTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_300CDF8, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalTripleStripeIncreasingTex, 0x10, 1, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300CD78, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalStripeAngleTex, 0x30, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x40, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x40, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300D2F8, 0x50, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aMachineNumber1Tex, 0x50, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300CEF8, 0x70, 5, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aLogoRedGazelleTex, 0x70, 5, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0xF0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0xF0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x130, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster2Tex, 0x130, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15342,17 +15342,17 @@ Gfx* Machine_DrawLoadWhiteCatTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x10, 1, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300BA78, 0x30, 2, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aMachineNumber2Tex, 0x30, 2, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300B678, 0x50, 3, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aLogoWhiteCatTex, 0x50, 3, G_IM_FMT_I, 64, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_300B5F8, 0xD0, 4, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aMetalPlatingTex, 0xD0, 4, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0xE0, 5, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x120, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x120, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15362,17 +15362,17 @@ Gfx* Machine_DrawLoadFireStingrayTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, D_3009CE8, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock(gfx++, aDecalFlamesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                       G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x120, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x120, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3009BE8, 0x140, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aMachineNumber5Tex, 0x140, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0x160, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster1Tex, 0x160, 5, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x1A0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x1A0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15382,19 +15382,19 @@ Gfx* Machine_DrawLoadWildGooseTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, D_3007E98, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock(gfx++, aDecalWildGooseLightningTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                       G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3007E18, 0x110, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeTex, 0x110, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008918, 0x120, 3, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aMachineNumber6Tex, 0x120, 3, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x140, 4, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x140, 4, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008698, 0x160, 5, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x160, 5, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008A18, 0x170, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster3Tex, 0x170, 6, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3008718, 0x1B0, 7, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct2Tex, 0x1B0, 7, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15404,19 +15404,19 @@ Gfx* Machine_DrawLoadGoldenFoxTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, D_3006278, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadMultiBlock(gfx++, aDecalGoldenFoxStripesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                       G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006678, 0x50, 2, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aLogoGoldenFoxTex, 0x50, 2, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006178, 0x90, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x90, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006078, 0xB0, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aMachineNumber3Tex, 0xB0, 4, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006878, 0xD0, 5, G_IM_FMT_IA, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aCompartmentLatchTex, 0xD0, 5, G_IM_FMT_IA, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006A78, 0x110, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aFloorDuct1Tex, 0x110, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3006478, 0x150, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster2Tex, 0x150, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
@@ -15426,19 +15426,19 @@ Gfx* Machine_DrawLoadBlueFalconTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, D_3004918, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock(gfx++, aDecalBlueFalconWingCheckeredTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                       G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004698, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004598, 0x60, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aDecalBlueFalconArrowTex, 0x60, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004718, 0x70, 4, G_IM_FMT_I, 64, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aLogoBlueFalconTex, 0x70, 4, G_IM_FMT_I, 64, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 6, 4, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004498, 0xB0, 5, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aMachineNumber7Tex, 0xB0, 5, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004D18, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aRearDuctTex, 0xD0, 6, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-    gDPLoadMultiBlock_4b(gfx++, D_3004B18, 0x110, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gDPLoadMultiBlock_4b(gfx++, aBooster1Tex, 0x110, 7, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
     return gfx;
