@@ -68,6 +68,27 @@ typedef enum WingType {
     /* 6 */ WING_6,
 } WingType;
 
+typedef enum Logo {
+    /* 0 */ LOGO_SHIELD,
+    /* 1 */ LOGO_ARROW_PLANE,
+    /* 2 */ LOGO_CIRCLE,
+    /* 3 */ LOGO_SKULL,
+    /* 4 */ LOGO_YELLOW_GREEN,
+    /* 5 */ LOGO_KANJI,
+    /* 6 */ LOGO_X,
+    /* 7 */ LOGO_N64,
+} Logo;
+
+typedef enum Decal {
+    /* 0 */ DECAL_STRIPE,
+    /* 1 */ DECAL_THIN_STRIPE,
+    /* 2 */ DECAL_DOUBLE_STRIPE,
+    /* 3 */ DECAL_TRIPLE_STRIPE_UNEVEN,
+    /* 4 */ DECAL_BLOCK,
+} Decal;
+
+#define MACHINE_NUMBER(x) ((x) - 1)
+
 typedef enum CustomMachineTile {
     MACHINE_TILE_CUSTOM_LOGO = 1,
     MACHINE_TILE_CUSTOM_NUMBER,

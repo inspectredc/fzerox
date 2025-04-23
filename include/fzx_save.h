@@ -73,16 +73,20 @@ typedef struct GhostRecord {
     unk_80141C88_unk_1D unk_20;
 } GhostRecord; // size = 0x40
 
+typedef struct GhostReplayInfo {
+    /* 0x00 */ u16 checksum;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ s32 lapTimes[3];
+    /* 0x10 */ s32 end;
+    /* 0x14 */ u32 size;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+} GhostReplayInfo; // size = 0x20
+
 typedef struct GhostData {
-    u16 checksum;
-    s16 unk_02;
-    s32 lapTimes[3];
-    s32 replayEnd;
-    u32 replaySize;
-    s32 unk_18;
-    s32 unk_1C;
-    u8 replayData[16200];
-    s8 unk_3F68[0x18];
+    /* 0x0000 */ GhostReplayInfo replayInfo;
+    /* 0x0020 */ u8 replayData[16200];
+    /* 0x3F68 */ s8 unk_3F68[0x18];
 } GhostData; // size = 0x3F80
 
 typedef struct CupSave {
@@ -101,5 +105,8 @@ typedef struct SaveContext {
 } SaveContext; // size = 0x8000
 
 s32 Save_Init(SaveContext*, s32);
+
+#define REPLAY_DATA_LARGE_FLAG -0x80
+#define REPLAY_DATA_LARGE(x) REPLAY_DATA_LARGE_FLAG, (((x) >> 8) & 0xFF), ((x) & 0xFF)
 
 #endif // FZX_SAVE_H

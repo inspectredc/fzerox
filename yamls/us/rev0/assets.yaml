@@ -209,8 +209,15 @@
 
   # Ghost Data
   - name: segment_27F200
-    type: bin
+    # type: bin
+    # start: 0x27F200
+    exclusive_ram_id: segment_00
+    type: code
+    dir: assets
+    vram: 0x0
     start: 0x27F200
+    subsegments:
+      - [0x27F200, .data, segment_27F200/segment_27F200]
 
   - name: course_data
     exclusive_ram_id: segment_00

@@ -44,8 +44,8 @@ typedef struct Object {
 
 // Credits
 #define INTRO_TIMER(obj) ((introObj)->cacheIndex)
-#define MACHINE_NUMBER(machineObj) ((machineObj)->counter2)
-#define PORTRAIT_MACHINE_NUMBER(portraitObj) ((portraitObj)->counter2)
+#define MACHINE_INDEX(machineObj) ((machineObj)->counter2)
+#define PORTRAIT_MACHINE_INDEX(portraitObj) ((portraitObj)->counter2)
 #define MENU_LADY_DITHER_SCALE(menuLadyObj) ((menuLadyObj)->state2)
 
 // Course Select

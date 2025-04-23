@@ -875,7 +875,7 @@ void func_i3_8013C6D8(void) {
         }
         temp_fv0 = (s16) sp60 - spFC->height * 0.5f;
         spB8 = (s16) sp64 + 8.0f;
-        vp = gGfxPool->unk_2C2D8;
+        vp = &gGfxPool->unk_2C2C8[1];
         vp->vp.vscale[0] = 0x500;
         vp->vp.vscale[1] = 0x3C0;
         vp->vp.vscale[2] = 0x1FF;
@@ -1022,7 +1022,7 @@ Gfx* func_i3_8013D2BC(Gfx* gfx) {
             }
 
             gSPDisplayList(gfx++, D_80148C0);
-            gSPViewport(gfx++, D_1000000.unk_2C2D8);
+            gSPViewport(gfx++, &D_1000000.unk_2C2C8[1]);
             gSPPerspNormalize(gfx++, D_i3_801439C0);
             gSPMatrix(gfx++, &D_1000000.unk_2B2C8[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gSPMatrix(gfx++, &D_1000000.unk_2B2C8[2], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
