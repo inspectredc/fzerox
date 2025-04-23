@@ -1433,8 +1433,7 @@ Gfx* func_800833AC(Gfx* gfx, s32 arg1, s32 playerIndex) {
     switch (player->unk_E0) {
         case 1:
             gSPViewport(gfx++, &D_1000000.unk_2C2C8[playerIndex]);
-            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, player->unk_B0, player->unk_B4, player->unk_B8,
-                          player->unk_BC);
+            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, player->unk_B0, player->unk_B4, player->unk_B8, player->unk_BC);
             break;
         default:
             gfx = func_8006A00C(gfx, arg1);
