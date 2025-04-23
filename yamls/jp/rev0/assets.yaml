@@ -208,9 +208,14 @@
       - [0x278C70, .data, segment_2787F0/segment_2787F0]
 
   # Ghost Data
-  - name: segment_27F200
-    type: bin
+  - name: staff_ghost_records
+    exclusive_ram_id: segment_00
+    type: code
+    dir: assets
+    vram: 0x0
     start: 0x27F680
+    subsegments:
+      - [0x27F680, .data, staff_ghost_records/staff_ghost_records]
 
   - name: course_data
     exclusive_ram_id: segment_00

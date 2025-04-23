@@ -190,14 +190,6 @@ const unk_8008112C_arg_1 D_800D544C = {
       0.0f, 400.0f, 400.0f, 0.2f, 50.0f, 50.0f, 0.2f, 0.0f, 0.0f, 1.0f, 0.0f, 300.0f, 0.0f },
 };
 
-const s32 D_800D5540[] = { 0 };
-
-const s32 D_800D5544[] = { 1, 2 };
-
-const s32 D_800D554C[] = { 5, 7, 6 };
-
-const s32 D_800D5558[] = { 5, 7, 6, 8 };
-
 s32 D_800CD8A0 = -1;
 s32 D_800CD8A4 = 1;
 f32 D_800CD8A8 = 5.0f;
@@ -232,6 +224,14 @@ unk_800CD970 D_800CD970[] = {
     { 0, 88, 60.0f, D_800CD8B0 }, { 1, 23, 60.0f, D_800CD8C8 },  { 1, 23, 60.0f, D_800CD900 },
     { 1, 23, 80.0f, D_800CD938 }, { 0, 284, 60.0f, D_800CD8BC },
 };
+
+const s32 D_800D5540[] = { 0 };
+
+const s32 D_800D5544[] = { 1, 2 };
+
+const s32 D_800D554C[] = { 5, 7, 6 };
+
+const s32 D_800D5558[] = { 5, 7, 6, 8 };
 
 const s32* D_800CD9AC[] = {
     NULL, D_800D5540, D_800D5544, D_800D554C, D_800D5558,
@@ -1428,13 +1428,12 @@ extern s32 gGameMode;
 extern GfxPool D_1000000;
 
 Gfx* func_800833AC(Gfx* gfx, s32 arg1, s32 playerIndex) {
-    Player* temp_v0 = &gPlayers[playerIndex];
+    Player* player = &gPlayers[playerIndex];
 
-    switch (temp_v0->unk_E0) {
+    switch (player->unk_E0) {
         case 1:
             gSPViewport(gfx++, &D_1000000.unk_2C2C8[playerIndex]);
-            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, temp_v0->unk_B0, temp_v0->unk_B4, temp_v0->unk_B8,
-                          temp_v0->unk_BC);
+            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, player->unk_B0, player->unk_B4, player->unk_B8, player->unk_BC);
             break;
         default:
             gfx = func_8006A00C(gfx, arg1);
@@ -2766,7 +2765,6 @@ void func_80086B64(Player* player, unk_struct_F8* arg1) {
     }
 }
 
-extern s32 D_800CD8A0;
 extern s32 D_800E5E80;
 extern s16 D_800E5FBC;
 extern s32 D_i2_80106F10;

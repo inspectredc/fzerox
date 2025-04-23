@@ -49,9 +49,7 @@ typedef struct GfxPool {
     Mtx unk_2B248[1];
     Mtx unk_2B288[1];
     Mtx unk_2B2C8[64];
-    Vp unk_2C2C8[1];
-    Vp unk_2C2D8[1];
-    s8 pad_2C2E8[0x20];
+    Vp unk_2C2C8[4];
     Vp unk_2C308[6];
     Mtx unk_2C368[6];
     Vtx distanceFromRacerBehindE8[4];

@@ -1335,7 +1335,7 @@ Gfx* Credits_PortraitsDraw(Gfx* gfx, Object* portraitsObj) {
 
     sp34 = &D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)];
     temp_v1 = OBJECT_COUNTER(portraitsObj);
-    machineLeftPos = kCreditsMachinePositions[(PORTRAIT_MACHINE_NUMBER(portraitsObj) % 4) * 2];
+    machineLeftPos = kCreditsMachinePositions[(PORTRAIT_MACHINE_INDEX(portraitsObj) % 4) * 2];
 
     if (machineLeftPos < 100) {
         left = SCREEN_WIDTH - (temp_v1 / 1.2);
@@ -1503,8 +1503,8 @@ void Credits_MachinesUpdate(Object* machinesObj) {
 
     var_a2 = 0;
 
-    OBJECT_LEFT(machinesObj) = kCreditsMachinePositions[(MACHINE_NUMBER(machinesObj) % 4) * 2 + 0];
-    OBJECT_TOP(machinesObj) = kCreditsMachinePositions[(MACHINE_NUMBER(machinesObj) % 4) * 2 + 1];
+    OBJECT_LEFT(machinesObj) = kCreditsMachinePositions[(MACHINE_INDEX(machinesObj) % 4) * 2 + 0];
+    OBJECT_TOP(machinesObj) = kCreditsMachinePositions[(MACHINE_INDEX(machinesObj) % 4) * 2 + 1];
     switch (OBJECT_STATE2(machinesObj)) {
         case 0:
             if (++OBJECT_COUNTER(machinesObj) >= 64) {
@@ -1528,9 +1528,9 @@ void Credits_MachinesUpdate(Object* machinesObj) {
         case 3:
             if (OBJECT_COUNTER(machinesObj) != 0) {
                 OBJECT_STATE2(machinesObj) = 0;
-                MACHINE_NUMBER(machinesObj)++;
+                MACHINE_INDEX(machinesObj)++;
                 var_v1 = 0;
-                if ((MACHINE_NUMBER(machinesObj) == 5) && (D_i6_8011FAF0[9] == 0)) {
+                if ((MACHINE_INDEX(machinesObj) == 5) && (D_i6_8011FAF0[9] == 0)) {
                     var_a2 = 9;
                     D_i6_8011FAF0[9] = 1;
                     var_v1 = 1;
@@ -1592,7 +1592,7 @@ void Credits_PortraitsUpdate(Object* portraitsObj) {
         case 3:
             if (OBJECT_COUNTER(portraitsObj) != 0) {
                 OBJECT_STATE2(portraitsObj) = 0;
-                PORTRAIT_MACHINE_NUMBER(portraitsObj)++;
+                PORTRAIT_MACHINE_INDEX(portraitsObj)++;
                 OBJECT_STATE(portraitsObj) = OBJECT_STATE(Object_Get(OBJECT_CREDITS_MACHINES));
                 var_v1 = 1;
                 OBJECT_COUNTER(portraitsObj) = 0;

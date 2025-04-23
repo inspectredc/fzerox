@@ -332,7 +332,7 @@ void Save_InitWrite(SaveContext* saveContext) {
         profileSave->editCup.checksum = checksum;
     }
     saveContext->ghostRecord.checksum = Save_CalculateGhostRecordChecksum(&saveContext->ghostRecord);
-    saveContext->ghostData.checksum = Save_CalculateGhostDataChecksum(&saveContext->ghostData);
+    saveContext->ghostData.replayInfo.checksum = Save_CalculateGhostDataChecksum(&saveContext->ghostData);
 
     for (i = 0, characterSave = saveContext->characterSaves; i < 24; i++, characterSave++) {
         characterSave->checksum = Save_CalculateCharacterSaveChecksum(characterSave);
@@ -383,7 +383,7 @@ void Save_WriteGhostRecord(GhostRecord* ghostRecord) {
 }
 
 void Save_WriteGhostData(GhostData* ghostData) {
-    ghostData->checksum = Save_CalculateGhostDataChecksum(ghostData);
+    ghostData->replayInfo.checksum = Save_CalculateGhostDataChecksum(ghostData);
     Sram_ReadWrite(OS_WRITE, (uintptr_t) &gSaveContext.ghostData - (uintptr_t) &gSaveContext, ghostData,
                    sizeof(GhostData));
 }
@@ -809,12 +809,12 @@ void Save_InitGhostData(GhostData* ghostData, bool shouldClear) {
 
     // clang-format off
     for (i = 0; i < 3; i++) { \
-        ghostData->lapTimes[i] = 0;
+        ghostData->replayInfo.lapTimes[i] = 0;
     }
     // clang-format on
 
-    ghostData->replayEnd = 0;
-    ghostData->replaySize = 0;
+    ghostData->replayInfo.end = 0;
+    ghostData->replayInfo.size = 0;
 }
 
 void Save_InitCharacterSave(CharacterSave* characterSave, bool shouldClear) {
@@ -1036,11 +1036,11 @@ void Save_SaveGhostData(Ghost* ghost) {
     GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
     for (i = 0; i < 3; i++) {
-        ghostData->lapTimes[i] = ghost->lapTimes[i];
+        ghostData->replayInfo.lapTimes[i] = ghost->lapTimes[i];
     }
 
-    ghostData->replayEnd = ghost->replayEnd;
-    ghostData->replaySize = ghost->replaySize;
+    ghostData->replayInfo.end = ghost->replayEnd;
+    ghostData->replayInfo.size = ghost->replaySize;
 
     var_v1 = ghost->replayData;
     var_a1 = ghostData->replayData;
@@ -1049,9 +1049,9 @@ void Save_SaveGhostData(Ghost* ghost) {
         *var_a1++ = *var_v1++;
     }
 
-    ghostData->unk_02 = 0;
-    ghostData->unk_18 = 0;
-    ghostData->unk_1C = 0;
+    ghostData->replayInfo.unk_02 = 0;
+    ghostData->replayInfo.unk_18 = 0;
+    ghostData->replayInfo.unk_1C = 0;
 }
 
 extern f32 gCharacterLastEngine[30];
@@ -1348,7 +1348,7 @@ void Save_LoadGhostData(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* g
     GhostData* ghostData2 = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
 
     if (arg3) {
-        if (ghostData->checksum != Save_CalculateGhostDataChecksum(ghostData) * 1) {
+        if (ghostData->replayInfo.checksum != Save_CalculateGhostDataChecksum(ghostData) * 1) {
             Save_InitGhostRecord(ghostRecord2, true);
             Save_WriteGhostRecord(ghostRecord2);
             Save_InitGhostData(ghostData2, true);
@@ -1358,11 +1358,11 @@ void Save_LoadGhostData(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* g
     }
 
     for (i = 0; i < 3; i++) {
-        ghost->lapTimes[i] = ghostData->lapTimes[i];
+        ghost->lapTimes[i] = ghostData->replayInfo.lapTimes[i];
     }
 
-    ghost->replayEnd = ghostData->replayEnd;
-    ghost->replaySize = ghostData->replaySize;
+    ghost->replayEnd = ghostData->replayInfo.end;
+    ghost->replaySize = ghostData->replayInfo.size;
 
     var_v0 = ghostData->replayData;
     var_v1 = ghost->replayData;
@@ -1508,7 +1508,7 @@ s32 Save_CalculateGhostRecordChecksum(GhostRecord* ghostRecord) {
 }
 
 s32 Save_CalculateGhostDataChecksum(GhostData* ghostData) {
-    return Save_CalculateChecksum(&ghostData->unk_02, sizeof(GhostData) - sizeof(u16));
+    return Save_CalculateChecksum(&ghostData->replayInfo.unk_02, sizeof(GhostData) - sizeof(u16));
 }
 
 s32 Save_CalculateCharacterSaveChecksum(CharacterSave* characterSave) {
@@ -1566,7 +1566,7 @@ s32 Save_LoadStaffGhostRecord(GhostInfo* arg0, s32 courseIndex) {
 }
 
 void Save_RomCopyGhostRecord(GhostRecord* ghostRecord, s32 courseIndex) {
-    Dma_RomCopyAsync(SEGMENT_ROM_START(segment_27F200) + D_i2_80106DF0[courseIndex][0], ghostRecord,
+    Dma_RomCopyAsync(SEGMENT_ROM_START(staff_ghost_records) + D_i2_80106DF0[courseIndex][0], ghostRecord,
                      sizeof(GhostRecord));
 }
 
@@ -1593,10 +1593,10 @@ s32 Save_LoadStaffGhost(s32 courseIndex) {
 
 void Save_RomCopyGhostData(GhostData* ghostData, s32 courseIndex) {
     uintptr_t* offsets = D_i2_80106DF0[courseIndex];
-    RomOffset romOffset = SEGMENT_ROM_START(segment_27F200);
+    RomOffset romOffset = SEGMENT_ROM_START(staff_ghost_records);
 
-    Dma_RomCopyAsync(romOffset + offsets[1], ghostData, 0x20);
-    Dma_RomCopyAsync(romOffset + offsets[2], ghostData->replayData, ALIGN_2(ghostData->replaySize + 1));
+    Dma_RomCopyAsync(romOffset + offsets[1], &ghostData->replayInfo, sizeof(GhostReplayInfo));
+    Dma_RomCopyAsync(romOffset + offsets[2], ghostData->replayData, ALIGN_2(ghostData->replayInfo.size + 1));
 }
 
 void func_i2_801039BC(s32 arg0) {
