@@ -1566,7 +1566,7 @@ s32 Save_LoadStaffGhostRecord(GhostInfo* arg0, s32 courseIndex) {
 }
 
 void Save_RomCopyGhostRecord(GhostRecord* ghostRecord, s32 courseIndex) {
-    Dma_RomCopyAsync(SEGMENT_ROM_START(segment_27F200) + D_i2_80106DF0[courseIndex][0], ghostRecord,
+    Dma_RomCopyAsync(SEGMENT_ROM_START(staff_ghost_records) + D_i2_80106DF0[courseIndex][0], ghostRecord,
                      sizeof(GhostRecord));
 }
 
@@ -1593,7 +1593,7 @@ s32 Save_LoadStaffGhost(s32 courseIndex) {
 
 void Save_RomCopyGhostData(GhostData* ghostData, s32 courseIndex) {
     uintptr_t* offsets = D_i2_80106DF0[courseIndex];
-    RomOffset romOffset = SEGMENT_ROM_START(segment_27F200);
+    RomOffset romOffset = SEGMENT_ROM_START(staff_ghost_records);
 
     Dma_RomCopyAsync(romOffset + offsets[1], &ghostData->replayInfo, sizeof(GhostReplayInfo));
     Dma_RomCopyAsync(romOffset + offsets[2], ghostData->replayData, ALIGN_2(ghostData->replayInfo.size + 1));
