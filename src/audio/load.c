@@ -578,12 +578,12 @@ u8* AudioHeap_AllocPermanent(s32 tableType, s32 id, u32 size);
 void* AudioHeap_AllocCached(s32 tableType, s32 size, s32 cache, s32 id);
 
 void* AudioLoad_SyncLoad(u32 tableType, u32 id, s32* didAllocate) {
-    u32 size;
+    size_t size;
     AudioTable* table;
     u8* ramAddr;
     u32 medium;
     s32 loadStatus;
-    u32 romAddr;
+    uintptr_t romAddr;
     s32 pad;
     s32 cachePolicy;
 
@@ -1351,12 +1351,12 @@ void AudioLoad_AsyncDma(AudioAsyncLoad* asyncLoad, size_t size) {
 void AudioLoad_AsyncDmaUnkMedium(uintptr_t devAddr, u8* ramAddr, size_t size, s32 unkMediumParam) {
 }
 
-void AudioLoad_RelocateSample(TunedSample* tSample, u32 fontDataAddr, SampleBankRelocInfo* relocInfo) {
+void AudioLoad_RelocateSample(TunedSample* tSample, uintptr_t fontDataAddr, SampleBankRelocInfo* relocInfo) {
     void* reloc;
     Sample* sample;
 
     // "Error: Already wavetable is touched %x.\n";
-    if ((u32) tSample->sample <= AUDIO_RELOCATED_ADDRESS_START) {
+    if ((uintptr_t) tSample->sample <= AUDIO_RELOCATED_ADDRESS_START) {
         sample = tSample->sample = reloc = (u32) tSample->sample + fontDataAddr;
         // "Touch Warning: Length zero %x\n";
         if ((sample->size != 0) && (sample->isRelocated != 1)) {
@@ -1383,7 +1383,7 @@ void AudioLoad_RelocateSample(TunedSample* tSample, u32 fontDataAddr, SampleBank
     }
 }
 
-void AudioLoad_RelocateFontAndPreloadSamples(s32 fontId, u32 fontDataAddr, SampleBankRelocInfo* relocData,
+void AudioLoad_RelocateFontAndPreloadSamples(s32 fontId, uintptr_t fontDataAddr, SampleBankRelocInfo* relocData,
                                              s32 isAsync) {
     s32 i;
     Sample* sample;

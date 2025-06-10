@@ -2188,7 +2188,7 @@ void func_80085610(void) {
             func_80085B80(gPlayers, D_800E5990, D_800E5D70);
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+        case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
             v0 = 0;
             if (1) {}
             D_800E5E8C = D_800E5E8A;

@@ -134,8 +134,8 @@ bool func_i3_8013A004(void) {
     for (i = 0; i < 5; i++) {
         var_a2 = (i & 1) ? -D_i3_80143788 : D_i3_80143788;
 
-        v0->vp.vscale[0] = 640;
-        v0->vp.vscale[1] = 480;
+        v0->vp.vscale[0] = (SCREEN_WIDTH / 2) << 2;
+        v0->vp.vscale[1] = (SCREEN_HEIGHT / 2) << 2;
         v0->vp.vscale[2] = 0x1FF;
         v0->vp.vscale[3] = 0;
         v0->vp.vtrans[0] = (var_a2 + D_i3_80143790 + 45) << 2;
@@ -145,8 +145,8 @@ bool func_i3_8013A004(void) {
         v0++;
     }
 
-    v0->vp.vscale[0] = 640;
-    v0->vp.vscale[1] = 480;
+    v0->vp.vscale[0] = (SCREEN_WIDTH / 2) << 2;
+    v0->vp.vscale[1] = (SCREEN_HEIGHT / 2) << 2;
     v0->vp.vscale[2] = 0x1FF;
     v0->vp.vscale[3] = 0;
     v0->vp.vtrans[0] = (D_i3_80143788 + D_i3_8014379C + 36) << 2;

@@ -121,7 +121,7 @@ s16 D_i3_8013ED48[][4][2] = {
     { { 58, 80 }, { 58, 193 }, { 200, 80 }, { 200, 193 } },
 };
 
-void* sRaceMenuTextures[RACE_MENU_MAX] = {
+TexturePtr sRaceMenuTextures[RACE_MENU_MAX] = {
     aMenuRetryTex,                 // RACE_MENU_RETRY
     aMenuSettingsTex,              // RACE_MENU_SETTINGS
     aMenuQuitTex,                  // RACE_MENU_QUIT
@@ -1007,7 +1007,7 @@ Gfx* func_i3_8011ECF0(Gfx* gfx) {
             }
         }
 
-        if (left < 0x140) {
+        if (left < SCREEN_WIDTH) {
             gDPPipeSync(gfx++);
             character = gRacersByPosition[i]->character;
             gDPLoadTextureBlock(gfx++, gCharacterPortraitTextures[character], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
@@ -1222,11 +1222,11 @@ Gfx* func_i3_8012040C(Gfx* gfx, s32 arg1) {
             break;
     }
     if (var_a1 == 1) {
-        if (D_i3_80141BE0[arg1] < 0x3D) {
+        if (D_i3_80141BE0[arg1] <= 60) {
             winnerLeft = spB4;
             winnerTop = spB0;
             scale = sp84;
-        } else if (D_i3_80141BE0[arg1] >= 0x46) {
+        } else if (D_i3_80141BE0[arg1] >= 70) {
             winnerLeft = spAC;
             winnerTop = spA8;
             scale = sp80;
@@ -1236,7 +1236,7 @@ Gfx* func_i3_8012040C(Gfx* gfx, s32 arg1) {
             winnerTop = (spB0 + (((spA8 - spB0) / 10.0f) * temp_fv0));
             scale = (((sp80 - sp84) / 10.0f) * temp_fv0) + sp84;
         }
-        if ((D_i3_80141BE0[arg1] >= 0x3D) || (gGameFrameCount & 4)) {
+        if ((D_i3_80141BE0[arg1] > 60) || (gGameFrameCount & 4)) {
             gfx = func_i3_DrawWinner(gfx, winnerLeft, winnerTop, scale);
         }
     }
@@ -1399,11 +1399,11 @@ Gfx* func_i3_801209C8(Gfx* gfx, s32 arg1) {
             break;
     }
     if (var_a1 == 1) {
-        if (D_i3_80141BE0[arg1] < 0x3D) {
+        if (D_i3_80141BE0[arg1] <= 60) {
             loserLeft = spB4;
             loserTop = spB0;
             scale = sp84;
-        } else if (D_i3_80141BE0[arg1] >= 0x46) {
+        } else if (D_i3_80141BE0[arg1] >= 70) {
             loserLeft = spAC;
             loserTop = spA8;
             scale = sp80;
@@ -1413,7 +1413,7 @@ Gfx* func_i3_801209C8(Gfx* gfx, s32 arg1) {
             loserTop = (spB0 + (((spA8 - spB0) / 10.0f) * temp_fv0));
             scale = (((sp80 - sp84) / 10.0f) * temp_fv0) + sp84;
         }
-        if ((D_i3_80141BE0[arg1] >= 0x3D) || (gGameFrameCount & 4)) {
+        if ((D_i3_80141BE0[arg1] > 60) || (gGameFrameCount & 4)) {
             gfx = func_i3_DrawLoser(gfx, loserLeft, loserTop, scale);
         }
     }
@@ -1619,7 +1619,7 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
     temp_fa1 = gPlayers[playerIndex].unk_5C.x.z;
     sqrtf(SQ(temp_fv0) + SQ(temp_fv1) + SQ(temp_fa1));
 
-    if (D_i3_80141BF0[playerIndex] < 11) {
+    if (D_i3_80141BF0[playerIndex] <= 10) {
         spC0 = 0 * 0;
         spC4 = 0 * -2;
         spC8 = 0 * 2 + 180.0f;
@@ -1935,8 +1935,8 @@ s32 func_i3_801228F8(s32 playerNum, s32 highlightedOption, s32 maxOptionValue) {
             func_800BA8D8(0x1E);
         }
     }
-    if (D_i3_80141D90 >= 0x4B) {
-        D_i3_80141D90 = 0x3B;
+    if (D_i3_80141D90 >= 75) {
+        D_i3_80141D90 = 59;
     }
 
     Math_Rand1();
@@ -1978,8 +1978,8 @@ s32 func_i3_80122A6C(s32 playerNum, s32 highlightedOption, s32 maxOptionValue) {
             func_800BA8D8(0x1E);
         }
     }
-    if (D_i3_80141D90 >= 0x4B) {
-        D_i3_80141D90 = 0x3B;
+    if (D_i3_80141D90 >= 75) {
+        D_i3_80141D90 = 59;
     }
 
     Math_Rand1();
@@ -3670,7 +3670,7 @@ Gfx* func_i3_80128DA4(Gfx* gfx, s32 arg1) {
         if ((D_i3_80141C30[arg1] == 1) && (D_800CD010 == 0)) {
             func_8007E0CC();
         }
-        if ((D_i3_80141C30[arg1] == 0x3C) && (D_800CD010 == 0)) {
+        if ((D_i3_80141C30[arg1] == 60) && (D_800CD010 == 0)) {
             func_800BAFA4(0x12);
         }
     }
@@ -3770,9 +3770,9 @@ void func_i3_801296E8(s32 num) {
 
     if (remainingNum >= 100) {
         D_i3_80141E08[digitIndex + 0] = (remainingNum / 100) + '0';
-        remainingNum -= (remainingNum / 100) * 100;
         D_i3_80141E08[digitIndex + 1] = D_i3_80141E08[digitIndex + 2] = '0';
         D_i3_80141E08[digitIndex + 3] = '\0';
+        remainingNum -= (remainingNum / 100) * 100;
     }
     if (num >= 100) {
         digitIndex++;
@@ -3811,7 +3811,7 @@ Gfx* func_i3_801298DC(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
 
 extern s16 D_800E5FE2;
 
-Gfx* func_i3_DrawDeathRaceResultsS(Gfx* gfx) {
+Gfx* func_i3_DrawDeathRaceResults(Gfx* gfx) {
     s32 temp_v1;
     f32 oneScalar = 1.0f;
     s32 xl;
@@ -3881,7 +3881,7 @@ s32 D_i3_8013EFA4[] = { 255, 255, 255, 127 };
 
 s32 D_i3_8013EFB4[] = { 255, 0, 0, 255 };
 
-s32 D_i3_8013EFC4[] = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+s32 D_i3_8013EFC4[] = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
     s32 var_a1;
@@ -3894,9 +3894,9 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
 
     var_a1 = 0;
     if (D_i3_80141D10 < 30) {
-        var_a1 = (-D_i3_80141D10 * 4) + 120;
+        var_a1 = (30 - D_i3_80141D10) * 4;
     } else if (D_i3_80141D10 > 60030) {
-        var_a1 = (D_i3_80141D10 * 4) - 240120;
+        var_a1 = (D_i3_80141D10 - 60030) * 4;
     }
     gfx = func_i3_8012952C(gfx, var_a1);
 
@@ -4286,9 +4286,9 @@ Gfx* func_i3_DrawGPResultsScreen(Gfx* gfx, s32 arg1) {
 
     var_a2 = 0;
     if (D_i3_80141B88[arg1] < 30) {
-        var_a2 = (-D_i3_80141B88[arg1] * 4) + 120;
+        var_a2 = (30 - D_i3_80141B88[arg1]) * 4;
     } else if (D_i3_80141B88[arg1] > 30030) {
-        var_a2 = (D_i3_80141B88[arg1] * 4) - 120120;
+        var_a2 = (D_i3_80141B88[arg1] - 30030) * 4;
     }
 
     gfx = func_i3_8012952C(gfx, var_a2);
@@ -4424,9 +4424,9 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
 
     var_a2 = 0;
     if (D_i3_80141B88[playerIndex] < 30) {
-        var_a2 = -D_i3_80141B88[playerIndex] * 4 + 120;
+        var_a2 = (30 - D_i3_80141B88[playerIndex]) * 4;
     } else if (D_i3_80141B88[playerIndex] > 40030) {
-        var_a2 = D_i3_80141B88[playerIndex] * 4 - 160120;
+        var_a2 = (D_i3_80141B88[playerIndex] - 40030) * 4;
     }
     gfx = func_i3_8012952C(gfx, var_a2);
 
@@ -5024,7 +5024,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         break;
                 }
             } else if (gGameMode == GAMEMODE_DEATH_RACE) {
-                gfx = func_i3_DrawDeathRaceResultsS(gfx);
+                gfx = func_i3_DrawDeathRaceResults(gfx);
                 gfx = func_i3_80124EEC(gfx);
             }
         }

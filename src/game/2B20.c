@@ -14,7 +14,7 @@ s8 gGamePaused;
 s32 D_800DCE60;
 UNUSED s32 D_800DCE64;
 UNUSED s32 D_800DCE68;
-OSContStatus D_800DCE70[MAXCONTROLLERS];
+OSContStatus gControllerStatus[MAXCONTROLLERS];
 OSContPad gControllerPads[MAXCONTROLLERS];
 Controller gControllers[MAXCONTROLLERS + 1];
 Controller gSharedController;
@@ -211,7 +211,7 @@ void func_80068BC0(void) {
             case 15:
                 D_800CD044 = 11;
                 if (gGameMode == GAMEMODE_GP_RACE) {
-                    gQueuedGameMode = GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS;
+                    gQueuedGameMode = GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS;
                 } else {
                     gQueuedGameMode = GAMEMODE_LX_MACHINE_SETTINGS;
                 }
@@ -255,7 +255,7 @@ void func_80068DCC(void) {
             var_v1 = 0xF;
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+        case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
         case GAMEMODE_FLX_MAIN_MENU:
         case GAMEMODE_FLX_MACHINE_SELECT:
         case GAMEMODE_FLX_COURSE_SELECT:
@@ -408,7 +408,7 @@ void func_800690FC(void) {
             func_80069700();
             switch (gGameMode) {
                 case GAMEMODE_LX_MACHINE_SETTINGS:
-                case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+                case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
                     if ((gNumPlayers == 1) && (gCourseIndex < COURSE_EDIT_1)) {
                         Save_UpdateCourseCharacterSave(gCourseIndex);
                     }
@@ -449,7 +449,7 @@ void func_800690FC(void) {
                 case GAMEMODE_COURSE_EDIT:
                 case GAMEMODE_DEATH_RACE:
                 case GAMEMODE_LX_MACHINE_SETTINGS:
-                case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+                case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
                 case GAMEMODE_FLX_MACHINE_SELECT:
                     sp24 = 1;
                     break;
@@ -730,15 +730,15 @@ void Controller_Init(void) {
     s32 i;
     u8 sp53;
 
-    osContInit(&gSerialEventQueue, &sp53, D_800DCE70);
+    osContInit(&gSerialEventQueue, &sp53, gControllerStatus);
     gControllersConnected = 0;
 
     for (i = 0; i < MAXCONTROLLERS; i++) {
 
-        gControllers[i].errno = D_800DCE70[i].errno;
+        gControllers[i].errno = gControllerStatus[i].errno;
         gControllers[i].unk_72 = gControllers[i].unk_74 = gControllers[i].unk_76 = gControllers[i].unk_78 = 0;
         gControllers[i].unk_88 = gControllers[i].unk_8C = gControllers[i].unk_90 = 0;
-        if (D_800DCE70[i].errno == 0) {
+        if (gControllerStatus[i].errno == 0) {
             gPlayerControlPorts[gControllersConnected] = i;
             gControllersConnected++;
             if (osMotorInit(&gSerialEventQueue, &gControllers[i].pfs, i) == 0) {

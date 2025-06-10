@@ -595,7 +595,7 @@ s32 NextCourseSelect_Update(void) {
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 sCourseSelectState = COURSE_SELECT_NEXT_COURSE_CONTINUE;
                 func_800BA8D8(0x3E);
-                return GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS;
+                return GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS;
             }
             break;
         case COURSE_SELECT_NEXT_COURSE_CONTINUE:

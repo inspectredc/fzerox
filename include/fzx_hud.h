@@ -25,5 +25,4 @@ typedef enum TimerDigits {
     /* 13 */ TIMER_DIGIT_MINUS,
 } TimerDigits;
 
-
 #endif // FZX_HUD_H

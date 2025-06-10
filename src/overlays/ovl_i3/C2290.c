@@ -1727,7 +1727,7 @@ Gfx* func_i3_DrawPlayerLives(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     }
 
     // Flash Change In Life Icon
-    if ((gLivesChangeCounter != 0) && ((gGameFrameCount % 20U) >= 5)) {
+    if ((gLivesChangeCounter != 0) && ((gGameFrameCount % 20) >= 5)) {
         gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 7) << 2, (top + 7) << 2, 0, 0, 0, 1 << 12, 1 << 10);
     }
 

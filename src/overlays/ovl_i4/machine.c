@@ -978,7 +978,7 @@ void MachineSettings_Init(void) {
 
     for (i = 0; i < 4; i++) {
         gPlayerSelectionLock[i] = SELECTION_FREE;
-        if (gGameMode != GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS) {
+        if (gGameMode != GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS) {
             gPlayerEngine[i] = 0.5f;
         }
     }
@@ -1150,7 +1150,7 @@ s32 MachineSelect_Update(void) {
                     gMachineSelectState = MACHINE_SELECT_AWAIT_OK;
                 }
                 break;
-            case 2:
+            case MACHINE_SELECT_AWAIT_OK:
                 if (gInputButtonPressed & BTN_B) {
                     gPlayerSelectionLock[i] = SELECTION_FREE;
                     gMachineSelectState = MACHINE_SELECT_ACTIVE;
@@ -1373,8 +1373,8 @@ void MachineSelect_MachineInit(Object* machineObj) {
     MACHINE_VIEWPORT(machineObj) = vp;
 
     for (i = 0; i < 30; i++) {
-        vp[i].vp.vscale[0] = 640;
-        vp[i].vp.vscale[1] = 480;
+        vp[i].vp.vscale[0] = (SCREEN_WIDTH / 2) << 2;
+        vp[i].vp.vscale[1] = (SCREEN_HEIGHT / 2) << 2;
         vp[i].vp.vscale[2] = 0x1FF;
         vp[i].vp.vscale[3] = 0;
         vp[i].vp.vtrans[0] = (((i % 6) * 0x28) + 0x39) << 2;
@@ -1408,8 +1408,8 @@ void MachineSettings_MachineInit(Object* machineObj) {
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 4; j++) {
-            vp[i * 4 + j].vp.vscale[0] = 0x280;
-            vp[i * 4 + j].vp.vscale[1] = 0x1E0;
+            vp[i * 4 + j].vp.vscale[0] = (SCREEN_WIDTH / 2) << 2;
+            vp[i * 4 + j].vp.vscale[1] = (SCREEN_HEIGHT / 2) << 2;
             vp[i * 4 + j].vp.vscale[2] = 0x1FF;
             vp[i * 4 + j].vp.vscale[3] = 0;
 
@@ -1478,7 +1478,7 @@ void MachineSettings_SliderInit(void) {
 void MachineSelect_DifficultyCupsInit(Object* difficultyCupsObj) {
     s32 i;
 
-    OBJECT_BUFFER(difficultyCupsObj) = func_800768F4(0, 0x258);
+    OBJECT_BUFFER(difficultyCupsObj) = func_800768F4(0, 4 * 30 * 5);
 
     Save_UpdateCupSave(OBJECT_BUFFER(difficultyCupsObj));
 
@@ -2046,7 +2046,7 @@ Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* difficultyCupsObj) {
     for (i = 0; i < var_t0; i++) {
 
         // FAKE
-        if ((*((i ^ 0) + (0, var_t1))) == 0) {
+        if (((s8*)var_t1)[(i ^ 0)] == 0) {
             // No trophy
             trophyIndex = 20;
             if (1) {}

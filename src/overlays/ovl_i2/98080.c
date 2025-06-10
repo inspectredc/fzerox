@@ -102,7 +102,7 @@ void func_i2_800FC77C(void) {
             func_i2_800FCB84(0, 5);
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+        case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
             func_i2_800FCB84(0, 6);
             break;
         case GAMEMODE_RECORDS:
