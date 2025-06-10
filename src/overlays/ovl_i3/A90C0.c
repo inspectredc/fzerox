@@ -312,7 +312,9 @@ void func_i3_80115E74(void) {
                 }
 
                 for (i = 0; i < 200; i++) {
+#ifndef VERSION_JP
                     if (var_s5 != 0) {
+#endif
                         temp_hi = Math_Rand2() % var_s5;
 
                         if ((gRacers[sp70[temp_hi]].unk_350 == 0xFF) && (sp70[temp_hi] != 0xFF)) {
@@ -326,9 +328,11 @@ void func_i3_80115E74(void) {
                         if ((m >= 3) || ((m >= 2) && (gDifficulty <= EXPERT))) {
                             break;
                         }
+#ifndef VERSION_JP
                     } else {
                         break;
                     }
+#endif
                 }
 
                 for (i = 1; i < gTotalRacers; i++) {

@@ -10,8 +10,9 @@ jobs:
 
     strategy:
       fail-fast: false
+      matrix:
+        version: [us, jp]
 
-    # Todo: Add secrets and verify builds
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -38,18 +39,18 @@ jobs:
         path: fzerox-secret
 
     - name: Get the dependency
-      run: cp -r fzerox-secret/baserom.us.rev0.z64 ./
+      run: cp -r fzerox-secret/baserom.${{ matrix.version }}.rev0.z64 ./
 
     - name: Compile
-      run: make init
+      run: make init VERSION=${{ matrix.version }}
 
     - name: Generate objdiff report
-      run: python3 -m mapfile_parser objdiff_report report.json --version us
+      run: python3 -m mapfile_parser objdiff_report report.json --version ${{ matrix.version }}
 
     - name: Upload progress report artifact
       uses: actions/upload-artifact@v4
       with:
-        name: us_report
+        name: ${{ matrix.version }}_report
         path: report.json
 
     - name: Upload progress to Discord
