@@ -43,6 +43,15 @@ jobs:
     - name: Compile
       run: make init
 
+    - name: Generate objdiff report
+      run: python3 -m mapfile_parser objdiff_report report.json --version us
+
+    - name: Upload progress report artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: us_report
+        path: report.json
+
     - name: Upload progress to Discord
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       run: python3 tools/upload_progress.py --discord_url ${{ secrets.DISCORD_URL }}
