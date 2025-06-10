@@ -41,3 +41,12 @@ jobs:
 
     - name: Compile
       run: make init VERSION=jp
+
+    - name: Generate objdiff report
+      run: python3 -m mapfile_parser objdiff_report report.json --version jp
+
+    - name: Upload progress report artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: jp_report
+        path: report.json
