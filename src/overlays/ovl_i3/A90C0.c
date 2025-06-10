@@ -225,29 +225,20 @@ extern s32 gTotalRacers;
 extern s32 D_800E5FF0;
 extern s16 D_80115D50[];
 
-#ifdef NON_EQUIVALENT
-// close with fakes in https://decomp.me/scratch/NV0Rp
 void func_i3_80115E74(void) {
-    s32 sp70[1];
-    s32 i; // s3
-    s32 j; // s1
+    s32 pad[44];
+    Racer* tempRacer;
+    s32 i;
+    s32 j;
     s32 k;
-    s32 l;
+    s32 m;
+    s32 n;
     Racer* var_s0;
-    Racer* var_s2;
-    s32 var_v0_5;
-    s32 var_s0_3;
-    s32 var_a0_2;
     s32 var_a1;
-    s32 var_a1_2;
-    s32 var_a3_2;
-    s32 var_s0_2;
-    s8 var_a3;
+    s32 sp70[8];
+    s32 var_a3;
     s32 temp_hi;
-    s32 temp1;
-    s32 temp2;
-    u32 var_s5;
-    s32 temp_a0;
+    s32 var_s5;
 
     if ((gGameMode == GAMEMODE_GP_END_CS) || (gGameMode == GAMEMODE_DEATH_RACE) || (gGameMode == GAMEMODE_PRACTICE)) {
         D_i3_80141998 = 1;
@@ -283,8 +274,7 @@ void func_i3_80115E74(void) {
             if (gNumPlayers != 1) {
                 var_s0->unk_34D = 1;
             }
-            var_s0->unk_368 = 0xFF;
-            var_s0->unk_350 = 0xFF;
+            var_s0->unk_350 = var_s0->unk_368 = 0xFF;
             var_s0++;
         }
     }
@@ -292,23 +282,23 @@ void func_i3_80115E74(void) {
         if ((gGameMode != GAMEMODE_GP_END_CS) &&
             ((gGameMode != GAMEMODE_GP_RACE) || (D_800E5FF0 == 1) || (D_800CD010 == 1) || (D_i3_8013DBEC != 0))) {
             for (i = 0; i < 100; i++) {
-                temp1 = (Math_Rand1() % (gTotalRacers - 1)) + 1;
-                temp2 = (Math_Rand2() % (gTotalRacers - 1)) + 1;
+                m = (Math_Rand2() % (gTotalRacers - 1)) + 1;
+                k = (Math_Rand1() % (gTotalRacers - 1)) + 1;
 
-                var_a3 = gRacers[temp1].unk_34D;
-                gRacers[temp1].unk_34D = gRacers[temp2].unk_34D;
-                gRacers[temp2].unk_34D = var_a3;
+                var_a3 = gRacers[m].unk_34D;
+                gRacers[m].unk_34D = gRacers[k].unk_34D;
+                gRacers[k].unk_34D = var_a3;
             }
             var_s5 = 0;
             if (gGameMode == GAMEMODE_GP_RACE) {
-                var_s0_2 = 0;
+                m = 0;
                 for (i = 1; i < gTotalRacers; i++) {
 
                     for (j = 0; j < 3; j++) {
                         if (sPlayerRacer->character == D_i3_8013E7A8[gRacers[i].character].unk_03[j]) {
                             gRacers[i].unk_350 = 0;
                             gRacers[i].unk_34D = 7;
-                            var_s0_2++;
+                            m++;
                             break;
                         }
                     }
@@ -323,16 +313,17 @@ void func_i3_80115E74(void) {
 
                 for (i = 0; i < 200; i++) {
                     if (var_s5 != 0) {
-                        temp_hi = Math_Rand1() % var_s5;
+                        temp_hi = Math_Rand2() % var_s5;
 
                         if ((gRacers[sp70[temp_hi]].unk_350 == 0xFF) && (sp70[temp_hi] != 0xFF)) {
                             gRacers[sp70[temp_hi]].unk_350 = 0;
                             gRacers[sp70[temp_hi]].unk_34D = 7;
-                            var_s0_2++;
+                            m++;
+                         
                             // FAKE!
-                            // if ((gRacers && gRacers) && gRacers){}
+                            if (gRacers) {}
                         }
-                        if ((var_s0_2 >= 3) || ((var_s0_2 >= 2) && (gDifficulty <= EXPERT))) {
+                        if ((m >= 3) || ((m >= 2) && (gDifficulty <= EXPERT))) {
                             break;
                         }
                     } else {
@@ -343,26 +334,26 @@ void func_i3_80115E74(void) {
                 for (i = 1; i < gTotalRacers; i++) {
                     if (gRacers[i].unk_34D == 6) {
                         for (j = 0; gRacers[i].unk_350 == 0xFF && j < 200;) {
-                            temp_hi = Math_Rand1() % 11;
+                            temp_hi = Math_Rand2() % 11;
                             if (temp_hi < 3) {
                                 var_a3 = D_i3_8013E7A8[gRacers[i].character].unk_03[temp_hi];
                             } else {
                                 var_a3 = D_i3_8013E7A8[gRacers[i].character].unk_06[temp_hi - 3];
                             }
                             j++;
-                            for (var_s0_3 = 1; var_s0_3 < gTotalRacers; var_s0_3++) {
-                                if (gRacers[var_s0_3].character == var_a3) {
-                                    var_v0_5 = 0;
+                            for (m = 1; m < gTotalRacers; m++) {
+                                if (gRacers[m].character == var_a3) {
+                                    n = 0;
                                     for (k = 1; k < gTotalRacers; k++) {
-                                        if (gRacers[k].unk_350 == var_s0_3) {
-                                            var_v0_5++;
+                                        if (gRacers[k].unk_350 == m) {
+                                            n++;
                                         }
-                                        if (gRacers[var_s0_3].unk_34D >= 6) {
-                                            var_v0_5++;
+                                        if (gRacers[m].unk_34D >= 6) {
+                                            n++;
                                         }
                                     }
-                                    if ((var_v0_5 == 0) && (gRacers[var_s0_3].unk_350 == 0xFF)) {
-                                        gRacers[i].unk_350 = var_s0_3;
+                                    if ((n == 0) && (gRacers[m].unk_350 == 0xFF)) {
+                                        gRacers[i].unk_350 = m;
                                         break;
                                     }
                                 }
@@ -373,12 +364,12 @@ void func_i3_80115E74(void) {
             }
         }
 
-        var_v0_5 = 1;
-        for (var_a0_2 = 0; var_a0_2 < 8; var_a0_2++) {
+        n = 1;
+        for (k = 0; k < 8; k++) {
             for (var_s0 = &gRacers[1]; var_s0 < &gRacers[gTotalRacers]; var_s0++) {
-                if (var_s0->unk_34D == var_a0_2) {
-                    var_s0->unk_368 = var_v0_5;
-                    var_v0_5++;
+                if (var_s0->unk_34D == k) {
+                    var_s0->unk_368 = n;
+                    n++;
                 }
             }
         }
@@ -393,46 +384,51 @@ void func_i3_80115E74(void) {
     }
     if ((gGameMode != GAMEMODE_GP_RACE) || (D_800E5FF0 == 1) || ((gCourseIndex % 6) == 0) || (D_800CD010 == 1) ||
         (D_i3_8013DBEC != 0)) {
+        tempRacer = gRacers;
         gRacers[0].unk_368 = 0xFF;
         gRacers[0].unk_350 = 0xFF;
-        var_v0_5 = 1;
+        n = 1;
 
-        for (var_a0_2 = 0; var_a0_2 < 8; var_a0_2++) {
+        for (k = 0; k < 8; k++) {
             for (i = 1; i < gTotalRacers; i++) {
-                if (gRacers[i].unk_34D == var_a0_2) {
-                    gRacers[i].position = D_80115D50[i] = var_v0_5;
-                    var_v0_5++;
+                if (gRacers[i].unk_34D == k) {
+              
+                    // FAKE!
+                    (*(tempRacer + i)).position = D_80115D50[i] = n;
+                    if (1) {} if (1) {}
+                    
+                    n++;
                 }
             }
         }
         gRacers[0].position = D_80115D50[0] = gTotalRacers;
     } else {
-        var_a1 = false;
-        for (var_a0_2 = 1; var_a0_2 - 1 < gTotalRacers; var_a0_2++) {
-            j = false;
+        var_a1 = 0;
+        for (k = 1; k <= gTotalRacers; k++) {
+            j = 0;
             for (i = 0; i < gTotalRacers; i++) {
-                if (D_80115D50[i] == var_a0_2) {
-                    j = true;
+                if (D_80115D50[i] == k) {
+                    j++;
                     break;
                 }
             }
 
-            if (!j) {
-                var_a1 = true;
+            if (j == 0) {
+                var_a1 = 1;
                 break;
             }
         }
-        if (!var_a1) {
+        if (var_a1 == 0) {
             for (i = 0; i < gTotalRacers; i++) {
                 gRacers[i].position = (gTotalRacers - D_80115D50[i]) + 1;
             }
         } else {
-            var_v0_5 = 1;
-            for (var_a0_2 = 0; var_a0_2 < 8; var_a0_2++) {
-                for (k = 1; k < gTotalRacers; k++) {
-                    if (gRacers[k].unk_34D == var_a0_2) {
-                        gRacers[k].position = var_v0_5;
-                        var_v0_5++;
+            n = 1;
+            for (k = 0; k < 8; k++) {
+                for (i = 1; i < gTotalRacers; i++) {
+                    if (gRacers[i].unk_34D == k) {
+                        gRacers[i].position = n;
+                        n++;
                     }
                 }
             }
@@ -441,13 +437,13 @@ void func_i3_80115E74(void) {
     }
 
     if (((gGameMode == GAMEMODE_GP_RACE) && (D_i3_8013E94C[gCourseIndex] == 1)) || (D_800CD010 == 1)) {
-        var_v0_5 = 4;
-        for (var_a3_2 = 0; var_a3_2 < gTotalRacers; var_a3_2++) {
+        var_a1 = 4;
+        for (var_a3 = 0; var_a3 < gTotalRacers; var_a3++) {
             for (j = 1; j < gTotalRacers; j++) {
                 if ((gRacers[j].unk_368 >= 4) && (gRacers[j].unk_368 < gTotalRacers) &&
-                    (gRacers[j].position == (var_a3_2 + 1))) {
-                    gRacers[j].unk_368 = var_v0_5;
-                    var_v0_5++;
+                    (gRacers[j].position == (var_a3 + 1))) {
+                    gRacers[j].unk_368 = var_a1;
+                    var_a1++;
                     break;
                 }
             }
@@ -464,13 +460,6 @@ void func_i3_80115E74(void) {
         }
     }
 }
-#else
-#ifdef VERSION_JP
-#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115E74.s")
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i3/A90C0/func_i3_80115E74.s")
-#endif
-#endif
 
 extern CourseInfo* gCurrentCourseInfo;
 
@@ -1752,7 +1741,6 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                                     racer->unk_33C += 46.0f;
                                 }
                             }
-                            break;
                     }
                 }
             }

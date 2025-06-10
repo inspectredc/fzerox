@@ -148,79 +148,80 @@ extern f32 gPlayerEngine[];
 extern s32 gCourseIndex;
 
 void func_80068BC0(void) {
-    if (D_800CD044 == 0) {
-        switch (D_800CD048) {
-            case 1:
-                D_800CD044 = 5;
-                break;
-            case 2:
-                D_800CD044 = 1;
-                gQueuedGameMode = GAMEMODE_FLX_MAIN_MENU;
-                break;
-            case 3:
-                D_800CD044 = 1;
-                gQueuedGameMode = GAMEMODE_FLX_COURSE_SELECT;
-                break;
-            case 7:
-                D_800CD044 = 1;
-                gQueuedGameMode = GAMEMODE_FLX_MACHINE_SELECT;
-                break;
-            case 4:
-                D_800CD044 = 1;
-                if (gCourseIndex % 6 == 5) {
-                    gQueuedGameMode = GAMEMODE_GP_END_CS;
-                } else {
-                    gQueuedGameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
-                    gCourseIndex++;
-                }
-                gPlayerEngine[0] = 0.5f;
-                break;
-            case 5:
-                D_800CD044 = 1;
+    if (D_800CD044 != 0) {
+        return;
+    }
+    switch (D_800CD048) {
+        case 1:
+            D_800CD044 = 5;
+            break;
+        case 2:
+            D_800CD044 = 1;
+            gQueuedGameMode = GAMEMODE_FLX_MAIN_MENU;
+            break;
+        case 3:
+            D_800CD044 = 1;
+            gQueuedGameMode = GAMEMODE_FLX_COURSE_SELECT;
+            break;
+        case 7:
+            D_800CD044 = 1;
+            gQueuedGameMode = GAMEMODE_FLX_MACHINE_SELECT;
+            break;
+        case 4:
+            D_800CD044 = 1;
+            if (gCourseIndex % 6 == 5) {
+                gQueuedGameMode = GAMEMODE_GP_END_CS;
+            } else {
                 gQueuedGameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
-                break;
-            case 6:
-                D_800CD044 = 11;
-                gQueuedGameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
-                break;
-            case 8:
-                D_800CD044 = 21;
-                gQueuedGameMode = GAMEMODE_RECORDS;
-                break;
-            case 9:
-                D_800CD044 = 21;
-                gQueuedGameMode = GAMEMODE_FLX_RECORDS_COURSE_SELECT;
-                break;
-            case 10:
-            case 14:
-                D_800CD044 = 21;
-                gQueuedGameMode = GAMEMODE_FLX_MAIN_MENU;
-                break;
-            case 11:
-                D_800CD044 = 31;
-                gQueuedGameMode = GAMEMODE_FLX_COURSE_SELECT;
-                break;
-            case 12:
-                D_800CD044 = 31;
-                gQueuedGameMode = GAMEMODE_FLX_MAIN_MENU;
-                break;
-            case 13:
-                D_800CD044 = 21;
-                gQueuedGameMode = GAMEMODE_FLX_OPTIONS_MENU;
-                break;
-            case 15:
-                D_800CD044 = 11;
-                if (gGameMode == GAMEMODE_GP_RACE) {
-                    gQueuedGameMode = GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS;
-                } else {
-                    gQueuedGameMode = GAMEMODE_LX_MACHINE_SETTINGS;
-                }
-                break;
-            case 16:
-                D_800CD044 = 11;
-                gQueuedGameMode = gGameMode;
-                break;
-        }
+                gCourseIndex++;
+            }
+            gPlayerEngine[0] = 0.5f;
+            break;
+        case 5:
+            D_800CD044 = 1;
+            gQueuedGameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
+            break;
+        case 6:
+            D_800CD044 = 11;
+            gQueuedGameMode = GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
+            break;
+        case 8:
+            D_800CD044 = 21;
+            gQueuedGameMode = GAMEMODE_RECORDS;
+            break;
+        case 9:
+            D_800CD044 = 21;
+            gQueuedGameMode = GAMEMODE_FLX_RECORDS_COURSE_SELECT;
+            break;
+        case 10:
+        case 14:
+            D_800CD044 = 21;
+            gQueuedGameMode = GAMEMODE_FLX_MAIN_MENU;
+            break;
+        case 11:
+            D_800CD044 = 31;
+            gQueuedGameMode = GAMEMODE_FLX_COURSE_SELECT;
+            break;
+        case 12:
+            D_800CD044 = 31;
+            gQueuedGameMode = GAMEMODE_FLX_MAIN_MENU;
+            break;
+        case 13:
+            D_800CD044 = 21;
+            gQueuedGameMode = GAMEMODE_FLX_OPTIONS_MENU;
+            break;
+        case 15:
+            D_800CD044 = 11;
+            if (gGameMode == GAMEMODE_GP_RACE) {
+                gQueuedGameMode = GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS;
+            } else {
+                gQueuedGameMode = GAMEMODE_LX_MACHINE_SETTINGS;
+            }
+            break;
+        case 16:
+            D_800CD044 = 11;
+            gQueuedGameMode = gGameMode;
+            break;
     }
 }
 

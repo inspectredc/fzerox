@@ -123,7 +123,7 @@ void AudioHeap_DiscardFont(s32 fontId) {
                 note->playbackState.parentLayer->finished = true;
             }
             Audio_NoteDisable(note);
-            Audio_AudioListRemove(note);
+            Audio_AudioListRemove(&note->listItem);
             AudioSeq_AudioListPushBack(&gNoteFreeLists.disabled, &note->listItem);
         }
     }

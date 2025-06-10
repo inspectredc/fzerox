@@ -2978,8 +2978,6 @@ void func_80074204(void) {
     }
 }
 
-void func_80074204(void);
-
 void func_800742D0(void) {
     func_80074204();
     gCourseData.venue = VENUE_MUTE_CITY;

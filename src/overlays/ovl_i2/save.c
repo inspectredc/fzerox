@@ -85,7 +85,7 @@ void Save_ReadProfileSaves(ProfileSave* profileSave) {
 extern Ghost gGhosts[];
 extern s32 gCurrentGhostType;
 
-s32 SaveLoadPlayerGhost(s32, s32);
+s32 Save_LoadPlayerGhost(s32, s32);
 s32 Save_LoadStaffGhost(s32);
 
 s32 Save_LoadGhost(s32 courseIndex) {
@@ -106,7 +106,7 @@ s32 Save_LoadGhost(s32 courseIndex) {
             break;
         case GHOST_NONE:
         case GHOST_PLAYER:
-            sp18 = SaveLoadPlayerGhost(courseIndex, -1);
+            sp18 = Save_LoadPlayerGhost(courseIndex, -1);
             break;
         case GHOST_STAFF:
             sp18 = Save_LoadStaffGhost(courseIndex);
@@ -179,7 +179,7 @@ s32 func_i2_801005CC(s32 courseIndex) {
 bool func_i2_80100B38(GhostInfo*);
 s32 func_i2_801005CC(s32);
 
-s32 SaveLoadPlayerGhost(s32 courseIndex, s32 ghostIndex) {
+s32 Save_LoadPlayerGhost(s32 courseIndex, s32 ghostIndex) {
     GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
     GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
     s32 var_t0;
@@ -665,7 +665,7 @@ void Save_CreateNew(SaveContext* saveContext, s32 arg1) {
     if ((arg1 != 0) && (arg1 == 1)) {
         Save_ReadProfileSaves(saveContext->profileSaves);
         Save_LoadSaveSettings(saveContext->profileSaves, false);
-        spB7 = saveContext->profileSaves[0].saveSettings.unk_09;
+        spB7 = saveContext->profileSaves[0].saveSettings.customUnlocks;
         Save_LoadEditCup(saveContext->profileSaves, false);
         editCup = saveContext->profileSaves[0].editCup;
     }
@@ -694,7 +694,7 @@ void Save_CreateNew(SaveContext* saveContext, s32 arg1) {
 
     // Restore the n64dd related save data
     if ((arg1 != 0) && (arg1 == 1)) {
-        saveContext->profileSaves[0].saveSettings.unk_09 = saveContext->profileSaves[1].saveSettings.unk_09 = spB7;
+        saveContext->profileSaves[0].saveSettings.customUnlocks = saveContext->profileSaves[1].saveSettings.customUnlocks = spB7;
         saveContext->profileSaves[0].editCup = saveContext->profileSaves[1].editCup = editCup;
     }
 }
@@ -718,7 +718,7 @@ void Save_InitSaveSettings(SaveSettings* saveSettings, bool shouldClear) {
 
     // vs com default on
     saveSettings->settings = 1;
-    saveSettings->unk_09 = 0;
+    saveSettings->customUnlocks = 0;
 }
 
 void Save_InitEditCup(SaveEditCup* editCup, bool shouldClear) {
@@ -912,16 +912,16 @@ void Save_SaveSettings(SaveSettings* saveSettings) {
         saveSettings->cupDifficultiesCleared[i] = gCupNumDifficultiesCleared[i];
     }
 
-    saveSettings->unk_09 = 0;
+    saveSettings->customUnlocks = 0;
 
-    if (D_i2_80111848[0] != 0) {
-        saveSettings->unk_09 |= 1;
+    if (D_i2_80111848[CAPTAIN_FALCON] != 0) {
+        saveSettings->customUnlocks |= 1;
     }
-    if (D_i2_80111848[3] != 0) {
-        saveSettings->unk_09 |= 2;
+    if (D_i2_80111848[SAMURAI_GOROH] != 0) {
+        saveSettings->customUnlocks |= 2;
     }
-    if (D_i2_80111848[4] != 0) {
-        saveSettings->unk_09 |= 4;
+    if (D_i2_80111848[JODY_SUMMER] != 0) {
+        saveSettings->customUnlocks |= 4;
     }
 }
 
@@ -1204,14 +1204,14 @@ void Save_LoadSaveSettings(ProfileSave* profileSaves, bool arg1) {
     }
     // clang-format on
 
-    if (saveSettings->unk_09 & 1) {
-        D_i2_80111848[0] = 1;
+    if (saveSettings->customUnlocks & 1) {
+        D_i2_80111848[CAPTAIN_FALCON] = 1;
     }
-    if (saveSettings->unk_09 & 2) {
-        D_i2_80111848[3] = 1;
+    if (saveSettings->customUnlocks & 2) {
+        D_i2_80111848[SAMURAI_GOROH] = 1;
     }
-    if (saveSettings->unk_09 & 4) {
-        D_i2_80111848[4] = 1;
+    if (saveSettings->customUnlocks & 4) {
+        D_i2_80111848[JODY_SUMMER] = 1;
     }
 }
 

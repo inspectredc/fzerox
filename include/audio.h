@@ -887,7 +887,7 @@ void Audio_SeqLayerNoteDecay(SequenceLayer* layer);
 void Audio_InitNoteLists(NotePool* pool);
 void Audio_InitNoteFreeList(void);
 void Audio_NotePoolFill(NotePool* pool, s32 count);
-void Audio_AudioListRemove(Note* note);
+void Audio_AudioListRemove(AudioListItem* item);
 Note* Audio_AllocNote(SequenceLayer* layer);
 void Audio_NoteInitAll(void);
 

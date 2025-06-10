@@ -125,7 +125,11 @@
     "fzx_object.h": "c",
     "fzx_hud.h": "c",
     "fzx_save.h": "c",
-    "staff_ghost_records.h": "c"
+    "staff_ghost_records.h": "c",
+    "fzx_machine.h": "c",
+    "segment_1e23f0.h": "c",
+    "unk_gfx.h": "c",
+    "segment_16c8a0.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp.errorSquiggles": "enabled"
