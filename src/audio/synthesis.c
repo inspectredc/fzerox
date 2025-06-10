@@ -308,12 +308,12 @@ Acmd* AudioSynth_ProcessNote(s32 noteIndex, NoteSubEu* noteSub, NoteSynthesisSta
                 }
             }
             switch (bookSample->codec) {
-                case 0:
+                case CODEC_ADPCM:
                     frameSize = 9;
                     skipInitialSamples = SAMPLES_PER_FRAME;
                     sampleDataStart = 0;
                     break;
-                case 1:
+                case CODEC_S8:
                     frameSize = 16;
                     skipInitialSamples = SAMPLES_PER_FRAME;
                     sampleDataStart = 0;
@@ -351,14 +351,14 @@ Acmd* AudioSynth_ProcessNote(s32 noteIndex, NoteSubEu* noteSub, NoteSynthesisSta
                 var_t4 = ALIGN16(var_t2 + SAMPLES_PER_FRAME);
             }
             switch (bookSample->codec) {
-                case 0:
+                case CODEC_ADPCM:
                     aligned = ALIGN16((nFramesToDecode * frameSize) + SAMPLES_PER_FRAME);
                     addr = DMEM_COMPRESSED_ADPCM_DATA - aligned;
                     aSetBuffer(aList++, 0, addr + sampleDataStartPad, DMEM_UNCOMPRESSED_NOTE + var_t4,
                                nSamplesToDecode * SAMPLE_SIZE);
                     aADPCMdec(aList++, flags, OS_K0_TO_PHYSICAL(synthState->synthesisBuffers));
                     break;
-                case 1:
+                case CODEC_S8:
                     aligned = ALIGN16((nFramesToDecode * frameSize) + SAMPLES_PER_FRAME);
                     addr = DMEM_COMPRESSED_ADPCM_DATA - aligned;
                     aSetBuffer(aList++, 0, addr + sampleDataStartPad, DMEM_UNCOMPRESSED_NOTE + var_t4,

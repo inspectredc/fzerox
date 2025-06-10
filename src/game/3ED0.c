@@ -6,14 +6,14 @@ f32 gSinTable[0x1000];
 Mtx D_800E1230;
 MtxF D_800E1270;
 
-extern OSContStatus D_800DCE70[];
+extern OSContStatus gControllerStatus[];
 extern Controller gControllers[];
 
 Controller* Controller_GetMouse(void) {
     s32 i;
 
     for (i = 0; i < MAXCONTROLLERS; i++) {
-        if ((D_800DCE70[i].type & CONT_TYPE_MASK) == CONT_TYPE_MOUSE) {
+        if ((gControllerStatus[i].type & CONT_TYPE_MASK) == CONT_TYPE_MOUSE) {
             return &gControllers[i];
         }
     }
@@ -423,10 +423,10 @@ void func_8006B18C(LookAt* lookAt, s32* arg1, MtxF* arg2, f32 arg3, f32 arg4, f3
             (temp_fa1 * arg2->m[0][0] + temp_ft4 * arg2->m[1][0] + temp_ft5 * arg2->m[2][0]) * (arg6 * 2) + arg6 * 4;
         arg1[1] =
             (temp_fa1 * arg2->m[0][1] + temp_ft4 * arg2->m[1][1] + temp_ft5 * arg2->m[2][1]) * (arg7 * 2) + arg7 * 4;
-        return;
+    } else {
+        arg1[0] = arg6 * 2;
+        arg1[1] = arg7 * 2;
     }
-    arg1[0] = arg6 * 2;
-    arg1[1] = arg7 * 2;
 }
 
 #define FTO32(x) (long) ((x) *65536.0f)
@@ -576,7 +576,6 @@ void func_8006B908(MtxF* arg0, MtxF* arg1, MtxF* arg2) {
 void Matrix_FromMtx(Mtx* src2, MtxF* dest) {
     s32 i;
     s32 j;
-    // Potential Re-cast?
     Mtx* src = src2;
 
     for (i = 3; i >= 0; i--) {
@@ -956,28 +955,30 @@ void func_8006CB0C(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
     }
     temp_fv1 = (arg2 * arg8) + (arg3 * arg9) + (arg4 * argA);
 
-    if (!(SQ(temp_fv1) < 0.01)) {
-        temp_fv1 = -1.0f / temp_fv1;
-        temp_fv0 = (((-arg8 * arg5) - (arg9 * arg6)) - (argA * arg7)) * temp_fv1;
-        arg8 *= temp_fv1;
-        arg9 *= temp_fv1;
-        argA *= temp_fv1;
-        arg1->xx = arg8 * arg2 + 1.0f;
-        arg1->yx = arg8 * arg3;
-        arg1->zx = arg8 * arg4;
-        arg1->xy = arg9 * arg2;
-        arg1->yy = arg9 * arg3 + 1.0f;
-        arg1->zy = arg9 * arg4;
-        arg1->xz = argA * arg2;
-        arg1->yz = argA * arg3;
-        arg1->zz = argA * arg4 + 1.0f;
-        arg1->xw = temp_fv0 * arg2;
-        arg1->yw = temp_fv0 * arg3;
-        arg1->zw = temp_fv0 * arg4;
-        arg1->wx = arg1->wy = arg1->wz = 0.0f;
-        arg1->ww = 1.0f;
-        Matrix_ToMtx(arg1, arg0);
+    if (SQ(temp_fv1) < 0.01) {
+        return;
     }
+
+    temp_fv1 = -1.0f / temp_fv1;
+    temp_fv0 = (((-arg8 * arg5) - (arg9 * arg6)) - (argA * arg7)) * temp_fv1;
+    arg8 *= temp_fv1;
+    arg9 *= temp_fv1;
+    argA *= temp_fv1;
+    arg1->xx = arg8 * arg2 + 1.0f;
+    arg1->yx = arg8 * arg3;
+    arg1->zx = arg8 * arg4;
+    arg1->xy = arg9 * arg2;
+    arg1->yy = arg9 * arg3 + 1.0f;
+    arg1->zy = arg9 * arg4;
+    arg1->xz = argA * arg2;
+    arg1->yz = argA * arg3;
+    arg1->zz = argA * arg4 + 1.0f;
+    arg1->xw = temp_fv0 * arg2;
+    arg1->yw = temp_fv0 * arg3;
+    arg1->zw = temp_fv0 * arg4;
+    arg1->wx = arg1->wy = arg1->wz = 0.0f;
+    arg1->ww = 1.0f;
+    Matrix_ToMtx(arg1, arg0);
 }
 
 void func_8006CC98(Mtx* arg0, MtxF* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,

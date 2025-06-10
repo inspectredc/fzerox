@@ -62,7 +62,7 @@ const char* sTrackNames[] = { "mute city",
                               "default 5",
                               "default 6",
                               "x",
-                              "\0" };
+                              "" };
 
 #ifdef VERSION_JP
 const char* gMachineNames[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
@@ -798,6 +798,7 @@ void func_8007DEF0(void) {
     s32 i;
     s32 var_v1 = 0;
     s32 var_a0;
+    s32 cupType;
 
     for (i = 0; i < 4; i++) {
         if (gCupNumDifficultiesCleared[i] < 3) {
@@ -805,34 +806,33 @@ void func_8007DEF0(void) {
             break;
         }
     }
+    cupType = gCupType;
     var_a0 = gDifficulty + 1;
-    //! @bug This always evaluates to true, and instead should use a &&
+    //! @bug This always evaluates to false, and instead should use an ||
     //       The result of this could lead to an OOB array access of gCupNumDifficultiesCleared
-    if ((gCupType >= JACK_CUP) || (gCupType <= JOKER_CUP)) {
-        if (var_a0 > MASTER + 1) {
-            var_a0 = MASTER + 1;
-        }
-
-        if (gCupNumDifficultiesCleared[gCupType] < var_a0) {
-            gCupNumDifficultiesCleared[gCupType] = var_a0;
-        }
-        if (var_v1 != 0) {
-            for (i = 0; i < 4; i++) {
-                if (gCupNumDifficultiesCleared[i] < 3) {
-                    var_v1 = 0;
-                    if (gCupType) {}
-                }
-            }
-
-            if (var_v1 != 0) {
-                D_800E42CC = 1;
-            }
-        }
-        Save_SaveSettingsProfiles();
+    if ((cupType < JACK_CUP) && (cupType > JOKER_CUP)) {
+        return;
     }
-}
+    if (var_a0 > MASTER + 1) {
+        var_a0 = MASTER + 1;
+    }
 
-extern s8 gCupNumDifficultiesCleared[4];
+    if (gCupNumDifficultiesCleared[cupType] < var_a0) {
+        gCupNumDifficultiesCleared[cupType] = var_a0;
+    }
+    if (var_v1 != 0) {
+        for (i = 0; i < 4; i++) {
+            if (gCupNumDifficultiesCleared[i] < 3) {
+                var_v1 = 0;
+            }
+        }
+
+        if (var_v1 != 0) {
+            D_800E42CC = 1;
+        }
+    }
+    Save_SaveSettingsProfiles();
+}
 
 s32 func_8007E008(void) {
     s32 sum = 0;

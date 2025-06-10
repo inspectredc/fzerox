@@ -135,8 +135,8 @@ static char devstr8[] = "AudioSend: %d -> %d (%d)\n";
 static char devstr9[] = "Warning: MesgQ is Full, Retry Next Send.\n";
 static char devstr10[] = "Next Start %d \n";
 
-void AudioThread_SetFadeOutTimer(s32 seqPlayId, s32 fadeTime);
-void AudioThread_SetFadeInTimer(s32 seqPlayId, s32 fadeTime);
+void AudioThread_SetFadeOutTimer(s32 seqPlayerIndex, s32 fadeTime);
+void AudioThread_SetFadeInTimer(s32 seqPlayerIndex, s32 fadeTime);
 
 void AudioThread_ProcessGlobalCmd(AudioCmd* cmd) {
     s32 i;
@@ -216,23 +216,23 @@ void AudioThread_ProcessGlobalCmd(AudioCmd* cmd) {
     }
 }
 
-void AudioThread_SetFadeOutTimer(s32 seqPlayId, s32 fadeTime) {
+void AudioThread_SetFadeOutTimer(s32 seqPlayerIndex, s32 fadeTime) {
     if (fadeTime == 0) {
         fadeTime = 1;
     }
 
-    gSeqPlayers[seqPlayId].state = 2;
-    gSeqPlayers[seqPlayId].fadeTimer = fadeTime;
-    gSeqPlayers[seqPlayId].fadeVelocity = -(gSeqPlayers[seqPlayId].fadeVolume / fadeTime);
+    gSeqPlayers[seqPlayerIndex].state = 2;
+    gSeqPlayers[seqPlayerIndex].fadeTimer = fadeTime;
+    gSeqPlayers[seqPlayerIndex].fadeVelocity = -(gSeqPlayers[seqPlayerIndex].fadeVolume / fadeTime);
 }
 
-void AudioThread_SetFadeInTimer(s32 seqPlayId, s32 fadeTime) {
+void AudioThread_SetFadeInTimer(s32 seqPlayerIndex, s32 fadeTime) {
     if (fadeTime != 0) {
-        gSeqPlayers[seqPlayId].state = 1;
-        gSeqPlayers[seqPlayId].fadeTimerUnkEu = fadeTime;
-        gSeqPlayers[seqPlayId].fadeTimer = fadeTime;
-        gSeqPlayers[seqPlayId].fadeVolume = 0.0f;
-        gSeqPlayers[seqPlayId].fadeVelocity = 0.0f;
+        gSeqPlayers[seqPlayerIndex].state = 1;
+        gSeqPlayers[seqPlayerIndex].fadeTimerUnkEu = fadeTime;
+        gSeqPlayers[seqPlayerIndex].fadeTimer = fadeTime;
+        gSeqPlayers[seqPlayerIndex].fadeVolume = 0.0f;
+        gSeqPlayers[seqPlayerIndex].fadeVelocity = 0.0f;
     }
 }
 

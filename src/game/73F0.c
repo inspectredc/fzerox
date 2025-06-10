@@ -704,9 +704,6 @@ void func_8006EC7C(void) {
     }
 }
 
-extern Gfx D_8017220[];
-extern Gfx D_80172A0[];
-
 Gfx* func_8006F3D8(Gfx* gfx) {
 
     gSPSetGeometryMode(gfx++, G_CULL_BACK);
@@ -719,8 +716,6 @@ Gfx* func_8006F3D8(Gfx* gfx) {
     return gfx;
 }
 
-extern Gfx D_8018618[];
-
 Gfx* func_8006F444(Gfx* gfx) {
 
     gSPSetGeometryMode(gfx++, G_CULL_BACK);
@@ -728,9 +723,6 @@ Gfx* func_8006F444(Gfx* gfx) {
 
     return gfx;
 }
-
-extern Gfx D_801A1F8[];
-extern Gfx D_801A278[];
 
 Gfx* func_8006F478(Gfx* gfx) {
 
@@ -744,8 +736,6 @@ Gfx* func_8006F478(Gfx* gfx) {
     return gfx;
 }
 
-extern Gfx D_801AEF8[];
-
 Gfx* func_8006F4E4(Gfx* gfx) {
 
     gSPClearGeometryMode(gfx++, G_CULL_BACK);
@@ -753,9 +743,6 @@ Gfx* func_8006F4E4(Gfx* gfx) {
 
     return gfx;
 }
-
-extern Gfx D_801D030[];
-extern Gfx D_801D0B0[];
 
 Gfx* func_8006F514(Gfx* gfx) {
 
@@ -768,9 +755,6 @@ Gfx* func_8006F514(Gfx* gfx) {
 
     return gfx;
 }
-
-extern Gfx D_801E178[];
-extern Gfx D_801E1F8[];
 
 Gfx* func_8006F57C(Gfx* gfx) {
 
@@ -785,7 +769,6 @@ Gfx* func_8006F57C(Gfx* gfx) {
 }
 
 extern GfxPool D_1000000;
-extern Gfx D_801EAA8[];
 
 Gfx* func_8006F5E4(Gfx* gfx) {
 
@@ -818,8 +801,6 @@ Gfx* func_8006F68C(Gfx* gfx) {
     return gfx;
 }
 
-extern Gfx D_801EBF8[];
-
 Gfx* func_8006F6FC(Gfx* gfx) {
 
     gSPSetGeometryMode(gfx++, G_CULL_BACK);
@@ -838,9 +819,6 @@ Gfx* func_8006F6FC(Gfx* gfx) {
     return gfx;
 }
 
-extern u16 D_8014A20[];
-extern Gfx D_801ED28[];
-
 Gfx* func_8006F7A4(Gfx* gfx) {
 
     if (D_800E32C8 != 0) {
@@ -854,8 +832,6 @@ Gfx* func_8006F7A4(Gfx* gfx) {
     D_800E32C8 = 0;
     return gfx;
 }
-
-extern Gfx D_801EEA0[];
 extern u16 D_801F018[];
 
 Gfx* func_8006F89C(Gfx* gfx) {
@@ -872,9 +848,6 @@ Gfx* func_8006F89C(Gfx* gfx) {
     return gfx;
 }
 
-extern Gfx D_801F818[];
-extern u16 D_801F8C8[];
-
 Gfx* func_8006F998(Gfx* gfx) {
 
     if (D_800E32C8 != 2) {
@@ -889,9 +862,6 @@ Gfx* func_8006F998(Gfx* gfx) {
     return gfx;
 }
 
-extern Gfx D_80200C8[];
-extern u16 D_8020208[];
-
 Gfx* func_8006FA94(Gfx* gfx) {
 
     if (D_800E32C8 != 3) {
@@ -905,9 +875,6 @@ Gfx* func_8006FA94(Gfx* gfx) {
     D_800E32C8 = 3;
     return gfx;
 }
-
-extern Gfx D_8021208[];
-extern u16 D_8021380[];
 
 Gfx* func_8006FB90(Gfx* gfx) {
 
@@ -2973,13 +2940,16 @@ void func_8007402C(s32 courseIndex) {
 
         while (func_800760F8() != 2) {}
 
-        if (func_i1_80403680(0xFFFB, gEditCupTrackNames[sp28], "CRSD\0\0\0\0ENTRY CHECK OK\n") != 0xFFFF) {
-            func_i1_804096C8(0xFFFB, gEditCupTrackNames[sp28], "CRSD\0\0\0\0ENTRY LOAD OK\n\0\0UNPACK\n\0UNPACK OK\n",
-                             &gCourseData, 0);
+        if (func_i1_80403680(0xFFFB, gEditCupTrackNames[sp28], "CRSD") != 0xFFFF) {
+            PRINTF("ENTRY CHECK OK\n");
+            func_i1_804096C8(0xFFFB, gEditCupTrackNames[sp28], "CRSD", &gCourseData, 0);
+            PRINTF("ENTRY LOAD OK\n");
         }
     } else {
+        PRINTF("UNPACK\n");
         Dma_LoadAssetsAsync(SEGMENT_ROM_START(course_data) + courseIndex * sizeof(CourseData),
                             osVirtualToPhysical(&gCourseData), sizeof(CourseData));
+        PRINTF("UNPACK OK\n");
     }
 
     func_80074428(courseIndex);
@@ -3006,8 +2976,6 @@ void func_80074204(void) {
         gCourseData.sign[i] = SIGN_NONE;
     }
 }
-
-void func_80074204(void);
 
 void func_800742D0(void) {
     func_80074204();

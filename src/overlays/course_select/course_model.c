@@ -78,16 +78,16 @@ void func_i5_801161D8(void) {
     D_i5_801197D0 = (Vtx*) func_800768F4(0, 0x4800 * sizeof(Vtx));
 
     for (i = 0; i < 6; i++) {
-        D_i5_80118FF0[0][i].vp.vscale[0] = SCREEN_WIDTH;
-        D_i5_80118FF0[0][i].vp.vscale[1] = SCREEN_HEIGHT;
+        D_i5_80118FF0[0][i].vp.vscale[0] = (SCREEN_WIDTH / 4) << 2;
+        D_i5_80118FF0[0][i].vp.vscale[1] = (SCREEN_HEIGHT / 4) << 2;
         D_i5_80118FF0[0][i].vp.vscale[2] = 0x1FF;
         D_i5_80118FF0[0][i].vp.vscale[3] = 0;
         D_i5_80118FF0[0][i].vp.vtrans[0] = 640 + i * 0x500;
         D_i5_80118FF0[0][i].vp.vtrans[1] = 600;
         D_i5_80118FF0[0][i].vp.vtrans[2] = 0x1FF;
         D_i5_80118FF0[0][i].vp.vtrans[3] = 0;
-        D_i5_80118FF0[1][i].vp.vscale[0] = SCREEN_WIDTH;
-        D_i5_80118FF0[1][i].vp.vscale[1] = SCREEN_HEIGHT;
+        D_i5_80118FF0[1][i].vp.vscale[0] = (SCREEN_WIDTH / 4) << 2;
+        D_i5_80118FF0[1][i].vp.vscale[1] = (SCREEN_HEIGHT / 4) << 2;
         D_i5_80118FF0[1][i].vp.vscale[2] = 0x1FF;
         D_i5_80118FF0[1][i].vp.vscale[3] = 0;
         D_i5_80118FF0[1][i].vp.vtrans[0] = 640 + i * 0x500;

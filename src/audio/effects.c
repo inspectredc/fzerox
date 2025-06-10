@@ -3,7 +3,7 @@
 
 static char D_800D0840[] = "Audio:Envp: overflow  %f\n";
 
-void Audio_SequenceChannelProcessSound(SequenceChannel* channel, s32 updateVolume) {
+void Audio_SequenceChannelProcessSound(SequenceChannel* channel, bool updateVolume) {
     s32 i;
 
     if (channel->changes.s.volume || updateVolume) {
