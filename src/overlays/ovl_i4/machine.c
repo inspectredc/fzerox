@@ -2046,7 +2046,7 @@ Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* difficultyCupsObj) {
     for (i = 0; i < var_t0; i++) {
 
         // FAKE
-        if (((s8*)var_t1)[(i ^ 0)] == 0) {
+        if (((s8*) var_t1)[(i ^ 0)] == 0) {
             // No trophy
             trophyIndex = 20;
             if (1) {}

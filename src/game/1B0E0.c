@@ -5058,11 +5058,11 @@ void func_8008DBB8(Racer* arg0, s32 arg1) {
     if (arg1 < arg0->unk_288) {
         return;
     }
-    
+
     temp_v0 = arg0->unk_28C;
     if (temp_v0 == NULL) {
         return;
-    } 
+    }
     if (temp_v0->stateFlags & (RACER_STATE_FLAGS_2000000 | RACER_STATE_RETIRED | RACER_STATE_SPINNING_OUT)) {
         return;
     }
@@ -7854,15 +7854,15 @@ void func_800952F4(void) {
                         }
                         if ((racer2->machineLod != 0) &&
                             (func_i2_801054C0(((racer->unk_0C.unk_34.x + racer2->unk_0C.unk_34.x) * 0.5f) +
-                                                    (6.0f * racer->unk_C0.y.x),
-                                                ((racer->unk_0C.unk_34.y + racer2->unk_0C.unk_34.y) * 0.5f) +
-                                                    (6.0f * racer->unk_C0.y.y),
-                                                ((racer->unk_0C.unk_34.z + racer2->unk_0C.unk_34.z) * 0.5f) +
-                                                    (6.0f * racer->unk_C0.y.z),
-                                                (racer->velocity.x + racer2->velocity.x) * 0.5f,
-                                                (racer->velocity.y + racer2->velocity.y) * 0.5f,
-                                                (racer->velocity.z + racer2->velocity.z) * 0.5f,
-                                                var_fs0 + 12.0f, racer2) == 0)) {
+                                                  (6.0f * racer->unk_C0.y.x),
+                                              ((racer->unk_0C.unk_34.y + racer2->unk_0C.unk_34.y) * 0.5f) +
+                                                  (6.0f * racer->unk_C0.y.y),
+                                              ((racer->unk_0C.unk_34.z + racer2->unk_0C.unk_34.z) * 0.5f) +
+                                                  (6.0f * racer->unk_C0.y.z),
+                                              (racer->velocity.x + racer2->velocity.x) * 0.5f,
+                                              (racer->velocity.y + racer2->velocity.y) * 0.5f,
+                                              (racer->velocity.z + racer2->velocity.z) * 0.5f, var_fs0 + 12.0f,
+                                              racer2) == 0)) {
                             racer->unk_220 = racer2->unk_220;
                         }
                         var_fs0 *= 1.1f;

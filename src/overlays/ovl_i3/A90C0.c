@@ -319,7 +319,7 @@ void func_i3_80115E74(void) {
                             gRacers[sp70[temp_hi]].unk_350 = 0;
                             gRacers[sp70[temp_hi]].unk_34D = 7;
                             m++;
-                         
+
                             // FAKE!
                             if (gRacers) {}
                         }
@@ -392,11 +392,12 @@ void func_i3_80115E74(void) {
         for (k = 0; k < 8; k++) {
             for (i = 1; i < gTotalRacers; i++) {
                 if (gRacers[i].unk_34D == k) {
-              
+
                     // FAKE!
                     (*(tempRacer + i)).position = D_80115D50[i] = n;
-                    if (1) {} if (1) {}
-                    
+                    if (1) {}
+                    if (1) {}
+
                     n++;
                 }
             }

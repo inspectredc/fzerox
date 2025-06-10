@@ -694,7 +694,8 @@ void Save_CreateNew(SaveContext* saveContext, s32 arg1) {
 
     // Restore the n64dd related save data
     if ((arg1 != 0) && (arg1 == 1)) {
-        saveContext->profileSaves[0].saveSettings.customUnlocks = saveContext->profileSaves[1].saveSettings.customUnlocks = spB7;
+        saveContext->profileSaves[0].saveSettings.customUnlocks =
+            saveContext->profileSaves[1].saveSettings.customUnlocks = spB7;
         saveContext->profileSaves[0].editCup = saveContext->profileSaves[1].editCup = editCup;
     }
 }

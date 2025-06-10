@@ -2942,8 +2942,7 @@ void func_8007402C(s32 courseIndex) {
 
         if (func_i1_80403680(0xFFFB, gEditCupTrackNames[sp28], "CRSD") != 0xFFFF) {
             PRINTF("ENTRY CHECK OK\n");
-            func_i1_804096C8(0xFFFB, gEditCupTrackNames[sp28], "CRSD",
-                             &gCourseData, 0);
+            func_i1_804096C8(0xFFFB, gEditCupTrackNames[sp28], "CRSD", &gCourseData, 0);
             PRINTF("ENTRY LOAD OK\n");
         }
     } else {
