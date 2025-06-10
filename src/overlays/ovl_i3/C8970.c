@@ -1299,10 +1299,10 @@ void func_i3_801387EC(void) {
         u16 minus32 = -32;
         // FAKE! Not sure how to generate 0xFFE0 directly
 
-        SET_VTX(&gfxPool->distanceFromRacerBehindE8[0], minus32, 32, 0, 0, 0, 255, 255, 255, 255);
-        SET_VTX(&gfxPool->distanceFromRacerBehindE8[1], 32, 32, 0, 0x800, 0, 255, 255, 255, 255);
-        SET_VTX(&gfxPool->distanceFromRacerBehindE8[2], minus32, minus32, 0, 0, 0x800, 255, 255, 255, 0);
-        SET_VTX(&gfxPool->distanceFromRacerBehindE8[3], 32, minus32, 0, 0x800, 0x800, 255, 255, 255, 0);
+        SET_VTX(&gfxPool->unk_2C4E8[0], minus32, 32, 0, 0, 0, 255, 255, 255, 255);
+        SET_VTX(&gfxPool->unk_2C4E8[1], 32, 32, 0, 0x800, 0, 255, 255, 255, 255);
+        SET_VTX(&gfxPool->unk_2C4E8[2], minus32, minus32, 0, 0, 0x800, 255, 255, 255, 0);
+        SET_VTX(&gfxPool->unk_2C4E8[3], 32, minus32, 0, 0x800, 0x800, 255, 255, 255, 0);
     }
     D_i3_80142178 = 0;
 
@@ -1445,7 +1445,7 @@ Gfx* func_i3_80139168(Gfx* gfx) {
             continue;
         }
         gSPMatrix(gfx++, &D_1000000.unk_2C368[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPVertex(gfx++, D_1000000.distanceFromRacerBehindE8, 4, 0);
+        gSPVertex(gfx++, D_1000000.unk_2C4E8, 4, 0);
         gDPPipeSync(gfx++);
 
         if (D_i3_80142188 & 4) {

@@ -547,25 +547,24 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
     Object* object = gObjects;
 
     while (true) {
-        // clang-format off
-        if (object->cmdId == OBJECT_FREE) { \
-            object->cmdId = cmdId;          \
-            object->state = 0;              \
-            object->state2 = 0;             \
-            object->left = left;            \
-            object->top = top;              \
-            object->priority = priority;    \
-            object->shouldDraw = true;      \
-            object->counter = 0;            \
-            object->counter2 = 0;           \
+        if (object->cmdId == OBJECT_FREE) {
             break;
         }
-        // clang-format on
         if (++i > ARRAY_COUNT(gObjects)) {
             return;
         }
         object++;
     }
+
+    object->cmdId = cmdId;
+    object->state = 0;
+    object->state2 = 0;
+    object->left = left;
+    object->top = top;
+    object->priority = priority;
+    object->shouldDraw = true;
+    object->counter = 0;
+    object->counter2 = 0;
 
     switch (cmdId) {
         case OBJECT_TITLE_BACKGROUND:

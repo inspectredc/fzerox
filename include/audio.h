@@ -618,7 +618,7 @@ typedef struct {
 typedef s32 (*DmaHandler)(OSPiHandle* handle, OSIoMesg* mb, s32 direction);
 
 #define NO_LAYER ((SequenceLayer*) (-1))
-#define IS_SEQUENCE_CHANNEL_VALID(ptr) ((u32) (ptr) != (u32) &gSeqChannelNone)
+#define IS_SEQUENCE_CHANNEL_VALID(ptr) ((uintptr_t) (ptr) != (uintptr_t) &gSeqChannelNone)
 
 typedef enum {
     /* 0 */ LOAD_STATUS_NOT_LOADED, // the entry data is not loaded
@@ -887,7 +887,7 @@ void Audio_SeqLayerNoteDecay(SequenceLayer* layer);
 void Audio_InitNoteLists(NotePool* pool);
 void Audio_InitNoteFreeList(void);
 void Audio_NotePoolFill(NotePool* pool, s32 count);
-void Audio_AudioListRemove(Note* note);
+void Audio_AudioListRemove(AudioListItem* item);
 Note* Audio_AllocNote(SequenceLayer* layer);
 void Audio_NoteInitAll(void);
 

@@ -2189,7 +2189,9 @@ Vtx* func_800A2BDC(Vtx* arg0, Vec3f* arg1, Mtx3F* arg2) {
     arg0->v.ob[0] = Math_Round(temp_fs0 - sp40);
     arg0->v.ob[1] = Math_Round(temp_fs1 - sp3C);
     arg0->v.ob[2] = Math_Round(temp_fs2 - sp38);
-    return ++arg0;
+    arg0++;
+
+    return arg0;
 }
 
 s32 func_800A2D2C(CourseInfo* arg0, Vtx* arg1) {
@@ -3954,8 +3956,6 @@ Gfx* func_800A92FC(Gfx* gfx, Vtx* arg1, s32 arg2) {
 }
 
 extern u32 gGameFrameCount;
-extern Gfx D_8014040[];
-extern Gfx D_8014078[];
 
 Gfx* func_800A95B4(Gfx* gfx) {
     s32 trackType;

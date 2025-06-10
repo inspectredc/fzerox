@@ -94,7 +94,7 @@ bool gRamDDCompatible = false;
 bool sAudioThreadCreated = false;
 s8 sMainThreadStartEnabled = true;
 s8 sGameThreadStartEnabled = true;
-s8 sAudioThreadStartEnabled = 1;
+s8 sAudioThreadStartEnabled = true;
 UNUSED s8 D_800CCFD4 = 1;
 
 void func_80069F5C(FrameBuffer*);

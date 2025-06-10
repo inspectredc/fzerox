@@ -160,7 +160,7 @@ void func_800766F0(void) {
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+        case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
         case GAMEMODE_FLX_MACHINE_SELECT:
             *block2 = ALIGN16((uintptr_t) osPhysicalToVirtual(gSegment17B960VramEnd));
             break;
@@ -319,7 +319,7 @@ void func_80076CB8(void) {
             break;
         case GAMEMODE_RECORDS:
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+        case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
         case GAMEMODE_FLX_MACHINE_SELECT:
             D_800CD2E0 = 2;
             Segment_SetAddress(4, gSegment1B8550VramStart);
@@ -374,20 +374,20 @@ void func_80076F00(void) {
 
     D_800CD2E8 = 1;
     switch (gGameMode) {
-        default:
-            D_800CD2E8 = 0;
-            Segment_SetAddress(9, gSegment22B0A0VramStart);
-            break;
         case GAMEMODE_CREATE_MACHINE:
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+        case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
             segmentSize = SEGMENT_DATA_SIZE_CONST(segment_22B0A0);
-            gSegment22B0A0VramStart = osVirtualToPhysical(func_800768F4(0, segmentSize));
-            gSegment22B0A0VramEnd = ALIGN16(gSegment22B0A0VramStart + segmentSize);
-            Segment_SetAddress(9, gSegment22B0A0VramStart);
             break;
+        default:
+            D_800CD2E8 = 0;
+            Segment_SetAddress(9, gSegment22B0A0VramStart);
+            return;
     }
+    gSegment22B0A0VramStart = osVirtualToPhysical(func_800768F4(0, segmentSize));
+    gSegment22B0A0VramEnd = ALIGN16(gSegment22B0A0VramStart + segmentSize);
+    Segment_SetAddress(9, gSegment22B0A0VramStart);
 }
 
 extern s32 gSegment235130VramStart;
@@ -398,10 +398,6 @@ void func_80076FC0(void) {
 
     D_800CD2EC = 1;
     switch (gGameMode) {
-        default:
-            D_800CD2EC = 0;
-            Segment_SetAddress(10, gSegment235130VramStart);
-            break;
         case GAMEMODE_GP_RACE:
         case GAMEMODE_PRACTICE:
         case GAMEMODE_VS_2P:
@@ -413,11 +409,15 @@ void func_80076FC0(void) {
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
             segmentSize = SEGMENT_DATA_SIZE_CONST(segment_235130);
-            gSegment235130VramStart = osVirtualToPhysical(func_800768F4(0, segmentSize));
-            gSegment235130VramEnd = ALIGN16(gSegment235130VramStart + segmentSize);
-            Segment_SetAddress(10, gSegment235130VramStart);
             break;
+        default:
+            D_800CD2EC = 0;
+            Segment_SetAddress(10, gSegment235130VramStart);
+            return;
     }
+    gSegment235130VramStart = osVirtualToPhysical(func_800768F4(0, segmentSize));
+    gSegment235130VramEnd = ALIGN16(gSegment235130VramStart + segmentSize);
+    Segment_SetAddress(10, gSegment235130VramStart);
 }
 
 extern s32 gSegment2738A0VramStart;
@@ -537,7 +537,7 @@ void func_80077318(void) {
             segmentBssSize = SEGMENT_BSS_SIZE(ovl_i3);
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+        case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
         case GAMEMODE_FLX_TITLE:
         case GAMEMODE_FLX_MACHINE_SELECT:
             // ovl_i4
@@ -637,7 +637,7 @@ void func_80077630(void) {
                 break;
             case GAMEMODE_RECORDS:
             case GAMEMODE_LX_MACHINE_SETTINGS:
-            case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+            case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
             case GAMEMODE_FLX_MACHINE_SELECT:
                 Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(gSegment17B960VramStart),
                                     SEGMENT_ROM_SIZE(segment_17B960));
@@ -695,7 +695,7 @@ void func_800778F8(void) {
             case GAMEMODE_CREATE_MACHINE:
             case GAMEMODE_GP_END_CS:
             case GAMEMODE_LX_MACHINE_SETTINGS:
-            case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+            case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
                 romOffset = SEGMENT_ROM_START(segment_22B0A0);
                 ramSize = SEGMENT_VRAM_SIZE(segment_22B0A0);
                 sp24 = func_800768F4(1, ramSize);

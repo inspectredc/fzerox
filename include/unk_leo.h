@@ -13,7 +13,7 @@ typedef struct unk_leo_804285D0 {
     s32 unk_0C;
     u8 unk_10[20];
     u8 unk_24[5];
-    s8 unk_29;
+    u8 unk_29;
     u8 unk_2A;
     s8 unk_2B[0x1];
     s32 unk_2C;
@@ -22,7 +22,9 @@ typedef struct unk_leo_804285D0 {
 typedef struct unk_leo_80419EA0 {
     u8 unk_00[10];
     s8 unk_0A[4];
-    s8 unk_0E[0x16];
+    u8 unk_0E;
+    u8 unk_0F;
+    u8 unk_10[20];
     s32 unk_24;
     u16 unk_28;
     s8 unk_2C[0x12];

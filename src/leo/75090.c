@@ -430,10 +430,10 @@ u16 D_i1_80428660[] = {
 };
 
 s16 func_i1_804070EC(s32 arg0) {
-    if ((arg0 >= 0x21) && (arg0 < 0x7F)) {
+    if ((arg0 > 0x20) && (arg0 < 0x7F)) {
         return (s16) (arg0 - 0x20);
     }
-    if ((arg0 >= 0xA1) && (arg0 < 0xE0)) {
+    if ((arg0 > 0xA0) && (arg0 < 0xE0)) {
         return D_i1_80428660[arg0 - 0xA0];
     }
     return 0;

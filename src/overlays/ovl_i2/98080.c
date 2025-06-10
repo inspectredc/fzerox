@@ -102,7 +102,7 @@ void func_i2_800FC77C(void) {
             func_i2_800FCB84(0, 5);
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
-        case GAMEMODE_FLX_GP_RACE_NEXT_MACHINE_SETTINGS:
+        case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
             func_i2_800FCB84(0, 6);
             break;
         case GAMEMODE_RECORDS:
@@ -358,23 +358,19 @@ void func_i2_800FFC68(unk_8010D778*);
 void func_i2_80100220(unk_8010D778*);
 
 void func_i2_800FCF48(unk_8010D778* arg0) {
-    s16 temp_t2;
-    s32 temp_at;
-    s32 temp_t6;
-    u32 temp_t9;
 
     arg0->unk_00 = arg0->unk_04;
     arg0->unk_04 = 0;
     arg0->unk_0C = 0;
     arg0->unk_12 = 2;
 
-    switch (arg0->unk_00 - 1) {
-        case 9:
+    switch (arg0->unk_00) {
+        case 10:
 
             arg0->unk_12 &= ~0x2;
             arg0->unk_12 |= 8;
             break;
-        case 0:
+        case 1:
             if (arg0->unk_10 != 0) {
                 arg0->unk_08 = 3;
             } else {
@@ -382,29 +378,29 @@ void func_i2_800FCF48(unk_8010D778* arg0) {
             }
             func_i2_800FD4AC(arg0);
             break;
-        case 1:
+        case 2:
             if (arg0->unk_10 == 0) {
                 arg0->unk_12 |= 4;
             }
             arg0->unk_08 = 1;
             func_i2_800FDBDC(arg0);
             break;
-        case 2:
+        case 3:
             if (arg0->unk_10 == 0) {
                 arg0->unk_12 |= 4;
             }
             arg0->unk_08 = 1;
             func_i2_800FE13C(arg0);
             break;
-        case 3:
+        case 4:
             if (arg0->unk_10 == 0) {
                 arg0->unk_12 |= 4;
             }
             arg0->unk_08 = 1;
             func_i2_800FEED8(arg0);
             break;
-        case 4:
         case 5:
+        case 6:
             if (arg0->unk_10 != 0) {
                 arg0->unk_08 = 3;
                 func_i2_800FF7A8(arg0, 255, 20);
@@ -413,21 +409,21 @@ void func_i2_800FCF48(unk_8010D778* arg0) {
                 func_i2_800FF7A8(arg0, 0, 20);
             }
             break;
-        case 8:
+        case 9:
             if (arg0->unk_10 == 0) {
                 arg0->unk_12 |= 4;
             }
             arg0->unk_08 = 1;
             func_i2_800FF9C8(arg0);
             break;
-        case 6:
+        case 7:
             if (arg0->unk_10 == 0) {
                 arg0->unk_12 |= 4;
             }
             arg0->unk_08 = 1;
             func_i2_800FFC68(arg0);
             break;
-        case 7:
+        case 8:
             if (arg0->unk_10 == 0) {
                 arg0->unk_12 |= 4;
             }

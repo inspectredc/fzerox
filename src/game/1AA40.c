@@ -16,9 +16,9 @@ void func_80080A48(void) {
     for (i = 0, var_v1 = D_800E51B8; i < 3; i++, var_v1++) {
         var_v1->unk_00 = 0;
         var_v1->unk_04 = -1;
-        var_v1->unk_18 = var_v1->unk_1A = 0;
         var_v1->unk_06 = var_v1->unk_08 = var_v1->unk_0A = var_v1->unk_0C = var_v1->unk_0E = var_v1->unk_10 =
             var_v1->unk_12 = 0;
+        var_v1->unk_18 = var_v1->unk_1A = 0;
     }
 }
 

@@ -3,6 +3,7 @@
 #include "fzx_save.h"
 #include "fzx_course.h"
 #include "fzx_machine.h"
+#include "assets/staff_ghost_records.h"
 #include "ovl_i2.h"
 
 OSIoMesg sSramIoMesg;
@@ -12,14 +13,30 @@ s16 gSettingSoundMode;
 u8 D_i2_80111848[30];
 
 uintptr_t D_i2_80106DF0[][3] = {
-    { 0x0, 0x40, 0x60 },           { 0x1B30, 0x1B70, 0x1B90 },    { 0x37B0, 0x37F0, 0x3810 },
-    { 0x5070, 0x50B0, 0x50D0 },    { 0x6B50, 0x6B90, 0x6BB0 },    { 0x8A30, 0x8A70, 0x8A90 },
-    { 0xA920, 0xA960, 0xA980 },    { 0xC410, 0xC450, 0xC470 },    { 0xDDC0, 0xDE00, 0xDE20 },
-    { 0xF920, 0xF960, 0xF980 },    { 0x11370, 0x113B0, 0x113D0 }, { 0x12980, 0x129C0, 0x129E0 },
-    { 0x149F0, 0x14A30, 0x14A50 }, { 0x16550, 0x16590, 0x165B0 }, { 0x18410, 0x18450, 0x18470 },
-    { 0x1A6B0, 0x1A6F0, 0x1A710 }, { 0x1C6E0, 0x1C720, 0x1C740 }, { 0x1DF00, 0x1DF40, 0x1DF60 },
-    { 0x20100, 0x20140, 0x20160 }, { 0x22B60, 0x22BA0, 0x22BC0 }, { 0x24580, 0x245C0, 0x245E0 },
-    { 0x26E10, 0x26E50, 0x26E70 }, { 0x28D00, 0x28D40, 0x28D60 }, { 0x2B130, 0x2B170, 0x2B190 },
+    { &aMuteCity1StaffGhostRecord, &aMuteCity1StaffGhostReplayInfo, aMuteCity1StaffGhostData },
+    { &aSilence1StaffGhostRecord, &aSilence1StaffGhostReplayInfo, aSilence1StaffGhostData },
+    { &aSandOcean1StaffGhostRecord, &aSandOcean1StaffGhostReplayInfo, aSandOcean1StaffGhostData },
+    { &aDevilsForest1StaffGhostRecord, &aDevilsForest1StaffGhostReplayInfo, aDevilsForest1StaffGhostData },
+    { &aBigBlue1StaffGhostRecord, &aBigBlue1StaffGhostReplayInfo, aBigBlue1StaffGhostData },
+    { &aPortTown1StaffGhostRecord, &aPortTown1StaffGhostReplayInfo, aPortTown1StaffGhostData },
+    { &aSectorAlphaStaffGhostRecord, &aSectorAlphaStaffGhostReplayInfo, aSectorAlphaStaffGhostData },
+    { &aRedCanyon1StaffGhostRecord, &aRedCanyon1StaffGhostReplayInfo, aRedCanyon1StaffGhostData },
+    { &aDevilsForest2StaffGhostRecord, &aDevilsForest2StaffGhostReplayInfo, aDevilsForest2StaffGhostData },
+    { &aMuteCity2StaffGhostRecord, &aMuteCity2StaffGhostReplayInfo, aMuteCity2StaffGhostData },
+    { &aBigBlue2StaffGhostRecord, &aBigBlue2StaffGhostReplayInfo, aBigBlue2StaffGhostData },
+    { &aWhiteLand1StaffGhostRecord, &aWhiteLand1StaffGhostReplayInfo, aWhiteLand1StaffGhostData },
+    { &aFireFieldStaffGhostRecord, &aFireFieldStaffGhostReplayInfo, aFireFieldStaffGhostData },
+    { &aSilence2StaffGhostRecord, &aSilence2StaffGhostReplayInfo, aSilence2StaffGhostData },
+    { &aSectorBetaStaffGhostRecord, &aSectorBetaStaffGhostReplayInfo, aSectorBetaStaffGhostData },
+    { &aRedCanyon2StaffGhostRecord, &aRedCanyon2StaffGhostReplayInfo, aRedCanyon2StaffGhostData },
+    { &aWhiteLand2StaffGhostRecord, &aWhiteLand2StaffGhostReplayInfo, aWhiteLand2StaffGhostData },
+    { &aMuteCity3StaffGhostRecord, &aMuteCity3StaffGhostReplayInfo, aMuteCity3StaffGhostData },
+    { &aRainbowRoadStaffGhostRecord, &aRainbowRoadStaffGhostReplayInfo, aRainbowRoadStaffGhostData },
+    { &aDevilsForest3StaffGhostRecord, &aDevilsForest3StaffGhostReplayInfo, aDevilsForest3StaffGhostData },
+    { &aSpacePlantStaffGhostRecord, &aSpacePlantStaffGhostReplayInfo, aSpacePlantStaffGhostData },
+    { &aSandOcean2StaffGhostRecord, &aSandOcean2StaffGhostReplayInfo, aSandOcean2StaffGhostData },
+    { &aPortTown2StaffGhostRecord, &aPortTown2StaffGhostReplayInfo, aPortTown2StaffGhostData },
+    { &aBigHandStaffGhostRecord, &aBigHandStaffGhostReplayInfo, aBigHandStaffGhostData },
 };
 
 void Save_LoadCupSave(CupSave*, u8*);
@@ -68,7 +85,7 @@ void Save_ReadProfileSaves(ProfileSave* profileSave) {
 extern Ghost gGhosts[];
 extern s32 gCurrentGhostType;
 
-s32 SaveLoadPlayerGhost(s32, s32);
+s32 Save_LoadPlayerGhost(s32, s32);
 s32 Save_LoadStaffGhost(s32);
 
 s32 Save_LoadGhost(s32 courseIndex) {
@@ -89,7 +106,7 @@ s32 Save_LoadGhost(s32 courseIndex) {
             break;
         case GHOST_NONE:
         case GHOST_PLAYER:
-            sp18 = SaveLoadPlayerGhost(courseIndex, -1);
+            sp18 = Save_LoadPlayerGhost(courseIndex, -1);
             break;
         case GHOST_STAFF:
             sp18 = Save_LoadStaffGhost(courseIndex);
@@ -162,7 +179,7 @@ s32 func_i2_801005CC(s32 courseIndex) {
 bool func_i2_80100B38(GhostInfo*);
 s32 func_i2_801005CC(s32);
 
-s32 SaveLoadPlayerGhost(s32 courseIndex, s32 ghostIndex) {
+s32 Save_LoadPlayerGhost(s32 courseIndex, s32 ghostIndex) {
     GhostRecord* ghostRecord = (GhostRecord*) gSaveBuffer;
     GhostData* ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
     s32 var_t0;
@@ -648,7 +665,7 @@ void Save_CreateNew(SaveContext* saveContext, s32 arg1) {
     if ((arg1 != 0) && (arg1 == 1)) {
         Save_ReadProfileSaves(saveContext->profileSaves);
         Save_LoadSaveSettings(saveContext->profileSaves, false);
-        spB7 = saveContext->profileSaves[0].saveSettings.unk_09;
+        spB7 = saveContext->profileSaves[0].saveSettings.customUnlocks;
         Save_LoadEditCup(saveContext->profileSaves, false);
         editCup = saveContext->profileSaves[0].editCup;
     }
@@ -677,7 +694,8 @@ void Save_CreateNew(SaveContext* saveContext, s32 arg1) {
 
     // Restore the n64dd related save data
     if ((arg1 != 0) && (arg1 == 1)) {
-        saveContext->profileSaves[0].saveSettings.unk_09 = saveContext->profileSaves[1].saveSettings.unk_09 = spB7;
+        saveContext->profileSaves[0].saveSettings.customUnlocks =
+            saveContext->profileSaves[1].saveSettings.customUnlocks = spB7;
         saveContext->profileSaves[0].editCup = saveContext->profileSaves[1].editCup = editCup;
     }
 }
@@ -701,7 +719,7 @@ void Save_InitSaveSettings(SaveSettings* saveSettings, bool shouldClear) {
 
     // vs com default on
     saveSettings->settings = 1;
-    saveSettings->unk_09 = 0;
+    saveSettings->customUnlocks = 0;
 }
 
 void Save_InitEditCup(SaveEditCup* editCup, bool shouldClear) {
@@ -895,16 +913,16 @@ void Save_SaveSettings(SaveSettings* saveSettings) {
         saveSettings->cupDifficultiesCleared[i] = gCupNumDifficultiesCleared[i];
     }
 
-    saveSettings->unk_09 = 0;
+    saveSettings->customUnlocks = 0;
 
-    if (D_i2_80111848[0] != 0) {
-        saveSettings->unk_09 |= 1;
+    if (D_i2_80111848[CAPTAIN_FALCON] != 0) {
+        saveSettings->customUnlocks |= 1;
     }
-    if (D_i2_80111848[3] != 0) {
-        saveSettings->unk_09 |= 2;
+    if (D_i2_80111848[SAMURAI_GOROH] != 0) {
+        saveSettings->customUnlocks |= 2;
     }
-    if (D_i2_80111848[4] != 0) {
-        saveSettings->unk_09 |= 4;
+    if (D_i2_80111848[JODY_SUMMER] != 0) {
+        saveSettings->customUnlocks |= 4;
     }
 }
 
@@ -1187,14 +1205,14 @@ void Save_LoadSaveSettings(ProfileSave* profileSaves, bool arg1) {
     }
     // clang-format on
 
-    if (saveSettings->unk_09 & 1) {
-        D_i2_80111848[0] = 1;
+    if (saveSettings->customUnlocks & 1) {
+        D_i2_80111848[CAPTAIN_FALCON] = 1;
     }
-    if (saveSettings->unk_09 & 2) {
-        D_i2_80111848[3] = 1;
+    if (saveSettings->customUnlocks & 2) {
+        D_i2_80111848[SAMURAI_GOROH] = 1;
     }
-    if (saveSettings->unk_09 & 4) {
-        D_i2_80111848[4] = 1;
+    if (saveSettings->customUnlocks & 4) {
+        D_i2_80111848[JODY_SUMMER] = 1;
     }
 }
 
