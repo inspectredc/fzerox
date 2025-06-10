@@ -53,5 +53,5 @@ jobs:
         path: report.json
 
     - name: Upload progress to Discord
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' &&  matrix.version == 'us'}}
       run: python3 tools/upload_progress.py --discord_url ${{ secrets.DISCORD_URL }}
