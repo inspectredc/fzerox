@@ -23,3 +23,16 @@ a418b0151521b76691fa03f8658c8b567c69498b:
       code: src/assets
       headers: include/assets
       modding: src/assets
+
+08f87114da46ae7b8c1344febd88bf42718ffac6:
+  name: F-ZERO X CN REV 0 (v1.0)
+  path: assets/yaml/cn/rev0
+  config:
+    gbi: F3DEX2
+    sort: OFFSET
+    logging: ERROR
+    textures: ADDITIONAL_DEFINES
+    output:
+      code: src/assets
+      headers: include/assets
+      modding: src/assets

@@ -1,0 +1,98 @@
+  - name: header
+    type: header
+    start: 0x0
+
+  - name: boot
+    type: bin
+    start: 0x40
+
+  - name: entry
+    type: code
+    start: 0x1000
+    vram: 0x80067000
+    subsegments:
+      - [0x1000, hasm]
+
+  - name: main
+    type: code
+    start: 0x1060
+    vram: 0x80067060
+    follows_vram: entry
+    bss_size: 0x23080
+    subsegments:
+      - [0x1060, asm]
+      - [0x1B00, asm]
+      - [0x2A80, asm]
+      - [0x2B40, asm]
+      - [0x36F0, asm]
+      - [0xEF70, asm]
+      - [0xF080, asm]
+      - [0x106C0, asm]
+      - [0x11F20, asm]
+      - [0x14670, asm]
+      - [0x19540, asm]
+      - [0x19760, asm]
+      - [0x19EA0, asm]
+      - [0x22C50, asm]
+      - [0x50630, asm]
+      - [0x50760, asm]
+      - [0x50990, asm]
+      - [0x51390, asm]
+      - [0x51510, asm]
+      - [0x51520, asm]
+      - [0x51530, asm]
+      - [0x51580, asm]
+      - [0x515D0, asm]
+      - [0x51660, asm]
+      - [0x516B0, asm]
+      - [0x51700, asm]
+      - [0x51830, asm]
+      - [0x51880, asm]
+      - [0x518E0, asm]
+      - [0x51940, asm]
+      - [0x51990, asm]
+      - [0x51A90, asm]
+      - [0x51B00, asm]
+      - [0x51B60, asm]
+      - [0x51BD0, asm]
+      - [0x51CB0, asm]
+      - [0x51CE0, asm]
+      - [0x51E60, asm]
+      - [0x51FE0, asm]
+      - [0x52700, asm]
+      - [0x52C40, asm]
+      - [0x52C70, asm]
+      - [0x53250, asm]
+      - [0x537E0, asm]
+      - [0x53D50, asm]
+      - [0x54260, asm]
+      - [0x542B0, asm]
+      - [0x54300, asm]
+      - [0x545C0, asm]
+      - [0x54630, asm]
+      - [0x54830, asm]
+      - [0x548E0, data]
+      - [0x5FBD0, rodata]
+      - { type: bss, vram: 0x800CB4C0 }
+
+  - type: bin
+    start: 0x654C0
+    follows_vram: main
+
+  - name: ovl_i6
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i6
+    start: 0xF5C30
+    vram: 0x80124C10
+    bss_size: 0xCEAE
+    symbol_name_format: i6_$VRAM
+    subsegments:
+      - [0xF5C30, asm]
+      - [0xFD650, data]
+      - { type: bss, vram: 0x8012E040 }
+
+  - type: bin
+    start: 0xFF060
+
+  - [0xF94000]
