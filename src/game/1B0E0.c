@@ -5618,8 +5618,6 @@ void func_8008EC98(Racer* arg0) {
     }
 }
 
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/fHjsj stack
 void func_8008F550(Racer* arg0) {
     f32 var_fa1;
     f32 temp_fv1;
@@ -5738,13 +5736,19 @@ void func_8008F550(Racer* arg0) {
         arg0->unk_0C.unk_40 = sp5C;
 
         arg0->unk_0C.unk_28.x *= temp_fv1;
-        arg0->unk_0C.unk_34.x = arg0->unk_0C.unk_44.x = arg0->unk_0C.unk_28.x + arg0->unk_0C.unk_1C.x;
+        temp_fv0 = arg0->unk_0C.unk_28.x + arg0->unk_0C.unk_1C.x;
+        arg0->unk_0C.unk_44.x = temp_fv0;
+        arg0->unk_0C.unk_34.x = temp_fv0;
 
         arg0->unk_0C.unk_28.y *= temp_fv1;
-        arg0->unk_0C.unk_34.y = arg0->unk_0C.unk_44.y = arg0->unk_0C.unk_28.y + arg0->unk_0C.unk_1C.y;
+        temp_fv0 = arg0->unk_0C.unk_28.y + arg0->unk_0C.unk_1C.y;
+        arg0->unk_0C.unk_44.y = temp_fv0;
+        arg0->unk_0C.unk_34.y = temp_fv0;
 
         arg0->unk_0C.unk_28.z *= temp_fv1;
-        arg0->unk_0C.unk_34.z = arg0->unk_0C.unk_44.z = arg0->unk_0C.unk_28.z + arg0->unk_0C.unk_1C.z;
+        temp_fv0 = arg0->unk_0C.unk_28.z + arg0->unk_0C.unk_1C.z;
+        arg0->unk_0C.unk_44.z = temp_fv0;
+        arg0->unk_0C.unk_34.z = temp_fv0;
 
         arg0->unk_A0 = 0.0f;
 
@@ -5754,8 +5758,7 @@ void func_8008F550(Racer* arg0) {
             arg0->velocity.x -= (var_fa1 * arg0->unk_19C.x);
             arg0->velocity.y -= (var_fa1 * arg0->unk_19C.y);
             arg0->velocity.z -= (var_fa1 * arg0->unk_19C.z);
-            // FAKE: lowers stack
-            if (1) {}
+
             if ((arg0->id < gNumPlayers) && (D_800E5FD0 != 0)) {
                 func_800BB3C4(arg0->id, var_fa1);
             }
@@ -5784,13 +5787,6 @@ void func_8008F550(Racer* arg0) {
         }
     }
 }
-#else
-#ifdef VERSION_JP
-#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/1B0E0/func_8008F550.s")
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/1B0E0/func_8008F550.s")
-#endif
-#endif
 
 void func_8008FC80(Racer* arg0) {
     f32 var_fv0;

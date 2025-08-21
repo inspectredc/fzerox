@@ -1782,9 +1782,9 @@ void func_i7_80146920(void) {
     }
 }
 
-#ifdef NON_MATCHING
 Gfx* func_i7_80146E28(Gfx* gfx) {
     s32 i;
+    unk_8014BEC8* var_a3;
 
     gSPClearGeometryMode(gfx++, 0xFFFFFFFF);
     gSPSetGeometryMode(gfx++, G_ZBUFFER | G_SHADE | G_CLIPPING);
@@ -1798,14 +1798,13 @@ Gfx* func_i7_80146E28(Gfx* gfx) {
     gDPSetTextureConvert(gfx++, G_TC_FILT);
 
     gDPPipeSync(gfx++);
-    // gDPSetRenderMode(gfx++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
     gDPSetRenderMode(gfx++, (G_RM_AA_ZB_OPA_SURF) & ~Z_CMP, (G_RM_AA_ZB_OPA_SURF2) & ~Z_CMP);
     gDPSetCombineMode(gfx++, G_CC_SHADE, G_CC_SHADE);
     gDPSetDepthSource(gfx++, G_ZS_PRIM);
     gDPSetPrimDepth(gfx++, 0x7FC0, 0);
 
-    for (i = 0; i < 3; i++) {
-        if (!(D_i7_8014BEC8[i].unk_02 & 2)) {
+    for (i = 0, var_a3 = D_i7_8014BEC8; i < 3; i++, var_a3++) {
+        if (!(var_a3->unk_02 & 2)) {
             continue;
         }
         gSPMatrix(gfx++, &D_i7_8014BDF0->unk_C0[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -1822,8 +1821,8 @@ Gfx* func_i7_80146E28(Gfx* gfx) {
     gDPSetRenderMode(gfx++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
     gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 
-    for (i = 0; i < 3; i++) {
-        if (!(D_i7_8014BEC8[i].unk_02 & 1)) {
+    for (i = 0, var_a3 = D_i7_8014BEC8; i < 3; i++, var_a3++) {
+        if (!(var_a3->unk_02 & 1)) {
             continue;
         }
         gSPMatrix(gfx++, &D_i7_8014BDF0->unk_00[i], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -1832,13 +1831,6 @@ Gfx* func_i7_80146E28(Gfx* gfx) {
 
     return gfx;
 }
-#else
-#ifdef VERSION_JP
-#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_80146E28.s")
-#else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i7/ending/func_i7_80146E28.s")
-#endif
-#endif
 
 extern s32 gTotalRacers;
 
