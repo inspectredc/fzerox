@@ -286,7 +286,7 @@ s32 func_i8_80143F94(void) {
 
     if (lastCourseIndex != gCourseIndex) {
         sp2C = 1;
-        func_800BA8D8(0x1E);
+        Audio_TriggerSystemSE(0x1E);
     } else {
         sp2C = 0;
     }
@@ -296,12 +296,12 @@ s32 func_i8_80143F94(void) {
             if (D_i8_80144FC0 != NULL) {
                 D_80144FB0 = 1;
                 D_i8_80144FC8 = 0;
-                func_800BA8D8(0x21);
+                Audio_TriggerSystemSE(0x21);
                 func_i3_8013BF18(0);
             }
         } else if (gInputButtonPressed & BTN_B) {
             sp2C = 2;
-            func_800BA8D8(0x10);
+            Audio_TriggerSystemSE(0x10);
         }
     }
     return sp2C;
@@ -334,7 +334,7 @@ s32 func_i8_80144144(void) {
     }
     // clang-format on
     if (sp28 != D_i8_80144FC8) {
-        func_800BA8D8(0x1E);
+        Audio_TriggerSystemSE(0x1E);
     }
     if (gInputButtonPressed & (BTN_A | BTN_START)) {
         var_t0 = 0;
@@ -370,12 +370,12 @@ s32 func_i8_80144144(void) {
         }
 
         if (var_t0 != 0) {
-            func_800BA8D8(0x21);
+            Audio_TriggerSystemSE(0x21);
         }
     } else if (gInputButtonPressed & BTN_B) {
         D_80144FB0 = 0;
         func_80080BDC(D_i8_80144FC0);
-        func_800BA8D8(0x10);
+        Audio_TriggerSystemSE(0x10);
     }
     return sp2C;
 }
@@ -396,13 +396,13 @@ void func_i8_801443D0(void) {
             }
         }
         if (sp1C != D_i8_80144FCC) {
-            func_800BA8D8(0x1E);
+            Audio_TriggerSystemSE(0x1E);
         }
         sp18 = 0;
         if (gInputButtonPressed & (BTN_A | BTN_START)) {
             sp18 = 1;
             if (D_i8_80144FCC == 0) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
             } else {
                 if (D_i8_80144FCE == 0) {
                     func_i2_801017B8(gCourseIndex);
@@ -412,11 +412,11 @@ void func_i8_801443D0(void) {
                 }
                 D_i8_80144FB8[D_i8_80144FC8] = 0;
                 D_i8_80144FC8 = D_i8_80144FCA;
-                func_800BA8D8(5);
+                Audio_TriggerSystemSE(5);
             }
         } else if (gInputButtonPressed & BTN_B) {
             sp18 = 1;
-            func_800BA8D8(0x10);
+            Audio_TriggerSystemSE(0x10);
         }
         if (sp18 != 0) {
             D_80144FB0 = 1;

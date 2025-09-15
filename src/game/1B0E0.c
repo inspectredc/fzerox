@@ -36,7 +36,7 @@ s32 D_800E5F10[4];
 s32 D_800E5F20[4];
 s32 D_800E5F30[4];
 Racer* gRacersByPosition[30];
-s32 D_800E5FB8;
+s32 sClosestRacerId;
 s16 D_800E5FBC;
 s16 D_800E5FBE;
 s16 D_800E5FC0;
@@ -1275,12 +1275,12 @@ void func_80082C80(Player* player) {
     f32 temp_ft5;
     f32 temp_fa0;
     f32 var_fv1;
-    Racer* temp_v0;
+    Racer* closestRacer;
 
-    temp_v0 = &gRacers[D_800E5FB8];
-    temp_fa1 = temp_v0->unk_0C.unk_34.x - player->unk_50.x;
-    temp_ft4 = temp_v0->unk_0C.unk_34.y - player->unk_50.y;
-    temp_ft5 = temp_v0->unk_0C.unk_34.z - player->unk_50.z;
+    closestRacer = &gRacers[sClosestRacerId];
+    temp_fa1 = closestRacer->unk_0C.unk_34.x - player->unk_50.x;
+    temp_ft4 = closestRacer->unk_0C.unk_34.y - player->unk_50.y;
+    temp_ft5 = closestRacer->unk_0C.unk_34.z - player->unk_50.z;
 
     var_fv1 = sqrtf(SQ(temp_fa1) + SQ(temp_ft4) + SQ(temp_ft5));
 
@@ -1291,7 +1291,7 @@ void func_80082C80(Player* player) {
         var_fv1 *= temp_fa0;
     }
     if ((var_fv1 >= -1000.0f) && (var_fv1 <= 1000.0f)) {
-        func_800BA2D0(((var_fv1 + 1000.0f) / 2000.0f) * 127.0f);
+        Audio_SetEnemyEnginePan(((var_fv1 + 1000.0f) / 2000.0f) * 127.0f);
     }
 }
 
@@ -3717,7 +3717,7 @@ void func_80089220(s32 playerIndex) {
     func_i3_80128D8C();
     func_i3_TriggerLivesIncrease();
     if (D_800E5FD0 != 0) {
-        func_800BA8D8(0);
+        Audio_TriggerSystemSE(0);
     }
     D_800F80C4 = 0;
 }
@@ -3730,7 +3730,7 @@ void func_8008927C(s32 playerIndex) {
         func_i3_TriggerLivesDecrease();
     }
     if (D_800E5FD0 != 0) {
-        func_800BA8D8(44);
+        Audio_TriggerSystemSE(44);
     }
     D_800F80C4 = 0;
 }
@@ -3752,7 +3752,7 @@ void func_800892E0(Racer* racer) {
                 gRacers[0].energy = gRacers[0].maxEnergy;
                 D_800F5DE8 = D_800E5FBC;
                 func_800BA2B4(gRacers[0].id);
-                func_800BAB68(gRacers[0].id);
+                Audio_PlayerEngineStop(gRacers[0].id);
                 func_8007E0CC();
             }
         }
@@ -3773,37 +3773,37 @@ void func_800894C0(Racer* arg0) {
     if (D_800E5FD0 != 0) {
         if (arg0->unk_08 & 0x800) {
             arg0->unk_08 &= ~0x800;
-            func_800BA3E4(arg0->id, 4);
+            Audio_PlayerLevelSEStop(arg0->id, 4);
         }
         if (arg0->unk_08 & 0x400) {
             arg0->unk_08 &= ~0x400;
-            func_800BA3E4(arg0->id, 5);
+            Audio_PlayerLevelSEStop(arg0->id, 5);
         }
         if (arg0->unk_08 & 0x20) {
             arg0->unk_08 &= ~0x20;
-            func_800BA3E4(arg0->id, 11);
+            Audio_PlayerLevelSEStop(arg0->id, 11);
         }
         if (arg0->unk_08 & 0x200) {
             arg0->unk_08 &= ~0x200;
-            func_800BA3E4(arg0->id, 6);
+            Audio_PlayerLevelSEStop(arg0->id, 6);
         }
         if (arg0->unk_08 & 0x40) {
             arg0->unk_08 &= ~0x40;
-            func_800BA3E4(arg0->id, 10);
+            Audio_PlayerLevelSEStop(arg0->id, 10);
         }
         if (arg0->unk_08 & 0x2000) {
             arg0->unk_08 &= ~0x2000;
-            func_800BA3E4(arg0->id, 8);
+            Audio_PlayerLevelSEStop(arg0->id, 8);
         }
         if (arg0->unk_08 & 0x100) {
             arg0->unk_08 &= ~0x100;
-            func_800BAB50(arg0->id);
+            Audio_PlayerEngineEchoStop(arg0->id);
         }
         if (arg0->unk_08 & 0x80) {
             arg0->unk_08 &= ~0x80;
-            func_800BA3E4(arg0->id, 9);
+            Audio_PlayerLevelSEStop(arg0->id, 9);
         }
-        func_800BAB68(arg0->id);
+        Audio_PlayerEngineStop(arg0->id);
     } else {
         arg0->unk_08 &= ~(0x800 | 0x400 | 0x20 | 0x200 | 0x40 | 0x2000 | 0x100 | 0x80);
     }
@@ -4355,7 +4355,7 @@ void func_8008B150(void) {
     for (i = gTotalRacers - 1; i > 0; i--) {
         if (sRacerPairInfo[(i * (i - 1)) >> 1].trailToLeadDistance < closestDistance) {
             closestDistance = sRacerPairInfo[(i * (i - 1)) >> 1].trailToLeadDistance;
-            D_800E5FB8 = i;
+            sClosestRacerId = i;
         }
     }
 }
@@ -5074,12 +5074,12 @@ void func_8008DBB8(Racer* arg0, s32 arg1) {
         func_i3_80128D8C();
         func_i3_TriggerLivesIncrease();
         if (D_800E5FD0 != 0) {
-            func_800BA8D8(0);
+            Audio_TriggerSystemSE(0);
         }
     }
     temp_v0->unk_230 += temp_v0->maxEnergy * 0.125f;
     if ((gNumPlayers == 1) && (D_800E5FD0 != 0)) {
-        func_800BA8D8(0x39);
+        Audio_TriggerSystemSE(0x39);
     }
 }
 
@@ -5105,7 +5105,7 @@ void func_8008DCD8(Racer* arg0, f32 arg1) {
                 func_800894C0(arg0);
             }
             if (D_800E5FD0 != 0) {
-                func_800BA710(arg0->id, 8);
+                Audio_PlayerTriggerSEStart(arg0->id, 8);
             }
             if (arg0->machineLod != 0) {
                 if (arg0->unk_28C == NULL) {
@@ -5209,7 +5209,7 @@ void func_8008E188(Racer* arg0, f32 arg1, f32 arg2, f32 arg3) {
                              arg0->velocity.y, arg0->velocity.z, (arg1 * arg2 * 1.5f) + 18.0f, arg0);
         }
         if (D_800E5FD0 != 0) {
-            func_800BA710(arg0->id, 3);
+            Audio_PlayerTriggerSEStart(arg0->id, 3);
         }
         func_8008DCD8(arg0, arg1 * arg2 * 0.7f);
     }
@@ -5277,7 +5277,7 @@ void func_8008E54C(Racer* arg0, f32 arg1) {
             func_i2_801054C0(arg0->unk_0C.unk_34.x, arg0->unk_0C.unk_34.y, arg0->unk_0C.unk_34.z, arg0->velocity.x,
                              arg0->velocity.y, arg0->velocity.z, 40.0f, arg0);
             if (D_800E5FD0 != 0) {
-                func_800BA710(arg0->id, 3);
+                Audio_PlayerTriggerSEStart(arg0->id, 3);
             }
         }
     } else {
@@ -5295,7 +5295,7 @@ void func_8008E54C(Racer* arg0, f32 arg1) {
                 if (!(arg0->unk_08 & 0x2000)) {
                     arg0->unk_08 |= 0x2000;
                     if (D_800E5FD0 != 0) {
-                        func_800BA2F0(arg0->id, 8);
+                        Audio_PlayerLevelSEStart(arg0->id, 8);
                     }
                 }
             }
@@ -5342,7 +5342,7 @@ void func_8008E54C(Racer* arg0, f32 arg1) {
                 if (arg0->unk_08 & 0x2000) {
                     arg0->unk_08 &= ~0x2000;
                     if (D_800E5FD0 != 0) {
-                        func_800BA3E4(arg0->id, 8);
+                        Audio_PlayerLevelSEStop(arg0->id, 8);
                     }
                 }
             }
@@ -5357,7 +5357,7 @@ void func_8008E54C(Racer* arg0, f32 arg1) {
                 if (!(arg0->unk_08 & 0x2000)) {
                     arg0->unk_08 |= 0x2000;
                     if (D_800E5FD0 != 0) {
-                        func_800BA2F0(arg0->id, 8);
+                        Audio_PlayerLevelSEStart(arg0->id, 8);
                     }
                 }
             }
@@ -5465,7 +5465,7 @@ void func_8008EC98(Racer* arg0) {
                 if (!(arg0->unk_08 & 0x2000)) {
                     arg0->unk_08 |= 0x2000;
                     if (D_800E5FD0 != 0) {
-                        func_800BA2F0(arg0->id, 8);
+                        Audio_PlayerLevelSEStart(arg0->id, 8);
                     }
                 }
             }
@@ -5601,7 +5601,7 @@ void func_8008EC98(Racer* arg0) {
             if (arg0->unk_08 & 0x2000) {
                 arg0->unk_08 &= ~0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA3E4(arg0->id, 8);
+                    Audio_PlayerLevelSEStop(arg0->id, 8);
                 }
             }
         }
@@ -5611,7 +5611,7 @@ void func_8008EC98(Racer* arg0) {
             if (!(arg0->unk_08 & 0x2000)) {
                 arg0->unk_08 |= 0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(arg0->id, 8);
+                    Audio_PlayerLevelSEStart(arg0->id, 8);
                 }
             }
         }
@@ -5666,7 +5666,7 @@ void func_8008F550(Racer* arg0) {
             if (!(arg0->unk_08 & 0x2000)) {
                 arg0->unk_08 |= 0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(arg0->id, 8);
+                    Audio_PlayerLevelSEStart(arg0->id, 8);
                 }
             }
         }
@@ -5771,7 +5771,7 @@ void func_8008F550(Racer* arg0) {
             if (arg0->unk_08 & 0x2000) {
                 arg0->unk_08 &= ~0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA3E4(arg0->id, 8);
+                    Audio_PlayerLevelSEStop(arg0->id, 8);
                 }
             }
         }
@@ -5781,7 +5781,7 @@ void func_8008F550(Racer* arg0) {
             if (!(arg0->unk_08 & 0x2000)) {
                 arg0->unk_08 |= 0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(arg0->id, 8);
+                    Audio_PlayerLevelSEStart(arg0->id, 8);
                 }
             }
         }
@@ -5837,7 +5837,7 @@ void func_8008FC80(Racer* arg0) {
             if (!(arg0->unk_08 & 0x2000)) {
                 arg0->unk_08 |= 0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(arg0->id, 8);
+                    Audio_PlayerLevelSEStart(arg0->id, 8);
                 }
             }
         }
@@ -5956,7 +5956,7 @@ void func_8008FC80(Racer* arg0) {
             if (arg0->unk_08 & 0x2000) {
                 arg0->unk_08 &= ~0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA3E4(arg0->id, 8);
+                    Audio_PlayerLevelSEStop(arg0->id, 8);
                 }
             }
         }
@@ -5966,7 +5966,7 @@ void func_8008FC80(Racer* arg0) {
             if (!(arg0->unk_08 & 0x2000)) {
                 arg0->unk_08 |= 0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(arg0->id, 8);
+                    Audio_PlayerLevelSEStart(arg0->id, 8);
                 }
             }
         }
@@ -5980,7 +5980,7 @@ void func_80090490(Racer* arg0) {
         if (!(arg0->unk_08 & 0x2000)) {
             arg0->unk_08 |= 0x2000;
             if (D_800E5FD0 != 0) {
-                func_800BA2F0(arg0->id, 8);
+                Audio_PlayerLevelSEStart(arg0->id, 8);
             }
         }
     }
@@ -6027,7 +6027,7 @@ void func_80090568(Racer* arg0) {
             if (!(arg0->unk_08 & 0x2000)) {
                 arg0->unk_08 |= 0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(arg0->id, 8);
+                    Audio_PlayerLevelSEStart(arg0->id, 8);
                 }
             }
         }
@@ -6074,7 +6074,7 @@ void func_80090568(Racer* arg0) {
             if (arg0->unk_08 & 0x2000) {
                 arg0->unk_08 &= ~0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA3E4(arg0->id, 8);
+                    Audio_PlayerLevelSEStop(arg0->id, 8);
                 }
             }
         }
@@ -6087,7 +6087,7 @@ void func_80090568(Racer* arg0) {
             if (!(arg0->unk_08 & 0x2000)) {
                 arg0->unk_08 |= 0x2000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(arg0->id, 8);
+                    Audio_PlayerLevelSEStart(arg0->id, 8);
                 }
             }
         }
@@ -6125,9 +6125,9 @@ void func_80090AFC(Racer* arg0) {
 
     if ((arg0->id < gNumPlayers) && (D_800E5FD0 != 0)) {
         if (sCharacterVoices[arg0->character] != VOICE_FEMALE) {
-            func_800BA710(arg0->id, 52);
+            Audio_PlayerTriggerSEStart(arg0->id, 52);
         } else {
-            func_800BA710(arg0->id, 53);
+            Audio_PlayerTriggerSEStart(arg0->id, 53);
         }
         func_800894C0(arg0);
     }
@@ -6328,7 +6328,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             if (!(racer->unk_08 & 0x400)) {
                 racer->unk_08 |= 0x400;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(racer->id, 5);
+                    Audio_PlayerLevelSEStart(racer->id, 5);
                 }
             }
         }
@@ -6336,7 +6336,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         if (racer->unk_08 & 0x400) {
             racer->unk_08 &= ~0x400;
             if (D_800E5FD0 != 0) {
-                func_800BA3E4(racer->id, 5);
+                Audio_PlayerLevelSEStop(racer->id, 5);
             }
         }
     }
@@ -6352,7 +6352,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             if (!(racer->unk_08 & 0x80)) {
                 racer->unk_08 |= 0x80;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(racer->id, 9);
+                    Audio_PlayerLevelSEStart(racer->id, 9);
                 }
             }
         }
@@ -6360,7 +6360,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         if (racer->unk_08 & 0x80) {
             racer->unk_08 &= ~0x80;
             if (D_800E5FD0 != 0) {
-                func_800BA3E4(racer->id, 9);
+                Audio_PlayerLevelSEStop(racer->id, 9);
             }
         }
     }
@@ -6384,7 +6384,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         racer->boostTimer = sInitialBoostTimer;
         racer->unk_08 |= 0x1000;
         if (D_800E5FD0 != 0) {
-            func_800BA710(racer->id, 7);
+            Audio_PlayerTriggerSEStart(racer->id, 7);
         }
     } else {
         if ((racer->stateFlags & (RACER_STATE_CRASHED | COURSE_EFFECT_MASK)) == COURSE_EFFECT_DASH) {
@@ -6398,7 +6398,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             if (!(racer->unk_08 & 0x1000)) {
                 racer->unk_08 |= 0x1000;
                 if (D_800E5FD0 != 0) {
-                    func_800BA710(racer->id, 7);
+                    Audio_PlayerTriggerSEStart(racer->id, 7);
                 }
             }
         } else {
@@ -6422,7 +6422,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                     racer->stateFlags |= RACER_STATE_FLAGS_10000;
                     func_8008DCD8(racer, 12.5f);
                     if (D_800E5FD0 != 0) {
-                        func_800BA710(racer->id, 1);
+                        Audio_PlayerTriggerSEStart(racer->id, 1);
                     }
                     break;
                 }
@@ -6475,7 +6475,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 racer->stateFlags |= RACER_STATE_FLAGS_200000;
                 racer->unk_1DC = (racer->speed * 0.3f) + 0.5f;
                 if ((racer->id < gNumPlayers) && (D_800E5FD0 != 0)) {
-                    func_800BA710(racer->id, 0x37);
+                    Audio_PlayerTriggerSEStart(racer->id, 0x37);
                 }
                 break;
 
@@ -6531,12 +6531,12 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 if (buttonCurrent & BTN_R) {
                     racer->unk_284 = 2;
                     if (D_800E5FD0 != 0) {
-                        func_800BA710(racer->id, 2);
+                        Audio_PlayerTriggerSEStart(racer->id, 2);
                     }
                 } else {
                     racer->unk_284 = 1;
                     if (D_800E5FD0 != 0) {
-                        func_800BA710(racer->id, 6);
+                        Audio_PlayerTriggerSEStart(racer->id, 6);
                     }
                 }
             }
@@ -6549,12 +6549,12 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 if (buttonCurrent & BTN_Z) {
                     racer->unk_284 = 2;
                     if (D_800E5FD0 != 0) {
-                        func_800BA710(racer->id, 2);
+                        Audio_PlayerTriggerSEStart(racer->id, 2);
                     }
                 } else {
                     racer->unk_284 = 1;
                     if (D_800E5FD0 != 0) {
-                        func_800BA710(racer->id, 6);
+                        Audio_PlayerTriggerSEStart(racer->id, 6);
                     }
                 }
             }
@@ -6670,14 +6670,14 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             if (!(racer->unk_08 & 0x40)) {
                 racer->unk_08 |= 0x40;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(racer->id, 0xA);
+                    Audio_PlayerLevelSEStart(racer->id, 0xA);
                 }
             }
         } else {
             if (racer->unk_08 & 0x40) {
                 racer->unk_08 &= ~0x40;
                 if (D_800E5FD0 != 0) {
-                    func_800BA3E4(racer->id, 0xA);
+                    Audio_PlayerLevelSEStop(racer->id, 0xA);
                 }
             }
         }
@@ -6698,7 +6698,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             racer->unk_204 = 0x1E;
             racer->unk_214 = 0x1B;
             if ((racer->id < gNumPlayers) && (D_800E5FD0 != 0)) {
-                func_800BA710(racer->id, 0x29);
+                Audio_PlayerTriggerSEStart(racer->id, 0x29);
             }
         } else {
             if (racer->unk_214 != 0) {
@@ -6761,7 +6761,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 if (!(racer->unk_08 & 0x200)) {
                     racer->unk_08 |= 0x200;
                     if (D_800E5FD0 != 0) {
-                        func_800BA2F0(racer->id, 6);
+                        Audio_PlayerLevelSEStart(racer->id, 6);
                     }
                 }
             }
@@ -6771,7 +6771,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 if (racer->unk_08 & 0x200) {
                     racer->unk_08 &= ~0x200;
                     if (D_800E5FD0 != 0) {
-                        func_800BA3E4(racer->id, 6);
+                        Audio_PlayerLevelSEStop(racer->id, 6);
                     }
                 }
             }
@@ -6782,7 +6782,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             if (racer->unk_08 & 0x200) {
                 racer->unk_08 &= ~0x200;
                 if (D_800E5FD0 != 0) {
-                    func_800BA3E4(racer->id, 6);
+                    Audio_PlayerLevelSEStop(racer->id, 6);
                 }
             }
         }
@@ -6852,7 +6852,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             if (!(racer->unk_08 & 0x20)) {
                 racer->unk_08 |= 0x20;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(racer->id, 0xB);
+                    Audio_PlayerLevelSEStart(racer->id, 0xB);
                 }
             }
         }
@@ -6862,7 +6862,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             if (racer->unk_08 & 0x20) {
                 racer->unk_08 &= ~0x20;
                 if (D_800E5FD0 != 0) {
-                    func_800BA3E4(racer->id, 0xB);
+                    Audio_PlayerLevelSEStop(racer->id, 0xB);
                 }
             }
         }
@@ -6948,9 +6948,9 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 func_i2_80105590(racer->unk_0C.unk_34.x, racer->unk_0C.unk_34.y, racer->unk_0C.unk_34.z, 0.0f, 0.0f,
                                  0.0f, 600.0f, racer);
                 if (D_800E5FD0 != 0) {
-                    func_800BA710(racer->id, 8);
+                    Audio_PlayerTriggerSEStart(racer->id, 8);
                     if ((racer->id == 0) && (gNumPlayers == 1)) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                 }
                 racer->unk_C0.x.y = 0.0f;
@@ -7066,7 +7066,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
 
                             if (racer->id < gNumPlayers) {
                                 if (D_800E5FD0 != 0) {
-                                    func_800BA710(racer->id, 0xF);
+                                    Audio_PlayerTriggerSEStart(racer->id, 0xF);
                                     func_800BA2B4(racer->id);
                                 }
                                 func_800894C0(racer);
@@ -7208,7 +7208,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             } else if ((racer->id < gNumPlayers) && (racer->pitForceFieldSize == 0.1f)) {
                 racer->unk_08 |= 0x800;
                 if (D_800E5FD0 != 0) {
-                    func_800BA2F0(racer->id, 4);
+                    Audio_PlayerLevelSEStart(racer->id, 4);
                 }
             }
         }
@@ -7220,7 +7220,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 if (racer->id < gNumPlayers) {
                     racer->unk_08 &= ~0x800;
                     if (D_800E5FD0 != 0) {
-                        func_800BA3E4(racer->id, 4);
+                        Audio_PlayerLevelSEStop(racer->id, 4);
                     }
                 }
             }
@@ -7271,7 +7271,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                         racer->unk_27C = 0;
                         racer->unk_284 = 0;
                     } else if (D_800E5FD0 != 0) {
-                        func_800BA710(racer->id, 2);
+                        Audio_PlayerTriggerSEStart(racer->id, 2);
                     }
                 }
             } else {
@@ -7282,7 +7282,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                         racer->unk_27C = 0;
                         racer->unk_284 = 0;
                     } else if (D_800E5FD0 != 0) {
-                        func_800BA710(racer->id, 2);
+                        Audio_PlayerTriggerSEStart(racer->id, 2);
                     }
                 }
             }
@@ -7359,7 +7359,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             func_i2_80105590(sp10C.x, sp10C.y, sp10C.z, racer->velocity.x, racer->velocity.y, racer->velocity.z,
                              (f32) ((Math_Rand2() & 0xF) + ((s32) (racer->spinOutTimer * 5) / 150) + 5), racer);
             if (!((racer->id + gGameFrameCount) & 4) && (D_800E5FD0 != 0)) {
-                func_800BA710(racer->id, 5);
+                Audio_PlayerTriggerSEStart(racer->id, 5);
             }
             if (racer->id < gNumPlayers) {
                 controller->unk_88 = 0xBB8;
@@ -7419,7 +7419,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                     i--;
                 } while (i != 0);
                 if (D_800E5FD0 != 0) {
-                    func_800BA710(racer->id, 8);
+                    Audio_PlayerTriggerSEStart(racer->id, 8);
                 }
                 if (racer->id < gNumPlayers) {
                     controller->unk_88 = 10000;
@@ -7434,14 +7434,14 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         if ((racer->id < gNumPlayers) && (var_fa1 < 0.3f) && (racer->spinOutTimer == 0) && (D_800E5FD0 != 0)) {
             if (var_fa1 >= 0.2f) {
                 if (!(gGameFrameCount & 0x1F)) {
-                    func_800BA710(racer->id, 0x13);
+                    Audio_PlayerTriggerSEStart(racer->id, 0x13);
                 }
             } else if (var_fa1 >= 0.1f) {
                 if (!(gGameFrameCount & 0xF)) {
-                    func_800BA710(racer->id, 0x14);
+                    Audio_PlayerTriggerSEStart(racer->id, 0x14);
                 }
             } else if (!(gGameFrameCount & 7)) {
-                func_800BA710(racer->id, 0x15);
+                Audio_PlayerTriggerSEStart(racer->id, 0x15);
             }
         }
         if (!(gGameFrameCount & 8) && ((var_fa1 < 0.2f) || ((var_fa1 < 0.5f) && !(gGameFrameCount & 0x10)))) {
@@ -7501,7 +7501,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                              racer->velocity.y + racer->unk_B4.y, racer->velocity.z + racer->unk_B4.z, 20.0f, racer);
 
             if (racer->id < gNumPlayers) {
-                func_800BA710(racer->id, 0x32);
+                Audio_PlayerTriggerSEStart(racer->id, 0x32);
             }
             racer->unk_178 = 1.03f;
             racer->unk_2DA = racer->unk_2DC = 0xFF;
@@ -7524,7 +7524,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         racer->shadowBaseG = 205.0f;
         racer->shadowBaseB = 255.0f;
         if (racer->id < gNumPlayers) {
-            func_800BA710(racer->id, 0x28);
+            Audio_PlayerTriggerSEStart(racer->id, 0x28);
         }
     }
 
@@ -7547,7 +7547,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             if (!(racer->unk_08 & 0x100)) {
                 racer->unk_08 |= 0x100;
                 if (D_800E5FD0 != 0) {
-                    func_800BAB34(racer->id);
+                    Audio_PlayerEngineEchoStart(racer->id);
                 }
             }
         } else {
@@ -7555,7 +7555,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             if (racer->unk_08 & 0x100) {
                 racer->unk_08 &= ~0x100;
                 if (D_800E5FD0 != 0) {
-                    func_800BAB50(racer->id);
+                    Audio_PlayerEngineEchoStop(racer->id);
                 }
             }
         }
@@ -7878,7 +7878,7 @@ void func_800952F4(void) {
                             func_8008DCD8(racer2, var_fs2 * var_fs0);
                         }
                         if (D_800E5FD0 != 0) {
-                            func_800BA710(racer2->id, 4);
+                            Audio_PlayerTriggerSEStart(racer2->id, 4);
                         }
                     }
                     temp_s2->unk_10 = 1;
@@ -8085,7 +8085,7 @@ void func_800952F4(void) {
                 !(racer2->stateFlags & (RACER_STATE_CRASHED | RACER_STATE_FLAGS_80000))) {
                 D_800F80A8[i]++;
                 if (D_800F80A8[i] == 100) {
-                    func_800BA8D8(0x3C);
+                    Audio_TriggerSystemSE(0x3C);
                 }
             } else {
                 D_800F80A8[i] = 0;
@@ -8096,7 +8096,7 @@ void func_800952F4(void) {
         if (gNumPlayers == 1) {
             func_8008B150();
             if (D_800E5FD0 != 0) {
-                func_800BA2E0(D_800E5FB8);
+                Audio_SetNearestEnemy(sClosestRacerId);
             }
         }
         if ((gRacersByPosition[0]->id < gNumPlayers) && (gGameMode != GAMEMODE_DEATH_RACE) &&
@@ -8106,7 +8106,7 @@ void func_800952F4(void) {
                 if (!(gRacersByPosition[0]->unk_08 & 0x4000)) {
                     gRacersByPosition[0]->unk_08 |= 0x4000;
                     if (D_800E5FD0 != 0) {
-                        func_800BA8D8(0x3B);
+                        Audio_TriggerSystemSE(0x3B);
                     }
                 }
             } else if (var_fs0 < 2000.0f) {
@@ -8133,10 +8133,10 @@ void func_800952F4(void) {
                         racer->energy = racer->maxEnergy;
                         if (D_800E5FD0 != 0) {
                             if (racer->position == 1) {
-                                func_800BA710(racer->id, 0xF);
+                                Audio_PlayerTriggerSEStart(racer->id, 0xF);
                             }
                             func_800BA2B4(racer->id);
-                            func_800BAB68(racer->id);
+                            Audio_PlayerEngineStop(racer->id);
                             if ((i != 0) && (gPlayerRacersFinished == 0)) {
                                 i = 0;
                                 func_8007E0CC();
@@ -8160,13 +8160,13 @@ void func_800952F4(void) {
             case 30:
                 if (gRacers[0].stateFlags & RACER_STATE_FLAGS_2000000) {
                     if ((gGameMode == GAMEMODE_GP_RACE) || (gGameMode == GAMEMODE_DEATH_RACE)) {
-                        func_800BA8D8(0x3D);
+                        Audio_TriggerSystemSE(0x3D);
                         break;
                     } else if (gGameMode == GAMEMODE_TIME_ATTACK) {
                         if ((gCurrentGhostType == GHOST_PLAYER) || (gCurrentGhostType == GHOST_NONE)) {
-                            func_800BA8D8(0x3D);
+                            Audio_TriggerSystemSE(0x3D);
                         } else if (gRacers[0].raceTime < gFastestGhostTime) {
-                            func_800BA8D8(0x43);
+                            Audio_TriggerSystemSE(0x43);
                         }
                     }
                 }
@@ -8174,7 +8174,7 @@ void func_800952F4(void) {
             case 120:
                 if ((gGameMode == GAMEMODE_GP_RACE) && (gRacers[0].stateFlags & RACER_STATE_FLAGS_2000000) &&
                     (gRacers[0].position == 1)) {
-                    func_800BA8D8(0x33);
+                    Audio_TriggerSystemSE(0x33);
                 }
                 break;
         }
@@ -9377,23 +9377,23 @@ block_115:
             if (gRaceIntroTimer > 160) {
                 var_s2 = aCountdown3Tex;
                 if ((playerIndex == 0) && (!gGamePaused) && (gRaceIntroTimer == 220)) {
-                    func_800BA8D8(0x2F);
+                    Audio_TriggerSystemSE(0x2F);
                 }
             } else if (gRaceIntroTimer > 100) {
                 var_s2 = aCountdown2Tex;
                 if ((playerIndex == 0) && (!gGamePaused) && (gRaceIntroTimer == 160)) {
-                    func_800BA8D8(9);
+                    Audio_TriggerSystemSE(9);
                 }
             } else if (gRaceIntroTimer > 40) {
                 var_s2 = aCountdown1Tex;
                 if ((playerIndex == 0) && (!gGamePaused) && (gRaceIntroTimer == 100)) {
-                    func_800BA8D8(0xA);
+                    Audio_TriggerSystemSE(0xA);
                 }
             } else {
                 var_s2 = aCountdownGoTex;
                 if ((playerIndex == 0) && (!gGamePaused)) {
                     if (gRaceIntroTimer == 40) {
-                        func_800BA8D8(0xB);
+                        Audio_TriggerSystemSE(0xB);
                     }
                     if ((gRaceIntroTimer == 1) && (D_800CD010 == 0)) {
                         if (gCurrentCourseInfo->courseIndex < COURSE_EDIT_1) {
@@ -9584,7 +9584,7 @@ block_115:
                         if (!(playerRacer->unk_08 & 0x8000)) {
                             playerRacer->unk_08 |= 0x8000;
                             if (D_800E5FD0 != 0) {
-                                func_800BA8D8(0x3A);
+                                Audio_TriggerSystemSE(0x3A);
                             }
                         }
                     } else if (playerRacer->distanceFromRacerBehind > 2500.0f) {

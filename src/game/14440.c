@@ -858,16 +858,16 @@ void func_8007E08C(void) {
     func_800BB39C(0);
 }
 
-void func_8007E0AC(s32 arg0) {
-    func_800BAF30(arg0);
+void func_8007E0AC(s32 bgm) {
+    Audio_BetaBgmStart(bgm);
 }
 
 void func_8007E0CC(void) {
-    func_800BAF80();
+    Audio_BetaBgmStop();
 }
 
 void func_8007E0EC(void) {
-    func_800BB078();
+    Audio_BetaBgmStop2();
 }
 
 const s8 kMachineSelectCharacterList[] = { CAPTAIN_FALCON,

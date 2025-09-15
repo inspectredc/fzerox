@@ -240,11 +240,11 @@ s32 Title_Update(void) {
     }
 
     if ((D_800CD044 == 0) && (gInputButtonPressed & (BTN_A | BTN_START))) {
-        func_800BA8D8(0x3E);
+        Audio_TriggerSystemSE(0x3E);
         func_8007E0CC();
         D_i4_8011D790 = -1;
         if (gLeoDDConnected && (OBJECT_STATE(Object_Get(OBJECT_TITLE_DISK_DRIVE)) == 1)) {
-            func_800BB370();
+            Audio_SESeqStart();
         }
         return GAMEMODE_FLX_MAIN_MENU;
     } else {
@@ -356,7 +356,7 @@ void Title_DiskDriveInit(Object* diskDriveObj) {
     if (gRamDDCompatible && (func_800758F8() != 1)) {
         OBJECT_COUNTER(diskDriveObj)++;
         D_i4_8011D794 = 1;
-        func_800BB334();
+        Audio_AllSoundStop();
     }
 }
 
@@ -497,8 +497,8 @@ void Title_DiskDriveUpdate(Object* diskDriveObj) {
     if (gRamDDCompatible && (D_i4_8011D790 != -1) && (D_800CD010 == 0)) {
         if (func_800758F8() == 1) {
             if (OBJECT_COUNTER(diskDriveObj) != 0) {
-                func_800BB370();
-                func_800BAFA4(0xD);
+                Audio_SESeqStart();
+                Audio_RomBgmStart(0xD);
             }
             OBJECT_COUNTER(diskDriveObj) = 0;
             OBJECT_STATE(diskDriveObj) = 0;
@@ -511,7 +511,7 @@ void Title_DiskDriveUpdate(Object* diskDriveObj) {
         }
         switch (OBJECT_COUNTER(diskDriveObj)) {
             case 1:
-                func_800BB334();
+                Audio_AllSoundStop();
                 break;
             case 30:
                 if (func_800761D4() == 2) {

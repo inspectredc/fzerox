@@ -273,7 +273,7 @@ void func_80068DCC(void) {
     if (D_800CD154 != var_v1) {
         func_8007E0CC();
         func_8007E08C();
-        func_800BAFA4(var_v1);
+        Audio_RomBgmStart(var_v1);
     }
     D_800CD154 = var_v1;
 }

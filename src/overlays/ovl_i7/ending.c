@@ -530,7 +530,7 @@ s32 func_i7_801442A0(void) {
                 D_i7_8014BE0C++;
                 if (D_i7_8014BE0C == 0x3C) {
                     D_i7_8014BE1C = 1;
-                    func_800BB09C();
+                    Audio_BetaBgmStop3();
                 }
             }
             if (D_i7_8014BE0C >= 360) {
@@ -1726,7 +1726,7 @@ void func_i7_80146920(void) {
                     var_s2->unk_14 = var_s4->unk_C0.x.x;
                     var_s2->unk_18 = var_s4->unk_C0.x.y;
                     var_s2->unk_1C = var_s4->unk_C0.x.z;
-                    func_800BA8D8(0x40);
+                    Audio_TriggerSystemSE(0x40);
                 }
                 break;
             case 2:
@@ -2116,7 +2116,7 @@ void func_i7_80147EBC(void) {
                     temp_s4->unk_24 = 3;
                     var_s1 = 0;
                     if (temp_s4->unk_2C == 0x20) {
-                        func_800BAA88(0x40, 0x7F);
+                        Audio_Hanabi(0x40, 0x7F);
                     } else {
                         var_fs0_2 = temp_s4->unk_00;
                         temp_ft4 = temp_s4->unk_04;
@@ -2130,7 +2130,7 @@ void func_i7_80147EBC(void) {
                             var_fa0 *= var_fv1;
                         }
                         if ((var_fa0 >= -1000) && (var_fa0 <= 1000)) {
-                            func_800BAA88((s32) (f32) (u32) (((var_fa0 + 1000.0f) / 2000.0f) * 127.0f), 0x40);
+                            Audio_Hanabi((s32) (f32) (u32) (((var_fa0 + 1000.0f) / 2000.0f) * 127.0f), 0x40);
                         }
                     }
                     var_fs1_2 = sqrtf(SQ(gPlayers[0].unk_5C.z.x) + SQ(gPlayers[0].unk_5C.z.z));

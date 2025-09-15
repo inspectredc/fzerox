@@ -307,10 +307,10 @@ s32 MainMenu_Update(void) {
                     break;
             }
             if (previous != gSelectedMode) {
-                func_800BA8D8(0x1E);
+                Audio_TriggerSystemSE(0x1E);
             }
             if (gInputButtonPressed & BTN_B) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
                 func_8007E0CC();
                 D_800CD384 = 5;
                 return GAMEMODE_FLX_TITLE;
@@ -322,7 +322,7 @@ s32 MainMenu_Update(void) {
             }
 
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x3E);
+                Audio_TriggerSystemSE(0x3E);
                 gAntiPiracyAddedDifficulty =
                     (UNLOCK_EVERYTHING_ROMDATA(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) & 0xFFFF) - 0x997A;
                 switch (gSelectedMode) {
@@ -330,7 +330,7 @@ s32 MainMenu_Update(void) {
                     case MODE_TIME_ATTACK:
                     case MODE_VS_BATTLE:
                     case MODE_PRACTICE:
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                         D_800CD384 = 1;
                         break;
                     case MODE_DEATH_RACE:
@@ -338,7 +338,7 @@ s32 MainMenu_Update(void) {
                         gCourseIndex = COURSE_DEATH_RACE;
                         gCurrentTrackName = gTrackNames[gCourseIndex];
                         gNumPlayers = 1;
-                        func_800BB324(gNumPlayers - 1);
+                        Audio_SetPlayerMode(gNumPlayers - 1);
                         gDifficulty = gAntiPiracyAddedDifficulty + MASTER;
                         return GAMEMODE_FLX_MACHINE_SELECT;
                     case MODE_OPTIONS:
@@ -377,7 +377,7 @@ s32 MainMenu_Update(void) {
                 if (gModeSubOption[gSelectedMode] < 0) {
                     gModeSubOption[gSelectedMode] = 0;
                     D_800CD384 = 0;
-                    func_800BA8D8(0x10);
+                    Audio_TriggerSystemSE(0x10);
                     break;
                 }
             }
@@ -389,16 +389,16 @@ s32 MainMenu_Update(void) {
                 }
             }
             if (previous != gModeSubOption[gSelectedMode]) {
-                func_800BA8D8(0x1E);
+                Audio_TriggerSystemSE(0x1E);
             }
             if (gInputButtonPressed & BTN_B) {
                 D_800CD384 = 0;
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
             } else if ((gInputButtonPressed & BTN_START) &&
                        (OBJECT_STATE(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) == 7)) {
                 break;
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x21);
+                Audio_TriggerSystemSE(0x21);
                 D_800CD384 = 2;
                 switch (gSelectedMode) {
                     case MODE_VS_BATTLE:
@@ -408,7 +408,7 @@ s32 MainMenu_Update(void) {
                         if (gModeSubOption[MODE_TIME_ATTACK] != 0) {
                             D_800CD384 = 6;
                             D_800CD048 = 9;
-                            func_800BA8D8(0x3E);
+                            Audio_TriggerSystemSE(0x3E);
                         } else {
                             gNumPlayers = 1;
                         }
@@ -424,7 +424,7 @@ s32 MainMenu_Update(void) {
         case 2:
             Math_Rand1();
             if (gInputButtonPressed & BTN_B) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
                 switch (gSelectedMode) {
                     case MODE_GP_RACE:
                     case MODE_TIME_ATTACK:
@@ -443,8 +443,8 @@ s32 MainMenu_Update(void) {
                 break;
             }
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x3E);
-                func_800BB324(gNumPlayers - 1);
+                Audio_TriggerSystemSE(0x3E);
+                Audio_SetPlayerMode(gNumPlayers - 1);
                 switch (gSelectedMode) {
                     case MODE_GP_RACE:
                     case MODE_TIME_ATTACK:
@@ -484,7 +484,7 @@ s32 MainMenu_Update(void) {
                 }
             }
             if (gInputButtonPressed & BTN_B) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
                 switch (gSelectedMode) {
                     case MODE_GP_RACE:
                     case MODE_TIME_ATTACK:
@@ -1111,7 +1111,7 @@ void MainMenu_UnlockEverythingUpdate(Object* unlockEverythingObj) {
             if (++OBJECT_STATE(unlockEverythingObj) == 8) {
                 gSettingEverythingUnlocked = 1;
                 Save_SaveSettingsProfiles();
-                func_800BA8D8(0x2E);
+                Audio_TriggerSystemSE(0x2E);
                 backgroundObj = Object_Get(OBJECT_MAIN_MENU_BACKGROUND);
                 if (OBJECT_STATE(backgroundObj) < 2) {
                     OBJECT_STATE(backgroundObj) = (Math_Rand1() % 3) + (OBJECT_STATE(backgroundObj) * 10) + 10;

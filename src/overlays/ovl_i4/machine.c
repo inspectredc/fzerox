@@ -1040,7 +1040,7 @@ s32 MachineSelect_Update(void) {
         Controller_SetGlobalInputs(&gControllers[gPlayerControlPorts[i]]);
         if (i >= gNumPlayers) {
             if ((gInputButtonPressed & BTN_B) && (gMachineSelectState == MACHINE_SELECT_ACTIVE)) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
                 gMachineSelectState = MACHINE_SELECT_EXIT;
                 if (gSelectedMode == MODE_DEATH_RACE) {
                     return GAMEMODE_FLX_MAIN_MENU;
@@ -1061,7 +1061,7 @@ s32 MachineSelect_Update(void) {
                 MACHINE_MINI_STATE(Object_Get(OBJECT_MACHINE_SELECT_MACHINE)) = 1;
                 D_i4_8011D778 = 1.0f;
                 D_i4_8011D77C = 0.0f;
-                func_800BA8D8(0x17);
+                Audio_TriggerSystemSE(0x17);
                 return gGameMode;
             }
         }
@@ -1096,13 +1096,13 @@ s32 MachineSelect_Update(void) {
                 gRacers[i].character = func_8007E10C(sMachineSelectIndex[i]);
 
                 if (lastMachineIndex != sMachineSelectIndex[i]) {
-                    func_800BA710(i, 0x1E);
+                    Audio_PlayerTriggerSEStart(i, 0x1E);
                     D_800CD3AC[i] = 1;
                     gPlayerEngine[i] = 0.5f;
                 }
 
                 if (gInputButtonPressed & BTN_B) {
-                    func_800BA710(i, 0x10);
+                    Audio_PlayerTriggerSEStart(i, 0x10);
 
                     if (gPlayerSelectionLock[i] != SELECTION_FREE) {
                         gPlayerSelectionLock[i] = SELECTION_FREE;
@@ -1135,7 +1135,7 @@ s32 MachineSelect_Update(void) {
                                 gRacers[i].machineSkinIndex = 0;
                             }
                         }
-                        func_800BA710(i, 0x21);
+                        Audio_PlayerTriggerSEStart(i, 0x21);
                     }
                 }
 
@@ -1154,11 +1154,11 @@ s32 MachineSelect_Update(void) {
                 if (gInputButtonPressed & BTN_B) {
                     gPlayerSelectionLock[i] = SELECTION_FREE;
                     gMachineSelectState = MACHINE_SELECT_ACTIVE;
-                    func_800BA710(i, 0x10);
+                    Audio_PlayerTriggerSEStart(i, 0x10);
                     break;
                 }
                 if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                    func_800BA710(i, 0x3E);
+                    Audio_PlayerTriggerSEStart(i, 0x3E);
                     gMachineSelectState = MACHINE_SELECT_CONTINUE;
                     return GAMEMODE_LX_MACHINE_SETTINGS;
                 }
@@ -1204,7 +1204,7 @@ s32 MachineSettings_Update(void) {
                         gRacers[i].machineSkinIndex &= 3;
                     }
                     if (k != gRacers[i].machineSkinIndex) {
-                        func_800BA710(i, 0x1E);
+                        Audio_PlayerTriggerSEStart(i, 0x1E);
                     }
                     stickX = temp_s1->stickX;
                     temp_fa0 = gPlayerEngine[i];
@@ -1231,14 +1231,14 @@ s32 MachineSettings_Update(void) {
                         }
                     }
                     if ((s32) (temp_fa0 / 0.1f) != (s32) (gPlayerEngine[i] / 0.1f)) {
-                        func_800BA710(i, 0x16);
+                        Audio_PlayerTriggerSEStart(i, 0x16);
                     }
                     if (gNumPlayers == 1) {
                         gCharacterLastEngine[gRacers[0].character] = gPlayerEngine[0];
                     }
                 }
                 if (gInputButtonPressed & BTN_B) {
-                    func_800BA710(i, 0x10);
+                    Audio_PlayerTriggerSEStart(i, 0x10);
 
                     if (gPlayerSelectionLock[i] != SELECTION_FREE) {
                         gPlayerSelectionLock[i] = SELECTION_FREE;
@@ -1250,7 +1250,7 @@ s32 MachineSettings_Update(void) {
                         return GAMEMODE_FLX_GP_RACE_NEXT_COURSE;
                     }
                 } else if ((gInputButtonPressed & (BTN_A | BTN_START)) && (gPlayerSelectionLock[i] == SELECTION_FREE)) {
-                    func_800BA710(i, 0x21);
+                    Audio_PlayerTriggerSEStart(i, 0x21);
                     gPlayerSelectionLock[i] = SELECTION_LOCKED;
                 }
 
@@ -1269,9 +1269,9 @@ s32 MachineSettings_Update(void) {
                 if (gInputButtonPressed & BTN_B) {
                     gPlayerSelectionLock[i] = SELECTION_FREE;
                     gMachineSettingsState = MACHINE_SETTINGS_ACTIVE;
-                    func_800BA710(i, 0x10);
+                    Audio_PlayerTriggerSEStart(i, 0x10);
                 } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                    func_800BA710(i, 0x3E);
+                    Audio_PlayerTriggerSEStart(i, 0x3E);
                     func_8007E0CC();
                     gMachineSettingsState = MACHINE_SETTINGS_CONTINUE;
                     switch (gSelectedMode) {

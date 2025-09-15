@@ -230,8 +230,8 @@ void func_i3_8011AEA0(void) {
     if (sMenuStateFlags != 0) {
         if (sMenuStateFlags & MENU_STATE_PAUSE_GAME) {
             gGamePaused = true;
-            func_800BB0C0(1);
-            func_800BA8D8(12);
+            Audio_HandlePause(1);
+            Audio_TriggerSystemSE(12);
             func_80069700();
         }
         if (sMenuStateFlags & MENU_STATE_UNPAUSE_GAME) {
@@ -240,8 +240,8 @@ void func_i3_8011AEA0(void) {
             for (i = 0; i < gNumPlayers; i++) {
                 gControllers[gPlayerControlPorts[i]].unk_72 = 1;
             }
-            func_800BB0C0(0);
-            func_800BA8D8(13);
+            Audio_HandlePause(0);
+            Audio_TriggerSystemSE(13);
         }
         if ((sMenuStateFlags & MENU_STATE_RACE_FINISH_SAVE) && !sRaceFinishSaveTriggered) {
             if (gGameMode == GAMEMODE_TIME_ATTACK) {
@@ -621,7 +621,7 @@ Gfx* func_i3_8011C25C(Gfx* gfx, s32 playerNum) {
                       ((D_i3_80141A68[playerNum] == 1) && (D_i3_80141AA0[playerNum].x == 0.0f))) ||
                      ((D_i3_80141A68[playerNum] == 2) && (D_i3_80141AA0[playerNum].y == 0.0f)))) {
                     D_i3_80141A68[playerNum]++;
-                    func_800BA710(playerNum, 0x31);
+                    Audio_PlayerTriggerSEStart(playerNum, 0x31);
                 }
             }
             if ((D_i3_80141A68[playerNum] == 3) &&
@@ -629,7 +629,7 @@ Gfx* func_i3_8011C25C(Gfx* gfx, s32 playerNum) {
                 D_i3_80141A68[playerNum]++;
                 if ((D_i3_80141B40[D_i3_80141A50[playerNum][0]][0] == D_i3_80141B40[D_i3_80141A50[playerNum][1]][1]) &&
                     (D_i3_80141B40[D_i3_80141A50[playerNum][0]][0] == D_i3_80141B40[D_i3_80141A50[playerNum][2]][2])) {
-                    func_800BA710(playerNum, 0x30);
+                    Audio_PlayerTriggerSEStart(playerNum, 0x30);
                     D_i3_80141B70[playerNum] = 0x78;
                     var_v1 = 0;
                     for (i = 0; i < gTotalRacers; i++) {
@@ -880,7 +880,7 @@ Gfx* func_i3_8011DD30(Gfx* gfx, s32 arg1) {
         }
         if ((gGameMode == GAMEMODE_TIME_ATTACK) &&
             ((((D_i3_80141BB4 * sp144) + D_i3_80141BB0) - D_i3_80141B88[arg1]) == 1) && (D_800CD010 == 0)) {
-            func_800BA8D8(0x22);
+            Audio_TriggerSystemSE(0x22);
         }
         if (top < 240) {
             gDPPipeSync(gfx++);
@@ -901,12 +901,12 @@ Gfx* func_i3_8011DD30(Gfx* gfx, s32 arg1) {
     }
     if ((gGameMode == GAMEMODE_TIME_ATTACK) &&
         ((((D_i3_80141BB4 * gTotalLapCount) + D_i3_80141BB0) - D_i3_80141B88[arg1]) == 1) && (D_800CD010 == 0)) {
-        func_800BA8D8(0x22);
+        Audio_TriggerSystemSE(0x22);
     }
     if ((gGameMode == GAMEMODE_TIME_ATTACK) &&
         ((((D_i3_80141BB4 * (gTotalLapCount + 1)) + D_i3_80141BB0) - D_i3_80141B88[arg1]) == 1) && (D_800E5FE2 == 1) &&
         (D_800CD010 == 0)) {
-        func_800BA8D8(0x2A);
+        Audio_TriggerSystemSE(0x2A);
     }
     if (top < 240) {
         gDPPipeSync(gfx++);
@@ -976,32 +976,32 @@ Gfx* func_i3_8011ECF0(Gfx* gfx) {
             switch (i) {
                 case 0:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x18);
+                        Audio_TriggerSystemSE(0x18);
                     }
                     break;
                 case 1:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x19);
+                        Audio_TriggerSystemSE(0x19);
                     }
                     break;
                 case 2:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x1A);
+                        Audio_TriggerSystemSE(0x1A);
                     }
                     break;
                 case 3:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x1B);
+                        Audio_TriggerSystemSE(0x1B);
                     }
                     break;
                 case 4:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x1C);
+                        Audio_TriggerSystemSE(0x1C);
                     }
                     break;
                 case 5:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x1D);
+                        Audio_TriggerSystemSE(0x1D);
                     }
                     break;
             }
@@ -1267,21 +1267,21 @@ Gfx* func_i3_8012040C(Gfx* gfx, s32 arg1) {
 
                 if (gRacers[arg1].stateFlags & RACER_STATE_CRASHED) {
                     if (D_800CD010 == 0) {
-                        func_800BAFA4(0x13);
+                        Audio_RomBgmStart(0x13);
                     }
                 } else if (D_800CD010 == 0) {
-                    func_800BAFA4(0x11);
+                    Audio_RomBgmStart(0x11);
                 }
                 for (i = 0; i < gNumPlayers; i++) {
                     if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
                         (gRacers[arg1].stateFlags & RACER_STATE_FLAGS_2000000)) {
-                        func_800BA3E4(i, 3);
-                        func_800BA3E4(i, 4);
-                        func_800BA3E4(i, 5);
-                        func_800BA3E4(i, 8);
-                        func_800BA3E4(i, 9);
-                        func_800BA3E4(i, 10);
-                        func_800BA3E4(i, 11);
+                        Audio_PlayerLevelSEStop(i, 3);
+                        Audio_PlayerLevelSEStop(i, 4);
+                        Audio_PlayerLevelSEStop(i, 5);
+                        Audio_PlayerLevelSEStop(i, 8);
+                        Audio_PlayerLevelSEStop(i, 9);
+                        Audio_PlayerLevelSEStop(i, 10);
+                        Audio_PlayerLevelSEStop(i, 11);
                     }
                 }
 
@@ -1683,18 +1683,18 @@ Gfx* func_i3_80121860(Gfx* gfx, s32 playerIndex) {
 
     if (D_i3_80141BE0[playerIndex] == 60) {
         if (D_800CD010 == 0) {
-            func_800BAFA4(0x11);
+            Audio_RomBgmStart(0x11);
         }
         for (i = 0; i < gNumPlayers; i++) {
             if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
                 (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
-                func_800BA3E4(i, 3);
-                func_800BA3E4(i, 4);
-                func_800BA3E4(i, 5);
-                func_800BA3E4(i, 8);
-                func_800BA3E4(i, 9);
-                func_800BA3E4(i, 10);
-                func_800BA3E4(i, 11);
+                Audio_PlayerLevelSEStop(i, 3);
+                Audio_PlayerLevelSEStop(i, 4);
+                Audio_PlayerLevelSEStop(i, 5);
+                Audio_PlayerLevelSEStop(i, 8);
+                Audio_PlayerLevelSEStop(i, 9);
+                Audio_PlayerLevelSEStop(i, 10);
+                Audio_PlayerLevelSEStop(i, 11);
             }
         }
     }
@@ -1738,8 +1738,8 @@ Gfx* func_i3_80121E70(Gfx* gfx, s32 arg1) {
         gControllers[gGameFrameCount % 4].unk_78 = 1;
         D_i3_80141BC0[0] += 2;
         if (D_i3_80141BC0[0] == 250) {
-            func_800BB038();
-            func_800BB048();
+            Audio_Retire();
+            Audio_LevelSEFadeout();
         }
         if (D_i3_80141BC0[0] > 1000) {
             D_i3_80141BC0[0] = 1000;
@@ -1826,7 +1826,7 @@ Gfx* func_i3_80121E70(Gfx* gfx, s32 arg1) {
         if ((gControllers[gPlayerControlPorts[arg1]].buttonPressed & (BTN_A | BTN_START)) &&
             (D_i3_80141BF0[arg1] >= 60) && !sMenuIsBusy) {
             if (D_800CD010 == 0) {
-                func_800BB048();
+                Audio_LevelSEFadeout();
             }
             if (D_800CD010 == 0) {
                 func_8007E0CC();
@@ -1932,7 +1932,7 @@ s32 func_i3_801228F8(s32 playerNum, s32 highlightedOption, s32 maxOptionValue) {
             highlightedOption = 0;
         }
         if (D_800CD010 == 0) {
-            func_800BA8D8(0x1E);
+            Audio_TriggerSystemSE(0x1E);
         }
     }
     if (D_i3_80141D90 >= 75) {
@@ -1975,7 +1975,7 @@ s32 func_i3_80122A6C(s32 playerNum, s32 highlightedOption, s32 maxOptionValue) {
             highlightedOption = 0;
         }
         if (D_800CD010 == 0) {
-            func_800BA8D8(0x1E);
+            Audio_TriggerSystemSE(0x1E);
         }
     }
     if (D_i3_80141D90 >= 75) {
@@ -2194,12 +2194,12 @@ Gfx* func_i3_DrawGhostSave(Gfx* gfx) {
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) {
         if (sOverwriteGhostOption == 0) {
             if (D_800CD010 == 0) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
             }
             sSaveGhostMenuOpen = false;
         } else {
             if (D_800CD010 == 0) {
-                func_800BA8D8(0x21);
+                Audio_TriggerSystemSE(0x21);
             }
             Save_SaveGhost(gCourseIndex, gFastestGhost);
             sSaveGhostMenuOpen = false;
@@ -2208,7 +2208,7 @@ Gfx* func_i3_DrawGhostSave(Gfx* gfx) {
     }
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) {
         if (D_800CD010 == 0) {
-            func_800BA8D8(0x10);
+            Audio_TriggerSystemSE(0x10);
         }
         sSaveGhostMenuOpen = false;
         sRaceMenuOptionIndex = 0;
@@ -2307,10 +2307,10 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
             switch (sRaceMenuOptionIndex) {
                 case TIME_ATTACK_RETRY:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2320,10 +2320,10 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                     break;
                 case TIME_ATTACK_QUIT:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2333,7 +2333,7 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                     break;
                 case TIME_ATTACK_SAVE_GHOST:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     sSaveGhostMenuOpen = true;
                     D_i3_80141DCC = 0;
@@ -2341,10 +2341,10 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                     break;
                 case TIME_ATTACK_SETTINGS:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2354,10 +2354,10 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                     break;
                 case TIME_ATTACK_CHANGE_MACHINE:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2367,10 +2367,10 @@ Gfx* func_i3_DrawTimeAttackFinishMenu(Gfx* gfx) {
                     break;
                 case TIME_ATTACK_CHANGE_COURSE:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2418,10 +2418,10 @@ Gfx* func_i3_80124370(Gfx* gfx) {
             switch (D_i3_80141D9C) {
                 case 0:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2431,10 +2431,10 @@ Gfx* func_i3_80124370(Gfx* gfx) {
                     break;
                 case 1:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2444,10 +2444,10 @@ Gfx* func_i3_80124370(Gfx* gfx) {
                     break;
                 case 4:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2457,10 +2457,10 @@ Gfx* func_i3_80124370(Gfx* gfx) {
                     break;
                 case 2:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2470,10 +2470,10 @@ Gfx* func_i3_80124370(Gfx* gfx) {
                     break;
                 case 3:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2521,10 +2521,10 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
             switch (sRaceMenuOptionIndex) {
                 case 0:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2534,10 +2534,10 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
                     break;
                 case 4:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2547,10 +2547,10 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
                     break;
                 case 2:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2560,10 +2560,10 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
                     break;
                 case 3:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2573,10 +2573,10 @@ Gfx* func_i3_8012492C(Gfx* gfx) {
                     break;
                 case 1:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2626,10 +2626,10 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
             switch (sRaceMenuOptionIndex) {
                 case 0:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2639,10 +2639,10 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
                     break;
                 case 3:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2652,10 +2652,10 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
                     break;
                 case 2:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2665,10 +2665,10 @@ Gfx* func_i3_80124EEC(Gfx* gfx) {
                     break;
                 case 1:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -2729,80 +2729,80 @@ Gfx* func_i3_DrawGeneralPause(Gfx* gfx) {
                     break;
                 case PAUSE_GENERAL_RETRY:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0xE);
+                        Audio_TriggerSystemSE(0xE);
                     }
                     sMenuIsBusy = true;
                     sMenuStateFlags |= MENU_STATE_RETRY;
                     break;
                 case PAUSE_GENERAL_QUIT:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0xE);
+                        Audio_TriggerSystemSE(0xE);
                     }
                     sMenuIsBusy = true;
                     sMenuStateFlags |= MENU_STATE_QUIT;
                     break;
                 case PAUSE_GENERAL_CHANGE_MACHINE:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0xE);
+                        Audio_TriggerSystemSE(0xE);
                     }
                     sMenuIsBusy = true;
                     sMenuStateFlags |= MENU_STATE_CHANGE_MACHINE;
                     break;
                 case PAUSE_GENERAL_CHANGE_COURSE:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0xE);
+                        Audio_TriggerSystemSE(0xE);
                     }
                     sMenuIsBusy = true;
                     sMenuStateFlags |= MENU_STATE_CHANGE_COURSE;
                     break;
                 case PAUSE_GENERAL_SETTINGS:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0xE);
+                        Audio_TriggerSystemSE(0xE);
                     }
                     sMenuIsBusy = true;
                     sMenuStateFlags |= MENU_STATE_SETTINGS;
@@ -2859,64 +2859,64 @@ Gfx* func_i3_DrawDeathRacePause(Gfx* gfx) {
                     break;
                 case PAUSE_DEATH_RACE_RETRY:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0xE);
+                        Audio_TriggerSystemSE(0xE);
                     }
                     sMenuIsBusy = true;
                     sMenuStateFlags |= MENU_STATE_RETRY;
                     break;
                 case PAUSE_DEATH_RACE_QUIT:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0xE);
+                        Audio_TriggerSystemSE(0xE);
                     }
                     sMenuIsBusy = true;
                     sMenuStateFlags |= MENU_STATE_QUIT;
                     break;
                 case PAUSE_DEATH_RACE_CHANGE_MACHINE:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0xE);
+                        Audio_TriggerSystemSE(0xE);
                     }
                     sMenuIsBusy = true;
                     sMenuStateFlags |= MENU_STATE_CHANGE_MACHINE;
                     break;
                 case PAUSE_DEATH_RACE_SETTINGS:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
                     }
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0xE);
+                        Audio_TriggerSystemSE(0xE);
                     }
                     sMenuIsBusy = true;
                     sMenuStateFlags |= MENU_STATE_SETTINGS;
@@ -2991,10 +2991,10 @@ Gfx* func_i3_DrawGpRacePause(Gfx* gfx) {
                     break;
                 case PAUSE_GP_RETRY:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -3005,7 +3005,7 @@ Gfx* func_i3_DrawGpRacePause(Gfx* gfx) {
                             func_i3_TriggerLivesDecrease();
                         }
                         if (D_800CD010 == 0) {
-                            func_800BA8D8(0x2C);
+                            Audio_TriggerSystemSE(0x2C);
                         }
                     }
                     sMenuIsBusy = true;
@@ -3013,13 +3013,13 @@ Gfx* func_i3_DrawGpRacePause(Gfx* gfx) {
                     break;
                 case PAUSE_GP_QUIT:
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0xE);
+                        Audio_TriggerSystemSE(0xE);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -3029,10 +3029,10 @@ Gfx* func_i3_DrawGpRacePause(Gfx* gfx) {
                     break;
                 case PAUSE_GP_SETTINGS:
                     if (D_800CD010 == 0) {
-                        func_800BB0C0(2);
+                        Audio_HandlePause(2);
                     }
                     if (D_800CD010 == 0) {
-                        func_800BB048();
+                        Audio_LevelSEFadeout();
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0CC();
@@ -3043,7 +3043,7 @@ Gfx* func_i3_DrawGpRacePause(Gfx* gfx) {
                             func_i3_TriggerLivesDecrease();
                         }
                         if (D_800CD010 == 0) {
-                            func_800BA8D8(0x2C);
+                            Audio_TriggerSystemSE(0x2C);
                         }
                     }
                     sMenuIsBusy = true;
@@ -3526,8 +3526,8 @@ Gfx* func_i3_80128DA4(Gfx* gfx, s32 arg1) {
 
         D_i3_80141BC0[0] += 2;
         if (D_i3_80141BC0[0] == 250) {
-            func_800BB038();
-            func_800BB048();
+            Audio_Retire();
+            Audio_LevelSEFadeout();
         }
         if (D_i3_80141BC0[0] > 1000) {
             D_i3_80141BC0[0] = 1000;
@@ -3671,7 +3671,7 @@ Gfx* func_i3_80128DA4(Gfx* gfx, s32 arg1) {
             func_8007E0CC();
         }
         if ((D_i3_80141C30[arg1] == 60) && (D_800CD010 == 0)) {
-            func_800BAFA4(0x12);
+            Audio_RomBgmStart(0x12);
         }
     }
 
@@ -4013,7 +4013,7 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
 
                 if (D_i3_80141D28[gRacers[j].id] != 0) {
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x1F);
+                        Audio_TriggerSystemSE(0x1F);
                     }
                     D_i3_80141D28[gRacers[j].id]--;
                     D_i3_80141D18[gRacers[j].id]++;
@@ -4203,13 +4203,13 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                         if (j > 50) {
                             D_i3_80141D68 = 0;
                             if (D_800CD010 == 0) {
-                                func_800BA8D8(0x1E);
+                                Audio_TriggerSystemSE(0x1E);
                             }
                         }
                         if (gControllers[gPlayerControlPorts[i]].buttonPressed & BTN_UP) {
                             D_i3_80141D68 = 0;
                             if (D_800CD010 == 0) {
-                                func_800BA8D8(0x1E);
+                                Audio_TriggerSystemSE(0x1E);
                             }
                         }
                     }
@@ -4217,13 +4217,13 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                         if (j < -50) {
                             D_i3_80141D68 = 1;
                             if (D_800CD010 == 0) {
-                                func_800BA8D8(0x1E);
+                                Audio_TriggerSystemSE(0x1E);
                             }
                         }
                         if (gControllers[gPlayerControlPorts[i]].buttonPressed & BTN_DOWN) {
                             D_i3_80141D68 = 1;
                             if (D_800CD010 == 0) {
-                                func_800BA8D8(0x1E);
+                                Audio_TriggerSystemSE(0x1E);
                             }
                         }
                     }
@@ -4243,7 +4243,7 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                 } else if ((D_i3_80141D10 > 30060) && (D_i3_80141D10 < 60000)) {
                     D_i3_80141D10 = 60000;
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(0x21);
                     }
                     if (D_800CD010 == 0) {
                         func_8007E0EC();
@@ -4387,7 +4387,7 @@ Gfx* func_i3_DrawGPResultsScreen(Gfx* gfx, s32 arg1) {
     }
     if ((D_i3_80141D08 != (gTotalRacers - 6) * 25.0f) && (D_i3_80141D08 != 0.0f)) {
         if ((s32) (D_i3_80141D08 * 0.06f) != ((s32) ((D_i3_80141D08 - var_fv1) * 0.06f))) {
-            func_800BA8D8(0x3F);
+            Audio_TriggerSystemSE(0x3F);
         }
     }
 
@@ -4478,7 +4478,7 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
         if (D_i3_80141D00 < -62.0f) {
             D_i3_80141D00 = -62.0f;
         } else if ((s32) (D_i3_80141D00 * 0.06f) != (s32) ((D_i3_80141D00 - D_i3_80141D04) * 0.06f)) {
-            func_800BA8D8(0x3F);
+            Audio_TriggerSystemSE(0x3F);
         }
 
         for (i = 0; i < gTotalRacers; i++) {
@@ -4561,7 +4561,7 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
         }
         if ((D_i3_80141CC8 != 0.0f) && (D_i3_80141CC8 != ((gTotalRacers - 6) * 25.0f + 7.0f)) &&
             (s32) (D_i3_80141CC8 * 0.06f) != (s32) ((D_i3_80141CC8 - var_fv0) * 0.06f)) {
-            func_800BA8D8(0x3F);
+            Audio_TriggerSystemSE(0x3F);
         }
     }
     if (D_i3_80141B88[playerIndex] >= 40060) {
@@ -4602,19 +4602,19 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
             }
             if (D_i3_80141D78[playerIndex] == 120) {
                 if (D_800CD010 == 0) {
-                    func_800BAFA4(0x10);
+                    Audio_RomBgmStart(0x10);
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
                     if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
                         (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
-                        func_800BA3E4(i, 3);
-                        func_800BA3E4(i, 4);
-                        func_800BA3E4(i, 5);
-                        func_800BA3E4(i, 8);
-                        func_800BA3E4(i, 9);
-                        func_800BA3E4(i, 10);
-                        func_800BA3E4(i, 11);
+                        Audio_PlayerLevelSEStop(i, 3);
+                        Audio_PlayerLevelSEStop(i, 4);
+                        Audio_PlayerLevelSEStop(i, 5);
+                        Audio_PlayerLevelSEStop(i, 8);
+                        Audio_PlayerLevelSEStop(i, 9);
+                        Audio_PlayerLevelSEStop(i, 10);
+                        Audio_PlayerLevelSEStop(i, 11);
                     }
                 }
             }
@@ -4639,19 +4639,19 @@ Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
             }
             if (D_i3_80141BE0[playerIndex] == 30) {
                 if (D_800CD010 == 0) {
-                    func_800BAFA4(0x11);
+                    Audio_RomBgmStart(0x11);
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
                     if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
                         (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000)) {
-                        func_800BA3E4(i, 3);
-                        func_800BA3E4(i, 4);
-                        func_800BA3E4(i, 5);
-                        func_800BA3E4(i, 8);
-                        func_800BA3E4(i, 9);
-                        func_800BA3E4(i, 10);
-                        func_800BA3E4(i, 11);
+                        Audio_PlayerLevelSEStop(i, 3);
+                        Audio_PlayerLevelSEStop(i, 4);
+                        Audio_PlayerLevelSEStop(i, 5);
+                        Audio_PlayerLevelSEStop(i, 8);
+                        Audio_PlayerLevelSEStop(i, 9);
+                        Audio_PlayerLevelSEStop(i, 10);
+                        Audio_PlayerLevelSEStop(i, 11);
                     }
                 }
             }
@@ -4827,7 +4827,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 if ((D_800CD010 == 0) && (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_L)) {
                     gRaceTimeIntervalToggle ^= 1;
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x31);
+                        Audio_TriggerSystemSE(0x31);
                     }
                 }
             } else if ((gGameMode == GAMEMODE_TIME_ATTACK) && (gFastestGhostIndex >= 0)) {
@@ -4862,7 +4862,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 if ((D_800CD010 == 0) && (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_L)) {
                     gRaceTimeIntervalToggle ^= 1;
                     if (D_800CD010 == 0) {
-                        func_800BA8D8(0x31);
+                        Audio_TriggerSystemSE(0x31);
                     }
                 }
             }
@@ -4996,7 +4996,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         break;
                     case 5:
                         if (D_800CD010 == 0) {
-                            func_800BB048();
+                            Audio_LevelSEFadeout();
                         }
                         if (D_800CD010 == 0) {
                             func_8007E0EC();
@@ -5011,7 +5011,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         break;
                     case 4:
                         if (D_800CD010 == 0) {
-                            func_800BB048();
+                            Audio_LevelSEFadeout();
                         }
                         if (D_800CD010 == 0) {
                             func_8007E0CC();
@@ -5044,7 +5044,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                             D_i3_80141C20[0] = 2;
                             func_i3_80121E28(0);
                             if (D_800CD010 == 0) {
-                                func_800BAFA4(0x14);
+                                Audio_RomBgmStart(0x14);
                             }
                         }
                         break;
@@ -5062,7 +5062,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                         if (D_i3_80141C30[0] == 400) {
 #endif
                             if (D_800CD010 == 0) {
-                                func_800BB048();
+                                Audio_LevelSEFadeout();
                             }
                             if (D_800CD010 == 0) {
                                 func_8007E0CC();
@@ -5152,7 +5152,7 @@ Gfx* func_i3_8012D3D4(Gfx* gfx) {
                 D_i3_80141D10++;
             }
             if ((D_i3_80141D10 == 0) && (D_800CD010 == 0)) {
-                func_800BB048();
+                Audio_LevelSEFadeout();
             }
         } else {
             D_80141D6C = 0;

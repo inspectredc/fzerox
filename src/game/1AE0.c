@@ -163,7 +163,7 @@ void func_i2_800FD344(void);
 
 void func_80067D64(void) {
     MQ_WAIT_FOR_MESG(&D_800DCAB0, &D_800DCD10);
-    func_800B9E28();
+    Audio_Update();
     Gfx_InitBuffer();
     func_800690FC();
     Gfx_LoadSegments();
@@ -193,7 +193,7 @@ void func_80067E98(void) {
     Gfx_LoadSegments();
     gMasterDisp = func_80069698(gMasterDisp);
     Gfx_FullSync();
-    func_800B9E28();
+    Audio_Update();
     MQ_WAIT_FOR_MESG(&D_800DCAC8, &D_800DCD10);
     func_i2_800FD344();
     osViSwapBuffer(gFrameBuffers[D_800DCD08]);
@@ -222,7 +222,7 @@ void Game_ThreadEntry(void* entry) {
     OSMesg msgBuf[1];
 
     startTime = osGetTime();
-    func_800BB46C();
+    Audio_GuitarSeqStart();
     osRecvMesg(&D_800DCAB0, msgBuf, OS_MESG_BLOCK);
 
     // Segment Start and End Pairs

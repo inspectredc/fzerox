@@ -968,6 +968,17 @@ static char D_800D10E0[] = "Base %x,Len %x Media %d\n";
 static char D_800D10FC[] = "Wave Load %d \n";
 static char D_800D110C[] = "Total Bg Wave Load %d \n";
 
+/*
+AudioTable gSoundFontTableData = {
+    { 2, 0, 0, 0 },
+    {
+    //    Offset, Size,   Medium,      CachePolicy,    sampleBankId1 | sampleBankId2, numInstruments | numDrums, numSfx
+        { 0,      0x2CE0, MEDIUM_CART, CACHE_POLICY_0, (0 << 8)      | 1,             (71 << 8)      | 0,        0 },
+        { 0x2CE0, 0xB0,   MEDIUM_CART, CACHE_POLICY_0, (2 << 8)      | 0xFF,          (1 << 8)       | 0,        0 },
+    }
+};
+ */
+
 void AudioLoad_Init(void* heap, size_t heapSize) {
     s32 numFonts;
     void* ramAddr;

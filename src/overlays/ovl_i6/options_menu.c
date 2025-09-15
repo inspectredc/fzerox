@@ -305,7 +305,7 @@ bool func_i6_8011C788(void) {
         }
     }
     if (lastRow != gOptionsCurrentRow) {
-        func_800BA8D8(0x1E);
+        Audio_TriggerSystemSE(0x1E);
         return false;
     }
     option = &gOptionsInfo[gOptionsCurrentRow];
@@ -326,11 +326,11 @@ bool func_i6_8011C788(void) {
         }
         if (lastSelectionState != sOptionsSelectionState[gOptionsCurrentRow]) {
             updateSettings = true;
-            func_800BA8D8(0x21);
+            Audio_TriggerSystemSE(0x21);
         }
     }
     if (gInputButtonPressed & BTN_B) {
-        func_800BA8D8(0x10);
+        Audio_TriggerSystemSE(0x10);
         return true;
     }
 
@@ -382,13 +382,13 @@ bool func_i6_8011C788(void) {
                 if (D_i6_801247A4 != NULL) {
                     sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_OPEN;
                     sOptionsSelectionState[gOptionsCurrentRow] = 0;
-                    func_800BA8D8(0x21);
+                    Audio_TriggerSystemSE(0x21);
                 }
             }
             break;
         case OPTIONS_EXIT:
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
                 return true;
             }
             break;
@@ -424,7 +424,7 @@ void func_i6_8011CBB4(void) {
             }
         }
         if (lastSelectionState != sOptionsSelectionState[gOptionsCurrentRow]) {
-            func_800BA8D8(0x1E);
+            Audio_TriggerSystemSE(0x1E);
         }
         updateSettings = false;
         if (gInputButtonPressed & (BTN_A | BTN_START)) {
@@ -436,13 +436,13 @@ void func_i6_8011CBB4(void) {
                     D_800E5F00[i] = D_800E5F10[i] = 0;
                 }
                 func_8007E398();
-                func_800BA8D8(5);
+                Audio_TriggerSystemSE(5);
             } else {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
             }
         } else if (gInputButtonPressed & BTN_B) {
             updateSettings = true;
-            func_800BA8D8(0x10);
+            Audio_TriggerSystemSE(0x10);
         }
         if (updateSettings) {
             sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_CLOSED;

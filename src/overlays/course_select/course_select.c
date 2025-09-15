@@ -456,7 +456,7 @@ s32 CourseSelect_Update(void) {
                 if (sCourseSelectCup <= 4) {
                     CourseModel_Init(sCourseSelectCup);
                 }
-                func_800BA8D8(30);
+                Audio_TriggerSystemSE(30);
             }
             if (gCupSelectOption < 10) {
                 gCupType = gCupSelectOption;
@@ -471,7 +471,7 @@ s32 CourseSelect_Update(void) {
                 gCourseIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
             }
             if (gInputButtonPressed & BTN_B) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
                 if (gGameMode == GAMEMODE_FLX_COURSE_SELECT) {
                     D_800CD3B8 = gCourseIndex;
                     sCourseSelectState = COURSE_SELECT_START_EXIT;
@@ -481,7 +481,7 @@ s32 CourseSelect_Update(void) {
                     D_800CD048 = 10;
                 }
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x21);
+                Audio_TriggerSystemSE(0x21);
                 if (gCupSelectOption == 4) {
                     sCourseSelectTrackNo = 0;
                     sCourseSelectState = COURSE_SELECT_AWAIT_OK;
@@ -511,7 +511,7 @@ s32 CourseSelect_Update(void) {
                     sSelectedGhostOption++;
                 }
                 if (originalSelectedGhostOption != sSelectedGhostOption) {
-                    func_800BA8D8(30);
+                    Audio_TriggerSystemSE(30);
                 }
                 if (unlockedGhost < sSelectedGhostOption) {
                     sSelectedGhostOption = 0;
@@ -524,7 +524,7 @@ s32 CourseSelect_Update(void) {
                 gPlayers[0].unk_18 = 1;
                 arrowsObj = Object_Get(OBJECT_COURSE_SELECT_ARROWS);
                 LEFT_ARROW_ROTATION_CHANGE(arrowsObj) += 0x200;
-                func_800BA8D8(30);
+                Audio_TriggerSystemSE(30);
             }
 
             if ((gInputPressed & BTN_RIGHT) && (sCourseSelectTrackNo < 5)) {
@@ -532,7 +532,7 @@ s32 CourseSelect_Update(void) {
                 gPlayers[0].unk_18 = 1;
                 arrowsObj = Object_Get(OBJECT_COURSE_SELECT_ARROWS);
                 RIGHT_ARROW_ROTATION_CHANGE(arrowsObj) += 0x200;
-                func_800BA8D8(30);
+                Audio_TriggerSystemSE(30);
             }
             if (gCupSelectOption >= 10) {
                 gCourseIndex = sCourseSelectTrackNo + COURSE_EDIT_1;
@@ -541,9 +541,9 @@ s32 CourseSelect_Update(void) {
             }
             if (gInputButtonPressed & BTN_B) {
                 sCourseSelectState = COURSE_SELECT_CUP_SELECT;
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x21);
+                Audio_TriggerSystemSE(0x21);
                 sCourseSelectState = COURSE_SELECT_AWAIT_OK;
                 D_i5_801190D0 = 0;
             }
@@ -555,9 +555,9 @@ s32 CourseSelect_Update(void) {
                 } else {
                     sCourseSelectState = COURSE_SELECT_CHOOSE_COURSE;
                 }
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(0x10);
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x3E);
+                Audio_TriggerSystemSE(0x3E);
                 sCourseSelectState = COURSE_SELECT_CONTINUE;
                 if (gGameMode == GAMEMODE_FLX_COURSE_SELECT) {
                     D_800CD3B8 = gCourseIndex;
@@ -569,7 +569,7 @@ s32 CourseSelect_Update(void) {
             break;
         case COURSE_SELECT_START_EXIT:
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x21);
+                Audio_TriggerSystemSE(0x21);
                 sCourseSelectState = COURSE_SELECT_CUP_SELECT;
             }
             break;
@@ -594,7 +594,7 @@ s32 NextCourseSelect_Update(void) {
         case COURSE_SELECT_NEXT_COURSE_AWAIT_INPUT:
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 sCourseSelectState = COURSE_SELECT_NEXT_COURSE_CONTINUE;
-                func_800BA8D8(0x3E);
+                Audio_TriggerSystemSE(0x3E);
                 return GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS;
             }
             break;

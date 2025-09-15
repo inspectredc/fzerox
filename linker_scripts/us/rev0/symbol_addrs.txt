@@ -243,6 +243,14 @@ Matrix_ToMtx = 0x8006BBE8;
 CourseFeature_IsDecorational = 0x8006D3F0;
 mio0Decode = 0x800AA620;
 
+Audio_PlayerLevelSEStart = 0x800BA2F0;
+Audio_PlayerLevelSEStop = 0x800BA3E4;
+Audio_PlayerTriggerSEStart = 0x800BA710;
+Audio_TriggerSystemSE = 0x800BA8D8;
+Audio_PlayerEngineEchoStart = 0x800BAB34;
+Audio_PlayerEngineEchoStop = 0x800BAB50;
+Audio_LevelSEFadeout = 0x800BB048;
+
 gRandSeed1 = 0x800CD170;
 gRandMask1 = 0x800CD174;
 gRandSeed2 = 0x800CD178;
@@ -298,7 +306,7 @@ D_800E5F10 = 0x800E5F10; // size:0x10
 D_800E5F20 = 0x800E5F20; // size:0x10
 D_800E5F30 = 0x800E5F30; // size:0x10
 gRacersByPosition = 0x800E5F40;
-D_800E5FB8 = 0x800E5FB8; // size:0x4
+sClosestRacerId = 0x800E5FB8; // size:0x4
 gRacersRetired = 0x800E5FC2;
 gRacersFinished = 0x800E5FC4;
 gPlayerRacersRetired = 0x800E5FC8;

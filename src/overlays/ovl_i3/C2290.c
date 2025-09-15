@@ -503,11 +503,11 @@ Gfx* func_i3_UpdatePlayerHudInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex)
             D_i3_80141EA8[playerIndex].lapIntervalCounter = 90;
         }
         if ((lap == 2) && !sSecondLapStarted && (D_800E5FD0 != 0) && (gGameMode != GAMEMODE_PRACTICE)) {
-            func_800BA8D8(0x11);
+            Audio_TriggerSystemSE(0x11);
             sSecondLapStarted = true;
         }
         if ((lap == gTotalLapCount) && !sFinalLapStarted && (D_800E5FD0 != 0) && (gGameMode != GAMEMODE_PRACTICE)) {
-            func_800BA8D8(0x12);
+            Audio_TriggerSystemSE(0x12);
             sFinalLapStarted = true;
         }
     }
@@ -1568,7 +1568,7 @@ Gfx* func_i3_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
 
     if (D_800F80A8[playerIndex] < 100) {
         if (D_i3_8013F078[playerIndex]) {
-            func_800BA3E4(playerIndex, 3);
+            Audio_PlayerLevelSEStop(playerIndex, 3);
             D_i3_8013F078[playerIndex] = false;
         }
         return gfx;
@@ -1590,7 +1590,7 @@ Gfx* func_i3_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     }
 
     if (!D_i3_8013F078[playerIndex]) {
-        func_800BA2F0(playerIndex, 3);
+        Audio_PlayerLevelSEStart(playerIndex, 3);
         D_i3_8013F078[playerIndex] = true;
     }
     if ((gGameFrameCount % 20U) >= 5) {
@@ -1774,7 +1774,7 @@ Gfx* func_i3_DrawPracticeBestLap(Gfx* gfx) {
     }
 
     if (gStartNewBestLap) {
-        func_800BA8D8(0x38);
+        Audio_TriggerSystemSE(0x38);
         gStartNewBestLap = false;
         sPracticeBestLapCounter = 180;
     }

@@ -776,7 +776,7 @@ void func_i3_8013C6D8(void) {
 
     keyboardIndex = (sKeyboardCursorY * 10) + sKeyboardCursorX;
     if (previousKeyboardIndex != keyboardIndex) {
-        func_800BA8D8(0x1E);
+        Audio_TriggerSystemSE(0x1E);
     }
     if (gInputButtonPressed & BTN_A) {
         nameLengthIncreased = false;
@@ -807,7 +807,7 @@ void func_i3_8013C6D8(void) {
                 sKeyboardCursorY = sEnterKeyboardIndex / 10;
             }
         }
-        func_800BA8D8(0x21);
+        Audio_TriggerSystemSE(0x21);
     } else if (gInputButtonPressed & BTN_START) {
         if (sNameKeyboardCharacters[keyboardIndex] == '<') {
             func_i3_8013D214(sp10C);
@@ -815,7 +815,7 @@ void func_i3_8013C6D8(void) {
             sKeyboardCursorX = sEnterKeyboardIndex % 10;
             sKeyboardCursorY = sEnterKeyboardIndex / 10;
         }
-        func_800BA8D8(0x21);
+        Audio_TriggerSystemSE(0x21);
     } else if (gInputButtonPressed & BTN_B) {
         gRecordNameEnteredLength--;
         if (gRecordNameEnteredLength < 0) {
@@ -826,7 +826,7 @@ void func_i3_8013C6D8(void) {
         sKeyboardCursorX = keyboardIndex % 10;
         sKeyboardCursorY = keyboardIndex / 10;
         gRecordNameEntered[gRecordNameEnteredLength] = 0;
-        func_800BA8D8(0x10);
+        Audio_TriggerSystemSE(0x10);
     }
     if (D_i3_801437B0 == 2) {
         sp64 = ((s16) (keyboardIndex % 10) * 20) + 62;
