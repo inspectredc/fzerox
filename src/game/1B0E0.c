@@ -5330,7 +5330,7 @@ void func_8008E54C(Racer* arg0, f32 arg1) {
                 arg0->velocity.y -= temp_ft4 * arg0->unk_24C.y.y;
                 arg0->velocity.z -= temp_ft4 * arg0->unk_24C.y.z;
                 if ((arg0->id < gNumPlayers) && (D_800E5FD0 != 0)) {
-                    func_800BB3C4(arg0->id, temp_ft4);
+                    Audio_Chakuchi(arg0->id, temp_ft4);
                 }
             }
         }
@@ -5538,7 +5538,7 @@ void func_8008EC98(Racer* arg0) {
                     arg0->velocity.y -= var_fs0 * arg0->unk_24C.y.y;
                     arg0->velocity.z -= var_fs0 * arg0->unk_24C.y.z;
                     if ((arg0->id < gNumPlayers) && (D_800E5FD0 != 0)) {
-                        func_800BB3C4(arg0->id, var_fs0);
+                        Audio_Chakuchi(arg0->id, var_fs0);
                     }
                 }
             }
@@ -5586,7 +5586,7 @@ void func_8008EC98(Racer* arg0) {
             arg0->velocity.y -= var_fs0 * arg0->unk_19C.y;
             arg0->velocity.z -= var_fs0 * arg0->unk_19C.z;
             if ((arg0->id < gNumPlayers) && (D_800E5FD0 != 0)) {
-                func_800BB3C4(arg0->id, var_fs0);
+                Audio_Chakuchi(arg0->id, var_fs0);
             }
         }
     }
@@ -5760,7 +5760,7 @@ void func_8008F550(Racer* arg0) {
             arg0->velocity.z -= (var_fa1 * arg0->unk_19C.z);
 
             if ((arg0->id < gNumPlayers) && (D_800E5FD0 != 0)) {
-                func_800BB3C4(arg0->id, var_fa1);
+                Audio_Chakuchi(arg0->id, var_fa1);
             }
         }
     }
@@ -5895,7 +5895,7 @@ void func_8008FC80(Racer* arg0) {
                     arg0->velocity.y -= var_fs0 * arg0->unk_24C.y.y;
                     arg0->velocity.z -= var_fs0 * arg0->unk_24C.y.z;
                     if ((arg0->id < gNumPlayers) && (D_800E5FD0 != 0)) {
-                        func_800BB3C4(arg0->id, var_fs0);
+                        Audio_Chakuchi(arg0->id, var_fs0);
                     }
                 }
             }
@@ -5938,7 +5938,7 @@ void func_8008FC80(Racer* arg0) {
             arg0->velocity.y -= var_fs0 * arg0->unk_19C.y;
             arg0->velocity.z -= var_fs0 * arg0->unk_19C.z;
             if ((arg0->id < gNumPlayers) && (D_800E5FD0 != 0)) {
-                func_800BB3C4(arg0->id, var_fs0);
+                Audio_Chakuchi(arg0->id, var_fs0);
             }
         }
     }
@@ -6063,7 +6063,7 @@ void func_80090568(Racer* arg0) {
             arg0->velocity.y -= sp48 * arg0->unk_24C.y.y;
             arg0->velocity.z -= sp48 * arg0->unk_24C.y.z;
             if ((arg0->id < gNumPlayers) && (D_800E5FD0 != 0)) {
-                func_800BB3C4(arg0->id, sp48);
+                Audio_Chakuchi(arg0->id, sp48);
             }
         }
     }

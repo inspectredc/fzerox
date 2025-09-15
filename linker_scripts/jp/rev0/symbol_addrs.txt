@@ -226,7 +226,7 @@ Audio_PlayerEngineStop = 0x800BABD0;
 func_800BAE5C = 0x800BAEC4;
 func_800BB018 = 0x800BB080;
 Audio_LevelSEFadeout = 0x800BB0B0;
-func_800BB3C4 = 0x800BB424;
+Audio_Chakuchi = 0x800BB424;
 
 gGameFrameCount = 0x800CD040;
 gNumPlayers = 0x800CD060;

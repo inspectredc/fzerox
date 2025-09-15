@@ -1769,7 +1769,7 @@ void func_800BB39C(s32 courseIndex) {
 }
 
 // Na_chakuchi
-void func_800BB3C4(u8 racerId, f32 volume) {
+void Audio_Chakuchi(u8 racerId, f32 volume) {
     PRINTF("Na_chakuchi Called player = %02x volume = %f \n", racerId, volume);
 
     if (volume < -48.0f) {

@@ -240,7 +240,7 @@ void Audio_SetPlayerMode(u8 numPlayersIndex);
 void Audio_AllSoundStop(void);
 void Audio_SESeqStart(void);
 void func_800BB39C(s32);
-void func_800BB3C4(u8, f32);
+void Audio_Chakuchi(u8, f32);
 void Audio_GuitarSeqStart(void);
 
 bool LeoDD_CheckPresence(void);
