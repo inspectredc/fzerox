@@ -269,18 +269,31 @@ typedef struct {
     /* 0x0C */ f32 extent;
 } Portamento; // size = 0x10
 
-typedef struct {
+typedef struct AdpcmLoopHeader {
     /* 0x00 */ u32 start;
-    /* 0x04 */ u32 end;
-    /* 0x08 */ u32 count;
-    /* 0x10 */ u64 predictorState[4]; // only exists if count != 0. 8-byte aligned
-} AdpcmLoop; // size = 0x30 or 0x10, 0x8 aligned
+    /* 0x04 */ u32 end; // s16 sample position where the loop ends
+    /* 0x08 */ u32 count; // The number of times the loop is played before the sound completes. Setting count to -1 indicates that the loop should play indefinitely.
+    /* 0x0C */ char unk_0C[0x4];
+} AdpcmLoopHeader; // size = 0x10
 
-typedef struct {
+typedef struct AdpcmLoop {
+    /* 0x00 */ AdpcmLoopHeader header;
+    /* 0x10 */ s16 predictorState[16]; // only exists if count != 0. 8-byte aligned
+} AdpcmLoop; // size = 0x30 (or 0x10)
+
+typedef struct AdpcmBookHeader {
     /* 0x00 */ s32 order;
     /* 0x04 */ s32 numPredictors;
-    /* 0x08 */ u64 book[1]; // size 8 * order * numPredictors.
-} AdpcmBook; // size >= 8, 0x8 aligned
+} AdpcmBookHeader; // size = 0x8
+
+/**
+ * The procedure used to design the codeBook is based on an adaptive clustering algorithm.
+ * The size of the codeBook is (8 * order * numPredictors) and is 8-byte aligned
+ */
+typedef struct AdpcmBook {
+    /* 0x00 */ AdpcmBookHeader header;
+    /* 0x08 */ s16 book[]; // size 8 * order * numPredictors. 8-byte aligned
+} AdpcmBook; // size >= 0x8
 
 typedef struct {
     /* 0x00 */ u32 codec : 4;       // The state of compression or decompression
@@ -576,7 +589,7 @@ typedef struct {
     /* 0x02 */ s16 unkMediumParam;
     /* 0x04 */ uintptr_t romAddr;
     /* 0x08 */ char pad[0x8];
-    /* 0x10 */ AudioTableEntry entries[1]; // (dynamic size)
+    /* 0x10 */ AudioTableEntry entries[]; // (dynamic size)
 } AudioTable;
 
 typedef struct {
@@ -650,7 +663,7 @@ typedef enum {
 
 typedef enum {
     /* 0 */ MEDIUM_RAM,
-    /* 1 */ MEDIUM_UNK,
+    /* 1 */ MEDIUM_LBA,
     /* 2 */ MEDIUM_CART,
     /* 3 */ MEDIUM_DISK_DRIVE
 } SampleMedium;

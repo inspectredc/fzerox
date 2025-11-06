@@ -368,10 +368,10 @@ bool func_i6_8011C788(void) {
             if (updateSettings) {
                 if (sOptionsSelectionState[gOptionsCurrentRow] == 0) {
                     gSettingSoundMode = 0;
-                    Audio_SetSoundMode(SOUNDMODE_SURROUND); // Option says stereo, but sets surround anyway?
+                    Audio_SetOutMode(SOUNDMODE_SURROUND); // Option says stereo, but sets surround anyway?
                 } else {
                     gSettingSoundMode = 1;
-                    Audio_SetSoundMode(SOUNDMODE_MONO);
+                    Audio_SetOutMode(SOUNDMODE_MONO);
                 }
             }
             break;

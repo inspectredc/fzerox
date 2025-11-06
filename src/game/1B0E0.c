@@ -3751,7 +3751,7 @@ void func_800892E0(Racer* racer) {
                 D_800E5FBC = 1;
                 gRacers[0].energy = gRacers[0].maxEnergy;
                 D_800F5DE8 = D_800E5FBC;
-                func_800BA2B4(gRacers[0].id);
+                Audio_PlayerFinished(gRacers[0].id);
                 Audio_PlayerEngineStop(gRacers[0].id);
                 func_8007E0CC();
             }
@@ -7067,7 +7067,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                             if (racer->id < gNumPlayers) {
                                 if (D_800E5FD0 != 0) {
                                     Audio_PlayerTriggerSEStart(racer->id, 0xF);
-                                    func_800BA2B4(racer->id);
+                                    Audio_PlayerFinished(racer->id);
                                 }
                                 func_800894C0(racer);
                                 if (gNumPlayers == 1) {
@@ -7679,7 +7679,7 @@ void func_800952F4(void) {
             if (gRaceIntroTimer == 460) {
                 func_8007E08C();
                 if (D_800CD010 == 0) {
-                    func_800BB018();
+                    Audio_StartDemo();
                 }
                 for (i = 0; i < gNumPlayers; i++) {
                     func_800BAE5C(i);
@@ -8135,7 +8135,7 @@ void func_800952F4(void) {
                             if (racer->position == 1) {
                                 Audio_PlayerTriggerSEStart(racer->id, 0xF);
                             }
-                            func_800BA2B4(racer->id);
+                            Audio_PlayerFinished(racer->id);
                             Audio_PlayerEngineStop(racer->id);
                             if ((i != 0) && (gPlayerRacersFinished == 0)) {
                                 i = 0;

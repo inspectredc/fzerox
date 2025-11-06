@@ -5,8 +5,8 @@
 #include "fzx_game.h"
 
 void Audio_SEStart(u8 channelIndex, u8 ioData);
-void Audio_StopChannelSE(u8);
-void Audio_SystemSEStart(u8);
+void Audio_StopChannelSE(u8 channelIndex);
+void Audio_SystemSEStart(u8 ioData);
 void Audio_DisablePlayerSE(void);
 
 u8 sAudioRetireStatus = 0;
@@ -34,9 +34,9 @@ f32 sEnemyEngineVolume = 0.0f;
 f32 sEnemyEngineFreqScale = 0.0f;
 u8 sEnemyEngineLinearPan = 64;
 u8 sAudioPauseStatus = 0;
-u16 sBGMPauseFadeoutTimer = 0;
+u16 sBgmPauseFadeoutTimer = 0;
 u8 sBgmPlayState = 0;
-u16 sBGMFadeoutTimer = 0;
+u16 sBgmFadeoutTimer = 0;
 u16 sLevelFadeoutTimer = 0;
 UNUSED s32 D_800D1A54 = 0;
 u8 sAudioLevelFadeoutActive = 0;
@@ -46,7 +46,7 @@ f32 D_800D1A64[4] = { 0 };
 u8 sPlayerEngineSoundState[4] = { 0 };
 u8 D_800D1A78[4] = { 0 };
 f32 sAudioPlayerPreviousSpeed[4] = { 0 };
-u8 D_800D1A8C[4] = { 0 };
+u8 gAudioPlayerFinishedState[4] = { 0 };
 u8 sPlayerEngineEchoSoundState[4] = { 0 };
 u8 D_800D1A94[4] = { 0 };
 f32 sChannelVolume[16] = { 0 };
@@ -137,12 +137,12 @@ void Audio_LevelSEStart(u8 playerIndex, u8 sfxId) {
             switch (playerIndex) {
                 case 0:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 6, 0);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 10);
                     Audio_SEStart(6, sfxId + 10);
                     break;
                 case 1:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 7, 0x7F);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 10);
                     Audio_SEStart(7, sfxId + 10);
                     break;
             }
@@ -151,17 +151,17 @@ void Audio_LevelSEStart(u8 playerIndex, u8 sfxId) {
             switch (playerIndex) {
                 case 0:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 6, 0);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
                     Audio_SEStart(6, sfxId + 20);
                     break;
                 case 1:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 7, 0);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
                     Audio_SEStart(7, sfxId + 20);
                     break;
                 case 2:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 8, 0x7F);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
                     Audio_SEStart(8, sfxId + 20);
                     break;
             }
@@ -170,22 +170,22 @@ void Audio_LevelSEStart(u8 playerIndex, u8 sfxId) {
             switch (playerIndex) {
                 case 0:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 6, 0);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
                     Audio_SEStart(6, sfxId + 20);
                     break;
                 case 1:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 7, 0);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
                     Audio_SEStart(7, sfxId + 20);
                     break;
                 case 2:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 8, 0x7F);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
                     Audio_SEStart(8, sfxId + 20);
                     break;
                 case 3:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 9, 0x7F);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
                     Audio_SEStart(9, sfxId + 20);
                     break;
             }
@@ -454,7 +454,7 @@ void Audio_LevelSEFadeoutRoutine(void) {
     }
 }
 
-void Audio_BGMFadeout(void) {
+void Audio_BgmFadeout(void) {
     f32 volumeScale;
 
     switch (sBgmPlayState) {
@@ -462,53 +462,53 @@ void Audio_BGMFadeout(void) {
             break;
         case 1:
 #ifdef VERSION_JP
-            if (++sBGMFadeoutTimer == (100 / 2) - 1) {
+            if (++sBgmFadeoutTimer == (100 / 2) - 1) {
 #else
-            if (++sBGMFadeoutTimer == (70 / 2) - 1) {
+            if (++sBgmFadeoutTimer == (70 / 2) - 1) {
 #endif
                 PRINTF("BGM FADEOUT1 COMPLETE ROUTINE\n");
                 sBgmPlayState = 0;
-                sBGMFadeoutTimer = 0;
+                sBgmFadeoutTimer = 0;
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 0.0f);
                 Audio_StopChannelSE(0);
             } else {
 #ifdef VERSION_JP
-                volumeScale = 1.0f - (sBGMFadeoutTimer * (2.0f / 100.0f));
+                volumeScale = 1.0f - (sBgmFadeoutTimer * (2.0f / 100.0f));
 #else
-                volumeScale = 1.0f - (sBGMFadeoutTimer * (2.0f / 70.0f));
+                volumeScale = 1.0f - (sBgmFadeoutTimer * (2.0f / 70.0f));
 #endif
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, volumeScale);
             }
             break;
         case 2:
 #ifdef VERSION_JP
-            if (++sBGMFadeoutTimer == (80 / 1) - 1) {
+            if (++sBgmFadeoutTimer == (80 / 1) - 1) {
 #else
-            if (++sBGMFadeoutTimer == (70 / 1) - 1) {
+            if (++sBgmFadeoutTimer == (70 / 1) - 1) {
 #endif
                 PRINTF("BGM FADEOUT2 COMPLETE ROUTINE\n");
                 sBgmPlayState = 0;
-                sBGMFadeoutTimer = 0;
+                sBgmFadeoutTimer = 0;
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 0.0f);
                 Audio_StopChannelSE(0);
             } else {
 #ifdef VERSION_JP
-                volumeScale = 1.0f - (sBGMFadeoutTimer * (1.0f / 80.0f));
+                volumeScale = 1.0f - (sBgmFadeoutTimer * (1.0f / 80.0f));
 #else
-                volumeScale = 1.0f - (sBGMFadeoutTimer * (1.0f / 70.0f));
+                volumeScale = 1.0f - (sBgmFadeoutTimer * (1.0f / 70.0f));
 #endif
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, volumeScale);
             }
             break;
         case 3:
-            if (++sBGMFadeoutTimer == (700 / 2) - 1) {
+            if (++sBgmFadeoutTimer == (700 / 2) - 1) {
                 PRINTF("BGM FADEOUT3 COMPLETE ROUTINE\n");
                 sBgmPlayState = 0;
-                sBGMFadeoutTimer = 0;
+                sBgmFadeoutTimer = 0;
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 0.0f);
                 Audio_StopChannelSE(0);
             } else {
-                volumeScale = 1.0f - (sBGMFadeoutTimer * (2.0f / 700.0f));
+                volumeScale = 1.0f - (sBgmFadeoutTimer * (2.0f / 700.0f));
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, volumeScale);
             }
             break;
@@ -552,17 +552,17 @@ void func_800B84B8(void) {
     }
 }
 
-void Audio_BGMFadeoutPause(void) {
+void Audio_BgmFadeoutPause(void) {
     f32 volumeScale;
 
     if (sAudioPauseStatus == 2) {
-        if (++sBGMPauseFadeoutTimer == (100 / 2) - 1) {
+        if (++sBgmPauseFadeoutTimer == (100 / 2) - 1) {
             PRINTF("BGM FADEOUT COMPLETE ROUTINE (in the PAUSE ROUTINE)\n");
             sAudioPauseStatus = 0;
-            sBGMPauseFadeoutTimer = 0;
+            sBgmPauseFadeoutTimer = 0;
             Audio_StopChannelSE(0);
         } else {
-            volumeScale = 0.4f - (sBGMPauseFadeoutTimer * (0.4f * (2.0f / 100.0f)));
+            volumeScale = 0.4f - (sBgmPauseFadeoutTimer * (0.4f * (2.0f / 100.0f)));
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, volumeScale);
         }
     }
@@ -595,7 +595,7 @@ void Audio_UpdateEnemyEngine(void) {
         sAudioClosestRacerDistance = sqrtf(SQ_SUM(&vec));
         if ((sAudioClosestRacerDistance < 820.0f) && (sAudioClosestRacerDistance != 0.0f)) {
             if (sAudioEnemyEngineStatus == 0) {
-                if (D_800D1A8C[0] == 0) {
+                if (gAudioPlayerFinishedState[0] == 0) {
                     if (!sAudioDisableEnemyEngineSound) {
                         PRINTF("ENEMY ENGINE START MACHINE No.= %02x\n", sAudioClosestRacerId);
                         Audio_SEStart(14, 1);
@@ -1124,7 +1124,8 @@ void func_800B9EBC(s32 arg0, s32 arg1, s32 arg2) {
 void func_800B9ECC(void) {
 }
 
-void Audio_ResetSoundData(void) {
+// Nas_InitAudio
+void Audio_InitAudio(void) {
     u8 i;
 
     Audio_StopChannelSE(0);
@@ -1180,7 +1181,7 @@ void Audio_ResetSoundData(void) {
         sPlayerEngineSoundState[i] = 0;
         D_800D1A78[i] = 0;
         sAudioPlayerPreviousSpeed[i] = 0;
-        D_800D1A8C[i] = 0;
+        gAudioPlayerFinishedState[i] = 0;
         sActivePlayerLevelSE[i][0] = 0;
         sActivePlayerLevelSE[i][1] = 0;
         sActivePlayerLevelSE[i][2] = 0;
@@ -1218,18 +1219,20 @@ void Audio_Init(void) {
     AudioLoad_Init(NULL, 0);
 }
 
-void Audio_SetSoundMode(u8 soundMode) {
+// Na_SetOutMode
+void Audio_SetOutMode(u8 soundMode) {
     AUDIOCMD_GLOBAL_SET_SOUND_MODE(soundMode);
 }
 
-void func_800BA2B4(u8 playerIndex) {
-    D_800D1A8C[playerIndex] = 1;
+void Audio_PlayerFinished(u8 playerIndex) {
+    gAudioPlayerFinishedState[playerIndex] = 1;
 }
 
 void Audio_SetEnemyEnginePan(u8 pan) {
     sEnemyEngineLinearPan = pan;
 }
 
+// Na_Player_Goal
 void Audio_SetNearestEnemy(u8 racerId) {
     sAudioClosestRacerId = racerId;
 }
@@ -1239,7 +1242,7 @@ void Audio_PlayerLevelSEStart(u8 playerIndex, u8 sfxId) {
 
     PRINTF("Player Level SE Start !! player =  %02x SE number = %02x\n", playerIndex, sfxId);
 
-    if (D_800D1A8C[playerIndex] == 1) {
+    if (gAudioPlayerFinishedState[playerIndex] == 1) {
         return;
     }
 
@@ -1615,7 +1618,7 @@ void Audio_DDBgmStop(void) {
 void Audio_BetaBgmStart(u8 bgm) {
     PRINTF("Na_BetaBgm_Start num = %02x\n", bgm);
     sBgmPlayState = 0;
-    sBGMFadeoutTimer = 0;
+    sBgmFadeoutTimer = 0;
     sActiveBgm = bgm;
     AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 1.0f);
     Audio_SEStart(0, bgm);
@@ -1633,7 +1636,7 @@ void Audio_BetaBgmStop(void) {
 void Audio_RomBgmStart(u8 bgm) {
     PRINTF("Na_ROMBgm_Start Called num = %02x\n", bgm);
     sBgmPlayState = 0;
-    sBGMFadeoutTimer = 0;
+    sBgmFadeoutTimer = 0;
     sActiveBgm = bgm;
     AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 1.0f);
     Audio_SEStart(0, bgm);
@@ -1647,7 +1650,8 @@ void Audio_RomBgmStop(void) {
     }
 }
 
-void func_800BB018(void) {
+// Na_START_DEMO
+void Audio_StartDemo(void) {
     Audio_RomBgmStart(0x17);
 }
 
@@ -1682,7 +1686,7 @@ void Audio_BetaBgmStop3(void) {
 }
 
 // Na_PauseSet
-void Audio_HandlePause(u8 status) {
+void Audio_PauseSet(u8 status) {
 
     PRINTF("Pause Called!! Status =  %02x\n", status);
 
@@ -1746,7 +1750,7 @@ void Audio_SetPlayerMode(u8 numPlayersIndex) {
 
 void Audio_AllSoundStop(void) {
     PRINTF("All Sound Off\n");
-    Audio_ResetSoundData();
+    Audio_InitAudio();
     AUDIOCMD_GLOBAL_DISABLE_SEQPLAYER(0, 0);
     Audio_SetSpec(0);
     AudioThread_ScheduleProcessCmds();
@@ -1760,9 +1764,9 @@ void Audio_SESeqStart(void) {
 }
 
 // Na_ChangeSoundMode
-void func_800BB39C(s32 courseIndex) {
+void Audio_ChangeSoundMode(s32 courseIndex) {
     PRINTF("Change Sound Mode No = %02x\n", courseIndex);
-    Audio_ResetSoundData();
+    Audio_InitAudio();
 #ifndef VERSION_JP
     AudioThread_ScheduleProcessCmds();
 #endif
@@ -1803,9 +1807,9 @@ void Audio_GuitarSeqStart(void) {
 AudioTask* Audio_SetupCreateTask(void) {
     AudioTask* curAudioTask;
 
-    Audio_BGMFadeout();
+    Audio_BgmFadeout();
     Audio_LevelSEFadeoutRoutine();
-    Audio_BGMFadeoutPause();
+    Audio_BgmFadeoutPause();
     AudioThread_ScheduleProcessCmds();
     gCurAudioTask = curAudioTask = AudioThread_CreateTask();
     return curAudioTask;

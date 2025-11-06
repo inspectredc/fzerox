@@ -124,8 +124,8 @@ typedef enum RaceMenuTextures{
     /* 0x05 */ RACE_MENU_GHOST_SAVE,            // ghost save
     /* 0x06 */ RACE_MENU_OVERWRITE_DATA1,       // overwrite data?
     /* 0x07 */ RACE_MENU_SAVING,                // saving
-    /* 0x08 */ RACE_MENU_NO_GAME_PAK,           // no game pak
-    /* 0x09 */ RACE_MENU_NO_DISK,               // no disk
+    /* 0x08 */ RACE_MENU_TO_GAME_PAK,           // to game pak
+    /* 0x09 */ RACE_MENU_TO_DISK,               // to disk
     /* 0x0A */ RACE_MENU_OVERWRITE_DATA2,       // overwrite data?
     /* 0x0B */ RACE_MENU_CLEAR_RECORD,          // clear record
     /* 0x0C */ RACE_MENU_ERASE_COURSE_DATA1,    // erase saved data for this course?

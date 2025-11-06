@@ -11,13 +11,14 @@ typedef struct ControlPoint {
 } ControlPoint; // size = 0x14
 
 typedef struct CourseData {
-    /* 0x000 */ s8 creatorId;
+    /* 0x000 */ u8 creatorId;
     /* 0x001 */ s8 controlPointCount;
     /* 0x002 */ s8 venue;
     /* 0x003 */ s8 skybox;
     /* 0x004 */ u32 checksum;
-    /* 0x008 */ s8 flag;
-    /* 0x009 */ char fileName[23];
+    /* 0x008 */ u8 flag;
+    /* 0x009 */ char fileName[22];
+    /* 0x01F */ s8 bgm;
     /* 0x020 */ ControlPoint controlPoint[64];
     /* 0x520 */ s16 bankAngle[64];
     /* 0x5A0 */ s8 pit[64];

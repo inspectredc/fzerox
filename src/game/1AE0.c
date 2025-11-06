@@ -353,9 +353,9 @@ void Game_ThreadEntry(void* entry) {
     Controller_Init();
     func_i10_80115DF0();
     if (gSettingSoundMode == 0) {
-        Audio_SetSoundMode(SOUNDMODE_SURROUND);
+        Audio_SetOutMode(SOUNDMODE_SURROUND);
     } else {
-        Audio_SetSoundMode(SOUNDMODE_MONO);
+        Audio_SetOutMode(SOUNDMODE_MONO);
     }
 
     while (true) {

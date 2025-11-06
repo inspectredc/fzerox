@@ -1,0 +1,19 @@
+# :config:
+#   header:
+#     code:
+#       - '#include "aseq.h"'
+#       - '#include "libultra/ultra64.h"'
+#     header:
+#       - '#include "libultra/ultra64.h"'
+
+# aAudioSeq0:
+#   type: FZX:SEQUENCE
+#   offset: 0x527AF0
+#   size: 0xC10
+#   symbol: aAudioSeq0
+
+# aAudioSeq1:
+#   type: FZX:SEQUENCE
+#   offset: 0x528700
+#   size: 0x30
+#   symbol: aAudioSeq1

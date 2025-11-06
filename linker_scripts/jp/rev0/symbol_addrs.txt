@@ -214,7 +214,7 @@ func_800A1818 = 0x800A1898;
 func_800A18A8 = 0x800A1928;
 func_800A18FC = 0x800A197C;
 func_800A1954 = 0x800A19D4;
-func_800BA2B4 = 0x800BA31C;
+Audio_PlayerFinished = 0x800BA31C;
 Audio_SetNearestEnemy = 0x800BA348;
 Audio_PlayerLevelSEStart = 0x800BA358;
 Audio_PlayerLevelSEStop = 0x800BA44C;
@@ -224,7 +224,7 @@ Audio_PlayerEngineEchoStart = 0x800BAB9C;
 Audio_PlayerEngineEchoStop = 0x800BABB8;
 Audio_PlayerEngineStop = 0x800BABD0;
 func_800BAE5C = 0x800BAEC4;
-func_800BB018 = 0x800BB080;
+Audio_StartDemo = 0x800BB080;
 Audio_LevelSEFadeout = 0x800BB0B0;
 Audio_Chakuchi = 0x800BB424;
 

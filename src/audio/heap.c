@@ -762,9 +762,9 @@ void AudioHeap_Init(void) {
         reverb->sample.medium = MEDIUM_RAM;
         reverb->sample.size = reverb->windowSize * SAMPLE_SIZE;
         reverb->sample.sampleAddr = (u8*) reverb->leftRingBuf;
-        reverb->loop.start = 0;
-        reverb->loop.count = 1;
-        reverb->loop.end = reverb->windowSize;
+        reverb->loop.header.start = 0;
+        reverb->loop.header.count = 1;
+        reverb->loop.header.end = reverb->windowSize;
     }
 
     AudioSeq_InitSequencePlayers();

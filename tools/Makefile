@@ -43,6 +43,6 @@ mio0:
 
 torch:
 	@echo "Building torch..."
-	$(MAKE) -C Torch type=release -j$(N_THREADS)
+	$(MAKE) -C Torch type=release -j$(N_THREADS) CFLAGS+="-DBUILD_SM64=OFF -DBUILD_MK64=OFF -DBUILD_SF64=OFF"
 
 .PHONY: all clean distclean default torch

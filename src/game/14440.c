@@ -855,7 +855,7 @@ bool func_8007E038(void) {
 }
 
 void func_8007E08C(void) {
-    func_800BB39C(0);
+    Audio_ChangeSoundMode(0);
 }
 
 void func_8007E0AC(s32 bgm) {

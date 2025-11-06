@@ -7785,7 +7785,7 @@ aMenuSavingTex:
   compression: MIO0
   symbol: aMenuSavingTex
 
-aMenuNoGamePakTex:
+aMenuToGamePakTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25A45C
   ctype: u8
@@ -7794,9 +7794,9 @@ aMenuNoGamePakTex:
   width: 64
   height: 16
   compression: MIO0
-  symbol: aMenuNoGamePakTex
+  symbol: aMenuToGamePakTex
 
-aMenuNoDiskTex:
+aMenuToDiskTex:
   type: COMPRESSED_TEXTURE
   offset: 0x25A5D8
   ctype: u8
@@ -7805,7 +7805,7 @@ aMenuNoDiskTex:
   width: 64
   height: 16
   compression: MIO0
-  symbol: aMenuNoDiskTex
+  symbol: aMenuToDiskTex
 
 aMenuOverwriteData2Tex:
   type: COMPRESSED_TEXTURE

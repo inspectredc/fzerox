@@ -243,6 +243,7 @@ Matrix_ToMtx = 0x8006BBE8;
 CourseFeature_IsDecorational = 0x8006D3F0;
 mio0Decode = 0x800AA620;
 
+Audio_PlayerFinished = 0x800BA2B4;
 Audio_PlayerLevelSEStart = 0x800BA2F0;
 Audio_PlayerLevelSEStop = 0x800BA3E4;
 Audio_PlayerTriggerSEStart = 0x800BA710;

@@ -130,8 +130,8 @@ TexturePtr sRaceMenuTextures[RACE_MENU_MAX] = {
     aMenuGhostSaveTex,             // RACE_MENU_GHOST_SAVE
     aMenuOverwriteData1Tex,        // RACE_MENU_OVERWRITE_DATA1
     aMenuSavingTex,                // RACE_MENU_SAVING
-    aMenuNoGamePakTex,             // RACE_MENU_NO_GAME_PAK
-    aMenuNoDiskTex,                // RACE_MENU_NO_DISK
+    aMenuToGamePakTex,             // RACE_MENU_TO_GAME_PAK
+    aMenuToDiskTex,                // RACE_MENU_TO_DISK
     aMenuOverwriteData2Tex,        // RACE_MENU_OVERWRITE_DATA2
     aMenuClearRecordTex,           // RACE_MENU_CLEAR_RECORD
     aMenuEraseCourseSavedData1Tex, // RACE_MENU_ERASE_COURSE_DATA1
@@ -165,10 +165,10 @@ s32 sRaceMenuDimensions[RACE_MENU_MAX * 2] = {
     TEX_HEIGHT(aMenuOverwriteData1Tex), // RACE_MENU_OVERWRITE_DATA1
     TEX_WIDTH(aMenuSavingTex),
     TEX_HEIGHT(aMenuSavingTex), // RACE_MENU_SAVING
-    TEX_WIDTH(aMenuNoGamePakTex),
-    TEX_HEIGHT(aMenuNoGamePakTex), // RACE_MENU_NO_GAME_PAK
-    TEX_WIDTH(aMenuNoDiskTex),
-    TEX_HEIGHT(aMenuNoDiskTex), // RACE_MENU_NO_DISK
+    TEX_WIDTH(aMenuToGamePakTex),
+    TEX_HEIGHT(aMenuToGamePakTex), // RACE_MENU_TO_GAME_PAK
+    TEX_WIDTH(aMenuToDiskTex),
+    TEX_HEIGHT(aMenuToDiskTex), // RACE_MENU_TO_DISK
     TEX_WIDTH(aMenuOverwriteData2Tex),
     TEX_HEIGHT(aMenuOverwriteData2Tex), // RACE_MENU_OVERWRITE_DATA2
     TEX_WIDTH(aMenuClearRecordTex),
@@ -230,7 +230,7 @@ void func_i3_8011AEA0(void) {
     if (sMenuStateFlags != 0) {
         if (sMenuStateFlags & MENU_STATE_PAUSE_GAME) {
             gGamePaused = true;
-            Audio_HandlePause(1);
+            Audio_PauseSet(1);
             Audio_TriggerSystemSE(12);
             func_80069700();
         }
@@ -240,7 +240,7 @@ void func_i3_8011AEA0(void) {
             for (i = 0; i < gNumPlayers; i++) {
                 gControllers[gPlayerControlPorts[i]].unk_72 = 1;
             }
-            Audio_HandlePause(0);
+            Audio_PauseSet(0);
             Audio_TriggerSystemSE(13);
         }
         if ((sMenuStateFlags & MENU_STATE_RACE_FINISH_SAVE) && !sRaceFinishSaveTriggered) {
@@ -2729,7 +2729,7 @@ Gfx* func_i3_DrawGeneralPause(Gfx* gfx) {
                     break;
                 case PAUSE_GENERAL_RETRY:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -2745,7 +2745,7 @@ Gfx* func_i3_DrawGeneralPause(Gfx* gfx) {
                     break;
                 case PAUSE_GENERAL_QUIT:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -2761,7 +2761,7 @@ Gfx* func_i3_DrawGeneralPause(Gfx* gfx) {
                     break;
                 case PAUSE_GENERAL_CHANGE_MACHINE:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -2777,7 +2777,7 @@ Gfx* func_i3_DrawGeneralPause(Gfx* gfx) {
                     break;
                 case PAUSE_GENERAL_CHANGE_COURSE:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -2793,7 +2793,7 @@ Gfx* func_i3_DrawGeneralPause(Gfx* gfx) {
                     break;
                 case PAUSE_GENERAL_SETTINGS:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -2859,7 +2859,7 @@ Gfx* func_i3_DrawDeathRacePause(Gfx* gfx) {
                     break;
                 case PAUSE_DEATH_RACE_RETRY:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -2875,7 +2875,7 @@ Gfx* func_i3_DrawDeathRacePause(Gfx* gfx) {
                     break;
                 case PAUSE_DEATH_RACE_QUIT:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -2891,7 +2891,7 @@ Gfx* func_i3_DrawDeathRacePause(Gfx* gfx) {
                     break;
                 case PAUSE_DEATH_RACE_CHANGE_MACHINE:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -2907,7 +2907,7 @@ Gfx* func_i3_DrawDeathRacePause(Gfx* gfx) {
                     break;
                 case PAUSE_DEATH_RACE_SETTINGS:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -2991,7 +2991,7 @@ Gfx* func_i3_DrawGpRacePause(Gfx* gfx) {
                     break;
                 case PAUSE_GP_RETRY:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -3016,7 +3016,7 @@ Gfx* func_i3_DrawGpRacePause(Gfx* gfx) {
                         Audio_TriggerSystemSE(0xE);
                     }
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
@@ -3029,7 +3029,7 @@ Gfx* func_i3_DrawGpRacePause(Gfx* gfx) {
                     break;
                 case PAUSE_GP_SETTINGS:
                     if (D_800CD010 == 0) {
-                        Audio_HandlePause(2);
+                        Audio_PauseSet(2);
                     }
                     if (D_800CD010 == 0) {
                         Audio_LevelSEFadeout();
