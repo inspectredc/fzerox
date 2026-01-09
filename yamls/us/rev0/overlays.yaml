@@ -85,7 +85,7 @@
       - [0x977F0, .data, mfs/mfs_save]
       - [0x97800, .data, lib/leocmdex]
       - [0x97860, .data, lib/leord_diskid]
-      - [0x97880, .data, lib/leoglobals]
+      - [0x97880, .data, lib/createleomanager]
       - [0x97890, .rodata, mfs/mfs_ram]
       - [0x978A0, .rodata, mfs/mfs_save]
       - [0x978C0, .rodata, mfs/mfs_prepared_dir]
@@ -107,7 +107,7 @@
       - { type: .bss, vram: 0x8042B3A0, name: lib/leotempbuffer }
       - { type: .bss, vram: 0x8042B490, name: lib/leoc2_syndrome }
       - { type: .bss, vram: 0x8042BBD0, name: lib/leoc2ecc }
-      - { type: .bss, vram: 0x8042BBE0, name: lib/leoglobals }
+      - { type: .bss, vram: 0x8042BBE0, name: lib/createleomanager }
       - { type: .bss, vram: 0x8042BBF0, name: lib/leomseq_tbl }
       - { type: .bss, vram: 0x8042BC30, name: lib/leomecha }
 

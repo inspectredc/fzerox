@@ -13,12 +13,17 @@ const u32 wt_mseq_code[0x10] = {
 };
 
 void leoSet_mseq(u16 rwmode) {
-    u32* tbl;
+    const u32* tbl;
     u32 sct_byte_x;
     u32 sct_byte_u;
     u8 i;
 
-    osEPiWriteIo(LEOPiInfo, LEO_SEQ_STATUS, (LEOasic_seq_ctl_shadow &= 0xBFFFFFFF));
+#if LEO_VERSION == LEO_VERSION_A
+    osEPiWriteIo(LEOPiInfo, LEO_SEQ_STATUS, (LEOasic_seq_ctl_shadow &= ~LEO_STATUS_DATA_REQUEST));
+#else // LEO_VERSION_B
+    LEOasic_seq_ctl_shadow &= ~LEO_STATUS_DATA_REQUEST;
+    osEPiWriteIo(LEOPiInfo, LEO_SEQ_STATUS, LEOasic_seq_ctl_shadow);
+#endif
     if (rwmode == 1) {
         tbl = wt_mseq_code;
     } else {

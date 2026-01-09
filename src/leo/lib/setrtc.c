@@ -1,5 +1,4 @@
 #include "libultra/ultra64.h"
-#include "libc/stdbool.h"
 #include "leo/leo_internal.h"
 
 bool leoVerifyRTC(u8, u8);

@@ -16,6 +16,7 @@
     "_LANGUAGE_C",
     "F3DEX_GBI_2",
     "BUILD_VERSION=VERSION_I",
+    "LEO_VERSION=0",
     "MFS_VERSION=0"
   ],
   "files.associations": {

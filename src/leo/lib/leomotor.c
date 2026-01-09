@@ -19,7 +19,11 @@ void leoStart_stop(void) {
             }
             send_cmd = ASIC_SLEEP;
         }
+#if LEO_VERSION == LEO_VERSION_A
         sense_code = leoSend_asic_cmd_w(send_cmd, send_data);
+#else // LEO_VERSION_B
+        sense_code = leoSend_asic_cmd_w_nochkDiskChange(send_cmd, send_data);
+#endif
         if (sense_code == 0) {
             LEOcur_command->header.status = LEO_STATUS_GOOD;
             return;

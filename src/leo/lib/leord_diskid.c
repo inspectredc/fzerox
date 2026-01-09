@@ -40,4 +40,12 @@ void leoReadDiskId(void) {
     // Copy status and sense
     LEOcur_command->header.sense = GET_ERROR(dummy_cmd);
     LEOcur_command->header.status = dummy_cmd.header.status;
+
+#if LEO_VERSION == LEO_VERSION_B
+    if (LEOcur_command->header.status == LEO_STATUS_GOOD) {
+        leoClrUA_MEDIUM_CHANGED();
+    } else {
+        leoSetUA_MEDIUM_CHANGED();
+    }
+#endif
 }

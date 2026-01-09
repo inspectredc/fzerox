@@ -46,7 +46,12 @@ else
   $(error Unable to detect a suitable MIPS toolchain installed)
 endif
 
-VERSION ?= us
+ifeq ($(EXPANSION_KIT),1)
+  VERSION ?= jp
+else
+  VERSION ?= us
+endif
+
 REV ?= rev0
 
 BASEROM              := baserom.$(VERSION).$(REV).z64
@@ -137,29 +142,37 @@ endif
 BUILD_DEFINES ?=
 
 ifeq ($(EXPANSION_KIT),1)
-	BUILD_DEFINES   += -DEXPANSION_KIT
-	MFS_VERSION ?= 1
+    BUILD_DEFINES   += -DEXPANSION_KIT -DBUILD_VERSION=VERSION_J
+    LEO_VERSION ?= 1
+    MFS_VERSION ?= 1
+else
+    # Version check
+    ifeq ($(VERSION),jp)
+        BUILD_DEFINES   += -DVERSION_JP=1 -DBUILD_VERSION=VERSION_I
+    endif
+
+    ifeq ($(VERSION),us)
+        BUILD_DEFINES   += -DVERSION_US=1 -DBUILD_VERSION=VERSION_I
+    endif
+
+    ifeq ($(VERSION),eu)
+        BUILD_DEFINES   += -DVERSION_EU=1 -DBUILD_VERSION=VERSION_I
+        REV := rev0
+    endif
+endif
+
+LEO_VERSION ?= 0
+ifeq ($(LEO_VERSION),0)
+    BUILD_DEFINES   += -DLEO_VERSION=LEO_VERSION_A
+else
+    BUILD_DEFINES   += -DLEO_VERSION=LEO_VERSION_B
 endif
 
 MFS_VERSION ?= 0
 ifeq ($(MFS_VERSION),0)
-	BUILD_DEFINES   += -DMFS_VERSION=MFS_VERSION_A
+    BUILD_DEFINES   += -DMFS_VERSION=MFS_VERSION_A
 else
-	BUILD_DEFINES   += -DMFS_VERSION=MFS_VERSION_B
-endif
-
-# Version check
-ifeq ($(VERSION),jp)
-    BUILD_DEFINES   += -DVERSION_JP=1 -DBUILD_VERSION=VERSION_I
-endif
-
-ifeq ($(VERSION),us)
-    BUILD_DEFINES   += -DVERSION_US=1 -DBUILD_VERSION=VERSION_I
-endif
-
-ifeq ($(VERSION),eu)
-    BUILD_DEFINES   += -DVERSION_EU=1 -DBUILD_VERSION=VERSION_I
-	REV := rev0
+    BUILD_DEFINES   += -DMFS_VERSION=MFS_VERSION_B
 endif
 
 ifeq ($(NON_MATCHING),1)

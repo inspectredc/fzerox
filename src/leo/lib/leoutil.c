@@ -59,7 +59,7 @@ u16 leoLba_to_phys(u32 lba) {
     }
 
     // Get the relative offset to defect tracks for the current zone (if Zone 0, then it's 0)
-    if (pzone != 0) {
+    if ((u32) pzone != 0) {
         defect_offset = LEO_sys_data.param.defect_num[pzone - 1];
     } else {
         defect_offset = 0;
