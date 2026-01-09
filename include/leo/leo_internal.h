@@ -212,15 +212,6 @@ extern const s32 LEORAM_BYTE[7];
 
 extern s32 __leoActive;
 
-extern s32 (*D_i1_8042A620)(LEOCmd*, s32, u32, void*, u32, OSMesgQueue*);
-extern s32 (*D_i1_8042A624)(LEOCmd*, u32, OSMesgQueue*);
-extern s32 (*D_i1_8042A628)(LEOCmd*, u8, OSMesgQueue*);
-extern s32 (*D_i1_8042A62C)(LEOCmd*, LEODiskID*, OSMesgQueue*);
-extern s32 (*D_i1_8042A630)(LEOCmd*, OSMesgQueue*);
-extern s32 (*D_i1_8042A634)(LEOCmd*, LEODiskTime*, OSMesgQueue*);
-extern s32 (*D_i1_8042A638)(LEOCmd*, u32, u32, OSMesgQueue*);
-extern s32 (*D_i1_8042A63C)(LEOCmd*, OSMesgQueue*);
-
 extern OSPiHandle* LEOPiInfo;
 extern OSIoMesg LEOPiDmaParam;
 extern OSMesg LEOc2ctrl_que_buf[1];

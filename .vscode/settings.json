@@ -14,7 +14,9 @@
   },
   "defines": [
     "_LANGUAGE_C",
-    "F3DEX_GBI_2"
+    "F3DEX_GBI_2",
+    "BUILD_VERSION=VERSION_I",
+    "MFS_VERSION=0"
   ],
   "files.associations": {
     "hud.h": "c",
@@ -116,7 +118,7 @@
     "segment_2b9ea0.h": "c",
     "segment_22b0a0.h": "c",
     "segment_2738a0.h": "c",
-    "unk_leo.h": "c",
+    "mfs.h": "c",
     "fzx_game.h": "c",
     "course_data.h": "c",
     "fzx_course.h": "c",

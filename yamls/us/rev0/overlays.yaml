@@ -22,19 +22,24 @@
     bss_size: 0x2CD0
     symbol_name_format: i1_$VRAM
     subsegments:
-      - [0x72120, c, ../72120]
+      - [0x72120, c, 72120]
       - [0x72150, hasm, lib/getaadr2]
-      - [0x721B0, c]
-      - [0x72E40, c]
-      - [0x75090, c]
-      - [0x76270, c]
-      - [0x77CA0, c]
-      - [0x78170, c]
-      - [0x79180, c]
-      - [0x79830, c]
-      - [0x79AF0, c]
-      - [0x7A430, c]
-      - [0x7A590, c]
+      - [0x721B0, c, 721B0]
+      - [0x721E0, c, mfs/mfs_dir_entry_util]
+      - [0x72E40, c, mfs/mfs_ram]
+      - [0x73F60, c, mfs/mfs_dir]
+      - [0x75090, c, mfs/mfs_device]
+      - [0x76080, c, mfs/mfs_name]
+      - [0x76270, c, mfs/mfs_save]
+      - [0x77CA0, c, mfs/mfs_fat]
+      - [0x78170, c, mfs/mfs_delete]
+      - [0x78420, c, mfs/mfs_load]
+      - [0x79180, c, mfs/mfs_read_write]
+      - [0x79830, c, mfs/mfs_rename]
+      - [0x79AF0, c, mfs/mfs_prepared_dir]
+      - [0x7A1A0, c, mfs/mfs_creation_date]
+      - [0x7A430, c, mfs/mfs_handlers]
+      - [0x7A590, c, mfs/mfs_attr]
       - [0x7AA00, c, lib/readwrite]
       - [0x7AAF0, c, lib/leofunc]
       - [0x7AF20, c, lib/leoint]
@@ -63,7 +68,7 @@
       - [0x7FE10, c, lib/leotranslat]
       - [0x80170, c, lib/leotimer]
       - [0x80870, hasm, lib/getkadr]
-      - [0x80960, data]
+      - [0x80960, data, lib/getkadr]
       - [0x813B0, textbin, lib/getaadr]
       # - [0x813B0, hasm, lib/getaadr]
       # - [0x8142C, data, lib/getaadr]
@@ -75,15 +80,15 @@
       - [0x84040, c, lib/readrtc]
       - [0x840E0, c, lib/leoseek]
       - [0x841F0, c, lib/seek]
-      - [0x842A0, .data, leo_data]
-      - [0x97770, .data, 75090]
-      - [0x977F0, .data, 76270]
+      - [0x842A0, .data, mfs/mfs_data]
+      - [0x97770, .data, mfs/mfs_name]
+      - [0x977F0, .data, mfs/mfs_save]
       - [0x97800, .data, lib/leocmdex]
       - [0x97860, .data, lib/leord_diskid]
       - [0x97880, .data, lib/leoglobals]
-      - [0x97890, .rodata, 72E40]
-      - [0x978A0, .rodata, 76270]
-      - [0x978C0, .rodata, 79AF0]
+      - [0x97890, .rodata, mfs/mfs_ram]
+      - [0x978A0, .rodata, mfs/mfs_save]
+      - [0x978C0, .rodata, mfs/mfs_prepared_dir]
       - [0x978E0, .rodata, lib/leofunc]
       - [0x978F0, .rodata, lib/leocmdex]
       - [0x979A0, .rodata, lib/leord_diskid]
@@ -91,9 +96,10 @@
       - [0x97B90, .rodata, lib/leoc2ecc]
       - [0x97FB0, .rodata, lib/leomseq_tbl]
       - [0x98060, .rodata, lib/leotimer]
-      - { type: .bss, vram: 0x80428F70, name: 72E40 }
-      - { type: .bss, vram: 0x8042A610, name: 79AF0 }
-      - { type: .bss, vram: 0x8042A620, name: 7A430 }
+      - { type: .bss, vram: 0x80428F70, name: mfs/mfs_data }
+      - { type: .bss, vram: 0x8042A600, name: mfs/mfs_dir }
+      - { type: .bss, vram: 0x8042A610, name: mfs/mfs_prepared_dir }
+      - { type: .bss, vram: 0x8042A620, name: mfs/mfs_handlers }
       - { type: .bss, vram: 0x8042A640, name: lib/leofunc }
       - { type: .bss, vram: 0x8042A660, name: lib/leoram }
       - { type: .bss, vram: 0x8042B360, name: lib/leoint }

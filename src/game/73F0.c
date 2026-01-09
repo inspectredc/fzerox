@@ -2940,9 +2940,9 @@ void func_8007402C(s32 courseIndex) {
 
         while (func_800760F8() != 2) {}
 
-        if (func_i1_80403680(0xFFFB, gEditCupTrackNames[sp28], "CRSD") != 0xFFFF) {
+        if (Mfs_GetFileIndex(0xFFFB, gEditCupTrackNames[sp28], "CRSD") != 0xFFFF) {
             PRINTF("ENTRY CHECK OK\n");
-            func_i1_804096C8(0xFFFB, gEditCupTrackNames[sp28], "CRSD", &gCourseData, 0);
+            Mfs_LoadFileInDir(0xFFFB, gEditCupTrackNames[sp28], "CRSD", &gCourseData, 0);
             PRINTF("ENTRY LOAD OK\n");
         }
     } else {

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_thread.h"
 #include "PR/leo.h"
+#include "leo/mfs.h"
 
 bool D_800CD510 = false;
 s32 gSkyboxType;
@@ -66,7 +67,7 @@ void func_800762B0(LEODiskID);
 OSMesgQueue D_800E42D0;
 OSMesg D_800E42E8[16];
 
-extern s32 D_i1_80428610;
+extern s32 gMfsError;
 extern LEODiskID D_i1_80428618;
 extern LEODiskID leoBootID;
 
@@ -75,12 +76,12 @@ void func_8007F5EC(void) {
     func_80076310();
     osCreateMesgQueue(&D_800E42D0, D_800E42E8, ARRAY_COUNT(D_800E42E8));
 #ifdef VERSION_JP
-    func_i1_80404AEC("01", "EFZJ");
+    Mfs_SetGameCode("01", "EFZJ");
 #else
-    func_i1_80404AEC("01", "EFZE");
+    Mfs_SetGameCode("01", "EFZE");
 #endif
-    if (func_i1_80403F4C(0x101, D_800E42E8, ARRAY_COUNT(D_800E42E8)) < 0) {
-        switch (D_i1_80428610) {
+    if (Mfs_CreateLeoManager(0x101, D_800E42E8, ARRAY_COUNT(D_800E42E8)) < 0) {
+        switch (gMfsError) {
             case 0x29:
                 return;
             case 0x2A:
@@ -92,7 +93,7 @@ void func_8007F5EC(void) {
     }
 
 label:
-    if (D_i1_80428610 == 0xF9) {
+    if (gMfsError == 0xF9) {
         func_8007F520();
     }
     func_i1_8040428C();
@@ -103,17 +104,17 @@ label:
         case 1:
             break;
         case 0:
-            if (func_i1_804043B8(1) < 0) {}
+            if (Mfs_InitRamArea(1) < 0) {}
             break;
         case -1:
-            switch (D_i1_80428610) {
+            switch (gMfsError) {
                 case 42:
                     break;
                 case 23:
-                    func_i1_804043B8(1);
+                    Mfs_InitRamArea(1);
                     break;
             }
             break;
     }
-    func_i1_804067BC(0, 0);
+    Mfs_ModeSelectAsync(0, 0);
 }

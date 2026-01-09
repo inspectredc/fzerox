@@ -116,7 +116,7 @@ else
   # we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
   CFLAGS += -G 0 -non_shared -fullwarn -verbose -Xcpluscomm $(IINC) -nostdinc -Wab,-r4300_mul -woff 649,838,712,516
   MIPS_VERSION := -mips2
-  WARNINGS := -fullwarn -verbose -woff 624,649,838,712,516,513,596,564,594,709
+  WARNINGS := -fullwarn -verbose -woff 624,649,838,712,516,513,596,564,594,709,807
 endif
 
 ifeq ($(COMPILER),ido)
@@ -136,17 +136,29 @@ endif
 
 BUILD_DEFINES ?=
 
+ifeq ($(EXPANSION_KIT),1)
+	BUILD_DEFINES   += -DEXPANSION_KIT
+	MFS_VERSION ?= 1
+endif
+
+MFS_VERSION ?= 0
+ifeq ($(MFS_VERSION),0)
+	BUILD_DEFINES   += -DMFS_VERSION=MFS_VERSION_A
+else
+	BUILD_DEFINES   += -DMFS_VERSION=MFS_VERSION_B
+endif
+
 # Version check
 ifeq ($(VERSION),jp)
-    BUILD_DEFINES   += -DVERSION_JP=1
+    BUILD_DEFINES   += -DVERSION_JP=1 -DBUILD_VERSION=VERSION_I
 endif
 
 ifeq ($(VERSION),us)
-    BUILD_DEFINES   += -DVERSION_US=1
+    BUILD_DEFINES   += -DVERSION_US=1 -DBUILD_VERSION=VERSION_I
 endif
 
 ifeq ($(VERSION),eu)
-    BUILD_DEFINES   += -DVERSION_EU=1
+    BUILD_DEFINES   += -DVERSION_EU=1 -DBUILD_VERSION=VERSION_I
 	REV := rev0
 endif
 
@@ -259,7 +271,7 @@ COMMON_DEFINES  := -D_MIPS_SZLONG=32
 GBI_DEFINES     := -DF3DEX_GBI_2
 RELEASE_DEFINES := -DNDEBUG
 AS_DEFINES      := -DMIPSEB -D_LANGUAGE_ASSEMBLY -D_ULTRA64
-C_DEFINES       := -DLANGUAGE_C -D_LANGUAGE_C -DBUILD_VERSION=VERSION_H ${RELEASE_DEFINES}
+C_DEFINES       := -DLANGUAGE_C -D_LANGUAGE_C ${RELEASE_DEFINES}
 ENDIAN          := -EB
 
 ICONV_FLAGS     := --from-code=UTF-8 --to-code=EUC-JP
@@ -337,7 +349,9 @@ $(BUILD_DIR)/src/libultra/io/motor.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/os/%.o: OPTFLAGS := -O1 -g0
 
 # libleo
-$(BUILD_DIR)/src/leo/%.o: OPTFLAGS := -g
+$(BUILD_DIR)/src/leo/lib%.o: OPTFLAGS := -g
+$(BUILD_DIR)/src/leo/mfs%.o: OPTFLAGS := -g
+$(BUILD_DIR)/src/leo/721B0.o: OPTFLAGS := -g
 
 # per-file flags
 $(BUILD_DIR)/src/libultra/libc/ldiv.o: OPTFLAGS := -O2 -g0
