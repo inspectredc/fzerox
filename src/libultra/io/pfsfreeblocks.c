@@ -11,11 +11,13 @@ s32 osPfsFreeBlocks(OSPfs* pfs, s32* bytes_not_used) {
     int offset;
 
     PFS_CHECK_STATUS();
-
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH
     ERRCK(__osCheckId(pfs));
-
+#else
+    PFS_CHECK_ID();
+#endif
     for (bank = 0; bank < pfs->banks; bank++) {
-        ERRCK(__osPfsRWInode(pfs, &inode, OS_READ, bank));
+        ERRCK(__osPfsRWInode(pfs, &inode, PFS_READ, bank));
         offset = ((bank > 0) ? 1 : pfs->inode_start_page);
 
         for (j = offset; j < ARRLEN(inode.inode_page); j++) {

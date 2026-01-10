@@ -2,15 +2,15 @@
 #include "PR/os_internal.h"
 #include "PR/osint.h"
 
-OSTimer __osBaseTimer;
 OSTime __osCurrentTime;
 u32 __osBaseCounter;
 u32 __osViIntrCount;
 u32 __osTimerCounter;
+OSTimer __osBaseTimer;
 OSTimer* __osTimerList = &__osBaseTimer;
 
 #ifndef _FINALROM
-OSMesgQueue __osProfTimerQ ALIGNED(8);
+OSMesgQueue __osProfTimerQ ALIGNED(0x8);
 OSProf* __osProfileList;
 OSProf* __osProfileListEnd;
 u32 __osProfileOverflowBin;
