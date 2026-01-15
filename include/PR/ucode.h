@@ -152,10 +152,10 @@ extern long long int  gspF3DLP_Rej_fifoDataStart[], gspF3DLP_Rej_fifoDataEnd[];
 extern long long int  gspL3DEX_fifoTextStart[],     gspL3DEX_fifoTextEnd[];
 extern long long int  gspL3DEX_fifoDataStart[],     gspL3DEX_fifoDataEnd[];
 
-/*========== F3DFLX ==========*/
+/*========== F3DFLX2 ==========*/
 /* Manually Added */
-extern long long int  gspF3DFLX_Rej_fifoTextStart[], gspF3DFLX_Rej_fifoTextEnd[];
-extern long long int  gspF3DFLX_Rej_fifoDataStart[], gspF3DFLX_Rej_fifoDataEnd[];
+extern long long int  gspF3DFLX2_Rej_fifoTextStart[], gspF3DFLX2_Rej_fifoTextEnd[];
+extern long long int  gspF3DFLX2_Rej_fifoDataStart[], gspF3DFLX2_Rej_fifoDataEnd[];
 
 /*========== F3DEX2/F3DLX2/F3DLP2/L3DEX2 ==========*/
 /* FIFO version */

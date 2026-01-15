@@ -62,10 +62,10 @@ uintptr_t gSegment1E23F0VramStart;
 uintptr_t gSegment1E23F0VramEnd;
 uintptr_t gSegment22B0A0VramStart;
 uintptr_t gSegment22B0A0VramEnd;
-intptr_t gSegment235130VramStart;
-intptr_t gSegment235130VramEnd;
-intptr_t gSegment2738A0VramStart;
-intptr_t gSegment2738A0VramEnd;
+uintptr_t gSegment235130VramStart;
+uintptr_t gSegment235130VramEnd;
+uintptr_t gSegment2738A0VramStart;
+uintptr_t gSegment2738A0VramEnd;
 uintptr_t gCourseEditTexturesVramStart;
 uintptr_t gCourseEditTexturesVramEnd;
 uintptr_t gCreateMachineTexturesVramStart;
@@ -89,8 +89,6 @@ void func_80067AE0(void) {
     D_800DCD04 = D_800DCD0C;
     D_800DCD0C = temp_t7;
 }
-
-void Segment_SetPhysicalAddress(s32, void*);
 
 extern GfxPool D_8024DCE0[2];
 extern OSTask D_802A6AC0[];
@@ -127,16 +125,16 @@ void Gfx_SetTask(OSTask* task) {
 
     switch (gGameMode & GAMEMODE_F3D_MASK) {
         case GFXMODE_F3DEX:
-            task->t.ucode = (u64*) gspF3DEX_fifoTextStart;
-            task->t.ucode_data = (u64*) gspF3DEX_fifoDataStart;
+            task->t.ucode = (u64*) gspF3DEX2_fifoTextStart;
+            task->t.ucode_data = (u64*) gspF3DEX2_fifoDataStart;
             break;
         case GFXMODE_F3DLX:
-            task->t.ucode = (u64*) gspF3DLX_Rej_fifoTextStart;
-            task->t.ucode_data = (u64*) gspF3DLX_Rej_fifoDataStart;
+            task->t.ucode = (u64*) gspF3DLX2_Rej_fifoTextStart;
+            task->t.ucode_data = (u64*) gspF3DLX2_Rej_fifoDataStart;
             break;
         case GFXMODE_F3DFLX:
-            task->t.ucode = (u64*) gspF3DFLX_Rej_fifoTextStart;
-            task->t.ucode_data = (u64*) gspF3DFLX_Rej_fifoDataStart;
+            task->t.ucode = (u64*) gspF3DFLX2_Rej_fifoTextStart;
+            task->t.ucode_data = (u64*) gspF3DFLX2_Rej_fifoDataStart;
             break;
     }
 
@@ -158,12 +156,9 @@ extern OSMesgQueue D_800DCAB0;
 extern OSMesgQueue D_800DCAC8;
 extern FrameBuffer* gFrameBuffers[];
 
-void func_800690FC(void);
-void func_i2_800FD344(void);
-
 void func_80067D64(void) {
     MQ_WAIT_FOR_MESG(&D_800DCAB0, &D_800DCD10);
-    func_800B9E28();
+    Audio_Update();
     Gfx_InitBuffer();
     func_800690FC();
     Gfx_LoadSegments();
@@ -174,8 +169,8 @@ void func_80067D64(void) {
     while (osDpGetStatus() &
            (DPC_STATUS_DMA_BUSY | DPC_STATUS_CMD_BUSY | DPC_STATUS_PIPE_BUSY | DPC_STATUS_TMEM_BUSY)) {}
 
-    func_80077C9C();
-    func_i2_800FD344();
+    Segment_LoadAssets();
+    Transition_SetBackgroundBuffer();
     osViSwapBuffer(gFrameBuffers[D_800DCD00]);
 
     while (osViGetCurrentFramebuffer() != gFrameBuffers[D_800DCD00]) {}
@@ -193,11 +188,11 @@ void func_80067E98(void) {
     Gfx_LoadSegments();
     gMasterDisp = func_80069698(gMasterDisp);
     Gfx_FullSync();
-    func_800B9E28();
+    Audio_Update();
     MQ_WAIT_FOR_MESG(&D_800DCAC8, &D_800DCD10);
-    func_i2_800FD344();
+    Transition_SetBackgroundBuffer();
     osViSwapBuffer(gFrameBuffers[D_800DCD08]);
-    func_80077C9C();
+    Segment_LoadAssets();
 
     while ((osViGetCurrentFramebuffer() == gFrameBuffers[D_800DCD04] ||
             osViGetNextFramebuffer() == gFrameBuffers[D_800DCD04]) &&
@@ -222,7 +217,7 @@ void Game_ThreadEntry(void* entry) {
     OSMesg msgBuf[1];
 
     startTime = osGetTime();
-    func_800BB46C();
+    Audio_GuitarSeqStart();
     osRecvMesg(&D_800DCAB0, msgBuf, OS_MESG_BLOCK);
 
     // Segment Start and End Pairs
@@ -238,10 +233,10 @@ void Game_ThreadEntry(void* entry) {
     gOvlCourseSelectVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(course_select));
     gOvl6VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i6));
     gOvl6VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i6));
-    gOvl7VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i7));
-    gOvl7VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i7));
-    gOvl8VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i8));
-    gOvl8VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i8));
+    gOvl7VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ending));
+    gOvl7VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ending));
+    gOvl8VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(records));
+    gOvl8VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(records));
     gOvl9VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i9));
     gOvl9VramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(ovl_i9));
     gOvl10VramStart = osVirtualToPhysical(SEGMENT_VRAM_START(ovl_i10));
@@ -303,24 +298,20 @@ void Game_ThreadEntry(void* entry) {
     Segment_SetAddress(2, gUnkBssVramStart);
     Segment_SetAddress(8, gSegment16C8A0VramStart);
     Segment_SetAddress(3, gSegment17B1E0VramStart);
-    func_80076804();
-    func_80076848();
+    Arena_DefaultStartInit();
+    Arena_EndInit();
 
-    // clang-format off
-    osInvalICache(SEGMENT_TEXT_START(ovl_i2), SEGMENT_TEXT_SIZE(ovl_i2)); \
-    osInvalDCache(SEGMENT_DATA_START(ovl_i2), SEGMENT_DATA_END(ovl_i2) - SEGMENT_DATA_START(ovl_i2));
-    // clang-format on
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(ovl_i2), SEGMENT_TEXT_SIZE(ovl_i2), SEGMENT_DATA_START(ovl_i2),
+                        SEGMENT_DATA_END(ovl_i2) - SEGMENT_DATA_START(ovl_i2));
     Dma_LoadOverlay(SEGMENT_ROM_START(ovl_i2), SEGMENT_VRAM_START(ovl_i2), SEGMENT_ROM_SIZE(ovl_i2),
                     SEGMENT_BSS_START(ovl_i2), SEGMENT_BSS_SIZE(ovl_i2));
 
-    // clang-format off
-    osInvalICache(SEGMENT_TEXT_START(ovl_i10), SEGMENT_TEXT_SIZE(ovl_i10)); \
-    osInvalDCache(SEGMENT_DATA_START(ovl_i10), SEGMENT_DATA_SIZE(ovl_i10));
-    // clang-format on
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(ovl_i10), SEGMENT_TEXT_SIZE(ovl_i10), SEGMENT_DATA_START(ovl_i10),
+                        SEGMENT_DATA_SIZE(ovl_i10));
     Dma_LoadOverlay(SEGMENT_ROM_START(ovl_i10), SEGMENT_VRAM_START(ovl_i10), SEGMENT_ROM_SIZE(ovl_i10),
                     SEGMENT_BSS_START(ovl_i10), SEGMENT_BSS_SIZE(ovl_i10));
 
-    osInvalDCache(osPhysicalToVirtual(gSegment16C8A0VramStart), SEGMENT_DATA_SIZE_CONST(segment_16C8A0));
+    CLEAR_DATA_CACHE(osPhysicalToVirtual(gSegment16C8A0VramStart), SEGMENT_DATA_SIZE_CONST(segment_16C8A0));
     Dma_LoadAssets(SEGMENT_ROM_START(segment_16C8A0),
                    (uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +
                        (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0),
@@ -347,15 +338,15 @@ void Game_ThreadEntry(void* entry) {
         func_800742D0();
     }
     func_800742FC();
-    func_8006C378(&D_80225800.unk_000, 0, 1.0f, 0, 0, 0, 0.0f, 0.0f, 0.0f);
+    Matrix_SetTransRot(&D_80225800.unk_000, 0, 1.0f, 0, 0, 0, 0.0f, 0.0f, 0.0f);
 
     Math_Rand1Init(osGetTime(), osGetTime() + osGetTime());
     Controller_Init();
     func_i10_80115DF0();
     if (gSettingSoundMode == 0) {
-        Audio_SetSoundMode(SOUNDMODE_SURROUND);
+        Audio_SetOutMode(SOUNDMODE_SURROUND);
     } else {
-        Audio_SetSoundMode(SOUNDMODE_MONO);
+        Audio_SetOutMode(SOUNDMODE_MONO);
     }
 
     while (true) {

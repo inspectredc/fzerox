@@ -1,6 +1,7 @@
 #include "global.h"
 #include "course_select.h"
 #include "fzx_game.h"
+#include "fzx_camera.h"
 #include "assets/segment_17B1E0.h"
 
 void func_i5_80115DF0(void) {
@@ -15,14 +16,14 @@ void func_i5_80115E10(void) {
         }
         D_i5_801190B4--;
     }
-    func_8008675C();
+    Camera_Update();
 }
 
 extern GfxPool D_1000000;
 
 extern GfxPool* gGfxPool;
 extern s32 D_800DCCFC;
-extern Player gPlayers[];
+extern Camera gCameras[];
 
 s32 D_801197B0[8];
 Vtx* D_i5_801197D0;
@@ -56,7 +57,7 @@ Gfx* func_i5_80115E64(Gfx* gfx) {
 
     gDPSetRenderMode(gfx++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gDPSetCombineMode(gfx++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-    gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
+    gSPPerspNormalize(gfx++, gCameras[0].perspectiveScale);
     gSPMatrix(gfx++, D_1000000.unk_20008, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gfx++, D_1000000.unk_20108, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
@@ -66,7 +67,7 @@ Gfx* func_i5_80115E64(Gfx* gfx) {
     if (D_i5_801190B4 < 6) {
         for (i = 0; i < gCourseModelCupCourseNo; i++) {
             gSPViewport(gfx++, &D_i5_80118FF0[D_800DCCFC][i]);
-            gfx = func_800A92FC(gfx, &D_i5_801197D0[i * 0xC00], D_801197B0[i]);
+            gfx = Course_DrawModel(gfx, &D_i5_801197D0[i * 0xC00], D_801197B0[i]);
         }
     }
     return gfx;
@@ -75,7 +76,7 @@ Gfx* func_i5_80115E64(Gfx* gfx) {
 void func_i5_801161D8(void) {
     s32 i;
 
-    D_i5_801197D0 = (Vtx*) func_800768F4(0, 0x4800 * sizeof(Vtx));
+    D_i5_801197D0 = (Vtx*) Arena_Allocate(ALLOC_FRONT, 0x4800 * sizeof(Vtx));
 
     for (i = 0; i < 6; i++) {
         D_i5_80118FF0[0][i].vp.vscale[0] = (SCREEN_WIDTH / 4) << 2;
@@ -97,17 +98,17 @@ void func_i5_801161D8(void) {
     }
 }
 
-void func_i5_801164A8(s32 arg0) {
+void func_i5_801164A8(s32 left) {
     s32 i;
 
     for (i = 0; i < 6; i++) {
         Vp* vp = &D_i5_80118FF0[D_800DCCFC][i];
 
-        vp->vp.vscale[0] = SCREEN_WIDTH;
-        vp->vp.vscale[1] = SCREEN_HEIGHT;
+        vp->vp.vscale[0] = (SCREEN_WIDTH / 4) << 2;
+        vp->vp.vscale[1] = (SCREEN_HEIGHT / 4) << 2;
         vp->vp.vscale[2] = 0x1FF;
         vp->vp.vscale[3] = 0;
-        vp->vp.vtrans[0] = 640 + (arg0 + i * 0x500);
+        vp->vp.vtrans[0] = 640 + (left + i * 0x500);
         vp->vp.vtrans[1] = 600;
         vp->vp.vtrans[2] = 0x1FF;
         vp->vp.vtrans[3] = 0;

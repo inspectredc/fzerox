@@ -99,13 +99,13 @@ tools:
           paths:
             - overlays/ovl_i6
         - id: ovl_i7
-          name: ovl_i7
+          name: ending
           paths:
-            - overlays/ovl_i7/ending
+            - overlays/ending/ending
         - id: ovl_i8
-          name: ovl_i8
+          name: records
           paths:
-            - overlays/ovl_i8/records
+            - overlays/records/records
         - id: ovl_i9
           name: ovl_i9
           paths:

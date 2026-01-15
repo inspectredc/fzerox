@@ -3561,14 +3561,14 @@ D_303C170:
   offset: 0x3C170
   symbol: D_303C170
 
-D_303C3F0:
+aTimerSymbolsTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 8
   height: 224
   offset: 0x3C3F0
-  symbol: D_303C3F0
+  symbol: aTimerSymbolsTex
 
 D_303D1F0:
   type: TEXTURE

@@ -42,25 +42,28 @@
     follows_vram: entry
     bss_size: 0x242E0
     subsegments:
-      - [0x1060, c, game/1060] #sys_boot
+      - [0x1060, c, sys/sys_main]
       - [0x1AD0, pad]
-      - [0x1AE0, c, game/1AE0] #sys_main
-      - [0x2A60, c, game/2A60]
-      - [0x2B20, c, game/2B20] #sys_joybus
-      - [0x3ED0, c, game/3ED0]
+      - [0x1AE0, c, sys/sys_gfx]
+      - [0x2A60, c, sys/sys_audio]
+      - [0x2B20, c, game/game]
+      - [0x3700, c, sys/controller]
+      - [0x3ED0, c, sys/math]
       - [0x73F0, c, game/73F0]
       - [0xEA90, c, game/EA90]
       - [0xF0B0, c, game/F0B0]
       - [0xF1C0, c, game/F1C0]
-      - [0x10490, c, game/10490]
+      - [0x10490, c, sys/dma]
+      - [0x106F0, c, sys/segment]
       - [0x11CF0, c, game/11CF0]
       - [0x14440, c, game/14440]
       - [0x18410, c, game/18410]
       - [0x194E0, c, game/194E0]
       - [0x197D0, c, game/197D0]
       - [0x19FC0, c, game/sys_fault]
-      - [0x1AAC0, c, game/1AA40]
-      - [0x1B160, c, game/1B0E0]
+      - [0x1AAC0, c, game/bordered_box]
+      - [0x1B160, c, game/camera]
+      - [0x22D60, c, game/racer]
       - [0x36F50, c, game/36ED0]
       - [0x446A0, hasm, game/mio0Decode]
       - [0x44750, c, audio/playback]
@@ -218,19 +221,21 @@
       - [0x662D0, textbin, aspmain]
 
       # Data
-      - [0x67000, .data, game/1060]
-      - [0x67040, .data, game/1AE0]
-      - [0x67050, .data, game/2A60]
-      - [0x67060, .data, game/2B20]
-      - [0x671D0, .data, game/3ED0]
+      - [0x67000, .data, sys/sys_main]
+      - [0x67040, .data, sys/sys_gfx]
+      - [0x67050, .data, sys/sys_audio]
+      - [0x67060, .data, game/game]
+      - [0x671C0, .data, sys/controller]
+      - [0x671D0, .data, sys/math]
       - [0x671E0, .data, game/73F0]
       - [0x67310, .data, game/F1C0]
-      - [0x67340, .data, game/10490]
+      - [0x67340, .data, sys/segment]
       - [0x673E0, .data, game/14440]
       - [0x67570, .data, game/194E0]
       - [0x67580, .data, game/197D0]
       - [0x677B0, .data, game/sys_fault]
-      - [0x67990, .data, game/1B0E0]
+      - [0x67990, .data, game/camera]
+      - [0x67B90, .data, game/racer]
       - [0x695F0, .data, game/36ED0]
       - [0x69B20, .data, audio/note_data]
       - [0x6A770, .data, audio/playback]
@@ -316,21 +321,22 @@
       - [0x6D1B0, .data, libultra/io/vimgr]
 
       # RODATA - Game/Sys
-      - [0x6D1D0, .rodata, game/1060]
-      - [0x6D1E0, .rodata, game/1AE0]
-      - [0x6D1F0, .rodata, game/2B20]
-      - [0x6D460, .rodata, game/3ED0]
+      - [0x6D1D0, .rodata, sys/sys_main]
+      - [0x6D1E0, .rodata, sys/sys_gfx]
+      - [0x6D1F0, .rodata, game/game]
+      - [0x6D460, .rodata, sys/math]
       - [0x6D4E0, .rodata, game/73F0]
       - [0x6D6B0, .rodata, game/EA90]
       - [0x6D6D0, .rodata, game/F1C0]
-      - [0x6D940, .rodata, game/10490]
+      - [0x6D940, .rodata, sys/segment]
       - [0x6DC40, .rodata, game/11CF0]
       - [0x6E3F0, .rodata, game/14440]
       - [0x6E790, .rodata, game/194E0]
       - [0x6E7A0, .rodata, game/197D0]
       - [0x6E7B0, .rodata, game/sys_fault]
-      - [0x6EB60, .rodata, game/1AA40]
-      - [0x6EB80, .rodata, game/1B0E0]
+      - [0x6EB60, .rodata, game/bordered_box]
+      - [0x6EB80, .rodata, game/camera]
+      - [0x6F690, .rodata, game/racer]
       - [0x6F910, .rodata, game/36ED0]
       - [0x6FA40, .rodata, audio/playback]
       - [0x6FA50, .rodata, audio/effects]
@@ -361,21 +367,23 @@
       - [0x71C90, data, aspmain]
       - [0x71F70, data, audio/audio_tables]
 
-      - { type: .bss, vram: 0x800D8020, name: game/1060 }
-      - { type: .bss, vram: 0x800DCCE0, name: game/1AE0 }
-      - { type: .bss, vram: 0x800DCE20, name: game/2A60 }
-      - { type: .bss, vram: 0x800DCE30, name: game/2B20 }
-      - { type: .bss, vram: 0x800DD220, name: game/3ED0 }
+      - { type: .bss, vram: 0x800D8020, name: sys/sys_main }
+      - { type: .bss, vram: 0x800DCCE0, name: sys/sys_gfx }
+      - { type: .bss, vram: 0x800DCE20, name: sys/sys_audio }
+      - { type: .bss, vram: 0x800DCE30, name: game/game }
+      - { type: .bss, vram: 0x800DCE60, name: sys/controller }
+      - { type: .bss, vram: 0x800DD220, name: sys/math }
       - { type: .bss, vram: 0x800E12A0, name: game/73F0 }
       - { type: .bss, vram: 0x800E32D0, name: game/F1C0 }
-      - { type: .bss, vram: 0x800E3370, name: game/10490 }
+      - { type: .bss, vram: 0x800E3370, name: sys/segment }
       - { type: .bss, vram: 0x800E33D0, name: game/11CF0 }
       - { type: .bss, vram: 0x800E40E0, name: game/14440 }
       - { type: .bss, vram: 0x800E4250, name: game/194E0 }
       - { type: .bss, vram: 0x800E4320, name: game/197D0 }
       - { type: .bss, vram: 0x800E43A0, name: game/sys_fault }
-      - { type: .bss, vram: 0x800E4D80, name: game/1AA40 }
-      - { type: .bss, vram: 0x800E4DF0, name: game/1B0E0 }
+      - { type: .bss, vram: 0x800E4D80, name: game/bordered_box }
+      - { type: .bss, vram: 0x800E4DF0, name: game/camera }
+      - { type: .bss, vram: 0x800E5A90, name: game/racer }
       - { type: .bss, vram: 0x800F80E0, name: game/36ED0 }
       - { type: .bss, vram: 0x800F85C0, name: audio/load }
       - { type: .bss, vram: 0x800F86C0, name: libultra/io/sptask }

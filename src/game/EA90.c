@@ -52,8 +52,8 @@ Mtx3F* func_80074C60(Mtx3F* arg0) {
     Mtx3F sp18;
 
     temp_a0 = gCurrentCourseInfo->courseSegments;
-    sp44 = func_8009E108(temp_a0, 0.0f, &sp40);
-    func_8009E85C(temp_a0, 0.0f, &sp18, sp44);
+    sp44 = Course_SplineGetLengthInfo(temp_a0, 0.0f, &sp40);
+    Course_SplineGetBasis(temp_a0, 0.0f, &sp18, sp44);
     *arg0 = sp18;
     return arg0;
 }
@@ -75,7 +75,7 @@ void func_80074CE4(CourseInfo* arg0) {
 
     var_s0 = arg0->courseSegments;
     for (i = 0; i < arg0->segmentCount; i++) {
-        func_8009E538(var_s0, 0.0f, &spD4);
+        Course_SplineGetTangent(var_s0, 0.0f, &spD4);
         func_80074BB4(&spD4, 1);
         if ((SQ(spD4.x) + SQ(spD4.z)) != 0.0f) {
             spE8 = spD4.z;
@@ -92,8 +92,8 @@ void func_80074CE4(CourseInfo* arg0) {
         spF0 = ((spE0 * spD4.x) - (spE8 * spD4.z)) * -1.0f;
         spEC = ((spE8 * spD4.y) - (spE4 * spD4.x)) * -1.0f;
         func_80074B10(&spF4, &spF0, &spEC);
-        func_8006C520(NULL, &sp94, 1.0f, DEG_TO_FZXANG(gCourseData.bankAngle[i]), spD4.x, spD4.y, spD4.z, 0.0f, 0.0f,
-                      0.0f);
+        Matrix_SetAxisRotation(NULL, &sp94, 1.0f, DEG_TO_FZXANG(gCourseData.bankAngle[i]), spD4.x, spD4.y, spD4.z, 0.0f,
+                               0.0f, 0.0f);
         var_s0->unk_0C.x = sp94.m[0][0] * spF4 + sp94.m[1][0] * spF0 + sp94.m[2][0] * spEC;
         var_s0->unk_0C.y = sp94.m[0][1] * spF4 + sp94.m[1][1] * spF0 + sp94.m[2][1] * spEC;
         var_s0->unk_0C.z = sp94.m[0][2] * spF4 + sp94.m[1][2] * spF0 + sp94.m[2][2] * spEC;

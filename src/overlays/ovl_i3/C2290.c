@@ -263,7 +263,7 @@ void func_i3_8012F450(unk_8012F450* arg0) {
     }
 }
 
-Gfx* func_i3_DrawTimerScisThousandths(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale) {
+Gfx* Hud_DrawTimerScisThousandths(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale) {
     s32 offset = 0;
     s32 timeField;
 
@@ -503,11 +503,11 @@ Gfx* func_i3_UpdatePlayerHudInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex)
             D_i3_80141EA8[playerIndex].lapIntervalCounter = 90;
         }
         if ((lap == 2) && !sSecondLapStarted && (D_800E5FD0 != 0) && (gGameMode != GAMEMODE_PRACTICE)) {
-            func_800BA8D8(0x11);
+            Audio_TriggerSystemSE(0x11);
             sSecondLapStarted = true;
         }
         if ((lap == gTotalLapCount) && !sFinalLapStarted && (D_800E5FD0 != 0) && (gGameMode != GAMEMODE_PRACTICE)) {
-            func_800BA8D8(0x12);
+            Audio_TriggerSystemSE(0x12);
             sFinalLapStarted = true;
         }
     }
@@ -552,7 +552,7 @@ Gfx* func_i3_DrawEnergyBar(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 height;
     f32 scale;
 
-    if (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000) {
+    if (gRacers[playerIndex].stateFlags & RACER_STATE_FINISHED) {
         return gfx;
     }
 
@@ -579,7 +579,7 @@ Gfx* func_i3_DrawEnergyBar(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
 
     for (i = 0; i < height; i++) {
         gDPPipeSync(gfx++);
-        if (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_100000) {
+        if (gRacers[playerIndex].stateFlags & RACER_STATE_CAN_BOOST) {
             gDPSetFillColor(gfx++, sEnergyBarFillColors[i + 5]);
         } else {
             gDPSetFillColor(gfx++, sEnergyBarFillColors[i]);
@@ -602,7 +602,7 @@ Gfx* func_i3_DrawEnergyOutlineRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playe
     s32 height;
     f32 scale;
 
-    if (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000) {
+    if (gRacers[playerIndex].stateFlags & RACER_STATE_FINISHED) {
         return gfx;
     }
 
@@ -793,7 +793,7 @@ Gfx* func_i3_DrawPosition(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
         return gfx;
     }
 
-    if (gRacers[playerIndex].stateFlags & (RACER_STATE_FLAGS_2000000 | RACER_STATE_RETIRED)) {
+    if (gRacers[playerIndex].stateFlags & (RACER_STATE_FINISHED | RACER_STATE_RETIRED)) {
         sPositionScales[playerIndex] += 0.04f;
     }
 
@@ -916,7 +916,7 @@ Gfx* func_i3_DrawLapRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     if (gGameMode == GAMEMODE_DEATH_RACE) {
         return gfx;
     }
-    if (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000) {
+    if (gRacers[playerIndex].stateFlags & RACER_STATE_FINISHED) {
         return gfx;
     }
     if ((gPlayerMinimapLapCounterToggle[playerIndex] != 0) && (numPlayersIndex >= 2)) {
@@ -942,7 +942,7 @@ Gfx* func_i3_DrawLapCounter(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     if (gGameMode == GAMEMODE_DEATH_RACE) {
         return gfx;
     }
-    if (gRacers[playerIndex].stateFlags & RACER_STATE_FLAGS_2000000) {
+    if (gRacers[playerIndex].stateFlags & RACER_STATE_FINISHED) {
         return gfx;
     }
     if ((gPlayerMinimapLapCounterToggle[playerIndex] != 0) && (numPlayersIndex >= 2)) {
@@ -1006,8 +1006,9 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
 
             // Timer
             gDPPipeSync(gfx++);
-            gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gDPLoadTextureBlock(gfx++, aTimerSymbolsTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0,
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                G_TX_NOLOD, G_TX_NOLOD);
             gDPSetTextureFilter(gfx++, G_TF_POINT);
 
             gfx = func_i3_UpdatePlayerHudInfo(gfx, 0, 0);
@@ -1055,8 +1056,9 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
             gDPPipeSync(gfx++);
             gDPSetTextureFilter(gfx++, G_TF_POINT);
 
-            gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gDPLoadTextureBlock(gfx++, aTimerSymbolsTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0,
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                G_TX_NOLOD, G_TX_NOLOD);
 
             gfx = func_i3_UpdatePlayerHudInfo(gfx, 1, 0);
             gfx = func_i3_UpdatePlayerHudInfo(gfx, 1, 1);
@@ -1099,8 +1101,9 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
             // Timer
             gDPPipeSync(gfx++);
             gDPSetTextureFilter(gfx++, G_TF_POINT);
-            gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gDPLoadTextureBlock(gfx++, aTimerSymbolsTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0,
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                G_TX_NOLOD, G_TX_NOLOD);
 
             gfx = func_i3_UpdatePlayerHudInfo(gfx, 2, 0);
             gfx = func_i3_UpdatePlayerHudInfo(gfx, 2, 1);
@@ -1151,8 +1154,9 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
             gDPPipeSync(gfx++);
             gDPSetTextureFilter(gfx++, G_TF_POINT);
 
-            gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gDPLoadTextureBlock(gfx++, aTimerSymbolsTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0,
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                G_TX_NOLOD, G_TX_NOLOD);
 
             gfx = func_i3_UpdatePlayerHudInfo(gfx, 3, 0);
             gfx = func_i3_UpdatePlayerHudInfo(gfx, 3, 1);
@@ -1217,9 +1221,9 @@ void func_i3_UpdatePortraitScales(void) {
     s32 i;
 
     for (i = 0; i < gTotalRacers; i++) {
-        if (gRacers[i].stateFlags & RACER_STATE_FLAGS_2000000) {
+        if (gRacers[i].stateFlags & RACER_STATE_FINISHED) {
             sPortraitTextureScale[i] = 1.0f;
-        } else if (gRacers[i].stateFlags & RACER_STATE_FLAGS_80000) {
+        } else if (gRacers[i].stateFlags & RACER_STATE_FALLING_OFF_TRACK) {
             sPortraitTextureScale[i] -= 0.01f;
             if (sPortraitTextureScale[i] < 0.01f) {
                 sPortraitTextureScale[i] = 0.01f;
@@ -1237,7 +1241,7 @@ void func_i3_80132D78(void) {
 
     for (i = 0; i < 6; i++) {
         racer = gRacersByPosition[i];
-        if (racer->stateFlags & RACER_STATE_FLAGS_80000 && racer->position < 6) {
+        if (racer->stateFlags & RACER_STATE_FALLING_OFF_TRACK && racer->position < 6) {
             D_i3_8013F020[i][1] = 90;
             D_i3_8013F020[i][2] = racer->character;
         }
@@ -1634,7 +1638,7 @@ void func_i3_InitRacePortraits(void) {
 
 extern s32 gLivesChangeCounter;
 
-void func_i3_ResetLivesChangeCounter(void) {
+void Hud_ResetLivesChangeCounter(void) {
     gLivesChangeCounter = 0;
 }
 
@@ -1774,7 +1778,7 @@ Gfx* func_i3_DrawPracticeBestLap(Gfx* gfx) {
     }
 
     if (gStartNewBestLap) {
-        func_800BA8D8(0x38);
+        Audio_TriggerSystemSE(0x38);
         gStartNewBestLap = false;
         sPracticeBestLapCounter = 180;
     }

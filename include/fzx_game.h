@@ -24,6 +24,7 @@ typedef enum GameMode {
     /* 0x13 */ GAMEMODE_RECORDS_COURSE_SELECT,
     /* 0x14 */ GAMEMODE_OPTIONS_MENU,
     /* 0x15 */ GAMEMODE_DEATH_RACE,
+    /* 0x16 */ GAMEMODE_EAD_DEMO,
 } GameMode;
 
 #define GET_MODE(gamemode) (gamemode & 0x1F)
@@ -59,6 +60,46 @@ typedef enum ModeSelect {
     /* 6 */ MODE_OPTIONS,
     /* 7 */ MODE_CREATE_MACHINE,
 } ModeSelect;
+
+typedef enum GameModeChangeState {
+    /* 0 */ GAMEMODE_UPDATE,
+    /* 1 */ GAMEMODE_CHANGE_START,
+    /* 2 */ GAMEMODE_CHANGE_WAIT_TRANSITION,
+    /* 3 */ GAMEMODE_CHANGE_INIT,
+    /* 5 */ GAMEMODE_CHANGE_START_RELOAD = 5,
+    /* 6 */ GAMEMODE_CHANGE_WAIT_TRANSITION_RELOAD,
+} GameModeChangeState;
+
+#define GAMEMODE_CHANGE_UNK10(state) (state + 10)
+#define GAMEMODE_CHANGE_FAST(state) (state + 20)
+#define GAMEMODE_CHANGE_INSTANT(state) (state + 30)
+
+typedef enum MenuChangeMode {
+    /*  0 */ MENU_CHANGE_INACTIVE,
+    /*  1 */ MENU_CHANGE_RETRY,
+    /*  2 */ MENU_CHANGE_QUIT,
+    /*  3 */ MENU_CHANGE_CHANGE_COURSE,
+    /*  4 */ MENU_CHANGE_NEXT_COURSE,
+    /*  5 */ MENU_CHANGE_CRASH_RESTART,
+    /*  6 */ MENU_CHANGE_6,
+    /*  7 */ MENU_CHANGE_CHANGE_MACHINE,
+    /*  8 */ MENU_CHANGE_CHANGE_RECORD_COURSE,
+    /*  9 */ MENU_CHANGE_TO_RECORDS,
+    /* 10 */ MENU_CHANGE_EXIT_RECORDS,
+    /* 11 */ MENU_CHANGE_TO_COURSE_SELECT,
+    /* 12 */ MENU_CHANGE_EXIT_COURSE_SELECT,
+    /* 13 */ MENU_CHANGE_TO_OPTIONS,
+    /* 14 */ MENU_CHANGE_EXIT_OPTIONS,
+    /* 15 */ MENU_CHANGE_SETTINGS,
+    /* 16 */ MENU_CHANGE_16,
+} MenuChangeMode;
+
+typedef enum TitleDemoState {
+    /* 0 */ TITLE_DEMO_INACTIVE,
+    /* 1 */ TITLE_DEMO_ACTIVE,
+    /* 2 */ TITLE_DEMO_EXIT,
+    /* 3 */ TITLE_DEMO_START_EXIT,
+} TitleDemoState;
 
 typedef enum Difficulty {
     /* 0 */ NOVICE,
@@ -101,12 +142,14 @@ typedef enum Character {
 } Character;
 
 typedef enum Cup {
-    JACK_CUP,
-    QUEEN_CUP,
-    KING_CUP,
-    JOKER_CUP,
-    X_CUP,
-    EDIT_CUP,
+    /* 0 */ JACK_CUP,
+    /* 1 */ QUEEN_CUP,
+    /* 2 */ KING_CUP,
+    /* 3 */ JOKER_CUP,
+    /* 4 */ X_CUP,
+    /* 5 */ EDIT_CUP,
+    /* 6 */ DD_1_CUP,
+    /* 7 */ DD_2_CUP,
 } Cup;
 
 #endif // FZX_GAME_H

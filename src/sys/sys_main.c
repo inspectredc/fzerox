@@ -1,13 +1,17 @@
 #include "global.h"
-#include "fzx_thread.h"
 #include "audio.h"
+#include "fzx_thread.h"
 #include "PR/viint.h"
+#include "PR/leo.h"
 
 char sBootThreadStack[0x200];
 char sIdleThreadStack[0x200];
 char sMainThreadStack[0x400];
 char sGameThreadStack[0x1000];
 char sAudioThreadStack[0x800];
+#ifdef EXPANSION_KIT
+char sSys6ThreadStack[0x1000];
+#endif
 char sResetThreadStack[0x1200];
 UNUSED char sUnusedThreadStack[0xE00];
 OSThread sIdleThread;
@@ -15,7 +19,7 @@ OSThread sMainThread;
 OSThread sAudioThread;
 OSThread sGameThread;
 OSThread sResetThread;
-UNUSED OSThread sUnusedThread;
+OSThread sSys6Thread;
 OSMesgQueue sPiMgrCmdQueue;
 OSMesgQueue gDmaMesgQueue;
 OSMesgQueue gSerialEventQueue;
@@ -35,14 +39,22 @@ OSMesg sMainThreadMsgBuf[16];
 OSMesg sResetMsgBuf[1];
 OSMesg D_800DCC84[1];
 /*  */ UNUSED s8 D_800DCC88[0x20];
-OSIoMesg D_800DCCA8;
+#ifdef EXPANSION_KIT
+OSMesgQueue D_8079A2E8;
+OSMesg D_8079A300[1];
+#endif
+OSIoMesg gDmaIOMsg;
 OSTask* gCurGfxTask;
 OSTask* gCurAudioOSTask;
 bool gResetStarted;
-bool gLeoDDConnected;
+s32 gLeoDriveConnectionState;
 FrameBuffer* gFrameBuffers[3];
 OSPiHandle* gCartRomHandle;
 OSPiHandle* gDriveRomHandle;
+
+#ifdef EXPANSION_KIT
+#include "src/assets/boot_logo/boot_logo.c"
+#endif
 
 void Idle_ThreadEntry(void*);
 void Reset_ThreadEntry(void*);
@@ -51,6 +63,41 @@ void bootproc(void) {
     osInitialize();
     osCreateMesgQueue(&gResetMesgQueue, sResetMsgBuf, ARRAY_COUNT(sResetMsgBuf));
     osSetEventMesg(OS_EVENT_PRENMI, &gResetMesgQueue, (void*) 0x1B);
+#ifdef EXPANSION_KIT
+    {
+        u64* ptr;
+        u32 i;
+        ptr = (u64*) sIdleThreadStack;
+
+        for (i = 0; i < sizeof(sIdleThreadStack) / sizeof(u64); i++) {
+            ptr[i] = 0x8877665544332211;
+        }
+
+        ptr = (u64*) sMainThreadStack;
+
+        for (i = 0; i < sizeof(sMainThreadStack) / sizeof(u64); i++) {
+            ptr[i] = 0x8877665544332211;
+        }
+
+        ptr = (u64*) sGameThreadStack;
+
+        for (i = 0; i < sizeof(sGameThreadStack) / sizeof(u64); i++) {
+            ptr[i] = 0x8877665544332211;
+        }
+
+        ptr = (u64*) sSys6ThreadStack;
+
+        for (i = 0; i < sizeof(sSys6ThreadStack) / sizeof(u64); i++) {
+            ptr[i] = 0x8877665544332211;
+        }
+
+        ptr = (u64*) sAudioThreadStack;
+
+        for (i = 0; i < sizeof(sAudioThreadStack) / sizeof(u64); i++) {
+            ptr[i] = 0x8877665544332211;
+        }
+    }
+#endif
     osCreateThread(&sIdleThread, THREAD_ID_IDLE, Idle_ThreadEntry, NULL, sIdleThreadStack + sizeof(sIdleThreadStack),
                    100);
     osStartThread(&sIdleThread);
@@ -112,12 +159,17 @@ void Main_ThreadEntry(void* arg0) {
     osCreateMesgQueue(&gMainThreadMesgQueue, sMainThreadMsgBuf, ARRAY_COUNT(sMainThreadMsgBuf));
     osCreateMesgQueue(&gSerialEventQueue, sSerialEventBuf, ARRAY_COUNT(sSerialEventBuf));
     osCreateMesgQueue(&D_800DCB10, D_800DCC84, ARRAY_COUNT(D_800DCC84));
+#ifdef EXPANSION_KIT
+    osCreateMesgQueue(&D_8079A2E8, D_8079A300, ARRAY_COUNT(D_8079A300));
+#endif
     osSetEventMesg(OS_EVENT_SI, &gSerialEventQueue, (OSMesg) EVENT_MESG_SI);
     osSetEventMesg(OS_EVENT_SP, &gMainThreadMesgQueue, (OSMesg) EVENT_MESG_SP);
     osSetEventMesg(OS_EVENT_DP, &gMainThreadMesgQueue, (OSMesg) EVENT_MESG_DP);
     osViSetEvent(&gMainThreadMesgQueue, (OSMesg) EVENT_MESG_VI, 1);
+
+#ifndef EXPANSION_KIT
     gResetStarted = false;
-    gLeoDDConnected = LeoDD_CheckPresence();
+    gLeoDriveConnectionState = LeoDD_CheckPresence();
     var_v1 = (u64*) gFrameBuffers[0];
 
     // clang-format off
@@ -149,7 +201,7 @@ void Main_ThreadEntry(void* arg0) {
     if (gRamDDCompatible) {
         Dma_ClearRomCopy(SEGMENT_ROM_START(leo), SEGMENT_VRAM_START(leo), SEGMENT_ROM_SIZE(leo));
         bzero(SEGMENT_BSS_START(leo), SEGMENT_BSS_SIZE(leo));
-        if (gLeoDDConnected) {
+        if (gLeoDriveConnectionState != 0) {
             LeoDD_LoadFonts();
         }
 #ifdef VERSION_JP
@@ -157,39 +209,102 @@ void Main_ThreadEntry(void* arg0) {
 #else
         func_800751FC("EFZE");
 #endif
-        if (gLeoDDConnected) {
+        if (gLeoDriveConnectionState != 0) {
             func_80076340();
         }
     }
+#else // EXPANSION_KIT
+    DiskDrive_InitRomSegmentPairs();
+
+    switch (osResetType) {
+        case OS_TV_PAL:
+        case OS_TV_NTSC:
+            gRamDDCompatible = true;
+            break;
+        case OS_TV_MPAL:
+            gRamDDCompatible = true;
+            break;
+    }
+
+    if (gRamDDCompatible) {
+        gLeoDriveConnectionState = LeoDriveExist();
+        gDriveRomHandle = osDriveRomInit();
+        if (gLeoDriveConnectionState != 0) {
+            LeoFault_LoadFontSet();
+        }
+        func_80704DB0("01", leoBootID.gameName);
+
+        for (i = 0; i < 3; i++) {
+            var_v0 = &gFrameBuffers[i]->buffer[19199];
+
+            while (var_v0 >= gFrameBuffers[i]->buffer) {
+                *var_v0-- = 0x0001000100010001;
+            }
+        }
+
+        osViSwapBuffer(gFrameBuffers[0]);
+
+        while (osViGetCurrentFramebuffer() != gFrameBuffers[0]) {}
+
+        osViBlack(false);
+
+        DiskMount_Init();
+    }
+#endif
 
     osCreateThread(&sResetThread, THREAD_ID_RESET, Reset_ThreadEntry, NULL,
                    sResetThreadStack + sizeof(sResetThreadStack), 100);
     osStartThread(&sResetThread);
 
-    if (gRamDDCompatible && gLeoDDConnected) {
+#ifndef EXPANSION_KIT
+    if (gRamDDCompatible && (gLeoDriveConnectionState != 0)) {
         func_800763A8();
     }
-    if (gRamDDCompatible && gLeoDDConnected && (func_800761D4() == 2)) {
+    if (gRamDDCompatible && (gLeoDriveConnectionState != 0) && (func_800761D4() == 2)) {
         func_8007515C();
     }
+#endif
+
     osViSwapBuffer(gFrameBuffers[1]);
 
     while (osViGetCurrentFramebuffer() != gFrameBuffers[1]) {}
 
+#ifndef EXPANSION_KIT
     func_80069F5C(gFrameBuffers[0]);
+#else // EXPANSION_KIT
+    func_806F33D0(gFrameBuffers[0]);
+    func_806F33D0(gFrameBuffers[1]);
+    func_806F33D0(gFrameBuffers[2]);
+#endif
     osViSwapBuffer(gFrameBuffers[0]);
 
     while (osViGetCurrentFramebuffer() != gFrameBuffers[0]) {}
 
     osViBlack(false);
 
-    if (gRamDDCompatible && gLeoDDConnected) {
+#ifndef EXPANSION_KIT
+    if (gRamDDCompatible && (gLeoDriveConnectionState != 0)) {
         LeoDD_LoadFonts();
 #ifdef VERSION_JP
         func_8007647C();
 #endif
     }
+#else // EXPANSION_KIT
+    if (gRamDDCompatible) {
+        osCreateThread(&sSys6Thread, THREAD_ID_6, func_80767958, 0, sSys6ThreadStack + sizeof(sSys6ThreadStack), 30);
+        if (gLeoDriveConnectionState == 1) {
+            osStartThread(&sSys6Thread);
+            gLeoDriveConnectionState = 2;
+        }
+    }
+#endif
+
     func_80075230(&sGameThread);
+
+#ifdef EXPANSION_KIT
+    AudioLoad_SetDmaHandler(func_80768C08);
+    AudioLoad_SetLeoHandler(func_80768AF0);
+#endif
 
     osCreateThread(&sAudioThread, THREAD_ID_AUDIO, Audio_ThreadEntry, NULL,
                    sAudioThreadStack + sizeof(sAudioThreadStack), 20);
@@ -232,6 +347,9 @@ void Main_ThreadEntry(void* arg0) {
             }
         } else if (msg == (OSMesg) EVENT_MESG_VI) {
             osSendMesg(&gAudioTaskMesgQueue, (OSMesg) EVENT_MESG_NEXT_AUDIO_TASK, OS_MESG_NOBLOCK);
+#ifdef EXPANSION_KIT
+            osSendMesg(&D_8079A2E8, (OSMesg) 1, OS_MESG_NOBLOCK);
+#endif
             if ((++D_800CCFB0 - D_800CCFB4) >= D_800CCFB8) {
                 D_800CCFB4 = D_800CCFB0;
                 D_800CCFB8 = D_800CCFBC;
@@ -280,7 +398,9 @@ void Idle_ThreadEntry(void* arg0) {
     osViBlack(true);
     osCreatePiManager(OS_PRIORITY_PIMGR, &sPiMgrCmdQueue, sPiMgrCmdBuf, ARRAY_COUNT(sPiMgrCmdBuf));
     gCartRomHandle = osCartRomInit();
+#ifndef EXPANSION_KIT
     gDriveRomHandle = osDriveRomInit();
+#endif
     Fault_Init();
     Fault_SetFrameBuffer(&gFrameBuffer1, SCREEN_WIDTH, 16);
     osCreateThread(&sMainThread, THREAD_ID_MAIN, Main_ThreadEntry, NULL, sMainThreadStack + sizeof(sMainThreadStack),
@@ -305,10 +425,35 @@ void Reset_ThreadEntry(void* arg0) {
     gResetStarted = true;
     osViBlack(true);
     osViSetYScale(1.0f);
-    if (gRamDDCompatible && gLeoDDConnected) {
+    if (gRamDDCompatible && (gLeoDriveConnectionState != 0)) {
         LeoReset();
     }
-    func_80069700();
+    Controller_Reset();
 
     while (true) {}
 }
+
+#ifdef EXPANSION_KIT
+void func_806F33D0(FrameBuffer* fb) {
+    u64* var_s0 = &fb->array[SCREEN_HEIGHT - 1][SCREEN_WIDTH - 4];
+    u64* var;
+    s32 i;
+    s32 j;
+
+    // Very FAKE Throughout
+    while (var_s0 >= fb->buffer) {
+        *(--var_s0 + 1) = 0x1000100010001;
+    }
+    osWritebackDCache(fb, sizeof(FrameBuffer));
+
+    var_s0 = &fb->array[100][92];
+
+    for (i = 0; i < 39; i++) {
+        for (j = 0; j < 34; j++) {
+            var = &D_80769DF0[i * 136 + j * 4];
+            var_s0[j] = *var;
+        }
+        var_s0 += 80;
+    }
+}
+#endif

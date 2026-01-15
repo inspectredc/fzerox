@@ -33,7 +33,7 @@ s16 gRacerPositionsById[30];
 s32 D_80115DD0[4];
 s16 gRacersRemaining;
 
-void func_i2_801044F0(void) {
+void Effects_Init(void) {
     s32 i;
 
     D_80111CF0 = D_80111CF4 = 0;
@@ -81,7 +81,7 @@ void func_i2_801044F0(void) {
 
 extern s8 gGamePaused;
 
-void func_i2_8010466C(void) {
+void Effects_Update(void) {
     u32 var_s2;
     s32 var_s3;
     f32 temp_fv0;
@@ -147,9 +147,9 @@ void func_i2_8010466C(void) {
 
         if (var2->unk_3C != 0) {
             Racer* racer = var2->unk_40;
-            var2->unk_00.x += var2->unk_0C.x -= 0.4f * racer->unk_A8.x;
-            var2->unk_00.y += var2->unk_0C.y -= 0.4f * racer->unk_A8.y;
-            var2->unk_00.z += var2->unk_0C.z -= 0.4f * racer->unk_A8.z;
+            var2->unk_00.x += var2->unk_0C.x -= 0.4f * racer->gravityUp.x;
+            var2->unk_00.y += var2->unk_0C.y -= 0.4f * racer->gravityUp.y;
+            var2->unk_00.z += var2->unk_0C.z -= 0.4f * racer->gravityUp.z;
 
             temp_fv1 = 1.0f / sqrtf(SQ(var2->unk_0C.x) + SQ(var2->unk_0C.y) + SQ(var2->unk_0C.z));
             var2->unk_18.x = var2->unk_0C.x * temp_fv1;
@@ -204,15 +204,15 @@ void func_i2_8010466C(void) {
             temp_fs2 = (((Math_Rand1() & 0x1FFFF) / 131071.0f) * 1.8f) - 0.9f;
             temp_fs0 = (((Math_Rand1() & 0x1FFFF) / 131071.0f) * 0.4f) + 0.4f;
             temp_fs1 = (((Math_Rand1() & 0x1FFFF) / 131071.0f) * 1.8f) - 0.9f;
-            func_i2_801058FC(((s32) (Math_Rand1() % 16) - 8) + racer->unk_0C.unk_34.x,
-                             ((s32) (Math_Rand1() % 16) - 8) + racer->unk_0C.unk_34.y,
-                             ((s32) (Math_Rand1() % 16) - 8) + racer->unk_0C.unk_34.z,
-                             racer->velocity.x + (temp_fs2 * racer->unk_C0.z.x) + (temp_fs0 * racer->unk_C0.y.x) +
-                                 (temp_fs1 * racer->unk_C0.x.x),
-                             racer->velocity.y + (temp_fs2 * racer->unk_C0.z.y) + (temp_fs0 * racer->unk_C0.y.y) +
-                                 (temp_fs1 * racer->unk_C0.x.y),
-                             racer->velocity.z + (temp_fs2 * racer->unk_C0.z.z) + (temp_fs0 * racer->unk_C0.y.z) +
-                                 (temp_fs1 * racer->unk_C0.x.z),
+            func_i2_801058FC(((s32) (Math_Rand1() % 16) - 8) + racer->segmentPositionInfo.pos.x,
+                             ((s32) (Math_Rand1() % 16) - 8) + racer->segmentPositionInfo.pos.y,
+                             ((s32) (Math_Rand1() % 16) - 8) + racer->segmentPositionInfo.pos.z,
+                             racer->velocity.x + (temp_fs2 * racer->trueBasis.z.x) + (temp_fs0 * racer->trueBasis.y.x) +
+                                 (temp_fs1 * racer->trueBasis.x.x),
+                             racer->velocity.y + (temp_fs2 * racer->trueBasis.z.y) + (temp_fs0 * racer->trueBasis.y.y) +
+                                 (temp_fs1 * racer->trueBasis.x.y),
+                             racer->velocity.z + (temp_fs2 * racer->trueBasis.z.z) + (temp_fs0 * racer->trueBasis.y.z) +
+                                 (temp_fs1 * racer->trueBasis.x.z),
                              30.0f, var3->unk_08);
         }
     }
@@ -241,9 +241,9 @@ void func_i2_8010466C(void) {
             var4->unk_18.y += var4->unk_30.y + (temp_fv0 * var4->unk_3C.y);
             var4->unk_18.z += var4->unk_30.z + (temp_fv0 * var4->unk_3C.z);
 
-            var4->unk_30.x = (var4->unk_30.x * 0.98f) - (0.2f * var4->unk_54->unk_A8.x);
-            var4->unk_30.y = (var4->unk_30.y * 0.98f) - (0.2f * var4->unk_54->unk_A8.y);
-            var4->unk_30.z = (var4->unk_30.z * 0.98f) - (0.2f * var4->unk_54->unk_A8.z);
+            var4->unk_30.x = (var4->unk_30.x * 0.98f) - (0.2f * var4->unk_54->gravityUp.x);
+            var4->unk_30.y = (var4->unk_30.y * 0.98f) - (0.2f * var4->unk_54->gravityUp.y);
+            var4->unk_30.z = (var4->unk_30.z * 0.98f) - (0.2f * var4->unk_54->gravityUp.z);
             var4->unk_4E = 255 - (s32) (SIN(var4->unk_24.x & 0x7FF) * 255.0f);
         } else {
             D_80115D44--;

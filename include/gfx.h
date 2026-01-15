@@ -5,16 +5,12 @@
 #include "macros.h"
 
 typedef union {
+    u64 buffer[SCREEN_HEIGHT * SCREEN_WIDTH / 4];
     u16 data[SCREEN_HEIGHT * SCREEN_WIDTH];
     u16 array[SCREEN_HEIGHT][SCREEN_WIDTH];
 } FrameBuffer; // size = 0x25800
 
-typedef struct ScissorBox {
-    u32 left;
-    u32 top;
-    u32 right;
-    u32 bottom;
-} ScissorBox;
+#define PACK_5551(r, g, b, a) (((((r) << 11) | ((g) << 6)) | ((b) << 1)) | (a))
 
 /**
  * `x` vertex x
@@ -34,12 +30,12 @@ typedef struct ScissorBox {
     { { x, y, z }, 0, { s, t }, { cr, cg, cb, a }, }
 
 #define SET_VTX(vtx, x, y, z, s, t, cr, cg, cb, a) \
-    (vtx)->v.ob[0] = ((x) & 0xFFFF);               \
-    (vtx)->v.ob[1] = ((y) & 0xFFFF);               \
-    (vtx)->v.ob[2] = ((z) & 0xFFFF);               \
+    ((u16*)((vtx)->v.ob))[0] = ((x) & 0xFFFF);     \
+    ((u16*)((vtx)->v.ob))[1] = ((y) & 0xFFFF);     \
+    ((u16*)((vtx)->v.ob))[2] = ((z) & 0xFFFF);     \
     (vtx)->v.flag = 0;                             \
-    (vtx)->v.tc[0] = ((s) & 0xFFFF);               \
-    (vtx)->v.tc[1] = ((t) & 0xFFFF);               \
+    ((u16*)((vtx)->v.tc))[0] = ((s) & 0xFFFF);     \
+    ((u16*)((vtx)->v.tc))[1] = ((t) & 0xFFFF);     \
     (vtx)->v.cn[0] = cr;                           \
     (vtx)->v.cn[1] = cg;                           \
     (vtx)->v.cn[2] = cb;                           \

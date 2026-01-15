@@ -14,6 +14,60 @@
 #include "other_types.h"
 #include "segment_symbols.h"
 
+#ifndef EXPANSION_KIT
+#define CLEAR_OVERLAY_CACHE(textStart, textSize, dataStart, dataSize)  \
+    {                                                                  \
+        osInvalICache(textStart, textSize);                            \
+        osInvalDCache(dataStart, dataSize);                            \
+    }
+
+#define CLEAR_TEXT_CACHE(vaddr, nbytes)        \
+    {                                          \
+        osInvalICache(vaddr, nbytes);          \
+    }
+
+#define CLEAR_DATA_CACHE(vaddr, nbytes)        \
+    {                                          \
+        osInvalDCache(vaddr, nbytes);          \
+    }
+#else
+#define CLEAR_OVERLAY_CACHE(textStart, textSize, dataStart, dataSize)  \
+    {                                                                  \
+        OSIntMask prevMask = osGetIntMask();                           \
+        osSetIntMask(OS_IM_NONE);                                      \
+        osInvalICache(textStart, textSize);                            \
+        osInvalDCache(dataStart, dataSize);                            \
+        osSetIntMask(prevMask);                                        \
+    }
+
+#define CLEAR_TEXT_CACHE(vaddr, nbytes)        \
+    {                                          \
+        OSIntMask prevMask = osGetIntMask();   \
+        osSetIntMask(OS_IM_NONE);              \
+        osInvalICache(vaddr, nbytes);          \
+        osSetIntMask(prevMask);                \
+    }
+
+#define CLEAR_DATA_CACHE(vaddr, nbytes)        \
+    {                                          \
+        OSIntMask prevMask = osGetIntMask();   \
+        osSetIntMask(OS_IM_NONE);              \
+        osInvalDCache(vaddr, nbytes);          \
+        osSetIntMask(prevMask);                \
+    }
+#endif
+
+#ifndef EXPANSION_KIT
+#define ARENA_COUNT 3
+#else
+#define ARENA_COUNT 4
+#endif
+
+typedef enum AllocType {
+    ALLOC_FRONT,
+    ALLOC_PEEK,
+    ALLOC_BACK,
+} AllocType;
 
 // FAKE!!
 typedef struct unk_Light_t {
@@ -30,7 +84,7 @@ typedef union unk_Light {
 
 typedef struct GfxPool {
     Gfx gfxBuffer[8193];
-    Vtx unk_10008[4096];
+    Vtx courseVtxBuffer[4096];
     Mtx unk_20008[4];
     Mtx unk_20108[4];
     Mtx unk_20208[4];
@@ -41,11 +95,11 @@ typedef struct GfxPool {
     Lights1 unk_21A88[4];
     unk_Light unk_21AE8[4];
     LookAt unk_21B28;
-    Vtx unk_21B48[2048];
+    Vtx effectsVtxBuffer[2048];
     Vtx unk_29B48[28];
     Vtx unk_29D08[4];
     s8 pad_29D48[0x500];
-    Vtx unk_2A248[256];
+    Vtx backgroundTileVtxBuffer[256];
     Mtx unk_2B248[1];
     Mtx unk_2B288[1];
     Mtx unk_2B2C8[64];

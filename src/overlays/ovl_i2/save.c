@@ -435,7 +435,7 @@ s32 Save_SaveCourseRecordProfiles(s32 courseIndex) {
     return 0;
 }
 
-extern s32 gRamDDCompatible;
+extern bool gRamDDCompatible;
 void Save_SaveEditCup(SaveEditCup*);
 
 s32 Save_SaveEditCupProfiles(void) {
@@ -903,7 +903,7 @@ void Save_SaveSettings(SaveSettings* saveSettings) {
     if (gSettingSoundMode != 0) {
         settingLowerFlags |= 4;
     }
-    if (gSettingEverythingUnlocked != 0) {
+    if (gSettingEverythingUnlocked) {
         settingLowerFlags |= 8;
     }
 
@@ -1188,9 +1188,9 @@ void Save_LoadSaveSettings(ProfileSave* profileSaves, bool arg1) {
         gSettingSoundMode = 0;
     }
     if (saveSettings->settings & 8) {
-        gSettingEverythingUnlocked = 1;
+        gSettingEverythingUnlocked = true;
     } else {
-        gSettingEverythingUnlocked = 0;
+        gSettingEverythingUnlocked = false;
     }
 
     for (i = JACK_CUP; i <= JOKER_CUP; i++) {

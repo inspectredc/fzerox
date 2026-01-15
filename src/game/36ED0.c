@@ -3,6 +3,7 @@
 #include "fzx_game.h"
 #include "fzx_course.h"
 #include "fzx_math.h"
+#include "fzx_camera.h"
 #include "fzx_segmentA.h"
 #include "assets/segment_16C8A0.h"
 
@@ -48,7 +49,7 @@ CourseInfo* gCurrentCourseInfo;
 s32 gCourseIndex;
 s32 D_800F8518;
 unk_36ED0* D_800F851C;
-Vtx* D_800F8520;
+Vtx* gCourseVtxPtr;
 s32 D_800F8524;
 unk_800A8B74_arg_0 D_800F8528[64];
 s32 D_800F8928;
@@ -368,7 +369,7 @@ void func_8009CED0(s32 venue) {
     }
 }
 
-s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) {
+s32 func_8009D16C(RacerSegmentPositionInfo* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) {
     s32 i;
     Vec3f sp130;
     CourseSegment* var_s1_2;
@@ -393,13 +394,13 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
     CourseSegment* var_s1;
     CourseSegment* var_s2;
     CourseSegment* var_s3;
-    Racer_unk_C sp88;
+    RacerSegmentPositionInfo sp88;
 
     i = 3;
 
-    sp130.x = arg1 - arg0->unk_44.x;
-    sp130.y = arg2 - arg0->unk_44.y;
-    sp130.z = arg3 - arg0->unk_44.z;
+    sp130.x = arg1 - arg0->lastGroundedPos.x;
+    sp130.y = arg2 - arg0->lastGroundedPos.y;
+    sp130.z = arg3 - arg0->lastGroundedPos.z;
 
     var_s0 = arg0->courseSegment;
     var_s1 = var_s0->next;
@@ -413,15 +414,15 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
     sp78 = (sp10C - 3.0f) + var_fs4;
     sp74 = sp78 + var_fs4;
 
-    sp88.unk_04 = arg0->unk_04;
+    sp88.segmentTValue = arg0->segmentTValue;
     sp88.courseSegment = arg0->courseSegment;
-    sp88.unk_0C = arg0->unk_0C;
-    sp88.unk_18 = arg0->unk_18;
+    sp88.segmentForward = arg0->segmentForward;
+    sp88.segmentForwardMagnitude = arg0->segmentForwardMagnitude;
 
     while ((SQ_SUM(&sp130) > 5.0f) && (--i != 0)) {
-        sp88.unk_04 += (DOT_XYZ(&sp130, &sp88.unk_0C) / SQ(sp88.unk_18));
-        if (sp88.unk_04 >= 1.0f) {
-            if (sp88.unk_04 > 1.9f) {
+        sp88.segmentTValue += (DOT_XYZ(&sp130, &sp88.segmentForward) / SQ(sp88.segmentForwardMagnitude));
+        if (sp88.segmentTValue >= 1.0f) {
+            if (sp88.segmentTValue > 1.9f) {
                 return -1;
             }
             sp88.courseSegment = sp88.courseSegment->next;
@@ -433,10 +434,11 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
             sp114 = var_fs4 - 2.0f;
             sp110 = sp114 - 1.0f;
             sp10C = sp110 + var_fs4;
-            sp88.unk_04 -= 1.0f;
-            sp88.unk_04 *= (sp88.unk_18 / func_8009E538(sp88.courseSegment, 0.0f, &sp130));
-        } else if (sp88.unk_04 < 0.0f) {
-            if (sp88.unk_04 < -0.9f) {
+            sp88.segmentTValue -= 1.0f;
+            sp88.segmentTValue *=
+                (sp88.segmentForwardMagnitude / Course_SplineGetTangent(sp88.courseSegment, 0.0f, &sp130));
+        } else if (sp88.segmentTValue < 0.0f) {
+            if (sp88.segmentTValue < -0.9f) {
                 return -1;
             }
             sp88.courseSegment = sp88.courseSegment->prev;
@@ -449,61 +451,62 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
             sp110 = sp114 - 1.0f;
             sp10C = sp110 + var_fs4;
 
-            sp88.unk_04 *= (sp88.unk_18 / func_8009E538(sp88.courseSegment, 1.0f, &sp130));
-            sp88.unk_04 += 1.0f;
+            sp88.segmentTValue *=
+                (sp88.segmentForwardMagnitude / Course_SplineGetTangent(sp88.courseSegment, 1.0f, &sp130));
+            sp88.segmentTValue += 1.0f;
         }
-        tSquare = SQ(sp88.unk_04);
-        tCube = tSquare * sp88.unk_04;
-        temp_fa0 = (((2.0f * tSquare) - sp88.unk_04) - tCube) * var_fs4;
+        tSquare = SQ(sp88.segmentTValue);
+        tCube = tSquare * sp88.segmentTValue;
+        temp_fa0 = (((2.0f * tSquare) - sp88.segmentTValue) - tCube) * var_fs4;
         temp_fa1 = ((sp110 * tSquare) - sp114 * tCube) + 1.0f;
-        temp_ft4 = (sp114 * tCube - (sp10C * tSquare)) + (var_fs4 * sp88.unk_04);
+        temp_ft4 = (sp114 * tCube - (sp10C * tSquare)) + (var_fs4 * sp88.segmentTValue);
         spE8 = (tCube - tSquare) * var_fs4;
 
-        sp88.unk_1C.x = (temp_fa0 * var_s2->pos.x) + (temp_fa1 * var_s0->pos.x) + (temp_ft4 * var_s1->pos.x) +
-                        (spE8 * var_s3->pos.x);
-        sp88.unk_1C.y = (temp_fa0 * var_s2->pos.y) + (temp_fa1 * var_s0->pos.y) + (temp_ft4 * var_s1->pos.y) +
-                        (spE8 * var_s3->pos.y);
-        sp88.unk_1C.z = (temp_fa0 * var_s2->pos.z) + (temp_fa1 * var_s0->pos.z) + (temp_ft4 * var_s1->pos.z) +
-                        (spE8 * var_s3->pos.z);
+        sp88.segmentPos.x = (temp_fa0 * var_s2->pos.x) + (temp_fa1 * var_s0->pos.x) + (temp_ft4 * var_s1->pos.x) +
+                            (spE8 * var_s3->pos.x);
+        sp88.segmentPos.y = (temp_fa0 * var_s2->pos.y) + (temp_fa1 * var_s0->pos.y) + (temp_ft4 * var_s1->pos.y) +
+                            (spE8 * var_s3->pos.y);
+        sp88.segmentPos.z = (temp_fa0 * var_s2->pos.z) + (temp_fa1 * var_s0->pos.z) + (temp_ft4 * var_s1->pos.z) +
+                            (spE8 * var_s3->pos.z);
 
         sp78 = (sp10C - 3.0f) + var_fs4;
         sp74 = sp78 + var_fs4;
 
-        temp_fa0 = (((4.0f * sp88.unk_04) - 1.0f) - (3.0f * tSquare)) * var_fs4;
-        temp_fa1 = ((sp10C - 3.0f) * sp88.unk_04) - sp78 * tSquare;
-        temp_ft4 = (sp78 * tSquare - (sp74 * sp88.unk_04)) + var_fs4;
-        spE8 = ((3.0f * tSquare) - (2.0f * sp88.unk_04)) * var_fs4;
+        temp_fa0 = (((4.0f * sp88.segmentTValue) - 1.0f) - (3.0f * tSquare)) * var_fs4;
+        temp_fa1 = ((sp10C - 3.0f) * sp88.segmentTValue) - sp78 * tSquare;
+        temp_ft4 = (sp78 * tSquare - (sp74 * sp88.segmentTValue)) + var_fs4;
+        spE8 = ((3.0f * tSquare) - (2.0f * sp88.segmentTValue)) * var_fs4;
 
-        sp88.unk_0C.x = (temp_fa0 * var_s2->pos.x) + (temp_fa1 * var_s0->pos.x) + (temp_ft4 * var_s1->pos.x) +
-                        (spE8 * var_s3->pos.x);
-        sp88.unk_0C.y = (temp_fa0 * var_s2->pos.y) + (temp_fa1 * var_s0->pos.y) + (temp_ft4 * var_s1->pos.y) +
-                        (spE8 * var_s3->pos.y);
-        sp88.unk_0C.z = (temp_fa0 * var_s2->pos.z) + (temp_fa1 * var_s0->pos.z) + (temp_ft4 * var_s1->pos.z) +
-                        (spE8 * var_s3->pos.z);
+        sp88.segmentForward.x = (temp_fa0 * var_s2->pos.x) + (temp_fa1 * var_s0->pos.x) + (temp_ft4 * var_s1->pos.x) +
+                                (spE8 * var_s3->pos.x);
+        sp88.segmentForward.y = (temp_fa0 * var_s2->pos.y) + (temp_fa1 * var_s0->pos.y) + (temp_ft4 * var_s1->pos.y) +
+                                (spE8 * var_s3->pos.y);
+        sp88.segmentForward.z = (temp_fa0 * var_s2->pos.z) + (temp_fa1 * var_s0->pos.z) + (temp_ft4 * var_s1->pos.z) +
+                                (spE8 * var_s3->pos.z);
 
-        sp88.unk_18 = sqrtf(SQ_SUM(&sp88.unk_0C));
+        sp88.segmentForwardMagnitude = sqrtf(SQ_SUM(&sp88.segmentForward));
 
-        sp88.unk_28.x = arg1 - sp88.unk_1C.x;
-        sp88.unk_28.y = arg2 - sp88.unk_1C.y;
-        sp88.unk_28.z = arg3 - sp88.unk_1C.z;
+        sp88.segmentDisplacement.x = arg1 - sp88.segmentPos.x;
+        sp88.segmentDisplacement.y = arg2 - sp88.segmentPos.y;
+        sp88.segmentDisplacement.z = arg3 - sp88.segmentPos.z;
 
-        sp88.unk_40 = sqrtf(SQ_SUM(&sp88.unk_28));
+        sp88.distanceFromSegment = sqrtf(SQ_SUM(&sp88.segmentDisplacement));
 
-        if (sp88.unk_40 < 0.001f) {
+        if (sp88.distanceFromSegment < 0.001f) {
             break;
         }
-        sp88.unk_34.x = CROSS_X(&sp88.unk_28, &sp88.unk_0C);
-        sp88.unk_34.y = CROSS_Y(&sp88.unk_28, &sp88.unk_0C);
-        sp88.unk_34.z = CROSS_Z(&sp88.unk_28, &sp88.unk_0C);
+        sp88.pos.x = CROSS_X(&sp88.segmentDisplacement, &sp88.segmentForward);
+        sp88.pos.y = CROSS_Y(&sp88.segmentDisplacement, &sp88.segmentForward);
+        sp88.pos.z = CROSS_Z(&sp88.segmentDisplacement, &sp88.segmentForward);
 
-        sp88.unk_28.x = CROSS_X(&sp88.unk_0C, &sp88.unk_34);
-        sp88.unk_28.y = CROSS_Y(&sp88.unk_0C, &sp88.unk_34);
-        sp88.unk_28.z = CROSS_Z(&sp88.unk_0C, &sp88.unk_34);
+        sp88.segmentDisplacement.x = CROSS_X(&sp88.segmentForward, &sp88.pos);
+        sp88.segmentDisplacement.y = CROSS_Y(&sp88.segmentForward, &sp88.pos);
+        sp88.segmentDisplacement.z = CROSS_Z(&sp88.segmentForward, &sp88.pos);
 
-        temp_fv1 = sp88.unk_40 / sqrtf(SQ_SUM(&sp88.unk_28));
-        sp130.x = arg1 - ((sp88.unk_28.x * temp_fv1) + sp88.unk_1C.x);
-        sp130.y = arg2 - ((sp88.unk_28.y * temp_fv1) + sp88.unk_1C.y);
-        sp130.z = arg3 - ((sp88.unk_28.z * temp_fv1) + sp88.unk_1C.z);
+        temp_fv1 = sp88.distanceFromSegment / sqrtf(SQ_SUM(&sp88.segmentDisplacement));
+        sp130.x = arg1 - ((sp88.segmentDisplacement.x * temp_fv1) + sp88.segmentPos.x);
+        sp130.y = arg2 - ((sp88.segmentDisplacement.y * temp_fv1) + sp88.segmentPos.y);
+        sp130.z = arg3 - ((sp88.segmentDisplacement.z * temp_fv1) + sp88.segmentPos.z);
     }
 
     var_s1_2 = sp88.courseSegment;
@@ -511,13 +514,13 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
     var_v1 = var_s1_2->prev;
     var_a0 = var_v0->next;
 
-    tSquare = SQ(sp88.unk_04);
+    tSquare = SQ(sp88.segmentTValue);
 
     var_fs4 = var_s1_2->unk_24;
-    temp_fa0 = (((4.0f * sp88.unk_04) - 1.0f) - 3.0f * tSquare) * var_fs4;
-    temp_fa1 = ((6.0f - 3.0f * var_fs4) * tSquare) + (((2.0f * var_fs4) - 6.0f) * sp88.unk_04);
-    temp_ft4 = ((3.0f * var_fs4 - 6.0f) * tSquare) + ((6.0f - (4.0f * var_fs4)) * sp88.unk_04) + var_fs4;
-    spE8 = (3.0f * tSquare - (2.0f * sp88.unk_04)) * var_fs4;
+    temp_fa0 = (((4.0f * sp88.segmentTValue) - 1.0f) - 3.0f * tSquare) * var_fs4;
+    temp_fa1 = ((6.0f - 3.0f * var_fs4) * tSquare) + (((2.0f * var_fs4) - 6.0f) * sp88.segmentTValue);
+    temp_ft4 = ((3.0f * var_fs4 - 6.0f) * tSquare) + ((6.0f - (4.0f * var_fs4)) * sp88.segmentTValue) + var_fs4;
+    spE8 = (3.0f * tSquare - (2.0f * sp88.segmentTValue)) * var_fs4;
 
     arg4->x.x =
         (temp_fa0 * var_v1->pos.x) + (temp_fa1 * var_s1_2->pos.x) + (temp_ft4 * var_v0->pos.x) + (spE8 * var_a0->pos.x);
@@ -531,9 +534,9 @@ s32 func_8009D16C(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) 
     arg4->x.y *= temp_fv1;
     arg4->x.z *= temp_fv1;
 
-    arg4->y.x = ((var_s1_2->next->unk_0C.x - var_s1_2->unk_0C.x) * sp88.unk_04) + var_s1_2->unk_0C.x;
-    arg4->y.y = ((var_s1_2->next->unk_0C.y - var_s1_2->unk_0C.y) * sp88.unk_04) + var_s1_2->unk_0C.y;
-    arg4->y.z = ((var_s1_2->next->unk_0C.z - var_s1_2->unk_0C.z) * sp88.unk_04) + var_s1_2->unk_0C.z;
+    arg4->y.x = ((var_s1_2->next->unk_0C.x - var_s1_2->unk_0C.x) * sp88.segmentTValue) + var_s1_2->unk_0C.x;
+    arg4->y.y = ((var_s1_2->next->unk_0C.y - var_s1_2->unk_0C.y) * sp88.segmentTValue) + var_s1_2->unk_0C.y;
+    arg4->y.z = ((var_s1_2->next->unk_0C.z - var_s1_2->unk_0C.z) * sp88.segmentTValue) + var_s1_2->unk_0C.z;
 
     arg4->z.x = CROSS_X(&arg4->y, &arg4->x);
     arg4->z.y = CROSS_Y(&arg4->y, &arg4->x);
@@ -648,42 +651,42 @@ s32 func_8009DEAC(CourseInfo* arg0) {
 }
 
 // Get Rough Racer Lap Distance
-f32 func_8009DFA0(Racer_unk_C* arg0) {
+f32 func_8009DFA0(RacerSegmentPositionInfo* arg0) {
     f32 length;
     Vec3f posDiff;
 
-    if (arg0->unk_04 < 0.5f) {
-        if (arg0->unk_04 < 0.25f) {
+    if (arg0->segmentTValue < 0.5f) {
+        if (arg0->segmentTValue < 0.25f) {
             length = 0.0f;
-            posDiff.x = arg0->unk_1C.x - arg0->courseSegment->pos.x;
-            posDiff.y = arg0->unk_1C.y - arg0->courseSegment->pos.y;
-            posDiff.z = arg0->unk_1C.z - arg0->courseSegment->pos.z;
+            posDiff.x = arg0->segmentPos.x - arg0->courseSegment->pos.x;
+            posDiff.y = arg0->segmentPos.y - arg0->courseSegment->pos.y;
+            posDiff.z = arg0->segmentPos.z - arg0->courseSegment->pos.z;
         } else {
             length = arg0->courseSegment->quarterMarkLength;
-            posDiff.x = arg0->unk_1C.x - arg0->courseSegment->quarterMarkPos.x;
-            posDiff.y = arg0->unk_1C.y - arg0->courseSegment->quarterMarkPos.y;
-            posDiff.z = arg0->unk_1C.z - arg0->courseSegment->quarterMarkPos.z;
+            posDiff.x = arg0->segmentPos.x - arg0->courseSegment->quarterMarkPos.x;
+            posDiff.y = arg0->segmentPos.y - arg0->courseSegment->quarterMarkPos.y;
+            posDiff.z = arg0->segmentPos.z - arg0->courseSegment->quarterMarkPos.z;
         }
-    } else if (arg0->unk_04 < 0.75f) {
+    } else if (arg0->segmentTValue < 0.75f) {
         length = arg0->courseSegment->halfMarkLength;
-        posDiff.x = arg0->unk_1C.x - arg0->courseSegment->halfMarkPos.x;
-        posDiff.y = arg0->unk_1C.y - arg0->courseSegment->halfMarkPos.y;
-        posDiff.z = arg0->unk_1C.z - arg0->courseSegment->halfMarkPos.z;
+        posDiff.x = arg0->segmentPos.x - arg0->courseSegment->halfMarkPos.x;
+        posDiff.y = arg0->segmentPos.y - arg0->courseSegment->halfMarkPos.y;
+        posDiff.z = arg0->segmentPos.z - arg0->courseSegment->halfMarkPos.z;
     } else {
         length = arg0->courseSegment->threeQuarterMarkLength;
-        posDiff.x = arg0->unk_1C.x - arg0->courseSegment->threeQuarterMarkPos.x;
-        posDiff.y = arg0->unk_1C.y - arg0->courseSegment->threeQuarterMarkPos.y;
-        posDiff.z = arg0->unk_1C.z - arg0->courseSegment->threeQuarterMarkPos.z;
+        posDiff.x = arg0->segmentPos.x - arg0->courseSegment->threeQuarterMarkPos.x;
+        posDiff.y = arg0->segmentPos.y - arg0->courseSegment->threeQuarterMarkPos.y;
+        posDiff.z = arg0->segmentPos.z - arg0->courseSegment->threeQuarterMarkPos.z;
     }
 
     length += sqrtf(SQ(posDiff.x) + SQ(posDiff.y) + SQ(posDiff.z));
-    arg0->unk_08 = length / arg0->courseSegment->length;
+    arg0->segmentLengthProportion = length / arg0->courseSegment->length;
     return arg0->courseSegment->lengthFromStart + length;
 }
 
 // Get Length Into Course Segment
 // Returns Length proprtion along the track
-f32 func_8009E108(CourseSegment* arg0, f32 arg1, f32* arg2) {
+f32 Course_SplineGetLengthInfo(CourseSegment* arg0, f32 arg1, f32* arg2) {
     f32 spDC;
     f32 spD8;
     f32 spD4;
@@ -772,7 +775,7 @@ f32 func_8009E108(CourseSegment* arg0, f32 arg1, f32* arg2) {
 }
 
 // Get un-normalised tangent vector along course segment (and magnitude)
-f32 func_8009E538(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
+f32 Course_SplineGetTangent(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
     f32 square;
     f32 temp_fv0;
     f32 sp44;
@@ -799,7 +802,7 @@ f32 func_8009E538(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
 }
 
 // Get position along course segment
-void func_8009E6F0(CourseSegment* segment, f32 t, Vec3f* pos) {
+void Course_SplineGetPosition(CourseSegment* segment, f32 t, Vec3f* pos) {
     f32 temp_fv0;
     f32 tSquare;
     f32 tCube;
@@ -829,7 +832,7 @@ void func_8009E6F0(CourseSegment* segment, f32 t, Vec3f* pos) {
 
 // Get tangent matrix (forward = tangent vector, up = up, left-right = horizontal road slope vector)
 // Returns magnitude of tangent
-f32 func_8009E85C(CourseSegment* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
+f32 Course_SplineGetBasis(CourseSegment* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
     f32 temp_fa0;
     f32 sp50;
     f32 sp4C;
@@ -879,7 +882,7 @@ f32 func_8009E85C(CourseSegment* arg0, f32 arg1, Mtx3F* arg2, f32 arg3) {
     return sp50;
 }
 
-s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 i, f32 arg5) {
+s32 func_8009EBEC(RacerSegmentPositionInfo* arg0, f32 arg1, f32 arg2, f32 arg3, s32 i, f32 arg5) {
     s32 pad2;
     Vec3f spD0;
     f32 temp_ft4;
@@ -900,9 +903,9 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 i, f32 ar
     CourseSegment* segment;
     CourseSegment* nextSegment;
 
-    spD0.x = arg1 - arg0->unk_44.x;
-    spD0.y = arg2 - arg0->unk_44.y;
-    spD0.z = arg3 - arg0->unk_44.z;
+    spD0.x = arg1 - arg0->lastGroundedPos.x;
+    spD0.y = arg2 - arg0->lastGroundedPos.y;
+    spD0.z = arg3 - arg0->lastGroundedPos.z;
 
     segment = arg0->courseSegment;
     nextSegment = segment->next;
@@ -918,10 +921,10 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 i, f32 ar
     spB4 = sp78 + var_fs3;
     while ((arg5 < (SQ_SUM(&spD0))) && (--i != 0)) {
 
-        arg0->unk_04 += DOT_XYZ(&spD0, &arg0->unk_0C) / SQ(arg0->unk_18);
+        arg0->segmentTValue += DOT_XYZ(&spD0, &arg0->segmentForward) / SQ(arg0->segmentForwardMagnitude);
 
-        if (arg0->unk_04 >= 1.0f) {
-            if (arg0->unk_04 > 1.9f) {
+        if (arg0->segmentTValue >= 1.0f) {
+            if (arg0->segmentTValue > 1.9f) {
                 return -1;
             }
             arg0->courseSegment = arg0->courseSegment->next;
@@ -937,11 +940,12 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 i, f32 ar
             sp78 = spBC + var_fs3;
 
             spB4 = sp78 + var_fs3;
-            arg0->unk_04 -= 1.0f;
+            arg0->segmentTValue -= 1.0f;
 
-            arg0->unk_04 *= arg0->unk_18 / func_8009E538(arg0->courseSegment, 0.0f, &spD0);
-        } else if (arg0->unk_04 < 0.0f) {
-            if (arg0->unk_04 < -0.9f) {
+            arg0->segmentTValue *=
+                arg0->segmentForwardMagnitude / Course_SplineGetTangent(arg0->courseSegment, 0.0f, &spD0);
+        } else if (arg0->segmentTValue < 0.0f) {
+            if (arg0->segmentTValue < -0.9f) {
                 return -1;
             }
             arg0->courseSegment = arg0->courseSegment->prev;
@@ -957,78 +961,79 @@ s32 func_8009EBEC(Racer_unk_C* arg0, f32 arg1, f32 arg2, f32 arg3, s32 i, f32 ar
             sp78 = spBC + var_fs3;
             spB4 = sp78 + var_fs3;
 
-            arg0->unk_04 *= arg0->unk_18 / func_8009E538(arg0->courseSegment, 1.0f, &spD0);
-            arg0->unk_04 += 1.0f;
+            arg0->segmentTValue *=
+                arg0->segmentForwardMagnitude / Course_SplineGetTangent(arg0->courseSegment, 1.0f, &spD0);
+            arg0->segmentTValue += 1.0f;
         }
 
-        square = SQ(arg0->unk_04);
+        square = SQ(arg0->segmentTValue);
         // FAKE
-        temp_fv1 = arg0->unk_04 * (0, square);
-        temp_ft4 = (((2.0f * square) - arg0->unk_04) - temp_fv1) * var_fs3;
+        temp_fv1 = arg0->segmentTValue * (0, square);
+        temp_ft4 = (((2.0f * square) - arg0->segmentTValue) - temp_fv1) * var_fs3;
         temp_ft5 = (((var_fs5 - 1.0f) * square) - var_fs5 * temp_fv1) + 1.0f;
-        temp_fs1 = (var_fs5 * temp_fv1 - (((var_fs5 - 1.0f) + var_fs3) * square)) + (var_fs3 * arg0->unk_04);
+        temp_fs1 = (var_fs5 * temp_fv1 - (((var_fs5 - 1.0f) + var_fs3) * square)) + (var_fs3 * arg0->segmentTValue);
         temp_fs2 = (temp_fv1 - square) * var_fs3;
 
-        arg0->unk_1C.x = (temp_ft4 * prevSegment->pos.x) + (temp_ft5 * segment->pos.x) +
-                         (temp_fs1 * nextSegment->pos.x) + (temp_fs2 * nextNextSegment->pos.x);
-        arg0->unk_1C.y = (temp_ft4 * prevSegment->pos.y) + (temp_ft5 * segment->pos.y) +
-                         (temp_fs1 * nextSegment->pos.y) + (temp_fs2 * nextNextSegment->pos.y);
-        arg0->unk_1C.z = (temp_ft4 * prevSegment->pos.z) + (temp_ft5 * segment->pos.z) +
-                         (temp_fs1 * nextSegment->pos.z) + (temp_fs2 * nextNextSegment->pos.z);
+        arg0->segmentPos.x = (temp_ft4 * prevSegment->pos.x) + (temp_ft5 * segment->pos.x) +
+                             (temp_fs1 * nextSegment->pos.x) + (temp_fs2 * nextNextSegment->pos.x);
+        arg0->segmentPos.y = (temp_ft4 * prevSegment->pos.y) + (temp_ft5 * segment->pos.y) +
+                             (temp_fs1 * nextSegment->pos.y) + (temp_fs2 * nextNextSegment->pos.y);
+        arg0->segmentPos.z = (temp_ft4 * prevSegment->pos.z) + (temp_ft5 * segment->pos.z) +
+                             (temp_fs1 * nextSegment->pos.z) + (temp_fs2 * nextNextSegment->pos.z);
 
-        temp_ft4 = (((arg0->unk_04 * 4.0f) - 1.0f) - (3.0f * square)) * var_fs3;
-        temp_ft5 = (arg0->unk_04 * spBC) - sp78 * square;
-        temp_fs1 = (sp78 * square - (spB4 * arg0->unk_04)) + var_fs3;
-        temp_fs2 = ((3.0f * square) - (2.0f * arg0->unk_04)) * var_fs3;
+        temp_ft4 = (((arg0->segmentTValue * 4.0f) - 1.0f) - (3.0f * square)) * var_fs3;
+        temp_ft5 = (arg0->segmentTValue * spBC) - sp78 * square;
+        temp_fs1 = (sp78 * square - (spB4 * arg0->segmentTValue)) + var_fs3;
+        temp_fs2 = ((3.0f * square) - (2.0f * arg0->segmentTValue)) * var_fs3;
 
-        arg0->unk_0C.x = (temp_ft4 * prevSegment->pos.x) + (temp_ft5 * segment->pos.x) +
-                         (temp_fs1 * nextSegment->pos.x) + (temp_fs2 * nextNextSegment->pos.x);
-        arg0->unk_0C.y = (temp_ft4 * prevSegment->pos.y) + (temp_ft5 * segment->pos.y) +
-                         (temp_fs1 * nextSegment->pos.y) + (temp_fs2 * nextNextSegment->pos.y);
-        arg0->unk_0C.z = (temp_ft4 * prevSegment->pos.z) + (temp_ft5 * segment->pos.z) +
-                         (temp_fs1 * nextSegment->pos.z) + (temp_fs2 * nextNextSegment->pos.z);
+        arg0->segmentForward.x = (temp_ft4 * prevSegment->pos.x) + (temp_ft5 * segment->pos.x) +
+                                 (temp_fs1 * nextSegment->pos.x) + (temp_fs2 * nextNextSegment->pos.x);
+        arg0->segmentForward.y = (temp_ft4 * prevSegment->pos.y) + (temp_ft5 * segment->pos.y) +
+                                 (temp_fs1 * nextSegment->pos.y) + (temp_fs2 * nextNextSegment->pos.y);
+        arg0->segmentForward.z = (temp_ft4 * prevSegment->pos.z) + (temp_ft5 * segment->pos.z) +
+                                 (temp_fs1 * nextSegment->pos.z) + (temp_fs2 * nextNextSegment->pos.z);
 
-        arg0->unk_18 = sqrtf(SQ_SUM(&arg0->unk_0C));
-        arg0->unk_28.x = arg1 - arg0->unk_1C.x;
-        arg0->unk_28.y = arg2 - arg0->unk_1C.y;
-        arg0->unk_28.z = arg3 - arg0->unk_1C.z;
-        arg0->unk_40 = sqrtf(SQ_SUM(&arg0->unk_28));
+        arg0->segmentForwardMagnitude = sqrtf(SQ_SUM(&arg0->segmentForward));
+        arg0->segmentDisplacement.x = arg1 - arg0->segmentPos.x;
+        arg0->segmentDisplacement.y = arg2 - arg0->segmentPos.y;
+        arg0->segmentDisplacement.z = arg3 - arg0->segmentPos.z;
+        arg0->distanceFromSegment = sqrtf(SQ_SUM(&arg0->segmentDisplacement));
 
-        if (arg0->unk_40 < 0.001f) {
+        if (arg0->distanceFromSegment < 0.001f) {
             break;
         }
 
-        arg0->unk_34.x = CROSS_X(&arg0->unk_28, &arg0->unk_0C);
-        arg0->unk_34.y = CROSS_Y(&arg0->unk_28, &arg0->unk_0C);
-        arg0->unk_34.z = CROSS_Z(&arg0->unk_28, &arg0->unk_0C);
+        arg0->pos.x = CROSS_X(&arg0->segmentDisplacement, &arg0->segmentForward);
+        arg0->pos.y = CROSS_Y(&arg0->segmentDisplacement, &arg0->segmentForward);
+        arg0->pos.z = CROSS_Z(&arg0->segmentDisplacement, &arg0->segmentForward);
 
-        arg0->unk_28.x = CROSS_X(&arg0->unk_0C, &arg0->unk_34);
-        arg0->unk_28.y = CROSS_Y(&arg0->unk_0C, &arg0->unk_34);
-        arg0->unk_28.z = CROSS_Z(&arg0->unk_0C, &arg0->unk_34);
+        arg0->segmentDisplacement.x = CROSS_X(&arg0->segmentForward, &arg0->pos);
+        arg0->segmentDisplacement.y = CROSS_Y(&arg0->segmentForward, &arg0->pos);
+        arg0->segmentDisplacement.z = CROSS_Z(&arg0->segmentForward, &arg0->pos);
 
-        temp_fa0 = arg0->unk_40 / sqrtf(SQ_SUM(&arg0->unk_28));
+        temp_fa0 = arg0->distanceFromSegment / sqrtf(SQ_SUM(&arg0->segmentDisplacement));
 
-        arg0->unk_28.x *= temp_fa0;
-        arg0->unk_44.x = temp_fv1 = arg0->unk_28.x + arg0->unk_1C.x;
-        spD0.x = arg1 - arg0->unk_44.x;
+        arg0->segmentDisplacement.x *= temp_fa0;
+        arg0->lastGroundedPos.x = temp_fv1 = arg0->segmentDisplacement.x + arg0->segmentPos.x;
+        spD0.x = arg1 - arg0->lastGroundedPos.x;
 
-        arg0->unk_28.y *= temp_fa0;
-        arg0->unk_44.y = temp_fv1 = arg0->unk_28.y + arg0->unk_1C.y;
-        spD0.y = arg2 - arg0->unk_44.y;
+        arg0->segmentDisplacement.y *= temp_fa0;
+        arg0->lastGroundedPos.y = temp_fv1 = arg0->segmentDisplacement.y + arg0->segmentPos.y;
+        spD0.y = arg2 - arg0->lastGroundedPos.y;
 
-        arg0->unk_28.z *= temp_fa0;
-        arg0->unk_44.z = temp_fv1 = arg0->unk_28.z + arg0->unk_1C.z;
-        spD0.z = arg3 - arg0->unk_44.z;
+        arg0->segmentDisplacement.z *= temp_fa0;
+        arg0->lastGroundedPos.z = temp_fv1 = arg0->segmentDisplacement.z + arg0->segmentPos.z;
+        spD0.z = arg3 - arg0->lastGroundedPos.z;
     }
 
-    arg0->unk_28.x = arg1 - arg0->unk_1C.x;
-    arg0->unk_28.y = arg2 - arg0->unk_1C.y;
-    arg0->unk_28.z = arg3 - arg0->unk_1C.z;
+    arg0->segmentDisplacement.x = arg1 - arg0->segmentPos.x;
+    arg0->segmentDisplacement.y = arg2 - arg0->segmentPos.y;
+    arg0->segmentDisplacement.z = arg3 - arg0->segmentPos.z;
 
-    arg0->unk_34.x = arg1;
-    arg0->unk_34.y = arg2;
-    arg0->unk_34.z = arg3;
-    arg0->unk_40 = sqrtf(SQ_SUM(&arg0->unk_28));
+    arg0->pos.x = arg1;
+    arg0->pos.y = arg2;
+    arg0->pos.z = arg3;
+    arg0->distanceFromSegment = sqrtf(SQ_SUM(&arg0->segmentDisplacement));
 
     return 0;
 }
@@ -1041,8 +1046,8 @@ s32 func_8009F334(CourseInfo* arg0) {
         sp30.y.x = var_s0->unk_0C.x;
         sp30.y.y = var_s0->unk_0C.y;
         sp30.y.z = var_s0->unk_0C.z;
-        func_8009E538(var_s0, 0.0f, &sp30.x);
-        if (func_8006AA38(&sp30) != 0) {
+        Course_SplineGetTangent(var_s0, 0.0f, &sp30.x);
+        if (Math_OrthonormalizeAroundForward(&sp30) != 0) {
             return -1;
         }
         var_s0->unk_0C.x = sp30.y.x;
@@ -1156,14 +1161,14 @@ void func_8009F508(CourseInfo* arg0) {
     arg0->courseSegments->lengthFromStart = 0.0f;
     var_s1 = arg0->courseSegments;
     do {
-        func_8009E6F0(var_s1, 0.25f, &var_s1->quarterMarkPos);
-        func_8009E6F0(var_s1, 0.5f, &var_s1->halfMarkPos);
-        func_8009E6F0(var_s1, 0.75f, &var_s1->threeQuarterMarkPos);
-        func_8009E108(var_s1, 0.25f, &var_s1->quarterMarkLength);
+        Course_SplineGetPosition(var_s1, 0.25f, &var_s1->quarterMarkPos);
+        Course_SplineGetPosition(var_s1, 0.5f, &var_s1->halfMarkPos);
+        Course_SplineGetPosition(var_s1, 0.75f, &var_s1->threeQuarterMarkPos);
+        Course_SplineGetLengthInfo(var_s1, 0.25f, &var_s1->quarterMarkLength);
         var_s1->quarterMarkLength -= var_s1->lengthFromStart;
-        func_8009E108(var_s1, 0.5f, &var_s1->halfMarkLength);
+        Course_SplineGetLengthInfo(var_s1, 0.5f, &var_s1->halfMarkLength);
         var_s1->halfMarkLength -= var_s1->lengthFromStart;
-        func_8009E108(var_s1, 0.75f, &var_s1->threeQuarterMarkLength);
+        Course_SplineGetLengthInfo(var_s1, 0.75f, &var_s1->threeQuarterMarkLength);
         var_s1->threeQuarterMarkLength -= var_s1->lengthFromStart;
         var_s1 = var_s1->next;
     } while (var_s1 != arg0->courseSegments);
@@ -1269,9 +1274,9 @@ void func_8009FC84(CourseInfo* arg0) {
 
     do {
         var_s0->trackSegmentInfo &= ~TRACK_FORM_MASK;
-        func_8009E85C(var_s0, 0.0f, &sp110, 0.0f);
-        func_8009E85C(var_s0, 0.5f, &spEC, 0.5f);
-        func_8009E85C(var_s0, 1.0f, &spC8, 1.0f);
+        Course_SplineGetBasis(var_s0, 0.0f, &sp110, 0.0f);
+        Course_SplineGetBasis(var_s0, 0.5f, &spEC, 0.5f);
+        Course_SplineGetBasis(var_s0, 1.0f, &spC8, 1.0f);
         sp98.x = CROSS_X(&sp110.x, &spEC.x);
         sp98.y = CROSS_Y(&sp110.x, &spEC.x);
         sp98.z = CROSS_Z(&sp110.x, &spEC.x);
@@ -1280,9 +1285,9 @@ void func_8009FC84(CourseInfo* arg0) {
         sp8C.z = CROSS_Z(&spEC.x, &spC8.x);
         sp88 = DOT_XYZ(&sp98, &spEC.y);
         sp7C = DOT_XYZ(&sp8C, &spEC.y);
-        func_8009E6F0(var_s0, 0.0f, &spBC);
-        func_8009E6F0(var_s0, 0.5f, &spB0);
-        func_8009E6F0(var_s0, 1.0f, &spA4);
+        Course_SplineGetPosition(var_s0, 0.0f, &spBC);
+        Course_SplineGetPosition(var_s0, 0.5f, &spB0);
+        Course_SplineGetPosition(var_s0, 1.0f, &spA4);
         temp_fs0 = func_8009F87C(&sp110, &spEC, &spBC, &spB0);
         temp_fv0 = func_8009F87C(&spEC, &spC8, &spB0, &spA4);
         if (temp_fs0 != 0.0f) {
@@ -1680,7 +1685,7 @@ f32 func_800A15C8(CourseSegment* arg0) {
         arg0->unk_68 = 0.0f;
         var_fs1 = 0.0f;
         do {
-            temp_fv1 = 50.0f / func_8009E538(arg0, arg0->unk_68, &sp58);
+            temp_fv1 = 50.0f / Course_SplineGetTangent(arg0, arg0->unk_68, &sp58);
             arg0->unk_68 += temp_fv1;
 
             if (arg0->unk_68 >= 1.0f) {
@@ -1700,7 +1705,7 @@ f32 func_800A15C8(CourseSegment* arg0) {
 
         var_fs1 = 0.0f;
         do {
-            temp_fv1 = 50.0f / func_8009E538(arg0, arg0->unk_6C, &sp58);
+            temp_fv1 = 50.0f / Course_SplineGetTangent(arg0, arg0->unk_6C, &sp58);
             arg0->unk_6C -= temp_fv1;
             if (arg0->unk_6C <= 0.0f) {
                 var_fs3 = var_fs1;
@@ -1712,7 +1717,7 @@ f32 func_800A15C8(CourseSegment* arg0) {
         arg0->unk_70 = var_fs1 / arg0->length;
     } else if (!(arg0->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) &&
                (arg0->next->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
-        arg0->unk_6C = 1.0f - (100.0f / func_8009E538(arg0, 1.0f, &sp58));
+        arg0->unk_6C = 1.0f - (100.0f / Course_SplineGetTangent(arg0, 1.0f, &sp58));
     } else {
         arg0->unk_6C = 99.0f;
     }
@@ -1837,8 +1842,8 @@ s32 func_800A1954(CourseInfo* arg0) {
         D_802A9FC0[0].trackSegmentInfo |= TRACK_JOIN_NEXT;
     }
     spB8 = func_800A15C8(var_s1);
-    sp280 = func_8009E85C(var_s1, 0.0f, &spEC, 0.0f);
-    func_8009E6F0(var_s1, 0.0f, &D_802A9FC0[0].unk_14);
+    sp280 = Course_SplineGetBasis(var_s1, 0.0f, &spEC, 0.0f);
+    Course_SplineGetPosition(var_s1, 0.0f, &D_802A9FC0[0].unk_14);
     if (D_802A9FC0[0].trackSegmentInfo & 0x600) {
         func_800A0458(D_802A9FC0, var_s1->radiusLeft, var_s1->radiusRight, &spEC, &sp254, &sp248, &sp23C, &sp230,
                       &sp224);
@@ -1905,7 +1910,7 @@ s32 func_800A1954(CourseInfo* arg0) {
                 if (var_s4->trackSegmentInfo & TRACK_FLAG_CONTINUOUS) {
                     if (var_fs1 < 2.0f) {
                         var_fs1 -= 1.0f;
-                        var_fs1 *= (sp280 / func_8009E538(var_s4, 0.0f, &spEC.x));
+                        var_fs1 *= (sp280 / Course_SplineGetTangent(var_s4, 0.0f, &spEC.x));
                     } else {
                         var_fs1 = 0.0f;
                     }
@@ -1930,11 +1935,11 @@ s32 func_800A1954(CourseInfo* arg0) {
         }
 
         sp8C = &var_s0->unk_14;
-        sp284 = func_8009E108(var_s1, var_fs1, &sp274);
+        sp284 = Course_SplineGetLengthInfo(var_s1, var_fs1, &sp274);
         sp27C = ((var_s4->radiusLeft - var_s1->radiusLeft) * sp284) + var_s1->radiusLeft;
         sp278 = ((var_s4->radiusRight - var_s1->radiusRight) * sp284) + var_s1->radiusRight;
-        sp280 = func_8009E85C(var_s1, var_fs1, &spEC, sp284);
-        func_8009E6F0(var_s1, var_fs1, sp8C);
+        sp280 = Course_SplineGetBasis(var_s1, var_fs1, &spEC, sp284);
+        Course_SplineGetPosition(var_s1, var_fs1, sp8C);
         D_800CF908[TRACK_SHAPE_INDEX((u32) var_s1->trackSegmentInfo & TRACK_SHAPE_MASK)](
             var_s0, sp27C, sp278, &spEC, &sp218, &sp20C, &sp200, &sp1F4, &sp1E8);
         spE8 += func_800A18A8(&sp218, &sp1DC);
@@ -2209,8 +2214,8 @@ s32 func_800A2D2C(CourseInfo* arg0, Vtx* arg1) {
     D_800F89E8 = 3000.0f;
     var_s0 = arg0->courseSegments;
     var_fs1 = 0.0f;
-    var_fs2 = func_8009E85C(var_s0, 0.0f, &sp80, 0.0f);
-    func_8009E6F0(var_s0, 0.0f, &spA4);
+    var_fs2 = Course_SplineGetBasis(var_s0, 0.0f, &sp80, 0.0f);
+    Course_SplineGetPosition(var_s0, 0.0f, &spA4);
     var_s3 = func_800A2BDC(arg1, &spA4, &sp80);
     spBC.x = sp80.x.x;
     spBC.y = sp80.x.y;
@@ -2224,14 +2229,14 @@ s32 func_800A2D2C(CourseInfo* arg0, Vtx* arg1) {
             var_s0 = var_s0->next;
             var_fs1 -= 1.0f;
             if (var_s0 != arg0->courseSegments) {
-                var_fs1 *= (var_fs2 / func_8009E538(var_s0, 0.0f, &spA4));
+                var_fs1 *= (var_fs2 / Course_SplineGetTangent(var_s0, 0.0f, &spA4));
             } else {
                 break;
             }
         }
 
-        var_fs2 = func_8009E85C(var_s0, var_fs1, &sp80, func_8009E108(var_s0, var_fs1, &spD0));
-        func_8009E6F0(var_s0, var_fs1, &spA4);
+        var_fs2 = Course_SplineGetBasis(var_s0, var_fs1, &sp80, Course_SplineGetLengthInfo(var_s0, var_fs1, &spD0));
+        Course_SplineGetPosition(var_s0, var_fs1, &spA4);
         if (func_800A1818(&spB0, &spBC, &spA4) != 0) {
 
             spBC.x = spA4.x - spB0.x;
@@ -2272,7 +2277,7 @@ extern s32 gRandSeed1;
 extern s32 gRandMask1;
 extern s32 gRandSeed2;
 extern s32 gRandMask2;
-extern s8 D_800CD010;
+extern s8 gTitleDemoState;
 extern s32 gGameMode;
 extern CourseData gCourseData;
 
@@ -2305,7 +2310,7 @@ void Course_GenerateRandomCourse(void) {
     f32 var_fs1;
 
     // Restore random generation seeding if track is re-done
-    if ((gGameMode == GAMEMODE_GP_RACE) && (D_800CD010 == 0) && (gCourseIndex == gLastRandomCourseIndex)) {
+    if ((gGameMode == GAMEMODE_GP_RACE) && (gTitleDemoState == 0) && (gCourseIndex == gLastRandomCourseIndex)) {
         Math_Rand1Init(sRandomCourseInitSeed1, sRandomCourseInitMask1);
         Math_Rand2Init(sRandomCourseInitSeed2, sRandomCourseInitMask2);
     }
@@ -2394,10 +2399,10 @@ void Course_GenerateRandomCourse(void) {
                 var_s0 = gCurrentCourseInfo->courseSegments;
 
                 do {
-                    func_8009E6F0(var_s0, 0.333333f, &spCC);
+                    Course_SplineGetPosition(var_s0, 0.333333f, &spCC);
                     var_s1_2->pos = spCC;
                     var_s1_2++;
-                    func_8009E6F0(var_s0, 0.666667f, &spCC);
+                    Course_SplineGetPosition(var_s0, 0.666667f, &spCC);
                     var_s1_2->pos = spCC;
                     var_s0 = var_s0->next;
                     var_s1_2++;
@@ -2908,8 +2913,8 @@ void func_800A4BAC(void) {
     D_800F8958[1].unk_28 = D_8014640;
     D_800F8958[1].unk_2C = 8;
 
-    var_a0 = &D_8024DCE0[0].unk_10008[0xFFF];
-    var_v1 = &D_8024DCE0[1].unk_10008[0xFFF];
+    var_a0 = &D_8024DCE0[0].courseVtxBuffer[0xFFF];
+    var_v1 = &D_8024DCE0[1].courseVtxBuffer[0xFFF];
     // FAKE
     goto dummy;
 dummy:;
@@ -2919,7 +2924,7 @@ dummy:;
 
         var_a0--;
         var_v1--;
-    } while ((u32) var_v1 >= (u32) D_8024DCE0[1].unk_10008);
+    } while ((u32) var_v1 >= (u32) D_8024DCE0[1].courseVtxBuffer);
 
     func_800A4B54();
 }
@@ -2967,7 +2972,7 @@ void func_800A4DF0(void) {
 
 extern s32 gNumPlayers;
 
-void func_800A4EAC(void) {
+void Course_Init(void) {
     CourseSegment* segment;
 
     if (gCourseIndex >= ARRAY_COUNT(gCourseInfos)) {
@@ -3005,68 +3010,68 @@ void func_800A4EAC(void) {
     D_800F8950 += D_800CF524 - 1000.0f;
 }
 
-void func_800A5028(void) {
+void Course_Update(void) {
 }
 
 void func_800A5030(unk_36ED0* arg0) {
-    D_800F8520[0].v.ob[0] = arg0->unk_20[0];
-    D_800F8520[0].v.ob[1] = arg0->unk_20[1];
-    D_800F8520[0].v.ob[2] = arg0->unk_20[2];
-    D_800F8520[1].v.ob[0] = arg0->unk_3E[0];
-    D_800F8520[1].v.ob[1] = arg0->unk_3E[1];
-    D_800F8520[1].v.ob[2] = arg0->unk_3E[2];
-    D_800F8520[2].v.ob[0] = arg0->unk_44[0];
-    D_800F8520[2].v.ob[1] = arg0->unk_44[1];
-    D_800F8520[2].v.ob[2] = arg0->unk_44[2];
-    D_800F8520[3].v.ob[0] = arg0->unk_4A[0];
-    D_800F8520[3].v.ob[1] = arg0->unk_4A[1];
-    D_800F8520[3].v.ob[2] = arg0->unk_4A[2];
-    D_800F8520[4].v.ob[0] = arg0->unk_26[0];
-    D_800F8520[4].v.ob[1] = arg0->unk_26[1];
-    D_800F8520[4].v.ob[2] = arg0->unk_26[2];
-    D_800F8520[5].v.ob[0] = arg0->unk_38[0];
-    D_800F8520[5].v.ob[1] = arg0->unk_38[1];
-    D_800F8520[5].v.ob[2] = arg0->unk_38[2];
-    D_800F8520[6].v.ob[0] = arg0->unk_32[0];
-    D_800F8520[6].v.ob[1] = arg0->unk_32[1];
-    D_800F8520[6].v.ob[2] = arg0->unk_32[2];
-    D_800F8520[7].v.ob[0] = arg0->unk_2C[0];
-    D_800F8520[7].v.ob[1] = arg0->unk_2C[1];
-    D_800F8520[7].v.ob[2] = arg0->unk_2C[2];
-    D_800F8520 += 8;
+    gCourseVtxPtr[0].v.ob[0] = arg0->unk_20[0];
+    gCourseVtxPtr[0].v.ob[1] = arg0->unk_20[1];
+    gCourseVtxPtr[0].v.ob[2] = arg0->unk_20[2];
+    gCourseVtxPtr[1].v.ob[0] = arg0->unk_3E[0];
+    gCourseVtxPtr[1].v.ob[1] = arg0->unk_3E[1];
+    gCourseVtxPtr[1].v.ob[2] = arg0->unk_3E[2];
+    gCourseVtxPtr[2].v.ob[0] = arg0->unk_44[0];
+    gCourseVtxPtr[2].v.ob[1] = arg0->unk_44[1];
+    gCourseVtxPtr[2].v.ob[2] = arg0->unk_44[2];
+    gCourseVtxPtr[3].v.ob[0] = arg0->unk_4A[0];
+    gCourseVtxPtr[3].v.ob[1] = arg0->unk_4A[1];
+    gCourseVtxPtr[3].v.ob[2] = arg0->unk_4A[2];
+    gCourseVtxPtr[4].v.ob[0] = arg0->unk_26[0];
+    gCourseVtxPtr[4].v.ob[1] = arg0->unk_26[1];
+    gCourseVtxPtr[4].v.ob[2] = arg0->unk_26[2];
+    gCourseVtxPtr[5].v.ob[0] = arg0->unk_38[0];
+    gCourseVtxPtr[5].v.ob[1] = arg0->unk_38[1];
+    gCourseVtxPtr[5].v.ob[2] = arg0->unk_38[2];
+    gCourseVtxPtr[6].v.ob[0] = arg0->unk_32[0];
+    gCourseVtxPtr[6].v.ob[1] = arg0->unk_32[1];
+    gCourseVtxPtr[6].v.ob[2] = arg0->unk_32[2];
+    gCourseVtxPtr[7].v.ob[0] = arg0->unk_2C[0];
+    gCourseVtxPtr[7].v.ob[1] = arg0->unk_2C[1];
+    gCourseVtxPtr[7].v.ob[2] = arg0->unk_2C[2];
+    gCourseVtxPtr += 8;
 }
 
 void func_800A5168(unk_36ED0* arg0) {
-    D_800F8520[0].v.tc[0] = D_800F8930[4];
-    D_800F8520[1].v.tc[0] = D_800F8520[7].v.tc[0] = D_800F8930[3];
-    D_800F8520[2].v.tc[0] = D_800F8520[6].v.tc[0] = D_800F8930[2];
-    D_800F8520[3].v.tc[0] = D_800F8520[5].v.tc[0] = D_800F8930[1];
-    D_800F8520[4].v.tc[0] = D_800F8930[0];
-    D_800F8520[0].v.ob[0] = arg0->unk_20[0];
-    D_800F8520[0].v.ob[1] = arg0->unk_20[1];
-    D_800F8520[0].v.ob[2] = arg0->unk_20[2];
-    D_800F8520[1].v.ob[0] = arg0->unk_3E[0];
-    D_800F8520[1].v.ob[1] = arg0->unk_3E[1];
-    D_800F8520[1].v.ob[2] = arg0->unk_3E[2];
-    D_800F8520[2].v.ob[0] = arg0->unk_44[0];
-    D_800F8520[2].v.ob[1] = arg0->unk_44[1];
-    D_800F8520[2].v.ob[2] = arg0->unk_44[2];
-    D_800F8520[3].v.ob[0] = arg0->unk_4A[0];
-    D_800F8520[3].v.ob[1] = arg0->unk_4A[1];
-    D_800F8520[3].v.ob[2] = arg0->unk_4A[2];
-    D_800F8520[4].v.ob[0] = arg0->unk_26[0];
-    D_800F8520[4].v.ob[1] = arg0->unk_26[1];
-    D_800F8520[4].v.ob[2] = arg0->unk_26[2];
-    D_800F8520[5].v.ob[0] = arg0->unk_38[0];
-    D_800F8520[5].v.ob[1] = arg0->unk_38[1];
-    D_800F8520[5].v.ob[2] = arg0->unk_38[2];
-    D_800F8520[6].v.ob[0] = arg0->unk_32[0];
-    D_800F8520[6].v.ob[1] = arg0->unk_32[1];
-    D_800F8520[6].v.ob[2] = arg0->unk_32[2];
-    D_800F8520[7].v.ob[0] = arg0->unk_2C[0];
-    D_800F8520[7].v.ob[1] = arg0->unk_2C[1];
-    D_800F8520[7].v.ob[2] = arg0->unk_2C[2];
-    D_800F8520 += 8;
+    gCourseVtxPtr[0].v.tc[0] = D_800F8930[4];
+    gCourseVtxPtr[1].v.tc[0] = gCourseVtxPtr[7].v.tc[0] = D_800F8930[3];
+    gCourseVtxPtr[2].v.tc[0] = gCourseVtxPtr[6].v.tc[0] = D_800F8930[2];
+    gCourseVtxPtr[3].v.tc[0] = gCourseVtxPtr[5].v.tc[0] = D_800F8930[1];
+    gCourseVtxPtr[4].v.tc[0] = D_800F8930[0];
+    gCourseVtxPtr[0].v.ob[0] = arg0->unk_20[0];
+    gCourseVtxPtr[0].v.ob[1] = arg0->unk_20[1];
+    gCourseVtxPtr[0].v.ob[2] = arg0->unk_20[2];
+    gCourseVtxPtr[1].v.ob[0] = arg0->unk_3E[0];
+    gCourseVtxPtr[1].v.ob[1] = arg0->unk_3E[1];
+    gCourseVtxPtr[1].v.ob[2] = arg0->unk_3E[2];
+    gCourseVtxPtr[2].v.ob[0] = arg0->unk_44[0];
+    gCourseVtxPtr[2].v.ob[1] = arg0->unk_44[1];
+    gCourseVtxPtr[2].v.ob[2] = arg0->unk_44[2];
+    gCourseVtxPtr[3].v.ob[0] = arg0->unk_4A[0];
+    gCourseVtxPtr[3].v.ob[1] = arg0->unk_4A[1];
+    gCourseVtxPtr[3].v.ob[2] = arg0->unk_4A[2];
+    gCourseVtxPtr[4].v.ob[0] = arg0->unk_26[0];
+    gCourseVtxPtr[4].v.ob[1] = arg0->unk_26[1];
+    gCourseVtxPtr[4].v.ob[2] = arg0->unk_26[2];
+    gCourseVtxPtr[5].v.ob[0] = arg0->unk_38[0];
+    gCourseVtxPtr[5].v.ob[1] = arg0->unk_38[1];
+    gCourseVtxPtr[5].v.ob[2] = arg0->unk_38[2];
+    gCourseVtxPtr[6].v.ob[0] = arg0->unk_32[0];
+    gCourseVtxPtr[6].v.ob[1] = arg0->unk_32[1];
+    gCourseVtxPtr[6].v.ob[2] = arg0->unk_32[2];
+    gCourseVtxPtr[7].v.ob[0] = arg0->unk_2C[0];
+    gCourseVtxPtr[7].v.ob[1] = arg0->unk_2C[1];
+    gCourseVtxPtr[7].v.ob[2] = arg0->unk_2C[2];
+    gCourseVtxPtr += 8;
 }
 
 void func_800A52FC(unk_36ED0* arg0, s32 arg1) {
@@ -3081,9 +3086,9 @@ void func_800A52FC(unk_36ED0* arg0, s32 arg1) {
         var_a1 = arg0->unk_54;
     }
 
-    D_800F8520[1].v.tc[1] = D_800F8520[2].v.tc[1] = D_800F8520[3].v.tc[1] = var_v1;
-    D_800F8520[5].v.tc[1] = D_800F8520[6].v.tc[1] = D_800F8520[7].v.tc[1] = var_a1;
-    D_800F8520[0].v.tc[1] = D_800F8520[4].v.tc[1] = (var_v1 + var_a1) >> 1;
+    gCourseVtxPtr[1].v.tc[1] = gCourseVtxPtr[2].v.tc[1] = gCourseVtxPtr[3].v.tc[1] = var_v1;
+    gCourseVtxPtr[5].v.tc[1] = gCourseVtxPtr[6].v.tc[1] = gCourseVtxPtr[7].v.tc[1] = var_a1;
+    gCourseVtxPtr[0].v.tc[1] = gCourseVtxPtr[4].v.tc[1] = (var_v1 + var_a1) >> 1;
     func_800A5168(arg0);
 }
 
@@ -3105,62 +3110,62 @@ void func_800A5380(unk_36ED0* arg0, s32 arg1) {
         var_a0 = arg0->unk_52;
     }
     if (arg0->trackSegmentInfo & 0x600) {
-        D_800F8520[0].v.tc[1] = D_800F8520[4].v.tc[1] = var_a0;
-        D_800F8520[1].v.tc[1] = D_800F8520[3].v.tc[1] = (var_a0 + var_a2) >> 1;
-        D_800F8520[2].v.tc[1] = var_a2;
-        D_800F8520[6].v.tc[1] = var_a3;
-        D_800F8520[7].v.tc[1] = D_800F8520[5].v.tc[1] = (var_a3 + var_a0) >> 1;
-        D_800F8520[0].v.tc[0] = D_800F8930[4];
-        D_800F8520[1].v.tc[0] = D_800F8520[7].v.tc[0] = D_800F8930[3];
-        D_800F8520[2].v.tc[0] = D_800F8520[6].v.tc[0] = D_800F8930[2];
-        D_800F8520[3].v.tc[0] = D_800F8520[5].v.tc[0] = D_800F8930[3];
-        D_800F8520[4].v.tc[0] = D_800F8930[4];
+        gCourseVtxPtr[0].v.tc[1] = gCourseVtxPtr[4].v.tc[1] = var_a0;
+        gCourseVtxPtr[1].v.tc[1] = gCourseVtxPtr[3].v.tc[1] = (var_a0 + var_a2) >> 1;
+        gCourseVtxPtr[2].v.tc[1] = var_a2;
+        gCourseVtxPtr[6].v.tc[1] = var_a3;
+        gCourseVtxPtr[7].v.tc[1] = gCourseVtxPtr[5].v.tc[1] = (var_a3 + var_a0) >> 1;
+        gCourseVtxPtr[0].v.tc[0] = D_800F8930[4];
+        gCourseVtxPtr[1].v.tc[0] = gCourseVtxPtr[7].v.tc[0] = D_800F8930[3];
+        gCourseVtxPtr[2].v.tc[0] = gCourseVtxPtr[6].v.tc[0] = D_800F8930[2];
+        gCourseVtxPtr[3].v.tc[0] = gCourseVtxPtr[5].v.tc[0] = D_800F8930[3];
+        gCourseVtxPtr[4].v.tc[0] = D_800F8930[4];
     } else {
-        D_800F8520[0].v.tc[1] = var_a0;
-        D_800F8520[1].v.tc[1] = (var_a0 + var_a2) >> 1;
-        D_800F8520[2].v.tc[1] = var_a2;
-        D_800F8520[3].v.tc[1] = (var_a2 + var_t0) >> 1;
-        D_800F8520[4].v.tc[1] = var_t0;
-        D_800F8520[5].v.tc[1] = (var_t0 + var_a3) >> 1;
-        D_800F8520[6].v.tc[1] = var_a3;
-        D_800F8520[7].v.tc[1] = (var_a3 + var_a0) >> 1;
-        D_800F8520[0].v.tc[0] = D_800F8930[4];
-        D_800F8520[1].v.tc[0] = D_800F8520[7].v.tc[0] = D_800F8930[3];
-        D_800F8520[2].v.tc[0] = D_800F8520[6].v.tc[0] = D_800F8930[2];
-        D_800F8520[3].v.tc[0] = D_800F8520[5].v.tc[0] = D_800F8930[1];
-        D_800F8520[4].v.tc[0] = D_800F8930[0];
+        gCourseVtxPtr[0].v.tc[1] = var_a0;
+        gCourseVtxPtr[1].v.tc[1] = (var_a0 + var_a2) >> 1;
+        gCourseVtxPtr[2].v.tc[1] = var_a2;
+        gCourseVtxPtr[3].v.tc[1] = (var_a2 + var_t0) >> 1;
+        gCourseVtxPtr[4].v.tc[1] = var_t0;
+        gCourseVtxPtr[5].v.tc[1] = (var_t0 + var_a3) >> 1;
+        gCourseVtxPtr[6].v.tc[1] = var_a3;
+        gCourseVtxPtr[7].v.tc[1] = (var_a3 + var_a0) >> 1;
+        gCourseVtxPtr[0].v.tc[0] = D_800F8930[4];
+        gCourseVtxPtr[1].v.tc[0] = gCourseVtxPtr[7].v.tc[0] = D_800F8930[3];
+        gCourseVtxPtr[2].v.tc[0] = gCourseVtxPtr[6].v.tc[0] = D_800F8930[2];
+        gCourseVtxPtr[3].v.tc[0] = gCourseVtxPtr[5].v.tc[0] = D_800F8930[1];
+        gCourseVtxPtr[4].v.tc[0] = D_800F8930[0];
     }
     func_800A5030(arg0);
 }
 
-extern Vtx* D_800F8520;
+extern Vtx* gCourseVtxPtr;
 
 void func_800A5560(unk_36ED0* arg0) {
     Gfx* gfx;
 
-    D_800F8520[0].v.ob[0] = ((arg0->unk_44[0] - arg0->unk_32[0]) >> 5) + arg0->unk_44[0];
-    D_800F8520[0].v.ob[1] = ((arg0->unk_44[1] - arg0->unk_32[1]) >> 5) + arg0->unk_44[1];
-    D_800F8520[0].v.ob[2] = ((arg0->unk_44[2] - arg0->unk_32[2]) >> 5) + arg0->unk_44[2];
+    gCourseVtxPtr[0].v.ob[0] = ((arg0->unk_44[0] - arg0->unk_32[0]) >> 5) + arg0->unk_44[0];
+    gCourseVtxPtr[0].v.ob[1] = ((arg0->unk_44[1] - arg0->unk_32[1]) >> 5) + arg0->unk_44[1];
+    gCourseVtxPtr[0].v.ob[2] = ((arg0->unk_44[2] - arg0->unk_32[2]) >> 5) + arg0->unk_44[2];
 
-    D_800F8520[1].v.ob[0] = ((arg0->unk_4A[0] - arg0->unk_2C[0]) >> 5) + arg0->unk_4A[0];
-    D_800F8520[1].v.ob[1] = ((arg0->unk_4A[1] - arg0->unk_2C[1]) >> 5) + arg0->unk_4A[1];
-    D_800F8520[1].v.ob[2] = ((arg0->unk_4A[2] - arg0->unk_2C[2]) >> 5) + arg0->unk_4A[2];
+    gCourseVtxPtr[1].v.ob[0] = ((arg0->unk_4A[0] - arg0->unk_2C[0]) >> 5) + arg0->unk_4A[0];
+    gCourseVtxPtr[1].v.ob[1] = ((arg0->unk_4A[1] - arg0->unk_2C[1]) >> 5) + arg0->unk_4A[1];
+    gCourseVtxPtr[1].v.ob[2] = ((arg0->unk_4A[2] - arg0->unk_2C[2]) >> 5) + arg0->unk_4A[2];
 
-    D_800F8520[2].v.ob[0] = ((arg0->unk_26[0] - arg0->unk_20[0]) >> 5) + arg0->unk_26[0];
-    D_800F8520[2].v.ob[1] = ((arg0->unk_26[1] - arg0->unk_20[1]) >> 5) + arg0->unk_26[1];
-    D_800F8520[2].v.ob[2] = ((arg0->unk_26[2] - arg0->unk_20[2]) >> 5) + arg0->unk_26[2];
+    gCourseVtxPtr[2].v.ob[0] = ((arg0->unk_26[0] - arg0->unk_20[0]) >> 5) + arg0->unk_26[0];
+    gCourseVtxPtr[2].v.ob[1] = ((arg0->unk_26[1] - arg0->unk_20[1]) >> 5) + arg0->unk_26[1];
+    gCourseVtxPtr[2].v.ob[2] = ((arg0->unk_26[2] - arg0->unk_20[2]) >> 5) + arg0->unk_26[2];
 
-    D_800F8520[3].v.ob[0] = ((arg0->unk_38[0] - arg0->unk_3E[0]) >> 5) + arg0->unk_38[0];
-    D_800F8520[3].v.ob[1] = ((arg0->unk_38[1] - arg0->unk_3E[1]) >> 5) + arg0->unk_38[1];
-    D_800F8520[3].v.ob[2] = ((arg0->unk_38[2] - arg0->unk_3E[2]) >> 5) + arg0->unk_38[2];
+    gCourseVtxPtr[3].v.ob[0] = ((arg0->unk_38[0] - arg0->unk_3E[0]) >> 5) + arg0->unk_38[0];
+    gCourseVtxPtr[3].v.ob[1] = ((arg0->unk_38[1] - arg0->unk_3E[1]) >> 5) + arg0->unk_38[1];
+    gCourseVtxPtr[3].v.ob[2] = ((arg0->unk_38[2] - arg0->unk_3E[2]) >> 5) + arg0->unk_38[2];
 
-    D_800F8520[4].v.ob[0] = ((arg0->unk_32[0] - arg0->unk_44[0]) >> 5) + arg0->unk_32[0];
-    D_800F8520[4].v.ob[1] = ((arg0->unk_32[1] - arg0->unk_44[1]) >> 5) + arg0->unk_32[1];
-    D_800F8520[4].v.ob[2] = ((arg0->unk_32[2] - arg0->unk_44[2]) >> 5) + arg0->unk_32[2];
+    gCourseVtxPtr[4].v.ob[0] = ((arg0->unk_32[0] - arg0->unk_44[0]) >> 5) + arg0->unk_32[0];
+    gCourseVtxPtr[4].v.ob[1] = ((arg0->unk_32[1] - arg0->unk_44[1]) >> 5) + arg0->unk_32[1];
+    gCourseVtxPtr[4].v.ob[2] = ((arg0->unk_32[2] - arg0->unk_44[2]) >> 5) + arg0->unk_32[2];
 
-    gSPVertex(D_800F89C4 - 1, D_800F8520, 5, 16);
+    gSPVertex(D_800F89C4 - 1, gCourseVtxPtr, 5, 16);
 
-    D_800F8520 += 5;
+    gCourseVtxPtr += 5;
 }
 
 void func_800A573C(unk_36ED0* arg0, s32 arg1) {
@@ -3180,14 +3185,14 @@ void func_800A573C(unk_36ED0* arg0, s32 arg1) {
         var_a2 = arg0->unk_50;
         var_a3 = arg0->unk_52;
     }
-    D_800F8520[0].v.tc[1] = var_a3;
-    D_800F8520[1].v.tc[1] = (var_a3 + var_v1) >> 1;
-    D_800F8520[2].v.tc[1] = var_v1;
-    D_800F8520[3].v.tc[1] = (var_v1 + var_a2) >> 1;
-    D_800F8520[4].v.tc[1] = var_a2;
-    D_800F8520[5].v.tc[1] = (var_a2 + var_a1) >> 1;
-    D_800F8520[6].v.tc[1] = var_a1;
-    D_800F8520[7].v.tc[1] = (var_a1 + var_a3) >> 1;
+    gCourseVtxPtr[0].v.tc[1] = var_a3;
+    gCourseVtxPtr[1].v.tc[1] = (var_a3 + var_v1) >> 1;
+    gCourseVtxPtr[2].v.tc[1] = var_v1;
+    gCourseVtxPtr[3].v.tc[1] = (var_v1 + var_a2) >> 1;
+    gCourseVtxPtr[4].v.tc[1] = var_a2;
+    gCourseVtxPtr[5].v.tc[1] = (var_a2 + var_a1) >> 1;
+    gCourseVtxPtr[6].v.tc[1] = var_a1;
+    gCourseVtxPtr[7].v.tc[1] = (var_a1 + var_a3) >> 1;
     func_800A5168(arg0);
 }
 
@@ -3206,18 +3211,18 @@ void func_800A57E8(unk_36ED0* arg0, s32 arg1) {
         var_v1 = arg0->unk_52;
     }
 
-    D_800F8520[1].v.tc[1] = var_a3;
-    D_800F8520[2].v.tc[1] = D_800F8520[3].v.tc[1] = (var_a3 + var_v1) >> 1;
-    D_800F8520[0].v.tc[1] = var_v1;
-    D_800F8520[4].v.tc[1] = var_v1;
-    D_800F8520[5].v.tc[1] = D_800F8520[6].v.tc[1] = (var_t0 + var_v1) >> 1;
-    D_800F8520[7].v.tc[1] = var_t0;
+    gCourseVtxPtr[1].v.tc[1] = var_a3;
+    gCourseVtxPtr[2].v.tc[1] = gCourseVtxPtr[3].v.tc[1] = (var_a3 + var_v1) >> 1;
+    gCourseVtxPtr[0].v.tc[1] = var_v1;
+    gCourseVtxPtr[4].v.tc[1] = var_v1;
+    gCourseVtxPtr[5].v.tc[1] = gCourseVtxPtr[6].v.tc[1] = (var_t0 + var_v1) >> 1;
+    gCourseVtxPtr[7].v.tc[1] = var_t0;
     func_800A5168(arg0);
 }
 
 void func_800A587C(void) {
 
-    gSPVertex(D_800F89C4++, D_800F8520, 16, 0);
+    gSPVertex(D_800F89C4++, gCourseVtxPtr, 16, 0);
     gSPDisplayList(D_800F89C4++, D_80140F0);
 
     func_800A52FC(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
@@ -3252,7 +3257,7 @@ void func_800A5924(void) {
 
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
 
-        gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+        gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
 
         gSPDisplayList(D_800F89C4++, D_800F89B8->unk_04);
 
@@ -3288,7 +3293,7 @@ void func_800A5CF0(void) {
         }
 
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
-        gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+        gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
         gSPDisplayList(D_800F89C4++, D_800F89BC->unk_04);
         func_800A52FC(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
         D_800F89BC->unk_00 = D_800F89CC;
@@ -3300,7 +3305,7 @@ void func_800A5CF0(void) {
 
 void func_800A60CC(void) {
 
-    gSPVertex(D_800F89C4++, D_800F8520, 16, 0);
+    gSPVertex(D_800F89C4++, gCourseVtxPtr, 16, 0);
     if (D_800F89DC != 0) {
         if (D_800F892C != D_800F89D4) {
             gSPTexture(D_800F89C4++, 0, 0, 0, D_800F892C, G_OFF);
@@ -3388,7 +3393,7 @@ void func_800A63A0(void) {
 
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
 
-        gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+        gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
 
         if (D_800F89DC != 0) {
             if (D_800F892C != D_800F89D4) {
@@ -3407,7 +3412,7 @@ void func_800A63A0(void) {
                 default:
                     func_800A5560(D_800F89CC);
                     gSPDisplayList(D_800F89C4++, D_800F89B8->unk_20);
-                    gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+                    gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
                     gSPDisplayList(D_800F89C4++, D_800F89B8->unk_18);
                     break;
             }
@@ -3482,7 +3487,7 @@ void func_800A6CF4(void) {
         }
 
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
-        gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+        gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
 
         if (D_800F89DC != 0) {
             if (D_800F892C != D_800F89D4) {
@@ -3498,7 +3503,7 @@ void func_800A6CF4(void) {
                 case TRACK_UNK2_2000:
                     func_800A5560(D_800F89D0);
                     gSPDisplayList(D_800F89C4++, D_800F89B8->unk_1C);
-                    gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+                    gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
                     gSPDisplayList(D_800F89C4++, D_800F89BC->unk_14);
                     break;
                 default:
@@ -3533,7 +3538,7 @@ void func_800A6CF4(void) {
 
 void func_800A7650(void) {
 
-    gSPVertex(D_800F89C4++, D_800F8520, 16, 0);
+    gSPVertex(D_800F89C4++, gCourseVtxPtr, 16, 0);
 
     switch (D_800F89CC->trackSegmentInfo & TRACK_UNK1_MASK) {
         case TRACK_UNK1_0:
@@ -3579,7 +3584,7 @@ void func_800A7764(void) {
 
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
 
-        gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+        gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
 
         switch (D_800F89CC->trackSegmentInfo & TRACK_UNK1_MASK) {
             case TRACK_UNK1_0:
@@ -3627,7 +3632,7 @@ void func_800A7BC0(void) {
 
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
 
-        gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+        gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
 
         switch (D_800F89CC->trackSegmentInfo & TRACK_UNK1_MASK) {
             case TRACK_UNK1_0:
@@ -3652,7 +3657,7 @@ void func_800A7BC0(void) {
 
 void func_800A8028(void) {
 
-    gSPVertex(D_800F89C4++, D_800F8520, 16, 0);
+    gSPVertex(D_800F89C4++, gCourseVtxPtr, 16, 0);
     gSPDisplayList(D_800F89C4++, D_80140F0);
 
     func_800A57E8(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
@@ -3686,7 +3691,7 @@ void func_800A80D0(void) {
         }
 
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
-        gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+        gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
         gSPDisplayList(D_800F89C4++, D_800F89B8->unk_0C);
         func_800A57E8(D_800F89D0, 0);
         D_800F89BC->unk_00 = D_800F89D0;
@@ -3721,7 +3726,7 @@ void func_800A84B8(void) {
         }
 
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
-        gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+        gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
         gSPDisplayList(D_800F89C4++, D_800F89BC->unk_0C);
         func_800A57E8(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
         D_800F89BC->unk_00 = D_800F89CC;
@@ -3733,7 +3738,7 @@ void func_800A84B8(void) {
 
 void func_800A88AC(void) {
 
-    gSPVertex(D_800F89C4++, D_800F8520, 16, 0);
+    gSPVertex(D_800F89C4++, gCourseVtxPtr, 16, 0);
     gSPDisplayList(D_800F89C4++, D_8014210);
     func_800A52FC(D_800F89CC, 0);
     D_800F8958[0].unk_00 = D_800F89CC;
@@ -3747,7 +3752,7 @@ void func_800A894C(void) {
     if (D_800F89CC == D_800F89B8->unk_00) {
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
 
-        gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+        gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
         gSPDisplayList(D_800F89C4++, D_800F89B8->unk_10);
         func_800A52FC(D_800F89D0, 0);
         D_800F89BC->unk_00 = D_800F89D0;
@@ -3763,7 +3768,7 @@ void func_800A8A5C(void) {
     if (D_800F89D0 == D_800F89B8->unk_00) {
         D_800F89BC = &D_800F8958[D_800F89C0 ^= 1];
 
-        gSPVertex(D_800F89C4++, D_800F8520, 8, D_800F89BC->unk_2C);
+        gSPVertex(D_800F89C4++, gCourseVtxPtr, 8, D_800F89BC->unk_2C);
         gSPDisplayList(D_800F89C4++, D_800F89BC->unk_10);
         func_800A52FC(D_800F89CC, D_800F89CC->trackSegmentInfo & TRACK_FLAG_80000000);
         D_800F89BC->unk_00 = D_800F89CC;
@@ -3926,7 +3931,7 @@ void func_800A8F1C(unk_800A8B74_arg_0* arg0) {
     } while (D_800F89D0 != arg0->unk_00);
 }
 
-Gfx* func_800A92FC(Gfx* gfx, Vtx* arg1, s32 arg2) {
+Gfx* Course_DrawModel(Gfx* gfx, Vtx* arg1, s32 arg2) {
     s32 i;
 
     while (arg2 > 30) {
@@ -4012,9 +4017,9 @@ Gfx* func_800A95B4(Gfx* gfx) {
     return D_800F89C4;
 }
 
-extern Player gPlayers[];
+extern Camera gCameras[];
 
-Gfx* func_800A9938(Gfx* gfx, s32 playerIndex) {
+Gfx* Course_Draw(Gfx* gfx, s32 playerIndex) {
     MtxF sp60;
     f32 var_fv1;
     f32 temp_fa0;
@@ -4032,18 +4037,20 @@ Gfx* func_800A9938(Gfx* gfx, s32 playerIndex) {
     s32 var_t0;
     s32 var_a2;
     Racer* racer;
-    Player* player;
+    Camera* camera;
     s32 i;
 
-    player = &gPlayers[playerIndex];
-    racer = &gRacers[player->id];
+    camera = &gCameras[playerIndex];
+    racer = &gRacers[camera->id];
 
     D_800F89C4 = gfx;
-    segment = racer->unk_0C.courseSegment;
+    segment = racer->segmentPositionInfo.courseSegment;
 
     if (segment->trackSegmentInfo & TRACK_FLAG_20000000) {
-        if (((segment->trackSegmentInfo & TRACK_JOIN_PREVIOUS) && (racer->unk_0C.unk_04 < segment->unk_68)) ||
-            ((segment->trackSegmentInfo & TRACK_JOIN_NEXT) && (segment->unk_6C < racer->unk_0C.unk_04))) {
+        if (((segment->trackSegmentInfo & TRACK_JOIN_PREVIOUS) &&
+             (racer->segmentPositionInfo.segmentTValue < segment->unk_68)) ||
+            ((segment->trackSegmentInfo & TRACK_JOIN_NEXT) &&
+             (segment->unk_6C < racer->segmentPositionInfo.segmentTValue))) {
             D_800F89D8 = true;
         } else {
             D_800F89D8 = false;
@@ -4052,34 +4059,34 @@ Gfx* func_800A9938(Gfx* gfx, s32 playerIndex) {
         D_800F89D8 = true;
     }
 
-    temp_fv1 = (player->unk_5C.x.x * D_800CF524) - player->unk_50.x;
-    temp_fa0 = (player->unk_5C.x.y * D_800CF524) - player->unk_50.y;
-    temp_fa1 = (player->unk_5C.x.z * D_800CF524) - player->unk_50.z;
+    temp_fv1 = (camera->basis.x.x * D_800CF524) - camera->eye.x;
+    temp_fa0 = (camera->basis.x.y * D_800CF524) - camera->eye.y;
+    temp_fa1 = (camera->basis.x.z * D_800CF524) - camera->eye.z;
 
-    sp60.m[3][2] = player->unk_11C.m[3][2] -
-                   (player->unk_11C.m[2][2] *
-                    (sp60.m[3][3] = ((-temp_fv1 * player->unk_15C.m[0][2]) - (temp_fa0 * player->unk_15C.m[1][2])) -
-                                    (player->unk_15C.m[2][2] * temp_fa1)));
+    sp60.m[3][2] = camera->projectionMtx.m[3][2] -
+                   (camera->projectionMtx.m[2][2] *
+                    (sp60.m[3][3] = ((-temp_fv1 * camera->viewMtx.m[0][2]) - (temp_fa0 * camera->viewMtx.m[1][2])) -
+                                    (camera->viewMtx.m[2][2] * temp_fa1)));
     sp60.m[3][0] =
-        (player->unk_11C.m[0][0] * ((temp_fv1 * player->unk_15C.m[0][0]) + (temp_fa0 * player->unk_15C.m[1][0]) +
-                                    (temp_fa1 * player->unk_15C.m[2][0]))) -
-        (player->unk_11C.m[2][0] * sp60.m[3][3]);
+        (camera->projectionMtx.m[0][0] * ((temp_fv1 * camera->viewMtx.m[0][0]) + (temp_fa0 * camera->viewMtx.m[1][0]) +
+                                          (temp_fa1 * camera->viewMtx.m[2][0]))) -
+        (camera->projectionMtx.m[2][0] * sp60.m[3][3]);
     sp60.m[3][1] =
-        (player->unk_11C.m[1][1] * ((temp_fv1 * player->unk_15C.m[0][1]) + (temp_fa0 * player->unk_15C.m[1][1]) +
-                                    (temp_fa1 * player->unk_15C.m[2][1]))) -
-        (player->unk_11C.m[2][1] * sp60.m[3][3]);
-    sp60.m[0][0] = player->unk_19C.m[0][0];
-    sp60.m[0][1] = player->unk_19C.m[0][1];
-    sp60.m[0][2] = player->unk_19C.m[0][2];
-    sp60.m[0][3] = player->unk_19C.m[0][3];
-    sp60.m[1][0] = player->unk_19C.m[1][0];
-    sp60.m[1][1] = player->unk_19C.m[1][1];
-    sp60.m[1][2] = player->unk_19C.m[1][2];
-    sp60.m[1][3] = player->unk_19C.m[1][3];
-    sp60.m[2][0] = player->unk_19C.m[2][0];
-    sp60.m[2][1] = player->unk_19C.m[2][1];
-    sp60.m[2][2] = player->unk_19C.m[2][2];
-    sp60.m[2][3] = player->unk_19C.m[2][3];
+        (camera->projectionMtx.m[1][1] * ((temp_fv1 * camera->viewMtx.m[0][1]) + (temp_fa0 * camera->viewMtx.m[1][1]) +
+                                          (temp_fa1 * camera->viewMtx.m[2][1]))) -
+        (camera->projectionMtx.m[2][1] * sp60.m[3][3]);
+    sp60.m[0][0] = camera->projectionViewMtx.m[0][0];
+    sp60.m[0][1] = camera->projectionViewMtx.m[0][1];
+    sp60.m[0][2] = camera->projectionViewMtx.m[0][2];
+    sp60.m[0][3] = camera->projectionViewMtx.m[0][3];
+    sp60.m[1][0] = camera->projectionViewMtx.m[1][0];
+    sp60.m[1][1] = camera->projectionViewMtx.m[1][1];
+    sp60.m[1][2] = camera->projectionViewMtx.m[1][2];
+    sp60.m[1][3] = camera->projectionViewMtx.m[1][3];
+    sp60.m[2][0] = camera->projectionViewMtx.m[2][0];
+    sp60.m[2][1] = camera->projectionViewMtx.m[2][1];
+    sp60.m[2][2] = camera->projectionViewMtx.m[2][2];
+    sp60.m[2][3] = camera->projectionViewMtx.m[2][3];
 
     var_v1 = D_802A9FC0;
 
@@ -4210,13 +4217,13 @@ Gfx* func_800A9938(Gfx* gfx, s32 playerIndex) {
     gDPSetPrimColor(D_800F89C4++, 0, 0, 255 - ((gGameFrameCount * 8) % 256), 0, 0, 255);
 
     if (1) {}
-    segment = racer->unk_0C.courseSegment;
+    segment = racer->segmentPositionInfo.courseSegment;
 
     if (segment->trackSegmentInfo & TRACK_FLAG_20000000) {
-        if (segment->unk_6C < racer->unk_0C.unk_04) {
-            var_fv1 = (1.0f - racer->unk_0C.unk_08) / segment->unk_70;
-        } else if (racer->unk_0C.unk_04 < segment->unk_68) {
-            var_fv1 = racer->unk_0C.unk_08 / segment->unk_70;
+        if (segment->unk_6C < racer->segmentPositionInfo.segmentTValue) {
+            var_fv1 = (1.0f - racer->segmentPositionInfo.segmentLengthProportion) / segment->unk_70;
+        } else if (racer->segmentPositionInfo.segmentTValue < segment->unk_68) {
+            var_fv1 = racer->segmentPositionInfo.segmentLengthProportion / segment->unk_70;
         } else {
             var_a0 = gCurrentCourseInfo->unk_14[0] >> 2;
             var_t0 = gCurrentCourseInfo->unk_14[1] >> 2;

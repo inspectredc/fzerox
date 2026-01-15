@@ -15,7 +15,7 @@ void func_8007F4E0(s32 venue, s32 skybox) {
 }
 
 s8 gRecordNameEntered[4];
-s16 D_800E42CC;
+s16 gForceCredits;
 
 void func_8007F500(void) {
     s32 i;
@@ -24,7 +24,7 @@ void func_8007F500(void) {
         gRecordNameEntered[i] = 0;
     }
 
-    D_800E42CC = 0;
+    gForceCredits = false;
 }
 
 extern OSMesgQueue gMainThreadMesgQueue;

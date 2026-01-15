@@ -2,6 +2,7 @@
 #include "fzx_game.h"
 #include "fzx_racer.h"
 #include "fzx_course.h"
+#include "fzx_camera.h"
 #include "ovl_i3.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
@@ -319,8 +320,8 @@ void func_i3_InitCourseMinimap(void) {
     temp_s5 = var_s1;
 
     while (true) {
-        temp_fs1 = func_8009E538(var_s1, var_fs0, &sp84);
-        func_8009E6F0(var_s1, var_fs0, &sp78);
+        temp_fs1 = Course_SplineGetTangent(var_s1, var_fs0, &sp84);
+        Course_SplineGetPosition(var_s1, var_fs0, &sp78);
         temp_s0 = Math_Round(((sp78.x * 64.0f * sp90) / 16000.0f) + temp_fs3) / 2;
         temp_v0 = Math_Round(((sp78.z * 64.0f * sp90) / 16000.0f) + temp_fs3);
         if ((temp_s0 >= 0) && (temp_s0 < 64)) {
@@ -347,7 +348,7 @@ void func_i3_InitCourseMinimap(void) {
                 break;
             }
             var_fs0 -= 1.0f;
-            var_fs0 *= (temp_fs1 / func_8009E538(var_s1, 0.0f, &sp84));
+            var_fs0 *= (temp_fs1 / Course_SplineGetTangent(var_s1, 0.0f, &sp84));
         }
     }
 
@@ -356,8 +357,8 @@ void func_i3_InitCourseMinimap(void) {
     temp_s5 = var_s1;
 
     while (true) {
-        temp_fs1 = func_8009E538(var_s1, var_fs0, &sp84);
-        func_8009E6F0(var_s1, var_fs0, &sp78);
+        temp_fs1 = Course_SplineGetTangent(var_s1, var_fs0, &sp84);
+        Course_SplineGetPosition(var_s1, var_fs0, &sp78);
         temp_s0 = Math_Round(((sp78.x * 64.0f * sp90) / 16000.0f) + temp_fs3) / 2;
         temp_v0 = Math_Round(((sp78.z * 64.0f * sp90) / 16000.0f) + temp_fs3);
         if ((temp_s0 > 0) && (temp_s0 < 64)) {
@@ -377,13 +378,13 @@ void func_i3_InitCourseMinimap(void) {
                 break;
             }
             var_fs0 -= 1.0f;
-            var_fs0 *= (temp_fs1 / func_8009E538(var_s1, 0.0f, &sp84));
+            var_fs0 *= (temp_fs1 / Course_SplineGetTangent(var_s1, 0.0f, &sp84));
         }
     }
 
     var_s1 = sp74->courseSegments;
-    func_8009E538(var_s1, 0.0f, &sp84);
-    func_8009E6F0(var_s1, 0.0f, &sp78);
+    Course_SplineGetTangent(var_s1, 0.0f, &sp84);
+    Course_SplineGetPosition(var_s1, 0.0f, &sp78);
     temp_s0 = Math_Round(((sp78.x * 64.0f * sp90) / 16000.0f) + temp_fs3) / 2;
     temp_v0 = Math_Round(((sp78.z * 64.0f * sp90) / 16000.0f) + temp_fs3);
     if ((temp_s0 > 0) && (temp_s0 < 63)) {
@@ -405,7 +406,7 @@ void func_i3_InitCourseMinimap(void) {
 extern s16 gSettingVsCom;
 extern Controller gControllers[];
 extern s32 gPlayerControlPorts[];
-extern s8 D_800CD010;
+extern s8 gTitleDemoState;
 extern Gfx D_8014940[];
 extern Gfx D_80149A0[];
 extern s32 gGameMode;
@@ -426,7 +427,7 @@ Gfx* func_i3_DrawCourseMinimap(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 playerMarkerRightPos;
 
     if ((controller->buttonPressed & BTN_CLEFT) && (numPlayersIndex >= 2)) {
-        if (D_800CD010 == 0) {
+        if (gTitleDemoState == 0) {
             gPlayerMinimapLapCounterToggle[playerIndex] = (gPlayerMinimapLapCounterToggle[playerIndex] + 1) % 2;
         }
     }
@@ -479,14 +480,18 @@ Gfx* func_i3_DrawCourseMinimap(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
             continue;
         }
         playerMarkerLeftPos =
-            Math_Round(((gRacers[i].unk_0C.unk_1C.x * 64.0f * minimapScale) / 16000.0f) + (64 * minimapScale)) / 2;
+            Math_Round(((gRacers[i].segmentPositionInfo.segmentPos.x * 64.0f * minimapScale) / 16000.0f) +
+                       (64 * minimapScale)) /
+            2;
         playerMarkerRightPos =
-            Math_Round(((gRacers[i].unk_0C.unk_1C.z * 64.0f * minimapScale) / 16000.0f) + (64 * minimapScale)) / 2;
+            Math_Round(((gRacers[i].segmentPositionInfo.segmentPos.z * 64.0f * minimapScale) / 16000.0f) +
+                       (64 * minimapScale)) /
+            2;
         playerMarkerLeftPos += left;
         playerMarkerRightPos += top;
         gDPPipeSync(gfx++);
 
-        // Player Markers
+        // Camera Markers
         switch (i) {
             case 0:
                 gDPSetFillColor(gfx++, GPACK_RGBA5551(0, 255, 255, 1) << 16 | GPACK_RGBA5551(0, 255, 255, 1));
@@ -507,16 +512,20 @@ Gfx* func_i3_DrawCourseMinimap(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     }
     if (numPlayersIndex == 0) {
         if (gGameMode == GAMEMODE_GP_RACE) {
-            // Lead Non-Player Racer Marker
+            // Lead Non-Camera Racer Marker
             if (gRacers[0].position == 1) {
                 racer = gRacersByPosition[1];
             } else {
                 racer = gRacersByPosition[0];
             }
             playerMarkerLeftPos =
-                Math_Round(((racer->unk_0C.unk_1C.x * 64.0f * minimapScale) / 16000.0f) + (64 * minimapScale)) / 2;
+                Math_Round(((racer->segmentPositionInfo.segmentPos.x * 64.0f * minimapScale) / 16000.0f) +
+                           (64 * minimapScale)) /
+                2;
             playerMarkerRightPos =
-                Math_Round(((racer->unk_0C.unk_1C.z * 64.0f * minimapScale) / 16000.0f) + (64 * minimapScale)) / 2;
+                Math_Round(((racer->segmentPositionInfo.segmentPos.z * 64.0f * minimapScale) / 16000.0f) +
+                           (64 * minimapScale)) /
+                2;
             playerMarkerLeftPos += left;
             playerMarkerRightPos += top;
 
@@ -528,12 +537,14 @@ Gfx* func_i3_DrawCourseMinimap(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
         } else if (gFastestGhostRacer != NULL) {
             // Ghost Racer Marker
             playerMarkerLeftPos =
-                Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.x * 64.0f * minimapScale) / 16000.0f) +
-                           (64 * minimapScale)) /
+                Math_Round(
+                    ((gFastestGhostRacer->racer->segmentPositionInfo.segmentPos.x * 64.0f * minimapScale) / 16000.0f) +
+                    (64 * minimapScale)) /
                 2;
             playerMarkerRightPos =
-                Math_Round(((gFastestGhostRacer->racer->unk_0C.unk_1C.z * 64.0f * minimapScale) / 16000.0f) +
-                           (64 * minimapScale)) /
+                Math_Round(
+                    ((gFastestGhostRacer->racer->segmentPositionInfo.segmentPos.z * 64.0f * minimapScale) / 16000.0f) +
+                    (64 * minimapScale)) /
                 2;
             playerMarkerLeftPos += left;
             playerMarkerRightPos += top;
@@ -549,12 +560,14 @@ Gfx* func_i3_DrawCourseMinimap(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
             return gfx;
         }
 
-        playerMarkerLeftPos = Math_Round(((gRacers[playerIndex].unk_0C.unk_1C.x * 64.0f * minimapScale) / 16000.0f) +
-                                         (64 * minimapScale)) /
-                              2;
-        playerMarkerRightPos = Math_Round(((gRacers[playerIndex].unk_0C.unk_1C.z * 64.0f * minimapScale) / 16000.0f) +
-                                          (64 * minimapScale)) /
-                               2;
+        playerMarkerLeftPos =
+            Math_Round(((gRacers[playerIndex].segmentPositionInfo.segmentPos.x * 64.0f * minimapScale) / 16000.0f) +
+                       (64 * minimapScale)) /
+            2;
+        playerMarkerRightPos =
+            Math_Round(((gRacers[playerIndex].segmentPositionInfo.segmentPos.z * 64.0f * minimapScale) / 16000.0f) +
+                       (64 * minimapScale)) /
+            2;
         playerMarkerLeftPos += left;
         playerMarkerRightPos += top;
 
@@ -586,21 +599,20 @@ extern s32 D_800CD510;
 extern s32 gSkyboxType;
 extern s32 gVenueType;
 
-extern Player gPlayers[];
 extern s32 gCourseIndex;
 
 void func_i3_80139550(void);
 void func_i3_801387EC(void);
-void func_i3_80136974(Player*, unk_80141FF0* arg1, CourseVenue* arg2, f32 arg3, f32 arg4);
+void func_i3_80136974(Camera*, unk_80141FF0* arg1, CourseVenue* arg2, f32 arg3, f32 arg4);
 
-void func_i3_801365E0(void) {
+void Background_Init(void) {
     s32 pad;
     s32 i;
     f32 var_fs0;
     f32 var_fs1;
     CourseInfo* temp_v0;
     unk_80141FF0* var_s0;
-    Player* var_s1;
+    Camera* camera;
 
     D_i3_80142170 = gNumPlayers;
     D_800CD510 = false;
@@ -618,8 +630,8 @@ void func_i3_801365E0(void) {
         var_fs0 = 0.0f - var_fs0;
     }
 
-    for (var_s0 = D_i3_80141FF0, var_s1 = gPlayers, i = 0; i < D_i3_80142170; var_s0++, var_s1++, i++) {
-        func_i3_80136974(var_s1, var_s0, D_i3_80142180.unk_00, var_fs1, var_fs0);
+    for (var_s0 = D_i3_80141FF0, camera = gCameras, i = 0; i < D_i3_80142170; var_s0++, camera++, i++) {
+        func_i3_80136974(camera, var_s0, D_i3_80142180.unk_00, var_fs1, var_fs0);
     }
 
     temp_v0 = &gCourseInfos[gCourseIndex];
@@ -675,7 +687,7 @@ void func_i3_801365E0(void) {
 
 const unk_80141860 D_i3_80141860 = { 400.0f, 1700.0f, 0.006f, 0.006f, 0.0f, 0.0f, 0.0f, 0.0f };
 
-void func_i3_80136974(Player* player, unk_80141FF0* arg1, CourseVenue* arg2, f32 arg3, f32 arg4) {
+void func_i3_80136974(Camera* camera, unk_80141FF0* arg1, CourseVenue* arg2, f32 arg3, f32 arg4) {
     arg1->unk_00 = 0.0f;
     arg1->unk_08 = 0.0f;
     arg1->unk_04 = -750.0f;
@@ -697,20 +709,20 @@ void func_i3_80136974(Player* player, unk_80141FF0* arg1, CourseVenue* arg2, f32
     arg1->unk_3C = D_i3_80141860;
     arg1->unk_3C.unk_18 = arg3;
     arg1->unk_3C.unk_1C = arg4;
-    arg1->unk_5C = player->unk_AC / player->unk_A8;
+    arg1->unk_5C = camera->fovScaleY / camera->fovScaleX;
 }
 
-void func_i3_80136E74(Vtx*, unk_80141FF0*, Player*, f32);
-void func_i3_801374D4(Vtx*, unk_80141FF0*, Player*, f32, f32, f32, f32, f32, f32, s32, s32);
-void func_i3_80137AC4(Vtx*, unk_80141FF0*, Player*, unk_80141860*, f32, f32, f32, f32, f32, f32, s32, s32, bool);
+void func_i3_80136E74(Vtx*, unk_80141FF0*, Camera*, f32);
+void func_i3_801374D4(Vtx*, unk_80141FF0*, Camera*, f32, f32, f32, f32, f32, f32, s32, s32);
+void func_i3_80137AC4(Vtx*, unk_80141FF0*, Camera*, unk_80141860*, f32, f32, f32, f32, f32, f32, s32, s32, bool);
 void func_i3_80138D80(void);
-void func_i3_801398D0(s32, unk_80141FF0*, Player*);
+void func_i3_801398D0(s32, unk_80141FF0*, Camera*);
 
 extern GfxPool* gGfxPool;
 
-void func_i3_80136A6C(void) {
+void Background_Update(void) {
     s32 pad[3];
-    Player* var_s2;
+    Camera* camera;
     unk_80141FF0* var_s1;
     Vtx* vtx;
     s32 i;
@@ -727,34 +739,34 @@ void func_i3_80136A6C(void) {
     f32 var_fv0;
     bool var_s3;
 
-    for (i = 0, var_s1 = D_i3_80141FF0, var_s2 = gPlayers; i < D_i3_80142170; i++, var_s1++, var_s2++) {
+    for (i = 0, var_s1 = D_i3_80141FF0, camera = gCameras; i < D_i3_80142170; i++, var_s1++, camera++) {
 
-        var_s1->unk_00 = var_s2->unk_50.x + (var_s2->unk_80 * D_i3_801407A8);
-        var_s1->unk_08 = var_s2->unk_50.z + (var_s2->unk_84 * D_i3_801407A8);
-        temp_v0 = Math_Round(var_s2->unk_94.x * 5.688889f);
+        var_s1->unk_00 = camera->eye.x + (camera->xzNormalizedX * D_i3_801407A8);
+        var_s1->unk_08 = camera->eye.z + (camera->xzNormalizedZ * D_i3_801407A8);
+        temp_v0 = Math_Round(camera->fov * 5.688889f);
         temp_fa0 = TAN(temp_v0);
 
         var_s1->unk_0C = (var_s1->unk_10 + D_i3_801407A8) * temp_fa0 * 1.2f;
         var_s1->unk_14 = var_s1->unk_0C * var_s1->unk_5C;
 
-        temp2 = var_s2->unk_80;
-        temp = var_s2->unk_84;
+        temp2 = camera->xzNormalizedX;
+        temp = camera->xzNormalizedZ;
         temp_fs3 = var_s1->unk_10 * temp2;
         temp_fs4 = var_s1->unk_10 * temp;
         temp_fs1 = var_s1->unk_0C * temp;
         temp_fs2 = var_s1->unk_0C * (0.0f - temp2);
 
         vtx = &gGfxPool->unk_29B48[i * 28 + 2 * 4];
-        func_i3_80136E74(vtx, var_s1, var_s2, temp_fa0);
+        func_i3_80136E74(vtx, var_s1, camera, temp_fa0);
 
         vtx = &gGfxPool->unk_29B48[i * 28 + 0 * 4];
-        func_i3_801374D4(vtx, var_s1, var_s2, temp_fs3, temp_fs4, 0.0f, 0.0f, temp_fs1, temp_fs2, 255, 0);
+        func_i3_801374D4(vtx, var_s1, camera, temp_fs3, temp_fs4, 0.0f, 0.0f, temp_fs1, temp_fs2, 255, 0);
 
         vtx = &gGfxPool->unk_29B48[i * 28 + 1 * 4];
-        func_i3_801374D4(vtx, var_s1, var_s2, 0.0f, 0.0f, 0.0f - temp_fs3, 0.0f - temp_fs4, temp_fs1, temp_fs2, 0, 255);
+        func_i3_801374D4(vtx, var_s1, camera, 0.0f, 0.0f, 0.0f - temp_fs3, 0.0f - temp_fs4, temp_fs1, temp_fs2, 0, 255);
 
         if (D_i3_8014218C > 0) {
-            temp_fv1 = (var_s1->unk_04 + var_s1->unk_3C.unk_04) - var_s2->unk_50.y;
+            temp_fv1 = (var_s1->unk_04 + var_s1->unk_3C.unk_04) - camera->eye.y;
             if (temp_fv1 != 0.0f) {
                 if (temp_fv1 >= 0.f) {
                     var_fv0 = temp_fv1;
@@ -772,11 +784,11 @@ void func_i3_80136A6C(void) {
                 }
 
                 vtx = &gGfxPool->unk_29B48[i * 28 + 3 * 4];
-                func_i3_80137AC4(vtx, var_s1, var_s2, &var_s1->unk_3C, temp_fs3, temp_fs4, 0.0f, 0.0f, temp_fs1,
+                func_i3_80137AC4(vtx, var_s1, camera, &var_s1->unk_3C, temp_fs3, temp_fs4, 0.0f, 0.0f, temp_fs1,
                                  temp_fs2, 255, ((1.0f - var_fv0) * 255.0f), var_s3);
 
                 vtx = &gGfxPool->unk_29B48[i * 28 + 4 * 4];
-                func_i3_80137AC4(vtx, var_s1, var_s2, &var_s1->unk_3C, 0.0f, 0.0f, 0.0f - temp_fs3, 0.0f - temp_fs4,
+                func_i3_80137AC4(vtx, var_s1, camera, &var_s1->unk_3C, 0.0f, 0.0f, 0.0f - temp_fs3, 0.0f - temp_fs4,
                                  temp_fs1, temp_fs2, ((1.0f - var_fv0) * 255.0f), 255, var_s3);
 
                 goto block_12;
@@ -784,7 +796,7 @@ void func_i3_80136A6C(void) {
         } else {
         block_12:
             if (D_i3_80142188 & 1) {
-                func_i3_801398D0(i, var_s1, var_s2);
+                func_i3_801398D0(i, var_s1, camera);
             }
         }
     }
@@ -793,7 +805,7 @@ void func_i3_80136A6C(void) {
     }
 }
 
-void func_i3_80136E74(Vtx* vtx, unk_80141FF0* arg1, Player* player, f32 arg3) {
+void func_i3_80136E74(Vtx* vtx, unk_80141FF0* arg1, Camera* camera, f32 arg3) {
     s32 i;
     s32 temp1;
     s32 temp2;
@@ -810,43 +822,34 @@ void func_i3_80136E74(Vtx* vtx, unk_80141FF0* arg1, Player* player, f32 arg3) {
     f32 sp68[4];
     f32 sp58[4];
 
-    temp_fa1 = (2.0f * (player->unk_94.y * temp_fv0)) / player->unk_A8;
+    temp_fa1 = (2.0f * (camera->frustrumCenterX * temp_fv0)) / camera->fovScaleX;
     temp_fv0 *= arg1->unk_5C;
-    temp_ft5 = (2.0f * (player->unk_94.z * temp_fv0)) / player->unk_AC;
+    temp_ft5 = (2.0f * (camera->frustrumCenterY * temp_fv0)) / camera->fovScaleY;
 
-    sp98[0] = player->unk_50.x + (player->unk_5C.x.x * arg1->unk_18) +
-              (player->unk_5C.y.x * (arg1->unk_14 + temp_ft5)) + (player->unk_5C.z.x * (arg1->unk_0C - temp_fa1));
-    sp88[0] = player->unk_50.y + (player->unk_5C.x.y * arg1->unk_18) +
-              (player->unk_5C.y.y * (arg1->unk_14 + temp_ft5)) + (player->unk_5C.z.y * (arg1->unk_0C - temp_fa1));
-    sp78[0] = player->unk_50.z + (player->unk_5C.x.z * arg1->unk_18) +
-              (player->unk_5C.y.z * (arg1->unk_14 + temp_ft5)) + (player->unk_5C.z.z * (arg1->unk_0C - temp_fa1));
-    sp98[1] =
-        (player->unk_50.x + (player->unk_5C.x.x * arg1->unk_18) + (player->unk_5C.y.x * (arg1->unk_14 + temp_ft5))) -
-        (player->unk_5C.z.x * (arg1->unk_0C + temp_fa1));
-    sp88[1] =
-        (player->unk_50.y + (player->unk_5C.x.y * arg1->unk_18) + (player->unk_5C.y.y * (arg1->unk_14 + temp_ft5))) -
-        (player->unk_5C.z.y * (arg1->unk_0C + temp_fa1));
-    sp78[1] =
-        (player->unk_50.z + (player->unk_5C.x.z * arg1->unk_18) + (player->unk_5C.y.z * (arg1->unk_14 + temp_ft5))) -
-        (player->unk_5C.z.z * (arg1->unk_0C + temp_fa1));
-    sp98[2] =
-        ((player->unk_50.x + (player->unk_5C.x.x * arg1->unk_18)) - (player->unk_5C.y.x * (arg1->unk_14 - temp_ft5))) +
-        (player->unk_5C.z.x * (arg1->unk_0C - temp_fa1));
-    sp88[2] =
-        ((player->unk_50.y + (player->unk_5C.x.y * arg1->unk_18)) - (player->unk_5C.y.y * (arg1->unk_14 - temp_ft5))) +
-        (player->unk_5C.z.y * (arg1->unk_0C - temp_fa1));
-    sp78[2] =
-        ((player->unk_50.z + (player->unk_5C.x.z * arg1->unk_18)) - (player->unk_5C.y.z * (arg1->unk_14 - temp_ft5))) +
-        (player->unk_5C.z.z * (arg1->unk_0C - temp_fa1));
-    sp98[3] =
-        ((player->unk_50.x + (player->unk_5C.x.x * arg1->unk_18)) - (player->unk_5C.y.x * (arg1->unk_14 - temp_ft5))) -
-        (player->unk_5C.z.x * (arg1->unk_0C + temp_fa1));
-    sp88[3] =
-        ((player->unk_50.y + (player->unk_5C.x.y * arg1->unk_18)) - (player->unk_5C.y.y * (arg1->unk_14 - temp_ft5))) -
-        (player->unk_5C.z.y * (arg1->unk_0C + temp_fa1));
-    sp78[3] =
-        ((player->unk_50.z + (player->unk_5C.x.z * arg1->unk_18)) - (player->unk_5C.y.z * (arg1->unk_14 - temp_ft5))) -
-        (player->unk_5C.z.z * (arg1->unk_0C + temp_fa1));
+    sp98[0] = camera->eye.x + (camera->basis.x.x * arg1->unk_18) + (camera->basis.y.x * (arg1->unk_14 + temp_ft5)) +
+              (camera->basis.z.x * (arg1->unk_0C - temp_fa1));
+    sp88[0] = camera->eye.y + (camera->basis.x.y * arg1->unk_18) + (camera->basis.y.y * (arg1->unk_14 + temp_ft5)) +
+              (camera->basis.z.y * (arg1->unk_0C - temp_fa1));
+    sp78[0] = camera->eye.z + (camera->basis.x.z * arg1->unk_18) + (camera->basis.y.z * (arg1->unk_14 + temp_ft5)) +
+              (camera->basis.z.z * (arg1->unk_0C - temp_fa1));
+    sp98[1] = (camera->eye.x + (camera->basis.x.x * arg1->unk_18) + (camera->basis.y.x * (arg1->unk_14 + temp_ft5))) -
+              (camera->basis.z.x * (arg1->unk_0C + temp_fa1));
+    sp88[1] = (camera->eye.y + (camera->basis.x.y * arg1->unk_18) + (camera->basis.y.y * (arg1->unk_14 + temp_ft5))) -
+              (camera->basis.z.y * (arg1->unk_0C + temp_fa1));
+    sp78[1] = (camera->eye.z + (camera->basis.x.z * arg1->unk_18) + (camera->basis.y.z * (arg1->unk_14 + temp_ft5))) -
+              (camera->basis.z.z * (arg1->unk_0C + temp_fa1));
+    sp98[2] = ((camera->eye.x + (camera->basis.x.x * arg1->unk_18)) - (camera->basis.y.x * (arg1->unk_14 - temp_ft5))) +
+              (camera->basis.z.x * (arg1->unk_0C - temp_fa1));
+    sp88[2] = ((camera->eye.y + (camera->basis.x.y * arg1->unk_18)) - (camera->basis.y.y * (arg1->unk_14 - temp_ft5))) +
+              (camera->basis.z.y * (arg1->unk_0C - temp_fa1));
+    sp78[2] = ((camera->eye.z + (camera->basis.x.z * arg1->unk_18)) - (camera->basis.y.z * (arg1->unk_14 - temp_ft5))) +
+              (camera->basis.z.z * (arg1->unk_0C - temp_fa1));
+    sp98[3] = ((camera->eye.x + (camera->basis.x.x * arg1->unk_18)) - (camera->basis.y.x * (arg1->unk_14 - temp_ft5))) -
+              (camera->basis.z.x * (arg1->unk_0C + temp_fa1));
+    sp88[3] = ((camera->eye.y + (camera->basis.x.y * arg1->unk_18)) - (camera->basis.y.y * (arg1->unk_14 - temp_ft5))) -
+              (camera->basis.z.y * (arg1->unk_0C + temp_fa1));
+    sp78[3] = ((camera->eye.z + (camera->basis.x.z * arg1->unk_18)) - (camera->basis.y.z * (arg1->unk_14 - temp_ft5))) -
+              (camera->basis.z.z * (arg1->unk_0C + temp_fa1));
 
     for (i = 0; i < 4; i++) {
         if (sp98[i] < -32000.0f) {
@@ -905,7 +908,7 @@ void func_i3_80136E74(Vtx* vtx, unk_80141FF0* arg1, Player* player, f32 arg3) {
 }
 
 extern s8 gGamePaused;
-void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, Player* player, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7,
+void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, Camera* camera, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7,
                       f32 arg8, s32 arg9, s32 argA) {
     unk_80141860* temp_v0;
     f32 temp_fv0;
@@ -934,7 +937,7 @@ void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, Player* player, f32 arg3, f3
     sp68[3] = arg1->unk_00 + arg5 - arg7;
     sp54[3] = arg1->unk_08 + arg6 - arg8;
 
-    temp_fv0 = (temp_v0->unk_04 - player->unk_50.y) / (temp_fa1 - player->unk_50.y);
+    temp_fv0 = (temp_v0->unk_04 - camera->eye.y) / (temp_fa1 - camera->eye.y);
 
     if (!gGamePaused) {
         temp_v0->unk_10 += temp_v0->unk_18;
@@ -954,14 +957,14 @@ void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, Player* player, f32 arg3, f3
         }
     }
 
-    sp44[0] = ((((sp68[0] - player->unk_50.x) * temp_fv0) + player->unk_50.x) * temp_v0->unk_08) + temp_v0->unk_10;
-    sp34[0] = ((((sp54[0] - player->unk_50.z) * temp_fv0) + player->unk_50.z) * temp_v0->unk_0C) + temp_v0->unk_14;
-    sp44[1] = ((((sp68[1] - player->unk_50.x) * temp_fv0) + player->unk_50.x) * temp_v0->unk_08) + temp_v0->unk_10;
-    sp34[1] = ((((sp54[1] - player->unk_50.z) * temp_fv0) + player->unk_50.z) * temp_v0->unk_0C) + temp_v0->unk_14;
-    sp44[2] = ((((sp68[2] - player->unk_50.x) * temp_fv0) + player->unk_50.x) * temp_v0->unk_08) + temp_v0->unk_10;
-    sp34[2] = ((((sp54[2] - player->unk_50.z) * temp_fv0) + player->unk_50.z) * temp_v0->unk_0C) + temp_v0->unk_14;
-    sp44[3] = ((((sp68[3] - player->unk_50.x) * temp_fv0) + player->unk_50.x) * temp_v0->unk_08) + temp_v0->unk_10;
-    sp34[3] = ((((sp54[3] - player->unk_50.z) * temp_fv0) + player->unk_50.z) * temp_v0->unk_0C) + temp_v0->unk_14;
+    sp44[0] = ((((sp68[0] - camera->eye.x) * temp_fv0) + camera->eye.x) * temp_v0->unk_08) + temp_v0->unk_10;
+    sp34[0] = ((((sp54[0] - camera->eye.z) * temp_fv0) + camera->eye.z) * temp_v0->unk_0C) + temp_v0->unk_14;
+    sp44[1] = ((((sp68[1] - camera->eye.x) * temp_fv0) + camera->eye.x) * temp_v0->unk_08) + temp_v0->unk_10;
+    sp34[1] = ((((sp54[1] - camera->eye.z) * temp_fv0) + camera->eye.z) * temp_v0->unk_0C) + temp_v0->unk_14;
+    sp44[2] = ((((sp68[2] - camera->eye.x) * temp_fv0) + camera->eye.x) * temp_v0->unk_08) + temp_v0->unk_10;
+    sp34[2] = ((((sp54[2] - camera->eye.z) * temp_fv0) + camera->eye.z) * temp_v0->unk_0C) + temp_v0->unk_14;
+    sp44[3] = ((((sp68[3] - camera->eye.x) * temp_fv0) + camera->eye.x) * temp_v0->unk_08) + temp_v0->unk_10;
+    sp34[3] = ((((sp54[3] - camera->eye.z) * temp_fv0) + camera->eye.z) * temp_v0->unk_0C) + temp_v0->unk_14;
 
     var_fv0 = sp44[0];
     var_ft4 = sp34[0];
@@ -1005,7 +1008,7 @@ void func_i3_801374D4(Vtx* vtx, unk_80141FF0* arg1, Player* player, f32 arg3, f3
     }
 }
 
-void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, Player* player, unk_80141860* arg3, f32 arg4, f32 arg5, f32 arg6,
+void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, Camera* camera, unk_80141860* arg3, f32 arg4, f32 arg5, f32 arg6,
                       f32 arg7, f32 arg8, f32 arg9, s32 argA, s32 argB, bool argC) {
     s32 temp1;
     s32 temp2;
@@ -1024,7 +1027,7 @@ void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, Player* player, unk_80141860
     f32 sp24[4];
 
     if (argC) {
-        var_fa0 = player->unk_50.y + arg3->unk_00;
+        var_fa0 = camera->eye.y + arg3->unk_00;
     } else {
         var_fa0 = arg1->unk_04 + arg3->unk_04;
     }
@@ -1056,15 +1059,15 @@ void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, Player* player, unk_80141860
     }
 
     if (argC) {
-        temp_ft5 = ((arg1->unk_04 + arg3->unk_04) - player->unk_50.y) / (var_fa0 - player->unk_50.y);
-        sp34[0] = ((((sp58[0] - player->unk_50.x) * temp_ft5) + player->unk_50.x) * arg3->unk_08) + arg3->unk_10;
-        sp24[0] = ((((sp44[0] - player->unk_50.z) * temp_ft5) + player->unk_50.z) * arg3->unk_0C) + arg3->unk_14;
-        sp34[1] = ((((sp58[1] - player->unk_50.x) * temp_ft5) + player->unk_50.x) * arg3->unk_08) + arg3->unk_10;
-        sp24[1] = ((((sp44[1] - player->unk_50.z) * temp_ft5) + player->unk_50.z) * arg3->unk_0C) + arg3->unk_14;
-        sp34[2] = ((((sp58[2] - player->unk_50.x) * temp_ft5) + player->unk_50.x) * arg3->unk_08) + arg3->unk_10;
-        sp24[2] = ((((sp44[2] - player->unk_50.z) * temp_ft5) + player->unk_50.z) * arg3->unk_0C) + arg3->unk_14;
-        sp34[3] = ((((sp58[3] - player->unk_50.x) * temp_ft5) + player->unk_50.x) * arg3->unk_08) + arg3->unk_10;
-        sp24[3] = ((((sp44[3] - player->unk_50.z) * temp_ft5) + player->unk_50.z) * arg3->unk_0C) + arg3->unk_14;
+        temp_ft5 = ((arg1->unk_04 + arg3->unk_04) - camera->eye.y) / (var_fa0 - camera->eye.y);
+        sp34[0] = ((((sp58[0] - camera->eye.x) * temp_ft5) + camera->eye.x) * arg3->unk_08) + arg3->unk_10;
+        sp24[0] = ((((sp44[0] - camera->eye.z) * temp_ft5) + camera->eye.z) * arg3->unk_0C) + arg3->unk_14;
+        sp34[1] = ((((sp58[1] - camera->eye.x) * temp_ft5) + camera->eye.x) * arg3->unk_08) + arg3->unk_10;
+        sp24[1] = ((((sp44[1] - camera->eye.z) * temp_ft5) + camera->eye.z) * arg3->unk_0C) + arg3->unk_14;
+        sp34[2] = ((((sp58[2] - camera->eye.x) * temp_ft5) + camera->eye.x) * arg3->unk_08) + arg3->unk_10;
+        sp24[2] = ((((sp44[2] - camera->eye.z) * temp_ft5) + camera->eye.z) * arg3->unk_0C) + arg3->unk_14;
+        sp34[3] = ((((sp58[3] - camera->eye.x) * temp_ft5) + camera->eye.x) * arg3->unk_08) + arg3->unk_10;
+        sp24[3] = ((((sp44[3] - camera->eye.z) * temp_ft5) + camera->eye.z) * arg3->unk_0C) + arg3->unk_14;
     } else {
         sp34[0] = (sp58[0] * arg3->unk_08) + arg3->unk_10;
         sp24[0] = (sp44[0] * arg3->unk_0C) + arg3->unk_14;
@@ -1123,21 +1126,21 @@ void func_i3_80137AC4(Vtx* vtx, unk_80141FF0* arg1, Player* player, unk_80141860
 extern GfxPool D_1000000;
 extern Mtx D_2000000[];
 
-Gfx* func_i7_80149760(Gfx*);
+Gfx* EndingCutsceneEffects_DrawFireworks(Gfx*);
 Gfx* func_i3_80139168(Gfx*);
 Gfx* func_i3_80139AB0(Gfx*, s32);
 
-Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
+Gfx* Background_Draw(Gfx* gfx, s32 arg1, s32 arg2) {
     CourseSkyboxes* spEC;
     s32 pad;
 
     spEC = D_i3_80142180.unk_04;
 
-    gSPPerspNormalize(gfx++, gPlayers[arg1].unk_118);
+    gSPPerspNormalize(gfx++, gCameras[arg1].perspectiveScale);
 
     gSPMatrix(gfx++, &D_1000000.unk_20208[arg1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
-    gfx = func_800833AC(gfx, arg2, arg1);
+    gfx = Camera_Draw(gfx, arg2, arg1);
     gSPDisplayList(gfx++, D_303A9E0);
 
     if (D_i3_80142174 != 0) {
@@ -1173,7 +1176,7 @@ Gfx* func_i3_801381DC(Gfx* gfx, s32 arg1, s32 arg2) {
     gSP2Triangles(gfx++, 4, 7, 5, 0, 4, 6, 7, 0);
 
     if (gGameMode == GAMEMODE_GP_END_CS) {
-        gfx = func_i7_80149760(gfx);
+        gfx = EndingCutsceneEffects_DrawFireworks(gfx);
         gSPClearGeometryMode(gfx++, 0xFFFFFFFF);
         gSPSetGeometryMode(gfx++, G_SHADE | G_SHADING_SMOOTH | G_CLIPPING);
         gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
@@ -1296,13 +1299,10 @@ void func_i3_801387EC(void) {
     }
 
     for (i = 0, gfxPool = D_8024DCE0; i < 2; i++, gfxPool++) {
-        u16 minus32 = -32;
-        // FAKE! Not sure how to generate 0xFFE0 directly
-
-        SET_VTX(&gfxPool->unk_2C4E8[0], minus32, 32, 0, 0, 0, 255, 255, 255, 255);
+        SET_VTX(&gfxPool->unk_2C4E8[0], -32, 32, 0, 0, 0, 255, 255, 255, 255);
         SET_VTX(&gfxPool->unk_2C4E8[1], 32, 32, 0, 0x800, 0, 255, 255, 255, 255);
-        SET_VTX(&gfxPool->unk_2C4E8[2], minus32, minus32, 0, 0, 0x800, 255, 255, 255, 0);
-        SET_VTX(&gfxPool->unk_2C4E8[3], 32, minus32, 0, 0x800, 0x800, 255, 255, 255, 0);
+        SET_VTX(&gfxPool->unk_2C4E8[2], -32, -32, 0, 0, 0x800, 255, 255, 255, 0);
+        SET_VTX(&gfxPool->unk_2C4E8[3], 32, -32, 0, 0x800, 0x800, 255, 255, 255, 0);
     }
     D_i3_80142178 = 0;
 
@@ -1359,9 +1359,9 @@ void func_i3_80138D80(void) {
 
     for (i = 0, var_s2 = D_i3_801421A0; i < D_i3_80142176; i++, var_s2++) {
 
-        spA0.x = 0.0f - gPlayers[playerIndex].unk_5C.x.x;
-        spA0.y = 0.0f - gPlayers[playerIndex].unk_5C.x.y;
-        spA0.z = 0.0f - gPlayers[playerIndex].unk_5C.x.z;
+        spA0.x = 0.0f - gCameras[playerIndex].basis.x.x;
+        spA0.y = 0.0f - gCameras[playerIndex].basis.x.y;
+        spA0.z = 0.0f - gCameras[playerIndex].basis.x.z;
 
         sp94.x = 0.0f - spA0.z;
         sp94.z = spA0.x;
@@ -1370,14 +1370,14 @@ void func_i3_80138D80(void) {
         sp88.y = (sp94.z * spA0.x) - (sp94.x * spA0.z);
         sp88.z = (sp94.x * spA0.y) - 0.0f;
 
-        sp94.x = gPlayers[playerIndex].unk_50.x + var_s2->unk_08;
+        sp94.x = gCameras[playerIndex].eye.x + var_s2->unk_08;
         sp94.y = 400.0f;
-        sp94.z = gPlayers[playerIndex].unk_50.z + var_s2->unk_10;
+        sp94.z = gCameras[playerIndex].eye.z + var_s2->unk_10;
 
         if ((sp94.x <= 23000.0f) && (sp94.x >= -23000.0f) && (sp94.z <= 23000.0f) && (sp94.z >= -23000.0f)) {
             var_s2->unk_02 = 1;
-            func_8006BFCC(&gGfxPool->unk_2C368[i], NULL, D_i3_801407A0, D_i3_801407A0, D_i3_801407A0, &spA0, &sp88,
-                          &sp94);
+            Matrix_SetLockedLookAtFromVectors(&gGfxPool->unk_2C368[i], NULL, D_i3_801407A0, D_i3_801407A0,
+                                              D_i3_801407A0, &spA0, &sp88, &sp94);
         } else {
             var_s2->unk_02 = 0;
         }
@@ -1397,8 +1397,6 @@ void func_i3_80138D80(void) {
         }
     }
 }
-
-#define PACK_5551(r, g, b, a) (((((r) << 11) | ((g) << 6)) | ((b) << 1)) | (a))
 
 u16 func_i3_8013907C(void) {
     s32 temp_a1;
@@ -1493,7 +1491,7 @@ void func_i3_80139550(void) {
     }
 }
 
-void func_i3_801398D0(s32 arg0, unk_80141FF0* arg1, Player* player) {
+void func_i3_801398D0(s32 arg0, unk_80141FF0* arg1, Camera* camera) {
     unk_80142320* var_v1;
     s32 i;
     f32 temp_fs0;
@@ -1509,25 +1507,27 @@ void func_i3_801398D0(s32 arg0, unk_80141FF0* arg1, Player* player) {
         temp_fv0 = var_v1->unk_08;
         temp_fv1 = var_v1->unk_0C;
         temp_fa0 = var_v1->unk_10;
-        temp_fa1 = temp_fv0 - player->unk_50.x;
-        temp_ft4 = temp_fv1 - player->unk_50.y;
-        temp_ft5 = temp_fa0 - player->unk_50.z;
-        temp_fs0 =
-            ((temp_fa1 * player->unk_5C.x.x) + (temp_ft4 * player->unk_5C.x.y) + (temp_ft5 * player->unk_5C.x.z));
+        temp_fa1 = temp_fv0 - camera->eye.x;
+        temp_ft4 = temp_fv1 - camera->eye.y;
+        temp_ft5 = temp_fa0 - camera->eye.z;
+        temp_fs0 = ((temp_fa1 * camera->basis.x.x) + (temp_ft4 * camera->basis.x.y) + (temp_ft5 * camera->basis.x.z));
         if (temp_fs0 <= 0.0f) {
             var_v1->unk_04[arg0] = 0;
         } else {
-            temp_fa1 = player->unk_19C.xw + ((player->unk_19C.xx * temp_fv0) + (player->unk_19C.xy * temp_fv1) +
-                                             (player->unk_19C.xz * temp_fa0));
-            temp_ft4 = player->unk_19C.yw + ((player->unk_19C.yx * temp_fv0) + (player->unk_19C.yy * temp_fv1) +
-                                             (player->unk_19C.yz * temp_fa0));
-            temp_ft5 = player->unk_19C.ww + ((player->unk_19C.wx * temp_fv0) + (player->unk_19C.wy * temp_fv1) +
-                                             (player->unk_19C.wz * temp_fa0));
-            var_v1->unk_14[arg0][0] = player->unk_F0 + ((temp_fa1 * player->unk_E8) / temp_ft5);
-            var_v1->unk_14[arg0][1] = player->unk_F4 - ((temp_ft4 * player->unk_EC) / temp_ft5);
+            temp_fa1 = camera->projectionViewMtx.xw +
+                       ((camera->projectionViewMtx.xx * temp_fv0) + (camera->projectionViewMtx.xy * temp_fv1) +
+                        (camera->projectionViewMtx.xz * temp_fa0));
+            temp_ft4 = camera->projectionViewMtx.yw +
+                       ((camera->projectionViewMtx.yx * temp_fv0) + (camera->projectionViewMtx.yy * temp_fv1) +
+                        (camera->projectionViewMtx.yz * temp_fa0));
+            temp_ft5 = camera->projectionViewMtx.ww +
+                       ((camera->projectionViewMtx.wx * temp_fv0) + (camera->projectionViewMtx.wy * temp_fv1) +
+                        (camera->projectionViewMtx.wz * temp_fa0));
+            var_v1->unk_14[arg0][0] = camera->currentVpTransX + ((temp_fa1 * camera->currentVpScaleX) / temp_ft5);
+            var_v1->unk_14[arg0][1] = camera->currentVpTransY - ((temp_ft4 * camera->currentVpScaleY) / temp_ft5);
             ptr = var_v1->unk_14[arg0];
-            if ((ptr[0] < player->unk_B0) || (player->unk_B8 < ptr[0]) || ((ptr[1] < player->unk_B4)) ||
-                (player->unk_BC < ptr[1])) {
+            if ((ptr[0] < camera->currentScissorLeft) || (camera->currentScissorRight < ptr[0]) ||
+                ((ptr[1] < camera->currentScissorTop)) || (camera->currentScissorBottom < ptr[1])) {
                 var_v1->unk_04[arg0] = 0;
             } else {
                 var_v1->unk_04[arg0] = 1;

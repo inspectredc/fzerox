@@ -1,19 +1,22 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_object.h"
+#include "fzx_camera.h"
+#include "fzx_bordered_box.h"
+#include "src/overlays/ovl_i2/transition.h"
 #include "ovl_i6.h"
 #include "audio.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B1E0.h"
 
 SaveContext* sSaveContextPtr;
-u8 D_i6_8011FB18[2][0x2580]; // Some kind of vtx buffer space?
-void* D_i6_80124618;
+Vtx D_i6_8011FB18[2][0x258]; // Some kind of vtx buffer space?
+Vtx* D_i6_80124618;
 s16 D_i6_80124620[176];
 s32 sOptionsDataClearMenu;
 s16 sOptionsDataAlreadyCleared;
 s32 sOptionsSelectionState[7];
-unk_800E51B8* D_i6_801247A4;
+BorderedBoxWidget* D_i6_801247A4;
 s16 D_i6_801247A8;
 s16 D_i6_801247AA;
 TexturePtr D_i6_801247AC;
@@ -24,32 +27,32 @@ s16 D_i6_801247B0;
  */
 
 // 'WITH', 'W/O'
-OptionsTextureInfo gOptionsVsComSelection[] = {
+TextureInfo gOptionsVsComSelection[] = {
     { aMenuWithTex, 32, 16 },
     { aMenuWithoutTex, 32, 16 },
 };
 
 // 'WITH', 'W/O'
-OptionsTextureInfo gOptionsVsSlotSelection[] = {
+TextureInfo gOptionsVsSlotSelection[] = {
     { aMenuWithTex, 32, 16 },
     { aMenuWithoutTex, 32, 16 },
 };
 
 // 'W/O', '+1', '+2'
-OptionsTextureInfo gOptionsVsHandicapSelection[] = {
+TextureInfo gOptionsVsHandicapSelection[] = {
     { aMenuWithoutTex, 32, 16 },
     { aMenuPlusOneTex, 32, 16 },
     { aMenuPlusTwoTex, 32, 16 },
 };
 
 // 'Stereo', 'Mono'
-OptionsTextureInfo gOptionsSoundModeSelection[] = {
+TextureInfo gOptionsSoundModeSelection[] = {
     { aMenuStereoTex, 64, 16 },
     { aMenuMonoTex, 64, 16 },
 };
 
 // 'No', 'Yes'
-OptionsTextureInfo gOptionsAllDataClearSelection[] = {
+TextureInfo gOptionsAllDataClearSelection[] = {
     { aMenuNoTex, 32, 16 },
     { aMenuYesTex, 32, 16 },
 };
@@ -131,8 +134,6 @@ UNUSED char D_i6_8011EEBC[] = "Feel Mie";
 extern s16 D_800CCFE8;
 extern s8 D_800CD3C4;
 
-void func_i6_8011C404(void);
-
 void OptionsMenu_Init(void) {
     s32 i;
     OptionsInfo* option;
@@ -155,7 +156,7 @@ void OptionsMenu_Init(void) {
     func_80078104(aMenuYesTex, TEX_SIZE(aMenuYesTex, sizeof(u8)), 0, 1, false);
 
     for (i = 0, option = gOptionsInfo; i < OPTIONS_MAX; i++, option++) {
-        func_80078104(option->optionTextureInfo.textureOffset,
+        func_80078104(option->optionTextureInfo.texture,
                       option->optionTextureInfo.width * option->optionTextureInfo.height * sizeof(u8), 0, 1, 0);
     }
 
@@ -187,8 +188,8 @@ void OptionsMenu_Init(void) {
     D_i6_801247B0 = 0;
     gOptionsCurrentRow = 0;
     func_i6_8011C404();
-    func_80080A40(&D_i6_801247A4);
-    func_80080A48();
+    BorderedBox_CleanWidget(&D_i6_801247A4);
+    BorderedBox_ClearAll();
     sSaveContextPtr = &gSaveContext;
 }
 
@@ -243,23 +244,19 @@ void func_i6_8011C404(void) {
     }
 }
 
-bool func_i6_8011C788(void);
-void func_i6_8011CBB4(void);
-void func_i6_8011D394(void);
-extern s16 D_800CD048;
-extern s32 D_i2_80106DA4;
-extern Controller gSharedController;
+extern s32 gTransitionState;
+extern s16 gMenuChangeMode;
 
 s32 OptionsMenu_Update(void) {
     Controller_SetGlobalInputs(&gSharedController);
-    func_80080C0C();
+    BorderedBox_Update();
     func_i6_8011D394();
     if (!sOptionsDataAlreadyCleared) {
         switch (sOptionsDataClearMenu) {
             case OPTIONS_DATA_CLEAR_MENU_CLOSED:
-                if (D_i2_80106DA4 == 0 && func_i6_8011C788()) {
+                if (gTransitionState == TRANSITION_INACTIVE && func_i6_8011C788()) {
                     sOptionsDataAlreadyCleared = true;
-                    D_800CD048 = 14;
+                    gMenuChangeMode = MENU_CHANGE_EXIT_OPTIONS;
                 }
                 break;
             case OPTIONS_DATA_CLEAR_MENU_OPEN:
@@ -280,7 +277,7 @@ bool func_i6_8011C788(void) {
     bool updateSettings;
     OptionsInfo* option;
 
-    if (func_8008108C(D_i6_801247A4, 0)) {
+    if (BorderedBox_GetInfo(D_i6_801247A4, IS_BORDERED_BOX_ACTIVE)) {
         return false;
     }
     lastRow = gOptionsCurrentRow;
@@ -305,7 +302,7 @@ bool func_i6_8011C788(void) {
         }
     }
     if (lastRow != gOptionsCurrentRow) {
-        func_800BA8D8(0x1E);
+        Audio_TriggerSystemSE(NA_SE_30);
         return false;
     }
     option = &gOptionsInfo[gOptionsCurrentRow];
@@ -326,11 +323,11 @@ bool func_i6_8011C788(void) {
         }
         if (lastSelectionState != sOptionsSelectionState[gOptionsCurrentRow]) {
             updateSettings = true;
-            func_800BA8D8(0x21);
+            Audio_TriggerSystemSE(NA_SE_33);
         }
     }
     if (gInputButtonPressed & BTN_B) {
-        func_800BA8D8(0x10);
+        Audio_TriggerSystemSE(NA_SE_16);
         return true;
     }
 
@@ -368,27 +365,27 @@ bool func_i6_8011C788(void) {
             if (updateSettings) {
                 if (sOptionsSelectionState[gOptionsCurrentRow] == 0) {
                     gSettingSoundMode = 0;
-                    Audio_SetSoundMode(SOUNDMODE_SURROUND); // Option says stereo, but sets surround anyway?
+                    Audio_SetOutMode(SOUNDMODE_SURROUND); // Option says stereo, but sets surround anyway?
                 } else {
                     gSettingSoundMode = 1;
-                    Audio_SetSoundMode(SOUNDMODE_MONO);
+                    Audio_SetOutMode(SOUNDMODE_MONO);
                 }
             }
             break;
         case OPTIONS_DATA_CLEAR:
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 D_i6_801247A4 =
-                    func_80080AA8(0, 0x5A, 0x8C, 0x94, 0x50, GPACK_RGBA5551(255, 0, 0, 1), func_i6_8011D168);
+                    BorderedBox_Init(0, 0x5A, 0x8C, 0x94, 0x50, GPACK_RGBA5551(255, 0, 0, 1), func_i6_8011D168);
                 if (D_i6_801247A4 != NULL) {
                     sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_OPEN;
                     sOptionsSelectionState[gOptionsCurrentRow] = 0;
-                    func_800BA8D8(0x21);
+                    Audio_TriggerSystemSE(NA_SE_33);
                 }
             }
             break;
         case OPTIONS_EXIT:
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(NA_SE_16);
                 return true;
             }
             break;
@@ -402,8 +399,8 @@ bool func_i6_8011C788(void) {
     return false;
 }
 
-extern s32 D_800E5F00[];
-extern s32 D_800E5F10[];
+extern s32 gVsRacePlayerVictoryCount[];
+extern s32 gVsRacePlayerPoints[];
 
 void func_i6_8011CBB4(void) {
     s32 lastSelectionState;
@@ -411,7 +408,7 @@ void func_i6_8011CBB4(void) {
     s32 i;
     bool updateSettings;
 
-    if (func_8008108C(D_i6_801247A4, 1) != 0) {
+    if (BorderedBox_GetInfo(D_i6_801247A4, IS_BORDERED_BOX_OPENED)) {
         lastSelectionState = sOptionsSelectionState[gOptionsCurrentRow];
         if (gInputButtonPressed & BTN_LEFT) {
             if (--sOptionsSelectionState[gOptionsCurrentRow] < 0) {
@@ -424,7 +421,7 @@ void func_i6_8011CBB4(void) {
             }
         }
         if (lastSelectionState != sOptionsSelectionState[gOptionsCurrentRow]) {
-            func_800BA8D8(0x1E);
+            Audio_TriggerSystemSE(NA_SE_30);
         }
         updateSettings = false;
         if (gInputButtonPressed & (BTN_A | BTN_START)) {
@@ -433,25 +430,23 @@ void func_i6_8011CBB4(void) {
                 Save_Init(sSaveContextPtr, 1);
                 func_i6_8011C404();
                 for (i = 0; i < 4; i++) {
-                    D_800E5F00[i] = D_800E5F10[i] = 0;
+                    gVsRacePlayerVictoryCount[i] = gVsRacePlayerPoints[i] = 0;
                 }
                 func_8007E398();
-                func_800BA8D8(5);
+                Audio_TriggerSystemSE(NA_SE_5);
             } else {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(NA_SE_16);
             }
         } else if (gInputButtonPressed & BTN_B) {
             updateSettings = true;
-            func_800BA8D8(0x10);
+            Audio_TriggerSystemSE(NA_SE_16);
         }
         if (updateSettings) {
             sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_CLOSED;
-            func_80080BDC(D_i6_801247A4);
+            BorderedBox_StartClose(D_i6_801247A4);
         }
     }
 }
-
-Gfx* func_i6_8011D8C8(Gfx*);
 
 Gfx* OptionsMenu_Draw(Gfx* gfx) {
     s32 temp_s4;
@@ -459,8 +454,8 @@ Gfx* OptionsMenu_Draw(Gfx* gfx) {
     s32 i;
     s32 var_s7;
     OptionsInfo* option;
-    OptionsTextureInfo* selectionStateTextureInfo;
-    OptionsTextureInfo* optionTextureInfo;
+    TextureInfo* selectionStateTextureInfo;
+    TextureInfo* optionTextureInfo;
 
     gfx = Object_UpdateAndDrawAll(gfx);
     if (D_i6_801247A8 != 1) {
@@ -499,8 +494,8 @@ Gfx* OptionsMenu_Draw(Gfx* gfx) {
             gfx = func_8007DB28(gfx, 0);
         }
         optionTextureInfo = &option->optionTextureInfo;
-        gfx = func_8007E410(gfx, func_800783AC(optionTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
-                            option->unk_0C + 0x1E, var_s5, optionTextureInfo->width, optionTextureInfo->height, 0);
+        gfx = func_8007E410(gfx, func_800783AC(optionTextureInfo->texture), NULL, G_IM_FMT_CI, 1, option->unk_0C + 0x1E,
+                            var_s5, optionTextureInfo->width, optionTextureInfo->height, 0);
 
         if (!(option->flags & OPTIONS_REQUIRE_SELECTING)) {
             gfx =
@@ -509,19 +504,19 @@ Gfx* OptionsMenu_Draw(Gfx* gfx) {
                                 0);
             selectionStateTextureInfo = &option->selectionStateTextureInfo[sOptionsSelectionState[i]];
             temp_s4 = ((60 - selectionStateTextureInfo->width) / 2) + option->unk_10;
-            gfx = func_8007E410(gfx, func_800783AC(selectionStateTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
+            gfx = func_8007E410(gfx, func_800783AC(selectionStateTextureInfo->texture), NULL, G_IM_FMT_CI, 1,
                                 temp_s4 + 0xD0, var_s5, selectionStateTextureInfo->width,
                                 selectionStateTextureInfo->height, 0);
         }
         var_s5 += var_s7;
     }
 
-    return func_80080E90(gfx);
+    return BorderedBox_Draw(gfx);
 }
 
 Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
     s32 sp54;
-    OptionsTextureInfo* dataClearTextureInfo;
+    TextureInfo* dataClearTextureInfo;
 
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -537,8 +532,8 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
                         0);
     dataClearTextureInfo = &gOptionsAllDataClearSelection[sOptionsSelectionState[gOptionsCurrentRow]];
     sp54 = (60 - dataClearTextureInfo->width) / 2;
-    return func_8007E410(gfx, func_800783AC(dataClearTextureInfo->textureOffset), NULL, G_IM_FMT_CI, 1,
-                         arg1 + sp54 + 0x2A, arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);
+    return func_8007E410(gfx, func_800783AC(dataClearTextureInfo->texture), NULL, G_IM_FMT_CI, 1, arg1 + sp54 + 0x2A,
+                         arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);
 }
 
 extern GfxPool* gGfxPool;
@@ -601,7 +596,7 @@ void func_i6_8011D394(void) {
     }
 
     D_i6_80124618 = D_i6_8011FB18[D_800DCCFC];
-    func_8006D2E0(gGfxPool->unk_2B248, NULL, 1.0f, 0.0f, 319.0f, 239.0f, 0.0f, -100.0f, 100.0f);
+    Matrix_SetOrtho(gGfxPool->unk_2B248, NULL, 1.0f, 0.0f, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1, 0.0f, -100.0f, 100.0f);
     vtx = D_i6_80124618;
 
     var_s0 = 32;
@@ -662,7 +657,7 @@ Gfx* func_i6_8011D8C8(Gfx* gfx) {
     s32 var_t5;
 
     if ((D_i6_801247A8 == 1) || (D_i6_801247A8 == 2)) {
-        gfx = func_8006A00C(gfx, 0);
+        gfx = func_8006A00C(gfx, SCISSOR_BOX_FULL_SCREEN);
         gSPDisplayList(gfx++, D_8014810);
         gDPSetTextureFilter(gfx++, G_TF_POINT);
         gDPSetRenderMode(gfx++, G_RM_XLU_SURF, G_RM_NOOP2);

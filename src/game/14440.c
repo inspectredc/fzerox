@@ -24,11 +24,11 @@ s8 D_800CD3AC[] = { 1, 1, 1, 1 };
 
 s32 gMachineSelectState = MACHINE_SELECT_ACTIVE;
 s32 gMachineSettingsState = MACHINE_SETTINGS_ACTIVE;
-s32 D_800CD3B8 = 0;
-s32 D_800CD3BC = 0;
+s32 gLastCourseSelectCourseIndex = 0;
+s32 gLastRecordsCourseIndex = 0;
 s8 gUnlockableLevel = 0;
 s8 D_800CD3C4 = 0;
-s8 gSettingEverythingUnlocked = 0;
+s8 gSettingEverythingUnlocked = false;
 s32 gCurrentGhostType = GHOST_PLAYER;
 
 const char* sTrackNames[] = { "mute city",
@@ -186,8 +186,6 @@ Gfx* func_8007ABA4(Gfx* gfx) {
     }
     return gfx;
 }
-
-#define PACK_5551(r, g, b, a) (((((r) << 11) | ((g) << 6)) | ((b) << 1)) | (a))
 
 Gfx* func_8007AC48(Gfx* gfx, u16 red, u16 green, u16 blue) {
 
@@ -739,7 +737,7 @@ void func_8007D9D0(void) {
 
 void Controller_SetGlobalInputs(Controller* controller) {
     gInputButtonPressed = controller->buttonPressed | STICK_TO_BUTTON(controller->stickPressed);
-    if (controller->unk_82 != 0) {
+    if (controller->retriggerCurrentButtonPress != 0) {
         gStickPressed = controller->buttonCurrent | STICK_TO_BUTTON(controller->stickCurrent);
     } else {
         gStickPressed = 0;
@@ -792,7 +790,7 @@ void func_8007DED8(void) {
 extern s32 gCupType;
 extern s32 gDifficulty;
 
-extern s16 D_800E42CC;
+extern s16 gForceCredits;
 
 void func_8007DEF0(void) {
     s32 i;
@@ -828,7 +826,7 @@ void func_8007DEF0(void) {
         }
 
         if (var_v1 != 0) {
-            D_800E42CC = 1;
+            gForceCredits = true;
         }
     }
     Save_SaveSettingsProfiles();
@@ -844,11 +842,11 @@ s32 func_8007E008(void) {
     return sum;
 }
 
-extern s32 gRamDDCompatible;
-extern bool gLeoDDConnected;
+extern bool gRamDDCompatible;
+extern s32 gLeoDriveConnectionState;
 
 bool func_8007E038(void) {
-    if (gRamDDCompatible && gLeoDDConnected && (func_800760F8() == 2)) {
+    if (gRamDDCompatible && (gLeoDriveConnectionState != 0) && (func_800760F8() == 2)) {
         return true;
     }
     return false;
@@ -902,11 +900,11 @@ const s8 kMachineSelectCharacterList[] = { CAPTAIN_FALCON,
                                            THE_SKULL,
                                            30 };
 
-s8 func_8007E10C(s32 i) {
+s8 Character_GetCharacterFromSlot(s32 i) {
     return kMachineSelectCharacterList[i];
 }
 
-s32 func_8007E11C(s32 character) {
+s32 Character_GetSlotFromCharacter(s32 character) {
     s32 i;
 
     for (i = 0; i < 30; i++) {
@@ -1000,7 +998,7 @@ void func_8007E398(void) {
         gModeSubOption[i] = 0;
     }
 
-    D_800CD3B8 = 0;
-    D_800CD3BC = 0;
+    gLastCourseSelectCourseIndex = 0;
+    gLastRecordsCourseIndex = 0;
     gCurrentGhostType = GHOST_PLAYER;
 }

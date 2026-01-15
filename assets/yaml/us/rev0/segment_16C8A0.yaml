@@ -376,75 +376,75 @@ D_80146A0:
   offset: 0x146A0
   symbol: D_80146A0
 
-D_80146A8:
+aVpFullScreen:
   type: VP
   offset: 0x146A8
-  symbol: D_80146A8
+  symbol: aVpFullScreen
 
-D_80146B8:
+aVpTopHalf:
   type: VP
   offset: 0x146B8
-  symbol: D_80146B8
+  symbol: aVpTopHalf
 
-D_80146C8:
+aVpBottomHalf:
   type: VP
   offset: 0x146C8
-  symbol: D_80146C8
+  symbol: aVpBottomHalf
 
-D_80146D8:
+aVpLeftHalf:
   type: VP
   offset: 0x146D8
-  symbol: D_80146D8
+  symbol: aVpLeftHalf
 
-D_80146E8:
+aVpRightHalf:
   type: VP
   offset: 0x146E8
-  symbol: D_80146E8
+  symbol: aVpRightHalf
 
-D_80146F8:
+aVpTopLeftQuarter:
   type: VP
   offset: 0x146F8
-  symbol: D_80146F8
+  symbol: aVpTopLeftQuarter
 
-D_8014708:
+aVpTopRightQuarter:
   type: VP
   offset: 0x14708
-  symbol: D_8014708
+  symbol: aVpTopRightQuarter
 
-D_8014718:
+aVpBottomLeftQuarter:
   type: VP
   offset: 0x14718
-  symbol: D_8014718
+  symbol: aVpBottomLeftQuarter
 
-D_8014728:
+aVpBottomRightQuarter:
   type: VP
   offset: 0x14728
-  symbol: D_8014728
+  symbol: aVpBottomRightQuarter
 
-D_8014738:
+aVpTopCenterQuarter:
   type: VP
   offset: 0x14738
-  symbol: D_8014738
+  symbol: aVpTopCenterQuarter
 
-D_8014748:
+aVpBottomCenterQuarter:
   type: VP
   offset: 0x14748
-  symbol: D_8014748
+  symbol: aVpBottomCenterQuarter
 
-D_8014758:
+aVpLeftCenterQuarter:
   type: VP
   offset: 0x14758
-  symbol: D_8014758
+  symbol: aVpLeftCenterQuarter
 
-D_8014768:
+aVpRightCenterQuarter:
   type: VP
   offset: 0x14768
-  symbol: D_8014768
+  symbol: aVpRightCenterQuarter
 
-D_8014780:
+aSetupFillBlackDL:
   type: GFX
   offset: 0x14780
-  symbol: D_8014780
+  symbol: aSetupFillBlackDL
 
 D_80147B0:
   type: GFX

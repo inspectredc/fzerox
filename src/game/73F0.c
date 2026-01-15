@@ -77,7 +77,7 @@ extern unk_802D3D38 D_802D3D38[];
 extern CourseInfo* gCurrentCourseInfo;
 extern unk_802D1B60 D_802D1B60;
 
-void func_8006D448(void) {
+void Course_LandminesViewInteractDataInit(void) {
     unk_802D1B60_unk_00* temp_s0;
     s32 i;
     s32 j;
@@ -105,9 +105,9 @@ void func_8006D448(void) {
         }
 
         courseSegment = &gCurrentCourseInfo->courseSegments[temp_s0->segmentIndex];
-        temp = func_8009E108(courseSegment, temp_s0->unk_08, &spAC);
-        func_8009E85C(courseSegment, temp_s0->unk_08, &sp6C, temp);
-        func_8009E6F0(courseSegment, temp_s0->unk_08, &sp90);
+        temp = Course_SplineGetLengthInfo(courseSegment, temp_s0->unk_08, &spAC);
+        Course_SplineGetBasis(courseSegment, temp_s0->unk_08, &sp6C, temp);
+        Course_SplineGetPosition(courseSegment, temp_s0->unk_08, &sp90);
 
         sp90.x += (temp_s0->unk_0C * sp6C.z.x) + (2 * sp6C.y.x);
         sp90.y += (temp_s0->unk_0C * sp6C.z.y) + (2 * sp6C.y.y);
@@ -199,7 +199,7 @@ extern unk_802D2D78 D_802D2D78[];
 #ifdef NON_EQUIVALENT
 #define VERTEX_MODIFIED_ST(s, t) ((((s) << 15) & 0xFFFF0000) | ((t) &0xFFFF))
 
-Gfx* func_8006DAAC(Gfx* gfx, s32 arg1) {
+Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
     u32 i;
     s32 j;
     s32 k;
@@ -406,13 +406,13 @@ Gfx* func_8006DAAC(Gfx* gfx, s32 arg1) {
 }
 #else
 #ifdef VERSION_JP
-#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/73F0/func_8006DAAC.s")
+#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/73F0/Course_GadgetsDraw.s")
 #else
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/func_8006DAAC.s")
+#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/73F0/Course_GadgetsDraw.s")
 #endif
 #endif
 
-void func_8006E478(void) {
+void Course_JumpsViewInteractDataInit(void) {
     unk_802D1B60* var = &D_802D1B60;
     s32 i;
     s32 j;
@@ -440,9 +440,9 @@ void func_8006E478(void) {
             continue;
         }
         courseSegment = &gCurrentCourseInfo->courseSegments[temp_s0->segmentIndex];
-        temp = func_8009E108(courseSegment, temp_s0->unk_08, &spA4);
-        func_8009E85C(courseSegment, temp_s0->unk_08, &sp58, temp);
-        func_8009E6F0(courseSegment, temp_s0->unk_08, &sp88);
+        temp = Course_SplineGetLengthInfo(courseSegment, temp_s0->unk_08, &spA4);
+        Course_SplineGetBasis(courseSegment, temp_s0->unk_08, &sp58, temp);
+        Course_SplineGetPosition(courseSegment, temp_s0->unk_08, &sp88);
 
         sp88.x += temp_s0->unk_0C * sp58.z.x - 0.5 * temp_s0->unk_10.x * sp58.z.x;
         sp88.y += temp_s0->unk_0C * sp58.z.y - 0.5 * temp_s0->unk_10.x * sp58.z.y;
@@ -535,7 +535,7 @@ void func_8006E478(void) {
 
 extern s32 D_800F8518;
 
-void func_8006EC7C(void) {
+void Course_DecorationsViewInteractDataInit(void) {
     CourseSegment* courseSegment;
     unk_36ED0* var_s1;
     unk_802D08E0* var_s0;
@@ -571,9 +571,9 @@ void func_8006EC7C(void) {
         }
         courseSegment = &gCurrentCourseInfo->courseSegments[temp_s3->segmentIndex];
 
-        temp = func_8009E108(courseSegment, temp_s3->unk_08, &sp14C);
-        func_8009E85C(courseSegment, temp_s3->unk_08, &spAC, temp);
-        func_8009E6F0(courseSegment, temp_s3->unk_08, &spD0);
+        temp = Course_SplineGetLengthInfo(courseSegment, temp_s3->unk_08, &sp14C);
+        Course_SplineGetBasis(courseSegment, temp_s3->unk_08, &spAC, temp);
+        Course_SplineGetPosition(courseSegment, temp_s3->unk_08, &spD0);
 
         if (COURSE_FEATURE_IS_BUILDING(temp_s3->featureType)) {
             if (SQ(spAC.x.y) > 0.95) {
@@ -638,31 +638,32 @@ void func_8006EC7C(void) {
             case COURSE_FEATURE_SIGN_TV_LEFT:
             case COURSE_FEATURE_SIGN_2_LEFT:
             case COURSE_FEATURE_SIGN_1_LEFT:
-                func_8006BC84(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x * -1.0f,
-                              var_s0->unk_0C.x.y * -1.0f, var_s0->unk_0C.x.z * -1.0f, var_s0->unk_0C.y.x,
-                              var_s0->unk_0C.y.y, var_s0->unk_0C.y.z, var_s0->unk_00.x, var_s0->unk_00.y,
-                              var_s0->unk_00.z);
+                Matrix_SetLockedLookAt(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30,
+                                       var_s0->unk_0C.x.x * -1.0f, var_s0->unk_0C.x.y * -1.0f,
+                                       var_s0->unk_0C.x.z * -1.0f, var_s0->unk_0C.y.x, var_s0->unk_0C.y.y,
+                                       var_s0->unk_0C.y.z, var_s0->unk_00.x, var_s0->unk_00.y, var_s0->unk_00.z);
                 break;
             case COURSE_FEATURE_SIGN_NINTEX_RIGHT:
-                func_8006BC84(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x,
-                              var_s0->unk_0C.x.y, var_s0->unk_0C.x.z, var_s0->unk_0C.y.x, var_s0->unk_0C.y.y,
-                              var_s0->unk_0C.y.z, var_s0->unk_00.x + (var_s0->unk_0C.y.x * 50.0f),
-                              var_s0->unk_00.y + (var_s0->unk_0C.y.y * 50.0f),
-                              var_s0->unk_00.z + (var_s0->unk_0C.y.z * 50.0f));
+                Matrix_SetLockedLookAt(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x,
+                                       var_s0->unk_0C.x.y, var_s0->unk_0C.x.z, var_s0->unk_0C.y.x, var_s0->unk_0C.y.y,
+                                       var_s0->unk_0C.y.z, var_s0->unk_00.x + (var_s0->unk_0C.y.x * 50.0f),
+                                       var_s0->unk_00.y + (var_s0->unk_0C.y.y * 50.0f),
+                                       var_s0->unk_00.z + (var_s0->unk_0C.y.z * 50.0f));
                 break;
             case COURSE_FEATURE_SIGN_OVERHEAD:
-                func_8006BC84(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x,
-                              var_s0->unk_0C.x.y, var_s0->unk_0C.x.z, var_s0->unk_0C.y.x, var_s0->unk_0C.y.y,
-                              var_s0->unk_0C.y.z, var_s0->unk_00.x + (var_s0->unk_0C.y.x * 100.0f * var_s0->unk_30),
-                              var_s0->unk_00.y + (var_s0->unk_0C.y.y * 100.0f * var_s0->unk_30),
-                              var_s0->unk_00.z + (var_s0->unk_0C.y.z * 100.0f * var_s0->unk_30));
+                Matrix_SetLockedLookAt(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x,
+                                       var_s0->unk_0C.x.y, var_s0->unk_0C.x.z, var_s0->unk_0C.y.x, var_s0->unk_0C.y.y,
+                                       var_s0->unk_0C.y.z,
+                                       var_s0->unk_00.x + (var_s0->unk_0C.y.x * 100.0f * var_s0->unk_30),
+                                       var_s0->unk_00.y + (var_s0->unk_0C.y.y * 100.0f * var_s0->unk_30),
+                                       var_s0->unk_00.z + (var_s0->unk_0C.y.z * 100.0f * var_s0->unk_30));
                 break;
             case COURSE_FEATURE_SIGN_NINTEX_LEFT:
-                func_8006BC84(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x * -1.0f,
-                              var_s0->unk_0C.x.y * -1.0f, var_s0->unk_0C.x.z * -1.0f, var_s0->unk_0C.y.x,
-                              var_s0->unk_0C.y.y, var_s0->unk_0C.y.z, var_s0->unk_00.x + (var_s0->unk_0C.y.x * 50.0f),
-                              var_s0->unk_00.y + (var_s0->unk_0C.y.y * 50.0f),
-                              var_s0->unk_00.z + (var_s0->unk_0C.y.z * 50.0f));
+                Matrix_SetLockedLookAt(
+                    mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x * -1.0f,
+                    var_s0->unk_0C.x.y * -1.0f, var_s0->unk_0C.x.z * -1.0f, var_s0->unk_0C.y.x, var_s0->unk_0C.y.y,
+                    var_s0->unk_0C.y.z, var_s0->unk_00.x + (var_s0->unk_0C.y.x * 50.0f),
+                    var_s0->unk_00.y + (var_s0->unk_0C.y.y * 50.0f), var_s0->unk_00.z + (var_s0->unk_0C.y.z * 50.0f));
                 break;
             case COURSE_FEATURE_BUILDING_TALL_LEFT:
             case COURSE_FEATURE_BUILDING_TALL_RIGHT:
@@ -674,14 +675,14 @@ void func_8006EC7C(void) {
             case COURSE_FEATURE_BUILDING_MOUNTAIN_RIGHT:
             case COURSE_FEATURE_BUILDING_TALL_GOLD_LEFT:
             case COURSE_FEATURE_BUILDING_TALL_GOLD_RIGHT:
-                func_8006BC84(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x,
-                              var_s0->unk_0C.x.y, var_s0->unk_0C.x.z, 0.0f, 1.0f, 0.0f, var_s0->unk_00.x, -750.0f,
-                              var_s0->unk_00.z);
+                Matrix_SetLockedLookAt(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x,
+                                       var_s0->unk_0C.x.y, var_s0->unk_0C.x.z, 0.0f, 1.0f, 0.0f, var_s0->unk_00.x,
+                                       -750.0f, var_s0->unk_00.z);
                 break;
             default:
-                func_8006BC84(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x,
-                              var_s0->unk_0C.x.y, var_s0->unk_0C.x.z, var_s0->unk_0C.y.x, var_s0->unk_0C.y.y,
-                              var_s0->unk_0C.y.z, var_s0->unk_00.x, var_s0->unk_00.y, var_s0->unk_00.z);
+                Matrix_SetLockedLookAt(mtx, &spDC, var_s0->unk_30, var_s0->unk_30, var_s0->unk_30, var_s0->unk_0C.x.x,
+                                       var_s0->unk_0C.x.y, var_s0->unk_0C.x.z, var_s0->unk_0C.y.x, var_s0->unk_0C.y.y,
+                                       var_s0->unk_0C.y.z, var_s0->unk_00.x, var_s0->unk_00.y, var_s0->unk_00.z);
                 break;
         }
         mtx++;
@@ -898,13 +899,13 @@ void func_8006FC8C(CourseSegment* arg0, f32 arg1, Vec3f* arg2) {
     f32 temp_fv0;
     Mtx3F sp28;
 
-    temp_fv0 = func_8009E108(arg0, arg1, &sp58);
+    temp_fv0 = Course_SplineGetLengthInfo(arg0, arg1, &sp58);
 
     sp54 = ((arg0->next->radiusLeft - arg0->radiusLeft) * temp_fv0) + arg0->radiusLeft;
     sp50 = ((arg0->next->radiusRight - arg0->radiusRight) * temp_fv0) + arg0->radiusRight;
 
-    func_8009E85C(arg0, arg1, &sp28, temp_fv0);
-    func_8009E6F0(arg0, arg1, arg2);
+    Course_SplineGetBasis(arg0, arg1, &sp28, temp_fv0);
+    Course_SplineGetPosition(arg0, arg1, arg2);
     sp58 = (sp54 - sp50) / 2.0f;
 
     arg2->x += sp58 * sp28.z.x;
@@ -1003,8 +1004,8 @@ void func_8006FF90(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     sp2C = &gCurrentCourseInfo->courseSegments[arg1->segmentIndex];
     vtx = *arg2;
 
-    sp74 = func_8009E538(sp2C, sp78, &sp54);
-    func_8009E85C(sp2C, arg1->unk_08, &sp30, func_8009E108(sp2C, arg1->unk_08, &sp6C));
+    sp74 = Course_SplineGetTangent(sp2C, sp78, &sp54);
+    Course_SplineGetBasis(sp2C, arg1->unk_08, &sp30, Course_SplineGetLengthInfo(sp2C, arg1->unk_08, &sp6C));
     func_8006FC8C(sp2C, arg1->unk_08, &sp60);
     sp60.x += 5.0f * sp30.y.x;
     sp60.y += 5.0f * sp30.y.y;
@@ -1079,17 +1080,18 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     sp88 = &gCurrentCourseInfo->courseSegments[arg1->segmentIndex];
     vtx = *arg2;
 
-    spEC = func_8009E538(sp88, spF0, &spBC);
-    spE8 = func_8009E108(sp88, arg1->unk_08, &spE4);
+    spEC = Course_SplineGetTangent(sp88, spF0, &spBC);
+    spE8 = Course_SplineGetLengthInfo(sp88, arg1->unk_08, &spE4);
 
-    func_8009E85C(sp88, arg1->unk_08, &sp8C, spE8);
+    Course_SplineGetBasis(sp88, arg1->unk_08, &sp8C, spE8);
 
     spE0 = sp88->radiusLeft + sp88->radiusRight;
     spE0 = (((sp88->next->radiusLeft + sp88->next->radiusRight) - spE0) * spE8) + spE0;
     spE0 /= 2;
 
     func_8006FC8C(sp88, arg1->unk_08, &spC8);
-    func_8006C520(NULL, &sp44, 1.0f, DEG_TO_FZXANG(arg1->unk_10), sp8C.x.x, sp8C.x.y, sp8C.x.z, 0.0f, 0.0f, 0.0f);
+    Matrix_SetAxisRotation(NULL, &sp44, 1.0f, DEG_TO_FZXANG(arg1->unk_10), sp8C.x.x, sp8C.x.y, sp8C.x.z, 0.0f, 0.0f,
+                           0.0f);
     spBC.x = sp44.m[0][0] * sp8C.z.x + sp44.m[1][0] * sp8C.z.y + sp44.m[2][0] * sp8C.z.z;
     spBC.y = sp44.m[0][1] * sp8C.z.x + sp44.m[1][1] * sp8C.z.y + sp44.m[2][1] * sp8C.z.z;
     spBC.z = sp44.m[0][2] * sp8C.z.x + sp44.m[1][2] * sp8C.z.y + sp44.m[2][2] * sp8C.z.z;
@@ -1197,10 +1199,10 @@ Vtx* func_80070B5C(CourseSegment* arg0, f32 arg1, unk_8006FF90_arg_1* arg2, Vtx*
 
     while (true) {
         func_8006FD7C((s32) (arg3 - D_800E32D0) / 2, arg0->segmentIndex, arg1);
-        func_8009E538(arg0, arg1, &spDC);
+        Course_SplineGetTangent(arg0, arg1, &spDC);
         func_8006FC8C(arg0, arg1, &spE8);
-        temp_fv0 = func_8009E108(arg0, arg1, &spF4);
-        func_8009E85C(arg0, arg1, &sp88, temp_fv0);
+        temp_fv0 = Course_SplineGetLengthInfo(arg0, arg1, &spF4);
+        Course_SplineGetBasis(arg0, arg1, &sp88, temp_fv0);
         spE8.x += sp88.y.x * 10.0f;
         spE8.y += sp88.y.y * 10.0f;
         spE8.z += sp88.y.z * 10.0f;
@@ -1289,7 +1291,7 @@ Vtx* func_80070B5C(CourseSegment* arg0, f32 arg1, unk_8006FF90_arg_1* arg2, Vtx*
 
 extern Vtx D_802268C0[];
 
-void func_80071260(s32 arg0) {
+void Course_EffectsViewInteractDataInit(s32 arg0) {
     s32 i;
     s32 j;
     s32 pad;
@@ -1639,7 +1641,7 @@ void func_80071BE4(s32 courseIndex) {
         switch (gCourseData.landmine[i]) {
             case LANDMINE_MIDDLE:
                 temp_fs2 /= 5.0f;
-                temp = func_8009E538(courseSegment, 0.0f, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, 0.0f, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1667,7 +1669,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
                 var_s0->segmentIndex = i;
@@ -1682,7 +1684,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1710,7 +1712,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
                 var_s0->segmentIndex = i;
@@ -1740,7 +1742,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, 0.0f, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, 0.0f, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1755,7 +1757,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1770,7 +1772,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1785,7 +1787,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1800,7 +1802,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1830,7 +1832,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, 0.0f, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, 0.0f, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1845,7 +1847,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1860,7 +1862,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1875,7 +1877,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1890,7 +1892,7 @@ void func_80071BE4(s32 courseIndex) {
                 var_s1++;
                 var_s2++;
 
-                temp = func_8009E538(courseSegment, var_fs0, &sp88);
+                temp = Course_SplineGetTangent(courseSegment, var_fs0, &sp88);
                 var_fs0 += temp_fs2 / temp;
                 var_s0->segmentIndex = i;
                 var_s0->featureType = COURSE_FEATURE_LANDMINE;
@@ -1949,7 +1951,7 @@ void func_8007243C(s32 courseIndex) {
 
         switch (gCourseData.jump[i]) {
             case JUMP_ALL:
-                temp_fv1 -= 100.0f / func_8009E538(temp_a0, 1.0f, &sp88);
+                temp_fv1 -= 100.0f / Course_SplineGetTangent(temp_a0, 1.0f, &sp88);
                 temp_fv1 += 1.0f;
 
                 var_s0->featureType = COURSE_FEATURE_JUMP;
@@ -1964,7 +1966,7 @@ void func_8007243C(s32 courseIndex) {
                 var_s3++;
                 break;
             case JUMP_LEFT:
-                temp_fv1 -= 100.0f / func_8009E538(temp_a0, 1.0f, &sp88);
+                temp_fv1 -= 100.0f / Course_SplineGetTangent(temp_a0, 1.0f, &sp88);
                 temp_fv1 += 1.0f;
 
                 var_s0->featureType = COURSE_FEATURE_JUMP;
@@ -1979,7 +1981,7 @@ void func_8007243C(s32 courseIndex) {
                 var_s3++;
                 break;
             case JUMP_RIGHT:
-                temp_fv1 -= 100.0f / func_8009E538(temp_a0, 1.0f, &sp88);
+                temp_fv1 -= 100.0f / Course_SplineGetTangent(temp_a0, 1.0f, &sp88);
                 temp_fv1 += 1.0f;
 
                 var_s0->featureType = COURSE_FEATURE_JUMP;
@@ -2030,7 +2032,7 @@ void func_80072758(s32 arg0, s32 segmentIndex) {
     switch (gCourseData.dash[segmentIndex]) {
         case DASH_MIDDLE:
             sp58 /= 2;
-            temp = func_8009E538(sp3C, 0, &sp2C);
+            temp = Course_SplineGetTangent(sp3C, 0, &sp2C);
             var_fs0 += sp58 / temp;
             sp38->segmentIndex = segmentIndex;
             sp38->effectType = COURSE_EFFECT_DASH;
@@ -2056,7 +2058,7 @@ void func_80072758(s32 arg0, s32 segmentIndex) {
             break;
         case DASH_LEFT:
             sp58 /= 2;
-            temp = func_8009E538(sp3C, 0, &sp2C);
+            temp = Course_SplineGetTangent(sp3C, 0, &sp2C);
             var_fs0 += sp58 / temp;
             sp4C = (var_fs0 * sp48) + sp4C;
             sp38->segmentIndex = segmentIndex;
@@ -2085,7 +2087,7 @@ void func_80072758(s32 arg0, s32 segmentIndex) {
             break;
         case DASH_RIGHT:
             sp58 /= 2;
-            temp = func_8009E538(sp3C, 0, &sp2C);
+            temp = Course_SplineGetTangent(sp3C, 0, &sp2C);
             var_fs0 += sp58 / temp;
             sp4C = (var_fs0 * sp48) + sp4C;
             sp38->segmentIndex = segmentIndex;
@@ -2854,18 +2856,18 @@ void func_80073A04(void) {
 }
 
 extern OSMesgQueue gDmaMesgQueue;
-extern OSIoMesg D_800DCCA8;
+extern OSIoMesg gDmaIOMsg;
 extern OSPiHandle* gCartRomHandle;
 
 void Dma_ClearRomCopy(void* romAddr, void* ramAddr, size_t size) {
     osInvalDCache(osPhysicalToVirtual(ramAddr), size);
-    D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
-    D_800DCCA8.hdr.retQueue = &gDmaMesgQueue;
-    D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
-    D_800DCCA8.devAddr = (uintptr_t) romAddr;
-    D_800DCCA8.size = size;
+    gDmaIOMsg.hdr.pri = OS_MESG_PRI_NORMAL;
+    gDmaIOMsg.hdr.retQueue = &gDmaMesgQueue;
+    gDmaIOMsg.dramAddr = osPhysicalToVirtual(ramAddr);
+    gDmaIOMsg.devAddr = (uintptr_t) romAddr;
+    gDmaIOMsg.size = size;
     gCartRomHandle->transferInfo.cmdType = LEO_CMD_TYPE_2;
-    osEPiStartDma(gCartRomHandle, &D_800DCCA8, OS_READ);
+    osEPiStartDma(gCartRomHandle, &gDmaIOMsg, OS_READ);
     MQ_WAIT_FOR_MESG(&gDmaMesgQueue, NULL);
 }
 
@@ -2876,13 +2878,13 @@ void Dma_RomCopyAsync(void* romAddr, void* ramAddr, size_t size) {
         MQ_WAIT_FOR_MESG(&gDmaMesgQueue, sp20);
     }
     osInvalDCache(osPhysicalToVirtual(ramAddr), size);
-    D_800DCCA8.hdr.pri = OS_MESG_PRI_NORMAL;
-    D_800DCCA8.hdr.retQueue = &gDmaMesgQueue;
-    D_800DCCA8.dramAddr = osPhysicalToVirtual(ramAddr);
-    D_800DCCA8.devAddr = (uintptr_t) romAddr;
-    D_800DCCA8.size = size;
+    gDmaIOMsg.hdr.pri = OS_MESG_PRI_NORMAL;
+    gDmaIOMsg.hdr.retQueue = &gDmaMesgQueue;
+    gDmaIOMsg.dramAddr = osPhysicalToVirtual(ramAddr);
+    gDmaIOMsg.devAddr = (uintptr_t) romAddr;
+    gDmaIOMsg.size = size;
     gCartRomHandle->transferInfo.cmdType = LEO_CMD_TYPE_2;
-    osEPiStartDma(gCartRomHandle, &D_800DCCA8, OS_READ);
+    osEPiStartDma(gCartRomHandle, &gDmaIOMsg, OS_READ);
     MQ_WAIT_FOR_MESG(&gDmaMesgQueue, sp20);
 }
 

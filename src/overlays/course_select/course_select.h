@@ -7,8 +7,9 @@ void func_i5_80115DF0(void);
 void func_i5_80115E10(void);
 Gfx* func_i5_80115E64(Gfx* gfx);
 void func_i5_801161D8(void);
-void func_i5_801164A8(s32 arg0);
+void func_i5_801164A8(s32 left);
 void func_i5_80116678(s32 cupType);
+void CourseModel_Init(s32 cupType);
 
 extern Vp D_i5_80118FF0[2][6];
 extern s32 gCourseModelCupType;

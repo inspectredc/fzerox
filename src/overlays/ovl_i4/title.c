@@ -65,11 +65,10 @@ UNUSED s32 D_i4_8011D628[] = { 85, 21, 120, 150 };
 
 s32 D_i4_8011D638 = 0;
 
-extern s32 gLeoDDConnected;
+extern s32 gLeoDriveConnectionState;
 extern s16 D_800CCFE8;
 extern s32 gCourseIndex;
 extern s32 gGameMode;
-extern Controller gSharedController;
 extern u16 gInputButtonPressed;
 extern u32 gGameFrameCount;
 
@@ -207,13 +206,13 @@ void Title_Init(void) {
     Object_Init(OBJECT_TITLE_LOGO, 0, 0, 10);
     Object_Init(OBJECT_TITLE_PUSH_START, 0, 0, 12);
     Object_Init(OBJECT_TITLE_COPYRIGHT, 94, 200, 12);
-    if (gLeoDDConnected) {
+    if (gLeoDriveConnectionState != 0) {
         Object_Init(OBJECT_TITLE_DISK_DRIVE, 0, 0, 12);
     }
 }
 
 extern s32 gControllersConnected;
-extern s16 D_800CD044;
+extern s16 gGameModeChangeState;
 
 s32 Title_Update(void) {
 
@@ -222,7 +221,7 @@ s32 Title_Update(void) {
     }
     Controller_SetGlobalInputs(&gSharedController);
     Math_Rand1();
-    if (gLeoDDConnected && (OBJECT_COUNTER(Object_Get(OBJECT_TITLE_DISK_DRIVE)) != 0) &&
+    if ((gLeoDriveConnectionState != 0) && (OBJECT_COUNTER(Object_Get(OBJECT_TITLE_DISK_DRIVE)) != 0) &&
         (OBJECT_STATE(Object_Get(OBJECT_TITLE_DISK_DRIVE)) == 0)) {
         return gGameMode;
     }
@@ -235,16 +234,16 @@ s32 Title_Update(void) {
     }
 
     D_i4_8011D790++;
-    if (D_i4_8011D790 < 0x50) {
+    if (D_i4_8011D790 < 80) {
         return gGameMode;
     }
 
-    if ((D_800CD044 == 0) && (gInputButtonPressed & (BTN_A | BTN_START))) {
-        func_800BA8D8(0x3E);
+    if ((gGameModeChangeState == 0) && (gInputButtonPressed & (BTN_A | BTN_START))) {
+        Audio_TriggerSystemSE(NA_SE_62);
         func_8007E0CC();
         D_i4_8011D790 = -1;
-        if (gLeoDDConnected && (OBJECT_STATE(Object_Get(OBJECT_TITLE_DISK_DRIVE)) == 1)) {
-            func_800BB370();
+        if ((gLeoDriveConnectionState != 0) && (OBJECT_STATE(Object_Get(OBJECT_TITLE_DISK_DRIVE)) == 1)) {
+            Audio_SESeqStart();
         }
         return GAMEMODE_FLX_MAIN_MENU;
     } else {
@@ -329,7 +328,7 @@ void Title_CopyrightInit(void) {
     func_80077D50(sCopyrightCompTexInfo, 0);
 }
 
-extern s32 gRamDDCompatible;
+extern bool gRamDDCompatible;
 
 void Title_DiskDriveInit(Object* diskDriveObj) {
     s32 var_v0;
@@ -490,15 +489,15 @@ Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* diskDriveObj) {
     return gfx;
 }
 
-extern s8 D_800CD010;
+extern s8 gTitleDemoState;
 
 void Title_DiskDriveUpdate(Object* diskDriveObj) {
 
-    if (gRamDDCompatible && (D_i4_8011D790 != -1) && (D_800CD010 == 0)) {
+    if (gRamDDCompatible && (D_i4_8011D790 != -1) && (gTitleDemoState == TITLE_DEMO_INACTIVE)) {
         if (func_800758F8() == 1) {
             if (OBJECT_COUNTER(diskDriveObj) != 0) {
-                func_800BB370();
-                func_800BAFA4(0xD);
+                Audio_SESeqStart();
+                func_800BAFA4(BGM_TITLE);
             }
             OBJECT_COUNTER(diskDriveObj) = 0;
             OBJECT_STATE(diskDriveObj) = 0;

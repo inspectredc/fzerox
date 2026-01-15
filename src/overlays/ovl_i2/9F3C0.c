@@ -1,19 +1,20 @@
 #include "global.h"
 #include "fzx_course.h"
+#include "fzx_camera.h"
 #include "assets/segment_17B960.h"
 
 extern s8 gGamePaused;
 
 void func_i2_80103A70(void) {
     func_i3_8012F324();
-    func_80069700();
-    func_8008C7C8();
-    func_80085610();
-    func_i2_801044F0();
+    Controller_Reset();
+    Racer_Init();
+    Camera_Init();
+    Effects_Init();
     func_8006D414();
     gGamePaused = false;
     func_i3_8011B520();
-    func_i3_ResetLivesChangeCounter();
+    Hud_ResetLivesChangeCounter();
     func_i3_InitRacePortraits();
 }
 
@@ -28,17 +29,17 @@ extern CourseData gCourseData;
 void Race_Init(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
     gGamePaused = false;
-    func_800A4EAC();
+    Course_Init();
     func_i3_80116C4C();
-    func_8008C7C8();
-    func_80085610();
+    Racer_Init();
+    Camera_Init();
     func_8007F4E0(gCourseData.venue, gCourseData.skybox);
-    func_i3_801365E0();
-    func_i2_801044F0();
-    func_8006D448();
-    func_8006E478();
-    func_8006EC7C();
-    func_80071260(0);
+    Background_Init();
+    Effects_Init();
+    Course_LandminesViewInteractDataInit();
+    Course_JumpsViewInteractDataInit();
+    Course_DecorationsViewInteractDataInit();
+    Course_EffectsViewInteractDataInit(false);
     func_i3_8012F324();
     func_i3_InitCourseMinimap();
     func_i3_8011B520();
@@ -49,11 +50,11 @@ extern s32 gGameMode;
 
 s32 Race_Update(void) {
     func_i3_8011AEA0();
-    func_i2_8010466C();
-    func_800952F4();
-    func_8008675C();
-    func_i3_80136A6C();
-    func_800A5028();
+    Effects_Update();
+    Racer_Update();
+    Camera_Update();
+    Background_Update();
+    Course_Update();
     func_80074844();
 
     return gGameMode;
@@ -61,12 +62,12 @@ s32 Race_Update(void) {
 
 extern s32 D_800DCCFC;
 extern s32 D_800DCD04;
-extern Vtx* D_800E5ECC;
-extern Vtx* D_800E5ED0;
-extern Vtx* D_800F8520;
+extern Vtx* gEffectsVtxPtr;
+extern Vtx* gEffectsVtxEndPtr;
+extern Vtx* gCourseVtxPtr;
 extern GfxPool D_1000000;
 extern GfxPool* gGfxPool;
-extern Player gPlayers[];
+extern Camera gCameras[];
 extern FrameBuffer* gFrameBuffers[];
 extern s16 D_800CCFE4;
 extern s32 gNumPlayers;
@@ -109,51 +110,51 @@ Gfx* Race_Draw(Gfx* gfx) {
         gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
                          OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
     }
-    D_800F8520 = gGfxPool->unk_10008;
-    D_800E5ECC = gGfxPool->unk_21B48;
-    D_800E5ED0 = &gGfxPool->unk_21B48[0x7FF];
+    gCourseVtxPtr = gGfxPool->courseVtxBuffer;
+    gEffectsVtxPtr = gGfxPool->effectsVtxBuffer;
+    gEffectsVtxEndPtr = &gGfxPool->effectsVtxBuffer[0x7FF];
     switch (gNumPlayers) {
         case 1:
-            gfx = func_i3_801381DC(gfx, 0, 0);
-            gfx = func_800A9938(gfx, 0);
-            gfx = func_8006DAAC(gfx, 0);
+            gfx = Background_Draw(gfx, 0, SCISSOR_BOX_FULL_SCREEN);
+            gfx = Course_Draw(gfx, 0);
+            gfx = Course_GadgetsDraw(gfx, 0);
             break;
         case 2:
-            gfx = func_i3_801381DC(gfx, 0, 1);
-            gfx = func_800A9938(gfx, 0);
-            gfx = func_8006DAAC(gfx, 0);
-            gfx = func_i3_801381DC(gfx, 1, 2);
-            gfx = func_800A9938(gfx, 1);
-            gfx = func_8006DAAC(gfx, 1);
+            gfx = Background_Draw(gfx, 0, 1);
+            gfx = Course_Draw(gfx, 0);
+            gfx = Course_GadgetsDraw(gfx, 0);
+            gfx = Background_Draw(gfx, 1, 2);
+            gfx = Course_Draw(gfx, 1);
+            gfx = Course_GadgetsDraw(gfx, 1);
             break;
         case 3:
-            gfx = func_i3_801381DC(gfx, 0, 5);
-            gfx = func_800A9938(gfx, 0);
-            gfx = func_8006DAAC(gfx, 0);
-            gfx = func_i3_801381DC(gfx, 1, 7);
-            gfx = func_800A9938(gfx, 1);
-            gfx = func_8006DAAC(gfx, 1);
-            gfx = func_i3_801381DC(gfx, 2, 6);
-            gfx = func_800A9938(gfx, 2);
-            gfx = func_8006DAAC(gfx, 2);
+            gfx = Background_Draw(gfx, 0, 5);
+            gfx = Course_Draw(gfx, 0);
+            gfx = Course_GadgetsDraw(gfx, 0);
+            gfx = Background_Draw(gfx, 1, 7);
+            gfx = Course_Draw(gfx, 1);
+            gfx = Course_GadgetsDraw(gfx, 1);
+            gfx = Background_Draw(gfx, 2, 6);
+            gfx = Course_Draw(gfx, 2);
+            gfx = Course_GadgetsDraw(gfx, 2);
             break;
         case 4:
-            gfx = func_i3_801381DC(gfx, 0, 5);
-            gfx = func_800A9938(gfx, 0);
-            gfx = func_8006DAAC(gfx, 0);
-            gfx = func_i3_801381DC(gfx, 1, 7);
-            gfx = func_800A9938(gfx, 1);
-            gfx = func_8006DAAC(gfx, 1);
-            gfx = func_i3_801381DC(gfx, 2, 6);
-            gfx = func_800A9938(gfx, 2);
-            gfx = func_8006DAAC(gfx, 2);
-            gfx = func_i3_801381DC(gfx, 3, 8);
-            gfx = func_800A9938(gfx, 3);
-            gfx = func_8006DAAC(gfx, 3);
+            gfx = Background_Draw(gfx, 0, 5);
+            gfx = Course_Draw(gfx, 0);
+            gfx = Course_GadgetsDraw(gfx, 0);
+            gfx = Background_Draw(gfx, 1, 7);
+            gfx = Course_Draw(gfx, 1);
+            gfx = Course_GadgetsDraw(gfx, 1);
+            gfx = Background_Draw(gfx, 2, 6);
+            gfx = Course_Draw(gfx, 2);
+            gfx = Course_GadgetsDraw(gfx, 2);
+            gfx = Background_Draw(gfx, 3, 8);
+            gfx = Course_Draw(gfx, 3);
+            gfx = Course_GadgetsDraw(gfx, 3);
             break;
     }
 
-    gSPLoadUcodeL(gfx++, gspF3DFLX_Rej_fifo);
+    gSPLoadUcodeL(gfx++, gspF3DFLX2_Rej_fifo);
     gfx = Segment_SetTableAddresses(gfx);
     gSPClipRatio(gfx++, FRUSTRATIO_3);
     gDPPipeSync(gfx++);
@@ -168,53 +169,53 @@ Gfx* Race_Draw(Gfx* gfx) {
 
     switch (gNumPlayers) {
         case 1:
-            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
+            gSPPerspNormalize(gfx++, gCameras[0].perspectiveScale);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gfx = func_800833AC(gfx, 0, 0);
-            gfx = func_80096CE8(gfx, 0);
+            gfx = Camera_Draw(gfx, SCISSOR_BOX_FULL_SCREEN, 0);
+            gfx = Racer_Draw(gfx, 0);
             gfx = func_i3_8012CF34(gfx, 0);
             break;
         case 2:
-            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
+            gSPPerspNormalize(gfx++, gCameras[0].perspectiveScale);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gfx = func_800833AC(gfx, 1, 0);
-            gfx = func_80096CE8(gfx, 0);
-            gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
+            gfx = Camera_Draw(gfx, 1, 0);
+            gfx = Racer_Draw(gfx, 0);
+            gSPPerspNormalize(gfx++, gCameras[1].perspectiveScale);
             gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gfx = func_800833AC(gfx, 2, 1);
-            gfx = func_80096CE8(gfx, 1);
+            gfx = Camera_Draw(gfx, 2, 1);
+            gfx = Racer_Draw(gfx, 1);
             break;
         case 3:
-            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
+            gSPPerspNormalize(gfx++, gCameras[0].perspectiveScale);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gfx = func_800833AC(gfx, 5, 0);
-            gfx = func_80096CE8(gfx, 0);
-            gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
+            gfx = Camera_Draw(gfx, 5, 0);
+            gfx = Racer_Draw(gfx, 0);
+            gSPPerspNormalize(gfx++, gCameras[1].perspectiveScale);
             gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gfx = func_800833AC(gfx, 7, 1);
-            gfx = func_80096CE8(gfx, 1);
-            gSPPerspNormalize(gfx++, gPlayers[2].unk_118);
+            gfx = Camera_Draw(gfx, 7, 1);
+            gfx = Racer_Draw(gfx, 1);
+            gSPPerspNormalize(gfx++, gCameras[2].perspectiveScale);
             gSPMatrix(gfx++, &D_1000000.unk_20208[2], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gfx = func_800833AC(gfx, 6, 2);
-            gfx = func_80096CE8(gfx, 2);
+            gfx = Camera_Draw(gfx, 6, 2);
+            gfx = Racer_Draw(gfx, 2);
             break;
         case 4:
-            gSPPerspNormalize(gfx++, gPlayers[0].unk_118);
+            gSPPerspNormalize(gfx++, gCameras[0].perspectiveScale);
             gSPMatrix(gfx++, &D_1000000.unk_20208[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gfx = func_800833AC(gfx, 5, 0);
-            gfx = func_80096CE8(gfx, 0);
-            gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
+            gfx = Camera_Draw(gfx, 5, 0);
+            gfx = Racer_Draw(gfx, 0);
+            gSPPerspNormalize(gfx++, gCameras[1].perspectiveScale);
             gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gfx = func_800833AC(gfx, 7, 1);
-            gfx = func_80096CE8(gfx, 1);
-            gSPPerspNormalize(gfx++, gPlayers[2].unk_118);
+            gfx = Camera_Draw(gfx, 7, 1);
+            gfx = Racer_Draw(gfx, 1);
+            gSPPerspNormalize(gfx++, gCameras[2].perspectiveScale);
             gSPMatrix(gfx++, &D_1000000.unk_20208[2], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gfx = func_800833AC(gfx, 6, 2);
-            gfx = func_80096CE8(gfx, 2);
-            gSPPerspNormalize(gfx++, gPlayers[3].unk_118);
+            gfx = Camera_Draw(gfx, 6, 2);
+            gfx = Racer_Draw(gfx, 2);
+            gSPPerspNormalize(gfx++, gCameras[3].perspectiveScale);
             gSPMatrix(gfx++, &D_1000000.unk_20208[3], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gfx = func_800833AC(gfx, 8, 3);
-            gfx = func_80096CE8(gfx, 3);
+            gfx = Camera_Draw(gfx, 8, 3);
+            gfx = Racer_Draw(gfx, 3);
             break;
     }
 

@@ -232,15 +232,42 @@ gSeqTicksPerBeat = 0x800D1C68;
 
 bootproc = 0x80067060;
 
+gTitleDemoState = 0x800CD010;
+
+sDefaultMtx = 0x800E1230;
+sDefaultMtxF = 0x800E1270;
+Math_SinTableInit = 0x8006A6E4;
 Math_Rand1Init = 0x8006A8F0;
 Math_Rand2Init = 0x8006A904;
 Math_Rand1 = 0x8006A918;
 Math_Rand2 = 0x8006A978;
 Math_Round = 0x8006A9E0;
-Math_SinTableInit = 0x8006A6E4;
+Math_OrthonormalizeAroundUp = 0x8006AC10;
 Light_SetLookAtSource = 0x8006B07C;
 Matrix_ToMtx = 0x8006BBE8;
+Matrix_SetLockedLookAtFromVectors = 0x8006BFCC;
+Matrix_ScaleFrom3DMatrix = 0x8006C278;
+Matrix_SetTransRot = 0x8006C378;
+Matrix_SetAxisRotation = 0x8006C520;
+Matrix_SetOrtho = 0x8006D2E0;
+
 CourseFeature_IsDecorational = 0x8006D3F0;
+Course_GadgetsDraw = 0x8006DAAC;
+
+Course_SplineGetLengthInfo = 0x8009E108;
+Course_SplineGetTangent = 0x8009E538;
+Course_SplineGetPosition = 0x8009E6F0;
+Course_SplineGetBasis = 0x8009E85C;
+
+Racer_Draw = 0x80096CE8;
+
+Audio_TriggerSystemSE = 0x800BA8D8;
+Audio_PlayerTriggerSEStart = 0x800BA710;
+
+gCourseVtxPtr = 0x800F8520;
+gEffectsVtxPtr = 0x800E5ECC;
+gEffectsVtxEndPtr = 0x800E5ED0;
+
 mio0Decode = 0x800AA620;
 
 gRandSeed1 = 0x800CD170;
@@ -289,16 +316,16 @@ gInputButtonPressed = 0x800E416E;
 gStickPressed = 0x800E4170;
 gSkyboxType = 0x800E4260;
 gBackgroundFloorType = 0x800E4264;
-gPlayers = 0x800E5220; // size:0x770
+gCameras = 0x800E5220; // size:0x770
 gTotalRacers = 0x800E5EC0;
 sLastRacer = 0x800E5EC4;
 sRivalRacer = 0x800E5EC8;
-D_800E5F00 = 0x800E5F00; // size:0x10
-D_800E5F10 = 0x800E5F10; // size:0x10
+gVsRacePlayerVictoryCount = 0x800E5F00; // size:0x10
+gVsRacePlayerPoints = 0x800E5F10; // size:0x10
 D_800E5F20 = 0x800E5F20; // size:0x10
 D_800E5F30 = 0x800E5F30; // size:0x10
 gRacersByPosition = 0x800E5F40;
-D_800E5FB8 = 0x800E5FB8; // size:0x4
+gNearestRacer = 0x800E5FB8; // size:0x4
 gRacersRetired = 0x800E5FC2;
 gRacersFinished = 0x800E5FC4;
 gPlayerRacersRetired = 0x800E5FC8;

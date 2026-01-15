@@ -3,6 +3,7 @@
 #include "ovl_i3.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
+#include "fzx_camera.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B960.h"
 
@@ -41,7 +42,7 @@ extern Lights1 D_8024DCC0;
 
 extern s32 gGameMode;
 
-void func_i3_80139D20(void) {
+void RecordsEntry_Init(void) {
 
     D_i3_80143780 = 0;
     D_i3_80143782 = 0;
@@ -76,8 +77,8 @@ void func_i3_80139D20(void) {
         D_i3_80143788 = 0;
         D_i3_8014378C = 0;
     }
-    func_8006BC84(&D_8024DC80, NULL, 0.7f * D_800CE748, 0.7f * D_800CE74C, 0.7f * D_800CE750, 0.0f, 0.0f, 1.0f, 0.0f,
-                  1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+    Matrix_SetLockedLookAt(&D_8024DC80, NULL, 0.7f * D_800CE748, 0.7f * D_800CE74C, 0.7f * D_800CE750, 0.0f, 0.0f, 1.0f,
+                           0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
     Lights_SetSource(&D_8024DCC0, 0, 0, 0, 255, 255, 255, 100, 50, 69);
     func_80078104(aBestTex, TEX_SIZE(aBestTex, sizeof(u16)), 0, 0, 0);
 
@@ -88,7 +89,7 @@ void func_i3_80139D20(void) {
                       0, 0);
     }
     if (D_i3_80143780 & 0x10) {
-        func_i3_8013BF18(1);
+        RecordsEntry_SetDrawArrows(true);
         func_80078104(aYellowArrowTex, TEX_SIZE(aYellowArrowTex, sizeof(u16)), 0, 1, 0);
     }
 }
@@ -99,7 +100,7 @@ void func_i3_80139FF4(void) {
 
 extern GfxPool* gGfxPool;
 
-bool func_i3_8013A004(void) {
+bool RecordsEntry_Update(void) {
     Vp* v0;
     s32 i;
     bool var_a0;
@@ -165,7 +166,6 @@ extern Lights0 D_20284C0;
 extern FrameBuffer* gFrameBuffers[];
 extern char* gTrackNames[55];
 extern Gfx D_8014940[];
-extern Player gPlayers[];
 extern GfxPool D_1000000;
 
 extern u32 gGameFrameCount;
@@ -174,7 +174,7 @@ extern s16 D_800E5FE2;
 extern s16 D_800E5FE4;
 extern s16 D_800E5FE6;
 
-Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
+Gfx* RecordsEntry_DrawRecords(Gfx* gfx, s32 courseIndex) {
     CourseInfo* var_s2;
     s32 sp1A8;
     s32 xl;
@@ -299,7 +299,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
     }
     gSPDisplayList(gfx++, D_8014940);
 
-    gDPLoadTextureBlock(gfx++, D_303C3F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(gfx++, aTimerSymbolsTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 224, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     for (i = 0; i < 5; i++) {
@@ -328,8 +328,8 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
             } else {
                 gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
             }
-            gfx = func_i3_DrawTimerScisThousandths(gfx, var_s2->timeRecord[i], var_s3 + D_i3_80143790 + 0x4B,
-                                                   (D_i3_80143794 + (D_i3_80143798 * i)) - 0xE, 1.0f);
+            gfx = Hud_DrawTimerScisThousandths(gfx, var_s2->timeRecord[i], var_s3 + D_i3_80143790 + 0x4B,
+                                               (D_i3_80143794 + (D_i3_80143798 * i)) - 0xE, 1.0f);
         }
     }
 
@@ -353,8 +353,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
         } else {
             gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
         }
-        gfx =
-            func_i3_DrawTimerScisThousandths(gfx, var_s2->bestTime, D_i3_801437A8 + D_i3_80143788, D_i3_801437AA, 1.0f);
+        gfx = Hud_DrawTimerScisThousandths(gfx, var_s2->bestTime, D_i3_801437A8 + D_i3_80143788, D_i3_801437AA, 1.0f);
     }
 
     xl = D_i3_801437A8 + D_i3_80143788 + D_i3_801437AC;
@@ -424,11 +423,11 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
         var_v0 = false;
     }
 
-    gfx = func_i3_DrawSpeed(gfx, D_i3_80143788 + D_i3_8014379C, D_i3_801437A0, var_s2->maxSpeed, var_v0, true);
-    gSPLoadUcodeL(gfx++, gspF3DFLX_Rej_fifo);
+    gfx = RecordsEntry_DrawSpeed(gfx, D_i3_80143788 + D_i3_8014379C, D_i3_801437A0, var_s2->maxSpeed, var_v0, true);
+    gSPLoadUcodeL(gfx++, gspF3DFLX2_Rej_fifo);
     gfx = Segment_SetTableAddresses(gfx);
     gSPClipRatio(gfx++, FRUSTRATIO_3);
-    gSPPerspNormalize(gfx++, gPlayers[1].unk_118);
+    gSPPerspNormalize(gfx++, gCameras[1].perspectiveScale);
     gSPMatrix(gfx++, &D_1000000.unk_20208[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPDisplayList(gfx++, D_303A5F8);
     gSPNumLights(gfx++, NUMLIGHTS_1);
@@ -450,7 +449,7 @@ Gfx* func_i3_8013A360(Gfx* gfx, s32 courseIndex) {
 
 extern Gfx D_80149A0[];
 
-Gfx* func_i3_DrawSpeed(Gfx* gfx, s32 left, s32 top, f32 arg3, bool arg4, bool drawMaxSpeedTexture) {
+Gfx* RecordsEntry_DrawSpeed(Gfx* gfx, s32 left, s32 top, f32 arg3, bool arg4, bool drawMaxSpeedTexture) {
     s32 i;
     s32 speed;
     s32 digitMask;
@@ -540,8 +539,8 @@ Gfx* func_i3_8013BBF8(Gfx* gfx, s32 arg1, s32 arg2, f32 arg3) {
     return gfx;
 }
 
-void func_i3_8013BF18(s32 arg0) {
-    if (arg0 != 0) {
+void RecordsEntry_SetDrawArrows(bool arg0) {
+    if (arg0) {
         D_i3_80143780 |= 0x20;
     } else {
         D_i3_80143780 &= ~0x20;
@@ -776,7 +775,7 @@ void func_i3_8013C6D8(void) {
 
     keyboardIndex = (sKeyboardCursorY * 10) + sKeyboardCursorX;
     if (previousKeyboardIndex != keyboardIndex) {
-        func_800BA8D8(0x1E);
+        Audio_TriggerSystemSE(NA_SE_30);
     }
     if (gInputButtonPressed & BTN_A) {
         nameLengthIncreased = false;
@@ -807,7 +806,7 @@ void func_i3_8013C6D8(void) {
                 sKeyboardCursorY = sEnterKeyboardIndex / 10;
             }
         }
-        func_800BA8D8(0x21);
+        Audio_TriggerSystemSE(NA_SE_33);
     } else if (gInputButtonPressed & BTN_START) {
         if (sNameKeyboardCharacters[keyboardIndex] == '<') {
             func_i3_8013D214(sp10C);
@@ -815,7 +814,7 @@ void func_i3_8013C6D8(void) {
             sKeyboardCursorX = sEnterKeyboardIndex % 10;
             sKeyboardCursorY = sEnterKeyboardIndex / 10;
         }
-        func_800BA8D8(0x21);
+        Audio_TriggerSystemSE(NA_SE_33);
     } else if (gInputButtonPressed & BTN_B) {
         gRecordNameEnteredLength--;
         if (gRecordNameEnteredLength < 0) {
@@ -826,7 +825,7 @@ void func_i3_8013C6D8(void) {
         sKeyboardCursorX = keyboardIndex % 10;
         sKeyboardCursorY = keyboardIndex / 10;
         gRecordNameEntered[gRecordNameEnteredLength] = 0;
-        func_800BA8D8(0x10);
+        Audio_TriggerSystemSE(NA_SE_16);
     }
     if (D_i3_801437B0 == 2) {
         sp64 = ((s16) (keyboardIndex % 10) * 20) + 62;
@@ -899,10 +898,10 @@ void func_i3_8013C6D8(void) {
             spB8 = 500.0f;
         }
 
-        func_8006D03C(&gGfxPool->unk_2B2C8[1], &sp74, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f,
-                      &D_i3_801439C0);
-        func_8006CC98(&gGfxPool->unk_2B2C8[2], &sp74, 0.0f, 0.0f, spB8, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-        func_8006C378(&gGfxPool->unk_2B2C8[3], &sp74, spB8, 0, i, i, 0.0f, 0.0f, 0.0f);
+        Matrix_SetFrustrum(&gGfxPool->unk_2B2C8[1], &sp74, 60.0f, 16.0f, 8129.0f, 320.0f, 0.0f, 240.0f, 0.0f,
+                           &D_i3_801439C0);
+        Matrix_SetLookAt(&gGfxPool->unk_2B2C8[2], &sp74, 0.0f, 0.0f, spB8, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        Matrix_SetTransRot(&gGfxPool->unk_2B2C8[3], &sp74, spB8, 0, i, i, 0.0f, 0.0f, 0.0f);
     }
 }
 

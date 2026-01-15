@@ -3,6 +3,7 @@
 #include "audiothread_cmd.h"
 #include "fzx_racer.h"
 #include "fzx_game.h"
+#include "fzx_camera.h"
 
 void func_800BAE98(u8 channelIndex, u8 ioData);
 void func_800BAEDC(u8);
@@ -192,7 +193,7 @@ void func_800B759C(u8 arg0) {
     }
 }
 
-extern Player gPlayers[];
+extern Camera gCameras[];
 
 void func_800B7600(u8 arg0, u8 arg1) {
     f32 volumeScale;
@@ -220,9 +221,9 @@ void func_800B7600(u8 arg0, u8 arg1) {
                     if (arg0 == D_800D1A20) {
                         var_fv1 = D_800D1A30;
                     } else {
-                        vec.x = gRacers[arg0].unk_0C.unk_34.x - gPlayers[0].unk_50.x;
-                        vec.y = gRacers[arg0].unk_0C.unk_34.y - gPlayers[0].unk_50.y;
-                        vec.z = gRacers[arg0].unk_0C.unk_34.z - gPlayers[0].unk_50.z;
+                        vec.x = gRacers[arg0].segmentPositionInfo.pos.x - gCameras[0].eye.x;
+                        vec.y = gRacers[arg0].segmentPositionInfo.pos.y - gCameras[0].eye.y;
+                        vec.z = gRacers[arg0].segmentPositionInfo.pos.z - gCameras[0].eye.z;
 
                         var_fv1 = sqrtf(SQ_SUM(&vec));
                     }
@@ -486,7 +487,7 @@ void func_800B82C8(void) {
 }
 
 extern s32 gNumPlayers;
-extern s8 D_800CD010;
+extern s8 gTitleDemoState;
 extern s32 gGameMode;
 
 void func_800B84B8(void) {
@@ -511,11 +512,12 @@ void func_800B84B8(void) {
                         break;
                 }
 
-                if ((temp_lo > 2100) && (temp_lo < 2110) && (gGameMode == GAMEMODE_FLX_TITLE) && (D_800CD010 == 0)) {
-                    D_800CD010 = 1;
+                if ((temp_lo > 2100) && (temp_lo < 2110) && (gGameMode == GAMEMODE_FLX_TITLE) &&
+                    (gTitleDemoState == 0)) {
+                    gTitleDemoState = 1;
                 }
-                if ((temp_lo > 8200) && (temp_lo < 8210) && (D_800CD010 == 1)) {
-                    D_800CD010 = 3;
+                if ((temp_lo > 8200) && (temp_lo < 8210) && (gTitleDemoState == 1)) {
+                    gTitleDemoState = 3;
                 }
             }
         }
@@ -543,9 +545,9 @@ void func_800B8640(void) {
     if ((D_800D19E0 != 1) && (D_800D1A18 == 0) && (D_800D1A20 != 0) && (D_800D1A40 != 1) && (D_800D1A40 != 2) &&
         ((gGameMode == GAMEMODE_GP_RACE) || (gGameMode == GAMEMODE_PRACTICE) || (gGameMode == GAMEMODE_DEATH_RACE)) &&
         (D_800D1A58 == 0)) {
-        vec.x = gRacers[D_800D1A20].unk_0C.unk_34.x - gPlayers[0].unk_50.x;
-        vec.y = gRacers[D_800D1A20].unk_0C.unk_34.y - gPlayers[0].unk_50.y;
-        vec.z = gRacers[D_800D1A20].unk_0C.unk_34.z - gPlayers[0].unk_50.z;
+        vec.x = gRacers[D_800D1A20].segmentPositionInfo.pos.x - gCameras[0].eye.x;
+        vec.y = gRacers[D_800D1A20].segmentPositionInfo.pos.y - gCameras[0].eye.y;
+        vec.z = gRacers[D_800D1A20].segmentPositionInfo.pos.z - gCameras[0].eye.z;
         D_800D1A30 = sqrtf(SQ_SUM(&vec));
         if ((D_800D1A30 < 820.0f) && (D_800D1A30 != 0.0f)) {
             if (D_800D1A1C == 0) {
@@ -635,9 +637,9 @@ void func_800B899C(u8 arg0) {
                 Vec3f vec;
                 f32 temp;
 
-                vec.x = gRacers[arg0].unk_0C.unk_34.x - gPlayers[arg0].unk_50.x;
-                vec.y = gRacers[arg0].unk_0C.unk_34.y - gPlayers[arg0].unk_50.y;
-                vec.z = gRacers[arg0].unk_0C.unk_34.z - gPlayers[arg0].unk_50.z;
+                vec.x = gRacers[arg0].segmentPositionInfo.pos.x - gCameras[arg0].eye.x;
+                vec.y = gRacers[arg0].segmentPositionInfo.pos.y - gCameras[arg0].eye.y;
+                vec.z = gRacers[arg0].segmentPositionInfo.pos.z - gCameras[arg0].eye.z;
                 temp = sqrtf(SQ_SUM(&vec));
                 volumeScale = (-0.002f * temp + 1.2f) * 0.65f;
 
@@ -654,9 +656,9 @@ void func_800B899C(u8 arg0) {
             Vec3f vec;
             f32 temp;
 
-            vec.x = gRacers[arg0].unk_0C.unk_34.x - gPlayers[arg0].unk_50.x;
-            vec.y = gRacers[arg0].unk_0C.unk_34.y - gPlayers[arg0].unk_50.y;
-            vec.z = gRacers[arg0].unk_0C.unk_34.z - gPlayers[arg0].unk_50.z;
+            vec.x = gRacers[arg0].segmentPositionInfo.pos.x - gCameras[arg0].eye.x;
+            vec.y = gRacers[arg0].segmentPositionInfo.pos.y - gCameras[arg0].eye.y;
+            vec.z = gRacers[arg0].segmentPositionInfo.pos.z - gCameras[arg0].eye.z;
             temp = sqrtf(SQ_SUM(&vec));
             volumeScale = -0.002f * temp + 1.2f;
 
@@ -1049,7 +1051,7 @@ void func_800B9D3C(void) {
     }
 }
 
-void func_800B9E28(void) {
+void Audio_Update(void) {
     func_800B9D3C();
     AudioThread_ScheduleProcessCmds();
 }
@@ -1162,7 +1164,7 @@ void Audio_Init(void) {
     AudioLoad_Init(NULL, 0);
 }
 
-void Audio_SetSoundMode(u8 soundMode) {
+void Audio_SetOutMode(u8 soundMode) {
     AUDIOCMD_GLOBAL_SET_SOUND_MODE(soundMode);
 }
 
@@ -1170,7 +1172,7 @@ void func_800BA2B4(u8 arg0) {
     D_800D1A8C[arg0] = 1;
 }
 
-void func_800BA2D0(u8 arg0) {
+void Audio_SetEnemyEnginePan(u8 arg0) {
     D_800D1A3C = arg0;
 }
 
@@ -1310,7 +1312,7 @@ void func_800BA67C(u8 racerId, u8 arg1) {
     }
 }
 
-void func_800BA710(u8 arg0, u8 arg1) {
+void Audio_PlayerTriggerSEStart(u8 arg0, u8 arg1) {
 
     if (arg1 == 0x1E) {
         goto block_5;
@@ -1361,7 +1363,7 @@ void func_800BA7F8(u8 arg0, u16 arg1) {
     }
 }
 
-void func_800BA8D8(u8 arg0) {
+void Audio_TriggerSystemSE(u8 arg0) {
 
     if (arg0 == 0x11) {
         func_800BA7F8(arg0, 0x83);
@@ -1396,7 +1398,7 @@ void func_800BA8D8(u8 arg0) {
     }
 }
 
-void func_800BAA88(u8 arg0, u8 arg1) {
+void Audio_Hanabi(u8 arg0, u8 arg1) {
     f32 volumeScale;
 
     AUDIOCMD_CHANNEL_SET_PAN(0, 15, func_800B71D0(arg0));
@@ -1566,7 +1568,7 @@ void func_800BB078(void) {
     }
 }
 
-void func_800BB09C(void) {
+void Audio_BetaBgmStop3(void) {
     if (D_800D1A48 == 0) {
         D_800D1A48 = 3;
     }
@@ -1626,7 +1628,7 @@ void func_800BB2E0(s32 specId) {
         do { } while (!AudioThread_ResetComplete()); }
 }
 
-void func_800BB324(u8 numPlayersIndex) {
+void Audio_SetPlayerMode(u8 numPlayersIndex) {
     D_800D1A18 = numPlayersIndex;
 }
 
@@ -1637,7 +1639,7 @@ void func_800BB334(void) {
     AudioThread_ScheduleProcessCmds();
 }
 
-void func_800BB370(void) {
+void Audio_SESeqStart(void) {
     AUDIOCMD_GLOBAL_INIT_SEQPLAYER(0, 0, 0, 0);
     AudioThread_ScheduleProcessCmds();
 }
@@ -1670,9 +1672,9 @@ void func_800BB45C(void) {
     D_800D1A0C = 1;
 }
 
-void func_800BB46C(void) {
+void Audio_GuitarSeqStart(void) {
     AUDIOCMD_GLOBAL_INIT_SEQPLAYER(1, 1, 0, 0);
-    func_800BB370();
+    Audio_SESeqStart();
 }
 
 AudioTask* Audio_SetupCreateTask(void) {

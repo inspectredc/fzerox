@@ -14,7 +14,7 @@ OSMesg D_800E3328;
 u8 D_800E332C[4];
 OSMesg sLeoCmdMsgBuf[16];
 
-extern bool gLeoDDConnected;
+extern s32 gLeoDriveConnectionState;
 extern OSMesgQueue gMainThreadMesgQueue;
 
 LEODiskID D_800CD2B0 = { 0 };
@@ -408,7 +408,7 @@ bool func_80075D10(LEOCmd* cmdBlock, s32 direction, s32 LBA, void* vaddr, u32 nL
 s32 func_800760F8(void) {
     static s32 D_800E3370;
 
-    if (!gLeoDDConnected) {
+    if (gLeoDriveConnectionState == 0) {
         return 0;
     }
     D_800E3370 = func_80075800();
@@ -429,7 +429,7 @@ s32 func_800760F8(void) {
 s32 func_800761D4(void) {
     static s32 D_800E3374;
 
-    if (!gLeoDDConnected) {
+    if (gLeoDriveConnectionState == 0) {
         return 0;
     }
     D_800E3374 = func_80075800();

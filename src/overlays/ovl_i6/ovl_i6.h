@@ -28,12 +28,6 @@ typedef struct unk_8011DC40 {
     s32 unk_1C;
 } unk_8011DC40; // UNUSED?
 
-typedef struct OptionsTextureInfo {
-    /* 0x00 */ void* textureOffset;
-    /* 0x04 */ s16 width;
-    /* 0x06 */ s16 height;
-} OptionsTextureInfo; // size = 0x8
-
 #define OPTIONS_REQUIRE_SELECTING 1
 #define OPTIONS_SHOWN 2
 
@@ -43,8 +37,8 @@ typedef struct OptionsInfo {
     /* 0x08 */ s32 totalSelectionStates;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ OptionsTextureInfo* selectionStateTextureInfo;
-    /* 0x18 */ OptionsTextureInfo optionTextureInfo;
+    /* 0x14 */ TextureInfo* selectionStateTextureInfo;
+    /* 0x18 */ TextureInfo optionTextureInfo;
 } OptionsInfo; // size = 0x20
 
 extern SaveContext gSaveContext;

@@ -2,7 +2,7 @@
 #include "fzx_game.h"
 #include "fzx_object.h"
 #include "fzx_course.h"
-#include "src/overlays/ovl_i2/ovl_i2.h"
+#include "src/overlays/ovl_i2/transition.h"
 #include "ovl_i6.h"
 #include "assets/segment_2B9EA0.h"
 #include "assets/segment_17B1E0.h"
@@ -201,10 +201,6 @@ extern s16 D_800CCFE8;
 extern s32 gNumPlayers;
 extern s32 D_800CD384;
 
-const s32 gDefaultSubOptionLimits[] = { 2, 1, 0, 2, 0, 2, 0, 0 };
-
-const s32 gMaxSubOptionLimits[] = { 3, 1, 0, 2, 0, 3, 0, 0 };
-
 void MainMenu_Init(void) {
     D_800CCFE8 = 3;
     D_800CD384 = 0;
@@ -244,25 +240,27 @@ extern char* gTrackNames[];
 
 extern s32 gNumPlayers;
 extern s32 gDifficulty;
-extern s16 D_800CD044;
-extern s16 D_800CD048;
+extern s16 gGameModeChangeState;
+extern s16 gMenuChangeMode;
 extern s32 gSelectedMode;
 extern s8 gUnlockableLevel;
 extern s8 gSettingEverythingUnlocked;
 extern s32 gGameMode;
-extern Controller gSharedController;
 extern s32 gControllersConnected;
 extern u16 gInputPressed;
 extern u16 gInputButtonPressed;
 extern char* gCurrentTrackName;
 extern s32 gCourseIndex;
-extern s32 D_i2_80106DA4;
+extern s32 gTransitionState;
+
+const s32 kDefaultSubOptionLimits[] = { 2, 1, 0, 2, 0, 2, 0, 0 };
+const s32 kMaxSubOptionLimits[] = { 3, 1, 0, 2, 0, 3, 0, 0 };
 
 s32 MainMenu_Update(void) {
     s32 previous;
     bool var_v1_2;
 
-    if (D_i2_80106DA4 != 0) {
+    if (gTransitionState != TRANSITION_INACTIVE) {
         return gGameMode;
     }
 
@@ -307,10 +305,10 @@ s32 MainMenu_Update(void) {
                     break;
             }
             if (previous != gSelectedMode) {
-                func_800BA8D8(0x1E);
+                Audio_TriggerSystemSE(NA_SE_30);
             }
             if (gInputButtonPressed & BTN_B) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(NA_SE_16);
                 func_8007E0CC();
                 D_800CD384 = 5;
                 return GAMEMODE_FLX_TITLE;
@@ -322,7 +320,7 @@ s32 MainMenu_Update(void) {
             }
 
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x3E);
+                Audio_TriggerSystemSE(NA_SE_62);
                 gAntiPiracyAddedDifficulty =
                     (UNLOCK_EVERYTHING_ROMDATA(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) & 0xFFFF) - 0x997A;
                 switch (gSelectedMode) {
@@ -330,7 +328,7 @@ s32 MainMenu_Update(void) {
                     case MODE_TIME_ATTACK:
                     case MODE_VS_BATTLE:
                     case MODE_PRACTICE:
-                        func_800BA8D8(0x21);
+                        Audio_TriggerSystemSE(NA_SE_33);
                         D_800CD384 = 1;
                         break;
                     case MODE_DEATH_RACE:
@@ -338,12 +336,12 @@ s32 MainMenu_Update(void) {
                         gCourseIndex = COURSE_DEATH_RACE;
                         gCurrentTrackName = gTrackNames[gCourseIndex];
                         gNumPlayers = 1;
-                        func_800BB324(gNumPlayers - 1);
+                        Audio_SetPlayerMode(gNumPlayers - 1);
                         gDifficulty = gAntiPiracyAddedDifficulty + MASTER;
                         return GAMEMODE_FLX_MACHINE_SELECT;
                     case MODE_OPTIONS:
                         D_800CD384 = 5;
-                        D_800CD048 = 13;
+                        gMenuChangeMode = MENU_CHANGE_TO_OPTIONS;
                         break;
                     case MODE_COURSE_EDIT:
                         D_800CD384 = 5;
@@ -363,12 +361,12 @@ s32 MainMenu_Update(void) {
                 gModeSubOption[gSelectedMode]++;
             }
             if ((gUnlockableLevel < 2) && !gSettingEverythingUnlocked) {
-                if (gDefaultSubOptionLimits[gSelectedMode] < gModeSubOption[gSelectedMode]) {
-                    gModeSubOption[gSelectedMode] = gDefaultSubOptionLimits[gSelectedMode];
+                if (kDefaultSubOptionLimits[gSelectedMode] < gModeSubOption[gSelectedMode]) {
+                    gModeSubOption[gSelectedMode] = kDefaultSubOptionLimits[gSelectedMode];
                 }
             } else {
-                if (gMaxSubOptionLimits[gSelectedMode] < gModeSubOption[gSelectedMode]) {
-                    gModeSubOption[gSelectedMode] = gMaxSubOptionLimits[gSelectedMode];
+                if (kMaxSubOptionLimits[gSelectedMode] < gModeSubOption[gSelectedMode]) {
+                    gModeSubOption[gSelectedMode] = kMaxSubOptionLimits[gSelectedMode];
                 }
             }
 #ifndef VERSION_JP
@@ -377,7 +375,7 @@ s32 MainMenu_Update(void) {
                 if (gModeSubOption[gSelectedMode] < 0) {
                     gModeSubOption[gSelectedMode] = 0;
                     D_800CD384 = 0;
-                    func_800BA8D8(0x10);
+                    Audio_TriggerSystemSE(NA_SE_16);
                     break;
                 }
             }
@@ -389,16 +387,16 @@ s32 MainMenu_Update(void) {
                 }
             }
             if (previous != gModeSubOption[gSelectedMode]) {
-                func_800BA8D8(0x1E);
+                Audio_TriggerSystemSE(NA_SE_30);
             }
             if (gInputButtonPressed & BTN_B) {
                 D_800CD384 = 0;
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(NA_SE_16);
             } else if ((gInputButtonPressed & BTN_START) &&
                        (OBJECT_STATE(Object_Get(OBJECT_MAIN_MENU_UNLOCK_EVERYTHING)) == 7)) {
                 break;
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x21);
+                Audio_TriggerSystemSE(NA_SE_33);
                 D_800CD384 = 2;
                 switch (gSelectedMode) {
                     case MODE_VS_BATTLE:
@@ -407,8 +405,8 @@ s32 MainMenu_Update(void) {
                     case MODE_TIME_ATTACK:
                         if (gModeSubOption[MODE_TIME_ATTACK] != 0) {
                             D_800CD384 = 6;
-                            D_800CD048 = 9;
-                            func_800BA8D8(0x3E);
+                            gMenuChangeMode = MENU_CHANGE_TO_RECORDS;
+                            Audio_TriggerSystemSE(NA_SE_62);
                         } else {
                             gNumPlayers = 1;
                         }
@@ -424,7 +422,7 @@ s32 MainMenu_Update(void) {
         case 2:
             Math_Rand1();
             if (gInputButtonPressed & BTN_B) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(NA_SE_16);
                 switch (gSelectedMode) {
                     case MODE_GP_RACE:
                     case MODE_TIME_ATTACK:
@@ -443,8 +441,8 @@ s32 MainMenu_Update(void) {
                 break;
             }
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x3E);
-                func_800BB324(gNumPlayers - 1);
+                Audio_TriggerSystemSE(NA_SE_62);
+                Audio_SetPlayerMode(gNumPlayers - 1);
                 switch (gSelectedMode) {
                     case MODE_GP_RACE:
                     case MODE_TIME_ATTACK:
@@ -484,7 +482,7 @@ s32 MainMenu_Update(void) {
                 }
             }
             if (gInputButtonPressed & BTN_B) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(NA_SE_16);
                 switch (gSelectedMode) {
                     case MODE_GP_RACE:
                     case MODE_TIME_ATTACK:
@@ -496,8 +494,8 @@ s32 MainMenu_Update(void) {
             }
             break;
         case 4:
-            if (D_800CD044 == 0) {
-                D_800CD048 = 11;
+            if (gGameModeChangeState == GAMEMODE_UPDATE) {
+                gMenuChangeMode = MENU_CHANGE_TO_COURSE_SELECT;
             }
             break;
         default:
@@ -523,7 +521,7 @@ void MainMenu_BackgroundInit(Object* backgroundObj) {
             OBJECT_LEFT(backgroundObj) = 8;
             /* fallthrough */
         case 1:
-            for (i = 0; i < 240; i++) {
+            for (i = 0; i < SCREEN_HEIGHT; i++) {
                 D_i6_8011F910[i] = 0;
             }
 
@@ -532,13 +530,13 @@ void MainMenu_BackgroundInit(Object* backgroundObj) {
     }
 }
 
-extern s16 D_800CD044;
+extern s16 gGameModeChangeState;
 
 void MainMenu_SignInit(Object* signObj) {
     s32 index = signObj->cmdId - OBJECT_MAIN_MENU_MODE_SIGN_0;
 
     func_80077D50(sMenuSignCompTexInfos[index], 0);
-    if (D_800CD044 == 33) {
+    if (gGameModeChangeState == GAMEMODE_CHANGE_INSTANT(GAMEMODE_CHANGE_INIT)) {
         OBJECT_COUNTER(signObj) = 12;
     }
 }
@@ -546,7 +544,7 @@ void MainMenu_SignInit(Object* signObj) {
 void MainMenu_HeaderInit(Object* headerObj) {
 
     func_80077D50(sSelectModeCompTexInfo, 0);
-    if (D_800CD044 == 33) {
+    if (gGameModeChangeState == GAMEMODE_CHANGE_INSTANT(GAMEMODE_CHANGE_INIT)) {
         OBJECT_COUNTER(headerObj) = 12;
     }
 }
@@ -712,8 +710,9 @@ Gfx* MainMenu_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
 
                 OBJECT_COUNTER(backgroundObj)++;
 
-                for (i = 0; i <= 100; i++) {
-                    j = Math_Rand1() % 240;
+                i = 0;
+                while (i <= 100) {
+                    j = Math_Rand1() % SCREEN_HEIGHT;
                     if (D_i6_8011F910[j] == 0) {
                         D_i6_8011F910[j] = 1;
                         alpha++;
@@ -722,9 +721,10 @@ Gfx* MainMenu_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
                     if (alpha >= 4) {
                         goto label;
                     }
+                    i++;
                 }
 
-                for (j = 0; j < 240; j++) {
+                for (j = 0; j < SCREEN_HEIGHT; j++) {
                     if (D_i6_8011F910[j] == 0) {
                         D_i6_8011F910[j] = 1;
                         alpha++;
@@ -743,7 +743,7 @@ Gfx* MainMenu_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
                 break;
         }
 
-        for (var_t1 = 0; var_t1 < 240; var_t1++) {
+        for (var_t1 = 0; var_t1 < SCREEN_HEIGHT; var_t1++) {
 
             switch (OBJECT_STATE(backgroundObj)) {
                 case 10:
@@ -967,7 +967,7 @@ Gfx* MainMenu_DifficultyDraw(Gfx* gfx, Object* difficultyObj) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
-        if ((gUnlockableLevel < 2) && (gSettingEverythingUnlocked == 0)) {
+        if ((gUnlockableLevel < 2) && !gSettingEverythingUnlocked) {
             if (i < 3) {
 #ifdef VERSION_JP
                 gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
@@ -1109,9 +1109,9 @@ void MainMenu_UnlockEverythingUpdate(Object* unlockEverythingObj) {
     if ((OBJECT_STATE(unlockEverythingObj) < 8) && (gInputButtonPressed != 0)) {
         if (gUnlockEverythingInputs[OBJECT_STATE(unlockEverythingObj)] & gInputPressed) {
             if (++OBJECT_STATE(unlockEverythingObj) == 8) {
-                gSettingEverythingUnlocked = 1;
+                gSettingEverythingUnlocked = true;
                 Save_SaveSettingsProfiles();
-                func_800BA8D8(0x2E);
+                Audio_TriggerSystemSE(NA_SE_46);
                 backgroundObj = Object_Get(OBJECT_MAIN_MENU_BACKGROUND);
                 if (OBJECT_STATE(backgroundObj) < 2) {
                     OBJECT_STATE(backgroundObj) = (Math_Rand1() % 3) + (OBJECT_STATE(backgroundObj) * 10) + 10;

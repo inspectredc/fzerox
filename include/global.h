@@ -11,5 +11,6 @@
 #include "fzx_math.h"
 #include "unk_structs.h"
 #include "leo/leo_internal.h"
+#include "sfx.h"
 
 #endif // GLOBAL_H

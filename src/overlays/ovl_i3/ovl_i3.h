@@ -47,7 +47,7 @@ typedef struct unk_80141860 {
     f32 unk_14;
     f32 unk_18;
     f32 unk_1C;
-} unk_80141860; // size = 0x20 (possibly unk_struct_20)
+} unk_80141860; // size = 0x20
 
 typedef struct unk_80141FF0 {
     f32 unk_00;

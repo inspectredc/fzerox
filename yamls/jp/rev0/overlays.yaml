@@ -121,22 +121,22 @@
     follows_vram: main
     symbol_name_format: i2_$VRAM
     subsegments:
-      - [0x97FF0, c, 98080]
+      - [0x97FF0, c, transition]
       - [0x9BC70, c, save]
       - [0x9F330, c, 9F3C0]
       - [0x9FDB0, c, 9FE40]
       - [0xA1670, c, font]
-      - [0xA2660, .data, 98080]
+      - [0xA2660, .data, transition]
       - [0xA26B0, .data, save]
       - [0xA27D0, .data, 9F3C0]
       - [0xA27D0, .data, 9FE40]
       - [0xA2810, .data, font]
-      - [0xA60E0, .rodata, 98080]
+      - [0xA60E0, .rodata, transition]
       - [0xA6360, .rodata, save]
       - [0xA6390, .rodata, 9FE40]
       - [0xA63F0, .rodata, font]
       - [0xA6D30, .data, ovl_i2_data]
-      - { type: .bss, vram: 0x8010D000, name: 98080 }
+      - { type: .bss, vram: 0x8010D000, name: transition }
       - { type: .bss, vram: 0x8010D080, name: ovl_i2_buffers }
       - { type: .bss, vram: 0x80111040, name: save }
       - { type: .bss, vram: 0x80111100, name: 9FE40 }
@@ -203,7 +203,8 @@
     subsegments:
       - [0xDC200, c, course_model]
       - [0xDCC40, c, course_select]
-      - [0xDF400, .data, course_select]
+      - [0xDF400, .data, course_view]
+      - [0xDF4C0, .data, course_select]
       - [0xDF960, .rodata, course_select]
       - { type: .bss, vram: 0x80119080, name: course_model }
       - { type: .bss, vram: 0x801190B0, name: course_select}
@@ -233,25 +234,30 @@
       - { type: .bss, vram: 0x8011F460, name: options_menu}
       - { type: .bss, vram: 0x80124110, name: save_context }
 
-  - name: ovl_i7
+  - name: ending
     exclusive_ram_id: overlay
     type: code
-    dir: overlays/ovl_i7
+    dir: overlays/ending
     start: 0xE97E0
     vram: 0x801432D0
     bss_size: 0xDD0
     symbol_name_format: i7_$VRAM
     subsegments:
       - [0xE97E0, c, ending]
+      - [0xECFD0, c, ending_effects]
       - [0xEFCA0, .data, ending]
+      - [0xEFE60, .data, ending_racer_focus_scripts]
+      - [0xF0A10, .data, ending_effects]
+      - [0xF0DB0, .data, ending_podium_camera_scripts]
       - [0xF1150, .rodata, ending]
-      - { type: .bss, vram: 0x8014AD80, name: ovl_i7_data }
+      - { type: .bss, vram: 0x8014AD80, name: podium_draw_data }
       - { type: .bss, vram: 0x8014B6E0, name: ending }
+      - { type: .bss, vram: 0x8014B890, name: ending_effects }
 
-  - name: ovl_i8
+  - name: records
     exclusive_ram_id: overlay
     type: code
-    dir: overlays/ovl_i8
+    dir: overlays/records
     start: 0xF1290
     vram: 0x801432D0
     bss_size: 0x130
