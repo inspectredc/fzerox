@@ -55,7 +55,7 @@ Gfx* (*D_800CD184[])(Gfx*) = {
     func_8006FB90, // COURSE_FEATURE_BUILDING_TALL_GOLD_RIGHT
 };
 
-bool CourseFeature_IsDecorational(s32 courseFeature) {
+bool Course_FeatureIsDecorational(s32 courseFeature) {
     if ((courseFeature >= COURSE_FEATURE_GATE_SQUARE) && (courseFeature <= COURSE_FEATURE_BUILDING_TALL_GOLD_RIGHT)) {
         return true;
     }
@@ -368,7 +368,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
         var_s3 = D_8022F0C0;
         var_s1 = D_802D1B60.unk_00;
         for (i = 0; i < D_802D1B60.unk_04; i++, var_s1++) {
-            if (CourseFeature_IsDecorational(var_s1->featureType) != 0) {
+            if (Course_FeatureIsDecorational(var_s1->featureType) != 0) {
                 if ((var_s2_2->unk_34->unk_10 != 0) && (var_s1->featureType <= COURSE_FEATURE_SIGN_OVERHEAD)) {
                     gSPMatrix(gfx++, K0_TO_PHYS(var_s3), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                     gfx = D_800CD184[var_s1->featureType](gfx);
@@ -390,7 +390,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
 
         var_s1 = D_802D1B60.unk_00;
         for (i = 0; i < D_802D1B60.unk_04; i++, var_s1++) {
-            if (CourseFeature_IsDecorational(var_s1->featureType) == 0) {
+            if (Course_FeatureIsDecorational(var_s1->featureType) == 0) {
                 continue;
             }
 
@@ -566,7 +566,7 @@ void Course_DecorationsViewInteractDataInit(void) {
     var_s0 = D_802D08E0;
     for (i = 0; i < sp12C->unk_04; i++) {
         temp_s3 = &sp12C->unk_00[i];
-        if (!CourseFeature_IsDecorational(temp_s3->featureType)) {
+        if (!Course_FeatureIsDecorational(temp_s3->featureType)) {
             continue;
         }
         courseSegment = &gCurrentCourseInfo->courseSegments[temp_s3->segmentIndex];
@@ -581,7 +581,7 @@ void Course_DecorationsViewInteractDataInit(void) {
                     spAC.x.x = -1.0f * spAC.y.x;
                     spAC.x.y = 0;
                     spAC.x.z = -1.0f * spAC.y.z;
-                    func_80074A90(&spAC.x.x, &spAC.x.z);
+                    Math_NormalizeXZ(&spAC.x.x, &spAC.x.z);
                     spAC.y.x = 0.0f;
                     spAC.y.y = 1.0f;
                     spAC.y.z = 0.0f;
@@ -592,7 +592,7 @@ void Course_DecorationsViewInteractDataInit(void) {
                     spAC.x.x = spAC.y.x;
                     spAC.x.y = 0;
                     spAC.x.z = spAC.y.z;
-                    func_80074A90(&spAC.x.x, &spAC.x.z);
+                    Math_NormalizeXZ(&spAC.x.x, &spAC.x.z);
                     spAC.y.x = 0.0f;
                     spAC.y.y = 1.0f;
                     spAC.y.z = 0.0f;
@@ -602,7 +602,7 @@ void Course_DecorationsViewInteractDataInit(void) {
                 }
             } else {
                 spAC.x.y = 0.0f;
-                func_80074A90(&spAC.x.x, &spAC.x.z);
+                Math_NormalizeXZ(&spAC.x.x, &spAC.x.z);
                 spAC.y.x = 0.0f;
                 spAC.y.y = 1.0f;
                 spAC.y.z = 0.0f;
@@ -983,7 +983,7 @@ next:
 
 extern unk_802D3E38 D_802D3E38[];
 
-s32 func_80074BB4(Vec3f* arg0, f32 arg1);
+s32 Math_VectorSetScale(Vec3f* arg0, f32 arg1);
 
 f32 D_800CD1DC = 150.0f;
 f32 D_800CD1E0 = 50.0f;
@@ -1095,14 +1095,14 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     spBC.x = sp44.m[0][0] * sp8C.z.x + sp44.m[1][0] * sp8C.z.y + sp44.m[2][0] * sp8C.z.z;
     spBC.y = sp44.m[0][1] * sp8C.z.x + sp44.m[1][1] * sp8C.z.y + sp44.m[2][1] * sp8C.z.z;
     spBC.z = sp44.m[0][2] * sp8C.z.x + sp44.m[1][2] * sp8C.z.y + sp44.m[2][2] * sp8C.z.z;
-    func_80074BB4(&spBC, 1.0f);
+    Math_VectorSetScale(&spBC, 1.0f);
     sp8C.z.x = spBC.x;
     sp8C.z.y = spBC.y;
     sp8C.z.z = spBC.z;
     spBC.x = sp44.m[0][0] * sp8C.y.x + sp44.m[1][0] * sp8C.y.y + sp44.m[2][0] * sp8C.y.z;
     spBC.y = sp44.m[0][1] * sp8C.y.x + sp44.m[1][1] * sp8C.y.y + sp44.m[2][1] * sp8C.y.z;
     spBC.z = sp44.m[0][2] * sp8C.y.x + sp44.m[1][2] * sp8C.y.y + sp44.m[2][2] * sp8C.y.z;
-    func_80074BB4(&spBC, 1.0f);
+    Math_VectorSetScale(&spBC, 1.0f);
     sp8C.y.x = spBC.x;
     sp8C.y.y = spBC.y;
     sp8C.y.z = spBC.z;
@@ -1125,7 +1125,7 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     spB0.x = vtx->v.ob[0] - spD4.x;
     spB0.y = vtx->v.ob[1] - spD4.y;
     spB0.z = vtx->v.ob[2] - spD4.z;
-    func_80074BB4(&spB0, 1.0f);
+    Math_VectorSetScale(&spB0, 1.0f);
 
     D_802D3E38[arg0].unk_0C = spB0;
     vtx++;
@@ -1138,7 +1138,7 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
     spB0.x = vtx->v.ob[0] - spD4.x;
     spB0.y = vtx->v.ob[1] - spD4.y;
     spB0.z = vtx->v.ob[2] - spD4.z;
-    func_80074BB4(&spB0, 1.0f);
+    Math_VectorSetScale(&spB0, 1.0f);
     D_802D3E38[arg0].unk_18 = spB0;
     D_802D3E38[arg0].unk_04 = spF0;
     spF0 += (150.0f / spEC);
@@ -1172,7 +1172,6 @@ void func_8007049C(s32 arg0, unk_8006FF90_arg_1* arg1, Vtx** arg2) {
 
 s32 D_800CD1E8 = 0;
 
-f32 func_80074A20(Vec3f, Vec3f);
 void func_8006FD7C(s32 arg0, s32 arg1, f32 arg2);
 f32 func_8006FE90(s32 arg0, f32 arg1);
 
@@ -1233,11 +1232,11 @@ Vtx* func_80070B5C(CourseSegment* arg0, f32 arg1, unk_8006FF90_arg_1* arg2, Vtx*
             spB8 = spAC;
             sp114 = true;
         }
-        arg4 += 9.0f * func_80074A20(spC4, spD0);
-        arg5 += 9.0f * func_80074A20(spAC, spB8);
+        arg4 += 9.0f * Math_VectorGetDistance(spC4, spD0);
+        arg5 += 9.0f * Math_VectorGetDistance(spAC, spB8);
         if ((arg4 > 32768.0f) || (arg5 > 32768.0f)) {
-            arg4 = (func_80074A20(spC4, spD0) * 9.0f) + -32768.0f;
-            arg5 = (func_80074A20(spAC, spB8) * 9.0f) + -32768.0f;
+            arg4 = (Math_VectorGetDistance(spC4, spD0) * 9.0f) + -32768.0f;
+            arg5 = (Math_VectorGetDistance(spAC, spB8) * 9.0f) + -32768.0f;
         }
         arg3->v.ob[0] = spC4.x;
         arg3->v.ob[1] = spC4.y;
@@ -1253,7 +1252,7 @@ Vtx* func_80070B5C(CourseSegment* arg0, f32 arg1, unk_8006FF90_arg_1* arg2, Vtx*
         arg3->v.ob[1] = spAC.y;
         arg3->v.ob[2] = spAC.z;
         spB8 = spAC;
-        arg3->v.tc[0] = func_80074A20(spC4, spAC) * 6.0f * 1;
+        arg3->v.tc[0] = Math_VectorGetDistance(spC4, spAC) * 6.0f * 1;
         arg3->v.tc[1] = arg5 * 1;
         arg3++;
         D_800CD1E8++;
@@ -2936,7 +2935,7 @@ void func_8007402C(s32 courseIndex) {
         sp28 = courseIndex - COURSE_EDIT_1;
         if (func_800760F8() != 2) {
             osWritebackDCacheAll();
-            LeoDD_DrawIsDiskInserted();
+            LeoFault_DrawIsDiskInserted();
             osWritebackDCacheAll();
         }
 
@@ -3188,10 +3187,4 @@ void func_80074844(void) {
     sp3C.m[2][0] = sp3C.m[0][2] = 0.0f;
     sp3C.m[0][0] = 1.0f;
     Matrix_ToMtx(&sp3C, gGfxPool->unk_2C668);
-}
-
-UNUSED s32 D_800CD2A0 = -1;
-
-f32 func_80074A20(Vec3f arg0, Vec3f arg1) {
-    return sqrtf(SQ(arg1.x - arg0.x) + SQ(arg1.y - arg0.y) + SQ(arg1.z - arg0.z));
 }

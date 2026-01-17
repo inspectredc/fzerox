@@ -1626,7 +1626,7 @@ Gfx* func_i3_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     return gfx;
 }
 
-void func_i3_InitRacePortraits(void) {
+void Hud_InitRacePortraits(void) {
     s32 i;
 
     D_i3_8013F000 = 3;

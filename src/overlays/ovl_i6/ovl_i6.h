@@ -41,6 +41,4 @@ typedef struct OptionsInfo {
     /* 0x18 */ TextureInfo optionTextureInfo;
 } OptionsInfo; // size = 0x20
 
-extern SaveContext gSaveContext;
-
 #endif // OVL_I6_H

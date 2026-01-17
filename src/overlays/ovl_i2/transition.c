@@ -2,7 +2,6 @@
 #include "transition.h"
 #include "fzx_camera.h"
 #include "fzx_game.h"
-#include "ovl_i2.h"
 #include "assets/segment_16C8A0.h"
 
 s16 sWipePos;

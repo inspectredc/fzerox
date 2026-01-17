@@ -6,6 +6,7 @@
 #include "fzx_course.h"
 #include "fzx_machine.h"
 #include "fzx_save.h"
+#include "fzx_effects.h"
 #include "unk_gfx.h"
 #include "assets/segment_16C8A0.h"
 #include "assets/segment_17B960.h"
@@ -19,8 +20,8 @@ Racer* sRivalRacer;
 Vtx* gEffectsVtxPtr;
 Vtx* gEffectsVtxEndPtr;
 s16 gPlayerLives[4];
-s16 D_800E5EE0[4];
-s16 D_800E5EE8[4];
+s16 gPlayerCharacters[4];
+s16 gPlayerMachineSkins[4];
 f32 gPlayerEngine[4];
 s32 gVsRacePlayerVictoryCount[4];
 s32 gVsRacePlayerPoints[4];
@@ -505,17 +506,17 @@ u8 D_800CF4D8[] = {
 };
 
 u8 D_800CF4F0[] = {
-    0, // VENUE_MUTE_CITY
-    3, // VENUE_PORT_TOWN
-    4, // VENUE_BIG_BLUE
-    2, // VENUE_SAND_OCEAN
-    5, // VENUE_DEVILS_FOREST
-    8, // VENUE_WHITE_LAND
-    7, // VENUE_SECTOR
-    6, // VENUE_RED_CANYON
-    2, // VENUE_FIRE_FIELD
-    1, // VENUE_SILENCE
-    0, // VENUE_ENDING
+    BGM_MUTE_CITY,     // VENUE_MUTE_CITY
+    BGM_PORT_TOWN,     // VENUE_PORT_TOWN
+    BGM_BIG_BLUE,      // VENUE_BIG_BLUE
+    BGM_SAND_OCEAN,    // VENUE_SAND_OCEAN
+    BGM_DEVILS_FOREST, // VENUE_DEVILS_FOREST
+    BGM_WHITE_LAND,    // VENUE_WHITE_LAND
+    BGM_SECTOR,        // VENUE_SECTOR
+    BGM_RED_CANYON,    // VENUE_RED_CANYON
+    BGM_SAND_OCEAN,    // VENUE_FIRE_FIELD
+    BGM_SILENCE,       // VENUE_SILENCE
+    BGM_MUTE_CITY,     // VENUE_ENDING
 };
 
 s32 func_80088CE0(s32 position) {
@@ -803,8 +804,8 @@ void func_8008969C(void) {
     s32 i;
 
     for (i = gNumPlayers - 1; i >= 0; i--) {
-        gRacers[i].character = D_800E5EE0[i];
-        gRacers[i].machineSkinIndex = D_800E5EE8[i];
+        gRacers[i].character = gPlayerCharacters[i];
+        gRacers[i].machineSkinIndex = gPlayerMachineSkins[i];
     }
 }
 
@@ -812,8 +813,8 @@ void func_80089724(void) {
     s32 i;
 
     for (i = gNumPlayers - 1; i >= 0; i--) {
-        D_800E5EE0[i] = gRacers[i].character;
-        D_800E5EE8[i] = gRacers[i].machineSkinIndex;
+        gPlayerCharacters[i] = gRacers[i].character;
+        gPlayerMachineSkins[i] = gRacers[i].machineSkinIndex;
         gRacers[i].unk_1A8 = func_8008960C(gPlayerEngine[i]);
     }
 }
@@ -827,7 +828,7 @@ void func_80089800(void) {
     j = 0;
 
     for (i = 1; i < 30; i++) {
-        if (j == D_800E5EE0[0]) {
+        if (j == gPlayerCharacters[0]) {
             j++;
         }
         gRacers[i].character = j++;
@@ -1575,7 +1576,7 @@ void func_8008C14C(Racer* arg0) {
     arg0->lapsCompleted = 1;
     arg0->unk_28C = NULL;
     arg0->unk_08 = 0x8000;
-    arg0->startNewPracticeLap = arg0->unk_288 = arg0->unk_278 = arg0->unk_27A = arg0->unk_27C = arg0->unk_220 =
+    arg0->startNewPracticeLap = arg0->unk_288 = arg0->unk_278 = arg0->unk_27A = arg0->unk_27C = arg0->bodyWhiteTimer =
         arg0->spinOutTimer = arg0->completedLapsTime = arg0->raceTime = arg0->lap = arg0->unk_204 = arg0->unk_208 =
             arg0->unk_20C = arg0->boostTimer = arg0->unk_214 = arg0->unk_210 = 0;
     arg0->unk_118.x = arg0->unk_118.y = arg0->unk_118.z = arg0->pitForceFieldSize = arg0->unk_1DC = arg0->unk_E4 =
@@ -1980,7 +1981,7 @@ void func_8008D8E8(void) {
     s32 i;
 
     func_800A4DF0();
-    func_8008D3C4(D_800E5EE0[0], 0);
+    func_8008D3C4(gPlayerCharacters[0], 0);
     func_8008D824();
 
     for (i = 0; i < 3; i++) {
@@ -2021,8 +2022,8 @@ void func_8008DA68(void) {
         gRacers[i].machineSkinIndex = 0;
         gRacers[i].unk_1A8 = func_8008960C(0.5f);
         if (i < 4) {
-            D_800E5EE0[i] = (s16) gRacers[i].character;
-            D_800E5EE8[i] = gRacers[i].machineSkinIndex;
+            gPlayerCharacters[i] = (s16) gRacers[i].character;
+            gPlayerMachineSkins[i] = gRacers[i].machineSkinIndex;
             gPlayerEngine[i] = 0.5f;
         }
     }
@@ -2100,8 +2101,8 @@ void func_8008DCD8(Racer* arg0, f32 arg1) {
                     sp90.y = arg0->unk_28C->velocity.y;
                     sp90.x = arg0->unk_28C->velocity.z;
                 }
-                func_i2_80105648(arg0->segmentPositionInfo.pos.x, arg0->segmentPositionInfo.pos.y,
-                                 arg0->segmentPositionInfo.pos.z, sp90.z, sp90.y, sp90.x, 40.0f, arg0);
+                Effects_SpawnExplosion2(arg0->segmentPositionInfo.pos.x, arg0->segmentPositionInfo.pos.y,
+                                        arg0->segmentPositionInfo.pos.z, sp90.z, sp90.y, sp90.x, 40.0f, arg0);
 
                 temp_s5 = arg0->bodyRF;
                 temp_s6 = arg0->bodyGF;
@@ -2116,16 +2117,16 @@ void func_8008DCD8(Racer* arg0, f32 arg1) {
 
                     temp_fs1 = ((Math_Rand1() & 0x1FFFF) * (15.0f / 131071.0f)) - 7.5f;
 
-                    func_i2_80105A28(((s32) (Math_Rand2() % 32) - 0x10) + arg0->segmentPositionInfo.pos.x,
-                                     ((s32) (Math_Rand1() % 32) - 0x10) + arg0->segmentPositionInfo.pos.y,
-                                     ((s32) (Math_Rand1() % 32) - 0x10) + arg0->segmentPositionInfo.pos.z,
-                                     sp90.z + (arg0->trueBasis.z.x * temp_fs2) + (temp_fs0 * arg0->trueBasis.y.x) +
-                                         (temp_fs1 * arg0->trueBasis.x.x),
-                                     sp90.y + (arg0->trueBasis.z.y * temp_fs2) + (temp_fs0 * arg0->trueBasis.y.y) +
-                                         (temp_fs1 * arg0->trueBasis.x.y),
-                                     sp90.x + (arg0->trueBasis.z.z * temp_fs2) + (temp_fs0 * arg0->trueBasis.y.z) +
-                                         (temp_fs1 * arg0->trueBasis.x.z),
-                                     &arg0->trueBasis, temp_s5, temp_s6, temp_s7, arg0);
+                    Effects_SpawnMachineDebris(((s32) (Math_Rand2() % 32) - 0x10) + arg0->segmentPositionInfo.pos.x,
+                                               ((s32) (Math_Rand1() % 32) - 0x10) + arg0->segmentPositionInfo.pos.y,
+                                               ((s32) (Math_Rand1() % 32) - 0x10) + arg0->segmentPositionInfo.pos.z,
+                                               sp90.z + (arg0->trueBasis.z.x * temp_fs2) +
+                                                   (temp_fs0 * arg0->trueBasis.y.x) + (temp_fs1 * arg0->trueBasis.x.x),
+                                               sp90.y + (arg0->trueBasis.z.y * temp_fs2) +
+                                                   (temp_fs0 * arg0->trueBasis.y.y) + (temp_fs1 * arg0->trueBasis.x.y),
+                                               sp90.x + (arg0->trueBasis.z.z * temp_fs2) +
+                                                   (temp_fs0 * arg0->trueBasis.y.z) + (temp_fs1 * arg0->trueBasis.x.z),
+                                               &arg0->trueBasis, temp_s5, temp_s6, temp_s7, arg0);
                     i--;
                 } while (i != 0);
             }
@@ -2188,10 +2189,11 @@ void func_8008E188(Racer* arg0, f32 arg1, f32 arg2, f32 arg3) {
 
     if (arg1 * arg2 > 0.01f) {
         if (arg0->machineLod != 0) {
-            func_i2_801054C0(arg0->segmentPositionInfo.pos.x + ((arg2 * 15.0f) * arg0->unk_24C.z.x),
-                             arg0->segmentPositionInfo.pos.y + ((arg2 * 15.0f) * arg0->unk_24C.z.y),
-                             arg0->segmentPositionInfo.pos.z + ((arg2 * 15.0f) * arg0->unk_24C.z.z), arg0->velocity.x,
-                             arg0->velocity.y, arg0->velocity.z, (arg1 * arg2 * 1.5f) + 18.0f, arg0);
+            Effects_SpawnCollisionSparks(arg0->segmentPositionInfo.pos.x + ((arg2 * 15.0f) * arg0->unk_24C.z.x),
+                                         arg0->segmentPositionInfo.pos.y + ((arg2 * 15.0f) * arg0->unk_24C.z.y),
+                                         arg0->segmentPositionInfo.pos.z + ((arg2 * 15.0f) * arg0->unk_24C.z.z),
+                                         arg0->velocity.x, arg0->velocity.y, arg0->velocity.z,
+                                         (arg1 * arg2 * 1.5f) + 18.0f, arg0);
         }
         if (D_800E5FD0 != 0) {
             Audio_PlayerTriggerSEStart(arg0->id, 3);
@@ -2260,9 +2262,9 @@ void func_8008E54C(Racer* arg0, f32 arg1) {
         if ((sp50 < -arg0->unk_274) || (arg0->unk_270 < sp50)) {
             arg0->stateFlags |= RACER_STATE_FLAGS_80000000;
             func_8008DCD8(arg0, 2.0f);
-            func_i2_801054C0(arg0->segmentPositionInfo.pos.x, arg0->segmentPositionInfo.pos.y,
-                             arg0->segmentPositionInfo.pos.z, arg0->velocity.x, arg0->velocity.y, arg0->velocity.z,
-                             40.0f, arg0);
+            Effects_SpawnCollisionSparks(arg0->segmentPositionInfo.pos.x, arg0->segmentPositionInfo.pos.y,
+                                         arg0->segmentPositionInfo.pos.z, arg0->velocity.x, arg0->velocity.y,
+                                         arg0->velocity.z, 40.0f, arg0);
             if (D_800E5FD0 != 0) {
                 Audio_PlayerTriggerSEStart(arg0->id, 3);
             }
@@ -3977,8 +3979,8 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 func_800894C0(racer);
             }
             if ((racer->id < gNumPlayers) || (gRacers[0].stateFlags & RACER_STATE_FALLING_OFF_TRACK)) {
-                func_i2_80105590(racer->segmentPositionInfo.pos.x, racer->segmentPositionInfo.pos.y,
-                                 racer->segmentPositionInfo.pos.z, 0.0f, 0.0f, 0.0f, 600.0f, racer);
+                Effects_SpawnExplosion1(racer->segmentPositionInfo.pos.x, racer->segmentPositionInfo.pos.y,
+                                        racer->segmentPositionInfo.pos.z, 0.0f, 0.0f, 0.0f, 600.0f, racer);
                 if (D_800E5FD0 != 0) {
                     Audio_PlayerTriggerSEStart(racer->id, 8);
                     if ((racer->id == 0) && (gNumPlayers == 1)) {
@@ -3994,7 +3996,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 racer->trueBasis.x.z = 1.0f;
                 racer->trueBasis.y.y = 1.0f;
                 racer->trueBasis.z.x = 1.0f;
-                func_i2_801059B4(14.0f, racer);
+                Effects_SpawnFallExplosion(14.0f, racer);
             }
             if (racer->id < gNumPlayers) {
                 controller->unk_88 = 0x2710;
@@ -4387,16 +4389,16 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         racer->unk_E8.x.z = (racer->unk_E8.z.x * racer->unk_E8.y.y) - (racer->unk_E8.z.y * racer->unk_E8.y.x);
     }
 
-    if (racer->unk_220 != 0) {
-        racer->unk_220--;
+    if (racer->bodyWhiteTimer != 0) {
+        racer->bodyWhiteTimer--;
     }
     if (racer->spinOutTimer != 0) {
         if (!((racer->id + gGameFrameCount) & 3) && (racer->machineLod != 0)) {
             sp10C.x = (s32) ((Math_Rand1() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.x;
             sp10C.y = (s32) ((Math_Rand1() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.y;
             sp10C.z = (s32) ((Math_Rand1() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.z;
-            func_i2_80105590(sp10C.x, sp10C.y, sp10C.z, racer->velocity.x, racer->velocity.y, racer->velocity.z,
-                             (f32) ((Math_Rand2() & 0xF) + ((s32) (racer->spinOutTimer * 5) / 150) + 5), racer);
+            Effects_SpawnExplosion1(sp10C.x, sp10C.y, sp10C.z, racer->velocity.x, racer->velocity.y, racer->velocity.z,
+                                    (f32) ((Math_Rand2() & 0xF) + ((s32) (racer->spinOutTimer * 5) / 150) + 5), racer);
             if (!((racer->id + gGameFrameCount) & 4) && (D_800E5FD0 != 0)) {
                 Audio_PlayerTriggerSEStart(racer->id, 5);
             }
@@ -4410,14 +4412,14 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 var_fs1 = ((f32) (Math_Rand2() & 0x1FFFF) * 0.000068665075f) - 4.5f;
                 var_fs0 = ((f32) (Math_Rand1() & 0x1FFFF) * 0.000038147264f) + 2.0f;
                 var_ft4 = ((f32) (Math_Rand2() & 0x1FFFF) * 0.000068665075f) - 4.5f;
-                func_i2_80105700(sp10C.x, sp10C.y, sp10C.z,
-                                 racer->velocity.x + (var_fs1 * racer->trueBasis.z.x) +
-                                     (var_fs0 * racer->trueBasis.y.x) + (var_ft4 * racer->trueBasis.x.x),
-                                 racer->velocity.y + (var_fs1 * racer->trueBasis.z.y) +
-                                     (var_fs0 * racer->trueBasis.y.y) + (var_ft4 * racer->trueBasis.x.y),
-                                 racer->velocity.z + (var_fs1 * racer->trueBasis.z.z) +
-                                     (var_fs0 * racer->trueBasis.y.z) + (var_ft4 * racer->trueBasis.x.z),
-                                 racer);
+                Effects_SpawnFlyingSparks(sp10C.x, sp10C.y, sp10C.z,
+                                          racer->velocity.x + (var_fs1 * racer->trueBasis.z.x) +
+                                              (var_fs0 * racer->trueBasis.y.x) + (var_ft4 * racer->trueBasis.x.x),
+                                          racer->velocity.y + (var_fs1 * racer->trueBasis.z.y) +
+                                              (var_fs0 * racer->trueBasis.y.y) + (var_ft4 * racer->trueBasis.x.y),
+                                          racer->velocity.z + (var_fs1 * racer->trueBasis.z.z) +
+                                              (var_fs0 * racer->trueBasis.y.z) + (var_ft4 * racer->trueBasis.x.z),
+                                          racer);
             }
         }
 
@@ -4431,9 +4433,9 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             D_800E5FBE++;
             func_800892E0(racer);
             if (racer->machineLod != 0) {
-                func_i2_80105648(racer->segmentPositionInfo.pos.x, racer->segmentPositionInfo.pos.y,
-                                 racer->segmentPositionInfo.pos.z, racer->velocity.x, racer->velocity.y,
-                                 racer->velocity.z, 80.0f, racer);
+                Effects_SpawnExplosion2(racer->segmentPositionInfo.pos.x, racer->segmentPositionInfo.pos.y,
+                                        racer->segmentPositionInfo.pos.z, racer->velocity.x, racer->velocity.y,
+                                        racer->velocity.z, 80.0f, racer);
                 if (racer->id < gNumPlayers) {
                     i = 60;
                 } else {
@@ -4446,16 +4448,16 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                     var_fs1 = ((f32) (Math_Rand1() & 0x1FFFF) * 0.00011444179f) - 7.5f;
                     var_fs0 = ((f32) (Math_Rand1() & 0x1FFFF) * 0.00005340617f) + 3.5f;
                     var_ft4 = ((f32) (Math_Rand1() & 0x1FFFF) * 0.00011444179f) - 7.5f;
-                    func_i2_80105A28((s32) ((Math_Rand2() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.x,
-                                     (s32) ((Math_Rand2() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.y,
-                                     (s32) ((Math_Rand2() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.z,
-                                     racer->velocity.x + (var_fs1 * racer->trueBasis.z.x) +
-                                         (var_fs0 * racer->trueBasis.y.x) + (var_ft4 * racer->trueBasis.x.x),
-                                     racer->velocity.y + (var_fs1 * racer->trueBasis.z.y) +
-                                         (var_fs0 * racer->trueBasis.y.y) + (var_ft4 * racer->trueBasis.x.y),
-                                     racer->velocity.z + (var_fs1 * racer->trueBasis.z.z) +
-                                         (var_fs0 * racer->trueBasis.y.z) + (var_ft4 * racer->trueBasis.x.z),
-                                     &racer->trueBasis, sp13C, sp138, sp134, racer);
+                    Effects_SpawnMachineDebris((s32) ((Math_Rand2() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.x,
+                                               (s32) ((Math_Rand2() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.y,
+                                               (s32) ((Math_Rand2() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.z,
+                                               racer->velocity.x + (var_fs1 * racer->trueBasis.z.x) +
+                                                   (var_fs0 * racer->trueBasis.y.x) + (var_ft4 * racer->trueBasis.x.x),
+                                               racer->velocity.y + (var_fs1 * racer->trueBasis.z.y) +
+                                                   (var_fs0 * racer->trueBasis.y.y) + (var_ft4 * racer->trueBasis.x.y),
+                                               racer->velocity.z + (var_fs1 * racer->trueBasis.z.z) +
+                                                   (var_fs0 * racer->trueBasis.y.z) + (var_ft4 * racer->trueBasis.x.z),
+                                               &racer->trueBasis, sp13C, sp138, sp134, racer);
                     i--;
                 } while (i != 0);
                 if (D_800E5FD0 != 0) {
@@ -4499,7 +4501,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             var_ft4 = racer->bodyBF;
         }
 
-        var_fa1 = racer->unk_220 / 5.0f;
+        var_fa1 = racer->bodyWhiteTimer / 5.0f;
         racer->bodyR = ((255.0f - var_fs1) * var_fa1) + var_fs1;
         racer->bodyG = ((255.0f - var_fs0) * var_fa1) + var_fs0;
         racer->bodyB = ((255.0f - var_ft4) * var_fa1) + var_ft4;
@@ -4529,16 +4531,16 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             sp10C.y = (s32) ((Math_Rand1() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.y;
             sp10C.z = (s32) ((Math_Rand1() & 0x1F) - 0x10) + racer->segmentPositionInfo.pos.z;
 
-            func_i2_801054C0(sp10C.x, sp10C.y, sp10C.z,
-                             racer->velocity.x + (var_fs1 * racer->trueBasis.z.x) + (var_fs0 * racer->trueBasis.y.x) +
-                                 (var_ft4 * racer->trueBasis.x.x),
-                             racer->velocity.y + (var_fs1 * racer->trueBasis.z.y) + (var_fs0 * racer->trueBasis.y.y) +
-                                 (var_ft4 * racer->trueBasis.x.y),
-                             racer->velocity.z + (var_fs1 * racer->trueBasis.z.z) + (var_fs0 * racer->trueBasis.y.z) +
-                                 (var_ft4 * racer->trueBasis.x.z),
-                             10.0f, racer);
-            func_i2_801058FC(sp10C.x, sp10C.y, sp10C.z, racer->velocity.x + racer->tiltUp.x,
-                             racer->velocity.y + racer->tiltUp.y, racer->velocity.z + racer->tiltUp.z, 20.0f, racer);
+            Effects_SpawnCollisionSparks(sp10C.x, sp10C.y, sp10C.z,
+                                         racer->velocity.x + (var_fs1 * racer->trueBasis.z.x) +
+                                             (var_fs0 * racer->trueBasis.y.x) + (var_ft4 * racer->trueBasis.x.x),
+                                         racer->velocity.y + (var_fs1 * racer->trueBasis.z.y) +
+                                             (var_fs0 * racer->trueBasis.y.y) + (var_ft4 * racer->trueBasis.x.y),
+                                         racer->velocity.z + (var_fs1 * racer->trueBasis.z.z) +
+                                             (var_fs0 * racer->trueBasis.y.z) + (var_ft4 * racer->trueBasis.x.z),
+                                         10.0f, racer);
+            Effects_SpawnSmoke(sp10C.x, sp10C.y, sp10C.z, racer->velocity.x + racer->tiltUp.x,
+                               racer->velocity.y + racer->tiltUp.y, racer->velocity.z + racer->tiltUp.z, 20.0f, racer);
 
             if (racer->id < gNumPlayers) {
                 Audio_PlayerTriggerSEStart(racer->id, 0x32);
@@ -4897,7 +4899,7 @@ void Racer_Update(void) {
                             var_fs0 = -var_fs0;
                         }
                         if ((racer2->machineLod != 0) &&
-                            (func_i2_801054C0(
+                            (Effects_SpawnCollisionSparks(
                                  ((racer->segmentPositionInfo.pos.x + racer2->segmentPositionInfo.pos.x) * 0.5f) +
                                      (6.0f * racer->trueBasis.y.x),
                                  ((racer->segmentPositionInfo.pos.y + racer2->segmentPositionInfo.pos.y) * 0.5f) +
@@ -4907,7 +4909,7 @@ void Racer_Update(void) {
                                  (racer->velocity.x + racer2->velocity.x) * 0.5f,
                                  (racer->velocity.y + racer2->velocity.y) * 0.5f,
                                  (racer->velocity.z + racer2->velocity.z) * 0.5f, var_fs0 + 12.0f, racer2) == 0)) {
-                            racer->unk_220 = racer2->unk_220;
+                            racer->bodyWhiteTimer = racer2->bodyWhiteTimer;
                         }
                         var_fs0 *= 1.1f;
                         if (racer->unk_284 == 0) {
@@ -5236,27 +5238,28 @@ void Racer_Update(void) {
     }
 }
 
-extern unk_80111870 D_80111870[32];
-extern s32 D_80111CF0;
-extern s32 D_80111CF4;
-extern unk_80111870 D_80111CF8[32];
-extern s32 D_80112178;
-extern s32 D_8011217C;
-extern unk_80111870 D_80112180[8];
-extern s32 D_801122A0;
-extern s32 D_801122A4;
-extern unk_801122A8 D_801122A8[32];
-extern s32 D_80112B28;
-extern s32 D_80112B2C;
-extern unk_80111870 D_80112B30[32];
-extern s32 D_80112FB0;
-extern s32 D_80112FB4;
-extern unk_80112FB8 D_80112FB8[32];
-extern s32 D_80113138;
-extern s32 D_8011313C;
-extern unk_80113140 D_80113140[128];
-extern s32 D_80115D40;
-extern s32 D_80115D44;
+extern MachineEffect gCollisionSparks[32];
+extern s32 gCollisionSparkIndex;
+extern s32 gCollisionSparkCount;
+extern MachineEffect gExplosions1[32];
+extern s32 gExplosions1Index;
+extern s32 gExplosions1Count;
+extern MachineEffect gExplosions2[8];
+extern s32 gExplosions2Index;
+extern s32 gExplosions2Count;
+extern FlyingSparkEffect gFlyingSparks[32];
+extern s32 gFlyingSparksIndex;
+extern s32 gFlyingSparksCount;
+extern MachineEffect gSmokes[32];
+extern s32 gSmokesIndex;
+extern s32 gSmokesCount;
+extern FallExplosionEffect gFallExplosions[32];
+extern s32 gFallExplosionsIndex;
+extern s32 gFallExplosionsCount;
+extern MachineDebrisEffect gMachineDebris[128];
+extern s32 gMachineDebrisIndex;
+extern s32 gMachineDebrisCount;
+extern GfxPool D_1000000;
 
 #ifdef NON_EQUIVALENT
 Gfx* Racer_Draw(Gfx* gfx, s32 playerIndex) {
@@ -5366,13 +5369,13 @@ Gfx* Racer_Draw(Gfx* gfx, s32 playerIndex) {
     GhostRacer* temp_v0_10;
     GhostRacer* temp_v0_4;
     GhostRacer* var_v1;
-    unk_80111870* temp_s1;
-    unk_80111870* temp_s1_4;
-    unk_80111870* temp_s1_5;
-    unk_801122A8* temp_s1_3;
-    unk_80112FB8* temp_s1_6;
+    MachineEffect* temp_s1;
+    MachineEffect* temp_s1_4;
+    MachineEffect* temp_s1_5;
+    FlyingSparkEffect* temp_s1_3;
+    FallExplosionEffect* temp_s1_6;
     Mtx* mtx;
-    unk_80113140* temp_v0_13;
+    MachineDebrisEffect* temp_v0_13;
     s32 temp;
 
     camera = &gCameras[playerIndex];
@@ -6017,31 +6020,31 @@ block_115:
     }
     gSPDisplayList(gfx++, D_4007FB8);
 
-    var_s3_6 = D_8011217C;
+    var_s3_6 = gExplosions1Count;
 
-    var_s7 = (D_80112178 - 1) & 0x1F;
+    var_s7 = (gExplosions1Index - 1) & 0x1F;
     while ((var_s3_6 != 0) && ((u32) (gEffectsVtxEndPtr - 3) >= (u32) gEffectsVtxPtr)) {
-        temp_s1 = &D_80111CF8[var_s7];
+        temp_s1 = &gExplosions1[var_s7];
 
-        temp_fs1 = temp_s1->unk_18 * sp56C;
-        temp_fs3 = temp_s1->unk_18 * sp568;
-        temp_fs2 = temp_s1->unk_18 * sp564;
-        sp53C = temp_s1->unk_18 * sp560;
-        sp538 = temp_s1->unk_18 * sp55C;
-        sp534 = temp_s1->unk_18 * sp558;
+        temp_fs1 = temp_s1->scale * sp56C;
+        temp_fs3 = temp_s1->scale * sp568;
+        temp_fs2 = temp_s1->scale * sp564;
+        sp53C = temp_s1->scale * sp560;
+        sp538 = temp_s1->scale * sp55C;
+        sp534 = temp_s1->scale * sp558;
 
-        gEffectsVtxPtr[0].v.ob[0] = Math_Round(temp_s1->unk_00.x + temp_fs1);
-        gEffectsVtxPtr[0].v.ob[1] = Math_Round(temp_s1->unk_00.y + temp_fs3);
-        gEffectsVtxPtr[0].v.ob[2] = Math_Round(temp_s1->unk_00.z + temp_fs2);
-        gEffectsVtxPtr[2].v.ob[0] = Math_Round(temp_s1->unk_00.x - temp_fs1);
-        gEffectsVtxPtr[2].v.ob[1] = Math_Round(temp_s1->unk_00.y - temp_fs3);
-        gEffectsVtxPtr[2].v.ob[2] = Math_Round(temp_s1->unk_00.z - temp_fs2);
-        gEffectsVtxPtr[1].v.ob[0] = Math_Round(temp_s1->unk_00.x + sp53C);
-        gEffectsVtxPtr[1].v.ob[1] = Math_Round(temp_s1->unk_00.y + sp538);
-        gEffectsVtxPtr[1].v.ob[2] = Math_Round(temp_s1->unk_00.z + sp534);
-        gEffectsVtxPtr[3].v.ob[0] = Math_Round(temp_s1->unk_00.x - sp53C);
-        gEffectsVtxPtr[3].v.ob[1] = Math_Round(temp_s1->unk_00.y - sp538);
-        gEffectsVtxPtr[3].v.ob[2] = Math_Round(temp_s1->unk_00.z - sp534);
+        gEffectsVtxPtr[0].v.ob[0] = Math_Round(temp_s1->pos.x + temp_fs1);
+        gEffectsVtxPtr[0].v.ob[1] = Math_Round(temp_s1->pos.y + temp_fs3);
+        gEffectsVtxPtr[0].v.ob[2] = Math_Round(temp_s1->pos.z + temp_fs2);
+        gEffectsVtxPtr[2].v.ob[0] = Math_Round(temp_s1->pos.x - temp_fs1);
+        gEffectsVtxPtr[2].v.ob[1] = Math_Round(temp_s1->pos.y - temp_fs3);
+        gEffectsVtxPtr[2].v.ob[2] = Math_Round(temp_s1->pos.z - temp_fs2);
+        gEffectsVtxPtr[1].v.ob[0] = Math_Round(temp_s1->pos.x + sp53C);
+        gEffectsVtxPtr[1].v.ob[1] = Math_Round(temp_s1->pos.y + sp538);
+        gEffectsVtxPtr[1].v.ob[2] = Math_Round(temp_s1->pos.z + sp534);
+        gEffectsVtxPtr[3].v.ob[0] = Math_Round(temp_s1->pos.x - sp53C);
+        gEffectsVtxPtr[3].v.ob[1] = Math_Round(temp_s1->pos.y - sp538);
+        gEffectsVtxPtr[3].v.ob[2] = Math_Round(temp_s1->pos.z - sp534);
 
         gEffectsVtxPtr[0].v.tc[0] = gEffectsVtxPtr[1].v.tc[0] = gEffectsVtxPtr[1].v.tc[1] = gEffectsVtxPtr[2].v.tc[1] =
             0;
@@ -6051,15 +6054,15 @@ block_115:
         gSPVertex(gfx++, gEffectsVtxPtr, 4, 0);
         gDPPipeSync(gfx++);
 
-        if (temp_s1->unk_1C < 8) {
-            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255 - (temp_s1->unk_1C * 16), 255);
-            gDPSetEnvColor(gfx++, 255, 255 - (temp_s1->unk_1C * 32), 0, 255);
+        if (temp_s1->timer < 8) {
+            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255 - (temp_s1->timer * 16), 255);
+            gDPSetEnvColor(gfx++, 255, 255 - (temp_s1->timer * 32), 0, 255);
         } else {
-            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255 - (temp_s1->unk_1C * 16), 255);
-            gDPSetEnvColor(gfx++, 0x1FF - (temp_s1->unk_1C * 32), 0, 0, 0x17F - (temp_s1->unk_1C * 16));
+            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255 - (temp_s1->timer * 16), 255);
+            gDPSetEnvColor(gfx++, 0x1FF - (temp_s1->timer * 32), 0, 0, 0x17F - (temp_s1->timer * 16));
         }
 
-        gDPLoadTextureBlock(gfx++, D_800CDAB8[temp_s1->unk_1C >> 1], G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
+        gDPLoadTextureBlock(gfx++, D_800CDAB8[temp_s1->timer >> 1], G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 0, 0, G_TX_NOLOD, G_TX_NOLOD);
 
         gSP2Triangles(gfx++, 0, 1, 3, 0, 1, 2, 3, 0);
@@ -6070,29 +6073,29 @@ block_115:
 
         gEffectsVtxPtr += 4;
     }
-    var_s3_6 = D_801122A4;
-    var_s7 = (D_801122A0 - 1) & 7;
+    var_s3_6 = gExplosions2Count;
+    var_s7 = (gExplosions2Index - 1) & 7;
     while ((var_s3_6 != 0) && ((gEffectsVtxEndPtr - 3) >= gEffectsVtxPtr)) {
-        temp_s1 = &D_80112180[var_s7];
-        temp_fs1 = temp_s1->unk_18 * sp56C;
-        temp_fs3 = temp_s1->unk_18 * sp568;
-        temp_fs2 = temp_s1->unk_18 * sp564;
-        sp538 = temp_s1->unk_18 * sp55C;
-        sp53C = temp_s1->unk_18 * sp560;
-        sp534 = temp_s1->unk_18 * sp558;
+        temp_s1 = &gExplosions2[var_s7];
+        temp_fs1 = temp_s1->scale * sp56C;
+        temp_fs3 = temp_s1->scale * sp568;
+        temp_fs2 = temp_s1->scale * sp564;
+        sp538 = temp_s1->scale * sp55C;
+        sp53C = temp_s1->scale * sp560;
+        sp534 = temp_s1->scale * sp558;
 
-        gEffectsVtxPtr[0].v.ob[0] = Math_Round(temp_s1->unk_00.x + temp_fs1);
-        gEffectsVtxPtr[0].v.ob[1] = Math_Round(temp_s1->unk_00.y + temp_fs3);
-        gEffectsVtxPtr[0].v.ob[2] = Math_Round(temp_s1->unk_00.z + temp_fs2);
-        gEffectsVtxPtr[2].v.ob[0] = Math_Round(temp_s1->unk_00.x - temp_fs1);
-        gEffectsVtxPtr[2].v.ob[1] = Math_Round(temp_s1->unk_00.y - temp_fs3);
-        gEffectsVtxPtr[2].v.ob[2] = Math_Round(temp_s1->unk_00.z - temp_fs2);
-        gEffectsVtxPtr[1].v.ob[0] = Math_Round(temp_s1->unk_00.x + sp53C);
-        gEffectsVtxPtr[1].v.ob[1] = Math_Round(temp_s1->unk_00.y + sp538);
-        gEffectsVtxPtr[1].v.ob[2] = Math_Round(temp_s1->unk_00.z + sp534);
-        gEffectsVtxPtr[3].v.ob[0] = Math_Round(temp_s1->unk_00.x - sp53C);
-        gEffectsVtxPtr[3].v.ob[1] = Math_Round(temp_s1->unk_00.y - sp538);
-        gEffectsVtxPtr[3].v.ob[2] = Math_Round(temp_s1->unk_00.z - sp534);
+        gEffectsVtxPtr[0].v.ob[0] = Math_Round(temp_s1->pos.x + temp_fs1);
+        gEffectsVtxPtr[0].v.ob[1] = Math_Round(temp_s1->pos.y + temp_fs3);
+        gEffectsVtxPtr[0].v.ob[2] = Math_Round(temp_s1->pos.z + temp_fs2);
+        gEffectsVtxPtr[2].v.ob[0] = Math_Round(temp_s1->pos.x - temp_fs1);
+        gEffectsVtxPtr[2].v.ob[1] = Math_Round(temp_s1->pos.y - temp_fs3);
+        gEffectsVtxPtr[2].v.ob[2] = Math_Round(temp_s1->pos.z - temp_fs2);
+        gEffectsVtxPtr[1].v.ob[0] = Math_Round(temp_s1->pos.x + sp53C);
+        gEffectsVtxPtr[1].v.ob[1] = Math_Round(temp_s1->pos.y + sp538);
+        gEffectsVtxPtr[1].v.ob[2] = Math_Round(temp_s1->pos.z + sp534);
+        gEffectsVtxPtr[3].v.ob[0] = Math_Round(temp_s1->pos.x - sp53C);
+        gEffectsVtxPtr[3].v.ob[1] = Math_Round(temp_s1->pos.y - sp538);
+        gEffectsVtxPtr[3].v.ob[2] = Math_Round(temp_s1->pos.z - sp534);
 
         gEffectsVtxPtr[0].v.tc[0] = gEffectsVtxPtr[1].v.tc[0] = gEffectsVtxPtr[1].v.tc[1] = gEffectsVtxPtr[2].v.tc[1] =
             0;
@@ -6102,15 +6105,15 @@ block_115:
         gSPVertex(gfx++, gEffectsVtxPtr, 4, 0);
         gDPPipeSync(gfx++);
 
-        if (temp_s1->unk_1C < 16) {
-            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255 - (temp_s1->unk_1C * 8), 255);
-            gDPSetEnvColor(gfx++, 255, 255 - (temp_s1->unk_1C * 16), 0, 255);
+        if (temp_s1->timer < 16) {
+            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255 - (temp_s1->timer * 8), 255);
+            gDPSetEnvColor(gfx++, 255, 255 - (temp_s1->timer * 16), 0, 255);
         } else {
-            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255 - (temp_s1->unk_1C * 8), 255);
-            gDPSetEnvColor(gfx++, 0x1FF - (temp_s1->unk_1C * 16), 0, 0, 0x17F - (temp_s1->unk_1C * 8));
+            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255 - (temp_s1->timer * 8), 255);
+            gDPSetEnvColor(gfx++, 0x1FF - (temp_s1->timer * 16), 0, 0, 0x17F - (temp_s1->timer * 8));
         }
 
-        gDPLoadTextureBlock(gfx++, D_800CDAB8[temp_s1->unk_1C >> 2], G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
+        gDPLoadTextureBlock(gfx++, D_800CDAB8[temp_s1->timer >> 2], G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 0, 0, G_TX_NOLOD, G_TX_NOLOD);
 
         gSP2Triangles(gfx++, 0, 1, 3, 0, 1, 2, 3, 0);
@@ -6124,25 +6127,25 @@ block_115:
 
     gSPDisplayList(gfx++, D_4007FD8);
 
-    var_s3_6 = D_80115D44;
+    var_s3_6 = gMachineDebrisCount;
 
-    var_s7 = (D_80115D40 - 1) & 0x7F;
+    var_s7 = (gMachineDebrisIndex - 1) & 0x7F;
     while ((var_s3_6 != 0) && ((gEffectsVtxEndPtr - 2) >= gEffectsVtxPtr)) {
 
-        temp_v0_13 = &D_80113140[var_s7];
-        gEffectsVtxPtr[0].v.ob[0] = temp_v0_13->unk_00.x;
-        gEffectsVtxPtr[0].v.ob[1] = temp_v0_13->unk_00.y;
-        gEffectsVtxPtr[0].v.ob[2] = temp_v0_13->unk_00.z;
-        gEffectsVtxPtr[1].v.ob[0] = temp_v0_13->unk_0C.x;
-        gEffectsVtxPtr[1].v.ob[1] = temp_v0_13->unk_0C.y;
-        gEffectsVtxPtr[1].v.ob[2] = temp_v0_13->unk_0C.z;
-        gEffectsVtxPtr[2].v.ob[0] = temp_v0_13->unk_18.x;
-        gEffectsVtxPtr[2].v.ob[1] = temp_v0_13->unk_18.y;
-        gEffectsVtxPtr[2].v.ob[2] = temp_v0_13->unk_18.z;
-        gEffectsVtxPtr[0].v.cn[0] = temp_v0_13->unk_48;
-        gEffectsVtxPtr[0].v.cn[1] = temp_v0_13->unk_4A;
-        gEffectsVtxPtr[0].v.cn[2] = temp_v0_13->unk_4C;
-        gEffectsVtxPtr[0].v.cn[3] = temp_v0_13->unk_4E;
+        temp_v0_13 = &gMachineDebris[var_s7];
+        gEffectsVtxPtr[0].v.ob[0] = temp_v0_13->cornerPos1.x;
+        gEffectsVtxPtr[0].v.ob[1] = temp_v0_13->cornerPos1.y;
+        gEffectsVtxPtr[0].v.ob[2] = temp_v0_13->cornerPos1.z;
+        gEffectsVtxPtr[1].v.ob[0] = temp_v0_13->cornerPos2.x;
+        gEffectsVtxPtr[1].v.ob[1] = temp_v0_13->cornerPos2.y;
+        gEffectsVtxPtr[1].v.ob[2] = temp_v0_13->cornerPos2.z;
+        gEffectsVtxPtr[2].v.ob[0] = temp_v0_13->cornerPos3.x;
+        gEffectsVtxPtr[2].v.ob[1] = temp_v0_13->cornerPos3.y;
+        gEffectsVtxPtr[2].v.ob[2] = temp_v0_13->cornerPos3.z;
+        gEffectsVtxPtr[0].v.cn[0] = temp_v0_13->red;
+        gEffectsVtxPtr[0].v.cn[1] = temp_v0_13->green;
+        gEffectsVtxPtr[0].v.cn[2] = temp_v0_13->blue;
+        gEffectsVtxPtr[0].v.cn[3] = temp_v0_13->alpha;
         gSPVertex(gfx++, gEffectsVtxPtr, 3, 0);
         gSP1Triangle(gfx++, 0, 1, 2, 0);
 
@@ -6153,19 +6156,19 @@ block_115:
 
     gSPDisplayList(gfx++, D_4008000);
 
-    var_s3_6 = D_80112B2C;
-    var_s7 = (D_80112B28 - 1) & 0x1F;
+    var_s3_6 = gFlyingSparksCount;
+    var_s7 = (gFlyingSparksIndex - 1) & 0x1F;
     while ((var_s3_6 != 0) && ((gEffectsVtxEndPtr - 2) >= gEffectsVtxPtr)) {
-        temp_s1_3 = &D_801122A8[var_s7];
-        gEffectsVtxPtr[0].v.ob[0] = Math_Round(temp_s1_3->unk_00.x - (3.0f * temp_s1_3->unk_0C.x));
-        gEffectsVtxPtr[0].v.ob[1] = Math_Round(temp_s1_3->unk_00.y - (3.0f * temp_s1_3->unk_0C.y));
-        gEffectsVtxPtr[0].v.ob[2] = Math_Round(temp_s1_3->unk_00.z - (3.0f * temp_s1_3->unk_0C.z));
-        gEffectsVtxPtr[1].v.ob[0] = Math_Round(temp_s1_3->unk_00.x + temp_s1_3->unk_30.x);
-        gEffectsVtxPtr[1].v.ob[1] = Math_Round(temp_s1_3->unk_00.y + temp_s1_3->unk_30.y);
-        gEffectsVtxPtr[1].v.ob[2] = Math_Round(temp_s1_3->unk_00.z + temp_s1_3->unk_30.z);
-        gEffectsVtxPtr[2].v.ob[0] = Math_Round(temp_s1_3->unk_00.x - temp_s1_3->unk_30.x);
-        gEffectsVtxPtr[2].v.ob[1] = Math_Round(temp_s1_3->unk_00.y - temp_s1_3->unk_30.y);
-        gEffectsVtxPtr[2].v.ob[2] = Math_Round(temp_s1_3->unk_00.z - temp_s1_3->unk_30.z);
+        temp_s1_3 = &gFlyingSparks[var_s7];
+        gEffectsVtxPtr[0].v.ob[0] = Math_Round(temp_s1_3->pos.x - (3.0f * temp_s1_3->velocity.x));
+        gEffectsVtxPtr[0].v.ob[1] = Math_Round(temp_s1_3->pos.y - (3.0f * temp_s1_3->velocity.y));
+        gEffectsVtxPtr[0].v.ob[2] = Math_Round(temp_s1_3->pos.z - (3.0f * temp_s1_3->velocity.z));
+        gEffectsVtxPtr[1].v.ob[0] = Math_Round(temp_s1_3->pos.x + temp_s1_3->basis.z.x);
+        gEffectsVtxPtr[1].v.ob[1] = Math_Round(temp_s1_3->pos.y + temp_s1_3->basis.z.y);
+        gEffectsVtxPtr[1].v.ob[2] = Math_Round(temp_s1_3->pos.z + temp_s1_3->basis.z.z);
+        gEffectsVtxPtr[2].v.ob[0] = Math_Round(temp_s1_3->pos.x - temp_s1_3->basis.z.x);
+        gEffectsVtxPtr[2].v.ob[1] = Math_Round(temp_s1_3->pos.y - temp_s1_3->basis.z.y);
+        gEffectsVtxPtr[2].v.ob[2] = Math_Round(temp_s1_3->pos.z - temp_s1_3->basis.z.z);
 
         gEffectsVtxPtr[0].v.cn[0] = 0xFF;
         gEffectsVtxPtr[0].v.cn[1] = gEffectsVtxPtr[0].v.cn[2] = 0;
@@ -6184,18 +6187,18 @@ block_115:
 
     gSPDisplayList(gfx++, D_4008028);
 
-    var_s3_6 = D_80111CF4;
-    var_s7 = (D_80111CF0 - 1) & 0x1F;
+    var_s3_6 = gCollisionSparkCount;
+    var_s7 = (gCollisionSparkIndex - 1) & 0x1F;
     while ((var_s3_6 != 0) && ((gEffectsVtxEndPtr - 3) >= gEffectsVtxPtr)) {
-        temp_s1_4 = &D_80111870[var_s7];
-        temp_v0_14 = temp_s1_4->unk_20;
+        temp_s1_4 = &gCollisionSparks[var_s7];
+        temp_v0_14 = temp_s1_4->racer;
         if (temp_v0_14->unk_2B3 != 0) {
-            temp_fv1_6 = SQ(temp_s1_4->unk_1C - 1) * -0.15f;
-            temp_fs4 = temp_s1_4->unk_00.x + (temp_fv1_6 * temp_v0_14->trueBasis.y.x);
-            temp_fs5 = temp_s1_4->unk_00.y + (temp_fv1_6 * temp_v0_14->trueBasis.y.y);
-            sp54C = temp_s1_4->unk_00.z + (temp_fv1_6 * temp_v0_14->trueBasis.y.z);
+            temp_fv1_6 = SQ(temp_s1_4->timer - 1) * -0.15f;
+            temp_fs4 = temp_s1_4->pos.x + (temp_fv1_6 * temp_v0_14->trueBasis.y.x);
+            temp_fs5 = temp_s1_4->pos.y + (temp_fv1_6 * temp_v0_14->trueBasis.y.y);
+            sp54C = temp_s1_4->pos.z + (temp_fv1_6 * temp_v0_14->trueBasis.y.z);
 
-            temp_fv0_16 = temp_s1_4->unk_18;
+            temp_fv0_16 = temp_s1_4->scale;
             temp_fs1 = temp_fv0_16 * sp56C;
             temp_fs3 = temp_fv0_16 * sp568;
             temp_fs2 = temp_fv0_16 * sp564;
@@ -6220,11 +6223,11 @@ block_115:
             gEffectsVtxPtr[0].v.tc[1] = gEffectsVtxPtr[2].v.tc[0] = gEffectsVtxPtr[3].v.tc[0] =
                 gEffectsVtxPtr[3].v.tc[1] = 0x7FF;
 
-            gSPTexture(gfx++, 0x8000, 0x8000, 0, temp_s1_4->unk_1C >> 1, G_ON);
+            gSPTexture(gfx++, 0x8000, 0x8000, 0, temp_s1_4->timer >> 1, G_ON);
             gSPVertex(gfx++, gEffectsVtxPtr, 4, 0);
             gDPPipeSync(gfx++);
-            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255 - (temp_s1_4->unk_1C * 8), 255);
-            gDPSetEnvColor(gfx++, 255, 255 - (temp_s1_4->unk_1C * 16), 0, 255 - (temp_s1_4->unk_1C * 4));
+            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255 - (temp_s1_4->timer * 8), 255);
+            gDPSetEnvColor(gfx++, 255, 255 - (temp_s1_4->timer * 16), 0, 255 - (temp_s1_4->timer * 4));
             gSP2Triangles(gfx++, 0, 1, 3, 0, 1, 2, 3, 0);
             gEffectsVtxPtr += 4;
         }
@@ -6234,38 +6237,38 @@ block_115:
 
     gSPDisplayList(gfx++, D_4008130);
 
-    var_s3_6 = D_80112FB4;
-    var_s7 = (D_80112FB0 - 1) & 0x1F;
+    var_s3_6 = gSmokesCount;
+    var_s7 = (gSmokesIndex - 1) & 0x1F;
     while ((var_s3_6 != 0) && ((gEffectsVtxEndPtr - 3) >= gEffectsVtxPtr)) {
-        temp_s1_5 = &D_80112B30[var_s7];
-        if (temp_s1_5->unk_20->unk_2B3 != 0) {
-            temp_fv0_17 = temp_s1_5->unk_18;
+        temp_s1_5 = &gSmokes[var_s7];
+        if (temp_s1_5->racer->unk_2B3 != 0) {
+            temp_fv0_17 = temp_s1_5->scale;
             temp_fs1 = temp_fv0_17 * sp56C;
             temp_fs3 = temp_fv0_17 * sp568;
             temp_fs2 = temp_fv0_17 * sp564;
             sp53C = temp_fv0_17 * sp560;
             sp538 = temp_fv0_17 * sp55C;
             sp534 = temp_fv0_17 * sp558;
-            gEffectsVtxPtr[0].v.ob[0] = Math_Round(temp_s1_5->unk_00.x + temp_fs1);
-            gEffectsVtxPtr[0].v.ob[1] = Math_Round(temp_s1_5->unk_00.y + temp_fs3);
-            gEffectsVtxPtr[0].v.ob[2] = Math_Round(temp_s1_5->unk_00.z + temp_fs2);
-            gEffectsVtxPtr[2].v.ob[0] = Math_Round(temp_s1_5->unk_00.x - temp_fs1);
-            gEffectsVtxPtr[2].v.ob[1] = Math_Round(temp_s1_5->unk_00.y - temp_fs3);
-            gEffectsVtxPtr[2].v.ob[2] = Math_Round(temp_s1_5->unk_00.z - temp_fs2);
-            gEffectsVtxPtr[1].v.ob[0] = Math_Round(temp_s1_5->unk_00.x + sp53C);
-            gEffectsVtxPtr[1].v.ob[1] = Math_Round(temp_s1_5->unk_00.y + sp538);
-            gEffectsVtxPtr[1].v.ob[2] = Math_Round(temp_s1_5->unk_00.z + sp534);
-            gEffectsVtxPtr[3].v.ob[0] = Math_Round(temp_s1_5->unk_00.x - sp53C);
-            gEffectsVtxPtr[3].v.ob[1] = Math_Round(temp_s1_5->unk_00.y - sp538);
-            gEffectsVtxPtr[3].v.ob[2] = Math_Round(temp_s1_5->unk_00.z - sp534);
+            gEffectsVtxPtr[0].v.ob[0] = Math_Round(temp_s1_5->pos.x + temp_fs1);
+            gEffectsVtxPtr[0].v.ob[1] = Math_Round(temp_s1_5->pos.y + temp_fs3);
+            gEffectsVtxPtr[0].v.ob[2] = Math_Round(temp_s1_5->pos.z + temp_fs2);
+            gEffectsVtxPtr[2].v.ob[0] = Math_Round(temp_s1_5->pos.x - temp_fs1);
+            gEffectsVtxPtr[2].v.ob[1] = Math_Round(temp_s1_5->pos.y - temp_fs3);
+            gEffectsVtxPtr[2].v.ob[2] = Math_Round(temp_s1_5->pos.z - temp_fs2);
+            gEffectsVtxPtr[1].v.ob[0] = Math_Round(temp_s1_5->pos.x + sp53C);
+            gEffectsVtxPtr[1].v.ob[1] = Math_Round(temp_s1_5->pos.y + sp538);
+            gEffectsVtxPtr[1].v.ob[2] = Math_Round(temp_s1_5->pos.z + sp534);
+            gEffectsVtxPtr[3].v.ob[0] = Math_Round(temp_s1_5->pos.x - sp53C);
+            gEffectsVtxPtr[3].v.ob[1] = Math_Round(temp_s1_5->pos.y - sp538);
+            gEffectsVtxPtr[3].v.ob[2] = Math_Round(temp_s1_5->pos.z - sp534);
             gEffectsVtxPtr[0].v.tc[0] = gEffectsVtxPtr[1].v.tc[0] = gEffectsVtxPtr[1].v.tc[1] =
                 gEffectsVtxPtr[2].v.tc[1] = 0;
             gEffectsVtxPtr[0].v.tc[1] = gEffectsVtxPtr[2].v.tc[0] = gEffectsVtxPtr[3].v.tc[0] =
                 gEffectsVtxPtr[3].v.tc[1] = 0x7FF;
-            gSPTexture(gfx++, 0x8000, 0x8000, 0, temp_s1_5->unk_1C >> 1, G_ON);
+            gSPTexture(gfx++, 0x8000, 0x8000, 0, temp_s1_5->timer >> 1, G_ON);
             gSPVertex(gfx++, gEffectsVtxPtr, 4, 0);
             gDPPipeSync(gfx++);
-            gDPSetEnvColor(gfx++, 180, 150, 100, 230 - (temp_s1_4->unk_1C * 4));
+            gDPSetEnvColor(gfx++, 180, 150, 100, 230 - (temp_s1_4->timer * 4));
             gSP2Triangles(gfx++, 0, 1, 3, 0, 1, 2, 3, 0);
             gEffectsVtxPtr += 4;
         }
@@ -6322,13 +6325,13 @@ block_115:
 
     gSPDisplayList(gfx++, aSetupFallExplosionDL);
 
-    var_s3_6 = D_8011313C;
-    var_s7 = (D_80113138 - 1) & 0x1F;
+    var_s3_6 = gFallExplosionsCount;
+    var_s7 = (gFallExplosionsIndex - 1) & 0x1F;
     while ((var_s3_6 != 0) && ((gEffectsVtxEndPtr - 7) >= gEffectsVtxPtr)) {
-        temp_s1_6 = &D_80112FB8[var_s7];
-        racer = temp_s1_6->unk_08;
-        temp_s4 = temp_s1_6->unk_04 - 5;
-        if (temp_s1_6->unk_04 == 0) {
+        temp_s1_6 = &gFallExplosions[var_s7];
+        racer = temp_s1_6->racer;
+        temp_s4 = temp_s1_6->timer - 5;
+        if (temp_s1_6->timer == 0) {
             break;
         }
 
@@ -6346,7 +6349,7 @@ block_115:
                 sp5C4 = (s32) ((60 - temp_s4) * 255) / 40;
             }
 
-            temp_fs0_15 = temp * temp_s1_6->unk_00;
+            temp_fs0_15 = temp * temp_s1_6->scale;
             temp_fs1 = temp_fs0_15 * sp56C;
             gEffectsVtxPtr[0].v.ob[0] = Math_Round(racer->segmentPositionInfo.pos.x + temp_fs1);
             temp_fs2 = temp_fs0_15 * sp568;
@@ -6378,11 +6381,11 @@ block_115:
             gEffectsVtxPtr += 4;
         }
 
-        if (temp_s1_6->unk_04 < 0x1A) {
+        if (temp_s1_6->timer < 0x1A) {
             if ((gEffectsVtxEndPtr - 3) < gEffectsVtxPtr) {
                 break;
             }
-            temp_fs0_18 = (temp_s1_6->unk_00 * 163.64f * (f32) temp_s1_6->unk_04) / 26.0f;
+            temp_fs0_18 = (temp_s1_6->scale * 163.64f * (f32) temp_s1_6->timer) / 26.0f;
             temp_fs1 = racer->trueBasis.x.x * temp_fs0_18;
             temp_fs3 = racer->trueBasis.x.y * temp_fs0_18;
             temp_fs2 = racer->trueBasis.x.z * temp_fs0_18;
@@ -6412,7 +6415,7 @@ block_115:
             gSPVertex(gfx++, gEffectsVtxPtr, 4, 0);
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 100, 255, 255, 255);
-            gDPSetEnvColor(gfx++, 0, 0, 255, (((26 - temp_s1_6->unk_04) * 255) / 26));
+            gDPSetEnvColor(gfx++, 0, 0, 255, (((26 - temp_s1_6->timer) * 255) / 26));
             gSP2Triangles(gfx++, 0, 1, 3, 0, 1, 2, 3, 0);
             gEffectsVtxPtr += 4;
         }

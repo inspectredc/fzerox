@@ -3,7 +3,7 @@
 #include "fzx_object.h"
 #include "fzx_course.h"
 #include "fzx_camera.h"
-#include "src/overlays/ovl_i2/ovl_i2.h"
+#include "fzx_font.h"
 #include "src/overlays/ovl_i2/transition.h"
 #include "course_select.h"
 #include "assets/segment_2B9EA0.h"

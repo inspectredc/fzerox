@@ -2,7 +2,7 @@
 
 extern Gfx D_8014940[];
 
-Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 format, s32 unkTmemFlag, s32 left, s32 top,
+Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr palette, s32 format, s32 unkTmemFlag, s32 left, s32 top,
                    s32 width, s32 height, u16 unkDrawFlag) {
     bool usedPrimitives;
     u8* texPtr;
@@ -40,12 +40,12 @@ Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 for
         }
         gDPSetCombineMode(gfx++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     }
-    if (tlutTexture != NULL) {
+    if (palette != NULL) {
         if (!usedPrimitives) {
             gDPPipeSync(gfx++);
         }
 
-        gDPLoadTLUT_pal256(gfx++, tlutTexture);
+        gDPLoadTLUT_pal256(gfx++, palette);
     }
 
     for (row = 0, texPtr = texture; row < numBlocks; row++) {
@@ -71,34 +71,34 @@ Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr tlutTexture, s32 for
     return gfx;
 }
 
-void func_8007ECCC(u16* arg0, s32 arg1) {
+void func_8007ECCC(u16* pixel, s32 textureSize) {
     s32 i;
     u32 colorBlend;
     u32 red, green, blue, alpha;
 
-    for (i = 0; i < (arg1 / 2); i++, arg0++) {
-        red = ((*arg0 & 0xF800) >> 11) * 77;
-        green = ((*arg0 & 0x7C0) >> 6) * 150;
-        blue = ((*arg0 & 0x3E) >> 1) * 29;
-        alpha = *arg0 & 0x1;
+    for (i = 0; i < (textureSize / (s32) sizeof(u16)); i++, pixel++) {
+        red = ((*pixel & 0xF800) >> 11) * 77;
+        green = ((*pixel & 0x7C0) >> 6) * 150;
+        blue = ((*pixel & 0x3E) >> 1) * 29;
+        alpha = *pixel & 0x1;
 
-        colorBlend = (0x1F00 - red - green - blue) >> 8;
+        colorBlend = (0x1F00 - (red + green + blue)) >> 8;
 
-        *arg0 = (colorBlend << 1) + (colorBlend << 6) + (colorBlend << 11) + alpha;
+        *pixel = (colorBlend << 1) + (colorBlend << 6) + (colorBlend << 11) + alpha;
     }
 }
 
-s32 func_8007EF68(u16* arg0, s32 arg1, u16 arg2) {
+s32 func_8007EF68(u16* palette, s32 paletteSize, u16 pixelColor) {
     s32 i;
     s32 index;
 
-    if (arg1 == 0) {
+    if (paletteSize == 0) {
         return -1;
     }
     index = -1;
 
-    for (i = 0; i < arg1; i++, arg0++) {
-        if (*arg0 == arg2) {
+    for (i = 0; i < paletteSize; i++, palette++) {
+        if (*palette == pixelColor) {
             index = i;
             break;
         }
@@ -107,31 +107,32 @@ s32 func_8007EF68(u16* arg0, s32 arg1, u16 arg2) {
     return index;
 }
 
-s32 func_8007EFBC(u16* arg0, u16* arg1, s32 arg2) {
+s32 func_8007EFBC(u16* pixel, u16* paletteStart, s32 pixelCount) {
     s32 i;
-    s32 temp_v0;
-    u8* var_s0 = (u8*) arg0;
-    s32 var_s2 = 0;
-    u16* var_s3 = arg1;
+    s32 paletteIndex;
+    u8* pixelOut = (u8*) pixel;
+    s32 paletteSize = 0;
+    u16* palette = paletteStart;
 
-    for (i = 0; i < arg2; i++, arg0++) {
-        temp_v0 = func_8007EF68(arg1, var_s2, *arg0);
-        if (temp_v0 == -1) {
-            if (var_s2 >= 0x100) {
+    //! @bug only call to this function passes in textureSize over pixelCount
+    for (i = 0; i < pixelCount; i++, pixel++) {
+        paletteIndex = func_8007EF68(paletteStart, paletteSize, *pixel);
+        if (paletteIndex == -1) {
+            if (paletteSize >= 0x100) {
                 return -1;
             }
-            *var_s0 = var_s2;
-            *var_s3 = *arg0;
-            var_s0++;
-            var_s3++;
-            var_s2++;
+            *pixelOut = paletteSize;
+            *palette = *pixel;
+            pixelOut++;
+            palette++;
+            paletteSize++;
         } else {
-            *var_s0 = temp_v0;
-            var_s0++;
+            *pixelOut = paletteIndex;
+            pixelOut++;
         }
     }
 
-    return var_s2;
+    return paletteSize;
 }
 
 extern u32 gGameFrameCount;

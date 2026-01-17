@@ -5,7 +5,7 @@
 #include "fzx_course.h"
 #include "fzx_machine.h"
 #include "fzx_camera.h"
-#include "src/overlays/ovl_i2/ovl_i2.h"
+#include "fzx_font.h"
 #include "ovl_i3.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"
@@ -225,7 +225,7 @@ void func_i3_8013BF50(s32);
 void func_i3_8013C008(void);
 void Save_SaveDeathRaceProfiles(void);
 
-void func_i3_8011AEA0(void) {
+void Menus_Update(void) {
     s32 i;
 
     if (sMenuStateFlags != 0) {
@@ -358,7 +358,7 @@ extern s16 gRacersRemaining;
 extern CourseInfo* gCurrentCourseInfo;
 extern s32 D_80141900;
 
-void func_i3_8011B520(void) {
+void Menus_Init(void) {
     s32 i;
     s32 j;
     s32 k;
@@ -4586,7 +4586,7 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
 extern s32 gTotalLapCount;
 extern s32 gCurrentGhostType;
 
-Gfx* func_i3_8012CF34(Gfx* gfx, s32 playerIndex) {
+Gfx* Menus_Player1SpecialDraw(Gfx* gfx, s32 playerIndex) {
     s32 i;
 
     if (gCameras[playerIndex].mode == 10) {
@@ -4681,7 +4681,7 @@ extern s32 D_800F80A8[];
 extern s32 gSettingVsSlot;
 extern s32 gRaceTimeIntervalToggle;
 
-Gfx* func_i3_8012D3D4(Gfx* gfx) {
+Gfx* Menus_Draw(Gfx* gfx) {
     s32 i = 0;
     s32 j;
     Racer* racer;

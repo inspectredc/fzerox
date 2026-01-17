@@ -1070,7 +1070,7 @@ void func_800B9EBC(s32 arg0, s32 arg1, s32 arg2) {
 void func_800B9ECC(void) {
 }
 
-void func_800B9ED4(void) {
+void Audio_InitAudio(void) {
     u8 i;
 
     func_800BAEDC(0);
@@ -1520,7 +1520,7 @@ void func_800BAF20(u8 arg0) {
 void func_800BAF28(void) {
 }
 
-void func_800BAF30(u8 ioData) {
+void Audio_RomBgmStart(u8 ioData) {
     D_800D1A48 = 0;
     D_800D1A4C = 0;
     D_800D1A60 = ioData;
@@ -1528,7 +1528,7 @@ void func_800BAF30(u8 ioData) {
     func_800BAE98(0, ioData);
 }
 
-void func_800BAF80(void) {
+void Audio_RomBgmStop(void) {
     if (D_800D1A48 == 0) {
         D_800D1A48 = 1;
     }
@@ -1562,7 +1562,7 @@ void func_800BB048(void) {
     D_800D1A08 = 1;
 }
 
-void func_800BB078(void) {
+void Audio_BetaBgmStop2(void) {
     if (D_800D1A48 == 0) {
         D_800D1A48 = 2;
     }
@@ -1633,7 +1633,7 @@ void Audio_SetPlayerMode(u8 numPlayersIndex) {
 }
 
 void func_800BB334(void) {
-    func_800B9ED4();
+    Audio_InitAudio();
     AUDIOCMD_GLOBAL_DISABLE_SEQPLAYER(0, 0);
     func_800BB2E0(0);
     AudioThread_ScheduleProcessCmds();
@@ -1644,8 +1644,8 @@ void Audio_SESeqStart(void) {
     AudioThread_ScheduleProcessCmds();
 }
 
-void func_800BB39C(s32 arg0) {
-    func_800B9ED4();
+void Audio_ChangeSoundMode(s32 courseIndex) {
+    Audio_InitAudio();
 #ifndef VERSION_JP
     AudioThread_ScheduleProcessCmds();
 #endif

@@ -1,103 +1,104 @@
 #include "global.h"
 #include "fzx_course.h"
 
-void func_80074A90(f32* arg0, f32* arg1) {
-    f32 temp_fa0;
-    f32 temp_fv1;
+void Math_NormalizeXZ(f32* x, f32* z) {
+    f32 magnitude;
+    f32 normalizingFactor;
 
-    temp_fa0 = SQ(*arg0) + SQ(*arg1);
-    if (temp_fa0 < 1e-07) {
+    magnitude = SQ(*x) + SQ(*z);
+    if (magnitude < 1e-07) {
         return;
     }
-    temp_fv1 = 1.0f / sqrtf(temp_fa0);
-    *arg0 *= temp_fv1;
-    *arg1 *= temp_fv1;
+    normalizingFactor = 1.0f / sqrtf(magnitude);
+    *x *= normalizingFactor;
+    *z *= normalizingFactor;
 }
 
-void func_80074B10(f32* arg0, f32* arg1, f32* arg2) {
-    f32 temp_fa1;
-    f32 temp_fv1;
+void Math_NormalizeXYZ(f32* x, f32* y, f32* z) {
+    f32 magnitude;
+    f32 normalizingFactor;
 
-    temp_fa1 = SQ(*arg0) + SQ(*arg1) + SQ(*arg2);
-    if (temp_fa1 < 1e-07) {
+    magnitude = SQ(*x) + SQ(*y) + SQ(*z);
+    if (magnitude < 1e-07) {
         return;
     }
-    temp_fv1 = 1.0f / sqrtf(temp_fa1);
-    *arg0 *= temp_fv1;
-    *arg1 *= temp_fv1;
-    *arg2 *= temp_fv1;
+    normalizingFactor = 1.0f / sqrtf(magnitude);
+    *x *= normalizingFactor;
+    *y *= normalizingFactor;
+    *z *= normalizingFactor;
 }
 
-s32 func_80074BB4(Vec3f* arg0, f32 arg1) {
-    f32 temp_fa1;
-    f32 temp_fv1;
+s32 Math_VectorSetScale(Vec3f* vec, f32 scale) {
+    f32 magnitude;
+    f32 scaleFactor;
 
-    temp_fa1 = SQ(arg0->x) + SQ(arg0->y) + SQ(arg0->z);
-    if (temp_fa1 < 1e-07) {
+    magnitude = SQ(vec->x) + SQ(vec->y) + SQ(vec->z);
+    if (magnitude < 1e-07) {
         return -1;
     }
-    temp_fv1 = arg1 / sqrtf(temp_fa1);
-    arg0->x *= temp_fv1;
-    arg0->y *= temp_fv1;
-    arg0->z *= temp_fv1;
+    scaleFactor = scale / sqrtf(magnitude);
+    vec->x *= scaleFactor;
+    vec->y *= scaleFactor;
+    vec->z *= scaleFactor;
     return 0;
 }
 
 extern CourseInfo* gCurrentCourseInfo;
 
-Mtx3F* func_80074C60(Mtx3F* arg0) {
-    f32 sp44;
-    f32 sp40;
-    CourseSegment* temp_a0;
-    Mtx3F sp18;
+Mtx3F* func_80074C60(Mtx3F* basisPtr) {
+    f32 lengthProportionAlongSegment;
+    f32 lengthFromStart;
+    CourseSegment* segment;
+    Mtx3F basis;
 
-    temp_a0 = gCurrentCourseInfo->courseSegments;
-    sp44 = Course_SplineGetLengthInfo(temp_a0, 0.0f, &sp40);
-    Course_SplineGetBasis(temp_a0, 0.0f, &sp18, sp44);
-    *arg0 = sp18;
-    return arg0;
+    segment = gCurrentCourseInfo->courseSegments;
+    lengthProportionAlongSegment = Course_SplineGetLengthInfo(segment, 0.0f, &lengthFromStart);
+    Course_SplineGetBasis(segment, 0.0f, &basis, lengthProportionAlongSegment);
+    *basisPtr = basis;
+    return basisPtr;
 }
 
 extern CourseData gCourseData;
 
-void func_80074CE4(CourseInfo* arg0) {
+// Set segment up vectors
+void func_80074CE4(CourseInfo* courseInfo) {
     s32 pad[4];
-    f32 spF4;
-    f32 spF0;
-    f32 spEC;
-    f32 spE8;
-    f32 spE4;
-    f32 spE0;
-    Vec3f spD4;
-    MtxF sp94;
+    f32 baseUpX;
+    f32 baseUpY;
+    f32 baseUpZ;
+    f32 rightVecX;
+    f32 rightVecY;
+    f32 rightVecZ;
+    Vec3f segmentTangentVec;
+    MtxF mtxF;
     s32 i;
-    CourseSegment* var_s0;
+    CourseSegment* segment;
 
-    var_s0 = arg0->courseSegments;
-    for (i = 0; i < arg0->segmentCount; i++) {
-        Course_SplineGetTangent(var_s0, 0.0f, &spD4);
-        func_80074BB4(&spD4, 1);
-        if ((SQ(spD4.x) + SQ(spD4.z)) != 0.0f) {
-            spE8 = spD4.z;
-            spE4 = 0.0f;
-            spE0 = -1.0f * spD4.x;
+    segment = courseInfo->courseSegments;
+    for (i = 0; i < courseInfo->segmentCount; i++) {
+        Course_SplineGetTangent(segment, 0.0f, &segmentTangentVec);
+        Math_VectorSetScale(&segmentTangentVec, 1);
+        if ((SQ(segmentTangentVec.x) + SQ(segmentTangentVec.z)) != 0.0f) {
+            rightVecX = segmentTangentVec.z;
+            rightVecY = 0.0f;
+            rightVecZ = -1.0f * segmentTangentVec.x;
         } else {
-            spE8 = 0.0f;
-            spE4 = 0.0f;
-            spE0 = spD4.y;
+            rightVecX = 0.0f;
+            rightVecY = 0.0f;
+            rightVecZ = segmentTangentVec.y;
         }
 
-        func_80074B10(&spE8, &spE4, &spE0);
-        spF4 = ((spE4 * spD4.z) - (spE0 * spD4.y)) * -1.0f;
-        spF0 = ((spE0 * spD4.x) - (spE8 * spD4.z)) * -1.0f;
-        spEC = ((spE8 * spD4.y) - (spE4 * spD4.x)) * -1.0f;
-        func_80074B10(&spF4, &spF0, &spEC);
-        Matrix_SetAxisRotation(NULL, &sp94, 1.0f, DEG_TO_FZXANG(gCourseData.bankAngle[i]), spD4.x, spD4.y, spD4.z, 0.0f,
-                               0.0f, 0.0f);
-        var_s0->unk_0C.x = sp94.m[0][0] * spF4 + sp94.m[1][0] * spF0 + sp94.m[2][0] * spEC;
-        var_s0->unk_0C.y = sp94.m[0][1] * spF4 + sp94.m[1][1] * spF0 + sp94.m[2][1] * spEC;
-        var_s0->unk_0C.z = sp94.m[0][2] * spF4 + sp94.m[1][2] * spF0 + sp94.m[2][2] * spEC;
-        var_s0 = var_s0->next;
+        Math_NormalizeXYZ(&rightVecX, &rightVecY, &rightVecZ);
+        baseUpX = ((rightVecY * segmentTangentVec.z) - (rightVecZ * segmentTangentVec.y)) * -1.0f;
+        baseUpY = ((rightVecZ * segmentTangentVec.x) - (rightVecX * segmentTangentVec.z)) * -1.0f;
+        baseUpZ = ((rightVecX * segmentTangentVec.y) - (rightVecY * segmentTangentVec.x)) * -1.0f;
+        Math_NormalizeXYZ(&baseUpX, &baseUpY, &baseUpZ);
+        Matrix_SetAxisRotation(NULL, &mtxF, 1.0f, DEG_TO_FZXANG(gCourseData.bankAngle[i]), segmentTangentVec.x,
+                               segmentTangentVec.y, segmentTangentVec.z, 0.0f, 0.0f, 0.0f);
+        segment->unk_0C.x = mtxF.m[0][0] * baseUpX + mtxF.m[1][0] * baseUpY + mtxF.m[2][0] * baseUpZ;
+        segment->unk_0C.y = mtxF.m[0][1] * baseUpX + mtxF.m[1][1] * baseUpY + mtxF.m[2][1] * baseUpZ;
+        segment->unk_0C.z = mtxF.m[0][2] * baseUpX + mtxF.m[1][2] * baseUpY + mtxF.m[2][2] * baseUpZ;
+        segment = segment->next;
     }
 }
 

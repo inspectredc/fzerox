@@ -203,7 +203,7 @@ typedef struct Racer {
     s32 unk_214;
     s32 boostTimer;
     s32 spinOutTimer;
-    s32 unk_220;
+    s32 bodyWhiteTimer;
     f32 pitForceFieldSize;
     f32 energy;
     f32 maxEnergy;
@@ -454,46 +454,6 @@ typedef struct GhostInfo {
     /* 0x14 */ char trackName[9];
     /* 0x1D */ unk_80141C88_unk_1D unk_1D;
 } GhostInfo; // size = 0x40
-
-typedef struct unk_80111870 {
-    Vec3f unk_00;
-    Vec3f unk_0C;
-    f32 unk_18;
-    u32 unk_1C;
-    Racer* unk_20;
-} unk_80111870; // size = 0x24
-
-typedef struct unk_80112FB8 {
-    f32 unk_00;
-    s32 unk_04;
-    Racer* unk_08;
-} unk_80112FB8; // size = 0xC
-
-typedef struct unk_801122A8 {
-    Vec3f unk_00;
-    Vec3f unk_0C;
-    Vec3f unk_18;
-    Vec3f unk_24;
-    Vec3f unk_30;
-    u32 unk_3C;
-    Racer* unk_40;
-} unk_801122A8; // size = 0x44
-
-typedef struct unk_80113140 {
-    Vec3f unk_00;
-    Vec3f unk_0C;
-    Vec3f unk_18;
-    Vec3i unk_24;
-    Vec3f unk_30;
-    Vec3f unk_3C;
-    s16 unk_48;
-    s16 unk_4A;
-    s16 unk_4C;
-    s16 unk_4E;
-    u32 unk_50;
-    Racer* unk_54;
-} unk_80113140; // size = 0x58
-
 typedef struct Machine {
     s16 customType;
     u8 shadowType;

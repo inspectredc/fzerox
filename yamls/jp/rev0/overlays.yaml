@@ -123,23 +123,24 @@
     subsegments:
       - [0x97FF0, c, transition]
       - [0x9BC70, c, save]
-      - [0x9F330, c, 9F3C0]
-      - [0x9FDB0, c, 9FE40]
+      - [0x9F330, c, race]
+      - [0x9FDB0, c, effects]
       - [0xA1670, c, font]
       - [0xA2660, .data, transition]
       - [0xA26B0, .data, save]
-      - [0xA27D0, .data, 9F3C0]
-      - [0xA27D0, .data, 9FE40]
+      - [0xA27D0, .data, race]
+      - [0xA27D0, .data, ovl_i2_data1]
       - [0xA2810, .data, font]
       - [0xA60E0, .rodata, transition]
       - [0xA6360, .rodata, save]
-      - [0xA6390, .rodata, 9FE40]
+      - [0xA6390, .rodata, effects]
       - [0xA63F0, .rodata, font]
       - [0xA6D30, .data, ovl_i2_data]
       - { type: .bss, vram: 0x8010D000, name: transition }
       - { type: .bss, vram: 0x8010D080, name: ovl_i2_buffers }
       - { type: .bss, vram: 0x80111040, name: save }
-      - { type: .bss, vram: 0x80111100, name: 9FE40 }
+      - { type: .bss, vram: 0x80111100, name: effects }
+      - { type: .bss, vram: 0x801155E0, name: ovl_i2_data1 }
 
   - name: ovl_i3
     exclusive_ram_id: overlay

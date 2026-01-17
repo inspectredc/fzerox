@@ -1,5 +1,5 @@
 #include "global.h"
-#include "src/overlays/ovl_i2/ovl_i2.h"
+#include "fzx_font.h"
 #include "ovl_i3.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"

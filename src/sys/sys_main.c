@@ -202,7 +202,7 @@ void Main_ThreadEntry(void* arg0) {
         Dma_ClearRomCopy(SEGMENT_ROM_START(leo), SEGMENT_VRAM_START(leo), SEGMENT_ROM_SIZE(leo));
         bzero(SEGMENT_BSS_START(leo), SEGMENT_BSS_SIZE(leo));
         if (gLeoDriveConnectionState != 0) {
-            LeoDD_LoadFonts();
+            LeoFault_LoadFonts();
         }
 #ifdef VERSION_JP
         func_800751FC("EFZJ");
@@ -210,7 +210,7 @@ void Main_ThreadEntry(void* arg0) {
         func_800751FC("EFZE");
 #endif
         if (gLeoDriveConnectionState != 0) {
-            func_80076340();
+            SLLeoCreateManager();
         }
     }
 #else // EXPANSION_KIT
@@ -258,7 +258,7 @@ void Main_ThreadEntry(void* arg0) {
 
 #ifndef EXPANSION_KIT
     if (gRamDDCompatible && (gLeoDriveConnectionState != 0)) {
-        func_800763A8();
+        SLLeoResetClear();
     }
     if (gRamDDCompatible && (gLeoDriveConnectionState != 0) && (func_800761D4() == 2)) {
         func_8007515C();
@@ -284,7 +284,7 @@ void Main_ThreadEntry(void* arg0) {
 
 #ifndef EXPANSION_KIT
     if (gRamDDCompatible && (gLeoDriveConnectionState != 0)) {
-        LeoDD_LoadFonts();
+        LeoFault_LoadFonts();
 #ifdef VERSION_JP
         func_8007647C();
 #endif

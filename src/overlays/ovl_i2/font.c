@@ -1,5 +1,5 @@
 #include "global.h"
-#include "ovl_i2.h"
+#include "fzx_font.h"
 #include "assets/segment_2B9EA0.h"
 
 unk_80077D50 sFont1ACompTexInfo[] = {

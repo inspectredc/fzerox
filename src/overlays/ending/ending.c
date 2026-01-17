@@ -7,7 +7,7 @@
 #include "fzx_course.h"
 #include "fzx_machine.h"
 #include "fzx_camera.h"
-#include "src/overlays/ovl_i2/ovl_i2.h"
+#include "fzx_font.h"
 #include "assets/segment_16C8A0.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"

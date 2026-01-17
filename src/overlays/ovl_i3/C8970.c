@@ -289,7 +289,7 @@ s8 D_i3_80140F40[][3] = {
 extern s32 gNumPlayers;
 extern CourseInfo* gCurrentCourseInfo;
 
-void func_i3_InitCourseMinimap(void) {
+void Minimap_InitCourseMinimap(void) {
     s32 pad[23];
     s32 i;
     f32 temp_fs1;

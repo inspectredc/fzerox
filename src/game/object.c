@@ -10,7 +10,7 @@ unk_800E3F28 D_800E3F28[16];
 unk_800E4068 D_800E4068[16];
 
 void func_80077CF0(s32 segAddr, size_t size, u8* startAddr) {
-    osInvalDCache(startAddr, size);
+    CLEAR_DATA_CACHE(startAddr, size);
     Dma_LoadAssets(SEGMENT_ROM_START(segment_2B9EA0) + SEGMENT_OFFSET(segAddr), startAddr, size);
 }
 
@@ -18,7 +18,7 @@ void func_80077D44(void) {
     D_800E3A20 = 0;
 }
 
-extern u8* gArenaStartPtrs;
+extern uintptr_t gArenaStartPtrs[];
 
 u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     bool var_a0;
@@ -32,7 +32,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
     u8* header;
     unk_800E33E0* var_s8 = D_800E33E0;
 
-    sp44 = gArenaStartPtrs;
+    sp44 = gArenaStartPtrs[0];
     var_s7 = false;
 
     while (arg0->unk_04 != 0) {
@@ -75,7 +75,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
                     }
                     var_s4 = Arena_Allocate(ALLOC_FRONT, textureSize);
                     header = Arena_Allocate(ALLOC_PEEK, var_s2);
-                    osInvalDCache(header, var_s2);
+                    CLEAR_DATA_CACHE(header, var_s2);
                     func_80077CF0(arg0->unk_04, var_s2, header);
                     if (*(s32*) header == (s32) 'MIO0') {
                         mio0Decode(header, var_s4);
@@ -93,7 +93,7 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
 
                     var_s4 = Arena_Allocate(ALLOC_FRONT, arg0->height * arg0->width * 2);
                     header = Arena_Allocate(ALLOC_PEEK, var_s0);
-                    osInvalDCache(header, var_s0);
+                    CLEAR_DATA_CACHE(header, var_s0);
                     func_80077CF0(arg0->unk_04, var_s0, header);
                     if (*(s32*) header == (s32) 'MIO0') {
                         mio0Decode(header, var_s4);
@@ -165,11 +165,11 @@ void* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) 
 
                 sp24 = textureSize + var_a3;
                 var_s0 = Arena_Allocate(ALLOC_PEEK, sp24);
-                osInvalDCache(var_s0, sp24);
+                CLEAR_DATA_CACHE(var_s0, sp24);
                 var_a2 = var_s0 + var_a3;
             }
 
-            osInvalDCache(var_a2, textureSize);
+            CLEAR_DATA_CACHE(var_a2, textureSize);
             func_80077CF0(arg0, textureSize, var_a2);
             if (*(s32*) var_a2 == (s32) 'MIO0') {
                 mio0Decode(var_a2, var_s0);
@@ -461,7 +461,7 @@ void func_800790D4(void) {
                         size = 0x400;
                     }
                     header = Arena_Allocate(ALLOC_PEEK, size);
-                    osInvalDCache(header, size);
+                    CLEAR_DATA_CACHE(header, size);
                     func_80077CF0(temp_s1->unk_04, size, header);
                     if (*(s32*) header == (s32) 'MIO0') {
                         mio0Decode(header, var_s3->unk_04);
