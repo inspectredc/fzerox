@@ -52,7 +52,6 @@ TextureInfo sRecordsYesNoTextureInfos[] = {
 extern s16 D_800CCFE8;
 extern s8 gGamePaused;
 extern s32 D_i2_80106F10;
-extern CourseData gCourseData;
 extern s32 gDifficulty;
 
 void Records_Init(void) {
@@ -64,7 +63,7 @@ void Records_Init(void) {
     func_i3_80116C4C();
     Racer_Init();
     Camera_Init();
-    func_8007F4E0(gCourseData.venue, gCourseData.skybox);
+    func_8007F4E0(COURSE_CONTEXT()->courseData.venue, COURSE_CONTEXT()->courseData.skybox);
     Background_Init();
     Course_LandminesViewInteractDataInit();
     Course_JumpsViewInteractDataInit();

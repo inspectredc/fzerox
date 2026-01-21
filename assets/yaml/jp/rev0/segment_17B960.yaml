@@ -3534,32 +3534,32 @@ D_303AA40:
   offset: 0x3AA40
   symbol: D_303AA40
 
-D_303AA70:
+aMaxSpeedTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 64
   height: 16
   offset: 0x3AA70
-  symbol: D_303AA70
+  symbol: aMaxSpeedTex
 
-D_303B270:
+aSpeedDigitsTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 12
   height: 160
   offset: 0x3B270
-  symbol: D_303B270
+  symbol: aSpeedDigitsTex
 
-D_303C170:
+aKmhTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 20
   height: 16
   offset: 0x3C170
-  symbol: D_303C170
+  symbol: aKmhTex
 
 aTimerSymbolsTex:
   type: TEXTURE
@@ -3570,13 +3570,13 @@ aTimerSymbolsTex:
   offset: 0x3C3F0
   symbol: aTimerSymbolsTex
 
-D_303D1F0:
+aLapTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 16
   height: 12
   offset: 0x3D1F0
-  symbol: D_303D1F0
+  symbol: aLapTex
 
 # size = 0x3CBF0, end = 0x3D370

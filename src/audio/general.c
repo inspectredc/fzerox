@@ -513,10 +513,10 @@ void func_800B84B8(void) {
                 }
 
                 if ((temp_lo > 2100) && (temp_lo < 2110) && (gGameMode == GAMEMODE_FLX_TITLE) &&
-                    (gTitleDemoState == 0)) {
+                    (gTitleDemoState == TITLE_DEMO_INACTIVE)) {
                     gTitleDemoState = 1;
                 }
-                if ((temp_lo > 8200) && (temp_lo < 8210) && (gTitleDemoState == 1)) {
+                if ((temp_lo > 8200) && (temp_lo < 8210) && (gTitleDemoState == TITLE_DEMO_ACTIVE)) {
                     gTitleDemoState = 3;
                 }
             }
@@ -1204,7 +1204,7 @@ void func_800BA2F0(u8 playerNum, u8 arg1) {
     }
 }
 
-void func_800BA3E4(u8 playerNum, u8 arg1) {
+void Audio_PlayerLevelSEStop(u8 playerNum, u8 arg1) {
     s32 temp;
 
     if (arg1 == D_800D1BE8[playerNum][0]) {
@@ -1552,11 +1552,11 @@ void func_800BB018(void) {
     func_800BAFA4(0x17);
 }
 
-void func_800BB038(void) {
+void Audio_Retire(void) {
     D_800D19E0 = 1;
 }
 
-void func_800BB048(void) {
+void Audio_LevelSEFadeout(void) {
     func_800BB45C();
     D_800D1A58 = 1;
     D_800D1A08 = 1;
@@ -1574,7 +1574,7 @@ void Audio_BetaBgmStop3(void) {
     }
 }
 
-void func_800BB0C0(u8 arg0) {
+void Audio_PauseSet(u8 arg0) {
 
     switch (arg0) {
         case 0:

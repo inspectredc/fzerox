@@ -30,7 +30,6 @@ void func_i2_80103A70(void) {
 }
 
 extern s16 D_800CCFE8;
-extern CourseData gCourseData;
 
 void Race_Init(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
@@ -39,7 +38,7 @@ void Race_Init(void) {
     func_i3_80116C4C();
     Racer_Init();
     Camera_Init();
-    func_8007F4E0(gCourseData.venue, gCourseData.skybox);
+    func_8007F4E0(COURSE_CONTEXT()->courseData.venue, COURSE_CONTEXT()->courseData.skybox);
     Background_Init();
     Effects_Init();
     Course_LandminesViewInteractDataInit();

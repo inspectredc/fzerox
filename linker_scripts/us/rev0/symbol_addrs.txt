@@ -261,8 +261,10 @@ Course_SplineGetBasis = 0x8009E85C;
 
 Racer_Draw = 0x80096CE8;
 
-Audio_TriggerSystemSE = 0x800BA8D8;
+Audio_PlayerLevelSEStop = 0x800BA3E4;
 Audio_PlayerTriggerSEStart = 0x800BA710;
+Audio_TriggerSystemSE = 0x800BA8D8;
+Audio_LevelSEFadeout = 0x800BB048;
 
 gCourseVtxPtr = 0x800F8520;
 gEffectsVtxPtr = 0x800E5ECC;
@@ -342,7 +344,7 @@ sReplayRecordPosZ = 0x800F5DE0;
 gGhostRacers = 0x800F5DF0; // size:0x9C
 gRaceIntroTimer = 0x800F5E98;
 sRacerPairInfo = 0x800F5EA0;
-D_800F80A8 = 0x800F80A8; // size:0x10
+gPlayerReverseTimer = 0x800F80A8; // size:0x10
 D_800F8504 = 0x800F8504; // size:0x7
 gCurrentCourseInfo = 0x800F8510;
 gCourseIndex = 0x800F8514;

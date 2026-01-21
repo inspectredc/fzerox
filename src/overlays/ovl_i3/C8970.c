@@ -427,7 +427,7 @@ Gfx* func_i3_DrawCourseMinimap(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 playerMarkerRightPos;
 
     if ((controller->buttonPressed & BTN_CLEFT) && (numPlayersIndex >= 2)) {
-        if (gTitleDemoState == 0) {
+        if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
             gPlayerMinimapLapCounterToggle[playerIndex] = (gPlayerMinimapLapCounterToggle[playerIndex] + 1) % 2;
         }
     }

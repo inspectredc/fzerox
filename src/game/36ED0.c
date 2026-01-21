@@ -2279,7 +2279,6 @@ extern s32 gRandSeed2;
 extern s32 gRandMask2;
 extern s8 gTitleDemoState;
 extern s32 gGameMode;
-extern CourseData gCourseData;
 
 void Course_GenerateRandomCourse(void) {
     s32 var_s4;
@@ -2310,7 +2309,8 @@ void Course_GenerateRandomCourse(void) {
     f32 var_fs1;
 
     // Restore random generation seeding if track is re-done
-    if ((gGameMode == GAMEMODE_GP_RACE) && (gTitleDemoState == 0) && (gCourseIndex == gLastRandomCourseIndex)) {
+    if ((gGameMode == GAMEMODE_GP_RACE) && (gTitleDemoState == TITLE_DEMO_INACTIVE) &&
+        (gCourseIndex == gLastRandomCourseIndex)) {
         Math_Rand1Init(sRandomCourseInitSeed1, sRandomCourseInitMask1);
         Math_Rand2Init(sRandomCourseInitSeed2, sRandomCourseInitMask2);
     }
@@ -2395,7 +2395,7 @@ void Course_GenerateRandomCourse(void) {
                     } while (var_s0 >= gCurrentCourseInfo->courseSegments);
                 } while (func_8009DEAC(gCurrentCourseInfo) != 0);
 
-                var_s1_2 = gCourseData.controlPoint;
+                var_s1_2 = COURSE_CONTEXT()->courseData.controlPoint;
                 var_s0 = gCurrentCourseInfo->courseSegments;
 
                 do {
@@ -2425,7 +2425,7 @@ void Course_GenerateRandomCourse(void) {
                     }
                     var_s1_2 -= 3;
                     var_s0_4 -= 3;
-                } while (var_s1_2 >= gCourseData.controlPoint);
+                } while (var_s1_2 >= COURSE_CONTEXT()->courseData.controlPoint);
 
                 var_s0_4 = spB0 + 1;
                 spCC.x = (spB0->pos.x + var_s0_4->pos.x) * 0.5f;
@@ -2438,7 +2438,7 @@ void Course_GenerateRandomCourse(void) {
                 temp_fs3 = (var_s0_4->pos.z - spB0->pos.z) * temp_fv1;
 
                 if (temp_fv0 < 5000.0f) {
-                    var_s1_2 = &gCourseData.controlPoint[gCurrentCourseInfo->segmentCount * 3 - 1];
+                    var_s1_2 = &COURSE_CONTEXT()->courseData.controlPoint[gCurrentCourseInfo->segmentCount * 3 - 1];
                     temp_fv1 = 3.1496062f - (temp_fv0 / 1587.5f);
 
                     do {
@@ -2449,7 +2449,7 @@ void Course_GenerateRandomCourse(void) {
                             var_s1_2->pos.z -= (temp_fv1 * temp_fs3);
                         }
                         var_s1_2--;
-                    } while (var_s1_2 >= gCourseData.controlPoint);
+                    } while (var_s1_2 >= COURSE_CONTEXT()->courseData.controlPoint);
                     spCC.x -= (temp_fv1 * temp_fs2) * 0.5f;
                     spCC.y -= (temp_fv1 * temp_ft5) * 0.5f;
                     spCC.z -= (temp_fv1 * temp_fs3) * 0.5f;
@@ -2467,8 +2467,8 @@ void Course_GenerateRandomCourse(void) {
                 do {
                     var_s0->pos = var_s1_2->pos;
                     var_s0--;
-                    if (--var_s1_2 < gCourseData.controlPoint) {
-                        var_s1_2 = &gCourseData.controlPoint[gCurrentCourseInfo->segmentCount - 3];
+                    if (--var_s1_2 < COURSE_CONTEXT()->courseData.controlPoint) {
+                        var_s1_2 = &COURSE_CONTEXT()->courseData.controlPoint[gCurrentCourseInfo->segmentCount - 3];
                     }
                 } while (var_s1_2 != spB0);
 
@@ -2606,11 +2606,11 @@ void Course_GenerateRandomCourse(void) {
                     break;
             }
 
-            gCourseData.creatorId = CREATOR_NINTENDO;
-            gCourseData.controlPointCount = gCurrentCourseInfo->segmentCount;
-            gCourseData.venue = (Math_Rand2() & 0x1FFFF) % 10;
-            gCourseData.skybox = (Math_Rand1() & 0x1FFFF) % 8;
-            gCourseData.flag = 1;
+            COURSE_CONTEXT()->courseData.creatorId = CREATOR_NINTENDO;
+            COURSE_CONTEXT()->courseData.controlPointCount = gCurrentCourseInfo->segmentCount;
+            COURSE_CONTEXT()->courseData.venue = (Math_Rand2() & 0x1FFFF) % 10;
+            COURSE_CONTEXT()->courseData.skybox = (Math_Rand1() & 0x1FFFF) % 8;
+            COURSE_CONTEXT()->courseData.flag = 1;
 
             switch (Math_Rand1() & 3) {
                 case 0: // ROAD GROUP 1
@@ -2627,7 +2627,7 @@ void Course_GenerateRandomCourse(void) {
                     break;
             }
             var_s6 = 0;
-            var_s4 = gCourseData.controlPointCount - 1;
+            var_s4 = COURSE_CONTEXT()->courseData.controlPointCount - 1;
             if (sp104 != 0) {
                 var_s0 = gCurrentCourseInfo->courseSegments[0].prev;
             } else {
@@ -2635,7 +2635,7 @@ void Course_GenerateRandomCourse(void) {
             }
 
             do {
-                var_s3 = &gCourseData.controlPoint[var_s4];
+                var_s3 = &COURSE_CONTEXT()->courseData.controlPoint[var_s4];
                 var_s3->pos = var_s0->pos;
                 var_s3->radiusLeft = var_s0->radiusLeft;
                 var_s3->radiusRight = var_s0->radiusRight;
@@ -2645,16 +2645,16 @@ void Course_GenerateRandomCourse(void) {
                     var_s6 = 0;
                 }
 
-                gCourseData.bankAngle[var_s4] = 0;
-                gCourseData.pit[var_s4] = PIT_NONE;
-                gCourseData.dash[var_s4] = DASH_NONE;
-                gCourseData.dirt[var_s4] = DIRT_NONE;
-                gCourseData.ice[var_s4] = ICE_NONE;
-                gCourseData.jump[var_s4] = JUMP_NONE;
-                gCourseData.landmine[var_s4] = LANDMINE_NONE;
-                gCourseData.gate[var_s4] = GATE_NONE;
-                gCourseData.building[var_s4] = BUILDING_NONE;
-                gCourseData.sign[var_s4] = SIGN_NONE;
+                COURSE_CONTEXT()->courseData.bankAngle[var_s4] = 0;
+                COURSE_CONTEXT()->courseData.pit[var_s4] = PIT_NONE;
+                COURSE_CONTEXT()->courseData.dash[var_s4] = DASH_NONE;
+                COURSE_CONTEXT()->courseData.dirt[var_s4] = DIRT_NONE;
+                COURSE_CONTEXT()->courseData.ice[var_s4] = ICE_NONE;
+                COURSE_CONTEXT()->courseData.jump[var_s4] = JUMP_NONE;
+                COURSE_CONTEXT()->courseData.landmine[var_s4] = LANDMINE_NONE;
+                COURSE_CONTEXT()->courseData.gate[var_s4] = GATE_NONE;
+                COURSE_CONTEXT()->courseData.building[var_s4] = BUILDING_NONE;
+                COURSE_CONTEXT()->courseData.sign[var_s4] = SIGN_NONE;
 
                 if (sp104 != 0) {
                     var_s0 = var_s0->prev;
@@ -2665,13 +2665,15 @@ void Course_GenerateRandomCourse(void) {
             } while (var_s4 >= 0);
 
             // Override for start line
-            gCourseData.controlPoint[0].trackSegmentInfo =
+            COURSE_CONTEXT()->courseData.controlPoint[0].trackSegmentInfo =
                 TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_START_LINE;
-            gCourseData.gate[1] = GATE_START;
-            gCourseData.controlPoint[1].trackSegmentInfo =
-                gCourseData.controlPoint[gCurrentCourseInfo->segmentCount - 1].trackSegmentInfo = spB4[1];
-            gCourseData.controlPoint[3].trackSegmentInfo =
-                gCourseData.controlPoint[gCurrentCourseInfo->segmentCount - 3].trackSegmentInfo = spB4[0];
+            COURSE_CONTEXT()->courseData.gate[1] = GATE_START;
+            COURSE_CONTEXT()->courseData.controlPoint[1].trackSegmentInfo =
+                COURSE_CONTEXT()->courseData.controlPoint[gCurrentCourseInfo->segmentCount - 1].trackSegmentInfo =
+                    spB4[1];
+            COURSE_CONTEXT()->courseData.controlPoint[3].trackSegmentInfo =
+                COURSE_CONTEXT()->courseData.controlPoint[gCurrentCourseInfo->segmentCount - 3].trackSegmentInfo =
+                    spB4[0];
 
             if (((sp108 == 0) || (sp108 == 3)) && ((Math_Rand1() & 0x1FFFF) >= 0x8000)) {
                 temp_a0 = Math_Rand2() & 3;
@@ -2685,9 +2687,9 @@ void Course_GenerateRandomCourse(void) {
                 var_s4 = gCurrentCourseInfo->segmentCount - 4;
 
                 do {
-                    var_s3 = &gCourseData.controlPoint[var_s4];
-                    var_s1_2 = &gCourseData.controlPoint[var_s4 + 1];
-                    spB0 = &gCourseData.controlPoint[var_s4 - 1];
+                    var_s3 = &COURSE_CONTEXT()->courseData.controlPoint[var_s4];
+                    var_s1_2 = &COURSE_CONTEXT()->courseData.controlPoint[var_s4 + 1];
+                    spB0 = &COURSE_CONTEXT()->courseData.controlPoint[var_s4 - 1];
                     spCC.x = var_s1_2->pos.x - var_s3->pos.x;
                     spCC.z = var_s1_2->pos.z - var_s3->pos.z;
 
@@ -2708,14 +2710,15 @@ void Course_GenerateRandomCourse(void) {
                     }
                     if ((temp_fs2 * spCC.z) < (spCC.x * temp_fs3)) {
                         if (var_s6 != 0) {
-                            gCourseData.bankAngle[var_s4] = 360 - (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                            COURSE_CONTEXT()->courseData.bankAngle[var_s4] =
+                                360 - (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
                         } else {
-                            gCourseData.bankAngle[var_s4] = (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                            COURSE_CONTEXT()->courseData.bankAngle[var_s4] = (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
                         }
                     } else if (var_s6 != 0) {
-                        gCourseData.bankAngle[var_s4] = (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                        COURSE_CONTEXT()->courseData.bankAngle[var_s4] = (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
                     } else {
-                        gCourseData.bankAngle[var_s4] = 360 - (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
+                        COURSE_CONTEXT()->courseData.bankAngle[var_s4] = 360 - (s32) ((1.0f - SQ(var_fs0)) * var_fs1);
                     }
                     var_s4--;
                 } while (var_s4 > 1);
@@ -2723,7 +2726,7 @@ void Course_GenerateRandomCourse(void) {
 
             if (sp108 == 0) {
                 if (1) {}
-                var_s1_2 = &gCourseData.controlPoint[gCurrentCourseInfo->segmentCount - 4];
+                var_s1_2 = &COURSE_CONTEXT()->courseData.controlPoint[gCurrentCourseInfo->segmentCount - 4];
                 do {
                     var_s0_4 = var_s1_2 + 1;
                     if (((Math_Rand1() & 0x1FFFF) < 0x1112) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000)) {
@@ -2733,9 +2736,9 @@ void Course_GenerateRandomCourse(void) {
                         }
                     }
                     var_s1_2 -= 3;
-                } while (var_s1_2 >= &gCourseData.controlPoint[4]);
+                } while (var_s1_2 >= &COURSE_CONTEXT()->courseData.controlPoint[4]);
 
-                var_s1_2 = &gCourseData.controlPoint[gCurrentCourseInfo->segmentCount - 3];
+                var_s1_2 = &COURSE_CONTEXT()->courseData.controlPoint[gCurrentCourseInfo->segmentCount - 3];
                 do {
                     var_s0_4 = var_s1_2 + 1;
                     if (((Math_Rand1() & 0x1FFFF) < 0x1112) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000)) {
@@ -2745,14 +2748,16 @@ void Course_GenerateRandomCourse(void) {
                         }
                     }
                     var_s1_2 -= 3;
-                } while (var_s1_2 >= &gCourseData.controlPoint[2]);
+                } while (var_s1_2 >= &COURSE_CONTEXT()->courseData.controlPoint[2]);
 
                 if ((Math_Rand2() & 0x1FFFF) < 0xFFFF) {
                     var_s1_2 =
-                        &gCourseData
+                        &COURSE_CONTEXT()
+                             ->courseData
                              .controlPoint[((Math_Rand1() & 0x1FFFF) % (gCurrentCourseInfo->segmentCount - 1)) + 1];
                     var_s0_4 =
-                        &gCourseData
+                        &COURSE_CONTEXT()
+                             ->courseData
                              .controlPoint[((Math_Rand2() & 0x1FFFF) % (gCurrentCourseInfo->segmentCount - 1)) + 1];
                     if ((var_s1_2 < var_s0_4) && ((var_s1_2 - 1)->trackSegmentInfo & 0x10000000) &&
                         ((var_s0_4 + 1)->trackSegmentInfo & 0x10000000)) {
@@ -2774,8 +2779,8 @@ void Course_GenerateRandomCourse(void) {
                 }
 
                 // Ensure there are pit zones
-                gCourseData.pit[gCurrentCourseInfo->segmentCount - 3] =
-                    gCourseData.pit[gCurrentCourseInfo->segmentCount - 4] = PIT_BOTH;
+                COURSE_CONTEXT()->courseData.pit[gCurrentCourseInfo->segmentCount - 3] =
+                    COURSE_CONTEXT()->courseData.pit[gCurrentCourseInfo->segmentCount - 4] = PIT_BOTH;
             } else {
                 if (sp108 == 1) { // PIPE
                     spB4 = D_800CFA10;
@@ -2786,8 +2791,8 @@ void Course_GenerateRandomCourse(void) {
                 }
                 var_s6 = Math_Rand2() & 3;
                 temp_s3 = ((Math_Rand1() & 0x1FFFF) % 3) + 1;
-                var_s1_2 = &gCourseData.controlPoint[2];
-                var_s0_4 = &gCourseData.controlPoint[gCurrentCourseInfo->segmentCount - 5];
+                var_s1_2 = &COURSE_CONTEXT()->courseData.controlPoint[2];
+                var_s0_4 = &COURSE_CONTEXT()->courseData.controlPoint[gCurrentCourseInfo->segmentCount - 5];
 
                 var_s4 = 4;
                 do {
@@ -2814,31 +2819,36 @@ void Course_GenerateRandomCourse(void) {
                     }
                     var_s6 = (var_s6 + temp_s3) & 3;
                     var_s1_2 =
-                        &gCourseData
+                        &COURSE_CONTEXT()
+                             ->courseData
                              .controlPoint[((Math_Rand1() & 0x1FFFF) % (gCurrentCourseInfo->segmentCount - 6)) + 2];
                     var_s0_4 =
-                        &gCourseData
+                        &COURSE_CONTEXT()
+                             ->courseData
                              .controlPoint[((Math_Rand2() & 0x1FFFF) % (gCurrentCourseInfo->segmentCount - 6)) + 2];
                     var_s4--;
                 } while (var_s4 > 0);
                 // Ensure there are pit zones
-                gCourseData.pit[gCurrentCourseInfo->segmentCount - 1] =
-                    gCourseData.pit[gCurrentCourseInfo->segmentCount - 2] = PIT_BOTH;
+                COURSE_CONTEXT()->courseData.pit[gCurrentCourseInfo->segmentCount - 1] =
+                    COURSE_CONTEXT()->courseData.pit[gCurrentCourseInfo->segmentCount - 2] = PIT_BOTH;
             }
             temp_s3 = Math_Rand1() & 7;
             while (temp_s3 != 0) {
                 do {
                     var_s4 = ((Math_Rand2() & 0x1FFFF) % (gCurrentCourseInfo->segmentCount - 6)) + 2;
-                    if (gCourseData.controlPoint[var_s4].trackSegmentInfo & 0x08000000) {
+                    if (COURSE_CONTEXT()->courseData.controlPoint[var_s4].trackSegmentInfo & 0x08000000) {
                         break;
                     }
-                } while (gCourseData
+                } while (COURSE_CONTEXT()
+                             ->courseData
                              .controlPoint[((var_s4 + gCurrentCourseInfo->segmentCount) - 1) %
                                            gCurrentCourseInfo->segmentCount]
                              .trackSegmentInfo !=
-                         gCourseData.controlPoint[(var_s4 + 1) % gCurrentCourseInfo->segmentCount].trackSegmentInfo);
+                         COURSE_CONTEXT()
+                             ->courseData.controlPoint[(var_s4 + 1) % gCurrentCourseInfo->segmentCount]
+                             .trackSegmentInfo);
 
-                gCourseData.dash[var_s4] = (Math_Rand1() & 0x1FFFF) % 3;
+                COURSE_CONTEXT()->courseData.dash[var_s4] = (Math_Rand1() & 0x1FFFF) % 3;
                 temp_s3--;
             }
             var_s6 = (Math_Rand1() & 0x1FFFF) % 3;
@@ -2846,14 +2856,14 @@ void Course_GenerateRandomCourse(void) {
             temp_s3 = (Math_Rand2() & 7) - 1;
             while (temp_s3 >= 0) {
                 var_s4 = ((Math_Rand2() & 0x1FFFF) % (gCurrentCourseInfo->segmentCount - 2)) + 2;
-                temp_s2 = gCourseData.controlPoint[var_s4].trackSegmentInfo & TRACK_SHAPE_MASK;
+                temp_s2 = COURSE_CONTEXT()->courseData.controlPoint[var_s4].trackSegmentInfo & TRACK_SHAPE_MASK;
                 if ((temp_s2 == TRACK_SHAPE_ROAD) || (temp_s2 == TRACK_SHAPE_BORDERLESS_ROAD)) {
-                    temp_s2 = gCourseData.controlPoint[var_s4 - 1].trackSegmentInfo & TRACK_SHAPE_MASK;
+                    temp_s2 = COURSE_CONTEXT()->courseData.controlPoint[var_s4 - 1].trackSegmentInfo & TRACK_SHAPE_MASK;
                     if ((temp_s2 == TRACK_SHAPE_ROAD) || (temp_s2 == TRACK_SHAPE_BORDERLESS_ROAD)) {
                         if ((Math_Rand2() & 0x1FFFF) < 0xAAAA) {
-                            gCourseData.sign[var_s4] = (Math_Rand1() & 1) + 3;
+                            COURSE_CONTEXT()->courseData.sign[var_s4] = (Math_Rand1() & 1) + 3;
                         } else {
-                            gCourseData.sign[var_s4] = var_s6;
+                            COURSE_CONTEXT()->courseData.sign[var_s4] = var_s6;
                         }
                     }
                 }
@@ -2958,8 +2968,8 @@ void func_800A4DF0(void) {
 
     gCurrentCourseInfo = &gCourseInfos[gCourseIndex];
     func_8007402C(gCourseIndex);
-    func_800747EC(gCourseData.venue);
-    func_8009CED0(gCourseData.venue);
+    func_800747EC(COURSE_CONTEXT()->courseData.venue);
+    func_8009CED0(COURSE_CONTEXT()->courseData.venue);
     func_80074634(gCurrentCourseInfo);
     func_8009DEAC(gCurrentCourseInfo);
     if (gCurrentCourseInfo->courseIndex >= COURSE_EDIT_1) {
@@ -4283,32 +4293,34 @@ block_68:
 
 s32 Course_CalculateChecksum(void) {
     s32 i;
-    u32 var_v1 = gCourseData.controlPointCount;
+    u32 var_v1 = COURSE_CONTEXT()->courseData.controlPointCount;
 
-    for (i = 0; i < gCourseData.controlPointCount; i++) {
+    for (i = 0; i < COURSE_CONTEXT()->courseData.controlPointCount; i++) {
 
-        gCourseData.controlPoint[i].trackSegmentInfo &= ~TRACK_JOIN_MASK;
-        gCourseData.controlPoint[i].trackSegmentInfo &= ~TRACK_FORM_MASK;
-        gCourseData.controlPoint[i].trackSegmentInfo &= ~TRACK_FLAG_CONTINUOUS;
+        COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo &= ~TRACK_JOIN_MASK;
+        COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo &= ~TRACK_FORM_MASK;
+        COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo &= ~TRACK_FLAG_CONTINUOUS;
 
         var_v1 +=
-            (s32) ((gCourseData.controlPoint[i].pos.x + ((1.1f + (0.7f * i)) * gCourseData.controlPoint[i].pos.y)) +
-                   ((2.2f + (1.2f * i)) * gCourseData.controlPoint[i].pos.z * (4.4f + (0.9f * i))) +
-                   gCourseData.controlPoint[i].radiusLeft +
-                   ((5.5f + (0.8f * i)) * gCourseData.controlPoint[i].radiusRight * 4.8f)) +
-            gCourseData.controlPoint[i].trackSegmentInfo * (0xFE - i) + gCourseData.bankAngle[i] * (0x93DE - i * 2);
+            (s32) ((COURSE_CONTEXT()->courseData.controlPoint[i].pos.x +
+                    ((1.1f + (0.7f * i)) * COURSE_CONTEXT()->courseData.controlPoint[i].pos.y)) +
+                   ((2.2f + (1.2f * i)) * COURSE_CONTEXT()->courseData.controlPoint[i].pos.z * (4.4f + (0.9f * i))) +
+                   COURSE_CONTEXT()->courseData.controlPoint[i].radiusLeft +
+                   ((5.5f + (0.8f * i)) * COURSE_CONTEXT()->courseData.controlPoint[i].radiusRight * 4.8f)) +
+            COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo * (0xFE - i) +
+            COURSE_CONTEXT()->courseData.bankAngle[i] * (0x93DE - i * 2);
     }
 
-    for (i = 0; i < gCourseData.controlPointCount; i++) {
-        var_v1 += (gCourseData.pit[i] * i);
-        var_v1 += (gCourseData.dash[i] * (i + 0x10));
-        var_v1 += (gCourseData.dirt[i] * (i + 0x80));
-        var_v1 += (gCourseData.ice[i] * (i + 0x100));
-        var_v1 += (gCourseData.jump[i] * (i + 0x800));
-        var_v1 += (gCourseData.landmine[i] * (i + 0x1000));
-        var_v1 += (gCourseData.gate[i] * (i + 0x8000));
-        var_v1 += (gCourseData.building[i] * (i + 0x10000));
-        var_v1 += (gCourseData.sign[i] * (i + 0x80000));
+    for (i = 0; i < COURSE_CONTEXT()->courseData.controlPointCount; i++) {
+        var_v1 += (COURSE_CONTEXT()->courseData.pit[i] * i);
+        var_v1 += (COURSE_CONTEXT()->courseData.dash[i] * (i + 0x10));
+        var_v1 += (COURSE_CONTEXT()->courseData.dirt[i] * (i + 0x80));
+        var_v1 += (COURSE_CONTEXT()->courseData.ice[i] * (i + 0x100));
+        var_v1 += (COURSE_CONTEXT()->courseData.jump[i] * (i + 0x800));
+        var_v1 += (COURSE_CONTEXT()->courseData.landmine[i] * (i + 0x1000));
+        var_v1 += (COURSE_CONTEXT()->courseData.gate[i] * (i + 0x8000));
+        var_v1 += (COURSE_CONTEXT()->courseData.building[i] * (i + 0x10000));
+        var_v1 += (COURSE_CONTEXT()->courseData.sign[i] * (i + 0x80000));
     }
 
     return var_v1;

@@ -34,4 +34,4 @@ MachineSelect_BackgroundDraw = 0x801178C4; //segment:ovl_i4
 
 Credits_IntroDraw = 0x80119908; //segment:ovl_i6
 
-gCourseData = 0x8010B7B0; //segment:ovl_i2 size:0x7E0
+gCourseCtx = 0x8010B7B0; //segment:ovl_i2 size:0x7E0

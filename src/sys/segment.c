@@ -647,8 +647,6 @@ void Segment_LoadSegment9(void) {
     D_800CD2E8 = false;
 }
 
-extern CourseData gCourseData;
-
 void Segment_LoadSegment10(void) {
     s32 pad;
     s32 venue;
@@ -671,7 +669,7 @@ void Segment_LoadSegment10(void) {
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
-            venue = gCourseData.venue;
+            venue = COURSE_CONTEXT()->courseData.venue;
             romOffset = D_800CD2F8[venue];
             ramSize = D_800CD350[venue] - D_800CD324[venue];
             break;

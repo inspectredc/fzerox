@@ -151,7 +151,7 @@ typedef struct Racer {
     Vec3f acceleration;
     f32 speed;
     f32 maxSpeed;
-    f32 unk_A0;
+    f32 heightAboveGround;
     f32 podiumHeight;
     Vec3f gravityUp;
     Vec3f tiltUp;
@@ -214,9 +214,9 @@ typedef struct Racer {
     f32 lapsCompletedDistance;
     f32 lapDistance;
     f32 raceDistancePosition;
-    Mtx3F unk_24C;
-    f32 unk_270;
-    f32 unk_274;
+    Mtx3F segmentBasis;
+    f32 currentRadiusLeft;
+    f32 currentRadiusRight;
     s16 unk_278;
     s16 unk_27A;
     s32 unk_27C;
@@ -422,13 +422,6 @@ typedef struct GhostRacer {
     f32 scale;
     Racer* racer;
 } GhostRacer; // size 0x34
-
-typedef struct unk_8012F450 {
-    /* 0x00 */ s32 time;
-    /* 0x04 */ u8 hours;
-    /* 0x05 */ u8 minutes;
-    /* 0x08 */ f32 minuteFraction;
-} unk_8012F450; // size = 0xC
 
 typedef struct RaceStats {
     s32 raceTime;

@@ -58,8 +58,6 @@ Mtx3F* func_80074C60(Mtx3F* basisPtr) {
     return basisPtr;
 }
 
-extern CourseData gCourseData;
-
 // Set segment up vectors
 void func_80074CE4(CourseInfo* courseInfo) {
     s32 pad[4];
@@ -93,8 +91,8 @@ void func_80074CE4(CourseInfo* courseInfo) {
         baseUpY = ((rightVecZ * segmentTangentVec.x) - (rightVecX * segmentTangentVec.z)) * -1.0f;
         baseUpZ = ((rightVecX * segmentTangentVec.y) - (rightVecY * segmentTangentVec.x)) * -1.0f;
         Math_NormalizeXYZ(&baseUpX, &baseUpY, &baseUpZ);
-        Matrix_SetAxisRotation(NULL, &mtxF, 1.0f, DEG_TO_FZXANG(gCourseData.bankAngle[i]), segmentTangentVec.x,
-                               segmentTangentVec.y, segmentTangentVec.z, 0.0f, 0.0f, 0.0f);
+        Matrix_SetAxisRotation(NULL, &mtxF, 1.0f, DEG_TO_FZXANG(COURSE_CONTEXT()->courseData.bankAngle[i]),
+                               segmentTangentVec.x, segmentTangentVec.y, segmentTangentVec.z, 0.0f, 0.0f, 0.0f);
         segment->unk_0C.x = mtxF.m[0][0] * baseUpX + mtxF.m[1][0] * baseUpY + mtxF.m[2][0] * baseUpZ;
         segment->unk_0C.y = mtxF.m[0][1] * baseUpX + mtxF.m[1][1] * baseUpY + mtxF.m[2][1] * baseUpZ;
         segment->unk_0C.z = mtxF.m[0][2] * baseUpX + mtxF.m[1][2] * baseUpY + mtxF.m[2][2] * baseUpZ;

@@ -2,8 +2,8 @@
 #include "unk_structs.h"
 #include "fzx_course.h"
 
-CourseData gCourseData = {
-    CREATOR_NINTENDO, 0, 0, 0, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }
+CourseContext gCourseCtx = {
+    { CREATOR_NINTENDO, 0, 0, 0, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 } }
 };
 CourseData D_8010BF90 = { 0 };
 CourseData D_8010C770 = {

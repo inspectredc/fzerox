@@ -31,6 +31,10 @@ typedef struct CourseData {
     /* 0x7A0 */ s8 sign[64];
 } CourseData; // size = 0x7E0
 
+typedef struct CourseContext {
+    CourseData courseData;
+} CourseContext;
+
 typedef enum Courses {
     /*  0 */ COURSE_MUTE_CITY,
     /*  1 */ COURSE_SILENCE,
@@ -310,5 +314,9 @@ typedef enum BorderlessRoad {
 #define TRACK_FLAG_20000000 0x20000000
 #define TRACK_FLAG_CONTINUOUS 0x40000000
 #define TRACK_FLAG_80000000 0x80000000
+
+extern CourseContext gCourseCtx;
+
+#define COURSE_CONTEXT() (&gCourseCtx)
 
 #endif // FZX_COURSE_H
