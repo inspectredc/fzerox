@@ -26,4 +26,15 @@ Gfx* Hud_DrawRaceTimeInterval(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale);
 Gfx* Hud_DrawBlankTimeHundredths(Gfx* gfx, s32 left, s32 top);
 Gfx* Hud_DrawBlankTimeThousandths(Gfx* gfx, s32 left, s32 top);
 
+Gfx* Hud_UpdateRaceIntervalInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex, f32 scale);
+Gfx* Hud_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
+Gfx* Hud_DrawKOStars(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
+Gfx* Hud_DrawPlayerLives(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
+Gfx* Hud_DrawPracticeBestLap(Gfx* gfx);
+Gfx* Hud_DrawDeathRaceTimer(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
+Gfx* Hud_DrawDeathRaceBest(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
+Gfx* Hud_DrawDeathRaceBestTime(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
+
+void Hud_UpdateCharacterPortraits(void);
+
 #endif // HUD_H

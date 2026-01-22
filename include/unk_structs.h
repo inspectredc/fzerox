@@ -67,7 +67,8 @@ typedef struct CourseInfo {
     /* 0x08 */ s32 segmentCount;
     /* 0x0C */ f32 length;
     /* 0x10 */ CourseSegment* courseSegments;
-    /* 0x14 */ s16 unk_14[6];
+    /* 0x14 */ s16 courseFogColors[3];
+    /* 0x1A */ s16 racerFogColors[3];
     /* 0x20 */ s32 timeRecord[5];
     /* 0x34 */ MachineInfo recordMachineInfos[5];
     /* 0x98 */ f32 recordEngines[5];

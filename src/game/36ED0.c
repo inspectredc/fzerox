@@ -4235,21 +4235,24 @@ Gfx* Course_Draw(Gfx* gfx, s32 playerIndex) {
         } else if (racer->segmentPositionInfo.segmentTValue < segment->unk_68) {
             var_fv1 = racer->segmentPositionInfo.segmentLengthProportion / segment->unk_70;
         } else {
-            var_a0 = gCurrentCourseInfo->unk_14[0] >> 2;
-            var_t0 = gCurrentCourseInfo->unk_14[1] >> 2;
-            var_a2 = gCurrentCourseInfo->unk_14[2] >> 2;
+            var_a0 = gCurrentCourseInfo->courseFogColors[0] >> 2;
+            var_t0 = gCurrentCourseInfo->courseFogColors[1] >> 2;
+            var_a2 = gCurrentCourseInfo->courseFogColors[2] >> 2;
             goto block_68;
         }
-        var_a0 = gCurrentCourseInfo->unk_14[0] +
-                 Math_Round(((gCurrentCourseInfo->unk_14[0] >> 2) - gCurrentCourseInfo->unk_14[0]) * var_fv1);
-        var_t0 = gCurrentCourseInfo->unk_14[1] +
-                 Math_Round(((gCurrentCourseInfo->unk_14[1] >> 2) - gCurrentCourseInfo->unk_14[1]) * var_fv1);
-        var_a2 = gCurrentCourseInfo->unk_14[2] +
-                 Math_Round(((gCurrentCourseInfo->unk_14[2] >> 2) - gCurrentCourseInfo->unk_14[2]) * var_fv1);
+        var_a0 = gCurrentCourseInfo->courseFogColors[0] +
+                 Math_Round(((gCurrentCourseInfo->courseFogColors[0] >> 2) - gCurrentCourseInfo->courseFogColors[0]) *
+                            var_fv1);
+        var_t0 = gCurrentCourseInfo->courseFogColors[1] +
+                 Math_Round(((gCurrentCourseInfo->courseFogColors[1] >> 2) - gCurrentCourseInfo->courseFogColors[1]) *
+                            var_fv1);
+        var_a2 = gCurrentCourseInfo->courseFogColors[2] +
+                 Math_Round(((gCurrentCourseInfo->courseFogColors[2] >> 2) - gCurrentCourseInfo->courseFogColors[2]) *
+                            var_fv1);
     } else {
-        var_a0 = gCurrentCourseInfo->unk_14[0];
-        var_t0 = gCurrentCourseInfo->unk_14[1];
-        var_a2 = gCurrentCourseInfo->unk_14[2];
+        var_a0 = gCurrentCourseInfo->courseFogColors[0];
+        var_t0 = gCurrentCourseInfo->courseFogColors[1];
+        var_a2 = gCurrentCourseInfo->courseFogColors[2];
     }
 block_68:
 

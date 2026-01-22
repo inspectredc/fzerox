@@ -153,26 +153,28 @@
     symbol_name_format: i3_$VRAM
     subsegments:
       - [0xA90C0, c, cpu]
-      - [0xAE140, c, AE140]
+      - [0xAE140, c, menus]
       - [0xC2160, c, C2160]
-      - [0xC2290, c, C2290]
-      - [0xC8970, c, C8970]
-      - [0xCCFF0, c, CCFF0]
+      - [0xC2290, c, hud]
+      - [0xC8970, c, minimap]
+      - [0xC98B0, c, background]
+      - [0xrecords_entry, c, records_entry]
       - [0xD0E50, .data, cpu]
-      - [0xD2000, .data, AE140]
-      - [0xD22C0, .data, C2290]
-      - [0xD29D0, .data, C8970]
-      - [0xD4220, .data, CCFF0]
+      - [0xD2000, .data, menus]
+      - [0xD22C0, .data, hud]
+      - [0xD29D0, .data, minimap]
+      - [0xD3A70, .data, background]
+      - [0xD4220, .data, records_entry]
       - [0xD4260, .rodata, cpu]
-      - [0xD4410, .rodata, AE140]
-      - [0xD4B20, .rodata, C2290]
-      - [0xD4B30, .rodata, C8970]
-      - [0xD4BA0, .rodata, CCFF0]
+      - [0xD4410, .rodata, menus]
+      - [0xD4B20, .rodata, hud]
+      - [0xD4B30, .rodata, background]
+      - [0xD4BA0, .rodata, records_entry]
       - { type: .bss, vram: 0x80141900, name: cpu }
-      - { type: .bss, vram: 0x801419A0, name: AE140 }
-      - { type: .bss, vram: 0x80141E30, name: C2290 }
-      - { type: .bss, vram: 0x80141FF0, name: C8970 }
-      - { type: .bss, vram: 0x80143780, name: CCFF0 }
+      - { type: .bss, vram: 0x801419A0, name: menus }
+      - { type: .bss, vram: 0x80141E30, name: hud }
+      - { type: .bss, vram: 0x80141FF0, name: background }
+      - { type: .bss, vram: 0x80143780, name: records_entry }
 
 
   - name: ovl_i4

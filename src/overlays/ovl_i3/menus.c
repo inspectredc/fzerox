@@ -113,7 +113,7 @@ s32 sPlayerFinishTimer[4];
 s32 sPlayerFinishState[4];
 s32 sFinishedSuccessTime;
 char sMenusLoadedNumberStr[32];
-s32 D_i3_80141E28;
+s32 sVsRacePointsAddTimer;
 
 TexturePtr D_i3_8013ED30[] = {
     aPortraitPositionFirstTex,  aPortraitPositionSecondTex, aPortraitPositionThirdTex,
@@ -1162,7 +1162,7 @@ Gfx* Menus_DrawPlayerWinner(Gfx* gfx, s32 playerIndex) {
                 case 2:
                 case 3:
                     isWinner = 0;
-                    D_80141D70 = 1;
+                    D_80141D70 = true;
                     break;
             }
             break;
@@ -1344,7 +1344,7 @@ Gfx* Menus_DrawPlayerLoser(Gfx* gfx, s32 playerIndex) {
                 case 2:
                 case 3:
                     isLoser = 0;
-                    D_80141D70 = 1;
+                    D_80141D70 = true;
                     break;
             }
             break;
@@ -3747,13 +3747,13 @@ const char* sCharacterNames[] = {
 };
 #endif
 
-Gfx* Menus_DrawResultsCharacterName(Gfx* gfx, s32 arg1, s32 character, s32 left, s32 top) {
-    gfx = Menus_SetOptionColor(gfx, arg1);
+Gfx* Menus_DrawResultsCharacterName(Gfx* gfx, s32 highlightType, s32 character, s32 left, s32 top) {
+    gfx = Menus_SetOptionColor(gfx, highlightType);
     return Font_DrawString(gfx, left, top, sCharacterNames[character], 1, FONT_SET_4, 0);
 }
 
-Gfx* Menus_DrawResultsRetireStatus(Gfx* gfx, s32 arg1, s32 left, s32 top) {
-    gfx = Menus_SetOptionColor(gfx, arg1);
+Gfx* Menus_DrawResultsRetireStatus(Gfx* gfx, s32 highlightType, s32 left, s32 top) {
+    gfx = Menus_SetOptionColor(gfx, highlightType);
 #ifdef VERSION_JP
     return Font_DrawString(gfx, left, top, "リタイア", 1, FONT_SET_4, 0);
 #else
@@ -3796,20 +3796,20 @@ void Menus_LoadNumberToStr(s32 num) {
     sMenusLoadedNumberStr[digitIndex + 1] = '\0';
 }
 
-Gfx* Menus_DrawPositionNumber(Gfx* gfx, s32 arg1, s32 position, s32 left, s32 top) {
-    gfx = Menus_SetOptionColor(gfx, arg1);
+Gfx* Menus_DrawPositionNumber(Gfx* gfx, s32 highlightType, s32 position, s32 left, s32 top) {
+    gfx = Menus_SetOptionColor(gfx, highlightType);
     Menus_LoadNumberToStr(position);
     return Font_DrawString(gfx, left - Font_GetStringWidth(sMenusLoadedNumberStr, FONT_SET_4, 0), top,
                            sMenusLoadedNumberStr, 0, FONT_SET_4, 0);
 }
 
-Gfx* Menus_DrawPlusPoints(Gfx* gfx, s32 arg1, s32 left, s32 top) {
-    gfx = Menus_SetOptionColor(gfx, arg1);
+Gfx* Menus_DrawPlusPoints(Gfx* gfx, s32 highlightType, s32 left, s32 top) {
+    gfx = Menus_SetOptionColor(gfx, highlightType);
     return Font_DrawString(gfx, left - Font_GetStringWidth("+     $", FONT_SET_4, 1), top, "+     $", 1, FONT_SET_4, 0);
 }
 
-Gfx* Menus_DrawPoints(Gfx* gfx, s32 arg1, s32 left, s32 top) {
-    gfx = Menus_SetOptionColor(gfx, arg1);
+Gfx* Menus_DrawPoints(Gfx* gfx, s32 highlightType, s32 left, s32 top) {
+    gfx = Menus_SetOptionColor(gfx, highlightType);
     return Font_DrawString(gfx, left - Font_GetStringWidth("    $", FONT_SET_4, 1), top, "    $", 1, FONT_SET_4, 0);
 }
 
@@ -3869,85 +3869,85 @@ Gfx* Menus_DrawDeathRaceResults(Gfx* gfx) {
 
 extern s32 gVsRacePlayerVictoryCount[];
 extern s32 gVsRacePlayerPoints[];
-extern s32 D_80115DD0[];
+extern s32 gVsPreviousRacePosition[];
 
 UNUSED s32 D_i3_8013EF40 = 0;
 
-s32 D_i3_8013EF44[][4] = {
+s32 sVsRaceRacerCountPositionPoints[][4] = {
     { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 5, 0, 0, 0 }, { 5, 3, 0, 0 }, { 5, 3, 1, 0 },
 };
 
-s32 D_i3_8013EF94[] = { 0, 255, 0, 255 };
+s32 sVsPlayerColorRed[] = { 0, 255, 0, 255 };
 
-s32 D_i3_8013EFA4[] = { 255, 255, 255, 127 };
+s32 sVsPlayerColorGreen[] = { 255, 255, 255, 127 };
 
-s32 D_i3_8013EFB4[] = { 255, 0, 0, 255 };
+s32 sVsPlayerColorBlue[] = { 255, 0, 0, 255 };
 
-s32 D_i3_8013EFC4[] = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+s32 sVsPositionToVictoryGivenCount[] = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
-    s32 var_a1;
+Gfx* Menus_DrawVsResultsScreen(Gfx* gfx) {
+    s32 boxScale;
     s32 i;
     s32 j;
     s32 var_s1;
     s32 pad[8];
-    s32 temp_v1_2;
-    s32 sp58;
+    s32 stringHalfWidth;
+    s32 totalVsVictories;
 
-    var_a1 = 0;
+    boxScale = 0;
     if (sVsResultsTimer < 30) {
-        var_a1 = (30 - sVsResultsTimer) * 4;
+        boxScale = (30 - sVsResultsTimer) * 4;
     } else if (sVsResultsTimer > 60030) {
-        var_a1 = (sVsResultsTimer - 60030) * 4;
+        boxScale = (sVsResultsTimer - 60030) * 4;
     }
-    gfx = Menus_DrawResultsBox(gfx, var_a1);
+    gfx = Menus_DrawResultsBox(gfx, boxScale);
 
-    sp58 = 0;
+    totalVsVictories = 0;
     for (i = 0; i < gTotalRacers; i++) {
-        sp58 += gVsRacePlayerVictoryCount[i];
+        totalVsVictories += gVsRacePlayerVictoryCount[i];
     }
 
     if ((sVsResultsTimer > 30) && (sVsResultsTimer < 30030)) {
-        temp_v1_2 = Font_GetStringWidth("vs results", FONT_SET_3, 1) / 2;
-        gfx = Menus_DrawBeveledBox(gfx, 0x9B - temp_v1_2, 0x21, temp_v1_2 + 0xA9, 0x33, 0, 0, 0xC8, 0x7F);
+        stringHalfWidth = Font_GetStringWidth("vs results", FONT_SET_3, 1) / 2;
+        gfx = Menus_DrawBeveledBox(gfx, 155 - stringHalfWidth, 33, stringHalfWidth + 169, 51, 0, 0, 200, 127);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx = Font_DrawString(gfx, 0xA2 - (Font_GetStringWidth("vs results", FONT_SET_3, 1) / 2), 0x34, "vs results", 1,
+        gfx = Font_DrawString(gfx, 162 - (Font_GetStringWidth("vs results", FONT_SET_3, 1) / 2), 52, "vs results", 1,
                               FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-        gfx = Font_DrawString(gfx, 0xA0 - (Font_GetStringWidth("vs results", FONT_SET_3, 1) / 2), 0x32, "vs results", 1,
+        gfx = Font_DrawString(gfx, 160 - (Font_GetStringWidth("vs results", FONT_SET_3, 1) / 2), 50, "vs results", 1,
                               FONT_SET_3, 0);
     } else if ((sVsResultsTimer > 30030) && (sVsResultsTimer < 60030)) {
-        temp_v1_2 = Font_GetStringWidth("vs total ranking", FONT_SET_3, 1) / 2;
-        gfx = Menus_DrawBeveledBox(gfx, 0x9B - temp_v1_2, 0x21, temp_v1_2 + 0xA9, 0x33, 0, 0, 0xC8, 0x7F);
+        stringHalfWidth = Font_GetStringWidth("vs total ranking", FONT_SET_3, 1) / 2;
+        gfx = Menus_DrawBeveledBox(gfx, 155 - stringHalfWidth, 33, stringHalfWidth + 169, 51, 0, 0, 200, 127);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx = Font_DrawString(gfx, 0xA2 - (Font_GetStringWidth("vs total ranking", FONT_SET_3, 1) / 2), 0x34,
+        gfx = Font_DrawString(gfx, 162 - (Font_GetStringWidth("vs total ranking", FONT_SET_3, 1) / 2), 52,
                               "vs total ranking", 1, FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-        gfx = Font_DrawString(gfx, 0xA0 - (Font_GetStringWidth("vs total ranking", FONT_SET_3, 1) / 2), 0x32,
+        gfx = Font_DrawString(gfx, 160 - (Font_GetStringWidth("vs total ranking", FONT_SET_3, 1) / 2), 50,
                               "vs total ranking", 1, FONT_SET_3, 0);
     }
     if ((sVsResultsTimer >= 30) && (sVsResultsTimer < 30030)) {
-        var_a1 = 0;
+        boxScale = 0;
         if (sVsResultsTimer < 60) {
-            var_a1 = (-sVsResultsTimer * 4) + 240;
+            boxScale = (-sVsResultsTimer * 4) + 240;
         } else if (sVsResultsTimer > 30000) {
-            var_a1 = (sVsResultsTimer * 4) - 120000;
+            boxScale = (sVsResultsTimer * 4) - 120000;
         }
         gDPPipeSync(gfx++);
-        gDPSetScissor(gfx++, G_SC_NON_INTERLACE, var_a1 + 30, var_a1 + 25, 290 - var_a1, 220 - var_a1);
+        gDPSetScissor(gfx++, G_SC_NON_INTERLACE, boxScale + 30, boxScale + 25, 290 - boxScale, 220 - boxScale);
 
         if (sVsResultsTimer == 30) {
             for (i = 0; i < gTotalRacers; i++) {
                 sVsRaceResultsPlayerDisplayPoints[i] =
-                    gVsRacePlayerPoints[i] - D_i3_8013EF44[gTotalRacers][gRacers[i].position - 1];
-                sVsRacePlayerPointsIncrease[i] = D_i3_8013EF44[gTotalRacers][gRacers[i].position - 1];
+                    gVsRacePlayerPoints[i] - sVsRaceRacerCountPositionPoints[gTotalRacers][gRacers[i].position - 1];
+                sVsRacePlayerPointsIncrease[i] = sVsRaceRacerCountPositionPoints[gTotalRacers][gRacers[i].position - 1];
             }
-            D_i3_80141E28 = 0;
-            sVsRaceResultsMenuOptionIndex = 0;
+            sVsRacePointsAddTimer = 0;
+            sVsRaceResultsMenuOptionIndex = VS_RESULTS_COURSE_SELECT;
         }
         for (i = 0, j = 0; i < 4; i++) {
             sVsRacePreviousPlayerByOverallPosition[i] = i;
@@ -3957,7 +3957,7 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
             j += gVsRacePlayerPoints[i];
         }
 
-        if (sp58 == 1) {
+        if (totalVsVictories == 1) {
             for (i = 0; i < gTotalRacers; i++) {
                 for (j = 0; j < gTotalRacers; j++) {
                     if (gRacers[i].position == j + 1) {
@@ -3969,41 +3969,45 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
             for (i = 0; i < gTotalRacers; i++) {
                 for (j = i + 1; j < gTotalRacers; j++) {
                     if (gVsRacePlayerPoints[sVsRacePreviousPlayerByOverallPosition[i]] -
-                            D_i3_8013EF44[gTotalRacers]
-                                         [gRacers[sVsRacePreviousPlayerByOverallPosition[i]].position - 1] <
+                            sVsRaceRacerCountPositionPoints
+                                [gTotalRacers][gRacers[sVsRacePreviousPlayerByOverallPosition[i]].position - 1] <
                         gVsRacePlayerPoints[sVsRacePreviousPlayerByOverallPosition[j]] -
-                            D_i3_8013EF44[gTotalRacers]
-                                         [gRacers[sVsRacePreviousPlayerByOverallPosition[j]].position - 1]) {
+                            sVsRaceRacerCountPositionPoints
+                                [gTotalRacers][gRacers[sVsRacePreviousPlayerByOverallPosition[j]].position - 1]) {
                         var_s1 = sVsRacePreviousPlayerByOverallPosition[i];
                         sVsRacePreviousPlayerByOverallPosition[i] = sVsRacePreviousPlayerByOverallPosition[j];
                         sVsRacePreviousPlayerByOverallPosition[j] = var_s1;
                     }
                     if ((gVsRacePlayerPoints[sVsRacePreviousPlayerByOverallPosition[i]] -
-                             D_i3_8013EF44[gTotalRacers]
-                                          [gRacers[sVsRacePreviousPlayerByOverallPosition[i]].position - 1] ==
+                             sVsRaceRacerCountPositionPoints
+                                 [gTotalRacers][gRacers[sVsRacePreviousPlayerByOverallPosition[i]].position - 1] ==
                          gVsRacePlayerPoints[sVsRacePreviousPlayerByOverallPosition[j]] -
-                             D_i3_8013EF44[gTotalRacers]
-                                          [gRacers[sVsRacePreviousPlayerByOverallPosition[j]].position - 1]) &&
+                             sVsRaceRacerCountPositionPoints
+                                 [gTotalRacers][gRacers[sVsRacePreviousPlayerByOverallPosition[j]].position - 1]) &&
                         (gVsRacePlayerVictoryCount[sVsRacePreviousPlayerByOverallPosition[i]] -
-                             D_i3_8013EFC4[gRacers[sVsRacePreviousPlayerByOverallPosition[i]].position - 1] <
+                             sVsPositionToVictoryGivenCount
+                                 [gRacers[sVsRacePreviousPlayerByOverallPosition[i]].position - 1] <
                          gVsRacePlayerVictoryCount[sVsRacePreviousPlayerByOverallPosition[j]] -
-                             D_i3_8013EFC4[gRacers[sVsRacePreviousPlayerByOverallPosition[j]].position - 1])) {
+                             sVsPositionToVictoryGivenCount
+                                 [gRacers[sVsRacePreviousPlayerByOverallPosition[j]].position - 1])) {
                         var_s1 = sVsRacePreviousPlayerByOverallPosition[i];
                         sVsRacePreviousPlayerByOverallPosition[i] = sVsRacePreviousPlayerByOverallPosition[j];
                         sVsRacePreviousPlayerByOverallPosition[j] = var_s1;
                     }
                     if ((gVsRacePlayerPoints[sVsRacePreviousPlayerByOverallPosition[i]] -
-                             D_i3_8013EF44[gTotalRacers]
-                                          [gRacers[sVsRacePreviousPlayerByOverallPosition[i]].position - 1] ==
+                             sVsRaceRacerCountPositionPoints
+                                 [gTotalRacers][gRacers[sVsRacePreviousPlayerByOverallPosition[i]].position - 1] ==
                          gVsRacePlayerPoints[sVsRacePreviousPlayerByOverallPosition[j]] -
-                             D_i3_8013EF44[gTotalRacers]
-                                          [gRacers[sVsRacePreviousPlayerByOverallPosition[j]].position - 1]) &&
+                             sVsRaceRacerCountPositionPoints
+                                 [gTotalRacers][gRacers[sVsRacePreviousPlayerByOverallPosition[j]].position - 1]) &&
                         (gVsRacePlayerVictoryCount[sVsRacePreviousPlayerByOverallPosition[i]] -
-                             D_i3_8013EFC4[gRacers[sVsRacePreviousPlayerByOverallPosition[i]].position - 1] ==
+                             sVsPositionToVictoryGivenCount
+                                 [gRacers[sVsRacePreviousPlayerByOverallPosition[i]].position - 1] ==
                          gVsRacePlayerVictoryCount[sVsRacePreviousPlayerByOverallPosition[j]] -
-                             D_i3_8013EFC4[gRacers[sVsRacePreviousPlayerByOverallPosition[j]].position - 1]) &&
-                        (D_80115DD0[sVsRacePreviousPlayerByOverallPosition[i]] >
-                         D_80115DD0[sVsRacePreviousPlayerByOverallPosition[j]])) {
+                             sVsPositionToVictoryGivenCount
+                                 [gRacers[sVsRacePreviousPlayerByOverallPosition[j]].position - 1]) &&
+                        (gVsPreviousRacePosition[sVsRacePreviousPlayerByOverallPosition[i]] >
+                         gVsPreviousRacePosition[sVsRacePreviousPlayerByOverallPosition[j]])) {
                         var_s1 = sVsRacePreviousPlayerByOverallPosition[i];
                         sVsRacePreviousPlayerByOverallPosition[i] = sVsRacePreviousPlayerByOverallPosition[j];
                         sVsRacePreviousPlayerByOverallPosition[j] = var_s1;
@@ -4012,12 +4016,12 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
             }
         }
 
-        D_i3_80141E28++;
-        if (D_i3_80141E28 > 30000) {
-            D_i3_80141E28 = 0;
+        sVsRacePointsAddTimer++;
+        if (sVsRacePointsAddTimer > 30000) {
+            sVsRacePointsAddTimer = 0;
         }
 
-        if ((D_i3_80141E28 > 120) && !(D_i3_80141E28 & 7)) {
+        if ((sVsRacePointsAddTimer > 120) && !(sVsRacePointsAddTimer & 7)) {
             for (i = 0; i < gTotalRacers; i++) {
                 for (j = 0; j < gTotalRacers; j++) {
                     if (gRacers[j].position == i + 1) {
@@ -4039,27 +4043,27 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-        gfx = Font_DrawString(gfx, 0x30, 0x50, "1Ｓ", 1, FONT_SET_5, 0);
-        gfx = Font_DrawString(gfx, 0x30, 0x69, "2Ｎ", 1, FONT_SET_5, 0);
+        gfx = Font_DrawString(gfx, 48, 80, "1Ｓ", 1, FONT_SET_5, 0);
+        gfx = Font_DrawString(gfx, 48, 105, "2Ｎ", 1, FONT_SET_5, 0);
 
         if (gTotalRacers >= 3) {
-            gfx = Font_DrawString(gfx, 0x30, 0x82, "3Ｒ", 1, FONT_SET_5, 0);
+            gfx = Font_DrawString(gfx, 48, 130, "3Ｒ", 1, FONT_SET_5, 0);
         }
         if (gTotalRacers >= 4) {
-            gfx = Font_DrawString(gfx, 0x30, 0x9B, "4Ｔ", 1, FONT_SET_5, 0);
+            gfx = Font_DrawString(gfx, 48, 155, "4Ｔ", 1, FONT_SET_5, 0);
         }
 
         for (i = 0; i < gTotalRacers; i++) {
             gDPPipeSync(gfx++);
-            gDPSetPrimColor(gfx++, 0, 0, D_i3_8013EF94[sVsRacePreviousPlayerByOverallPosition[i]],
-                            D_i3_8013EFA4[sVsRacePreviousPlayerByOverallPosition[i]],
-                            D_i3_8013EFB4[sVsRacePreviousPlayerByOverallPosition[i]], 255);
+            gDPSetPrimColor(gfx++, 0, 0, sVsPlayerColorRed[sVsRacePreviousPlayerByOverallPosition[i]],
+                            sVsPlayerColorGreen[sVsRacePreviousPlayerByOverallPosition[i]],
+                            sVsPlayerColorBlue[sVsRacePreviousPlayerByOverallPosition[i]], 255);
             j = sVsRacePreviousPlayerByOverallPosition[i];
 
             if (gRacers[j].id < gNumPlayers) {
-                gfx = Font_DrawString(gfx, 0x4D, 80 + i * 25, "Ｐ", 1, FONT_SET_5, 0);
+                gfx = Font_DrawString(gfx, 77, 80 + i * 25, "Ｐ", 1, FONT_SET_5, 0);
             } else {
-                gfx = Font_DrawString(gfx, 0x4D, 80 + i * 25, "Ａ", 1, FONT_SET_5, 0);
+                gfx = Font_DrawString(gfx, 77, 80 + i * 25, "Ａ", 1, FONT_SET_5, 0);
             }
 
             if (gRacers[j].id < gNumPlayers) {
@@ -4068,52 +4072,52 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                 Menus_LoadNumberToStr((gRacers[j].id - gNumPlayers) + 1);
             }
 
-            gfx = Font_DrawString(gfx, 0x93, 80 + i * 25, sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
+            gfx = Font_DrawString(gfx, 147, 80 + i * 25, sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
             Menus_LoadNumberToStr(sVsRaceResultsPlayerDisplayPoints[gRacers[j].id]);
-            gfx = Font_DrawString(gfx, 0xD3 - Font_GetStringWidth(sMenusLoadedNumberStr, FONT_SET_5, 1), 80 + i * 25,
+            gfx = Font_DrawString(gfx, 211 - Font_GetStringWidth(sMenusLoadedNumberStr, FONT_SET_5, 1), 80 + i * 25,
                                   sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
-            gfx = Font_DrawString(gfx, 0xD3, 80 + i * 25, "$", 1, FONT_SET_5, 0);
+            gfx = Font_DrawString(gfx, 211, 80 + i * 25, "$", 1, FONT_SET_5, 0);
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 100, 100, 255, 255);
-            gfx = Font_DrawString(gfx, 0xED, 80 + i * 25, "+", 1, FONT_SET_5, 0);
+            gfx = Font_DrawString(gfx, 237, 80 + i * 25, "+", 1, FONT_SET_5, 0);
             Menus_LoadNumberToStr(sVsRacePlayerPointsIncrease[gRacers[j].id]);
-            gfx = Font_DrawString(gfx, 0xFA, 80 + i * 25, sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
+            gfx = Font_DrawString(gfx, 250, 80 + i * 25, sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
 
             if (gRacers[j].position == 1) {
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-                gfx = Font_DrawString(gfx, 0x10E, 80 + i * 25, "v", 1, FONT_SET_5, 0);
+                gfx = Font_DrawString(gfx, 270, 80 + i * 25, "v", 1, FONT_SET_5, 0);
             }
         }
     } else if (sVsResultsTimer >= 30030) {
         if (sVsResultsTimer < 60030) {
-            var_a1 = 0;
+            boxScale = 0;
             if (sVsResultsTimer < 30060) {
-                var_a1 = -sVsResultsTimer * 4 + 120240;
+                boxScale = -sVsResultsTimer * 4 + 120240;
             } else if (sVsResultsTimer > 60000) {
-                var_a1 = sVsResultsTimer * 4 - 240000;
+                boxScale = sVsResultsTimer * 4 - 240000;
             }
             gDPPipeSync(gfx++);
-            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, var_a1 + 30, var_a1 + 25, 290 - var_a1, 220 - var_a1);
+            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, boxScale + 30, boxScale + 25, 290 - boxScale, 220 - boxScale);
 
-            if (sVsRaceResultsMenuOptionIndex == 0) {
+            if (sVsRaceResultsMenuOptionIndex == VS_RESULTS_COURSE_SELECT) {
                 gDPPipeSync(gfx++);
                 gfx = func_8007DB28(gfx, 0);
-                gfx = Font_DrawScaledString(gfx, 0x82, 0xC3, "Ｃ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
-                gfx = Font_DrawScaledString(gfx, 0x6E, 0xC3, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 130, 195, "Ｃ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 110, 195, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-                gfx = Font_DrawScaledString(gfx, 0x82, 0xD2, "Ｅ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 130, 210, "Ｅ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
             } else {
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-                gfx = Font_DrawScaledString(gfx, 0x82, 0xC3, "Ｃ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 130, 195, "Ｃ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
                 gDPPipeSync(gfx++);
                 gfx = func_8007DB28(gfx, 0);
-                gfx = Font_DrawScaledString(gfx, 0x82, 0xD2, "Ｅ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
-                gfx = Font_DrawScaledString(gfx, 0x6E, 0xD2, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 130, 210, "Ｅ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
+                gfx = Font_DrawScaledString(gfx, 110, 210, "Ｍ", 1, FONT_SET_5, 0, 0.8f, 0.8f);
             }
 
             for (i = 0; i < 4; i++) {
@@ -4151,26 +4155,26 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
 
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            gfx = Font_DrawString(gfx, 0x30, 0x50, "1Ｓ", 1, FONT_SET_5, 0);
-            gfx = Font_DrawString(gfx, 0x30, 0x69, "2Ｎ", 1, FONT_SET_5, 0);
+            gfx = Font_DrawString(gfx, 48, 80, "1Ｓ", 1, FONT_SET_5, 0);
+            gfx = Font_DrawString(gfx, 48, 105, "2Ｎ", 1, FONT_SET_5, 0);
 
             if (gTotalRacers >= 3) {
-                gfx = Font_DrawString(gfx, 0x30, 0x82, "3Ｒ", 1, FONT_SET_5, 0);
+                gfx = Font_DrawString(gfx, 48, 130, "3Ｒ", 1, FONT_SET_5, 0);
             }
             if (gTotalRacers >= 4) {
-                gfx = Font_DrawString(gfx, 0x30, 0x9B, "4Ｔ", 1, FONT_SET_5, 0);
+                gfx = Font_DrawString(gfx, 48, 155, "4Ｔ", 1, FONT_SET_5, 0);
             }
 
             for (i = 0; i < gTotalRacers; i++) {
                 gDPPipeSync(gfx++);
-                gDPSetPrimColor(gfx++, 0, 0, D_i3_8013EF94[sVsRacePlayerByOverallPosition[i]],
-                                D_i3_8013EFA4[sVsRacePlayerByOverallPosition[i]],
-                                D_i3_8013EFB4[sVsRacePlayerByOverallPosition[i]], 255);
+                gDPSetPrimColor(gfx++, 0, 0, sVsPlayerColorRed[sVsRacePlayerByOverallPosition[i]],
+                                sVsPlayerColorGreen[sVsRacePlayerByOverallPosition[i]],
+                                sVsPlayerColorBlue[sVsRacePlayerByOverallPosition[i]], 255);
 
                 if (sVsRacePlayerByOverallPosition[i] < gNumPlayers) {
-                    gfx = Font_DrawString(gfx, 0x4D, 80 + i * 25, "Ｐ", 1, FONT_SET_5, 0);
+                    gfx = Font_DrawString(gfx, 77, 80 + i * 25, "Ｐ", 1, FONT_SET_5, 0);
                 } else {
-                    gfx = Font_DrawString(gfx, 0x4D, 80 + i * 25, "Ａ", 1, FONT_SET_5, 0);
+                    gfx = Font_DrawString(gfx, 77, 80 + i * 25, "Ａ", 1, FONT_SET_5, 0);
                 }
 
                 if (sVsRacePlayerByOverallPosition[i] < gNumPlayers) {
@@ -4179,27 +4183,27 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                     Menus_LoadNumberToStr((sVsRacePlayerByOverallPosition[i] - gNumPlayers) + 1);
                 }
 
-                gfx = Font_DrawString(gfx, 0x93, 80 + i * 25, sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
+                gfx = Font_DrawString(gfx, 147, 80 + i * 25, sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
                 Menus_LoadNumberToStr(gVsRacePlayerPoints[sVsRacePlayerByOverallPosition[i]]);
-                gfx = Font_DrawString(gfx, 0xD3 - Font_GetStringWidth(sMenusLoadedNumberStr, FONT_SET_5, 1),
-                                      80 + i * 25, sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
-                gfx = Font_DrawString(gfx, 0xD3, 80 + i * 25, "$", 1, FONT_SET_5, 0);
+                gfx = Font_DrawString(gfx, 211 - Font_GetStringWidth(sMenusLoadedNumberStr, FONT_SET_5, 1), 80 + i * 25,
+                                      sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
+                gfx = Font_DrawString(gfx, 211, 80 + i * 25, "$", 1, FONT_SET_5, 0);
 
                 if (gVsRacePlayerVictoryCount[sVsRacePlayerByOverallPosition[i]] > 0) {
                     gDPPipeSync(gfx++);
                     gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-                    gfx = Font_DrawString(gfx, 0xF0, 80 + i * 25, "v", 1, FONT_SET_5, 0);
+                    gfx = Font_DrawString(gfx, 240, 80 + i * 25, "v", 1, FONT_SET_5, 0);
                     j = gVsRacePlayerVictoryCount[sVsRacePlayerByOverallPosition[i]];
                     if (j > 99) {
                         j = 99;
                     }
                     Menus_LoadNumberToStr(j);
-                    gfx = Font_DrawString(gfx, 0xFE, 80 + i * 25, sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
+                    gfx = Font_DrawString(gfx, 254, 80 + i * 25, sMenusLoadedNumberStr, 1, FONT_SET_5, 0);
                 }
 
-                if (sp58 != 1) {
+                if (totalVsVictories != 1) {
                     for (j = 0; j < gTotalRacers; j++) {
                         if (sVsRacePreviousPlayerByOverallPosition[j] == sVsRacePlayerByOverallPosition[i]) {
                             var_s1 = j;
@@ -4209,41 +4213,41 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
                     if (var_s1 < i) {
                         gDPPipeSync(gfx++);
                         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
-                        gfx = Font_DrawString(gfx, 0x21, 80 + i * 25, "Ｄ", 1, FONT_SET_5, 0);
+                        gfx = Font_DrawString(gfx, 33, 80 + i * 25, "Ｄ", 1, FONT_SET_5, 0);
                     }
 
                     if (var_s1 > i) {
                         gDPPipeSync(gfx++);
                         gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-                        gfx = Font_DrawString(gfx, 0x21, 80 + i * 25, "Ｕ", 1, FONT_SET_5, 0);
+                        gfx = Font_DrawString(gfx, 33, 80 + i * 25, "Ｕ", 1, FONT_SET_5, 0);
                     }
                 }
 
                 if (!sMenuIsBusy) {
                     j = gControllers[gPlayerControlPorts[i]].stickY;
-                    if (sVsRaceResultsMenuOptionIndex == 1) {
+                    if (sVsRaceResultsMenuOptionIndex == VS_RESULTS_QUIT) {
                         if (j > 50) {
-                            sVsRaceResultsMenuOptionIndex = 0;
+                            sVsRaceResultsMenuOptionIndex = VS_RESULTS_COURSE_SELECT;
                             if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
                                 Audio_TriggerSystemSE(NA_SE_30);
                             }
                         }
                         if (gControllers[gPlayerControlPorts[i]].buttonPressed & BTN_UP) {
-                            sVsRaceResultsMenuOptionIndex = 0;
+                            sVsRaceResultsMenuOptionIndex = VS_RESULTS_COURSE_SELECT;
                             if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
                                 Audio_TriggerSystemSE(NA_SE_30);
                             }
                         }
                     }
-                    if (sVsRaceResultsMenuOptionIndex == 0) {
+                    if (sVsRaceResultsMenuOptionIndex == VS_RESULTS_COURSE_SELECT) {
                         if (j < -50) {
-                            sVsRaceResultsMenuOptionIndex = 1;
+                            sVsRaceResultsMenuOptionIndex = VS_RESULTS_QUIT;
                             if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
                                 Audio_TriggerSystemSE(NA_SE_30);
                             }
                         }
                         if (gControllers[gPlayerControlPorts[i]].buttonPressed & BTN_DOWN) {
-                            sVsRaceResultsMenuOptionIndex = 1;
+                            sVsRaceResultsMenuOptionIndex = VS_RESULTS_QUIT;
                             if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
                                 Audio_TriggerSystemSE(NA_SE_30);
                             }
@@ -4277,17 +4281,17 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
 
     if ((sVsResultsTimer == 60060) && !sMenuIsBusy) {
         for (i = 0; i < gTotalRacers; i++) {
-            D_80115DD0[i] = gRacers[i].position;
+            gVsPreviousRacePosition[i] = gRacers[i].position;
         }
 
         if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
             func_8007E08C();
         }
 
-        if (sVsRaceResultsMenuOptionIndex == 0) {
+        if (sVsRaceResultsMenuOptionIndex == VS_RESULTS_COURSE_SELECT) {
             sMenuIsBusy = true;
             sMenuStateFlags |= MENU_STATE_CHANGE_COURSE;
-        } else {
+        } else { // VS_RESULTS_QUIT
             sMenuIsBusy = true;
             sMenuStateFlags |= MENU_STATE_QUIT;
         }
@@ -4299,67 +4303,67 @@ Gfx* func_i3_DrawVsResultsScreen(Gfx* gfx) {
 
 extern s32 gRacePositionPoints[];
 
-Gfx* func_i3_DrawGPResultsScreen(Gfx* gfx, s32 arg1) {
+Gfx* Menus_DrawGpResultsScreen(Gfx* gfx, s32 playerIndex) {
     s32 i;
-    s32 var_a2;
-    s32 temp_ft3;
-    f32 var_fv1;
+    s32 boxScale;
+    s32 scrollTop;
+    f32 manualScrollSpeed;
     s32 pad[2];
 
-    var_a2 = 0;
-    if (sPlayerResultsTimer[arg1] < 30) {
-        var_a2 = (30 - sPlayerResultsTimer[arg1]) * 4;
-    } else if (sPlayerResultsTimer[arg1] > 30030) {
-        var_a2 = (sPlayerResultsTimer[arg1] - 30030) * 4;
+    boxScale = 0;
+    if (sPlayerResultsTimer[playerIndex] < 30) {
+        boxScale = (30 - sPlayerResultsTimer[playerIndex]) * 4;
+    } else if (sPlayerResultsTimer[playerIndex] > 30030) {
+        boxScale = (sPlayerResultsTimer[playerIndex] - 30030) * 4;
     }
 
-    gfx = Menus_DrawResultsBox(gfx, var_a2);
+    gfx = Menus_DrawResultsBox(gfx, boxScale);
 
-    if ((sPlayerResultsTimer[arg1] > 30) && (sPlayerResultsTimer[arg1] < 30030)) {
+    if ((sPlayerResultsTimer[playerIndex] > 30) && (sPlayerResultsTimer[playerIndex] < 30030)) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx = Font_DrawString(gfx, 0xA2 - (Font_GetStringWidth("results", FONT_SET_3, 1) / 2), 0x34, "results", 1,
+        gfx = Font_DrawString(gfx, 162 - (Font_GetStringWidth("results", FONT_SET_3, 1) / 2), 52, "results", 1,
                               FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-        gfx = Font_DrawString(gfx, 0xA0 - (Font_GetStringWidth("results", FONT_SET_3, 1) / 2), 0x32, "results", 1,
+        gfx = Font_DrawString(gfx, 160 - (Font_GetStringWidth("results", FONT_SET_3, 1) / 2), 50, "results", 1,
                               FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 30, 55, 290, 204);
 
         for (i = 0; i < gTotalRacers; i++) {
-            temp_ft3 = (58 + i * 25) - sGpResultsRankingScrollPosition;
-            if (temp_ft3 > 20 && temp_ft3 < 220) {
+            scrollTop = (58 + i * 25) - sGpResultsRankingScrollPosition;
+            if (scrollTop > 20 && scrollTop < 220) {
                 if (gGameMode == GAMEMODE_GP_RACE) {
                     gfx = Menus_DrawResultsRankingCharacterPortrait(
-                        gfx, gRacersByPosition[i]->id, gRacersByPosition[i]->character, 0x2D,
+                        gfx, gRacersByPosition[i]->id, gRacersByPosition[i]->character, 45,
                         (s32) ((55 + i * 25) - sGpResultsRankingScrollPosition), 0.75f);
-                    gfx = Menus_DrawPositionNumber(gfx, gRacersByPosition[i]->id, i + 1, 0x2C,
+                    gfx = Menus_DrawPositionNumber(gfx, gRacersByPosition[i]->id, i + 1, 44,
                                                    (s32) ((64 + i * 25) - sGpResultsRankingScrollPosition));
                     gfx = Menus_DrawResultsCharacterName(gfx, gRacersByPosition[i]->id, gRacersByPosition[i]->character,
-                                                         0x49, (s32) ((70 + i * 25) - sGpResultsRankingScrollPosition));
-                    gfx = Menus_DrawPlusPoints(gfx, gRacersByPosition[i]->id, 0xD8,
+                                                         73, (s32) ((70 + i * 25) - sGpResultsRankingScrollPosition));
+                    gfx = Menus_DrawPlusPoints(gfx, gRacersByPosition[i]->id, 216,
                                                (s32) ((70 + i * 25) - sGpResultsRankingScrollPosition));
                     if (gRacersByPosition[i]->raceTime != 0) {
-                        gfx = Menus_DrawPositionNumber(gfx, gRacersByPosition[i]->id, gRacePositionPoints[i], 0xC7,
+                        gfx = Menus_DrawPositionNumber(gfx, gRacersByPosition[i]->id, gRacePositionPoints[i], 199,
                                                        (s32) ((70 + i * 25) - sGpResultsRankingScrollPosition));
                     } else {
-                        gfx = Menus_DrawPositionNumber(gfx, gRacersByPosition[i]->id, 0, 0xC7,
+                        gfx = Menus_DrawPositionNumber(gfx, gRacersByPosition[i]->id, 0, 199,
                                                        (s32) ((70 + i * 25) - sGpResultsRankingScrollPosition));
-                        gfx = Menus_DrawResultsRetireStatus(gfx, gRacersByPosition[i]->id, 0xDC,
+                        gfx = Menus_DrawResultsRetireStatus(gfx, gRacersByPosition[i]->id, 220,
                                                             (s32) ((70 + i * 25) - sGpResultsRankingScrollPosition));
                     }
                 } else {
                     gfx = Menus_DrawResultsRankingCharacterPortrait(
-                        gfx, gRacersByPosition[i]->id, (s32) gRacersByPosition[i]->character, 0x39,
+                        gfx, gRacersByPosition[i]->id, (s32) gRacersByPosition[i]->character, 57,
                         (s32) ((55 + i * 25) - sGpResultsRankingScrollPosition), 0.75f);
-                    gfx = Menus_DrawPositionNumber(gfx, gRacersByPosition[i]->id, i + 1, 0x38,
+                    gfx = Menus_DrawPositionNumber(gfx, gRacersByPosition[i]->id, i + 1, 56,
                                                    (s32) ((64 + i * 25) - sGpResultsRankingScrollPosition));
                     gfx = Menus_DrawResultsCharacterName(gfx, gRacersByPosition[i]->id,
-                                                         (s32) gRacersByPosition[i]->character, 0x55,
+                                                         (s32) gRacersByPosition[i]->character, 85,
                                                          (s32) ((70 + i * 25) - sGpResultsRankingScrollPosition));
                     if (gRacersByPosition[i]->raceTime == 0) {
-                        gfx = Menus_DrawResultsRetireStatus(gfx, gRacersByPosition[i]->id, 0xBE,
+                        gfx = Menus_DrawResultsRetireStatus(gfx, gRacersByPosition[i]->id, 190,
                                                             (s32) ((70 + i * 25) - sGpResultsRankingScrollPosition));
                     }
                 }
@@ -4373,8 +4377,8 @@ Gfx* func_i3_DrawGPResultsScreen(Gfx* gfx, s32 arg1) {
         for (i = 0; i < gTotalRacers; i++) {
 
             if (gRacersByPosition[i]->raceTime != 0) {
-                temp_ft3 = (58 + i * 25) - sGpResultsRankingScrollPosition;
-                if ((temp_ft3 > 20) && (temp_ft3 < 220)) {
+                scrollTop = (58 + i * 25) - sGpResultsRankingScrollPosition;
+                if ((scrollTop > 20) && (scrollTop < 220)) {
                     gDPPipeSync(gfx++);
                     if (gRacersByPosition[i]->id == 0) {
                         gfx = func_8007F090(gfx, 255, 0, 0);
@@ -4384,26 +4388,26 @@ Gfx* func_i3_DrawGPResultsScreen(Gfx* gfx, s32 arg1) {
                     }
                     if (gGameMode == GAMEMODE_GP_RACE) {
                         gfx =
-                            Hud_DrawTimerScisThousandths(gfx, gRacersByPosition[i]->raceTime, 0xD5,
+                            Hud_DrawTimerScisThousandths(gfx, gRacersByPosition[i]->raceTime, 213,
                                                          (s32) ((58 + i * 25) - sGpResultsRankingScrollPosition), 1.0f);
                     } else {
                         gfx =
-                            Hud_DrawTimerScisThousandths(gfx, gRacersByPosition[i]->raceTime, 0xB9,
+                            Hud_DrawTimerScisThousandths(gfx, gRacersByPosition[i]->raceTime, 185,
                                                          (s32) ((58 + i * 25) - sGpResultsRankingScrollPosition), 1.0f);
                     }
                 }
             }
         }
     }
-    var_fv1 = gControllers[gPlayerControlPorts[0]].stickY * -1.0f;
-    if ((var_fv1 > 0.0f) && (var_fv1 < 14.0f)) {
-        var_fv1 = 0.0f;
+    manualScrollSpeed = gControllers[gPlayerControlPorts[0]].stickY * -1.0f;
+    if ((manualScrollSpeed > 0.0f) && (manualScrollSpeed < 14.0f)) {
+        manualScrollSpeed = 0.0f;
     }
-    if ((var_fv1 < 0.0f) && (var_fv1 > -14.0f)) {
-        var_fv1 = 0.0f;
+    if ((manualScrollSpeed < 0.0f) && (manualScrollSpeed > -14.0f)) {
+        manualScrollSpeed = 0.0f;
     }
-    var_fv1 *= 0.075f;
-    sGpResultsRankingScrollPosition += var_fv1;
+    manualScrollSpeed *= 0.075f;
+    sGpResultsRankingScrollPosition += manualScrollSpeed;
     if (sGpResultsRankingScrollPosition < 0.0f) {
         sGpResultsRankingScrollPosition = 0.0f;
     }
@@ -4413,60 +4417,59 @@ Gfx* func_i3_DrawGPResultsScreen(Gfx* gfx, s32 arg1) {
     }
     if ((sGpResultsRankingScrollPosition != (gTotalRacers - 6) * 25.0f) && (sGpResultsRankingScrollPosition != 0.0f)) {
         if ((s32) (sGpResultsRankingScrollPosition * 0.06f) !=
-            ((s32) ((sGpResultsRankingScrollPosition - var_fv1) * 0.06f))) {
+            ((s32) ((sGpResultsRankingScrollPosition - manualScrollSpeed) * 0.06f))) {
             Audio_TriggerSystemSE(NA_SE_63);
         }
     }
 
-    sPlayerResultsTimer[arg1]++;
-    if ((sPlayerResultsTimer[arg1] < 30030) &&
+    sPlayerResultsTimer[playerIndex]++;
+    if ((sPlayerResultsTimer[playerIndex] < 30030) &&
         (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START))) {
-        sPlayerResultsTimer[arg1] = 30030;
+        sPlayerResultsTimer[playerIndex] = 30030;
     }
-    if (sPlayerResultsTimer[arg1] >= 30060) {
-        sPlayerResultsTimer[arg1] = 0;
+    if (sPlayerResultsTimer[playerIndex] >= 30060) {
+        sPlayerResultsTimer[playerIndex] = 0;
         if (gGameMode == GAMEMODE_GP_RACE) {
-            sGpRaceResultsState = 2;
+            sGpRaceResultsState = GP_RESULTS_TOTAL_RANKING;
         } else {
-            sGpRaceResultsState = 3;
+            sGpRaceResultsState = GP_RESULTS_END_MENU;
             sGpResultsEndMenuScissorBoxTimer = 60;
         }
     }
     return gfx;
 }
 
-void Save_UpdateCupCompletion(s32, s32, s32);
 extern s32 gCupType;
 extern s16 gPlayer1OverallPosition;
 extern s16 gRacerPositionsById[];
 
-Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
+Gfx* Menus_DrawGpResultsTotalRanking(Gfx* gfx, s32 playerIndex) {
     s32 i;
     s32 j;
-    s32 var_a2;
-    s32 temp_ft2;
+    s32 boxScale;
+    s32 scrollTop;
     s32 var_s0;
     s32 temp_a2;
-    f32 var_fv0;
+    f32 manualScrollSpeed;
     s32 pad;
 
-    var_a2 = 0;
+    boxScale = 0;
     if (sPlayerResultsTimer[playerIndex] < 30) {
-        var_a2 = (30 - sPlayerResultsTimer[playerIndex]) * 4;
+        boxScale = (30 - sPlayerResultsTimer[playerIndex]) * 4;
     } else if (sPlayerResultsTimer[playerIndex] > 40030) {
-        var_a2 = (sPlayerResultsTimer[playerIndex] - 40030) * 4;
+        boxScale = (sPlayerResultsTimer[playerIndex] - 40030) * 4;
     }
-    gfx = Menus_DrawResultsBox(gfx, var_a2);
+    gfx = Menus_DrawResultsBox(gfx, boxScale);
 
     if ((sPlayerResultsTimer[playerIndex] > 30) && (sPlayerResultsTimer[playerIndex] < 40030)) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gfx = Font_DrawString(gfx, 0xA2 - (Font_GetStringWidth("total ranking", FONT_SET_3, 1) / 2), 0x34,
-                              "total ranking", 1, FONT_SET_3, 0);
+        gfx = Font_DrawString(gfx, 162 - (Font_GetStringWidth("total ranking", FONT_SET_3, 1) / 2), 52, "total ranking",
+                              1, FONT_SET_3, 0);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-        gfx = Font_DrawString(gfx, 0xA0 - (Font_GetStringWidth("total ranking", FONT_SET_3, 1) / 2), 0x32,
-                              "total ranking", 1, FONT_SET_3, 0);
+        gfx = Font_DrawString(gfx, 160 - (Font_GetStringWidth("total ranking", FONT_SET_3, 1) / 2), 50, "total ranking",
+                              1, FONT_SET_3, 0);
 
         for (i = 0; i < gTotalRacers; i++) {
             gRacerIdsByPosition[i] = i;
@@ -4511,43 +4514,43 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
         }
 
         for (i = 0; i < gTotalRacers; i++) {
-            temp_ft2 = (i * 25) - sTotalRankingsForcedScrollPosition - sTotalRankingsManualScrollPosition;
-            if ((temp_ft2 > 10) && (temp_ft2 < 220)) {
+            scrollTop = (i * 25) - sTotalRankingsForcedScrollPosition - sTotalRankingsManualScrollPosition;
+            if ((scrollTop > 10) && (scrollTop < 220)) {
                 if (gCourseIndex % 6) {
                     // Change In Positions
                     if (gRacerPositionsById[gRacerIdsByPosition[i]] < i + 1) {
                         gDPPipeSync(gfx++);
                         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
-                        gfx = Font_DrawString(gfx, 0x2F, temp_ft2 + 0x13, "Ｄ", 1, FONT_SET_5, 0);
+                        gfx = Font_DrawString(gfx, 47, scrollTop + 19, "Ｄ", 1, FONT_SET_5, 0);
                         var_s0 = 61;
                         if ((i - gRacerPositionsById[gRacerIdsByPosition[i]]) + 1 < 10) {
                             var_s0 = 58;
                         }
                         gfx = Menus_DrawPositionNumber(gfx, 1, (i - gRacerPositionsById[gRacerIdsByPosition[i]]) + 1,
-                                                       var_s0, temp_ft2 + 0x10);
+                                                       var_s0, scrollTop + 16);
                     }
                     if (gRacerPositionsById[gRacerIdsByPosition[i]] > i + 1) {
                         gDPPipeSync(gfx++);
                         gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-                        gfx = Font_DrawString(gfx, 0x2F, temp_ft2 + 0x16, "Ｕ", 1, FONT_SET_5, 0);
+                        gfx = Font_DrawString(gfx, 47, scrollTop + 22, "Ｕ", 1, FONT_SET_5, 0);
                         var_s0 = 61;
                         if ((i - gRacerPositionsById[gRacerIdsByPosition[i]]) + 1 > -10) {
                             var_s0 = 58;
                         }
                         gfx = Menus_DrawPositionNumber(gfx, 1, (gRacerPositionsById[gRacerIdsByPosition[i]] - i) - 1,
-                                                       var_s0, temp_ft2 + 0x13);
+                                                       var_s0, scrollTop + 19);
                     }
                 }
 
                 gfx = Menus_DrawResultsRankingCharacterPortrait(gfx, gRacers[gRacerIdsByPosition[i]].id,
-                                                                gRacers[gRacerIdsByPosition[i]].character, 0x51,
-                                                                temp_ft2, 0.75f);
-                gfx = Menus_DrawPositionNumber(gfx, gRacers[gRacerIdsByPosition[i]].id, i + 1, 0x51, temp_ft2 + 9);
+                                                                gRacers[gRacerIdsByPosition[i]].character, 81,
+                                                                scrollTop, 0.75f);
+                gfx = Menus_DrawPositionNumber(gfx, gRacers[gRacerIdsByPosition[i]].id, i + 1, 81, scrollTop + 9);
                 gfx = Menus_DrawResultsCharacterName(gfx, gRacers[gRacerIdsByPosition[i]].id,
-                                                     gRacers[gRacerIdsByPosition[i]].character, 0x6D, temp_ft2 + 0xF);
-                gfx = Menus_DrawPoints(gfx, gRacers[gRacerIdsByPosition[i]].id, 0x103, temp_ft2 + 0xF);
+                                                     gRacers[gRacerIdsByPosition[i]].character, 109, scrollTop + 15);
+                gfx = Menus_DrawPoints(gfx, gRacers[gRacerIdsByPosition[i]].id, 259, scrollTop + 15);
                 gfx = Menus_DrawPositionNumber(gfx, gRacers[gRacerIdsByPosition[i]].id,
-                                               gRacers[gRacerIdsByPosition[i]].points, 0xF3, temp_ft2 + 0xF);
+                                               gRacers[gRacerIdsByPosition[i]].points, 243, scrollTop + 15);
             }
 
             if (gRacerIdsByPosition[i] == 0) {
@@ -4573,15 +4576,15 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
         if (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) {
             sPlayerResultsTimer[playerIndex] = 40030;
         }
-        var_fv0 = gControllers[gPlayerControlPorts[0]].stickY * -1.0f;
-        if ((var_fv0 > 0.0f) && (var_fv0 < 14.0f)) {
-            var_fv0 = 0.0f;
+        manualScrollSpeed = gControllers[gPlayerControlPorts[0]].stickY * -1.0f;
+        if ((manualScrollSpeed > 0.0f) && (manualScrollSpeed < 14.0f)) {
+            manualScrollSpeed = 0.0f;
         }
-        if ((var_fv0 < 0.0f) && (var_fv0 > -14.0f)) {
-            var_fv0 = 0.0f;
+        if ((manualScrollSpeed < 0.0f) && (manualScrollSpeed > -14.0f)) {
+            manualScrollSpeed = 0.0f;
         }
-        var_fv0 *= 0.075f;
-        sTotalRankingsManualScrollPosition += var_fv0;
+        manualScrollSpeed *= 0.075f;
+        sTotalRankingsManualScrollPosition += manualScrollSpeed;
         if (sTotalRankingsManualScrollPosition < 0.0f) {
             sTotalRankingsManualScrollPosition = 0.0f;
         }
@@ -4592,12 +4595,12 @@ Gfx* func_i3_8012C4D8(Gfx* gfx, s32 playerIndex) {
         if ((sTotalRankingsManualScrollPosition != 0.0f) &&
             (sTotalRankingsManualScrollPosition != ((gTotalRacers - 6) * 25.0f + 7.0f)) &&
             (s32) (sTotalRankingsManualScrollPosition * 0.06f) !=
-                (s32) ((sTotalRankingsManualScrollPosition - var_fv0) * 0.06f)) {
+                (s32) ((sTotalRankingsManualScrollPosition - manualScrollSpeed) * 0.06f)) {
             Audio_TriggerSystemSE(NA_SE_63);
         }
     }
     if (sPlayerResultsTimer[playerIndex] >= 40060) {
-        sGpRaceResultsState = 5;
+        sGpRaceResultsState = GP_RESULTS_TO_NEXT_COURSE;
 
         for (i = 0; i < gTotalRacers; i++) {
             for (j = 0; j < gTotalRacers; j++) {
@@ -4616,11 +4619,11 @@ extern s32 gCurrentGhostType;
 Gfx* Menus_Player1SpecialDraw(Gfx* gfx, s32 playerIndex) {
     s32 i;
 
-    if (gCameras[playerIndex].mode == 10) {
+    if (gCameras[playerIndex].mode == CAMERA_MODE_FINISHED_LOSER) {
         if ((gGameMode != GAMEMODE_TIME_ATTACK) ||
             ((gGameMode == GAMEMODE_TIME_ATTACK) && (gCurrentGhostType < GHOST_STAFF))) {
-            if (sPlayerFinishInitialized[playerIndex] == 0) {
-                sPlayerFinishInitialized[playerIndex] = 1;
+            if (!sPlayerFinishInitialized[playerIndex]) {
+                sPlayerFinishInitialized[playerIndex] = true;
                 Menus_InitFinish(playerIndex);
             }
 
@@ -4629,25 +4632,25 @@ Gfx* Menus_Player1SpecialDraw(Gfx* gfx, s32 playerIndex) {
             }
         } else {
             if ((sPlayerLoserFinishTimer[playerIndex] < 300) &&
-                ((gGameFrameCount & 4) || (sPlayerLoserFinishTimer[playerIndex] >= 0x3D))) {
+                ((gGameFrameCount & 4) || (sPlayerLoserFinishTimer[playerIndex] > 60))) {
                 gRacers[0].awarenessFlags |= 0x1000;
                 gfx = Menus_DrawPlayerLoser(gfx, 0);
             }
             if (sPlayerLoserFinishTimer[playerIndex] == 120) {
                 if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
-                    func_800BAFA4(0x10);
+                    func_800BAFA4(BGM_21);
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
                     if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
                         (gRacers[playerIndex].stateFlags & RACER_STATE_FINISHED)) {
-                        Audio_PlayerLevelSEStop(i, 3);
-                        Audio_PlayerLevelSEStop(i, 4);
-                        Audio_PlayerLevelSEStop(i, 5);
-                        Audio_PlayerLevelSEStop(i, 8);
-                        Audio_PlayerLevelSEStop(i, 9);
-                        Audio_PlayerLevelSEStop(i, 10);
-                        Audio_PlayerLevelSEStop(i, 11);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_3);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_4);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_5);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_8);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_9);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_10);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_11);
                     }
                 }
             }
@@ -4657,11 +4660,11 @@ Gfx* Menus_Player1SpecialDraw(Gfx* gfx, s32 playerIndex) {
             }
         }
         sPlayerLoserFinishTimer[playerIndex]++;
-    } else if (sPlayerFinishState[playerIndex] == 1) {
+    } else if (sPlayerFinishState[playerIndex] == PLAYER_FINISH_CAMERA_SUCCESS) {
         if ((gGameMode != GAMEMODE_TIME_ATTACK) ||
             ((gGameMode == GAMEMODE_TIME_ATTACK) && (gCurrentGhostType < GHOST_STAFF))) {
-            if (sPlayerFinishInitialized[playerIndex] == 0) {
-                sPlayerFinishInitialized[playerIndex] = 1;
+            if (!sPlayerFinishInitialized[playerIndex]) {
+                sPlayerFinishInitialized[playerIndex] = true;
                 Menus_InitFinish(playerIndex);
             }
             gfx = Menus_DrawFinish(gfx, playerIndex);
@@ -4672,19 +4675,19 @@ Gfx* Menus_Player1SpecialDraw(Gfx* gfx, s32 playerIndex) {
             }
             if (sPlayerWinnerLoserFinishGameoverTimer[playerIndex] == 30) {
                 if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
-                    func_800BAFA4(0x11);
+                    func_800BAFA4(BGM_22);
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
                     if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
                         (gRacers[playerIndex].stateFlags & RACER_STATE_FINISHED)) {
-                        Audio_PlayerLevelSEStop(i, 3);
-                        Audio_PlayerLevelSEStop(i, 4);
-                        Audio_PlayerLevelSEStop(i, 5);
-                        Audio_PlayerLevelSEStop(i, 8);
-                        Audio_PlayerLevelSEStop(i, 9);
-                        Audio_PlayerLevelSEStop(i, 10);
-                        Audio_PlayerLevelSEStop(i, 11);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_3);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_4);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_5);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_8);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_9);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_10);
+                        Audio_PlayerLevelSEStop(i, NA_LEVEL_SE_11);
                     }
                 }
             }
@@ -4694,7 +4697,7 @@ Gfx* Menus_Player1SpecialDraw(Gfx* gfx, s32 playerIndex) {
             }
         }
     } else {
-        sPlayerFinishInitialized[playerIndex] = 0;
+        sPlayerFinishInitialized[playerIndex] = false;
     }
     return gfx;
 }
@@ -4703,7 +4706,7 @@ extern s32 gTotalLapCount;
 extern char* gCurrentTrackName;
 extern s16 D_800E5FBC;
 extern s16 gRacersRetired;
-extern s16 D_800F5DE6;
+extern s16 gUnableToRecordGhost;
 extern s32 gRaceIntroTimer;
 extern s32 gPlayerReverseTimer[];
 extern s32 gSettingVsSlot;
@@ -4714,8 +4717,8 @@ Gfx* Menus_Draw(Gfx* gfx) {
     s32 j;
     Racer* racer;
     s32 pad[4];
-    f32 temp_ft5;
-    f32 var_fa0;
+    f32 averageSpeed;
+    f32 intervalTime;
     s32 playerIndex = 0;
 
     gRacersRemaining = gTotalRacers - gRacersRetired;
@@ -4746,32 +4749,32 @@ Gfx* Menus_Draw(Gfx* gfx) {
             }
 
             if (sFinishedSuccessTime < sPlayerFinishTimer[i]) {
-                sPlayerFinishState[i] = 2;
+                sPlayerFinishState[i] = PLAYER_FINISH_SUCCESS_COMPLETE;
             } else {
-                sPlayerFinishState[i] = 1;
+                sPlayerFinishState[i] = PLAYER_FINISH_CAMERA_SUCCESS;
             }
         }
         if ((gNumPlayers >= 2) && (D_800E5FBC == 1)) {
-            sPlayerFinishState[i] = 2;
+            sPlayerFinishState[i] = PLAYER_FINISH_SUCCESS_COMPLETE;
         }
     }
 
     gDPPipeSync(gfx++);
-    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, 320, 240);
+    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    if (D_80141D6C == 0) {
+    if (!D_80141D6C) {
         if (gNumPlayers == 3) {
-            gfx = Menus_DrawBeveledBox(gfx, 0xA0, 0x78, 0x131, 0xE8, 0, 0, 0, 0xFF);
+            gfx = Menus_DrawBeveledBox(gfx, 160, 120, 305, 232, 0, 0, 0, 255);
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 0, 0, 250, 255);
             gfx = Font_DrawScaledString(gfx,
                                         (234.0f - ((Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 1) * 0.7f) / 2)),
-                                        0x94, gCurrentTrackName, 1, FONT_SET_3, 0, 0.7f, 0.7f);
+                                        148, gCurrentTrackName, 1, FONT_SET_3, 0, 0.7f, 0.7f);
             gDPPipeSync(gfx++);
             gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
             gfx = Font_DrawScaledString(gfx,
                                         (232.0f - ((Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 1) * 0.7f) / 2)),
-                                        0x92, gCurrentTrackName, 1, FONT_SET_3, 0, 0.7f, 0.7f);
+                                        146, gCurrentTrackName, 1, FONT_SET_3, 0, 0.7f, 0.7f);
         }
 
         gDPPipeSync(gfx++);
@@ -4782,29 +4785,31 @@ Gfx* Menus_Draw(Gfx* gfx) {
         }
 
         if ((gNumPlayers != 1) || (gGameMode != GAMEMODE_GP_RACE) || (sPlayer1Lives > 0) ||
-            (sPlayerGameoverState[0] < 2)) {
-            if (((gNumPlayers != 1) || (sPlayerFinishState[0] != 2)) &&
-                ((gNumPlayers != 1) || (gCameras[playerIndex].mode != 10) || (sPlayerLoserFinishTimer[0] < 300))) {
-                gfx = func_i3_DrawHUD(gfx);
+            (sPlayerGameoverState[0] < PLAYER_GAMEOVER_DISPLAY)) {
+            if (!((gNumPlayers == 1) && (sPlayerFinishState[0] == PLAYER_FINISH_SUCCESS_COMPLETE)) &&
+                !((gNumPlayers == 1) && (gCameras[playerIndex].mode == CAMERA_MODE_FINISHED_LOSER) &&
+                  (sPlayerLoserFinishTimer[0] >= 300))) {
+                gfx = Hud_DrawHud(gfx);
             }
             for (i = 0; i < gNumPlayers; i++) {
-                if ((gNumPlayers != 1) || ((sPlayerFinishState[i] != 2) && ((gCameras[playerIndex].mode != 10) ||
-                                                                            (sPlayerLoserFinishTimer[0] < 300)))) {
+                if (!((gNumPlayers == 1) && ((sPlayerFinishState[i] == PLAYER_FINISH_SUCCESS_COMPLETE) ||
+                                             ((gCameras[playerIndex].mode == CAMERA_MODE_FINISHED_LOSER) &&
+                                              (sPlayerLoserFinishTimer[0] >= 300))))) {
                     if (gNumPlayers == 1) {
-                        gfx = func_i3_DrawRacePortraits(gfx);
+                        gfx = Hud_DrawRacePortraits(gfx);
                     }
-                    if ((gGameMode != GAMEMODE_DEATH_RACE) && (sPlayerGameoverState[i] == 0) &&
+                    if ((gGameMode != GAMEMODE_DEATH_RACE) && (sPlayerGameoverState[i] == PLAYER_GAMEOVER_NONE) &&
                         !(gRacers[i].stateFlags & RACER_STATE_FINISHED)) {
-                        gfx = func_i3_DrawCourseMinimap(gfx, gNumPlayers - 1, i);
+                        gfx = Minimap_DrawCourseMinimap(gfx, gNumPlayers - 1, i);
                     }
                     if (gNumPlayers == 3) {
-                        gfx = func_i3_DrawCourseMinimap(gfx, gNumPlayers - 1, 3);
+                        gfx = Minimap_DrawCourseMinimap(gfx, gNumPlayers - 1, 3);
                     }
-                    gfx = func_i3_DrawPosition(gfx, gNumPlayers - 1, i);
+                    gfx = Hud_DrawPosition(gfx, gNumPlayers - 1, i);
                 }
-                if (((gNumPlayers != 1) || (sPlayerGameoverState[i] == 0)) &&
+                if (((gNumPlayers != 1) || (sPlayerGameoverState[i] == PLAYER_GAMEOVER_NONE)) &&
                     !(gRacers[i].stateFlags & RACER_STATE_FINISHED)) {
-                    gfx = func_i3_DrawPlayerSpeed(gfx, gNumPlayers - 1, i);
+                    gfx = Hud_DrawPlayerSpeed(gfx, gNumPlayers - 1, i);
                 }
             }
         }
@@ -4816,7 +4821,7 @@ Gfx* Menus_Draw(Gfx* gfx) {
             }
         }
 
-        if (gTitleDemoState != 0) {
+        if (gTitleDemoState != TITLE_DEMO_INACTIVE) {
             j = 0;
             for (i = 0; i < gNumPlayers; i++) {
                 if (gRacers[i].stateFlags & RACER_STATE_CRASHED) {
@@ -4825,38 +4830,39 @@ Gfx* Menus_Draw(Gfx* gfx) {
             }
 
             if (((gNumPlayers == j) || (D_800E5FBC == 1)) && (gTitleDemoState == TITLE_DEMO_ACTIVE)) {
-                gTitleDemoState = 3;
+                gTitleDemoState = TITLE_DEMO_START_EXIT;
             }
         }
     }
     if (gNumPlayers == 1) {
-        if (((gCameras[playerIndex].mode == 4) || (gCameras[playerIndex].mode == 6)) &&
-            (sPlayerGameoverState[0] == 0)) {
-            temp_ft5 = gRacers[playerIndex].raceDistance / gRacers[playerIndex].raceTime;
+        if (((gCameras[playerIndex].mode == CAMERA_MODE_RACE_INTRO) ||
+             (gCameras[playerIndex].mode == CAMERA_MODE_RACE)) &&
+            (sPlayerGameoverState[0] == PLAYER_GAMEOVER_NONE)) {
+            averageSpeed = gRacers[playerIndex].raceDistance / gRacers[playerIndex].raceTime;
             if (gGameMode == GAMEMODE_GP_RACE) {
                 if (gRaceTimeIntervalToggle) {
-                    if ((temp_ft5 > 0.1f) && (gRacersRemaining >= 2)) {
+                    if ((averageSpeed > 0.1f) && (gRacersRemaining >= 2)) {
                         if (gRacers[playerIndex].position != 1) {
-                            var_fa0 =
-                                ((gRacersByPosition[0]->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) *
-                                0.8892f;
+                            intervalTime = ((gRacersByPosition[0]->raceDistance - gRacers[playerIndex].raceDistance) /
+                                            averageSpeed) *
+                                           0.8892f;
                         } else {
-                            var_fa0 =
-                                ((gRacersByPosition[1]->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) *
-                                0.8892f;
+                            intervalTime = ((gRacersByPosition[1]->raceDistance - gRacers[playerIndex].raceDistance) /
+                                            averageSpeed) *
+                                           0.8892f;
                         }
                         if (gRacersByPosition[0]->stateFlags & RACER_STATE_FINISHED) {
-                            var_fa0 = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].raceDistance) *
-                                       gCurrentCourseInfo->length * gTotalLapCount) -
-                                      gRacersByPosition[0]->raceTime;
+                            intervalTime = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].raceDistance) *
+                                            gCurrentCourseInfo->length * gTotalLapCount) -
+                                           gRacersByPosition[0]->raceTime;
                         }
-                        if ((var_fa0 < 30000.0f) && (var_fa0 > -30000.0f) && (gPlayerReverseTimer[0] < 10)) {
-                            gfx = Menus_DrawRaceTimeInterval(gfx, var_fa0, 0xDE, 0x36);
+                        if ((intervalTime < 30000.0f) && (intervalTime > -30000.0f) && (gPlayerReverseTimer[0] < 10)) {
+                            gfx = Menus_DrawRaceTimeInterval(gfx, intervalTime, 222, 54);
                         } else {
-                            gfx = Menus_DrawBlankTimeHundredths(gfx, 0xDE, 0x36);
+                            gfx = Menus_DrawBlankTimeHundredths(gfx, 222, 54);
                         }
                     } else {
-                        gfx = Menus_DrawBlankTimeHundredths(gfx, 0xDE, 0x36);
+                        gfx = Menus_DrawBlankTimeHundredths(gfx, 222, 54);
                     }
                 }
                 if ((gTitleDemoState == TITLE_DEMO_INACTIVE) &&
@@ -4880,23 +4886,23 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 sFastestGhostRacerRacer->raceDistance =
                     sFastestGhostRacerRacer->lapDistance + sFastestGhostRacerLapsCompletedDistance;
                 if (gRaceTimeIntervalToggle) {
-                    if (temp_ft5 > 0.1f) {
-                        var_fa0 =
-                            ((sFastestGhostRacerRacer->raceDistance - gRacers[playerIndex].raceDistance) / temp_ft5) *
-                            0.8892f;
+                    if (averageSpeed > 0.1f) {
+                        intervalTime = ((sFastestGhostRacerRacer->raceDistance - gRacers[playerIndex].raceDistance) /
+                                        averageSpeed) *
+                                       0.8892f;
                         if ((gCurrentCourseInfo->length * (gTotalLapCount - 0.01f)) <=
                             sFastestGhostRacerRacer->raceDistance) {
-                            var_fa0 = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].raceDistance) *
-                                       gCurrentCourseInfo->length * gTotalLapCount) -
-                                      gFastestGhostTime;
+                            intervalTime = ((gRacers[playerIndex].raceTime / gRacers[playerIndex].raceDistance) *
+                                            gCurrentCourseInfo->length * gTotalLapCount) -
+                                           gFastestGhostTime;
                         }
-                        if ((var_fa0 < 30000.0f) && (var_fa0 > -30000.0f) && (gPlayerReverseTimer[0] < 0xA)) {
-                            gfx = Menus_DrawRaceTimeInterval(gfx, var_fa0, 0xDE, 0x36);
+                        if ((intervalTime < 30000.0f) && (intervalTime > -30000.0f) && (gPlayerReverseTimer[0] < 0xA)) {
+                            gfx = Menus_DrawRaceTimeInterval(gfx, intervalTime, 222, 54);
                         } else {
-                            gfx = Menus_DrawBlankTimeHundredths(gfx, 0xDE, 0x36);
+                            gfx = Menus_DrawBlankTimeHundredths(gfx, 222, 54);
                         }
                     } else {
-                        gfx = Menus_DrawBlankTimeHundredths(gfx, 0xDE, 0x36);
+                        gfx = Menus_DrawBlankTimeHundredths(gfx, 222, 54);
                     }
                 }
                 sFastestGhostRacerLapDistance = sFastestGhostRacerRacer->lapDistance;
@@ -4910,8 +4916,8 @@ Gfx* Menus_Draw(Gfx* gfx) {
             }
         }
 
-        if ((gGameMode == GAMEMODE_TIME_ATTACK) && !gGamePaused && (D_800F5DE6 != 0) &&
-            (gCameras[playerIndex].mode == 6) && (sPlayerGameoverState[0] == 0)) {
+        if ((gGameMode == GAMEMODE_TIME_ATTACK) && !gGamePaused && gUnableToRecordGhost &&
+            (gCameras[playerIndex].mode == CAMERA_MODE_RACE) && (sPlayerGameoverState[0] == PLAYER_GAMEOVER_NONE)) {
             gfx = Menus_DrawCannotSaveGhost(gfx);
         }
         if (gGameMode != GAMEMODE_PRACTICE) {
@@ -4932,7 +4938,7 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 sPlayerBoosterOkTimer[playerIndex]++;
             }
         }
-        if (!gGamePaused && (gCameras[playerIndex].mode == 4)) {
+        if (!gGamePaused && (gCameras[playerIndex].mode == CAMERA_MODE_RACE_INTRO)) {
             gDPPipeSync(gfx++);
             gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 16, 308, 224);
             sMenuRaceIntroTimer++;
@@ -4977,8 +4983,8 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 }
             }
         }
-        if ((sPlayerFinishState[0] == 2) ||
-            ((gCameras[playerIndex].mode == 10) && (sPlayerLoserFinishTimer[0] > 300))) {
+        if ((sPlayerFinishState[0] == PLAYER_FINISH_SUCCESS_COMPLETE) ||
+            ((gCameras[playerIndex].mode == CAMERA_MODE_FINISHED_LOSER) && (sPlayerLoserFinishTimer[0] > 300))) {
             if (!D_i3_80141B78[playerIndex]) {
                 D_i3_80141B78[playerIndex] = true;
                 if (gGameMode != GAMEMODE_TIME_ATTACK) {
@@ -4986,11 +4992,11 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 }
             }
             if (gGameMode == GAMEMODE_TIME_ATTACK) {
-                if (sTimeAttackResultsTimer < 0x190) {
+                if (sTimeAttackResultsTimer < 400) {
                     gfx = Menu_DrawTimeAttackResultsTimes(gfx);
                     gfx = Menus_DrawMaxSpeed(gfx, 0);
                 }
-                gfx = Menus_DrawCourseName(gfx, 160, 0x26, 0);
+                gfx = Menus_DrawCourseName(gfx, 160, 38, 0);
                 if ((sPlayerResultsTimer[playerIndex] > 100) &&
                     (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START)) &&
                     (sTimeAttackResultsTimer == 0)) {
@@ -5000,17 +5006,17 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 if (sTimeAttackResultsTimer != 0) {
                     sTimeAttackResultsTimer += 8;
                 }
-                if ((sTimeAttackResultsTimer >= 0x188) && (sTimeAttackResultsTimer < 0x190)) {
+                if ((sTimeAttackResultsTimer >= 392) && (sTimeAttackResultsTimer < 400)) {
                     if (gCurrentTimeAttackRecordPosition == 0) {
-                        func_i3_80139FF4();
+                        RecordsEntry_ToRecordsState();
                     }
                     Menus_CheckGhostCanSave();
                 }
-                if (sTimeAttackResultsTimer >= 0x190) {
-                    sTimeAttackResultsTimer = 0x190;
+                if (sTimeAttackResultsTimer >= 400) {
+                    sTimeAttackResultsTimer = 400;
                     if (gShowNameEntryMenu) {
-                        func_i3_8013C15C();
-                        gfx = func_i3_8013D2BC(gfx);
+                        RecordsEntry_UpdateNameEntry();
+                        gfx = RecordsEntry_DrawNameEntry(gfx);
                     } else {
                         i = RecordsEntry_Update();
                         gfx = RecordsEntry_DrawRecords(gfx, gCourseIndex);
@@ -5021,25 +5027,25 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 }
             } else if (gGameMode == GAMEMODE_GP_RACE) {
                 switch (sGpRaceResultsState) {
-                    case 0:
+                    case GP_RESULTS_TOP_6_TIMING:
                         gfx = Menus_DrawCourseName(gfx, 160, 200, 0);
                         gfx = Menus_DrawGpResultsPortraitsTimes(gfx);
                         gfx = Menus_DrawMaxSpeed(gfx, 0);
                         if ((sPlayerResultsTimer[playerIndex] >= 600) ||
                             (gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_A | BTN_START))) {
-                            sGpRaceResultsState = 1;
+                            sGpRaceResultsState = GP_RESULTS_RACE_RESULT;
                             sPlayerResultsTimer[playerIndex] = 0;
                         }
                         break;
-                    case 1:
-                        gfx = func_i3_DrawGPResultsScreen(gfx, 0);
+                    case GP_RESULTS_RACE_RESULT:
+                        gfx = Menus_DrawGpResultsScreen(gfx, 0);
                         sTotalRankingsForcedScrollPosition = gTotalRacers * 25;
                         sTotalRankingsForcedScrollSpeed = 4.2f;
                         break;
-                    case 2:
-                        gfx = func_i3_8012C4D8(gfx, 0);
+                    case GP_RESULTS_TOTAL_RANKING:
+                        gfx = Menus_DrawGpResultsTotalRanking(gfx, 0);
                         break;
-                    case 5:
+                    case GP_RESULTS_TO_NEXT_COURSE:
                         if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
                             Audio_LevelSEFadeout();
                         }
@@ -5049,12 +5055,12 @@ Gfx* Menus_Draw(Gfx* gfx) {
                         sMenuIsBusy = true;
                         D_i3_801419A6 = 30;
                         sMenuStateFlags |= MENU_STATE_GP_NEXT_COURSE;
-                        sGpRaceResultsState = 255;
+                        sGpRaceResultsState = GP_RESULTS_COMPLETE;
                         break;
-                    case 3:
+                    case GP_RESULTS_END_MENU:
                         gfx = Menus_DrawGpResultsEndMenu(gfx);
                         break;
-                    case 4:
+                    case GP_RESULTS_QUIT:
                         if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
                             Audio_LevelSEFadeout();
                         }
@@ -5063,9 +5069,9 @@ Gfx* Menus_Draw(Gfx* gfx) {
                         }
                         sMenuIsBusy = true;
                         sMenuStateFlags |= MENU_STATE_QUIT;
-                        sGpRaceResultsState = 255;
+                        sGpRaceResultsState = GP_RESULTS_COMPLETE;
                         break;
-                    case 255:
+                    case GP_RESULTS_COMPLETE:
                         break;
                 }
             } else if (gGameMode == GAMEMODE_DEATH_RACE) {
@@ -5073,27 +5079,29 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 gfx = Menus_DrawDeathRaceEndMenu(gfx);
             }
         }
+
+        // CRASHED
         if (!(gRacers[playerIndex].stateFlags & RACER_STATE_FINISHED) &&
             (gRacers[playerIndex].stateFlags & RACER_STATE_CRASHED)) {
-            if (sPlayerGameoverState[0] == 0) {
+            if (sPlayerGameoverState[0] == PLAYER_GAMEOVER_NONE) {
                 sPlayerRetireTimer[0] = 0;
                 sPlayerRetireRelativeLeftPos[0] = 200.0f;
                 sPlayerRetireHorizontalSpeed[0] = -20.0f;
-                sPlayerGameoverState[0] = 1;
+                sPlayerGameoverState[0] = PLAYER_GAMEOVER_CRASHED;
             }
             if ((gGameMode == GAMEMODE_GP_RACE) && (sPlayer1Lives <= 0)) {
                 switch (sPlayerGameoverState[0]) {
-                    case 1:
+                    case PLAYER_GAMEOVER_CRASHED:
                         gfx = Menus_DrawPlayerRetire(gfx, 0);
                         if (sPlayerRetireTimer[0] > 500) {
-                            sPlayerGameoverState[0] = 2;
+                            sPlayerGameoverState[0] = PLAYER_GAMEOVER_DISPLAY;
                             Menus_InitGameover(0);
                             if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
-                                func_800BAFA4(0x14);
+                                func_800BAFA4(BGM_GAMEOVER);
                             }
                         }
                         break;
-                    case 2:
+                    case PLAYER_GAMEOVER_DISPLAY:
                         gfx = Menus_DrawGameover(gfx, 0);
                         break;
                 }
@@ -5125,8 +5133,8 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 }
             }
         }
-    } else {
-        if (D_80141D6C == 0) {
+    } else { // VS MODE
+        if (!D_80141D6C) {
             for (i = 0; i < gTotalRacers; i++) {
                 racer = &gRacers[i];
                 if (i < gNumPlayers) {
@@ -5174,12 +5182,12 @@ Gfx* Menus_Draw(Gfx* gfx) {
                     !(racer->stateFlags & RACER_STATE_CRASHED)) {
                     gfx = Menus_DrawMaxSpeed(gfx, i);
                 } else if ((racer->stateFlags & RACER_STATE_CRASHED) && !(racer->stateFlags & RACER_STATE_FINISHED) &&
-                           (i < gNumPlayers) && (sPlayerFinishState[i] != 2)) {
-                    if (sPlayerGameoverState[i] == 0) {
+                           (i < gNumPlayers) && (sPlayerFinishState[i] != PLAYER_FINISH_SUCCESS_COMPLETE)) {
+                    if (sPlayerGameoverState[i] == PLAYER_GAMEOVER_NONE) {
                         sPlayerRetireTimer[i] = 0;
                         sPlayerRetireRelativeLeftPos[i] = 200.0f;
                         sPlayerRetireHorizontalSpeed[i] = -20.0f;
-                        sPlayerGameoverState[i] = 1;
+                        sPlayerGameoverState[i] = PLAYER_GAMEOVER_CRASHED;
                     }
                     if ((D_800E5FBC != 1) || (racer->position != 1)) {
                         gfx = Menus_DrawPlayerRetire(gfx, i);
@@ -5189,19 +5197,19 @@ Gfx* Menus_Draw(Gfx* gfx) {
         }
         if ((D_800E5FBC == 1) && (gTitleDemoState == TITLE_DEMO_INACTIVE)) {
             if (sVsResultsTimer > 0) {
-                D_80141D6C = 1;
+                D_80141D6C = true;
                 if (D_80141D70 != 0) {
-                    gfx = func_i3_DrawVsResultsScreen(gfx);
+                    gfx = Menus_DrawVsResultsScreen(gfx);
                 }
             } else {
-                D_80141D6C = 0;
+                D_80141D6C = false;
                 sVsResultsTimer++;
             }
             if ((sVsResultsTimer == 0) && (gTitleDemoState == TITLE_DEMO_INACTIVE)) {
                 Audio_LevelSEFadeout();
             }
         } else {
-            D_80141D6C = 0;
+            D_80141D6C = false;
             sVsResultsTimer = -420;
         }
     }

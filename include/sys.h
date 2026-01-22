@@ -97,14 +97,14 @@ typedef struct GfxPool {
     LookAt unk_21B28;
     Vtx effectsVtxBuffer[2048];
     Vtx unk_29B48[28];
-    Vtx unk_29D08[4];
+    Vtx spinningKeyboardCharacterVtx[4];
     s8 pad_29D48[0x500];
     Vtx backgroundTileVtxBuffer[256];
     Mtx unk_2B248[1];
     Mtx unk_2B288[1];
     Mtx unk_2B2C8[64];
     Vp unk_2C2C8[4];
-    Vp unk_2C308[6];
+    Vp recordsMachineVp[6];
     Mtx unk_2C368[6];
     Vtx unk_2C4E8[4];
     u16 unk_2C528[6][16];

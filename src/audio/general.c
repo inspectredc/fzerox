@@ -1180,7 +1180,7 @@ void func_800BA2E0(u8 arg0) {
     D_800D1A20 = arg0;
 }
 
-void func_800BA2F0(u8 playerNum, u8 arg1) {
+void Audio_PlayerLevelSEStart(u8 playerNum, u8 arg1) {
 
     if ((D_800D1A8C[playerNum] != 1) && (arg1 != D_800D1BF8[playerNum][0]) && (arg1 != D_800D1BF8[playerNum][1]) &&
         (arg1 != D_800D1BF8[playerNum][2]) && (arg1 != D_800D1BF8[playerNum][3]) &&
@@ -1250,7 +1250,7 @@ void Audio_PlayerLevelSEStop(u8 playerNum, u8 arg1) {
             func_800BAEDC(playerNum + 6);
             temp = D_800D1BF8[playerNum][0];
             D_800D1BF8[playerNum][0] = 0;
-            func_800BA2F0(playerNum, temp);
+            Audio_PlayerLevelSEStart(playerNum, temp);
         }
     } else if (arg1 == D_800D1BF8[playerNum][1]) {
         D_800D1BF8[playerNum][1] = D_800D1BF8[playerNum][2];

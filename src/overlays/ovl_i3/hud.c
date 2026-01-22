@@ -5,7 +5,8 @@
 #include "fzx_hud.h"
 #include "fzx_racer.h"
 #include "fzx_machine.h"
-#include "ovl_i3.h"
+#include "minimap.h"
+#include "assets/segment_16C8A0.h"
 #include "assets/segment_17B960.h"
 #include "assets/segment_1B8550.h"
 #include "assets/segment_2747F0.h"
@@ -197,7 +198,7 @@ s32 sPortraitReplacementIndexes[] = {
     0, // BLOOD_FALCON
 };
 
-Gfx* func_i3_DrawTimerDigitRectangle(Gfx* gfx, s32 left, s32 top, s32 number, f32 scale) {
+Gfx* Hud_DrawTimerDigitRectangle(Gfx* gfx, s32 left, s32 top, s32 number, f32 scale) {
 
     if (number >= 15) {
         return gfx;
@@ -208,7 +209,7 @@ Gfx* func_i3_DrawTimerDigitRectangle(Gfx* gfx, s32 left, s32 top, s32 number, f3
     return gfx;
 }
 
-Gfx* func_i3_DrawTimerDigitScisRectangle(Gfx* gfx, s32 left, s32 top, s32 number, f32 scale) {
+Gfx* Hud_DrawTimerDigitScisRectangle(Gfx* gfx, s32 left, s32 top, s32 number, f32 scale) {
 
     if (number >= 15) {
         return gfx;
@@ -276,98 +277,98 @@ Gfx* Hud_DrawTimerScisThousandths(Gfx* gfx, s32 time, s32 left, s32 top, f32 sca
     timeField = time / 60000;
 
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, 0, scale);
         offset += 8.0f * scale;
-        gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField, scale);
         offset += 8.0f * scale;
     } else {
-        gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8.0f * scale;
-        gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField % 10, scale);
         offset += 8.0f * scale;
     }
 
     time -= timeField * 60000;
     timeField = time / 1000;
 
-    gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, scale);
+    gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, scale);
     offset += 8.0f * scale;
 
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, 0, scale);
         offset += 8.0f * scale;
-        gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField, scale);
         offset += 8.0f * scale;
     } else {
-        gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8.0f * scale;
-        gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField % 10, scale);
         offset += 8.0f * scale;
     }
 
     time -= timeField * 1000;
     timeField = time / 100;
 
-    gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, scale);
+    gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, scale);
     offset += 8.0f * scale;
 
-    gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField, scale);
+    gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField, scale);
     offset += 8.0f * scale;
 
     time -= timeField * 100;
     timeField = time / 10;
 
-    gfx = func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField, scale);
+    gfx = Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, timeField, scale);
     offset += 8.0f * scale;
 
     time -= timeField * 10;
 
-    return func_i3_DrawTimerDigitScisRectangle(gfx, left + offset, top, time, scale);
+    return Hud_DrawTimerDigitScisRectangle(gfx, left + offset, top, time, scale);
 }
 
 Gfx* Hud_DrawBlankTimeHundredths(Gfx* gfx, s32 left, s32 top) {
     s32 offset = 0;
 
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    return func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    return Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
 }
 
 Gfx* Hud_DrawBlankTimeThousandths(Gfx* gfx, s32 left, s32 top) {
     s32 offset = 0;
 
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
     offset += 8;
-    return func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
+    return Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, 1.0f);
 }
 
-Gfx* func_i3_DrawPlayerTimer(Gfx* gfx, s32 time, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawPlayerTimer(Gfx* gfx, s32 time, s32 numPlayersIndex, s32 playerIndex) {
     UNUSED s32 pad;
     s32 top;
     s32 left;
@@ -400,56 +401,56 @@ Gfx* func_i3_DrawPlayerTimer(Gfx* gfx, s32 time, s32 numPlayersIndex, s32 player
     timeField = time / 60000;
 
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
         offset += 8;
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
         offset += 8;
     }
 
     time -= timeField * 60000;
     timeField = time / 1000;
 
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, scale);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, scale);
 
     offset += 8;
 
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
         offset += 8;
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
         offset += 8;
     }
 
     time -= timeField * 1000;
     timeField = time / 10;
 
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, scale);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, scale);
     offset += 8;
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
     }
     return gfx;
 }
 
 extern Gfx D_80149D0[];
 
-Gfx* func_i3_DrawTimeRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawTimeRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 right;
     s32 left;
 
@@ -470,10 +471,10 @@ Gfx* func_i3_DrawTimeRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
 
 extern s32 gTotalLapCount;
 extern s16 D_800E5FBC;
-extern s16 D_800E5FD0;
+extern s16 gEnableRaceSfx;
 extern s8 gGamePaused;
 
-Gfx* func_i3_UpdatePlayerHudInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_UpdatePlayerHudInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     UNUSED s32 pad[2];
     s32 lap;
     bool newLap;
@@ -504,17 +505,17 @@ Gfx* func_i3_UpdatePlayerHudInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex)
         if ((gRacers[playerIndex].position != 1) || (gGameMode == GAMEMODE_TIME_ATTACK)) {
             D_i3_80141EA8[playerIndex].lapIntervalCounter = 90;
         }
-        if ((lap == 2) && !sSecondLapStarted && (D_800E5FD0 != 0) && (gGameMode != GAMEMODE_PRACTICE)) {
-            Audio_TriggerSystemSE(0x11);
+        if ((lap == 2) && !sSecondLapStarted && gEnableRaceSfx && (gGameMode != GAMEMODE_PRACTICE)) {
+            Audio_TriggerSystemSE(NA_SE_17);
             sSecondLapStarted = true;
         }
-        if ((lap == gTotalLapCount) && !sFinalLapStarted && (D_800E5FD0 != 0) && (gGameMode != GAMEMODE_PRACTICE)) {
-            Audio_TriggerSystemSE(0x12);
+        if ((lap == gTotalLapCount) && !sFinalLapStarted && gEnableRaceSfx && (gGameMode != GAMEMODE_PRACTICE)) {
+            Audio_TriggerSystemSE(NA_SE_18);
             sFinalLapStarted = true;
         }
     }
 
-    if (D_i3_8013EFFC == D_i3_80141EA8[playerIndex].lapFlashTimer) {
+    if (D_i3_80141EA8[playerIndex].lapFlashTimer == D_i3_8013EFFC) {
         sPreviousLapTimes[playerIndex] = gRacers[playerIndex].lapTimes[(lap + 1) % 3];
     }
 
@@ -529,7 +530,7 @@ Gfx* func_i3_UpdatePlayerHudInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex)
                 return gfx;
             }
 
-            gfx = func_i3_DrawPlayerTimer(gfx, sPreviousLapTimes[playerIndex] + 5, numPlayersIndex, playerIndex);
+            gfx = Hud_DrawPlayerTimer(gfx, sPreviousLapTimes[playerIndex] + 5, numPlayersIndex, playerIndex);
         }
     } else if (numPlayersIndex < 2) {
         if (gGameMode == GAMEMODE_PRACTICE) {
@@ -539,14 +540,12 @@ Gfx* func_i3_UpdatePlayerHudInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex)
             return gfx;
         }
 
-        gfx = func_i3_DrawPlayerTimer(gfx, gRacers[playerIndex].raceTime + 5, numPlayersIndex, playerIndex);
+        gfx = Hud_DrawPlayerTimer(gfx, gRacers[playerIndex].raceTime + 5, numPlayersIndex, playerIndex);
     }
     return gfx;
 }
 
-extern Gfx D_80149A0[];
-
-Gfx* func_i3_DrawEnergyBar(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawEnergyBar(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 i;
     s32 energyWidth;
     s32 left;
@@ -596,7 +595,7 @@ Gfx* func_i3_DrawEnergyBar(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     return gfx;
 }
 
-Gfx* func_i3_DrawEnergyOutlineRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawEnergyOutlineRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     UNUSED s32 pad;
     s32 top;
     s32 left;
@@ -634,9 +633,7 @@ Gfx* func_i3_DrawEnergyOutlineRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playe
     return gfx;
 }
 
-extern Gfx D_80149A0[];
-
-Gfx* func_i3_DrawPlayerSpeed(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawPlayerSpeed(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 i;
     s32 left;
     s32 top;
@@ -704,7 +701,7 @@ Gfx* func_i3_DrawPlayerSpeed(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
 extern s16 gCpuRacersRetired;
 extern s32 gTotalRacers;
 
-Gfx* func_i3_DrawRacePositionExtras(Gfx* gfx, s32 left, s32 top) {
+Gfx* Hud_DrawRacePositionExtras(Gfx* gfx, s32 left, s32 top) {
     s32 i;
     s32 xOffset;
     s32 digit;
@@ -763,7 +760,7 @@ Gfx* func_i3_DrawRacePositionExtras(Gfx* gfx, s32 left, s32 top) {
     return gfx;
 }
 
-Gfx* func_i3_DrawPositionSuffixRectangle(Gfx* gfx, s32 left, s32 top, f32 scale) {
+Gfx* Hud_DrawPositionSuffixRectangle(Gfx* gfx, s32 left, s32 top, f32 scale) {
 
     gSPTextureRectangle(gfx++, left << 2, (s32) (top + (12.0f * scale)) << 2, (s32) (left + (20.0f * scale)) << 2,
                         (s32) (top + (12.0f * scale) + (20.0f * scale)) << 2, 0, 0, 0, (s32) ((1 << 10) / scale),
@@ -772,9 +769,7 @@ Gfx* func_i3_DrawPositionSuffixRectangle(Gfx* gfx, s32 left, s32 top, f32 scale)
     return gfx;
 }
 
-extern Gfx D_8014940[];
-
-Gfx* func_i3_DrawPosition(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawPosition(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 i;
     u8* positionTexturePtr;
     s32 positionDigit;
@@ -898,17 +893,17 @@ Gfx* func_i3_DrawPosition(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
                         G_TX_NOLOD);
 
     if (numPlayersIndex == 0) {
-        gfx = func_i3_DrawRacePositionExtras(gfx, left, top);
+        gfx = Hud_DrawRacePositionExtras(gfx, left, top);
     }
 
     if (numPlayersIndex == 1) {
-        gfx = func_i3_DrawPositionSuffixRectangle(gfx, left, top, scale);
+        gfx = Hud_DrawPositionSuffixRectangle(gfx, left, top, scale);
     }
 
     return gfx;
 }
 
-Gfx* func_i3_DrawLapRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawLapRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 top;
     s32 left;
 
@@ -933,7 +928,7 @@ Gfx* func_i3_DrawLapRectangle(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     return gfx;
 }
 
-Gfx* func_i3_DrawLapCounter(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawLapCounter(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 top;
     s32 left;
     s32 lap;
@@ -980,18 +975,9 @@ Gfx* func_i3_DrawLapCounter(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     return gfx;
 }
 
-Gfx* func_i3_UpdateRaceIntervalInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex, f32 scale);
-Gfx* func_i3_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
-Gfx* func_i3_DrawKOStars(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
-Gfx* func_i3_DrawPlayerLives(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
-Gfx* func_i3_DrawPracticeBestLap(Gfx* gfx);
-Gfx* func_i3_DrawDeathRaceTimer(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
-Gfx* func_i3_DrawDeathRaceBest(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
-Gfx* func_i3_DrawDeathRaceBestTime(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
-
 extern s32 gNumPlayers;
 
-Gfx* func_i3_DrawHUD(Gfx* gfx) {
+Gfx* Hud_DrawHud(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_8014940);
 
@@ -1002,9 +988,9 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
             gDPLoadTextureBlock(gfx++, aHudTimeTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 24, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawTimeRectangle(gfx, 0, 0);
+            gfx = Hud_DrawTimeRectangle(gfx, 0, 0);
 
-            gfx = func_i3_DrawDeathRaceBest(gfx, 0, 0);
+            gfx = Hud_DrawDeathRaceBest(gfx, 0, 0);
 
             // Timer
             gDPPipeSync(gfx++);
@@ -1013,29 +999,29 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
                                 G_TX_NOLOD, G_TX_NOLOD);
             gDPSetTextureFilter(gfx++, G_TF_POINT);
 
-            gfx = func_i3_UpdatePlayerHudInfo(gfx, 0, 0);
+            gfx = Hud_UpdatePlayerHudInfo(gfx, 0, 0);
 
-            gfx = func_i3_UpdateRaceIntervalInfo(gfx, 0, 0, 1.0f);
+            gfx = Hud_UpdateRaceIntervalInfo(gfx, 0, 0, 1.0f);
 
             // Best Lap Time
-            gfx = func_i3_DrawPracticeBestLap(gfx);
-            gfx = func_i3_DrawDeathRaceTimer(gfx, 0, 0);
+            gfx = Hud_DrawPracticeBestLap(gfx);
+            gfx = Hud_DrawDeathRaceTimer(gfx, 0, 0);
 
-            gfx = func_i3_DrawDeathRaceBestTime(gfx, 0, 0);
+            gfx = Hud_DrawDeathRaceBestTime(gfx, 0, 0);
 
             // Energy Bar
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, aHudEnergyTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 72, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawEnergyOutlineRectangle(gfx, 0, 0);
+            gfx = Hud_DrawEnergyOutlineRectangle(gfx, 0, 0);
 
             // Lap
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, aLapTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawLapRectangle(gfx, 0, 0);
+            gfx = Hud_DrawLapRectangle(gfx, 0, 0);
 
             // Lap Counter
             gDPPipeSync(gfx++);
@@ -1043,15 +1029,15 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawLapCounter(gfx, 0, 0);
+            gfx = Hud_DrawLapCounter(gfx, 0, 0);
 
-            gfx = func_i3_DrawEnergyBar(gfx, 0, 0);
+            gfx = Hud_DrawEnergyBar(gfx, 0, 0);
 
-            gfx = func_i3_DrawReverse(gfx, 0, 0);
+            gfx = Hud_DrawReverse(gfx, 0, 0);
 
-            gfx = func_i3_DrawPlayerLives(gfx, 0, 0);
+            gfx = Hud_DrawPlayerLives(gfx, 0, 0);
 
-            gfx = func_i3_DrawKOStars(gfx, 0, 0);
+            gfx = Hud_DrawKOStars(gfx, 0, 0);
             break;
         case 2:
             // Timer
@@ -1062,27 +1048,27 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_UpdatePlayerHudInfo(gfx, 1, 0);
-            gfx = func_i3_UpdatePlayerHudInfo(gfx, 1, 1);
+            gfx = Hud_UpdatePlayerHudInfo(gfx, 1, 0);
+            gfx = Hud_UpdatePlayerHudInfo(gfx, 1, 1);
 
-            gfx = func_i3_UpdateRaceIntervalInfo(gfx, 1, 0, 1.0f);
-            gfx = func_i3_UpdateRaceIntervalInfo(gfx, 1, 1, 1.0f);
+            gfx = Hud_UpdateRaceIntervalInfo(gfx, 1, 0, 1.0f);
+            gfx = Hud_UpdateRaceIntervalInfo(gfx, 1, 1, 1.0f);
 
             // Energy Bar
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, aHudEnergyTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 72, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawEnergyOutlineRectangle(gfx, 1, 0);
-            gfx = func_i3_DrawEnergyOutlineRectangle(gfx, 1, 1);
+            gfx = Hud_DrawEnergyOutlineRectangle(gfx, 1, 0);
+            gfx = Hud_DrawEnergyOutlineRectangle(gfx, 1, 1);
 
             // Lap
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, aLapTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawLapRectangle(gfx, 1, 0);
-            gfx = func_i3_DrawLapRectangle(gfx, 1, 1);
+            gfx = Hud_DrawLapRectangle(gfx, 1, 0);
+            gfx = Hud_DrawLapRectangle(gfx, 1, 1);
 
             // Lap Counter
             gDPPipeSync(gfx++);
@@ -1090,14 +1076,14 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawLapCounter(gfx, 1, 0);
-            gfx = func_i3_DrawLapCounter(gfx, 1, 1);
+            gfx = Hud_DrawLapCounter(gfx, 1, 0);
+            gfx = Hud_DrawLapCounter(gfx, 1, 1);
 
-            gfx = func_i3_DrawEnergyBar(gfx, 1, 0);
-            gfx = func_i3_DrawEnergyBar(gfx, 1, 1);
+            gfx = Hud_DrawEnergyBar(gfx, 1, 0);
+            gfx = Hud_DrawEnergyBar(gfx, 1, 1);
 
-            gfx = func_i3_DrawReverse(gfx, 1, 0);
-            gfx = func_i3_DrawReverse(gfx, 1, 1);
+            gfx = Hud_DrawReverse(gfx, 1, 0);
+            gfx = Hud_DrawReverse(gfx, 1, 1);
             break;
         case 3:
             // Timer
@@ -1107,31 +1093,31 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_UpdatePlayerHudInfo(gfx, 2, 0);
-            gfx = func_i3_UpdatePlayerHudInfo(gfx, 2, 1);
-            gfx = func_i3_UpdatePlayerHudInfo(gfx, 2, 2);
+            gfx = Hud_UpdatePlayerHudInfo(gfx, 2, 0);
+            gfx = Hud_UpdatePlayerHudInfo(gfx, 2, 1);
+            gfx = Hud_UpdatePlayerHudInfo(gfx, 2, 2);
 
-            gfx = func_i3_UpdateRaceIntervalInfo(gfx, 2, 0, 0.75f);
-            gfx = func_i3_UpdateRaceIntervalInfo(gfx, 2, 1, 0.75f);
-            gfx = func_i3_UpdateRaceIntervalInfo(gfx, 2, 2, 0.75f);
+            gfx = Hud_UpdateRaceIntervalInfo(gfx, 2, 0, 0.75f);
+            gfx = Hud_UpdateRaceIntervalInfo(gfx, 2, 1, 0.75f);
+            gfx = Hud_UpdateRaceIntervalInfo(gfx, 2, 2, 0.75f);
 
             // Energy Bar
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, aHudEnergyTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 72, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawEnergyOutlineRectangle(gfx, 2, 0);
-            gfx = func_i3_DrawEnergyOutlineRectangle(gfx, 2, 1);
-            gfx = func_i3_DrawEnergyOutlineRectangle(gfx, 2, 2);
+            gfx = Hud_DrawEnergyOutlineRectangle(gfx, 2, 0);
+            gfx = Hud_DrawEnergyOutlineRectangle(gfx, 2, 1);
+            gfx = Hud_DrawEnergyOutlineRectangle(gfx, 2, 2);
 
             // Lap
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, aLapTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawLapRectangle(gfx, 2, 0);
-            gfx = func_i3_DrawLapRectangle(gfx, 2, 1);
-            gfx = func_i3_DrawLapRectangle(gfx, 2, 2);
+            gfx = Hud_DrawLapRectangle(gfx, 2, 0);
+            gfx = Hud_DrawLapRectangle(gfx, 2, 1);
+            gfx = Hud_DrawLapRectangle(gfx, 2, 2);
 
             // Lap Counter
             gDPPipeSync(gfx++);
@@ -1139,17 +1125,17 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawLapCounter(gfx, 2, 0);
-            gfx = func_i3_DrawLapCounter(gfx, 2, 1);
-            gfx = func_i3_DrawLapCounter(gfx, 2, 2);
+            gfx = Hud_DrawLapCounter(gfx, 2, 0);
+            gfx = Hud_DrawLapCounter(gfx, 2, 1);
+            gfx = Hud_DrawLapCounter(gfx, 2, 2);
 
-            gfx = func_i3_DrawEnergyBar(gfx, 2, 0);
-            gfx = func_i3_DrawEnergyBar(gfx, 2, 1);
-            gfx = func_i3_DrawEnergyBar(gfx, 2, 2);
+            gfx = Hud_DrawEnergyBar(gfx, 2, 0);
+            gfx = Hud_DrawEnergyBar(gfx, 2, 1);
+            gfx = Hud_DrawEnergyBar(gfx, 2, 2);
 
-            gfx = func_i3_DrawReverse(gfx, 2, 0);
-            gfx = func_i3_DrawReverse(gfx, 2, 1);
-            gfx = func_i3_DrawReverse(gfx, 2, 2);
+            gfx = Hud_DrawReverse(gfx, 2, 0);
+            gfx = Hud_DrawReverse(gfx, 2, 1);
+            gfx = Hud_DrawReverse(gfx, 2, 2);
             break;
         case 4:
             // Timer
@@ -1160,35 +1146,35 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_UpdatePlayerHudInfo(gfx, 3, 0);
-            gfx = func_i3_UpdatePlayerHudInfo(gfx, 3, 1);
-            gfx = func_i3_UpdatePlayerHudInfo(gfx, 3, 2);
-            gfx = func_i3_UpdatePlayerHudInfo(gfx, 3, 3);
+            gfx = Hud_UpdatePlayerHudInfo(gfx, 3, 0);
+            gfx = Hud_UpdatePlayerHudInfo(gfx, 3, 1);
+            gfx = Hud_UpdatePlayerHudInfo(gfx, 3, 2);
+            gfx = Hud_UpdatePlayerHudInfo(gfx, 3, 3);
 
-            gfx = func_i3_UpdateRaceIntervalInfo(gfx, 3, 0, 0.75f);
-            gfx = func_i3_UpdateRaceIntervalInfo(gfx, 3, 1, 0.75f);
-            gfx = func_i3_UpdateRaceIntervalInfo(gfx, 3, 2, 0.75f);
-            gfx = func_i3_UpdateRaceIntervalInfo(gfx, 3, 3, 0.75f);
+            gfx = Hud_UpdateRaceIntervalInfo(gfx, 3, 0, 0.75f);
+            gfx = Hud_UpdateRaceIntervalInfo(gfx, 3, 1, 0.75f);
+            gfx = Hud_UpdateRaceIntervalInfo(gfx, 3, 2, 0.75f);
+            gfx = Hud_UpdateRaceIntervalInfo(gfx, 3, 3, 0.75f);
 
             // Energy Bar
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, aHudEnergyTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 72, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawEnergyOutlineRectangle(gfx, 3, 0);
-            gfx = func_i3_DrawEnergyOutlineRectangle(gfx, 3, 1);
-            gfx = func_i3_DrawEnergyOutlineRectangle(gfx, 3, 2);
-            gfx = func_i3_DrawEnergyOutlineRectangle(gfx, 3, 3);
+            gfx = Hud_DrawEnergyOutlineRectangle(gfx, 3, 0);
+            gfx = Hud_DrawEnergyOutlineRectangle(gfx, 3, 1);
+            gfx = Hud_DrawEnergyOutlineRectangle(gfx, 3, 2);
+            gfx = Hud_DrawEnergyOutlineRectangle(gfx, 3, 3);
 
             // Lap
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, aLapTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawLapRectangle(gfx, 3, 0);
-            gfx = func_i3_DrawLapRectangle(gfx, 3, 1);
-            gfx = func_i3_DrawLapRectangle(gfx, 3, 2);
-            gfx = func_i3_DrawLapRectangle(gfx, 3, 3);
+            gfx = Hud_DrawLapRectangle(gfx, 3, 0);
+            gfx = Hud_DrawLapRectangle(gfx, 3, 1);
+            gfx = Hud_DrawLapRectangle(gfx, 3, 2);
+            gfx = Hud_DrawLapRectangle(gfx, 3, 3);
 
             // Lap Counter
             gDPPipeSync(gfx++);
@@ -1196,20 +1182,20 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
 
-            gfx = func_i3_DrawLapCounter(gfx, 3, 0);
-            gfx = func_i3_DrawLapCounter(gfx, 3, 1);
-            gfx = func_i3_DrawLapCounter(gfx, 3, 2);
-            gfx = func_i3_DrawLapCounter(gfx, 3, 3);
+            gfx = Hud_DrawLapCounter(gfx, 3, 0);
+            gfx = Hud_DrawLapCounter(gfx, 3, 1);
+            gfx = Hud_DrawLapCounter(gfx, 3, 2);
+            gfx = Hud_DrawLapCounter(gfx, 3, 3);
 
-            gfx = func_i3_DrawEnergyBar(gfx, 3, 0);
-            gfx = func_i3_DrawEnergyBar(gfx, 3, 1);
-            gfx = func_i3_DrawEnergyBar(gfx, 3, 2);
-            gfx = func_i3_DrawEnergyBar(gfx, 3, 3);
+            gfx = Hud_DrawEnergyBar(gfx, 3, 0);
+            gfx = Hud_DrawEnergyBar(gfx, 3, 1);
+            gfx = Hud_DrawEnergyBar(gfx, 3, 2);
+            gfx = Hud_DrawEnergyBar(gfx, 3, 3);
 
-            gfx = func_i3_DrawReverse(gfx, 3, 0);
-            gfx = func_i3_DrawReverse(gfx, 3, 1);
-            gfx = func_i3_DrawReverse(gfx, 3, 2);
-            gfx = func_i3_DrawReverse(gfx, 3, 3);
+            gfx = Hud_DrawReverse(gfx, 3, 0);
+            gfx = Hud_DrawReverse(gfx, 3, 1);
+            gfx = Hud_DrawReverse(gfx, 3, 2);
+            gfx = Hud_DrawReverse(gfx, 3, 3);
             break;
     }
 
@@ -1219,7 +1205,7 @@ Gfx* func_i3_DrawHUD(Gfx* gfx) {
     return gfx;
 }
 
-void func_i3_UpdatePortraitScales(void) {
+void Hud_UpdatePortraitScales(void) {
     s32 i;
 
     for (i = 0; i < gTotalRacers; i++) {
@@ -1263,9 +1249,7 @@ void func_i3_80132D78(void) {
 
 extern u32 gGameFrameCount;
 
-void func_i3_UpdateCharacterPortraits(void);
-
-Gfx* func_i3_DrawRacePortraits(Gfx* gfx) {
+Gfx* Hud_DrawRacePortraits(Gfx* gfx) {
     s32 i;
     s32 position;
     s32 portraitWidth;
@@ -1278,12 +1262,12 @@ Gfx* func_i3_DrawRacePortraits(Gfx* gfx) {
 
     if (D_i3_8013F000 != 0) {
         D_i3_8013F000--;
-        func_i3_UpdateCharacterPortraits();
+        Hud_UpdateCharacterPortraits();
     }
 
     gSPDisplayList(gfx++, D_8014940);
 
-    func_i3_UpdatePortraitScales();
+    Hud_UpdatePortraitScales();
 
     // Draw Top 6 Positions for GAMEMODE_GP_RACE, otherwise draw just the player
     for (position = 0, i = 0; i < 6; i++, position++) {
@@ -1337,7 +1321,7 @@ Gfx* func_i3_DrawRacePortraits(Gfx* gfx) {
                             (sPortraitPositionYPos[i] + 6) << 2, 0, 0, 0, Math_Round(1024.0f), Math_Round(1024.0f));
 
         // Flash effect around border of players character portrait
-        if ((gRacers[0].position - 1 == i) && ((gGameFrameCount % 20U) >= 5)) {
+        if ((gRacers[0].position - 1 == i) && ((gGameFrameCount % 20) >= 5)) {
             gDPPipeSync(gfx++);
             gDPLoadTextureBlock(gfx++, aCharacterPortraitHighlightBorderTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
@@ -1352,7 +1336,7 @@ Gfx* func_i3_DrawRacePortraits(Gfx* gfx) {
     return gfx;
 }
 
-Gfx* func_i3_DrawTimerWithPosition(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale) {
+Gfx* Hud_DrawTimerWithPosition(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale) {
     s32 offset = 0;
     UNUSED s32 pad;
     s32 timeField;
@@ -1368,46 +1352,46 @@ Gfx* func_i3_DrawTimerWithPosition(Gfx* gfx, s32 time, s32 left, s32 top, f32 sc
     timeField = time / 60000;
 
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
         offset += 8;
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
         offset += 8;
     }
     time -= (timeField * 60000);
     timeField = time / 1000;
 
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, scale);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, scale);
     offset += 8;
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
         offset += 8;
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
         offset += 8;
     }
 
     time -= timeField * 1000;
     timeField = time / 10;
 
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, scale);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, scale);
     offset += 8;
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
     }
     return gfx;
 }
@@ -1432,10 +1416,10 @@ Gfx* Hud_DrawRaceTimeInterval(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale) 
         time = -MAX_TIMER;
     }
     if (time < -4) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_MINUS, scale);
         time = -time;
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PLUS, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PLUS, scale);
     }
     if (time < 0) {
         time = -time;
@@ -1446,58 +1430,58 @@ Gfx* Hud_DrawRaceTimeInterval(Gfx* gfx, s32 time, s32 left, s32 top, f32 scale) 
     timeField = time / 60000;
 
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
         offset += 8;
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
         offset += 8;
     }
 
     time -= timeField * 60000;
     timeField = time / 1000;
 
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, scale);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, scale);
 
     offset += 8;
 
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
         offset += 8;
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
         offset += 8;
     }
 
     time -= timeField * 1000;
     timeField = time / 10;
 
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, scale);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, scale);
 
     offset += 8;
 
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, scale);
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, scale);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, scale);
     }
     return gfx;
 }
 
 extern GhostRacer* gFastestGhostRacer;
 
-Gfx* func_i3_UpdateRaceIntervalInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex, f32 scale) {
+Gfx* Hud_UpdateRaceIntervalInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex, f32 scale) {
     Racer* leadRivalRacer;
     s32 i;
     s32 raceTime;
@@ -1564,7 +1548,7 @@ Gfx* func_i3_UpdateRaceIntervalInfo(Gfx* gfx, s32 numPlayersIndex, s32 playerInd
 
 extern s32 gPlayerReverseTimer[];
 
-Gfx* func_i3_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 i;
     f32 scale;
     s32 left;
@@ -1574,7 +1558,7 @@ Gfx* func_i3_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
 
     if (gPlayerReverseTimer[playerIndex] < 100) {
         if (D_i3_8013F078[playerIndex]) {
-            Audio_PlayerLevelSEStop(playerIndex, 3);
+            Audio_PlayerLevelSEStop(playerIndex, NA_LEVEL_SE_3);
             D_i3_8013F078[playerIndex] = false;
         }
         return gfx;
@@ -1596,10 +1580,10 @@ Gfx* func_i3_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     }
 
     if (!D_i3_8013F078[playerIndex]) {
-        func_800BA2F0(playerIndex, 3);
+        Audio_PlayerLevelSEStart(playerIndex, NA_LEVEL_SE_3);
         D_i3_8013F078[playerIndex] = true;
     }
-    if ((gGameFrameCount % 20U) >= 5) {
+    if ((gGameFrameCount % 20) >= 5) {
         return gfx;
     }
 
@@ -1613,7 +1597,7 @@ Gfx* func_i3_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     for (i = 0; i < 23; i++) {
         gDPPipeSync(gfx++);
 
-        gDPLoadTextureBlock(gfx++, (aReverseTex + i * 0xE0), G_IM_FMT_CI, G_IM_SIZ_8b, 112, 2, 0,
+        gDPLoadTextureBlock(gfx++, (aReverseTex + i * 224), G_IM_FMT_CI, G_IM_SIZ_8b, 112, 2, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
@@ -1647,7 +1631,7 @@ void Hud_ResetLivesChangeCounter(void) {
 extern s32 gPreviousLivesCount;
 extern s16 gPlayerLives[];
 
-void func_i3_TriggerLivesIncrease(void) {
+void Hud_TriggerLivesIncrease(void) {
     gPreviousLivesCount = gPlayerLives[0] - 1;
     gLivesChangeCounter = 90;
 }
@@ -1659,7 +1643,7 @@ void Hud_TriggerLivesDecrease(void) {
 
 extern s16 gRacersKOd;
 
-Gfx* func_i3_DrawKOStars(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawKOStars(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 i;
     s32 left;
     s32 top;
@@ -1691,7 +1675,7 @@ Gfx* func_i3_DrawKOStars(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     return gfx;
 }
 
-Gfx* func_i3_DrawPlayerLives(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawPlayerLives(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 i;
     s32 numLives;
     s32 left;
@@ -1741,11 +1725,11 @@ Gfx* func_i3_DrawPlayerLives(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
 }
 
 // Replaces Falcon/Summer/Goroh Portrait Textures With Alternate Texture
-void func_i3_ReplaceCharacterPortrait(s32 character) {
+void Hud_ReplaceCharacterPortrait(s32 character) {
     size_t textureOffset;
     s32 textureIndex;
     void* vramOffset;
-    void* romOffset;
+    SRomOffset romOffset;
 
     textureIndex = sPortraitReplacementIndexes[character];
 
@@ -1753,17 +1737,18 @@ void func_i3_ReplaceCharacterPortrait(s32 character) {
     vramOffset = (Segment_GetAddress(4) + SEGMENT_OFFSET(aPortraitCaptainFalconTex)) + textureOffset;
 
     textureOffset = textureIndex * 0x800;
-    romOffset = (SEGMENT_ROM_START(segment_2747F0) + SEGMENT_OFFSET(D_276FF0)) + textureOffset;
+    romOffset = SEGMENT_ROM_START(segment_2747F0);
+    romOffset = (romOffset + SEGMENT_OFFSET(D_276FF0)) + textureOffset;
 
     Dma_LoadAssetsAsync(romOffset, vramOffset, 0x800);
 }
 
-void func_i3_UpdateCharacterPortraits(void) {
+void Hud_UpdateCharacterPortraits(void) {
     s32 i;
 
     for (i = 0; i < gTotalRacers; i++) {
         if (IS_SUPER_MACHINE(gRacers[i].customType)) {
-            func_i3_ReplaceCharacterPortrait(gRacers[i].character);
+            Hud_ReplaceCharacterPortrait(gRacers[i].character);
         }
     }
 }
@@ -1771,7 +1756,7 @@ void func_i3_UpdateCharacterPortraits(void) {
 extern s32 gPracticeBestLap;
 extern s16 gStartNewBestLap;
 
-Gfx* func_i3_DrawPracticeBestLap(Gfx* gfx) {
+Gfx* Hud_DrawPracticeBestLap(Gfx* gfx) {
     s32 left;
     s32 top;
 
@@ -1780,7 +1765,7 @@ Gfx* func_i3_DrawPracticeBestLap(Gfx* gfx) {
     }
 
     if (gStartNewBestLap) {
-        Audio_TriggerSystemSE(0x38);
+        Audio_TriggerSystemSE(NA_SE_56);
         gStartNewBestLap = false;
         sPracticeBestLapCounter = 180;
     }
@@ -1790,7 +1775,7 @@ Gfx* func_i3_DrawPracticeBestLap(Gfx* gfx) {
             sPracticeBestLapCounter--;
         }
         if ((sPracticeBestLapCounter % 20) >= 5) {
-            gfx = func_i3_DrawTimerWithPosition(gfx, gPracticeBestLap + 5, 128, 36, 1.0f);
+            gfx = Hud_DrawTimerWithPosition(gfx, gPracticeBestLap + 5, 128, 36, 1.0f);
         }
     } else {
         if (gPracticeBestLap == (600000 - 1)) {
@@ -1798,7 +1783,7 @@ Gfx* func_i3_DrawPracticeBestLap(Gfx* gfx) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
             gfx = Hud_DrawBlankTimeHundredths(gfx, 128, 36);
         } else {
-            gfx = func_i3_DrawTimerWithPosition(gfx, gPracticeBestLap + 5, 128, 36, 1.0f);
+            gfx = Hud_DrawTimerWithPosition(gfx, gPracticeBestLap + 5, 128, 36, 1.0f);
         }
     }
 
@@ -1824,7 +1809,7 @@ Gfx* func_i3_DrawPracticeBestLap(Gfx* gfx) {
     return gfx;
 }
 
-Gfx* func_i3_DrawDeathRaceTimer(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawDeathRaceTimer(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 offset = 0;
     s32 top;
     s32 left;
@@ -1850,52 +1835,52 @@ Gfx* func_i3_DrawDeathRaceTimer(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) 
     timeField = time / 60000;
 
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, 1.0f);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, 1.0f);
         offset += 8;
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, 1.0f);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, 1.0f);
         offset += 8;
     }
 
     time -= timeField * 60000;
     timeField = time / 1000;
 
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_PRIME, 1.0f);
     offset += 8;
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, 1.0f);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, 1.0f);
         offset += 8;
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, 1.0f);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, 1.0f);
         offset += 8;
     }
     time -= timeField * 1000;
     timeField = time / 10;
-    gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, 1.0f);
+    gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, TIMER_DIGIT_DOUBLE_PRIME, 1.0f);
     offset += 8;
 
     if (timeField < 10) {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, 0, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, 0, 1.0f);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField, 1.0f);
     } else {
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField / 10, 1.0f);
         offset += 8;
-        gfx = func_i3_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, 1.0f);
+        gfx = Hud_DrawTimerDigitRectangle(gfx, left + offset, top, timeField % 10, 1.0f);
     }
 
     return gfx;
 }
 
-Gfx* func_i3_DrawDeathRaceBest(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawDeathRaceBest(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 left;
     s32 top;
 
@@ -1924,7 +1909,7 @@ Gfx* func_i3_DrawDeathRaceBest(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
 
 extern CourseInfo* gCurrentCourseInfo;
 
-Gfx* func_i3_DrawDeathRaceBestTime(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
+Gfx* Hud_DrawDeathRaceBestTime(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     s32 left;
     s32 top;
 
@@ -1942,7 +1927,7 @@ Gfx* func_i3_DrawDeathRaceBestTime(Gfx* gfx, s32 numPlayersIndex, s32 playerInde
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
         gfx = Hud_DrawBlankTimeHundredths(gfx, left, top);
     } else {
-        gfx = func_i3_DrawTimerWithPosition(gfx, gCurrentCourseInfo->timeRecord[0] + 5, left, top, 1.0f);
+        gfx = Hud_DrawTimerWithPosition(gfx, gCurrentCourseInfo->timeRecord[0] + 5, left, top, 1.0f);
     }
 
     return gfx;

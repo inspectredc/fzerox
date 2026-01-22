@@ -6,6 +6,7 @@
 // Header for types that are well known, but don't have a proper header home yet
 
 typedef u32 RomOffset;
+typedef s32 SRomOffset;
 typedef void* TexturePtr;
 
 #endif
