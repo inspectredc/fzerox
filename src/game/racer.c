@@ -8,11 +8,11 @@
 #include "fzx_save.h"
 #include "fzx_effects.h"
 #include "unk_gfx.h"
-#include "assets/segment_16C8A0.h"
-#include "assets/segment_17B960.h"
-#include "assets/segment_1B8550.h"
-#include "assets/segment_1E23F0.h"
-#include "assets/segment_22B0A0.h"
+#include "assets/course_track_gfx.h"
+#include "assets/machine_custom_gfx.h"
+#include "assets/hud_gfx.h"
+#include "assets/machine_global_gfx.h"
+#include "assets/machine_models.h"
 
 s32 gTotalRacers;
 Racer* sLastRacer;

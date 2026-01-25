@@ -5,8 +5,8 @@
 #include "fzx_font.h"
 #include "src/overlays/ovl_i2/transition.h"
 #include "ovl_i6.h"
-#include "assets/segment_2B9EA0.h"
-#include "assets/segment_17B1E0.h"
+#include "assets/common_assets_compressed.h"
+#include "assets/setup_gfx.h"
 
 s16 D_i6_8011F910[SCREEN_HEIGHT];
 

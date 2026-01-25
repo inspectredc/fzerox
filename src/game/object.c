@@ -11,7 +11,7 @@ unk_800E4068 D_800E4068[16];
 
 void func_80077CF0(s32 segAddr, size_t size, u8* startAddr) {
     CLEAR_DATA_CACHE(startAddr, size);
-    Dma_LoadAssets(SEGMENT_ROM_START(segment_2B9EA0) + SEGMENT_OFFSET(segAddr), startAddr, size);
+    Dma_LoadAssets(SEGMENT_ROM_START(common_assets_compressed) + SEGMENT_OFFSET(segAddr), startAddr, size);
 }
 
 void func_80077D44(void) {

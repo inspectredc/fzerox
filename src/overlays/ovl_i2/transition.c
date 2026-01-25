@@ -2,7 +2,7 @@
 #include "transition.h"
 #include "fzx_camera.h"
 #include "fzx_game.h"
-#include "assets/segment_16C8A0.h"
+#include "assets/course_track_gfx.h"
 
 s16 sWipePos;
 u16 sTiledPerspectiveScale;

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "fzx_font.h"
-#include "assets/segment_2B9EA0.h"
+#include "assets/common_assets_compressed.h"
 
 unk_80077D50 sFont1ACompTexInfo[] = {
     { 17, aFont1ATex, TEX_WIDTH(aFont1ATex), TEX_HEIGHT(aFont1ATex), TEX_COMPRESSED_SIZE(aFont1ATex) }, { 0 }

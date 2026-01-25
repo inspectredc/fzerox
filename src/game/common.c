@@ -4,7 +4,7 @@
 #include "fzx_course.h"
 #include "fzx_save.h"
 #include "src/overlays/ovl_i4/ovl_i4.h"
-#include "assets/segment_17B1E0.h"
+#include "assets/setup_gfx.h"
 
 f32 gCharacterLastEngine[30];
 UNUSED s32 D_800E4168;

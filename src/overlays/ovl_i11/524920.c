@@ -21,8 +21,8 @@ void func_i11_800FC730(void) {
 
     leoBootID = D_800CD2B0;
 
-    osAppNMIBuffer[0] = SEGMENT_ROM_START(unk_nmi);
-    osAppNMIBuffer[1] = SEGMENT_ROM_END(unk_nmi);
+    osAppNMIBuffer[0] = SEGMENT_ROM_START(cartridge_offsets);
+    osAppNMIBuffer[1] = SEGMENT_ROM_END(cartridge_offsets);
 
     if (osAppNMIBuffer[15] != 0x20DE1529) {
         osAppNMIBuffer[15] = 0x20DE1529;

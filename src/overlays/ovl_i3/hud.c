@@ -6,11 +6,11 @@
 #include "fzx_racer.h"
 #include "fzx_machine.h"
 #include "minimap.h"
-#include "assets/segment_16C8A0.h"
-#include "assets/segment_17B960.h"
-#include "assets/segment_1B8550.h"
-#include "assets/segment_2747F0.h"
-#include "assets/segment_2B9EA0.h"
+#include "assets/course_track_gfx.h"
+#include "assets/machine_custom_gfx.h"
+#include "assets/hud_gfx.h"
+#include "assets/super_textures.h"
+#include "assets/common_assets_compressed.h"
 #include "segment_symbols.h"
 
 f32 sPortraitTextureScale[TOTAL_RACER_COUNT];
@@ -1737,7 +1737,7 @@ void Hud_ReplaceCharacterPortrait(s32 character) {
     vramOffset = (Segment_GetAddress(4) + SEGMENT_OFFSET(aPortraitCaptainFalconTex)) + textureOffset;
 
     textureOffset = textureIndex * 0x800;
-    romOffset = SEGMENT_ROM_START(segment_2747F0);
+    romOffset = SEGMENT_ROM_START(super_textures);
     romOffset = (romOffset + SEGMENT_OFFSET(D_276FF0)) + textureOffset;
 
     Dma_LoadAssetsAsync(romOffset, vramOffset, 0x800);

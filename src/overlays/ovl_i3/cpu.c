@@ -3,7 +3,7 @@
 #include "fzx_game.h"
 #include "fzx_racer.h"
 #include "fzx_course.h"
-#include "assets/segment_2B9EA0.h"
+#include "assets/common_assets_compressed.h"
 
 s32 D_80141900;
 s32 D_i3_80141904;

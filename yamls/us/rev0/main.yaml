@@ -82,8 +82,8 @@
       - [0x511D0, c, audio/general]
 
       # Leo Boot
-      - [0x554E0, c, leo_bootdisk]
-      - [0x55940, hasm, ../../../src/leo_bootstrap] # have to redirect to unextracted hasm
+      - [0x554E0, c, leo/leo_bootdisk]
+      - [0x55940, hasm, ../../../src/leo/leo_bootstrap] # have to redirect to unextracted hasm
 
       # Libultra
       - [0x559A0, hasm, libultra/os/setcause]
@@ -432,28 +432,28 @@
     vram: 0x80225800
     bss_size: 0x81340
     subsegments:
-      - { type: .bss, vram: 0x80225800, name: unk_gfx_segment}
+      - { type: .bss, vram: 0x80225800, name: game/unk_gfx_segment}
 
   - name: unk_bss_segment
     type: code
     vram: 0x80225800
     bss_size: 0x284C0
     subsegments:
-      - { type: .bss, vram: 0x80225800, name: unk_bss_segment}
+      - { type: .bss, vram: 0x80225800, name: game/unk_bss_segment}
 
   - name: gfxpool
     type: code
     vram: 0x8024DCE0
     bss_size: 0x58D60
     subsegments:
-      - { type: .bss, vram: 0x8024DCE0, name: gfxpool}
+      - { type: .bss, vram: 0x8024DCE0, name: game/gfxpool}
 
-  - name: unk_context
+  - name: game_context
     type: code
     vram: 0x802A6B40
     bss_size: 0x2F100
     subsegments:
-      - { type: .bss, vram: 0x802A6B40, name: unk_context }
+      - { type: .bss, vram: 0x802A6B40, name: game/game_context }
 
   - name: buffers
     exclusive_ram_id: buffer
@@ -461,7 +461,7 @@
     vram: 0x802D5C40
     bss_size: 0x55000
     subsegments:
-      - { type: .bss, vram: 0x802D5C40, name: buffers }
+      - { type: .bss, vram: 0x802D5C40, name: sys/buffers }
 
   - name: framebuffer3
     type: code

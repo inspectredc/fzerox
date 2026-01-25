@@ -6,7 +6,7 @@
 #include "fzx_font.h"
 #include "src/overlays/ovl_i2/transition.h"
 #include "course_select.h"
-#include "assets/segment_2B9EA0.h"
+#include "assets/common_assets_compressed.h"
 
 s32 sCourseSelectCup;
 s32 sLastCourseIndex;

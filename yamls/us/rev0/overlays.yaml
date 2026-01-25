@@ -1,17 +1,17 @@
-  - name: unk_nmi
+  - name: cartridge_offsets
     exclusive_ram_id: overlay
     type: code
     start: 0x72030
     vram: 0x8032AC40 # vram unknown
     subsegments:
-      - [0x72030, .data, unk_nmi]
+      - [0x72030, .data, sys/cartridge_offsets]
 
   - name: leo_font
     type: code
     vram: 0x80400000
     bss_size: 0x3010
     subsegments:
-      - { type: .bss, vram: 0x80400000, name: leo_font }
+      - { type: .bss, vram: 0x80400000, name: sys/leo_font }
 
   - name: leo
     exclusive_ram_id: overlay
@@ -158,7 +158,7 @@
       - [0xC2290, c, hud]
       - [0xC8970, c, minimap]
       - [0xC98B0, c, background]
-      - [0xrecords_entry, c, records_entry]
+      - [0xCCFF0, c, records_entry]
       - [0xD0E50, .data, cpu]
       - [0xD2000, .data, menus]
       - [0xD22C0, .data, hud]

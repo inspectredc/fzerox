@@ -1,7 +1,7 @@
 #include "global.h"
 #include "audio.h"
 #include "fzx_camera.h"
-#include "assets/segment_16C8A0.h"
+#include "assets/course_track_gfx.h"
 
 f32 gSinTable[0x1000];
 Mtx sDefaultMtx;
@@ -32,7 +32,7 @@ void func_80069F5C(FrameBuffer* fb) {
     var_s0 = &fb->array[70][96];
 
     for (var_s1 = 0; var_s1 < 0x6A00; var_s1 += 0x100, var_s0 += 80) {
-        Dma_ClearRomCopy((uintptr_t) SEGMENT_ROM_START(segment_2787F0) + var_s1 + sizeof(Gfx), var_s0, 0x100);
+        Dma_ClearRomCopy((uintptr_t) SEGMENT_ROM_START(boot_textures) + var_s1 + sizeof(Gfx), var_s0, 0x100);
     }
 }
 

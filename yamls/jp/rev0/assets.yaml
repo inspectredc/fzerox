@@ -1,21 +1,20 @@
-  #File Screen Textures
-  - name: segment_145B70
+  - name: expansion_kit_textures_beta
     exclusive_ram_id: segment_07
     type: code
     dir: assets
     vram: 0x07000000
     start: 0x1458F0
     subsegments:
-      - [0x1458F0, .data, segment_145B70/segment_145B70]
+      - [0x1458F0, .data, expansion_kit_textures_beta/expansion_kit_textures_beta]
     
-  - name: course_edit_textures
+  - name: course_edit_textures_beta
     exclusive_ram_id: segment_04
     type: code
     dir: assets
     vram: 0x04000000
     start: 0x152A30
     subsegments:
-      - [0x152A30, .data, course_edit_textures/course_edit_textures]
+      - [0x152A30, .data, course_edit_textures_beta/course_edit_textures_beta]
     
   - name: create_machine_textures
     exclusive_ram_id: segment_04
@@ -26,186 +25,186 @@
     subsegments:
       - [0x1661E0, .data, create_machine_textures/create_machine_textures]
 
-  - name: segment_16C8A0
+  - name: course_track_gfx
     exclusive_ram_id: segment_08
     type: code
     dir: assets
     vram: 0x08000000
     start: 0x16CD20
     subsegments:
-      - [0x16CD20, .data, segment_16C8A0/segment_16C8A0]
+      - [0x16CD20, .data, course_track_gfx/course_track_gfx]
 
-  - name: segment_17B1E0
+  - name: setup_gfx
     exclusive_ram_id: segment_03
     type: code
     dir: assets
     vram: 0x03000000
     start: 0x17B660
     subsegments:
-      - [0x17B660, .data, segment_17B1E0/segment_17B1E0]
+      - [0x17B660, .data, setup_gfx/setup_gfx]
 
-  - name: segment_17B960
+  - name: machine_custom_gfx
     exclusive_ram_id: segment_03
     type: code
     dir: assets
     vram: 0x03000780
-    follows_vram: segment_17B1E0
+    follows_vram: setup_gfx
     start: 0x17BDE0
     subsegments:
-      - [0x17BDE0, .data, segment_17B960/segment_17B960]
+      - [0x17BDE0, .data, machine_custom_gfx/machine_custom_gfx]
 
-  - name: segment_1B8550
+  - name: hud_gfx
     exclusive_ram_id: segment_04
     type: code
     dir: assets
     vram: 0x04000000
     start: 0x1B89D0
     subsegments:
-      - [0x1B89D0, .data, segment_1B8550/segment_1B8550]
+      - [0x1B89D0, .data, hud_gfx/hud_gfx]
 
-  - name: segment_1E23F0
+  - name: machine_global_gfx
     exclusive_ram_id: segment_07
     type: code
     dir: assets
     vram: 0x07000000
     start: 0x1E2870
     subsegments:
-      - [0x1E2870, .data, segment_1E23F0/segment_1E23F0]
+      - [0x1E2870, .data, machine_global_gfx/machine_global_gfx]
 
-  - name: segment_22B0A0
+  - name: machine_models
     exclusive_ram_id: segment_09
     type: code
     dir: assets
     vram: 0x09000000
     start: 0x22B520
     subsegments:
-      - [0x22B520, .data, segment_22B0A0/segment_22B0A0]
+      - [0x22B520, .data, machine_models/machine_models]
 
-  - name: segment_235130
+  - name: mute_city_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x2355B0
     subsegments:
-      - [0x2355B0, .data, segment_235130/segment_235130]
+      - [0x2355B0, .data, mute_city_textures/mute_city_textures]
 
-  - name: segment_239A80
+  - name: port_town_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x239F00
     subsegments:
-      - [0x239F00, .data, segment_239A80/segment_239A80]
+      - [0x239F00, .data, port_town_textures/port_town_textures]
 
-  - name: segment_23EC50
+  - name: big_blue_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x23F0D0
     subsegments:
-      - [0x23F0D0, .data, segment_23EC50/segment_23EC50]
+      - [0x23F0D0, .data, big_blue_textures/big_blue_textures]
 
-  - name: segment_243D90
+  - name: sand_ocean_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x244210
     subsegments:
-      - [0x244210, .data, segment_243D90/segment_243D90]
+      - [0x244210, .data, sand_ocean_textures/sand_ocean_textures]
 
-  - name: segment_24A270
+  - name: devils_forest_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x24A6F0
     subsegments:
-      - [0x24A6F0, .data, segment_24A270/segment_24A270]
+      - [0x24A6F0, .data, devils_forest_textures/devils_forest_textures]
 
-  - name: segment_2507F0
+  - name: white_land_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x250C70
     subsegments:
-      - [0x250C70, .data, segment_2507F0/segment_2507F0]
+      - [0x250C70, .data, white_land_textures/white_land_textures]
 
-  - name: segment_255100
+  - name: sector_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x255580
     subsegments:
-      - [0x255580, .data, segment_255100/segment_255100]
+      - [0x255580, .data, sector_textures/sector_textures]
 
-  - name: segment_259600
+  - name: red_canyon_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x259A80
     subsegments:
-      - [0x259A80, .data, segment_259600/segment_259600]
+      - [0x259A80, .data, red_canyon_textures/red_canyon_textures]
 
-  - name: segment_25F360
+  - name: fire_field_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x25F7E0
     subsegments:
-      - [0x25F7E0, .data, segment_25F360/segment_25F360]
+      - [0x25F7E0, .data, fire_field_textures/fire_field_textures]
 
-  - name: segment_266C20
+  - name: silence_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x2670A0
     subsegments:
-      - [0x2670A0, .data, segment_266C20/segment_266C20]
+      - [0x2670A0, .data, silence_textures/silence_textures]
 
-  - name: segment_26D780
+  - name: ending_venue_textures
     exclusive_ram_id: segment_0A
     type: code
     dir: assets
     vram: 0x0A000000
     start: 0x26DC00
     subsegments:
-      - [0x26DC00, .data, segment_26D780/segment_26D780]
+      - [0x26DC00, .data, ending_venue_textures/ending_venue_textures]
 
-  - name: segment_2738A0
+  - name: podium_gfx
     exclusive_ram_id: segment_05
     type: code
     dir: assets
     vram: 0x05000000
     start: 0x273D20
     subsegments:
-      - [0x273D20, .data, segment_2738A0/segment_2738A0]
+      - [0x273D20, .data, podium_gfx/podium_gfx]
 
-  - name: segment_2747F0
+  - name: super_textures
     exclusive_ram_id: segment_00
     type: code
     dir: assets
     vram: 0x0
     start: 0x274C70
     subsegments:
-      - [0x274C70, .data, segment_2747F0/segment_2747F0]
+      - [0x274C70, .data, super_textures/super_textures]
 
-  - name: segment_2787F0
+  - name: boot_textures
     exclusive_ram_id: segment_00
     type: code
     dir: assets
     vram: 0x0
     start: 0x278C70
     subsegments:
-      - [0x278C70, .data, segment_2787F0/segment_2787F0]
+      - [0x278C70, .data, boot_textures/boot_textures]
 
   # Ghost Data
   - name: staff_ghost_records
@@ -226,14 +225,14 @@
     subsegments:
       - [0x2AD660, .data, course_data/course_data]
 
-  - name: segment_2B9EA0
+  - name: common_assets_compressed
     exclusive_ram_id: segment_0F
     type: code
     dir: assets
     vram: 0x0F000000
     start: 0x2BA320
     subsegments:
-      - [0x2BA320, .data, segment_2B9EA0/segment_2B9EA0]
+      - [0x2BA320, .data, common_assets_compressed/common_assets_compressed]
 
   - name: ovl_i11
     exclusive_ram_id: overlay

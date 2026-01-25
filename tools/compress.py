@@ -11,20 +11,20 @@ import crunch64
 
 # todo: generate this list from splat yaml
 compressedEntries = [
-    "segment_16C8A0",
-    "segment_22B0A0",
-    "segment_235130",
-    "segment_239A80",
-    "segment_23EC50",
-    "segment_243D90",
-    "segment_24A270",
-    "segment_2507F0",
-    "segment_255100",
-    "segment_259600",
-    "segment_25F360",
-    "segment_266C20",
-    "segment_26D780",
-    "segment_2738A0",
+    "course_track_gfx",
+    "machine_models",
+    "mute_city_textures",
+    "port_town_textures",
+    "big_blue_textures",
+    "sand_ocean_textures",
+    "devils_forest_textures",
+    "white_land_textures",
+    "sector_textures",
+    "red_canyon_textures",
+    "fire_field_textures",
+    "silence_textures",
+    "ending_venue_textures",
+    "podium_gfx",
 ]
 
 VERBOSE = False

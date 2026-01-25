@@ -6,9 +6,9 @@
 #include "fzx_course.h"
 #include "fzx_bordered_box.h"
 #include "src/overlays/ovl_i2/transition.h"
-#include "assets/segment_16C8A0.h"
-#include "assets/segment_17B960.h"
-#include "assets/segment_2B9EA0.h"
+#include "assets/course_track_gfx.h"
+#include "assets/machine_custom_gfx.h"
+#include "assets/common_assets_compressed.h"
 
 s32 sRecordsState;
 s32 sUnlockedCourseCount;

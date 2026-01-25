@@ -1,6 +1,6 @@
 #include "global.h"
 #include "fzx_bordered_box.h"
-#include "assets/segment_16C8A0.h"
+#include "assets/course_track_gfx.h"
 
 void BorderedBox_CleanWidget(BorderedBoxWidget** boxPtr) {
     *boxPtr = NULL;

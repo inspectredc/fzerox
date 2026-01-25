@@ -4,7 +4,7 @@
 #include "fzx_camera.h"
 #include "fzx_course.h"
 #include "fzx_save.h"
-#include "assets/segment_16C8A0.h"
+#include "assets/course_track_gfx.h"
 // #include "src/overlays/ending/ending.h"
 #define ENDING_CHARACTER_FIREWORKS (1 << 0)
 #define ENDING_SHOW_PODIUM_SEQUENCE (1 << 1)

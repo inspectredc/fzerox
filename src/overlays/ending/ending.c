@@ -8,11 +8,11 @@
 #include "fzx_machine.h"
 #include "fzx_camera.h"
 #include "fzx_font.h"
-#include "assets/segment_16C8A0.h"
-#include "assets/segment_17B960.h"
-#include "assets/segment_1B8550.h"
-#include "assets/segment_2738A0.h"
-#include "assets/segment_2B9EA0.h"
+#include "assets/course_track_gfx.h"
+#include "assets/machine_custom_gfx.h"
+#include "assets/hud_gfx.h"
+#include "assets/podium_gfx.h"
+#include "assets/common_assets_compressed.h"
 
 PodiumDrawData* gPodiumDrawDataPtr;
 s16 sTotalRacersKOd;

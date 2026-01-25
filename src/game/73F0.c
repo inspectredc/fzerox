@@ -3,8 +3,8 @@
 #include "fzx_thread.h"
 #include "fzx_course.h"
 #include "segment_symbols.h"
-#include "assets/segment_16C8A0.h"
-#include "assets/segment_17B1E0.h"
+#include "assets/course_track_gfx.h"
+#include "assets/setup_gfx.h"
 
 OSMesg D_800E12B0;
 UNUSED s8 D_800E12B8[0x10];
@@ -2990,7 +2990,7 @@ extern CourseData D_8010CF50;
 void func_800742FC(void) {
     s32 i;
 
-    bzero(SEGMENT_VRAM_START(unk_context), SEGMENT_BSS_SIZE(unk_context));
+    bzero(SEGMENT_VRAM_START(game_context), SEGMENT_BSS_SIZE(game_context));
     func_80074204();
     D_802CDFD0 = 0;
     COURSE_CONTEXT()->courseData.creatorId = CREATOR_NINTENDO;
@@ -3143,7 +3143,7 @@ s32 D_800CD24C[] = { 1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 // Load Venue Building Textures
 void func_800747EC(s32 venue) {
-    void* sp1C = (D_800CD220[venue] * 0x800) + SEGMENT_ROM_START(segment_2747F0);
+    void* sp1C = (D_800CD220[venue] * 0x800) + SEGMENT_ROM_START(super_textures);
 
     Dma_LoadAssetsAsync(sp1C, Segment_SegmentedToVirtual(D_8014A20), 0x800);
 }

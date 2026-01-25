@@ -15,45 +15,45 @@ s8 D_800CD2F0 = -1;
 s8 D_800CD2F4 = false;
 
 RomOffset D_800CD2F8[] = {
-    SEGMENT_ROM_START(segment_235130), // VENUE_MUTE_CITY
-    SEGMENT_ROM_START(segment_239A80), // VENUE_PORT_TOWN
-    SEGMENT_ROM_START(segment_23EC50), // VENUE_BIG_BLUE
-    SEGMENT_ROM_START(segment_243D90), // VENUE_SAND_OCEAN
-    SEGMENT_ROM_START(segment_24A270), // VENUE_DEVILS_FOREST
-    SEGMENT_ROM_START(segment_2507F0), // VENUE_WHITE_LAND
-    SEGMENT_ROM_START(segment_255100), // VENUE_SECTOR
-    SEGMENT_ROM_START(segment_259600), // VENUE_RED_CANYON
-    SEGMENT_ROM_START(segment_25F360), // VENUE_FIRE_FIELD
-    SEGMENT_ROM_START(segment_266C20), // VENUE_SILENCE
-    SEGMENT_ROM_START(segment_26D780), // VENUE_ENDING
+    SEGMENT_ROM_START(mute_city_textures), // VENUE_MUTE_CITY
+    SEGMENT_ROM_START(port_town_textures), // VENUE_PORT_TOWN
+    SEGMENT_ROM_START(big_blue_textures), // VENUE_BIG_BLUE
+    SEGMENT_ROM_START(sand_ocean_textures), // VENUE_SAND_OCEAN
+    SEGMENT_ROM_START(devils_forest_textures), // VENUE_DEVILS_FOREST
+    SEGMENT_ROM_START(white_land_textures), // VENUE_WHITE_LAND
+    SEGMENT_ROM_START(sector_textures), // VENUE_SECTOR
+    SEGMENT_ROM_START(red_canyon_textures), // VENUE_RED_CANYON
+    SEGMENT_ROM_START(fire_field_textures), // VENUE_FIRE_FIELD
+    SEGMENT_ROM_START(silence_textures), // VENUE_SILENCE
+    SEGMENT_ROM_START(ending_venue_textures), // VENUE_ENDING
 };
 
 u8* D_800CD324[] = {
-    SEGMENT_VRAM_START(segment_235130), // VENUE_MUTE_CITY
-    SEGMENT_VRAM_START(segment_239A80), // VENUE_PORT_TOWN
-    SEGMENT_VRAM_START(segment_23EC50), // VENUE_BIG_BLUE
-    SEGMENT_VRAM_START(segment_243D90), // VENUE_SAND_OCEAN
-    SEGMENT_VRAM_START(segment_24A270), // VENUE_DEVILS_FOREST
-    SEGMENT_VRAM_START(segment_2507F0), // VENUE_WHITE_LAND
-    SEGMENT_VRAM_START(segment_255100), // VENUE_SECTOR
-    SEGMENT_VRAM_START(segment_259600), // VENUE_RED_CANYON
-    SEGMENT_VRAM_START(segment_25F360), // VENUE_FIRE_FIELD
-    SEGMENT_VRAM_START(segment_266C20), // VENUE_SILENCE
-    SEGMENT_VRAM_START(segment_26D780), // VENUE_ENDING
+    SEGMENT_VRAM_START(mute_city_textures), // VENUE_MUTE_CITY
+    SEGMENT_VRAM_START(port_town_textures), // VENUE_PORT_TOWN
+    SEGMENT_VRAM_START(big_blue_textures), // VENUE_BIG_BLUE
+    SEGMENT_VRAM_START(sand_ocean_textures), // VENUE_SAND_OCEAN
+    SEGMENT_VRAM_START(devils_forest_textures), // VENUE_DEVILS_FOREST
+    SEGMENT_VRAM_START(white_land_textures), // VENUE_WHITE_LAND
+    SEGMENT_VRAM_START(sector_textures), // VENUE_SECTOR
+    SEGMENT_VRAM_START(red_canyon_textures), // VENUE_RED_CANYON
+    SEGMENT_VRAM_START(fire_field_textures), // VENUE_FIRE_FIELD
+    SEGMENT_VRAM_START(silence_textures), // VENUE_SILENCE
+    SEGMENT_VRAM_START(ending_venue_textures), // VENUE_ENDING
 };
 
 u8* D_800CD350[] = {
-    SEGMENT_VRAM_END(segment_235130), // VENUE_MUTE_CITY
-    SEGMENT_VRAM_END(segment_239A80), // VENUE_PORT_TOWN
-    SEGMENT_VRAM_END(segment_23EC50), // VENUE_BIG_BLUE
-    SEGMENT_VRAM_END(segment_243D90), // VENUE_SAND_OCEAN
-    SEGMENT_VRAM_END(segment_24A270), // VENUE_DEVILS_FOREST
-    SEGMENT_VRAM_END(segment_2507F0), // VENUE_WHITE_LAND
-    SEGMENT_VRAM_END(segment_255100), // VENUE_SECTOR
-    SEGMENT_VRAM_END(segment_259600), // VENUE_RED_CANYON
-    SEGMENT_VRAM_END(segment_25F360), // VENUE_FIRE_FIELD
-    SEGMENT_VRAM_END(segment_266C20), // VENUE_SILENCE
-    SEGMENT_VRAM_END(segment_26D780), // VENUE_ENDING
+    SEGMENT_VRAM_END(mute_city_textures), // VENUE_MUTE_CITY
+    SEGMENT_VRAM_END(port_town_textures), // VENUE_PORT_TOWN
+    SEGMENT_VRAM_END(big_blue_textures), // VENUE_BIG_BLUE
+    SEGMENT_VRAM_END(sand_ocean_textures), // VENUE_SAND_OCEAN
+    SEGMENT_VRAM_END(devils_forest_textures), // VENUE_DEVILS_FOREST
+    SEGMENT_VRAM_END(white_land_textures), // VENUE_WHITE_LAND
+    SEGMENT_VRAM_END(sector_textures), // VENUE_SECTOR
+    SEGMENT_VRAM_END(red_canyon_textures), // VENUE_RED_CANYON
+    SEGMENT_VRAM_END(fire_field_textures), // VENUE_FIRE_FIELD
+    SEGMENT_VRAM_END(silence_textures), // VENUE_SILENCE
+    SEGMENT_VRAM_END(ending_venue_textures), // VENUE_ENDING
 };
 
 extern uintptr_t gSegment17B1E0VramEnd;
@@ -235,7 +235,7 @@ void Segment_SetupSegment4(void) {
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
-            segmentSize = SEGMENT_VRAM_SIZE(segment_1B8550);
+            segmentSize = SEGMENT_VRAM_SIZE(hud_gfx);
             break;
         case GAMEMODE_CREATE_MACHINE:
             segmentSize = SEGMENT_VRAM_SIZE(create_machine_textures);
@@ -273,11 +273,11 @@ void Segment_SetupSegment7(void) {
         case GAMEMODE_VS_4P:
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_DEATH_RACE:
-            ramSize = SEGMENT_VRAM_SIZE(segment_1E23F0);
+            ramSize = SEGMENT_VRAM_SIZE(machine_global_gfx);
             break;
         case GAMEMODE_COURSE_EDIT:
         case GAMEMODE_CREATE_MACHINE:
-            ramSize = SEGMENT_VRAM_SIZE(segment_145B70);
+            ramSize = SEGMENT_VRAM_SIZE(expansion_kit_textures_beta);
             break;
         default:
             D_800CD2E4 = false;
@@ -302,7 +302,7 @@ void Segment_SetupSegment9(void) {
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
-            segmentSize = SEGMENT_DATA_SIZE_CONST(segment_22B0A0);
+            segmentSize = SEGMENT_DATA_SIZE_CONST(machine_models);
             break;
         default:
             D_800CD2E8 = false;
@@ -332,7 +332,7 @@ void Segment_SetupSegment10(void) {
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
-            segmentSize = SEGMENT_DATA_SIZE_CONST(segment_235130);
+            segmentSize = SEGMENT_DATA_SIZE_CONST(mute_city_textures);
             break;
         default:
             D_800CD2EC = false;
@@ -353,7 +353,7 @@ void Segment_SetupSegment5(void) {
     D_800CD2F4 = true;
     switch (gGameMode) {
         case GAMEMODE_GP_END_CS:
-            segmentSize = SEGMENT_DATA_SIZE_CONST(segment_2738A0);
+            segmentSize = SEGMENT_DATA_SIZE_CONST(podium_gfx);
             break;
         default:
             D_800CD2F4 = false;
@@ -546,29 +546,29 @@ void Segment_LoadSegment4(void) {
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_DEATH_RACE:
-            Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(gSegment17B960VramStart),
-                                SEGMENT_ROM_SIZE(segment_17B960));
-            romOffset = SEGMENT_ROM_START(segment_1B8550);
-            ramSize = SEGMENT_VRAM_SIZE(segment_1B8550);
+            Dma_LoadAssetsAsync(SEGMENT_ROM_START(machine_custom_gfx), osPhysicalToVirtual(gSegment17B960VramStart),
+                                SEGMENT_ROM_SIZE(machine_custom_gfx));
+            romOffset = SEGMENT_ROM_START(hud_gfx);
+            ramSize = SEGMENT_VRAM_SIZE(hud_gfx);
             break;
         case GAMEMODE_CREATE_MACHINE:
-            Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(gSegment17B960VramStart),
-                                SEGMENT_ROM_SIZE(segment_17B960));
+            Dma_LoadAssetsAsync(SEGMENT_ROM_START(machine_custom_gfx), osPhysicalToVirtual(gSegment17B960VramStart),
+                                SEGMENT_ROM_SIZE(machine_custom_gfx));
             romOffset = SEGMENT_ROM_START(create_machine_textures);
             ramSize = SEGMENT_VRAM_SIZE(create_machine_textures);
             break;
         case GAMEMODE_COURSE_EDIT:
-            Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(gSegment17B960VramStart),
-                                SEGMENT_ROM_SIZE(segment_17B960));
-            romOffset = SEGMENT_ROM_START(course_edit_textures);
-            ramSize = SEGMENT_VRAM_SIZE(course_edit_textures);
+            Dma_LoadAssetsAsync(SEGMENT_ROM_START(machine_custom_gfx), osPhysicalToVirtual(gSegment17B960VramStart),
+                                SEGMENT_ROM_SIZE(machine_custom_gfx));
+            romOffset = SEGMENT_ROM_START(course_edit_textures_beta);
+            ramSize = SEGMENT_VRAM_SIZE(course_edit_textures_beta);
             break;
         case GAMEMODE_RECORDS:
         case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
         case GAMEMODE_FLX_MACHINE_SELECT:
-            Dma_LoadAssetsAsync(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(gSegment17B960VramStart),
-                                SEGMENT_ROM_SIZE(segment_17B960));
+            Dma_LoadAssetsAsync(SEGMENT_ROM_START(machine_custom_gfx), osPhysicalToVirtual(gSegment17B960VramStart),
+                                SEGMENT_ROM_SIZE(machine_custom_gfx));
         default:
             D_800CD2E0 = 0;
             return;
@@ -597,13 +597,13 @@ void Segment_LoadSegment7(void) {
         case GAMEMODE_VS_4P:
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_DEATH_RACE:
-            romOffset = SEGMENT_ROM_START(segment_1E23F0);
-            ramSize = SEGMENT_VRAM_SIZE(segment_1E23F0);
+            romOffset = SEGMENT_ROM_START(machine_global_gfx);
+            ramSize = SEGMENT_VRAM_SIZE(machine_global_gfx);
             break;
         case GAMEMODE_COURSE_EDIT:
         case GAMEMODE_CREATE_MACHINE:
-            romOffset = SEGMENT_ROM_START(segment_145B70);
-            ramSize = SEGMENT_VRAM_SIZE(segment_145B70);
+            romOffset = SEGMENT_ROM_START(expansion_kit_textures_beta);
+            ramSize = SEGMENT_VRAM_SIZE(expansion_kit_textures_beta);
             break;
         default:
             D_800CD2E4 = false;
@@ -629,8 +629,8 @@ void Segment_LoadSegment9(void) {
         case GAMEMODE_GP_END_CS:
         case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
-            romOffset = SEGMENT_ROM_START(segment_22B0A0);
-            ramSize = SEGMENT_VRAM_SIZE(segment_22B0A0);
+            romOffset = SEGMENT_ROM_START(machine_models);
+            ramSize = SEGMENT_VRAM_SIZE(machine_models);
             break;
         default:
             D_800CD2E8 = false;
@@ -740,8 +740,8 @@ void Segment_LoadSegment5(void) {
         D_800CD2F4 = false;
         return;
     }
-    romOffset = SEGMENT_ROM_START(segment_2738A0);
-    ramSize = SEGMENT_VRAM_SIZE(segment_2738A0);
+    romOffset = SEGMENT_ROM_START(podium_gfx);
+    ramSize = SEGMENT_VRAM_SIZE(podium_gfx);
 
     vram = Arena_Allocate(ALLOC_PEEK, ramSize);
 

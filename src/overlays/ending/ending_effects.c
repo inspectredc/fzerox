@@ -4,9 +4,9 @@
 #include "fzx_racer.h"
 #include "fzx_machine.h"
 #include "fzx_camera.h"
-#include "assets/segment_16C8A0.h"
-#include "assets/segment_1B8550.h"
-#include "assets/segment_2B9EA0.h"
+#include "assets/course_track_gfx.h"
+#include "assets/hud_gfx.h"
+#include "assets/common_assets_compressed.h"
 
 s16 sFireworksLauncherCount;
 s16 gActiveFireworks;

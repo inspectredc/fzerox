@@ -1,5 +1,5 @@
 #include "global.h"
-#include "assets/segment_17B1E0.h"
+#include "assets/setup_gfx.h"
 
 Gfx* func_8007A440(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha) {
 

@@ -253,8 +253,8 @@ void Game_ThreadEntry(void* entry) {
     gBuffersVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(buffers));
     gUnkGfxVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(unk_gfx_segment));
     gUnkGfxVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(unk_gfx_segment));
-    gUnkContextVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(unk_context));
-    gUnkContextVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(unk_context));
+    gUnkContextVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(game_context));
+    gUnkContextVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(game_context));
     gAudioContextVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(audio_context));
     gAudioContextVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(audio_context) + 0x10);
     gGfxPoolVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(gfxpool));
@@ -263,28 +263,28 @@ void Game_ThreadEntry(void* entry) {
     gUnkBssVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(unk_bss_segment));
 
     gSegment16C8A0VramStart = gBuffersVramEnd;
-    gSegment16C8A0VramEnd = gSegment16C8A0VramStart + (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0);
+    gSegment16C8A0VramEnd = gSegment16C8A0VramStart + (size_t) SEGMENT_DATA_SIZE_CONST(course_track_gfx);
 
     gSegment17B1E0VramStart = gSegment16C8A0VramEnd;
-    gSegment17B1E0VramEnd = gSegment17B1E0VramStart + (size_t) SEGMENT_VRAM_SIZE(segment_17B1E0);
+    gSegment17B1E0VramEnd = gSegment17B1E0VramStart + (size_t) SEGMENT_VRAM_SIZE(setup_gfx);
 
     gSegment17B960VramStart = gSegment17B1E0VramEnd;
-    gSegment17B960VramEnd = gSegment17B960VramStart + (size_t) SEGMENT_VRAM_SIZE(segment_17B960);
+    gSegment17B960VramEnd = gSegment17B960VramStart + (size_t) SEGMENT_VRAM_SIZE(machine_custom_gfx);
 
     gSegment1B8550VramStart = gSegment17B960VramEnd;
-    gSegment1B8550VramEnd = gSegment1B8550VramStart + (size_t) SEGMENT_VRAM_SIZE(segment_1B8550);
+    gSegment1B8550VramEnd = gSegment1B8550VramStart + (size_t) SEGMENT_VRAM_SIZE(hud_gfx);
 
     gSegment1E23F0VramStart = gOvl3VramEnd;
-    gSegment1E23F0VramEnd = gSegment1E23F0VramStart + (size_t) SEGMENT_VRAM_SIZE(segment_1E23F0);
+    gSegment1E23F0VramEnd = gSegment1E23F0VramStart + (size_t) SEGMENT_VRAM_SIZE(machine_global_gfx);
 
     gSegment22B0A0VramStart = gSegment17B960VramEnd;
-    gSegment22B0A0VramEnd = gSegment22B0A0VramStart + (size_t) SEGMENT_DATA_SIZE_CONST(segment_22B0A0);
+    gSegment22B0A0VramEnd = gSegment22B0A0VramStart + (size_t) SEGMENT_DATA_SIZE_CONST(machine_models);
 
     D_800DCDFC = gSegment17B1E0VramEnd;
     D_800DCE00 = D_800DCDFC + 0x1F820;
 
     gCourseEditTexturesVramStart = D_800DCE00;
-    gCourseEditTexturesVramEnd = gCourseEditTexturesVramStart + (size_t) SEGMENT_VRAM_SIZE(course_edit_textures);
+    gCourseEditTexturesVramEnd = gCourseEditTexturesVramStart + (size_t) SEGMENT_VRAM_SIZE(course_edit_textures_beta);
 
     gCreateMachineTexturesVramStart = D_800DCE00;
     gCreateMachineTexturesVramEnd =
@@ -311,19 +311,19 @@ void Game_ThreadEntry(void* entry) {
     Dma_LoadOverlay(SEGMENT_ROM_START(ovl_i10), SEGMENT_VRAM_START(ovl_i10), SEGMENT_ROM_SIZE(ovl_i10),
                     SEGMENT_BSS_START(ovl_i10), SEGMENT_BSS_SIZE(ovl_i10));
 
-    CLEAR_DATA_CACHE(osPhysicalToVirtual(gSegment16C8A0VramStart), SEGMENT_DATA_SIZE_CONST(segment_16C8A0));
-    Dma_LoadAssets(SEGMENT_ROM_START(segment_16C8A0),
+    CLEAR_DATA_CACHE(osPhysicalToVirtual(gSegment16C8A0VramStart), SEGMENT_DATA_SIZE_CONST(course_track_gfx));
+    Dma_LoadAssets(SEGMENT_ROM_START(course_track_gfx),
                    (uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +
-                       (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0),
-                   SEGMENT_ROM_SIZE(segment_16C8A0));
+                       (size_t) SEGMENT_DATA_SIZE_CONST(course_track_gfx),
+                   SEGMENT_ROM_SIZE(course_track_gfx));
 
     mio0Decode((uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +
-                   (size_t) SEGMENT_DATA_SIZE_CONST(segment_16C8A0),
+                   (size_t) SEGMENT_DATA_SIZE_CONST(course_track_gfx),
                osPhysicalToVirtual(gSegment16C8A0VramStart));
-    Dma_LoadAssets(SEGMENT_ROM_START(segment_17B1E0), osPhysicalToVirtual(gSegment17B1E0VramStart),
-                   SEGMENT_ROM_SIZE(segment_17B1E0));
-    Dma_LoadAssets(SEGMENT_ROM_START(segment_17B960), osPhysicalToVirtual(gSegment17B960VramStart),
-                   SEGMENT_ROM_SIZE(segment_17B960));
+    Dma_LoadAssets(SEGMENT_ROM_START(setup_gfx), osPhysicalToVirtual(gSegment17B1E0VramStart),
+                   SEGMENT_ROM_SIZE(setup_gfx));
+    Dma_LoadAssets(SEGMENT_ROM_START(machine_custom_gfx), osPhysicalToVirtual(gSegment17B960VramStart),
+                   SEGMENT_ROM_SIZE(machine_custom_gfx));
 
     // FrameBuffer Indexes
     D_800DCCFC = 0;

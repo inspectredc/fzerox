@@ -390,7 +390,7 @@ $(BUILD_DIR)/src/libultra/os/%.o: CC := $(IDO53)
 $(BUILD_DIR)/src/libultra/libc/%.o: CC := $(IDO53)
 
 # libleo
-$(BUILD_DIR)/src/leo_bootdisk.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO53) -- $(AS) $(ASFLAGS) --
+$(BUILD_DIR)/src/leo/leo_bootdisk.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO53) -- $(AS) $(ASFLAGS) --
 $(BUILD_DIR)/src/leo/lib/%.o: CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO53) -- $(AS) $(ASFLAGS) --
 else
 # directory flags
