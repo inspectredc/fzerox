@@ -355,7 +355,7 @@ void Title_DiskDriveInit(Object* diskDriveObj) {
     if (gRamDDCompatible && (func_800758F8() != 1)) {
         OBJECT_COUNTER(diskDriveObj)++;
         D_i4_8011D794 = 1;
-        func_800BB334();
+        Audio_AllSoundStop();
     }
 }
 
@@ -497,7 +497,7 @@ void Title_DiskDriveUpdate(Object* diskDriveObj) {
         if (func_800758F8() == 1) {
             if (OBJECT_COUNTER(diskDriveObj) != 0) {
                 Audio_SESeqStart();
-                func_800BAFA4(BGM_TITLE);
+                Audio_RomBgmStart(BGM_TITLE);
             }
             OBJECT_COUNTER(diskDriveObj) = 0;
             OBJECT_STATE(diskDriveObj) = 0;
@@ -510,7 +510,7 @@ void Title_DiskDriveUpdate(Object* diskDriveObj) {
         }
         switch (OBJECT_COUNTER(diskDriveObj)) {
             case 1:
-                func_800BB334();
+                Audio_AllSoundStop();
                 break;
             case 30:
                 if (func_800761D4() == 2) {

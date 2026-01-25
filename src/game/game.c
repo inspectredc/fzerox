@@ -254,7 +254,7 @@ void func_80068DCC(void) {
     if (D_800CD154 != bgm) {
         func_8007E0CC();
         func_8007E08C();
-        func_800BAFA4(bgm);
+        Audio_RomBgmStart(bgm);
     }
     D_800CD154 = bgm;
 }

@@ -261,18 +261,21 @@ Course_SplineGetBasis = 0x8009E85C;
 
 Racer_Draw = 0x80096CE8;
 
-Audio_PlayerLevelSEStart = 0x800BA2F0;
-Audio_PlayerLevelSEStop = 0x800BA3E4;
-Audio_PlayerTriggerSEStart = 0x800BA710;
-Audio_TriggerSystemSE = 0x800BA8D8;
-Audio_LevelSEFadeout = 0x800BB048;
-
 gCourseVtxPtr = 0x800F8520;
 gEffectsVtxPtr = 0x800E5ECC;
 gEffectsVtxEndPtr = 0x800E5ED0;
 gEnableRaceSfx = 0x800E5FD0;
 
 mio0Decode = 0x800AA620;
+
+Audio_PlayerFinished = 0x800BA2B4;
+Audio_PlayerLevelSEStart = 0x800BA2F0;
+Audio_PlayerLevelSEStop = 0x800BA3E4;
+Audio_PlayerTriggerSEStart = 0x800BA710;
+Audio_TriggerSystemSE = 0x800BA8D8;
+Audio_PlayerEngineEchoStart = 0x800BAB34;
+Audio_PlayerEngineEchoStop = 0x800BAB50;
+Audio_LevelSEFadeout = 0x800BB048;
 
 gRandSeed1 = 0x800CD170;
 gRandMask1 = 0x800CD174;
