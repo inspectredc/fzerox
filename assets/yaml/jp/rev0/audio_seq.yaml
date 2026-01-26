@@ -8,7 +8,7 @@
 
 aAudioSeqSE:
   type: FZX:SEQUENCE
-  offset: 0x527AF0
+  offset: 0x522620
   size: 0xC10
   force_large_notes: true
   envelope_end_markers: true
@@ -17,7 +17,7 @@ aAudioSeqSE:
 
 aAudioSeqGuitar:
   type: FZX:SEQUENCE
-  offset: 0x528700
+  offset: 0x523230
   size: 0x30
   force_large_notes: true
   envelope_end_markers: true

@@ -247,12 +247,22 @@
       - [0x51F720, .rodata, 524920]
 
   - name: audio_bank
-    type: bin
+    exclusive_ram_id: segment_00
+    type: code
+    dir: assets
+    vram: 0x0
     start: 0x51F890
+    subsegments:
+      - [0x51F890, .data, audio_bank/audio_bank]
 
   - name: audio_seq
-    type: bin
+    exclusive_ram_id: segment_00
+    type: code
+    dir: assets
+    vram: 0x0
     start: 0x522620
+    subsegments:
+      - [0x522620, .data, audio_seq/audio_seq]
 
   - name: audio_table
     type: bin

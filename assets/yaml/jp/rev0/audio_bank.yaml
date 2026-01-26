@@ -12,7 +12,7 @@ aAudioSoundFontSE:
   num_drums: 0
   num_instruments: 71
   support_sfx: false
-  offset: 0x524D60
+  offset: 0x51F890
   symbol: aAudioSoundFontSE
 
 aAudioSoundFontGuitar:
@@ -20,5 +20,5 @@ aAudioSoundFontGuitar:
   num_drums: 0
   num_instruments: 1
   support_sfx: false
-  offset: 0x527A40
+  offset: 0x522570
   symbol: aAudioSoundFontGuitar
