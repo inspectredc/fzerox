@@ -1,8 +1,6 @@
 #include "global.h"
 #include "audio.h"
 
-void Audio_NoteSetResamplingRate(Note* note, f32 freqScale);
-
 static char D_800D0680[] = "----------------------Double-Error CH: %x %f\n";
 static char D_800D06B0[] = "----------------------Double-Error NT: %x\n";
 static char D_800D06DC[] = "CAUTION:SUB IS SEPARATED FROM GROUP\n";
@@ -75,9 +73,6 @@ void Audio_NoteSetResamplingRate(Note* note, f32 freqScale) {
     note->noteSubEu.resampleRate = (s32) (var_fv0 * 32768.0f);
 }
 
-void Audio_AdsrInit(AdsrState* adsr, EnvelopePoint* envelope, s16* arg2);
-extern NoteSubEu gDefaultNoteSub;
-
 void Audio_NoteInit(Note* note) {
     if (note->playbackState.parentLayer->adsr.decayIndex == 0) {
         Audio_AdsrInit(&note->playbackState.adsr, note->playbackState.parentLayer->channel->adsr.envelope,
@@ -87,7 +82,7 @@ void Audio_NoteInit(Note* note) {
                        &note->playbackState.adsrVolScaleUnused);
     }
     note->playbackState.unk_04 = 0;
-    note->playbackState.adsr.state = 1;
+    note->playbackState.adsr.state = ADSR_STATE_INITIAL;
     note->noteSubEu = gDefaultNoteSub;
 }
 
@@ -101,16 +96,9 @@ void Audio_NoteDisable(Note* note) {
     note->playbackState.parentLayer = NO_LAYER;
     note->playbackState.prevParentLayer = NO_LAYER;
     note->noteSubEu.bitField.finished = 0;
-    note->playbackState.adsr.state = 0;
+    note->playbackState.adsr.state = ADSR_STATE_DISABLED;
     note->playbackState.adsr.current = 0.0f;
 }
-
-void AudioSeq_SequenceChannelDisable(SequenceChannel* channel);
-void Audio_SeqLayerNoteRelease(SequenceLayer* layer);
-void Audio_AudioListPushFront(AudioListItem* item1, AudioListItem* item2);
-void Audio_NoteInitForLayer(Note* note, SequenceLayer* layer);
-f32 Audio_AdsrUpdate(AdsrState* adsr);
-void Audio_NotePortamentoUpdate(Note* note);
 
 void Audio_ProcessNotes(void) {
     s32 pad[4];
@@ -164,7 +152,7 @@ void Audio_ProcessNotes(void) {
             NoteSubEu* noteSub = &note->noteSubEu;
             if (0) {}
             if ((playbackState->unk_04 > 0) || noteSub->bitField.finished) {
-                if ((playbackState->adsr.state == 0) || noteSub->bitField.finished) {
+                if ((playbackState->adsr.state == ADSR_STATE_DISABLED) || noteSub->bitField.finished) {
                     if (playbackState->wantedParentLayer != NO_LAYER) {
                         Audio_NoteDisable(note);
                         if (playbackState->wantedParentLayer->channel != NULL) {
@@ -190,7 +178,7 @@ void Audio_ProcessNotes(void) {
                         goto next;
                     }
                 }
-            } else if (playbackState->adsr.state == 0) {
+            } else if (playbackState->adsr.state == ADSR_STATE_DISABLED) {
                 if (playbackState->parentLayer != NO_LAYER) {
                     playbackState->parentLayer->bit8 = true;
                 }
@@ -246,9 +234,6 @@ Drum* Audio_GetDrum(s32 fontId, s32 drumId) {
     return gSoundFontList[fontId].drums[drumId];
 }
 
-void Audio_AudioListRemove(AudioListItem*);
-void Audio_AudioListPushFront(AudioListItem*, AudioListItem*);
-
 void Audio_SeqLayerDecayRelease(SequenceLayer* layer, s32 adsrState) {
     Note* note;
     NoteAttributes* noteAttr;
@@ -273,7 +258,7 @@ void Audio_SeqLayerDecayRelease(SequenceLayer* layer, s32 adsrState) {
         }
     } else {
         noteAttr = &note->playbackState.attributes;
-        if (note->playbackState.adsr.state != 6) {
+        if (note->playbackState.adsr.state != ADSR_STATE_DECAY) {
             noteAttr->freqScale = layer->noteFreqScale;
             noteAttr->velocity = layer->noteVelocity;
             noteAttr->pan = layer->notePan;
@@ -382,8 +367,6 @@ void Audio_NotePoolClear(NotePool* pool) {
         }
     }
 }
-
-void* AudioSeq_AudioListPopBack(AudioListItem* list);
 
 void Audio_NotePoolFill(NotePool* pool, s32 count) {
     s32 i;
@@ -600,8 +583,6 @@ Note* Audio_AllocNote(SequenceLayer* layer) {
     return NULL;
 }
 
-void* AudioHeap_Alloc(AudioAllocPool* pool, u32 size);
-
 void Audio_NoteInitAll(void) {
     s32 i;
     Note* note;
@@ -619,7 +600,7 @@ void Audio_NoteInitAll(void) {
         note->playbackState.waveId = 0;
         note->playbackState.attributes.velocity = 0.0f;
         note->playbackState.adsrVolScaleUnused = 0;
-        note->playbackState.adsr.state = 0;
+        note->playbackState.adsr.state = ADSR_STATE_DISABLED;
         note->playbackState.adsr.action.asByte = 0;
         note->playbackState.portamento.cur = 0.0f;
         note->playbackState.portamento.speed = 0.0f;

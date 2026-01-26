@@ -106,14 +106,18 @@ typedef enum BgmId {
     /* 10 */ BGM_NEW_03,
     /* 11 */ BGM_NEW_02,
     /* 12 */ BGM_NEW_01,
-    // /* 13 */ BGM_NEW_04,
+#ifdef EXPANSION_KIT
+    /* 13 */ BGM_NEW_04,
+#endif
     /* 14 */ BGM_TITLE,
     /* 15 */ BGM_SELECT,
     /* 16 */ BGM_OPTION,
-    // /* 17 */ BGM_DEATHRACE,
-    // /* 18 */ BGM_COURSE_EDITOR,
-    // /* 19 */ BGM_MACHINE_EDITOR,
-    // /* 20 */ BGM_EAD_DEMO,
+#ifdef EXPANSION_KIT
+    /* 17 */ BGM_DEATHRACE,
+    /* 18 */ BGM_COURSE_EDITOR,
+    /* 19 */ BGM_MACHINE_EDITOR,
+    /* 20 */ BGM_EAD_DEMO,
+#endif
     /* 21 */ BGM_21,
     /* 22 */ BGM_22,
     /* 23 */ BGM_23,
@@ -127,6 +131,10 @@ typedef enum BgmId {
 } BgmId;
 
 typedef enum SeqId {
+#ifndef EXPANSION_KIT
+    /*  0 */ SEQ_SOUND_EFFECTS,
+    /*  1 */ SEQ_GUITAR,
+#else
     /*  0 */ SEQ_GUITAR,
     /*  1 */ SEQ_SOUND_EFFECTS,
     /*  2 */ SEQ_DDBGM_MUTE_CITY,
@@ -150,10 +158,15 @@ typedef enum SeqId {
     /* 20 */ SEQ_DDBGM_COURSE_EDITOR,
     /* 21 */ SEQ_DDBGM_MACHINE_EDITOR,
     /* 22 */ SEQ_DDBGM_EAD_DEMO,
+#endif
     /* 23 */ SEQ_MAX,
 } SeqId;
 
 typedef enum FontId {
+#ifndef EXPANSION_KIT
+    /*  0 */ FONT_SOUND_EFFECTS,
+    /*  1 */ FONT_GUITAR,
+#else
     /*  0 */ FONT_GUITAR,
     /*  1 */ FONT_SOUND_EFFECTS,
     /*  2 */ FONT_DDBGM_MUTE_CITY,
@@ -177,6 +190,7 @@ typedef enum FontId {
     /* 20 */ FONT_DDBGM_COURSE_EDITOR,
     /* 21 */ FONT_DDBGM_MACHINE_EDITOR,
     /* 22 */ FONT_DDBGM_EAD_DEMO,
+#endif
     /* 23 */ FONT_MAX,
 } FontId;
 
@@ -184,6 +198,7 @@ typedef enum SampleBankId {
     /*  0 */ SAMPLE_SOUND_EFFECTS,
     /*  1 */ SAMPLE_BGM,
     /*  2 */ SAMPLE_GUITAR,
+#ifdef EXPANSION_KIT
     /*  3 */ SAMPLE_DD_SOUND_EFFECTS,
     /*  4 */ SAMPLE_DDBGM_MUTE_CITY,
     /*  5 */ SAMPLE_DDBGM_SILENCE,
@@ -206,6 +221,7 @@ typedef enum SampleBankId {
     /* 22 */ SAMPLE_DDBGM_COURSE_EDITOR,
     /* 23 */ SAMPLE_DDBGM_MACHINE_EDITOR,
     /* 24 */ SAMPLE_DDBGM_EAD_DEMO,
+#endif
     /* 25 */ SAMPLE_MAX,
 } SampleBankId;
 

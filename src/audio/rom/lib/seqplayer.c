@@ -144,9 +144,6 @@ static char D_800D0A50[] = "Disappear Sequence or Bank %d\n";
 static char D_800D0A70[] = "Group:Undefine upper C0h command (%x)\n";
 static char D_800D0A98[] = "Group:Undefined Command\n";
 
-u8 AudioSeq_ScriptReadU8(SeqScriptState*);
-s16 AudioSeq_ScriptReadS16(SeqScriptState*);
-
 s32 AudioSeq_GetScriptControlFlowArgument(SeqScriptState* state, u8 cmd) {
     u8 highBits = sSeqInstructionArgsTable[cmd - 0xB0];
     u8 lowBits = highBits & 3;
@@ -163,8 +160,6 @@ s32 AudioSeq_GetScriptControlFlowArgument(SeqScriptState* state, u8 cmd) {
 
     return cmdArg;
 }
-
-u16 AudioSeq_ScriptReadCompressedU16(SeqScriptState*);
 
 s32 AudioSeq_HandleScriptFlowControl(SequencePlayer* seqPlayer, SeqScriptState* state, s32 cmd, s32 cmdArg) {
     switch (cmd) {
@@ -276,8 +271,6 @@ void AudioSeq_InitSequenceChannel(SequenceChannel* channel) {
     Audio_InitNoteLists(&channel->notePool);
 }
 
-void* AudioSeq_AudioListPopBack(AudioListItem*);
-
 s32 AudioSeq_SeqChannelSetLayer(SequenceChannel* channel, s32 layerIndex) {
     SequenceLayer* newLayer;
     SequenceLayer* layer;
@@ -331,8 +324,6 @@ void AudioSeq_SeqLayerDisable(SequenceLayer* layer) {
     }
 }
 
-void AudioSeq_AudioListPushBack(AudioListItem* list, AudioListItem* item);
-
 void AudioSeq_SeqLayerFree(SequenceChannel* channel, s32 layerIndex) {
     SequenceLayer* layer = channel->layers[layerIndex];
 
@@ -342,8 +333,6 @@ void AudioSeq_SeqLayerFree(SequenceChannel* channel, s32 layerIndex) {
         channel->layers[layerIndex] = NULL;
     }
 }
-
-void Audio_NotePoolClear(NotePool*);
 
 void AudioSeq_SequenceChannelDisable(SequenceChannel* channel) {
     s32 i;
@@ -400,8 +389,6 @@ void AudioSeq_SequenceChannelEnable(SequencePlayer* seqPlayer, u8 channelIndex, 
         }
     }
 }
-
-void AudioLoad_SetSeqLoadStatus(s32, s32);
 
 void AudioSeq_SequencePlayerDisable(SequencePlayer* seqPlayer) {
     AudioSeq_SequencePlayerDisableChannels(seqPlayer, 0xFFFF);
@@ -486,12 +473,6 @@ u16 AudioSeq_ScriptReadCompressedU16(SeqScriptState* state) {
     }
     return ret;
 }
-
-void AudioSeq_SeqLayerProcessScriptStep1(SequenceLayer*);
-s32 AudioSeq_SeqLayerProcessScriptStep2(SequenceLayer*);
-s32 AudioSeq_SeqLayerProcessScriptStep3(SequenceLayer*, s32);
-s32 AudioSeq_SeqLayerProcessScriptStep4(SequenceLayer*, s32);
-s32 AudioSeq_SeqLayerProcessScriptStep5(SequenceLayer*, s32);
 
 void AudioSeq_SeqLayerProcessScript(SequenceLayer* layer) {
     s32 cmd;
@@ -579,8 +560,6 @@ s32 AudioSeq_SeqLayerProcessScriptStep5(SequenceLayer* layer, s32 sameTunedSampl
 
     return 0;
 }
-
-u8 AudioSeq_GetInstrument(SequenceChannel* channel, u8 instId, Instrument** instOut, AdsrSettings* adsr);
 
 s32 AudioSeq_SeqLayerProcessScriptStep2(SequenceLayer* layer) {
     SequenceChannel* channel = layer->channel;
@@ -729,7 +708,6 @@ s32 AudioSeq_SeqLayerProcessScriptStep2(SequenceLayer* layer) {
 }
 
 extern f32 gPitchFrequencies[];
-Drum* Audio_GetDrum(s32 fontId, s32 drumId);
 
 s32 AudioSeq_SeqLayerProcessScriptStep4(SequenceLayer* layer, s32 cmd) {
     s32 sameTunedSample = true;
@@ -1012,8 +990,6 @@ void AudioSeq_SetInstrument(SequenceChannel* channel, u8 instId) {
 void AudioSeq_SequenceChannelSetVolume(SequenceChannel* channel, u8 volume) {
     channel->volume = (s32) volume / 127.0f;
 }
-
-extern u8 sSeqInstructionArgsTable[];
 
 void AudioSeq_SequenceChannelProcessScript(SequenceChannel* channel) {
     u8* data;
@@ -1592,8 +1568,6 @@ void AudioSeq_SequencePlayerProcessSequence(SequencePlayer* seqPlayer) {
     }
 }
 
-void Audio_SequencePlayerProcessSound(SequencePlayer* seqPlayer);
-
 void AudioSeq_ProcessSequences(s32 arg0) {
     SequencePlayer* seqPlayer;
     u32 i;
@@ -1648,8 +1622,6 @@ void AudioSeq_ResetSequencePlayer(s32 seqPlayerIndex) {
         AudioSeq_InitSequenceChannel(seqPlayer->channels[i]);
     }
 }
-
-void* AudioHeap_AllocZeroed(AudioAllocPool* pool, u32 size);
 
 void AudioSeq_InitSequencePlayerChannels(s32 seqPlayerIndex) {
     SequenceChannel* channel;

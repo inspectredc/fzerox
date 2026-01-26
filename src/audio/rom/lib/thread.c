@@ -3,9 +3,6 @@
 #include "audiothread_cmd.h"
 #include "fzx_thread.h"
 
-void AudioThread_ProcessCmds(u32 msg);
-void AudioThread_ProcessSeqPlayerCmd(SequenceChannel* channel, AudioCmd* cmd);
-
 static char devstr0[] = "DAC:Lost 1 Frame.\n";
 static char devstr1[] = "Address Error %x\n";
 static char devstr2[] = "DMA: Request queue over.( %d )\n";
@@ -134,9 +131,6 @@ static char devstr7[] = "---AudioSending (%d->%d) \n";
 static char devstr8[] = "AudioSend: %d -> %d (%d)\n";
 static char devstr9[] = "Warning: MesgQ is Full, Retry Next Send.\n";
 static char devstr10[] = "Next Start %d \n";
-
-void AudioThread_SetFadeOutTimer(s32 seqPlayerIndex, s32 fadeTime);
-void AudioThread_SetFadeInTimer(s32 seqPlayerIndex, s32 fadeTime);
 
 void AudioThread_ProcessGlobalCmd(AudioCmd* cmd) {
     s32 i;
@@ -392,12 +386,12 @@ void AudioThread_ProcessCmds(u32 msg) {
                 }
             } else if (seqPlayer->enabled) {
                 if (cmd->arg1 < 16) {
-                    AudioThread_ProcessSeqPlayerCmd(seqPlayer->channels[cmd->arg1], cmd);
+                    AudioThread_ProcessChannelCmd(seqPlayer->channels[cmd->arg1], cmd);
                 } else if (cmd->arg1 == 0xFF) {
                     threadCmdChannelMask = gThreadCmdChannelMask[cmd->arg0];
                     for (i = 0; i < ARRAY_COUNT(seqPlayer->channels); i++) {
                         if (threadCmdChannelMask & 1) {
-                            AudioThread_ProcessSeqPlayerCmd(seqPlayer->channels[i], cmd);
+                            AudioThread_ProcessChannelCmd(seqPlayer->channels[i], cmd);
                         }
                         threadCmdChannelMask = threadCmdChannelMask >> 1;
                     }
@@ -508,7 +502,7 @@ void AudioThread_ResetExternalPool(void) {
     gExternalPool.startRamAddr = NULL;
 }
 
-void AudioThread_ProcessSeqPlayerCmd(SequenceChannel* channel, AudioCmd* cmd) {
+void AudioThread_ProcessChannelCmd(SequenceChannel* channel, AudioCmd* cmd) {
     switch (cmd->op) {
         case AUDIOCMD_OP_CHANNEL_SET_VOL_SCALE:
             if (channel->volumeScale != cmd->asFloat) {

@@ -19,14 +19,14 @@
     vram: 0x80025C00
     bss_size: 0x57D0
     subsegments:
-      - { type: .bss, vram: 0x80025C00, name: audio/audio_context }
+      - { type: .bss, vram: 0x80025C00, name: audio/rom/lib/audio_context }
 
   - name: audio_heap
     type: code
     vram: 0x8002B400
     bss_size: 0x3B000
     subsegments:
-      - { type: .bss, vram: 0x8002B400, name: audio/audio_heap }
+      - { type: .bss, vram: 0x8002B400, name: audio/rom/lib/audio_heap }
 
   - name: entry
     type: code
@@ -71,15 +71,15 @@
       - [0x22CE0, c, game/racer]
       - [0x36ED0, c, game/36ED0]
       - [0x44620, hasm, game/mio0Decode]
-      - [0x446D0, c, audio/playback]
-      - [0x459A0, c, audio/effects]
-      - [0x45FD0, c, audio/seqplayer]
-      - [0x48A10, c, audio/load]
-      - [0x4C460, c, audio/heap]
-      - [0x4EBC0, c, audio/aisetnextbuf]
-      - [0x4EC40, c, audio/synthesis]
-      - [0x4FFB0, c, audio/thread]
-      - [0x511D0, c, audio/general]
+      - [0x446D0, c, audio/rom/lib/playback]
+      - [0x459A0, c, audio/rom/lib/effects]
+      - [0x45FD0, c, audio/rom/lib/seqplayer]
+      - [0x48A10, c, audio/rom/lib/load]
+      - [0x4C460, c, audio/rom/lib/heap]
+      - [0x4EBC0, c, audio/rom/lib/aisetnextbuf]
+      - [0x4EC40, c, audio/rom/lib/synthesis]
+      - [0x4FFB0, c, audio/rom/lib/thread]
+      - [0x511D0, c, audio/rom/external]
 
       # Leo Boot
       - [0x554E0, c, leo/leo_bootdisk]
@@ -243,17 +243,17 @@
       - [0x678A0, .data, game/camera]
       - [0x67AA0, .data, game/racer]
       - [0x69500, .data, game/36ED0]
-      - [0x69A30, .data, audio/note_data]
-      - [0x6A680, .data, audio/playback]
-      - [0x6A840, .data, audio/effects]
-      - [0x6A860, .data, audio/seqplayer]
-      - [0x6AAC0, .data, audio/load]
-      - [0x6B130, .data, audio/heap]
-      - [0x6B6D0, .data, audio/aisetnextbuf]
-      - [0x6B6E0, .data, audio/synthesis]
-      - [0x6B710, .data, audio/thread]
-      - [0x6B9E0, .data, audio/general]
-      - [0x6BC20, .data, audio/audio_context]
+      - [0x69A30, .data, audio/rom/lib/note_data]
+      - [0x6A680, .data, audio/rom/lib/playback]
+      - [0x6A840, .data, audio/rom/lib/effects]
+      - [0x6A860, .data, audio/rom/lib/seqplayer]
+      - [0x6AAC0, .data, audio/rom/lib/load]
+      - [0x6B130, .data, audio/rom/lib/heap]
+      - [0x6B6D0, .data, audio/rom/lib/aisetnextbuf]
+      - [0x6B6E0, .data, audio/rom/lib/synthesis]
+      - [0x6B710, .data, audio/rom/lib/thread]
+      - [0x6B9E0, .data, audio/rom/external]
+      - [0x6BC20, .data, audio/rom/lib/audio_context]
       - [0x6BC80, data, libultra/os/exceptasm]
       - [0x6BCA0, .data, libultra/os/thread]
       - [0x6BCD0, .data, libultra/io/controller]
@@ -345,13 +345,13 @@
       - [0x6EC80, .rodata, game/camera]
       - [0x6F790, .rodata, game/racer]
       - [0x6FA10, .rodata, game/36ED0]
-      - [0x6FB40, .rodata, audio/playback]
-      - [0x6FB50, .rodata, audio/effects]
-      - [0x6FB80, .rodata, audio/seqplayer]
-      - [0x6FF40, .rodata, audio/load]
-      - [0x6FF70, .rodata, audio/heap]
-      - [0x6FF90, .rodata, audio/thread]
-      - [0x70050, .rodata, audio/general]
+      - [0x6FB40, .rodata, audio/rom/lib/playback]
+      - [0x6FB50, .rodata, audio/rom/lib/effects]
+      - [0x6FB80, .rodata, audio/rom/lib/seqplayer]
+      - [0x6FF40, .rodata, audio/rom/lib/load]
+      - [0x6FF70, .rodata, audio/rom/lib/heap]
+      - [0x6FF90, .rodata, audio/rom/lib/thread]
+      - [0x70050, .rodata, audio/rom/external]
 
       # RODATA - Libultra
       - [0x709A0, rodata, libultra/libc/setintmask]
@@ -372,7 +372,7 @@
       - [0x71500, data, f3dflx]
       - [0x718B0, data, l3dex]
       - [0x71CA0, data, aspmain]
-      - [0x71F80, data, audio/audio_tables]
+      - [0x71F80, .data, audio/rom/audio_tables]
 
       - { type: .bss, vram: 0x800D8030, name: sys/sys_main }
       - { type: .bss, vram: 0x800DCCF0, name: sys/sys_gfx }
@@ -392,7 +392,7 @@
       - { type: .bss, vram: 0x800E5220, name: game/camera }
       - { type: .bss, vram: 0x800E5EC0, name: game/racer }
       - { type: .bss, vram: 0x800F8510, name: game/36ED0 }
-      - { type: .bss, vram: 0x800F89F0, name: audio/load }
+      - { type: .bss, vram: 0x800F89F0, name: audio/rom/lib/load }
       - { type: .bss, vram: 0x800F8AF0, name: libultra/io/sptask }
       - { type: .bss, vram: 0x800F8B30, name: libultra/io/leointerrupt }
       - { type: .bss, vram: 0x800F9B30, name: libultra/io/motor }
