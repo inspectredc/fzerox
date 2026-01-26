@@ -1266,10 +1266,10 @@ Gfx* Menus_DrawPlayerWinner(Gfx* gfx, s32 playerIndex) {
 
                 if (gRacers[playerIndex].stateFlags & RACER_STATE_CRASHED) {
                     if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
-                        func_800BAFA4(BGM_24);
+                        Audio_RomBgmStart(BGM_24);
                     }
                 } else if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
-                    func_800BAFA4(BGM_22);
+                    Audio_RomBgmStart(BGM_22);
                 }
                 for (i = 0; i < gNumPlayers; i++) {
                     if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
@@ -1681,7 +1681,7 @@ Gfx* Menus_DrawFinish(Gfx* gfx, s32 playerIndex) {
 
     if (sPlayerWinnerLoserFinishGameoverTimer[playerIndex] == 60) {
         if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
-            func_800BAFA4(BGM_22);
+            Audio_RomBgmStart(BGM_22);
         }
         for (i = 0; i < gNumPlayers; i++) {
             if ((gRacers[i].stateFlags & RACER_STATE_CRASHED) ||
@@ -3675,7 +3675,7 @@ Gfx* Menus_DrawPlayerRetire(Gfx* gfx, s32 playerIndex) {
             func_8007E0CC();
         }
         if ((sPlayerRetireTimer[playerIndex] == 60) && (gTitleDemoState == TITLE_DEMO_INACTIVE)) {
-            func_800BAFA4(BGM_23);
+            Audio_RomBgmStart(BGM_23);
         }
     }
 
@@ -4638,7 +4638,7 @@ Gfx* Menus_Player1SpecialDraw(Gfx* gfx, s32 playerIndex) {
             }
             if (sPlayerLoserFinishTimer[playerIndex] == 120) {
                 if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
-                    func_800BAFA4(BGM_21);
+                    Audio_RomBgmStart(BGM_21);
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
@@ -4675,7 +4675,7 @@ Gfx* Menus_Player1SpecialDraw(Gfx* gfx, s32 playerIndex) {
             }
             if (sPlayerWinnerLoserFinishGameoverTimer[playerIndex] == 30) {
                 if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
-                    func_800BAFA4(BGM_22);
+                    Audio_RomBgmStart(BGM_22);
                 }
 
                 for (i = 0; i < gNumPlayers; i++) {
@@ -5097,7 +5097,7 @@ Gfx* Menus_Draw(Gfx* gfx) {
                             sPlayerGameoverState[0] = PLAYER_GAMEOVER_DISPLAY;
                             Menus_InitGameover(0);
                             if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
-                                func_800BAFA4(BGM_GAMEOVER);
+                                Audio_RomBgmStart(BGM_GAMEOVER);
                             }
                         }
                         break;

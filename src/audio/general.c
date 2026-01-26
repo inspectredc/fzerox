@@ -217,7 +217,8 @@ void Audio_PlayerSEStart(u8 racerId, u8 sfxId) {
     //! @bug OOB read in sPlayerEngineSoundState when using non-player racerIds
     if ((sPlayerEngineSoundState[racerId] == 0) &&
         !((sfxId == 0x16) || (sfxId == 0x10) || (sfxId == 0x21) || (sfxId == 0x1E) || (sfxId == 5) || (sfxId == 8) ||
-          (sfxId == 0xF) || (sfxId == 0x30) || (sfxId == 0x31) || (sfxId == 0x34) || (sfxId == 0x35) || (sfxId == 0x3E))) {
+          (sfxId == 0xF) || (sfxId == 0x30) || (sfxId == 0x31) || (sfxId == 0x34) || (sfxId == 0x35) ||
+          (sfxId == 0x3E))) {
         PRINTF("Ouch!! UN-SUPORTED TRG SE NUM WAS CALLED !!!!!!! num = %02x\n", sfxId);
         return;
     }
@@ -1418,7 +1419,8 @@ void Audio_SystemSEStart(u8 ioData) {
 
 void Audio_TriggerVoiceSEStart(u8 sfxId, u16 time) {
 
-    if ((sfxId != sVoiceSEStack1) && (sfxId != sVoiceSEStack2) && (sfxId != sVoiceSEStack3) && (sfxId != sVoiceSEStack4)) {
+    if ((sfxId != sVoiceSEStack1) && (sfxId != sVoiceSEStack2) && (sfxId != sVoiceSEStack3) &&
+        (sfxId != sVoiceSEStack4)) {
         if (sVoiceSEStackTimer1 != 0) {
             if (sVoiceSEStackTimer2 != 0) {
                 if (sVoiceSEStackTimer3 != 0) {

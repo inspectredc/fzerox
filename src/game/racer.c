@@ -730,8 +730,8 @@ void func_800892E0(Racer* racer) {
                 D_800E5FBC = 1;
                 gRacers[0].energy = gRacers[0].maxEnergy;
                 D_800F5DE8 = D_800E5FBC;
-                func_800BA2B4(gRacers[0].id);
-                func_800BAB68(gRacers[0].id);
+                Audio_PlayerFinished(gRacers[0].id);
+                Audio_PlayerEngineStop(gRacers[0].id);
                 func_8007E0CC();
             }
         }
@@ -776,13 +776,13 @@ void func_800894C0(Racer* arg0) {
         }
         if (arg0->unk_08 & 0x100) {
             arg0->unk_08 &= ~0x100;
-            func_800BAB50(arg0->id);
+            Audio_PlayerEngineEchoStop(arg0->id);
         }
         if (arg0->unk_08 & 0x80) {
             arg0->unk_08 &= ~0x80;
             Audio_PlayerLevelSEStop(arg0->id, 9);
         }
-        func_800BAB68(arg0->id);
+        Audio_PlayerEngineStop(arg0->id);
     } else {
         arg0->unk_08 &= ~(0x800 | 0x400 | 0x20 | 0x200 | 0x40 | 0x2000 | 0x100 | 0x80);
     }
@@ -2325,7 +2325,7 @@ void func_8008E54C(Racer* arg0, f32 arg1) {
                 arg0->velocity.y -= temp_ft4 * arg0->segmentBasis.y.y;
                 arg0->velocity.z -= temp_ft4 * arg0->segmentBasis.y.z;
                 if ((arg0->id < gNumPlayers) && gEnableRaceSfx) {
-                    func_800BB3C4(arg0->id, temp_ft4);
+                    Audio_Chakuchi(arg0->id, temp_ft4);
                 }
             }
         }
@@ -2540,7 +2540,7 @@ void func_8008EC98(Racer* arg0) {
                     arg0->velocity.y -= var_fs0 * arg0->segmentBasis.y.y;
                     arg0->velocity.z -= var_fs0 * arg0->segmentBasis.y.z;
                     if ((arg0->id < gNumPlayers) && gEnableRaceSfx) {
-                        func_800BB3C4(arg0->id, var_fs0);
+                        Audio_Chakuchi(arg0->id, var_fs0);
                     }
                 }
             }
@@ -2591,7 +2591,7 @@ void func_8008EC98(Racer* arg0) {
             arg0->velocity.y -= var_fs0 * arg0->unk_19C.y;
             arg0->velocity.z -= var_fs0 * arg0->unk_19C.z;
             if ((arg0->id < gNumPlayers) && gEnableRaceSfx) {
-                func_800BB3C4(arg0->id, var_fs0);
+                Audio_Chakuchi(arg0->id, var_fs0);
             }
         }
     }
@@ -2770,7 +2770,7 @@ void func_8008F550(Racer* arg0) {
             arg0->velocity.z -= (var_fa1 * arg0->unk_19C.z);
 
             if ((arg0->id < gNumPlayers) && gEnableRaceSfx) {
-                func_800BB3C4(arg0->id, var_fa1);
+                Audio_Chakuchi(arg0->id, var_fa1);
             }
         }
     }
@@ -2911,7 +2911,7 @@ void func_8008FC80(Racer* arg0) {
                     arg0->velocity.y -= var_fs0 * arg0->segmentBasis.y.y;
                     arg0->velocity.z -= var_fs0 * arg0->segmentBasis.y.z;
                     if ((arg0->id < gNumPlayers) && gEnableRaceSfx) {
-                        func_800BB3C4(arg0->id, var_fs0);
+                        Audio_Chakuchi(arg0->id, var_fs0);
                     }
                 }
             }
@@ -2957,7 +2957,7 @@ void func_8008FC80(Racer* arg0) {
             arg0->velocity.y -= var_fs0 * arg0->unk_19C.y;
             arg0->velocity.z -= var_fs0 * arg0->unk_19C.z;
             if ((arg0->id < gNumPlayers) && gEnableRaceSfx) {
-                func_800BB3C4(arg0->id, var_fs0);
+                Audio_Chakuchi(arg0->id, var_fs0);
             }
         }
     }
@@ -3087,7 +3087,7 @@ void func_80090568(Racer* arg0) {
             arg0->velocity.y -= sp48 * arg0->segmentBasis.y.y;
             arg0->velocity.z -= sp48 * arg0->segmentBasis.y.z;
             if ((arg0->id < gNumPlayers) && gEnableRaceSfx) {
-                func_800BB3C4(arg0->id, sp48);
+                Audio_Chakuchi(arg0->id, sp48);
             }
         }
     }
@@ -4119,7 +4119,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                             if (racer->id < gNumPlayers) {
                                 if (gEnableRaceSfx) {
                                     Audio_PlayerTriggerSEStart(racer->id, 0xF);
-                                    func_800BA2B4(racer->id);
+                                    Audio_PlayerFinished(racer->id);
                                 }
                                 func_800894C0(racer);
                                 if (gNumPlayers == 1) {
@@ -4610,7 +4610,7 @@ void func_80090BCC(Racer* racer, Controller* controller) {
             if (racer->unk_08 & 0x100) {
                 racer->unk_08 &= ~0x100;
                 if (gEnableRaceSfx) {
-                    func_800BAB50(racer->id);
+                    Audio_PlayerEngineEchoStop(racer->id);
                 }
             }
         }
@@ -4739,7 +4739,7 @@ void Racer_Update(void) {
             if (gRaceIntroTimer == 460) {
                 func_8007E08C();
                 if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
-                    func_800BB018();
+                    Audio_StartDemo();
                 }
                 for (i = 0; i < gNumPlayers; i++) {
                     func_800BAE5C(i);
@@ -5166,7 +5166,7 @@ void Racer_Update(void) {
         if (gNumPlayers == 1) {
             func_8008B150();
             if (gEnableRaceSfx) {
-                func_800BA2E0(gNearestRacer);
+                Audio_SetNearestEnemy(gNearestRacer);
             }
         }
         if ((gRacersByPosition[0]->id < gNumPlayers) && (gGameMode != GAMEMODE_DEATH_RACE) &&
@@ -5205,8 +5205,8 @@ void Racer_Update(void) {
                             if (racer->position == 1) {
                                 Audio_PlayerTriggerSEStart(racer->id, 0xF);
                             }
-                            func_800BA2B4(racer->id);
-                            func_800BAB68(racer->id);
+                            Audio_PlayerFinished(racer->id);
+                            Audio_PlayerEngineStop(racer->id);
                             if ((i != 0) && (gPlayerRacersFinished == 0)) {
                                 i = 0;
                                 func_8007E0CC();

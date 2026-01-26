@@ -244,11 +244,11 @@ void func_8007E08C(void) {
 }
 
 void func_8007E0AC(s32 bgm) {
-    Audio_RomBgmStart(bgm);
+    Audio_BetaBgmStart(bgm);
 }
 
 void func_8007E0CC(void) {
-    Audio_RomBgmStop();
+    Audio_BetaBgmStop();
 }
 
 void func_8007E0EC(void) {

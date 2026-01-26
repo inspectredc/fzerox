@@ -15,45 +15,45 @@ s8 D_800CD2F0 = -1;
 s8 D_800CD2F4 = false;
 
 RomOffset D_800CD2F8[] = {
-    SEGMENT_ROM_START(mute_city_textures), // VENUE_MUTE_CITY
-    SEGMENT_ROM_START(port_town_textures), // VENUE_PORT_TOWN
-    SEGMENT_ROM_START(big_blue_textures), // VENUE_BIG_BLUE
-    SEGMENT_ROM_START(sand_ocean_textures), // VENUE_SAND_OCEAN
+    SEGMENT_ROM_START(mute_city_textures),     // VENUE_MUTE_CITY
+    SEGMENT_ROM_START(port_town_textures),     // VENUE_PORT_TOWN
+    SEGMENT_ROM_START(big_blue_textures),      // VENUE_BIG_BLUE
+    SEGMENT_ROM_START(sand_ocean_textures),    // VENUE_SAND_OCEAN
     SEGMENT_ROM_START(devils_forest_textures), // VENUE_DEVILS_FOREST
-    SEGMENT_ROM_START(white_land_textures), // VENUE_WHITE_LAND
-    SEGMENT_ROM_START(sector_textures), // VENUE_SECTOR
-    SEGMENT_ROM_START(red_canyon_textures), // VENUE_RED_CANYON
-    SEGMENT_ROM_START(fire_field_textures), // VENUE_FIRE_FIELD
-    SEGMENT_ROM_START(silence_textures), // VENUE_SILENCE
-    SEGMENT_ROM_START(ending_venue_textures), // VENUE_ENDING
+    SEGMENT_ROM_START(white_land_textures),    // VENUE_WHITE_LAND
+    SEGMENT_ROM_START(sector_textures),        // VENUE_SECTOR
+    SEGMENT_ROM_START(red_canyon_textures),    // VENUE_RED_CANYON
+    SEGMENT_ROM_START(fire_field_textures),    // VENUE_FIRE_FIELD
+    SEGMENT_ROM_START(silence_textures),       // VENUE_SILENCE
+    SEGMENT_ROM_START(ending_venue_textures),  // VENUE_ENDING
 };
 
 u8* D_800CD324[] = {
-    SEGMENT_VRAM_START(mute_city_textures), // VENUE_MUTE_CITY
-    SEGMENT_VRAM_START(port_town_textures), // VENUE_PORT_TOWN
-    SEGMENT_VRAM_START(big_blue_textures), // VENUE_BIG_BLUE
-    SEGMENT_VRAM_START(sand_ocean_textures), // VENUE_SAND_OCEAN
+    SEGMENT_VRAM_START(mute_city_textures),     // VENUE_MUTE_CITY
+    SEGMENT_VRAM_START(port_town_textures),     // VENUE_PORT_TOWN
+    SEGMENT_VRAM_START(big_blue_textures),      // VENUE_BIG_BLUE
+    SEGMENT_VRAM_START(sand_ocean_textures),    // VENUE_SAND_OCEAN
     SEGMENT_VRAM_START(devils_forest_textures), // VENUE_DEVILS_FOREST
-    SEGMENT_VRAM_START(white_land_textures), // VENUE_WHITE_LAND
-    SEGMENT_VRAM_START(sector_textures), // VENUE_SECTOR
-    SEGMENT_VRAM_START(red_canyon_textures), // VENUE_RED_CANYON
-    SEGMENT_VRAM_START(fire_field_textures), // VENUE_FIRE_FIELD
-    SEGMENT_VRAM_START(silence_textures), // VENUE_SILENCE
-    SEGMENT_VRAM_START(ending_venue_textures), // VENUE_ENDING
+    SEGMENT_VRAM_START(white_land_textures),    // VENUE_WHITE_LAND
+    SEGMENT_VRAM_START(sector_textures),        // VENUE_SECTOR
+    SEGMENT_VRAM_START(red_canyon_textures),    // VENUE_RED_CANYON
+    SEGMENT_VRAM_START(fire_field_textures),    // VENUE_FIRE_FIELD
+    SEGMENT_VRAM_START(silence_textures),       // VENUE_SILENCE
+    SEGMENT_VRAM_START(ending_venue_textures),  // VENUE_ENDING
 };
 
 u8* D_800CD350[] = {
-    SEGMENT_VRAM_END(mute_city_textures), // VENUE_MUTE_CITY
-    SEGMENT_VRAM_END(port_town_textures), // VENUE_PORT_TOWN
-    SEGMENT_VRAM_END(big_blue_textures), // VENUE_BIG_BLUE
-    SEGMENT_VRAM_END(sand_ocean_textures), // VENUE_SAND_OCEAN
+    SEGMENT_VRAM_END(mute_city_textures),     // VENUE_MUTE_CITY
+    SEGMENT_VRAM_END(port_town_textures),     // VENUE_PORT_TOWN
+    SEGMENT_VRAM_END(big_blue_textures),      // VENUE_BIG_BLUE
+    SEGMENT_VRAM_END(sand_ocean_textures),    // VENUE_SAND_OCEAN
     SEGMENT_VRAM_END(devils_forest_textures), // VENUE_DEVILS_FOREST
-    SEGMENT_VRAM_END(white_land_textures), // VENUE_WHITE_LAND
-    SEGMENT_VRAM_END(sector_textures), // VENUE_SECTOR
-    SEGMENT_VRAM_END(red_canyon_textures), // VENUE_RED_CANYON
-    SEGMENT_VRAM_END(fire_field_textures), // VENUE_FIRE_FIELD
-    SEGMENT_VRAM_END(silence_textures), // VENUE_SILENCE
-    SEGMENT_VRAM_END(ending_venue_textures), // VENUE_ENDING
+    SEGMENT_VRAM_END(white_land_textures),    // VENUE_WHITE_LAND
+    SEGMENT_VRAM_END(sector_textures),        // VENUE_SECTOR
+    SEGMENT_VRAM_END(red_canyon_textures),    // VENUE_RED_CANYON
+    SEGMENT_VRAM_END(fire_field_textures),    // VENUE_FIRE_FIELD
+    SEGMENT_VRAM_END(silence_textures),       // VENUE_SILENCE
+    SEGMENT_VRAM_END(ending_venue_textures),  // VENUE_ENDING
 };
 
 extern uintptr_t gSegment17B1E0VramEnd;
