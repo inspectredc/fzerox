@@ -417,28 +417,32 @@ void Audio_LevelSEFadeoutRoutine(void) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 5, reverbVolume);
         }
     }
-    if ((sPlayerEngineSoundState[0] != 0) && (sActivePlayerLevelSE[0][0] != NA_LEVEL_SE_NONE) && (sChannelVolume[6] != 0.0f)) {
+    if ((sPlayerEngineSoundState[0] != 0) && (sActivePlayerLevelSE[0][0] != NA_LEVEL_SE_NONE) &&
+        (sChannelVolume[6] != 0.0f)) {
         volumeScale = sChannelVolume[6] - ((sChannelVolume[6] / 30.0f) * sLevelFadeoutTimer);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 6, volumeScale);
         if (sPlayerEngineEchoSoundState[0] == 1) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, reverbVolume);
         }
     }
-    if ((sPlayerEngineSoundState[1] != 0) && (sActivePlayerLevelSE[1][0] != NA_LEVEL_SE_NONE) && (sChannelVolume[7] != 0.0f)) {
+    if ((sPlayerEngineSoundState[1] != 0) && (sActivePlayerLevelSE[1][0] != NA_LEVEL_SE_NONE) &&
+        (sChannelVolume[7] != 0.0f)) {
         volumeScale = sChannelVolume[7] - ((sChannelVolume[7] / 30.0f) * sLevelFadeoutTimer);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 7, volumeScale);
         if (sPlayerEngineEchoSoundState[1] == 1) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, reverbVolume);
         }
     }
-    if ((sPlayerEngineSoundState[2] != 0) && (sActivePlayerLevelSE[2][0] != NA_LEVEL_SE_NONE) && (sChannelVolume[8] != 0.0f)) {
+    if ((sPlayerEngineSoundState[2] != 0) && (sActivePlayerLevelSE[2][0] != NA_LEVEL_SE_NONE) &&
+        (sChannelVolume[8] != 0.0f)) {
         volumeScale = sChannelVolume[8] - ((sChannelVolume[8] / 30.0f) * sLevelFadeoutTimer);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 8, volumeScale);
         if (sPlayerEngineEchoSoundState[2] == 1) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, reverbVolume);
         }
     }
-    if ((sPlayerEngineSoundState[3] != 0) && (sActivePlayerLevelSE[3][0] != NA_LEVEL_SE_NONE) && (sChannelVolume[9] != 0.0f)) {
+    if ((sPlayerEngineSoundState[3] != 0) && (sActivePlayerLevelSE[3][0] != NA_LEVEL_SE_NONE) &&
+        (sChannelVolume[9] != 0.0f)) {
         volumeScale = sChannelVolume[9] - ((sChannelVolume[9] / 30.0f) * sLevelFadeoutTimer);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 9, volumeScale);
         if (sPlayerEngineEchoSoundState[3] == 1) {
@@ -859,7 +863,8 @@ void Audio_UpdateReverb(u8 playerIndex) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 14, 80);
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 15, 80);
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
-                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
+                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) ||
+                    (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 80);
@@ -886,7 +891,8 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[0] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
-                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
+                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) ||
+                    (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 80);
@@ -903,7 +909,8 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[1] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 3, 80);
-                if ((sRacerActiveSE[1] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_FAST)) {
+                if ((sRacerActiveSE[1] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_MEDIUM) ||
+                    (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 80);
@@ -928,7 +935,8 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[0] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
-                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
+                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) ||
+                    (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 80);
@@ -945,7 +953,8 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[1] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 3, 80);
-                if ((sRacerActiveSE[1] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_FAST)) {
+                if ((sRacerActiveSE[1] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_MEDIUM) ||
+                    (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 80);
@@ -962,7 +971,8 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[2] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 4, 80);
-                if ((sRacerActiveSE[2] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_FAST)) {
+                if ((sRacerActiveSE[2] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_MEDIUM) ||
+                    (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 12, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 12, 80);
@@ -987,7 +997,8 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[0] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
-                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
+                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) ||
+                    (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 80);
@@ -1004,7 +1015,8 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[1] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 3, 80);
-                if ((sRacerActiveSE[1] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_FAST)) {
+                if ((sRacerActiveSE[1] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_MEDIUM) ||
+                    (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 80);
@@ -1021,7 +1033,8 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[2] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 4, 80);
-                if ((sRacerActiveSE[2] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_FAST)) {
+                if ((sRacerActiveSE[2] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_MEDIUM) ||
+                    (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 12, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 12, 80);
@@ -1038,7 +1051,8 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[3] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 5, 80);
-                if ((sRacerActiveSE[3] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[3] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[3] == NA_SE_LOW_ENERGY_FAST)) {
+                if ((sRacerActiveSE[3] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[3] == NA_SE_LOW_ENERGY_MEDIUM) ||
+                    (sRacerActiveSE[3] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 13, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 13, 80);

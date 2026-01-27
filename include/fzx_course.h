@@ -163,14 +163,14 @@ typedef enum Ice {
     /*  3 */ ICE_MIDDLE,
 } Ice;
 
-typedef enum Jump {
+typedef enum JumpType {
     /* -1 */ JUMP_NONE = -1,
     /*  0 */ JUMP_ALL,
     /*  1 */ JUMP_LEFT,
     /*  2 */ JUMP_RIGHT,
-} Jump;
+} JumpType;
 
-typedef enum Landmine {
+typedef enum LandmineType {
     /* -1 */ LANDMINE_NONE = -1,
     /*  0 */ LANDMINE_MIDDLE,
     /*  1 */ LANDMINE_LEFT,
@@ -290,17 +290,15 @@ typedef enum BorderlessRoad {
 #define TRACK_JOIN_BOTH 0x600
 #define TRACK_JOIN_MASK 0x600
 
-#define TRACK_UNK1_0 0x0
-#define TRACK_UNK1_800 0x800
-#define TRACK_UNK1_1000 0x1000
-#define TRACK_UNK1_1800 0x1800
-#define TRACK_UNK1_MASK 0x1800
+#define TRACK_CHUNK_JOIN_TRANSITION_END_NONE 0x0
+#define TRACK_CHUNK_JOIN_PREVIOUS_START 0x800
+#define TRACK_CHUNK_JOIN_NEXT_FINISH 0x1000
+#define TRACK_CHUNK_JOIN_TRANSITION_END_MASK 0x1800
 
-#define TRACK_UNK2_0 0x0
-#define TRACK_UNK2_2000 0x2000
-#define TRACK_UNK2_4000 0x4000
-#define TRACK_UNK2_6000 0x6000
-#define TRACK_UNK2_MASK 0x6000
+#define TRACK_CHUNK_JOIN_TRANSITION_START_NONE 0x0
+#define TRACK_CHUNK_JOIN_PREVIOUS_END 0x2000
+#define TRACK_CHUNK_JOIN_NEXT_START 0x4000
+#define TRACK_CHUNK_JOIN_TRANSITION_START_MASK 0x6000
 
 #define TRACK_FORM_STRAIGHT 0x00008000
 #define TRACK_FORM_LEFT 0x00010000
@@ -312,7 +310,8 @@ typedef enum BorderlessRoad {
 
 #define TRACK_FLAG_8000000 0x8000000
 #define TRACK_FLAG_JOINABLE 0x10000000
-#define TRACK_FLAG_20000000 0x20000000
+#define TRACK_FLAG_INSIDE 0x20000000
+#define TRACK_FLAG_20000000 0x20000000 // Todo: Delete once torch is updated
 #define TRACK_FLAG_CONTINUOUS 0x40000000
 #define TRACK_FLAG_80000000 0x80000000
 

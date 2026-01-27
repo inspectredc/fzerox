@@ -2,34 +2,35 @@
 #define UNK_STRUCTS_H
 
 #include "libultra/ultra64.h"
+#include "libc/stdbool.h"
 #include "other_types.h"
 #include "fzx_math.h"
 
 typedef struct CourseSegment {
     /* 0x00 */ Vec3f pos;
-    /* 0x0C */ Vec3f unk_0C;
+    /* 0x0C */ Vec3f up;
     /* 0x18 */ f32 radiusLeft;
     /* 0x1C */ f32 radiusRight;
     /* 0x20 */ s32 trackSegmentInfo;
-    /* 0x24 */ f32 unk_24;
+    /* 0x24 */ f32 tension;
     /* 0x28 */ f32 length;
     /* 0x2C */ f32 lengthFromStart;
     /* 0x30 */ s32 segmentIndex;
     /* 0x34 */ struct CourseSegment* next;
     /* 0x38 */ struct CourseSegment* prev;
-    /* 0x3C */ struct unk_36ED0* unk_3C;
-    /* 0x40 */ struct unk_36ED0* unk_40;
-    /* 0x44 */ struct unk_802D3D38* unk_44;
-    /* 0x48 */ struct unk_802D3D38* unk_48;
-    /* 0x4C */ struct unk_802D3978* unk_4C;
-    /* 0x50 */ struct unk_802D3978* unk_50;
-    /* 0x54 */ struct unk_802D3E38* unk_54;
-    /* 0x58 */ struct unk_802D3E38* unk_58;
-    /* 0x5C */ s8 unk_5C[0x8]; // likely a pair of unk_802D2D78 struct ptrs
+    /* 0x3C */ struct SegmentChunk* startChunk;
+    /* 0x40 */ struct SegmentChunk* endChunk;
+    /* 0x44 */ struct Jump* jumpsStart;
+    /* 0x48 */ struct Jump* jumpsEnd;
+    /* 0x4C */ struct Landmine* landminesStart;
+    /* 0x50 */ struct Landmine* landminesEnd;
+    /* 0x54 */ struct Effect* effectsStart;
+    /* 0x58 */ struct Effect* effectsEnd;
+    /* 0x5C */ s8 unk_5C[0x8]; // likely a pair of EffectDrawData struct ptrs
     /* 0x64 */ f32 unk_64;
-    /* 0x68 */ f32 unk_68;
-    /* 0x6C */ f32 unk_6C;
-    /* 0x70 */ f32 unk_70;
+    /* 0x68 */ f32 previousJoinEndTValue;
+    /* 0x6C */ f32 nextJoinStartTValue;
+    /* 0x70 */ f32 joinScale;
     /* 0x74 */ Vec3f quarterMarkPos;
     /* 0x80 */ Vec3f halfMarkPos;
     /* 0x8C */ Vec3f threeQuarterMarkPos;
@@ -123,7 +124,7 @@ typedef struct unk_802D08E0 {
     Vec3f unk_00;
     Mtx3F unk_0C;
     f32 unk_30;
-    struct unk_36ED0* unk_34;
+    struct SegmentChunk* unk_34;
 } unk_802D08E0; // size = 0x38
 
 typedef struct RacerSegmentPositionInfo {
@@ -314,30 +315,30 @@ typedef struct Racer {
     s32 unk_3A4;
 } Racer; // size = 0x3A8
 
-typedef struct unk_36ED0 {
-    s32 trackSegmentInfo;
-    s32 unk_04;
-    f32 unk_08;
-    f32 unk_0C;
-    s32 unk_10;
-    Vec3f unk_14;
-    s16 unk_20[3];
-    s16 unk_26[3];
-    s16 unk_2C[3];
-    s16 unk_32[3];
-    s16 unk_38[3];
-    s16 unk_3E[3];
-    s16 unk_44[3];
-    s16 unk_4A[3];
-    s16 unk_50;
-    s16 unk_52;
-    s16 unk_54;
-    s16 unk_56;
-    s16 unk_58;
-    s16 unk_5A;
-    s16 unk_5C;
-    s16 unk_5E;
-} unk_36ED0; // size = 0x60
+typedef struct SegmentChunk {
+    /* 0x00 */ s32 trackSegmentInfo;
+    /* 0x04 */ s32 segmentIndex;
+    /* 0x08 */ f32 segmentTValue;
+    /* 0x0C */ f32 depth;
+    /* 0x10 */ bool drawState;
+    /* 0x14 */ Vec3f pos;
+    /* 0x20 */ s16 referencePos1[3];
+    /* 0x26 */ s16 referencePos2[3];
+    /* 0x2C */ s16 referencePos3[3];
+    /* 0x32 */ s16 referencePos4[3];
+    /* 0x38 */ s16 referencePos5[3];
+    /* 0x3E */ s16 referencePos6[3];
+    /* 0x44 */ s16 referencePos7[3];
+    /* 0x4A */ s16 referencePos8[3];
+    /* 0x50 */ s16 topTextureCoord;
+    /* 0x52 */ s16 bottomTextureCoord;
+    /* 0x54 */ s16 leftTextureCoord;
+    /* 0x56 */ s16 rightTextureCoord;
+    /* 0x58 */ s16 topTextureCorrection;
+    /* 0x5A */ s16 bottomTextureCorrection;
+    /* 0x5C */ s16 leftTextureCorrection;
+    /* 0x5E */ s16 rightTextureCorrection;
+} SegmentChunk; // size = 0x60
 
 typedef struct unk_802D2D70 {
     unk_8006FF90_arg_1* unk_00;

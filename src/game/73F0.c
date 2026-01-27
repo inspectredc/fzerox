@@ -151,8 +151,8 @@ void Course_LandminesViewInteractDataInit(void) {
     }
 
     for (i = 0; i < gCurrentCourseInfo->segmentCount; i++) {
-        gCurrentCourseInfo->courseSegments[i].unk_4C = NULL;
-        gCurrentCourseInfo->courseSegments[i].unk_50 = NULL;
+        gCurrentCourseInfo->courseSegments[i].landminesStart = NULL;
+        gCurrentCourseInfo->courseSegments[i].landminesEnd = NULL;
     }
 
     for (i = 0; i < gCurrentCourseInfo->segmentCount; i++) {
@@ -163,7 +163,7 @@ void Course_LandminesViewInteractDataInit(void) {
             }
 
             if (i == temp_s0->segmentIndex) {
-                gCurrentCourseInfo->courseSegments[i].unk_50 = &D_802D3978[j + 1];
+                gCurrentCourseInfo->courseSegments[i].landminesEnd = &D_802D3978[j + 1];
             }
             j++;
         }
@@ -180,7 +180,7 @@ void Course_LandminesViewInteractDataInit(void) {
             }
 
             if (i == temp_s0->segmentIndex) {
-                gCurrentCourseInfo->courseSegments[i].unk_4C = &D_802D3978[j - 1];
+                gCurrentCourseInfo->courseSegments[i].landminesStart = &D_802D3978[j - 1];
             }
             j--;
         }
@@ -189,7 +189,7 @@ void Course_LandminesViewInteractDataInit(void) {
 
 extern unk_802D08E0 D_802D08E0[];
 extern Mtx D_8022F0C0[];
-extern unk_36ED0 D_802A9FC0[];
+extern SegmentChunk gSegmentChunks[];
 extern Vtx D_8022E8C0[];
 extern unk_802D2D70 D_802D2D70;
 extern unk_802D2D78 D_802D2D78[];
@@ -311,7 +311,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
                         var_t0 = &D_800E12C8[var_s4->vtxStart - D_80225800.unk_1C0[j]];
 
                         for (k = 0; k < 15; k++) {
-                            if (D_802A9FC0[var_t0[k]].unk_10 == 0) {
+                            if (gSegmentChunks[var_t0[k]].unk_10 == 0) {
                                 continue;
                             }
                             if ((vtx[k * 2 + 2].v.tc[1] < vtx[k * 2 + 0].v.tc[1]) ||
@@ -330,7 +330,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
 
                     var_t0 = &D_800E12C8[var_s4->vtxStart - D_80225800.unk_1C0[j]];
                     for (k = 0; k < (remainderVtxGroupNum / 2) - 1; k++) {
-                        if (D_802A9FC0[var_t0[k]].unk_10 == 0) {
+                        if (gSegmentChunks[var_t0[k]].unk_10 == 0) {
                             continue;
                         }
                         if ((vtx[k * 2 + 2].v.tc[1] < vtx[k * 2 + 0].v.tc[1]) ||
@@ -497,8 +497,8 @@ void Course_JumpsViewInteractDataInit(void) {
     }
 
     for (i = 0; i < gCurrentCourseInfo->segmentCount; i++) {
-        gCurrentCourseInfo->courseSegments[i].unk_44 = NULL;
-        gCurrentCourseInfo->courseSegments[i].unk_48 = NULL;
+        gCurrentCourseInfo->courseSegments[i].jumpsStart = NULL;
+        gCurrentCourseInfo->courseSegments[i].jumpsEnd = NULL;
     }
 
     for (i = 0; i < gCurrentCourseInfo->segmentCount; i++) {
@@ -509,7 +509,7 @@ void Course_JumpsViewInteractDataInit(void) {
             }
 
             if (i == temp_s0->segmentIndex) {
-                gCurrentCourseInfo->courseSegments[i].unk_48 = &D_802D3D38[j + 1];
+                gCurrentCourseInfo->courseSegments[i].jumpsEnd = &D_802D3D38[j + 1];
             }
             j++;
         }
@@ -525,18 +525,18 @@ void Course_JumpsViewInteractDataInit(void) {
             }
 
             if (i == temp_s0->segmentIndex) {
-                gCurrentCourseInfo->courseSegments[i].unk_44 = &D_802D3D38[j - 1];
+                gCurrentCourseInfo->courseSegments[i].jumpsStart = &D_802D3D38[j - 1];
             }
             j--;
         }
     }
 }
 
-extern s32 D_800F8518;
+extern s32 gSegmentChunkCount;
 
 void Course_DecorationsViewInteractDataInit(void) {
     CourseSegment* courseSegment;
-    unk_36ED0* var_s1;
+    SegmentChunk* var_s1;
     unk_802D08E0* var_s0;
     s32 i;
     f32 sp14C;
@@ -687,12 +687,12 @@ void Course_DecorationsViewInteractDataInit(void) {
         mtx++;
 
         var_fs0 = 1e8f;
-        var_s1 = D_802A9FC0;
-        for (j = 0; j < D_800F8518; j++) {
+        var_s1 = gSegmentChunks;
+        for (j = 0; j < gSegmentChunkCount; j++) {
 
-            temp_fv0 = var_s1->unk_14.x - var_s0->unk_00.x;
-            temp_fv1 = var_s1->unk_14.y - var_s0->unk_00.y;
-            temp_fa0 = var_s1->unk_14.z - var_s0->unk_00.z;
+            temp_fv0 = var_s1->pos.x - var_s0->unk_00.x;
+            temp_fv1 = var_s1->pos.y - var_s0->unk_00.y;
+            temp_fa0 = var_s1->pos.z - var_s0->unk_00.z;
             temp_fa1 = SQ(temp_fv0) + SQ(temp_fv1) + SQ(temp_fa0);
             if (temp_fa1 < var_fs0) {
                 var_s0->unk_34 = var_s1;
@@ -920,15 +920,16 @@ void func_8006FD7C(s32 arg0, s32 arg1, f32 arg2) {
 
     //! @bug sp0 may not be initialised
     if (D_800CD180 == 0) {
-        sp0 = D_800F8518;
+        sp0 = gSegmentChunkCount;
     }
 
     while (true) {
         temp_v0 = (i + sp0 - 1) % sp0;
 
-        if ((D_802A9FC0[temp_v0].unk_04 < arg1 ||
-             (arg1 == D_802A9FC0[temp_v0].unk_04 && D_802A9FC0[temp_v0].unk_08 <= arg2)) &&
-            (arg1 < D_802A9FC0[i].unk_04 || (arg1 == D_802A9FC0[i].unk_04 && arg2 < D_802A9FC0[i].unk_08))) {
+        if ((gSegmentChunks[temp_v0].segmentIndex < arg1 ||
+             (arg1 == gSegmentChunks[temp_v0].segmentIndex && gSegmentChunks[temp_v0].segmentTValue <= arg2)) &&
+            (arg1 < gSegmentChunks[i].segmentIndex ||
+             (arg1 == gSegmentChunks[i].segmentIndex && arg2 < gSegmentChunks[i].segmentTValue))) {
             break;
         }
         i++;
@@ -943,11 +944,11 @@ f32 func_8006FE90(s32 arg0, f32 arg1) {
     i = 0;
     //! @bug sp0 may not be initialised
     if (D_800CD180 == 0) {
-        sp0 = D_800F8518;
+        sp0 = gSegmentChunkCount;
     }
 
     do {
-        if (arg0 == D_802A9FC0[i].unk_04) {
+        if (arg0 == gSegmentChunks[i].segmentIndex) {
             goto next;
         }
         i++;
@@ -962,22 +963,22 @@ f32 func_8006FE90(s32 arg0, f32 arg1) {
 next:
     while (true) {
 
-        if (arg0 == D_802A9FC0[i].unk_04 && arg1 < D_802A9FC0[i].unk_08) {
+        if (arg0 == gSegmentChunks[i].segmentIndex && arg1 < gSegmentChunks[i].segmentTValue) {
             break;
         }
 
         i++;
 
-        if (i == D_800F8518) {
+        if (i == gSegmentChunkCount) {
             return 1.0f;
         }
 
-        if (arg0 != D_802A9FC0[i].unk_04) {
+        if (arg0 != gSegmentChunks[i].segmentIndex) {
             return 1.0f;
         }
     }
 
-    return D_802A9FC0[i].unk_08;
+    return gSegmentChunks[i].segmentTValue;
 }
 
 extern unk_802D3E38 D_802D3E38[];
@@ -1386,15 +1387,15 @@ void Course_EffectsViewInteractDataInit(s32 arg0) {
     }
 
     for (i = 0; i < gCurrentCourseInfo->segmentCount; i++) {
-        gCurrentCourseInfo->courseSegments[i].unk_54 = NULL;
-        gCurrentCourseInfo->courseSegments[i].unk_58 = NULL;
+        gCurrentCourseInfo->courseSegments[i].effectsStart = NULL;
+        gCurrentCourseInfo->courseSegments[i].effectsEnd = NULL;
     }
 
     for (i = 0; i < gCurrentCourseInfo->segmentCount; i++) {
         for (j = 0; j < var_s2->count; j++) {
             temp_s0 = &var_s2->unk_00[j];
             if (i == temp_s0->segmentIndex) {
-                gCurrentCourseInfo->courseSegments[i].unk_58 = &D_802D3E38[j + 1];
+                gCurrentCourseInfo->courseSegments[i].effectsEnd = &D_802D3E38[j + 1];
             }
         }
     }
@@ -1403,7 +1404,7 @@ void Course_EffectsViewInteractDataInit(s32 arg0) {
         for (j = var_s2->count - 1; j >= 0; j--) {
             temp_s0 = &var_s2->unk_00[j];
             if (i == temp_s0->segmentIndex) {
-                gCurrentCourseInfo->courseSegments[i].unk_54 = &D_802D3E38[j];
+                gCurrentCourseInfo->courseSegments[i].effectsStart = &D_802D3E38[j];
             }
         }
     }
@@ -2769,7 +2770,7 @@ extern CourseData D_8010C770;
 extern CourseSegment D_802CDFD8[];
 extern CourseSegment D_802C2020[];
 
-void func_80073A04(void) {
+void Course_SegmentsInit(void) {
     CourseSegment* segment;
     CourseInfo* courseInfo;
     s32 var_a3;
@@ -2917,7 +2918,7 @@ extern u8 gEditCupTrackNames[][9];
 extern s16 gPlayer1OverallPosition;
 
 // Load Course
-void func_8007402C(s32 courseIndex) {
+void Course_Load(s32 courseIndex) {
     s32 pad;
     s32 sp28;
 
@@ -2955,7 +2956,7 @@ void func_8007402C(s32 courseIndex) {
     func_80074428(courseIndex);
 }
 
-void func_800741DC(s32 courseIndex) {
+void Course_GadgetsInit(s32 courseIndex) {
     func_80073894(courseIndex);
     func_8007392C(courseIndex);
 }
@@ -3004,7 +3005,7 @@ void func_800742FC(void) {
 
     for (i = 0; i < ARRAY_COUNT(gCourseInfos); i++) {}
 
-    func_8007402C(0);
+    Course_Load(0);
     func_80074204();
     D_8010CF50 = COURSE_CONTEXT()->courseData;
     COURSE_CONTEXT()->courseData.controlPointCount = 0;
@@ -3044,9 +3045,9 @@ void func_80074428(s32 courseIndex) {
         return;
     }
 
-    func_8009DEAC(&gCourseInfos[courseIndex]);
+    Course_SplineCalculateTensions(&gCourseInfos[courseIndex]);
     func_80074CE4(&gCourseInfos[courseIndex]);
-    func_8009F508(&gCourseInfos[courseIndex]);
+    Course_SegmentLengthsInit(&gCourseInfos[courseIndex]);
 }
 
 extern CourseSegment D_802CB6D0[];

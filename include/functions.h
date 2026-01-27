@@ -48,12 +48,12 @@ void Course_EffectsViewInteractDataInit(s32);
 
 f32 Math_VectorGetDistance(Vec3f arg0, Vec3f arg1);
 
-void func_80073A04(void);
+void Course_SegmentsInit(void);
 void Dma_ClearRomCopy(void* romAddr, void* ramAddr, size_t size);
 void Dma_RomCopyAsync(void* romAddr, void* ramAddr, size_t size);
 void Dma_LoadAssetsAsync(u8* romAddr, u8* ramAddr, size_t size);
-void func_8007402C(s32 courseIndex);
-void func_800741DC(s32 courseIndex);
+void Course_Load(s32 courseIndex);
+void Course_GadgetsInit(s32 courseIndex);
 void func_800742D0(void);
 void func_800742FC(void);
 void func_80074428(s32 courseIndex);
@@ -184,19 +184,20 @@ Gfx* func_8009CEA0(Gfx* gfx, s32 character);
 
 void func_8009CED0(s32 venue);
 s32 func_8009D16C(RacerSegmentPositionInfo* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4);
-s32 func_8009DEAC(CourseInfo* arg0);
+s32 Course_SplineCalculateTensions(CourseInfo* courseInfo);
 f32 Course_SplineGetLengthInfo(CourseSegment*, f32, f32*);
 f32 Course_SplineGetTangent(CourseSegment*, f32, Vec3f*);
 void Course_SplineGetPosition(CourseSegment*, f32, Vec3f*);
 f32 Course_SplineGetBasis(CourseSegment*, f32, Mtx3F*, f32);
-void func_8009F508(CourseInfo* arg0);
+void Course_SegmentLengthsInit(CourseInfo* courseInfo);
 f32 func_8009DFA0(RacerSegmentPositionInfo* arg0);
+s32 Course_CalculateChecksum(void);
 
 s32 func_800A2D2C(CourseInfo* arg0, Vtx* arg1);
 void Course_GenerateRandomCourse(void);
 void Course_Init(void);
 void Course_Update(void);
-Gfx* Course_DrawModel(Gfx* gfx, Vtx* arg1, s32 arg2);
+Gfx* Course_DrawModel(Gfx* gfx, Vtx* vtx, s32 vtxCount);
 Gfx* Course_Draw(Gfx* gfx, s32 playerIndex);
 
 void mio0Decode(u8*, void*);

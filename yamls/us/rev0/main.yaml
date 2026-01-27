@@ -69,7 +69,7 @@
       - [0x1AA40, c, game/bordered_box]
       - [0x1B0E0, c, game/camera]
       - [0x22CE0, c, game/racer]
-      - [0x36ED0, c, game/36ED0]
+      - [0x36ED0, c, game/course]
       - [0x44620, hasm, game/mio0Decode]
       - [0x446D0, c, audio/rom/lib/playback]
       - [0x459A0, c, audio/rom/lib/effects]
@@ -242,7 +242,7 @@
       - [0x676C0, .data, sys/sys_fault]
       - [0x678A0, .data, game/camera]
       - [0x67AA0, .data, game/racer]
-      - [0x69500, .data, game/36ED0]
+      - [0x69500, .data, game/course]
       - [0x69A30, .data, audio/rom/lib/note_data]
       - [0x6A680, .data, audio/rom/lib/playback]
       - [0x6A840, .data, audio/rom/lib/effects]
@@ -344,7 +344,7 @@
       - [0x6EC60, .rodata, game/bordered_box]
       - [0x6EC80, .rodata, game/camera]
       - [0x6F790, .rodata, game/racer]
-      - [0x6FA10, .rodata, game/36ED0]
+      - [0x6FA10, .rodata, game/course]
       - [0x6FB40, .rodata, audio/rom/lib/playback]
       - [0x6FB50, .rodata, audio/rom/lib/effects]
       - [0x6FB80, .rodata, audio/rom/lib/seqplayer]
@@ -391,7 +391,7 @@
       - { type: .bss, vram: 0x800E51B0, name: game/bordered_box }
       - { type: .bss, vram: 0x800E5220, name: game/camera }
       - { type: .bss, vram: 0x800E5EC0, name: game/racer }
-      - { type: .bss, vram: 0x800F8510, name: game/36ED0 }
+      - { type: .bss, vram: 0x800F8510, name: game/course }
       - { type: .bss, vram: 0x800F89F0, name: audio/rom/lib/load }
       - { type: .bss, vram: 0x800F8AF0, name: libultra/io/sptask }
       - { type: .bss, vram: 0x800F8B30, name: libultra/io/leointerrupt }

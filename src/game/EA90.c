@@ -93,9 +93,9 @@ void func_80074CE4(CourseInfo* courseInfo) {
         Math_NormalizeXYZ(&baseUpX, &baseUpY, &baseUpZ);
         Matrix_SetAxisRotation(NULL, &mtxF, 1.0f, DEG_TO_FZXANG(COURSE_CONTEXT()->courseData.bankAngle[i]),
                                segmentTangentVec.x, segmentTangentVec.y, segmentTangentVec.z, 0.0f, 0.0f, 0.0f);
-        segment->unk_0C.x = mtxF.m[0][0] * baseUpX + mtxF.m[1][0] * baseUpY + mtxF.m[2][0] * baseUpZ;
-        segment->unk_0C.y = mtxF.m[0][1] * baseUpX + mtxF.m[1][1] * baseUpY + mtxF.m[2][1] * baseUpZ;
-        segment->unk_0C.z = mtxF.m[0][2] * baseUpX + mtxF.m[1][2] * baseUpY + mtxF.m[2][2] * baseUpZ;
+        segment->up.x = mtxF.m[0][0] * baseUpX + mtxF.m[1][0] * baseUpY + mtxF.m[2][0] * baseUpZ;
+        segment->up.y = mtxF.m[0][1] * baseUpX + mtxF.m[1][1] * baseUpY + mtxF.m[2][1] * baseUpZ;
+        segment->up.z = mtxF.m[0][2] * baseUpX + mtxF.m[1][2] * baseUpY + mtxF.m[2][2] * baseUpZ;
         segment = segment->next;
     }
 }

@@ -124,16 +124,16 @@ void CourseModel_Init(s32 cupType) {
 void func_i5_80116678(s32 cupType) {
 
     if (cupType == X_CUP) {
-        func_8007402C(cupType * 6 + gCourseModelCupCourseNo);
+        Course_Load(cupType * 6 + gCourseModelCupCourseNo);
         func_80074634(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo]);
-        func_8009F508(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo]);
+        Course_SegmentLengthsInit(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo]);
         D_801197B0[gCourseModelCupCourseNo] = func_800A2D2C(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo],
                                                             &D_i5_801197D0[gCourseModelCupCourseNo * 0xC00]);
         gCourseModelCupCourseNo++;
     } else {
-        func_8007402C(cupType * 6 + gCourseModelCupCourseNo);
+        Course_Load(cupType * 6 + gCourseModelCupCourseNo);
         func_80074634(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo]);
-        func_8009F508(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo]);
+        Course_SegmentLengthsInit(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo]);
         D_801197B0[gCourseModelCupCourseNo] = func_800A2D2C(&gCourseInfos[cupType * 6 + gCourseModelCupCourseNo],
                                                             &D_i5_801197D0[gCourseModelCupCourseNo * 0xC00]);
         gCourseModelCupCourseNo++;
