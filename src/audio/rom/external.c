@@ -83,34 +83,34 @@ void Audio_LevelSEStart(u8 playerIndex, u8 sfxId) {
 
     PRINTF("LEVEL SE INTERNAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId);
 
-    if (sActivePlayerLevelSE[playerIndex][0] == 0) {
+    if (sActivePlayerLevelSE[playerIndex][0] == NA_LEVEL_SE_NONE) {
         sActivePlayerLevelSE[playerIndex][0] = sfxId;
-    } else if (sActivePlayerLevelSE[playerIndex][1] == 0) {
+    } else if (sActivePlayerLevelSE[playerIndex][1] == NA_LEVEL_SE_NONE) {
         sActivePlayerLevelSE[playerIndex][1] = sActivePlayerLevelSE[playerIndex][0];
         sActivePlayerLevelSE[playerIndex][0] = sfxId;
-    } else if (sActivePlayerLevelSE[playerIndex][2] == 0) {
+    } else if (sActivePlayerLevelSE[playerIndex][2] == NA_LEVEL_SE_NONE) {
         sActivePlayerLevelSE[playerIndex][2] = sActivePlayerLevelSE[playerIndex][1];
         sActivePlayerLevelSE[playerIndex][1] = sActivePlayerLevelSE[playerIndex][0];
         sActivePlayerLevelSE[playerIndex][0] = sfxId;
-    } else if (sActivePlayerLevelSE[playerIndex][3] == 0) {
+    } else if (sActivePlayerLevelSE[playerIndex][3] == NA_LEVEL_SE_NONE) {
         sActivePlayerLevelSE[playerIndex][3] = sActivePlayerLevelSE[playerIndex][2];
         sActivePlayerLevelSE[playerIndex][2] = sActivePlayerLevelSE[playerIndex][1];
         sActivePlayerLevelSE[playerIndex][1] = sActivePlayerLevelSE[playerIndex][0];
         sActivePlayerLevelSE[playerIndex][0] = sfxId;
-    } else if (sActivePlayerLevelSE[playerIndex][4] == 0) {
+    } else if (sActivePlayerLevelSE[playerIndex][4] == NA_LEVEL_SE_NONE) {
         sActivePlayerLevelSE[playerIndex][4] = sActivePlayerLevelSE[playerIndex][3];
         sActivePlayerLevelSE[playerIndex][3] = sActivePlayerLevelSE[playerIndex][2];
         sActivePlayerLevelSE[playerIndex][2] = sActivePlayerLevelSE[playerIndex][1];
         sActivePlayerLevelSE[playerIndex][1] = sActivePlayerLevelSE[playerIndex][0];
         sActivePlayerLevelSE[playerIndex][0] = sfxId;
-    } else if (sActivePlayerLevelSE[playerIndex][5] == 0) {
+    } else if (sActivePlayerLevelSE[playerIndex][5] == NA_LEVEL_SE_NONE) {
         sActivePlayerLevelSE[playerIndex][5] = sActivePlayerLevelSE[playerIndex][4];
         sActivePlayerLevelSE[playerIndex][4] = sActivePlayerLevelSE[playerIndex][3];
         sActivePlayerLevelSE[playerIndex][3] = sActivePlayerLevelSE[playerIndex][2];
         sActivePlayerLevelSE[playerIndex][2] = sActivePlayerLevelSE[playerIndex][1];
         sActivePlayerLevelSE[playerIndex][1] = sActivePlayerLevelSE[playerIndex][0];
         sActivePlayerLevelSE[playerIndex][0] = sfxId;
-    } else if (sActivePlayerLevelSE[playerIndex][6] == 0) {
+    } else if (sActivePlayerLevelSE[playerIndex][6] == NA_LEVEL_SE_NONE) {
         sActivePlayerLevelSE[playerIndex][6] = sActivePlayerLevelSE[playerIndex][5];
         sActivePlayerLevelSE[playerIndex][5] = sActivePlayerLevelSE[playerIndex][4];
         sActivePlayerLevelSE[playerIndex][4] = sActivePlayerLevelSE[playerIndex][3];
@@ -118,7 +118,7 @@ void Audio_LevelSEStart(u8 playerIndex, u8 sfxId) {
         sActivePlayerLevelSE[playerIndex][2] = sActivePlayerLevelSE[playerIndex][1];
         sActivePlayerLevelSE[playerIndex][1] = sActivePlayerLevelSE[playerIndex][0];
         sActivePlayerLevelSE[playerIndex][0] = sfxId;
-    } else if (sActivePlayerLevelSE[playerIndex][7] == 0) {
+    } else if (sActivePlayerLevelSE[playerIndex][7] == NA_LEVEL_SE_NONE) {
         sActivePlayerLevelSE[playerIndex][7] = sActivePlayerLevelSE[playerIndex][6];
         sActivePlayerLevelSE[playerIndex][6] = sActivePlayerLevelSE[playerIndex][5];
         sActivePlayerLevelSE[playerIndex][5] = sActivePlayerLevelSE[playerIndex][4];
@@ -138,13 +138,13 @@ void Audio_LevelSEStart(u8 playerIndex, u8 sfxId) {
             switch (playerIndex) {
                 case 0:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 6, 0);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 10);
-                    Audio_SEStart(6, sfxId + 10);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, LEVEL_SE_2P(sfxId));
+                    Audio_SEStart(6, LEVEL_SE_2P(sfxId));
                     break;
                 case 1:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 7, 0x7F);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 10);
-                    Audio_SEStart(7, sfxId + 10);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, LEVEL_SE_2P(sfxId));
+                    Audio_SEStart(7, LEVEL_SE_2P(sfxId));
                     break;
             }
             break;
@@ -152,18 +152,18 @@ void Audio_LevelSEStart(u8 playerIndex, u8 sfxId) {
             switch (playerIndex) {
                 case 0:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 6, 0);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
-                    Audio_SEStart(6, sfxId + 20);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, LEVEL_SE_MP(sfxId));
+                    Audio_SEStart(6, LEVEL_SE_MP(sfxId));
                     break;
                 case 1:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 7, 0);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
-                    Audio_SEStart(7, sfxId + 20);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, LEVEL_SE_MP(sfxId));
+                    Audio_SEStart(7, LEVEL_SE_MP(sfxId));
                     break;
                 case 2:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 8, 0x7F);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
-                    Audio_SEStart(8, sfxId + 20);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, LEVEL_SE_MP(sfxId));
+                    Audio_SEStart(8, LEVEL_SE_MP(sfxId));
                     break;
             }
             break;
@@ -171,23 +171,23 @@ void Audio_LevelSEStart(u8 playerIndex, u8 sfxId) {
             switch (playerIndex) {
                 case 0:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 6, 0);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
-                    Audio_SEStart(6, sfxId + 20);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, LEVEL_SE_MP(sfxId));
+                    Audio_SEStart(6, LEVEL_SE_MP(sfxId));
                     break;
                 case 1:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 7, 0);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
-                    Audio_SEStart(7, sfxId + 20);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, LEVEL_SE_MP(sfxId));
+                    Audio_SEStart(7, LEVEL_SE_MP(sfxId));
                     break;
                 case 2:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 8, 0x7F);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
-                    Audio_SEStart(8, sfxId + 20);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, LEVEL_SE_MP(sfxId));
+                    Audio_SEStart(8, LEVEL_SE_MP(sfxId));
                     break;
                 case 3:
                     AUDIOCMD_CHANNEL_SET_PAN(0, 9, 0x7F);
-                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, sfxId + 20);
-                    Audio_SEStart(9, sfxId + 20);
+                    PRINTF("LEVEL SE FINAL CALL! player=%02x SE Number= %02x \n", playerIndex, LEVEL_SE_MP(sfxId));
+                    Audio_SEStart(9, LEVEL_SE_MP(sfxId));
                     break;
             }
             break;
@@ -196,16 +196,14 @@ void Audio_LevelSEStart(u8 playerIndex, u8 sfxId) {
 
 void Audio_LevelSEPopStack(u8 playerIndex) {
 
-    if (sAudioLevelSEStack[playerIndex][0] != 0) {
+    if (sAudioLevelSEStack[playerIndex][0] != NA_LEVEL_SE_NONE) {
         Audio_LevelSEStart(playerIndex, sAudioLevelSEStack[playerIndex][0]);
         sAudioLevelSEStack[playerIndex][0] = sAudioLevelSEStack[playerIndex][1];
         sAudioLevelSEStack[playerIndex][1] = sAudioLevelSEStack[playerIndex][2];
         sAudioLevelSEStack[playerIndex][2] = sAudioLevelSEStack[playerIndex][3];
-        sAudioLevelSEStack[playerIndex][3] = 0;
+        sAudioLevelSEStack[playerIndex][3] = NA_LEVEL_SE_NONE;
     }
 }
-
-extern Camera gCameras[];
 
 void Audio_PlayerSEStart(u8 racerId, u8 sfxId) {
     f32 volumeScale;
@@ -216,9 +214,9 @@ void Audio_PlayerSEStart(u8 racerId, u8 sfxId) {
 
     //! @bug OOB read in sPlayerEngineSoundState when using non-player racerIds
     if ((sPlayerEngineSoundState[racerId] == 0) &&
-        !((sfxId == 0x16) || (sfxId == 0x10) || (sfxId == 0x21) || (sfxId == 0x1E) || (sfxId == 5) || (sfxId == 8) ||
-          (sfxId == 0xF) || (sfxId == 0x30) || (sfxId == 0x31) || (sfxId == 0x34) || (sfxId == 0x35) ||
-          (sfxId == 0x3E))) {
+        !((sfxId == NA_SE_22) || (sfxId == NA_SE_16) || (sfxId == NA_SE_33) || (sfxId == NA_SE_30) ||
+          (sfxId == NA_SE_5) || (sfxId == NA_SE_8) || (sfxId == NA_SE_15) || (sfxId == NA_SE_48) ||
+          (sfxId == NA_SE_49) || (sfxId == NA_SE_52) || (sfxId == NA_SE_53) || (sfxId == NA_SE_62))) {
         PRINTF("Ouch!! UN-SUPORTED TRG SE NUM WAS CALLED !!!!!!! num = %02x\n", sfxId);
         return;
     }
@@ -233,8 +231,8 @@ void Audio_PlayerSEStart(u8 racerId, u8 sfxId) {
                 volumeScale = sRacerAudioVolume[racerId];
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 10, volumeScale);
 
-                if (sfxId >= 0x3F || sfxId < 0) {
-                    sfxId = 0;
+                if (sfxId >= NA_SE_PLAYER_MAX || sfxId < NA_SE_NONE) {
+                    sfxId = NA_SE_NONE;
                 }
                 Audio_SEStart(10, sfxId);
             } else if (sAudioEnemyEngineStatus != 0) {
@@ -353,12 +351,12 @@ void Audio_PlayerSEStart(u8 racerId, u8 sfxId) {
 
 void Audio_PlayerSEPopStack(u8 racerId) {
 
-    if (sAudioPlayerSEStack[racerId][0] != 0) {
+    if (sAudioPlayerSEStack[racerId][0] != NA_SE_NONE) {
         Audio_PlayerSEStart(racerId, sAudioPlayerSEStack[racerId][0]);
         sAudioPlayerSEStack[racerId][0] = sAudioPlayerSEStack[racerId][1];
         sAudioPlayerSEStack[racerId][1] = sAudioPlayerSEStack[racerId][2];
         sAudioPlayerSEStack[racerId][2] = sAudioPlayerSEStack[racerId][3];
-        sAudioPlayerSEStack[racerId][3] = 0;
+        sAudioPlayerSEStack[racerId][3] = NA_SE_NONE;
     }
 }
 
@@ -366,7 +364,7 @@ void Audio_LevelSEFadeoutRoutine(void) {
     f32 volumeScale;
     s8 reverbVolume;
 
-    if (!sAudioLevelFadeoutActive || sAudioPauseStatus == 2) {
+    if (!sAudioLevelFadeoutActive || sAudioPauseStatus == AUDIO_PAUSE_TRANSITION) {
         return;
     }
 
@@ -419,28 +417,28 @@ void Audio_LevelSEFadeoutRoutine(void) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 5, reverbVolume);
         }
     }
-    if ((sPlayerEngineSoundState[0] != 0) && (sActivePlayerLevelSE[0][0] != 0) && (sChannelVolume[6] != 0.0f)) {
+    if ((sPlayerEngineSoundState[0] != 0) && (sActivePlayerLevelSE[0][0] != NA_LEVEL_SE_NONE) && (sChannelVolume[6] != 0.0f)) {
         volumeScale = sChannelVolume[6] - ((sChannelVolume[6] / 30.0f) * sLevelFadeoutTimer);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 6, volumeScale);
         if (sPlayerEngineEchoSoundState[0] == 1) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, reverbVolume);
         }
     }
-    if ((sPlayerEngineSoundState[1] != 0) && (sActivePlayerLevelSE[1][0] != 0) && (sChannelVolume[7] != 0.0f)) {
+    if ((sPlayerEngineSoundState[1] != 0) && (sActivePlayerLevelSE[1][0] != NA_LEVEL_SE_NONE) && (sChannelVolume[7] != 0.0f)) {
         volumeScale = sChannelVolume[7] - ((sChannelVolume[7] / 30.0f) * sLevelFadeoutTimer);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 7, volumeScale);
         if (sPlayerEngineEchoSoundState[1] == 1) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, reverbVolume);
         }
     }
-    if ((sPlayerEngineSoundState[2] != 0) && (sActivePlayerLevelSE[2][0] != 0) && (sChannelVolume[8] != 0.0f)) {
+    if ((sPlayerEngineSoundState[2] != 0) && (sActivePlayerLevelSE[2][0] != NA_LEVEL_SE_NONE) && (sChannelVolume[8] != 0.0f)) {
         volumeScale = sChannelVolume[8] - ((sChannelVolume[8] / 30.0f) * sLevelFadeoutTimer);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 8, volumeScale);
         if (sPlayerEngineEchoSoundState[2] == 1) {
             AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, reverbVolume);
         }
     }
-    if ((sPlayerEngineSoundState[3] != 0) && (sActivePlayerLevelSE[3][0] != 0) && (sChannelVolume[9] != 0.0f)) {
+    if ((sPlayerEngineSoundState[3] != 0) && (sActivePlayerLevelSE[3][0] != NA_LEVEL_SE_NONE) && (sChannelVolume[9] != 0.0f)) {
         volumeScale = sChannelVolume[9] - ((sChannelVolume[9] / 30.0f) * sLevelFadeoutTimer);
         AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 9, volumeScale);
         if (sPlayerEngineEchoSoundState[3] == 1) {
@@ -526,7 +524,7 @@ void func_800B84B8(void) {
     SequenceLayer* layer;
     Note* note;
 
-    if ((sActiveBgm == 13) && (IS_SEQUENCE_CHANNEL_VALID(gSeqPlayers[0].channels[0]))) {
+    if ((sActiveBgm == BGM_TITLE) && (IS_SEQUENCE_CHANNEL_VALID(gSeqPlayers[0].channels[0]))) {
         layer = gSeqPlayers[0].channels[0]->layers[0];
         if (layer != NULL) {
             note = layer->note;
@@ -545,10 +543,10 @@ void func_800B84B8(void) {
 
                 if ((temp_lo > 2100) && (temp_lo < 2110) && (gGameMode == GAMEMODE_FLX_TITLE) &&
                     (gTitleDemoState == TITLE_DEMO_INACTIVE)) {
-                    gTitleDemoState = 1;
+                    gTitleDemoState = TITLE_DEMO_ACTIVE;
                 }
                 if ((temp_lo > 8200) && (temp_lo < 8210) && (gTitleDemoState == TITLE_DEMO_ACTIVE)) {
-                    gTitleDemoState = 3;
+                    gTitleDemoState = TITLE_DEMO_START_EXIT;
                 }
             }
         }
@@ -558,10 +556,10 @@ void func_800B84B8(void) {
 void Audio_BgmFadeoutPause(void) {
     f32 volumeScale;
 
-    if (sAudioPauseStatus == 2) {
+    if (sAudioPauseStatus == AUDIO_PAUSE_TRANSITION) {
         if (++sBgmPauseFadeoutTimer == (100 / 2) - 1) {
             PRINTF("BGM FADEOUT COMPLETE ROUTINE (in the PAUSE ROUTINE)\n");
-            sAudioPauseStatus = 0;
+            sAudioPauseStatus = AUDIO_PAUSE_UNPAUSED;
             sBgmPauseFadeoutTimer = 0;
             Audio_StopChannelSE(0);
         } else {
@@ -586,7 +584,7 @@ void Audio_UpdateEnemyEngine(void) {
         return;
     }
 
-    if (sAudioPauseStatus == 1 || sAudioPauseStatus == 2) {
+    if (sAudioPauseStatus == AUDIO_PAUSE_PAUSED || sAudioPauseStatus == AUDIO_PAUSE_TRANSITION) {
         return;
     }
 
@@ -601,7 +599,7 @@ void Audio_UpdateEnemyEngine(void) {
                 if (gAudioPlayerFinishedState[0] == 0) {
                     if (!sAudioDisableEnemyEngineSound) {
                         PRINTF("ENEMY ENGINE START MACHINE No.= %02x\n", sAudioClosestRacerId);
-                        Audio_SEStart(14, 1);
+                        Audio_SEStart(14, NA_LEVEL_SE_1);
                     }
                     sAudioEnemyEngineStatus = 2;
                 }
@@ -647,7 +645,7 @@ void func_800B899C(u8 playerIndex) {
     f32 freqScale;
     f32 volumeScale;
 
-    if (sAudioPauseStatus == 1 || sAudioPauseStatus == 2) {
+    if (sAudioPauseStatus == AUDIO_PAUSE_PAUSED || sAudioPauseStatus == AUDIO_PAUSE_TRANSITION) {
         return;
     }
 
@@ -733,7 +731,7 @@ void func_800B8DAC(u8 playerIndex) {
     f32 freqScale;
     f32 volumeScale;
 
-    if (sAudioPauseStatus == 1 || sAudioPauseStatus == 2) {
+    if (sAudioPauseStatus == AUDIO_PAUSE_PAUSED || sAudioPauseStatus == AUDIO_PAUSE_TRANSITION) {
         return;
     }
 
@@ -741,25 +739,25 @@ void func_800B8DAC(u8 playerIndex) {
         return;
     }
     switch (sActivePlayerLevelSE[playerIndex][0]) {
-        case 0:
+        case NA_LEVEL_SE_NONE:
             volumeScale = 0.0f;
             freqScale = 1.0f;
             break;
-        case 3:
-        case 4:
-        case 10:
-        case 13:
-        case 14:
-        case 20:
-        case 23:
-        case 24:
-        case 30:
+        case NA_LEVEL_SE_3:
+        case NA_LEVEL_SE_4:
+        case NA_LEVEL_SE_10:
+        case LEVEL_SE_2P(NA_LEVEL_SE_3):
+        case LEVEL_SE_2P(NA_LEVEL_SE_4):
+        case LEVEL_SE_2P(NA_LEVEL_SE_10):
+        case LEVEL_SE_MP(NA_LEVEL_SE_3):
+        case LEVEL_SE_MP(NA_LEVEL_SE_4):
+        case LEVEL_SE_MP(NA_LEVEL_SE_10):
             volumeScale = 1.0f;
             freqScale = 1.0f;
             break;
-        case 5:
-        case 15:
-        case 25:
+        case NA_LEVEL_SE_5:
+        case LEVEL_SE_2P(NA_LEVEL_SE_5):
+        case LEVEL_SE_MP(NA_LEVEL_SE_5):
             volumeScale = (gRacers[playerIndex].speed * (1.0f / 45.0f)) + 0.5f;
             if (gRacers[playerIndex].speed < 0.1f) {
                 volumeScale = 0.0f;
@@ -772,9 +770,9 @@ void func_800B8DAC(u8 playerIndex) {
             }
             freqScale = 1.0f;
             break;
-        case 11:
-        case 21:
-        case 31:
+        case NA_LEVEL_SE_11:
+        case LEVEL_SE_2P(NA_LEVEL_SE_11):
+        case LEVEL_SE_MP(NA_LEVEL_SE_11):
             volumeScale = (gRacers[playerIndex].speed * (1.0f / 45.0f)) + 0.5f;
             if (gRacers[playerIndex].speed < 0.1f) {
                 volumeScale = 0.0f;
@@ -787,9 +785,9 @@ void func_800B8DAC(u8 playerIndex) {
             }
             freqScale = 1.0f;
             break;
-        case 8:
-        case 18:
-        case 28:
+        case NA_LEVEL_SE_8:
+        case LEVEL_SE_2P(NA_LEVEL_SE_8):
+        case LEVEL_SE_MP(NA_LEVEL_SE_8):
             volumeScale = 0.8f;
             freqScale = (gRacers[playerIndex].speed * (1.0f / 30.0f)) - (8.0f / 10.0f);
             if (freqScale > 2.5f) {
@@ -799,9 +797,9 @@ void func_800B8DAC(u8 playerIndex) {
                 freqScale = 0.3f;
             }
             break;
-        case 9:
-        case 19:
-        case 29:
+        case NA_LEVEL_SE_9:
+        case LEVEL_SE_2P(NA_LEVEL_SE_9):
+        case LEVEL_SE_MP(NA_LEVEL_SE_9):
             volumeScale = 0.85f;
             freqScale = gRacers[playerIndex].speed * (1.0f / 20.0f);
             if (freqScale > 8.0f) {
@@ -811,9 +809,9 @@ void func_800B8DAC(u8 playerIndex) {
                 freqScale = 0.1f;
             }
             break;
-        case 6:
-        case 16:
-        case 26:
+        case NA_LEVEL_SE_6:
+        case LEVEL_SE_2P(NA_LEVEL_SE_6):
+        case LEVEL_SE_MP(NA_LEVEL_SE_6):
             if (gRacers[playerIndex].unk_5C.x > 0.0f) {
                 volumeScale = gRacers[playerIndex].unk_5C.x * (2.0f / 30.0f);
                 freqScale = (gRacers[playerIndex].unk_5C.x * (1.0f / 80.0f)) + 1.0f;
@@ -861,12 +859,12 @@ void Audio_UpdateReverb(u8 playerIndex) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 14, 80);
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 15, 80);
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
-                if ((sRacerActiveSE[0] == 19) || (sRacerActiveSE[0] == 20) || (sRacerActiveSE[0] == 21)) {
+                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 80);
                 }
-                if ((sActivePlayerLevelSE[0][0] == 3) || (sActivePlayerLevelSE[0][0] == 4)) {
+                if ((sActivePlayerLevelSE[0][0] == NA_LEVEL_SE_3) || (sActivePlayerLevelSE[0][0] == NA_LEVEL_SE_4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, 80);
@@ -888,12 +886,12 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[0] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
-                if ((sRacerActiveSE[0] == 19) || (sRacerActiveSE[0] == 20) || (sRacerActiveSE[0] == 21)) {
+                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 80);
                 }
-                if ((sActivePlayerLevelSE[0][0] == 3) || (sActivePlayerLevelSE[0][0] == 4)) {
+                if ((sActivePlayerLevelSE[0][0] == NA_LEVEL_SE_3) || (sActivePlayerLevelSE[0][0] == NA_LEVEL_SE_4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, 80);
@@ -905,12 +903,12 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[1] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 3, 80);
-                if ((sRacerActiveSE[1] == 19) || (sRacerActiveSE[1] == 20) || (sRacerActiveSE[1] == 21)) {
+                if ((sRacerActiveSE[1] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 80);
                 }
-                if ((sActivePlayerLevelSE[1][0] == 3) || (sActivePlayerLevelSE[1][0] == 4)) {
+                if ((sActivePlayerLevelSE[1][0] == NA_LEVEL_SE_3) || (sActivePlayerLevelSE[1][0] == NA_LEVEL_SE_4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 80);
@@ -930,12 +928,12 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[0] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
-                if ((sRacerActiveSE[0] == 19) || (sRacerActiveSE[0] == 20) || (sRacerActiveSE[0] == 21)) {
+                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 80);
                 }
-                if ((sActivePlayerLevelSE[0][0] == 3) || (sActivePlayerLevelSE[0][0] == 4)) {
+                if ((sActivePlayerLevelSE[0][0] == NA_LEVEL_SE_3) || (sActivePlayerLevelSE[0][0] == NA_LEVEL_SE_4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, 80);
@@ -947,12 +945,12 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[1] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 3, 80);
-                if ((sRacerActiveSE[1] == 19) || (sRacerActiveSE[1] == 20) || (sRacerActiveSE[1] == 21)) {
+                if ((sRacerActiveSE[1] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 80);
                 }
-                if ((sActivePlayerLevelSE[1][0] == 3) || (sActivePlayerLevelSE[1][0] == 4)) {
+                if ((sActivePlayerLevelSE[1][0] == NA_LEVEL_SE_3) || (sActivePlayerLevelSE[1][0] == NA_LEVEL_SE_4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 80);
@@ -964,12 +962,12 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[2] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 4, 80);
-                if ((sRacerActiveSE[2] == 19) || (sRacerActiveSE[2] == 20) || (sRacerActiveSE[2] == 21)) {
+                if ((sRacerActiveSE[2] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 12, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 12, 80);
                 }
-                if ((sActivePlayerLevelSE[2][0] == 3) || (sActivePlayerLevelSE[2][0] == 4)) {
+                if ((sActivePlayerLevelSE[2][0] == NA_LEVEL_SE_3) || (sActivePlayerLevelSE[2][0] == NA_LEVEL_SE_4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, 80);
@@ -989,12 +987,12 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[0] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 2, 80);
-                if ((sRacerActiveSE[0] == 19) || (sRacerActiveSE[0] == 20) || (sRacerActiveSE[0] == 21)) {
+                if ((sRacerActiveSE[0] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[0] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 10, 80);
                 }
-                if ((sActivePlayerLevelSE[0][0] == 3) || (sActivePlayerLevelSE[0][0] == 4)) {
+                if ((sActivePlayerLevelSE[0][0] == NA_LEVEL_SE_3) || (sActivePlayerLevelSE[0][0] == NA_LEVEL_SE_4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 6, 80);
@@ -1006,12 +1004,12 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[1] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 3, 80);
-                if ((sRacerActiveSE[1] == 19) || (sRacerActiveSE[1] == 20) || (sRacerActiveSE[1] == 21)) {
+                if ((sRacerActiveSE[1] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[1] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 11, 80);
                 }
-                if ((sActivePlayerLevelSE[1][0] == 3) || (sActivePlayerLevelSE[1][0] == 4)) {
+                if ((sActivePlayerLevelSE[1][0] == NA_LEVEL_SE_3) || (sActivePlayerLevelSE[1][0] == NA_LEVEL_SE_4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 7, 80);
@@ -1023,12 +1021,12 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[2] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 4, 80);
-                if ((sRacerActiveSE[2] == 19) || (sRacerActiveSE[2] == 20) || (sRacerActiveSE[2] == 21)) {
+                if ((sRacerActiveSE[2] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[2] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 12, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 12, 80);
                 }
-                if ((sActivePlayerLevelSE[2][0] == 3) || (sActivePlayerLevelSE[2][0] == 4)) {
+                if ((sActivePlayerLevelSE[2][0] == NA_LEVEL_SE_3) || (sActivePlayerLevelSE[2][0] == NA_LEVEL_SE_4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 8, 80);
@@ -1040,12 +1038,12 @@ void Audio_UpdateReverb(u8 playerIndex) {
             }
             if (sPlayerEngineEchoSoundState[3] == 1) {
                 AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 5, 80);
-                if ((sRacerActiveSE[3] == 19) || (sRacerActiveSE[3] == 20) || (sRacerActiveSE[3] == 21)) {
+                if ((sRacerActiveSE[3] == NA_SE_LOW_ENERGY_SLOW) || (sRacerActiveSE[3] == NA_SE_LOW_ENERGY_MEDIUM) || (sRacerActiveSE[3] == NA_SE_LOW_ENERGY_FAST)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 13, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 13, 80);
                 }
-                if ((sActivePlayerLevelSE[3][0] == 3) || (sActivePlayerLevelSE[3][0] == 4)) {
+                if ((sActivePlayerLevelSE[3][0] == NA_LEVEL_SE_3) || (sActivePlayerLevelSE[3][0] == NA_LEVEL_SE_4)) {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 9, 0);
                 } else {
                     AUDIOCMD_CHANNEL_SET_REVERB_VOLUME(0, 9, 80);
@@ -1118,7 +1116,7 @@ void Audio_SetChannelMute(s32 seqPlayerIndex, s32 channelIndex, bool muted) {
 }
 
 void Audio_LoadDrum(void) {
-    AUDIOCMD_GLOBAL_SYNC_LOAD_INSTRUMENT(0, 0x7F, 0);
+    AUDIOCMD_GLOBAL_SYNC_LOAD_INSTRUMENT(FONT_SOUND_EFFECTS, 0x7F, 0);
 }
 
 void func_800B9EBC(s32 arg0, s32 arg1, s32 arg2) {
@@ -1172,7 +1170,7 @@ void Audio_InitAudio(void) {
     sEnemyEngineVolume = 0.0f;
     sEnemyEngineFreqScale = 0.0f;
     sEnemyEngineLinearPan = 64;
-    sAudioPauseStatus = 0;
+    sAudioPauseStatus = AUDIO_PAUSE_UNPAUSED;
     sAudioLevelFadeoutActive = false;
     sLevelFadeoutTimer = 0;
 #ifndef VERSION_JP
@@ -1185,20 +1183,20 @@ void Audio_InitAudio(void) {
         D_800D1A78[i] = 0;
         sAudioPlayerPreviousSpeed[i] = 0;
         gAudioPlayerFinishedState[i] = 0;
-        sActivePlayerLevelSE[i][0] = 0;
-        sActivePlayerLevelSE[i][1] = 0;
-        sActivePlayerLevelSE[i][2] = 0;
-        sActivePlayerLevelSE[i][3] = 0;
-        sActivePlayerLevelSE[i][4] = 0;
-        sActivePlayerLevelSE[i][5] = 0;
-        sActivePlayerLevelSE[i][6] = 0;
-        sActivePlayerLevelSE[i][7] = 0;
+        sActivePlayerLevelSE[i][0] = NA_LEVEL_SE_NONE;
+        sActivePlayerLevelSE[i][1] = NA_LEVEL_SE_NONE;
+        sActivePlayerLevelSE[i][2] = NA_LEVEL_SE_NONE;
+        sActivePlayerLevelSE[i][3] = NA_LEVEL_SE_NONE;
+        sActivePlayerLevelSE[i][4] = NA_LEVEL_SE_NONE;
+        sActivePlayerLevelSE[i][5] = NA_LEVEL_SE_NONE;
+        sActivePlayerLevelSE[i][6] = NA_LEVEL_SE_NONE;
+        sActivePlayerLevelSE[i][7] = NA_LEVEL_SE_NONE;
         sPlayerEngineEchoSoundState[i] = 0;
-        sRacerActiveSE[i] = 0;
-        sAudioLevelSEStack[i][0] = 0;
-        sAudioLevelSEStack[i][1] = 0;
-        sAudioLevelSEStack[i][2] = 0;
-        sAudioLevelSEStack[i][3] = 0;
+        sRacerActiveSE[i] = NA_SE_NONE;
+        sAudioLevelSEStack[i][0] = NA_LEVEL_SE_NONE;
+        sAudioLevelSEStack[i][1] = NA_LEVEL_SE_NONE;
+        sAudioLevelSEStack[i][2] = NA_LEVEL_SE_NONE;
+        sAudioLevelSEStack[i][3] = NA_LEVEL_SE_NONE;
         D_800D1A94[i] = 0;
     }
 
@@ -1207,10 +1205,10 @@ void Audio_InitAudio(void) {
     }
 
     for (i = 0; i < 30; i++) {
-        sAudioPlayerSEStack[i][0] = 0;
-        sAudioPlayerSEStack[i][1] = 0;
-        sAudioPlayerSEStack[i][2] = 0;
-        sAudioPlayerSEStack[i][3] = 0;
+        sAudioPlayerSEStack[i][0] = NA_SE_NONE;
+        sAudioPlayerSEStack[i][1] = NA_SE_NONE;
+        sAudioPlayerSEStack[i][2] = NA_SE_NONE;
+        sAudioPlayerSEStack[i][3] = NA_SE_NONE;
     }
 }
 
@@ -1253,10 +1251,10 @@ void Audio_PlayerLevelSEStart(u8 playerIndex, u8 sfxId) {
         (sfxId != sActivePlayerLevelSE[playerIndex][2]) && (sfxId != sActivePlayerLevelSE[playerIndex][3]) &&
         (sfxId != sActivePlayerLevelSE[playerIndex][4]) && (sfxId != sActivePlayerLevelSE[playerIndex][5]) &&
         (sfxId != sActivePlayerLevelSE[playerIndex][6]) && (sfxId != sActivePlayerLevelSE[playerIndex][7])) {
-        if (sAudioLevelSEStack[playerIndex][0] != 0) {
-            if (sAudioLevelSEStack[playerIndex][1] != 0) {
-                if (sAudioLevelSEStack[playerIndex][2] != 0) {
-                    if (sAudioLevelSEStack[playerIndex][3] == 0) {
+        if (sAudioLevelSEStack[playerIndex][0] != NA_LEVEL_SE_NONE) {
+            if (sAudioLevelSEStack[playerIndex][1] != NA_LEVEL_SE_NONE) {
+                if (sAudioLevelSEStack[playerIndex][2] != NA_LEVEL_SE_NONE) {
+                    if (sAudioLevelSEStack[playerIndex][3] == NA_LEVEL_SE_NONE) {
                         sAudioLevelSEStack[playerIndex][3] = sfxId;
                     } else {
                         PRINTF("PLAYER LEVEL SE STACK OVER!!\n");
@@ -1280,31 +1278,31 @@ void Audio_PlayerLevelSEStop(u8 playerIndex, u8 sfxId) {
     PRINTF("Na_PlyLevelSE_Stop Called player = %02x num = %02x \n", playerIndex, sfxId);
 
     if (sfxId == sAudioLevelSEStack[playerIndex][0]) {
-        sAudioLevelSEStack[playerIndex][0] = 0;
-        if (sAudioLevelSEStack[playerIndex][1] != 0) {
+        sAudioLevelSEStack[playerIndex][0] = NA_LEVEL_SE_NONE;
+        if (sAudioLevelSEStack[playerIndex][1] != NA_LEVEL_SE_NONE) {
             sAudioLevelSEStack[playerIndex][0] = sAudioLevelSEStack[playerIndex][1];
             sAudioLevelSEStack[playerIndex][1] = sAudioLevelSEStack[playerIndex][2];
             sAudioLevelSEStack[playerIndex][2] = sAudioLevelSEStack[playerIndex][3];
-            sAudioLevelSEStack[playerIndex][3] = 0;
+            sAudioLevelSEStack[playerIndex][3] = NA_LEVEL_SE_NONE;
         }
     }
     if (sfxId == sAudioLevelSEStack[playerIndex][1]) {
-        sAudioLevelSEStack[playerIndex][1] = 0;
-        if (sAudioLevelSEStack[playerIndex][2] != 0) {
+        sAudioLevelSEStack[playerIndex][1] = NA_LEVEL_SE_NONE;
+        if (sAudioLevelSEStack[playerIndex][2] != NA_LEVEL_SE_NONE) {
             sAudioLevelSEStack[playerIndex][1] = sAudioLevelSEStack[playerIndex][2];
             sAudioLevelSEStack[playerIndex][2] = sAudioLevelSEStack[playerIndex][3];
-            sAudioLevelSEStack[playerIndex][3] = 0;
+            sAudioLevelSEStack[playerIndex][3] = NA_LEVEL_SE_NONE;
         }
     }
     if (sfxId == sAudioLevelSEStack[playerIndex][2]) {
-        sAudioLevelSEStack[playerIndex][2] = 0;
-        if (sAudioLevelSEStack[playerIndex][3] != 0) {
+        sAudioLevelSEStack[playerIndex][2] = NA_LEVEL_SE_NONE;
+        if (sAudioLevelSEStack[playerIndex][3] != NA_LEVEL_SE_NONE) {
             sAudioLevelSEStack[playerIndex][2] = sAudioLevelSEStack[playerIndex][3];
-            sAudioLevelSEStack[playerIndex][3] = 0;
+            sAudioLevelSEStack[playerIndex][3] = NA_LEVEL_SE_NONE;
         }
     }
     if (sfxId == sAudioLevelSEStack[playerIndex][3]) {
-        sAudioLevelSEStack[playerIndex][3] = 0;
+        sAudioLevelSEStack[playerIndex][3] = NA_LEVEL_SE_NONE;
     }
 
     if (sfxId == sActivePlayerLevelSE[playerIndex][0]) {
@@ -1316,13 +1314,13 @@ void Audio_PlayerLevelSEStop(u8 playerIndex, u8 sfxId) {
         sActivePlayerLevelSE[playerIndex][4] = sActivePlayerLevelSE[playerIndex][5];
         sActivePlayerLevelSE[playerIndex][5] = sActivePlayerLevelSE[playerIndex][6];
         sActivePlayerLevelSE[playerIndex][6] = sActivePlayerLevelSE[playerIndex][7];
-        sActivePlayerLevelSE[playerIndex][7] = 0;
-        if (sActivePlayerLevelSE[playerIndex][0] == 0) {
+        sActivePlayerLevelSE[playerIndex][7] = NA_LEVEL_SE_NONE;
+        if (sActivePlayerLevelSE[playerIndex][0] == NA_LEVEL_SE_NONE) {
             Audio_StopChannelSE(playerIndex + 6);
         } else {
             Audio_StopChannelSE(playerIndex + 6);
             temp = sActivePlayerLevelSE[playerIndex][0];
-            sActivePlayerLevelSE[playerIndex][0] = 0;
+            sActivePlayerLevelSE[playerIndex][0] = NA_LEVEL_SE_NONE;
             Audio_PlayerLevelSEStart(playerIndex, temp);
         }
     } else if (sfxId == sActivePlayerLevelSE[playerIndex][1]) {
@@ -1332,34 +1330,34 @@ void Audio_PlayerLevelSEStop(u8 playerIndex, u8 sfxId) {
         sActivePlayerLevelSE[playerIndex][4] = sActivePlayerLevelSE[playerIndex][5];
         sActivePlayerLevelSE[playerIndex][5] = sActivePlayerLevelSE[playerIndex][6];
         sActivePlayerLevelSE[playerIndex][6] = sActivePlayerLevelSE[playerIndex][7];
-        sActivePlayerLevelSE[playerIndex][7] = 0;
+        sActivePlayerLevelSE[playerIndex][7] = NA_LEVEL_SE_NONE;
     } else if (sfxId == sActivePlayerLevelSE[playerIndex][2]) {
         sActivePlayerLevelSE[playerIndex][2] = sActivePlayerLevelSE[playerIndex][3];
         sActivePlayerLevelSE[playerIndex][3] = sActivePlayerLevelSE[playerIndex][4];
         sActivePlayerLevelSE[playerIndex][4] = sActivePlayerLevelSE[playerIndex][5];
         sActivePlayerLevelSE[playerIndex][5] = sActivePlayerLevelSE[playerIndex][6];
         sActivePlayerLevelSE[playerIndex][6] = sActivePlayerLevelSE[playerIndex][7];
-        sActivePlayerLevelSE[playerIndex][7] = 0;
+        sActivePlayerLevelSE[playerIndex][7] = NA_LEVEL_SE_NONE;
     } else if (sfxId == sActivePlayerLevelSE[playerIndex][3]) {
         sActivePlayerLevelSE[playerIndex][3] = sActivePlayerLevelSE[playerIndex][4];
         sActivePlayerLevelSE[playerIndex][4] = sActivePlayerLevelSE[playerIndex][5];
         sActivePlayerLevelSE[playerIndex][5] = sActivePlayerLevelSE[playerIndex][6];
         sActivePlayerLevelSE[playerIndex][6] = sActivePlayerLevelSE[playerIndex][7];
-        sActivePlayerLevelSE[playerIndex][7] = 0;
+        sActivePlayerLevelSE[playerIndex][7] = NA_LEVEL_SE_NONE;
     } else if (sfxId == sActivePlayerLevelSE[playerIndex][4]) {
         sActivePlayerLevelSE[playerIndex][4] = sActivePlayerLevelSE[playerIndex][5];
         sActivePlayerLevelSE[playerIndex][5] = sActivePlayerLevelSE[playerIndex][6];
         sActivePlayerLevelSE[playerIndex][6] = sActivePlayerLevelSE[playerIndex][7];
-        sActivePlayerLevelSE[playerIndex][7] = 0;
+        sActivePlayerLevelSE[playerIndex][7] = NA_LEVEL_SE_NONE;
     } else if (sfxId == sActivePlayerLevelSE[playerIndex][5]) {
         sActivePlayerLevelSE[playerIndex][5] = sActivePlayerLevelSE[playerIndex][6];
         sActivePlayerLevelSE[playerIndex][6] = sActivePlayerLevelSE[playerIndex][7];
-        sActivePlayerLevelSE[playerIndex][7] = 0;
+        sActivePlayerLevelSE[playerIndex][7] = NA_LEVEL_SE_NONE;
     } else if (sfxId == sActivePlayerLevelSE[playerIndex][6]) {
         sActivePlayerLevelSE[playerIndex][6] = sActivePlayerLevelSE[playerIndex][7];
-        sActivePlayerLevelSE[playerIndex][7] = 0;
+        sActivePlayerLevelSE[playerIndex][7] = NA_LEVEL_SE_NONE;
     } else if (sfxId == sActivePlayerLevelSE[playerIndex][7]) {
-        sActivePlayerLevelSE[playerIndex][7] = 0;
+        sActivePlayerLevelSE[playerIndex][7] = NA_LEVEL_SE_NONE;
     }
 }
 
@@ -1367,10 +1365,10 @@ void Audio_PlayerTriggerSE(u8 racerId, u8 sfxId) {
 
     if (sfxId != sAudioPlayerSEStack[racerId][0] && sfxId != sAudioPlayerSEStack[racerId][1] &&
         sfxId != sAudioPlayerSEStack[racerId][2] && sfxId != sAudioPlayerSEStack[racerId][3]) {
-        if (sAudioPlayerSEStack[racerId][0] != 0) {
-            if (sAudioPlayerSEStack[racerId][1] != 0) {
-                if (sAudioPlayerSEStack[racerId][2] != 0) {
-                    if (sAudioPlayerSEStack[racerId][3] == 0) {
+        if (sAudioPlayerSEStack[racerId][0] != NA_SE_NONE) {
+            if (sAudioPlayerSEStack[racerId][1] != NA_SE_NONE) {
+                if (sAudioPlayerSEStack[racerId][2] != NA_SE_NONE) {
+                    if (sAudioPlayerSEStack[racerId][3] == NA_SE_NONE) {
                         sAudioPlayerSEStack[racerId][3] = sfxId;
                     }
                 } else {
@@ -1388,10 +1386,10 @@ void Audio_PlayerTriggerSE(u8 racerId, u8 sfxId) {
 // Na_PlyTrgSE_Start
 void Audio_PlayerTriggerSEStart(u8 racerId, u8 sfxId) {
 
-    if (sfxId == 0x1E) {
+    if (sfxId == NA_SE_30) {
         goto block_5;
     }
-    if (sfxId == 0x21) {
+    if (sfxId == NA_SE_33) {
         goto block_5;
     }
     if (sAudioRetireStatus == 1) {
@@ -1448,36 +1446,36 @@ void Audio_TriggerVoiceSEStart(u8 sfxId, u16 time) {
 void Audio_TriggerSystemSE(u8 sfxId) {
 
     PRINTF("System SE = %02x\n", sfxId);
-    if (sfxId == 0x11) {
+    if (sfxId == NA_SE_17) {
         // You got boost power
-        Audio_TriggerVoiceSEStart(sfxId, 0x83);
-    } else if (sfxId == 0x12) {
+        Audio_TriggerVoiceSEStart(sfxId, 131);
+    } else if (sfxId == NA_SE_18) {
         // Yeah! The final lap
-        Audio_TriggerVoiceSEStart(sfxId, 0xB3);
-    } else if (sfxId == 0x2A) {
-        Audio_TriggerVoiceSEStart(sfxId, 0xBE);
-    } else if (sfxId == 0x2C) {
-        Audio_TriggerVoiceSEStart(sfxId, 0xC6);
-    } else if (sfxId == 0x30) {
-        Audio_TriggerVoiceSEStart(sfxId, 0x9A);
-    } else if (sfxId == 0x33) {
-        Audio_TriggerVoiceSEStart(sfxId, 0x9B);
-    } else if (sfxId == 0x34) {
-        Audio_TriggerVoiceSEStart(sfxId, 0xE9);
-    } else if (sfxId == 0x35) {
-        Audio_TriggerVoiceSEStart(sfxId, 0xCD);
-    } else if (sfxId == 0x38) {
-        Audio_TriggerVoiceSEStart(sfxId, 0x71);
-    } else if (sfxId == 0x3A) {
-        Audio_TriggerVoiceSEStart(sfxId, 0x68);
-    } else if (sfxId == 0x3B) {
-        Audio_TriggerVoiceSEStart(sfxId, 0xB5);
-    } else if (sfxId == 0x3C) {
-        Audio_TriggerVoiceSEStart(sfxId, 0x99);
-    } else if (sfxId == 0x3D) {
-        Audio_TriggerVoiceSEStart(sfxId, 0x83);
-    } else if (sfxId == 0x43) {
-        Audio_TriggerVoiceSEStart(sfxId, 0x9B);
+        Audio_TriggerVoiceSEStart(sfxId, 179);
+    } else if (sfxId == NA_SE_42) {
+        Audio_TriggerVoiceSEStart(sfxId, 190);
+    } else if (sfxId == NA_SE_44) {
+        Audio_TriggerVoiceSEStart(sfxId, 198);
+    } else if (sfxId == NA_SE_48) {
+        Audio_TriggerVoiceSEStart(sfxId, 154);
+    } else if (sfxId == NA_SE_51) {
+        Audio_TriggerVoiceSEStart(sfxId, 155);
+    } else if (sfxId == NA_SE_52) {
+        Audio_TriggerVoiceSEStart(sfxId, 233);
+    } else if (sfxId == NA_SE_53) {
+        Audio_TriggerVoiceSEStart(sfxId, 205);
+    } else if (sfxId == NA_SE_56) {
+        Audio_TriggerVoiceSEStart(sfxId, 113);
+    } else if (sfxId == NA_SE_58) {
+        Audio_TriggerVoiceSEStart(sfxId, 104);
+    } else if (sfxId == NA_SE_59) {
+        Audio_TriggerVoiceSEStart(sfxId, 181);
+    } else if (sfxId == NA_SE_60) {
+        Audio_TriggerVoiceSEStart(sfxId, 153);
+    } else if (sfxId == NA_SE_61) {
+        Audio_TriggerVoiceSEStart(sfxId, 131);
+    } else if (sfxId == NA_SE_67) {
+        Audio_TriggerVoiceSEStart(sfxId, 155);
     } else {
         Audio_SystemSEStart(sfxId);
     }
@@ -1499,7 +1497,7 @@ void Audio_Hanabi(u8 pan, u8 volume) {
 
     volumeScale = volume / 127.0f;
     AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 15, volumeScale);
-    Audio_SEStart(15, 0x2D);
+    Audio_SEStart(15, NA_SE_45);
 }
 
 void Audio_PlayerEngineEchoStart(u8 playerIndex) {
@@ -1526,9 +1524,9 @@ void Audio_PlayerEngineStart(u8 playerIndex) {
         case 0:
             AUDIOCMD_CHANNEL_SET_PAN(0, 2, 0x3F);
             if (D_800D1A94[playerIndex] == 0) {
-                Audio_SEStart(playerIndex + 2, 2);
+                Audio_SEStart(playerIndex + 2, NA_LEVEL_SE_2);
             } else {
-                Audio_SEStart(playerIndex + 2, 7);
+                Audio_SEStart(playerIndex + 2, NA_LEVEL_SE_7);
             }
             break;
         case 1:
@@ -1541,9 +1539,9 @@ void Audio_PlayerEngineStart(u8 playerIndex) {
                     break;
             }
             if (D_800D1A94[playerIndex] == 0) {
-                Audio_SEStart(playerIndex + 2, 0xC);
+                Audio_SEStart(playerIndex + 2, LEVEL_SE_2P(NA_LEVEL_SE_2));
             } else {
-                Audio_SEStart(playerIndex + 2, 0x11);
+                Audio_SEStart(playerIndex + 2, LEVEL_SE_2P(NA_LEVEL_SE_7));
             }
             break;
         case 2:
@@ -1559,9 +1557,9 @@ void Audio_PlayerEngineStart(u8 playerIndex) {
                     break;
             }
             if (D_800D1A94[playerIndex] == 0) {
-                Audio_SEStart(playerIndex + 2, 0x16);
+                Audio_SEStart(playerIndex + 2, LEVEL_SE_MP(NA_LEVEL_SE_2));
             } else {
-                Audio_SEStart(playerIndex + 2, 0x1B);
+                Audio_SEStart(playerIndex + 2, LEVEL_SE_MP(NA_LEVEL_SE_7));
             }
             break;
         case 3:
@@ -1580,9 +1578,9 @@ void Audio_PlayerEngineStart(u8 playerIndex) {
                     break;
             }
             if (D_800D1A94[playerIndex] == 0) {
-                Audio_SEStart(playerIndex + 2, 0x16);
+                Audio_SEStart(playerIndex + 2, LEVEL_SE_MP(NA_LEVEL_SE_2));
             } else {
-                Audio_SEStart(playerIndex + 2, 0x1B);
+                Audio_SEStart(playerIndex + 2, LEVEL_SE_MP(NA_LEVEL_SE_7));
             }
     }
 }
@@ -1656,7 +1654,7 @@ void Audio_RomBgmStop(void) {
 
 // Na_START_DEMO
 void Audio_StartDemo(void) {
-    Audio_RomBgmStart(0x17);
+    Audio_RomBgmStart(BGM_DEMO);
 }
 
 // Na_RETIRE
@@ -1695,12 +1693,12 @@ void Audio_PauseSet(u8 status) {
     PRINTF("Pause Called!! Status =  %02x\n", status);
 
     switch (status) {
-        case 0:
-            sAudioPauseStatus = 0;
+        case AUDIO_PAUSE_UNPAUSED:
+            sAudioPauseStatus = AUDIO_PAUSE_UNPAUSED;
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 1.0f);
             break;
-        case 1:
-            sAudioPauseStatus = 1;
+        case AUDIO_PAUSE_PAUSED:
+            sAudioPauseStatus = AUDIO_PAUSE_PAUSED;
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 0.4f);
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 2, 0.0f);
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 3, 0.0f);
@@ -1712,7 +1710,7 @@ void Audio_PauseSet(u8 status) {
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 9, 0.0f);
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 14, 0.0f);
             break;
-        case 2:
+        case AUDIO_PAUSE_TRANSITION:
             Audio_StopChannelSE(0);
             Audio_StopChannelSE(2);
             Audio_StopChannelSE(3);
@@ -1733,7 +1731,7 @@ void Audio_PauseSet(u8 status) {
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 8, 0.0f);
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 9, 0.0f);
             AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 14, 0.0f);
-            sAudioPauseStatus = 2;
+            sAudioPauseStatus = AUDIO_PAUSE_TRANSITION;
             break;
     }
 }
@@ -1763,7 +1761,7 @@ void Audio_AllSoundStop(void) {
 // Na_SeSeq_Start
 void Audio_SESeqStart(void) {
     PRINTF("Na_SeSeq_Start for ROM Called\n");
-    AUDIOCMD_GLOBAL_INIT_SEQPLAYER(0, 0, 0, 0);
+    AUDIOCMD_GLOBAL_INIT_SEQPLAYER(0, SEQ_SOUND_EFFECTS, 0, 0);
     AudioThread_ScheduleProcessCmds();
 }
 
@@ -1793,7 +1791,7 @@ void Audio_Chakuchi(u8 racerId, f32 volume) {
         sRacerAudioVolume[racerId] = 0.75f;
     }
     PRINTF("Na_chakuchi Edited volume = %f \n", sRacerAudioVolume[racerId]);
-    Audio_PlayerTriggerSE(racerId, 0x36);
+    Audio_PlayerTriggerSE(racerId, NA_SE_54);
 }
 
 void Audio_DisablePlayerSE(void) {
@@ -1804,7 +1802,7 @@ void Audio_DisablePlayerSE(void) {
 void Audio_GuitarSeqStart(void) {
     PRINTF("Na_Guitor_Start Called\n");
     PRINTF("Na_Guitor_Start for ROM Called\n");
-    AUDIOCMD_GLOBAL_INIT_SEQPLAYER(1, 1, 0, 0);
+    AUDIOCMD_GLOBAL_INIT_SEQPLAYER(1, SEQ_GUITAR, 0, 0);
     Audio_SESeqStart();
 }
 
