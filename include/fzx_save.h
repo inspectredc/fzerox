@@ -132,6 +132,7 @@ void Save_InitCharacterSave(CharacterSave* characterSave, bool shouldClear);
 void Save_SaveSettings(SaveSettings* saveSettings);
 s32 Save_SaveGhost(s32 courseIndex, Ghost* ghost);
 void Save_SaveDeathRace(SaveDeathRace* deathRace);
+s32 Save_SaveDeathRaceProfiles(void);
 void Save_SaveCourseRecord(SaveCourseRecords* courseRecords, s32 courseIndex);
 void Save_SaveEditCup(SaveEditCup* editCup);
 void Save_SaveGhostRecord(Ghost* ghost);
@@ -139,6 +140,8 @@ void Save_SaveGhostData(Ghost* ghost);
 void Save_SaveCharacterSave(CharacterSave* characterSave);
 
 void func_i2_80102A7C(unk_80141C88_unk_1D*, MachineInfo*);
+
+s32 Save_UpdateCupCompletion(s32 difficulty, s32 cupType, s32 character);
 
 void Save_Load(SaveContext* saveContext);
 void Save_LoadSaveSettings(ProfileSave* profileSaves, bool arg1);

@@ -2259,7 +2259,7 @@ void func_8008E54C(Racer* racer, f32 airborneRange) {
                                          racer->segmentPositionInfo.pos.z, racer->velocity.x, racer->velocity.y,
                                          racer->velocity.z, 40.0f, racer);
             if (gEnableRaceSfx) {
-                Audio_PlayerTriggerSEStart(racer->id, 3);
+                Audio_PlayerTriggerSEStart(racer->id, NA_SE_3);
             }
         }
     } else {
@@ -3364,19 +3364,19 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
         var_fs1 *= 0.987f;
         var_ft4 *= 0.987f;
         if (racer->id < gNumPlayers) {
-            if (!(racer->soundEffectFlags & 0x400)) {
-                racer->soundEffectFlags |= 0x400;
+            if (!(racer->soundEffectFlags & RACER_SE_FLAGS_DIRT)) {
+                racer->soundEffectFlags |= RACER_SE_FLAGS_DIRT;
                 if (gEnableRaceSfx) {
-                    Audio_PlayerLevelSEStart(racer->id, 5);
+                    Audio_PlayerLevelSEStart(racer->id, NA_LEVEL_SE_5);
                 }
             }
         }
     } else {
         if (racer->id < gNumPlayers) {
-            if (racer->soundEffectFlags & 0x400) {
-                racer->soundEffectFlags &= ~0x400;
+            if (racer->soundEffectFlags & RACER_SE_FLAGS_DIRT) {
+                racer->soundEffectFlags &= ~RACER_SE_FLAGS_DIRT;
                 if (gEnableRaceSfx) {
-                    Audio_PlayerLevelSEStop(racer->id, 5);
+                    Audio_PlayerLevelSEStop(racer->id, NA_LEVEL_SE_5);
                 }
             }
         }
@@ -3390,19 +3390,19 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
             var_ft4 *= 0.9f;
         }
         if (racer->id < gNumPlayers) {
-            if (!(racer->soundEffectFlags & 0x80)) {
-                racer->soundEffectFlags |= 0x80;
+            if (!(racer->soundEffectFlags & RACER_SE_FLAGS_BRAKE)) {
+                racer->soundEffectFlags |= RACER_SE_FLAGS_BRAKE;
                 if (gEnableRaceSfx) {
-                    Audio_PlayerLevelSEStart(racer->id, 9);
+                    Audio_PlayerLevelSEStart(racer->id, NA_LEVEL_SE_9);
                 }
             }
         }
     } else {
         if (racer->id < gNumPlayers) {
-            if (racer->soundEffectFlags & 0x80) {
-                racer->soundEffectFlags &= ~0x80;
+            if (racer->soundEffectFlags & RACER_SE_FLAGS_BRAKE) {
+                racer->soundEffectFlags &= ~RACER_SE_FLAGS_BRAKE;
                 if (gEnableRaceSfx) {
-                    Audio_PlayerLevelSEStop(racer->id, 9);
+                    Audio_PlayerLevelSEStop(racer->id, NA_LEVEL_SE_9);
                 }
             }
         }
@@ -3430,7 +3430,7 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
         racer->boostTimer = sInitialBoostTimer;
         racer->soundEffectFlags |= RACER_SE_FLAGS_BOOST;
         if (gEnableRaceSfx) {
-            Audio_PlayerTriggerSEStart(racer->id, 7);
+            Audio_PlayerTriggerSEStart(racer->id, NA_SE_7);
         }
     } else {
         if ((racer->stateFlags & (RACER_STATE_CRASHED | COURSE_EFFECT_MASK)) == COURSE_EFFECT_DASH) {
@@ -3444,7 +3444,7 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
             if (!(racer->soundEffectFlags & RACER_SE_FLAGS_BOOST)) {
                 racer->soundEffectFlags |= RACER_SE_FLAGS_BOOST;
                 if (gEnableRaceSfx) {
-                    Audio_PlayerTriggerSEStart(racer->id, NA_LEVEL_SE_7);
+                    Audio_PlayerTriggerSEStart(racer->id, NA_SE_7);
                 }
             }
         } else {

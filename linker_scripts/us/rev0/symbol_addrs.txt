@@ -261,11 +261,6 @@ Course_SplineGetBasis = 0x8009E85C;
 
 Racer_Draw = 0x80096CE8;
 
-gCourseVtxPtr = 0x800F8520;
-gEffectsVtxPtr = 0x800E5ECC;
-gEffectsVtxEndPtr = 0x800E5ED0;
-gEnableRaceSfx = 0x800E5FD0;
-
 mio0Decode = 0x800AA620;
 
 Audio_PlayerFinished = 0x800BA2B4;
@@ -327,6 +322,8 @@ gCameras = 0x800E5220; // size:0x770
 gTotalRacers = 0x800E5EC0;
 sLastRacer = 0x800E5EC4;
 sRivalRacer = 0x800E5EC8;
+gEffectsVtxPtr = 0x800E5ECC;
+gEffectsVtxEndPtr = 0x800E5ED0;
 gVsRacePlayerVictoryCount = 0x800E5F00; // size:0x10
 gVsRacePlayerPoints = 0x800E5F10; // size:0x10
 D_800E5F20 = 0x800E5F20; // size:0x10
@@ -337,9 +334,12 @@ gRacersRetired = 0x800E5FC2;
 gRacersFinished = 0x800E5FC4;
 gPlayerRacersRetired = 0x800E5FC8;
 gPlayerRacersFinished = 0x800E5FCA;
+gEnableRaceSfx = 0x800E5FD0;
 sRaceFrameCount = 0x800E5FD8;
 gPracticeBestLap = 0x800E5FDC;
 gStartNewBestLap = 0x800E5FE0;
+sPipeFogColors = 0x800E5FE8;
+sTunnelFogColors = 0x800E5FEC;
 sGhostReplayRecordingSize = 0x800F5DC8;
 sGhostReplayRecordingEnd = 0x800F5DCC;
 sReplayRecordFrameCount = 0x800F5DD0;
@@ -353,6 +353,7 @@ gPlayerReverseTimer = 0x800F80A8; // size:0x10
 sRecordsMachineIndices = 0x800F8504; // size:0x7
 gCurrentCourseInfo = 0x800F8510;
 gCourseIndex = 0x800F8514;
+gCourseVtxPtr = 0x800F8520;
 sSegmentChunkGroups = 0x800F8528; // size:0x400
 
 D_800D4E98 = 0x800D4E98;

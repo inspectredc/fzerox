@@ -4,6 +4,7 @@
 #include "fzx_racer.h"
 #include "fzx_camera.h"
 #include "fzx_course.h"
+#include "menus.h"
 #include "records_entry.h"
 #include "assets/course_track_gfx.h"
 #include "assets/machine_custom_gfx.h"

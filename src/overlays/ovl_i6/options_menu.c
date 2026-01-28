@@ -269,7 +269,6 @@ s32 OptionsMenu_Update(void) {
 
 extern u16 gInputButtonPressed;
 extern u16 gInputPressed;
-Gfx* func_i6_8011D168(Gfx*, s32, s32);
 
 bool func_i6_8011C788(void) {
     s32 lastRow;

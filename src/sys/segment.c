@@ -192,21 +192,21 @@ void* Arena_Allocate(s32 allocationType, size_t size) {
     return allocatePtr;
 }
 
-s32 Segment_SetPhysicalAddress(s32 segment, s32 addr) {
+uintptr_t Segment_SetPhysicalAddress(s32 segment, uintptr_t addr) {
     gSegments[segment] = K0_TO_PHYS(addr);
     return gSegments[segment];
 }
 
-s32 Segment_SetAddress(s32 segment, s32 addr) {
+uintptr_t Segment_SetAddress(s32 segment, uintptr_t addr) {
     gSegments[segment] = addr;
     return gSegments[segment];
 }
 
-s32 Segment_GetAddress(s32 segment) {
+uintptr_t Segment_GetAddress(s32 segment) {
     return PHYS_TO_K0(gSegments[segment]);
 }
 
-s32 Segment_SegmentedToVirtual(uintptr_t segmentedAddr) {
+uintptr_t Segment_SegmentedToVirtual(uintptr_t segmentedAddr) {
     return PHYS_TO_K0(gSegments[SEGMENT_NUMBER(segmentedAddr)] + SEGMENT_OFFSET(segmentedAddr));
 }
 

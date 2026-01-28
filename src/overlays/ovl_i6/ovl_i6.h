@@ -41,4 +41,7 @@ typedef struct OptionsInfo {
     /* 0x18 */ TextureInfo optionTextureInfo;
 } OptionsInfo; // size = 0x20
 
+bool func_i6_8011C788(void);
+Gfx* func_i6_8011D168(Gfx*, s32, s32);
+
 #endif // OVL_I6_H

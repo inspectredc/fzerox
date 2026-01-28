@@ -2,6 +2,7 @@
 #include "menus.h"
 #include "hud.h"
 #include "ovl_i3.h"
+#include "records_entry.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
 #include "fzx_save.h"

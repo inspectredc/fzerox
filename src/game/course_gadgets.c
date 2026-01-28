@@ -3,6 +3,7 @@
 #include "fzx_thread.h"
 #include "fzx_course.h"
 #include "segment_symbols.h"
+#include "leo/mfs.h"
 #include "assets/course_track_gfx.h"
 #include "assets/setup_gfx.h"
 

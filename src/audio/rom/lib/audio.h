@@ -916,6 +916,7 @@ Note* Audio_AllocNote(SequenceLayer* layer);
 void Audio_NoteInitAll(void);
 
 void Audio_NotePortamentoInit(Note* note);
+void Audio_NotePortamentoUpdate(Note* note);
 void Audio_SequencePlayerProcessSound(SequencePlayer* seqPlayer);
 void Audio_AdsrInit(AdsrState* adsr, EnvelopePoint* envelope, s16* volOut);
 f32 Audio_AdsrUpdate(AdsrState* adsr);
@@ -930,6 +931,7 @@ void AudioSeq_SequencePlayerDisable(SequencePlayer* seqPlayer);
 void AudioSeq_AudioListPushBack(AudioListItem* list, AudioListItem* item);
 void* AudioSeq_AudioListPopBack(AudioListItem* list);
 void AudioSeq_SkipForwardSequence(SequencePlayer* seqPlayer);
+void AudioSeq_ResetSequencePlayer(s32 seqPlayerIndex);
 void AudioSeq_SequenceChannelDisable(SequenceChannel* channel);
 u8 AudioSeq_ScriptReadU8(SeqScriptState* state);
 s16 AudioSeq_ScriptReadS16(SeqScriptState* state);
@@ -1031,5 +1033,7 @@ bool AudioThread_ResetComplete(void);
 s32 AudioThread_ResetAudioHeap(s32 specId);
 void AudioThread_PreNMIInternal(void);
 void AudioThread_InitMesgQueues(void);
+
+AudioTask* Audio_SetupCreateTask(void);
 
 #endif // AUDIO_INTERNAL_H

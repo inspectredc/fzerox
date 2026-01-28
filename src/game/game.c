@@ -1,6 +1,7 @@
 #include "global.h"
 #include "audio.h"
 #include "fzx_game.h"
+#include "fzx_camera.h"
 #include "fzx_course.h"
 
 UNUSED s32 D_800DCE40;
