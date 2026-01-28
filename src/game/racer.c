@@ -3183,12 +3183,12 @@ void func_80090BCC(Racer* racer, Controller* controller) {
     Mtx3F spE8;
     f32 spE4;
     CourseSegment* temp_v1;
-    unk_802D3E38* temp_a0;
-    unk_802D3E38* var_v0;
-    unk_802D3978* var_v0_2;
-    unk_802D3978* temp2;
-    unk_802D3D38* var_v0_3;
-    unk_802D3D38* temp;
+    Effect* temp_a0;
+    Effect* var_v0;
+    Landmine* var_v0_2;
+    Landmine* temp2;
+    Jump* var_v0_3;
+    Jump* temp;
     u16 buttonReleased; // spC6
     u16 buttonCurrent;
     u16 buttonPressed;
@@ -3246,10 +3246,10 @@ void func_80090BCC(Racer* racer, Controller* controller) {
                 if (var_v0->unk_18.x < var_fa1) {
                     continue;
                 }
-                if (racer->segmentPositionInfo.segmentTValue < var_v0->unk_04) {
+                if (racer->segmentPositionInfo.segmentTValue < var_v0->segmentTValueStart) {
                     continue;
                 }
-                if (var_v0->unk_08 < racer->segmentPositionInfo.segmentTValue) {
+                if (var_v0->segmentTValueEnd < racer->segmentPositionInfo.segmentTValue) {
                     continue;
                 }
                 racer->stateFlags |= var_v0->effectType;
@@ -3259,11 +3259,11 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         } else {
 
             do {
-                if (racer->segmentPositionInfo.segmentTValue < var_v0->unk_04) {
+                if (racer->segmentPositionInfo.segmentTValue < var_v0->segmentTValueStart) {
                     continue;
                 }
 
-                if (var_v0->unk_08 < racer->segmentPositionInfo.segmentTValue) {
+                if (var_v0->segmentTValueEnd < racer->segmentPositionInfo.segmentTValue) {
                     continue;
                 }
 
@@ -3456,9 +3456,9 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         if (var_v0_2 != NULL) {
             temp2 = temp_v1->landminesEnd;
             do {
-                var_fs1 = var_v0_2->unk_04.x - racer->segmentPositionInfo.pos.x;
-                var_fs0 = var_v0_2->unk_04.y - racer->segmentPositionInfo.pos.y;
-                var_ft4 = var_v0_2->unk_04.z - racer->segmentPositionInfo.pos.z;
+                var_fs1 = var_v0_2->pos.x - racer->segmentPositionInfo.pos.x;
+                var_fs0 = var_v0_2->pos.y - racer->segmentPositionInfo.pos.y;
+                var_ft4 = var_v0_2->pos.z - racer->segmentPositionInfo.pos.z;
                 if ((SQ(var_fs1) + SQ(var_fs0) + SQ(var_ft4)) < 900.0f) {
                     racer->acceleration.x += (15.0f * racer->tiltUp.x);
                     racer->acceleration.y += (15.0f * racer->tiltUp.y);
@@ -3480,39 +3480,39 @@ void func_80090BCC(Racer* racer, Controller* controller) {
         if (var_v0_3 != NULL) {
             temp = temp_v1->jumpsEnd;
             do {
-                var_fs1 = racer->segmentPositionInfo.pos.x - var_v0_3->unk_00.x;
-                var_fs0 = racer->segmentPositionInfo.pos.y - var_v0_3->unk_00.y;
-                var_ft4 = racer->segmentPositionInfo.pos.z - var_v0_3->unk_00.z;
-                var_fa1 = (var_v0_3->unk_0C.x.x * var_fs1) + (var_v0_3->unk_0C.x.y * var_fs0) +
-                          (var_v0_3->unk_0C.x.z * var_ft4);
+                var_fs1 = racer->segmentPositionInfo.pos.x - var_v0_3->pos.x;
+                var_fs0 = racer->segmentPositionInfo.pos.y - var_v0_3->pos.y;
+                var_ft4 = racer->segmentPositionInfo.pos.z - var_v0_3->pos.z;
+                var_fa1 =
+                    (var_v0_3->basis.x.x * var_fs1) + (var_v0_3->basis.x.y * var_fs0) + (var_v0_3->basis.x.z * var_ft4);
 
                 if (var_fa1 < 0.0f) {
                     continue;
                 }
 
-                if (var_v0_3->unk_30.z < var_fa1) {
+                if (var_v0_3->dimensions.z < var_fa1) {
                     continue;
                 }
 
-                var_fa1 = (var_v0_3->unk_0C.z.x * var_fs1) + (var_v0_3->unk_0C.z.y * var_fs0) +
-                          (var_v0_3->unk_0C.z.z * var_ft4);
+                var_fa1 =
+                    (var_v0_3->basis.z.x * var_fs1) + (var_v0_3->basis.z.y * var_fs0) + (var_v0_3->basis.z.z * var_ft4);
 
                 if (var_fa1 < 0.0f) {
                     continue;
                 }
 
-                if (var_v0_3->unk_30.x < var_fa1) {
+                if (var_v0_3->dimensions.x < var_fa1) {
                     continue;
                 }
 
-                var_fa1 = (var_v0_3->unk_0C.y.x * var_fs1) + (var_v0_3->unk_0C.y.y * var_fs0) +
-                          (var_v0_3->unk_0C.y.z * var_ft4);
+                var_fa1 =
+                    (var_v0_3->basis.y.x * var_fs1) + (var_v0_3->basis.y.y * var_fs0) + (var_v0_3->basis.y.z * var_ft4);
 
                 if (var_fa1 < 0.0f) {
                     continue;
                 }
 
-                if (var_v0_3->unk_30.y < var_fa1) {
+                if (var_v0_3->dimensions.y < var_fa1) {
                     continue;
                 }
 

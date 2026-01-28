@@ -499,14 +499,14 @@ D_8015220:
   offset: 0x15220
   symbol: D_8015220
 
-D_8015A20:
+aJumpFeatureTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x15A20
-  symbol: D_8015A20
+  symbol: aJumpFeatureTex
 
 aPitEffectTex:
   type: TEXTURE
@@ -778,10 +778,10 @@ D_8021380:
   offset: 0x21380
   symbol: D_8021380
 
-D_8022380:
+aSetupLandmineTextureDL:
   type: GFX
   offset: 0x22380
-  symbol: D_8022380
+  symbol: aSetupLandmineTextureDL
 
 aSetupCourseEffectTextureDL:
   type: GFX

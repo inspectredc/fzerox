@@ -138,6 +138,7 @@ typedef enum PitZone {
     /*  0 */ PIT_BOTH,
     /*  1 */ PIT_LEFT,
     /*  2 */ PIT_RIGHT,
+    /*  3 */ PIT_MIDDLE,
 } PitZone;
 
 typedef enum DashZone {
@@ -175,7 +176,7 @@ typedef enum LandmineType {
     /*  0 */ LANDMINE_MIDDLE,
     /*  1 */ LANDMINE_LEFT,
     /*  2 */ LANDMINE_RIGHT,
-} Landmine;
+} LandmineType;
 
 typedef enum Gate {
     /* -1 */ GATE_NONE = -1,

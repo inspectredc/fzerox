@@ -80,52 +80,77 @@ typedef struct CourseInfo {
     /* 0xDC */ MachineInfo bestTimeMachine;
 } CourseInfo; // size = 0xF0
 
-typedef struct unk_802D3E38 {
-    s32 effectType;
-    f32 unk_04;
-    f32 unk_08;
-    Vec3f unk_0C;
-    Vec3f unk_18;
-    s8 unk_24[0x4];
-} unk_802D3E38; // size = 0x28
+typedef struct Jump {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ Mtx3F basis;
+    /* 0x30 */ Vec3f dimensions; // width, height, depth
+    /* 0x3C */ s8 unk_3C[0x4];
+} Jump; // size = 0x40
 
-typedef struct unk_802D3D38 {
-    Vec3f unk_00;
-    Mtx3F unk_0C;
-    Vec3f unk_30;
-    s8 unk_3C[0x4];
-} unk_802D3D38; // size = 0x40
+typedef struct Landmine {
+#ifndef EXPANSION_KIT
+    /* 0x00 */ s32 unk_00;
+#endif
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ s8 unk_10[0x4];
+} Landmine; // size = 0x10
 
-typedef struct unk_8006FF90_arg_1 {
-    s32 segmentIndex;
-    s32 effectType;
-    f32 unk_08;
-    f32 unk_0C;
-    f32 unk_10;
-    f32 unk_14;
-} unk_8006FF90_arg_1; // size = 0x18
+typedef struct Effect {
+    /* 0x00 */ s32 effectType;
+    /* 0x04 */ f32 segmentTValueStart;
+    /* 0x08 */ f32 segmentTValueEnd;
+    /* 0x0C */ Vec3f unk_0C;
+    /* 0x18 */ Vec3f unk_18;
+    /* 0x24 */ s8 unk_24[0x4];
+} Effect; // size = 0x28
 
-typedef struct unk_802D1B60_unk_00 {
-    s32 featureType;
-    s32 segmentIndex;
-    f32 unk_08;
-    f32 unk_0C;
-    Vec3f unk_10;
-} unk_802D1B60_unk_00; // size = 0x1C
+#define DASH_LATERAL_OFFSET(effect) ((effect)->rightEdgeDistance)
+#define DASH_LATERAL_OFFSET2(effect) ((effect)->leftEdgeDistance)
+#define DASH_ANGLE(effect) ((effect)->rightEdgeDistance)
+#define DASH_ANGLE2(effect) ((effect)->leftEdgeDistance)
 
-typedef struct unk_802D1B60 {
-    unk_802D1B60_unk_00* unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-} unk_802D1B60;
+typedef struct CourseEffect {
+    /* 0x00 */ s32 segmentIndex;
+    /* 0x04 */ s32 effectType;
+    /* 0x08 */ f32 segmentTValueStart;
+    /* 0x0C */ f32 segmentTValueEnd;
+    /* 0x10 */ f32 rightEdgeDistance;
+    /* 0x14 */ f32 leftEdgeDistance;
+} CourseEffect; // size = 0x18
 
-typedef struct unk_802D08E0 {
-    Vec3f unk_00;
-    Mtx3F unk_0C;
-    f32 unk_30;
-    struct SegmentChunk* unk_34;
-} unk_802D08E0; // size = 0x38
+typedef struct CourseFeature {
+    /* 0x00 */ s32 featureType;
+    /* 0x04 */ s32 segmentIndex;
+    /* 0x08 */ f32 segmentTValue;
+    /* 0x0C */ f32 lateralOffset;
+    /* 0x10 */ Vec3f dimensions;
+} CourseFeature; // size = 0x1C
+
+typedef struct CourseFeaturesInfo {
+    /* 0x00 */ CourseFeature* features;
+    /* 0x04 */ s32 featureCount;
+    /* 0x08 */ s32 landmineCount;
+    /* 0x0C */ s32 jumpCount;
+} CourseFeaturesInfo; // size = 0x10
+
+typedef struct CourseDecoration {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ Mtx3F basis;
+    /* 0x30 */ f32 scale;
+    /* 0x34 */ struct SegmentChunk* loadChunk;
+} CourseDecoration; // size = 0x38
+
+typedef struct CourseEffectsInfo {
+    /* 0x00 */ CourseEffect* effects;
+    /* 0x04 */ s32 count;
+} CourseEffectsInfo; // size = 0x8
+
+typedef struct EffectDrawData {
+    /* 0x00 */ s32 effectType;
+    /* 0x04 */ Vtx* vtxStart;
+    /* 0x08 */ Vtx* vtxEnd;
+    /* 0x0C */ s8 unk_0C[0x4];
+} EffectDrawData; // size = 0x10
 
 typedef struct RacerSegmentPositionInfo {
     /* 0x00 */ CourseSegment* courseSegment;
@@ -340,24 +365,6 @@ typedef struct SegmentChunk {
     /* 0x5E */ s16 rightTextureCorrection;
 } SegmentChunk; // size = 0x60
 
-typedef struct unk_802D2D70 {
-    unk_8006FF90_arg_1* unk_00;
-    s32 count;
-} unk_802D2D70;
-
-typedef struct unk_802D2D78 {
-    s32 effectType;
-    Vtx* vtxStart;
-    Vtx* vtxEnd;
-    s8 unk_0C[0x4];
-} unk_802D2D78; // size = 0x10
-
-typedef struct unk_802D3978 {
-    s32 unk_00;
-    Vec3f unk_04;
-    s8 unk_10[0x4];
-} unk_802D3978; // size = 0x14
-
 typedef struct Ghost {
     /* 0x0000 */ s32 encodedCourseIndex;
     /* 0x0004 */ s32 raceTime;
@@ -463,8 +470,11 @@ typedef struct Machine {
 
 typedef struct unk_80225800 {
     Mtx unk_000;
-    Vtx unk_040[4][6];
-    Vtx unk_1C0[48][5];
+    Vtx jumpVtx[4 * 6];
+    Vtx landmineVtx[48 * 5];
+    Vtx terrainEffectVtx[0x800];
+    Vtx dashVtx[0x80];
+    Mtx decorationMtx[32];
 } unk_80225800; // size = 0x10C0
 
 typedef struct BoosterInfo {

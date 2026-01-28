@@ -49,7 +49,7 @@
       - [0x2B20, c, game/game]
       - [0x3700, c, sys/controller]
       - [0x3ED0, c, sys/math]
-      - [0x73F0, c, game/73F0]
+      - [0x73F0, c, game/course_gadgets]
       - [0xEA20, c, game/EA20]
       - [0xEA90, c, game/EA90]
       - [0xF0B0, c, sys/disk_drive]
@@ -230,7 +230,7 @@
       - [0x67060, .data, game/game]
       - [0x671C0, .data, sys/controller]
       - [0x671D0, .data, sys/math]
-      - [0x671E0, .data, game/73F0]
+      - [0x671E0, .data, game/course_gadgets]
       - [0x67300, .data, game/EA20]
       - [0x67310, .data, sys/sys_leo]
       - [0x67340, .data, sys/segment]
@@ -329,7 +329,7 @@
       - [0x6D1E0, .rodata, sys/sys_gfx]
       - [0x6D1F0, .rodata, game/game]
       - [0x6D460, .rodata, sys/math]
-      - [0x6D4E0, .rodata, game/73F0]
+      - [0x6D4E0, .rodata, game/course_gadgets]
       - [0x6D6B0, .rodata, game/EA90]
       - [0x6D6D0, .rodata, sys/sys_leo]
       - [0x6D940, .rodata, sys/segment]
@@ -377,7 +377,7 @@
       - { type: .bss, vram: 0x800DCE30, name: game/game }
       - { type: .bss, vram: 0x800DCE60, name: sys/controller }
       - { type: .bss, vram: 0x800DD220, name: sys/math }
-      - { type: .bss, vram: 0x800E12A0, name: game/73F0 }
+      - { type: .bss, vram: 0x800E12A0, name: game/course_gadgets }
       - { type: .bss, vram: 0x800E32D0, name: sys/sys_leo }
       - { type: .bss, vram: 0x800E3370, name: sys/segment }
       - { type: .bss, vram: 0x800E33D0, name: game/object }
@@ -451,6 +451,7 @@
     bss_size: 0x2F100
     subsegments:
       - { type: .bss, vram: 0x802A6B40, name: game/game_context }
+      - { type: .bss, vram: 0x802CB6D0, name: game/course_gadget_context }
 
   - name: buffers
     exclusive_ram_id: buffer

@@ -45,8 +45,23 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1);
 void Course_JumpsViewInteractDataInit(void);
 void Course_DecorationsViewInteractDataInit(void);
 void Course_EffectsViewInteractDataInit(s32);
+Gfx* Course_FeatureDrawGateSquare(Gfx* gfx);
+Gfx* Course_FeatureDrawGateStart(Gfx* gfx);
+Gfx* Course_FeatureDrawGateHexagonal(Gfx* gfx);
+Gfx* Course_FeatureDrawSignTV(Gfx* gfx);
+Gfx* Course_FeatureDrawSign2(Gfx* gfx);
+Gfx* Course_FeatureDrawSign1(Gfx* gfx);
+Gfx* Course_FeatureDrawSignNinTexRight(Gfx* gfx);
+Gfx* Course_FeatureDrawSignNinTexLeft(Gfx* gfx);
+Gfx* Course_FeatureDrawSignOverhead(Gfx* gfx);
+Gfx* Course_FeatureDrawBuildingTall(Gfx* gfx);
+Gfx* Course_FeatureDrawBuildingShort(Gfx* gfx);
+Gfx* Course_FeatureDrawBuildingSpire(Gfx* gfx);
+Gfx* Course_FeatureDrawBuildingMountain(Gfx* gfx);
+Gfx* Course_FeatureDrawBuildingTallGold(Gfx* gfx);
 
 f32 Math_VectorGetDistance(Vec3f arg0, Vec3f arg1);
+s32 Math_VectorSetScale(Vec3f* vec, f32 scale);
 
 void Course_SegmentsInit(void);
 void Dma_ClearRomCopy(void* romAddr, void* ramAddr, size_t size);

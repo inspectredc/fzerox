@@ -4,9 +4,6 @@
 #include "unk_gfx.h"
 
 unk_80225800 D_80225800;
-Vtx D_802268C0[0x800];
-Vtx D_8022E8C0[0x80];
-Mtx D_8022F0C0[32];
 
 Gfx D_8022F8C0[51];
 Gfx D_8022FA58[126];

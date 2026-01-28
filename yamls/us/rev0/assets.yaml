@@ -250,7 +250,7 @@
     exclusive_ram_id: segment_00
     type: code
     dir: assets
-    vram: 0x0
+    vram: 0x8F000000
     start: 0x524D60
     subsegments:
       - [0x524D60, .data, audio_bank/audio_bank]
@@ -259,7 +259,7 @@
     exclusive_ram_id: segment_00
     type: code
     dir: assets
-    vram: 0x0
+    vram: 0x8F000000
     start: 0x527AF0
     subsegments:
       - [0x527AF0, .data, audio_seq/audio_seq]
