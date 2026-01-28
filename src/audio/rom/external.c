@@ -666,7 +666,7 @@ void func_800B899C(u8 playerIndex) {
     }
     sAudioPlayerPreviousSpeed[playerIndex] = gRacers[playerIndex].speed;
     if (D_800D1A94[playerIndex] == 0) {
-        if ((gRacers[playerIndex].unk_1D4 != 0.0f) && (gRacers[playerIndex].speed > 27.0f)) {
+        if ((gRacers[playerIndex].accelerationForce != 0.0f) && (gRacers[playerIndex].speed > 27.0f)) {
             if (D_800D1A78[playerIndex] == 1) {
                 if (D_800D1A64[playerIndex] > -0.5f) {
                     D_800D1A64[playerIndex] -= 0.004f;
@@ -687,7 +687,7 @@ void func_800B899C(u8 playerIndex) {
     freqScale = (((0.01f + gRacers[playerIndex].speed) * (1.0f / 21.0f)) + 0.25f) + D_800D1A64[playerIndex];
     AUDIOCMD_CHANNEL_SET_FREQ_SCALE(0, playerIndex + 2, freqScale);
 
-    if ((gRacers[playerIndex].unk_1D4 == 0.0f) && (gRacers[playerIndex].unk_1D8 == 0.0f)) {
+    if ((gRacers[playerIndex].accelerationForce == 0.0f) && (gRacers[playerIndex].driftAttackForce == 0.0f)) {
         if (D_800D1A94[playerIndex] == 1) {
             Vec3f vec;
             f32 temp;

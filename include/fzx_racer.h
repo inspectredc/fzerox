@@ -5,7 +5,13 @@
 
 #define TOTAL_RACER_COUNT 30
 
-extern Racer gRacers[TOTAL_RACER_COUNT];
+typedef struct RacerPairInfo {
+    Racer* leadRacer;
+    Racer* trailRacer;
+    f32 trailToLeadDistance;
+    f32 leadToTrailDistance;
+    bool areColliding;
+} RacerPairInfo; // size = 0x14
 
 typedef enum CourseEffects {
     COURSE_EFFECT_NONE,
@@ -37,6 +43,18 @@ typedef enum CourseEffects {
 #define RACER_STATE_ACTIVE (1 << 30)
 #define RACER_STATE_FLAGS_80000000 (1 << 31)
 
+#define RACER_SE_FLAGS_ICE (1 << 5)
+#define RACER_SE_FLAGS_DRIFT_SLIDE (1 << 6)
+#define RACER_SE_FLAGS_BRAKE (1 << 7)
+#define RACER_SE_FLAGS_ENGINE_ECHO (1 << 8)
+#define RACER_SE_FLAGS_200 (1 << 9)
+#define RACER_SE_FLAGS_DIRT (1 << 10)
+#define RACER_SE_FLAGS_PIT (1 << 11)
+#define RACER_SE_FLAGS_BOOST (1 << 12)
+#define RACER_SE_FLAGS_AIRBORNE (1 << 13)
+#define RACER_SE_FLAGS_4000 (1 << 14)
+#define RACER_SE_FLAGS_8000 (1 << 15)
+
 typedef enum BodyStat {
     /* 0 */ BODY_A,
     /* 1 */ BODY_B,
@@ -62,9 +80,22 @@ typedef enum GripStat {
 } GripStat;
 
 typedef enum MachineStatIndex {
-    BODY_STAT,
-    BOOST_STAT,
-    GRIP_STAT,
+    /* 0 */ BODY_STAT,
+    /* 1 */ BOOST_STAT,
+    /* 2 */ GRIP_STAT,
 } MachineStatIndex;
+
+typedef enum AttackState {
+    /* 0 */ ATTACK_STATE_NONE,
+    /* 1 */ ATTACK_STATE_SIDE,
+    /* 2 */ ATTACK_STATE_SPIN,
+} AttackState;
+
+typedef enum DriftAttackDirection {
+    /* 0 */ DRIFT_ATTACK_LEFT,
+    /* 1 */ DRIFT_ATTACK_RIGHT,
+} DriftAttackDirection;
+
+extern Racer gRacers[TOTAL_RACER_COUNT];
 
 #endif // FZX_RACER_H
