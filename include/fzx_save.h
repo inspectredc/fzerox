@@ -2,6 +2,7 @@
 #define FZX_SAVE_H
 
 #include "unk_structs.h"
+#include "libc/stdbool.h"
 
 typedef enum GhostType {
     /* 0 */ GHOST_NONE,
@@ -95,16 +96,78 @@ typedef struct CupSave {
     u16 cupCompletion[4][10];
 } CupSave; // size = 0x60
 
+typedef struct GhostSave {
+    GhostRecord record;
+    GhostData data;
+} GhostSave;
+
 typedef struct SaveContext {
     ProfileSave profileSaves[2];
-    GhostRecord ghostRecord;
-    GhostData ghostData;
+    GhostSave ghostSave;
     CharacterSave characterSaves[24];
     CupSave cupSave;
     s8 unk_7FE0[0x20];
 } SaveContext; // size = 0x8000
 
 s32 Save_Init(SaveContext*, s32);
+
+extern u8 gSaveBuffer[];
+extern SaveContext gSaveContext;
+
+s32 Save_LoadPlayerGhost(s32 courseIndex, s32 ghostIndex);
+
+bool func_i2_80100B38(GhostInfo* ghostInfo);
+
+void func_i2_80101590(GhostRecord* ghostRecord, GhostInfo* ghostInfo);
+
+void Save_CreateNew(SaveContext* saveContext, s32 arg1);
+
+void Save_InitSaveSettings(SaveSettings* saveSettings, bool shouldClear);
+void Save_InitEditCup(SaveEditCup* editCup, bool shouldClear);
+void Save_InitDeathRace(SaveDeathRace* deathRace, bool shouldClear);
+void Save_InitGhostRecord(GhostRecord* ghostRecord, bool shouldClear);
+void Save_InitGhostData(GhostData* ghostData, bool shouldClear);
+void Save_InitCharacterSave(CharacterSave* characterSave, bool shouldClear);
+
+void Save_SaveSettings(SaveSettings* saveSettings);
+s32 Save_SaveGhost(s32 courseIndex, Ghost* ghost);
+void Save_SaveDeathRace(SaveDeathRace* deathRace);
+s32 Save_SaveDeathRaceProfiles(void);
+void Save_SaveCourseRecord(SaveCourseRecords* courseRecords, s32 courseIndex);
+void Save_SaveEditCup(SaveEditCup* editCup);
+void Save_SaveGhostRecord(Ghost* ghost);
+void Save_SaveGhostData(Ghost* ghost);
+void Save_SaveCharacterSave(CharacterSave* characterSave);
+
+void func_i2_80102A7C(unk_80141C88_unk_1D*, MachineInfo*);
+
+s32 Save_UpdateCupCompletion(s32 difficulty, s32 cupType, s32 character);
+
+void Save_Load(SaveContext* saveContext);
+void Save_LoadSaveSettings(ProfileSave* profileSaves, bool arg1);
+void Save_LoadEditCup(ProfileSave* profileSaves, bool arg1);
+void Save_LoadDeathRace(ProfileSave* profileSaves);
+void Save_LoadCupSave(CupSave* cupSave, u8* cupCompletion);
+void Save_LoadCharacterSave(CharacterSave* characterSave, s32 courseIndex);
+void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex);
+void Save_LoadGhostData(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3);
+void Save_LoadGhostRecord(GhostRecord* ghostRecord, GhostData* ghostData, Ghost* ghost, bool arg3);
+
+void Save_ClearData(void* data, s32 size);
+
+u16 Save_CalculateSaveSettingsChecksum(ProfileSave* profileSave);
+u16 Save_CalculateSaveDeathRaceChecksum(ProfileSave* profileSave);
+u16 Save_CalculateProfileSaveCourseRecordChecksum(ProfileSave* profileSave, s32 courseIndex);
+u16 Save_CalculateSaveEditCupChecksum(ProfileSave* profileSave);
+u16 Save_CalculateGhostRecordChecksum(GhostRecord* ghostRecord);
+u16 Save_CalculateGhostDataChecksum(GhostData* ghostData);
+u16 Save_CalculateCharacterSaveChecksum(CharacterSave* characterSave);
+u16 Save_CalculateCupSaveChecksum(CupSave* cupSave);
+
+void Save_RomCopyGhostRecord(GhostRecord* ghostRecord, s32 courseIndex);
+void Save_RomCopyGhostData(GhostData* ghostData, s32 courseIndex);
+
+s32 Save_LoadStaffGhost(s32 courseIndex);
 
 #define REPLAY_DATA_LARGE_FLAG -0x80
 #define REPLAY_DATA_LARGE(x) REPLAY_DATA_LARGE_FLAG, (((x) >> 8) & 0xFF), ((x) & 0xFF)

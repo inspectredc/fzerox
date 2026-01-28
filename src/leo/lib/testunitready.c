@@ -2,7 +2,7 @@
 #include "leo/leo_internal.h"
 
 s32 LeoTestUnitReady(LEOStatus* status) {
-    LEOCmdTestUnitReady cmdBlock;
+    volatile LEOCmdTestUnitReady cmdBlock;
 
     if (!__leoActive) {
         return -1;

@@ -2,7 +2,11 @@
 #define LEO_INTERNAL_H
 
 #include "libultra/ultra64.h"
+#include "libc/stdbool.h"
 #include "PR/leo.h"
+
+#define LEO_VERSION_A 0
+#define LEO_VERSION_B 1
 
 typedef struct {
   /* 0x0 */ u16 lba;
@@ -210,16 +214,7 @@ extern const u16 LEOZONE_OUTERCYL_TBL[8];
 extern const u16 LEORAM_START_LBA[7];
 extern const s32 LEORAM_BYTE[7];
 
-extern s32 __leoActive;
-
-extern s32 (*D_i1_8042A620)(LEOCmd*, s32, u32, void*, u32, OSMesgQueue*);
-extern s32 (*D_i1_8042A624)(LEOCmd*, u32, OSMesgQueue*);
-extern s32 (*D_i1_8042A628)(LEOCmd*, u8, OSMesgQueue*);
-extern s32 (*D_i1_8042A62C)(LEOCmd*, LEODiskID*, OSMesgQueue*);
-extern s32 (*D_i1_8042A630)(LEOCmd*, OSMesgQueue*);
-extern s32 (*D_i1_8042A634)(LEOCmd*, LEODiskTime*, OSMesgQueue*);
-extern s32 (*D_i1_8042A638)(LEOCmd*, u32, u32, OSMesgQueue*);
-extern s32 (*D_i1_8042A63C)(LEOCmd*, OSMesgQueue*);
+extern bool __leoActive;
 
 extern OSPiHandle* LEOPiInfo;
 extern OSIoMesg LEOPiDmaParam;
@@ -251,8 +246,15 @@ extern LEOCmd* LEOcur_command;
 extern u32 LEOasic_bm_ctl_shadow;
 extern u32 LEOasic_seq_ctl_shadow;
 extern u8 LEOdrive_flag;
+#if LEO_VERSION == LEO_VERSION_A
 extern u8 LEOclr_que_flag;
 extern u16 LEOrw_flags;
+#else // LEO_VERSION_B
+extern volatile u8 LEOclr_que_flag;
+#ifdef LEO_SKIP_RW_FLAG
+extern volatile u16 LEOrw_flags;
+#endif
+#endif
 extern u8 LEOdisk_type;
 extern tgt_param_form LEOtgt_param;
 extern s32 LEO_country_code;

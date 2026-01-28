@@ -53,14 +53,19 @@ tools:
           name: main
           paths:
             - game
+            - sys
             - audio
-            - leo_bootdisk
-            - leo_bootstrap
+            - leo/leo_bootdisk
+            - leo/leo_bootstrap
             - libultra
         - id: main.game
           name: main.game
           paths:
             - game
+        - id: main.sys
+          name: main.sys
+          paths:
+            - sys
         - id: main.audio
           name: main.audio
           paths:
@@ -76,7 +81,7 @@ tools:
         - id: leo
           name: leo
           paths:
-            - "72120"
+            - leo/72120
             - leo
         - id: ovl_i2
           name: ovl_i2
@@ -99,13 +104,13 @@ tools:
           paths:
             - overlays/ovl_i6
         - id: ovl_i7
-          name: ovl_i7
+          name: ending
           paths:
-            - overlays/ovl_i7/ending
+            - overlays/ending/ending
         - id: ovl_i8
-          name: ovl_i8
+          name: records
           paths:
-            - overlays/ovl_i8/records
+            - overlays/records/records
         - id: ovl_i9
           name: ovl_i9
           paths:
@@ -114,98 +119,98 @@ tools:
           name: ovl_i10
           paths:
             - overlays/ovl_i10/1459A0
-        - id: segment_145B70
-          name: segment_145B70
+        - id: expansion_kit_textures_beta
+          name: expansion_kit_textures_beta
           paths:
-            - assets/segment_145B70/segment_145B70
-        - id: course_edit_textures
-          name: course_edit_textures
+            - assets/expansion_kit_textures_beta/expansion_kit_textures_beta
+        - id: course_edit_textures_beta
+          name: course_edit_textures_beta
           paths:
-            - assets/course_edit_textures/course_edit_textures
+            - assets/course_edit_textures_beta/course_edit_textures_beta
         - id: create_machine_textures
           name: create_machine_textures
           paths:
             - assets/create_machine_textures/create_machine_textures
-        - id: segment_16C8A0
-          name: segment_16C8A0
+        - id: course_track_gfx
+          name: course_track_gfx
           paths:
-            - assets/segment_16C8A0/segment_16C8A0
-        - id: segment_17B1E0
-          name: segment_17B1E0
+            - assets/course_track_gfx/course_track_gfx
+        - id: setup_gfx
+          name: setup_gfx
           paths:
-            - assets/segment_17B1E0/segment_17B1E0
-        - id: segment_17B960
-          name: segment_17B960
+            - assets/setup_gfx/setup_gfx
+        - id: machine_custom_gfx
+          name: machine_custom_gfx
           paths:
-            - assets/segment_17B960/segment_17B960
-        - id: segment_1B8550
-          name: segment_1B8550
+            - assets/machine_custom_gfx/machine_custom_gfx
+        - id: hud_gfx
+          name: hud_gfx
           paths:
-            - assets/segment_1B8550/segment_1B8550
-        - id: segment_1E23F0
-          name: segment_1E23F0
+            - assets/hud_gfx/hud_gfx
+        - id: machine_global_gfx
+          name: machine_global_gfx
           paths:
-            - assets/segment_1E23F0/segment_1E23F0
-        - id: segment_22B0A0
-          name: segment_22B0A0
+            - assets/machine_global_gfx/machine_global_gfx
+        - id: machine_models
+          name: machine_models
           paths:
-            - assets/segment_22B0A0/segment_22B0A0
-        - id: segment_235130
-          name: segment_235130
+            - assets/machine_models/machine_models
+        - id: mute_city_textures
+          name: mute_city_textures
           paths:
-            - assets/segment_235130/segment_235130
-        - id: segment_239A80
-          name: segment_239A80
+            - assets/mute_city_textures/mute_city_textures
+        - id: port_town_textures
+          name: port_town_textures
           paths:
-            - assets/segment_239A80/segment_239A80
-        - id: segment_23EC50
-          name: segment_23EC50
+            - assets/port_town_textures/port_town_textures
+        - id: big_blue_textures
+          name: big_blue_textures
           paths:
-            - assets/segment_23EC50/segment_23EC50
-        - id: segment_243D90
-          name: segment_243D90
+            - assets/big_blue_textures/big_blue_textures
+        - id: sand_ocean_textures
+          name: sand_ocean_textures
           paths:
-            - assets/segment_243D90/segment_243D90
-        - id: segment_24A270
-          name: segment_24A270
+            - assets/sand_ocean_textures/sand_ocean_textures
+        - id: devils_forest_textures
+          name: devils_forest_textures
           paths:
-            - assets/segment_24A270/segment_24A270
-        - id: segment_2507F0
-          name: segment_2507F0
+            - assets/devils_forest_textures/devils_forest_textures
+        - id: white_land_textures
+          name: white_land_textures
           paths:
-            - assets/segment_2507F0/segment_2507F0
-        - id: segment_255100
-          name: segment_255100
+            - assets/white_land_textures/white_land_textures
+        - id: sector_textures
+          name: sector_textures
           paths:
-            - assets/segment_255100/segment_255100
-        - id: segment_259600
-          name: segment_259600
+            - assets/sector_textures/sector_textures
+        - id: red_canyon_textures
+          name: red_canyon_textures
           paths:
-            - assets/segment_259600/segment_259600
-        - id: segment_25F360
-          name: segment_25F360
+            - assets/red_canyon_textures/red_canyon_textures
+        - id: fire_field_textures
+          name: fire_field_textures
           paths:
-            - assets/segment_25F360/segment_25F360
-        - id: segment_266C20
-          name: segment_266C20
+            - assets/fire_field_textures/fire_field_textures
+        - id: silence_textures
+          name: silence_textures
           paths:
-            - assets/segment_266C20/segment_266C20
-        - id: segment_26D780
-          name: segment_26D780
+            - assets/silence_textures/silence_textures
+        - id: ending_venue_textures
+          name: ending_venue_textures
           paths:
-            - assets/segment_26D780/segment_26D780
-        - id: segment_2738A0
-          name: segment_2738A0
+            - assets/ending_venue_textures/ending_venue_textures
+        - id: podium_gfx
+          name: podium_gfx
           paths:
-            - assets/segment_2738A0/segment_2738A0
-        - id: segment_2747F0
-          name: segment_2747F0
+            - assets/podium_gfx/podium_gfx
+        - id: super_textures
+          name: super_textures
           paths:
-            - assets/segment_2747F0/segment_2747F0
-        - id: segment_2787F0
-          name: segment_2787F0
+            - assets/super_textures/super_textures
+        - id: boot_textures
+          name: boot_textures
           paths:
-            - assets/segment_2787F0/segment_2787F0
+            - assets/boot_textures/boot_textures
         - id: staff_ghost_records
           name: staff_ghost_records
           paths:
@@ -214,10 +219,10 @@ tools:
           name: course_data
           paths:
             - assets/course_data/course_data
-        - id: segment_2B9EA0
-          name: segment_2B9EA0
+        - id: common_assets_compressed
+          name: common_assets_compressed
           paths:
-            - assets/segment_2B9EA0/segment_2B9EA0
+            - assets/common_assets_compressed/common_assets_compressed
         - id: ovl_i11
           name: ovl_i11
           paths:

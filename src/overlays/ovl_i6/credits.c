@@ -1,11 +1,11 @@
 #include "global.h"
 #include "fzx_game.h"
 #include "fzx_object.h"
-#include "src/overlays/ovl_i2/ovl_i2.h"
+#include "fzx_font.h"
 #include "ovl_i6.h"
 #include "audio.h"
-#include "assets/segment_2B9EA0.h"
-#include "assets/segment_17B1E0.h"
+#include "assets/common_assets_compressed.h"
+#include "assets/setup_gfx.h"
 
 s8 D_i6_8011FAF0[30];
 
@@ -1474,7 +1474,7 @@ void Credits_OldMachinesUpdate(Object* oldMachinesObj) {
     }
     if (sDebugCreditsOldMachines) {
         if (gInputPressed & BTN_LEFT) {
-            func_800BA8D8(30);
+            Audio_TriggerSystemSE(NA_SE_30);
             if (OBJECT_STATE(oldMachinesObj) != 0) {
                 OBJECT_STATE(oldMachinesObj)--;
             } else {
@@ -1484,7 +1484,7 @@ void Credits_OldMachinesUpdate(Object* oldMachinesObj) {
         }
 
         if (gInputPressed & BTN_RIGHT) {
-            func_800BA8D8(30);
+            Audio_TriggerSystemSE(NA_SE_30);
             OBJECT_STATE(oldMachinesObj)++;
             OBJECT_STATE(oldMachinesObj) = OBJECT_STATE(oldMachinesObj) % 30;
             var_v1++;
@@ -1660,8 +1660,6 @@ bool Object_OnIntervalMovePosYAndCheckTarget(Object* object, s32 step, s32 targe
     }
     return false;
 }
-
-void Credits_ObjectInit(s32 cmdId, s32 left, s32 top, s8 priority);
 
 void Credits_ScriptUpdate(Object* scriptObj) {
     s32 objId;
@@ -1874,7 +1872,7 @@ void Credits_MenuLadyUpdate(Object* menuLadyObj) {
                 OBJECT_STATE(menuLadyObj)++;
                 OBJECT_COUNTER(menuLadyObj) = 0;
                 Credits_ObjectInit(OBJECT_CREDITS_SEE_YOU_AGAIN, 0x80, 0x40, 8);
-                func_800BA8D8(0x2B);
+                Audio_TriggerSystemSE(NA_SE_43);
             }
             break;
         case 4:
@@ -2299,7 +2297,6 @@ void Credits_Init(void) {
 }
 
 extern s32 gGameMode;
-extern Controller gSharedController;
 
 s32 Credits_Update(void) {
 

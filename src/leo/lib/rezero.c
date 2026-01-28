@@ -2,7 +2,7 @@
 #include "leo/leo_internal.h"
 
 s32 LeoRezero(LEOCmd* cmdBlock, OSMesgQueue* mq) {
-    if (__leoActive == 0) {
+    if (!__leoActive) {
         return -1;
     }
     cmdBlock->header.command = LEO_COMMAND_REZERO;

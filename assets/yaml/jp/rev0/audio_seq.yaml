@@ -1,0 +1,24 @@
+:config:
+  header:
+    code:
+      - '#include "aseq.h"'
+      - '#include "libultra/ultra64.h"'
+    header:
+      - '#include "libultra/ultra64.h"'
+
+aAudioSeqSE:
+  type: FZX:SEQUENCE
+  offset: 0x522620
+  size: 0xC10
+  force_large_notes: true
+  envelope_end_markers: true
+  has_footer: true
+  symbol: aAudioSeqSE
+
+aAudioSeqGuitar:
+  type: FZX:SEQUENCE
+  offset: 0x523230
+  size: 0x30
+  force_large_notes: true
+  envelope_end_markers: true
+  symbol: aAudioSeqGuitar

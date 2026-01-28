@@ -1,17 +1,17 @@
-  - name: unk_nmi
+  - name: cartridge_offsets
     exclusive_ram_id: overlay
     type: code
     start: 0x72030
     vram: 0x8032AC40 # vram unknown
     subsegments:
-      - [0x72030, .data, unk_nmi]
+      - [0x72030, .data, sys/cartridge_offsets]
 
   - name: leo_font
     type: code
     vram: 0x80400000
     bss_size: 0x3010
     subsegments:
-      - { type: .bss, vram: 0x80400000, name: leo_font }
+      - { type: .bss, vram: 0x80400000, name: sys/leo_font }
 
   - name: leo
     exclusive_ram_id: overlay
@@ -22,19 +22,24 @@
     bss_size: 0x2CD0
     symbol_name_format: i1_$VRAM
     subsegments:
-      - [0x72120, c, ../72120]
+      - [0x72120, c, 72120]
       - [0x72150, hasm, lib/getaadr2]
-      - [0x721B0, c]
-      - [0x72E40, c]
-      - [0x75090, c]
-      - [0x76270, c]
-      - [0x77CA0, c]
-      - [0x78170, c]
-      - [0x79180, c]
-      - [0x79830, c]
-      - [0x79AF0, c]
-      - [0x7A430, c]
-      - [0x7A590, c]
+      - [0x721B0, c, 721B0]
+      - [0x721E0, c, mfs/mfs_dir_entry_util]
+      - [0x72E40, c, mfs/mfs_ram]
+      - [0x73F60, c, mfs/mfs_dir]
+      - [0x75090, c, mfs/mfs_device]
+      - [0x76080, c, mfs/mfs_name]
+      - [0x76270, c, mfs/mfs_save]
+      - [0x77CA0, c, mfs/mfs_fat]
+      - [0x78170, c, mfs/mfs_delete]
+      - [0x78420, c, mfs/mfs_load]
+      - [0x79180, c, mfs/mfs_read_write]
+      - [0x79830, c, mfs/mfs_rename]
+      - [0x79AF0, c, mfs/mfs_prepared_dir]
+      - [0x7A1A0, c, mfs/mfs_creation_date]
+      - [0x7A430, c, mfs/mfs_handlers]
+      - [0x7A590, c, mfs/mfs_attr]
       - [0x7AA00, c, lib/readwrite]
       - [0x7AAF0, c, lib/leofunc]
       - [0x7AF20, c, lib/leoint]
@@ -63,7 +68,7 @@
       - [0x7FE10, c, lib/leotranslat]
       - [0x80170, c, lib/leotimer]
       - [0x80870, hasm, lib/getkadr]
-      - [0x80960, data]
+      - [0x80960, data, lib/getkadr]
       - [0x813B0, textbin, lib/getaadr]
       # - [0x813B0, hasm, lib/getaadr]
       # - [0x8142C, data, lib/getaadr]
@@ -75,15 +80,15 @@
       - [0x84040, c, lib/readrtc]
       - [0x840E0, c, lib/leoseek]
       - [0x841F0, c, lib/seek]
-      - [0x842A0, .data, leo_data]
-      - [0x97770, .data, 75090]
-      - [0x977F0, .data, 76270]
+      - [0x842A0, .data, mfs/mfs_data]
+      - [0x97770, .data, mfs/mfs_name]
+      - [0x977F0, .data, mfs/mfs_save]
       - [0x97800, .data, lib/leocmdex]
       - [0x97860, .data, lib/leord_diskid]
-      - [0x97880, .data, lib/leoglobals]
-      - [0x97890, .rodata, 72E40]
-      - [0x978A0, .rodata, 76270]
-      - [0x978C0, .rodata, 79AF0]
+      - [0x97880, .data, lib/createleomanager]
+      - [0x97890, .rodata, mfs/mfs_ram]
+      - [0x978A0, .rodata, mfs/mfs_save]
+      - [0x978C0, .rodata, mfs/mfs_prepared_dir]
       - [0x978E0, .rodata, lib/leofunc]
       - [0x978F0, .rodata, lib/leocmdex]
       - [0x979A0, .rodata, lib/leord_diskid]
@@ -91,9 +96,10 @@
       - [0x97B90, .rodata, lib/leoc2ecc]
       - [0x97FB0, .rodata, lib/leomseq_tbl]
       - [0x98060, .rodata, lib/leotimer]
-      - { type: .bss, vram: 0x80428F70, name: 72E40 }
-      - { type: .bss, vram: 0x8042A610, name: 79AF0 }
-      - { type: .bss, vram: 0x8042A620, name: 7A430 }
+      - { type: .bss, vram: 0x80428F70, name: mfs/mfs_data }
+      - { type: .bss, vram: 0x8042A600, name: mfs/mfs_dir }
+      - { type: .bss, vram: 0x8042A610, name: mfs/mfs_prepared_dir }
+      - { type: .bss, vram: 0x8042A620, name: mfs/mfs_handlers }
       - { type: .bss, vram: 0x8042A640, name: lib/leofunc }
       - { type: .bss, vram: 0x8042A660, name: lib/leoram }
       - { type: .bss, vram: 0x8042B360, name: lib/leoint }
@@ -101,7 +107,7 @@
       - { type: .bss, vram: 0x8042B3A0, name: lib/leotempbuffer }
       - { type: .bss, vram: 0x8042B490, name: lib/leoc2_syndrome }
       - { type: .bss, vram: 0x8042BBD0, name: lib/leoc2ecc }
-      - { type: .bss, vram: 0x8042BBE0, name: lib/leoglobals }
+      - { type: .bss, vram: 0x8042BBE0, name: lib/createleomanager }
       - { type: .bss, vram: 0x8042BBF0, name: lib/leomseq_tbl }
       - { type: .bss, vram: 0x8042BC30, name: lib/leomecha }
 
@@ -116,25 +122,26 @@
     follows_vram: main
     symbol_name_format: i2_$VRAM
     subsegments:
-      - [0x98080, c]
+      - [0x98080, c, transition]
       - [0x9BD00, c, save]
-      - [0x9F3C0, c]
-      - [0x9FE40, c]
+      - [0x9F3C0, c, race]
+      - [0x9FE40, c, effects]
       - [0xA1700, c, font]
-      - [0xA26F0, .data, 98080]
+      - [0xA26F0, .data, transition]
       - [0xA2740, .data, save]
-      - [0xA2860, .data, 9F3C0]
-      - [0xA2860, .data, 9FE40]
+      - [0xA2860, .data, race]
+      - [0xA2860, .data, ovl_i2_data1]
       - [0xA28A0, .data, font]
-      - [0xA64B0, .rodata, 98080]
+      - [0xA64B0, .rodata, transition]
       - [0xA6730, .rodata, save]
-      - [0xA6760, .rodata, 9FE40]
+      - [0xA6760, .rodata, effects]
       - [0xA67C0, .rodata, font]
-      - [0xA7100, .data, ovl_i2_data]
-      - { type: .bss, vram: 0x8010D770, name: 98080 }
-      - { type: .bss, vram: 0x8010D7F0, name: ovl_i2_buffers }
+      - [0xA7100, .data, course_context]
+      - { type: .bss, vram: 0x8010D770, name: transition }
+      - { type: .bss, vram: 0x8010D7F0, name: save_buffer }
       - { type: .bss, vram: 0x801117B0, name: save }
-      - { type: .bss, vram: 0x80111870, name: 9FE40 }
+      - { type: .bss, vram: 0x80111870, name: effects }
+      - { type: .bss, vram: 0x80115D50, name: ovl_i2_data1 }
 
   - name: ovl_i3
     exclusive_ram_id: overlay
@@ -145,27 +152,29 @@
     bss_size: 0x20D0
     symbol_name_format: i3_$VRAM
     subsegments:
-      - [0xA90C0, c]
-      - [0xAE140, c]
-      - [0xC2160, c]
-      - [0xC2290, c]
-      - [0xC8970, c]
-      - [0xCCFF0, c]
-      - [0xD0E50, .data, A90C0]
-      - [0xD2000, .data, AE140]
-      - [0xD22C0, .data, C2290]
-      - [0xD29D0, .data, C8970]
-      - [0xD4220, .data, CCFF0]
-      - [0xD4260, .rodata, A90C0]
-      - [0xD4410, .rodata, AE140]
-      - [0xD4B20, .rodata, C2290]
-      - [0xD4B30, .rodata, C8970]
-      - [0xD4BA0, .rodata, CCFF0]
-      - { type: .bss, vram: 0x80141900, name: A90C0 }
-      - { type: .bss, vram: 0x801419A0, name: AE140 }
-      - { type: .bss, vram: 0x80141E30, name: C2290 }
-      - { type: .bss, vram: 0x80141FF0, name: C8970 }
-      - { type: .bss, vram: 0x80143780, name: CCFF0 }
+      - [0xA90C0, c, cpu]
+      - [0xAE140, c, menus]
+      - [0xC2160, c, C2160]
+      - [0xC2290, c, hud]
+      - [0xC8970, c, minimap]
+      - [0xC98B0, c, background]
+      - [0xCCFF0, c, records_entry]
+      - [0xD0E50, .data, cpu]
+      - [0xD2000, .data, menus]
+      - [0xD22C0, .data, hud]
+      - [0xD29D0, .data, minimap]
+      - [0xD3A70, .data, background]
+      - [0xD4220, .data, records_entry]
+      - [0xD4260, .rodata, cpu]
+      - [0xD4410, .rodata, menus]
+      - [0xD4B20, .rodata, hud]
+      - [0xD4B30, .rodata, background]
+      - [0xD4BA0, .rodata, records_entry]
+      - { type: .bss, vram: 0x80141900, name: cpu }
+      - { type: .bss, vram: 0x801419A0, name: menus }
+      - { type: .bss, vram: 0x80141E30, name: hud }
+      - { type: .bss, vram: 0x80141FF0, name: background }
+      - { type: .bss, vram: 0x80143780, name: records_entry }
 
 
   - name: ovl_i4
@@ -196,7 +205,8 @@
     subsegments:
       - [0xDC550, c, course_model]
       - [0xDCF90, c, course_select]
-      - [0xDF750, .data, course_select]
+      - [0xDF750, .data, course_view]
+      - [0xDF810, .data, course_select]
       - [0xDFCB0, .rodata, course_select]
       - { type: .bss, vram: 0x801197B0, name: course_model }
       - { type: .bss, vram: 0x801197E0, name: course_select}
@@ -225,25 +235,30 @@
       - { type: .bss, vram: 0x8011FB10, name: options_menu}
       - { type: .bss, vram: 0x801247C0, name: save_context }
 
-  - name: ovl_i7
+  - name: ending
     exclusive_ram_id: overlay
     type: code
-    dir: overlays/ovl_i7
+    dir: overlays/ending
     start: 0xE9A30
     vram: 0x801439D0
     bss_size: 0xDD0
     symbol_name_format: i7_$VRAM
     subsegments:
       - [0xE9A30, c, ending]
+      - [0xED220, c, ending_effects]
       - [0xEFEF0, .data, ending]
+      - [0xF00B0, .data, ending_racer_focus_scripts]
+      - [0xF0C60, .data, ending_effects]
+      - [0xF1000, .data, ending_podium_camera_scripts]
       - [0xF13A0, .rodata, ending]
-      - { type: .bss, vram: 0x8014B480, name: ovl_i7_data }
+      - { type: .bss, vram: 0x8014B480, name: podium_draw_data }
       - { type: .bss, vram: 0x8014BDE0, name: ending }
+      - { type: .bss, vram: 0x8014BF90, name: ending_effects }
 
-  - name: ovl_i8
+  - name: records
     exclusive_ram_id: overlay
     type: code
-    dir: overlays/ovl_i8
+    dir: overlays/records
     start: 0xF14E0
     vram: 0x801439D0
     bss_size: 0x130

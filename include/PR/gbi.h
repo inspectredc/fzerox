@@ -1347,18 +1347,18 @@ typedef union {
 
 typedef struct {
   unsigned char	col[3];		/* diffuse light value (rgba) */
-  char 		pad1;
+  signed char 	pad1;
   unsigned char	colc[3];	/* copy of diffuse light value (rgba) */
-  char 		pad2;
+  signed char 	pad2;
   signed char	dir[3];		/* direction of light (normalized) */
-  char 		pad3;
+  signed char 	pad3;
 } Light_t;
 
 typedef struct {
   unsigned char	col[3];		/* ambient light value (rgba) */
-  char 		pad1;
+  signed char 	pad1;
   unsigned char	colc[3];	/* copy of ambient light value (rgba) */
-  char 		pad2;
+  signed char 	pad2;
 } Ambient_t;
 
 typedef struct {

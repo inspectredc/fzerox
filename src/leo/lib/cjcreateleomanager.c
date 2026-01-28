@@ -1,34 +1,45 @@
 #include "libultra/ultra64.h"
-#include "libc/stdbool.h"
+#include "libc/stdint.h"
 #include "leo/leo_internal.h"
 #include "PR/os_internal_exception.h"
 
 s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsgCnt) {
     OSPiHandle* driveRomHandle;
     OSPiHandle* leoDiskHandle;
-    LEOCmdInquiry cmdBlockInq;
-    LEOCmd cmdBlockID;
+    volatile LEOCmdInquiry cmdBlockInq;
+    volatile LEOCmd cmdBlockID;
     LEODiskID thisID;
     u32 stat;
     u32 status;
-    s32 dummy;
-    s32 dummy2;
+    volatile intptr_t dummy;
+    volatile intptr_t dummy2;
 
     if (__leoActive) {
         return LEO_ERROR_GOOD;
     }
 
+#if LEO_VERSION == LEO_VERSION_B
+    if (!LeoDriveExist()) {
+        return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
+    }
+#endif
     leoDiskHandle = osLeoDiskInit();
     driveRomHandle = osDriveRomInit();
 
+#if LEO_VERSION == LEO_VERSION_A
     osEPiReadIo(leoDiskHandle, LEO_STATUS, &status);
     if (status & LEO_STATUS_PRESENCE_MASK) {
         return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
     }
+#endif
 
     __leoActive = true;
 
+#if LEO_VERSION == LEO_VERSION_A
     __osSetHWIntrRoutine(1, __osLeoInterrupt);
+#else // LEO_VERSION_B
+    __osSetHWIntrRoutine(1, __osLeoInterrupt, leoDiskStack + sizeof(leoDiskStack) - 16);
+#endif
     leoInitialize(comPri, intPri, cmdBuf, cmdMsgCnt);
 
     if (osResetType == 1) {
@@ -41,10 +52,10 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     cmdBlockInq.header.reserve3 = 0;
     leoCommand((void*) &cmdBlockInq);
 
-    dummy = (u32) &cmdBlockInq & 0xFFFFFF;
+    dummy = (uintptr_t) &cmdBlockInq & 0xFFFFFF;
 
     while (dummy > 0) {
-        dummy -= ((u32) __leoSetReset & 0xFFFFFF) | 0x403DF4;
+        dummy -= ((uintptr_t) __leoSetReset & 0xFFFFFF) | 0x403DF4;
     }
 
     while (cmdBlockInq.header.status == LEO_STATUS_BUSY) {}
@@ -53,7 +64,11 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
         return GET_ERROR(cmdBlockInq);
     }
     __leoVersion.driver = cmdBlockInq.version;
+#if LEO_VERSION == LEO_VERSION_A
     __leoVersion.drive = 4;
+#else // LEO_VERSION_B
+    __leoVersion.drive = 6;
+#endif
     __leoVersion.deviceType = cmdBlockInq.dev_type;
     __leoVersion.ndevices = cmdBlockInq.dev_num;
 
@@ -69,7 +84,7 @@ s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
         }
 
         dummy2 *= status;
-        dummy2 -= (u32) &cmdBlockInq;
+        dummy2 -= (uintptr_t) &cmdBlockInq;
         LEO_country_code = LEO_COUNTRY_JPN;
     } else {
         while (true) {}

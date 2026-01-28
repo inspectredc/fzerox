@@ -2,12 +2,15 @@
 #include "fzx_game.h"
 #include "fzx_object.h"
 #include "fzx_course.h"
-#include "src/overlays/ovl_i2/ovl_i2.h"
+#include "fzx_camera.h"
+#include "fzx_font.h"
+#include "src/overlays/ovl_i2/transition.h"
 #include "course_select.h"
-#include "assets/segment_2B9EA0.h"
+#include "assets/common_assets_compressed.h"
 
-/* potentially in a shared data file */
-Vp D_i5_80118FF0[2][6] = { 0 };
+s32 sCourseSelectCup;
+s32 sLastCourseIndex;
+
 s32 gCourseModelCupType = 0;
 s32 D_i5_801190B4 = 0;
 s32 gCourseModelCupCourseNo = 0;
@@ -228,9 +231,6 @@ const char* sTrackSubtitles[] = {
 
 s8 sGhostOptionTypeMap[] = { 1, 0, 2, 3, 4 };
 
-s32 sCourseSelectCup;
-s32 sLastCourseIndex;
-
 extern s32 gCourseIndex;
 
 void CourseSelect_UpdateUnlockedGhosts(void) {
@@ -265,8 +265,8 @@ void func_i5_80116910(void) {
 
 extern s16 D_800CCFE8;
 extern s32 gSelectedMode;
-extern s32 D_800CD3B8;
-extern s32 D_800CD3BC;
+extern s32 gLastCourseSelectCourseIndex;
+extern s32 gLastRecordsCourseIndex;
 extern s8 gUnlockableLevel;
 extern s8 gSettingEverythingUnlocked;
 extern s32 gCurrentGhostType;
@@ -282,9 +282,9 @@ void CourseSelect_Init(void) {
     sSelectedGhostOption = sGhostOptionTypeMap[gCurrentGhostType];
     sLastCourseIndex = -1;
     if (gGameMode == GAMEMODE_FLX_COURSE_SELECT) {
-        var_v0 = D_800CD3B8;
+        var_v0 = gLastCourseSelectCourseIndex;
     } else {
-        var_v0 = D_800CD3BC;
+        var_v0 = gLastRecordsCourseIndex;
     }
     if (var_v0 >= COURSE_X_1) {
         gCupSelectOption = 4;
@@ -301,7 +301,7 @@ void CourseSelect_Init(void) {
     }
     CourseSelect_UpdateUnlockedGhosts();
     var_v1 = gUnlockableLevel;
-    if ((var_v1 >= 3) || (gSettingEverythingUnlocked != 0)) {
+    if ((var_v1 >= 3) || gSettingEverythingUnlocked) {
         var_v1 = 2;
     }
 
@@ -320,7 +320,7 @@ void CourseSelect_Init(void) {
         sCourseSelectCup = gCupSelectOption;
     }
 
-    func_80085610();
+    Camera_Init();
     Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
     Object_Init(OBJECT_COURSE_SELECT_BACKGROUND, 0, 0, 2);
     if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
@@ -333,11 +333,11 @@ void CourseSelect_Init(void) {
     Object_Init(OBJECT_COURSE_SELECT_HEADER, var_a1, var_a2, 4);
     Object_Init(OBJECT_COURSE_SELECT_OK, 0, 0, 10);
     Object_Init(OBJECT_COURSE_SELECT_MODEL, 0, 0, 8);
-    if (((gSettingEverythingUnlocked != 0) || (gUnlockableLevel >= 2)) &&
-        (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) && (gSelectedMode != MODE_TIME_ATTACK)) {
+    if ((gSettingEverythingUnlocked || (gUnlockableLevel >= 2)) && (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) &&
+        (gSelectedMode != MODE_TIME_ATTACK)) {
         Object_Init(OBJECT_COURSE_SELECT_CUP_4, 0, -100, 6);
     }
-    if ((gUnlockableLevel >= 1) || (gSettingEverythingUnlocked != 0)) {
+    if ((gUnlockableLevel >= 1) || gSettingEverythingUnlocked) {
         Object_Init(OBJECT_COURSE_SELECT_CUP_3, 0, -100, 6);
     }
     Object_Init(OBJECT_COURSE_SELECT_CUP_2, 0, -100, 6);
@@ -381,7 +381,7 @@ void NextCourseSelect_Init(void) {
     } else {
         sCourseSelectCup = gCupSelectOption;
     }
-    func_80085610();
+    Camera_Init();
     Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
     Object_Init(OBJECT_COURSE_SELECT_BACKGROUND, 0, 0, 2);
     Object_Init(OBJECT_COURSE_SELECT_MODEL, 0, 0, 8);
@@ -393,16 +393,13 @@ void NextCourseSelect_Init(void) {
     Object_Init(OBJECT_COURSE_SELECT_NAME, 0, 0, 8);
 }
 
-void CourseModel_Init(s32 cupType);
-
 extern s32 gCupType;
-extern s16 D_800CD044;
-extern s16 D_800CD048;
-extern Controller gSharedController;
+extern s16 gGameModeChangeState;
+extern s16 gMenuChangeMode;
 extern u16 gInputPressed;
 extern u16 gInputButtonPressed;
-extern Player gPlayers[];
-extern s32 D_i2_80106DA4;
+extern Camera gCameras[];
+extern s32 gTransitionState;
 
 s32 CourseSelect_Update(void) {
     s32 pad[2];
@@ -410,10 +407,9 @@ s32 CourseSelect_Update(void) {
     s8 originalSelectedGhostOption;
     s32 unlockedGhost;
     s32 var_v1;
-    Object* arrowsObj;
 
-    func_8008675C();
-    if (D_i2_80106DA4 != 0) {
+    Camera_Update();
+    if (gTransitionState != TRANSITION_INACTIVE) {
         return gGameMode;
     }
     if ((gSelectedMode == MODE_TIME_ATTACK) && (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT)) {
@@ -432,7 +428,7 @@ s32 CourseSelect_Update(void) {
                     gCupSelectOption++;
                 }
                 var_v1 = gUnlockableLevel;
-                if ((var_v1 >= 3) || (gSettingEverythingUnlocked != 0)) {
+                if ((var_v1 >= 3) || gSettingEverythingUnlocked) {
                     var_v1 = 2;
                 }
 
@@ -456,7 +452,7 @@ s32 CourseSelect_Update(void) {
                 if (sCourseSelectCup <= 4) {
                     CourseModel_Init(sCourseSelectCup);
                 }
-                func_800BA8D8(30);
+                Audio_TriggerSystemSE(NA_SE_30);
             }
             if (gCupSelectOption < 10) {
                 gCupType = gCupSelectOption;
@@ -471,17 +467,17 @@ s32 CourseSelect_Update(void) {
                 gCourseIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
             }
             if (gInputButtonPressed & BTN_B) {
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(NA_SE_16);
                 if (gGameMode == GAMEMODE_FLX_COURSE_SELECT) {
-                    D_800CD3B8 = gCourseIndex;
+                    gLastCourseSelectCourseIndex = gCourseIndex;
                     sCourseSelectState = COURSE_SELECT_START_EXIT;
                 } else {
-                    D_800CD3BC = gCourseIndex;
+                    gLastRecordsCourseIndex = gCourseIndex;
                     sCourseSelectState = COURSE_SELECT_EXIT_RECORDS;
-                    D_800CD048 = 10;
+                    gMenuChangeMode = MENU_CHANGE_EXIT_RECORDS;
                 }
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x21);
+                Audio_TriggerSystemSE(NA_SE_33);
                 if (gCupSelectOption == 4) {
                     sCourseSelectTrackNo = 0;
                     sCourseSelectState = COURSE_SELECT_AWAIT_OK;
@@ -511,7 +507,7 @@ s32 CourseSelect_Update(void) {
                     sSelectedGhostOption++;
                 }
                 if (originalSelectedGhostOption != sSelectedGhostOption) {
-                    func_800BA8D8(30);
+                    Audio_TriggerSystemSE(NA_SE_30);
                 }
                 if (unlockedGhost < sSelectedGhostOption) {
                     sSelectedGhostOption = 0;
@@ -521,18 +517,16 @@ s32 CourseSelect_Update(void) {
 
             if ((gInputPressed & BTN_LEFT) && (sCourseSelectTrackNo > 0)) {
                 sCourseSelectTrackNo--;
-                gPlayers[0].unk_18 = 1;
-                arrowsObj = Object_Get(OBJECT_COURSE_SELECT_ARROWS);
-                LEFT_ARROW_ROTATION_CHANGE(arrowsObj) += 0x200;
-                func_800BA8D8(30);
+                gCameras[0].state = CAMERA_COURSE_SELECT_DISABLED;
+                LEFT_ARROW_ROTATION_CHANGE(Object_Get(OBJECT_COURSE_SELECT_ARROWS)) += 0x200;
+                Audio_TriggerSystemSE(NA_SE_30);
             }
 
             if ((gInputPressed & BTN_RIGHT) && (sCourseSelectTrackNo < 5)) {
                 sCourseSelectTrackNo++;
-                gPlayers[0].unk_18 = 1;
-                arrowsObj = Object_Get(OBJECT_COURSE_SELECT_ARROWS);
-                RIGHT_ARROW_ROTATION_CHANGE(arrowsObj) += 0x200;
-                func_800BA8D8(30);
+                gCameras[0].state = CAMERA_COURSE_SELECT_DISABLED;
+                RIGHT_ARROW_ROTATION_CHANGE(Object_Get(OBJECT_COURSE_SELECT_ARROWS)) += 0x200;
+                Audio_TriggerSystemSE(NA_SE_30);
             }
             if (gCupSelectOption >= 10) {
                 gCourseIndex = sCourseSelectTrackNo + COURSE_EDIT_1;
@@ -541,9 +535,9 @@ s32 CourseSelect_Update(void) {
             }
             if (gInputButtonPressed & BTN_B) {
                 sCourseSelectState = COURSE_SELECT_CUP_SELECT;
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(NA_SE_16);
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x21);
+                Audio_TriggerSystemSE(NA_SE_33);
                 sCourseSelectState = COURSE_SELECT_AWAIT_OK;
                 D_i5_801190D0 = 0;
             }
@@ -555,27 +549,28 @@ s32 CourseSelect_Update(void) {
                 } else {
                     sCourseSelectState = COURSE_SELECT_CHOOSE_COURSE;
                 }
-                func_800BA8D8(0x10);
+                Audio_TriggerSystemSE(NA_SE_16);
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x3E);
+                Audio_TriggerSystemSE(NA_SE_62);
                 sCourseSelectState = COURSE_SELECT_CONTINUE;
                 if (gGameMode == GAMEMODE_FLX_COURSE_SELECT) {
-                    D_800CD3B8 = gCourseIndex;
+                    gLastCourseSelectCourseIndex = gCourseIndex;
                     return GAMEMODE_FLX_MACHINE_SELECT;
+                } else {
+                    gLastRecordsCourseIndex = gCourseIndex;
+                    return GAMEMODE_RECORDS;
                 }
-                D_800CD3BC = gCourseIndex;
-                return GAMEMODE_RECORDS;
             }
             break;
         case COURSE_SELECT_START_EXIT:
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                func_800BA8D8(0x21);
+                Audio_TriggerSystemSE(NA_SE_33);
                 sCourseSelectState = COURSE_SELECT_CUP_SELECT;
             }
             break;
         case COURSE_SELECT_EXIT:
-            if (D_800CD044 == 0) {
-                D_800CD048 = 12;
+            if (gGameModeChangeState == GAMEMODE_UPDATE) {
+                gMenuChangeMode = MENU_CHANGE_EXIT_COURSE_SELECT;
             }
             break;
         default:
@@ -587,14 +582,14 @@ s32 CourseSelect_Update(void) {
 }
 
 s32 NextCourseSelect_Update(void) {
-    func_8008675C();
+    Camera_Update();
     Controller_SetGlobalInputs(&gSharedController);
     D_i5_801190D0 = 1;
     switch (sCourseSelectState) {
         case COURSE_SELECT_NEXT_COURSE_AWAIT_INPUT:
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
                 sCourseSelectState = COURSE_SELECT_NEXT_COURSE_CONTINUE;
-                func_800BA8D8(0x3E);
+                Audio_TriggerSystemSE(NA_SE_62);
                 return GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS;
             }
             break;
@@ -657,7 +652,7 @@ void CourseSelect_CupInit(Object* cupObj) {
     cupType = cupObj->cmdId - OBJECT_COURSE_SELECT_CUP_0;
     if (cupType == JOKER_CUP || cupType == X_CUP) {
         var_v0 = gUnlockableLevel;
-        if ((var_v0 >= 3) || (gSettingEverythingUnlocked != 0)) {
+        if ((var_v0 >= 3) || gSettingEverythingUnlocked) {
             var_v0 = 2;
         }
         if (var_v0 < (cupType - 2)) {
@@ -670,7 +665,7 @@ void CourseSelect_CupInit(Object* cupObj) {
         func_80077D50(sCupClearedDifficultyCompTexInfos[i], 0);
     }
 
-    if (D_800CD044 == 33) {
+    if (gGameModeChangeState == GAMEMODE_CHANGE_INSTANT(GAMEMODE_CHANGE_INIT)) {
         OBJECT_COUNTER(cupObj) = 12;
     }
     OBJECT_LEFT(cupObj) = 0x80;
@@ -818,7 +813,7 @@ Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
         case JOKER_CUP:
         case X_CUP:
             var_v0 = gUnlockableLevel;
-            if ((var_v0 >= 3) || (gSettingEverythingUnlocked != 0)) {
+            if ((var_v0 >= 3) || gSettingEverythingUnlocked) {
                 var_v0 = 2;
             }
             if (var_v0 < (i - 2)) {
@@ -848,7 +843,7 @@ Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
 }
 
 Gfx* CourseSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
-    s32 temp_v1;
+    s32 yOffset;
 
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
@@ -871,9 +866,9 @@ Gfx* CourseSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
         if (OBJECT_COUNTER(headerObj) < 0) {
             OBJECT_COUNTER(headerObj) = 0;
         }
-        temp_v1 = (SQ(OBJECT_COUNTER(headerObj)) * 3) / 2;
+        yOffset = (SQ(OBJECT_COUNTER(headerObj)) * 3) / 2;
 
-        gfx = func_80078EA0(gfx, sSelectCourseCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj) + temp_v1, 0,
+        gfx = func_80078EA0(gfx, sSelectCourseCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj) + yOffset, 0,
                             0, 0, 1.0f, 1.0f);
     } else {
         gfx =
@@ -919,7 +914,7 @@ Gfx* CourseSelect_NameDraw(Gfx* gfx) {
             cupTrackNoStr[2] = ' ';
             cupTrackNoStr[3] = '\0';
             cupTrackNoWidth = Font_GetStringWidth(cupTrackNoStr, FONT_SET_3, 0);
-            if (sCourseSelectCup == EDIT_CUP) {
+            if (sCourseSelectCup == 5) {
                 trackNameWidth = Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 0);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
                 gfx = Font_DrawString(
@@ -984,8 +979,8 @@ Gfx* CourseSelect_GhostOptionDraw(Gfx* gfx, Object* ghostOptionObj) {
     for (i = 0; i < numUnlockedGhosts; i++) {
         if (i == sSelectedGhostOption) {
             switch (sCourseSelectState) {
-                case COURSE_SELECT_AWAIT_OK: // await ok
-                case COURSE_SELECT_CONTINUE: // continue
+                case COURSE_SELECT_AWAIT_OK:
+                case COURSE_SELECT_CONTINUE:
                     gDPSetPrimColor(gfx++, 0, 0, 0, 255, 0, 255);
                     break;
                 default:
@@ -1066,11 +1061,7 @@ void CourseSelect_CupUpdate(Object* cupObj) {
                 case COURSE_SELECT_EXIT_RECORDS:
                 case COURSE_SELECT_START_EXIT:
                 case COURSE_SELECT_EXIT:
-                    if (var_v1 != 5) {
-                        var_a1 = 85;
-                    } else {
-                        var_a1 = 170;
-                    }
+                    var_a1 = (var_v1 != 5) ? 85 : 170;
                     Object_LerpPosYToTarget(cupObj, var_a1);
 
                     if (OBJECT_STATE(cupObj) == 2) {
@@ -1093,7 +1084,7 @@ void CourseSelect_CupUpdate(Object* cupObj) {
                 var_a1 = 0x80;
             } else {
                 var_v0 = gUnlockableLevel;
-                if (gSettingEverythingUnlocked != 0) {
+                if (gSettingEverythingUnlocked) {
                     var_v0 = 2;
                 }
                 switch (var_v0) {
@@ -1119,6 +1110,7 @@ void CourseSelect_CupUpdate(Object* cupObj) {
                         break;
                 }
             }
+
             if (OBJECT_COUNTER(cupObj) == 0xB) {
                 OBJECT_LEFT(cupObj) = var_a1;
             } else if (OBJECT_STATE(cupObj) >= 2) {

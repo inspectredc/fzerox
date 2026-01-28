@@ -4,8 +4,10 @@
 
 // Adjust line numbers to match assert
 #if BUILD_VERSION < VERSION_J
-#line 49
+#line 47
 #endif
+
+#define PIF_RAM_SIZE (PIF_RAM_END + 1 - PIF_RAM_START)
 
 // TODO: this comes from a header
 #ident "$Revision: 1.17 $"
@@ -13,12 +15,18 @@
 s32 __osSiRawStartDma(s32 direction, void* dramAddr) {
     assert(((u32) dramAddr & 0x3) == 0);
 
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH
     if (IO_READ(SI_STATUS_REG) & (SI_STATUS_DMA_BUSY | SI_STATUS_RD_BUSY)) {
         return -1;
     }
+#else
+    if (__osSiDeviceBusy()) {
+        return -1;
+    }
+#endif
 
     if (direction == OS_WRITE) {
-        osWritebackDCache(dramAddr, 64);
+        osWritebackDCache(dramAddr, PIF_RAM_SIZE);
     }
 
     IO_WRITE(SI_DRAM_ADDR_REG, osVirtualToPhysical(dramAddr));
@@ -30,7 +38,7 @@ s32 __osSiRawStartDma(s32 direction, void* dramAddr) {
     }
 
     if (direction == OS_READ) {
-        osInvalDCache(dramAddr, 64);
+        osInvalDCache(dramAddr, PIF_RAM_SIZE);
     }
 
     return 0;

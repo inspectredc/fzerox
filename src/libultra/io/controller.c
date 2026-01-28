@@ -3,15 +3,15 @@
 #include "PR/controller.h"
 #include "PR/siint.h"
 
-OSPifRam __osContPifRam ALIGNED(16);
+OSPifRam __osContPifRam;
 u8 __osContLastCmd;
 u8 __osMaxControllers;
 
 OSTimer __osEepromTimer;
-OSMesgQueue __osEepromTimerQ ALIGNED(8);
+OSMesgQueue __osEepromTimerQ ALIGNED(0x8);
 OSMesg __osEepromTimerMsg;
 
-s32 __osContinitialized = 0;
+s32 __osContinitialized = FALSE;
 
 s32 osContInit(OSMesgQueue* mq, u8* bitpattern, OSContStatus* data) {
     OSMesg dummy;
@@ -20,11 +20,11 @@ s32 osContInit(OSMesgQueue* mq, u8* bitpattern, OSContStatus* data) {
     OSTimer mytimer;
     OSMesgQueue timerMesgQueue;
 
-    if (__osContinitialized != 0) {
+    if (__osContinitialized) {
         return 0;
     }
 
-    __osContinitialized = 1;
+    __osContinitialized = TRUE;
 
     t = osGetTime();
     if (t < OS_USEC_TO_CYCLES(500000)) {

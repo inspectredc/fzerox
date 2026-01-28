@@ -6,7 +6,7 @@
 #include "PR/piint.h"
 
 #if BUILD_VERSION >= VERSION_J
-OSPiHandle __CartRomHandle ALIGNED(8);
+OSPiHandle __CartRomHandle ALIGNED(0x8);
 OSPiHandle* osCartRomInit(void) {
     u32 value = 0;
     u32 saveMask;
@@ -65,7 +65,7 @@ OSPiHandle* osCartRomInit(void) {
 }
 #else
 
-OSPiHandle CartRomHandle ALIGNED(8);
+OSPiHandle CartRomHandle ALIGNED(0x8);
 OSPiHandle* osCartRomInit(void) {
     u32 domain = 0;
     u32 saveMask;

@@ -26,9 +26,14 @@ u32 LEOasic_bm_ctl_shadow;
 u32 LEOasic_seq_ctl_shadow;
 
 u8 LEOdrive_flag;
-u8 LEOclr_que_flag;
 
+#if LEO_VERSION == LEO_VERSION_A
+u8 LEOclr_que_flag;
 u16 LEOrw_flags;
+#else // LEO_VERSION_B
+volatile u8 LEOclr_que_flag;
+volatile u16 LEOrw_flags;
+#endif
 
 u8 LEOdisk_type;
 

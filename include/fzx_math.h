@@ -23,6 +23,7 @@
 
 #define DEG_TO_FZXANG(x) (((x) * 0x1000) / 360)
 #define DEG_TO_FZXANG2(x) ((x) * (0x1000 / 360.0f))
+#define DEG_TO_FZXANG3(x) ((0x1000 / 360.0f) * x)
 
 typedef union {
     struct {
@@ -59,10 +60,10 @@ typedef struct Vec3fFlip {
 } Vec3fFlip;
 
 typedef float Mtx3F_t[3][3];
-typedef union {
-    struct {
-        Vec3f x,y,z;
-    };
+typedef struct {
+    Vec3f x; // forward
+    Vec3f y; // up
+    Vec3f z; // side (left)
 } Mtx3F; // size = 0x24
 
 typedef float MtxF_t[4][4];

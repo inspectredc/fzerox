@@ -4,6 +4,29 @@ LeoGetKAdr = 0x80411760; //segment:leo
 LeoGetAAdr = 0x804122A0; //segment:leo
 LeoGetAAdr2 = 0x80403040; //segment:leo
 
+Transition_PhasedStripsDraw = 0x800FFEEC; // segment:ovl_i2
+gCollisionSparks = 0x80111870; // segment:ovl_i2
+gCollisionSparkIndex = 0x80111CF0; // segment:ovl_i2
+gCollisionSparkCount = 0x80111CF4; // segment:ovl_i2
+gExplosions1 = 0x80111CF8; // segment:ovl_i2
+gExplosions1Index = 0x80112178; // segment:ovl_i2
+gExplosions1Count = 0x8011217C; // segment:ovl_i2
+gExplosions2 = 0x80112180; // segment:ovl_i2
+gExplosions2Index = 0x801122A0; // segment:ovl_i2
+gExplosions2Count = 0x801122A4; // segment:ovl_i2
+gFlyingSparks = 0x801122A8; // segment:ovl_i2
+gFlyingSparksIndex = 0x80112B28; // segment:ovl_i2
+gFlyingSparksCount = 0x80112B2C; // segment:ovl_i2
+gSmokes = 0x80112B30; // segment:ovl_i2
+gSmokesIndex = 0x80112FB0; // segment:ovl_i2
+gSmokesCount = 0x80112FB4; // segment:ovl_i2
+gFallExplosions = 0x80112FB8; // segment:ovl_i2
+gFallExplosionsIndex = 0x80113138; // segment:ovl_i2
+gFallExplosionsCount = 0x8011313C; // segment:ovl_i2
+gMachineDebris = 0x80113140; // segment:ovl_i2
+gMachineDebrisIndex = 0x80115D40; // segment:ovl_i2
+gMachineDebrisCount = 0x80115D44; // segment:ovl_i2
+
 sPlayerRacer = 0x80141910; //segment:ovl_i3
 gFastestGhostTime = 0x80141C78; //segment:ovl_i3
 
@@ -11,4 +34,4 @@ MachineSelect_BackgroundDraw = 0x801178C4; //segment:ovl_i4
 
 Credits_IntroDraw = 0x80119908; //segment:ovl_i6
 
-gCourseData = 0x8010B7B0; //segment:ovl_i2 size:0x7E0
+gCourseCtx = 0x8010B7B0; //segment:ovl_i2 size:0x7E0

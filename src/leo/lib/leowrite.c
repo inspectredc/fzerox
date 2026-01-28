@@ -1,5 +1,10 @@
 #include "libultra/ultra64.h"
+
+#define LEO_SKIP_RW_FLAG
 #include "leo/leo_internal.h"
+#undef LEO_SKIP_RW_FLAG
+
+extern u16 LEOrw_flags;
 
 void leoWrite(void) {
     u32 message;

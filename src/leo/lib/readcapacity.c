@@ -3,7 +3,7 @@
 
 s32 LeoReadCapacity(LEOCapacity* cmdBlock, s32 dir) {
 
-    if (__leoActive == 0) {
+    if (!__leoActive) {
         return -1;
     }
 

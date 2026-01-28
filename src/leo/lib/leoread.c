@@ -1,5 +1,4 @@
 #include "libultra/ultra64.h"
-#include "libc/stdbool.h"
 #include "leo/leo_internal.h"
 
 void leoRead(void) {
@@ -35,7 +34,7 @@ void leoRead_common(u32 offset) {
     }
 
     LEOtgt_param.lba = tg_lba;
-    LEOrw_flags &= 0xFFFF3FFF;
+    LEOrw_flags &= ~(0x8000 | 0x4000);
     osSendMesg(&LEOc2ctrl_que, NULL, OS_MESG_NOBLOCK);
     osStartThread(&LEOinterruptThread);
 
@@ -43,8 +42,10 @@ void leoRead_common(u32 offset) {
         osRecvMesg(&LEOcontrol_que, (OSMesg) &message, OS_MESG_BLOCK);
 
         switch (message) {
+#if LEO_VERSION == LEO_VERSION_A
             case LEO_MSG_CONTROL_FORCE_ACCEPT:
                 goto end;
+#endif
             case LEO_MSG_CONTROL_C2_CORRECTION:
                 leoC2_Correction();
                 LEOrw_flags &= ~0x4000;
@@ -55,9 +56,17 @@ void leoRead_common(u32 offset) {
                 LEOcur_command->header.sense = message;
                 LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                 return;
+#if LEO_VERSION == LEO_VERSION_B
+            case LEO_MSG_CONTROL_FORCE_ACCEPT:
+                LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
+                LEOcur_command->header.status = LEO_STATUS_GOOD;
+                return;
+#endif
         }
     }
+#if LEO_VERSION == LEO_VERSION_A
 end:
     LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
     LEOcur_command->header.status = LEO_STATUS_GOOD;
+#endif
 }
