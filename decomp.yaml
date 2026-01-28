@@ -53,14 +53,19 @@ tools:
           name: main
           paths:
             - game
+            - sys
             - audio
-            - leo_bootdisk
-            - leo_bootstrap
+            - leo/leo_bootdisk
+            - leo/leo_bootstrap
             - libultra
         - id: main.game
           name: main.game
           paths:
             - game
+        - id: main.sys
+          name: main.sys
+          paths:
+            - sys
         - id: main.audio
           name: main.audio
           paths:
@@ -76,7 +81,7 @@ tools:
         - id: leo
           name: leo
           paths:
-            - "72120"
+            - leo/72120
             - leo
         - id: ovl_i2
           name: ovl_i2
