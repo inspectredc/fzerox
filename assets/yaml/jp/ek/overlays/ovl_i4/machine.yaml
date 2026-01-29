@@ -1,0 +1,46 @@
+:config:
+  header:
+    code:
+      - '#include "assets/overlays/ovl_i4/machine.h"'
+    header:
+      - '#include "libultra/ultra64.h"'
+
+aNoviceDDTrophyTex:
+  type: COMPRESSED_TEXTURE
+  offset: 0xE4564
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  compression: MIO0
+  symbol: aNoviceDDTrophyTex
+
+aStandardDDTrophyTex:
+  type: COMPRESSED_TEXTURE
+  offset: 0xE45F4
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  compression: MIO0
+  symbol: aStandardDDTrophyTex
+
+aExpertDDTrophyTex:
+  type: COMPRESSED_TEXTURE
+  offset: 0xE4698
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  compression: MIO0
+  symbol: aExpertDDTrophyTex
+
+aMasterDDTrophyTex:
+  type: COMPRESSED_TEXTURE
+  offset: 0xE473C
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  compression: MIO0
+  symbol: aMasterDDTrophyTex

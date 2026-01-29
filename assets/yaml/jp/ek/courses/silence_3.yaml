@@ -1,0 +1,11 @@
+:config:
+  header:
+    code:
+      - '#include "assets/courses/silence_3.h"'
+    header:
+      - '#include "fzx_course.h"'
+
+aCourseSilence3:
+  type: FZX:COURSE
+  offset: 0x231790
+  symbol: aCourseSilence3

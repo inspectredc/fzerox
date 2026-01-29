@@ -1,0 +1,26 @@
+:config:
+  header:
+    code:
+      - '#include "assets/overlays/course_select/course_select.h"'
+    header:
+      - '#include "libultra/ultra64.h"'
+
+aCupSelectDD1Tex:
+  type: COMPRESSED_TEXTURE
+  offset: 0xEA664
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 64
+  compression: MIO0
+  symbol: aCupSelectDD1Tex
+
+aCupSelectDD2Tex:
+  type: COMPRESSED_TEXTURE
+  offset: 0xEAAFC
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 64
+  compression: MIO0
+  symbol: aCupSelectDD2Tex

@@ -1,0 +1,11 @@
+:config:
+  header:
+    code:
+      - '#include "assets/courses/sand_ocean_3.h"'
+    header:
+      - '#include "fzx_course.h"'
+
+aCourseSandOcean3:
+  type: FZX:COURSE
+  offset: 0x231790
+  symbol: aCourseSandOcean3

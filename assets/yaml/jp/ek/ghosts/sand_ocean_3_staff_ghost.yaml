@@ -1,0 +1,15 @@
+:config:
+  header:
+    code:
+      - '#include "assets/ghosts/sand_ocean_3_staff_ghost.h"'
+      - '#include "fzx_game.h"'
+      - '#include "fzx_machine.h"'
+      - '#include "fzx_save.h"'
+    header:
+      - '#include "fzx_save.h"'
+
+aSandOcean3StaffGhost:
+  type: FZX:GHOST
+  disk_drive: true
+  offset: 0x23ADF0
+  symbol: aSandOcean3StaffGhost

@@ -15,6 +15,7 @@ s32 D_800E32CC;
 Vtx* sTerrainEffectVtxStart;
 
 bool gInCourseEditor = false;
+extern bool gInCourseEditTestRun;
 
 Gfx* (*sCourseDecorationDrawFuncs[])(Gfx*) = {
     Course_FeatureDrawGateSquare,       // COURSE_FEATURE_GATE_SQUARE
@@ -50,6 +51,7 @@ bool Course_FeatureIsDecorational(s32 courseFeature) {
 
 extern Landmine gLandmines[48];
 
+#ifndef EXPANSION_KIT
 void func_8006D414(void) {
     s32 i;
 
@@ -57,6 +59,7 @@ void func_8006D414(void) {
         gLandmines[i].unk_00 = 1;
     }
 }
+#endif
 
 extern unk_80225800 D_80225800;
 extern Jump gJumps[];
@@ -132,7 +135,9 @@ void Course_LandminesViewInteractDataInit(void) {
         gLandmines[courseFeaturesInfo->landmineCount].pos.x = pos.x;
         gLandmines[courseFeaturesInfo->landmineCount].pos.y = pos.y;
         gLandmines[courseFeaturesInfo->landmineCount].pos.z = pos.z;
+#ifndef EXPANSION_KIT
         gLandmines[courseFeaturesInfo->landmineCount].unk_00 = 1;
+#endif
         courseFeaturesInfo->landmineCount++;
     }
 

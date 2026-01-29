@@ -1,0 +1,599 @@
+entrypoint = 0x806F2800;
+bootproc = 0x806F2860;
+// Idle_ThreadEntry = 0x806F31B8;
+
+Audio_ThreadEntry = 0x806F4A60;
+Game_ThreadEntry = 0x806F3A94;
+Audio_PreNMI = 0x80740B10;
+Gfx_InitBuffer = 0x806F3514;
+Segment_SetPhysicalAddress = 0x80708770;
+Segment_SetAddress = 0x80708790;
+Segment_GetAddress = 0x807087A8;
+Segment_SegmentedToVirtual = 0x807087C4;
+Segment_SetTableAddresses = 0x807087F8;
+Gfx_LoadSegments = 0x806F35A8;
+Gfx_FullSync = 0x806F3610;
+Gfx_SetTask = 0x806F3698;
+
+mio0Decode = 0x8072E3B0;
+
+Game_Init = 0x806F4B40;
+
+Controller_ClearInputs = 0x806F5AE0;
+Controller_UpdateInputs = 0x806F5B70;
+
+Math_SinTableInit = 0x806F6A38;
+Math_Rand1Init = 0x806F6C44;
+Math_Rand2Init = 0x806F6C58;
+Math_Rand1 = 0x806F6C6C;
+Math_Rand2 = 0x806F6CCC;
+Math_Round = 0x806F6D34;
+Lights_SetAmbient = 0x806F731C;
+Lights_SetColor = 0x806F7338;
+Lights_SetDirection = 0x806F7354;
+Lights_SetSource = 0x806F7364;
+Light_SetLookAtSource = 0x806F73D0;
+Matrix_FromMtx = 0x806F7EC8;
+Matrix_ToMtx = 0x806F7F30;
+Matrix_SetLockedLookAt = 0x806F7FCC;
+Matrix_SetLockedLookAtFromVectors = 0x806F8314;
+Matrix_ScaleFrom3DMatrix = 0x806F85C0;
+Matrix_SetTransRot = 0x806F86C0;
+Matrix_SetAxisRotation = 0x806F8868;
+Matrix_SetLookAt = 0x806F8FE0;
+Matrix_SetFrustrum = 0x806F9384;
+Matrix_SetOrtho = 0x806F9628;
+
+Course_FeatureIsDecorational = 0x806F9750;
+Course_GadgetsDraw = 0x806F9DB4;
+Course_GetBgm = 0x80703228;
+
+SLForceWritebackDCacheAll = 0x80704D74;
+SLLeoReadDiskID = 0x80704FF4;
+SLLeoReadWrite_DATA = 0x80705310;
+SLLeoReadWrite = 0x80705554;
+SLLeoModeSelectAsync = 0x80705D44;
+SLMFSRecoverManageArea = 0x80706100;
+SLMFSDeleteFile = 0x8070664C;
+SLMFSLoad = 0x8070687C;
+SLMFSLoadHalfway = 0x80706B84;
+SLMFSSave = 0x80706E94;
+SLMFSCreateManager = 0x80707198;
+SLMFSNewDisk = 0x80707204;
+SLMFSFlushManageArea = 0x8070752C;
+SLCheckDiskInsert = 0x80707964;
+SLCheckDiskChange2 = 0x80707A54;
+
+Controller_SetGlobalInputs = 0x8070D43C;
+
+Character_GetSlotFromCharacter = 0x8070DBF0;
+
+LeoFault_CopyFontToRam = 0x8070F170;
+LeoFault_DrawErrorMessage = 0x8070F6C8;
+LeoFault_DrawErrorMessageNumber = 0x8070F76C;
+
+Fault_FillRectangle = 0x8070FD80;
+Fault_DisplayChar = 0x8070FE6C;
+Fault_SetFrameBuffer = 0x80710A38;
+Fault_Init = 0x80710A60;
+
+Camera_CalculateProjectionViewMtx = 0x80713204;
+Camera_DrawCourseEditTestRun = 0x80719890;
+
+Racer_Draw = 0x80727F54;
+
+Audio_PlayerFinished = 0x80740B98;
+Audio_PlayerLevelSEStart = 0x80740BF8;
+Audio_PlayerLevelSEStop = 0x80740CE8;
+Audio_PlayerTriggerSEStart = 0x80741014;
+Audio_TriggerSystemSE = 0x8074122C;
+Audio_PlayerEngineEchoStart = 0x8074151C;
+Audio_PlayerEngineEchoStop = 0x80741538;
+Audio_LevelSEFadeout = 0x80741EC4;
+
+// game data
+
+sSpTaskState = 0x8076C760;
+gRamDDCompatible = 0x8076C780;
+gGameFrameCount = 0x8076C7A0;
+gBodyHealthValues = 0x8076EF84;
+
+gNumPlayers = 0x8076C7C8;
+gCupType = 0x8076C7CC;
+gDifficulty = 0x8076C7D0;
+gTotalLapCount = 0x8076C7D4;
+gTitleDemoState = 0x8076C7D8;
+sTitleDemoNumPlayerState = 0x8076C7DC;
+sTitleDemoCoursesState = 0x8076C7E0;
+sTitleDemoGameModes = 0x8076C7F0;
+sTitleDemoNumPlayers = 0x8076C7FC;
+sTitleDemoCourses = 0x8076C808;
+sGamemodeInitFuncs = 0x8076C818;
+sGamemodeUpdateFuncs = 0x8076C874;
+sGamemodeDrawFuncs = 0x8076C8D0;
+
+gRandSeed1 = 0x8076C940;
+gRandMask1 = 0x8076C944;
+gRandSeed2 = 0x8076C948;
+gRandMask2 = 0x8076C94C;
+
+gInCourseEditTestRun = 0x8076C950;
+gInCourseEditor = 0x8076C954;
+sCourseDecorationDrawFuncs = 0x8076C980;
+
+gSelectedMode = 0x8076CC50;
+gPlayerSelectionLock = 0x8076CC78;
+gMachineSelectState = 0x8076CC80;
+gMachineSettingsState = 0x8076CC84;
+gSettingEverythingUnlocked = 0x8076CC98;
+gCurrentGhostType = 0x8076CC9C;
+gUnlockableLevel = 0x8076CC90;
+gModeSubOption = 0x8076CC58;
+sTrackNames = 0x8076CCA4; // size:0xB0
+gMachineNames = 0x8076CD54;
+
+sLeoErrorMessages = 0x8076D344; // size:0x98
+sLeoFontPallete = 0x8076D4BC;
+
+sFaultCharIndex = 0x8076D4E0;
+sFaultCharPixelFlags = 0x8076D560;
+sFaultCauses = 0x8076D660;
+sFloatExceptions = 0x8076D6A8;
+
+sMaxCameraLookBackRotate = 0x8076D8B4;
+
+sPosition1PMarkerTexs = 0x8076D8C0;
+sPositionMPMarkerTexs = 0x8076D8CC;
+D_8076DBD0 = 0x8076DBD0; // size:0x2D0
+D_8076DEA0 = 0x8076DEA0;
+sMachineLoadTexturesFuncs = 0x8076DEB8;
+sMachineDrawFuncs = 0x8076DF3C;
+sCharacterVoices = 0x8076E1D0;
+gSettingVsHandicap = 0x8076E2F0;
+gSettingVsCom = 0x8076E2F4;
+gTotalLives = 0x8076E2FC;
+gRacePositionPoints = 0x8076E4E0;
+sInitialBoostTimer = 0x8076E594;
+sEnergyRefillScale = 0x8076E598;
+sBoosterInfos = 0x8076E5AC;
+D_8076EF98 = 0x8076EF98; // size:0x14
+sDefaultMachines = 0x8076EFD4; // size:0x2D6
+D_8076F2DC = 0x8076F2DC; // size:0x20
+
+
+// game bss
+
+sMainThreadStack = 0x80795A70;
+sGameThreadStack = 0x80795E70;
+sAudioThreadStack = 0x80796E70;
+
+gDmaMesgQueue = 0x8079A0A8;
+gSerialEventQueue = 0x8079A0C0;
+gAudioTaskMesgQueue = 0x8079A0D8;
+
+gMainThreadMesgQueue = 0x8079A120;
+gResetMesgQueue = 0x8079A138;
+
+gCurGfxTask = 0x8079A320;
+gCurAudioOSTask = 0x8079A324;
+gResetStarted = 0x8079A328;
+gFrameBuffers = 0x8079A330;
+gCartRomHandle = 0x8079A33C;
+gDriveRomHandle = 0x8079A340;
+
+gGfxPool = 0x8079A350;
+sGfxTask = 0x8079A354;
+gMasterDisp = 0x8079A358;
+
+gGameMode = 0x8079A4B4;
+gQueuedGameMode = 0x8079A4B8;
+gAntiPiracyAddedDifficulty = 0x8079A4C8;
+gGamePaused = 0x8079A4CC;
+
+gControllerPads = 0x8079A4F0;
+gControllers = 0x8079A508; // size:0x2E4
+gSharedController = 0x8079A7F0;
+gPlayerControlPorts = 0x8079A888; // size:0x10
+gControllersConnected = 0x8079A898;
+
+gSinTable = 0x8079A8A0; // size:0x4000
+
+sDefaultMtx = 0x8079E8A0;
+sDefaultMtxF = 0x8079E8E0;
+
+sCourseDecorationTextureLoadState = 0x8079F938;
+
+gSegments = 0x8079FA40;
+
+gCharacterLastEngine = 0x8079FAA0;
+gInputPressed = 0x8079FB1C;
+gInputButtonPressed = 0x8079FB1E;
+gRetriggeredButtonCurrentPressed = 0x8079FB20;
+gCupNumDifficultiesCleared = 0x8079FB24;
+gCurrentTrackName = 0x8079FB2C;
+gTrackNames = 0x8079FB30; // size:0xDC
+
+gSkyboxType = 0x8079FC10;
+gVenueType = 0x8079FC14;
+gCupRaceStats = 0x8079FC18; // size:0x60
+gRecordNameEntered = 0x8079FC78; // size:0x4
+
+sLeoPrintFrameBuffer = 0x8079FC80;
+sLeoPrintCurPixel = 0x8079FC84;
+sLeoFontIoMsg = 0x8079FCA8;
+
+idleThreadCounter = 0x8079FE80;
+mainThreadCounter = 0x8079FE84;
+gameThreadCounter = 0x8079FE88;
+audioThreadCounter = 0x8079FE8C;
+unkThreadCounter = 0x8079FE90;
+gFaultMgr = 0x8079FE98; // size:0x9D8
+
+gCameras = 0x807A0930; // size:0x770
+gRaceIntroTimer = 0x807B15A8;
+gTotalRacers = 0x807A15D0;
+sLastRacer = 0x807A15D4;
+sRivalRacer = 0x807A15D8;
+gEffectsVtxPtr = 0x807A15DC;
+gEffectsVtxEndPtr = 0x807A15E0;
+gPlayerLives = 0x807A15E8;
+gPlayerEngine = 0x807A1600;
+gVsRacePlayerVictoryCount = 0x807A1610; // size:0x10
+gVsRacePlayerPoints = 0x807A1620; // size:0x10
+gRacersByPosition = 0x807A1650;
+gRacersRetired = 0x807A16D2;
+gRacersFinished = 0x807A16D4;
+gCpuRacersRetired = 0x807A16D6;
+gPlayerRacersRetired = 0x807A16D8;
+gPlayerRacersFinished = 0x807A16DA;
+sLastMultiplayerTotalRacerCount = 0x807A16DC;
+sLastMultiplayerPlayerCount = 0x807A16DE;
+gEnableRaceSfx = 0x807A16E0;
+gRacersKOd = 0x807A16E2;
+sRaceFrameCount = 0x807A16E8;
+gPracticeBestLap = 0x807A16EC;
+gStartNewBestLap = 0x807A16F0;
+sPipeFogColors = 0x807A16F8;
+sTunnelFogColors = 0x807A16FC;
+gGhosts = 0x807A1708;
+gFastestGhost = 0x807AD588;
+sGhostReplayRecordingBuffer = 0x807AD590;
+sGhostReplayRecordingSize = 0x807B14D8;
+sGhostReplayRecordingEnd = 0x807B14DC;
+sReplayRecordFrameCount = 0x807B14E0;
+sGhostReplayRecordingPtr = 0x807B14E4;
+sReplayRecordPosX = 0x807B14E8;
+sReplayRecordPosY = 0x807B14EC;
+sReplayRecordPosZ = 0x807B14F0;
+gGhostRacers = 0x807B1500; // size:0x9C
+gFastestGhostRacer = 0x807B15A0;
+sRacerPairInfo = 0x807B15B0;
+gPlayerReverseTimer = 0x807B37B8; // size:0x10
+gMachines = 0x807B37D8; // size:0x294
+sCustomMachineInfo = 0x807B3A70;
+
+gCourseDecorations = 0x807BB738; // size:0x700
+gCourseFeatures = 0x807BBE38; // size:0xD20
+gCourseFeaturesInfo = 0x807BCB58; // size:0x10
+gCourseEffects = 0x807BCB68;
+gCourseEffectsInfo = 0x807BDD68; // size:0x8
+gEffectsDrawData = 0x807BDD70;
+gLandmines = 0x807BF570;
+gJumps = 0x807BF870;
+gEffects = 0x807BFA70;
+
+D_807C6F0C = 0x807C6F0C;
+
+D_802259C0 = 0x802259C0;
+
+// libultra
+
+__osSetCause = 0x80745DE0;
+osSendMesg = 0x80745DF0;
+osStopThread = 0x80745F40;
+osRecvMesg = 0x80746000;
+osGetIntMask = 0x80746140;
+osSetIntMask = 0x807461A0;
+_VirtualToPhysicalTask = 0x80746240;
+osSpTaskLoad = 0x8074635C;
+osSpTaskStartGo = 0x807464EC;
+__ull_rshift = 0x80746530;
+__ull_rem = 0x8074655C;
+__ull_div = 0x80746598;
+__ll_lshift = 0x807465D4;
+__ll_rem = 0x80746600;
+__ll_div = 0x8074663C;
+__ll_mul = 0x80746698;
+__ull_divremi = 0x807466C8;
+__ll_mod = 0x80746728;
+__ll_rshift = 0x807467C4;
+__osExceptionPreamble = 0x807467F0;
+__osException = 0x80746800;
+send_mesg = 0x80746D24;
+__osEnqueueAndYield = 0x80746E0C;
+__osEnqueueThread = 0x80746F0C;
+__osPopThread = 0x80746F54;
+__osDispatchThread = 0x80746F64;
+__osCleanupThread = 0x807470E0;
+__osDequeueThread = 0x807470F0;
+osDestroyThread = 0x80747130;
+bzero = 0x80747240;
+__osMotorAccess = 0x807472E0;
+__osMakeMotorData = 0x80747448;
+osMotorInit = 0x80747554;
+osCreateThread = 0x80747B10;
+__osSiCreateAccessQueue = 0x807476B0;
+__osSiGetAccess = 0x80747700;
+__osSiRelAccess = 0x80747744;
+osContInit = 0x80747770;
+__osContGetInitData = 0x807478E0;
+__osPackRequestData = 0x807479B0;
+osContStartReadData = 0x80747C60;
+osContGetReadData = 0x80747CE4;
+__osPackReadData = 0x80747D70;
+__osSetCount = 0x80747E40;
+osVirtualToPhysical = 0x80747E50;
+osPhysicalToVirtual = 0x80747ED0;
+osWritebackDCache = 0x80747EE0;
+osInitialize = 0x80747F60;
+createSpeedParam = 0x80748208;
+__osSetSR = 0x807482B0;
+__osGetSR = 0x807482C0;
+osViGetNextFramebuffer = 0x807482D0;
+__osSpRawStartDma = 0x80748310;
+__osSiRawStartDma = 0x807483A0;
+osEPiLinkHandle = 0x80748450;
+osViBlack = 0x807484A0;
+osSpTaskYield = 0x80748560;
+__osPfsGetNextPage = 0x80748580;
+osPfsReadWriteFile = 0x80748654;
+__osPfsGetStatus = 0x807489D0;
+__osPfsRequestOneChannel = 0x80748AA0;
+__osPfsGetOneChannelData = 0x80748B64;
+osViSetMode = 0x80748C00;
+osPfsAllocateFile = 0x80748C70;
+__osPfsDeclearPage = 0x80748FA4;
+osPfsFreeBlocks = 0x807490F0;
+__osProbeTLB = 0x80749290;
+__d_to_ll = 0x80749350;
+__f_to_ll = 0x8074936C;
+__d_to_ull = 0x80749388;
+__f_to_ull = 0x80749428;
+__ll_to_d = 0x807494C4;
+__ll_to_f = 0x807494DC;
+__ull_to_d = 0x807494F4;
+__ull_to_f = 0x80749528;
+osCreatePiManager = 0x80749560;
+__osPiCreateAccessQueue = 0x807496D0;
+__osPiGetAccess = 0x80749720;
+__osPiRelAccess = 0x80749764;
+__osDevMgrMain = 0x807497A0;
+__osPiRawStartDma = 0x80749BB0;
+osGetCount = 0x80749C80;
+__osSumcalc = 0x80749C90;
+__osIdCheckSum = 0x80749D04;
+__osRepairPackId = 0x80749E00;
+__osCheckPackId = 0x8074A150;
+__osGetId = 0x8074A2B4;
+__osCheckId = 0x8074A460;
+__osPfsRWInode = 0x8074A534;
+osPfsFindFile = 0x8074A810;
+osSetEventMesg = 0x8074A9E0;
+sqrtf = 0x8074AAA0;
+_Printf = 0x8074B120;
+proutSprintf = 0x8074B770;
+sprintf = 0x8074B794;
+osUnmapTLBAll = 0x8074B7F0;
+osEPiStartDma = 0x8074B840;
+osSyncPrintf = 0x8074B920;
+rmonPrintf = 0x8074B93C;
+memcpy = 0x8074B960;
+strlen = 0x8074B98C;
+strchr = 0x8074B9B4;
+osCreateMesgQueue = 0x8074BA00;
+osInvalDCache = 0x8074BA30;
+osInvalICache = 0x8074BAE0;
+__osSpDeviceBusy = 0x8074BB60;
+__osSiDeviceBusy = 0x8074BB90;
+osJamMesg = 0x8074BBC0;
+osSetThreadPri = 0x8074BD10;
+osGetThreadPri = 0x8074BDF0;
+__osEPiRawReadIo = 0x8074BE10;
+osViSwapBuffer = 0x8074BF70;
+__osEPiRawStartDma = 0x8074BFC0;
+osSpTaskYielded = 0x8074C1A0;
+bcmp = 0x8074C220;
+osGetTime = 0x8074C340;
+__osTimerServicesInit = 0x8074C3D0;
+__osTimerInterrupt = 0x8074C45C;
+__osSetTimerIntr = 0x8074C5D4;
+__osInsertTimer = 0x8074C648;
+__osSetGlobalIntMask = 0x8074C7D0;
+osAiSetFrequency = 0x8074C820;
+__osGetActiveQueue = 0x8074C970;
+__osSetCompare = 0x8074C980;
+osDpSetStatus = 0x8074C990;
+osDpGetStatus = 0x8074C9A0;
+bcopy = 0x8074C9B0;
+__osResetGlobalIntMask = 0x8074CCC0;
+__osDisableInt = 0x8074CD20;
+__osRestoreInt = 0x8074CD90;
+__osViInit = 0x8074CDB0;
+__osViSwapContext = 0x8074CEF0;
+osPiGetCmdQueue = 0x8074D1F0;
+osEPiReadIo = 0x8074D220;
+osViSetSpecialFeatures = 0x8074D270;
+osSetTime = 0x8074D3D0;
+osViSetEvent = 0x8074D400;
+osPfsIsPlug = 0x8074D470;
+__osPfsRequestData = 0x8074D610;
+__osPfsGetInitData = 0x8074D6E0;
+osCartRomInit = 0x8074D7B0;
+__osPfsSelectBank = 0x8074D910;
+__osSetFpcCsr = 0x8074D990;
+osPfsInitPak = 0x8074D9A0;
+__osPfsCheckRamArea = 0x8074DBA8;
+osPfsChecker = 0x8074DCB0;
+corrupted_init = 0x8074E1E8;
+corrupted = 0x8074E4B4;
+osAiGetLength = 0x8074E650;
+osEPiWriteIo = 0x8074E660;
+osMapTLBRdb = 0x8074E6B0;
+osYieldThread = 0x8074E710;
+__osGetCause = 0x8074E760;
+__osContRamWrite = 0x8074E770;
+__osContRamRead = 0x8074E9C0;
+__osContAddressCrc = 0x8074EBF0;
+__osContDataCrc = 0x8074ECC0;
+__osEPiRawWriteIo = 0x8074ED60;
+osSetTimer = 0x8074EEC0;
+lldiv = 0x8074FA60;
+ldiv = 0x8074FB60;
+_Litob = 0x8074FBF0;
+__osSiRawWriteIo = 0x8074FE90;
+__osSpSetStatus = 0x8074FEE0;
+__osSpGetStatus = 0x8074FEF0;
+osCreateViManager = 0x8074FF00;
+viMgrMain = 0x80750080;
+__osViGetCurrentContext = 0x80750210;
+osWritebackDCacheAll = 0x80750220;
+osStartThread = 0x80750250;
+osViSetYScale = 0x807503A0;
+osViGetCurrentFramebuffer = 0x80750400;
+__osSpSetPc = 0x80750440;
+__osSetHWIntrRoutine = 0x80750480;
+
+// libultra data
+
+__osHwIntTable = 0x80771DE0;
+__osRunQueue = 0x80771E18;
+__osRunningThread = 0x80771E20;
+__osFaultedThread = 0x80771E24;
+__osShutdown = 0x80771E5C;
+__OSGlobalIntMask = 0x80771E60;
+
+// libultra bss
+
+__MotorDataBuf = 0x807C1C40; //size:0x100
+__osThreadSave = 0x807C1E00;
+__osEventStateTab = 0x807C3390; //size:0x80
+
+// libleo
+
+__LeoBootGame3 = 0x8075AA10;
+LeoGetKAdr = 0x8075BB20;
+LeoGetAAdr = 0x8075C620;
+
+mfsStrCmp = 0x8076294C;
+mfsStrCpy = 0x80762B78;
+mfsStrnCmp = 0x807629FC;
+mfsStrLen = 0x80762B1C;
+
+// libleo data
+
+__leoResetCalled = 0x8077AC40;
+__leoQueuesCreated = 0x8077AC44;
+leo_sys_read_cmd = 0x8077AC90;
+__leoActive = 0x8077ACD0;
+
+// libleo bss
+
+LEOpost_que = 0x807C4730;
+LEOpost_que_buf = 0x807C4748;
+LEO_sys_data = 0x807C4750;
+LEOcommandThread = 0x807C4838;
+LEOinterruptThread = 0x807C49E8;
+LEOcommandThreadStack = 0x807C4B98;
+LEOinterruptThreadStack = 0x807C4F98;
+LEOcommand_que = 0x807C5398;
+LEOevent_que = 0x807C53B0;
+LEOcontrol_que = 0x807C53C8;
+LEOdma_que = 0x807C53E0;
+LEOblock_que = 0x807C53F8;
+LEOevent_que_buf = 0x807C5410;
+LEOcontrol_que_buf = 0x807C5414;
+LEOdma_que_buf = 0x807C5418;
+LEOblock_que_buf = 0x807C5420;
+LEOwrite_pointer = 0x807C5424;
+LEOcur_command = 0x807C5428;
+LEOasic_bm_ctl_shadow = 0x807C542C;
+LEOasic_seq_ctl_shadow = 0x807C5430;
+LEOdrive_flag = 0x807C5434;
+LEOclr_que_flag = 0x807C5435;
+LEOrw_flags = 0x807C5436;
+LEOdisk_type = 0x807C5438;
+LEOtgt_param = 0x807C5440;
+LEO_country_code = 0x807C544C;
+LEOc2ctrl_que_buf = 0x807C5450;
+LEOc2ctrl_que = 0x807C5458;
+LEOPiInfo = 0x807C5470;
+LEOPiDmaParam = 0x807C5478;
+LEO_currentCommand = 0x807C5490;
+LeoDiskHandle = 0x807C54A0;
+__osDiskHandle = 0x807C5514;
+LEO_TempBuffer = 0x807C5530;
+LEOC2_Syndrome = 0x807C5620;
+LEOc2_param = 0x807C5D60;
+__leoVersion = 0x807C5D70;
+leoDiskStack = 0x807C5D80; //size:0x1000
+DriveRomHandle = 0x807C6D80; //size:0x74
+
+gMfsRamArea = 0x80784EF0; // size:0xE730
+gCurrentDirectoryEntry = 0x80793620;
+gFileAllocationTable = 0x80793650;
+gDirectoryEntryCount = 0x80794CD0;
+gMfsError = 0x80794CD4;
+gWorkingDirectory = 0x80794CE0;
+gRamAreaCapacity = 0x80794D24;
+gCompanyCode = 0x80794D40;
+gGameCode = 0x80794D44;
+
+gPreparedDirectoryId = 0x807C6E60;
+gPreparedEntryIndexCounter = 0x807C6E62;
+
+// audio
+
+gCurAudioTask = 0x80771D68;
+
+gAudioSpecs = 0x80771D88; // size:0x38
+
+gSoundFontTableLba = 0x80771DC8;
+gSequenceTableLba = 0x80771DCC;
+gSampleBankTableLba = 0x80771DD0;
+
+gTempoData = 0x807795F0; // size:0x4
+gAudioHeapInitSizes = 0x807795F4;
+
+gSoundFontTable = 0x80795170;
+gSequenceFontTable = 0x807952F0;
+gSequenceTable = 0x80795350;
+gSampleBankTable = 0x807954D0;
+
+sScriptLoadDonePointers = 0x807C1908;
+sScriptLoadQueue = 0x807C18B0;
+sScriptLoadMsgBuf = 0x807C18C8;
+
+gCourseInfos = 0x802BB140; //segment:game_context size:0x3480
+gRacers = 0x802D2F20; //segment:game_context size:0x6DB0
+
+gCustomMachinesInfo = 0x806F2400; //segment:custom_machine_info size:0x3E0
+
+D_807B3C20 = 0x807B3C20; // size:0x2904
+D_807B6528 = 0x807B6528; // size:0x2904
+
+D_807794F0 = 0x807794F0; // force_migration:True
+
+kDefaultAtEyeData = 0x807763D0; // size:0x78
+D_80776448 = 0x80776448; // size:0xAC
+D_807764F4 = 0x807764F4; // size:0xF4
+kDefaultLocalAnchorData = 0x807765E8; // size:0xC0
+D_807766A8 = 0x807766A8; // size:0xAC
+D_80776754 = 0x80776754; // size:0xAC
+D_80776800 = 0x80776800; // size:0xAC
+D_807768AC = 0x807768AC; // size:0x78
+D_80776924 = 0x80776924; // size:0x78
+D_8077699C = 0x8077699C; // size:0xAC
+kRegularCameraRaceSettings = 0x80776A48; // size:0x30
+kWidescreenCameraRaceSettings = 0x80776A78; // size:0x30
+D_80776AA8 = 0x80776AA8; // size:0xF4
+D_80776B9C = 0x80776B9C; // size:0xF4

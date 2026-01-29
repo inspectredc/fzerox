@@ -1,0 +1,14 @@
+// rsp
+rspbootTextStart = 0x807504F0; //name_end:rspbootTextEnd
+aspMainTextStart = 0x80768E60; //name_end:aspMainTextEnd
+aspMainDataStart = 0x80794E90; //name_end:aspMainDataEnd
+gspF3DEX2_fifoTextStart = 0x807505C0; //name_end:gspF3DEX2_fifoTextEnd
+gspF3DEX2_fifoDataStart = 0x80779860; //name_end:gspF3DEX2_fifoDataEnd
+gspF3DLX2_Rej_fifoTextStart = 0x80751950; //name_end:gspF3DLX2_Rej_fifoTextEnd
+gspF3DLX2_Rej_fifoDataStart = 0x80779C80; //name_end:gspF3DLX2_Rej_fifoDataEnd
+gspF3DFLX2_Rej_fifoTextStart = 0x80752AE0; //name_end:gspF3DFLX2_Rej_fifoTextEnd
+gspF3DFLX2_Rej_fifoDataStart = 0x8077A090; //name_end:gspF3DFLX2_Rej_fifoDataEnd
+gspF3DEX2_Rej_fifoTextStart = 0x80754E00; //name_end:gspF3DEX2_Rej_fifoTextEnd
+gspF3DEX2_Rej_fifoDataStart = 0x8077A830; //name_end:gspF3DEX2_Rej_fifoDataEnd
+gspL3DEX2_fifoTextStart = 0x80753C70; //name_end:gspL3DEX2_fifoTextEnd
+gspL3DEX2_fifoDataStart = 0x8077A440; //name_end:gspL3DEX2_fifoDataEnd

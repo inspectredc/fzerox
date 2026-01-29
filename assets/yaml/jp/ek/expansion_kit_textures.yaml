@@ -1,0 +1,545 @@
+:config:
+  segments:
+    - [0x07,  0x1FB850]
+  header:
+    code:
+      - '#include "assets/expansion_kit_textures.h"'
+    header:
+      - '#include "gfx.h"'
+
+aExpansionKitPauseInstructionsTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 224
+  height: 32
+  offset: 0x0
+  symbol: aExpansionKitPauseInstructionsTex
+
+aControlPointSelectMarkerTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x3800
+  symbol: aControlPointSelectMarkerTex
+
+D_7004000:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 8
+  offset: 0x4000
+  symbol: D_7004000
+
+D_7004080:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 8
+  offset: 0x4080
+  symbol: D_7004080
+
+aExpansionKitYesNoTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 32
+  height: 32
+  offset: 0x4100
+  symbol: aExpansionKitYesNoTex
+
+aExpansionKitMenuEntryTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x4300
+  symbol: aExpansionKitMenuEntryTex
+
+aExpansionKitABButtonTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 32
+  offset: 0x4900
+  symbol: aExpansionKitABButtonTex
+
+aExpansionKitFileMenuBorderTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 24
+  offset: 0x4D00
+  symbol: aExpansionKitFileMenuBorderTex
+
+aExpansionKitMenuGoldBackgroundTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x5180
+  symbol: aExpansionKitMenuGoldBackgroundTex
+
+aExpansionKitMenuGoldBorderBackgroundTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x5780
+  symbol: aExpansionKitMenuGoldBorderBackgroundTex
+
+aExpansionKitMenuGoldBorderHighlightBackgroundTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x5D80
+  symbol: aExpansionKitMenuGoldBorderHighlightBackgroundTex
+
+aExpansionKitMenuGoldBorderSplitBackgroundTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x6380
+  symbol: aExpansionKitMenuGoldBorderSplitBackgroundTex
+
+aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x6980
+  symbol: aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex
+
+aExpansionKitMenuBlueBorderBackgroundTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x6F80
+  symbol: aExpansionKitMenuBlueBorderBackgroundTex
+
+aExpansionKitMenuBlueBorderHighlightBackgroundTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x7580
+  symbol: aExpansionKitMenuBlueBorderHighlightBackgroundTex
+
+aExpansionKitMenuPurpleBorderBackgroundTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x7B80
+  symbol: aExpansionKitMenuPurpleBorderBackgroundTex
+
+aExpansionKitMenuPurpleBorderHighlightBackgroundTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x8180
+  symbol: aExpansionKitMenuPurpleBorderHighlightBackgroundTex
+
+aExpansionKitMenuClearAllTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x8780
+  symbol: aExpansionKitMenuClearAllTex
+
+aExpansionKitMenu1Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8900
+  symbol: aExpansionKitMenu1Tex
+
+aExpansionKitMenu2Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8980
+  symbol: aExpansionKitMenu2Tex
+
+aExpansionKitMenu3Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8A00
+  symbol: aExpansionKitMenu3Tex
+
+aExpansionKitMenu4Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8A80
+  symbol: aExpansionKitMenu4Tex
+
+aExpansionKitMenu5Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8B00
+  symbol: aExpansionKitMenu5Tex
+
+aExpansionKitMenu6Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8B80
+  symbol: aExpansionKitMenu6Tex
+
+aExpansionKitMenu7Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8C00
+  symbol: aExpansionKitMenu7Tex
+
+aExpansionKitMenu8Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8C80
+  symbol: aExpansionKitMenu8Tex
+
+aExpansionKitMenu9Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8D00
+  symbol: aExpansionKitMenu9Tex
+
+aExpansionKitMenu10Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8D80
+  symbol: aExpansionKitMenu10Tex
+
+aExpansionKitMenu11Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8E00
+  symbol: aExpansionKitMenu11Tex
+
+aExpansionKitMenu12Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8E80
+  symbol: aExpansionKitMenu12Tex
+
+aExpansionKitMenu13Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8F00
+  symbol: aExpansionKitMenu13Tex
+
+aExpansionKitMenu14Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x8F80
+  symbol: aExpansionKitMenu14Tex
+
+aExpansionKitMenu15Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x9000
+  symbol: aExpansionKitMenu15Tex
+
+aExpansionKitFontCharacterSheet1Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 128
+  height: 48
+  offset: 0x9080
+  symbol: aExpansionKitFontCharacterSheet1Tex
+
+aExpansionKitFontCharacterSheet2Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 128
+  height: 48
+  offset: 0x9C80
+  symbol: aExpansionKitFontCharacterSheet2Tex
+
+aExpansionKitFontCharacterSheet3Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 128
+  height: 48
+  offset: 0xA880
+  symbol: aExpansionKitFontCharacterSheet3Tex
+
+aExpansionKitNameEntryTex:
+  type: TEXTURE
+  ctype: u8
+  format: CI8
+  width: 160
+  height: 120
+  tlut: 0x700FF80
+  offset: 0xB480
+  symbol: aExpansionKitNameEntryTex
+
+aExpansionKitNameEntryPalette:
+  type: TEXTURE
+  offset: 0xFF80
+  ctype: u16
+  format: TLUT
+  colors: 256
+  symbol: aExpansionKitNameEntryPalette
+
+aExpansionKitMenuExitHighlightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  offset: 0x10180
+  symbol: aExpansionKitMenuExitHighlightTex
+
+aExpansionKitMenuOptionTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  offset: 0x10580
+  symbol: aExpansionKitMenuOptionTex
+
+aExpansionKitMenuOptionHighlightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  offset: 0x10980
+  symbol: aExpansionKitMenuOptionHighlightTex
+
+aExpansionKitOptionsMenuTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 144
+  height: 116
+  offset: 0x10D80
+  symbol: aExpansionKitOptionsMenuTex
+
+aExpansionKitOptionOnTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 12
+  offset: 0x12E20
+  symbol: aExpansionKitOptionOnTex
+
+aExpansionKitOptionOffTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 12
+  offset: 0x12F40
+  symbol: aExpansionKitOptionOffTex
+
+aExpansionKitHelpMenuTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 112
+  height: 42
+  offset: 0x13060
+  symbol: aExpansionKitHelpMenuTex
+
+aExpansionKitPointSelectHelpTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 160
+  height: 56
+  offset: 0x13990
+  symbol: aExpansionKitPointSelectHelpTex
+
+aExpansionKitEditControlHelpTex:
+  type: COMPRESSED_TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 228
+  height: 180
+  offset: 0x14B14
+  compression: MIO0
+  symbol: aExpansionKitEditControlHelpTex
+
+aExpansionKitCameraControlHelpTex:
+  type: COMPRESSED_TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 228
+  height: 180
+  offset: 0x19D74
+  compression: MIO0
+  symbol: aExpansionKitCameraControlHelpTex
+
+aExpansionKitMenuCopyTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x1EFA0
+  symbol: aExpansionKitMenuCopyTex
+
+aExpansionKitReverseTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x1F120
+  symbol: aExpansionKitReverseTex
+
+aExpansionKitMenuAcceptTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x1F2A0
+  symbol: aExpansionKitMenuAcceptTex
+
+aExpansionKitMenuClearTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x1F420
+  symbol: aExpansionKitMenuClearTex
+
+aExpansionKitScrollArrowIndicatorTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  offset: 0x1F5A0
+  symbol: aExpansionKitScrollArrowIndicatorTex
+
+aExpansionKitMenuExitTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  offset: 0x1F9A0
+  symbol: aExpansionKitMenuExitTex
+
+aExpansionKitHelpTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  offset: 0x1FDA0
+  symbol: aExpansionKitHelpTex
+
+aExpansionKitMenuHighlightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x201A0
+  symbol: aExpansionKitMenuHighlightTex
+
+D_70207A0:
+  type: GFX
+  offset: 0x207A0
+  symbol: D_70207A0
+
+D_7020808:
+  type: GFX
+  offset: 0x20808
+  symbol: D_7020808
+
+aExpansionKitSetupFontCharacterSheet1DL:
+  type: GFX
+  offset: 0x20850
+  symbol: aExpansionKitSetupFontCharacterSheet1DL
+
+aExpansionKitSetupFontCharacterSheet2DL:
+  type: GFX
+  offset: 0x20890
+  symbol: aExpansionKitSetupFontCharacterSheet2DL
+
+aExpansionKitSetupFontCharacterSheet3DL:
+  type: GFX
+  offset: 0x208D0
+  symbol: aExpansionKitSetupFontCharacterSheet3DL
+
+D_7020910:
+  type: BLOB
+  size: 0x10
+  offset: 0x20910
+  symbol: D_7020910

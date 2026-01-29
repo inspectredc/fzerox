@@ -1,0 +1,33 @@
+:config:
+  header:
+    code:
+      - '#include "assets/overlays/ovl_i10/a187510.h"'
+    header:
+      - '#include "libultra/ultra64.h"'
+
+aDDLoadingTex:
+  type: TEXTURE
+  offset: 0x187830
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 16
+  symbol: aDDLoadingTex
+
+aDDLoadBlueFalconTex:
+  type: TEXTURE
+  offset: 0x188030
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  symbol: aDDLoadBlueFalconTex
+
+aDDLoadMachineTrailTex:
+  type: TEXTURE
+  offset: 0x188430
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  symbol: aDDLoadMachineTrailTex

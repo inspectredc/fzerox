@@ -1,0 +1,11 @@
+:config:
+  header:
+    code:
+      - '#include "assets/courses/devils_forest_5.h"'
+    header:
+      - '#include "fzx_course.h"'
+
+aCourseDevilsForest5:
+  type: FZX:COURSE
+  offset: 0x232F30
+  symbol: aCourseDevilsForest5

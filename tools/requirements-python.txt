@@ -12,3 +12,4 @@ GitPython
 colour
 requests
 crunch64
+numpy

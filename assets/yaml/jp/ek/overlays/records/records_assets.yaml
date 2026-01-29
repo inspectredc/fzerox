@@ -1,0 +1,258 @@
+:config:
+  header:
+    code:
+      - '#include "assets/overlays/records/records_assets.h"'
+    header:
+      - '#include "libultra/ultra64.h"'
+
+D_i8_8009E2B8:
+  type: GFX
+  offset: 0xFFDA8
+  symbol: D_i8_8009E2B8
+
+aRecordsWhichGhostToCopyTex:
+  type: TEXTURE
+  offset: 0xFFDB0
+  ctype: u8
+  format: CI8
+  tlut: 0x1005B8
+  width: 128
+  height: 16
+  symbol: aRecordsWhichGhostToCopyTex
+
+D_i8_8009EAC0:
+  type: GFX
+  offset: 0x1005B0
+  symbol: D_i8_8009EAC0
+
+aRecordsWhichGhostToCopyPalette:
+  type: TEXTURE
+  offset: 0x1005B8
+  ctype: u16
+  format: TLUT
+  colors: 32
+  symbol: aRecordsWhichGhostToCopyPalette
+
+D_i8_8009EB08:
+  type: GFX
+  offset: 0x1005F8
+  symbol: D_i8_8009EB08
+
+aRecordsWhereToCopyTex:
+  type: TEXTURE
+  offset: 0x100600
+  ctype: u8
+  format: CI8
+  tlut: 0x100E08
+  width: 128
+  height: 16
+  symbol: aRecordsWhereToCopyTex
+
+D_i8_8009F310:
+  type: GFX
+  offset: 0x100E00
+  symbol: D_i8_8009F310
+
+aRecordsWhereToCopyPalette:
+  type: TEXTURE
+  offset: 0x100E08
+  ctype: u16
+  format: TLUT
+  colors: 32
+  symbol: aRecordsWhereToCopyPalette
+
+D_i8_8009F358:
+  type: GFX
+  offset: 0x100E48
+  symbol: D_i8_8009F358
+
+aMenuCopyGhostTex:
+  type: TEXTURE
+  offset: 0x100E50
+  ctype: u8
+  format: CI8
+  tlut: 0x101258
+  width: 64
+  height: 16
+  symbol: aMenuCopyGhostTex
+
+D_i8_8009F760:
+  type: GFX
+  offset: 0x101250
+  symbol: D_i8_8009F760
+
+aMenuCopyGhostPalette:
+  type: TEXTURE
+  offset: 0x101258
+  ctype: u16
+  format: TLUT
+  colors: 32
+  symbol: aMenuCopyGhostPalette
+
+D_i8_8009F7A8:
+  type: GFX
+  offset: 0x101298
+  symbol: D_i8_8009F7A8
+
+aRecordsGhostCopiedTex:
+  type: TEXTURE
+  offset: 0x1012A0
+  ctype: u8
+  format: CI8
+  tlut: 0x1016A8
+  width: 64
+  height: 16
+  symbol: aRecordsGhostCopiedTex
+
+D_i8_8009FBB0:
+  type: GFX
+  offset: 0x1016A0
+  symbol: D_i8_8009FBB0
+
+aRecordsGhostCopiedPalette:
+  type: TEXTURE
+  offset: 0x1016A8
+  ctype: u16
+  format: TLUT
+  colors: 32
+  symbol: aRecordsGhostCopiedPalette
+
+D_i8_8009FBF8:
+  type: GFX
+  offset: 0x1016E8
+  symbol: D_i8_8009FBF8
+# 
+aRecordsCassetteGhostTex:
+  type: TEXTURE
+  offset: 0x1016F0
+  ctype: u8
+  format: CI8
+  tlut: 0x101AF8
+  width: 64
+  height: 16
+  symbol: aRecordsCassetteGhostTex
+
+D_i8_800A0000:
+  type: GFX
+  offset: 0x101AF0
+  symbol: D_i8_800A0000
+
+aRecordsCassetteGhostPalette:
+  type: TEXTURE
+  offset: 0x101AF8
+  ctype: u16
+  format: TLUT
+  colors: 32
+  symbol: aRecordsCassetteGhostPalette
+
+D_i8_800A0048:
+  type: GFX
+  offset: 0x101B38
+  symbol: D_i8_800A0048
+
+aRecordsDiskGhost1Tex:
+  type: TEXTURE
+  offset: 0x101B40
+  ctype: u8
+  format: CI8
+  tlut: 0x101F48
+  width: 64
+  height: 16
+  symbol: aRecordsDiskGhost1Tex
+
+D_i8_800A0450:
+  type: GFX
+  offset: 0x101F40
+  symbol: D_i8_800A0450
+
+aRecordsDiskGhost1Palette:
+  type: TEXTURE
+  offset: 0x101F48
+  ctype: u16
+  format: TLUT
+  colors: 32
+  symbol: aRecordsDiskGhost1Palette
+
+D_i8_800A0498:
+  type: GFX
+  offset: 0x101F88
+  symbol: D_i8_800A0498
+
+aRecordsDiskGhost2Tex:
+  type: TEXTURE
+  offset: 0x101F90
+  ctype: u8
+  format: CI8
+  tlut: 0x102398
+  width: 64
+  height: 16
+  symbol: aRecordsDiskGhost2Tex
+
+D_i8_800A08A0:
+  type: GFX
+  offset: 0x102390
+  symbol: D_i8_800A08A0
+
+aRecordsDiskGhost2Palette:
+  type: TEXTURE
+  offset: 0x102398
+  ctype: u16
+  format: TLUT
+  colors: 32
+  symbol: aRecordsDiskGhost2Palette
+
+D_i8_800A08E8:
+  type: GFX
+  offset: 0x1023D8
+  symbol: D_i8_800A08E8
+
+aRecordsDiskGhost3Tex:
+  type: TEXTURE
+  offset: 0x1023E0
+  ctype: u8
+  format: CI8
+  tlut: 0x1027E8
+  width: 64
+  height: 16
+  symbol: aRecordsDiskGhost3Tex
+
+D_i8_800A0CF0:
+  type: GFX
+  offset: 0x1027E0
+  symbol: D_i8_800A0CF0
+
+aRecordsDiskGhost3Palette:
+  type: TEXTURE
+  offset: 0x1027E8
+  ctype: u16
+  format: TLUT
+  colors: 32
+  symbol: aRecordsDiskGhost3Palette
+
+D_i8_800A0D38:
+  type: GFX
+  offset: 0x102828
+  symbol: D_i8_800A0D38
+
+aRecordsInsertDiskToCopyToTex:
+  type: TEXTURE
+  offset: 0x102830
+  ctype: u8
+  format: CI8
+  tlut: 0x103838
+  width: 128
+  height: 32
+  symbol: aRecordsInsertDiskToCopyToTex
+
+D_i8_800A1D40:
+  type: GFX
+  offset: 0x103830
+  symbol: D_i8_800A1D40
+
+aRecordsInsertDiskToCopyToPalette:
+  type: TEXTURE
+  offset: 0x103838
+  ctype: u16
+  format: TLUT
+  colors: 17
+  symbol: aRecordsInsertDiskToCopyToPalette

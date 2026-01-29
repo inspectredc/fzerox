@@ -1,6 +1,10 @@
 #include "libultra/ultra64.h"
 #include "leo/leo_internal.h"
 
+#if LEO_VERSION == LEO_VERSION_B
+extern s32 LEO_currentCommand;
+#endif
+
 u32 asic_cur_status;
 u32 unit_atten;
 

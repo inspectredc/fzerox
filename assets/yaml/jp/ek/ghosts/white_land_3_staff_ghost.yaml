@@ -1,0 +1,15 @@
+:config:
+  header:
+    code:
+      - '#include "assets/ghosts/white_land_3_staff_ghost.h"'
+      - '#include "fzx_game.h"'
+      - '#include "fzx_machine.h"'
+      - '#include "fzx_save.h"'
+    header:
+      - '#include "fzx_save.h"'
+
+aWhiteLand3StaffGhost:
+  type: FZX:GHOST
+  disk_drive: true
+  offset: 0x25EBB0
+  symbol: aWhiteLand3StaffGhost

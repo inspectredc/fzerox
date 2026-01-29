@@ -1,0 +1,15 @@
+:config:
+  header:
+    code:
+      - '#include "assets/ghosts/space_plant_2_staff_ghost.h"'
+      - '#include "fzx_game.h"'
+      - '#include "fzx_machine.h"'
+      - '#include "fzx_save.h"'
+    header:
+      - '#include "fzx_save.h"'
+
+aSpacePlant2StaffGhost:
+  type: FZX:GHOST
+  disk_drive: true
+  offset: 0x252C70
+  symbol: aSpacePlant2StaffGhost

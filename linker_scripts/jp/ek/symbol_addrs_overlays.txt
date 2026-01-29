@@ -1,0 +1,51 @@
+Transition_PhasedStripsDraw = 0x800A5874; //segment:ovl_i2
+Font_GetStringWidth = 0x800AD4A4; //segment:ovl_i2
+Font_DrawScaledString = 0x800ADA1C; //segment:ovl_i2
+func_i2_800AEA90 = 0x800AEA90; //segment:ovl_i2
+Course_SplineGetLengthInfo = 0x800B20D0; //segment:ovl_i2
+Course_SplineGetTangent = 0x800B2500; //segment:ovl_i2
+Course_SplineGetPosition = 0x800B26B8; //segment:ovl_i2
+Course_SplineGetBasis = 0x800B2824; //segment:ovl_i2
+Course_SegmentGetJoinLengths = 0x800B58B8; //segment:ovl_i2
+
+gSettingVsSlot = 0x800BF060; //segment:ovl_i2
+gPlayer1OverallPosition = 0x800BF068; //segment:ovl_i2
+gCourseCtx = 0x800C3230; //segment:ovl_i2 size:0xC720
+D_800D0910 = 0x800D0910; //segment:ovl_i2 size:0x7E0
+gEditCupTrackNames = 0x800D10F0; //segment:ovl_i2
+gLivesChangeCounter = 0x800D11E0; //segment:ovl_i2
+gPreviousLivesCount = 0x800D11E4; //segment:ovl_i2
+gCollisionSparks = 0x800D1330; //segment:ovl_i2
+gCollisionSparkIndex = 0x800D17B0; //segment:ovl_i2
+gCollisionSparkCount = 0x800D17B4; //segment:ovl_i2
+gExplosions1 = 0x800D17B8; //segment:ovl_i2
+gExplosions1Index = 0x800D1C38; //segment:ovl_i2
+gExplosions1Count = 0x800D1C3C; //segment:ovl_i2
+gExplosions2 = 0x800D1C40; //segment:ovl_i2
+gExplosions2Index = 0x800D1D60; //segment:ovl_i2
+gExplosions2Count = 0x800D1D64; //segment:ovl_i2
+gFlyingSparks = 0x800D1D68; //segment:ovl_i2
+gFlyingSparksIndex = 0x800D25E8; //segment:ovl_i2
+gFlyingSparksCount = 0x800D25EC; //segment:ovl_i2
+gSmokes = 0x800D25F0; //segment:ovl_i2
+gSmokesIndex = 0x800D2A70; //segment:ovl_i2
+gSmokesCount = 0x800D2A74; //segment:ovl_i2
+gFallExplosions = 0x800D2A78; //segment:ovl_i2
+gFallExplosionsIndex = 0x800D2BF8; //segment:ovl_i2
+gFallExplosionsCount = 0x800D2BFC; //segment:ovl_i2
+gMachineDebris = 0x800D2C00; //segment:ovl_i2
+gMachineDebrisIndex = 0x800D5800; //segment:ovl_i2
+gMachineDebrisCount = 0x800D5804; //segment:ovl_i2
+gCurrentCourseInfo = 0x800D65C0; //segment:ovl_i2
+gCourseIndex = 0x800D65C4; //segment:ovl_i2
+D_800D6CA0 = 0x800D6CA0; //segment:ovl_i2 size:0xF0
+
+MachineSelect_BackgroundDraw = 0x80070D30; //segment:ovl_i4
+
+Credits_IntroDraw = 0x8007FF1C; //segment:ovl_i6
+
+gCreateOption = 0x80030614; //segment:expansion_kit
+
+D_xk2_80128CB8 = 0x80128CB8; //segment:course_edit size:0x3C
+D_xk2_80128DF8 = 0x80128DF8; //segment:course_edit size:0xE100
+D_xk2_80136EF8 = 0x80136EF8; //segment:course_edit size:0x3840

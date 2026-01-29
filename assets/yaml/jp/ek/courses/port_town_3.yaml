@@ -1,0 +1,11 @@
+:config:
+  header:
+    code:
+      - '#include "assets/courses/port_town_3.h"'
+    header:
+      - '#include "fzx_course.h"'
+
+aCoursePortTown3:
+  type: FZX:COURSE
+  offset: 0x232750
+  symbol: aCoursePortTown3

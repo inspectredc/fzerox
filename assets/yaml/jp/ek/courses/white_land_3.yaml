@@ -1,0 +1,11 @@
+:config:
+  header:
+    code:
+      - '#include "assets/courses/white_land_3.h"'
+    header:
+      - '#include "fzx_course.h"'
+
+aCourseWhiteLand3:
+  type: FZX:COURSE
+  offset: 0x235E70
+  symbol: aCourseWhiteLand3

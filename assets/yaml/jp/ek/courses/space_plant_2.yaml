@@ -1,0 +1,11 @@
+:config:
+  header:
+    code:
+      - '#include "assets/courses/space_plant_2.h"'
+    header:
+      - '#include "fzx_course.h"'
+
+aCourseSpacePlant2:
+  type: FZX:COURSE
+  offset: 0x2346D0
+  symbol: aCourseSpacePlant2

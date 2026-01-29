@@ -1,0 +1,11 @@
+:config:
+  header:
+    code:
+      - '#include "assets/courses/big_blue_3.h"'
+    header:
+      - '#include "fzx_course.h"'
+
+aCourseBigBlue3:
+  type: FZX:COURSE
+  offset: 0x233710
+  symbol: aCourseBigBlue3

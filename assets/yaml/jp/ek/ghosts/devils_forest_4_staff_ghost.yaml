@@ -1,0 +1,15 @@
+:config:
+  header:
+    code:
+      - '#include "assets/ghosts/devils_forest_4_staff_ghost.h"'
+      - '#include "fzx_game.h"'
+      - '#include "fzx_machine.h"'
+      - '#include "fzx_save.h"'
+    header:
+      - '#include "fzx_save.h"'
+
+aDevilsForest4StaffGhost:
+  type: FZX:GHOST
+  disk_drive: true
+  offset: 0x23EDB0
+  symbol: aDevilsForest4StaffGhost

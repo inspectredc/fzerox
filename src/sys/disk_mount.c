@@ -42,6 +42,7 @@ extern s32 gMfsError;
 extern LEODiskID D_i1_80428618;
 extern LEODiskID leoBootID;
 
+#ifndef EXPANSION_KIT
 void DiskMount_Init(void) {
 
     func_80076310();
@@ -89,3 +90,4 @@ label:
     }
     Mfs_ModeSelectAsync(0, 0);
 }
+#endif

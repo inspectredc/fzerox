@@ -1,0 +1,15 @@
+:config:
+  header:
+    code:
+      - '#include "assets/ghosts/mute_city_4_staff_ghost.h"'
+      - '#include "fzx_game.h"'
+      - '#include "fzx_machine.h"'
+      - '#include "fzx_save.h"'
+    header:
+      - '#include "fzx_save.h"'
+
+aMuteCity4StaffGhost:
+  type: FZX:GHOST
+  disk_drive: true
+  offset: 0x24ECB0
+  symbol: aMuteCity4StaffGhost

@@ -1,0 +1,26 @@
+:config:
+  header:
+    code:
+      - '#include "assets/overlays/ovl_i4/title.h"'
+    header:
+      - '#include "libultra/ultra64.h"'
+
+aN64DDLogoTex:
+  type: COMPRESSED_TEXTURE
+  offset: 0xE5CA4
+  ctype: u16
+  format: RGBA16
+  width: 56
+  height: 17
+  compression: MIO0
+  symbol: aN64DDLogoTex
+
+aCopyrightDDTex:
+  type: COMPRESSED_TEXTURE
+  offset: 0xE5F68
+  ctype: u16
+  format: RGBA16
+  width: 192
+  height: 14
+  compression: MIO0
+  symbol: aCopyrightDDTex

@@ -23,3 +23,17 @@ a418b0151521b76691fa03f8658c8b567c69498b:
       code: src/assets
       headers: include/assets
       modding: src/assets
+
+03209263d2ee7d621353431f3f8512ab8c1c0150:
+  name: F-Zero X Expansion Kit (JP)
+  path: assets/yaml/jp/ek
+  config:
+    gbi: F3DEX2
+    sort: OFFSET
+    logging: ERROR
+    textures: ADDITIONAL_DEFINES
+    output:
+      code: src/assets
+      headers: include/assets
+      modding: src/assets
+

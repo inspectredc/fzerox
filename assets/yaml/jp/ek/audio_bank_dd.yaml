@@ -1,0 +1,215 @@
+:config:
+  header:
+    code:
+      - '#include "assets/audio_bank_dd.h"'
+      - '#include "aseq.h"'
+    header:
+      - '#include "audio.h"'
+      - '#include "libultra/ultra64.h"'
+
+aAudioSoundFontDDGuitar:
+  type: FZX:SOUNDFONT
+  offset: 0x266B30
+  num_drums: 0
+  num_instruments: 1
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDGuitar
+
+aAudioSoundFontDDSE:
+  type: FZX:SOUNDFONT
+  offset: 0x266BE0
+  num_drums: 0
+  num_instruments: 71
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDSE
+
+aAudioSoundFontDDMuteCity:
+  type: FZX:SOUNDFONT
+  offset: 0x2698D0
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDMuteCity
+
+aAudioSoundFontDDSilence:
+  type: FZX:SOUNDFONT
+  offset: 0x269A50
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDSilence
+
+aAudioSoundFontDDSandOcean:
+  type: FZX:SOUNDFONT
+  offset: 0x269BD0
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDSandOcean
+
+aAudioSoundFontDDPortTown:
+  type: FZX:SOUNDFONT
+  offset: 0x269D50
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDPortTown
+
+aAudioSoundFontDDBigBlue:
+  type: FZX:SOUNDFONT
+  offset: 0x269ED0
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDBigBlue
+
+aAudioSoundFontDDDevilsForest:
+  type: FZX:SOUNDFONT
+  offset: 0x26A050
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDDevilsForest
+
+aAudioSoundFontDDRedCanyon:
+  type: FZX:SOUNDFONT
+  offset: 0x26A1D0
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDRedCanyon
+
+aAudioSoundFontDDSector:
+  type: FZX:SOUNDFONT
+  offset: 0x26A350
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDSector
+
+aAudioSoundFontDDWhiteLand:
+  type: FZX:SOUNDFONT
+  offset: 0x26A4D0
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDWhiteLand
+
+aAudioSoundFontDDRainbowRoad:
+  type: FZX:SOUNDFONT
+  offset: 0x26A650
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDRainbowRoad
+
+aAudioSoundFontDDNew03:
+  type: FZX:SOUNDFONT
+  offset: 0x26A7D0
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDNew03
+
+aAudioSoundFontDDNew02:
+  type: FZX:SOUNDFONT
+  offset: 0x26A950
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDNew02
+
+aAudioSoundFontDDNew01:
+  type: FZX:SOUNDFONT
+  offset: 0x26AAD0
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDNew01
+
+aAudioSoundFontDDNew04:
+  type: FZX:SOUNDFONT
+  offset: 0x26AC50
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDNew04
+
+aAudioSoundFontDDTitle:
+  type: FZX:SOUNDFONT
+  offset: 0x26ADD0
+  num_drums: 0
+  num_instruments: 1
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDTitle
+
+aAudioSoundFontDDSelect:
+  type: FZX:SOUNDFONT
+  offset: 0x26AEA0
+  num_drums: 0
+  num_instruments: 1
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDSelect
+
+aAudioSoundFontDDOption:
+  type: FZX:SOUNDFONT
+  offset: 0x26AF70
+  num_drums: 0
+  num_instruments: 1
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDOption
+
+aAudioSoundFontDDDeathRace:
+  type: FZX:SOUNDFONT
+  offset: 0x26B040
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDDeathRace
+
+aAudioSoundFontDDCourseEditor:
+  type: FZX:SOUNDFONT
+  offset: 0x26B1C0
+  num_drums: 0
+  num_instruments: 11
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDCourseEditor
+
+aAudioSoundFontDDMachineEditor:
+  type: FZX:SOUNDFONT
+  offset: 0x26BA50
+  num_drums: 0
+  num_instruments: 6
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDMachineEditor
+
+aAudioSoundFontDDEADDemo:
+  type: FZX:SOUNDFONT
+  offset: 0x26C3A0
+  num_drums: 0
+  num_instruments: 2
+  support_sfx: true
+  num_sfx: 0
+  symbol: aAudioSoundFontDDEADDemo

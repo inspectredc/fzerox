@@ -1,0 +1,11 @@
+:config:
+  header:
+    code:
+      - '#include "assets/courses/big_foot.h"'
+    header:
+      - '#include "fzx_course.h"'
+
+aCourseBigFoot:
+  type: FZX:COURSE
+  offset: 0x236650
+  symbol: aCourseBigFoot

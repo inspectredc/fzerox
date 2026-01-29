@@ -48,22 +48,31 @@ endif
 
 ifeq ($(EXPANSION_KIT),1)
   VERSION ?= jp
+  REV ?= ek
+  EXT ?= z64dd
+  TARGET ?= fzerox-expansion
 else
   VERSION ?= us
 endif
 
+REV_R ?= rev0
+EXT_R ?= z64
 REV ?= rev0
+EXT ?= z64
+DISK_EXT ?= ndd
 
-BASEROM              := baserom.$(VERSION).$(REV).z64
-TARGET               := fzerox
+BASEROM_R            := baserom.$(VERSION).$(REV_R).$(EXT_R)
+BASEROM_E            := baserom.$(VERSION).$(REV).$(DISK_EXT)
+BASEROM              := baserom.$(VERSION).$(REV).$(EXT)
+TARGET               ?= fzerox
 
 ### Output ###
 
 BUILD_DIR := build
 TOOLS	  := tools
 PYTHON	  := python3
-ROM	      := $(BUILD_DIR)/$(TARGET)_uncompressed.$(VERSION).$(REV).z64
-ROMC 	  := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).z64
+ROM	      := $(BUILD_DIR)/$(TARGET)_uncompressed.$(VERSION).$(REV).$(EXT)
+ROMC 	  := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).$(EXT)
 ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).elf
 LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).map
 LD_SCRIPT := linker_scripts/$(VERSION)/$(REV)/$(TARGET).ld
@@ -142,7 +151,7 @@ endif
 BUILD_DEFINES ?=
 
 ifeq ($(EXPANSION_KIT),1)
-    BUILD_DEFINES   += -DEXPANSION_KIT -DBUILD_VERSION=VERSION_J
+    BUILD_DEFINES   += -DVERSION_JP=1 -DEXPANSION_KIT -DBUILD_VERSION=VERSION_J
     LEO_VERSION ?= 1
     MFS_VERSION ?= 1
 else
@@ -321,6 +330,13 @@ BIN_DIRS      := $(shell find bin -type d)
 C_FILES       := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 C_FILES       := $(filter-out %.inc.c,$(C_FILES))
 C_FILES       := $(filter-out %.incbin.c,$(C_FILES))
+
+ifeq ($(EXPANSION_KIT),0)
+C_FILES := $(filter-out src/audio/disk/%,$(C_FILES))
+else
+C_FILES := $(filter-out src/audio/rom/%,$(C_FILES))
+endif
+
 S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
 BIN_FILES     := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
@@ -442,6 +458,11 @@ torch:
 	@$(MAKE) -s -C $(TOOLS) torch
 	rm -f torch.hash.yml
 
+setup:
+ifeq ($(EXPANSION_KIT),1)
+	@$(PYTHON) $(TOOLS)/extract_baserom.py --file $(BASEROM_E) --version $(VERSION) --revision $(REV)
+endif
+
 init:
 	@$(MAKE) clean
 	@$(MAKE) extract -j $(N_THREADS)
@@ -454,8 +475,8 @@ compressed: $(ROMC)
 ifeq ($(COMPARE),1)
 	@echo "$(GREEN)Calculating Rom Header Checksum... $(YELLOW)$<$(NO_COL)"
 	@md5sum --status -c $(TARGET).$(VERSION).$(REV).md5 && \
-	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64$(NO_COL): $(GREEN)OK$(NO_COL)\n$(FZERO)" || \
-	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64 $(RED)FAILED$(NO_COL)\n"
+	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).$(EXT)$(NO_COL): $(GREEN)OK$(NO_COL)\n$(FZERO)" || \
+	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).$(EXT) $(RED)FAILED$(NO_COL)\n"
 endif
 
 #### Main Targets ###
@@ -474,6 +495,9 @@ assets:
 	@$(TORCH) code $(BASEROM)
 	@$(TORCH) header $(BASEROM)
 	@$(TORCH) modding export $(BASEROM)
+ifeq ($(EXPANSION_KIT),1)
+	@$(TORCH) header $(BASEROM_R)
+endif
 
 mod:
 	@$(TORCH) modding import code $(BASEROM)
@@ -516,15 +540,21 @@ disasm:
 # Compressed ROM
 $(ROMC): $(ROM)
 	$(call print,ROM->Compressed ROM:,$<,$@)
+ifeq ($(EXPANSION_KIT),0)
 	$(V)$(PYTHON) $(TOOLS)/compress.py $(ROM) $(ROMC) $(ELF) $(VERSION)
 	$(V)$(PYTHON) $(TOOLS)/fixcrc.py $(ROMC)
+else
+	$(V)$(PYTHON) $(TOOLS)/patch.py $(ROM) $(ROMC) $(ELF) $(VERSION)
+endif
 
 # Uncompressed ROM intermediary
 $(ROM): $(ELF)
 	$(call print,ELF->ROM:,$<,$@)
 	$(V)$(OBJCOPY) -O binary $< $@
+ifeq ($(EXPANSION_KIT),0)
 	$(V)$(ENCRYPT_LIBLEO) $@ $(LD_MAP)
 	$(V)$(PYTHON) $(TOOLS)/fixcrc.py $(ROM)
+endif
 
 # Link
 $(ELF): $(LIBULTRA_O) $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/pif_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto/undefined_funcs_auto.ld

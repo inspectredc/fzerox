@@ -1,0 +1,15 @@
+:config:
+  header:
+    code:
+      - '#include "assets/boot_logo.h"'
+    header:
+      - '#include "libultra/ultra64.h"'
+
+D_80769DF0:
+  type: TEXTURE
+  offset: 0x775F0
+  ctype: u16
+  format: RGBA16
+  width: 136
+  height: 39
+  symbol: D_80769DF0

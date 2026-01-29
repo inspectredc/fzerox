@@ -107,7 +107,11 @@ void func_80074F98(void) {
     bcmp(NULL, NULL, 0);
     osEPiReadIo(NULL, 0, NULL);
     osEPiWriteIo(NULL, 0, 0);
+#if BUILD_VERSION >= VERSION_J
+    __osSetHWIntrRoutine(0, NULL, NULL);
+#else
     __osSetHWIntrRoutine(0, NULL);
+#endif
     osStopThread(NULL);
     LeoBootGame(NULL);
     osEPiLinkHandle(NULL);

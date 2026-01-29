@@ -1,0 +1,11 @@
+:config:
+  header:
+    code:
+      - '#include "assets/courses/fire_field_2.h"'
+    header:
+      - '#include "fzx_course.h"'
+
+aCourseFireField2:
+  type: FZX:COURSE
+  offset: 0x235690
+  symbol: aCourseFireField2

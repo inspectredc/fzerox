@@ -113,4 +113,35 @@ DECLARE_SEGMENT(audio_table);
 
 DECLARE_SEGMENT(game_context);
 
+#ifdef EXPANSION_KIT
+#define SEGMENT_DISK_START(segment) (segment ## _ROM_START)
+#define SEGMENT_DISK_SIZE(segment)  (SEGMENT_BSS_START(segment) - SEGMENT_VRAM_START(segment))
+
+DECLARE_SEGMENT(silence_3);
+DECLARE_SEGMENT(sand_ocean_3);
+DECLARE_SEGMENT(devils_forest_4);
+DECLARE_SEGMENT(port_town_3);
+DECLARE_SEGMENT(devils_forest_5);
+DECLARE_SEGMENT(big_blue_3);
+DECLARE_SEGMENT(mute_city_4);
+DECLARE_SEGMENT(space_plant_2);
+DECLARE_SEGMENT(port_town_4);
+DECLARE_SEGMENT(fire_field_2);
+DECLARE_SEGMENT(white_land_3);
+DECLARE_SEGMENT(big_foot);
+
+DECLARE_SEGMENT(silence_3_staff_ghost);
+DECLARE_SEGMENT(sand_ocean_3_staff_ghost);
+DECLARE_SEGMENT(devils_forest_4_staff_ghost);
+DECLARE_SEGMENT(port_town_3_staff_ghost);
+DECLARE_SEGMENT(devils_forest_5_staff_ghost);
+DECLARE_SEGMENT(big_blue_3_staff_ghost);
+DECLARE_SEGMENT(mute_city_4_staff_ghost);
+DECLARE_SEGMENT(space_plant_2_staff_ghost);
+DECLARE_SEGMENT(port_town_4_staff_ghost);
+DECLARE_SEGMENT(fire_field_2_staff_ghost);
+DECLARE_SEGMENT(white_land_3_staff_ghost);
+DECLARE_SEGMENT(big_foot_staff_ghost);
+#endif
+
 #endif

@@ -81,7 +81,7 @@ typedef union unk_Light {
 } unk_Light;
 
 // ROUGH APPROXIMATIONS OF SIZES, NOT CORRECT!!
-
+#ifndef EXPANSION_KIT
 typedef struct GfxPool {
     Gfx gfxBuffer[8193];
     Vtx courseVtxBuffer[4096];
@@ -113,6 +113,40 @@ typedef struct GfxPool {
     Mtx unk_2C668[1];
     s8 pad_2C6A8[0x48];
 } GfxPool; // size = 0x2C6F0
+#else // EXPANSION_KIT
+typedef struct GfxPool {
+    /* 0x00000 */ Gfx gfxBuffer[13313];
+    /* 0x1A008 */ Mtx unk_20008[4];
+    /* 0x1A108 */ Mtx unk_20108[4];
+    /* 0x1A208 */ Mtx unk_20208[4];
+    /* 0x1A308 */ Vtx courseVtxBuffer[4096];
+    /* 0x2A308 */ Vtx effectsVtxBuffer[2048];
+    /* 0x32308 */ Mtx unk_20308[30];
+    /* 0x32A08 */ Mtx unk_20A88[30];
+    /* 0x33208 */ Mtx unk_21208[30];
+    /* 0x33988 */ Mtx unk_21988[4];
+    /* 0x33A88 */ Lights1 unk_21A88[4];
+    /* 0x33AE8 */ unk_Light unk_21AE8[4];
+    /* 0x33B28 */ LookAt unk_21B28;
+    /* 0x33B48 */ Vtx unk_29B48[28];
+    /* 0x33D08 */ Vtx spinningKeyboardCharacterVtx[4];
+    /* 0x33D48 */ s8 pad_29D48[0x500];
+    /* 0x34248 */ Vtx backgroundTileVtxBuffer[256];
+    /* 0x35248 */ Mtx unk_2B248[1];
+    /* 0x35288 */ Mtx unk_2B288[1];
+    /* 0x352C8 */ Mtx unk_2B2C8[64];
+    /* 0x362C8 */ Vp unk_2C2C8[4];
+    /* 0x36308 */ Vp recordsMachineVp[6];
+    /* 0x36368 */ Mtx unk_2C368[6];
+    /* 0x364E8 */ Vtx unk_2C4E8[4];
+    /* 0x36528 */ u16 unk_2C528[6][16];
+    /* 0x365E8 */ Vtx unk_365E8[4];
+    /* 0x36628 */ Mtx unk_2C5E8[1];
+    /* 0x36668 */ Mtx unk_2C628[1];
+    /* 0x366A8 */ Mtx unk_2C668[1];
+    /* 0x366E8 */ s8 pad_2C6A8[0x48];
+} GfxPool; // size = 0x36730
+#endif
 
 typedef struct {
     /* 0x000 */ OSThread thread;
