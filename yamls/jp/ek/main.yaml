@@ -48,21 +48,21 @@
     vram: 0x80400000
     bss_size: 0x2ECA00
     subsegments:
-      - { type: bss, vram: 0x80400000, name: audio/disk/lib/audio_heap }
+      - { type: .bss, vram: 0x80400000, name: audio/disk/lib/audio_heap }
 
   - name: audio_context
     type: code
     vram: 0x806ECA00
     bss_size: 0x59C0
     subsegments:
-      - { type: bss, vram: 0x806ECA00, name: audio/disk/lib/audio_context }
+      - { type: .bss, vram: 0x806ECA00, name: audio/disk/lib/audio_context }
 
   - name: custom_machine_info
     type: code
     vram: 0x806F2400
     bss_size: 0x3E0
     subsegments:
-      - { type: bss, vram: 0x806F2400, name: game/custom_machine_info }
+      - { type: .bss, vram: 0x806F2400, name: game/custom_machine_info }
 
   - name: entry
     type: code
@@ -91,10 +91,10 @@
       - [0x10B20, asm, game/EA90]
       - [0x110B0, asm, sys/disk_drive]
       - [0x11850, asm, sys/sys_leo_dd]
-      - [0x157F0, asm, sys/dma]
+      - [0x15850, asm, sys/dma]
       - [0x15AB0, asm, sys/segment]
       - [0x17490, asm, game/texture_utils]
-      - [0x1AA00, asm, game/common]
+      - [0x1AA20, asm, game/common]
       - [0x1B6E0, asm, game/texture_utils2]
       - [0x1C8B0, asm, game/194E0]
       - [0x1C8F0, asm, sys/disk_mount]
@@ -411,37 +411,37 @@
       - [0x80A50, data, libultra/io/vimgr]
 
       # Rodata
-      - [0x80A80, .rodata, sys/sys_main]
-      - [0x80A90, .rodata, sys/sys_gfx]
-      - [0x80AA0, .rodata, game/game]
-      - [0x80D70, .rodata, sys/math]
-      - [0x80DF0, .rodata, game/course_gadgets]
-      - [0x81210, .rodata, game/EA90]
-      - [0x81230, .rodata, sys/disk_drive]
-      - [0x81500, .rodata, sys/sys_leo_dd]
-      - [0x82EE0, .rodata, sys/segment]
-      - [0x831E0, .rodata, game/common]
-      - [0x83620, .rodata, game/194E0]
-      - [0x83630, .rodata, sys/leo_fault]
-      - [0x83670, .rodata, sys/sys_fault]
-      - [0x83BB0, .rodata, game/bordered_box]
-      - [0x83BD0, .rodata, game/camera]
-      - [0x846F0, .rodata, game/racer]
-      - [0x84970, .rodata, audio/disk/lib/synthesis]
-      - [0x84990, .rodata, audio/disk/lib/heap]
-      - [0x849C0, .rodata, audio/disk/lib/load]
-      - [0x84A60, .rodata, audio/disk/lib/thread]
-      - [0x84B90, .rodata, audio/disk/lib/playback]
-      - [0x84BB0, .rodata, audio/disk/lib/effects]
-      - [0x84BE0, .rodata, audio/disk/lib/seqplayer]
-      - [0x85220, .rodata, audio/disk/external]
+      - [0x80A80, rodata, sys/sys_main]
+      - [0x80A90, rodata, sys/sys_gfx]
+      - [0x80AA0, rodata, game/game]
+      - [0x80D70, rodata, sys/math]
+      - [0x80DF0, rodata, game/course_gadgets]
+      - [0x81210, rodata, game/EA90]
+      - [0x81230, rodata, sys/disk_drive]
+      - [0x81500, rodata, sys/sys_leo_dd]
+      - [0x82EE0, rodata, sys/segment]
+      - [0x831E0, rodata, game/common]
+      - [0x83620, rodata, game/194E0]
+      - [0x83630, rodata, sys/leo_fault]
+      - [0x83670, rodata, sys/sys_fault]
+      - [0x83BB0, rodata, game/bordered_box]
+      - [0x83BD0, rodata, game/camera]
+      - [0x846F0, rodata, game/racer]
+      - [0x84970, rodata, audio/disk/lib/synthesis]
+      - [0x84990, rodata, audio/disk/lib/heap]
+      - [0x849C0, rodata, audio/disk/lib/load]
+      - [0x84A60, rodata, audio/disk/lib/thread]
+      - [0x84B90, rodata, audio/disk/lib/playback]
+      - [0x84BB0, rodata, audio/disk/lib/effects]
+      - [0x84BE0, rodata, audio/disk/lib/seqplayer]
+      - [0x85220, rodata, audio/disk/external]
       - [0x86DF0, data, audio/disk/lib/init_data]
       - [0x86E00, rodata, libultra/libc/setintmask]
       - [0x86EA0, rodata, libultra/os/exceptasm]
-      - [0x86ED0, .rodata, libultra/libc/llcvt]
-      - [0x86EE0, .rodata, libultra/io/devmgr]
-      - [0x86F00, .rodata, libultra/libc/xprintf]
-      - [0x87000, .rodata, libultra/libc/xldtob]
+      - [0x86ED0, rodata, libultra/libc/llcvt]
+      - [0x86EE0, rodata, libultra/io/devmgr]
+      - [0x86F00, rodata, libultra/libc/xprintf]
+      - [0x87000, rodata, libultra/libc/xldtob]
 
       - [0x87060, data, f3dex]
       - [0x87480, data, f3dlx]
@@ -455,21 +455,21 @@
       - [0x884D0, data, leo/lib/createleomanager]
       - [0x884E0, data, leo/lib/driverominit]
 
-      - [0x884F0, .rodata, leo/lib/leofunc]
-      - [0x88500, .rodata, leo/lib/leocmdex]
-      - [0x885B0, .rodata, leo/lib/leord_diskid]
-      - [0x885C0, .rodata, leo/lib/leomecha]
-      - [0x88630, .rodata, leo/lib/leo_tbl]
-      - [0x88810, .rodata, leo/lib/leoc2ecc]
-      - [0x88C30, .rodata, leo/lib/leomseq_tbl]
-      - [0x88CB0, .rodata, leo/lib/leotimer]
+      - [0x884F0, rodata, leo/lib/leofunc]
+      - [0x88500, rodata, leo/lib/leocmdex]
+      - [0x885B0, rodata, leo/lib/leord_diskid]
+      - [0x885C0, rodata, leo/lib/leomecha]
+      - [0x88630, rodata, leo/lib/leo_tbl]
+      - [0x88810, rodata, leo/lib/leoc2ecc]
+      - [0x88C30, rodata, leo/lib/leomseq_tbl]
+      - [0x88CB0, rodata, leo/lib/leotimer]
       - [0x88CD0, data, leo/mfs/mfs_data]
       - [0xA2550, data, leo/mfs/mfs_name]
       - [0xA25D0, data, leo/mfs/mfs_save]
-      - [0xA25E0, .rodata, leo/mfs/mfs_dir]
-      - [0xA25F0, .rodata, leo/mfs/mfs_save]
+      - [0xA25E0, rodata, leo/mfs/mfs_dir]
+      - [0xA25F0, rodata, leo/mfs/mfs_save]
       - [0xA2610, data, sys/75000]
-      - [0xA2630, .rodata, sys/75000]
+      - [0xA2630, rodata, sys/75000]
       - [0xA2690, data, aspmain]
       - [0xA2970, data, audio/disk/audio_tables]
       - { type: bss, vram: 0x80795670, name: sys/sys_main }
@@ -524,11 +524,11 @@
       - { type: bss, vram: 0x807C6E50, name: 807C6E50 } # pad
       - { type: bss, vram: 0x807C6E60, name: leo/mfs/mfs_prepared_dir }
       - { type: bss, vram: 0x807C6E70, name:  leo/mfs/mfs_handlers }
-      - { type: bss, vram: 0x807C6E70, name: sys/75000 }
+      - { type: bss, vram: 0x807C6E90, name: sys/75000 }
 
-  - name: cartridge_offsets
-    type: code
-    vram: 0x807C70A0
-    bss_size: 0xF0
-    subsegments:
-      - { type: bss, vram: 0x807C70A0, name: sys/cartridge_offsets }
+  # - name: cartridge_offsets
+  #   type: code
+  #   vram: 0x807C70A0
+  #   bss_size: 0xF0
+  #   subsegments:
+  #     - { type: bss, vram: 0x807C70A0, name: sys/cartridge_offsets }

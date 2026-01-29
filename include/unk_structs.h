@@ -489,4 +489,36 @@ typedef struct TextureInfo {
     /* 0x06 */ s16 height;
 } TextureInfo; // size = 0x8
 
+typedef struct CustomMachine {
+    /* 0x00 */ u8 body;
+    /* 0x01 */ u8 boost;
+    /* 0x02 */ u8 grip;
+    /* 0x03 */ u8 frontType;
+    /* 0x04 */ u8 rearType;
+    /* 0x05 */ u8 wingType;
+    /* 0x06 */ u8 logo;
+    /* 0x07 */ u8 number;
+    /* 0x08 */ u8 decal;
+    /* 0x09 */ u8 red;
+    /* 0x0A */ u8 green;
+    /* 0x0B */ u8 blue;
+    /* 0x0C */ u8 numberR;
+    /* 0x0D */ u8 numberG;
+    /* 0x0E */ u8 numberB;
+    /* 0x0F */ u8 decalR;
+    /* 0x10 */ u8 decalG;
+    /* 0x11 */ u8 decalB;
+    /* 0x12 */ u8 cockpitR;
+    /* 0x13 */ u8 cockpitG;
+    /* 0x14 */ u8 cockpitB;
+    /* 0x15 */ char machineName[9];
+    /* 0x1E */ u16 checksum;
+} CustomMachine; // size = 0x20
+
+typedef struct CustomMachinesInfo {
+    /* 0x000 */ CustomMachine customMachines[30];
+    /* 0x3C0 */ s8 characterCustomState[30];
+    /* 0x3DE */ u16 checksum;
+} CustomMachinesInfo; // size = 0x3E0
+
 #endif // UNK_STRUCTS_H

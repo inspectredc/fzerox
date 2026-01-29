@@ -22,21 +22,21 @@
       - [0xAD210, asm]
       - [0xAD2C0, data, A2E70]
       - [0xAD2D0, data, A2E90]
-      - [0xAD300, .rodata, A2E90]
+      - [0xAD300, rodata, A2E90]
       - [0xAD360, data, A3AA0]
       - [0xAD560, data, A3AE0]
-      - [0xAFBF0, .rodata, A3AE0]
+      - [0xAFBF0, rodata, A3AE0]
       - [0xAFD30, data, A6340]
-      - [0xAFD80, .rodata, A6340]
+      - [0xAFD80, rodata, A6340]
       - [0xAFE40, data, A8140]
-      - [0xAFEA0, .rodata, A8140]
+      - [0xAFEA0, rodata, A8140]
       - [0xAFEF0, data, AAA80]
       - [0xAFF10, data, expansion_kit_text]
       - [0xB0640, data, expansion_kit_data]
       - [0xB0670, data, AB150]
-      - [0xB0680, .rodata, AB150]
+      - [0xB0680, rodata, AB150]
       - [0xB0770, data, ABC40]
-      - [0xB0790, .rodata, ABC40]
+      - [0xB0790, rodata, ABC40]
       - [0xB0860, data, expansion_kit_disk_data]
       - { type: bss, vram: 0x80033840, name: expansion_kit_bss }
       - { type: bss, vram: 0x8003A470, name: A2E90 }
@@ -48,19 +48,19 @@
       - { type: bss, vram: 0x8003BBA0, name: ABC40 }
 
 
-  - name: expansion_kit_font
-    type: code
-    vram: 0x8003BBC0
-    bss_size: 0x10
-    subsegments:
-      - { type: bss, vram: 0x8003BBC0, name: sys/expansion_kit_font }
+  # - name: expansion_kit_font
+  #   type: code
+  #   vram: 0x8003BBC0
+  #   bss_size: 0x10
+  #   subsegments:
+  #     - { type: bss, vram: 0x8003BBC0, name: sys/expansion_kit_font }
 
-  - name: leo_font
-    type: code
-    vram: 0x8003BBD0
-    bss_size: 0x3710
-    subsegments:
-      - { type: bss, vram: 0x8003BBD0, name: sys/leo_font }
+  # - name: leo_font
+  #   type: code
+  #   vram: 0x8003BBD0
+  #   bss_size: 0x3710
+  #   subsegments:
+  #     - { type: bss, vram: 0x8003BBD0, name: sys/leo_font }
 
   - name: ovl_i3
     exclusive_ram_id: ovl_i3
@@ -84,11 +84,11 @@
       - [0xDD4F0, data, minimap]
       - [0xDD590, data, background]
       - [0xDDD40, data, records_entry]
-      - [0xDDD80, .rodata, cpu]
-      - [0xDDF30, .rodata, menus]
-      - [0xDE710, .rodata, hud]
-      - [0xDE720, .rodata, background]
-      - [0xDE790, .rodata, records_entry]
+      - [0xDDD80, rodata, cpu]
+      - [0xDDF30, rodata, menus]
+      - [0xDE710, rodata, hud]
+      - [0xDE720, rodata, background]
+      - [0xDE790, rodata, records_entry]
       - { type: bss, vram: 0x8006CFF0, name: cpu }
       - { type: bss, vram: 0x8006D090, name: menus }
       - { type: bss, vram: 0x8006D600, name: hud }
@@ -109,7 +109,7 @@
       - [0xE3560, asm, title]
       - [0xE4560, data, machine]
       - [0xE5CA0, data, title]
-      - [0xE6550, .rodata, machine]
+      - [0xE6550, rodata, machine]
       - { type: bss, vram: 0x80077050, name: machine }
       - { type: bss, vram: 0x80077070, name: title }
 
@@ -127,7 +127,7 @@
       - [0xEA590, data, course_view]
       - [0xEA650, data, course_model]
       - [0xEA660, data, course_select]
-      - [0xEB400, .rodata, course_select]
+      - [0xEB400, rodata, course_select]
       - { type: bss, vram: 0x8007C270, name: course_model }
       - { type: bss, vram: 0x8007C2A0, name: course_select }
 
@@ -147,9 +147,9 @@
       - [0xF3870, data, main_menu]
       - [0xF3A60, data, credits]
       - [0xF4450, data, options_menu]
-      - [0xF45A0, .rodata, main_menu]
-      - [0xF47B0, .rodata, credits]
-      - [0xF5060, .rodata, options_menu]
+      - [0xF45A0, rodata, main_menu]
+      - [0xF47B0, rodata, credits]
+      - [0xF5060, rodata, options_menu]
       - { type: bss, vram: 0x80085AE0, name: main_menu }
       - { type: bss, vram: 0x80085AF0, name: credits }
       - { type: bss, vram: 0x80085B10, name: options_menu }
@@ -170,8 +170,8 @@
       - [0xFB810, data, ending_racer_focus_scripts]
       - [0xFC3C0, data, ending_effects]
       - [0xFC760, data, ending_podium_camera_scripts]
-      - [0xFCB00, .rodata, ending]
-      - [0xFCBD0, .rodata, ending_effects]
+      - [0xFCB00, rodata, ending]
+      - [0xFCBD0, rodata, ending_effects]
       - { type: bss, vram: 0x8009A3A0, name: podium_draw_data }
       - { type: bss, vram: 0x8009AD00, name: ending }
       - { type: bss, vram: 0x8009AEB0, name: ending_effects }
@@ -187,7 +187,7 @@
     subsegments:
       - [0xFCC60, asm, records]
       - [0xFFCA0, data, records]
-      - [0x1038B0, .rodata, records]
+      - [0x1038B0, rodata, records]
       - { type: bss, vram: 0x800A1EF0, name: records}
 
   - name: ovl_i2
@@ -214,13 +214,13 @@
       - [0x1209A0, data, ovl_i2_data1]
       - [0x1209B0, data, font]
       - [0x122E50, data, ../../game/course]
-      - [0x123380, .rodata, transition]
-      - [0x123600, .rodata, save]
-      - [0x123630, .rodata, dd_save]
-      - [0x123870, .rodata, effects]
-      - [0x1238D0, .rodata, font]
-      - [0x124220, .rodata, ../../game/object]
-      - [0x124A10, .rodata, ../../game/course]
+      - [0x123380, rodata, transition]
+      - [0x123600, rodata, save]
+      - [0x123630, rodata, dd_save]
+      - [0x123870, rodata, effects]
+      - [0x1238D0, rodata, font]
+      - [0x124220, rodata, ../../game/object]
+      - [0x124A10, rodata, ../../game/course]
       - [0x124B70, data, course_context]
       - { type: bss, vram: 0x800D11F0, name: transition }
       - { type: bss, vram: 0x800D1270, name: save }
@@ -254,7 +254,7 @@
       - [0x1872B0, asm, 1459A0]
       - [0x187510, asm]
       - [0x187830, data, 187510]
-      - [0x188830, .rodata, 187510]
+      - [0x188830, rodata, 187510]
 
   - name: course_edit
     exclusive_ram_id: overlay_800D6D90
@@ -282,31 +282,31 @@
       - [0x1A7710, asm]
       - [0x1A7D50, asm]
       - [0x1A82E0, data, 188850]
-      - [0x1A84D0, .rodata, 188850]
+      - [0x1A84D0, rodata, 188850]
       - [0x1A8AF0, data, 191080]
-      - [0x1A8D00, .rodata, 191080]
+      - [0x1A8D00, rodata, 191080]
       - [0x1A8EC0, data, 19C470]
-      - [0x1B5710, .rodata, 19C470]
+      - [0x1B5710, rodata, 19C470]
       - [0x1B59D0, data, 19D4A0]
-      - [0x1B59E0, .rodata, 19D4A0]
+      - [0x1B59E0, rodata, 19D4A0]
       - [0x1B5AB0, data, 19DD60]
-      - [0x1B5AD0, .rodata, 19DD60]
+      - [0x1B5AD0, rodata, 19DD60]
       - [0x1B5D40, data, 19F3F0]
       - [0x1B5E20, data, 19FA50]
-      - [0x1B5E50, .rodata, 1A0B50]
+      - [0x1B5E50, rodata, 1A0B50]
       - [0x1B6680, data, 1A1240]
-      - [0x1B6690, .rodata, 1A1240]
+      - [0x1B6690, rodata, 1A1240]
       - [0x1B6760, data, 1A2D70]
-      - [0x1B6790, .rodata, 1A2D70]
+      - [0x1B6790, rodata, 1A2D70]
       - [0x1B67D0, data, 1A3AB0]
-      - [0x1B6890, .rodata, 1A3AB0]
+      - [0x1B6890, rodata, 1A3AB0]
       - [0x1B69B0, data, 1A4210]
-      - [0x1B6F50, .rodata, 1A4210]
+      - [0x1B6F50, rodata, 1A4210]
       - [0x1B7000, data, 1A5B70]
-      - [0x1CB120, .rodata, 1A5B70]
+      - [0x1CB120, rodata, 1A5B70]
       - [0x1CB140, data, 1A7710]
-      - [0x1CB160, .rodata, 1A7710]
-      - [0x1CB170, .rodata, 1A7D50]
+      - [0x1CB160, rodata, 1A7710]
+      - [0x1CB170, rodata, 1A7D50]
       - { type: bss, vram: 0x80119720, name: 188850 }
       - { type: bss, vram: 0x80128C90, name: 19DD60 }
       - { type: bss, vram: 0x80128CA0, name: 19FA50 }
@@ -343,13 +343,13 @@
       - [0x1D6E20, data, 1D5C50]
       - [0x1D6E30, data, machine_create_text]
       - [0x1D6FB0, data, machine_create_assets]
-      - [0x1DF840, .rodata, machine_create]
-      - [0x1DF860, .rodata, machine_create_update]
-      - [0x1E0230, .rodata, machine_create_draw]
-      - [0x1E05D0, .rodata, 1D2380]
-      - [0x1E0A20, .rodata, custom_machine_select]
-      - [0x1E0A50, .rodata, machine_create_stats]
-      - [0x1E0AB0, .rodata, 1D5C50]
+      - [0x1DF840, rodata, machine_create]
+      - [0x1DF860, rodata, machine_create_update]
+      - [0x1E0230, rodata, machine_create_draw]
+      - [0x1E05D0, rodata, 1D2380]
+      - [0x1E0A20, rodata, custom_machine_select]
+      - [0x1E0A50, rodata, machine_create_stats]
+      - [0x1E0AB0, rodata, 1D5C50]
       - { type: bss, vram: 0x80140E40, name: machine_create }
       - { type: bss, vram: 0x80140E50, name: machine_create_update }
       - { type: bss, vram: 0x801412A0, name: machine_create_draw }
@@ -369,5 +369,5 @@
       - [0x1E1FD0, asm, ead_demo]
       - [0x1E27D0, data, ead_demo_engine]
       - [0x1FB800, data, ead_demo]
-      - [0x1FB840, .rodata, ead_demo]
+      - [0x1FB840, rodata, ead_demo]
       - { type: bss, vram: 0x800F1AE0, name: ead_demo_engine }
