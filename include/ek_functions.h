@@ -11,6 +11,12 @@
 #include "PR/leo.h"
 #include "audio.h"
 
+void func_80767958(void* entry);
+void func_806F33D0(FrameBuffer* fb);
+s32 func_80768A5C(LEOCmd* cmdBlock, s32 direction, u32 lba, void* vAddr, u32 nLbas, OSMesgQueue* mq);
+s32 func_80768AF0(LEOCmd* cmdBlock, s32 direction, u32 lba, void* vAddr, u32 nLbas, OSMesgQueue* mq);
+s32 func_80768C08(OSPiHandle*, OSIoMesg*, s32);
+
 void DiskDrive_InitRomSegmentPairs(void);
 void func_80704DB0(char*, char*);
 void DiskMount_Init(void);

@@ -527,9 +527,9 @@
       - { type: .bss, vram: 0x807C6E70, name: leo/mfs/mfs_handlers }
       - { type: bss, vram: 0x807C6E90, name: sys/75000 }
 
-  # - name: cartridge_offsets
-  #   type: code
-  #   vram: 0x807C70A0
-  #   bss_size: 0xF0
-  #   subsegments:
-  #     - { type: bss, vram: 0x807C70A0, name: sys/cartridge_offsets }
+  - name: cartridge_offsets
+    type: code
+    vram: 0x807C70A0
+    bss_size: 0xF0
+    subsegments:
+      - { type: .bss, vram: 0x807C70A0, name: sys/cartridge_offsets }

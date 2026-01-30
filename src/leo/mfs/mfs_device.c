@@ -407,7 +407,7 @@ s32 mfsStrnCmp(u8* b1, u8* b2, size_t length) {
     if ((*p1 == 0) && (*p2 == 0)) {
         return 0;
     }
-    
+
 #if MFS_VERSION == MFS_VERSION_A
     return -1;
 #else

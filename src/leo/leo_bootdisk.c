@@ -54,7 +54,8 @@ void LeoBootGame(void* entry) {
 
 // This MUST be scrambled by the build process or they will not be executable
 // at runtime when descrambled.
-//! @bug EXPANSION_KIT: This function and _LeoBootGame3 are supposed to be encrypted after compile time, but they are not
+//! @bug EXPANSION_KIT: This function and _LeoBootGame3 are supposed to be encrypted after compile time, but they are
+//! not
 void __LeoBootGame2(void* entry) {
     u8* entry2 = (u8*) entry;
     u32 i;

@@ -48,19 +48,19 @@
       - { type: bss, vram: 0x8003BBA0, name: ABC40 }
 
 
-  # - name: expansion_kit_font
-  #   type: code
-  #   vram: 0x8003BBC0
-  #   bss_size: 0x10
-  #   subsegments:
-  #     - { type: bss, vram: 0x8003BBC0, name: sys/expansion_kit_font }
+  - name: expansion_kit_font
+    type: code
+    vram: 0x8003BBC0
+    bss_size: 0x10
+    subsegments:
+      - { type: .bss, vram: 0x8003BBC0, name: sys/expansion_kit_font }
 
-  # - name: leo_font
-  #   type: code
-  #   vram: 0x8003BBD0
-  #   bss_size: 0x3710
-  #   subsegments:
-  #     - { type: bss, vram: 0x8003BBD0, name: sys/leo_font }
+  - name: leo_font
+    type: code
+    vram: 0x8003BBD0
+    bss_size: 0x3710
+    subsegments:
+      - { type: .bss, vram: 0x8003BBD0, name: sys/leo_font }
 
   - name: ovl_i3
     exclusive_ram_id: ovl_i3
@@ -365,9 +365,9 @@
     bss_size: 0x5080
     symbol_name_format: xk4_$VRAM
     subsegments:
-      - [0x1E0B00, asm, ead_demo_engine]
-      - [0x1E1FD0, asm, ead_demo]
-      - [0x1E27D0, data, ead_demo_engine]
-      - [0x1FB800, data, ead_demo]
-      - [0x1FB840, rodata, ead_demo]
-      - { type: bss, vram: 0x800F1AE0, name: ead_demo_engine }
+      - [0x1E0B00, c, ead_demo_engine]
+      - [0x1E1FD0, c, ead_demo]
+      - [0x1E27D0, .data, ead_demo_engine]
+      - [0x1FB800, .data, ead_demo]
+      - [0x1FB840, .rodata, ead_demo]
+      - { type: .bss, vram: 0x800F1AE0, name: ead_demo_engine }
