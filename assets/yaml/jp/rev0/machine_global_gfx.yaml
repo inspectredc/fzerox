@@ -5,8 +5,10 @@
     - "assets/yaml/jp/rev0/machine_custom_gfx.yaml"
   header:
     code:
-      - '#include "assets/machine_global_gfx.h"'
-      - '#include "assets/machine_custom_gfx.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(machine_global_gfx.h)'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(machine_custom_gfx.h)'
     header:
       - '#include "gfx.h"'
 

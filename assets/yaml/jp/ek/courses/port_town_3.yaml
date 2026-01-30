@@ -1,7 +1,8 @@
 :config:
   header:
     code:
-      - '#include "assets/courses/port_town_3.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(courses/port_town_3.h)'
     header:
       - '#include "fzx_course.h"'
 

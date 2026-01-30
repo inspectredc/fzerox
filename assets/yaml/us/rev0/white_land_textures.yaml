@@ -3,7 +3,8 @@
     - [0x0A,  0x2507F0]
   header:
     code:
-      - '#include "assets/white_land_textures.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(white_land_textures.h)'
     header:
       - '#include "gfx.h"'
 

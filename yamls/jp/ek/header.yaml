@@ -3,7 +3,7 @@ sha1: 03209263d2ee7d621353431f3f8512ab8c1c0150
 options:
   basename: fzerox-expansion
   target_path: baserom.jp.ek.z64dd
-  elf_path: build/fzerox-expansion.jp.ek.elf
+  elf_path: build/jp/ek/fzerox-expansion.jp.ek.elf
   ld_script_path: linker_scripts/jp/ek/fzerox-expansion.ld
   base_path: .
   compiler: IDO
@@ -22,7 +22,7 @@ options:
   src_path: src
   asset_path: bin/jp/ek
 
-  build_path: build
+  build_path: build/jp/ek
 
   extensions_path: tools/splat_ext
   mips_abi_float_regs: o32

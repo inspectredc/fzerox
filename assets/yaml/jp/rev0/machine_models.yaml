@@ -5,7 +5,8 @@
     - [0x09,  0x22B520]
   header:
     code:
-      - '#include "assets/machine_models.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(machine_models.h)'
     header:
       - '#include "gfx.h"'
 

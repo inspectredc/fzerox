@@ -6,11 +6,11 @@
 #include "fzx_racer.h"
 #include "fzx_machine.h"
 #include "minimap.h"
-#include "assets/course_track_gfx.h"
-#include "assets/machine_custom_gfx.h"
-#include "assets/hud_gfx.h"
-#include "assets/super_textures.h"
-#include "assets/common_assets_compressed.h"
+#include ASSET_HEADER(course_track_gfx.h)
+#include ASSET_HEADER(machine_custom_gfx.h)
+#include ASSET_HEADER(hud_gfx.h)
+#include ASSET_HEADER(super_textures.h)
+#include ASSET_HEADER(common_assets_compressed.h)
 #include "segment_symbols.h"
 
 f32 sPortraitTextureScale[TOTAL_RACER_COUNT];

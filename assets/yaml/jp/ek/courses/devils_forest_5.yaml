@@ -1,7 +1,8 @@
 :config:
   header:
     code:
-      - '#include "assets/courses/devils_forest_5.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(courses/devils_forest_5.h)'
     header:
       - '#include "fzx_course.h"'
 

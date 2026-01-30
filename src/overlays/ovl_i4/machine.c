@@ -7,9 +7,9 @@
 #include "fzx_font.h"
 #include "src/overlays/ovl_i2/transition.h"
 #include "ovl_i4.h"
-#include "assets/machine_custom_gfx.h"
-#include "assets/machine_models.h"
-#include "assets/common_assets_compressed.h"
+#include ASSET_HEADER(machine_custom_gfx.h)
+#include ASSET_HEADER(machine_models.h)
+#include ASSET_HEADER(common_assets_compressed.h)
 
 UNUSED s32 D_8011D770;
 s32 sMachinesUnlocked;

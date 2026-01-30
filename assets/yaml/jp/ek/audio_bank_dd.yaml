@@ -1,7 +1,8 @@
 :config:
   header:
     code:
-      - '#include "assets/audio_bank_dd.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(audio_bank_dd.h)'
       - '#include "aseq.h"'
     header:
       - '#include "audio.h"'

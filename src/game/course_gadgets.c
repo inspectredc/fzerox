@@ -4,8 +4,8 @@
 #include "fzx_course.h"
 #include "segment_symbols.h"
 #include "leo/mfs.h"
-#include "assets/course_track_gfx.h"
-#include "assets/setup_gfx.h"
+#include ASSET_HEADER(course_track_gfx.h)
+#include ASSET_HEADER(setup_gfx.h)
 
 OSMesg D_800E12B0;
 UNUSED s8 D_800E12B8[0x10];

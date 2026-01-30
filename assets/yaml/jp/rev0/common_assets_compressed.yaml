@@ -3,7 +3,8 @@
     - [0x0F,  0x2BA320]
   header:
     code:
-      - '#include "assets/common_assets_compressed.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(common_assets_compressed.h)'
     header:
       - '#include "gfx.h"'
 

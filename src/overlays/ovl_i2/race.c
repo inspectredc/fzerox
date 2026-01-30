@@ -1,7 +1,7 @@
 #include "global.h"
 #include "fzx_course.h"
 #include "fzx_camera.h"
-#include "assets/machine_custom_gfx.h"
+#include ASSET_HEADER(machine_custom_gfx.h)
 
 extern s8 gGamePaused;
 

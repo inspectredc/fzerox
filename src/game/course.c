@@ -5,7 +5,7 @@
 #include "fzx_math.h"
 #include "fzx_camera.h"
 #include "fzx_segmentA.h"
-#include "assets/course_track_gfx.h"
+#include ASSET_HEADER(course_track_gfx.h)
 
 #define VERTEX_MODIFIED_ST(s, t) ((((s) << 15) & 0xFFFF0000) | ((t) &0xFFFF))
 

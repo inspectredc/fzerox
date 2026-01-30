@@ -3,7 +3,8 @@
     - [0x4,  0x166660]
   header:
     code:
-      - '#include "assets/create_machine_textures.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(create_machine_textures.h)'
     header:
       - '#include "gfx.h"'
 

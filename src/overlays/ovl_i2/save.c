@@ -3,7 +3,7 @@
 #include "fzx_save.h"
 #include "fzx_course.h"
 #include "fzx_machine.h"
-#include "assets/staff_ghost_records.h"
+#include ASSET_HEADER(staff_ghost_records.h)
 
 OSIoMesg sSramIoMesg;
 OSPiHandle sSramPiHandle;

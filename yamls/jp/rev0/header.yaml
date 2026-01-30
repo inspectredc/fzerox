@@ -3,7 +3,7 @@ sha1: a418b0151521b76691fa03f8658c8b567c69498b
 options:
   basename: fzerox
   target_path: baserom.jp.rev0.z64
-  elf_path: build/fzerox.jp.rev0.elf
+  elf_path: build/jp/rev0/fzerox.jp.rev0.elf
   ld_script_path: linker_scripts/jp/rev0/fzerox.ld
   base_path: .
   compiler: IDO
@@ -22,7 +22,7 @@ options:
   src_path: src
   asset_path: bin/jp/rev0
 
-  build_path: build
+  build_path: build/jp/rev0
 
   extensions_path: tools/splat_ext
   mips_abi_float_regs: o32

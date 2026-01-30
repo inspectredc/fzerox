@@ -3,7 +3,8 @@
     [0x8012B520, 0x1CB1E0]
   header:
     code:
-      - '#include "assets/overlays/machine_create/machine_create_assets.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(overlays/machine_create/machine_create_assets.h)'
     header:
       - '#include "gfx.h"'
       - '#include "libultra/ultra64.h"'

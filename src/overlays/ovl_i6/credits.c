@@ -4,8 +4,8 @@
 #include "fzx_font.h"
 #include "ovl_i6.h"
 #include "audio.h"
-#include "assets/common_assets_compressed.h"
-#include "assets/setup_gfx.h"
+#include ASSET_HEADER(common_assets_compressed.h)
+#include ASSET_HEADER(setup_gfx.h)
 
 s8 D_i6_8011FAF0[30];
 

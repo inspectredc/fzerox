@@ -7,9 +7,9 @@
     logging: ERROR
     textures: ADDITIONAL_DEFINES
     output:
-      code: src/assets
-      headers: include/assets
-      modding: src/assets
+      code: src/assets/us/rev0
+      headers: include/assets/us/rev0
+      modding: src/assets/us/rev0
 
 a418b0151521b76691fa03f8658c8b567c69498b:
   name: F-ZERO X JP REV 0 (v1.0)
@@ -20,9 +20,9 @@ a418b0151521b76691fa03f8658c8b567c69498b:
     logging: ERROR
     textures: ADDITIONAL_DEFINES
     output:
-      code: src/assets
-      headers: include/assets
-      modding: src/assets
+      code: src/assets/jp/rev0
+      headers: include/assets/jp/rev0
+      modding: src/assets/jp/rev0
 
 03209263d2ee7d621353431f3f8512ab8c1c0150:
   name: F-Zero X Expansion Kit (JP)
@@ -33,7 +33,7 @@ a418b0151521b76691fa03f8658c8b567c69498b:
     logging: ERROR
     textures: ADDITIONAL_DEFINES
     output:
-      code: src/assets
-      headers: include/assets
-      modding: src/assets
+      code: src/assets/jp/ek
+      headers: include/assets/jp/ek
+      modding: src/assets/jp/ek
 

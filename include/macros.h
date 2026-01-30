@@ -33,6 +33,17 @@
 #define PHYS_TO_K1ROM(x) (((u32) (x) | 0xB0000000))
 #define ROM_READ(addr) (*(vu32*) PHYS_TO_K1ROM(addr))
 
+/* 
+ * Macros for asset includes
+ */
+#define ASSET_STR(x) #x
+#define ASSET_STR_HELPER(x) ASSET_STR(x)
+
+#define ASSET_HEADER(x) ASSET_STR_HELPER(assets/ASSET_VERSION/ASSET_REVISION/x)
+#define ASSET_SOURCE(x) ASSET_STR_HELPER(src/assets/ASSET_VERSION/ASSET_REVISION/x)
+#define ASSET_HEADER_EK(x) ASSET_STR_HELPER(assets/ASSET_VERSION/ek/x)
+#define ASSET_SOURCE_EK(x) ASSET_STR_HELPER(src/assets/ASSET_VERSION/ek/x)
+
 /*
  * Macros for libultra
  */

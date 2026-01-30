@@ -23,7 +23,9 @@ def symInfoMain():
     if args.expansion_kit:
         targetPrefix = "fzerox-expansion"
 
-    BUILTMAP = Path(f"build") / (targetPrefix + "." + args.version + ".map")
+    versionSplit = args.version.split(".")
+
+    BUILTMAP = Path("build") / versionSplit[0] / versionSplit[1] / (targetPrefix + "." + args.version + ".map")
 
     mapPath = BUILTMAP
     if args.use_expected:

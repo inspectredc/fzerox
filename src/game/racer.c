@@ -8,11 +8,11 @@
 #include "fzx_save.h"
 #include "fzx_effects.h"
 #include "unk_gfx.h"
-#include "assets/course_track_gfx.h"
-#include "assets/machine_custom_gfx.h"
-#include "assets/hud_gfx.h"
-#include "assets/machine_global_gfx.h"
-#include "assets/machine_models.h"
+#include ASSET_HEADER(course_track_gfx.h)
+#include ASSET_HEADER(machine_custom_gfx.h)
+#include ASSET_HEADER(hud_gfx.h)
+#include ASSET_HEADER(machine_global_gfx.h)
+#include ASSET_HEADER(machine_models.h)
 
 s32 gTotalRacers;
 Racer* sLastRacer;

@@ -1,7 +1,8 @@
 :config:
   header:
     code:
-      - '#include "assets/courses/white_land_3.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(courses/white_land_3.h)'
     header:
       - '#include "fzx_course.h"'
 

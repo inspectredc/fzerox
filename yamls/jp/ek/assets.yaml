@@ -1,7 +1,7 @@
   - name: expansion_kit_textures
     exclusive_ram_id: segment_07
     type: code
-    dir: assets
+    dir: assets/jp/ek
     vram: 0x07000000
     start: 0x1FB850
     subsegments:
@@ -10,7 +10,7 @@
   - name: course_edit_textures
     exclusive_ram_id: segment_09
     type: code
-    dir: assets
+    dir: assets/jp/ek
     vram: 0x09000000
     start: 0x21C170
     subsegments:
@@ -19,7 +19,7 @@
   - name: silence_3
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x230FB0
     subsegments:
@@ -28,7 +28,7 @@
   - name: sand_ocean_3
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x231790
     subsegments:
@@ -37,7 +37,7 @@
   - name: devils_forest_4
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x231F70
     subsegments:
@@ -46,7 +46,7 @@
   - name: port_town_3
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x232750
     subsegments:
@@ -55,7 +55,7 @@
   - name: devils_forest_5
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x232F30
     subsegments:
@@ -64,7 +64,7 @@
   - name: big_blue_3
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x233710
     subsegments:
@@ -73,7 +73,7 @@
   - name: mute_city_4
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x233EF0
     subsegments:
@@ -82,7 +82,7 @@
   - name: space_plant_2
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x2346D0
     subsegments:
@@ -91,7 +91,7 @@
   - name: port_town_4
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x234EB0
     subsegments:
@@ -100,7 +100,7 @@
   - name: fire_field_2
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x235690
     subsegments:
@@ -109,7 +109,7 @@
   - name: white_land_3
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x235E70
     subsegments:
@@ -118,7 +118,7 @@
   - name: big_foot
     exclusive_ram_id: course
     type: code
-    dir: assets/courses
+    dir: assets/jp/ek/courses
     vram: 0x8F123450
     start: 0x236650
     subsegments:
@@ -127,7 +127,7 @@
   - name: silence_3_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x236E30
     subsegments:
@@ -136,7 +136,7 @@
   - name: sand_ocean_3_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x23ADF0
     subsegments:
@@ -145,7 +145,7 @@
   - name: devils_forest_4_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x23EDB0
     subsegments:
@@ -154,7 +154,7 @@
   - name: port_town_3_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x242D70
     subsegments:
@@ -163,7 +163,7 @@
   - name: devils_forest_5_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x246D30
     subsegments:
@@ -172,7 +172,7 @@
   - name: big_blue_3_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x24ACF0
     subsegments:
@@ -181,7 +181,7 @@
   - name: mute_city_4_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x24ECB0
     subsegments:
@@ -190,7 +190,7 @@
   - name: space_plant_2_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x252C70
     subsegments:
@@ -199,7 +199,7 @@
   - name: port_town_4_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x256C30
     subsegments:
@@ -208,7 +208,7 @@
   - name: fire_field_2_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x25ABF0
     subsegments:
@@ -217,7 +217,7 @@
   - name: white_land_3_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x25EBB0
     subsegments:
@@ -226,7 +226,7 @@
   - name: big_foot_staff_ghost
     exclusive_ram_id: course
     type: code
-    dir: assets/ghosts
+    dir: assets/jp/ek/ghosts
     vram: 0x8F123450
     start: 0x262B70
     subsegments:
@@ -235,7 +235,7 @@
   - name: audio_bank_dd
     exclusive_ram_id: course
     type: code
-    dir: assets
+    dir: assets/jp/ek
     vram: 0x8F123450
     start: 0x266B30
     subsegments:
@@ -244,7 +244,7 @@
   - name: audio_seq_dd
     exclusive_ram_id: course
     type: code
-    dir: assets
+    dir: assets/jp/ek
     vram: 0x8F123450
     start: 0x26C520
     subsegments:

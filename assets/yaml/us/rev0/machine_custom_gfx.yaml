@@ -3,7 +3,8 @@
     - [0x03,  0x17B1E0]
   header:
     code:
-      - '#include "assets/machine_custom_gfx.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(machine_custom_gfx.h)'
     header:
       - '#include "gfx.h"'
 

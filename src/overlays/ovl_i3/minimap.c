@@ -2,7 +2,7 @@
 #include "minimap.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
-#include "assets/course_track_gfx.h"
+#include ASSET_HEADER(course_track_gfx.h)
 
 u8 sCourseMinimapTex[0x1000] = { 0 };
 

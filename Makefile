@@ -46,6 +46,8 @@ else
   $(error Unable to detect a suitable MIPS toolchain installed)
 endif
 
+EXPANSION_KIT ?= 0
+
 ifeq ($(EXPANSION_KIT),1)
   VERSION ?= jp
   REV ?= ek
@@ -68,7 +70,7 @@ TARGET               ?= fzerox
 
 ### Output ###
 
-BUILD_DIR := build
+BUILD_DIR := build/$(VERSION)/$(REV)
 TOOLS	  := tools
 PYTHON	  := python3
 ROM	      := $(BUILD_DIR)/$(TARGET)_uncompressed.$(VERSION).$(REV).$(EXT)
@@ -151,21 +153,21 @@ endif
 BUILD_DEFINES ?=
 
 ifeq ($(EXPANSION_KIT),1)
-    BUILD_DEFINES   += -DVERSION_JP=1 -DEXPANSION_KIT -DBUILD_VERSION=VERSION_J
+    BUILD_DEFINES   += -DVERSION_JP=1 -DEXPANSION_KIT -DBUILD_VERSION=VERSION_J -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV_R)
     LEO_VERSION ?= 1
     MFS_VERSION ?= 1
 else
     # Version check
     ifeq ($(VERSION),jp)
-        BUILD_DEFINES   += -DVERSION_JP=1 -DBUILD_VERSION=VERSION_I
+        BUILD_DEFINES   += -DVERSION_JP=1 -DBUILD_VERSION=VERSION_I -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
     endif
 
     ifeq ($(VERSION),us)
-        BUILD_DEFINES   += -DVERSION_US=1 -DBUILD_VERSION=VERSION_I
+        BUILD_DEFINES   += -DVERSION_US=1 -DBUILD_VERSION=VERSION_I -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
     endif
 
     ifeq ($(VERSION),eu)
-        BUILD_DEFINES   += -DVERSION_EU=1 -DBUILD_VERSION=VERSION_I
+        BUILD_DEFINES   += -DVERSION_EU=1 -DBUILD_VERSION=VERSION_I -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
         REV := rev0
     endif
 endif
@@ -321,21 +323,49 @@ endif
 
 $(shell mkdir -p asm bin linker_scripts/$(VERSION)/$(REV)/auto)
 
+# Setup expansion kit file exclusion filters
+
+ifeq ($(EXPANSION_KIT),0)
+EXCLUSION_FILES := \
+src/sys/sys_leo_dd.c \
+src/sys/disk_mount_dd.c \
+src/sys/leo_fault_dd.c \
+src/overlays/expansion_kit/% \
+src/overlays/course_edit/% \
+src/overlays/machine_create/% \
+src/overlays/ead_demo/% \
+src/audio/disk/%
+else
+EXCLUSION_FILES := \
+src/sys/sys_leo.c \
+src/sys/disk_mount.c \
+src/sys/leo_fault.c \
+src/audio/rom/% 
+endif
+
+ifeq ($(MFS_VERSION),0)
+EXCLUSION_FILES += \
+src/leo/mfs/mfs_copy.c \
+src/leo/mfs/mfs_validate.c
+else
+EXCLUSION_FILES += \
+src/leo/mfs/mfs_creation_date.c
+endif
+
 SRC_DIRS      := $(shell find src -type d)
 
 ASM_DIRS      := $(shell find asm/$(VERSION)/$(REV) -type d -not -path "asm/$(VERSION)/$(REV)/nonmatchings/*")
-BIN_DIRS      := $(shell find bin -type d)
-
+BIN_DIRS      := $(shell find bin/$(VERSION)/$(REV) -type d)
 
 C_FILES       := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+
+ALL_ASSET_FILES := $(filter src/assets/%,$(C_FILES))
+EXCLUSION_ASSET_FILES := $(filter-out src/assets/$(VERSION)/$(REV)/%,$(ALL_ASSET_FILES))
+
 C_FILES       := $(filter-out %.inc.c,$(C_FILES))
 C_FILES       := $(filter-out %.incbin.c,$(C_FILES))
-
-ifeq ($(EXPANSION_KIT),0)
-C_FILES := $(filter-out src/audio/disk/%,$(C_FILES))
-else
-C_FILES := $(filter-out src/audio/rom/%,$(C_FILES))
-endif
+C_FILES       := $(filter-out $(EXCLUSION_FILES),$(C_FILES))
+C_FILES       := $(filter-out $(EXCLUSION_ASSET_FILES),$(C_FILES))
 
 S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
 BIN_FILES     := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
@@ -417,6 +447,7 @@ $(BUILD_DIR)/src/libultra/libc/llcvt.o: OPTFLAGS := -O1 -g0
 $(BUILD_DIR)/src/libultra/libc/llcvt.o: MIPS_VERSION := -mips3 -32
 
 $(BUILD_DIR)/src/sys/leo_fault.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/sys/leo_fault_dd.o: OUT_ENCODING := shift-jis
 
 # cc & asm-processor
 CC = $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO) -- $(AS) $(ASFLAGS) --
@@ -528,8 +559,8 @@ clean:
 	@git clean -fdx bin/$(VERSION)/$(REV)
 	@git clean -fdx mio0/$(VERSION)/$(REV) 
 	@git clean -fdx $(BUILD_DIR)/
-	@git clean -fdx src/assets/
-	@git clean -fdx include/assets/
+	@git clean -fdx src/assets/$(VERSION)/$(REV) 
+	@git clean -fdx include/assets/$(VERSION)/$(REV) 
 	@git clean -fdx linker_scripts/$(VERSION)/$(REV)/*.ld
 
 format:
@@ -540,9 +571,9 @@ checkformat:
 
 # asm-differ expected object files
 expected:
-	mkdir -p expected/build
-	rm -rf expected/build/
-	cp -r $(BUILD_DIR)/ expected/build/
+	mkdir -p expected/$(BUILD_DIR)
+	rm -rf expected/$(BUILD_DIR)
+	cp -r $(BUILD_DIR)/ expected/$(BUILD_DIR)
 
 context:
 	@echo "Generating ctx.c ..."

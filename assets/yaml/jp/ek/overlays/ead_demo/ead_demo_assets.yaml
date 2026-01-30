@@ -3,7 +3,8 @@
     [0x800D6D90, 0x1E0B00]
   header:
     code:
-      - '#include "assets/overlays/ead_demo/ead_demo_assets.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(overlays/ead_demo/ead_demo_assets.h)'
     header:
       - '#include "libultra/ultra64.h"'
       - '#include "src/overlays/ead_demo/ead_demo.h"'

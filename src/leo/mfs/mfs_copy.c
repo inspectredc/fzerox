@@ -1,6 +1,5 @@
 #include "leo/mfs.h"
 
-#if MFS_VERSION == MFS_VERSION_B
 void Mfs_GetFATBlockSizeInfo(s32* totalBlocksSizePtr, s32* unusedBlocksSizePtr) {
     s32 i;
     s32 fatId;
@@ -143,4 +142,3 @@ s32 Mfs_CopyFileToDir(s32 entryId, char* name, u16 parentDirId) {
     Mfs_SetDirEntryExtension(gMfsRamArea.directoryEntry[entryId].extension);
     Mfs_CopyDirEntryToRam(nextFreeEntryId);
 }
-#endif

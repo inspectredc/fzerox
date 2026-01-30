@@ -1,6 +1,6 @@
 #include "global.h"
 #include "ead_demo.h"
-#include "assets/overlays/ead_demo/ead_demo_assets.h"
+#include ASSET_HEADER_EK(overlays/ead_demo/ead_demo_assets.h)
 
 f32 sEADDemoSinTable[0x1400];
 f32* sEADDemoCosTable;
@@ -27,7 +27,7 @@ UNUSED Mtx sEADDemoClearMtx = gdSPDefMtx(
 );
 // clang-format on
 
-#include "src/assets/overlays/ead_demo/ead_demo_assets/ead_demo_assets.c"
+#include ASSET_SOURCE_EK(overlays/ead_demo/ead_demo_assets/ead_demo_assets.c)
 
 f32 EADDemo_CalculateSinTableValue(f32 input) {
     s32 i;

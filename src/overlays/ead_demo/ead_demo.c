@@ -1,7 +1,7 @@
 #include "global.h"
 #include "ead_demo.h"
-#include "assets/setup_gfx.h"
-#include "assets/course_track_gfx.h"
+#include ASSET_HEADER(setup_gfx.h)
+#include ASSET_HEADER(course_track_gfx.h)
 #include "src/overlays/ovl_i2/transition.h"
 
 Lights1 D_xk4_800F1A90 = gdSPDefLights1(50, 50, 30, 255, 200, 160, 0, 84, 84);

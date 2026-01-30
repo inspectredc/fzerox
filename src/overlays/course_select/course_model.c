@@ -2,7 +2,7 @@
 #include "course_select.h"
 #include "fzx_game.h"
 #include "fzx_camera.h"
-#include "assets/setup_gfx.h"
+#include ASSET_HEADER(setup_gfx.h)
 
 void func_i5_80115DF0(void) {
     func_i5_801161D8();

@@ -1,7 +1,8 @@
 :config:
   header:
     code:
-      - '#include "assets/overlays/course_select/course_select.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(overlays/course_select/course_select.h)'
     header:
       - '#include "libultra/ultra64.h"'
 

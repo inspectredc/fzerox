@@ -1,7 +1,7 @@
 #include "global.h"
 #include "fzx_machine.h"
-#include "assets/machine_custom_gfx.h"
-#include "assets/machine_global_gfx.h"
+#include ASSET_HEADER(machine_custom_gfx.h)
+#include ASSET_HEADER(machine_global_gfx.h)
 
 s32 D_i9_80168CD0; // some unused bss exists in the file
 

@@ -45,7 +45,9 @@ def firstDiffMain():
 
     args = parser.parse_args()
 
-    buildFolder = Path("build")
+    versionSplit = args.version.split(".")
+
+    buildFolder = Path("build") / versionSplit[0] / versionSplit[1]
 
     targetPrefix = "fzerox"
     extension = ".z64"

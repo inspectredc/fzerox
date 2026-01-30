@@ -3,7 +3,8 @@
     - [0x0A,  0x239A80]
   header:
     code:
-      - '#include "assets/port_town_textures.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(port_town_textures.h)'
     header:
       - '#include "gfx.h"'
 

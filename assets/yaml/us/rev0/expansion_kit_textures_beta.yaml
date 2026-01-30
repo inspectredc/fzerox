@@ -3,7 +3,8 @@
     - [0x07,  0x145B70]
   header:
     code:
-      - '#include "assets/expansion_kit_textures_beta.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(expansion_kit_textures_beta.h)'
     header:
       - '#include "gfx.h"'
 

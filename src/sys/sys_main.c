@@ -55,7 +55,7 @@ OSPiHandle* gCartRomHandle;
 OSPiHandle* gDriveRomHandle;
 
 #ifdef EXPANSION_KIT
-#include "src/assets/boot_logo/boot_logo.c"
+#include ASSET_SOURCE_EK(boot_logo/boot_logo.c)
 #endif
 
 void Idle_ThreadEntry(void*);

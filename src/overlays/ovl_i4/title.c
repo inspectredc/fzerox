@@ -3,7 +3,7 @@
 #include "fzx_object.h"
 #include "fzx_course.h"
 #include "ovl_i4.h"
-#include "assets/common_assets_compressed.h"
+#include ASSET_HEADER(common_assets_compressed.h)
 
 s32 D_i4_8011D790;
 s32 D_i4_8011D794;

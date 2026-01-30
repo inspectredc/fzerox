@@ -1,6 +1,5 @@
 #include "leo/mfs.h"
 
-#if MFS_VERSION == MFS_VERSION_A
 s32 Mfs_UpdateEntryCreationDate(u16 entryId, MfsTimeFormat* creationDate) {
     bcopy(creationDate, &gMfsRamArea.directoryEntry[entryId].creationDate, sizeof(MfsTimeFormat));
     //! @bug bad return (return value is used)
@@ -58,4 +57,3 @@ s32 Mfs_CheckAndUpdateEntryCreationDate(u16 entryId, MfsTimeFormat* creationDate
     }
     return 0;
 }
-#endif

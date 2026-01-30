@@ -4,8 +4,8 @@
 #include "fzx_course.h"
 #include "fzx_camera.h"
 #include "background.h"
-#include "assets/common_assets_compressed.h"
-#include "assets/machine_custom_gfx.h"
+#include ASSET_HEADER(common_assets_compressed.h)
+#include ASSET_HEADER(machine_custom_gfx.h)
 
 Background sBackgrounds[4];
 s32 sBackgroundCount;

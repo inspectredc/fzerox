@@ -1,7 +1,7 @@
 #include "global.h"
 #include "audio.h"
 #include "fzx_camera.h"
-#include "assets/course_track_gfx.h"
+#include ASSET_HEADER(course_track_gfx.h)
 
 f32 gSinTable[0x1000];
 Mtx sDefaultMtx;
