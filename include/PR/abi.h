@@ -16,7 +16,9 @@
 #define A_LOADADPCM     11
 #define A_MIXER         12
 #define A_INTERLEAVE    13
-// #define A_HILOGAIN      14
+#ifdef EXPANSION_KIT
+#define A_HILOGAIN      14
+#endif
 #define A_SETLOOP       15
 #define A_INTERL        17
 #define A_ENVSETUP1     18
@@ -25,7 +27,9 @@
 #define A_SAVEBUFF      21
 #define A_ENVSETUP2     22
 #define A_S8DEC         23
+#ifndef EXPANSION_KIT
 #define A_HILOGAIN      24
+#endif
 #define A_UNK19         25
 #define A_DUPLICATE     26
 
@@ -311,6 +315,7 @@ typedef short ENVMIX_STATE[40];
         _a->words.w1 = (uintptr_t)(size);                                  \
     }
 
+#ifndef EXPANSION_KIT
 #define aEnvMixer(pkt, dmemi, count, swapLR, x0, x1, x2, x3, m)  \
 {                                                                      \
         Acmd *_a = (Acmd *)pkt;                                        \
@@ -321,6 +326,18 @@ typedef short ENVMIX_STATE[40];
                         _SHIFTL(x2, 1, 1) | _SHIFTL(x3, 0, 1));        \
         _a->words.w1 = (u32)(m);                                       \
 }
+#else
+#define aEnvMixer(pkt, dmemi, count, swapLR, x0, x1, x2, x3, m, bits)  \
+{                                                                      \
+        Acmd *_a = (Acmd *)pkt;                                        \
+                                                                       \
+        _a->words.w0 = (bits | _SHIFTL(dmemi >> 4, 16, 8) |            \
+                        _SHIFTL(count, 8, 8) | _SHIFTL(swapLR, 4, 1) | \
+                        _SHIFTL(x0, 3, 1) | _SHIFTL(x1, 2, 1) |        \
+                        _SHIFTL(x2, 1, 1) | _SHIFTL(x3, 0, 1));        \
+        _a->words.w1 = (u32)(m);                                       \
+}
+#endif
 
 #define aInterleave(pkt, o, l, r, c)                                 \
 {                                                                    \

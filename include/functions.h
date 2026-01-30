@@ -237,10 +237,15 @@ void func_800A4DF0(void);
 void mio0Decode(u8*, void*);
 s32 func_800AA6BC(u8*);
 
+#ifndef EXPANSION_KIT
+void Audio_Init(void);
+#else
+void Audio_Init(RomOffset audioSequenceStart, RomOffset audioBankStart, RomOffset audioTableStart);
+#endif
+
 void AudioThread_InitMesgQueues(void);
 void Audio_Update(void);
 void Audio_PreNMI(void);
-void Audio_Init(void);
 void Audio_SetOutMode(u8 soundMode);
 void Audio_PlayerFinished(u8 playerIndex);
 void Audio_SetEnemyEnginePan(u8 pan);

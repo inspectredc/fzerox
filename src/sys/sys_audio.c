@@ -6,16 +6,21 @@
 extern OSMesgQueue gAudioTaskMesgQueue;
 extern OSMesgQueue gMainThreadMesgQueue;
 extern OSTask* gCurAudioOSTask;
+extern RomOffset gRomSegmentPairs[][2];
 
 OSMesg sAudioTaskMsg;
 
 void Audio_ThreadEntry(void* arg0) {
     static AudioTask* sCurAudioTask = NULL;
+#ifndef EXPANSION_KIT
     Audio_Init();
+#else
+    Audio_Init(gRomSegmentPairs[2][0], gRomSegmentPairs[0][0], gRomSegmentPairs[1][0]);
+#endif
 
     while (true) {
-        MQ_GET_MESG(&gAudioTaskMesgQueue, &sAudioTaskMsg);
-        MQ_WAIT_FOR_MESG(&gAudioTaskMesgQueue, &sAudioTaskMsg);
+        osRecvMesg(&gAudioTaskMesgQueue, &sAudioTaskMsg, OS_MESG_NOBLOCK);
+        osRecvMesg(&gAudioTaskMesgQueue, &sAudioTaskMsg, OS_MESG_BLOCK);
         if (sCurAudioTask != NULL) {
             gCurAudioOSTask = &sCurAudioTask->task;
             osSendMesg(&gMainThreadMesgQueue, (OSMesg) EVENT_MESG_AUDIO_TASK_SET, OS_MESG_BLOCK);

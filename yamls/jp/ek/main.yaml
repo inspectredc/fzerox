@@ -104,16 +104,16 @@
       - [0x1F320, asm, game/camera]
       - [0x27110, asm, game/racer]
       - [0x3BBB0, hasm, game/mio0Decode]
-      - [0x3BC60, asm, audio/disk/lib/synthesis]
-      - [0x3E700, asm, audio/disk/lib/heap]
+      - [0x3BC60, c, audio/disk/lib/synthesis]
+      - [0x3E700, c, audio/disk/lib/heap]
       - [0x41AD0, pad]
-      - [0x41AE0, asm, audio/disk/lib/load]
-      - [0x467A0, asm, audio/disk/lib/thread]
-      - [0x48020, asm, audio/disk/lib/os]
-      - [0x48120, asm, audio/disk/lib/playback]
-      - [0x49EC0, asm, audio/disk/lib/effects]
-      - [0x4A920, asm, audio/disk/lib/seqplayer]
-      - [0x4DF40, asm, audio/disk/external]
+      - [0x41AE0, c, audio/disk/lib/load]
+      - [0x467A0, c, audio/disk/lib/thread]
+      - [0x48020, c, audio/disk/lib/os]
+      - [0x48120, c, audio/disk/lib/playback]
+      - [0x49EC0, c, audio/disk/lib/effects]
+      - [0x4A920, c, audio/disk/lib/seqplayer]
+      - [0x4DF40, c, audio/disk/external]
       - [0x535E0, hasm, libultra/os/setcause]
       - [0x535F0, c, libultra/os/sendmesg]
       - [0x53740, c, libultra/os/stopthread]
@@ -324,16 +324,16 @@
       - [0x7AEC0, data, game/camera]
       - [0x7B0C0, data, game/racer]
       - [0x7CB20, data, unk_tables]
-      - [0x7DB20, data, audio/disk/lib/filter_data]
-      - [0x7DD10, data, audio/disk/lib/note_data]
-      - [0x7F130, data, audio/disk/lib/synthesis]
-      - [0x7F160, data, audio/disk/lib/load]
-      - [0x7F230, data, audio/disk/lib/thread]
-      - [0x7F250, data, audio/disk/lib/os]
-      - [0x7F260, data, audio/disk/lib/effects]
-      - [0x7F270, data, audio/disk/lib/seqplayer]
-      - [0x7F2C0, data, audio/disk/external]
-      - [0x7F570, data, audio/disk/lib/audio_context]
+      - [0x7DB20, .data, audio/disk/lib/filter_data]
+      - [0x7DD10, .data, audio/disk/lib/note_data]
+      - [0x7F130, .data, audio/disk/lib/synthesis]
+      - [0x7F160, .data, audio/disk/lib/load]
+      - [0x7F230, .data, audio/disk/lib/thread]
+      - [0x7F250, .data, audio/disk/lib/os]
+      - [0x7F260, .data, audio/disk/lib/effects]
+      - [0x7F270, .data, audio/disk/lib/seqplayer]
+      - [0x7F2C0, .data, audio/disk/external]
+      - [0x7F570, .data, audio/disk/lib/audio_context]
 
       - [0x7F5E0, data, libultra/os/exceptasm]
       - [0x7F610, .data, libultra/os/thread]
@@ -427,15 +427,15 @@
       - [0x83BB0, rodata, game/bordered_box]
       - [0x83BD0, rodata, game/camera]
       - [0x846F0, rodata, game/racer]
-      - [0x84970, rodata, audio/disk/lib/synthesis]
-      - [0x84990, rodata, audio/disk/lib/heap]
-      - [0x849C0, rodata, audio/disk/lib/load]
-      - [0x84A60, rodata, audio/disk/lib/thread]
-      - [0x84B90, rodata, audio/disk/lib/playback]
-      - [0x84BB0, rodata, audio/disk/lib/effects]
-      - [0x84BE0, rodata, audio/disk/lib/seqplayer]
-      - [0x85220, rodata, audio/disk/external]
-      - [0x86DF0, data, audio/disk/lib/init_data]
+      - [0x84970, .rodata, audio/disk/lib/synthesis]
+      - [0x84990, .rodata, audio/disk/lib/heap]
+      - [0x849C0, .rodata, audio/disk/lib/load]
+      - [0x84A60, .rodata, audio/disk/lib/thread]
+      - [0x84B90, .rodata, audio/disk/lib/playback]
+      - [0x84BB0, .rodata, audio/disk/lib/effects]
+      - [0x84BE0, .rodata, audio/disk/lib/seqplayer]
+      - [0x85220, .rodata, audio/disk/external]
+      - [0x86DF0, .data, audio/disk/lib/init_data]
       - [0x86E00, rodata, libultra/libc/setintmask]
       - [0x86EA0, rodata, libultra/os/exceptasm]
       - [0x86ED0, .rodata, libultra/libc/llcvt]
@@ -472,7 +472,7 @@
       - [0xA2610, data, sys/75000]
       - [0xA2630, rodata, sys/75000]
       - [0xA2690, data, aspmain]
-      - [0xA2970, data, audio/disk/audio_tables]
+      - [0xA2970, .data, audio/disk/audio_tables]
       - { type: .bss, vram: 0x80795670, name: sys/sys_main }
       - { type: bss, vram: 0x8079A350, name: sys/sys_gfx }
       - { type: bss, vram: 0x8079A4A0, name: sys/sys_audio }
@@ -491,8 +491,8 @@
       - { type: bss, vram: 0x807A15D0, name: game/racer }
       - { type: bss, vram: 0x807B3C20, name: game/course_gadget_context }
       - { type: bss, vram: 0x807C1870, name: 807C1870 } # pad
-      - { type: bss, vram: 0x807C1890, name: audio/disk/lib/load }
-      - { type: bss, vram: 0x807C1BE0, name: audio/disk/external }
+      - { type: .bss, vram: 0x807C1890, name: audio/disk/lib/load }
+      - { type: .bss, vram: 0x807C1BE0, name: audio/disk/external }
       - { type: bss, vram: 0x807C1BF0, name: 807C1BF0 } # pad
       - { type: .bss, vram: 0x807C1C00, name: libultra/io/sptask }
       - { type: .bss, vram: 0x807C1C40, name: libultra/io/motor }

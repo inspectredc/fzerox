@@ -1226,7 +1226,7 @@ s32 Audio_SetFontInstrument(s32 instrumentType, s32 fontId, s32 index, void* val
 
 AudioTask* AudioThread_CreateTask(void);
 void AudioThread_QueueCmdF32(s32 opArgs, f32 data);
-void AudioThread_QueueCmdS32(s32 opArgs, s32 data);
+void AudioThread_QueueCmdU32(s32 opArgs, s32 data);
 void AudioThread_QueueCmdS8(s32 opArgs, s8 data);
 void AudioThread_QueueCmdU16(s32 opArgs, u16 data);
 void AudioThread_ProcessSeqPlayerCmd(SequencePlayer* seqPlayer, AudioCmd* cmd);
