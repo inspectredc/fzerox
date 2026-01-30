@@ -169,6 +169,7 @@ u16 leoLba_to_phys(u32 lba);
 u8 leoRead_system_area(void);
 u8 leoWait_mecha_cmd_done(u32 asic_cmd);
 u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data);
+u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data);
 u32 leoChk_err_retry(u32 sense);
 u8 leoChk_cur_drvmode(void);
 void leoDrive_reset(void);

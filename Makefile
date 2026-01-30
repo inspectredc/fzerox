@@ -376,13 +376,33 @@ $(BUILD_DIR)/src/libultra/io/pfschecker.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/io/leodiskinit.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/io/viswapcontext.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/io/motor.o: OPTFLAGS := -O2 -g0
+ifeq ($(EXPANSION_KIT),1)
+$(BUILD_DIR)/src/libultra/io/devmgr.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/pirawdma.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/sirawread.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/sirawwrite.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/sprawdma.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/epirawdma.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/epirawread.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/epirawwrite.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/epiread.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/epiwrite.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/cartrominit.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/visetspecial.o: OPTFLAGS := -O2 -g0
+endif
 
 $(BUILD_DIR)/src/libultra/os/%.o: OPTFLAGS := -O1 -g0
 
 # libleo
+ifeq ($(EXPANSION_KIT),0)
 $(BUILD_DIR)/src/leo/lib%.o: OPTFLAGS := -g
 $(BUILD_DIR)/src/leo/mfs%.o: OPTFLAGS := -g
 $(BUILD_DIR)/src/leo/721B0.o: OPTFLAGS := -g
+else
+$(BUILD_DIR)/src/leo/mfs/%.o: OPTFLAGS := -g
+$(BUILD_DIR)/src/leo/lib/%.o: OPTFLAGS := -O2 -g0
+endif
 
 # per-file flags
 $(BUILD_DIR)/src/libultra/libc/ldiv.o: OPTFLAGS := -O2 -g0

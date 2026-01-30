@@ -1,10 +1,20 @@
 #include "PR/leo.h"
 #include "PR/os_internal.h"
+#include "PR/osint.h"
 #include "leo/leo_internal.h"
 #include "libc/stdint.h"
+#include "libc/stdbool.h"
 
 void __LeoBootGame2(void* entry);
 void __LeoBootGame3(void* entry);
+
+#ifdef EXPANSION_KIT
+#define LEO_BOOT_GAME_2_SIZE 0x344
+#define LEO_BOOT_GAME_3_SIZE 0x50
+#else
+#define LEO_BOOT_GAME_2_SIZE 0x324
+#define LEO_BOOT_GAME_3_SIZE 0x60
+#endif
 
 void LeoBootGame(void* entry) {
     u8* ptr;
@@ -17,23 +27,23 @@ void LeoBootGame(void* entry) {
     key = ((((uintptr_t) ptr & 0xFF000000) >> 0x18) + (((uintptr_t) ptr & 0x00FF0000) >> 0x10) +
            (((uintptr_t) ptr & 0x0000FF00) >> 0x08) + (((uintptr_t) ptr & 0x000000FF))) &
           0xFF;
-    for (i = 0; i < 0x324; i += 4) {
+    for (i = 0; i < LEO_BOOT_GAME_2_SIZE; i += 4) {
         ptr[2] -= key;
         ptr[3] += key;
         ptr += 4;
     }
     osWritebackDCacheAll();
-    osInvalICache(__LeoBootGame2, 0x324);
+    osInvalICache(__LeoBootGame2, LEO_BOOT_GAME_2_SIZE);
 
     // Descramble __LeoBootGame3
     ptr = (u8*) &__LeoBootGame3;
-    for (i = 0; i < 0x60; i += 4) {
+    for (i = 0; i < LEO_BOOT_GAME_3_SIZE; i += 4) {
         ptr[2] -= key;
         ptr[3] += key;
         ptr += 4;
     }
     osWritebackDCacheAll();
-    osInvalICache(__LeoBootGame3, 0x60);
+    osInvalICache(__LeoBootGame3, LEO_BOOT_GAME_3_SIZE);
 
     __LeoBootGame2(entry);
 }
@@ -44,6 +54,7 @@ void LeoBootGame(void* entry) {
 
 // This MUST be scrambled by the build process or they will not be executable
 // at runtime when descrambled.
+//! @bug EXPANSION_KIT: This function and _LeoBootGame3 are supposed to be encrypted after compile time, but they are not
 void __LeoBootGame2(void* entry) {
     u8* entry2 = (u8*) entry;
     u32 i;
@@ -55,6 +66,12 @@ void __LeoBootGame2(void* entry) {
     bzero(LeoBootGame, 0x13C);
     osWritebackDCache(LeoBootGame, 0x13C);
     __osSetSR(SR_CU1 | SR_CU0);
+
+#ifdef EXPANSION_KIT
+    if (__osShutdown != 0) {
+        while (true) {}
+    }
+#endif
 
     *(u8*) 0xA0000010 = (u32) (LEO_country_code & 0xFF000000) >> 0x18;
 
@@ -115,7 +132,7 @@ void __LeoBootGame2(void* entry) {
     for (i = 0; i < 0x100; i++) {
         *var_v0++ = 0;
     }
-    bzero(__LeoBootGame2, 0x2E4);
-    osWritebackDCache(__LeoBootGame2, 0x2E4);
+    bzero(__LeoBootGame2, LEO_BOOT_GAME_2_SIZE - 0x40);
+    osWritebackDCache(__LeoBootGame2, LEO_BOOT_GAME_2_SIZE - 0x40);
     __LeoBootGame3(entry2);
 }

@@ -110,7 +110,9 @@ void LeoReset(void) {
     __leoResetCalled = true;
     if (__leoQueuesCreated) {
 #endif
+#if LEO_VERSION == LEO_VERSION_A
         osRecvMesg(&LEOblock_que, NULL, OS_MESG_BLOCK);
+#endif
         LEOclr_que_flag = -1;
         leoClr_queue();
         LEOclr_que_flag = 0;

@@ -330,7 +330,7 @@ s32 Mfs_WriteLBA(u32 startLBA, u8* buf, u32 nLBAs) {
     if (!((uintptr_t) buf & 0xF)) {
 #if MFS_VERSION == MFS_VERSION_B
         LeoLBAToByte(startLBA, nLBAs, &bufSize);
-        osInvalDCache(buf, bufSize);
+        osWritebackDCache(buf, bufSize);
         D_80794CD8 = 3;
 #endif
         if (gLeoReadWriteFunc(&cmdBlock, OS_WRITE, startLBA, buf, nLBAs, &D_i1_8042A5E8) < 0) {
@@ -344,7 +344,7 @@ s32 Mfs_WriteLBA(u32 startLBA, u8* buf, u32 nLBAs) {
     } else {
 #if MFS_VERSION == MFS_VERSION_B
         LeoLBAToByte(startLBA, nLBAs, &bufSize);
-        osInvalDCache(buf, bufSize);
+        osWritebackDCache(buf, bufSize);
 #endif
         for (i = 0; i < nLBAs; i++) {
             LeoLBAToByte(startLBA + i, 1, &bufSize);
@@ -407,8 +407,12 @@ s32 mfsStrnCmp(u8* b1, u8* b2, size_t length) {
     if ((*p1 == 0) && (*p2 == 0)) {
         return 0;
     }
-
+    
+#if MFS_VERSION == MFS_VERSION_A
     return -1;
+#else
+    return (*p1 != 0) ? 1 : -1;
+#endif
 }
 
 s32 mfsStrLen(u8* str) {
