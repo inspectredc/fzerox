@@ -20,7 +20,7 @@ void func_80077D44(void) {
 
 extern uintptr_t gArenaStartPtrs[];
 
-u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
+u8* func_80077D50_impl(unk_80077D50* arg0, s32 arg1, bool arg2) {
     bool var_a0;
     bool var_s7;
     s32 var_s0;
@@ -369,7 +369,8 @@ Gfx* func_80078DB4(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, TexturePtr t
     }
 }
 
-Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8) {
+Gfx* func_80078EA0_impl(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7,
+                        f32 arg8, bool arg9) {
     TexturePtr texture;
 
     while (arg1->unk_04 != 0) {
@@ -385,7 +386,8 @@ Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s3
     return gfx;
 }
 
-Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8) {
+Gfx* func_80078F80_impl(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7,
+                        f32 arg8, bool arg9) {
     TexturePtr texture;
     unk_80077D50* var_s0;
     s32 var;
@@ -506,11 +508,11 @@ s32 func_800792D8(unk_800792D8* arg0) {
     D_800E3F28[i].unk_08 = -0x8000;
 
     if (arg0[0].unk_00 != NULL) {
-        D_800E3F28[i].unk_0C = func_80077D50(arg0[0].unk_00, 1);
+        D_800E3F28[i].unk_0C = func_80077D50_impl(arg0[0].unk_00, 1, true);
     }
 
-    D_800E3F28[i].unk_10 =
-        (arg0[1].unk_00 != NULL) ? func_80077D50(arg0[1].unk_00, 1) : func_80077D50(arg0[0].unk_00, 1);
+    D_800E3F28[i].unk_10 = (arg0[1].unk_00 != NULL) ? func_80077D50_impl(arg0[1].unk_00, 1, true)
+                                                    : func_80077D50_impl(arg0[0].unk_00, 1, true);
     D_800E3F28[i].unk_0A = 0;
     return i;
 }

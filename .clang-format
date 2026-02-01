@@ -21,3 +21,8 @@ AllowShortFunctionsOnASingleLine: false
 AlignEscapedNewlines: Left
 AlignTrailingComments: true
 SortIncludes: false
+WhitespaceSensitiveMacros: 
+  - ASSET_HEADER
+  - ASSET_SOURCE
+  - ASSET_HEADER_EK
+  - ASSET_SOURCE_EK

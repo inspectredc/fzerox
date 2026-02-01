@@ -2047,11 +2047,13 @@ Gfx* Font_DrawString(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing
             fontChar = Font_GetCharIndex(str, FONT_SET_UPPERCASE_ONLY);
         }
         if (fontChar >= 0) {
-            func_80077D50(fontCharTexInfos[fontChar], 0);
+            func_80077D50_impl(fontCharTexInfos[fontChar], 0, true);
             if (arg6 == 1) {
-                gfx = func_80078EA0(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 1, 0, 0, 1.0f, 1.0f);
+                gfx = func_80078EA0_impl(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 1, 0, 0, 1.0f, 1.0f,
+                                         true);
             } else {
-                gfx = func_80078EA0(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 0, 0, 0, 1.0f, 1.0f);
+                gfx = func_80078EA0_impl(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 0, 0, 0, 1.0f, 1.0f,
+                                         true);
             }
 
             strWidth += fontCharWidths[fontChar] + additionalSpacing;
@@ -2130,13 +2132,13 @@ Gfx* Font_DrawScaledString(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalS
             fontChar = Font_GetCharIndex(str, FONT_SET_UPPERCASE_ONLY);
         }
         if (fontChar >= 0) {
-            func_80077D50(fontCharTexInfos[fontChar], 0);
+            func_80077D50_impl(fontCharTexInfos[fontChar], 0, true);
             if (arg6 == 1) {
-                gfx = func_80078EA0(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)), top, 4, 0, 0,
-                                    scaleX, scaleY);
+                gfx = func_80078EA0_impl(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)), top, 4, 0,
+                                         0, scaleX, scaleY, true);
             } else {
-                gfx = func_80078EA0(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)), top, 3, 0, 0,
-                                    scaleX, scaleY);
+                gfx = func_80078EA0_impl(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)), top, 3, 0,
+                                         0, scaleX, scaleY, true);
             }
 
             strWidth += fontCharWidths[fontChar] + additionalSpacing;
@@ -2166,8 +2168,8 @@ Gfx* Font_DrawMachineStatValue(Gfx* gfx, s32 left, s32 top, s32 statValue) {
         return gfx;
     }
 
-    func_80077D50(sMachineStatValueCompTexInfos[statValue], 0);
-    return func_80078EA0(gfx, sMachineStatValueCompTexInfos[statValue], left, top, 0, 0, 0, 1.0f, 1.0f);
+    func_80077D50_impl(sMachineStatValueCompTexInfos[statValue], 0, true);
+    return func_80078EA0_impl(gfx, sMachineStatValueCompTexInfos[statValue], left, top, 0, 0, 0, 1.0f, 1.0f, true);
 }
 
 Gfx* Font_DrawMachineStatValueSmall(Gfx* gfx, s32 left, s32 top, s32 statValue) {
@@ -2176,8 +2178,8 @@ Gfx* Font_DrawMachineStatValueSmall(Gfx* gfx, s32 left, s32 top, s32 statValue) 
         return gfx;
     }
 
-    func_80077D50(sMachineStatValueCompTexInfos[statValue], 0);
-    return func_80078EA0(gfx, sMachineStatValueCompTexInfos[statValue], left, top, 3, 0, 0, 0.5f, 0.5f);
+    func_80077D50_impl(sMachineStatValueCompTexInfos[statValue], 0, true);
+    return func_80078EA0_impl(gfx, sMachineStatValueCompTexInfos[statValue], left, top, 3, 0, 0, 0.5f, 0.5f, true);
 }
 
 Gfx* Font_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight) {
@@ -2188,8 +2190,9 @@ Gfx* Font_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight) {
     do {
         digit = weight % 10;
         width -= kMachineWeightDigitWidths[digit];
-        func_80077D50(sMachineWeightDigitCompTexInfos[digit], 0);
-        gfx = func_80078EA0(gfx, sMachineWeightDigitCompTexInfos[digit], left + width, top - 16, 0, 0, 0, 1.0f, 1.0f);
+        func_80077D50_impl(sMachineWeightDigitCompTexInfos[digit], 0, true);
+        gfx = func_80078EA0_impl(gfx, sMachineWeightDigitCompTexInfos[digit], left + width, top - 16, 0, 0, 0, 1.0f,
+                                 1.0f, true);
         weight /= 10;
     } while (weight != 0);
 
@@ -2205,9 +2208,9 @@ Gfx* Font_DrawMachineWeightSmall(Gfx* gfx, s32 left, s32 top, u32 weight) {
     do {
         digit = weight % 10;
         width -= kMachineWeightDigitWidths[digit] * scale + 1.0f;
-        func_80077D50(sMachineWeightDigitCompTexInfos[digit], 0);
-        gfx = func_80078EA0(gfx, sMachineWeightDigitCompTexInfos[digit], left + width, top - (16.0f * scale), 3, 0, 0,
-                            scale, scale);
+        func_80077D50_impl(sMachineWeightDigitCompTexInfos[digit], 0, true);
+        gfx = func_80078EA0_impl(gfx, sMachineWeightDigitCompTexInfos[digit], left + width, top - (16.0f * scale), 3, 0,
+                                 0, scale, scale, true);
         weight /= 10;
     } while (weight != 0);
 

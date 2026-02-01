@@ -558,8 +558,6 @@ s32 Save_Init(SaveContext* saveContext, s32 arg1) {
     return 0;
 }
 
-void Save_InitCourseRecord(SaveCourseRecords*, bool);
-
 s32 func_i2_801017B8(s32 courseIndex) {
     u16 checksum;
     s32 i;

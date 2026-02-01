@@ -489,7 +489,7 @@
       - { type: bss, vram: 0x807A0870, name: game/bordered_box }
       - { type: bss, vram: 0x807A0930, name: game/camera }
       - { type: bss, vram: 0x807A15D0, name: game/racer }
-      - { type: bss, vram: 0x807B3C20, name: game/course_gadget_context }
+      - { type: .bss, vram: 0x807B3C20, name: game/course_gadget_context }
       - { type: bss, vram: 0x807C1870, name: 807C1870 } # pad
       - { type: .bss, vram: 0x807C1890, name: audio/disk/lib/load }
       - { type: .bss, vram: 0x807C1BE0, name: audio/disk/external }

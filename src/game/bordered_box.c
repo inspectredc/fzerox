@@ -23,8 +23,13 @@ void BorderedBox_ClearAll(void) {
     }
 }
 
+#ifndef EXPANSION_KIT
 BorderedBoxWidget* BorderedBox_Init(s16 id, s16 left, s16 top, s16 width, s16 height, u16 borderColor,
                                     BorderedBoxContentsDrawFunc contentsDrawFunc) {
+#else
+BorderedBoxWidget* BorderedBox_Init(s16 id, s16 left, s16 top, s16 width, s16 height, u16 depth, u16 borderColor,
+                                    BorderedBoxContentsDrawFunc contentsDrawFunc) {
+#endif
     s32 i;
     BorderedBoxWidget* box;
     s64 state = BORDERED_BOX_OPEN_WIDTH;

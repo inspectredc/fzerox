@@ -287,7 +287,7 @@ const s8 kMachineSelectCharacterList[] = { CAPTAIN_FALCON,
                                            THE_SKULL,
                                            30 };
 
-s8 Character_GetCharacterFromSlot(s32 characterSlot) {
+s32 Character_GetCharacterFromSlot(s32 characterSlot) {
     return kMachineSelectCharacterList[characterSlot];
 }
 

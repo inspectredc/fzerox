@@ -344,6 +344,7 @@ src/sys/disk_mount.c \
 src/sys/leo_fault.c \
 src/sys/leo_presence.c \
 src/sys/sys_leo.c \
+src/overlays/ovl_i11/% \
 src/audio/rom/% 
 endif
 
@@ -452,6 +453,9 @@ $(BUILD_DIR)/src/libultra/libc/llcvt.o: MIPS_VERSION := -mips3 -32
 
 $(BUILD_DIR)/src/sys/leo_fault.o: OUT_ENCODING := shift-jis
 $(BUILD_DIR)/src/sys/leo_fault_dd.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/overlays/expansion_kit/expansion_kit_disk_data.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/overlays/expansion_kit/expansion_kit_text.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/overlays/machine_create/machine_create_text.o: OUT_ENCODING := shift-jis
 
 # cc & asm-processor
 CC = $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO) -- $(AS) $(ASFLAGS) --

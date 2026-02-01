@@ -244,21 +244,22 @@ void Fault_DisplayDebugInfo(OSThread* thread) {
 
 #ifdef EXPANSION_KIT
     for (sIdleThreadCounter = 0; ((u64*) sIdleThreadStack)[sIdleThreadCounter] == 0x8877665544332211;
-        sIdleThreadCounter++) {}
+         sIdleThreadCounter++) {}
 
     for (sMainThreadCounter = 0; ((u64*) sMainThreadStack)[sMainThreadCounter] == 0x8877665544332211;
-        sMainThreadCounter++) {}
+         sMainThreadCounter++) {}
 
     for (sGameThreadCounter = 0; ((u64*) sGameThreadStack)[sGameThreadCounter] == 0x8877665544332211;
-        sGameThreadCounter++) {}
+         sGameThreadCounter++) {}
 
     for (sAudioThreadCounter = 0; ((u64*) sAudioThreadStack)[sAudioThreadCounter] == 0x8877665544332211;
-        sAudioThreadCounter++) {}
+         sAudioThreadCounter++) {}
 
-    for (sSys6ThreadCounter = 0; ((u64*) sSys6ThreadStack)[sSys6ThreadCounter] == 0x8877665544332211; sSys6ThreadCounter++) {}
+    for (sSys6ThreadCounter = 0; ((u64*) sSys6ThreadStack)[sSys6ThreadCounter] == 0x8877665544332211;
+         sSys6ThreadCounter++) {}
 
     Fault_Printf(120, 220, "I%dT%dG%dA%dD%d", sIdleThreadCounter, sMainThreadCounter, sGameThreadCounter,
-                sAudioThreadCounter, sSys6ThreadCounter);
+                 sAudioThreadCounter, sSys6ThreadCounter);
 #endif
 
     osViBlack(false);
@@ -381,7 +382,8 @@ void Fault_DisplayDebugInfo2(OSThread* thread) {
     for (sAudioThreadCounter = 0; ((u64*) sAudioThreadStack)[sAudioThreadCounter] == 0x8877665544332211;
          sAudioThreadCounter++) {}
 
-    for (sSys6ThreadCounter = 0; ((u64*) sSys6ThreadStack)[sSys6ThreadCounter] == 0x8877665544332211; sSys6ThreadCounter++) {}
+    for (sSys6ThreadCounter = 0; ((u64*) sSys6ThreadStack)[sSys6ThreadCounter] == 0x8877665544332211;
+         sSys6ThreadCounter++) {}
 
     Fault_Printf(120, 220, "I%dT%dG%dA%dD%d", sIdleThreadCounter, sMainThreadCounter, sGameThreadCounter,
                  sAudioThreadCounter, sSys6ThreadCounter);

@@ -115,11 +115,24 @@ void Segment_LoadOverlays(void);
 void Segment_LoadAssets(void);
 
 void func_80077CF0(s32 segAddr, size_t size, u8* startAddr);
-u8* func_80077D50(unk_80077D50* arg0, s32 arg1);
+
+#ifndef EXPANSION_KIT
+#define func_80077D50_impl(arg0, arg1, arg2) func_80077D50(arg0, arg1)
+#define func_80078EA0_impl(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9) func_80078EA0(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8)
+#define func_80078F80_impl(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9) func_80078F80(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8)
+#else
+#define func_80077D50_impl(arg0, arg1, arg2) func_80077D50(arg0, arg1, arg2)
+#define func_80078EA0_impl(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9) func_80078EA0(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9)
+#define func_80078F80_impl(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9) func_80078F80(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9)
+#endif
+u8* func_80077D50_impl(unk_80077D50* arg0, s32 arg1, bool arg2);
+Gfx* func_80078EA0_impl(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8, bool arg9);
+Gfx* func_80078F80_impl(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8, bool arg9);
+
 void* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4);
 TexturePtr func_800783AC(void* arg0);
-Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
-Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8);
+
+
 void func_800790D4(void);
 s32 func_800792D8(unk_800792D8* arg0);
 void func_800793E8(s32 arg0, s32 arg1, unk_800792D8* arg2);
@@ -156,7 +169,7 @@ void func_8007E08C(void);
 void func_8007E0AC(s32 bgm);
 void func_8007E0CC(void);
 void func_8007E0EC(void);
-s8 Character_GetCharacterFromSlot(s32 characterSlot);
+s32 Character_GetCharacterFromSlot(s32 characterSlot);
 s32 Character_GetSlotFromCharacter(s32 character);
 void func_8007E2B4(void);
 void func_8007E398(void);
@@ -235,6 +248,7 @@ Gfx* Course_DrawModel(Gfx* gfx, Vtx* vtx, s32 vtxCount);
 Gfx* Course_Draw(Gfx* gfx, s32 playerIndex);
 void func_800A4B54(void);
 void func_800A4BAC(void);
+void func_800A4D0C(s32 arg0);
 void func_800A4DF0(void);
 
 void mio0Decode(u8*, void*);

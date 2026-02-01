@@ -515,7 +515,7 @@ void MainMenu_BackgroundInit(Object* backgroundObj) {
     s32 i;
 
     OBJECT_STATE(backgroundObj) = D_800CD3C4;
-    func_80077D50(sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], 0);
+    func_80077D50_impl(sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], 0, true);
 
     switch (OBJECT_STATE(backgroundObj)) {
         case 0:
@@ -526,7 +526,7 @@ void MainMenu_BackgroundInit(Object* backgroundObj) {
                 D_i6_8011F910[i] = 0;
             }
 
-            func_80077D50(sTitleBackgroundCompTexInfos[2], 0);
+            func_80077D50_impl(sTitleBackgroundCompTexInfos[2], 0, true);
             break;
     }
 }
@@ -536,7 +536,7 @@ extern s16 gGameModeChangeState;
 void MainMenu_SignInit(Object* signObj) {
     s32 index = signObj->cmdId - OBJECT_MAIN_MENU_MODE_SIGN_0;
 
-    func_80077D50(sMenuSignCompTexInfos[index], 0);
+    func_80077D50_impl(sMenuSignCompTexInfos[index], 0, true);
     if (gGameModeChangeState == GAMEMODE_CHANGE_INSTANT(GAMEMODE_CHANGE_INIT)) {
         OBJECT_COUNTER(signObj) = 12;
     }
@@ -544,7 +544,7 @@ void MainMenu_SignInit(Object* signObj) {
 
 void MainMenu_HeaderInit(Object* headerObj) {
 
-    func_80077D50(sSelectModeCompTexInfo, 0);
+    func_80077D50_impl(sSelectModeCompTexInfo, 0, true);
     if (gGameModeChangeState == GAMEMODE_CHANGE_INSTANT(GAMEMODE_CHANGE_INIT)) {
         OBJECT_COUNTER(headerObj) = 12;
     }
@@ -553,35 +553,35 @@ void MainMenu_HeaderInit(Object* headerObj) {
 void MainMenu_NumPlayersInit(void) {
     s32 i;
 
-    func_80077D50(sSelectModeOptionFlamesCompTexInfo, 0);
+    func_80077D50_impl(sSelectModeOptionFlamesCompTexInfo, 0, true);
 
     for (i = 0; i < 3; i++) {
-        func_80077D50(sNumPlayersCompTexInfos[i], 0);
+        func_80077D50_impl(sNumPlayersCompTexInfos[i], 0, true);
     }
 }
 
 void MainMenu_DifficultyInit(void) {
     s32 i;
 
-    func_80077D50(sSelectModeOptionFlamesCompTexInfo, 0);
+    func_80077D50_impl(sSelectModeOptionFlamesCompTexInfo, 0, true);
 
     for (i = 0; i < 4; i++) {
-        func_80077D50(sDifficultyCompTexInfos[i], 0);
+        func_80077D50_impl(sDifficultyCompTexInfos[i], 0, true);
     }
 }
 
 void MainMenu_TimeAttackModeInit(void) {
     s32 i;
 
-    func_80077D50(sSelectModeOptionFlamesCompTexInfo, 0);
+    func_80077D50_impl(sSelectModeOptionFlamesCompTexInfo, 0, true);
 
     for (i = 0; i < 2; i++) {
-        func_80077D50(sTimeAttackModeCompTexInfos[i], 0);
+        func_80077D50_impl(sTimeAttackModeCompTexInfos[i], 0, true);
     }
 }
 
 void MainMenu_OkInit(Object* okObj) {
-    func_80077D50(sOkCompTexInfo, 0);
+    func_80077D50_impl(sOkCompTexInfo, 0, true);
     OBJECT_LEFT(okObj) = 50;
 }
 
@@ -656,7 +656,7 @@ Gfx* MainMenu_SignDraw(Gfx* gfx, Object* signObj) {
     temp1 = (((mode % 4) * 0x40) - (SQ(OBJECT_COUNTER(signObj)) * 2)) + 0x20;
     temp2 = ((mode / 4) * 0x5B) + 0x26;
 
-    gfx = func_80078EA0(gfx, sMenuSignCompTexInfos[mode], temp1, temp2, 1, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0_impl(gfx, sMenuSignCompTexInfos[mode], temp1, temp2, 1, 0, 0, 1.0f, 1.0f, true);
 
 #ifdef VERSION_JP
     if (mode == gSelectedMode) {
@@ -684,13 +684,15 @@ Gfx* MainMenu_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
 
     if (OBJECT_STATE(backgroundObj) < 3) {
         sp44 = sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)];
-        gfx = func_80078EA0(gfx, sp44, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sp44, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f,
+                                 true);
         gfx = func_8007A440(gfx, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj),
                             OBJECT_LEFT(backgroundObj) + sp44->width, OBJECT_TOP(backgroundObj) + sp44->height,
                             D_i6_8011DC60, D_i6_8011DC64, D_i6_8011DC68, D_i6_8011DC6C);
     } else {
         sp44 = sTitleBackgroundCompTexInfos[D_800CD3C4];
-        gfx = func_80078EA0(gfx, sp44, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sp44, OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f,
+                                 true);
         var_t1 = (OBJECT_STATE(backgroundObj) / 10);
         var_ra = sTitleBackgroundCompTexInfos[var_t1 - 1];
 
@@ -846,8 +848,8 @@ Gfx* MainMenu_HeaderDraw(Gfx* gfx, Object* headerObj) {
 
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return func_80078EA0(gfx, sSelectModeCompTexInfo, OBJECT_LEFT(headerObj) - temp, OBJECT_TOP(headerObj), 0, 0, 0,
-                         1.0f, 1.0f);
+    return func_80078EA0_impl(gfx, sSelectModeCompTexInfo, OBJECT_LEFT(headerObj) - temp, OBJECT_TOP(headerObj), 0, 0,
+                              0, 1.0f, 1.0f, true);
 }
 
 Gfx* MainMenu_NumPlayersDraw(Gfx* gfx, Object* numPlayersObj) {
@@ -880,8 +882,8 @@ Gfx* MainMenu_NumPlayersDraw(Gfx* gfx, Object* numPlayersObj) {
             break;
     }
     temp_s7 = SQ(OBJECT_COUNTER(numPlayersObj)) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, OBJECT_LEFT(numPlayersObj) - temp_s7,
-                        OBJECT_TOP(numPlayersObj), 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0_impl(gfx, sSelectModeOptionFlamesCompTexInfo, OBJECT_LEFT(numPlayersObj) - temp_s7,
+                             OBJECT_TOP(numPlayersObj), 0, 0, 0, 1.0f, 1.0f, true);
 
     for (i = 0; i < 3; i++) {
         if (gModeSubOption[gSelectedMode] == i) {
@@ -906,8 +908,8 @@ Gfx* MainMenu_NumPlayersDraw(Gfx* gfx, Object* numPlayersObj) {
             }
 #endif
         }
-        gfx = func_80078EA0(gfx, sNumPlayersCompTexInfos[i], (OBJECT_LEFT(numPlayersObj) - temp_s7) + 0x20,
-                            OBJECT_TOP(numPlayersObj) + (i * 20) + 0xC, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sNumPlayersCompTexInfos[i], (OBJECT_LEFT(numPlayersObj) - temp_s7) + 0x20,
+                                 OBJECT_TOP(numPlayersObj) + (i * 20) + 0xC, 1, 0, 0, 1.0f, 1.0f, true);
     }
 
     if (D_800CD384 != 2) {
@@ -950,8 +952,8 @@ Gfx* MainMenu_DifficultyDraw(Gfx* gfx, Object* difficultyObj) {
     }
 
     temp_s6 = SQ(OBJECT_COUNTER(difficultyObj)) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, OBJECT_LEFT(difficultyObj) - temp_s6,
-                        OBJECT_TOP(difficultyObj), 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0_impl(gfx, sSelectModeOptionFlamesCompTexInfo, OBJECT_LEFT(difficultyObj) - temp_s6,
+                             OBJECT_TOP(difficultyObj), 0, 0, 0, 1.0f, 1.0f, true);
 
     for (i = 0; i < 4; i++) {
         if (gModeSubOption[gSelectedMode] == i) {
@@ -971,20 +973,20 @@ Gfx* MainMenu_DifficultyDraw(Gfx* gfx, Object* difficultyObj) {
         if ((gUnlockableLevel < 2) && !gSettingEverythingUnlocked) {
             if (i < 3) {
 #ifdef VERSION_JP
-                gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
-                                    OBJECT_TOP(difficultyObj) + (i * 20) + 0xC, 1, 0, 0, 1.0f, 1.0f);
+                gfx = func_80078EA0_impl(gfx, sDifficultyCompTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
+                                         OBJECT_TOP(difficultyObj) + (i * 20) + 0xC, 1, 0, 0, 1.0f, 1.0f, true);
 #else
-                gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
-                                    OBJECT_TOP(difficultyObj) + (i * 20) + 0xE, 1, 0, 0, 1.0f, 1.0f);
+                gfx = func_80078EA0_impl(gfx, sDifficultyCompTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
+                                         OBJECT_TOP(difficultyObj) + (i * 20) + 0xE, 1, 0, 0, 1.0f, 1.0f, true);
 #endif
             }
         } else {
 #ifdef VERSION_JP
-            gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
-                                OBJECT_TOP(difficultyObj) + (i * 18) + 5, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sDifficultyCompTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
+                                     OBJECT_TOP(difficultyObj) + (i * 18) + 5, 1, 0, 0, 1.0f, 1.0f, true);
 #else
-            gfx = func_80078EA0(gfx, sDifficultyCompTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
-                                OBJECT_TOP(difficultyObj) + (i * 18) + 7, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sDifficultyCompTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
+                                     OBJECT_TOP(difficultyObj) + (i * 18) + 7, 1, 0, 0, 1.0f, 1.0f, true);
 #endif
         }
     }
@@ -1023,8 +1025,8 @@ Gfx* MainMenu_TimeAttackModeDraw(Gfx* gfx, Object* timeAttackModeObj) {
     }
 
     temp_s7 = SQ(OBJECT_COUNTER(timeAttackModeObj)) * 2;
-    gfx = func_80078EA0(gfx, sSelectModeOptionFlamesCompTexInfo, OBJECT_LEFT(timeAttackModeObj) - temp_s7,
-                        OBJECT_TOP(timeAttackModeObj), 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078EA0_impl(gfx, sSelectModeOptionFlamesCompTexInfo, OBJECT_LEFT(timeAttackModeObj) - temp_s7,
+                             OBJECT_TOP(timeAttackModeObj), 0, 0, 0, 1.0f, 1.0f, true);
 
     for (i = 0; i < 2; i++) {
         if (gModeSubOption[MODE_TIME_ATTACK] == i) {
@@ -1043,13 +1045,13 @@ Gfx* MainMenu_TimeAttackModeDraw(Gfx* gfx, Object* timeAttackModeObj) {
         }
         temp_a1 = sTimeAttackModeCompTexInfos[i];
 #ifdef VERSION_JP
-        gfx = func_80078EA0(gfx, temp_a1,
-                            (((s32) (0x80 - temp_a1->width) / 2) + OBJECT_LEFT(timeAttackModeObj)) - temp_s7,
-                            OBJECT_TOP(timeAttackModeObj) + (i * 28) + 0x11, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, temp_a1,
+                                 (((s32) (0x80 - temp_a1->width) / 2) + OBJECT_LEFT(timeAttackModeObj)) - temp_s7,
+                                 OBJECT_TOP(timeAttackModeObj) + (i * 28) + 0x11, 1, 0, 0, 1.0f, 1.0f, true);
 #else
-        gfx = func_80078EA0(gfx, temp_a1,
-                            (((s32) (0x80 - temp_a1->width) / 2) + OBJECT_LEFT(timeAttackModeObj)) - temp_s7,
-                            OBJECT_TOP(timeAttackModeObj) + (i * 28) + 0x15, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, temp_a1,
+                                 (((s32) (0x80 - temp_a1->width) / 2) + OBJECT_LEFT(timeAttackModeObj)) - temp_s7,
+                                 OBJECT_TOP(timeAttackModeObj) + (i * 28) + 0x15, 1, 0, 0, 1.0f, 1.0f, true);
 #endif
     }
 
@@ -1065,13 +1067,13 @@ Gfx* MainMenu_OkDraw(Gfx* gfx, Object* okObj) {
         case 4:
         case 5:
             gfx = func_8007DB28(gfx, 1);
-            gfx = func_80078EA0(gfx, sOkCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0,
-                                1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sOkCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0,
+                                     1.0f, 1.0f, true);
             break;
         default:
             gfx = func_8007DB28(gfx, 0);
-            gfx = func_80078EA0(gfx, sOkCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0,
-                                1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sOkCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0,
+                                     1.0f, 1.0f, true);
             break;
     }
     return gfx;

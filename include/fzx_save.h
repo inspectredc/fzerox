@@ -123,6 +123,7 @@ void func_i2_80101590(GhostRecord* ghostRecord, GhostInfo* ghostInfo);
 void Save_CreateNew(SaveContext* saveContext, s32 arg1);
 
 void Save_InitSaveSettings(SaveSettings* saveSettings, bool shouldClear);
+void Save_InitCourseRecord(SaveCourseRecords* courseRecords, bool shouldClear);
 void Save_InitEditCup(SaveEditCup* editCup, bool shouldClear);
 void Save_InitDeathRace(SaveDeathRace* deathRace, bool shouldClear);
 void Save_InitGhostRecord(GhostRecord* ghostRecord, bool shouldClear);

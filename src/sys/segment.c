@@ -77,7 +77,6 @@ void Arena_StartInit(void) {
     uintptr_t* block4 = &gArenaStartPtrs[3];
 #endif
 
-
     *block1 = ALIGN16((uintptr_t) SEGMENT_VRAM_END(ovl_i2));
     *block3 = ALIGN16((uintptr_t) D_8024DC80);
 #ifdef EXPANSION_KIT
@@ -664,7 +663,7 @@ void Segment_LoadOverlays(void) {
 #ifndef EXPANSION_KIT
         Dma_LoadOverlay(romStart, vramStart, segmentRomSize, vramBssStart, segmentBssSize);
 #else
-        DiskDrive_LoadOverlay(diskStart, vramStart, segmentRomSize, segmentBssSize);
+    DiskDrive_LoadOverlay(diskStart, vramStart, segmentRomSize, segmentBssSize);
 #endif
 #ifdef EXPANSION_KIT
     }

@@ -44,7 +44,11 @@ typedef enum BorderedBoxInfoRequest {
 
 void BorderedBox_CleanWidget(BorderedBoxWidget** boxPtr);
 void BorderedBox_ClearAll(void);
+#ifndef EXPANSION_KIT
 BorderedBoxWidget* BorderedBox_Init(s16 id, s16 left, s16 top, s16 width, s16 height, u16 borderColor, BorderedBoxContentsDrawFunc contentsDrawFunc);
+#else
+BorderedBoxWidget* BorderedBox_Init(s16 id, s16 left, s16 top, s16 width, s16 height, u16 depth, u16 borderColor, BorderedBoxContentsDrawFunc contentsDrawFunc);
+#endif
 void BorderedBox_StartClose(BorderedBoxWidget* box);
 void BorderedBox_Update(void);
 Gfx* BorderedBox_Draw(Gfx* gfx);

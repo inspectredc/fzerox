@@ -1322,19 +1322,19 @@ s32 MachineSettings_GetCharacter(s32 character) {
 }
 
 void MachineSelect_HeaderInit(void) {
-    func_80077D50(sSelectMachineCompTexInfo, 0);
+    func_80077D50_impl(sSelectMachineCompTexInfo, 0, true);
 }
 
 void func_i4_80116E8C(Object* arg0) {
     s32 i;
 
     if (gNumPlayers == 1) {
-        func_80077D50(sPortraitCompTexInfos[gRacers[0].character], 0);
+        func_80077D50_impl(sPortraitCompTexInfos[gRacers[0].character], 0, true);
         return;
     }
 
     for (i = 0; i < gNumPlayers; i++) {
-        func_80077D50(sSmallPortraitCompTexInfos[gRacers[i].character], 0);
+        func_80077D50_impl(sSmallPortraitCompTexInfos[gRacers[i].character], 0, true);
     }
 }
 
@@ -1345,7 +1345,7 @@ void MachineSettings_PortraitInit(Object* portraitObj) {
     OBJECT_STATE(portraitObj) = MachineSettings_GetCharacter(OBJECT_STATE(portraitObj));
 
     if (gNumPlayers == 1) {
-        func_80077D50(sPortraitBackgroundCompTexInfo, 0);
+        func_80077D50_impl(sPortraitBackgroundCompTexInfo, 0, true);
         OBJECT_CACHE_INDEX(portraitObj) = func_800792D8(D_i4_8011C05C[OBJECT_STATE(portraitObj)]);
     } else {
         OBJECT_CACHE_INDEX(portraitObj) = func_800792D8(D_i4_8011C7A4[OBJECT_STATE(portraitObj)]);
@@ -1357,11 +1357,11 @@ void MachineSelect_PortraitInit(Object* portraitObj) {
 }
 
 void MachineSelect_CursorNumInit(Object* cursorNumObj) {
-    func_80077D50(sPlayerNumIconCompTexInfos[cursorNumObj->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], 0);
+    func_80077D50_impl(sPlayerNumIconCompTexInfos[cursorNumObj->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0], 0, true);
 }
 
 void MachineSelect_CursorInit(void) {
-    func_80077D50(sMachineSelectCursorCompTexInfo, 0);
+    func_80077D50_impl(sMachineSelectCursorCompTexInfo, 0, true);
 }
 
 void MachineSelect_MachineInit(Object* machineObj) {
@@ -1451,19 +1451,19 @@ void MachineSettings_MachineInit(Object* machineObj) {
 
 void MachineSettings_EngineWeightInit(void) {
     if (gNumPlayers == 1) {
-        func_80077D50(sMachineInfoGraphCompTexInfo, 0);
-        func_80077D50(sMachineAccelerationMaxSpeedCompTexInfo, 0);
+        func_80077D50_impl(sMachineInfoGraphCompTexInfo, 0, true);
+        func_80077D50_impl(sMachineAccelerationMaxSpeedCompTexInfo, 0, true);
     } else {
-        func_80077D50(sMachineInfoGraphSmallCompTexInfo, 0);
-        func_80077D50(sMachineAccelerationMaxSpeedSmallCompTexInfo, 0);
+        func_80077D50_impl(sMachineInfoGraphSmallCompTexInfo, 0, true);
+        func_80077D50_impl(sMachineAccelerationMaxSpeedSmallCompTexInfo, 0, true);
     }
 }
 
 void MachineSettings_StatsInit(void) {
     if (gNumPlayers == 1) {
-        func_80077D50(sMachineBodyBoostGripCompTexInfo, 0);
+        func_80077D50_impl(sMachineBodyBoostGripCompTexInfo, 0, true);
     } else {
-        func_80077D50(sMachineBodyBoostGripSmallCompTexInfo, 0);
+        func_80077D50_impl(sMachineBodyBoostGripSmallCompTexInfo, 0, true);
     }
 }
 
@@ -1474,7 +1474,7 @@ void MachineSettings_NameCardInit(Object* nameCardObj) {
 }
 
 void MachineSettings_SliderInit(void) {
-    func_80077D50(sEngineSliderCompTexInfo, 0);
+    func_80077D50_impl(sEngineSliderCompTexInfo, 0, true);
 }
 
 void MachineSelect_DifficultyCupsInit(Object* difficultyCupsObj) {
@@ -1485,11 +1485,11 @@ void MachineSelect_DifficultyCupsInit(Object* difficultyCupsObj) {
     Save_UpdateCupSave(OBJECT_BUFFER(difficultyCupsObj));
 
     for (i = 0; i < 21; i++) {
-        func_80077D50(sTrophyCompTexInfos[i], 0);
+        func_80077D50_impl(sTrophyCompTexInfos[i], 0, true);
     }
 
     for (i = 0; i < 4; i++) {
-        func_80077D50(sDifficultyCompTexInfos[i], 0);
+        func_80077D50_impl(sDifficultyCompTexInfos[i], 0, true);
     }
 }
 
@@ -1497,17 +1497,17 @@ void MachineSelect_StatsInit(void) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        func_80077D50(sMachineStatCompTexInfos[i], 0);
+        func_80077D50_impl(sMachineStatCompTexInfos[i], 0, true);
     }
 }
 
 void MachineSelect_OkInit(Object* okObj) {
-    func_80077D50(sOKCompTexInfo, 0);
+    func_80077D50_impl(sOKCompTexInfo, 0, true);
     OBJECT_TOP(okObj) = 50;
 }
 
 void MachineSettings_OkInit(Object* okObj) {
-    func_80077D50(sOKCompTexInfo, 0);
+    func_80077D50_impl(sOKCompTexInfo, 0, true);
     OBJECT_LEFT(okObj) = 50;
 }
 
@@ -1543,8 +1543,8 @@ Gfx* MachineSelect_BackgroundDraw(Gfx* gfx) {
 Gfx* MachineSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return func_80078EA0(gfx, sSelectMachineCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0, 0, 0, 1.0f,
-                         1.0f);
+    return func_80078EA0_impl(gfx, sSelectMachineCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0, 0, 0,
+                              1.0f, 1.0f, true);
 }
 
 Gfx* func_i4_80117BE0(Gfx* gfx, Object* arg1) {
@@ -1552,13 +1552,13 @@ Gfx* func_i4_80117BE0(Gfx* gfx, Object* arg1) {
     const s32* var_s0;
 
     if (gNumPlayers == 1) {
-        gfx = func_80078EA0(gfx, sPortraitCompTexInfos[gRacers[0].character], OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0,
-                            0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sPortraitCompTexInfos[gRacers[0].character], OBJECT_LEFT(arg1), OBJECT_TOP(arg1),
+                                 0, 0, 0, 1.0f, 1.0f, true);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             var_s0 = &D_i4_8011D6C4[i * 2];
-            gfx = func_80078EA0(gfx, sSmallPortraitCompTexInfos[gRacers[i].character], var_s0[0], var_s0[1] + 55, 0, 0,
-                                0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sSmallPortraitCompTexInfos[gRacers[i].character], var_s0[0], var_s0[1] + 55,
+                                     0, 0, 0, 1.0f, 1.0f, true);
         }
     }
     return gfx;
@@ -1574,18 +1574,18 @@ Gfx* MachineSettings_PortraitDraw(Gfx* gfx, Object* portraitObj) {
     positions = &D_i4_8011D6C4[playerIndex * 2];
     switch (gNumPlayers) {
         case 1:
-            gfx = func_80078EA0(gfx, sPortraitBackgroundCompTexInfo, OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj),
-                                0, 0, 0, 1.0f, 1.0f);
-            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj),
-                                OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sPortraitBackgroundCompTexInfo, OBJECT_LEFT(portraitObj),
+                                     OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f, true);
+            gfx = func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj),
+                                     OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f, true);
             break;
         case 2:
-            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], positions[0] - 4,
-                                positions[1] + 0x1A, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], positions[0] - 4,
+                                     positions[1] + 0x1A, 0, 0, 0, 1.0f, 1.0f, true);
             break;
         default:
-            gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], positions[0], positions[1] + 0x37, 0,
-                                0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], positions[0],
+                                     positions[1] + 0x37, 0, 0, 0, 1.0f, 1.0f, true);
             break;
     }
     return gfx;
@@ -1608,14 +1608,15 @@ Gfx* MachineSelect_StatsDraw(Gfx* gfx, Object* statsObj) {
     temp_t0 = D_i4_8011D694[playerIndex * 2 + 1];
     if (playerIndex < 2) {
         for (i = 0; i < 3; i++) {
-            gfx = func_80078EA0(gfx, sMachineStatCompTexInfos[i], temp_fp, (temp_t0 - 7) + i * 20, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sMachineStatCompTexInfos[i], temp_fp, (temp_t0 - 7) + i * 20, 0, 0, 0, 1.0f,
+                                     1.0f, true);
             temp_s0 = sMachineStatValueStr[temp_a3[i]];
             gfx = Font_DrawString(gfx, temp_fp + 5, (temp_t0 + 10) + i * 20, temp_s0, 0, FONT_SET_2, 0);
         }
     } else {
         for (i = 0; i < 3; i++) {
-            gfx = func_80078EA0(gfx, sMachineStatCompTexInfos[i], temp_fp - 0x14, (temp_t0 - 7) + i * 20, 0, 0, 0, 1.0f,
-                                1.0f);
+            gfx = func_80078EA0_impl(gfx, sMachineStatCompTexInfos[i], temp_fp - 0x14, (temp_t0 - 7) + i * 20, 0, 0, 0,
+                                     1.0f, 1.0f, true);
             temp_s0 = sMachineStatValueStr[temp_a3[i]];
             gfx = Font_DrawString(gfx, (temp_fp - Font_GetStringWidth(temp_s0, FONT_SET_2, 0)) - 5,
                                   (temp_t0 + 10) + i * 20, temp_s0, 0, FONT_SET_2, 0);
@@ -1629,16 +1630,16 @@ Gfx* MachineSelect_PortraitDraw(Gfx* gfx, Object* portraitObj) {
 
     playerIndex = portraitObj->cmdId - OBJECT_MACHINE_SELECT_PORTRAIT_0;
 
-    gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj),
-                        OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[playerIndex],
-                         D_i4_8011D674[playerIndex * 2 + 0] + OBJECT_LEFT(portraitObj),
-                         D_i4_8011D674[playerIndex * 2 + 1] + OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
+    gfx = func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj),
+                             OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f, true);
+    return func_80078EA0_impl(gfx, sPlayerNumIconCompTexInfos[playerIndex],
+                              D_i4_8011D674[playerIndex * 2 + 0] + OBJECT_LEFT(portraitObj),
+                              D_i4_8011D674[playerIndex * 2 + 1] + OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f, true);
 }
 
 Gfx* MachineSelect_CursorNumDraw(Gfx* gfx, Object* portraitObj) {
-    return func_80078EA0(gfx, sPlayerNumIconCompTexInfos[portraitObj->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0],
-                         OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0_impl(gfx, sPlayerNumIconCompTexInfos[portraitObj->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0],
+                              OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, 0, 0, 1.0f, 1.0f, true);
 }
 
 extern u32 gGameFrameCount;
@@ -1660,8 +1661,8 @@ Gfx* MachineSelect_CursorDraw(Gfx* gfx, Object* cursorObj) {
             OBJECT_LEFT(cursorObj) = ((temp_v0 % 6) * 0x28) + 0x28;
             OBJECT_TOP(cursorObj) = ((temp_v0 / 6) * 0x22) + 0x25;
 
-            gfx = func_80078EA0(gfx, sMachineSelectCursorCompTexInfo, OBJECT_LEFT(cursorObj), OBJECT_TOP(cursorObj), 1,
-                                0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sMachineSelectCursorCompTexInfo, OBJECT_LEFT(cursorObj),
+                                     OBJECT_TOP(cursorObj), 1, 0, 0, 1.0f, 1.0f, true);
         }
     }
     return gfx;
@@ -1728,8 +1729,8 @@ Gfx* MachineSelect_OkDraw(Gfx* gfx, Object* okObj) {
     }
 
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + var_v1, OBJECT_TOP(okObj) + 209, 1, 0, 0, 1.0f,
-                         1.0f);
+    return func_80078EA0_impl(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + var_v1, OBJECT_TOP(okObj) + 209, 1, 0, 0, 1.0f,
+                              1.0f, true);
 }
 
 extern const char* gMachineNames[];
@@ -1830,8 +1831,8 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
 
     if (gNumPlayers == 1) {
         weight = gMachines[gRacers[0].character].weight;
-        gfx = func_80078EA0(gfx, sMachineInfoGraphCompTexInfo, OBJECT_LEFT(engineWeightObj),
-                            OBJECT_TOP(engineWeightObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sMachineInfoGraphCompTexInfo, OBJECT_LEFT(engineWeightObj),
+                                 OBJECT_TOP(engineWeightObj), 0, 0, 0, 1.0f, 1.0f, true);
         gfx = Font_DrawMachineWeight(gfx, OBJECT_LEFT(engineWeightObj) + 0x66, OBJECT_TOP(engineWeightObj) + 0x17,
                                      weight);
 
@@ -1845,27 +1846,27 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
                 break;
         }
 #ifdef VERSION_JP
-        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj),
-                            OBJECT_TOP(engineWeightObj), 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj),
+                                 OBJECT_TOP(engineWeightObj), 1, 0, 0, 1.0f, 1.0f, true);
 #else
-        gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj) + 3,
-                            OBJECT_TOP(engineWeightObj) + 1, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sMachineAccelerationMaxSpeedCompTexInfo, OBJECT_LEFT(engineWeightObj) + 3,
+                                 OBJECT_TOP(engineWeightObj) + 1, 1, 0, 0, 1.0f, 1.0f, true);
 #endif
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             weight = gMachines[gRacers[i].character].weight;
             temp_s0 = D_i4_8011D6C4[i * 2 + 0];
             temp_s1 = D_i4_8011D6C4[i * 2 + 1];
-            gfx = func_80078EA0(gfx, sMachineInfoGraphSmallCompTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA, 0, 0, 0, 1.0f,
-                                1.0f);
+            gfx = func_80078EA0_impl(gfx, sMachineInfoGraphSmallCompTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA, 0, 0, 0,
+                                     1.0f, 1.0f, true);
             gfx = Font_DrawMachineWeight(gfx, temp_s0 + 0x6E, temp_s1 + 0x1C, weight);
             if (gPlayerSelectionLock[i] == SELECTION_FREE) {
                 gfx = func_8007DB28(gfx, 0);
             } else {
                 gDPSetPrimColor(gfx++, 0, 0, 0, 255, 0, 255);
             }
-            gfx = func_80078EA0(gfx, sMachineAccelerationMaxSpeedSmallCompTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA, 1, 0,
-                                0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sMachineAccelerationMaxSpeedSmallCompTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA,
+                                     1, 0, 0, 1.0f, 1.0f, true);
         }
     }
     return gfx;
@@ -1880,8 +1881,8 @@ Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* statsObj) {
     s32 pad;
 
     if (gNumPlayers == 1) {
-        gfx = func_80078EA0(gfx, sMachineBodyBoostGripCompTexInfo, OBJECT_LEFT(statsObj), OBJECT_TOP(statsObj), 0, 0, 0,
-                            1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sMachineBodyBoostGripCompTexInfo, OBJECT_LEFT(statsObj), OBJECT_TOP(statsObj), 0,
+                                 0, 0, 1.0f, 1.0f, true);
 
         for (i = 0; i < 3; i++) {
             temp = gMachines[gRacers[0].character].machineStats;
@@ -1893,8 +1894,8 @@ Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* statsObj) {
             leftOffset = D_i4_8011D6C4[i * 2 + 0];
             topOffset = D_i4_8011D6C4[i * 2 + 1];
 
-            gfx = func_80078EA0(gfx, sMachineBodyBoostGripSmallCompTexInfo, leftOffset + 0x2B, topOffset + 0x39, 0, 0,
-                                0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sMachineBodyBoostGripSmallCompTexInfo, leftOffset + 0x2B, topOffset + 0x39, 0,
+                                     0, 0, 1.0f, 1.0f, true);
 
             for (j = 0; j < 3; j++) {
                 temp = gMachines[gRacers[i].character].machineStats;
@@ -1930,8 +1931,8 @@ Gfx* func_i4_801193B8(Gfx* gfx, Object* arg1) {
 Gfx* MachineSettings_NameCardDraw(Gfx* gfx, Object* nameCardObj) {
 
     if (gNumPlayers == 1) {
-        gfx = func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(nameCardObj)], OBJECT_LEFT(nameCardObj),
-                            OBJECT_TOP(nameCardObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(nameCardObj)], OBJECT_LEFT(nameCardObj),
+                                 OBJECT_TOP(nameCardObj), 0, 0, 0, 1.0f, 1.0f, true);
     }
     return gfx;
 }
@@ -1955,8 +1956,8 @@ Gfx* MachineSettings_SliderDraw(Gfx* gfx, Object* sliderObj) {
                 break;
         }
 
-        gfx = func_80078EA0(gfx, sEngineSliderCompTexInfo, (s32) (gPlayerEngine[0] * 128.0f) + 0x98, 0x54, 1, 0, 0,
-                            1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sEngineSliderCompTexInfo, (s32) (gPlayerEngine[0] * 128.0f) + 0x98, 0x54, 1, 0, 0,
+                                 1.0f, 1.0f, true);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             temp_v1 = 1;
@@ -1974,7 +1975,7 @@ Gfx* MachineSettings_SliderDraw(Gfx* gfx, Object* sliderObj) {
 
             top = D_i4_8011D6C4[i * 2 + 1] + 0x2E;
             left = D_i4_8011D6C4[i * 2 + 0] + (s32) (gPlayerEngine[i] * 80.0f) + 0x23;
-            gfx = func_80078EA0(gfx, sEngineSliderCompTexInfo, left, top, temp_v1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sEngineSliderCompTexInfo, left, top, temp_v1, 0, 0, 1.0f, 1.0f, true);
         }
     }
     return gfx;
@@ -2056,9 +2057,9 @@ Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* difficultyCupsObj) {
             if (1) {}
         }
 
-        gfx = func_80078EA0(gfx, sTrophyCompTexInfos[trophyIndex], 20, 0x73 + i * 20, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sTrophyCompTexInfos[trophyIndex], 20, 0x73 + i * 20, 0, 0, 0, 1.0f, 1.0f, true);
     }
-    return func_80078EA0(gfx, sDifficultyCompTexInfos[difficulty], 30, 0xD1, 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0_impl(gfx, sDifficultyCompTexInfos[difficulty], 30, 0xD1, 0, 0, 0, 1.0f, 1.0f, true);
 }
 
 Gfx* MachineSelect_NameDraw(Gfx* gfx, Object* nameObj) {
@@ -2076,8 +2077,8 @@ Gfx* MachineSelect_NameDraw(Gfx* gfx, Object* nameObj) {
 
 Gfx* MachineSettings_OkDraw(Gfx* gfx, Object* okObj) {
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f,
-                         1.0f);
+    return func_80078EA0_impl(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f,
+                              1.0f, true);
 }
 
 void func_i4_80119BB8(Object* arg0) {

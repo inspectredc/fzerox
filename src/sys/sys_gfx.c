@@ -444,9 +444,9 @@ void Game_ThreadEntry(void* entry) {
                    SEGMENT_ROM_SIZE(course_track_gfx));
 #else
     Dma_LoadAssets(gRomSegmentPairs[15][0],
-                (uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +
-                    (size_t) SEGMENT_DATA_SIZE_CONST(course_track_gfx),
-                SEGMENT_VRAM_SIZE(course_track_gfx));
+                   (uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +
+                       (size_t) SEGMENT_DATA_SIZE_CONST(course_track_gfx),
+                   SEGMENT_VRAM_SIZE(course_track_gfx));
 #endif
 
     mio0Decode((uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +

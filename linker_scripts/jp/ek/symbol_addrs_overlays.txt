@@ -41,7 +41,7 @@ gVenueOption = 0x8003066C; //segment:expansion_kit
 gSkyboxOption = 0x80030670; //segment:expansion_kit
 gBGMOption = 0x80030674; //segment:expansion_kit
 gCourseEditEntryOption = 0x80030678; //segment:expansion_kit
-gCourseEditMenuOptions = 0x8003067C; //segment:expansion_kit
+gCourseEditMenuOptions = 0x8003067C; //segment:expansion_kit size:0x14
 sPitTypeMenuItems = 0x80030690; //segment:expansion_kit
 sPitTypeWidget = 0x80030744; //segment:expansion_kit
 sDashTypeMenuItems = 0x80030778; //segment:expansion_kit
@@ -120,7 +120,7 @@ gBGMOptionToCourseBGM = 0x800328B4; //segment:expansion_kit
 gExpansionKitNameEntryStrLength = 0x80032AC0; //segment:expansion_kit
 sInputIndicatorFlashRate = 0x80032AC4; //segment:expansion_kit
 sNameEntryKeyboardStr = 0x80032AD4; //segment:expansion_kit
-gCustomMachine = 0x800333D0; //segment:expansion_kit
+gCustomMachine = 0x800333D0; //segment:expansion_kit size:0x20
 gExpansionKitNameEntryStr = 0x8003A560; //segment:expansion_kit
 sNameEntryCursorXPos = 0x8003A5BC; //segment:expansion_kit
 sNameEntryCursorYPos = 0x8003A5C0; //segment:expansion_kit
@@ -2300,6 +2300,29 @@ sEADDemoMatrix = 0x800F6B4C; //segment:ead_demo
 
 // transition
 
+func_xk1_80025C00 = 0x80025C00; //segment:expansion_kit
 func_xk1_8002FFDC = 0x8002FFDC; //segment:expansion_kit
+D_xk1_8003A598 = 0x8003A598; //segment:expansion_kit size:0x24
+D_xk1_8003A5D8 = 0x8003A5D8; //segment:expansion_kit size:0xE58
+
+func_i3_80059EC0 = 0x80059EC0; //segment:ovl_i3
+
+func_80077D50 = 0x800AE17C; //segment:ovl_i2
+func_80078104 = 0x800AE7C4; //segment:ovl_i2
+func_800783AC = 0x800AEA90; //segment:ovl_i2
+func_80078EA0 = 0x800AF584; //segment:ovl_i2
+func_80078F80 = 0x800AF678; //segment:ovl_i2
+func_800790D4 = 0x800AF7E0; //segment:ovl_i2
+func_800792D8 = 0x800AF9F8; //segment:ovl_i2
+func_800793E8 = 0x800AFB1C; //segment:ovl_i2
+func_80079EC8 = 0x800B079C; //segment:ovl_i2
+func_i2_800B39B4 = 0x800B39B4; //segment:ovl_i2
+func_800A4D0C = 0x800B91AC; //segment:ovl_i2
+func_i2_800BE8BC = 0x800BE8BC; //segment:ovl_i2
 
 func_i10_80115DF0 = 0x8012B520; //segment:ovl_i10
+
+D_xk2_80119744 = 0x80119744; //segment:course_edit
+D_xk2_80128DF8 = 0x80128DF8; //segment:course_edit size:0xE100
+
+D_xk3_801372B8 = 0x801372B8; //segment:machine_create

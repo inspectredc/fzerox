@@ -8,7 +8,9 @@
 #include ASSET_HEADER(setup_gfx.h)
 
 OSMesg D_800E12B0;
-UNUSED s8 D_800E12B8[0x10];
+UNUSED s8 D_800E12B8[0x8];
+CourseEffectsInfo* D_800E12C0;
+UNUSED s8 D_800E12C4[0x4];
 s32 D_800E12C8[0x800];
 s32 sCourseDecorationTextureLoadState;
 s32 D_800E32CC;
@@ -2845,11 +2847,11 @@ void Course_SignsInit(s32 courseIndex) {
     gCourseFeaturesInfo.jumpCount = jumpCount;
 }
 
-extern s32 D_802CDFD0;
+extern unk_807B3C20 D_802CB6D0;
 
 void Course_FeaturesInit(s32 courseIndex) {
     if (gInCourseEditor) {
-        if (D_802CDFD0 < 4) {
+        if (D_802CB6D0.controlPointCount < 4) {
             return;
         }
     } else if (COURSE_CONTEXT()->courseData.controlPointCount < 4) {
@@ -2870,7 +2872,7 @@ void Course_EffectsInit(s32 courseIndex) {
     s32 i;
 
     if (gInCourseEditor) {
-        if (D_802CDFD0 < 4) {
+        if (D_802CB6D0.controlPointCount < 4) {
             return;
         }
     } else if (COURSE_CONTEXT()->courseData.controlPointCount < 4) {
@@ -2889,8 +2891,8 @@ void Course_EffectsInit(s32 courseIndex) {
 
 extern s32 gCourseIndex;
 extern CourseData D_8010C770;
-extern CourseSegment D_802CDFD8[];
-extern CourseSegment D_802C2020[];
+extern unk_807B3C20 D_802CDFD8;
+extern unk_807B3C20 D_802C2020;
 
 void Course_SegmentsInit(void) {
     CourseSegment* segment;
@@ -2899,8 +2901,8 @@ void Course_SegmentsInit(void) {
     s32 i;
 
     courseInfo = &gCourseInfos[gCourseIndex];
-    segment = D_802C2020;
-    courseInfo->courseSegments = D_802C2020;
+    segment = D_802C2020.unk_0000;
+    courseInfo->courseSegments = D_802C2020.unk_0000;
 
     for (i = 0; i < courseInfo->segmentCount; i++) {
         segment->segmentIndex = i;
@@ -2934,7 +2936,7 @@ void Course_SegmentsInit(void) {
     segmentIndex = courseInfo->courseSegments[segmentIndex].next->segmentIndex;
     segment = &courseInfo->courseSegments[segmentIndex];
     for (i = 0; i < courseInfo->segmentCount; i++) {
-        D_802CDFD8[i] = *segment;
+        D_802CDFD8.unk_0000[i] = *segment;
 
         D_8010C770.bankAngle[i] = COURSE_CONTEXT()->courseData.bankAngle[segment->segmentIndex];
         D_8010C770.pit[i] = COURSE_CONTEXT()->courseData.pit[segment->segmentIndex];
@@ -2950,8 +2952,8 @@ void Course_SegmentsInit(void) {
     }
 
     for (i = 0; i < courseInfo->segmentCount; i++) {
-        D_802C2020[i] = D_802CDFD8[i];
-        courseInfo->courseSegments[i] = D_802CDFD8[i];
+        D_802C2020.unk_0000[i] = D_802CDFD8.unk_0000[i];
+        courseInfo->courseSegments[i] = D_802CDFD8.unk_0000[i];
 
         COURSE_CONTEXT()->courseData.bankAngle[i] = D_8010C770.bankAngle[i];
         COURSE_CONTEXT()->courseData.pit[i] = D_8010C770.pit[i];
@@ -3113,14 +3115,14 @@ void func_800742FC(void) {
 
     bzero(SEGMENT_VRAM_START(game_context), SEGMENT_BSS_SIZE(game_context));
     func_80074204();
-    D_802CDFD0 = 0;
+    D_802CB6D0.controlPointCount = 0;
     COURSE_CONTEXT()->courseData.creatorId = CREATOR_NINTENDO;
     COURSE_CONTEXT()->courseData.controlPointCount = 0;
     COURSE_CONTEXT()->courseData.venue = VENUE_MUTE_CITY;
     COURSE_CONTEXT()->courseData.skybox = SKYBOX_PURPLE;
     D_8010CF50 = COURSE_CONTEXT()->courseData;
     gCourseFeaturesInfo.features = gCourseFeatures;
-    gCourseInfos[0].courseSegments = D_802C2020;
+    gCourseInfos[0].courseSegments = D_802C2020.unk_0000;
     gCourseEffectsInfo.effects = gCourseEffects;
 
     for (i = 0; i < ARRAY_COUNT(gCourseInfos); i++) {}
@@ -3129,7 +3131,7 @@ void func_800742FC(void) {
     func_80074204();
     D_8010CF50 = COURSE_CONTEXT()->courseData;
     COURSE_CONTEXT()->courseData.controlPointCount = 0;
-    D_802CDFD0 = 0;
+    D_802CB6D0.controlPointCount = 0;
 }
 
 void func_80074428(s32 courseIndex) {
@@ -3141,25 +3143,25 @@ void func_80074428(s32 courseIndex) {
         return;
     }
 
-    gCourseInfos[courseIndex].courseSegments = D_802C2020;
+    gCourseInfos[courseIndex].courseSegments = D_802C2020.unk_0000;
     gCourseInfos[courseIndex].segmentCount = courseData->controlPointCount;
 
     for (i = 0; i < courseData->controlPointCount; i++) {
-        D_802C2020[i].pos = courseData->controlPoint[i].pos;
-        D_802C2020[i].radiusLeft = courseData->controlPoint[i].radiusLeft;
-        D_802C2020[i].radiusRight = courseData->controlPoint[i].radiusRight;
-        D_802C2020[i].trackSegmentInfo = courseData->controlPoint[i].trackSegmentInfo;
+        D_802C2020.unk_0000[i].pos = courseData->controlPoint[i].pos;
+        D_802C2020.unk_0000[i].radiusLeft = courseData->controlPoint[i].radiusLeft;
+        D_802C2020.unk_0000[i].radiusRight = courseData->controlPoint[i].radiusRight;
+        D_802C2020.unk_0000[i].trackSegmentInfo = courseData->controlPoint[i].trackSegmentInfo;
     }
 
-    var_v0 = D_802C2020;
+    var_v0 = D_802C2020.unk_0000;
     for (i = 0; i < courseData->controlPointCount; i++, var_v0++) {
         var_v0->segmentIndex = i;
         var_v0->next = var_v0 + 1;
         var_v0->prev = var_v0 - 1;
     }
 
-    D_802C2020[0].prev = &D_802C2020[courseData->controlPointCount - 1];
-    D_802C2020[courseData->controlPointCount - 1].next = &D_802C2020[0];
+    D_802C2020.unk_0000[0].prev = &D_802C2020.unk_0000[courseData->controlPointCount - 1];
+    D_802C2020.unk_0000[courseData->controlPointCount - 1].next = &D_802C2020.unk_0000[0];
 
     if (courseData->controlPointCount < 4) {
         return;
@@ -3170,19 +3172,17 @@ void func_80074428(s32 courseIndex) {
     Course_SegmentLengthsInit(&gCourseInfos[courseIndex]);
 }
 
-extern CourseSegment D_802CB6D0[];
-
 void func_80074594(void) {
     s32 i;
     CourseData* courseData = &COURSE_CONTEXT()->courseData;
 
-    courseData->controlPointCount = D_802CDFD0;
+    courseData->controlPointCount = D_802CB6D0.controlPointCount;
 
     for (i = 0; i < courseData->controlPointCount; i++) {
-        courseData->controlPoint[i].pos = D_802CB6D0[i].pos;
-        courseData->controlPoint[i].radiusLeft = D_802CB6D0[i].radiusLeft;
-        courseData->controlPoint[i].radiusRight = D_802CB6D0[i].radiusRight;
-        courseData->controlPoint[i].trackSegmentInfo = D_802CB6D0[i].trackSegmentInfo;
+        courseData->controlPoint[i].pos = D_802CB6D0.unk_0000[i].pos;
+        courseData->controlPoint[i].radiusLeft = D_802CB6D0.unk_0000[i].radiusLeft;
+        courseData->controlPoint[i].radiusRight = D_802CB6D0.unk_0000[i].radiusRight;
+        courseData->controlPoint[i].trackSegmentInfo = D_802CB6D0.unk_0000[i].trackSegmentInfo;
     }
 }
 
@@ -3223,15 +3223,13 @@ void func_80074634(CourseInfo* courseInfo) {
     }
 }
 
-extern CourseSegment D_802CB6D0[];
-
 void func_80074744(void) {
     CourseSegment* segment;
     s32 i;
     s32 trackShape;
 
-    for (i = 0; i < D_802CDFD0; i++) {
-        segment = &D_802CB6D0[i];
+    for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
+        segment = &D_802CB6D0.unk_0000[i];
         trackShape = segment->trackSegmentInfo & TRACK_SHAPE_MASK;
         switch (trackShape) {
             case TRACK_SHAPE_PIPE:

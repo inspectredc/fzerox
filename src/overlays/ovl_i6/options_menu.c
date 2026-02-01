@@ -373,8 +373,11 @@ bool func_i6_8011C788(void) {
             break;
         case OPTIONS_DATA_CLEAR:
             if (gInputButtonPressed & (BTN_A | BTN_START)) {
+#ifndef EXPANSION_KIT
                 D_i6_801247A4 =
                     BorderedBox_Init(0, 0x5A, 0x8C, 0x94, 0x50, GPACK_RGBA5551(255, 0, 0, 1), func_i6_8011D168);
+#else
+#endif
                 if (D_i6_801247A4 != NULL) {
                     sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_OPEN;
                     sOptionsSelectionState[gOptionsCurrentRow] = 0;

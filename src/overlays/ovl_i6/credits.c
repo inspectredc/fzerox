@@ -803,22 +803,22 @@ void Credits_MachinesInit(Object* machinesObj) {
 }
 
 void Credits_MenuLadyInit(Object* menuLadyObj) {
-    func_80077D50(sCreditsMenuLadyCompTexInfo, 0);
+    func_80077D50_impl(sCreditsMenuLadyCompTexInfo, 0, true);
     OBJECT_COUNTER(menuLadyObj) = 0xB6;
 }
 
 void Credits_SeeYouAgainInit(void) {
-    func_80077D50(sCreditsSeeYouAgainCompTexInfo, 0);
+    func_80077D50_impl(sCreditsSeeYouAgainCompTexInfo, 0, true);
 }
 
 void Credits_IntroInit(Object* introObj) {
-    func_80077D50(sCreditsMrZeroCompTexInfo, 0);
+    func_80077D50_impl(sCreditsMrZeroCompTexInfo, 0, true);
     OBJECT_COUNTER(introObj) = 0x100;
     INTRO_TIMER(introObj) = 0;
 }
 
 void Credits_CopyrightInit(void) {
-    func_80077D50(sCreditsCopyrightCompTexInfo, 0);
+    func_80077D50_impl(sCreditsCopyrightCompTexInfo, 0, true);
 }
 
 void Credits_PortraitsInit(Object* portraitsObj) {
@@ -891,8 +891,8 @@ Gfx* Credits_OldMachinesDraw(Gfx* gfx, Object* oldMachinesObj) {
         return gfx;
     }
 
-    return func_80078F80(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(oldMachinesObj)], OBJECT_LEFT(oldMachinesObj),
-                         OBJECT_TOP(oldMachinesObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(oldMachinesObj)], OBJECT_LEFT(oldMachinesObj),
+                              OBJECT_TOP(oldMachinesObj), 0, 0, 0, 1.0f, 1.0f, true);
 }
 
 #define UNK_RAND_MACRO(var, x, y) (((Math_Rand1() >> (var % 4)) % x) - y)
@@ -975,7 +975,7 @@ Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
             }
             break;
         case 1:
-            gfx = func_80078F80(gfx, temp_s1, OBJECT_LEFT(machinesObj), top, 0, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078F80_impl(gfx, temp_s1, OBJECT_LEFT(machinesObj), top, 0, 0, 0, 1.0f, 1.0f, true);
             break;
         case 2:
             if (sp154 < 5) {
@@ -985,8 +985,8 @@ Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
                 additionalWidth = (width * (1.0f - var_fv1)) / 2;
                 additionalHeight = (height * (1.0f - var_fv1)) / 2;
 
-                gfx = func_80078F80(gfx, temp_s1, OBJECT_LEFT(machinesObj) + additionalWidth, top + additionalHeight, 4,
-                                    0, 0, var_fv1, var_fv1);
+                gfx = func_80078F80_impl(gfx, temp_s1, OBJECT_LEFT(machinesObj) + additionalWidth,
+                                         top + additionalHeight, 4, 0, 0, var_fv1, var_fv1, true);
             } else {
                 if (temp_s1->unk_0A == 0) {
                     texture = temp_s1->unk_0C;
@@ -1347,7 +1347,7 @@ Gfx* Credits_PortraitsDraw(Gfx* gfx, Object* portraitsObj) {
 
     if (OBJECT_STATE2(portraitsObj) == 0) {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255 - temp_v1);
-        gfx = func_80078F80(gfx, sp34, left, -5, 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078F80_impl(gfx, sp34, left, -5, 1, 0, 0, 1.0f, 1.0f, true);
     }
     return gfx;
 }

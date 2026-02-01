@@ -273,7 +273,7 @@ extern s8 D_800CD3C4;
 
 void Title_BackgroundInit(Object* backgroundObj) {
     OBJECT_STATE(backgroundObj) = D_800CD3C4;
-    func_80077D50(sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], 0);
+    func_80077D50_impl(sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], 0, true);
     if (OBJECT_STATE(backgroundObj) == 0) {
         OBJECT_LEFT(backgroundObj) = 8;
     }
@@ -296,7 +296,7 @@ void Title_LogoInit(Object* logoObj) {
             break;
     }
 
-    func_80077D50(sTitleLogoCompTexInfo, 0);
+    func_80077D50_impl(sTitleLogoCompTexInfo, 0, true);
 }
 
 void func_i4_8011B134(void) {
@@ -305,9 +305,9 @@ void func_i4_8011B134(void) {
 void Title_StartInit(Object* startObj) {
 
     OBJECT_STATE(startObj) = D_800CD3C4;
-    func_80077D50(sTitleNoControllerCompTexInfo, 0);
+    func_80077D50_impl(sTitleNoControllerCompTexInfo, 0, true);
     if (gControllersConnected != 0) {
-        func_80077D50(sTitlePushStartCompTexInfo, 0);
+        func_80077D50_impl(sTitlePushStartCompTexInfo, 0, true);
         OBJECT_LEFT(startObj) = 120;
         switch (OBJECT_STATE(startObj)) {
             case 0:
@@ -325,7 +325,7 @@ void func_i4_8011B1E4(void) {
 }
 
 void Title_CopyrightInit(void) {
-    func_80077D50(sCopyrightCompTexInfo, 0);
+    func_80077D50_impl(sCopyrightCompTexInfo, 0, true);
 }
 
 extern bool gRamDDCompatible;
@@ -351,7 +351,7 @@ void Title_DiskDriveInit(Object* diskDriveObj) {
         var_v0 = 2;
     }
 
-    func_80077D50(sTitleWarningCompTexInfos[var_v0], 0);
+    func_80077D50_impl(sTitleWarningCompTexInfos[var_v0], 0, true);
     if (gRamDDCompatible && (func_800758F8() != 1)) {
         OBJECT_COUNTER(diskDriveObj)++;
         D_i4_8011D794 = 1;
@@ -386,8 +386,8 @@ void Title_BackgroundUpdate(Object* backgroundObj) {
 }
 
 Gfx* Title_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
-    return func_80078EA0(gfx, sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], OBJECT_LEFT(backgroundObj),
-                         OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0_impl(gfx, sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)],
+                              OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f, true);
 }
 
 Gfx* func_i4_8011B3DC(Gfx* gfx, Object* arg1) {
@@ -395,7 +395,8 @@ Gfx* func_i4_8011B3DC(Gfx* gfx, Object* arg1) {
 }
 
 Gfx* Title_LogoDraw(Gfx* gfx, Object* logoObj) {
-    return func_80078EA0(gfx, sTitleLogoCompTexInfo, OBJECT_LEFT(logoObj), OBJECT_TOP(logoObj), 0, 0, 0, 1.0f, 1.0f);
+    return func_80078EA0_impl(gfx, sTitleLogoCompTexInfo, OBJECT_LEFT(logoObj), OBJECT_TOP(logoObj), 0, 0, 0, 1.0f,
+                              1.0f, true);
 }
 
 Gfx* func_i4_8011B438(Gfx* gfx, Object* arg1) {
@@ -410,8 +411,8 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
             return gfx;
         }
         gfx = func_8007DB28(gfx, 0);
-        gfx = func_80078EA0(gfx, sTitlePushStartCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 1, 0, 0, 1.0f,
-                            1.0f);
+        gfx = func_80078EA0_impl(gfx, sTitlePushStartCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 1, 0, 0,
+                                 1.0f, 1.0f, true);
     } else {
         OBJECT_LEFT(startObj) = 80;
 
@@ -441,8 +442,8 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
             gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
 
-        gfx = func_80078EA0(gfx, sTitleNoControllerCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 0, 0, 0,
-                            1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sTitleNoControllerCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 0, 0,
+                                 0, 1.0f, 1.0f, true);
     }
     return gfx;
 }
@@ -452,8 +453,8 @@ Gfx* func_i4_8011B668(Gfx* gfx, Object* arg1) {
 }
 
 Gfx* Title_CopyrightDraw(Gfx* gfx, Object* copyrightObj) {
-    return func_80078EA0(gfx, sCopyrightCompTexInfo, OBJECT_LEFT(copyrightObj), OBJECT_TOP(copyrightObj), 0, 0, 0, 1.0f,
-                         1.0f);
+    return func_80078EA0_impl(gfx, sCopyrightCompTexInfo, OBJECT_LEFT(copyrightObj), OBJECT_TOP(copyrightObj), 0, 0, 0,
+                              1.0f, 1.0f, true);
 }
 
 Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* diskDriveObj) {
@@ -483,8 +484,8 @@ Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* diskDriveObj) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
-        gfx = func_80078EA0(gfx, sTitleWarningCompTexInfos[var_t0], OBJECT_LEFT(diskDriveObj), OBJECT_TOP(diskDriveObj),
-                            0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sTitleWarningCompTexInfos[var_t0], OBJECT_LEFT(diskDriveObj),
+                                 OBJECT_TOP(diskDriveObj), 0, 0, 0, 1.0f, 1.0f, true);
     }
     return gfx;
 }

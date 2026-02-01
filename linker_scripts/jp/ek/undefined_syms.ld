@@ -1382,3 +1382,8 @@ silence_textures_VRAM = 0xA000000;
 silence_textures_VRAM_END = 0xA006B60;
 ending_venue_textures_VRAM = 0xA000000;
 ending_venue_textures_VRAM_END = 0xA006120;
+
+
+D_09000000 = 0x09000000;
+D_07000000 = 0x07000000;
+D_09001C88 = 0x09001C88;

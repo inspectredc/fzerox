@@ -287,137 +287,137 @@ D_4003340:
   offset: 0x3C40
   symbol: D_4003340
 
-D_4003540:
+aMachineCreateStatSelectedATex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x3E40
-  symbol: D_4003540
+  symbol: aMachineCreateStatSelectedATex
 
-D_4003840:
+aMachineCreateStatATex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x4140
-  symbol: D_4003840
+  symbol: aMachineCreateStatATex
 
-D_4003B40:
+aMachineCreateStatAInvalidTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x4440
-  symbol: D_4003B40
+  symbol: aMachineCreateStatAInvalidTex
 
-D_4003E40:
+aMachineCreateStatSelectedBTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x4740
-  symbol: D_4003E40
+  symbol: aMachineCreateStatSelectedBTex
 
-D_4004140:
+aMachineCreateStatBTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x4A40
-  symbol: D_4004140
+  symbol: aMachineCreateStatBTex
 
-D_4004440:
+aMachineCreateStatBInvalidTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x4D40
-  symbol: D_4004440
+  symbol: aMachineCreateStatBInvalidTex
 
-D_4004740:
+aMachineCreateStatSelectedCTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x5040
-  symbol: D_4004740
+  symbol: aMachineCreateStatSelectedCTex
 
-D_4004A40:
+aMachineCreateStatCTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x5340
-  symbol: D_4004A40
+  symbol: aMachineCreateStatCTex
 
-D_4004D40:
+aMachineCreateStatCInvalidTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x5640
-  symbol: D_4004D40
+  symbol: aMachineCreateStatCInvalidTex
 
-D_4005040:
+aMachineCreateStatSelectedDTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x5940
-  symbol: D_4005040
+  symbol: aMachineCreateStatSelectedDTex
 
-D_4005340:
+aMachineCreateStatDTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x5C40
-  symbol: D_4005340
+  symbol: aMachineCreateStatDTex
 
-D_4005640:
+aMachineCreateStatDInvalidTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x5F40
-  symbol: D_4005640
+  symbol: aMachineCreateStatDInvalidTex
 
-D_4005940:
+aMachineCreateStatSelectedETex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x6240
-  symbol: D_4005940
+  symbol: aMachineCreateStatSelectedETex
 
-D_4005C40:
+aMachineCreateStatETex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x6540
-  symbol: D_4005C40
+  symbol: aMachineCreateStatETex
 
-D_4005F40:
+aMachineCreateStatEInvalidTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 16
   offset: 0x6840
-  symbol: D_4005F40
+  symbol: aMachineCreateStatEInvalidTex

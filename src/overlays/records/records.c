@@ -269,7 +269,10 @@ s32 Records_ViewRecordsUpdate(void) {
     }
     if (sp2C == 0) {
         if (gInputButtonPressed & (BTN_A | BTN_START)) {
+#ifndef EXPANSION_KIT
             sRecordsMenuBox = BorderedBox_Init(0, 108, 50, 104, 100, GPACK_RGBA5551(0, 255, 0, 1), Records_MenuDraw);
+#else
+#endif
             if (sRecordsMenuBox != NULL) {
                 sRecordsState = RECORDS_STATE_RECORDS_MENU;
                 sRecordsHighlightedMenuIndex = 0;
@@ -335,8 +338,11 @@ s32 Records_MenuUpdate(void) {
                     clearBoxTop = 142;
                 }
 
+#ifndef EXPANSION_KIT
                 sRecordsClearConfirmBox = BorderedBox_Init(1, 120, clearBoxTop, 148, 80, GPACK_RGBA5551(255, 0, 0, 1),
                                                            Records_DrawClearConfirm);
+#else
+#endif
 
                 successfulSelection = false;
                 if (sRecordsClearConfirmBox != NULL) {
