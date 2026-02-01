@@ -2297,3 +2297,9 @@ sLimbAnimScaleData = 0x800F6B40; //segment:ead_demo
 sLimbAnimRotationData = 0x800F6B44; //segment:ead_demo
 sLimbAnimPositionData = 0x800F6B48; //segment:ead_demo
 sEADDemoMatrix = 0x800F6B4C; //segment:ead_demo
+
+// transition
+
+func_xk1_8002FFDC = 0x8002FFDC; //segment:expansion_kit
+
+func_i10_80115DF0 = 0x8012B520; //segment:ovl_i10

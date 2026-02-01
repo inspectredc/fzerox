@@ -6681,10 +6681,12 @@ block_115:
     return gfx;
 }
 #else
+#ifndef EXPANSION_KIT
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/racer/Racer_Draw.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/racer/Racer_Draw.s")
+#endif
 #endif
 #endif
 

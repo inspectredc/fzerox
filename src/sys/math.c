@@ -32,7 +32,11 @@ void func_80069F5C(FrameBuffer* fb) {
     var_s0 = &fb->array[70][96];
 
     for (var_s1 = 0; var_s1 < 0x6A00; var_s1 += 0x100, var_s0 += 80) {
+#ifndef EXPANSION_KIT
         Dma_ClearRomCopy((uintptr_t) SEGMENT_ROM_START(boot_textures) + var_s1 + sizeof(Gfx), var_s0, 0x100);
+#else
+        Dma_ClearRomCopy(gRomSegmentPairs[3][0] + var_s1 + sizeof(Gfx), var_s0, 0x100);
+#endif
     }
 }
 
@@ -379,28 +383,32 @@ void Light_SetLookAtSource(LookAt* lookAt, MtxF* mtx) {
                         Math_Round(mtx->m[2][1] * 120.0f));
 }
 
-void func_8006B18C(LookAt* lookAt, s32* arg1, MtxF* arg2, f32 arg3, f32 arg4, f32 arg5, s32 arg6, s32 arg7) {
+void func_8006B18C(LookAt* lookAt, s32* arg1, MtxF* mtxF, f32 arg3, f32 arg4, f32 arg5, s32 arg6, s32 arg7) {
     f32 temp_fa0;
     f32 temp_fa1;
     f32 temp_ft4;
     f32 temp_ft5;
     f32 temp_fv1;
 
-    Light_SetLookAtSource(lookAt, arg2);
-    temp_fa1 = arg2->m[0][2] + arg3;
-    temp_ft4 = arg2->m[1][2] + arg4;
-    temp_ft5 = arg2->m[2][2] + arg5;
+    Light_SetLookAtSource(lookAt, mtxF);
+    temp_fa1 = mtxF->m[0][2] + arg3;
+    temp_ft4 = mtxF->m[1][2] + arg4;
+    temp_ft5 = mtxF->m[2][2] + arg5;
     temp_fa0 = SQ(temp_fa1) + SQ(temp_ft4) + SQ(temp_ft5);
     if (temp_fa0 > 0.01f) {
+#ifndef EXPANSION_KIT
         temp_fv1 = 1.0 / sqrtf(temp_fa0);
+#else
+        temp_fv1 = 1.0f / sqrtf(temp_fa0);
+#endif
         temp_fa1 *= temp_fv1;
         temp_ft4 *= temp_fv1;
         temp_ft5 *= temp_fv1;
 
         arg1[0] =
-            (temp_fa1 * arg2->m[0][0] + temp_ft4 * arg2->m[1][0] + temp_ft5 * arg2->m[2][0]) * (arg6 * 2) + arg6 * 4;
+            (temp_fa1 * mtxF->m[0][0] + temp_ft4 * mtxF->m[1][0] + temp_ft5 * mtxF->m[2][0]) * (arg6 * 2) + arg6 * 4;
         arg1[1] =
-            (temp_fa1 * arg2->m[0][1] + temp_ft4 * arg2->m[1][1] + temp_ft5 * arg2->m[2][1]) * (arg7 * 2) + arg7 * 4;
+            (temp_fa1 * mtxF->m[0][1] + temp_ft4 * mtxF->m[1][1] + temp_ft5 * mtxF->m[2][1]) * (arg7 * 2) + arg7 * 4;
     } else {
         arg1[0] = arg6 * 2;
         arg1[1] = arg7 * 2;
@@ -905,10 +913,14 @@ void Matrix_SetAxisRotation(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, f32 arg4,
     Matrix_ToMtx(arg1, arg0);
 }
 #else
+#ifndef EXPANSION_KIT
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
+#endif
+#else
+#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
 #endif
 #endif
 

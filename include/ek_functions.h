@@ -36,5 +36,17 @@ void Audio_SEStart(u8 channelIndex, u8 ioData);
 void Audio_StopChannelSE(u8 channelIndex);
 void Audio_DisablePlayerSE(void);
 
+void func_80704CE0(void);
+void func_80706518(s32, s32, char*);
+void func_80707B08(void);
+s32 func_80707780(void);
+void SLMFSNewDisk(void);
+void SLMFSNewDisk2(void);
+void SLMFSDeleteFile(u16 dirId, char* name, char* extension, bool writeChanges);
+void SLMFSRecoverManageArea(void);
+s32 SLLeoReadDiskID(LEODiskID* diskId);
+
+s32 DiskDrive_LoadOverlay(s32 startLba, void* vram, s32 diskSize, s32 bssSize);
+
 #endif
 #endif // EK_FUNCTIONS_H

@@ -218,7 +218,7 @@ void Main_ThreadEntry(void* arg0) {
             SLLeoCreateManager();
         }
     }
-#else // EXPANSION_KIT
+#else
     DiskDrive_InitRomSegmentPairs();
 
     switch (osResetType) {
@@ -276,7 +276,7 @@ void Main_ThreadEntry(void* arg0) {
 
 #ifndef EXPANSION_KIT
     func_80069F5C(gFrameBuffers[0]);
-#else // EXPANSION_KIT
+#else
     func_806F33D0(gFrameBuffers[0]);
     func_806F33D0(gFrameBuffers[1]);
     func_806F33D0(gFrameBuffers[2]);
@@ -294,7 +294,7 @@ void Main_ThreadEntry(void* arg0) {
         func_8007647C();
 #endif
     }
-#else // EXPANSION_KIT
+#else
     if (gRamDDCompatible) {
         osCreateThread(&sSys6Thread, THREAD_ID_6, func_80767958, 0, sSys6ThreadStack + sizeof(sSys6ThreadStack), 30);
         if (gLeoDriveConnectionState == 1) {

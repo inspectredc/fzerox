@@ -36,6 +36,12 @@ uintptr_t gLeoVramStart;
 uintptr_t gLeoVramEnd;
 UNUSED uintptr_t D_800DCD6C;
 UNUSED uintptr_t D_800DCD70;
+#ifdef EXPANSION_KIT
+uintptr_t gOvlCourseEditVramStart;
+uintptr_t gOvlCourseEditVramEnd;
+uintptr_t gOvlMachineCreateVramStart;
+uintptr_t gOvlMachineCreateVramEnd;
+#endif
 uintptr_t gFramebuffer1VramStart;
 uintptr_t gFramebuffer1VramEnd;
 uintptr_t gFramebuffer2VramStart;
@@ -54,8 +60,8 @@ uintptr_t gSegment17B1E0VramStart;
 uintptr_t gSegment17B1E0VramEnd;
 uintptr_t gSegment17B960VramStart;
 uintptr_t gSegment17B960VramEnd;
-UNUSED uintptr_t D_800DCDBC;
-UNUSED uintptr_t D_800DCDC0;
+uintptr_t gExpansionKitTexturesVramStart;
+uintptr_t gExpansionKitTexturesVramEnd;
 uintptr_t gSegment1B8550VramStart;
 uintptr_t gSegment1B8550VramEnd;
 uintptr_t gSegment1E23F0VramStart;
@@ -103,11 +109,27 @@ void Gfx_InitBuffer(void) {
     gMasterDisp = gGfxPool->gfxBuffer;
 }
 
+extern unk_80128C94* D_80128C90;
+
 void Gfx_LoadSegments(void) {
+#ifdef EXPANSION_KIT
+    Segment_SetPhysicalAddress(6, &D_80128C90[D_800DCCFC]);
+#endif
     gMasterDisp = Segment_SetTableAddresses(gMasterDisp);
 }
 
+extern bool gInCourseEditor;
+
 void Gfx_FullSync(void) {
+
+#ifdef EXPANSION_KIT
+    if (gInCourseEditor) {
+        gMasterDisp = func_xk1_8002ED64(gMasterDisp);
+    }
+
+    gMasterDisp = func_xk1_8002F9DC(gMasterDisp);
+#endif
+
     gDPFullSync(gMasterDisp++);
     gSPEndDisplayList(gMasterDisp++);
 }
@@ -157,14 +179,14 @@ extern OSMesgQueue D_800DCAC8;
 extern FrameBuffer* gFrameBuffers[];
 
 void func_80067D64(void) {
-    MQ_WAIT_FOR_MESG(&D_800DCAB0, &D_800DCD10);
+    osRecvMesg(&D_800DCAB0, &D_800DCD10, OS_MESG_BLOCK);
     Audio_Update();
     Gfx_InitBuffer();
     func_800690FC();
     Gfx_LoadSegments();
     gMasterDisp = func_80069698(gMasterDisp);
     Gfx_FullSync();
-    MQ_WAIT_FOR_MESG(&D_800DCAC8, &D_800DCD10);
+    osRecvMesg(&D_800DCAC8, &D_800DCD10, OS_MESG_BLOCK);
 
     while (osDpGetStatus() &
            (DPC_STATUS_DMA_BUSY | DPC_STATUS_CMD_BUSY | DPC_STATUS_PIPE_BUSY | DPC_STATUS_TMEM_BUSY)) {}
@@ -181,7 +203,7 @@ void func_80067D64(void) {
 void func_80067E98(void) {
     s32 retries = 100000;
 
-    MQ_WAIT_FOR_MESG(&D_800DCAB0, &D_800DCD10);
+    osRecvMesg(&D_800DCAB0, &D_800DCD10, OS_MESG_BLOCK);
     Gfx_InitBuffer();
     func_800690FC();
     func_80067AE0();
@@ -189,7 +211,7 @@ void func_80067E98(void) {
     gMasterDisp = func_80069698(gMasterDisp);
     Gfx_FullSync();
     Audio_Update();
-    MQ_WAIT_FOR_MESG(&D_800DCAC8, &D_800DCD10);
+    osRecvMesg(&D_800DCAC8, &D_800DCD10, OS_MESG_BLOCK);
     Transition_SetBackgroundBuffer();
     osViSwapBuffer(gFrameBuffers[D_800DCD08]);
     Segment_LoadAssets();
@@ -209,6 +231,9 @@ s16 D_800CCFE8 = 2;
 
 extern bool gRamDDCompatible;
 extern s16 gSettingSoundMode;
+extern s32 D_8076CB40;
+extern s32 D_800CCFB0;
+extern s32 gLeoDriveConnectionState;
 
 extern unk_80225800 D_80225800;
 
@@ -281,49 +306,175 @@ void Game_ThreadEntry(void* entry) {
     gSegment22B0A0VramEnd = gSegment22B0A0VramStart + (size_t) SEGMENT_DATA_SIZE_CONST(machine_models);
 
     D_800DCDFC = gSegment17B1E0VramEnd;
+#ifndef EXPANSION_KIT // TODO: USE MACRO FOR SIZE
     D_800DCE00 = D_800DCDFC + 0x1F820;
+#else
+    D_800DCE00 = D_800DCDFC + 0x35E10;
+#endif
 
     gCourseEditTexturesVramStart = D_800DCE00;
+#ifndef EXPANSION_KIT
     gCourseEditTexturesVramEnd = gCourseEditTexturesVramStart + (size_t) SEGMENT_VRAM_SIZE(course_edit_textures_beta);
+#else
+    gCourseEditTexturesVramEnd = gCourseEditTexturesVramStart + (size_t) SEGMENT_VRAM_SIZE(course_edit_textures);
+#endif
 
     gCreateMachineTexturesVramStart = D_800DCE00;
     gCreateMachineTexturesVramEnd =
         gCreateMachineTexturesVramStart + (size_t) SEGMENT_VRAM_SIZE(create_machine_textures);
 
+#ifndef EXPANSION_KIT
     gLeoVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(leo));
     gLeoVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(leo));
+#else
+    gOvlCourseEditVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(course_edit));
+    gOvlCourseEditVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(course_edit));
+
+    gExpansionKitTexturesVramStart = gOvlCourseEditVramEnd;
+    gExpansionKitTexturesVramEnd = gExpansionKitTexturesVramStart + (size_t) SEGMENT_VRAM_SIZE(expansion_kit_textures);
+
+    gOvlMachineCreateVramStart = osVirtualToPhysical(SEGMENT_VRAM_START(machine_create));
+    gOvlMachineCreateVramEnd = osVirtualToPhysical(SEGMENT_VRAM_END(machine_create));
+#endif
 
     // Setup memory
     Segment_SetAddress(0, 0);
     Segment_SetAddress(2, gUnkBssVramStart);
     Segment_SetAddress(8, gSegment16C8A0VramStart);
     Segment_SetAddress(3, gSegment17B1E0VramStart);
+#ifdef EXPANSION_KIT
+    Segment_SetPhysicalAddress(6, &D_80128C90[D_800DCCFC]);
+
+    Controller_Init();
+#endif
+
     Arena_DefaultStartInit();
     Arena_EndInit();
 
+#ifdef EXPANSION_KIT
+    while (func_80742790() != 2) {}
+    while (func_807424CC() != 0) {}
+#endif
+
+#ifndef EXPANSION_KIT
     CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(ovl_i2), SEGMENT_TEXT_SIZE(ovl_i2), SEGMENT_DATA_START(ovl_i2),
                         SEGMENT_DATA_END(ovl_i2) - SEGMENT_DATA_START(ovl_i2));
     Dma_LoadOverlay(SEGMENT_ROM_START(ovl_i2), SEGMENT_VRAM_START(ovl_i2), SEGMENT_ROM_SIZE(ovl_i2),
                     SEGMENT_BSS_START(ovl_i2), SEGMENT_BSS_SIZE(ovl_i2));
+#endif
 
     CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(ovl_i10), SEGMENT_TEXT_SIZE(ovl_i10), SEGMENT_DATA_START(ovl_i10),
                         SEGMENT_DATA_SIZE(ovl_i10));
+#ifndef EXPANSION_KIT
     Dma_LoadOverlay(SEGMENT_ROM_START(ovl_i10), SEGMENT_VRAM_START(ovl_i10), SEGMENT_ROM_SIZE(ovl_i10),
                     SEGMENT_BSS_START(ovl_i10), SEGMENT_BSS_SIZE(ovl_i10));
+#else
+    DiskDrive_LoadOverlayProgressBar(SEGMENT_DISK_START(ovl_i10), SEGMENT_VRAM_START(ovl_i10),
+                                     SEGMENT_DISK_SIZE(ovl_i10), SEGMENT_BSS_SIZE(ovl_i10));
+#endif
+
+#ifdef EXPANSION_KIT
+
+    D_8076CB40 = D_800CCFB0;
+
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(expansion_kit), SEGMENT_TEXT_SIZE(expansion_kit),
+                        SEGMENT_DATA_START(expansion_kit),
+                        SEGMENT_DATA_END(expansion_kit) - SEGMENT_DATA_START(expansion_kit));
+
+    DiskDrive_LoadOverlayProgressBar(SEGMENT_DISK_START(expansion_kit), SEGMENT_VRAM_START(expansion_kit),
+                                     SEGMENT_DISK_SIZE(expansion_kit), SEGMENT_BSS_SIZE(expansion_kit));
+
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(ovl_i3), SEGMENT_TEXT_SIZE(ovl_i3), SEGMENT_DATA_START(ovl_i3),
+                        SEGMENT_DATA_SIZE(ovl_i3));
+
+    DiskDrive_LoadOverlayProgressBar(SEGMENT_DISK_START(ovl_i3), SEGMENT_VRAM_START(ovl_i3), SEGMENT_DISK_SIZE(ovl_i3),
+                                     SEGMENT_BSS_SIZE(ovl_i3));
+
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(ovl_i4), SEGMENT_TEXT_SIZE(ovl_i4), SEGMENT_DATA_START(ovl_i4),
+                        SEGMENT_DATA_SIZE(ovl_i4));
+
+    DiskDrive_LoadOverlayProgressBar(SEGMENT_DISK_START(ovl_i4), SEGMENT_VRAM_START(ovl_i4), SEGMENT_DISK_SIZE(ovl_i4),
+                                     SEGMENT_BSS_SIZE(ovl_i4));
+
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(course_select), SEGMENT_TEXT_SIZE(course_select),
+                        SEGMENT_DATA_START(course_select), SEGMENT_DATA_SIZE(course_select));
+
+    DiskDrive_LoadOverlayProgressBar(SEGMENT_DISK_START(course_select), SEGMENT_VRAM_START(course_select),
+                                     SEGMENT_DISK_SIZE(course_select), SEGMENT_BSS_SIZE(course_select));
+
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(ovl_i6), SEGMENT_TEXT_SIZE(ovl_i6), SEGMENT_DATA_START(ovl_i6),
+                        SEGMENT_DATA_SIZE(ovl_i6));
+
+    DiskDrive_LoadOverlayProgressBar(SEGMENT_DISK_START(ovl_i6), SEGMENT_VRAM_START(ovl_i6), SEGMENT_DISK_SIZE(ovl_i6),
+                                     SEGMENT_BSS_SIZE(ovl_i6));
+
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(ending), SEGMENT_TEXT_SIZE(ending), SEGMENT_DATA_START(ending),
+                        SEGMENT_DATA_SIZE(ending));
+
+    DiskDrive_LoadOverlayProgressBar(SEGMENT_DISK_START(ending), SEGMENT_VRAM_START(ending), SEGMENT_DISK_SIZE(ending),
+                                     SEGMENT_BSS_SIZE(ending));
+
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(records), SEGMENT_TEXT_SIZE(records), SEGMENT_DATA_START(records),
+                        SEGMENT_DATA_SIZE(records));
+
+    DiskDrive_LoadOverlayProgressBar(SEGMENT_DISK_START(records), SEGMENT_VRAM_START(records),
+                                     SEGMENT_DISK_SIZE(records), SEGMENT_BSS_SIZE(records));
+
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(ovl_i2), SEGMENT_TEXT_SIZE(ovl_i2), SEGMENT_DATA_START(ovl_i2),
+                        SEGMENT_DATA_END(ovl_i2) - SEGMENT_DATA_START(ovl_i2));
+
+    DiskDrive_LoadOverlayProgressBar(SEGMENT_DISK_START(ovl_i2), SEGMENT_VRAM_START(ovl_i2), SEGMENT_DISK_SIZE(ovl_i2),
+                                     SEGMENT_BSS_SIZE(ovl_i2));
+
+    CLEAR_OVERLAY_CACHE(SEGMENT_TEXT_START(ovl_i9), SEGMENT_TEXT_SIZE(ovl_i9), SEGMENT_DATA_START(ovl_i9),
+                        SEGMENT_DATA_SIZE(ovl_i9));
+
+    DiskDrive_LoadOverlay(SEGMENT_DISK_START(ovl_i9), SEGMENT_VRAM_START(ovl_i9), SEGMENT_DISK_SIZE(ovl_i9),
+                          SEGMENT_BSS_SIZE(ovl_i9));
+
+    D_8076CB40 = -1;
+    func_i10_8012B904();
+#endif
 
     CLEAR_DATA_CACHE(osPhysicalToVirtual(gSegment16C8A0VramStart), SEGMENT_DATA_SIZE_CONST(course_track_gfx));
+#ifndef EXPANSION_KIT
     Dma_LoadAssets(SEGMENT_ROM_START(course_track_gfx),
                    (uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +
                        (size_t) SEGMENT_DATA_SIZE_CONST(course_track_gfx),
                    SEGMENT_ROM_SIZE(course_track_gfx));
+#else
+    Dma_LoadAssets(gRomSegmentPairs[15][0],
+                (uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +
+                    (size_t) SEGMENT_DATA_SIZE_CONST(course_track_gfx),
+                SEGMENT_VRAM_SIZE(course_track_gfx));
+#endif
 
     mio0Decode((uintptr_t) osPhysicalToVirtual(gSegment16C8A0VramStart) +
                    (size_t) SEGMENT_DATA_SIZE_CONST(course_track_gfx),
                osPhysicalToVirtual(gSegment16C8A0VramStart));
+
+#ifndef EXPANSION_KIT
     Dma_LoadAssets(SEGMENT_ROM_START(setup_gfx), osPhysicalToVirtual(gSegment17B1E0VramStart),
                    SEGMENT_ROM_SIZE(setup_gfx));
     Dma_LoadAssets(SEGMENT_ROM_START(machine_custom_gfx), osPhysicalToVirtual(gSegment17B960VramStart),
                    SEGMENT_ROM_SIZE(machine_custom_gfx));
+#else
+    Dma_LoadAssets(gRomSegmentPairs[7][0], (uintptr_t) osPhysicalToVirtual(gSegment17B1E0VramStart),
+                   SEGMENT_VRAM_SIZE(setup_gfx));
+
+    Dma_LoadAssets(gRomSegmentPairs[10][0], (uintptr_t) osPhysicalToVirtual(gSegment17B960VramStart),
+                   SEGMENT_VRAM_SIZE(machine_custom_gfx));
+#endif
+
+#ifdef EXPANSION_KIT
+    if ((gLeoDriveConnectionState != 0) && gRamDDCompatible) {
+        if (osAppNMIBuffer[13] != 0x20DE1529) {
+            osAppNMIBuffer[13] = 0x20DE1529;
+            func_xk1_8002FFA0();
+        }
+        func_xk1_8002FFDC();
+    }
+#endif
 
     // FrameBuffer Indexes
     D_800DCCFC = 0;
@@ -341,7 +492,11 @@ void Game_ThreadEntry(void* entry) {
     Matrix_SetTransRot(&D_80225800.unk_000, 0, 1.0f, 0, 0, 0, 0.0f, 0.0f, 0.0f);
 
     Math_Rand1Init(osGetTime(), osGetTime() + osGetTime());
+
+#ifndef EXPANSION_KIT
     Controller_Init();
+#endif
+
     func_i10_80115DF0();
     if (gSettingSoundMode == 0) {
         Audio_SetOutMode(SOUNDMODE_SURROUND);

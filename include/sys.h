@@ -113,7 +113,7 @@ typedef struct GfxPool {
     Mtx unk_2C668[1];
     s8 pad_2C6A8[0x48];
 } GfxPool; // size = 0x2C6F0
-#else // EXPANSION_KIT
+#else
 typedef struct GfxPool {
     /* 0x00000 */ Gfx gfxBuffer[13313];
     /* 0x1A008 */ Mtx unk_20008[4];

@@ -632,10 +632,12 @@ void func_8009DB28(CourseSegment* segment, f32* arg1, f32* arg2) {
 }
 #else
 void func_8009DB28(CourseSegment*, f32*, f32*);
+#ifndef EXPANSION_KIT
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/course/func_8009DB28.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/course/func_8009DB28.s")
+#endif
 #endif
 #endif
 

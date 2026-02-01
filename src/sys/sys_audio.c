@@ -6,7 +6,6 @@
 extern OSMesgQueue gAudioTaskMesgQueue;
 extern OSMesgQueue gMainThreadMesgQueue;
 extern OSTask* gCurAudioOSTask;
-extern RomOffset gRomSegmentPairs[][2];
 
 OSMesg sAudioTaskMsg;
 

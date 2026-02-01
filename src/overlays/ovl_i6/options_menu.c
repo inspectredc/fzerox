@@ -631,10 +631,12 @@ void func_i6_8011D394(void) {
     }
 }
 #else
+#ifndef EXPANSION_KIT
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i6/options_menu/func_i6_8011D394.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/options_menu/func_i6_8011D394.s")
+#endif
 #endif
 #endif
 

@@ -117,6 +117,14 @@ DECLARE_SEGMENT(game_context);
 #define SEGMENT_DISK_START(segment) (segment ## _ROM_START)
 #define SEGMENT_DISK_SIZE(segment)  (SEGMENT_BSS_START(segment) - SEGMENT_VRAM_START(segment))
 
+DECLARE_SEGMENT(course_edit_textures);
+DECLARE_SEGMENT(expansion_kit_textures);
+
+DECLARE_SEGMENT(expansion_kit);
+DECLARE_SEGMENT(course_edit);
+DECLARE_SEGMENT(machine_create);
+DECLARE_SEGMENT(ead_demo);
+
 DECLARE_SEGMENT(silence_3);
 DECLARE_SEGMENT(sand_ocean_3);
 DECLARE_SEGMENT(devils_forest_4);
@@ -142,6 +150,8 @@ DECLARE_SEGMENT(port_town_4_staff_ghost);
 DECLARE_SEGMENT(fire_field_2_staff_ghost);
 DECLARE_SEGMENT(white_land_3_staff_ghost);
 DECLARE_SEGMENT(big_foot_staff_ghost);
+
+DECLARE_SEGMENT(cartridge_offsets);
 #endif
 
 #endif

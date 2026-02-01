@@ -5,7 +5,7 @@
 
 #ifndef EXPANSION_KIT
 #define BORDERED_BOX_COUNT 3
-#else // EXPANSION_KIT
+#else
 #define BORDERED_BOX_COUNT 5
 #endif
 

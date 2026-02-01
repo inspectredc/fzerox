@@ -1557,10 +1557,12 @@ Gfx* Transition_PhasedStripsDraw(Gfx* gfx, Transition* transition) {
     return gfx;
 }
 #else
+#ifndef EXPANSION_KIT
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i2/transition/Transition_PhasedStripsDraw.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/transition/Transition_PhasedStripsDraw.s")
+#endif
 #endif
 #endif
 

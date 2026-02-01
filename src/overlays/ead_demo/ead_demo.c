@@ -11,27 +11,27 @@ Vp sEADDemoVp = {
 };
 
 extern s32 D_800CCFBC;
-extern s16 D_8076C7A8;
+extern s16 D_800CCFE8;
 
 void EADDemo_Init(void) {
     Audio_DDBgmReady(BGM_EAD_DEMO);
     Audio_DDBgmStart(BGM_EAD_DEMO);
     EADDemo_SinTableInit();
     D_800CCFBC = 2;
-    D_8076C7A8 = 3;
+    D_800CCFE8 = 3;
 }
 
 extern s32 gTransitionState;
 
 extern GfxPool D_8024E260[];
-extern s32 D_8079A35C;
+extern s32 D_800DCCFC;
 extern s32 gGameMode;
 extern s32 gPostEadDemoGameMode;
 extern u16 gInputButtonPressed;
 extern GfxPool* gGfxPool;
 
 s32 EADDemo_Update(void) {
-    gGfxPool = &D_8024E260[D_8079A35C];
+    gGfxPool = &D_8024E260[D_800DCCFC];
     if (gTransitionState != TRANSITION_INACTIVE) {
         return gGameMode;
     }
@@ -49,7 +49,7 @@ extern Gfx D_8076CAF8[];
 extern u8 aEADDemoSugoiTex[];
 extern GfxPool D_1000000;
 extern FrameBuffer* gFrameBuffers[];
-extern s32 D_8079A364;
+extern s32 D_800DCD04;
 
 Gfx* EADDemo_Draw(Gfx* gfx) {
     static s32 D_xk4_800F1AB8 = 4800;
@@ -62,8 +62,7 @@ Gfx* EADDemo_Draw(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_3000338);
     gSPDisplayList(gfx++, D_8076CAF8);
-
-    gfx = EADDemo_DrawBackground(gfx, gFrameBuffers[D_8079A364], 0, 0, 0x60, 0, 0, 0);
+    gfx = EADDemo_DrawBackground(gfx, gFrameBuffers[D_800DCD04], 0, 0, 0x60, 0, 0, 0);
     gSPDisplayList(gfx++, D_8014940);
 
     for (i = 0; i < 64; i++) {

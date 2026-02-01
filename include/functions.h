@@ -90,7 +90,10 @@ s32 SLLeoReadWrite(LEOCmd* cmdBlock, s32 direction, s32 lba, void* vAddr, u32 nL
 s32 func_800760F8(void);
 s32 func_800761D4(void);
 void func_800762B0(LEODiskID diskId);
+#ifndef EXPANSION_KIT
 s32 SLLeoCreateManager(void);
+#endif
+s32 SLCheckDiskInsert(void);
 void SLLeoResetClear(void);
 void func_8007647C(void);
 void func_80076310(void);
