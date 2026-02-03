@@ -2306,6 +2306,10 @@ D_xk1_8003A598 = 0x8003A598; //segment:expansion_kit size:0x24
 D_xk1_8003A5D8 = 0x8003A5D8; //segment:expansion_kit size:0xE58
 
 func_i3_80059EC0 = 0x80059EC0; //segment:ovl_i3
+D_80141D6C = 0x8006D544; //segment:ovl_i3
+D_80141D70 = 0x8006D548; //segment:ovl_i3
+
+D_i5_801190D0 = 0x8007B9DC; //segment:course_select
 
 func_80077D50 = 0x800AE17C; //segment:ovl_i2
 func_80078104 = 0x800AE7C4; //segment:ovl_i2
@@ -2319,6 +2323,7 @@ func_80079EC8 = 0x800B079C; //segment:ovl_i2
 func_i2_800B39B4 = 0x800B39B4; //segment:ovl_i2
 func_800A4D0C = 0x800B91AC; //segment:ovl_i2
 func_i2_800BE8BC = 0x800BE8BC; //segment:ovl_i2
+D_i2_80106F10 = 0x800BF040; //segment:ovl_i2
 
 func_i10_80115DF0 = 0x8012B520; //segment:ovl_i10
 

@@ -38,6 +38,7 @@ void func_8074184C(u8 playerIndex);
 void Audio_SEStart(u8 channelIndex, u8 ioData);
 void Audio_StopChannelSE(u8 channelIndex);
 void Audio_DisablePlayerSE(void);
+void Audio_DDBgmStart(u8 bgm);
 void Audio_DDBgmStart2(u8 bgm);
 void Audio_EditorBgmRestart(void);
 void Audio_EditorBgmStop(void);

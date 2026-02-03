@@ -94,14 +94,14 @@
       - [0x15850, c, sys/dma]
       - [0x15AB0, c, sys/segment]
       - [0x17490, asm, game/texture_utils]
-      - [0x1AA20, asm, game/common]
+      - [0x1AA20, c, game/common]
       - [0x1B6E0, asm, game/texture_utils2]
-      - [0x1C8B0, asm, game/194E0]
+      - [0x1C8B0, c, game/194E0]
       - [0x1C8F0, c, sys/disk_mount_dd]
       - [0x1C970, c, sys/leo_fault_dd]
       - [0x1D580, c, sys/sys_fault]
-      - [0x1E970, asm, game/bordered_box]
-      - [0x1F320, asm, game/camera]
+      - [0x1E970, c, game/bordered_box]
+      - [0x1F320, c, game/camera]
       - [0x27110, asm, game/racer]
       - [0x3BBB0, hasm, game/mio0Decode]
       - [0x3BC60, c, audio/disk/lib/synthesis]
@@ -316,12 +316,12 @@
       - [0x7A340, .data, sys/disk_drive_dd]
       - [0x7A350, .data, sys/sys_leo_dd]
       - [0x7A3D0, .data, sys/segment]
-      - [0x7A450, data, game/common]
-      - [0x7A620, data, game/194E0]
+      - [0x7A450, .data, game/common]
+      - [0x7A620, .data, game/194E0]
       - [0x7A800, .data, sys/disk_mount_dd]
       - [0x7A810, .data, sys/leo_fault_dd]
       - [0x7ACE0, .data, sys/sys_fault]
-      - [0x7AEC0, data, game/camera]
+      - [0x7AEC0, .data, game/camera]
       - [0x7B0C0, data, game/racer]
       - [0x7CB20, data, unk_tables]
       - [0x7DB20, .data, audio/disk/lib/filter_data]
@@ -420,12 +420,12 @@
       - [0x81230, .rodata, sys/disk_drive_dd]
       - [0x81500, .rodata, sys/sys_leo_dd]
       - [0x82EE0, .rodata, sys/segment]
-      - [0x831E0, rodata, game/common]
+      - [0x831E0, .rodata, game/common]
       - [0x83620, .rodata, sys/disk_mount_dd]
       - [0x83630, .rodata, sys/leo_fault_dd]
       - [0x83670, .rodata, sys/sys_fault]
-      - [0x83BB0, rodata, game/bordered_box]
-      - [0x83BD0, rodata, game/camera]
+      - [0x83BB0, .rodata, game/bordered_box]
+      - [0x83BD0, .rodata, game/camera]
       - [0x846F0, rodata, game/racer]
       - [0x84970, .rodata, audio/disk/lib/synthesis]
       - [0x84990, .rodata, audio/disk/lib/heap]
@@ -482,12 +482,12 @@
       - { type: bss, vram: 0x8079E920, name: game/course_gadgets }
       - { type: .bss, vram: 0x8079F950, name: sys/sys_leo_dd }
       - { type: .bss, vram: 0x8079FA40, name: sys/segment }
-      - { type: bss, vram: 0x8079FAA0, name: game/common }
-      - { type: bss, vram: 0x8079FC10, name: game/194E0 }
+      - { type: .bss, vram: 0x8079FAA0, name: game/common }
+      - { type: .bss, vram: 0x8079FC10, name: game/194E0 }
       - { type: .bss, vram: 0x8079FC80, name: sys/leo_fault_dd }
       - { type: .bss, vram: 0x8079FE80, name: sys/sys_fault }
-      - { type: bss, vram: 0x807A0870, name: game/bordered_box }
-      - { type: bss, vram: 0x807A0930, name: game/camera }
+      - { type: .bss, vram: 0x807A0870, name: game/bordered_box }
+      - { type: .bss, vram: 0x807A0930, name: game/camera }
       - { type: bss, vram: 0x807A15D0, name: game/racer }
       - { type: .bss, vram: 0x807B3C20, name: game/course_gadget_context }
       - { type: bss, vram: 0x807C1870, name: 807C1870 } # pad

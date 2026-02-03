@@ -255,7 +255,7 @@ void func_xk3_80132F50(void) {
     } else {
         sMachineSelectIndex = 0;
     }
-    sMachinesUnlocked = ((func_8070DA54() / 3) * 6) + 6;
+    sMachinesUnlocked = ((func_8007E008() / 3) * 6) + 6;
     if (gSettingEverythingUnlocked != 0) {
         sMachinesUnlocked = 30;
     }

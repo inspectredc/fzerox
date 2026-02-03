@@ -25,6 +25,9 @@ typedef struct BorderedBoxWidget {
     /* 0x16 */ s16 maxHeight;
     /* 0x18 */ u16 boxColor;
     /* 0x1A */ u16 borderColor;
+#ifdef EXPANSION_KIT
+    /* 0x1C */ u16 depth;
+#endif
     /* 0x1C */ BorderedBoxContentsDrawFunc contentsDrawFunc;
 } BorderedBoxWidget; // size = 0x20
 

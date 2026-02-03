@@ -4,8 +4,8 @@
 #include "fzx_camera.h"
 #include "fzx_course.h"
 #include "fzx_save.h"
+#include "src/overlays/ending/ending.h"
 #include ASSET_HEADER(course_track_gfx.h)
-// #include "src/overlays/ending/ending.h"
 #define ENDING_CHARACTER_FIREWORKS (1 << 0)
 #define ENDING_SHOW_PODIUM_SEQUENCE (1 << 1)
 #define ENDING_DRAW_CONGRATULATIONS (1 << 2)
@@ -362,8 +362,10 @@ const CameraFollowSmoothData D_800D544C = {
 
 s32 sMultiplayerFocusCameraId = -1;
 bool sAllowCameraLookBack = true;
+#ifndef EXPANSION_KIT
 f32 D_800CD8A8 = 5.0f;
 f32 D_800CD8AC = 5.0f;
+#endif
 
 EyeFromRacerInfo sEyeFromRacerInfo0 = {
     2000.0f,
@@ -1006,6 +1008,7 @@ void Camera_UpdateProjectionViewMtx(GfxPool* gfxPool, Camera* camera) {
                        camera->fovScaleX, camera->frustrumCenterX, camera->fovScaleY, camera->frustrumCenterY,
                        &camera->perspectiveScale);
 
+#ifndef EXPANSION_KIT
     if (D_800E5E8C != 0) {
         var_fv0 = D_800CD8AC;
         var_fv1 = D_800CD8A8;
@@ -1028,6 +1031,35 @@ void Camera_UpdateProjectionViewMtx(GfxPool* gfxPool, Camera* camera) {
                      camera->basis.y.x, camera->basis.y.y, camera->basis.y.z);
 
     Camera_CalculateProjectionViewMtx(&camera->projectionViewMtx, &camera->projectionMtx, &camera->viewMtx);
+#else
+    eye = camera->eye;
+    at = camera->at;
+
+    Matrix_SetLookAt(&gfxPool->unk_20108[camera->id], &camera->viewMtx, eye.x, eye.y, eye.z, at.x, at.y, at.z,
+                     camera->basis.y.x, camera->basis.y.y, camera->basis.y.z);
+    Camera_CalculateProjectionViewMtx(&camera->projectionViewMtx, &camera->projectionMtx, &camera->viewMtx);
+    if (gNumPlayers != 2) {
+        f32 var_fv0;
+        f32 fov;
+
+        var_fv0 = ABS(camera->projectionViewMtx.m[3][1]);
+
+        if (var_fv0 > 30000.0f) {
+            var_fv0 -= 30000.0f;
+            var_fv0 /= SHT_MAX - 30000.0f;
+            if (var_fv0 >= 1.0f) {
+                var_fv0 = 1.0f;
+            }
+            fov = camera->fov + ((85.0f - camera->fov) * var_fv0);
+
+            Matrix_SetFrustrum(&gfxPool->unk_20008[camera->id], &camera->projectionMtx, fov, camera->near, camera->far,
+                               camera->fovScaleX, camera->frustrumCenterX, camera->fovScaleY, camera->frustrumCenterY,
+                               &camera->perspectiveScale);
+            Camera_CalculateProjectionViewMtx(&camera->projectionViewMtx, &camera->projectionMtx, &camera->viewMtx);
+        }
+    }
+#endif
+
     Camera_MatrixToMtx(&camera->projectionViewMtx, &gfxPool->unk_20208[camera->id]);
 }
 
@@ -1930,7 +1962,11 @@ void Camera_StartInit(void) {
         var_s4++;
         camera++;
     }
+#ifndef EXPANSION_KIT
     sCameraInfoInitialized = false;
+#else
+    sCameraInfoInitialized = true;
+#endif
 }
 
 extern s8 gTitleDemoState;
@@ -1941,7 +1977,9 @@ void Camera_Init(void) {
     Racer* racer;
 
     sEndingCameraMessage = 0;
+#ifndef EXPANSION_KIT
     D_800E5E8C = 0;
+#endif
 
     for (i = 0, camera = gCameras; i < 4; i++, camera++) {
         racer = &gRacers[camera->id];
@@ -1961,7 +1999,9 @@ void Camera_Init(void) {
             break;
         case GAMEMODE_LX_MACHINE_SETTINGS:
         case GAMEMODE_LX_GP_RACE_NEXT_MACHINE_SETTINGS:
+#ifndef EXPANSION_KIT
             D_800E5E8C = sCameraInfoInitialized;
+#endif
             sNumCameras = 1;
             gCameras[0].mode = CAMERA_MODE_MACHINE_SETTINGS;
             Camera_InitMode(gCameras, sCameraSettings, sCameraScriptMgrs);
@@ -1976,7 +2016,9 @@ void Camera_Init(void) {
         case GAMEMODE_GP_RACE:
         case GAMEMODE_PRACTICE:
         case GAMEMODE_DEATH_RACE:
+#ifndef EXPANSION_KIT
             D_800E5E8C = sCameraInfoInitialized;
+#endif
             /* fallthrough */
         case GAMEMODE_VS_2P:
         case GAMEMODE_VS_3P:
@@ -1999,15 +2041,27 @@ void Camera_Init(void) {
 
             break;
         case GAMEMODE_TIME_ATTACK:
+#ifndef EXPANSION_KIT
             D_800E5E8C = sCameraInfoInitialized;
+#endif
             sMultiplayerFocusCameraId = -1;
+#ifndef EXPANSION_KIT
             sNumCameras = 2;
+#endif
             if (gTitleDemoState != TITLE_DEMO_INACTIVE) {
+#ifdef EXPANSION_KIT
+                sNumCameras = 1;
+#endif
                 gCameras[0].mode = CAMERA_MODE_TITLE_DEMO;
+#ifndef EXPANSION_KIT
                 if (1) {
                     gCameras[0].mode = CAMERA_MODE_RACE_INTRO;
                 }
+#endif
             } else {
+#ifdef EXPANSION_KIT
+                sNumCameras = 2;
+#endif
                 gCameras[0].mode = CAMERA_MODE_RACE_INTRO;
             }
             gCameras[0].focusPos = gRacers[0].segmentPositionInfo.pos;
@@ -2017,6 +2071,18 @@ void Camera_Init(void) {
                 Camera_InitMode(&gCameras[i], &sCameraSettings[i], &sCameraScriptMgrs[i]);
             }
             break;
+#ifdef EXPANSION_KIT
+        case GAMEMODE_COURSE_EDIT:
+            sNumCameras = 1;
+            gCameras[0].mode = CAMERA_MODE_RACE;
+            gCameras[0].focusPos = gRacers[0].segmentPositionInfo.pos;
+            gCameras[0].racerBasis = gRacers[0].trueBasis;
+
+            for (i = 0; i < sNumCameras; i++) {
+                Camera_InitMode(&gCameras[i], &sCameraSettings[i], &sCameraScriptMgrs[i]);
+            }
+            break;
+#endif
         case GAMEMODE_RECORDS:
             sNumCameras = 2;
             gCameras[0].mode = CAMERA_MODE_RECORDS_RACE;
@@ -2347,7 +2413,9 @@ void Camera_UpdateMode(Camera* camera, CameraSettings* cameraSettings, CameraScr
             case CAMERA_MODE_MACHINE_SELECT_CREATE:
             case CAMERA_MODE_MACHINE_SETTINGS:
             case CAMERA_MODE_16:
+#ifndef EXPANSION_KIT
             default:
+#endif
                 break;
             case CAMERA_MODE_COURSE_SELECT:
                 Camera_UpdateCourseSelect(camera, cameraSettings);
@@ -2417,6 +2485,11 @@ void Camera_UpdateMode(Camera* camera, CameraSettings* cameraSettings, CameraScr
                     Camera_UpdateFinishedLoser(camera, cameraSettings, scriptMgr);
                 }
                 break;
+#ifdef EXPANSION_KIT
+            case CAMERA_MODE_RECORDS_RACE:
+                Camera_UpdateRecordsRace(camera, cameraSettings, scriptMgr);
+                break;
+#endif
             case CAMERA_MODE_ENDING:
                 Camera_UpdateEnding(camera, cameraSettings, scriptMgr);
                 break;
@@ -2958,7 +3031,11 @@ void Camera_UpdateCourseSelect(Camera* camera, CameraSettings* cameraSettings) {
 void Camera_UpdateFallingOffTrack(Camera* camera, CameraSettings* cameraSettings) {
     CameraTypeAtEye* atEye = &cameraSettings->atEye;
 
+#ifndef EXPANSION_KIT
     atEye->targetAt = gRacers[camera->id].segmentPositionInfo.pos;
+#else
+    atEye->targetAt = gRacers[camera->id].focusPos;
+#endif
 }
 
 void Camera_UpdateFinishedSuccess(Camera* camera, CameraSettings* cameraSettings, CameraScriptManager* scriptMgr) {
@@ -3190,6 +3267,17 @@ void Camera_UpdateFinishedSpectate(Camera* camera, CameraSettings* cameraSetting
     }
 }
 
+#ifdef EXPANSION_KIT
+void Camera_UpdateRecordsRace(Camera* camera, CameraSettings* cameraSettings, CameraScriptManager* scriptMgr) {
+    Racer* racer = &gRacers[camera->id];
+
+    if (racer->stateFlags & RACER_STATE_FALLING_OFF_TRACK) {
+        camera->mode = CAMERA_MODE_FALLING_OFF_TRACK;
+        Camera_InitMode(camera, cameraSettings, scriptMgr);
+    }
+}
+#endif
+
 extern CameraScript gEndingPosition1FocusScript[];
 extern CameraScript gEndingPosition3FocusScript[];
 extern CameraScript gEndingPosition2FocusScript[];
@@ -3308,3 +3396,12 @@ bool Camera_CheckEndingCameraMessage(s32 msg) {
     }
     return matchingMsg;
 }
+
+#ifdef EXPANSION_KIT
+Gfx* Camera_DrawCourseEditTestRun(Gfx* gfx) {
+
+    gSPPerspNormalize(gfx++, gCameras[0].perspectiveScale);
+    gSPMatrix(gfx++, &D_1000000.unk_20208[gCameras[0].id], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    return Camera_Draw(gfx, SCISSOR_BOX_FULL_SCREEN, gCameras[0].id);
+}
+#endif

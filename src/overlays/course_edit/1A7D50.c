@@ -49,7 +49,7 @@ Gfx* func_xk2_800F634C(Gfx* gfx) {
     gfx = Menus_DrawRaceMenuTexture(gfx, 2, 0x8C, 0x5F);
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
-    gfx = func_8070D4A8(gfx, 0);
+    gfx = func_8007DB28(gfx, 0);
     gfx = Font_DrawScaledString(gfx, 0x7D, (D_xk2_8013A7E0 * 0xF) + 0x61, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);

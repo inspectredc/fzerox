@@ -3122,7 +3122,7 @@ void func_xk2_800DEE20(void) {
         gRacers[0].unk_1A8 = 0.5f;
         Racer_Init();
         Camera_Init();
-        func_8070F0B0(COURSE_CONTEXT()->courseData.venue, COURSE_CONTEXT()->courseData.skybox);
+        func_8007F4E0(COURSE_CONTEXT()->courseData.venue, COURSE_CONTEXT()->courseData.skybox);
         Background_Init();
         Effects_Init();
         Course_FeaturesInit(0);
