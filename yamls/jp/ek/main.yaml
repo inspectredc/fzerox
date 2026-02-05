@@ -82,27 +82,27 @@
       - [0xCE0, c, sys/sys_gfx]
       - [0x2250, pad]
       - [0x2260, c, sys/sys_audio]
-      - [0x2340, asm, game/game]
+      - [0x2340, c, game/game]
       - [0x3250, c, sys/controller]
       - [0x3A20, c, sys/math]
       - [0x6F40, pad]
-      - [0x6F50, asm, game/course_gadgets]
-      - [0x10AB0, asm, game/EA20]
-      - [0x10B20, asm, game/EA90]
+      - [0x6F50, c, game/course_gadgets]
+      - [0x10AB0, c, game/EA20]
+      - [0x10B20, c, game/EA90]
       - [0x110B0, c, sys/disk_drive_dd]
       - [0x11850, c, sys/sys_leo_dd]
       - [0x15850, c, sys/dma]
       - [0x15AB0, c, sys/segment]
-      - [0x17490, asm, game/texture_utils]
+      - [0x17490, c, game/texture_utils]
       - [0x1AA20, c, game/common]
-      - [0x1B6E0, asm, game/texture_utils2]
+      - [0x1B6E0, c, game/texture_utils2]
       - [0x1C8B0, c, game/194E0]
       - [0x1C8F0, c, sys/disk_mount_dd]
       - [0x1C970, c, sys/leo_fault_dd]
       - [0x1D580, c, sys/sys_fault]
       - [0x1E970, c, game/bordered_box]
       - [0x1F320, c, game/camera]
-      - [0x27110, asm, game/racer]
+      - [0x27110, c, game/racer]
       - [0x3BBB0, hasm, game/mio0Decode]
       - [0x3BC60, c, audio/disk/lib/synthesis]
       - [0x3E700, c, audio/disk/lib/heap]
@@ -309,10 +309,10 @@
       - [0x775F0, .data, sys/sys_main]
       - [0x79FA0, .data, sys/sys_gfx]
       - [0x79FB0, .data, sys/sys_audio]
-      - [0x79FC0, data, game/game]
+      - [0x79FC0, .data, game/game]
       - [0x7A130, .data, sys/controller]
       - [0x7A140, .data, sys/math]
-      - [0x7A150, data, game/course_gadgets]
+      - [0x7A150, .data, game/course_gadgets]
       - [0x7A340, .data, sys/disk_drive_dd]
       - [0x7A350, .data, sys/sys_leo_dd]
       - [0x7A3D0, .data, sys/segment]
@@ -322,7 +322,7 @@
       - [0x7A810, .data, sys/leo_fault_dd]
       - [0x7ACE0, .data, sys/sys_fault]
       - [0x7AEC0, .data, game/camera]
-      - [0x7B0C0, data, game/racer]
+      - [0x7B0C0, .data, game/racer]
       - [0x7CB20, data, unk_tables]
       - [0x7DB20, .data, audio/disk/lib/filter_data]
       - [0x7DD10, .data, audio/disk/lib/note_data]
@@ -413,10 +413,10 @@
       # Rodata
       - [0x80A80, .rodata, sys/sys_main]
       - [0x80A90, .rodata, sys/sys_gfx]
-      - [0x80AA0, rodata, game/game]
+      - [0x80AA0, .rodata, game/game]
       - [0x80D70, .rodata, sys/math]
-      - [0x80DF0, rodata, game/course_gadgets]
-      - [0x81210, rodata, game/EA90]
+      - [0x80DF0, .rodata, game/course_gadgets]
+      - [0x81210, .rodata, game/EA90]
       - [0x81230, .rodata, sys/disk_drive_dd]
       - [0x81500, .rodata, sys/sys_leo_dd]
       - [0x82EE0, .rodata, sys/segment]
@@ -426,7 +426,7 @@
       - [0x83670, .rodata, sys/sys_fault]
       - [0x83BB0, .rodata, game/bordered_box]
       - [0x83BD0, .rodata, game/camera]
-      - [0x846F0, rodata, game/racer]
+      - [0x846F0, .rodata, game/racer]
       - [0x84970, .rodata, audio/disk/lib/synthesis]
       - [0x84990, .rodata, audio/disk/lib/heap]
       - [0x849C0, .rodata, audio/disk/lib/load]
@@ -476,10 +476,10 @@
       - { type: .bss, vram: 0x80795670, name: sys/sys_main }
       - { type: .bss, vram: 0x8079A350, name: sys/sys_gfx }
       - { type: .bss, vram: 0x8079A4A0, name: sys/sys_audio }
-      - { type: bss, vram: 0x8079A4B0, name: game/game }
+      - { type: .bss, vram: 0x8079A4B0, name: game/game }
       - { type: .bss, vram: 0x8079A4E0, name: sys/controller }
       - { type: .bss, vram: 0x8079A8A0, name: sys/math }
-      - { type: bss, vram: 0x8079E920, name: game/course_gadgets }
+      - { type: .bss, vram: 0x8079E920, name: game/course_gadgets }
       - { type: .bss, vram: 0x8079F950, name: sys/sys_leo_dd }
       - { type: .bss, vram: 0x8079FA40, name: sys/segment }
       - { type: .bss, vram: 0x8079FAA0, name: game/common }
@@ -488,7 +488,7 @@
       - { type: .bss, vram: 0x8079FE80, name: sys/sys_fault }
       - { type: .bss, vram: 0x807A0870, name: game/bordered_box }
       - { type: .bss, vram: 0x807A0930, name: game/camera }
-      - { type: bss, vram: 0x807A15D0, name: game/racer }
+      - { type: .bss, vram: 0x807A15D0, name: game/racer }
       - { type: .bss, vram: 0x807B3C20, name: game/course_gadget_context }
       - { type: bss, vram: 0x807C1870, name: 807C1870 } # pad
       - { type: .bss, vram: 0x807C1890, name: audio/disk/lib/load }

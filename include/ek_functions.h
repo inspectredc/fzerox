@@ -21,8 +21,6 @@ void DiskDrive_InitRomSegmentPairs(void);
 void func_80704DB0(char*, char*);
 void DiskMount_Init(void);
 
-Gfx* func_8072DF40(Gfx*, s32, s32);
-
 s32 AudioLoad_GetStartLbaAddr(s32 lba, uintptr_t* devAddrPtr);
 void AudioLoad_DiskDrive(s32 lba, uintptr_t devAddr, u8* ramAddr, s32 totalSize);
 s32 AudioLoad_DiskInit(AudioDiskInfo* diskInfo, s32 lba, uintptr_t devAddr, u8* ramAddr, s32 bytesRemaining);
@@ -34,10 +32,10 @@ void func_80738944(void);
 void func_80739EE0(void);
 
 void Audio_Reset(u8 playerIndex);
-void func_8074184C(u8 playerIndex);
 void Audio_SEStart(u8 channelIndex, u8 ioData);
 void Audio_StopChannelSE(u8 channelIndex);
 void Audio_DisablePlayerSE(void);
+void Audio_DDBgmReady(u8 bgm);
 void Audio_DDBgmStart(u8 bgm);
 void Audio_DDBgmStart2(u8 bgm);
 void Audio_EditorBgmRestart(void);
@@ -342,6 +340,18 @@ Gfx* MachineCreate_DrawColorSelection(Gfx*, s32, s32);
 void func_xk3_8013571C(void);
 void func_xk3_80135E58(u8* red, u8* green, u8* blue);
 s32 func_xk3_801363F8(unk_8003A5D8*);
+
+void CourseEdit_Init(void);
+s32 CourseEdit_Update(void);
+Gfx* CourseEdit_Draw(Gfx* gfx);
+
+void MachineCreate_Init(void);
+s32 MachineCreate_Update(void);
+Gfx* MachineCreate_Draw(Gfx* gfx);
+
+void EADDemo_Init(void);
+s32 EADDemo_Update(void);
+Gfx* EADDemo_Draw(Gfx* gfx);
 
 #endif
 #endif // EK_FUNCTIONS_H

@@ -16,18 +16,19 @@ void func_xk1_8002FBB0(void) {
 }
 
 extern CustomMachinesInfo gCustomMachinesInfo;
-extern u8 D_800D1308[];
+extern u8 D_i2_80111848[];
 
 void func_xk1_8002FBC8(void) {
     u8 i;
 
     for (i = 0; i < 30; i++) {
-        if ((gCustomMachinesInfo.characterCustomState[i] < 0) && (D_800D1308[Character_GetCharacterFromSlot(i)] == 0)) {
+        if ((gCustomMachinesInfo.characterCustomState[i] < 0) &&
+            (D_i2_80111848[Character_GetCharacterFromSlot(i)] == 0)) {
             gCustomMachinesInfo.customMachines[i].number = 31;
             gCustomMachinesInfo.characterCustomState[i] = 0;
         }
     }
-    func_8071E0C0();
+    func_8008D33C();
 }
 
 extern CustomMachine gCustomMachine;
@@ -35,7 +36,7 @@ extern CustomMachine gCustomMachine;
 void func_xk1_8002FC70(void) {
     func_xk1_8002FFA0();
     gCustomMachine.number = 31;
-    func_8071E0C0();
+    func_8008D33C();
 }
 
 Gfx* ExpansionKit_DrawRectangleBorder(Gfx* gfx, u16 left, u16 top, u16 right, u16 bottom, u16 color, u8 borderWidth,

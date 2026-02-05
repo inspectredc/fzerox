@@ -19,7 +19,8 @@
                 "_MIPS_SZLONG=32",
                 "F3DEX_GBI_2",
                 "ASSET_VERSION=us",
-                "ASSET_REVISION=rev0"
+                "ASSET_REVISION=rev0",
+                "BUILD_VERSION=VERSION_I"
             ],
             "cStandard": "gnu89", // C89 + some GNU extensions from C99 like C++ comments
             "cppStandard": "${default}"
@@ -46,7 +47,8 @@
                 "LEO_VERSION=1",
                 "MFS_VERSION=1",
                 "ASSET_VERSION=jp",
-                "ASSET_REVISION=rev0"
+                "ASSET_REVISION=rev0",
+                "BUILD_VERSION=VERSION_J"
             ],
             "cStandard": "gnu89", // C89 + some GNU extensions from C99 like C++ comments
             "cppStandard": "${default}"

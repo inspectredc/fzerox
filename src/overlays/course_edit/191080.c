@@ -174,7 +174,7 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
     if ((D_802CB6D0.controlPointCount >= 4) && (D_xk2_800F7044 == 1) && (D_800D6CA0.unk_20 == -1)) {
         gSPDisplayList(gfx++, D_9014BA0);
         if (D_xk2_800F7404 == 0) {
-            gfx = func_i2_800BDAA4(gfx);
+            gfx = func_800A95B4(gfx);
         }
     }
     gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -1651,8 +1651,8 @@ void func_xk2_800E5B6C(void) {
             func_xk2_800E5D90(gCurrentCourseInfo);
             func_xk2_800E5A38(0);
         } else {
-            func_807034F0(gCurrentCourseInfo);
-            func_i2_800B3360(gCurrentCourseInfo);
+            func_80074CE4(gCurrentCourseInfo);
+            func_8009F334(gCurrentCourseInfo);
             Course_SegmentLengthsInit(gCurrentCourseInfo);
             if (Course_SegmentJoinsInit(gCurrentCourseInfo) != 0) {
                 D_xk2_80104CA0[4] = 1;
@@ -2228,7 +2228,7 @@ void func_xk2_800E7854(void) {
     func_xk2_800E7BA8();
     func_xk2_800E7990();
     func_xk2_800E7A78();
-    func_8070304C();
+    func_80074844();
     func_80703234();
     if ((D_802CB6D0.controlPointCount >= 4) && (D_800D6CA0.unk_20 == -1)) {
         Course_FeaturesInit(0);
@@ -3012,7 +3012,7 @@ Gfx* func_xk2_800EA4E4(Gfx* gfx) {
     gDPSetCycleType(gfx++, G_CYC_2CYCLE);
     gDPSetRenderMode(gfx++, G_RM_PASS, G_RM_AA_ZB_OPA_SURF2);
 
-    gfx = func_8072DF40(gfx, D_xk2_800F7060, D_xk2_800F7064);
+    gfx = func_8009CCBC(gfx, D_xk2_800F7060, D_xk2_800F7064);
     gSPLoadUcodeL(gfx++, gspF3DEX2_fifo);
     func_xk2_800E1FC0(&gfx);
     return gfx;

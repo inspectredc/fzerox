@@ -55,7 +55,7 @@ extern s32 D_800CCFBC;
 extern bool gInCourseEditor;
 extern s32 D_8076C958;
 
-extern CourseData D_800D0910;
+extern CourseData D_8010CF50;
 extern CourseSegment D_802D0620[];
 extern unk_807B3C20 D_802CB6D0;
 
@@ -97,8 +97,8 @@ void func_xk2_800EC3AC(void) {
 
     D_802D0620[0].prev = &D_802D0620[D_802CB6D0.controlPointCount - 1];
     D_802D0620[D_802CB6D0.controlPointCount - 1].next = &D_802D0620[0];
-    func_80702D6C();
-    D_800D0910 = COURSE_CONTEXT()->courseData;
+    func_80074594();
+    D_8010CF50 = COURSE_CONTEXT()->courseData;
     gInCourseEditor = false;
 }
 
@@ -196,11 +196,11 @@ void CourseEdit_Init(void) {
     func_xk1_8002D86C(9, 2);
     func_xk1_8002D880(0x18);
     func_xk2_800E77F0();
-    COURSE_CONTEXT()->courseData = D_800D0910;
+    COURSE_CONTEXT()->courseData = D_8010CF50;
     gVenueOption = COURSE_CONTEXT()->courseData.venue;
     gSkyboxOption = COURSE_CONTEXT()->courseData.skybox;
     gBGMOption = gBGMOptionToCourseBGM[COURSE_CONTEXT()->courseData.bgm];
-    func_80702FF4(gVenueOption);
+    func_800747EC(gVenueOption);
     func_xk2_800E7028(D_xk1_80030608);
     func_xk2_800F5C5C();
     func_xk1_8002AF10(4);
@@ -344,7 +344,7 @@ s32 func_xk2_800ECBC0(void) {
             D_xk2_80103FF8 = 0;
         }
         func_xk2_800E5B6C();
-        func_8070304C();
+        func_80074844();
     }
     return GAMEMODE_COURSE_EDIT;
 }
@@ -416,7 +416,7 @@ s32 CourseEdit_Update(void) {
         gCurrentCourseInfo->length = 0.0f;
     }
     if (!gInCourseEditTestRun) {
-        func_80702F1C();
+        func_80074744();
     }
     switch (D_800D6CA0.unk_08) {
         case 0x38:

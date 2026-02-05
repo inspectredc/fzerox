@@ -45,7 +45,7 @@ void Course_LandminesViewInteractDataInit(void);
 Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1);
 void Course_JumpsViewInteractDataInit(void);
 void Course_DecorationsViewInteractDataInit(void);
-void Course_EffectsViewInteractDataInit(s32);
+void Course_EffectsViewInteractDataInit(bool);
 Gfx* Course_FeatureDrawGateSquare(Gfx* gfx);
 Gfx* Course_FeatureDrawGateStart(Gfx* gfx);
 Gfx* Course_FeatureDrawGateHexagonal(Gfx* gfx);

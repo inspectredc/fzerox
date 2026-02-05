@@ -175,7 +175,7 @@ void func_xk2_800EACB0(void) {
     gSkyboxOption = COURSE_CONTEXT()->courseData.skybox;
     gBGMOption = gBGMOptionToCourseBGM[COURSE_CONTEXT()->courseData.bgm];
     func_80077AD8(COURSE_CONTEXT()->courseData.venue);
-    func_80702FF4(gVenueOption);
+    func_800747EC(gVenueOption);
     func_80074428(0);
 
     courseInfo = &gCourseInfos[0];

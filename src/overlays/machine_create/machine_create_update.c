@@ -713,7 +713,7 @@ void func_xk3_8012CE44(void) {
                         (mfsStrCmp(&gCustomMachinesInfo.customMachines[i].machineName, D_xk3_80141298) == 0)) {
                         gCustomMachinesInfo.characterCustomState[i] = 0;
                         gCustomMachinesInfo.customMachines[i].number = 31;
-                        func_8071E0C0();
+                        func_8008D33C();
                         break;
                     }
                 }
@@ -736,7 +736,7 @@ void func_xk3_8012CE44(void) {
                         (mfsStrCmp(D_xk3_80141298, gSuperMachineNames[i]) == 0)) {
                         gCustomMachinesInfo.characterCustomState[i] = 0;
                         gCustomMachinesInfo.customMachines[i].number = 31;
-                        func_8071E0C0();
+                        func_8008D33C();
                         break;
                     }
                 }
@@ -815,7 +815,7 @@ void func_xk3_8012CE44(void) {
                         (mfsStrCmp(gCustomMachinesInfo.customMachines[i].machineName, D_xk3_80141298) == 0)) {
                         gCustomMachinesInfo.characterCustomState[i] = 0;
                         gCustomMachinesInfo.customMachines[i].number = 31;
-                        func_8071E0C0();
+                        func_8008D33C();
                         break;
                     }
                 }

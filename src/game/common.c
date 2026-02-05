@@ -294,7 +294,6 @@ void func_8007DEF0(void) {
         var_a0 = MASTER + 1;
     }
 
-
 #ifdef EXPANSION_KIT
     if (var_a1) {
         if (D_8079FB28[cupType - DD_1_CUP] < var_a0) {

@@ -1409,7 +1409,7 @@ void func_xk1_8002860C(void) {
     D_xk2_80119744 = 0.0f;
     gPointOption = POINT_OPTION_SET;
     func_xk2_800DC3F8();
-    func_8070299C();
+    func_80074204();
     gCurrentCourseInfo->length = 0.0f;
     gCourseFeaturesInfo.jumpCount = 0;
     gCourseFeaturesInfo.landmineCount = 0;
@@ -1665,7 +1665,7 @@ void func_xk1_80028EF0(void) {
     if (gVenueWidget.openIndex != INVALID_OPTION) {
         func_xk1_80027C80(&gCourseEditWidget);
         COURSE_CONTEXT()->courseData.venue = gVenueOption;
-        func_80702FF4(gVenueOption);
+        func_800747EC(gVenueOption);
         func_80077AD8(gVenueOption);
         D_xk2_800F7040 = 3;
     }

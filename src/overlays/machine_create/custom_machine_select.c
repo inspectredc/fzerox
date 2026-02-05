@@ -249,7 +249,7 @@ extern s8 gSettingEverythingUnlocked;
 void func_xk3_80132F50(void) {
     Camera_Init();
     gGreyscaleMachinePart = true;
-    func_8071EB18();
+    func_8008D97C();
     if (D_xk1_800333F0 != 0) {
         sMachineSelectIndex = D_800333F4;
     } else {
@@ -365,7 +365,7 @@ void MachineCreate_MachineSelectHandleAPress(void) {
 
         if (D_xk1_800333F0 != 0) {
             gCustomMachinesInfo.characterCustomState[sMachineSelectIndex] = -1;
-            func_8071E0C0();
+            func_8008D33C();
         } else {
             gCustomMachineWork = gCustomMachine;
 
@@ -373,7 +373,7 @@ void MachineCreate_MachineSelectHandleAPress(void) {
                 if (gCustomMachinesInfo.characterCustomState[i] == 1) {
                     gCustomMachinesInfo.characterCustomState[i] = 0;
                     gCustomMachinesInfo.customMachines[i].number = 31;
-                    func_8071E0C0();
+                    func_8008D33C();
                     break;
                 }
             }
@@ -423,7 +423,7 @@ void MachineCreate_MachineSelectHandleBPress(void) {
         }
     }
     Audio_TriggerSystemSE(NA_SE_37);
-    func_8071E0C0();
+    func_8008D33C();
 }
 
 extern s32 sMachineSelectIndex;
@@ -533,7 +533,7 @@ void func_xk3_80133F40(void) {
 }
 
 extern const char* gMachineNames[];
-extern unk_800E3F28 D_800D63F8[];
+extern unk_800E3F28 D_800E3F28[];
 extern const char* gSuperMachineNames[];
 
 Gfx* func_xk3_80133F6C(Gfx* gfx, Object* arg1) {
@@ -542,7 +542,7 @@ Gfx* func_xk3_80133F6C(Gfx* gfx, Object* arg1) {
         return gfx;
     }
     if (sMachineSelectIndex < 30) {
-        gfx = func_80078F80_impl(gfx, &D_800D63F8[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0,
+        gfx = func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0,
                                  0, 1.0f, 1.0f, false);
         if (gCustomMachinesInfo.characterCustomState[sMachineSelectIndex] > 0) {
             gfx = Font_DrawString(gfx, 0x46, 0x25, gCustomMachinesInfo.customMachines[sMachineSelectIndex].machineName,
@@ -695,7 +695,7 @@ Gfx* func_xk3_80134408(Gfx* gfx, Object* machineObj) {
             }
             gGreyscaleMachinePart = true;
         } else {
-            gfx = func_8072DF40(gfx, Character_GetCharacterFromSlot(i), 0);
+            gfx = func_8009CCBC(gfx, Character_GetCharacterFromSlot(i), 0);
         }
     }
 
@@ -753,9 +753,9 @@ void func_xk3_80134A48(Object* portraitObj) {
     OBJECT_STATE(portraitObj) = sMachineSelectIndex;
 }
 
-extern f32 D_8076E568;
-extern f32 D_8076E56C;
-extern f32 D_8076E570;
+extern f32 D_800CE748;
+extern f32 D_800CE74C;
+extern f32 D_800CE750;
 
 void func_xk3_80134B04(Object* machineObj) {
     Racer* racer;
@@ -777,7 +777,7 @@ void func_xk3_80134B04(Object* machineObj) {
         racer->trueBasis.x.y += var_fv0 * racer->trueBasis.z.y;
         racer->trueBasis.x.z += var_fv0 * racer->trueBasis.z.z;
         Math_OrthonormalizeAroundForward(&racer->trueBasis);
-        Matrix_SetLockedLookAt(&gGfxPool->unk_20308[i], NULL, D_8076E568, D_8076E56C, D_8076E570, racer->trueBasis.x.x,
+        Matrix_SetLockedLookAt(&gGfxPool->unk_20308[i], NULL, D_800CE748, D_800CE74C, D_800CE750, racer->trueBasis.x.x,
                                racer->trueBasis.x.y, racer->trueBasis.x.z, racer->trueBasis.y.x, racer->trueBasis.y.y,
                                racer->trueBasis.y.z, racer->segmentPositionInfo.pos.x, racer->segmentPositionInfo.pos.y,
                                racer->segmentPositionInfo.pos.z);

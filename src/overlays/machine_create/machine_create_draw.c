@@ -268,12 +268,12 @@ void func_xk3_8012F5F0(Object* arg0) {
     OBJECT_STATE(arg0) = -1;
 }
 
-extern unk_800E3F28 D_800D63F8[];
+extern unk_800E3F28 D_800E3F28[];
 
 Gfx* func_xk3_8012F628(Gfx* gfx, Object* arg1) {
 
     if (gWorksMachineMode != MACHINE_MODE_ENTRY) {
-        gfx = func_80078F80_impl(gfx, &D_800D63F8[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0,
+        gfx = func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0,
                                  0, 1.0f, 1.0f, false);
     }
     return gfx;

@@ -5,7 +5,7 @@
 u8 D_xk3_80137160 = 0;
 
 extern unk_8003A5D8 D_xk1_8003A5D8[];
-extern u8 D_800D1308[];
+extern u8 D_i2_80111848[];
 
 void func_xk3_80135F90(void) {
     u8 i;
@@ -13,7 +13,7 @@ void func_xk3_80135F90(void) {
     D_xk3_80137160 = 0;
 
     for (i = 0; i < 30; i++) {
-        D_xk3_80137160 += D_800D1308[i];
+        D_xk3_80137160 += D_i2_80111848[i];
     }
     if (gWorksMachineMode == MACHINE_MODE_ENTRY_GET_FILE) {
         if (D_xk3_80137160 != 0) {
@@ -42,7 +42,7 @@ void func_xk3_801360B8(void) {
     u8 var_s1;
 
     for (i = 0, var_s1 = 0; i < 30; i++) {
-        if (D_800D1308[Character_GetCharacterFromSlot(i)] != 0) {
+        if (D_i2_80111848[Character_GetCharacterFromSlot(i)] != 0) {
             D_xk1_8003A5D8[var_s1].attr = 0;
             D_xk1_8003A5D8[var_s1].unk_22 = 0;
             mfsStrCpy(D_xk1_8003A5D8[var_s1].name, gSuperMachineNames[i]);

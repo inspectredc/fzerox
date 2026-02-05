@@ -297,7 +297,7 @@ s32 func_xk2_800F2750(void) {
     if (D_800D6CA0.unk_20 == -1) {
         Course_SegmentContinuousFlagInit(gCourseInfos);
         Course_SegmentFormsInit(gCourseInfos);
-        return func_i2_800B5CD8(gCourseInfos);
+        return func_800A1954(gCourseInfos);
     }
     return 0;
 }
@@ -345,7 +345,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
                 break;
             }
             func_800A4D0C(2);
-            temp_v0 = func_i2_800B5CD8(courseInfo);
+            temp_v0 = func_800A1954(courseInfo);
             if (temp_v0 != 0) {
                 D_xk1_80032C20 = 0;
                 D_800D6CA0.unk_08 = 0x10;
@@ -371,7 +371,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
                 func_800A4D0C(0);
             }
             func_800A4D0C(1);
-            temp_v0 = func_i2_800B5CD8(courseInfo);
+            temp_v0 = func_800A1954(courseInfo);
             if (temp_v0 != 0) {
                 D_xk1_80032C20 = 0;
                 D_800D6CA0.unk_08 = 0x10;

@@ -95,7 +95,7 @@ s32 MachineCreate_Update(void) {
         PRINTF("WORKS MACHINE MODE : 0\n");
         gWorksMachineMode = MACHINE_MODE_0;
         func_xk1_8002FBB0();
-        func_8071E0C0();
+        func_8008D33C();
         ExpansionKit_SetMenuHighlightDrawFlag(true);
         func_80704810(true);
         osViSetSpecialFeatures(OS_VI_DITHER_FILTER_OFF);

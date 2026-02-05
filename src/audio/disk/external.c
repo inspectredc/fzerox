@@ -468,7 +468,7 @@ void Audio_TriggerSystemSE(u8 sfxId) {
         D_80771CA8 = 0;
         for (i = 0; i < sAudioPlayerMode + 1; i++) {
             if (sAudioRetireStatus == 0) {
-                func_8074184C(i);
+                func_800BAE5C(i);
             }
         }
     }
@@ -611,7 +611,7 @@ void Audio_PlayerEngineStart(u8 playerIndex) {
     AudioThread_ScheduleProcessCmds();
 }
 
-void func_8074184C(u8 playerIndex) {
+void func_800BAE5C(u8 playerIndex) {
     PRINTF("==BANDO== WINING RUN ENGINE SOUND START! MACHINE No.= %02x\n", playerIndex);
     Audio_PlayerEngineStart(playerIndex);
     sPlayerEngineSoundState[playerIndex] = 1;
@@ -871,7 +871,7 @@ void Audio_TestRunStart(void) {
     sLevelFadeoutTimer = 0;
     sBgmPlayState = 0;
     Audio_Reset(0);
-    func_8074184C(0);
+    func_800BAE5C(0);
 }
 
 // Na_Test_Run_End

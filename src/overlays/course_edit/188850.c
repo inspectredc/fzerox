@@ -1557,7 +1557,7 @@ void func_xk2_800DADEC(void) {
             COURSE_CONTEXT()->courseData.bankAngle[i] = (COURSE_CONTEXT()->courseData.bankAngle[i] / 3) * 3;
         }
     }
-    func_807034F0(gCurrentCourseInfo);
+    func_80074CE4(gCurrentCourseInfo);
     D_xk2_800F7040 = 3;
 }
 
@@ -1642,7 +1642,7 @@ void func_xk2_800DB154(void) {
     D_xk2_800F7040 = 3;
 }
 
-extern CourseData D_800CF950;
+extern CourseData D_8010C770;
 
 void func_xk2_800DB550(void) {
     s32 i;
@@ -1667,16 +1667,16 @@ void func_xk2_800DB550(void) {
             continue;
         }
 
-        D_800CF950.bankAngle[j] = COURSE_CONTEXT()->courseData.bankAngle[i];
-        D_800CF950.pit[j] = COURSE_CONTEXT()->courseData.pit[i];
-        D_800CF950.dash[j] = COURSE_CONTEXT()->courseData.dash[i];
-        D_800CF950.dirt[j] = COURSE_CONTEXT()->courseData.dirt[i];
-        D_800CF950.ice[j] = COURSE_CONTEXT()->courseData.ice[i];
-        D_800CF950.jump[j] = COURSE_CONTEXT()->courseData.jump[i];
-        D_800CF950.landmine[j] = COURSE_CONTEXT()->courseData.landmine[i];
-        D_800CF950.gate[j] = COURSE_CONTEXT()->courseData.gate[i];
-        D_800CF950.building[j] = COURSE_CONTEXT()->courseData.building[i];
-        D_800CF950.sign[j] = COURSE_CONTEXT()->courseData.sign[i];
+        D_8010C770.bankAngle[j] = COURSE_CONTEXT()->courseData.bankAngle[i];
+        D_8010C770.pit[j] = COURSE_CONTEXT()->courseData.pit[i];
+        D_8010C770.dash[j] = COURSE_CONTEXT()->courseData.dash[i];
+        D_8010C770.dirt[j] = COURSE_CONTEXT()->courseData.dirt[i];
+        D_8010C770.ice[j] = COURSE_CONTEXT()->courseData.ice[i];
+        D_8010C770.jump[j] = COURSE_CONTEXT()->courseData.jump[i];
+        D_8010C770.landmine[j] = COURSE_CONTEXT()->courseData.landmine[i];
+        D_8010C770.gate[j] = COURSE_CONTEXT()->courseData.gate[i];
+        D_8010C770.building[j] = COURSE_CONTEXT()->courseData.building[i];
+        D_8010C770.sign[j] = COURSE_CONTEXT()->courseData.sign[i];
 
         D_xk2_80119920[j] = *var_s0;
         j++;
@@ -1685,16 +1685,16 @@ void func_xk2_800DB550(void) {
     for (i = 0; i < j; i++) {
         D_802CB6D0.unk_0000[i] = D_xk2_80119920[i];
 
-        COURSE_CONTEXT()->courseData.bankAngle[i] = D_800CF950.bankAngle[i];
-        COURSE_CONTEXT()->courseData.pit[i] = D_800CF950.pit[i];
-        COURSE_CONTEXT()->courseData.dash[i] = D_800CF950.dash[i];
-        COURSE_CONTEXT()->courseData.dirt[i] = D_800CF950.dirt[i];
-        COURSE_CONTEXT()->courseData.ice[i] = D_800CF950.ice[i];
-        COURSE_CONTEXT()->courseData.jump[i] = D_800CF950.jump[i];
-        COURSE_CONTEXT()->courseData.landmine[i] = D_800CF950.landmine[i];
-        COURSE_CONTEXT()->courseData.gate[i] = D_800CF950.gate[i];
-        COURSE_CONTEXT()->courseData.building[i] = D_800CF950.building[i];
-        COURSE_CONTEXT()->courseData.sign[i] = D_800CF950.sign[i];
+        COURSE_CONTEXT()->courseData.bankAngle[i] = D_8010C770.bankAngle[i];
+        COURSE_CONTEXT()->courseData.pit[i] = D_8010C770.pit[i];
+        COURSE_CONTEXT()->courseData.dash[i] = D_8010C770.dash[i];
+        COURSE_CONTEXT()->courseData.dirt[i] = D_8010C770.dirt[i];
+        COURSE_CONTEXT()->courseData.ice[i] = D_8010C770.ice[i];
+        COURSE_CONTEXT()->courseData.jump[i] = D_8010C770.jump[i];
+        COURSE_CONTEXT()->courseData.landmine[i] = D_8010C770.landmine[i];
+        COURSE_CONTEXT()->courseData.gate[i] = D_8010C770.gate[i];
+        COURSE_CONTEXT()->courseData.building[i] = D_8010C770.building[i];
+        COURSE_CONTEXT()->courseData.sign[i] = D_8010C770.sign[i];
     }
 
     func_xk2_800E6F9C();
@@ -1704,7 +1704,7 @@ void func_xk2_800DB550(void) {
         func_xk2_800DE210(&sp74, var_s0->prev->pos, var_s0->pos, var_s0->next->pos);
         var_s0->pos = sp74;
     }
-    func_807034F0(gCurrentCourseInfo);
+    func_80074CE4(gCurrentCourseInfo);
 }
 
 extern s32 gPointOption;
@@ -1728,16 +1728,16 @@ void func_xk2_800DB924(void) {
             continue;
         }
 
-        D_800CF950.bankAngle[j] = COURSE_CONTEXT()->courseData.bankAngle[i];
-        D_800CF950.pit[j] = COURSE_CONTEXT()->courseData.pit[i];
-        D_800CF950.dash[j] = COURSE_CONTEXT()->courseData.dash[i];
-        D_800CF950.dirt[j] = COURSE_CONTEXT()->courseData.dirt[i];
-        D_800CF950.ice[j] = COURSE_CONTEXT()->courseData.ice[i];
-        D_800CF950.jump[j] = COURSE_CONTEXT()->courseData.jump[i];
-        D_800CF950.landmine[j] = COURSE_CONTEXT()->courseData.landmine[i];
-        D_800CF950.gate[j] = COURSE_CONTEXT()->courseData.gate[i];
-        D_800CF950.building[j] = COURSE_CONTEXT()->courseData.building[i];
-        D_800CF950.sign[j] = COURSE_CONTEXT()->courseData.sign[i];
+        D_8010C770.bankAngle[j] = COURSE_CONTEXT()->courseData.bankAngle[i];
+        D_8010C770.pit[j] = COURSE_CONTEXT()->courseData.pit[i];
+        D_8010C770.dash[j] = COURSE_CONTEXT()->courseData.dash[i];
+        D_8010C770.dirt[j] = COURSE_CONTEXT()->courseData.dirt[i];
+        D_8010C770.ice[j] = COURSE_CONTEXT()->courseData.ice[i];
+        D_8010C770.jump[j] = COURSE_CONTEXT()->courseData.jump[i];
+        D_8010C770.landmine[j] = COURSE_CONTEXT()->courseData.landmine[i];
+        D_8010C770.gate[j] = COURSE_CONTEXT()->courseData.gate[i];
+        D_8010C770.building[j] = COURSE_CONTEXT()->courseData.building[i];
+        D_8010C770.sign[j] = COURSE_CONTEXT()->courseData.sign[i];
 
         D_xk2_80119920[j] = D_802CB6D0.unk_0000[i];
         j++;
@@ -1750,16 +1750,16 @@ void func_xk2_800DB924(void) {
     for (i = 0; i < j; i++) {
         D_802CB6D0.unk_0000[i] = D_xk2_80119920[i];
 
-        COURSE_CONTEXT()->courseData.bankAngle[i] = D_800CF950.bankAngle[i];
-        COURSE_CONTEXT()->courseData.pit[i] = D_800CF950.pit[i];
-        COURSE_CONTEXT()->courseData.dash[i] = D_800CF950.dash[i];
-        COURSE_CONTEXT()->courseData.dirt[i] = D_800CF950.dirt[i];
-        COURSE_CONTEXT()->courseData.ice[i] = D_800CF950.ice[i];
-        COURSE_CONTEXT()->courseData.jump[i] = D_800CF950.jump[i];
-        COURSE_CONTEXT()->courseData.landmine[i] = D_800CF950.landmine[i];
-        COURSE_CONTEXT()->courseData.gate[i] = D_800CF950.gate[i];
-        COURSE_CONTEXT()->courseData.building[i] = D_800CF950.building[i];
-        COURSE_CONTEXT()->courseData.sign[i] = D_800CF950.sign[i];
+        COURSE_CONTEXT()->courseData.bankAngle[i] = D_8010C770.bankAngle[i];
+        COURSE_CONTEXT()->courseData.pit[i] = D_8010C770.pit[i];
+        COURSE_CONTEXT()->courseData.dash[i] = D_8010C770.dash[i];
+        COURSE_CONTEXT()->courseData.dirt[i] = D_8010C770.dirt[i];
+        COURSE_CONTEXT()->courseData.ice[i] = D_8010C770.ice[i];
+        COURSE_CONTEXT()->courseData.jump[i] = D_8010C770.jump[i];
+        COURSE_CONTEXT()->courseData.landmine[i] = D_8010C770.landmine[i];
+        COURSE_CONTEXT()->courseData.gate[i] = D_8010C770.gate[i];
+        COURSE_CONTEXT()->courseData.building[i] = D_8010C770.building[i];
+        COURSE_CONTEXT()->courseData.sign[i] = D_8010C770.sign[i];
     }
 
     func_xk2_800E6F9C();
@@ -2912,7 +2912,7 @@ void func_xk2_800DE4F8(void) {
         Math_Round(sp8C.z);
         temp_s0->pos = sp8C;
     }
-    func_807034F0(gCurrentCourseInfo);
+    func_80074CE4(gCurrentCourseInfo);
 }
 
 extern s32 D_xk1_800305FC;
@@ -3114,7 +3114,7 @@ void func_xk2_800DEE20(void) {
         Audio_TestRunStart();
         func_xk2_800EF78C();
         D_800CCFBC = 1;
-        func_80702D6C();
+        func_80074594();
         func_80074428(gCourseIndex);
         Course_Init();
         gRacers[0].character = 0;
@@ -3149,16 +3149,16 @@ s32 func_xk2_800DEFCC(void) {
     func_xk2_800EF78C();
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        D_800CF950.bankAngle[i] = COURSE_CONTEXT()->courseData.bankAngle[var_a3];
-        D_800CF950.pit[i] = COURSE_CONTEXT()->courseData.pit[var_a3];
-        D_800CF950.dash[i] = COURSE_CONTEXT()->courseData.dash[var_a3];
-        D_800CF950.dirt[i] = COURSE_CONTEXT()->courseData.dirt[var_a3];
-        D_800CF950.ice[i] = COURSE_CONTEXT()->courseData.ice[var_a3];
-        D_800CF950.jump[i] = COURSE_CONTEXT()->courseData.jump[var_a3];
-        D_800CF950.landmine[i] = COURSE_CONTEXT()->courseData.landmine[var_a3];
-        D_800CF950.gate[i] = COURSE_CONTEXT()->courseData.gate[var_a3];
-        D_800CF950.building[i] = COURSE_CONTEXT()->courseData.building[var_a3];
-        D_800CF950.sign[i] = COURSE_CONTEXT()->courseData.sign[var_a3];
+        D_8010C770.bankAngle[i] = COURSE_CONTEXT()->courseData.bankAngle[var_a3];
+        D_8010C770.pit[i] = COURSE_CONTEXT()->courseData.pit[var_a3];
+        D_8010C770.dash[i] = COURSE_CONTEXT()->courseData.dash[var_a3];
+        D_8010C770.dirt[i] = COURSE_CONTEXT()->courseData.dirt[var_a3];
+        D_8010C770.ice[i] = COURSE_CONTEXT()->courseData.ice[var_a3];
+        D_8010C770.jump[i] = COURSE_CONTEXT()->courseData.jump[var_a3];
+        D_8010C770.landmine[i] = COURSE_CONTEXT()->courseData.landmine[var_a3];
+        D_8010C770.gate[i] = COURSE_CONTEXT()->courseData.gate[var_a3];
+        D_8010C770.building[i] = COURSE_CONTEXT()->courseData.building[var_a3];
+        D_8010C770.sign[i] = COURSE_CONTEXT()->courseData.sign[var_a3];
 
         D_xk2_80119920[i] = D_802CB6D0.unk_0000[var_a3];
 
@@ -3172,16 +3172,16 @@ s32 func_xk2_800DEFCC(void) {
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         D_802CB6D0.unk_0000[i] = D_xk2_80119920[i];
 
-        COURSE_CONTEXT()->courseData.bankAngle[i] = D_800CF950.bankAngle[i];
-        COURSE_CONTEXT()->courseData.pit[i] = D_800CF950.pit[i];
-        COURSE_CONTEXT()->courseData.dash[i] = D_800CF950.dash[i];
-        COURSE_CONTEXT()->courseData.dirt[i] = D_800CF950.dirt[i];
-        COURSE_CONTEXT()->courseData.ice[i] = D_800CF950.ice[i];
-        COURSE_CONTEXT()->courseData.jump[i] = D_800CF950.jump[i];
-        COURSE_CONTEXT()->courseData.landmine[i] = D_800CF950.landmine[i];
-        COURSE_CONTEXT()->courseData.gate[i] = D_800CF950.gate[i];
-        COURSE_CONTEXT()->courseData.building[i] = D_800CF950.building[i];
-        COURSE_CONTEXT()->courseData.sign[i] = D_800CF950.sign[i];
+        COURSE_CONTEXT()->courseData.bankAngle[i] = D_8010C770.bankAngle[i];
+        COURSE_CONTEXT()->courseData.pit[i] = D_8010C770.pit[i];
+        COURSE_CONTEXT()->courseData.dash[i] = D_8010C770.dash[i];
+        COURSE_CONTEXT()->courseData.dirt[i] = D_8010C770.dirt[i];
+        COURSE_CONTEXT()->courseData.ice[i] = D_8010C770.ice[i];
+        COURSE_CONTEXT()->courseData.jump[i] = D_8010C770.jump[i];
+        COURSE_CONTEXT()->courseData.landmine[i] = D_8010C770.landmine[i];
+        COURSE_CONTEXT()->courseData.gate[i] = D_8010C770.gate[i];
+        COURSE_CONTEXT()->courseData.building[i] = D_8010C770.building[i];
+        COURSE_CONTEXT()->courseData.sign[i] = D_8010C770.sign[i];
     }
 
     D_802CB6D0.unk_0000[0].trackSegmentInfo =
