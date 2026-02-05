@@ -2,144 +2,51 @@
 #include "fzx_font.h"
 #include ASSET_HEADER(common_assets_compressed.h)
 
-unk_80077D50 sFont1ACompTexInfo[] = {
-    { 17, aFont1ATex, TEX_WIDTH(aFont1ATex), TEX_HEIGHT(aFont1ATex), TEX_COMPRESSED_SIZE(aFont1ATex) }, { 0 }
-};
-unk_80077D50 sFont1BCompTexInfo[] = {
-    { 17, aFont1BTex, TEX_WIDTH(aFont1BTex), TEX_HEIGHT(aFont1BTex), TEX_COMPRESSED_SIZE(aFont1BTex) }, { 0 }
-};
-unk_80077D50 sFont1CCompTexInfo[] = {
-    { 17, aFont1CTex, TEX_WIDTH(aFont1CTex), TEX_HEIGHT(aFont1CTex), TEX_COMPRESSED_SIZE(aFont1CTex) }, { 0 }
-};
-unk_80077D50 sFont1DCompTexInfo[] = {
-    { 17, aFont1DTex, TEX_WIDTH(aFont1DTex), TEX_HEIGHT(aFont1DTex), TEX_COMPRESSED_SIZE(aFont1DTex) }, { 0 }
-};
-unk_80077D50 sFont1ECompTexInfo[] = {
-    { 17, aFont1ETex, TEX_WIDTH(aFont1ETex), TEX_HEIGHT(aFont1ETex), TEX_COMPRESSED_SIZE(aFont1ETex) }, { 0 }
-};
-unk_80077D50 sFont1FCompTexInfo[] = {
-    { 17, aFont1FTex, TEX_WIDTH(aFont1FTex), TEX_HEIGHT(aFont1FTex), TEX_COMPRESSED_SIZE(aFont1FTex) }, { 0 }
-};
-unk_80077D50 sFont1GCompTexInfo[] = {
-    { 17, aFont1GTex, TEX_WIDTH(aFont1GTex), TEX_HEIGHT(aFont1GTex), TEX_COMPRESSED_SIZE(aFont1GTex) }, { 0 }
-};
-unk_80077D50 sFont1HCompTexInfo[] = {
-    { 17, aFont1HTex, TEX_WIDTH(aFont1HTex), TEX_HEIGHT(aFont1HTex), TEX_COMPRESSED_SIZE(aFont1HTex) }, { 0 }
-};
-unk_80077D50 sFont1ICompTexInfo[] = {
-    { 17, aFont1ITex, TEX_WIDTH(aFont1ITex), TEX_HEIGHT(aFont1ITex), TEX_COMPRESSED_SIZE(aFont1ITex) }, { 0 }
-};
-unk_80077D50 sFont1JCompTexInfo[] = {
-    { 17, aFont1JTex, TEX_WIDTH(aFont1JTex), TEX_HEIGHT(aFont1JTex), TEX_COMPRESSED_SIZE(aFont1JTex) }, { 0 }
-};
-unk_80077D50 sFont1KCompTexInfo[] = {
-    { 17, aFont1KTex, TEX_WIDTH(aFont1KTex), TEX_HEIGHT(aFont1KTex), TEX_COMPRESSED_SIZE(aFont1KTex) }, { 0 }
-};
-unk_80077D50 sFont1LCompTexInfo[] = {
-    { 17, aFont1LTex, TEX_WIDTH(aFont1LTex), TEX_HEIGHT(aFont1LTex), TEX_COMPRESSED_SIZE(aFont1LTex) }, { 0 }
-};
-unk_80077D50 sFont1MCompTexInfo[] = {
-    { 17, aFont1MTex, TEX_WIDTH(aFont1MTex), TEX_HEIGHT(aFont1MTex), TEX_COMPRESSED_SIZE(aFont1MTex) }, { 0 }
-};
-unk_80077D50 sFont1NCompTexInfo[] = {
-    { 17, aFont1NTex, TEX_WIDTH(aFont1NTex), TEX_HEIGHT(aFont1NTex), TEX_COMPRESSED_SIZE(aFont1NTex) }, { 0 }
-};
-unk_80077D50 sFont1OCompTexInfo[] = {
-    { 17, aFont1OTex, TEX_WIDTH(aFont1OTex), TEX_HEIGHT(aFont1OTex), TEX_COMPRESSED_SIZE(aFont1OTex) }, { 0 }
-};
-unk_80077D50 sFont1PCompTexInfo[] = {
-    { 17, aFont1PTex, TEX_WIDTH(aFont1PTex), TEX_HEIGHT(aFont1PTex), TEX_COMPRESSED_SIZE(aFont1PTex) }, { 0 }
-};
-unk_80077D50 sFont1QCompTexInfo[] = {
-    { 17, aFont1QTex, TEX_WIDTH(aFont1QTex), TEX_HEIGHT(aFont1QTex), TEX_COMPRESSED_SIZE(aFont1QTex) }, { 0 }
-};
-unk_80077D50 sFont1RCompTexInfo[] = {
-    { 17, aFont1RTex, TEX_WIDTH(aFont1RTex), TEX_HEIGHT(aFont1RTex), TEX_COMPRESSED_SIZE(aFont1RTex) }, { 0 }
-};
-unk_80077D50 sFont1SCompTexInfo[] = {
-    { 17, aFont1STex, TEX_WIDTH(aFont1STex), TEX_HEIGHT(aFont1STex), TEX_COMPRESSED_SIZE(aFont1STex) }, { 0 }
-};
-unk_80077D50 sFont1TCompTexInfo[] = {
-    { 17, aFont1TTex, TEX_WIDTH(aFont1TTex), TEX_HEIGHT(aFont1TTex), TEX_COMPRESSED_SIZE(aFont1TTex) }, { 0 }
-};
-unk_80077D50 sFont1UCompTexInfo[] = {
-    { 17, aFont1UTex, TEX_WIDTH(aFont1UTex), TEX_HEIGHT(aFont1UTex), TEX_COMPRESSED_SIZE(aFont1UTex) }, { 0 }
-};
-unk_80077D50 sFont1VCompTexInfo[] = {
-    { 17, aFont1VTex, TEX_WIDTH(aFont1VTex), TEX_HEIGHT(aFont1VTex), TEX_COMPRESSED_SIZE(aFont1VTex) }, { 0 }
-};
-unk_80077D50 sFont1WCompTexInfo[] = {
-    { 17, aFont1WTex, TEX_WIDTH(aFont1WTex), TEX_HEIGHT(aFont1WTex), TEX_COMPRESSED_SIZE(aFont1WTex) }, { 0 }
-};
-unk_80077D50 sFont1XCompTexInfo[] = {
-    { 17, aFont1XTex, TEX_WIDTH(aFont1XTex), TEX_HEIGHT(aFont1XTex), TEX_COMPRESSED_SIZE(aFont1XTex) }, { 0 }
-};
-unk_80077D50 sFont1YCompTexInfo[] = {
-    { 17, aFont1YTex, TEX_WIDTH(aFont1YTex), TEX_HEIGHT(aFont1YTex), TEX_COMPRESSED_SIZE(aFont1YTex) }, { 0 }
-};
-unk_80077D50 sFont1ZCompTexInfo[] = {
-    { 17, aFont1ZTex, TEX_WIDTH(aFont1ZTex), TEX_HEIGHT(aFont1ZTex), TEX_COMPRESSED_SIZE(aFont1ZTex) }, { 0 }
-};
-unk_80077D50 sFont1CommaCompTexInfo[] = { { 17, aFont1CommaTex, TEX_WIDTH(aFont1CommaTex), TEX_HEIGHT(aFont1CommaTex),
-                                            TEX_COMPRESSED_SIZE(aFont1CommaTex) },
-                                          { 0 } };
-unk_80077D50 sFont1PeriodCompTexInfo[] = { { 17, aFont1PeriodTex, TEX_WIDTH(aFont1PeriodTex),
-                                             TEX_HEIGHT(aFont1PeriodTex), TEX_COMPRESSED_SIZE(aFont1PeriodTex) },
-                                           { 0 } };
-unk_80077D50 sFont1PrimeCompTexInfo[] = { { 17, aFont1PrimeTex, TEX_WIDTH(aFont1PrimeTex), TEX_HEIGHT(aFont1PrimeTex),
-                                            TEX_COMPRESSED_SIZE(aFont1PrimeTex) },
-                                          { 0 } };
-unk_80077D50 sFont1ExclamationMarkCompTexInfo[] = { { 17, aFont1ExclamationMarkTex, TEX_WIDTH(aFont1ExclamationMarkTex),
-                                                      TEX_HEIGHT(aFont1ExclamationMarkTex),
-                                                      TEX_COMPRESSED_SIZE(aFont1ExclamationMarkTex) },
-                                                    { 0 } };
-unk_80077D50 sFont1Num0CompTexInfo[] = { { 17, aFont1Num0Tex, TEX_WIDTH(aFont1Num0Tex), TEX_HEIGHT(aFont1Num0Tex),
-                                           TEX_COMPRESSED_SIZE(aFont1Num0Tex) },
-                                         { 0 } };
-unk_80077D50 sFont1Num1CompTexInfo[] = { { 17, aFont1Num1Tex, TEX_WIDTH(aFont1Num1Tex), TEX_HEIGHT(aFont1Num1Tex),
-                                           TEX_COMPRESSED_SIZE(aFont1Num1Tex) },
-                                         { 0 } };
-unk_80077D50 sFont1Num2CompTexInfo[] = { { 17, aFont1Num2Tex, TEX_WIDTH(aFont1Num2Tex), TEX_HEIGHT(aFont1Num2Tex),
-                                           TEX_COMPRESSED_SIZE(aFont1Num2Tex) },
-                                         { 0 } };
-unk_80077D50 sFont1Num3CompTexInfo[] = { { 17, aFont1Num3Tex, TEX_WIDTH(aFont1Num3Tex), TEX_HEIGHT(aFont1Num3Tex),
-                                           TEX_COMPRESSED_SIZE(aFont1Num3Tex) },
-                                         { 0 } };
-unk_80077D50 sFont1Num4CompTexInfo[] = { { 17, aFont1Num4Tex, TEX_WIDTH(aFont1Num4Tex), TEX_HEIGHT(aFont1Num4Tex),
-                                           TEX_COMPRESSED_SIZE(aFont1Num4Tex) },
-                                         { 0 } };
-unk_80077D50 sFont1Num5CompTexInfo[] = { { 17, aFont1Num5Tex, TEX_WIDTH(aFont1Num5Tex), TEX_HEIGHT(aFont1Num5Tex),
-                                           TEX_COMPRESSED_SIZE(aFont1Num5Tex) },
-                                         { 0 } };
-unk_80077D50 sFont1Num6CompTexInfo[] = { { 17, aFont1Num6Tex, TEX_WIDTH(aFont1Num6Tex), TEX_HEIGHT(aFont1Num6Tex),
-                                           TEX_COMPRESSED_SIZE(aFont1Num6Tex) },
-                                         { 0 } };
-unk_80077D50 sFont1Num7CompTexInfo[] = { { 17, aFont1Num7Tex, TEX_WIDTH(aFont1Num7Tex), TEX_HEIGHT(aFont1Num7Tex),
-                                           TEX_COMPRESSED_SIZE(aFont1Num7Tex) },
-                                         { 0 } };
-unk_80077D50 sFont1Num8CompTexInfo[] = { { 17, aFont1Num8Tex, TEX_WIDTH(aFont1Num8Tex), TEX_HEIGHT(aFont1Num8Tex),
-                                           TEX_COMPRESSED_SIZE(aFont1Num8Tex) },
-                                         { 0 } };
-unk_80077D50 sFont1Num9CompTexInfo[] = { { 17, aFont1Num9Tex, TEX_WIDTH(aFont1Num9Tex), TEX_HEIGHT(aFont1Num9Tex),
-                                           TEX_COMPRESSED_SIZE(aFont1Num9Tex) },
-                                         { 0 } };
-unk_80077D50 sFont1UnderscoreCompTexInfo[] = { { 17, aFont1UnderscoreTex, TEX_WIDTH(aFont1UnderscoreTex),
-                                                 TEX_HEIGHT(aFont1UnderscoreTex),
-                                                 TEX_COMPRESSED_SIZE(aFont1UnderscoreTex) },
-                                               { 0 } };
-unk_80077D50 sFont1EndCompTexInfo[] = {
-    { 17, aFont1EndTex, TEX_WIDTH(aFont1EndTex), TEX_HEIGHT(aFont1EndTex), TEX_COMPRESSED_SIZE(aFont1EndTex) }, { 0 }
-};
-unk_80077D50 sFont1BoxCompTexInfo[] = {
-    { 17, aFont1BoxTex, TEX_WIDTH(aFont1BoxTex), TEX_HEIGHT(aFont1BoxTex), TEX_COMPRESSED_SIZE(aFont1BoxTex) }, { 0 }
-};
-unk_80077D50 sFont1DashCompTexInfo[] = { { 17, aFont1DashTex, TEX_WIDTH(aFont1DashTex), TEX_HEIGHT(aFont1DashTex),
-                                           TEX_COMPRESSED_SIZE(aFont1DashTex) },
-                                         { 0 } };
-unk_80077D50 sFont1AmpersandCompTexInfo[] = { { 17, aFont1AmpersandTex, TEX_WIDTH(aFont1AmpersandTex),
-                                                TEX_HEIGHT(aFont1AmpersandTex),
-                                                TEX_COMPRESSED_SIZE(aFont1AmpersandTex) },
-                                              { 0 } };
+unk_80077D50 sFont1ACompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ATex);
+unk_80077D50 sFont1BCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1BTex);
+unk_80077D50 sFont1CCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1CTex);
+unk_80077D50 sFont1DCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1DTex);
+unk_80077D50 sFont1ECompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ETex);
+unk_80077D50 sFont1FCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1FTex);
+unk_80077D50 sFont1GCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1GTex);
+unk_80077D50 sFont1HCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1HTex);
+unk_80077D50 sFont1ICompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ITex);
+unk_80077D50 sFont1JCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1JTex);
+unk_80077D50 sFont1KCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1KTex);
+unk_80077D50 sFont1LCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1LTex);
+unk_80077D50 sFont1MCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1MTex);
+unk_80077D50 sFont1NCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1NTex);
+unk_80077D50 sFont1OCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1OTex);
+unk_80077D50 sFont1PCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1PTex);
+unk_80077D50 sFont1QCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1QTex);
+unk_80077D50 sFont1RCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1RTex);
+unk_80077D50 sFont1SCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1STex);
+unk_80077D50 sFont1TCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1TTex);
+unk_80077D50 sFont1UCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1UTex);
+unk_80077D50 sFont1VCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1VTex);
+unk_80077D50 sFont1WCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1WTex);
+unk_80077D50 sFont1XCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1XTex);
+unk_80077D50 sFont1YCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1YTex);
+unk_80077D50 sFont1ZCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ZTex);
+unk_80077D50 sFont1CommaCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1CommaTex);
+unk_80077D50 sFont1PeriodCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1PeriodTex);
+unk_80077D50 sFont1PrimeCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1PrimeTex);
+unk_80077D50 sFont1ExclamationMarkCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ExclamationMarkTex);
+unk_80077D50 sFont1Num0CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num0Tex);
+unk_80077D50 sFont1Num1CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num1Tex);
+unk_80077D50 sFont1Num2CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num2Tex);
+unk_80077D50 sFont1Num3CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num3Tex);
+unk_80077D50 sFont1Num4CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num4Tex);
+unk_80077D50 sFont1Num5CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num5Tex);
+unk_80077D50 sFont1Num6CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num6Tex);
+unk_80077D50 sFont1Num7CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num7Tex);
+unk_80077D50 sFont1Num8CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num8Tex);
+unk_80077D50 sFont1Num9CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num9Tex);
+unk_80077D50 sFont1UnderscoreCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1UnderscoreTex);
+unk_80077D50 sFont1EndCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1EndTex);
+unk_80077D50 sFont1BoxCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1BoxTex);
+unk_80077D50 sFont1DashCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1DashTex);
+unk_80077D50 sFont1AmpersandCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1AmpersandTex);
 
 unk_80077D50* sFont1CompTexInfos[] = {
     sFont1ACompTexInfo,         sFont1BCompTexInfo,     sFont1CCompTexInfo,          sFont1DCompTexInfo,
@@ -156,133 +63,48 @@ unk_80077D50* sFont1CompTexInfos[] = {
     sFont1EndCompTexInfo,       sFont1BoxCompTexInfo,   sFont1UnderscoreCompTexInfo, sFont1CommaCompTexInfo,
 };
 
-unk_80077D50 sFont2ACompTexInfo[] = {
-    { 17, aFont2ATex, TEX_WIDTH(aFont2ATex), TEX_HEIGHT(aFont2ATex), TEX_COMPRESSED_SIZE(aFont2ATex) }, { 0 }
-};
-unk_80077D50 sFont2BCompTexInfo[] = {
-    { 17, aFont2BTex, TEX_WIDTH(aFont2BTex), TEX_HEIGHT(aFont2BTex), TEX_COMPRESSED_SIZE(aFont2BTex) }, { 0 }
-};
-unk_80077D50 sFont2CCompTexInfo[] = {
-    { 17, aFont2CTex, TEX_WIDTH(aFont2CTex), TEX_HEIGHT(aFont2CTex), TEX_COMPRESSED_SIZE(aFont2CTex) }, { 0 }
-};
-unk_80077D50 sFont2DCompTexInfo[] = {
-    { 17, aFont2DTex, TEX_WIDTH(aFont2DTex), TEX_HEIGHT(aFont2DTex), TEX_COMPRESSED_SIZE(aFont2DTex) }, { 0 }
-};
-unk_80077D50 sFont2ECompTexInfo[] = {
-    { 17, aFont2ETex, TEX_WIDTH(aFont2ETex), TEX_HEIGHT(aFont2ETex), TEX_COMPRESSED_SIZE(aFont2ETex) }, { 0 }
-};
-unk_80077D50 sFont2FCompTexInfo[] = {
-    { 17, aFont2FTex, TEX_WIDTH(aFont2FTex), TEX_HEIGHT(aFont2FTex), TEX_COMPRESSED_SIZE(aFont2FTex) }, { 0 }
-};
-unk_80077D50 sFont2GCompTexInfo[] = {
-    { 17, aFont2GTex, TEX_WIDTH(aFont2GTex), TEX_HEIGHT(aFont2GTex), TEX_COMPRESSED_SIZE(aFont2GTex) }, { 0 }
-};
-unk_80077D50 sFont2HCompTexInfo[] = {
-    { 17, aFont2HTex, TEX_WIDTH(aFont2HTex), TEX_HEIGHT(aFont2HTex), TEX_COMPRESSED_SIZE(aFont2HTex) }, { 0 }
-};
-unk_80077D50 sFont2ICompTexInfo[] = {
-    { 17, aFont2ITex, TEX_WIDTH(aFont2ITex), TEX_HEIGHT(aFont2ITex), TEX_COMPRESSED_SIZE(aFont2ITex) }, { 0 }
-};
-unk_80077D50 sFont2JCompTexInfo[] = {
-    { 17, aFont2JTex, TEX_WIDTH(aFont2JTex), TEX_HEIGHT(aFont2JTex), TEX_COMPRESSED_SIZE(aFont2JTex) }, { 0 }
-};
-unk_80077D50 sFont2KCompTexInfo[] = {
-    { 17, aFont2KTex, TEX_WIDTH(aFont2KTex), TEX_HEIGHT(aFont2KTex), TEX_COMPRESSED_SIZE(aFont2KTex) }, { 0 }
-};
-unk_80077D50 sFont2LCompTexInfo[] = {
-    { 17, aFont2LTex, TEX_WIDTH(aFont2LTex), TEX_HEIGHT(aFont2LTex), TEX_COMPRESSED_SIZE(aFont2LTex) }, { 0 }
-};
-unk_80077D50 sFont2MCompTexInfo[] = {
-    { 17, aFont2MTex, TEX_WIDTH(aFont2MTex), TEX_HEIGHT(aFont2MTex), TEX_COMPRESSED_SIZE(aFont2MTex) }, { 0 }
-};
-unk_80077D50 sFont2NCompTexInfo[] = {
-    { 17, aFont2NTex, TEX_WIDTH(aFont2NTex), TEX_HEIGHT(aFont2NTex), TEX_COMPRESSED_SIZE(aFont2NTex) }, { 0 }
-};
-unk_80077D50 sFont2OCompTexInfo[] = {
-    { 17, aFont2OTex, TEX_WIDTH(aFont2OTex), TEX_HEIGHT(aFont2OTex), TEX_COMPRESSED_SIZE(aFont2OTex) }, { 0 }
-};
-unk_80077D50 sFont2PCompTexInfo[] = {
-    { 17, aFont2PTex, TEX_WIDTH(aFont2PTex), TEX_HEIGHT(aFont2PTex), TEX_COMPRESSED_SIZE(aFont2PTex) }, { 0 }
-};
-unk_80077D50 sFont2QCompTexInfo[] = {
-    { 17, aFont2QTex, TEX_WIDTH(aFont2QTex), TEX_HEIGHT(aFont2QTex), TEX_COMPRESSED_SIZE(aFont2QTex) }, { 0 }
-};
-unk_80077D50 sFont2RCompTexInfo[] = {
-    { 17, aFont2RTex, TEX_WIDTH(aFont2RTex), TEX_HEIGHT(aFont2RTex), TEX_COMPRESSED_SIZE(aFont2RTex) }, { 0 }
-};
-unk_80077D50 sFont2SCompTexInfo[] = {
-    { 17, aFont2STex, TEX_WIDTH(aFont2STex), TEX_HEIGHT(aFont2STex), TEX_COMPRESSED_SIZE(aFont2STex) }, { 0 }
-};
-unk_80077D50 sFont2TCompTexInfo[] = {
-    { 17, aFont2TTex, TEX_WIDTH(aFont2TTex), TEX_HEIGHT(aFont2TTex), TEX_COMPRESSED_SIZE(aFont2TTex) }, { 0 }
-};
-unk_80077D50 sFont2UCompTexInfo[] = {
-    { 17, aFont2UTex, TEX_WIDTH(aFont2UTex), TEX_HEIGHT(aFont2UTex), TEX_COMPRESSED_SIZE(aFont2UTex) }, { 0 }
-};
-unk_80077D50 sFont2VCompTexInfo[] = {
-    { 17, aFont2VTex, TEX_WIDTH(aFont2VTex), TEX_HEIGHT(aFont2VTex), TEX_COMPRESSED_SIZE(aFont2VTex) }, { 0 }
-};
-unk_80077D50 sFont2WCompTexInfo[] = {
-    { 17, aFont2WTex, TEX_WIDTH(aFont2WTex), TEX_HEIGHT(aFont2WTex), TEX_COMPRESSED_SIZE(aFont2WTex) }, { 0 }
-};
-unk_80077D50 sFont2XCompTexInfo[] = {
-    { 17, aFont2XTex, TEX_WIDTH(aFont2XTex), TEX_HEIGHT(aFont2XTex), TEX_COMPRESSED_SIZE(aFont2XTex) }, { 0 }
-};
-unk_80077D50 sFont2YCompTexInfo[] = {
-    { 17, aFont2YTex, TEX_WIDTH(aFont2YTex), TEX_HEIGHT(aFont2YTex), TEX_COMPRESSED_SIZE(aFont2YTex) }, { 0 }
-};
-unk_80077D50 sFont2ZCompTexInfo[] = {
-    { 17, aFont2ZTex, TEX_WIDTH(aFont2ZTex), TEX_HEIGHT(aFont2ZTex), TEX_COMPRESSED_SIZE(aFont2ZTex) }, { 0 }
-};
-unk_80077D50 sFont2CommaCompTexInfo[] = { { 17, aFont2CommaTex, TEX_WIDTH(aFont2CommaTex), TEX_HEIGHT(aFont2CommaTex),
-                                            TEX_COMPRESSED_SIZE(aFont2CommaTex) },
-                                          { 0 } };
-unk_80077D50 sFont2PeriodCompTexInfo[] = { { 17, aFont2PeriodTex, TEX_WIDTH(aFont2PeriodTex),
-                                             TEX_HEIGHT(aFont2PeriodTex), TEX_COMPRESSED_SIZE(aFont2PeriodTex) },
-                                           { 0 } };
-unk_80077D50 sFont2PrimeCompTexInfo[] = { { 17, aFont2PrimeTex, TEX_WIDTH(aFont2PrimeTex), TEX_HEIGHT(aFont2PrimeTex),
-                                            TEX_COMPRESSED_SIZE(aFont2PrimeTex) },
-                                          { 0 } };
-unk_80077D50 sFont2DashCompTexInfo[] = { { 17, aFont2DashTex, TEX_WIDTH(aFont2DashTex), TEX_HEIGHT(aFont2DashTex),
-                                           TEX_COMPRESSED_SIZE(aFont2DashTex) },
-                                         { 0 } };
-unk_80077D50 sFont2KgCompTexInfo[] = {
-    { 17, aFont2KgTex, TEX_WIDTH(aFont2KgTex), TEX_HEIGHT(aFont2KgTex), TEX_COMPRESSED_SIZE(aFont2KgTex) }, { 0 }
-};
-unk_80077D50 sFont2AmpersandCompTexInfo[] = { { 17, aFont2AmpersandTex, TEX_WIDTH(aFont2AmpersandTex),
-                                                TEX_HEIGHT(aFont2AmpersandTex),
-                                                TEX_COMPRESSED_SIZE(aFont2AmpersandTex) },
-                                              { 0 } };
-unk_80077D50 sFont2Num0CompTexInfo[] = { { 17, aFont2Num0Tex, TEX_WIDTH(aFont2Num0Tex), TEX_HEIGHT(aFont2Num0Tex),
-                                           TEX_COMPRESSED_SIZE(aFont2Num0Tex) },
-                                         { 0 } };
-unk_80077D50 sFont2Num1CompTexInfo[] = { { 17, aFont2Num1Tex, TEX_WIDTH(aFont2Num1Tex), TEX_HEIGHT(aFont2Num1Tex),
-                                           TEX_COMPRESSED_SIZE(aFont2Num1Tex) },
-                                         { 0 } };
-unk_80077D50 sFont2Num2CompTexInfo[] = { { 17, aFont2Num2Tex, TEX_WIDTH(aFont2Num2Tex), TEX_HEIGHT(aFont2Num2Tex),
-                                           TEX_COMPRESSED_SIZE(aFont2Num2Tex) },
-                                         { 0 } };
-unk_80077D50 sFont2Num3CompTexInfo[] = { { 17, aFont2Num3Tex, TEX_WIDTH(aFont2Num3Tex), TEX_HEIGHT(aFont2Num3Tex),
-                                           TEX_COMPRESSED_SIZE(aFont2Num3Tex) },
-                                         { 0 } };
-unk_80077D50 sFont2Num4CompTexInfo[] = { { 17, aFont2Num4Tex, TEX_WIDTH(aFont2Num4Tex), TEX_HEIGHT(aFont2Num4Tex),
-                                           TEX_COMPRESSED_SIZE(aFont2Num4Tex) },
-                                         { 0 } };
-unk_80077D50 sFont2Num5CompTexInfo[] = { { 17, aFont2Num5Tex, TEX_WIDTH(aFont2Num5Tex), TEX_HEIGHT(aFont2Num5Tex),
-                                           TEX_COMPRESSED_SIZE(aFont2Num5Tex) },
-                                         { 0 } };
-unk_80077D50 sFont2Num6CompTexInfo[] = { { 17, aFont2Num6Tex, TEX_WIDTH(aFont2Num6Tex), TEX_HEIGHT(aFont2Num6Tex),
-                                           TEX_COMPRESSED_SIZE(aFont2Num6Tex) },
-                                         { 0 } };
-unk_80077D50 sFont2Num7CompTexInfo[] = { { 17, aFont2Num7Tex, TEX_WIDTH(aFont2Num7Tex), TEX_HEIGHT(aFont2Num7Tex),
-                                           TEX_COMPRESSED_SIZE(aFont2Num7Tex) },
-                                         { 0 } };
-unk_80077D50 sFont2Num8CompTexInfo[] = { { 17, aFont2Num8Tex, TEX_WIDTH(aFont2Num8Tex), TEX_HEIGHT(aFont2Num8Tex),
-                                           TEX_COMPRESSED_SIZE(aFont2Num8Tex) },
-                                         { 0 } };
-unk_80077D50 sFont2Num9CompTexInfo[] = { { 17, aFont2Num9Tex, TEX_WIDTH(aFont2Num9Tex), TEX_HEIGHT(aFont2Num9Tex),
-                                           TEX_COMPRESSED_SIZE(aFont2Num9Tex) },
-                                         { 0 } };
+unk_80077D50 sFont2ACompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ATex);
+unk_80077D50 sFont2BCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2BTex);
+unk_80077D50 sFont2CCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2CTex);
+unk_80077D50 sFont2DCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2DTex);
+unk_80077D50 sFont2ECompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ETex);
+unk_80077D50 sFont2FCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2FTex);
+unk_80077D50 sFont2GCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2GTex);
+unk_80077D50 sFont2HCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2HTex);
+unk_80077D50 sFont2ICompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ITex);
+unk_80077D50 sFont2JCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2JTex);
+unk_80077D50 sFont2KCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2KTex);
+unk_80077D50 sFont2LCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2LTex);
+unk_80077D50 sFont2MCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2MTex);
+unk_80077D50 sFont2NCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2NTex);
+unk_80077D50 sFont2OCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2OTex);
+unk_80077D50 sFont2PCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2PTex);
+unk_80077D50 sFont2QCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2QTex);
+unk_80077D50 sFont2RCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2RTex);
+unk_80077D50 sFont2SCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2STex);
+unk_80077D50 sFont2TCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2TTex);
+unk_80077D50 sFont2UCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2UTex);
+unk_80077D50 sFont2VCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2VTex);
+unk_80077D50 sFont2WCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2WTex);
+unk_80077D50 sFont2XCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2XTex);
+unk_80077D50 sFont2YCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2YTex);
+unk_80077D50 sFont2ZCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ZTex);
+unk_80077D50 sFont2CommaCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2CommaTex);
+unk_80077D50 sFont2PeriodCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2PeriodTex);
+unk_80077D50 sFont2PrimeCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2PrimeTex);
+unk_80077D50 sFont2DashCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2DashTex);
+unk_80077D50 sFont2KgCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2KgTex);
+unk_80077D50 sFont2AmpersandCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2AmpersandTex);
+unk_80077D50 sFont2Num0CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num0Tex);
+unk_80077D50 sFont2Num1CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num1Tex);
+unk_80077D50 sFont2Num2CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num2Tex);
+unk_80077D50 sFont2Num3CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num3Tex);
+unk_80077D50 sFont2Num4CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num4Tex);
+unk_80077D50 sFont2Num5CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num5Tex);
+unk_80077D50 sFont2Num6CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num6Tex);
+unk_80077D50 sFont2Num7CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num7Tex);
+unk_80077D50 sFont2Num8CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num8Tex);
+unk_80077D50 sFont2Num9CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num9Tex);
 
 unk_80077D50* sFont2CompTexInfos[] = {
     sFont2ACompTexInfo,         sFont2BCompTexInfo,     sFont2CCompTexInfo,      sFont2DCompTexInfo,
@@ -299,32 +121,32 @@ unk_80077D50* sFont2CompTexInfos[] = {
     sFont2PeriodCompTexInfo,    sFont2CommaCompTexInfo, sFont2CommaCompTexInfo,  sFont2CommaCompTexInfo,
 };
 
-unk_80077D50 sFont3ACompTexInfo[] = { { 4, aFont3ATex, TEX_WIDTH(aFont3ATex), TEX_HEIGHT(aFont3ATex), 0 }, { 0 } };
-unk_80077D50 sFont3BCompTexInfo[] = { { 4, aFont3BTex, TEX_WIDTH(aFont3BTex), TEX_HEIGHT(aFont3BTex), 0 }, { 0 } };
-unk_80077D50 sFont3CCompTexInfo[] = { { 4, aFont3CTex, TEX_WIDTH(aFont3CTex), TEX_HEIGHT(aFont3CTex), 0 }, { 0 } };
-unk_80077D50 sFont3DCompTexInfo[] = { { 4, aFont3DTex, TEX_WIDTH(aFont3DTex), TEX_HEIGHT(aFont3DTex), 0 }, { 0 } };
-unk_80077D50 sFont3ECompTexInfo[] = { { 4, aFont3ETex, TEX_WIDTH(aFont3ETex), TEX_HEIGHT(aFont3ETex), 0 }, { 0 } };
-unk_80077D50 sFont3FCompTexInfo[] = { { 4, aFont3FTex, TEX_WIDTH(aFont3FTex), TEX_HEIGHT(aFont3FTex), 0 }, { 0 } };
-unk_80077D50 sFont3GCompTexInfo[] = { { 4, aFont3GTex, TEX_WIDTH(aFont3GTex), TEX_HEIGHT(aFont3GTex), 0 }, { 0 } };
-unk_80077D50 sFont3HCompTexInfo[] = { { 4, aFont3HTex, TEX_WIDTH(aFont3HTex), TEX_HEIGHT(aFont3HTex), 0 }, { 0 } };
-unk_80077D50 sFont3ICompTexInfo[] = { { 4, aFont3ITex, TEX_WIDTH(aFont3ITex), TEX_HEIGHT(aFont3ITex), 0 }, { 0 } };
-unk_80077D50 sFont3JCompTexInfo[] = { { 4, aFont3JTex, TEX_WIDTH(aFont3JTex), TEX_HEIGHT(aFont3JTex), 0 }, { 0 } };
-unk_80077D50 sFont3KCompTexInfo[] = { { 4, aFont3KTex, TEX_WIDTH(aFont3KTex), TEX_HEIGHT(aFont3KTex), 0 }, { 0 } };
-unk_80077D50 sFont3LCompTexInfo[] = { { 4, aFont3LTex, TEX_WIDTH(aFont3LTex), TEX_HEIGHT(aFont3LTex), 0 }, { 0 } };
-unk_80077D50 sFont3MCompTexInfo[] = { { 4, aFont3MTex, TEX_WIDTH(aFont3MTex), TEX_HEIGHT(aFont3MTex), 0 }, { 0 } };
-unk_80077D50 sFont3NCompTexInfo[] = { { 4, aFont3NTex, TEX_WIDTH(aFont3NTex), TEX_HEIGHT(aFont3NTex), 0 }, { 0 } };
-unk_80077D50 sFont3OCompTexInfo[] = { { 4, aFont3OTex, TEX_WIDTH(aFont3OTex), TEX_HEIGHT(aFont3OTex), 0 }, { 0 } };
-unk_80077D50 sFont3PCompTexInfo[] = { { 4, aFont3PTex, TEX_WIDTH(aFont3PTex), TEX_HEIGHT(aFont3PTex), 0 }, { 0 } };
-unk_80077D50 sFont3QCompTexInfo[] = { { 4, aFont3QTex, TEX_WIDTH(aFont3QTex), TEX_HEIGHT(aFont3QTex), 0 }, { 0 } };
-unk_80077D50 sFont3RCompTexInfo[] = { { 4, aFont3RTex, TEX_WIDTH(aFont3RTex), TEX_HEIGHT(aFont3RTex), 0 }, { 0 } };
-unk_80077D50 sFont3SCompTexInfo[] = { { 4, aFont3STex, TEX_WIDTH(aFont3STex), TEX_HEIGHT(aFont3STex), 0 }, { 0 } };
-unk_80077D50 sFont3TCompTexInfo[] = { { 4, aFont3TTex, TEX_WIDTH(aFont3TTex), TEX_HEIGHT(aFont3TTex), 0 }, { 0 } };
-unk_80077D50 sFont3UCompTexInfo[] = { { 4, aFont3UTex, TEX_WIDTH(aFont3UTex), TEX_HEIGHT(aFont3UTex), 0 }, { 0 } };
-unk_80077D50 sFont3VCompTexInfo[] = { { 4, aFont3VTex, TEX_WIDTH(aFont3VTex), TEX_HEIGHT(aFont3VTex), 0 }, { 0 } };
-unk_80077D50 sFont3WCompTexInfo[] = { { 4, aFont3WTex, TEX_WIDTH(aFont3WTex), TEX_HEIGHT(aFont3WTex), 0 }, { 0 } };
-unk_80077D50 sFont3XCompTexInfo[] = { { 4, aFont3XTex, TEX_WIDTH(aFont3XTex), TEX_HEIGHT(aFont3XTex), 0 }, { 0 } };
-unk_80077D50 sFont3YCompTexInfo[] = { { 4, aFont3YTex, TEX_WIDTH(aFont3YTex), TEX_HEIGHT(aFont3YTex), 0 }, { 0 } };
-unk_80077D50 sFont3ZCompTexInfo[] = { { 4, aFont3ZTex, TEX_WIDTH(aFont3ZTex), TEX_HEIGHT(aFont3ZTex), 0 }, { 0 } };
+unk_80077D50 sFont3ACompTexInfo[] = COMP_TEX_INFO(4, aFont3ATex, 0);
+unk_80077D50 sFont3BCompTexInfo[] = COMP_TEX_INFO(4, aFont3BTex, 0);
+unk_80077D50 sFont3CCompTexInfo[] = COMP_TEX_INFO(4, aFont3CTex, 0);
+unk_80077D50 sFont3DCompTexInfo[] = COMP_TEX_INFO(4, aFont3DTex, 0);
+unk_80077D50 sFont3ECompTexInfo[] = COMP_TEX_INFO(4, aFont3ETex, 0);
+unk_80077D50 sFont3FCompTexInfo[] = COMP_TEX_INFO(4, aFont3FTex, 0);
+unk_80077D50 sFont3GCompTexInfo[] = COMP_TEX_INFO(4, aFont3GTex, 0);
+unk_80077D50 sFont3HCompTexInfo[] = COMP_TEX_INFO(4, aFont3HTex, 0);
+unk_80077D50 sFont3ICompTexInfo[] = COMP_TEX_INFO(4, aFont3ITex, 0);
+unk_80077D50 sFont3JCompTexInfo[] = COMP_TEX_INFO(4, aFont3JTex, 0);
+unk_80077D50 sFont3KCompTexInfo[] = COMP_TEX_INFO(4, aFont3KTex, 0);
+unk_80077D50 sFont3LCompTexInfo[] = COMP_TEX_INFO(4, aFont3LTex, 0);
+unk_80077D50 sFont3MCompTexInfo[] = COMP_TEX_INFO(4, aFont3MTex, 0);
+unk_80077D50 sFont3NCompTexInfo[] = COMP_TEX_INFO(4, aFont3NTex, 0);
+unk_80077D50 sFont3OCompTexInfo[] = COMP_TEX_INFO(4, aFont3OTex, 0);
+unk_80077D50 sFont3PCompTexInfo[] = COMP_TEX_INFO(4, aFont3PTex, 0);
+unk_80077D50 sFont3QCompTexInfo[] = COMP_TEX_INFO(4, aFont3QTex, 0);
+unk_80077D50 sFont3RCompTexInfo[] = COMP_TEX_INFO(4, aFont3RTex, 0);
+unk_80077D50 sFont3SCompTexInfo[] = COMP_TEX_INFO(4, aFont3STex, 0);
+unk_80077D50 sFont3TCompTexInfo[] = COMP_TEX_INFO(4, aFont3TTex, 0);
+unk_80077D50 sFont3UCompTexInfo[] = COMP_TEX_INFO(4, aFont3UTex, 0);
+unk_80077D50 sFont3VCompTexInfo[] = COMP_TEX_INFO(4, aFont3VTex, 0);
+unk_80077D50 sFont3WCompTexInfo[] = COMP_TEX_INFO(4, aFont3WTex, 0);
+unk_80077D50 sFont3XCompTexInfo[] = COMP_TEX_INFO(4, aFont3XTex, 0);
+unk_80077D50 sFont3YCompTexInfo[] = COMP_TEX_INFO(4, aFont3YTex, 0);
+unk_80077D50 sFont3ZCompTexInfo[] = COMP_TEX_INFO(4, aFont3ZTex, 0);
 unk_80077D50 sFont3AlphaCompTexInfo[] = {
     { 4, aFont3AlphaTex, TEX_WIDTH(aFont3AlphaTex), TEX_HEIGHT(aFont3AlphaTex), 0 }, { 0 }
 };

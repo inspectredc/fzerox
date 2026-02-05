@@ -67,16 +67,25 @@ void Transition_HideSet(void) {
         case GAMEMODE_COURSE_EDIT:
             Transition_Queue(TRANSITION_HIDE, TRANSITION_TYPE_INSTANT);
             break;
+#ifdef EXPANSION_KIT
+        case GAMEMODE_CREATE_MACHINE:
+            Transition_Queue(TRANSITION_HIDE, TRANSITION_TYPE_STATIC_FADE);
+            break;
+#endif
         case GAMEMODE_FLX_COURSE_SELECT:
             Transition_SetArgument(TRANSITION_TYPE_FADE, 40);
             Transition_Queue(TRANSITION_HIDE, TRANSITION_TYPE_FADE);
             break;
         case GAMEMODE_FLX_MACHINE_SELECT:
+#ifndef EXPANSION_KIT
             if (gNumPlayers == 1) {
                 Transition_Queue(TRANSITION_HIDE, TRANSITION_TYPE_INSTANT);
             } else {
                 Transition_Queue(TRANSITION_HIDE, TRANSITION_TYPE_FADE);
             }
+#else
+            Transition_Queue(TRANSITION_HIDE, TRANSITION_TYPE_STATIC_FADE);
+#endif
             break;
         case GAMEMODE_FLX_MAIN_MENU:
             if (gGameModeChangeState == GAMEMODE_CHANGE_FAST(GAMEMODE_CHANGE_START)) {
@@ -143,12 +152,24 @@ void Transition_AppearSet(void) {
         case GAMEMODE_VS_4P:
         case GAMEMODE_TIME_ATTACK:
         case GAMEMODE_DEATH_RACE:
+#ifndef EXPANSION_KIT
         case GAMEMODE_FLX_MACHINE_SELECT:
+#endif
             Transition_Queue(TRANSITION_APPEAR, TRANSITION_TYPE_FADE);
             break;
+#ifdef EXPANSION_KIT
+        case GAMEMODE_FLX_MACHINE_SELECT:
+            Transition_Queue(TRANSITION_APPEAR, TRANSITION_TYPE_STATIC_FADE);
+            break;
+#endif
         case GAMEMODE_COURSE_EDIT:
             Transition_Queue(TRANSITION_APPEAR, TRANSITION_TYPE_INSTANT);
             break;
+#ifdef EXPANSION_KIT
+        case GAMEMODE_CREATE_MACHINE:
+            Transition_Queue(TRANSITION_APPEAR, TRANSITION_TYPE_STATIC_FADE);
+            break;
+#endif
         case GAMEMODE_FLX_RECORDS_COURSE_SELECT:
         case GAMEMODE_FLX_OPTIONS_MENU:
             if (gGameModeChangeState == GAMEMODE_CHANGE_FAST(GAMEMODE_CHANGE_INIT)) {
@@ -1505,7 +1526,7 @@ bool Transition_PhasedStripsUpdateState(Transition* transition) {
     return phasedStripsFinished;
 }
 
-#ifdef NON_EQUIVALENT
+#ifdef NON_MATCHING
 Gfx* Transition_PhasedStripsDraw(Gfx* gfx, Transition* transition) {
     f32* stripLeftPtr;
     u16* backgroundTexture;
@@ -1563,6 +1584,8 @@ Gfx* Transition_PhasedStripsDraw(Gfx* gfx, Transition* transition) {
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/transition/Transition_PhasedStripsDraw.s")
 #endif
+#else
+#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/overlays/ovl_i2/transition/Transition_PhasedStripsDraw.s")
 #endif
 #endif
 

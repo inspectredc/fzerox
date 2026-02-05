@@ -72,6 +72,18 @@ typedef enum Courses {
     /* 27 */ COURSE_EDIT_4,
     /* 28 */ COURSE_EDIT_5,
     /* 29 */ COURSE_EDIT_6,
+    /* 30 */ COURSE_SILENCE_3,
+    /* 31 */ COURSE_SAND_OCEAN_3,
+    /* 32 */ COURSE_DEVILS_FOREST_4,
+    /* 33 */ COURSE_PORT_TOWN_3,
+    /* 34 */ COURSE_DEVILS_FOREST_5,
+    /* 35 */ COURSE_BIG_BLUE_3,
+    /* 36 */ COURSE_MUTE_CITY_4,
+    /* 37 */ COURSE_SPACE_PLANT_2,
+    /* 38 */ COURSE_PORT_TOWN_4,
+    /* 39 */ COURSE_FIRE_FIELD_2,
+    /* 40 */ COURSE_WHITE_LAND_3,
+    /* 41 */ COURSE_BIG_FOOT,
     /* 48 */ COURSE_X_1 = 48,
     /* 49 */ COURSE_X_2,
     /* 50 */ COURSE_X_3,
@@ -80,6 +92,7 @@ typedef enum Courses {
     /* 53 */ COURSE_X_6,
     /* 54 */ COURSE_DEATH_RACE,
     /* 55 */ COURSE_ENDING,
+    /* 56 */ COURSE_MAX,
 } Courses;
 
 #define CREATOR_NINTENDO 4

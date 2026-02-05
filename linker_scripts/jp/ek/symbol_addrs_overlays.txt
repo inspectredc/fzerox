@@ -2325,6 +2325,10 @@ func_i4_8011B668 = 0x80074CC4; //segment:ovl_i4
 
 D_i5_801190D0 = 0x8007B9DC; //segment:course_select
 
+func_i2_80100B38 = 0x800A68A8; // segment:ovl_i2
+func_i2_80101590 = 0x800A7438; // segment:ovl_i2
+func_i2_801017B8 = 0x800A7660; // segment:ovl_i2
+func_i2_801039BC = 0x800A9AE0; // segment:ovl_i2
 func_i2_80103A70 = 0x800AABD0; //segment:ovl_i2
 func_80077CF0 = 0x800AE100; //segment:ovl_i2
 func_80077D50 = 0x800AE17C; //segment:ovl_i2
@@ -2348,9 +2352,12 @@ func_i2_800BE8BC = 0x800BE8BC; //segment:ovl_i2
 D_i2_80106DA0 = 0x800BEE10; //segment:ovl_i2
 D_i2_80106F10 = 0x800BF040; //segment:ovl_i2
 D_i2_80106F14 = 0x800BF044; //segment:ovl_i2
+D_i2_8010ADE0 = 0x800C1CC0; //segment:ovl_i2
+D_i2_8010ADE8 = 0x800C1CC8; //segment:ovl_i2
 D_8010C770 = 0x800CF950; //segment:ovl_i2
 D_8010CF50 = 0x800D0910; //segment:ovl_i2
 D_i2_80111848 = 0x800D1308; //segment:ovl_i2
+D_80115D50 = 0x800D5810; // segment:ovl_i2
 D_800E33E0 = 0x800D58B0; //segment:ovl_i2
 D_800E3A20 = 0x800D5EF0; //segment:ovl_i2
 D_800E3F28 = 0x800D63F8; //segment:ovl_i2

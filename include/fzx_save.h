@@ -40,6 +40,12 @@ typedef struct SaveEditCup {
     u8 editCupTrackNames[6][9];
 } SaveEditCup; // size = 0x40
 
+typedef struct SaveDDCups {
+    u16 checksum;
+    u16 staffGhostCompletion;
+    u8 cupCompletion[30 * 2];
+} SaveDDCups; // size = 0x40
+
 typedef struct SaveSettings {
     u8 fileName[8];
     u8 settings;
@@ -59,7 +65,10 @@ typedef struct ProfileSave {
     SaveSettings saveSettings;
     SaveDeathRace deathRace;
     SaveCourseRecords courses[24];
-    SaveEditCup editCup;
+    union {
+        SaveEditCup editCup;
+        SaveDDCups ddCups;
+    };
 } ProfileSave; // size = 0x19E0
 
 typedef struct GhostRecord {
@@ -114,8 +123,6 @@ s32 Save_Init(SaveContext*, s32);
 extern u8 gSaveBuffer[];
 extern SaveContext gSaveContext;
 
-s32 Save_LoadPlayerGhost(s32 courseIndex, s32 ghostIndex);
-
 bool func_i2_80100B38(GhostInfo* ghostInfo);
 
 void func_i2_80101590(GhostRecord* ghostRecord, GhostInfo* ghostInfo);
@@ -135,7 +142,9 @@ s32 Save_SaveGhost(s32 courseIndex, Ghost* ghost);
 void Save_SaveDeathRace(SaveDeathRace* deathRace);
 s32 Save_SaveDeathRaceProfiles(void);
 void Save_SaveCourseRecord(SaveCourseRecords* courseRecords, s32 courseIndex);
+#ifndef EXPANSION_KIT
 void Save_SaveEditCup(SaveEditCup* editCup);
+#endif
 void Save_SaveGhostRecord(Ghost* ghost);
 void Save_SaveGhostData(Ghost* ghost);
 void Save_SaveCharacterSave(CharacterSave* characterSave);
@@ -146,7 +155,9 @@ s32 Save_UpdateCupCompletion(s32 difficulty, s32 cupType, s32 character);
 
 void Save_Load(SaveContext* saveContext);
 void Save_LoadSaveSettings(ProfileSave* profileSaves, bool arg1);
+#ifndef EXPANSION_KIT
 void Save_LoadEditCup(ProfileSave* profileSaves, bool arg1);
+#endif
 void Save_LoadDeathRace(ProfileSave* profileSaves);
 void Save_LoadCupSave(CupSave* cupSave, u8* cupCompletion);
 void Save_LoadCharacterSave(CharacterSave* characterSave, s32 courseIndex);
@@ -168,7 +179,39 @@ u16 Save_CalculateCupSaveChecksum(CupSave* cupSave);
 void Save_RomCopyGhostRecord(GhostRecord* ghostRecord, s32 courseIndex);
 void Save_RomCopyGhostData(GhostData* ghostData, s32 courseIndex);
 
-s32 Save_LoadStaffGhost(s32 courseIndex);
+#ifndef EXPANSION_KIT
+#define Save_LoadStaffGhost_impl(courseIndex, encodedCourseIndex) Save_LoadStaffGhost(courseIndex)
+#define Save_LoadPlayerGhost_impl(courseIndex, encodedCourseIndex, ghostIndex) Save_LoadPlayerGhost(courseIndex, ghostIndex)
+#define func_i2_801005CC_impl(courseIndex, encodedCourseIndex) func_i2_801005CC(courseIndex)
+#else
+#define Save_LoadStaffGhost_impl(courseIndex, encodedCourseIndex) Save_LoadStaffGhost(courseIndex, encodedCourseIndex)
+#define Save_LoadPlayerGhost_impl(courseIndex, encodedCourseIndex, ghostIndex) Save_LoadPlayerGhost(courseIndex, encodedCourseIndex, ghostIndex)
+#define func_i2_801005CC_impl(courseIndex, encodedCourseIndex) func_i2_801005CC(courseIndex, encodedCourseIndex)
+#endif
+s32 Save_LoadStaffGhost_impl(s32 courseIndex, s32 encodedCourseIndex);
+s32 Save_LoadPlayerGhost_impl(s32 courseIndex, s32 encodedCourseIndex, s32 ghostIndex);
+s32 func_i2_801005CC_impl(s32 courseIndex, s32 encodedCourseIndex);
+
+#ifdef EXPANSION_KIT
+s32 func_i2_800A5F58(s32 courseIndex, s32 encodedCourseIndex);
+void Save_LoadCourseRecord2(SaveCourseRecords* courseRecord, s32 courseIndex);
+void Save_LoadDDCups(ProfileSave* profileSaves, u8* cupCompletion, u16* staffGhostCompletion);
+u16 Save_CalculateSaveCourseRecordChecksum(SaveCourseRecords* courseRecords);
+u16 Save_CalculateSaveDDCupsChecksum(ProfileSave* profileSave);
+void Save_RomCopyGhostReplayInfo(GhostData* ghostData, s32 courseIndex);
+
+void DDSave_LoadCachedCourseGhostRecords(s32 courseIndex, GhostRecord* ghostRecord);
+bool DDSave_ValidateCachedGhostRecords(void);
+void DDSave_LoadCachedCourseGhostData(s32 courseIndex, s32 ghostIndex, GhostData* ghostData);
+void DDSave_SaveGhost(s32 courseIndex, s32 ghostIndex, Ghost* ghost);
+void DDSave_SaveGhostWithCustomSupport(s32 courseIndex, s32 ghostIndex, Ghost* ghost);
+void DDSave_EraseDiskGhostSave(s32 courseIndex);
+void DDSave_EraseDiskCourseRecord(s32 courseIndex);
+void DDSave_ClearCachedGhostSaves(void);
+SaveCourseRecords* DDSave_GetCachedCourseRecord(void);
+void DDSave_LoadBaseCourses(void);
+void DDSave_EraseCourseGhostFile(s32 courseIndex);
+#endif
 
 #define REPLAY_DATA_LARGE_FLAG -0x80
 #define REPLAY_DATA_LARGE(x) REPLAY_DATA_LARGE_FLAG, (((x) >> 8) & 0xFF), ((x) & 0xFF)

@@ -199,36 +199,36 @@
     bss_size: 0x5BA0
     symbol_name_format: i2_$VRAM
     subsegments:
-      - [0x1039E0, asm, transition]
-      - [0x107680, asm, save]
-      - [0x10B620, asm, dd_save]
+      - [0x1039E0, c, transition]
+      - [0x107680, c, save]
+      - [0x10B620, c, dd_save]
       - [0x10C510, asm, race]
       - [0x10CFF0, asm, effects]
       - [0x10E8B0, asm, font]
       - [0x10FA40, c, ../../game/object]
       - [0x112650, c, ../../game/course]
-      - [0x120750, data, transition]
-      - [0x1207A0, data, save]
-      - [0x120970, data, dd_save]
+      - [0x120750, .data, transition]
+      - [0x1207A0, .data, save]
+      - [0x120970, .data, dd_save]
       - [0x120980, data, race]
-      - [0x1209A0, data, ovl_i2_data1]
+      - [0x1209A0, .data, ovl_i2_data1]
       - [0x1209B0, data, font]
       - [0x122E50, .data, ../../game/course]
-      - [0x123380, rodata, transition]
-      - [0x123600, rodata, save]
-      - [0x123630, rodata, dd_save]
+      - [0x123380, .rodata, transition]
+      - [0x123600, .rodata, save]
+      - [0x123630, .rodata, dd_save]
       - [0x123870, rodata, effects]
       - [0x1238D0, rodata, font]
       - [0x124220, .rodata, ../../game/object]
       - [0x124A10, .rodata, ../../game/course]
       - [0x124B70, data, course_context]
-      - { type: bss, vram: 0x800D11F0, name: transition }
-      - { type: bss, vram: 0x800D1270, name: save }
+      - { type: .bss, vram: 0x800D11F0, name: transition }
+      - { type: .bss, vram: 0x800D1270, name: save }
       - { type: bss, vram: 0x800D1330, name: effects }
-      - { type: bss, vram: 0x800D5810, name: ovl_i2_data1 }
+      - { type: .bss, vram: 0x800D5810, name: ovl_i2_data1 }
       - { type: .bss, vram: 0x800D58B0, name: ../../game/object }
       - { type: .bss, vram: 0x800D65C0, name: ../../game/course }
-      - { type: bss, vram: 0x800D6CA0, name: ovl_i2_data2 }
+      - { type: .bss, vram: 0x800D6CA0, name: ovl_i2_data2 }
 
   - name: ovl_i9
     exclusive_ram_id: overlay_800D6D90

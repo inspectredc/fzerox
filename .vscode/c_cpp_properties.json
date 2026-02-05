@@ -48,7 +48,8 @@
                 "MFS_VERSION=1",
                 "ASSET_VERSION=jp",
                 "ASSET_REVISION=rev0",
-                "BUILD_VERSION=VERSION_J"
+                "BUILD_VERSION=VERSION_J",
+                "VERSION_JP"
             ],
             "cStandard": "gnu89", // C89 + some GNU extensions from C99 like C++ comments
             "cppStandard": "${default}"

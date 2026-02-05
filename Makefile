@@ -332,6 +332,8 @@ src/sys/disk_mount_dd.c \
 src/sys/leo_fault_dd.c \
 src/sys/sys_leo_dd.c \
 src/sys/75000.c \
+src/overlays/ovl_i2/dd_save.c \
+src/overlays/ovl_i2/ovl_i2_data2.c \
 src/overlays/expansion_kit/% \
 src/overlays/course_edit/% \
 src/overlays/machine_create/% \
