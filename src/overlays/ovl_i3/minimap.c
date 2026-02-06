@@ -4,7 +4,11 @@
 #include "fzx_racer.h"
 #include ASSET_HEADER(course_track_gfx.h)
 
+#ifndef EXPANSION_KIT
 u8 sCourseMinimapTex[0x1000] = { 0 };
+#else
+u8* sCourseMinimapTex;
+#endif
 
 u16 sCourseMinimapPalette[] = {
     GPACK_RGBA5551(0, 0, 0, 0),       // MINIMAP_PALETTE_CLEAR
@@ -24,6 +28,7 @@ s32 gPlayerMinimapLapCounterToggle[] = { 0, 0, 0, 0 };
 
 extern s32 gNumPlayers;
 extern CourseInfo* gCurrentCourseInfo;
+extern bool gInCourseEditor;
 
 void Minimap_InitCourseMinimap(void) {
     s32 pad[23];
@@ -39,6 +44,12 @@ void Minimap_InitCourseMinimap(void) {
     Vec3f tangent;
     Vec3f pos;
     CourseInfo* courseInfo;
+
+#ifdef EXPANSION_KIT
+    if (!gInCourseEditor) {
+        sCourseMinimapTex = Arena_Allocate(ALLOC_FRONT, MINIMAP_MAX_SIZE);
+    }
+#endif
 
     courseInfo = gCurrentCourseInfo;
 

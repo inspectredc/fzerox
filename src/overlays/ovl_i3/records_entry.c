@@ -174,6 +174,7 @@ extern s16 gCurrentTimeAttackRecordPosition;
 extern s16 gCurrentTimeAttackHasMaxSpeed;
 extern s16 gBestTimedLap;
 extern GfxPool D_1000000;
+extern Gfx D_8076CE28[];
 
 Gfx* RecordsEntry_DrawRecords(Gfx* gfx, s32 courseIndex) {
     CourseInfo* courseInfo;
@@ -190,7 +191,11 @@ Gfx* RecordsEntry_DrawRecords(Gfx* gfx, s32 courseIndex) {
     s8 recordPositionStr[0x10];
     char* trackName;
 
+#ifndef EXPANSION_KIT
     gSPDisplayList(gfx++, D_303A810);
+#else
+    gSPDisplayList(gfx++, D_8076CE28);
+#endif
     gDPPipeSync(gfx++);
     gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
 
@@ -949,7 +954,13 @@ void RecordsEntry_SaveRecordName(CourseInfo* courseInfo) {
 
         courseInfo->recordNames[gCurrentTimeAttackRecordPosition - 1][i] = nameEntryCharacter;
     }
-    Save_SaveCourseRecordProfiles(gCourseIndex);
+#ifdef EXPANSION_KIT
+    if (gCourseIndex < COURSE_EDIT_1) {
+#endif
+        Save_SaveCourseRecordProfiles(gCourseIndex);
+#ifdef EXPANSION_KIT
+    }
+#endif
 }
 
 signed char sNameEntryStr[] = "NAME ENTRY";

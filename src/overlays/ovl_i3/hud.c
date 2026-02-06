@@ -22,7 +22,9 @@ s32 sPracticeBestLapCounter = 0;
 bool sSecondLapStarted = false;
 bool sFinalLapStarted = false;
 s32 D_i3_8013EFFC = 180;
+#ifndef EXPANSION_KIT
 s32 D_i3_8013F000 = 3;
+#endif
 UNUSED s32 D_i3_8013F004 = 0;
 
 s32 gPlayerLapNumbers[] = { 1, 1, 1, 1 };
@@ -75,6 +77,17 @@ TexturePtr sPositionTextures[] = {
     aPortraitPositionFirstTex,  aPortraitPositionSecondTex, aPortraitPositionThirdTex,
     aPortraitPositionFourthTex, aPortraitPositionFifthTex,  aPortraitPositionSixthTex,
 };
+
+#ifdef EXPANSION_KIT
+// clang-format off
+s32 D_i3_8006B708[] = {
+    255, 0,   0,
+    0,   255, 0,
+    255, 255, 100,
+    255, 0,   0,
+};
+// clang-format on
+#endif
 
 s32 sPlayerTimerPositions[][4][2] = {
     { { 230, 38 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
@@ -197,6 +210,36 @@ s32 sPortraitReplacementIndexes[] = {
     0, // THE_SKULL
     0, // BLOOD_FALCON
 };
+
+#ifdef EXPANSION_KIT
+extern u32 gGameFrameCount;
+
+Gfx* func_i3_80059EC0(Gfx* gfx, s32 arg1) {
+    s32 temp_a3;
+    s32 temp_a2;
+    s32 red;
+    s32 green;
+    s32 blue;
+    s32 temp_hi;
+    s32* temp_a0;
+    s32 pad;
+
+    temp_hi = (((gGameFrameCount * arg1) % 300) * 8) % 300;
+    temp_a2 = temp_hi % 100;
+    temp_a3 = 100 - temp_a2;
+    temp_a0 = &D_i3_8006B708[((temp_hi / 100) % 3) * 3];
+
+    red = ((temp_a0[0] * temp_a3) + (temp_a0[3] * temp_a2)) / 100;
+    green = ((temp_a0[1] * temp_a3) + (temp_a0[4] * temp_a2)) / 100;
+    blue = ((temp_a0[2] * temp_a3) + (temp_a0[5] * temp_a2)) / 100;
+
+    gDPSetPrimColor(gfx++, 0, 0, red, green, blue, 255);
+    gDPSetAlphaCompare(gfx++, G_AC_NONE);
+    gDPSetTextureFilter(gfx++, G_TF_BILERP);
+
+    return gfx;
+}
+#endif
 
 Gfx* Hud_DrawTimerDigitRectangle(Gfx* gfx, s32 left, s32 top, s32 number, f32 scale) {
 
@@ -1260,10 +1303,12 @@ Gfx* Hud_DrawRacePortraits(Gfx* gfx) {
     Racer* racer;
     s32 character;
 
+#ifndef EXPANSION_KIT
     if (D_i3_8013F000 != 0) {
         D_i3_8013F000--;
         Hud_UpdateCharacterPortraits();
     }
+#endif
 
     gSPDisplayList(gfx++, D_8014940);
 
@@ -1615,7 +1660,9 @@ Gfx* Hud_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
 void Hud_InitRacePortraits(void) {
     s32 i;
 
+#ifndef EXPANSION_KIT
     D_i3_8013F000 = 3;
+#endif
 
     for (i = 0; i < ARRAY_COUNT(sPortraitTextureScale); i++) {
         sPortraitTextureScale[i] = 1.0f;
@@ -1737,7 +1784,11 @@ void Hud_ReplaceCharacterPortrait(s32 character) {
     vramOffset = (Segment_GetAddress(4) + SEGMENT_OFFSET(aPortraitCaptainFalconTex)) + textureOffset;
 
     textureOffset = textureIndex * 0x800;
+#ifndef EXPANSION_KIT
     romOffset = SEGMENT_ROM_START(super_textures);
+#else
+    romOffset = gRomSegmentPairs[6][0];
+#endif
     romOffset = (romOffset + SEGMENT_OFFSET(D_276FF0)) + textureOffset;
 
     Dma_LoadAssetsAsync(romOffset, vramOffset, 0x800);

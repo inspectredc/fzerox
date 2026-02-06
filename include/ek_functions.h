@@ -35,6 +35,7 @@ void Audio_Reset(u8 playerIndex);
 void Audio_SEStart(u8 channelIndex, u8 ioData);
 void Audio_StopChannelSE(u8 channelIndex);
 void Audio_DisablePlayerSE(void);
+void Audio_RomBgmReady(u8 bgm);
 void Audio_DDBgmReady(u8 bgm);
 void Audio_DDBgmStart(u8 bgm);
 void Audio_DDBgmStart2(u8 bgm);
