@@ -25,12 +25,14 @@
 #define MAX_TIMER (60 * 60 * 1000 - 1)
 
 #ifndef EXPANSION_KIT
-    #define COMP_TEX_INFO(type, texture, compressedSize) \
-        { { type, texture, TEX_WIDTH(texture), TEX_HEIGHT(texture), compressedSize }, { 0 } }
+    #define COMP_TEX_INFO_WH(type, texture, width, height, compressedSize) \
+        { { type, texture, width, height, compressedSize }, { 0 } }
 #else
-    #define COMP_TEX_INFO(type, texture, compressedSize) \
-        { { type, texture, TEX_WIDTH(texture), TEX_HEIGHT(texture), compressedSize } }
+    #define COMP_TEX_INFO_WH(type, texture, width, height, compressedSize) \
+        { { type, texture, width, height, compressedSize } }
 #endif
+#define COMP_TEX_INFO(type, texture, compressedSize) \
+    COMP_TEX_INFO_WH(type, texture, TEX_WIDTH(texture), TEX_HEIGHT(texture), compressedSize)
 
 #define COMP_TEX_INFO_DEF(type, texture) \
     COMP_TEX_INFO(type, texture, TEX_COMPRESSED_SIZE(texture))

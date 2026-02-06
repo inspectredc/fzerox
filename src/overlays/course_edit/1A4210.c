@@ -317,7 +317,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
 
     D_xk2_80104364 = 0;
     D_xk2_80104368 = 0;
-    gCourseCtx.courseData.flag = 0;
+    COURSE_CONTEXT()->courseData.flag = 0;
     sp18 = 0;
     if (D_802CB6D0.controlPointCount < 4) {
         D_xk1_80032C20 = 0;
@@ -398,7 +398,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
             }
             func_800A4D0C(0);
             if (sp18 == 0) {
-                gCourseCtx.courseData.flag = 1;
+                COURSE_CONTEXT()->courseData.flag = 1;
             }
             break;
         }

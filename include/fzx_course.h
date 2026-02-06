@@ -33,6 +33,11 @@ typedef struct CourseData {
     /* 0x7A0 */ s8 sign[64];
 } CourseData; // size = 0x7E0
 
+typedef struct CourseBuffer {
+    /* 0x0000 */ CourseData courseData;
+    /* 0x07E0 */ u8 saveBuffer[0xBF40];
+} CourseBuffer; // size = 0xC720
+
 typedef struct CourseContext {
     /* 0x0000 */ CourseData courseData;
 #ifdef EXPANSION_KIT
@@ -345,8 +350,17 @@ typedef enum BorderlessRoad {
 #define TRACK_FLAG_CONTINUOUS 0x40000000
 #define TRACK_FLAG_80000000 0x80000000
 
+#ifndef EXPANSION_KIT
 extern CourseContext gCourseCtx;
-
 #define COURSE_CONTEXT() (&gCourseCtx)
+#else
+#ifdef AVOID_UB
+extern CourseContext gCourseCtx;
+#else
+extern CourseBuffer gCourseCtx;
+#endif
+#define COURSE_CONTEXT() ((CourseContext*)&gCourseCtx)
+#endif
+
 
 #endif // FZX_COURSE_H

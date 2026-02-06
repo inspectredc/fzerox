@@ -1953,18 +1953,18 @@ void func_xk2_800E6CA8(s32 arg0, CourseSegment arg1) {
             D_802CB6D0.unk_0000[i] = D_802CB6D0.unk_0000[i - 1];
             D_802CB6D0.unk_0000[i].segmentIndex = i;
 
-            gCourseCtx.courseData.bankAngle[i] = gCourseCtx.courseData.bankAngle[i - 1];
+            COURSE_CONTEXT()->courseData.bankAngle[i] = COURSE_CONTEXT()->courseData.bankAngle[i - 1];
             D_80128690[i] = D_80128690[i - 1];
 
-            gCourseCtx.courseData.pit[i] = gCourseCtx.courseData.pit[i - 1];
-            gCourseCtx.courseData.dash[i] = gCourseCtx.courseData.dash[i - 1];
-            gCourseCtx.courseData.dirt[i] = gCourseCtx.courseData.dirt[i - 1];
-            gCourseCtx.courseData.ice[i] = gCourseCtx.courseData.ice[i - 1];
-            gCourseCtx.courseData.jump[i] = gCourseCtx.courseData.jump[i - 1];
-            gCourseCtx.courseData.landmine[i] = gCourseCtx.courseData.landmine[i - 1];
-            gCourseCtx.courseData.gate[i] = gCourseCtx.courseData.gate[i - 1];
-            gCourseCtx.courseData.building[i] = gCourseCtx.courseData.building[i - 1];
-            gCourseCtx.courseData.sign[i] = gCourseCtx.courseData.sign[i - 1];
+            COURSE_CONTEXT()->courseData.pit[i] = COURSE_CONTEXT()->courseData.pit[i - 1];
+            COURSE_CONTEXT()->courseData.dash[i] = COURSE_CONTEXT()->courseData.dash[i - 1];
+            COURSE_CONTEXT()->courseData.dirt[i] = COURSE_CONTEXT()->courseData.dirt[i - 1];
+            COURSE_CONTEXT()->courseData.ice[i] = COURSE_CONTEXT()->courseData.ice[i - 1];
+            COURSE_CONTEXT()->courseData.jump[i] = COURSE_CONTEXT()->courseData.jump[i - 1];
+            COURSE_CONTEXT()->courseData.landmine[i] = COURSE_CONTEXT()->courseData.landmine[i - 1];
+            COURSE_CONTEXT()->courseData.gate[i] = COURSE_CONTEXT()->courseData.gate[i - 1];
+            COURSE_CONTEXT()->courseData.building[i] = COURSE_CONTEXT()->courseData.building[i - 1];
+            COURSE_CONTEXT()->courseData.sign[i] = COURSE_CONTEXT()->courseData.sign[i - 1];
         }
     }
 
@@ -1979,16 +1979,16 @@ void func_xk2_800E6CA8(s32 arg0, CourseSegment arg1) {
     temp_v1->radiusLeft = arg1.radiusLeft;
     temp_v1->radiusRight = arg1.radiusRight;
     temp_v1->trackSegmentInfo = arg1.trackSegmentInfo;
-    gCourseCtx.courseData.bankAngle[arg0 + 1] = D_xk2_80128D6C;
-    gCourseCtx.courseData.pit[arg0 + 1] = PIT_NONE;
-    gCourseCtx.courseData.dash[arg0 + 1] = DASH_NONE;
-    gCourseCtx.courseData.dirt[arg0 + 1] = DIRT_NONE;
-    gCourseCtx.courseData.ice[arg0 + 1] = ICE_NONE;
-    gCourseCtx.courseData.jump[arg0 + 1] = JUMP_NONE;
-    gCourseCtx.courseData.landmine[arg0 + 1] = LANDMINE_NONE;
-    gCourseCtx.courseData.gate[arg0 + 1] = GATE_NONE;
-    gCourseCtx.courseData.building[arg0 + 1] = BUILDING_NONE;
-    gCourseCtx.courseData.sign[arg0 + 1] = SIGN_NONE;
+    COURSE_CONTEXT()->courseData.bankAngle[arg0 + 1] = D_xk2_80128D6C;
+    COURSE_CONTEXT()->courseData.pit[arg0 + 1] = PIT_NONE;
+    COURSE_CONTEXT()->courseData.dash[arg0 + 1] = DASH_NONE;
+    COURSE_CONTEXT()->courseData.dirt[arg0 + 1] = DIRT_NONE;
+    COURSE_CONTEXT()->courseData.ice[arg0 + 1] = ICE_NONE;
+    COURSE_CONTEXT()->courseData.jump[arg0 + 1] = JUMP_NONE;
+    COURSE_CONTEXT()->courseData.landmine[arg0 + 1] = LANDMINE_NONE;
+    COURSE_CONTEXT()->courseData.gate[arg0 + 1] = GATE_NONE;
+    COURSE_CONTEXT()->courseData.building[arg0 + 1] = BUILDING_NONE;
+    COURSE_CONTEXT()->courseData.sign[arg0 + 1] = SIGN_NONE;
     D_800D6CA0.unk_0C = arg0 + 1;
 
     D_802CB6D0.controlPointCount++;

@@ -213,8 +213,8 @@ void func_xk2_800F1938(void) {
         }
         radiusLeft = (temp_v1->radiusLeft + temp_v1->next->radiusLeft) / 2;
         radiusRight = (temp_v1->radiusRight + temp_v1->next->radiusRight) / 2;
-        temp_a2 = gCourseCtx.courseData.bankAngle[temp_v1->segmentIndex];
-        temp_a3 = gCourseCtx.courseData.bankAngle[temp_v1->next->segmentIndex];
+        temp_a2 = COURSE_CONTEXT()->courseData.bankAngle[temp_v1->segmentIndex];
+        temp_a3 = COURSE_CONTEXT()->courseData.bankAngle[temp_v1->next->segmentIndex];
         temp_a1 = temp_a3 - temp_a2;
 
         if (ABS(temp_a1) < 180) {

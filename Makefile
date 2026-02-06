@@ -346,6 +346,7 @@ src/sys/disk_mount.c \
 src/sys/leo_fault.c \
 src/sys/leo_presence.c \
 src/sys/sys_leo.c \
+src/overlays/ovl_i2/save_buffer.c \
 src/overlays/ovl_i11/% \
 src/audio/rom/% 
 endif

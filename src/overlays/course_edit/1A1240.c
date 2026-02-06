@@ -435,7 +435,7 @@ void func_xk2_800F07A4(void) {
     for (i = 0; i < 5; i++) {
         sp108.pos = D_xk2_80128CB8[i];
         func_xk2_800E6CA8(D_800D6CA0.unk_0C, sp108);
-        gCourseCtx.courseData.bankAngle[D_800D6CA0.unk_0C] = 0;
+        COURSE_CONTEXT()->courseData.bankAngle[D_800D6CA0.unk_0C] = 0;
     }
     func_i2_800BE8BC(gCurrentCourseInfo);
     temp_s2 = D_802CB6D0.unk_0000[sp1C0].next;
@@ -444,60 +444,60 @@ void func_xk2_800F07A4(void) {
         spFC.x = spCC.y.x;
         spFC.y = spCC.y.y;
         spFC.z = spCC.y.z;
-        gCourseCtx.courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
+        COURSE_CONTEXT()->courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
         temp_s2 = temp_s2->next;
         // clang-format off
         spFC.x = spCC.x.x; \
         spFC.y = spCC.x.y; \
         spFC.z = spCC.x.z;
         // clang-format on
-        gCourseCtx.courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
+        COURSE_CONTEXT()->courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
         temp_s2 = temp_s2->next;
         spFC.x = -1.0f * spCC.y.x;
         spFC.y = -1.0f * spCC.y.y;
         spFC.z = -1.0f * spCC.y.z;
-        gCourseCtx.courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
+        COURSE_CONTEXT()->courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
         temp_s2 = temp_s2->next;
         spFC.x = -1.0f * spCC.x.x;
         spFC.y = -1.0f * spCC.x.y;
         spFC.z = -1.0f * spCC.x.z;
-        gCourseCtx.courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
+        COURSE_CONTEXT()->courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
         temp_s2 = temp_s2->next;
         // clang-format off
         spFC.x = spCC.y.x; \
         spFC.y = spCC.y.y; \
         spFC.z = spCC.y.z;
         // clang-format on
-        gCourseCtx.courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
+        COURSE_CONTEXT()->courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
     } else {
         spFC.x = spCC.y.x;
         spFC.y = spCC.y.y;
         spFC.z = spCC.y.z;
-        gCourseCtx.courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
+        COURSE_CONTEXT()->courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
         temp_s2 = temp_s2->next;
         spFC.x = -1.0f * spCC.x.x;
         spFC.y = -1.0f * spCC.x.y;
         spFC.z = -1.0f * spCC.x.z;
-        gCourseCtx.courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
+        COURSE_CONTEXT()->courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
         temp_s2 = temp_s2->next;
         spFC.x = -1.0f * spCC.y.x;
         spFC.y = -1.0f * spCC.y.y;
         spFC.z = -1.0f * spCC.y.z;
-        gCourseCtx.courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
+        COURSE_CONTEXT()->courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
         temp_s2 = temp_s2->next;
         // clang-format off
         spFC.x = spCC.x.x; \
         spFC.y = spCC.x.y; \
         spFC.z = spCC.x.z;
         // clang-format on
-        gCourseCtx.courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
+        COURSE_CONTEXT()->courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
         temp_s2 = temp_s2->next;
         // clang-format off
         spFC.x = spCC.y.x; \
         spFC.y = spCC.y.y; \
         spFC.z = spCC.y.z;
         // clang-format on
-        gCourseCtx.courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
+        COURSE_CONTEXT()->courseData.bankAngle[temp_s2->segmentIndex] = func_xk2_800F05C0(temp_s2, spFC);
     }
     D_xk2_800F7040 = 3;
 }
@@ -522,18 +522,18 @@ void func_xk2_800F0FF4(void) {
     var_v1 = &D_802CB6D0.unk_0000[1];
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         temp_a0 = var_v1->segmentIndex;
-        D_8010C770.bankAngle[i] = 360 - gCourseCtx.courseData.bankAngle[temp_a0];
+        D_8010C770.bankAngle[i] = 360 - COURSE_CONTEXT()->courseData.bankAngle[temp_a0];
 
         temp_a2 = var_v1->prev->segmentIndex;
-        D_8010C770.pit[i] = gCourseCtx.courseData.pit[temp_a2];
-        D_8010C770.dash[i] = gCourseCtx.courseData.dash[temp_a2];
-        D_8010C770.dirt[i] = gCourseCtx.courseData.dirt[temp_a2];
-        D_8010C770.ice[i] = gCourseCtx.courseData.ice[temp_a2];
-        D_8010C770.jump[i] = gCourseCtx.courseData.jump[temp_a2];
-        D_8010C770.landmine[i] = gCourseCtx.courseData.landmine[temp_a2];
-        D_8010C770.gate[i] = gCourseCtx.courseData.gate[temp_a0];
-        D_8010C770.building[i] = gCourseCtx.courseData.building[temp_a0];
-        D_8010C770.sign[i] = gCourseCtx.courseData.sign[temp_a0];
+        D_8010C770.pit[i] = COURSE_CONTEXT()->courseData.pit[temp_a2];
+        D_8010C770.dash[i] = COURSE_CONTEXT()->courseData.dash[temp_a2];
+        D_8010C770.dirt[i] = COURSE_CONTEXT()->courseData.dirt[temp_a2];
+        D_8010C770.ice[i] = COURSE_CONTEXT()->courseData.ice[temp_a2];
+        D_8010C770.jump[i] = COURSE_CONTEXT()->courseData.jump[temp_a2];
+        D_8010C770.landmine[i] = COURSE_CONTEXT()->courseData.landmine[temp_a2];
+        D_8010C770.gate[i] = COURSE_CONTEXT()->courseData.gate[temp_a0];
+        D_8010C770.building[i] = COURSE_CONTEXT()->courseData.building[temp_a0];
+        D_8010C770.sign[i] = COURSE_CONTEXT()->courseData.sign[temp_a0];
         D_xk2_80119920[i] = D_802CB6D0.unk_0000[temp_a0];
 
         D_xk2_80119920[i].trackSegmentInfo = var_v1->prev->trackSegmentInfo;
@@ -542,16 +542,16 @@ void func_xk2_800F0FF4(void) {
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         D_802CB6D0.unk_0000[i] = D_xk2_80119920[i];
 
-        gCourseCtx.courseData.bankAngle[i] = D_8010C770.bankAngle[i];
-        gCourseCtx.courseData.pit[i] = D_8010C770.pit[i];
-        gCourseCtx.courseData.dash[i] = D_8010C770.dash[i];
-        gCourseCtx.courseData.dirt[i] = D_8010C770.dirt[i];
-        gCourseCtx.courseData.ice[i] = D_8010C770.ice[i];
-        gCourseCtx.courseData.jump[i] = D_8010C770.jump[i];
-        gCourseCtx.courseData.landmine[i] = D_8010C770.landmine[i];
-        gCourseCtx.courseData.gate[i] = D_8010C770.gate[i];
-        gCourseCtx.courseData.building[i] = D_8010C770.building[i];
-        gCourseCtx.courseData.sign[i] = D_8010C770.sign[i];
+        COURSE_CONTEXT()->courseData.bankAngle[i] = D_8010C770.bankAngle[i];
+        COURSE_CONTEXT()->courseData.pit[i] = D_8010C770.pit[i];
+        COURSE_CONTEXT()->courseData.dash[i] = D_8010C770.dash[i];
+        COURSE_CONTEXT()->courseData.dirt[i] = D_8010C770.dirt[i];
+        COURSE_CONTEXT()->courseData.ice[i] = D_8010C770.ice[i];
+        COURSE_CONTEXT()->courseData.jump[i] = D_8010C770.jump[i];
+        COURSE_CONTEXT()->courseData.landmine[i] = D_8010C770.landmine[i];
+        COURSE_CONTEXT()->courseData.gate[i] = D_8010C770.gate[i];
+        COURSE_CONTEXT()->courseData.building[i] = D_8010C770.building[i];
+        COURSE_CONTEXT()->courseData.sign[i] = D_8010C770.sign[i];
     }
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
