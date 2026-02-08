@@ -24,24 +24,35 @@
 
 #define MAX_TIMER (60 * 60 * 1000 - 1)
 
-#ifndef EXPANSION_KIT
-    #define COMP_TEX_INFO_WH(type, texture, width, height, compressedSize) \
-        { { type, texture, width, height, compressedSize }, { 0 } }
-#else
-    #define COMP_TEX_INFO_WH(type, texture, width, height, compressedSize) \
-        { { type, texture, width, height, compressedSize } }
-#endif
-#define COMP_TEX_INFO(type, texture, compressedSize) \
-    COMP_TEX_INFO_WH(type, texture, TEX_WIDTH(texture), TEX_HEIGHT(texture), compressedSize)
-
-#define COMP_TEX_INFO_DEF(type, texture) \
-    COMP_TEX_INFO(type, texture, TEX_COMPRESSED_SIZE(texture))
-
 #define TEX_COMPRESSED_SIZE(tex) (_ ## tex ## _COMPRESSED_SIZE)
 #define TEX_WIDTH(tex) (_ ## tex ## _WIDTH)
 #define TEX_HEIGHT(tex) (_ ## tex ## _HEIGHT)
 #define TEX_SIZE(tex, depth) (TEX_WIDTH(tex) * TEX_HEIGHT(tex) * (depth))
 #define TEX_SIZE_4B(tex) (TEX_WIDTH(tex) * TEX_HEIGHT(tex) / 2)
+
+#ifndef EXPANSION_KIT
+    #define COMP_TEX_INFO_WH(type, texture, width, height, compressedSize) \
+        { { type, texture, width, height, compressedSize }, { 0 } }
+    #define COMP_TEX_INFO_WH_PAD(type, texture, width, height, compressedSize) \
+        COMP_TEX_INFO_WH(type, texture, width, height, compressedSize)
+#else
+    #define COMP_TEX_INFO_WH(type, texture, width, height, compressedSize) \
+        { { type, texture, width, height, compressedSize } }
+
+    #define COMP_TEX_INFO_WH_PAD(type, texture, width, height, compressedSize) \
+        { { type, texture, width, height, compressedSize }, { 0 } }
+#endif
+#define COMP_TEX_INFO_PAD(type, texture, compressedSize) \
+    COMP_TEX_INFO_WH_PAD(type, texture, TEX_WIDTH(texture), TEX_HEIGHT(texture), compressedSize)
+
+#define COMP_TEX_INFO(type, texture, compressedSize) \
+    COMP_TEX_INFO_WH(type, texture, TEX_WIDTH(texture), TEX_HEIGHT(texture), compressedSize)
+
+#define COMP_TEX_INFO_DEF_PAD(type, texture) \
+    COMP_TEX_INFO_PAD(type, texture, TEX_COMPRESSED_SIZE(texture))
+
+#define COMP_TEX_INFO_DEF(type, texture) \
+    COMP_TEX_INFO(type, texture, TEX_COMPRESSED_SIZE(texture))
 
 #define PHYS_TO_K1ROM(x) (((u32) (x) | 0xB0000000))
 #define ROM_READ(addr) (*(vu32*) PHYS_TO_K1ROM(addr))

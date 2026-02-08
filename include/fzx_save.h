@@ -200,6 +200,7 @@ u16 Save_CalculateSaveCourseRecordChecksum(SaveCourseRecords* courseRecords);
 u16 Save_CalculateSaveDDCupsChecksum(ProfileSave* profileSave);
 void Save_RomCopyGhostReplayInfo(GhostData* ghostData, s32 courseIndex);
 
+void DDSave_LoadCourseGhostRecords(s32 courseIndex, GhostRecord* ghostRecord);
 void DDSave_LoadCachedCourseGhostRecords(s32 courseIndex, GhostRecord* ghostRecord);
 bool DDSave_ValidateCachedGhostRecords(void);
 void DDSave_LoadCachedCourseGhostData(s32 courseIndex, s32 ghostIndex, GhostData* ghostData);

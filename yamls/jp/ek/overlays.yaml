@@ -105,13 +105,13 @@
     bss_size: 0x30
     symbol_name_format: i4_$VRAM
     subsegments:
-      - [0xDE7C0, asm, machine]
-      - [0xE3560, asm, title]
-      - [0xE4560, data, machine]
-      - [0xE5CA0, data, title]
-      - [0xE6550, rodata, machine]
-      - { type: bss, vram: 0x80077050, name: machine }
-      - { type: bss, vram: 0x80077070, name: title }
+      - [0xDE7C0, c, machine]
+      - [0xE3560, c, title]
+      - [0xE4560, .data, machine]
+      - [0xE5CA0, .data, title]
+      - [0xE6550, .rodata, machine]
+      - { type: .bss, vram: 0x80077050, name: machine }
+      - { type: .bss, vram: 0x80077070, name: title }
 
   - name: course_select
     exclusive_ram_id: course_select
@@ -122,14 +122,14 @@
     bss_size: 0x40
     symbol_name_format: i5_$VRAM
     subsegments:
-      - [0xE6660, asm, course_model]
-      - [0xE7340, asm, course_select]
-      - [0xEA590, data, course_view]
-      - [0xEA650, data, course_model]
-      - [0xEA660, data, course_select]
-      - [0xEB400, rodata, course_select]
-      - { type: bss, vram: 0x8007C270, name: course_model }
-      - { type: bss, vram: 0x8007C2A0, name: course_select }
+      - [0xE6660, c, course_model]
+      - [0xE7340, c, course_select]
+      - [0xEA590, .data, course_view]
+      - [0xEA650, .data, course_model]
+      - [0xEA660, .data, course_select]
+      - [0xEB400, .rodata, course_select]
+      - { type: .bss, vram: 0x8007C270, name: course_model }
+      - { type: .bss, vram: 0x8007C2A0, name: course_select }
 
   - name: ovl_i6
     exclusive_ram_id: ovl_i6

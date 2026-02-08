@@ -206,7 +206,8 @@
       - [0xDC550, c, course_model]
       - [0xDCF90, c, course_select]
       - [0xDF750, .data, course_view]
-      - [0xDF810, .data, course_select]
+      - [0xDF810, .data, course_model]
+      - [0xDF820, .data, course_select]
       - [0xDFCB0, .rodata, course_select]
       - { type: .bss, vram: 0x801197B0, name: course_model }
       - { type: .bss, vram: 0x801197E0, name: course_select}
