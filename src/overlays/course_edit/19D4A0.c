@@ -4,7 +4,7 @@
 s32 D_xk2_80103F10 = 0;
 s32 D_xk2_80103F14 = 0;
 
-extern u8 gEditCupTrackNames[4 * 6][9];
+extern char gEditCupTrackNames[4 * 6][9];
 extern unk_800D6CA0 D_800D6CA0;
 
 void func_xk2_800EB9E0(void) {

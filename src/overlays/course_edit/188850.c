@@ -3232,7 +3232,7 @@ void func_xk2_800DF370(void) {
     func_xk1_8002D2F0();
 }
 
-extern u8 gEditCupTrackNames[][9];
+extern char gEditCupTrackNames[][9];
 extern s32 D_xk2_80103F10;
 
 void func_xk2_800DF42C(void) {

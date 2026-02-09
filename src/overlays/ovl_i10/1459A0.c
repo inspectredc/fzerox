@@ -1,18 +1,37 @@
 #include "global.h"
 #include "fzx_save.h"
+#include "fzx_course.h"
 
-void func_i10_80115E30(SaveContext*);
+extern s32 gLeoDriveConnectionState;
 extern OSPiHandle* gSramPiHandlePtr;
 
 s32 func_i10_80115DF0(void) {
     gSramPiHandlePtr = Sram_Init();
     func_i10_80115E30((SaveContext*) Arena_Allocate(ALLOC_PEEK, sizeof(SaveContext)));
+
+#ifdef EXPANSION_KIT
+    if (gLeoDriveConnectionState != 0) {
+        func_xk1_8002FBC8();
+    }
+    func_i10_8012B580();
+#endif
     return 0;
 }
 
-void Save_Load(SaveContext*);
-bool func_i10_80115EE8(u8*);
-void func_i10_80115F2C(SaveContext*, s32);
+#ifdef EXPANSION_KIT
+extern s32 sDDStaffGhostRecordTimes[];
+
+void func_i10_8012B580(void) {
+    s32 pad;
+    s32 courseIndex;
+    GhostInfo ghostInfo;
+
+    for (courseIndex = COURSE_MUTE_CITY; courseIndex <= COURSE_BIG_HAND; courseIndex++) {
+        Save_LoadStaffGhostRecord(&ghostInfo, courseIndex);
+        sDDStaffGhostRecordTimes[courseIndex] = ghostInfo.raceTime;
+    }
+}
+#endif
 
 void func_i10_80115E30(SaveContext* saveContext) {
     s32 i;

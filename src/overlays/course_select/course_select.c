@@ -517,7 +517,7 @@ extern u16 gInputPressed;
 extern u16 gInputButtonPressed;
 extern Camera gCameras[];
 extern s32 gTransitionState;
-extern u8 gEditCupTrackNames[][9];
+extern char gEditCupTrackNames[][9];
 
 s32 CourseSelect_Update(void) {
     s32 originalCupSelectOption;

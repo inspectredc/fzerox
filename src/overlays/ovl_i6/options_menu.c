@@ -10,7 +10,7 @@
 #include ASSET_HEADER(setup_gfx.h)
 
 SaveContext* sSaveContextPtr;
-Vtx D_i6_8011FB18[2][0x258]; // Some kind of vtx buffer space?
+Vtx D_i6_8011FB18[2][0x258];
 Vtx* D_i6_80124618;
 s16 D_i6_80124620[176];
 s32 sOptionsDataClearMenu;
@@ -257,6 +257,9 @@ s32 OptionsMenu_Update(void) {
                 if (gTransitionState == TRANSITION_INACTIVE && func_i6_8011C788()) {
                     sOptionsDataAlreadyCleared = true;
                     gMenuChangeMode = MENU_CHANGE_EXIT_OPTIONS;
+#ifdef EXPANSION_KIT
+                    Audio_RomBgmReady(BGM_SELECT);
+#endif
                 }
                 break;
             case OPTIONS_DATA_CLEAR_MENU_OPEN:
@@ -377,6 +380,8 @@ bool func_i6_8011C788(void) {
                 D_i6_801247A4 =
                     BorderedBox_Init(0, 0x5A, 0x8C, 0x94, 0x50, GPACK_RGBA5551(255, 0, 0, 1), func_i6_8011D168);
 #else
+                D_i6_801247A4 =
+                    BorderedBox_Init(0, 0x5A, 0x8C, 0x94, 0x50, 10, GPACK_RGBA5551(255, 0, 0, 1), func_i6_8011D168);
 #endif
                 if (D_i6_801247A4 != NULL) {
                     sOptionsDataClearMenu = OPTIONS_DATA_CLEAR_MENU_OPEN;
@@ -430,12 +435,18 @@ void func_i6_8011CBB4(void) {
             updateSettings = true;
             if (sOptionsSelectionState[gOptionsCurrentRow] == 1) {
                 Save_Init(sSaveContextPtr, 1);
+#ifdef EXPANSION_KIT
+                func_i6_80083390();
+#endif
                 func_i6_8011C404();
                 for (i = 0; i < 4; i++) {
                     gVsRacePlayerVictoryCount[i] = gVsRacePlayerPoints[i] = 0;
                 }
                 func_8007E398();
                 Audio_TriggerSystemSE(NA_SE_5);
+#ifdef EXPANSION_KIT
+                func_xk1_8002FC70();
+#endif
             } else {
                 Audio_TriggerSystemSE(NA_SE_16);
             }
@@ -449,6 +460,17 @@ void func_i6_8011CBB4(void) {
         }
     }
 }
+
+#ifdef EXPANSION_KIT
+void func_i6_80083390(void) {
+    s32 i;
+
+    for (i = 0; i < 42; i++) {
+        DDSave_EraseCourseGhostFile(i);
+    };
+    func_8076805C();
+}
+#endif
 
 Gfx* OptionsMenu_Draw(Gfx* gfx) {
     s32 temp_s4;
@@ -640,6 +662,8 @@ void func_i6_8011D394(void) {
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/options_menu/func_i6_8011D394.s")
 #endif
+#else
+#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/overlays/ovl_i6/options_menu/func_i6_8011D394.s")
 #endif
 #endif
 

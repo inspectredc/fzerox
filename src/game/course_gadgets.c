@@ -3808,7 +3808,7 @@ static const char devrostr07[] = "U ERROR RETRY\n";
 static const char devrostr08[] = "U ERROR RETRY\n";
 #endif
 
-extern u8 gEditCupTrackNames[][9];
+extern char gEditCupTrackNames[][9];
 extern s16 gPlayer1OverallPosition;
 extern u8 D_i2_80106F14[];
 extern OSMesgQueue* gMFSMesgQ;

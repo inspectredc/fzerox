@@ -40,7 +40,7 @@ CourseData D_8010CF50 = {
 };
 
 #ifndef EXPANSION_KIT
-u8 gEditCupTrackNames[6][9] = { 0 };
+char gEditCupTrackNames[6][9] = { 0 };
 #else
 char gEditCupTrackNames[6 * 4][9] = { 0 };
 #endif

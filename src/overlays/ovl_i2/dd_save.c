@@ -7,7 +7,7 @@
 char sDDSaveGhostFileName[] = "GHOST00";
 
 extern OSMesgQueue gMFSMesgQ;
-extern u8 gEditCupTrackNames[][9];
+extern char gEditCupTrackNames[][9];
 
 void DDSave_LoadCourseGhostRecords(s32 courseIndex, GhostRecord* ghostRecord) {
     s32 i;

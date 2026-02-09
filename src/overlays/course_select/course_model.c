@@ -106,7 +106,7 @@ extern s32 D_800DCCFC;
 extern Camera gCameras[];
 extern s32 gSelectedMode;
 extern s32 gCupType;
-extern u8 gEditCupTrackNames[][9];
+extern char gEditCupTrackNames[][9];
 
 // Track 3D Models
 Gfx* func_i5_80115E64(Gfx* gfx) {

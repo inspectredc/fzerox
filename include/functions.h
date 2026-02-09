@@ -4,6 +4,7 @@
 #include "sys.h"
 #include "controller.h"
 #include "fzx_math.h"
+#include "fzx_save.h"
 #include "fzx_object.h"
 #include "unk_structs.h"
 #include "PR/leo.h"
@@ -313,6 +314,7 @@ s32 Save_InitGhost(s32 courseIndex);
 OSPiHandle* Sram_Init(void);
 void Sram_ReadWrite(s32 direction, u32 offset, void* dramAddr, size_t size);
 s32 Save_LoadStaffGhostRecord(GhostInfo*, s32);
+void func_i2_801039BC(s32);
 void func_i2_80103A70(void);
 void Race_Init(void);
 s32 Race_Update(void);
@@ -710,6 +712,9 @@ Gfx* Machine_DrawLoadGoldenFoxTextures(Gfx* gfx);
 Gfx* Machine_DrawLoadBlueFalconTextures(Gfx* gfx);
 
 s32 func_i10_80115DF0(void);
+void func_i10_80115E30(SaveContext* saveContext);
+bool func_i10_80115EE8(u8*);
+void func_i10_80115F2C(SaveContext*, s32);
 
 void func_i11_800FC730(void);
 

@@ -41,7 +41,7 @@ uintptr_t D_i2_80106DF0[][3] = {
     { &aBigHandStaffGhostRecord, &aBigHandStaffGhostReplayInfo, aBigHandStaffGhostData },
 };
 
-extern u8 gEditCupTrackNames[][9];
+extern char gEditCupTrackNames[][9];
 
 const char D_i2_8010ADE0[] = { 'F', '-', 'Z', 'E', 'R', 'O', ' ', 'X' };
 const char D_i2_8010ADE8[] = { 'D', 'A', 'I', '&', 'E', 'A', 'D', '!' };

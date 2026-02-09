@@ -322,7 +322,7 @@ extern u8 gExpansionKitNameEntryStr[];
 extern s32 D_xk2_80103F10;
 extern s32 D_xk2_80104378;
 extern s32 D_xk2_80119884;
-extern u8 gEditCupTrackNames[][9];
+extern char gEditCupTrackNames[][9];
 
 void func_xk2_800EB400(void) {
     s32 courseIndex;

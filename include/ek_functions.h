@@ -60,6 +60,20 @@ bool func_80768C88(u16 dirId, char* name, char* extension);
 
 s32 DiskDrive_LoadOverlay(s32 startLba, void* vram, s32 diskSize, s32 bssSize);
 
+void Records_State3Update(void);
+void Records_CopyGhostMenuUpdate(void);
+Gfx* Records_DrawGhostCopyMenu(Gfx* gfx, s32 left, s32 top);
+void Records_CopyWhereMenuUpdate(void);
+void Records_SetCopyingState(s32 copyingState);
+Gfx* Records_DrawCopyWhereMenu(Gfx* gfx, s32 left, s32 top);
+void Records_CopyToDiskMenuUpdate(void);
+Gfx* Records_DrawCopyToDiskMenu(Gfx* gfx, s32 left, s32 top);
+void Records_CopyingStateUpdate(void);
+void Records_ReadWriteGhost(s32 direction);
+Gfx* Records_DrawCopyingInfo(Gfx* gfx, s32 left, s32 top);
+
+void func_i10_8012B580(void);
+
 void func_xk1_80025C00(s32);
 void func_xk1_80025F98(void);
 void func_xk1_800260E4(void);

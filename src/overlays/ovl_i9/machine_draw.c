@@ -2,6 +2,9 @@
 #include "fzx_machine.h"
 #include ASSET_HEADER(machine_custom_gfx.h)
 #include ASSET_HEADER(machine_global_gfx.h)
+#ifdef EXPANSION_KIT
+#include ASSET_HEADER_EK(overlays/machine_create/machine_create_assets.h)
+#endif
 
 s32 D_i9_80168CD0; // some unused bss exists in the file
 
@@ -4932,9 +4935,9 @@ Gfx* Machine_DrawSuperCatLod5(Gfx* gfx) {
 }
 
 extern s16 D_800CE784;
+extern s16 gGreyscaleMachinePart;
 extern f32 gBodyHealthValues[];
 extern OSMesgQueue D_800DCAB0;
-void func_i2_801039BC(s32);
 
 Gfx* Machine_DrawBlueFalconLod1(Gfx* gfx) {
     OSMesg sp1AC;
@@ -4977,7 +4980,15 @@ Gfx* Machine_DrawBlueFalconLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 13, 16, 14, 0, 17, 18, 19, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
@@ -5063,8 +5074,19 @@ Gfx* Machine_DrawBlueFalconLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 33, 38, 34, 0, 0, 19, 1, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
-    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
+        gDPSetEnvColor(gfx++, 81, 81, 81, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+        gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_30037D8, 20, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 3, 1, 0);
@@ -5401,8 +5423,19 @@ Gfx* Machine_DrawGoldenFoxLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 22, 23, 24, 0, 22, 24, 25, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3005C08, 26, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -5713,7 +5746,17 @@ Gfx* Machine_DrawWildGooseLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 7, 9, 10, 0, 0, 11, 1, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetEnvColor(gfx++, 255, 215, 0, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetEnvColor(gfx++, 204, 204, 204, 255);
+    } else {
+#endif
+        gDPSetEnvColor(gfx++, 255, 215, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 5, G_ON);
     gSPVertex(gfx++, D_30078D8, 4, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -5741,8 +5784,19 @@ Gfx* Machine_DrawWildGooseLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_30072D8, 26, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -6065,8 +6119,19 @@ Gfx* Machine_DrawFireStingrayLod1(Gfx* gfx) {
     gSP1Triangle(gfx++, 5, 18, 21, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3009428, 10, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -6365,8 +6430,19 @@ Gfx* Machine_DrawWhiteCatLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_300B2F8, 12, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -6374,7 +6450,17 @@ Gfx* Machine_DrawWhiteCatLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetEnvColor(gfx++, 255, 0, 0, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetEnvColor(gfx++, 77, 77, 77, 255);
+    } else {
+#endif
+        gDPSetEnvColor(gfx++, 255, 0, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_OFF);
     gSPVertex(gfx++, D_300AA88, 20, 0);
@@ -6609,7 +6695,15 @@ Gfx* Machine_DrawWhiteCatLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawRedGazelleLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -6692,8 +6786,19 @@ Gfx* Machine_DrawRedGazelleLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 8, 9, 10, 0, 11, 12, 13, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_300C9C8, 20, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -6997,8 +7102,19 @@ Gfx* Machine_DrawWonderWaspLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_300E2A8, 22, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -7008,7 +7124,17 @@ Gfx* Machine_DrawWonderWaspLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 18, 20, 19, 0, 8, 10, 21, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetEnvColor(gfx++, 255, 255, 0, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetEnvColor(gfx++, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetEnvColor(gfx++, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_OFF);
     gSPVertex(gfx++, D_300D958, 34, 0);
@@ -7321,8 +7447,19 @@ Gfx* Machine_DrawIronTigerLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 19, 7, 9, 0, 20, 21, 22, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_300F778, 18, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -7583,7 +7720,16 @@ Gfx* Machine_DrawIronTigerLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawDeepClawLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -7657,8 +7803,19 @@ Gfx* Machine_DrawDeepClawLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 4, 5, 6, 0, 7, 8, 9, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3010DE8, 10, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -7903,7 +8060,17 @@ Gfx* Machine_DrawTwinNorittaLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 14, 15, 16, 0, 17, 18, 19, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 0, 26, 68, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 23, 23, 23, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 0, 26, 68, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
     gSPVertex(gfx++, D_3012438, 41, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -7970,8 +8137,19 @@ Gfx* Machine_DrawTwinNorittaLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 18, 19, 20, 0, 0, 21, 1, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
-    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
+        gDPSetEnvColor(gfx++, 81, 81, 81, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+        gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3012748, 50, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -8225,7 +8403,16 @@ Gfx* Machine_DrawTwinNorittaLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawSuperPiranhaLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 77, 77, 77, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -8281,8 +8468,19 @@ Gfx* Machine_DrawSuperPiranhaLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_30139E8, 16, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -8290,7 +8488,17 @@ Gfx* Machine_DrawSuperPiranhaLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 10, 11, 12, 0, 13, 14, 15, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetEnvColor(gfx++, 255, 0, 0, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetEnvColor(gfx++, 77, 77, 77, 255);
+    } else {
+#endif
+        gDPSetEnvColor(gfx++, 255, 0, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_OFF);
     gSPVertex(gfx++, D_3013AE8, 47, 0);
@@ -8554,7 +8762,16 @@ Gfx* Machine_DrawSuperPiranhaLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawMightyHurricaneLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -8634,8 +8851,19 @@ Gfx* Machine_DrawMightyHurricaneLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 4, 9, 8, 0, 4, 8, 11, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
-    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 114, 114, 114, 255);
+        gDPSetEnvColor(gfx++, 23, 23, 23, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+        gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3014D78, 22, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -8941,8 +9169,19 @@ Gfx* Machine_DrawLittleWyvernLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 8, 10, 11, 0, 5, 12, 6, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
-    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
+        gDPSetEnvColor(gfx++, 81, 81, 81, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+        gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3015BA8, 20, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -8951,7 +9190,17 @@ Gfx* Machine_DrawLittleWyvernLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 16, 17, 18, 0, 19, 17, 16, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetEnvColor(gfx++, 6, 18, 105, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetEnvColor(gfx++, 24, 24, 24, 255);
+    } else {
+#endif
+        gDPSetEnvColor(gfx++, 6, 18, 105, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_OFF);
     gSPVertex(gfx++, D_3015CE8, 26, 0);
@@ -9222,7 +9471,16 @@ Gfx* Machine_DrawLittleWyvernLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawSpaceAnglerLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 150, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 16, 16, 16, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 0, 0, 150, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -9284,8 +9542,19 @@ Gfx* Machine_DrawSpaceAnglerLod1(Gfx* gfx) {
     gSP1Triangle(gfx++, 5, 6, 7, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
-    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 114, 114, 114, 255);
+        gDPSetEnvColor(gfx++, 23, 23, 23, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+        gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3017498, 20, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -9591,8 +9860,19 @@ Gfx* Machine_DrawGreenPantherLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 6, 7, 8, 0, 6, 8, 9, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
-    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
+        gDPSetEnvColor(gfx++, 81, 81, 81, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+        gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_30182F8, 26, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -9837,7 +10117,17 @@ Gfx* Machine_DrawBlackBullLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 10, 11, 1, 0, 11, 2, 1, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 77, 77, 77, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
     gSPVertex(gfx++, D_3019498, 8, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -10167,7 +10457,16 @@ Gfx* Machine_DrawBlackBullLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawWildBoarLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 50, 0, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 15, 15, 15, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 50, 0, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -10240,8 +10539,19 @@ Gfx* Machine_DrawWildBoarLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 10, 11, 12, 0, 10, 12, 13, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_301AEA8, 10, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -10491,7 +10801,16 @@ Gfx* Machine_DrawWildBoarLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawAstroRobinLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -10567,8 +10886,19 @@ Gfx* Machine_DrawAstroRobinLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
-    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
+        gDPSetEnvColor(gfx++, 81, 81, 81, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+        gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_301C538, 16, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -10829,7 +11159,16 @@ Gfx* Machine_DrawAstroRobinLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawKingMeteorLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 194, 194, 194, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -10899,8 +11238,19 @@ Gfx* Machine_DrawKingMeteorLod1(Gfx* gfx) {
     gSP1Triangle(gfx++, 17, 19, 20, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_301D808, 18, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -11165,7 +11515,17 @@ Gfx* Machine_DrawQueenMeteorLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 194, 194, 194, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
     gSPVertex(gfx++, D_301E838, 30, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -11231,8 +11591,19 @@ Gfx* Machine_DrawQueenMeteorLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 18, 19, 20, 0, 18, 20, 21, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_301EB78, 18, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -11491,7 +11862,16 @@ Gfx* Machine_DrawQueenMeteorLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawGreatStarLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -11500,7 +11880,17 @@ Gfx* Machine_DrawGreatStarLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 7, 8, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 10, 10, 70, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 17, 17, 17, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 10, 10, 70, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
     gSPVertex(gfx++, D_3020028, 35, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -11564,8 +11954,19 @@ Gfx* Machine_DrawGreatStarLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
-    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
+        gDPSetEnvColor(gfx++, 81, 81, 81, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+        gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_301FE58, 20, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -11848,7 +12249,16 @@ Gfx* Machine_DrawHyperSpeederLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 12, 14, 15, 0, 16, 17, 18, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 147, 33, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 168, 168, 168, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 147, 33, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
     gSPVertex(gfx++, D_3020CD8, 60, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -11869,7 +12279,17 @@ Gfx* Machine_DrawHyperSpeederLod1(Gfx* gfx) {
     gSP1Triangle(gfx++, 57, 58, 59, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 240, 180, 20, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 181, 181, 181, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 240, 180, 20, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 4, G_ON);
     gSPVertex(gfx++, D_3021098, 29, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -11899,8 +12319,19 @@ Gfx* Machine_DrawHyperSpeederLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 8, 10, 9, 0, 0, 2, 11, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
-    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 114, 114, 114, 255);
+        gDPSetEnvColor(gfx++, 23, 23, 23, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+        gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3021328, 18, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -12187,7 +12618,17 @@ Gfx* Machine_DrawDeathAnchorLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 16, 18, 17, 0, 4, 6, 19, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
     gSPVertex(gfx++, D_3022718, 39, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -12201,7 +12642,17 @@ Gfx* Machine_DrawDeathAnchorLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 34, 36, 37, 0, 1, 0, 38, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 0, 255, 255, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 179, 179, 179, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 0, 255, 255, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
     gSPVertex(gfx++, D_3022988, 51, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -12240,8 +12691,19 @@ Gfx* Machine_DrawDeathAnchorLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 7, 9, 10, 0, 4, 6, 11, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3022CB8, 10, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -12493,7 +12955,17 @@ Gfx* Machine_DrawCrazyBearLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 100, 0, 24, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 33, 33, 33, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 100, 0, 24, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
@@ -12510,7 +12982,17 @@ Gfx* Machine_DrawCrazyBearLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 29, 30, 31, 0, 32, 33, 34, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 107, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 12, 12, 12, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 0, 0, 107, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
     gSPVertex(gfx++, D_3023C48, 64, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -12566,8 +13048,19 @@ Gfx* Machine_DrawCrazyBearLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 24, 0, 2, 0, 24, 25, 0, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_30240F8, 16, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -12847,7 +13340,16 @@ Gfx* Machine_DrawCrazyBearLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawNightThunderLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -12914,8 +13416,19 @@ Gfx* Machine_DrawNightThunderLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_30259B8, 12, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -13174,7 +13687,16 @@ Gfx* Machine_DrawNightThunderLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawBigFangLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -13241,8 +13763,19 @@ Gfx* Machine_DrawBigFangLod1(Gfx* gfx) {
     gSP1Triangle(gfx++, 1, 14, 2, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
-    gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
+        gDPSetEnvColor(gfx++, 81, 81, 81, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
+        gDPSetEnvColor(gfx++, 14, 99, 165, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3026878, 20, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -13493,7 +14026,16 @@ Gfx* Machine_DrawBigFangLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawMightyTyphoonLod1(Gfx* gfx) {
 
-    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
                       0, 0, 0, COMBINED);
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 1, G_ON);
@@ -13576,8 +14118,19 @@ Gfx* Machine_DrawMightyTyphoonLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 3, 2, 1, 0, 0, 2, 5, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
-    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 114, 114, 114, 255);
+        gDPSetEnvColor(gfx++, 23, 23, 23, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+        gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_30277A8, 20, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -13848,7 +14401,17 @@ Gfx* Machine_DrawMadWolfLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 4, 5, 6, 0, 4, 6, 7, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 89, 84, 0, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 77, 77, 77, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 89, 84, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 2, G_ON);
     gSPVertex(gfx++, D_3028B08, 38, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -13864,7 +14427,17 @@ Gfx* Machine_DrawMadWolfLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 24, 21, 34, 0, 0, 30, 1, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 28, 28, 28, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
     gSPVertex(gfx++, D_3028FA8, 64, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -13906,8 +14479,19 @@ Gfx* Machine_DrawMadWolfLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3028D68, 20, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -14239,8 +14823,19 @@ Gfx* Machine_DrawSonicPhantomLod1(Gfx* gfx) {
     gSP1Triangle(gfx++, 15, 17, 18, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
-    gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 114, 114, 114, 255);
+        gDPSetEnvColor(gfx++, 23, 23, 23, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
+        gDPSetEnvColor(gfx++, 6, 27, 43, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_3029FD8, 21, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -14485,7 +15080,17 @@ Gfx* Machine_DrawBloodHawkLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 8, 9, 10, 0, 8, 10, 11, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 255, 212, 0, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 255, 212, 0, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
     gSPVertex(gfx++, D_302B698, 16, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 4, 5, 0);
@@ -14550,8 +15155,19 @@ Gfx* Machine_DrawBloodHawkLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 12, 0, 3, 0, 12, 13, 0, 0);
 
     gDPPipeSync(gfx++);
-    gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
-    gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
+        gDPSetEnvColor(gfx++, 34, 34, 34, 255);
+    } else {
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
+        gDPSetEnvColor(gfx++, 19, 32, 86, 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 0, G_ON);
     gSPVertex(gfx++, D_302B5D8, 12, 0);
     gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
@@ -14950,8 +15566,17 @@ Gfx* Machine_DrawLoadCrazyBearTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalCrazyBearEyeTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
-                      G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPLoadMultiBlock(gfx++, D_8013E180, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP,
+                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    } else {
+#endif
+        gDPLoadMultiBlock(gfx++, aDecalCrazyBearEyeTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    }              
+#endif
     gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber29Tex, 0x120, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -14992,8 +15617,18 @@ Gfx* Machine_DrawLoadHyperSpeederTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalBeastFaceTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
-                      G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPLoadMultiBlock(gfx++, D_8013F380, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    } else {
+#endif
+        gDPLoadMultiBlock(gfx++, aDecalBeastFaceTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    }              
+#endif
+
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x130, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15136,8 +15771,18 @@ Gfx* Machine_DrawLoadGreenPantherTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalGreenPantherCamoTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
-                      G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPLoadMultiBlock(gfx++, D_8013EB80, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    } else {
+#endif
+        gDPLoadMultiBlock(gfx++, aDecalGreenPantherCamoTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    }              
+#endif
+
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber17Tex, 0x130, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15174,8 +15819,18 @@ Gfx* Machine_DrawLoadLittleWyvernTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalLittleWyvernStripeEndsTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
-                      G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPLoadMultiBlock(gfx++, D_8013E980, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    } else {
+#endif
+        gDPLoadMultiBlock(gfx++, aDecalLittleWyvernStripeEndsTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
+                          G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    }              
+#endif
+
     gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber10Tex, 0x60, 3, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15276,8 +15931,18 @@ Gfx* Machine_DrawLoadIronTigerTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalLeopardTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
-                      G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPLoadMultiBlock(gfx++, D_8013D980, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    } else {
+#endif
+        gDPLoadMultiBlock(gfx++, aDecalLeopardTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    }              
+#endif
+
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x130, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15360,8 +16025,18 @@ Gfx* Machine_DrawLoadFireStingrayTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalFlamesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
-                      G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPLoadMultiBlock(gfx++, D_8013D180, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    } else {
+#endif
+        gDPLoadMultiBlock(gfx++, aDecalFlamesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    }              
+#endif
+
     gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x120, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15380,8 +16055,18 @@ Gfx* Machine_DrawLoadWildGooseTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalWildGooseLightningTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
-                      G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPLoadMultiBlock(gfx++, D_8013C980, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+    } else {
+#endif
+        gDPLoadMultiBlock(gfx++, aDecalWildGooseLightningTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    }              
+#endif
+
     gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeTex, 0x110, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aMachineNumber6Tex, 0x120, 3, G_IM_FMT_I, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15402,8 +16087,18 @@ Gfx* Machine_DrawLoadGoldenFoxTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalGoldenFoxStripesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
-                      G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPLoadMultiBlock(gfx++, D_8013C780, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    } else {
+#endif
+        gDPLoadMultiBlock(gfx++, aDecalGoldenFoxStripesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    }              
+#endif
+
     gDPLoadMultiBlock_4b(gfx++, aLogoGoldenFoxTex, 0x50, 2, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x90, 3, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15424,8 +16119,18 @@ Gfx* Machine_DrawLoadBlueFalconTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-    gDPLoadMultiBlock(gfx++, aDecalBlueFalconWingCheckeredTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
-                      G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart) {
+        gDPLoadMultiBlock(gfx++, D_8013C580, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+    } else {
+#endif
+        gDPLoadMultiBlock(gfx++, aDecalBlueFalconWingCheckeredTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
+                          G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef EXPANSION_KIT
+    }              
+#endif
+
     gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     gDPLoadMultiBlock_4b(gfx++, aDecalBlueFalconArrowTex, 0x60, 3, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,

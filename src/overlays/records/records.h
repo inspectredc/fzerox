@@ -11,6 +11,13 @@ typedef struct RecordsMenuInfo {
 #endif
 } RecordsMenuInfo; // size = 0xC
 
+typedef struct TexturePaletteInfo {
+    /* 0x00 */ TexturePtr texture;
+    /* 0x04 */ void* tlut;
+    /* 0x08 */ s16 width;
+    /* 0x0A */ s16 height;
+} TexturePaletteInfo; // size = 0xC
+
 typedef struct GhostMarkerRenderInfo {
     /* 0x00 */ Mtx mtx;
     /* 0x40 */ Vtx vtx[4];
