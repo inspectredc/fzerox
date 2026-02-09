@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fzx_font.h"
+#include "src/overlays/ovl_i3/menus.h"
 #include ASSET_HEADER(common_assets_compressed.h)
 
 s32 D_xk2_8013A7E0;

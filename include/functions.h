@@ -32,6 +32,7 @@ void func_8006ADE4(s32 arg0, s32 arg1, s32 arg2, s32* red, s32* green, s32* blue
 void Lights_SetSource(Lights1* light, s32 ambientR, s32 ambientG, s32 ambientB, s32 r, s32 g, s32 b, s32 x, s32 y, s32 z);
 void Light_SetLookAtSource(LookAt* lookAt, MtxF* mtx);
 void Matrix_ToMtx(MtxF* src, Mtx* dest2);
+void Matrix_FromMtx(Mtx* src2, MtxF* dest);
 void Matrix_SetLockedLookAt(Mtx* mtx, MtxF* mtxF, f32 scaleZ, f32 scaleY, f32 scaleX, f32 lookAtX, f32 lookAtY, f32 lookAtZ, f32 upX, f32 upY, f32 upZ, f32 xPos, f32 yPos, f32 zPos);
 void Matrix_SetLockedLookAtFromVectors(Mtx* mtx, MtxF* mtxF, f32 scaleZ, f32 scaleY, f32 scaleX, Vec3f* lookAt, Vec3f* up, Vec3f* pos);
 void Matrix_ScaleFrom3DMatrix(Mtx* mtx, MtxF* mtxF, f32 xScale, f32 yScale, f32 zScale, Mtx3F* matrix3D, Vec3f* pos);
@@ -61,6 +62,11 @@ Gfx* Course_FeatureDrawBuildingShort(Gfx* gfx);
 Gfx* Course_FeatureDrawBuildingSpire(Gfx* gfx);
 Gfx* Course_FeatureDrawBuildingMountain(Gfx* gfx);
 Gfx* Course_FeatureDrawBuildingTallGold(Gfx* gfx);
+void Course_FeaturesInit(s32 courseIndex);
+void Course_EffectsInit(s32 courseIndex);
+void func_80074204(void);
+void func_80074594(void);
+void func_80074744(void);
 
 f32 Math_VectorGetDistance(Vec3f arg0, Vec3f arg1);
 s32 Math_VectorSetScale(Vec3f* vec, f32 scale);
@@ -77,6 +83,7 @@ void func_80074428(s32 courseIndex);
 void func_80074634(CourseInfo* courseInfo);
 void func_800747EC(s32 venue);
 void Math_NormalizeXZ(f32* x, f32* z);
+void Math_NormalizeXYZ(f32* x, f32* y, f32* z);
 void func_80074CE4(CourseInfo*);
 void func_80074844(void);
 
@@ -91,6 +98,7 @@ s32 SLLeoReadWrite(LEOCmd* cmdBlock, s32 direction, s32 lba, void* vAddr, u32 nL
 s32 func_800760F8(void);
 s32 func_800761D4(void);
 void func_800762B0(LEODiskID diskId);
+bool SLLeoDiskCompare(LEODiskID diskId1, LEODiskID diskId2);
 #ifndef EXPANSION_KIT
 s32 SLLeoCreateManager(void);
 #endif
@@ -100,6 +108,16 @@ void func_8007647C(void);
 void func_80076310(void);
 void func_8007D9D0(void);
 void func_8007F500(void);
+
+#ifdef EXPANSION_KIT
+void LeoFault_LoadFontSet(void);
+void LeoFault_DrawErrorMessage(Gfx** gfxP, s32 posX, s32 posY, u8* codes);
+void LeoFault_DrawErrorMessageNumber(Gfx** gfxP, s32 posX, s32 posY, s8* str);
+#endif
+
+#ifdef VERSION_JP
+void LeoFault_CopyFontToRam(s32* code, u8* ramAddr);
+#endif
 
 void Dma_LoadAssets(u8* romAddr, u8* ramAddr, size_t size);
 void Dma_LoadOverlay(u8* romAddr, u8* ramAddr, size_t size, void* bssAddr, size_t bssSize);
@@ -114,6 +132,7 @@ uintptr_t Segment_SegmentedToVirtual(uintptr_t segmentedAddr);
 Gfx* Segment_SetTableAddresses(Gfx*);
 void Segment_LoadOverlays(void);
 void Segment_LoadAssets(void);
+void func_80077AD8(s32 venue);
 
 void func_80077CF0(s32 segAddr, size_t size, u8* startAddr);
 
@@ -193,6 +212,7 @@ void LeoFault_DrawWrongDisk(void);
 void LeoFault_DrawIsDiskInserted(void);
 void LeoFault_DrawInsertInitialDiskUsed(void);
 
+void Fault_FillRectangle(s32 xPos, s32 yPos, s32 width, s32 height);
 void Fault_SetFrameBuffer(FrameBuffer* buffer, u16 width, u16 height);
 void Fault_Init(void);
 
@@ -206,10 +226,12 @@ void func_80089724(void);
 void func_80089BD0(void);
 void func_8008AA8C(void);
 void func_8008B1CC(void);
+void func_8008D33C(void);
 void Racer_Init(void);
 void func_8008D7E8(void);
 void func_8008D824(void);
 void func_8008D8E8(void);
+void func_8008D97C(void);
 void func_8008DB98(void);
 void func_8008DA68(void);
 void func_8008EC38(Racer* racer);
@@ -239,10 +261,13 @@ void Course_SplineGetPosition(CourseSegment*, f32, Vec3f*);
 f32 Course_SplineGetBasis(CourseSegment*, f32, Mtx3F*, f32);
 void Course_SegmentLengthsInit(CourseInfo* courseInfo);
 f32 func_8009DFA0(RacerSegmentPositionInfo* arg0);
-s32 Course_CalculateChecksum(void);
-
+s32 func_8009F334(CourseInfo* courseInfo);
+s32 func_800A1954(CourseInfo* courseInfo);
 s32 func_800A2D2C(CourseInfo* arg0, Vtx* arg1);
 void Course_GenerateRandomCourse(void);
+s32 Course_SegmentJoinsInit(CourseInfo* courseInfo);
+void Course_SegmentContinuousFlagInit(CourseInfo* courseInfo);
+void Course_SegmentFormsInit(CourseInfo* courseInfo);
 void Course_Init(void);
 void Course_Update(void);
 Gfx* Course_DrawModel(Gfx* gfx, Vtx* vtx, s32 vtxCount);
@@ -251,6 +276,8 @@ void func_800A4B54(void);
 void func_800A4BAC(void);
 void func_800A4D0C(s32 arg0);
 void func_800A4DF0(void);
+Gfx* func_800A95B4(Gfx* gfx);
+s32 Course_CalculateChecksum(void);
 
 void mio0Decode(u8*, void*);
 s32 func_800AA6BC(u8*);

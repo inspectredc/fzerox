@@ -1240,6 +1240,8 @@ void AudioThread_PreNMIInternal(void);
 s32 AudioThread_SilenceCheck(s32 flags);
 void AudioThread_InitMesgQueues(void);
 
+AudioTask* Audio_SetupCreateTask(void);
+
 extern AudioSpec gAudioSpecs[];
 extern TempoData gTempoData;
 extern AudioHeapInitSizes gAudioHeapInitSizes;

@@ -23,13 +23,8 @@ void func_i3_801175A4(void);
 
 Gfx* func_i3_8012EE90(Gfx* gfx, s32 arg1);
 
-Gfx* Hud_DrawPlayerSpeed(Gfx*, s32, s32);
-Gfx* Hud_DrawPosition(Gfx*, s32, s32);
-Gfx* Hud_DrawHud(Gfx*);
-Gfx* Hud_DrawRacePortraits(Gfx*);
-Gfx* Minimap_DrawCourseMinimap(Gfx*, s32, s32);
 void RecordsEntry_ToRecordsState(void);
 void RecordsEntry_UpdateNameEntry(void);
-Gfx* RecordsEntry_DrawNameEntry(Gfx*);
+Gfx* RecordsEntry_DrawNameEntry(Gfx* gfx);
 
 #endif // OVL_I3_H

@@ -1288,29 +1288,29 @@ void Course_SegmentLengthsInit(CourseInfo* courseInfo) {
 }
 
 #ifdef EXPANSION_KIT
-s32 func_i2_800B39B4(CourseInfo* arg0) {
+s32 func_i2_800B39B4(CourseInfo* courseInfo) {
     Vec3f vec1;
     Vec3f vec2;
     f32 temp_fs0;
-    CourseSegment* temp_s1;
-    CourseSegment* temp_v0;
-    CourseSegment* var_s0 = arg0->courseSegments;
+    CourseSegment* nextSegment;
+    CourseSegment* prevSegment;
+    CourseSegment* segment = courseInfo->courseSegments;
 
     do {
-        temp_v0 = var_s0->prev;
-        temp_s1 = var_s0->next;
-        vec1.x = var_s0->pos.x - temp_v0->pos.x;
-        vec1.y = var_s0->pos.y - temp_v0->pos.y;
-        vec1.z = var_s0->pos.z - temp_v0->pos.z;
+        prevSegment = segment->prev;
+        nextSegment = segment->next;
+        vec1.x = segment->pos.x - prevSegment->pos.x;
+        vec1.y = segment->pos.y - prevSegment->pos.y;
+        vec1.z = segment->pos.z - prevSegment->pos.z;
         temp_fs0 = 1.0f / sqrtf(SQ_SUM(&vec1));
 
         vec1.x *= temp_fs0;
         vec1.y *= temp_fs0;
         vec1.z *= temp_fs0;
 
-        vec2.x = temp_s1->pos.x - var_s0->pos.x;
-        vec2.y = temp_s1->pos.y - var_s0->pos.y;
-        vec2.z = temp_s1->pos.z - var_s0->pos.z;
+        vec2.x = nextSegment->pos.x - segment->pos.x;
+        vec2.y = nextSegment->pos.y - segment->pos.y;
+        vec2.z = nextSegment->pos.z - segment->pos.z;
 
         temp_fs0 = 1.0f / sqrtf(SQ_SUM(&vec2));
 
@@ -1319,10 +1319,10 @@ s32 func_i2_800B39B4(CourseInfo* arg0) {
         vec2.z *= temp_fs0;
 
         if (DOT_XYZ(&vec1, &vec2) < -0.997f) {
-            return var_s0 - arg0->courseSegments;
+            return segment - courseInfo->courseSegments;
         }
-        var_s0 = var_s0->next;
-    } while (var_s0 != arg0->courseSegments);
+        segment = segment->next;
+    } while (segment != courseInfo->courseSegments);
 
     return -1;
 }

@@ -3,6 +3,7 @@
 #include "fzx_game.h"
 #include "fzx_camera.h"
 #include "fzx_course.h"
+#include "src/overlays/ovl_i3/hud.h"
 
 UNUSED s32 D_800DCE40;
 s32 gGameMode;

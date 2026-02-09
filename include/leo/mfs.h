@@ -222,16 +222,19 @@ s32 Mfs_InitRamArea(s32 arg0);
 s32 Mfs_InitRamArea(s32 arg0, u8 attr, u8* volumeName);
 #endif
 void func_i1_804040EC(void);
+s32 func_i1_80404204(void);
 s32 func_i1_8040428C(void);
 s32 func_i1_804046F0(void);
 s32 func_i1_80404830(void);
 s32 func_i1_804065C0(void);
 s32 func_i1_804047F0(void);
+s32 Mfs_CopyRamAreaFromBackup(void);
 #if MFS_VERSION == MFS_VERSION_B
 s32 func_80760A84(void);
 s32 Mfs_CalculateVolumeChecksum(void);
 s32 Mfs_CheckChecksum(void);
 s32 Mfs_ValidateFileSystemOperation(s32 validationFlags, u16 entryIndex, u16 subEntryIndex, u16 dirId);
+void func_80762330(LEODiskTime* diskTime);
 #endif
 
 #endif // MFS_H

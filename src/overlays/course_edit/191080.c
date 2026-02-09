@@ -2,6 +2,8 @@
 #include "fzx_camera.h"
 #include "fzx_course.h"
 #include "fzx_expansion_kit.h"
+#include "src/overlays/ovl_i3/hud.h"
+#include "src/overlays/ovl_i3/minimap.h"
 #include ASSET_HEADER_EK(expansion_kit_textures.h)
 #include ASSET_HEADER_EK(course_edit_textures.h)
 

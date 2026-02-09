@@ -123,9 +123,14 @@ s32 Save_Init(SaveContext*, s32);
 extern u8 gSaveBuffer[];
 extern SaveContext gSaveContext;
 
+void Save_ReadGhostData(GhostData* ghostData);
+
 bool func_i2_80100B38(GhostInfo* ghostInfo);
 
 void func_i2_80101590(GhostRecord* ghostRecord, GhostInfo* ghostInfo);
+
+void Save_WriteGhostRecord(GhostRecord* ghostRecord);
+void Save_WriteGhostData(GhostData* ghostData);
 
 void Save_CreateNew(SaveContext* saveContext, s32 arg1);
 
@@ -194,13 +199,25 @@ s32 func_i2_801005CC_impl(s32 courseIndex, s32 encodedCourseIndex);
 
 #ifdef EXPANSION_KIT
 s32 func_i2_800A5F58(s32 courseIndex, s32 encodedCourseIndex);
+void func_i2_800A8CE4(SaveCourseRecords* courseRecord, s32 courseIndex);
 void Save_LoadCourseRecord2(SaveCourseRecords* courseRecord, s32 courseIndex);
 void Save_LoadDDCups(ProfileSave* profileSaves, u8* cupCompletion, u16* staffGhostCompletion);
 u16 Save_CalculateSaveCourseRecordChecksum(SaveCourseRecords* courseRecords);
 u16 Save_CalculateSaveDDCupsChecksum(ProfileSave* profileSave);
 void Save_RomCopyGhostReplayInfo(GhostData* ghostData, s32 courseIndex);
+void Save_ClearGhostRecord(GhostRecord* ghostRecord);
+void Save_ClearCourseRecord(SaveCourseRecords* courseRecords);
+
+s32 Save_GetDDStaffGhostRecordTime(s32 courseIndex);
+u16 Save_GetDDStaffGhostCompletion(void);
+s32 Save_SetDDStaffGhostComplete(s32 courseIndex);
 
 void DDSave_LoadCourseGhostRecords(s32 courseIndex, GhostRecord* ghostRecord);
+void DDSave_LoadCourseGhostData(s32 courseIndex, s32 ghostIndex, GhostData* ghostData);
+void DDSave_SaveCourseGhost(s32 courseIndex);
+void DDSave_LoadCachedGhostRecord(s32 ghostIndex, GhostRecord* ghostRecord);
+void DDSave_LoadCachedGhostData(s32 ghostIndex, GhostData* ghostData);
+void DDSave_LoadDDCourseGhosts(s32 courseIndex);
 void DDSave_LoadCachedCourseGhostRecords(s32 courseIndex, GhostRecord* ghostRecord);
 bool DDSave_ValidateCachedGhostRecords(void);
 void DDSave_LoadCachedCourseGhostData(s32 courseIndex, s32 ghostIndex, GhostData* ghostData);

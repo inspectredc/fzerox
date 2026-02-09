@@ -158,6 +158,9 @@ typedef enum PlayerGameoverState {
 #define MENU_STATE_RETIRE_RESTART (1 << 10)
 
 Gfx* Menus_DrawBeveledBox(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
+Gfx* Menus_SetOptionColor(Gfx* gfx, s32 arg1);
+Gfx* Menus_DrawRaceMenuTexture(Gfx* gfx, s32 textureIndex, s32 left, s32 top);
+s32 Menus_UpdateHighlightedOptionVertical(s32 playerIndex, s32 highlightedOption, s32 maxOptionValue);
 
 void Menus_GetFastestGhostInfo(void);
 

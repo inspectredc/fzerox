@@ -1,6 +1,7 @@
 #include "global.h"
 #include "menus.h"
 #include "hud.h"
+#include "minimap.h"
 #include "ovl_i3.h"
 #include "records_entry.h"
 #include "fzx_game.h"
@@ -49,9 +50,21 @@ f32 sVsSlotInitialSpeed[3];
 TexturePtr sVsSlotPortraits[8][3];
 u16 sVsSlotResultIndexToPortraitResult[8][3];
 s16 sVsSlotCooldownTimer[4];
+#ifdef EXPANSION_KIT // TODO BSS Reordering
+GhostRecord sDDGhostRecords[3];
+#endif
 bool D_i3_80141B78[4];
+#ifdef EXPANSION_KIT // TODO BSS Reordering
+GhostRecord* sSortedDDGhostRecordPtrs[3];
+#endif
 s32 sPlayerResultsTimer[4];
+#ifdef EXPANSION_KIT // TODO BSS Reordering
+GhostRecord* sTempDDGhostRecordPtr;
+#endif
 s32 sGpRaceResultsState;
+#ifdef EXPANSION_KIT // TODO BSS Reordering
+s32 sSortedDDGhostRecordIndices[3];
+#endif
 s32 sTimeAttackResultsTimer;
 s32 sResultsTimesLapLeft;
 s32 sResultsTimesTop;
@@ -1641,16 +1654,6 @@ void Menus_InitFinish(s32 playerIndex) {
 extern GfxPool D_1000000;
 extern GfxPool* gGfxPool;
 
-#ifdef EXPANSION_KIT
-s32 sSaveGhostToDiskMenuOptionIndex = 0;
-s32 sSaveGhostToDiskMenuScissorBoxTimer = 0;
-const char* sDDGhostSavePositionsStr[] = { "1ST", "2ND", "3RD" };
-GhostRecord sDDGhostRecords[3];
-GhostRecord* sSortedDDGhostRecordPtrs[3];
-GhostRecord* sTempDDGhostRecordPtr;
-s32 sSortedDDGhostRecordIndices[3];
-#endif
-
 Gfx* Menus_DrawFinish(Gfx* gfx, s32 playerIndex) {
     s32 pad[4];
     f32 temp;
@@ -2242,6 +2245,9 @@ extern char* gCurrentTrackName;
 extern char* gTrackNames[];
 
 #ifdef EXPANSION_KIT
+s32 sSaveGhostToDiskMenuOptionIndex = 0;
+s32 sSaveGhostToDiskMenuScissorBoxTimer = 0;
+const char* sDDGhostSavePositionsStr[] = { "1ST", "2ND", "3RD" };
 
 Gfx* Menus_DrawGhostSaveToDiskMenu(Gfx* gfx) {
     s32 i;
