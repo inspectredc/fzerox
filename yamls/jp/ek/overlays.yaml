@@ -140,20 +140,20 @@
     bss_size: 0xCCE0
     symbol_name_format: i6_$VRAM
     subsegments:
-      - [0xEB850, asm, main_menu]
-      - [0xEDA70, asm, credits]
+      - [0xEB850, c, main_menu]
+      - [0xEDA70, c, credits]
       - [0xF1C10, asm, options_menu]
-      - [0xF3800, asm, E7CF0]
-      - [0xF3870, data, main_menu]
-      - [0xF3A60, data, credits]
+      - [0xF3800, c, E7CF0]
+      - [0xF3870, .data, main_menu]
+      - [0xF3A60, .data, credits]
       - [0xF4450, data, options_menu]
-      - [0xF45A0, rodata, main_menu]
-      - [0xF47B0, rodata, credits]
+      - [0xF45A0, .rodata, main_menu]
+      - [0xF47B0, .rodata, credits]
       - [0xF5060, rodata, options_menu]
-      - { type: bss, vram: 0x80085AE0, name: main_menu }
-      - { type: bss, vram: 0x80085AF0, name: credits }
+      - { type: .bss, vram: 0x80085AE0, name: main_menu }
+      - { type: .bss, vram: 0x80085AF0, name: credits }
       - { type: bss, vram: 0x80085B10, name: options_menu }
-      - { type: bss, vram: 0x8008A7C0, name: save_context }
+      - { type: .bss, vram: 0x8008A7C0, name: save_context }
 
   - name: ending
     exclusive_ram_id: ending

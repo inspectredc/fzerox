@@ -2330,6 +2330,10 @@ func_i4_8011B668 = 0x80074CC4; //segment:ovl_i4
 
 D_i5_801190D0 = 0x8007B9DC; //segment:course_select
 
+D_i6_8011DFAC = 0x800844CC; //segment:ovl_i6
+D_i6_8011DFB0 = 0x800844D0; //segment:ovl_i6
+D_i6_8011DFB4 = 0x800844D4; //segment:ovl_i6
+
 func_i2_80100B38 = 0x800A68A8; // segment:ovl_i2
 func_i2_80101590 = 0x800A7438; // segment:ovl_i2
 func_i2_801017B8 = 0x800A7660; // segment:ovl_i2

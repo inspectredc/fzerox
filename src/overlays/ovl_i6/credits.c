@@ -6,6 +6,9 @@
 #include "audio.h"
 #include ASSET_HEADER(common_assets_compressed.h)
 #include ASSET_HEADER(setup_gfx.h)
+#ifdef EXPANSION_KIT
+#include ASSET_HEADER_EK(overlays/ovl_i4/title.h)
+#endif
 
 s8 D_i6_8011FAF0[30];
 
@@ -21,245 +24,66 @@ s32 D_i6_8011DFB4 = 50;
     VEHICLE ARTWORK
  */
 
-// BLUE FALCON
-unk_80077D50 sCreditsBlueFalconCompTexInfo[] = { { 18, aCreditsBlueFalconTex, TEX_WIDTH(aCreditsBlueFalconTex),
-                                                   TEX_HEIGHT(aCreditsBlueFalconTex),
-                                                   TEX_COMPRESSED_SIZE(aCreditsBlueFalconTex) },
-                                                 { 0 } };
-
-// WILD GOOSE
-unk_80077D50 sCreditsWildGooseCompTexInfo[] = { { 18, aCreditsWildGooseTex, TEX_WIDTH(aCreditsWildGooseTex),
-                                                  TEX_HEIGHT(aCreditsWildGooseTex),
-                                                  TEX_COMPRESSED_SIZE(aCreditsWildGooseTex) },
-                                                { 0 } };
-
-// FIRE STINGRAY
-unk_80077D50 sCreditsFireStingrayCompTexInfo[] = { { 18, aCreditsFireStingrayTex, TEX_WIDTH(aCreditsFireStingrayTex),
-                                                     TEX_HEIGHT(aCreditsFireStingrayTex),
-                                                     TEX_COMPRESSED_SIZE(aCreditsFireStingrayTex) },
-                                                   { 0 } };
-
-// GOLDEN FOX
-unk_80077D50 sCreditsGoldenFoxCompTexInfo[] = { { 18, aCreditsGoldenFoxTex, TEX_WIDTH(aCreditsGoldenFoxTex),
-                                                  TEX_HEIGHT(aCreditsGoldenFoxTex),
-                                                  TEX_COMPRESSED_SIZE(aCreditsGoldenFoxTex) },
-                                                { 0 } };
-
-// RED GAZELLE
-unk_80077D50 sCreditsRedGazelleCompTexInfo[] = { { 18, aCreditsRedGazelleTex, TEX_WIDTH(aCreditsRedGazelleTex),
-                                                   TEX_HEIGHT(aCreditsRedGazelleTex),
-                                                   TEX_COMPRESSED_SIZE(aCreditsRedGazelleTex) },
-                                                 { 0 } };
-
-// WHITE CAT
-unk_80077D50 sCreditsWhiteFoxCompTexInfo[] = { { 18, aCreditsWhiteFoxTex, TEX_WIDTH(aCreditsWhiteFoxTex),
-                                                 TEX_HEIGHT(aCreditsWhiteFoxTex),
-                                                 TEX_COMPRESSED_SIZE(aCreditsWhiteFoxTex) },
-                                               { 0 } };
-
-// IRON TIGER
-unk_80077D50 sCreditsIronTigerCompTexInfo[] = { { 18, aCreditsIronTigerTex, TEX_WIDTH(aCreditsIronTigerTex),
-                                                  TEX_HEIGHT(aCreditsIronTigerTex),
-                                                  TEX_COMPRESSED_SIZE(aCreditsIronTigerTex) },
-                                                { 0 } };
-
-// DEEP CLAW
-unk_80077D50 sCreditsDeepClawCompTexInfo[] = { { 18, aCreditsDeepClawTex, TEX_WIDTH(aCreditsDeepClawTex),
-                                                 TEX_HEIGHT(aCreditsDeepClawTex),
-                                                 TEX_COMPRESSED_SIZE(aCreditsDeepClawTex) },
-                                               { 0 } };
-
-// CRAZY BEAR
-unk_80077D50 sCreditsCrazyBearCompTexInfo[] = { { 18, aCreditsCrazyBearTex, TEX_WIDTH(aCreditsCrazyBearTex),
-                                                  TEX_HEIGHT(aCreditsCrazyBearTex),
-                                                  TEX_COMPRESSED_SIZE(aCreditsCrazyBearTex) },
-                                                { 0 } };
-
-// GREAT STAR
-unk_80077D50 sCreditsGreatStarCompTexInfo[] = { { 18, aCreditsGreatStarTex, TEX_WIDTH(aCreditsGreatStarTex),
-                                                  TEX_HEIGHT(aCreditsGreatStarTex),
-                                                  TEX_COMPRESSED_SIZE(aCreditsGreatStarTex) },
-                                                { 0 } };
-
-// BIG FANG
-unk_80077D50 sCreditsBigFangCompTexInfo[] = { { 18, aCreditsBigFangTex, TEX_WIDTH(aCreditsBigFangTex),
-                                                TEX_HEIGHT(aCreditsBigFangTex),
-                                                TEX_COMPRESSED_SIZE(aCreditsBigFangTex) },
-                                              { 0 } };
-
-// MAD WOLF
-unk_80077D50 sCreditsMadWolfCompTexInfo[] = { { 18, aCreditsMadWolfTex, TEX_WIDTH(aCreditsMadWolfTex),
-                                                TEX_HEIGHT(aCreditsMadWolfTex),
-                                                TEX_COMPRESSED_SIZE(aCreditsMadWolfTex) },
-                                              { 0 } };
-
-// NIGHT THUNDER
-unk_80077D50 sCreditsNightThunderCompTexInfo[] = { { 18, aCreditsNightThunderTex, TEX_WIDTH(aCreditsNightThunderTex),
-                                                     TEX_HEIGHT(aCreditsNightThunderTex),
-                                                     TEX_COMPRESSED_SIZE(aCreditsNightThunderTex) },
-                                                   { 0 } };
-
-// TWIN NORITTA
-unk_80077D50 sCreditsTwinNorittaCompTexInfo[] = { { 18, aCreditsTwinNorittaTex, TEX_WIDTH(aCreditsTwinNorittaTex),
-                                                    TEX_HEIGHT(aCreditsTwinNorittaTex),
-                                                    TEX_COMPRESSED_SIZE(aCreditsTwinNorittaTex) },
-                                                  { 0 } };
-
-// WONDER WASP
-unk_80077D50 sCreditsWonderWaspCompTexInfo[] = { { 18, aCreditsWonderWaspTex, TEX_WIDTH(aCreditsWonderWaspTex),
-                                                   TEX_HEIGHT(aCreditsWonderWaspTex),
-                                                   TEX_COMPRESSED_SIZE(aCreditsWonderWaspTex) },
-                                                 { 0 } };
-
-// QUEEN METEOR
-unk_80077D50 sCreditsQueenMeteorCompTexInfo[] = { { 18, aCreditsQueenMeteorTex, TEX_WIDTH(aCreditsQueenMeteorTex),
-                                                    TEX_HEIGHT(aCreditsQueenMeteorTex),
-                                                    TEX_COMPRESSED_SIZE(aCreditsQueenMeteorTex) },
-                                                  { 0 } };
-
-// BLOOD HAWK
-unk_80077D50 sCreditsBloodHawkCompTexInfo[] = { { 18, aCreditsBloodHawkTex, TEX_WIDTH(aCreditsBloodHawkTex),
-                                                  TEX_HEIGHT(aCreditsBloodHawkTex),
-                                                  TEX_COMPRESSED_SIZE(aCreditsBloodHawkTex) },
-                                                { 0 } };
-
-// ASTRO ROBIN
-unk_80077D50 sCreditsAstroRobinCompTexInfo[] = { { 18, aCreditsAstroRobinTex, TEX_WIDTH(aCreditsAstroRobinTex),
-                                                   TEX_HEIGHT(aCreditsAstroRobinTex),
-                                                   TEX_COMPRESSED_SIZE(aCreditsAstroRobinTex) },
-                                                 { 0 } };
-
-// DEATH ANCHOR
-unk_80077D50 sCreditsDeathAnchorCompTexInfo[] = { { 18, aCreditsDeathAnchorTex, TEX_WIDTH(aCreditsDeathAnchorTex),
-                                                    TEX_HEIGHT(aCreditsDeathAnchorTex),
-                                                    TEX_COMPRESSED_SIZE(aCreditsDeathAnchorTex) },
-                                                  { 0 } };
-
-// WILD BOAR
-unk_80077D50 sCreditsWildBoarCompTexInfo[] = { { 18, aCreditsWildBoarTex, TEX_WIDTH(aCreditsWildBoarTex),
-                                                 TEX_HEIGHT(aCreditsWildBoarTex),
-                                                 TEX_COMPRESSED_SIZE(aCreditsWildBoarTex) },
-                                               { 0 } };
-
-// KING METEOR
-unk_80077D50 sCreditsKingMeteorCompTexInfo[] = { { 18, aCreditsKingMeteorTex, TEX_WIDTH(aCreditsKingMeteorTex),
-                                                   TEX_HEIGHT(aCreditsKingMeteorTex),
-                                                   TEX_COMPRESSED_SIZE(aCreditsKingMeteorTex) },
-                                                 { 0 } };
-
-// SUPER PIRANHA
-unk_80077D50 sCreditsSuperPiranhaCompTexInfo[] = { { 18, aCreditsSuperPiranhaTex, TEX_WIDTH(aCreditsSuperPiranhaTex),
-                                                     TEX_HEIGHT(aCreditsSuperPiranhaTex),
-                                                     TEX_COMPRESSED_SIZE(aCreditsSuperPiranhaTex) },
-                                                   { 0 } };
-
-// MIGHTY HURRICANE
-unk_80077D50 sCreditsMightyHurricaneCompTexInfo[] = {
-    { 18, aCreditsMightyHurricaneTex, TEX_WIDTH(aCreditsMightyHurricaneTex), TEX_HEIGHT(aCreditsMightyHurricaneTex),
-      TEX_COMPRESSED_SIZE(aCreditsMightyHurricaneTex) },
-    { 0 }
-};
-
-// SPACE ANGLER
-unk_80077D50 sCreditsSpaceAnglerCompTexInfo[] = { { 18, aCreditsSpaceAnglerTex, TEX_WIDTH(aCreditsSpaceAnglerTex),
-                                                    TEX_HEIGHT(aCreditsSpaceAnglerTex),
-                                                    TEX_COMPRESSED_SIZE(aCreditsSpaceAnglerTex) },
-                                                  { 0 } };
-
-// MIGHTY TYPHOON
-unk_80077D50 sCreditsMightyTyphoonCompTexInfo[] = { { 18, aCreditsMightyTyphoonTex, TEX_WIDTH(aCreditsMightyTyphoonTex),
-                                                      TEX_HEIGHT(aCreditsMightyTyphoonTex),
-                                                      TEX_COMPRESSED_SIZE(aCreditsMightyTyphoonTex) },
-                                                    { 0 } };
-
-// HYPER SPEEDER
-unk_80077D50 sCreditsHyperSpeederCompTexInfo[] = { { 18, aCreditsHyperSpeederTex, TEX_WIDTH(aCreditsHyperSpeederTex),
-                                                     TEX_HEIGHT(aCreditsHyperSpeederTex),
-                                                     TEX_COMPRESSED_SIZE(aCreditsHyperSpeederTex) },
-                                                   { 0 } };
-
-// GREEN PANTHER
-unk_80077D50 sCreditsGreenPantherCompTexInfo[] = { { 18, aCreditsGreenPantherTex, TEX_WIDTH(aCreditsGreenPantherTex),
-                                                     TEX_HEIGHT(aCreditsGreenPantherTex),
-                                                     TEX_COMPRESSED_SIZE(aCreditsGreenPantherTex) },
-                                                   { 0 } };
-
-// BLACK BULL
-unk_80077D50 sCreditsBlackBullCompTexInfo[] = { { 18, aCreditsBlackBullTex, TEX_WIDTH(aCreditsBlackBullTex),
-                                                  TEX_HEIGHT(aCreditsBlackBullTex),
-                                                  TEX_COMPRESSED_SIZE(aCreditsBlackBullTex) },
-                                                { 0 } };
-
-// LITTLE WYVERN
-unk_80077D50 sCreditsLittleWyvernCompTexInfo[] = { { 18, aCreditsLittleWyvernTex, TEX_WIDTH(aCreditsLittleWyvernTex),
-                                                     TEX_HEIGHT(aCreditsLittleWyvernTex),
-                                                     TEX_COMPRESSED_SIZE(aCreditsLittleWyvernTex) },
-                                                   { 0 } };
-
-// SONIC PHANTOM
-unk_80077D50 sCreditsSonicPhantomCompTexInfo[] = { { 18, aCreditsSonicPhantomTex, TEX_WIDTH(aCreditsSonicPhantomTex),
-                                                     TEX_HEIGHT(aCreditsSonicPhantomTex),
-                                                     TEX_COMPRESSED_SIZE(aCreditsSonicPhantomTex) },
-                                                   { 0 } };
+unk_80077D50 sCreditsBlueFalconCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBlueFalconTex);
+unk_80077D50 sCreditsWildGooseCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWildGooseTex);
+unk_80077D50 sCreditsFireStingrayCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsFireStingrayTex);
+unk_80077D50 sCreditsGoldenFoxCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsGoldenFoxTex);
+unk_80077D50 sCreditsRedGazelleCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsRedGazelleTex);
+unk_80077D50 sCreditsWhiteFoxCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWhiteFoxTex);
+unk_80077D50 sCreditsIronTigerCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsIronTigerTex);
+unk_80077D50 sCreditsDeepClawCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsDeepClawTex);
+unk_80077D50 sCreditsCrazyBearCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsCrazyBearTex);
+unk_80077D50 sCreditsGreatStarCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsGreatStarTex);
+unk_80077D50 sCreditsBigFangCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBigFangTex);
+unk_80077D50 sCreditsMadWolfCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsMadWolfTex);
+unk_80077D50 sCreditsNightThunderCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsNightThunderTex);
+unk_80077D50 sCreditsTwinNorittaCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsTwinNorittaTex);
+unk_80077D50 sCreditsWonderWaspCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWonderWaspTex);
+unk_80077D50 sCreditsQueenMeteorCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsQueenMeteorTex);
+unk_80077D50 sCreditsBloodHawkCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBloodHawkTex);
+unk_80077D50 sCreditsAstroRobinCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsAstroRobinTex);
+unk_80077D50 sCreditsDeathAnchorCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsDeathAnchorTex);
+unk_80077D50 sCreditsWildBoarCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWildBoarTex);
+unk_80077D50 sCreditsKingMeteorCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsKingMeteorTex);
+unk_80077D50 sCreditsSuperPiranhaCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsSuperPiranhaTex);
+unk_80077D50 sCreditsMightyHurricaneCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsMightyHurricaneTex);
+unk_80077D50 sCreditsSpaceAnglerCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsSpaceAnglerTex);
+unk_80077D50 sCreditsMightyTyphoonCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsMightyTyphoonTex);
+unk_80077D50 sCreditsHyperSpeederCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsHyperSpeederTex);
+unk_80077D50 sCreditsGreenPantherCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsGreenPantherTex);
+unk_80077D50 sCreditsBlackBullCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBlackBullTex);
+unk_80077D50 sCreditsLittleWyvernCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsLittleWyvernTex);
+unk_80077D50 sCreditsSonicPhantomCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsSonicPhantomTex);
 
 unk_800792D8 D_i6_8011E378[] = { { sCreditsBlueFalconCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E388[] = { { sCreditsWildGooseCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E398[] = { { sCreditsFireStingrayCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E3A8[] = { { sCreditsGoldenFoxCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E3B8[] = { { sCreditsRedGazelleCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E3C8[] = { { sCreditsWhiteFoxCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E3D8[] = { { sCreditsIronTigerCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E3E8[] = { { sCreditsDeepClawCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E3F8[] = { { sCreditsCrazyBearCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E408[] = { { sCreditsGreatStarCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E418[] = { { sCreditsBigFangCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E428[] = { { sCreditsMadWolfCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E438[] = { { sCreditsNightThunderCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E448[] = { { sCreditsTwinNorittaCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E458[] = { { sCreditsWonderWaspCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E468[] = { { sCreditsQueenMeteorCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E478[] = { { sCreditsBloodHawkCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E488[] = { { sCreditsAstroRobinCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E498[] = { { sCreditsDeathAnchorCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E4A8[] = { { sCreditsWildBoarCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E4B8[] = { { sCreditsKingMeteorCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E4C8[] = { { sCreditsSuperPiranhaCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E4D8[] = { { sCreditsMightyHurricaneCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E4E8[] = { { sCreditsSpaceAnglerCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E4F8[] = { { sCreditsMightyTyphoonCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E508[] = { { sCreditsHyperSpeederCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E518[] = { { sCreditsGreenPantherCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E528[] = { { sCreditsBlackBullCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E538[] = { { sCreditsLittleWyvernCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011E548[] = { { sCreditsSonicPhantomCompTexInfo, 60 }, { 0 } };
 
 unk_800792D8* D_i6_8011E558[] = {
@@ -304,291 +128,78 @@ unk_800792D8* D_i6_8011E560[] = {
     CREDITS / ENDING IMAGES + CHARACTER PORTRAITS
  */
 
-// ENDING SCREEN GIRL
-unk_80077D50 sCreditsMenuLadyCompTexInfo[] = { { 17, aCreditsMenuLadyTex, TEX_WIDTH(aCreditsMenuLadyTex),
-                                                 TEX_HEIGHT(aCreditsMenuLadyTex),
-                                                 TEX_COMPRESSED_SIZE(aCreditsMenuLadyTex) },
-                                               { 0 } };
-
-// 'SEE YOU AGAIN!!'
-unk_80077D50 sCreditsSeeYouAgainCompTexInfo[] = { { 17, aCreditsSeeYouAgainTex, TEX_WIDTH(aCreditsSeeYouAgainTex),
-                                                    TEX_HEIGHT(aCreditsSeeYouAgainTex),
-                                                    TEX_COMPRESSED_SIZE(aCreditsSeeYouAgainTex) },
-                                                  { 0 } };
-
-// MR ZERO
-unk_80077D50 sCreditsMrZeroCompTexInfo[] = { { 17, aCreditsMrZeroTex, TEX_WIDTH(aCreditsMrZeroTex),
-                                               TEX_HEIGHT(aCreditsMrZeroTex), TEX_COMPRESSED_SIZE(aCreditsMrZeroTex) },
-                                             { 0 } };
+unk_80077D50 sCreditsMenuLadyCompTexInfo[] = COMP_TEX_INFO_DEF(17, aCreditsMenuLadyTex);
+unk_80077D50 sCreditsSeeYouAgainCompTexInfo[] = COMP_TEX_INFO_DEF(17, aCreditsSeeYouAgainTex);
+unk_80077D50 sCreditsMrZeroCompTexInfo[] = COMP_TEX_INFO_DEF(17, aCreditsMrZeroTex);
 
 // COPYRIGHT LOGO (1998)
 //! @bug This has the incorrect compressed size (leftover from version difference?)
-#if 0
-unk_80077D50 sCreditsCopyrightCompTexInfo[] = { { 17, aCopyrightTex, TEX_WIDTH(aCopyrightTex), TEX_HEIGHT(aCopyrightTex), TEX_COMPRESSED_SIZE(aCopyrightTex) }, { 0 } };
+#ifndef EXPANSION_KIT
+unk_80077D50 sCreditsCopyrightCompTexInfo[] = COMP_TEX_INFO_PAD(17, aCopyrightTex, 0x439);
 #else
-unk_80077D50 sCreditsCopyrightCompTexInfo[] = {
-    { 17, aCopyrightTex, TEX_WIDTH(aCopyrightTex), TEX_HEIGHT(aCopyrightTex), 0x439 }, { 0 }
-};
+unk_80077D50 sCreditsCopyrightCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCopyrightDDTex);
 #endif
 
-// DR STEWART
-unk_80077D50 sCreditsPortraitDrStewartCompTexInfo[] = {
-    { 17, aFullPortraitDrStewartTex, TEX_WIDTH(aFullPortraitDrStewartTex), TEX_HEIGHT(aFullPortraitDrStewartTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitDrStewartTex) },
-    { 0 }
-};
-
-// CAPTAIN FALCON
-unk_80077D50 sCreditsPortraitCaptainFalconCompTexInfo[] = {
-    { 17, aFullPortraitCaptainFalconTex, TEX_WIDTH(aFullPortraitCaptainFalconTex),
-      TEX_HEIGHT(aFullPortraitCaptainFalconTex), TEX_COMPRESSED_SIZE(aFullPortraitCaptainFalconTex) },
-    { 0 }
-};
-
-// JODY SUMMER
-unk_80077D50 sCreditsPortraitJodySummerCompTexInfo[] = {
-    { 17, aFullPortraitJodySummerTex, TEX_WIDTH(aFullPortraitJodySummerTex), TEX_HEIGHT(aFullPortraitJodySummerTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitJodySummerTex) },
-    { 0 }
-};
-
-// SAMURAI GOROH
-unk_80077D50 sCreditsPortraitSamuraiGorohCompTexInfo[] = {
-    { 17, aFullPortraitSamuraiGorohTex, TEX_WIDTH(aFullPortraitSamuraiGorohTex),
-      TEX_HEIGHT(aFullPortraitSamuraiGorohTex), TEX_COMPRESSED_SIZE(aFullPortraitSamuraiGorohTex) },
-    { 0 }
-};
-
-// MIGHTY GAZELLE
-unk_80077D50 sCreditsPortraitMightyGazelleCompTexInfo[] = {
-    { 17, aFullPortraitMightyGazelleTex, TEX_WIDTH(aFullPortraitMightyGazelleTex),
-      TEX_HEIGHT(aFullPortraitMightyGazelleTex), TEX_COMPRESSED_SIZE(aFullPortraitMightyGazelleTex) },
-    { 0 }
-};
-
-// PICO
-unk_80077D50 sCreditsPortraitPicoCompTexInfo[] = { { 17, aFullPortraitPicoTex, TEX_WIDTH(aFullPortraitPicoTex),
-                                                     TEX_HEIGHT(aFullPortraitPicoTex),
-                                                     TEX_COMPRESSED_SIZE(aFullPortraitPicoTex) },
-                                                   { 0 } };
-
-// BABA
-unk_80077D50 sCreditsPortraitBabaCompTexInfo[] = { { 17, aFullPortraitBabaTex, TEX_WIDTH(aFullPortraitBabaTex),
-                                                     TEX_HEIGHT(aFullPortraitBabaTex),
-                                                     TEX_COMPRESSED_SIZE(aFullPortraitBabaTex) },
-                                                   { 0 } };
-
-// MR EAD
-unk_80077D50 sCreditsPortraitMrEadCompTexInfo[] = { { 17, aFullPortraitMrEadTex, TEX_WIDTH(aFullPortraitMrEadTex),
-                                                      TEX_HEIGHT(aFullPortraitMrEadTex),
-                                                      TEX_COMPRESSED_SIZE(aFullPortraitMrEadTex) },
-                                                    { 0 } };
-
-// OCTOMAN
-unk_80077D50 sCreditsPortraitOctomanCompTexInfo[] = { { 17, aFullPortraitOctomanTex, TEX_WIDTH(aFullPortraitOctomanTex),
-                                                        TEX_HEIGHT(aFullPortraitOctomanTex),
-                                                        TEX_COMPRESSED_SIZE(aFullPortraitOctomanTex) },
-                                                      { 0 } };
-
-// THE SKULL
-unk_80077D50 sCreditsPortraitTheSkullCompTexInfo[] = {
-    { 17, aFullPortraitTheSkullTex, TEX_WIDTH(aFullPortraitTheSkullTex), TEX_HEIGHT(aFullPortraitTheSkullTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitTheSkullTex) },
-    { 0 }
-};
-
-// BEASTMAN
-unk_80077D50 sCreditsPortraitBeastmanCompTexInfo[] = {
-    { 17, aFullPortraitBeastmanTex, TEX_WIDTH(aFullPortraitBeastmanTex), TEX_HEIGHT(aFullPortraitBeastmanTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitBeastmanTex) },
-    { 0 }
-};
-
-// ANTONIO GUSTER
-unk_80077D50 sCreditsPortraitAntonioGusterCompTexInfo[] = {
-    { 17, aFullPortraitAntonioGusterTex, TEX_WIDTH(aFullPortraitAntonioGusterTex),
-      TEX_HEIGHT(aFullPortraitAntonioGusterTex), TEX_COMPRESSED_SIZE(aFullPortraitAntonioGusterTex) },
-    { 0 }
-};
-
-// DRAQ
-unk_80077D50 sCreditsPortraitDraqCompTexInfo[] = { { 17, aFullPortraitDraqTex, TEX_WIDTH(aFullPortraitDraqTex),
-                                                     TEX_HEIGHT(aFullPortraitDraqTex),
-                                                     TEX_COMPRESSED_SIZE(aFullPortraitDraqTex) },
-                                                   { 0 } };
-
-// ROGER BUSTER
-unk_80077D50 sCreditsPortraitRogerBusterCompTexInfo[] = {
-    { 17, aFullPortraitRogerBusterTex, TEX_WIDTH(aFullPortraitRogerBusterTex), TEX_HEIGHT(aFullPortraitRogerBusterTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitRogerBusterTex) },
-    { 0 }
-};
-
-// SILVER NEEISEN
-unk_80077D50 sCreditsPortraitSilverNeelsenCompTexInfo[] = {
-    { 17, aFullPortraitSilverNeelsenTex, TEX_WIDTH(aFullPortraitSilverNeelsenTex),
-      TEX_HEIGHT(aFullPortraitSilverNeelsenTex), TEX_COMPRESSED_SIZE(aFullPortraitSilverNeelsenTex) },
-    { 0 }
-};
-
-// SUPER ARROW
-unk_80077D50 sCreditsPortraitSuperArrowCompTexInfo[] = {
-    { 17, aFullPortraitSuperArrowTex, TEX_WIDTH(aFullPortraitSuperArrowTex), TEX_HEIGHT(aFullPortraitSuperArrowTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitSuperArrowTex) },
-    { 0 }
-};
-
-// MRS ARROW
-unk_80077D50 sCreditsPortraitMrsArrowCompTexInfo[] = {
-    { 17, aFullPortraitMrsArrowTex, TEX_WIDTH(aFullPortraitMrsArrowTex), TEX_HEIGHT(aFullPortraitMrsArrowTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitMrsArrowTex) },
-    { 0 }
-};
-
-// ZODA
-unk_80077D50 sCreditsPortraitZodaCompTexInfo[] = { { 17, aFullPortraitZodaTex, TEX_WIDTH(aFullPortraitZodaTex),
-                                                     TEX_HEIGHT(aFullPortraitZodaTex),
-                                                     TEX_COMPRESSED_SIZE(aFullPortraitZodaTex) },
-                                                   { 0 } };
-
-// JOHN TANAKA
-unk_80077D50 sCreditsPortraitJohnTanakaCompTexInfo[] = {
-    { 17, aFullPortraitJohnTanakaTex, TEX_WIDTH(aFullPortraitJohnTanakaTex), TEX_HEIGHT(aFullPortraitJohnTanakaTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitJohnTanakaTex) },
-    { 0 }
-};
-
-// BIO REX
-unk_80077D50 sCreditsPortraitBioRexCompTexInfo[] = { { 17, aFullPortraitBioRexTex, TEX_WIDTH(aFullPortraitBioRexTex),
-                                                       TEX_HEIGHT(aFullPortraitBioRexTex),
-                                                       TEX_COMPRESSED_SIZE(aFullPortraitBioRexTex) },
-                                                     { 0 } };
-
-// KATE ALEN
-unk_80077D50 sCreditsPortraitKateAlenCompTexInfo[] = {
-    { 17, aFullPortraitKateAlenTex, TEX_WIDTH(aFullPortraitKateAlenTex), TEX_HEIGHT(aFullPortraitKateAlenTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitKateAlenTex) },
-    { 0 }
-};
-
-// GOMAR & SHIOH
-unk_80077D50 sCreditsPortraitGomarAndShiohCompTexInfo[] = {
-    { 17, aFullPortraitGomarAndShiohTex, TEX_WIDTH(aFullPortraitGomarAndShiohTex),
-      TEX_HEIGHT(aFullPortraitGomarAndShiohTex), TEX_COMPRESSED_SIZE(aFullPortraitGomarAndShiohTex) },
-    { 0 }
-};
-
-// MICHAEL CHAIN
-unk_80077D50 sCreditsPortraitMichaelChainCompTexInfo[] = {
-    { 17, aFullPortraitMichaelChainTex, TEX_WIDTH(aFullPortraitMichaelChainTex),
-      TEX_HEIGHT(aFullPortraitMichaelChainTex), TEX_COMPRESSED_SIZE(aFullPortraitMichaelChainTex) },
-    { 0 }
-};
-
-// BILLY
-unk_80077D50 sCreditsPortraitBillyCompTexInfo[] = { { 17, aFullPortraitBillyTex, TEX_WIDTH(aFullPortraitBillyTex),
-                                                      TEX_HEIGHT(aFullPortraitBillyTex),
-                                                      TEX_COMPRESSED_SIZE(aFullPortraitBillyTex) },
-                                                    { 0 } };
-
-// DR CLASH
-unk_80077D50 sCreditsPortraitDrClashCompTexInfo[] = { { 17, aFullPortraitDrClashTex, TEX_WIDTH(aFullPortraitDrClashTex),
-                                                        TEX_HEIGHT(aFullPortraitDrClashTex),
-                                                        TEX_COMPRESSED_SIZE(aFullPortraitDrClashTex) },
-                                                      { 0 } };
-
-// JACK LEVIN
-unk_80077D50 sCreditsPortraitJackLevinCompTexInfo[] = {
-    { 17, aFullPortraitJackLevinTex, TEX_WIDTH(aFullPortraitJackLevinTex), TEX_HEIGHT(aFullPortraitJackLevinTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitJackLevinTex) },
-    { 0 }
-};
-
-// BLOOD FALCON
-unk_80077D50 sCreditsPortraitBloodFalconCompTexInfo[] = {
-    { 17, aFullPortraitBloodFalconTex, TEX_WIDTH(aFullPortraitBloodFalconTex), TEX_HEIGHT(aFullPortraitBloodFalconTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitBloodFalconTex) },
-    { 0 }
-};
-
-// LEON
-unk_80077D50 sCreditsPortraitLeonCompTexInfo[] = { { 17, aFullPortraitLeonTex, TEX_WIDTH(aFullPortraitLeonTex),
-                                                     TEX_HEIGHT(aFullPortraitLeonTex),
-                                                     TEX_COMPRESSED_SIZE(aFullPortraitLeonTex) },
-                                                   { 0 } };
-
-// JAMES MCCLOUD
-unk_80077D50 sCreditsPortraitJamesMcCloudCompTexInfo[] = {
-    { 17, aFullPortraitJamesMcCloudTex, TEX_WIDTH(aFullPortraitJamesMcCloudTex),
-      TEX_HEIGHT(aFullPortraitJamesMcCloudTex), TEX_COMPRESSED_SIZE(aFullPortraitJamesMcCloudTex) },
-    { 0 }
-};
-
-// BLACK SHADOW
-unk_80077D50 sCreditsPortraitBlackShadowCompTexInfo[] = {
-    { 17, aFullPortraitBlackShadowTex, TEX_WIDTH(aFullPortraitBlackShadowTex), TEX_HEIGHT(aFullPortraitBlackShadowTex),
-      TEX_COMPRESSED_SIZE(aFullPortraitBlackShadowTex) },
-    { 0 }
-};
+unk_80077D50 sCreditsPortraitDrStewartCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDrStewartTex);
+unk_80077D50 sCreditsPortraitCaptainFalconCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitCaptainFalconTex);
+unk_80077D50 sCreditsPortraitJodySummerCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJodySummerTex);
+unk_80077D50 sCreditsPortraitSamuraiGorohCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSamuraiGorohTex);
+unk_80077D50 sCreditsPortraitMightyGazelleCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMightyGazelleTex);
+unk_80077D50 sCreditsPortraitPicoCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitPicoTex);
+unk_80077D50 sCreditsPortraitBabaCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBabaTex);
+unk_80077D50 sCreditsPortraitMrEadCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMrEadTex);
+unk_80077D50 sCreditsPortraitOctomanCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitOctomanTex);
+unk_80077D50 sCreditsPortraitTheSkullCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitTheSkullTex);
+unk_80077D50 sCreditsPortraitBeastmanCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBeastmanTex);
+unk_80077D50 sCreditsPortraitAntonioGusterCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitAntonioGusterTex);
+unk_80077D50 sCreditsPortraitDraqCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDraqTex);
+unk_80077D50 sCreditsPortraitRogerBusterCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitRogerBusterTex);
+unk_80077D50 sCreditsPortraitSilverNeelsenCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSilverNeelsenTex);
+unk_80077D50 sCreditsPortraitSuperArrowCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSuperArrowTex);
+unk_80077D50 sCreditsPortraitMrsArrowCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMrsArrowTex);
+unk_80077D50 sCreditsPortraitZodaCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitZodaTex);
+unk_80077D50 sCreditsPortraitJohnTanakaCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJohnTanakaTex);
+unk_80077D50 sCreditsPortraitBioRexCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBioRexTex);
+unk_80077D50 sCreditsPortraitKateAlenCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitKateAlenTex);
+unk_80077D50 sCreditsPortraitGomarAndShiohCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitGomarAndShiohTex);
+unk_80077D50 sCreditsPortraitMichaelChainCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMichaelChainTex);
+unk_80077D50 sCreditsPortraitBillyCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBillyTex);
+unk_80077D50 sCreditsPortraitDrClashCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDrClashTex);
+unk_80077D50 sCreditsPortraitJackLevinCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJackLevinTex);
+unk_80077D50 sCreditsPortraitBloodFalconCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBloodFalconTex);
+unk_80077D50 sCreditsPortraitLeonCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitLeonTex);
+unk_80077D50 sCreditsPortraitJamesMcCloudCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJamesMcCloudTex);
+unk_80077D50 sCreditsPortraitBlackShadowCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBlackShadowTex);
 
 unk_800792D8 D_i6_8011EA18[] = { { sCreditsPortraitDrStewartCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EA28[] = { { sCreditsPortraitCaptainFalconCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EA38[] = { { sCreditsPortraitJodySummerCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EA48[] = { { sCreditsPortraitSamuraiGorohCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EA58[] = { { sCreditsPortraitMightyGazelleCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EA68[] = { { sCreditsPortraitPicoCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EA78[] = { { sCreditsPortraitBabaCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EA88[] = { { sCreditsPortraitMrEadCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EA98[] = { { sCreditsPortraitOctomanCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EAA8[] = { { sCreditsPortraitTheSkullCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EAB8[] = { { sCreditsPortraitBeastmanCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EAC8[] = { { sCreditsPortraitAntonioGusterCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EAD8[] = { { sCreditsPortraitDraqCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EAE8[] = { { sCreditsPortraitRogerBusterCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EAF8[] = { { sCreditsPortraitSilverNeelsenCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EB08[] = { { sCreditsPortraitSuperArrowCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EB18[] = { { sCreditsPortraitMrsArrowCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EB28[] = { { sCreditsPortraitZodaCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EB38[] = { { sCreditsPortraitJohnTanakaCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EB48[] = { { sCreditsPortraitBioRexCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EB58[] = { { sCreditsPortraitKateAlenCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EB68[] = { { sCreditsPortraitGomarAndShiohCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EB78[] = { { sCreditsPortraitMichaelChainCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EB88[] = { { sCreditsPortraitBillyCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EB98[] = { { sCreditsPortraitDrClashCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EBA8[] = { { sCreditsPortraitJackLevinCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EBB8[] = { { sCreditsPortraitBloodFalconCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EBC8[] = { { sCreditsPortraitLeonCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EBD8[] = { { sCreditsPortraitJamesMcCloudCompTexInfo, 60 }, { 0 } };
-
 unk_800792D8 D_i6_8011EBE8[] = { { sCreditsPortraitBlackShadowCompTexInfo, 60 }, { 0 } };
 
 unk_800792D8* D_i6_8011EBF8[] = {
@@ -643,6 +254,9 @@ const char* gCreditsNames[] = {
     "atsushi tejima",    "masanori sato",      "takayuki hashida", "super mario club",  "hiroshi yamauchi",
     "shigeru miyamoto",  "yoshitaka yasumoto", "naruhisa kawano",  "sou kimura",        "kayomi mcdonald",
     "jim wornell",
+#ifdef EXPANSION_KIT
+    "hiroshi kubo",
+#endif
 };
 
 const s16 kStartRolesInitialPositions[] = { 50, 240, 280, -20, 280, 240, 50, -20 };
@@ -705,6 +319,10 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_33,
     OBJECT_FREE,
+#ifdef EXPANSION_KIT
+    OBJECT_CREDITS_NAME_36,
+    OBJECT_FREE,
+#endif
     OBJECT_CREDITS_NAME_34,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_35,
@@ -736,8 +354,10 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
+#ifndef EXPANSION_KIT
     OBJECT_FREE,
     OBJECT_FREE,
+#endif
     OBJECT_CREDITS_ROLE_29,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -818,13 +438,18 @@ void Credits_IntroInit(Object* introObj) {
 }
 
 void Credits_CopyrightInit(void) {
-    func_80077D50_impl(sCreditsCopyrightCompTexInfo, 0, true);
+#ifndef EXPANSION_KIT
+    func_80077D50_impl(sCreditsCopyrightCompTexInfo, 0, false);
+#else
+    func_i2_800AE578(sCreditsCopyrightCompTexInfo, false);
+#endif
 }
 
 void Credits_PortraitsInit(Object* portraitsObj) {
 
     OBJECT_CACHE_INDEX(portraitsObj) = func_800792D8(D_i6_8011EBF8[0]);
 
+    //! @bug the case where func_800792D8 returns -1 is unhandled
     D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)].unk_04 = -1;
 }
 
@@ -1294,6 +919,8 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj);
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
 #endif
+#else
+#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
 #endif
 #endif
 
@@ -1305,7 +932,11 @@ Gfx* Credits_CopyrightDraw(Gfx* gfx, Object* copyRightObj) {
     TexturePtr texture;
 
     OBJECT_COUNTER(copyRightObj)++;
+#ifndef EXPANSION_KIT
     texture = func_800783AC(aCopyrightTex);
+#else
+    texture = func_800783AC(aCopyrightDDTex);
+#endif
     var_s2 = OBJECT_TOP(copyRightObj);
     temp_s7 = OBJECT_LEFT(copyRightObj);
     gSPDisplayList(gfx++, D_3000088);
@@ -1318,11 +949,23 @@ Gfx* Credits_CopyrightDraw(Gfx* gfx, Object* copyRightObj) {
             var_a2 = 0;
         }
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-        gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 128, 1 /* unused by macro */, 0, row, 128,
-                           row + 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
-                           G_TX_NOLOD, G_TX_NOLOD);
-        gSPScisTextureRectangle(gfx++, (temp_s7 + var_a2) << 2, (var_s2 + row) << 2, (temp_s7 + var_a2 + 128) << 2,
-                                (var_s2 + row + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+#ifndef EXPANSION_KIT
+        gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEX_WIDTH(aCopyrightTex),
+                           1 /* unused by macro */, 0, row, TEX_WIDTH(aCopyrightTex), row + 1, 0,
+                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                           G_TX_NOLOD);
+        gSPScisTextureRectangle(gfx++, (temp_s7 + var_a2) << 2, (var_s2 + row) << 2,
+                                (temp_s7 + var_a2 + TEX_WIDTH(aCopyrightTex)) << 2, (var_s2 + row + 1) << 2, 0, 0, 0,
+                                1 << 10, 1 << 10);
+#else
+        gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEX_WIDTH(aCopyrightDDTex),
+                           1 /* unused by macro */, 0, row, TEX_WIDTH(aCopyrightDDTex), row + 1, 0,
+                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                           G_TX_NOLOD);
+        gSPScisTextureRectangle(gfx++, (temp_s7 + var_a2) << 2, (var_s2 + row) << 2,
+                                (temp_s7 + var_a2 + TEX_WIDTH(aCopyrightDDTex)) << 2, (var_s2 + row + 1) << 2, 0, 0, 0,
+                                1 << 10, 1 << 10);
+#endif
     }
 
     return gfx;
@@ -1889,7 +1532,11 @@ void Credits_SeeYouAgainUpdate(Object* seeYouAgainObj) {
             if (++OBJECT_COUNTER(seeYouAgainObj) >= 175) {
                 OBJECT_STATE(seeYouAgainObj)++;
                 OBJECT_COUNTER(seeYouAgainObj) = 0;
-                Credits_ObjectInit(OBJECT_CREDITS_COPYRIGHT, 0x60, 0xCD, 8);
+#ifndef EXPANSION_KIT
+                Credits_ObjectInit(OBJECT_CREDITS_COPYRIGHT, 96, 205, 8);
+#else
+                Credits_ObjectInit(OBJECT_CREDITS_COPYRIGHT, 78, 205, 8);
+#endif
             }
             break;
         case 1:
@@ -2170,6 +1817,9 @@ Gfx* Credits_ObjectDraw(Gfx* gfx) {
                 case OBJECT_CREDITS_NAME_33:
                 case OBJECT_CREDITS_NAME_34:
                 case OBJECT_CREDITS_NAME_35:
+#ifdef EXPANSION_KIT
+                case OBJECT_CREDITS_NAME_36:
+#endif
                     gfx = Credits_EndNameDraw(gfx, &gObjects[j]);
                     break;
             }
@@ -2271,6 +1921,9 @@ void Credits_ObjectUpdate(void) {
             case OBJECT_CREDITS_NAME_33:
             case OBJECT_CREDITS_NAME_34:
             case OBJECT_CREDITS_NAME_35:
+#ifdef EXPANSION_KIT
+            case OBJECT_CREDITS_NAME_36:
+#endif
                 Credits_EndNameUpdate(&gObjects[i]);
                 break;
             case OBJECT_CREDITS_MENU_LADY:

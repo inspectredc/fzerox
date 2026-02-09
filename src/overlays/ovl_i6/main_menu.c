@@ -8,10 +8,16 @@
 #include ASSET_HEADER(common_assets_compressed.h)
 #include ASSET_HEADER(setup_gfx.h)
 
+#ifndef EXPANSION_KIT
 s16 D_i6_8011F910[SCREEN_HEIGHT];
+#else
+s16* D_i6_8011F910;
+#endif
 
+#ifndef EXPANSION_KIT
 // UNUSED?
 UNUSED unk_8011DC40 D_i6_8011DC40 = { 1.0f, 1.0f, 32, 12, 0, 2, 17, 20 };
+#endif
 
 s32 D_i6_8011DC60 = 0;
 s32 D_i6_8011DC64 = 0;
@@ -22,54 +28,14 @@ s32 D_i6_8011DC6C = 180;
     MENU OPTIONS
  */
 
-// GP RACE
-unk_80077D50 sMenuSignGpRaceCompTexInfo[] = { { 17, aMenuSignGpRaceTex, TEX_WIDTH(aMenuSignGpRaceTex),
-                                                TEX_HEIGHT(aMenuSignGpRaceTex),
-                                                TEX_COMPRESSED_SIZE(aMenuSignGpRaceTex) },
-                                              { 0 } };
-
-// TIME ATTACK
-unk_80077D50 sMenuSignTimeAttackCompTexInfo[] = { { 17, aMenuSignTimeAttackTex, TEX_WIDTH(aMenuSignTimeAttackTex),
-                                                    TEX_HEIGHT(aMenuSignTimeAttackTex),
-                                                    TEX_COMPRESSED_SIZE(aMenuSignTimeAttackTex) },
-                                                  { 0 } };
-
-// VS BATTLE
-unk_80077D50 sMenuSignVsBattleCompTexInfo[] = { { 17, aMenuSignVsBattleTex, TEX_WIDTH(aMenuSignVsBattleTex),
-                                                  TEX_HEIGHT(aMenuSignVsBattleTex),
-                                                  TEX_COMPRESSED_SIZE(aMenuSignVsBattleTex) },
-                                                { 0 } };
-
-// PRACTICE
-unk_80077D50 sMenuSignPracticeCompTexInfo[] = { { 17, aMenuSignPracticeTex, TEX_WIDTH(aMenuSignPracticeTex),
-                                                  TEX_HEIGHT(aMenuSignPracticeTex),
-                                                  TEX_COMPRESSED_SIZE(aMenuSignPracticeTex) },
-                                                { 0 } };
-
-// DEATH RACE
-unk_80077D50 sMenuSignDeathRaceCompTexInfo[] = { { 17, aMenuSignDeathRaceTex, TEX_WIDTH(aMenuSignDeathRaceTex),
-                                                   TEX_HEIGHT(aMenuSignDeathRaceTex),
-                                                   TEX_COMPRESSED_SIZE(aMenuSignDeathRaceTex) },
-                                                 { 0 } };
-
-// OPTIONS
-unk_80077D50 sMenuSignOptionsCompTexInfo[] = { { 17, aMenuSignOptionsTex, TEX_WIDTH(aMenuSignOptionsTex),
-                                                 TEX_HEIGHT(aMenuSignOptionsTex),
-                                                 TEX_COMPRESSED_SIZE(aMenuSignOptionsTex) },
-                                               { 0 } };
-
-// COURSE EDIT
-unk_80077D50 sMenuSignCourseEditCompTexInfo[] = { { 17, aMenuSignCourseEditTex, TEX_WIDTH(aMenuSignCourseEditTex),
-                                                    TEX_HEIGHT(aMenuSignCourseEditTex),
-                                                    TEX_COMPRESSED_SIZE(aMenuSignCourseEditTex) },
-                                                  { 0 } };
-
-// CREATE MACHINE
-unk_80077D50 sMenuSignCreateMachineCompTexInfo[] = {
-    { 17, aMenuSignCreateMachineTex, TEX_WIDTH(aMenuSignCreateMachineTex), TEX_HEIGHT(aMenuSignCreateMachineTex),
-      TEX_COMPRESSED_SIZE(aMenuSignCreateMachineTex) },
-    { 0 }
-};
+unk_80077D50 sMenuSignGpRaceCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignGpRaceTex);
+unk_80077D50 sMenuSignTimeAttackCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignTimeAttackTex);
+unk_80077D50 sMenuSignVsBattleCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignVsBattleTex);
+unk_80077D50 sMenuSignPracticeCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignPracticeTex);
+unk_80077D50 sMenuSignDeathRaceCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignDeathRaceTex);
+unk_80077D50 sMenuSignOptionsCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignOptionsTex);
+unk_80077D50 sMenuSignCourseEditCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignCourseEditTex);
+unk_80077D50 sMenuSignCreateMachineCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignCreateMachineTex);
 
 unk_80077D50* sMenuSignCompTexInfos[] = {
     sMenuSignGpRaceCompTexInfo,        // MODE_GP_RACE
@@ -86,26 +52,9 @@ unk_80077D50* sMenuSignCompTexInfos[] = {
     LARGE WALLPAPER-STYLE IMAGES/COMIC STYLE IMAGE
  */
 
-// TITLE SCREEN BACKGROUND
-static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = {
-    { 17, aTitleBackgroundMainTex, TEX_WIDTH(aTitleBackgroundMainTex), TEX_HEIGHT(aTitleBackgroundMainTex),
-      TEX_COMPRESSED_SIZE(aTitleBackgroundMainTex) },
-    { 0 }
-};
-
-// COMIC STRIP
-static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = {
-    { 17, aTitleBackgroundComicTex, TEX_WIDTH(aTitleBackgroundComicTex), TEX_HEIGHT(aTitleBackgroundComicTex),
-      TEX_COMPRESSED_SIZE(aTitleBackgroundComicTex) },
-    { 0 }
-};
-
-// BLUE FALCON, SEMI-TRANSPARENT
-static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = {
-    { 17, aTitleBackgroundFalconTex, TEX_WIDTH(aTitleBackgroundFalconTex), TEX_HEIGHT(aTitleBackgroundFalconTex),
-      TEX_COMPRESSED_SIZE(aTitleBackgroundFalconTex) },
-    { 0 }
-};
+static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundMainTex);
+static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundComicTex);
+static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundFalconTex);
 
 static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
     sTitleBackgroundMainCompTexInfo,
@@ -117,62 +66,17 @@ static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
     MENU SECOND OPTIONS
  */
 
-// SELECT MODE
-unk_80077D50 sSelectModeCompTexInfo[] = {
-    { 4, aSelectModeTex, TEX_WIDTH(aSelectModeTex), TEX_HEIGHT(aSelectModeTex), 0 }, { 0 }
-};
-
-// FLAMES
-unk_80077D50 sSelectModeOptionFlamesCompTexInfo[] = {
-    { 17, aSelectModeOptionFlamesTex, TEX_WIDTH(aSelectModeOptionFlamesTex), TEX_HEIGHT(aSelectModeOptionFlamesTex),
-      TEX_COMPRESSED_SIZE(aSelectModeOptionFlamesTex) },
-    { 0 }
-};
-
-// NOVICE
-static unk_80077D50 sNoviceCompTexInfo[] = {
-    { 17, aNoviceTex, TEX_WIDTH(aNoviceTex), TEX_HEIGHT(aNoviceTex), TEX_COMPRESSED_SIZE(aNoviceTex) }, { 0 }
-};
-
-// STANDARD
-static unk_80077D50 sStandardCompTexInfo[] = {
-    { 17, aStandardTex, TEX_WIDTH(aStandardTex), TEX_HEIGHT(aStandardTex), TEX_COMPRESSED_SIZE(aStandardTex) }, { 0 }
-};
-
-// EXPERT
-static unk_80077D50 sExpertCompTexInfo[] = {
-    { 17, aExpertTex, TEX_WIDTH(aExpertTex), TEX_HEIGHT(aExpertTex), TEX_COMPRESSED_SIZE(aExpertTex) }, { 0 }
-};
-
-// MASTER
-static unk_80077D50 sMasterCompTexInfo[] = {
-    { 17, aMasterTex, TEX_WIDTH(aMasterTex), TEX_HEIGHT(aMasterTex), TEX_COMPRESSED_SIZE(aMasterTex) }, { 0 }
-};
-
-// 2 PLAYERS
-unk_80077D50 s2PlayersCompTexInfo[] = {
-    { 17, a2PlayersTex, TEX_WIDTH(a2PlayersTex), TEX_HEIGHT(a2PlayersTex), TEX_COMPRESSED_SIZE(a2PlayersTex) }, { 0 }
-};
-
-// 3 PLAYERS
-unk_80077D50 s3PlayersCompTexInfo[] = {
-    { 17, a3PlayersTex, TEX_WIDTH(a3PlayersTex), TEX_HEIGHT(a3PlayersTex), TEX_COMPRESSED_SIZE(a3PlayersTex) }, { 0 }
-};
-
-// 4 PLAYERS
-unk_80077D50 s4PlayersCompTexInfo[] = {
-    { 17, a4PlayersTex, TEX_WIDTH(a4PlayersTex), TEX_HEIGHT(a4PlayersTex), TEX_COMPRESSED_SIZE(a4PlayersTex) }, { 0 }
-};
-
-// TIME ATTACK
-unk_80077D50 sTimeAttackCompTexInfo[] = { { 18, aTimeAttackTex, TEX_WIDTH(aTimeAttackTex), TEX_HEIGHT(aTimeAttackTex),
-                                            TEX_COMPRESSED_SIZE(aTimeAttackTex) },
-                                          { 0 } };
-
-// RECORDS
-unk_80077D50 sRecordsOptionCompTexInfo[] = { { 17, aRecordsOptionTex, TEX_WIDTH(aRecordsOptionTex),
-                                               TEX_HEIGHT(aRecordsOptionTex), TEX_COMPRESSED_SIZE(aRecordsOptionTex) },
-                                             { 0 } };
+unk_80077D50 sSelectModeCompTexInfo[] = COMP_TEX_INFO(4, aSelectModeTex, 0);
+unk_80077D50 sSelectModeOptionFlamesCompTexInfo[] = COMP_TEX_INFO_DEF(17, aSelectModeOptionFlamesTex);
+static unk_80077D50 sNoviceCompTexInfo[] = COMP_TEX_INFO_DEF(17, aNoviceTex);
+static unk_80077D50 sStandardCompTexInfo[] = COMP_TEX_INFO_DEF(17, aStandardTex);
+static unk_80077D50 sExpertCompTexInfo[] = COMP_TEX_INFO_DEF(17, aExpertTex);
+static unk_80077D50 sMasterCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMasterTex);
+unk_80077D50 s2PlayersCompTexInfo[] = COMP_TEX_INFO_DEF(17, a2PlayersTex);
+unk_80077D50 s3PlayersCompTexInfo[] = COMP_TEX_INFO_DEF(17, a3PlayersTex);
+unk_80077D50 s4PlayersCompTexInfo[] = COMP_TEX_INFO_DEF(17, a4PlayersTex);
+unk_80077D50 sTimeAttackCompTexInfo[] = COMP_TEX_INFO_DEF(18, aTimeAttackTex);
+unk_80077D50 sRecordsOptionCompTexInfo[] = COMP_TEX_INFO_DEF(17, aRecordsOptionTex);
 
 static unk_80077D50* sDifficultyCompTexInfos[] = {
     sNoviceCompTexInfo,
@@ -192,18 +96,21 @@ unk_80077D50* sTimeAttackModeCompTexInfos[] = {
     sRecordsOptionCompTexInfo,
 };
 
-// 'OK?'
-static unk_80077D50 sOkCompTexInfo[] = {
-    { 17, aOKTex, TEX_WIDTH(aOKTex), TEX_HEIGHT(aOKTex), TEX_COMPRESSED_SIZE(aOKTex) }, { 0 }
-};
+static unk_80077D50 sOkCompTexInfo[] = COMP_TEX_INFO_DEF(17, aOKTex);
 
 extern u32 gGameFrameCount;
 extern s16 D_800CCFE8;
 extern s32 gNumPlayers;
 extern s32 D_800CD384;
+extern f32 D_800CE748;
+extern f32 D_800CE74C;
+extern f32 D_800CE750;
 
 void MainMenu_Init(void) {
     D_800CCFE8 = 3;
+#ifdef EXPANSION_KIT
+    D_800CE748 = D_800CE74C = D_800CE750 = 0.1f;
+#endif
     D_800CD384 = 0;
     gNumPlayers = 1;
     if ((gGameFrameCount % 4) == 0) {
@@ -292,6 +199,7 @@ s32 MainMenu_Update(void) {
                     gSelectedMode -= 4;
                 }
             }
+#ifndef EXPANSION_KIT
 #ifndef VERSION_JP
             if ((gSelectedMode == MODE_VS_BATTLE) && (gControllersConnected < 2)) {
                 gSelectedMode = MODE_DEATH_RACE;
@@ -305,12 +213,18 @@ s32 MainMenu_Update(void) {
                     gSelectedMode = MODE_OPTIONS;
                     break;
             }
+#endif
             if (previous != gSelectedMode) {
                 Audio_TriggerSystemSE(NA_SE_30);
             }
             if (gInputButtonPressed & BTN_B) {
                 Audio_TriggerSystemSE(NA_SE_16);
+#ifndef EXPANSION_KIT
                 func_8007E0CC();
+#else
+                func_8070DB48();
+                Audio_RomBgmReady(BGM_TITLE);
+#endif
                 D_800CD384 = 5;
                 return GAMEMODE_FLX_TITLE;
             }
@@ -341,14 +255,27 @@ s32 MainMenu_Update(void) {
                         gDifficulty = gAntiPiracyAddedDifficulty + MASTER;
                         return GAMEMODE_FLX_MACHINE_SELECT;
                     case MODE_OPTIONS:
+#ifdef EXPANSION_KIT
+                        Audio_RomBgmReady(BGM_OPTION);
+#endif
                         D_800CD384 = 5;
                         gMenuChangeMode = MENU_CHANGE_TO_OPTIONS;
                         break;
                     case MODE_COURSE_EDIT:
                         D_800CD384 = 5;
+#ifdef EXPANSION_KIT
+                        Audio_EditorInit();
+                        func_80704810(false);
+                        func_8070481C();
+#endif
                         return GAMEMODE_COURSE_EDIT;
                     case MODE_CREATE_MACHINE:
                         D_800CD384 = 5;
+#ifdef EXPANSION_KIT
+                        Audio_Editor2Init();
+                        func_80704810(false);
+                        func_8070481C();
+#endif
                         return GAMEMODE_CREATE_MACHINE;
                     default:
                         D_800CD384 = 2;
@@ -408,6 +335,9 @@ s32 MainMenu_Update(void) {
                             D_800CD384 = 6;
                             gMenuChangeMode = MENU_CHANGE_TO_RECORDS;
                             Audio_TriggerSystemSE(NA_SE_62);
+#ifdef EXPANSION_KIT
+                            Audio_RomBgmReady(BGM_OPTION);
+#endif
                         } else {
                             gNumPlayers = 1;
                         }
@@ -514,6 +444,15 @@ extern s8 D_800CD3C4;
 void MainMenu_BackgroundInit(Object* backgroundObj) {
     s32 i;
 
+#ifdef EXPANSION_KIT
+#ifdef AVOID_UB
+    D_i6_8011F910 = Arena_Allocate(ALLOC_FRONT, SCREEN_HEIGHT * sizeof(s16));
+#else
+    //! @bug This only allocates half the size needed
+    D_i6_8011F910 = Arena_Allocate(ALLOC_FRONT, SCREEN_HEIGHT * sizeof(s16) / 2);
+#endif
+#endif
+
     OBJECT_STATE(backgroundObj) = D_800CD3C4;
     func_80077D50_impl(sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], 0, true);
 
@@ -530,8 +469,6 @@ void MainMenu_BackgroundInit(Object* backgroundObj) {
             break;
     }
 }
-
-extern s16 gGameModeChangeState;
 
 void MainMenu_SignInit(Object* signObj) {
     s32 index = signObj->cmdId - OBJECT_MAIN_MENU_MODE_SIGN_0;
@@ -615,9 +552,11 @@ Gfx* MainMenu_SignDraw(Gfx* gfx, Object* signObj) {
 
     mode = signObj->cmdId - OBJECT_MAIN_MENU_MODE_SIGN_0;
 
+#ifndef EXPANSION_KIT
     if ((mode == MODE_COURSE_EDIT) || (mode == MODE_CREATE_MACHINE)) {
         return gfx;
     }
+#endif
 
     if (mode == gSelectedMode) {
         if (D_800CD384 == 0) {
@@ -1100,9 +1039,6 @@ void MainMenu_OkUpdate(Object* okObj) {
             break;
     }
 }
-
-extern u16 gInputPressed;
-extern u16 gInputButtonPressed;
 
 const u16 gUnlockEverythingInputs[] = { BTN_L, BTN_Z, BTN_R, BTN_CUP, BTN_CDOWN, BTN_CLEFT, BTN_CRIGHT, BTN_START };
 
