@@ -1,4 +1,4 @@
-name: Build
+name: Build-EK
 
 # Build on every branch push, tag push, and pull request change:
 on: [push, pull_request_target]
@@ -32,8 +32,8 @@ jobs:
     - name: Get extra dependencies
       uses: actions/checkout@v4
       with:
-        repository: ${{ secrets.FZEROX_EK_DEPENDENCIES }}
-        token: ${{ secrets.FZEROX_EK_TOKEN }}
+        repository: ${{ secrets.FZEROX_DEPENDENCIES }}
+        token: ${{ secrets.FZEROX_TOKEN }}
         path: fzerox-secret
 
     - name: Get the dependency
@@ -54,6 +54,6 @@ jobs:
         name: ek_report
         path: report.json
 
-    # - name: Upload progress to Discord
-    #   if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    #   run: python3 tools/upload_progress.py --discord_url ${{ secrets.DISCORD_URL }}
+    - name: Upload progress to Discord
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      run: python3 tools/upload_progress_ek.py --discord_url ${{ secrets.DISCORD_URL_EK }}
