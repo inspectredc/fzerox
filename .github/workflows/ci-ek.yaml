@@ -36,8 +36,8 @@ jobs:
         token: ${{ secrets.FZEROX_TOKEN }}
         path: fzerox-secret
 
-    - name: Get the dependency
-      run: cp -r fzerox-secret/baserom.jp.ndd ./baserom.jp.ek.ndd
+    - name: Get the dependencies
+      run: cp -r fzerox-secret/baserom.jp.ndd ./baserom.jp.ek.ndd && cp -r fzerox-secret/baserom.jp.rev0.z64 ./baserom.jp.rev0.z64
 
     - name: Create z64dd baserom
       run: make setup EXPANSION_KIT=1
