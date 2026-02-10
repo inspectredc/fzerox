@@ -150,7 +150,8 @@ char sTotalRankingStr[] = "TOTAL RANKING";
 #ifndef EXPANSION_KIT
 const char* sCupNames[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP", "EDIT CUP", "X CUP" };
 #else
-const char* sCupNames[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP", "EDIT CUP", "X CUP", "DD-1 CUP", "DD-2 CUP" };
+const char* sCupNames[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP",
+                            "EDIT CUP", "X CUP",     "DD-1 CUP", "DD-2 CUP" };
 #endif
 
 char sThanksForPlayingStr[] = "THANKS FOR PLAYING!!";

@@ -1950,7 +1950,15 @@ void Racer_Init(void) {
     }
 }
 
-#ifdef EXPANSION_KIT
+#ifndef EXPANSION_KIT
+void func_8008D33C(void) {
+    s32 i;
+
+    for (i = 29; i >= 0; i--) {
+        gMachines[i] = sDefaultMachines[i];
+    }
+}
+#else
 extern CustomMachinesInfo gCustomMachinesInfo;
 extern u8 D_i2_80111848[];
 
@@ -2022,14 +2030,6 @@ void func_8008D33C(void) {
 void func_8008D33C(void);
 #pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/game/racer/func_8008D33C.s")
 #endif
-#else
-void func_8008D33C(void) {
-    s32 i;
-
-    for (i = 29; i >= 0; i--) {
-        gMachines[i] = sDefaultMachines[i];
-    }
-}
 #endif
 
 void func_8008D3C4(s32 character, s32 arg1) {

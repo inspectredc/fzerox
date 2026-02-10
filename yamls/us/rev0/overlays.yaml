@@ -67,9 +67,10 @@
       - [0x7FD70, c, lib/readcapacity]
       - [0x7FE10, c, lib/leotranslat]
       - [0x80170, c, lib/leotimer]
-      - [0x80870, hasm, lib/getkadr]
-      - [0x80960, data, lib/getkadr]
-      - [0x813B0, textbin, lib/getaadr]
+      - { start: 0x80870, type: textbin, use_src_path: True, name: lib/getkadr }
+      # - [0x80870, hasm, lib/getkadr]
+      # - [0x80960, data, lib/getkadr]
+      - { start: 0x813B0, type: textbin, use_src_path: True, name: lib/getaadr }
       # - [0x813B0, hasm, lib/getaadr]
       # - [0x8142C, data, lib/getaadr]
       - [0x83850, c, lib/leowrite]

@@ -35,25 +35,43 @@ versions:
       asm: "asm/jp/rev0"
       nonmatchings: "asm/jp/rev0/nonmatchings"
 
+  - name: ek
+    fullname: ek
+    sha1: a418b0151521b76691fa03f8658c8b567c69498b
+    paths:
+      target: "baserom.jp.ek.z64dd"
+
+      build_dir: "build/jp/ek"
+      map: "build/jp/ek/fzerox-expansion.jp.ek.map"
+      compiled_target: "build/jp/ek/fzerox-expansion.jp.ek.z64dd"
+      elf: "build/jp/ek/fzerox-expansion.jp.ek.elf"
+
+      expected_dir: "expected/"
+
+      asm: "asm/jp/ek"
+      nonmatchings: "asm/jp/ek/nonmatchings"
+
 tools:
   mapfile_parser:
     progress_report:
-      check_asm_paths: True
+      check_asm_paths: False
+      path_index: 4
       prefixes_to_trim:
         - build/us/rev0/lib/
         - build/us/rev0/src/
-        - build/us/rev0/asm/us/rev0/data/
+        - build/us/rev0/asm/us/rev0/data
         - build/us/rev0/asm/us/rev0
-        - build/us/rev0/asm/jp/rev0/data
-        - build/us/rev0/asm/jp/rev0
         - build/us/rev0/
         - build/jp/rev0/lib/
         - build/jp/rev0/src/
-        - build/jp/rev0/asm/us/rev0/data/
-        - build/jp/rev0/asm/us/rev0
         - build/jp/rev0/asm/jp/rev0/data
         - build/jp/rev0/asm/jp/rev0
         - build/jp/rev0/
+        - build/jp/ek/lib/
+        - build/jp/ek/src/
+        - build/jp/ek/asm/jp/ek/data
+        - build/jp/ek/asm/jp/ek
+        - build/jp/ek/
       categories:
         # Categories by segment
         - id: main

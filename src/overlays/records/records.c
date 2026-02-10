@@ -1002,9 +1002,8 @@ Gfx* Records_MenuDraw(Gfx* gfx, s32 left, s32 top) {
                             left + boxCenteringOffset + 20, top + 10 + i * 20, textureInfo->width, textureInfo->height,
                             3);
 #else
-        gfx = func_8007E410(gfx, texture, tlut, G_IM_FMT_CI, 1,
-                            left + boxCenteringOffset + 20, top + 10 + i * 20, textureInfo->width, textureInfo->height,
-                            3);
+        gfx = func_8007E410(gfx, texture, tlut, G_IM_FMT_CI, 1, left + boxCenteringOffset + 20, top + 10 + i * 20,
+                            textureInfo->width, textureInfo->height, 3);
 #endif
     }
 

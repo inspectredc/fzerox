@@ -2383,6 +2383,8 @@ D_800E4068 = 0x800D6538; //segment:ovl_i2
 func_i10_80115DF0 = 0x8012B520; //segment:ovl_i10
 
 D_xk2_80119744 = 0x80119744; //segment:course_edit
+D_80128C94 = 0x80128C94; //segment:course_edit
 D_xk2_80128DF8 = 0x80128DF8; //segment:course_edit size:0xE100
+
 
 D_xk3_801372B8 = 0x801372B8; //segment:machine_create

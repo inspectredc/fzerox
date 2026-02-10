@@ -232,12 +232,12 @@
       - [0x5DC80, c, libultra/os/sethwinterrupt]
 
       # Microcode
-      - [0x5DCF0, textbin, rspboot]
-      - [0x5DDC0, textbin, f3dex]
-      - [0x5F150, textbin, f3dlx]
-      - [0x602E0, textbin, f3dflx]
-      - [0x61470, textbin, l3dex]
-      - [0x62600, textbin, f3dex_rej]
+      - { start: 0x5DCF0, type: textbin, use_src_path: True, name: rsp/rspboot }
+      - { start: 0x5DDC0, type: textbin, use_src_path: True, name: rsp/f3dex2 }
+      - { start: 0x5F150, type: textbin, use_src_path: True, name: rsp/f3dlx2 }
+      - { start: 0x602E0, type: textbin, use_src_path: True, name: rsp/f3dflx2 }
+      - { start: 0x61470, type: textbin, use_src_path: True, name: rsp/l3dex2 }
+      - { start: 0x62600, type: textbin, use_src_path: True, name: rsp/f3dex2_rej }
 
       - [0x638F0, c, leo/lib/readwrite]
       - [0x63980, c, leo/lib/leofunc]
@@ -274,9 +274,9 @@
       - [0x68AE0, c, leo/lib/readcapacity]
       - [0x68B70, c, leo/lib/leotranslat]
       - [0x68E10, c, leo/lib/leotimer]
-      - [0x69320, textbin, leo/lib/getkadr]
+      - { start: 0x69320, type: textbin, use_src_path: True, name: leo/lib/getkadr }
       # - [0x693D8, data, leo/lib/getkadr]
-      - [0x69E20, textbin, leo/lib/getaadr]
+      - { start: 0x69E20, type: textbin, use_src_path: True, name: leo/lib/getaadr }
       # - [0x69E90, data, leo/lib/getaadr]
       - [0x6C2B0, c, leo/lib/leowrite]
       - [0x6C3E0, c, leo/lib/cjcreateleomanager]
@@ -303,7 +303,7 @@
       - [0x744C0, c, leo/mfs/mfs_validate]
       - [0x74970, c, leo/mfs/mfs_copy]
       - [0x75000, c, sys/75000]
-      - [0x76660, textbin, aspmain]
+      - { start: 0x76660, type: textbin, use_src_path: True, name: rsp/aspmain }
 
       # Data
       - [0x775F0, .data, sys/sys_main]
@@ -443,11 +443,11 @@
       - [0x86F00, .rodata, libultra/libc/xprintf]
       - [0x87000, .rodata, libultra/libc/xldtob]
 
-      - [0x87060, data, f3dex]
-      - [0x87480, data, f3dlx]
-      - [0x87890, data, f3dflx]
-      - [0x87C40, data, l3dex]
-      - [0x88030, data, f3dex_rej]
+      - { start: 0x87060, type: databin, use_src_path: True, name: rsp/f3dex2 }
+      - { start: 0x87480, type: databin, use_src_path: True, name: rsp/f3dlx2 }
+      - { start: 0x87890, type: databin, use_src_path: True, name: rsp/f3dflx2 }
+      - { start: 0x87C40, type: databin, use_src_path: True, name: rsp/l3dex2 }
+      - { start: 0x88030, type: databin, use_src_path: True, name: rsp/f3dex2_rej }
 
       - [0x88440, .data, leo/lib/leofunc]
       - [0x88450, .data, leo/lib/leocmdex]
@@ -471,7 +471,7 @@
 
       - [0xA2610, .data, sys/75000]
       - [0xA2630, .rodata, sys/75000]
-      - [0xA2690, data, aspmain]
+      - { start: 0xA2690, type: databin, use_src_path: True, name: rsp/aspmain }
       - [0xA2970, .data, audio/disk/audio_tables]
       - { type: .bss, vram: 0x80795670, name: sys/sys_main }
       - { type: .bss, vram: 0x8079A350, name: sys/sys_gfx }

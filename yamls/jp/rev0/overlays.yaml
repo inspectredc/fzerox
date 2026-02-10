@@ -66,9 +66,10 @@
       - [0x7FCE0, c, lib/readcapacity]
       - [0x7FD80, c, lib/leotranslat]
       - [0x800E0, c, lib/leotimer]
-      - [0x807E0, hasm, lib/getkadr]
-      - [0x808D0, data, lib/getkadr]
-      - [0x81320, textbin, lib/getaadr]
+      - { start: 0x807E0, type: textbin, use_src_path: True, name: lib/getkadr }
+      # - [0x807E0, hasm, lib/getkadr]
+      # - [0x808D0, data, lib/getkadr]
+      - { start: 0x81320, type: textbin, use_src_path: True, name: lib/getaadr }
       # - [0x81320, hasm, lib/getaadr]
       # - [0x8139C, data, lib/getaadr]
       - [0x837C0, c, lib/leowrite]
@@ -186,7 +187,7 @@
     bss_size: 0x30
     symbol_name_format: i4_$VRAM
     subsegments:
-      - [0xD4870, asm] # padding
+      - [0xD4870, hasm] # padding
       - [0xD4880, c, machine]
       - [0xD92F0, c, title]
       - [0xDA410, .data, machine]

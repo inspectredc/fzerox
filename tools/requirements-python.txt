@@ -1,6 +1,6 @@
-mapfile-parser>=2.9.0,<3.0.0
-spimdisasm==1.25.1
-rabbitizer==1.10.0
+mapfile-parser>=2.12.0,<3.0.0
+git+https://github.com/inspectredc/spimdisasm.git@non-matching-label-toggle#egg=spimdisasm
+rabbitizer==1.14.0
 PyYAML
 pylibyaml
 tqdm

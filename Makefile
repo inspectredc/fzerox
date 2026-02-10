@@ -260,7 +260,7 @@ ENCRYPT_LIBLEO  := $(PYTHON) $(TOOLS)/encrypt_libleo.py
 EXTRACT_MIO0    := $(PYTHON) $(TOOLS)/decompressMio0Segments.py
 
 
-IINC := -Iinclude -Ibin/$(VERSION).$(REV) -I.
+IINC := -Iinclude -Ibin/$(VERSION)/$(REV) -I.
 IINC += -Ilib/ultralib/include -Ilib/ultralib/include/PR -Ilib/ultralib/include/ido
 
 ifeq ($(KEEP_MDEBUG),0)

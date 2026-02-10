@@ -217,13 +217,13 @@
       - [0x618E0, c, libultra/os/sethwinterrupt]
 
       # Microcode
-      - [0x61930, textbin, rspboot]
-      - [0x61A00, textbin, f3dex]
-      - [0x62D70, textbin, f3dlx]
-      - [0x63F00, textbin, f3dflx]
-      - [0x65090, textbin, l3dex]
+      - { start: 0x61930, type: textbin, use_src_path: True, name: rsp/rspboot }
+      - { start: 0x61A00, type: textbin, use_src_path: True, name: rsp/f3dex2 }
+      - { start: 0x62D70, type: textbin, use_src_path: True, name: rsp/f3dlx2 }
+      - { start: 0x63F00, type: textbin, use_src_path: True, name: rsp/f3dflx2 }
+      - { start: 0x65090, type: textbin, use_src_path: True, name: rsp/l3dex2 }
       - [0x66220, c, sys/leo_presence]
-      - [0x66270, textbin, aspmain]
+      - { start: 0x66270, type: textbin, use_src_path: True, name: rsp/aspmain }
 
       # DATA - todo: split data
       - [0x66FA0, .data, sys/sys_main]
@@ -367,11 +367,11 @@
       - [0x70C70, .rodata, libultra/libc/xldtob]
 
       # DATA - Microcode
-      - [0x70CD0, data, f3dex]
-      - [0x710F0, data, f3dlx]
-      - [0x71500, data, f3dflx]
-      - [0x718B0, data, l3dex]
-      - [0x71CA0, data, aspmain]
+      - { start: 0x70CD0, type: databin, use_src_path: True, name: rsp/f3dex2 }
+      - { start: 0x710F0, type: databin, use_src_path: True, name: rsp/f3dlx2 }
+      - { start: 0x71500, type: databin, use_src_path: True, name: rsp/f3dflx2 }
+      - { start: 0x718B0, type: databin, use_src_path: True, name: rsp/l3dex2 }
+      - { start: 0x71CA0, type: databin, use_src_path: True, name: rsp/aspmain }
       - [0x71F80, .data, audio/rom/audio_tables]
 
       - { type: .bss, vram: 0x800D8030, name: sys/sys_main }

@@ -33,7 +33,6 @@ options:
   mnemonic_ljust: 12
   rom_address_padding: True
   dump_symbols: True
-  include_macro_inc: False
   libultra_symbols: True
   hardware_regs: True
 

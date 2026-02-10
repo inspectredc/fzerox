@@ -271,7 +271,7 @@ OSThread* func_80080884(void) {
     OSThread* queue = __osGetActiveQueue();
 
     while (queue->priority != -1) {
-        if ((queue->priority > 0) && (queue->priority < 0x7F) && (queue->flags & 3)) {
+        if ((queue->priority > 0) && (queue->priority < 0x7F) && (queue->flags & (OS_FLAG_CPU_BREAK | OS_FLAG_FAULT))) {
             return queue;
         }
         queue = queue->tlnext;

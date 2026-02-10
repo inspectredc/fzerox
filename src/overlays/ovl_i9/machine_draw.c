@@ -15575,7 +15575,7 @@ Gfx* Machine_DrawLoadCrazyBearTextures(Gfx* gfx) {
         gDPLoadMultiBlock(gfx++, aDecalCrazyBearEyeTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #ifdef EXPANSION_KIT
-    }              
+    }
 #endif
     gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
@@ -15626,7 +15626,7 @@ Gfx* Machine_DrawLoadHyperSpeederTextures(Gfx* gfx) {
         gDPLoadMultiBlock(gfx++, aDecalBeastFaceTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #ifdef EXPANSION_KIT
-    }              
+    }
 #endif
 
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15780,7 +15780,7 @@ Gfx* Machine_DrawLoadGreenPantherTextures(Gfx* gfx) {
         gDPLoadMultiBlock(gfx++, aDecalGreenPantherCamoTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #ifdef EXPANSION_KIT
-    }              
+    }
 #endif
 
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15828,7 +15828,7 @@ Gfx* Machine_DrawLoadLittleWyvernTextures(Gfx* gfx) {
         gDPLoadMultiBlock(gfx++, aDecalLittleWyvernStripeEndsTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
                           G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 #ifdef EXPANSION_KIT
-    }              
+    }
 #endif
 
     gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15940,7 +15940,7 @@ Gfx* Machine_DrawLoadIronTigerTextures(Gfx* gfx) {
         gDPLoadMultiBlock(gfx++, aDecalLeopardTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #ifdef EXPANSION_KIT
-    }              
+    }
 #endif
 
     gDPLoadMultiBlock_4b(gfx++, aAirDuct1Tex, 0x110, 2, G_IM_FMT_I, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -16034,7 +16034,7 @@ Gfx* Machine_DrawLoadFireStingrayTextures(Gfx* gfx) {
         gDPLoadMultiBlock(gfx++, aDecalFlamesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #ifdef EXPANSION_KIT
-    }              
+    }
 #endif
 
     gDPLoadMultiBlock_4b(gfx++, aAirDuct2Tex, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -16064,7 +16064,7 @@ Gfx* Machine_DrawLoadWildGooseTextures(Gfx* gfx) {
         gDPLoadMultiBlock(gfx++, aDecalWildGooseLightningTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #ifdef EXPANSION_KIT
-    }              
+    }
 #endif
 
     gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeTex, 0x110, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -16096,7 +16096,7 @@ Gfx* Machine_DrawLoadGoldenFoxTextures(Gfx* gfx) {
         gDPLoadMultiBlock(gfx++, aDecalGoldenFoxStripesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 #ifdef EXPANSION_KIT
-    }              
+    }
 #endif
 
     gDPLoadMultiBlock_4b(gfx++, aLogoGoldenFoxTex, 0x50, 2, G_IM_FMT_I, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -16128,7 +16128,7 @@ Gfx* Machine_DrawLoadBlueFalconTextures(Gfx* gfx) {
         gDPLoadMultiBlock(gfx++, aDecalBlueFalconWingCheckeredTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
                           G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 #ifdef EXPANSION_KIT
-    }              
+    }
 #endif
 
     gDPLoadMultiBlock_4b(gfx++, aDecalStripeTex, 0x50, 2, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
