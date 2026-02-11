@@ -1,3 +1,7 @@
+/*****************************
+ *    MFS Version A Only     *
+ *****************************/
+
 #include "leo/mfs.h"
 
 s32 Mfs_UpdateEntryCreationDate(u16 entryId, MfsTimeFormat* creationDate) {

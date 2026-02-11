@@ -1,3 +1,7 @@
+/*****************************
+ *    Expansion Kit Only     *
+ *****************************/
+
 #include "global.h"
 #include "leo/mfs.h"
 

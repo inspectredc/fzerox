@@ -1,3 +1,7 @@
+/*****************************
+ *    MFS Version B Only     *
+ *****************************/
+
 #include "leo/mfs.h"
 
 void Mfs_GetFATBlockSizeInfo(s32* totalBlocksSizePtr, s32* unusedBlocksSizePtr) {

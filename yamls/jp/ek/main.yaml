@@ -89,16 +89,16 @@
       - [0x6F50, c, game/course_gadgets]
       - [0x10AB0, c, game/EA20]
       - [0x10B20, c, game/EA90]
-      - [0x110B0, c, sys/disk_drive_dd]
-      - [0x11850, c, sys/sys_leo_dd]
+      - [0x110B0, c, sys/disk/disk_drive_dd]
+      - [0x11850, c, sys/disk/sys_leo_dd]
       - [0x15850, c, sys/dma]
       - [0x15AB0, c, sys/segment]
       - [0x17490, c, game/texture_utils]
       - [0x1AA20, c, game/common]
       - [0x1B6E0, c, game/texture_utils2]
       - [0x1C8B0, c, game/194E0]
-      - [0x1C8F0, c, sys/disk_mount_dd]
-      - [0x1C970, c, sys/leo_fault_dd]
+      - [0x1C8F0, c, sys/disk/disk_mount_dd]
+      - [0x1C970, c, sys/disk/leo_fault_dd]
       - [0x1D580, c, sys/sys_fault]
       - [0x1E970, c, game/bordered_box]
       - [0x1F320, c, game/camera]
@@ -302,7 +302,7 @@
       - [0x74100, c, leo/mfs/mfs_attr]
       - [0x744C0, c, leo/mfs/mfs_validate]
       - [0x74970, c, leo/mfs/mfs_copy]
-      - [0x75000, c, sys/75000]
+      - [0x75000, c, sys/disk/75000]
       - { start: 0x76660, type: textbin, use_src_path: True, name: rsp/aspmain }
 
       # Data
@@ -313,13 +313,13 @@
       - [0x7A130, .data, sys/controller]
       - [0x7A140, .data, sys/math]
       - [0x7A150, .data, game/course_gadgets]
-      - [0x7A340, .data, sys/disk_drive_dd]
-      - [0x7A350, .data, sys/sys_leo_dd]
+      - [0x7A340, .data, sys/disk/disk_drive_dd]
+      - [0x7A350, .data, sys/disk/sys_leo_dd]
       - [0x7A3D0, .data, sys/segment]
       - [0x7A450, .data, game/common]
       - [0x7A620, .data, game/194E0]
-      - [0x7A800, .data, sys/disk_mount_dd]
-      - [0x7A810, .data, sys/leo_fault_dd]
+      - [0x7A800, .data, sys/disk/disk_mount_dd]
+      - [0x7A810, .data, sys/disk/leo_fault_dd]
       - [0x7ACE0, .data, sys/sys_fault]
       - [0x7AEC0, .data, game/camera]
       - [0x7B0C0, .data, game/racer]
@@ -417,12 +417,12 @@
       - [0x80D70, .rodata, sys/math]
       - [0x80DF0, .rodata, game/course_gadgets]
       - [0x81210, .rodata, game/EA90]
-      - [0x81230, .rodata, sys/disk_drive_dd]
-      - [0x81500, .rodata, sys/sys_leo_dd]
+      - [0x81230, .rodata, sys/disk/disk_drive_dd]
+      - [0x81500, .rodata, sys/disk/sys_leo_dd]
       - [0x82EE0, .rodata, sys/segment]
       - [0x831E0, .rodata, game/common]
-      - [0x83620, .rodata, sys/disk_mount_dd]
-      - [0x83630, .rodata, sys/leo_fault_dd]
+      - [0x83620, .rodata, sys/disk/disk_mount_dd]
+      - [0x83630, .rodata, sys/disk/leo_fault_dd]
       - [0x83670, .rodata, sys/sys_fault]
       - [0x83BB0, .rodata, game/bordered_box]
       - [0x83BD0, .rodata, game/camera]
@@ -469,8 +469,8 @@
       - [0xA25E0, .rodata, leo/mfs/mfs_dir]
       - [0xA25F0, .rodata, leo/mfs/mfs_save]
 
-      - [0xA2610, .data, sys/75000]
-      - [0xA2630, .rodata, sys/75000]
+      - [0xA2610, .data, sys/disk/75000]
+      - [0xA2630, .rodata, sys/disk/75000]
       - { start: 0xA2690, type: databin, use_src_path: True, name: rsp/aspmain }
       - [0xA2970, .data, audio/disk/audio_tables]
       - { type: .bss, vram: 0x80795670, name: sys/sys_main }
@@ -480,11 +480,11 @@
       - { type: .bss, vram: 0x8079A4E0, name: sys/controller }
       - { type: .bss, vram: 0x8079A8A0, name: sys/math }
       - { type: .bss, vram: 0x8079E920, name: game/course_gadgets }
-      - { type: .bss, vram: 0x8079F950, name: sys/sys_leo_dd }
+      - { type: .bss, vram: 0x8079F950, name: sys/disk/sys_leo_dd }
       - { type: .bss, vram: 0x8079FA40, name: sys/segment }
       - { type: .bss, vram: 0x8079FAA0, name: game/common }
       - { type: .bss, vram: 0x8079FC10, name: game/194E0 }
-      - { type: .bss, vram: 0x8079FC80, name: sys/leo_fault_dd }
+      - { type: .bss, vram: 0x8079FC80, name: sys/disk/leo_fault_dd }
       - { type: .bss, vram: 0x8079FE80, name: sys/sys_fault }
       - { type: .bss, vram: 0x807A0870, name: game/bordered_box }
       - { type: .bss, vram: 0x807A0930, name: game/camera }
@@ -525,7 +525,7 @@
       - { type: bss, vram: 0x807C6E50, name: 807C6E50 } # pad
       - { type: .bss, vram: 0x807C6E60, name: leo/mfs/mfs_prepared_dir }
       - { type: .bss, vram: 0x807C6E70, name: leo/mfs/mfs_handlers }
-      - { type: .bss, vram: 0x807C6E90, name: sys/75000 }
+      - { type: .bss, vram: 0x807C6E90, name: sys/disk/75000 }
 
   - name: cartridge_offsets
     type: code

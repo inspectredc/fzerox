@@ -1,3 +1,7 @@
+/*****************************
+ *    MFS Version B Only     *
+ *****************************/
+
 #include "leo/mfs.h"
 
 s32 Mfs_ValidateFileSystemOperation(s32 validationFlags, u16 entryIndex, u16 subEntryIndex, u16 dirId) {

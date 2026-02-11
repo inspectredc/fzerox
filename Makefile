@@ -327,11 +327,7 @@ $(shell mkdir -p asm bin linker_scripts/$(VERSION)/$(REV)/auto)
 
 ifeq ($(EXPANSION_KIT),0)
 EXCLUSION_FILES := \
-src/sys/disk_drive_dd.c \
-src/sys/disk_mount_dd.c \
-src/sys/leo_fault_dd.c \
-src/sys/sys_leo_dd.c \
-src/sys/75000.c \
+src/sys/disk/% \
 src/overlays/ovl_i2/dd_save.c \
 src/overlays/ovl_i2/ovl_i2_data2.c \
 src/overlays/ovl_i10/187510.c \
@@ -342,11 +338,7 @@ src/overlays/ead_demo/% \
 src/audio/disk/%
 else
 EXCLUSION_FILES := \
-src/sys/disk_drive.c \
-src/sys/disk_mount.c \
-src/sys/leo_fault.c \
-src/sys/leo_presence.c \
-src/sys/sys_leo.c \
+src/sys/rom/% \
 src/overlays/ovl_i2/save_buffer.c \
 src/overlays/ovl_i11/% \
 src/audio/rom/% 

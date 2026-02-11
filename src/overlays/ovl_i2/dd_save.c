@@ -1,4 +1,8 @@
-#include "global.h"
+/*****************************
+ *    Expansion Kit Only     *
+ *****************************/
+
+ #include "global.h"
 #include "leo/mfs.h"
 #include "fzx_course.h"
 #include "fzx_save.h"
