@@ -189,7 +189,7 @@ OSMesg D_807C7070;
 unk_807C6F10* D_807C7074;
 OSMesg D_807C7078;
 OSMesgQueue* D_807C707C;
-#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/sys/75000/func_80767958.s")
+#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/sys/disk/75000/func_80767958.s")
 #endif
 
 s32 func_80767E30(void) {
