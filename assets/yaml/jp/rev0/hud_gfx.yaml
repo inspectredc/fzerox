@@ -7,7 +7,6 @@
     code:
       - '#include "macros.h"'
       - '#include ASSET_HEADER(hud_gfx.h)'
-      - '#include "macros.h"'
       - '#include ASSET_HEADER(course_track_gfx.h)'
     header:
       - '#include "gfx.h"'
