@@ -1,5 +1,9 @@
 #include "PR/os.h"
 
+#ifdef COMPILER_GCC
+#include "src/gcc_fix/missing_functions_gcc.inc.c"
+#endif
+
 unsigned long long __ull_rshift(unsigned long long a0, unsigned long long a1) {
     return a0 >> a1;
 }

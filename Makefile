@@ -126,7 +126,7 @@ else
 endif
 
 ifeq ($(COMPILER),gcc)
-  CFLAGS += -G 0 -ffast-math -fno-unsafe-math-optimizations -march=vr4300 -mfix4300 -mabi=32 -mno-abicalls -mdivide-breaks -fno-zero-initialized-in-bss -fno-toplevel-reorder -ffreestanding -fno-common -fno-merge-constants -mno-explicit-relocs -mno-split-addresses $(CHECK_WARNINGS) -funsigned-char
+  CFLAGS += -G 0 -ffast-math -fno-unsafe-math-optimizations -march=vr4300 -mfix4300 -mabi=32 -mno-abicalls -mdivide-breaks -fno-zero-initialized-in-bss -fno-toplevel-reorder -ffreestanding -fno-common -fno-merge-constants -mno-explicit-relocs -mno-split-addresses $(CHECK_WARNINGS) -funsigned-char -Wno-error=incompatible-pointer-types
   MIPS_VERSION := -mips3
 else
   # we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
@@ -489,8 +489,8 @@ else
 # $(BUILD_DIR)/src/libultra/libc/xlitob.o:  OPTFLAGS := -Os
 # $(BUILD_DIR)/src/libultra/libc/xldtob.o:  OPTFLAGS := -Os
 # $(BUILD_DIR)/src/libultra/libc/xprintf.o: OPTFLAGS := -Os
-# $(BUILD_DIR)/src/libultra/libc/ll.o:      OPTFLAGS := -O2
-# $(BUILD_DIR)/src/libultra/libc/ll.o: MIPS_VERSION := -mips3
+$(BUILD_DIR)/src/libultra/libc/ll.o:      OPTFLAGS := -O2
+$(BUILD_DIR)/src/libultra/libc/ll.o: MIPS_VERSION := -mips3
 
 # cc & asm-processor
 # $(BUILD_DIR)/src/libultra/gu/sqrtf.o:       OPTFLAGS := -Os
