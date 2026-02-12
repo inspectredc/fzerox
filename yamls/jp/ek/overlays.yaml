@@ -4,6 +4,7 @@
     dir: overlays/expansion_kit
     start: 0xA2E70
     vram: 0x80025C00
+    follows_vram: framebuffer3
     bss_size: 0x8380
     symbol_name_format: xk1_$VRAM
     subsegments:
@@ -51,6 +52,7 @@
   - name: expansion_kit_font
     type: code
     vram: 0x8003BBC0
+    follows_vram: expansion_kit
     bss_size: 0x10
     subsegments:
       - { type: .bss, vram: 0x8003BBC0, name: sys/expansion_kit_font }
@@ -58,6 +60,7 @@
   - name: leo_font
     type: code
     vram: 0x8003BBD0
+    follows_vram: expansion_kit_font
     bss_size: 0x3710
     subsegments:
       - { type: .bss, vram: 0x8003BBD0, name: sys/leo_font }
@@ -68,6 +71,7 @@
     dir: overlays/ovl_i3
     start: 0xB0AB0
     vram: 0x8003F2E0
+    follows_vram: leo_font
     bss_size: 0x21C0
     symbol_name_format: i3_$VRAM
     subsegments:
@@ -102,6 +106,7 @@
     dir: overlays/ovl_i4
     start: 0xDE7C0
     vram: 0x8006F1B0
+    follows_vram: ovl_i3
     bss_size: 0x30
     symbol_name_format: i4_$VRAM
     subsegments:
@@ -119,6 +124,7 @@
     dir: overlays/course_select
     start: 0xE6660
     vram: 0x80077080
+    follows_vram: ovl_i4
     bss_size: 0x40
     symbol_name_format: i5_$VRAM
     subsegments:
@@ -137,6 +143,7 @@
     dir: overlays/ovl_i6
     start: 0xEB850
     vram: 0x8007C2B0
+    follows_vram: course_select
     bss_size: 0xCCE0
     symbol_name_format: i6_$VRAM
     subsegments:
@@ -161,6 +168,7 @@
     dir: overlays/ending
     start: 0xF5080
     vram: 0x800927C0
+    follows_vram: ovl_i6
     bss_size: 0xDD0
     symbol_name_format: i7_$VRAM
     subsegments:
@@ -182,6 +190,7 @@
     dir: overlays/records
     start: 0xFCC60
     vram: 0x8009B170
+    follows_vram: ending
     bss_size: 0x1B0
     symbol_name_format: i8_$VRAM
     subsegments:
@@ -196,6 +205,7 @@
     dir: overlays/ovl_i2
     start: 0x1039E0
     vram: 0x800A20A0
+    follows_vram: records
     bss_size: 0x5BA0
     symbol_name_format: i2_$VRAM
     subsegments:
@@ -236,6 +246,7 @@
     dir: overlays/ovl_i9
     start: 0x132B30
     vram: 0x800D6D90
+    follows_vram: ovl_i2
     bss_size: 0x10
     symbol_name_format: i9_$VRAM
     subsegments:
@@ -249,6 +260,7 @@
     dir: overlays/ovl_i10
     start: 0x1872B0
     vram: 0x8012B520
+    follows_vram: ovl_i9
     symbol_name_format: i10_$VRAM
     subsegments:
       - [0x1872B0, c, 1459A0]
@@ -262,6 +274,7 @@
     dir: overlays/course_edit
     start: 0x188850
     vram: 0x800D6D90
+    follows_vram: ovl_i2
     bss_size: 0x210D0
     symbol_name_format: xk2_$VRAM
     subsegments:
@@ -322,6 +335,7 @@
     dir: overlays/machine_create
     start: 0x1CB1E0
     vram: 0x8012B520
+    follows_vram: ovl_i9
     bss_size: 0x6A0
     symbol_name_format: xk3_$VRAM
     subsegments:
@@ -362,6 +376,7 @@
     dir: overlays/ead_demo
     start: 0x1E0B00
     vram: 0x800D6D90
+    follows_vram: ovl_i2
     bss_size: 0x5080
     symbol_name_format: xk4_$VRAM
     subsegments:

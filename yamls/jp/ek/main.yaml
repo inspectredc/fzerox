@@ -530,6 +530,7 @@
   - name: cartridge_offsets
     type: code
     vram: 0x807C70A0
+    follows_vram: main
     bss_size: 0xF0
     subsegments:
       - { type: .bss, vram: 0x807C70A0, name: sys/cartridge_offsets }

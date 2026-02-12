@@ -607,7 +607,7 @@ s32 func_8009D16C(RacerSegmentPositionInfo* arg0, f32 arg1, f32 arg2, f32 arg3, 
     return 0;
 }
 
-#ifdef NON_EQUIVALENT
+#ifdef NON_MATCHING
 // Weird float/double calculations
 void func_8009DB28(CourseSegment* segment, f32* arg1, f32* arg2) {
     f64 temp_ft5;

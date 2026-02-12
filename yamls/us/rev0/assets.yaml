@@ -240,6 +240,7 @@
     dir: overlays/ovl_i11
     start: 0x524920
     vram: 0x800FC730
+    follows_vram: main
     symbol_name_format: i11_$VRAM
     subsegments:
       - [0x524920, c]

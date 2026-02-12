@@ -780,7 +780,7 @@ void Matrix_SetTransRot(Mtx* mtx, MtxF* mtxF, f32 scale, s32 xRot, s32 yRot, s32
     Matrix_ToMtx(mtxF, mtx);
 }
 
-#ifdef NON_EQUIVALENT
+#ifdef NON_MATCHING
 void Matrix_SetAxisRotation(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,
                             f32 arg9) {
     f32 sin;

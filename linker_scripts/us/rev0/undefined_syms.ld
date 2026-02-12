@@ -1,7 +1,3 @@
-// UNKNOWN
-// not sure which overlay this references / covers multiple overlays?
-D_80115DF0 = 0x80115DF0;
-
 // Segment A Textures are used like a track palette system and so need generalised references
 D_A000000 = 0x0A000000;
 D_A001000 = 0x0A001000;
@@ -22,8 +18,8 @@ D_A00B900 = 0x0A00B900;
 D_A00BB40 = 0x0A00BB40;
 D_A00BD80 = 0x0A00BD80;
 
-D_800D54A4 = 0x800D54A4;
-D_800D53B0 = 0x800D53B0;
-D_800D4CD8 = 0x800D4CD8;
-D_800D4EF0 = 0x800D4EF0;
-D_800D5308 = 0x800D5308;
+D_1000000 = 0x1000000;
+D_2000000 = 0x2000000;
+D_2028480 = 0x2028480;
+D_20284C0 = 0x20284C0;
+D_80000000 = 0x80000000;

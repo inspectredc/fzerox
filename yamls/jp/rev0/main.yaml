@@ -17,6 +17,7 @@
   - name: audio_context
     type: code
     vram: 0x80025C00
+    follows_vram: framebuffer_unused
     bss_size: 0x57D0
     subsegments:
       - { type: .bss, vram: 0x80025C00, name: audio/rom/lib/audio_context }
@@ -427,6 +428,7 @@
   - name: unk_gfx_segment
     type: code
     vram: 0x80225800
+    follows_vram: framebuffer2
     bss_size: 0x81340
     subsegments:
       - { type: .bss, vram: 0x80225800, name: game/unk_gfx_segment}
@@ -434,6 +436,7 @@
   - name: unk_bss_segment
     type: code
     vram: 0x80225800
+    follows_vram: framebuffer2
     bss_size: 0x284C0
     subsegments:
       - { type: .bss, vram: 0x80225800, name: game/unk_bss_segment}
@@ -441,6 +444,7 @@
   - name: gfxpool
     type: code
     vram: 0x8024DCE0
+    follows_vram: unk_bss_segment
     bss_size: 0x58D60
     subsegments:
       - { type: .bss, vram: 0x8024DCE0, name: game/gfxpool}
@@ -448,6 +452,7 @@
   - name: game_context
     type: code
     vram: 0x802A6B40
+    follows_vram: unk_gfx_segment
     bss_size: 0x2F100
     subsegments:
       - { type: .bss, vram: 0x802A6B40, name: game/game_context }
@@ -457,6 +462,7 @@
     exclusive_ram_id: buffer
     type: code
     vram: 0x802D5C40
+    follows_vram: game_context
     bss_size: 0x55000
     subsegments:
       - { type: .bss, vram: 0x802D5C40, name: sys/buffers }
