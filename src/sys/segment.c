@@ -62,6 +62,36 @@ u8* D_800CD350[] = {
 s32 D_8076CC40 = 0;
 #endif
 
+void Segment_LoadModOverlay(void) {
+  s8 expansionKit;
+  uintptr_t vramStart;
+  uintptr_t vramTextStart;
+  uintptr_t vramDataStart;
+  uintptr_t vramBssStart;
+  RomOffset romStart;
+  size_t segmentRomSize;
+  size_t segmentVramSize;
+  size_t segmentTextSize;
+  size_t segmentDataSize;
+  size_t segmentBssSize;
+
+  vramTextStart = SEGMENT_TEXT_START(ovl_save_state);
+  vramStart = SEGMENT_VRAM_START(ovl_save_state);
+  vramDataStart = SEGMENT_DATA_START(ovl_save_state);
+  vramBssStart = SEGMENT_BSS_START(ovl_save_state);
+  romStart = SEGMENT_ROM_START(ovl_save_state);
+  segmentTextSize = SEGMENT_TEXT_SIZE(ovl_save_state);
+  segmentDataSize = SEGMENT_DATA_SIZE(ovl_save_state);
+  segmentRomSize = SEGMENT_BSS_START(ovl_save_state) - SEGMENT_VRAM_START(ovl_save_state);
+  segmentVramSize = SEGMENT_VRAM_SIZE(ovl_save_state);
+  segmentBssSize = SEGMENT_BSS_SIZE(ovl_save_state);
+
+  CLEAR_TEXT_CACHE(vramTextStart, segmentTextSize);
+  CLEAR_DATA_CACHE(vramDataStart, segmentDataSize);
+  Dma_LoadOverlay(romStart, vramStart, segmentRomSize, vramBssStart, segmentBssSize);
+
+}
+
 extern uintptr_t gSegment17B1E0VramEnd;
 extern uintptr_t gSegment17B960VramEnd;
 extern s32 gGameMode;
@@ -672,6 +702,7 @@ void Segment_LoadOverlays(void) {
 #ifndef EXPANSION_KIT
     Segment_LoadOverlays2();
 #endif
+    Segment_LoadModOverlay();
     D_800CD2E0 = 1;
     Segment_SetupSegment4();
     Segment_SetupSegment7();

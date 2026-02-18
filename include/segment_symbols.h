@@ -155,3 +155,4 @@ DECLARE_SEGMENT(cartridge_offsets);
 #endif
 
 #endif
+DECLARE_SEGMENT(ovl_save_state);

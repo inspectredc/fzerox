@@ -443,6 +443,7 @@ void func_80068F04(void) {
 extern OSMesgQueue gSerialEventQueue;
 extern CourseInfo* gCurrentCourseInfo;
 extern u8 D_i2_80106F14[];
+extern void Mod_Entry(void);
 
 void func_800690FC(void) {
 #ifdef EXPANSION_KIT
@@ -634,6 +635,7 @@ void func_800690FC(void) {
 #ifndef EXPANSION_KIT
             func_80068DCC();
 #endif
+            Mod_Entry();
 
 #ifdef EXPANSION_KIT
             if (sp24ek == 1) {

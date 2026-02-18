@@ -302,3 +302,12 @@
     symbol_name_format: i10_$VRAM
     subsegments:
       - [0x1459A0, c]
+
+  - name: ovl_save_state
+    type: code
+    start: auto
+    vram: 0x80400000
+    exclusive_ram_id: mod
+    symbol_name_format: ovl_save_state_$VRAM
+    subsegments:
+      - [auto, c, game/mod]

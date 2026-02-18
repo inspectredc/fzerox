@@ -11,9 +11,9 @@ find-command = $(shell which $(1) 2>/dev/null)
 #### Defaults ####
 
 # If COMPARE is 1, check the output md5sum after building
-COMPARE ?= 1
+COMPARE ?= 0
 # If NON_MATCHING is 1, define the NON_MATCHING C flag when building
-NON_MATCHING ?= 0
+NON_MATCHING ?= 1
 # if WERROR is 1, pass -Werror to CC_CHECK, so warnings would be treated as errors
 WERROR ?= 0
 # Keep .mdebug section in build
@@ -596,7 +596,7 @@ disasm:
 $(ROMC): $(ROM)
 	$(call print,ROM->Compressed ROM:,$<,$@)
 ifeq ($(EXPANSION_KIT),0)
-	$(V)$(PYTHON) $(TOOLS)/compress.py $(ROM) $(ROMC) $(ELF) $(VERSION)
+	$(V)$(PYTHON) $(TOOLS)/compress.py -v $(ROM) $(ROMC) $(ELF) $(VERSION)
 	$(V)$(PYTHON) $(TOOLS)/fixcrc.py $(ROMC)
 else
 	$(V)$(PYTHON) $(TOOLS)/patch.py $(ROM) $(ROMC) $(ELF) $(VERSION)
