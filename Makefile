@@ -566,6 +566,7 @@ clean:
 	@git clean -fdx src/assets/$(VERSION)/$(REV) 
 	@git clean -fdx include/assets/$(VERSION)/$(REV) 
 	@git clean -fdx linker_scripts/$(VERSION)/$(REV)/*.ld
+	@git clean -fdx linker_scripts/$(VERSION)/$(REV)/auto
 
 format:
 	@$(PYTHON) $(TOOLS)/format.py -j $(N_THREADS)
