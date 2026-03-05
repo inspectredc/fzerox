@@ -17,6 +17,7 @@
   - name: audio_context
     type: code
     vram: 0x80025C00
+    follows_vram: framebuffer_unused
     bss_size: 0x57D0
     subsegments:
       - { type: .bss, vram: 0x80025C00, name: audio/rom/lib/audio_context }
@@ -53,8 +54,8 @@
       - [0x73F0, c, game/course_gadgets]
       - [0xEA20, c, game/EA20]
       - [0xEA90, c, game/EA90]
-      - [0xF0B0, c, sys/disk_drive]
-      - [0xF1C0, c, sys/sys_leo]
+      - [0xF0B0, c, sys/rom/disk_drive]
+      - [0xF1C0, c, sys/rom/sys_leo]
       - [0x10490, c, sys/dma]
       - [0x106F0, c, sys/segment]
       - [0x11CF0, c, game/object]
@@ -62,8 +63,8 @@
       - [0x179D0, c, game/common]
       - [0x18410, c, game/texture_utils2]
       - [0x194E0, c, game/194E0]
-      - [0x19520, c, sys/disk_mount]
-      - [0x197D0, c, sys/leo_fault]
+      - [0x19520, c, sys/rom/disk_mount]
+      - [0x197D0, c, sys/rom/leo_fault]
       - [0x19F30, pad]
       - [0x19F40, c, sys/sys_fault]
       - [0x1AA40, c, game/bordered_box]
@@ -217,13 +218,13 @@
       - [0x618E0, c, libultra/os/sethwinterrupt]
 
       # Microcode
-      - [0x61930, textbin, rspboot]
-      - [0x61A00, textbin, f3dex]
-      - [0x62D70, textbin, f3dlx]
-      - [0x63F00, textbin, f3dflx]
-      - [0x65090, textbin, l3dex]
-      - [0x66220, c, sys/leo_presence]
-      - [0x66270, textbin, aspmain]
+      - { start: 0x61930, type: textbin, use_src_path: True, name: rsp/rspboot }
+      - { start: 0x61A00, type: textbin, use_src_path: True, name: rsp/f3dex2 }
+      - { start: 0x62D70, type: textbin, use_src_path: True, name: rsp/f3dlx2 }
+      - { start: 0x63F00, type: textbin, use_src_path: True, name: rsp/f3dflx2 }
+      - { start: 0x65090, type: textbin, use_src_path: True, name: rsp/l3dex2 }
+      - [0x66220, c, sys/rom/leo_presence]
+      - { start: 0x66270, type: textbin, use_src_path: True, name: rsp/aspmain }
 
       # DATA - todo: split data
       - [0x66FA0, .data, sys/sys_main]
@@ -234,11 +235,11 @@
       - [0x67170, .data, sys/math]
       - [0x67180, .data, game/course_gadgets]
       - [0x672A0, .data, game/EA20]
-      - [0x672B0, .data, sys/sys_leo]
+      - [0x672B0, .data, sys/rom/sys_leo]
       - [0x672E0, .data, sys/segment]
       - [0x67380, .data, game/common]
       - [0x67510, .data, game/194E0]
-      - [0x67520, .data, sys/leo_fault]
+      - [0x67520, .data, sys/rom/leo_fault]
       - [0x676C0, .data, sys/sys_fault]
       - [0x678A0, .data, game/camera]
       - [0x67AA0, .data, game/racer]
@@ -334,12 +335,12 @@
       - [0x6D380, .rodata, sys/math]
       - [0x6D400, .rodata, game/course_gadgets]
       - [0x6D5D0, .rodata, game/EA90]
-      - [0x6D5F0, .rodata, sys/sys_leo]
+      - [0x6D5F0, .rodata, sys/rom/sys_leo]
       - [0x6D860, .rodata, sys/segment]
       - [0x6DB60, .rodata, game/object]
       - [0x6E310, .rodata, game/common]
       - [0x6E6B0, .rodata, game/194E0]
-      - [0x6E6C0, .rodata, sys/leo_fault]
+      - [0x6E6C0, .rodata, sys/rom/leo_fault]
       - [0x6E8B0, .rodata, sys/sys_fault]
       - [0x6EC60, .rodata, game/bordered_box]
       - [0x6EC80, .rodata, game/camera]
@@ -367,11 +368,11 @@
       - [0x70C70, .rodata, libultra/libc/xldtob]
 
       # DATA - Microcode
-      - [0x70CD0, data, f3dex]
-      - [0x710F0, data, f3dlx]
-      - [0x71500, data, f3dflx]
-      - [0x718B0, data, l3dex]
-      - [0x71CA0, data, aspmain]
+      - { start: 0x70CD0, type: databin, use_src_path: True, name: rsp/f3dex2 }
+      - { start: 0x710F0, type: databin, use_src_path: True, name: rsp/f3dlx2 }
+      - { start: 0x71500, type: databin, use_src_path: True, name: rsp/f3dflx2 }
+      - { start: 0x718B0, type: databin, use_src_path: True, name: rsp/l3dex2 }
+      - { start: 0x71CA0, type: databin, use_src_path: True, name: rsp/aspmain }
       - [0x71F80, .data, audio/rom/audio_tables]
 
       - { type: .bss, vram: 0x800D8030, name: sys/sys_main }
@@ -381,12 +382,12 @@
       - { type: .bss, vram: 0x800DCE70, name: sys/controller }
       - { type: .bss, vram: 0x800DD230, name: sys/math }
       - { type: .bss, vram: 0x800E12B0, name: game/course_gadgets }
-      - { type: .bss, vram: 0x800E32E0, name: sys/sys_leo }
+      - { type: .bss, vram: 0x800E32E0, name: sys/rom/sys_leo }
       - { type: .bss, vram: 0x800E3380, name: sys/segment }
       - { type: .bss, vram: 0x800E33E0, name: game/object }
       - { type: .bss, vram: 0x800E40F0, name: game/common }
       - { type: .bss, vram: 0x800E4260, name: game/194E0 }
-      - { type: .bss, vram: 0x800E4330, name: sys/leo_fault }
+      - { type: .bss, vram: 0x800E4330, name: sys/rom/leo_fault }
       - { type: .bss, vram: 0x800E47D0, name: sys/sys_fault }
       - { type: .bss, vram: 0x800E51B0, name: game/bordered_box }
       - { type: .bss, vram: 0x800E5220, name: game/camera }
@@ -430,6 +431,7 @@
   - name: unk_gfx_segment
     type: code
     vram: 0x80225800
+    follows_vram: framebuffer2
     bss_size: 0x81340
     subsegments:
       - { type: .bss, vram: 0x80225800, name: game/unk_gfx_segment}
@@ -437,6 +439,7 @@
   - name: unk_bss_segment
     type: code
     vram: 0x80225800
+    follows_vram: framebuffer2
     bss_size: 0x284C0
     subsegments:
       - { type: .bss, vram: 0x80225800, name: game/unk_bss_segment}
@@ -444,6 +447,7 @@
   - name: gfxpool
     type: code
     vram: 0x8024DCE0
+    follows_vram: unk_bss_segment
     bss_size: 0x58D60
     subsegments:
       - { type: .bss, vram: 0x8024DCE0, name: game/gfxpool}
@@ -451,6 +455,7 @@
   - name: game_context
     type: code
     vram: 0x802A6B40
+    follows_vram: unk_gfx_segment
     bss_size: 0x2F100
     subsegments:
       - { type: .bss, vram: 0x802A6B40, name: game/game_context }
@@ -460,6 +465,7 @@
     exclusive_ram_id: buffer
     type: code
     vram: 0x802D5C40
+    follows_vram: game_context
     bss_size: 0x55000
     subsegments:
       - { type: .bss, vram: 0x802D5C40, name: sys/buffers }

@@ -5,8 +5,9 @@
     - "assets/yaml/jp/rev0/course_track_gfx.yaml"
   header:
     code:
-      - '#include "assets/hud_gfx.h"'
-      - '#include "assets/course_track_gfx.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(hud_gfx.h)'
+      - '#include ASSET_HEADER(course_track_gfx.h)'
     header:
       - '#include "gfx.h"'
   tables:
@@ -268,167 +269,194 @@ aSupernovaTex:
 #   offset: 0x4CA8
 #   symbol: aSupernova8Tex
 
-aSmokeEffect1Tex:
+aSmokeEffectTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
-  height: 32
+  height: 256
   offset: 0x4EA8
-  symbol: aSmokeEffect1Tex
+  symbol: aSmokeEffectTex
 
-aSmokeEffect2Tex:
+# aSmokeEffect1Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x4EA8
+#   symbol: aSmokeEffect1Tex
+
+# aSmokeEffect2Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x50A8
+#   symbol: aSmokeEffect2Tex
+
+# aSmokeEffect3Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x52A8
+#   symbol: aSmokeEffect3Tex
+
+# aSmokeEffect4Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x54A8
+#   symbol: aSmokeEffect4Tex
+
+# aSmokeEffect5Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x56A8
+#   symbol: aSmokeEffect5Tex
+
+# aSmokeEffect6Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x58A8
+#   symbol: aSmokeEffect6Tex
+
+# aSmokeEffect7Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x5AA8
+#   symbol: aSmokeEffect7Tex
+
+# aSmokeEffect8Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x5CA8
+#   symbol: aSmokeEffect8Tex
+
+aPitForceFieldTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 32
-  height: 32
-  offset: 0x50A8
-  symbol: aSmokeEffect2Tex
-
-aSmokeEffect3Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x52A8
-  symbol: aSmokeEffect3Tex
-
-aSmokeEffect4Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x54A8
-  symbol: aSmokeEffect4Tex
-
-aSmokeEffect5Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x56A8
-  symbol: aSmokeEffect5Tex
-
-aSmokeEffect6Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x58A8
-  symbol: aSmokeEffect6Tex
-
-aSmokeEffect7Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x5AA8
-  symbol: aSmokeEffect7Tex
-
-aSmokeEffect8Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x5CA8
-  symbol: aSmokeEffect8Tex
-
-aPitForceField1Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
+  height: 256
   offset: 0x5EA8
-  symbol: aPitForceField1Tex
+  symbol: aPitForceFieldTex
 
-aPitForceField2Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x60A8
-  symbol: aPitForceField2Tex
+# aPitForceField1Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x5EA8
+#   symbol: aPitForceField1Tex
 
-aPitForceField3Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x62A8
-  symbol: aPitForceField3Tex
+# aPitForceField2Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x60A8
+#   symbol: aPitForceField2Tex
 
-aPitForceField4Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x64A8
-  symbol: aPitForceField4Tex
+# aPitForceField3Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x62A8
+#   symbol: aPitForceField3Tex
 
-aPitForceField5Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x66A8
-  symbol: aPitForceField5Tex
+# aPitForceField4Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x64A8
+#   symbol: aPitForceField4Tex
 
-aPitForceField6Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x68A8
-  symbol: aPitForceField6Tex
+# aPitForceField5Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x66A8
+#   symbol: aPitForceField5Tex
 
-aPitForceField7Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x6AA8
-  symbol: aPitForceField7Tex
+# aPitForceField6Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x68A8
+#   symbol: aPitForceField6Tex
 
-aPitForceField8Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 32
-  height: 32
-  offset: 0x6CA8
-  symbol: aPitForceField8Tex
+# aPitForceField7Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x6AA8
+#   symbol: aPitForceField7Tex
 
-aFallExplosion1Tex:
+# aPitForceField8Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 32
+#   height: 32
+#   offset: 0x6CA8
+#   symbol: aPitForceField8Tex
+
+aFallExplosionTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 64
-  height: 64
+  height: 128
   offset: 0x6EA8
-  symbol: aFallExplosion1Tex
+  symbol: aFallExplosionTex
 
-aFallExplosion2Tex:
-  type: TEXTURE
-  ctype: u8
-  format: I4
-  width: 64
-  height: 64
-  offset: 0x76A8
-  symbol: aFallExplosion2Tex
+# aFallExplosion1Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 64
+#   height: 64
+#   offset: 0x6EA8
+#   symbol: aFallExplosion1Tex
+
+# aFallExplosion2Tex:
+#   type: TEXTURE
+#   ctype: u8
+#   format: I4
+#   width: 64
+#   height: 64
+#   offset: 0x76A8
+#   symbol: aFallExplosion2Tex
 
 D_4007EA8:
   type: GFX

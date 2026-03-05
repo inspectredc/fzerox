@@ -1,6 +1,13 @@
 #include "global.h"
 #include "fzx_thread.h"
 
+#ifdef EXPANSION_KIT
+s32 sIdleThreadCounter;
+s32 sMainThreadCounter;
+s32 sGameThreadCounter;
+s32 sAudioThreadCounter;
+s32 sSys6ThreadCounter;
+#endif
 FaultMgr gFaultMgr;
 
 u8 sFaultCharIndex[0x80] = {
@@ -150,7 +157,15 @@ void Fault_DisplayFloatException(u32 exceptFlags) {
     }
 }
 
+extern char sIdleThreadStack[];
+extern char sMainThreadStack[];
+extern char sGameThreadStack[];
+extern char sSys6ThreadStack[];
+extern char sAudioThreadStack[];
+extern const char* sFaultCauses[];
 extern OSMesgQueue gSerialEventQueue;
+extern Controller gSharedController;
+
 const u16 sCrashDebuggerInputs[] = { BTN_A, BTN_CUP,    BTN_CUP, BTN_B,      BTN_CRIGHT, BTN_CRIGHT,
                                      BTN_B, BTN_CRIGHT, BTN_B,   BTN_CRIGHT, BTN_START };
 
@@ -227,6 +242,26 @@ void Fault_DisplayDebugInfo(OSThread* thread) {
     Fault_DisplayFloatReg(210, 210, 28, &context->fp28.f.f_even);
     Fault_DisplayFloatReg(30, 220, 30, &context->fp30.f.f_even);
 
+#ifdef EXPANSION_KIT
+    for (sIdleThreadCounter = 0; ((u64*) sIdleThreadStack)[sIdleThreadCounter] == 0x8877665544332211;
+         sIdleThreadCounter++) {}
+
+    for (sMainThreadCounter = 0; ((u64*) sMainThreadStack)[sMainThreadCounter] == 0x8877665544332211;
+         sMainThreadCounter++) {}
+
+    for (sGameThreadCounter = 0; ((u64*) sGameThreadStack)[sGameThreadCounter] == 0x8877665544332211;
+         sGameThreadCounter++) {}
+
+    for (sAudioThreadCounter = 0; ((u64*) sAudioThreadStack)[sAudioThreadCounter] == 0x8877665544332211;
+         sAudioThreadCounter++) {}
+
+    for (sSys6ThreadCounter = 0; ((u64*) sSys6ThreadStack)[sSys6ThreadCounter] == 0x8877665544332211;
+         sSys6ThreadCounter++) {}
+
+    Fault_Printf(120, 220, "I%dT%dG%dA%dD%d", sIdleThreadCounter, sMainThreadCounter, sGameThreadCounter,
+                 sAudioThreadCounter, sSys6ThreadCounter);
+#endif
+
     osViBlack(false);
 
     osViSwapBuffer(gFaultMgr.fb);
@@ -236,7 +271,7 @@ OSThread* func_80080884(void) {
     OSThread* queue = __osGetActiveQueue();
 
     while (queue->priority != -1) {
-        if ((queue->priority > 0) && (queue->priority < 0x7F) && (queue->flags & 3)) {
+        if ((queue->priority > 0) && (queue->priority < 0x7F) && (queue->flags & (OS_FLAG_CPU_BREAK | OS_FLAG_FAULT))) {
             return queue;
         }
         queue = queue->tlnext;
@@ -253,11 +288,17 @@ void Fault_ThreadEntry(void* arg) {
 
     faultedThread = NULL;
     while (faultedThread == NULL) {
-        MQ_WAIT_FOR_MESG(&gFaultMgr.mesgQueue, &dummy);
+        osRecvMesg(&gFaultMgr.mesgQueue, &dummy, OS_MESG_BLOCK);
         faultedThread = func_80080884();
     }
+#ifndef EXPANSION_KIT
     Fault_DisplayDebugInfo(faultedThread);
     while (true) {}
+#else
+    while (true) {
+        Fault_DisplayDebugInfo(faultedThread);
+    }
+#endif
 }
 
 void Fault_SetFrameBuffer(FrameBuffer* buffer, u16 width, u16 height) {
@@ -275,3 +316,80 @@ void Fault_Init(void) {
                    gFaultMgr.stack + sizeof(gFaultMgr.stack), 250);
     osStartThread(&gFaultMgr.thread);
 }
+
+#ifdef EXPANSION_KIT
+void Fault_DisplayDebugInfo2(OSThread* thread) {
+    __OSThreadContext* context = &thread->context;
+    s16 causeIndex = CAUSE_INDEX(context->cause);
+    s32 i;
+    u64* temp_v1;
+    u64* var_v0;
+
+    if (causeIndex == CAUSE_INDEX(EXC_WATCH)) {
+        causeIndex = 16;
+    }
+    if (causeIndex == CAUSE_INDEX(EXC_VCED)) {
+        causeIndex = 17;
+    }
+    gFaultMgr.fb = osViGetCurrentFramebuffer();
+    osWritebackDCacheAll();
+    temp_v1 = &gFaultMgr.fb->buffer[1600];
+    var_v0 = &gFaultMgr.fb->buffer[19199];
+    while (var_v0 >= temp_v1) {
+        *(--var_v0 + 1) = 0x0001000100010001;
+    }
+
+    Fault_Printf(30, 25, "THREAD:%d  (%s)", thread->id, sFaultCauses[causeIndex]);
+    Fault_Printf(30, 35, "PC:%08XH   SR:%08XH   VA:%08XH", context->pc, context->sr, context->badvaddr);
+    Fault_Printf(30, 50, "AT:%08XH   V0:%08XH   V1:%08XH", (s32) context->at, (s32) context->v0, (s32) context->v1);
+    Fault_Printf(30, 60, "A0:%08XH   A1:%08XH   A2:%08XH", (s32) context->a0, (s32) context->a1, (s32) context->a2);
+    Fault_Printf(30, 70, "A3:%08XH   T0:%08XH   T1:%08XH", (s32) context->a3, (s32) context->t0, (s32) context->t1);
+    Fault_Printf(30, 80, "T2:%08XH   T3:%08XH   T4:%08XH", (s32) context->t2, (s32) context->t3, (s32) context->t4);
+    Fault_Printf(30, 90, "T5:%08XH   T6:%08XH   T7:%08XH", (s32) context->t5, (s32) context->t6, (s32) context->t7);
+    Fault_Printf(30, 100, "S0:%08XH   S1:%08XH   S2:%08XH", (s32) context->s0, (s32) context->s1, (s32) context->s2);
+    Fault_Printf(30, 110, "S3:%08XH   S4:%08XH   S5:%08XH", (s32) context->s3, (s32) context->s4, (s32) context->s5);
+    Fault_Printf(30, 120, "S6:%08XH   S7:%08XH   T8:%08XH", (s32) context->s6, (s32) context->s7, (s32) context->t8);
+    Fault_Printf(30, 130, "T9:%08XH   GP:%08XH   SP:%08XH", (s32) context->t9, (s32) context->gp, (s32) context->sp);
+    Fault_Printf(30, 140, "S8:%08XH   RA:%08XH", (s32) context->s8, (s32) context->ra);
+    Fault_DisplayFloatException(context->fpcsr);
+
+    Fault_DisplayFloatReg(30, 170, 0, &context->fp0.f.f_even);
+    Fault_DisplayFloatReg(120, 170, 2, &context->fp2.f.f_even);
+    Fault_DisplayFloatReg(210, 170, 4, &context->fp4.f.f_even);
+    Fault_DisplayFloatReg(30, 180, 6, &context->fp6.f.f_even);
+    Fault_DisplayFloatReg(120, 180, 8, &context->fp8.f.f_even);
+    Fault_DisplayFloatReg(210, 180, 10, &context->fp10.f.f_even);
+    Fault_DisplayFloatReg(30, 190, 12, &context->fp12.f.f_even);
+    Fault_DisplayFloatReg(120, 190, 14, &context->fp14.f.f_even);
+    Fault_DisplayFloatReg(210, 190, 16, &context->fp16.f.f_even);
+    Fault_DisplayFloatReg(30, 200, 18, &context->fp18.f.f_even);
+    Fault_DisplayFloatReg(120, 200, 20, &context->fp20.f.f_even);
+    Fault_DisplayFloatReg(210, 200, 22, &context->fp22.f.f_even);
+    Fault_DisplayFloatReg(30, 210, 24, &context->fp24.f.f_even);
+    Fault_DisplayFloatReg(120, 210, 26, &context->fp26.f.f_even);
+    Fault_DisplayFloatReg(210, 210, 28, &context->fp28.f.f_even);
+    Fault_DisplayFloatReg(30, 220, 30, &context->fp30.f.f_even);
+
+    for (sIdleThreadCounter = 0; ((u64*) sIdleThreadStack)[sIdleThreadCounter] == 0x8877665544332211;
+         sIdleThreadCounter++) {}
+
+    for (sMainThreadCounter = 0; ((u64*) sMainThreadStack)[sMainThreadCounter] == 0x8877665544332211;
+         sMainThreadCounter++) {}
+
+    for (sGameThreadCounter = 0; ((u64*) sGameThreadStack)[sGameThreadCounter] == 0x8877665544332211;
+         sGameThreadCounter++) {}
+
+    for (sAudioThreadCounter = 0; ((u64*) sAudioThreadStack)[sAudioThreadCounter] == 0x8877665544332211;
+         sAudioThreadCounter++) {}
+
+    for (sSys6ThreadCounter = 0; ((u64*) sSys6ThreadStack)[sSys6ThreadCounter] == 0x8877665544332211;
+         sSys6ThreadCounter++) {}
+
+    Fault_Printf(120, 220, "I%dT%dG%dA%dD%d", sIdleThreadCounter, sMainThreadCounter, sGameThreadCounter,
+                 sAudioThreadCounter, sSys6ThreadCounter);
+
+    osWritebackDCacheAll();
+
+    osViBlack(false);
+}
+#endif

@@ -1140,10 +1140,37 @@ typedef struct {
 } Mtx_u;
 
 typedef union {
-	Mtx_u		u;
     Mtx_t		m;
+	Mtx_u		u;
     long long int	force_structure_alignment;
 } Mtx;
+
+#define IPART(x) (((s32)((x) * 0x10000) >> 16) & 0xFFFF)
+#define FPART(x)  ((s32)((x) * 0x10000) & 0xFFFF)
+
+#define gdSPDefMtx( \
+        xx, xy, xz, xw, \
+        yx, yy, yz, yw, \
+        zx, zy, zz, zw, \
+        wx, wy, wz, ww) \
+    { { \
+        (IPART(xx) << 16) | IPART(yx), \
+        (IPART(zx) << 16) | IPART(wx), \
+        (IPART(xy) << 16) | IPART(yy), \
+        (IPART(zy) << 16) | IPART(wy), \
+        (IPART(xz) << 16) | IPART(yz), \
+        (IPART(zz) << 16) | IPART(wz), \
+        (IPART(xw) << 16) | IPART(yw), \
+        (IPART(zw) << 16) | IPART(ww), \
+        (FPART(xx) << 16) | FPART(yx), \
+        (FPART(zx) << 16) | FPART(wx), \
+        (FPART(xy) << 16) | FPART(yy), \
+        (FPART(zy) << 16) | FPART(wy), \
+        (FPART(xz) << 16) | FPART(yz), \
+        (FPART(zz) << 16) | FPART(wz), \
+        (FPART(xw) << 16) | FPART(yw), \
+        (FPART(zw) << 16) | FPART(ww), \
+    } }
 
 /*
  * Viewport

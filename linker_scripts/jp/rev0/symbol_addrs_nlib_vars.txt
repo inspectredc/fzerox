@@ -8,3 +8,5 @@ gspF3DLX2_Rej_fifoTextStart = 0x800C8DD0; //name_end:gspF3DLX2_Rej_fifoTextEnd
 gspF3DLX2_Rej_fifoDataStart = 0x800D70E0; //name_end:gspF3DLX2_Rej_fifoDataEnd
 gspF3DFLX2_Rej_fifoTextStart = 0x800C9F60; //name_end:gspF3DFLX2_Rej_fifoTextEnd
 gspF3DFLX2_Rej_fifoDataStart = 0x800D74F0; //name_end:gspF3DFLX2_Rej_fifoDataEnd
+gspL3DEX2_fifoTextStart = 0x800CB0F0; //name_end:gspL3DEX2_fifoTextEnd
+gspL3DEX2_fifoDataStart = 0x800D78C0; //name_end:gspL3DEX2_fifoDataEnd

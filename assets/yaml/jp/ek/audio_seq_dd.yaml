@@ -1,0 +1,171 @@
+:config:
+  header:
+    code:
+      - '#include "aseq.h"'
+      - '#include "libultra/ultra64.h"'
+    header:
+      - '#include "libultra/ultra64.h"'
+
+aAudioSeqDDGuitar:
+  type: FZX:SEQUENCE
+  offset: 0x26C520
+  size: 0x30
+  force_large_notes: true
+  symbol: aAudioSeqDDGuitar
+
+aAudioSeqDDSE:
+  type: FZX:SEQUENCE
+  offset: 0x26C550
+  size: 0xB50
+  force_large_notes: true
+  has_footer: true
+  symbol: aAudioSeqDDSE
+
+aAudioSeqDDMuteCity:
+  type: FZX:SEQUENCE
+  offset: 0x26D0A0
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDMuteCity
+
+aAudioSeqDDSilence:
+  type: FZX:SEQUENCE
+  offset: 0x26D0E0
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDSilence
+
+aAudioSeqDDSandOcean:
+  type: FZX:SEQUENCE
+  offset: 0x26D120
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDSandOcean
+
+aAudioSeqDDPortTown:
+  type: FZX:SEQUENCE
+  offset: 0x26D160
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDPortTown
+
+aAudioSeqDDBigBlue:
+  type: FZX:SEQUENCE
+  offset: 0x26D1A0
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDBigBlue
+
+aAudioSeqDDDevilsForest:
+  type: FZX:SEQUENCE
+  offset: 0x26D1E0
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDDevilsForest
+
+aAudioSeqDDRedCanyon:
+  type: FZX:SEQUENCE
+  offset: 0x26D220
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDRedCanyon
+
+aAudioSeqDDSector:
+  type: FZX:SEQUENCE
+  offset: 0x26D260
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDSector
+
+aAudioSeqDDWhiteLand:
+  type: FZX:SEQUENCE
+  offset: 0x26D2A0
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDWhiteLand
+
+aAudioSeqDDRainbowRoad:
+  type: FZX:SEQUENCE
+  offset: 0x26D2E0
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDRainbowRoad
+
+aAudioSeqDDNew03:
+  type: FZX:SEQUENCE
+  offset: 0x26D320
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDNew03
+
+aAudioSeqDDNew02:
+  type: FZX:SEQUENCE
+  offset: 0x26D360
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDNew02
+
+aAudioSeqDDNew01:
+  type: FZX:SEQUENCE
+  offset: 0x26D3A0
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDNew01
+
+aAudioSeqDDNew04:
+  type: FZX:SEQUENCE
+  offset: 0x26D3E0
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDNew04
+
+aAudioSeqDDTitle:
+  type: FZX:SEQUENCE
+  offset: 0x26D420
+  size: 0x30
+  force_large_notes: true
+  symbol: aAudioSeqDDTitle
+
+aAudioSeqDDSelect:
+  type: FZX:SEQUENCE
+  offset: 0x26D450
+  size: 0x30
+  force_large_notes: true
+  symbol: aAudioSeqDDSelect
+
+aAudioSeqDDOption:
+  type: FZX:SEQUENCE
+  offset: 0x26D480
+  size: 0x30
+  force_large_notes: true
+  symbol: aAudioSeqDDOption
+
+aAudioSeqDDDeathRace:
+  type: FZX:SEQUENCE
+  offset: 0x26D4B0
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDDeathRace
+
+aAudioSeqDDCourseEditor:
+  type: FZX:SEQUENCE
+  offset: 0x26D4F0
+  size: 0x1930
+  force_large_notes: true
+  has_jump_bug: true
+  symbol: aAudioSeqDDCourseEditor
+
+aAudioSeqDDMachineEditor:
+  type: FZX:SEQUENCE
+  offset: 0x26EE20
+  size: 0x13B0
+  force_large_notes: true
+  has_jump_bug: true
+  symbol: aAudioSeqDDMachineEditor
+
+aAudioSeqDDEADDemo:
+  type: FZX:SEQUENCE
+  offset: 0x2701D0
+  size: 0x40
+  force_large_notes: true
+  symbol: aAudioSeqDDEADDemo

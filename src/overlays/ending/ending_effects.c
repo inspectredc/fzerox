@@ -4,9 +4,9 @@
 #include "fzx_racer.h"
 #include "fzx_machine.h"
 #include "fzx_camera.h"
-#include "assets/course_track_gfx.h"
-#include "assets/hud_gfx.h"
-#include "assets/common_assets_compressed.h"
+#include ASSET_HEADER(course_track_gfx.h)
+#include ASSET_HEADER(hud_gfx.h)
+#include ASSET_HEADER(common_assets_compressed.h)
 
 s16 sFireworksLauncherCount;
 s16 gActiveFireworks;

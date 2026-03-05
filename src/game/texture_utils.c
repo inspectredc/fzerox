@@ -1,5 +1,5 @@
 #include "global.h"
-#include "assets/setup_gfx.h"
+#include ASSET_HEADER(setup_gfx.h)
 
 Gfx* func_8007A440(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha) {
 
@@ -127,8 +127,14 @@ Gfx* func_8007AD44(Gfx* gfx, u16 red, u16 green, u16 blue, s32 left, s32 top, s3
     return gfx;
 }
 
+extern Gfx D_8076CAF8[];
+
 Gfx* func_8007AE70(Gfx* gfx) {
+#ifndef EXPANSION_KIT
     gSPDisplayList(gfx++, D_3000170);
+#else
+    gSPDisplayList(gfx++, D_8076CAF8);
+#endif
     return gfx;
 }
 

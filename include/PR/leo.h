@@ -60,7 +60,10 @@ typedef struct
 typedef	struct
 {
   u64		lineNumber;
-  LEODiskTime	time;
+  union {
+    LEODiskTime	time;
+    u64 rawTime;
+  };
 } LEOSerialNum;
 
 typedef struct

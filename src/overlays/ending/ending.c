@@ -8,11 +8,22 @@
 #include "fzx_machine.h"
 #include "fzx_camera.h"
 #include "fzx_font.h"
-#include "assets/course_track_gfx.h"
-#include "assets/machine_custom_gfx.h"
-#include "assets/hud_gfx.h"
-#include "assets/podium_gfx.h"
-#include "assets/common_assets_compressed.h"
+#ifndef EXPANSION_KIT
+#include ASSET_HEADER(course_track_gfx.h)
+#include ASSET_HEADER(machine_custom_gfx.h)
+#include ASSET_HEADER(podium_gfx.h)
+#endif
+#include ASSET_HEADER(hud_gfx.h)
+#include ASSET_HEADER(common_assets_compressed.h)
+
+#ifdef EXPANSION_KIT
+// FAKE! BSS issues
+extern Gfx D_5000178[];
+extern Gfx D_5001E38[];
+extern Gfx D_5002B18[];
+extern Gfx D_8014940[];
+extern u16 aTimerSymbolsTex[];
+#endif
 
 PodiumDrawData* gPodiumDrawDataPtr;
 s16 sTotalRacersKOd;
@@ -36,7 +47,11 @@ EndingCutsceneResults sEndingCutsceneResults[10];
 Podium gPodiums[3];
 u16 gPodiumActiveFlags;
 Vec3f sPodiumHoleVtxPositions[7];
+#ifdef EXPANSION_KIT
+s16 sHasBeatenEveryMasterCup;
+#endif
 // FAKE! BSS REORDER PADDING
+#ifndef EXPANSION_KIT
 UNUSED s8 D_i7_8014BF84;
 UNUSED s8 D_i7_8014BF85;
 UNUSED s8 D_i7_8014BF86;
@@ -44,6 +59,7 @@ UNUSED s8 D_i7_8014BF87;
 UNUSED s8 D_i7_8014BF88;
 UNUSED s8 D_i7_8014BF89;
 UNUSED s8 D_i7_8014BF8A;
+#endif
 
 extern s16 D_800CCFE8;
 extern s32 gCupType;
@@ -54,6 +70,7 @@ extern s32 gCourseIndex;
 extern RaceStats gCupRaceStats[1][6];
 extern s32 D_i2_80106F10;
 extern s16 gPlayer1OverallPosition;
+extern s8 D_8079FB28[];
 
 extern s32 gNumPlayers;
 extern s32 gDifficulty;
@@ -130,7 +147,12 @@ s16 sEndingCutsceneResultsScript[] = {
 
 char sTotalRankingStr[] = "TOTAL RANKING";
 
+#ifndef EXPANSION_KIT
 const char* sCupNames[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP", "EDIT CUP", "X CUP" };
+#else
+const char* sCupNames[] = { "JACK CUP", "QUEEN CUP", "KING CUP", "JOKER CUP",
+                            "EDIT CUP", "X CUP",     "DD-1 CUP", "DD-2 CUP" };
+#endif
 
 char sThanksForPlayingStr[] = "THANKS FOR PLAYING!!";
 
@@ -175,6 +197,30 @@ s32 EndingCutscene_GetEndScreenIndex(s32 difficulty, s16 character, s8 customTyp
     }
     return endScreenCharacterIndex;
 }
+
+#ifdef EXPANSION_KIT
+bool EndingCutscene_HasBeatenEveryMasterCup(void) {
+    s8* cupCompletion;
+    s32 i;
+    bool beatenEveryMasterCup;
+
+    cupCompletion = Arena_Allocate(ALLOC_FRONT, NUM_DIFFICULTIES * TOTAL_RACER_COUNT * NUM_COMPETITIVE_CUPS);
+    Save_UpdateCupSave(cupCompletion);
+
+    beatenEveryMasterCup = false;
+    cupCompletion += MASTER * TOTAL_RACER_COUNT * NUM_COMPETITIVE_CUPS;
+    for (i = 0; i < TOTAL_RACER_COUNT * NUM_COMPETITIVE_CUPS; i++, cupCompletion++) {
+        if (*cupCompletion == 0) {
+            break;
+        }
+    }
+    if (i == TOTAL_RACER_COUNT * NUM_COMPETITIVE_CUPS) {
+        beatenEveryMasterCup = true;
+    }
+
+    return beatenEveryMasterCup;
+}
+#endif
 
 void EndingCutscene_Init(void) {
     EndingCutsceneResults* cutsceneResults;
@@ -225,6 +271,12 @@ void EndingCutscene_Init(void) {
     if (gForceCredits) {
         gForceCredits = false;
         gEndingFlags |= ENDING_FOLLOW_WITH_CREDITS;
+#ifdef EXPANSION_KIT
+    } else if (gCupType == DD_2_CUP) {
+        if ((D_8079FB28[0] >= 3) && (D_8079FB28[1] >= 3) && (gPlayer1OverallPosition == 1)) {
+            gEndingFlags |= ENDING_FOLLOW_WITH_CREDITS;
+        }
+#endif
     } else if (gUnlockableLevel >= 2) {
         switch (sCupDifficulty) {
             case EXPERT:
@@ -270,6 +322,14 @@ void EndingCutscene_Init(void) {
         case EDIT_CUP:
             sCupNameIndex = 4;
             break;
+#ifdef EXPANSION_KIT
+        case DD_1_CUP:
+            sCupNameIndex = 6;
+            break;
+        case DD_2_CUP:
+            sCupNameIndex = 7;
+            break;
+#endif
     }
     sCupNameWidth = Font_GetStringWidth(sCupNames[sCupNameIndex], FONT_SET_3, 1);
     sDrawThanksForPlaying = false;
@@ -328,6 +388,9 @@ void EndingCutscene_Init(void) {
         cutsceneResults++;
     }
     sTotalScrollResults = cutsceneResults - sEndingCutsceneResults;
+#ifdef EXPANSION_KIT
+    sHasBeatenEveryMasterCup = EndingCutscene_HasBeatenEveryMasterCup();
+#endif
     func_80078104(aCongratulationsTex, TEX_SIZE(aCongratulationsTex, sizeof(u16)), 0, 0, 0);
     func_80078104(aFinalResultPosition0Tex, TEX_SIZE(aFinalResultPosition0Tex, sizeof(u16)), 0, 0, 0);
     func_80078104(aFinalResultPosition1Tex, TEX_SIZE(aFinalResultPosition1Tex, sizeof(u16)), 0, 0, 0);
@@ -364,7 +427,7 @@ void EndingCutscene_Init(void) {
 }
 
 extern s32 D_800DCCFC;
-extern Controller gSharedController;
+extern s32 gPostEadDemoGameMode;
 
 s32 EndingCutscene_Update(void) {
 
@@ -389,6 +452,12 @@ s32 EndingCutscene_Update(void) {
         case 1:
             return GAMEMODE_FLX_MAIN_MENU;
         case 2:
+#ifdef EXPANSION_KIT
+            if (sHasBeatenEveryMasterCup) {
+                gPostEadDemoGameMode = GAMEMODE_FLX_UNSKIPPABLE_CREDITS;
+                return GAMEMODE_EAD_DEMO;
+            }
+#endif
             return GAMEMODE_FLX_UNSKIPPABLE_CREDITS;
         case 0:
         default:
@@ -560,6 +629,8 @@ s32 EndingCutscene_UpdateState(void) {
     return exitState;
 }
 
+extern Gfx D_8076CE28[];
+
 Gfx* EndingCutscene_Draw(Gfx* gfx) {
 
     if (D_i2_80106F10 != 0) {
@@ -577,7 +648,11 @@ Gfx* EndingCutscene_Draw(Gfx* gfx) {
         gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     }
 
+#ifndef EXPANSION_KIT
     gSPDisplayList(gfx++, D_303A810);
+#else
+    gSPDisplayList(gfx++, D_8076CE28);
+#endif
     gDPPipeSync(gfx++);
     gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
 

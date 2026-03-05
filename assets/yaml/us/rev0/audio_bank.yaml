@@ -1,7 +1,8 @@
 :config:
   header:
     code:
-      - '#include "assets/audio_bank.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(audio_bank.h)'
       - '#include "libultra/ultra64.h"'
     header:
       - '#include "audio.h"'

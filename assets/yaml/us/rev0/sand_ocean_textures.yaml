@@ -3,7 +3,8 @@
     - [0x0A,  0x243D90]
   header:
     code:
-      - '#include "assets/sand_ocean_textures.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(sand_ocean_textures.h)'
     header:
       - '#include "gfx.h"'
 

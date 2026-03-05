@@ -9,10 +9,12 @@ char sIdleThreadStack[0x200];
 char sMainThreadStack[0x400];
 char sGameThreadStack[0x1000];
 char sAudioThreadStack[0x800];
-#ifdef EXPANSION_KIT
-char sSys6ThreadStack[0x1000];
-#endif
+#ifndef EXPANSION_KIT
 char sResetThreadStack[0x1200];
+#else
+char sSys6ThreadStack[0x1000];
+char sResetThreadStack[0x200];
+#endif
 UNUSED char sUnusedThreadStack[0xE00];
 OSThread sIdleThread;
 OSThread sMainThread;
@@ -53,7 +55,7 @@ OSPiHandle* gCartRomHandle;
 OSPiHandle* gDriveRomHandle;
 
 #ifdef EXPANSION_KIT
-#include "src/assets/boot_logo/boot_logo.c"
+#include ASSET_SOURCE_EK(boot_logo/boot_logo.c)
 #endif
 
 void Idle_ThreadEntry(void*);
@@ -150,6 +152,9 @@ void Main_ThreadEntry(void* arg0) {
     OSMesg msg;
     s32 var_a0;
     u64* var_v1;
+#ifdef EXPANSION_KIT
+    s32 i;
+#endif
 
     // Init message queues
     osCreateMesgQueue(&gDmaMesgQueue, sDmaMsgBuf, ARRAY_COUNT(sDmaMsgBuf));
@@ -166,9 +171,9 @@ void Main_ThreadEntry(void* arg0) {
     osSetEventMesg(OS_EVENT_SP, &gMainThreadMesgQueue, (OSMesg) EVENT_MESG_SP);
     osSetEventMesg(OS_EVENT_DP, &gMainThreadMesgQueue, (OSMesg) EVENT_MESG_DP);
     osViSetEvent(&gMainThreadMesgQueue, (OSMesg) EVENT_MESG_VI, 1);
+    gResetStarted = false;
 
 #ifndef EXPANSION_KIT
-    gResetStarted = false;
     gLeoDriveConnectionState = LeoDD_CheckPresence();
     var_v1 = (u64*) gFrameBuffers[0];
 
@@ -213,7 +218,7 @@ void Main_ThreadEntry(void* arg0) {
             SLLeoCreateManager();
         }
     }
-#else // EXPANSION_KIT
+#else
     DiskDrive_InitRomSegmentPairs();
 
     switch (osResetType) {
@@ -235,10 +240,10 @@ void Main_ThreadEntry(void* arg0) {
         func_80704DB0("01", leoBootID.gameName);
 
         for (i = 0; i < 3; i++) {
-            var_v0 = &gFrameBuffers[i]->buffer[19199];
+            var_v1 = &gFrameBuffers[i]->buffer[19199];
 
-            while (var_v0 >= gFrameBuffers[i]->buffer) {
-                *var_v0-- = 0x0001000100010001;
+            while (var_v1 >= gFrameBuffers[i]->buffer) {
+                *var_v1-- = 0x0001000100010001;
             }
         }
 
@@ -271,7 +276,7 @@ void Main_ThreadEntry(void* arg0) {
 
 #ifndef EXPANSION_KIT
     func_80069F5C(gFrameBuffers[0]);
-#else // EXPANSION_KIT
+#else
     func_806F33D0(gFrameBuffers[0]);
     func_806F33D0(gFrameBuffers[1]);
     func_806F33D0(gFrameBuffers[2]);
@@ -289,7 +294,7 @@ void Main_ThreadEntry(void* arg0) {
         func_8007647C();
 #endif
     }
-#else // EXPANSION_KIT
+#else
     if (gRamDDCompatible) {
         osCreateThread(&sSys6Thread, THREAD_ID_6, func_80767958, 0, sSys6ThreadStack + sizeof(sSys6ThreadStack), 30);
         if (gLeoDriveConnectionState == 1) {

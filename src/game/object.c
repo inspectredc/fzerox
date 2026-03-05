@@ -11,7 +11,11 @@ unk_800E4068 D_800E4068[16];
 
 void func_80077CF0(s32 segAddr, size_t size, u8* startAddr) {
     CLEAR_DATA_CACHE(startAddr, size);
+#ifndef EXPANSION_KIT
     Dma_LoadAssets(SEGMENT_ROM_START(common_assets_compressed) + SEGMENT_OFFSET(segAddr), startAddr, size);
+#else
+    Dma_LoadAssets(gRomSegmentPairs[4][0] + SEGMENT_OFFSET(segAddr), startAddr, size);
+#endif
 }
 
 void func_80077D44(void) {
@@ -20,16 +24,16 @@ void func_80077D44(void) {
 
 extern uintptr_t gArenaStartPtrs[];
 
-u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
+u8* func_80077D50_impl(unk_80077D50* arg0, s32 arg1, bool arg2) {
     bool var_a0;
-    bool var_s7;
     s32 var_s0;
     s32 alignedWidth;
     s32 var_s2;
     size_t textureSize;
+    u8* header;
     u8* sp44;
     u8* var_s4;
-    u8* header;
+    bool var_s7;
     unk_800E33E0* var_s8 = D_800E33E0;
 
     sp44 = gArenaStartPtrs[0];
@@ -116,11 +120,80 @@ u8* func_80077D50(unk_80077D50* arg0, s32 arg1) {
             D_800E3A20++;
         }
 
+#ifdef EXPANSION_KIT
+        if (arg2) {
+            break;
+        }
+#endif
+
         arg0++;
     }
 
     return sp44;
 }
+
+#ifdef EXPANSION_KIT
+u8* func_i2_800AE578(unk_80077D50* arg0, bool arg1) {
+    s32 temp_s0;
+    bool var_a0;
+    s32 var_s0;
+    bool var_s6;
+    u8* header;
+    u8* var_fp;
+    u8* var_s3;
+    unk_800E33E0* var_s7 = D_800E33E0;
+
+    var_s6 = false;
+    var_fp = gArenaStartPtrs[0];
+
+    while (arg0->unk_04 != NULL) {
+        var_a0 = false;
+        if (!arg1) {
+            for (var_s0 = 0; var_s0 < D_800E3A20; var_s0++) {
+                if (D_800E33E0[var_s0].unk_00 == (0, arg0->unk_04)) {
+                    var_a0 = true;
+                    break;
+                }
+            }
+        }
+        if (!var_a0) {
+            switch (arg0->unk_00) {
+                case 17:
+                case 18:
+                    if (arg0->compressedSize != 0) {
+                        var_s0 = ((arg0->compressedSize >> 1) * 2) + 2;
+                    } else {
+                        var_s0 = 0x400;
+                    }
+                    var_s3 = Arena_Allocate(ALLOC_FRONT, arg0->height * arg0->width * 2);
+                    header = Arena_Allocate(ALLOC_PEEK, var_s0);
+                    CLEAR_DATA_CACHE(header, var_s0);
+                    bcopy(arg0->unk_04, header, var_s0);
+                    if (*(s32*) header == (s32) 'MIO0') {
+                        mio0Decode(header, var_s3);
+                    } else {
+                        bzero(var_s3, arg0->height * arg0->width * 2);
+                    }
+                    break;
+                default:
+                    var_s0 = arg0->height * arg0->width * 2;
+                    var_s3 = Arena_Allocate(ALLOC_FRONT, var_s0);
+                    func_80077CF0(arg0->unk_04, var_s0, var_s3);
+                    break;
+            }
+            if (!var_s6) {
+                var_fp = var_s3;
+                var_s6 = true;
+            }
+            var_s7[D_800E3A20].unk_00 = arg0->unk_04;
+            var_s7[D_800E3A20].unk_04 = var_s3;
+            D_800E3A20++;
+        }
+        arg0++;
+    }
+    return var_fp;
+}
+#endif
 
 void* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) {
     s32 var_a3;
@@ -369,7 +442,8 @@ Gfx* func_80078DB4(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, TexturePtr t
     }
 }
 
-Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8) {
+Gfx* func_80078EA0_impl(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7,
+                        f32 arg8, bool arg9) {
     TexturePtr texture;
 
     while (arg1->unk_04 != 0) {
@@ -380,12 +454,18 @@ Gfx* func_80078EA0(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s3
         if (texture != NULL) {
             gfx = func_80078DB4(gfx, arg1, left, top, texture, arg4, arg5, arg6, arg7, arg8);
         }
+#ifdef EXPANSION_KIT
+        if (arg9) {
+            break;
+        }
+#endif
         arg1++;
     }
     return gfx;
 }
 
-Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8) {
+Gfx* func_80078F80_impl(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7,
+                        f32 arg8, bool arg9) {
     TexturePtr texture;
     unk_80077D50* var_s0;
     s32 var;
@@ -393,6 +473,9 @@ Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s3
     var_s0 = arg1->unk_00[arg1->unk_04].unk_00;
 
     while (var_s0->unk_04 != 0) {
+#ifdef EXPANSION_KIT
+        if (gfx) {}
+#endif
         var = arg1->unk_0A;
         switch (var) {
             case 0:
@@ -406,7 +489,11 @@ Gfx* func_80078F80(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s3
         if (texture != NULL) {
             gfx = func_80078DB4(gfx, var_s0, left, top, texture, arg4, arg5, arg6, arg7, arg8);
         }
-
+#ifdef EXPANSION_KIT
+        if (arg9) {
+            break;
+        }
+#endif
         var_s0++;
     }
     return gfx;
@@ -506,11 +593,11 @@ s32 func_800792D8(unk_800792D8* arg0) {
     D_800E3F28[i].unk_08 = -0x8000;
 
     if (arg0[0].unk_00 != NULL) {
-        D_800E3F28[i].unk_0C = func_80077D50(arg0[0].unk_00, 1);
+        D_800E3F28[i].unk_0C = func_80077D50_impl(arg0[0].unk_00, 1, true);
     }
 
-    D_800E3F28[i].unk_10 =
-        (arg0[1].unk_00 != NULL) ? func_80077D50(arg0[1].unk_00, 1) : func_80077D50(arg0[0].unk_00, 1);
+    D_800E3F28[i].unk_10 = (arg0[1].unk_00 != NULL) ? func_80077D50_impl(arg0[1].unk_00, 1, true)
+                                                    : func_80077D50_impl(arg0[0].unk_00, 1, true);
     D_800E3F28[i].unk_0A = 0;
     return i;
 }
@@ -591,6 +678,11 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
         case OBJECT_TITLE_DISK_DRIVE:
             Title_DiskDriveInit(object);
             break;
+#ifdef EXPANSION_KIT
+        case OBJECT_21:
+            func_i4_800748F4();
+            break;
+#endif
         case OBJECT_MACHINE_SELECT_HEADER:
             MachineSelect_HeaderInit();
             break;
@@ -694,6 +786,10 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
         case OBJECT_COURSE_SELECT_CUP_3:
         case OBJECT_COURSE_SELECT_CUP_4:
         case OBJECT_COURSE_SELECT_CUP_5:
+#ifdef EXPANSION_KIT
+        case OBJECT_COURSE_SELECT_CUP_6:
+        case OBJECT_COURSE_SELECT_CUP_7:
+#endif
             CourseSelect_CupInit(object);
             break;
         case OBJECT_COURSE_SELECT_HEADER:
@@ -711,6 +807,23 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
         case OBJECT_COURSE_SELECT_GHOST_OPTION:
             CourseSelect_GhostOptionInit(object);
             break;
+#ifdef EXPANSION_KIT
+        case OBJECT_170:
+            func_xk3_80133B4C(object);
+            break;
+        case OBJECT_171:
+            func_xk3_80133B84();
+            break;
+        case OBJECT_172:
+            func_xk3_80133BD4(object);
+            break;
+        case OBJECT_173:
+            func_xk3_80133F40();
+            break;
+        case OBJECT_174:
+            func_xk3_8012F5F0(object);
+            break;
+#endif
         default:
             break;
     }
@@ -760,6 +873,11 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
         case OBJECT_TITLE_DISK_DRIVE:
             gfx = Title_DiskDriveDraw(gfx, object);
             break;
+#ifdef EXPANSION_KIT
+        case OBJECT_21:
+            gfx = func_i4_80074EE0(gfx, object);
+            break;
+#endif
         case OBJECT_MACHINE_SELECT_BACKGROUND:
             gfx = MachineSelect_BackgroundDraw(gfx);
             break;
@@ -882,6 +1000,10 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
         case OBJECT_COURSE_SELECT_CUP_3:
         case OBJECT_COURSE_SELECT_CUP_4:
         case OBJECT_COURSE_SELECT_CUP_5:
+#ifdef EXPANSION_KIT
+        case OBJECT_COURSE_SELECT_CUP_6:
+        case OBJECT_COURSE_SELECT_CUP_7:
+#endif
             gfx = CourseSelect_CupDraw(gfx, object);
             break;
         case OBJECT_COURSE_SELECT_HEADER:
@@ -902,6 +1024,23 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
         case OBJECT_COURSE_SELECT_GHOST_OPTION:
             gfx = CourseSelect_GhostOptionDraw(gfx, object);
             break;
+#ifdef EXPANSION_KIT
+        case OBJECT_170:
+            gfx = func_xk3_80133F6C(gfx, object);
+            break;
+        case OBJECT_171:
+            gfx = func_xk3_801340DC(gfx, object);
+            break;
+        case OBJECT_172:
+            gfx = func_xk3_80134408(gfx, object);
+            break;
+        case OBJECT_173:
+            gfx = func_xk3_80134854(gfx, object);
+            break;
+        case OBJECT_174:
+            gfx = func_xk3_8012F628(gfx, object);
+            break;
+#endif
     }
     return gfx;
 }
@@ -978,6 +1117,10 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
             case OBJECT_COURSE_SELECT_CUP_3:
             case OBJECT_COURSE_SELECT_CUP_4:
             case OBJECT_COURSE_SELECT_CUP_5:
+#ifdef EXPANSION_KIT
+            case OBJECT_COURSE_SELECT_CUP_6:
+            case OBJECT_COURSE_SELECT_CUP_7:
+#endif
                 CourseSelect_CupUpdate(&gObjects[i]);
                 break;
             case OBJECT_COURSE_SELECT_OK:
@@ -992,6 +1135,19 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
             case OBJECT_COURSE_SELECT_GHOST_OPTION:
                 CourseSelect_GhostOptionUpdate(&gObjects[i]);
                 break;
+#ifdef EXPANSION_KIT
+            case OBJECT_170:
+                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                func_xk3_80134A48(&gObjects[i]);
+                break;
+            case OBJECT_172:
+                func_xk3_80134B04(&gObjects[i]);
+                break;
+            case OBJECT_174:
+                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                func_xk3_8012F6A8(&gObjects[i]);
+                break;
+#endif
         }
     }
 

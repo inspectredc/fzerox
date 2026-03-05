@@ -5,8 +5,9 @@
     - "assets/yaml/us/rev0/course_track_gfx.yaml"
   header:
     code:
-      - '#include "assets/setup_gfx.h"'
-      - '#include "assets/course_track_gfx.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(setup_gfx.h)'
+      - '#include ASSET_HEADER(course_track_gfx.h)'
     header:
       - '#include "gfx.h"'
 

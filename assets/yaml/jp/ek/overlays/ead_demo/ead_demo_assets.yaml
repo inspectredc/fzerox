@@ -1,0 +1,1945 @@
+:config:
+  virtual:
+    [0x800D6D90, 0x1E0B00]
+  header:
+    code:
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(overlays/ead_demo/ead_demo_assets.h)'
+    header:
+      - '#include "libultra/ultra64.h"'
+      - '#include "src/overlays/ead_demo/ead_demo.h"'
+
+D_xk4_800DA20C:
+  type: ARRAY
+  array_type: f32
+  count: 8
+  offset: 0x1E3F7C
+  symbol: D_xk4_800DA20C
+
+aEADDemoAnimationInfo:
+  type: FZX:ANIM
+  scale_count: 3
+  rot_count: 1372
+  pos_count: 108
+  offset: 0x1E3F9C
+  symbol: aEADDemoAnimationInfo
+
+D_xk4_800DA250:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 8
+  offset: 0x1E3FC0
+  symbol: D_xk4_800DA250
+
+D_xk4_800DA2D0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1E4040
+  symbol: D_xk4_800DA2D0
+
+D_xk4_800DAAD0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1E4840
+  symbol: D_xk4_800DAAD0
+
+D_xk4_800DB2D0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1E5040
+  symbol: D_xk4_800DB2D0
+
+D_xk4_800DBAD0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x1E5840
+  symbol: D_xk4_800DBAD0
+
+D_xk4_800DCAD0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 64
+  offset: 0x1E6840
+  symbol: D_xk4_800DCAD0
+
+D_xk4_800DDAD0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1E7840
+  symbol: D_xk4_800DDAD0
+
+D_xk4_800DE2D0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1E8040
+  symbol: D_xk4_800DE2D0
+
+D_xk4_800DEAD0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1E8840
+  symbol: D_xk4_800DEAD0
+
+D_xk4_800DF2D0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1E9040
+  symbol: D_xk4_800DF2D0
+
+D_xk4_800DFAD0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1E9840
+  symbol: D_xk4_800DFAD0
+
+D_xk4_800E02D0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x1EA040
+  symbol: D_xk4_800E02D0
+
+D_xk4_800E04D0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x1EA240
+  symbol: D_xk4_800E04D0
+
+D_xk4_800E14D0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 32
+  offset: 0x1EB240
+  symbol: D_xk4_800E14D0
+
+D_xk4_800E24D0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1EC240
+  symbol: D_xk4_800E24D0
+
+D_xk4_800E2CD0:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 8
+  offset: 0x1ECA40
+  symbol: D_xk4_800E2CD0
+
+D_xk4_800E2D50:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x1ECAC0
+  symbol: D_xk4_800E2D50
+
+D_xk4_800E2F50:
+  type: VTX
+  offset: 0x1ECCC0
+  count: 21
+  symbol: D_xk4_800E2F50
+
+D_xk4_800E30A0:
+  type: VTX
+  offset: 0x1ECE10
+  count: 4
+  symbol: D_xk4_800E30A0
+
+D_xk4_800E30E0:
+  type: VTX
+  offset: 0x1ECE50
+  count: 14
+  symbol: D_xk4_800E30E0
+
+D_xk4_800E31C0:
+  type: VTX
+  offset: 0x1ECF30
+  count: 27
+  symbol: D_xk4_800E31C0
+
+D_xk4_800E3370:
+  type: VTX
+  offset: 0x1ED0E0
+  count: 3
+  symbol: D_xk4_800E3370
+
+D_xk4_800E33A0:
+  type: VTX
+  offset: 0x1ED110
+  count: 5
+  symbol: D_xk4_800E33A0
+
+D_xk4_800E33F0:
+  type: VTX
+  offset: 0x1ED160
+  count: 24
+  symbol: D_xk4_800E33F0
+
+D_xk4_800E3570:
+  type: VTX
+  offset: 0x1ED2E0
+  count: 14
+  symbol: D_xk4_800E3570
+
+D_xk4_800E3650:
+  type: VTX
+  offset: 0x1ED3C0
+  count: 18
+  symbol: D_xk4_800E3650
+
+D_xk4_800E3770:
+  type: VTX
+  offset: 0x1ED4E0
+  count: 18
+  symbol: D_xk4_800E3770
+
+D_xk4_800E3890:
+  type: VTX
+  offset: 0x1ED600
+  count: 89
+  symbol: D_xk4_800E3890
+
+D_xk4_800E3E20:
+  type: VTX
+  offset: 0x1EDB90
+  count: 60
+  symbol: D_xk4_800E3E20
+
+D_xk4_800E41E0:
+  type: VTX
+  offset: 0x1EDF50
+  count: 22
+  symbol: D_xk4_800E41E0
+
+D_xk4_800E4340:
+  type: VTX
+  offset: 0x1EE0B0
+  count: 6
+  symbol: D_xk4_800E4340
+
+D_xk4_800E43A0:
+  type: VTX
+  offset: 0x1EE110
+  count: 14
+  symbol: D_xk4_800E43A0
+
+D_xk4_800E4480:
+  type: VTX
+  offset: 0x1EE1F0
+  count: 17
+  symbol: D_xk4_800E4480
+
+D_xk4_800E4590:
+  type: VTX
+  offset: 0x1EE300
+  count: 4
+  symbol: D_xk4_800E4590
+
+D_xk4_800E45D0:
+  type: VTX
+  offset: 0x1EE340
+  count: 32
+  symbol: D_xk4_800E45D0
+
+D_xk4_800E47D0:
+  type: VTX
+  offset: 0x1EE540
+  count: 9
+  symbol: D_xk4_800E47D0
+
+D_xk4_800E4860:
+  type: VTX
+  offset: 0x1EE5D0
+  count: 127
+  symbol: D_xk4_800E4860
+
+D_xk4_800E5050:
+  type: VTX
+  offset: 0x1EEDC0
+  count: 11
+  symbol: D_xk4_800E5050
+
+D_xk4_800E5100:
+  type: VTX
+  offset: 0x1EEE70
+  count: 2
+  symbol: D_xk4_800E5100
+
+D_xk4_800E5120:
+  type: VTX
+  offset: 0x1EEE90
+  count: 19
+  symbol: D_xk4_800E5120
+
+D_xk4_800E5250:
+  type: VTX
+  offset: 0x1EEFC0
+  count: 6
+  symbol: D_xk4_800E5250
+
+D_xk4_800E52B0:
+  type: VTX
+  offset: 0x1EF020
+  count: 6
+  symbol: D_xk4_800E52B0
+
+D_xk4_800E5310:
+  type: VTX
+  offset: 0x1EF080
+  count: 32
+  symbol: D_xk4_800E5310
+
+D_xk4_800E5510:
+  type: VTX
+  offset: 0x1EF280
+  count: 42
+  symbol: D_xk4_800E5510
+
+D_xk4_800E57B0:
+  type: VTX
+  offset: 0x1EF520
+  count: 21
+  symbol: D_xk4_800E57B0
+
+D_xk4_800E5900:
+  type: VTX
+  offset: 0x1EF670
+  count: 21
+  symbol: D_xk4_800E5900
+
+D_xk4_800E5A50:
+  type: VTX
+  offset: 0x1EF7C0
+  count: 8
+  symbol: D_xk4_800E5A50
+
+D_xk4_800E5AD0:
+  type: VTX
+  offset: 0x1EF840
+  count: 3
+  symbol: D_xk4_800E5AD0
+
+D_xk4_800E5B00:
+  type: VTX
+  offset: 0x1EF870
+  count: 2
+  symbol: D_xk4_800E5B00
+
+D_xk4_800E5B20:
+  type: VTX
+  offset: 0x1EF890
+  count: 21
+  symbol: D_xk4_800E5B20
+
+D_xk4_800E5C70:
+  type: VTX
+  offset: 0x1EF9E0
+  count: 32
+  symbol: D_xk4_800E5C70
+
+D_xk4_800E5E70:
+  type: VTX
+  offset: 0x1EFBE0
+  count: 3
+  symbol: D_xk4_800E5E70
+
+D_xk4_800E5EA0:
+  type: VTX
+  offset: 0x1EFC10
+  count: 18
+  symbol: D_xk4_800E5EA0
+
+D_xk4_800E5FC0:
+  type: VTX
+  offset: 0x1EFD30
+  count: 4
+  symbol: D_xk4_800E5FC0
+
+D_xk4_800E6000:
+  type: VTX
+  offset: 0x1EFD70
+  count: 3
+  symbol: D_xk4_800E6000
+
+D_xk4_800E6030:
+  type: VTX
+  offset: 0x1EFDA0
+  count: 2
+  symbol: D_xk4_800E6030
+
+D_xk4_800E6050:
+  type: VTX
+  offset: 0x1EFDC0
+  count: 8
+  symbol: D_xk4_800E6050
+
+D_xk4_800E60D0:
+  type: VTX
+  offset: 0x1EFE40
+  count: 6
+  symbol: D_xk4_800E60D0
+
+D_xk4_800E6130:
+  type: VTX
+  offset: 0x1EFEA0
+  count: 7
+  symbol: D_xk4_800E6130
+
+D_xk4_800E61A0:
+  type: VTX
+  offset: 0x1EFF10
+  count: 8
+  symbol: D_xk4_800E61A0
+
+D_xk4_800E6220:
+  type: VTX
+  offset: 0x1EFF90
+  count: 8
+  symbol: D_xk4_800E6220
+
+D_xk4_800E62A0:
+  type: VTX
+  offset: 0x1F0010
+  count: 13
+  symbol: D_xk4_800E62A0
+
+D_xk4_800E6370:
+  type: VTX
+  offset: 0x1F00E0
+  count: 3
+  symbol: D_xk4_800E6370
+
+D_xk4_800E63A0:
+  type: VTX
+  offset: 0x1F0110
+  count: 4
+  symbol: D_xk4_800E63A0
+
+D_xk4_800E63E0:
+  type: VTX
+  offset: 0x1F0150
+  count: 4
+  symbol: D_xk4_800E63E0
+
+D_xk4_800E6420:
+  type: VTX
+  offset: 0x1F0190
+  count: 12
+  symbol: D_xk4_800E6420
+
+D_xk4_800E64E0:
+  type: VTX
+  offset: 0x1F0250
+  count: 9
+  symbol: D_xk4_800E64E0
+
+D_xk4_800E6570:
+  type: VTX
+  offset: 0x1F02E0
+  count: 3
+  symbol: D_xk4_800E6570
+
+D_xk4_800E65A0:
+  type: VTX
+  offset: 0x1F0310
+  count: 14
+  symbol: D_xk4_800E65A0
+
+D_xk4_800E6680:
+  type: VTX
+  offset: 0x1F03F0
+  count: 14
+  symbol: D_xk4_800E6680
+
+D_xk4_800E6760:
+  type: VTX
+  offset: 0x1F04D0
+  count: 13
+  symbol: D_xk4_800E6760
+
+D_xk4_800E6830:
+  type: VTX
+  offset: 0x1F05A0
+  count: 15
+  symbol: D_xk4_800E6830
+
+D_xk4_800E6920:
+  type: VTX
+  offset: 0x1F0690
+  count: 6
+  symbol: D_xk4_800E6920
+
+D_xk4_800E6980:
+  type: VTX
+  offset: 0x1F06F0
+  count: 3
+  symbol: D_xk4_800E6980
+
+D_xk4_800E69B0:
+  type: VTX
+  offset: 0x1F0720
+  count: 2
+  symbol: D_xk4_800E69B0
+
+D_xk4_800E69D0:
+  type: VTX
+  offset: 0x1F0740
+  count: 21
+  symbol: D_xk4_800E69D0
+
+D_xk4_800E6B20:
+  type: VTX
+  offset: 0x1F0890
+  count: 32
+  symbol: D_xk4_800E6B20
+
+D_xk4_800E6D20:
+  type: VTX
+  offset: 0x1F0A90
+  count: 3
+  symbol: D_xk4_800E6D20
+
+D_xk4_800E6D50:
+  type: VTX
+  offset: 0x1F0AC0
+  count: 18
+  symbol: D_xk4_800E6D50
+
+D_xk4_800E6E70:
+  type: VTX
+  offset: 0x1F0BE0
+  count: 4
+  symbol: D_xk4_800E6E70
+
+D_xk4_800E6EB0:
+  type: VTX
+  offset: 0x1F0C20
+  count: 3
+  symbol: D_xk4_800E6EB0
+
+D_xk4_800E6EE0:
+  type: VTX
+  offset: 0x1F0C50
+  count: 2
+  symbol: D_xk4_800E6EE0
+
+D_xk4_800E6F00:
+  type: VTX
+  offset: 0x1F0C70
+  count: 8
+  symbol: D_xk4_800E6F00
+
+D_xk4_800E6F80:
+  type: VTX
+  offset: 0x1F0CF0
+  count: 6
+  symbol: D_xk4_800E6F80
+
+D_xk4_800E6FE0:
+  type: VTX
+  offset: 0x1F0D50
+  count: 7
+  symbol: D_xk4_800E6FE0
+
+D_xk4_800E7050:
+  type: VTX
+  offset: 0x1F0DC0
+  count: 8
+  symbol: D_xk4_800E7050
+
+D_xk4_800E70D0:
+  type: VTX
+  offset: 0x1F0E40
+  count: 8
+  symbol: D_xk4_800E70D0
+
+D_xk4_800E7150:
+  type: VTX
+  offset: 0x1F0EC0
+  count: 13
+  symbol: D_xk4_800E7150
+
+D_xk4_800E7220:
+  type: VTX
+  offset: 0x1F0F90
+  count: 3
+  symbol: D_xk4_800E7220
+
+D_xk4_800E7250:
+  type: VTX
+  offset: 0x1F0FC0
+  count: 4
+  symbol: D_xk4_800E7250
+
+D_xk4_800E7290:
+  type: VTX
+  offset: 0x1F1000
+  count: 4
+  symbol: D_xk4_800E7290
+
+D_xk4_800E72D0:
+  type: VTX
+  offset: 0x1F1040
+  count: 12
+  symbol: D_xk4_800E72D0
+
+D_xk4_800E7390:
+  type: VTX
+  offset: 0x1F1100
+  count: 9
+  symbol: D_xk4_800E7390
+
+D_xk4_800E7420:
+  type: VTX
+  offset: 0x1F1190
+  count: 3
+  symbol: D_xk4_800E7420
+
+D_xk4_800E7450:
+  type: VTX
+  offset: 0x1F11C0
+  count: 14
+  symbol: D_xk4_800E7450
+
+D_xk4_800E7530:
+  type: VTX
+  offset: 0x1F12A0
+  count: 14
+  symbol: D_xk4_800E7530
+
+D_xk4_800E7610:
+  type: VTX
+  offset: 0x1F1380
+  count: 13
+  symbol: D_xk4_800E7610
+
+D_xk4_800E76E0:
+  type: VTX
+  offset: 0x1F1450
+  count: 15
+  symbol: D_xk4_800E76E0
+
+D_xk4_800E77D0:
+  type: VTX
+  offset: 0x1F1540
+  count: 6
+  symbol: D_xk4_800E77D0
+
+D_xk4_800E7830:
+  type: VTX
+  offset: 0x1F15A0
+  count: 4
+  symbol: D_xk4_800E7830
+
+D_xk4_800E7870:
+  type: VTX
+  offset: 0x1F15E0
+  count: 20
+  symbol: D_xk4_800E7870
+
+D_xk4_800E79B0:
+  type: VTX
+  offset: 0x1F1720
+  count: 19
+  symbol: D_xk4_800E79B0
+
+D_xk4_800E7AE0:
+  type: VTX
+  offset: 0x1F1850
+  count: 6
+  symbol: D_xk4_800E7AE0
+
+D_xk4_800E7B40:
+  type: VTX
+  offset: 0x1F18B0
+  count: 4
+  symbol: D_xk4_800E7B40
+
+D_xk4_800E7B80:
+  type: VTX
+  offset: 0x1F18F0
+  count: 4
+  symbol: D_xk4_800E7B80
+
+D_xk4_800E7BC0:
+  type: VTX
+  offset: 0x1F1930
+  count: 3
+  symbol: D_xk4_800E7BC0
+
+D_xk4_800E7BF0:
+  type: VTX
+  offset: 0x1F1960
+  count: 10
+  symbol: D_xk4_800E7BF0
+
+D_xk4_800E7C90:
+  type: VTX
+  offset: 0x1F1A00
+  count: 7
+  symbol: D_xk4_800E7C90
+
+D_xk4_800E7D00:
+  type: VTX
+  offset: 0x1F1A70
+  count: 4
+  symbol: D_xk4_800E7D00
+
+D_xk4_800E7D40:
+  type: VTX
+  offset: 0x1F1AB0
+  count: 12
+  symbol: D_xk4_800E7D40
+
+D_xk4_800E7E00:
+  type: VTX
+  offset: 0x1F1B70
+  count: 8
+  symbol: D_xk4_800E7E00
+
+D_xk4_800E7E80:
+  type: VTX
+  offset: 0x1F1BF0
+  count: 12
+  symbol: D_xk4_800E7E80
+
+D_xk4_800E7F40:
+  type: VTX
+  offset: 0x1F1CB0
+  count: 3
+  symbol: D_xk4_800E7F40
+
+D_xk4_800E7F70:
+  type: VTX
+  offset: 0x1F1CE0
+  count: 7
+  symbol: D_xk4_800E7F70
+
+D_xk4_800E7FE0:
+  type: VTX
+  offset: 0x1F1D50
+  count: 8
+  symbol: D_xk4_800E7FE0
+
+D_xk4_800E8060:
+  type: VTX
+  offset: 0x1F1DD0
+  count: 9
+  symbol: D_xk4_800E8060
+
+D_xk4_800E80F0:
+  type: VTX
+  offset: 0x1F1E60
+  count: 5
+  symbol: D_xk4_800E80F0
+
+D_xk4_800E8140:
+  type: VTX
+  offset: 0x1F1EB0
+  count: 6
+  symbol: D_xk4_800E8140
+
+D_xk4_800E81A0:
+  type: VTX
+  offset: 0x1F1F10
+  count: 5
+  symbol: D_xk4_800E81A0
+
+D_xk4_800E81F0:
+  type: VTX
+  offset: 0x1F1F60
+  count: 4
+  symbol: D_xk4_800E81F0
+
+D_xk4_800E8230:
+  type: VTX
+  offset: 0x1F1FA0
+  count: 7
+  symbol: D_xk4_800E8230
+
+D_xk4_800E82A0:
+  type: VTX
+  offset: 0x1F2010
+  count: 9
+  symbol: D_xk4_800E82A0
+
+D_xk4_800E8330:
+  type: VTX
+  offset: 0x1F20A0
+  count: 4
+  symbol: D_xk4_800E8330
+
+D_xk4_800E8370:
+  type: VTX
+  offset: 0x1F20E0
+  count: 4
+  symbol: D_xk4_800E8370
+
+D_xk4_800E83B0:
+  type: VTX
+  offset: 0x1F2120
+  count: 20
+  symbol: D_xk4_800E83B0
+
+D_xk4_800E84F0:
+  type: VTX
+  offset: 0x1F2260
+  count: 19
+  symbol: D_xk4_800E84F0
+
+D_xk4_800E8620:
+  type: VTX
+  offset: 0x1F2390
+  count: 6
+  symbol: D_xk4_800E8620
+
+D_xk4_800E8680:
+  type: VTX
+  offset: 0x1F23F0
+  count: 4
+  symbol: D_xk4_800E8680
+
+D_xk4_800E86C0:
+  type: VTX
+  offset: 0x1F2430
+  count: 4
+  symbol: D_xk4_800E86C0
+
+D_xk4_800E8700:
+  type: VTX
+  offset: 0x1F2470
+  count: 3
+  symbol: D_xk4_800E8700
+
+D_xk4_800E8730:
+  type: VTX
+  offset: 0x1F24A0
+  count: 10
+  symbol: D_xk4_800E8730
+
+D_xk4_800E87D0:
+  type: VTX
+  offset: 0x1F2540
+  count: 7
+  symbol: D_xk4_800E87D0
+
+D_xk4_800E8840:
+  type: VTX
+  offset: 0x1F25B0
+  count: 4
+  symbol: D_xk4_800E8840
+
+D_xk4_800E8880:
+  type: VTX
+  offset: 0x1F25F0
+  count: 12
+  symbol: D_xk4_800E8880
+
+D_xk4_800E8940:
+  type: VTX
+  offset: 0x1F26B0
+  count: 8
+  symbol: D_xk4_800E8940
+
+D_xk4_800E89C0:
+  type: VTX
+  offset: 0x1F2730
+  count: 12
+  symbol: D_xk4_800E89C0
+
+D_xk4_800E8A80:
+  type: VTX
+  offset: 0x1F27F0
+  count: 3
+  symbol: D_xk4_800E8A80
+
+D_xk4_800E8AB0:
+  type: VTX
+  offset: 0x1F2820
+  count: 7
+  symbol: D_xk4_800E8AB0
+
+D_xk4_800E8B20:
+  type: VTX
+  offset: 0x1F2890
+  count: 8
+  symbol: D_xk4_800E8B20
+
+D_xk4_800E8BA0:
+  type: VTX
+  offset: 0x1F2910
+  count: 9
+  symbol: D_xk4_800E8BA0
+
+D_xk4_800E8C30:
+  type: VTX
+  offset: 0x1F29A0
+  count: 5
+  symbol: D_xk4_800E8C30
+
+D_xk4_800E8C80:
+  type: VTX
+  offset: 0x1F29F0
+  count: 6
+  symbol: D_xk4_800E8C80
+
+D_xk4_800E8CE0:
+  type: VTX
+  offset: 0x1F2A50
+  count: 5
+  symbol: D_xk4_800E8CE0
+
+D_xk4_800E8D30:
+  type: VTX
+  offset: 0x1F2AA0
+  count: 4
+  symbol: D_xk4_800E8D30
+
+D_xk4_800E8D70:
+  type: VTX
+  offset: 0x1F2AE0
+  count: 7
+  symbol: D_xk4_800E8D70
+
+D_xk4_800E8DE0:
+  type: VTX
+  offset: 0x1F2B50
+  count: 9
+  symbol: D_xk4_800E8DE0
+
+D_xk4_800E8E70:
+  type: VTX
+  offset: 0x1F2BE0
+  count: 4
+  symbol: D_xk4_800E8E70
+
+D_xk4_800E8EB0:
+  type: GFX
+  offset: 0x1F2C20
+  symbol: D_xk4_800E8EB0
+
+D_xk4_800E8EC0:
+  type: GFX
+  offset: 0x1F2C30
+  symbol: D_xk4_800E8EC0
+
+D_xk4_800E8ED0:
+  type: GFX
+  offset: 0x1F2C40
+  symbol: D_xk4_800E8ED0
+
+D_xk4_800E8F38:
+  type: GFX
+  offset: 0x1F2CA8
+  symbol: D_xk4_800E8F38
+
+D_xk4_800E8F98:
+  type: GFX
+  offset: 0x1F2D08
+  symbol: D_xk4_800E8F98
+
+D_xk4_800E8FF0:
+  type: GFX
+  offset: 0x1F2D60
+  symbol: D_xk4_800E8FF0
+
+D_xk4_800E9048:
+  type: GFX
+  offset: 0x1F2DB8
+  symbol: D_xk4_800E9048
+
+D_xk4_800E90A0:
+  type: GFX
+  offset: 0x1F2E10
+  symbol: D_xk4_800E90A0
+
+D_xk4_800E90F0:
+  type: GFX
+  offset: 0x1F2E60
+  symbol: D_xk4_800E90F0
+
+D_xk4_800E9150:
+  type: GFX
+  offset: 0x1F2EC0
+  symbol: D_xk4_800E9150
+
+D_xk4_800E91C0:
+  type: GFX
+  offset: 0x1F2F30
+  symbol: D_xk4_800E91C0
+
+D_xk4_800E9210:
+  type: GFX
+  offset: 0x1F2F80
+  symbol: D_xk4_800E9210
+
+D_xk4_800E9220:
+  type: GFX
+  offset: 0x1F2F90
+  symbol: D_xk4_800E9220
+
+D_xk4_800E9230:
+  type: GFX
+  offset: 0x1F2FA0
+  symbol: D_xk4_800E9230
+
+D_xk4_800E9288:
+  type: GFX
+  offset: 0x1F2FF8
+  symbol: D_xk4_800E9288
+
+D_xk4_800E92E8:
+  type: GFX
+  offset: 0x1F3058
+  symbol: D_xk4_800E92E8
+
+D_xk4_800E9340:
+  type: GFX
+  offset: 0x1F30B0
+  symbol: D_xk4_800E9340
+
+D_xk4_800E9390:
+  type: GFX
+  offset: 0x1F3100
+  symbol: D_xk4_800E9390
+
+D_xk4_800E93F8:
+  type: GFX
+  offset: 0x1F3168
+  symbol: D_xk4_800E93F8
+
+D_xk4_800E9458:
+  type: GFX
+  offset: 0x1F31C8
+  symbol: D_xk4_800E9458
+
+D_xk4_800E94D0:
+  type: GFX
+  offset: 0x1F3240
+  symbol: D_xk4_800E94D0
+
+D_xk4_800E94E0:
+  type: GFX
+  offset: 0x1F3250
+  symbol: D_xk4_800E94E0
+
+D_xk4_800E95A0:
+  type: GFX
+  offset: 0x1F3310
+  symbol: D_xk4_800E95A0
+
+D_xk4_800E95F8:
+  type: GFX
+  offset: 0x1F3368
+  symbol: D_xk4_800E95F8
+
+D_xk4_800E9608:
+  type: GFX
+  offset: 0x1F3378
+  symbol: D_xk4_800E9608
+
+D_xk4_800E9618:
+  type: GFX
+  offset: 0x1F3388
+  symbol: D_xk4_800E9618
+
+D_xk4_800E9680:
+  type: GFX
+  offset: 0x1F33F0
+  symbol: D_xk4_800E9680
+
+D_xk4_800E96E0:
+  type: GFX
+  offset: 0x1F3450
+  symbol: D_xk4_800E96E0
+
+D_xk4_800E9738:
+  type: GFX
+  offset: 0x1F34A8
+  symbol: D_xk4_800E9738
+
+D_xk4_800E9790:
+  type: GFX
+  offset: 0x1F3500
+  symbol: D_xk4_800E9790
+
+D_xk4_800E97E8:
+  type: GFX
+  offset: 0x1F3558
+  symbol: D_xk4_800E97E8
+
+D_xk4_800E9838:
+  type: GFX
+  offset: 0x1F35A8
+  symbol: D_xk4_800E9838
+
+D_xk4_800E9898:
+  type: GFX
+  offset: 0x1F3608
+  symbol: D_xk4_800E9898
+
+D_xk4_800E9908:
+  type: GFX
+  offset: 0x1F3678
+  symbol: D_xk4_800E9908
+
+D_xk4_800E9958:
+  type: GFX
+  offset: 0x1F36C8
+  symbol: D_xk4_800E9958
+
+D_xk4_800E9968:
+  type: GFX
+  offset: 0x1F36D8
+  symbol: D_xk4_800E9968
+
+D_xk4_800E9978:
+  type: GFX
+  offset: 0x1F36E8
+  symbol: D_xk4_800E9978
+
+D_xk4_800E99D0:
+  type: GFX
+  offset: 0x1F3740
+  symbol: D_xk4_800E99D0
+
+D_xk4_800E9A30:
+  type: GFX
+  offset: 0x1F37A0
+  symbol: D_xk4_800E9A30
+
+D_xk4_800E9A88:
+  type: GFX
+  offset: 0x1F37F8
+  symbol: D_xk4_800E9A88
+
+D_xk4_800E9AD8:
+  type: GFX
+  offset: 0x1F3848
+  symbol: D_xk4_800E9AD8
+
+D_xk4_800E9B40:
+  type: GFX
+  offset: 0x1F38B0
+  symbol: D_xk4_800E9B40
+
+D_xk4_800E9BA0:
+  type: GFX
+  offset: 0x1F3910
+  symbol: D_xk4_800E9BA0
+
+D_xk4_800E9C18:
+  type: GFX
+  offset: 0x1F3988
+  symbol: D_xk4_800E9C18
+
+D_xk4_800E9C28:
+  type: GFX
+  offset: 0x1F3998
+  symbol: D_xk4_800E9C28
+
+D_xk4_800E9CE8:
+  type: GFX
+  offset: 0x1F3A58
+  symbol: D_xk4_800E9CE8
+
+D_xk4_800E9D40:
+  type: GFX
+  offset: 0x1F3AB0
+  symbol: D_xk4_800E9D40
+
+D_xk4_800E9D50:
+  type: GFX
+  offset: 0x1F3AC0
+  symbol: D_xk4_800E9D50
+
+D_xk4_800E9D60:
+  type: GFX
+  offset: 0x1F3AD0
+  symbol: D_xk4_800E9D60
+
+D_xk4_800E9D70:
+  type: GFX
+  offset: 0x1F3AE0
+  symbol: D_xk4_800E9D70
+
+D_xk4_800E9DE0:
+  type: GFX
+  offset: 0x1F3B50
+  symbol: D_xk4_800E9DE0
+
+D_xk4_800E9E40:
+  type: GFX
+  offset: 0x1F3BB0
+  symbol: D_xk4_800E9E40
+
+D_xk4_800E9E90:
+  type: GFX
+  offset: 0x1F3C00
+  symbol: D_xk4_800E9E90
+
+D_xk4_800E9F10:
+  type: GFX
+  offset: 0x1F3C80
+  symbol: D_xk4_800E9F10
+
+D_xk4_800E9FA0:
+  type: GFX
+  offset: 0x1F3D10
+  symbol: D_xk4_800E9FA0
+
+D_xk4_800EA018:
+  type: GFX
+  offset: 0x1F3D88
+  symbol: D_xk4_800EA018
+
+D_xk4_800EA080:
+  type: GFX
+  offset: 0x1F3DF0
+  symbol: D_xk4_800EA080
+
+D_xk4_800EA0D8:
+  type: GFX
+  offset: 0x1F3E48
+  symbol: D_xk4_800EA0D8
+
+D_xk4_800EA0E8:
+  type: GFX
+  offset: 0x1F3E58
+  symbol: D_xk4_800EA0E8
+
+D_xk4_800EA0F8:
+  type: GFX
+  offset: 0x1F3E68
+  symbol: D_xk4_800EA0F8
+
+D_xk4_800EA108:
+  type: GFX
+  offset: 0x1F3E78
+  symbol: D_xk4_800EA108
+
+D_xk4_800EA170:
+  type: GFX
+  offset: 0x1F3EE0
+  symbol: D_xk4_800EA170
+
+D_xk4_800EA1C8:
+  type: GFX
+  offset: 0x1F3F38
+  symbol: D_xk4_800EA1C8
+
+D_xk4_800EA220:
+  type: GFX
+  offset: 0x1F3F90
+  symbol: D_xk4_800EA220
+
+D_xk4_800EA278:
+  type: GFX
+  offset: 0x1F3FE8
+  symbol: D_xk4_800EA278
+
+D_xk4_800EA2D0:
+  type: GFX
+  offset: 0x1F4040
+  symbol: D_xk4_800EA2D0
+
+D_xk4_800EA340:
+  type: GFX
+  offset: 0x1F40B0
+  symbol: D_xk4_800EA340
+
+D_xk4_800EA350:
+  type: GFX
+  offset: 0x1F40C0
+  symbol: D_xk4_800EA350
+
+D_xk4_800EA360:
+  type: GFX
+  offset: 0x1F40D0
+  symbol: D_xk4_800EA360
+
+D_xk4_800EA3E8:
+  type: GFX
+  offset: 0x1F4158
+  symbol: D_xk4_800EA3E8
+
+D_xk4_800EA4A8:
+  type: GFX
+  offset: 0x1F4218
+  symbol: D_xk4_800EA4A8
+
+D_xk4_800EA528:
+  type: GFX
+  offset: 0x1F4298
+  symbol: D_xk4_800EA528
+
+D_xk4_800EA538:
+  type: GFX
+  offset: 0x1F42A8
+  symbol: D_xk4_800EA538
+
+D_xk4_800EA548:
+  type: GFX
+  offset: 0x1F42B8
+  symbol: D_xk4_800EA548
+
+D_xk4_800EA558:
+  type: GFX
+  offset: 0x1F42C8
+  symbol: D_xk4_800EA558
+
+D_xk4_800EA5C8:
+  type: GFX
+  offset: 0x1F4338
+  symbol: D_xk4_800EA5C8
+
+D_xk4_800EA628:
+  type: GFX
+  offset: 0x1F4398
+  symbol: D_xk4_800EA628
+
+D_xk4_800EA678:
+  type: GFX
+  offset: 0x1F43E8
+  symbol: D_xk4_800EA678
+
+D_xk4_800EA6F8:
+  type: GFX
+  offset: 0x1F4468
+  symbol: D_xk4_800EA6F8
+
+D_xk4_800EA788:
+  type: GFX
+  offset: 0x1F44F8
+  symbol: D_xk4_800EA788
+
+D_xk4_800EA800:
+  type: GFX
+  offset: 0x1F4570
+  symbol: D_xk4_800EA800
+
+D_xk4_800EA868:
+  type: GFX
+  offset: 0x1F45D8
+  symbol: D_xk4_800EA868
+
+D_xk4_800EA8C0:
+  type: GFX
+  offset: 0x1F4630
+  symbol: D_xk4_800EA8C0
+
+D_xk4_800EA8D0:
+  type: GFX
+  offset: 0x1F4640
+  symbol: D_xk4_800EA8D0
+
+D_xk4_800EA8E0:
+  type: GFX
+  offset: 0x1F4650
+  symbol: D_xk4_800EA8E0
+
+D_xk4_800EA8F0:
+  type: GFX
+  offset: 0x1F4660
+  symbol: D_xk4_800EA8F0
+
+D_xk4_800EA958:
+  type: GFX
+  offset: 0x1F46C8
+  symbol: D_xk4_800EA958
+
+D_xk4_800EA9B0:
+  type: GFX
+  offset: 0x1F4720
+  symbol: D_xk4_800EA9B0
+
+D_xk4_800EAA08:
+  type: GFX
+  offset: 0x1F4778
+  symbol: D_xk4_800EAA08
+
+D_xk4_800EAA60:
+  type: GFX
+  offset: 0x1F47D0
+  symbol: D_xk4_800EAA60
+
+D_xk4_800EAAB8:
+  type: GFX
+  offset: 0x1F4828
+  symbol: D_xk4_800EAAB8
+
+D_xk4_800EAB28:
+  type: GFX
+  offset: 0x1F4898
+  symbol: D_xk4_800EAB28
+
+D_xk4_800EAB38:
+  type: GFX
+  offset: 0x1F48A8
+  symbol: D_xk4_800EAB38
+
+D_xk4_800EAB48:
+  type: GFX
+  offset: 0x1F48B8
+  symbol: D_xk4_800EAB48
+
+D_xk4_800EABD0:
+  type: GFX
+  offset: 0x1F4940
+  symbol: D_xk4_800EABD0
+
+D_xk4_800EAC90:
+  type: GFX
+  offset: 0x1F4A00
+  symbol: D_xk4_800EAC90
+
+D_xk4_800EAD10:
+  type: GFX
+  offset: 0x1F4A80
+  symbol: D_xk4_800EAD10
+
+D_xk4_800EAD20:
+  type: GFX
+  offset: 0x1F4A90
+  symbol: D_xk4_800EAD20
+
+D_xk4_800EAD30:
+  type: GFX
+  offset: 0x1F4AA0
+  symbol: D_xk4_800EAD30
+
+D_xk4_800EADB0:
+  type: GFX
+  offset: 0x1F4B20
+  symbol: D_xk4_800EADB0
+
+D_xk4_800EAE08:
+  type: GFX
+  offset: 0x1F4B78
+  symbol: D_xk4_800EAE08
+
+D_xk4_800EAE60:
+  type: GFX
+  offset: 0x1F4BD0
+  symbol: D_xk4_800EAE60
+
+D_xk4_800EAF58:
+  type: GFX
+  offset: 0x1F4CC8
+  symbol: D_xk4_800EAF58
+
+D_xk4_800EAFE0:
+  type: GFX
+  offset: 0x1F4D50
+  symbol: D_xk4_800EAFE0
+
+D_xk4_800EB080:
+  type: GFX
+  offset: 0x1F4DF0
+  symbol: D_xk4_800EB080
+
+D_xk4_800EB0D8:
+  type: GFX
+  offset: 0x1F4E48
+  symbol: D_xk4_800EB0D8
+
+D_xk4_800EB0E8:
+  type: GFX
+  offset: 0x1F4E58
+  symbol: D_xk4_800EB0E8
+
+D_xk4_800EB0F8:
+  type: GFX
+  offset: 0x1F4E68
+  symbol: D_xk4_800EB0F8
+
+D_xk4_800EB1B0:
+  type: GFX
+  offset: 0x1F4F20
+  symbol: D_xk4_800EB1B0
+
+D_xk4_800EB220:
+  type: GFX
+  offset: 0x1F4F90
+  symbol: D_xk4_800EB220
+
+D_xk4_800EB2C0:
+  type: GFX
+  offset: 0x1F5030
+  symbol: D_xk4_800EB2C0
+
+D_xk4_800EB408:
+  type: GFX
+  offset: 0x1F5178
+  symbol: D_xk4_800EB408
+
+D_xk4_800EB4F8:
+  type: GFX
+  offset: 0x1F5268
+  symbol: D_xk4_800EB4F8
+
+D_xk4_800EB588:
+  type: GFX
+  offset: 0x1F52F8
+  symbol: D_xk4_800EB588
+
+D_xk4_800EB5D8:
+  type: GFX
+  offset: 0x1F5348
+  symbol: D_xk4_800EB5D8
+
+D_xk4_800EB648:
+  type: GFX
+  offset: 0x1F53B8
+  symbol: D_xk4_800EB648
+
+D_xk4_800EB6E8:
+  type: GFX
+  offset: 0x1F5458
+  symbol: D_xk4_800EB6E8
+
+D_xk4_800EB738:
+  type: GFX
+  offset: 0x1F54A8
+  symbol: D_xk4_800EB738
+
+D_xk4_800EB840:
+  type: GFX
+  offset: 0x1F55B0
+  symbol: D_xk4_800EB840
+
+D_xk4_800EB9B8:
+  type: GFX
+  offset: 0x1F5728
+  symbol: D_xk4_800EB9B8
+
+D_xk4_800EBA58:
+  type: GFX
+  offset: 0x1F57C8
+  symbol: D_xk4_800EBA58
+
+D_xk4_800EBAC8:
+  type: GFX
+  offset: 0x1F5838
+  symbol: D_xk4_800EBAC8
+
+D_xk4_800EBB48:
+  type: GFX
+  offset: 0x1F58B8
+  symbol: D_xk4_800EBB48
+
+D_xk4_800EBBE0:
+  type: GFX
+  offset: 0x1F5950
+  symbol: D_xk4_800EBBE0
+
+D_xk4_800EBC00:
+  type: GFX
+  offset: 0x1F5970
+  symbol: D_xk4_800EBC00
+
+D_xk4_800EBC48:
+  type: GFX
+  offset: 0x1F59B8
+  symbol: D_xk4_800EBC48
+
+D_xk4_800EBC68:
+  type: GFX
+  offset: 0x1F59D8
+  symbol: D_xk4_800EBC68
+
+D_xk4_800EBCA0:
+  type: GFX
+  offset: 0x1F5A10
+  symbol: D_xk4_800EBCA0
+
+D_xk4_800EBCB8:
+  type: GFX
+  offset: 0x1F5A28
+  symbol: D_xk4_800EBCB8
+
+D_xk4_800EBCD8:
+  type: GFX
+  offset: 0x1F5A48
+  symbol: D_xk4_800EBCD8
+
+D_xk4_800EBCF8:
+  type: GFX
+  offset: 0x1F5A68
+  symbol: D_xk4_800EBCF8
+
+D_xk4_800EBD40:
+  type: GFX
+  offset: 0x1F5AB0
+  symbol: D_xk4_800EBD40
+
+D_xk4_800EBD60:
+  type: GFX
+  offset: 0x1F5AD0
+  symbol: D_xk4_800EBD60
+
+D_xk4_800EBD98:
+  type: GFX
+  offset: 0x1F5B08
+  symbol: D_xk4_800EBD98
+
+D_xk4_800EBDB0:
+  type: GFX
+  offset: 0x1F5B20
+  symbol: D_xk4_800EBDB0
+
+D_xk4_800EBDD0:
+  type: GFX
+  offset: 0x1F5B40
+  symbol: D_xk4_800EBDD0
+
+D_xk4_800EBDE8:
+  type: GFX
+  offset: 0x1F5B58
+  symbol: D_xk4_800EBDE8
+
+D_xk4_800EBE28:
+  type: GFX
+  offset: 0x1F5B98
+  symbol: D_xk4_800EBE28
+
+D_xk4_800EBE40:
+  type: GFX
+  offset: 0x1F5BB0
+  symbol: D_xk4_800EBE40
+
+D_xk4_800EBEA8:
+  type: GFX
+  offset: 0x1F5C18
+  symbol: D_xk4_800EBEA8
+
+D_xk4_800EBEC0:
+  type: GFX
+  offset: 0x1F5C30
+  symbol: D_xk4_800EBEC0
+
+D_xk4_800EBF10:
+  type: GFX
+  offset: 0x1F5C80
+  symbol: D_xk4_800EBF10
+
+D_xk4_800EBF28:
+  type: GFX
+  offset: 0x1F5C98
+  symbol: D_xk4_800EBF28
+
+D_xk4_800EBF68:
+  type: GFX
+  offset: 0x1F5CD8
+  symbol: D_xk4_800EBF68
+
+D_xk4_800EBF78:
+  type: GFX
+  offset: 0x1F5CE8
+  symbol: D_xk4_800EBF78
+
+D_xk4_800EBF90:
+  type: GFX
+  offset: 0x1F5D00
+  symbol: D_xk4_800EBF90
+
+D_xk4_800EBFA8:
+  type: GFX
+  offset: 0x1F5D18
+  symbol: D_xk4_800EBFA8
+
+D_xk4_800EBFF8:
+  type: GFX
+  offset: 0x1F5D68
+  symbol: D_xk4_800EBFF8
+
+D_xk4_800EC010:
+  type: GFX
+  offset: 0x1F5D80
+  symbol: D_xk4_800EC010
+
+D_xk4_800EC050:
+  type: GFX
+  offset: 0x1F5DC0
+  symbol: D_xk4_800EC050
+
+D_xk4_800EC060:
+  type: GFX
+  offset: 0x1F5DD0
+  symbol: D_xk4_800EC060
+
+D_xk4_800EC078:
+  type: GFX
+  offset: 0x1F5DE8
+  symbol: D_xk4_800EC078
+
+aEADDemoSkeletonLimb41:
+  type: FZX:LIMB
+  offset: 0x1F5E10
+  symbol: aEADDemoSkeletonLimb41
+
+aEADDemoSkeletonLimb40:
+  type: FZX:LIMB
+  offset: 0x1F5E48
+  symbol: aEADDemoSkeletonLimb40
+
+aEADDemoSkeletonLimb39:
+  type: FZX:LIMB
+  offset: 0x1F5E80
+  symbol: aEADDemoSkeletonLimb39
+
+aEADDemoSkeletonLimb38:
+  type: FZX:LIMB
+  offset: 0x1F5EB8
+  symbol: aEADDemoSkeletonLimb38
+
+aEADDemoSkeletonLimb37:
+  type: FZX:LIMB
+  offset: 0x1F5EF0
+  symbol: aEADDemoSkeletonLimb37
+
+aEADDemoSkeletonLimb36:
+  type: FZX:LIMB
+  offset: 0x1F5F28
+  symbol: aEADDemoSkeletonLimb36
+
+aEADDemoSkeletonLimb35:
+  type: FZX:LIMB
+  offset: 0x1F5F60
+  symbol: aEADDemoSkeletonLimb35
+
+aEADDemoSkeletonLimb34:
+  type: FZX:LIMB
+  offset: 0x1F5F98
+  symbol: aEADDemoSkeletonLimb34
+
+aEADDemoSkeletonLimb33:
+  type: FZX:LIMB
+  offset: 0x1F5FD0
+  symbol: aEADDemoSkeletonLimb33
+
+aEADDemoSkeletonLimb32:
+  type: FZX:LIMB
+  offset: 0x1F6008
+  symbol: aEADDemoSkeletonLimb32
+
+aEADDemoSkeletonLimb31:
+  type: FZX:LIMB
+  offset: 0x1F6040
+  symbol: aEADDemoSkeletonLimb31
+
+aEADDemoSkeletonLimb30:
+  type: FZX:LIMB
+  offset: 0x1F6078
+  symbol: aEADDemoSkeletonLimb30
+
+aEADDemoSkeletonLimb29:
+  type: FZX:LIMB
+  offset: 0x1F60B0
+  symbol: aEADDemoSkeletonLimb29
+
+aEADDemoSkeletonLimb28:
+  type: FZX:LIMB
+  offset: 0x1F60E8
+  symbol: aEADDemoSkeletonLimb28
+
+aEADDemoSkeletonLimb27:
+  type: FZX:LIMB
+  offset: 0x1F6120
+  symbol: aEADDemoSkeletonLimb27
+
+aEADDemoSkeletonLimb26:
+  type: FZX:LIMB
+  offset: 0x1F6158
+  symbol: aEADDemoSkeletonLimb26
+
+aEADDemoSkeletonLimb25:
+  type: FZX:LIMB
+  offset: 0x1F6190
+  symbol: aEADDemoSkeletonLimb25
+
+aEADDemoSkeletonLimb24:
+  type: FZX:LIMB
+  offset: 0x1F61C8
+  symbol: aEADDemoSkeletonLimb24
+
+aEADDemoSkeletonLimb23:
+  type: FZX:LIMB
+  offset: 0x1F6200
+  symbol: aEADDemoSkeletonLimb23
+
+aEADDemoSkeletonLimb22:
+  type: FZX:LIMB
+  offset: 0x1F6238
+  symbol: aEADDemoSkeletonLimb22
+
+aEADDemoSkeletonLimb21:
+  type: FZX:LIMB
+  offset: 0x1F6270
+  symbol: aEADDemoSkeletonLimb21
+
+aEADDemoSkeletonLimb20:
+  type: FZX:LIMB
+  offset: 0x1F62A8
+  symbol: aEADDemoSkeletonLimb20
+
+aEADDemoSkeletonLimb19:
+  type: FZX:LIMB
+  offset: 0x1F62E0
+  symbol: aEADDemoSkeletonLimb19
+
+aEADDemoSkeletonLimb18:
+  type: FZX:LIMB
+  offset: 0x1F6318
+  symbol: aEADDemoSkeletonLimb18
+
+aEADDemoSkeletonLimb17:
+  type: FZX:LIMB
+  offset: 0x1F6350
+  symbol: aEADDemoSkeletonLimb17
+
+aEADDemoSkeletonLimb16:
+  type: FZX:LIMB
+  offset: 0x1F6388
+  symbol: aEADDemoSkeletonLimb16
+
+aEADDemoSkeletonLimb15:
+  type: FZX:LIMB
+  offset: 0x1F63C0
+  symbol: aEADDemoSkeletonLimb15
+
+aEADDemoSkeletonLimb14:
+  type: FZX:LIMB
+  offset: 0x1F63F8
+  symbol: aEADDemoSkeletonLimb14
+
+aEADDemoSkeletonLimb13:
+  type: FZX:LIMB
+  offset: 0x1F6430
+  symbol: aEADDemoSkeletonLimb13
+
+aEADDemoSkeletonLimb12:
+  type: FZX:LIMB
+  offset: 0x1F6468
+  symbol: aEADDemoSkeletonLimb12
+
+aEADDemoSkeletonLimb11:
+  type: FZX:LIMB
+  offset: 0x1F64A0
+  symbol: aEADDemoSkeletonLimb11
+
+aEADDemoSkeletonLimb10:
+  type: FZX:LIMB
+  offset: 0x1F64D8
+  symbol: aEADDemoSkeletonLimb10
+
+aEADDemoSkeletonLimb9:
+  type: FZX:LIMB
+  offset: 0x1F6510
+  symbol: aEADDemoSkeletonLimb9
+
+aEADDemoSkeletonLimb8:
+  type: FZX:LIMB
+  offset: 0x1F6548
+  symbol: aEADDemoSkeletonLimb8
+
+aEADDemoSkeletonLimb7:
+  type: FZX:LIMB
+  offset: 0x1F6580
+  symbol: aEADDemoSkeletonLimb7
+
+aEADDemoSkeletonLimb6:
+  type: FZX:LIMB
+  offset: 0x1F65B8
+  symbol: aEADDemoSkeletonLimb6
+
+aEADDemoSkeletonLimb5:
+  type: FZX:LIMB
+  offset: 0x1F65F0
+  symbol: aEADDemoSkeletonLimb5
+
+aEADDemoSkeletonLimb4:
+  type: FZX:LIMB
+  offset: 0x1F6628
+  symbol: aEADDemoSkeletonLimb4
+
+aEADDemoSkeletonLimb3:
+  type: FZX:LIMB
+  offset: 0x1F6660
+  symbol: aEADDemoSkeletonLimb3
+
+aEADDemoSkeletonLimb2:
+  type: FZX:LIMB
+  offset: 0x1F6698
+  symbol: aEADDemoSkeletonLimb2
+
+aEADDemoSkeletonLimb1:
+  type: FZX:LIMB
+  offset: 0x1F66D0
+  symbol: aEADDemoSkeletonLimb1
+
+aEADDemoSkeletonLimb0:
+  type: FZX:LIMB
+  offset: 0x1F6708
+  symbol: aEADDemoSkeletonLimb0
+
+aEADDemoSkeleton:
+  type: ASSET_ARRAY
+  assetType: EADDemoLimb
+  factoryType: FZX:LIMB
+  count: 42
+  offset: 0x1F6740
+  symbol: aEADDemoSkeleton
+
+aEADDemoSugoiTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 160
+  height: 64
+  offset: 0x1F67E8
+  symbol: aEADDemoSugoiTex

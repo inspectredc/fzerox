@@ -133,7 +133,7 @@ def format_files(src_files: List[str], extra_files: List[str], nb_jobs: int):
             with multiprocessing.get_context("fork").Pool(nb_jobs) as pool:
                 pool.map(partial(run_clang_tidy_with_export, tmp_dir), file_chunks)
 
-            run_clang_apply_replacements(tmp_dir)
+            # run_clang_apply_replacements(tmp_dir)
         finally:
             shutil.rmtree(tmp_dir)
     else:

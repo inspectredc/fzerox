@@ -3,7 +3,8 @@
     - [0x05,  0x273D20]
   header:
     code:
-      - '#include "assets/podium_gfx.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(podium_gfx.h)'
     header:
       - '#include "gfx.h"'
 

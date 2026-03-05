@@ -4,8 +4,8 @@
 #include "fzx_course.h"
 #include "fzx_camera.h"
 #include "background.h"
-#include "assets/common_assets_compressed.h"
-#include "assets/machine_custom_gfx.h"
+#include ASSET_HEADER(common_assets_compressed.h)
+#include ASSET_HEADER(machine_custom_gfx.h)
 
 Background sBackgrounds[4];
 s32 sBackgroundCount;
@@ -595,7 +595,11 @@ void Background_Update(void) {
         angle = Math_Round(DEG_TO_FZXANG3(0.5f * camera->fov));
         depthFovRatio = TAN(angle);
 
+#ifndef EXPANSION_KIT
         background->horizontalRange = (background->scrollDepth + sBackgroundScale) * depthFovRatio * 1.2f;
+#else
+        background->horizontalRange = (background->scrollDepth + sBackgroundScale) * depthFovRatio * 1.5f;
+#endif
         background->verticalRange = background->horizontalRange * background->aspectRatio;
 
         xScale = camera->xzNormalizedX;
@@ -1056,14 +1060,20 @@ Gfx* Background_Draw(Gfx* gfx, s32 cameraIndex, s32 scissorBoxType) {
         gSPVertex(gfx++, &D_1000000.unk_29B48[cameraIndex * 28], 28, 0);
     }
 
-    gSPDisplayList(gfx++, D_303AA40);
-    gDPSetPrimColor(gfx++, 0, 0, skybox->courseFogR, skybox->courseFogG, skybox->courseFogB, 0);
+#ifdef EXPANSION_KIT
+    if (sBackgrounds[cameraIndex].pos.y < camera->eye.y) {
+#endif
+        gSPDisplayList(gfx++, D_303AA40);
+        gDPSetPrimColor(gfx++, 0, 0, skybox->courseFogR, skybox->courseFogG, skybox->courseFogB, 0);
 
-    gDPLoadTextureBlock(gfx++, sVenueFloorTexture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                        G_TX_NOMIRROR | G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock(gfx++, sVenueFloorTexture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 32, 0,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    gSP2Triangles(gfx++, 0, 3, 1, 0, 0, 2, 3, 0);
-    gSP2Triangles(gfx++, 4, 7, 5, 0, 4, 6, 7, 0);
+        gSP2Triangles(gfx++, 0, 3, 1, 0, 0, 2, 3, 0);
+        gSP2Triangles(gfx++, 4, 7, 5, 0, 4, 6, 7, 0);
+#ifdef EXPANSION_KIT
+    }
+#endif
 
     if (gGameMode == GAMEMODE_GP_END_CS) {
         gfx = EndingCutsceneEffects_DrawFireworks(gfx);
@@ -1092,6 +1102,7 @@ Gfx* Background_Draw(Gfx* gfx, s32 cameraIndex, s32 scissorBoxType) {
 extern s16 gPlayer1OverallPosition;
 extern s32 gCupType;
 extern GfxPool D_8024DCE0[];
+extern bool gInCourseEditTestRun;
 
 void Background_InitBackgroundSprites(void) {
     s32 pad[3];
@@ -1111,6 +1122,12 @@ void Background_InitBackgroundSprites(void) {
     if (gNumPlayers != 1) {
         return;
     }
+
+#ifdef EXPANSION_KIT
+    if (gInCourseEditTestRun) {
+        return;
+    }
+#endif
 
     if (gCourseIndex < COURSE_EDIT_1) {
         bgSpriteInitData = sBackgroundSpriteCourseInitData[gCourseIndex];
@@ -1168,6 +1185,14 @@ void Background_InitBackgroundSprites(void) {
                 case EDIT_CUP:
                     backgroundSprite->spriteId = BG_SPRITE_EDIT_CUP_BUILDING;
                     break;
+#ifdef EXPANSION_KIT
+                case JACK_CUP:
+                    backgroundSprite->spriteId = BG_SPRITE_JACK_CUP_BUILDING;
+                    break;
+                default:
+                    backgroundSprite->spriteId = BG_SPRITE_FZERO_X_BUILDING;
+                    break;
+#endif
             }
         }
         backgroundSprite->isVisible = false;

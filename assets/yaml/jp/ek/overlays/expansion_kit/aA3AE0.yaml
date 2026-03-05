@@ -1,0 +1,25 @@
+:config:
+  header:
+    code:
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(overlays/expansion_kit/aA3AE0.h)'
+    header:
+      - '#include "libultra/ultra64.h"'
+
+D_xk1_800302F0:
+  type: TEXTURE
+  offset: 0xAD560
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  symbol: D_xk1_800302F0
+
+D_xk1_80030470:
+  type: TEXTURE
+  offset: 0xAD6E0
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  symbol: D_xk1_80030470

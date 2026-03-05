@@ -5,7 +5,7 @@
 
 #ifndef EXPANSION_KIT
 #define BORDERED_BOX_COUNT 3
-#else // EXPANSION_KIT
+#else
 #define BORDERED_BOX_COUNT 5
 #endif
 
@@ -25,6 +25,9 @@ typedef struct BorderedBoxWidget {
     /* 0x16 */ s16 maxHeight;
     /* 0x18 */ u16 boxColor;
     /* 0x1A */ u16 borderColor;
+#ifdef EXPANSION_KIT
+    /* 0x1C */ u16 depth;
+#endif
     /* 0x1C */ BorderedBoxContentsDrawFunc contentsDrawFunc;
 } BorderedBoxWidget; // size = 0x20
 
@@ -44,7 +47,11 @@ typedef enum BorderedBoxInfoRequest {
 
 void BorderedBox_CleanWidget(BorderedBoxWidget** boxPtr);
 void BorderedBox_ClearAll(void);
+#ifndef EXPANSION_KIT
 BorderedBoxWidget* BorderedBox_Init(s16 id, s16 left, s16 top, s16 width, s16 height, u16 borderColor, BorderedBoxContentsDrawFunc contentsDrawFunc);
+#else
+BorderedBoxWidget* BorderedBox_Init(s16 id, s16 left, s16 top, s16 width, s16 height, u16 depth, u16 borderColor, BorderedBoxContentsDrawFunc contentsDrawFunc);
+#endif
 void BorderedBox_StartClose(BorderedBoxWidget* box);
 void BorderedBox_Update(void);
 Gfx* BorderedBox_Draw(Gfx* gfx);

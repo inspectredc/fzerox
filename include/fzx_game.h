@@ -106,6 +106,7 @@ typedef enum Difficulty {
     /* 1 */ STANDARD,
     /* 2 */ EXPERT,
     /* 3 */ MASTER,
+    /* 4 */ DIFFICULTY_MAX,
 } Difficulty;
 
 typedef enum Character {
@@ -148,8 +149,14 @@ typedef enum Cup {
     /* 3 */ JOKER_CUP,
     /* 4 */ X_CUP,
     /* 5 */ EDIT_CUP,
+#ifdef EXPANSION_KIT
     /* 6 */ DD_1_CUP,
     /* 7 */ DD_2_CUP,
+#endif
+    /* 8 */ CUP_MAX,
 } Cup;
+
+#define NUM_COMPETITIVE_CUPS (CUP_MAX - 1)
+#define NUM_DIFFICULTIES DIFFICULTY_MAX
 
 #endif // FZX_GAME_H

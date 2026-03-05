@@ -3,7 +3,8 @@
     - [0x0A,  0x23F0D0]
   header:
     code:
-      - '#include "assets/big_blue_textures.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(big_blue_textures.h)'
     header:
       - '#include "gfx.h"'
 

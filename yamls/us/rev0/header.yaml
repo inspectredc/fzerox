@@ -3,13 +3,15 @@ sha1: 5f658e88ffa9de23cba6986a8fd3d3a90d7b4340
 options:
   basename: fzerox
   target_path: baserom.us.rev0.z64
-  elf_path: build/fzerox.us.rev0.elf
+  elf_path: build/us/rev0/fzerox.us.rev0.elf
   ld_script_path: linker_scripts/us/rev0/fzerox.ld
   base_path: .
   compiler: IDO
   find_file_boundaries: True
   header_encoding: ASCII
   platform: n64
+  # create_undefined_funcs_auto: False
+  # create_undefined_syms_auto: False
   undefined_funcs_auto_path: linker_scripts/us/rev0/auto/undefined_funcs_auto.ld
   undefined_syms_auto_path: linker_scripts/us/rev0/auto/undefined_syms_auto.ld
 
@@ -22,7 +24,7 @@ options:
   src_path: src
   asset_path: bin/us/rev0
 
-  build_path: build
+  build_path: build/us/rev0
 
   extensions_path: tools/splat_ext
   mips_abi_float_regs: o32
@@ -33,7 +35,6 @@ options:
   mnemonic_ljust: 12
   rom_address_padding: True
   dump_symbols: True
-  include_macro_inc: False
   libultra_symbols: True
   hardware_regs: True
 

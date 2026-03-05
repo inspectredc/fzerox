@@ -1,6 +1,6 @@
 #include "global.h"
 #include "fzx_bordered_box.h"
-#include "assets/course_track_gfx.h"
+#include ASSET_HEADER(course_track_gfx.h)
 
 void BorderedBox_CleanWidget(BorderedBoxWidget** boxPtr) {
     *boxPtr = NULL;
@@ -23,8 +23,13 @@ void BorderedBox_ClearAll(void) {
     }
 }
 
+#ifndef EXPANSION_KIT
 BorderedBoxWidget* BorderedBox_Init(s16 id, s16 left, s16 top, s16 width, s16 height, u16 borderColor,
                                     BorderedBoxContentsDrawFunc contentsDrawFunc) {
+#else
+BorderedBoxWidget* BorderedBox_Init(s16 id, s16 left, s16 top, s16 width, s16 height, u16 depth, u16 borderColor,
+                                    BorderedBoxContentsDrawFunc contentsDrawFunc) {
+#endif
     s32 i;
     BorderedBoxWidget* box;
     s64 state = BORDERED_BOX_OPEN_WIDTH;
@@ -41,7 +46,7 @@ BorderedBoxWidget* BorderedBox_Init(s16 id, s16 left, s16 top, s16 width, s16 he
         }
     }
 
-    if (i == 3) {
+    if (i == BORDERED_BOX_COUNT) {
         return NULL;
     }
     sBorderedBoxCount++;
@@ -58,11 +63,19 @@ BorderedBoxWidget* BorderedBox_Init(s16 id, s16 left, s16 top, s16 width, s16 he
     box->maxHeight = height;
     box->boxColor = GPACK_RGBA5551(0, 0, 0, 1);
     box->borderColor = borderColor;
+#ifdef EXPANSION_KIT
+    box->depth = depth;
+#endif
     box->contentsDrawFunc = contentsDrawFunc;
     return box;
 }
 
 void BorderedBox_StartClose(BorderedBoxWidget* box) {
+#ifdef EXPANSION_KIT
+    if (box == NULL) {
+        return;
+    }
+#endif
     box->state = BORDERED_BOX_CLOSE_HEIGHT;
     box->timer = 0;
     box->maxLeft = box->left;
@@ -146,11 +159,59 @@ void BorderedBox_Update(void) {
 Gfx* BorderedBox_Draw(Gfx* gfx) {
     s32 i;
     BorderedBoxWidget* box;
+#ifdef EXPANSION_KIT
+    s32 j;
+    s32 boxCount;
+    BorderedBoxWidget* box2;
+    s16* boxIndex;
+    bool swapIndexes;
+    s16 tempIndex;
+    s16 sortedBoxIndexes[5];
+#endif
 
+#ifdef EXPANSION_KIT
+    boxCount = 0;
+    for (i = 0, box = sBorderedBoxes, boxIndex = sortedBoxIndexes; i < BORDERED_BOX_COUNT; i++, boxIndex++, box++) {
+        *boxIndex = i;
+        if (box->id != -1) {
+            boxCount++;
+        }
+    }
+
+    for (i = 0; i < BORDERED_BOX_COUNT; i++) {
+        box = &sBorderedBoxes[sortedBoxIndexes[i]];
+        for (j = i + 1; j < BORDERED_BOX_COUNT; j++) {
+            swapIndexes = false;
+            box2 = &sBorderedBoxes[sortedBoxIndexes[j]];
+
+            if (box->id == -1) {
+                if (box2->id != -1) {
+                    swapIndexes = true;
+                }
+            } else {
+                if (box2->id != -1 && box2->depth < box->depth) {
+                    swapIndexes = true;
+                }
+            }
+
+            if (swapIndexes) {
+                tempIndex = sortedBoxIndexes[i];
+                sortedBoxIndexes[i] = sortedBoxIndexes[j];
+                sortedBoxIndexes[j] = tempIndex;
+            }
+        }
+    }
+#endif
+
+#ifndef EXPANSION_KIT
     for (i = 0, box = sBorderedBoxes; i < BORDERED_BOX_COUNT; i++, box++) {
         if (box->id == -1) {
             continue;
         }
+#else
+    for (i = 0; i < boxCount; i++, box++) {
+        box = &sBorderedBoxes[sortedBoxIndexes[i]];
+#endif
 
         gSPDisplayList(gfx++, D_80149A0);
         gDPSetFillColor(gfx++, box->borderColor << 16 | box->borderColor);
@@ -165,6 +226,7 @@ Gfx* BorderedBox_Draw(Gfx* gfx) {
             gfx = box->contentsDrawFunc(gfx, box->left, box->top);
         }
     }
+
     return gfx;
 }
 

@@ -1,6 +1,5 @@
 #include "global.h"
-
-extern Gfx D_8014940[];
+#include ASSET_HEADER(course_track_gfx.h)
 
 Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr palette, s32 format, s32 unkTmemFlag, s32 left, s32 top,
                    s32 width, s32 height, u16 unkDrawFlag) {
@@ -87,6 +86,40 @@ void func_8007ECCC(u16* pixel, s32 textureSize) {
         *pixel = (colorBlend << 1) + (colorBlend << 6) + (colorBlend << 11) + alpha;
     }
 }
+
+#ifdef EXPANSION_KIT
+
+void func_8070EA38(u16* pixel, s32 arg1, s32 arg2) {
+    s32 i;
+    u16 var_v0;
+    u16 temp_a0;
+    u16 temp_a2;
+    u16 temp_t0;
+    u32 red, green, blue;
+
+    var_v0 = GPACK_RGBA5551(0, 0, 0, 1);
+    for (i = 0; i < arg1; i++, pixel++) {
+        temp_a0 = *pixel;
+        temp_a2 = *(pixel + 1);
+        temp_t0 = *(pixel + arg2);
+
+        red = (((var_v0 & 0xF800) >> 11)) + (((temp_a0 & 0xF800) >> 11)) + (((temp_a2 & 0xF800) >> 11)) +
+              (((temp_t0 & 0xF800) >> 11));
+        green = (((var_v0 & 0x7C0) >> 6)) + (((temp_a0 & 0x7C0) >> 6)) + (((temp_a2 & 0x7C0) >> 6)) +
+                (((temp_t0 & 0x7C0) >> 6));
+        blue = (((var_v0 & 0x3E) >> 1)) + (((temp_a0 & 0x3E) >> 1)) + (((temp_a2 & 0x3E) >> 1)) +
+               (((temp_t0 & 0x3E) >> 1));
+
+        // clang-format off
+        red /= 4; green /= 4; blue /= 4;
+        // clang-format on
+
+        var_v0 = temp_a0;
+
+        *pixel = (red << 11) | (green << 6) | (blue << 1) | 1;
+    }
+}
+#endif
 
 s32 func_8007EF68(u16* palette, s32 paletteSize, u16 pixelColor) {
     s32 i;

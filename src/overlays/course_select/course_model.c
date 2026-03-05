@@ -1,21 +1,101 @@
 #include "global.h"
 #include "course_select.h"
 #include "fzx_game.h"
+#include "fzx_save.h"
+#include "fzx_course.h"
 #include "fzx_camera.h"
-#include "assets/setup_gfx.h"
+#include ASSET_HEADER(setup_gfx.h)
+
+s32 D_801197B0[8];
+Vtx* D_i5_801197D0;
+
+s32 gCourseModelCupType = 0;
+s32 D_i5_801190B4 = 0;
+s32 gCourseModelCupCourseNo = 0;
+
+extern s8 D_i5_8007B9EC[];
+extern s32 D_8076CB44;
+extern u8 D_80794E14;
 
 void func_i5_80115DF0(void) {
+#ifdef EXPANSION_KIT
+    D_i5_801197D0 = Arena_Allocate(ALLOC_FRONT, 0x3600 * sizeof(Vtx));
+#endif
     func_i5_801161D8();
 }
 
 void func_i5_80115E10(void) {
-
+#ifndef EXPANSION_KIT
     if (D_i5_801190B4 > 0) {
         if (D_i5_801190B4 < 7) {
             func_i5_80116678(gCourseModelCupType);
         }
         D_i5_801190B4--;
     }
+#else
+    static s32 D_i5_8007B07C = 0;
+    GhostSave* ghostSave = COURSE_CONTEXT()->ghostSave;
+    SaveCourseRecords* courseRecords = &COURSE_CONTEXT()->saveCourseRecord;
+    s32 i;
+    bool var_a3;
+
+    if ((D_i5_801190B4 > 0) && (D_i5_801190B4 < 7) && (D_i5_8007B07C == 0)) {
+        if (gCourseModelCupType >= 4) {
+            D_8076CB44 = 1;
+        } else {
+            D_8076CB44 = 0;
+        }
+        D_i5_8007B07C = 1;
+        func_80704050(true);
+        func_80702448(gCourseModelCupType * 6 + gCourseModelCupCourseNo);
+        func_80704050(false);
+    }
+
+    if ((D_8076CB44 == 0) && (D_i5_8007B07C == 1)) {
+        D_i5_8007B07C = 0;
+        func_80074428(gCourseModelCupType * 6 + gCourseModelCupCourseNo);
+        func_80074634(&gCourseInfos[gCourseModelCupType * 6 + gCourseModelCupCourseNo]);
+        Course_SegmentLengthsInit(&gCourseInfos[gCourseModelCupType * 6 + gCourseModelCupCourseNo]);
+        D_801197B0[gCourseModelCupCourseNo] =
+            func_800A2D2C(&gCourseInfos[gCourseModelCupType * 6 + gCourseModelCupCourseNo],
+                          &D_i5_801197D0[gCourseModelCupCourseNo * 0x900]);
+        gCourseModelCupCourseNo++;
+        D_i5_801190B4--;
+    }
+    if ((D_8076CB44 == 1) && (D_i5_8007B07C == 1)) {
+        var_a3 = false;
+        if (D_80794E14 == 0) {
+            for (i = 0; i < 3; i++) {
+                if ((ghostSave[i].record.encodedCourseIndex !=
+                     gCourseInfos[gCourseModelCupType * 6 + gCourseModelCupCourseNo].encodedCourseIndex)) {
+                    continue;
+                }
+
+                if (ghostSave[i].record.encodedCourseIndex == 0) {
+                    continue;
+                }
+                if (1) {}
+
+                var_a3 = true;
+            }
+            if (var_a3) {
+                D_i5_8007B9EC[gCourseModelCupType * 6 + gCourseModelCupCourseNo] |= 1;
+            }
+            D_i5_8007B07C = 0;
+            func_80074428(gCourseModelCupType * 6 + gCourseModelCupCourseNo);
+            func_80074634(&gCourseInfos[gCourseModelCupType * 6 + gCourseModelCupCourseNo]);
+            Course_SegmentLengthsInit(&gCourseInfos[gCourseModelCupType * 6 + gCourseModelCupCourseNo]);
+            D_801197B0[gCourseModelCupCourseNo] =
+                func_800A2D2C(&gCourseInfos[gCourseModelCupType * 6 + gCourseModelCupCourseNo],
+                              &D_i5_801197D0[gCourseModelCupCourseNo * 0x900]);
+            gCourseModelCupCourseNo++;
+            D_i5_801190B4--;
+        }
+    }
+    if (D_i5_801190B4 >= 7) {
+        D_i5_801190B4--;
+    }
+#endif
     Camera_Update();
 }
 
@@ -24,9 +104,9 @@ extern GfxPool D_1000000;
 extern GfxPool* gGfxPool;
 extern s32 D_800DCCFC;
 extern Camera gCameras[];
-
-s32 D_801197B0[8];
-Vtx* D_i5_801197D0;
+extern s32 gSelectedMode;
+extern s32 gCupType;
+extern char gEditCupTrackNames[][9];
 
 // Track 3D Models
 Gfx* func_i5_80115E64(Gfx* gfx) {
@@ -61,13 +141,27 @@ Gfx* func_i5_80115E64(Gfx* gfx) {
     gSPMatrix(gfx++, D_1000000.unk_20008, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gfx++, D_1000000.unk_20108, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
+#ifndef EXPANSION_KIT
     guScale(gGfxPool->unk_20308, 0.25f, 0.25f, 0.25f);
+#else
+    Matrix_SetLockedLookAt(gGfxPool->unk_20308, NULL, 0.25f, 0.25f, 0.25f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+                           0.0f, 0.0f);
+#endif
     gSPMatrix(gfx++, K0_TO_PHYS(gGfxPool->unk_20308), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     if (D_i5_801190B4 < 6) {
         for (i = 0; i < gCourseModelCupCourseNo; i++) {
+#ifdef EXPANSION_KIT
+            if ((gCupType == EDIT_CUP) && (gSelectedMode == MODE_TIME_ATTACK) && (gEditCupTrackNames[i][0] == '\0')) {
+                continue;
+            }
+#endif
             gSPViewport(gfx++, &D_i5_80118FF0[D_800DCCFC][i]);
+#ifndef EXPANSION_KIT
             gfx = Course_DrawModel(gfx, &D_i5_801197D0[i * 0xC00], D_801197B0[i]);
+#else
+            gfx = Course_DrawModel(gfx, &D_i5_801197D0[i * 0x900], D_801197B0[i]);
+#endif
         }
     }
     return gfx;
@@ -76,7 +170,9 @@ Gfx* func_i5_80115E64(Gfx* gfx) {
 void func_i5_801161D8(void) {
     s32 i;
 
+#ifndef EXPANSION_KIT
     D_i5_801197D0 = (Vtx*) Arena_Allocate(ALLOC_FRONT, 0x4800 * sizeof(Vtx));
+#endif
 
     for (i = 0; i < 6; i++) {
         D_i5_80118FF0[0][i].vp.vscale[0] = (SCREEN_WIDTH / 4) << 2;
@@ -121,6 +217,7 @@ void CourseModel_Init(s32 cupType) {
     gCourseModelCupCourseNo = 0;
 }
 
+#ifndef EXPANSION_KIT
 void func_i5_80116678(s32 cupType) {
 
     if (cupType == X_CUP) {
@@ -139,3 +236,4 @@ void func_i5_80116678(s32 cupType) {
         gCourseModelCupCourseNo++;
     }
 }
+#endif

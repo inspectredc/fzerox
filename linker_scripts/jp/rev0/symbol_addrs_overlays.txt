@@ -12,9 +12,12 @@ func_i6_8011D394 = 0x8011CC44; // segment:ovl_i6
 
 EndingCutscene_DrawPodiums = 0x80146728; // segment:ending
 
-LeoGetKAdr = 0x80414160; // segment:leo
+LeoGetKAdr = 0x80414160; // segment:leo // use_non_matching_label:False
 D_i1_80411850 = 0x80414250; // segment:leo type:u16
-LeoGetAAdr = 0x80414CA0; // segment:leo
+LeoGetAAdr = 0x80414CA0; // segment:leo // use_non_matching_label:False
+
+// Not a real symbol!
+func_i4_80115680 = 0x80115680; // use_non_matching_label:False
 
 // referenced data/bss
 

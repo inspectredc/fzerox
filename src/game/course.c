@@ -5,9 +5,17 @@
 #include "fzx_math.h"
 #include "fzx_camera.h"
 #include "fzx_segmentA.h"
-#include "assets/course_track_gfx.h"
+#include ASSET_HEADER(course_track_gfx.h)
 
 #define VERTEX_MODIFIED_ST(s, t) ((((s) << 15) & 0xFFFF0000) | ((t) &0xFFFF))
+
+#ifndef EXPANSION_KIT
+#define SEGMENT_CHUNK_GROUP_COUNT 64
+#define SEGMENT_CHUNK_COUNT 0x400
+#else
+#define SEGMENT_CHUNK_GROUP_COUNT 96
+#define SEGMENT_CHUNK_COUNT 0x300
+#endif
 
 typedef struct unk_800CF528 {
     s32 texture;
@@ -51,7 +59,7 @@ s32 gSegmentChunkCount;
 SegmentChunk* sLastSegmentChunk;
 Vtx* gCourseVtxPtr;
 s32 D_800F8524;
-SegmentChunkGroup sSegmentChunkGroups[64];
+SegmentChunkGroup sSegmentChunkGroups[SEGMENT_CHUNK_GROUP_COUNT];
 s32 sLastTrackShapeType;
 s32 D_800F892C;
 s16 D_800F8930[5];
@@ -376,6 +384,35 @@ void func_8009CED0(s32 venue) {
     }
 }
 
+#ifdef EXPANSION_KIT
+void func_i2_800B0FAC(CourseSegment* segment, Mtx3F* basis) {
+    f32 normalizingFactor;
+    f32 sp38;
+    f32 sp34;
+    f32 sp30;
+    Vec3f forward;
+    f32 temp_ft4;
+
+    normalizingFactor = 1.0f / Course_SplineGetTangent(segment, 0.0f, &forward);
+    forward.x *= normalizingFactor;
+    forward.y *= normalizingFactor;
+    forward.z *= normalizingFactor;
+
+    sp38 = basis->x.x - forward.x;
+    sp34 = basis->x.y - forward.y;
+    sp30 = basis->x.z - forward.z;
+
+    //! @bug This should probably use z instead of y twice
+    temp_ft4 = ((sp38 * segment->up.x) + (sp34 * segment->up.y) + (sp38 * segment->up.y));
+    temp_ft4 *= 2.0f;
+
+    basis->y.x = (segment->up.x + sp38) - (temp_ft4 * segment->up.x);
+    basis->y.y = (segment->up.y + sp34) - (temp_ft4 * segment->up.y);
+    basis->y.z = (segment->up.z + sp30) - (temp_ft4 * segment->up.z);
+    Math_OrthonormalizeAroundForward(basis);
+}
+#endif
+
 s32 func_8009D16C(RacerSegmentPositionInfo* arg0, f32 arg1, f32 arg2, f32 arg3, Mtx3F* arg4) {
     s32 i;
     Vec3f sp130;
@@ -545,9 +582,24 @@ s32 func_8009D16C(RacerSegmentPositionInfo* arg0, f32 arg1, f32 arg2, f32 arg3, 
     arg4->y.y = ((var_s1_2->next->up.y - var_s1_2->up.y) * sp88.segmentTValue) + var_s1_2->up.y;
     arg4->y.z = ((var_s1_2->next->up.z - var_s1_2->up.z) * sp88.segmentTValue) + var_s1_2->up.z;
 
+#ifdef EXPANSION_KIT
+    if ((arg4->y.x == 0.0f) && (arg4->y.y == 0.0f) && (arg4->y.z == 0.0f)) {
+        func_i2_800B0FAC(var_s1_2, arg4);
+        return 0;
+    }
+#endif
+
     arg4->z.x = CROSS_X(&arg4->y, &arg4->x);
     arg4->z.y = CROSS_Y(&arg4->y, &arg4->x);
     arg4->z.z = CROSS_Z(&arg4->y, &arg4->x);
+
+#ifdef EXPANSION_KIT
+    if ((arg4->z.x == 0.0f) && (arg4->z.y == 0.0f) && (arg4->z.z == 0.0f)) {
+        func_i2_800B0FAC(var_s1_2, arg4);
+        return 0;
+    }
+#endif
+
     temp_fv1 = 1.0f / sqrtf(SQ_SUM(&arg4->z));
     arg4->z.x *= temp_fv1;
     arg4->z.y *= temp_fv1;
@@ -555,7 +607,7 @@ s32 func_8009D16C(RacerSegmentPositionInfo* arg0, f32 arg1, f32 arg2, f32 arg3, 
     return 0;
 }
 
-#ifdef NON_EQUIVALENT
+#ifdef NON_MATCHING
 // Weird float/double calculations
 void func_8009DB28(CourseSegment* segment, f32* arg1, f32* arg2) {
     f64 temp_ft5;
@@ -632,10 +684,14 @@ void func_8009DB28(CourseSegment* segment, f32* arg1, f32* arg2) {
 }
 #else
 void func_8009DB28(CourseSegment*, f32*, f32*);
+#ifndef EXPANSION_KIT
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/course/func_8009DB28.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/course/func_8009DB28.s")
+#endif
+#else
+#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/game/course/func_8009DB28.s")
 #endif
 #endif
 
@@ -881,9 +937,23 @@ f32 Course_SplineGetBasis(CourseSegment* segment, f32 t, Mtx3F* basis, f32 lengt
     basis->y.y = (segment->next->up.y - segment->up.y) * lengthProportionAlongSegment + segment->up.y;
     basis->y.z = (segment->next->up.z - segment->up.z) * lengthProportionAlongSegment + segment->up.z;
 
+#ifdef EXPANSION_KIT
+    if ((basis->y.x == 0.0f) && (basis->y.y == 0.0f) && (basis->y.z == 0.0f)) {
+        func_i2_800B0FAC(segment, basis);
+        return sp50;
+    }
+#endif
+
     basis->z.x = basis->y.y * basis->x.z - basis->y.z * basis->x.y;
     basis->z.y = basis->y.z * basis->x.x - basis->y.x * basis->x.z;
     basis->z.z = basis->y.x * basis->x.y - basis->y.y * basis->x.x;
+
+#ifdef EXPANSION_KIT
+    if ((basis->z.x == 0.0f) && (basis->z.y == 0.0f) && (basis->z.z == 0.0f)) {
+        func_i2_800B0FAC(segment, basis);
+        return sp50;
+    }
+#endif
 
     tension = 1.0f / sqrtf(SQ(basis->z.x) + SQ(basis->z.y) + SQ(basis->z.z));
 
@@ -1027,7 +1097,17 @@ s32 func_8009EBEC(RacerSegmentPositionInfo* arg0, f32 xPos, f32 yPos, f32 zPos, 
         arg0->segmentDisplacement.y = CROSS_Y(&arg0->segmentForward, &arg0->pos);
         arg0->segmentDisplacement.z = CROSS_Z(&arg0->segmentForward, &arg0->pos);
 
+#ifndef EXPANSION_KIT
         temp_fa0 = arg0->distanceFromSegment / sqrtf(SQ_SUM(&arg0->segmentDisplacement));
+#else
+        temp_fa0 = SQ_SUM(&arg0->segmentDisplacement);
+
+        if (temp_fa0 == 0.0f) {
+            break;
+        }
+
+        temp_fa0 = arg0->distanceFromSegment / sqrtf(temp_fa0);
+#endif
 
         arg0->segmentDisplacement.x *= temp_fa0;
         arg0->lastGroundedPos.x = pad = arg0->segmentDisplacement.x + arg0->segmentPos.x;
@@ -1075,6 +1155,8 @@ s32 func_8009F334(CourseInfo* courseInfo) {
     return 0;
 }
 
+extern bool gInCourseEditor;
+
 s32 Course_SegmentJoinsInit(CourseInfo* courseInfo) {
     s32 var_v1 = 0;
     CourseSegment* segment = courseInfo->courseSegments;
@@ -1100,6 +1182,11 @@ s32 Course_SegmentJoinsInit(CourseInfo* courseInfo) {
                     (gTrackJoinUpperLength[TRACK_SHAPE_INDEX((u32) segment->trackSegmentInfo & TRACK_SHAPE_MASK)] +
                      100.0f)) {
                     var_v1 = -1;
+#ifdef EXPANSION_KIT
+                    if (gInCourseEditor) {
+                        func_xk2_800F1330(segment - courseInfo->courseSegments, 2);
+                    }
+#endif
                 }
                 break;
             case TRACK_JOIN_BOTH:
@@ -1108,6 +1195,11 @@ s32 Course_SegmentJoinsInit(CourseInfo* courseInfo) {
                       gTrackJoinUpperLength[TRACK_SHAPE_INDEX((u32) segment->trackSegmentInfo & TRACK_SHAPE_MASK)]) +
                      100.0f)) {
                     var_v1 = -1;
+#ifdef EXPANSION_KIT
+                    if (gInCourseEditor) {
+                        func_xk2_800F1330(segment - courseInfo->courseSegments, 2);
+                    }
+#endif
                 }
                 break;
             default:
@@ -1194,6 +1286,47 @@ void Course_SegmentLengthsInit(CourseInfo* courseInfo) {
         segment = segment->next;
     } while (segment != courseInfo->courseSegments);
 }
+
+#ifdef EXPANSION_KIT
+s32 func_i2_800B39B4(CourseInfo* courseInfo) {
+    Vec3f vec1;
+    Vec3f vec2;
+    f32 temp_fs0;
+    CourseSegment* nextSegment;
+    CourseSegment* prevSegment;
+    CourseSegment* segment = courseInfo->courseSegments;
+
+    do {
+        prevSegment = segment->prev;
+        nextSegment = segment->next;
+        vec1.x = segment->pos.x - prevSegment->pos.x;
+        vec1.y = segment->pos.y - prevSegment->pos.y;
+        vec1.z = segment->pos.z - prevSegment->pos.z;
+        temp_fs0 = 1.0f / sqrtf(SQ_SUM(&vec1));
+
+        vec1.x *= temp_fs0;
+        vec1.y *= temp_fs0;
+        vec1.z *= temp_fs0;
+
+        vec2.x = nextSegment->pos.x - segment->pos.x;
+        vec2.y = nextSegment->pos.y - segment->pos.y;
+        vec2.z = nextSegment->pos.z - segment->pos.z;
+
+        temp_fs0 = 1.0f / sqrtf(SQ_SUM(&vec2));
+
+        vec2.x *= temp_fs0;
+        vec2.y *= temp_fs0;
+        vec2.z *= temp_fs0;
+
+        if (DOT_XYZ(&vec1, &vec2) < -0.997f) {
+            return segment - courseInfo->courseSegments;
+        }
+        segment = segment->next;
+    } while (segment != courseInfo->courseSegments);
+
+    return -1;
+}
+#endif
 
 f32 func_8009F87C(Mtx3F* arg0, Mtx3F* arg1, Vec3f* arg2, Vec3f* arg3) {
     f32 temp_v1;
@@ -1555,9 +1688,19 @@ void Course_ChunkCalculateHalfPipeReferencePos(SegmentChunk* chunk, f32 radiusLe
     chunk->referencePos5[1] = Math_Round(sp54 - temp_fs4);
     chunk->referencePos5[2] = Math_Round(temp_fs0 - temp_fs5);
 
+#ifndef EXPANSION_KIT
     chunk->referencePos2[0] = Math_Round(bottomPos->x = chunk->pos.x - (sp64 * basis->y.x));
     chunk->referencePos2[1] = Math_Round(bottomPos->y = chunk->pos.y - (sp64 * basis->y.y));
     chunk->referencePos2[2] = Math_Round(bottomPos->z = chunk->pos.z - (sp64 * basis->y.z));
+#else
+    chunk->referencePos2[0] = Math_Round(bottomPos->x = chunk->pos.x - (sp58 = (sp64 * basis->y.x)));
+    chunk->referencePos2[1] = Math_Round(bottomPos->y = chunk->pos.y - (sp54 = (sp64 * basis->y.y)));
+    chunk->referencePos2[2] = Math_Round(bottomPos->z = chunk->pos.z - (temp_fs0 = (sp64 * basis->y.z)));
+
+    topPos->x = chunk->pos.x + sp58;
+    topPos->y = chunk->pos.y + sp54;
+    topPos->z = chunk->pos.z + temp_fs0;
+#endif
 
     sp64 *= 1.2f;
     temp_fs1 = gSinTable[0xE80] * sp64;
@@ -1574,9 +1717,15 @@ void Course_ChunkCalculateHalfPipeReferencePos(SegmentChunk* chunk, f32 radiusLe
     chunk->referencePos3[1] = Math_Round(sp54 - temp_fs4);
     chunk->referencePos3[2] = Math_Round(temp_fs0 - temp_fs5);
 
+#ifndef EXPANSION_KIT
     chunk->referencePos1[0] = Math_Round((topPos->x = centerPos->x = chunk->pos.x) - (sp64 * basis->y.x));
     chunk->referencePos1[1] = Math_Round((topPos->y = centerPos->y = chunk->pos.y) - (sp64 * basis->y.y));
     chunk->referencePos1[2] = Math_Round((topPos->z = centerPos->z = chunk->pos.z) - (sp64 * basis->y.z));
+#else
+    chunk->referencePos1[0] = Math_Round((centerPos->x = chunk->pos.x) - (sp64 * basis->y.x));
+    chunk->referencePos1[1] = Math_Round((centerPos->y = chunk->pos.y) - (sp64 * basis->y.y));
+    chunk->referencePos1[2] = Math_Round((centerPos->z = chunk->pos.z) - (sp64 * basis->y.z));
+#endif
 }
 
 void Course_ChunkCalculateTunnelReferencePos(SegmentChunk* chunk, f32 radiusLeft, f32 radiusRight, Mtx3F* basis,
@@ -1749,6 +1898,22 @@ f32 Course_SegmentGetJoinLengths(CourseSegment* segment) {
     segment->joinScale = -1.0f;
     joinLength = gTrackJoinUpperLength[TRACK_SHAPE_INDEX((u32) segment->trackSegmentInfo & TRACK_SHAPE_MASK)];
 
+#ifdef EXPANSION_KIT
+    switch (segment->trackSegmentInfo & TRACK_JOIN_MASK) {
+        case TRACK_JOIN_PREVIOUS:
+        case TRACK_JOIN_NEXT:
+            if (segment->length <= (joinLength + 100.0f)) {
+                joinLength = segment->length * 0.5f;
+            }
+            break;
+        case TRACK_JOIN_BOTH:
+            if (segment->length <= ((2.0f * joinLength) + 100.0f)) {
+                joinLength = segment->length * 0.3f;
+            }
+            break;
+    }
+#endif
+
     if (segment->trackSegmentInfo & TRACK_JOIN_PREVIOUS) {
         segment->previousJoinEndTValue = 0.0f;
         length = 0.0f;
@@ -1839,6 +2004,7 @@ s32 func_800A18FC(s32 trackSegmentInfo, f32 distance) {
 }
 
 extern SegmentChunk gSegmentChunks[];
+extern Mtx3F D_80033840[];
 
 s32 func_800A1954(CourseInfo* courseInfo) {
     CourseSegment* startSegment;
@@ -1891,6 +2057,9 @@ s32 func_800A1954(CourseInfo* courseInfo) {
     unk_800CF528* temp_a3;
     f32 joinLengths;
     s32 spB4;
+#ifdef EXPANSION_KIT
+    Mtx3F* spB0;
+#endif
     Vec3f spA8;
     s32 pad;
 
@@ -1911,6 +2080,13 @@ s32 func_800A1954(CourseInfo* courseInfo) {
     }
     joinLengths = Course_SegmentGetJoinLengths(segment);
     forwardMagnitude = Course_SplineGetBasis(segment, 0.0f, &segmentBasis, 0.0f);
+
+#ifdef EXPANSION_KIT
+    if (gInCourseEditor) {
+        D_80033840[0] = segmentBasis;
+        spB0 = &D_80033840[1];
+    }
+#endif
 
     Course_SplineGetPosition(segment, 0.0f, &gSegmentChunks[0].pos);
     if (gSegmentChunks[0].trackSegmentInfo & TRACK_JOIN_BOTH) {
@@ -1985,8 +2161,10 @@ s32 func_800A1954(CourseInfo* courseInfo) {
             if (segment->nextJoinStartTValue <= t) {
                 t = segment->nextJoinStartTValue;
             }
+#ifndef EXPANSION_KIT
             // FAKE
             gSegmentChunks[0].trackSegmentInfo = gSegmentChunks[0].trackSegmentInfo;
+#endif
         } else {
             t += sp274;
 
@@ -2094,17 +2272,34 @@ s32 func_800A1954(CourseInfo* courseInfo) {
             }
 
             if (!(spB4 & 0x10000)) {
+#ifndef EXPANSION_KIT
                 spB4 |= 0x10000 | nextSegmentChunk - gSegmentChunks;
+#else
+                spB4 |= 0x10000;
+                if (t < 0.5f) {
+                    spB4 |= nextSegmentChunk - gSegmentChunks;
+                } else {
+                    spB4 |= (nextSegmentChunk - gSegmentChunks) + 1;
+                }
+#endif
             }
 
         skip:
 
             sp274 = SQ(forward.x) + SQ(forward.y) + SQ(forward.z);
 
-            sp274 = 1.0f / sqrtf(sp274);
-            forward.x *= sp274;
-            forward.y *= sp274;
-            forward.z *= sp274;
+#ifdef EXPANSION_KIT
+            if (sp274 != 0.0f) {
+#endif
+                sp274 = 1.0f / sqrtf(sp274);
+                forward.x *= sp274;
+                forward.y *= sp274;
+                forward.z *= sp274;
+#ifdef EXPANSION_KIT
+            } else {
+                forward.x = forward.y = forward.z = 0.0f;
+            }
+#endif
 
             segmentStartCenterPos = currentChunkCenterPos;
             segmentStartLeftPos = currentChunkLeftPos;
@@ -2176,7 +2371,15 @@ s32 func_800A1954(CourseInfo* courseInfo) {
             } else {
                 if (t < segment->previousJoinEndTValue) {
                     nextSegmentChunk->trackSegmentInfo |= TRACK_JOIN_PREVIOUS;
-                    sp274 = (segment->length * lengthProportionAlongSegment) / joinLengths;
+#ifdef EXPANSION_KIT
+                    if (joinLengths != 0.0f) {
+#endif
+                        sp274 = (segment->length * lengthProportionAlongSegment) / joinLengths;
+#ifdef EXPANSION_KIT
+                    } else {
+                        sp274 = 0.0f;
+                    }
+#endif
                 } else {
                     nextSegmentChunk->trackSegmentInfo |= TRACK_JOIN_NEXT;
                     sp274 = (segment->length - (segment->length * lengthProportionAlongSegment)) / joinLengths;
@@ -2221,12 +2424,25 @@ s32 func_800A1954(CourseInfo* courseInfo) {
                 }
             }
 
-            if (++gSegmentChunkCount == 0x400) {
+#ifndef EXPANSION_KIT
+            if (++gSegmentChunkCount == SEGMENT_CHUNK_COUNT) {
                 spB4 |= 0x20000;
             } else {
                 segmentChunk = nextSegmentChunk;
                 nextSegmentChunk++;
             }
+#else
+            if (gSegmentChunkCount < SEGMENT_CHUNK_COUNT) {
+                if (gInCourseEditor) {
+                    *spB0++ = segmentBasis;
+                }
+                gSegmentChunkCount++;
+                segmentChunk = nextSegmentChunk;
+                nextSegmentChunk++;
+            } else {
+                spB4 |= 0x20000;
+            }
+#endif
         }
     }
 
@@ -2366,7 +2582,7 @@ s32 func_800A2D2C(CourseInfo* arg0, Vtx* arg1) {
             spBC.y *= spD0;
             spBC.z *= spD0;
 
-            if (var_s2 < 0xC00) {
+            if (var_s2 < 3 * SEGMENT_CHUNK_COUNT) {
                 var_s3 = func_800A2BDC(var_s3, &spA4, &sp80);
                 continue;
             }
@@ -2376,7 +2592,7 @@ s32 func_800A2D2C(CourseInfo* arg0, Vtx* arg1) {
 
     var_s2 += 3;
 
-    if (var_s2 < 0xC00) {
+    if (var_s2 < 3 * SEGMENT_CHUNK_COUNT) {
         var_s3[0] = arg1[0];
         var_s3[1] = arg1[1];
         var_s3[2] = arg1[2];
@@ -2995,6 +3211,10 @@ void Course_GenerateRandomCourse(void) {
 
     gCurrentCourseInfo->maxSpeed = 0.0f;
     gCurrentCourseInfo->bestTime = 600000 - 1;
+
+#ifdef EXPANSION_KIT
+    COURSE_CONTEXT()->courseData.bgm = (Math_Rand2() & 0x1FFFF) % 14;
+#endif
 }
 
 extern CourseSegment D_802C2020[];
@@ -3107,7 +3327,13 @@ void Course_Init(void) {
     } else {
         func_800A4D0C(1);
     }
-    func_800A4DF0();
+#ifdef EXPANSION_KIT
+    if (!gInCourseEditor) {
+#endif
+        func_800A4DF0();
+#ifdef EXPANSION_KIT
+    }
+#endif
     Course_SegmentsInit();
     Course_SegmentLengthsInit(gCurrentCourseInfo);
     Course_GadgetsInit(gCourseIndex);
@@ -3975,7 +4201,7 @@ void Course_DrawForwardAirChunkGroup(void) {
     }
 }
 
-extern SegmentChunk gSegmentChunks[];
+extern GfxPool* gGfxPool;
 
 void Course_DrawBackwardChunkGroup(SegmentChunkGroup* chunkGroup) {
     f32 var_fv0;
@@ -4017,6 +4243,12 @@ void Course_DrawBackwardChunkGroup(SegmentChunkGroup* chunkGroup) {
                 } while (sWorkingNextSegmentChunk->trackSegmentInfo & TRACK_FLAG_CONTINUOUS);
             }
         }
+
+#ifdef EXPANSION_KIT
+        if (gCourseVtxPtr >= &gGfxPool->courseVtxBuffer[0xFF0]) {
+            break;
+        }
+#endif
 
         trackShape = TRACK_SHAPE_INDEX((u32) sWorkingSegmentChunk->trackSegmentInfo & TRACK_SHAPE_MASK);
         trackType = sWorkingSegmentChunk->trackSegmentInfo & TRACK_TYPE_MASK;
@@ -4095,6 +4327,13 @@ void Course_DrawForwardChunkGroup(SegmentChunkGroup* chunkGroup) {
                 } while (sWorkingSegmentChunk->trackSegmentInfo & TRACK_FLAG_CONTINUOUS);
             }
         }
+
+#ifdef EXPANSION_KIT
+        if (gCourseVtxPtr >= &gGfxPool->courseVtxBuffer[0xFF0]) {
+            break;
+        }
+#endif
+
         trackShape = TRACK_SHAPE_INDEX((u32) sWorkingSegmentChunk->trackSegmentInfo & TRACK_SHAPE_MASK);
         trackType = sWorkingSegmentChunk->trackSegmentInfo & TRACK_TYPE_MASK;
         if (trackType != TRACK_TYPE_NONE) {
@@ -4183,6 +4422,13 @@ Gfx* func_800A95B4(Gfx* gfx) {
     sWorkingSegmentChunk = gSegmentChunks;
     sWorkingNextSegmentChunk = &gSegmentChunks[1];
     do {
+#ifdef EXPANSION_KIT
+        // Unsure why this check is like this
+        if (gCourseVtxPtr >= &gGfxPool->effectsVtxBuffer[0x7E5]) {
+            return sCourseDisp;
+        }
+#endif
+
         trackShape = TRACK_SHAPE_INDEX((u32) sWorkingSegmentChunk->trackSegmentInfo & TRACK_SHAPE_MASK);
         trackType = sWorkingSegmentChunk->trackSegmentInfo & TRACK_TYPE_MASK;
         if (trackType != TRACK_TYPE_NONE) {
@@ -4220,7 +4466,7 @@ Gfx* func_800A95B4(Gfx* gfx) {
     return sCourseDisp;
 }
 
-Gfx* Course_Draw(Gfx* gfx, s32 playerIndex) {
+Gfx* Course_Draw(Gfx* gfx, s32 cameraIndex) {
     MtxF sp60;
     f32 var_fv1;
     f32 temp_fa0;
@@ -4241,7 +4487,7 @@ Gfx* Course_Draw(Gfx* gfx, s32 playerIndex) {
     Camera* camera;
     s32 i;
 
-    camera = &gCameras[playerIndex];
+    camera = &gCameras[cameraIndex];
     racer = &gRacers[camera->id];
 
     sCourseDisp = gfx;
@@ -4485,12 +4731,49 @@ block_68:
     return sCourseDisp;
 }
 
+#ifdef EXPANSION_KIT
+extern unk_800D6CA0 D_800D6CA0;
+
+s32 func_i2_800BE8BC(CourseInfo* courseInfo) {
+    s32 var_s3 = -1;
+    f32 alpha1;
+    f32 alpha2;
+    CourseSegment* segment = courseInfo->courseSegments;
+
+    if (1) {}
+    do {
+        func_8009DB28(segment, &alpha1, &alpha2);
+        segment->tension = (alpha1 + alpha2) * 0.5f;
+        if ((alpha1 < 0.0f) || (alpha1 > 2.0f) || (alpha2 < 0.0f) || (alpha2 > 2.0f)) {
+            var_s3 = segment->segmentIndex;
+            segment->tension = 0.1f;
+        }
+        segment = segment->next;
+    } while (segment != courseInfo->courseSegments);
+
+    D_800D6CA0.unk_20 = var_s3;
+    return var_s3;
+}
+
+bool func_i2_800BE9D4(f32* regValue) {
+    u32 regAsInt = *(u32*) regValue;
+    s32 regExp = ((regAsInt & 0x7F800000) >> 0x17) - 0x7F;
+
+    if (((-0x7F < regExp) && (regExp < 0x80)) || (regAsInt == 0)) {
+        return false;
+    } else {
+        PRINTF("FLOATING POINT EXCEPTION\n");
+        return true;
+    }
+}
+#endif
+
 s32 Course_CalculateChecksum(void) {
     s32 i;
     u32 checksum = COURSE_CONTEXT()->courseData.controlPointCount;
 
     for (i = 0; i < COURSE_CONTEXT()->courseData.controlPointCount; i++) {
-
+#ifndef EXPANSION_KIT
         COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo &= ~TRACK_JOIN_MASK;
         COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo &= ~TRACK_FORM_MASK;
         COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo &= ~TRACK_FLAG_CONTINUOUS;
@@ -4503,6 +4786,52 @@ s32 Course_CalculateChecksum(void) {
                    ((5.5f + (0.8f * i)) * COURSE_CONTEXT()->courseData.controlPoint[i].radiusRight * 4.8f)) +
             COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo * (0xFE - i) +
             COURSE_CONTEXT()->courseData.bankAngle[i] * (0x93DE - i * 2);
+#else
+        ControlPoint* controlPoint = &COURSE_CONTEXT()->courseData.controlPoint[i];
+
+        controlPoint->trackSegmentInfo &= ~TRACK_JOIN_MASK;
+        controlPoint->trackSegmentInfo &= ~TRACK_FORM_MASK;
+        controlPoint->trackSegmentInfo &= ~TRACK_FLAG_CONTINUOUS;
+
+        if (func_i2_800BE9D4(&controlPoint->pos.x)) {
+            return -1;
+        }
+
+        if (controlPoint->pos.x < -15000.0f) {
+            return -1;
+        }
+        if (controlPoint->pos.x > 15000.0f) {
+            return -1;
+        }
+
+        if (func_i2_800BE9D4(&controlPoint->pos.y)) {
+            return -1;
+        }
+
+        if (controlPoint->pos.y < -250.0f) {
+            return -1;
+        }
+        if (controlPoint->pos.y > 5000.0f) {
+            return -1;
+        }
+
+        if (func_i2_800BE9D4(&controlPoint->pos.z)) {
+            return -1;
+        }
+
+        if (controlPoint->pos.z < -15000.0f) {
+            return -1;
+        }
+        if (controlPoint->pos.z > 15000.0f) {
+            return -1;
+        }
+
+        checksum += (s32) ((controlPoint->pos.x + ((1.1f + (0.7f * i)) * controlPoint->pos.y)) +
+                           ((2.2f + (1.2f * i)) * controlPoint->pos.z * (4.4f + (0.9f * i))) +
+                           controlPoint->radiusLeft + ((5.5f + (0.8f * i)) * controlPoint->radiusRight * 4.8f)) +
+                    controlPoint->trackSegmentInfo * (0xFE - i) +
+                    COURSE_CONTEXT()->courseData.bankAngle[i] * (0x93DE - i * 2);
+#endif
     }
 
     for (i = 0; i < COURSE_CONTEXT()->courseData.controlPointCount; i++) {

@@ -25,6 +25,6 @@
 #define OS_MAJOR_VERSION	VERSION_I /* major version */
 #define OS_MINOR_VERSION	1 /* patch level */
 
-#define IS_VERSION_I_PATCH ((OS_MAJOR_VERSION == VERSION_I) && (OS_MINOR_VERSION != 0))
+#define IS_VERSION_I_PATCH ((BUILD_VERSION == VERSION_I) && (OS_MINOR_VERSION != 0))
 
 #endif /* !_OS_VERSION_H_ */

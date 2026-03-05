@@ -1,7 +1,7 @@
   - name: expansion_kit_textures_beta
     exclusive_ram_id: segment_07
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x07000000
     start: 0x145B70
     subsegments:
@@ -10,7 +10,7 @@
   - name: course_edit_textures_beta
     exclusive_ram_id: segment_04
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x04000000
     start: 0x1535B0
     subsegments:
@@ -19,7 +19,7 @@
   - name: create_machine_textures
     exclusive_ram_id: segment_04
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x04000000
     start: 0x166660
     subsegments:
@@ -28,7 +28,7 @@
   - name: course_track_gfx
     exclusive_ram_id: segment_08
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x08000000
     start: 0x16C8A0
     subsegments:
@@ -37,7 +37,7 @@
   - name: setup_gfx
     exclusive_ram_id: segment_03
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x03000000
     start: 0x17B1E0
     subsegments:
@@ -46,7 +46,7 @@
   - name: machine_custom_gfx
     exclusive_ram_id: segment_03
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x03000780
     follows_vram: setup_gfx
     start: 0x17B960
@@ -56,7 +56,7 @@
   - name: hud_gfx
     exclusive_ram_id: segment_04
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x04000000
     start: 0x1B8550
     subsegments:
@@ -65,7 +65,7 @@
   - name: machine_global_gfx
     exclusive_ram_id: segment_07
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x07000000
     start: 0x1E23F0
     subsegments:
@@ -74,7 +74,7 @@
   - name: machine_models
     exclusive_ram_id: segment_09
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x09000000
     start: 0x22B0A0
     subsegments:
@@ -83,7 +83,7 @@
   - name: mute_city_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x235130
     subsegments:
@@ -92,7 +92,7 @@
   - name: port_town_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x239A80
     subsegments:
@@ -101,7 +101,7 @@
   - name: big_blue_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x23EC50
     subsegments:
@@ -110,7 +110,7 @@
   - name: sand_ocean_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x243D90
     subsegments:
@@ -119,7 +119,7 @@
   - name: devils_forest_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x24A270
     subsegments:
@@ -128,7 +128,7 @@
   - name: white_land_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x2507F0
     subsegments:
@@ -137,7 +137,7 @@
   - name: sector_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x255100
     subsegments:
@@ -146,7 +146,7 @@
   - name: red_canyon_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x259600
     subsegments:
@@ -155,7 +155,7 @@
   - name: fire_field_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x25F360
     subsegments:
@@ -164,7 +164,7 @@
   - name: silence_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x266C20
     subsegments:
@@ -173,7 +173,7 @@
   - name: ending_venue_textures
     exclusive_ram_id: segment_0A
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0A000000
     start: 0x26D780
     subsegments:
@@ -182,7 +182,7 @@
   - name: podium_gfx
     exclusive_ram_id: segment_05
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x05000000
     start: 0x2738A0
     subsegments:
@@ -191,7 +191,7 @@
   - name: super_textures
     exclusive_ram_id: segment_00
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0
     start: 0x2747F0
     subsegments:
@@ -200,7 +200,7 @@
   - name: boot_textures
     exclusive_ram_id: segment_00
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0
     start: 0x2787F0
     subsegments:
@@ -210,7 +210,7 @@
   - name: staff_ghost_records
     exclusive_ram_id: segment_00
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0
     start: 0x27F200
     subsegments:
@@ -219,7 +219,7 @@
   - name: course_data
     exclusive_ram_id: segment_00
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0
     start: 0x2AD1E0
     subsegments:
@@ -228,7 +228,7 @@
   - name: common_assets_compressed
     exclusive_ram_id: segment_0F
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x0F000000
     start: 0x2B9EA0
     subsegments:
@@ -240,6 +240,7 @@
     dir: overlays/ovl_i11
     start: 0x524920
     vram: 0x800FC730
+    follows_vram: main
     symbol_name_format: i11_$VRAM
     subsegments:
       - [0x524920, c]
@@ -249,7 +250,7 @@
   - name: audio_bank
     exclusive_ram_id: segment_00
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x8F000000
     start: 0x524D60
     subsegments:
@@ -258,7 +259,7 @@
   - name: audio_seq
     exclusive_ram_id: segment_00
     type: code
-    dir: assets
+    dir: assets/us/rev0
     vram: 0x8F000000
     start: 0x527AF0
     subsegments:

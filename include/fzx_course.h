@@ -2,6 +2,7 @@
 #define FZX_COURSE_H
 
 #include "fzx_math.h"
+#include "fzx_save.h"
 
 typedef struct ControlPoint {
     /* 0x00 */ Vec3f pos;
@@ -32,8 +33,17 @@ typedef struct CourseData {
     /* 0x7A0 */ s8 sign[64];
 } CourseData; // size = 0x7E0
 
+typedef struct CourseBuffer {
+    /* 0x0000 */ CourseData courseData;
+    /* 0x07E0 */ u8 saveBuffer[0xBF40];
+} CourseBuffer; // size = 0xC720
+
 typedef struct CourseContext {
-    CourseData courseData;
+    /* 0x0000 */ CourseData courseData;
+#ifdef EXPANSION_KIT
+    /* 0x07E0 */ GhostSave ghostSave[3];
+    /* 0xC720 */ SaveCourseRecords saveCourseRecord;
+#endif
 } CourseContext;
 
 typedef enum Courses {
@@ -67,6 +77,18 @@ typedef enum Courses {
     /* 27 */ COURSE_EDIT_4,
     /* 28 */ COURSE_EDIT_5,
     /* 29 */ COURSE_EDIT_6,
+    /* 30 */ COURSE_SILENCE_3,
+    /* 31 */ COURSE_SAND_OCEAN_3,
+    /* 32 */ COURSE_DEVILS_FOREST_4,
+    /* 33 */ COURSE_PORT_TOWN_3,
+    /* 34 */ COURSE_DEVILS_FOREST_5,
+    /* 35 */ COURSE_BIG_BLUE_3,
+    /* 36 */ COURSE_MUTE_CITY_4,
+    /* 37 */ COURSE_SPACE_PLANT_2,
+    /* 38 */ COURSE_PORT_TOWN_4,
+    /* 39 */ COURSE_FIRE_FIELD_2,
+    /* 40 */ COURSE_WHITE_LAND_3,
+    /* 41 */ COURSE_BIG_FOOT,
     /* 48 */ COURSE_X_1 = 48,
     /* 49 */ COURSE_X_2,
     /* 50 */ COURSE_X_3,
@@ -75,6 +97,7 @@ typedef enum Courses {
     /* 53 */ COURSE_X_6,
     /* 54 */ COURSE_DEATH_RACE,
     /* 55 */ COURSE_ENDING,
+    /* 56 */ COURSE_MAX,
 } Courses;
 
 #define CREATOR_NINTENDO 4
@@ -138,7 +161,10 @@ typedef enum PitZone {
     /*  0 */ PIT_BOTH,
     /*  1 */ PIT_LEFT,
     /*  2 */ PIT_RIGHT,
+#ifdef EXPANSION_KIT
     /*  3 */ PIT_MIDDLE,
+#endif
+    /*  4 */ PIT_MAX,
 } PitZone;
 
 typedef enum DashZone {
@@ -146,6 +172,7 @@ typedef enum DashZone {
     /*  0 */ DASH_MIDDLE,
     /*  1 */ DASH_LEFT,
     /*  2 */ DASH_RIGHT,
+    /*  3 */ DASH_MAX,
 } DashZone;
 
 typedef enum Dirt {
@@ -154,6 +181,7 @@ typedef enum Dirt {
     /*  1 */ DIRT_LEFT,
     /*  2 */ DIRT_RIGHT,
     /*  3 */ DIRT_MIDDLE,
+    /*  4 */ DIRT_MAX,
 } Dirt;
 
 typedef enum Ice {
@@ -162,6 +190,7 @@ typedef enum Ice {
     /*  1 */ ICE_LEFT,
     /*  2 */ ICE_RIGHT,
     /*  3 */ ICE_MIDDLE,
+    /*  4 */ ICE_MAX,
 } Ice;
 
 typedef enum JumpType {
@@ -169,6 +198,7 @@ typedef enum JumpType {
     /*  0 */ JUMP_ALL,
     /*  1 */ JUMP_LEFT,
     /*  2 */ JUMP_RIGHT,
+    /*  3 */ JUMP_MAX,
 } JumpType;
 
 typedef enum LandmineType {
@@ -176,6 +206,7 @@ typedef enum LandmineType {
     /*  0 */ LANDMINE_MIDDLE,
     /*  1 */ LANDMINE_LEFT,
     /*  2 */ LANDMINE_RIGHT,
+    /*  3 */ LANDMINE_MAX,
 } LandmineType;
 
 typedef enum Gate {
@@ -183,6 +214,7 @@ typedef enum Gate {
     /*  0 */ GATE_SQUARE,
     /*  1 */ GATE_START,
     /*  2 */ GATE_HEXAGONAL,
+    /*  3 */ GATE_MAX,
 } Gate;
 
 typedef enum Building {
@@ -202,6 +234,7 @@ typedef enum Building {
     /* 12 */ BUILDING_TALL_GOLD_BOTH,
     /* 13 */ BUILDING_TALL_GOLD_LEFT,
     /* 14 */ BUILDING_TALL_GOLD_RIGHT,
+    /* 15 */ BUILDING_MAX,
 } Building;
 
 typedef enum Sign {
@@ -211,6 +244,7 @@ typedef enum Sign {
     /*  2 */ SIGN_2,
     /*  3 */ SIGN_NINTEX,
     /*  4 */ SIGN_OVERHEAD,
+    /*  5 */ SIGN_MAX,
 } Sign;
 
 typedef enum Road {
@@ -316,8 +350,17 @@ typedef enum BorderlessRoad {
 #define TRACK_FLAG_CONTINUOUS 0x40000000
 #define TRACK_FLAG_80000000 0x80000000
 
+#ifndef EXPANSION_KIT
 extern CourseContext gCourseCtx;
-
 #define COURSE_CONTEXT() (&gCourseCtx)
+#else
+#ifdef AVOID_UB
+extern CourseContext gCourseCtx;
+#else
+extern CourseBuffer gCourseCtx;
+#endif
+#define COURSE_CONTEXT() ((CourseContext*)&gCourseCtx)
+#endif
+
 
 #endif // FZX_COURSE_H

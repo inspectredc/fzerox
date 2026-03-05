@@ -79,9 +79,9 @@ label:
             break;
         case -1:
             switch (gMfsError) {
-                case 42:
+                case LEO_ERROR_MEDIUM_NOT_PRESENT:
                     break;
-                case 23:
+                case LEO_ERROR_UNRECOVERED_READ_ERROR:
                     Mfs_InitRamArea(1);
                     break;
             }

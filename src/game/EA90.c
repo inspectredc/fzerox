@@ -45,6 +45,7 @@ s32 Math_VectorSetScale(Vec3f* vec, f32 scale) {
 
 extern CourseInfo* gCurrentCourseInfo;
 
+#ifndef EXPANSION_KIT
 Mtx3F* func_80074C60(Mtx3F* basisPtr) {
     f32 lengthProportionAlongSegment;
     f32 lengthFromStart;
@@ -57,6 +58,7 @@ Mtx3F* func_80074C60(Mtx3F* basisPtr) {
     *basisPtr = basis;
     return basisPtr;
 }
+#endif
 
 // Set segment up vectors
 void func_80074CE4(CourseInfo* courseInfo) {
@@ -101,6 +103,7 @@ void func_80074CE4(CourseInfo* courseInfo) {
 }
 
 // Test Function?
+#ifndef EXPANSION_KIT
 void func_80074F98(void) {
     f32 sp2C;
     s64 temp;
@@ -115,7 +118,28 @@ void func_80074F98(void) {
     osPfsAllocateFile(NULL, 0, 0, NULL, NULL, 0, NULL);
     osPfsReadWriteFile(NULL, 0, 0, 0, 0, NULL);
     osPfsFindFile(NULL, 0, 0, NULL, NULL, NULL);
-    sprintf(NULL, "\0\0\0\0\0\0\0");
+    sprintf(NULL, "");
     guOrtho(NULL, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
     temp = sp2C;
 }
+#else
+void func_80074F98(void) {
+    f32 sp2C;
+    s64 temp;
+    bcmp(NULL, NULL, 0);
+    osEPiReadIo(NULL, 0, NULL);
+    osEPiWriteIo(NULL, 0, 0);
+    __osSetHWIntrRoutine(0, NULL, NULL);
+    osStopThread(NULL);
+    osGetIntMask();
+    osEPiLinkHandle(NULL);
+    osPfsInitPak(NULL, NULL, 0);
+    osPfsAllocateFile(NULL, 0, 0, NULL, NULL, 0, NULL);
+    osPfsReadWriteFile(NULL, 0, 0, 0, 0, NULL);
+    osPfsFindFile(NULL, 0, 0, NULL, NULL, NULL);
+    __osSetCause(0);
+    __osSetCount(0);
+    sprintf(NULL, "");
+    temp = sp2C;
+}
+#endif

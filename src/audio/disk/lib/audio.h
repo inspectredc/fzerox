@@ -1226,7 +1226,7 @@ s32 Audio_SetFontInstrument(s32 instrumentType, s32 fontId, s32 index, void* val
 
 AudioTask* AudioThread_CreateTask(void);
 void AudioThread_QueueCmdF32(s32 opArgs, f32 data);
-void AudioThread_QueueCmdS32(s32 opArgs, s32 data);
+void AudioThread_QueueCmdU32(s32 opArgs, s32 data);
 void AudioThread_QueueCmdS8(s32 opArgs, s8 data);
 void AudioThread_QueueCmdU16(s32 opArgs, u16 data);
 void AudioThread_ProcessSeqPlayerCmd(SequencePlayer* seqPlayer, AudioCmd* cmd);
@@ -1239,6 +1239,8 @@ s32 AudioThread_ResetAudioHeap(s32 specId);
 void AudioThread_PreNMIInternal(void);
 s32 AudioThread_SilenceCheck(s32 flags);
 void AudioThread_InitMesgQueues(void);
+
+AudioTask* Audio_SetupCreateTask(void);
 
 extern AudioSpec gAudioSpecs[];
 extern TempoData gTempoData;

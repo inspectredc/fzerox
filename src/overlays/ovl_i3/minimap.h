@@ -24,4 +24,6 @@ typedef enum MinimapPaletteIndex {
 
 extern s32 gPlayerMinimapLapCounterToggle[];
 
+Gfx* Minimap_DrawCourseMinimap(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex);
+
 #endif // MINIMAP_H

@@ -46,24 +46,35 @@ else
   $(error Unable to detect a suitable MIPS toolchain installed)
 endif
 
+EXPANSION_KIT ?= 0
+
 ifeq ($(EXPANSION_KIT),1)
   VERSION ?= jp
+  REV ?= ek
+  EXT ?= z64dd
+  TARGET ?= fzerox-expansion
 else
   VERSION ?= us
 endif
 
+REV_R ?= rev0
+EXT_R ?= z64
 REV ?= rev0
+EXT ?= z64
+DISK_EXT ?= ndd
 
-BASEROM              := baserom.$(VERSION).$(REV).z64
-TARGET               := fzerox
+BASEROM_R            := baserom.$(VERSION).$(REV_R).$(EXT_R)
+BASEROM_E            := baserom.$(VERSION).$(REV).$(DISK_EXT)
+BASEROM              := baserom.$(VERSION).$(REV).$(EXT)
+TARGET               ?= fzerox
 
 ### Output ###
 
-BUILD_DIR := build
+BUILD_DIR := build/$(VERSION)/$(REV)
 TOOLS	  := tools
 PYTHON	  := python3
-ROM	      := $(BUILD_DIR)/$(TARGET)_uncompressed.$(VERSION).$(REV).z64
-ROMC 	  := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).z64
+ROM	      := $(BUILD_DIR)/$(TARGET)_uncompressed.$(VERSION).$(REV).$(EXT)
+ROMC 	  := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).$(EXT)
 ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).elf
 LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).$(REV).map
 LD_SCRIPT := linker_scripts/$(VERSION)/$(REV)/$(TARGET).ld
@@ -142,21 +153,21 @@ endif
 BUILD_DEFINES ?=
 
 ifeq ($(EXPANSION_KIT),1)
-    BUILD_DEFINES   += -DEXPANSION_KIT -DBUILD_VERSION=VERSION_J
+    BUILD_DEFINES   += -DVERSION_JP=1 -DEXPANSION_KIT -DBUILD_VERSION=VERSION_J -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV_R)
     LEO_VERSION ?= 1
     MFS_VERSION ?= 1
 else
     # Version check
     ifeq ($(VERSION),jp)
-        BUILD_DEFINES   += -DVERSION_JP=1 -DBUILD_VERSION=VERSION_I
+        BUILD_DEFINES   += -DVERSION_JP=1 -DBUILD_VERSION=VERSION_I -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
     endif
 
     ifeq ($(VERSION),us)
-        BUILD_DEFINES   += -DVERSION_US=1 -DBUILD_VERSION=VERSION_I
+        BUILD_DEFINES   += -DVERSION_US=1 -DBUILD_VERSION=VERSION_I -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
     endif
 
     ifeq ($(VERSION),eu)
-        BUILD_DEFINES   += -DVERSION_EU=1 -DBUILD_VERSION=VERSION_I
+        BUILD_DEFINES   += -DVERSION_EU=1 -DBUILD_VERSION=VERSION_I -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
         REV := rev0
     endif
 endif
@@ -249,7 +260,7 @@ ENCRYPT_LIBLEO  := $(PYTHON) $(TOOLS)/encrypt_libleo.py
 EXTRACT_MIO0    := $(PYTHON) $(TOOLS)/decompressMio0Segments.py
 
 
-IINC := -Iinclude -Ibin/$(VERSION).$(REV) -I.
+IINC := -Iinclude -Ibin/$(VERSION)/$(REV) -I.
 IINC += -Ilib/ultralib/include -Ilib/ultralib/include/PR -Ilib/ultralib/include/ido
 
 ifeq ($(KEEP_MDEBUG),0)
@@ -259,12 +270,12 @@ else
 endif
 
 # Check code syntax with host compiler
-CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized
+CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized -Wno-incompatible-pointer-types-discards-qualifiers -Wno-pointer-sign
 # Have CC_CHECK pretend to be a MIPS compiler
 MIPS_BUILTIN_DEFS := -DMIPSEB -D_MIPS_FPSET=16 -D_MIPS_ISA=2 -D_ABIO32=1 -D_MIPS_SIM=_ABIO32 -D_MIPS_SZINT=32 -D_MIPS_SZPTR=32
 ifneq ($(RUN_CC_CHECK),0)
 #   The -MMD flags additionaly creates a .d file with the same name as the .o file.
-    CHECK_WARNINGS    := -Wno-unused-variable -Wno-int-conversion
+    CHECK_WARNINGS    := -Wno-unused-variable -Wno-int-conversion -Wno-incompatible-pointer-types-discards-qualifiers -Wno-pointer-sign
     CC_CHECK          := $(CC_CHECK_COMP)
     CC_CHECK_FLAGS    := -MMD -MP -fno-builtin -fsyntax-only -funsigned-char -fdiagnostics-color -std=gnu89 -DNON_MATCHING -DAVOID_UB -DCC_CHECK=1
 
@@ -312,15 +323,51 @@ endif
 
 $(shell mkdir -p asm bin linker_scripts/$(VERSION)/$(REV)/auto)
 
+# Setup expansion kit file exclusion filters
+
+ifeq ($(EXPANSION_KIT),0)
+EXCLUSION_FILES := \
+src/sys/disk/% \
+src/overlays/ovl_i2/dd_save.c \
+src/overlays/ovl_i2/ovl_i2_data2.c \
+src/overlays/ovl_i10/187510.c \
+src/overlays/expansion_kit/% \
+src/overlays/course_edit/% \
+src/overlays/machine_create/% \
+src/overlays/ead_demo/% \
+src/audio/disk/%
+else
+EXCLUSION_FILES := \
+src/sys/rom/% \
+src/overlays/ovl_i2/save_buffer.c \
+src/overlays/ovl_i11/% \
+src/audio/rom/% 
+endif
+
+ifeq ($(MFS_VERSION),0)
+EXCLUSION_FILES += \
+src/leo/mfs/mfs_copy.c \
+src/leo/mfs/mfs_validate.c
+else
+EXCLUSION_FILES += \
+src/leo/mfs/mfs_creation_date.c
+endif
+
 SRC_DIRS      := $(shell find src -type d)
 
 ASM_DIRS      := $(shell find asm/$(VERSION)/$(REV) -type d -not -path "asm/$(VERSION)/$(REV)/nonmatchings/*")
-BIN_DIRS      := $(shell find bin -type d)
-
+BIN_DIRS      := $(shell find bin/$(VERSION)/$(REV) -type d)
 
 C_FILES       := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+
+ALL_ASSET_FILES := $(filter src/assets/%,$(C_FILES))
+EXCLUSION_ASSET_FILES := $(filter-out src/assets/$(VERSION)/$(REV)/%,$(ALL_ASSET_FILES))
+
 C_FILES       := $(filter-out %.inc.c,$(C_FILES))
 C_FILES       := $(filter-out %.incbin.c,$(C_FILES))
+C_FILES       := $(filter-out $(EXCLUSION_FILES),$(C_FILES))
+C_FILES       := $(filter-out $(EXCLUSION_ASSET_FILES),$(C_FILES))
+
 S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
 BIN_FILES     := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
@@ -360,13 +407,33 @@ $(BUILD_DIR)/src/libultra/io/pfschecker.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/io/leodiskinit.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/io/viswapcontext.o: OPTFLAGS := -O2 -g0
 $(BUILD_DIR)/src/libultra/io/motor.o: OPTFLAGS := -O2 -g0
+ifeq ($(EXPANSION_KIT),1)
+$(BUILD_DIR)/src/libultra/io/devmgr.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/pirawdma.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/sirawread.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/sirawwrite.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/sprawdma.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/epirawdma.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/epirawread.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/epirawwrite.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/epiread.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/epiwrite.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/cartrominit.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPTFLAGS := -O2 -g0
+$(BUILD_DIR)/src/libultra/io/visetspecial.o: OPTFLAGS := -O2 -g0
+endif
 
 $(BUILD_DIR)/src/libultra/os/%.o: OPTFLAGS := -O1 -g0
 
 # libleo
+ifeq ($(EXPANSION_KIT),0)
 $(BUILD_DIR)/src/leo/lib%.o: OPTFLAGS := -g
 $(BUILD_DIR)/src/leo/mfs%.o: OPTFLAGS := -g
 $(BUILD_DIR)/src/leo/721B0.o: OPTFLAGS := -g
+else
+$(BUILD_DIR)/src/leo/mfs/%.o: OPTFLAGS := -g
+$(BUILD_DIR)/src/leo/lib/%.o: OPTFLAGS := -O2 -g0
+endif
 
 # per-file flags
 $(BUILD_DIR)/src/libultra/libc/ldiv.o: OPTFLAGS := -O2 -g0
@@ -380,7 +447,11 @@ $(BUILD_DIR)/src/libultra/libc/ll.o: MIPS_VERSION := -mips3 -32
 $(BUILD_DIR)/src/libultra/libc/llcvt.o: OPTFLAGS := -O1 -g0
 $(BUILD_DIR)/src/libultra/libc/llcvt.o: MIPS_VERSION := -mips3 -32
 
-$(BUILD_DIR)/src/sys/leo_fault.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/sys/rom/leo_fault.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/sys/disk/leo_fault_dd.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/overlays/expansion_kit/expansion_kit_disk_data.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/overlays/expansion_kit/expansion_kit_text.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/overlays/machine_create/machine_create_text.o: OUT_ENCODING := shift-jis
 
 # cc & asm-processor
 CC = $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO) -- $(AS) $(ASFLAGS) --
@@ -442,6 +513,11 @@ torch:
 	@$(MAKE) -s -C $(TOOLS) torch
 	rm -f torch.hash.yml
 
+setup:
+ifeq ($(EXPANSION_KIT),1)
+	@$(PYTHON) $(TOOLS)/extract_baserom.py --file $(BASEROM_E) --version $(VERSION) --revision $(REV)
+endif
+
 init:
 	@$(MAKE) clean
 	@$(MAKE) extract -j $(N_THREADS)
@@ -454,8 +530,8 @@ compressed: $(ROMC)
 ifeq ($(COMPARE),1)
 	@echo "$(GREEN)Calculating Rom Header Checksum... $(YELLOW)$<$(NO_COL)"
 	@md5sum --status -c $(TARGET).$(VERSION).$(REV).md5 && \
-	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64$(NO_COL): $(GREEN)OK$(NO_COL)\n$(FZERO)" || \
-	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).z64 $(RED)FAILED$(NO_COL)\n"
+	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).$(EXT)$(NO_COL): $(GREEN)OK$(NO_COL)\n$(FZERO)" || \
+	$(PRINT) "$(BLUE)$(TARGET).$(VERSION).$(REV).$(EXT) $(RED)FAILED$(NO_COL)\n"
 endif
 
 #### Main Targets ###
@@ -474,6 +550,9 @@ assets:
 	@$(TORCH) code $(BASEROM)
 	@$(TORCH) header $(BASEROM)
 	@$(TORCH) modding export $(BASEROM)
+ifeq ($(EXPANSION_KIT),1)
+	@$(TORCH) header $(BASEROM_R)
+endif
 
 mod:
 	@$(TORCH) modding import code $(BASEROM)
@@ -484,9 +563,10 @@ clean:
 	@git clean -fdx bin/$(VERSION)/$(REV)
 	@git clean -fdx mio0/$(VERSION)/$(REV) 
 	@git clean -fdx $(BUILD_DIR)/
-	@git clean -fdx src/assets/
-	@git clean -fdx include/assets/
+	@git clean -fdx src/assets/$(VERSION)/$(REV) 
+	@git clean -fdx include/assets/$(VERSION)/$(REV) 
 	@git clean -fdx linker_scripts/$(VERSION)/$(REV)/*.ld
+	@git clean -fdx linker_scripts/$(VERSION)/$(REV)/auto
 
 format:
 	@$(PYTHON) $(TOOLS)/format.py -j $(N_THREADS)
@@ -496,9 +576,9 @@ checkformat:
 
 # asm-differ expected object files
 expected:
-	mkdir -p expected/build
-	rm -rf expected/build/
-	cp -r $(BUILD_DIR)/ expected/build/
+	mkdir -p expected/$(BUILD_DIR)
+	rm -rf expected/$(BUILD_DIR)
+	cp -r $(BUILD_DIR)/ expected/$(BUILD_DIR)
 
 context:
 	@echo "Generating ctx.c ..."
@@ -516,15 +596,21 @@ disasm:
 # Compressed ROM
 $(ROMC): $(ROM)
 	$(call print,ROM->Compressed ROM:,$<,$@)
+ifeq ($(EXPANSION_KIT),0)
 	$(V)$(PYTHON) $(TOOLS)/compress.py $(ROM) $(ROMC) $(ELF) $(VERSION)
 	$(V)$(PYTHON) $(TOOLS)/fixcrc.py $(ROMC)
+else
+	$(V)$(PYTHON) $(TOOLS)/patch.py $(ROM) $(ROMC) $(ELF) $(VERSION)
+endif
 
 # Uncompressed ROM intermediary
 $(ROM): $(ELF)
 	$(call print,ELF->ROM:,$<,$@)
 	$(V)$(OBJCOPY) -O binary $< $@
+ifeq ($(EXPANSION_KIT),0)
 	$(V)$(ENCRYPT_LIBLEO) $@ $(LD_MAP)
 	$(V)$(PYTHON) $(TOOLS)/fixcrc.py $(ROM)
+endif
 
 # Link
 $(ELF): $(LIBULTRA_O) $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/hardware_regs.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/pif_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto/undefined_syms_auto.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/$(REV)/auto/undefined_funcs_auto.ld

@@ -1,20 +1,44 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "fzx_course.h"
 #include "fzx_camera.h"
-#include "assets/machine_custom_gfx.h"
+#include ASSET_HEADER(machine_custom_gfx.h)
 
 extern s8 gGamePaused;
 
 s32 D_i2_80106F10 = 0;
 
-UNUSED u8 D_i2_80106F14[] = { BGM_MUTE_CITY,  BGM_SILENCE,    BGM_SAND_OCEAN, BGM_DEVILS_FOREST, BGM_BIG_BLUE,
-                              BGM_PORT_TOWN,  BGM_SECTOR,     BGM_RED_CANYON, BGM_DEVILS_FOREST, BGM_MUTE_CITY,
-                              BGM_BIG_BLUE,   BGM_WHITE_LAND, BGM_SAND_OCEAN, BGM_SILENCE,       BGM_SECTOR,
-                              BGM_RED_CANYON, BGM_WHITE_LAND, BGM_MUTE_CITY,  BGM_SECTOR,        BGM_DEVILS_FOREST,
-                              BGM_RED_CANYON, BGM_SAND_OCEAN, BGM_PORT_TOWN,  BGM_WHITE_LAND,    BGM_MUTE_CITY,
-                              BGM_PORT_TOWN,  BGM_BIG_BLUE,   BGM_SAND_OCEAN, BGM_DEVILS_FOREST, BGM_WHITE_LAND,
-                              BGM_SECTOR,     BGM_RED_CANYON, BGM_SAND_OCEAN, BGM_SILENCE,       BGM_MUTE_CITY,
-                              BGM_MUTE_CITY };
+#ifndef EXPANSION_KIT
+u8 D_i2_80106F14[] = {
+    BGM_MUTE_CITY,  BGM_SILENCE,       BGM_SAND_OCEAN,    BGM_DEVILS_FOREST, BGM_BIG_BLUE,   BGM_PORT_TOWN,
+    BGM_SECTOR,     BGM_RED_CANYON,    BGM_DEVILS_FOREST, BGM_MUTE_CITY,     BGM_BIG_BLUE,   BGM_WHITE_LAND,
+    BGM_SAND_OCEAN, BGM_SILENCE,       BGM_SECTOR,        BGM_RED_CANYON,    BGM_WHITE_LAND, BGM_MUTE_CITY,
+    BGM_SECTOR,     BGM_DEVILS_FOREST, BGM_RED_CANYON,    BGM_SAND_OCEAN,    BGM_PORT_TOWN,  BGM_WHITE_LAND,
+};
+#else
+u8 D_i2_80106F14[] = {
+    BGM_MUTE_CITY,    BGM_SILENCE,       BGM_SAND_OCEAN,    BGM_DEVILS_FOREST, BGM_BIG_BLUE,   BGM_PORT_TOWN,
+    BGM_SECTOR,       BGM_RED_CANYON,    BGM_DEVILS_FOREST, BGM_MUTE_CITY,     BGM_BIG_BLUE,   BGM_WHITE_LAND,
+    BGM_SAND_OCEAN,   BGM_SILENCE,       BGM_SECTOR,        BGM_RED_CANYON,    BGM_WHITE_LAND, BGM_MUTE_CITY,
+    BGM_RAINBOW_ROAD, BGM_DEVILS_FOREST, BGM_RED_CANYON,    BGM_SAND_OCEAN,    BGM_PORT_TOWN,  BGM_WHITE_LAND,
+};
+#endif
+
+#ifndef EXPANSION_KIT
+UNUSED u8 D_i2_80106F2C[] = {
+    BGM_MUTE_CITY,     // VENUE_MUTE_CITY
+    BGM_PORT_TOWN,     // VENUE_PORT_TOWN
+    BGM_BIG_BLUE,      // VENUE_BIG_BLUE
+    BGM_SAND_OCEAN,    // VENUE_SAND_OCEAN
+    BGM_DEVILS_FOREST, // VENUE_DEVILS_FOREST
+    BGM_WHITE_LAND,    // VENUE_WHITE_LAND
+    BGM_SECTOR,        // VENUE_SECTOR
+    BGM_RED_CANYON,    // VENUE_RED_CANYON
+    BGM_SAND_OCEAN,    // VENUE_FIRE_FIELD
+    BGM_SILENCE,       // VENUE_SILENCE
+    BGM_MUTE_CITY,     // VENUE_ENDING
+};
+#endif
 
 void func_i2_80103A70(void) {
     func_i3_8012F324();
@@ -22,7 +46,9 @@ void func_i2_80103A70(void) {
     Racer_Init();
     Camera_Init();
     Effects_Init();
+#ifndef EXPANSION_KIT
     func_8006D414();
+#endif
     gGamePaused = false;
     Menus_Init();
     Hud_ResetLivesChangeCounter();
@@ -30,11 +56,25 @@ void func_i2_80103A70(void) {
 }
 
 extern s16 D_800CCFE8;
+extern s32 gGameMode;
+extern s32 gCurrentGhostType;
+extern s32 gCourseIndex;
 
 void Race_Init(void) {
     D_800CCFE8 = D_i2_80106F10 = 3;
     gGamePaused = false;
+#ifdef EXPANSION_KIT
+    if ((gGameMode == GAMEMODE_TIME_ATTACK) && (gCurrentGhostType == GHOST_STAFF)) {
+        Save_LoadGhost(gCourseIndex);
+    }
+#endif
     Course_Init();
+#ifdef EXPANSION_KIT
+    if ((gGameMode == GAMEMODE_TIME_ATTACK) &&
+        ((gCurrentGhostType == GHOST_PLAYER) || (gCurrentGhostType == GHOST_NONE))) {
+        Save_LoadGhost(gCourseIndex);
+    }
+#endif
     func_i3_80116C4C();
     Racer_Init();
     Camera_Init();
@@ -50,8 +90,6 @@ void Race_Init(void) {
     Menus_Init();
     Hud_InitRacePortraits();
 }
-
-extern s32 gGameMode;
 
 s32 Race_Update(void) {
     Menus_Update();
@@ -77,6 +115,9 @@ extern FrameBuffer* gFrameBuffers[];
 extern s16 D_800CCFE4;
 extern s32 gNumPlayers;
 
+extern Gfx D_8076CE28[];
+extern Gfx D_8076CF10[];
+
 Gfx* Race_Draw(Gfx* gfx) {
 
     if (D_i2_80106F10 != 0) {
@@ -100,11 +141,20 @@ Gfx* Race_Draw(Gfx* gfx) {
 
         gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     }
+
+#ifndef EXPANSION_KIT
     if (gNumPlayers == 1) {
         gSPDisplayList(gfx++, D_303A8F8);
     } else {
         gSPDisplayList(gfx++, D_303A810);
     }
+#else
+    if (gNumPlayers == 1) {
+        gSPDisplayList(gfx++, D_8076CF10);
+    } else {
+        gSPDisplayList(gfx++, D_8076CE28);
+    }
+#endif
 
     gDPPipeSync(gfx++);
 

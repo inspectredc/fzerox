@@ -1,0 +1,12 @@
+:config:
+  header:
+    code:
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(courses/mute_city_4.h)'
+    header:
+      - '#include "fzx_course.h"'
+
+aCourseMuteCity4:
+  type: FZX:COURSE
+  offset: 0x233EF0
+  symbol: aCourseMuteCity4

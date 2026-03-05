@@ -4,7 +4,7 @@
 #include "fzx_course.h"
 #include "fzx_save.h"
 #include "src/overlays/ovl_i4/ovl_i4.h"
-#include "assets/setup_gfx.h"
+#include ASSET_HEADER(setup_gfx.h)
 
 f32 gCharacterLastEngine[30];
 UNUSED s32 D_800E4168;
@@ -12,6 +12,9 @@ u16 gInputPressed;
 u16 gInputButtonPressed;
 u16 gRetriggeredButtonCurrentPressed;
 s8 gCupNumDifficultiesCleared[4];
+#ifdef EXPANSION_KIT
+s8 D_8079FB28[2];
+#endif
 char* gCurrentTrackName;
 char* gTrackNames[55];
 
@@ -31,39 +34,67 @@ s8 gUnlockableLevel = 0;
 s8 D_800CD3C4 = 0;
 s8 gSettingEverythingUnlocked = false;
 s32 gCurrentGhostType = GHOST_PLAYER;
+#ifdef EXPANSION_KIT
+bool D_8076CCA0 = false;
+#endif
 
-const char* sTrackNames[] = { "mute city",
-                              "silence",
-                              "sand ocean",
-                              "devil's forest",
-                              "big blue",
-                              "port town",
-                              "sector Ａ",
-                              "red canyon",
-                              "devil's forest 2",
-                              "mute city 2",
-                              "big blue 2",
-                              "white land",
-                              "fire field",
-                              "silence 2",
-                              "sector Ｂ",
-                              "red canyon 2",
-                              "white land 2",
-                              "mute city 3",
-                              "rainbow road",
-                              "devil's forest 3",
-                              "space plant",
-                              "sand ocean 2",
-                              "port town 2",
-                              "big hand",
-                              "default 1",
-                              "default 2",
-                              "default 3",
-                              "default 4",
-                              "default 5",
-                              "default 6",
-                              "x",
-                              "" };
+const char* sTrackNames[] = {
+    "mute city",
+    "silence",
+    "sand ocean",
+    "devil's forest",
+    "big blue",
+    "port town",
+    "sector Ａ",
+    "red canyon",
+    "devil's forest 2",
+    "mute city 2",
+    "big blue 2",
+    "white land",
+    "fire field",
+    "silence 2",
+    "sector Ｂ",
+    "red canyon 2",
+    "white land 2",
+    "mute city 3",
+    "rainbow road",
+    "devil's forest 3",
+    "space plant",
+    "sand ocean 2",
+    "port town 2",
+    "big hand",
+#ifndef EXPANSION_KIT
+    "default 1",
+    "default 2",
+    "default 3",
+    "default 4",
+    "default 5",
+    "default 6",
+#else
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+#endif
+    "x",
+    "",
+#ifdef EXPANSION_KIT
+    "silence 3",
+    "sand ocean 3",
+    "devil's forest 4",
+    "port town 3",
+    "devil's forest 5",
+    "big blue 3",
+    "mute city 4",
+    "space plant 2",
+    "port town 4",
+    "fire field 2",
+    "white land 3",
+    "big foot",
+#endif
+};
 
 #ifdef VERSION_JP
 const char* gMachineNames[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
@@ -94,14 +125,11 @@ s32 D_800CD4E0[] = {
 };
 // clang-format on
 
-extern u8 gEditCupTrackNames[][9];
+extern char gEditCupTrackNames[][9];
 
-void func_8007D9D0(void) {
+#ifdef EXPANSION_KIT
+void func_8070D220(void) {
     s32 i;
-
-    for (i = 0; i < 24; i++) {
-        gTrackNames[i] = sTrackNames[i];
-    }
 
     for (i = 24; i < 30; i++) {
         if (gEditCupTrackNames[i - 24][0] == '\0') {
@@ -110,10 +138,41 @@ void func_8007D9D0(void) {
             gTrackNames[i] = gEditCupTrackNames[i - 24];
         }
     }
+}
+#endif
 
+void func_8007D9D0(void) {
+    s32 i;
+
+    for (i = 0; i < 24; i++) {
+        gTrackNames[i] = sTrackNames[i];
+    }
+
+#ifndef EXPANSION_KIT
+    for (i = 24; i < 30; i++) {
+        if (gEditCupTrackNames[i - 24][0] == '\0') {
+            gTrackNames[i] = sTrackNames[i];
+        } else {
+            gTrackNames[i] = gEditCupTrackNames[i - 24];
+        }
+    }
+#else
+    func_8070D220();
+#endif
+
+#ifndef EXPANSION_KIT
     for (i = 30; i < 48; i++) {
         gTrackNames[i] = sTrackNames[31];
     }
+#else
+    for (i = 30; i < 42; i++) {
+        gTrackNames[i] = sTrackNames[i + 2];
+    }
+
+    for (i = 42; i < 48; i++) {
+        gTrackNames[i] = sTrackNames[31];
+    }
+#endif
 
     for (i = 48; i < 54; i++) {
         gTrackNames[i] = sTrackNames[30];
@@ -181,42 +240,96 @@ extern s16 gForceCredits;
 
 void func_8007DEF0(void) {
     s32 i;
-    s32 var_v1 = 0;
+    bool var_v1;
     s32 var_a0;
     s32 cupType;
+#ifdef EXPANSION_KIT
+    bool var_a1;
 
-    for (i = 0; i < 4; i++) {
-        if (gCupNumDifficultiesCleared[i] < 3) {
-            var_v1 = 1;
+    switch (gCupType) {
+        case EDIT_CUP:
+            return;
+        case DD_1_CUP:
+        case DD_2_CUP:
+            var_a1 = true;
             break;
-        }
+        default:
+            var_a1 = false;
+            break;
     }
+#endif
+
+    var_v1 = false;
+
+#ifdef EXPANSION_KIT
+    if (var_a1) {
+        for (i = 0; i < 2; i++) {
+            if (D_8079FB28[i] < 3) {
+                var_v1 = true;
+                break;
+            }
+        }
+    } else {
+#endif
+        for (i = 0; i < 4; i++) {
+            if (gCupNumDifficultiesCleared[i] < 3) {
+                var_v1 = 1;
+                break;
+            }
+        }
+#ifdef EXPANSION_KIT
+    }
+#endif
+
     cupType = gCupType;
     var_a0 = gDifficulty + 1;
+#ifndef EXPANSION_KIT
     //! @bug This always evaluates to false, and instead should use an ||
     //       The result of this could lead to an OOB array access of gCupNumDifficultiesCleared
     if ((cupType < JACK_CUP) && (cupType > JOKER_CUP)) {
         return;
     }
+#endif
     if (var_a0 > MASTER + 1) {
         var_a0 = MASTER + 1;
     }
 
-    if (gCupNumDifficultiesCleared[cupType] < var_a0) {
-        gCupNumDifficultiesCleared[cupType] = var_a0;
-    }
-    if (var_v1 != 0) {
-        for (i = 0; i < 4; i++) {
-            if (gCupNumDifficultiesCleared[i] < 3) {
-                var_v1 = 0;
+#ifdef EXPANSION_KIT
+    if (var_a1) {
+        if (D_8079FB28[cupType - DD_1_CUP] < var_a0) {
+            D_8079FB28[cupType - DD_1_CUP] = var_a0;
+        }
+        if (var_v1) {
+            for (i = 0; i < 2; i++) {
+                if (D_8079FB28[i] < 3) {
+                    var_v1 = false;
+                }
+            }
+
+            if (var_v1) {
+                gForceCredits = true;
             }
         }
-
-        if (var_v1 != 0) {
-            gForceCredits = true;
+    } else {
+#endif
+        if (gCupNumDifficultiesCleared[cupType] < var_a0) {
+            gCupNumDifficultiesCleared[cupType] = var_a0;
         }
+        if (var_v1) {
+            for (i = 0; i < 4; i++) {
+                if (gCupNumDifficultiesCleared[i] < 3) {
+                    var_v1 = false;
+                }
+            }
+
+            if (var_v1) {
+                gForceCredits = true;
+            }
+        }
+        Save_SaveSettingsProfiles();
+#ifdef EXPANSION_KIT
     }
-    Save_SaveSettingsProfiles();
+#endif
 }
 
 s32 func_8007E008(void) {
@@ -232,27 +345,71 @@ s32 func_8007E008(void) {
 extern bool gRamDDCompatible;
 extern s32 gLeoDriveConnectionState;
 
+#ifndef EXPANSION_KIT
 bool func_8007E038(void) {
     if (gRamDDCompatible && (gLeoDriveConnectionState != 0) && (func_800760F8() == 2)) {
         return true;
     }
     return false;
 }
+#endif
 
 void func_8007E08C(void) {
     Audio_ChangeSoundMode(COURSE_MUTE_CITY);
 }
 
 void func_8007E0AC(s32 bgm) {
+#ifndef EXPANSION_KIT
     Audio_BetaBgmStart(bgm);
+#else
+    if (bgm == BGM_DEATHRACE2) {
+        bgm = BGM_DEATHRACE;
+    }
+    Audio_DDBgmStart(bgm);
+#endif
 }
+
+#ifdef EXPANSION_KIT
+void func_8070DAD4(s32 bgm) {
+    Audio_RomBgmStart(bgm);
+    D_8076CCA0 = true;
+}
+#endif
 
 void func_8007E0CC(void) {
     Audio_BetaBgmStop();
+#ifdef EXPANSION_KIT
+    if (D_8076CCA0) {
+        Audio_RomBgmStop();
+    } else {
+        Audio_DDBgmStop();
+    }
+    D_8076CCA0 = false;
+#endif
 }
+
+#ifdef EXPANSION_KIT
+void func_8070DB48(void) {
+    Audio_BetaBgmStop();
+    if (D_8076CCA0) {
+        Audio_RomBgmStop2();
+    } else {
+        Audio_DDBgmStop();
+    }
+    D_8076CCA0 = false;
+}
+#endif
 
 void func_8007E0EC(void) {
     Audio_BetaBgmStop2();
+#ifdef EXPANSION_KIT
+    if (D_8076CCA0) {
+        Audio_RomBgmStop();
+    } else {
+        Audio_DDBgmStop();
+    }
+    D_8076CCA0 = false;
+#endif
 }
 
 const s8 kMachineSelectCharacterList[] = { CAPTAIN_FALCON,
@@ -287,7 +444,7 @@ const s8 kMachineSelectCharacterList[] = { CAPTAIN_FALCON,
                                            THE_SKULL,
                                            30 };
 
-s8 Character_GetCharacterFromSlot(s32 characterSlot) {
+s32 Character_GetCharacterFromSlot(s32 characterSlot) {
     return kMachineSelectCharacterList[characterSlot];
 }
 

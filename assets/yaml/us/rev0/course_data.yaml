@@ -1,7 +1,8 @@
 :config:
   header:
     code:
-      - '#include "assets/course_data.h"'
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(course_data.h)'
     header:
       - '#include "fzx_course.h"'
 

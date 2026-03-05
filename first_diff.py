@@ -40,16 +40,25 @@ def firstDiffMain():
 
     parser.add_argument("-c", "--count", type=int, default=5, help="find up to this many instruction difference(s)")
     parser.add_argument("-v", "--version", help="Which version should be processed", default="us.rev0")
+    parser.add_argument("-k", "--expansion-kit", action='store_true', help="Uses the expansion kit version")
     parser.add_argument("-a", "--add-colons", action='store_true', help="Add colon between bytes" )
 
     args = parser.parse_args()
 
-    buildFolder = Path("build")
+    versionSplit = args.version.split(".")
 
-    BUILTROM = Path(buildFolder / f"fzerox.us.rev0.z64")
-    BUILTMAP = buildFolder / f"fzerox.us.rev0.map"
+    buildFolder = Path("build") / versionSplit[0] / versionSplit[1]
 
-    EXPECTEDROM = Path("baserom.us.rev0.z64")
+    targetPrefix = "fzerox"
+    extension = ".z64"
+    if args.expansion_kit:
+        targetPrefix = "fzerox-expansion"
+        extension = ".z64dd"
+
+    BUILTROM = Path(buildFolder / (targetPrefix + "." + args.version + extension))
+    BUILTMAP = buildFolder / (targetPrefix + "." + args.version + ".map")
+
+    EXPECTEDROM = Path("baserom." + args.version + extension)
     EXPECTEDMAP = "expected" / BUILTMAP
 
     mapfile_parser.frontends.first_diff.doFirstDiff(BUILTMAP, EXPECTEDMAP, BUILTROM, EXPECTEDROM, args.count, mismatchSize=True, addColons=args.add_colons, bytesConverterCallback=decodeInstruction)

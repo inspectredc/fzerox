@@ -8,11 +8,11 @@
 #include "fzx_save.h"
 #include "fzx_effects.h"
 #include "unk_gfx.h"
-#include "assets/course_track_gfx.h"
-#include "assets/machine_custom_gfx.h"
-#include "assets/hud_gfx.h"
-#include "assets/machine_global_gfx.h"
-#include "assets/machine_models.h"
+#include ASSET_HEADER(course_track_gfx.h)
+#include ASSET_HEADER(machine_custom_gfx.h)
+#include ASSET_HEADER(hud_gfx.h)
+#include ASSET_HEADER(machine_global_gfx.h)
+#include ASSET_HEADER(machine_models.h)
 
 s32 gTotalRacers;
 Racer* sLastRacer;
@@ -137,10 +137,10 @@ TexturePtr D_800CDC54[] = {
 };
 
 // Shadow Types
-UNUSED u8 D_800CDD04[] = { 0x25, 0x2B, 0x2A, 0x26, 0x27, 0x28, 0x29, 0x25, 0x2B, 0x2A, 0x26, 0x27, 0x28,
-                           0x29, 0x25, 0x2B, 0x2A, 0x26, 0x27, 0x28, 0x29, 0x25, 0x2B, 0x2A, 0x26, 0x27,
-                           0x28, 0x29, 0x1E, 0x24, 0x23, 0x1F, 0x20, 0x21, 0x22, 0x1E, 0x24, 0x23, 0x1F,
-                           0x20, 0x21, 0x22, 0x1E, 0x24, 0x23, 0x1F, 0x20, 0x21, 0x22 };
+u8 D_800CDD04[] = { 0x25, 0x2B, 0x2A, 0x26, 0x27, 0x28, 0x29, 0x25, 0x2B, 0x2A, 0x26, 0x27, 0x28,
+                    0x29, 0x25, 0x2B, 0x2A, 0x26, 0x27, 0x28, 0x29, 0x25, 0x2B, 0x2A, 0x26, 0x27,
+                    0x28, 0x29, 0x1E, 0x24, 0x23, 0x1F, 0x20, 0x21, 0x22, 0x1E, 0x24, 0x23, 0x1F,
+                    0x20, 0x21, 0x22, 0x1E, 0x24, 0x23, 0x1F, 0x20, 0x21, 0x22 };
 
 // Machine Load Textures
 Gfx* D_800CDD38[] = {
@@ -389,6 +389,10 @@ s16 D_800CE77C = 0;
 s16 D_800CE780 = 1;
 s16 D_800CE784 = 0;
 
+#ifdef EXPANSION_KIT
+s16 gGreyscaleMachinePart = false;
+#endif
+
 // clang-format off
 BoosterInfo sBoosterInfos[] = {
     { 4, { { -87.0f, 22.0f, -208.0f }, { -87.0f, 60.0f, -208.0f }, { 87.0f, 22.0f, -208.0f }, { 87.0f, 60.0f, -208.0f } }, { 10.0f, 10.0f, 10.0f, 10.0f } },
@@ -488,15 +492,15 @@ Machine sDefaultMachines[] = {
 // clang-format on
 
 // Machine Part Weights
-UNUSED s16 D_800CF488[] = {
+s16 D_800CF488[] = {
     270, 290, 320, 350, 420, 580, 630,
 };
 
-UNUSED s16 D_800CF498[] = {
+s16 D_800CF498[] = {
     510, 560, 630, 720, 890, 930, 1170,
 };
 
-UNUSED s16 D_800CF4A8[] = {
+s16 D_800CF4A8[] = {
     0, 100, 120, 140, 190, 250, 420,
 };
 
@@ -511,13 +515,23 @@ void (*D_800CF4B8[])(Racer*) = {
     func_80090568, // TRACK_SHAPE_BORDERLESS_ROAD
 };
 
+#ifndef EXPANSION_KIT
 u8 D_800CF4D8[] = {
     BGM_MUTE_CITY,  BGM_SILENCE,       BGM_SAND_OCEAN,    BGM_DEVILS_FOREST, BGM_BIG_BLUE,   BGM_PORT_TOWN,
     BGM_SECTOR,     BGM_RED_CANYON,    BGM_DEVILS_FOREST, BGM_MUTE_CITY,     BGM_BIG_BLUE,   BGM_WHITE_LAND,
     BGM_SAND_OCEAN, BGM_SILENCE,       BGM_SECTOR,        BGM_RED_CANYON,    BGM_WHITE_LAND, BGM_MUTE_CITY,
     BGM_SECTOR,     BGM_DEVILS_FOREST, BGM_RED_CANYON,    BGM_SAND_OCEAN,    BGM_PORT_TOWN,  BGM_WHITE_LAND,
 };
+#else
+u8 D_800CF4D8[] = {
+    BGM_MUTE_CITY,    BGM_SILENCE,       BGM_SAND_OCEAN,    BGM_DEVILS_FOREST, BGM_BIG_BLUE,   BGM_PORT_TOWN,
+    BGM_SECTOR,       BGM_RED_CANYON,    BGM_DEVILS_FOREST, BGM_MUTE_CITY,     BGM_BIG_BLUE,   BGM_WHITE_LAND,
+    BGM_SAND_OCEAN,   BGM_SILENCE,       BGM_SECTOR,        BGM_RED_CANYON,    BGM_WHITE_LAND, BGM_MUTE_CITY,
+    BGM_RAINBOW_ROAD, BGM_DEVILS_FOREST, BGM_RED_CANYON,    BGM_SAND_OCEAN,    BGM_PORT_TOWN,  BGM_WHITE_LAND,
+};
+#endif
 
+#ifndef EXPANSION_KIT
 u8 D_800CF4F0[] = {
     BGM_MUTE_CITY,     // VENUE_MUTE_CITY
     BGM_PORT_TOWN,     // VENUE_PORT_TOWN
@@ -531,6 +545,7 @@ u8 D_800CF4F0[] = {
     BGM_SILENCE,       // VENUE_SILENCE
     BGM_MUTE_CITY,     // VENUE_ENDING
 };
+#endif
 
 s32 Racer_GetRacerIdFromPosition(s32 position) {
     s32 i;
@@ -553,6 +568,9 @@ void Racer_SetupStartPositions(void) {
     f32 t;
     f32 height;
     f32 var_fv0;
+#ifdef EXPANSION_KIT
+    f32 var_fs1;
+#endif
     s32 i;
     s32 j;
     CourseSegment* racerStartSegment;
@@ -567,8 +585,13 @@ void Racer_SetupStartPositions(void) {
         t -= 7.3f / Course_SplineGetTangent(racerStartSegment, t, &gRacers[0].segmentPositionInfo.segmentForward);
     }
 
+#ifndef EXPANSION_KIT
     if ((gGameMode != GAMEMODE_RECORDS) && (gGameMode != GAMEMODE_GP_END_CS) &&
         (gTitleDemoState == TITLE_DEMO_INACTIVE)) {
+#else
+    if ((gGameMode != GAMEMODE_RECORDS) && (gGameMode != GAMEMODE_GP_END_CS) &&
+        (gTitleDemoState == TITLE_DEMO_INACTIVE) && (gGameMode != GAMEMODE_COURSE_EDIT)) {
+#endif
         if ((gGameMode == GAMEMODE_GP_RACE) || (gGameMode == GAMEMODE_PRACTICE) || (gGameMode == GAMEMODE_DEATH_RACE)) {
             height = 1.99f;
         } else {
@@ -586,10 +609,8 @@ void Racer_SetupStartPositions(void) {
         Course_SplineGetPosition(racerStartSegment, t, &racer->segmentPositionInfo.segmentPos);
         racer->segmentPositionInfo.pos = racer->segmentPositionInfo.lastGroundedPos =
             racer->segmentPositionInfo.segmentPos;
-        racer->segmentPositionInfo.segmentDisplacement.x = 0.0f;
-        racer->segmentPositionInfo.segmentDisplacement.y = 0.0f;
-        racer->segmentPositionInfo.segmentDisplacement.z = 0.0f;
-        racer->segmentPositionInfo.distanceFromSegment = 0.0f;
+        racer->segmentPositionInfo.segmentDisplacement.x = racer->segmentPositionInfo.segmentDisplacement.y =
+            racer->segmentPositionInfo.segmentDisplacement.z = racer->segmentPositionInfo.distanceFromSegment = 0.0f;
         racer->segmentPositionInfo.segmentForwardMagnitude =
             Course_SplineGetTangent(racer->segmentPositionInfo.courseSegment, racer->segmentPositionInfo.segmentTValue,
                                     &racer->segmentPositionInfo.segmentForward);
@@ -597,12 +618,32 @@ void Racer_SetupStartPositions(void) {
             racer->segmentPositionInfo.courseSegment, racer->segmentPositionInfo.segmentTValue, &racer->lapDistance);
         Course_SplineGetBasis(racer->segmentPositionInfo.courseSegment, racer->segmentPositionInfo.segmentTValue,
                               &racer->segmentBasis, racer->segmentPositionInfo.segmentLengthProportion);
+
+#ifdef EXPANSION_KIT
+        var_fs1 = ((racer->segmentPositionInfo.segmentLengthProportion *
+                    (racer->segmentPositionInfo.courseSegment->next->radiusLeft -
+                     racer->segmentPositionInfo.courseSegment->radiusLeft)) +
+                   racer->segmentPositionInfo.courseSegment->radiusLeft +
+                   (racer->segmentPositionInfo.segmentLengthProportion *
+                    (racer->segmentPositionInfo.courseSegment->next->radiusRight -
+                     racer->segmentPositionInfo.courseSegment->radiusRight)) +
+                   racer->segmentPositionInfo.courseSegment->radiusRight) *
+                  0.125f;
+        if (var_fs1 > 50.0f) {
+            var_fs1 = 50.0f;
+        }
+#endif
+
         if (gTotalRacers >= 4) {
             var_fv0 = 3.0f;
         } else {
             var_fv0 = gTotalRacers - 1;
         }
+#ifndef EXPANSION_KIT
         var_fv0 = (((j - 1) & 3) * 2 - var_fv0) * 50.0f;
+#else
+        var_fv0 = (((j - 1) & 3) * 2 - var_fv0) * var_fs1;
+#endif
         func_8009EBEC(
             &racer->segmentPositionInfo,
             racer->segmentPositionInfo.pos.x + (height * racer->segmentBasis.y.x) + (var_fv0 * racer->segmentBasis.z.x),
@@ -611,6 +652,10 @@ void Racer_SetupStartPositions(void) {
             100, 1.0f);
         if (gNumPlayers == 1) {
             var_fv0 = 100.0f;
+#ifdef EXPANSION_KIT
+        } else if (var_fs1 <= 23.0f) {
+            var_fv0 = 46.0f;
+#endif
         } else {
             var_fv0 = 0.1f;
         }
@@ -725,9 +770,8 @@ void Racer_RetireRacer(Racer* racer) {
             if ((gGameMode == GAMEMODE_DEATH_RACE) && (gTotalRacers == (gCpuRacersRetired + 1))) {
                 gRacers[0].stateFlags |= (RACER_STATE_FINISHED | RACER_STATE_CPU_CONTROLLED);
                 gRacers[0].raceTime += Math_Rand2() % 16;
-                D_800E5FBC = 1;
                 gRacers[0].energy = gRacers[0].maxEnergy;
-                D_800F5DE8 = D_800E5FBC;
+                D_800F5DE8 = D_800E5FBC = 1;
                 Audio_PlayerFinished(gRacers[0].id);
                 Audio_PlayerEngineStop(gRacers[0].id);
                 func_8007E0CC();
@@ -1532,8 +1576,13 @@ void Racer_InitRacer(Racer* racer) {
     racer->bodyLowEnergyGradientR = racer->bodyRF - racer->bodyLowEnergyR;
     racer->bodyLowEnergyGradientG = racer->bodyGF - racer->bodyLowEnergyG;
     racer->bodyLowEnergyGradientB = racer->bodyBF - racer->bodyLowEnergyB;
+#ifndef EXPANSION_KIT
     if ((gTitleDemoState != TITLE_DEMO_INACTIVE) || (gGameMode == GAMEMODE_PRACTICE) ||
         (gGameMode == GAMEMODE_DEATH_RACE)) {
+#else
+    if ((gTitleDemoState != TITLE_DEMO_INACTIVE) || (gGameMode == GAMEMODE_PRACTICE) ||
+        (gGameMode == GAMEMODE_DEATH_RACE) || (gGameMode == GAMEMODE_COURSE_EDIT)) {
+#endif
         racer->stateFlags =
             RACER_STATE_ACTIVE | RACER_STATE_FLAGS_20000000 | RACER_STATE_CAN_BOOST | RACER_STATE_FLAGS_8000;
     } else {
@@ -1660,6 +1709,9 @@ void Racer_Init(void) {
         switch (gGameMode) {
             case GAMEMODE_RECORDS:
             case GAMEMODE_TIME_ATTACK:
+#ifdef EXPANSION_KIT
+            case GAMEMODE_COURSE_EDIT:
+#endif
                 gTotalRacers = 1;
                 break;
             case GAMEMODE_GP_END_CS:
@@ -1735,7 +1787,13 @@ void Racer_Init(void) {
     osRecvMesg(&D_800DCAB0, &sp68, OS_MESG_BLOCK);
     for (i = 0; i < gTotalRacers; i++) {
         gRacers[i].id = i;
-        Cpu_InitRacer(&gRacers[i]);
+#ifdef EXPANSION_KIT
+        if (gGameMode != GAMEMODE_COURSE_EDIT) {
+#endif
+            Cpu_InitRacer(&gRacers[i]);
+#ifdef EXPANSION_KIT
+        }
+#endif
         Racer_InitRacer(&gRacers[i]);
         if (i < gNumPlayers) {
             gRacers[i].unk_2A4 = 0;
@@ -1770,14 +1828,34 @@ void Racer_Init(void) {
     }
     if ((gGameMode != GAMEMODE_RECORDS) && (gGameMode != GAMEMODE_GP_END_CS) &&
         (gTitleDemoState == TITLE_DEMO_INACTIVE)) {
+#ifndef EXPANSION_KIT
         D_800CE780 = 1;
         gRaceIntroTimer = 460;
+#endif
         gEnableRaceSfx = true;
+#ifdef EXPANSION_KIT
+
+        if (gGameMode == GAMEMODE_COURSE_EDIT) {
+            D_800CE780 = 0;
+            gRaceIntroTimer = 100;
+            for (racer = sLastRacer; racer >= gRacers; racer--) {
+                racer->unk_17C = 13.0f;
+                racer->unk_2A4 = 0;
+            }
+        } else {
+            D_800CE780 = 1;
+            gRaceIntroTimer = 460;
+        }
+#endif
     } else {
         gEnableRaceSfx = false;
         gRaceIntroTimer = 0;
 
+#ifndef EXPANSION_KIT
         if (gTitleDemoState != TITLE_DEMO_INACTIVE) {
+#else
+        if (gTitleDemoState != TITLE_DEMO_INACTIVE && gGameMode != GAMEMODE_RECORDS) {
+#endif
             D_800CE780 = 1;
         } else {
             D_800CE780 = 0;
@@ -1849,8 +1927,19 @@ void Racer_Init(void) {
                     racer->machineIndex = gRacers[0].machineIndex;
                 }
 
+#ifndef EXPANSION_KIT
                 racer->shadowType = gMachines[racer->character].shadowType;
                 racer->boostersType = gMachines[racer->character].boostersType;
+#else
+                if (ghostRacer->ghost->machineInfo.customType == CUSTOM_MACHINE_EDITED) {
+                    racer->shadowType = D_800CDD04[ghostRacer->ghost->machineInfo.frontType * 7 +
+                                                   ghostRacer->ghost->machineInfo.rearType];
+                    racer->boostersType = ghostRacer->ghost->machineInfo.rearType + 30;
+                } else {
+                    racer->shadowType = sDefaultMachines[racer->character].shadowType;
+                    racer->boostersType = sDefaultMachines[racer->character].boostersType;
+                }
+#endif
                 racer->bodyR = ghostRacer->ghost->machineInfo.bodyR;
                 racer->bodyG = ghostRacer->ghost->machineInfo.bodyG;
                 racer->bodyB = ghostRacer->ghost->machineInfo.bodyB;
@@ -1861,6 +1950,7 @@ void Racer_Init(void) {
     }
 }
 
+#ifndef EXPANSION_KIT
 void func_8008D33C(void) {
     s32 i;
 
@@ -1868,6 +1958,79 @@ void func_8008D33C(void) {
         gMachines[i] = sDefaultMachines[i];
     }
 }
+#else
+extern CustomMachinesInfo gCustomMachinesInfo;
+extern u8 D_i2_80111848[];
+
+#ifdef NON_MATCHING
+void func_8008D33C(void) {
+    CustomMachineInfo* temp_a2;
+    s32 characterSlot;
+    s32 i;
+    CustomMachine* temp_a1;
+
+    for (i = 29; i >= 0; i--) {
+        characterSlot = Character_GetSlotFromCharacter(i);
+        temp_a1 = &gCustomMachinesInfo.customMachines[characterSlot];
+        if (gCustomMachinesInfo.characterCustomState[characterSlot] > 0) {
+            temp_a2 = &sCustomMachineInfo[i];
+            temp_a2->decalR = temp_a1->decalR;
+            temp_a2->decalG = temp_a1->decalG;
+            temp_a2->decalB = temp_a1->decalB;
+            temp_a2->numberR = temp_a1->numberR;
+            temp_a2->numberG = temp_a1->numberG;
+            temp_a2->numberB = temp_a1->numberB;
+            temp_a2->cockpitR = temp_a1->cockpitR;
+            temp_a2->cockpitG = temp_a1->cockpitG;
+            temp_a2->cockpitB = temp_a1->cockpitB;
+            temp_a2->frontType = temp_a1->frontType;
+            temp_a2->rearType = temp_a1->rearType;
+            temp_a2->wingType = temp_a1->wingType;
+            temp_a2->decal = temp_a1->decal - 1;
+            temp_a2->logo = temp_a1->logo - 1;
+            gMachines[i].shadowType = D_800CDD04[(temp_a2->frontType * 7) + temp_a2->rearType];
+            gMachines[i].boostersType = temp_a2->rearType + 30;
+            gMachines[i].customType = CUSTOM_MACHINE_EDITED;
+            gMachines[i].number = sDefaultMachines[i].number;
+            gMachines[i].red[0] = temp_a1->red;
+            gMachines[i].green[0] = temp_a1->green;
+            gMachines[i].blue[0] = temp_a1->blue;
+            gMachines[i].red[1] = temp_a1->red + 0x40;
+            gMachines[i].green[1] = temp_a1->green + 0x40;
+            gMachines[i].blue[1] = temp_a1->blue + 0x40;
+            gMachines[i].red[2] = temp_a1->red + 0x80;
+            gMachines[i].green[2] = temp_a1->green + 0x80;
+            gMachines[i].blue[2] = temp_a1->blue + 0x80;
+            gMachines[i].red[3] = temp_a1->red + 0xC0;
+            gMachines[i].green[3] = temp_a1->green + 0xC0;
+            gMachines[i].blue[3] = temp_a1->blue + 0xC0;
+            gMachines[i].machineStats[BODY_STAT] = BODY_E - temp_a1->body;
+            gMachines[i].machineStats[BOOST_STAT] = BOOST_E - temp_a1->boost;
+            gMachines[i].machineStats[GRIP_STAT] = GRIP_E - temp_a1->grip;
+            gMachines[i].weight =
+                D_800CF488[temp_a2->frontType] + D_800CF498[temp_a2->rearType] + D_800CF4A8[temp_a2->wingType];
+        } else if (gCustomMachinesInfo.characterCustomState[characterSlot] < 0) {
+            if ((i == CAPTAIN_FALCON) && (D_i2_80111848[CAPTAIN_FALCON] != 0)) {
+                gMachines[i] = sDefaultMachines[30];
+            } else {
+                if ((i == SAMURAI_GOROH) && (D_i2_80111848[SAMURAI_GOROH] != 0)) {
+                    gMachines[i] = sDefaultMachines[31];
+                } else if ((i == JODY_SUMMER) && (D_i2_80111848[JODY_SUMMER] != 0)) {
+                    gMachines[i] = sDefaultMachines[32];
+                } else {
+                    gMachines[i] = sDefaultMachines[i];
+                }
+            }
+        } else {
+            gMachines[i] = sDefaultMachines[i];
+        }
+    }
+}
+#else
+void func_8008D33C(void);
+#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/game/racer/func_8008D33C.s")
+#endif
+#endif
 
 void func_8008D3C4(s32 character, s32 arg1) {
     Gfx* gfx;
@@ -1977,7 +2140,9 @@ void func_8008D824(void) {
 void func_8008D8E8(void) {
     s32 i;
 
+#ifndef EXPANSION_KIT
     func_800A4DF0();
+#endif
     func_8008D3C4(gPlayerCharacters[0], 0);
     func_8008D824();
 
@@ -2016,7 +2181,7 @@ void func_8008DA68(void) {
         gRacers[i].machineSkinIndex = 0;
         gRacers[i].unk_1A8 = func_8008960C(0.5f);
         if (i < 4) {
-            gPlayerCharacters[i] = (s16) gRacers[i].character;
+            gPlayerCharacters[i] = gRacers[i].character;
             gPlayerMachineSkins[i] = gRacers[i].machineSkinIndex;
             gPlayerEngine[i] = 0.5f;
         }
@@ -2027,8 +2192,6 @@ void func_8008DA68(void) {
 void func_8008DB98(void) {
     func_8008DA68();
 }
-
-extern s16 gRacersKOd;
 
 void func_8008DBB8(Racer* arg0, s32 arg1) {
     Racer* temp_v0;
@@ -2127,8 +2290,14 @@ void Racer_ReceiveDamage(Racer* racer, f32 damageStrength) {
             }
         }
     } else {
+#ifdef EXPANSION_KIT
+        if (D_800CE780 != 0) {
+#endif
+            racer->energy -= damageStrength;
+#ifdef EXPANSION_KIT
+        }
+#endif
         racer->stateFlags |= RACER_STATE_RECEIVED_DAMAGE;
-        racer->energy -= damageStrength;
         if (racer->energy < 0.0f) {
             if (racer->machineLod == 0) {
                 racer->energy = 0.1f;
@@ -2236,7 +2405,7 @@ void func_8008E504(Racer* racer) {
 
 void func_8008E54C(Racer* racer, f32 airborneRange) {
     f32 temp_ft4;
-    f32 sp50;
+    f32 lateralOffset;
     f32 temp_fv0;
 
     if (racer->stateFlags & RACER_STATE_FLAGS_80000000) {
@@ -2249,10 +2418,10 @@ void func_8008E54C(Racer* racer, f32 airborneRange) {
         if (racer->stateFlags & RACER_STATE_FLAGS_80000000) {
             return;
         }
-        sp50 = (racer->segmentBasis.z.x * racer->segmentPositionInfo.segmentDisplacement.x) +
-               (racer->segmentBasis.z.y * racer->segmentPositionInfo.segmentDisplacement.y) +
-               (racer->segmentBasis.z.z * racer->segmentPositionInfo.segmentDisplacement.z);
-        if ((sp50 < -racer->currentRadiusRight) || (racer->currentRadiusLeft < sp50)) {
+        lateralOffset = (racer->segmentBasis.z.x * racer->segmentPositionInfo.segmentDisplacement.x) +
+                        (racer->segmentBasis.z.y * racer->segmentPositionInfo.segmentDisplacement.y) +
+                        (racer->segmentBasis.z.z * racer->segmentPositionInfo.segmentDisplacement.z);
+        if ((lateralOffset < -racer->currentRadiusRight) || (racer->currentRadiusLeft < lateralOffset)) {
             racer->stateFlags |= RACER_STATE_FLAGS_80000000;
             Racer_ReceiveDamage(racer, 2.0f);
             Effects_SpawnCollisionSparks(racer->segmentPositionInfo.pos.x, racer->segmentPositionInfo.pos.y,
@@ -2263,9 +2432,9 @@ void func_8008E54C(Racer* racer, f32 airborneRange) {
             }
         }
     } else {
-        sp50 = (racer->segmentBasis.z.x * racer->segmentPositionInfo.segmentDisplacement.x) +
-               (racer->segmentBasis.z.y * racer->segmentPositionInfo.segmentDisplacement.y) +
-               (racer->segmentBasis.z.z * racer->segmentPositionInfo.segmentDisplacement.z);
+        lateralOffset = (racer->segmentBasis.z.x * racer->segmentPositionInfo.segmentDisplacement.x) +
+                        (racer->segmentBasis.z.y * racer->segmentPositionInfo.segmentDisplacement.y) +
+                        (racer->segmentBasis.z.z * racer->segmentPositionInfo.segmentDisplacement.z);
         racer->heightAboveGround = (racer->segmentBasis.y.x * racer->segmentPositionInfo.segmentDisplacement.x) +
                                    (racer->segmentBasis.y.y * racer->segmentPositionInfo.segmentDisplacement.y) +
                                    (racer->segmentBasis.y.z * racer->segmentPositionInfo.segmentDisplacement.z);
@@ -2369,18 +2538,18 @@ void func_8008E54C(Racer* racer, f32 airborneRange) {
             }
         }
 
-        if (sp50 < -racer->currentRadiusRight) {
+        if (lateralOffset < -racer->currentRadiusRight) {
             Racer_HitWall(racer,
                           (racer->segmentBasis.z.x * racer->velocity.x) +
                               (racer->segmentBasis.z.y * racer->velocity.y) +
                               (racer->segmentBasis.z.z * racer->velocity.z),
-                          -1.0f, racer->currentRadiusRight + sp50);
-        } else if (racer->currentRadiusLeft < sp50) {
+                          -1.0f, racer->currentRadiusRight + lateralOffset);
+        } else if (racer->currentRadiusLeft < lateralOffset) {
             Racer_HitWall(racer,
                           (racer->segmentBasis.z.x * racer->velocity.x) +
                               (racer->segmentBasis.z.y * racer->velocity.y) +
                               (racer->segmentBasis.z.z * racer->velocity.z),
-                          1.0f, sp50 - racer->currentRadiusLeft);
+                          1.0f, lateralOffset - racer->currentRadiusLeft);
         } else {
             racer->segmentPositionInfo.distanceFromSegment =
                 sqrtf(SQ(racer->segmentPositionInfo.segmentDisplacement.x) +
@@ -2669,20 +2838,22 @@ void func_8008F550(Racer* racer) {
             return;
         }
         racer->stateFlags &= ~RACER_STATE_FLAGS_80000000;
-    } else if ((racer->currentRadiusLeft + 200.0f) < racer->segmentPositionInfo.distanceFromSegment) {
-        racer->stateFlags |= RACER_STATE_FLAGS_80000000 | RACER_STATE_AIRBORNE;
-        if (racer->id < gNumPlayers) {
-            if (!(racer->soundEffectFlags & RACER_SE_FLAGS_AIRBORNE)) {
-                racer->soundEffectFlags |= RACER_SE_FLAGS_AIRBORNE;
-                if (gEnableRaceSfx) {
-                    Audio_PlayerLevelSEStart(racer->id, NA_LEVEL_SE_8);
+    } else {
+        if ((racer->currentRadiusLeft + 200.0f) < racer->segmentPositionInfo.distanceFromSegment) {
+            racer->stateFlags |= RACER_STATE_FLAGS_80000000 | RACER_STATE_AIRBORNE;
+            if (racer->id < gNumPlayers) {
+                if (!(racer->soundEffectFlags & RACER_SE_FLAGS_AIRBORNE)) {
+                    racer->soundEffectFlags |= RACER_SE_FLAGS_AIRBORNE;
+                    if (gEnableRaceSfx) {
+                        Audio_PlayerLevelSEStart(racer->id, NA_LEVEL_SE_8);
+                    }
                 }
             }
+            func_8008E418(racer);
+            func_8008E504(racer);
+            racer->shadowPos.y = -54321.0f;
+            return;
         }
-        func_8008E418(racer);
-        func_8008E504(racer);
-        racer->shadowPos.y = -54321.0f;
-        return;
     }
 
     if (var_fa1 != 0.0f) {
@@ -3054,21 +3225,23 @@ void func_80090568(Racer* racer) {
             return;
         }
         racer->stateFlags &= ~RACER_STATE_FLAGS_80000000;
-    } else if ((racer->heightAboveGround > 30.0f) || (sp48 < -racer->currentRadiusRight) ||
-               (racer->currentRadiusLeft < sp48)) {
-        racer->stateFlags |= RACER_STATE_FLAGS_80000000 | RACER_STATE_AIRBORNE;
-        if (racer->id < gNumPlayers) {
-            if (!(racer->soundEffectFlags & RACER_SE_FLAGS_AIRBORNE)) {
-                racer->soundEffectFlags |= RACER_SE_FLAGS_AIRBORNE;
-                if (gEnableRaceSfx) {
-                    Audio_PlayerLevelSEStart(racer->id, NA_LEVEL_SE_8);
+    } else {
+        if ((racer->heightAboveGround > 30.0f) || (sp48 < -racer->currentRadiusRight) ||
+            (racer->currentRadiusLeft < sp48)) {
+            racer->stateFlags |= RACER_STATE_FLAGS_80000000 | RACER_STATE_AIRBORNE;
+            if (racer->id < gNumPlayers) {
+                if (!(racer->soundEffectFlags & RACER_SE_FLAGS_AIRBORNE)) {
+                    racer->soundEffectFlags |= RACER_SE_FLAGS_AIRBORNE;
+                    if (gEnableRaceSfx) {
+                        Audio_PlayerLevelSEStart(racer->id, NA_LEVEL_SE_8);
+                    }
                 }
             }
+            func_8008E418(racer);
+            func_8008E504(racer);
+            racer->shadowPos.y = -54321.0f;
+            return;
         }
-        func_8008E418(racer);
-        func_8008E504(racer);
-        racer->shadowPos.y = -54321.0f;
-        return;
     }
 
     if (racer->heightAboveGround < 0.0f) {
@@ -3433,7 +3606,12 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
             Audio_PlayerTriggerSEStart(racer->id, NA_SE_7);
         }
     } else {
+#ifndef EXPANSION_KIT
         if ((racer->stateFlags & (RACER_STATE_CRASHED | COURSE_EFFECT_MASK)) == COURSE_EFFECT_DASH) {
+#else
+        if ((racer->stateFlags & (RACER_STATE_CRASHED | COURSE_EFFECT_MASK)) == COURSE_EFFECT_DASH &&
+            racer->stateFlags & RACER_STATE_FLAGS_400000) {
+#endif
             buttonCurrent |= BTN_A;
             racer->shadowColorStrength = 1.3f;
             racer->shadowBaseR = 255.0f;
@@ -3863,22 +4041,28 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
             if (var_ft4 < racer->unk_1C0) {
                 var_ft4 = racer->unk_1C0;
             }
-            if ((gNumPlayers == 1) || (gSettingVsHandicap == 0)) {
-                sp128 = racer->boostEnergyUsage;
-            } else {
-                sp128 = (gRacersByPosition[0]->raceDistance - racer->raceDistance);
-                sp128 /= D_800CE4D8;
-                if (sp128 >= 1.0f) {
-                    sp128 = racer->boostEnergyUsage * 0.1f;
+#ifdef EXPANSION_KIT
+            if (gGameMode != GAMEMODE_COURSE_EDIT) {
+#endif
+                if ((gNumPlayers == 1) || (gSettingVsHandicap == 0)) {
+                    sp128 = racer->boostEnergyUsage;
                 } else {
-                    sp128 = (((1.0f - sp128) * 0.9f) + 0.1f) * racer->boostEnergyUsage;
+                    sp128 = (gRacersByPosition[0]->raceDistance - racer->raceDistance);
+                    sp128 /= D_800CE4D8;
+                    if (sp128 >= 1.0f) {
+                        sp128 = racer->boostEnergyUsage * 0.1f;
+                    } else {
+                        sp128 = (((1.0f - sp128) * 0.9f) + 0.1f) * racer->boostEnergyUsage;
+                    }
                 }
+                racer->energy -= sp128;
+                if (racer->energy < 0.0f) {
+                    racer->boostTimer = 1;
+                    racer->energy = 0.0f;
+                }
+#ifdef EXPANSION_KIT
             }
-            racer->energy -= sp128;
-            if (racer->energy < 0.0f) {
-                racer->boostTimer = 1;
-                racer->energy = 0.0f;
-            }
+#endif
         }
         racer->boostTimer--;
         if (racer->boostTimer == 0) {
@@ -3987,7 +4171,13 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
         D_800CF4B8[TRACK_SHAPE_INDEX(TRACK_SHAPE_AIR)](racer);
         if (racer->segmentPositionInfo.pos.y < -2750.0f) {
             racer->stateFlags &= ~RACER_STATE_ACTIVE;
-            racer->stateFlags |= RACER_STATE_CRASHED;
+#ifdef EXPANSION_KIT
+            if (gGameMode != GAMEMODE_COURSE_EDIT) {
+#endif
+                racer->stateFlags |= RACER_STATE_CRASHED;
+#ifdef EXPANSION_KIT
+            }
+#endif
             D_800E5FC0++;
             Racer_RetireRacer(racer);
 
@@ -4069,26 +4259,42 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
                                         racer->segmentPositionInfo.courseSegment->up.z)) +
                                       racer->segmentPositionInfo.courseSegment->up.z;
 
-            racer->segmentBasis.z.x = (racer->segmentBasis.y.y * racer->segmentBasis.x.z) -
-                                      (racer->segmentBasis.y.z * racer->segmentBasis.x.y);
-            racer->segmentBasis.z.y = (racer->segmentBasis.y.z * racer->segmentBasis.x.x) -
-                                      (racer->segmentBasis.y.x * racer->segmentBasis.x.z);
-            racer->segmentBasis.z.z = (racer->segmentBasis.y.x * racer->segmentBasis.x.y) -
-                                      (racer->segmentBasis.y.y * racer->segmentBasis.x.x);
+#ifdef EXPANSION_KIT
+            if ((racer->segmentBasis.y.x == 0.0f) && (racer->segmentBasis.y.y == 0.0f) &&
+                (racer->segmentBasis.y.z == 0.0f)) {
+                func_i2_800B0FAC(racer->segmentPositionInfo.courseSegment, &racer->segmentBasis);
+            } else {
+#endif
+                racer->segmentBasis.z.x = (racer->segmentBasis.y.y * racer->segmentBasis.x.z) -
+                                          (racer->segmentBasis.y.z * racer->segmentBasis.x.y);
+                racer->segmentBasis.z.y = (racer->segmentBasis.y.z * racer->segmentBasis.x.x) -
+                                          (racer->segmentBasis.y.x * racer->segmentBasis.x.z);
+                racer->segmentBasis.z.z = (racer->segmentBasis.y.x * racer->segmentBasis.x.y) -
+                                          (racer->segmentBasis.y.y * racer->segmentBasis.x.x);
+#ifdef EXPANSION_KIT
+                if ((racer->segmentBasis.z.x == 0.0f) && (racer->segmentBasis.z.y == 0.0f) &&
+                    (racer->segmentBasis.z.z == 0.0f)) {
+                    func_i2_800B0FAC(racer->segmentPositionInfo.courseSegment, &racer->segmentBasis);
+                } else {
+#endif
 
-            var_fa1 =
-                1.0f / sqrtf(SQ(racer->segmentBasis.z.x) + SQ(racer->segmentBasis.z.y) + SQ(racer->segmentBasis.z.z));
+                    var_fa1 = 1.0f / sqrtf(SQ(racer->segmentBasis.z.x) + SQ(racer->segmentBasis.z.y) +
+                                           SQ(racer->segmentBasis.z.z));
 
-            racer->segmentBasis.z.x *= var_fa1;
-            racer->segmentBasis.z.y *= var_fa1;
-            racer->segmentBasis.z.z *= var_fa1;
+                    racer->segmentBasis.z.x *= var_fa1;
+                    racer->segmentBasis.z.y *= var_fa1;
+                    racer->segmentBasis.z.z *= var_fa1;
 
-            racer->segmentBasis.y.x = (racer->segmentBasis.x.y * racer->segmentBasis.z.z) -
-                                      (racer->segmentBasis.x.z * racer->segmentBasis.z.y);
-            racer->segmentBasis.y.y = (racer->segmentBasis.x.z * racer->segmentBasis.z.x) -
-                                      (racer->segmentBasis.x.x * racer->segmentBasis.z.z);
-            racer->segmentBasis.y.z = (racer->segmentBasis.x.x * racer->segmentBasis.z.y) -
-                                      (racer->segmentBasis.x.y * racer->segmentBasis.z.x);
+                    racer->segmentBasis.y.x = (racer->segmentBasis.x.y * racer->segmentBasis.z.z) -
+                                              (racer->segmentBasis.x.z * racer->segmentBasis.z.y);
+                    racer->segmentBasis.y.y = (racer->segmentBasis.x.z * racer->segmentBasis.z.x) -
+                                              (racer->segmentBasis.x.x * racer->segmentBasis.z.z);
+                    racer->segmentBasis.y.z = (racer->segmentBasis.x.x * racer->segmentBasis.z.y) -
+                                              (racer->segmentBasis.x.y * racer->segmentBasis.z.x);
+#ifdef EXPANSION_KIT
+                }
+            }
+#endif
             if (!(racer->stateFlags & (RACER_STATE_CRASHED | RACER_STATE_FINISHED | RACER_STATE_FALLING_OFF_TRACK)) &&
                 (gRaceIntroTimer < 40) && (gGameMode != GAMEMODE_RECORDS)) {
 
@@ -4107,7 +4313,12 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
                         racer->lapTimes[racer->lap - 2] = (s32) (i - racer->completedLapsTime);
                         racer->completedLapsTime = i;
                         racer->startNewPracticeLap = true;
+#ifndef EXPANSION_KIT
                         if ((gGameMode == GAMEMODE_PRACTICE) || (gGameMode == GAMEMODE_DEATH_RACE)) {
+#else
+                        if ((gGameMode == GAMEMODE_PRACTICE) || (gGameMode == GAMEMODE_DEATH_RACE) ||
+                            (gGameMode == GAMEMODE_COURSE_EDIT)) {
+#endif
                             if (racer == gRacers) {
                                 if (racer->lapTimes[racer->lap - 2] < gPracticeBestLap) {
                                     gPracticeBestLap = racer->lapTimes[racer->lap - 2];
@@ -4301,9 +4512,9 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
     racer->modelPos.y = racer->segmentPositionInfo.pos.y + (var_fa1 * racer->modelBasis.y.y);
     racer->modelPos.z = racer->segmentPositionInfo.pos.z + (var_fa1 * racer->modelBasis.y.z);
     if (racer->spinOutTimer != 0) {
-        racer->modelPos.x += ((f32) (Math_Rand1() & 0xFFFF) * 0.000027466238f) - 0.9f;
-        racer->modelPos.y += ((f32) (Math_Rand1() & 0xFFFF) * 0.000027466238f) - 0.9f;
-        racer->modelPos.z += ((f32) (Math_Rand2() & 0xFFFF) * 0.000027466238f) - 0.9f;
+        racer->modelPos.x += ((f32) (Math_Rand1() % 65536) * (1.8f / 65535.0f)) - 0.9f;
+        racer->modelPos.y += ((f32) (Math_Rand1() % 65536) * (1.8f / 65535.0f)) - 0.9f;
+        racer->modelPos.z += ((f32) (Math_Rand2() % 65536) * (1.8f / 65535.0f)) - 0.9f;
     }
 
     if (racer->unk_27C != 0) {
@@ -4334,7 +4545,7 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
                     racer->unk_27C += 0x1000;
                     if (racer->unk_280 > -50) {
                         racer->unk_27C = 0;
-                        racer->attackState = 0;
+                        racer->attackState = ATTACK_STATE_NONE;
                     } else if (gEnableRaceSfx) {
                         Audio_PlayerTriggerSEStart(racer->id, NA_SE_2);
                     }
@@ -4345,7 +4556,7 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
                     racer->unk_27C -= 0x1000;
                     if (racer->unk_280 < 50) {
                         racer->unk_27C = 0;
-                        racer->attackState = 0;
+                        racer->attackState = ATTACK_STATE_NONE;
                     } else if (gEnableRaceSfx) {
                         Audio_PlayerTriggerSEStart(racer->id, NA_SE_2);
                     }
@@ -4434,7 +4645,7 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
             sp10C.y = (s32) ((Math_Rand1() % 32) - 16) + racer->segmentPositionInfo.pos.y;
             sp10C.z = (s32) ((Math_Rand1() % 32) - 16) + racer->segmentPositionInfo.pos.z;
             Effects_SpawnExplosion1(sp10C.x, sp10C.y, sp10C.z, racer->velocity.x, racer->velocity.y, racer->velocity.z,
-                                    (f32) ((Math_Rand2() % 16) + ((s32) (racer->spinOutTimer * 5) / 150) + 5), racer);
+                                    (f32) ((Math_Rand2() % 16) + ((racer->spinOutTimer * 5) / 150) + 5), racer);
             if (!((racer->id + gGameFrameCount) & 4) && gEnableRaceSfx) {
                 Audio_PlayerTriggerSEStart(racer->id, NA_SE_5);
             }
@@ -4524,8 +4735,8 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
                 }
             }
         }
-        if (*(vu32*) &gGameFrameCount & 0x8) {}
-        if (*(vu32*) &gGameFrameCount & 0x10) {}
+        if (!(*(vu32*) &gGameFrameCount & 0x8)) {}
+        if (!(*(vu32*) &gGameFrameCount & 0x10)) {}
         if (!(gGameFrameCount & 8) && ((var_fa1 < 0.2f) || ((var_fa1 < 0.5f) && !(gGameFrameCount & 0x10)))) {
             var_fa1 *= 2;
             var_fs1 = (racer->bodyLowEnergyGradientR * var_fa1) + racer->bodyLowEnergyR;
@@ -4606,6 +4817,9 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
         racer->shadowBaseG = 205.0f;
         racer->shadowBaseB = 255.0f;
         if (racer->id < gNumPlayers) {
+#ifdef EXPANSION_KIT
+            func_800BAE5C(racer->id);
+#endif
             Audio_PlayerTriggerSEStart(racer->id, NA_SE_40);
         }
     }
@@ -4653,7 +4867,7 @@ void func_80094FF4(s32 position) {
             *sGhostReplayRecordingPtr++ = position & 0xFF;
         } else {
             sGhostReplayRecordingSize -= 3;
-            gUnableToRecordGhost = 1;
+            gUnableToRecordGhost = true;
             D_800F5DE4 = 0;
         }
     } else {
@@ -4662,22 +4876,22 @@ void func_80094FF4(s32 position) {
             *sGhostReplayRecordingPtr++ = position;
         } else {
             sGhostReplayRecordingSize--;
-            gUnableToRecordGhost = 1;
+            gUnableToRecordGhost = true;
             D_800F5DE4 = 0;
         }
     }
 }
 
-s32 func_800950E8(GhostRacer* arg0) {
-    s32 temp1 = *arg0->replayPtr++;
+s32 func_800950E8(GhostRacer* ghostRacer) {
+    s32 temp1 = *ghostRacer->replayPtr++;
 
     if (temp1 == -0x80) {
-        temp1 = *arg0->replayPtr++;
+        temp1 = *ghostRacer->replayPtr++;
         temp1 <<= 8;
-        temp1 |= (u8) *arg0->replayPtr++;
-        arg0->replayIndex += 3;
+        temp1 |= (u8) *ghostRacer->replayPtr++;
+        ghostRacer->replayIndex += 3;
     } else {
-        arg0->replayIndex++;
+        ghostRacer->replayIndex++;
     }
 
     return temp1;
@@ -4748,9 +4962,17 @@ void Racer_Update(void) {
     Mtx3F spCC;
     Racer* racer;
     Racer* racer2;
+#ifdef EXPANSION_KIT
+    bool spC0;
+#endif
     Camera* camera;
 
     sRaceFrameCount++;
+
+#ifdef EXPANSION_KIT
+    spC0 = false;
+#endif
+
     if (gRaceIntroTimer != 0) {
         if (!gGamePaused) {
             if (gRaceIntroTimer == 460) {
@@ -4758,16 +4980,27 @@ void Racer_Update(void) {
                 if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
                     Audio_StartDemo();
                 }
+#ifndef EXPANSION_KIT
                 for (i = 0; i < gNumPlayers; i++) {
                     func_800BAE5C(i);
                 }
+#endif
             }
 
             gRaceIntroTimer--;
             if (gRaceIntroTimer == 40) {
-                for (racer = sLastRacer; racer >= gRacers; racer--) {
-                    racer->stateFlags |= RACER_STATE_FLAGS_400000;
+#ifdef EXPANSION_KIT
+                if (func_807424CC() != 0) {
+                    gRaceIntroTimer++;
+                    spC0 = true;
+                } else {
+#endif
+                    for (racer = sLastRacer; racer >= gRacers; racer--) {
+                        racer->stateFlags |= RACER_STATE_FLAGS_400000;
+                    }
+#ifdef EXPANSION_KIT
                 }
+#endif
             } else if ((gRaceIntroTimer == 255) && (gGameMode == GAMEMODE_TIME_ATTACK)) {
                 D_800F5DE4 = 1;
                 sReplayRecordFrameCount = 0;
@@ -5029,7 +5262,11 @@ void Racer_Update(void) {
         }
     }
 
+#ifndef EXPANSION_KIT
     if (gGameMode == GAMEMODE_TIME_ATTACK) {
+#else
+    if (gGameMode == GAMEMODE_TIME_ATTACK && !spC0) {
+#endif
         sReplayRecordFrameCount++;
         if ((D_800F5DE4 != 0) && !(sReplayRecordFrameCount & 1)) {
             var_fs0 = gRacers[0].segmentPositionInfo.pos.x;
@@ -5186,8 +5423,13 @@ void Racer_Update(void) {
                 Audio_SetNearestEnemy(gNearestRacer);
             }
         }
+#ifndef EXPANSION_KIT
         if ((gRacersByPosition[0]->id < gNumPlayers) && (gGameMode != GAMEMODE_DEATH_RACE) &&
             (gGameMode != GAMEMODE_PRACTICE)) {
+#else
+        if ((gRacersByPosition[0]->id < gNumPlayers) && (gGameMode != GAMEMODE_DEATH_RACE) &&
+            (gGameMode != GAMEMODE_PRACTICE) && (gGameMode != GAMEMODE_COURSE_EDIT)) {
+#endif
             var_fs0 = gRacersByPosition[0]->raceDistance - gRacersByPosition[1]->raceDistance;
             if (var_fs0 > 4000.0f) {
                 if (!(gRacersByPosition[0]->soundEffectFlags & RACER_SE_FLAGS_4000)) {
@@ -5268,27 +5510,6 @@ void Racer_Update(void) {
     }
 }
 
-extern MachineEffect gCollisionSparks[32];
-extern s32 gCollisionSparkIndex;
-extern s32 gCollisionSparkCount;
-extern MachineEffect gExplosions1[32];
-extern s32 gExplosions1Index;
-extern s32 gExplosions1Count;
-extern MachineEffect gExplosions2[8];
-extern s32 gExplosions2Index;
-extern s32 gExplosions2Count;
-extern FlyingSparkEffect gFlyingSparks[32];
-extern s32 gFlyingSparksIndex;
-extern s32 gFlyingSparksCount;
-extern MachineEffect gSmokes[32];
-extern s32 gSmokesIndex;
-extern s32 gSmokesCount;
-extern FallExplosionEffect gFallExplosions[32];
-extern s32 gFallExplosionsIndex;
-extern s32 gFallExplosionsCount;
-extern MachineDebrisEffect gMachineDebris[128];
-extern s32 gMachineDebrisIndex;
-extern s32 gMachineDebrisCount;
 extern GfxPool D_1000000;
 
 #ifdef NON_MATCHING
@@ -5366,7 +5587,16 @@ Gfx* Racer_Draw(Gfx* gfx, s32 playerIndex) {
     sp580.m[2][2] = camera->projectionViewMtx.m[2][2];
     sp580.m[2][3] = camera->projectionViewMtx.m[2][3];
 
+#ifndef EXPANSION_KIT
     if (gGameMode != GAMEMODE_GP_END_CS) {
+#else
+    if (gGameMode == GAMEMODE_GP_END_CS || gGameMode == GAMEMODE_COURSE_EDIT) {
+        for (racer = sLastRacer; racer >= gRacers; racer--) {
+            racer->machineLod = racer->unk_2B2 = 1;
+            racer->unk_2B3 = 2;
+        }
+    } else {
+#endif
         for (racer = sLastRacer; racer >= gRacers; racer--) {
             racer->machineLod = racer->unk_2B2 = racer->unk_2B3 = 0;
             if (racer->stateFlags & RACER_STATE_ACTIVE) {
@@ -5422,11 +5652,13 @@ Gfx* Racer_Draw(Gfx* gfx, s32 playerIndex) {
                 }
             }
         }
+#ifndef EXPANSION_KIT
     } else {
         for (racer = sLastRacer; racer >= gRacers; racer--) {
             racer->machineLod = racer->unk_2B2 = 1;
             racer->unk_2B3 = 2;
         }
+#endif
     }
     if (gNumPlayers >= 3) {
         for (racer = &gRacers[gNumPlayers - 1]; racer >= gRacers; racer--) {
@@ -5595,7 +5827,7 @@ Gfx* Racer_Draw(Gfx* gfx, s32 playerIndex) {
     }
     playerRacer = &gRacers[playerIndex];
 
-    if (playerRacer->segmentPositionInfo.courseSegment->trackSegmentInfo & TRACK_FLAG_20000000) {
+    if (playerRacer->segmentPositionInfo.courseSegment->trackSegmentInfo & TRACK_FLAG_INSIDE) {
         if (playerRacer->segmentPositionInfo.courseSegment->nextJoinStartTValue <
             playerRacer->segmentPositionInfo.segmentTValue) {
             temp_fs0 = (1.0f - playerRacer->segmentPositionInfo.segmentLengthProportion) /
@@ -5635,7 +5867,7 @@ block_115:
     gSPLight(gfx++, &D_1000000.unk_21A88[playerIndex].l[0], 1);
     gSPLight(gfx++, &D_1000000.unk_21A88[playerIndex].a, 2);
 
-    if ((playerRacer->segmentPositionInfo.courseSegment->trackSegmentInfo & TRACK_FLAG_20000000) &&
+    if ((playerRacer->segmentPositionInfo.courseSegment->trackSegmentInfo & TRACK_FLAG_INSIDE) &&
         !(playerRacer->stateFlags & RACER_STATE_FLAGS_80000000)) {
         sp560 = playerRacer->segmentBasis.y.x;
         gGfxPool->unk_21A88[playerIndex].l[0].l.dir[0] = Math_Round(sp560 * 120.0f);
@@ -6402,7 +6634,11 @@ block_115:
         }
     }
 
+#ifndef EXPANSION_KIT
     if (gRaceIntroTimer != 0) {
+#else
+    if (gRaceIntroTimer != 0 && gGameMode != GAMEMODE_COURSE_EDIT) {
+#endif
         gSPDisplayList(gfx++, D_400A258);
 
         gSPMatrix(gfx++, &D_1000000.unk_21988[playerIndex], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -6455,7 +6691,11 @@ block_115:
                         } else if (gCurrentCourseInfo->courseIndex == COURSE_DEATH_RACE) {
                             func_8007E0AC(BGM_DEATHRACE2);
                         } else {
+#ifndef EXPANSION_KIT
                             func_8007E0AC(D_800CF4F0[COURSE_CONTEXT()->courseData.venue]);
+#else
+                            func_8007E0AC(Course_GetBgm());
+#endif
                         }
                     }
                 }
@@ -6470,7 +6710,13 @@ block_115:
     } else if ((gTotalRacers >= 2) && !(playerRacer->stateFlags & (RACER_STATE_FINISHED | RACER_STATE_RETIRED)) &&
                (gGameMode != GAMEMODE_GP_END_CS)) {
         gSPDisplayList(gfx++, D_4007EA8);
+#ifndef EXPANSION_KIT
         if ((gGameMode != GAMEMODE_PRACTICE) && (gGameMode != GAMEMODE_DEATH_RACE)) {
+#else
+
+        if ((gGameMode != GAMEMODE_PRACTICE) && (gGameMode != GAMEMODE_DEATH_RACE) &&
+            (gGameMode != GAMEMODE_COURSE_EDIT)) {
+#endif
             if (gTotalRacers < 3) {
                 var_s4 = gTotalRacers;
             } else {
@@ -6681,10 +6927,14 @@ block_115:
     return gfx;
 }
 #else
+#ifndef EXPANSION_KIT
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/racer/Racer_Draw.s")
 #else
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/racer/Racer_Draw.s")
+#endif
+#else
+#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/game/racer/Racer_Draw.s")
 #endif
 #endif
 
@@ -6707,9 +6957,20 @@ Gfx* func_8009CBE8(Gfx* gfx, s32 arg1, s32 red, s32 green, s32 blue) {
 
 Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2) {
     Machine* machine = &gMachines[character];
+    s32 color;
 
     gSPDisplayList(gfx++, D_800CDD38[character]);
-    gDPSetEnvColor(gfx++, machine->red[arg2], machine->green[arg2], machine->blue[arg2], 255);
+#ifdef EXPANSION_KIT
+    if (gGreyscaleMachinePart && (machine->customType == CUSTOM_MACHINE_DEFAULT)) {
+        color = (machine->red[arg2] * 77) + (machine->green[arg2] * 151) + (machine->blue[arg2] * 28);
+        color >>= 8;
+        gDPSetEnvColor(gfx++, color, color, color, 255);
+    } else {
+#endif
+        gDPSetEnvColor(gfx++, machine->red[arg2], machine->green[arg2], machine->blue[arg2], 255);
+#ifdef EXPANSION_KIT
+    }
+#endif
     gSPDisplayList(gfx++, D_800CDDB0[character * 6]);
     return gfx;
 }
@@ -6731,6 +6992,32 @@ Gfx* func_8009CE70(Gfx* gfx, s32 character) {
 }
 
 Gfx* func_8009CEA0(Gfx* gfx, s32 character) {
-    gSPDisplayList(gfx++, D_800CDAD8[character]);
+#ifdef EXPANSION_KIT
+    s32 characterSlot;
+    CustomMachine* customMachine;
+
+    characterSlot = Character_GetSlotFromCharacter(character);
+
+    if (gCustomMachinesInfo.characterCustomState[characterSlot] > 0) {
+        customMachine = &gCustomMachinesInfo.customMachines[characterSlot];
+        gSPDisplayList(gfx++, D_800CDB50[customMachine->frontType]);
+        gSPDisplayList(gfx++, D_800CDB6C[customMachine->rearType]);
+        gSPDisplayList(gfx++, D_800CDB88[customMachine->wingType]);
+    } else if (gCustomMachinesInfo.characterCustomState[characterSlot] < 0) {
+        if ((character == CAPTAIN_FALCON) && (D_i2_80111848[CAPTAIN_FALCON] != 0)) {
+            gSPDisplayList(gfx++, D_9012718);
+        } else if ((character == SAMURAI_GOROH) && (D_i2_80111848[SAMURAI_GOROH] != 0)) {
+            gSPDisplayList(gfx++, D_9013460);
+        } else if ((character == JODY_SUMMER) && (D_i2_80111848[JODY_SUMMER] != 0)) {
+            gSPDisplayList(gfx++, D_9013D58);
+        } else {
+            gSPDisplayList(gfx++, D_800CDAD8[character]);
+        }
+    } else {
+#endif
+        gSPDisplayList(gfx++, D_800CDAD8[character]);
+#ifdef EXPANSION_KIT
+    }
+#endif
     return gfx;
 }

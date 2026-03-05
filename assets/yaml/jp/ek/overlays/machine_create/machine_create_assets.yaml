@@ -1,0 +1,431 @@
+:config:
+  virtual:
+    [0x8012B520, 0x1CB1E0]
+  header:
+    code:
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(overlays/machine_create/machine_create_assets.h)'
+    header:
+      - '#include "gfx.h"'
+      - '#include "libultra/ultra64.h"'
+
+aMachineCreatePartsTogetherViewport:
+  type: VP
+  offset: 0x1D6FB0
+  symbol: aMachineCreatePartsTogetherViewport
+
+D_xk3_80137300:
+  type: GFX
+  offset: 0x1D6FC0
+  symbol: D_xk3_80137300
+
+D_xk3_80137378:
+  type: GFX
+  offset: 0x1D7038
+  symbol: D_xk3_80137378
+
+D_xk3_801373B0:
+  type: GFX
+  offset: 0x1D7070
+  symbol: D_xk3_801373B0
+
+D_xk3_801373F0:
+  type: GFX
+  offset: 0x1D70B0
+  symbol: D_xk3_801373F0
+
+D_xk3_80137440:
+  type: GFX
+  offset: 0x1D7100
+  symbol: D_xk3_80137440
+
+D_xk3_80137460:
+  type: GFX
+  offset: 0x1D7120
+  symbol: D_xk3_80137460
+
+D_xk3_801374A8:
+  type: GFX
+  offset: 0x1D7168
+  symbol: D_xk3_801374A8
+
+D_xk3_80137520:
+  type: LIGHTS
+  offset: 0x1D71E0
+  symbol: D_xk3_80137520
+
+D_xk3_80137538:
+  type: GFX
+  offset: 0x1D71F8
+  symbol: D_xk3_80137538
+
+D_xk3_80137558:
+  type: LIGHTS
+  offset: 0x1D7218
+  symbol: D_xk3_80137558
+
+D_xk3_80137570:
+  type: GFX
+  offset: 0x1D7230
+  symbol: D_xk3_80137570
+
+D_xk3_80137590:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 64
+  height: 28
+  offset: 0x1D7250
+  symbol: D_xk3_80137590
+
+aMachineCreateMachineNameTex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 48
+  height: 12
+  offset: 0x1D8050
+  symbol: aMachineCreateMachineNameTex
+
+aMachineCreateSettingsTex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 72
+  height: 12
+  offset: 0x1D8290
+  symbol: aMachineCreateSettingsTex
+
+D_xk3_80138930:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 32
+  height: 16
+  offset: 0x1D85F0
+  symbol: D_xk3_80138930
+
+D_xk3_80138B30:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x1D87F0
+  symbol: D_xk3_80138B30
+
+D_xk3_80138CB0:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x1D8970
+  symbol: D_xk3_80138CB0
+
+aMachineCreateMachineRegistrationTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x1D8AF0
+  symbol: aMachineCreateMachineRegistrationTex
+
+aMachineCreateEnterTex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 56
+  height: 8
+  offset: 0x1D90F0
+  symbol: aMachineCreateEnterTex
+
+aMachineCreateReturnTex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 48
+  height: 8
+  offset: 0x1D92B0
+  symbol: aMachineCreateReturnTex
+
+aMachineCreateKgTex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 16
+  height: 16
+  offset: 0x1D9430
+  symbol: aMachineCreateKgTex
+
+aMachineCreateWeight0Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 16
+  offset: 0x1D9530
+  symbol: aMachineCreateWeight0Tex
+
+aMachineCreateWeight1Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 16
+  offset: 0x1D95B0
+  symbol: aMachineCreateWeight1Tex
+
+aMachineCreateWeight2Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 16
+  offset: 0x1D9630
+  symbol: aMachineCreateWeight2Tex
+
+aMachineCreateWeight3Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 16
+  offset: 0x1D96B0
+  symbol: aMachineCreateWeight3Tex
+
+aMachineCreateWeight4Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 16
+  offset: 0x1D9730
+  symbol: aMachineCreateWeight4Tex
+
+aMachineCreateWeight5Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 16
+  offset: 0x1D97B0
+  symbol: aMachineCreateWeight5Tex
+
+aMachineCreateWeight6Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 16
+  offset: 0x1D9830
+  symbol: aMachineCreateWeight6Tex
+
+aMachineCreateWeight7Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 16
+  offset: 0x1D98B0
+  symbol: aMachineCreateWeight7Tex
+
+aMachineCreateWeight8Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 16
+  offset: 0x1D9930
+  symbol: aMachineCreateWeight8Tex
+
+aMachineCreateWeight9Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 16
+  offset: 0x1D99B0
+  symbol: aMachineCreateWeight9Tex
+
+aMachineCreateFrontTex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 40
+  height: 8
+  offset: 0x1D9A30
+  symbol: aMachineCreateFrontTex
+
+aMachineCreateRearTex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 40
+  height: 8
+  offset: 0x1D9B70
+  symbol: aMachineCreateRearTex
+
+aMachineCreateWingTex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 40
+  height: 8
+  offset: 0x1D9CB0
+  symbol: aMachineCreateWingTex
+
+aMachineCreateWing1Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 5
+  offset: 0x1D9DF0
+  symbol: aMachineCreateWing1Tex
+
+aMachineCreateWing2Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I8
+  width: 8
+  height: 5
+  offset: 0x1D9E18
+  symbol: aMachineCreateWing2Tex
+
+aMachineCreateOkTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  offset: 0x1D9E40
+  symbol: aMachineCreateOkTex
+
+aMachineCreateHighlightedOkTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 16
+  offset: 0x1DA240
+  symbol: aMachineCreateHighlightedOkTex
+
+D_xk3_8013A980:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 72
+  height: 16
+  offset: 0x1DA640
+  symbol: D_xk3_8013A980
+
+D_xk3_8013B280:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 120
+  height: 16
+  offset: 0x1DAF40
+  symbol: D_xk3_8013B280
+
+aMachineCreateEditMarkerTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 28
+  height: 8
+  offset: 0x1DBE40
+  symbol: aMachineCreateEditMarkerTex
+
+aMachineCreateSuperMarkerTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 36
+  height: 8
+  offset: 0x1DC000
+  symbol: aMachineCreateSuperMarkerTex
+
+D_8013C580:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x1DC240
+  symbol: D_8013C580
+
+D_8013C780:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x1DC440
+  symbol: D_8013C780
+
+D_8013C980:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1DC640
+  symbol: D_8013C980
+
+D_8013D180:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1DCE40
+  symbol: D_8013D180
+
+D_8013D980:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1DD640
+  symbol: D_8013D980
+
+D_8013E180:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1DDE40
+  symbol: D_8013E180
+
+D_8013E980:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x1DE640
+  symbol: D_8013E980
+
+D_8013EB80:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1DE840
+  symbol: D_8013EB80
+
+D_8013F380:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 32
+  height: 32
+  offset: 0x1DF040
+  symbol: D_8013F380
+

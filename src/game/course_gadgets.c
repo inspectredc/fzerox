@@ -1,20 +1,59 @@
 #include "global.h"
+#include "fzx_game.h"
 #include "fzx_racer.h"
 #include "fzx_thread.h"
 #include "fzx_course.h"
 #include "segment_symbols.h"
 #include "leo/mfs.h"
-#include "assets/course_track_gfx.h"
-#include "assets/setup_gfx.h"
+#include ASSET_HEADER(course_track_gfx.h)
+#include ASSET_HEADER(setup_gfx.h)
+#ifdef EXPANSION_KIT
+#include "fzx_expansion_kit.h"
+#include ASSET_HEADER_EK(course_edit_textures.h)
+#endif
+
+#ifndef EXPANSION_KIT
+#define IN_COURSE_EDITOR (gInCourseEditor)
+#else
+#define IN_COURSE_EDITOR (gInCourseEditor && !gInCourseEditTestRun)
+#endif
 
 OSMesg D_800E12B0;
-UNUSED s8 D_800E12B8[0x10];
+UNUSED s8 D_800E12B8[0x8];
+CourseEffectsInfo* D_800E12C0;
+UNUSED s8 D_800E12C4[0x4];
+#ifndef EXPANSION_KIT
 s32 D_800E12C8[0x800];
+#else
+s16 D_800E12C8[0x800];
+#endif
 s32 sCourseDecorationTextureLoadState;
+#ifdef EXPANSION_KIT
+s32 D_8079F93C;
+#endif
 s32 D_800E32CC;
 Vtx* sTerrainEffectVtxStart;
 
+#ifdef EXPANSION_KIT
+bool gInCourseEditTestRun = false;
+#endif
 bool gInCourseEditor = false;
+
+#ifdef EXPANSION_KIT
+s32 D_8076C958 = 90;
+s32 D_8076C95C = 0;
+s32 D_8076C960 = 0;
+s32 D_8076C964 = 1;
+s32 D_8076C968 = 0;
+s32 D_8076C96C = 0;
+
+u16* gCourseEditIconTextures[] = {
+    aCourseEditTestDriveIconTex,
+    aCourseEditLineModeIconTex,
+    aCourseEditGridAlignIconTex,
+    aCourseEditQuestionIconTex,
+};
+#endif
 
 Gfx* (*sCourseDecorationDrawFuncs[])(Gfx*) = {
     Course_FeatureDrawGateSquare,       // COURSE_FEATURE_GATE_SQUARE
@@ -50,6 +89,7 @@ bool Course_FeatureIsDecorational(s32 courseFeature) {
 
 extern Landmine gLandmines[48];
 
+#ifndef EXPANSION_KIT
 void func_8006D414(void) {
     s32 i;
 
@@ -57,11 +97,19 @@ void func_8006D414(void) {
         gLandmines[i].unk_00 = 1;
     }
 }
+#endif
 
 extern unk_80225800 D_80225800;
 extern Jump gJumps[];
 extern CourseInfo* gCurrentCourseInfo;
 extern CourseFeaturesInfo gCourseFeaturesInfo;
+extern unk_80128C94* D_80128C94;
+
+#ifndef EXPANSION_KIT
+#define LANDMINE_ANGLE (1.1547f)
+#else
+#define LANDMINE_ANGLE (temp_fs0)
+#endif
 
 void Course_LandminesViewInteractDataInit(void) {
     CourseFeature* feature;
@@ -75,9 +123,15 @@ void Course_LandminesViewInteractDataInit(void) {
     f32 lengthProportionAlongSegment;
     Vec3f pos;
     Mtx3F segmentBasis;
+#ifdef EXPANSION_KIT
+    f32 temp_fs0;
+#endif
 
-    if (gInCourseEditor) {
+    if (IN_COURSE_EDITOR) {
         //! @bug vtx uninitialised
+#ifdef EXPANSION_KIT
+        vtx = D_80128C94->landmineVtx;
+#endif
     } else {
         vtx = D_80225800.landmineVtx;
     }
@@ -86,6 +140,9 @@ void Course_LandminesViewInteractDataInit(void) {
 
     for (i = 0; i < courseFeaturesInfo->featureCount; i++) {
         feature = &courseFeaturesInfo->features[i];
+#ifdef EXPANSION_KIT
+        temp_fs0 = 1.1547f; // 1 / sin(π / 3)
+#endif
         if (feature->featureType != COURSE_FEATURE_LANDMINE) {
             continue;
         }
@@ -105,34 +162,36 @@ void Course_LandminesViewInteractDataInit(void) {
         vtx->v.tc[0] = 0x400;
         vtx->v.tc[1] = 0;
         vtx++;
-        vtx->v.ob[0] = pos.x - (16.0f * 1.1547f) * segmentBasis.x.x;
-        vtx->v.ob[1] = pos.y - (16.0f * 1.1547f) * segmentBasis.x.y;
-        vtx->v.ob[2] = pos.z - (16.0f * 1.1547f) * segmentBasis.x.z;
+        vtx->v.ob[0] = pos.x - (16.0f * LANDMINE_ANGLE) * segmentBasis.x.x;
+        vtx->v.ob[1] = pos.y - (16.0f * LANDMINE_ANGLE) * segmentBasis.x.y;
+        vtx->v.ob[2] = pos.z - (16.0f * LANDMINE_ANGLE) * segmentBasis.x.z;
         vtx->v.tc[0] = 0;
         vtx->v.tc[1] = 0x800;
         vtx++;
-        vtx->v.ob[0] = pos.x - (16.0f * 1.1547f) * segmentBasis.z.x;
-        vtx->v.ob[1] = pos.y - (16.0f * 1.1547f) * segmentBasis.z.y;
-        vtx->v.ob[2] = pos.z - (16.0f * 1.1547f) * segmentBasis.z.z;
+        vtx->v.ob[0] = pos.x - (16.0f * LANDMINE_ANGLE) * segmentBasis.z.x;
+        vtx->v.ob[1] = pos.y - (16.0f * LANDMINE_ANGLE) * segmentBasis.z.y;
+        vtx->v.ob[2] = pos.z - (16.0f * LANDMINE_ANGLE) * segmentBasis.z.z;
         vtx->v.tc[0] = 0x800;
         vtx->v.tc[1] = 0x800;
         vtx++;
-        vtx->v.ob[0] = pos.x + (16.0f * 1.1547f) * segmentBasis.x.x;
-        vtx->v.ob[1] = pos.y + (16.0f * 1.1547f) * segmentBasis.x.y;
-        vtx->v.ob[2] = pos.z + (16.0f * 1.1547f) * segmentBasis.x.z;
+        vtx->v.ob[0] = pos.x + (16.0f * LANDMINE_ANGLE) * segmentBasis.x.x;
+        vtx->v.ob[1] = pos.y + (16.0f * LANDMINE_ANGLE) * segmentBasis.x.y;
+        vtx->v.ob[2] = pos.z + (16.0f * LANDMINE_ANGLE) * segmentBasis.x.z;
         vtx->v.tc[0] = 0;
         vtx->v.tc[1] = 0x800;
         vtx++;
-        vtx->v.ob[0] = pos.x + (16.0f * 1.1547f) * segmentBasis.z.x;
-        vtx->v.ob[1] = pos.y + (16.0f * 1.1547f) * segmentBasis.z.y;
-        vtx->v.ob[2] = pos.z + (16.0f * 1.1547f) * segmentBasis.z.z;
+        vtx->v.ob[0] = pos.x + (16.0f * LANDMINE_ANGLE) * segmentBasis.z.x;
+        vtx->v.ob[1] = pos.y + (16.0f * LANDMINE_ANGLE) * segmentBasis.z.y;
+        vtx->v.ob[2] = pos.z + (16.0f * LANDMINE_ANGLE) * segmentBasis.z.z;
         vtx->v.tc[0] = 0x800;
         vtx->v.tc[1] = 0x800;
         vtx++;
         gLandmines[courseFeaturesInfo->landmineCount].pos.x = pos.x;
         gLandmines[courseFeaturesInfo->landmineCount].pos.y = pos.y;
         gLandmines[courseFeaturesInfo->landmineCount].pos.z = pos.z;
+#ifndef EXPANSION_KIT
         gLandmines[courseFeaturesInfo->landmineCount].unk_00 = 1;
+#endif
         courseFeaturesInfo->landmineCount++;
     }
 
@@ -176,48 +235,85 @@ void Course_LandminesViewInteractDataInit(void) {
 extern CourseDecoration gCourseDecorations[];
 extern SegmentChunk gSegmentChunks[];
 extern CourseEffectsInfo gCourseEffectsInfo;
+#ifndef EXPANSION_KIT
 extern EffectDrawData gEffectsDrawData[];
+#else
+extern EffectDrawData gEffectsDrawData[][192];
+#endif
+extern CourseFeature gCourseFeatures[];
+extern unk_80225800 D_2000000;
+extern unk_800D6CA0 D_800D6CA0;
+extern s32 D_xk2_800F7034;
+extern s32 gCreateOption;
+extern CourseEffect gCourseEffects[];
+extern s32 D_800DCCFC;
 #define VERTEX_MODIFIED_ST(s, t) ((((s) << 15) & 0xFFFF0000) | ((t) &0xFFFF))
 #define VERTEX_MODIFIED_ST2(s, t) ((((s) << 16) & 0xFFFF0000) | ((t) &0xFFFF))
 
+#if !defined(EXPANSION_KIT) || defined(NON_MATCHING)
 // Draw Course Effects and Features
 Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
-    s32 pad[12];
-    CourseFeaturesInfo* featuresInfo;
+    s32 i;
     s32 j;
     s32 k;
+    s32 var_v1;
     Mtx* decorationMtx;
-    Vtx* dashVtx;
-    EffectDrawData* effectDrawData;
-    EffectDrawData* effectDrawDataEnd;
+    s32 temp_s3;
+#ifdef EXPANSION_KIT
+    s32 sp1D4;
+#endif
     s32 totalVtxGroups;
     s32 numVtxs;
-    s32 sp1D4;
     s32 remainderVtxGroupNum;
     Vtx* vtx;
-    s16* var_t0;
+    Vtx* tempVtx;
+    Vtx* dashVtx; // sp1BC
     CourseFeature* feature;
     CourseFeature* featuresEnd;
     CourseDecoration* decoration;
-    s32 var_v1;
-    s32 temp_v1;
-    s32 temp_s3;
-    unk_80225800* var_s7;
-    CourseEffectsInfo* effectsInfo;
-    Vtx* tempVtx;
+    CourseFeaturesInfo* featuresInfo;
+    CourseEffectsInfo* effectsInfo; // sp1A8
+    EffectDrawData* effectDrawData;
+    EffectDrawData* effectDrawDataEnd; // sp1A0
+    s32 temp_t0;
 
     gSPDisplayList(gfx++, aSetupLandmineTextureDL);
 
 #ifdef EXPANSION_KIT
-
+    gDPSetTextureFilter(gfx++, G_TF_BILERP);
+    gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 #endif
 
     featuresInfo = &gCourseFeaturesInfo;
 
     if ((featuresInfo->landmineCount != 0)) {
-        if (gInCourseEditor) {
+        if (IN_COURSE_EDITOR) {
 #ifdef EXPANSION_KIT
-
+            sp1D4 = -1;
+            for (i = featuresInfo->landmineCount - 1; i >= 0; i--) {
+                var_v1 = 0;
+                for (j = 0; j < featuresInfo->featureCount; j++) {
+                    if (gCourseFeatures[j].featureType == COURSE_FEATURE_LANDMINE) {
+                        if (i == var_v1) {
+                            break;
+                        }
+                        ++var_v1;
+                    }
+                }
+                if (D_800D6CA0.unk_0C == gCourseFeatures[j].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                    if (sp1D4 != 1) {
+                        sp1D4 = 1;
+                        gSPDisplayList(gfx++, D_9014C20);
+                        gDPSetPrimColor(gfx++, 0, 0, D_xk2_800F7034, D_xk2_800F7034, D_xk2_800F7034, 255);
+                    }
+                } else if (sp1D4 != 0) {
+                    sp1D4 = 0;
+                    gSPDisplayList(gfx++, D_9014C40);
+                }
+                gSPVertex(gfx++, &D_80128C94->landmineVtx[i * 5], 5, 0);
+                gSP2Triangles(gfx++, 0, 1, 2, 0, 0, 2, 3, 0);
+                gSP2Triangles(gfx++, 0, 3, 4, 0, 0, 4, 1, 0);
+            }
 #endif
         } else {
             vtx = &D_80225800.landmineVtx[(featuresInfo->landmineCount - 1) * 5];
@@ -233,9 +329,34 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
         gDPLoadTextureBlock(gfx++, aJumpFeatureTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-        if (gInCourseEditor) {
+        if (IN_COURSE_EDITOR) {
 #ifdef EXPANSION_KIT
-
+            sp1D4 = -1;
+            for (i = featuresInfo->jumpCount - 1; i >= 0; i--) {
+                var_v1 = 0;
+                for (j = 0; j < featuresInfo->featureCount; j++) {
+                    if (gCourseFeatures[j].featureType == COURSE_FEATURE_JUMP) {
+                        if (i == var_v1) {
+                            break;
+                        }
+                        ++var_v1;
+                    }
+                }
+                if (D_800D6CA0.unk_0C == gCourseFeatures[j].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                    if (sp1D4 != 1) {
+                        sp1D4 = 1;
+                        gSPDisplayList(gfx++, D_9014C20);
+                        gDPSetPrimColor(gfx++, 0, 0, D_xk2_800F7034, D_xk2_800F7034, D_xk2_800F7034, 255);
+                    }
+                } else if (sp1D4 != 0) {
+                    sp1D4 = 0;
+                    gSPDisplayList(gfx++, D_9014C40);
+                }
+                gSPVertex(gfx++, &D_80128C94->jumpVtx[i * 6], 6, 0);
+                gSP2Triangles(gfx++, 0, 1, 2, 0, 3, 5, 4, 0);
+                gSP2Triangles(gfx++, 0, 3, 1, 0, 1, 3, 4, 0);
+                gSP2Triangles(gfx++, 0, 5, 3, 0, 0, 2, 5, 0);
+            }
 #endif
         } else {
             vtx = &D_80225800.jumpVtx[(featuresInfo->jumpCount - 1) * 6];
@@ -255,15 +376,104 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
 
         gSPDisplayList(gfx++, aSetupCourseEffectTextureDL);
 
-        if (gInCourseEditor) {
+        if (IN_COURSE_EDITOR) {
 #ifdef EXPANSION_KIT
+            gDPSetRenderMode(gfx++,
+                             Z_CMP | CVG_DST_FULL | ZMODE_OPA | ALPHA_CVG_SEL |
+                                 GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM),
+                             Z_CMP | CVG_DST_FULL | ZMODE_OPA | ALPHA_CVG_SEL |
+                                 GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
+            gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+            dashVtx = D_80128C94->dashVtx;
+            sp1D4 = -1;
+            for (i = 0; i < effectsInfo->count; i++) {
+                effectDrawData = &gEffectsDrawData[D_800DCCFC][i];
 
+                if (D_800D6CA0.unk_0C == gCourseEffects[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                    if (sp1D4 != 1) {
+                        sp1D4 = 1;
+                        gSPDisplayList(gfx++, D_9014C20);
+                        gDPSetPrimColor(gfx++, 0, 0, D_xk2_800F7034, D_xk2_800F7034, D_xk2_800F7034, 255);
+                    }
+                } else if (sp1D4 != 0) {
+                    sp1D4 = 0;
+                    gSPDisplayList(gfx++, D_9014C40);
+                    gDPSetRenderMode(gfx++,
+                                     Z_CMP | CVG_DST_FULL | ZMODE_OPA | ALPHA_CVG_SEL |
+                                         GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM),
+                                     Z_CMP | CVG_DST_FULL | ZMODE_OPA | ALPHA_CVG_SEL |
+                                         GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
+                }
+                gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, effectDrawData->effectType, G_ON);
+                if (effectDrawData->effectType == COURSE_EFFECT_DASH) {
+                    gSPVertex(gfx++, dashVtx, 6, 0);
+                    gSP2Triangles(gfx++, 0, 4, 1, 0, 0, 3, 4, 0);
+                    gSP2Triangles(gfx++, 0, 2, 3, 0, 2, 5, 3, 0);
+                    dashVtx += 6;
+                    continue;
+                }
+                numVtxs = effectDrawData->vtxEnd - effectDrawData->vtxStart;
+                totalVtxGroups = (numVtxs >> 5) + 1;
+                remainderVtxGroupNum = numVtxs & 0x1F;
+
+                if (remainderVtxGroupNum == 0) {
+                    remainderVtxGroupNum = 32;
+                    totalVtxGroups--;
+                }
+                // FAKE!!
+                // if (((!featuresInfo->landmineCount) && (!featuresInfo->landmineCount)) &&
+                //     (!featuresInfo->landmineCount)) {}
+
+                vtx = effectDrawData->vtxStart;
+                temp_s3 = totalVtxGroups - 1;
+                for (j = 0; j < temp_s3; j++) {
+                    gSPVertex(gfx++, vtx, 32, 0);
+
+                    for (k = 0; k < 15; k++) {
+                        temp_t0 = k << 1;
+                        tempVtx = &vtx[(k << 1)];
+                        if ((tempVtx[2].v.tc[1] < tempVtx[0].v.tc[1]) || (tempVtx[3].v.tc[1] < tempVtx[1].v.tc[1])) {
+                            gSPModifyVertex(gfx++, (k << 1), G_MWO_POINT_ST,
+                                            VERTEX_MODIFIED_ST(tempVtx[0].v.tc[0], 0x8000));
+                            gSPModifyVertex(gfx++, (k << 1) + 1, G_MWO_POINT_ST,
+                                            VERTEX_MODIFIED_ST(tempVtx[1].v.tc[0], 0x8000));
+                        }
+                        gSP2Triangles(gfx++, temp_t0, temp_t0 + 2, temp_t0 + 1, 0, temp_t0 + 1, temp_t0 + 2,
+                                      temp_t0 + 3, 0);
+                    }
+                    vtx += 32;
+                }
+
+                gSPVertex(gfx++, effectDrawData->vtxStart + (j << 5), remainderVtxGroupNum, 0);
+
+                temp_s3 = (remainderVtxGroupNum >> 1) - 1;
+                for (k = 0; k < temp_s3; k++) {
+                    temp_t0 = k << 1;
+                    tempVtx = &vtx[(k << 1)];
+                    if ((tempVtx[2].v.tc[1] < tempVtx[0].v.tc[1]) || (tempVtx[3].v.tc[1] < tempVtx[1].v.tc[1])) {
+                        tempVtx = &vtx[k * 2];
+                        gSPModifyVertex(gfx++, (k << 1), G_MWO_POINT_ST,
+                                        VERTEX_MODIFIED_ST2((tempVtx[0].v.tc[0]), 0x8000));
+                        tempVtx = &vtx[k * 2];
+                        gSPModifyVertex(gfx++, (k << 1) + 1, G_MWO_POINT_ST,
+                                        VERTEX_MODIFIED_ST2((tempVtx[1].v.tc[0]), 0x8000));
+                    }
+                    gSP2Triangles(gfx++, temp_t0, temp_t0 + 2, temp_t0 + 1, 0, temp_t0 + 1, temp_t0 + 2, temp_t0 + 3,
+                                  0);
+                }
+            }
 #endif
         } else {
-            effectDrawDataEnd = gEffectsDrawData + effectsInfo->count;
             dashVtx = D_80225800.dashVtx;
+#ifndef EXPANSION_KIT
+            effectDrawDataEnd = gEffectsDrawData + effectsInfo->count;
             for (effectDrawData = gEffectsDrawData; effectDrawData < effectDrawDataEnd; effectDrawData++) {
                 gSPTexture(gfx++, 0x8000, 0x8000, 0, effectDrawData->effectType, G_ON);
+#else
+            effectDrawDataEnd = gEffectsDrawData[0] + effectsInfo->count;
+            for (effectDrawData = gEffectsDrawData[0]; effectDrawData < effectDrawDataEnd; effectDrawData++) {
+                gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, effectDrawData->effectType, G_ON);
+#endif
                 if (effectDrawData->effectType == COURSE_EFFECT_DASH) {
                     gSPVertex(gfx++, dashVtx, 6, 0);
                     gSP2Triangles(gfx++, 0, 4, 1, 0, 0, 3, 4, 0);
@@ -283,12 +493,13 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
                 temp_s3 = totalVtxGroups - 1;
                 for (j = 0; j < temp_s3; j++) {
 
-                    temp_v1 = (effectDrawData->vtxStart - D_80225800.terrainEffectVtx + (j << 5)) >> 1;
+                    var_v1 = (effectDrawData->vtxStart - D_80225800.terrainEffectVtx + (j << 5)) >> 1;
                     gSPVertex(gfx++, vtx, 32, 0);
 
                     for (k = 0; k < 15; k++) {
+                        temp_t0 = k << 1;
                         tempVtx = &vtx[(k << 1)];
-                        if (gSegmentChunks[D_800E12C8[k + temp_v1]].drawState == 0) {
+                        if (gSegmentChunks[D_800E12C8[k + var_v1]].drawState == 0) {
                             continue;
                         }
                         if ((tempVtx[2].v.tc[1] < tempVtx[0].v.tc[1]) || (tempVtx[3].v.tc[1] < tempVtx[1].v.tc[1])) {
@@ -297,19 +508,20 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
                             gSPModifyVertex(gfx++, (k << 1) + 1, G_MWO_POINT_ST,
                                             VERTEX_MODIFIED_ST(tempVtx[1].v.tc[0], 0x8000));
                         }
-                        gSP2Triangles(gfx++, (k << 1), (k << 1) + 2, (k << 1) + 1, 0, (k << 1) + 1, (k << 1) + 2,
-                                      (k << 1) + 3, 0);
+                        gSP2Triangles(gfx++, temp_t0, temp_t0 + 2, temp_t0 + 1, 0, temp_t0 + 1, temp_t0 + 2,
+                                      temp_t0 + 3, 0);
                     }
                     vtx += 32;
                 }
 
-                temp_v1 = (effectDrawData->vtxStart - D_80225800.terrainEffectVtx + (j << 5)) >> 1;
+                var_v1 = (effectDrawData->vtxStart - D_80225800.terrainEffectVtx + (j << 5)) >> 1;
                 gSPVertex(gfx++, effectDrawData->vtxStart + (j << 5), remainderVtxGroupNum, 0);
 
                 temp_s3 = (remainderVtxGroupNum >> 1) - 1;
                 for (k = 0; k < temp_s3; k++) {
+                    temp_t0 = k << 1;
                     tempVtx = &vtx[(k << 1)];
-                    if (gSegmentChunks[D_800E12C8[k + temp_v1]].drawState == 0) {
+                    if (gSegmentChunks[D_800E12C8[k + var_v1]].drawState == 0) {
                         continue;
                     }
                     if ((tempVtx[2].v.tc[1] < tempVtx[0].v.tc[1]) || (tempVtx[3].v.tc[1] < tempVtx[1].v.tc[1])) {
@@ -320,8 +532,8 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
                         gSPModifyVertex(gfx++, (k << 1) + 1, G_MWO_POINT_ST,
                                         VERTEX_MODIFIED_ST2((tempVtx[1].v.tc[0]), 0x8000));
                     }
-                    gSP2Triangles(gfx++, (k << 1), (k << 1) + 2, (k << 1) + 1, 0, (k << 1) + 1, (k << 1) + 2,
-                                  (k << 1) + 3, 0);
+                    gSP2Triangles(gfx++, temp_t0, temp_t0 + 2, temp_t0 + 1, 0, temp_t0 + 1, temp_t0 + 2, temp_t0 + 3,
+                                  0);
                 }
             }
         }
@@ -343,9 +555,62 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
 
     decoration = gCourseDecorations;
     sCourseDecorationTextureLoadState = -1;
-    if (gInCourseEditor) {
+    if (IN_COURSE_EDITOR) {
 #ifdef EXPANSION_KIT
-
+        decorationMtx = D_80128C94->decorationMtx;
+        sp1D4 = -1;
+        for (i = 0; i < featuresInfo->featureCount; i++) {
+            feature = &featuresInfo->features[i];
+            if (!Course_FeatureIsDecorational(feature->featureType)) {
+                continue;
+            }
+            if (D_800D6CA0.unk_0C == gCourseFeatures[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                if (sp1D4 != 1) {
+                    sp1D4 = 1;
+                    gSPDisplayList(gfx++, D_9014C20);
+                    gDPSetPrimColor(gfx++, 0, 0, D_xk2_800F7034, D_xk2_800F7034, D_xk2_800F7034, 255);
+                }
+            } else if (sp1D4 != 0) {
+                sp1D4 = 0;
+                gSPDisplayList(gfx++, D_9014C40);
+            }
+            if (feature->featureType <= COURSE_FEATURE_SIGN_OVERHEAD) {
+                gSPMatrix(gfx++, K0_TO_PHYS(decorationMtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+                gfx = sCourseDecorationDrawFuncs[feature->featureType](gfx);
+            }
+            decorationMtx++;
+        }
+        if (COURSE_CONTEXT()->courseData.skybox == SKYBOX_NIGHT) {
+            gDPPipeSync(gfx++);
+            gDPSetCombineMode(gfx++, G_CC_BLENDRGBA, G_CC_BLENDRGBA);
+            gDPSetRenderMode(gfx++,
+                             Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | ALPHA_CVG_SEL | FORCE_BL | G_RM_FOG_SHADE_A,
+                             Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | ALPHA_CVG_SEL | FORCE_BL |
+                                 GBL_c2(G_BL_CLR_FOG, G_BL_A_SHADE, G_BL_CLR_IN, G_BL_1MA));
+        }
+        decorationMtx = D_80128C94->decorationMtx;
+        sp1D4 = -1;
+        for (i = 0; i < featuresInfo->featureCount; i++) {
+            feature = &featuresInfo->features[i];
+            if (!Course_FeatureIsDecorational(feature->featureType)) {
+                continue;
+            }
+            if (D_800D6CA0.unk_0C == gCourseFeatures[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                if (sp1D4 != 1) {
+                    sp1D4 = 1;
+                    gSPDisplayList(gfx++, D_9014C20);
+                    gDPSetPrimColor(gfx++, 0, 0, D_xk2_800F7034, D_xk2_800F7034, D_xk2_800F7034, 255);
+                }
+            } else if (sp1D4 != 0) {
+                sp1D4 = 0;
+                gSPDisplayList(gfx++, D_9014C40);
+            }
+            if (COURSE_FEATURE_IS_BUILDING(feature->featureType)) {
+                gSPMatrix(gfx++, K0_TO_PHYS(decorationMtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+                gfx = sCourseDecorationDrawFuncs[feature->featureType](gfx);
+            }
+            decorationMtx++;
+        }
 #endif
     } else {
         featuresEnd = featuresInfo->features + featuresInfo->featureCount;
@@ -387,6 +652,9 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
     }
     return gfx;
 }
+#else
+#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/game/course_gadgets/Course_GadgetsDraw.s")
+#endif
 
 void Course_JumpsViewInteractDataInit(void) {
     CourseFeaturesInfo* featuresInfo = &gCourseFeaturesInfo;
@@ -402,8 +670,11 @@ void Course_JumpsViewInteractDataInit(void) {
     CourseFeature* feature;
     Mtx3F segmentBasis;
 
-    if (gInCourseEditor) {
+    if (IN_COURSE_EDITOR) {
         //! @bug vtx uninitialised
+#ifdef EXPANSION_KIT
+        vtx = D_80128C94->jumpVtx;
+#endif
     } else {
         vtx = D_80225800.jumpVtx;
     }
@@ -539,8 +810,11 @@ void Course_DecorationsViewInteractDataInit(void) {
     Mtx3F segmentBasis;
 
     featuresInfo = &gCourseFeaturesInfo;
-    if (gInCourseEditor) {
+    if (IN_COURSE_EDITOR) {
         //! @bug mtx uninitialised
+#ifdef EXPANSION_KIT
+        mtx = D_80128C94->decorationMtx;
+#endif
     } else {
         mtx = D_80225800.decorationMtx;
     }
@@ -899,24 +1173,24 @@ void Course_SegmentGetCenterPosition(CourseSegment* segment, f32 t, Vec3f* pos) 
     pos->z += sp58 * segmentBasis.z.z;
 }
 
-void func_8006FD7C(s32 arg0, s32 arg1, f32 arg2) {
+void func_8006FD7C(s32 arg0, s32 segmentIndex, f32 t) {
     s32 i = 0;
     s32 temp_v0;
     s32 pad;
     s32 sp0;
 
     //! @bug sp0 may not be initialised
-    if (!gInCourseEditor) {
+    if (!IN_COURSE_EDITOR) {
         sp0 = gSegmentChunkCount;
     }
 
     while (true) {
         temp_v0 = (i + sp0 - 1) % sp0;
 
-        if ((gSegmentChunks[temp_v0].segmentIndex < arg1 ||
-             (arg1 == gSegmentChunks[temp_v0].segmentIndex && gSegmentChunks[temp_v0].segmentTValue <= arg2)) &&
-            (arg1 < gSegmentChunks[i].segmentIndex ||
-             (arg1 == gSegmentChunks[i].segmentIndex && arg2 < gSegmentChunks[i].segmentTValue))) {
+        if ((gSegmentChunks[temp_v0].segmentIndex < segmentIndex ||
+             (segmentIndex == gSegmentChunks[temp_v0].segmentIndex && gSegmentChunks[temp_v0].segmentTValue <= t)) &&
+            (segmentIndex < gSegmentChunks[i].segmentIndex ||
+             (segmentIndex == gSegmentChunks[i].segmentIndex && t < gSegmentChunks[i].segmentTValue))) {
             break;
         }
         i++;
@@ -929,10 +1203,14 @@ f32 func_8006FE90(s32 segmentIndex, f32 t) {
     s32 sp0;
 
     i = 0;
+#ifndef EXPANSION_KIT
     //! @bug sp0 may not be initialised
-    if (!gInCourseEditor) {
+    if (!IN_COURSE_EDITOR) {
         sp0 = gSegmentChunkCount;
     }
+#else
+    sp0 = gSegmentChunkCount;
+#endif
 
     do {
         if (segmentIndex == gSegmentChunks[i].segmentIndex) {
@@ -974,6 +1252,12 @@ f32 sDashScaleForward = 150.0f;
 f32 sDashScaleWidth = 50.0f;
 f32 sDashArrowPointScale = 50.0f;
 
+#ifndef EXPANSION_KIT
+#define EFFECT_TC_SCALE 2
+#else
+#define EFFECT_TC_SCALE 1
+#endif
+
 void Course_FlatDashVerticesInit(s32 effectIndex, CourseEffect* effect, Vtx** vtxs) {
     Vtx* vtx;
     f32 t;
@@ -1002,20 +1286,20 @@ void Course_FlatDashVerticesInit(s32 effectIndex, CourseEffect* effect, Vtx** vt
                               (segmentBasis.x.y * sDashArrowPointScale));
     vtx->v.ob[2] = Math_Round(((DASH_LATERAL_OFFSET(effect) * segmentBasis.z.z) + pos.z) +
                               (segmentBasis.x.z * sDashArrowPointScale));
-    vtx->v.tc[0] = 0x400;
-    vtx->v.tc[1] = 0x200;
+    vtx->v.tc[0] = 0x200 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0x100 * EFFECT_TC_SCALE;
     vtx++;
     vtx->v.ob[0] = Math_Round(((DASH_LATERAL_OFFSET(effect) + sDashScaleWidth) * segmentBasis.z.x) + pos.x);
     vtx->v.ob[1] = Math_Round(((DASH_LATERAL_OFFSET(effect) + sDashScaleWidth) * segmentBasis.z.y) + pos.y);
     vtx->v.ob[2] = Math_Round(((DASH_LATERAL_OFFSET(effect) + sDashScaleWidth) * segmentBasis.z.z) + pos.z);
-    vtx->v.tc[0] = 0;
-    vtx->v.tc[1] = 0;
+    vtx->v.tc[0] = 0 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0 * EFFECT_TC_SCALE;
     vtx++;
     vtx->v.ob[0] = Math_Round(((DASH_LATERAL_OFFSET(effect) - sDashScaleWidth) * segmentBasis.z.x) + pos.x);
     vtx->v.ob[1] = Math_Round(((DASH_LATERAL_OFFSET(effect) - sDashScaleWidth) * segmentBasis.z.y) + pos.y);
     vtx->v.ob[2] = Math_Round(((DASH_LATERAL_OFFSET(effect) - sDashScaleWidth) * segmentBasis.z.z) + pos.z);
-    vtx->v.tc[0] = 0x800;
-    vtx->v.tc[1] = 0;
+    vtx->v.tc[0] = 0x400 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0 * EFFECT_TC_SCALE;
 
     t += sDashScaleForward / forwardMagnitude;
     gEffects[effectIndex].segmentTValueEnd = t;
@@ -1030,8 +1314,8 @@ void Course_FlatDashVerticesInit(s32 effectIndex, CourseEffect* effect, Vtx** vt
     vtx->v.ob[0] = Math_Round((DASH_LATERAL_OFFSET(effect) * segmentBasis.z.x) + pos.x);
     vtx->v.ob[1] = Math_Round((DASH_LATERAL_OFFSET(effect) * segmentBasis.z.y) + pos.y);
     vtx->v.ob[2] = Math_Round((DASH_LATERAL_OFFSET(effect) * segmentBasis.z.z) + pos.z);
-    vtx->v.tc[0] = 0x400;
-    vtx->v.tc[1] = 0x800;
+    vtx->v.tc[0] = 0x200 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0x400 * EFFECT_TC_SCALE;
     vtx++;
     vtx->v.ob[0] = Math_Round((((DASH_LATERAL_OFFSET(effect) + sDashScaleWidth) * segmentBasis.z.x) + pos.x) -
                               (segmentBasis.x.x * sDashArrowPointScale));
@@ -1039,8 +1323,8 @@ void Course_FlatDashVerticesInit(s32 effectIndex, CourseEffect* effect, Vtx** vt
                               (segmentBasis.x.y * sDashArrowPointScale));
     vtx->v.ob[2] = Math_Round((((DASH_LATERAL_OFFSET(effect) + sDashScaleWidth) * segmentBasis.z.z) + pos.z) -
                               (segmentBasis.x.z * sDashArrowPointScale));
-    vtx->v.tc[0] = 0;
-    vtx->v.tc[1] = 0x600;
+    vtx->v.tc[0] = 0 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0x300 * EFFECT_TC_SCALE;
     vtx++;
     vtx->v.ob[0] = Math_Round((((DASH_LATERAL_OFFSET(effect) - sDashScaleWidth) * segmentBasis.z.x) + pos.x) -
                               (segmentBasis.x.x * sDashArrowPointScale));
@@ -1048,9 +1332,11 @@ void Course_FlatDashVerticesInit(s32 effectIndex, CourseEffect* effect, Vtx** vt
                               (segmentBasis.x.y * sDashArrowPointScale));
     vtx->v.ob[2] = Math_Round((((DASH_LATERAL_OFFSET(effect) - sDashScaleWidth) * segmentBasis.z.z) + pos.z) -
                               (segmentBasis.x.z * sDashArrowPointScale));
-    vtx->v.tc[0] = 0x800;
-    vtx->v.tc[1] = 0x600;
+    vtx->v.tc[0] = 0x400 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0x300 * EFFECT_TC_SCALE;
+#ifndef EXPANSION_KIT
     gEffectsDrawData[effectIndex].effectType = effect->effectType;
+#endif
 
     vtx++;
     *vtxs = vtx;
@@ -1117,8 +1403,8 @@ void Course_CurvedDashVerticesInit(s32 effectIndex, CourseEffect* effect, Vtx** 
     vtx->v.ob[0] = Math_Round((segmentBasis.x.x * 50.0f) + pos.x);
     vtx->v.ob[1] = Math_Round((segmentBasis.x.y * 50.0f) + pos.y);
     vtx->v.ob[2] = Math_Round((segmentBasis.x.z * 50.0f) + pos.z);
-    vtx->v.tc[0] = 0x400;
-    vtx->v.tc[1] = 0x200;
+    vtx->v.tc[0] = 0x200 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0x100 * EFFECT_TC_SCALE;
     vtx++;
     vtx->v.ob[0] = Math_Round((segmentBasis.z.x * 50.0f) + pos.x);
     vtx->v.ob[1] = Math_Round((segmentBasis.z.y * 50.0f) + pos.y);
@@ -1136,8 +1422,8 @@ void Course_CurvedDashVerticesInit(s32 effectIndex, CourseEffect* effect, Vtx** 
     vtx->v.ob[0] = Math_Round(pos.x - (segmentBasis.z.x * 50.0f));
     vtx->v.ob[1] = Math_Round(pos.y - (segmentBasis.z.y * 50.0f));
     vtx->v.ob[2] = Math_Round(pos.z - (segmentBasis.z.z * 50.0f));
-    vtx->v.tc[0] = 0x800;
-    vtx->v.tc[1] = 0;
+    vtx->v.tc[0] = 0x400 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0 * EFFECT_TC_SCALE;
     spB0.x = vtx->v.ob[0] - spD4.x;
     spB0.y = vtx->v.ob[1] - spD4.y;
     spB0.z = vtx->v.ob[2] - spD4.z;
@@ -1154,21 +1440,23 @@ void Course_CurvedDashVerticesInit(s32 effectIndex, CourseEffect* effect, Vtx** 
     vtx->v.ob[0] = Math_Round(pos.x);
     vtx->v.ob[1] = Math_Round(pos.y);
     vtx->v.ob[2] = Math_Round(pos.z);
-    vtx->v.tc[0] = 0x400;
-    vtx->v.tc[1] = 0x800;
+    vtx->v.tc[0] = 0x200 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0x400 * EFFECT_TC_SCALE;
     vtx++;
     vtx->v.ob[0] = Math_Round(((segmentBasis.z.x * 50.0f) + pos.x) - (segmentBasis.x.x * 50.0f));
     vtx->v.ob[1] = Math_Round(((segmentBasis.z.y * 50.0f) + pos.y) - (segmentBasis.x.y * 50.0f));
     vtx->v.ob[2] = Math_Round(((segmentBasis.z.z * 50.0f) + pos.z) - (segmentBasis.x.z * 50.0f));
-    vtx->v.tc[0] = 0;
-    vtx->v.tc[1] = 0x600;
+    vtx->v.tc[0] = 0 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0x300 * EFFECT_TC_SCALE;
     vtx++;
     vtx->v.ob[0] = Math_Round((pos.x - (segmentBasis.z.x * 50.0f)) - (segmentBasis.x.x * 50.0f));
     vtx->v.ob[1] = Math_Round((pos.y - (segmentBasis.z.y * 50.0f)) - (segmentBasis.x.y * 50.0f));
     vtx->v.ob[2] = Math_Round((pos.z - (segmentBasis.z.z * 50.0f)) - (segmentBasis.x.z * 50.0f));
-    vtx->v.tc[0] = 0x800;
-    vtx->v.tc[1] = 0x600;
+    vtx->v.tc[0] = 0x400 * EFFECT_TC_SCALE;
+    vtx->v.tc[1] = 0x300 * EFFECT_TC_SCALE;
+#ifndef EXPANSION_KIT
     gEffectsDrawData[effectIndex].effectType = effect->effectType;
+#endif
     vtx++;
     *vtxs = vtx;
 }
@@ -1176,7 +1464,13 @@ void Course_CurvedDashVerticesInit(s32 effectIndex, CourseEffect* effect, Vtx** 
 s32 D_800CD1E8 = 0;
 
 // This just needs to be something equating to 1.0f
+#ifndef EXPANSION_KIT
 #define EFFECT_TEXTURE_SCALAR (2.0f - 1.0f)
+#else
+#define EFFECT_TEXTURE_SCALAR (1.0f)
+#endif
+
+extern u8 D_xk2_80104CA0[];
 
 Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffect* effect, Vtx* vtx,
                                       f32 rightTextureTCoordinate, f32 leftTextureTCoordinate) {
@@ -1200,7 +1494,13 @@ Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffec
     textureUnit = 0;
 
     while (true) {
-        func_8006FD7C((s32) (vtx - sTerrainEffectVtxStart) / 2, segment->segmentIndex, t);
+#ifdef EXPANSION_KIT
+        if (!IN_COURSE_EDITOR) {
+#endif
+            func_8006FD7C((s32) (vtx - sTerrainEffectVtxStart) / 2, segment->segmentIndex, t);
+#ifdef EXPANSION_KIT
+        }
+#endif
         Course_SplineGetTangent(segment, t, &forward);
         Course_SegmentGetCenterPosition(segment, t, &pos);
         lengthProportionAlongSegment = Course_SplineGetLengthInfo(segment, t, &lengthFromStart);
@@ -1212,7 +1512,11 @@ Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffec
         radius = segment->radiusLeft + segment->radiusRight;
         radius = (((segment->next->radiusLeft + segment->next->radiusRight) - radius) * lengthProportionAlongSegment) +
                  radius;
+#ifndef EXPANSION_KIT
         radius /= 2;
+#else
+        radius /= 2.0f;
+#endif
 
         if (effect->rightEdgeDistance < -1.0f * radius) {
             rightEdgeDistance = -1.0f * radius;
@@ -1236,11 +1540,13 @@ Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffec
             lastEdgeLeftPos = edgeLeftPos;
             startPositionSet = true;
         }
-        rightTextureTCoordinate += 9.0f * Math_VectorGetDistance(edgeRightPos, lastEdgeRightPos);
-        leftTextureTCoordinate += 9.0f * Math_VectorGetDistance(edgeLeftPos, lastEdgeLeftPos);
+        rightTextureTCoordinate += (4.5f * EFFECT_TC_SCALE) * Math_VectorGetDistance(edgeRightPos, lastEdgeRightPos);
+        leftTextureTCoordinate += (4.5f * EFFECT_TC_SCALE) * Math_VectorGetDistance(edgeLeftPos, lastEdgeLeftPos);
         if ((rightTextureTCoordinate > 0x8000) || (leftTextureTCoordinate > 0x8000)) {
-            rightTextureTCoordinate = (Math_VectorGetDistance(edgeRightPos, lastEdgeRightPos) * 9.0f) + -0x8000;
-            leftTextureTCoordinate = (Math_VectorGetDistance(edgeLeftPos, lastEdgeLeftPos) * 9.0f) + -0x8000;
+            rightTextureTCoordinate =
+                (Math_VectorGetDistance(edgeRightPos, lastEdgeRightPos) * (4.5f * EFFECT_TC_SCALE)) + -0x8000;
+            leftTextureTCoordinate =
+                (Math_VectorGetDistance(edgeLeftPos, lastEdgeLeftPos) * (4.5f * EFFECT_TC_SCALE)) + -0x8000;
         }
         vtx->v.ob[0] = edgeRightPos.x;
         vtx->v.ob[1] = edgeRightPos.y;
@@ -1256,13 +1562,17 @@ Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffec
         vtx->v.ob[1] = edgeLeftPos.y;
         vtx->v.ob[2] = edgeLeftPos.z;
         lastEdgeLeftPos = edgeLeftPos;
-        vtx->v.tc[0] = Math_VectorGetDistance(edgeRightPos, edgeLeftPos) * 6.0f * EFFECT_TEXTURE_SCALAR;
+        vtx->v.tc[0] =
+            Math_VectorGetDistance(edgeRightPos, edgeLeftPos) * (3.0f * EFFECT_TC_SCALE) * EFFECT_TEXTURE_SCALAR;
         vtx->v.tc[1] = leftTextureTCoordinate * EFFECT_TEXTURE_SCALAR;
         vtx++;
         D_800CD1E8++;
         textureUnit++;
 
         if (D_800CD1E8 >= D_800E32CC) {
+#ifdef EXPANSION_KIT
+            D_xk2_80104CA0[7] = 1;
+#endif
             return vtx;
         }
 
@@ -1292,7 +1602,149 @@ Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffec
     return vtx;
 }
 
-void Course_EffectsViewInteractDataInit(s32 arg0) {
+// This just needs to be something equating to 1.0f
+#define EFFECT_TEXTURE_SCALAR2 (2.0f - 1.0f)
+
+#ifdef EXPANSION_KIT
+extern unk_80128690 D_80128690[];
+extern unk_8011C220 D_8011C220[];
+
+Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseEffect* effect, Vtx* vtx,
+                                                 f32 rightTextureTCoordinate, f32 leftTextureTCoordinate) {
+    s32 i;
+    bool startPositionSet = false;
+    f32 lengthProportionAlongSegment;
+    f32 t;
+    s32 pad;
+    f32 rightEdgeDistance;
+    f32 leftEdgeDistance;
+    s32 textureUnit;
+    s32 pad2[2];
+    f32 spFC;
+    f32 radiusLeft;
+    f32 radiusRight;
+    f32 radius;
+    Vec3f pos;
+    Vec3f lastRightEdgePos = { 0.0f, 0.0f, 0.0f };
+    Vec3f rightEdgePos = { 0.0f, 0.0f, 0.0f };
+    Vec3f lastLeftEdgePos = { 0.0f, 0.0f, 0.0f };
+    Vec3f leftEdgePos = { 0.0f, 0.0f, 0.0f };
+    Mtx3F basis;
+
+    textureUnit = 0;
+
+    i = D_80128690[segment->segmentIndex].unk_00;
+
+    if (i >= 0x10000) {
+        return vtx;
+    }
+
+    t = D_8011C220[i].unk_04;
+
+    while (true) {
+        lengthProportionAlongSegment = Course_SplineGetLengthInfo(segment, t, &spFC);
+        pos.x = D_8011C220[i].pos.x;
+        pos.y = D_8011C220[i].pos.y;
+        pos.z = D_8011C220[i].pos.z;
+        basis = D_8011C220[i].basis;
+
+        pos.x += basis.y.x * 10.0f;
+        pos.y += basis.y.y * 10.0f;
+        pos.z += basis.y.z * 10.0f;
+
+        radiusLeft =
+            segment->radiusLeft + ((segment->next->radiusLeft - segment->radiusLeft) * lengthProportionAlongSegment);
+        radiusRight =
+            segment->radiusRight + ((segment->next->radiusRight - segment->radiusRight) * lengthProportionAlongSegment);
+
+        radius = radiusLeft + radiusRight;
+        radius /= 2.0f;
+
+        if (effect->rightEdgeDistance < -1.0f * radius) {
+            rightEdgeDistance = -1.0f * radius;
+        } else {
+            rightEdgeDistance = effect->rightEdgeDistance;
+        }
+
+        if (radius < effect->leftEdgeDistance) {
+            leftEdgeDistance = radius;
+        } else {
+            leftEdgeDistance = effect->leftEdgeDistance;
+        }
+
+        pos.x += basis.z.x * (radiusLeft - radius);
+        pos.y += basis.z.y * (radiusLeft - radius);
+        pos.z += basis.z.z * (radiusLeft - radius);
+
+        rightEdgePos.x = Math_Round((basis.z.x * rightEdgeDistance) + pos.x);
+        rightEdgePos.y = Math_Round((basis.z.y * rightEdgeDistance) + pos.y);
+        rightEdgePos.z = Math_Round((basis.z.z * rightEdgeDistance) + pos.z);
+        leftEdgePos.x = Math_Round((basis.z.x * leftEdgeDistance) + pos.x);
+        leftEdgePos.y = Math_Round((basis.z.y * leftEdgeDistance) + pos.y);
+        leftEdgePos.z = Math_Round((basis.z.z * leftEdgeDistance) + pos.z);
+        if (!startPositionSet) {
+            lastRightEdgePos = rightEdgePos;
+            lastLeftEdgePos = leftEdgePos;
+            startPositionSet = true;
+        }
+        rightTextureTCoordinate += 4.5f * Math_VectorGetDistance(rightEdgePos, lastRightEdgePos);
+        leftTextureTCoordinate += 4.5f * Math_VectorGetDistance(leftEdgePos, lastLeftEdgePos);
+        if ((rightTextureTCoordinate > 0x8000) || (leftTextureTCoordinate > 0x8000)) {
+            rightTextureTCoordinate = (Math_VectorGetDistance(rightEdgePos, lastRightEdgePos) * 4.5f) + -0x8000;
+            leftTextureTCoordinate = (Math_VectorGetDistance(leftEdgePos, lastLeftEdgePos) * 4.5f) + -0x8000;
+        }
+        vtx->v.ob[0] = rightEdgePos.x;
+        vtx->v.ob[1] = rightEdgePos.y;
+        vtx->v.ob[2] = rightEdgePos.z;
+        lastRightEdgePos = rightEdgePos;
+        vtx->v.tc[0] = 0;
+        vtx->v.tc[1] = rightTextureTCoordinate * EFFECT_TEXTURE_SCALAR2;
+        vtx++;
+        D_800CD1E8++;
+        textureUnit++;
+
+        vtx->v.ob[0] = leftEdgePos.x;
+        vtx->v.ob[1] = leftEdgePos.y;
+        vtx->v.ob[2] = leftEdgePos.z;
+        lastLeftEdgePos = leftEdgePos;
+        vtx->v.tc[0] = Math_VectorGetDistance(rightEdgePos, leftEdgePos) * 3.0f * EFFECT_TEXTURE_SCALAR2;
+        vtx->v.tc[1] = leftTextureTCoordinate * EFFECT_TEXTURE_SCALAR2;
+        vtx++;
+        D_800CD1E8++;
+        textureUnit++;
+
+        if (D_800CD1E8 >= D_800E32CC) {
+            D_xk2_80104CA0[7] = 1;
+            return vtx;
+        }
+
+        if (t == effect->segmentTValueEnd) {
+            break;
+        }
+
+        if (textureUnit == 32) {
+            textureUnit = 0;
+            while (true) {
+                rightTextureTCoordinate -= 0x400;
+                leftTextureTCoordinate -= 0x400;
+                if (rightTextureTCoordinate < -0x7C00 || leftTextureTCoordinate < -0x7C00) {
+                    break;
+                }
+            }
+        } else {
+            if (D_8011C220[i + 1].unk_04 < t) {
+                t = 1.0f;
+            } else {
+                t = D_8011C220[i + 1].unk_04;
+            }
+            i++;
+        }
+    }
+    return vtx;
+}
+#endif
+
+void Course_EffectsViewInteractDataInit(bool arg0) {
     s32 i;
     s32 j;
     CourseSegment* segment;
@@ -1309,19 +1761,33 @@ void Course_EffectsViewInteractDataInit(s32 arg0) {
     s32 pad2;
 
     D_800CD1E8 = 0;
-    if (gInCourseEditor) {
+    if (IN_COURSE_EDITOR) {
+#ifndef EXPANSION_KIT
         //! @bug Uninitalised pointers!
         D_800E32CC = 0x400;
+#else
+        D_8079F93C = D_800DCCFC;
+        D_800E32CC = 0x400;
+        sTerrainEffectVtxStart = D_80128C94->terrainEffectVtx;
+        vtx = D_80128C94->terrainEffectVtx;
+        dashVtx = D_80128C94->dashVtx;
+        effectsInfo = &gCourseEffectsInfo;
+#endif
     } else {
+#ifdef EXPANSION_KIT
+        D_8079F93C = 0;
+#endif
         D_800E32CC = 0x800;
         sTerrainEffectVtxStart = D_80225800.terrainEffectVtx;
         vtx = D_80225800.terrainEffectVtx;
         dashVtx = D_80225800.dashVtx;
+#ifndef EXPANSION_KIT
         // FAKE
         if (1) {}
         if (1) {}
         if (1) {}
         if (1) {}
+#endif
         effectsInfo = &gCourseEffectsInfo;
     }
 
@@ -1329,8 +1795,13 @@ void Course_EffectsViewInteractDataInit(s32 arg0) {
         effect = &effectsInfo->effects[i];
         segment = &gCurrentCourseInfo->courseSegments[effect->segmentIndex];
 
+#ifndef EXPANSION_KIT
         gEffectsDrawData[i].effectType = effect->effectType;
         gEffectsDrawData[i].vtxStart = vtx;
+#else
+        gEffectsDrawData[D_8079F93C][i].effectType = effect->effectType;
+        gEffectsDrawData[D_8079F93C][i].vtxStart = vtx;
+#endif
         gEffects[i].effectType = effect->effectType;
         gEffects[i].segmentTValueStart = effect->segmentTValueStart;
         gEffects[i].segmentTValueEnd = effect->segmentTValueEnd;
@@ -1362,15 +1833,22 @@ void Course_EffectsViewInteractDataInit(s32 arg0) {
             rightTextureTCoordinate = -0x8000;
             leftTextureTCoordinate = -0x8000;
 
+            // Check if texture continues from the previous
             for (j = 0; j < i; j++) {
                 if ((effect->segmentIndex == (effectsInfo->effects[j].segmentIndex + 1)) &&
                     (effect->effectType == effectsInfo->effects[j].effectType) &&
                     (effectsInfo->effects[j].segmentTValueEnd == 1.0f) &&
                     (effect->rightEdgeDistance == effectsInfo->effects[j].rightEdgeDistance) &&
                     (effect->leftEdgeDistance == effectsInfo->effects[j].leftEdgeDistance)) {
-                    // float calculation just needs to be 1.0f
-                    rightTextureTCoordinate = (gEffectsDrawData[j].vtxEnd - 2)->v.tc[1] / EFFECT_TEXTURE_SCALAR;
-                    leftTextureTCoordinate = (gEffectsDrawData[j].vtxEnd - 1)->v.tc[1] / EFFECT_TEXTURE_SCALAR;
+#ifndef EXPANSION_KIT
+                    rightTextureTCoordinate = (gEffectsDrawData[j].vtxEnd - 2)->v.tc[1] / EFFECT_TEXTURE_SCALAR2;
+                    leftTextureTCoordinate = (gEffectsDrawData[j].vtxEnd - 1)->v.tc[1] / EFFECT_TEXTURE_SCALAR2;
+#else
+                    rightTextureTCoordinate =
+                        (gEffectsDrawData[D_8079F93C][j].vtxEnd - 2)->v.tc[1] / EFFECT_TEXTURE_SCALAR2;
+                    leftTextureTCoordinate =
+                        (gEffectsDrawData[D_8079F93C][j].vtxEnd - 1)->v.tc[1] / EFFECT_TEXTURE_SCALAR2;
+#endif
                     while (true) {
                         rightTextureTCoordinate -= 0x400;
                         leftTextureTCoordinate -= 0x400;
@@ -1380,15 +1858,30 @@ void Course_EffectsViewInteractDataInit(s32 arg0) {
                     }
                 }
             }
-            vtx = Course_TerrainEffectVerticesInit(segment, t, effect, vtx, rightTextureTCoordinate,
-                                                   leftTextureTCoordinate);
+#ifdef EXPANSION_KIT
+            if (!arg0) {
+#endif
+                vtx = Course_TerrainEffectVerticesInit(segment, t, effect, vtx, rightTextureTCoordinate,
+                                                       leftTextureTCoordinate);
+#ifdef EXPANSION_KIT
+            } else {
+                vtx = Course_TerrainEffectVerticesInitFromStorage(segment, effect, vtx, rightTextureTCoordinate,
+                                                                  leftTextureTCoordinate);
+            }
+#endif
+
             if (D_800CD1E8 >= D_800E32CC) {
                 effectsInfo->count = i - 1;
             }
+#ifndef EXPANSION_KIT
             gEffectsDrawData[i].effectType = effect->effectType;
+#endif
         }
-
+#ifndef EXPANSION_KIT
         gEffectsDrawData[i].vtxEnd = vtx;
+#else
+        gEffectsDrawData[D_8079F93C][i].vtxEnd = vtx;
+#endif
     }
 
     for (i = 0; i < gCurrentCourseInfo->segmentCount; i++) {
@@ -1414,23 +1907,21 @@ void Course_EffectsViewInteractDataInit(s32 arg0) {
         }
     }
 
+#ifndef EXPANSION_KIT
     for (i = 0; i < effectsInfo->count; i++) {}
+#else
+    // FAKE
+    for (i = 0; i < (temp = effectsInfo)->count; i++) {}
+#endif
 }
 
 extern CourseInfo gCourseInfos[56];
-extern CourseEffect gCourseEffects[];
-
-#ifndef EXPANSION_KIT
-#define effectDistanceFromCenter 100.0f
-#endif
 
 void Course_SegmentPitInit(s32 courseIndex, s32 segmentIndex) {
     s32 effectCount = gCourseEffectsInfo.count;
     CourseEffect* effect = &gCourseEffectsInfo.effects[effectCount];
     CourseSegment* segment;
-#ifdef EXPANSION_KIT
     f32 effectDistanceFromCenter = 100.0f;
-#endif
     f32 minimumSegmentWidth;
     f32 segmentWidth;
     f32 nextSegmentWidth;
@@ -1464,47 +1955,67 @@ void Course_SegmentPitInit(s32 courseIndex, s32 segmentIndex) {
     // clang-format off
     switch (COURSE_CONTEXT()->courseData.pit[segmentIndex]) {
         case PIT_LEFT:
-            effect->segmentIndex = segmentIndex;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_PIT;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
-            effect->rightEdgeDistance = effectDistanceFromCenter;
+#ifndef EXPANSION_KIT
+            effect->rightEdgeDistance = 100.0f;
             effect->leftEdgeDistance = 5000.0f;
+#else
+            effect->rightEdgeDistance = effectDistanceFromCenter; \
+            effect->leftEdgeDistance = 5000.0f;
+#endif
             effectCount++;
             break;
         case PIT_RIGHT:
-            effect->segmentIndex = segmentIndex;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_PIT;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
+#ifndef EXPANSION_KIT
             effect->rightEdgeDistance = -5000.0f;
+            effect->leftEdgeDistance = -1.0f * 100.0f;
+#else
+            effect->rightEdgeDistance = -5000.0f; \
             effect->leftEdgeDistance = -1.0f * effectDistanceFromCenter;
+#endif
             effectCount++;
             break;
         case PIT_BOTH:
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_PIT;
-            effect->segmentIndex = segmentIndex;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
-            effect->rightEdgeDistance = effectDistanceFromCenter;
+#ifndef EXPANSION_KIT
+            effect->rightEdgeDistance = 100.0f;
             effect->leftEdgeDistance = 5000.0f;
+#else
+            effect->rightEdgeDistance = effectDistanceFromCenter; \
+            effect->leftEdgeDistance = 5000.0f;
+#endif
             effect++;
             effectCount++;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_PIT;
-            effect->segmentIndex = segmentIndex;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
+#ifndef EXPANSION_KIT
             effect->rightEdgeDistance = -5000.0f;
+            effect->leftEdgeDistance = -1.0f * 100.0f;
+#else
+            effect->rightEdgeDistance = -5000.0f; \
             effect->leftEdgeDistance = -1.0f * effectDistanceFromCenter;
+#endif
             effectCount++;
             break;
 #ifdef EXPANSION_KIT
         case PIT_MIDDLE:
-            effect->segmentIndex = segmentIndex;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_PIT;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
-            effect->rightEdgeDistance = -1.0f * effectDistanceFromCenter;
+            effect->rightEdgeDistance = -1.0f * effectDistanceFromCenter; \
             effect->leftEdgeDistance = effectDistanceFromCenter;
             effectCount++;
             break;
@@ -1521,9 +2032,7 @@ void Course_SegmentDirtInit(s32 courseIndex, s32 segmentIndex) {
     CourseSegment* segment;
     f32 segmentWidth;
     f32 nextSegmentWidth;
-#ifdef EXPANSION_KIT
     f32 effectDistanceFromCenter = 100.0f;
-#endif
     f32 minimumSegmentWidth;
     f32 minimumDistanceFromCenter;
     f32 segmentCenterVariance;
@@ -1563,47 +2072,72 @@ void Course_SegmentDirtInit(s32 courseIndex, s32 segmentIndex) {
     // clang-format off
     switch (COURSE_CONTEXT()->courseData.dirt[segmentIndex]) {
         case DIRT_LEFT:
-            effect->segmentIndex = segmentIndex;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_DIRT;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
-            effect->rightEdgeDistance = effectDistanceFromCenter;
+#ifndef EXPANSION_KIT
+            effect->rightEdgeDistance = 100.0f;
             effect->leftEdgeDistance = 5000.0f;
+#else
+            effect->rightEdgeDistance = effectDistanceFromCenter; \
+            effect->leftEdgeDistance = 5000.0f;
+#endif
             effectCount++;
             break;
         case DIRT_RIGHT:
-            effect->segmentIndex = segmentIndex;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_DIRT;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
+#ifndef EXPANSION_KIT
             effect->rightEdgeDistance = -5000.0f;
+            effect->leftEdgeDistance = -1.0f * 100.0f;
+#else
+            effect->rightEdgeDistance = -5000.0f; \
             effect->leftEdgeDistance = -1.0f * effectDistanceFromCenter;
+#endif
             effectCount++;
             break;
         case DIRT_BOTH:
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_DIRT;
-            effect->segmentIndex = segmentIndex;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
-            effect->rightEdgeDistance = effectDistanceFromCenter;
+#ifndef EXPANSION_KIT
+            effect->rightEdgeDistance = 100.0f;
             effect->leftEdgeDistance = 5000.0f;
+#else
+            effect->rightEdgeDistance = effectDistanceFromCenter; \
+            effect->leftEdgeDistance = 5000.0f;
+#endif
             effect++;
             effectCount++;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_DIRT;
-            effect->segmentIndex = segmentIndex;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
+#ifndef EXPANSION_KIT
             effect->rightEdgeDistance = -5000.0f;
+            effect->leftEdgeDistance = -1.0f * 100.0f;
+#else
+            effect->rightEdgeDistance = -5000.0f; \
             effect->leftEdgeDistance = -1.0f * effectDistanceFromCenter;
+#endif
             effectCount++;
             break;
         case DIRT_MIDDLE:
-            effect->segmentIndex = segmentIndex;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_DIRT;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
-            effect->rightEdgeDistance = -1.0f * effectDistanceFromCenter;
+#ifndef EXPANSION_KIT
+            effect->rightEdgeDistance = -1.0f * 100.0f;
+            effect->leftEdgeDistance = 100.0f;
+#else
+            effect->rightEdgeDistance = -1.0f * effectDistanceFromCenter; \
             effect->leftEdgeDistance = effectDistanceFromCenter;
+#endif
             effectCount++;
             break;
     }
@@ -1619,9 +2153,7 @@ void Course_SegmentIceInit(s32 courseIndex, s32 segmentIndex) {
     CourseSegment* segment;
     f32 segmentWidth;
     f32 nextSegmentWidth;
-#ifdef EXPANSION_KIT
     f32 effectDistanceFromCenter = 100.0f;
-#endif
     f32 minimumSegmentWidth;
     f32 minimumDistanceFromCenter;
     f32 segmentCenterVariance;
@@ -1655,47 +2187,72 @@ void Course_SegmentIceInit(s32 courseIndex, s32 segmentIndex) {
     // clang-format off
     switch (COURSE_CONTEXT()->courseData.ice[segmentIndex]) {
         case ICE_LEFT:
-            effect->segmentIndex = segmentIndex;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_ICE;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
+#ifndef EXPANSION_KIT
+            effect->rightEdgeDistance = 100.0f;
+            effect->leftEdgeDistance = 5000.0f;
+#else
             effect->rightEdgeDistance = effectDistanceFromCenter; \
             effect->leftEdgeDistance = 5000.0f;
+#endif
             effectCount++;
             break;
         case ICE_RIGHT:
-            effect->segmentIndex = segmentIndex;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_ICE;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
+#ifndef EXPANSION_KIT
             effect->rightEdgeDistance = -5000.0f;
+            effect->leftEdgeDistance = -1.0f * 100.0f;
+#else
+            effect->rightEdgeDistance = -5000.0f; \
             effect->leftEdgeDistance = -1.0f * effectDistanceFromCenter;
+#endif
             effectCount++;
             break;
         case ICE_BOTH:
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_ICE;
-            effect->segmentIndex = segmentIndex;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
+#ifndef EXPANSION_KIT
+            effect->rightEdgeDistance = 100.0f;
+            effect->leftEdgeDistance = 5000.0f;
+#else
             effect->rightEdgeDistance = effectDistanceFromCenter; \
             effect->leftEdgeDistance = 5000.0f;
+#endif
             effect++;
             effectCount++;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_ICE;
-            effect->segmentIndex = segmentIndex;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
+#ifndef EXPANSION_KIT
             effect->rightEdgeDistance = -5000.0f;
+            effect->leftEdgeDistance = -1.0f * 100.0f;
+#else
+            effect->rightEdgeDistance = -5000.0f; \
             effect->leftEdgeDistance = -1.0f * effectDistanceFromCenter;
+#endif
             effectCount++;
             break;
         case ICE_MIDDLE:
-            effect->segmentIndex = segmentIndex;
+            effect->segmentIndex = segmentIndex; \
             effect->effectType = COURSE_EFFECT_ICE;
             effect->segmentTValueStart = 0.0f;
             effect->segmentTValueEnd = 1.0f;
+#ifndef EXPANSION_KIT
+            effect->rightEdgeDistance = -1.0f * 100.0f;
+            effect->leftEdgeDistance = 100.0f;
+#else
             effect->rightEdgeDistance = -1.0f * effectDistanceFromCenter; \
             effect->leftEdgeDistance = effectDistanceFromCenter;
+#endif
             effectCount++;
             break;
     }
@@ -1704,6 +2261,23 @@ void Course_SegmentIceInit(s32 courseIndex, s32 segmentIndex) {
     gCourseEffectsInfo.effects = gCourseEffects;
     gCourseEffectsInfo.count = effectCount;
 }
+
+#ifdef EXPANSION_KIT
+f32 func_806FF598(CourseSegment* segment, f32 t, f32 segmentLengthProportion) {
+    s32 i;
+    s32 steps;
+    f32 forwardMagnitude;
+    Vec3f tangent;
+
+    steps = Math_Round(segmentLengthProportion / 5.0f);
+
+    for (i = 0; i < steps; i++) {
+        forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
+        t += 5.0f / forwardMagnitude;
+    }
+    return t;
+}
+#endif
 
 void Course_LandminesInit(s32 courseIndex) {
     CourseFeature* feature;
@@ -1741,12 +2315,16 @@ void Course_LandminesInit(s32 courseIndex) {
 
         switch (COURSE_CONTEXT()->courseData.landmine[i]) {
             case LANDMINE_MIDDLE:
+#ifdef EXPANSION_KIT
+                // FAKE
+                if (segmentWidth) {}
+#endif
                 lengthFactor /= 5.0f;
                 forwardMagnitude = Course_SplineGetTangent(segment, 0.0f, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1758,9 +2336,9 @@ void Course_LandminesInit(s32 courseIndex) {
                 featureCount++;
                 landmineCount++;
 
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1774,9 +2352,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
-                feature->segmentIndex = i;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1789,9 +2367,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1803,9 +2381,9 @@ void Course_LandminesInit(s32 courseIndex) {
                 featureCount++;
                 landmineCount++;
 
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1819,9 +2397,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
-                feature->segmentIndex = i;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1831,13 +2409,59 @@ void Course_LandminesInit(s32 courseIndex) {
                 feature++;
                 featureCount++;
                 landmineCount++;
+#ifdef EXPANSION_KIT
+                if (t > 1.0f) {
+                    feature -= 6;
+                    featureCount -= 6;
+                    landmineCount -= 6;
+
+                    func_806FF598(segment, 0, lengthFactor);
+                    feature->segmentTValue = 0.2f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.2f) + segmentCenterDistance) -
+                                             ((segmentWidth + (segmentWidthVariance * 0.2f)) / 4);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+                    feature->segmentTValue = 0.2f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.2f) + segmentCenterDistance) +
+                                             ((segmentWidth + (segmentWidthVariance * 0.2f)) / 4);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+                    func_806FF598(segment, 0.2f, lengthFactor);
+                    feature->segmentTValue = 0.4f;
+                    feature->lateralOffset = (segmentCenterVariance * 0.4f) + segmentCenterDistance;
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+                    func_806FF598(segment, 0.4f, lengthFactor);
+                    feature->segmentTValue = 0.6f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.6f) + segmentCenterDistance) -
+                                             ((segmentWidth + (segmentWidthVariance * 0.6f)) / 4);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+                    feature->segmentTValue = 0.6f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.6f) + segmentCenterDistance) +
+                                             ((segmentWidth + (segmentWidthVariance * 0.6f)) / 4);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+                    func_806FF598(segment, 0.6f, lengthFactor);
+                    feature->segmentTValue = 0.8f;
+                    feature->lateralOffset = (segmentCenterVariance * 0.8f) + segmentCenterDistance;
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+                }
+#endif
                 break;
             case LANDMINE_LEFT:
                 lengthFactor /= 6.0f;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
-                feature->segmentIndex = i;
-                feature->segmentTValue = 0.0f;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
+                feature->segmentTValue = t;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1849,9 +2473,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, 0.0f, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1865,9 +2489,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1881,9 +2505,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1897,9 +2521,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1913,9 +2537,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1926,13 +2550,62 @@ void Course_LandminesInit(s32 courseIndex) {
                 feature++;
                 featureCount++;
                 landmineCount++;
+#ifdef EXPANSION_KIT
+                if (t > 1.0f) {
+                    feature -= 6;
+                    featureCount -= 6;
+                    landmineCount -= 6;
+
+                    feature->segmentTValue = 0;
+                    feature->lateralOffset = ((segmentCenterVariance * 0) + segmentCenterDistance) +
+                                             ((segmentWidth + (segmentWidthVariance * 0)) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+
+                    feature->segmentTValue = 0.166667f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.166667f) + segmentCenterDistance) +
+                                             (((segmentWidth + (segmentWidthVariance * 0.166667f)) * 3.0f) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+
+                    feature->segmentTValue = 0.333333f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.333333f) + segmentCenterDistance) +
+                                             ((segmentWidth + (segmentWidthVariance * 0.333333f)) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+
+                    feature->segmentTValue = 0.5f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.5f) + segmentCenterDistance) +
+                                             (((segmentWidth + (segmentWidthVariance * 0.5f)) * 3.0f) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+
+                    feature->segmentTValue = 0.666667f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.666667f) + segmentCenterDistance) +
+                                             ((segmentWidth + (segmentWidthVariance * 0.666667f)) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+
+                    feature->segmentTValue = 0.833333f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.833333f) + segmentCenterDistance) +
+                                             (((segmentWidth + (segmentWidthVariance * 0.833333f)) * 3.0f) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+                }
+#endif
                 break;
             case LANDMINE_RIGHT:
                 lengthFactor /= 6.0f;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
-                feature->segmentIndex = i;
-                feature->segmentTValue = 0.0f;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
+                feature->segmentTValue = t;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1944,9 +2617,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, 0.0f, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1960,9 +2633,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1976,9 +2649,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -1992,9 +2665,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -2008,9 +2681,9 @@ void Course_LandminesInit(s32 courseIndex) {
 
                 forwardMagnitude = Course_SplineGetTangent(segment, t, &tangent);
                 t += lengthFactor / forwardMagnitude;
-                feature->segmentIndex = i;
-                feature->featureType = COURSE_FEATURE_LANDMINE;
                 // clang-format off
+                feature->featureType = COURSE_FEATURE_LANDMINE; \
+                feature->segmentIndex = i;
                 feature->dimensions.x = 0.0f; \
                 feature->dimensions.y = 0.0f; \
                 feature->dimensions.z = 0.0f;
@@ -2021,6 +2694,55 @@ void Course_LandminesInit(s32 courseIndex) {
                 feature++;
                 featureCount++;
                 landmineCount++;
+#ifdef EXPANSION_KIT
+                if (t > 1.0f) {
+                    feature -= 6;
+                    featureCount -= 6;
+                    landmineCount -= 6;
+
+                    feature->segmentTValue = 0;
+                    feature->lateralOffset = ((segmentCenterVariance * 0) + segmentCenterDistance) -
+                                             ((segmentWidth + (segmentWidthVariance * 0)) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+
+                    feature->segmentTValue = 0.166667f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.166667f) + segmentCenterDistance) -
+                                             (((segmentWidth + (segmentWidthVariance * 0.166667f)) * 3.0f) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+
+                    feature->segmentTValue = 0.333333f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.333333f) + segmentCenterDistance) -
+                                             ((segmentWidth + (segmentWidthVariance * 0.333333f)) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+
+                    feature->segmentTValue = 0.5f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.5f) + segmentCenterDistance) -
+                                             (((segmentWidth + (segmentWidthVariance * 0.5f)) * 3.0f) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+
+                    feature->segmentTValue = 0.666667f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.666667f) + segmentCenterDistance) -
+                                             ((segmentWidth + (segmentWidthVariance * 0.666667f)) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+
+                    feature->segmentTValue = 0.833333f;
+                    feature->lateralOffset = ((segmentCenterVariance * 0.833333f) + segmentCenterDistance) -
+                                             (((segmentWidth + (segmentWidthVariance * 0.833333f)) * 3.0f) / 8);
+                    feature++;
+                    featureCount++;
+                    landmineCount++;
+                }
+#endif
                 break;
         }
     }
@@ -2840,11 +3562,11 @@ void Course_SignsInit(s32 courseIndex) {
     gCourseFeaturesInfo.jumpCount = jumpCount;
 }
 
-extern s32 D_802CDFD0;
+extern unk_807B3C20 D_802CB6D0;
 
 void Course_FeaturesInit(s32 courseIndex) {
-    if (gInCourseEditor) {
-        if (D_802CDFD0 < 4) {
+    if (IN_COURSE_EDITOR) {
+        if (D_802CB6D0.controlPointCount < 4) {
             return;
         }
     } else if (COURSE_CONTEXT()->courseData.controlPointCount < 4) {
@@ -2864,8 +3586,8 @@ void Course_FeaturesInit(s32 courseIndex) {
 void Course_EffectsInit(s32 courseIndex) {
     s32 i;
 
-    if (gInCourseEditor) {
-        if (D_802CDFD0 < 4) {
+    if (IN_COURSE_EDITOR) {
+        if (D_802CB6D0.controlPointCount < 4) {
             return;
         }
     } else if (COURSE_CONTEXT()->courseData.controlPointCount < 4) {
@@ -2884,8 +3606,10 @@ void Course_EffectsInit(s32 courseIndex) {
 
 extern s32 gCourseIndex;
 extern CourseData D_8010C770;
-extern CourseSegment D_802CDFD8[];
-extern CourseSegment D_802C2020[];
+extern unk_807B3C20 D_802CDFD8;
+extern unk_807B3C20 D_802C2020;
+
+extern CourseData D_i2_800D0130;
 
 void Course_SegmentsInit(void) {
     CourseSegment* segment;
@@ -2893,11 +3617,14 @@ void Course_SegmentsInit(void) {
     s32 segmentIndex;
     s32 i;
 
-    courseInfo = &gCourseInfos[gCourseIndex];
-    segment = D_802C2020;
-    courseInfo->courseSegments = D_802C2020;
+#ifdef EXPANSION_KIT
+    D_i2_800D0130 = COURSE_CONTEXT()->courseData;
+#endif
 
-    for (i = 0; i < courseInfo->segmentCount; i++) {
+    courseInfo = &gCourseInfos[gCourseIndex];
+    courseInfo->courseSegments = D_802C2020.unk_0000;
+
+    for (i = 0, segment = D_802C2020.unk_0000; i < courseInfo->segmentCount; i++) {
         segment->segmentIndex = i;
         segment->next = segment + 1;
         segment->prev = segment - 1;
@@ -2929,8 +3656,10 @@ void Course_SegmentsInit(void) {
     segmentIndex = courseInfo->courseSegments[segmentIndex].next->segmentIndex;
     segment = &courseInfo->courseSegments[segmentIndex];
     for (i = 0; i < courseInfo->segmentCount; i++) {
-        D_802CDFD8[i] = *segment;
+        segmentIndex = segment->segmentIndex;
+        D_802CDFD8.unk_0000[i] = *segment;
 
+#ifndef EXPANSION_KIT
         D_8010C770.bankAngle[i] = COURSE_CONTEXT()->courseData.bankAngle[segment->segmentIndex];
         D_8010C770.pit[i] = COURSE_CONTEXT()->courseData.pit[segment->segmentIndex];
         D_8010C770.dash[i] = COURSE_CONTEXT()->courseData.dash[segment->segmentIndex];
@@ -2941,12 +3670,26 @@ void Course_SegmentsInit(void) {
         D_8010C770.gate[i] = COURSE_CONTEXT()->courseData.gate[segment->segmentIndex];
         D_8010C770.building[i] = COURSE_CONTEXT()->courseData.building[segment->segmentIndex];
         D_8010C770.sign[i] = COURSE_CONTEXT()->courseData.sign[segment->segmentIndex];
+#else
+        D_8010C770.bankAngle[i] = COURSE_CONTEXT()->courseData.bankAngle[segmentIndex];
+        D_8010C770.pit[i] = COURSE_CONTEXT()->courseData.pit[segmentIndex];
+        D_8010C770.dash[i] = COURSE_CONTEXT()->courseData.dash[segmentIndex];
+        D_8010C770.dirt[i] = COURSE_CONTEXT()->courseData.dirt[segmentIndex];
+        D_8010C770.ice[i] = COURSE_CONTEXT()->courseData.ice[segmentIndex];
+        D_8010C770.jump[i] = COURSE_CONTEXT()->courseData.jump[segmentIndex];
+        D_8010C770.landmine[i] = COURSE_CONTEXT()->courseData.landmine[segmentIndex];
+        D_8010C770.gate[i] = COURSE_CONTEXT()->courseData.gate[segmentIndex];
+        D_8010C770.building[i] = COURSE_CONTEXT()->courseData.building[segmentIndex];
+        D_8010C770.sign[i] = COURSE_CONTEXT()->courseData.sign[segmentIndex];
+#endif
         segment = segment->next;
     }
 
     for (i = 0; i < courseInfo->segmentCount; i++) {
-        D_802C2020[i] = D_802CDFD8[i];
-        courseInfo->courseSegments[i] = D_802CDFD8[i];
+#ifndef EXPANSION_KIT
+        D_802C2020.unk_0000[i] = D_802CDFD8.unk_0000[i];
+#endif
+        courseInfo->courseSegments[i] = D_802CDFD8.unk_0000[i];
 
         COURSE_CONTEXT()->courseData.bankAngle[i] = D_8010C770.bankAngle[i];
         COURSE_CONTEXT()->courseData.pit[i] = D_8010C770.pit[i];
@@ -2984,14 +3727,14 @@ void Dma_ClearRomCopy(void* romAddr, void* ramAddr, size_t size) {
     gDmaIOMsg.size = size;
     gCartRomHandle->transferInfo.cmdType = LEO_CMD_TYPE_2;
     osEPiStartDma(gCartRomHandle, &gDmaIOMsg, OS_READ);
-    MQ_WAIT_FOR_MESG(&gDmaMesgQueue, NULL);
+    osRecvMesg(&gDmaMesgQueue, NULL, OS_MESG_BLOCK);
 }
 
 void Dma_RomCopyAsync(void* romAddr, void* ramAddr, size_t size) {
     OSMesg sp20[8];
 
     if (gDmaMesgQueue.validCount >= gDmaMesgQueue.msgCount) {
-        MQ_WAIT_FOR_MESG(&gDmaMesgQueue, sp20);
+        osRecvMesg(&gDmaMesgQueue, sp20, OS_MESG_BLOCK);
     }
     osInvalDCache(osPhysicalToVirtual(ramAddr), size);
     gDmaIOMsg.hdr.pri = OS_MESG_PRI_NORMAL;
@@ -3000,8 +3743,12 @@ void Dma_RomCopyAsync(void* romAddr, void* ramAddr, size_t size) {
     gDmaIOMsg.devAddr = (uintptr_t) romAddr;
     gDmaIOMsg.size = size;
     gCartRomHandle->transferInfo.cmdType = LEO_CMD_TYPE_2;
+#ifndef EXPANSION_KIT
     osEPiStartDma(gCartRomHandle, &gDmaIOMsg, OS_READ);
-    MQ_WAIT_FOR_MESG(&gDmaMesgQueue, sp20);
+#else
+    func_80768B88(gCartRomHandle, &gDmaIOMsg, OS_READ);
+#endif
+    osRecvMesg(&gDmaMesgQueue, sp20, OS_MESG_BLOCK);
 }
 
 void Dma_LoadAssetsAsync(u8* romAddr, u8* ramAddr, size_t size) {
@@ -3022,24 +3769,75 @@ void Dma_LoadAssetsAsync(u8* romAddr, u8* ramAddr, size_t size) {
     }
 }
 
+#ifdef EXPANSION_KIT
+void func_80701E08(void) {
+
+    func_80704050(true);
+
+    switch (func_8070595C()) {
+        case 1:
+            func_8070F8A4(-1, 3);
+            break;
+        case 0:
+            func_8070F8A4(-1, 4);
+            break;
+        default:
+            break;
+    }
+    while (func_8070595C() != 2) {}
+    func_80704050(false);
+}
+#endif
+
 // todo: move these to appropriate places
+#ifdef EXPANSION_KIT
+static const char devrostr00[] = "%d startVtx error %d/%d\n";
+static const char devrostr01[] = "GADGET OVER !! OVER !! OVER !!\n";
+static const char devrostr02[] = "devide idx error\n";
+#endif
 static const char devrostr0[] = "\n/***\nCOURSE GADGET TEXTURE OVER!! %f,%f\n***/\n";
 static const char devrostr1[] = "GADGET OVER !! OVER !! OVER !!\n";
 static const char devrostr2[] = "Gadget Vtx Over %d!!\n";
+#ifndef EXPANSION_KIT
 static const char devrostr3[] = "move start position %d\n";
 static const char devrostr4[] = "look index %d\n";
 static const char devrostr5[] = "index %d\n";
+#else
+static const char devrostr06[] = "U ERROR RETRY\n";
+static const char devrostr07[] = "U ERROR RETRY\n";
+static const char devrostr08[] = "U ERROR RETRY\n";
+#endif
 
-extern u8 gEditCupTrackNames[][9];
+extern char gEditCupTrackNames[][9];
 extern s16 gPlayer1OverallPosition;
+extern u8 D_i2_80106F14[];
+extern OSMesgQueue* gMFSMesgQ;
+extern s8 gTitleDemoState;
+extern s32 D_8079F9B4;
+extern s32 D_xk2_800F7404;
+
+UNUSED s32 D_800CD21C = 0;
 
 void Course_Load(s32 courseIndex) {
     s32 pad;
     s32 diskCourseIndex;
+    s32 pad2;
+    RomOffset romAddr;
+    s32 pad3[2];
+
+#ifdef EXPANSION_KIT
+    PRINTF("============== COURSE LOAD %2d  ==============\n", courseIndex);
+
+    DDSave_ClearCachedGhostSaves();
+#endif
 
     if (courseIndex >= COURSE_DEATH_RACE) {
-        Dma_LoadAssetsAsync(SEGMENT_ROM_START(course_data) + (courseIndex - 30) * sizeof(CourseData),
-                            osVirtualToPhysical(&COURSE_CONTEXT()->courseData), sizeof(CourseData));
+#ifndef EXPANSION_KIT
+        romAddr = SEGMENT_ROM_START(course_data) + (courseIndex - 30) * sizeof(CourseData);
+#else
+        romAddr = gRomSegmentPairs[5][0] + (courseIndex - 30) * sizeof(CourseData);
+#endif
+        Dma_LoadAssetsAsync(romAddr, osVirtualToPhysical(&COURSE_CONTEXT()->courseData), sizeof(CourseData));
         if ((gPlayer1OverallPosition >= 4) && (courseIndex == COURSE_ENDING)) {
             COURSE_CONTEXT()->courseData.skybox = SKYBOX_BLUE;
         }
@@ -3048,6 +3846,7 @@ void Course_Load(s32 courseIndex) {
         return;
     } else if (courseIndex >= COURSE_EDIT_1) {
         diskCourseIndex = courseIndex - COURSE_EDIT_1;
+#ifndef EXPANSION_KIT
         if (func_800760F8() != 2) {
             osWritebackDCacheAll();
             LeoFault_DrawIsDiskInserted();
@@ -3062,15 +3861,229 @@ void Course_Load(s32 courseIndex) {
             Mfs_LoadFileInDir(0xFFFB, gEditCupTrackNames[diskCourseIndex], "CRSD", &COURSE_CONTEXT()->courseData, 0);
             PRINTF("ENTRY LOAD OK\n");
         }
+#else
+        PRINTF("ENTRY CHECK\n");
+        PRINTF("ENTRY CHECK NONE(DEFAULT COURSE)\n");
+        diskCourseIndex = courseIndex - COURSE_EDIT_1;
+        func_80701E08();
+        if (gEditCupTrackNames[diskCourseIndex][0] == '\0' || diskCourseIndex >= 6) {
+            char ghostName[8] = { "GHOST00" };
+
+            ghostName[5] = (courseIndex / 10) + '0';
+            ghostName[6] = (courseIndex % 10) + '0';
+            Save_ClearCourseRecord(DDSave_GetCachedCourseRecord());
+            func_8076852C(MFS_ENTRY_WORKING_DIR, ghostName, "GOST", COURSE_CONTEXT(), sizeof(CourseContext));
+            osRecvMesg(&gMFSMesgQ, NULL, OS_MESG_BLOCK);
+            Course_CalculateChecksum();
+            if (DDSave_ValidateCachedGhostRecords()) {
+                PRINTF("GHOST DATA WAS BROKEN\n");
+                DDSave_ClearCachedGhostSaves();
+                Save_ClearCourseRecord(DDSave_GetCachedCourseRecord());
+            }
+            PRINTF("DEF LOAD OK\n");
+            func_i2_800A8CE4(DDSave_GetCachedCourseRecord(), courseIndex);
+            DiskDrive_LoadData(SEGMENT_DISK_START(silence_3) + diskCourseIndex, &COURSE_CONTEXT()->courseData,
+                               sizeof(CourseData), 0);
+            if ((Course_CalculateChecksum() != COURSE_CONTEXT()->courseData.checksum) ||
+                (COURSE_CONTEXT()->courseData.creatorId != CREATOR_NINTENDO) ||
+                (COURSE_CONTEXT()->courseData.bgm > BGM_NEW_04)) {
+                func_8070F8A4(-1, 9);
+                while (true) {}
+            }
+        } else {
+            func_8076852C(MFS_ENTRY_WORKING_DIR, gEditCupTrackNames[diskCourseIndex], "CRSD", COURSE_CONTEXT(),
+                          sizeof(CourseContext));
+            osRecvMesg(&gMFSMesgQ, NULL, OS_MESG_BLOCK);
+            if (D_8079F9B4 != 0) {
+                PRINTF("ENTRY CHECK BUT NONE %s (DEFAULT COURSE)\n", gEditCupTrackNames[diskCourseIndex]);
+                if (gMfsError == N64DD_NOT_FOUND) {
+                    gEditCupTrackNames[diskCourseIndex][0] = '\0';
+                    {
+                        char ghostName[8] = { "GHOST00" };
+                        ghostName[5] = (courseIndex / 10) + '0';
+                        ghostName[6] = (courseIndex % 10) + '0';
+                        Save_ClearCourseRecord(DDSave_GetCachedCourseRecord());
+                        func_8076852C(MFS_ENTRY_WORKING_DIR, ghostName, "GOST", COURSE_CONTEXT(),
+                                      sizeof(CourseContext));
+                        osRecvMesg(&gMFSMesgQ, NULL, OS_MESG_BLOCK);
+                        Course_CalculateChecksum();
+                        if (DDSave_ValidateCachedGhostRecords()) {
+                            PRINTF("GHOST DATA WAS BROKEN\n");
+                            DDSave_ClearCachedGhostSaves();
+                            Save_ClearCourseRecord(DDSave_GetCachedCourseRecord());
+                        }
+                        PRINTF("DEF LOAD OK\n");
+                        func_i2_800A8CE4(DDSave_GetCachedCourseRecord(), courseIndex);
+                        DiskDrive_LoadData(SEGMENT_DISK_START(silence_3) + diskCourseIndex,
+                                           &COURSE_CONTEXT()->courseData, sizeof(CourseData), 0);
+                        if ((Course_CalculateChecksum() != COURSE_CONTEXT()->courseData.checksum) ||
+                            (COURSE_CONTEXT()->courseData.creatorId != CREATOR_NINTENDO) ||
+                            (COURSE_CONTEXT()->courseData.bgm > BGM_NEW_04)) {
+                            func_8070F8A4(-1, 9);
+                            while (true) {}
+                        }
+                    }
+                }
+            } else {
+                PRINTF("ENTRY LOAD OK\n");
+                PRINTF("course ID is %d\n", courseIndex);
+                func_i2_800A8CE4(DDSave_GetCachedCourseRecord(), courseIndex);
+            }
+        }
+        gCourseInfos[courseIndex].encodedCourseIndex = (Course_CalculateChecksum() << 5) | COURSE_EDIT_1;
+#endif
     } else {
+#ifdef EXPANSION_KIT
+        char ghostName[8] = { "GHOST00" };
+        ghostName[5] = (courseIndex / 10) + '0';
+        ghostName[6] = (courseIndex % 10) + '0';
+        Save_ClearCourseRecord(DDSave_GetCachedCourseRecord());
+        if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
+            func_8076852C(MFS_ENTRY_WORKING_DIR, ghostName, "GOST", COURSE_CONTEXT(), sizeof(CourseContext));
+            osRecvMesg(&gMFSMesgQ, NULL, OS_MESG_BLOCK);
+        }
+#endif
+
+#ifndef EXPANSION_KIT
+        romAddr = SEGMENT_ROM_START(course_data) + courseIndex * sizeof(CourseData);
+#else
+        romAddr = gRomSegmentPairs[5][0] + courseIndex * sizeof(CourseData);
+#endif
         PRINTF("UNPACK\n");
-        Dma_LoadAssetsAsync(SEGMENT_ROM_START(course_data) + courseIndex * sizeof(CourseData),
-                            osVirtualToPhysical(&COURSE_CONTEXT()->courseData), sizeof(CourseData));
+        Dma_LoadAssetsAsync(romAddr, osVirtualToPhysical(&COURSE_CONTEXT()->courseData), sizeof(CourseData));
         PRINTF("UNPACK OK\n");
+
+#ifdef EXPANSION_KIT
+        COURSE_CONTEXT()->courseData.bgm = D_i2_80106F14[courseIndex];
+        // Patch Out Red Canyon 2 Dirt
+        if (gInCourseEditor && (courseIndex == COURSE_RED_CANYON_2)) {
+            COURSE_CONTEXT()->courseData.dirt[21] = DIRT_NONE;
+            COURSE_CONTEXT()->courseData.checksum = Course_CalculateChecksum();
+        }
+#endif
     }
 
     func_80074428(courseIndex);
+#ifdef EXPANSION_KIT
+    if (gInCourseEditor) {
+        D_xk2_800F7404 = 1;
+    }
+#endif
 }
+
+#ifdef EXPANSION_KIT
+void func_80702448(s32 courseIndex) {
+    s32 pad[2];
+    s32 diskCourseIndex;
+    RomOffset romAddr;
+    s32 pad3[2];
+
+    DDSave_ClearCachedGhostSaves();
+    if (courseIndex >= COURSE_DEATH_RACE) {
+        romAddr = gRomSegmentPairs[5][0] + (courseIndex - 30) * sizeof(CourseData);
+        Dma_LoadAssetsAsync(romAddr, osVirtualToPhysical(&COURSE_CONTEXT()->courseData), sizeof(CourseData));
+        if ((gPlayer1OverallPosition >= 4) && (courseIndex == COURSE_ENDING)) {
+            COURSE_CONTEXT()->courseData.skybox = SKYBOX_BLUE;
+        }
+    } else if (courseIndex >= COURSE_X_1) {
+        Course_GenerateRandomCourse();
+        return;
+    } else if (courseIndex >= COURSE_EDIT_1) {
+        PRINTF("ENTRY CHECK\n");
+        diskCourseIndex = courseIndex - COURSE_EDIT_1;
+        PRINTF("INDEX %d\n", diskCourseIndex);
+        PRINTF("ENTRY CHECK NONE(DEFAULT COURSE)\n");
+        switch (func_8070595C()) {
+            case 1:
+                func_8070F8A4(-1, 3);
+                break;
+            case 0:
+                func_8070F8A4(-1, 4);
+                break;
+            default:
+                break;
+        }
+        while (func_8070595C() != 2) {}
+        if (gEditCupTrackNames[diskCourseIndex][0] == '\0' || diskCourseIndex >= 6) {
+            char ghostName[8] = { "GHOST00" };
+            s32 pad;
+
+            ghostName[5] = (courseIndex / 10) + '0';
+            ghostName[6] = (courseIndex % 10) + '0';
+            Save_ClearCourseRecord(DDSave_GetCachedCourseRecord());
+            func_8076852C(MFS_ENTRY_WORKING_DIR, ghostName, "GOST", COURSE_CONTEXT(), sizeof(CourseContext));
+            osRecvMesg(&gMFSMesgQ, NULL, OS_MESG_BLOCK);
+            Course_CalculateChecksum();
+            if (DDSave_ValidateCachedGhostRecords()) {
+                DDSave_ClearCachedGhostSaves();
+                Save_ClearCourseRecord(DDSave_GetCachedCourseRecord());
+            }
+            PRINTF("course index is %d\n", courseIndex);
+            PRINTF("DEF LOAD OK\n");
+            func_i2_800A8CE4(DDSave_GetCachedCourseRecord(), courseIndex);
+            DiskDrive_LoadData(SEGMENT_DISK_START(silence_3) + diskCourseIndex, &COURSE_CONTEXT()->courseData,
+                               sizeof(CourseData), 0);
+            if ((Course_CalculateChecksum() != COURSE_CONTEXT()->courseData.checksum) ||
+                (COURSE_CONTEXT()->courseData.creatorId != CREATOR_NINTENDO) ||
+                (COURSE_CONTEXT()->courseData.bgm > BGM_NEW_04)) {
+                func_8070F8A4(-1, 9);
+                while (true) {}
+            }
+        } else {
+            func_8076852C(MFS_ENTRY_WORKING_DIR, gEditCupTrackNames[diskCourseIndex], "CRSD", COURSE_CONTEXT(),
+                          sizeof(CourseContext));
+            osRecvMesg(&gMFSMesgQ, NULL, OS_MESG_BLOCK);
+            PRINTF("ENTRY CHECK BUT NONE %s (DEFAULT COURSE)\n");
+            if (D_8079F9B4 != 0) {
+                if (gMfsError == N64DD_NOT_FOUND) {
+                    gEditCupTrackNames[diskCourseIndex][0] = '\0';
+                    {
+                        char ghostName[8] = { "GHOST00" };
+                        s32 pad;
+
+                        ghostName[5] = (courseIndex / 10) + '0';
+                        ghostName[6] = (courseIndex % 10) + '0';
+                        Save_ClearCourseRecord(DDSave_GetCachedCourseRecord());
+                        func_8076852C(MFS_ENTRY_WORKING_DIR, ghostName, "GOST", COURSE_CONTEXT(),
+                                      sizeof(CourseContext));
+                        osRecvMesg(&gMFSMesgQ, NULL, OS_MESG_BLOCK);
+                        Course_CalculateChecksum();
+                        if (DDSave_ValidateCachedGhostRecords()) {
+                            DDSave_ClearCachedGhostSaves();
+                            Save_ClearCourseRecord(DDSave_GetCachedCourseRecord());
+                        }
+                        PRINTF("course index is %d\n", courseIndex);
+                        PRINTF("DEF LOAD OK\n");
+                        func_i2_800A8CE4(DDSave_GetCachedCourseRecord(), courseIndex);
+                        DiskDrive_LoadData(SEGMENT_DISK_START(silence_3) + diskCourseIndex,
+                                           &COURSE_CONTEXT()->courseData, sizeof(CourseData), 0);
+                        if ((Course_CalculateChecksum() != COURSE_CONTEXT()->courseData.checksum) ||
+                            (COURSE_CONTEXT()->courseData.creatorId != CREATOR_NINTENDO) ||
+                            (COURSE_CONTEXT()->courseData.bgm > BGM_NEW_04)) {
+                            func_8070F8A4(-1, 9);
+                            while (true) {}
+                        }
+                    }
+                }
+            } else {
+                PRINTF("ENTRY LOAD OK\n");
+                PRINTF("course ID is %d\n", courseIndex);
+                func_i2_800A8CE4(DDSave_GetCachedCourseRecord(), courseIndex);
+            }
+        }
+        gCourseInfos[courseIndex].encodedCourseIndex = (Course_CalculateChecksum() << 5) | COURSE_EDIT_1;
+    } else {
+        romAddr = gRomSegmentPairs[5][0] + courseIndex * sizeof(CourseData);
+
+        Dma_LoadAssetsAsync(romAddr, osVirtualToPhysical(&COURSE_CONTEXT()->courseData), sizeof(CourseData));
+        // Patch Out Red Canyon 2 Dirt
+        if (gInCourseEditor && courseIndex == COURSE_RED_CANYON_2) {
+            COURSE_CONTEXT()->courseData.dirt[21] = DIRT_NONE;
+            COURSE_CONTEXT()->courseData.checksum = Course_CalculateChecksum();
+        }
+    }
+}
+#endif
 
 void Course_GadgetsInit(s32 courseIndex) {
     Course_FeaturesInit(courseIndex);
@@ -3100,22 +4113,25 @@ void func_800742D0(void) {
     COURSE_CONTEXT()->courseData.skybox = SKYBOX_PURPLE;
 }
 
-extern CourseFeature gCourseFeatures[];
+extern u8 D_80030060[];
 extern CourseData D_8010CF50;
 
 void func_800742FC(void) {
     s32 i;
 
     bzero(SEGMENT_VRAM_START(game_context), SEGMENT_BSS_SIZE(game_context));
+#ifdef EXPANSION_KIT
+    D_80030060[0] = '\0';
+#endif
     func_80074204();
-    D_802CDFD0 = 0;
+    D_802CB6D0.controlPointCount = 0;
     COURSE_CONTEXT()->courseData.creatorId = CREATOR_NINTENDO;
     COURSE_CONTEXT()->courseData.controlPointCount = 0;
     COURSE_CONTEXT()->courseData.venue = VENUE_MUTE_CITY;
     COURSE_CONTEXT()->courseData.skybox = SKYBOX_PURPLE;
     D_8010CF50 = COURSE_CONTEXT()->courseData;
     gCourseFeaturesInfo.features = gCourseFeatures;
-    gCourseInfos[0].courseSegments = D_802C2020;
+    gCourseInfos[0].courseSegments = D_802C2020.unk_0000;
     gCourseEffectsInfo.effects = gCourseEffects;
 
     for (i = 0; i < ARRAY_COUNT(gCourseInfos); i++) {}
@@ -3124,11 +4140,14 @@ void func_800742FC(void) {
     func_80074204();
     D_8010CF50 = COURSE_CONTEXT()->courseData;
     COURSE_CONTEXT()->courseData.controlPointCount = 0;
-    D_802CDFD0 = 0;
+    D_802CB6D0.controlPointCount = 0;
 }
 
 void func_80074428(s32 courseIndex) {
     s32 i;
+#ifdef EXPANSION_KIT
+    s32 sp20;
+#endif
     CourseSegment* var_v0;
     CourseData* courseData = &COURSE_CONTEXT()->courseData;
 
@@ -3136,54 +4155,64 @@ void func_80074428(s32 courseIndex) {
         return;
     }
 
-    gCourseInfos[courseIndex].courseSegments = D_802C2020;
+    gCourseInfos[courseIndex].courseSegments = D_802C2020.unk_0000;
     gCourseInfos[courseIndex].segmentCount = courseData->controlPointCount;
 
     for (i = 0; i < courseData->controlPointCount; i++) {
-        D_802C2020[i].pos = courseData->controlPoint[i].pos;
-        D_802C2020[i].radiusLeft = courseData->controlPoint[i].radiusLeft;
-        D_802C2020[i].radiusRight = courseData->controlPoint[i].radiusRight;
-        D_802C2020[i].trackSegmentInfo = courseData->controlPoint[i].trackSegmentInfo;
+        D_802C2020.unk_0000[i].pos = courseData->controlPoint[i].pos;
+        D_802C2020.unk_0000[i].radiusLeft = courseData->controlPoint[i].radiusLeft;
+        D_802C2020.unk_0000[i].radiusRight = courseData->controlPoint[i].radiusRight;
+        D_802C2020.unk_0000[i].trackSegmentInfo = courseData->controlPoint[i].trackSegmentInfo;
     }
 
-    var_v0 = D_802C2020;
+    var_v0 = D_802C2020.unk_0000;
     for (i = 0; i < courseData->controlPointCount; i++, var_v0++) {
         var_v0->segmentIndex = i;
         var_v0->next = var_v0 + 1;
         var_v0->prev = var_v0 - 1;
     }
 
-    D_802C2020[0].prev = &D_802C2020[courseData->controlPointCount - 1];
-    D_802C2020[courseData->controlPointCount - 1].next = &D_802C2020[0];
+    D_802C2020.unk_0000[0].prev = &D_802C2020.unk_0000[courseData->controlPointCount - 1];
+    D_802C2020.unk_0000[courseData->controlPointCount - 1].next = &D_802C2020.unk_0000[0];
 
     if (courseData->controlPointCount < 4) {
         return;
     }
 
+#ifndef EXPANSION_KIT
     Course_SplineCalculateTensions(&gCourseInfos[courseIndex]);
+#else
+    sp20 = func_i2_800B39B4(&gCourseInfos[courseIndex]);
+    if (sp20 == -1) {
+        sp20 = func_i2_800BE8BC(&gCourseInfos[courseIndex]);
+    }
+#endif
     func_80074CE4(&gCourseInfos[courseIndex]);
     Course_SegmentLengthsInit(&gCourseInfos[courseIndex]);
+#ifdef EXPANSION_KIT
+    if (sp20 == -1) {
+        Course_FeaturesInit(courseIndex);
+    }
+#endif
 }
-
-extern CourseSegment D_802CB6D0[];
 
 void func_80074594(void) {
     s32 i;
     CourseData* courseData = &COURSE_CONTEXT()->courseData;
 
-    courseData->controlPointCount = D_802CDFD0;
+    courseData->controlPointCount = D_802CB6D0.controlPointCount;
 
     for (i = 0; i < courseData->controlPointCount; i++) {
-        courseData->controlPoint[i].pos = D_802CB6D0[i].pos;
-        courseData->controlPoint[i].radiusLeft = D_802CB6D0[i].radiusLeft;
-        courseData->controlPoint[i].radiusRight = D_802CB6D0[i].radiusRight;
-        courseData->controlPoint[i].trackSegmentInfo = D_802CB6D0[i].trackSegmentInfo;
+        courseData->controlPoint[i].pos = D_802CB6D0.unk_0000[i].pos;
+        courseData->controlPoint[i].radiusLeft = D_802CB6D0.unk_0000[i].radiusLeft;
+        courseData->controlPoint[i].radiusRight = D_802CB6D0.unk_0000[i].radiusRight;
+        courseData->controlPoint[i].trackSegmentInfo = D_802CB6D0.unk_0000[i].trackSegmentInfo;
     }
 }
 
 // Centre the course around origin
 void func_80074634(CourseInfo* courseInfo) {
-    CourseSegment* courseSegment;
+    CourseSegment* segment;
     s32 i;
     f32 minX = 65536.0f;
     f32 maxX = -65536.0f;
@@ -3192,41 +4221,39 @@ void func_80074634(CourseInfo* courseInfo) {
 
     for (i = 0; i < courseInfo->segmentCount; i++) {
 
-        courseSegment = &courseInfo->courseSegments[i];
+        segment = &courseInfo->courseSegments[i];
 
-        if (courseSegment->pos.x < minX) {
-            minX = courseSegment->pos.x;
+        if (segment->pos.x < minX) {
+            minX = segment->pos.x;
         }
-        if (maxX < courseSegment->pos.x) {
-            maxX = courseSegment->pos.x;
+        if (maxX < segment->pos.x) {
+            maxX = segment->pos.x;
         }
 
-        if (courseSegment->pos.z < minZ) {
-            minZ = courseSegment->pos.z;
+        if (segment->pos.z < minZ) {
+            minZ = segment->pos.z;
         }
-        if (maxZ < courseSegment->pos.z) {
-            maxZ = courseSegment->pos.z;
+        if (maxZ < segment->pos.z) {
+            maxZ = segment->pos.z;
         }
     }
 
     for (i = 0; i < courseInfo->segmentCount; i++) {
 
-        courseSegment = &courseInfo->courseSegments[i];
+        segment = &courseInfo->courseSegments[i];
 
-        courseSegment->pos.x -= ((minX + maxX) / 2);
-        courseSegment->pos.z -= ((minZ + maxZ) / 2);
+        segment->pos.x -= ((minX + maxX) / 2);
+        segment->pos.z -= ((minZ + maxZ) / 2);
     }
 }
-
-extern CourseSegment D_802CB6D0[];
 
 void func_80074744(void) {
     CourseSegment* segment;
     s32 i;
     s32 trackShape;
 
-    for (i = 0; i < D_802CDFD0; i++) {
-        segment = &D_802CB6D0[i];
+    for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
+        segment = &D_802CB6D0.unk_0000[i];
         trackShape = segment->trackSegmentInfo & TRACK_SHAPE_MASK;
         switch (trackShape) {
             case TRACK_SHAPE_PIPE:
@@ -3244,6 +4271,20 @@ void func_80074744(void) {
             case TRACK_SHAPE_ROAD:
             case TRACK_SHAPE_BORDERLESS_ROAD:
                 break;
+#ifdef EXPANSION_KIT
+            case TRACK_SHAPE_AIR:
+                trackShape = segment->prev->trackSegmentInfo & TRACK_SHAPE_MASK;
+                switch (trackShape) {
+                    case TRACK_SHAPE_ROAD:
+                    case TRACK_SHAPE_BORDERLESS_ROAD:
+                        break;
+                    default:
+                        COURSE_CONTEXT()->courseData.gate[i] = GATE_NONE;
+                        COURSE_CONTEXT()->courseData.sign[i] = SIGN_NONE;
+                        break;
+                }
+                break;
+#endif
             default:
                 COURSE_CONTEXT()->courseData.gate[i] = GATE_NONE;
                 COURSE_CONTEXT()->courseData.sign[i] = SIGN_NONE;
@@ -3252,14 +4293,16 @@ void func_80074744(void) {
     }
 }
 
-UNUSED s32 D_800CD21C = 0;
-
 s32 D_800CD220[] = { 1, 0, 0, 0, 2, 3, 4, 0, 0, 0, 0 };
 s32 D_800CD24C[] = { 1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 // Load Venue Building Textures
 void func_800747EC(s32 venue) {
-    RomOffset romOffset = (D_800CD220[venue] * 0x800) + SEGMENT_ROM_START(super_textures);
+#ifndef EXPANSION_KIT
+    RomOffset romOffset = SEGMENT_ROM_START(super_textures) + (D_800CD220[venue] * 0x800);
+#else
+    RomOffset romOffset = gRomSegmentPairs[6][0] + (D_800CD220[venue] * 0x800);
+#endif
 
     Dma_LoadAssetsAsync(romOffset, Segment_SegmentedToVirtual(D_8014A20), 0x800);
 }
@@ -3303,3 +4346,39 @@ void func_80074844(void) {
     sp3C.m[0][0] = 1.0f;
     Matrix_ToMtx(&sp3C, gGfxPool->unk_2C668);
 }
+
+#ifdef EXPANSION_KIT
+Gfx D_8076CAF8[] = {
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_FILL),
+    gsDPSetDepthImage(0x3DBC00),
+    gsDPSetColorImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 0x3DBC00),
+    gsDPSetFillColor(0xFFFCFFFC),
+    gsDPSetScissor(G_SC_NON_INTERLACE, 12, 8, 308, 232),
+    gsDPFillRectangle(12, 8, 307, 231),
+    gsDPSetDepthSource(G_ZS_PIXEL),
+    gsSPEndDisplayList(),
+};
+
+s32 Course_GetBgm(void) {
+    return COURSE_CONTEXT()->courseData.bgm;
+}
+
+void func_80703234(void) {
+    s32 i;
+
+    gCourseFeaturesInfo.landmineCount = 0;
+    gCourseFeaturesInfo.jumpCount = 0;
+
+    for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
+
+        if (COURSE_CONTEXT()->courseData.landmine[i] != LANDMINE_NONE) {
+            gCourseFeaturesInfo.landmineCount += 6;
+        }
+
+        if (COURSE_CONTEXT()->courseData.jump[i] != JUMP_NONE) {
+            gCourseFeaturesInfo.jumpCount++;
+        }
+    }
+}
+#endif

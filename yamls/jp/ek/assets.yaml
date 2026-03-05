@@ -1,0 +1,257 @@
+  - name: expansion_kit_textures
+    exclusive_ram_id: segment_07
+    type: code
+    dir: assets/jp/ek
+    vram: 0x07000000
+    start: 0x1FB850
+    subsegments:
+      - [0x1FB850, .data, expansion_kit_textures/expansion_kit_textures]
+
+  - name: course_edit_textures
+    exclusive_ram_id: segment_09
+    type: code
+    dir: assets/jp/ek
+    vram: 0x09000000
+    start: 0x21C170
+    subsegments:
+      - [0x21C170, .data, course_edit_textures/course_edit_textures]
+
+  - name: silence_3
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x230FB0
+    subsegments:
+      - [0x230FB0, .data, silence_3/silence_3]
+
+  - name: sand_ocean_3
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x231790
+    subsegments:
+      - [0x231790, .data, sand_ocean_3/sand_ocean_3]
+
+  - name: devils_forest_4
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x231F70
+    subsegments:
+      - [0x231F70, .data, devils_forest_4/devils_forest_4]
+
+  - name: port_town_3
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x232750
+    subsegments:
+      - [0x232750, .data, port_town_3/port_town_3]
+
+  - name: devils_forest_5
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x232F30
+    subsegments:
+      - [0x232F30, .data, devils_forest_5/devils_forest_5]
+
+  - name: big_blue_3
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x233710
+    subsegments:
+      - [0x233710, .data, big_blue_3/big_blue_3]
+
+  - name: mute_city_4
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x233EF0
+    subsegments:
+      - [0x233EF0, .data, mute_city_4/mute_city_4]
+
+  - name: space_plant_2
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x2346D0
+    subsegments:
+      - [0x2346D0, .data, space_plant_2/space_plant_2]
+
+  - name: port_town_4
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x234EB0
+    subsegments:
+      - [0x234EB0, .data, port_town_4/port_town_4]
+
+  - name: fire_field_2
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x235690
+    subsegments:
+      - [0x235690, .data, fire_field_2/fire_field_2]
+
+  - name: white_land_3
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x235E70
+    subsegments:
+      - [0x235E70, .data, white_land_3/white_land_3]
+
+  - name: big_foot
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/courses
+    vram: 0x8F123450
+    start: 0x236650
+    subsegments:
+      - [0x236650, .data, big_foot/big_foot]
+
+  - name: silence_3_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x236E30
+    subsegments:
+      - [0x236E30, .data, silence_3_staff_ghost/silence_3_staff_ghost]
+
+  - name: sand_ocean_3_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x23ADF0
+    subsegments:
+      - [0x23ADF0, .data, sand_ocean_3_staff_ghost/sand_ocean_3_staff_ghost]
+
+  - name: devils_forest_4_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x23EDB0
+    subsegments:
+      - [0x23EDB0, .data, devils_forest_4_staff_ghost/devils_forest_4_staff_ghost]
+
+  - name: port_town_3_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x242D70
+    subsegments:
+      - [0x242D70, .data, port_town_3_staff_ghost/port_town_3_staff_ghost]
+
+  - name: devils_forest_5_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x246D30
+    subsegments:
+      - [0x246D30, .data, devils_forest_5_staff_ghost/devils_forest_5_staff_ghost]
+
+  - name: big_blue_3_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x24ACF0
+    subsegments:
+      - [0x24ACF0, .data, big_blue_3_staff_ghost/big_blue_3_staff_ghost]
+
+  - name: mute_city_4_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x24ECB0
+    subsegments:
+      - [0x24ECB0, .data, mute_city_4_staff_ghost/mute_city_4_staff_ghost]
+
+  - name: space_plant_2_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x252C70
+    subsegments:
+      - [0x252C70, .data, space_plant_2_staff_ghost/space_plant_2_staff_ghost]
+
+  - name: port_town_4_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x256C30
+    subsegments:
+      - [0x256C30, .data, port_town_4_staff_ghost/port_town_4_staff_ghost]
+
+  - name: fire_field_2_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x25ABF0
+    subsegments:
+      - [0x25ABF0, .data, fire_field_2_staff_ghost/fire_field_2_staff_ghost]
+
+  - name: white_land_3_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x25EBB0
+    subsegments:
+      - [0x25EBB0, .data, white_land_3_staff_ghost/white_land_3_staff_ghost]
+
+  - name: big_foot_staff_ghost
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek/ghosts
+    vram: 0x8F123450
+    start: 0x262B70
+    subsegments:
+      - [0x262B70, .data, big_foot_staff_ghost/big_foot_staff_ghost]
+
+  - name: audio_bank_dd
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek
+    vram: 0x8F123450
+    start: 0x266B30
+    subsegments:
+      - [0x266B30, .data, audio_bank_dd/audio_bank_dd]
+
+  - name: audio_seq_dd
+    exclusive_ram_id: course
+    type: code
+    dir: assets/jp/ek
+    vram: 0x8F123450
+    start: 0x26C520
+    subsegments:
+      - [0x26C520, .data, audio_seq_dd/audio_seq_dd]
+
+  - name: audio_table_dd
+    type: bin
+    start: 0x270210
+
+  - [0x200C000]

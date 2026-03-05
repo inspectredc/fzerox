@@ -1,0 +1,1591 @@
+:config:
+  segments:
+    - [0x09,  0x21C170]
+  external_files:
+    - "assets/yaml/jp/ek/expansion_kit_textures.yaml"
+  header:
+    code:
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(course_edit_textures.h)'
+      - '#include ASSET_HEADER_EK(expansion_kit_textures.h)'
+    header:
+      - '#include "gfx.h"'
+
+aCourseEditCursorSpeedSliderTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 112
+  height: 24
+  offset: 0x0
+  symbol: aCourseEditCursorSpeedSliderTex
+
+aCourseEditCursorSpeedMarkerTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 12
+  offset: 0x540
+  symbol: aCourseEditCursorSpeedMarkerTex
+
+aCourseEditCursorTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x5A0
+  symbol: aCourseEditCursorTex
+
+aCourseEditAxisDL:
+  type: GFX
+  offset: 0x7A0
+  symbol: aCourseEditAxisDL
+
+aExecuteCourseEditAxisDL:
+  type: GFX
+  offset: 0x858
+  symbol: aExecuteCourseEditAxisDL
+
+aCourseEditYAxisVtx:
+  type: VTX
+  count: 6
+  offset: 0x868
+  symbol: aCourseEditYAxisVtx
+
+aCourseEditXAxisVtx:
+  type: VTX
+  count: 6
+  offset: 0x8C8
+  symbol: aCourseEditXAxisVtx
+
+aCourseEditZAxisVtx:
+  type: VTX
+  count: 6
+  offset: 0x928
+  symbol: aCourseEditZAxisVtx
+
+aCourseEditSTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 16
+  height: 16
+  offset: 0x988
+  symbol: aCourseEditSTex
+
+aCourseEditSRoadTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xA08
+  symbol: aCourseEditSRoadTex
+
+aCourseEditNumberSheetTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 12
+  height: 120
+  offset: 0xC48
+  symbol: aCourseEditNumberSheetTex
+
+aCourseEditNumberTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x1788
+  symbol: aCourseEditNumberTex
+
+aCourseEditControlPointTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 8
+  height: 8
+  offset: 0x19C8
+  symbol: aCourseEditControlPointTex
+
+aCourseEditStartMarkerTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x1A48
+  symbol: aCourseEditStartMarkerTex
+
+aCourseEditMouseClickTex:
+  type: TEXTURE
+  ctype: u8
+  format: IA8
+  width: 16
+  height: 16
+  offset: 0x1C88
+  symbol: aCourseEditMouseClickTex
+
+aCourseEditBackgroundPlaneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x1D88
+  symbol: aCourseEditBackgroundPlaneTex
+
+aCourseEditGoldQuestionIcon2Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x1F88
+  symbol: aCourseEditGoldQuestionIcon2Tex
+
+aCourseEditTestDriveIconTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x2188
+  symbol: aCourseEditTestDriveIconTex
+
+aCourseEditLineModeIconTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x2388
+  symbol: aCourseEditLineModeIconTex
+
+aCourseEditGoldLineModeIconTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x2588
+  symbol: aCourseEditGoldLineModeIconTex
+
+aCourseEditQuestionIconTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x2788
+  symbol: aCourseEditQuestionIconTex
+
+aCourseEditGoldQuestionIconTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x2988
+  symbol: aCourseEditGoldQuestionIconTex
+
+aCourseEditGridAlignIconTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x2B88
+  symbol: aCourseEditGridAlignIconTex
+
+aCourseEditGoldGridAlignIconTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 16
+  height: 16
+  offset: 0x2D88
+  symbol: aCourseEditGoldGridAlignIconTex
+
+aCourseEditInfoBackgroundTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 24
+  offset: 0x2F88
+  symbol: aCourseEditInfoBackgroundTex
+
+aCourseEditInfoFontSheetTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 32
+  offset: 0x3408
+  symbol: aCourseEditInfoFontSheetTex
+
+aCourseEditClearTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x3808
+  symbol: aCourseEditClearTex
+
+aCourseEditFileTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 48
+  height: 16
+  offset: 0x3988
+  symbol: aCourseEditFileTex
+
+aCourseEditLoadTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x3F88
+  symbol: aCourseEditLoadTex
+
+aCourseEditSaveTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x4108
+  symbol: aCourseEditSaveTex
+
+aCourseEditRenameTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x4288
+  symbol: aCourseEditRenameTex
+
+aCourseEditEraseFileTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x4408
+  symbol: aCourseEditEraseFileTex
+
+aCourseEditProtectTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x4588
+  symbol: aCourseEditProtectTex
+
+aCourseEditCreateTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x4708
+  symbol: aCourseEditCreateTex
+
+aCourseEditPointBoldTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x4888
+  symbol: aCourseEditPointBoldTex
+
+aCourseEditMoveTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x4A08
+  symbol: aCourseEditMoveTex
+
+aCourseEditStyleTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x4B88
+  symbol: aCourseEditStyleTex
+
+aCourseEditSceneTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x4D08
+  symbol: aCourseEditSceneTex
+
+aCourseEditTypeTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x4E88
+  symbol: aCourseEditTypeTex
+
+aCourseEditSkyTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5008
+  symbol: aCourseEditSkyTex
+
+aCourseEditCourseTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5188
+  symbol: aCourseEditCourseTex
+
+aCourseEditPointTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5308
+  symbol: aCourseEditPointTex
+
+aCourseEditDesignTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5488
+  symbol: aCourseEditDesignTex
+
+aCourseEditPartsTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5608
+  symbol: aCourseEditPartsTex
+
+aCourseEditBackgroundTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5788
+  symbol: aCourseEditBackgroundTex
+
+aCourseEditSetTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5908
+  symbol: aCourseEditSetTex
+
+aCourseEditMoveStartTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5A88
+  symbol: aCourseEditMoveStartTex
+
+aCourseEditCenteringTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5C08
+  symbol: aCourseEditCenteringTex
+
+aCourseEditMoveXZIconTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5D88
+  symbol: aCourseEditMoveXZIconTex
+
+aCourseEditMoveYIconTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x5F08
+  symbol: aCourseEditMoveYIconTex
+
+aCourseEditWidthTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6088
+  symbol: aCourseEditWidthTex
+
+aCourseEditBankTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6208
+  symbol: aCourseEditBankTex
+
+aCourseEditCenterTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6388
+  symbol: aCourseEditCenterTex
+
+aCourseEditStraightTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6508
+  symbol: aCourseEditStraightTex
+
+aCourseEditRoadTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6688
+  symbol: aCourseEditRoadTex
+
+aCourseEditHRoadTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6808
+  symbol: aCourseEditHRoadTex
+
+aCourseEditTRoadTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6988
+  symbol: aCourseEditTRoadTex
+
+aCourseEditTunnelTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6B08
+  symbol: aCourseEditTunnelTex
+
+aCourseEditPipeTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6C88
+  symbol: aCourseEditPipeTex
+
+aCourseEditHalfpipeTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6E08
+  symbol: aCourseEditHalfpipeTex
+
+aCourseEditCylinderTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x6F88
+  symbol: aCourseEditCylinderTex
+
+aCourseEditSpaceTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x7108
+  symbol: aCourseEditSpaceTex
+
+aCourseEditLoopTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x7288
+  symbol: aCourseEditLoopTex
+
+aCourseEditPitTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x7408
+  symbol: aCourseEditPitTex
+
+aCourseEditDashTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x7588
+  symbol: aCourseEditDashTex
+
+aCourseEditDirtTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x7708
+  symbol: aCourseEditDirtTex
+
+aCourseEditSlipTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x7888
+  symbol: aCourseEditSlipTex
+
+aCourseEditJumpTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x7A08
+  symbol: aCourseEditJumpTex
+
+aCourseEditTrapTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x7B88
+  symbol: aCourseEditTrapTex
+
+aCourseEditGateTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x7D08
+  symbol: aCourseEditGateTex
+
+aCourseEditBuildingTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x7E88
+  symbol: aCourseEditBuildingTex
+
+aCourseEditSignTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 48
+  height: 16
+  offset: 0x8008
+  symbol: aCourseEditSignTex
+
+aCourseEditBigBlueTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8188
+  symbol: aCourseEditBigBlueTex
+
+aCourseEditFireFieldTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8288
+  symbol: aCourseEditFireFieldTex
+
+aCourseEditDevilsForestTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8388
+  symbol: aCourseEditDevilsForestTex
+
+aCourseEditMuteCity1Tex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8488
+  symbol: aCourseEditMuteCity1Tex
+
+aCourseEditPortTownTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8588
+  symbol: aCourseEditPortTownTex
+
+aCourseEditRedCanyonTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8688
+  symbol: aCourseEditRedCanyonTex
+
+aCourseEditSandOceanTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8788
+  symbol: aCourseEditSandOceanTex
+
+aCourseEditSectorTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8888
+  symbol: aCourseEditSectorTex
+
+aCourseEditSilenceTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8988
+  symbol: aCourseEditSilenceTex
+
+aCourseEditWhiteLandTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8A88
+  symbol: aCourseEditWhiteLandTex
+
+aCourseEditRainbowRoadTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8B88
+  symbol: aCourseEditRainbowRoadTex
+
+aCourseEditRegenerationTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8C88
+  symbol: aCourseEditRegenerationTex
+
+aCourseEditRollerCoasterTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8D88
+  symbol: aCourseEditRollerCoasterTex
+
+aCourseEditBigFootTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8E88
+  symbol: aCourseEditBigFootTex
+
+aCourseEditJaponTex:
+  type: TEXTURE
+  ctype: u8
+  format: I4
+  width: 64
+  height: 8
+  offset: 0x8F88
+  symbol: aCourseEditJaponTex
+
+aCourseEditMuteCitySceneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x9088
+  symbol: aCourseEditMuteCitySceneTex
+
+aCourseEditPortTownSceneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x92C8
+  symbol: aCourseEditPortTownSceneTex
+
+aCourseEditBigBlueSceneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x9508
+  symbol: aCourseEditBigBlueSceneTex
+
+aCourseEditSandOceanSceneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x9748
+  symbol: aCourseEditSandOceanSceneTex
+
+aCourseEditDevilsForestSceneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x9988
+  symbol: aCourseEditDevilsForestSceneTex
+
+aCourseEditWhiteLandSceneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x9BC8
+  symbol: aCourseEditWhiteLandSceneTex
+
+aCourseEditSectorSceneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x9E08
+  symbol: aCourseEditSectorSceneTex
+
+aCourseEditRedCanyonSceneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xA048
+  symbol: aCourseEditRedCanyonSceneTex
+
+aCourseEditFireFieldSceneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xA288
+  symbol: aCourseEditFireFieldSceneTex
+
+aCourseEditSilenceSceneTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xA4C8
+  symbol: aCourseEditSilenceSceneTex
+
+aCourseEditHRoadType2Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xA708
+  symbol: aCourseEditHRoadType2Tex
+
+aCourseEditHRoadType3Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xA948
+  symbol: aCourseEditHRoadType3Tex
+
+aCourseEditTRoadType2Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xAB88
+  symbol: aCourseEditTRoadType2Tex
+
+aCourseEditTRoadType3Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xADC8
+  symbol: aCourseEditTRoadType3Tex
+
+aCourseEditTunnelType1Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xB008
+  symbol: aCourseEditTunnelType1Tex
+
+aCourseEditTunnelType2Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xB248
+  symbol: aCourseEditTunnelType2Tex
+
+aCourseEditTunnelType3Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xB488
+  symbol: aCourseEditTunnelType3Tex
+
+aCourseEditTunnelType4Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xB6C8
+  symbol: aCourseEditTunnelType4Tex
+
+aCourseEditPipeType1Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xB908
+  symbol: aCourseEditPipeType1Tex
+
+aCourseEditPipeType2Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xBB48
+  symbol: aCourseEditPipeType2Tex
+
+aCourseEditPipeType3Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xBD88
+  symbol: aCourseEditPipeType3Tex
+
+aCourseEditPipeType4Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xBFC8
+  symbol: aCourseEditPipeType4Tex
+
+aCourseEditHalfPipeType1Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xC208
+  symbol: aCourseEditHalfPipeType1Tex
+
+aCourseEditHalfPipeType2Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xC448
+  symbol: aCourseEditHalfPipeType2Tex
+
+aCourseEditHalfPipeType3Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xC688
+  symbol: aCourseEditHalfPipeType3Tex
+
+aCourseEditHalfPipeType4Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xC8C8
+  symbol: aCourseEditHalfPipeType4Tex
+
+aCourseEditCylinderType1Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xCB08
+  symbol: aCourseEditCylinderType1Tex
+
+aCourseEditCylinderType2Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xCD48
+  symbol: aCourseEditCylinderType2Tex
+
+aCourseEditCylinderType3Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xCF88
+  symbol: aCourseEditCylinderType3Tex
+
+aCourseEditCylinderType4Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xD1C8
+  symbol: aCourseEditCylinderType4Tex
+
+aCourseEditPitBothTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xD408
+  symbol: aCourseEditPitBothTex
+
+aCourseEditPitLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xD648
+  symbol: aCourseEditPitLeftTex
+
+aCourseEditPitRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xD888
+  symbol: aCourseEditPitRightTex
+
+aCourseEditPitMiddleTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xDAC8
+  symbol: aCourseEditPitMiddleTex
+
+aCourseEditDashMiddleTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xDD08
+  symbol: aCourseEditDashMiddleTex
+
+aCourseEditDashLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xDF48
+  symbol: aCourseEditDashLeftTex
+
+aCourseEditDashRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xE188
+  symbol: aCourseEditDashRightTex
+
+aCourseEditDirtBothTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xE3C8
+  symbol: aCourseEditDirtBothTex
+
+aCourseEditDirtLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xE608
+  symbol: aCourseEditDirtLeftTex
+
+aCourseEditDirtRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xE848
+  symbol: aCourseEditDirtRightTex
+
+aCourseEditDirtMiddleTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xEA88
+  symbol: aCourseEditDirtMiddleTex
+
+aCourseEditIceBothTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xECC8
+  symbol: aCourseEditIceBothTex
+
+aCourseEditIceLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xEF08
+  symbol: aCourseEditIceLeftTex
+
+aCourseEditIceRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xF148
+  symbol: aCourseEditIceRightTex
+
+aCourseEditIceMiddleTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xF388
+  symbol: aCourseEditIceMiddleTex
+
+aCourseEditJumpAllTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xF5C8
+  symbol: aCourseEditJumpAllTex
+
+aCourseEditJumpLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xF808
+  symbol: aCourseEditJumpLeftTex
+
+aCourseEditJumpRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xFA48
+  symbol: aCourseEditJumpRightTex
+
+aCourseEditLandmineMiddleTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xFC88
+  symbol: aCourseEditLandmineMiddleTex
+
+aCourseEditLandmineLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0xFEC8
+  symbol: aCourseEditLandmineLeftTex
+
+aCourseEditLandmineRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x10108
+  symbol: aCourseEditLandmineRightTex
+
+aCourseEditGateSquareTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x10348
+  symbol: aCourseEditGateSquareTex
+
+aCourseEditGateStartTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x10588
+  symbol: aCourseEditGateStartTex
+
+aCourseEditGateHexagonalTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x107C8
+  symbol: aCourseEditGateHexagonalTex
+
+aCourseEditBuildingTallBothTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x10A08
+  symbol: aCourseEditBuildingTallBothTex
+
+aCourseEditBuildingTallLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x10C48
+  symbol: aCourseEditBuildingTallLeftTex
+
+aCourseEditBuildingTallRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x10E88
+  symbol: aCourseEditBuildingTallRightTex
+
+aCourseEditBuildingShortBothTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x110C8
+  symbol: aCourseEditBuildingShortBothTex
+
+aCourseEditBuildingShortLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x11308
+  symbol: aCourseEditBuildingShortLeftTex
+
+aCourseEditBuildingShortRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x11548
+  symbol: aCourseEditBuildingShortRightTex
+
+aCourseEditBuildingSpireBothTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x11788
+  symbol: aCourseEditBuildingSpireBothTex
+
+aCourseEditBuildingSpireLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x119C8
+  symbol: aCourseEditBuildingSpireLeftTex
+
+aCourseEditBuildingSpireRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x11C08
+  symbol: aCourseEditBuildingSpireRightTex
+
+aCourseEditBuildingMountainBothTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x11E48
+  symbol: aCourseEditBuildingMountainBothTex
+
+aCourseEditBuildingMountainLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x12088
+  symbol: aCourseEditBuildingMountainLeftTex
+
+aCourseEditBuildingMountainRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x122C8
+  symbol: aCourseEditBuildingMountainRightTex
+
+aCourseEditBuildingTallGoldBothTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x12508
+  symbol: aCourseEditBuildingTallGoldBothTex
+
+aCourseEditBuildingTallGoldLeftTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x12748
+  symbol: aCourseEditBuildingTallGoldLeftTex
+
+aCourseEditBuildingTallGoldRightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x12988
+  symbol: aCourseEditBuildingTallGoldRightTex
+
+aCourseEditSignTVTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x12BC8
+  symbol: aCourseEditSignTVTex
+
+aCourseEditSign1Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x12E08
+  symbol: aCourseEditSign1Tex
+
+aCourseEditSign2Tex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x13048
+  symbol: aCourseEditSign2Tex
+
+aCourseEditSignNintexTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x13288
+  symbol: aCourseEditSignNintexTex
+
+aCourseEditSignOverheadTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x134C8
+  symbol: aCourseEditSignOverheadTex
+
+aCourseEditSkyboxPurpleTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x13708
+  symbol: aCourseEditSkyboxPurpleTex
+
+aCourseEditSkyboxTurquoiseTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x13948
+  symbol: aCourseEditSkyboxTurquoiseTex
+
+aCourseEditSkyboxDesertTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x13B88
+  symbol: aCourseEditSkyboxDesertTex
+
+aCourseEditSkyboxBlueTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x13DC8
+  symbol: aCourseEditSkyboxBlueTex
+
+aCourseEditSkyboxNightTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x14008
+  symbol: aCourseEditSkyboxNightTex
+
+aCourseEditSkyboxOrangeTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x14248
+  symbol: aCourseEditSkyboxOrangeTex
+
+aCourseEditSkyboxSunsetTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x14488
+  symbol: aCourseEditSkyboxSunsetTex
+
+aCourseEditSkyboxSkyBlueTex:
+  type: TEXTURE
+  ctype: u16
+  format: RGBA16
+  width: 24
+  height: 12
+  offset: 0x146C8
+  symbol: aCourseEditSkyboxSkyBlueTex
+
+D_9014908:
+  type: GFX
+  offset: 0x14908
+  symbol: D_9014908
+
+D_9014A38:
+  type: GFX
+  offset: 0x14A38
+  symbol: D_9014A38
+
+D_9014AA0:
+  type: GFX
+  offset: 0x14AA0
+  symbol: D_9014AA0
+
+D_9014AE8:
+  type: GFX
+  offset: 0x14AE8
+  symbol: D_9014AE8
+
+D_9014B68:
+  type: GFX
+  offset: 0x14B68
+  symbol: D_9014B68
+
+D_9014BA0:
+  type: GFX
+  offset: 0x14BA0
+  symbol: D_9014BA0
+
+D_9014BC0:
+  type: GFX
+  offset: 0x14BC0
+  symbol: D_9014BC0
+
+D_9014C20:
+  type: GFX
+  offset: 0x14C20
+  symbol: D_9014C20
+
+D_9014C40:
+  type: GFX
+  offset: 0x14C40
+  symbol: D_9014C40
+
+D_9014C60:
+  type: GFX
+  offset: 0x14C60
+  symbol: D_9014C60
+
+D_9014CB8:
+  type: GFX
+  offset: 0x14CB8
+  symbol: D_9014CB8
+
+D_9014D18:
+  type: GFX
+  offset: 0x14D18
+  symbol: D_9014D18
+
+D_9014D78:
+  type: GFX
+  offset: 0x14D78
+  symbol: D_9014D78
+
+D_9014DB8:
+  type: GFX
+  offset: 0x14DB8
+  symbol: D_9014DB8
+
+D_9014DF8:
+  type: GFX
+  offset: 0x14DF8
+  symbol: D_9014DF8

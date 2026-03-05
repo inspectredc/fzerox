@@ -4,17 +4,20 @@
 #include "fzx_course.h"
 #include "fzx_camera.h"
 #include "fzx_font.h"
+#include "fzx_save.h"
 #include "src/overlays/ovl_i2/transition.h"
 #include "course_select.h"
-#include "assets/common_assets_compressed.h"
+#include ASSET_HEADER(common_assets_compressed.h)
 
 s32 sCourseSelectCup;
 s32 sLastCourseIndex;
+#ifdef EXPANSION_KIT
+s8 D_i5_8007C2A8[7];
+s8 D_i5_8007C2AF;
 
-s32 gCourseModelCupType = 0;
-s32 D_i5_801190B4 = 0;
-s32 gCourseModelCupCourseNo = 0;
-UNUSED s32 D_i5_801190BC = 0;
+UNUSED s32 D_i5_8007B080 = 0;
+#include ASSET_SOURCE_EK(overlays/course_select/course_select/course_select.c)
+#endif
 
 s32 sCourseSelectState = COURSE_SELECT_CUP_SELECT;
 UNUSED s32 D_i5_801190C4 = 0;
@@ -24,74 +27,45 @@ s8 D_i5_801190D0 = 0;
 s8 sSelectedGhostOption = 0;
 s8 sUnlockedGhosts = 1;
 s8 sStaffGhostTimeBeaten = 0;
+#ifdef EXPANSION_KIT
+s8 D_i5_8007B9EC[42] = { 0 };
+#endif
 UNUSED s32 D_i5_801190E0 = 64;
 UNUSED s32 D_i5_801190E4 = 0;
 UNUSED s32 D_i5_801190E8 = 60;
 UNUSED s32 D_i5_801190EC = 40;
 UNUSED s32 D_i5_801190F0 = 70;
 
-unk_80077D50 sCupSelectJackCompTexInfo[] = { { 17, aCupSelectJackTex, TEX_WIDTH(aCupSelectJackTex),
-                                               TEX_HEIGHT(aCupSelectJackTex), TEX_COMPRESSED_SIZE(aCupSelectJackTex) },
-                                             { 0 } };
-unk_80077D50 sCupSelectQueenCompTexInfo[] = { { 17, aCupSelectQueenTex, TEX_WIDTH(aCupSelectQueenTex),
-                                                TEX_HEIGHT(aCupSelectQueenTex),
-                                                TEX_COMPRESSED_SIZE(aCupSelectQueenTex) },
-                                              { 0 } };
-unk_80077D50 sCupSelectKingCompTexInfo[] = { { 17, aCupSelectKingTex, TEX_WIDTH(aCupSelectKingTex),
-                                               TEX_HEIGHT(aCupSelectKingTex), TEX_COMPRESSED_SIZE(aCupSelectKingTex) },
-                                             { 0 } };
-unk_80077D50 sCupSelectJokerCompTexInfo[] = { { 17, aCupSelectJokerTex, TEX_WIDTH(aCupSelectJokerTex),
-                                                TEX_HEIGHT(aCupSelectJokerTex),
-                                                TEX_COMPRESSED_SIZE(aCupSelectJokerTex) },
-                                              { 0 } };
-unk_80077D50 sCupSelectXCompTexInfo[] = { { 17, aCupSelectXTex, TEX_WIDTH(aCupSelectXTex), TEX_HEIGHT(aCupSelectXTex),
-                                            TEX_COMPRESSED_SIZE(aCupSelectXTex) },
-                                          { 0 } };
-unk_80077D50 sCupSelectEditCompTexInfo[] = { { 17, aCupSelectEditTex, TEX_WIDTH(aCupSelectEditTex),
-                                               TEX_HEIGHT(aCupSelectEditTex), TEX_COMPRESSED_SIZE(aCupSelectEditTex) },
-                                             { 0 } };
-unk_80077D50 sCupSelectQuestionMarkCompTexInfo[] = {
-    { 17, aCupSelectQuestionMarkTex, TEX_WIDTH(aCupSelectQuestionMarkTex), TEX_HEIGHT(aCupSelectQuestionMarkTex),
-      TEX_COMPRESSED_SIZE(aCupSelectQuestionMarkTex) },
-    { 0 }
-};
+unk_80077D50 sCupSelectJackCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectJackTex);
+unk_80077D50 sCupSelectQueenCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectQueenTex);
+unk_80077D50 sCupSelectKingCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectKingTex);
+unk_80077D50 sCupSelectJokerCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectJokerTex);
+unk_80077D50 sCupSelectXCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectXTex);
+unk_80077D50 sCupSelectEditCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectEditTex);
+#ifdef EXPANSION_KIT
+unk_80077D50 sCupSelectDD1CompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectDD1Tex);
+unk_80077D50 sCupSelectDD2CompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectDD2Tex);
+#endif
+unk_80077D50 sCupSelectQuestionMarkCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectQuestionMarkTex);
 
 unk_80077D50* sCupSelectCompTexInfos[] = {
     sCupSelectJackCompTexInfo,         sCupSelectQueenCompTexInfo, sCupSelectKingCompTexInfo,
     sCupSelectJokerCompTexInfo,        sCupSelectXCompTexInfo,     sCupSelectEditCompTexInfo,
+#ifdef EXPANSION_KIT
+    sCupSelectDD1CompTexInfo,          sCupSelectDD2CompTexInfo,
+#endif
     sCupSelectQuestionMarkCompTexInfo,
 };
 
-unk_80077D50 sSelectCourseCompTexInfo[] = {
-    { 4, aSelectCourseTex, TEX_WIDTH(aSelectCourseTex), TEX_HEIGHT(aSelectCourseTex), 0 }, { 0 }
-};
-unk_80077D50 sRecordsCompTexInfo[] = { { 4, aRecordsTex, TEX_WIDTH(aRecordsTex), TEX_HEIGHT(aRecordsTex), 0 }, { 0 } };
-static unk_80077D50 sOKCompTexInfo[] = {
-    { 17, aOKTex, TEX_WIDTH(aOKTex), TEX_HEIGHT(aOKTex), TEX_COMPRESSED_SIZE(aOKTex) }, { 0 }
-};
-unk_80077D50 sYellowArrowCompTexInfo[] = { { 17, aYellowArrowTex, TEX_WIDTH(aYellowArrowTex),
-                                             TEX_HEIGHT(aYellowArrowTex), TEX_COMPRESSED_SIZE(aYellowArrowTex) },
-                                           { 0 } };
-unk_80077D50 sOptionsFalconHelmetCompTexInfo[] = { { 17, aOptionsFalconHelmetTex, TEX_WIDTH(aOptionsFalconHelmetTex),
-                                                     TEX_HEIGHT(aOptionsFalconHelmetTex),
-                                                     TEX_COMPRESSED_SIZE(aOptionsFalconHelmetTex) },
-                                                   { 0 } };
+unk_80077D50 sSelectCourseCompTexInfo[] = COMP_TEX_INFO(4, aSelectCourseTex, 0);
+unk_80077D50 sRecordsCompTexInfo[] = COMP_TEX_INFO(4, aRecordsTex, 0);
+static unk_80077D50 sOKCompTexInfo[] = COMP_TEX_INFO_DEF(17, aOKTex);
+unk_80077D50 sYellowArrowCompTexInfo[] = COMP_TEX_INFO_DEF(17, aYellowArrowTex);
+unk_80077D50 sOptionsFalconHelmetCompTexInfo[] = COMP_TEX_INFO_DEF(17, aOptionsFalconHelmetTex);
 
-static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = {
-    { 17, aTitleBackgroundMainTex, TEX_WIDTH(aTitleBackgroundMainTex), TEX_HEIGHT(aTitleBackgroundMainTex),
-      TEX_COMPRESSED_SIZE(aTitleBackgroundMainTex) },
-    { 0 }
-};
-static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = {
-    { 17, aTitleBackgroundComicTex, TEX_WIDTH(aTitleBackgroundComicTex), TEX_HEIGHT(aTitleBackgroundComicTex),
-      TEX_COMPRESSED_SIZE(aTitleBackgroundComicTex) },
-    { 0 }
-};
-static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = {
-    { 17, aTitleBackgroundFalconTex, TEX_WIDTH(aTitleBackgroundFalconTex), TEX_HEIGHT(aTitleBackgroundFalconTex),
-      TEX_COMPRESSED_SIZE(aTitleBackgroundFalconTex) },
-    { 0 }
-};
+static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundMainTex);
+static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundComicTex);
+static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundFalconTex);
 
 static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
     sTitleBackgroundMainCompTexInfo,
@@ -99,18 +73,10 @@ static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
     sTitleBackgroundFalconCompTexInfo,
 };
 
-unk_80077D50 sCupCleared1CompTexInfo[] = { { 17, aCupCleared1Tex, TEX_WIDTH(aCupCleared1Tex),
-                                             TEX_HEIGHT(aCupCleared1Tex), TEX_COMPRESSED_SIZE(aCupCleared1Tex) },
-                                           { 0 } };
-unk_80077D50 sCupCleared2CompTexInfo[] = { { 17, aCupCleared2Tex, TEX_WIDTH(aCupCleared2Tex),
-                                             TEX_HEIGHT(aCupCleared2Tex), TEX_COMPRESSED_SIZE(aCupCleared2Tex) },
-                                           { 0 } };
-unk_80077D50 sCupCleared3CompTexInfo[] = { { 17, aCupCleared3Tex, TEX_WIDTH(aCupCleared3Tex),
-                                             TEX_HEIGHT(aCupCleared3Tex), TEX_COMPRESSED_SIZE(aCupCleared3Tex) },
-                                           { 0 } };
-unk_80077D50 sCupCleared4CompTexInfo[] = { { 17, aCupCleared4Tex, TEX_WIDTH(aCupCleared4Tex),
-                                             TEX_HEIGHT(aCupCleared4Tex), TEX_COMPRESSED_SIZE(aCupCleared4Tex) },
-                                           { 0 } };
+unk_80077D50 sCupCleared1CompTexInfo[] = COMP_TEX_INFO_DEF(17, aCupCleared1Tex);
+unk_80077D50 sCupCleared2CompTexInfo[] = COMP_TEX_INFO_DEF(17, aCupCleared2Tex);
+unk_80077D50 sCupCleared3CompTexInfo[] = COMP_TEX_INFO_DEF(17, aCupCleared3Tex);
+unk_80077D50 sCupCleared4CompTexInfo[] = COMP_TEX_INFO_DEF(17, aCupCleared4Tex);
 
 unk_80077D50* sCupClearedDifficultyCompTexInfos[] = {
     sCupCleared1CompTexInfo,
@@ -119,29 +85,14 @@ unk_80077D50* sCupClearedDifficultyCompTexInfos[] = {
     sCupCleared4CompTexInfo,
 };
 
-unk_80077D50 sHasGhostMarkerCompTexInfo[] = {
-    { 4, aHasGhostMarkerTex, TEX_WIDTH(aHasGhostMarkerTex), TEX_HEIGHT(aHasGhostMarkerTex), 0 }, { 0 }
-};
-unk_80077D50 sStaffGhostBeatenCompTexInfo[] = { { 17, aStaffGhostBeatenTex, TEX_WIDTH(aStaffGhostBeatenTex),
-                                                  TEX_HEIGHT(aStaffGhostBeatenTex),
-                                                  TEX_COMPRESSED_SIZE(aStaffGhostBeatenTex) },
-                                                { 0 } };
+unk_80077D50 sHasGhostMarkerCompTexInfo[] = COMP_TEX_INFO(4, aHasGhostMarkerTex, 0);
+unk_80077D50 sStaffGhostBeatenCompTexInfo[] = COMP_TEX_INFO_DEF(17, aStaffGhostBeatenTex);
 
-unk_80077D50 sMenuWithGhostCompTexInfo[] = {
-    { 4, aMenuWithGhostTex, TEX_WIDTH(aMenuWithGhostTex), TEX_HEIGHT(aMenuWithGhostTex), 0 }, { 0 }
-};
-unk_80077D50 sMenuWithoutGhostCompTexInfo[] = {
-    { 4, aMenuWithoutGhostTex, TEX_WIDTH(aMenuWithoutGhostTex), TEX_HEIGHT(aMenuWithoutGhostTex), 0 }, { 0 }
-};
-unk_80077D50 sMenuStaffGhostCompTexInfo[] = {
-    { 4, aMenuStaffGhostTex, TEX_WIDTH(aMenuStaffGhostTex), TEX_HEIGHT(aMenuStaffGhostTex), 0 }, { 0 }
-};
-unk_80077D50 sMenuCelebrityGhostCompTexInfo[] = {
-    { 4, aMenuCelebrityGhostTex, TEX_WIDTH(aMenuCelebrityGhostTex), TEX_HEIGHT(aMenuCelebrityGhostTex), 0 }, { 0 }
-};
-unk_80077D50 sMenuChampGhostCompTexInfo[] = {
-    { 4, aMenuChampGhostTex, TEX_WIDTH(aMenuChampGhostTex), TEX_HEIGHT(aMenuChampGhostTex), 0 }, { 0 }
-};
+unk_80077D50 sMenuWithGhostCompTexInfo[] = COMP_TEX_INFO(4, aMenuWithGhostTex, 0);
+unk_80077D50 sMenuWithoutGhostCompTexInfo[] = COMP_TEX_INFO(4, aMenuWithoutGhostTex, 0);
+unk_80077D50 sMenuStaffGhostCompTexInfo[] = COMP_TEX_INFO(4, aMenuStaffGhostTex, 0);
+unk_80077D50 sMenuCelebrityGhostCompTexInfo[] = COMP_TEX_INFO(4, aMenuCelebrityGhostTex, 0);
+unk_80077D50 sMenuChampGhostCompTexInfo[] = COMP_TEX_INFO(4, aMenuChampGhostTex, 0);
 
 unk_80077D50* sTimeAttackGhostOptionCompTexInfos[] = {
     sMenuWithGhostCompTexInfo,      sMenuWithoutGhostCompTexInfo, sMenuStaffGhostCompTexInfo,
@@ -155,9 +106,94 @@ s32 sCourseSelectCupColors[] = {
     255, 255, 100,
     0,   255, 0,
     200, 90,  255,
-    200, 90,  255
+    200, 90,  255,
+#ifdef EXPANSION_KIT
+    200, 90,  255,
+#endif
 };
 // clang-format on
+
+extern s32 gCourseIndex;
+extern s8 gSettingEverythingUnlocked;
+extern s8 gUnlockableLevel;
+
+#ifdef EXPANSION_KIT
+void func_i5_80077D60(void) {
+    s32 var_v0;
+
+    var_v0 = gUnlockableLevel;
+    if ((var_v0 >= 3) || gSettingEverythingUnlocked) {
+        var_v0 = 2;
+    }
+
+    if (var_v0 + 2 < gCupSelectOption) {
+        gCupSelectOption = var_v0 + 2;
+    }
+}
+
+s32 func_i5_80077DAC(s32 cupType) {
+    s32 var_v0;
+
+    var_v0 = gUnlockableLevel;
+
+    if ((var_v0 >= 3) || gSettingEverythingUnlocked) {
+        var_v0 = 2;
+    }
+    if (var_v0 < cupType - 2) {
+        cupType = 6;
+    }
+    return cupType;
+}
+#endif
+
+void CourseSelect_UpdateUnlockedGhosts(void) {
+    GhostInfo ghostInfo;
+    s32 staffTime;
+    s32 timeRecord;
+
+#ifdef EXPANSION_KIT
+    // TODO: move to appropriate functions
+    PRINTF("setup start %d\n");
+    PRINTF("setup end cup:%d, crs:%d\n");
+    PRINTF("ghost time %d:%d:%d\n");
+    PRINTF("GHOET IRU\n");
+    PRINTF("GHOET INAI\n");
+    PRINTF("GHOET INAI2\n");
+    PRINTF("setup end %d\n");
+    PRINTF("");
+#endif
+
+#ifdef EXPANSION_KIT
+    if (sLastCourseIndex < -1) {
+        sLastCourseIndex++;
+        return;
+    }
+#endif
+
+    if (sLastCourseIndex != gCourseIndex) {
+        sStaffGhostTimeBeaten = false;
+#ifndef EXPANSION_KIT
+        if (Save_LoadStaffGhostRecord(&ghostInfo, gCourseIndex) != 0) {
+#else
+        ghostInfo.raceTime = Save_GetDDStaffGhostRecordTime(gCourseIndex);
+        if (ghostInfo.raceTime == -1) {
+#endif
+            sUnlockedGhosts = 1;
+        } else {
+            // Within 115% of staff ghost time
+            timeRecord = gCourseInfos[gCourseIndex].timeRecord[0];
+            if (timeRecord < ((ghostInfo.raceTime * 115) / 100)) {
+                sUnlockedGhosts = 2;
+            } else {
+                sUnlockedGhosts = 1;
+            }
+            if (timeRecord < ghostInfo.raceTime) {
+                sStaffGhostTimeBeaten = true;
+            }
+        }
+        sLastCourseIndex = gCourseIndex;
+    }
+}
 
 #ifdef VERSION_JP
 const char* sTrackSubtitles[] = {
@@ -191,6 +227,26 @@ const char* sTrackSubtitles[] = {
     "",
     "",
     "",
+#ifdef EXPANSION_KIT
+    "アウトサイドループ",
+    "シリンダーループ",
+    "ダイビング",
+    "ジグザグクランク",
+    "エックス",
+    "ジャポン",
+    "スリムハーフパイプ",
+    "ストレートジャンプ",
+    "トラップロード",
+    "180ローリング",
+    "スター",
+    "ビッグフット",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+#endif
     "",
 };
 #else
@@ -231,30 +287,12 @@ const char* sTrackSubtitles[] = {
 
 s8 sGhostOptionTypeMap[] = { 1, 0, 2, 3, 4 };
 
-extern s32 gCourseIndex;
-
-void CourseSelect_UpdateUnlockedGhosts(void) {
-    GhostInfo ghostInfo;
-    s32 pad;
-
-    if (sLastCourseIndex != gCourseIndex) {
-        sStaffGhostTimeBeaten = false;
-        if (Save_LoadStaffGhostRecord(&ghostInfo, gCourseIndex) != 0) {
-            sUnlockedGhosts = 1;
-        } else {
-            // Within 115% of staff ghost time
-            if (gCourseInfos[gCourseIndex].timeRecord[0] < ((ghostInfo.raceTime * 115) / 100)) {
-                sUnlockedGhosts = 2;
-            } else {
-                sUnlockedGhosts = 1;
-            }
-            if (gCourseInfos[gCourseIndex].timeRecord[0] < ghostInfo.raceTime) {
-                sStaffGhostTimeBeaten = true;
-            }
-        }
-        sLastCourseIndex = gCourseIndex;
-    }
-}
+#ifdef EXPANSION_KIT
+s8 D_i5_8007BDF0[] = {
+    11, 10, 12, 0, 0, 11, 10, 10, 12, 0, 11, 11, 10, 12, 12, 0,  1,  0,
+    2,  1,  0,  3, 2, 1,  3,  0,  0,  0, 11, 11, 10, 0,  12, 10, 12,
+};
+#endif
 
 extern char* gCurrentTrackName;
 extern char* gTrackNames[];
@@ -267,39 +305,84 @@ extern s16 D_800CCFE8;
 extern s32 gSelectedMode;
 extern s32 gLastCourseSelectCourseIndex;
 extern s32 gLastRecordsCourseIndex;
-extern s8 gUnlockableLevel;
-extern s8 gSettingEverythingUnlocked;
 extern s32 gCurrentGhostType;
 extern s32 gGameMode;
+extern s8 D_8079FB28[];
 
 void CourseSelect_Init(void) {
-    s32 var_a1;
-    s32 var_a2;
-    s32 var_v0;
+    s32 i;
+    s32 j;
+    s32 k;
+    s8* cupCompletion;
+    bool var_a1;
     s32 var_v1;
 
     D_800CCFE8 = 3;
+#ifdef EXPANSION_KIT
+    sCourseSelectState = COURSE_SELECT_CUP_SELECT;
+#endif
     sSelectedGhostOption = sGhostOptionTypeMap[gCurrentGhostType];
     sLastCourseIndex = -1;
-    if (gGameMode == GAMEMODE_FLX_COURSE_SELECT) {
-        var_v0 = gLastCourseSelectCourseIndex;
-    } else {
-        var_v0 = gLastRecordsCourseIndex;
+
+#ifdef EXPANSION_KIT
+    for (i = 0; i < 42; i++) {
+        D_i5_8007B9EC[i] = 0;
     }
-    if (var_v0 >= COURSE_X_1) {
+
+    cupCompletion = Arena_Allocate(ALLOC_FRONT, 4 * 30 * 7);
+    Save_UpdateCupSave(cupCompletion);
+
+    for (i = 0; i < 2; i++) {
+        var_a1 = false;
+        for (j = 3; j >= 0; j--) {
+            for (k = 0; k < 30; k++) {
+                if (((s8*) cupCompletion)[(j * 30 * 7) + (k * 7) + i + 5] != 0) {
+                    var_a1 = true;
+                    break;
+                }
+            }
+
+            if (var_a1) {
+                break;
+            }
+        }
+
+        if (var_a1) {
+            D_8079FB28[i] = j + 1;
+        } else {
+            D_8079FB28[i] = 0;
+        }
+    }
+    D_i5_8007C2AF = -1;
+#endif
+
+    if (gGameMode == GAMEMODE_FLX_COURSE_SELECT) {
+        k = gLastCourseSelectCourseIndex;
+    } else {
+        k = gLastRecordsCourseIndex;
+    }
+    if (k >= COURSE_X_1) {
         gCupSelectOption = 4;
         sCourseSelectTrackNo = 0;
         gCourseIndex = COURSE_X_1;
     } else {
-        sCourseSelectTrackNo = var_v0 % 6;
-        if (var_v0 >= COURSE_EDIT_1) {
+        sCourseSelectTrackNo = k % 6;
+        if (k >= COURSE_EDIT_1) {
+#ifndef EXPANSION_KIT
             gCupSelectOption = 10;
+#else
+            gCupSelectOption = (k / 6) + 6;
+            if (gCupSelectOption >= 13) {
+                gCupSelectOption = 10;
+            }
+#endif
         } else {
-            gCupSelectOption = var_v0 / 6;
+            gCupSelectOption = k / 6;
         }
-        gCourseIndex = var_v0;
+        gCourseIndex = k;
     }
     CourseSelect_UpdateUnlockedGhosts();
+#ifndef EXPANSION_KIT
     var_v1 = gUnlockableLevel;
     if ((var_v1 >= 3) || gSettingEverythingUnlocked) {
         var_v1 = 2;
@@ -308,14 +391,27 @@ void CourseSelect_Init(void) {
     if (var_v1 + 2 < gCupSelectOption) {
         gCupSelectOption = var_v1 + 2;
     }
+#else
+    if (gCupSelectOption < 10) {
+        func_i5_80077D60();
+    }
+#endif
     if ((gCupSelectOption == 4) &&
         ((gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) || (gSelectedMode == MODE_TIME_ATTACK))) {
         gCupSelectOption = 3;
     }
     if (gCupSelectOption >= 10) {
-        sCourseSelectCup = 4;
+#ifdef EXPANSION_KIT
+        if (gCupSelectOption == 10) {
+#endif
+            sCourseSelectCup = 4;
+#ifdef EXPANSION_KIT
+        } else {
+            sCourseSelectCup = gCupSelectOption - 6;
+        }
+#endif
     } else if (gCupSelectOption == 4) {
-        sCourseSelectCup = 5;
+        sCourseSelectCup = NUM_COMPETITIVE_CUPS;
     } else {
         sCourseSelectCup = gCupSelectOption;
     }
@@ -324,15 +420,20 @@ void CourseSelect_Init(void) {
     Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
     Object_Init(OBJECT_COURSE_SELECT_BACKGROUND, 0, 0, 2);
     if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
-        var_a1 = 80;
-        var_a2 = 17;
+        i = 80;
+        j = 17;
     } else {
-        var_a1 = 112;
-        var_a2 = 21;
+        i = 112;
+        j = 21;
     }
-    Object_Init(OBJECT_COURSE_SELECT_HEADER, var_a1, var_a2, 4);
+    Object_Init(OBJECT_COURSE_SELECT_HEADER, i, j, 4);
     Object_Init(OBJECT_COURSE_SELECT_OK, 0, 0, 10);
     Object_Init(OBJECT_COURSE_SELECT_MODEL, 0, 0, 8);
+#ifdef EXPANSION_KIT
+    Object_Init(OBJECT_COURSE_SELECT_CUP_7, 128, 0, 6);
+    Object_Init(OBJECT_COURSE_SELECT_CUP_5, 128, 0, 6);
+    Object_Init(OBJECT_COURSE_SELECT_CUP_6, 128, 0, 6);
+#endif
     if ((gSettingEverythingUnlocked || (gUnlockableLevel >= 2)) && (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) &&
         (gSelectedMode != MODE_TIME_ATTACK)) {
         Object_Init(OBJECT_COURSE_SELECT_CUP_4, 0, -100, 6);
@@ -368,16 +469,28 @@ void NextCourseSelect_Init(void) {
     } else {
         sCourseSelectTrackNo = gCourseIndex % 6;
         if (gCourseIndex >= COURSE_EDIT_1) {
+#ifndef EXPANSION_KIT
             gCupSelectOption = 10;
+#else
+            gCupSelectOption = (gCourseIndex / 6) + 6;
+#endif
         } else {
             gCupSelectOption = gCourseIndex / 6;
         }
     }
     func_i5_80116910();
     if (gCupSelectOption >= 10) {
-        sCourseSelectCup = 4;
+#ifdef EXPANSION_KIT
+        if (gCupSelectOption == 10) {
+#endif
+            sCourseSelectCup = 4;
+#ifdef EXPANSION_KIT
+        } else {
+            sCourseSelectCup = gCupSelectOption - 6;
+        }
+#endif
     } else if (gCupSelectOption == 4) {
-        sCourseSelectCup = 5;
+        sCourseSelectCup = NUM_COMPETITIVE_CUPS;
     } else {
         sCourseSelectCup = gCupSelectOption;
     }
@@ -386,7 +499,11 @@ void NextCourseSelect_Init(void) {
     Object_Init(OBJECT_COURSE_SELECT_BACKGROUND, 0, 0, 2);
     Object_Init(OBJECT_COURSE_SELECT_MODEL, 0, 0, 8);
     if (gCupSelectOption >= 10) {
+#ifndef EXPANSION_KIT
         Object_Init(OBJECT_COURSE_SELECT_CUP_5, 0, -100, 6);
+#else
+        Object_Init(OBJECT_COURSE_SELECT_CUP_5 + gCupSelectOption - 10, 0, -100, 6);
+#endif
     } else {
         Object_Init(OBJECT_COURSE_SELECT_CUP_0 + gCupSelectOption, 0, -100, 6);
     }
@@ -400,13 +517,30 @@ extern u16 gInputPressed;
 extern u16 gInputButtonPressed;
 extern Camera gCameras[];
 extern s32 gTransitionState;
+extern char gEditCupTrackNames[][9];
 
 s32 CourseSelect_Update(void) {
-    s32 pad[2];
     s32 originalCupSelectOption;
-    s8 originalSelectedGhostOption;
-    s32 unlockedGhost;
+    bool sp110;
     s32 var_v1;
+    s8 originalSelectedGhostOption;
+#ifdef EXPANSION_KIT
+    s32 i;
+    s32 temp_lo;
+    s32 j;
+    CourseInfo* courseInfo;
+    GhostRecord ghostRecords[3];
+    bool var_v1_2;
+#endif
+    s32 unlockedGhost;
+
+#ifdef EXPANSION_KIT
+    if (Object_Get(OBJECT_COURSE_SELECT_CUP_5) != NULL) {
+        sp110 = true;
+    } else {
+        sp110 = false;
+    }
+#endif
 
     Camera_Update();
     if (gTransitionState != TRANSITION_INACTIVE) {
@@ -420,6 +554,42 @@ s32 CourseSelect_Update(void) {
         case COURSE_SELECT_CUP_SELECT:
             D_i5_801190D0 = 1;
             originalCupSelectOption = gCupSelectOption;
+
+#ifdef EXPANSION_KIT
+            if (sp110) {
+                var_v1 = gUnlockableLevel;
+                if ((var_v1 >= 3) || gSettingEverythingUnlocked) {
+                    var_v1 = 2;
+                }
+
+                if ((var_v1 == 2) &&
+                    ((gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) || (gSelectedMode == MODE_TIME_ATTACK))) {
+                    var_v1 = 1;
+                }
+
+                if (gInputPressed & BTN_DOWN) {
+                    if (gCupSelectOption < 10) {
+                        if (D_i5_8007C2AF >= 10) {
+                            gCupSelectOption = D_i5_8007C2AF;
+                        } else {
+                            gCupSelectOption = D_i5_8007BDF0[var_v1 * 5 + gCupSelectOption];
+                        }
+                        D_i5_8007C2AF = originalCupSelectOption;
+                    }
+                } else if (gInputPressed & BTN_UP) {
+                    if (gCupSelectOption >= 10) {
+                        if ((D_i5_8007C2AF < 10) && (D_i5_8007C2AF >= 0)) {
+                            gCupSelectOption = D_i5_8007C2AF;
+                        } else {
+                            // FAKE!
+                            gCupSelectOption = D_i5_8007BDF0[(var_v1 & 0xFFFFFFFF) * 3 + gCupSelectOption + 6];
+                        }
+                        D_i5_8007C2AF = originalCupSelectOption;
+                    }
+                }
+            }
+#endif
+
             if (gCupSelectOption < 10) {
                 if ((gInputPressed & BTN_LEFT) && (gCupSelectOption > 0)) {
                     gCupSelectOption--;
@@ -427,6 +597,7 @@ s32 CourseSelect_Update(void) {
                 if ((gInputPressed & BTN_RIGHT) && (gCupSelectOption < 4)) {
                     gCupSelectOption++;
                 }
+#ifndef EXPANSION_KIT
                 var_v1 = gUnlockableLevel;
                 if ((var_v1 >= 3) || gSettingEverythingUnlocked) {
                     var_v1 = 2;
@@ -435,21 +606,46 @@ s32 CourseSelect_Update(void) {
                 if (var_v1 + 2 < gCupSelectOption) {
                     gCupSelectOption = var_v1 + 2;
                 }
+#else
+                func_i5_80077D60();
+#endif
                 if ((gCupSelectOption == 4) &&
                     ((gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) || (gSelectedMode == MODE_TIME_ATTACK))) {
                     gCupSelectOption = 3;
                 }
+#ifdef EXPANSION_KIT
+            } else {
+                if (gInputPressed & BTN_LEFT) {
+                    gCupSelectOption = D_i5_8007BDF0[gCupSelectOption + 18];
+                }
+                if (gInputPressed & BTN_RIGHT) {
+                    gCupSelectOption = D_i5_8007BDF0[gCupSelectOption + 22];
+                }
+#endif
             }
             if (gCupSelectOption >= 10) {
-                sCourseSelectCup = 4;
+#ifdef EXPANSION_KIT
+                if (gCupSelectOption == 10) {
+#endif
+                    sCourseSelectCup = 4;
+#ifdef EXPANSION_KIT
+                } else {
+                    sCourseSelectCup = gCupSelectOption - 6;
+                }
+#endif
             } else if (gCupSelectOption == 4) {
-                sCourseSelectCup = 5;
+                sCourseSelectCup = NUM_COMPETITIVE_CUPS;
             } else {
                 sCourseSelectCup = gCupSelectOption;
             }
             if (originalCupSelectOption != gCupSelectOption) {
+#ifdef EXPANSION_KIT
+                if (gInputPressed & (BTN_LEFT | BTN_RIGHT)) {
+                    D_i5_8007C2AF = -1;
+                }
+#endif
                 sCourseSelectTrackNo = 0;
-                if (sCourseSelectCup <= 4) {
+                if (sCourseSelectCup < NUM_COMPETITIVE_CUPS) {
                     CourseModel_Init(sCourseSelectCup);
                 }
                 Audio_TriggerSystemSE(NA_SE_30);
@@ -457,10 +653,18 @@ s32 CourseSelect_Update(void) {
             if (gCupSelectOption < 10) {
                 gCupType = gCupSelectOption;
             } else {
+#ifndef EXPANSION_KIT
                 gCupType = EDIT_CUP;
+#else
+                gCupType = gCupSelectOption - 5;
+#endif
             }
             if (gCupSelectOption >= 10) {
+#ifndef EXPANSION_KIT
                 gCourseIndex = sCourseSelectTrackNo + COURSE_EDIT_1;
+#else
+                gCourseIndex = (sCourseSelectCup * 6) + sCourseSelectTrackNo;
+#endif
             } else if (gCupSelectOption == 4) {
                 gCourseIndex = COURSE_X_1;
             } else {
@@ -474,6 +678,9 @@ s32 CourseSelect_Update(void) {
                 } else {
                     gLastRecordsCourseIndex = gCourseIndex;
                     sCourseSelectState = COURSE_SELECT_EXIT_RECORDS;
+#ifdef EXPANSION_KIT
+                    Audio_RomBgmReady(BGM_SELECT);
+#endif
                     gMenuChangeMode = MENU_CHANGE_EXIT_RECORDS;
                 }
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
@@ -483,7 +690,11 @@ s32 CourseSelect_Update(void) {
                     sCourseSelectState = COURSE_SELECT_AWAIT_OK;
                 } else if (gSelectedMode == MODE_GP_RACE) {
                     if (gCupSelectOption >= 10) {
+#ifndef EXPANSION_KIT
                         gCourseIndex = COURSE_EDIT_1;
+#else
+                        gCourseIndex = sCourseSelectCup * 6;
+#endif
                     } else {
                         gCourseIndex = gCupSelectOption * 6;
                     }
@@ -491,13 +702,48 @@ s32 CourseSelect_Update(void) {
                     sCourseSelectState = COURSE_SELECT_AWAIT_OK;
                 } else {
                     sCourseSelectState = COURSE_SELECT_CHOOSE_COURSE;
+#ifdef EXPANSION_KIT
+                    if ((gSelectedMode == MODE_TIME_ATTACK) && (gCupSelectOption < 10)) {
+                        temp_lo = gCupSelectOption * 6;
+
+                        if (D_i5_8007C2A8[temp_lo / 6] == 0) {
+                            for (i = temp_lo; i < temp_lo + 6; i++) {
+                                courseInfo = &gCourseInfos[i];
+                                DDSave_LoadCourseGhostRecords(i, ghostRecords);
+                                D_i5_8007B9EC[i] = 0;
+                                for (j = 0; j < 3; j++) {
+                                    if (courseInfo->encodedCourseIndex == 0) {
+                                        break;
+                                    }
+                                    if (courseInfo->encodedCourseIndex == ghostRecords[j].encodedCourseIndex) {
+                                        D_i5_8007B9EC[i] |= 1;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        D_i5_8007C2A8[temp_lo / 6] = 1;
+                    } else {
+                        sLastCourseIndex = -3;
+                    }
+#endif
                 }
                 OBJECT_LEFT(Object_Get(OBJECT_COURSE_SELECT_MODEL)) = 400 - (sCourseSelectTrackNo * 0x500);
             }
             break;
         case COURSE_SELECT_CHOOSE_COURSE:
             D_i5_801190D0 = 1;
+#ifndef EXPANSION_KIT
             if ((gSelectedMode == MODE_TIME_ATTACK) && (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT)) {
+#else
+
+            var_v1_2 = false;
+            if ((gSelectedMode == MODE_TIME_ATTACK) && (gCupType == EDIT_CUP) &&
+                (gEditCupTrackNames[gCourseIndex - COURSE_EDIT_1][0] == '\0')) {
+                var_v1_2 = true;
+            }
+            if ((gSelectedMode == MODE_TIME_ATTACK) && (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) && !var_v1_2) {
+#endif
                 unlockedGhost = sUnlockedGhosts;
                 originalSelectedGhostOption = sSelectedGhostOption;
                 if ((gInputPressed & BTN_UP) && (sSelectedGhostOption > 0)) {
@@ -529,7 +775,11 @@ s32 CourseSelect_Update(void) {
                 Audio_TriggerSystemSE(NA_SE_30);
             }
             if (gCupSelectOption >= 10) {
+#ifndef EXPANSION_KIT
                 gCourseIndex = sCourseSelectTrackNo + COURSE_EDIT_1;
+#else
+                gCourseIndex = (sCourseSelectCup * 6) + sCourseSelectTrackNo;
+#endif
             } else {
                 gCourseIndex = (gCupSelectOption * 6) + sCourseSelectTrackNo;
             }
@@ -537,9 +787,18 @@ s32 CourseSelect_Update(void) {
                 sCourseSelectState = COURSE_SELECT_CUP_SELECT;
                 Audio_TriggerSystemSE(NA_SE_16);
             } else if (gInputButtonPressed & (BTN_A | BTN_START)) {
-                Audio_TriggerSystemSE(NA_SE_33);
-                sCourseSelectState = COURSE_SELECT_AWAIT_OK;
-                D_i5_801190D0 = 0;
+#ifdef EXPANSION_KIT
+                if ((gSelectedMode == MODE_TIME_ATTACK) && (gCupType == EDIT_CUP) &&
+                    (gEditCupTrackNames[gCourseIndex - COURSE_EDIT_1][0] == '\0')) {
+                    Audio_TriggerSystemSE(NA_SE_32);
+                } else {
+#endif
+                    Audio_TriggerSystemSE(NA_SE_33);
+                    sCourseSelectState = COURSE_SELECT_AWAIT_OK;
+                    D_i5_801190D0 = 0;
+#ifdef EXPANSION_KIT
+                }
+#endif
             }
             break;
         case COURSE_SELECT_AWAIT_OK:
@@ -578,11 +837,19 @@ s32 CourseSelect_Update(void) {
     }
 
     func_i5_80116910();
+#ifdef EXPANSION_KIT
+    func_8070D220();
+#endif
     return gGameMode;
 }
 
 s32 NextCourseSelect_Update(void) {
     Camera_Update();
+#ifdef EXPANSION_KIT
+    if (gTransitionState != TRANSITION_INACTIVE) {
+        return gGameMode;
+    }
+#endif
     Controller_SetGlobalInputs(&gSharedController);
     D_i5_801190D0 = 1;
     switch (sCourseSelectState) {
@@ -597,6 +864,9 @@ s32 NextCourseSelect_Update(void) {
         default:
             break;
     }
+#ifdef EXPANSION_KIT
+    func_8070D220();
+#endif
     return gGameMode;
 }
 
@@ -612,13 +882,13 @@ void CourseSelect_BackgroundInit(Object* backgroundObj) {
 
     OBJECT_STATE(backgroundObj) = D_800CD3C4;
     sp20 = sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)];
-    func_80077D50(sp20, 0);
+    func_80077D50_impl(sp20, 0, true);
 
     if (OBJECT_STATE(backgroundObj) == 0) {
         OBJECT_LEFT(backgroundObj) = 8;
     }
     if (gGameMode == GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
-        func_80077D50(sOptionsFalconHelmetCompTexInfo, 0);
+        func_80077D50_impl(sOptionsFalconHelmetCompTexInfo, 0, true);
         if (OBJECT_STATE(backgroundObj) == 0) {
             size = 0x23A00;
         } else {
@@ -633,14 +903,16 @@ void CourseSelect_ModelInit(void) {
     s32 i;
 
     func_i5_80115DF0();
-    if (sCourseSelectCup <= 4) {
+    if (sCourseSelectCup < NUM_COMPETITIVE_CUPS) {
         CourseModel_Init(sCourseSelectCup);
+#ifndef EXPANSION_KIT
         D_i5_801190B4 -= 2;
 
         for (i = 0; i < 6; i++) {
             func_i5_80116678(gCourseModelCupType);
             D_i5_801190B4--;
         }
+#endif
     }
 }
 
@@ -651,6 +923,7 @@ void CourseSelect_CupInit(Object* cupObj) {
 
     cupType = cupObj->cmdId - OBJECT_COURSE_SELECT_CUP_0;
     if (cupType == JOKER_CUP || cupType == X_CUP) {
+#ifndef EXPANSION_KIT
         var_v0 = gUnlockableLevel;
         if ((var_v0 >= 3) || gSettingEverythingUnlocked) {
             var_v0 = 2;
@@ -658,11 +931,23 @@ void CourseSelect_CupInit(Object* cupObj) {
         if (var_v0 < (cupType - 2)) {
             cupType = 6;
         }
+#else
+        cupType = func_i5_80077DAC(cupType);
+#endif
     }
-    func_80077D50(sCupSelectCompTexInfos[cupType], 0);
+
+#ifdef EXPANSION_KIT
+    if (cupType >= DD_1_CUP) {
+        func_i2_800AE578(sCupSelectCompTexInfos[cupType], false);
+    } else {
+#endif
+        func_80077D50_impl(sCupSelectCompTexInfos[cupType], 0, false);
+#ifdef EXPANSION_KIT
+    }
+#endif
 
     for (i = 0; i < 4; i++) {
-        func_80077D50(sCupClearedDifficultyCompTexInfos[i], 0);
+        func_80077D50_impl(sCupClearedDifficultyCompTexInfos[i], 0, true);
     }
 
     if (gGameModeChangeState == GAMEMODE_CHANGE_INSTANT(GAMEMODE_CHANGE_INIT)) {
@@ -674,28 +959,32 @@ void CourseSelect_CupInit(Object* cupObj) {
 
 void CourseSelect_HeaderInit(Object* headerObj) {
     if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
-        func_80077D50(sSelectCourseCompTexInfo, 0);
+        func_80077D50_impl(sSelectCourseCompTexInfo, 0, true);
         OBJECT_COUNTER(headerObj) = 12;
     } else {
-        func_80077D50(sRecordsCompTexInfo, 0);
+        func_80077D50_impl(sRecordsCompTexInfo, 0, true);
     }
 }
 
 void CourseSelect_OkInit(Object* okObj) {
-    func_80077D50(sOKCompTexInfo, 0);
+    func_80077D50_impl(sOKCompTexInfo, 0, true);
     OBJECT_LEFT(okObj) = 50;
 }
 
 void CourseSelect_ArrowsInit(Object* arrowsObj) {
-    func_80077D50(sYellowArrowCompTexInfo, 0);
+    func_80077D50_impl(sYellowArrowCompTexInfo, 0, true);
     LEFT_ARROW_ROTATION_CHANGE(arrowsObj) = 0x80;
     RIGHT_ARROW_ROTATION_CHANGE(arrowsObj) = 0x80;
 }
 
 void CourseSelect_GhostMarkerInit(Object* ghostMarkerObj) {
     GhostInfo ghostInfo;
-    s32 pad;
+#ifdef EXPANSION_KIT
+    s32 pad[50];
+#endif
+    s32 i;
 
+#ifndef EXPANSION_KIT
     if (Save_LoadGhostInfo(&ghostInfo) != 0) {
         ghostMarkerObj->cmdId = OBJECT_FREE;
     }
@@ -704,16 +993,27 @@ void CourseSelect_GhostMarkerInit(Object* ghostMarkerObj) {
     }
     OBJECT_LEFT(ghostMarkerObj) += (ghostInfo.courseIndex % 6) * SCREEN_WIDTH;
     GHOST_MARKER_COURSE(ghostMarkerObj) = ghostInfo.courseIndex;
-    func_80077D50(sHasGhostMarkerCompTexInfo, 0);
+#else
+    for (i = 0; i < 7; i++) {
+        D_i5_8007C2A8[i] = 0;
+    }
+
+    GHOST_MARKER_COURSE(ghostMarkerObj) = -1;
+    if ((Save_LoadGhostInfo(&ghostInfo) == 0) && (ghostInfo.encodedCourseIndex != 0)) {
+        GHOST_MARKER_COURSE(ghostMarkerObj) = ghostInfo.courseIndex;
+    }
+#endif
+
+    func_80077D50_impl(sHasGhostMarkerCompTexInfo, 0, true);
 }
 
 void CourseSelect_GhostOptionInit(Object* ghostOptionObj) {
     s32 i;
 
-    func_80077D50(sStaffGhostBeatenCompTexInfo, 0);
+    func_80077D50_impl(sStaffGhostBeatenCompTexInfo, 0, true);
 
     for (i = 0; i < 5; i++) {
-        func_80077D50(sTimeAttackGhostOptionCompTexInfos[i], 0);
+        func_80077D50_impl(sTimeAttackGhostOptionCompTexInfos[i], 0, true);
     }
 
     OBJECT_LEFT(ghostOptionObj) = 150;
@@ -723,13 +1023,13 @@ Gfx* CourseSelect_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
 
     if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         gDPSetPrimColor(gfx++, 0, 0, 75, 75, 75, 180);
-        gfx = func_80078EA0(gfx, sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], OBJECT_LEFT(backgroundObj),
-                            OBJECT_TOP(backgroundObj), 1, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)],
+                                 OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 1, 0, 0, 1.0f, 1.0f, true);
     } else {
-        gfx = func_80078EA0(gfx, sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], OBJECT_LEFT(backgroundObj),
-                            OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f);
-        gfx = func_80078EA0(gfx, sOptionsFalconHelmetCompTexInfo, 53, 4, 2, 1, 0, 1.0f, 1.0f);
-        gfx = func_80078EA0(gfx, sOptionsFalconHelmetCompTexInfo, 203, 4, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)],
+                                 OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f, true);
+        gfx = func_80078EA0_impl(gfx, sOptionsFalconHelmetCompTexInfo, 53, 4, 2, 1, 0, 1.0f, 1.0f, true);
+        gfx = func_80078EA0_impl(gfx, sOptionsFalconHelmetCompTexInfo, 203, 4, 0, 0, 0, 1.0f, 1.0f, true);
     }
     return gfx;
 }
@@ -742,7 +1042,7 @@ Gfx* CourseSelect_ModelDraw(Gfx* gfx, Object* modelObj) {
         case COURSE_SELECT_CONTINUE:
         case COURSE_SELECT_NEXT_COURSE_AWAIT_INPUT:
         case COURSE_SELECT_NEXT_COURSE_CONTINUE:
-            if (sCourseSelectCup <= 4) {
+            if (sCourseSelectCup < NUM_COMPETITIVE_CUPS) {
                 gfx = func_i5_80115E64(gfx);
             }
             break;
@@ -757,21 +1057,28 @@ extern u32 gGameFrameCount;
 extern s8 gCupNumDifficultiesCleared[];
 
 Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
+    s32 spA4;
     s32 i;
-    s32 alpha;
     s32 cupDifficultiesCleared;
     s32 cupOption;
+    s32 alpha;
+#ifdef EXPANSION_KIT
     s32 var_v0;
+#endif
     s32 yOffset;
     s32 greyness;
 
-    i = cupObj->cmdId - OBJECT_COURSE_SELECT_CUP_0;
+    spA4 = cupObj->cmdId - OBJECT_COURSE_SELECT_CUP_0;
     if (gCupSelectOption >= 10) {
+#ifndef EXPANSION_KIT
         cupOption = EDIT_CUP;
+#else
+        cupOption = gCupSelectOption - 5;
+#endif
     } else {
         cupOption = gCupSelectOption;
     }
-    if (cupOption == i) {
+    if (cupOption == spA4) {
         if ((sCourseSelectState == COURSE_SELECT_CUP_SELECT) || (sCourseSelectState == COURSE_SELECT_EXIT_RECORDS)) {
             greyness = gGameFrameCount;
             greyness %= 30U;
@@ -783,7 +1090,26 @@ Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
     } else {
-        gDPSetPrimColor(gfx++, 0, 0, 100, 100, 100, 255);
+#ifndef EXPANSION_KIT
+        alpha = 255;
+#else
+        if (cupOption >= 5) {
+            if (gSelectedMode == 0) {
+                var_v0 = 49;
+            } else {
+                var_v0 = 45;
+            }
+
+            alpha = ((OBJECT_TOP(cupObj) - var_v0) * 300) / (85 - var_v0);
+            if (alpha > 255) {
+                alpha = 255;
+                if (1) {}
+            }
+        } else {
+            alpha = 255;
+        }
+#endif
+        gDPSetPrimColor(gfx++, 0, 0, 100, 100, 100, alpha);
     }
 
     switch (sCourseSelectState) {
@@ -806,39 +1132,61 @@ Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
         OBJECT_COUNTER(cupObj) = 0;
     }
 
-    cupDifficultiesCleared = gCupNumDifficultiesCleared[i];
+    cupDifficultiesCleared = gCupNumDifficultiesCleared[spA4];
     yOffset = (SQ(OBJECT_COUNTER(cupObj)) * 3) / 2;
 
-    switch (i) {
+    switch (spA4) {
         case JOKER_CUP:
         case X_CUP:
-            var_v0 = gUnlockableLevel;
-            if ((var_v0 >= 3) || gSettingEverythingUnlocked) {
-                var_v0 = 2;
+#ifndef EXPANSION_KIT
+            i = gUnlockableLevel;
+            if ((i >= 3) || gSettingEverythingUnlocked) {
+                i = 2;
             }
-            if (var_v0 < (i - 2)) {
-                i = 6;
+            if (i < (spA4 - 2)) {
+                spA4 = 6;
             }
+#else
+            spA4 = func_i5_80077DAC(spA4);
+#endif
             break;
     }
 
-    gfx = func_80078EA0(gfx, sCupSelectCompTexInfos[i], OBJECT_LEFT(cupObj), OBJECT_TOP(cupObj) + yOffset, 1, 0, 0,
-                        1.0f, 1.0f);
+    gfx = func_80078EA0_impl(gfx, sCupSelectCompTexInfos[spA4], OBJECT_LEFT(cupObj), OBJECT_TOP(cupObj) + yOffset, 1, 0,
+                             0, 1.0f, 1.0f, false);
 
-    if ((gSelectedMode == MODE_GP_RACE) && (i <= JOKER_CUP)) {
+    if ((gSelectedMode == MODE_GP_RACE) && (spA4 <= JOKER_CUP)) {
         alpha = ((OBJECT_TOP(cupObj) - 49) * 255) / 36;
-        if (cupOption == i) {
+        if (cupOption == spA4) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, alpha);
         }
 
         for (i = 0; i < cupDifficultiesCleared; i++) {
-            gfx = func_80078EA0(gfx, sCupClearedDifficultyCompTexInfos[i],
-                                OBJECT_LEFT(cupObj) + (i * 16) + ((12 - i * 8) / 2),
-                                (OBJECT_TOP(cupObj) + yOffset) - 12, 1, 0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sCupClearedDifficultyCompTexInfos[i],
+                                     OBJECT_LEFT(cupObj) + (i * 16) + ((12 - i * 8) / 2),
+                                     (OBJECT_TOP(cupObj) + yOffset) - 12, 1, 0, 0, 1.0f, 1.0f, true);
         }
     }
+
+#ifdef EXPANSION_KIT
+    cupDifficultiesCleared = D_8079FB28[spA4 - DD_1_CUP];
+    if ((gSelectedMode == MODE_GP_RACE) && (spA4 >= DD_1_CUP)) {
+        alpha = ((OBJECT_TOP(cupObj) - 49) * 255) / 121;
+        if (cupOption == spA4) {
+            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+        } else {
+            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, alpha);
+        }
+
+        for (i = 0; i < cupDifficultiesCleared; i++) {
+            gfx = func_80078EA0_impl(gfx, sCupClearedDifficultyCompTexInfos[i],
+                                     OBJECT_LEFT(cupObj) + (i * 16) + ((12 - i * 8) / 2),
+                                     (OBJECT_TOP(cupObj) + yOffset) - 9, 1, 0, 0, 1.0f, 1.0f, true);
+        }
+    }
+#endif
     return gfx;
 }
 
@@ -868,19 +1216,19 @@ Gfx* CourseSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
         }
         yOffset = (SQ(OBJECT_COUNTER(headerObj)) * 3) / 2;
 
-        gfx = func_80078EA0(gfx, sSelectCourseCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj) + yOffset, 0,
-                            0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sSelectCourseCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj) + yOffset,
+                                 0, 0, 0, 1.0f, 1.0f, true);
     } else {
-        gfx =
-            func_80078EA0(gfx, sRecordsCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sRecordsCompTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0, 0, 0, 1.0f,
+                                 1.0f, true);
     }
     return gfx;
 }
 
 Gfx* CourseSelect_OkDraw(Gfx* gfx, Object* okObj) {
     gfx = func_8007DB28(gfx, 0);
-    return func_80078EA0(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f,
-                         1.0f);
+    return func_80078EA0_impl(gfx, sOKCompTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1, 0, 0, 1.0f,
+                              1.0f, true);
 }
 
 Gfx* CourseSelect_ArrowsDraw(Gfx* gfx, Object* arrowsObj) {
@@ -888,10 +1236,10 @@ Gfx* CourseSelect_ArrowsDraw(Gfx* gfx, Object* arrowsObj) {
     f32 temp_fa1 = (SIN(RIGHT_ARROW_ROTATION(arrowsObj)) + 1.0) / 2;
 
     // left and top represent x positions for left and right arrows for this object
-    gfx = func_80078EA0(gfx, sYellowArrowCompTexInfo, LEFT_ARROW_LEFT(arrowsObj) + 0x2B,
-                        (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0, 0, 1.0f, temp_fv0);
-    return func_80078EA0(gfx, sYellowArrowCompTexInfo, RIGHT_ARROW_LEFT(arrowsObj) + 0xF5,
-                         (((1.0 - temp_fa1) * 16.0) + 112.0), 5, 0, 0, 1.0f, temp_fa1);
+    gfx = func_80078EA0_impl(gfx, sYellowArrowCompTexInfo, LEFT_ARROW_LEFT(arrowsObj) + 0x2B,
+                             (((1.0 - temp_fv0) * 16.0) + 112.0), 3, 0, 0, 1.0f, temp_fv0, true);
+    return func_80078EA0_impl(gfx, sYellowArrowCompTexInfo, RIGHT_ARROW_LEFT(arrowsObj) + 0xF5,
+                              (((1.0 - temp_fa1) * 16.0) + 112.0), 5, 0, 0, 1.0f, temp_fa1, true);
 }
 
 Gfx* CourseSelect_NameDraw(Gfx* gfx) {
@@ -899,6 +1247,31 @@ Gfx* CourseSelect_NameDraw(Gfx* gfx) {
     s32 cupTrackNoWidth;
     s32 trackNameWidth;
     s32* cupColors;
+#ifdef EXPANSION_KIT
+    s32 greyFactor;
+
+    greyFactor = 1;
+    if ((gSelectedMode == MODE_TIME_ATTACK) && (gCupType == EDIT_CUP) &&
+        (gEditCupTrackNames[gCourseIndex - COURSE_EDIT_1][0] == '\0')) {
+        greyFactor = 2;
+        switch (sCourseSelectState) {
+            case COURSE_SELECT_CUP_SELECT:
+            case COURSE_SELECT_EXIT_RECORDS:
+            case COURSE_SELECT_START_EXIT:
+            case COURSE_SELECT_EXIT:
+            case COURSE_SELECT_NEXT_COURSE_AWAIT_INPUT:
+            case COURSE_SELECT_NEXT_COURSE_CONTINUE:
+                break;
+            default:
+                if ((gGameFrameCount / 15) % 4) {
+                    gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+                    gfx = Font_DrawString(gfx, 160 - (Font_GetStringWidth("センタク デキマセン", 4, 0) / 2), 0x84,
+                                          "センタク デキマセン", 0, 4, 0);
+                }
+                break;
+        }
+    }
+#endif
 
     switch (sCourseSelectState) {
         case COURSE_SELECT_CUP_SELECT:
@@ -914,7 +1287,7 @@ Gfx* CourseSelect_NameDraw(Gfx* gfx) {
             cupTrackNoStr[2] = ' ';
             cupTrackNoStr[3] = '\0';
             cupTrackNoWidth = Font_GetStringWidth(cupTrackNoStr, FONT_SET_3, 0);
-            if (sCourseSelectCup == 5) {
+            if (sCourseSelectCup == NUM_COMPETITIVE_CUPS) {
                 trackNameWidth = Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 0);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
                 gfx = Font_DrawString(
@@ -930,7 +1303,11 @@ Gfx* CourseSelect_NameDraw(Gfx* gfx) {
                 gfx = Font_DrawString(
                     gfx, (-(trackNameWidth / 2) - (Font_GetStringWidth(cupTrackNoStr, FONT_SET_3, 0) / 2)) + 160, 200,
                     cupTrackNoStr, 0, FONT_SET_3, 0);
+#ifndef EXPANSION_KIT
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
+#else
+                gDPSetPrimColor(gfx++, 0, 0, 255 / greyFactor, 255 / greyFactor, 255 / greyFactor, 255);
+#endif
                 gfx = Font_DrawString(
                     gfx, ((cupTrackNoWidth / 2) - (Font_GetStringWidth(gCurrentTrackName, FONT_SET_3, 0) / 2)) + 160,
                     200, gCurrentTrackName, 0, FONT_SET_3, 0);
@@ -947,11 +1324,16 @@ Gfx* CourseSelect_NameDraw(Gfx* gfx) {
 }
 
 Gfx* CourseSelect_GhostMarkerDraw(Gfx* gfx, Object* ghostMarkerObj) {
+    s32 i;
+    s32 cupCourseIndex;
+    s32 left;
 
+#ifndef EXPANSION_KIT
     // If Cup Does Not Match
     if ((GHOST_MARKER_COURSE(ghostMarkerObj) / 6) != (gCourseIndex / 6)) {
         return gfx;
     }
+#endif
 
     switch (sCourseSelectState) {
         case COURSE_SELECT_CUP_SELECT:
@@ -963,9 +1345,27 @@ Gfx* CourseSelect_GhostMarkerDraw(Gfx* gfx, Object* ghostMarkerObj) {
         case COURSE_SELECT_AWAIT_OK:
         case COURSE_SELECT_CONTINUE:
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            gfx = func_80078EA0(gfx, sHasGhostMarkerCompTexInfo,
-                                OBJECT_LEFT(ghostMarkerObj) + GHOST_MARKER_OFFSET(ghostMarkerObj),
-                                OBJECT_TOP(ghostMarkerObj), 0, 0, 0, 1.0f, 1.0f);
+#ifndef EXPANSION_KIT
+            gfx = func_80078EA0_impl(gfx, sHasGhostMarkerCompTexInfo,
+                                     OBJECT_LEFT(ghostMarkerObj) + GHOST_MARKER_OFFSET(ghostMarkerObj),
+                                     OBJECT_TOP(ghostMarkerObj), 0, 0, 0, 1.0f, 1.0f, true);
+#else
+            if (gCupSelectOption >= 10) {
+                cupCourseIndex = sCourseSelectCup * 6;
+            } else {
+                cupCourseIndex = gCupSelectOption * 6;
+            }
+
+            for (i = 0; i < 6; i++) {
+                left = OBJECT_LEFT(ghostMarkerObj) + i * SCREEN_WIDTH + GHOST_MARKER_OFFSET(ghostMarkerObj);
+                if (left >= -30 && left <= SCREEN_WIDTH &&
+                    ((D_i5_8007B9EC[cupCourseIndex + i] & 1) ||
+                     (GHOST_MARKER_COURSE(ghostMarkerObj) == cupCourseIndex + i))) {
+                    gfx = func_80078EA0_impl(gfx, sHasGhostMarkerCompTexInfo, left, OBJECT_TOP(ghostMarkerObj), 0, 0, 0,
+                                             1.0f, 1.0f, true);
+                }
+            }
+#endif
             break;
     }
 
@@ -974,7 +1374,16 @@ Gfx* CourseSelect_GhostMarkerDraw(Gfx* gfx, Object* ghostMarkerObj) {
 
 Gfx* CourseSelect_GhostOptionDraw(Gfx* gfx, Object* ghostOptionObj) {
     s32 i;
-    s32 numUnlockedGhosts = sUnlockedGhosts + 1;
+    s32 numUnlockedGhosts;
+
+#ifdef EXPANSION_KIT
+    if ((gSelectedMode == MODE_TIME_ATTACK) && (gCupType == EDIT_CUP) &&
+        (gEditCupTrackNames[gCourseIndex - COURSE_EDIT_1][0] == '\0')) {
+        return gfx;
+    }
+#endif
+
+    numUnlockedGhosts = sUnlockedGhosts + 1;
 
     for (i = 0; i < numUnlockedGhosts; i++) {
         if (i == sSelectedGhostOption) {
@@ -990,12 +1399,12 @@ Gfx* CourseSelect_GhostOptionDraw(Gfx* gfx, Object* ghostOptionObj) {
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
-        gfx = func_80078EA0(gfx, sTimeAttackGhostOptionCompTexInfos[i], OBJECT_LEFT(ghostOptionObj) + 195,
-                            i * 20 + 0x2D, 0, 0, 0, 1.0f, 1.0f);
+        gfx = func_80078EA0_impl(gfx, sTimeAttackGhostOptionCompTexInfos[i], OBJECT_LEFT(ghostOptionObj) + 195,
+                                 i * 20 + 0x2D, 0, 0, 0, 1.0f, 1.0f, true);
 
         if ((i == 2) && sStaffGhostTimeBeaten) {
-            gfx = func_80078EA0(gfx, sStaffGhostBeatenCompTexInfo, OBJECT_LEFT(ghostOptionObj) + 265, i * 20 + 0x2D, 0,
-                                0, 0, 1.0f, 1.0f);
+            gfx = func_80078EA0_impl(gfx, sStaffGhostBeatenCompTexInfo, OBJECT_LEFT(ghostOptionObj) + 265,
+                                     i * 20 + 0x2D, 0, 0, 0, 1.0f, 1.0f, true);
         }
     }
     return gfx;
@@ -1003,9 +1412,43 @@ Gfx* CourseSelect_GhostOptionDraw(Gfx* gfx, Object* ghostOptionObj) {
 
 void CourseSelect_ModelUpdate(Object* modelObj) {
     s32 temp_a1;
+    bool var_v1;
 
+#ifdef EXPANSION_KIT
+    if (D_i5_801190B4 == 0) {
+        OBJECT_COUNTER(modelObj) = 1;
+    }
+    var_v1 = false;
+    switch (sCourseSelectState) {
+        case COURSE_SELECT_EXIT_RECORDS:
+        case COURSE_SELECT_START_EXIT:
+        case COURSE_SELECT_EXIT:
+            var_v1 = true;
+            break;
+        case COURSE_SELECT_CUP_SELECT:
+            if (gCupSelectOption < 10) {
+                break;
+            }
+            /* fallthrough */
+        default:
+            if (OBJECT_COUNTER(modelObj) == 0) {
+                if ((func_80742510() == 0) || (gCupSelectOption < 10)) {
+                    func_i5_80115E10();
+                }
+                var_v1 = true;
+            }
+            break;
+    }
+#endif
+
+#ifndef EXPANSION_KIT
     if (((sCourseSelectState != COURSE_SELECT_CUP_SELECT) && (sCourseSelectState != COURSE_SELECT_EXIT_RECORDS)) ||
         (gCupSelectOption < 4)) {
+#else
+    if (!var_v1 &&
+        (((sCourseSelectState != COURSE_SELECT_CUP_SELECT) && (sCourseSelectState != COURSE_SELECT_EXIT_RECORDS)) ||
+         (gCupSelectOption < 4))) {
+#endif
         func_i5_80115E10();
     }
     temp_a1 = -(sCourseSelectTrackNo * 0x500);
@@ -1021,17 +1464,23 @@ void CourseSelect_CupUpdate(Object* cupObj) {
     s32 var_v1;
     s32 var_a1;
     s32 var_v0;
+    s32 state;
 
     if (gGameMode == GAMEMODE_FLX_GP_RACE_NEXT_COURSE) {
-        OBJECT_LEFT(cupObj) = 0x80;
-        OBJECT_TOP(cupObj) = 0x31;
+        OBJECT_LEFT(cupObj) = 128;
+        OBJECT_TOP(cupObj) = 49;
         return;
     }
 
     var_v1 = cupObj->cmdId - OBJECT_COURSE_SELECT_CUP_0;
-    switch (OBJECT_STATE(cupObj)) {
+    state = OBJECT_STATE(cupObj);
+    switch (state) {
         case 0:
+#ifndef EXPANSION_KIT
             if (var_v1 != 5) {
+#else
+            if (var_v1 >= 5) {
+#endif
                 if (OBJECT_TOP(cupObj) < 85) {
                     Object_LerpPosYToTarget(cupObj, 85);
                 } else {
@@ -1050,7 +1499,11 @@ void CourseSelect_CupUpdate(Object* cupObj) {
         case 1:
         case 2:
         case 3:
+#ifndef EXPANSION_KIT
             if ((var_v1 == gCupSelectOption) || ((gCupSelectOption >= 10) && (var_v1 == 5))) {
+#else
+            if ((var_v1 == gCupSelectOption) || ((gCupSelectOption >= 10) && (var_v1 == gCupSelectOption - 5))) {
+#endif
                 cupObj->priority = 7;
             } else {
                 cupObj->priority = 6;
@@ -1061,8 +1514,11 @@ void CourseSelect_CupUpdate(Object* cupObj) {
                 case COURSE_SELECT_EXIT_RECORDS:
                 case COURSE_SELECT_START_EXIT:
                 case COURSE_SELECT_EXIT:
-                    var_a1 = (var_v1 != 5) ? 85 : 170;
-                    Object_LerpPosYToTarget(cupObj, var_a1);
+#ifndef EXPANSION_KIT
+                    Object_LerpPosYToTarget(cupObj, (var_v1 != 5) ? 85 : 170);
+#else
+                    Object_LerpPosYToTarget(cupObj, (var_v1 < 5) ? 85 : 170);
+#endif
 
                     if (OBJECT_STATE(cupObj) == 2) {
                         OBJECT_STATE(cupObj) = 3;
@@ -1080,8 +1536,27 @@ void CourseSelect_CupUpdate(Object* cupObj) {
                     OBJECT_STATE(cupObj) = 2;
                     break;
             }
+#ifndef EXPANSION_KIT
             if ((OBJECT_STATE(cupObj) == 2) || (var_v1 == 5)) {
-                var_a1 = 0x80;
+#else
+            if (OBJECT_STATE(cupObj) == 2) {
+#endif
+                var_a1 = 128;
+#ifdef EXPANSION_KIT
+            } else if (var_v1 >= 5) {
+
+                switch (var_v1) {
+                    case 5:
+                        var_a1 = 128;
+                        break;
+                    case 6:
+                        var_a1 = 54;
+                        break;
+                    case 7:
+                        var_a1 = 202;
+                        break;
+                }
+#endif
             } else {
                 var_v0 = gUnlockableLevel;
                 if (gSettingEverythingUnlocked) {
@@ -1192,6 +1667,7 @@ void CourseSelect_GhostMarkerUpdate(Object* ghostMarkerObj) {
     s32 xPos;
 
     GHOST_MARKER_OFFSET(ghostMarkerObj) = OBJECT_LEFT(Object_Get(OBJECT_COURSE_SELECT_MODEL)) >> 2;
+#ifndef EXPANSION_KIT
     xPos = OBJECT_LEFT(ghostMarkerObj) + GHOST_MARKER_OFFSET(ghostMarkerObj);
 
     if ((xPos < -30) || (xPos > SCREEN_WIDTH)) {
@@ -1199,6 +1675,7 @@ void CourseSelect_GhostMarkerUpdate(Object* ghostMarkerObj) {
     } else {
         ghostMarkerObj->shouldDraw = true;
     }
+#endif
 }
 
 void CourseSelect_GhostOptionUpdate(Object* ghostOptionObj) {

@@ -5,6 +5,7 @@
 #include "libc/stdbool.h"
 #include "other_types.h"
 #include "fzx_math.h"
+#include "PR/leo.h"
 
 typedef struct CourseSegment {
     /* 0x00 */ Vec3f pos;
@@ -468,14 +469,25 @@ typedef struct Machine {
     s16 weight;
 } Machine; // size = 0x16
 
+#ifndef EXPANSION_KIT
 typedef struct unk_80225800 {
-    Mtx unk_000;
-    Vtx jumpVtx[4 * 6];
-    Vtx landmineVtx[48 * 5];
-    Vtx terrainEffectVtx[0x800];
-    Vtx dashVtx[0x80];
-    Mtx decorationMtx[32];
-} unk_80225800; // size = 0x10C0
+    /* 0x0000 */ Mtx unk_000;
+    /* 0x0040 */ Vtx jumpVtx[4 * 6];
+    /* 0x01C0 */ Vtx landmineVtx[48 * 5];
+    /* 0x10C0 */ Vtx terrainEffectVtx[0x800];
+    /* 0x90C0 */ Vtx dashVtx[0x80];
+    /* 0x98C0 */ Mtx decorationMtx[32];
+} unk_80225800; // size = 0xA0C0
+#else
+typedef struct unk_80225800 {
+    /* 0x0000 */ Mtx unk_000;
+    /* 0x0040 */ Vtx jumpVtx[8 * 6];
+    /* 0x0340 */ Vtx landmineVtx[48 * 5];
+    /* 0x1240 */ Vtx terrainEffectVtx[0x800];
+    /* 0x9240 */ Vtx dashVtx[0xC0];
+    /* 0x9E40 */ Mtx decorationMtx[32];
+} unk_80225800; // size = 0xA640
+#endif
 
 typedef struct BoosterInfo {
     s32 count;
@@ -488,5 +500,179 @@ typedef struct TextureInfo {
     /* 0x04 */ s16 width;
     /* 0x06 */ s16 height;
 } TextureInfo; // size = 0x8
+
+typedef struct CustomMachine {
+    /* 0x00 */ u8 body;
+    /* 0x01 */ u8 boost;
+    /* 0x02 */ u8 grip;
+    /* 0x03 */ u8 frontType;
+    /* 0x04 */ u8 rearType;
+    /* 0x05 */ u8 wingType;
+    /* 0x06 */ u8 logo;
+    /* 0x07 */ u8 number;
+    /* 0x08 */ u8 decal;
+    /* 0x09 */ u8 red;
+    /* 0x0A */ u8 green;
+    /* 0x0B */ u8 blue;
+    /* 0x0C */ u8 numberR;
+    /* 0x0D */ u8 numberG;
+    /* 0x0E */ u8 numberB;
+    /* 0x0F */ u8 decalR;
+    /* 0x10 */ u8 decalG;
+    /* 0x11 */ u8 decalB;
+    /* 0x12 */ u8 cockpitR;
+    /* 0x13 */ u8 cockpitG;
+    /* 0x14 */ u8 cockpitB;
+    /* 0x15 */ char machineName[9];
+    /* 0x1E */ u16 checksum;
+} CustomMachine; // size = 0x20
+
+typedef struct CustomMachinesInfo {
+    /* 0x000 */ CustomMachine customMachines[30];
+    /* 0x3C0 */ s8 characterCustomState[30];
+    /* 0x3DE */ u16 checksum;
+} CustomMachinesInfo; // size = 0x3E0
+
+typedef struct unk_80128C94 {
+    /* 0x00000 */ Mtx unk_0000;
+    /* 0x00040 */ Mtx unk_0040;
+    /* 0x00080 */ s8 unk_0080[0x80];
+    /* 0x00100 */ Mtx unk_0100;
+    /* 0x00140 */ s8 unk_0140[0x40];
+    /* 0x00180 */ Vtx unk_0180[64 * 6];
+    /* 0x01980 */ Vtx unk_1980[898];
+    /* 0x051A0 */ s8 unk_51A0[0x200];
+    /* 0x053A0 */ Vtx jumpVtx[8 * 6];
+    /* 0x056A0 */ Vtx landmineVtx[5 * 48];
+    /* 0x065A0 */ Vtx terrainEffectVtx[0x800];
+    /* 0x0E5A0 */ Vtx dashVtx[0x80];
+    /* 0x0EDA0 */ s8 unk_EDA0[0x400];
+    /* 0x0F1A0 */ Mtx decorationMtx[0x20];
+    /* 0x0F9A0 */ Gfx unk_F9A0[741];
+    /* 0x110C8 */ Gfx unk_110C8[5064];
+} unk_80128C94; // size = 0x1AF08
+
+typedef struct unk_807C6F10 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 lba;
+    /* 0x08 */ void* vAddr;
+    /* 0x0C */ s32 nLBAs;
+    /* 0x10 */ OSPiHandle* piHandle;
+    /* 0x14 */ OSIoMesg* ioMesg;
+    /* 0x18 */ s32 direction;
+    /* 0x1C */ LEOCmd* cmdBlock;
+    /* 0x20 */ OSMesgQueue* mq;
+} unk_807C6F10; // size = 0x24
+
+typedef struct unk_807C6EA8 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ u8 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s16 unk_14;
+    /* 0x16 */ u16 dirId;
+    /* 0x18 */ char* name;
+    /* 0x1C */ char* extension;
+    /* 0x20 */ void* readBuf;
+    /* 0x24 */ s32 offset;
+    /* 0x28 */ s32 fileSize;
+    /* 0x2C */ s32 attr;
+    /* 0x30 */ s32 copyCount;
+    /* 0x34 */ bool writeChanges;
+    /* 0x38 */ void* writeBuf;
+    /* 0x3C */ char* oldName;
+    /* 0x40 */ char* oldExtension;
+    /* 0x44 */ char* newName;
+    /* 0x48 */ char* newExtension;
+    /* 0x4C */ s32 attributeToAdd;
+    /* 0x50 */ s32 attributeToRemove;
+    /* 0x54 */ u8 unk_54;
+    /* 0x58 */ s32 startLba;
+    /* 0x5C */ s32 lbaBuf;
+    /* 0x60 */ s32 bssSize;
+} unk_807C6EA8;
+
+typedef struct unk_8003A5D8 {
+    /* 0x00 */ char name[16];
+    /* 0x10 */ s32 attr;
+    /* 0x14 */ s8 unk_14[0x8];
+    /* 0x1C */ char unk_1C;
+    /* 0x1D */ char extension[5];
+    /* 0x22 */ u8 unk_22;
+    /* 0x23 */ s8 unk_23;
+} unk_8003A5D8; //size = 0x24
+
+typedef struct unk_800D6CA0 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s8 unk_18[0x4];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ CourseSegment unk_28;
+    /* 0xCC */ s8 unk_CC[0x24];
+} unk_800D6CA0; // size = 0xF0
+
+typedef struct MenuDropItem {
+    /* 0x00 */ void* backgroundTex;
+    /* 0x04 */ void* backgroundSelectedTex;
+    /* 0x08 */ void* contentsTex;
+    /* 0x0C */ void* subContentsRGBATex;
+    /* 0x10 */ struct MenuWidget* widget;
+    /* 0x14 */ void (*action)(void);
+    /* 0x18 */ u16 contentsWidth;
+    /* 0x1A */ u16 contentsHeight;
+    /* 0x1C */ void* unk_1C;
+    /* 0x20 */ void* subContentsI4Tex;
+} MenuDropItem; // size = 0x24
+
+typedef struct MenuWidget {
+    /* 0x00 */ s32 numItems;
+    /* 0x04 */ s32 openIndex;
+    /* 0x08 */ s32 highlightedIndex;
+    /* 0x0C */ s32 left;
+    /* 0x10 */ s32 top;
+    /* 0x14 */ s32 itemXOffset;
+    /* 0x18 */ s32 itemYOffset;
+    /* 0x1C */ MenuDropItem* menuItems;
+    /* 0x20 */ s32 cursorMinPosX;
+    /* 0x24 */ s32 cursorMinPosY;
+    /* 0x28 */ s32 cursorMaxPosX;
+    /* 0x2C */ s32 cursorMaxPosY;
+    /* 0x30 */ s32* option;
+} MenuWidget; // size = 0x34
+
+typedef struct unk_807B3C20 {
+    /* 0x0000 */ CourseSegment unk_0000[64];
+    /* 0x2900 */ s32 controlPointCount;
+} unk_807B3C20; // size 0x2904
+
+typedef struct unk_80128690 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+} unk_80128690; // size = 0xC
+
+typedef struct unk_8011C220 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ Vec3f pos;
+    /* 0x14 */ Mtx3F basis;
+} unk_8011C220; // size = 0x38
+
+typedef struct unk_80140E60 {
+    /* 0x00 */ s32 unk_00; // type
+    /* 0x04 */ s32 unk_04; // value
+} unk_80140E60; // size = 0x8
+
+typedef struct unk_801413F0 {
+    /* 0x00 */ Mtx unk_00;
+    /* 0x40 */ LookAt unk_40;
+} unk_801413F0; // size = 0x60
 
 #endif // UNK_STRUCTS_H

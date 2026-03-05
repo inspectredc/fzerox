@@ -189,5 +189,7 @@ Gfx D_8024DA90[62];
 Mtx D_8024DC80;
 Lights1 D_8024DCC0;
 
+s32 padAlignment8024DCD8;
+
 GfxPool D_8024DCE0[2];
 OSTask D_802A6AC0[2];

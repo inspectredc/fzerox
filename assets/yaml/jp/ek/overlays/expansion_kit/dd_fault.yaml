@@ -1,0 +1,17 @@
+:config:
+  header:
+    code:
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER_EK(overlays/expansion_kit/dd_fault.h)'
+    header:
+      - '#include "libultra/ultra64.h"'
+
+D_xk1_800335F0:
+  type: GFX
+  offset: 0xB0860
+  symbol: D_xk1_800335F0
+
+D_xk1_80033630:
+  type: GFX
+  offset: 0xB08A0
+  symbol: D_xk1_80033630

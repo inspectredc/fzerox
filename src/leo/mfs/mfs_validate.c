@@ -1,6 +1,9 @@
+/*****************************
+ *    MFS Version B Only     *
+ *****************************/
+
 #include "leo/mfs.h"
 
-#if MFS_VERSION == MFS_VERSION_B
 s32 Mfs_ValidateFileSystemOperation(s32 validationFlags, u16 entryIndex, u16 subEntryIndex, u16 dirId) {
     u16 dirEntryIndex;
     s32 entryValidGameCodeErr;
@@ -91,4 +94,3 @@ s32 Mfs_ValidateFileSystemOperation(s32 validationFlags, u16 entryIndex, u16 sub
     }
     return 0;
 }
-#endif
