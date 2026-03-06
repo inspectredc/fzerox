@@ -35,6 +35,22 @@ versions:
       asm: "asm/jp/rev0"
       nonmatchings: "asm/jp/rev0/nonmatchings"
 
+  - name: pal
+    fullname: pal
+    sha1: af9038bcb543a2b4faaab876dbdab4663859e092
+    paths:
+      target: "baserom.pal.rev0.z64"
+
+      build_dir: "build/pal/rev0"
+      map: "build/pal/rev0/fzerox.pal.rev0.map"
+      compiled_target: "build/pal/rev0/fzerox.pal.rev0.z64"
+      elf: "build/pal/rev0/fzerox.pal.rev0.elf"
+
+      expected_dir: "expected/"
+
+      asm: "asm/pal/rev0"
+      nonmatchings: "asm/pal/rev0/nonmatchings"
+
   - name: ek
     fullname: ek
     sha1: a418b0151521b76691fa03f8658c8b567c69498b
