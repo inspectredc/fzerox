@@ -53,6 +53,32 @@
             "cppStandard": "${default}"
         },
         {
+            "name": "Baserom PAL",
+            "compilerPath": "${default}",
+            "compilerArgs": [
+                "-m32"
+            ],
+            "intelliSenseMode": "${default}", // Shouldn't matter
+            "includePath": [
+                "${workspaceFolder}/**",
+                "src",
+                "build",
+                "include"
+            ],
+            "defines": [
+                "_LANGUAGE_C",
+                "__sgi",
+                "_MIPS_SZLONG=32",
+                "F3DEX_GBI_2",
+                "ASSET_VERSION=us",
+                "ASSET_REVISION=rev0",
+                "BUILD_VERSION=VERSION_I",
+                "VERSION_PAL"
+            ],
+            "cStandard": "gnu89", // C89 + some GNU extensions from C99 like C++ comments
+            "cppStandard": "${default}"
+        },
+        {
             "name": "Expansion Kit",
             "compilerPath": "${default}",
             "compilerArgs": [

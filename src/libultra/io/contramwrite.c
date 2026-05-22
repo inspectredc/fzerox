@@ -12,7 +12,7 @@ extern s32 __osPfsLastChannel;
 s32 __osContRamWrite(OSMesgQueue* mq, int channel, u16 address, u8* buffer, int force) {
     s32 ret = 0;
     s32 i;
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH_2
     u8* ptr;
 #else
     u8* ptr = (u8*) __osPfsPifRam.ramarray;
@@ -26,7 +26,7 @@ s32 __osContRamWrite(OSMesgQueue* mq, int channel, u16 address, u8* buffer, int 
 
     __osSiGetAccess();
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH_2
     do {
         ptr = (u8*) __osPfsPifRam.ramarray;
 #endif
@@ -67,7 +67,7 @@ s32 __osContRamWrite(OSMesgQueue* mq, int channel, u16 address, u8* buffer, int 
         crc = __osContDataCrc(buffer);
         osRecvMesg(mq, NULL, OS_MESG_BLOCK);
 
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_J && !IS_VERSION_I_PATCH_2
         do {
 #endif
             ret = __osSiRawStartDma(OS_READ, &__osPfsPifRam);
