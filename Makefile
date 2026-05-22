@@ -130,7 +130,7 @@ ifeq ($(COMPILER),gcc)
   MIPS_VERSION := -mips3
 else
   # we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
-  CFLAGS += -G 0 -non_shared -fullwarn -verbose -Xcpluscomm $(IINC) -nostdinc -Wab,-r4300_mul -woff 649,838,712,516,807
+  CFLAGS += -G 0 -non_shared -fullwarn -verbose -Xcpluscomm $(IINC) -nostdinc -Wab,-r4300_mul -woff 649,838,712,516,807,581
   MIPS_VERSION := -mips2
   WARNINGS := -fullwarn -verbose -woff 624,649,838,712,516,513,596,564,594,709,807
 endif
@@ -167,7 +167,8 @@ else
     endif
 
     ifeq ($(VERSION),pal)
-        BUILD_DEFINES   += -DVERSION_EU=1 -DBUILD_VERSION=VERSION_I -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
+        BUILD_DEFINES   += -DVERSION_PAL=1 -DBUILD_VERSION=VERSION_J -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
+        LEO_VERSION ?= 1
         REV := rev0
     endif
 endif
@@ -344,6 +345,11 @@ src/overlays/ovl_i11/% \
 src/audio/rom/% 
 endif
 
+# ifeq ($(VERSION),pal)
+# EXCLUSION_FILES += \
+# src/overlays/%
+# endif
+
 ifeq ($(MFS_VERSION),0)
 EXCLUSION_FILES += \
 src/leo/mfs/mfs_copy.c \
@@ -368,7 +374,17 @@ C_FILES       := $(filter-out %.incbin.c,$(C_FILES))
 C_FILES       := $(filter-out $(EXCLUSION_FILES),$(C_FILES))
 C_FILES       := $(filter-out $(EXCLUSION_ASSET_FILES),$(C_FILES))
 
+ifeq ($(VERSION),pal)
+EXCLUSION_S_FILES := \
+src/rsp/% \
+src/leo/lib/getaadr.s \
+src/leo/lib/getkadr.s
+endif
+
 S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
+ifeq ($(VERSION),pal)
+S_FILES       := $(filter-out $(EXCLUSION_S_FILES),$(S_FILES))
+endif
 BIN_FILES     := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \

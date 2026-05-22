@@ -916,7 +916,7 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj);
 #ifndef EXPANSION_KIT
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
-#else
+#elif VERSION_US
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
 #endif
 #else

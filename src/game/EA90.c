@@ -103,7 +103,7 @@ void func_80074CE4(CourseInfo* courseInfo) {
 }
 
 // Test Function?
-#ifndef EXPANSION_KIT
+#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL) 
 void func_80074F98(void) {
     f32 sp2C;
     s64 temp;

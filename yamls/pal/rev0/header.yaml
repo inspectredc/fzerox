@@ -21,7 +21,7 @@ options:
     - linker_scripts/pal/rev0/symbol_addrs_nlib_vars.txt
 
   asm_path: asm/pal/rev0
-  src_path: src-pal
+  src_path: src
   asset_path: bin/pal/rev0
 
   build_path: build/pal/rev0

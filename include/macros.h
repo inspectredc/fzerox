@@ -63,10 +63,15 @@
 #define ASSET_STR(x) #x
 #define ASSET_STR_HELPER(x) ASSET_STR(x)
 
+#ifdef VERSION_PAL
+#define ASSET_HEADER(x) ASSET_STR_HELPER(fzx_assets.h)
+#define ASSET_SOURCE(x) ASSET_STR_HELPER(fzx_assets.h)
+#else
 #define ASSET_HEADER(x) ASSET_STR_HELPER(assets/ASSET_VERSION/ASSET_REVISION/x)
 #define ASSET_SOURCE(x) ASSET_STR_HELPER(src/assets/ASSET_VERSION/ASSET_REVISION/x)
 #define ASSET_HEADER_EK(x) ASSET_STR_HELPER(assets/ASSET_VERSION/ek/x)
 #define ASSET_SOURCE_EK(x) ASSET_STR_HELPER(src/assets/ASSET_VERSION/ek/x)
+#endif
 
 /*
  * Macros for libultra
