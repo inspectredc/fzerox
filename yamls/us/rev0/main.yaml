@@ -226,7 +226,7 @@
       - [0x66220, c, sys/rom/leo_presence]
       - { start: 0x66270, type: textbin, use_src_path: True, name: rsp/aspmain }
 
-      # DATA - todo: split data
+      # DATA - Game/Sys
       - [0x66FA0, .data, sys/sys_main]
       - [0x66FE0, .data, sys/sys_gfx]
       - [0x66FF0, .data, sys/sys_audio]
@@ -244,6 +244,8 @@
       - [0x678A0, .data, game/camera]
       - [0x67AA0, .data, game/racer]
       - [0x69500, .data, game/course]
+
+      # DATA - Audio
       - [0x69A30, .data, audio/rom/lib/note_data]
       - [0x6A680, .data, audio/rom/lib/playback]
       - [0x6A840, .data, audio/rom/lib/effects]
@@ -255,6 +257,8 @@
       - [0x6B710, .data, audio/rom/lib/thread]
       - [0x6B9E0, .data, audio/rom/external]
       - [0x6BC20, .data, audio/rom/lib/audio_context]
+
+      # DATA - Libultra
       - [0x6BC80, data, libultra/os/exceptasm]
       - [0x6BCA0, .data, libultra/os/thread]
       - [0x6BCD0, .data, libultra/io/controller]

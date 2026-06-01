@@ -375,7 +375,6 @@ C_FILES       := $(filter-out $(EXCLUSION_ASSET_FILES),$(C_FILES))
 
 ifeq ($(VERSION),pal)
 EXCLUSION_S_FILES := \
-src/rsp/% \
 src/leo/lib/getaadr.s \
 src/leo/lib/getkadr.s
 endif

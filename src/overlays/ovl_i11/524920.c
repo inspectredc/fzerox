@@ -46,7 +46,7 @@ void func_i11_800FC730(void) {
     ptr[9] = 0xFF;
     ptr[10] = 0xFF;
 
-    SLLeoReadWrite(&cmdBlock, 0, 0x341, ptr, 1, &gDmaMesgQueue);
+    SLLeoReadWrite(&cmdBlock, OS_READ, 0x341, ptr, 1, &gDmaMesgQueue);
     osRecvMesg(&gDmaMesgQueue, NULL, 1);
     sp58 = ptr[1];
     sp40 = ptr[3];
@@ -54,13 +54,13 @@ void func_i11_800FC730(void) {
     sp4C = ptr[2] - ptr[1];
     PRINTF("INFO %d, 0x%x-0x%x-0x%x-0x%x, %dBytes, %dLBAs\n");
     if (D_i11_800FC9F0) {
-        SLLeoReadWrite(&cmdBlock, 0, sp58, sp40, sp4C, &gDmaMesgQueue);
+        SLLeoReadWrite(&cmdBlock, OS_READ, sp58, sp40, sp4C, &gDmaMesgQueue);
         osRecvMesg(&gDmaMesgQueue, NULL, 1);
         bzero(ptr[9], sp50);
     } else {
         switch (ptr[0]) {
             case 0:
-                SLLeoReadWrite(&cmdBlock, 0, sp58, sp40, sp4C, &gDmaMesgQueue);
+                SLLeoReadWrite(&cmdBlock, OS_READ, sp58, sp40, sp4C, &gDmaMesgQueue);
                 osRecvMesg(&gDmaMesgQueue, NULL, 1);
                 break;
             case 1:
@@ -69,11 +69,11 @@ void func_i11_800FC730(void) {
                 sp48--;
                 LeoLBAToByte(sp58, sp48, &sp44);
                 sp44 += sp40;
-                SLLeoReadWrite(&cmdBlock, 0, sp58, sp40, 1, &gDmaMesgQueue);
+                SLLeoReadWrite(&cmdBlock, OS_READ, sp58, sp40, 1, &gDmaMesgQueue);
                 osRecvMesg(&gDmaMesgQueue, NULL, 1);
                 sp4C -= sp48;
                 sp48 += sp58;
-                SLLeoReadWrite(&cmdBlock, 0, sp48, sp44, sp4C, &gDmaMesgQueue);
+                SLLeoReadWrite(&cmdBlock, OS_READ, sp48, sp44, sp4C, &gDmaMesgQueue);
                 osRecvMesg(&gDmaMesgQueue, NULL, 1);
                 break;
             case 2:
