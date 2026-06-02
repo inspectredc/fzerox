@@ -373,16 +373,7 @@ C_FILES       := $(filter-out %.incbin.c,$(C_FILES))
 C_FILES       := $(filter-out $(EXCLUSION_FILES),$(C_FILES))
 C_FILES       := $(filter-out $(EXCLUSION_ASSET_FILES),$(C_FILES))
 
-ifeq ($(VERSION),pal)
-EXCLUSION_S_FILES := \
-src/leo/lib/getaadr.s \
-src/leo/lib/getkadr.s
-endif
-
 S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
-ifeq ($(VERSION),pal)
-S_FILES       := $(filter-out $(EXCLUSION_S_FILES),$(S_FILES))
-endif
 BIN_FILES     := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \

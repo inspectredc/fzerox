@@ -32,6 +32,7 @@ __osCleanupThread = 0x800AFB00;
 __osDequeueThread = 0x800AFB10;
 osDestroyThread = 0x800AFB50;
 bzero = 0x800AFC60;
+__osLeoInterrupt = 0x800AFD00;
 __osMotorAccess = 0x800B03F0;
 osMotorInit = 0x800B0664;
 __osSiCreateAccessQueue = 0x800B07C0;
