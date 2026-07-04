@@ -217,7 +217,7 @@
       - [0xDF4D0, .data, course_select]
       - [0xDF960, .rodata, course_select]
       - { type: .bss, vram: 0x80119080, name: course_model }
-      - { type: .bss, vram: 0x801190B0, name: course_select}
+      - { type: .bss, vram: 0x801190B0, name: course_select }
 
   - name: ovl_i6
     exclusive_ram_id: overlay
@@ -242,7 +242,7 @@
       - [0xE97C0, .rodata, options_menu]
       - { type: .bss, vram: 0x8011F260, name: main_menu }
       - { type: .bss, vram: 0x8011F440, name: credits }
-      - { type: .bss, vram: 0x8011F460, name: options_menu}
+      - { type: .bss, vram: 0x8011F460, name: options_menu }
       - { type: .bss, vram: 0x80124110, name: save_context }
 
   - name: ending

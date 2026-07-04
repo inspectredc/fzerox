@@ -6,14 +6,12 @@
     subsegments:
       - [0x64880, .data, sys/cartridge_offsets]
 
-  # - [0x64970, bin]
-
-  # - name: leo_font
-  #   type: code
-  #   vram: 0x80400000
-  #   bss_size: 0x3010
-  #   subsegments:
-  #     - { type: .bss, vram: 0x80400000, name: sys/leo_font }
+  - name: leo_font
+    type: code
+    vram: 0x80400000
+    bss_size: 0x3020
+    subsegments:
+      - { type: .bss, vram: 0x80400000, name: sys/leo_font }
 
   - name: leo
     exclusive_ram_id: overlay
@@ -21,7 +19,7 @@
     dir: leo
     start: 0x64970
     vram: 0x80403020
-    # follows_vram: leo_font
+    follows_vram: leo_font
     bss_size: 0x1640
     symbol_name_format: i1_$VRAM
     subsegments:
@@ -116,136 +114,138 @@
       - { type: .bss, vram: 0x80430750, name: mfs/mfs_prepared_dir }
       - { type: .bss, vram: 0x80430760, name: mfs/mfs_handlers }
 
-  - [0x90A90, bin]
+  - name: ovl_i2
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i2
+    start: 0x90A90
+    vram: 0x800EEAA0
+    follows_vram: main
+    bss_size: 0x8B60
+    symbol_name_format: i2_$VRAM
+    subsegments:
+      - [0x90A90, asm, transition]
+      - [0x94710, asm, save]
+      - [0x97EC0, asm, race]
+      - [0x98940, asm, effects]
+      - [0x9A200, asm, font]
+      - [0x9B1F0, asm, ../../game/course]
+      - [0xA8940, data, transition]
+      - [0xA8990, data, save]
+      - [0xA8AB0, data, race]
+      - [0xA8AE0, data, ovl_i2_data1]
+      - [0xA8AF0, data, font]
+      - [0xAC700, data, ../../game/course]
+      - [0xACC30, rodata, transition]
+      - [0xACEB0, rodata, save]
+      - [0xACEE0, rodata, effects]
+      - [0xACF40, rodata, font]
+      - [0xAD880, rodata, ../../game/course]
+      - [0xAD9B0, data, course_context]
+      - { type: bss, vram: 0x80119A70, name: transition }
+      - { type: bss, vram: 0x80119AF0, name: save_buffer }
+      - { type: bss, vram: 0x8011DAB0, name: save }
+      - { type: bss, vram: 0x8011DB70, name: effects }
+      - { type: bss, vram: 0x80122050, name: ovl_i2_data1 }
+      - { type: bss, vram: 0x801220F0, name: ../../game/course }
 
+  - name: ovl_i3
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i3
+    start: 0xBBA60
+    vram: 0x801225D0
+    follows_vram: ovl_i2
+    bss_size: 0x20F0
+    symbol_name_format: i3_$VRAM
+    subsegments:
+      - [0xBBA60, asm, cpu]
+      - [0xC0AE0, pad]
+      - [0xC0AF0, asm, menus]
+      - [0xD4B70, asm, C2160]
+      - [0xD4CA0, asm, hud]
+      - [0xDB350, asm, minimap]
+      - [0xDC330, asm, background]
+      - [0xDFA70, asm, records_entry]
+      - [0xE38D0, data, cpu]
+      - [0xE4A80, data, menus]
+      - [0xE4D40, data, hud]
+      - [0xE5450, data, minimap]
+      - [0xE54F0, data, background]
+      - [0xE5CA0, data, records_entry]
+      - [0xE5CE0, rodata, cpu]
+      - [0xE5E90, rodata, menus]
+      - [0xE65A0, rodata, hud]
+      - [0xE65B0, rodata, background]
+      - [0xE6620, rodata, records_entry]
+      - { type: bss, vram: 0x8014D1C0, name: cpu }
+      - { type: bss, vram: 0x8014D260, name: menus }
+      - { type: bss, vram: 0x8014D700, name: hud }
+      - { type: bss, vram: 0x8014D8C0, name: minimap }
+      - { type: bss, vram: 0x8014D8D0, name: background }
+      - { type: bss, vram: 0x8014F060, name: records_entry }
 
-  # - name: ovl_i2
-  #   exclusive_ram_id: overlay
-  #   type: code
-  #   dir: overlays/ovl_i2
-  #   start: 0x98080
-  #   vram: 0x800FC730
-  #   follows_vram: main
-  #   bss_size: 0x8680
-  #   symbol_name_format: i2_$VRAM
-  #   subsegments:
-  #     - [0x98080, c, transition]
-  #     - [0x9BD00, c, save]
-  #     - [0x9F3C0, c, race]
-  #     - [0x9FE40, c, effects]
-  #     - [0xA1700, c, font]
-  #     - [0xA26F0, .data, transition]
-  #     - [0xA2740, .data, save]
-  #     - [0xA2860, .data, race]
-  #     - [0xA2860, .data, ovl_i2_data1]
-  #     - [0xA28A0, .data, font]
-  #     - [0xA64B0, .rodata, transition]
-  #     - [0xA6730, .rodata, save]
-  #     - [0xA6760, .rodata, effects]
-  #     - [0xA67C0, .rodata, font]
-  #     - [0xA7100, .data, course_context]
-  #     - { type: .bss, vram: 0x8010D770, name: transition }
-  #     - { type: .bss, vram: 0x8010D7F0, name: save_buffer }
-  #     - { type: .bss, vram: 0x801117B0, name: save }
-  #     - { type: .bss, vram: 0x80111870, name: effects }
-  #     - { type: .bss, vram: 0x80115D50, name: ovl_i2_data1 }
+  - name: ovl_i4
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i4
+    start: 0xE6650
+    vram: 0x801225D0
+    follows_vram: ovl_i2
+    bss_size: 0x30
+    symbol_name_format: i4_$VRAM
+    subsegments:
+      - [0xE6650, asm, machine]
+      - [0xEB0C0, asm, title]
+      - [0xEC1E0, data, machine]
+      - [0xEDCC0, data, title]
+      - [0xEDE30, rodata, machine]
+      - { type: bss, vram: 0x80129EC0, name: machine }
+      - { type: bss, vram: 0x80129EE0, name: title }
 
-  # - name: ovl_i3
-  #   exclusive_ram_id: overlay
-  #   type: code
-  #   dir: overlays/ovl_i3
-  #   start: 0xA90C0
-  #   vram: 0x80115DF0
-  #   follows_vram: ovl_i2
-  #   bss_size: 0x20D0
-  #   symbol_name_format: i3_$VRAM
-  #   subsegments:
-  #     - [0xA90C0, c, cpu]
-  #     - [0xAE140, c, menus]
-  #     - [0xC2160, c, C2160]
-  #     - [0xC2290, c, hud]
-  #     - [0xC8970, c, minimap]
-  #     - [0xC98B0, c, background]
-  #     - [0xCCFF0, c, records_entry]
-  #     - [0xD0E50, .data, cpu]
-  #     - [0xD2000, .data, menus]
-  #     - [0xD22C0, .data, hud]
-  #     - [0xD29D0, .data, minimap]
-  #     - [0xD3A70, .data, background]
-  #     - [0xD4220, .data, records_entry]
-  #     - [0xD4260, .rodata, cpu]
-  #     - [0xD4410, .rodata, menus]
-  #     - [0xD4B20, .rodata, hud]
-  #     - [0xD4B30, .rodata, background]
-  #     - [0xD4BA0, .rodata, records_entry]
-  #     - { type: .bss, vram: 0x80141900, name: cpu }
-  #     - { type: .bss, vram: 0x801419A0, name: menus }
-  #     - { type: .bss, vram: 0x80141E30, name: hud }
-  #     - { type: .bss, vram: 0x80141FF0, name: background }
-  #     - { type: .bss, vram: 0x80143780, name: records_entry }
+  - name: course_select
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/course_select
+    start: 0xEDF40
+    vram: 0x801225D0
+    follows_vram: ovl_i2
+    bss_size: 0x40
+    symbol_name_format: i5_$VRAM
+    subsegments:
+      - [0xEDF40, asm, course_model]
+      - [0xEE980, asm, course_select]
+      - [0xF1140, data, course_view]
+      - [0xF1200, data, course_model]
+      - [0xF1210, data, course_select]
+      - [0xF16A0, rodata, course_select]
+      - { type: bss, vram: 0x80125F90, name: course_model }
+      - { type: bss, vram: 0x80125FC0, name: course_select }
 
-
-  # - name: ovl_i4
-  #   exclusive_ram_id: overlay
-  #   type: code
-  #   dir: overlays/ovl_i4
-  #   start: 0xD4BD0
-  #   vram: 0x80115DF0
-  #   follows_vram: ovl_i2
-  #   bss_size: 0x30
-  #   symbol_name_format: i4_$VRAM
-  #   subsegments:
-  #     - [0xD4BD0, c, machine]
-  #     - [0xD9640, c, title]
-  #     - [0xDA760, .data, machine]
-  #     - [0xDC2D0, .data, title]
-  #     - [0xDC440, .rodata, machine]
-  #     - { type: .bss, vram: 0x8011D770, name: machine }
-  #     - { type: .bss, vram: 0x8011D790, name: title }
-
-  # - name: course_select
-  #   exclusive_ram_id: overlay
-  #   type: code
-  #   dir: overlays/course_select
-  #   start: 0xDC550
-  #   vram: 0x80115DF0
-  #   follows_vram: ovl_i2
-  #   bss_size: 0x40
-  #   symbol_name_format: i5_$VRAM
-  #   subsegments:
-  #     - [0xDC550, c, course_model]
-  #     - [0xDCF90, c, course_select]
-  #     - [0xDF750, .data, course_view]
-  #     - [0xDF810, .data, course_model]
-  #     - [0xDF820, .data, course_select]
-  #     - [0xDFCB0, .rodata, course_select]
-  #     - { type: .bss, vram: 0x801197B0, name: course_model }
-  #     - { type: .bss, vram: 0x801197E0, name: course_select}
-
-  # - name: ovl_i6
-  #   exclusive_ram_id: overlay
-  #   type: code
-  #   dir: overlays/ovl_i6
-  #   start: 0xDFF10
-  #   vram: 0x80115DF0
-  #   follows_vram: ovl_i2
-  #   bss_size: 0xCEB0
-  #   symbol_name_format: i6_$VRAM
-  #   subsegments:
-  #     - [0xDFF10, c, main_menu]
-  #     - [0xE2000, c, credits]
-  #     - [0xE6170, c, options_menu]
-  #     - [0xE7CF0, c]
-  #     - [0xE7D60, .data, main_menu]
-  #     - [0xE80C0, .data, credits]
-  #     - [0xE8EA0, .data, options_menu]
-  #     - [0xE8FF0, .rodata, main_menu]
-  #     - [0xE9180, .rodata, credits]
-  #     - [0xE9A10, .rodata, options_menu]
-  #     - { type: .bss, vram: 0x8011F910, name: main_menu }
-  #     - { type: .bss, vram: 0x8011FAF0, name: credits }
-  #     - { type: .bss, vram: 0x8011FB10, name: options_menu}
-  #     - { type: .bss, vram: 0x801247C0, name: save_context }
+  - name: ovl_i6
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i6
+    start: 0xF1900
+    vram: 0x801225D0
+    follows_vram: ovl_i2
+    bss_size: 0xCEB0
+    symbol_name_format: i6_$VRAM
+    subsegments:
+      - [0xF1900, asm, main_menu]
+      - [0xF39F0, asm, credits]
+      - [0xF7B90, asm, options_menu]
+      - [0xF9710, asm, E7CF0]
+      - [0xF9780, data, main_menu]
+      - [0xF9AE0, data, credits]
+      - [0xFA8C0, data, options_menu]
+      - [0xFAA10, rodata, main_menu]
+      - [0xFABA0, rodata, credits]
+      - [0xFB410, rodata, options_menu]
+      - { type: bss, vram: 0x8012C100, name: main_menu }
+      - { type: bss, vram: 0x8012C2E0, name: credits }
+      - { type: bss, vram: 0x8012C300, name: options_menu }
+      - { type: bss, vram: 0x80130FB0, name: save_context }
 
   - name: ending
     exclusive_ram_id: overlay
@@ -253,20 +253,20 @@
     dir: overlays/ending
     start: 0xFB430
     vram: 0x8014F2B0
-    # follows_vram: ovl_i3
+    follows_vram: ovl_i3
     bss_size: 0xDD0
     symbol_name_format: i7_$VRAM
     subsegments:
       - [0xFB430, asm, ending]
-      # - [0xED220, asm, ending_effects]
+      - [0xFEC20, asm, ending_effects]
       - [0x1018F0, data, ending]
-      # - [0xF00B0, .data, ending_racer_focus_scripts]
-      # - [0xF0C60, .data, ending_effects]
-      # - [0xF1000, .data, ending_podium_camera_scripts]
-      # - [0xF13A0, .rodata, ending]
+      - [0x101AB0, data, ending_racer_focus_scripts]
+      - [0x102660, data, ending_effects]
+      - [0x102A00, data, ending_podium_camera_scripts]
+      - [0x102DA0, rodata, ending]
       - { type: bss, vram: 0x80156D60, name: podium_draw_data }
-      # - { type: .bss, vram: 0x8014BDE0, name: ending }
-      # - { type: .bss, vram: 0x8014BF90, name: ending_effects }
+      - { type: bss, vram: 0x801576C0, name: ending }
+      - { type: bss, vram: 0x80157870, name: ending_effects }
 
   - name: records
     exclusive_ram_id: overlay
@@ -274,7 +274,7 @@
     dir: overlays/records
     start: 0x102EE0
     vram: 0x8014F2B0
-    # follows_vram: ovl_i3
+    follows_vram: ovl_i3
     bss_size: 0x130
     symbol_name_format: i8_$VRAM
     subsegments:
@@ -283,29 +283,27 @@
       - [0x1044C0, rodata, records]
       - { type: bss, vram: 0x801508A0, name: records }
 
-  - [0x1044D0, bin]
+  - name: ovl_i9
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i9
+    start: 0x1044D0
+    vram: 0x801225D0
+    follows_vram: ovl_i2
+    bss_size: 0x10
+    symbol_name_format: i9_$VRAM
+    subsegments:
+      - [0x1044D0, asm, machine_draw]
+      - [0x158390, data, machine_draw]
+      - { type: bss, vram: 0x801766F0, name: machine_draw }
 
-  # - name: ovl_i9
-  #   exclusive_ram_id: overlay
-  #   type: code
-  #   dir: overlays/ovl_i9
-  #   start: 0xF2AC0
-  #   vram: 0x80115DF0
-  #   follows_vram: ovl_i2
-  #   bss_size: 0x10
-  #   symbol_name_format: i9_$VRAM
-  #   subsegments:
-  #     - [0xF2AC0, c, machine_draw]
-  #     - [0x145740, .data, machine_draw]
-  #     - { type: .bss, vram: 0x80168CD0, name: machine_draw }
-
-  # - name: ovl_i10
-  #   exclusive_ram_id: overlay
-  #   type: code
-  #   dir: overlays/ovl_i10
-  #   start: 0x1459A0
-  #   vram: 0x80115DF0
-  #   follows_vram: ovl_i2
-  #   symbol_name_format: i10_$VRAM
-  #   subsegments:
-  #     - [0x1459A0, c]
+  - name: ovl_i10
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/ovl_i10
+    start: 0x1585F0
+    vram: 0x801225D0
+    follows_vram: ovl_i2
+    symbol_name_format: i10_$VRAM
+    subsegments:
+      - [0x1585F0, asm]

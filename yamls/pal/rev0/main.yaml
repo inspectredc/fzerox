@@ -393,8 +393,7 @@
       - { type: bss, vram: 0x800D7A00, name: game/bordered_box }
       - { type: bss, vram: 0x800D7A70, name: game/camera }
       - { type: bss, vram: 0x800D8710, name: game/racer }
-      - { type: bss, vram: 0x800EAD60, name: game/course }
-      - { type: .bss, vram: 0x800EAD60, name: audio/rom/lib/load }
+      - { type: bss, vram: 0x800EAD60, name: audio/rom/lib/load }
 
       - { type: .bss, vram: 0x800EAE60, name: libultra/io/sptask }
       - { type: .bss, vram: 0x800EAEA0, name: libultra/io/leointerrupt }
