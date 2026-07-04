@@ -16,3 +16,10 @@ jobs:
       SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
       SECRET_REPO: ${{ secrets.SECRET_REPO }}
       SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
+  build-ek:
+    needs: authorise
+    uses: ./.github/workflows/ci-ek-validate.yaml
+    secrets:
+      SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
+      SECRET_REPO: ${{ secrets.SECRET_REPO }}
+      SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
