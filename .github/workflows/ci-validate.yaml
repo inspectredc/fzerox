@@ -24,7 +24,7 @@ jobs:
         token: ${{ secrets.FZEROX_TOKEN }}
         path: fzerox-secret
     - name: Decrypt Secrets
-      working-directory: FZEROX_DEPENDENCIES
+      working-directory: fzerox-secret
       run: |
         ./decrypt_secret.sh
         mv baserom.${{ matrix.version }}.rev0.z64 ..
