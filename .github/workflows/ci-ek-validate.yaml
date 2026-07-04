@@ -22,15 +22,15 @@ jobs:
         token: ${{ secrets.FZEROX_TOKEN }}
         path: fzerox-secret
     - name: Decrypt Secrets
-      working-directory: FZEROX_DEPENDENCIES
+      working-directory: fzerox-secret
       run: |
         ./decrypt_secret.sh
-        mv baserom.jp.ndd ..
+        mv baserom.jp.ndd ../baserom.jp.ek.ndd
       env:
           SECRET_PASSPHRASE: ${{ secrets.FZEROX_PASSPHRASE }}
           SECRET_NAME: baserom.jp.ndd
     - name: Decrypt Secrets Base
-      working-directory: FZEROX_DEPENDENCIES
+      working-directory: fzerox-secret
       run: |
         ./decrypt_secret.sh
         mv baserom.jp.rev0.z64 ..
