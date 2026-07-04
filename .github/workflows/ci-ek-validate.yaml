@@ -25,7 +25,7 @@ jobs:
       working-directory: fzerox-secret
       run: |
         ./decrypt_secret.sh
-        mv baserom.jp.ndd ..
+        mv baserom.jp.ndd ../baserom.jp.ek.ndd
       env:
           SECRET_PASSPHRASE: ${{ secrets.FZEROX_PASSPHRASE }}
           SECRET_NAME: baserom.jp.ndd
