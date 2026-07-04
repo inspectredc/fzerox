@@ -1,24 +1,36 @@
-name: Build
-
-# Build on every branch push, tag push, and pull request change:
-on: [push, pull_request_target]
-
+name: ci-validate
+on:
+  workflow_call:
+    secrets:
+      FZEROX_PASSPHRASE: { required: true }
+      FZEROX_DEPENDENCIES: { required: true }
+      FZEROX_TOKEN: { required: true }
 jobs:
-  build_repo:
-    name: Build repo
+  build:
     runs-on: ubuntu-latest
-
     strategy:
       fail-fast: false
       matrix:
         version: [us, jp]
-
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v4
       with:
-        ref: ${{ github.event.pull_request.head.sha }}
-
+        ref: ${{ github.event.pull_request.head.sha || github.ref }}
+    - name: Fetch Secrets
+      uses: actions/checkout@v4
+      with:
+        repository: ${{ secrets.FZEROX_DEPENDENCIES }}
+        token: ${{ secrets.FZEROX_TOKEN }}
+        path: fzerox-secret
+    - name: Decrypt Secrets
+      working-directory: fzerox-secret
+      run: |
+        ./decrypt_secret.sh
+        mv baserom.${{ matrix.version }}.rev0.z64 ..
+      env:
+          SECRET_PASSPHRASE: ${{ secrets.FZEROX_PASSPHRASE }}
+          SECRET_NAME: baserom.${{ matrix.version }}.rev0.z64
     - name: Install package requirements
       run: sudo apt-get install -y git make git build-essential binutils-mips-linux-gnu python3 python3-pip
 
@@ -30,16 +42,6 @@ jobs:
 
     - name: build toolchain
       run: make -s -C tools
-
-    - name: Get extra dependencies
-      uses: actions/checkout@v4
-      with:
-        repository: ${{ secrets.FZEROX_DEPENDENCIES }}
-        token: ${{ secrets.FZEROX_TOKEN }}
-        path: fzerox-secret
-
-    - name: Get the dependency
-      run: cp -r fzerox-secret/baserom.${{ matrix.version }}.rev0.z64 ./
 
     - name: Compile
       run: make init VERSION=${{ matrix.version }}
