@@ -7,7 +7,7 @@ s32 Mfs_LoadFileIter(s32 fatId, u8* buf, u32 sizeToLoad, s32* nextFatIdPtr, u8**
     s32 lbasToLoad;
     u32 blocksSize;
 
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     D_80794CDC = 1;
 #endif
     nLBAs = Mfs_GetFileLbaCount(fatId);
@@ -57,10 +57,10 @@ s32 Mfs_LoadFile(u16 entryId, u8* buf, s32 sizeToLoad) {
     while (sizeToLoad != 0) {
         attr = gMfsRamArea.directoryEntry[entryId].attr;
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
         Mfs_LoadFileIter(fatId, buf, sizeToLoad, &newFatId, &newBufPos, &newSize,
                          (attr & MFS_FILE_ATTR_ENCODE) ? true : false);
-#else // MFS_VERSION_B
+#else
         if (Mfs_LoadFileIter(fatId, buf, sizeToLoad, &newFatId, &newBufPos, &newSize,
                              (attr & MFS_FILE_ATTR_ENCODE) ? true : false) < 0) {
             return -1;
@@ -70,7 +70,7 @@ s32 Mfs_LoadFile(u16 entryId, u8* buf, s32 sizeToLoad) {
         buf = newBufPos;
         sizeToLoad = newSize;
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
         if (sp38++ == 4) {
             while (true) {}
         }
@@ -82,6 +82,10 @@ s32 Mfs_LoadFile(u16 entryId, u8* buf, s32 sizeToLoad) {
 
 s32 Mfs_CalculateSizeAndLoadFile(u16 entryId, u8* buf, u32 sizeToLoad) {
     u32 fileSize;
+#if MFS_VERSION == MFS_VERSION_C
+    s32 sp18;
+#endif
+
 #if MFS_VERSION == MFS_VERSION_A
     if (gMfsRamArea.directoryEntry[entryId].attr & MFS_FILE_ATTR_FORBID_R) {
         if (Mfs_ValidateGameCode(entryId) < 0) {
@@ -89,9 +93,7 @@ s32 Mfs_CalculateSizeAndLoadFile(u16 entryId, u8* buf, u32 sizeToLoad) {
             return -1;
         }
     }
-#else // MFS_VERSION_B
-    s32 sp18;
-
+#else
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_READ | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         entryId, 0, 0) < 0) {
@@ -103,9 +105,9 @@ s32 Mfs_CalculateSizeAndLoadFile(u16 entryId, u8* buf, u32 sizeToLoad) {
     if ((sizeToLoad == 0) || (fileSize < sizeToLoad)) {
         sizeToLoad = fileSize;
     }
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
     return Mfs_LoadFile(entryId, buf, sizeToLoad);
-#else // MFS_VERSION_B
+#else
     return sp18 = Mfs_LoadFile(entryId, buf, sizeToLoad);
 #endif
 }
@@ -113,7 +115,7 @@ s32 Mfs_CalculateSizeAndLoadFile(u16 entryId, u8* buf, u32 sizeToLoad) {
 s32 Mfs_LoadFileInDir(u16 dirId, char* name, char* extension, u8* buf, s32 sizeToLoad) {
     u16 entryId;
 
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     D_80794CDC = 4;
 #endif
     if (func_i1_80404830() < 0) {
@@ -138,9 +140,9 @@ s32 Mfs_LoadFileInDir(u16 dirId, char* name, char* extension, u8* buf, s32 sizeT
 }
 
 s32 Mfs_CheckAndLoadFile(u16 entryId, u8* buf, s32 sizeToLoad) {
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
     if (func_i1_80404830() < 0) {
-#else // MFS_VERSION_B
+#else
     s32 err;
 
     err = func_i1_80404830();
@@ -169,7 +171,7 @@ s32 Mfs_LoadFileFromOffset(u16 entryId, u8* buf, s32 offset, u32 sizeToLoad) {
     u32 spaceAfterOffset;
     bool isEncoded;
     u32 blocksSize;
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     s32 sizeLoaded;
 #endif
     s32 fatId;
@@ -186,7 +188,7 @@ s32 Mfs_LoadFileFromOffset(u16 entryId, u8* buf, s32 offset, u32 sizeToLoad) {
     } else {
         isEncoded = false;
     }
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     D_80794CDC = 1;
 #endif
     Mfs_CopyFATFromRam();
@@ -200,10 +202,10 @@ s32 Mfs_LoadFileFromOffset(u16 entryId, u8* buf, s32 offset, u32 sizeToLoad) {
         bcopy((blocksSize - spaceAfterOffset) + D_i1_80415190, buf,
               (spaceAfterOffset > sizeRemaining) ? sizeRemaining : spaceAfterOffset);
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
         bufPtr += (spaceAfterOffset > sizeRemaining) ? sizeRemaining : spaceAfterOffset;
         sizeRemaining -= (spaceAfterOffset > sizeRemaining) ? sizeRemaining : spaceAfterOffset;
-#else // MFS_VERSION_B
+#else
         sizeLoaded = (spaceAfterOffset > sizeRemaining) ? sizeRemaining : spaceAfterOffset;
         bufPtr += sizeLoaded;
         sizeRemaining -= sizeLoaded;
@@ -284,7 +286,7 @@ s32 Mfs_CalculateSizeAndLoadFileFromOffset(u16 entryId, u8* buf, s32 offset, u32
             return -1;
         }
     }
-#else // MFS_VERSION_B
+#else
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_READ | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         entryId, 0, 0) < 0) {
@@ -324,7 +326,7 @@ s32 Mfs_LoadFileInDirFromOffset(u16 dirId, char* name, char* extension, u8* buf,
     return Mfs_CalculateSizeAndLoadFileFromOffset(entryId, buf, offset, sizeToLoad);
 }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 s32 func_i1_80409F5C(u16 entryId, u8* buf, s32 offset, u32 sizeToLoad) {
     if (func_i1_80404830() < 0) {
         return -1;

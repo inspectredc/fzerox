@@ -1,7 +1,7 @@
 #include "macros.h"
 #include "leo/mfs.h"
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 s32 func_i1_80404E50(u16 parentDirId, char* name, bool writeChanges) {
     u16 sp1E;
     u16 sp1C;
@@ -18,6 +18,13 @@ s32 func_i1_80404E50(u16 parentDirId, char* name, bool writeChanges) {
         gMfsError = N64DD_ARGUMENT_ILLEGAL;
         return -1;
     }
+#if MFS_VERSION == MFS_VERSION_B
+    if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_DIRECTORY, 0, 0,
+                                        parentDirId) < 0) {
+        gMfsError = 0x106;
+        return -1;
+    }
+#endif
     if (Mfs_ValidateFileName(name) < 0) {
         gMfsError = N64DD_ARGUMENT_ILLEGAL;
         return -1;
@@ -90,7 +97,7 @@ s32 Mfs_CreateRootDirectory(bool writeChanges) {
     return 0;
 }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 s32 func_i1_80405174(u16 dirId, char* name) {
     u16 dirEntryIndex;
 
@@ -140,7 +147,7 @@ s32 Mfs_SetWorkingDir(u16 dirId) {
     return Mfs_SetWorkingDirImpl(dirId);
 }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 s32 func_i1_80405368(void) {
     return Mfs_SetWorkingDirImpl(MFS_ENTRY_WORKING_PARENT_DIR);
 }
@@ -167,8 +174,20 @@ s32 func_i1_80405398(u16 dirId) {
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
+#if MFS_VERSION == MFS_VERSION_B
+    if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_READ | MFS_VALIDATION_CHECK_DIRECTORY, 0, 0, dirId) < 0) {
+        gMfsError = 0x106;
+        return -1;
+    }
+#endif
     D_i1_8042A602 = 0;
     D_i1_8042A600 = dirId;
+
+#if MFS_VERSION == MFS_VERSION_A
+    //! @bug BAD RETURN
+#else
+    return 0;
+#endif
 }
 
 u16 func_i1_8040547C(void) {
@@ -204,7 +223,12 @@ u16 func_i1_8040555C(u16 dirId, char* name) {
         return MFS_ENTRY_DOES_NOT_EXIST;
     }
     entryId = Mfs_GetDirectoryIndexFromParent(dirId, name);
+#if MFS_VERSION == MFS_VERSION_A
+    //! @bug entryId should exit if the entry does not exist
     if (entryId != MFS_ENTRY_DOES_NOT_EXIST) {
+#else
+    if (entryId == MFS_ENTRY_DOES_NOT_EXIST) {
+#endif
         gMfsError = N64DD_NOT_FOUND;
         return MFS_ENTRY_DOES_NOT_EXIST;
     }
@@ -235,7 +259,7 @@ u16 Mfs_GetParentDir(u16 dirId) {
     return gMfsRamArea.directoryEntry[dirId].parentDirId;
 }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 u16 func_i1_80405754(void) {
     if (func_i1_80404830() < 0) {
         return 0xFFF0;
@@ -286,7 +310,7 @@ s32 Mfs_MkDir(u16 dirId, u16 subDirId) {
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT | MFS_VALIDATION_CHECK_SUB_ENTRY,
                                         dirEntryIndex, subDirEntryIndex, dirId) < 0) {
@@ -307,7 +331,7 @@ s32 Mfs_MkDir(u16 dirId, u16 subDirId) {
     return 0;
 }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 s32 func_i1_804059B8(u16 dirId, char* name, bool writeChanges) {
     u16 parentId;
     u16 entryId;
@@ -338,6 +362,14 @@ s32 func_i1_804059B8(u16 dirId, char* name, bool writeChanges) {
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
+#if MFS_VERSION == MFS_VERSION_B
+    if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_DIRECTORY |
+                                            MFS_VALIDATION_CHECK_ENTRY_AS_DIRECTORY,
+                                        0, 0, dirId) < 0) {
+        gMfsError = 0x106;
+        return -1;
+    }
+#endif
     parentId = gMfsRamArea.directoryEntry[entryId].parentDirId;
     if (Mfs_GetDirectoryIndexFromParent(parentId, name) != MFS_ENTRY_DOES_NOT_EXIST) {
         gMfsError = 0x100;
@@ -360,7 +392,12 @@ s32 func_i1_80405B98(u16 arg0, char* arg1, char* arg2, bool writeChanges) {
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
+#if MFS_VERSION == MFS_VERSION_A
+    //! @bug BAD RETURN
     func_i1_804059B8(sp1E, arg2, writeChanges);
+#else
+    return func_i1_804059B8(sp1E, arg2, writeChanges);
+#endif
 }
 #endif
 
@@ -371,7 +408,7 @@ s32 Mfs_DeleteDirEntry(u16 entryId, bool writeChanges) {
 
 #if MFS_VERSION == MFS_VERSION_A
     if (gMfsRamArea.directoryEntry[entryId].attr & MFS_FILE_ATTR_FORBID_W) {
-#else // MFS_VERSION_B
+#else
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         entryId, 0, 0) < 0) {
@@ -408,7 +445,7 @@ s32 Mfs_DeleteDir(u16 dirId, char* name, bool writeChanges) {
     s32 sp18;
 
     sp18 = 0;
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     D_80794CDC = 4;
 #endif
     if (func_i1_80404830() < 0) {
@@ -447,7 +484,7 @@ s32 Mfs_DeleteDir(u16 dirId, char* name, bool writeChanges) {
     return 0;
 }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 s32 func_i1_80405EFC(u16 dirId, bool writeChanges) {
     u16 entryId;
 

@@ -1,6 +1,6 @@
-/*****************************
- *    MFS Version A Only     *
- *****************************/
+/******************************
+ *  MFS Version A and B Only  *
+ ******************************/
 
 #include "leo/mfs.h"
 
@@ -20,7 +20,13 @@ s32 Mfs_UpdateFileCreationDate(u16 dirId, char* name, char* extension, MfsTimeFo
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
+#if MFS_VERSION == MFS_VERSION_A
     if (gMfsRamArea.directoryEntry[entryId].attr & MFS_FILE_ATTR_FORBID_W) {
+#else
+    if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
+                                            MFS_VALIDATION_CHECK_PARENT,
+                                        entryId, 0, 0) < 0) {
+#endif
         gMfsError = 0x106;
         return -1;
     }

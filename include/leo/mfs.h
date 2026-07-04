@@ -7,6 +7,7 @@
 
 #define MFS_VERSION_A 0
 #define MFS_VERSION_B 1
+#define MFS_VERSION_C 2
 
 typedef struct MfsTimeFormat {
     union {
@@ -114,7 +115,7 @@ typedef struct MfsRamArea {
 
 extern u8 D_i1_80415190[0x4D10];
 
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
 extern u8 D_807801E0[0x4D10];
 #endif
 
@@ -127,8 +128,10 @@ extern OSMesg D_i1_80428608;
 extern s32 gDirectoryEntryCount;
 extern s32 gMfsError;
 
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
 extern s32 D_80794CD8;
+#endif
+#if MFS_VERSION >= MFS_VERSION_B
 extern s32 D_80794CDC;
 #endif
 
@@ -142,7 +145,7 @@ extern char D_i1_80428648[];
 extern char gCompanyCode[2];
 extern char gGameCode[4];
 
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
 extern u8 D_80794D48;
 #endif
 
@@ -218,7 +221,7 @@ void Mfs_SetDefaultLeoHandlerFuncs(void);
 s32 Mfs_ModeSelectAsync(s32 standby, s32 sleep);
 #if MFS_VERSION == MFS_VERSION_A
 s32 Mfs_InitRamArea(s32 arg0);
-#else // MFS_VERSION_B
+#else
 s32 Mfs_InitRamArea(s32 arg0, u8 attr, u8* volumeName);
 #endif
 void func_i1_804040EC(void);
@@ -229,7 +232,7 @@ s32 func_i1_80404830(void);
 s32 func_i1_804065C0(void);
 s32 func_i1_804047F0(void);
 s32 Mfs_CopyRamAreaFromBackup(void);
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
 s32 func_80760A84(void);
 s32 Mfs_CalculateVolumeChecksum(void);
 s32 Mfs_CheckChecksum(void);

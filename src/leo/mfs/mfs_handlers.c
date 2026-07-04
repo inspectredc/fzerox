@@ -21,7 +21,7 @@ void Mfs_SetDefaultLeoHandlerFuncs(void) {
     return;
 }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 void Mfs_SetLeoHandlerFunc(s32 handlerId, void* func) {
     switch (handlerId) {
         case 0:

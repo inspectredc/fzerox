@@ -14,7 +14,7 @@ s32 Mfs_ValidateFileName(char* name) {
     for (ptr = name; *ptr != 0; ptr++) {
 #if MFS_VERSION == MFS_VERSION_A
         if (*ptr == '/') {
-#else // MFS_VERSION_B
+#else
         if (*ptr == '/' || *ptr == '.' || *ptr == ':') {
 #endif
             return -1;

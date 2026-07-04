@@ -73,6 +73,8 @@
                 "ASSET_VERSION=us",
                 "ASSET_REVISION=rev0",
                 "BUILD_VERSION=VERSION_I",
+                "LEO_VERSION=1",
+                "MFS_VERSION=1",
                 "VERSION_PAL"
             ],
             "cStandard": "gnu89", // C89 + some GNU extensions from C99 like C++ comments
@@ -97,8 +99,8 @@
                 "_MIPS_SZLONG=32",
                 "F3DEX_GBI_2",
                 "EXPANSION_KIT=1",
-                "LEO_VERSION=1",
-                "MFS_VERSION=1",
+                "LEO_VERSION=2",
+                "MFS_VERSION=2",
                 "ASSET_VERSION=jp",
                 "ASSET_REVISION=rev0",
                 "BUILD_VERSION=VERSION_J",

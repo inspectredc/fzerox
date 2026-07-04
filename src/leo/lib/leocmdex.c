@@ -3,7 +3,7 @@
 
 OSPiHandle* LEOPiInfo;
 OSIoMesg LEOPiDmaParam;
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
 s32 LEO_currentCommand;
 #endif
 
@@ -20,7 +20,7 @@ LEOCmdRead leo_sys_read_cmd = {
 void leomain(void* arg0) {
     u32 cur_status;
     u32 sense_code;
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
     u8 disktype_bak;
 #endif
 
@@ -47,7 +47,7 @@ void leomain(void* arg0) {
 
     while (true) {
         osRecvMesg(&LEOcommand_que, (OSMesg*) &LEOcur_command, OS_MESG_BLOCK);
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
         LEO_currentCommand = LEOcur_command->header.command;
 #endif
         if (LEOcur_command->header.command == 0) {
@@ -67,7 +67,7 @@ void leomain(void* arg0) {
             } else {
                 switch (sense_code) {
                     case LEO_SENSE_COMMAND_PHASE_ERROR:
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
                     case LEO_SENSE_WAITING_NMI:
 #endif
                     case LEO_SENSE_DEVICE_COMMUNICATION_FAILURE:
@@ -90,7 +90,7 @@ void leomain(void* arg0) {
 #if LEO_VERSION == LEO_VERSION_A
                             leoClrUA_MEDIUM_CHANGED();
 #endif
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION >= LEO_VERSION_B
                         case LEO_COMMAND_START_STOP:
                         case LEO_COMMAND_MODE_SELECT:
 #endif
@@ -140,7 +140,7 @@ void leomain(void* arg0) {
             switch (LEOcur_command->header.command) {
                 case LEO_COMMAND_INQUIRY:
                 case LEO_COMMAND_TEST_UNIT_READY:
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION >= LEO_VERSION_B
                 case LEO_COMMAND_START_STOP:
 #endif
                 case LEO_COMMAND_MODE_SELECT:

@@ -16,7 +16,7 @@ s32 Mfs_AddFileAllocationTableEntry(s32* fatIdPtr, s32 lba, s32 nLBAs) {
 
     lbaIndex = lba;
     fatId = *fatIdPtr;
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
     while (nLBAs > 0) {
         if (fatId < 0) {
             fatId = gCurrentDirectoryEntry.fileAllocationTableId = lbaIndex;
@@ -26,7 +26,7 @@ s32 Mfs_AddFileAllocationTableEntry(s32* fatIdPtr, s32 lba, s32 nLBAs) {
             fatId = lbaIndex++;
         }
     }
-#else // MFS_VERSION_B
+#else
     if (fatId < 0) {
         fatId = gCurrentDirectoryEntry.fileAllocationTableId = lbaIndex;
     } else {

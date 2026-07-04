@@ -290,6 +290,7 @@
       - [0x6D660, c, leo/mfs/mfs_ram]
       - [0x6EB90, c, leo/mfs/mfs_dir]
       - [0x6F3B0, c, leo/mfs/mfs_device]
+      - [0x6F9F0, c, leo/mfs/mfs_util]
       - [0x70580, c, leo/mfs/mfs_name]
       - [0x70780, c, leo/mfs/mfs_save]
       - [0x720D0, c, leo/mfs/mfs_fat]
@@ -300,7 +301,6 @@
       - [0x73E60, c, leo/mfs/mfs_prepared_dir]
       - [0x74060, c, leo/mfs/mfs_handlers]
       - [0x74100, c, leo/mfs/mfs_attr]
-      - [0x744C0, c, leo/mfs/mfs_validate]
       - [0x74970, c, leo/mfs/mfs_copy]
       - [0x75000, c, sys/disk/75000]
       - { start: 0x76660, type: textbin, use_src_path: True, name: rsp/aspmain }

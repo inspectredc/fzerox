@@ -177,7 +177,7 @@ LEOError read_write_track(void) {
                              *(u32*) &LEOC2_Syndrome[block][0x08] | *(u32*) &LEOC2_Syndrome[block][0x0C]) != 0) {
 #if LEO_VERSION == LEO_VERSION_A
                             message = LEO_ERROR_NO_REFERENCE_POSITION_FOUND;
-#else // LEO_VERSION_B
+#else
                             message = LEO_ERROR_UNRECOVERED_READ_ERROR;
 #endif
                             goto track_end;
@@ -214,7 +214,7 @@ LEOError read_write_track(void) {
         }
 #if LEO_VERSION == LEO_VERSION_A
         if (message == LEO_ERROR_NO_REFERENCE_POSITION_FOUND) {
-#else // LEO_VERSION_B
+#else
         if (message == LEO_ERROR_NO_REFERENCE_POSITION_FOUND ||
             (message == LEO_ERROR_UNRECOVERED_READ_ERROR && retry_cntr == 32)) {
 #endif

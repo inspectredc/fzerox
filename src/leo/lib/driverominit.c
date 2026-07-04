@@ -5,7 +5,7 @@
 #include "libc/stdbool.h"
 #include "leo/leo_internal.h"
 
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
 OSPiHandle DriveRomHandle ALIGNED(8);
 
 OSPiHandle* osDriveRomInit(void) {

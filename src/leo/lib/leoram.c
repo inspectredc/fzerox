@@ -30,7 +30,7 @@ u8 LEOdrive_flag;
 #if LEO_VERSION == LEO_VERSION_A
 u8 LEOclr_que_flag;
 u16 LEOrw_flags;
-#else // LEO_VERSION_B
+#else
 volatile u8 LEOclr_que_flag;
 volatile u16 LEOrw_flags;
 #endif

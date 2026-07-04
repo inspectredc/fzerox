@@ -75,14 +75,18 @@ label:
         case 1:
             break;
         case 0:
+#if MFS_VERSION == MFS_VERSION_A
             if (Mfs_InitRamArea(1) < 0) {}
+#endif
             break;
         case -1:
             switch (gMfsError) {
                 case LEO_ERROR_MEDIUM_NOT_PRESENT:
                     break;
                 case LEO_ERROR_UNRECOVERED_READ_ERROR:
+#if MFS_VERSION == MFS_VERSION_A
                     Mfs_InitRamArea(1);
+#endif
                     break;
             }
             break;

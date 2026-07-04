@@ -3,7 +3,7 @@
 s32 Mfs_RenameFile(u16 dirId, char* newName, char* newExtension) {
     s32 err;
 
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         dirId, 0, 0) < 0) {
@@ -28,7 +28,7 @@ s32 Mfs_RenameFileInDir(u16 dirId, char* oldName, char* oldExtension, char* newN
                         bool writeChanges) {
     u16 entryId;
 
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     D_80794CDC = 4;
 #endif
     if (func_i1_80404830() < 0) {
@@ -47,7 +47,7 @@ s32 Mfs_RenameFileInDir(u16 dirId, char* oldName, char* oldExtension, char* newN
 #endif
 #if MFS_VERSION == MFS_VERSION_A
     Mfs_RenameFile(entryId, newName, newExtension);
-#else // MFS_VERSION_B
+#else
     if (Mfs_RenameFile(entryId, newName, newExtension) < 0) {
         return -1;
     }
@@ -61,7 +61,7 @@ s32 Mfs_RenameFileInDir(u16 dirId, char* oldName, char* oldExtension, char* newN
 }
 
 s32 Mfs_CheckAndRenameFile(u16 entryId, char* newName, char* newExtension, bool writeChanges) {
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     D_80794CDC = 4;
 #endif
     if (func_i1_80404830() < 0) {
@@ -81,7 +81,7 @@ s32 Mfs_CheckAndRenameFile(u16 entryId, char* newName, char* newExtension, bool 
     }
 #if MFS_VERSION == MFS_VERSION_A
     Mfs_RenameFile(entryId, newName, newExtension);
-#else // MFS_VERSION_B
+#else
     if (Mfs_RenameFile(entryId, newName, newExtension) < 0) {
         return -1;
     }

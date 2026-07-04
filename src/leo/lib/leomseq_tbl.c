@@ -20,7 +20,7 @@ void leoSet_mseq(u16 rwmode) {
 
 #if LEO_VERSION == LEO_VERSION_A
     osEPiWriteIo(LEOPiInfo, LEO_SEQ_STATUS, (LEOasic_seq_ctl_shadow &= ~LEO_STATUS_DATA_REQUEST));
-#else // LEO_VERSION_B
+#else
     LEOasic_seq_ctl_shadow &= ~LEO_STATUS_DATA_REQUEST;
     osEPiWriteIo(LEOPiInfo, LEO_SEQ_STATUS, LEOasic_seq_ctl_shadow);
 #endif

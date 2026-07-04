@@ -17,7 +17,7 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
         return LEO_ERROR_GOOD;
     }
 
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
     if (!LeoDriveExist()) {
         return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
     }
@@ -25,7 +25,7 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     leoDiskHandle = osLeoDiskInit();
     driveRomHandle = osDriveRomInit();
 
-#if LEO_VERSION == LEO_VERSION_A
+#if LEO_VERSION <= LEO_VERSION_B
     osEPiReadIo(leoDiskHandle, LEO_STATUS, &status);
     if (status & LEO_STATUS_PRESENCE_MASK) {
         return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
@@ -34,9 +34,9 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
 
     __leoActive = true;
 
-#if LEO_VERSION == LEO_VERSION_A
+#if LEO_VERSION <= LEO_VERSION_B
     __osSetHWIntrRoutine(1, __osLeoInterrupt);
-#else // LEO_VERSION_B
+#else
     __osSetHWIntrRoutine(1, __osLeoInterrupt, leoDiskStack + sizeof(leoDiskStack) - 16);
 #endif
     leoInitialize(comPri, intPri, cmdBuf, cmdMsgCnt);
@@ -65,7 +65,9 @@ s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsg
     __leoVersion.driver = cmdBlockInq.version;
 #if LEO_VERSION == LEO_VERSION_A
     __leoVersion.drive = 4;
-#else // LEO_VERSION_B
+#elif LEO_VERSION == LEO_VERSION_B
+    __leoVersion.drive = 5;
+#else
     __leoVersion.drive = 6;
 #endif
     __leoVersion.deviceType = cmdBlockInq.dev_type;
