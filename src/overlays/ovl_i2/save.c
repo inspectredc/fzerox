@@ -605,8 +605,8 @@ s32 Save_SaveCourseRecordProfiles(s32 courseIndex) {
         *saveCourseRecord = gSaveContext.profileSaves[0].courses[0];
         DDSave_SaveCourseGhost(courseIndex);
     }
-#elif defined (VERSION_PAL)
-    }
+#elif defined(VERSION_PAL)
+}
 #endif
 
     return 0;
@@ -2100,7 +2100,7 @@ s32 Save_LoadStaffGhost_impl(s32 courseIndex, s32 encodedCourseIndex) {
         s32 i;
         ghostRecord = (GhostRecord*) gSaveBuffer;
         ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
-        
+
         ghostRecord->raceTime = Math_Round(ghostRecord->raceTime * (60.0f / 50.0f));
 
         for (i = 0; i < 3; i++) {

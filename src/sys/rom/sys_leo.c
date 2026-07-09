@@ -549,7 +549,7 @@ void func_800764AC(u32 standby, u32 sleep) {
     switch (sSLLeoError) {
         case LEO_ERROR_GOOD:
         case LEO_ERROR_QUEUE_FULL:
-             break;
+            break;
         case LEO_ERROR_MEDIUM_MAY_HAVE_CHANGED:
             while (true) {
                 if (SLCheckDiskInsert() != 0) {
