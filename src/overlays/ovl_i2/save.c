@@ -1981,7 +1981,9 @@ s32 Save_LoadStaffGhostRecord(GhostInfo* ghostInfo, s32 courseIndex) {
     Save_RomCopyGhostRecord(ghostRecord, courseIndex);
     if (ghostInfo != NULL) {
         func_i2_80101590(ghostRecord, ghostInfo);
+#ifdef VERSION_PAL
         ghostInfo->raceTime = Math_Round(ghostInfo->raceTime * (60.0f / 50.0f));
+#endif
     }
     return 0;
 }
