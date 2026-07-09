@@ -780,7 +780,6 @@ void Matrix_SetTransRot(Mtx* mtx, MtxF* mtxF, f32 scale, s32 xRot, s32 yRot, s32
     Matrix_ToMtx(mtxF, mtx);
 }
 
-#if !defined(EXPANSION_KIT) || defined(NON_MATCHING)
 void Matrix_SetAxisRotation(Mtx* mtx, MtxF* mtxF, f32 scale, s32 angle, f32 xAxis, f32 yAxis, f32 zAxis, f32 xPos, f32 yPos,
                             f32 zPos) {
     f32 temp_fa0;
@@ -902,9 +901,6 @@ void Matrix_SetAxisRotation(Mtx* mtx, MtxF* mtxF, f32 scale, s32 angle, f32 xAxi
     mtxF->m[3][3] = 1.0f;
     Matrix_ToMtx(mtxF, mtx);
 }
-#else
-#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
-#endif
 
 void Matrix_SetShadowProjection(Mtx* mtx, MtxF* mtxF, f32 lightProjectionX, f32 lightProjectionY, f32 lightProjectionZ,
                                 f32 planePointX, f32 planePointY, f32 planePointZ, f32 planeNormalX, f32 planeNormalY,
