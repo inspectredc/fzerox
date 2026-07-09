@@ -66,71 +66,16 @@ s32 Mfs_WriteNewFileInDir(u16 parentDirId, char* name, char* extension, u8* buf,
     Mfs_CopyDirEntryToRam(entryId);
     Mfs_IncreaseFileRC(entryId);
     Mfs_CopyFATToRam();
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
     //! @bug bad return
-#else // MFS_VERSION_B
+#else
     return 0;
 #endif
 }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 s32 func_i1_804073F4(u16 parentDirId, char* name, char* extension, u8* buf, u32 fileSize, s32 attr, s32 copyCount,
                      bool writeChanges) {
-    u16 fileEntryId;
-
-    gMfsError = LEO_ERROR_GOOD;
-    if (func_i1_80404830() < 0) {
-        return -1;
-    }
-    if (fileSize == 0) {
-        gMfsError = N64DD_ARGUMENT_ILLEGAL;
-        return -1;
-    }
-    if (Mfs_ValidateFileName(name) < 0) {
-        gMfsError = N64DD_ARGUMENT_ILLEGAL;
-        return -1;
-    }
-    if (parentDirId == MFS_ENTRY_WORKING_DIR) {
-        parentDirId = gWorkingDirectory;
-    }
-    if (parentDirId == MFS_ENTRY_WORKING_PARENT_DIR) {
-        parentDirId = Mfs_GetParentDir(MFS_ENTRY_WORKING_DIR);
-    }
-    D_i1_804286E0 = 0;
-    fileEntryId = Mfs_GetFileIndex(parentDirId, name, extension);
-    if (fileEntryId != MFS_ENTRY_DOES_NOT_EXIST) {
-        D_i1_804286E0 = gMfsRamArea.directoryEntry[fileEntryId].renewalCounter;
-        if (gMfsRamArea.directoryEntry[fileEntryId].attr & MFS_FILE_ATTR_FORBID_W) {
-            gMfsError = 0x106;
-            return -1;
-        }
-        Mfs_DeleteFileInDir(parentDirId, name, extension, 0);
-        if (Mfs_RamGetFreeSize() < fileSize) {
-            func_i1_804040EC();
-            gMfsError = N64DD_AREA_LACKED;
-            return -1;
-        }
-    }
-
-    if (Mfs_RamGetFreeSize() < fileSize) {
-        gMfsError = N64DD_AREA_LACKED;
-        return -1;
-    }
-    if (Mfs_WriteNewFileInDir(parentDirId, name, extension, buf, fileSize, attr, copyCount) < 0) {
-        return -1;
-    }
-
-    if (writeChanges) {
-        if (Mfs_BackupRamArea() < 0) {
-            return -1;
-        }
-    }
-    return 0;
-}
-#endif
-
-s32 Mfs_SaveFile(u16 parentDirId, char* name, char* extension, u8* buf, u32 fileSize, s32 attr, s32 copyCount,
-                 bool writeChanges) {
     u16 fileEntryId;
 #if MFS_VERSION == MFS_VERSION_B
     u16 parentDirEntryId;
@@ -167,7 +112,86 @@ s32 Mfs_SaveFile(u16 parentDirId, char* name, char* extension, u8* buf, u32 file
         D_i1_804286E0 = gMfsRamArea.directoryEntry[fileEntryId].renewalCounter;
 #if MFS_VERSION == MFS_VERSION_A
         if (gMfsRamArea.directoryEntry[fileEntryId].attr & MFS_FILE_ATTR_FORBID_W) {
-#else // MFS_VERSION_B
+#else
+        if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
+                                                MFS_VALIDATION_CHECK_PARENT,
+                                            fileEntryId, 0, 0) < 0) {
+#endif
+            gMfsError = 0x106;
+            return -1;
+        }
+        Mfs_DeleteFileInDir(parentDirId, name, extension, 0);
+        if (Mfs_RamGetFreeSize() < fileSize) {
+            func_i1_804040EC();
+            gMfsError = N64DD_AREA_LACKED;
+            return -1;
+        }
+#if MFS_VERSION == MFS_VERSION_B
+    } else {
+        if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY,
+                                            parentDirEntryId, 0, 0) < 0) {
+            gMfsError = 0x106;
+            return -1;
+        }
+#endif
+    }
+
+    if (Mfs_RamGetFreeSize() < fileSize) {
+        gMfsError = N64DD_AREA_LACKED;
+        return -1;
+    }
+    if (Mfs_WriteNewFileInDir(parentDirId, name, extension, buf, fileSize, attr, copyCount) < 0) {
+        return -1;
+    }
+
+    if (writeChanges) {
+        if (Mfs_BackupRamArea() < 0) {
+            return -1;
+        }
+    }
+    return 0;
+}
+#endif
+
+s32 Mfs_SaveFile(u16 parentDirId, char* name, char* extension, u8* buf, u32 fileSize, s32 attr, s32 copyCount,
+                 bool writeChanges) {
+    u16 fileEntryId;
+#if MFS_VERSION >= MFS_VERSION_B
+    u16 parentDirEntryId;
+#endif
+
+    gMfsError = LEO_ERROR_GOOD;
+    if (func_i1_80404830() < 0) {
+        return -1;
+    }
+    if (fileSize == 0) {
+        gMfsError = N64DD_ARGUMENT_ILLEGAL;
+        return -1;
+    }
+    if (Mfs_ValidateFileName(name) < 0) {
+        gMfsError = N64DD_ARGUMENT_ILLEGAL;
+        return -1;
+    }
+    if (parentDirId == MFS_ENTRY_WORKING_DIR) {
+        parentDirId = gWorkingDirectory;
+    }
+    if (parentDirId == MFS_ENTRY_WORKING_PARENT_DIR) {
+        parentDirId = Mfs_GetParentDir(MFS_ENTRY_WORKING_DIR);
+    }
+#if MFS_VERSION >= MFS_VERSION_B
+    parentDirEntryId = Mfs_GetDirectoryIndex(parentDirId);
+    if (parentDirEntryId == MFS_ENTRY_DOES_NOT_EXIST) {
+        gMfsError = N64DD_NOT_FOUND;
+        return -1;
+    }
+#endif
+    D_i1_804286E0 = 0;
+    fileEntryId = Mfs_GetFileIndex(parentDirId, name, extension);
+    if (fileEntryId != MFS_ENTRY_DOES_NOT_EXIST) {
+        D_i1_804286E0 = gMfsRamArea.directoryEntry[fileEntryId].renewalCounter;
+#if MFS_VERSION == MFS_VERSION_A
+        if (gMfsRamArea.directoryEntry[fileEntryId].attr & MFS_FILE_ATTR_FORBID_W) {
+#else
         if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                                 MFS_VALIDATION_CHECK_PARENT,
                                             fileEntryId, 0, 0) < 0) {
@@ -185,7 +209,7 @@ s32 Mfs_SaveFile(u16 parentDirId, char* name, char* extension, u8* buf, u32 file
         Mfs_DeleteFileInDir(parentDirId, name, extension, 0);
         Mfs_RenameFileInDir(parentDirId, "__TMP__", "_!TMP", name, extension, 0);
     } else {
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
         if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY,
                                             parentDirEntryId, 0, 0) < 0) {
             gMfsError = 0x106;
@@ -214,7 +238,7 @@ s32 Mfs_AppendToFile(u16 entryId, u8* buf, u32 sizeToAppend, bool isEncoded) {
     u32 sizeRemaining;
     u32 extraSpace;
     u32 blocksSize;
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     u32 sizeWritten;
 #endif
     s32 fatId;
@@ -241,10 +265,10 @@ s32 Mfs_AppendToFile(u16 entryId, u8* buf, u32 sizeToAppend, bool isEncoded) {
         }
     }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
     sizeRemaining -= (extraSpace > sizeRemaining) ? sizeRemaining : extraSpace;
     bufPtr += (extraSpace > sizeRemaining) ? sizeRemaining : extraSpace;
-#else // MFS_VERSION_B
+#else
     sizeWritten = (extraSpace > sizeRemaining) ? sizeRemaining : extraSpace;
     sizeRemaining -= sizeWritten;
     bufPtr += sizeWritten;
@@ -321,7 +345,7 @@ s32 Mfs_AppendToFileInDir(u16 dirId, char* name, char* extension, u8* buf, s32 s
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         entryId, 0, 0) < 0) {
@@ -357,7 +381,7 @@ s32 Mfs_CheckAndAppendToFile(u16 entryId, u8* buf, s32 sizeToAppend, bool writeC
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         entryId, 0, 0) < 0) {
@@ -381,7 +405,7 @@ s32 Mfs_UpdateFileFromOffset(u16 entryId, u8* buf, s32 offset, u32 sizeToWrite, 
     u32 sizeRemaining;
     u32 extraSpace;
     s32 blocksSize;
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     u32 sizeWritten;
 #endif
     s32 fatId;
@@ -408,10 +432,10 @@ s32 Mfs_UpdateFileFromOffset(u16 entryId, u8* buf, s32 offset, u32 sizeToWrite, 
             return -1;
         }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
         sizeRemaining -= (extraSpace > sizeRemaining) ? sizeRemaining : extraSpace;
         bufPtr += (extraSpace > sizeRemaining) ? sizeRemaining : extraSpace;
-#else // MFS_VERSION_B
+#else
         sizeWritten = (extraSpace > sizeRemaining) ? sizeRemaining : extraSpace;
         sizeRemaining -= sizeWritten;
         bufPtr += sizeWritten;
@@ -520,7 +544,7 @@ s32 Mfs_UpdateFileInDirFromOffset(u16 dirId, char* name, char* extension, u8* bu
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         entryId, 0, 0) < 0) {
@@ -556,7 +580,7 @@ s32 Mfs_CheckAndUpdateFileFromOffset(u16 entryId, u8* buf, s32 offset, s32 sizeT
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         entryId, 0, 0) < 0) {
@@ -630,7 +654,7 @@ s32 Mfs_UpdateAndExtendFileInDir(u16 dirId, char* name, char* extension, u8* buf
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         entryId, 0, 0) < 0) {
@@ -666,7 +690,7 @@ s32 Mfs_CheckAndUpdateAndExtendFile(u16 entryId, u8* buf, s32 offset, s32 sizeTo
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         entryId, 0, 0) < 0) {

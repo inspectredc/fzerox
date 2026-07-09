@@ -1,0 +1,130 @@
+:config:
+  header:
+    code:
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(staff_ghost_records.h)'
+      - '#include "fzx_game.h"'
+      - '#include "fzx_machine.h"'
+      - '#include "fzx_save.h"'
+    header:
+      - '#include "fzx_save.h"'
+
+aMuteCity1StaffGhost:
+  type: FZX:GHOST
+  offset: 0x291E50
+  symbol: aMuteCity1StaffGhost
+
+aSilence1StaffGhost:
+  type: FZX:GHOST
+  offset: 0x293980
+  symbol: aSilence1StaffGhost
+
+aSandOcean1StaffGhost:
+  type: FZX:GHOST
+  offset: 0x295600
+  symbol: aSandOcean1StaffGhost
+
+aDevilsForest1StaffGhost:
+  type: FZX:GHOST
+  offset: 0x296EC0
+  symbol: aDevilsForest1StaffGhost
+
+aBigBlue1StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2989A0
+  symbol: aBigBlue1StaffGhost
+
+aPortTown1StaffGhost:
+  type: FZX:GHOST
+  offset: 0x29A880
+  symbol: aPortTown1StaffGhost
+
+aSectorAlphaStaffGhost:
+  type: FZX:GHOST
+  offset: 0x29C770
+  symbol: aSectorAlphaStaffGhost
+
+aRedCanyon1StaffGhost:
+  type: FZX:GHOST
+  offset: 0x29E260
+  symbol: aRedCanyon1StaffGhost
+
+aDevilsForest2StaffGhost:
+  type: FZX:GHOST
+  offset: 0x29FC10
+  symbol: aDevilsForest2StaffGhost
+
+aMuteCity2StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2A1770
+  symbol: aMuteCity2StaffGhost
+
+aBigBlue2StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2A31C0
+  symbol: aBigBlue2StaffGhost
+
+aWhiteLand1StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2A47D0
+  symbol: aWhiteLand1StaffGhost
+
+aFireFieldStaffGhost:
+  type: FZX:GHOST
+  offset: 0x2A6840
+  symbol: aFireFieldStaffGhost
+
+aSilence2StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2A83A0
+  symbol: aSilence2StaffGhost
+
+aSectorBetaStaffGhost:
+  type: FZX:GHOST
+  offset: 0x2AA260
+  symbol: aSectorBetaStaffGhost
+
+aRedCanyon2StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2AC500
+  symbol: aRedCanyon2StaffGhost
+
+aWhiteLand2StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2AE530
+  symbol: aWhiteLand2StaffGhost
+
+aMuteCity3StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2AFD50
+  symbol: aMuteCity3StaffGhost
+
+aRainbowRoadStaffGhost:
+  type: FZX:GHOST
+  offset: 0x2B1F50
+  symbol: aRainbowRoadStaffGhost
+
+aDevilsForest3StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2B49B0
+  symbol: aDevilsForest3StaffGhost
+
+aSpacePlantStaffGhost:
+  type: FZX:GHOST
+  offset: 0x2B63D0
+  symbol: aSpacePlantStaffGhost
+
+aSandOcean2StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2B8C60
+  symbol: aSandOcean2StaffGhost
+
+aPortTown2StaffGhost:
+  type: FZX:GHOST
+  offset: 0x2BAB50
+  symbol: aPortTown2StaffGhost
+
+aBigHandStaffGhost:
+  type: FZX:GHOST
+  offset: 0x2BCF80
+  symbol: aBigHandStaffGhost

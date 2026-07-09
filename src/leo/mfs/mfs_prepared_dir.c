@@ -1,7 +1,7 @@
 #include "leo/mfs.h"
 #include "macros.h"
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 s32 func_i1_8040A9E0(u16 entryId, MfsRamDirectoryEntry** directoryEntry) {
     gMfsError = LEO_ERROR_GOOD;
     if (func_i1_80404830() < 0) {
@@ -11,6 +11,25 @@ s32 func_i1_8040A9E0(u16 entryId, MfsRamDirectoryEntry** directoryEntry) {
         gMfsError = N64DD_NOT_FOUND;
         return -1;
     }
+
+#if MFS_VERSION == MFS_VERSION_B
+    if (gMfsRamArea.directoryEntry[entryId].attr & MFS_FILE_ATTR_DIRECTORY) {
+        if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_READ | MFS_VALIDATION_CHECK_PARENT |
+                                                MFS_VALIDATION_CHECK_MAIN_ENTRY,
+                                            entryId, 0, 0) < 0) {
+            gMfsError = 0x106;
+            return -1;
+        }
+    } else {
+        if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_READ | MFS_VALIDATION_CHECK_PARENT |
+                                                MFS_VALIDATION_CHECK_MAIN_ENTRY,
+                                            entryId, 0, 0) < 0) {
+            gMfsError = 0x106;
+            return -1;
+        }
+    }
+#endif
+
     *directoryEntry = &gMfsRamArea.directoryEntry[entryId];
     return 0;
 }
@@ -42,7 +61,7 @@ u16 gPreparedDirectoryId;
 u16 gPreparedEntryIndexCounter;
 
 s32 Mfs_GetFilesPreparation(u16 dirId) {
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
     UNUSED s32 pad;
 #endif
     if (func_i1_80404830() < 0) {
@@ -58,7 +77,7 @@ s32 Mfs_GetFilesPreparation(u16 dirId) {
             return -1;
         }
     }
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION >= MFS_VERSION_B
     if ((dirId == MFS_ENTRY_DOES_NOT_EXIST) || (Mfs_GetDirectoryIndex(dirId) == MFS_ENTRY_DOES_NOT_EXIST)) {
         gMfsError = N64DD_NOT_FOUND;
         return -1;
@@ -73,7 +92,7 @@ s32 Mfs_GetFilesPreparation(u16 dirId) {
     gPreparedDirectoryId = dirId;
 #if MFS_VERSION == MFS_VERSION_A
     //! @bug bad return
-#else // MFS_VERSION_B
+#else
     return 0;
 #endif
 }
@@ -90,7 +109,7 @@ u16 Mfs_GetNextFileInPreparedDir(void) {
     return MFS_ENTRY_DOES_NOT_EXIST;
 }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 s32 func_i1_8040AD08(u16 dirId) {
     s32 i;
     s32 fileCount;

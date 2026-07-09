@@ -108,6 +108,7 @@ void func_8007647C(void);
 void func_80076310(void);
 void func_8007D9D0(void);
 void func_8007F500(void);
+void func_800763B0(void);
 
 #ifdef EXPANSION_KIT
 void LeoFault_LoadFontSet(void);

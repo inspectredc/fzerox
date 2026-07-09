@@ -12,7 +12,7 @@ s32 __osPfsLastChannel = -1;
 s32 __osContRamRead(OSMesgQueue* mq, int channel, u16 address, u8* buffer) {
     s32 ret = 0;
     s32 i;
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH_2
     u8* ptr;
 #else
     u8* ptr = (u8*) &__osPfsPifRam;
@@ -21,7 +21,7 @@ s32 __osContRamRead(OSMesgQueue* mq, int channel, u16 address, u8* buffer) {
 
     __osSiGetAccess();
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH_2
     do {
         ptr = (u8*) &__osPfsPifRam;
 #endif
@@ -59,7 +59,7 @@ s32 __osContRamRead(OSMesgQueue* mq, int channel, u16 address, u8* buffer) {
         ret = __osSiRawStartDma(OS_WRITE, &__osPfsPifRam);
         osRecvMesg(mq, NULL, OS_MESG_BLOCK);
 
-#if BUILD_VERSION < VERSION_J
+#if BUILD_VERSION < VERSION_J && !IS_VERSION_I_PATCH_2
         do {
 #endif
             ret = __osSiRawStartDma(OS_READ, &__osPfsPifRam);

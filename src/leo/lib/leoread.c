@@ -56,7 +56,7 @@ void leoRead_common(u32 offset) {
                 LEOcur_command->header.sense = message;
                 LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
                 return;
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION >= LEO_VERSION_B
             case LEO_MSG_CONTROL_FORCE_ACCEPT:
                 LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
                 LEOcur_command->header.status = LEO_STATUS_GOOD;

@@ -4,7 +4,7 @@
 #include "fzx_racer.h"
 #include ASSET_HEADER(course_track_gfx.h)
 
-#ifndef EXPANSION_KIT
+#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
 u8 sCourseMinimapTex[0x1000] = { 0 };
 #else
 u8* sCourseMinimapTex;
@@ -49,6 +49,8 @@ void Minimap_InitCourseMinimap(void) {
     if (!gInCourseEditor) {
         sCourseMinimapTex = Arena_Allocate(ALLOC_FRONT, MINIMAP_MAX_SIZE);
     }
+#elif defined(VERSION_PAL)
+    sCourseMinimapTex = Arena_Allocate(ALLOC_FRONT, MINIMAP_MAX_SIZE);
 #endif
 
     courseInfo = gCurrentCourseInfo;

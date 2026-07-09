@@ -24,6 +24,19 @@ a418b0151521b76691fa03f8658c8b567c69498b:
       headers: include/assets/jp/rev0
       modding: src/assets/jp/rev0
 
+af9038bcb543a2b4faaab876dbdab4663859e092:
+  name: F-ZERO X PAL REV 0 (v1.0)
+  path: assets/yaml/pal/rev0
+  config:
+    gbi: F3DEX2
+    sort: OFFSET
+    logging: ERROR
+    textures: ADDITIONAL_DEFINES
+    output:
+      code: src/assets/pal/rev0
+      headers: include/assets/pal/rev0
+      modding: src/assets/pal/rev0
+
 03209263d2ee7d621353431f3f8512ab8c1c0150:
   name: F-Zero X Expansion Kit (JP)
   path: assets/yaml/jp/ek

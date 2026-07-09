@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 
 def apply(config, args):
-    config['baseimg'] = 'baserom.us.rev0.z64'
-    config['myimg'] = 'build/us/rev0/fzerox.us.rev0.z64'
-    config['mapfile'] = 'build/us/rev0/fzerox.us.rev0.map'
+    # config['baseimg'] = 'baserom.us.rev0.z64'
+    # config['myimg'] = 'build/us/rev0/fzerox.us.rev0.z64'
+    # config['mapfile'] = 'build/us/rev0/fzerox.us.rev0.map'
+
+    config['baseimg'] = 'baserom.pal.rev0.z64'
+    config['myimg'] = 'build/pal/rev0/fzerox.pal.rev0.z64'
+    config['mapfile'] = 'build/pal/rev0/fzerox.pal.rev0.map'
 
     # config['baseimg'] = 'baserom.jp.ek.z64dd'
     # config['myimg'] = 'build/jp/ek/fzerox-expansion.jp.ek.z64dd'

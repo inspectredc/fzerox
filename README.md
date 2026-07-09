@@ -2,12 +2,16 @@
 
 [![US Bytes Progress]](https://decomp.dev/inspectredc/fzerox/us) [![US Functions Progress]](https://decomp.dev/inspectredc/fzerox/us)
 [![Jp Bytes Progress]](https://decomp.dev/inspectredc/fzerox/jp) [![Jp Functions Progress]](https://decomp.dev/inspectredc/fzerox/jp)
+[![PAL Bytes Progress]](https://decomp.dev/inspectredc/fzerox/pal) [![PAL Functions Progress]](https://decomp.dev/inspectredc/fzerox/pal)
 
 [US Bytes Progress]: https://decomp.dev/inspectredc/fzerox/us.svg?mode=shield&label=US%20Bytes%20Progress&measure=matched_code_percent
 [US Functions Progress]: https://decomp.dev/inspectredc/fzerox/us.svg?mode=shield&label=US%20Functions%20Progress&measure=matched_functions
 
 [JP Bytes Progress]: https://decomp.dev/inspectredc/fzerox/jp.svg?mode=shield&label=JP%20Bytes%20Progress&measure=matched_code_percent
 [JP Functions Progress]: https://decomp.dev/inspectredc/fzerox/jp.svg?mode=shield&label=JP%20Functions%20Progress&measure=matched_functions
+
+[PAL Bytes Progress]: https://decomp.dev/inspectredc/fzerox/pal.svg?mode=shield&label=PAL%20Bytes%20Progress&measure=matched_code_percent
+[PAL Functions Progress]: https://decomp.dev/inspectredc/fzerox/pal.svg?mode=shield&label=PAL%20Functions%20Progress&measure=matched_functions
 
 # F-Zero X
 

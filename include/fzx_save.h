@@ -197,10 +197,13 @@ s32 Save_LoadStaffGhost_impl(s32 courseIndex, s32 encodedCourseIndex);
 s32 Save_LoadPlayerGhost_impl(s32 courseIndex, s32 encodedCourseIndex, s32 ghostIndex);
 s32 func_i2_801005CC_impl(s32 courseIndex, s32 encodedCourseIndex);
 
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+void Save_LoadCourseRecord2(SaveCourseRecords* courseRecord, s32 courseIndex);
+#endif
+
 #ifdef EXPANSION_KIT
 s32 func_i2_800A5F58(s32 courseIndex, s32 encodedCourseIndex);
 void func_i2_800A8CE4(SaveCourseRecords* courseRecord, s32 courseIndex);
-void Save_LoadCourseRecord2(SaveCourseRecords* courseRecord, s32 courseIndex);
 void Save_LoadDDCups(ProfileSave* profileSaves, u8* cupCompletion, u16* staffGhostCompletion);
 u16 Save_CalculateSaveCourseRecordChecksum(SaveCourseRecords* courseRecords);
 u16 Save_CalculateSaveDDCupsChecksum(ProfileSave* profileSave);

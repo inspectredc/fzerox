@@ -4,7 +4,7 @@
 #include "macros.h"
 #include "leo/leo_internal.h"
 
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
 OSPiHandle LeoDiskHandle;
 OSPiHandle* __osDiskHandle;
 

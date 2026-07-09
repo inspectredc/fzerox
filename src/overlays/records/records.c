@@ -800,7 +800,7 @@ void Records_ClearConfirmUpdate(void) {
                 Audio_TriggerSystemSE(NA_SE_16);
             } else {
                 if (sRecordsClearType == RECORDS_CLEAR_RECORDS) {
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
                     if ((gCourseIndex >= COURSE_MUTE_CITY) && (gCourseIndex <= COURSE_BIG_HAND)) {
 #endif
                         func_i2_801017B8(gCourseIndex);
@@ -808,6 +808,8 @@ void Records_ClearConfirmUpdate(void) {
                     } else {
                         DDSave_EraseDiskCourseRecord(gCourseIndex);
                     }
+#elif defined(VERSION_PAL)
+                }
 #endif
                 } else if (sRecordsClearType == RECORDS_CLEAR_GHOST) {
                     Save_InitGhost(gCourseIndex);

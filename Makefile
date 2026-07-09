@@ -130,7 +130,7 @@ ifeq ($(COMPILER),gcc)
   MIPS_VERSION := -mips3
 else
   # we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
-  CFLAGS += -G 0 -non_shared -fullwarn -verbose -Xcpluscomm $(IINC) -nostdinc -Wab,-r4300_mul -woff 649,838,712,516,807
+  CFLAGS += -G 0 -non_shared -fullwarn -verbose -Xcpluscomm $(IINC) -nostdinc -Wab,-r4300_mul -woff 649,838,712,516,807,581
   MIPS_VERSION := -mips2
   WARNINGS := -fullwarn -verbose -woff 624,649,838,712,516,513,596,564,594,709,807
 endif
@@ -154,8 +154,8 @@ BUILD_DEFINES ?=
 
 ifeq ($(EXPANSION_KIT),1)
     BUILD_DEFINES   += -DVERSION_JP=1 -DEXPANSION_KIT -DBUILD_VERSION=VERSION_J -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV_R)
-    LEO_VERSION ?= 1
-    MFS_VERSION ?= 1
+    LEO_VERSION ?= 2
+    MFS_VERSION ?= 2
 else
     # Version check
     ifeq ($(VERSION),jp)
@@ -166,8 +166,10 @@ else
         BUILD_DEFINES   += -DVERSION_US=1 -DBUILD_VERSION=VERSION_I -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
     endif
 
-    ifeq ($(VERSION),eu)
-        BUILD_DEFINES   += -DVERSION_EU=1 -DBUILD_VERSION=VERSION_I -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
+    ifeq ($(VERSION),pal)
+        BUILD_DEFINES   += -DVERSION_PAL=1 -DBUILD_VERSION=VERSION_I -DASSET_VERSION=$(VERSION) -DASSET_REVISION=$(REV)
+        LEO_VERSION ?= 1
+        MFS_VERSION ?= 1
         REV := rev0
     endif
 endif
@@ -175,15 +177,19 @@ endif
 LEO_VERSION ?= 0
 ifeq ($(LEO_VERSION),0)
     BUILD_DEFINES   += -DLEO_VERSION=LEO_VERSION_A
-else
+else ifeq ($(LEO_VERSION),1)
     BUILD_DEFINES   += -DLEO_VERSION=LEO_VERSION_B
+else ifeq ($(LEO_VERSION),2)
+    BUILD_DEFINES   += -DLEO_VERSION=LEO_VERSION_C
 endif
 
 MFS_VERSION ?= 0
 ifeq ($(MFS_VERSION),0)
     BUILD_DEFINES   += -DMFS_VERSION=MFS_VERSION_A
-else
+else ifeq ($(MFS_VERSION),1)
     BUILD_DEFINES   += -DMFS_VERSION=MFS_VERSION_B
+else ifeq ($(MFS_VERSION),2)
+    BUILD_DEFINES   += -DMFS_VERSION=MFS_VERSION_C
 endif
 
 ifeq ($(NON_MATCHING),1)
@@ -344,11 +350,15 @@ src/overlays/ovl_i11/% \
 src/audio/rom/% 
 endif
 
+# ifeq ($(VERSION),pal)
+# EXCLUSION_FILES += \
+# src/overlays/%
+# endif
+
 ifeq ($(MFS_VERSION),0)
 EXCLUSION_FILES += \
-src/leo/mfs/mfs_copy.c \
-src/leo/mfs/mfs_validate.c
-else
+src/leo/mfs/mfs_copy.c
+else ifeq ($(MFS_VERSION),2)
 EXCLUSION_FILES += \
 src/leo/mfs/mfs_creation_date.c
 endif
@@ -427,9 +437,14 @@ $(BUILD_DIR)/src/libultra/os/%.o: OPTFLAGS := -O1 -g0
 
 # libleo
 ifeq ($(EXPANSION_KIT),0)
+ifeq ($(VERSION),pal)
+$(BUILD_DIR)/src/leo/mfs/%.o: OPTFLAGS := -g
+$(BUILD_DIR)/src/leo/lib/%.o: OPTFLAGS := -O2 -g0
+else
 $(BUILD_DIR)/src/leo/lib%.o: OPTFLAGS := -g
 $(BUILD_DIR)/src/leo/mfs%.o: OPTFLAGS := -g
 $(BUILD_DIR)/src/leo/721B0.o: OPTFLAGS := -g
+endif
 else
 $(BUILD_DIR)/src/leo/mfs/%.o: OPTFLAGS := -g
 $(BUILD_DIR)/src/leo/lib/%.o: OPTFLAGS := -O2 -g0

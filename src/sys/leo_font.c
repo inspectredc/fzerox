@@ -8,6 +8,9 @@ u8 gLeoFontBuffer[181 * 0x80];
 #else
 u8 gLeoFontBuffer[96 * 0x80];
 #endif
+#ifdef VERSION_PAL
+u8 D_80403008[0x10];
+#endif
 #else
 u8 gLeoFontBuffer[110 * 0x80];
 #endif

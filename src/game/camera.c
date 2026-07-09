@@ -431,8 +431,8 @@ ScissorBox gScissorBoxBottomCenterQuarter = { 86, 120, 233, 231 };
 ScissorBox gScissorBoxLeftCenterQuarter = { 12, 64, 159, 175 };
 ScissorBox gScissorBoxRightCenterQuarter = { 160, 64, 307, 175 };
 
-f32 D_800CDA90 = 550.0f / 21.6f;
-f32 D_800CDA94 = 1000.0f / 21.6f;
+f32 D_800CDA90 = 550.0f / SPEED_CONVERSION;
+f32 D_800CDA94 = 1000.0f / SPEED_CONVERSION;
 f32 D_800CDA98 = 120.0f;
 s32 sMaxCameraLookBackRotate = 8;
 

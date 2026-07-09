@@ -2,7 +2,7 @@
 #include "PR/controller.h"
 #include "PR/siint.h"
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH_2
 void __osPfsRequestOneChannel(int channel, u8 cmd);
 #else
 void __osPfsRequestOneChannel(int channel);
@@ -18,7 +18,7 @@ s32 __osPfsGetStatus(OSMesgQueue* queue, int channel) {
     __osPfsInodeCacheBank = 250;
 #endif
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH_2
     __osPfsRequestOneChannel(channel, CONT_CMD_REQUEST_STATUS);
 #else
     __osPfsRequestOneChannel(channel);
@@ -43,7 +43,7 @@ s32 __osPfsGetStatus(OSMesgQueue* queue, int channel) {
     return ret;
 }
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH_2
 void __osPfsRequestOneChannel(int channel, u8 cmd) {
 #else
 void __osPfsRequestOneChannel(int channel) {
@@ -52,7 +52,7 @@ void __osPfsRequestOneChannel(int channel) {
     __OSContRequesFormatShort requestformat;
     int i;
 
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH_2
     __osContLastCmd = CONT_CMD_END;
 #else
     __osContLastCmd = CONT_CMD_REQUEST_STATUS;
@@ -63,7 +63,7 @@ void __osPfsRequestOneChannel(int channel) {
 
     requestformat.txsize = CONT_CMD_REQUEST_STATUS_TX;
     requestformat.rxsize = CONT_CMD_REQUEST_STATUS_RX;
-#if BUILD_VERSION >= VERSION_J
+#if BUILD_VERSION >= VERSION_J || IS_VERSION_I_PATCH_2
     requestformat.cmd = cmd;
 #else
     requestformat.cmd = CONT_CMD_REQUEST_STATUS;

@@ -1,0 +1,25 @@
+:config:
+  header:
+    code:
+      - '#include "macros.h"'
+      - '#include ASSET_HEADER(audio_bank.h)'
+      - '#include "libultra/ultra64.h"'
+    header:
+      - '#include "audio.h"'
+      - '#include "libultra/ultra64.h"'
+
+aAudioSoundFontSE:
+  type: FZX:SOUNDFONT
+  num_drums: 0
+  num_instruments: 71
+  support_sfx: false
+  offset: 0x537990
+  symbol: aAudioSoundFontSE
+
+aAudioSoundFontGuitar:
+  type: FZX:SOUNDFONT
+  num_drums: 0
+  num_instruments: 1
+  support_sfx: false
+  offset: 0x53A670
+  symbol: aAudioSoundFontGuitar

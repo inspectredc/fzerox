@@ -23,8 +23,13 @@
 #define _FINALROM
 
 #define OS_MAJOR_VERSION	VERSION_I /* major version */
+#ifdef VERSION_PAL
+#define OS_MINOR_VERSION	2 /* patch level */
+#else
 #define OS_MINOR_VERSION	1 /* patch level */
+#endif
 
-#define IS_VERSION_I_PATCH ((BUILD_VERSION == VERSION_I) && (OS_MINOR_VERSION != 0))
+#define IS_VERSION_I_PATCH ((BUILD_VERSION == VERSION_I) && (OS_MINOR_VERSION > 0))
+#define IS_VERSION_I_PATCH_2 ((BUILD_VERSION == VERSION_I) && (OS_MINOR_VERSION > 1))
 
 #endif /* !_OS_VERSION_H_ */

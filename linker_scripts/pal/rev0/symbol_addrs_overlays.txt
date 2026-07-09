@@ -1,0 +1,28 @@
+LeoGetKAdr = 0x80407B50; //segment:leo use_non_matching_label:False
+LeoGetAAdr = 0x80408650; //segment:leo use_non_matching_label:False
+LeoGetAAdr2 = 0x80404630; //segment:leo use_non_matching_label:False
+
+Transition_PhasedStripsDraw = 0x800F225C; // segment:ovl_i2
+func_8009DB28 = 0x800F9E58; // segment:ovl_i2
+Credits_IntroDraw = 0x801260E8; // segment:ovl_i6
+func_i6_8011D394 = 0x80129BA4; // segment:ovl_i6
+
+D_i6_8011DFAC = 0x8012A7BC; // segment:ovl_i6
+D_i6_8011DFB0 = 0x8012A7C0; // segment:ovl_i6
+D_i6_8011DFB4 = 0x8012A7C4; // segment:ovl_i6
+D_i6_8011EF34 = 0x8012BDCC; // segment:ovl_i6
+D_i6_8011EF40 = 0x8012BDD8; // segment:ovl_i6
+D_i6_8011EF4C = 0x8012BDE4; // segment:ovl_i6
+D_i6_8011EF54 = 0x8012BDEC; // segment:ovl_i6
+D_i6_8011EF5C = 0x8012BDF4; // segment:ovl_i6
+D_i6_8011EF68 = 0x8012BE00; // segment:ovl_i6
+D_i6_8011EF74 = 0x8012BE0C; // segment:ovl_i6
+D_i6_8011EF7C = 0x8012BE14; // segment:ovl_i6
+
+D_i6_8011F25C = 0x8012C0FC; // segment:ovl_i6
+D_i6_8011FB18 = 0x8012C308; // segment:ovl_i6
+
+D_i6_80124618 = 0x80130E08; // segment:ovl_i6
+D_i6_80124620 = 0x80130E10; // segment:ovl_i6
+D_i6_801247A8 = 0x80130F98; // segment:ovl_i6
+D_i6_801247AA = 0x80130F9A; // segment:ovl_i6

@@ -1,0 +1,59 @@
+name: F-ZERO X PAL REV 0 (v1.0)
+sha1: af9038bcb543a2b4faaab876dbdab4663859e092
+options:
+  basename: fzerox
+  target_path: baserom.pal.rev0.z64
+  elf_path: build/pal/rev0/fzerox.pal.rev0.elf
+  ld_script_path: linker_scripts/pal/rev0/fzerox.ld
+  base_path: .
+  compiler: IDO
+  find_file_boundaries: True
+  header_encoding: ASCII
+  platform: n64
+  # create_undefined_funcs_auto: False
+  # create_undefined_syms_auto: False
+  undefined_funcs_auto_path: linker_scripts/pal/rev0/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: linker_scripts/pal/rev0/auto/undefined_syms_auto.ld
+
+  symbol_addrs_path: 
+    - linker_scripts/pal/rev0/symbol_addrs.txt
+    - linker_scripts/pal/rev0/symbol_addrs_overlays.txt
+    - linker_scripts/pal/rev0/symbol_addrs_nlib_vars.txt
+
+  asm_path: asm/pal/rev0
+  src_path: src
+  asset_path: bin/pal/rev0
+
+  build_path: build/pal/rev0
+
+  extensions_path: tools/splat_ext
+  mips_abi_float_regs: o32
+  create_asm_dependencies: True
+  do_c_func_detection: True
+  o_as_suffix: True
+  gfx_ucode: f3dex2
+  mnemonic_ljust: 12
+  rom_address_padding: True
+  dump_symbols: True
+  libultra_symbols: True
+  hardware_regs: True
+
+  ld_dependencies: True
+
+
+  use_legacy_include_asm: False
+
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+
+  ld_legacy_generation: True
+  check_consecutive_segment_types: False
+  
+  mips_abi_float_regs: o32
+
+  disasm_unknown: True
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+
+segments:

@@ -7,6 +7,7 @@
 
 #define LEO_VERSION_A 0
 #define LEO_VERSION_B 1
+#define LEO_VERSION_C 2
 
 typedef struct {
   /* 0x0 */ u16 lba;
@@ -252,7 +253,7 @@ extern u8 LEOdrive_flag;
 #if LEO_VERSION == LEO_VERSION_A
 extern u8 LEOclr_que_flag;
 extern u16 LEOrw_flags;
-#else // LEO_VERSION_B
+#else
 extern volatile u8 LEOclr_que_flag;
 #ifndef LEO_SKIP_RW_FLAG
 extern volatile u16 LEOrw_flags;

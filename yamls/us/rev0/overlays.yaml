@@ -30,6 +30,7 @@
       - [0x72E40, c, mfs/mfs_ram]
       - [0x73F60, c, mfs/mfs_dir]
       - [0x75090, c, mfs/mfs_device]
+      - [0x756D0, c, mfs/mfs_util]
       - [0x76080, c, mfs/mfs_name]
       - [0x76270, c, mfs/mfs_save]
       - [0x77CA0, c, mfs/mfs_fat]
@@ -90,7 +91,7 @@
       - [0x97880, .data, lib/createleomanager]
       - [0x97890, .rodata, mfs/mfs_ram]
       - [0x978A0, .rodata, mfs/mfs_save]
-      - [0x978C0, .rodata, mfs/mfs_prepared_dir]
+      - [0x978C0, .rodata, mfs/mfs_handlers]
       - [0x978E0, .rodata, lib/leofunc]
       - [0x978F0, .rodata, lib/leocmdex]
       - [0x979A0, .rodata, lib/leord_diskid]
@@ -215,7 +216,7 @@
       - [0xDF820, .data, course_select]
       - [0xDFCB0, .rodata, course_select]
       - { type: .bss, vram: 0x801197B0, name: course_model }
-      - { type: .bss, vram: 0x801197E0, name: course_select}
+      - { type: .bss, vram: 0x801197E0, name: course_select }
 
   - name: ovl_i6
     exclusive_ram_id: overlay
@@ -239,7 +240,7 @@
       - [0xE9A10, .rodata, options_menu]
       - { type: .bss, vram: 0x8011F910, name: main_menu }
       - { type: .bss, vram: 0x8011FAF0, name: credits }
-      - { type: .bss, vram: 0x8011FB10, name: options_menu}
+      - { type: .bss, vram: 0x8011FB10, name: options_menu }
       - { type: .bss, vram: 0x801247C0, name: save_context }
 
   - name: ending

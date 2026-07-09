@@ -87,7 +87,7 @@ s32 Mfs_CopyDirEntryFromRam(u16 entryId) {
     return 0;
 }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
 s32 func_i1_8040349C(void) {
     s32 i;
     s32 sp18 = 0;
@@ -120,24 +120,24 @@ void Mfs_ResetFileRC(u16 entryId) {
 s32 Mfs_ValidateGameCode(u16 entryId) {
 
     if (mfsStrnCmp(gMfsRamArea.directoryEntry[entryId].companyCode, gCompanyCode, 2) != 0) {
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
         return 0;
-#else // MFS_VERSION_B
+#else
         return -1;
 #endif
     }
 
     if (mfsStrnCmp(gMfsRamArea.directoryEntry[entryId].gameCode, gGameCode, 4) != 0) {
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
         return 0;
-#else // MFS_VERSION_B
+#else
         return -1;
 #endif
     }
 
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
     //! @bug bad return
-#else // MFS_VERSION_B
+#else
     return 0;
 #endif
 }
@@ -233,7 +233,9 @@ s32 Mfs_FindBlocksForSize(u32 sizeRequired, s32* lbaPtr, s32* nLBAsPtr, s32* blo
 
 #if MFS_VERSION == MFS_VERSION_A
     for (i = 4; i <= (gRamAreaCapacity.endLBA - gRamAreaCapacity.startLBA); i++) {
-#else // MFS_VERSION_B
+#elif MFS_VERSION == MFS_VERSION_B
+    for (i = 6; i <= (gRamAreaCapacity.endLBA - gRamAreaCapacity.startLBA); i++) {
+#else
     for (i = 6; i < (gRamAreaCapacity.endLBA - gRamAreaCapacity.startLBA); i++) {
 #endif
         if (gFileAllocationTable[i] != MFS_FAT_UNUSED) {
@@ -246,9 +248,9 @@ s32 Mfs_FindBlocksForSize(u32 sizeRequired, s32* lbaPtr, s32* nLBAsPtr, s32* blo
             }
             j++;
         }
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
         LeoLBAToByte(i + gRamAreaCapacity.startLBA, (j - i) + 1, &availableBlockSize);
-#else // MFS_VERSION_B
+#else
         LeoLBAToByte(i + gRamAreaCapacity.startLBA, j - i, &availableBlockSize);
 #endif
         updateBestBlockConditionsSatisfied = 0;
@@ -267,9 +269,9 @@ s32 Mfs_FindBlocksForSize(u32 sizeRequired, s32* lbaPtr, s32* nLBAsPtr, s32* blo
         }
         if (updateBestBlockConditionsSatisfied != 0) {
             lba = i;
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
             nLBAs = (j - i) + 1;
-#else // MFS_VERSION_B
+#else
             nLBAs = j - i;
 #endif
             bestBlockSize = availableBlockSize;

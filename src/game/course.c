@@ -687,8 +687,10 @@ void func_8009DB28(CourseSegment*, f32*, f32*);
 #ifndef EXPANSION_KIT
 #ifdef VERSION_JP
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/course/func_8009DB28.s")
-#else
+#elif VERSION_US
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/course/func_8009DB28.s")
+#elif VERSION_PAL
+#pragma GLOBAL_ASM("asm/pal/rev0/nonmatchings/game/course/func_8009DB28.s")
 #endif
 #else
 #pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/game/course/func_8009DB28.s")

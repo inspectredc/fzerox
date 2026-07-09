@@ -982,7 +982,9 @@ void CourseSelect_GhostMarkerInit(Object* ghostMarkerObj) {
 #ifdef EXPANSION_KIT
     s32 pad[50];
 #endif
+#ifndef VERSION_PAL
     s32 i;
+#endif
 
 #ifndef EXPANSION_KIT
     if (Save_LoadGhostInfo(&ghostInfo) != 0) {

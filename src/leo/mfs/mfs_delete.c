@@ -5,7 +5,7 @@ s32 Mfs_DeleteFile(u16 entryId) {
 
 #if MFS_VERSION == MFS_VERSION_A
     if (gMfsRamArea.directoryEntry[entryId].attr & MFS_FILE_ATTR_FORBID_W) {
-#else // MFS_VERSION_B
+#else
     if (Mfs_ValidateFileSystemOperation(MFS_VALIDATION_CHECK_WRITE | MFS_VALIDATION_CHECK_MAIN_ENTRY |
                                             MFS_VALIDATION_CHECK_PARENT,
                                         entryId, 0, 0) < 0) {
@@ -15,9 +15,9 @@ s32 Mfs_DeleteFile(u16 entryId) {
     }
     Mfs_CopyFATFromRam();
     fatId = gMfsRamArea.directoryEntry[entryId].fileAllocationTableId;
-#if MFS_VERSION == MFS_VERSION_A
+#if MFS_VERSION <= MFS_VERSION_B
     Mfs_ClearFileAllocationTableEntry(fatId);
-#else // MFS_VERSION_B
+#else
     if (Mfs_ClearFileAllocationTableEntry(fatId) < 0) {
         return -1;
     }
@@ -30,7 +30,7 @@ s32 Mfs_DeleteFile(u16 entryId) {
 s32 Mfs_DeleteFileInDir(u16 dirId, char* name, char* extension, bool writeChanges) {
     u16 entryId;
 
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     D_80794CDC = 4;
 #endif
     if (func_i1_80404830() < 0) {
@@ -53,7 +53,7 @@ s32 Mfs_DeleteFileInDir(u16 dirId, char* name, char* extension, bool writeChange
 }
 
 s32 Mfs_CheckAndDeleteFile(u16 entryId, bool writeChanges) {
-#if MFS_VERSION == MFS_VERSION_B
+#if MFS_VERSION == MFS_VERSION_C
     D_80794CDC = 4;
 #endif
     if (func_i1_80404830() < 0) {

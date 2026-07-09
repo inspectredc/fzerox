@@ -131,9 +131,9 @@ u8 __locReadTimer(__LOCTime* time) {
     u32 data;
     u8 sense_code;
 
-#if LEO_VERSION == LEO_VERSION_A
+#if LEO_VERSION <= LEO_VERSION_B
     sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_MINUTE, 0);
-#else // LEO_VERSION_B
+#else
     sense_code = leoSend_asic_cmd_w_nochkDiskChange(ASIC_READ_TIMER_MINUTE, 0);
 #endif
     if (sense_code != 0) {
@@ -142,9 +142,9 @@ u8 __locReadTimer(__LOCTime* time) {
     osEPiReadIo(LEOPiInfo, LEO_DATA, &data);
     time->minute = (u8) ((u32) (data & 0xFF000000) >> 0x18);
     time->second = (u8) ((u32) (data & 0xFF0000) >> 0x10);
-#if LEO_VERSION == LEO_VERSION_A
+#if LEO_VERSION <= LEO_VERSION_B
     sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_DATE, 0);
-#else // LEO_VERSION_B
+#else
     sense_code = leoSend_asic_cmd_w_nochkDiskChange(ASIC_READ_TIMER_DATE, 0);
 #endif
     if (sense_code != 0) {
@@ -154,9 +154,9 @@ u8 __locReadTimer(__LOCTime* time) {
     osEPiReadIo(LEOPiInfo, LEO_DATA, &data);
     time->day = (u8) ((u32) (data & 0xFF000000) >> 0x18);
     time->hour = (u8) ((u32) (data & 0xFF0000) >> 0x10);
-#if LEO_VERSION == LEO_VERSION_A
+#if LEO_VERSION <= LEO_VERSION_B
     sense_code = leoSend_asic_cmd_w(ASIC_READ_TIMER_YEAR, 0);
-#else // LEO_VERSION_B
+#else
     sense_code = leoSend_asic_cmd_w_nochkDiskChange(ASIC_READ_TIMER_YEAR, 0);
 #endif
     if (sense_code != 0) {
@@ -183,18 +183,18 @@ u8 __locSetTimer(__LOCTime* time) {
     yearMonth = (time->year << 0x18) + (time->month << 0x10);
     dayHour = (time->day << 0x18) + (time->hour << 0x10);
     minuteSecond = (time->minute << 0x18) + (time->second << 0x10);
-#if LEO_VERSION == LEO_VERSION_A
+#if LEO_VERSION <= LEO_VERSION_B
     result = leoSend_asic_cmd_w(ASIC_SET_TIMER_YEAR, yearMonth);
-#else // LEO_VERSION_B
+#else
     result = leoSend_asic_cmd_w_nochkDiskChange(ASIC_SET_TIMER_YEAR, yearMonth);
 #endif
 
-#if LEO_VERSION == LEO_VERSION_A
+#if LEO_VERSION <= LEO_VERSION_B
     if ((result != 0) || (result = leoSend_asic_cmd_w(ASIC_SET_TIMER_DATE, dayHour), (result != 0)) ||
         (result = leoSend_asic_cmd_w(ASIC_SET_TIMER_MINUTE, minuteSecond), (result != 0))) {
         return result;
     }
-#else // LEO_VERSION_B
+#else
     if ((result != 0) || (result = leoSend_asic_cmd_w_nochkDiskChange(ASIC_SET_TIMER_DATE, dayHour), (result != 0)) ||
         (result = leoSend_asic_cmd_w_nochkDiskChange(ASIC_SET_TIMER_MINUTE, minuteSecond), (result != 0))) {
         return result;

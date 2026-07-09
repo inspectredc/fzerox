@@ -5,7 +5,7 @@
 OSMesgQueue LEOpost_que;
 OSMesg LEOpost_que_buf[1];
 
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
 bool __leoResetCalled = false;
 bool __leoQueuesCreated = false;
 #endif
@@ -13,7 +13,7 @@ bool __leoQueuesCreated = false;
 const u8 LEO_ZERO_MESG[] = { 0 };
 
 void leoInitialize(OSPri compri, OSPri intpri, OSMesg* cmdQueueBuf, u32 cmdBufCount) {
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
     u32 savedMask;
     OSPri oldPri;
     OSPri myPri;
@@ -50,7 +50,7 @@ void leoInitialize(OSPri compri, OSPri intpri, OSMesg* cmdQueueBuf, u32 cmdBufCo
     osStartThread(&LEOinterruptThread);
     osSetEventMesg(OS_EVENT_CART, &LEOevent_que, (OSMesg) 0x30000);
     osSendMesg(&LEOblock_que, NULL, OS_MESG_NOBLOCK);
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
     __osRestoreInt(savedMask);
 
     if (oldPri != -1) {
@@ -60,7 +60,7 @@ void leoInitialize(OSPri compri, OSPri intpri, OSMesg* cmdQueueBuf, u32 cmdBufCo
 }
 
 void leoCommand(void* cmd_blk_addr) {
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
     if (__leoResetCalled) {
         ((LEOCmd*) cmd_blk_addr)->header.status = LEO_STATUS_CHECK_CONDITION;
         ((LEOCmd*) cmd_blk_addr)->header.sense = LEO_SENSE_WAITING_NMI;
@@ -106,11 +106,11 @@ void leoCommand(void* cmd_blk_addr) {
 }
 
 void LeoReset(void) {
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
     __leoResetCalled = true;
     if (__leoQueuesCreated) {
 #endif
-#if LEO_VERSION == LEO_VERSION_A
+#if LEO_VERSION <= LEO_VERSION_B
         osRecvMesg(&LEOblock_que, NULL, OS_MESG_BLOCK);
 #endif
         LEOclr_que_flag = -1;
@@ -119,7 +119,7 @@ void LeoReset(void) {
         osRecvMesg(&LEOevent_que, NULL, OS_MESG_NOBLOCK);
         osSendMesg(&LEOevent_que, (OSMesg) ASIC_SOFT_RESET_CODE, OS_MESG_BLOCK);
         osSendMesg(&LEOcommand_que, (OSMesg) LEO_ZERO_MESG, OS_MESG_BLOCK);
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
     }
 #endif
 }

@@ -1,0 +1,482 @@
+  - name: header
+    type: header
+    start: 0x0
+
+  - name: boot
+    type: bin
+    start: 0x40
+
+  - name: framebuffer_unused
+    dir: framebuffers
+    type: code
+    vram: 0x80000400
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x80000400, name: framebuffer_unused }
+
+  - name: audio_context
+    type: code
+    vram: 0x80025C00
+    follows_vram: framebuffer_unused
+    bss_size: 0x57D0
+    subsegments:
+      - { type: .bss, vram: 0x80025C00, name: audio/rom/lib/audio_context }
+
+  - name: audio_heap
+    type: code
+    vram: 0x8002B400
+    bss_size: 0x3B000
+    subsegments:
+      - { type: .bss, vram: 0x8002B400, name: audio/rom/lib/audio_heap }
+
+  - name: entry
+    type: code
+    start: 0x1000
+    vram: 0x80067000
+    subsegments:
+      - [0x1000, hasm, entrypoint]
+
+  - name: main
+    type: code
+    start: 0x1060
+    vram: 0x80067060
+    follows_vram: entry
+    bss_size: 0x24220
+    subsegments:
+      # Game/Sys
+      - [0x1060, c, sys/sys_main]
+      - [0x1A70, pad]
+      - [0x1A80, c, sys/sys_gfx]
+      - [0x2A00, c, sys/sys_audio]
+      - [0x2AC0, c, game/game]
+      - [0x3670, c, sys/controller]
+      - [0x3E40, c, sys/math]
+      - [0x7360, c, game/course_gadgets]
+      - [0xE8D0, c, game/EA20]
+      - [0xE940, c, game/EA90]
+      - [0xEF60, c, sys/rom/disk_drive]
+      - [0xF070, c, sys/rom/sys_leo]
+      - [0x109A0, c, sys/dma]
+      - [0x10C00, c, sys/segment]
+      - [0x12200, c, game/object]
+      - [0x14950, pad]
+      - [0x14960, c, game/texture_utils]
+      - [0x17EF0, c, game/common]
+      - [0x18930, c, game/texture_utils2]
+      - [0x19A00, c, game/194E0]
+      - [0x19A40, c, sys/rom/disk_mount]
+      - [0x19C20, c, sys/rom/leo_fault]
+      - [0x1A380, c, sys/sys_fault]
+      - [0x1AE80, c, game/bordered_box]
+      - [0x1B520, c, game/camera]
+      - [0x23120, c, game/racer]
+      - [0x373D0, hasm, game/mio0Decode]
+
+      # Audio
+      - [0x37480, c, audio/rom/lib/playback]
+      - [0x38750, c, audio/rom/lib/effects]
+      - [0x38D80, c, audio/rom/lib/seqplayer]
+      - [0x3B7C0, c, audio/rom/lib/load]
+      - [0x3F210, c, audio/rom/lib/heap]
+      - [0x41970, c, audio/rom/lib/aisetnextbuf]
+      - [0x419F0, c, audio/rom/lib/synthesis]
+      - [0x42D60, c, audio/rom/lib/thread]
+      - [0x43F80, c, audio/rom/external]
+
+      # Leo Boot
+      - [0x48290, c, leo/leo_bootdisk]
+      - [0x486F0, hasm, ../../../src/leo/leo_bootstrap] # have to redirect to unextracted hasm
+
+      # Libultra
+      - [0x48750, hasm, libultra/os/setcause]
+
+      - [0x48760, c, libultra/os/sendmesg]
+      - [0x488B0, c, libultra/os/stopthread]
+      - [0x48970, c, libultra/os/recvmesg]
+      - [0x48AB0, hasm, libultra/os/getintmask]
+      - [0x48B10, hasm, libultra/os/setintmask]
+      - [0x48BB0, c, libultra/gu/scale]
+      - [0x48C50, c, libultra/io/sptask]
+      - [0x48F40, c, libultra/libc/ll]
+      - [0x49200, hasm, libultra/os/exceptasm]
+      - [0x49B10, c, libultra/os/thread]
+      - [0x49B50, c, libultra/os/destroythread]
+      - [0x49C60, hasm, libultra/libc/bzero]
+      - [0x49D00, c, libultra/io/leointerrupt]
+      - [0x4A3F0, c, libultra/io/motor]
+      - [0x4A7C0, c, libultra/io/siacs]
+      - [0x4A880, c, libultra/io/controller]
+      - [0x4ABC0, pad]
+      - [0x4AC20, c, libultra/os/createthread]
+      - [0x4AD70, c, libultra/io/contreaddata]
+      - [0x4AF50, hasm, libultra/os/setcount]
+      - [0x4AF60, c, libultra/io/driverominit]
+      - [0x4B040, c, libultra/os/virtualtophysical]
+      - [0x4B0C0, c, libultra/os/physicaltovirtual]
+      - [0x4B0D0, hasm, libultra/os/setsr]
+      - [0x4B0E0, hasm, libultra/os/writebackdcache]
+      - [0x4B160, c, libultra/os/initialize]
+      - [0x4B3F0, c, libultra/io/pirawread]
+      - [0x4B450, hasm, libultra/os/getsr]
+      - [0x4B460, c, libultra/io/vigetnextframebuf]
+      - [0x4B4A0, c, libultra/gu/perspective]
+      - [0x4B730, c, libultra/gu/sinf]
+      - [0x4B8F0, c, libultra/io/sprawdma]
+      - [0x4B980, c, libultra/io/sirawdma]
+      - [0x4BA30, c, libultra/io/epilinkhandle]
+      - [0x4BA80, c, libultra/io/viblack]
+      - [0x4BAF0, c, libultra/io/sirawread]
+      - [0x4BB40, c, libultra/io/sptaskyield]
+      - [0x4BB60, c, libultra/io/pfsreadwritefile]
+      - [0x4BFB0, c, libultra/gu/mtxutil]
+      - [0x4C220, c, libultra/io/visetmode]
+      - [0x4C290, c, libultra/gu/lookat]
+      - [0x4C5C0, c, libultra/io/pfsallocatefile]
+      - [0x4CA40, c, libultra/io/pfsfreeblocks]
+      - [0x4CBE0, hasm, libultra/os/probetlb]
+      - [0x4CCA0, c, libultra/libc/llcvt]
+      - [0x4CEB0, hasm, libultra/os/getcount]
+      - [0x4CEC0, c, libultra/io/contpfs]
+      - [0x4DA40, c, libultra/os/getmemsize]
+      - [0x4DAD0, c, libultra/io/pfssearchfile]
+      - [0x4DC80, c, libultra/io/pimgr]
+      - [0x4DE70, c, libultra/io/piacs]
+      - [0x4DF30, pad]
+      - [0x4DF40, c, libultra/io/devmgr]
+      - [0x4E3C0, c, libultra/io/pirawdma]
+      - [0x4E4B0, c, libultra/os/seteventmesg]
+      - [0x4E520, hasm, libultra/gu/sqrtf]
+      - [0x4E530, c, libultra/libc/xprintf]
+      - [0x4F1F0, c, libultra/libc/sprintf]
+      - [0x4F270, c, libultra/io/epidma]
+      - [0x4F350, c, libultra/io/leodiskinit]
+      - [0x4F3F0, c, libultra/libc/string]
+      - [0x4F490, c, libultra/os/createmesgqueue]
+      - [0x4F4C0, hasm, libultra/os/invaldcache]
+      - [0x4F570, hasm, libultra/os/invalicache]
+      - [0x4F5F0, c, libultra/io/sp]
+      - [0x4F620, c, libultra/io/si]
+      - [0x4F650, c, libultra/os/jammesg]
+      - [0x4F7A0, c, libultra/os/setthreadpri]
+      - [0x4F880, c, libultra/os/getthreadpri]
+      - [0x4F8A0, c, libultra/io/viswapbuf]
+      - [0x4F8F0, c, libultra/io/epirawdma]
+      - [0x4FB20, c, libultra/io/sptaskyielded]
+      - [0x4FBA0, hasm, libultra/libc/bcmp]
+      - [0x4FCC0, c, libultra/os/gettime]
+      - [0x4FD50, c, libultra/os/timerintr]
+      - [0x50150, c, libultra/gu/rotate]
+      - [0x50340, c, libultra/os/setglobalintmask]
+      - [0x50390, c, libultra/io/aisetfreq]
+      - [0x504F0, c, libultra/os/getactivequeue]
+      - [0x50500, hasm, libultra/gu/normalize]
+      - [0x50590, hasm, libultra/os/setcompare]
+      - [0x505A0, c, libultra/io/dpsetstat]
+      - [0x505B0, c, libultra/io/dpgetstat]
+      - [0x505C0, hasm, libultra/libc/bcopy]
+      - [0x508D0, c, libultra/os/resetglobalintmask]
+      - [0x50930, c, libultra/gu/ortho]
+      - [0x50AF0, hasm, libultra/os/interrupt]
+      - [0x50B30, c, libultra/io/vi]
+      - [0x50C70, c, libultra/io/viswapcontext]
+      - [0x50F70, c, libultra/io/pigetcmdq]
+      - [0x50FA0, c, libultra/gu/cosf]
+      - [0x51110, c, libultra/io/epiread]
+      - [0x51160, c, libultra/io/visetspecial]
+      - [0x51320, c, libultra/os/settime]
+      - [0x51350, c, libultra/io/visetevent]
+      - [0x513C0, c, libultra/io/cartrominit]
+      - [0x514C0, c, libultra/io/pfsselectbank]
+      - [0x51540, hasm, libultra/os/setfpccsr]
+      - [0x51550, c, libultra/io/pfsinitpak]
+      - [0x51740, c, libultra/io/pfsgetstatus]
+      - [0x51970, c, libultra/io/pfschecker]
+      - [0x52310, c, libultra/io/pfsisplug]
+      - [0x52650, c, libultra/io/aigetlen]
+      - [0x52660, c, libultra/io/epiwrite]
+      - [0x526B0, c, libultra/io/epirawread]
+      - [0x52850, hasm, libultra/os/maptlbrdb]
+      - [0x528B0, c, libultra/os/yieldthread]
+      - [0x52900, c, libultra/gu/translate]
+      - [0x529A0, c, libultra/io/contramwrite]
+      - [0x52BF0, c, libultra/io/contramread]
+      - [0x52E20, c, libultra/io/crc]
+      - [0x52F90, c, libultra/io/epirawwrite]
+      - [0x53120, c, libultra/os/settimer]
+      - [0x53200, c, libultra/libc/xldtob]
+      - [0x53CC0, c, libultra/libc/ldiv]
+      - [0x53E50, c, libultra/libc/xlitob]
+      - [0x540F0, c, libultra/io/sirawwrite]
+      - [0x54140, c, libultra/io/spsetstat]
+      - [0x54150, c, libultra/io/spgetstat]
+      - [0x54160, c, libultra/io/vimgr]
+      - [0x54470, c, libultra/io/vigetcurrcontext]
+      - [0x54480, hasm, libultra/os/writebackdcacheall]
+      - [0x544B0, c, libultra/os/startthread]
+      - [0x54600, c, libultra/io/visetyscale]
+      - [0x54660, c, libultra/io/vigetcurrframebuf]
+      - [0x546A0, c, libultra/io/spsetpc]
+      - [0x546E0, c, libultra/os/sethwinterrupt]
+      - { start: 0x54730, type: textbin, use_src_path: True, name: rsp/rspboot }
+      - { start: 0x54800, type: textbin, use_src_path: True, name: rsp/f3dex2 }
+      - { start: 0x55B90, type: textbin, use_src_path: True, name: rsp/f3dlx2 }
+      - { start: 0x56D20, type: textbin, use_src_path: True, name: rsp/f3dflx2 }
+      - { start: 0x57EB0, type: textbin, use_src_path: True, name: rsp/l3dex2 }
+      - [0x59040, c, sys/rom/leo_presence]
+      - { start: 0x59090, type: textbin, use_src_path: True, name: rsp/aspmain }
+
+      # DATA - Game/Sys
+      - [0x59DC0, .data, sys/sys_main]
+      - [0x59E00, .data, sys/sys_gfx]
+      - [0x59E10, .data, sys/sys_audio]
+      - [0x59E20, .data, game/game]
+      - [0x59F80, .data, sys/controller]
+      - [0x59F90, .data, sys/math]
+      - [0x59FA0, .data, game/course_gadgets]
+      - [0x5A0C0, .data, game/EA20]
+      - [0x5A0D0, .data, sys/rom/sys_leo]
+      - [0x5A100, .data, sys/segment]
+      - [0x5A1A0, .data, game/common]
+      - [0x5A330, .data, game/194E0]
+      - [0x5A340, .data, sys/rom/leo_fault]
+      - [0x5A4E0, .data, sys/sys_fault]
+      - [0x5A6C0, .data, game/camera]
+      - [0x5A8C0, .data, game/racer]
+
+      # DATA - Audio
+      - [0x5C320, .data, audio/rom/lib/note_data]
+      - [0x5CF70, .data, audio/rom/lib/playback]
+      - [0x5D130, .data, audio/rom/lib/effects]
+      - [0x5D150, .data, audio/rom/lib/seqplayer]
+      - [0x5D3B0, .data, audio/rom/lib/load]
+      - [0x5DA20, .data, audio/rom/lib/heap]
+      - [0x5DFC0, .data, audio/rom/lib/aisetnextbuf]
+      - [0x5DFD0, .data, audio/rom/lib/synthesis]
+      - [0x5E000, .data, audio/rom/lib/thread]
+      - [0x5E2D0, .data, audio/rom/external]
+      - [0x5E510, .data, audio/rom/lib/audio_context]
+
+      # DATA - Libultra
+      - [0x5E570, data, libultra/os/exceptasm]
+      - [0x5E590, .data, libultra/os/thread]
+      - [0x5E5B0, .data, libultra/io/siacs]
+      - [0x5E5C0, .data, libultra/io/controller]
+      - [0x5E5D0, .data, libultra/os/initialize]
+      - [0x5E5F0, .data, libultra/vimodes/vimodentsclpn1]
+      - [0x5E640, .data, libultra/vimodes/vimodentsclpf1]
+      - [0x5E690, .data, libultra/vimodes/vimodentsclan1]
+      - [0x5E6E0, .data, libultra/vimodes/vimodentsclaf1]
+      - [0x5E730, .data, libultra/vimodes/vimodentsclpn2]
+      - [0x5E780, .data, libultra/vimodes/vimodentsclpf2]
+      - [0x5E7D0, .data, libultra/vimodes/vimodentsclan2]
+      - [0x5E820, .data, libultra/vimodes/vimodentsclaf2]
+      - [0x5E870, .data, libultra/vimodes/vimodentschpn1]
+      - [0x5E8C0, .data, libultra/vimodes/vimodentschpf1]
+      - [0x5E910, .data, libultra/vimodes/vimodentschan1]
+      - [0x5E960, .data, libultra/vimodes/vimodentschaf1]
+      - [0x5E9B0, .data, libultra/vimodes/vimodentschpn2]
+      - [0x5EA00, .data, libultra/vimodes/vimodentschpf2]
+      - [0x5EA50, .data, libultra/vimodes/vimodepallpn1]
+      - [0x5EAA0, .data, libultra/vimodes/vimodepallpf1]
+      - [0x5EAF0, .data, libultra/vimodes/vimodepallan1]
+      - [0x5EB40, .data, libultra/vimodes/vimodepallaf1]
+      - [0x5EB90, .data, libultra/vimodes/vimodepallpn2]
+      - [0x5EBE0, .data, libultra/vimodes/vimodepallpf2]
+      - [0x5EC30, .data, libultra/vimodes/vimodepallan2]
+      - [0x5EC80, .data, libultra/vimodes/vimodepallaf2]
+      - [0x5ECD0, .data, libultra/vimodes/vimodepalhpn1]
+      - [0x5ED20, .data, libultra/vimodes/vimodepalhpf1]
+      - [0x5ED70, .data, libultra/vimodes/vimodepalhan1]
+      - [0x5EDC0, .data, libultra/vimodes/vimodepalhaf1]
+      - [0x5EE10, .data, libultra/vimodes/vimodepalhpn2]
+      - [0x5EE60, .data, libultra/vimodes/vimodepalhpf2]
+      - [0x5EEB0, .data, libultra/vimodes/vimodempallpn1]
+      - [0x5EF00, .data, libultra/vimodes/vimodempallpf1]
+      - [0x5EF50, .data, libultra/vimodes/vimodempallan1]
+      - [0x5EFA0, .data, libultra/vimodes/vimodempallaf1]
+      - [0x5EFF0, .data, libultra/vimodes/vimodempallpn2]
+      - [0x5F040, .data, libultra/vimodes/vimodempallpf2]
+      - [0x5F090, .data, libultra/vimodes/vimodempallan2]
+      - [0x5F0E0, .data, libultra/vimodes/vimodempallaf2]
+      - [0x5F130, .data, libultra/vimodes/vimodempalhpn1]
+      - [0x5F180, .data, libultra/vimodes/vimodempalhpf1]
+      - [0x5F1D0, .data, libultra/vimodes/vimodempalhan1]
+      - [0x5F220, .data, libultra/vimodes/vimodempalhaf1]
+      - [0x5F270, .data, libultra/vimodes/vimodempalhpn2]
+      - [0x5F2C0, .data, libultra/vimodes/vimodempalhpf2]
+      - [0x5F310, .data, libultra/vimodes/vimodefpallpn1]
+      - [0x5F360, .data, libultra/vimodes/vimodefpallpf1]
+      - [0x5F3B0, .data, libultra/vimodes/vimodefpallan1]
+      - [0x5F400, .data, libultra/vimodes/vimodefpallaf1]
+      - [0x5F450, .data, libultra/vimodes/vimodefpallpn2]
+      - [0x5F4A0, .data, libultra/vimodes/vimodefpallpf2]
+      - [0x5F4F0, .data, libultra/vimodes/vimodefpallan2]
+      - [0x5F540, .data, libultra/vimodes/vimodefpallaf2]
+      - [0x5F590, .data, libultra/vimodes/vimodefpalhpn1]
+      - [0x5F5E0, .data, libultra/vimodes/vimodefpalhpf1]
+      - [0x5F630, .data, libultra/vimodes/vimodefpalhan1]
+      - [0x5F680, .data, libultra/vimodes/vimodefpalhaf1]
+      - [0x5F6D0, .data, libultra/vimodes/vimodefpalhpn2]
+      - [0x5F720, .data, libultra/vimodes/vimodefpalhpf2]
+      - [0x5F770, .data, libultra/io/contpfs]
+      - [0x5F780, .data, libultra/io/pimgr]
+      - [0x5F7B0, .data, libultra/io/piacs]
+      - [0x5F7C0, .data, libultra/libc/xprintf]
+      - [0x5F810, .data, libultra/os/timerintr]
+      - [0x5F820, .data, libultra/io/vi]
+      - [0x5F890, .data, libultra/vimodescopy/vimodepallan1]
+      - [0x5F8E0, .data, libultra/vimodescopy/vimodentsclan1]
+      - [0x5F930, .data, libultra/vimodescopy/vimodempallan1]
+      - [0x5F980, .data, libultra/io/contramread]
+      - [0x5F990, .data, libultra/libc/xlitob]
+      - [0x5F9C0, .data, libultra/io/vimgr]
+
+      # RODATA - Game/Sys
+      - [0x5F9E0, .rodata, sys/sys_main]
+      - [0x5F9F0, .rodata, sys/sys_gfx]
+      - [0x5FA00, .rodata, game/game]
+      - [0x5FC70, .rodata, sys/math]
+      - [0x5FCF0, .rodata, game/course_gadgets]
+      - [0x5FE80, .rodata, game/EA90]
+      - [0x5FEA0, .rodata, sys/rom/disk_drive]
+      - [0x5FEE0, .rodata, sys/rom/sys_leo]
+      - [0x601E0, .rodata, sys/segment]
+      - [0x604E0, .rodata, game/object]
+      - [0x60C90, .rodata, game/common]
+      - [0x61030, .rodata, sys/rom/disk_mount]
+      - [0x61040, .rodata, sys/rom/leo_fault]
+      - [0x61230, .rodata, sys/sys_fault]
+      - [0x615E0, .rodata, game/bordered_box]
+      - [0x61600, .rodata, game/camera]
+      - [0x62110, .rodata, game/racer]
+      - [0x62390, .rodata, audio/rom/lib/playback]
+      - [0x623A0, .rodata, audio/rom/lib/effects]
+      - [0x623D0, .rodata, audio/rom/lib/seqplayer]
+      - [0x62790, .rodata, audio/rom/lib/load]
+      - [0x627C0, .rodata, audio/rom/lib/heap]
+      - [0x627E0, .rodata, audio/rom/lib/thread]
+      - [0x628A0, .rodata, audio/rom/external]
+
+      # RODATA - Libultra
+      - [0x631F0, rodata, libultra/libc/setintmask]
+      - [0x63290, rodata, libultra/os/exceptasm]
+      - [0x632C0, .rodata, libultra/gu/perspective]
+      - [0x632D0, .rodata, libultra/gu/sinf]
+      - [0x63320, .rodata, libultra/libc/llcvt]
+      - [0x63330, .rodata, libultra/io/devmgr]
+      - [0x63350, .rodata, libultra/libc/xprintf]
+      - [0x63450, .rodata, libultra/gu/rotate]
+      - [0x63460, .rodata, libultra/gu/cosf]
+      - [0x634B0, rodata, libultra/gu/libm_vals]
+      - [0x634C0, .rodata, libultra/libc/xldtob]
+
+      # DATA - Microcode
+      - { start: 0x63520, type: databin, use_src_path: True, name: rsp/f3dex2 }
+      - { start: 0x63940, type: databin, use_src_path: True, name: rsp/f3dlx2 }
+      - { start: 0x63D50, type: databin, use_src_path: True, name: rsp/f3dflx2 }
+      - { start: 0x64100, type: databin, use_src_path: True, name: rsp/l3dex2 }
+      - { start: 0x644F0, type: databin, use_src_path: True, name: rsp/aspmain }
+      - [0x647D0, .data, audio/rom/audio_tables]
+
+      - { type: .bss, vram: 0x800CA880, name: sys/sys_main }
+      - { type: .bss, vram: 0x800CF540, name: sys/sys_gfx }
+      - { type: .bss, vram: 0x800CF680, name: sys/sys_audio }
+      - { type: .bss, vram: 0x800CF690, name: game/game }
+      - { type: .bss, vram: 0x800CF6C0, name: sys/controller }
+      - { type: .bss, vram: 0x800CFA80, name: sys/math }
+      - { type: .bss, vram: 0x800D3B00, name: game/course_gadgets }
+      - { type: .bss, vram: 0x800D5B30, name: sys/rom/sys_leo }
+      - { type: .bss, vram: 0x800D5BD0, name: sys/segment }
+      - { type: .bss, vram: 0x800D5C30, name: game/object }
+      - { type: .bss, vram: 0x800D6940, name: game/common }
+      - { type: .bss, vram: 0x800D6AB0, name: game/194E0 }
+      - { type: .bss, vram: 0x800D6B80, name: sys/rom/leo_fault }
+      - { type: .bss, vram: 0x800D7020, name: sys/sys_fault }
+      - { type: .bss, vram: 0x800D7A00, name: game/bordered_box }
+      - { type: .bss, vram: 0x800D7A70, name: game/camera }
+      - { type: .bss, vram: 0x800D8710, name: game/racer }
+      - { type: .bss, vram: 0x800EAD60, name: audio/rom/lib/load }
+
+      - { type: .bss, vram: 0x800EAE60, name: libultra/io/sptask }
+      - { type: .bss, vram: 0x800EAEA0, name: libultra/io/leointerrupt }
+      - { type: .bss, vram: 0x800EBEA0, name: libultra/io/motor }
+      - { type: .bss, vram: 0x800EBFA0, name: libultra/io/siacs }
+      - { type: .bss, vram: 0x800EBFC0, name: libultra/io/controller }
+      - { type: .bss, vram: 0x800EC050, name: libultra/io/driverominit }
+      - { type: .bss, vram: 0x800EC0E0, name: libultra/debug/kdebugserver }
+      - { type: .bss, vram: 0x800EC290, name: libultra/io/contpfs }
+      - { type: .bss, vram: 0x800EC390, name: libultra/io/pimgr }
+      - { type: .bss, vram: 0x800ED650, name: libultra/io/piacs }
+      - { type: .bss, vram: 0x800ED670, name: libultra/os/seteventmesg }
+      - { type: .bss, vram: 0x800ED6F0, name: libultra/io/leodiskinit }
+      - { type: .bss, vram: 0x800ED770, name: libultra/os/timerintr }
+      - { type: .bss, vram: 0x800ED7B0, name: libultra/gu/rotate }
+      - { type: .bss, vram: 0x800ED7C0, name: libultra/io/cartrominit }
+      - { type: .bss, vram: 0x800ED840, name: libultra/io/pfsisplug }
+      - { type: .bss, vram: 0x800ED880, name: libultra/io/vimgr }
+
+  - name: framebuffer1
+    type: code
+    dir: framebuffers
+    vram: 0x801D9800
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x801D9800, name: framebuffer1 }
+
+  - name: framebuffer2
+    type: code
+    dir: framebuffers
+    vram: 0x80200000
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x80200000, name: framebuffer2 }
+
+  - name: unk_gfx_segment
+    type: code
+    vram: 0x80225800
+    follows_vram: framebuffer2
+    bss_size: 0x81340
+    subsegments:
+      - { type: .bss, vram: 0x80225800, name: game/unk_gfx_segment}
+
+  - name: unk_bss_segment
+    type: code
+    vram: 0x80225800
+    follows_vram: framebuffer2
+    bss_size: 0x284C0
+    subsegments:
+      - { type: .bss, vram: 0x80225800, name: game/unk_bss_segment}
+
+  - name: gfxpool
+    type: code
+    vram: 0x8024DCE0
+    follows_vram: unk_bss_segment
+    bss_size: 0x58D60
+    subsegments:
+      - { type: .bss, vram: 0x8024DCE0, name: game/gfxpool}
+
+  - name: game_context
+    type: code
+    vram: 0x802A6B40
+    follows_vram: unk_gfx_segment
+    bss_size: 0x2F100
+    subsegments:
+      - { type: .bss, vram: 0x802A6B40, name: game/game_context }
+      - { type: .bss, vram: 0x802CB6D0, name: game/course_gadget_context }
+
+  - name: buffers
+    exclusive_ram_id: buffer
+    type: code
+    vram: 0x802D5C40
+    follows_vram: game_context
+    bss_size: 0x55000
+    subsegments:
+      - { type: .bss, vram: 0x802D5C40, name: sys/buffers }
+
+  - name: framebuffer3
+    type: code
+    dir: framebuffers
+    vram: 0x803DA800
+    bss_size: 0x25800
+    subsegments:
+      - { type: .bss, vram: 0x803DA800, name: framebuffer3 }

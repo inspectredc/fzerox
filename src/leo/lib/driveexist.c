@@ -3,7 +3,7 @@
 #include "PR/piint.h"
 #include "libc/stdbool.h"
 
-#if LEO_VERSION == LEO_VERSION_B
+#if LEO_VERSION == LEO_VERSION_C
 u32 LeoDriveExist(void) {
     u32 data;
     u32 saveMask;
