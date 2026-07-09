@@ -30,7 +30,7 @@ s32 sMenuStateFlags;
 s32 D_i3_801419B4;
 s32 sPlayer1Lives;
 bool gShowNameEntryMenu;
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
 s32 D_i3_8006D0B4;
 #endif
 UNUSED s32 D_i3_801419C0[4];
@@ -387,7 +387,7 @@ void Menus_Init(void) {
         sVsSlotSpeed[i][VS_SLOT_1] = sVsSlotInitialSpeed[VS_SLOT_1];
         sVsSlotSpeed[i][VS_SLOT_2] = sVsSlotInitialSpeed[VS_SLOT_2];
 
-#ifndef EXPANSION_KIT
+#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
         sPlayerGameoverState[i] = D_i3_80141CF0[i] = sPlayerFinalLapTimer[i] = sPlayerBoosterOkTimer[i] =
             sPlayerWinnerLoserFinishGameoverTimer[i] = D_i3_80141B78[i] = sPlayerResultsTimer[i] =
                 sPlayerLoserFinishTimer[i] = sFinishGameoverTimer[i] = sPlayerFinishInitialized[i] =
@@ -2616,7 +2616,7 @@ Gfx* Menus_DrawTimeAttackFinishMenu(Gfx* gfx) {
         sGeneralRaceMenuScissorBoxTimer = 0;
     }
 
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
     if ((sGeneralRaceMenuScissorBoxTimer == 1) && (gCourseIndex >= COURSE_EDIT_1) && (gCourseIndex < COURSE_X_1)) {
         Save_SaveCourseRecordProfiles(gCourseIndex);
     }
@@ -3628,7 +3628,7 @@ Gfx* Menus_DrawMaxSpeed(Gfx* gfx, s32 playerIndex) {
     }
     top += sTimeAttackResultsTimer;
     digitMask = 1000;
-    speedRemainder = speed = Math_Round(gRacers[playerIndex].maxSpeed * 21.6f);
+    speedRemainder = speed = Math_Round(gRacers[playerIndex].maxSpeed * SPEED_CONVERSION);
 
     gDPPipeSync(gfx++);
 
@@ -5274,13 +5274,22 @@ Gfx* Menus_Draw(Gfx* gfx) {
     }
     if (gNumPlayers == 1) {
         if (gGameMode == GAMEMODE_DEATH_RACE) {
-            if (gRacers[playerIndex].speed < (500.0f / 27.0f)) {
+            //! @bug These speed checks do not account for PAL changes correctly
+#ifndef VERSION_PAL
+            if (gRacers[playerIndex].speed < 400.0f / SPEED_CONVERSION) {
+#else
+            if (gRacers[playerIndex].speed < 18.518517f) {
+#endif
                 D_80141900++;
             } else {
                 D_80141900 = 0;
             }
         } else {
-            if (gRacers[playerIndex].speed < (250.0f / 27.0f)) {
+#ifndef VERSION_PAL
+            if (gRacers[playerIndex].speed < 200.0f / SPEED_CONVERSION) {
+#else
+            if (gRacers[playerIndex].speed < 9.2592585f) {
+#endif
                 D_80141900++;
             } else {
                 D_80141900 = 0;
@@ -5557,7 +5566,7 @@ Gfx* Menus_Draw(Gfx* gfx) {
                     if (gCurrentTimeAttackRecordPosition == 0) {
                         RecordsEntry_ToRecordsState();
                     }
-#ifndef EXPANSION_KIT
+#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
                     Menus_CheckGhostCanSave();
 #endif
                 }
@@ -5567,24 +5576,28 @@ Gfx* Menus_Draw(Gfx* gfx) {
                         RecordsEntry_UpdateNameEntry();
                         gfx = RecordsEntry_DrawNameEntry(gfx);
                     } else {
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
                         if (D_i3_8006D0B4 == 0) {
-                            s32 courseIndex;
-                            bool beatAllDDStaffGhosts;
                             Menus_CheckGhostCanSave();
                             D_i3_8006D0B4 = 1;
-                            beatAllDDStaffGhosts = true;
-                            for (courseIndex = COURSE_MUTE_CITY; courseIndex <= COURSE_BIG_HAND; courseIndex++) {
-                                if (gCourseInfos[courseIndex].timeRecord[0] >=
-                                    Save_GetDDStaffGhostRecordTime(courseIndex)) {
-                                    beatAllDDStaffGhosts = false;
-                                    break;
+#ifdef EXPANSION_KIT
+                            {
+                                s32 courseIndex;
+                                bool beatAllDDStaffGhosts;
+                                beatAllDDStaffGhosts = true;
+                                for (courseIndex = COURSE_MUTE_CITY; courseIndex <= COURSE_BIG_HAND; courseIndex++) {
+                                    if (gCourseInfos[courseIndex].timeRecord[0] >=
+                                        Save_GetDDStaffGhostRecordTime(courseIndex)) {
+                                        beatAllDDStaffGhosts = false;
+                                        break;
+                                    }
+                                }
+                                if ((gCurrentGhostType == GHOST_STAFF) && (Save_GetDDStaffGhostCompletion() == 0xFFF) &&
+                                    beatAllDDStaffGhosts) {
+                                    sEADDemoQueueState = 1;
                                 }
                             }
-                            if ((gCurrentGhostType == GHOST_STAFF) && (Save_GetDDStaffGhostCompletion() == 0xFFF) &&
-                                beatAllDDStaffGhosts) {
-                                sEADDemoQueueState = 1;
-                            }
+#endif
                         }
 #endif
                         i = RecordsEntry_Update();
@@ -5682,7 +5695,7 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 gfx = Menus_DrawPlayerRetire(gfx, 0);
                 if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
                     if (gGameMode == GAMEMODE_GP_RACE) {
-#if defined(VERSION_US) || defined(EXPANSION_KIT)
+#if defined(VERSION_US) || defined(VERSION_PAL) || defined(EXPANSION_KIT)
                         if (sPlayerRetireTimer[0] == 400) {
 #else
                         if (sPlayerRetireTimer[0] > 400) {

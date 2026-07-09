@@ -584,7 +584,7 @@ s32 Save_SaveCourseRecordProfiles(s32 courseIndex) {
     ProfileSave* profileSaves = gSaveContext.profileSaves;
 #endif
 
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
     if ((courseIndex >= COURSE_MUTE_CITY) && (courseIndex <= COURSE_BIG_HAND)) {
 #endif
         Save_SaveCourseRecord(&profileSaves[0].courses[courseIndex], courseIndex);
@@ -604,6 +604,8 @@ s32 Save_SaveCourseRecordProfiles(s32 courseIndex) {
         saveCourseRecord = DDSave_GetCachedCourseRecord();
         *saveCourseRecord = gSaveContext.profileSaves[0].courses[0];
         DDSave_SaveCourseGhost(courseIndex);
+    }
+#elif defined (VERSION_PAL)
     }
 #endif
 
@@ -1569,7 +1571,7 @@ void Save_LoadDeathRace(ProfileSave* profileSaves) {
 void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex) {
     s32 i;
     s32 j;
-#ifndef EXPANSION_KIT
+#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
     u16 checksum;
     s32 invalidSaveIndex;
 #else
@@ -1613,13 +1615,15 @@ void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex) {
     }
 
     courseRecord = &profileSaves->courses[courseIndex];
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
     // Split into sub-function
     Save_LoadCourseRecord2(courseRecord, courseIndex);
 }
 
 void func_i2_800A8CE4(SaveCourseRecords* courseRecord, s32 courseIndex) {
+#ifdef EXPANSION_KIT
     Save_LoadCourseRecord2(courseRecord, courseIndex);
+#endif
 }
 
 void Save_LoadCourseRecord2(SaveCourseRecords* courseRecord, s32 courseIndex) {
@@ -1977,6 +1981,7 @@ s32 Save_LoadStaffGhostRecord(GhostInfo* ghostInfo, s32 courseIndex) {
     Save_RomCopyGhostRecord(ghostRecord, courseIndex);
     if (ghostInfo != NULL) {
         func_i2_80101590(ghostRecord, ghostInfo);
+        ghostInfo->raceTime = Math_Round(ghostInfo->raceTime * (60.0f / 50.0f));
     }
     return 0;
 }
@@ -2054,7 +2059,7 @@ s32 Save_LoadStaffGhost_impl(s32 courseIndex, s32 encodedCourseIndex) {
     GhostData* ghostData = &gSaveContext.ghostSave.data;
 #endif
 
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT)
     bool isEditCupCourse;
 
     if ((courseIndex >= COURSE_SILENCE_3) && (courseIndex <= COURSE_BIG_FOOT)) {
@@ -2087,6 +2092,21 @@ s32 Save_LoadStaffGhost_impl(s32 courseIndex, s32 encodedCourseIndex) {
 #ifdef EXPANSION_KIT
     }
 #endif
+
+#ifdef VERSION_PAL
+    {
+        s32 i;
+        ghostRecord = (GhostRecord*) gSaveBuffer;
+        ghostData = (GhostData*) &gSaveBuffer[sizeof(GhostRecord)];
+        
+        ghostRecord->raceTime = Math_Round(ghostRecord->raceTime * (60.0f / 50.0f));
+
+        for (i = 0; i < 3; i++) {
+            ghostData->replayInfo.lapTimes[i] = Math_Round(ghostData->replayInfo.lapTimes[i] * (60.0f / 50.0f));
+        }
+    }
+#endif
+
     Save_LoadGhostRecord(ghostRecord, ghostData, &gGhosts[ghostIndex], false);
     Save_LoadGhostData(ghostRecord, ghostData, &gGhosts[ghostIndex], false);
 

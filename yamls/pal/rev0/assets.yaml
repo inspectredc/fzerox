@@ -192,7 +192,7 @@
     exclusive_ram_id: segment_00
     type: code
     dir: assets/pal/rev0
-    vram: 0x8F000000
+    vram: 0x0
     start: 0x287440
     subsegments:
       - [0x287440, .data, super_textures/super_textures]
@@ -201,7 +201,7 @@
     exclusive_ram_id: segment_00
     type: code
     dir: assets/pal/rev0
-    vram: 0x8F000000
+    vram: 0x0
     start: 0x28B440
     subsegments:
       - [0x28B440, .data, boot_textures/boot_textures]
@@ -211,7 +211,7 @@
     exclusive_ram_id: segment_00
     type: code
     dir: assets/pal/rev0
-    vram: 0x8F000000
+    vram: 0x0
     start: 0x291E50
     subsegments:
       - [0x291E50, .data, staff_ghost_records/staff_ghost_records]
@@ -220,7 +220,7 @@
     exclusive_ram_id: segment_00
     type: code
     dir: assets/pal/rev0
-    vram: 0x8F000000
+    vram: 0x0
     start: 0x2BFE30
     subsegments:
       - [0x2BFE30, .data, course_data/course_data]
@@ -243,15 +243,15 @@
     follows_vram: main
     symbol_name_format: i11_$VRAM
     subsegments:
-      - [0x537550, asm, 524920]
-      - [0x537810, data, 524920]
-      - [0x537820, rodata, 524920]
+      - [0x537550, c, 524920]
+      - [0x537810, .data, 524920]
+      - [0x537820, .rodata, 524920]
 
   - name: audio_bank
     exclusive_ram_id: segment_00
     type: code
     dir: assets/pal/rev0
-    vram: 0x8F000000
+    vram: 0x0
     start: 0x537990
     subsegments:
       - [0x537990, .data, audio_bank/audio_bank]
@@ -260,7 +260,7 @@
     exclusive_ram_id: segment_00
     type: code
     dir: assets/pal/rev0
-    vram: 0x8F000000
+    vram: 0x0
     start: 0x53A720
     subsegments:
       - [0x53A720, .data, audio_seq/audio_seq]

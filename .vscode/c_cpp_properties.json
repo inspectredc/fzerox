@@ -70,7 +70,7 @@
                 "__sgi",
                 "_MIPS_SZLONG=32",
                 "F3DEX_GBI_2",
-                "ASSET_VERSION=us",
+                "ASSET_VERSION=pal",
                 "ASSET_REVISION=rev0",
                 "BUILD_VERSION=VERSION_I",
                 "LEO_VERSION=1",

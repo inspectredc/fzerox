@@ -254,36 +254,42 @@ f32 D_i3_8013DFA0[] = {
 };
 
 u32 D_i3_8013E328[] = {
-    107000, 99000,  90000,  82000,  91000,  82000,  76000,  70500,  93000,  83000,  78000,  74000,  99000,  92000,
-    86000,  81500,  110000, 104000, 98500,  92000,  108000, 102000, 98000,  92500,  96000,  91000,  85000,  79500,
-    97000,  90000,  83000,  76000,  102000, 96000,  89000,  83000,  90000,  85000,  82000,  78500,  77000,  73000,
-    68500,  64500,  110000, 105000, 101000, 96500,  97000,  92000,  87000,  82500,  109000, 104000, 99500,  95500,
-    120000, 114000, 108500, 103500, 118000, 112000, 106500, 102000, 86000,  83000,  77000,  72000,  121000, 116000,
-    109000, 101000, 155000, 148000, 141000, 134500, 91000,  86000,  82500,  79000,  137000, 130000, 125000, 120500,
-    114000, 108000, 102500, 97500,  125000, 120000, 114000, 109000, 161000, 155000, 148500, 143000,
+    TIME_CONVERT(107000), TIME_CONVERT(99000),  TIME_CONVERT(90000),  TIME_CONVERT(82000),  TIME_CONVERT(91000),  TIME_CONVERT(82000),  TIME_CONVERT(76000),  TIME_CONVERT(70500),  TIME_CONVERT(93000),  TIME_CONVERT(83000),  TIME_CONVERT(78000),  TIME_CONVERT(74000),  TIME_CONVERT(99000),  TIME_CONVERT(92000),
+    TIME_CONVERT(86000),  TIME_CONVERT(81500),  TIME_CONVERT(110000), TIME_CONVERT(104000), TIME_CONVERT(98500),  TIME_CONVERT(92000),  TIME_CONVERT(108000), TIME_CONVERT(102000), TIME_CONVERT(98000),  TIME_CONVERT(92500),  TIME_CONVERT(96000),  TIME_CONVERT(91000),  TIME_CONVERT(85000),  TIME_CONVERT(79500),
+    TIME_CONVERT(97000),  TIME_CONVERT(90000),  TIME_CONVERT(83000),  TIME_CONVERT(76000),  TIME_CONVERT(102000), TIME_CONVERT(96000),  TIME_CONVERT(89000),  TIME_CONVERT(83000),  TIME_CONVERT(90000),  TIME_CONVERT(85000),  TIME_CONVERT(82000),  TIME_CONVERT(78500),  TIME_CONVERT(77000),  TIME_CONVERT(73000),
+    TIME_CONVERT(68500),  TIME_CONVERT(64500),  TIME_CONVERT(110000), TIME_CONVERT(105000), TIME_CONVERT(101000), TIME_CONVERT(96500),  TIME_CONVERT(97000),  TIME_CONVERT(92000),  TIME_CONVERT(87000),  TIME_CONVERT(82500),  TIME_CONVERT(109000), TIME_CONVERT(104000), TIME_CONVERT(99500),  TIME_CONVERT(95500),
+    TIME_CONVERT(120000), TIME_CONVERT(114000), TIME_CONVERT(108500), TIME_CONVERT(103500), TIME_CONVERT(118000), TIME_CONVERT(112000), TIME_CONVERT(106500), TIME_CONVERT(102000), TIME_CONVERT(86000),  TIME_CONVERT(83000),  TIME_CONVERT(77000),  TIME_CONVERT(72000),  TIME_CONVERT(121000), TIME_CONVERT(116000),
+    TIME_CONVERT(109000), TIME_CONVERT(101000), TIME_CONVERT(155000), TIME_CONVERT(148000), TIME_CONVERT(141000), TIME_CONVERT(134500), TIME_CONVERT(91000),  TIME_CONVERT(86000),  TIME_CONVERT(82500),  TIME_CONVERT(79000),  TIME_CONVERT(137000), TIME_CONVERT(130000), TIME_CONVERT(125000), TIME_CONVERT(120500),
+    TIME_CONVERT(114000), TIME_CONVERT(108000), TIME_CONVERT(102500), TIME_CONVERT(97500),  TIME_CONVERT(125000), TIME_CONVERT(120000), TIME_CONVERT(114000), TIME_CONVERT(109000), TIME_CONVERT(161000), TIME_CONVERT(155000), TIME_CONVERT(148500), TIME_CONVERT(143000),
 #ifdef EXPANSION_KIT
-    161000, 155000, 148500, 143000, 161000, 155000, 148500, 143000, 161000, 155000, 148500, 143000, 161000, 155000,
-    148500, 143000, 161000, 155000, 148500, 143000, 161000, 155000, 148500, 143000, 117000, 113000, 110000, 107000,
-    135000, 130000, 126000, 123000, 135000, 130000, 126000, 123000, 129000, 124000, 120000, 117000, 134000, 129000,
-    125000, 122000, 155000, 149000, 144000, 140000, 116000, 111000, 107000, 104000, 113000, 108000, 104000, 101000,
-    116000, 111000, 107000, 104000, 123000, 118000, 11400,  111000, 125000, 120000, 116000, 113000, 120000, 115000,
-    111000, 108000,
+    TIME_CONVERT(161000), TIME_CONVERT(155000), TIME_CONVERT(148500), TIME_CONVERT(143000), TIME_CONVERT(161000), TIME_CONVERT(155000), TIME_CONVERT(148500), TIME_CONVERT(143000), TIME_CONVERT(161000), TIME_CONVERT(155000), TIME_CONVERT(148500), TIME_CONVERT(143000), TIME_CONVERT(161000), TIME_CONVERT(155000),
+    TIME_CONVERT(148500), TIME_CONVERT(143000), TIME_CONVERT(161000), TIME_CONVERT(155000), TIME_CONVERT(148500), TIME_CONVERT(143000), TIME_CONVERT(161000), TIME_CONVERT(155000), TIME_CONVERT(148500), TIME_CONVERT(143000), TIME_CONVERT(117000), TIME_CONVERT(113000), TIME_CONVERT(110000), TIME_CONVERT(107000),
+    TIME_CONVERT(135000), TIME_CONVERT(130000), TIME_CONVERT(126000), TIME_CONVERT(123000), TIME_CONVERT(135000), TIME_CONVERT(130000), TIME_CONVERT(126000), TIME_CONVERT(123000), TIME_CONVERT(129000), TIME_CONVERT(124000), TIME_CONVERT(120000), TIME_CONVERT(117000), TIME_CONVERT(134000), TIME_CONVERT(129000),
+    TIME_CONVERT(125000), TIME_CONVERT(122000), TIME_CONVERT(155000), TIME_CONVERT(149000), TIME_CONVERT(144000), TIME_CONVERT(140000), TIME_CONVERT(116000), TIME_CONVERT(111000), TIME_CONVERT(107000), TIME_CONVERT(104000), TIME_CONVERT(113000), TIME_CONVERT(108000), TIME_CONVERT(104000), TIME_CONVERT(101000),
+    TIME_CONVERT(116000), TIME_CONVERT(111000), TIME_CONVERT(107000), TIME_CONVERT(104000), TIME_CONVERT(123000), TIME_CONVERT(118000), TIME_CONVERT(11400),  TIME_CONVERT(111000), TIME_CONVERT(125000), TIME_CONVERT(120000), TIME_CONVERT(116000), TIME_CONVERT(113000), TIME_CONVERT(120000), TIME_CONVERT(115000),
+    TIME_CONVERT(111000), TIME_CONVERT(108000),
 #endif
 };
 
 u32 D_i3_8013E4A8[] = {
-    35000, 33000, 32000, 30000, 31000, 29000, 27500, 26300, 28000, 27000, 26200, 24500, 29000, 28000, 26500, 26000,
-    35000, 33500, 32000, 31000, 34000, 33000, 32000, 31000, 31000, 29500, 29000, 28000, 30500, 29000, 27500, 27000,
-    33000, 32000, 29500, 28000, 30000, 28500, 27000, 26000, 23000, 22500, 21700, 21000, 35500, 34500, 34000, 33000,
-    30000, 29500, 28000, 27500, 35000, 34000, 33000, 31000, 38000, 37000, 36000, 35000, 37000, 36000, 34500, 33000,
-    25500, 24500, 23500, 22000, 40000, 38000, 36000, 34000, 51000, 49000, 47000, 45500, 31000, 29000, 27500, 26000,
-    44000, 42000, 40000, 39000, 35500, 34000, 32500, 31500, 40000, 39000, 38000, 37000, 51000, 49500, 48500, 47000,
+    TIME_CONVERT(35000), TIME_CONVERT(33000), TIME_CONVERT(32000), TIME_CONVERT(30000), TIME_CONVERT(31000), TIME_CONVERT(29000), TIME_CONVERT(27500), TIME_CONVERT(26300), TIME_CONVERT(28000), TIME_CONVERT(27000), TIME_CONVERT(26200), TIME_CONVERT(24500), TIME_CONVERT(29000), TIME_CONVERT(28000), TIME_CONVERT(26500), TIME_CONVERT(26000),
+    TIME_CONVERT(35000), TIME_CONVERT(33500), TIME_CONVERT(32000), TIME_CONVERT(31000), TIME_CONVERT(34000), TIME_CONVERT(33000), TIME_CONVERT(32000), TIME_CONVERT(31000), TIME_CONVERT(31000), TIME_CONVERT(29500), TIME_CONVERT(29000), TIME_CONVERT(28000), TIME_CONVERT(30500), TIME_CONVERT(29000), TIME_CONVERT(27500), TIME_CONVERT(27000),
+    TIME_CONVERT(33000), TIME_CONVERT(32000), TIME_CONVERT(29500), TIME_CONVERT(28000), TIME_CONVERT(30000), TIME_CONVERT(28500), TIME_CONVERT(27000), TIME_CONVERT(26000), TIME_CONVERT(23000), TIME_CONVERT(22500), TIME_CONVERT(21700), TIME_CONVERT(21000), TIME_CONVERT(35500), TIME_CONVERT(34500), TIME_CONVERT(34000), TIME_CONVERT(33000),
+    TIME_CONVERT(30000), TIME_CONVERT(29500), TIME_CONVERT(28000), TIME_CONVERT(27500), TIME_CONVERT(35000), TIME_CONVERT(34000), TIME_CONVERT(33000), TIME_CONVERT(31000), TIME_CONVERT(38000), TIME_CONVERT(37000), TIME_CONVERT(36000), TIME_CONVERT(35000), TIME_CONVERT(37000), TIME_CONVERT(36000), TIME_CONVERT(34500), TIME_CONVERT(33000),
+#ifndef VERSION_PAL
+    TIME_CONVERT(25500),
+#else
+    //! @bug When converting between NTSC times to PAL, a digit was lost
+    TIME_CONVERT(2550),
+#endif
+    TIME_CONVERT(24500), TIME_CONVERT(23500), TIME_CONVERT(22000), TIME_CONVERT(40000), TIME_CONVERT(38000), TIME_CONVERT(36000), TIME_CONVERT(34000), TIME_CONVERT(51000), TIME_CONVERT(49000), TIME_CONVERT(47000), TIME_CONVERT(45500), TIME_CONVERT(31000), TIME_CONVERT(29000), TIME_CONVERT(27500), TIME_CONVERT(26000),
+    TIME_CONVERT(44000), TIME_CONVERT(42000), TIME_CONVERT(40000), TIME_CONVERT(39000), TIME_CONVERT(35500), TIME_CONVERT(34000), TIME_CONVERT(32500), TIME_CONVERT(31500), TIME_CONVERT(40000), TIME_CONVERT(39000), TIME_CONVERT(38000), TIME_CONVERT(37000), TIME_CONVERT(51000), TIME_CONVERT(49500), TIME_CONVERT(48500), TIME_CONVERT(47000),
 #ifdef EXPANSION_KIT
-    51000, 49500, 48500, 47000, 51000, 49500, 48500, 47000, 51000, 49500, 48500, 47000, 51000, 49500, 48500, 47000,
-    51000, 49500, 48500, 47000, 51000, 49500, 48500, 47000, 41000, 39500, 38000, 37000, 46000, 44000, 42500, 41000,
-    47000, 46000, 44000, 43000, 44000, 42000, 40000, 39000, 47000, 45000, 43500, 42000, 52000, 50500, 49000, 48000,
-    40000, 38500, 37000, 36000, 38000, 36500, 35000, 34000, 40000, 38500, 37000, 36000, 43000, 40500, 39000, 38000,
-    43000, 40500, 39000, 38000, 40000, 38500, 37000, 36000,
+    TIME_CONVERT(51000), TIME_CONVERT(49500), TIME_CONVERT(48500), TIME_CONVERT(47000), TIME_CONVERT(51000), TIME_CONVERT(49500), TIME_CONVERT(48500), TIME_CONVERT(47000), TIME_CONVERT(51000), TIME_CONVERT(49500), TIME_CONVERT(48500), TIME_CONVERT(47000), TIME_CONVERT(51000), TIME_CONVERT(49500), TIME_CONVERT(48500), TIME_CONVERT(47000),
+    TIME_CONVERT(51000), TIME_CONVERT(49500), TIME_CONVERT(48500), TIME_CONVERT(47000), TIME_CONVERT(51000), TIME_CONVERT(49500), TIME_CONVERT(48500), TIME_CONVERT(47000), TIME_CONVERT(41000), TIME_CONVERT(39500), TIME_CONVERT(38000), TIME_CONVERT(37000), TIME_CONVERT(46000), TIME_CONVERT(44000), TIME_CONVERT(42500), TIME_CONVERT(41000),
+    TIME_CONVERT(47000), TIME_CONVERT(46000), TIME_CONVERT(44000), TIME_CONVERT(43000), TIME_CONVERT(44000), TIME_CONVERT(42000), TIME_CONVERT(40000), TIME_CONVERT(39000), TIME_CONVERT(47000), TIME_CONVERT(45000), TIME_CONVERT(43500), TIME_CONVERT(42000), TIME_CONVERT(52000), TIME_CONVERT(50500), TIME_CONVERT(49000), TIME_CONVERT(48000),
+    TIME_CONVERT(40000), TIME_CONVERT(38500), TIME_CONVERT(37000), TIME_CONVERT(36000), TIME_CONVERT(38000), TIME_CONVERT(36500), TIME_CONVERT(35000), TIME_CONVERT(34000), TIME_CONVERT(40000), TIME_CONVERT(38500), TIME_CONVERT(37000), TIME_CONVERT(36000), TIME_CONVERT(43000), TIME_CONVERT(40500), TIME_CONVERT(39000), TIME_CONVERT(38000),
+    TIME_CONVERT(43000), TIME_CONVERT(40500), TIME_CONVERT(39000), TIME_CONVERT(38000), TIME_CONVERT(40000), TIME_CONVERT(38500), TIME_CONVERT(37000), TIME_CONVERT(36000),
 #endif
 };
 
@@ -496,7 +502,7 @@ void func_i3_80115E74(void) {
                 }
 
                 for (i = 0; i < 200; i++) {
-#if defined(VERSION_US) || defined(EXPANSION_KIT)
+#if defined(VERSION_US) || defined(VERSION_PAL) || defined(EXPANSION_KIT)
                     if (var_s5 != 0) {
 #endif
                         temp_hi = Math_Rand2() % var_s5;
@@ -512,7 +518,7 @@ void func_i3_80115E74(void) {
                         if ((m >= 3) || ((m >= 2) && (gDifficulty <= EXPERT))) {
                             break;
                         }
-#if defined(VERSION_US) || defined(EXPANSION_KIT)
+#if defined(VERSION_US) || defined(VERSION_PAL) || defined(EXPANSION_KIT)
                     } else {
                         break;
                     }
@@ -756,7 +762,7 @@ void Cpu_InitRacer(Racer* racer) {
     s32 j;
 
     sPlayerRacer = gRacers;
-#if defined(VERSION_US) || defined(EXPANSION_KIT)
+#if defined(VERSION_US) || defined(VERSION_PAL) || defined(EXPANSION_KIT)
     D_80141900 = 0;
 #endif
     if (racer->id == 0) {
@@ -772,7 +778,11 @@ void Cpu_InitRacer(Racer* racer) {
 #endif
         } else {
             for (i = 0; i < 0x200; i += 2) {
+#ifndef VERSION_PAL
                 D_i3_8013DBE8[i + 0] = 69;
+#else
+                D_i3_8013DBE8[i + 0] = 83;
+#endif
                 D_i3_8013DBE8[i + 1] = 0;
             }
         }
@@ -847,7 +857,7 @@ void Cpu_InitRacer(Racer* racer) {
     racer->unk_360 = 0.0f;
     racer->unk_38C = 0.0f;
     racer->unk_3A0 = gTotalRacers;
-    racer->unk_1EC = 2500.0f / 27.0f;
+    racer->unk_1EC = 2000.0f / SPEED_CONVERSION;
 
     if (gGameMode == GAMEMODE_GP_RACE) {
         racer->unk_360 = D_i3_8013EBD0[D_i3_8013E7A8[racer->character].unk_02 * 4 + gDifficulty];
@@ -874,7 +884,7 @@ void Cpu_InitRacer(Racer* racer) {
 
     if (gGameMode == GAMEMODE_GP_END_CS) {
         racer->unk_1A8 = func_8008960C(0.1f);
-        racer->unk_1EC = 2500.0f / 27.0f;
+        racer->unk_1EC = 2000.0f / SPEED_CONVERSION;
         racer->unk_1E8 = 0.0f;
         racer->unk_330 = 0.01f;
         racer->unk_334 = Math_Rand1() % 32768 / 32767.0f * 20.0f + 500.0f;
@@ -937,7 +947,7 @@ void Cpu_InitRacer(Racer* racer) {
         if (gGameMode == GAMEMODE_DEATH_RACE) {
             racer->unk_1A8 = (Math_Rand1() % 256 / 255.0f) * 0.2f;
         }
-        racer->unk_1EC = 2500.0f / 27.0f;
+        racer->unk_1EC = 2000.0f / SPEED_CONVERSION;
         racer->unk_1E8 = 0.0f;
     }
 }
@@ -1030,7 +1040,7 @@ void func_i3_801175A4(void) {
 }
 
 f32 func_i3_801179DC(Racer* arg0) {
-    return D_i3_8013DC18[gCourseIndex * 4 + gDifficulty] * (2500.0f / 27.0f);
+    return D_i3_8013DC18[gCourseIndex * 4 + gDifficulty] * (2000.0f / SPEED_CONVERSION);
 }
 
 f32 func_i3_80117A1C(Racer* arg0) {
@@ -1200,7 +1210,7 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
 
             temp_fv1 = (gRacers[var_a3].raceDistance + racer->unk_38C) - racer->raceDistance;
             if (temp_fv1 > 0) {
-                racer->unk_1EC = 69.44444f;
+                racer->unk_1EC = 1500.0f / SPEED_CONVERSION;
                 racer->unk_1E8 = temp_fv1 * 0.0003f;
                 if (racer->unk_1E8 > 1.0f) {
                     racer->unk_1E8 = 1.0f;
@@ -1228,7 +1238,7 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
     } else if (((gNumPlayers == 1) && (sPlayerRacer->stateFlags & RACER_STATE_FINISHED)) ||
                (racer->stateFlags & RACER_STATE_FINISHED) || (racer->id < gNumPlayers)) {
         racer->unk_1E8 = 0.0f;
-        racer->unk_1EC = (2500.0f / 27.0f);
+        racer->unk_1EC = 2000.0f / SPEED_CONVERSION;
         racer->unk_1B4 = 1.00894f;
         racer->unk_1B0 = 1.156336f;
         racer->unk_1B8 = 0.119168f;
@@ -1238,7 +1248,7 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
         if ((gNumPlayers == 1) && (gTotalRacers != 1) && (racer->id != 0) &&
             (sPlayerRacer->stateFlags & RACER_STATE_FINISHED)) {
             if ((sp44->id == 0) && (racer->distanceToRacerAhead < 2000.0f)) {
-                racer->unk_1EC = (625.0f / 27.0f);
+                racer->unk_1EC = 500.0f / SPEED_CONVERSION;
             } else if ((sp40->id == 0) && (racer->distanceFromRacerBehind < 2000.0f)) {
                 racer->unk_1E8 = 1.0f;
                 controller->buttonPressed |= BTN_B;
@@ -1246,7 +1256,7 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
         }
     } else if ((racer->currentRadiusRight + racer->currentRadiusLeft) < 184.0f) {
         racer->unk_1E8 = 0.0f;
-        racer->unk_1EC = (2500.0f / 27.0f);
+        racer->unk_1EC = 2000.0f / SPEED_CONVERSION;
     } else if (gNumPlayers == 1) {
         if (racer->unk_352 != 0xFF) {
             spBC = (gRacers[racer->unk_352].raceDistance + racer->unk_38C) - racer->raceDistance;
@@ -1274,7 +1284,7 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
             if (spBC < 2000.0f) {
                 racer->unk_1EC = gRacers[racer->unk_352].speed + (spBC * 0.01f);
             } else {
-                racer->unk_1EC = (625.0f / 9.0f);
+                racer->unk_1EC = 1500.0f / SPEED_CONVERSION;
             }
             racer->unk_1E8 = 1.2f;
             if (sp70 && (racer->raceTime > 1000) && ((racer->currentRadiusRight + racer->currentRadiusLeft) > 138.0f) &&
@@ -1350,13 +1360,13 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                     racer->unk_1E8 = 0.0f;
                     controller->buttonPressed |= BTN_B;
                     if (spBC > 1000.0f) {
-                        racer->unk_1EC = (2500.0f / 27.0f);
+                        racer->unk_1EC = 2000.0f / SPEED_CONVERSION;
                     }
                 }
             } else if ((var_fv0 < 2000.0f) && (gTotalLapCount == racer->lap) &&
                        (((s32) (gCurrentCourseInfo->segmentCount * 2) / 3) <
                         racer->segmentPositionInfo.courseSegment->segmentIndex)) {
-                spBC = sPlayerRacer->speed - 2.3148148f;
+                spBC = sPlayerRacer->speed - (50.0f / SPEED_CONVERSION);
                 if ((var_fv0 < 0.0f) && (racer->unk_1EC < spBC)) {
                     racer->unk_1EC = spBC;
                 }
@@ -1369,7 +1379,7 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                     racer->unk_1EC = (spBC * 0.05f) + (spBC - spB4);
                     racer->unk_1E8 = 1.0f;
                 } else {
-                    racer->unk_1EC = (2500.0f / 27.0f);
+                    racer->unk_1EC = 2000.0f / SPEED_CONVERSION;
                     racer->unk_1E8 = 0.0f;
                 }
             } else {
@@ -1413,7 +1423,7 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
     if (gCourseIndex == COURSE_FIRE_FIELD) {
         i = racer->segmentPositionInfo.courseSegment->segmentIndex;
         if ((i >= 4) && (i < 0x10)) {
-            racer->unk_1EC = (2500.0f / 27.0f);
+            racer->unk_1EC = 2000.0f / SPEED_CONVERSION;
             racer->unk_1E8 = 1.0f;
         }
     }
@@ -1542,7 +1552,7 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
             } else {
                 racer->unk_33C += racer->unk_354;
             }
-            racer->unk_1EC = (2500.0f / 27.0f);
+            racer->unk_1EC = 2000.0f / SPEED_CONVERSION;
             if (racer->unk_1E8 >= 1.0f) {
                 racer->unk_1E8 = 1.0f;
             }
@@ -1551,7 +1561,7 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
             if (((racer->segmentPositionInfo.courseSegment->next->trackSegmentInfo & TRACK_SHAPE_MASK) ==
                  TRACK_SHAPE_AIR) &&
                 (racer->segmentPositionInfo.segmentLengthProportion > 0.5f)) {
-                racer->unk_1EC = 69.44444f;
+                racer->unk_1EC = 1500.0f / SPEED_CONVERSION;
             }
         }
         if (var_a3 < -70) {
@@ -2141,8 +2151,8 @@ void Cpu_GenerateInputs(Racer* racer, Controller* controller) {
                 }
             }
         }
-        if (racer->unk_1EC < (625.0f / 27.0f)) {
-            racer->unk_1EC = (625.0f / 27.0f);
+        if (racer->unk_1EC < 500.0f / SPEED_CONVERSION) {
+            racer->unk_1EC = 500.0f / SPEED_CONVERSION;
         }
         if ((racer->stateFlags & RACER_STATE_FINISHED) || (gGameMode == GAMEMODE_GP_END_CS)) {
             racer->awarenessFlags &= ~0xA00;

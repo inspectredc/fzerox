@@ -191,6 +191,7 @@ void Main_ThreadEntry(void* arg0) {
 
     osViBlack(false);
 
+#ifndef VERSION_PAL
     if (osAppNMIBuffer[15] != 0x20DE1529) {
         // More than 8MB Ram available, n64dd compatible
         if (osGetMemSize() >= 0x800000) {
@@ -202,6 +203,21 @@ void Main_ThreadEntry(void* arg0) {
     } else {
         gRamDDCompatible = osAppNMIBuffer[14];
     }
+#else
+    switch (osResetType) {
+        case 0:
+        case 1:
+            if (osGetMemSize() >= 0x800000) {
+                gRamDDCompatible = true;
+            } else {
+                gRamDDCompatible = false;
+            }
+            break;
+        case 2:
+            gRamDDCompatible = true;
+            break;
+    }
+#endif
 
     if (gRamDDCompatible) {
         Dma_ClearRomCopy(SEGMENT_ROM_START(leo), SEGMENT_VRAM_START(leo), SEGMENT_ROM_SIZE(leo));
@@ -261,7 +277,7 @@ void Main_ThreadEntry(void* arg0) {
                    sResetThreadStack + sizeof(sResetThreadStack), 100);
     osStartThread(&sResetThread);
 
-#ifndef EXPANSION_KIT
+#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
     if (gRamDDCompatible && (gLeoDriveConnectionState != 0)) {
         SLLeoResetClear();
     }
@@ -391,11 +407,16 @@ void Idle_ThreadEntry(void* arg0) {
     gFrameBuffers[1] = &gFrameBuffer2;
     gFrameBuffers[2] = &gFrameBuffer3;
     osCreateViManager(OS_PRIORITY_VIMGR);
+#ifndef VERSION_PAL
     if (osTvType == OS_TV_TYPE_NTSC) {
         osViSetMode(&osViModeNtscLan1);
     } else {
         osViSetMode(&osViModeMpalLan1);
     }
+#else
+    osViSetMode(&osViModeFpalLan1);
+    osViSetYScale(0.833f);
+#endif
     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
     osViSetSpecialFeatures(OS_VI_GAMMA_DITHER_OFF);
     osViSetSpecialFeatures(OS_VI_DIVOT_OFF);

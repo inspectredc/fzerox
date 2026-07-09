@@ -389,7 +389,7 @@ s16 D_800CE77C = 0;
 s16 D_800CE780 = 1;
 s16 D_800CE784 = 0;
 
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
 s16 gGreyscaleMachinePart = false;
 #endif
 
@@ -1632,7 +1632,7 @@ void Racer_InitRacer(Racer* racer) {
                             racer->velocity.x = racer->velocity.y = racer->velocity.z = var_fs0 = 0.0f;
     racer->podiumHeight = racer->energyRegain = 0.0f;
     racer->shadowColorStrength = 1.0f;
-    racer->unk_1EC = 2500.0f / 27.0f;
+    racer->unk_1EC = 2000.0f / SPEED_CONVERSION;
     racer->unk_17C = D_800F80A4;
 
     racer->unk_1E0 = (((machine->weight - 780.0f) * -0.0050000027f) / 1560.0f) + 0.054f;
@@ -1851,7 +1851,7 @@ void Racer_Init(void) {
         gEnableRaceSfx = false;
         gRaceIntroTimer = 0;
 
-#ifndef EXPANSION_KIT
+#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
         if (gTitleDemoState != TITLE_DEMO_INACTIVE) {
 #else
         if (gTitleDemoState != TITLE_DEMO_INACTIVE && gGameMode != GAMEMODE_RECORDS) {
@@ -2290,11 +2290,11 @@ void Racer_ReceiveDamage(Racer* racer, f32 damageStrength) {
             }
         }
     } else {
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
         if (D_800CE780 != 0) {
 #endif
             racer->energy -= damageStrength;
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
         }
 #endif
         racer->stateFlags |= RACER_STATE_RECEIVED_DAMAGE;
@@ -4301,15 +4301,24 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
                 sp128 -= racer->lapDistance;
                 racer->unk_288++;
                 racer->unk_2A4++;
+#ifndef VERSION_PAL
                 racer->raceTime = (s32) (racer->unk_2A4 * 50) / 3;
+#else
+                racer->raceTime = racer->unk_2A4 * 20;
+#endif
                 if (sCourseHalfLength < sp128) {
                     racer->lapsCompletedDistance += gCurrentCourseInfo->length;
                     racer->lap++;
                     if ((racer->lap == racer->lapsCompleted + 1) && (racer->lap <= (gTotalLapCount + 1))) {
                         racer->lapsCompleted = racer->lap;
                         racer->stateFlags |= RACER_STATE_CAN_BOOST;
+#ifndef VERSION_PAL
                         i = racer->raceTime -
                             (s32) ((50.0f * racer->lapDistance) / (3.0f * (gCurrentCourseInfo->length - sp128)));
+#else
+                        i = racer->raceTime -
+                            (s32) ((20.0f * racer->lapDistance) / (gCurrentCourseInfo->length - sp128));
+#endif
                         racer->lapTimes[racer->lap - 2] = (s32) (i - racer->completedLapsTime);
                         racer->completedLapsTime = i;
                         racer->startNewPracticeLap = true;
@@ -6932,6 +6941,8 @@ block_115:
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/racer/Racer_Draw.s")
 #elif VERSION_US
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/racer/Racer_Draw.s")
+#elif VERSION_PAL
+#pragma GLOBAL_ASM("asm/pal/rev0/nonmatchings/game/racer/Racer_Draw.s")
 #endif
 #else
 #pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/game/racer/Racer_Draw.s")
@@ -6960,7 +6971,7 @@ Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2) {
     s32 color;
 
     gSPDisplayList(gfx++, D_800CDD38[character]);
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
     if (gGreyscaleMachinePart && (machine->customType == CUSTOM_MACHINE_DEFAULT)) {
         color = (machine->red[arg2] * 77) + (machine->green[arg2] * 151) + (machine->blue[arg2] * 28);
         color >>= 8;
@@ -6968,7 +6979,7 @@ Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2) {
     } else {
 #endif
         gDPSetEnvColor(gfx++, machine->red[arg2], machine->green[arg2], machine->blue[arg2], 255);
-#ifdef EXPANSION_KIT
+#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
     }
 #endif
     gSPDisplayList(gfx++, D_800CDDB0[character * 6]);

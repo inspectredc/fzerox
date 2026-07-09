@@ -918,6 +918,8 @@ void Matrix_SetAxisRotation(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, f32 arg4,
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
 #elif VERSION_US
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
+#elif VERSION_PAL
+#pragma GLOBAL_ASM("asm/pal/rev0/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
 #endif
 #else
 #pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/sys/math/Matrix_SetAxisRotation.s")

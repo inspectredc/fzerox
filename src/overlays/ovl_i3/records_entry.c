@@ -479,7 +479,7 @@ Gfx* RecordsEntry_DrawSpeed(Gfx* gfx, s32 left, s32 top, f32 speed, bool shouldH
     gSPDisplayList(gfx++, D_8014940);
 
     texLeft = left;
-    speedValue = (speed * 21.6f) + 0.5f;
+    speedValue = (speed * SPEED_CONVERSION) + 0.5f;
     if (drawMaxSpeedTexture) {
         gDPPipeSync(gfx++);
         gDPLoadTextureBlock(gfx++, aMaxSpeedTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,

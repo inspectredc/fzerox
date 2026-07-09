@@ -947,8 +947,13 @@ void AudioLoad_Init(void* heap, size_t heapSize) {
         }
     }
 
+#ifndef VERSION_PAL
     gMaxTempoTvTypeFactors = 1000 * REFRESH_RATE_DEVIATION_NTSC / REFRESH_RATE_NTSC;
     gRefreshRate = REFRESH_RATE_NTSC;
+#else
+    gMaxTempoTvTypeFactors = 1000 * REFRESH_RATE_DEVIATION_PAL / REFRESH_RATE_PAL;
+    gRefreshRate = REFRESH_RATE_PAL;
+#endif
 
     AudioThread_InitMesgQueues();
 

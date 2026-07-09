@@ -1,13 +1,17 @@
 #include "global.h"
 #include "PR/leo.h"
+#include "leo/mfs.h"
 #include "fzx_thread.h"
 
+#ifdef VERSION_PAL
+s32 sSLLeoReadWriteBlocksSize;
+#endif
 LEOStatus D_800E32E0;
 LEOCmd D_800E32E8;
 OSMesgQueue sSLLeoMesgQueue;
 OSMesg sSLLeoMsgBuf[1];
 s32 sSLLeoError;
-#ifdef VERSION_JP
+#if defined(VERSION_JP) || defined(VERSION_PAL)
 UNUSED s32 D_800E3318_JP;
 #endif
 s32 D_800E3328;
@@ -20,6 +24,14 @@ extern OSMesgQueue gMainThreadMesgQueue;
 LEODiskID D_800CD2B0 = { 0 };
 bool D_800CD2D0 = false;
 OSThread* D_800CD2D4 = NULL;
+
+#ifdef VERSION_PAL
+void func_80075070(void) {
+    s32 i;
+
+    for (i = 0; i < 0xFFFFF; i++) {}
+}
+#endif
 
 void SLForceWritebackDCacheAll(void) {
     OSIntMask prevMask = osGetIntMask();
@@ -70,6 +82,9 @@ bool func_800752EC(void) {
             return func_800752EC();
         case LEO_ERROR_MEDIUM_NOT_PRESENT:
         case LEO_ERROR_MEDIUM_MAY_HAVE_CHANGED:
+#ifdef VERSION_PAL
+            func_80075228();
+#endif
             return false;
         case LEO_ERROR_COMMAND_TERMINATED:
         default:
@@ -238,6 +253,13 @@ s32 func_800758F8(void) {
     sSLLeoError = LeoTestUnitReady(&D_800E32E0);
 
     switch (sSLLeoError) {
+        case LEO_ERROR_GOOD:
+        case LEO_ERROR_MEDIUM_NOT_PRESENT:
+        case LEO_ERROR_MEDIUM_MAY_HAVE_CHANGED:
+#ifdef VERSION_PAL
+            func_80075228();
+#endif
+            break;
         case LEO_ERROR_BUSY:
             return 1;
         case LEO_ERROR_COMMAND_TERMINATED:
@@ -247,10 +269,6 @@ s32 func_800758F8(void) {
             LeoFault_DrawErrorNumber(sSLLeoError);
             SLForceWritebackDCacheAll();
             while (true) {}
-        case LEO_ERROR_GOOD:
-        case LEO_ERROR_MEDIUM_NOT_PRESENT:
-        case LEO_ERROR_MEDIUM_MAY_HAVE_CHANGED:
-            break;
     }
 
     if (D_800E32E0 & LEO_TEST_UNIT_MR) {
@@ -272,6 +290,10 @@ s32 SLLeoReadWrite_DATA(LEOCmd* cmdBlock, s32 direction, u32 lba, void* vAddr, u
         while (func_800752EC()) {}
         while (SLCheckDiskInsert()) {}
     }
+#ifdef VERSION_PAL
+    LeoLBAToByte(lba, nLbas, &sSLLeoReadWriteBlocksSize);
+    osInvalDCache(osPhysicalToVirtual(vAddr), sSLLeoReadWriteBlocksSize);
+#endif
     LeoReadWrite(cmdBlock, direction, lba, vAddr, nLbas, &sSLLeoMesgQueue);
     osRecvMesg(&sSLLeoMesgQueue, &sSLLeoError, OS_MESG_BLOCK);
 
@@ -344,6 +366,10 @@ s32 SLLeoReadWrite(LEOCmd* cmdBlock, s32 direction, s32 lba, void* vAddr, u32 nL
         while (func_800752EC()) {}
         while (SLCheckDiskInsert()) {}
     }
+#ifdef VERSION_PAL
+    LeoLBAToByte(lba, nLbas, &sSLLeoReadWriteBlocksSize);
+    osInvalDCache(osPhysicalToVirtual(vAddr), sSLLeoReadWriteBlocksSize);
+#endif
     LeoReadWrite(cmdBlock, direction, lba, vAddr, nLbas, &sSLLeoMesgQueue);
     osRecvMesg(&sSLLeoMesgQueue, &sSLLeoError, OS_MESG_BLOCK);
 
@@ -486,5 +512,136 @@ void SLLeoResetClear(void) {
     while (true) {}
 }
 
+#ifndef VERSION_PAL
 void func_8007647C(void) {
 }
+#endif
+
+#ifdef VERSION_PAL
+void func_800763B0(void) {
+
+    switch (func_800753EC()) {
+        case LEO_ERROR_GOOD:
+            func_80075228();
+            break;
+        case LEO_ERROR_MEDIUM_NOT_PRESENT:
+            SLForceWritebackDCacheAll();
+            LeoFault_DrawIsDiskInserted();
+            SLForceWritebackDCacheAll();
+            while (SLCheckDiskInsert()) {}
+            func_800763B0();
+            break;
+        case LEO_ERROR_EJECTED_ILLEGALLY_RESUME:
+            SLForceWritebackDCacheAll();
+            LeoFault_DrawCautionDoNotRemovePleaseInsert();
+            LeoFault_DrawErrorNumber(sSLLeoError);
+            SLForceWritebackDCacheAll();
+            while (SLCheckDiskInsert()) {}
+            func_800763B0();
+            break;
+    }
+}
+
+void func_800764AC(u32 standby, u32 sleep) {
+
+    LeoModeSelectAsync(&D_800E32E8, standby, sleep, &sSLLeoMesgQueue);
+    osRecvMesg(&sSLLeoMesgQueue, &sSLLeoError, OS_MESG_BLOCK);
+    switch (sSLLeoError) {
+        case LEO_ERROR_GOOD:
+        case LEO_ERROR_QUEUE_FULL:
+             break;
+        case LEO_ERROR_MEDIUM_MAY_HAVE_CHANGED:
+            while (true) {
+                if (SLCheckDiskInsert() != 0) {
+                    SLForceWritebackDCacheAll();
+                    LeoFault_DrawIsDiskInserted();
+                    SLForceWritebackDCacheAll();
+                }
+                while (SLCheckDiskInsert()) {}
+                func_80075228();
+                if (func_80075738(D_800CD2B0) == 2) {
+                    break;
+                }
+                SLForceWritebackDCacheAll();
+                LeoFault_DrawWrongDisk();
+                SLForceWritebackDCacheAll();
+                while (func_800752EC()) {}
+            }
+            func_800764AC(standby, sleep);
+            break;
+        case LEO_ERROR_COMMAND_TERMINATED:
+        default:
+            SLForceWritebackDCacheAll();
+            LeoFault_DrawReferUserGuide();
+            LeoFault_DrawErrorNumber(sSLLeoError);
+            SLForceWritebackDCacheAll();
+            while (true) {}
+    }
+}
+
+// Roughly correct w/ wrong symbol names
+void func_80076678(u16 arg0) {
+
+    while (func_80075738(D_800CD2B0) != 2) {
+
+        SLForceWritebackDCacheAll();
+        LeoFault_DrawWrongDisk();
+        SLForceWritebackDCacheAll();
+
+        while (func_800752EC()) {}
+        while (SLCheckDiskInsert()) {}
+    }
+
+    Mfs_GetFilesPreparation(arg0);
+    switch (gMfsError) {
+        case LEO_ERROR_GOOD:
+            break;
+        case LEO_ERROR_BUSY:
+        case LEO_ERROR_QUEUE_FULL:
+            func_80075070();
+            func_80076678(arg0);
+            break;
+        case LEO_ERROR_MEDIUM_NOT_PRESENT:
+            SLForceWritebackDCacheAll();
+            LeoFault_DrawIsDiskInserted();
+            SLForceWritebackDCacheAll();
+            while (SLCheckDiskInsert()) {}
+            func_80075228();
+            func_80076678(arg0);
+            /* fallthrough */
+        case LEO_ERROR_MEDIUM_MAY_HAVE_CHANGED:
+            while (SLCheckDiskInsert()) {}
+            func_80075228();
+            func_80076678(arg0);
+            break;
+        case LEO_ERROR_DIAGNOSTIC_FAILURE:
+            SLForceWritebackDCacheAll();
+            LeoFault_DrawReinsertDisk();
+            LeoFault_DrawErrorNumber(sSLLeoError);
+            SLForceWritebackDCacheAll();
+            while (func_800752EC()) {}
+            while (SLCheckDiskInsert()) {}
+            func_80075228();
+            func_80076678(arg0);
+            break;
+        case LEO_ERROR_EJECTED_ILLEGALLY_RESUME:
+            SLForceWritebackDCacheAll();
+            LeoFault_DrawCautionDoNotRemovePleaseInsert();
+            LeoFault_DrawErrorNumber(sSLLeoError);
+            SLForceWritebackDCacheAll();
+            while (SLCheckDiskInsert()) {}
+            func_80076678(arg0);
+            /* fallthrough */
+        case LEO_ERROR_UNRECOVERED_READ_ERROR:
+        case 0x10A:
+            Mfs_CopyRamAreaFromBackup();
+            break;
+        default:
+            SLForceWritebackDCacheAll();
+            LeoFault_DrawReferUserGuide();
+            LeoFault_DrawErrorNumber(sSLLeoError);
+            SLForceWritebackDCacheAll();
+            while (true) {}
+    }
+}
+#endif

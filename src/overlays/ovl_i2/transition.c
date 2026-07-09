@@ -1583,6 +1583,8 @@ Gfx* Transition_PhasedStripsDraw(Gfx* gfx, Transition* transition) {
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i2/transition/Transition_PhasedStripsDraw.s")
 #elif VERSION_US
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i2/transition/Transition_PhasedStripsDraw.s")
+#elif VERSION_PAL
+#pragma GLOBAL_ASM("asm/pal/rev0/nonmatchings/overlays/ovl_i2/transition/Transition_PhasedStripsDraw.s")
 #endif
 #else
 #pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/overlays/ovl_i2/transition/Transition_PhasedStripsDraw.s")

@@ -270,7 +270,9 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_18,
+#ifndef VERSION_PAL
     OBJECT_FREE,
+#endif
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -278,7 +280,9 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_19,
+#ifndef VERSION_PAL
     OBJECT_FREE,
+#endif
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -288,7 +292,9 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_CREDITS_NAME_20,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_21,
+#ifndef VERSION_PAL
     OBJECT_FREE,
+#endif
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -298,7 +304,9 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_CREDITS_NAME_22,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_23,
+#ifndef VERSION_PAL
     OBJECT_FREE,
+#endif
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -328,6 +336,7 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_CREDITS_NAME_35,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_28,
+#ifndef VERSION_PAL
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -336,6 +345,7 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
+#endif
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -362,6 +372,7 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_29,
+#ifndef VERSION_PAL
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -369,6 +380,7 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
+#endif
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -918,6 +930,8 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj);
 #pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
 #elif VERSION_US
 #pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
+#elif VERSION_PAL
+#pragma GLOBAL_ASM("asm/pal/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
 #endif
 #else
 #pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
@@ -1160,7 +1174,14 @@ void Credits_MachinesUpdate(Object* machinesObj) {
             OBJECT_COUNTER(machinesObj) = 0;
             break;
         case 2:
-            if (++OBJECT_COUNTER(machinesObj) >= 64) {
+#ifndef VERSION_PAL
+            OBJECT_COUNTER(machinesObj)++;
+#else
+            if ((++OBJECT_COUNTER(machinesObj) % 6) == 5) {
+                OBJECT_COUNTER(machinesObj)++;
+            }
+#endif
+            if (OBJECT_COUNTER(machinesObj) >= 64) {
                 OBJECT_STATE2(machinesObj) = 3;
                 OBJECT_COUNTER(machinesObj) = 0;
                 scriptObj = Object_Get(OBJECT_CREDITS_SCRIPT);
@@ -1325,7 +1346,11 @@ void Credits_ScriptUpdate(Object* scriptObj) {
                             OBJECT_COUNTER(machinesObj)++;
                         }
                         break;
+#ifndef VERSION_PAL
                     case 60:
+#else
+                    case 50:
+#endif
                         Credits_ObjectInit(OBJECT_CREDITS_NAME_0 + OBJECT_STATE(scriptObj),
                                            kStartNamesInitialPositions[(OBJECT_STATE(scriptObj) % 4) * 2 + 0],
                                            kStartNamesInitialPositions[(OBJECT_STATE(scriptObj) % 4) * 2 + 1], 10);
@@ -1337,7 +1362,11 @@ void Credits_ScriptUpdate(Object* scriptObj) {
                 OBJECT_COUNTER(scriptObj) = 0;
                 break;
             case 2:
+#ifndef VERSION_PAL
                 if (OBJECT_COUNTER(scriptObj) > 30) {
+#else
+                if (OBJECT_COUNTER(scriptObj) > 15) {
+#endif
                     OBJECT_STATE(scriptObj)++;
                     OBJECT_STATE2(scriptObj) = 0;
                     OBJECT_COUNTER(scriptObj) = 0;
@@ -1414,7 +1443,11 @@ void Credits_StartRoleUpdate(Object* startRoleObj) {
             }
             break;
         case 1:
+#ifndef VERSION_PAL
             if (++OBJECT_COUNTER(startRoleObj) > 120) {
+#else
+            if (++OBJECT_COUNTER(startRoleObj) > 80) {
+#endif
                 OBJECT_STATE(startRoleObj) = 2;
                 machinesObj = Object_Get(OBJECT_CREDITS_MACHINES);
                 if ((machinesObj != NULL) && (OBJECT_STATE2(machinesObj) == 1)) {
@@ -1529,7 +1562,11 @@ void Credits_SeeYouAgainUpdate(Object* seeYouAgainObj) {
 
     switch (OBJECT_STATE(seeYouAgainObj)) {
         case 0:
+#ifndef VERSION_PAL
             if (++OBJECT_COUNTER(seeYouAgainObj) >= 175) {
+#else
+            if (++OBJECT_COUNTER(seeYouAgainObj) >= 146) {
+#endif
                 OBJECT_STATE(seeYouAgainObj)++;
                 OBJECT_COUNTER(seeYouAgainObj) = 0;
 #ifndef EXPANSION_KIT
@@ -1553,24 +1590,40 @@ void Credits_SeeYouAgainUpdate(Object* seeYouAgainObj) {
 void Credits_IntroUpdate(Object* introObj) {
 
     switch (++INTRO_TIMER(introObj)) {
+#ifndef VERSION_PAL
         case 30:
+#else
+        case 25:
+#endif
             if (OBJECT_STATE(introObj) == 0) {
                 OBJECT_STATE(introObj) = 1;
             }
             break;
+#ifndef VERSION_PAL
         case 60:
+#else
+        case 50:
+#endif
             if (OBJECT_STATE2(introObj) == 0) {
                 OBJECT_STATE2(introObj) = 1;
             }
             break;
+#ifndef VERSION_PAL
         case 370:
+#else
+        case 308:
+#endif
             Credits_ObjectInit(OBJECT_CREDITS_SCRIPT, 0, 0, 0);
             Credits_ObjectInit(OBJECT_CREDITS_MACHINES, 0, 0, 4);
             Credits_ObjectInit(OBJECT_CREDITS_PORTRAITS, 0, 0, 8);
             introObj->cmdId = OBJECT_FREE;
             break;
         default:
+#ifndef VERSION_PAL
             if (INTRO_TIMER(introObj) > 300) {
+#else
+            if (INTRO_TIMER(introObj) > 250) {
+#endif
                 if (OBJECT_STATE2(introObj) == 2) {
                     OBJECT_STATE2(introObj) = 3;
                 }

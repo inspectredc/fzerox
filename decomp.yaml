@@ -83,6 +83,11 @@ tools:
         - build/jp/rev0/asm/jp/rev0/data
         - build/jp/rev0/asm/jp/rev0
         - build/jp/rev0/
+        - build/pal/rev0/lib/
+        - build/pal/rev0/src/
+        - build/pal/rev0/asm/pal/rev0/data
+        - build/pal/rev0/asm/pal/rev0
+        - build/pal/rev0/
         - build/jp/ek/lib/
         - build/jp/ek/src/
         - build/jp/ek/asm/jp/ek/data

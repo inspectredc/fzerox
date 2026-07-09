@@ -57,6 +57,14 @@
 #define PHYS_TO_K1ROM(x) (((u32) (x) | 0xB0000000))
 #define ROM_READ(addr) (*(vu32*) PHYS_TO_K1ROM(addr))
 
+#ifndef VERSION_PAL
+#define TIME_CONVERT(x) (x)
+#define SPEED_CONVERSION (21.6f)
+#else
+#define TIME_CONVERT(x) (((x) / 5) * 6)
+#define SPEED_CONVERSION (18.0f)
+#endif
+
 /* 
  * Macros for asset includes
  */

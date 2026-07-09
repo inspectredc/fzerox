@@ -198,9 +198,12 @@ void Title_Init(void) {
 #else
     Object_Init(OBJECT_TITLE_COPYRIGHT, 78, 200, 12);
 #endif
+
+#ifndef VERSION_PAL
     if (gLeoDriveConnectionState != 0) {
         Object_Init(OBJECT_TITLE_DISK_DRIVE, 0, 0, 12);
     }
+#endif
 }
 
 extern s32 gControllersConnected;
@@ -213,10 +216,12 @@ s32 Title_Update(void) {
     }
     Controller_SetGlobalInputs(&gSharedController);
     Math_Rand1();
+#ifndef VERSION_PAL
     if ((gLeoDriveConnectionState != 0) && (OBJECT_COUNTER(Object_Get(OBJECT_TITLE_DISK_DRIVE)) != 0) &&
         (OBJECT_STATE(Object_Get(OBJECT_TITLE_DISK_DRIVE)) == 0)) {
         return gGameMode;
     }
+#endif
     if (D_i4_8011D794 != 0) {
         return gGameMode;
     }
@@ -237,9 +242,11 @@ s32 Title_Update(void) {
         Audio_RomBgmReady(BGM_SELECT);
 #endif
         D_i4_8011D790 = -1;
+#ifndef VERSION_PAL
         if ((gLeoDriveConnectionState != 0) && (OBJECT_STATE(Object_Get(OBJECT_TITLE_DISK_DRIVE)) == 1)) {
             Audio_SESeqStart();
         }
+#endif
         return GAMEMODE_FLX_MAIN_MENU;
     } else {
         return GAMEMODE_FLX_TITLE;

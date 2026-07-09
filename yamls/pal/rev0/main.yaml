@@ -44,42 +44,44 @@
     bss_size: 0x24220
     subsegments:
       # Game/Sys
-      - [0x1060, asm, sys/sys_main]
-      - [0x1A80, asm, sys/sys_gfx]
-      - [0x2A00, asm, sys/sys_audio]
-      - [0x2AC0, asm, game/game]
-      - [0x3670, asm, sys/controller]
-      - [0x3E40, asm, sys/math]
-      - [0x7360, asm, game/course_gadgets]
-      - [0xE8D0, asm, game/EA20]
-      - [0xE940, asm, game/EA90]
-      - [0xEF60, asm, sys/rom/disk_drive]
-      - [0xF070, asm, sys/rom/sys_leo]
-      - [0x109A0, asm, sys/dma]
-      - [0x10C00, asm, sys/segment]
-      - [0x12200, asm, game/object]
-      - [0x14960, asm, game/texture_utils]
-      - [0x17EF0, asm, game/common]
-      - [0x18930, asm, game/texture_utils2]
-      - [0x19A00, asm, game/194E0]
-      - [0x19A40, asm, sys/rom/disk_mount]
-      - [0x19C20, asm, sys/rom/leo_fault]
-      - [0x1A380, asm, sys/sys_fault]
-      - [0x1AE80, asm, game/bordered_box]
-      - [0x1B520, asm, game/camera]
-      - [0x23120, asm, game/racer]
+      - [0x1060, c, sys/sys_main]
+      - [0x1A70, pad]
+      - [0x1A80, c, sys/sys_gfx]
+      - [0x2A00, c, sys/sys_audio]
+      - [0x2AC0, c, game/game]
+      - [0x3670, c, sys/controller]
+      - [0x3E40, c, sys/math]
+      - [0x7360, c, game/course_gadgets]
+      - [0xE8D0, c, game/EA20]
+      - [0xE940, c, game/EA90]
+      - [0xEF60, c, sys/rom/disk_drive]
+      - [0xF070, c, sys/rom/sys_leo]
+      - [0x109A0, c, sys/dma]
+      - [0x10C00, c, sys/segment]
+      - [0x12200, c, game/object]
+      - [0x14950, pad]
+      - [0x14960, c, game/texture_utils]
+      - [0x17EF0, c, game/common]
+      - [0x18930, c, game/texture_utils2]
+      - [0x19A00, c, game/194E0]
+      - [0x19A40, c, sys/rom/disk_mount]
+      - [0x19C20, c, sys/rom/leo_fault]
+      - [0x1A380, c, sys/sys_fault]
+      - [0x1AE80, c, game/bordered_box]
+      - [0x1B520, c, game/camera]
+      - [0x23120, c, game/racer]
       - [0x373D0, hasm, game/mio0Decode]
 
       # Audio
-      - [0x37480, asm, audio/rom/lib/playback]
-      - [0x38750, asm, audio/rom/lib/effects]
-      - [0x38D80, asm, audio/rom/lib/seqplayer]
-      - [0x3B7C0, asm, audio/rom/lib/load]
-      - [0x3F210, asm, audio/rom/lib/heap]
-      - [0x41970, asm, audio/rom/lib/aisetnextbuf]
-      - [0x419F0, asm, audio/rom/lib/synthesis]
-      - [0x42D60, asm, audio/rom/lib/thread]
-      - [0x43F80, asm, audio/rom/external]
+      - [0x37480, c, audio/rom/lib/playback]
+      - [0x38750, c, audio/rom/lib/effects]
+      - [0x38D80, c, audio/rom/lib/seqplayer]
+      - [0x3B7C0, c, audio/rom/lib/load]
+      - [0x3F210, c, audio/rom/lib/heap]
+      - [0x41970, c, audio/rom/lib/aisetnextbuf]
+      - [0x419F0, c, audio/rom/lib/synthesis]
+      - [0x42D60, c, audio/rom/lib/thread]
+      - [0x43F80, c, audio/rom/external]
 
       # Leo Boot
       - [0x48290, c, leo/leo_bootdisk]
@@ -220,39 +222,39 @@
       - { start: 0x55B90, type: textbin, use_src_path: True, name: rsp/f3dlx2 }
       - { start: 0x56D20, type: textbin, use_src_path: True, name: rsp/f3dflx2 }
       - { start: 0x57EB0, type: textbin, use_src_path: True, name: rsp/l3dex2 }
-      - [0x59040, asm, sys/rom/leo_presence]
+      - [0x59040, c, sys/rom/leo_presence]
       - { start: 0x59090, type: textbin, use_src_path: True, name: rsp/aspmain }
 
       # DATA - Game/Sys
-      - [0x59DC0, data, sys/sys_main]
-      - [0x59E00, data, sys/sys_gfx]
-      - [0x59E10, data, sys/sys_audio]
-      - [0x59E20, data, game/game]
-      - [0x59F80, data, sys/controller]
-      - [0x59F90, data, sys/math]
-      - [0x59FA0, data, game/course_gadgets]
-      - [0x5A0C0, data, game/EA20]
-      - [0x5A0D0, data, sys/rom/sys_leo]
-      - [0x5A100, data, sys/segment]
-      - [0x5A1A0, data, game/common]
-      - [0x5A330, data, game/194E0]
-      - [0x5A340, data, sys/rom/leo_fault]
-      - [0x5A4E0, data, sys/sys_fault]
-      - [0x5A6C0, data, game/camera]
-      - [0x5A8C0, data, game/racer]
+      - [0x59DC0, .data, sys/sys_main]
+      - [0x59E00, .data, sys/sys_gfx]
+      - [0x59E10, .data, sys/sys_audio]
+      - [0x59E20, .data, game/game]
+      - [0x59F80, .data, sys/controller]
+      - [0x59F90, .data, sys/math]
+      - [0x59FA0, .data, game/course_gadgets]
+      - [0x5A0C0, .data, game/EA20]
+      - [0x5A0D0, .data, sys/rom/sys_leo]
+      - [0x5A100, .data, sys/segment]
+      - [0x5A1A0, .data, game/common]
+      - [0x5A330, .data, game/194E0]
+      - [0x5A340, .data, sys/rom/leo_fault]
+      - [0x5A4E0, .data, sys/sys_fault]
+      - [0x5A6C0, .data, game/camera]
+      - [0x5A8C0, .data, game/racer]
 
       # DATA - Audio
-      - [0x5C320, data, audio/rom/lib/note_data]
-      - [0x5CF70, data, audio/rom/lib/playback]
-      - [0x5D130, data, audio/rom/lib/effects]
-      - [0x5D150, data, audio/rom/lib/seqplayer]
-      - [0x5D3B0, data, audio/rom/lib/load]
-      - [0x5DA20, data, audio/rom/lib/heap]
-      - [0x5DFC0, data, audio/rom/lib/aisetnextbuf]
-      - [0x5DFD0, data, audio/rom/lib/synthesis]
-      - [0x5E000, data, audio/rom/lib/thread]
-      - [0x5E2D0, data, audio/rom/external]
-      - [0x5E510, data, audio/rom/lib/audio_context]
+      - [0x5C320, .data, audio/rom/lib/note_data]
+      - [0x5CF70, .data, audio/rom/lib/playback]
+      - [0x5D130, .data, audio/rom/lib/effects]
+      - [0x5D150, .data, audio/rom/lib/seqplayer]
+      - [0x5D3B0, .data, audio/rom/lib/load]
+      - [0x5DA20, .data, audio/rom/lib/heap]
+      - [0x5DFC0, .data, audio/rom/lib/aisetnextbuf]
+      - [0x5DFD0, .data, audio/rom/lib/synthesis]
+      - [0x5E000, .data, audio/rom/lib/thread]
+      - [0x5E2D0, .data, audio/rom/external]
+      - [0x5E510, .data, audio/rom/lib/audio_context]
 
       # DATA - Libultra
       - [0x5E570, data, libultra/os/exceptasm]
@@ -330,30 +332,30 @@
       - [0x5F9C0, .data, libultra/io/vimgr]
 
       # RODATA - Game/Sys
-      - [0x5F9E0, rodata, sys/sys_main]
-      - [0x5F9F0, rodata, sys/sys_gfx]
-      - [0x5FA00, rodata, game/game]
-      - [0x5FC70, rodata, sys/math]
-      - [0x5FCF0, rodata, game/course_gadgets]
-      - [0x5FE80, rodata, game/EA90]
-      - [0x5FEA0, rodata, game/disk_drive]
-      - [0x5FEE0, rodata, sys/rom/sys_leo]
-      - [0x601E0, rodata, sys/segment]
-      - [0x604E0, rodata, game/object]
-      - [0x60C90, rodata, game/common]
-      - [0x61030, rodata, sys/rom/disk_mount]
-      - [0x61040, rodata, sys/rom/leo_fault]
-      - [0x61230, rodata, sys/sys_fault]
-      - [0x615E0, rodata, game/bordered_box]
-      - [0x61600, rodata, game/camera]
-      - [0x62110, rodata, game/racer]
-      - [0x62390, rodata, audio/rom/lib/playback]
-      - [0x623A0, rodata, audio/rom/lib/effects]
-      - [0x623D0, rodata, audio/rom/lib/seqplayer]
-      - [0x62790, rodata, audio/rom/lib/load]
-      - [0x627C0, rodata, audio/rom/lib/heap]
-      - [0x627E0, rodata, audio/rom/lib/thread]
-      - [0x628A0, rodata, audio/rom/external]
+      - [0x5F9E0, .rodata, sys/sys_main]
+      - [0x5F9F0, .rodata, sys/sys_gfx]
+      - [0x5FA00, .rodata, game/game]
+      - [0x5FC70, .rodata, sys/math]
+      - [0x5FCF0, .rodata, game/course_gadgets]
+      - [0x5FE80, .rodata, game/EA90]
+      - [0x5FEA0, .rodata, sys/rom/disk_drive]
+      - [0x5FEE0, .rodata, sys/rom/sys_leo]
+      - [0x601E0, .rodata, sys/segment]
+      - [0x604E0, .rodata, game/object]
+      - [0x60C90, .rodata, game/common]
+      - [0x61030, .rodata, sys/rom/disk_mount]
+      - [0x61040, .rodata, sys/rom/leo_fault]
+      - [0x61230, .rodata, sys/sys_fault]
+      - [0x615E0, .rodata, game/bordered_box]
+      - [0x61600, .rodata, game/camera]
+      - [0x62110, .rodata, game/racer]
+      - [0x62390, .rodata, audio/rom/lib/playback]
+      - [0x623A0, .rodata, audio/rom/lib/effects]
+      - [0x623D0, .rodata, audio/rom/lib/seqplayer]
+      - [0x62790, .rodata, audio/rom/lib/load]
+      - [0x627C0, .rodata, audio/rom/lib/heap]
+      - [0x627E0, .rodata, audio/rom/lib/thread]
+      - [0x628A0, .rodata, audio/rom/external]
 
       # RODATA - Libultra
       - [0x631F0, rodata, libultra/libc/setintmask]
@@ -374,26 +376,26 @@
       - { start: 0x63D50, type: databin, use_src_path: True, name: rsp/f3dflx2 }
       - { start: 0x64100, type: databin, use_src_path: True, name: rsp/l3dex2 }
       - { start: 0x644F0, type: databin, use_src_path: True, name: rsp/aspmain }
-      - [0x647D0, data, audio/rom/audio_tables]
+      - [0x647D0, .data, audio/rom/audio_tables]
 
-      - { type: bss, vram: 0x800CA880, name: sys/sys_main }
-      - { type: bss, vram: 0x800CF540, name: sys/sys_gfx }
-      - { type: bss, vram: 0x800CF680, name: sys/sys_audio }
-      - { type: bss, vram: 0x800CF690, name: game/game }
-      - { type: bss, vram: 0x800CF6C0, name: sys/controller }
-      - { type: bss, vram: 0x800CFA80, name: sys/math }
-      - { type: bss, vram: 0x800D3B00, name: game/course_gadgets }
-      - { type: bss, vram: 0x800D5B30, name: sys/rom/sys_leo }
-      - { type: bss, vram: 0x800D5BD0, name: sys/segment }
-      - { type: bss, vram: 0x800D5C30, name: game/object }
-      - { type: bss, vram: 0x800D6940, name: game/common }
-      - { type: bss, vram: 0x800D6AB0, name: game/194E0 }
-      - { type: bss, vram: 0x800D6B80, name: sys/rom/leo_fault }
-      - { type: bss, vram: 0x800D7020, name: sys/sys_fault }
-      - { type: bss, vram: 0x800D7A00, name: game/bordered_box }
-      - { type: bss, vram: 0x800D7A70, name: game/camera }
-      - { type: bss, vram: 0x800D8710, name: game/racer }
-      - { type: bss, vram: 0x800EAD60, name: audio/rom/lib/load }
+      - { type: .bss, vram: 0x800CA880, name: sys/sys_main }
+      - { type: .bss, vram: 0x800CF540, name: sys/sys_gfx }
+      - { type: .bss, vram: 0x800CF680, name: sys/sys_audio }
+      - { type: .bss, vram: 0x800CF690, name: game/game }
+      - { type: .bss, vram: 0x800CF6C0, name: sys/controller }
+      - { type: .bss, vram: 0x800CFA80, name: sys/math }
+      - { type: .bss, vram: 0x800D3B00, name: game/course_gadgets }
+      - { type: .bss, vram: 0x800D5B30, name: sys/rom/sys_leo }
+      - { type: .bss, vram: 0x800D5BD0, name: sys/segment }
+      - { type: .bss, vram: 0x800D5C30, name: game/object }
+      - { type: .bss, vram: 0x800D6940, name: game/common }
+      - { type: .bss, vram: 0x800D6AB0, name: game/194E0 }
+      - { type: .bss, vram: 0x800D6B80, name: sys/rom/leo_fault }
+      - { type: .bss, vram: 0x800D7020, name: sys/sys_fault }
+      - { type: .bss, vram: 0x800D7A00, name: game/bordered_box }
+      - { type: .bss, vram: 0x800D7A70, name: game/camera }
+      - { type: .bss, vram: 0x800D8710, name: game/racer }
+      - { type: .bss, vram: 0x800EAD60, name: audio/rom/lib/load }
 
       - { type: .bss, vram: 0x800EAE60, name: libultra/io/sptask }
       - { type: .bss, vram: 0x800EAEA0, name: libultra/io/leointerrupt }

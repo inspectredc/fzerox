@@ -5,6 +5,7 @@
 
 extern OSMesgQueue gMainThreadMesgQueue;
 
+#ifndef VERSION_PAL
 void func_8007F520(void) {
     u8 i;
     s32 err;
@@ -34,6 +35,7 @@ void func_8007F520(void) {
 #endif
     while (true) {}
 }
+#endif
 
 OSMesgQueue D_800E42D0;
 OSMesg D_800E42E8[16];
@@ -41,6 +43,7 @@ OSMesg D_800E42E8[16];
 extern s32 gMfsError;
 extern LEODiskID D_i1_80428618;
 extern LEODiskID leoBootID;
+extern LEODiskID D_800CD2B0;
 
 void DiskMount_Init(void) {
 
@@ -55,20 +58,41 @@ void DiskMount_Init(void) {
         switch (gMfsError) {
             case LEO_ERROR_DEVICE_COMMUNICATION_FAILURE:
                 return;
+#ifndef VERSION_PAL
             case LEO_ERROR_MEDIUM_NOT_PRESENT:
+#endif
             case 0xF9:
             default:
+#ifndef VERSION_PAL
                 goto label;
+#endif
                 break;
         }
     }
 
 label:
     if (gMfsError == 0xF9) {
+#ifndef VERSION_PAL
         func_8007F520();
+#else
+        SLLeoResetClear();
+#endif
     }
+
+#ifndef VERSION_PAL
     func_i1_8040428C();
     func_800762B0(D_i1_80428618);
+#else
+    func_800763B0();
+    D_i1_80428618 = D_800CD2B0;
+    func_i1_80404204();
+#endif
+
+#ifdef VERSION_PAL
+    gWorkingDirectory = MFS_ENTRY_ROOT_DIR;
+    D_i1_80428644 = LEO_ERROR_GOOD;
+    gMfsRamArea.id.diskId[0] = '\0';
+#endif
     leoBootID = D_i1_80428618;
 
     switch (func_i1_804046F0()) {
@@ -77,6 +101,8 @@ label:
         case 0:
 #if MFS_VERSION == MFS_VERSION_A
             if (Mfs_InitRamArea(1) < 0) {}
+#else
+            if (Mfs_InitRamArea(1, MFS_VOLUME_ATTR_VPROTECT_WRITE, 0) < 0) {}
 #endif
             break;
         case -1:
@@ -86,10 +112,14 @@ label:
                 case LEO_ERROR_UNRECOVERED_READ_ERROR:
 #if MFS_VERSION == MFS_VERSION_A
                     Mfs_InitRamArea(1);
+#else
+                    Mfs_InitRamArea(1, MFS_VOLUME_ATTR_VPROTECT_WRITE, 0);
 #endif
                     break;
             }
             break;
     }
+#ifndef VERSION_PAL
     Mfs_ModeSelectAsync(0, 0);
+#endif
 }
