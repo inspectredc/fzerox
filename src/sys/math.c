@@ -780,151 +780,128 @@ void Matrix_SetTransRot(Mtx* mtx, MtxF* mtxF, f32 scale, s32 xRot, s32 yRot, s32
     Matrix_ToMtx(mtxF, mtx);
 }
 
-#ifdef NON_MATCHING
-void Matrix_SetAxisRotation(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8,
-                            f32 arg9) {
-    f32 sin;
-    f32 cos;
-    f32 sp8C;
-    f32 sp84;
-    f32 sp7C;
-    f32 sp70;
-    f32 sp6C;
+void Matrix_SetAxisRotation(Mtx* mtx, MtxF* mtxF, f32 scale, s32 angle, f32 xAxis, f32 yAxis, f32 zAxis, f32 xPos,
+                            f32 yPos, f32 zPos) {
     f32 temp_fa0;
     f32 temp_fa1;
+    f32 cos;
+    f32 sin;
     f32 temp_fs0;
     f32 temp_fs3;
     f32 temp_fs4;
-    f32 temp_ft4;
     f32 temp_ft5;
+    f32 temp_ft4;
     f32 temp_fv0;
+    f32 sp8C;
     f32 temp_fv1;
+    f32 sp84;
 
-    if (arg0 == NULL) {
-        arg0 = &sDefaultMtx;
+    if (mtx == NULL) {
+        mtx = &sDefaultMtx;
     }
-    if (arg1 == NULL) {
-        arg1 = &sDefaultMtxF;
+    if (mtxF == NULL) {
+        mtxF = &sDefaultMtxF;
     }
-    cos = COS(arg3);
-    sin = SIN(arg3);
-    if (arg5 == 0.0f) {
-        if (arg4 == 0.0f) {
-            if (arg6 < 0.0f) {
-                Matrix_SetTransRot(arg0, arg1, arg2, 0, 0, -arg3, arg7, arg8, arg9);
+    cos = COS(angle);
+    sin = SIN(angle);
+    if (yAxis == 0) {
+        if (xAxis == 0) {
+            if (zAxis < 0) {
+                Matrix_SetTransRot(mtx, mtxF, scale, 0, 0, -angle, xPos, yPos, zPos);
             } else {
-
-                Matrix_SetTransRot(arg0, arg1, arg2, 0, 0, arg3, arg7, arg8, arg9);
+                Matrix_SetTransRot(mtx, mtxF, scale, 0, 0, angle, xPos, yPos, zPos);
             }
             return;
         }
-        temp_fv0 = sqrtf(SQ(arg4) + SQ(arg6));
-        temp_fv1 = arg4 / temp_fv0;
-        temp_ft4 = arg2 * sin;
-        temp_fa0 = arg6 / temp_fv0;
+        temp_fv0 = sqrtf(SQ(xAxis) + SQ(zAxis));
+        temp_fv1 = xAxis / temp_fv0;
+        temp_fa0 = zAxis / temp_fv0;
         temp_fa1 = -temp_fv1;
-        temp_ft5 = temp_ft4 * temp_fa0;
-        temp_fs0 = temp_ft4 * temp_fa1;
-        temp_fs3 = cos * temp_fa0;
-        arg1->m[0][1] = temp_ft5;
-        arg1->m[1][0] = -temp_ft5;
-        arg1->m[2][1] = temp_fs0;
-        arg1->m[1][1] = arg2 * cos;
-        arg1->m[1][2] = -temp_fs0;
-        arg1->m[0][0] = ((temp_fs3 * temp_fa0) + SQ(temp_fv1)) * arg2;
-        arg1->m[2][2] = ((cos * temp_fa1 * temp_fa1) + SQ(temp_fa0)) * arg2;
-        temp_fs4 = ((temp_fs3 * temp_fa1) + (temp_fv1 * temp_fa0)) * arg2;
-        arg1->m[2][0] = temp_fs4;
-        arg1->m[0][2] = temp_fs4;
-    } else if (arg6 == 0.0f) {
-        temp_fv0 = sqrtf(SQ(arg4) + SQ(arg5));
-        temp_fa1 = arg5 / temp_fv0;
-        temp_ft4 = arg2 * sin;
-        temp_fv1 = arg4 / temp_fv0;
+        temp_fs4 = scale * sin;
+        temp_ft5 = temp_fs4 * temp_fa0;
+        temp_fs0 = temp_fs4 * temp_fa1;
+        mtxF->m[0][1] = temp_ft5;
+        mtxF->m[1][0] = -temp_ft5;
+        mtxF->m[2][1] = temp_fs0;
+        mtxF->m[1][2] = -temp_fs0;
+        mtxF->m[1][1] = scale * cos;
+        mtxF->m[0][0] = ((cos * temp_fa0 * temp_fa0) + SQ(temp_fv1)) * scale;
+        mtxF->m[2][2] = ((cos * temp_fa1 * temp_fa1) + SQ(temp_fa0)) * scale;
+        mtxF->m[0][2] = mtxF->m[2][0] = ((cos * temp_fa0 * temp_fa1) + (temp_fv1 * temp_fa0)) * scale;
+        ;
+    } else if (zAxis == 0) {
+        temp_fv0 = sqrtf(SQ(xAxis) + SQ(yAxis));
+        temp_fa1 = yAxis / temp_fv0;
+        temp_fv1 = xAxis / temp_fv0;
         temp_fs0 = -temp_fa1;
-        temp_fa0 = temp_ft4 * temp_fs0;
-        arg1->m[0][2] = temp_fa0;
-        temp_ft5 = temp_ft4 * temp_fv1;
-        arg1->m[2][0] = -temp_fa0;
-        arg1->m[1][2] = temp_ft5;
-        arg1->m[2][1] = -temp_ft5;
-        arg1->m[2][2] = arg2 * cos;
-        sp7C = cos * temp_fs0;
-        arg1->m[0][0] = ((sp7C * temp_fs0) + SQ(temp_fv1)) * arg2;
-        arg1->m[1][1] = ((cos * temp_fv1 * temp_fv1) + SQ(temp_fa1)) * arg2;
-        temp_fs4 = ((sp7C * temp_fv1) + (temp_fv1 * temp_fa1)) * arg2;
-        arg1->m[1][0] = temp_fs4;
-        arg1->m[0][1] = temp_fs4;
-    } else if (arg4 == 0.0f) {
-        temp_fv0 = sqrtf(SQ(arg5) + SQ(arg6));
-        temp_fa1 = arg5 / temp_fv0;
-        temp_ft4 = arg2 * sin;
-        temp_fa0 = arg6 / temp_fv0;
+        temp_fs4 = scale * sin;
+        temp_fa0 = temp_fs4 * temp_fs0;
+        temp_ft5 = temp_fs4 * temp_fv1;
+        mtxF->m[0][2] = temp_fa0;
+        mtxF->m[2][0] = -temp_fa0;
+        mtxF->m[1][2] = temp_ft5;
+        mtxF->m[2][1] = -temp_ft5;
+        mtxF->m[2][2] = scale * cos;
+        mtxF->m[0][0] = ((cos * temp_fs0 * temp_fs0) + SQ(temp_fv1)) * scale;
+        mtxF->m[1][1] = ((cos * temp_fv1 * temp_fv1) + SQ(temp_fa1)) * scale;
+        mtxF->m[0][1] = mtxF->m[1][0] = ((cos * temp_fs0 * temp_fv1) + (temp_fv1 * temp_fa1)) * scale;
+    } else if (xAxis == 0) {
+        temp_fv0 = sqrtf(SQ(yAxis) + SQ(zAxis));
+        temp_fa1 = yAxis / temp_fv0;
+        temp_fa0 = zAxis / temp_fv0;
         temp_fv1 = -temp_fa0;
+        temp_ft4 = scale * sin;
         temp_ft5 = temp_ft4 * temp_fv1;
         temp_fs0 = temp_ft4 * temp_fa1;
-        arg1->m[1][0] = temp_ft5;
-        arg1->m[0][1] = -temp_ft5;
-        arg1->m[0][2] = -temp_fs0;
-        arg1->m[2][0] = temp_fs0;
-        arg1->m[0][0] = arg2 * cos;
-        sp7C = cos * temp_fv1;
-        arg1->m[1][1] = ((sp7C * temp_fv1) + SQ(temp_fa1)) * arg2;
-        arg1->m[2][2] = ((cos * temp_fa1 * temp_fa1) + SQ(temp_fa0)) * arg2;
-        temp_fs4 = ((sp7C * temp_fa1) + (temp_fa1 * temp_fa0)) * arg2;
-        arg1->m[2][1] = temp_fs4;
-        arg1->m[1][2] = temp_fs4;
+        mtxF->m[1][0] = temp_ft5;
+        mtxF->m[0][1] = -temp_ft5;
+        mtxF->m[2][0] = temp_fs0;
+        mtxF->m[0][2] = -temp_fs0;
+        mtxF->m[0][0] = scale * cos;
+        mtxF->m[1][1] = ((cos * temp_fv1 * temp_fv1) + SQ(temp_fa1)) * scale;
+        mtxF->m[2][2] = ((cos * temp_fa1 * temp_fa1) + SQ(temp_fa0)) * scale;
+        temp_fs4 = ((cos * temp_fv1 * temp_fa1) + (temp_fa1 * temp_fa0)) * scale;
+        mtxF->m[2][1] = temp_fs4;
+        mtxF->m[1][2] = temp_fs4;
     } else {
-        temp_fv0 = sqrtf(SQ(arg4) + SQ(arg5) + SQ(arg6));
-        temp_fs4 = arg5 / temp_fv0;
-        temp_ft5 = arg4 / temp_fv0;
-        temp_ft4 = -temp_fs4;
-        sp8C = temp_ft5;
-        sp84 = arg6 / temp_fv0;
-        temp_fv0 = sqrtf(SQ(temp_ft4) + SQ(temp_ft5));
-        temp_ft5 /= temp_fv0;
+        temp_fv0 = sqrtf(SQ(xAxis) + SQ(yAxis) + SQ(zAxis));
+        temp_ft4 = xAxis / temp_fv0;
+        temp_fs4 = yAxis / temp_fv0;
+        temp_ft5 = -temp_fs4;
+        sp8C = temp_ft4;
+        sp84 = zAxis / temp_fv0;
+        temp_fv0 = sqrtf(SQ(temp_ft5) + SQ(temp_ft4));
         temp_ft4 /= temp_fv0;
-        temp_fv1 = temp_ft5 * sp84;
-        temp_fs3 = ((temp_fs4 - temp_ft5) * temp_ft4) - (temp_ft5 * (sp8C - temp_ft4));
-        temp_fv0 = -temp_ft4 * sp84;
-        arg1->m[0][0] = (((SQ(temp_fv1) + SQ(temp_ft4)) * cos) + SQ(sp8C)) * arg2;
-        arg1->m[1][1] = (((SQ(temp_fv0) + SQ(temp_ft5)) * cos) + SQ(temp_fs4)) * arg2;
-        arg1->m[2][2] = ((cos * temp_fs3 * temp_fs3) + SQ(sp84)) * arg2;
-        temp_fa0 = (((temp_fv1 * temp_fv0) + (temp_ft4 * temp_ft5)) * cos) + (sp8C * temp_fs4);
-        temp_fa1 = ((temp_fv0 * temp_ft4) - (temp_fv1 * temp_ft5)) * sin;
-        arg1->m[1][0] = (temp_fa0 + temp_fa1) * arg2;
-        arg1->m[0][1] = (temp_fa0 - temp_fa1) * arg2;
-        sp6C = (cos * temp_fv1 * temp_fs3) + (sp8C * sp84);
-        sp8C = sin * temp_fs3;
-        sp70 = sp8C * temp_ft4;
-        arg1->m[2][0] = (sp6C + sp70) * arg2;
-        arg1->m[0][2] = (sp6C - sp70) * arg2;
+        temp_ft5 /= temp_fv0;
+        temp_fv1 = temp_ft4 * sp84;
+        temp_fv0 = -temp_ft5 * sp84;
+        temp_fs3 = ((temp_fs4 - temp_ft4) * temp_ft5) - (temp_ft4 * (sp8C - temp_ft5));
+        mtxF->m[0][0] = (((SQ(temp_fv1) + SQ(temp_ft5)) * cos) + SQ(sp8C)) * scale;
+        mtxF->m[1][1] = (((SQ(temp_fv0) + SQ(temp_ft4)) * cos) + SQ(temp_fs4)) * scale;
+        mtxF->m[2][2] = ((cos * temp_fs3 * temp_fs3) + SQ(sp84)) * scale;
+        temp_fa0 = (((temp_fv1 * temp_fv0) + (temp_ft5 * temp_ft4)) * cos) + (sp8C * temp_fs4);
+        temp_fa1 = ((temp_fv0 * temp_ft5) - (temp_fv1 * temp_ft4)) * sin;
+        mtxF->m[1][0] = (temp_fa0 + temp_fa1) * scale;
+        mtxF->m[0][1] = (temp_fa0 - temp_fa1) * scale;
+        temp_fa0 = (cos * temp_fv1 * temp_fs3) + (sp8C * sp84);
+        temp_fa1 = sin * temp_fs3 * temp_ft5;
+        mtxF->m[2][0] = (temp_fa0 + temp_fa1) * scale;
+        mtxF->m[0][2] = (temp_fa0 - temp_fa1) * scale;
         temp_fa0 = (cos * temp_fv0 * temp_fs3) + (temp_fs4 * sp84);
-        temp_fv1 = sp8C * temp_ft5;
-        arg1->m[2][1] = (temp_fa0 + temp_fv1) * arg2;
-        arg1->m[1][2] = (temp_fa0 - temp_fv1) * arg2;
+        temp_fa1 = sin * temp_fs3 * temp_ft4;
+        mtxF->m[2][1] = (temp_fa0 + temp_fa1) * scale;
+        mtxF->m[1][2] = (temp_fa0 - temp_fa1) * scale;
     }
 
-    arg1->m[3][0] = arg7;
-    arg1->m[3][1] = arg8;
-    arg1->m[3][2] = arg9;
-    arg1->m[3][3] = 1.0f;
-    arg1->m[0][3] = arg1->m[1][3] = arg1->m[2][3] = 0.0f;
-    Matrix_ToMtx(arg1, arg0);
+    mtxF->m[3][0] = xPos;
+    mtxF->m[3][1] = yPos;
+    mtxF->m[3][2] = zPos;
+    mtxF->m[0][3] = 0.0f;
+    mtxF->m[1][3] = 0.0f;
+    mtxF->m[2][3] = 0.0f;
+    mtxF->m[3][3] = 1.0f;
+    Matrix_ToMtx(mtxF, mtx);
 }
-#else
-#ifndef EXPANSION_KIT
-#ifdef VERSION_JP
-#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
-#elif VERSION_US
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
-#elif VERSION_PAL
-#pragma GLOBAL_ASM("asm/pal/rev0/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
-#endif
-#else
-#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/sys/math/Matrix_SetAxisRotation.s")
-#endif
-#endif
 
 void Matrix_SetShadowProjection(Mtx* mtx, MtxF* mtxF, f32 lightProjectionX, f32 lightProjectionY, f32 lightProjectionZ,
                                 f32 planePointX, f32 planePointY, f32 planePointZ, f32 planeNormalX, f32 planeNormalY,
