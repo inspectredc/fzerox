@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "menus.h"
 #include "hud.h"
 #include "minimap.h"
@@ -1969,7 +1970,7 @@ Gfx* Menus_DrawRaceMenuTexture(Gfx* gfx, s32 textureIndex, s32 left, s32 top) {
 
     return TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(sRaceMenuTextures[textureIndex]), NULL,
                                           G_IM_FMT_CI, 1, left, top, sRaceMenuDimensions[textureIndex * 2 + 0],
-                                          sRaceMenuDimensions[textureIndex * 2 + 1], 2);
+                                          sRaceMenuDimensions[textureIndex * 2 + 1], INDEXED_DRAW_TINT_PRIM_COLOR);
 }
 
 s32 Menus_UpdateHighlightedOptionVertical(s32 playerIndex, s32 highlightedOption, s32 maxOptionValue) {

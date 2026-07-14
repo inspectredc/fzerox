@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "transition.h"
 #include "fzx_camera.h"
 #include "fzx_game.h"
@@ -1645,5 +1646,6 @@ bool Transition_GreyscalePaletteUpdateState(Transition* transition) {
 Gfx* Transition_GreyscalePaletteDraw(Gfx* gfx, Transition* transition) {
     return TextureUtils_DrawIndexedBlocks(gfx, transition->backgroundBuffer, sTransitionPalettePtr, G_IM_FMT_CI, 1,
                                           TRANSITION_BORDER_WIDTH, TRANSITION_BORDER_HEIGHT,
-                                          TRANSITION_BACKGROUND_WIDTH, TRANSITION_BACKGROUND_HEIGHT, 5);
+                                          TRANSITION_BACKGROUND_WIDTH, TRANSITION_BACKGROUND_HEIGHT,
+                                          INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_SMALL_BLOCKS);
 }

@@ -149,7 +149,8 @@ CacheTexInfo sCreditsMrZeroCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RG
 // COPYRIGHT LOGO (1998)
 //! @bug This has the incorrect compressed size (leftover from version difference?)
 #ifndef EXPANSION_KIT
-CacheTexInfo sCreditsCopyrightCacheTexInfo[] = CACHE_TEX_INFO_PAD(TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16), aCopyrightTex, 0x439);
+CacheTexInfo sCreditsCopyrightCacheTexInfo[] =
+    CACHE_TEX_INFO_PAD(TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16), aCopyrightTex, 0x439);
 #else
 CacheTexInfo sCreditsCopyrightCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCopyrightDDTex);
 #endif

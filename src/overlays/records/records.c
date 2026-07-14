@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "records.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
@@ -1005,10 +1006,11 @@ Gfx* Records_MenuDraw(Gfx* gfx, s32 left, s32 top) {
 #ifndef EXPANSION_KIT
         gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture), tlut, G_IM_FMT_CI, 1,
                                              left + boxCenteringOffset + 20, top + 10 + i * 20, textureInfo->width,
-                                             textureInfo->height, 3);
+                                             textureInfo->height, INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 #else
         gfx = TextureUtils_DrawIndexedBlocks(gfx, texture, tlut, G_IM_FMT_CI, 1, left + boxCenteringOffset + 20,
-                                             top + 10 + i * 20, textureInfo->width, textureInfo->height, 3);
+                                             top + 10 + i * 20, textureInfo->width, textureInfo->height,
+                                             INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 #endif
     }
 
@@ -1028,13 +1030,15 @@ Gfx* Records_DrawClearConfirm(Gfx* gfx, s32 left, s32 top) {
 #ifdef VERSION_JP
     gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture),
                                          TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1, left + 12, top + 10,
-                                         textureInfo->width, textureInfo->height, 3);
+                                         textureInfo->width, textureInfo->height,
+                                         INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 #else
     boxCenteringOffset = (124 - textureInfo->width) / 2;
 
-    gfx = TextureUtils_DrawIndexedBlocks(
-        gfx, TextureCache_GetCached(textureInfo->texture), TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1,
-        left + boxCenteringOffset + 12, top + 10, textureInfo->width, textureInfo->height, 3);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture),
+                                         TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1,
+                                         left + boxCenteringOffset + 12, top + 10, textureInfo->width,
+                                         textureInfo->height, INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 #endif
 
     gDPPipeSync(gfx++);
@@ -1138,7 +1142,8 @@ Gfx* Records_DrawGhostCopyMenu(Gfx* gfx, s32 left, s32 top) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
     gfx = TextureUtils_DrawIndexedBlocks(gfx, aRecordsWhichGhostToCopyTex, aRecordsWhichGhostToCopyPalette, G_IM_FMT_CI,
-                                         1, left + 20, top + 10, 128, 16, 3);
+                                         1, left + 20, top + 10, 128, 16,
+                                         INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 
     for (i = 0; i < 4; i++) {
         ghostTypeLeft = left + 10;
@@ -1161,7 +1166,8 @@ Gfx* Records_DrawGhostCopyMenu(Gfx* gfx, s32 left, s32 top) {
             gfx = func_8007DB28(gfx, 0);
         }
         gfx = TextureUtils_DrawIndexedBlocks(gfx, textureInfo->texture, textureInfo->tlut, G_IM_FMT_CI, 1,
-                                             ghostTypeLeft, ghostTypeTop, textureInfo->width, textureInfo->height, 2);
+                                             ghostTypeLeft, ghostTypeTop, textureInfo->width, textureInfo->height,
+                                             INDEXED_DRAW_TINT_PRIM_COLOR);
     }
 
     gSPDisplayList(gfx++, D_8014940);
@@ -1265,7 +1271,8 @@ Gfx* Records_DrawCopyWhereMenu(Gfx* gfx, s32 left, s32 top) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
     gfx = TextureUtils_DrawIndexedBlocks(gfx, aRecordsWhereToCopyTex, aRecordsWhereToCopyPalette, G_IM_FMT_CI, 1,
-                                         left + 10, top + 10, 128, 16, 3);
+                                         left + 10, top + 10, 128, 16,
+                                         INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 
     for (i = 0; i < 2; i++) {
         copyLocationLeft = left + 20;
@@ -1294,7 +1301,7 @@ Gfx* Records_DrawCopyWhereMenu(Gfx* gfx, s32 left, s32 top) {
         }
         gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture), tlut, G_IM_FMT_CI, 1,
                                              copyLocationLeft, copyLocationTop, textureInfo->width, textureInfo->height,
-                                             2);
+                                             INDEXED_DRAW_TINT_PRIM_COLOR);
     }
     return gfx;
 }
@@ -1339,7 +1346,7 @@ Gfx* Records_DrawCopyToDiskMenu(Gfx* gfx, s32 left, s32 top) {
     s32 i;
     TexturePaletteInfo* textureInfo;
     s32 ghostIndex;
-    s32 var_s4;
+    s32 drawFlags;
     bool timeTexturesLoaded;
 
     for (i = 1, textureInfo = &sRecordsGhostTypeTextureInfos[i]; i < 4; i++, textureInfo++) {
@@ -1347,9 +1354,9 @@ Gfx* Records_DrawCopyToDiskMenu(Gfx* gfx, s32 left, s32 top) {
         gDPPipeSync(gfx++);
 
         if (i != RECORDS_GHOST_DISK_1) {
-            var_s4 = 2;
+            drawFlags = INDEXED_DRAW_TINT_PRIM_COLOR;
         } else {
-            var_s4 = 3;
+            drawFlags = INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR;
         }
         if (i != sRecordsCopyToGhostTypeIndex) {
             if (i == RECORDS_GHOST_CASSETTE) {
@@ -1366,7 +1373,7 @@ Gfx* Records_DrawCopyToDiskMenu(Gfx* gfx, s32 left, s32 top) {
             gfx = func_8007DB28(gfx, 0);
         }
         gfx = TextureUtils_DrawIndexedBlocks(gfx, textureInfo->texture, textureInfo->tlut, 2, 1, left + 10,
-                                             top - 10 + i * 20, textureInfo->width, textureInfo->height, var_s4);
+                                             top - 10 + i * 20, textureInfo->width, textureInfo->height, drawFlags);
     }
 
     gSPDisplayList(gfx++, D_8014940);
@@ -1524,6 +1531,7 @@ Gfx* Records_DrawCopyingInfo(Gfx* gfx, s32 left, s32 top) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
     return TextureUtils_DrawIndexedBlocks(gfx, textureInfo->texture, textureInfo->tlut, G_IM_FMT_CI, 1, left + 10,
-                                          top + 10, textureInfo->width, textureInfo->height, 3);
+                                          top + 10, textureInfo->width, textureInfo->height,
+                                          INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 }
 #endif

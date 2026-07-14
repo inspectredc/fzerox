@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "fzx_game.h"
 #include "fzx_object.h"
 #include "fzx_camera.h"
@@ -502,7 +503,8 @@ Gfx* OptionsMenu_Draw(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
     gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aOptionsTex),
-                                         TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1, 112, 22, 96, 24, 3);
+                                         TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1, 112, 22, 96, 24,
+                                         INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 
     var_s5 = 60;
 
@@ -554,7 +556,7 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
 
     gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aOptionsEraseAllSavedDataTex),
                                          TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1, arg1 + 0xC, arg2 + 0xA,
-                                         128, 32, 3);
+                                         128, 32, INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 
     gDPPipeSync(gfx++);
     gfx = func_8007DB28(gfx, 0);

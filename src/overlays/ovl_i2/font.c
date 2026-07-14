@@ -275,10 +275,14 @@ CacheTexInfo sFont4WCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4W
 CacheTexInfo sFont4XCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4XTex, 8, TEX_HEIGHT(aFont4XTex), 0);
 CacheTexInfo sFont4YCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4YTex, 8, TEX_HEIGHT(aFont4YTex), 0);
 CacheTexInfo sFont4ZCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4ZTex, 8, TEX_HEIGHT(aFont4ZTex), 0);
-CacheTexInfo sFont4LowerCCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4LowerCTex, 8, TEX_HEIGHT(aFont4LowerCTex), 0);
-CacheTexInfo sFont4LowerRCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4LowerRTex, 8, TEX_HEIGHT(aFont4LowerRTex), 0);
-CacheTexInfo sFont4LowerSCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4LowerSTex, 8, TEX_HEIGHT(aFont4LowerSTex), 0);
-CacheTexInfo sFont4PeriodCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4PeriodTex, 8, TEX_HEIGHT(aFont4PeriodTex), 0);
+CacheTexInfo sFont4LowerCCacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4LowerCTex, 8, TEX_HEIGHT(aFont4LowerCTex), 0);
+CacheTexInfo sFont4LowerRCacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4LowerRTex, 8, TEX_HEIGHT(aFont4LowerRTex), 0);
+CacheTexInfo sFont4LowerSCacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4LowerSTex, 8, TEX_HEIGHT(aFont4LowerSTex), 0);
+CacheTexInfo sFont4PeriodCacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4PeriodTex, 8, TEX_HEIGHT(aFont4PeriodTex), 0);
 #endif
 CacheTexInfo sFont4KatakanaACacheTexInfo[] =
     CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4KatakanaATex, 8, TEX_HEIGHT(aFont4KatakanaATex), 0);
@@ -436,26 +440,40 @@ CacheTexInfo sFont4KatakanaDigraphICacheTexInfo[] =
     CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4KatakanaDigraphITex, 8, TEX_HEIGHT(aFont4KatakanaDigraphITex), 0);
 CacheTexInfo sFont4KatakanaDigraphECacheTexInfo[] =
     CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4KatakanaDigraphETex, 8, TEX_HEIGHT(aFont4KatakanaDigraphETex), 0);
-CacheTexInfo sFont4DashCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4DashTex, 8, TEX_HEIGHT(aFont4DashTex), 0);
-CacheTexInfo sFont4Num0CacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num0Tex, 8, TEX_HEIGHT(aFont4Num0Tex), 0);
-CacheTexInfo sFont4Num1CacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num1Tex, 8, TEX_HEIGHT(aFont4Num1Tex), 0);
-CacheTexInfo sFont4Num2CacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num2Tex, 8, TEX_HEIGHT(aFont4Num2Tex), 0);
-CacheTexInfo sFont4Num3CacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num3Tex, 8, TEX_HEIGHT(aFont4Num3Tex), 0);
-CacheTexInfo sFont4Num4CacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num4Tex, 8, TEX_HEIGHT(aFont4Num4Tex), 0);
-CacheTexInfo sFont4Num5CacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num5Tex, 8, TEX_HEIGHT(aFont4Num5Tex), 0);
-CacheTexInfo sFont4Num6CacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num6Tex, 8, TEX_HEIGHT(aFont4Num6Tex), 0);
-CacheTexInfo sFont4Num7CacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num7Tex, 8, TEX_HEIGHT(aFont4Num7Tex), 0);
-CacheTexInfo sFont4Num8CacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num8Tex, 8, TEX_HEIGHT(aFont4Num8Tex), 0);
-CacheTexInfo sFont4Num9CacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num9Tex, 8, TEX_HEIGHT(aFont4Num9Tex), 0);
-CacheTexInfo sFont4PrimeCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4PrimeTex, 8, TEX_HEIGHT(aFont4PrimeTex), 0);
+CacheTexInfo sFont4DashCacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4DashTex, 8, TEX_HEIGHT(aFont4DashTex), 0);
+CacheTexInfo sFont4Num0CacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num0Tex, 8, TEX_HEIGHT(aFont4Num0Tex), 0);
+CacheTexInfo sFont4Num1CacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num1Tex, 8, TEX_HEIGHT(aFont4Num1Tex), 0);
+CacheTexInfo sFont4Num2CacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num2Tex, 8, TEX_HEIGHT(aFont4Num2Tex), 0);
+CacheTexInfo sFont4Num3CacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num3Tex, 8, TEX_HEIGHT(aFont4Num3Tex), 0);
+CacheTexInfo sFont4Num4CacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num4Tex, 8, TEX_HEIGHT(aFont4Num4Tex), 0);
+CacheTexInfo sFont4Num5CacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num5Tex, 8, TEX_HEIGHT(aFont4Num5Tex), 0);
+CacheTexInfo sFont4Num6CacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num6Tex, 8, TEX_HEIGHT(aFont4Num6Tex), 0);
+CacheTexInfo sFont4Num7CacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num7Tex, 8, TEX_HEIGHT(aFont4Num7Tex), 0);
+CacheTexInfo sFont4Num8CacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num8Tex, 8, TEX_HEIGHT(aFont4Num8Tex), 0);
+CacheTexInfo sFont4Num9CacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4Num9Tex, 8, TEX_HEIGHT(aFont4Num9Tex), 0);
+CacheTexInfo sFont4PrimeCacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4PrimeTex, 8, TEX_HEIGHT(aFont4PrimeTex), 0);
 CacheTexInfo sFont4DoublePrimeCacheTexInfo[] =
     CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4DoublePrimeTex, 8, TEX_HEIGHT(aFont4DoublePrimeTex), 0);
 CacheTexInfo sFont4STCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4STTex, 8, TEX_HEIGHT(aFont4STTex), 0);
 CacheTexInfo sFont4NDCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4NDTex, 8, TEX_HEIGHT(aFont4NDTex), 0);
 CacheTexInfo sFont4RDCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4RDTex, 8, TEX_HEIGHT(aFont4RDTex), 0);
 CacheTexInfo sFont4THCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4THTex, 8, TEX_HEIGHT(aFont4THTex), 0);
-CacheTexInfo sFont4PlusCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4PlusTex, 8, TEX_HEIGHT(aFont4PlusTex), 0);
-CacheTexInfo sFont4MinusCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4MinusTex, 8, TEX_HEIGHT(aFont4MinusTex), 0);
+CacheTexInfo sFont4PlusCacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4PlusTex, 8, TEX_HEIGHT(aFont4PlusTex), 0);
+CacheTexInfo sFont4MinusCacheTexInfo[] =
+    CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4MinusTex, 8, TEX_HEIGHT(aFont4MinusTex), 0);
 CacheTexInfo sFont4PointsCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aFont4PointsTex, 0);
 
 #ifdef VERSION_JP
