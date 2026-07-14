@@ -1449,8 +1449,8 @@ Gfx* Transition_WipeDraw(Gfx* gfx, Transition* transition) {
     gDPSetTextureLUT(gfx++, G_TT_NONE);
 
     return TextureUtils_Draw(gfx, transition->backgroundBuffer, WIPE_LEFT(wipeInfo), WIPE_TOP(wipeInfo),
-                             TRANSITION_BACKGROUND_WIDTH, TRANSITION_BACKGROUND_HEIGHT, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA,
-                             false, false, false);
+                             TRANSITION_BACKGROUND_WIDTH, TRANSITION_BACKGROUND_HEIGHT, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                             TEXTURE_RENDER_DECAL_RGBA, false, false, false);
 }
 
 void Transition_PhasedStripsInit(Transition* transition) {

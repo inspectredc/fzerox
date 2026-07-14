@@ -719,7 +719,8 @@ Gfx* EndingCutscene_DrawScrollingResults(Gfx* gfx) {
                     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sCongratulationsEndingTextAlpha);
 
                     gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aCongratulationsTex), cutsceneResults->left,
-                                            textureTop, 264, 31, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
+                                            textureTop, 264, 31, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                            TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
                 }
                 break;
             case ENDING_CS_RESULTS_END_SCREEN:
@@ -732,12 +733,12 @@ Gfx* EndingCutscene_DrawScrollingResults(Gfx* gfx) {
                 if (sEndingTextTex != NULL) {
 #ifdef VERSION_JP
                     gfx = TextureUtils_Draw(gfx, sEndingTextTex, cutsceneResults->left + -14.0f,
-                                            textureTop + 99.0f + 10.0f, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true,
-                                            false, false);
+                                            textureTop + 99.0f + 10.0f, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                            TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #else
                     gfx = TextureUtils_Draw(gfx, sEndingTextTex, cutsceneResults->left + -14.0f,
-                                            textureTop + 99.0f + 10.0f, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true,
-                                            false, false);
+                                            textureTop + 99.0f + 10.0f, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                            TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #endif
                 }
                 break;
@@ -859,7 +860,8 @@ Gfx* EndingCutscene_DrawFinalResultsPosition(Gfx* gfx, s32 xPos, s32 yPos, s32 p
             width = 8;
         }
         gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(sFinalResultPositionDigitTexs[digit]), xPos + xOffset, yPos,
-                                width, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, false, false, false);
+                                width, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, false, false,
+                                false);
         xPos += 16;
     }
 
@@ -1058,17 +1060,19 @@ Gfx* EndingCutscene_DrawEndScreen(Gfx* gfx) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sEndScreenAlpha);
 
 #ifdef VERSION_JP
-    gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 70, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
+    gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 70, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                            TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #else
-    gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 62, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
+    gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 62, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                            TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #endif
     if (sEndingTextTex != NULL) {
 #ifdef VERSION_JP
-        gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 179, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false,
-                                false);
+        gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 179, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #else
-        gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 171, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false,
-                                false);
+        gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 171, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #endif
     }
     return gfx;
