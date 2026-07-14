@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include ASSET_HEADER(setup_gfx.h)
 
 Gfx* TextureUtils_DrawRectangleClipped(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue,
@@ -264,16 +265,16 @@ Gfx* TextureUtils_Draw(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 widt
     }
 
     switch (renderType) {
-        case 1:
+        case TEXTURE_RENDER_TINT_PRIM_COLOR:
             gSPDisplayList(gfx++, D_3000088);
             break;
-        case 2:
+        case TEXTURE_RENDER_DECAL_IA8:
             gSPDisplayList(gfx++, D_3000100);
             break;
-        case 3:
+        case TEXTURE_RENDER_MODULATE_I4:
             gSPDisplayList(gfx++, D_3000138);
             break;
-        case 0:
+        case TEXTURE_RENDER_DECAL_RGBA:
         default:
             gSPDisplayList(gfx++, D_3000050);
             break;
@@ -554,16 +555,16 @@ Gfx* TextureUtils_DrawScaled(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s3
     }
 
     switch (renderType) {
-        case 1:
+        case TEXTURE_RENDER_TINT_PRIM_COLOR:
             gSPDisplayList(gfx++, D_3000088);
             break;
-        case 2:
+        case TEXTURE_RENDER_DECAL_IA8:
             gSPDisplayList(gfx++, D_3000100);
             break;
-        case 3:
+        case TEXTURE_RENDER_MODULATE_I4:
             gSPDisplayList(gfx++, D_3000138);
             break;
-        case 0:
+        case TEXTURE_RENDER_DECAL_RGBA:
         default:
             gSPDisplayList(gfx++, D_3000050);
             break;

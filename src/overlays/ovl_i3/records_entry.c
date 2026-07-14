@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "fzx_font.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
@@ -233,9 +234,9 @@ Gfx* RecordsEntry_DrawRecords(Gfx* gfx, s32 courseIndex) {
             leftOffset = (s32) (10.0f * var_fv0);
 
             gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aYellowArrowTex), (-(i / 2) - leftOffset) + 118, 16, 32,
-                                    32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, false, false, false);
+                                    32, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, false, false);
             gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aYellowArrowTex), (i / 2) + leftOffset + 170, 16, 32,
-                                    32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, false, true, false);
+                                    32, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, true, false);
         }
     }
 

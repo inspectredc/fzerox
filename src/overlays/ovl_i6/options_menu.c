@@ -491,15 +491,15 @@ Gfx* OptionsMenu_Draw(Gfx* gfx) {
     gfx = Object_UpdateAndDrawAll(gfx);
     if (D_i6_801247A8 != 1) {
         gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aTitleBackgroundMainTex), 8, 0, 304, 240, G_IM_FMT_RGBA,
-                                G_IM_SIZ_16b, 0, false, false, false);
+                                G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, false, false);
     }
     if (D_i6_801247A8 != 0) {
         gfx = func_i6_8011D8C8(gfx);
     }
     gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aOptionsFalconHelmetTex), 50, 4, 64, 64, G_IM_FMT_RGBA,
-                            G_IM_SIZ_16b, 0, false, true, false);
+                            G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, true, false);
     gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aOptionsFalconHelmetTex), 206, 4, 64, 64, G_IM_FMT_RGBA,
-                            G_IM_SIZ_16b, 0, false, false, false);
+                            G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, false, false);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
     gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aOptionsTex),

@@ -278,24 +278,21 @@ Gfx* TextureCache_Draw(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, Textu
 
     switch (texInfo->format) {
         case TEX_CACHE_FMT_IA8:
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
-                                     2, false, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b, TEXTURE_RENDER_DECAL_IA8, false, false, false);
         case TEX_CACHE_FMT_I4:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
-                                     3, false, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, false, false, false);
         case TEX_CACHE_FMT_I4_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
-                                     3, true, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, true, false, false);
         case TEX_CACHE_FMT_RGBA16_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
             return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
-                                     G_IM_SIZ_16b, 0, true, false, false);
+                                     G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, true, false, false);
         case TEX_CACHE_FMT_RGBA16:
         default:
             return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
-                                     G_IM_SIZ_16b, 0, false, false, false);
+                                     G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, false, false);
     }
 }
 
@@ -303,24 +300,21 @@ Gfx* TextureCache_DrawTinted(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top,
 
     switch (texInfo->format) {
         case TEX_CACHE_FMT_IA8:
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
-                                     2, false, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b, TEXTURE_RENDER_DECAL_IA8, false, false, false);
         case TEX_CACHE_FMT_I4:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
-                                     3, false, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, false, false, false);
         case TEX_CACHE_FMT_I4_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
-                                     3, true, false, 0);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, true, false, 0);
         case TEX_CACHE_FMT_RGBA16_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
             return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
-                                     G_IM_SIZ_16b, 1, true, false, false);
+                                     G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
         case TEX_CACHE_FMT_RGBA16:
         default:
             return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
-                                     G_IM_SIZ_16b, 1, false, false, false);
+                                     G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, false, false, false);
     }
 }
 
@@ -329,24 +323,21 @@ Gfx* TextureCache_DrawMirror(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top,
 
     switch (texInfo->format) {
         case TEX_CACHE_FMT_IA8:
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
-                                     2, false, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b, TEXTURE_RENDER_DECAL_IA8, false, false, false);
         case TEX_CACHE_FMT_I4:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
-                                     3, false, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, false, false, false);
         case TEX_CACHE_FMT_I4_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
-                                     3, true, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, true, false, false);
         case TEX_CACHE_FMT_RGBA16_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
             return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
-                                     G_IM_SIZ_16b, 0, true, mirrorS, mirrorT);
+                                     G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, true, mirrorS, mirrorT);
         case TEX_CACHE_FMT_RGBA16:
         default:
             return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
-                                     G_IM_SIZ_16b, 0, false, mirrorS, mirrorT);
+                                     G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, mirrorS, mirrorT);
     }
 }
 
@@ -355,24 +346,23 @@ Gfx* TextureCache_DrawScaled(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top,
 
     switch (texInfo->format) {
         case TEX_CACHE_FMT_IA8:
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
-                                     2, false, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b, TEXTURE_RENDER_DECAL_IA8, false, false, false);
         case TEX_CACHE_FMT_I4:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
             return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
-                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+                                           G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, false, false);
         case TEX_CACHE_FMT_I4_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
             return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
-                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+                                           G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, false, false);
         case TEX_CACHE_FMT_RGBA16_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
             return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
-                                     G_IM_SIZ_16b, 0, true, false, false);
+                                     G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, true, false, false);
         case TEX_CACHE_FMT_RGBA16:
         default:
             return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
-                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, false, false);
+                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, false);
     }
 }
 
@@ -381,24 +371,23 @@ Gfx* TextureCache_DrawScaledMirror(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s3
 
     switch (texInfo->format) {
         case TEX_CACHE_FMT_IA8:
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
-                                     2, false, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b, TEXTURE_RENDER_DECAL_IA8, false, false, false);
         case TEX_CACHE_FMT_I4:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
             return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
-                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+                                           G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, false, false);
         case TEX_CACHE_FMT_I4_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
             return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
-                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+                                           G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, false, false);
         case TEX_CACHE_FMT_RGBA16_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
             return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
-                                     G_IM_SIZ_16b, 0, true, false, false);
+                                     G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, true, false, false);
         case TEX_CACHE_FMT_RGBA16:
         default:
             return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
-                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, false, true);
+                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, true);
     }
 }
 
@@ -407,24 +396,23 @@ Gfx* TextureCache_DrawScaledTinted(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s3
 
     switch (texInfo->format) {
         case TEX_CACHE_FMT_IA8:
-            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
-                                     2, false, false, false);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b, TEXTURE_RENDER_DECAL_IA8, false, false, false);
         case TEX_CACHE_FMT_I4:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
             return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
-                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+                                           G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, false, false);
         case TEX_CACHE_FMT_I4_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
             return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
-                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+                                           G_IM_FMT_I, G_IM_SIZ_4b, TEXTURE_RENDER_MODULATE_I4, false, false);
         case TEX_CACHE_FMT_RGBA16_TILED:
         case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
             return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
-                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, true, false);
+                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false);
         case TEX_CACHE_FMT_RGBA16:
         default:
             return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
-                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, false, false);
+                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, false, false);
     }
 }
 

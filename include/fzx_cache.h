@@ -51,4 +51,11 @@ typedef enum TextureCacheDrawMode {
     TEXTURE_CACHE_DRAW_SCALED_MIRROR,
 } TextureCacheDrawMode;
 
+typedef enum TextureRenderType {
+    TEXTURE_RENDER_DECAL_RGBA,
+    TEXTURE_RENDER_TINT_PRIM_COLOR,
+    TEXTURE_RENDER_DECAL_IA8,
+    TEXTURE_RENDER_MODULATE_I4,
+} TextureRenderType;
+
 #endif // FZX_CACHE_H

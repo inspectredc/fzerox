@@ -1,5 +1,6 @@
 #include "prevent_bss_reordering.h"
 #include "global.h"
+#include "fzx_cache.h"
 #include "ending.h"
 #include "fzx_game.h"
 #include "fzx_hud.h"
@@ -718,7 +719,7 @@ Gfx* EndingCutscene_DrawScrollingResults(Gfx* gfx) {
                     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sCongratulationsEndingTextAlpha);
 
                     gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aCongratulationsTex), cutsceneResults->left,
-                                            textureTop, 264, 31, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, true, false, false);
+                                            textureTop, 264, 31, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
                 }
                 break;
             case ENDING_CS_RESULTS_END_SCREEN:
@@ -726,16 +727,16 @@ Gfx* EndingCutscene_DrawScrollingResults(Gfx* gfx) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sCongratulationsEndingTextAlpha);
 
                 gfx = TextureUtils_Draw(gfx, sEndingTex, cutsceneResults->left, textureTop, 168, 99, G_IM_FMT_RGBA,
-                                        G_IM_SIZ_16b, 1, true, false, false);
+                                        G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 
                 if (sEndingTextTex != NULL) {
 #ifdef VERSION_JP
                     gfx = TextureUtils_Draw(gfx, sEndingTextTex, cutsceneResults->left + -14.0f,
-                                            textureTop + 99.0f + 10.0f, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, true,
+                                            textureTop + 99.0f + 10.0f, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true,
                                             false, false);
 #else
                     gfx = TextureUtils_Draw(gfx, sEndingTextTex, cutsceneResults->left + -14.0f,
-                                            textureTop + 99.0f + 10.0f, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, true,
+                                            textureTop + 99.0f + 10.0f, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true,
                                             false, false);
 #endif
                 }
@@ -858,12 +859,12 @@ Gfx* EndingCutscene_DrawFinalResultsPosition(Gfx* gfx, s32 xPos, s32 yPos, s32 p
             width = 8;
         }
         gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(sFinalResultPositionDigitTexs[digit]), xPos + xOffset, yPos,
-                                width, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, false, false, false);
+                                width, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, false, false, false);
         xPos += 16;
     }
 
     return TextureUtils_Draw(gfx, TextureCache_GetCached(sFinalResultsPositionSuffixTexs[positionSuffix]), xPos, yPos,
-                             16, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, false, false, false);
+                             16, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, false, false, false);
 }
 
 Gfx* EndingCutscene_DrawTotalRanking(Gfx* gfx, EndingCutsceneResults* cutsceneResults, f32 baseYPos) {
@@ -1057,16 +1058,16 @@ Gfx* EndingCutscene_DrawEndScreen(Gfx* gfx) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sEndScreenAlpha);
 
 #ifdef VERSION_JP
-    gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 70, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, true, false, false);
+    gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 70, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #else
-    gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 62, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, true, false, false);
+    gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 62, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #endif
     if (sEndingTextTex != NULL) {
 #ifdef VERSION_JP
-        gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 179, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, true, false,
+        gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 179, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false,
                                 false);
 #else
-        gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 171, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, true, false,
+        gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 171, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false,
                                 false);
 #endif
     }
