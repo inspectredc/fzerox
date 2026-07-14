@@ -187,6 +187,7 @@ Matrix_SetAxisRotation = 0x8006C520;
 Matrix_SetOrtho = 0x8006D2E0;
 Course_FeatureIsDecorational = 0x8006D3F0;
 Course_GadgetsDraw = 0x8006DAAC;
+TextureCache_GetCached = 0x800783AC;
 Racer_RetireRacer = 0x80089360;
 Racer_StopRacerSfx = 0x80089540;
 Racer_UpdateRacePositions = 0x8008A9F8;
