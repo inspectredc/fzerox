@@ -273,7 +273,7 @@ void func_i3_8012F324(void) {
     sSecondLapStarted = false;
     sFinalLapStarted = false;
 
-    func_80078104(aBestTex, TEX_SIZE(aBestTex, sizeof(u16)), 0, 0, 0);
+    TextureCache_LoadAndCache(aBestTex, TEX_SIZE(aBestTex, sizeof(u16)), false, false, false);
 
     if (gGameMode == GAMEMODE_PRACTICE) {
         D_i3_8013EFFC = 360;
@@ -1842,7 +1842,7 @@ Gfx* Hud_DrawPracticeBestLap(Gfx* gfx) {
     top = 20;
 
     // Best
-    gDPLoadTextureBlock(gfx++, func_800783AC(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
+    gDPLoadTextureBlock(gfx++, TextureCache_GetCached(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
 
@@ -1949,7 +1949,7 @@ Gfx* Hud_DrawDeathRaceBest(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
 
     // Best
-    gDPLoadTextureBlock(gfx++, func_800783AC(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
+    gDPLoadTextureBlock(gfx++, TextureCache_GetCached(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
 

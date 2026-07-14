@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "machine_create.h"
 #include "leo/mfs.h"
 #include "fzx_game.h"
@@ -261,20 +262,20 @@ s32 MachineCreate_CharacterSlotFromNumber(s32 number) {
     return 0;
 }
 
-extern unk_800792D8* D_xk3_80136E60[];
+extern TextureSwapEntry* D_xk3_80136E60[];
 
 void func_xk3_8012F5F0(Object* arg0) {
-    OBJECT_CACHE_INDEX(arg0) = func_800792D8(D_xk3_80136E60[0]);
+    OBJECT_CACHE_INDEX(arg0) = TextureCache_AllocSwapSlot(D_xk3_80136E60[0]);
     OBJECT_STATE(arg0) = -1;
 }
 
-extern unk_800E3F28 D_800E3F28[];
+extern TexSwapSlot gTextureSwapSlots[];
 
 Gfx* func_xk3_8012F628(Gfx* gfx, Object* arg1) {
 
     if (gWorksMachineMode != MACHINE_MODE_ENTRY) {
-        gfx = func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0,
-                                 0, 1.0f, 1.0f, false);
+        gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1),
+                                             OBJECT_TOP(arg1), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, false);
     }
     return gfx;
 }
@@ -299,13 +300,13 @@ void func_xk3_8012F6A8(Object* arg0) {
             if (character >= 36) {
                 character %= 30;
             }
-            func_800793E8(OBJECT_CACHE_INDEX(arg0), 0, D_xk3_80136E60[character]);
+            TextureCache_SetSwapSlotEntry(OBJECT_CACHE_INDEX(arg0), 0, D_xk3_80136E60[character]);
         }
         OBJECT_STATE(arg0) = D_800333F4 + 30;
     } else {
         if (OBJECT_STATE(arg0) != (gCustomMachine.number - 1)) {
-            func_800793E8(OBJECT_CACHE_INDEX(arg0), 0,
-                          D_xk3_80136E60[MachineCreate_CharacterSlotFromNumber(gCustomMachine.number)]);
+            TextureCache_SetSwapSlotEntry(OBJECT_CACHE_INDEX(arg0), 0,
+                                          D_xk3_80136E60[MachineCreate_CharacterSlotFromNumber(gCustomMachine.number)]);
         }
         OBJECT_STATE(arg0) = gCustomMachine.number - 1;
     }
@@ -401,7 +402,7 @@ Gfx* MachineCreate_DrawWeightAndName(Gfx* gfx, s32 weight, s8* characterName) {
     gfx = MachineCreate_DrawWeight(gfx, 170, 190, weight);
     gfx = Font_DrawString(gfx, 252 - Font_GetStringWidth(characterName, 4, 0), 219, characterName, 0, 4, 0);
     gfx = Object_UpdateAndDrawAll(gfx);
-    func_800790D4();
+    TextureCache_ProcessLoadQueue();
     return gfx;
 }
 

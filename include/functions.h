@@ -135,28 +135,28 @@ void Segment_LoadOverlays(void);
 void Segment_LoadAssets(void);
 void func_80077AD8(s32 venue);
 
-void func_80077CF0(s32 segAddr, size_t size, u8* startAddr);
+void TextureCache_LoadAssetData(s32 segAddr, size_t size, u8* dest);
 
 #ifndef EXPANSION_KIT
-#define func_80077D50_impl(arg0, arg1, arg2) func_80077D50(arg0, arg1)
-#define func_80078EA0_impl(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9) func_80078EA0(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8)
-#define func_80078F80_impl(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9) func_80078F80(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8)
+#define TextureCache_LoadCacheTexInfoList_impl(texInfo, forceReload, singleEntry) TextureCache_LoadCacheTexInfoList(texInfo, forceReload)
+#define TextureCache_DrawList_impl(gfx, texInfo, left, top, mode, mirrorS, mirrorT, scaleX, scaleY, singleEntry) TextureCache_DrawList(gfx, texInfo, left, top, mode, mirrorS, mirrorT, scaleX, scaleY)
+#define TextureCache_DrawSwapSlot_impl(gfx, slot, left, top, mode, mirrorS, mirrorT, scaleX, scaleY, singleEntry) TextureCache_DrawSwapSlot(gfx, slot, left, top, mode, mirrorS, mirrorT, scaleX, scaleY)
 #else
-#define func_80077D50_impl(arg0, arg1, arg2) func_80077D50(arg0, arg1, arg2)
-#define func_80078EA0_impl(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9) func_80078EA0(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9)
-#define func_80078F80_impl(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9) func_80078F80(gfx, arg1, left, top, arg4, arg5, arg6, arg7, arg8, arg9)
+#define TextureCache_LoadCacheTexInfoList_impl(texInfo, forceReload, singleEntry) TextureCache_LoadCacheTexInfoList(texInfo, forceReload, singleEntry)
+#define TextureCache_DrawList_impl(gfx, texInfo, left, top, mode, mirrorS, mirrorT, scaleX, scaleY, singleEntry) TextureCache_DrawList(gfx, texInfo, left, top, mode, mirrorS, mirrorT, scaleX, scaleY, singleEntry)
+#define TextureCache_DrawSwapSlot_impl(gfx, slot, left, top, mode, mirrorS, mirrorT, scaleX, scaleY, singleEntry) TextureCache_DrawSwapSlot(gfx, slot, left, top, mode, mirrorS, mirrorT, scaleX, scaleY, singleEntry)
 #endif
-u8* func_80077D50_impl(unk_80077D50* arg0, s32 arg1, bool arg2);
-Gfx* func_80078EA0_impl(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8, bool arg9);
-Gfx* func_80078F80_impl(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7, f32 arg8, bool arg9);
+u8* TextureCache_LoadCacheTexInfoList_impl(CacheTexInfo* texInfo, bool forceReload, bool singleEntry);
+Gfx* TextureCache_DrawList_impl(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, u32 mode, bool mirrorS, bool mirrorT, f32 scaleX, f32 scaleY, bool singleEntry);
+Gfx* TextureCache_DrawSwapSlot_impl(Gfx* gfx, TexSwapSlot* slot, s32 left, s32 top, u32 mode, bool mirrorS, bool mirrorT, f32 scaleX, f32 scaleY, bool singleEntry);
 
-void* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4);
-TexturePtr func_800783AC(void* arg0);
+void* TextureCache_LoadAndCache(void* segAddr, s32 textureSize, bool forceReload, bool isCompressed, bool noCache);
+TexturePtr TextureCache_GetCached(void* segAddr);
 
 
-void func_800790D4(void);
-s32 func_800792D8(unk_800792D8* arg0);
-void func_800793E8(s32 arg0, s32 arg1, unk_800792D8* arg2);
+void TextureCache_ProcessLoadQueue(void);
+s32 TextureCache_AllocSwapSlot(TextureSwapEntry* entries);
+void TextureCache_SetSwapSlotEntry(s32 slotIndex, s32 entryIndex, TextureSwapEntry* entries);
 void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority);
 Gfx* Object_UpdateAndDrawAll(Gfx* gfx);
 Object* Object_Get(s32 cmdId);
@@ -168,20 +168,20 @@ void Object_LerpPosXToClampedTargetMaxStep(Object* object, s32 target, s32 maxSt
 void Object_LerpPosYToClampedTarget(Object* object, s32 target);
 void Object_LerpAwayFromPosX(Object* object, s32 origin, s32 initialStep);
 
-Gfx* func_8007A440(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
-void func_8007A59C(u16* pixel, s32 size);
-void func_8007A828(u16* pixel, size_t size, s32 arg2, s32 arg3, s32 arg4);
-Gfx* func_8007AB88(Gfx*);
-Gfx* func_8007ABA4(Gfx*);
-Gfx* func_8007AD44(Gfx* gfx, u16 red, u16 green, u16 blue, s32 left, s32 top, s32 right, s32 bottom);
-Gfx* func_8007AE70(Gfx*);
-Gfx* func_8007AC48(Gfx* gfx, u16 red, u16 green, u16 blue);
-Gfx* func_8007AE8C(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
-Gfx* func_8007AF40(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
-Gfx* func_8007B14C(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u32 height, s32 format, s32 size, s32 arg8,
-                   s32 arg9, s32 argA, s32 argB);
-Gfx* func_8007CDB0(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u32 height, f32 arg6, f32 arg7,
-                   s32 format, s32 size, s32 argA, s32 argB, s32 argC);
+Gfx* TextureUtils_DrawRectangleClipped(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
+void TextureUtils_ConvertToGreyscale(u16* pixel, s32 size);
+void TextureUtils_ConvertToTintedGreyscale(u16* pixel, size_t size, s32 redScale, s32 greenScale, s32 blueScale);
+Gfx* TextureUtils_SetupFramebufferView(Gfx*);
+Gfx* TextureUtils_SetFramebuffer(Gfx*);
+Gfx* TextureUtils_DrawColorRectangle(Gfx* gfx, u16 red, u16 green, u16 blue, s32 left, s32 top, s32 right, s32 bottom);
+Gfx* TextureUtils_LoadFramebufferTexture(Gfx*);
+Gfx* TextureUtils_DrawBackgroundColor(Gfx* gfx, u16 red, u16 green, u16 blue);
+Gfx* TextureUtils_DrawDitheredRectangle(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
+Gfx* TextureUtils_DrawTranslucentRectangle(Gfx* gfx, s32 left, s32 top, s32 right, s32 bottom, s32 red, s32 green, s32 blue, s32 alpha);
+Gfx* TextureUtils_Draw(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u32 height, s32 format, s32 size, s32 renderType,
+                   bool tileLoad, bool mirrorS, bool mirrorT);
+Gfx* TextureUtils_DrawScaled(Gfx* gfx, TexturePtr texture, s32 left, s32 top, s32 width, u32 height, f32 scaleX, f32 scaleY,
+                   s32 format, s32 size, s32 renderType, bool singleRowBlocks, bool mirrorS);
 void Controller_SetGlobalInputs(Controller* controller);
 Gfx* func_8007DB28(Gfx* gfx, s32 arg1);
 void func_8007DEF0(void);
@@ -195,10 +195,10 @@ s32 Character_GetSlotFromCharacter(s32 character);
 void func_8007E2B4(void);
 void func_8007E398(void);
 
-Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr palette, s32 format, s32 unkTmemFlag, s32 left, s32 top, s32 width, s32 height, u16 unkDrawFlag);
-void func_8007ECCC(u16* pixel, s32 textureSize);
-s32 func_8007EFBC(u16* pixel, u16* paletteStart, s32 pixelCount);
-Gfx* func_8007F090(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3);
+Gfx* TextureUtils_DrawIndexedBlocks(Gfx* gfx, TexturePtr texture, TexturePtr palette, s32 format, s32 unkTmemFlag, s32 left, s32 top, s32 width, s32 height, u16 drawFlags);
+void Graphics_ConvertToInverseGreyscale(u16* pixel, s32 textureSize);
+s32 TextureUtils_GeneratePalette(u16* pixel, u16* paletteStart, s32 pixelCount);
+Gfx* TextureUtils_SetPulsingColor(Gfx* gfx, s32 red, s32 green, s32 blue);
 
 void func_8007F4E0(s32 venue, s32 skybox);
 

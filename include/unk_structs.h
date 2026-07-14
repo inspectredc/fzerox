@@ -378,38 +378,38 @@ typedef struct Ghost {
     /* 0x3F6A */ MachineInfo machineInfo;
 } Ghost; // size = 0x3F80
 
-typedef struct unk_80077D50 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x04 */ void* unk_04; // segmented address
+typedef struct CacheTexInfo {
+    /* 0x00 */ s16 format;
+    /* 0x04 */ void* segAddr;
     /* 0x08 */ u16 width;
     /* 0x0A */ u16 height;
     /* 0x0C */ size_t compressedSize;
-} unk_80077D50; // size = 0x10
+} CacheTexInfo; // size = 0x10
 
-typedef struct unk_800E33E0 {
-    void* unk_00; // segmented address
-    TexturePtr unk_04;
-} unk_800E33E0; // size = 0x8
+typedef struct TextureCacheEntry {
+    void* segAddr;
+    TexturePtr texture;
+} TextureCacheEntry; // size = 0x8
 
-typedef struct unk_800E4068 {
-    unk_80077D50* unk_00;
-    TexturePtr unk_04;
-} unk_800E4068; // size = 0x8
+typedef struct QueuedTextureLoad {
+    CacheTexInfo* CacheTexInfo;
+    TexturePtr texture;
+} QueuedTextureLoad; // size = 0x8
 
-typedef struct unk_800792D8 {
-    unk_80077D50* unk_00;
+typedef struct TextureSwapEntry {
+    CacheTexInfo* CacheTexInfo;
     s32 unk_04;
-} unk_800792D8;
+} TextureSwapEntry;
 
-typedef struct unk_800E3F28 {
-    unk_800792D8* unk_00;
-    s16 unk_04;
+typedef struct TexSwapSlot {
+    TextureSwapEntry* entries;
+    s16 entryIndex;
     s16 unk_06;
-    s16 unk_08;
-    s16 unk_0A;
-    TexturePtr unk_0C; // primary texture
-    TexturePtr unk_10; // alternate texture (defaults to primary)
-} unk_800E3F28; // size = 0x14
+    s16 allocated;
+    s16 slotTextureId;
+    TexturePtr textureA; // primary texture
+    TexturePtr textureB; // alternate texture (defaults to primary)
+} TexSwapSlot; // size = 0x14
 
 
 typedef struct unk_800DCE48 {

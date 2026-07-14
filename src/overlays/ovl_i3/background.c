@@ -524,14 +524,16 @@ void Background_Init(void) {
     }
     Background_InitBackgroundSprites();
 
-    sSkyboxTexture = func_80078104(sBackgroundCtx.skybox->texture, 64 * 1 * sizeof(u16), 0, 0, 0);
-    sVenueFloorTexture = func_80078104(sBackgroundCtx.venueFloor->texture, 64 * 32 * sizeof(u16), 0, 0, 0);
+    sSkyboxTexture =
+        TextureCache_LoadAndCache(sBackgroundCtx.skybox->texture, 64 * 1 * sizeof(u16), false, false, false);
+    sVenueFloorTexture =
+        TextureCache_LoadAndCache(sBackgroundCtx.venueFloor->texture, 64 * 32 * sizeof(u16), false, false, false);
 
     if (sSkyboxFlags & SKYBOX_CLOUDY) {
-        sCloudTexture = func_80078104(aCloudTex, TEX_SIZE(aCloudTex, sizeof(u8)), 0, 0, 0);
+        sCloudTexture = TextureCache_LoadAndCache(aCloudTex, TEX_SIZE(aCloudTex, sizeof(u8)), false, false, false);
     }
     if (sSkyboxFlags & SKYBOX_STARRY) {
-        sStarTexture = func_80078104(D_F2207C8, TEX_SIZE(D_F2207C8, sizeof(u8)), 0, 0, 0);
+        sStarTexture = TextureCache_LoadAndCache(D_F2207C8, TEX_SIZE(D_F2207C8, sizeof(u8)), false, false, false);
     }
     if (gGameMode == GAMEMODE_GP_END_CS) {
         sIsEndingCutscene = true;
@@ -1205,8 +1207,9 @@ void Background_InitBackgroundSprites(void) {
 
         texturePalettePair = sBackgroundSpritePalettePairs[backgroundSprite->spriteId];
 
-        backgroundSprite->texture = func_80078104(texturePalettePair[0], 64 * 64 / 2, 0, 0, 0);
-        backgroundSprite->palette = func_80078104(texturePalettePair[1], 16 * 1 * sizeof(u16), 0, 0, 0);
+        backgroundSprite->texture = TextureCache_LoadAndCache(texturePalettePair[0], 64 * 64 / 2, false, false, false);
+        backgroundSprite->palette =
+            TextureCache_LoadAndCache(texturePalettePair[1], 16 * 1 * sizeof(u16), false, false, false);
         sBackgroundSpriteCount++;
         backgroundSprite++;
         bgSpriteInitData++;

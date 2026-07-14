@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "transition.h"
 #include "fzx_camera.h"
 #include "fzx_game.h"
@@ -540,17 +541,17 @@ void Transition_SetBackgroundBuffer(void) {
     }
 
     if (transition->flags & TRANSITION_FLAG_GREYSCALE) {
-        func_8007A59C(transition->backgroundBuffer,
-                      TRANSITION_BACKGROUND_WIDTH * TRANSITION_BACKGROUND_HEIGHT * sizeof(u16));
+        TextureUtils_ConvertToGreyscale(transition->backgroundBuffer,
+                                        TRANSITION_BACKGROUND_WIDTH * TRANSITION_BACKGROUND_HEIGHT * sizeof(u16));
     }
     if (transition->flags & TRANSITION_FLAG_INVERSE_GREYSCALE) {
-        func_8007ECCC(transition->backgroundBuffer,
-                      TRANSITION_BACKGROUND_WIDTH * TRANSITION_BACKGROUND_HEIGHT * sizeof(u16));
+        Graphics_ConvertToInverseGreyscale(transition->backgroundBuffer,
+                                           TRANSITION_BACKGROUND_WIDTH * TRANSITION_BACKGROUND_HEIGHT * sizeof(u16));
     }
     if (transition->flags & TRANSITION_FLAG_CONVERT_TO_PALETTE) {
         //! @bug passes in size of texture instead of pixel count, causing overflow read
-        func_8007EFBC(transition->backgroundBuffer, sTransitionPalettePtr,
-                      TRANSITION_BACKGROUND_WIDTH * TRANSITION_BACKGROUND_HEIGHT * sizeof(u16));
+        TextureUtils_GeneratePalette(transition->backgroundBuffer, sTransitionPalettePtr,
+                                     TRANSITION_BACKGROUND_WIDTH * TRANSITION_BACKGROUND_HEIGHT * sizeof(u16));
     }
 }
 
@@ -1447,9 +1448,9 @@ Gfx* Transition_WipeDraw(Gfx* gfx, Transition* transition) {
 
     gDPSetTextureLUT(gfx++, G_TT_NONE);
 
-    return func_8007B14C(gfx, transition->backgroundBuffer, WIPE_LEFT(wipeInfo), WIPE_TOP(wipeInfo),
-                         TRANSITION_BACKGROUND_WIDTH, TRANSITION_BACKGROUND_HEIGHT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
-                         0, 0);
+    return TextureUtils_Draw(gfx, transition->backgroundBuffer, WIPE_LEFT(wipeInfo), WIPE_TOP(wipeInfo),
+                             TRANSITION_BACKGROUND_WIDTH, TRANSITION_BACKGROUND_HEIGHT, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                             TEXTURE_RENDER_DECAL_RGBA, false, false, false);
 }
 
 void Transition_PhasedStripsInit(Transition* transition) {
@@ -1643,7 +1644,8 @@ bool Transition_GreyscalePaletteUpdateState(Transition* transition) {
 }
 
 Gfx* Transition_GreyscalePaletteDraw(Gfx* gfx, Transition* transition) {
-    return func_8007E410(gfx, transition->backgroundBuffer, sTransitionPalettePtr, G_IM_FMT_CI, 1,
-                         TRANSITION_BORDER_WIDTH, TRANSITION_BORDER_HEIGHT, TRANSITION_BACKGROUND_WIDTH,
-                         TRANSITION_BACKGROUND_HEIGHT, 5);
+    return TextureUtils_DrawIndexedBlocks(gfx, transition->backgroundBuffer, sTransitionPalettePtr, G_IM_FMT_CI, 1,
+                                          TRANSITION_BORDER_WIDTH, TRANSITION_BORDER_HEIGHT,
+                                          TRANSITION_BACKGROUND_WIDTH, TRANSITION_BACKGROUND_HEIGHT,
+                                          INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_SMALL_BLOCKS);
 }

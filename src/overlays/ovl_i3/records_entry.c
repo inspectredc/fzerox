@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "fzx_font.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
@@ -34,7 +35,7 @@ s16 gRecordNameEnteredLength;
 s16 sEnterKeyboardIndex;
 KeyboardObject sKeyboardObjects[50];
 s16 sSelectedCharacterTransitionTimer[3];
-unk_80077D50* sSpinningKeyboardCharacterCompTexInfo;
+CacheTexInfo* sSpinningKeyboardCharacterCacheTexInfo;
 u16 sSpinningKeyboardCharacterPerspectiveScale;
 
 extern Mtx D_8024DC80;
@@ -85,17 +86,17 @@ void RecordsEntry_Init(void) {
     Matrix_SetLockedLookAt(&D_8024DC80, NULL, 0.7f * D_800CE748, 0.7f * D_800CE74C, 0.7f * D_800CE750, 0.0f, 0.0f, 1.0f,
                            0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
     Lights_SetSource(&D_8024DCC0, 0, 0, 0, 255, 255, 255, 100, 50, 69);
-    func_80078104(aBestTex, TEX_SIZE(aBestTex, sizeof(u16)), 0, 0, 0);
+    TextureCache_LoadAndCache(aBestTex, TEX_SIZE(aBestTex, sizeof(u16)), false, false, false);
 
     if (sRecordsEntryFlags & RECORDS_ENTRY_DRAW_ENGINE_SETTINGS) {
-        func_80078104(aRecordsAccelerationSpeedGraphTex, TEX_SIZE(aRecordsAccelerationSpeedGraphTex, sizeof(u16)), 0, 0,
-                      0);
-        func_80078104(aRecordsAccelerationSpeedSliderTex, TEX_SIZE(aRecordsAccelerationSpeedSliderTex, sizeof(u16)), 0,
-                      0, 0);
+        TextureCache_LoadAndCache(aRecordsAccelerationSpeedGraphTex,
+                                  TEX_SIZE(aRecordsAccelerationSpeedGraphTex, sizeof(u16)), false, false, false);
+        TextureCache_LoadAndCache(aRecordsAccelerationSpeedSliderTex,
+                                  TEX_SIZE(aRecordsAccelerationSpeedSliderTex, sizeof(u16)), false, false, false);
     }
     if (sRecordsEntryFlags & RECORDS_ENTRY_LOAD_ARROWS) {
         RecordsEntry_SetDrawArrows(true);
-        func_80078104(aYellowArrowTex, TEX_SIZE(aYellowArrowTex, sizeof(u16)), 0, 1, 0);
+        TextureCache_LoadAndCache(aYellowArrowTex, TEX_SIZE(aYellowArrowTex, sizeof(u16)), false, true, false);
     }
 }
 
@@ -200,7 +201,7 @@ Gfx* RecordsEntry_DrawRecords(Gfx* gfx, s32 courseIndex) {
     gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
 
     if (sRecordsEntryFlags & RECORDS_ENTRY_FILTER_BACKGROUND) {
-        gfx = func_8007A440(gfx, 12, 8, 308, 232, 0, 0, 0, 191);
+        gfx = TextureUtils_DrawRectangleClipped(gfx, 12, 8, 308, 232, 0, 0, 0, 191);
     }
     if (sRecordsEntryFlags & RECORDS_ENTRY_DRAW_COURSE_WITH_ARROWS) {
         trackName = gTrackNames[courseIndex];
@@ -232,10 +233,10 @@ Gfx* RecordsEntry_DrawRecords(Gfx* gfx, s32 courseIndex) {
             }
             leftOffset = (s32) (10.0f * var_fv0);
 
-            gfx = func_8007B14C(gfx, func_800783AC(aYellowArrowTex), (-(i / 2) - leftOffset) + 118, 16, 32, 32,
-                                G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 0, 0);
-            gfx = func_8007B14C(gfx, func_800783AC(aYellowArrowTex), (i / 2) + leftOffset + 170, 16, 32, 32,
-                                G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, 1, 0);
+            gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aYellowArrowTex), (-(i / 2) - leftOffset) + 118, 16, 32,
+                                    32, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, false, false);
+            gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aYellowArrowTex), (i / 2) + leftOffset + 170, 16, 32,
+                                    32, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_DECAL_RGBA, false, true, false);
         }
     }
 
@@ -335,7 +336,7 @@ Gfx* RecordsEntry_DrawRecords(Gfx* gfx, s32 courseIndex) {
 
             if (highlightSection) {
                 gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
-                gfx = func_8007F090(gfx, 255, 0, 0);
+                gfx = TextureUtils_SetPulsingColor(gfx, 255, 0, 0);
             } else {
                 gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
             }
@@ -361,7 +362,7 @@ Gfx* RecordsEntry_DrawRecords(Gfx* gfx, s32 courseIndex) {
 
         if (highlightSection) {
             gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
-            gfx = func_8007F090(gfx, 255, 0, 0);
+            gfx = TextureUtils_SetPulsingColor(gfx, 255, 0, 0);
         } else {
             gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
         }
@@ -376,7 +377,7 @@ Gfx* RecordsEntry_DrawRecords(Gfx* gfx, s32 courseIndex) {
     gDPPipeSync(gfx++);
     gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 
-    gDPLoadTextureBlock(gfx++, func_800783AC(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
+    gDPLoadTextureBlock(gfx++, TextureCache_GetCached(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
 
@@ -501,7 +502,7 @@ Gfx* RecordsEntry_DrawSpeed(Gfx* gfx, s32 left, s32 top, f32 speed, bool shouldH
     gDPPipeSync(gfx++);
 
     if (shouldHighlight) {
-        gfx = func_8007F090(gfx, 255, 0, 0);
+        gfx = TextureUtils_SetPulsingColor(gfx, 255, 0, 0);
         gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
     } else {
         gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
@@ -535,17 +536,17 @@ Gfx* RecordsEntry_DrawRecordMachine(Gfx* gfx, s32 recordsIndex, MachineInfo* mac
 Gfx* RecordsEntry_DrawRecordEngineSetting(Gfx* gfx, s32 left, s32 top, f32 engineValue) {
     u32 sliderOffset;
 
-    gDPLoadTextureBlock(gfx++, func_800783AC(aRecordsAccelerationSpeedGraphTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0,
-                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
-                        G_TX_NOLOD);
+    gDPLoadTextureBlock(gfx++, TextureCache_GetCached(aRecordsAccelerationSpeedGraphTex), G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                        32, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                        G_TX_NOLOD, G_TX_NOLOD);
 
     gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 32) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
     sliderOffset = engineValue * 29.5f;
 
-    gDPLoadTextureBlock(gfx++, func_800783AC(aRecordsAccelerationSpeedSliderTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0,
-                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
-                        G_TX_NOLOD);
+    gDPLoadTextureBlock(gfx++, TextureCache_GetCached(aRecordsAccelerationSpeedSliderTex), G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                        8, 8, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                        G_TX_NOLOD, G_TX_NOLOD);
 
     gSPTextureRectangle(gfx++, (left + sliderOffset - 2) << 2, (top + 9) << 2, (left + sliderOffset + 6) << 2,
                         (top + 17) << 2, 0, 0, 0, 1 << 10, 1 << 10);
@@ -713,7 +714,7 @@ void RecordsEntry_UpdateNameEntryTransition(bool transitionKeysAway) {
     }
 }
 
-extern unk_80077D50* sFont1CompTexInfos[];
+extern CacheTexInfo* sFont1CacheTexInfos[];
 extern u16 gInputPressed;
 extern u16 gInputButtonPressed;
 
@@ -732,7 +733,7 @@ void RecordsEntry_UpdateNameEntryKeyboard(void) {
     s32 keyboardCursorX;
     s32 keyboardCursorY;
     Vtx* vtx;
-    unk_80077D50* spinningCharacterCompTexInfo;
+    CacheTexInfo* spinningCharacterCacheTexInfo;
     f32 xPositions[4];
     f32 yPositions[4];
     f32 textureSCoordinates[4];
@@ -853,28 +854,28 @@ void RecordsEntry_UpdateNameEntryKeyboard(void) {
                 }
             }
         }
-        spinningCharacterCompTexInfo =
-            sFont1CompTexInfos[Font_GetCharIndex(&sNameKeyboardCharacters[keyboardIndex], FONT_SET_UPPERCASE_ONLY)];
-        sSpinningKeyboardCharacterCompTexInfo = spinningCharacterCompTexInfo;
+        spinningCharacterCacheTexInfo =
+            sFont1CacheTexInfos[Font_GetCharIndex(&sNameKeyboardCharacters[keyboardIndex], FONT_SET_UPPERCASE_ONLY)];
+        sSpinningKeyboardCharacterCacheTexInfo = spinningCharacterCacheTexInfo;
 
-        xPositions[0] = xPositions[2] = 0.0f - (spinningCharacterCompTexInfo->width * 0.5f);
-        xPositions[1] = xPositions[3] = xPositions[0] + spinningCharacterCompTexInfo->width;
+        xPositions[0] = xPositions[2] = 0.0f - (spinningCharacterCacheTexInfo->width * 0.5f);
+        xPositions[1] = xPositions[3] = xPositions[0] + spinningCharacterCacheTexInfo->width;
 
-        yPositions[0] = yPositions[1] = spinningCharacterCompTexInfo->height * 0.5f;
-        yPositions[2] = yPositions[3] = yPositions[0] - spinningCharacterCompTexInfo->height;
+        yPositions[0] = yPositions[1] = spinningCharacterCacheTexInfo->height * 0.5f;
+        yPositions[2] = yPositions[3] = yPositions[0] - spinningCharacterCacheTexInfo->height;
 
         vtx = gGfxPool->spinningKeyboardCharacterVtx;
         for (i = 0; i < 4; i++) {
             x = Math_Round(xPositions[i]);
             y = Math_Round(yPositions[i]);
             if (i & 1) {
-                textureSCoordinates[i] = spinningCharacterCompTexInfo->width;
+                textureSCoordinates[i] = spinningCharacterCacheTexInfo->width;
             } else {
                 textureSCoordinates[i] = 0.0f;
             }
 
             if (i >= 2) {
-                textureTCoordinates[i] = spinningCharacterCompTexInfo->height;
+                textureTCoordinates[i] = spinningCharacterCacheTexInfo->height;
             } else {
                 textureTCoordinates[i] = 0.0f;
             }
@@ -883,7 +884,7 @@ void RecordsEntry_UpdateNameEntryKeyboard(void) {
             SET_VTX(vtx, x, y, 0, s, t, 0, 0, 0, 0);
             vtx++;
         }
-        temp_fv0 = (s16) keyboardCursorY - spinningCharacterCompTexInfo->height * 0.5f;
+        temp_fv0 = (s16) keyboardCursorY - spinningCharacterCacheTexInfo->height * 0.5f;
         spB8 = (s16) keyboardCursorX + 8.0f;
         vp = &gGfxPool->unk_2C2C8[1];
         vp->vp.vscale[0] = SCREEN_WIDTH * 4;
@@ -1018,7 +1019,7 @@ Gfx* RecordsEntry_DrawNameEntry(Gfx* gfx) {
                 if (gRecordNameEnteredLength != i) {
                     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
                 } else {
-                    gfx = func_8007F090(gfx, 255, 0, 0);
+                    gfx = TextureUtils_SetPulsingColor(gfx, 255, 0, 0);
                 }
                 keyboardCharacterLeft = (i * 20) + 132;
                 gfx = Font_DrawString(gfx, keyboardCharacterLeft, 214, "_", 1, FONT_SET_1, 1);
@@ -1050,9 +1051,9 @@ Gfx* RecordsEntry_DrawNameEntry(Gfx* gfx) {
             gSPMatrix(gfx++, &D_1000000.unk_2B2C8[3], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPVertex(gfx++, D_1000000.spinningKeyboardCharacterVtx, 4, 0);
 
-            gDPLoadTextureBlock(gfx++, func_800783AC(sSpinningKeyboardCharacterCompTexInfo->unk_04), G_IM_FMT_RGBA,
-                                G_IM_SIZ_16b, sSpinningKeyboardCharacterCompTexInfo->width,
-                                sSpinningKeyboardCharacterCompTexInfo->height, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+            gDPLoadTextureBlock(gfx++, TextureCache_GetCached(sSpinningKeyboardCharacterCacheTexInfo->segAddr),
+                                G_IM_FMT_RGBA, G_IM_SIZ_16b, sSpinningKeyboardCharacterCacheTexInfo->width,
+                                sSpinningKeyboardCharacterCacheTexInfo->height, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                                 G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
             gSP2Triangles(gfx++, 0, 3, 1, 0, 0, 2, 3, 0);

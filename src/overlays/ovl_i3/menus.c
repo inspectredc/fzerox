@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "menus.h"
 #include "hud.h"
 #include "minimap.h"
@@ -415,39 +416,44 @@ void Menus_Init(void) {
     sGpResultsEndMenuScissorBoxTimer = sGeneralRaceMenuScissorBoxTimer = 60;
     sSaveGhostMenuState = GHOST_SAVE_MENU_CLOSED;
     sPlayer1Lives = gPlayerLives[0];
-    sRetireTexture = func_80078104(aRetireTex, TEX_SIZE(aRetireTex, sizeof(u8)), 0, 0, 0);
-    sRetirePalette = func_80078104(aRetireTLUT, TEX_SIZE(aRetireTLUT, sizeof(u16)), 0, 0, 0);
-    func_80078104(aMenuTextTLUT, 0x200, 0, 0, 0);
-    func_80078104(aMenuRetryTex, TEX_SIZE(aMenuRetryTex, sizeof(u8)), 0, 1, 0);
-    func_80078104(aMenuSettingsTex, TEX_SIZE(aMenuSettingsTex, sizeof(u8)), 0, 1, 0);
-    func_80078104(aMenuQuitTex, TEX_SIZE(aMenuQuitTex, sizeof(u8)), 0, 1, 0);
-    func_80078104(aMenuContinueTex, TEX_SIZE(aMenuContinueTex, sizeof(u8)), 0, 1, 0);
+    sRetireTexture = TextureCache_LoadAndCache(aRetireTex, TEX_SIZE(aRetireTex, sizeof(u8)), false, false, false);
+    sRetirePalette = TextureCache_LoadAndCache(aRetireTLUT, TEX_SIZE(aRetireTLUT, sizeof(u16)), false, false, false);
+    TextureCache_LoadAndCache(aMenuTextTLUT, 0x200, false, false, false);
+    TextureCache_LoadAndCache(aMenuRetryTex, TEX_SIZE(aMenuRetryTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuSettingsTex, TEX_SIZE(aMenuSettingsTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuQuitTex, TEX_SIZE(aMenuQuitTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuContinueTex, TEX_SIZE(aMenuContinueTex, sizeof(u8)), false, true, false);
 
     if (gGameMode == GAMEMODE_DEATH_RACE) {
-        func_80078104(aMenuChangeMachineTex, TEX_SIZE(aMenuChangeMachineTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aBestTex, TEX_SIZE(aBestTex, sizeof(u16)), 0, 0, 0);
+        TextureCache_LoadAndCache(aMenuChangeMachineTex, TEX_SIZE(aMenuChangeMachineTex, sizeof(u8)), false, true,
+                                  false);
+        TextureCache_LoadAndCache(aBestTex, TEX_SIZE(aBestTex, sizeof(u16)), false, false, false);
     }
     if (gGameMode == GAMEMODE_TIME_ATTACK) {
-        func_80078104(aMenuChangeMachineTex, TEX_SIZE(aMenuChangeMachineTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuChangeCourseTex, TEX_SIZE(aMenuChangeCourseTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuGhostSaveTex, TEX_SIZE(aMenuGhostSaveTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuOverwriteData1Tex, TEX_SIZE(aMenuOverwriteData1Tex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuSavedTex, TEX_SIZE(aMenuSavedTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuSavingTex, TEX_SIZE(aMenuSavingTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuYesTex, TEX_SIZE(aMenuYesTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuNoTex, TEX_SIZE(aMenuNoTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuNewGhostTex, TEX_SIZE(aMenuNewGhostTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuSavedGhostTex, TEX_SIZE(aMenuSavedGhostTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuCannotSaveGhostTex, TEX_SIZE(aMenuCannotSaveGhostTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuLeftArrowTex, TEX_SIZE(aMenuLeftArrowTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuRightArrowTex, TEX_SIZE(aMenuRightArrowTex, sizeof(u8)), 0, 1, 0);
+        TextureCache_LoadAndCache(aMenuChangeMachineTex, TEX_SIZE(aMenuChangeMachineTex, sizeof(u8)), false, true,
+                                  false);
+        TextureCache_LoadAndCache(aMenuChangeCourseTex, TEX_SIZE(aMenuChangeCourseTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuGhostSaveTex, TEX_SIZE(aMenuGhostSaveTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuOverwriteData1Tex, TEX_SIZE(aMenuOverwriteData1Tex, sizeof(u8)), false, true,
+                                  false);
+        TextureCache_LoadAndCache(aMenuSavedTex, TEX_SIZE(aMenuSavedTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuSavingTex, TEX_SIZE(aMenuSavingTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuYesTex, TEX_SIZE(aMenuYesTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuNoTex, TEX_SIZE(aMenuNoTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuNewGhostTex, TEX_SIZE(aMenuNewGhostTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuSavedGhostTex, TEX_SIZE(aMenuSavedGhostTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuCannotSaveGhostTex, TEX_SIZE(aMenuCannotSaveGhostTex, sizeof(u8)), false, true,
+                                  false);
+        TextureCache_LoadAndCache(aMenuLeftArrowTex, TEX_SIZE(aMenuLeftArrowTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuRightArrowTex, TEX_SIZE(aMenuRightArrowTex, sizeof(u8)), false, true, false);
 #ifdef EXPANSION_KIT
-        func_80078104(aMenuToGamePakTex, TEX_SIZE(aMenuToGamePakTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuToDiskTex, TEX_SIZE(aMenuToDiskTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuOverwriteData2Tex, TEX_SIZE(aMenuOverwriteData2Tex, sizeof(u8)), 0, 1, 0);
+        TextureCache_LoadAndCache(aMenuToGamePakTex, TEX_SIZE(aMenuToGamePakTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuToDiskTex, TEX_SIZE(aMenuToDiskTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(aMenuOverwriteData2Tex, TEX_SIZE(aMenuOverwriteData2Tex, sizeof(u8)), false, true,
+                                  false);
 #endif
-        sLoserTexture = func_80078104(aLoserTex, TEX_SIZE(aLoserTex, sizeof(u8)), 0, 0, 0);
-        sLoserPalette = func_80078104(aLoserTLUT, TEX_SIZE(aLoserTLUT, sizeof(u16)), 0, 0, 0);
+        sLoserTexture = TextureCache_LoadAndCache(aLoserTex, TEX_SIZE(aLoserTex, sizeof(u8)), false, false, false);
+        sLoserPalette = TextureCache_LoadAndCache(aLoserTLUT, TEX_SIZE(aLoserTLUT, sizeof(u16)), false, false, false);
         Menus_GetFastestGhostInfo();
         if (gFastestGhostIndex >= 0) {
             sFastestGhostRacerRacer = gFastestGhostRacer->racer;
@@ -458,16 +464,18 @@ void Menus_Init(void) {
 
     if ((gGameMode == GAMEMODE_VS_2P) || (gGameMode == GAMEMODE_VS_3P) || (gGameMode == GAMEMODE_VS_4P) ||
         (gGameMode == GAMEMODE_TIME_ATTACK)) {
-        sWinnerTexture = func_80078104(aWinnerTex, TEX_SIZE(aWinnerTex, sizeof(u8)), 0, 0, 0);
-        sWinnerPalette = func_80078104(aWinnerTLUT, TEX_SIZE(aWinnerTLUT, sizeof(u16)), 0, 0, 0);
+        sWinnerTexture = TextureCache_LoadAndCache(aWinnerTex, TEX_SIZE(aWinnerTex, sizeof(u8)), false, false, false);
+        sWinnerPalette =
+            TextureCache_LoadAndCache(aWinnerTLUT, TEX_SIZE(aWinnerTLUT, sizeof(u16)), false, false, false);
     }
     if ((gGameMode == GAMEMODE_PRACTICE) || (gGameMode == GAMEMODE_VS_2P) || (gGameMode == GAMEMODE_VS_3P) ||
         (gGameMode == GAMEMODE_VS_4P)) {
-        func_80078104(aMenuChangeMachineTex, TEX_SIZE(aMenuChangeMachineTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(aMenuChangeCourseTex, TEX_SIZE(aMenuChangeCourseTex, sizeof(u8)), 0, 1, 0);
-        func_80078104(D_F25D858, TEX_SIZE(D_F25D858, sizeof(u16)), 0, 0, 0);
-        func_80078104(D_F25E060, TEX_SIZE(D_F25E060, sizeof(u16)), 0, 0, 0);
-        func_80078104(D_F25E868, TEX_SIZE(D_F25E868, sizeof(u16)), 0, 0, 0);
+        TextureCache_LoadAndCache(aMenuChangeMachineTex, TEX_SIZE(aMenuChangeMachineTex, sizeof(u8)), false, true,
+                                  false);
+        TextureCache_LoadAndCache(aMenuChangeCourseTex, TEX_SIZE(aMenuChangeCourseTex, sizeof(u8)), false, true, false);
+        TextureCache_LoadAndCache(D_F25D858, TEX_SIZE(D_F25D858, sizeof(u16)), false, false, false);
+        TextureCache_LoadAndCache(D_F25E060, TEX_SIZE(D_F25E060, sizeof(u16)), false, false, false);
+        TextureCache_LoadAndCache(D_F25E868, TEX_SIZE(D_F25E868, sizeof(u16)), false, false, false);
 
         for (j = 0; j < 3; j++) {
             sVsSlotResultIndexToPortraitResult[0][j] = VS_SLOT_PORTRAIT_MR_ZERO;
@@ -508,13 +516,13 @@ void Menus_Init(void) {
                 } else {
                     switch (sVsSlotResultIndexToPortraitResult[i][j]) {
                         case VS_SLOT_PORTRAIT_X:
-                            sVsSlotPortraits[i][j] = func_800783AC(D_F25D858);
+                            sVsSlotPortraits[i][j] = TextureCache_GetCached(D_F25D858);
                             break;
                         case VS_SLOT_PORTRAIT_SKULL:
-                            sVsSlotPortraits[i][j] = func_800783AC(D_F25E060);
+                            sVsSlotPortraits[i][j] = TextureCache_GetCached(D_F25E060);
                             break;
                         case VS_SLOT_PORTRAIT_MR_ZERO:
-                            sVsSlotPortraits[i][j] = func_800783AC(D_F25E868);
+                            sVsSlotPortraits[i][j] = TextureCache_GetCached(D_F25E868);
                             break;
                         default:
                             break;
@@ -923,7 +931,7 @@ Gfx* Menus_DrawRaceResultsTimes(Gfx* gfx, s32 playerIndex) {
         if (top < SCREEN_HEIGHT) {
             gDPPipeSync(gfx++);
             if ((lap + 1) == gBestTimedLap) {
-                gfx = func_8007F090(gfx, 255, 0, 0);
+                gfx = TextureUtils_SetPulsingColor(gfx, 255, 0, 0);
                 gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
             } else {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -955,7 +963,7 @@ Gfx* Menus_DrawRaceResultsTimes(Gfx* gfx, s32 playerIndex) {
     if (top < SCREEN_HEIGHT) {
         gDPPipeSync(gfx++);
         if (gCurrentTimeAttackRecordPosition != 0) {
-            gfx = func_8007F090(gfx, 255, 0, 0);
+            gfx = TextureUtils_SetPulsingColor(gfx, 255, 0, 0);
             gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -1960,8 +1968,9 @@ Gfx* Menus_DrawRaceMenuTexture(Gfx* gfx, s32 textureIndex, s32 left, s32 top) {
         return gfx;
     }
 
-    return func_8007E410(gfx, func_800783AC(sRaceMenuTextures[textureIndex]), NULL, G_IM_FMT_CI, 1, left, top,
-                         sRaceMenuDimensions[textureIndex * 2 + 0], sRaceMenuDimensions[textureIndex * 2 + 1], 2);
+    return TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(sRaceMenuTextures[textureIndex]), NULL,
+                                          G_IM_FMT_CI, 1, left, top, sRaceMenuDimensions[textureIndex * 2 + 0],
+                                          sRaceMenuDimensions[textureIndex * 2 + 1], INDEXED_DRAW_TINT_PRIM_COLOR);
 }
 
 s32 Menus_UpdateHighlightedOptionVertical(s32 playerIndex, s32 highlightedOption, s32 maxOptionValue) {
@@ -2209,7 +2218,7 @@ Gfx* Menus_DrawSaved(Gfx* gfx) {
 
     gfx = Menus_DrawBeveledBox(gfx, 90, 110, 160, 130, 0, 0, 0, 255);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_SAVED, 93, 112);
     gDPPipeSync(gfx++);
@@ -2231,7 +2240,7 @@ Gfx* Menus_DrawSaving(Gfx* gfx) {
 
     gfx = Menus_DrawBeveledBox(gfx, 90, 110, 160, 130, 0, 0, 0, 255);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_SAVING, 95, 112);
     gDPPipeSync(gfx++);
@@ -2310,7 +2319,7 @@ Gfx* Menus_DrawGhostSaveToDiskMenu(Gfx* gfx) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     gDPSetTextureFilter(gfx++, G_TF_POINT);
 
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
     gDPSetTextureLUT(gfx++, G_TT_RGBA16);
 
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_NEW_GHOST, 83, 45);
@@ -2393,7 +2402,7 @@ Gfx* Menus_DrawGhostSaveOptionsMenu(Gfx* gfx) {
                           105 - sSaveGhostMenuOptionsScissorBoxTimer);
             gfx = Menus_DrawBeveledBox(gfx, 70, 45, 150, 100, 0, 0, 0, 255);
             gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-            gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+            gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
 
             switch (ghostSaveFlags) {
                 case 0:
@@ -2536,7 +2545,7 @@ Gfx* Menus_DrawGhostSaveMenu(Gfx* gfx) {
     }
 
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 #ifdef VERSION_JP
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_NEW_GHOST, 83, 45);
@@ -2597,7 +2606,7 @@ Gfx* Menus_DrawCannotSaveGhost(Gfx* gfx) {
 
     gfx = Menus_DrawBeveledBox(gfx, 20, 56, 140, 86, 0, 0, 0, 180);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
     gfx = func_8007DB28(gfx, 0);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_CANNOT_SAVE_GHOST, 16, 54);
     gDPPipeSync(gfx++);
@@ -2628,7 +2637,7 @@ Gfx* Menus_DrawTimeAttackFinishMenu(Gfx* gfx) {
                   225 - sGeneralRaceMenuScissorBoxTimer);
     gfx = Menus_DrawBeveledBox(gfx, 210, 137, 300, 220, 0, 0, 0, 180);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
     gfx = Menus_SetOptionColor(gfx, sRaceMenuOptionIndex - TIME_ATTACK_RETRY);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 230, 140);
     if (!sCannotSaveGhost) {
@@ -2810,7 +2819,7 @@ Gfx* Menus_DrawGpResultsEndMenu(Gfx* gfx) {
                   225 - sGpResultsEndMenuScissorBoxTimer);
     gfx = Menus_DrawBeveledBox(gfx, 210, 137, 300, 220, 0, 0, 0, 180);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
     gfx = Menus_SetOptionColor(gfx, sGpResultsEndMenuOptionIndex);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 230, 140);
     gfx = Menus_SetOptionColor(gfx, sGpResultsEndMenuOptionIndex - 1);
@@ -2935,7 +2944,7 @@ Gfx* Menus_DrawRetiredEndMenu(Gfx* gfx) {
                   226 - sGeneralRaceMenuScissorBoxTimer);
     gfx = Menus_DrawBeveledBox(gfx, 210, 137, 300, 221, 0, 0, 200, 127);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
     gfx = Menus_SetOptionColor(gfx, sRaceMenuOptionIndex - 0);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 230, 140);
     gfx = Menus_SetOptionColor(gfx, sRaceMenuOptionIndex - 1);
@@ -3063,7 +3072,7 @@ Gfx* Menus_DrawDeathRaceEndMenu(Gfx* gfx) {
         gfx = Menus_DrawBeveledBox(gfx, 210, 137, 300, 205, 0, 0, 200, 127);
     }
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
     gfx = Menus_SetOptionColor(gfx, sRaceMenuOptionIndex - 0);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_RETRY, 230, 140);
     gfx = Menus_SetOptionColor(gfx, sRaceMenuOptionIndex - 1);
@@ -3167,7 +3176,7 @@ Gfx* Menus_DrawGeneralPause(Gfx* gfx) {
                   230 - sPauseMenuScissorBoxTimer, 197 - sPauseMenuScissorBoxTimer);
     gfx = Menus_DrawBeveledBox(gfx, 120, 61, 210, 177, 0, 0, 0, 220);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
 
     gfx = Menus_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GENERAL_CONTINUE);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_CONTINUE, 140, 80);
@@ -3319,7 +3328,7 @@ Gfx* Menus_DrawDeathRacePause(Gfx* gfx) {
                   230 - sPauseMenuScissorBoxTimer, 166 - sPauseMenuScissorBoxTimer);
     gfx = Menus_DrawBeveledBox(gfx, 120, 61, 210, 161, 0, 0, 0, 220);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
 
     gfx = Menus_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_DEATH_RACE_CONTINUE);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_CONTINUE, 140, 80);
@@ -3448,7 +3457,7 @@ Gfx* Menus_DrawGpRacePause(Gfx* gfx) {
                   220 - sPauseMenuScissorBoxTimer, 150 - sPauseMenuScissorBoxTimer);
     gfx = Menus_DrawBeveledBox(gfx, 120, 61, 200, 145, 0, 0, 0, 220);
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
 
     gfx = Menus_SetOptionColor(gfx, sPauseMenuOptionIndex - PAUSE_GP_CONTINUE);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_CONTINUE, 140, 80);
@@ -3649,7 +3658,7 @@ Gfx* Menus_DrawMaxSpeed(Gfx* gfx, s32 playerIndex) {
     gDPPipeSync(gfx++);
 
     if (gCurrentTimeAttackHasMaxSpeed) {
-        gfx = func_8007F090(gfx, 255, 0, 0);
+        gfx = TextureUtils_SetPulsingColor(gfx, 255, 0, 0);
         gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
     }
     gDPLoadTextureBlock(gfx++, aSpeedDigitsTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 12, 160, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -4361,14 +4370,14 @@ Gfx* Menus_DrawDeathRaceResults(Gfx* gfx) {
     gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     left = 213;
     top = 101;
-    gDPLoadTextureBlock(gfx++, func_800783AC(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
+    gDPLoadTextureBlock(gfx++, TextureCache_GetCached(aBestTex), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 12, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
     gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 16) << 2, (top + 12) << 2, 0, 0, 0, 1 << 10, 1 << 10);
     gSPDisplayList(gfx++, D_8014940);
 
     if (gCurrentTimeAttackRecordPosition == 1) {
-        gfx = func_8007F090(gfx, 255, 0, 0);
+        gfx = TextureUtils_SetPulsingColor(gfx, 255, 0, 0);
         gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
     } else {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -4903,7 +4912,7 @@ Gfx* Menus_DrawGpResultsScreen(Gfx* gfx, s32 playerIndex) {
                 if ((scrollTop > 20) && (scrollTop < 220)) {
                     gDPPipeSync(gfx++);
                     if (gRacersByPosition[i]->id == 0) {
-                        gfx = func_8007F090(gfx, 255, 0, 0);
+                        gfx = TextureUtils_SetPulsingColor(gfx, 255, 0, 0);
                         gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
                     } else {
                         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);

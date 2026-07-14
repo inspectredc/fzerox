@@ -254,6 +254,8 @@ Matrix_SetOrtho = 0x8006D2E0;
 Course_FeatureIsDecorational = 0x8006D3F0;
 Course_GadgetsDraw = 0x8006DAAC;
 
+TextureCache_GetCached = 0x800783AC;
+
 Course_SplineGetLengthInfo = 0x8009E108;
 Course_SplineGetTangent = 0x8009E538;
 Course_SplineGetPosition = 0x8009E6F0;

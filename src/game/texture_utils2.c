@@ -1,8 +1,9 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include ASSET_HEADER(course_track_gfx.h)
 
-Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr palette, s32 format, s32 unkTmemFlag, s32 left, s32 top,
-                   s32 width, s32 height, u16 unkDrawFlag) {
+Gfx* TextureUtils_DrawIndexedBlocks(Gfx* gfx, TexturePtr texture, TexturePtr palette, s32 format, s32 unkTmemFlag,
+                                    s32 left, s32 top, s32 width, s32 height, u16 drawFlags) {
     bool usedPrimitives;
     u8* texPtr;
     s32 numBlocks;
@@ -21,18 +22,18 @@ Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr palette, s32 format,
         //! @bug pixelSize uninitialised
     }
     blockHeight = (s32) (tmem / pixelSize) / blockWidth;
-    if (unkDrawFlag & 4) {
+    if (drawFlags & INDEXED_DRAW_SMALL_BLOCKS) {
         blockHeight = 2;
     }
     numBlocks = height / blockHeight;
 
     usedPrimitives = false;
-    if (unkDrawFlag & 1) {
+    if (drawFlags & INDEXED_DRAW_USE_TLUT) {
         gSPDisplayList(gfx++, D_8014940);
         usedPrimitives = true;
         gDPSetTextureLUT(gfx++, G_TT_RGBA16);
     }
-    if (unkDrawFlag & 2) {
+    if (drawFlags & INDEXED_DRAW_TINT_PRIM_COLOR) {
         if (!usedPrimitives) {
             gDPPipeSync(gfx++);
             usedPrimitives = true;
@@ -70,7 +71,7 @@ Gfx* func_8007E410(Gfx* gfx, TexturePtr texture, TexturePtr palette, s32 format,
     return gfx;
 }
 
-void func_8007ECCC(u16* pixel, s32 textureSize) {
+void Graphics_ConvertToInverseGreyscale(u16* pixel, s32 textureSize) {
     s32 i;
     u32 colorBlend;
     u32 red, green, blue, alpha;
@@ -89,39 +90,39 @@ void func_8007ECCC(u16* pixel, s32 textureSize) {
 
 #ifdef EXPANSION_KIT
 
-void func_8070EA38(u16* pixel, s32 arg1, s32 arg2) {
+void TextureUtils_Blur(u16* pixel, s32 count, s32 width) {
     s32 i;
-    u16 var_v0;
-    u16 temp_a0;
-    u16 temp_a2;
-    u16 temp_t0;
+    u16 prevPixel;
+    u16 currentPixel;
+    u16 nextPixel;
+    u16 belowPixel;
     u32 red, green, blue;
 
-    var_v0 = GPACK_RGBA5551(0, 0, 0, 1);
-    for (i = 0; i < arg1; i++, pixel++) {
-        temp_a0 = *pixel;
-        temp_a2 = *(pixel + 1);
-        temp_t0 = *(pixel + arg2);
+    prevPixel = GPACK_RGBA5551(0, 0, 0, 1);
+    for (i = 0; i < count; i++, pixel++) {
+        currentPixel = *pixel;
+        nextPixel = *(pixel + 1);
+        belowPixel = *(pixel + width);
 
-        red = (((var_v0 & 0xF800) >> 11)) + (((temp_a0 & 0xF800) >> 11)) + (((temp_a2 & 0xF800) >> 11)) +
-              (((temp_t0 & 0xF800) >> 11));
-        green = (((var_v0 & 0x7C0) >> 6)) + (((temp_a0 & 0x7C0) >> 6)) + (((temp_a2 & 0x7C0) >> 6)) +
-                (((temp_t0 & 0x7C0) >> 6));
-        blue = (((var_v0 & 0x3E) >> 1)) + (((temp_a0 & 0x3E) >> 1)) + (((temp_a2 & 0x3E) >> 1)) +
-               (((temp_t0 & 0x3E) >> 1));
+        red = (((prevPixel & 0xF800) >> 11)) + (((currentPixel & 0xF800) >> 11)) + (((nextPixel & 0xF800) >> 11)) +
+              (((belowPixel & 0xF800) >> 11));
+        green = (((prevPixel & 0x7C0) >> 6)) + (((currentPixel & 0x7C0) >> 6)) + (((nextPixel & 0x7C0) >> 6)) +
+                (((belowPixel & 0x7C0) >> 6));
+        blue = (((prevPixel & 0x3E) >> 1)) + (((currentPixel & 0x3E) >> 1)) + (((nextPixel & 0x3E) >> 1)) +
+               (((belowPixel & 0x3E) >> 1));
 
         // clang-format off
         red /= 4; green /= 4; blue /= 4;
         // clang-format on
 
-        var_v0 = temp_a0;
+        prevPixel = currentPixel;
 
         *pixel = (red << 11) | (green << 6) | (blue << 1) | 1;
     }
 }
 #endif
 
-s32 func_8007EF68(u16* palette, s32 paletteSize, u16 pixelColor) {
+s32 TextureUtils_FindPaletteColor(u16* palette, s32 paletteSize, u16 pixelColor) {
     s32 i;
     s32 index;
 
@@ -140,7 +141,7 @@ s32 func_8007EF68(u16* palette, s32 paletteSize, u16 pixelColor) {
     return index;
 }
 
-s32 func_8007EFBC(u16* pixel, u16* paletteStart, s32 pixelCount) {
+s32 TextureUtils_GeneratePalette(u16* pixel, u16* paletteStart, s32 pixelCount) {
     s32 i;
     s32 paletteIndex;
     u8* pixelOut = (u8*) pixel;
@@ -149,7 +150,7 @@ s32 func_8007EFBC(u16* pixel, u16* paletteStart, s32 pixelCount) {
 
     //! @bug only call to this function passes in textureSize over pixelCount
     for (i = 0; i < pixelCount; i++, pixel++) {
-        paletteIndex = func_8007EF68(paletteStart, paletteSize, *pixel);
+        paletteIndex = TextureUtils_FindPaletteColor(paletteStart, paletteSize, *pixel);
         if (paletteIndex == -1) {
             if (paletteSize >= 0x100) {
                 return -1;
@@ -170,25 +171,25 @@ s32 func_8007EFBC(u16* pixel, u16* paletteStart, s32 pixelCount) {
 
 extern u32 gGameFrameCount;
 
-Gfx* func_8007F090(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
-    u32 red;
-    u32 green;
-    u32 blue;
-    s32 temp_v0 = gGameFrameCount & 0x10;
-    s32 temp_t0 = gGameFrameCount & 0xF;
-    f32 temp_fv0 = temp_t0 / 15.0f;
+Gfx* TextureUtils_SetPulsingColor(Gfx* gfx, s32 red, s32 green, s32 blue) {
+    u32 pulseRed;
+    u32 pulseGreen;
+    u32 pulseBlue;
+    s32 fadingToWhite = gGameFrameCount & 0x10;
+    s32 phase = gGameFrameCount & 0xF;
+    f32 phaseScale = phase / 15.0f;
 
-    if (!temp_v0) {
-        red = (arg1 - 255) * temp_fv0 + 255.0f;
-        green = (arg2 - 255) * temp_fv0 + 255.0f;
-        blue = (arg3 - 255) * temp_fv0 + 255.0f;
+    if (!fadingToWhite) {
+        pulseRed = (red - 255) * phaseScale + 255.0f;
+        pulseGreen = (green - 255) * phaseScale + 255.0f;
+        pulseBlue = (blue - 255) * phaseScale + 255.0f;
     } else {
-        red = arg1 + (255 - arg1) * temp_fv0;
-        green = arg2 + (255 - arg2) * temp_fv0;
-        blue = arg3 + (255 - arg3) * temp_fv0;
+        pulseRed = red + (255 - red) * phaseScale;
+        pulseGreen = green + (255 - green) * phaseScale;
+        pulseBlue = blue + (255 - blue) * phaseScale;
     }
 
-    gDPSetPrimColor(gfx++, 0, 0, red, green, blue, 255);
+    gDPSetPrimColor(gfx++, 0, 0, pulseRed, pulseGreen, pulseBlue, 255);
 
     return gfx;
 }

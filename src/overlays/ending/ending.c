@@ -1,5 +1,6 @@
 #include "prevent_bss_reordering.h"
 #include "global.h"
+#include "fzx_cache.h"
 #include "ending.h"
 #include "fzx_game.h"
 #include "fzx_hud.h"
@@ -391,34 +392,48 @@ void EndingCutscene_Init(void) {
 #ifdef EXPANSION_KIT
     sHasBeatenEveryMasterCup = EndingCutscene_HasBeatenEveryMasterCup();
 #endif
-    func_80078104(aCongratulationsTex, TEX_SIZE(aCongratulationsTex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPosition0Tex, TEX_SIZE(aFinalResultPosition0Tex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPosition1Tex, TEX_SIZE(aFinalResultPosition1Tex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPosition2Tex, TEX_SIZE(aFinalResultPosition2Tex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPosition3Tex, TEX_SIZE(aFinalResultPosition3Tex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPosition4Tex, TEX_SIZE(aFinalResultPosition4Tex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPosition5Tex, TEX_SIZE(aFinalResultPosition5Tex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPosition6Tex, TEX_SIZE(aFinalResultPosition6Tex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPosition7Tex, TEX_SIZE(aFinalResultPosition7Tex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPosition8Tex, TEX_SIZE(aFinalResultPosition8Tex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPosition9Tex, TEX_SIZE(aFinalResultPosition9Tex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixSTTex, TEX_SIZE(aFinalResultPositionSuffixSTTex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixNDTex, TEX_SIZE(aFinalResultPositionSuffixNDTex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixRDTex, TEX_SIZE(aFinalResultPositionSuffixRDTex, sizeof(u16)), 0, 0, 0);
-    func_80078104(aFinalResultPositionSuffixTHTex, TEX_SIZE(aFinalResultPositionSuffixTHTex, sizeof(u16)), 0, 0, 0);
+    TextureCache_LoadAndCache(aCongratulationsTex, TEX_SIZE(aCongratulationsTex, sizeof(u16)), false, false, false);
+    TextureCache_LoadAndCache(aFinalResultPosition0Tex, TEX_SIZE(aFinalResultPosition0Tex, sizeof(u16)), false, false,
+                              false);
+    TextureCache_LoadAndCache(aFinalResultPosition1Tex, TEX_SIZE(aFinalResultPosition1Tex, sizeof(u16)), false, false,
+                              false);
+    TextureCache_LoadAndCache(aFinalResultPosition2Tex, TEX_SIZE(aFinalResultPosition2Tex, sizeof(u16)), false, false,
+                              false);
+    TextureCache_LoadAndCache(aFinalResultPosition3Tex, TEX_SIZE(aFinalResultPosition3Tex, sizeof(u16)), false, false,
+                              false);
+    TextureCache_LoadAndCache(aFinalResultPosition4Tex, TEX_SIZE(aFinalResultPosition4Tex, sizeof(u16)), false, false,
+                              false);
+    TextureCache_LoadAndCache(aFinalResultPosition5Tex, TEX_SIZE(aFinalResultPosition5Tex, sizeof(u16)), false, false,
+                              false);
+    TextureCache_LoadAndCache(aFinalResultPosition6Tex, TEX_SIZE(aFinalResultPosition6Tex, sizeof(u16)), false, false,
+                              false);
+    TextureCache_LoadAndCache(aFinalResultPosition7Tex, TEX_SIZE(aFinalResultPosition7Tex, sizeof(u16)), false, false,
+                              false);
+    TextureCache_LoadAndCache(aFinalResultPosition8Tex, TEX_SIZE(aFinalResultPosition8Tex, sizeof(u16)), false, false,
+                              false);
+    TextureCache_LoadAndCache(aFinalResultPosition9Tex, TEX_SIZE(aFinalResultPosition9Tex, sizeof(u16)), false, false,
+                              false);
+    TextureCache_LoadAndCache(aFinalResultPositionSuffixSTTex, TEX_SIZE(aFinalResultPositionSuffixSTTex, sizeof(u16)),
+                              false, false, false);
+    TextureCache_LoadAndCache(aFinalResultPositionSuffixNDTex, TEX_SIZE(aFinalResultPositionSuffixNDTex, sizeof(u16)),
+                              false, false, false);
+    TextureCache_LoadAndCache(aFinalResultPositionSuffixRDTex, TEX_SIZE(aFinalResultPositionSuffixRDTex, sizeof(u16)),
+                              false, false, false);
+    TextureCache_LoadAndCache(aFinalResultPositionSuffixTHTex, TEX_SIZE(aFinalResultPositionSuffixTHTex, sizeof(u16)),
+                              false, false, false);
 
     if (gEndingFlags & ENDING_SHOW_END_SCREEN) {
 
         endingTextures = sEndingTextures[EndingCutscene_GetEndScreenIndex(sCupDifficulty, playerRacer->character,
                                                                           playerRacer->customType)];
 
-        sEndingTex = func_80078104(endingTextures[0], 168 * 99 * sizeof(u16), 0, 1, 0);
+        sEndingTex = TextureCache_LoadAndCache(endingTextures[0], 168 * 99 * sizeof(u16), false, true, false);
 
         if (endingTextures[1] != NULL) {
 #ifdef VERSION_JP
-            sEndingTextTex = func_80078104(endingTextures[1], 196 * 16 * sizeof(u16), 0, 1, 0);
+            sEndingTextTex = TextureCache_LoadAndCache(endingTextures[1], 196 * 16 * sizeof(u16), false, true, false);
 #else
-            sEndingTextTex = func_80078104(endingTextures[1], 196 * 32 * sizeof(u16), 0, 1, 0);
+            sEndingTextTex = TextureCache_LoadAndCache(endingTextures[1], 196 * 32 * sizeof(u16), false, true, false);
 #endif
         } else {
             sEndingTextTex = NULL;
@@ -703,24 +718,27 @@ Gfx* EndingCutscene_DrawScrollingResults(Gfx* gfx) {
                     gDPPipeSync(gfx++);
                     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sCongratulationsEndingTextAlpha);
 
-                    gfx = func_8007B14C(gfx, func_800783AC(aCongratulationsTex), cutsceneResults->left, textureTop, 264,
-                                        31, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+                    gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aCongratulationsTex), cutsceneResults->left,
+                                            textureTop, 264, 31, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                            TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
                 }
                 break;
             case ENDING_CS_RESULTS_END_SCREEN:
                 gDPPipeSync(gfx++);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sCongratulationsEndingTextAlpha);
 
-                gfx = func_8007B14C(gfx, sEndingTex, cutsceneResults->left, textureTop, 168, 99, G_IM_FMT_RGBA,
-                                    G_IM_SIZ_16b, 1, 1, 0, 0);
+                gfx = TextureUtils_Draw(gfx, sEndingTex, cutsceneResults->left, textureTop, 168, 99, G_IM_FMT_RGBA,
+                                        G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 
                 if (sEndingTextTex != NULL) {
 #ifdef VERSION_JP
-                    gfx = func_8007B14C(gfx, sEndingTextTex, cutsceneResults->left + -14.0f, textureTop + 99.0f + 10.0f,
-                                        196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+                    gfx = TextureUtils_Draw(gfx, sEndingTextTex, cutsceneResults->left + -14.0f,
+                                            textureTop + 99.0f + 10.0f, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                            TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #else
-                    gfx = func_8007B14C(gfx, sEndingTextTex, cutsceneResults->left + -14.0f, textureTop + 99.0f + 10.0f,
-                                        196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+                    gfx = TextureUtils_Draw(gfx, sEndingTextTex, cutsceneResults->left + -14.0f,
+                                            textureTop + 99.0f + 10.0f, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                            TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #endif
                 }
                 break;
@@ -841,13 +859,14 @@ Gfx* EndingCutscene_DrawFinalResultsPosition(Gfx* gfx, s32 xPos, s32 yPos, s32 p
             xOffset = 8;
             width = 8;
         }
-        gfx = func_8007B14C(gfx, func_800783AC(sFinalResultPositionDigitTexs[digit]), xPos + xOffset, yPos, width, 16,
-                            G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0, 0, 0);
+        gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(sFinalResultPositionDigitTexs[digit]), xPos + xOffset, yPos,
+                                width, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, false, false,
+                                false);
         xPos += 16;
     }
 
-    return func_8007B14C(gfx, func_800783AC(sFinalResultsPositionSuffixTexs[positionSuffix]), xPos, yPos, 16, 16,
-                         G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0, 0, 0);
+    return TextureUtils_Draw(gfx, TextureCache_GetCached(sFinalResultsPositionSuffixTexs[positionSuffix]), xPos, yPos,
+                             16, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, false, false, false);
 }
 
 Gfx* EndingCutscene_DrawTotalRanking(Gfx* gfx, EndingCutsceneResults* cutsceneResults, f32 baseYPos) {
@@ -994,7 +1013,7 @@ Gfx* EndingCutscene_DrawThanksForPlayingWindow(Gfx* gfx) {
 
     sThanksForPlayingBackgroundAlpha = (sThanksForPlayingFade * 255) / 120;
 
-    gfx = func_8007A440(gfx, 12, 8, 308, 232, 0, 0, 0, sThanksForPlayingBackgroundAlpha);
+    gfx = TextureUtils_DrawRectangleClipped(gfx, 12, 8, 308, 232, 0, 0, 0, sThanksForPlayingBackgroundAlpha);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sThanksForPlayingBackgroundAlpha);
 
@@ -1041,15 +1060,19 @@ Gfx* EndingCutscene_DrawEndScreen(Gfx* gfx) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sEndScreenAlpha);
 
 #ifdef VERSION_JP
-    gfx = func_8007B14C(gfx, sEndingTex, 76, 70, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+    gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 70, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                            TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #else
-    gfx = func_8007B14C(gfx, sEndingTex, 76, 62, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+    gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 62, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                            TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #endif
     if (sEndingTextTex != NULL) {
 #ifdef VERSION_JP
-        gfx = func_8007B14C(gfx, sEndingTextTex, 62, 179, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+        gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 179, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #else
-        gfx = func_8007B14C(gfx, sEndingTextTex, 62, 171, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1, 0, 0);
+        gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 171, 196, 32, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                                TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #endif
     }
     return gfx;

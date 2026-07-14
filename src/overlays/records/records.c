@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "records.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
@@ -275,7 +276,7 @@ void Records_InitData(void) {
     }
     sRecordsState = RECORDS_STATE_VIEW_RECORDS;
     sRecordsStopStateUpdate = false;
-    func_80078104(aMenuTextTLUT, TEX_SIZE(aMenuTextTLUT, sizeof(u16)), 0, 0, false);
+    TextureCache_LoadAndCache(aMenuTextTLUT, TEX_SIZE(aMenuTextTLUT, sizeof(u16)), false, false, false);
 
     recordsOption = sRecordsMenuInfo;
     for (i = 0; i < ARRAY_COUNT(sRecordsMenuInfo); i++, recordsOption++) {
@@ -284,19 +285,22 @@ void Records_InitData(void) {
             continue;
         }
 #endif
-        func_80078104(recordsOption->textureInfo.texture,
-                      recordsOption->textureInfo.width * recordsOption->textureInfo.height * sizeof(u8), 0, 1, false);
+        TextureCache_LoadAndCache(recordsOption->textureInfo.texture,
+                                  recordsOption->textureInfo.width * recordsOption->textureInfo.height * sizeof(u8),
+                                  false, true, false);
     }
-    func_80078104(aMenuEraseCourseSavedData1Tex, TEX_SIZE(aMenuEraseCourseSavedData1Tex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuEraseCourseSavedData2Tex, TEX_SIZE(aMenuEraseCourseSavedData2Tex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuLeftArrowTex, TEX_SIZE(aMenuLeftArrowTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuRightArrowTex, TEX_SIZE(aMenuRightArrowTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuNoTex, TEX_SIZE(aMenuNoTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuYesTex, TEX_SIZE(aMenuYesTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aHasGhostMarkerTex, TEX_SIZE_4B(aHasGhostMarkerTex), 0, 0, false);
+    TextureCache_LoadAndCache(aMenuEraseCourseSavedData1Tex, TEX_SIZE(aMenuEraseCourseSavedData1Tex, sizeof(u8)), false,
+                              true, false);
+    TextureCache_LoadAndCache(aMenuEraseCourseSavedData2Tex, TEX_SIZE(aMenuEraseCourseSavedData2Tex, sizeof(u8)), false,
+                              true, false);
+    TextureCache_LoadAndCache(aMenuLeftArrowTex, TEX_SIZE(aMenuLeftArrowTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuRightArrowTex, TEX_SIZE(aMenuRightArrowTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuNoTex, TEX_SIZE(aMenuNoTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuYesTex, TEX_SIZE(aMenuYesTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aHasGhostMarkerTex, TEX_SIZE_4B(aHasGhostMarkerTex), false, false, false);
 #ifdef EXPANSION_KIT
-    func_80078104(aMenuToGamePakTex, TEX_SIZE(aMenuToGamePakTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuToDiskTex, TEX_SIZE(aMenuToDiskTex, sizeof(u8)), 0, 1, false);
+    TextureCache_LoadAndCache(aMenuToGamePakTex, TEX_SIZE(aMenuToGamePakTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuToDiskTex, TEX_SIZE(aMenuToDiskTex, sizeof(u8)), false, true, false);
 #endif
     RecordsEntry_Init();
     BorderedBox_CleanWidget(&sRecordsMenuBox);
@@ -946,7 +950,7 @@ Gfx* Records_DrawGhostMarker(Gfx* gfx) {
     gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gfx++, sGhostMarkerRenderInfo->vtx, 4, 0);
 
-    gDPLoadTextureBlock_4b(gfx++, func_800783AC(aHasGhostMarkerTex), G_IM_FMT_I, TEX_WIDTH(aHasGhostMarkerTex),
+    gDPLoadTextureBlock_4b(gfx++, TextureCache_GetCached(aHasGhostMarkerTex), G_IM_FMT_I, TEX_WIDTH(aHasGhostMarkerTex),
                            TEX_HEIGHT(aHasGhostMarkerTex), 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP,
                            G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
@@ -982,7 +986,7 @@ Gfx* Records_MenuDraw(Gfx* gfx, s32 left, s32 top) {
         textureInfo = &recordsOption->textureInfo;
 #ifndef EXPANSION_KIT
         if (i == 0) {
-            tlut = func_800783AC(aMenuTextTLUT);
+            tlut = TextureCache_GetCached(aMenuTextTLUT);
         } else {
             tlut = NULL;
         }
@@ -991,8 +995,8 @@ Gfx* Records_MenuDraw(Gfx* gfx, s32 left, s32 top) {
         boxCenteringOffset = ((104 - textureInfo->width) / 2) - 20;
 #ifdef EXPANSION_KIT
         if (recordsOption->tlut == NULL) {
-            texture = func_800783AC(textureInfo->texture);
-            tlut = func_800783AC(aMenuTextTLUT);
+            texture = TextureCache_GetCached(textureInfo->texture);
+            tlut = TextureCache_GetCached(aMenuTextTLUT);
         } else {
             texture = textureInfo->texture;
             tlut = recordsOption->tlut;
@@ -1000,12 +1004,13 @@ Gfx* Records_MenuDraw(Gfx* gfx, s32 left, s32 top) {
 #endif
 
 #ifndef EXPANSION_KIT
-        gfx = func_8007E410(gfx, func_800783AC(textureInfo->texture), tlut, G_IM_FMT_CI, 1,
-                            left + boxCenteringOffset + 20, top + 10 + i * 20, textureInfo->width, textureInfo->height,
-                            3);
+        gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture), tlut, G_IM_FMT_CI, 1,
+                                             left + boxCenteringOffset + 20, top + 10 + i * 20, textureInfo->width,
+                                             textureInfo->height, INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 #else
-        gfx = func_8007E410(gfx, texture, tlut, G_IM_FMT_CI, 1, left + boxCenteringOffset + 20, top + 10 + i * 20,
-                            textureInfo->width, textureInfo->height, 3);
+        gfx = TextureUtils_DrawIndexedBlocks(gfx, texture, tlut, G_IM_FMT_CI, 1, left + boxCenteringOffset + 20,
+                                             top + 10 + i * 20, textureInfo->width, textureInfo->height,
+                                             INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 #endif
     }
 
@@ -1023,24 +1028,31 @@ Gfx* Records_DrawClearConfirm(Gfx* gfx, s32 left, s32 top) {
     textureInfo = &sRecordsClearTextureInfos[sRecordsClearType];
 
 #ifdef VERSION_JP
-    gfx = func_8007E410(gfx, func_800783AC(textureInfo->texture), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1,
-                        left + 12, top + 10, textureInfo->width, textureInfo->height, 3);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture),
+                                         TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1, left + 12, top + 10,
+                                         textureInfo->width, textureInfo->height,
+                                         INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 #else
     boxCenteringOffset = (124 - textureInfo->width) / 2;
 
-    gfx = func_8007E410(gfx, func_800783AC(textureInfo->texture), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1,
-                        left + boxCenteringOffset + 12, top + 10, textureInfo->width, textureInfo->height, 3);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture),
+                                         TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1,
+                                         left + boxCenteringOffset + 12, top + 10, textureInfo->width,
+                                         textureInfo->height, INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 #endif
 
     gDPPipeSync(gfx++);
     gfx = func_8007DB28(gfx, 0);
-    gfx = func_8007E410(gfx, func_800783AC(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1, left + 24, top + 50, 16, 16, 0);
-    gfx = func_8007E410(gfx, func_800783AC(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1, left + 99, top + 50, 16, 16, 0);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1,
+                                         left + 24, top + 50, 16, 16, 0);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1,
+                                         left + 99, top + 50, 16, 16, 0);
 
     textureInfo = &sRecordsYesNoTextureInfos[sRecordsYesNoIndex];
     boxCenteringOffset = (59 - textureInfo->width) / 2;
-    return func_8007E410(gfx, func_800783AC(textureInfo->texture), NULL, G_IM_FMT_CI, 1, left + boxCenteringOffset + 42,
-                         top + 50, textureInfo->width, textureInfo->height, 0);
+    return TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture), NULL, G_IM_FMT_CI, 1,
+                                          left + boxCenteringOffset + 42, top + 50, textureInfo->width,
+                                          textureInfo->height, 0);
 }
 
 #ifdef EXPANSION_KIT
@@ -1129,8 +1141,9 @@ Gfx* Records_DrawGhostCopyMenu(Gfx* gfx, s32 left, s32 top) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_8007E410(gfx, aRecordsWhichGhostToCopyTex, aRecordsWhichGhostToCopyPalette, G_IM_FMT_CI, 1, left + 20,
-                        top + 10, 128, 16, 3);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, aRecordsWhichGhostToCopyTex, aRecordsWhichGhostToCopyPalette, G_IM_FMT_CI,
+                                         1, left + 20, top + 10, 128, 16,
+                                         INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 
     for (i = 0; i < 4; i++) {
         ghostTypeLeft = left + 10;
@@ -1152,8 +1165,9 @@ Gfx* Records_DrawGhostCopyMenu(Gfx* gfx, s32 left, s32 top) {
         } else {
             gfx = func_8007DB28(gfx, 0);
         }
-        gfx = func_8007E410(gfx, textureInfo->texture, textureInfo->tlut, G_IM_FMT_CI, 1, ghostTypeLeft, ghostTypeTop,
-                            textureInfo->width, textureInfo->height, 2);
+        gfx = TextureUtils_DrawIndexedBlocks(gfx, textureInfo->texture, textureInfo->tlut, G_IM_FMT_CI, 1,
+                                             ghostTypeLeft, ghostTypeTop, textureInfo->width, textureInfo->height,
+                                             INDEXED_DRAW_TINT_PRIM_COLOR);
     }
 
     gSPDisplayList(gfx++, D_8014940);
@@ -1256,8 +1270,9 @@ Gfx* Records_DrawCopyWhereMenu(Gfx* gfx, s32 left, s32 top) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_8007E410(gfx, aRecordsWhereToCopyTex, aRecordsWhereToCopyPalette, G_IM_FMT_CI, 1, left + 10, top + 10,
-                        128, 16, 3);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, aRecordsWhereToCopyTex, aRecordsWhereToCopyPalette, G_IM_FMT_CI, 1,
+                                         left + 10, top + 10, 128, 16,
+                                         INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 
     for (i = 0; i < 2; i++) {
         copyLocationLeft = left + 20;
@@ -1268,7 +1283,7 @@ Gfx* Records_DrawCopyWhereMenu(Gfx* gfx, s32 left, s32 top) {
         if (i != RECORDS_COPY_TO_GAME_PAK) {
             tlut = NULL;
         } else {
-            tlut = func_800783AC(aMenuTextTLUT);
+            tlut = TextureCache_GetCached(aMenuTextTLUT);
         }
         if (i != sRecordsCopyWhereMenuIndex) {
             if (i == RECORDS_COPY_TO_GAME_PAK) {
@@ -1284,8 +1299,9 @@ Gfx* Records_DrawCopyWhereMenu(Gfx* gfx, s32 left, s32 top) {
         } else {
             gfx = func_8007DB28(gfx, 0);
         }
-        gfx = func_8007E410(gfx, func_800783AC(textureInfo->texture), tlut, G_IM_FMT_CI, 1, copyLocationLeft,
-                            copyLocationTop, textureInfo->width, textureInfo->height, 2);
+        gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture), tlut, G_IM_FMT_CI, 1,
+                                             copyLocationLeft, copyLocationTop, textureInfo->width, textureInfo->height,
+                                             INDEXED_DRAW_TINT_PRIM_COLOR);
     }
     return gfx;
 }
@@ -1330,7 +1346,7 @@ Gfx* Records_DrawCopyToDiskMenu(Gfx* gfx, s32 left, s32 top) {
     s32 i;
     TexturePaletteInfo* textureInfo;
     s32 ghostIndex;
-    s32 var_s4;
+    s32 drawFlags;
     bool timeTexturesLoaded;
 
     for (i = 1, textureInfo = &sRecordsGhostTypeTextureInfos[i]; i < 4; i++, textureInfo++) {
@@ -1338,9 +1354,9 @@ Gfx* Records_DrawCopyToDiskMenu(Gfx* gfx, s32 left, s32 top) {
         gDPPipeSync(gfx++);
 
         if (i != RECORDS_GHOST_DISK_1) {
-            var_s4 = 2;
+            drawFlags = INDEXED_DRAW_TINT_PRIM_COLOR;
         } else {
-            var_s4 = 3;
+            drawFlags = INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR;
         }
         if (i != sRecordsCopyToGhostTypeIndex) {
             if (i == RECORDS_GHOST_CASSETTE) {
@@ -1356,8 +1372,8 @@ Gfx* Records_DrawCopyToDiskMenu(Gfx* gfx, s32 left, s32 top) {
         } else {
             gfx = func_8007DB28(gfx, 0);
         }
-        gfx = func_8007E410(gfx, textureInfo->texture, textureInfo->tlut, 2, 1, left + 10, top - 10 + i * 20,
-                            textureInfo->width, textureInfo->height, var_s4);
+        gfx = TextureUtils_DrawIndexedBlocks(gfx, textureInfo->texture, textureInfo->tlut, 2, 1, left + 10,
+                                             top - 10 + i * 20, textureInfo->width, textureInfo->height, drawFlags);
     }
 
     gSPDisplayList(gfx++, D_8014940);
@@ -1514,7 +1530,8 @@ Gfx* Records_DrawCopyingInfo(Gfx* gfx, s32 left, s32 top) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    return func_8007E410(gfx, textureInfo->texture, textureInfo->tlut, G_IM_FMT_CI, 1, left + 10, top + 10,
-                         textureInfo->width, textureInfo->height, 3);
+    return TextureUtils_DrawIndexedBlocks(gfx, textureInfo->texture, textureInfo->tlut, G_IM_FMT_CI, 1, left + 10,
+                                          top + 10, textureInfo->width, textureInfo->height,
+                                          INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
 }
 #endif

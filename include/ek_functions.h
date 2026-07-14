@@ -34,7 +34,7 @@ void func_8070DAD4(s32 bgm);
 
 void func_8070F8A4(s32 error, s32 errorType);
 
-u8* func_i2_800AE578(unk_80077D50*, bool);
+u8* TextureCache_LoadCacheTexInfoListEK(CacheTexInfo*, bool);
 
 void func_i2_800B0FAC(CourseSegment* segment, Mtx3F* basis);
 s32 func_i2_800B39B4(CourseInfo* courseInfo);
