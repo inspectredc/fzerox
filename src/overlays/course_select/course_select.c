@@ -5,6 +5,7 @@
 #include "fzx_camera.h"
 #include "fzx_font.h"
 #include "fzx_save.h"
+#include "fzx_cache.h"
 #include "src/overlays/ovl_i2/transition.h"
 #include "course_select.h"
 #include ASSET_HEADER(common_assets_compressed.h)
@@ -36,17 +37,18 @@ UNUSED s32 D_i5_801190E8 = 60;
 UNUSED s32 D_i5_801190EC = 40;
 UNUSED s32 D_i5_801190F0 = 70;
 
-CacheTexInfo sCupSelectJackCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectJackTex);
-CacheTexInfo sCupSelectQueenCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectQueenTex);
-CacheTexInfo sCupSelectKingCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectKingTex);
-CacheTexInfo sCupSelectJokerCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectJokerTex);
-CacheTexInfo sCupSelectXCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectXTex);
-CacheTexInfo sCupSelectEditCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectEditTex);
+CacheTexInfo sCupSelectJackCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCupSelectJackTex);
+CacheTexInfo sCupSelectQueenCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCupSelectQueenTex);
+CacheTexInfo sCupSelectKingCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCupSelectKingTex);
+CacheTexInfo sCupSelectJokerCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCupSelectJokerTex);
+CacheTexInfo sCupSelectXCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCupSelectXTex);
+CacheTexInfo sCupSelectEditCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCupSelectEditTex);
 #ifdef EXPANSION_KIT
-CacheTexInfo sCupSelectDD1CacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectDD1Tex);
-CacheTexInfo sCupSelectDD2CacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectDD2Tex);
+CacheTexInfo sCupSelectDD1CacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCupSelectDD1Tex);
+CacheTexInfo sCupSelectDD2CacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCupSelectDD2Tex);
 #endif
-CacheTexInfo sCupSelectQuestionMarkCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCupSelectQuestionMarkTex);
+CacheTexInfo sCupSelectQuestionMarkCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCupSelectQuestionMarkTex);
 
 CacheTexInfo* sCupSelectCacheTexInfos[] = {
     sCupSelectJackCacheTexInfo,         sCupSelectQueenCacheTexInfo, sCupSelectKingCacheTexInfo,
@@ -57,15 +59,18 @@ CacheTexInfo* sCupSelectCacheTexInfos[] = {
     sCupSelectQuestionMarkCacheTexInfo,
 };
 
-CacheTexInfo sSelectCourseCacheTexInfo[] = COMP_TEX_INFO(4, aSelectCourseTex, 0);
-CacheTexInfo sRecordsCacheTexInfo[] = COMP_TEX_INFO(4, aRecordsTex, 0);
-static CacheTexInfo sOKCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aOKTex);
-CacheTexInfo sYellowArrowCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aYellowArrowTex);
-CacheTexInfo sOptionsFalconHelmetCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aOptionsFalconHelmetTex);
+CacheTexInfo sSelectCourseCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aSelectCourseTex, 0);
+CacheTexInfo sRecordsCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aRecordsTex, 0);
+static CacheTexInfo sOKCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aOKTex);
+CacheTexInfo sYellowArrowCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aYellowArrowTex);
+CacheTexInfo sOptionsFalconHelmetCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aOptionsFalconHelmetTex);
 
-static CacheTexInfo sTitleBackgroundMainCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundMainTex);
-static CacheTexInfo sTitleBackgroundComicCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundComicTex);
-static CacheTexInfo sTitleBackgroundFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundFalconTex);
+static CacheTexInfo sTitleBackgroundMainCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aTitleBackgroundMainTex);
+static CacheTexInfo sTitleBackgroundComicCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aTitleBackgroundComicTex);
+static CacheTexInfo sTitleBackgroundFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aTitleBackgroundFalconTex);
 
 static CacheTexInfo* sTitleBackgroundCacheTexInfos[] = {
     sTitleBackgroundMainCacheTexInfo,
@@ -73,10 +78,10 @@ static CacheTexInfo* sTitleBackgroundCacheTexInfos[] = {
     sTitleBackgroundFalconCacheTexInfo,
 };
 
-CacheTexInfo sCupCleared1CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aCupCleared1Tex);
-CacheTexInfo sCupCleared2CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aCupCleared2Tex);
-CacheTexInfo sCupCleared3CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aCupCleared3Tex);
-CacheTexInfo sCupCleared4CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aCupCleared4Tex);
+CacheTexInfo sCupCleared1CacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aCupCleared1Tex);
+CacheTexInfo sCupCleared2CacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aCupCleared2Tex);
+CacheTexInfo sCupCleared3CacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aCupCleared3Tex);
+CacheTexInfo sCupCleared4CacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aCupCleared4Tex);
 
 CacheTexInfo* sCupClearedDifficultyCacheTexInfos[] = {
     sCupCleared1CacheTexInfo,
@@ -85,14 +90,14 @@ CacheTexInfo* sCupClearedDifficultyCacheTexInfos[] = {
     sCupCleared4CacheTexInfo,
 };
 
-CacheTexInfo sHasGhostMarkerCacheTexInfo[] = COMP_TEX_INFO(4, aHasGhostMarkerTex, 0);
-CacheTexInfo sStaffGhostBeatenCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aStaffGhostBeatenTex);
+CacheTexInfo sHasGhostMarkerCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aHasGhostMarkerTex, 0);
+CacheTexInfo sStaffGhostBeatenCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aStaffGhostBeatenTex);
 
-CacheTexInfo sMenuWithGhostCacheTexInfo[] = COMP_TEX_INFO(4, aMenuWithGhostTex, 0);
-CacheTexInfo sMenuWithoutGhostCacheTexInfo[] = COMP_TEX_INFO(4, aMenuWithoutGhostTex, 0);
-CacheTexInfo sMenuStaffGhostCacheTexInfo[] = COMP_TEX_INFO(4, aMenuStaffGhostTex, 0);
-CacheTexInfo sMenuCelebrityGhostCacheTexInfo[] = COMP_TEX_INFO(4, aMenuCelebrityGhostTex, 0);
-CacheTexInfo sMenuChampGhostCacheTexInfo[] = COMP_TEX_INFO(4, aMenuChampGhostTex, 0);
+CacheTexInfo sMenuWithGhostCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aMenuWithGhostTex, 0);
+CacheTexInfo sMenuWithoutGhostCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aMenuWithoutGhostTex, 0);
+CacheTexInfo sMenuStaffGhostCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aMenuStaffGhostTex, 0);
+CacheTexInfo sMenuCelebrityGhostCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aMenuCelebrityGhostTex, 0);
+CacheTexInfo sMenuChampGhostCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aMenuChampGhostTex, 0);
 
 CacheTexInfo* sTimeAttackGhostOptionCacheTexInfos[] = {
     sMenuWithGhostCacheTexInfo,      sMenuWithoutGhostCacheTexInfo, sMenuStaffGhostCacheTexInfo,

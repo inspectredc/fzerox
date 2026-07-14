@@ -2,6 +2,7 @@
 #include "fzx_game.h"
 #include "fzx_object.h"
 #include "fzx_course.h"
+#include "fzx_cache.h"
 #include "ovl_i4.h"
 #include ASSET_HEADER(common_assets_compressed.h)
 
@@ -13,9 +14,12 @@ UNUSED s32 D_i4_80076690 = 0;
 #include ASSET_SOURCE_EK(overlays/ovl_i4/title/title.c)
 #endif
 
-static CacheTexInfo sTitleBackgroundMainCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundMainTex);
-static CacheTexInfo sTitleBackgroundComicCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundComicTex);
-static CacheTexInfo sTitleBackgroundFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundFalconTex);
+static CacheTexInfo sTitleBackgroundMainCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aTitleBackgroundMainTex);
+static CacheTexInfo sTitleBackgroundComicCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aTitleBackgroundComicTex);
+static CacheTexInfo sTitleBackgroundFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aTitleBackgroundFalconTex);
 
 static CacheTexInfo* sTitleBackgroundCacheTexInfos[] = {
     sTitleBackgroundMainCacheTexInfo,
@@ -23,11 +27,12 @@ static CacheTexInfo* sTitleBackgroundCacheTexInfos[] = {
     sTitleBackgroundFalconCacheTexInfo,
 };
 
-CacheTexInfo sTitleLogoCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aTitleLogoTex);
-CacheTexInfo sTitlePushStartCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aTitlePushStartTex);
-CacheTexInfo sTitleNoControllerCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aTitleNoControllerTex);
-CacheTexInfo sTitleExpansionPakWarningCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aTitleExpansionPakWarningTex);
-CacheTexInfo sTitleDiskWarningCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aTitleDiskWarningTex);
+CacheTexInfo sTitleLogoCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aTitleLogoTex);
+CacheTexInfo sTitlePushStartCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aTitlePushStartTex);
+CacheTexInfo sTitleNoControllerCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_I4, aTitleNoControllerTex);
+CacheTexInfo sTitleExpansionPakWarningCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_I4, aTitleExpansionPakWarningTex);
+CacheTexInfo sTitleDiskWarningCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_I4, aTitleDiskWarningTex);
 
 CacheTexInfo* sTitleWarningCacheTexInfos[] = {
     sTitleNoControllerCacheTexInfo,
@@ -36,14 +41,14 @@ CacheTexInfo* sTitleWarningCacheTexInfos[] = {
 };
 
 #ifndef EXPANSION_KIT
-CacheTexInfo sCopyrightCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCopyrightTex);
+CacheTexInfo sCopyrightCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCopyrightTex);
 #else
-CacheTexInfo sCopyrightCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCopyrightDDTex);
+CacheTexInfo sCopyrightCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aCopyrightDDTex);
 #endif
 
 #ifdef EXPANSION_KIT
 //! @bug Compressed size listed does not match the actual compressed texture size
-CacheTexInfo sN64DDLogoCacheTexInfo[] = COMP_TEX_INFO_PAD(17, aN64DDLogoTex, 0x2E7);
+CacheTexInfo sN64DDLogoCacheTexInfo[] = CACHE_TEX_INFO_PAD(TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16), aN64DDLogoTex, 0x2E7);
 #endif
 
 UNUSED s32 D_i4_8011D628[] = { 85, 21, 120, 150 };

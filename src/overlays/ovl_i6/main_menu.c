@@ -3,6 +3,7 @@
 #include "fzx_object.h"
 #include "fzx_course.h"
 #include "fzx_font.h"
+#include "fzx_cache.h"
 #include "src/overlays/ovl_i2/transition.h"
 #include "ovl_i6.h"
 #include ASSET_HEADER(common_assets_compressed.h)
@@ -28,14 +29,15 @@ s32 D_i6_8011DC6C = 180;
     MENU OPTIONS
  */
 
-CacheTexInfo sMenuSignGpRaceCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignGpRaceTex);
-CacheTexInfo sMenuSignTimeAttackCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignTimeAttackTex);
-CacheTexInfo sMenuSignVsBattleCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignVsBattleTex);
-CacheTexInfo sMenuSignPracticeCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignPracticeTex);
-CacheTexInfo sMenuSignDeathRaceCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignDeathRaceTex);
-CacheTexInfo sMenuSignOptionsCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignOptionsTex);
-CacheTexInfo sMenuSignCourseEditCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignCourseEditTex);
-CacheTexInfo sMenuSignCreateMachineCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMenuSignCreateMachineTex);
+CacheTexInfo sMenuSignGpRaceCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMenuSignGpRaceTex);
+CacheTexInfo sMenuSignTimeAttackCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMenuSignTimeAttackTex);
+CacheTexInfo sMenuSignVsBattleCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMenuSignVsBattleTex);
+CacheTexInfo sMenuSignPracticeCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMenuSignPracticeTex);
+CacheTexInfo sMenuSignDeathRaceCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMenuSignDeathRaceTex);
+CacheTexInfo sMenuSignOptionsCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMenuSignOptionsTex);
+CacheTexInfo sMenuSignCourseEditCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMenuSignCourseEditTex);
+CacheTexInfo sMenuSignCreateMachineCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMenuSignCreateMachineTex);
 
 CacheTexInfo* sMenuSignCacheTexInfos[] = {
     sMenuSignGpRaceCacheTexInfo,        // MODE_GP_RACE
@@ -52,9 +54,12 @@ CacheTexInfo* sMenuSignCacheTexInfos[] = {
     LARGE WALLPAPER-STYLE IMAGES/COMIC STYLE IMAGE
  */
 
-static CacheTexInfo sTitleBackgroundMainCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundMainTex);
-static CacheTexInfo sTitleBackgroundComicCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundComicTex);
-static CacheTexInfo sTitleBackgroundFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundFalconTex);
+static CacheTexInfo sTitleBackgroundMainCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aTitleBackgroundMainTex);
+static CacheTexInfo sTitleBackgroundComicCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aTitleBackgroundComicTex);
+static CacheTexInfo sTitleBackgroundFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aTitleBackgroundFalconTex);
 
 static CacheTexInfo* sTitleBackgroundCacheTexInfos[] = {
     sTitleBackgroundMainCacheTexInfo,
@@ -66,17 +71,18 @@ static CacheTexInfo* sTitleBackgroundCacheTexInfos[] = {
     MENU SECOND OPTIONS
  */
 
-CacheTexInfo sSelectModeCacheTexInfo[] = COMP_TEX_INFO(4, aSelectModeTex, 0);
-CacheTexInfo sSelectModeOptionFlamesCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSelectModeOptionFlamesTex);
-static CacheTexInfo sNoviceCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aNoviceTex);
-static CacheTexInfo sStandardCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aStandardTex);
-static CacheTexInfo sExpertCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aExpertTex);
-static CacheTexInfo sMasterCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMasterTex);
-CacheTexInfo s2PlayersCacheTexInfo[] = COMP_TEX_INFO_DEF(17, a2PlayersTex);
-CacheTexInfo s3PlayersCacheTexInfo[] = COMP_TEX_INFO_DEF(17, a3PlayersTex);
-CacheTexInfo s4PlayersCacheTexInfo[] = COMP_TEX_INFO_DEF(17, a4PlayersTex);
-CacheTexInfo sTimeAttackCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aTimeAttackTex);
-CacheTexInfo sRecordsOptionCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aRecordsOptionTex);
+CacheTexInfo sSelectModeCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aSelectModeTex, 0);
+CacheTexInfo sSelectModeOptionFlamesCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSelectModeOptionFlamesTex);
+static CacheTexInfo sNoviceCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aNoviceTex);
+static CacheTexInfo sStandardCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aStandardTex);
+static CacheTexInfo sExpertCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aExpertTex);
+static CacheTexInfo sMasterCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMasterTex);
+CacheTexInfo s2PlayersCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, a2PlayersTex);
+CacheTexInfo s3PlayersCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, a3PlayersTex);
+CacheTexInfo s4PlayersCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, a4PlayersTex);
+CacheTexInfo sTimeAttackCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aTimeAttackTex);
+CacheTexInfo sRecordsOptionCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aRecordsOptionTex);
 
 static CacheTexInfo* sDifficultyCacheTexInfos[] = {
     sNoviceCacheTexInfo,
@@ -96,7 +102,7 @@ CacheTexInfo* sTimeAttackModeCacheTexInfos[] = {
     sRecordsOptionCacheTexInfo,
 };
 
-static CacheTexInfo sOkCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aOKTex);
+static CacheTexInfo sOkCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aOKTex);
 
 extern u32 gGameFrameCount;
 extern s16 D_800CCFE8;

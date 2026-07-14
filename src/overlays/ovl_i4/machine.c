@@ -5,6 +5,7 @@
 #include "fzx_course.h"
 #include "fzx_camera.h"
 #include "fzx_font.h"
+#include "fzx_cache.h"
 #include "src/overlays/ovl_i2/transition.h"
 #include "ovl_i4.h"
 #include ASSET_HEADER(machine_custom_gfx.h)
@@ -22,40 +23,54 @@ UNUSED s32 D_i4_80074F50 = 0;
 #include ASSET_SOURCE_EK(overlays/ovl_i4/machine/machine.c)
 #endif
 
-CacheTexInfo sPortraitDrStewartCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDrStewartTex);
-CacheTexInfo sPortraitCaptainFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitCaptainFalconTex);
-CacheTexInfo sPortraitJodySummerCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJodySummerTex);
-CacheTexInfo sPortraitSamuraiGorohCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSamuraiGorohTex);
-CacheTexInfo sPortraitMightyGazelleCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMightyGazelleTex);
-CacheTexInfo sPortraitPicoCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitPicoTex);
-CacheTexInfo sPortraitBabaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBabaTex);
-CacheTexInfo sPortraitMrEadCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMrEadTex);
-CacheTexInfo sPortraitOctomanCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitOctomanTex);
-CacheTexInfo sPortraitTheSkullCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitTheSkullTex);
-CacheTexInfo sPortraitBeastmanCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBeastmanTex);
-CacheTexInfo sPortraitAntonioGusterCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitAntonioGusterTex);
-CacheTexInfo sPortraitDraqCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDraqTex);
-CacheTexInfo sPortraitRogerBusterCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitRogerBusterTex);
-CacheTexInfo sPortraitSilverNeelsenCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSilverNeelsenTex);
-CacheTexInfo sPortraitSuperArrowCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSuperArrowTex);
-CacheTexInfo sPortraitMrsArrowCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMrsArrowTex);
-CacheTexInfo sPortraitZodaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitZodaTex);
-CacheTexInfo sPortraitJohnTanakaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJohnTanakaTex);
-CacheTexInfo sPortraitBioRexCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBioRexTex);
-CacheTexInfo sPortraitKateAlenCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitKateAlenTex);
-CacheTexInfo sPortraitGomarAndShiohCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitGomarAndShiohTex);
-CacheTexInfo sPortraitMichaelChainCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMichaelChainTex);
-CacheTexInfo sPortraitBillyCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBillyTex);
-CacheTexInfo sPortraitDrClashCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDrClashTex);
-CacheTexInfo sPortraitJackLevinCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJackLevinTex);
-CacheTexInfo sPortraitBloodFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBloodFalconTex);
-CacheTexInfo sPortraitLeonCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitLeonTex);
-CacheTexInfo sPortraitJamesMcCloudCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJamesMcCloudTex);
-CacheTexInfo sPortraitBlackShadowCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBlackShadowTex);
-CacheTexInfo sPortraitCaptainFalconAltCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitCaptainFalconAltTex);
-CacheTexInfo sPortraitSamuraiGorohAltCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSamuraiGorohAltTex);
-CacheTexInfo sPortraitJodySummerAltCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJodySummerAltTex);
-CacheTexInfo sPortraitBackgroundCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBackgroundTex);
+CacheTexInfo sPortraitDrStewartCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitDrStewartTex);
+CacheTexInfo sPortraitCaptainFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitCaptainFalconTex);
+CacheTexInfo sPortraitJodySummerCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitJodySummerTex);
+CacheTexInfo sPortraitSamuraiGorohCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitSamuraiGorohTex);
+CacheTexInfo sPortraitMightyGazelleCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitMightyGazelleTex);
+CacheTexInfo sPortraitPicoCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitPicoTex);
+CacheTexInfo sPortraitBabaCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitBabaTex);
+CacheTexInfo sPortraitMrEadCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitMrEadTex);
+CacheTexInfo sPortraitOctomanCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitOctomanTex);
+CacheTexInfo sPortraitTheSkullCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitTheSkullTex);
+CacheTexInfo sPortraitBeastmanCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitBeastmanTex);
+CacheTexInfo sPortraitAntonioGusterCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitAntonioGusterTex);
+CacheTexInfo sPortraitDraqCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitDraqTex);
+CacheTexInfo sPortraitRogerBusterCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitRogerBusterTex);
+CacheTexInfo sPortraitSilverNeelsenCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitSilverNeelsenTex);
+CacheTexInfo sPortraitSuperArrowCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitSuperArrowTex);
+CacheTexInfo sPortraitMrsArrowCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitMrsArrowTex);
+CacheTexInfo sPortraitZodaCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitZodaTex);
+CacheTexInfo sPortraitJohnTanakaCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitJohnTanakaTex);
+CacheTexInfo sPortraitBioRexCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitBioRexTex);
+CacheTexInfo sPortraitKateAlenCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitKateAlenTex);
+CacheTexInfo sPortraitGomarAndShiohCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitGomarAndShiohTex);
+CacheTexInfo sPortraitMichaelChainCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitMichaelChainTex);
+CacheTexInfo sPortraitBillyCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitBillyTex);
+CacheTexInfo sPortraitDrClashCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitDrClashTex);
+CacheTexInfo sPortraitJackLevinCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitJackLevinTex);
+CacheTexInfo sPortraitBloodFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitBloodFalconTex);
+CacheTexInfo sPortraitLeonCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitLeonTex);
+CacheTexInfo sPortraitJamesMcCloudCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitJamesMcCloudTex);
+CacheTexInfo sPortraitBlackShadowCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitBlackShadowTex);
+CacheTexInfo sPortraitCaptainFalconAltCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitCaptainFalconAltTex);
+CacheTexInfo sPortraitSamuraiGorohAltCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitSamuraiGorohAltTex);
+CacheTexInfo sPortraitJodySummerAltCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitJodySummerAltTex);
+CacheTexInfo sPortraitBackgroundCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aFullPortraitBackgroundTex);
 
 CacheTexInfo* sPortraitCacheTexInfos[] = {
     sPortraitCaptainFalconCacheTexInfo,    // CAPTAIN_FALCON
@@ -137,39 +152,62 @@ TextureSwapEntry* D_i4_8011C05C[] = {
     D_i4_8011BEDC, D_i4_8011BFEC, D_i4_8011C02C, D_i4_8011C02C, D_i4_8011C02C, D_i4_8011C03C, D_i4_8011C04C,
 };
 
-CacheTexInfo sSmallPortraitDrStewartCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitDrStewartTex);
-CacheTexInfo sSmallPortraitCaptainFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitCaptainFalconTex);
-CacheTexInfo sSmallPortraitJodySummerCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitJodySummerTex);
-CacheTexInfo sSmallPortraitSamuraiGorohCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitSamuraiGorohTex);
-CacheTexInfo sSmallPortraitMightyGazelleCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitMightyGazelleTex);
-CacheTexInfo sSmallPortraitPicoCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitPicoTex);
-CacheTexInfo sSmallPortraitBabaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitBabaTex);
-CacheTexInfo sSmallPortraitMrEadCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitMrEadTex);
-CacheTexInfo sSmallPortraitOctomanCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitOctomanTex);
-CacheTexInfo sSmallPortraitTheSkullCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitTheSkullTex);
-CacheTexInfo sSmallPortraitBeastmanCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitBeastmanTex);
-CacheTexInfo sSmallPortraitAntonioGusterCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitAntonioGusterTex);
-CacheTexInfo sSmallPortraitDraqCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitDraqTex);
-CacheTexInfo sSmallPortraitRogerBusterCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitRogerBusterTex);
-CacheTexInfo sSmallPortraitSilverNeelsenCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitSilverNeelsenTex);
-CacheTexInfo sSmallPortraitSuperArrowCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitSuperArrowTex);
-CacheTexInfo sSmallPortraitMrsArrowCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitMrsArrowTex);
-CacheTexInfo sSmallPortraitZodaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitZodaTex);
-CacheTexInfo sSmallPortraitJohnTanakaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitJohnTanakaTex);
-CacheTexInfo sSmallPortraitBioRexCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitBioRexTex);
-CacheTexInfo sSmallPortraitKateAlenCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitKateAlenTex);
-CacheTexInfo sSmallPortraitGomarAndShiohCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitGomarAndShiohTex);
-CacheTexInfo sSmallPortraitMichaelChainCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitMichaelChainTex);
-CacheTexInfo sSmallPortraitBillyCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitBillyTex);
-CacheTexInfo sSmallPortraitDrClashCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitDrClashTex);
-CacheTexInfo sSmallPortraitJackLevinCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitJackLevinTex);
-CacheTexInfo sSmallPortraitBloodFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitBloodFalconTex);
-CacheTexInfo sSmallPortraitLeonCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitLeonTex);
-CacheTexInfo sSmallPortraitJamesMcCloudCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitJamesMcCloudTex);
-CacheTexInfo sSmallPortraitBlackShadowCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitBlackShadowTex);
-CacheTexInfo sSmallPortraitCaptainFalconAltCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitCaptainFalconAltTex);
-CacheTexInfo sSmallPortraitSamuraiGorohAltCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitSamuraiGorohAltTex);
-CacheTexInfo sSmallPortraitJodySummerAltCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aSmallPortraitJodySummerAltTex);
+CacheTexInfo sSmallPortraitDrStewartCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitDrStewartTex);
+CacheTexInfo sSmallPortraitCaptainFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitCaptainFalconTex);
+CacheTexInfo sSmallPortraitJodySummerCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitJodySummerTex);
+CacheTexInfo sSmallPortraitSamuraiGorohCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitSamuraiGorohTex);
+CacheTexInfo sSmallPortraitMightyGazelleCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitMightyGazelleTex);
+CacheTexInfo sSmallPortraitPicoCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitPicoTex);
+CacheTexInfo sSmallPortraitBabaCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitBabaTex);
+CacheTexInfo sSmallPortraitMrEadCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitMrEadTex);
+CacheTexInfo sSmallPortraitOctomanCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitOctomanTex);
+CacheTexInfo sSmallPortraitTheSkullCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitTheSkullTex);
+CacheTexInfo sSmallPortraitBeastmanCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitBeastmanTex);
+CacheTexInfo sSmallPortraitAntonioGusterCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitAntonioGusterTex);
+CacheTexInfo sSmallPortraitDraqCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitDraqTex);
+CacheTexInfo sSmallPortraitRogerBusterCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitRogerBusterTex);
+CacheTexInfo sSmallPortraitSilverNeelsenCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitSilverNeelsenTex);
+CacheTexInfo sSmallPortraitSuperArrowCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitSuperArrowTex);
+CacheTexInfo sSmallPortraitMrsArrowCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitMrsArrowTex);
+CacheTexInfo sSmallPortraitZodaCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitZodaTex);
+CacheTexInfo sSmallPortraitJohnTanakaCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitJohnTanakaTex);
+CacheTexInfo sSmallPortraitBioRexCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitBioRexTex);
+CacheTexInfo sSmallPortraitKateAlenCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitKateAlenTex);
+CacheTexInfo sSmallPortraitGomarAndShiohCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitGomarAndShiohTex);
+CacheTexInfo sSmallPortraitMichaelChainCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitMichaelChainTex);
+CacheTexInfo sSmallPortraitBillyCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitBillyTex);
+CacheTexInfo sSmallPortraitDrClashCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitDrClashTex);
+CacheTexInfo sSmallPortraitJackLevinCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitJackLevinTex);
+CacheTexInfo sSmallPortraitBloodFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitBloodFalconTex);
+CacheTexInfo sSmallPortraitLeonCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitLeonTex);
+CacheTexInfo sSmallPortraitJamesMcCloudCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitJamesMcCloudTex);
+CacheTexInfo sSmallPortraitBlackShadowCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitBlackShadowTex);
+CacheTexInfo sSmallPortraitCaptainFalconAltCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitCaptainFalconAltTex);
+CacheTexInfo sSmallPortraitSamuraiGorohAltCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitSamuraiGorohAltTex);
+CacheTexInfo sSmallPortraitJodySummerAltCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aSmallPortraitJodySummerAltTex);
 
 CacheTexInfo* sSmallPortraitCacheTexInfos[] = {
     sSmallPortraitCaptainFalconCacheTexInfo,    // CAPTAIN_FALCON
@@ -252,36 +290,50 @@ TextureSwapEntry* D_i4_8011C7A4[] = {
     D_i4_8011C774, D_i4_8011C774, D_i4_8011C774, D_i4_8011C784, D_i4_8011C794, D_i4_8011C774,
 };
 
-CacheTexInfo sNameCardCaptainFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardCaptainFalconTex);
-CacheTexInfo sNameCardDrStewartCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardDrStewartTex);
-CacheTexInfo sNameCardPicoCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardPicoTex);
-CacheTexInfo sNameCardSamuraiGorohCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardSamuraiGorohTex);
-CacheTexInfo sNameCardJodySummerCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardJodySummerTex);
-CacheTexInfo sNameCardMrEadCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardMrEadTex);
-CacheTexInfo sNameCardBabaCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardBabaTex);
-CacheTexInfo sNameCardOctomanCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardOctomanTex);
-CacheTexInfo sNameCardGomarAndShiohCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardGomarAndShiohTex);
-CacheTexInfo sNameCardKateAlenCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardKateAlenTex);
-CacheTexInfo sNameCardRogerBusterCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardRogerBusterTex);
-CacheTexInfo sNameCardJamesMcCloudCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardJamesMcCloudTex);
-CacheTexInfo sNameCardLeonCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardLeonTex);
-CacheTexInfo sNameCardAntonioGusterCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardAntonioGusterTex);
-CacheTexInfo sNameCardBlackShadowCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardBlackShadowTex);
-CacheTexInfo sNameCardMichaelChainCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardMichaelChainTex);
-CacheTexInfo sNameCardJackLevinCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardJackLevinTex);
-CacheTexInfo sNameCardSuperArrowCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardSuperArrowTex);
-CacheTexInfo sNameCardMrsArrowCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardMrsArrowTex);
-CacheTexInfo sNameCardJohnTanakaCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardJohnTanakaTex);
-CacheTexInfo sNameCardBeastmanCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardBeastmanTex);
-CacheTexInfo sNameCardZodaCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardZodaTex);
-CacheTexInfo sNameCardDrClashCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardDrClashTex);
-CacheTexInfo sNameCardSilverNeelsenCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardSilverNeelsenTex);
-CacheTexInfo sNameCardBioRexCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardBioRexTex);
-CacheTexInfo sNameCardDraqCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardDraqTex);
-CacheTexInfo sNameCardBillyCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardBillyTex);
-CacheTexInfo sNameCardBloodFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardBloodFalconTex);
-CacheTexInfo sNameCardMightyGazelleCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardMightyGazelleTex);
-CacheTexInfo sNameCardTheSkullCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aNameCardTheSkullTex);
+CacheTexInfo sNameCardCaptainFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardCaptainFalconTex);
+CacheTexInfo sNameCardDrStewartCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardDrStewartTex);
+CacheTexInfo sNameCardPicoCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardPicoTex);
+CacheTexInfo sNameCardSamuraiGorohCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardSamuraiGorohTex);
+CacheTexInfo sNameCardJodySummerCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardJodySummerTex);
+CacheTexInfo sNameCardMrEadCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardMrEadTex);
+CacheTexInfo sNameCardBabaCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardBabaTex);
+CacheTexInfo sNameCardOctomanCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardOctomanTex);
+CacheTexInfo sNameCardGomarAndShiohCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardGomarAndShiohTex);
+CacheTexInfo sNameCardKateAlenCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardKateAlenTex);
+CacheTexInfo sNameCardRogerBusterCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardRogerBusterTex);
+CacheTexInfo sNameCardJamesMcCloudCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardJamesMcCloudTex);
+CacheTexInfo sNameCardLeonCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardLeonTex);
+CacheTexInfo sNameCardAntonioGusterCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardAntonioGusterTex);
+CacheTexInfo sNameCardBlackShadowCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardBlackShadowTex);
+CacheTexInfo sNameCardMichaelChainCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardMichaelChainTex);
+CacheTexInfo sNameCardJackLevinCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardJackLevinTex);
+CacheTexInfo sNameCardSuperArrowCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardSuperArrowTex);
+CacheTexInfo sNameCardMrsArrowCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardMrsArrowTex);
+CacheTexInfo sNameCardJohnTanakaCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardJohnTanakaTex);
+CacheTexInfo sNameCardBeastmanCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardBeastmanTex);
+CacheTexInfo sNameCardZodaCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardZodaTex);
+CacheTexInfo sNameCardDrClashCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardDrClashTex);
+CacheTexInfo sNameCardSilverNeelsenCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardSilverNeelsenTex);
+CacheTexInfo sNameCardBioRexCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardBioRexTex);
+CacheTexInfo sNameCardDraqCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardDraqTex);
+CacheTexInfo sNameCardBillyCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardBillyTex);
+CacheTexInfo sNameCardBloodFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardBloodFalconTex);
+CacheTexInfo sNameCardMightyGazelleCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardMightyGazelleTex);
+CacheTexInfo sNameCardTheSkullCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aNameCardTheSkullTex);
 
 CacheTexInfo* sNameCardCacheTexInfos[] = {
     sNameCardCaptainFalconCacheTexInfo, // CAPTAIN_FALCON
@@ -356,11 +408,11 @@ TextureSwapEntry* D_i4_8011CE50[] = {
     D_i4_8011CE30, D_i4_8011CE40, D_i4_8011CC70,
 };
 
-CacheTexInfo sSelectMachineCacheTexInfo[] = COMP_TEX_INFO(4, aSelectMachineTex, 0);
-CacheTexInfo s1PIconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, a1PIconTex);
-CacheTexInfo s2PIconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, a2PIconTex);
-CacheTexInfo s3PIconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, a3PIconTex);
-CacheTexInfo s4PIconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, a4PIconTex);
+CacheTexInfo sSelectMachineCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aSelectMachineTex, 0);
+CacheTexInfo s1PIconCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, a1PIconTex);
+CacheTexInfo s2PIconCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, a2PIconTex);
+CacheTexInfo s3PIconCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, a3PIconTex);
+CacheTexInfo s4PIconCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, a4PIconTex);
 
 CacheTexInfo* sPlayerNumIconCacheTexInfos[] = {
     s1PIconCacheTexInfo,
@@ -369,41 +421,46 @@ CacheTexInfo* sPlayerNumIconCacheTexInfos[] = {
     s4PIconCacheTexInfo,
 };
 
-CacheTexInfo sMachineSelectCursorCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineSelectCursorTex);
-CacheTexInfo sMachineInfoGraphCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineInfoGraphTex);
-CacheTexInfo sMachineAccelerationMaxSpeedCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineAccelerationMaxSpeedTex);
-CacheTexInfo sMachineBodyBoostGripCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineBodyBoostGripTex);
-CacheTexInfo sMachineInfoGraphSmallCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aMachineInfoGraphSmallTex);
+CacheTexInfo sMachineSelectCursorCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMachineSelectCursorTex);
+CacheTexInfo sMachineInfoGraphCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMachineInfoGraphTex);
+CacheTexInfo sMachineAccelerationMaxSpeedCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMachineAccelerationMaxSpeedTex);
+CacheTexInfo sMachineBodyBoostGripCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMachineBodyBoostGripTex);
+CacheTexInfo sMachineInfoGraphSmallCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aMachineInfoGraphSmallTex);
 CacheTexInfo sMachineAccelerationMaxSpeedSmallCacheTexInfo[] =
-    COMP_TEX_INFO_DEF(18, aMachineAccelerationMaxSpeedSmallTex);
-CacheTexInfo sMachineBodyBoostGripSmallCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineBodyBoostGripSmallTex);
-CacheTexInfo sEngineSliderCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aEngineSliderTex);
-CacheTexInfo sNoviceJackTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aNoviceJackTrophyTex);
-CacheTexInfo sNoviceQueenTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aNoviceQueenTrophyTex);
-CacheTexInfo sNoviceKingTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aNoviceKingTrophyTex);
-CacheTexInfo sNoviceJokerTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aNoviceJokerTrophyTex);
-CacheTexInfo sNoviceXTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aNoviceXTrophyTex);
-CacheTexInfo sStandardJackTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aStandardJackTrophyTex);
-CacheTexInfo sStandardQueenTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aStandardQueenTrophyTex);
-CacheTexInfo sStandardKingTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aStandardKingTrophyTex);
-CacheTexInfo sStandardJokerTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aStandardJokerTrophyTex);
-CacheTexInfo sStandardXTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aStandardXTrophyTex);
-CacheTexInfo sExpertJackTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aExpertJackTrophyTex);
-CacheTexInfo sExpertQueenTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aExpertQueenTrophyTex);
-CacheTexInfo sExpertKingTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aExpertKingTrophyTex);
-CacheTexInfo sExpertJokerTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aExpertJokerTrophyTex);
-CacheTexInfo sExpertXTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aExpertXTrophyTex);
-CacheTexInfo sMasterJackTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aMasterJackTrophyTex);
-CacheTexInfo sMasterQueenTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aMasterQueenTrophyTex);
-CacheTexInfo sMasterKingTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aMasterKingTrophyTex);
-CacheTexInfo sMasterJokerTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aMasterJokerTrophyTex);
-CacheTexInfo sMasterXTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aMasterXTrophyTex);
-CacheTexInfo sNoTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aNoTrophyTex);
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16_TILED, aMachineAccelerationMaxSpeedSmallTex);
+CacheTexInfo sMachineBodyBoostGripSmallCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMachineBodyBoostGripSmallTex);
+CacheTexInfo sEngineSliderCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aEngineSliderTex);
+CacheTexInfo sNoviceJackTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aNoviceJackTrophyTex);
+CacheTexInfo sNoviceQueenTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aNoviceQueenTrophyTex);
+CacheTexInfo sNoviceKingTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aNoviceKingTrophyTex);
+CacheTexInfo sNoviceJokerTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aNoviceJokerTrophyTex);
+CacheTexInfo sNoviceXTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aNoviceXTrophyTex);
+CacheTexInfo sStandardJackTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aStandardJackTrophyTex);
+CacheTexInfo sStandardQueenTrophyCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aStandardQueenTrophyTex);
+CacheTexInfo sStandardKingTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aStandardKingTrophyTex);
+CacheTexInfo sStandardJokerTrophyCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aStandardJokerTrophyTex);
+CacheTexInfo sStandardXTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aStandardXTrophyTex);
+CacheTexInfo sExpertJackTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aExpertJackTrophyTex);
+CacheTexInfo sExpertQueenTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aExpertQueenTrophyTex);
+CacheTexInfo sExpertKingTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aExpertKingTrophyTex);
+CacheTexInfo sExpertJokerTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aExpertJokerTrophyTex);
+CacheTexInfo sExpertXTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aExpertXTrophyTex);
+CacheTexInfo sMasterJackTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aMasterJackTrophyTex);
+CacheTexInfo sMasterQueenTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aMasterQueenTrophyTex);
+CacheTexInfo sMasterKingTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aMasterKingTrophyTex);
+CacheTexInfo sMasterJokerTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aMasterJokerTrophyTex);
+CacheTexInfo sMasterXTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aMasterXTrophyTex);
+CacheTexInfo sNoTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aNoTrophyTex);
 #ifdef EXPANSION_KIT
-CacheTexInfo sNoviceDDTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aNoviceDDTrophyTex);
-CacheTexInfo sStandardDDTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aStandardDDTrophyTex);
-CacheTexInfo sExpertDDTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aExpertDDTrophyTex);
-CacheTexInfo sMasterDDTrophyCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aMasterDDTrophyTex);
+CacheTexInfo sNoviceDDTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aNoviceDDTrophyTex);
+CacheTexInfo sStandardDDTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aStandardDDTrophyTex);
+CacheTexInfo sExpertDDTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aExpertDDTrophyTex);
+CacheTexInfo sMasterDDTrophyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aMasterDDTrophyTex);
 #endif
 
 CacheTexInfo* sTrophyCacheTexInfos[] = {
@@ -420,10 +477,10 @@ CacheTexInfo* sTrophyCacheTexInfos[] = {
 #endif
 };
 
-static CacheTexInfo sNoviceCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aNoviceTex);
-static CacheTexInfo sStandardCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aStandardTex);
-static CacheTexInfo sExpertCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aExpertTex);
-static CacheTexInfo sMasterCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMasterTex);
+static CacheTexInfo sNoviceCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aNoviceTex);
+static CacheTexInfo sStandardCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aStandardTex);
+static CacheTexInfo sExpertCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aExpertTex);
+static CacheTexInfo sMasterCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aMasterTex);
 
 static CacheTexInfo* sDifficultyCacheTexInfos[] = {
     sNoviceCacheTexInfo,
@@ -432,9 +489,9 @@ static CacheTexInfo* sDifficultyCacheTexInfos[] = {
     sMasterCacheTexInfo,
 };
 
-static CacheTexInfo sBoostCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aBoostTex);
-static CacheTexInfo sBodyCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aBodyTex);
-static CacheTexInfo sGripCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aGripTex);
+static CacheTexInfo sBoostCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aBoostTex);
+static CacheTexInfo sBodyCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aBodyTex);
+static CacheTexInfo sGripCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aGripTex);
 
 CacheTexInfo* sMachineStatCacheTexInfos[] = {
     sBodyCacheTexInfo,
@@ -442,7 +499,7 @@ CacheTexInfo* sMachineStatCacheTexInfos[] = {
     sGripCacheTexInfo,
 };
 
-static CacheTexInfo sOKCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aOKTex);
+static CacheTexInfo sOKCacheTexInfo[] = CACHE_TEX_INFO_COMP(TEX_CACHE_FMT_RGBA16, aOKTex);
 
 static const char* sMachineStatValueStr[] = { "a", "b", "c", "d", "e" };
 
