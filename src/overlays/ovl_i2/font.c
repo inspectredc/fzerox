@@ -1824,11 +1824,11 @@ Gfx* Font_DrawString(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing
         if (fontChar >= 0) {
             TextureCache_LoadCacheTexInfoList_impl(fontCharTexInfos[fontChar], false, true);
             if (arg6 == 1) {
-                gfx = TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 1, false, false,
-                                                 1.0f, 1.0f, true);
+                gfx = TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], left + strWidth, top,
+                                                 TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
             } else {
-                gfx = TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 0, false, false,
-                                                 1.0f, 1.0f, true);
+                gfx = TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], left + strWidth, top,
+                                                 TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
             }
 
             strWidth += fontCharWidths[fontChar] + additionalSpacing;
@@ -1909,11 +1909,12 @@ Gfx* Font_DrawScaledString(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalS
         if (fontChar >= 0) {
             TextureCache_LoadCacheTexInfoList_impl(fontCharTexInfos[fontChar], false, true);
             if (arg6 == 1) {
-                gfx = TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)),
-                                                 top, 4, false, false, scaleX, scaleY, true);
+                gfx =
+                    TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)), top,
+                                               TEXTURE_CACHE_DRAW_SCALED_TINTED, false, false, scaleX, scaleY, true);
             } else {
                 gfx = TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)),
-                                                 top, 3, false, false, scaleX, scaleY, true);
+                                                 top, TEXTURE_CACHE_DRAW_SCALED, false, false, scaleX, scaleY, true);
             }
 
             strWidth += fontCharWidths[fontChar] + additionalSpacing;
@@ -1944,8 +1945,8 @@ Gfx* Font_DrawMachineStatValue(Gfx* gfx, s32 left, s32 top, s32 statValue) {
     }
 
     TextureCache_LoadCacheTexInfoList_impl(sMachineStatValueCacheTexInfos[statValue], false, true);
-    return TextureCache_DrawList_impl(gfx, sMachineStatValueCacheTexInfos[statValue], left, top, 0, false, false, 1.0f,
-                                      1.0f, true);
+    return TextureCache_DrawList_impl(gfx, sMachineStatValueCacheTexInfos[statValue], left, top, TEXTURE_CACHE_DRAW,
+                                      false, false, 1.0f, 1.0f, true);
 }
 
 Gfx* Font_DrawMachineStatValueSmall(Gfx* gfx, s32 left, s32 top, s32 statValue) {
@@ -1955,8 +1956,8 @@ Gfx* Font_DrawMachineStatValueSmall(Gfx* gfx, s32 left, s32 top, s32 statValue) 
     }
 
     TextureCache_LoadCacheTexInfoList_impl(sMachineStatValueCacheTexInfos[statValue], false, true);
-    return TextureCache_DrawList_impl(gfx, sMachineStatValueCacheTexInfos[statValue], left, top, 3, false, false, 0.5f,
-                                      0.5f, true);
+    return TextureCache_DrawList_impl(gfx, sMachineStatValueCacheTexInfos[statValue], left, top,
+                                      TEXTURE_CACHE_DRAW_SCALED, false, false, 0.5f, 0.5f, true);
 }
 
 Gfx* Font_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight) {
@@ -1968,8 +1969,8 @@ Gfx* Font_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight) {
         digit = weight % 10;
         width -= kMachineWeightDigitWidths[digit];
         TextureCache_LoadCacheTexInfoList_impl(sMachineWeightDigitCacheTexInfos[digit], false, true);
-        gfx = TextureCache_DrawList_impl(gfx, sMachineWeightDigitCacheTexInfos[digit], left + width, top - 16, 0, false,
-                                         false, 1.0f, 1.0f, true);
+        gfx = TextureCache_DrawList_impl(gfx, sMachineWeightDigitCacheTexInfos[digit], left + width, top - 16,
+                                         TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
         weight /= 10;
     } while (weight != 0);
 
@@ -1987,7 +1988,8 @@ Gfx* Font_DrawMachineWeightSmall(Gfx* gfx, s32 left, s32 top, u32 weight) {
         width -= kMachineWeightDigitWidths[digit] * scale + 1.0f;
         TextureCache_LoadCacheTexInfoList_impl(sMachineWeightDigitCacheTexInfos[digit], false, true);
         gfx = TextureCache_DrawList_impl(gfx, sMachineWeightDigitCacheTexInfos[digit], left + width,
-                                         top - (16.0f * scale), 3, false, false, scale, scale, true);
+                                         top - (16.0f * scale), TEXTURE_CACHE_DRAW_SCALED, false, false, scale, scale,
+                                         true);
         weight /= 10;
     } while (weight != 0);
 

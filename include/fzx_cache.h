@@ -42,4 +42,13 @@ typedef enum TextureCacheFormat {
 #define CACHE_TEX_INFO_COMP(type, texture) \
     CACHE_TEX_INFO(TEX_CACHE_MIO0(type), texture, TEX_COMPRESSED_SIZE(texture))
 
+typedef enum TextureCacheDrawMode {
+    TEXTURE_CACHE_DRAW,
+    TEXTURE_CACHE_DRAW_TINTED,
+    TEXTURE_CACHE_DRAW_MIRROR,
+    TEXTURE_CACHE_DRAW_SCALED,
+    TEXTURE_CACHE_DRAW_SCALED_TINTED,
+    TEXTURE_CACHE_DRAW_SCALED_MIRROR,
+} TextureCacheDrawMode;
+
 #endif // FZX_CACHE_H

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "machine_create.h"
 #include "leo/mfs.h"
 #include "fzx_game.h"
@@ -274,7 +275,7 @@ Gfx* func_xk3_8012F628(Gfx* gfx, Object* arg1) {
 
     if (gWorksMachineMode != MACHINE_MODE_ENTRY) {
         gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1),
-                                             OBJECT_TOP(arg1), 0, false, false, 1.0f, 1.0f, false);
+                                             OBJECT_TOP(arg1), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, false);
     }
     return gfx;
 }

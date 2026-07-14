@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "machine_create.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
@@ -543,7 +544,7 @@ Gfx* func_xk3_80133F6C(Gfx* gfx, Object* arg1) {
     }
     if (sMachineSelectIndex < 30) {
         gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1),
-                                             OBJECT_TOP(arg1), 0, false, false, 1.0f, 1.0f, false);
+                                             OBJECT_TOP(arg1), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, false);
         if (gCustomMachinesInfo.characterCustomState[sMachineSelectIndex] > 0) {
             gfx = Font_DrawString(gfx, 0x46, 0x25, gCustomMachinesInfo.customMachines[sMachineSelectIndex].machineName,
                                   0, 2, 0);
@@ -576,8 +577,8 @@ Gfx* func_xk3_801340DC(Gfx* gfx, Object* arg1) {
 
         var_s6 = 53;
         for (i = BODY_STAT; i <= GRIP_STAT; i++) {
-            gfx = TextureCache_DrawList_impl(gfx, sMachineStatCacheTexInfos[i], 19, var_s6 + i * 20, 0, false, false,
-                                             1.0f, 1.0f, false);
+            gfx = TextureCache_DrawList_impl(gfx, sMachineStatCacheTexInfos[i], 19, var_s6 + i * 20, TEXTURE_CACHE_DRAW,
+                                             false, false, 1.0f, 1.0f, false);
 
             if (gCustomMachinesInfo.characterCustomState[sMachineSelectIndex] > 0) {
                 switch (i) {
@@ -728,8 +729,8 @@ Gfx* func_xk3_80134854(Gfx* gfx, Object* arg1) {
         }
         OBJECT_LEFT(arg1) = ((sMachineSelectIndex % 6) * 0x28) + 0x28;
         OBJECT_TOP(arg1) = ((sMachineSelectIndex / 6) * 0x22) + 0x27;
-        gfx = TextureCache_DrawList_impl(gfx, sMachineSelectCursorCacheTexInfo, OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 1,
-                                         false, false, 1.0f, 1.0f, false);
+        gfx = TextureCache_DrawList_impl(gfx, sMachineSelectCursorCacheTexInfo, OBJECT_LEFT(arg1), OBJECT_TOP(arg1),
+                                         TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, false);
     }
     return gfx;
 }

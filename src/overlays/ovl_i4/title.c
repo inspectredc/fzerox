@@ -409,8 +409,8 @@ void Title_BackgroundUpdate(Object* backgroundObj) {
 
 Gfx* Title_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
     return TextureCache_DrawList_impl(gfx, sTitleBackgroundCacheTexInfos[OBJECT_STATE(backgroundObj)],
-                                      OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, false, false, 1.0f,
-                                      1.0f, true);
+                                      OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), TEXTURE_CACHE_DRAW, false,
+                                      false, 1.0f, 1.0f, true);
 }
 
 Gfx* func_i4_8011B3DC(Gfx* gfx, Object* arg1) {
@@ -418,8 +418,8 @@ Gfx* func_i4_8011B3DC(Gfx* gfx, Object* arg1) {
 }
 
 Gfx* Title_LogoDraw(Gfx* gfx, Object* logoObj) {
-    return TextureCache_DrawList_impl(gfx, sTitleLogoCacheTexInfo, OBJECT_LEFT(logoObj), OBJECT_TOP(logoObj), 0, false,
-                                      false, 1.0f, 1.0f, true);
+    return TextureCache_DrawList_impl(gfx, sTitleLogoCacheTexInfo, OBJECT_LEFT(logoObj), OBJECT_TOP(logoObj),
+                                      TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
 }
 
 Gfx* func_i4_8011B438(Gfx* gfx, Object* arg1) {
@@ -435,7 +435,7 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
         }
         gfx = func_8007DB28(gfx, 0);
         gfx = TextureCache_DrawList_impl(gfx, sTitlePushStartCacheTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj),
-                                         1, false, false, 1.0f, 1.0f, true);
+                                         TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
     } else {
         OBJECT_LEFT(startObj) = 80;
 
@@ -467,7 +467,7 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
         }
 
         gfx = TextureCache_DrawList_impl(gfx, sTitleNoControllerCacheTexInfo, OBJECT_LEFT(startObj),
-                                         OBJECT_TOP(startObj), 0, false, false, 1.0f, 1.0f, true);
+                                         OBJECT_TOP(startObj), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
     }
     return gfx;
 }
@@ -478,7 +478,7 @@ Gfx* func_i4_8011B668(Gfx* gfx, Object* arg1) {
 
 Gfx* Title_CopyrightDraw(Gfx* gfx, Object* copyrightObj) {
     return TextureCache_DrawList_impl(gfx, sCopyrightCacheTexInfo, OBJECT_LEFT(copyrightObj), OBJECT_TOP(copyrightObj),
-                                      0, false, false, 1.0f, 1.0f, true);
+                                      TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
 }
 
 Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* diskDriveObj) {
@@ -510,15 +510,15 @@ Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* diskDriveObj) {
             gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
         gfx = TextureCache_DrawList_impl(gfx, sTitleWarningCacheTexInfos[var_t0], OBJECT_LEFT(diskDriveObj),
-                                         OBJECT_TOP(diskDriveObj), 0, false, false, 1.0f, 1.0f, true);
+                                         OBJECT_TOP(diskDriveObj), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
     }
     return gfx;
 }
 
 #ifdef EXPANSION_KIT
 Gfx* func_i4_80074EE0(Gfx* gfx, Object* arg1) {
-    return TextureCache_DrawList_impl(gfx, sN64DDLogoCacheTexInfo, OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, false, false,
-                                      1.0f, 1.0f, false);
+    return TextureCache_DrawList_impl(gfx, sN64DDLogoCacheTexInfo, OBJECT_LEFT(arg1), OBJECT_TOP(arg1),
+                                      TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, false);
 }
 #endif
 

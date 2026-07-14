@@ -376,8 +376,8 @@ Gfx* TextureCache_DrawScaled(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top,
     }
 }
 
-Gfx* TextureCache_DrawScaledFlipped(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, TexturePtr texture, f32 scaleX,
-                                    f32 scaleY) {
+Gfx* TextureCache_DrawScaledMirror(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, TexturePtr texture, f32 scaleX,
+                                   f32 scaleY) {
 
     switch (texInfo->format) {
         case TEX_CACHE_FMT_IA8:
@@ -432,17 +432,17 @@ Gfx* TextureCache_DrawScaledTinted(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s3
 Gfx* TextureCache_DrawWithMode(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, TexturePtr texture, u32 mode,
                                bool mirrorS, bool mirrorT, f32 scaleX, f32 scaleY) {
     switch (mode) {
-        case 0:
+        case TEXTURE_CACHE_DRAW:
             return TextureCache_Draw(gfx, texInfo, left, top, texture);
-        case 1:
+        case TEXTURE_CACHE_DRAW_TINTED:
             return TextureCache_DrawTinted(gfx, texInfo, left, top, texture);
-        case 2:
+        case TEXTURE_CACHE_DRAW_MIRROR:
             return TextureCache_DrawMirror(gfx, texInfo, left, top, texture, mirrorS, mirrorT);
-        case 3:
+        case TEXTURE_CACHE_DRAW_SCALED:
             return TextureCache_DrawScaled(gfx, texInfo, left, top, texture, scaleX, scaleY);
-        case 5:
-            return TextureCache_DrawScaledFlipped(gfx, texInfo, left, top, texture, scaleX, scaleY);
-        case 4:
+        case TEXTURE_CACHE_DRAW_SCALED_MIRROR:
+            return TextureCache_DrawScaledMirror(gfx, texInfo, left, top, texture, scaleX, scaleY);
+        case TEXTURE_CACHE_DRAW_SCALED_TINTED:
             return TextureCache_DrawScaledTinted(gfx, texInfo, left, top, texture, scaleX, scaleY);
     }
 }

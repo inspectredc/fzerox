@@ -1031,16 +1031,16 @@ Gfx* CourseSelect_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
     if (gGameMode != GAMEMODE_FLX_RECORDS_COURSE_SELECT) {
         gDPSetPrimColor(gfx++, 0, 0, 75, 75, 75, 180);
         gfx = TextureCache_DrawList_impl(gfx, sTitleBackgroundCacheTexInfos[OBJECT_STATE(backgroundObj)],
-                                         OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 1, false, false, 1.0f,
-                                         1.0f, true);
+                                         OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj),
+                                         TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
     } else {
         gfx = TextureCache_DrawList_impl(gfx, sTitleBackgroundCacheTexInfos[OBJECT_STATE(backgroundObj)],
-                                         OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, false, false, 1.0f,
-                                         1.0f, true);
-        gfx =
-            TextureCache_DrawList_impl(gfx, sOptionsFalconHelmetCacheTexInfo, 53, 4, 2, true, false, 1.0f, 1.0f, true);
-        gfx = TextureCache_DrawList_impl(gfx, sOptionsFalconHelmetCacheTexInfo, 203, 4, 0, false, false, 1.0f, 1.0f,
-                                         true);
+                                         OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), TEXTURE_CACHE_DRAW,
+                                         false, false, 1.0f, 1.0f, true);
+        gfx = TextureCache_DrawList_impl(gfx, sOptionsFalconHelmetCacheTexInfo, 53, 4, TEXTURE_CACHE_DRAW_MIRROR, true,
+                                         false, 1.0f, 1.0f, true);
+        gfx = TextureCache_DrawList_impl(gfx, sOptionsFalconHelmetCacheTexInfo, 203, 4, TEXTURE_CACHE_DRAW, false,
+                                         false, 1.0f, 1.0f, true);
     }
     return gfx;
 }
@@ -1164,7 +1164,8 @@ Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
     }
 
     gfx = TextureCache_DrawList_impl(gfx, sCupSelectCacheTexInfos[spA4], OBJECT_LEFT(cupObj),
-                                     OBJECT_TOP(cupObj) + yOffset, 1, false, false, 1.0f, 1.0f, false);
+                                     OBJECT_TOP(cupObj) + yOffset, TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f,
+                                     false);
 
     if ((gSelectedMode == MODE_GP_RACE) && (spA4 <= JOKER_CUP)) {
         alpha = ((OBJECT_TOP(cupObj) - 49) * 255) / 36;
@@ -1175,9 +1176,9 @@ Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
         }
 
         for (i = 0; i < cupDifficultiesCleared; i++) {
-            gfx = TextureCache_DrawList_impl(gfx, sCupClearedDifficultyCacheTexInfos[i],
-                                             OBJECT_LEFT(cupObj) + (i * 16) + ((12 - i * 8) / 2),
-                                             (OBJECT_TOP(cupObj) + yOffset) - 12, 1, false, false, 1.0f, 1.0f, true);
+            gfx = TextureCache_DrawList_impl(
+                gfx, sCupClearedDifficultyCacheTexInfos[i], OBJECT_LEFT(cupObj) + (i * 16) + ((12 - i * 8) / 2),
+                (OBJECT_TOP(cupObj) + yOffset) - 12, TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
         }
     }
 
@@ -1192,9 +1193,9 @@ Gfx* CourseSelect_CupDraw(Gfx* gfx, Object* cupObj) {
         }
 
         for (i = 0; i < cupDifficultiesCleared; i++) {
-            gfx = TextureCache_DrawList_impl(gfx, sCupClearedDifficultyCacheTexInfos[i],
-                                             OBJECT_LEFT(cupObj) + (i * 16) + ((12 - i * 8) / 2),
-                                             (OBJECT_TOP(cupObj) + yOffset) - 9, 1, false, false, 1.0f, 1.0f, true);
+            gfx = TextureCache_DrawList_impl(
+                gfx, sCupClearedDifficultyCacheTexInfos[i], OBJECT_LEFT(cupObj) + (i * 16) + ((12 - i * 8) / 2),
+                (OBJECT_TOP(cupObj) + yOffset) - 9, TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
         }
     }
 #endif
@@ -1228,18 +1229,19 @@ Gfx* CourseSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
         yOffset = (SQ(OBJECT_COUNTER(headerObj)) * 3) / 2;
 
         gfx = TextureCache_DrawList_impl(gfx, sSelectCourseCacheTexInfo, OBJECT_LEFT(headerObj),
-                                         OBJECT_TOP(headerObj) + yOffset, 0, false, false, 1.0f, 1.0f, true);
+                                         OBJECT_TOP(headerObj) + yOffset, TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f,
+                                         true);
     } else {
-        gfx = TextureCache_DrawList_impl(gfx, sRecordsCacheTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0,
-                                         false, false, 1.0f, 1.0f, true);
+        gfx = TextureCache_DrawList_impl(gfx, sRecordsCacheTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj),
+                                         TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
     }
     return gfx;
 }
 
 Gfx* CourseSelect_OkDraw(Gfx* gfx, Object* okObj) {
     gfx = func_8007DB28(gfx, 0);
-    return TextureCache_DrawList_impl(gfx, sOKCacheTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1,
-                                      false, false, 1.0f, 1.0f, true);
+    return TextureCache_DrawList_impl(gfx, sOKCacheTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0,
+                                      TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
 }
 
 Gfx* CourseSelect_ArrowsDraw(Gfx* gfx, Object* arrowsObj) {
@@ -1248,9 +1250,11 @@ Gfx* CourseSelect_ArrowsDraw(Gfx* gfx, Object* arrowsObj) {
 
     // left and top represent x positions for left and right arrows for this object
     gfx = TextureCache_DrawList_impl(gfx, sYellowArrowCacheTexInfo, LEFT_ARROW_LEFT(arrowsObj) + 0x2B,
-                                     (((1.0 - temp_fv0) * 16.0) + 112.0), 3, false, false, 1.0f, temp_fv0, true);
+                                     (((1.0 - temp_fv0) * 16.0) + 112.0), TEXTURE_CACHE_DRAW_SCALED, false, false, 1.0f,
+                                     temp_fv0, true);
     return TextureCache_DrawList_impl(gfx, sYellowArrowCacheTexInfo, RIGHT_ARROW_LEFT(arrowsObj) + 0xF5,
-                                      (((1.0 - temp_fa1) * 16.0) + 112.0), 5, false, false, 1.0f, temp_fa1, true);
+                                      (((1.0 - temp_fa1) * 16.0) + 112.0), TEXTURE_CACHE_DRAW_SCALED_MIRROR, false,
+                                      false, 1.0f, temp_fa1, true);
 }
 
 Gfx* CourseSelect_NameDraw(Gfx* gfx) {
@@ -1357,9 +1361,9 @@ Gfx* CourseSelect_GhostMarkerDraw(Gfx* gfx, Object* ghostMarkerObj) {
         case COURSE_SELECT_CONTINUE:
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 #ifndef EXPANSION_KIT
-            gfx = TextureCache_DrawList_impl(gfx, sHasGhostMarkerCacheTexInfo,
-                                             OBJECT_LEFT(ghostMarkerObj) + GHOST_MARKER_OFFSET(ghostMarkerObj),
-                                             OBJECT_TOP(ghostMarkerObj), 0, false, false, 1.0f, 1.0f, true);
+            gfx = TextureCache_DrawList_impl(
+                gfx, sHasGhostMarkerCacheTexInfo, OBJECT_LEFT(ghostMarkerObj) + GHOST_MARKER_OFFSET(ghostMarkerObj),
+                OBJECT_TOP(ghostMarkerObj), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
 #else
             if (gCupSelectOption >= 10) {
                 cupCourseIndex = sCourseSelectCup * 6;
@@ -1373,7 +1377,7 @@ Gfx* CourseSelect_GhostMarkerDraw(Gfx* gfx, Object* ghostMarkerObj) {
                     ((D_i5_8007B9EC[cupCourseIndex + i] & 1) ||
                      (GHOST_MARKER_COURSE(ghostMarkerObj) == cupCourseIndex + i))) {
                     gfx = TextureCache_DrawList_impl(gfx, sHasGhostMarkerCacheTexInfo, left, OBJECT_TOP(ghostMarkerObj),
-                                                     0, false, false, 1.0f, 1.0f, true);
+                                                     TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
                 }
             }
 #endif
@@ -1411,11 +1415,11 @@ Gfx* CourseSelect_GhostOptionDraw(Gfx* gfx, Object* ghostOptionObj) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
         gfx = TextureCache_DrawList_impl(gfx, sTimeAttackGhostOptionCacheTexInfos[i], OBJECT_LEFT(ghostOptionObj) + 195,
-                                         i * 20 + 0x2D, 0, false, false, 1.0f, 1.0f, true);
+                                         i * 20 + 0x2D, TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
 
         if ((i == 2) && sStaffGhostTimeBeaten) {
             gfx = TextureCache_DrawList_impl(gfx, sStaffGhostBeatenCacheTexInfo, OBJECT_LEFT(ghostOptionObj) + 265,
-                                             i * 20 + 0x2D, 0, false, false, 1.0f, 1.0f, true);
+                                             i * 20 + 0x2D, TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
         }
     }
     return gfx;

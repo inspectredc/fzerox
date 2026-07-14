@@ -564,8 +564,8 @@ Gfx* Credits_OldMachinesDraw(Gfx* gfx, Object* oldMachinesObj) {
     }
 
     return TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(oldMachinesObj)],
-                                          OBJECT_LEFT(oldMachinesObj), OBJECT_TOP(oldMachinesObj), 0, false, false,
-                                          1.0f, 1.0f, true);
+                                          OBJECT_LEFT(oldMachinesObj), OBJECT_TOP(oldMachinesObj), TEXTURE_CACHE_DRAW,
+                                          false, false, 1.0f, 1.0f, true);
 }
 
 #define UNK_RAND_MACRO(var, x, y) (((Math_Rand1() >> (var % 4)) % x) - y)
@@ -648,8 +648,8 @@ Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
             }
             break;
         case 1:
-            gfx = TextureCache_DrawSwapSlot_impl(gfx, temp_s1, OBJECT_LEFT(machinesObj), top, 0, false, false, 1.0f,
-                                                 1.0f, true);
+            gfx = TextureCache_DrawSwapSlot_impl(gfx, temp_s1, OBJECT_LEFT(machinesObj), top, TEXTURE_CACHE_DRAW, false,
+                                                 false, 1.0f, 1.0f, true);
             break;
         case 2:
             if (sp154 < 5) {
@@ -660,7 +660,8 @@ Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
                 additionalHeight = (height * (1.0f - var_fv1)) / 2;
 
                 gfx = TextureCache_DrawSwapSlot_impl(gfx, temp_s1, OBJECT_LEFT(machinesObj) + additionalWidth,
-                                                     top + additionalHeight, 4, false, false, var_fv1, var_fv1, true);
+                                                     top + additionalHeight, TEXTURE_CACHE_DRAW_SCALED_TINTED, false,
+                                                     false, var_fv1, var_fv1, true);
             } else {
                 if (temp_s1->slotTextureId == 0) {
                     texture = temp_s1->textureA;
@@ -1042,7 +1043,8 @@ Gfx* Credits_PortraitsDraw(Gfx* gfx, Object* portraitsObj) {
 
     if (OBJECT_STATE2(portraitsObj) == 0) {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255 - temp_v1);
-        gfx = TextureCache_DrawSwapSlot_impl(gfx, sp34, left, -5, 1, false, false, 1.0f, 1.0f, true);
+        gfx = TextureCache_DrawSwapSlot_impl(gfx, sp34, left, -5, TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f,
+                                             true);
     }
     return gfx;
 }

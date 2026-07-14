@@ -1194,8 +1194,8 @@ Gfx* MachineSelect_BackgroundDraw(Gfx* gfx) {
 Gfx* MachineSelect_HeaderDraw(Gfx* gfx, Object* headerObj) {
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    return TextureCache_DrawList_impl(gfx, sSelectMachineCacheTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj), 0,
-                                      false, false, 1.0f, 1.0f, true);
+    return TextureCache_DrawList_impl(gfx, sSelectMachineCacheTexInfo, OBJECT_LEFT(headerObj), OBJECT_TOP(headerObj),
+                                      TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
 }
 
 Gfx* func_i4_80117BE0(Gfx* gfx, Object* arg1) {
@@ -1204,12 +1204,12 @@ Gfx* func_i4_80117BE0(Gfx* gfx, Object* arg1) {
 
     if (gNumPlayers == 1) {
         gfx = TextureCache_DrawList_impl(gfx, sPortraitCacheTexInfos[gRacers[0].character], OBJECT_LEFT(arg1),
-                                         OBJECT_TOP(arg1), 0, false, false, 1.0f, 1.0f, true);
+                                         OBJECT_TOP(arg1), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             var_s0 = &D_i4_8011D6C4[i * 2];
             gfx = TextureCache_DrawList_impl(gfx, sSmallPortraitCacheTexInfos[gRacers[i].character], var_s0[0],
-                                             var_s0[1] + 55, 0, false, false, 1.0f, 1.0f, true);
+                                             var_s0[1] + 55, TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
         }
     }
     return gfx;
@@ -1225,20 +1225,22 @@ Gfx* MachineSettings_PortraitDraw(Gfx* gfx, Object* portraitObj) {
     positions = &D_i4_8011D6C4[playerIndex * 2];
     switch (gNumPlayers) {
         case 1:
-            gfx = TextureCache_DrawList_impl(gfx, sPortraitBackgroundCacheTexInfo, OBJECT_LEFT(portraitObj),
-                                             OBJECT_TOP(portraitObj), 0, false, false, 1.0f, 1.0f, true);
+            gfx =
+                TextureCache_DrawList_impl(gfx, sPortraitBackgroundCacheTexInfo, OBJECT_LEFT(portraitObj),
+                                           OBJECT_TOP(portraitObj), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
             gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitObj)],
-                                                 OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, false, false,
-                                                 1.0f, 1.0f, true);
+                                                 OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), TEXTURE_CACHE_DRAW,
+                                                 false, false, 1.0f, 1.0f, true);
             break;
         case 2:
             gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitObj)],
-                                                 positions[0] - 4, positions[1] + 0x1A, 0, false, false, 1.0f, 1.0f,
-                                                 true);
+                                                 positions[0] - 4, positions[1] + 0x1A, TEXTURE_CACHE_DRAW, false,
+                                                 false, 1.0f, 1.0f, true);
             break;
         default:
-            gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitObj)], positions[0],
-                                                 positions[1] + 0x37, 0, false, false, 1.0f, 1.0f, true);
+            gfx =
+                TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitObj)], positions[0],
+                                               positions[1] + 0x37, TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
             break;
     }
     return gfx;
@@ -1261,15 +1263,15 @@ Gfx* MachineSelect_StatsDraw(Gfx* gfx, Object* statsObj) {
     temp_t0 = D_i4_8011D694[playerIndex * 2 + 1];
     if (playerIndex < 2) {
         for (i = 0; i < 3; i++) {
-            gfx = TextureCache_DrawList_impl(gfx, sMachineStatCacheTexInfos[i], temp_fp, (temp_t0 - 7) + i * 20, 0,
-                                             false, false, 1.0f, 1.0f, true);
+            gfx = TextureCache_DrawList_impl(gfx, sMachineStatCacheTexInfos[i], temp_fp, (temp_t0 - 7) + i * 20,
+                                             TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
             temp_s0 = sMachineStatValueStr[temp_a3[i]];
             gfx = Font_DrawString(gfx, temp_fp + 5, (temp_t0 + 10) + i * 20, temp_s0, 0, FONT_SET_2, 0);
         }
     } else {
         for (i = 0; i < 3; i++) {
-            gfx = TextureCache_DrawList_impl(gfx, sMachineStatCacheTexInfos[i], temp_fp - 20, (temp_t0 - 7) + i * 20, 0,
-                                             false, false, 1.0f, 1.0f, true);
+            gfx = TextureCache_DrawList_impl(gfx, sMachineStatCacheTexInfos[i], temp_fp - 20, (temp_t0 - 7) + i * 20,
+                                             TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
             temp_s0 = sMachineStatValueStr[temp_a3[i]];
             gfx = Font_DrawString(gfx, (temp_fp - Font_GetStringWidth(temp_s0, FONT_SET_2, 0)) - 5,
                                   (temp_t0 + 10) + i * 20, temp_s0, 0, FONT_SET_2, 0);
@@ -1284,17 +1286,18 @@ Gfx* MachineSelect_PortraitDraw(Gfx* gfx, Object* portraitObj) {
     playerIndex = portraitObj->cmdId - OBJECT_MACHINE_SELECT_PORTRAIT_0;
 
     gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitObj)],
-                                         OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, false, false, 1.0f, 1.0f,
-                                         true);
-    return TextureCache_DrawList_impl(
-        gfx, sPlayerNumIconCacheTexInfos[playerIndex], D_i4_8011D674[playerIndex * 2 + 0] + OBJECT_LEFT(portraitObj),
-        D_i4_8011D674[playerIndex * 2 + 1] + OBJECT_TOP(portraitObj), 0, false, false, 1.0f, 1.0f, true);
+                                         OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), TEXTURE_CACHE_DRAW, false,
+                                         false, 1.0f, 1.0f, true);
+    return TextureCache_DrawList_impl(gfx, sPlayerNumIconCacheTexInfos[playerIndex],
+                                      D_i4_8011D674[playerIndex * 2 + 0] + OBJECT_LEFT(portraitObj),
+                                      D_i4_8011D674[playerIndex * 2 + 1] + OBJECT_TOP(portraitObj), TEXTURE_CACHE_DRAW,
+                                      false, false, 1.0f, 1.0f, true);
 }
 
 Gfx* MachineSelect_CursorNumDraw(Gfx* gfx, Object* portraitObj) {
     return TextureCache_DrawList_impl(
         gfx, sPlayerNumIconCacheTexInfos[portraitObj->cmdId - OBJECT_MACHINE_SELECT_CURSOR_NUM_0],
-        OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), 0, false, false, 1.0f, 1.0f, true);
+        OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
 }
 
 extern u32 gGameFrameCount;
@@ -1333,7 +1336,8 @@ Gfx* MachineSelect_CursorDraw(Gfx* gfx, Object* cursorObj) {
             OBJECT_TOP(cursorObj) = ((temp_v0 / 6) * 34) + 37;
 
             gfx = TextureCache_DrawList_impl(gfx, sMachineSelectCursorCacheTexInfo, OBJECT_LEFT(cursorObj),
-                                             OBJECT_TOP(cursorObj), 1, false, false, 1.0f, 1.0f, true);
+                                             OBJECT_TOP(cursorObj), TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f,
+                                             true);
         }
     }
     return gfx;
@@ -1406,8 +1410,8 @@ Gfx* MachineSelect_OkDraw(Gfx* gfx, Object* okObj) {
     }
 
     gfx = func_8007DB28(gfx, 0);
-    return TextureCache_DrawList_impl(gfx, sOKCacheTexInfo, OBJECT_LEFT(okObj) + var_v1, OBJECT_TOP(okObj) + 209, 1,
-                                      false, false, 1.0f, 1.0f, true);
+    return TextureCache_DrawList_impl(gfx, sOKCacheTexInfo, OBJECT_LEFT(okObj) + var_v1, OBJECT_TOP(okObj) + 209,
+                                      TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
 }
 
 extern const char* gMachineNames[];
@@ -1527,8 +1531,9 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
 
     if (gNumPlayers == 1) {
         weight = gMachines[gRacers[0].character].weight;
-        gfx = TextureCache_DrawList_impl(gfx, sMachineInfoGraphCacheTexInfo, OBJECT_LEFT(engineWeightObj),
-                                         OBJECT_TOP(engineWeightObj), 0, false, false, 1.0f, 1.0f, true);
+        gfx =
+            TextureCache_DrawList_impl(gfx, sMachineInfoGraphCacheTexInfo, OBJECT_LEFT(engineWeightObj),
+                                       OBJECT_TOP(engineWeightObj), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
         gfx = Font_DrawMachineWeight(gfx, OBJECT_LEFT(engineWeightObj) + 0x66, OBJECT_TOP(engineWeightObj) + 0x17,
                                      weight);
 
@@ -1543,19 +1548,20 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
         }
 #ifdef VERSION_JP
         gfx = TextureCache_DrawList_impl(gfx, sMachineAccelerationMaxSpeedCacheTexInfo, OBJECT_LEFT(engineWeightObj),
-                                         OBJECT_TOP(engineWeightObj), 1, false, false, 1.0f, 1.0f, true);
+                                         OBJECT_TOP(engineWeightObj), TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f,
+                                         1.0f, true);
 #else
-        gfx =
-            TextureCache_DrawList_impl(gfx, sMachineAccelerationMaxSpeedCacheTexInfo, OBJECT_LEFT(engineWeightObj) + 3,
-                                       OBJECT_TOP(engineWeightObj) + 1, 1, false, false, 1.0f, 1.0f, true);
+        gfx = TextureCache_DrawList_impl(gfx, sMachineAccelerationMaxSpeedCacheTexInfo,
+                                         OBJECT_LEFT(engineWeightObj) + 3, OBJECT_TOP(engineWeightObj) + 1,
+                                         TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
 #endif
     } else {
         for (i = 0; i < gNumPlayers; i++) {
             weight = gMachines[gRacers[i].character].weight;
             temp_s0 = D_i4_8011D6C4[i * 2 + 0];
             temp_s1 = D_i4_8011D6C4[i * 2 + 1];
-            gfx = TextureCache_DrawList_impl(gfx, sMachineInfoGraphSmallCacheTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA, 0,
-                                             false, false, 1.0f, 1.0f, true);
+            gfx = TextureCache_DrawList_impl(gfx, sMachineInfoGraphSmallCacheTexInfo, temp_s0 + 0x2B, temp_s1 + 0xA,
+                                             TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
             gfx = Font_DrawMachineWeight(gfx, temp_s0 + 0x6E, temp_s1 + 0x1C, weight);
             if (gPlayerSelectionLock[i] == SELECTION_FREE) {
                 gfx = func_8007DB28(gfx, 0);
@@ -1563,7 +1569,7 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
                 gDPSetPrimColor(gfx++, 0, 0, 0, 255, 0, 255);
             }
             gfx = TextureCache_DrawList_impl(gfx, sMachineAccelerationMaxSpeedSmallCacheTexInfo, temp_s0 + 0x2B,
-                                             temp_s1 + 0xA, 1, false, false, 1.0f, 1.0f, true);
+                                             temp_s1 + 0xA, TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
         }
     }
     return gfx;
@@ -1579,7 +1585,7 @@ Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* statsObj) {
 
     if (gNumPlayers == 1) {
         gfx = TextureCache_DrawList_impl(gfx, sMachineBodyBoostGripCacheTexInfo, OBJECT_LEFT(statsObj),
-                                         OBJECT_TOP(statsObj), 0, false, false, 1.0f, 1.0f, true);
+                                         OBJECT_TOP(statsObj), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
 
         for (i = 0; i < 3; i++) {
             temp = gMachines[gRacers[0].character].machineStats;
@@ -1592,7 +1598,7 @@ Gfx* MachineSettings_StatsDraw(Gfx* gfx, Object* statsObj) {
             topOffset = D_i4_8011D6C4[i * 2 + 1];
 
             gfx = TextureCache_DrawList_impl(gfx, sMachineBodyBoostGripSmallCacheTexInfo, leftOffset + 0x2B,
-                                             topOffset + 0x39, 0, false, false, 1.0f, 1.0f, true);
+                                             topOffset + 0x39, TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, true);
 
             for (j = 0; j < 3; j++) {
                 temp = gMachines[gRacers[i].character].machineStats;
@@ -1629,15 +1635,15 @@ Gfx* MachineSettings_NameCardDraw(Gfx* gfx, Object* nameCardObj) {
 
     if (gNumPlayers == 1) {
         gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(nameCardObj)],
-                                             OBJECT_LEFT(nameCardObj), OBJECT_TOP(nameCardObj), 0, false, false, 1.0f,
-                                             1.0f, true);
+                                             OBJECT_LEFT(nameCardObj), OBJECT_TOP(nameCardObj), TEXTURE_CACHE_DRAW,
+                                             false, false, 1.0f, 1.0f, true);
     }
     return gfx;
 }
 
 Gfx* MachineSettings_SliderDraw(Gfx* gfx, Object* sliderObj) {
     s32 i;
-    s32 temp_v1;
+    s32 mode;
     s32 left;
     s32 top;
 
@@ -1655,10 +1661,10 @@ Gfx* MachineSettings_SliderDraw(Gfx* gfx, Object* sliderObj) {
         }
 
         gfx = TextureCache_DrawList_impl(gfx, sEngineSliderCacheTexInfo, (s32) (gPlayerEngine[0] * 128.0f) + 0x98, 0x54,
-                                         1, false, false, 1.0f, 1.0f, true);
+                                         TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
     } else {
         for (i = 0; i < gNumPlayers; i++) {
-            temp_v1 = 1;
+            mode = TEXTURE_CACHE_DRAW_TINTED;
             switch (gMachineSettingsState) {
                 case MACHINE_SETTINGS_ACTIVE:
                 case MACHINE_SETTINGS_EXIT:
@@ -1673,8 +1679,8 @@ Gfx* MachineSettings_SliderDraw(Gfx* gfx, Object* sliderObj) {
 
             top = D_i4_8011D6C4[i * 2 + 1] + 0x2E;
             left = D_i4_8011D6C4[i * 2 + 0] + (s32) (gPlayerEngine[i] * 80.0f) + 0x23;
-            gfx = TextureCache_DrawList_impl(gfx, sEngineSliderCacheTexInfo, left, top, temp_v1, false, false, 1.0f,
-                                             1.0f, true);
+            gfx = TextureCache_DrawList_impl(gfx, sEngineSliderCacheTexInfo, left, top, mode, false, false, 1.0f, 1.0f,
+                                             true);
         }
     }
     return gfx;
@@ -1761,8 +1767,8 @@ Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* difficultyCupsObj) {
 #endif
         }
 
-        gfx = TextureCache_DrawList_impl(gfx, sTrophyCacheTexInfos[trophyIndex], 20, 115 + i * 20, 0, false, false,
-                                         1.0f, 1.0f, false);
+        gfx = TextureCache_DrawList_impl(gfx, sTrophyCacheTexInfos[trophyIndex], 20, 115 + i * 20, TEXTURE_CACHE_DRAW,
+                                         false, false, 1.0f, 1.0f, false);
     }
 
 #ifdef EXPANSION_KIT
@@ -1777,13 +1783,13 @@ Gfx* MachineSelect_DifficultyCupsDraw(Gfx* gfx, Object* difficultyCupsObj) {
             trophyIndex = difficulty + 21;
         }
 
-        gfx = TextureCache_DrawList_impl(gfx, sTrophyCacheTexInfos[trophyIndex], 284, 115 + i * 20, 0, false, false,
-                                         1.0f, 1.0f, false);
+        gfx = TextureCache_DrawList_impl(gfx, sTrophyCacheTexInfos[trophyIndex], 284, 115 + i * 20, TEXTURE_CACHE_DRAW,
+                                         false, false, 1.0f, 1.0f, false);
     }
 #endif
 
-    return TextureCache_DrawList_impl(gfx, sDifficultyCacheTexInfos[difficulty], 30, 209, 0, false, false, 1.0f, 1.0f,
-                                      true);
+    return TextureCache_DrawList_impl(gfx, sDifficultyCacheTexInfos[difficulty], 30, 209, TEXTURE_CACHE_DRAW, false,
+                                      false, 1.0f, 1.0f, true);
 }
 
 Gfx* MachineSelect_NameDraw(Gfx* gfx, Object* nameObj) {
@@ -1809,8 +1815,8 @@ Gfx* MachineSelect_NameDraw(Gfx* gfx, Object* nameObj) {
 
 Gfx* MachineSettings_OkDraw(Gfx* gfx, Object* okObj) {
     gfx = func_8007DB28(gfx, 0);
-    return TextureCache_DrawList_impl(gfx, sOKCacheTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0, 1,
-                                      false, false, 1.0f, 1.0f, true);
+    return TextureCache_DrawList_impl(gfx, sOKCacheTexInfo, OBJECT_LEFT(okObj) + 0x10B, OBJECT_TOP(okObj) + 0xD0,
+                                      TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
 }
 
 void func_i4_80119BB8(Object* arg0) {
