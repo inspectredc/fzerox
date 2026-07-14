@@ -14,202 +14,202 @@ static s32 sMachineSelectIndex;
 static s32 sMachinesUnlocked;
 s32 sPreviousMachineSelectIndex;
 
-static unk_80077D50 sSmallPortraitDrStewartCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitDrStewartCacheTexInfo[] = {
     { 17, aSmallPortraitDrStewartTex, TEX_WIDTH(aSmallPortraitDrStewartTex), TEX_HEIGHT(aSmallPortraitDrStewartTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitDrStewartTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitCaptainFalconCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitCaptainFalconCacheTexInfo[] = {
     { 17, aSmallPortraitCaptainFalconTex, TEX_WIDTH(aSmallPortraitCaptainFalconTex),
       TEX_HEIGHT(aSmallPortraitCaptainFalconTex), TEX_COMPRESSED_SIZE(aSmallPortraitCaptainFalconTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitJodySummerCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitJodySummerCacheTexInfo[] = {
     { 17, aSmallPortraitJodySummerTex, TEX_WIDTH(aSmallPortraitJodySummerTex), TEX_HEIGHT(aSmallPortraitJodySummerTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitJodySummerTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitSamuraiGorohCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitSamuraiGorohCacheTexInfo[] = {
     { 17, aSmallPortraitSamuraiGorohTex, TEX_WIDTH(aSmallPortraitSamuraiGorohTex),
       TEX_HEIGHT(aSmallPortraitSamuraiGorohTex), TEX_COMPRESSED_SIZE(aSmallPortraitSamuraiGorohTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitMightyGazelleCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitMightyGazelleCacheTexInfo[] = {
     { 17, aSmallPortraitMightyGazelleTex, TEX_WIDTH(aSmallPortraitMightyGazelleTex),
       TEX_HEIGHT(aSmallPortraitMightyGazelleTex), TEX_COMPRESSED_SIZE(aSmallPortraitMightyGazelleTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitPicoCompTexInfo[] = { { 17, aSmallPortraitPicoTex, TEX_WIDTH(aSmallPortraitPicoTex),
-                                                          TEX_HEIGHT(aSmallPortraitPicoTex),
-                                                          TEX_COMPRESSED_SIZE(aSmallPortraitPicoTex) },
-                                                        { 0 } };
-static unk_80077D50 sSmallPortraitBabaCompTexInfo[] = { { 17, aSmallPortraitBabaTex, TEX_WIDTH(aSmallPortraitBabaTex),
-                                                          TEX_HEIGHT(aSmallPortraitBabaTex),
-                                                          TEX_COMPRESSED_SIZE(aSmallPortraitBabaTex) },
-                                                        { 0 } };
-static unk_80077D50 sSmallPortraitMrEadCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitPicoCacheTexInfo[] = { { 17, aSmallPortraitPicoTex, TEX_WIDTH(aSmallPortraitPicoTex),
+                                                           TEX_HEIGHT(aSmallPortraitPicoTex),
+                                                           TEX_COMPRESSED_SIZE(aSmallPortraitPicoTex) },
+                                                         { 0 } };
+static CacheTexInfo sSmallPortraitBabaCacheTexInfo[] = { { 17, aSmallPortraitBabaTex, TEX_WIDTH(aSmallPortraitBabaTex),
+                                                           TEX_HEIGHT(aSmallPortraitBabaTex),
+                                                           TEX_COMPRESSED_SIZE(aSmallPortraitBabaTex) },
+                                                         { 0 } };
+static CacheTexInfo sSmallPortraitMrEadCacheTexInfo[] = {
     { 17, aSmallPortraitMrEadTex, TEX_WIDTH(aSmallPortraitMrEadTex), TEX_HEIGHT(aSmallPortraitMrEadTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitMrEadTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitOctomanCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitOctomanCacheTexInfo[] = {
     { 17, aSmallPortraitOctomanTex, TEX_WIDTH(aSmallPortraitOctomanTex), TEX_HEIGHT(aSmallPortraitOctomanTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitOctomanTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitTheSkullCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitTheSkullCacheTexInfo[] = {
     { 17, aSmallPortraitTheSkullTex, TEX_WIDTH(aSmallPortraitTheSkullTex), TEX_HEIGHT(aSmallPortraitTheSkullTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitTheSkullTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitBeastmanCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitBeastmanCacheTexInfo[] = {
     { 17, aSmallPortraitBeastmanTex, TEX_WIDTH(aSmallPortraitBeastmanTex), TEX_HEIGHT(aSmallPortraitBeastmanTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitBeastmanTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitAntonioGusterCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitAntonioGusterCacheTexInfo[] = {
     { 17, aSmallPortraitAntonioGusterTex, TEX_WIDTH(aSmallPortraitAntonioGusterTex),
       TEX_HEIGHT(aSmallPortraitAntonioGusterTex), TEX_COMPRESSED_SIZE(aSmallPortraitAntonioGusterTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitDraqCompTexInfo[] = { { 17, aSmallPortraitDraqTex, TEX_WIDTH(aSmallPortraitDraqTex),
-                                                          TEX_HEIGHT(aSmallPortraitDraqTex),
-                                                          TEX_COMPRESSED_SIZE(aSmallPortraitDraqTex) },
-                                                        { 0 } };
-static unk_80077D50 sSmallPortraitRogerBusterCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitDraqCacheTexInfo[] = { { 17, aSmallPortraitDraqTex, TEX_WIDTH(aSmallPortraitDraqTex),
+                                                           TEX_HEIGHT(aSmallPortraitDraqTex),
+                                                           TEX_COMPRESSED_SIZE(aSmallPortraitDraqTex) },
+                                                         { 0 } };
+static CacheTexInfo sSmallPortraitRogerBusterCacheTexInfo[] = {
     { 17, aSmallPortraitRogerBusterTex, TEX_WIDTH(aSmallPortraitRogerBusterTex),
       TEX_HEIGHT(aSmallPortraitRogerBusterTex), TEX_COMPRESSED_SIZE(aSmallPortraitRogerBusterTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitSilverNeelsenCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitSilverNeelsenCacheTexInfo[] = {
     { 17, aSmallPortraitSilverNeelsenTex, TEX_WIDTH(aSmallPortraitSilverNeelsenTex),
       TEX_HEIGHT(aSmallPortraitSilverNeelsenTex), TEX_COMPRESSED_SIZE(aSmallPortraitSilverNeelsenTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitSuperArrowCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitSuperArrowCacheTexInfo[] = {
     { 17, aSmallPortraitSuperArrowTex, TEX_WIDTH(aSmallPortraitSuperArrowTex), TEX_HEIGHT(aSmallPortraitSuperArrowTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitSuperArrowTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitMrsArrowCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitMrsArrowCacheTexInfo[] = {
     { 17, aSmallPortraitMrsArrowTex, TEX_WIDTH(aSmallPortraitMrsArrowTex), TEX_HEIGHT(aSmallPortraitMrsArrowTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitMrsArrowTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitZodaCompTexInfo[] = { { 17, aSmallPortraitZodaTex, TEX_WIDTH(aSmallPortraitZodaTex),
-                                                          TEX_HEIGHT(aSmallPortraitZodaTex),
-                                                          TEX_COMPRESSED_SIZE(aSmallPortraitZodaTex) },
-                                                        { 0 } };
-static unk_80077D50 sSmallPortraitJohnTanakaCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitZodaCacheTexInfo[] = { { 17, aSmallPortraitZodaTex, TEX_WIDTH(aSmallPortraitZodaTex),
+                                                           TEX_HEIGHT(aSmallPortraitZodaTex),
+                                                           TEX_COMPRESSED_SIZE(aSmallPortraitZodaTex) },
+                                                         { 0 } };
+static CacheTexInfo sSmallPortraitJohnTanakaCacheTexInfo[] = {
     { 17, aSmallPortraitJohnTanakaTex, TEX_WIDTH(aSmallPortraitJohnTanakaTex), TEX_HEIGHT(aSmallPortraitJohnTanakaTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitJohnTanakaTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitBioRexCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitBioRexCacheTexInfo[] = {
     { 17, aSmallPortraitBioRexTex, TEX_WIDTH(aSmallPortraitBioRexTex), TEX_HEIGHT(aSmallPortraitBioRexTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitBioRexTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitKateAlenCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitKateAlenCacheTexInfo[] = {
     { 17, aSmallPortraitKateAlenTex, TEX_WIDTH(aSmallPortraitKateAlenTex), TEX_HEIGHT(aSmallPortraitKateAlenTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitKateAlenTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitGomarAndShiohCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitGomarAndShiohCacheTexInfo[] = {
     { 17, aSmallPortraitGomarAndShiohTex, TEX_WIDTH(aSmallPortraitGomarAndShiohTex),
       TEX_HEIGHT(aSmallPortraitGomarAndShiohTex), TEX_COMPRESSED_SIZE(aSmallPortraitGomarAndShiohTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitMichaelChainCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitMichaelChainCacheTexInfo[] = {
     { 17, aSmallPortraitMichaelChainTex, TEX_WIDTH(aSmallPortraitMichaelChainTex),
       TEX_HEIGHT(aSmallPortraitMichaelChainTex), TEX_COMPRESSED_SIZE(aSmallPortraitMichaelChainTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitBillyCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitBillyCacheTexInfo[] = {
     { 17, aSmallPortraitBillyTex, TEX_WIDTH(aSmallPortraitBillyTex), TEX_HEIGHT(aSmallPortraitBillyTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitBillyTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitDrClashCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitDrClashCacheTexInfo[] = {
     { 17, aSmallPortraitDrClashTex, TEX_WIDTH(aSmallPortraitDrClashTex), TEX_HEIGHT(aSmallPortraitDrClashTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitDrClashTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitJackLevinCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitJackLevinCacheTexInfo[] = {
     { 17, aSmallPortraitJackLevinTex, TEX_WIDTH(aSmallPortraitJackLevinTex), TEX_HEIGHT(aSmallPortraitJackLevinTex),
       TEX_COMPRESSED_SIZE(aSmallPortraitJackLevinTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitBloodFalconCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitBloodFalconCacheTexInfo[] = {
     { 17, aSmallPortraitBloodFalconTex, TEX_WIDTH(aSmallPortraitBloodFalconTex),
       TEX_HEIGHT(aSmallPortraitBloodFalconTex), TEX_COMPRESSED_SIZE(aSmallPortraitBloodFalconTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitLeonCompTexInfo[] = { { 17, aSmallPortraitLeonTex, TEX_WIDTH(aSmallPortraitLeonTex),
-                                                          TEX_HEIGHT(aSmallPortraitLeonTex),
-                                                          TEX_COMPRESSED_SIZE(aSmallPortraitLeonTex) },
-                                                        { 0 } };
-static unk_80077D50 sSmallPortraitJamesMcCloudCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitLeonCacheTexInfo[] = { { 17, aSmallPortraitLeonTex, TEX_WIDTH(aSmallPortraitLeonTex),
+                                                           TEX_HEIGHT(aSmallPortraitLeonTex),
+                                                           TEX_COMPRESSED_SIZE(aSmallPortraitLeonTex) },
+                                                         { 0 } };
+static CacheTexInfo sSmallPortraitJamesMcCloudCacheTexInfo[] = {
     { 17, aSmallPortraitJamesMcCloudTex, TEX_WIDTH(aSmallPortraitJamesMcCloudTex),
       TEX_HEIGHT(aSmallPortraitJamesMcCloudTex), TEX_COMPRESSED_SIZE(aSmallPortraitJamesMcCloudTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitBlackShadowCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitBlackShadowCacheTexInfo[] = {
     { 17, aSmallPortraitBlackShadowTex, TEX_WIDTH(aSmallPortraitBlackShadowTex),
       TEX_HEIGHT(aSmallPortraitBlackShadowTex), TEX_COMPRESSED_SIZE(aSmallPortraitBlackShadowTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitCaptainFalconAltCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitCaptainFalconAltCacheTexInfo[] = {
     { 17, aSmallPortraitCaptainFalconAltTex, TEX_WIDTH(aSmallPortraitCaptainFalconAltTex),
       TEX_HEIGHT(aSmallPortraitCaptainFalconAltTex), TEX_COMPRESSED_SIZE(aSmallPortraitCaptainFalconAltTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitSamuraiGorohAltCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitSamuraiGorohAltCacheTexInfo[] = {
     { 17, aSmallPortraitSamuraiGorohAltTex, TEX_WIDTH(aSmallPortraitSamuraiGorohAltTex),
       TEX_HEIGHT(aSmallPortraitSamuraiGorohAltTex), TEX_COMPRESSED_SIZE(aSmallPortraitSamuraiGorohAltTex) },
     { 0 }
 };
-static unk_80077D50 sSmallPortraitJodySummerAltCompTexInfo[] = {
+static CacheTexInfo sSmallPortraitJodySummerAltCacheTexInfo[] = {
     { 17, aSmallPortraitJodySummerAltTex, TEX_WIDTH(aSmallPortraitJodySummerAltTex),
       TEX_HEIGHT(aSmallPortraitJodySummerAltTex), TEX_COMPRESSED_SIZE(aSmallPortraitJodySummerAltTex) },
     { 0 }
 };
 
-unk_800792D8 D_xk3_80136C50[] = { { sSmallPortraitDrStewartCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136C60[] = { { sSmallPortraitCaptainFalconCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136C70[] = { { sSmallPortraitJodySummerCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136C80[] = { { sSmallPortraitSamuraiGorohCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136C90[] = { { sSmallPortraitMightyGazelleCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136CA0[] = { { sSmallPortraitPicoCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136CB0[] = { { sSmallPortraitBabaCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136CC0[] = { { sSmallPortraitMrEadCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136CD0[] = { { sSmallPortraitOctomanCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136CE0[] = { { sSmallPortraitTheSkullCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136CF0[] = { { sSmallPortraitBeastmanCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136D00[] = { { sSmallPortraitAntonioGusterCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136D10[] = { { sSmallPortraitDraqCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136D20[] = { { sSmallPortraitRogerBusterCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136D30[] = { { sSmallPortraitSilverNeelsenCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136D40[] = { { sSmallPortraitSuperArrowCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136D50[] = { { sSmallPortraitMrsArrowCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136D60[] = { { sSmallPortraitZodaCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136D70[] = { { sSmallPortraitJohnTanakaCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136D80[] = { { sSmallPortraitBioRexCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136D90[] = { { sSmallPortraitKateAlenCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136DA0[] = { { sSmallPortraitGomarAndShiohCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136DB0[] = { { sSmallPortraitMichaelChainCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136DC0[] = { { sSmallPortraitBillyCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136DD0[] = { { sSmallPortraitDrClashCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136DE0[] = { { sSmallPortraitJackLevinCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136DF0[] = { { sSmallPortraitBloodFalconCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136E00[] = { { sSmallPortraitLeonCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136E10[] = { { sSmallPortraitJamesMcCloudCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136E20[] = { { sSmallPortraitBlackShadowCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136E30[] = { { sSmallPortraitCaptainFalconAltCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136E40[] = { { sSmallPortraitSamuraiGorohAltCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_xk3_80136E50[] = { { sSmallPortraitJodySummerAltCompTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136C50[] = { { sSmallPortraitDrStewartCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136C60[] = { { sSmallPortraitCaptainFalconCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136C70[] = { { sSmallPortraitJodySummerCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136C80[] = { { sSmallPortraitSamuraiGorohCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136C90[] = { { sSmallPortraitMightyGazelleCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136CA0[] = { { sSmallPortraitPicoCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136CB0[] = { { sSmallPortraitBabaCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136CC0[] = { { sSmallPortraitMrEadCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136CD0[] = { { sSmallPortraitOctomanCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136CE0[] = { { sSmallPortraitTheSkullCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136CF0[] = { { sSmallPortraitBeastmanCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136D00[] = { { sSmallPortraitAntonioGusterCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136D10[] = { { sSmallPortraitDraqCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136D20[] = { { sSmallPortraitRogerBusterCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136D30[] = { { sSmallPortraitSilverNeelsenCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136D40[] = { { sSmallPortraitSuperArrowCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136D50[] = { { sSmallPortraitMrsArrowCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136D60[] = { { sSmallPortraitZodaCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136D70[] = { { sSmallPortraitJohnTanakaCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136D80[] = { { sSmallPortraitBioRexCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136D90[] = { { sSmallPortraitKateAlenCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136DA0[] = { { sSmallPortraitGomarAndShiohCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136DB0[] = { { sSmallPortraitMichaelChainCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136DC0[] = { { sSmallPortraitBillyCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136DD0[] = { { sSmallPortraitDrClashCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136DE0[] = { { sSmallPortraitJackLevinCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136DF0[] = { { sSmallPortraitBloodFalconCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136E00[] = { { sSmallPortraitLeonCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136E10[] = { { sSmallPortraitJamesMcCloudCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136E20[] = { { sSmallPortraitBlackShadowCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136E30[] = { { sSmallPortraitCaptainFalconAltCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136E40[] = { { sSmallPortraitSamuraiGorohAltCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_xk3_80136E50[] = { { sSmallPortraitJodySummerAltCacheTexInfo, 60 }, { 0 } };
 
-unk_800792D8* D_xk3_80136E60[] = {
+TextureSwapEntry* D_xk3_80136E60[] = {
     D_xk3_80136C60, D_xk3_80136C50, D_xk3_80136CA0, D_xk3_80136C80, D_xk3_80136C70, D_xk3_80136C90,
     D_xk3_80136CC0, D_xk3_80136CB0, D_xk3_80136CD0, D_xk3_80136DA0, D_xk3_80136D90, D_xk3_80136D20,
     D_xk3_80136E10, D_xk3_80136E00, D_xk3_80136D00, D_xk3_80136E20, D_xk3_80136DB0, D_xk3_80136DE0,
@@ -218,23 +218,23 @@ unk_800792D8* D_xk3_80136E60[] = {
     D_xk3_80136E30, D_xk3_80136E30, D_xk3_80136E30, D_xk3_80136E40, D_xk3_80136E50, D_xk3_80136E30,
 };
 
-static unk_80077D50 sMachineSelectCursorCompTexInfo[] = {
+static CacheTexInfo sMachineSelectCursorCacheTexInfo[] = {
     { 17, aMachineSelectCursorTex, TEX_WIDTH(aMachineSelectCursorTex), TEX_HEIGHT(aMachineSelectCursorTex),
       TEX_COMPRESSED_SIZE(aMachineSelectCursorTex) },
     { 0 }
 };
-static unk_80077D50 sBoostCompTexInfo[] = {
+static CacheTexInfo sBoostCacheTexInfo[] = {
     { 17, aBoostTex, TEX_WIDTH(aBoostTex), TEX_HEIGHT(aBoostTex), TEX_COMPRESSED_SIZE(aBoostTex) }, { 0 }
 };
-static unk_80077D50 sBodyCompTexInfo[] = { { 17, aBodyTex, TEX_WIDTH(aBodyTex), TEX_HEIGHT(aBodyTex), 0x4E }, { 0 } };
-static unk_80077D50 sGripCompTexInfo[] = {
+static CacheTexInfo sBodyCacheTexInfo[] = { { 17, aBodyTex, TEX_WIDTH(aBodyTex), TEX_HEIGHT(aBodyTex), 0x4E }, { 0 } };
+static CacheTexInfo sGripCacheTexInfo[] = {
     { 17, aGripTex, TEX_WIDTH(aGripTex), TEX_HEIGHT(aGripTex), TEX_COMPRESSED_SIZE(aGripTex) }, { 0 }
 };
 
-static unk_80077D50* sMachineStatCompTexInfos[] = {
-    sBodyCompTexInfo,
-    sBoostCompTexInfo,
-    sGripCompTexInfo,
+static CacheTexInfo* sMachineStatCacheTexInfos[] = {
+    sBodyCacheTexInfo,
+    sBoostCacheTexInfo,
+    sGripCacheTexInfo,
 };
 
 static const char* sMachineStatValueStr[] = { "a", "b", "c", "d", "e" };
@@ -447,7 +447,7 @@ void MachineCreate_MachineSelectUpdate(void) {
 Gfx* MachineCreate_DrawMachineSelect(Gfx* gfx) {
 
     gfx = Object_UpdateAndDrawAll(gfx);
-    func_800790D4();
+    TextureCache_ProcessLoadQueue();
     gSPDisplayList(gfx++, D_xk3_80137378);
 
     if (sMachineSelectIndex == 30) {
@@ -483,7 +483,7 @@ Gfx* MachineCreate_DrawMachineSelect(Gfx* gfx) {
 }
 
 void func_xk3_80133B4C(Object* arg0) {
-    OBJECT_CACHE_INDEX(arg0) = func_800792D8(D_xk3_80136E60[0]);
+    OBJECT_CACHE_INDEX(arg0) = TextureCache_AllocSwapSlot(D_xk3_80136E60[0]);
     OBJECT_STATE(arg0) = -1;
 }
 
@@ -491,7 +491,7 @@ void func_xk3_80133B84(void) {
     s32 i;
 
     for (i = BODY_STAT; i <= GRIP_STAT; i++) {
-        func_80077D50_impl(sMachineStatCompTexInfos[i], 0, false);
+        TextureCache_LoadCacheTexInfoList_impl(sMachineStatCacheTexInfos[i], false, false);
     }
 }
 
@@ -529,11 +529,11 @@ void func_xk3_80133BD4(Object* machineObj) {
 }
 
 void func_xk3_80133F40(void) {
-    func_80077D50_impl(sMachineSelectCursorCompTexInfo, 0, false);
+    TextureCache_LoadCacheTexInfoList_impl(sMachineSelectCursorCacheTexInfo, false, false);
 }
 
 extern const char* gMachineNames[];
-extern unk_800E3F28 D_800E3F28[];
+extern TexSwapSlot gTextureSwapSlots[];
 extern const char* gSuperMachineNames[];
 
 Gfx* func_xk3_80133F6C(Gfx* gfx, Object* arg1) {
@@ -542,8 +542,8 @@ Gfx* func_xk3_80133F6C(Gfx* gfx, Object* arg1) {
         return gfx;
     }
     if (sMachineSelectIndex < 30) {
-        gfx = func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0,
-                                 0, 1.0f, 1.0f, false);
+        gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1),
+                                             OBJECT_TOP(arg1), 0, false, false, 1.0f, 1.0f, false);
         if (gCustomMachinesInfo.characterCustomState[sMachineSelectIndex] > 0) {
             gfx = Font_DrawString(gfx, 0x46, 0x25, gCustomMachinesInfo.customMachines[sMachineSelectIndex].machineName,
                                   0, 2, 0);
@@ -576,7 +576,8 @@ Gfx* func_xk3_801340DC(Gfx* gfx, Object* arg1) {
 
         var_s6 = 53;
         for (i = BODY_STAT; i <= GRIP_STAT; i++) {
-            gfx = func_80078EA0_impl(gfx, sMachineStatCompTexInfos[i], 19, var_s6 + i * 20, 0, 0, 0, 1.0f, 1.0f, false);
+            gfx = TextureCache_DrawList_impl(gfx, sMachineStatCacheTexInfos[i], 19, var_s6 + i * 20, 0, false, false,
+                                             1.0f, 1.0f, false);
 
             if (gCustomMachinesInfo.characterCustomState[sMachineSelectIndex] > 0) {
                 switch (i) {
@@ -727,8 +728,8 @@ Gfx* func_xk3_80134854(Gfx* gfx, Object* arg1) {
         }
         OBJECT_LEFT(arg1) = ((sMachineSelectIndex % 6) * 0x28) + 0x28;
         OBJECT_TOP(arg1) = ((sMachineSelectIndex / 6) * 0x22) + 0x27;
-        gfx = func_80078EA0_impl(gfx, sMachineSelectCursorCompTexInfo, OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 1, 0, 0,
-                                 1.0f, 1.0f, false);
+        gfx = TextureCache_DrawList_impl(gfx, sMachineSelectCursorCacheTexInfo, OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 1,
+                                         false, false, 1.0f, 1.0f, false);
     }
     return gfx;
 }
@@ -748,7 +749,7 @@ void func_xk3_80134A48(Object* portraitObj) {
                 character %= 30;
             }
         }
-        func_800793E8(OBJECT_CACHE_INDEX(portraitObj), 0, D_xk3_80136E60[character]);
+        TextureCache_SetSwapSlotEntry(OBJECT_CACHE_INDEX(portraitObj), 0, D_xk3_80136E60[character]);
     }
     OBJECT_STATE(portraitObj) = sMachineSelectIndex;
 }

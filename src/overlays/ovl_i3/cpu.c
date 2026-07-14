@@ -814,7 +814,7 @@ void Cpu_InitRacer(Racer* racer) {
     if (racer->id == 0) {
         func_i3_80116974();
         if (gCourseIndex < COURSE_EDIT_1) {
-            func_80077CF0(D_i3_8013DB80[gCourseIndex], 0x200 * sizeof(s16), D_i3_8013DBE8);
+            TextureCache_LoadAssetData(D_i3_8013DB80[gCourseIndex], 0x200 * sizeof(s16), D_i3_8013DBE8);
 #ifdef EXPANSION_KIT
         } else if (gCourseIndex >= COURSE_SILENCE_3 && gCourseIndex <= COURSE_BIG_FOOT) {
             for (i = 0; i < 0x200; i += 2) {

@@ -7,9 +7,9 @@ s32 D_xk2_8013A7E0;
 s32 D_xk2_8013A7E4;
 
 void func_xk2_800F6290(void) {
-    func_80078104(aMenuTextTLUT, 0x200, 0, 0, 0);
-    func_80078104(aMenuQuitTex, 0x200, 0, 1, 0);
-    func_80078104(aMenuContinueTex, 0x400, 0, 1, 0);
+    TextureCache_LoadAndCache(aMenuTextTLUT, 0x200, false, false, false);
+    TextureCache_LoadAndCache(aMenuQuitTex, 0x200, false, true, false);
+    TextureCache_LoadAndCache(aMenuContinueTex, 0x400, false, true, false);
     Font_LoadString("Ｍ", 5);
     Font_LoadString("ABCDEFGHIJKLMNOPQRSTUVWXYZＡＢ23", 6);
     Font_LoadString("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 3);
@@ -42,7 +42,7 @@ Gfx* func_xk2_800F634C(Gfx* gfx) {
     gfx = Menus_DrawBeveledBox(gfx, 0x78, 0x3D, 0xD2, 0x71, 0, 0, 0, 0xDC);
     gSPDisplayList(gfx++, D_4011D78);
 
-    gDPLoadTLUT_pal256(gfx++, func_800783AC(aMenuTextTLUT));
+    gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
 
     gfx = Menus_SetOptionColor(gfx, D_xk2_8013A7E0);
     gfx = Menus_DrawRaceMenuTexture(gfx, 0xF, 0x8C, 0x50);

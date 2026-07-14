@@ -140,38 +140,44 @@ void OptionsMenu_Init(void) {
 
     D_800CCFE8 = 3;
     Object_Init(OBJECT_FRAMEBUFFER, 0, 0, 1);
-    func_80078104(aMenuTextTLUT, TEX_SIZE(aMenuTextTLUT, sizeof(u16)), 0, 0, false);
-    func_80078104(aOptionsFalconHelmetTex, TEX_SIZE(aOptionsFalconHelmetTex, sizeof(u16)), 0, 1, false);
-    func_80078104(aOptionsTex, TEX_SIZE(aOptionsTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aOptionsEraseAllSavedDataTex, TEX_SIZE(aOptionsEraseAllSavedDataTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuWithoutTex, TEX_SIZE(aMenuWithoutTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuWithTex, TEX_SIZE(aMenuWithTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuPlusOneTex, TEX_SIZE(aMenuPlusOneTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuPlusTwoTex, TEX_SIZE(aMenuPlusTwoTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuStereoTex, TEX_SIZE(aMenuStereoTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuMonoTex, TEX_SIZE(aMenuMonoTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuLeftArrowTex, TEX_SIZE(aMenuLeftArrowTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuRightArrowTex, TEX_SIZE(aMenuRightArrowTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuNoTex, TEX_SIZE(aMenuNoTex, sizeof(u8)), 0, 1, false);
-    func_80078104(aMenuYesTex, TEX_SIZE(aMenuYesTex, sizeof(u8)), 0, 1, false);
+    TextureCache_LoadAndCache(aMenuTextTLUT, TEX_SIZE(aMenuTextTLUT, sizeof(u16)), false, false, false);
+    TextureCache_LoadAndCache(aOptionsFalconHelmetTex, TEX_SIZE(aOptionsFalconHelmetTex, sizeof(u16)), false, true,
+                              false);
+    TextureCache_LoadAndCache(aOptionsTex, TEX_SIZE(aOptionsTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aOptionsEraseAllSavedDataTex, TEX_SIZE(aOptionsEraseAllSavedDataTex, sizeof(u8)), false,
+                              true, false);
+    TextureCache_LoadAndCache(aMenuWithoutTex, TEX_SIZE(aMenuWithoutTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuWithTex, TEX_SIZE(aMenuWithTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuPlusOneTex, TEX_SIZE(aMenuPlusOneTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuPlusTwoTex, TEX_SIZE(aMenuPlusTwoTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuStereoTex, TEX_SIZE(aMenuStereoTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuMonoTex, TEX_SIZE(aMenuMonoTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuLeftArrowTex, TEX_SIZE(aMenuLeftArrowTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuRightArrowTex, TEX_SIZE(aMenuRightArrowTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuNoTex, TEX_SIZE(aMenuNoTex, sizeof(u8)), false, true, false);
+    TextureCache_LoadAndCache(aMenuYesTex, TEX_SIZE(aMenuYesTex, sizeof(u8)), false, true, false);
 
     for (i = 0, option = gOptionsInfo; i < OPTIONS_MAX; i++, option++) {
-        func_80078104(option->optionTextureInfo.texture,
-                      option->optionTextureInfo.width * option->optionTextureInfo.height * sizeof(u8), 0, 1, 0);
+        TextureCache_LoadAndCache(option->optionTextureInfo.texture,
+                                  option->optionTextureInfo.width * option->optionTextureInfo.height * sizeof(u8),
+                                  false, true, false);
     }
 
-    func_80078104(aTitleBackgroundMainTex, TEX_SIZE(aTitleBackgroundMainTex, sizeof(u16)), 0, 1, false);
-    func_8007A828(func_800783AC(aTitleBackgroundMainTex), TEX_SIZE(aTitleBackgroundMainTex, sizeof(u16)), 0xC3, 0x5F,
-                  0x5F);
+    TextureCache_LoadAndCache(aTitleBackgroundMainTex, TEX_SIZE(aTitleBackgroundMainTex, sizeof(u16)), false, true,
+                              false);
+    TextureUtils_ConvertToTintedGreyscale(TextureCache_GetCached(aTitleBackgroundMainTex),
+                                          TEX_SIZE(aTitleBackgroundMainTex, sizeof(u16)), 195, 95, 95);
 
     if (D_800CD3C4 == 1) {
-        D_i6_801247AC =
-            func_80078104(aTitleBackgroundComicTex, TEX_SIZE(aTitleBackgroundComicTex, sizeof(u16)), 0, 1, false);
-        func_8007A828(D_i6_801247AC, TEX_SIZE(aTitleBackgroundComicTex, sizeof(u16)), 0xC3, 0x5F, 0x5F);
+        D_i6_801247AC = TextureCache_LoadAndCache(aTitleBackgroundComicTex,
+                                                  TEX_SIZE(aTitleBackgroundComicTex, sizeof(u16)), false, true, false);
+        TextureUtils_ConvertToTintedGreyscale(D_i6_801247AC, TEX_SIZE(aTitleBackgroundComicTex, sizeof(u16)), 195, 95,
+                                              95);
     } else if (D_800CD3C4 == 2) {
-        D_i6_801247AC =
-            func_80078104(aTitleBackgroundFalconTex, TEX_SIZE(aTitleBackgroundFalconTex, sizeof(u16)), 0, 1, false);
-        func_8007A828(D_i6_801247AC, TEX_SIZE(aTitleBackgroundFalconTex, sizeof(u16)), 0xC3, 0x5F, 0x5F);
+        D_i6_801247AC = TextureCache_LoadAndCache(aTitleBackgroundFalconTex,
+                                                  TEX_SIZE(aTitleBackgroundFalconTex, sizeof(u16)), false, true, false);
+        TextureUtils_ConvertToTintedGreyscale(D_i6_801247AC, TEX_SIZE(aTitleBackgroundFalconTex, sizeof(u16)), 195, 95,
+                                              95);
     }
     if (D_800CD3C4 != 0) {
         D_i6_801247A8 = 1;
@@ -483,20 +489,20 @@ Gfx* OptionsMenu_Draw(Gfx* gfx) {
 
     gfx = Object_UpdateAndDrawAll(gfx);
     if (D_i6_801247A8 != 1) {
-        gfx = func_8007B14C(gfx, func_800783AC(aTitleBackgroundMainTex), 8, 0, 304, 240, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0,
-                            0, 0, 0);
+        gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aTitleBackgroundMainTex), 8, 0, 304, 240, G_IM_FMT_RGBA,
+                                G_IM_SIZ_16b, 0, false, false, false);
     }
     if (D_i6_801247A8 != 0) {
         gfx = func_i6_8011D8C8(gfx);
     }
-    gfx = func_8007B14C(gfx, func_800783AC(aOptionsFalconHelmetTex), 50, 4, 64, 64, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
-                        1, 0);
-    gfx = func_8007B14C(gfx, func_800783AC(aOptionsFalconHelmetTex), 206, 4, 64, 64, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
-                        0, 0);
+    gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aOptionsFalconHelmetTex), 50, 4, 64, 64, G_IM_FMT_RGBA,
+                            G_IM_SIZ_16b, 0, false, true, false);
+    gfx = TextureUtils_Draw(gfx, TextureCache_GetCached(aOptionsFalconHelmetTex), 206, 4, 64, 64, G_IM_FMT_RGBA,
+                            G_IM_SIZ_16b, 0, false, false, false);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
-    gfx = func_8007E410(gfx, func_800783AC(aOptionsTex), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1, 112, 22, 96, 24,
-                        3);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aOptionsTex),
+                                         TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1, 112, 22, 96, 24, 3);
 
     var_s5 = 60;
 
@@ -518,19 +524,20 @@ Gfx* OptionsMenu_Draw(Gfx* gfx) {
             gfx = func_8007DB28(gfx, 0);
         }
         optionTextureInfo = &option->optionTextureInfo;
-        gfx = func_8007E410(gfx, func_800783AC(optionTextureInfo->texture), NULL, G_IM_FMT_CI, 1, option->unk_0C + 0x1E,
-                            var_s5, optionTextureInfo->width, optionTextureInfo->height, 0);
+        gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(optionTextureInfo->texture), NULL, G_IM_FMT_CI,
+                                             1, option->unk_0C + 0x1E, var_s5, optionTextureInfo->width,
+                                             optionTextureInfo->height, 0);
 
         if (!(option->flags & OPTIONS_REQUIRE_SELECTING)) {
-            gfx =
-                func_8007E410(gfx, func_800783AC(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1, 0xBE, var_s5, 0x10, 0x10, 0);
-            gfx = func_8007E410(gfx, func_800783AC(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1, 0x109, var_s5, 0x10, 0x10,
-                                0);
+            gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1,
+                                                 0xBE, var_s5, 0x10, 0x10, 0);
+            gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1,
+                                                 0x109, var_s5, 0x10, 0x10, 0);
             selectionStateTextureInfo = &option->selectionStateTextureInfo[sOptionsSelectionState[i]];
             temp_s4 = ((60 - selectionStateTextureInfo->width) / 2) + option->unk_10;
-            gfx = func_8007E410(gfx, func_800783AC(selectionStateTextureInfo->texture), NULL, G_IM_FMT_CI, 1,
-                                temp_s4 + 0xD0, var_s5, selectionStateTextureInfo->width,
-                                selectionStateTextureInfo->height, 0);
+            gfx = TextureUtils_DrawIndexedBlocks(
+                gfx, TextureCache_GetCached(selectionStateTextureInfo->texture), NULL, G_IM_FMT_CI, 1, temp_s4 + 0xD0,
+                var_s5, selectionStateTextureInfo->width, selectionStateTextureInfo->height, 0);
         }
         var_s5 += var_s7;
     }
@@ -545,19 +552,21 @@ Gfx* func_i6_8011D168(Gfx* gfx, s32 arg1, s32 arg2) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
 
-    gfx = func_8007E410(gfx, func_800783AC(aOptionsEraseAllSavedDataTex), func_800783AC(aMenuTextTLUT), G_IM_FMT_CI, 1,
-                        arg1 + 0xC, arg2 + 0xA, 128, 32, 3);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aOptionsEraseAllSavedDataTex),
+                                         TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1, arg1 + 0xC, arg2 + 0xA,
+                                         128, 32, 3);
 
     gDPPipeSync(gfx++);
     gfx = func_8007DB28(gfx, 0);
-    gfx =
-        func_8007E410(gfx, func_800783AC(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1, arg1 + 0x18, arg2 + 0x32, 16, 16, 0);
-    gfx = func_8007E410(gfx, func_800783AC(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1, arg1 + 0x63, arg2 + 0x32, 16, 16,
-                        0);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aMenuLeftArrowTex), NULL, G_IM_FMT_CI, 1,
+                                         arg1 + 0x18, arg2 + 0x32, 16, 16, 0);
+    gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(aMenuRightArrowTex), NULL, G_IM_FMT_CI, 1,
+                                         arg1 + 0x63, arg2 + 0x32, 16, 16, 0);
     dataClearTextureInfo = &gOptionsAllDataClearSelection[sOptionsSelectionState[gOptionsCurrentRow]];
     sp54 = (60 - dataClearTextureInfo->width) / 2;
-    return func_8007E410(gfx, func_800783AC(dataClearTextureInfo->texture), NULL, G_IM_FMT_CI, 1, arg1 + sp54 + 0x2A,
-                         arg2 + 0x32, dataClearTextureInfo->width, dataClearTextureInfo->height, 0);
+    return TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(dataClearTextureInfo->texture), NULL, G_IM_FMT_CI,
+                                          1, arg1 + sp54 + 0x2A, arg2 + 0x32, dataClearTextureInfo->width,
+                                          dataClearTextureInfo->height, 0);
 }
 
 extern GfxPool* gGfxPool;

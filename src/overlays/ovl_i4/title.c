@@ -13,37 +13,37 @@ UNUSED s32 D_i4_80076690 = 0;
 #include ASSET_SOURCE_EK(overlays/ovl_i4/title/title.c)
 #endif
 
-static unk_80077D50 sTitleBackgroundMainCompTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundMainTex);
-static unk_80077D50 sTitleBackgroundComicCompTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundComicTex);
-static unk_80077D50 sTitleBackgroundFalconCompTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundFalconTex);
+static CacheTexInfo sTitleBackgroundMainCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundMainTex);
+static CacheTexInfo sTitleBackgroundComicCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundComicTex);
+static CacheTexInfo sTitleBackgroundFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aTitleBackgroundFalconTex);
 
-static unk_80077D50* sTitleBackgroundCompTexInfos[] = {
-    sTitleBackgroundMainCompTexInfo,
-    sTitleBackgroundComicCompTexInfo,
-    sTitleBackgroundFalconCompTexInfo,
+static CacheTexInfo* sTitleBackgroundCacheTexInfos[] = {
+    sTitleBackgroundMainCacheTexInfo,
+    sTitleBackgroundComicCacheTexInfo,
+    sTitleBackgroundFalconCacheTexInfo,
 };
 
-unk_80077D50 sTitleLogoCompTexInfo[] = COMP_TEX_INFO_DEF(18, aTitleLogoTex);
-unk_80077D50 sTitlePushStartCompTexInfo[] = COMP_TEX_INFO_DEF(18, aTitlePushStartTex);
-unk_80077D50 sTitleNoControllerCompTexInfo[] = COMP_TEX_INFO_DEF(20, aTitleNoControllerTex);
-unk_80077D50 sTitleExpansionPakWarningCompTexInfo[] = COMP_TEX_INFO_DEF(20, aTitleExpansionPakWarningTex);
-unk_80077D50 sTitleDiskWarningCompTexInfo[] = COMP_TEX_INFO_DEF(20, aTitleDiskWarningTex);
+CacheTexInfo sTitleLogoCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aTitleLogoTex);
+CacheTexInfo sTitlePushStartCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aTitlePushStartTex);
+CacheTexInfo sTitleNoControllerCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aTitleNoControllerTex);
+CacheTexInfo sTitleExpansionPakWarningCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aTitleExpansionPakWarningTex);
+CacheTexInfo sTitleDiskWarningCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aTitleDiskWarningTex);
 
-unk_80077D50* sTitleWarningCompTexInfos[] = {
-    sTitleNoControllerCompTexInfo,
-    sTitleExpansionPakWarningCompTexInfo,
-    sTitleDiskWarningCompTexInfo,
+CacheTexInfo* sTitleWarningCacheTexInfos[] = {
+    sTitleNoControllerCacheTexInfo,
+    sTitleExpansionPakWarningCacheTexInfo,
+    sTitleDiskWarningCacheTexInfo,
 };
 
 #ifndef EXPANSION_KIT
-unk_80077D50 sCopyrightCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCopyrightTex);
+CacheTexInfo sCopyrightCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCopyrightTex);
 #else
-unk_80077D50 sCopyrightCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCopyrightDDTex);
+CacheTexInfo sCopyrightCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCopyrightDDTex);
 #endif
 
 #ifdef EXPANSION_KIT
 //! @bug Compressed size listed does not match the actual compressed texture size
-unk_80077D50 sN64DDLogoCompTexInfo[] = COMP_TEX_INFO_PAD(17, aN64DDLogoTex, 0x2E7);
+CacheTexInfo sN64DDLogoCacheTexInfo[] = COMP_TEX_INFO_PAD(17, aN64DDLogoTex, 0x2E7);
 #endif
 
 UNUSED s32 D_i4_8011D628[] = { 85, 21, 120, 150 };
@@ -275,7 +275,7 @@ extern s8 D_800CD3C4;
 
 void Title_BackgroundInit(Object* backgroundObj) {
     OBJECT_STATE(backgroundObj) = D_800CD3C4;
-    func_80077D50_impl(sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)], 0, true);
+    TextureCache_LoadCacheTexInfoList_impl(sTitleBackgroundCacheTexInfos[OBJECT_STATE(backgroundObj)], false, true);
     if (OBJECT_STATE(backgroundObj) == 0) {
         OBJECT_LEFT(backgroundObj) = 8;
     }
@@ -298,7 +298,7 @@ void Title_LogoInit(Object* logoObj) {
             break;
     }
 
-    func_80077D50_impl(sTitleLogoCompTexInfo, 0, true);
+    TextureCache_LoadCacheTexInfoList_impl(sTitleLogoCacheTexInfo, false, true);
 }
 
 void func_i4_8011B134(void) {
@@ -307,9 +307,9 @@ void func_i4_8011B134(void) {
 void Title_StartInit(Object* startObj) {
 
     OBJECT_STATE(startObj) = D_800CD3C4;
-    func_80077D50_impl(sTitleNoControllerCompTexInfo, 0, true);
+    TextureCache_LoadCacheTexInfoList_impl(sTitleNoControllerCacheTexInfo, false, true);
     if (gControllersConnected != 0) {
-        func_80077D50_impl(sTitlePushStartCompTexInfo, 0, true);
+        TextureCache_LoadCacheTexInfoList_impl(sTitlePushStartCacheTexInfo, false, true);
         OBJECT_LEFT(startObj) = 120;
         switch (OBJECT_STATE(startObj)) {
             case 0:
@@ -331,9 +331,9 @@ void func_i4_8011B1E4(void) {
 
 void Title_CopyrightInit(void) {
 #ifndef EXPANSION_KIT
-    func_80077D50_impl(sCopyrightCompTexInfo, 0, false);
+    TextureCache_LoadCacheTexInfoList_impl(sCopyrightCacheTexInfo, false, false);
 #else
-    func_i2_800AE578(sCopyrightCompTexInfo, false);
+    TextureCache_LoadCacheTexInfoListEK(sCopyrightCacheTexInfo, false);
 #endif
 }
 
@@ -360,7 +360,7 @@ void Title_DiskDriveInit(Object* diskDriveObj) {
         var_v0 = 2;
     }
 
-    func_80077D50_impl(sTitleWarningCompTexInfos[var_v0], 0, true);
+    TextureCache_LoadCacheTexInfoList_impl(sTitleWarningCacheTexInfos[var_v0], false, true);
 #ifndef EXPANSION_KIT
     if (gRamDDCompatible && (func_800758F8() != 1)) {
         OBJECT_COUNTER(diskDriveObj)++;
@@ -372,7 +372,7 @@ void Title_DiskDriveInit(Object* diskDriveObj) {
 
 #ifdef EXPANSION_KIT
 void func_i4_800748F4(void) {
-    func_i2_800AE578(sN64DDLogoCompTexInfo, 0);
+    TextureCache_LoadCacheTexInfoListEK(sN64DDLogoCacheTexInfo, false);
 }
 #endif
 
@@ -395,7 +395,7 @@ void Title_BackgroundUpdate(Object* backgroundObj) {
         backgroundEffect = sTitleBackgroundEffectFuncs[D_i4_8011D638];
     }
 
-    backgroundTexture = func_800783AC(aTitleBackgroundMainTex);
+    backgroundTexture = TextureCache_GetCached(aTitleBackgroundMainTex);
 
     for (i = 1999; i > 0; i--) {
         backgroundEffect(backgroundTexture);
@@ -403,8 +403,9 @@ void Title_BackgroundUpdate(Object* backgroundObj) {
 }
 
 Gfx* Title_BackgroundDraw(Gfx* gfx, Object* backgroundObj) {
-    return func_80078EA0_impl(gfx, sTitleBackgroundCompTexInfos[OBJECT_STATE(backgroundObj)],
-                              OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, 0, 0, 1.0f, 1.0f, true);
+    return TextureCache_DrawList_impl(gfx, sTitleBackgroundCacheTexInfos[OBJECT_STATE(backgroundObj)],
+                                      OBJECT_LEFT(backgroundObj), OBJECT_TOP(backgroundObj), 0, false, false, 1.0f,
+                                      1.0f, true);
 }
 
 Gfx* func_i4_8011B3DC(Gfx* gfx, Object* arg1) {
@@ -412,8 +413,8 @@ Gfx* func_i4_8011B3DC(Gfx* gfx, Object* arg1) {
 }
 
 Gfx* Title_LogoDraw(Gfx* gfx, Object* logoObj) {
-    return func_80078EA0_impl(gfx, sTitleLogoCompTexInfo, OBJECT_LEFT(logoObj), OBJECT_TOP(logoObj), 0, 0, 0, 1.0f,
-                              1.0f, true);
+    return TextureCache_DrawList_impl(gfx, sTitleLogoCacheTexInfo, OBJECT_LEFT(logoObj), OBJECT_TOP(logoObj), 0, false,
+                                      false, 1.0f, 1.0f, true);
 }
 
 Gfx* func_i4_8011B438(Gfx* gfx, Object* arg1) {
@@ -428,8 +429,8 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
             return gfx;
         }
         gfx = func_8007DB28(gfx, 0);
-        gfx = func_80078EA0_impl(gfx, sTitlePushStartCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 1, 0, 0,
-                                 1.0f, 1.0f, true);
+        gfx = TextureCache_DrawList_impl(gfx, sTitlePushStartCacheTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj),
+                                         1, false, false, 1.0f, 1.0f, true);
     } else {
         OBJECT_LEFT(startObj) = 80;
 
@@ -450,8 +451,9 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
             var_v1 = 30 - var_v1;
         }
 
-        gfx = func_8007A440(gfx, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), OBJECT_LEFT(startObj) + 160,
-                            OBJECT_TOP(startObj) + 32, (s32) (var_v1 * 40) / 60, 0, 0, 0xF0);
+        gfx = TextureUtils_DrawRectangleClipped(gfx, OBJECT_LEFT(startObj), OBJECT_TOP(startObj),
+                                                OBJECT_LEFT(startObj) + 160, OBJECT_TOP(startObj) + 32,
+                                                (s32) (var_v1 * 40) / 60, 0, 0, 240);
         var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
@@ -459,8 +461,8 @@ Gfx* Title_StartDraw(Gfx* gfx, Object* startObj) {
             gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
 
-        gfx = func_80078EA0_impl(gfx, sTitleNoControllerCompTexInfo, OBJECT_LEFT(startObj), OBJECT_TOP(startObj), 0, 0,
-                                 0, 1.0f, 1.0f, true);
+        gfx = TextureCache_DrawList_impl(gfx, sTitleNoControllerCacheTexInfo, OBJECT_LEFT(startObj),
+                                         OBJECT_TOP(startObj), 0, false, false, 1.0f, 1.0f, true);
     }
     return gfx;
 }
@@ -470,8 +472,8 @@ Gfx* func_i4_8011B668(Gfx* gfx, Object* arg1) {
 }
 
 Gfx* Title_CopyrightDraw(Gfx* gfx, Object* copyrightObj) {
-    return func_80078EA0_impl(gfx, sCopyrightCompTexInfo, OBJECT_LEFT(copyrightObj), OBJECT_TOP(copyrightObj), 0, 0, 0,
-                              1.0f, 1.0f, true);
+    return TextureCache_DrawList_impl(gfx, sCopyrightCacheTexInfo, OBJECT_LEFT(copyrightObj), OBJECT_TOP(copyrightObj),
+                                      0, false, false, 1.0f, 1.0f, true);
 }
 
 Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* diskDriveObj) {
@@ -493,24 +495,25 @@ Gfx* Title_DiskDriveDraw(Gfx* gfx, Object* diskDriveObj) {
             var_v1 = 30 - var_v1;
         }
 
-        gfx = func_8007A440(gfx, OBJECT_LEFT(diskDriveObj), OBJECT_TOP(diskDriveObj), OBJECT_LEFT(diskDriveObj) + 160,
-                            OBJECT_TOP(diskDriveObj) + 32, (s32) (var_v1 * 40) / 60, 0, 0, 0xF0);
+        gfx = TextureUtils_DrawRectangleClipped(gfx, OBJECT_LEFT(diskDriveObj), OBJECT_TOP(diskDriveObj),
+                                                OBJECT_LEFT(diskDriveObj) + 160, OBJECT_TOP(diskDriveObj) + 32,
+                                                (s32) (var_v1 * 40) / 60, 0, 0, 0xF0);
         var_v1 = gGameFrameCount % 60;
         if (var_v1 > 30) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
         } else {
             gDPSetPrimColor(gfx++, 0, 0, ((40 - var_v1) * 255) / 40, 0, 0, 255);
         }
-        gfx = func_80078EA0_impl(gfx, sTitleWarningCompTexInfos[var_t0], OBJECT_LEFT(diskDriveObj),
-                                 OBJECT_TOP(diskDriveObj), 0, 0, 0, 1.0f, 1.0f, true);
+        gfx = TextureCache_DrawList_impl(gfx, sTitleWarningCacheTexInfos[var_t0], OBJECT_LEFT(diskDriveObj),
+                                         OBJECT_TOP(diskDriveObj), 0, false, false, 1.0f, 1.0f, true);
     }
     return gfx;
 }
 
 #ifdef EXPANSION_KIT
 Gfx* func_i4_80074EE0(Gfx* gfx, Object* arg1) {
-    return func_80078EA0_impl(gfx, sN64DDLogoCompTexInfo, OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, 0, 0, 1.0f, 1.0f,
-                              false);
+    return TextureCache_DrawList_impl(gfx, sN64DDLogoCacheTexInfo, OBJECT_LEFT(arg1), OBJECT_TOP(arg1), 0, false, false,
+                                      1.0f, 1.0f, false);
 }
 #endif
 

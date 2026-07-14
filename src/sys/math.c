@@ -828,7 +828,6 @@ void Matrix_SetAxisRotation(Mtx* mtx, MtxF* mtxF, f32 scale, s32 angle, f32 xAxi
         mtxF->m[0][0] = ((cos * temp_fa0 * temp_fa0) + SQ(temp_fv1)) * scale;
         mtxF->m[2][2] = ((cos * temp_fa1 * temp_fa1) + SQ(temp_fa0)) * scale;
         mtxF->m[0][2] = mtxF->m[2][0] = ((cos * temp_fa0 * temp_fa1) + (temp_fv1 * temp_fa0)) * scale;
-        ;
     } else if (zAxis == 0) {
         temp_fv0 = sqrtf(SQ(xAxis) + SQ(yAxis));
         temp_fa1 = yAxis / temp_fv0;
@@ -855,8 +854,8 @@ void Matrix_SetAxisRotation(Mtx* mtx, MtxF* mtxF, f32 scale, s32 angle, f32 xAxi
         temp_fs0 = temp_ft4 * temp_fa1;
         mtxF->m[1][0] = temp_ft5;
         mtxF->m[0][1] = -temp_ft5;
-        mtxF->m[2][0] = temp_fs0;
         mtxF->m[0][2] = -temp_fs0;
+        mtxF->m[2][0] = temp_fs0;
         mtxF->m[0][0] = scale * cos;
         mtxF->m[1][1] = ((cos * temp_fv1 * temp_fv1) + SQ(temp_fa1)) * scale;
         mtxF->m[2][2] = ((cos * temp_fa1 * temp_fa1) + SQ(temp_fa0)) * scale;

@@ -2,1328 +2,1340 @@
 #include "fzx_font.h"
 #include ASSET_HEADER(common_assets_compressed.h)
 
-unk_80077D50 sFont1ACompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ATex);
-unk_80077D50 sFont1BCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1BTex);
-unk_80077D50 sFont1CCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1CTex);
-unk_80077D50 sFont1DCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1DTex);
-unk_80077D50 sFont1ECompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ETex);
-unk_80077D50 sFont1FCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1FTex);
-unk_80077D50 sFont1GCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1GTex);
-unk_80077D50 sFont1HCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1HTex);
-unk_80077D50 sFont1ICompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ITex);
-unk_80077D50 sFont1JCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1JTex);
-unk_80077D50 sFont1KCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1KTex);
-unk_80077D50 sFont1LCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1LTex);
-unk_80077D50 sFont1MCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1MTex);
-unk_80077D50 sFont1NCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1NTex);
-unk_80077D50 sFont1OCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1OTex);
-unk_80077D50 sFont1PCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1PTex);
-unk_80077D50 sFont1QCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1QTex);
-unk_80077D50 sFont1RCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1RTex);
-unk_80077D50 sFont1SCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1STex);
-unk_80077D50 sFont1TCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1TTex);
-unk_80077D50 sFont1UCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1UTex);
-unk_80077D50 sFont1VCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1VTex);
-unk_80077D50 sFont1WCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1WTex);
-unk_80077D50 sFont1XCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1XTex);
-unk_80077D50 sFont1YCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1YTex);
-unk_80077D50 sFont1ZCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ZTex);
-unk_80077D50 sFont1CommaCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1CommaTex);
-unk_80077D50 sFont1PeriodCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1PeriodTex);
-unk_80077D50 sFont1PrimeCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1PrimeTex);
-unk_80077D50 sFont1ExclamationMarkCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ExclamationMarkTex);
-unk_80077D50 sFont1Num0CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num0Tex);
-unk_80077D50 sFont1Num1CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num1Tex);
-unk_80077D50 sFont1Num2CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num2Tex);
-unk_80077D50 sFont1Num3CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num3Tex);
-unk_80077D50 sFont1Num4CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num4Tex);
-unk_80077D50 sFont1Num5CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num5Tex);
-unk_80077D50 sFont1Num6CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num6Tex);
-unk_80077D50 sFont1Num7CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num7Tex);
-unk_80077D50 sFont1Num8CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num8Tex);
-unk_80077D50 sFont1Num9CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num9Tex);
-unk_80077D50 sFont1UnderscoreCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1UnderscoreTex);
-unk_80077D50 sFont1EndCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1EndTex);
-unk_80077D50 sFont1BoxCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1BoxTex);
-unk_80077D50 sFont1DashCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1DashTex);
-unk_80077D50 sFont1AmpersandCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1AmpersandTex);
+CacheTexInfo sFont1ACacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ATex);
+CacheTexInfo sFont1BCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1BTex);
+CacheTexInfo sFont1CCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1CTex);
+CacheTexInfo sFont1DCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1DTex);
+CacheTexInfo sFont1ECacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ETex);
+CacheTexInfo sFont1FCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1FTex);
+CacheTexInfo sFont1GCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1GTex);
+CacheTexInfo sFont1HCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1HTex);
+CacheTexInfo sFont1ICacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ITex);
+CacheTexInfo sFont1JCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1JTex);
+CacheTexInfo sFont1KCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1KTex);
+CacheTexInfo sFont1LCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1LTex);
+CacheTexInfo sFont1MCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1MTex);
+CacheTexInfo sFont1NCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1NTex);
+CacheTexInfo sFont1OCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1OTex);
+CacheTexInfo sFont1PCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1PTex);
+CacheTexInfo sFont1QCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1QTex);
+CacheTexInfo sFont1RCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1RTex);
+CacheTexInfo sFont1SCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1STex);
+CacheTexInfo sFont1TCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1TTex);
+CacheTexInfo sFont1UCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1UTex);
+CacheTexInfo sFont1VCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1VTex);
+CacheTexInfo sFont1WCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1WTex);
+CacheTexInfo sFont1XCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1XTex);
+CacheTexInfo sFont1YCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1YTex);
+CacheTexInfo sFont1ZCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ZTex);
+CacheTexInfo sFont1CommaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1CommaTex);
+CacheTexInfo sFont1PeriodCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1PeriodTex);
+CacheTexInfo sFont1PrimeCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1PrimeTex);
+CacheTexInfo sFont1ExclamationMarkCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1ExclamationMarkTex);
+CacheTexInfo sFont1Num0CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num0Tex);
+CacheTexInfo sFont1Num1CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num1Tex);
+CacheTexInfo sFont1Num2CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num2Tex);
+CacheTexInfo sFont1Num3CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num3Tex);
+CacheTexInfo sFont1Num4CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num4Tex);
+CacheTexInfo sFont1Num5CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num5Tex);
+CacheTexInfo sFont1Num6CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num6Tex);
+CacheTexInfo sFont1Num7CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num7Tex);
+CacheTexInfo sFont1Num8CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num8Tex);
+CacheTexInfo sFont1Num9CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1Num9Tex);
+CacheTexInfo sFont1UnderscoreCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1UnderscoreTex);
+CacheTexInfo sFont1EndCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1EndTex);
+CacheTexInfo sFont1BoxCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1BoxTex);
+CacheTexInfo sFont1DashCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1DashTex);
+CacheTexInfo sFont1AmpersandCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont1AmpersandTex);
 
-unk_80077D50* sFont1CompTexInfos[] = {
-    sFont1ACompTexInfo,         sFont1BCompTexInfo,     sFont1CCompTexInfo,          sFont1DCompTexInfo,
-    sFont1ECompTexInfo,         sFont1FCompTexInfo,     sFont1GCompTexInfo,          sFont1HCompTexInfo,
-    sFont1ICompTexInfo,         sFont1JCompTexInfo,     sFont1KCompTexInfo,          sFont1LCompTexInfo,
-    sFont1MCompTexInfo,         sFont1NCompTexInfo,     sFont1OCompTexInfo,          sFont1PCompTexInfo,
-    sFont1QCompTexInfo,         sFont1RCompTexInfo,     sFont1SCompTexInfo,          sFont1TCompTexInfo,
-    sFont1UCompTexInfo,         sFont1VCompTexInfo,     sFont1WCompTexInfo,          sFont1XCompTexInfo,
-    sFont1YCompTexInfo,         sFont1ZCompTexInfo,     sFont1PrimeCompTexInfo,      sFont1PrimeCompTexInfo,
-    sFont1AmpersandCompTexInfo, sFont1PrimeCompTexInfo, sFont1DashCompTexInfo,       sFont1ExclamationMarkCompTexInfo,
-    sFont1Num0CompTexInfo,      sFont1Num1CompTexInfo,  sFont1Num2CompTexInfo,       sFont1Num3CompTexInfo,
-    sFont1Num4CompTexInfo,      sFont1Num5CompTexInfo,  sFont1Num6CompTexInfo,       sFont1Num7CompTexInfo,
-    sFont1Num8CompTexInfo,      sFont1Num9CompTexInfo,  sFont1PeriodCompTexInfo,     sFont1PeriodCompTexInfo,
-    sFont1EndCompTexInfo,       sFont1BoxCompTexInfo,   sFont1UnderscoreCompTexInfo, sFont1CommaCompTexInfo,
+CacheTexInfo* sFont1CacheTexInfos[] = {
+    sFont1ACacheTexInfo,          sFont1BCacheTexInfo,
+    sFont1CCacheTexInfo,          sFont1DCacheTexInfo,
+    sFont1ECacheTexInfo,          sFont1FCacheTexInfo,
+    sFont1GCacheTexInfo,          sFont1HCacheTexInfo,
+    sFont1ICacheTexInfo,          sFont1JCacheTexInfo,
+    sFont1KCacheTexInfo,          sFont1LCacheTexInfo,
+    sFont1MCacheTexInfo,          sFont1NCacheTexInfo,
+    sFont1OCacheTexInfo,          sFont1PCacheTexInfo,
+    sFont1QCacheTexInfo,          sFont1RCacheTexInfo,
+    sFont1SCacheTexInfo,          sFont1TCacheTexInfo,
+    sFont1UCacheTexInfo,          sFont1VCacheTexInfo,
+    sFont1WCacheTexInfo,          sFont1XCacheTexInfo,
+    sFont1YCacheTexInfo,          sFont1ZCacheTexInfo,
+    sFont1PrimeCacheTexInfo,      sFont1PrimeCacheTexInfo,
+    sFont1AmpersandCacheTexInfo,  sFont1PrimeCacheTexInfo,
+    sFont1DashCacheTexInfo,       sFont1ExclamationMarkCacheTexInfo,
+    sFont1Num0CacheTexInfo,       sFont1Num1CacheTexInfo,
+    sFont1Num2CacheTexInfo,       sFont1Num3CacheTexInfo,
+    sFont1Num4CacheTexInfo,       sFont1Num5CacheTexInfo,
+    sFont1Num6CacheTexInfo,       sFont1Num7CacheTexInfo,
+    sFont1Num8CacheTexInfo,       sFont1Num9CacheTexInfo,
+    sFont1PeriodCacheTexInfo,     sFont1PeriodCacheTexInfo,
+    sFont1EndCacheTexInfo,        sFont1BoxCacheTexInfo,
+    sFont1UnderscoreCacheTexInfo, sFont1CommaCacheTexInfo,
 };
 
-unk_80077D50 sFont2ACompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ATex);
-unk_80077D50 sFont2BCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2BTex);
-unk_80077D50 sFont2CCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2CTex);
-unk_80077D50 sFont2DCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2DTex);
-unk_80077D50 sFont2ECompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ETex);
-unk_80077D50 sFont2FCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2FTex);
-unk_80077D50 sFont2GCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2GTex);
-unk_80077D50 sFont2HCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2HTex);
-unk_80077D50 sFont2ICompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ITex);
-unk_80077D50 sFont2JCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2JTex);
-unk_80077D50 sFont2KCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2KTex);
-unk_80077D50 sFont2LCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2LTex);
-unk_80077D50 sFont2MCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2MTex);
-unk_80077D50 sFont2NCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2NTex);
-unk_80077D50 sFont2OCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2OTex);
-unk_80077D50 sFont2PCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2PTex);
-unk_80077D50 sFont2QCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2QTex);
-unk_80077D50 sFont2RCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2RTex);
-unk_80077D50 sFont2SCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2STex);
-unk_80077D50 sFont2TCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2TTex);
-unk_80077D50 sFont2UCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2UTex);
-unk_80077D50 sFont2VCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2VTex);
-unk_80077D50 sFont2WCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2WTex);
-unk_80077D50 sFont2XCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2XTex);
-unk_80077D50 sFont2YCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2YTex);
-unk_80077D50 sFont2ZCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ZTex);
-unk_80077D50 sFont2CommaCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2CommaTex);
-unk_80077D50 sFont2PeriodCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2PeriodTex);
-unk_80077D50 sFont2PrimeCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2PrimeTex);
-unk_80077D50 sFont2DashCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2DashTex);
-unk_80077D50 sFont2KgCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2KgTex);
-unk_80077D50 sFont2AmpersandCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2AmpersandTex);
-unk_80077D50 sFont2Num0CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num0Tex);
-unk_80077D50 sFont2Num1CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num1Tex);
-unk_80077D50 sFont2Num2CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num2Tex);
-unk_80077D50 sFont2Num3CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num3Tex);
-unk_80077D50 sFont2Num4CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num4Tex);
-unk_80077D50 sFont2Num5CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num5Tex);
-unk_80077D50 sFont2Num6CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num6Tex);
-unk_80077D50 sFont2Num7CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num7Tex);
-unk_80077D50 sFont2Num8CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num8Tex);
-unk_80077D50 sFont2Num9CompTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num9Tex);
+CacheTexInfo sFont2ACacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ATex);
+CacheTexInfo sFont2BCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2BTex);
+CacheTexInfo sFont2CCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2CTex);
+CacheTexInfo sFont2DCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2DTex);
+CacheTexInfo sFont2ECacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ETex);
+CacheTexInfo sFont2FCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2FTex);
+CacheTexInfo sFont2GCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2GTex);
+CacheTexInfo sFont2HCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2HTex);
+CacheTexInfo sFont2ICacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ITex);
+CacheTexInfo sFont2JCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2JTex);
+CacheTexInfo sFont2KCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2KTex);
+CacheTexInfo sFont2LCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2LTex);
+CacheTexInfo sFont2MCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2MTex);
+CacheTexInfo sFont2NCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2NTex);
+CacheTexInfo sFont2OCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2OTex);
+CacheTexInfo sFont2PCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2PTex);
+CacheTexInfo sFont2QCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2QTex);
+CacheTexInfo sFont2RCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2RTex);
+CacheTexInfo sFont2SCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2STex);
+CacheTexInfo sFont2TCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2TTex);
+CacheTexInfo sFont2UCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2UTex);
+CacheTexInfo sFont2VCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2VTex);
+CacheTexInfo sFont2WCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2WTex);
+CacheTexInfo sFont2XCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2XTex);
+CacheTexInfo sFont2YCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2YTex);
+CacheTexInfo sFont2ZCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2ZTex);
+CacheTexInfo sFont2CommaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2CommaTex);
+CacheTexInfo sFont2PeriodCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2PeriodTex);
+CacheTexInfo sFont2PrimeCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2PrimeTex);
+CacheTexInfo sFont2DashCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2DashTex);
+CacheTexInfo sFont2KgCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2KgTex);
+CacheTexInfo sFont2AmpersandCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2AmpersandTex);
+CacheTexInfo sFont2Num0CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num0Tex);
+CacheTexInfo sFont2Num1CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num1Tex);
+CacheTexInfo sFont2Num2CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num2Tex);
+CacheTexInfo sFont2Num3CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num3Tex);
+CacheTexInfo sFont2Num4CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num4Tex);
+CacheTexInfo sFont2Num5CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num5Tex);
+CacheTexInfo sFont2Num6CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num6Tex);
+CacheTexInfo sFont2Num7CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num7Tex);
+CacheTexInfo sFont2Num8CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num8Tex);
+CacheTexInfo sFont2Num9CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFont2Num9Tex);
 
-unk_80077D50* sFont2CompTexInfos[] = {
-    sFont2ACompTexInfo,         sFont2BCompTexInfo,     sFont2CCompTexInfo,      sFont2DCompTexInfo,
-    sFont2ECompTexInfo,         sFont2FCompTexInfo,     sFont2GCompTexInfo,      sFont2HCompTexInfo,
-    sFont2ICompTexInfo,         sFont2JCompTexInfo,     sFont2KCompTexInfo,      sFont2LCompTexInfo,
-    sFont2MCompTexInfo,         sFont2NCompTexInfo,     sFont2OCompTexInfo,      sFont2PCompTexInfo,
-    sFont2QCompTexInfo,         sFont2RCompTexInfo,     sFont2SCompTexInfo,      sFont2TCompTexInfo,
-    sFont2UCompTexInfo,         sFont2VCompTexInfo,     sFont2WCompTexInfo,      sFont2XCompTexInfo,
-    sFont2YCompTexInfo,         sFont2ZCompTexInfo,     sFont2PrimeCompTexInfo,  sFont2PrimeCompTexInfo,
-    sFont2AmpersandCompTexInfo, sFont2PrimeCompTexInfo, sFont2DashCompTexInfo,   sFont2KgCompTexInfo,
-    sFont2Num0CompTexInfo,      sFont2Num1CompTexInfo,  sFont2Num2CompTexInfo,   sFont2Num3CompTexInfo,
-    sFont2Num4CompTexInfo,      sFont2Num5CompTexInfo,  sFont2Num6CompTexInfo,   sFont2Num7CompTexInfo,
-    sFont2Num8CompTexInfo,      sFont2Num9CompTexInfo,  sFont2PeriodCompTexInfo, sFont2PeriodCompTexInfo,
-    sFont2PeriodCompTexInfo,    sFont2CommaCompTexInfo, sFont2CommaCompTexInfo,  sFont2CommaCompTexInfo,
+CacheTexInfo* sFont2CacheTexInfos[] = {
+    sFont2ACacheTexInfo,         sFont2BCacheTexInfo,     sFont2CCacheTexInfo,      sFont2DCacheTexInfo,
+    sFont2ECacheTexInfo,         sFont2FCacheTexInfo,     sFont2GCacheTexInfo,      sFont2HCacheTexInfo,
+    sFont2ICacheTexInfo,         sFont2JCacheTexInfo,     sFont2KCacheTexInfo,      sFont2LCacheTexInfo,
+    sFont2MCacheTexInfo,         sFont2NCacheTexInfo,     sFont2OCacheTexInfo,      sFont2PCacheTexInfo,
+    sFont2QCacheTexInfo,         sFont2RCacheTexInfo,     sFont2SCacheTexInfo,      sFont2TCacheTexInfo,
+    sFont2UCacheTexInfo,         sFont2VCacheTexInfo,     sFont2WCacheTexInfo,      sFont2XCacheTexInfo,
+    sFont2YCacheTexInfo,         sFont2ZCacheTexInfo,     sFont2PrimeCacheTexInfo,  sFont2PrimeCacheTexInfo,
+    sFont2AmpersandCacheTexInfo, sFont2PrimeCacheTexInfo, sFont2DashCacheTexInfo,   sFont2KgCacheTexInfo,
+    sFont2Num0CacheTexInfo,      sFont2Num1CacheTexInfo,  sFont2Num2CacheTexInfo,   sFont2Num3CacheTexInfo,
+    sFont2Num4CacheTexInfo,      sFont2Num5CacheTexInfo,  sFont2Num6CacheTexInfo,   sFont2Num7CacheTexInfo,
+    sFont2Num8CacheTexInfo,      sFont2Num9CacheTexInfo,  sFont2PeriodCacheTexInfo, sFont2PeriodCacheTexInfo,
+    sFont2PeriodCacheTexInfo,    sFont2CommaCacheTexInfo, sFont2CommaCacheTexInfo,  sFont2CommaCacheTexInfo,
 };
 
-unk_80077D50 sFont3ACompTexInfo[] = COMP_TEX_INFO(4, aFont3ATex, 0);
-unk_80077D50 sFont3BCompTexInfo[] = COMP_TEX_INFO(4, aFont3BTex, 0);
-unk_80077D50 sFont3CCompTexInfo[] = COMP_TEX_INFO(4, aFont3CTex, 0);
-unk_80077D50 sFont3DCompTexInfo[] = COMP_TEX_INFO(4, aFont3DTex, 0);
-unk_80077D50 sFont3ECompTexInfo[] = COMP_TEX_INFO(4, aFont3ETex, 0);
-unk_80077D50 sFont3FCompTexInfo[] = COMP_TEX_INFO(4, aFont3FTex, 0);
-unk_80077D50 sFont3GCompTexInfo[] = COMP_TEX_INFO(4, aFont3GTex, 0);
-unk_80077D50 sFont3HCompTexInfo[] = COMP_TEX_INFO(4, aFont3HTex, 0);
-unk_80077D50 sFont3ICompTexInfo[] = COMP_TEX_INFO(4, aFont3ITex, 0);
-unk_80077D50 sFont3JCompTexInfo[] = COMP_TEX_INFO(4, aFont3JTex, 0);
-unk_80077D50 sFont3KCompTexInfo[] = COMP_TEX_INFO(4, aFont3KTex, 0);
-unk_80077D50 sFont3LCompTexInfo[] = COMP_TEX_INFO(4, aFont3LTex, 0);
-unk_80077D50 sFont3MCompTexInfo[] = COMP_TEX_INFO(4, aFont3MTex, 0);
-unk_80077D50 sFont3NCompTexInfo[] = COMP_TEX_INFO(4, aFont3NTex, 0);
-unk_80077D50 sFont3OCompTexInfo[] = COMP_TEX_INFO(4, aFont3OTex, 0);
-unk_80077D50 sFont3PCompTexInfo[] = COMP_TEX_INFO(4, aFont3PTex, 0);
-unk_80077D50 sFont3QCompTexInfo[] = COMP_TEX_INFO(4, aFont3QTex, 0);
-unk_80077D50 sFont3RCompTexInfo[] = COMP_TEX_INFO(4, aFont3RTex, 0);
-unk_80077D50 sFont3SCompTexInfo[] = COMP_TEX_INFO(4, aFont3STex, 0);
-unk_80077D50 sFont3TCompTexInfo[] = COMP_TEX_INFO(4, aFont3TTex, 0);
-unk_80077D50 sFont3UCompTexInfo[] = COMP_TEX_INFO(4, aFont3UTex, 0);
-unk_80077D50 sFont3VCompTexInfo[] = COMP_TEX_INFO(4, aFont3VTex, 0);
-unk_80077D50 sFont3WCompTexInfo[] = COMP_TEX_INFO(4, aFont3WTex, 0);
-unk_80077D50 sFont3XCompTexInfo[] = COMP_TEX_INFO(4, aFont3XTex, 0);
-unk_80077D50 sFont3YCompTexInfo[] = COMP_TEX_INFO(4, aFont3YTex, 0);
-unk_80077D50 sFont3ZCompTexInfo[] = COMP_TEX_INFO(4, aFont3ZTex, 0);
-unk_80077D50 sFont3AlphaCompTexInfo[] = COMP_TEX_INFO(4, aFont3AlphaTex, 0);
-unk_80077D50 sFont3BetaCompTexInfo[] = COMP_TEX_INFO(4, aFont3BetaTex, 0);
-unk_80077D50 sFont3GammaCompTexInfo[] = COMP_TEX_INFO(4, aFont3GammaTex, 0);
-unk_80077D50 sFont3PrimeCompTexInfo[] = COMP_TEX_INFO(4, aFont3PrimeTex, 0);
-unk_80077D50 sFont3EllipsisCompTexInfo[] = COMP_TEX_INFO(4, aFont3EllipsisTex, 0);
-unk_80077D50 sFont3ColonCompTexInfo[] = COMP_TEX_INFO(4, aFont3ColonTex, 0);
-unk_80077D50 sFont3PeriodCompTexInfo[] = COMP_TEX_INFO(4, aFont3PeriodTex, 0);
-unk_80077D50 sFont3AmpersandCompTexInfo[] = COMP_TEX_INFO(4, aFont3AmpersandTex, 0);
-unk_80077D50 sFont3CommaCompTexInfo[] = COMP_TEX_INFO(4, aFont3CommaTex, 0);
+CacheTexInfo sFont3ACacheTexInfo[] = COMP_TEX_INFO(4, aFont3ATex, 0);
+CacheTexInfo sFont3BCacheTexInfo[] = COMP_TEX_INFO(4, aFont3BTex, 0);
+CacheTexInfo sFont3CCacheTexInfo[] = COMP_TEX_INFO(4, aFont3CTex, 0);
+CacheTexInfo sFont3DCacheTexInfo[] = COMP_TEX_INFO(4, aFont3DTex, 0);
+CacheTexInfo sFont3ECacheTexInfo[] = COMP_TEX_INFO(4, aFont3ETex, 0);
+CacheTexInfo sFont3FCacheTexInfo[] = COMP_TEX_INFO(4, aFont3FTex, 0);
+CacheTexInfo sFont3GCacheTexInfo[] = COMP_TEX_INFO(4, aFont3GTex, 0);
+CacheTexInfo sFont3HCacheTexInfo[] = COMP_TEX_INFO(4, aFont3HTex, 0);
+CacheTexInfo sFont3ICacheTexInfo[] = COMP_TEX_INFO(4, aFont3ITex, 0);
+CacheTexInfo sFont3JCacheTexInfo[] = COMP_TEX_INFO(4, aFont3JTex, 0);
+CacheTexInfo sFont3KCacheTexInfo[] = COMP_TEX_INFO(4, aFont3KTex, 0);
+CacheTexInfo sFont3LCacheTexInfo[] = COMP_TEX_INFO(4, aFont3LTex, 0);
+CacheTexInfo sFont3MCacheTexInfo[] = COMP_TEX_INFO(4, aFont3MTex, 0);
+CacheTexInfo sFont3NCacheTexInfo[] = COMP_TEX_INFO(4, aFont3NTex, 0);
+CacheTexInfo sFont3OCacheTexInfo[] = COMP_TEX_INFO(4, aFont3OTex, 0);
+CacheTexInfo sFont3PCacheTexInfo[] = COMP_TEX_INFO(4, aFont3PTex, 0);
+CacheTexInfo sFont3QCacheTexInfo[] = COMP_TEX_INFO(4, aFont3QTex, 0);
+CacheTexInfo sFont3RCacheTexInfo[] = COMP_TEX_INFO(4, aFont3RTex, 0);
+CacheTexInfo sFont3SCacheTexInfo[] = COMP_TEX_INFO(4, aFont3STex, 0);
+CacheTexInfo sFont3TCacheTexInfo[] = COMP_TEX_INFO(4, aFont3TTex, 0);
+CacheTexInfo sFont3UCacheTexInfo[] = COMP_TEX_INFO(4, aFont3UTex, 0);
+CacheTexInfo sFont3VCacheTexInfo[] = COMP_TEX_INFO(4, aFont3VTex, 0);
+CacheTexInfo sFont3WCacheTexInfo[] = COMP_TEX_INFO(4, aFont3WTex, 0);
+CacheTexInfo sFont3XCacheTexInfo[] = COMP_TEX_INFO(4, aFont3XTex, 0);
+CacheTexInfo sFont3YCacheTexInfo[] = COMP_TEX_INFO(4, aFont3YTex, 0);
+CacheTexInfo sFont3ZCacheTexInfo[] = COMP_TEX_INFO(4, aFont3ZTex, 0);
+CacheTexInfo sFont3AlphaCacheTexInfo[] = COMP_TEX_INFO(4, aFont3AlphaTex, 0);
+CacheTexInfo sFont3BetaCacheTexInfo[] = COMP_TEX_INFO(4, aFont3BetaTex, 0);
+CacheTexInfo sFont3GammaCacheTexInfo[] = COMP_TEX_INFO(4, aFont3GammaTex, 0);
+CacheTexInfo sFont3PrimeCacheTexInfo[] = COMP_TEX_INFO(4, aFont3PrimeTex, 0);
+CacheTexInfo sFont3EllipsisCacheTexInfo[] = COMP_TEX_INFO(4, aFont3EllipsisTex, 0);
+CacheTexInfo sFont3ColonCacheTexInfo[] = COMP_TEX_INFO(4, aFont3ColonTex, 0);
+CacheTexInfo sFont3PeriodCacheTexInfo[] = COMP_TEX_INFO(4, aFont3PeriodTex, 0);
+CacheTexInfo sFont3AmpersandCacheTexInfo[] = COMP_TEX_INFO(4, aFont3AmpersandTex, 0);
+CacheTexInfo sFont3CommaCacheTexInfo[] = COMP_TEX_INFO(4, aFont3CommaTex, 0);
 
-unk_80077D50 sFont3DashCompTexInfo[] = COMP_TEX_INFO(4, aFont3DashTex, 0);
-unk_80077D50 sFont3Num0CompTexInfo[] = COMP_TEX_INFO(4, aFont3Num0Tex, 0);
-unk_80077D50 sFont3Num1CompTexInfo[] = COMP_TEX_INFO(4, aFont3Num1Tex, 0);
-unk_80077D50 sFont3Num2CompTexInfo[] = COMP_TEX_INFO(4, aFont3Num2Tex, 0);
-unk_80077D50 sFont3Num3CompTexInfo[] = COMP_TEX_INFO(4, aFont3Num3Tex, 0);
-unk_80077D50 sFont3Num4CompTexInfo[] = COMP_TEX_INFO(4, aFont3Num4Tex, 0);
-unk_80077D50 sFont3Num5CompTexInfo[] = COMP_TEX_INFO(4, aFont3Num5Tex, 0);
-unk_80077D50 sFont3Num6CompTexInfo[] = COMP_TEX_INFO(4, aFont3Num6Tex, 0);
-unk_80077D50 sFont3Num7CompTexInfo[] = COMP_TEX_INFO(4, aFont3Num7Tex, 0);
-unk_80077D50 sFont3Num8CompTexInfo[] = COMP_TEX_INFO(4, aFont3Num8Tex, 0);
-unk_80077D50 sFont3Num9CompTexInfo[] = COMP_TEX_INFO(4, aFont3Num9Tex, 0);
+CacheTexInfo sFont3DashCacheTexInfo[] = COMP_TEX_INFO(4, aFont3DashTex, 0);
+CacheTexInfo sFont3Num0CacheTexInfo[] = COMP_TEX_INFO(4, aFont3Num0Tex, 0);
+CacheTexInfo sFont3Num1CacheTexInfo[] = COMP_TEX_INFO(4, aFont3Num1Tex, 0);
+CacheTexInfo sFont3Num2CacheTexInfo[] = COMP_TEX_INFO(4, aFont3Num2Tex, 0);
+CacheTexInfo sFont3Num3CacheTexInfo[] = COMP_TEX_INFO(4, aFont3Num3Tex, 0);
+CacheTexInfo sFont3Num4CacheTexInfo[] = COMP_TEX_INFO(4, aFont3Num4Tex, 0);
+CacheTexInfo sFont3Num5CacheTexInfo[] = COMP_TEX_INFO(4, aFont3Num5Tex, 0);
+CacheTexInfo sFont3Num6CacheTexInfo[] = COMP_TEX_INFO(4, aFont3Num6Tex, 0);
+CacheTexInfo sFont3Num7CacheTexInfo[] = COMP_TEX_INFO(4, aFont3Num7Tex, 0);
+CacheTexInfo sFont3Num8CacheTexInfo[] = COMP_TEX_INFO(4, aFont3Num8Tex, 0);
+CacheTexInfo sFont3Num9CacheTexInfo[] = COMP_TEX_INFO(4, aFont3Num9Tex, 0);
 
-unk_80077D50* sFont3CompTexInfos[] = {
-    sFont3ACompTexInfo,         sFont3BCompTexInfo,    sFont3CCompTexInfo,     sFont3DCompTexInfo,
-    sFont3ECompTexInfo,         sFont3FCompTexInfo,    sFont3GCompTexInfo,     sFont3HCompTexInfo,
-    sFont3ICompTexInfo,         sFont3JCompTexInfo,    sFont3KCompTexInfo,     sFont3LCompTexInfo,
-    sFont3MCompTexInfo,         sFont3NCompTexInfo,    sFont3OCompTexInfo,     sFont3PCompTexInfo,
-    sFont3QCompTexInfo,         sFont3RCompTexInfo,    sFont3SCompTexInfo,     sFont3TCompTexInfo,
-    sFont3UCompTexInfo,         sFont3VCompTexInfo,    sFont3WCompTexInfo,     sFont3XCompTexInfo,
-    sFont3YCompTexInfo,         sFont3ZCompTexInfo,    sFont3PrimeCompTexInfo, sFont3ACompTexInfo,
-    sFont3AmpersandCompTexInfo, sFont3ACompTexInfo,    sFont3DashCompTexInfo,  sFont3ACompTexInfo,
-    sFont3Num0CompTexInfo,      sFont3Num1CompTexInfo, sFont3Num2CompTexInfo,  sFont3Num3CompTexInfo,
-    sFont3Num4CompTexInfo,      sFont3Num5CompTexInfo, sFont3Num6CompTexInfo,  sFont3Num7CompTexInfo,
-    sFont3Num8CompTexInfo,      sFont3Num9CompTexInfo, sFont3ColonCompTexInfo, sFont3PeriodCompTexInfo,
-    sFont3EllipsisCompTexInfo,  sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3CommaCompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3AlphaCompTexInfo,     sFont3BetaCompTexInfo, sFont3GammaCompTexInfo, sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3GammaCompTexInfo, sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,    sFont3ACompTexInfo,     sFont3ACompTexInfo,
-    sFont3ACompTexInfo,         sFont3ACompTexInfo,
+CacheTexInfo* sFont3CacheTexInfos[] = {
+    sFont3ACacheTexInfo,         sFont3BCacheTexInfo,    sFont3CCacheTexInfo,     sFont3DCacheTexInfo,
+    sFont3ECacheTexInfo,         sFont3FCacheTexInfo,    sFont3GCacheTexInfo,     sFont3HCacheTexInfo,
+    sFont3ICacheTexInfo,         sFont3JCacheTexInfo,    sFont3KCacheTexInfo,     sFont3LCacheTexInfo,
+    sFont3MCacheTexInfo,         sFont3NCacheTexInfo,    sFont3OCacheTexInfo,     sFont3PCacheTexInfo,
+    sFont3QCacheTexInfo,         sFont3RCacheTexInfo,    sFont3SCacheTexInfo,     sFont3TCacheTexInfo,
+    sFont3UCacheTexInfo,         sFont3VCacheTexInfo,    sFont3WCacheTexInfo,     sFont3XCacheTexInfo,
+    sFont3YCacheTexInfo,         sFont3ZCacheTexInfo,    sFont3PrimeCacheTexInfo, sFont3ACacheTexInfo,
+    sFont3AmpersandCacheTexInfo, sFont3ACacheTexInfo,    sFont3DashCacheTexInfo,  sFont3ACacheTexInfo,
+    sFont3Num0CacheTexInfo,      sFont3Num1CacheTexInfo, sFont3Num2CacheTexInfo,  sFont3Num3CacheTexInfo,
+    sFont3Num4CacheTexInfo,      sFont3Num5CacheTexInfo, sFont3Num6CacheTexInfo,  sFont3Num7CacheTexInfo,
+    sFont3Num8CacheTexInfo,      sFont3Num9CacheTexInfo, sFont3ColonCacheTexInfo, sFont3PeriodCacheTexInfo,
+    sFont3EllipsisCacheTexInfo,  sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3CommaCacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3AlphaCacheTexInfo,     sFont3BetaCacheTexInfo, sFont3GammaCacheTexInfo, sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3GammaCacheTexInfo, sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,    sFont3ACacheTexInfo,     sFont3ACacheTexInfo,
+    sFont3ACacheTexInfo,         sFont3ACacheTexInfo,
 };
 
 //! @bug These textures actually have width 16 and height 8.
 // They instead should be cropped or reformatted rather than setting the width here
-unk_80077D50 sFont4ACompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4ATex, 8, TEX_HEIGHT(aFont4ATex), 0);
-unk_80077D50 sFont4DCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4DTex, 8, TEX_HEIGHT(aFont4DTex), 0);
-unk_80077D50 sFont4ECompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4ETex, 8, TEX_HEIGHT(aFont4ETex), 0);
-unk_80077D50 sFont4MCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4MTex, 8, TEX_HEIGHT(aFont4MTex), 0);
-unk_80077D50 sFont4AmpersandCompTexInfo[] =
+CacheTexInfo sFont4ACacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4ATex, 8, TEX_HEIGHT(aFont4ATex), 0);
+CacheTexInfo sFont4DCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4DTex, 8, TEX_HEIGHT(aFont4DTex), 0);
+CacheTexInfo sFont4ECacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4ETex, 8, TEX_HEIGHT(aFont4ETex), 0);
+CacheTexInfo sFont4MCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4MTex, 8, TEX_HEIGHT(aFont4MTex), 0);
+CacheTexInfo sFont4AmpersandCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4AmpersandTex, 8, TEX_HEIGHT(aFont4AmpersandTex), 0);
 #ifndef VERSION_JP
-unk_80077D50 sFont4BCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4BTex, 8, TEX_HEIGHT(aFont4BTex), 0);
-unk_80077D50 sFont4CCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4CTex, 8, TEX_HEIGHT(aFont4CTex), 0);
-unk_80077D50 sFont4FCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4FTex, 8, TEX_HEIGHT(aFont4FTex), 0);
-unk_80077D50 sFont4GCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4GTex, 8, TEX_HEIGHT(aFont4GTex), 0);
-unk_80077D50 sFont4HCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4HTex, 8, TEX_HEIGHT(aFont4HTex), 0);
-unk_80077D50 sFont4ICompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4ITex, 8, TEX_HEIGHT(aFont4ITex), 0);
-unk_80077D50 sFont4JCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4JTex, 8, TEX_HEIGHT(aFont4JTex), 0);
-unk_80077D50 sFont4KCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4KTex, 8, TEX_HEIGHT(aFont4KTex), 0);
-unk_80077D50 sFont4LCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4LTex, 8, TEX_HEIGHT(aFont4LTex), 0);
-unk_80077D50 sFont4NCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4NTex, 8, TEX_HEIGHT(aFont4NTex), 0);
-unk_80077D50 sFont4OCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4OTex, 8, TEX_HEIGHT(aFont4OTex), 0);
-unk_80077D50 sFont4PCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4PTex, 8, TEX_HEIGHT(aFont4PTex), 0);
-unk_80077D50 sFont4QCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4QTex, 8, TEX_HEIGHT(aFont4QTex), 0);
-unk_80077D50 sFont4RCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4RTex, 8, TEX_HEIGHT(aFont4RTex), 0);
-unk_80077D50 sFont4SCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4STex, 8, TEX_HEIGHT(aFont4STex), 0);
-unk_80077D50 sFont4TCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4TTex, 8, TEX_HEIGHT(aFont4TTex), 0);
-unk_80077D50 sFont4UCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4UTex, 8, TEX_HEIGHT(aFont4UTex), 0);
-unk_80077D50 sFont4VCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4VTex, 8, TEX_HEIGHT(aFont4VTex), 0);
-unk_80077D50 sFont4WCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4WTex, 8, TEX_HEIGHT(aFont4WTex), 0);
-unk_80077D50 sFont4XCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4XTex, 8, TEX_HEIGHT(aFont4XTex), 0);
-unk_80077D50 sFont4YCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4YTex, 8, TEX_HEIGHT(aFont4YTex), 0);
-unk_80077D50 sFont4ZCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4ZTex, 8, TEX_HEIGHT(aFont4ZTex), 0);
-unk_80077D50 sFont4LowerCCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4LowerCTex, 8, TEX_HEIGHT(aFont4LowerCTex), 0);
-unk_80077D50 sFont4LowerRCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4LowerRTex, 8, TEX_HEIGHT(aFont4LowerRTex), 0);
-unk_80077D50 sFont4LowerSCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4LowerSTex, 8, TEX_HEIGHT(aFont4LowerSTex), 0);
-unk_80077D50 sFont4PeriodCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4PeriodTex, 8, TEX_HEIGHT(aFont4PeriodTex), 0);
+CacheTexInfo sFont4BCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4BTex, 8, TEX_HEIGHT(aFont4BTex), 0);
+CacheTexInfo sFont4CCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4CTex, 8, TEX_HEIGHT(aFont4CTex), 0);
+CacheTexInfo sFont4FCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4FTex, 8, TEX_HEIGHT(aFont4FTex), 0);
+CacheTexInfo sFont4GCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4GTex, 8, TEX_HEIGHT(aFont4GTex), 0);
+CacheTexInfo sFont4HCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4HTex, 8, TEX_HEIGHT(aFont4HTex), 0);
+CacheTexInfo sFont4ICacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4ITex, 8, TEX_HEIGHT(aFont4ITex), 0);
+CacheTexInfo sFont4JCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4JTex, 8, TEX_HEIGHT(aFont4JTex), 0);
+CacheTexInfo sFont4KCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4KTex, 8, TEX_HEIGHT(aFont4KTex), 0);
+CacheTexInfo sFont4LCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4LTex, 8, TEX_HEIGHT(aFont4LTex), 0);
+CacheTexInfo sFont4NCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4NTex, 8, TEX_HEIGHT(aFont4NTex), 0);
+CacheTexInfo sFont4OCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4OTex, 8, TEX_HEIGHT(aFont4OTex), 0);
+CacheTexInfo sFont4PCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4PTex, 8, TEX_HEIGHT(aFont4PTex), 0);
+CacheTexInfo sFont4QCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4QTex, 8, TEX_HEIGHT(aFont4QTex), 0);
+CacheTexInfo sFont4RCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4RTex, 8, TEX_HEIGHT(aFont4RTex), 0);
+CacheTexInfo sFont4SCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4STex, 8, TEX_HEIGHT(aFont4STex), 0);
+CacheTexInfo sFont4TCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4TTex, 8, TEX_HEIGHT(aFont4TTex), 0);
+CacheTexInfo sFont4UCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4UTex, 8, TEX_HEIGHT(aFont4UTex), 0);
+CacheTexInfo sFont4VCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4VTex, 8, TEX_HEIGHT(aFont4VTex), 0);
+CacheTexInfo sFont4WCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4WTex, 8, TEX_HEIGHT(aFont4WTex), 0);
+CacheTexInfo sFont4XCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4XTex, 8, TEX_HEIGHT(aFont4XTex), 0);
+CacheTexInfo sFont4YCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4YTex, 8, TEX_HEIGHT(aFont4YTex), 0);
+CacheTexInfo sFont4ZCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4ZTex, 8, TEX_HEIGHT(aFont4ZTex), 0);
+CacheTexInfo sFont4LowerCCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4LowerCTex, 8, TEX_HEIGHT(aFont4LowerCTex), 0);
+CacheTexInfo sFont4LowerRCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4LowerRTex, 8, TEX_HEIGHT(aFont4LowerRTex), 0);
+CacheTexInfo sFont4LowerSCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4LowerSTex, 8, TEX_HEIGHT(aFont4LowerSTex), 0);
+CacheTexInfo sFont4PeriodCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4PeriodTex, 8, TEX_HEIGHT(aFont4PeriodTex), 0);
 #endif
-unk_80077D50 sFont4KatakanaACompTexInfo[] =
+CacheTexInfo sFont4KatakanaACacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaATex, 8, TEX_HEIGHT(aFont4KatakanaATex), 0);
-unk_80077D50 sFont4KatakanaICompTexInfo[] =
+CacheTexInfo sFont4KatakanaICacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaITex, 8, TEX_HEIGHT(aFont4KatakanaITex), 0);
-unk_80077D50 sFont4KatakanaUCompTexInfo[] =
+CacheTexInfo sFont4KatakanaUCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaUTex, 8, TEX_HEIGHT(aFont4KatakanaUTex), 0);
-unk_80077D50 sFont4KatakanaECompTexInfo[] =
+CacheTexInfo sFont4KatakanaECacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaETex, 8, TEX_HEIGHT(aFont4KatakanaETex), 0);
-unk_80077D50 sFont4KatakanaOCompTexInfo[] =
+CacheTexInfo sFont4KatakanaOCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaOTex, 8, TEX_HEIGHT(aFont4KatakanaOTex), 0);
-unk_80077D50 sFont4KatakanaKaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaKaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaKaTex, 8, TEX_HEIGHT(aFont4KatakanaKaTex), 0);
-unk_80077D50 sFont4KatakanaKiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaKiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaKiTex, 8, TEX_HEIGHT(aFont4KatakanaKiTex), 0);
-unk_80077D50 sFont4KatakanaKuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaKuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaKuTex, 8, TEX_HEIGHT(aFont4KatakanaKuTex), 0);
-unk_80077D50 sFont4KatakanaKeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaKeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaKeTex, 8, TEX_HEIGHT(aFont4KatakanaKeTex), 0);
-unk_80077D50 sFont4KatakanaKoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaKoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaKoTex, 8, TEX_HEIGHT(aFont4KatakanaKoTex), 0);
-unk_80077D50 sFont4KatakanaSaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaSaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaSaTex, 8, TEX_HEIGHT(aFont4KatakanaSaTex), 0);
-unk_80077D50 sFont4KatakanaShiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaShiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaShiTex, 8, TEX_HEIGHT(aFont4KatakanaShiTex), 0);
-unk_80077D50 sFont4KatakanaSuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaSuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaSuTex, 8, TEX_HEIGHT(aFont4KatakanaSuTex), 0);
-unk_80077D50 sFont4KatakanaSeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaSeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaSeTex, 8, TEX_HEIGHT(aFont4KatakanaSeTex), 0);
-unk_80077D50 sFont4KatakanaSoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaSoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaSoTex, 8, TEX_HEIGHT(aFont4KatakanaSoTex), 0);
-unk_80077D50 sFont4KatakanaTaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaTaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaTaTex, 8, TEX_HEIGHT(aFont4KatakanaTaTex), 0);
-unk_80077D50 sFont4KatakanaChiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaChiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaChiTex, 8, TEX_HEIGHT(aFont4KatakanaChiTex), 0);
-unk_80077D50 sFont4KatakanaTsuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaTsuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaTsuTex, 8, TEX_HEIGHT(aFont4KatakanaTsuTex), 0);
-unk_80077D50 sFont4KatakanaTeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaTeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaTeTex, 8, TEX_HEIGHT(aFont4KatakanaTeTex), 0);
-unk_80077D50 sFont4KatakanaToCompTexInfo[] =
+CacheTexInfo sFont4KatakanaToCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaToTex, 8, TEX_HEIGHT(aFont4KatakanaToTex), 0);
-unk_80077D50 sFont4KatakanaSoukonCompTexInfo[] =
+CacheTexInfo sFont4KatakanaSoukonCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaSoukonTex, 8, TEX_HEIGHT(aFont4KatakanaSoukonTex), 0);
-unk_80077D50 sFont4KatakanaNaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaNaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaNaTex, 8, TEX_HEIGHT(aFont4KatakanaNaTex), 0);
-unk_80077D50 sFont4KatakanaNiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaNiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaNiTex, 8, TEX_HEIGHT(aFont4KatakanaNiTex), 0);
-unk_80077D50 sFont4KatakanaNuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaNuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaNuTex, 8, TEX_HEIGHT(aFont4KatakanaNuTex), 0);
-unk_80077D50 sFont4KatakanaNeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaNeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaNeTex, 8, TEX_HEIGHT(aFont4KatakanaNeTex), 0);
-unk_80077D50 sFont4KatakanaNoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaNoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaNoTex, 8, TEX_HEIGHT(aFont4KatakanaNoTex), 0);
-unk_80077D50 sFont4KatakanaHaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaHaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaHaTex, 8, TEX_HEIGHT(aFont4KatakanaHaTex), 0);
-unk_80077D50 sFont4KatakanaHiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaHiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaHiTex, 8, TEX_HEIGHT(aFont4KatakanaHiTex), 0);
-unk_80077D50 sFont4KatakanaFuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaFuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaFuTex, 8, TEX_HEIGHT(aFont4KatakanaFuTex), 0);
-unk_80077D50 sFont4KatakanaHeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaHeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaHeTex, 8, TEX_HEIGHT(aFont4KatakanaHeTex), 0);
-unk_80077D50 sFont4KatakanaHoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaHoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaHoTex, 8, TEX_HEIGHT(aFont4KatakanaHoTex), 0);
-unk_80077D50 sFont4KatakanaMaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaMaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaMaTex, 8, TEX_HEIGHT(aFont4KatakanaMaTex), 0);
-unk_80077D50 sFont4KatakanaMiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaMiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaMiTex, 8, TEX_HEIGHT(aFont4KatakanaMiTex), 0);
-unk_80077D50 sFont4KatakanaMuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaMuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaMuTex, 8, TEX_HEIGHT(aFont4KatakanaMuTex), 0);
-unk_80077D50 sFont4KatakanaMeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaMeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaMeTex, 8, TEX_HEIGHT(aFont4KatakanaMeTex), 0);
-unk_80077D50 sFont4KatakanaMoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaMoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaMoTex, 8, TEX_HEIGHT(aFont4KatakanaMoTex), 0);
-unk_80077D50 sFont4KatakanaYaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaYaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaYaTex, 8, TEX_HEIGHT(aFont4KatakanaYaTex), 0);
-unk_80077D50 sFont4KatakanaYuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaYuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaYuTex, 8, TEX_HEIGHT(aFont4KatakanaYuTex), 0);
-unk_80077D50 sFont4KatakanaYoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaYoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaYoTex, 8, TEX_HEIGHT(aFont4KatakanaYoTex), 0);
-unk_80077D50 sFont4KatakanaYoonYaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaYoonYaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaYoonYaTex, 8, TEX_HEIGHT(aFont4KatakanaYoonYaTex), 0);
-unk_80077D50 sFont4KatakanaYoonYuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaYoonYuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaYoonYuTex, 8, TEX_HEIGHT(aFont4KatakanaYoonYuTex), 0);
-unk_80077D50 sFont4KatakanaYoonYoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaYoonYoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaYoonYoTex, 8, TEX_HEIGHT(aFont4KatakanaYoonYoTex), 0);
-unk_80077D50 sFont4KatakanaRaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaRaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaRaTex, 8, TEX_HEIGHT(aFont4KatakanaRaTex), 0);
-unk_80077D50 sFont4KatakanaRiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaRiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaRiTex, 8, TEX_HEIGHT(aFont4KatakanaRiTex), 0);
-unk_80077D50 sFont4KatakanaRuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaRuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaRuTex, 8, TEX_HEIGHT(aFont4KatakanaRuTex), 0);
-unk_80077D50 sFont4KatakanaReCompTexInfo[] =
+CacheTexInfo sFont4KatakanaReCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaReTex, 8, TEX_HEIGHT(aFont4KatakanaReTex), 0);
-unk_80077D50 sFont4KatakanaRoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaRoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaRoTex, 8, TEX_HEIGHT(aFont4KatakanaRoTex), 0);
-unk_80077D50 sFont4KatakanaWaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaWaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaWaTex, 8, TEX_HEIGHT(aFont4KatakanaWaTex), 0);
-unk_80077D50 sFont4KatakanaWoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaWoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaWoTex, 8, TEX_HEIGHT(aFont4KatakanaWoTex), 0);
-unk_80077D50 sFont4KatakanaNCompTexInfo[] =
+CacheTexInfo sFont4KatakanaNCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaNTex, 8, TEX_HEIGHT(aFont4KatakanaNTex), 0);
-unk_80077D50 sFont4KatakanaGaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaGaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaGaTex, 8, TEX_HEIGHT(aFont4KatakanaGaTex), 0);
-unk_80077D50 sFont4KatakanaGiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaGiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaGiTex, 8, TEX_HEIGHT(aFont4KatakanaGiTex), 0);
-unk_80077D50 sFont4KatakanaGuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaGuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaGuTex, 8, TEX_HEIGHT(aFont4KatakanaGuTex), 0);
-unk_80077D50 sFont4KatakanaGeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaGeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaGeTex, 8, TEX_HEIGHT(aFont4KatakanaGeTex), 0);
-unk_80077D50 sFont4KatakanaGoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaGoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaGoTex, 8, TEX_HEIGHT(aFont4KatakanaGoTex), 0);
-unk_80077D50 sFont4KatakanaZaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaZaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaZaTex, 8, TEX_HEIGHT(aFont4KatakanaZaTex), 0);
-unk_80077D50 sFont4KatakanaJiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaJiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaJiTex, 8, TEX_HEIGHT(aFont4KatakanaJiTex), 0);
-unk_80077D50 sFont4KatakanaZuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaZuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaZuTex, 8, TEX_HEIGHT(aFont4KatakanaZuTex), 0);
-unk_80077D50 sFont4KatakanaZeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaZeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaZeTex, 8, TEX_HEIGHT(aFont4KatakanaZeTex), 0);
-unk_80077D50 sFont4KatakanaZoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaZoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaZoTex, 8, TEX_HEIGHT(aFont4KatakanaZoTex), 0);
-unk_80077D50 sFont4KatakanaDaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaDaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaDaTex, 8, TEX_HEIGHT(aFont4KatakanaDaTex), 0);
-unk_80077D50 sFont4KatakanaDjiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaDjiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaDjiTex, 8, TEX_HEIGHT(aFont4KatakanaDjiTex), 0);
-unk_80077D50 sFont4KatakanaDzuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaDzuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaDzuTex, 8, TEX_HEIGHT(aFont4KatakanaDzuTex), 0);
-unk_80077D50 sFont4KatakanaDeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaDeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaDeTex, 8, TEX_HEIGHT(aFont4KatakanaDeTex), 0);
-unk_80077D50 sFont4KatakanaDoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaDoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaDoTex, 8, TEX_HEIGHT(aFont4KatakanaDoTex), 0);
-unk_80077D50 sFont4KatakanaBaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaBaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaBaTex, 8, TEX_HEIGHT(aFont4KatakanaBaTex), 0);
-unk_80077D50 sFont4KatakanaBiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaBiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaBiTex, 8, TEX_HEIGHT(aFont4KatakanaBiTex), 0);
-unk_80077D50 sFont4KatakanaBuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaBuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaBuTex, 8, TEX_HEIGHT(aFont4KatakanaBuTex), 0);
-unk_80077D50 sFont4KatakanaBeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaBeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaBeTex, 8, TEX_HEIGHT(aFont4KatakanaBeTex), 0);
-unk_80077D50 sFont4KatakanaBoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaBoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaBoTex, 8, TEX_HEIGHT(aFont4KatakanaBoTex), 0);
-unk_80077D50 sFont4KatakanaPaCompTexInfo[] =
+CacheTexInfo sFont4KatakanaPaCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaPaTex, 8, TEX_HEIGHT(aFont4KatakanaPaTex), 0);
-unk_80077D50 sFont4KatakanaPiCompTexInfo[] =
+CacheTexInfo sFont4KatakanaPiCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaPiTex, 8, TEX_HEIGHT(aFont4KatakanaPiTex), 0);
-unk_80077D50 sFont4KatakanaPuCompTexInfo[] =
+CacheTexInfo sFont4KatakanaPuCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaPuTex, 8, TEX_HEIGHT(aFont4KatakanaPuTex), 0);
-unk_80077D50 sFont4KatakanaPeCompTexInfo[] =
+CacheTexInfo sFont4KatakanaPeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaPeTex, 8, TEX_HEIGHT(aFont4KatakanaPeTex), 0);
-unk_80077D50 sFont4KatakanaPoCompTexInfo[] =
+CacheTexInfo sFont4KatakanaPoCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaPoTex, 8, TEX_HEIGHT(aFont4KatakanaPoTex), 0);
-unk_80077D50 sFont4KatakanaDigraphACompTexInfo[] =
+CacheTexInfo sFont4KatakanaDigraphACacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaDigraphATex, 8, TEX_HEIGHT(aFont4KatakanaDigraphATex), 0);
-unk_80077D50 sFont4KatakanaDigraphICompTexInfo[] =
+CacheTexInfo sFont4KatakanaDigraphICacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaDigraphITex, 8, TEX_HEIGHT(aFont4KatakanaDigraphITex), 0);
-unk_80077D50 sFont4KatakanaDigraphECompTexInfo[] =
+CacheTexInfo sFont4KatakanaDigraphECacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4KatakanaDigraphETex, 8, TEX_HEIGHT(aFont4KatakanaDigraphETex), 0);
-unk_80077D50 sFont4DashCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4DashTex, 8, TEX_HEIGHT(aFont4DashTex), 0);
-unk_80077D50 sFont4Num0CompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num0Tex, 8, TEX_HEIGHT(aFont4Num0Tex), 0);
-unk_80077D50 sFont4Num1CompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num1Tex, 8, TEX_HEIGHT(aFont4Num1Tex), 0);
-unk_80077D50 sFont4Num2CompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num2Tex, 8, TEX_HEIGHT(aFont4Num2Tex), 0);
-unk_80077D50 sFont4Num3CompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num3Tex, 8, TEX_HEIGHT(aFont4Num3Tex), 0);
-unk_80077D50 sFont4Num4CompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num4Tex, 8, TEX_HEIGHT(aFont4Num4Tex), 0);
-unk_80077D50 sFont4Num5CompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num5Tex, 8, TEX_HEIGHT(aFont4Num5Tex), 0);
-unk_80077D50 sFont4Num6CompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num6Tex, 8, TEX_HEIGHT(aFont4Num6Tex), 0);
-unk_80077D50 sFont4Num7CompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num7Tex, 8, TEX_HEIGHT(aFont4Num7Tex), 0);
-unk_80077D50 sFont4Num8CompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num8Tex, 8, TEX_HEIGHT(aFont4Num8Tex), 0);
-unk_80077D50 sFont4Num9CompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num9Tex, 8, TEX_HEIGHT(aFont4Num9Tex), 0);
-unk_80077D50 sFont4PrimeCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4PrimeTex, 8, TEX_HEIGHT(aFont4PrimeTex), 0);
-unk_80077D50 sFont4DoublePrimeCompTexInfo[] =
+CacheTexInfo sFont4DashCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4DashTex, 8, TEX_HEIGHT(aFont4DashTex), 0);
+CacheTexInfo sFont4Num0CacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num0Tex, 8, TEX_HEIGHT(aFont4Num0Tex), 0);
+CacheTexInfo sFont4Num1CacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num1Tex, 8, TEX_HEIGHT(aFont4Num1Tex), 0);
+CacheTexInfo sFont4Num2CacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num2Tex, 8, TEX_HEIGHT(aFont4Num2Tex), 0);
+CacheTexInfo sFont4Num3CacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num3Tex, 8, TEX_HEIGHT(aFont4Num3Tex), 0);
+CacheTexInfo sFont4Num4CacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num4Tex, 8, TEX_HEIGHT(aFont4Num4Tex), 0);
+CacheTexInfo sFont4Num5CacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num5Tex, 8, TEX_HEIGHT(aFont4Num5Tex), 0);
+CacheTexInfo sFont4Num6CacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num6Tex, 8, TEX_HEIGHT(aFont4Num6Tex), 0);
+CacheTexInfo sFont4Num7CacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num7Tex, 8, TEX_HEIGHT(aFont4Num7Tex), 0);
+CacheTexInfo sFont4Num8CacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num8Tex, 8, TEX_HEIGHT(aFont4Num8Tex), 0);
+CacheTexInfo sFont4Num9CacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4Num9Tex, 8, TEX_HEIGHT(aFont4Num9Tex), 0);
+CacheTexInfo sFont4PrimeCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4PrimeTex, 8, TEX_HEIGHT(aFont4PrimeTex), 0);
+CacheTexInfo sFont4DoublePrimeCacheTexInfo[] =
     COMP_TEX_INFO_WH(4, aFont4DoublePrimeTex, 8, TEX_HEIGHT(aFont4DoublePrimeTex), 0);
-unk_80077D50 sFont4STCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4STTex, 8, TEX_HEIGHT(aFont4STTex), 0);
-unk_80077D50 sFont4NDCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4NDTex, 8, TEX_HEIGHT(aFont4NDTex), 0);
-unk_80077D50 sFont4RDCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4RDTex, 8, TEX_HEIGHT(aFont4RDTex), 0);
-unk_80077D50 sFont4THCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4THTex, 8, TEX_HEIGHT(aFont4THTex), 0);
-unk_80077D50 sFont4PlusCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4PlusTex, 8, TEX_HEIGHT(aFont4PlusTex), 0);
-unk_80077D50 sFont4MinusCompTexInfo[] = COMP_TEX_INFO_WH(4, aFont4MinusTex, 8, TEX_HEIGHT(aFont4MinusTex), 0);
-unk_80077D50 sFont4PointsCompTexInfo[] = COMP_TEX_INFO(4, aFont4PointsTex, 0);
+CacheTexInfo sFont4STCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4STTex, 8, TEX_HEIGHT(aFont4STTex), 0);
+CacheTexInfo sFont4NDCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4NDTex, 8, TEX_HEIGHT(aFont4NDTex), 0);
+CacheTexInfo sFont4RDCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4RDTex, 8, TEX_HEIGHT(aFont4RDTex), 0);
+CacheTexInfo sFont4THCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4THTex, 8, TEX_HEIGHT(aFont4THTex), 0);
+CacheTexInfo sFont4PlusCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4PlusTex, 8, TEX_HEIGHT(aFont4PlusTex), 0);
+CacheTexInfo sFont4MinusCacheTexInfo[] = COMP_TEX_INFO_WH(4, aFont4MinusTex, 8, TEX_HEIGHT(aFont4MinusTex), 0);
+CacheTexInfo sFont4PointsCacheTexInfo[] = COMP_TEX_INFO(4, aFont4PointsTex, 0);
 
 #ifdef VERSION_JP
-unk_80077D50* sFont4CompTexInfos[] = {
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4DCompTexInfo,
-    sFont4ECompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4MCompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4PrimeCompTexInfo,
-    sFont4DoublePrimeCompTexInfo,
-    sFont4AmpersandCompTexInfo,
-    sFont4PlusCompTexInfo,
-    sFont4MinusCompTexInfo,
-    sFont4PointsCompTexInfo,
-    sFont4Num0CompTexInfo,
-    sFont4Num1CompTexInfo,
-    sFont4Num2CompTexInfo,
-    sFont4Num3CompTexInfo,
-    sFont4Num4CompTexInfo,
-    sFont4Num5CompTexInfo,
-    sFont4Num6CompTexInfo,
-    sFont4Num7CompTexInfo,
-    sFont4Num8CompTexInfo,
-    sFont4Num9CompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4KatakanaDigraphACompTexInfo,
-    sFont4KatakanaACompTexInfo,
-    sFont4KatakanaDigraphICompTexInfo,
-    sFont4KatakanaICompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaDigraphECompTexInfo,
-    sFont4KatakanaECompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaKaCompTexInfo,
-    sFont4KatakanaGaCompTexInfo,
-    sFont4KatakanaKiCompTexInfo,
-    sFont4KatakanaGiCompTexInfo,
-    sFont4KatakanaKuCompTexInfo,
-    sFont4KatakanaGuCompTexInfo,
-    sFont4KatakanaKeCompTexInfo,
-    sFont4KatakanaGeCompTexInfo,
-    sFont4KatakanaKoCompTexInfo,
-    sFont4KatakanaGoCompTexInfo,
-    sFont4KatakanaSaCompTexInfo,
-    sFont4KatakanaZaCompTexInfo,
-    sFont4KatakanaShiCompTexInfo,
-    sFont4KatakanaJiCompTexInfo,
-    sFont4KatakanaSuCompTexInfo,
-    sFont4KatakanaZuCompTexInfo,
-    sFont4KatakanaSeCompTexInfo,
-    sFont4KatakanaZeCompTexInfo,
-    sFont4KatakanaSoCompTexInfo,
-    sFont4KatakanaZoCompTexInfo,
-    sFont4KatakanaTaCompTexInfo,
-    sFont4KatakanaDaCompTexInfo,
-    sFont4KatakanaChiCompTexInfo,
-    sFont4KatakanaDjiCompTexInfo,
-    sFont4KatakanaSoukonCompTexInfo,
-    sFont4KatakanaTsuCompTexInfo,
-    sFont4KatakanaDzuCompTexInfo,
-    sFont4KatakanaTeCompTexInfo,
-    sFont4KatakanaDeCompTexInfo,
-    sFont4KatakanaToCompTexInfo,
-    sFont4KatakanaDoCompTexInfo,
-    sFont4KatakanaNaCompTexInfo,
-    sFont4KatakanaNiCompTexInfo,
-    sFont4KatakanaNuCompTexInfo,
-    sFont4KatakanaNeCompTexInfo,
-    sFont4KatakanaNoCompTexInfo,
-    sFont4KatakanaHaCompTexInfo,
-    sFont4KatakanaBaCompTexInfo,
-    sFont4KatakanaPaCompTexInfo,
-    sFont4KatakanaHiCompTexInfo,
-    sFont4KatakanaBiCompTexInfo,
-    sFont4KatakanaPiCompTexInfo,
-    sFont4KatakanaFuCompTexInfo,
-    sFont4KatakanaBuCompTexInfo,
-    sFont4KatakanaPuCompTexInfo,
-    sFont4KatakanaHeCompTexInfo,
-    sFont4KatakanaBeCompTexInfo,
-    sFont4KatakanaPeCompTexInfo,
-    sFont4KatakanaHoCompTexInfo,
-    sFont4KatakanaBoCompTexInfo,
-    sFont4KatakanaPoCompTexInfo,
-    sFont4KatakanaMaCompTexInfo,
-    sFont4KatakanaMiCompTexInfo,
-    sFont4KatakanaMuCompTexInfo,
-    sFont4KatakanaMeCompTexInfo,
-    sFont4KatakanaMoCompTexInfo,
-    sFont4KatakanaYoonYaCompTexInfo,
-    sFont4KatakanaYaCompTexInfo,
-    sFont4KatakanaYoonYuCompTexInfo,
-    sFont4KatakanaYuCompTexInfo,
-    sFont4KatakanaYoonYoCompTexInfo,
-    sFont4KatakanaYoCompTexInfo,
-    sFont4KatakanaRaCompTexInfo,
-    sFont4KatakanaRiCompTexInfo,
-    sFont4KatakanaRuCompTexInfo,
-    sFont4KatakanaReCompTexInfo,
-    sFont4KatakanaRoCompTexInfo,
-    sFont4KatakanaWaCompTexInfo,
-    sFont4KatakanaWoCompTexInfo,
-    sFont4KatakanaNCompTexInfo,
-    sFont4KatakanaDigraphACompTexInfo,
-    sFont4KatakanaACompTexInfo,
-    sFont4KatakanaDigraphICompTexInfo,
-    sFont4KatakanaICompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaDigraphECompTexInfo,
-    sFont4KatakanaECompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaKaCompTexInfo,
-    sFont4KatakanaGaCompTexInfo,
-    sFont4KatakanaKiCompTexInfo,
-    sFont4KatakanaGiCompTexInfo,
-    sFont4KatakanaKuCompTexInfo,
-    sFont4KatakanaGuCompTexInfo,
-    sFont4KatakanaKeCompTexInfo,
-    sFont4KatakanaGeCompTexInfo,
-    sFont4KatakanaKoCompTexInfo,
-    sFont4KatakanaGoCompTexInfo,
-    sFont4KatakanaSaCompTexInfo,
-    sFont4KatakanaZaCompTexInfo,
-    sFont4KatakanaShiCompTexInfo,
-    sFont4KatakanaJiCompTexInfo,
-    sFont4KatakanaSuCompTexInfo,
-    sFont4KatakanaZuCompTexInfo,
-    sFont4KatakanaSeCompTexInfo,
-    sFont4KatakanaZeCompTexInfo,
-    sFont4KatakanaSoCompTexInfo,
-    sFont4KatakanaZoCompTexInfo,
-    sFont4KatakanaTaCompTexInfo,
-    sFont4KatakanaDaCompTexInfo,
-    sFont4KatakanaChiCompTexInfo,
-    sFont4KatakanaDjiCompTexInfo,
-    sFont4KatakanaSoukonCompTexInfo,
-    sFont4KatakanaTsuCompTexInfo,
-    sFont4KatakanaDzuCompTexInfo,
-    sFont4KatakanaTeCompTexInfo,
-    sFont4KatakanaDeCompTexInfo,
-    sFont4KatakanaToCompTexInfo,
-    sFont4KatakanaDoCompTexInfo,
-    sFont4KatakanaNaCompTexInfo,
-    sFont4KatakanaNiCompTexInfo,
-    sFont4KatakanaNuCompTexInfo,
-    sFont4KatakanaNeCompTexInfo,
-    sFont4KatakanaNoCompTexInfo,
-    sFont4KatakanaHaCompTexInfo,
-    sFont4KatakanaBaCompTexInfo,
-    sFont4KatakanaPaCompTexInfo,
-    sFont4KatakanaHiCompTexInfo,
-    sFont4KatakanaBiCompTexInfo,
-    sFont4KatakanaPiCompTexInfo,
-    sFont4KatakanaFuCompTexInfo,
-    sFont4KatakanaBuCompTexInfo,
-    sFont4KatakanaPuCompTexInfo,
-    sFont4KatakanaHeCompTexInfo,
-    sFont4KatakanaBeCompTexInfo,
-    sFont4KatakanaPeCompTexInfo,
-    sFont4KatakanaHoCompTexInfo,
-    sFont4KatakanaBoCompTexInfo,
-    sFont4KatakanaPoCompTexInfo,
-    sFont4KatakanaMaCompTexInfo,
-    sFont4KatakanaMiCompTexInfo,
-    sFont4KatakanaMuCompTexInfo,
-    sFont4KatakanaMeCompTexInfo,
-    sFont4KatakanaMoCompTexInfo,
-    sFont4KatakanaYoonYaCompTexInfo,
-    sFont4KatakanaYaCompTexInfo,
-    sFont4KatakanaYoonYuCompTexInfo,
-    sFont4KatakanaYuCompTexInfo,
-    sFont4KatakanaYoonYoCompTexInfo,
-    sFont4KatakanaYoCompTexInfo,
-    sFont4KatakanaRaCompTexInfo,
-    sFont4KatakanaRiCompTexInfo,
-    sFont4KatakanaRuCompTexInfo,
-    sFont4KatakanaReCompTexInfo,
-    sFont4KatakanaRoCompTexInfo,
-    sFont4KatakanaWaCompTexInfo,
-    sFont4KatakanaWoCompTexInfo,
-    sFont4KatakanaNCompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4NDCompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4RDCompTexInfo,
-    sFont4STCompTexInfo,
-    sFont4THCompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4DashCompTexInfo,
+CacheTexInfo* sFont4CacheTexInfos[] = {
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4DCacheTexInfo,
+    sFont4ECacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4MCacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4PrimeCacheTexInfo,
+    sFont4DoublePrimeCacheTexInfo,
+    sFont4AmpersandCacheTexInfo,
+    sFont4PlusCacheTexInfo,
+    sFont4MinusCacheTexInfo,
+    sFont4PointsCacheTexInfo,
+    sFont4Num0CacheTexInfo,
+    sFont4Num1CacheTexInfo,
+    sFont4Num2CacheTexInfo,
+    sFont4Num3CacheTexInfo,
+    sFont4Num4CacheTexInfo,
+    sFont4Num5CacheTexInfo,
+    sFont4Num6CacheTexInfo,
+    sFont4Num7CacheTexInfo,
+    sFont4Num8CacheTexInfo,
+    sFont4Num9CacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4KatakanaDigraphACacheTexInfo,
+    sFont4KatakanaACacheTexInfo,
+    sFont4KatakanaDigraphICacheTexInfo,
+    sFont4KatakanaICacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaDigraphECacheTexInfo,
+    sFont4KatakanaECacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaKaCacheTexInfo,
+    sFont4KatakanaGaCacheTexInfo,
+    sFont4KatakanaKiCacheTexInfo,
+    sFont4KatakanaGiCacheTexInfo,
+    sFont4KatakanaKuCacheTexInfo,
+    sFont4KatakanaGuCacheTexInfo,
+    sFont4KatakanaKeCacheTexInfo,
+    sFont4KatakanaGeCacheTexInfo,
+    sFont4KatakanaKoCacheTexInfo,
+    sFont4KatakanaGoCacheTexInfo,
+    sFont4KatakanaSaCacheTexInfo,
+    sFont4KatakanaZaCacheTexInfo,
+    sFont4KatakanaShiCacheTexInfo,
+    sFont4KatakanaJiCacheTexInfo,
+    sFont4KatakanaSuCacheTexInfo,
+    sFont4KatakanaZuCacheTexInfo,
+    sFont4KatakanaSeCacheTexInfo,
+    sFont4KatakanaZeCacheTexInfo,
+    sFont4KatakanaSoCacheTexInfo,
+    sFont4KatakanaZoCacheTexInfo,
+    sFont4KatakanaTaCacheTexInfo,
+    sFont4KatakanaDaCacheTexInfo,
+    sFont4KatakanaChiCacheTexInfo,
+    sFont4KatakanaDjiCacheTexInfo,
+    sFont4KatakanaSoukonCacheTexInfo,
+    sFont4KatakanaTsuCacheTexInfo,
+    sFont4KatakanaDzuCacheTexInfo,
+    sFont4KatakanaTeCacheTexInfo,
+    sFont4KatakanaDeCacheTexInfo,
+    sFont4KatakanaToCacheTexInfo,
+    sFont4KatakanaDoCacheTexInfo,
+    sFont4KatakanaNaCacheTexInfo,
+    sFont4KatakanaNiCacheTexInfo,
+    sFont4KatakanaNuCacheTexInfo,
+    sFont4KatakanaNeCacheTexInfo,
+    sFont4KatakanaNoCacheTexInfo,
+    sFont4KatakanaHaCacheTexInfo,
+    sFont4KatakanaBaCacheTexInfo,
+    sFont4KatakanaPaCacheTexInfo,
+    sFont4KatakanaHiCacheTexInfo,
+    sFont4KatakanaBiCacheTexInfo,
+    sFont4KatakanaPiCacheTexInfo,
+    sFont4KatakanaFuCacheTexInfo,
+    sFont4KatakanaBuCacheTexInfo,
+    sFont4KatakanaPuCacheTexInfo,
+    sFont4KatakanaHeCacheTexInfo,
+    sFont4KatakanaBeCacheTexInfo,
+    sFont4KatakanaPeCacheTexInfo,
+    sFont4KatakanaHoCacheTexInfo,
+    sFont4KatakanaBoCacheTexInfo,
+    sFont4KatakanaPoCacheTexInfo,
+    sFont4KatakanaMaCacheTexInfo,
+    sFont4KatakanaMiCacheTexInfo,
+    sFont4KatakanaMuCacheTexInfo,
+    sFont4KatakanaMeCacheTexInfo,
+    sFont4KatakanaMoCacheTexInfo,
+    sFont4KatakanaYoonYaCacheTexInfo,
+    sFont4KatakanaYaCacheTexInfo,
+    sFont4KatakanaYoonYuCacheTexInfo,
+    sFont4KatakanaYuCacheTexInfo,
+    sFont4KatakanaYoonYoCacheTexInfo,
+    sFont4KatakanaYoCacheTexInfo,
+    sFont4KatakanaRaCacheTexInfo,
+    sFont4KatakanaRiCacheTexInfo,
+    sFont4KatakanaRuCacheTexInfo,
+    sFont4KatakanaReCacheTexInfo,
+    sFont4KatakanaRoCacheTexInfo,
+    sFont4KatakanaWaCacheTexInfo,
+    sFont4KatakanaWoCacheTexInfo,
+    sFont4KatakanaNCacheTexInfo,
+    sFont4KatakanaDigraphACacheTexInfo,
+    sFont4KatakanaACacheTexInfo,
+    sFont4KatakanaDigraphICacheTexInfo,
+    sFont4KatakanaICacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaDigraphECacheTexInfo,
+    sFont4KatakanaECacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaKaCacheTexInfo,
+    sFont4KatakanaGaCacheTexInfo,
+    sFont4KatakanaKiCacheTexInfo,
+    sFont4KatakanaGiCacheTexInfo,
+    sFont4KatakanaKuCacheTexInfo,
+    sFont4KatakanaGuCacheTexInfo,
+    sFont4KatakanaKeCacheTexInfo,
+    sFont4KatakanaGeCacheTexInfo,
+    sFont4KatakanaKoCacheTexInfo,
+    sFont4KatakanaGoCacheTexInfo,
+    sFont4KatakanaSaCacheTexInfo,
+    sFont4KatakanaZaCacheTexInfo,
+    sFont4KatakanaShiCacheTexInfo,
+    sFont4KatakanaJiCacheTexInfo,
+    sFont4KatakanaSuCacheTexInfo,
+    sFont4KatakanaZuCacheTexInfo,
+    sFont4KatakanaSeCacheTexInfo,
+    sFont4KatakanaZeCacheTexInfo,
+    sFont4KatakanaSoCacheTexInfo,
+    sFont4KatakanaZoCacheTexInfo,
+    sFont4KatakanaTaCacheTexInfo,
+    sFont4KatakanaDaCacheTexInfo,
+    sFont4KatakanaChiCacheTexInfo,
+    sFont4KatakanaDjiCacheTexInfo,
+    sFont4KatakanaSoukonCacheTexInfo,
+    sFont4KatakanaTsuCacheTexInfo,
+    sFont4KatakanaDzuCacheTexInfo,
+    sFont4KatakanaTeCacheTexInfo,
+    sFont4KatakanaDeCacheTexInfo,
+    sFont4KatakanaToCacheTexInfo,
+    sFont4KatakanaDoCacheTexInfo,
+    sFont4KatakanaNaCacheTexInfo,
+    sFont4KatakanaNiCacheTexInfo,
+    sFont4KatakanaNuCacheTexInfo,
+    sFont4KatakanaNeCacheTexInfo,
+    sFont4KatakanaNoCacheTexInfo,
+    sFont4KatakanaHaCacheTexInfo,
+    sFont4KatakanaBaCacheTexInfo,
+    sFont4KatakanaPaCacheTexInfo,
+    sFont4KatakanaHiCacheTexInfo,
+    sFont4KatakanaBiCacheTexInfo,
+    sFont4KatakanaPiCacheTexInfo,
+    sFont4KatakanaFuCacheTexInfo,
+    sFont4KatakanaBuCacheTexInfo,
+    sFont4KatakanaPuCacheTexInfo,
+    sFont4KatakanaHeCacheTexInfo,
+    sFont4KatakanaBeCacheTexInfo,
+    sFont4KatakanaPeCacheTexInfo,
+    sFont4KatakanaHoCacheTexInfo,
+    sFont4KatakanaBoCacheTexInfo,
+    sFont4KatakanaPoCacheTexInfo,
+    sFont4KatakanaMaCacheTexInfo,
+    sFont4KatakanaMiCacheTexInfo,
+    sFont4KatakanaMuCacheTexInfo,
+    sFont4KatakanaMeCacheTexInfo,
+    sFont4KatakanaMoCacheTexInfo,
+    sFont4KatakanaYoonYaCacheTexInfo,
+    sFont4KatakanaYaCacheTexInfo,
+    sFont4KatakanaYoonYuCacheTexInfo,
+    sFont4KatakanaYuCacheTexInfo,
+    sFont4KatakanaYoonYoCacheTexInfo,
+    sFont4KatakanaYoCacheTexInfo,
+    sFont4KatakanaRaCacheTexInfo,
+    sFont4KatakanaRiCacheTexInfo,
+    sFont4KatakanaRuCacheTexInfo,
+    sFont4KatakanaReCacheTexInfo,
+    sFont4KatakanaRoCacheTexInfo,
+    sFont4KatakanaWaCacheTexInfo,
+    sFont4KatakanaWoCacheTexInfo,
+    sFont4KatakanaNCacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4NDCacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4RDCacheTexInfo,
+    sFont4STCacheTexInfo,
+    sFont4THCacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4DashCacheTexInfo,
 };
 #else
-unk_80077D50* sFont4CompTexInfos[] = {
-    sFont4ACompTexInfo,
-    sFont4BCompTexInfo,
-    sFont4CCompTexInfo,
-    sFont4DCompTexInfo,
-    sFont4ECompTexInfo,
-    sFont4FCompTexInfo,
-    sFont4GCompTexInfo,
-    sFont4HCompTexInfo,
-    sFont4ICompTexInfo,
-    sFont4JCompTexInfo,
-    sFont4KCompTexInfo,
-    sFont4LCompTexInfo,
-    sFont4MCompTexInfo,
-    sFont4NCompTexInfo,
-    sFont4OCompTexInfo,
-    sFont4PCompTexInfo,
-    sFont4QCompTexInfo,
-    sFont4RCompTexInfo,
-    sFont4SCompTexInfo,
-    sFont4TCompTexInfo,
-    sFont4UCompTexInfo,
-    sFont4VCompTexInfo,
-    sFont4WCompTexInfo,
-    sFont4XCompTexInfo,
-    sFont4YCompTexInfo,
-    sFont4ZCompTexInfo,
-    sFont4PrimeCompTexInfo,
-    sFont4DoublePrimeCompTexInfo,
-    sFont4AmpersandCompTexInfo,
-    sFont4PlusCompTexInfo,
-    sFont4MinusCompTexInfo,
-    sFont4PointsCompTexInfo,
-    sFont4Num0CompTexInfo,
-    sFont4Num1CompTexInfo,
-    sFont4Num2CompTexInfo,
-    sFont4Num3CompTexInfo,
-    sFont4Num4CompTexInfo,
-    sFont4Num5CompTexInfo,
-    sFont4Num6CompTexInfo,
-    sFont4Num7CompTexInfo,
-    sFont4Num8CompTexInfo,
-    sFont4Num9CompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4PeriodCompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4KatakanaDigraphACompTexInfo,
-    sFont4KatakanaACompTexInfo,
-    sFont4LowerCCompTexInfo,
-    sFont4KatakanaICompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaDigraphECompTexInfo,
-    sFont4KatakanaECompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaKaCompTexInfo,
-    sFont4KatakanaGaCompTexInfo,
-    sFont4KatakanaKiCompTexInfo,
-    sFont4KatakanaGiCompTexInfo,
-    sFont4KatakanaKuCompTexInfo,
-    sFont4KatakanaGuCompTexInfo,
-    sFont4KatakanaKeCompTexInfo,
-    sFont4LowerRCompTexInfo,
-    sFont4LowerSCompTexInfo,
-    sFont4KatakanaGoCompTexInfo,
-    sFont4KatakanaSaCompTexInfo,
-    sFont4KatakanaZaCompTexInfo,
-    sFont4KatakanaShiCompTexInfo,
-    sFont4KatakanaJiCompTexInfo,
-    sFont4KatakanaSuCompTexInfo,
-    sFont4KatakanaZuCompTexInfo,
-    sFont4KatakanaSeCompTexInfo,
-    sFont4KatakanaZeCompTexInfo,
-    sFont4KatakanaSoCompTexInfo,
-    sFont4KatakanaZoCompTexInfo,
-    sFont4KatakanaTaCompTexInfo,
-    sFont4KatakanaDaCompTexInfo,
-    sFont4KatakanaChiCompTexInfo,
-    sFont4KatakanaDjiCompTexInfo,
-    sFont4KatakanaSoukonCompTexInfo,
-    sFont4KatakanaTsuCompTexInfo,
-    sFont4KatakanaDzuCompTexInfo,
-    sFont4KatakanaTeCompTexInfo,
-    sFont4KatakanaDeCompTexInfo,
-    sFont4KatakanaToCompTexInfo,
-    sFont4KatakanaDoCompTexInfo,
-    sFont4KatakanaNaCompTexInfo,
-    sFont4KatakanaNiCompTexInfo,
-    sFont4KatakanaNuCompTexInfo,
-    sFont4KatakanaNeCompTexInfo,
-    sFont4KatakanaNoCompTexInfo,
-    sFont4KatakanaHaCompTexInfo,
-    sFont4KatakanaBaCompTexInfo,
-    sFont4KatakanaPaCompTexInfo,
-    sFont4KatakanaHiCompTexInfo,
-    sFont4KatakanaBiCompTexInfo,
-    sFont4KatakanaPiCompTexInfo,
-    sFont4KatakanaFuCompTexInfo,
-    sFont4KatakanaBuCompTexInfo,
-    sFont4KatakanaPuCompTexInfo,
-    sFont4KatakanaHeCompTexInfo,
-    sFont4KatakanaBeCompTexInfo,
-    sFont4KatakanaPeCompTexInfo,
-    sFont4KatakanaHoCompTexInfo,
-    sFont4KatakanaBoCompTexInfo,
-    sFont4KatakanaPoCompTexInfo,
-    sFont4KatakanaMaCompTexInfo,
-    sFont4KatakanaMiCompTexInfo,
-    sFont4KatakanaMuCompTexInfo,
-    sFont4KatakanaMeCompTexInfo,
-    sFont4KatakanaMoCompTexInfo,
-    sFont4KatakanaYoonYaCompTexInfo,
-    sFont4KatakanaYaCompTexInfo,
-    sFont4KatakanaYoonYuCompTexInfo,
-    sFont4KatakanaYuCompTexInfo,
-    sFont4KatakanaYoonYoCompTexInfo,
-    sFont4KatakanaYoCompTexInfo,
-    sFont4KatakanaRaCompTexInfo,
-    sFont4KatakanaRiCompTexInfo,
-    sFont4KatakanaRuCompTexInfo,
-    sFont4KatakanaReCompTexInfo,
-    sFont4KatakanaRoCompTexInfo,
-    sFont4KatakanaWaCompTexInfo,
-    sFont4KatakanaWoCompTexInfo,
-    sFont4KatakanaNCompTexInfo,
-    sFont4KatakanaDigraphACompTexInfo,
-    sFont4KatakanaACompTexInfo,
-    sFont4KatakanaDigraphICompTexInfo,
-    sFont4KatakanaICompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaDigraphECompTexInfo,
-    sFont4KatakanaECompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaKaCompTexInfo,
-    sFont4KatakanaGaCompTexInfo,
-    sFont4KatakanaKiCompTexInfo,
-    sFont4KatakanaGiCompTexInfo,
-    sFont4KatakanaKuCompTexInfo,
-    sFont4KatakanaGuCompTexInfo,
-    sFont4KatakanaKeCompTexInfo,
-    sFont4KatakanaGeCompTexInfo,
-    sFont4KatakanaKoCompTexInfo,
-    sFont4KatakanaGoCompTexInfo,
-    sFont4KatakanaSaCompTexInfo,
-    sFont4KatakanaZaCompTexInfo,
-    sFont4KatakanaShiCompTexInfo,
-    sFont4KatakanaJiCompTexInfo,
-    sFont4KatakanaSuCompTexInfo,
-    sFont4KatakanaZuCompTexInfo,
-    sFont4KatakanaSeCompTexInfo,
-    sFont4KatakanaZeCompTexInfo,
-    sFont4KatakanaSoCompTexInfo,
-    sFont4KatakanaZoCompTexInfo,
-    sFont4KatakanaTaCompTexInfo,
-    sFont4KatakanaDaCompTexInfo,
-    sFont4KatakanaChiCompTexInfo,
-    sFont4KatakanaDjiCompTexInfo,
-    sFont4KatakanaSoukonCompTexInfo,
-    sFont4KatakanaTsuCompTexInfo,
-    sFont4KatakanaDzuCompTexInfo,
-    sFont4KatakanaTeCompTexInfo,
-    sFont4KatakanaDeCompTexInfo,
-    sFont4KatakanaToCompTexInfo,
-    sFont4KatakanaDoCompTexInfo,
-    sFont4KatakanaNaCompTexInfo,
-    sFont4KatakanaNiCompTexInfo,
-    sFont4KatakanaNuCompTexInfo,
-    sFont4KatakanaNeCompTexInfo,
-    sFont4KatakanaNoCompTexInfo,
-    sFont4KatakanaHaCompTexInfo,
-    sFont4KatakanaBaCompTexInfo,
-    sFont4KatakanaPaCompTexInfo,
-    sFont4KatakanaHiCompTexInfo,
-    sFont4KatakanaBiCompTexInfo,
-    sFont4KatakanaPiCompTexInfo,
-    sFont4KatakanaFuCompTexInfo,
-    sFont4KatakanaBuCompTexInfo,
-    sFont4KatakanaPuCompTexInfo,
-    sFont4KatakanaHeCompTexInfo,
-    sFont4KatakanaBeCompTexInfo,
-    sFont4KatakanaPeCompTexInfo,
-    sFont4KatakanaHoCompTexInfo,
-    sFont4KatakanaBoCompTexInfo,
-    sFont4KatakanaPoCompTexInfo,
-    sFont4KatakanaMaCompTexInfo,
-    sFont4KatakanaMiCompTexInfo,
-    sFont4KatakanaMuCompTexInfo,
-    sFont4KatakanaMeCompTexInfo,
-    sFont4KatakanaMoCompTexInfo,
-    sFont4KatakanaYoonYaCompTexInfo,
-    sFont4KatakanaYaCompTexInfo,
-    sFont4KatakanaYoonYuCompTexInfo,
-    sFont4KatakanaYuCompTexInfo,
-    sFont4KatakanaYoonYoCompTexInfo,
-    sFont4KatakanaYoCompTexInfo,
-    sFont4KatakanaRaCompTexInfo,
-    sFont4KatakanaRiCompTexInfo,
-    sFont4KatakanaRuCompTexInfo,
-    sFont4KatakanaReCompTexInfo,
-    sFont4KatakanaRoCompTexInfo,
-    sFont4KatakanaWaCompTexInfo,
-    sFont4KatakanaWoCompTexInfo,
-    sFont4KatakanaNCompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4NDCompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4RDCompTexInfo,
-    sFont4STCompTexInfo,
-    sFont4THCompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4DashCompTexInfo,
+CacheTexInfo* sFont4CacheTexInfos[] = {
+    sFont4ACacheTexInfo,
+    sFont4BCacheTexInfo,
+    sFont4CCacheTexInfo,
+    sFont4DCacheTexInfo,
+    sFont4ECacheTexInfo,
+    sFont4FCacheTexInfo,
+    sFont4GCacheTexInfo,
+    sFont4HCacheTexInfo,
+    sFont4ICacheTexInfo,
+    sFont4JCacheTexInfo,
+    sFont4KCacheTexInfo,
+    sFont4LCacheTexInfo,
+    sFont4MCacheTexInfo,
+    sFont4NCacheTexInfo,
+    sFont4OCacheTexInfo,
+    sFont4PCacheTexInfo,
+    sFont4QCacheTexInfo,
+    sFont4RCacheTexInfo,
+    sFont4SCacheTexInfo,
+    sFont4TCacheTexInfo,
+    sFont4UCacheTexInfo,
+    sFont4VCacheTexInfo,
+    sFont4WCacheTexInfo,
+    sFont4XCacheTexInfo,
+    sFont4YCacheTexInfo,
+    sFont4ZCacheTexInfo,
+    sFont4PrimeCacheTexInfo,
+    sFont4DoublePrimeCacheTexInfo,
+    sFont4AmpersandCacheTexInfo,
+    sFont4PlusCacheTexInfo,
+    sFont4MinusCacheTexInfo,
+    sFont4PointsCacheTexInfo,
+    sFont4Num0CacheTexInfo,
+    sFont4Num1CacheTexInfo,
+    sFont4Num2CacheTexInfo,
+    sFont4Num3CacheTexInfo,
+    sFont4Num4CacheTexInfo,
+    sFont4Num5CacheTexInfo,
+    sFont4Num6CacheTexInfo,
+    sFont4Num7CacheTexInfo,
+    sFont4Num8CacheTexInfo,
+    sFont4Num9CacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4PeriodCacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4KatakanaDigraphACacheTexInfo,
+    sFont4KatakanaACacheTexInfo,
+    sFont4LowerCCacheTexInfo,
+    sFont4KatakanaICacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaDigraphECacheTexInfo,
+    sFont4KatakanaECacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaKaCacheTexInfo,
+    sFont4KatakanaGaCacheTexInfo,
+    sFont4KatakanaKiCacheTexInfo,
+    sFont4KatakanaGiCacheTexInfo,
+    sFont4KatakanaKuCacheTexInfo,
+    sFont4KatakanaGuCacheTexInfo,
+    sFont4KatakanaKeCacheTexInfo,
+    sFont4LowerRCacheTexInfo,
+    sFont4LowerSCacheTexInfo,
+    sFont4KatakanaGoCacheTexInfo,
+    sFont4KatakanaSaCacheTexInfo,
+    sFont4KatakanaZaCacheTexInfo,
+    sFont4KatakanaShiCacheTexInfo,
+    sFont4KatakanaJiCacheTexInfo,
+    sFont4KatakanaSuCacheTexInfo,
+    sFont4KatakanaZuCacheTexInfo,
+    sFont4KatakanaSeCacheTexInfo,
+    sFont4KatakanaZeCacheTexInfo,
+    sFont4KatakanaSoCacheTexInfo,
+    sFont4KatakanaZoCacheTexInfo,
+    sFont4KatakanaTaCacheTexInfo,
+    sFont4KatakanaDaCacheTexInfo,
+    sFont4KatakanaChiCacheTexInfo,
+    sFont4KatakanaDjiCacheTexInfo,
+    sFont4KatakanaSoukonCacheTexInfo,
+    sFont4KatakanaTsuCacheTexInfo,
+    sFont4KatakanaDzuCacheTexInfo,
+    sFont4KatakanaTeCacheTexInfo,
+    sFont4KatakanaDeCacheTexInfo,
+    sFont4KatakanaToCacheTexInfo,
+    sFont4KatakanaDoCacheTexInfo,
+    sFont4KatakanaNaCacheTexInfo,
+    sFont4KatakanaNiCacheTexInfo,
+    sFont4KatakanaNuCacheTexInfo,
+    sFont4KatakanaNeCacheTexInfo,
+    sFont4KatakanaNoCacheTexInfo,
+    sFont4KatakanaHaCacheTexInfo,
+    sFont4KatakanaBaCacheTexInfo,
+    sFont4KatakanaPaCacheTexInfo,
+    sFont4KatakanaHiCacheTexInfo,
+    sFont4KatakanaBiCacheTexInfo,
+    sFont4KatakanaPiCacheTexInfo,
+    sFont4KatakanaFuCacheTexInfo,
+    sFont4KatakanaBuCacheTexInfo,
+    sFont4KatakanaPuCacheTexInfo,
+    sFont4KatakanaHeCacheTexInfo,
+    sFont4KatakanaBeCacheTexInfo,
+    sFont4KatakanaPeCacheTexInfo,
+    sFont4KatakanaHoCacheTexInfo,
+    sFont4KatakanaBoCacheTexInfo,
+    sFont4KatakanaPoCacheTexInfo,
+    sFont4KatakanaMaCacheTexInfo,
+    sFont4KatakanaMiCacheTexInfo,
+    sFont4KatakanaMuCacheTexInfo,
+    sFont4KatakanaMeCacheTexInfo,
+    sFont4KatakanaMoCacheTexInfo,
+    sFont4KatakanaYoonYaCacheTexInfo,
+    sFont4KatakanaYaCacheTexInfo,
+    sFont4KatakanaYoonYuCacheTexInfo,
+    sFont4KatakanaYuCacheTexInfo,
+    sFont4KatakanaYoonYoCacheTexInfo,
+    sFont4KatakanaYoCacheTexInfo,
+    sFont4KatakanaRaCacheTexInfo,
+    sFont4KatakanaRiCacheTexInfo,
+    sFont4KatakanaRuCacheTexInfo,
+    sFont4KatakanaReCacheTexInfo,
+    sFont4KatakanaRoCacheTexInfo,
+    sFont4KatakanaWaCacheTexInfo,
+    sFont4KatakanaWoCacheTexInfo,
+    sFont4KatakanaNCacheTexInfo,
+    sFont4KatakanaDigraphACacheTexInfo,
+    sFont4KatakanaACacheTexInfo,
+    sFont4KatakanaDigraphICacheTexInfo,
+    sFont4KatakanaICacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaDigraphECacheTexInfo,
+    sFont4KatakanaECacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaKaCacheTexInfo,
+    sFont4KatakanaGaCacheTexInfo,
+    sFont4KatakanaKiCacheTexInfo,
+    sFont4KatakanaGiCacheTexInfo,
+    sFont4KatakanaKuCacheTexInfo,
+    sFont4KatakanaGuCacheTexInfo,
+    sFont4KatakanaKeCacheTexInfo,
+    sFont4KatakanaGeCacheTexInfo,
+    sFont4KatakanaKoCacheTexInfo,
+    sFont4KatakanaGoCacheTexInfo,
+    sFont4KatakanaSaCacheTexInfo,
+    sFont4KatakanaZaCacheTexInfo,
+    sFont4KatakanaShiCacheTexInfo,
+    sFont4KatakanaJiCacheTexInfo,
+    sFont4KatakanaSuCacheTexInfo,
+    sFont4KatakanaZuCacheTexInfo,
+    sFont4KatakanaSeCacheTexInfo,
+    sFont4KatakanaZeCacheTexInfo,
+    sFont4KatakanaSoCacheTexInfo,
+    sFont4KatakanaZoCacheTexInfo,
+    sFont4KatakanaTaCacheTexInfo,
+    sFont4KatakanaDaCacheTexInfo,
+    sFont4KatakanaChiCacheTexInfo,
+    sFont4KatakanaDjiCacheTexInfo,
+    sFont4KatakanaSoukonCacheTexInfo,
+    sFont4KatakanaTsuCacheTexInfo,
+    sFont4KatakanaDzuCacheTexInfo,
+    sFont4KatakanaTeCacheTexInfo,
+    sFont4KatakanaDeCacheTexInfo,
+    sFont4KatakanaToCacheTexInfo,
+    sFont4KatakanaDoCacheTexInfo,
+    sFont4KatakanaNaCacheTexInfo,
+    sFont4KatakanaNiCacheTexInfo,
+    sFont4KatakanaNuCacheTexInfo,
+    sFont4KatakanaNeCacheTexInfo,
+    sFont4KatakanaNoCacheTexInfo,
+    sFont4KatakanaHaCacheTexInfo,
+    sFont4KatakanaBaCacheTexInfo,
+    sFont4KatakanaPaCacheTexInfo,
+    sFont4KatakanaHiCacheTexInfo,
+    sFont4KatakanaBiCacheTexInfo,
+    sFont4KatakanaPiCacheTexInfo,
+    sFont4KatakanaFuCacheTexInfo,
+    sFont4KatakanaBuCacheTexInfo,
+    sFont4KatakanaPuCacheTexInfo,
+    sFont4KatakanaHeCacheTexInfo,
+    sFont4KatakanaBeCacheTexInfo,
+    sFont4KatakanaPeCacheTexInfo,
+    sFont4KatakanaHoCacheTexInfo,
+    sFont4KatakanaBoCacheTexInfo,
+    sFont4KatakanaPoCacheTexInfo,
+    sFont4KatakanaMaCacheTexInfo,
+    sFont4KatakanaMiCacheTexInfo,
+    sFont4KatakanaMuCacheTexInfo,
+    sFont4KatakanaMeCacheTexInfo,
+    sFont4KatakanaMoCacheTexInfo,
+    sFont4KatakanaYoonYaCacheTexInfo,
+    sFont4KatakanaYaCacheTexInfo,
+    sFont4KatakanaYoonYuCacheTexInfo,
+    sFont4KatakanaYuCacheTexInfo,
+    sFont4KatakanaYoonYoCacheTexInfo,
+    sFont4KatakanaYoCacheTexInfo,
+    sFont4KatakanaRaCacheTexInfo,
+    sFont4KatakanaRiCacheTexInfo,
+    sFont4KatakanaRuCacheTexInfo,
+    sFont4KatakanaReCacheTexInfo,
+    sFont4KatakanaRoCacheTexInfo,
+    sFont4KatakanaWaCacheTexInfo,
+    sFont4KatakanaWoCacheTexInfo,
+    sFont4KatakanaNCacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4NDCacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4RDCacheTexInfo,
+    sFont4STCacheTexInfo,
+    sFont4THCacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4DashCacheTexInfo,
 };
 #endif
 
-unk_80077D50 sFont5Num0CompTexInfo[] = COMP_TEX_INFO(4, aFont5Num0Tex, 0);
-unk_80077D50 sFont5Num1CompTexInfo[] = COMP_TEX_INFO(4, aFont5Num1Tex, 0);
-unk_80077D50 sFont5Num2CompTexInfo[] = COMP_TEX_INFO(4, aFont5Num2Tex, 0);
-unk_80077D50 sFont5Num3CompTexInfo[] = COMP_TEX_INFO(4, aFont5Num3Tex, 0);
-unk_80077D50 sFont5Num4CompTexInfo[] = COMP_TEX_INFO(4, aFont5Num4Tex, 0);
-unk_80077D50 sFont5Num5CompTexInfo[] = COMP_TEX_INFO(4, aFont5Num5Tex, 0);
-unk_80077D50 sFont5Num6CompTexInfo[] = COMP_TEX_INFO(4, aFont5Num6Tex, 0);
-unk_80077D50 sFont5Num7CompTexInfo[] = COMP_TEX_INFO(4, aFont5Num7Tex, 0);
-unk_80077D50 sFont5Num8CompTexInfo[] = COMP_TEX_INFO(4, aFont5Num8Tex, 0);
-unk_80077D50 sFont5Num9CompTexInfo[] = COMP_TEX_INFO(4, aFont5Num9Tex, 0);
-unk_80077D50 sFont5VCompTexInfo[] = COMP_TEX_INFO(4, aFont5VTex, 0);
-unk_80077D50 sFont5OpenParenthesisCompTexInfo[] = COMP_TEX_INFO(4, aFont5OpenParenthesisTex, 0);
-unk_80077D50 sFont5CloseParenthesisCompTexInfo[] = COMP_TEX_INFO(4, aFont5CloseParenthesisTex, 0);
-unk_80077D50 sFont5STCompTexInfo[] = COMP_TEX_INFO(4, aFont5STTex, 0);
-unk_80077D50 sFont5NDCompTexInfo[] = COMP_TEX_INFO(4, aFont5NDTex, 0);
-unk_80077D50 sFont5RDCompTexInfo[] = COMP_TEX_INFO(4, aFont5RDTex, 0);
-unk_80077D50 sFont5THCompTexInfo[] = COMP_TEX_INFO(4, aFont5THTex, 0);
-unk_80077D50 sFont5PlusCompTexInfo[] = COMP_TEX_INFO(4, aFont5PlusTex, 0);
-unk_80077D50 sFont5UpArrowCompTexInfo[] = COMP_TEX_INFO(4, aFont5UpArrowTex, 0);
-unk_80077D50 sFont5DownArrowCompTexInfo[] = COMP_TEX_INFO(4, aFont5DownArrowTex, 0);
-unk_80077D50 sFont5SideArrowCompTexInfo[] = COMP_TEX_INFO(4, aFont5SideArrowTex, 0);
-unk_80077D50 sFont5PointsCompTexInfo[] = COMP_TEX_INFO_DEF(20, aFont5PointsTex);
-unk_80077D50 sFont5PlayerCompTexInfo[] = COMP_TEX_INFO_DEF(20, aFont5PlayerTex);
-unk_80077D50 sFont5ComputerCompTexInfo[] = COMP_TEX_INFO_DEF(20, aFont5ComputerTex);
-unk_80077D50 sFont5SelectCourseCompTexInfo[] = COMP_TEX_INFO_DEF(20, aFont5SelectCourseTex);
-unk_80077D50 sFont5QuitCompTexInfo[] = COMP_TEX_INFO_DEF(20, aFont5QuitTex);
+CacheTexInfo sFont5Num0CacheTexInfo[] = COMP_TEX_INFO(4, aFont5Num0Tex, 0);
+CacheTexInfo sFont5Num1CacheTexInfo[] = COMP_TEX_INFO(4, aFont5Num1Tex, 0);
+CacheTexInfo sFont5Num2CacheTexInfo[] = COMP_TEX_INFO(4, aFont5Num2Tex, 0);
+CacheTexInfo sFont5Num3CacheTexInfo[] = COMP_TEX_INFO(4, aFont5Num3Tex, 0);
+CacheTexInfo sFont5Num4CacheTexInfo[] = COMP_TEX_INFO(4, aFont5Num4Tex, 0);
+CacheTexInfo sFont5Num5CacheTexInfo[] = COMP_TEX_INFO(4, aFont5Num5Tex, 0);
+CacheTexInfo sFont5Num6CacheTexInfo[] = COMP_TEX_INFO(4, aFont5Num6Tex, 0);
+CacheTexInfo sFont5Num7CacheTexInfo[] = COMP_TEX_INFO(4, aFont5Num7Tex, 0);
+CacheTexInfo sFont5Num8CacheTexInfo[] = COMP_TEX_INFO(4, aFont5Num8Tex, 0);
+CacheTexInfo sFont5Num9CacheTexInfo[] = COMP_TEX_INFO(4, aFont5Num9Tex, 0);
+CacheTexInfo sFont5VCacheTexInfo[] = COMP_TEX_INFO(4, aFont5VTex, 0);
+CacheTexInfo sFont5OpenParenthesisCacheTexInfo[] = COMP_TEX_INFO(4, aFont5OpenParenthesisTex, 0);
+CacheTexInfo sFont5CloseParenthesisCacheTexInfo[] = COMP_TEX_INFO(4, aFont5CloseParenthesisTex, 0);
+CacheTexInfo sFont5STCacheTexInfo[] = COMP_TEX_INFO(4, aFont5STTex, 0);
+CacheTexInfo sFont5NDCacheTexInfo[] = COMP_TEX_INFO(4, aFont5NDTex, 0);
+CacheTexInfo sFont5RDCacheTexInfo[] = COMP_TEX_INFO(4, aFont5RDTex, 0);
+CacheTexInfo sFont5THCacheTexInfo[] = COMP_TEX_INFO(4, aFont5THTex, 0);
+CacheTexInfo sFont5PlusCacheTexInfo[] = COMP_TEX_INFO(4, aFont5PlusTex, 0);
+CacheTexInfo sFont5UpArrowCacheTexInfo[] = COMP_TEX_INFO(4, aFont5UpArrowTex, 0);
+CacheTexInfo sFont5DownArrowCacheTexInfo[] = COMP_TEX_INFO(4, aFont5DownArrowTex, 0);
+CacheTexInfo sFont5SideArrowCacheTexInfo[] = COMP_TEX_INFO(4, aFont5SideArrowTex, 0);
+CacheTexInfo sFont5PointsCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aFont5PointsTex);
+CacheTexInfo sFont5PlayerCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aFont5PlayerTex);
+CacheTexInfo sFont5ComputerCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aFont5ComputerTex);
+CacheTexInfo sFont5SelectCourseCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aFont5SelectCourseTex);
+CacheTexInfo sFont5QuitCacheTexInfo[] = COMP_TEX_INFO_DEF(20, aFont5QuitTex);
 
-unk_80077D50* sFont5CompTexInfos[] = {
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont4PrimeCompTexInfo,
-    sFont4DoublePrimeCompTexInfo,
-    sFont4AmpersandCompTexInfo,
-    sFont5PlusCompTexInfo,
-    sFont4MinusCompTexInfo,
-    sFont5PointsCompTexInfo,
-    sFont5Num0CompTexInfo,
-    sFont5Num1CompTexInfo,
-    sFont5Num2CompTexInfo,
-    sFont5Num3CompTexInfo,
-    sFont5Num4CompTexInfo,
-    sFont5Num5CompTexInfo,
-    sFont5Num6CompTexInfo,
-    sFont5Num7CompTexInfo,
-    sFont5Num8CompTexInfo,
-    sFont5Num9CompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4ACompTexInfo,
-    sFont5OpenParenthesisCompTexInfo,
-    sFont5CloseParenthesisCompTexInfo,
-    sFont4ACompTexInfo,
-    sFont4KatakanaDigraphACompTexInfo,
-    sFont4KatakanaACompTexInfo,
-    sFont4KatakanaDigraphICompTexInfo,
-    sFont4KatakanaICompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaDigraphECompTexInfo,
-    sFont4KatakanaECompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaKaCompTexInfo,
-    sFont4KatakanaGaCompTexInfo,
-    sFont4KatakanaKiCompTexInfo,
-    sFont4KatakanaGiCompTexInfo,
-    sFont4KatakanaKuCompTexInfo,
-    sFont4KatakanaGuCompTexInfo,
-    sFont4KatakanaKeCompTexInfo,
-    sFont4KatakanaGeCompTexInfo,
-    sFont4KatakanaKoCompTexInfo,
-    sFont4KatakanaGoCompTexInfo,
-    sFont4KatakanaSaCompTexInfo,
-    sFont4KatakanaZaCompTexInfo,
-    sFont4KatakanaShiCompTexInfo,
-    sFont4KatakanaJiCompTexInfo,
-    sFont4KatakanaSuCompTexInfo,
-    sFont4KatakanaZuCompTexInfo,
-    sFont4KatakanaSeCompTexInfo,
-    sFont4KatakanaZeCompTexInfo,
-    sFont4KatakanaSoCompTexInfo,
-    sFont4KatakanaZoCompTexInfo,
-    sFont4KatakanaTaCompTexInfo,
-    sFont4KatakanaDaCompTexInfo,
-    sFont4KatakanaChiCompTexInfo,
-    sFont4KatakanaDjiCompTexInfo,
-    sFont4KatakanaSoukonCompTexInfo,
-    sFont4KatakanaTsuCompTexInfo,
-    sFont4KatakanaDzuCompTexInfo,
-    sFont4KatakanaTeCompTexInfo,
-    sFont4KatakanaDeCompTexInfo,
-    sFont4KatakanaToCompTexInfo,
-    sFont4KatakanaDoCompTexInfo,
-    sFont4KatakanaNaCompTexInfo,
-    sFont4KatakanaNiCompTexInfo,
-    sFont4KatakanaNuCompTexInfo,
-    sFont4KatakanaNeCompTexInfo,
-    sFont4KatakanaNoCompTexInfo,
-    sFont4KatakanaHaCompTexInfo,
-    sFont4KatakanaBaCompTexInfo,
-    sFont4KatakanaPaCompTexInfo,
-    sFont4KatakanaHiCompTexInfo,
-    sFont4KatakanaBiCompTexInfo,
-    sFont4KatakanaPiCompTexInfo,
-    sFont4KatakanaFuCompTexInfo,
-    sFont4KatakanaBuCompTexInfo,
-    sFont4KatakanaPuCompTexInfo,
-    sFont4KatakanaHeCompTexInfo,
-    sFont4KatakanaBeCompTexInfo,
-    sFont4KatakanaPeCompTexInfo,
-    sFont4KatakanaHoCompTexInfo,
-    sFont4KatakanaBoCompTexInfo,
-    sFont4KatakanaPoCompTexInfo,
-    sFont4KatakanaMaCompTexInfo,
-    sFont4KatakanaMiCompTexInfo,
-    sFont4KatakanaMuCompTexInfo,
-    sFont4KatakanaMeCompTexInfo,
-    sFont4KatakanaMoCompTexInfo,
-    sFont4KatakanaYoonYaCompTexInfo,
-    sFont4KatakanaYaCompTexInfo,
-    sFont4KatakanaYoonYuCompTexInfo,
-    sFont4KatakanaYuCompTexInfo,
-    sFont4KatakanaYoonYoCompTexInfo,
-    sFont4KatakanaYoCompTexInfo,
-    sFont4KatakanaRaCompTexInfo,
-    sFont4KatakanaRiCompTexInfo,
-    sFont4KatakanaRuCompTexInfo,
-    sFont4KatakanaReCompTexInfo,
-    sFont4KatakanaRoCompTexInfo,
-    sFont4KatakanaWaCompTexInfo,
-    sFont4KatakanaWoCompTexInfo,
-    sFont4KatakanaNCompTexInfo,
-    sFont4KatakanaDigraphACompTexInfo,
-    sFont4KatakanaACompTexInfo,
-    sFont4KatakanaDigraphICompTexInfo,
-    sFont4KatakanaICompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaUCompTexInfo,
-    sFont4KatakanaDigraphECompTexInfo,
-    sFont4KatakanaECompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaOCompTexInfo,
-    sFont4KatakanaKaCompTexInfo,
-    sFont4KatakanaGaCompTexInfo,
-    sFont4KatakanaKiCompTexInfo,
-    sFont4KatakanaGiCompTexInfo,
-    sFont4KatakanaKuCompTexInfo,
-    sFont4KatakanaGuCompTexInfo,
-    sFont4KatakanaKeCompTexInfo,
-    sFont4KatakanaGeCompTexInfo,
-    sFont4KatakanaKoCompTexInfo,
-    sFont4KatakanaGoCompTexInfo,
-    sFont4KatakanaSaCompTexInfo,
-    sFont4KatakanaZaCompTexInfo,
-    sFont4KatakanaShiCompTexInfo,
-    sFont4KatakanaJiCompTexInfo,
-    sFont4KatakanaSuCompTexInfo,
-    sFont4KatakanaZuCompTexInfo,
-    sFont4KatakanaSeCompTexInfo,
-    sFont4KatakanaZeCompTexInfo,
-    sFont4KatakanaSoCompTexInfo,
-    sFont4KatakanaZoCompTexInfo,
-    sFont4KatakanaTaCompTexInfo,
-    sFont4KatakanaDaCompTexInfo,
-    sFont4KatakanaChiCompTexInfo,
-    sFont4KatakanaDjiCompTexInfo,
-    sFont4KatakanaSoukonCompTexInfo,
-    sFont4KatakanaTsuCompTexInfo,
-    sFont4KatakanaDzuCompTexInfo,
-    sFont4KatakanaTeCompTexInfo,
-    sFont4KatakanaDeCompTexInfo,
-    sFont4KatakanaToCompTexInfo,
-    sFont4KatakanaDoCompTexInfo,
-    sFont4KatakanaNaCompTexInfo,
-    sFont4KatakanaNiCompTexInfo,
-    sFont4KatakanaNuCompTexInfo,
-    sFont4KatakanaNeCompTexInfo,
-    sFont4KatakanaNoCompTexInfo,
-    sFont4KatakanaHaCompTexInfo,
-    sFont4KatakanaBaCompTexInfo,
-    sFont4KatakanaPaCompTexInfo,
-    sFont4KatakanaHiCompTexInfo,
-    sFont4KatakanaBiCompTexInfo,
-    sFont4KatakanaPiCompTexInfo,
-    sFont4KatakanaFuCompTexInfo,
-    sFont4KatakanaBuCompTexInfo,
-    sFont4KatakanaPuCompTexInfo,
-    sFont4KatakanaHeCompTexInfo,
-    sFont4KatakanaBeCompTexInfo,
-    sFont4KatakanaPeCompTexInfo,
-    sFont4KatakanaHoCompTexInfo,
-    sFont4KatakanaBoCompTexInfo,
-    sFont4KatakanaPoCompTexInfo,
-    sFont4KatakanaMaCompTexInfo,
-    sFont4KatakanaMiCompTexInfo,
-    sFont4KatakanaMuCompTexInfo,
-    sFont4KatakanaMeCompTexInfo,
-    sFont4KatakanaMoCompTexInfo,
-    sFont4KatakanaYoonYaCompTexInfo,
-    sFont4KatakanaYaCompTexInfo,
-    sFont4KatakanaYoonYuCompTexInfo,
-    sFont4KatakanaYuCompTexInfo,
-    sFont4KatakanaYoonYoCompTexInfo,
-    sFont4KatakanaYoCompTexInfo,
-    sFont4KatakanaRaCompTexInfo,
-    sFont4KatakanaRiCompTexInfo,
-    sFont4KatakanaRuCompTexInfo,
-    sFont4KatakanaReCompTexInfo,
-    sFont4KatakanaRoCompTexInfo,
-    sFont4KatakanaWaCompTexInfo,
-    sFont4KatakanaWoCompTexInfo,
-    sFont4KatakanaNCompTexInfo,
-    sFont5ComputerCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5SelectCourseCompTexInfo,
-    sFont5DownArrowCompTexInfo,
-    sFont5QuitCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5SideArrowCompTexInfo,
-    sFont5NDCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5PlayerCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5RDCompTexInfo,
-    sFont5STCompTexInfo,
-    sFont5THCompTexInfo,
-    sFont5UpArrowCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
-    sFont5VCompTexInfo,
+CacheTexInfo* sFont5CacheTexInfos[] = {
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont4PrimeCacheTexInfo,
+    sFont4DoublePrimeCacheTexInfo,
+    sFont4AmpersandCacheTexInfo,
+    sFont5PlusCacheTexInfo,
+    sFont4MinusCacheTexInfo,
+    sFont5PointsCacheTexInfo,
+    sFont5Num0CacheTexInfo,
+    sFont5Num1CacheTexInfo,
+    sFont5Num2CacheTexInfo,
+    sFont5Num3CacheTexInfo,
+    sFont5Num4CacheTexInfo,
+    sFont5Num5CacheTexInfo,
+    sFont5Num6CacheTexInfo,
+    sFont5Num7CacheTexInfo,
+    sFont5Num8CacheTexInfo,
+    sFont5Num9CacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont5OpenParenthesisCacheTexInfo,
+    sFont5CloseParenthesisCacheTexInfo,
+    sFont4ACacheTexInfo,
+    sFont4KatakanaDigraphACacheTexInfo,
+    sFont4KatakanaACacheTexInfo,
+    sFont4KatakanaDigraphICacheTexInfo,
+    sFont4KatakanaICacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaDigraphECacheTexInfo,
+    sFont4KatakanaECacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaKaCacheTexInfo,
+    sFont4KatakanaGaCacheTexInfo,
+    sFont4KatakanaKiCacheTexInfo,
+    sFont4KatakanaGiCacheTexInfo,
+    sFont4KatakanaKuCacheTexInfo,
+    sFont4KatakanaGuCacheTexInfo,
+    sFont4KatakanaKeCacheTexInfo,
+    sFont4KatakanaGeCacheTexInfo,
+    sFont4KatakanaKoCacheTexInfo,
+    sFont4KatakanaGoCacheTexInfo,
+    sFont4KatakanaSaCacheTexInfo,
+    sFont4KatakanaZaCacheTexInfo,
+    sFont4KatakanaShiCacheTexInfo,
+    sFont4KatakanaJiCacheTexInfo,
+    sFont4KatakanaSuCacheTexInfo,
+    sFont4KatakanaZuCacheTexInfo,
+    sFont4KatakanaSeCacheTexInfo,
+    sFont4KatakanaZeCacheTexInfo,
+    sFont4KatakanaSoCacheTexInfo,
+    sFont4KatakanaZoCacheTexInfo,
+    sFont4KatakanaTaCacheTexInfo,
+    sFont4KatakanaDaCacheTexInfo,
+    sFont4KatakanaChiCacheTexInfo,
+    sFont4KatakanaDjiCacheTexInfo,
+    sFont4KatakanaSoukonCacheTexInfo,
+    sFont4KatakanaTsuCacheTexInfo,
+    sFont4KatakanaDzuCacheTexInfo,
+    sFont4KatakanaTeCacheTexInfo,
+    sFont4KatakanaDeCacheTexInfo,
+    sFont4KatakanaToCacheTexInfo,
+    sFont4KatakanaDoCacheTexInfo,
+    sFont4KatakanaNaCacheTexInfo,
+    sFont4KatakanaNiCacheTexInfo,
+    sFont4KatakanaNuCacheTexInfo,
+    sFont4KatakanaNeCacheTexInfo,
+    sFont4KatakanaNoCacheTexInfo,
+    sFont4KatakanaHaCacheTexInfo,
+    sFont4KatakanaBaCacheTexInfo,
+    sFont4KatakanaPaCacheTexInfo,
+    sFont4KatakanaHiCacheTexInfo,
+    sFont4KatakanaBiCacheTexInfo,
+    sFont4KatakanaPiCacheTexInfo,
+    sFont4KatakanaFuCacheTexInfo,
+    sFont4KatakanaBuCacheTexInfo,
+    sFont4KatakanaPuCacheTexInfo,
+    sFont4KatakanaHeCacheTexInfo,
+    sFont4KatakanaBeCacheTexInfo,
+    sFont4KatakanaPeCacheTexInfo,
+    sFont4KatakanaHoCacheTexInfo,
+    sFont4KatakanaBoCacheTexInfo,
+    sFont4KatakanaPoCacheTexInfo,
+    sFont4KatakanaMaCacheTexInfo,
+    sFont4KatakanaMiCacheTexInfo,
+    sFont4KatakanaMuCacheTexInfo,
+    sFont4KatakanaMeCacheTexInfo,
+    sFont4KatakanaMoCacheTexInfo,
+    sFont4KatakanaYoonYaCacheTexInfo,
+    sFont4KatakanaYaCacheTexInfo,
+    sFont4KatakanaYoonYuCacheTexInfo,
+    sFont4KatakanaYuCacheTexInfo,
+    sFont4KatakanaYoonYoCacheTexInfo,
+    sFont4KatakanaYoCacheTexInfo,
+    sFont4KatakanaRaCacheTexInfo,
+    sFont4KatakanaRiCacheTexInfo,
+    sFont4KatakanaRuCacheTexInfo,
+    sFont4KatakanaReCacheTexInfo,
+    sFont4KatakanaRoCacheTexInfo,
+    sFont4KatakanaWaCacheTexInfo,
+    sFont4KatakanaWoCacheTexInfo,
+    sFont4KatakanaNCacheTexInfo,
+    sFont4KatakanaDigraphACacheTexInfo,
+    sFont4KatakanaACacheTexInfo,
+    sFont4KatakanaDigraphICacheTexInfo,
+    sFont4KatakanaICacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaUCacheTexInfo,
+    sFont4KatakanaDigraphECacheTexInfo,
+    sFont4KatakanaECacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaOCacheTexInfo,
+    sFont4KatakanaKaCacheTexInfo,
+    sFont4KatakanaGaCacheTexInfo,
+    sFont4KatakanaKiCacheTexInfo,
+    sFont4KatakanaGiCacheTexInfo,
+    sFont4KatakanaKuCacheTexInfo,
+    sFont4KatakanaGuCacheTexInfo,
+    sFont4KatakanaKeCacheTexInfo,
+    sFont4KatakanaGeCacheTexInfo,
+    sFont4KatakanaKoCacheTexInfo,
+    sFont4KatakanaGoCacheTexInfo,
+    sFont4KatakanaSaCacheTexInfo,
+    sFont4KatakanaZaCacheTexInfo,
+    sFont4KatakanaShiCacheTexInfo,
+    sFont4KatakanaJiCacheTexInfo,
+    sFont4KatakanaSuCacheTexInfo,
+    sFont4KatakanaZuCacheTexInfo,
+    sFont4KatakanaSeCacheTexInfo,
+    sFont4KatakanaZeCacheTexInfo,
+    sFont4KatakanaSoCacheTexInfo,
+    sFont4KatakanaZoCacheTexInfo,
+    sFont4KatakanaTaCacheTexInfo,
+    sFont4KatakanaDaCacheTexInfo,
+    sFont4KatakanaChiCacheTexInfo,
+    sFont4KatakanaDjiCacheTexInfo,
+    sFont4KatakanaSoukonCacheTexInfo,
+    sFont4KatakanaTsuCacheTexInfo,
+    sFont4KatakanaDzuCacheTexInfo,
+    sFont4KatakanaTeCacheTexInfo,
+    sFont4KatakanaDeCacheTexInfo,
+    sFont4KatakanaToCacheTexInfo,
+    sFont4KatakanaDoCacheTexInfo,
+    sFont4KatakanaNaCacheTexInfo,
+    sFont4KatakanaNiCacheTexInfo,
+    sFont4KatakanaNuCacheTexInfo,
+    sFont4KatakanaNeCacheTexInfo,
+    sFont4KatakanaNoCacheTexInfo,
+    sFont4KatakanaHaCacheTexInfo,
+    sFont4KatakanaBaCacheTexInfo,
+    sFont4KatakanaPaCacheTexInfo,
+    sFont4KatakanaHiCacheTexInfo,
+    sFont4KatakanaBiCacheTexInfo,
+    sFont4KatakanaPiCacheTexInfo,
+    sFont4KatakanaFuCacheTexInfo,
+    sFont4KatakanaBuCacheTexInfo,
+    sFont4KatakanaPuCacheTexInfo,
+    sFont4KatakanaHeCacheTexInfo,
+    sFont4KatakanaBeCacheTexInfo,
+    sFont4KatakanaPeCacheTexInfo,
+    sFont4KatakanaHoCacheTexInfo,
+    sFont4KatakanaBoCacheTexInfo,
+    sFont4KatakanaPoCacheTexInfo,
+    sFont4KatakanaMaCacheTexInfo,
+    sFont4KatakanaMiCacheTexInfo,
+    sFont4KatakanaMuCacheTexInfo,
+    sFont4KatakanaMeCacheTexInfo,
+    sFont4KatakanaMoCacheTexInfo,
+    sFont4KatakanaYoonYaCacheTexInfo,
+    sFont4KatakanaYaCacheTexInfo,
+    sFont4KatakanaYoonYuCacheTexInfo,
+    sFont4KatakanaYuCacheTexInfo,
+    sFont4KatakanaYoonYoCacheTexInfo,
+    sFont4KatakanaYoCacheTexInfo,
+    sFont4KatakanaRaCacheTexInfo,
+    sFont4KatakanaRiCacheTexInfo,
+    sFont4KatakanaRuCacheTexInfo,
+    sFont4KatakanaReCacheTexInfo,
+    sFont4KatakanaRoCacheTexInfo,
+    sFont4KatakanaWaCacheTexInfo,
+    sFont4KatakanaWoCacheTexInfo,
+    sFont4KatakanaNCacheTexInfo,
+    sFont5ComputerCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5SelectCourseCacheTexInfo,
+    sFont5DownArrowCacheTexInfo,
+    sFont5QuitCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5SideArrowCacheTexInfo,
+    sFont5NDCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5PlayerCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5RDCacheTexInfo,
+    sFont5STCacheTexInfo,
+    sFont5THCacheTexInfo,
+    sFont5UpArrowCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
+    sFont5VCacheTexInfo,
 };
 
-unk_80077D50 sFont6ACompTexInfo[] = COMP_TEX_INFO(4, aFont6ATex, 0);
-unk_80077D50 sFont6BCompTexInfo[] = COMP_TEX_INFO(4, aFont6BTex, 0);
-unk_80077D50 sFont6CCompTexInfo[] = COMP_TEX_INFO(4, aFont6CTex, 0);
-unk_80077D50 sFont6DCompTexInfo[] = COMP_TEX_INFO(4, aFont6DTex, 0);
-unk_80077D50 sFont6ECompTexInfo[] = COMP_TEX_INFO(4, aFont6ETex, 0);
-unk_80077D50 sFont6FCompTexInfo[] = COMP_TEX_INFO(4, aFont6FTex, 0);
-unk_80077D50 sFont6GCompTexInfo[] = COMP_TEX_INFO(4, aFont6GTex, 0);
-unk_80077D50 sFont6HCompTexInfo[] = COMP_TEX_INFO(4, aFont6HTex, 0);
-unk_80077D50 sFont6ICompTexInfo[] = COMP_TEX_INFO(4, aFont6ITex, 0);
-unk_80077D50 sFont6JCompTexInfo[] = COMP_TEX_INFO(4, aFont6JTex, 0);
-unk_80077D50 sFont6KCompTexInfo[] = COMP_TEX_INFO(4, aFont6KTex, 0);
-unk_80077D50 sFont6LCompTexInfo[] = COMP_TEX_INFO(4, aFont6LTex, 0);
-unk_80077D50 sFont6MCompTexInfo[] = COMP_TEX_INFO(4, aFont6MTex, 0);
-unk_80077D50 sFont6NCompTexInfo[] = COMP_TEX_INFO(4, aFont6NTex, 0);
-unk_80077D50 sFont6OCompTexInfo[] = COMP_TEX_INFO(4, aFont6OTex, 0);
-unk_80077D50 sFont6PCompTexInfo[] = COMP_TEX_INFO(4, aFont6PTex, 0);
-unk_80077D50 sFont6QCompTexInfo[] = COMP_TEX_INFO(4, aFont6QTex, 0);
-unk_80077D50 sFont6RCompTexInfo[] = COMP_TEX_INFO(4, aFont6RTex, 0);
-unk_80077D50 sFont6SCompTexInfo[] = COMP_TEX_INFO(4, aFont6STex, 0);
-unk_80077D50 sFont6TCompTexInfo[] = COMP_TEX_INFO(4, aFont6TTex, 0);
-unk_80077D50 sFont6UCompTexInfo[] = COMP_TEX_INFO(4, aFont6UTex, 0);
-unk_80077D50 sFont6VCompTexInfo[] = COMP_TEX_INFO(4, aFont6VTex, 0);
-unk_80077D50 sFont6WCompTexInfo[] = COMP_TEX_INFO(4, aFont6WTex, 0);
-unk_80077D50 sFont6XCompTexInfo[] = COMP_TEX_INFO(4, aFont6XTex, 0);
-unk_80077D50 sFont6YCompTexInfo[] = COMP_TEX_INFO(4, aFont6YTex, 0);
-unk_80077D50 sFont6ZCompTexInfo[] = COMP_TEX_INFO(4, aFont6ZTex, 0);
-unk_80077D50 sFont6Num0CompTexInfo[] = COMP_TEX_INFO(4, aFont6Num0Tex, 0);
-unk_80077D50 sFont6Num1CompTexInfo[] = COMP_TEX_INFO(4, aFont6Num1Tex, 0);
-unk_80077D50 sFont6Num2CompTexInfo[] = COMP_TEX_INFO(4, aFont6Num2Tex, 0);
-unk_80077D50 sFont6Num3CompTexInfo[] = COMP_TEX_INFO(4, aFont6Num3Tex, 0);
-unk_80077D50 sFont6Num4CompTexInfo[] = COMP_TEX_INFO(4, aFont6Num4Tex, 0);
-unk_80077D50 sFont6Num5CompTexInfo[] = COMP_TEX_INFO(4, aFont6Num5Tex, 0);
-unk_80077D50 sFont6Num6CompTexInfo[] = COMP_TEX_INFO(4, aFont6Num6Tex, 0);
-unk_80077D50 sFont6Num7CompTexInfo[] = COMP_TEX_INFO(4, aFont6Num7Tex, 0);
-unk_80077D50 sFont6Num8CompTexInfo[] = COMP_TEX_INFO(4, aFont6Num8Tex, 0);
-unk_80077D50 sFont6Num9CompTexInfo[] = COMP_TEX_INFO(4, aFont6Num9Tex, 0);
-unk_80077D50 sFont6AlphaCompTexInfo[] = COMP_TEX_INFO(4, aFont6AlphaTex, 0);
-unk_80077D50 sFont6BetaCompTexInfo[] = COMP_TEX_INFO(4, aFont6BetaTex, 0);
-unk_80077D50 sFont6HiraganaNiCompTexInfo[] = COMP_TEX_INFO(4, aFont6HiraganaNiTex, 0);
-unk_80077D50 sFont6AmpersandCompTexInfo[] = COMP_TEX_INFO(4, aFont6AmpersandTex, 0);
-unk_80077D50 sFont6CommaCompTexInfo[] = COMP_TEX_INFO(4, aFont6CommaTex, 0);
-unk_80077D50 sFont6DoublePrimeCompTexInfo[] = COMP_TEX_INFO(4, aFont6DoublePrimeTex, 0);
-unk_80077D50 sFont6DashCompTexInfo[] = COMP_TEX_INFO(4, aFont6DashTex, 0);
-unk_80077D50 sFont6PeriodCompTexInfo[] = COMP_TEX_INFO(4, aFont6PeriodTex, 0);
-unk_80077D50 sFont6PrimeCompTexInfo[] = COMP_TEX_INFO(4, aFont6PrimeTex, 0);
-unk_80077D50 sFont6UnderscoreCompTexInfo[] = COMP_TEX_INFO(4, aFont6UnderscoreTex, 0);
+CacheTexInfo sFont6ACacheTexInfo[] = COMP_TEX_INFO(4, aFont6ATex, 0);
+CacheTexInfo sFont6BCacheTexInfo[] = COMP_TEX_INFO(4, aFont6BTex, 0);
+CacheTexInfo sFont6CCacheTexInfo[] = COMP_TEX_INFO(4, aFont6CTex, 0);
+CacheTexInfo sFont6DCacheTexInfo[] = COMP_TEX_INFO(4, aFont6DTex, 0);
+CacheTexInfo sFont6ECacheTexInfo[] = COMP_TEX_INFO(4, aFont6ETex, 0);
+CacheTexInfo sFont6FCacheTexInfo[] = COMP_TEX_INFO(4, aFont6FTex, 0);
+CacheTexInfo sFont6GCacheTexInfo[] = COMP_TEX_INFO(4, aFont6GTex, 0);
+CacheTexInfo sFont6HCacheTexInfo[] = COMP_TEX_INFO(4, aFont6HTex, 0);
+CacheTexInfo sFont6ICacheTexInfo[] = COMP_TEX_INFO(4, aFont6ITex, 0);
+CacheTexInfo sFont6JCacheTexInfo[] = COMP_TEX_INFO(4, aFont6JTex, 0);
+CacheTexInfo sFont6KCacheTexInfo[] = COMP_TEX_INFO(4, aFont6KTex, 0);
+CacheTexInfo sFont6LCacheTexInfo[] = COMP_TEX_INFO(4, aFont6LTex, 0);
+CacheTexInfo sFont6MCacheTexInfo[] = COMP_TEX_INFO(4, aFont6MTex, 0);
+CacheTexInfo sFont6NCacheTexInfo[] = COMP_TEX_INFO(4, aFont6NTex, 0);
+CacheTexInfo sFont6OCacheTexInfo[] = COMP_TEX_INFO(4, aFont6OTex, 0);
+CacheTexInfo sFont6PCacheTexInfo[] = COMP_TEX_INFO(4, aFont6PTex, 0);
+CacheTexInfo sFont6QCacheTexInfo[] = COMP_TEX_INFO(4, aFont6QTex, 0);
+CacheTexInfo sFont6RCacheTexInfo[] = COMP_TEX_INFO(4, aFont6RTex, 0);
+CacheTexInfo sFont6SCacheTexInfo[] = COMP_TEX_INFO(4, aFont6STex, 0);
+CacheTexInfo sFont6TCacheTexInfo[] = COMP_TEX_INFO(4, aFont6TTex, 0);
+CacheTexInfo sFont6UCacheTexInfo[] = COMP_TEX_INFO(4, aFont6UTex, 0);
+CacheTexInfo sFont6VCacheTexInfo[] = COMP_TEX_INFO(4, aFont6VTex, 0);
+CacheTexInfo sFont6WCacheTexInfo[] = COMP_TEX_INFO(4, aFont6WTex, 0);
+CacheTexInfo sFont6XCacheTexInfo[] = COMP_TEX_INFO(4, aFont6XTex, 0);
+CacheTexInfo sFont6YCacheTexInfo[] = COMP_TEX_INFO(4, aFont6YTex, 0);
+CacheTexInfo sFont6ZCacheTexInfo[] = COMP_TEX_INFO(4, aFont6ZTex, 0);
+CacheTexInfo sFont6Num0CacheTexInfo[] = COMP_TEX_INFO(4, aFont6Num0Tex, 0);
+CacheTexInfo sFont6Num1CacheTexInfo[] = COMP_TEX_INFO(4, aFont6Num1Tex, 0);
+CacheTexInfo sFont6Num2CacheTexInfo[] = COMP_TEX_INFO(4, aFont6Num2Tex, 0);
+CacheTexInfo sFont6Num3CacheTexInfo[] = COMP_TEX_INFO(4, aFont6Num3Tex, 0);
+CacheTexInfo sFont6Num4CacheTexInfo[] = COMP_TEX_INFO(4, aFont6Num4Tex, 0);
+CacheTexInfo sFont6Num5CacheTexInfo[] = COMP_TEX_INFO(4, aFont6Num5Tex, 0);
+CacheTexInfo sFont6Num6CacheTexInfo[] = COMP_TEX_INFO(4, aFont6Num6Tex, 0);
+CacheTexInfo sFont6Num7CacheTexInfo[] = COMP_TEX_INFO(4, aFont6Num7Tex, 0);
+CacheTexInfo sFont6Num8CacheTexInfo[] = COMP_TEX_INFO(4, aFont6Num8Tex, 0);
+CacheTexInfo sFont6Num9CacheTexInfo[] = COMP_TEX_INFO(4, aFont6Num9Tex, 0);
+CacheTexInfo sFont6AlphaCacheTexInfo[] = COMP_TEX_INFO(4, aFont6AlphaTex, 0);
+CacheTexInfo sFont6BetaCacheTexInfo[] = COMP_TEX_INFO(4, aFont6BetaTex, 0);
+CacheTexInfo sFont6HiraganaNiCacheTexInfo[] = COMP_TEX_INFO(4, aFont6HiraganaNiTex, 0);
+CacheTexInfo sFont6AmpersandCacheTexInfo[] = COMP_TEX_INFO(4, aFont6AmpersandTex, 0);
+CacheTexInfo sFont6CommaCacheTexInfo[] = COMP_TEX_INFO(4, aFont6CommaTex, 0);
+CacheTexInfo sFont6DoublePrimeCacheTexInfo[] = COMP_TEX_INFO(4, aFont6DoublePrimeTex, 0);
+CacheTexInfo sFont6DashCacheTexInfo[] = COMP_TEX_INFO(4, aFont6DashTex, 0);
+CacheTexInfo sFont6PeriodCacheTexInfo[] = COMP_TEX_INFO(4, aFont6PeriodTex, 0);
+CacheTexInfo sFont6PrimeCacheTexInfo[] = COMP_TEX_INFO(4, aFont6PrimeTex, 0);
+CacheTexInfo sFont6UnderscoreCacheTexInfo[] = COMP_TEX_INFO(4, aFont6UnderscoreTex, 0);
 
-unk_80077D50* sFont6CompTexInfos[] = {
-    sFont6ACompTexInfo,         sFont6BCompTexInfo,    sFont6CCompTexInfo,          sFont6DCompTexInfo,
-    sFont6ECompTexInfo,         sFont6FCompTexInfo,    sFont6GCompTexInfo,          sFont6HCompTexInfo,
-    sFont6ICompTexInfo,         sFont6JCompTexInfo,    sFont6KCompTexInfo,          sFont6LCompTexInfo,
-    sFont6MCompTexInfo,         sFont6NCompTexInfo,    sFont6OCompTexInfo,          sFont6PCompTexInfo,
-    sFont6QCompTexInfo,         sFont6RCompTexInfo,    sFont6SCompTexInfo,          sFont6TCompTexInfo,
-    sFont6UCompTexInfo,         sFont6VCompTexInfo,    sFont6WCompTexInfo,          sFont6XCompTexInfo,
-    sFont6YCompTexInfo,         sFont6ZCompTexInfo,    sFont6PrimeCompTexInfo,      sFont6DoublePrimeCompTexInfo,
-    sFont6AmpersandCompTexInfo, sFont6ACompTexInfo,    sFont6DashCompTexInfo,       sFont6ACompTexInfo,
-    sFont6Num0CompTexInfo,      sFont6Num1CompTexInfo, sFont6Num2CompTexInfo,       sFont6Num3CompTexInfo,
-    sFont6Num4CompTexInfo,      sFont6Num5CompTexInfo, sFont6Num6CompTexInfo,       sFont6Num7CompTexInfo,
-    sFont6Num8CompTexInfo,      sFont6Num9CompTexInfo, sFont6ACompTexInfo,          sFont6PeriodCompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6CommaCompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6HiraganaNiCompTexInfo, sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6AlphaCompTexInfo,     sFont6BetaCompTexInfo, sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,         sFont6ACompTexInfo,    sFont6ACompTexInfo,          sFont6ACompTexInfo,
-    sFont6ACompTexInfo,
+CacheTexInfo* sFont6CacheTexInfos[] = {
+    sFont6ACacheTexInfo,         sFont6BCacheTexInfo,    sFont6CCacheTexInfo,          sFont6DCacheTexInfo,
+    sFont6ECacheTexInfo,         sFont6FCacheTexInfo,    sFont6GCacheTexInfo,          sFont6HCacheTexInfo,
+    sFont6ICacheTexInfo,         sFont6JCacheTexInfo,    sFont6KCacheTexInfo,          sFont6LCacheTexInfo,
+    sFont6MCacheTexInfo,         sFont6NCacheTexInfo,    sFont6OCacheTexInfo,          sFont6PCacheTexInfo,
+    sFont6QCacheTexInfo,         sFont6RCacheTexInfo,    sFont6SCacheTexInfo,          sFont6TCacheTexInfo,
+    sFont6UCacheTexInfo,         sFont6VCacheTexInfo,    sFont6WCacheTexInfo,          sFont6XCacheTexInfo,
+    sFont6YCacheTexInfo,         sFont6ZCacheTexInfo,    sFont6PrimeCacheTexInfo,      sFont6DoublePrimeCacheTexInfo,
+    sFont6AmpersandCacheTexInfo, sFont6ACacheTexInfo,    sFont6DashCacheTexInfo,       sFont6ACacheTexInfo,
+    sFont6Num0CacheTexInfo,      sFont6Num1CacheTexInfo, sFont6Num2CacheTexInfo,       sFont6Num3CacheTexInfo,
+    sFont6Num4CacheTexInfo,      sFont6Num5CacheTexInfo, sFont6Num6CacheTexInfo,       sFont6Num7CacheTexInfo,
+    sFont6Num8CacheTexInfo,      sFont6Num9CacheTexInfo, sFont6ACacheTexInfo,          sFont6PeriodCacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6CommaCacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6HiraganaNiCacheTexInfo, sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6AlphaCacheTexInfo,     sFont6BetaCacheTexInfo, sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,         sFont6ACacheTexInfo,    sFont6ACacheTexInfo,          sFont6ACacheTexInfo,
+    sFont6ACacheTexInfo,
 };
 
-unk_80077D50 sMachineStatACompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineStatATex);
-unk_80077D50 sMachineStatBCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineStatBTex);
-unk_80077D50 sMachineStatCCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineStatCTex);
-unk_80077D50 sMachineStatDCompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineStatDTex);
-unk_80077D50 sMachineStatECompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineStatETex);
+CacheTexInfo sMachineStatACacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineStatATex);
+CacheTexInfo sMachineStatBCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineStatBTex);
+CacheTexInfo sMachineStatCCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineStatCTex);
+CacheTexInfo sMachineStatDCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineStatDTex);
+CacheTexInfo sMachineStatECacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineStatETex);
 
-unk_80077D50* sMachineStatValueCompTexInfos[] = {
-    sMachineStatACompTexInfo, sMachineStatBCompTexInfo, sMachineStatCCompTexInfo,
-    sMachineStatDCompTexInfo, sMachineStatECompTexInfo,
+CacheTexInfo* sMachineStatValueCacheTexInfos[] = {
+    sMachineStatACacheTexInfo, sMachineStatBCacheTexInfo, sMachineStatCCacheTexInfo,
+    sMachineStatDCacheTexInfo, sMachineStatECacheTexInfo,
 };
 
-unk_80077D50 sMachineWeight0CompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight0Tex);
-unk_80077D50 sMachineWeight1CompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight1Tex);
-unk_80077D50 sMachineWeight2CompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight2Tex);
-unk_80077D50 sMachineWeight3CompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight3Tex);
-unk_80077D50 sMachineWeight4CompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight4Tex);
-unk_80077D50 sMachineWeight5CompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight5Tex);
-unk_80077D50 sMachineWeight6CompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight6Tex);
-unk_80077D50 sMachineWeight7CompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight7Tex);
-unk_80077D50 sMachineWeight8CompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight8Tex);
-unk_80077D50 sMachineWeight9CompTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight9Tex);
+CacheTexInfo sMachineWeight0CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight0Tex);
+CacheTexInfo sMachineWeight1CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight1Tex);
+CacheTexInfo sMachineWeight2CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight2Tex);
+CacheTexInfo sMachineWeight3CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight3Tex);
+CacheTexInfo sMachineWeight4CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight4Tex);
+CacheTexInfo sMachineWeight5CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight5Tex);
+CacheTexInfo sMachineWeight6CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight6Tex);
+CacheTexInfo sMachineWeight7CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight7Tex);
+CacheTexInfo sMachineWeight8CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight8Tex);
+CacheTexInfo sMachineWeight9CacheTexInfo[] = COMP_TEX_INFO_DEF(17, aMachineWeight9Tex);
 
-unk_80077D50* sMachineWeightDigitCompTexInfos[] = {
-    sMachineWeight0CompTexInfo, sMachineWeight1CompTexInfo, sMachineWeight2CompTexInfo, sMachineWeight3CompTexInfo,
-    sMachineWeight4CompTexInfo, sMachineWeight5CompTexInfo, sMachineWeight6CompTexInfo, sMachineWeight7CompTexInfo,
-    sMachineWeight8CompTexInfo, sMachineWeight9CompTexInfo,
+CacheTexInfo* sMachineWeightDigitCacheTexInfos[] = {
+    sMachineWeight0CacheTexInfo, sMachineWeight1CacheTexInfo, sMachineWeight2CacheTexInfo, sMachineWeight3CacheTexInfo,
+    sMachineWeight4CacheTexInfo, sMachineWeight5CacheTexInfo, sMachineWeight6CacheTexInfo, sMachineWeight7CacheTexInfo,
+    sMachineWeight8CacheTexInfo, sMachineWeight9CacheTexInfo,
 };
 
 void Font_IntToString(s32 num, s8* str) {
@@ -1687,28 +1699,28 @@ s32 Font_GetStringWidth(s8* str, s32 fontSet, s32 additionalSpacing) {
 
 #ifdef EXPANSION_KIT
 void Font_LoadString(s8* str, s32 fontSet) {
-    unk_80077D50** fontCharTexInfos;
+    CacheTexInfo** fontCharTexInfos;
     s32 fontChar;
 
     switch (fontSet) {
         case FONT_SET_2:
-            fontCharTexInfos = sFont2CompTexInfos;
+            fontCharTexInfos = sFont2CacheTexInfos;
             break;
         case FONT_SET_3:
-            fontCharTexInfos = sFont3CompTexInfos;
+            fontCharTexInfos = sFont3CacheTexInfos;
             break;
         case FONT_SET_4:
-            fontCharTexInfos = sFont4CompTexInfos;
+            fontCharTexInfos = sFont4CacheTexInfos;
             break;
         case FONT_SET_5:
-            fontCharTexInfos = sFont5CompTexInfos;
+            fontCharTexInfos = sFont5CacheTexInfos;
             break;
         case FONT_SET_6:
-            fontCharTexInfos = sFont6CompTexInfos;
+            fontCharTexInfos = sFont6CacheTexInfos;
             break;
         case FONT_SET_1:
         default:
-            fontCharTexInfos = sFont1CompTexInfos;
+            fontCharTexInfos = sFont1CacheTexInfos;
             break;
     }
     while (*str != 0) {
@@ -1718,7 +1730,7 @@ void Font_LoadString(s8* str, s32 fontSet) {
             fontChar = Font_GetCharIndex(str, FONT_SET_UPPERCASE_ONLY);
         }
         if (fontChar >= 0) {
-            func_80077D50_impl(fontCharTexInfos[fontChar], 0, true);
+            TextureCache_LoadCacheTexInfoList_impl(fontCharTexInfos[fontChar], false, true);
         } else {
             switch (fontChar) {
                 case FONT_CHAR_SPACE:
@@ -1741,44 +1753,44 @@ Gfx* Font_DrawString(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing
     const s16* fontCharWidths;
     s32 strWidth;
     s32 fontChar;
-    unk_80077D50** fontCharTexInfos;
+    CacheTexInfo** fontCharTexInfos;
     s32 fontSpaceWidth;
 
     switch (fontSet) {
         case FONT_SET_2:
             fontCharWidths = kFont2CharWidths;
-            fontCharTexInfos = sFont2CompTexInfos;
+            fontCharTexInfos = sFont2CacheTexInfos;
             fontSpaceWidth = 3;
             top -= 8;
             break;
         case FONT_SET_3:
             fontCharWidths = kFont3CharWidths;
-            fontCharTexInfos = sFont3CompTexInfos;
+            fontCharTexInfos = sFont3CacheTexInfos;
             fontSpaceWidth = 6;
             top -= 16;
             break;
         case FONT_SET_4:
             fontCharWidths = kFont4CharWidths;
-            fontCharTexInfos = sFont4CompTexInfos;
+            fontCharTexInfos = sFont4CacheTexInfos;
             fontSpaceWidth = 3;
             top -= 8;
             break;
         case FONT_SET_5:
             fontCharWidths = kFont5CharWidths;
-            fontCharTexInfos = sFont5CompTexInfos;
+            fontCharTexInfos = sFont5CacheTexInfos;
             fontSpaceWidth = 3;
             top -= 16;
             break;
         case FONT_SET_6:
             fontCharWidths = kFont6CharWidths;
-            fontCharTexInfos = sFont6CompTexInfos;
+            fontCharTexInfos = sFont6CacheTexInfos;
             fontSpaceWidth = 3;
             top -= 16;
             break;
         case FONT_SET_1:
         default:
             fontCharWidths = kFont1CharWidths;
-            fontCharTexInfos = sFont1CompTexInfos;
+            fontCharTexInfos = sFont1CacheTexInfos;
             fontSpaceWidth = 7;
             top -= 16;
             break;
@@ -1791,13 +1803,13 @@ Gfx* Font_DrawString(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalSpacing
             fontChar = Font_GetCharIndex(str, FONT_SET_UPPERCASE_ONLY);
         }
         if (fontChar >= 0) {
-            func_80077D50_impl(fontCharTexInfos[fontChar], 0, true);
+            TextureCache_LoadCacheTexInfoList_impl(fontCharTexInfos[fontChar], false, true);
             if (arg6 == 1) {
-                gfx = func_80078EA0_impl(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 1, 0, 0, 1.0f, 1.0f,
-                                         true);
+                gfx = TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 1, false, false,
+                                                 1.0f, 1.0f, true);
             } else {
-                gfx = func_80078EA0_impl(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 0, 0, 0, 1.0f, 1.0f,
-                                         true);
+                gfx = TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], left + strWidth, top, 0, false, false,
+                                                 1.0f, 1.0f, true);
             }
 
             strWidth += fontCharWidths[fontChar] + additionalSpacing;
@@ -1826,44 +1838,44 @@ Gfx* Font_DrawScaledString(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalS
     const s16* fontCharWidths;
     s32 strWidth;
     s32 fontChar;
-    unk_80077D50** fontCharTexInfos;
+    CacheTexInfo** fontCharTexInfos;
     s32 fontSpaceWidth;
 
     switch (fontSet) {
         case FONT_SET_2:
             fontCharWidths = kFont2CharWidths;
-            fontCharTexInfos = sFont2CompTexInfos;
+            fontCharTexInfos = sFont2CacheTexInfos;
             fontSpaceWidth = 3;
             top -= 8;
             break;
         case FONT_SET_3:
             fontCharWidths = kFont3CharWidths;
-            fontCharTexInfos = sFont3CompTexInfos;
+            fontCharTexInfos = sFont3CacheTexInfos;
             fontSpaceWidth = 6;
             top -= 16;
             break;
         case FONT_SET_4:
             fontCharWidths = kFont4CharWidths;
-            fontCharTexInfos = sFont4CompTexInfos;
+            fontCharTexInfos = sFont4CacheTexInfos;
             fontSpaceWidth = 3;
             top -= 8;
             break;
         case FONT_SET_5:
             fontCharWidths = kFont5CharWidths;
-            fontCharTexInfos = sFont5CompTexInfos;
+            fontCharTexInfos = sFont5CacheTexInfos;
             fontSpaceWidth = 3;
             top -= 16;
             break;
         case FONT_SET_6:
             fontCharWidths = kFont6CharWidths;
-            fontCharTexInfos = sFont6CompTexInfos;
+            fontCharTexInfos = sFont6CacheTexInfos;
             fontSpaceWidth = 3;
             top -= 16;
             break;
         case FONT_SET_1:
         default:
             fontCharWidths = kFont1CharWidths;
-            fontCharTexInfos = sFont1CompTexInfos;
+            fontCharTexInfos = sFont1CacheTexInfos;
             fontSpaceWidth = 7;
             top -= 16;
             break;
@@ -1876,13 +1888,13 @@ Gfx* Font_DrawScaledString(Gfx* gfx, s32 left, s32 top, s8* str, s32 additionalS
             fontChar = Font_GetCharIndex(str, FONT_SET_UPPERCASE_ONLY);
         }
         if (fontChar >= 0) {
-            func_80077D50_impl(fontCharTexInfos[fontChar], 0, true);
+            TextureCache_LoadCacheTexInfoList_impl(fontCharTexInfos[fontChar], false, true);
             if (arg6 == 1) {
-                gfx = func_80078EA0_impl(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)), top, 4, 0,
-                                         0, scaleX, scaleY, true);
+                gfx = TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)),
+                                                 top, 4, false, false, scaleX, scaleY, true);
             } else {
-                gfx = func_80078EA0_impl(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)), top, 3, 0,
-                                         0, scaleX, scaleY, true);
+                gfx = TextureCache_DrawList_impl(gfx, fontCharTexInfos[fontChar], (s32) (left + (strWidth * scaleX)),
+                                                 top, 3, false, false, scaleX, scaleY, true);
             }
 
             strWidth += fontCharWidths[fontChar] + additionalSpacing;
@@ -1912,8 +1924,9 @@ Gfx* Font_DrawMachineStatValue(Gfx* gfx, s32 left, s32 top, s32 statValue) {
         return gfx;
     }
 
-    func_80077D50_impl(sMachineStatValueCompTexInfos[statValue], 0, true);
-    return func_80078EA0_impl(gfx, sMachineStatValueCompTexInfos[statValue], left, top, 0, 0, 0, 1.0f, 1.0f, true);
+    TextureCache_LoadCacheTexInfoList_impl(sMachineStatValueCacheTexInfos[statValue], false, true);
+    return TextureCache_DrawList_impl(gfx, sMachineStatValueCacheTexInfos[statValue], left, top, 0, false, false, 1.0f,
+                                      1.0f, true);
 }
 
 Gfx* Font_DrawMachineStatValueSmall(Gfx* gfx, s32 left, s32 top, s32 statValue) {
@@ -1922,8 +1935,9 @@ Gfx* Font_DrawMachineStatValueSmall(Gfx* gfx, s32 left, s32 top, s32 statValue) 
         return gfx;
     }
 
-    func_80077D50_impl(sMachineStatValueCompTexInfos[statValue], 0, true);
-    return func_80078EA0_impl(gfx, sMachineStatValueCompTexInfos[statValue], left, top, 3, 0, 0, 0.5f, 0.5f, true);
+    TextureCache_LoadCacheTexInfoList_impl(sMachineStatValueCacheTexInfos[statValue], false, true);
+    return TextureCache_DrawList_impl(gfx, sMachineStatValueCacheTexInfos[statValue], left, top, 3, false, false, 0.5f,
+                                      0.5f, true);
 }
 
 Gfx* Font_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight) {
@@ -1934,9 +1948,9 @@ Gfx* Font_DrawMachineWeight(Gfx* gfx, s32 left, s32 top, u32 weight) {
     do {
         digit = weight % 10;
         width -= kMachineWeightDigitWidths[digit];
-        func_80077D50_impl(sMachineWeightDigitCompTexInfos[digit], 0, true);
-        gfx = func_80078EA0_impl(gfx, sMachineWeightDigitCompTexInfos[digit], left + width, top - 16, 0, 0, 0, 1.0f,
-                                 1.0f, true);
+        TextureCache_LoadCacheTexInfoList_impl(sMachineWeightDigitCacheTexInfos[digit], false, true);
+        gfx = TextureCache_DrawList_impl(gfx, sMachineWeightDigitCacheTexInfos[digit], left + width, top - 16, 0, false,
+                                         false, 1.0f, 1.0f, true);
         weight /= 10;
     } while (weight != 0);
 
@@ -1952,9 +1966,9 @@ Gfx* Font_DrawMachineWeightSmall(Gfx* gfx, s32 left, s32 top, u32 weight) {
     do {
         digit = weight % 10;
         width -= kMachineWeightDigitWidths[digit] * scale + 1.0f;
-        func_80077D50_impl(sMachineWeightDigitCompTexInfos[digit], 0, true);
-        gfx = func_80078EA0_impl(gfx, sMachineWeightDigitCompTexInfos[digit], left + width, top - (16.0f * scale), 3, 0,
-                                 0, scale, scale, true);
+        TextureCache_LoadCacheTexInfoList_impl(sMachineWeightDigitCacheTexInfos[digit], false, true);
+        gfx = TextureCache_DrawList_impl(gfx, sMachineWeightDigitCacheTexInfos[digit], left + width,
+                                         top - (16.0f * scale), 3, false, false, scale, scale, true);
         weight /= 10;
     } while (weight != 0);
 

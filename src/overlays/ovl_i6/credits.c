@@ -24,74 +24,74 @@ s32 D_i6_8011DFB4 = 50;
     VEHICLE ARTWORK
  */
 
-unk_80077D50 sCreditsBlueFalconCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBlueFalconTex);
-unk_80077D50 sCreditsWildGooseCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWildGooseTex);
-unk_80077D50 sCreditsFireStingrayCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsFireStingrayTex);
-unk_80077D50 sCreditsGoldenFoxCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsGoldenFoxTex);
-unk_80077D50 sCreditsRedGazelleCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsRedGazelleTex);
-unk_80077D50 sCreditsWhiteFoxCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWhiteFoxTex);
-unk_80077D50 sCreditsIronTigerCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsIronTigerTex);
-unk_80077D50 sCreditsDeepClawCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsDeepClawTex);
-unk_80077D50 sCreditsCrazyBearCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsCrazyBearTex);
-unk_80077D50 sCreditsGreatStarCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsGreatStarTex);
-unk_80077D50 sCreditsBigFangCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBigFangTex);
-unk_80077D50 sCreditsMadWolfCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsMadWolfTex);
-unk_80077D50 sCreditsNightThunderCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsNightThunderTex);
-unk_80077D50 sCreditsTwinNorittaCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsTwinNorittaTex);
-unk_80077D50 sCreditsWonderWaspCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWonderWaspTex);
-unk_80077D50 sCreditsQueenMeteorCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsQueenMeteorTex);
-unk_80077D50 sCreditsBloodHawkCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBloodHawkTex);
-unk_80077D50 sCreditsAstroRobinCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsAstroRobinTex);
-unk_80077D50 sCreditsDeathAnchorCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsDeathAnchorTex);
-unk_80077D50 sCreditsWildBoarCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWildBoarTex);
-unk_80077D50 sCreditsKingMeteorCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsKingMeteorTex);
-unk_80077D50 sCreditsSuperPiranhaCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsSuperPiranhaTex);
-unk_80077D50 sCreditsMightyHurricaneCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsMightyHurricaneTex);
-unk_80077D50 sCreditsSpaceAnglerCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsSpaceAnglerTex);
-unk_80077D50 sCreditsMightyTyphoonCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsMightyTyphoonTex);
-unk_80077D50 sCreditsHyperSpeederCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsHyperSpeederTex);
-unk_80077D50 sCreditsGreenPantherCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsGreenPantherTex);
-unk_80077D50 sCreditsBlackBullCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBlackBullTex);
-unk_80077D50 sCreditsLittleWyvernCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsLittleWyvernTex);
-unk_80077D50 sCreditsSonicPhantomCompTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsSonicPhantomTex);
+CacheTexInfo sCreditsBlueFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBlueFalconTex);
+CacheTexInfo sCreditsWildGooseCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWildGooseTex);
+CacheTexInfo sCreditsFireStingrayCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsFireStingrayTex);
+CacheTexInfo sCreditsGoldenFoxCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsGoldenFoxTex);
+CacheTexInfo sCreditsRedGazelleCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsRedGazelleTex);
+CacheTexInfo sCreditsWhiteFoxCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWhiteFoxTex);
+CacheTexInfo sCreditsIronTigerCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsIronTigerTex);
+CacheTexInfo sCreditsDeepClawCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsDeepClawTex);
+CacheTexInfo sCreditsCrazyBearCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsCrazyBearTex);
+CacheTexInfo sCreditsGreatStarCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsGreatStarTex);
+CacheTexInfo sCreditsBigFangCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBigFangTex);
+CacheTexInfo sCreditsMadWolfCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsMadWolfTex);
+CacheTexInfo sCreditsNightThunderCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsNightThunderTex);
+CacheTexInfo sCreditsTwinNorittaCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsTwinNorittaTex);
+CacheTexInfo sCreditsWonderWaspCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWonderWaspTex);
+CacheTexInfo sCreditsQueenMeteorCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsQueenMeteorTex);
+CacheTexInfo sCreditsBloodHawkCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBloodHawkTex);
+CacheTexInfo sCreditsAstroRobinCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsAstroRobinTex);
+CacheTexInfo sCreditsDeathAnchorCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsDeathAnchorTex);
+CacheTexInfo sCreditsWildBoarCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsWildBoarTex);
+CacheTexInfo sCreditsKingMeteorCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsKingMeteorTex);
+CacheTexInfo sCreditsSuperPiranhaCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsSuperPiranhaTex);
+CacheTexInfo sCreditsMightyHurricaneCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsMightyHurricaneTex);
+CacheTexInfo sCreditsSpaceAnglerCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsSpaceAnglerTex);
+CacheTexInfo sCreditsMightyTyphoonCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsMightyTyphoonTex);
+CacheTexInfo sCreditsHyperSpeederCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsHyperSpeederTex);
+CacheTexInfo sCreditsGreenPantherCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsGreenPantherTex);
+CacheTexInfo sCreditsBlackBullCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsBlackBullTex);
+CacheTexInfo sCreditsLittleWyvernCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsLittleWyvernTex);
+CacheTexInfo sCreditsSonicPhantomCacheTexInfo[] = COMP_TEX_INFO_DEF(18, aCreditsSonicPhantomTex);
 
-unk_800792D8 D_i6_8011E378[] = { { sCreditsBlueFalconCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E388[] = { { sCreditsWildGooseCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E398[] = { { sCreditsFireStingrayCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E3A8[] = { { sCreditsGoldenFoxCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E3B8[] = { { sCreditsRedGazelleCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E3C8[] = { { sCreditsWhiteFoxCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E3D8[] = { { sCreditsIronTigerCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E3E8[] = { { sCreditsDeepClawCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E3F8[] = { { sCreditsCrazyBearCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E408[] = { { sCreditsGreatStarCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E418[] = { { sCreditsBigFangCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E428[] = { { sCreditsMadWolfCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E438[] = { { sCreditsNightThunderCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E448[] = { { sCreditsTwinNorittaCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E458[] = { { sCreditsWonderWaspCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E468[] = { { sCreditsQueenMeteorCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E478[] = { { sCreditsBloodHawkCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E488[] = { { sCreditsAstroRobinCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E498[] = { { sCreditsDeathAnchorCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E4A8[] = { { sCreditsWildBoarCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E4B8[] = { { sCreditsKingMeteorCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E4C8[] = { { sCreditsSuperPiranhaCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E4D8[] = { { sCreditsMightyHurricaneCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E4E8[] = { { sCreditsSpaceAnglerCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E4F8[] = { { sCreditsMightyTyphoonCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E508[] = { { sCreditsHyperSpeederCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E518[] = { { sCreditsGreenPantherCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E528[] = { { sCreditsBlackBullCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E538[] = { { sCreditsLittleWyvernCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011E548[] = { { sCreditsSonicPhantomCompTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E378[] = { { sCreditsBlueFalconCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E388[] = { { sCreditsWildGooseCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E398[] = { { sCreditsFireStingrayCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E3A8[] = { { sCreditsGoldenFoxCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E3B8[] = { { sCreditsRedGazelleCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E3C8[] = { { sCreditsWhiteFoxCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E3D8[] = { { sCreditsIronTigerCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E3E8[] = { { sCreditsDeepClawCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E3F8[] = { { sCreditsCrazyBearCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E408[] = { { sCreditsGreatStarCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E418[] = { { sCreditsBigFangCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E428[] = { { sCreditsMadWolfCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E438[] = { { sCreditsNightThunderCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E448[] = { { sCreditsTwinNorittaCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E458[] = { { sCreditsWonderWaspCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E468[] = { { sCreditsQueenMeteorCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E478[] = { { sCreditsBloodHawkCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E488[] = { { sCreditsAstroRobinCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E498[] = { { sCreditsDeathAnchorCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E4A8[] = { { sCreditsWildBoarCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E4B8[] = { { sCreditsKingMeteorCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E4C8[] = { { sCreditsSuperPiranhaCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E4D8[] = { { sCreditsMightyHurricaneCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E4E8[] = { { sCreditsSpaceAnglerCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E4F8[] = { { sCreditsMightyTyphoonCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E508[] = { { sCreditsHyperSpeederCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E518[] = { { sCreditsGreenPantherCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E528[] = { { sCreditsBlackBullCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E538[] = { { sCreditsLittleWyvernCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011E548[] = { { sCreditsSonicPhantomCacheTexInfo, 60 }, { 0 } };
 
-unk_800792D8* D_i6_8011E558[] = {
+TextureSwapEntry* D_i6_8011E558[] = {
     D_i6_8011E498,
     D_i6_8011E498,
 };
 
-unk_800792D8* D_i6_8011E560[] = {
+TextureSwapEntry* D_i6_8011E560[] = {
     D_i6_8011E378, // CAPTAIN_FALCON
     D_i6_8011E388, // DR_STEWART
     D_i6_8011E398, // PICO
@@ -128,81 +128,81 @@ unk_800792D8* D_i6_8011E560[] = {
     CREDITS / ENDING IMAGES + CHARACTER PORTRAITS
  */
 
-unk_80077D50 sCreditsMenuLadyCompTexInfo[] = COMP_TEX_INFO_DEF(17, aCreditsMenuLadyTex);
-unk_80077D50 sCreditsSeeYouAgainCompTexInfo[] = COMP_TEX_INFO_DEF(17, aCreditsSeeYouAgainTex);
-unk_80077D50 sCreditsMrZeroCompTexInfo[] = COMP_TEX_INFO_DEF(17, aCreditsMrZeroTex);
+CacheTexInfo sCreditsMenuLadyCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aCreditsMenuLadyTex);
+CacheTexInfo sCreditsSeeYouAgainCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aCreditsSeeYouAgainTex);
+CacheTexInfo sCreditsMrZeroCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aCreditsMrZeroTex);
 
 // COPYRIGHT LOGO (1998)
 //! @bug This has the incorrect compressed size (leftover from version difference?)
 #ifndef EXPANSION_KIT
-unk_80077D50 sCreditsCopyrightCompTexInfo[] = COMP_TEX_INFO_PAD(17, aCopyrightTex, 0x439);
+CacheTexInfo sCreditsCopyrightCacheTexInfo[] = COMP_TEX_INFO_PAD(17, aCopyrightTex, 0x439);
 #else
-unk_80077D50 sCreditsCopyrightCompTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCopyrightDDTex);
+CacheTexInfo sCreditsCopyrightCacheTexInfo[] = COMP_TEX_INFO_DEF_PAD(17, aCopyrightDDTex);
 #endif
 
-unk_80077D50 sCreditsPortraitDrStewartCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDrStewartTex);
-unk_80077D50 sCreditsPortraitCaptainFalconCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitCaptainFalconTex);
-unk_80077D50 sCreditsPortraitJodySummerCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJodySummerTex);
-unk_80077D50 sCreditsPortraitSamuraiGorohCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSamuraiGorohTex);
-unk_80077D50 sCreditsPortraitMightyGazelleCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMightyGazelleTex);
-unk_80077D50 sCreditsPortraitPicoCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitPicoTex);
-unk_80077D50 sCreditsPortraitBabaCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBabaTex);
-unk_80077D50 sCreditsPortraitMrEadCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMrEadTex);
-unk_80077D50 sCreditsPortraitOctomanCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitOctomanTex);
-unk_80077D50 sCreditsPortraitTheSkullCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitTheSkullTex);
-unk_80077D50 sCreditsPortraitBeastmanCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBeastmanTex);
-unk_80077D50 sCreditsPortraitAntonioGusterCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitAntonioGusterTex);
-unk_80077D50 sCreditsPortraitDraqCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDraqTex);
-unk_80077D50 sCreditsPortraitRogerBusterCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitRogerBusterTex);
-unk_80077D50 sCreditsPortraitSilverNeelsenCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSilverNeelsenTex);
-unk_80077D50 sCreditsPortraitSuperArrowCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSuperArrowTex);
-unk_80077D50 sCreditsPortraitMrsArrowCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMrsArrowTex);
-unk_80077D50 sCreditsPortraitZodaCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitZodaTex);
-unk_80077D50 sCreditsPortraitJohnTanakaCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJohnTanakaTex);
-unk_80077D50 sCreditsPortraitBioRexCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBioRexTex);
-unk_80077D50 sCreditsPortraitKateAlenCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitKateAlenTex);
-unk_80077D50 sCreditsPortraitGomarAndShiohCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitGomarAndShiohTex);
-unk_80077D50 sCreditsPortraitMichaelChainCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMichaelChainTex);
-unk_80077D50 sCreditsPortraitBillyCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBillyTex);
-unk_80077D50 sCreditsPortraitDrClashCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDrClashTex);
-unk_80077D50 sCreditsPortraitJackLevinCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJackLevinTex);
-unk_80077D50 sCreditsPortraitBloodFalconCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBloodFalconTex);
-unk_80077D50 sCreditsPortraitLeonCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitLeonTex);
-unk_80077D50 sCreditsPortraitJamesMcCloudCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJamesMcCloudTex);
-unk_80077D50 sCreditsPortraitBlackShadowCompTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBlackShadowTex);
+CacheTexInfo sCreditsPortraitDrStewartCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDrStewartTex);
+CacheTexInfo sCreditsPortraitCaptainFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitCaptainFalconTex);
+CacheTexInfo sCreditsPortraitJodySummerCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJodySummerTex);
+CacheTexInfo sCreditsPortraitSamuraiGorohCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSamuraiGorohTex);
+CacheTexInfo sCreditsPortraitMightyGazelleCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMightyGazelleTex);
+CacheTexInfo sCreditsPortraitPicoCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitPicoTex);
+CacheTexInfo sCreditsPortraitBabaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBabaTex);
+CacheTexInfo sCreditsPortraitMrEadCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMrEadTex);
+CacheTexInfo sCreditsPortraitOctomanCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitOctomanTex);
+CacheTexInfo sCreditsPortraitTheSkullCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitTheSkullTex);
+CacheTexInfo sCreditsPortraitBeastmanCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBeastmanTex);
+CacheTexInfo sCreditsPortraitAntonioGusterCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitAntonioGusterTex);
+CacheTexInfo sCreditsPortraitDraqCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDraqTex);
+CacheTexInfo sCreditsPortraitRogerBusterCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitRogerBusterTex);
+CacheTexInfo sCreditsPortraitSilverNeelsenCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSilverNeelsenTex);
+CacheTexInfo sCreditsPortraitSuperArrowCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitSuperArrowTex);
+CacheTexInfo sCreditsPortraitMrsArrowCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMrsArrowTex);
+CacheTexInfo sCreditsPortraitZodaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitZodaTex);
+CacheTexInfo sCreditsPortraitJohnTanakaCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJohnTanakaTex);
+CacheTexInfo sCreditsPortraitBioRexCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBioRexTex);
+CacheTexInfo sCreditsPortraitKateAlenCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitKateAlenTex);
+CacheTexInfo sCreditsPortraitGomarAndShiohCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitGomarAndShiohTex);
+CacheTexInfo sCreditsPortraitMichaelChainCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitMichaelChainTex);
+CacheTexInfo sCreditsPortraitBillyCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBillyTex);
+CacheTexInfo sCreditsPortraitDrClashCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitDrClashTex);
+CacheTexInfo sCreditsPortraitJackLevinCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJackLevinTex);
+CacheTexInfo sCreditsPortraitBloodFalconCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBloodFalconTex);
+CacheTexInfo sCreditsPortraitLeonCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitLeonTex);
+CacheTexInfo sCreditsPortraitJamesMcCloudCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitJamesMcCloudTex);
+CacheTexInfo sCreditsPortraitBlackShadowCacheTexInfo[] = COMP_TEX_INFO_DEF(17, aFullPortraitBlackShadowTex);
 
-unk_800792D8 D_i6_8011EA18[] = { { sCreditsPortraitDrStewartCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EA28[] = { { sCreditsPortraitCaptainFalconCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EA38[] = { { sCreditsPortraitJodySummerCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EA48[] = { { sCreditsPortraitSamuraiGorohCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EA58[] = { { sCreditsPortraitMightyGazelleCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EA68[] = { { sCreditsPortraitPicoCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EA78[] = { { sCreditsPortraitBabaCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EA88[] = { { sCreditsPortraitMrEadCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EA98[] = { { sCreditsPortraitOctomanCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EAA8[] = { { sCreditsPortraitTheSkullCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EAB8[] = { { sCreditsPortraitBeastmanCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EAC8[] = { { sCreditsPortraitAntonioGusterCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EAD8[] = { { sCreditsPortraitDraqCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EAE8[] = { { sCreditsPortraitRogerBusterCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EAF8[] = { { sCreditsPortraitSilverNeelsenCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EB08[] = { { sCreditsPortraitSuperArrowCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EB18[] = { { sCreditsPortraitMrsArrowCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EB28[] = { { sCreditsPortraitZodaCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EB38[] = { { sCreditsPortraitJohnTanakaCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EB48[] = { { sCreditsPortraitBioRexCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EB58[] = { { sCreditsPortraitKateAlenCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EB68[] = { { sCreditsPortraitGomarAndShiohCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EB78[] = { { sCreditsPortraitMichaelChainCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EB88[] = { { sCreditsPortraitBillyCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EB98[] = { { sCreditsPortraitDrClashCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EBA8[] = { { sCreditsPortraitJackLevinCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EBB8[] = { { sCreditsPortraitBloodFalconCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EBC8[] = { { sCreditsPortraitLeonCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EBD8[] = { { sCreditsPortraitJamesMcCloudCompTexInfo, 60 }, { 0 } };
-unk_800792D8 D_i6_8011EBE8[] = { { sCreditsPortraitBlackShadowCompTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EA18[] = { { sCreditsPortraitDrStewartCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EA28[] = { { sCreditsPortraitCaptainFalconCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EA38[] = { { sCreditsPortraitJodySummerCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EA48[] = { { sCreditsPortraitSamuraiGorohCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EA58[] = { { sCreditsPortraitMightyGazelleCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EA68[] = { { sCreditsPortraitPicoCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EA78[] = { { sCreditsPortraitBabaCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EA88[] = { { sCreditsPortraitMrEadCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EA98[] = { { sCreditsPortraitOctomanCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EAA8[] = { { sCreditsPortraitTheSkullCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EAB8[] = { { sCreditsPortraitBeastmanCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EAC8[] = { { sCreditsPortraitAntonioGusterCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EAD8[] = { { sCreditsPortraitDraqCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EAE8[] = { { sCreditsPortraitRogerBusterCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EAF8[] = { { sCreditsPortraitSilverNeelsenCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EB08[] = { { sCreditsPortraitSuperArrowCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EB18[] = { { sCreditsPortraitMrsArrowCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EB28[] = { { sCreditsPortraitZodaCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EB38[] = { { sCreditsPortraitJohnTanakaCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EB48[] = { { sCreditsPortraitBioRexCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EB58[] = { { sCreditsPortraitKateAlenCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EB68[] = { { sCreditsPortraitGomarAndShiohCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EB78[] = { { sCreditsPortraitMichaelChainCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EB88[] = { { sCreditsPortraitBillyCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EB98[] = { { sCreditsPortraitDrClashCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EBA8[] = { { sCreditsPortraitJackLevinCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EBB8[] = { { sCreditsPortraitBloodFalconCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EBC8[] = { { sCreditsPortraitLeonCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EBD8[] = { { sCreditsPortraitJamesMcCloudCacheTexInfo, 60 }, { 0 } };
+TextureSwapEntry D_i6_8011EBE8[] = { { sCreditsPortraitBlackShadowCacheTexInfo, 60 }, { 0 } };
 
-unk_800792D8* D_i6_8011EBF8[] = {
+TextureSwapEntry* D_i6_8011EBF8[] = {
     D_i6_8011EA28, // CAPTAIN_FALCON
     D_i6_8011EA68, // DR_STEWART
     D_i6_8011EA48, // PICO
@@ -410,16 +410,16 @@ const s16 kCreditsObjectScrollScript[] = {
 };
 
 extern Object gObjects[32];
-extern unk_800E3F28 D_800E3F28[];
+extern TexSwapSlot gTextureSwapSlots[];
 
 void Credits_OldMachinesInit(Object* oldMachinesObj) {
 
-    OBJECT_CACHE_INDEX(oldMachinesObj) = func_800792D8(D_i6_8011E558[0]);
+    OBJECT_CACHE_INDEX(oldMachinesObj) = TextureCache_AllocSwapSlot(D_i6_8011E558[0]);
 
     OBJECT_STATE(oldMachinesObj) = 0;
 
-    //! @bug the case where func_800792D8 returns -1 is unhandled
-    D_800E3F28[OBJECT_CACHE_INDEX(oldMachinesObj)].unk_04 = -1;
+    //! @bug the case where TextureCache_AllocSwapSlot returns -1 is unhandled
+    gTextureSwapSlots[OBJECT_CACHE_INDEX(oldMachinesObj)].entryIndex = -1;
 }
 
 void Credits_MachinesInit(Object* machinesObj) {
@@ -428,41 +428,41 @@ void Credits_MachinesInit(Object* machinesObj) {
     for (i = 0; i < ARRAY_COUNT(D_i6_8011FAF0); i++) {
         D_i6_8011FAF0[i] = 0;
     }
-    OBJECT_CACHE_INDEX(machinesObj) = func_800792D8(D_i6_8011E558[0]);
+    OBJECT_CACHE_INDEX(machinesObj) = TextureCache_AllocSwapSlot(D_i6_8011E558[0]);
 
-    //! @bug the case where func_800792D8 returns -1 is unhandled
-    D_800E3F28[OBJECT_CACHE_INDEX(machinesObj)].unk_04 = -1;
+    //! @bug the case where TextureCache_AllocSwapSlot returns -1 is unhandled
+    gTextureSwapSlots[OBJECT_CACHE_INDEX(machinesObj)].entryIndex = -1;
 }
 
 void Credits_MenuLadyInit(Object* menuLadyObj) {
-    func_80077D50_impl(sCreditsMenuLadyCompTexInfo, 0, true);
+    TextureCache_LoadCacheTexInfoList_impl(sCreditsMenuLadyCacheTexInfo, false, true);
     OBJECT_COUNTER(menuLadyObj) = 0xB6;
 }
 
 void Credits_SeeYouAgainInit(void) {
-    func_80077D50_impl(sCreditsSeeYouAgainCompTexInfo, 0, true);
+    TextureCache_LoadCacheTexInfoList_impl(sCreditsSeeYouAgainCacheTexInfo, false, true);
 }
 
 void Credits_IntroInit(Object* introObj) {
-    func_80077D50_impl(sCreditsMrZeroCompTexInfo, 0, true);
+    TextureCache_LoadCacheTexInfoList_impl(sCreditsMrZeroCacheTexInfo, false, true);
     OBJECT_COUNTER(introObj) = 0x100;
     INTRO_TIMER(introObj) = 0;
 }
 
 void Credits_CopyrightInit(void) {
 #ifndef EXPANSION_KIT
-    func_80077D50_impl(sCreditsCopyrightCompTexInfo, 0, false);
+    TextureCache_LoadCacheTexInfoList_impl(sCreditsCopyrightCacheTexInfo, false, false);
 #else
-    func_i2_800AE578(sCreditsCopyrightCompTexInfo, false);
+    TextureCache_LoadCacheTexInfoListEK(sCreditsCopyrightCacheTexInfo, false);
 #endif
 }
 
 void Credits_PortraitsInit(Object* portraitsObj) {
 
-    OBJECT_CACHE_INDEX(portraitsObj) = func_800792D8(D_i6_8011EBF8[0]);
+    OBJECT_CACHE_INDEX(portraitsObj) = TextureCache_AllocSwapSlot(D_i6_8011EBF8[0]);
 
-    //! @bug the case where func_800792D8 returns -1 is unhandled
-    D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)].unk_04 = -1;
+    //! @bug the case where TextureCache_AllocSwapSlot returns -1 is unhandled
+    gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitsObj)].entryIndex = -1;
 }
 
 Gfx* Credits_FadeInNameByLetter(Gfx* gfx, Object* startNameObj, bool* wordFadeInProgress, bool isRightJustified) {
@@ -528,8 +528,9 @@ Gfx* Credits_OldMachinesDraw(Gfx* gfx, Object* oldMachinesObj) {
         return gfx;
     }
 
-    return func_80078F80_impl(gfx, &D_800E3F28[OBJECT_CACHE_INDEX(oldMachinesObj)], OBJECT_LEFT(oldMachinesObj),
-                              OBJECT_TOP(oldMachinesObj), 0, 0, 0, 1.0f, 1.0f, true);
+    return TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(oldMachinesObj)],
+                                          OBJECT_LEFT(oldMachinesObj), OBJECT_TOP(oldMachinesObj), 0, false, false,
+                                          1.0f, 1.0f, true);
 }
 
 #define UNK_RAND_MACRO(var, x, y) (((Math_Rand1() >> (var % 4)) % x) - y)
@@ -540,7 +541,7 @@ Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
     s32 var_t5;
     f32 var_fv1;
     s32 left;
-    unk_800E3F28* temp_s1;
+    TexSwapSlot* temp_s1;
     s32 height;
     s32 width;
     s32 var_a0;
@@ -551,13 +552,13 @@ Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
     TexturePtr texture;
     s32 top;
 
-    temp_s1 = &D_800E3F28[OBJECT_CACHE_INDEX(machinesObj)];
+    temp_s1 = &gTextureSwapSlots[OBJECT_CACHE_INDEX(machinesObj)];
 
     left = OBJECT_LEFT(machinesObj);
     top = OBJECT_TOP(machinesObj);
 
     if (OBJECT_TOP(machinesObj) > 120) {
-        top = OBJECT_TOP(machinesObj) - temp_s1->unk_00->unk_00->height;
+        top = OBJECT_TOP(machinesObj) - temp_s1->entries->CacheTexInfo->height;
     }
 
     sp154 = OBJECT_COUNTER(machinesObj);
@@ -565,16 +566,16 @@ Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
         sp154 = 64;
     }
 
-    width = temp_s1->unk_00->unk_00->width;
-    height = temp_s1->unk_00->unk_00->height;
+    width = temp_s1->entries->CacheTexInfo->width;
+    height = temp_s1->entries->CacheTexInfo->height;
 
     switch (OBJECT_STATE2(machinesObj)) {
         case 0:
 
-            if (temp_s1->unk_0A == 0) {
-                texture = temp_s1->unk_0C;
+            if (temp_s1->slotTextureId == 0) {
+                texture = temp_s1->textureA;
             } else {
-                texture = temp_s1->unk_10;
+                texture = temp_s1->textureB;
             }
 
             gSPDisplayList(gfx++, D_3000088);
@@ -612,7 +613,8 @@ Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
             }
             break;
         case 1:
-            gfx = func_80078F80_impl(gfx, temp_s1, OBJECT_LEFT(machinesObj), top, 0, 0, 0, 1.0f, 1.0f, true);
+            gfx = TextureCache_DrawSwapSlot_impl(gfx, temp_s1, OBJECT_LEFT(machinesObj), top, 0, false, false, 1.0f,
+                                                 1.0f, true);
             break;
         case 2:
             if (sp154 < 5) {
@@ -622,13 +624,13 @@ Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
                 additionalWidth = (width * (1.0f - var_fv1)) / 2;
                 additionalHeight = (height * (1.0f - var_fv1)) / 2;
 
-                gfx = func_80078F80_impl(gfx, temp_s1, OBJECT_LEFT(machinesObj) + additionalWidth,
-                                         top + additionalHeight, 4, 0, 0, var_fv1, var_fv1, true);
+                gfx = TextureCache_DrawSwapSlot_impl(gfx, temp_s1, OBJECT_LEFT(machinesObj) + additionalWidth,
+                                                     top + additionalHeight, 4, false, false, var_fv1, var_fv1, true);
             } else {
-                if (temp_s1->unk_0A == 0) {
-                    texture = temp_s1->unk_0C;
+                if (temp_s1->slotTextureId == 0) {
+                    texture = temp_s1->textureA;
                 } else {
-                    texture = temp_s1->unk_10;
+                    texture = temp_s1->textureB;
                 }
                 gSPDisplayList(gfx++, D_3000088);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, ((64 - sp154) * 255) / 64);
@@ -664,9 +666,10 @@ Gfx* Credits_MachinesDraw(Gfx* gfx, Object* machinesObj) {
                         ((left + additionalWidth) + width) << 2,
                         (s32) (((top + additionalHeight) + (row * var_ft4)) + 1.0f) << 2, 0, 0, 0, var_t5, 1 << 10);
                     gDPPipeSync(gfx++);
-                    gfx = func_8007A440(gfx, (left + additionalWidth), ((top + additionalHeight) + (row * var_ft4)),
-                                        ((left + additionalWidth) + (width * var_fv1)),
-                                        ((top + additionalHeight) + (row * var_ft4)) + 1.0f, 0x80, 0x80, 0x80, 0x10);
+                    gfx = TextureUtils_DrawRectangleClipped(
+                        gfx, (left + additionalWidth), ((top + additionalHeight) + (row * var_ft4)),
+                        ((left + additionalWidth) + (width * var_fv1)),
+                        ((top + additionalHeight) + (row * var_ft4)) + 1.0f, 0x80, 0x80, 0x80, 0x10);
                 }
             }
             break;
@@ -685,7 +688,7 @@ Gfx* Credits_MenuLadyDraw(Gfx* gfx, Object* menuLadyObj) {
     s32 var_t5;
     TexturePtr texture;
 
-    texture = func_800783AC(aCreditsMenuLadyTex);
+    texture = TextureCache_GetCached(aCreditsMenuLadyTex);
     left = OBJECT_LEFT(menuLadyObj);
     top = OBJECT_TOP(menuLadyObj);
 
@@ -776,7 +779,7 @@ Gfx* Credits_SeeYouAgainDraw(Gfx* gfx, Object* seeYouAgainObj) {
     TexturePtr texture;
 
     OBJECT_COUNTER(seeYouAgainObj)++;
-    texture = func_800783AC(aCreditsSeeYouAgainTex);
+    texture = TextureCache_GetCached(aCreditsSeeYouAgainTex);
     sp50 = OBJECT_LEFT(seeYouAgainObj);
     var_s5 = OBJECT_TOP(seeYouAgainObj);
 
@@ -850,7 +853,7 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
     f32 scale;
     TexturePtr texture;
 
-    texture = func_800783AC(aCreditsMrZeroTex);
+    texture = TextureCache_GetCached(aCreditsMrZeroTex);
     gSPDisplayList(gfx++, D_3000088);
 
     var = 60;
@@ -947,9 +950,9 @@ Gfx* Credits_CopyrightDraw(Gfx* gfx, Object* copyRightObj) {
 
     OBJECT_COUNTER(copyRightObj)++;
 #ifndef EXPANSION_KIT
-    texture = func_800783AC(aCopyrightTex);
+    texture = TextureCache_GetCached(aCopyrightTex);
 #else
-    texture = func_800783AC(aCopyrightDDTex);
+    texture = TextureCache_GetCached(aCopyrightDDTex);
 #endif
     var_s2 = OBJECT_TOP(copyRightObj);
     temp_s7 = OBJECT_LEFT(copyRightObj);
@@ -987,12 +990,12 @@ Gfx* Credits_CopyrightDraw(Gfx* gfx, Object* copyRightObj) {
 
 Gfx* Credits_PortraitsDraw(Gfx* gfx, Object* portraitsObj) {
     s32 pad[14];
-    unk_800E3F28* sp34;
+    TexSwapSlot* sp34;
     s32 temp_v1;
     s32 left;
     s32 machineLeftPos;
 
-    sp34 = &D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)];
+    sp34 = &gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitsObj)];
     temp_v1 = OBJECT_COUNTER(portraitsObj);
     machineLeftPos = kCreditsMachinePositions[(PORTRAIT_MACHINE_INDEX(portraitsObj) % 4) * 2];
 
@@ -1004,7 +1007,7 @@ Gfx* Credits_PortraitsDraw(Gfx* gfx, Object* portraitsObj) {
 
     if (OBJECT_STATE2(portraitsObj) == 0) {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255 - temp_v1);
-        gfx = func_80078F80_impl(gfx, sp34, left, -5, 1, 0, 0, 1.0f, 1.0f, true);
+        gfx = TextureCache_DrawSwapSlot_impl(gfx, sp34, left, -5, 1, false, false, 1.0f, 1.0f, true);
     }
     return gfx;
 }
@@ -1122,12 +1125,12 @@ extern u16 gInputPressed;
 
 void Credits_OldMachinesUpdate(Object* oldMachinesObj) {
     s32 var_v1;
-    unk_800E3F28* temp_v0;
+    TexSwapSlot* temp_v0;
 
-    temp_v0 = &D_800E3F28[OBJECT_CACHE_INDEX(oldMachinesObj)];
+    temp_v0 = &gTextureSwapSlots[OBJECT_CACHE_INDEX(oldMachinesObj)];
     var_v1 = 0;
-    if (temp_v0->unk_04 == -1) {
-        temp_v0->unk_04 = 0;
+    if (temp_v0->entryIndex == -1) {
+        temp_v0->entryIndex = 0;
         OBJECT_STATE(oldMachinesObj) = 0;
         var_v1 = 1;
     }
@@ -1150,7 +1153,8 @@ void Credits_OldMachinesUpdate(Object* oldMachinesObj) {
         }
     }
     if (var_v1 != 0) {
-        func_800793E8(OBJECT_CACHE_INDEX(oldMachinesObj), 0, D_i6_8011E560[OBJECT_STATE(oldMachinesObj)]);
+        TextureCache_SetSwapSlotEntry(OBJECT_CACHE_INDEX(oldMachinesObj), 0,
+                                      D_i6_8011E560[OBJECT_STATE(oldMachinesObj)]);
     }
 }
 
@@ -1233,14 +1237,14 @@ void Credits_MachinesUpdate(Object* machinesObj) {
             break;
     }
 
-    if (D_800E3F28[OBJECT_CACHE_INDEX(machinesObj)].unk_04 == -1) {
-        D_800E3F28[OBJECT_CACHE_INDEX(machinesObj)].unk_04 = 0;
+    if (gTextureSwapSlots[OBJECT_CACHE_INDEX(machinesObj)].entryIndex == -1) {
+        gTextureSwapSlots[OBJECT_CACHE_INDEX(machinesObj)].entryIndex = 0;
         OBJECT_STATE(machinesObj) = Math_Rand1() % 30;
         D_i6_8011FAF0[OBJECT_STATE(machinesObj)] = 1;
         var_a2++;
     }
     if (var_a2 != 0) {
-        func_800793E8(OBJECT_CACHE_INDEX(machinesObj), 0, D_i6_8011E560[OBJECT_STATE(machinesObj)]);
+        TextureCache_SetSwapSlotEntry(OBJECT_CACHE_INDEX(machinesObj), 0, D_i6_8011E560[OBJECT_STATE(machinesObj)]);
     }
 }
 
@@ -1266,13 +1270,13 @@ void Credits_PortraitsUpdate(Object* portraitsObj) {
             break;
     }
 
-    if (D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)].unk_04 == -1) {
-        D_800E3F28[OBJECT_CACHE_INDEX(portraitsObj)].unk_04 = 0;
+    if (gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitsObj)].entryIndex == -1) {
+        gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitsObj)].entryIndex = 0;
         OBJECT_STATE(portraitsObj) = OBJECT_STATE(Object_Get(OBJECT_CREDITS_MACHINES));
         var_v1++;
     }
     if (var_v1 != 0) {
-        func_800793E8(OBJECT_CACHE_INDEX(portraitsObj), 0, D_i6_8011EBF8[OBJECT_STATE(portraitsObj)]);
+        TextureCache_SetSwapSlotEntry(OBJECT_CACHE_INDEX(portraitsObj), 0, D_i6_8011EBF8[OBJECT_STATE(portraitsObj)]);
     }
 }
 
@@ -1766,18 +1770,18 @@ Gfx* Credits_ObjectDraw(Gfx* gfx) {
                 case OBJECT_FREE:
                     break;
                 case OBJECT_FRAMEBUFFER:
-                    gfx = func_8007AB88(gfx);
-                    gfx = func_8007AE70(gfx);
-                    gfx = func_8007ABA4(gfx);
+                    gfx = TextureUtils_SetupFramebufferView(gfx);
+                    gfx = TextureUtils_LoadFramebufferTexture(gfx);
+                    gfx = TextureUtils_SetFramebuffer(gfx);
                     break;
                 case OBJECT_150:
-                    gfx = func_8007AC48(gfx, 0, 0, 0);
+                    gfx = TextureUtils_DrawBackgroundColor(gfx, 0, 0, 0);
                     break;
                 case OBJECT_CREDITS_MACHINES_OLD:
                     gfx = Credits_OldMachinesDraw(gfx, &gObjects[j]);
                     break;
                 case OBJECT_CREDITS_BACKGROUND:
-                    gfx = func_8007AC48(gfx, 0, 0, 0);
+                    gfx = TextureUtils_DrawBackgroundColor(gfx, 0, 0, 0);
                     break;
                 case OBJECT_CREDITS_MACHINES:
                     gfx = Credits_MachinesDraw(gfx, &gObjects[j]);
@@ -2022,6 +2026,6 @@ s32 Credits_Update(void) {
 Gfx* Credits_Draw(Gfx* gfx) {
     Credits_ObjectUpdate();
     gfx = Credits_ObjectDraw(gfx);
-    func_800790D4();
+    TextureCache_ProcessLoadQueue();
     return gfx;
 }

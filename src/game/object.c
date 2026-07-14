@@ -1,623 +1,629 @@
 #include "global.h"
+#include "fzx_cache.h"
 #include "fzx_game.h"
 #include "fzx_object.h"
 #include "segment_symbols.h"
 
-unk_800E33E0 D_800E33E0[200];
-s32 D_800E3A20;
+TextureCacheEntry gTextureCache[200];
+s32 gTextureCacheCount;
 Object gObjects[32];
-unk_800E3F28 D_800E3F28[16];
-unk_800E4068 D_800E4068[16];
+TexSwapSlot gTextureSwapSlots[16];
+QueuedTextureLoad gQueuedTextureLoads[16];
 
-void func_80077CF0(s32 segAddr, size_t size, u8* startAddr) {
-    CLEAR_DATA_CACHE(startAddr, size);
+void TextureCache_LoadAssetData(s32 segAddr, size_t size, u8* dest) {
+    CLEAR_DATA_CACHE(dest, size);
 #ifndef EXPANSION_KIT
-    Dma_LoadAssets(SEGMENT_ROM_START(common_assets_compressed) + SEGMENT_OFFSET(segAddr), startAddr, size);
+    Dma_LoadAssets(SEGMENT_ROM_START(common_assets_compressed) + SEGMENT_OFFSET(segAddr), dest, size);
 #else
-    Dma_LoadAssets(gRomSegmentPairs[4][0] + SEGMENT_OFFSET(segAddr), startAddr, size);
+    Dma_LoadAssets(gRomSegmentPairs[4][0] + SEGMENT_OFFSET(segAddr), dest, size);
 #endif
 }
 
-void func_80077D44(void) {
-    D_800E3A20 = 0;
+void TextureCache_ResetCache(void) {
+    gTextureCacheCount = 0;
 }
 
 extern uintptr_t gArenaStartPtrs[];
 
-u8* func_80077D50_impl(unk_80077D50* arg0, s32 arg1, bool arg2) {
-    bool var_a0;
-    s32 var_s0;
+u8* TextureCache_LoadCacheTexInfoList_impl(CacheTexInfo* texInfo, bool forceReload, bool singleEntry) {
+    bool alreadyCached;
+    s32 i;
     s32 alignedWidth;
-    s32 var_s2;
+    s32 headerSize;
     size_t textureSize;
     u8* header;
-    u8* sp44;
-    u8* var_s4;
-    bool var_s7;
-    unk_800E33E0* var_s8 = D_800E33E0;
+    u8* firstTexture;
+    u8* texture;
+    bool foundFirst;
+    TextureCacheEntry* cache = gTextureCache;
 
-    sp44 = gArenaStartPtrs[0];
-    var_s7 = false;
+    firstTexture = gArenaStartPtrs[0];
+    foundFirst = false;
 
-    while (arg0->unk_04 != 0) {
-        var_a0 = false;
-        if (arg1 == 0) {
-            for (var_s0 = 0; var_s0 < D_800E3A20; var_s0++) {
+    while (texInfo->segAddr != 0) {
+        alreadyCached = false;
+        if (!forceReload) {
+            for (i = 0; i < gTextureCacheCount; i++) {
                 // FAKE
-                if (D_800E33E0[var_s0].unk_00 == (0, arg0->unk_04)) {
-                    var_a0 = true;
+                if (gTextureCache[i].segAddr == (0, texInfo->segAddr)) {
+                    alreadyCached = true;
                     break;
                 }
             }
         }
-        if (!var_a0) {
-            switch (arg0->unk_00) {
-                case 4:
-                case 5:
-                    if (arg0->width % 16) {
-                        alignedWidth = ((arg0->width + 16) / 16) * 16;
+        if (!alreadyCached) {
+            switch (texInfo->format) {
+                case TEX_CACHE_FMT_I4:
+                case TEX_CACHE_FMT_I4_TILED:
+                    if (texInfo->width % 16) {
+                        alignedWidth = ((texInfo->width + 16) / 16) * 16;
                     } else {
-                        alignedWidth = arg0->width;
+                        alignedWidth = texInfo->width;
                     }
-                    textureSize = arg0->height * alignedWidth;
-                    var_s4 = Arena_Allocate(ALLOC_FRONT, textureSize);
-                    func_80077CF0(arg0->unk_04, textureSize, var_s4);
+                    textureSize = texInfo->height * alignedWidth;
+                    texture = Arena_Allocate(ALLOC_FRONT, textureSize);
+                    TextureCache_LoadAssetData(texInfo->segAddr, textureSize, texture);
                     break;
-                case 20:
-                case 21:
+                case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
+                case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
 
-                    if (arg0->width % 16) {
-                        alignedWidth = ((arg0->width + 16) / 16) * 16;
+                    if (texInfo->width % 16) {
+                        alignedWidth = ((texInfo->width + 16) / 16) * 16;
                     } else {
-                        alignedWidth = arg0->width;
+                        alignedWidth = texInfo->width;
                     }
-                    textureSize = arg0->height * alignedWidth;
-                    if (arg0->compressedSize != 0) {
-                        var_s2 = ALIGN_2(arg0->compressedSize) + 2;
+                    textureSize = texInfo->height * alignedWidth;
+                    if (texInfo->compressedSize != 0) {
+                        headerSize = ALIGN_2(texInfo->compressedSize) + 2;
                     } else {
-                        var_s2 = 0x400;
+                        headerSize = 0x400;
                     }
-                    var_s4 = Arena_Allocate(ALLOC_FRONT, textureSize);
-                    header = Arena_Allocate(ALLOC_PEEK, var_s2);
-                    CLEAR_DATA_CACHE(header, var_s2);
-                    func_80077CF0(arg0->unk_04, var_s2, header);
+                    texture = Arena_Allocate(ALLOC_FRONT, textureSize);
+                    header = Arena_Allocate(ALLOC_PEEK, headerSize);
+                    CLEAR_DATA_CACHE(header, headerSize);
+                    TextureCache_LoadAssetData(texInfo->segAddr, headerSize, header);
                     if (*(s32*) header == (s32) 'MIO0') {
-                        mio0Decode(header, var_s4);
+                        mio0Decode(header, texture);
                     } else {
-                        bzero(var_s4, (arg0->height * alignedWidth) / 2);
+                        bzero(texture, (texInfo->height * alignedWidth) / 2);
                     }
                     break;
-                case 17:
-                case 18:
-                    if (arg0->compressedSize != 0) {
-                        var_s0 = ALIGN_2(arg0->compressedSize) + 2;
+                case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16):
+                case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
+                    if (texInfo->compressedSize != 0) {
+                        i = ALIGN_2(texInfo->compressedSize) + 2;
                     } else {
-                        var_s0 = 0x400;
+                        i = 0x400;
                     }
 
-                    var_s4 = Arena_Allocate(ALLOC_FRONT, arg0->height * arg0->width * 2);
-                    header = Arena_Allocate(ALLOC_PEEK, var_s0);
-                    CLEAR_DATA_CACHE(header, var_s0);
-                    func_80077CF0(arg0->unk_04, var_s0, header);
+                    texture = Arena_Allocate(ALLOC_FRONT, texInfo->height * texInfo->width * 2);
+                    header = Arena_Allocate(ALLOC_PEEK, i);
+                    CLEAR_DATA_CACHE(header, i);
+                    TextureCache_LoadAssetData(texInfo->segAddr, i, header);
                     if (*(s32*) header == (s32) 'MIO0') {
-                        mio0Decode(header, var_s4);
+                        mio0Decode(header, texture);
                     } else {
-                        bzero(var_s4, arg0->height * arg0->width * 2);
+                        bzero(texture, texInfo->height * texInfo->width * 2);
                     }
                     break;
                 default:
-                    var_s0 = arg0->height * arg0->width * 2;
-                    var_s4 = Arena_Allocate(ALLOC_FRONT, var_s0);
-                    func_80077CF0(arg0->unk_04, var_s0, var_s4);
+                    i = texInfo->height * texInfo->width * 2;
+                    texture = Arena_Allocate(ALLOC_FRONT, i);
+                    TextureCache_LoadAssetData(texInfo->segAddr, i, texture);
                     break;
             }
-            if (!var_s7) {
-                sp44 = var_s4;
-                var_s7 = true;
+            if (!foundFirst) {
+                firstTexture = texture;
+                foundFirst = true;
             }
-            var_s8[D_800E3A20].unk_00 = arg0->unk_04;
-            var_s8[D_800E3A20].unk_04 = (s32) var_s4;
-            D_800E3A20++;
+            cache[gTextureCacheCount].segAddr = texInfo->segAddr;
+            cache[gTextureCacheCount].texture = texture;
+            gTextureCacheCount++;
         }
 
 #ifdef EXPANSION_KIT
-        if (arg2) {
+        if (singleEntry) {
             break;
         }
 #endif
 
-        arg0++;
+        texInfo++;
     }
 
-    return sp44;
+    return firstTexture;
 }
 
 #ifdef EXPANSION_KIT
-u8* func_i2_800AE578(unk_80077D50* arg0, bool arg1) {
+u8* TextureCache_LoadCacheTexInfoListEK(CacheTexInfo* texInfo, bool singleEntry) {
     s32 temp_s0;
-    bool var_a0;
-    s32 var_s0;
-    bool var_s6;
+    bool alreadyCached;
+    s32 i;
+    bool foundFirst;
     u8* header;
-    u8* var_fp;
-    u8* var_s3;
-    unk_800E33E0* var_s7 = D_800E33E0;
+    u8* firstTexture;
+    u8* texture;
+    TextureCacheEntry* cache = gTextureCache;
 
-    var_s6 = false;
-    var_fp = gArenaStartPtrs[0];
+    foundFirst = false;
+    firstTexture = gArenaStartPtrs[0];
 
-    while (arg0->unk_04 != NULL) {
-        var_a0 = false;
-        if (!arg1) {
-            for (var_s0 = 0; var_s0 < D_800E3A20; var_s0++) {
-                if (D_800E33E0[var_s0].unk_00 == (0, arg0->unk_04)) {
-                    var_a0 = true;
+    while (texInfo->segAddr != NULL) {
+        alreadyCached = false;
+        if (!singleEntry) {
+            for (i = 0; i < gTextureCacheCount; i++) {
+                if (gTextureCache[i].segAddr == (0, texInfo->segAddr)) {
+                    alreadyCached = true;
                     break;
                 }
             }
         }
-        if (!var_a0) {
-            switch (arg0->unk_00) {
-                case 17:
-                case 18:
-                    if (arg0->compressedSize != 0) {
-                        var_s0 = ((arg0->compressedSize >> 1) * 2) + 2;
+        if (!alreadyCached) {
+            switch (texInfo->format) {
+                case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16):
+                case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
+                    if (texInfo->compressedSize != 0) {
+                        i = ((texInfo->compressedSize >> 1) * 2) + 2;
                     } else {
-                        var_s0 = 0x400;
+                        i = 0x400;
                     }
-                    var_s3 = Arena_Allocate(ALLOC_FRONT, arg0->height * arg0->width * 2);
-                    header = Arena_Allocate(ALLOC_PEEK, var_s0);
-                    CLEAR_DATA_CACHE(header, var_s0);
-                    bcopy(arg0->unk_04, header, var_s0);
+                    texture = Arena_Allocate(ALLOC_FRONT, texInfo->height * texInfo->width * 2);
+                    header = Arena_Allocate(ALLOC_PEEK, i);
+                    CLEAR_DATA_CACHE(header, i);
+                    bcopy(texInfo->segAddr, header, i);
                     if (*(s32*) header == (s32) 'MIO0') {
-                        mio0Decode(header, var_s3);
+                        mio0Decode(header, texture);
                     } else {
-                        bzero(var_s3, arg0->height * arg0->width * 2);
+                        bzero(texture, texInfo->height * texInfo->width * 2);
                     }
                     break;
                 default:
-                    var_s0 = arg0->height * arg0->width * 2;
-                    var_s3 = Arena_Allocate(ALLOC_FRONT, var_s0);
-                    func_80077CF0(arg0->unk_04, var_s0, var_s3);
+                    i = texInfo->height * texInfo->width * 2;
+                    texture = Arena_Allocate(ALLOC_FRONT, i);
+                    TextureCache_LoadAssetData(texInfo->segAddr, i, texture);
                     break;
             }
-            if (!var_s6) {
-                var_fp = var_s3;
-                var_s6 = true;
+            if (!foundFirst) {
+                firstTexture = texture;
+                foundFirst = true;
             }
-            var_s7[D_800E3A20].unk_00 = arg0->unk_04;
-            var_s7[D_800E3A20].unk_04 = var_s3;
-            D_800E3A20++;
+            cache[gTextureCacheCount].segAddr = texInfo->segAddr;
+            cache[gTextureCacheCount].texture = texture;
+            gTextureCacheCount++;
         }
-        arg0++;
+        texInfo++;
     }
-    return var_fp;
+    return firstTexture;
 }
 #endif
 
-void* func_80078104(void* arg0, s32 textureSize, s32 arg2, s32 arg3, bool arg4) {
-    s32 var_a3;
-    bool var_t0;
-    u8* var_s0;
-    u8* var_a2;
-    s32 sp24;
-    unk_800E33E0* var_v1 = D_800E33E0;
+void* TextureCache_LoadAndCache(void* segAddr, s32 textureSize, bool forceReload, bool isCompressed, bool noCache) {
+    s32 decodedSize;
+    bool alreadyCached;
+    u8* texture;
+    u8* header;
+    s32 combinedSize;
+    TextureCacheEntry* cache = gTextureCache;
 
-    var_t0 = false;
-    if ((arg2 == 0) && !arg4) {
-        for (var_a3 = 0; var_a3 < D_800E3A20; var_a3++) {
-            if (D_800E33E0[var_a3].unk_00 == arg0) {
-                var_t0 = true;
+    alreadyCached = false;
+    if (!forceReload && !noCache) {
+        for (decodedSize = 0; decodedSize < gTextureCacheCount; decodedSize++) {
+            if (gTextureCache[decodedSize].segAddr == segAddr) {
+                alreadyCached = true;
                 break;
             }
         }
     }
-    if (!var_t0 || arg4) {
-        if (arg3 == 0) {
-            if (!arg4) {
-                var_s0 = Arena_Allocate(ALLOC_FRONT, textureSize);
+    if (!alreadyCached || noCache) {
+        if (!isCompressed) {
+            if (!noCache) {
+                texture = Arena_Allocate(ALLOC_FRONT, textureSize);
             } else {
-                var_s0 = Arena_Allocate(ALLOC_PEEK, textureSize);
+                texture = Arena_Allocate(ALLOC_PEEK, textureSize);
             }
-            func_80077CF0(arg0, textureSize, var_s0);
+            TextureCache_LoadAssetData(segAddr, textureSize, texture);
         } else {
-            var_s0 = Arena_Allocate(ALLOC_PEEK, 8);
-            func_80077CF0(arg0, 8, var_s0);
-            var_a3 = func_800AA6BC(var_s0);
+            texture = Arena_Allocate(ALLOC_PEEK, 8);
+            TextureCache_LoadAssetData(segAddr, 8, texture);
+            decodedSize = func_800AA6BC(texture);
 
-            if (!arg4) {
-                var_s0 = Arena_Allocate(ALLOC_FRONT, var_a3);
-                var_a2 = Arena_Allocate(ALLOC_PEEK, textureSize);
+            if (!noCache) {
+                texture = Arena_Allocate(ALLOC_FRONT, decodedSize);
+                header = Arena_Allocate(ALLOC_PEEK, textureSize);
             } else {
-                if (var_a3 % 16) {
-                    var_a3 = ((var_a3 / 16) * 16) + 16;
+                if (decodedSize % 16) {
+                    decodedSize = ((decodedSize / 16) * 16) + 16;
                 }
                 if (textureSize % 16) {
                     textureSize = ((textureSize / 16) * 16) + 16;
                 }
 
-                sp24 = textureSize + var_a3;
-                var_s0 = Arena_Allocate(ALLOC_PEEK, sp24);
-                CLEAR_DATA_CACHE(var_s0, sp24);
-                var_a2 = var_s0 + var_a3;
+                combinedSize = textureSize + decodedSize;
+                texture = Arena_Allocate(ALLOC_PEEK, combinedSize);
+                CLEAR_DATA_CACHE(texture, combinedSize);
+                header = texture + decodedSize;
             }
 
-            CLEAR_DATA_CACHE(var_a2, textureSize);
-            func_80077CF0(arg0, textureSize, var_a2);
-            if (*(s32*) var_a2 == (s32) 'MIO0') {
-                mio0Decode(var_a2, var_s0);
+            CLEAR_DATA_CACHE(header, textureSize);
+            TextureCache_LoadAssetData(segAddr, textureSize, header);
+            if (*(s32*) header == (s32) 'MIO0') {
+                mio0Decode(header, texture);
             } else {
-                bzero(var_s0, var_a3);
+                bzero(texture, decodedSize);
             }
         }
-        if (!arg4) {
-            var_v1[D_800E3A20].unk_00 = arg0;
-            var_v1[D_800E3A20].unk_04 = var_s0;
-            D_800E3A20++;
+        if (!noCache) {
+            cache[gTextureCacheCount].segAddr = segAddr;
+            cache[gTextureCacheCount].texture = texture;
+            gTextureCacheCount++;
         }
     } else {
         // FAKE
-        return (var_v1 + var_a3)->unk_04;
+        return (cache + decodedSize)->texture;
     }
-    return var_s0;
+    return texture;
 }
 
-TexturePtr func_800783AC(void* arg0) {
+TexturePtr TextureCache_GetCached(void* segAddr) {
     s32 i;
 
-    for (i = 0; i < D_800E3A20; i++) {
-        if (arg0 == D_800E33E0[i].unk_00) {
-            return D_800E33E0[i].unk_04;
+    for (i = 0; i < gTextureCacheCount; i++) {
+        if (segAddr == gTextureCache[i].segAddr) {
+            return gTextureCache[i].texture;
         }
     }
     return NULL;
 }
 
-Gfx* func_800783F4(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, TexturePtr texture) {
+Gfx* TextureCache_Draw(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, TexturePtr texture) {
 
-    switch (arg1->unk_00) {
-        case 3:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
-                                 0);
-        case 4:
-        case 20:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 0, 0,
-                                 0);
-        case 5:
-        case 21:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 1, 0,
-                                 0);
-        case 2:
-        case 18:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 1,
-                                 0, 0);
-        case 1:
+    switch (texInfo->format) {
+        case TEX_CACHE_FMT_IA8:
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
+                                     2, false, false, false);
+        case TEX_CACHE_FMT_I4:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
+                                     3, false, false, false);
+        case TEX_CACHE_FMT_I4_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
+                                     3, true, false, false);
+        case TEX_CACHE_FMT_RGBA16_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
+                                     G_IM_SIZ_16b, 0, true, false, false);
+        case TEX_CACHE_FMT_RGBA16:
         default:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
-                                 0, 0);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
+                                     G_IM_SIZ_16b, 0, false, false, false);
     }
 }
 
-Gfx* func_8007857C(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, TexturePtr texture) {
+Gfx* TextureCache_DrawTinted(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, TexturePtr texture) {
 
-    switch (arg1->unk_00) {
-        case 3:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
-                                 0);
-        case 4:
-        case 20:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 0, 0,
-                                 0);
-        case 5:
-        case 21:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 1, 0,
-                                 0);
-        case 2:
-        case 18:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 1,
-                                 0, 0);
-        case 1:
+    switch (texInfo->format) {
+        case TEX_CACHE_FMT_IA8:
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
+                                     2, false, false, false);
+        case TEX_CACHE_FMT_I4:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
+                                     3, false, false, false);
+        case TEX_CACHE_FMT_I4_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
+                                     3, true, false, 0);
+        case TEX_CACHE_FMT_RGBA16_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
+                                     G_IM_SIZ_16b, 1, true, false, false);
+        case TEX_CACHE_FMT_RGBA16:
         default:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0,
-                                 0, 0);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
+                                     G_IM_SIZ_16b, 1, false, false, false);
     }
 }
 
-Gfx* func_8007870C(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, TexturePtr texture, s32 arg5, s32 arg6) {
+Gfx* TextureCache_DrawMirror(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, TexturePtr texture, bool mirrorS,
+                             bool mirrorT) {
 
-    switch (arg1->unk_00) {
-        case 3:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
-                                 0);
-        case 4:
-        case 20:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 0, 0,
-                                 0);
-        case 5:
-        case 21:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_I, G_IM_SIZ_4b, 3, 1, 0,
-                                 0);
-        case 2:
-        case 18:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 1,
-                                 arg5, arg6);
-        case 1:
+    switch (texInfo->format) {
+        case TEX_CACHE_FMT_IA8:
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
+                                     2, false, false, false);
+        case TEX_CACHE_FMT_I4:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
+                                     3, false, false, false);
+        case TEX_CACHE_FMT_I4_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_I, G_IM_SIZ_4b,
+                                     3, true, false, false);
+        case TEX_CACHE_FMT_RGBA16_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
+                                     G_IM_SIZ_16b, 0, true, mirrorS, mirrorT);
+        case TEX_CACHE_FMT_RGBA16:
         default:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0,
-                                 arg5, arg6);
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
+                                     G_IM_SIZ_16b, 0, false, mirrorS, mirrorT);
     }
 }
 
-Gfx* func_800788A4(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, TexturePtr texture, f32 arg5, f32 arg6) {
+Gfx* TextureCache_DrawScaled(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, TexturePtr texture, f32 scaleX,
+                             f32 scaleY) {
 
-    switch (arg1->unk_00) {
-        case 3:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
-                                 0);
-        case 4:
-        case 20:
-            return func_8007CDB0(gfx, texture, left, top, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
-                                 G_IM_SIZ_4b, 3, 0, 0);
-        case 5:
-        case 21:
-            return func_8007CDB0(gfx, texture, left, top, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
-                                 G_IM_SIZ_4b, 3, 0, 0);
-        case 2:
-        case 18:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 1,
-                                 0, 0);
-        case 1:
+    switch (texInfo->format) {
+        case TEX_CACHE_FMT_IA8:
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
+                                     2, false, false, false);
+        case TEX_CACHE_FMT_I4:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
+            return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
+                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+        case TEX_CACHE_FMT_I4_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
+            return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
+                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+        case TEX_CACHE_FMT_RGBA16_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
+                                     G_IM_SIZ_16b, 0, true, false, false);
+        case TEX_CACHE_FMT_RGBA16:
         default:
-            return func_8007CDB0(gfx, texture, left, top, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_RGBA,
-                                 G_IM_SIZ_16b, 0, 0, 0);
+            return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
+                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, false, false);
     }
 }
 
-Gfx* func_80078A4C(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, TexturePtr texture, f32 arg5, f32 arg6) {
+Gfx* TextureCache_DrawScaledFlipped(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, TexturePtr texture, f32 scaleX,
+                                    f32 scaleY) {
 
-    switch (arg1->unk_00) {
-        case 3:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
-                                 0);
-        case 4:
-        case 20:
-            return func_8007CDB0(gfx, texture, left, top, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
-                                 G_IM_SIZ_4b, 3, 0, 0);
-        case 5:
-        case 21:
-            return func_8007CDB0(gfx, texture, left, top, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
-                                 G_IM_SIZ_4b, 3, 0, 0);
-        case 2:
-        case 18:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 1,
-                                 0, 0);
-        case 1:
+    switch (texInfo->format) {
+        case TEX_CACHE_FMT_IA8:
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
+                                     2, false, false, false);
+        case TEX_CACHE_FMT_I4:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
+            return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
+                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+        case TEX_CACHE_FMT_I4_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
+            return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
+                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+        case TEX_CACHE_FMT_RGBA16_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_RGBA,
+                                     G_IM_SIZ_16b, 0, true, false, false);
+        case TEX_CACHE_FMT_RGBA16:
         default:
-            return func_8007CDB0(gfx, texture, left, top, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_RGBA,
-                                 G_IM_SIZ_16b, 0, 0, 1);
+            return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
+                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, false, true);
     }
 }
 
-Gfx* func_80078BF8(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, TexturePtr texture, f32 arg5, f32 arg6) {
+Gfx* TextureCache_DrawScaledTinted(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, TexturePtr texture, f32 scaleX,
+                                   f32 scaleY) {
 
-    switch (arg1->unk_00) {
-        case 3:
-            return func_8007B14C(gfx, texture, left, top, arg1->width, arg1->height, G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0,
-                                 0);
-        case 4:
-        case 20:
-            return func_8007CDB0(gfx, texture, left, top, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
-                                 G_IM_SIZ_4b, 3, 0, 0);
-        case 5:
-        case 21:
-            return func_8007CDB0(gfx, texture, left, top, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_I,
-                                 G_IM_SIZ_4b, 3, 0, 0);
-        case 2:
-        case 18:
-            return func_8007CDB0(gfx, texture, left, top, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_RGBA,
-                                 G_IM_SIZ_16b, 1, 1, 0);
-        case 1:
+    switch (texInfo->format) {
+        case TEX_CACHE_FMT_IA8:
+            return TextureUtils_Draw(gfx, texture, left, top, texInfo->width, texInfo->height, G_IM_FMT_IA, G_IM_SIZ_8b,
+                                     2, false, false, false);
+        case TEX_CACHE_FMT_I4:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4):
+            return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
+                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+        case TEX_CACHE_FMT_I4_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_I4_TILED):
+            return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
+                                           G_IM_FMT_I, G_IM_SIZ_4b, 3, false, false);
+        case TEX_CACHE_FMT_RGBA16_TILED:
+        case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
+            return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
+                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, true, false);
+        case TEX_CACHE_FMT_RGBA16:
         default:
-            return func_8007CDB0(gfx, texture, left, top, arg1->width, arg1->height, arg5, arg6, G_IM_FMT_RGBA,
-                                 G_IM_SIZ_16b, 1, 0, 0);
+            return TextureUtils_DrawScaled(gfx, texture, left, top, texInfo->width, texInfo->height, scaleX, scaleY,
+                                           G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, false, false);
     }
 }
 
 // BAD RETURN
-Gfx* func_80078DB4(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, TexturePtr texture, u32 arg5, s32 arg6, s32 arg7,
-                   f32 arg8, f32 arg9) {
-    switch (arg5) {
+Gfx* TextureCache_DrawWithMode(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, TexturePtr texture, u32 mode,
+                               bool mirrorS, bool mirrorT, f32 scaleX, f32 scaleY) {
+    switch (mode) {
         case 0:
-            return func_800783F4(gfx, arg1, left, top, texture);
+            return TextureCache_Draw(gfx, texInfo, left, top, texture);
         case 1:
-            return func_8007857C(gfx, arg1, left, top, texture);
+            return TextureCache_DrawTinted(gfx, texInfo, left, top, texture);
         case 2:
-            return func_8007870C(gfx, arg1, left, top, texture, arg6, arg7);
+            return TextureCache_DrawMirror(gfx, texInfo, left, top, texture, mirrorS, mirrorT);
         case 3:
-            return func_800788A4(gfx, arg1, left, top, texture, arg8, arg9);
+            return TextureCache_DrawScaled(gfx, texInfo, left, top, texture, scaleX, scaleY);
         case 5:
-            return func_80078A4C(gfx, arg1, left, top, texture, arg8, arg9);
+            return TextureCache_DrawScaledFlipped(gfx, texInfo, left, top, texture, scaleX, scaleY);
         case 4:
-            return func_80078BF8(gfx, arg1, left, top, texture, arg8, arg9);
+            return TextureCache_DrawScaledTinted(gfx, texInfo, left, top, texture, scaleX, scaleY);
     }
 }
 
-Gfx* func_80078EA0_impl(Gfx* gfx, unk_80077D50* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7,
-                        f32 arg8, bool arg9) {
+Gfx* TextureCache_DrawList_impl(Gfx* gfx, CacheTexInfo* texInfo, s32 left, s32 top, u32 mode, bool mirrorS,
+                                bool mirrorT, f32 scaleX, f32 scaleY, bool singleEntry) {
     TexturePtr texture;
 
-    while (arg1->unk_04 != 0) {
+    while (texInfo->segAddr != 0) {
         // FAKE
         if (gfx) {}
 
-        texture = func_800783AC(arg1->unk_04);
+        texture = TextureCache_GetCached(texInfo->segAddr);
         if (texture != NULL) {
-            gfx = func_80078DB4(gfx, arg1, left, top, texture, arg4, arg5, arg6, arg7, arg8);
+            gfx = TextureCache_DrawWithMode(gfx, texInfo, left, top, texture, mode, mirrorS, mirrorT, scaleX, scaleY);
         }
 #ifdef EXPANSION_KIT
-        if (arg9) {
+        if (singleEntry) {
             break;
         }
 #endif
-        arg1++;
+        texInfo++;
     }
     return gfx;
 }
 
-Gfx* func_80078F80_impl(Gfx* gfx, unk_800E3F28* arg1, s32 left, s32 top, u32 arg4, s32 arg5, s32 arg6, f32 arg7,
-                        f32 arg8, bool arg9) {
+Gfx* TextureCache_DrawSwapSlot_impl(Gfx* gfx, TexSwapSlot* slot, s32 left, s32 top, u32 mode, bool mirrorS,
+                                    bool mirrorT, f32 scaleX, f32 scaleY, bool singleEntry) {
     TexturePtr texture;
-    unk_80077D50* var_s0;
-    s32 var;
+    CacheTexInfo* texInfo;
+    s32 slotTextureId;
 
-    var_s0 = arg1->unk_00[arg1->unk_04].unk_00;
+    texInfo = slot->entries[slot->entryIndex].CacheTexInfo;
 
-    while (var_s0->unk_04 != 0) {
+    while (texInfo->segAddr != 0) {
 #ifdef EXPANSION_KIT
         if (gfx) {}
 #endif
-        var = arg1->unk_0A;
-        switch (var) {
+        slotTextureId = slot->slotTextureId;
+        switch (slotTextureId) {
             case 0:
-                texture = arg1->unk_0C;
+                texture = slot->textureA;
                 break;
             default:
-                texture = arg1->unk_10;
+                texture = slot->textureB;
                 break;
         }
 
         if (texture != NULL) {
-            gfx = func_80078DB4(gfx, var_s0, left, top, texture, arg4, arg5, arg6, arg7, arg8);
+            gfx = TextureCache_DrawWithMode(gfx, texInfo, left, top, texture, mode, mirrorS, mirrorT, scaleX, scaleY);
         }
 #ifdef EXPANSION_KIT
-        if (arg9) {
+        if (singleEntry) {
             break;
         }
 #endif
-        var_s0++;
+        texInfo++;
     }
     return gfx;
 }
 
-void func_80079080(void) {
+void TextureCache_ClearLoadQueue(void) {
     s32 i;
 
-    D_800E4068[0].unk_00 = NULL;
+    gQueuedTextureLoads[0].CacheTexInfo = NULL;
 
     for (i = 1; i < 17; i++) {}
 }
 
-void func_800790A4(unk_80077D50* arg0, TexturePtr arg1) {
-    unk_800E4068* var_v0;
+void TextureCache_QueueLoad(CacheTexInfo* CacheTexInfo, TexturePtr texture) {
+    QueuedTextureLoad* load;
 
-    var_v0 = D_800E4068;
-    while (var_v0->unk_00 != NULL) {
-        var_v0++;
+    load = gQueuedTextureLoads;
+    while (load->CacheTexInfo != NULL) {
+        load++;
     }
-    var_v0->unk_00 = arg0;
-    var_v0->unk_04 = arg1;
+    load->CacheTexInfo = CacheTexInfo;
+    load->texture = texture;
 }
 
-void func_800790D4(void) {
-    s32 var_v1;
+void TextureCache_ProcessLoadQueue(void) {
+    s32 alignedWidth;
     u8* header;
     size_t size;
-    unk_80077D50* temp_s1;
-    unk_800E4068* var_s3;
+    CacheTexInfo* texInfo;
+    QueuedTextureLoad* load;
 
-    var_s3 = D_800E4068;
+    load = gQueuedTextureLoads;
 
     while (true) {
-        temp_s1 = var_s3->unk_00;
-        if (temp_s1 != NULL) {
-            switch (temp_s1->unk_00) {
-                case 4:
-                case 5:
-                    if (temp_s1->width % 16) {
-                        var_v1 = ((temp_s1->width + 16) / 16) * 16;
+        texInfo = load->CacheTexInfo;
+        if (texInfo != NULL) {
+            switch (texInfo->format) {
+                case TEX_CACHE_FMT_I4:
+                case TEX_CACHE_FMT_I4_TILED:
+                    if (texInfo->width % 16) {
+                        alignedWidth = ((texInfo->width + 16) / 16) * 16;
                     } else {
-                        var_v1 = temp_s1->width;
+                        alignedWidth = texInfo->width;
                     }
-                    func_80077CF0(temp_s1->unk_04, temp_s1->height * var_v1, var_s3->unk_04);
+                    TextureCache_LoadAssetData(texInfo->segAddr, texInfo->height * alignedWidth, load->texture);
                     break;
-                case 17:
-                case 18:
-                    if (temp_s1->compressedSize != 0) {
-                        size = ALIGN_2(temp_s1->compressedSize) + 2;
+                case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16):
+                case TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16_TILED):
+                    if (texInfo->compressedSize != 0) {
+                        size = ALIGN_2(texInfo->compressedSize) + 2;
                     } else {
                         size = 0x400;
                     }
                     header = Arena_Allocate(ALLOC_PEEK, size);
                     CLEAR_DATA_CACHE(header, size);
-                    func_80077CF0(temp_s1->unk_04, size, header);
+                    TextureCache_LoadAssetData(texInfo->segAddr, size, header);
                     if (*(s32*) header == (s32) 'MIO0') {
-                        mio0Decode(header, var_s3->unk_04);
+                        mio0Decode(header, load->texture);
                     } else {
-                        bzero(var_s3->unk_04, temp_s1->height * temp_s1->width * 2);
+                        bzero(load->texture, texInfo->height * texInfo->width * 2);
                     }
                     break;
                 default:
-                    size = temp_s1->height * temp_s1->width;
-                    func_80077CF0(temp_s1->unk_04, size * 2, var_s3->unk_04);
+                    size = texInfo->height * texInfo->width;
+                    TextureCache_LoadAssetData(texInfo->segAddr, size * 2, load->texture);
                     break;
             }
-            var_s3->unk_00 = NULL;
-            var_s3++;
+            load->CacheTexInfo = NULL;
+            load++;
         } else {
             break;
         }
     }
 }
 
-void func_800792A8(void) {
+void TextureCache_ClearSwapSlots(void) {
     s32 i;
 
     for (i = 0; i < 16; i++) {
-        D_800E3F28[i].unk_08 = 0;
+        gTextureSwapSlots[i].allocated = 0;
     }
 }
 
-s32 func_800792D8(unk_800792D8* arg0) {
+s32 TextureCache_AllocSwapSlot(TextureSwapEntry* entries) {
     s32 i = 0;
-    u8* var_v0;
+    UNUSED s32 pad;
 
-    while (D_800E3F28[i].unk_08 != 0) {
+    while (gTextureSwapSlots[i].allocated != 0) {
         if (++i >= 16) {
             return -1;
         }
     }
 
-    D_800E3F28[i].unk_00 = arg0;
-    D_800E3F28[i].unk_04 = -1;
-    D_800E3F28[i].unk_06 = 0;
-    D_800E3F28[i].unk_08 = -0x8000;
+    gTextureSwapSlots[i].entries = entries;
+    gTextureSwapSlots[i].entryIndex = -1;
+    gTextureSwapSlots[i].unk_06 = 0;
+    gTextureSwapSlots[i].allocated = -0x8000;
 
-    if (arg0[0].unk_00 != NULL) {
-        D_800E3F28[i].unk_0C = func_80077D50_impl(arg0[0].unk_00, 1, true);
+    if (entries[0].CacheTexInfo != NULL) {
+        gTextureSwapSlots[i].textureA = TextureCache_LoadCacheTexInfoList_impl(entries[0].CacheTexInfo, true, true);
     }
 
-    D_800E3F28[i].unk_10 = (arg0[1].unk_00 != NULL) ? func_80077D50_impl(arg0[1].unk_00, 1, true)
-                                                    : func_80077D50_impl(arg0[0].unk_00, 1, true);
-    D_800E3F28[i].unk_0A = 0;
+    gTextureSwapSlots[i].textureB = (entries[1].CacheTexInfo != NULL)
+                                        ? TextureCache_LoadCacheTexInfoList_impl(entries[1].CacheTexInfo, true, true)
+                                        : TextureCache_LoadCacheTexInfoList_impl(entries[0].CacheTexInfo, true, true);
+    gTextureSwapSlots[i].slotTextureId = 0;
     return i;
 }
 
-void func_800793E8(s32 arg0, s32 arg1, unk_800792D8* arg2) {
-    unk_800E3F28* sp1C;
-    s32 temp_a3;
+void TextureCache_SetSwapSlotEntry(s32 slotIndex, s32 entryIndex, TextureSwapEntry* entries) {
+    UNUSED s32 pad;
+    s32 entryTexInfo;
 
-    D_800E3F28[arg0].unk_04 = arg1;
-    D_800E3F28[arg0].unk_00 = arg2;
+    gTextureSwapSlots[slotIndex].entryIndex = entryIndex;
+    gTextureSwapSlots[slotIndex].entries = entries;
     // FAKE
-    D_800E3F28[arg0].unk_06 = (arg2 + arg1)->unk_04;
-    temp_a3 = arg2[D_800E3F28[arg0].unk_04].unk_00;
+    gTextureSwapSlots[slotIndex].unk_06 = (entries + entryIndex)->unk_04;
+    entryTexInfo = entries[gTextureSwapSlots[slotIndex].entryIndex].CacheTexInfo;
 
-    if (D_800E3F28[arg0].unk_0A != 0) {
-        func_800790A4(temp_a3, D_800E3F28[arg0].unk_0C);
-        D_800E3F28[arg0].unk_0A = 0;
+    if (gTextureSwapSlots[slotIndex].slotTextureId != 0) {
+        TextureCache_QueueLoad(entryTexInfo, gTextureSwapSlots[slotIndex].textureA);
+        gTextureSwapSlots[slotIndex].slotTextureId = 0;
     } else {
-        func_800790A4(temp_a3, D_800E3F28[arg0].unk_10);
-        D_800E3F28[arg0].unk_0A = 1;
+        TextureCache_QueueLoad(entryTexInfo, gTextureSwapSlots[slotIndex].textureB);
+        gTextureSwapSlots[slotIndex].slotTextureId = 1;
     }
 }
 
@@ -839,9 +845,9 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
         case OBJECT_FREE:
             break;
         case OBJECT_FRAMEBUFFER:
-            gfx = func_8007AB88(gfx);
-            gfx = func_8007AE70(gfx);
-            gfx = func_8007ABA4(gfx);
+            gfx = TextureUtils_SetupFramebufferView(gfx);
+            gfx = TextureUtils_LoadFramebufferTexture(gfx);
+            gfx = TextureUtils_SetFramebuffer(gfx);
             break;
         case OBJECT_TITLE_BACKGROUND:
             gfx = Title_BackgroundDraw(gfx, object);
@@ -850,10 +856,10 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
             gfx = func_i4_8011B3DC(gfx, object);
             break;
         case OBJECT_12:
-            gfx = func_8007AF40(gfx, 118, 164, 203, 217, 255, 255, 255, 48);
+            gfx = TextureUtils_DrawTranslucentRectangle(gfx, 118, 164, 203, 217, 255, 255, 255, 48);
             break;
         case OBJECT_13:
-            gfx = func_8007AE8C(gfx, 12, 8, 307, 231, 0, 0, 0, 0);
+            gfx = TextureUtils_DrawDitheredRectangle(gfx, 12, 8, 307, 231, 0, 0, 0, 0);
             break;
         case OBJECT_TITLE_LOGO:
             gfx = Title_LogoDraw(gfx, object);
@@ -882,7 +888,7 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
             gfx = MachineSelect_BackgroundDraw(gfx);
             break;
         case OBJECT_MACHINE_SETTINGS_BACKGROUND:
-            gfx = func_8007AC48(gfx, 24, 24, 24);
+            gfx = TextureUtils_DrawBackgroundColor(gfx, 24, 24, 24);
             break;
         case OBJECT_MACHINE_SELECT_HEADER:
             gfx = MachineSelect_HeaderDraw(gfx, object);
@@ -986,7 +992,7 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
             break;
         case OBJECT_100:
         case OBJECT_140:
-            gfx = func_8007AC48(gfx, 0, 0, 0);
+            gfx = TextureUtils_DrawBackgroundColor(gfx, 0, 0, 0);
             break;
         case OBJECT_COURSE_SELECT_BACKGROUND:
             gfx = CourseSelect_BackgroundDraw(gfx, object);
@@ -1066,21 +1072,21 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
                 MainMenu_UnlockEverythingUpdate(&gObjects[i]);
                 break;
             case OBJECT_32:
-                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                gTextureSwapSlots[OBJECT_CACHE_INDEX(&gObjects[i])].entryIndex = 0;
                 func_i4_80119BB8(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SETTINGS_PORTRAIT_0:
             case OBJECT_MACHINE_SETTINGS_PORTRAIT_1:
             case OBJECT_MACHINE_SETTINGS_PORTRAIT_2:
             case OBJECT_MACHINE_SETTINGS_PORTRAIT_3:
-                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                gTextureSwapSlots[OBJECT_CACHE_INDEX(&gObjects[i])].entryIndex = 0;
                 MachineSettings_PortraitUpdate(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SELECT_PORTRAIT_0:
             case OBJECT_MACHINE_SELECT_PORTRAIT_1:
             case OBJECT_MACHINE_SELECT_PORTRAIT_2:
             case OBJECT_MACHINE_SELECT_PORTRAIT_3:
-                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                gTextureSwapSlots[OBJECT_CACHE_INDEX(&gObjects[i])].entryIndex = 0;
                 MachineSelect_PortraitUpdate(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SELECT_CURSOR_NUM_0:
@@ -1099,7 +1105,7 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
                 MachineSettings_MachineUpdate(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SETTINGS_NAME_CARD:
-                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                gTextureSwapSlots[OBJECT_CACHE_INDEX(&gObjects[i])].entryIndex = 0;
                 MachineSettings_NameCardUpdate(&gObjects[i]);
                 break;
             case OBJECT_MACHINE_SELECT_OK:
@@ -1137,14 +1143,14 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
                 break;
 #ifdef EXPANSION_KIT
             case OBJECT_170:
-                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                gTextureSwapSlots[OBJECT_CACHE_INDEX(&gObjects[i])].entryIndex = 0;
                 func_xk3_80134A48(&gObjects[i]);
                 break;
             case OBJECT_172:
                 func_xk3_80134B04(&gObjects[i]);
                 break;
             case OBJECT_174:
-                D_800E3F28[OBJECT_CACHE_INDEX(&gObjects[i])].unk_04 = 0;
+                gTextureSwapSlots[OBJECT_CACHE_INDEX(&gObjects[i])].entryIndex = 0;
                 func_xk3_8012F6A8(&gObjects[i]);
                 break;
 #endif
@@ -1183,10 +1189,10 @@ Object* Object_Get(s32 cmdId) {
 extern s32 gGameMode;
 
 void func_80079EC8(void) {
-    func_80077D44();
+    TextureCache_ResetCache();
     Object_ClearAll();
-    func_800792A8();
-    func_80079080();
+    TextureCache_ClearSwapSlots();
+    TextureCache_ClearLoadQueue();
     if (gGameMode != GAMEMODE_CREATE_MACHINE) {
         func_8007E2B4();
     }
@@ -1194,8 +1200,8 @@ void func_80079EC8(void) {
 
 void func_80079F1C(void) {
     Object_ClearAll();
-    func_800792A8();
-    func_80079080();
+    TextureCache_ClearSwapSlots();
+    TextureCache_ClearLoadQueue();
     func_8007E2B4();
 }
 

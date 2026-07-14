@@ -206,7 +206,8 @@ void EndingCutsceneEffects_InitPodiumRacerCharacters(void) {
             } else if ((character == JODY_SUMMER) && IS_SUPER_MACHINE(gRacers[i].customType)) {
                 j = 32;
             }
-            sPodiumRacerPortraitTexture = func_80078104(sFullPortraits[j], 180 * 245 * sizeof(u16), 0, 1, 1);
+            sPodiumRacerPortraitTexture =
+                TextureCache_LoadAndCache(sFullPortraits[j], 180 * 245 * sizeof(u16), false, true, true);
 
             // Resize texture
             for (j = 0; j != 42; j++) {
@@ -327,18 +328,18 @@ void EndingCutsceneEffects_Init(void) {
         D_i7_8014C020 = false;
         if (gPlayer1OverallPosition == 1) {
             if (gCupType == X_CUP) {
-                func_80077CF0(D_i7_8014AD18[Math_Rand1() % 4], 0x200, sCharacterFireworkBuffer);
+                TextureCache_LoadAssetData(D_i7_8014AD18[Math_Rand1() % 4], 0x200, sCharacterFireworkBuffer);
             } else if ((gRacers[0].character == CAPTAIN_FALCON) && IS_SUPER_MACHINE(gRacers[0].customType)) {
-                func_80077CF0(D_i7_8014AD0C, 0x200, sCharacterFireworkBuffer);
+                TextureCache_LoadAssetData(D_i7_8014AD0C, 0x200, sCharacterFireworkBuffer);
             } else if ((gRacers[0].character == SAMURAI_GOROH) && IS_SUPER_MACHINE(gRacers[0].customType)) {
-                func_80077CF0(D_i7_8014AD10, 0x200, sCharacterFireworkBuffer);
+                TextureCache_LoadAssetData(D_i7_8014AD10, 0x200, sCharacterFireworkBuffer);
             } else if ((gRacers[0].character == JODY_SUMMER) && IS_SUPER_MACHINE(gRacers[0].customType)) {
-                func_80077CF0(D_i7_8014AD14, 0x200, sCharacterFireworkBuffer);
+                TextureCache_LoadAssetData(D_i7_8014AD14, 0x200, sCharacterFireworkBuffer);
             } else {
-                func_80077CF0(D_i7_8014AC94[gRacers[0].character], 0x200, sCharacterFireworkBuffer);
+                TextureCache_LoadAssetData(D_i7_8014AC94[gRacers[0].character], 0x200, sCharacterFireworkBuffer);
             }
         } else {
-            func_80077CF0(D_i7_8014AD28, 0x200, sCharacterFireworkBuffer);
+            TextureCache_LoadAssetData(D_i7_8014AD28, 0x200, sCharacterFireworkBuffer);
         }
     }
 }
