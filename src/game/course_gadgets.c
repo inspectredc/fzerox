@@ -105,7 +105,7 @@ extern CourseInfo* gCurrentCourseInfo;
 extern CourseFeaturesInfo gCourseFeaturesInfo;
 extern unk_80128C94* D_80128C94;
 
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
 #define LANDMINE_ANGLE (1.1547f)
 #else
 #define LANDMINE_ANGLE (temp_fs0)
@@ -123,7 +123,7 @@ void Course_LandminesViewInteractDataInit(void) {
     f32 lengthProportionAlongSegment;
     Vec3f pos;
     Mtx3F segmentBasis;
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     f32 temp_fs0;
 #endif
 
@@ -140,7 +140,7 @@ void Course_LandminesViewInteractDataInit(void) {
 
     for (i = 0; i < courseFeaturesInfo->featureCount; i++) {
         feature = &courseFeaturesInfo->features[i];
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
         temp_fs0 = 1.1547f; // 1 / sin(π / 3)
 #endif
         if (feature->featureType != COURSE_FEATURE_LANDMINE) {
@@ -3846,8 +3846,7 @@ void Course_Load(s32 courseIndex) {
         return;
     } else if (courseIndex >= COURSE_EDIT_1) {
         diskCourseIndex = courseIndex - COURSE_EDIT_1;
-#ifndef EXPANSION_KIT
-#ifndef VERSION_PAL
+#if BUILD_REVISION <= REVISION_B
         if (func_800760F8() != 2) {
             osWritebackDCacheAll();
             LeoFault_DrawIsDiskInserted();
@@ -3863,7 +3862,7 @@ void Course_Load(s32 courseIndex) {
             PRINTF("ENTRY LOAD OK\n");
         }
 #endif
-#else
+#ifdef EXPANSION_KIT
         PRINTF("ENTRY CHECK\n");
         PRINTF("ENTRY CHECK NONE(DEFAULT COURSE)\n");
         diskCourseIndex = courseIndex - COURSE_EDIT_1;

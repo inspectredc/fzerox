@@ -3,7 +3,7 @@
 #include "leo/mfs.h"
 #include "fzx_thread.h"
 
-#ifdef VERSION_PAL
+#if BUILD_REVISION == REVISION_C
 s32 sSLLeoReadWriteBlocksSize;
 #endif
 LEOStatus D_800E32E0;
@@ -11,7 +11,7 @@ LEOCmd D_800E32E8;
 OSMesgQueue sSLLeoMesgQueue;
 OSMesg sSLLeoMsgBuf[1];
 s32 sSLLeoError;
-#if defined(VERSION_JP) || defined(VERSION_PAL)
+#if (BUILD_REVISION == REVISION_A) || (BUILD_REVISION == REVISION_C)
 UNUSED s32 D_800E3318_JP;
 #endif
 s32 D_800E3328;
@@ -25,7 +25,7 @@ LEODiskID D_800CD2B0 = { 0 };
 bool D_800CD2D0 = false;
 OSThread* D_800CD2D4 = NULL;
 
-#ifdef VERSION_PAL
+#if BUILD_REVISION == REVISION_C
 void func_80075070(void) {
     s32 i;
 
@@ -82,7 +82,7 @@ bool func_800752EC(void) {
             return func_800752EC();
         case LEO_ERROR_MEDIUM_NOT_PRESENT:
         case LEO_ERROR_MEDIUM_MAY_HAVE_CHANGED:
-#ifdef VERSION_PAL
+#if BUILD_REVISION == REVISION_C
             func_80075228();
 #endif
             return false;
@@ -256,7 +256,7 @@ s32 func_800758F8(void) {
         case LEO_ERROR_GOOD:
         case LEO_ERROR_MEDIUM_NOT_PRESENT:
         case LEO_ERROR_MEDIUM_MAY_HAVE_CHANGED:
-#ifdef VERSION_PAL
+#if BUILD_REVISION == REVISION_C
             func_80075228();
 #endif
             break;
@@ -290,7 +290,7 @@ s32 SLLeoReadWrite_DATA(LEOCmd* cmdBlock, s32 direction, u32 lba, void* vAddr, u
         while (func_800752EC()) {}
         while (SLCheckDiskInsert()) {}
     }
-#ifdef VERSION_PAL
+#if BUILD_REVISION == REVISION_C
     LeoLBAToByte(lba, nLbas, &sSLLeoReadWriteBlocksSize);
     osInvalDCache(osPhysicalToVirtual(vAddr), sSLLeoReadWriteBlocksSize);
 #endif
@@ -366,7 +366,7 @@ s32 SLLeoReadWrite(LEOCmd* cmdBlock, s32 direction, s32 lba, void* vAddr, u32 nL
         while (func_800752EC()) {}
         while (SLCheckDiskInsert()) {}
     }
-#ifdef VERSION_PAL
+#if BUILD_REVISION == REVISION_C
     LeoLBAToByte(lba, nLbas, &sSLLeoReadWriteBlocksSize);
     osInvalDCache(osPhysicalToVirtual(vAddr), sSLLeoReadWriteBlocksSize);
 #endif
@@ -478,7 +478,7 @@ void func_80076310(void) {
 s32 SLLeoCreateManager(void) {
 
     osCreateMesgQueue(&sSLLeoMesgQueue, sSLLeoMsgBuf, ARRAY_COUNT(sSLLeoMsgBuf));
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     sSLLeoError = LeoCJCreateLeoManager(149, 150, sSLLeoCmdMsgBuf, ARRAY_COUNT(sSLLeoCmdMsgBuf));
 #else
     sSLLeoError = LeoCACreateLeoManager(149, 150, sSLLeoCmdMsgBuf, ARRAY_COUNT(sSLLeoCmdMsgBuf));
@@ -512,12 +512,12 @@ void SLLeoResetClear(void) {
     while (true) {}
 }
 
-#ifndef VERSION_PAL
+#if BUILD_REVISION <= REVISION_B
 void func_8007647C(void) {
 }
 #endif
 
-#ifdef VERSION_PAL
+#if BUILD_REVISION == REVISION_C
 void func_800763B0(void) {
 
     switch (func_800753EC()) {

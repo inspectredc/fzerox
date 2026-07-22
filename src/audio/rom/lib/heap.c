@@ -1,7 +1,7 @@
 #include "global.h"
 #include "audio.h"
 
-#ifndef VERSION_JP
+#if BUILD_REVISION >= REVISION_B
 static char D_800D1130[] = "Warning:Kill Note  %x \n";
 static char D_800D1148[] = "Kill Voice %d (ID %d) %d\n";
 static char D_800D1164[] = "Warning: Running Sequence's data disappear!\n";

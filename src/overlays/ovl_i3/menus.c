@@ -31,7 +31,7 @@ s32 sMenuStateFlags;
 s32 D_i3_801419B4;
 s32 sPlayer1Lives;
 bool gShowNameEntryMenu;
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
 s32 D_i3_8006D0B4;
 #endif
 UNUSED s32 D_i3_801419C0[4];
@@ -388,7 +388,7 @@ void Menus_Init(void) {
         sVsSlotSpeed[i][VS_SLOT_1] = sVsSlotInitialSpeed[VS_SLOT_1];
         sVsSlotSpeed[i][VS_SLOT_2] = sVsSlotInitialSpeed[VS_SLOT_2];
 
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
         sPlayerGameoverState[i] = D_i3_80141CF0[i] = sPlayerFinalLapTimer[i] = sPlayerBoosterOkTimer[i] =
             sPlayerWinnerLoserFinishGameoverTimer[i] = D_i3_80141B78[i] = sPlayerResultsTimer[i] =
                 sPlayerLoserFinishTimer[i] = sFinishGameoverTimer[i] = sPlayerFinishInitialized[i] =
@@ -2547,7 +2547,7 @@ Gfx* Menus_DrawGhostSaveMenu(Gfx* gfx) {
     gSPDisplayList(gfx++, aMenuTextTlutSetupDL);
     gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_NEW_GHOST, 83, 45);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_SAVED_GHOST, 51, 109);
     gfx = Menus_DrawRaceMenuTexture(gfx, RACE_MENU_OVERWRITE_DATA1, 51, 171);
@@ -2625,7 +2625,7 @@ Gfx* Menus_DrawTimeAttackFinishMenu(Gfx* gfx) {
         sGeneralRaceMenuScissorBoxTimer = 0;
     }
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if ((sGeneralRaceMenuScissorBoxTimer == 1) && (gCourseIndex >= COURSE_EDIT_1) && (gCourseIndex < COURSE_X_1)) {
         Save_SaveCourseRecordProfiles(gCourseIndex);
     }
@@ -4230,7 +4230,7 @@ Gfx* Menus_DrawResultsBox(Gfx* gfx, s32 boxScale) {
     return gfx;
 }
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 const char* sCharacterNames[] = {
     "キャプテン ファルコン",
     "ドクター スチュワート",
@@ -4263,7 +4263,7 @@ const char* sCharacterNames[] = {
     "アービン ゴードン",
     "ブラッド ファルコン",
 };
-#else
+#else // LANGUAGE_ENG
 const char* sCharacterNames[] = {
     "CAPTAIN FALCON", "Dr. STEWART", "PICO",           "SAMURAI GOROH", "JODY SUMMER",   "MIGHTY GAZELLE",
     "Mr. EAD",        "BABA",        "OCTOMAN",        "GOMAR&SHIOH",   "KATE ALEN",     "ROGER BUSTER",
@@ -4280,9 +4280,9 @@ Gfx* Menus_DrawResultsCharacterName(Gfx* gfx, s32 highlightType, s32 character, 
 
 Gfx* Menus_DrawResultsRetireStatus(Gfx* gfx, s32 highlightType, s32 left, s32 top) {
     gfx = Menus_SetOptionColor(gfx, highlightType);
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     return Font_DrawString(gfx, left, top, "リタイア", 1, FONT_SET_4, 0);
-#else
+#else // LANGUAGE_ENG
     return Font_DrawString(gfx, left, top, "RETIRE", 1, FONT_SET_4, 0);
 #endif
 }
@@ -5284,9 +5284,9 @@ Gfx* Menus_Draw(Gfx* gfx) {
     if (gNumPlayers == 1) {
         if (gGameMode == GAMEMODE_DEATH_RACE) {
             //! @bug These speed checks do not account for PAL changes correctly
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
             if (gRacers[playerIndex].speed < 400.0f / SPEED_CONVERSION) {
-#else
+#else // OS_TV_TYPE_PAL
             if (gRacers[playerIndex].speed < 18.518517f) {
 #endif
                 D_80141900++;
@@ -5294,9 +5294,9 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 D_80141900 = 0;
             }
         } else {
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
             if (gRacers[playerIndex].speed < 200.0f / SPEED_CONVERSION) {
-#else
+#else // OS_TV_TYPE_PAL
             if (gRacers[playerIndex].speed < 9.2592585f) {
 #endif
                 D_80141900++;
@@ -5575,7 +5575,7 @@ Gfx* Menus_Draw(Gfx* gfx) {
                     if (gCurrentTimeAttackRecordPosition == 0) {
                         RecordsEntry_ToRecordsState();
                     }
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
                     Menus_CheckGhostCanSave();
 #endif
                 }
@@ -5585,7 +5585,7 @@ Gfx* Menus_Draw(Gfx* gfx) {
                         RecordsEntry_UpdateNameEntry();
                         gfx = RecordsEntry_DrawNameEntry(gfx);
                     } else {
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
                         if (D_i3_8006D0B4 == 0) {
                             Menus_CheckGhostCanSave();
                             D_i3_8006D0B4 = 1;
@@ -5704,10 +5704,10 @@ Gfx* Menus_Draw(Gfx* gfx) {
                 gfx = Menus_DrawPlayerRetire(gfx, 0);
                 if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
                     if (gGameMode == GAMEMODE_GP_RACE) {
-#if defined(VERSION_US) || defined(VERSION_PAL) || defined(EXPANSION_KIT)
-                        if (sPlayerRetireTimer[0] == 400) {
-#else
+#if BUILD_REVISION <= REVISION_A
                         if (sPlayerRetireTimer[0] > 400) {
+#else
+                        if (sPlayerRetireTimer[0] == 400) {
 #endif
                             if (gTitleDemoState == TITLE_DEMO_INACTIVE) {
                                 Audio_LevelSEFadeout();

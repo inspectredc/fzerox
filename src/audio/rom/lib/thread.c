@@ -469,7 +469,7 @@ s32 AudioThread_ResetAudioHeap(s32 specId) {
 void AudioThread_PreNMIInternal(void) {
     gResetTimer = 1;
 
-#ifndef VERSION_JP
+#if BUILD_REVISION >= REVISION_B
     if (gAudioContextInitialized)
 #endif
     {

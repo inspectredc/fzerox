@@ -220,7 +220,7 @@ void Audio_PlayerSEStart(u8 racerId, u8 sfxId) {
         PRINTF("Ouch!! UN-SUPORTED TRG SE NUM WAS CALLED !!!!!!! num = %02x\n", sfxId);
         return;
     }
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
     PRINTF("PLY TRG MYCAR NUM =  %02x SE NUM =  %02x VOL = %f \n", racerId, sfxId, sRacerAudioVolume[racerId]);
 #endif
     sRacerActiveSE[racerId] = sfxId;
@@ -236,7 +236,7 @@ void Audio_PlayerSEStart(u8 racerId, u8 sfxId) {
                 }
                 Audio_SEStart(10, sfxId);
             } else if (sAudioEnemyEngineStatus != 0) {
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
                 PRINTF("ENEMY NUMBER = %02x RANK = %d SE num = %02x MOST NEAR ENEMY = %02x \n", racerId, racerId, sfxId,
                        sAudioClosestRacerId);
 #endif
@@ -276,7 +276,7 @@ void Audio_PlayerSEStart(u8 racerId, u8 sfxId) {
                         } else {
                             pan = 0x3F;
                         }
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
                         PRINTF("DISTANCE = %f PAN = %02x VOLUME = %f TUNING = %f \n\n", distance, pan, volumeScale,
                                freqScale);
 #endif
@@ -465,7 +465,7 @@ void Audio_BgmFadeout(void) {
         case 0:
             break;
         case 1:
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
             if (++sBgmFadeoutTimer == (100 / 2) - 1) {
 #else
             if (++sBgmFadeoutTimer == (70 / 2) - 1) {
@@ -476,7 +476,7 @@ void Audio_BgmFadeout(void) {
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 0.0f);
                 Audio_StopChannelSE(0);
             } else {
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
                 volumeScale = 1.0f - (sBgmFadeoutTimer * (2.0f / 100.0f));
 #else
                 volumeScale = 1.0f - (sBgmFadeoutTimer * (2.0f / 70.0f));
@@ -485,7 +485,7 @@ void Audio_BgmFadeout(void) {
             }
             break;
         case 2:
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
             if (++sBgmFadeoutTimer == (80 / 1) - 1) {
 #else
             if (++sBgmFadeoutTimer == (70 / 1) - 1) {
@@ -496,7 +496,7 @@ void Audio_BgmFadeout(void) {
                 AUDIOCMD_CHANNEL_SET_VOL_SCALE(0, 0, 0.0f);
                 Audio_StopChannelSE(0);
             } else {
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
                 volumeScale = 1.0f - (sBgmFadeoutTimer * (1.0f / 80.0f));
 #else
                 volumeScale = 1.0f - (sBgmFadeoutTimer * (1.0f / 70.0f));
@@ -1187,7 +1187,7 @@ void Audio_InitAudio(void) {
     sAudioPauseStatus = AUDIO_PAUSE_UNPAUSED;
     sAudioLevelFadeoutActive = false;
     sLevelFadeoutTimer = 0;
-#ifndef VERSION_JP
+#if BUILD_REVISION >= REVISION_B
     sBgmPlayState = 0;
 #endif
 
@@ -1417,7 +1417,7 @@ block_5:
         return;
     }
 
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
     PRINTF("Player Trger SE Start !! player =  %02x SE number = %02x\n", racerId, sfxId);
 #endif
 
@@ -1783,7 +1783,7 @@ void Audio_SESeqStart(void) {
 void Audio_ChangeSoundMode(s32 courseIndex) {
     PRINTF("Change Sound Mode No = %02x\n", courseIndex);
     Audio_InitAudio();
-#ifndef VERSION_JP
+#if BUILD_REVISION >= REVISION_B
     AudioThread_ScheduleProcessCmds();
 #endif
 }

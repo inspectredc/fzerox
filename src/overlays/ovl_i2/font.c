@@ -252,7 +252,7 @@ CacheTexInfo sFont4ECacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4E
 CacheTexInfo sFont4MCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4MTex, 8, TEX_HEIGHT(aFont4MTex), 0);
 CacheTexInfo sFont4AmpersandCacheTexInfo[] =
     CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4AmpersandTex, 8, TEX_HEIGHT(aFont4AmpersandTex), 0);
-#ifndef VERSION_JP
+#if LANGUAGE == LANGUAGE_ENG
 CacheTexInfo sFont4BCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4BTex, 8, TEX_HEIGHT(aFont4BTex), 0);
 CacheTexInfo sFont4CCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4CTex, 8, TEX_HEIGHT(aFont4CTex), 0);
 CacheTexInfo sFont4FCacheTexInfo[] = CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4FTex, 8, TEX_HEIGHT(aFont4FTex), 0);
@@ -476,7 +476,7 @@ CacheTexInfo sFont4MinusCacheTexInfo[] =
     CACHE_TEX_INFO_WH(TEX_CACHE_FMT_I4, aFont4MinusTex, 8, TEX_HEIGHT(aFont4MinusTex), 0);
 CacheTexInfo sFont4PointsCacheTexInfo[] = CACHE_TEX_INFO(TEX_CACHE_FMT_I4, aFont4PointsTex, 0);
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 CacheTexInfo* sFont4CacheTexInfos[] = {
     sFont4ACacheTexInfo,
     sFont4ACacheTexInfo,
@@ -714,7 +714,7 @@ CacheTexInfo* sFont4CacheTexInfos[] = {
     sFont4ACacheTexInfo,
     sFont4DashCacheTexInfo,
 };
-#else
+#else // LANGUAGE_ENG
 CacheTexInfo* sFont4CacheTexInfos[] = {
     sFont4ACacheTexInfo,
     sFont4BCacheTexInfo,
@@ -1563,7 +1563,7 @@ const s16 kFont3CharWidths[] = {
     12, 12, 12, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
 };
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 const s16 kFont4CharWidths[] = {
     7, 7, 6, 7, 6, 5, 6, 7, 4, 4, 6, 5, 7, 6, 7, 6, 7, 7, 6, 6, 7, 6, 7, 7, 7, 5, 8, 8, 8, 8, 8, 16, 8, 8,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,  8, 8,
@@ -1573,7 +1573,7 @@ const s16 kFont4CharWidths[] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,  8, 8,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
 };
-#else
+#else // LANGUAGE_ENG
 const s16 kFont4CharWidths[] = {
     7, 7, 6, 7, 6, 5, 6, 7, 4, 4, 6, 5, 7, 6, 7, 6, 7, 7, 6, 6, 7, 6, 7, 7, 7, 5, 8, 8, 8, 8, 8, 16, 8, 8,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6,  6, 8,

@@ -389,7 +389,7 @@ s16 D_800CE77C = 0;
 s16 D_800CE780 = 1;
 s16 D_800CE784 = 0;
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
 s16 gGreyscaleMachinePart = false;
 #endif
 
@@ -1851,7 +1851,7 @@ void Racer_Init(void) {
         gEnableRaceSfx = false;
         gRaceIntroTimer = 0;
 
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
         if (gTitleDemoState != TITLE_DEMO_INACTIVE) {
 #else
         if (gTitleDemoState != TITLE_DEMO_INACTIVE && gGameMode != GAMEMODE_RECORDS) {
@@ -2290,11 +2290,11 @@ void Racer_ReceiveDamage(Racer* racer, f32 damageStrength) {
             }
         }
     } else {
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
         if (D_800CE780 != 0) {
 #endif
             racer->energy -= damageStrength;
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
         }
 #endif
         racer->stateFlags |= RACER_STATE_RECEIVED_DAMAGE;
@@ -4301,7 +4301,7 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
                 sp128 -= racer->lapDistance;
                 racer->unk_288++;
                 racer->unk_2A4++;
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
                 racer->raceTime = (s32) (racer->unk_2A4 * 50) / 3;
 #else
                 racer->raceTime = racer->unk_2A4 * 20;
@@ -4312,7 +4312,7 @@ void Racer_UpdateFromControls(Racer* racer, Controller* controller) {
                     if ((racer->lap == racer->lapsCompleted + 1) && (racer->lap <= (gTotalLapCount + 1))) {
                         racer->lapsCompleted = racer->lap;
                         racer->stateFlags |= RACER_STATE_CAN_BOOST;
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
                         i = racer->raceTime -
                             (s32) ((50.0f * racer->lapDistance) / (3.0f * (gCurrentCourseInfo->length - sp128)));
 #else
@@ -6971,7 +6971,7 @@ Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2) {
     s32 color;
 
     gSPDisplayList(gfx++, D_800CDD38[character]);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart && (machine->customType == CUSTOM_MACHINE_DEFAULT)) {
         color = (machine->red[arg2] * 77) + (machine->green[arg2] * 151) + (machine->blue[arg2] * 28);
         color >>= 8;
@@ -6979,7 +6979,7 @@ Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2) {
     } else {
 #endif
         gDPSetEnvColor(gfx++, machine->red[arg2], machine->green[arg2], machine->blue[arg2], 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
     gSPDisplayList(gfx++, D_800CDDB0[character * 6]);

@@ -5,7 +5,7 @@
 
 extern OSMesgQueue gMainThreadMesgQueue;
 
-#ifndef VERSION_PAL
+#if BUILD_REVISION <= REVISION_B
 void func_8007F520(void) {
     u8 i;
     s32 err;
@@ -22,12 +22,12 @@ void func_8007F520(void) {
             return;
         }
     }
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
     osWritebackDCacheAll();
     LeoFault_DrawReferUserGuide();
     LeoFault_DrawErrorNumber(err);
     osWritebackDCacheAll();
-#else
+#else // REVISION_B
     SLForceWritebackDCacheAll();
     LeoFault_DrawReferUserGuide();
     LeoFault_DrawErrorNumber(err);
@@ -49,7 +49,7 @@ void DiskMount_Init(void) {
 
     func_80076310();
     osCreateMesgQueue(&D_800E42D0, D_800E42E8, ARRAY_COUNT(D_800E42E8));
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     Mfs_SetGameCode("01", "EFZJ");
 #else
     Mfs_SetGameCode("01", "EFZE");
@@ -58,12 +58,12 @@ void DiskMount_Init(void) {
         switch (gMfsError) {
             case LEO_ERROR_DEVICE_COMMUNICATION_FAILURE:
                 return;
-#ifndef VERSION_PAL
+#if BUILD_REVISION <= REVISION_B
             case LEO_ERROR_MEDIUM_NOT_PRESENT:
 #endif
             case 0xF9:
             default:
-#ifndef VERSION_PAL
+#if BUILD_REVISION <= REVISION_B
                 goto label;
 #endif
                 break;
@@ -72,23 +72,23 @@ void DiskMount_Init(void) {
 
 label:
     if (gMfsError == 0xF9) {
-#ifndef VERSION_PAL
+#if BUILD_REVISION <= REVISION_B
         func_8007F520();
-#else
+#else // REVISION_C
         SLLeoResetClear();
 #endif
     }
 
-#ifndef VERSION_PAL
+#if BUILD_REVISION <= REVISION_B
     func_i1_8040428C();
     func_800762B0(D_i1_80428618);
-#else
+#else // REVISION_C
     func_800763B0();
     D_i1_80428618 = D_800CD2B0;
     func_i1_80404204();
 #endif
 
-#ifdef VERSION_PAL
+#if BUILD_REVISION == REVISION_C
     gWorkingDirectory = MFS_ENTRY_ROOT_DIR;
     D_i1_80428644 = LEO_ERROR_GOOD;
     gMfsRamArea.id.diskId[0] = '\0';
@@ -119,7 +119,7 @@ label:
             }
             break;
     }
-#ifndef VERSION_PAL
+#if BUILD_REVISION <= REVISION_B
     Mfs_ModeSelectAsync(0, 0);
 #endif
 }

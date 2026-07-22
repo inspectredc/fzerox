@@ -96,7 +96,7 @@ const char* sTrackNames[] = {
 #endif
 };
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 const char* gMachineNames[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
                                 "red gazelle",   "great star",       "iron tiger",    "deep claw",      "twin noritta",
                                 "super piranha", "mighty hurricane", "little wyvern", "space angler",   "green panther",
@@ -105,7 +105,7 @@ const char* gMachineNames[] = { "blue falcon",   "golden fox",       "wild goose
                                 "big fang",      "mighty typhoon",   "mad wolf",      "sonic phantom",  "hell hawk",
                                 "super falcon",  "golden fox",       "wild goose",    "super stingray", "super cat",
                                 "red gazelle" };
-#else
+#else // LANGUAGE_ENG
 const char* gMachineNames[] = { "blue falcon",   "golden fox",       "wild goose",    "fire stingray",  "white cat",
                                 "red gazelle",   "great star",       "iron tiger",    "deep claw",      "twin noritta",
                                 "super piranha", "mighty hurricane", "little wyvern", "space angler",   "green panther",

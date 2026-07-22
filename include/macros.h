@@ -2,6 +2,7 @@
 #define MACROS_H
 
 #include "alignment.h"
+#include "fzx_version.h"
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 #define ARRAY_COUNTU(arr) (u32)(sizeof(arr) / sizeof(arr[0]))
@@ -33,10 +34,10 @@
 #define PHYS_TO_K1ROM(x) (((u32) (x) | 0xB0000000))
 #define ROM_READ(addr) (*(vu32*) PHYS_TO_K1ROM(addr))
 
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
 #define TIME_CONVERT(x) (x)
 #define SPEED_CONVERSION (21.6f)
-#else
+#else // OS_TV_TYPE_PAL
 #define TIME_CONVERT(x) (((x) / 5) * 6)
 #define SPEED_CONVERSION (18.0f)
 #endif

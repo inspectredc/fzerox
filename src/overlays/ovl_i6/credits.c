@@ -305,7 +305,7 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_18,
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
     OBJECT_FREE,
 #endif
     OBJECT_FREE,
@@ -315,7 +315,7 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_19,
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
     OBJECT_FREE,
 #endif
     OBJECT_FREE,
@@ -327,7 +327,7 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_CREDITS_NAME_20,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_21,
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
     OBJECT_FREE,
 #endif
     OBJECT_FREE,
@@ -339,7 +339,7 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_CREDITS_NAME_22,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_23,
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
     OBJECT_FREE,
 #endif
     OBJECT_FREE,
@@ -371,7 +371,7 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_CREDITS_NAME_35,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_28,
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -407,7 +407,7 @@ const s16 kCreditsObjectScrollScript[] = {
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_CREDITS_NAME_29,
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
     OBJECT_FREE,
     OBJECT_FREE,
     OBJECT_FREE,
@@ -1215,9 +1215,9 @@ void Credits_MachinesUpdate(Object* machinesObj) {
             OBJECT_COUNTER(machinesObj) = 0;
             break;
         case 2:
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
             OBJECT_COUNTER(machinesObj)++;
-#else
+#else // OS_TV_TYPE_PAL
             if ((++OBJECT_COUNTER(machinesObj) % 6) == 5) {
                 OBJECT_COUNTER(machinesObj)++;
             }
@@ -1387,9 +1387,9 @@ void Credits_ScriptUpdate(Object* scriptObj) {
                             OBJECT_COUNTER(machinesObj)++;
                         }
                         break;
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
                     case 60:
-#else
+#else // OS_TV_TYPE_PAL
                     case 50:
 #endif
                         Credits_ObjectInit(OBJECT_CREDITS_NAME_0 + OBJECT_STATE(scriptObj),
@@ -1403,9 +1403,9 @@ void Credits_ScriptUpdate(Object* scriptObj) {
                 OBJECT_COUNTER(scriptObj) = 0;
                 break;
             case 2:
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
                 if (OBJECT_COUNTER(scriptObj) > 30) {
-#else
+#else // OS_TV_TYPE_PAL
                 if (OBJECT_COUNTER(scriptObj) > 15) {
 #endif
                     OBJECT_STATE(scriptObj)++;
@@ -1484,9 +1484,9 @@ void Credits_StartRoleUpdate(Object* startRoleObj) {
             }
             break;
         case 1:
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
             if (++OBJECT_COUNTER(startRoleObj) > 120) {
-#else
+#else // OS_TV_TYPE_PAL
             if (++OBJECT_COUNTER(startRoleObj) > 80) {
 #endif
                 OBJECT_STATE(startRoleObj) = 2;
@@ -1603,9 +1603,9 @@ void Credits_SeeYouAgainUpdate(Object* seeYouAgainObj) {
 
     switch (OBJECT_STATE(seeYouAgainObj)) {
         case 0:
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
             if (++OBJECT_COUNTER(seeYouAgainObj) >= 175) {
-#else
+#else // OS_TV_TYPE_PAL
             if (++OBJECT_COUNTER(seeYouAgainObj) >= 146) {
 #endif
                 OBJECT_STATE(seeYouAgainObj)++;
@@ -1631,27 +1631,27 @@ void Credits_SeeYouAgainUpdate(Object* seeYouAgainObj) {
 void Credits_IntroUpdate(Object* introObj) {
 
     switch (++INTRO_TIMER(introObj)) {
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
         case 30:
-#else
+#else // OS_TV_TYPE_PAL
         case 25:
 #endif
             if (OBJECT_STATE(introObj) == 0) {
                 OBJECT_STATE(introObj) = 1;
             }
             break;
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
         case 60:
-#else
+#else // OS_TV_TYPE_PAL
         case 50:
 #endif
             if (OBJECT_STATE2(introObj) == 0) {
                 OBJECT_STATE2(introObj) = 1;
             }
             break;
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
         case 370:
-#else
+#else // OS_TV_TYPE_PAL
         case 308:
 #endif
             Credits_ObjectInit(OBJECT_CREDITS_SCRIPT, 0, 0, 0);
@@ -1660,9 +1660,9 @@ void Credits_IntroUpdate(Object* introObj) {
             introObj->cmdId = OBJECT_FREE;
             break;
         default:
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
             if (INTRO_TIMER(introObj) > 300) {
-#else
+#else // OS_TV_TYPE_PAL
             if (INTRO_TIMER(introObj) > 250) {
 #endif
                 if (OBJECT_STATE2(introObj) == 2) {

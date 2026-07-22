@@ -5,15 +5,15 @@
 OSIoMesg sLeoFontIoMsg;
 s16* sLeoPrintFrameBuffer;
 s16* sLeoPrintCurPixel;
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 s32 sLeoFontOffsets[24];
-#else
+#else // LANGUAGE_ENG
 s32 sLeoFontWidths[96];
 s32 sLeoFontHeights[96];
 s32 sLeoFontAlignments[96];
 #endif
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 u8 D_800CD580[] = "０";
 
 u8 D_800CD584[] = "１";
@@ -68,7 +68,7 @@ u8* sLeoErrorMessages[] = {
     D_800CD5A0, D_800CD5A4, D_800CD5A8, D_800CD5B4, D_800CD5D8, D_800CD5F8, D_800CD618, D_800CD634,
     D_800CD640, D_800CD660, D_800CD66C, D_800CD68C, D_800CD6A4, D_800CD6C8, D_800CD6E4, D_800CD708,
 };
-#else
+#else // LANGUAGE_ENG
 s32 sLeoFontCodes[] = {
     0x6CA06F18, 0x6CB82A14, 0x6CBE4314, 0x6CC29A14, 0x6CDE8D16, 0x6CFADB14, 0x6D249B14, 0x6D422314, 0x6D445D14,
     0x6D594D14, 0x6D675414, 0x6D6F870E, 0x6D7F2402, 0x6D829108, 0x6D872102, 0x6D885A14, 0x6D998B14, 0x6DB15A14,
@@ -96,7 +96,7 @@ u16 sLeoFontPallete[] = {
 extern OSMesgQueue gDmaMesgQueue;
 extern OSPiHandle* gDriveRomHandle;
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 void LeoFault_CopyFontToRam(s32* code, u8* ramAddr) {
     uintptr_t fontAddr = LeoGetKAdr(code) + DDROM_FONT_START;
 #else
@@ -114,7 +114,7 @@ void LeoFault_CopyFontToRam(s32* code, u8* ramAddr, s32* width, s32* height, s32
     MQ_WAIT_FOR_MESG(&gDmaMesgQueue, NULL);
 }
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 s32 LeoFault_LoadFontSet(u8* codes, s32 fontOffset, s32 fontRamAddr) {
     s16 i;
 
@@ -149,7 +149,7 @@ void LeoFault_LoadFontSet(s32* codes, u8* fontRamAddr, s32* widths, s32* heights
 
 extern u8 gLeoFontBuffer[];
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 void LeoFault_LoadFonts(void) {
     func_8007F8F8(ARRAY_COUNT(sLeoErrorMessages), sLeoErrorMessages, gLeoFontBuffer, sLeoFontOffsets);
 }
@@ -197,7 +197,7 @@ void func_8007F9E0(void) {
     SLForceWritebackDCacheAll();
 }
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 void func_8007FA64(s32 posX, s32 posY, u8* fontCharData) {
     u8 i;
     u16 j;
@@ -252,7 +252,7 @@ void func_8007FA64(s32 posX, s32 posY, u8* fontCharData, s32 width, s32 height, 
 }
 #endif
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 void LeoFault_DrawErrorMessage(s32 posX, s32 posY, u16 messageNo) {
     s32 messageOffset;
     s32 offset;
@@ -325,7 +325,7 @@ void LeoFault_DrawErrorNumber(s32 errNo) {
     char errNoStr[4];
 
     sprintf(errNoStr, "%02d", errNo);
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     LeoFault_DrawErrorMessage(108, 80, LEO_ERROR_MESSAGE_ERROR_NUMBER);
     LeoFault_DrawErrorMessageNumber(190, 80, errNoStr);
 #else
@@ -337,7 +337,7 @@ void LeoFault_DrawErrorNumber(s32 errNo) {
 void LeoFault_DrawReferUserGuide(void) {
     LeoFault_SetFramebuffer();
     LeoFault_DrawErrorBox();
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     LeoFault_DrawErrorMessage(36, 110, LEO_ERROR_MESSAGE_USER_GUIDE);
 #else
     LeoFault_DrawErrorMessage(40, 110, "Please refer to the User's Guide.");
@@ -347,7 +347,7 @@ void LeoFault_DrawReferUserGuide(void) {
 void LeoFault_DrawCautionDoNotRemove(void) {
     LeoFault_SetFramebuffer();
     LeoFault_DrawErrorBox();
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     LeoFault_DrawErrorMessage(40, 100, LEO_ERROR_MESSAGE_CAUTION_WHILE_BLINKING);
     LeoFault_DrawErrorMessage(40, 120, LEO_ERROR_MESSAGE_DO_NOT_REMOVE_DISC);
 #else
@@ -360,7 +360,7 @@ void LeoFault_DrawCautionDoNotRemove(void) {
 void LeoFault_DrawCautionDoNotRemovePleaseInsert(void) {
     LeoFault_SetFramebuffer();
     LeoFault_DrawErrorBox();
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     LeoFault_DrawErrorMessage(40, 110, LEO_ERROR_MESSAGE_CAUTION_WHILE_BLINKING);
     LeoFault_DrawErrorMessage(40, 130, LEO_ERROR_MESSAGE_DO_NOT_REMOVE_DISC);
     LeoFault_DrawErrorMessage(40, 150, LEO_ERROR_MESSAGE_INSERT_DISC_AGAIN);
@@ -376,7 +376,7 @@ void LeoFault_DrawCautionDoNotRemovePleaseInsert(void) {
 void LeoFault_DrawReinsertDisk(void) {
     LeoFault_SetFramebuffer();
     LeoFault_DrawErrorBox();
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     LeoFault_DrawErrorMessage(48, 110, LEO_ERROR_MESSAGE_IS_EJECT_BUTTON);
     LeoFault_DrawErrorMessage(48, 130, LEO_ERROR_MESSAGE_PRESSED);
     LeoFault_DrawErrorMessage(48, 150, LEO_ERROR_MESSAGE_PLEASE_REMOVE_DISC_ONCE);
@@ -392,7 +392,7 @@ void LeoFault_DrawReinsertDisk(void) {
 void LeoFault_DrawWrongDisk(void) {
     LeoFault_SetFramebuffer();
     LeoFault_DrawErrorBox();
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     LeoFault_DrawErrorMessage(32, 90, LEO_ERROR_MESSAGE_WRONG_DISK_MAY);
     LeoFault_DrawErrorMessage(32, 110, LEO_ERROR_MESSAGE_BE_INSERTED_HAVE_YOU_CHECKED);
     LeoFault_DrawErrorMessage(32, 130, LEO_ERROR_MESSAGE_PLEASE);
@@ -405,7 +405,7 @@ void LeoFault_DrawWrongDisk(void) {
 void LeoFault_DrawIsDiskInserted(void) {
     LeoFault_SetFramebuffer();
     LeoFault_DrawErrorBox();
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     LeoFault_DrawErrorMessage(36, 110, LEO_ERROR_MESSAGE_CHECK_DISK_IS_INSERTED);
 #else
     LeoFault_DrawErrorMessage(59, 110, "Has the disk been inserted?");
@@ -415,7 +415,7 @@ void LeoFault_DrawIsDiskInserted(void) {
 void LeoFault_DrawInsertInitialDiskUsed(void) {
     LeoFault_SetFramebuffer();
     LeoFault_DrawErrorBox();
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     LeoFault_DrawErrorMessage(56, 100, LEO_ERROR_MESSAGE_INSERT_DISK_AT_STARTUP);
     LeoFault_DrawErrorMessage(56, 120, LEO_ERROR_MESSAGE_PLEASE);
 #else

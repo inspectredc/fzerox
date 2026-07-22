@@ -804,16 +804,16 @@ void Records_ClearConfirmUpdate(void) {
                 Audio_TriggerSystemSE(NA_SE_16);
             } else {
                 if (sRecordsClearType == RECORDS_CLEAR_RECORDS) {
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
                     if ((gCourseIndex >= COURSE_MUTE_CITY) && (gCourseIndex <= COURSE_BIG_HAND)) {
 #endif
                         func_i2_801017B8(gCourseIndex);
 #ifdef EXPANSION_KIT
                     } else {
                         DDSave_EraseDiskCourseRecord(gCourseIndex);
+#endif
+#if BUILD_REVISION >= REVISION_C
                     }
-#elif defined(VERSION_PAL)
-                }
 #endif
                 } else if (sRecordsClearType == RECORDS_CLEAR_GHOST) {
                     Save_InitGhost(gCourseIndex);
@@ -1027,12 +1027,12 @@ Gfx* Records_DrawClearConfirm(Gfx* gfx, s32 left, s32 top) {
 
     textureInfo = &sRecordsClearTextureInfos[sRecordsClearType];
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture),
                                          TextureCache_GetCached(aMenuTextTLUT), G_IM_FMT_CI, 1, left + 12, top + 10,
                                          textureInfo->width, textureInfo->height,
                                          INDEXED_DRAW_USE_TLUT | INDEXED_DRAW_TINT_PRIM_COLOR);
-#else
+#else // LANGUAGE_ENG
     boxCenteringOffset = (124 - textureInfo->width) / 2;
 
     gfx = TextureUtils_DrawIndexedBlocks(gfx, TextureCache_GetCached(textureInfo->texture),

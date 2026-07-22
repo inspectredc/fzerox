@@ -21,6 +21,9 @@
                 "ASSET_VERSION=us",
                 "ASSET_REVISION=rev0",
                 "BUILD_VERSION=VERSION_I",
+                "BUILD_REVISION=REVISION_B",
+                "LANGUAGE=LANGUAGE_ENG",
+                "OS_TV_TYPE=OS_TV_TYPE_NTSC",
                 "VERSION_US"
             ],
             "cStandard": "gnu89", // C89 + some GNU extensions from C99 like C++ comments
@@ -47,6 +50,9 @@
                 "ASSET_VERSION=jp",
                 "ASSET_REVISION=rev0",
                 "BUILD_VERSION=VERSION_I",
+                "BUILD_REVISION=REVISION_A",
+                "LANGUAGE=LANGUAGE_JPN",
+                "OS_TV_TYPE=OS_TV_TYPE_NTSC",
                 "VERSION_JP"
             ],
             "cStandard": "gnu89", // C89 + some GNU extensions from C99 like C++ comments
@@ -75,6 +81,9 @@
                 "BUILD_VERSION=VERSION_I",
                 "LEO_VERSION=1",
                 "MFS_VERSION=1",
+                "BUILD_REVISION=REVISION_C",
+                "LANGUAGE=LANGUAGE_ENG",
+                "OS_TV_TYPE=OS_TV_TYPE_PAL",
                 "VERSION_PAL"
             ],
             "cStandard": "gnu89", // C89 + some GNU extensions from C99 like C++ comments
@@ -104,6 +113,9 @@
                 "ASSET_VERSION=jp",
                 "ASSET_REVISION=rev0",
                 "BUILD_VERSION=VERSION_J",
+                "BUILD_REVISION=REVISION_D",
+                "LANGUAGE=LANGUAGE_JPN",
+                "OS_TV_TYPE=OS_TV_TYPE_NTSC",
                 "VERSION_JP"
             ],
             "cStandard": "gnu89", // C89 + some GNU extensions from C99 like C++ comments

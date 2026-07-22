@@ -151,13 +151,13 @@ extern s16 D_800CD16C;
 void Game_Init(void) {
     gGameMode = -1;
     gQueuedGameMode = GAMEMODE_FLX_TITLE;
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
     if (D_800DCE60 != 0x20DE1529) {
         D_800DCE60 = 0x20DE1529;
 #endif
         func_8008DB98();
         func_800A4BAC();
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
     } else {
         func_8008DA68();
         func_800A4B54();

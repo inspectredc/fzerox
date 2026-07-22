@@ -22,7 +22,7 @@ s32 sPracticeBestLapCounter = 0;
 bool sSecondLapStarted = false;
 bool sFinalLapStarted = false;
 s32 D_i3_8013EFFC = 180;
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
 s32 D_i3_8013F000 = 3;
 #endif
 UNUSED s32 D_i3_8013F004 = 0;
@@ -1303,7 +1303,7 @@ Gfx* Hud_DrawRacePortraits(Gfx* gfx) {
     Racer* racer;
     s32 character;
 
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
     if (D_i3_8013F000 != 0) {
         D_i3_8013F000--;
         Hud_UpdateCharacterPortraits();
@@ -1660,7 +1660,7 @@ Gfx* Hud_DrawReverse(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
 void Hud_InitRacePortraits(void) {
     s32 i;
 
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
     D_i3_8013F000 = 3;
 #endif
 

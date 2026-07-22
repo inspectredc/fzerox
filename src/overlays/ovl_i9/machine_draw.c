@@ -4980,13 +4980,13 @@ Gfx* Machine_DrawBlueFalconLod1(Gfx* gfx) {
     gSP2Triangles(gfx++, 13, 16, 14, 0, 17, 18, 19, 0);
 
     gDPPipeSync(gfx++);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -5075,7 +5075,7 @@ Gfx* Machine_DrawBlueFalconLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
         gDPSetEnvColor(gfx++, 81, 81, 81, 255);
@@ -5083,7 +5083,7 @@ Gfx* Machine_DrawBlueFalconLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
         gDPSetEnvColor(gfx++, 14, 99, 165, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -5424,7 +5424,7 @@ Gfx* Machine_DrawGoldenFoxLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -5432,7 +5432,7 @@ Gfx* Machine_DrawGoldenFoxLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -5747,13 +5747,13 @@ Gfx* Machine_DrawWildGooseLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetEnvColor(gfx++, 204, 204, 204, 255);
     } else {
 #endif
         gDPSetEnvColor(gfx++, 255, 215, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -5785,7 +5785,7 @@ Gfx* Machine_DrawWildGooseLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -5793,7 +5793,7 @@ Gfx* Machine_DrawWildGooseLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -6120,7 +6120,7 @@ Gfx* Machine_DrawFireStingrayLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -6128,7 +6128,7 @@ Gfx* Machine_DrawFireStingrayLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -6431,7 +6431,7 @@ Gfx* Machine_DrawWhiteCatLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -6439,7 +6439,7 @@ Gfx* Machine_DrawWhiteCatLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -6451,13 +6451,13 @@ Gfx* Machine_DrawWhiteCatLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetEnvColor(gfx++, 77, 77, 77, 255);
     } else {
 #endif
         gDPSetEnvColor(gfx++, 255, 0, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -6695,13 +6695,13 @@ Gfx* Machine_DrawWhiteCatLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawRedGazelleLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
     gDPSetCombineLERP(gfx++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0,
@@ -6787,7 +6787,7 @@ Gfx* Machine_DrawRedGazelleLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -6795,7 +6795,7 @@ Gfx* Machine_DrawRedGazelleLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -7103,7 +7103,7 @@ Gfx* Machine_DrawWonderWaspLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -7111,7 +7111,7 @@ Gfx* Machine_DrawWonderWaspLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -7125,13 +7125,13 @@ Gfx* Machine_DrawWonderWaspLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetEnvColor(gfx++, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetEnvColor(gfx++, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -7448,7 +7448,7 @@ Gfx* Machine_DrawIronTigerLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -7456,7 +7456,7 @@ Gfx* Machine_DrawIronTigerLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -7720,13 +7720,13 @@ Gfx* Machine_DrawIronTigerLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawDeepClawLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -7804,7 +7804,7 @@ Gfx* Machine_DrawDeepClawLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -7812,7 +7812,7 @@ Gfx* Machine_DrawDeepClawLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -8061,13 +8061,13 @@ Gfx* Machine_DrawTwinNorittaLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 23, 23, 23, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 0, 26, 68, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -8138,7 +8138,7 @@ Gfx* Machine_DrawTwinNorittaLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
         gDPSetEnvColor(gfx++, 81, 81, 81, 255);
@@ -8146,7 +8146,7 @@ Gfx* Machine_DrawTwinNorittaLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
         gDPSetEnvColor(gfx++, 14, 99, 165, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -8403,13 +8403,13 @@ Gfx* Machine_DrawTwinNorittaLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawSuperPiranhaLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 77, 77, 77, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -8469,7 +8469,7 @@ Gfx* Machine_DrawSuperPiranhaLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -8477,7 +8477,7 @@ Gfx* Machine_DrawSuperPiranhaLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -8489,13 +8489,13 @@ Gfx* Machine_DrawSuperPiranhaLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetEnvColor(gfx++, 77, 77, 77, 255);
     } else {
 #endif
         gDPSetEnvColor(gfx++, 255, 0, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -8762,13 +8762,13 @@ Gfx* Machine_DrawSuperPiranhaLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawMightyHurricaneLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -8852,7 +8852,7 @@ Gfx* Machine_DrawMightyHurricaneLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 114, 114, 114, 255);
         gDPSetEnvColor(gfx++, 23, 23, 23, 255);
@@ -8860,7 +8860,7 @@ Gfx* Machine_DrawMightyHurricaneLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
         gDPSetEnvColor(gfx++, 6, 27, 43, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -9170,7 +9170,7 @@ Gfx* Machine_DrawLittleWyvernLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
         gDPSetEnvColor(gfx++, 81, 81, 81, 255);
@@ -9178,7 +9178,7 @@ Gfx* Machine_DrawLittleWyvernLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
         gDPSetEnvColor(gfx++, 14, 99, 165, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -9191,13 +9191,13 @@ Gfx* Machine_DrawLittleWyvernLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetEnvColor(gfx++, 24, 24, 24, 255);
     } else {
 #endif
         gDPSetEnvColor(gfx++, 6, 18, 105, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -9471,13 +9471,13 @@ Gfx* Machine_DrawLittleWyvernLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawSpaceAnglerLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 16, 16, 16, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 150, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -9543,7 +9543,7 @@ Gfx* Machine_DrawSpaceAnglerLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 114, 114, 114, 255);
         gDPSetEnvColor(gfx++, 23, 23, 23, 255);
@@ -9551,7 +9551,7 @@ Gfx* Machine_DrawSpaceAnglerLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
         gDPSetEnvColor(gfx++, 6, 27, 43, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -9861,7 +9861,7 @@ Gfx* Machine_DrawGreenPantherLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
         gDPSetEnvColor(gfx++, 81, 81, 81, 255);
@@ -9869,7 +9869,7 @@ Gfx* Machine_DrawGreenPantherLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
         gDPSetEnvColor(gfx++, 14, 99, 165, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -10118,13 +10118,13 @@ Gfx* Machine_DrawBlackBullLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 77, 77, 77, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -10457,13 +10457,13 @@ Gfx* Machine_DrawBlackBullLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawWildBoarLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 15, 15, 15, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 50, 0, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -10540,7 +10540,7 @@ Gfx* Machine_DrawWildBoarLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -10548,7 +10548,7 @@ Gfx* Machine_DrawWildBoarLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -10801,13 +10801,13 @@ Gfx* Machine_DrawWildBoarLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawAstroRobinLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -10887,7 +10887,7 @@ Gfx* Machine_DrawAstroRobinLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
         gDPSetEnvColor(gfx++, 81, 81, 81, 255);
@@ -10895,7 +10895,7 @@ Gfx* Machine_DrawAstroRobinLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
         gDPSetEnvColor(gfx++, 14, 99, 165, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -11159,13 +11159,13 @@ Gfx* Machine_DrawAstroRobinLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawKingMeteorLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 194, 194, 194, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -11239,7 +11239,7 @@ Gfx* Machine_DrawKingMeteorLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -11247,7 +11247,7 @@ Gfx* Machine_DrawKingMeteorLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -11516,13 +11516,13 @@ Gfx* Machine_DrawQueenMeteorLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 194, 194, 194, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 101, 229, 255, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -11592,7 +11592,7 @@ Gfx* Machine_DrawQueenMeteorLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -11600,7 +11600,7 @@ Gfx* Machine_DrawQueenMeteorLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -11862,13 +11862,13 @@ Gfx* Machine_DrawQueenMeteorLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawGreatStarLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -11881,13 +11881,13 @@ Gfx* Machine_DrawGreatStarLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 17, 17, 17, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 10, 10, 70, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -11955,7 +11955,7 @@ Gfx* Machine_DrawGreatStarLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
         gDPSetEnvColor(gfx++, 81, 81, 81, 255);
@@ -11963,7 +11963,7 @@ Gfx* Machine_DrawGreatStarLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
         gDPSetEnvColor(gfx++, 14, 99, 165, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -12250,13 +12250,13 @@ Gfx* Machine_DrawHyperSpeederLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 168, 168, 168, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 147, 33, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
     gSPTexture(gfx++, 0xFFFF, 0xFFFF, 0, 3, G_ON);
@@ -12280,13 +12280,13 @@ Gfx* Machine_DrawHyperSpeederLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 181, 181, 181, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 240, 180, 20, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -12320,7 +12320,7 @@ Gfx* Machine_DrawHyperSpeederLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 114, 114, 114, 255);
         gDPSetEnvColor(gfx++, 23, 23, 23, 255);
@@ -12328,7 +12328,7 @@ Gfx* Machine_DrawHyperSpeederLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
         gDPSetEnvColor(gfx++, 6, 27, 43, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -12619,13 +12619,13 @@ Gfx* Machine_DrawDeathAnchorLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -12643,13 +12643,13 @@ Gfx* Machine_DrawDeathAnchorLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 179, 179, 179, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 0, 255, 255, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -12692,7 +12692,7 @@ Gfx* Machine_DrawDeathAnchorLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -12700,7 +12700,7 @@ Gfx* Machine_DrawDeathAnchorLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -12956,13 +12956,13 @@ Gfx* Machine_DrawCrazyBearLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 33, 33, 33, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 100, 0, 24, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -12983,13 +12983,13 @@ Gfx* Machine_DrawCrazyBearLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 12, 12, 12, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 107, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -13049,7 +13049,7 @@ Gfx* Machine_DrawCrazyBearLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -13057,7 +13057,7 @@ Gfx* Machine_DrawCrazyBearLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -13340,13 +13340,13 @@ Gfx* Machine_DrawCrazyBearLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawNightThunderLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -13417,7 +13417,7 @@ Gfx* Machine_DrawNightThunderLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -13425,7 +13425,7 @@ Gfx* Machine_DrawNightThunderLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -13687,13 +13687,13 @@ Gfx* Machine_DrawNightThunderLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawBigFangLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -13764,7 +13764,7 @@ Gfx* Machine_DrawBigFangLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 232, 232, 232, 255);
         gDPSetEnvColor(gfx++, 81, 81, 81, 255);
@@ -13772,7 +13772,7 @@ Gfx* Machine_DrawBigFangLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 209, 238, 255, 255);
         gDPSetEnvColor(gfx++, 14, 99, 165, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -14026,13 +14026,13 @@ Gfx* Machine_DrawBigFangLod5(Gfx* gfx) {
 
 Gfx* Machine_DrawMightyTyphoonLod1(Gfx* gfx) {
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 228, 228, 228, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -14119,7 +14119,7 @@ Gfx* Machine_DrawMightyTyphoonLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 114, 114, 114, 255);
         gDPSetEnvColor(gfx++, 23, 23, 23, 255);
@@ -14127,7 +14127,7 @@ Gfx* Machine_DrawMightyTyphoonLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
         gDPSetEnvColor(gfx++, 6, 27, 43, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -14402,13 +14402,13 @@ Gfx* Machine_DrawMadWolfLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 77, 77, 77, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 89, 84, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -14428,13 +14428,13 @@ Gfx* Machine_DrawMadWolfLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 28, 28, 28, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -14480,7 +14480,7 @@ Gfx* Machine_DrawMadWolfLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -14488,7 +14488,7 @@ Gfx* Machine_DrawMadWolfLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -14824,7 +14824,7 @@ Gfx* Machine_DrawSonicPhantomLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 114, 114, 114, 255);
         gDPSetEnvColor(gfx++, 23, 23, 23, 255);
@@ -14832,7 +14832,7 @@ Gfx* Machine_DrawSonicPhantomLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 41, 136, 196, 255);
         gDPSetEnvColor(gfx++, 6, 27, 43, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -15081,13 +15081,13 @@ Gfx* Machine_DrawBloodHawkLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
     } else {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 255, 212, 0, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -15156,7 +15156,7 @@ Gfx* Machine_DrawBloodHawkLod1(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
         gDPSetPrimColor(gfx++, 0, 0, 203, 203, 203, 255);
         gDPSetEnvColor(gfx++, 34, 34, 34, 255);
@@ -15164,7 +15164,7 @@ Gfx* Machine_DrawBloodHawkLod1(Gfx* gfx) {
 #endif
         gDPSetPrimColor(gfx++, 0, 0, 165, 213, 250, 255);
         gDPSetEnvColor(gfx++, 19, 32, 86, 255);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -15566,7 +15566,7 @@ Gfx* Machine_DrawLoadCrazyBearTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
         gDPLoadMultiBlock(gfx++, D_8013E180, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP,
@@ -15576,7 +15576,7 @@ Gfx* Machine_DrawLoadCrazyBearTextures(Gfx* gfx) {
 #endif
         gDPLoadMultiBlock(gfx++, aDecalCrazyBearEyeTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
     gDPLoadMultiBlock_4b(gfx++, aDecalDoubleStripeUnevenTex, 0x110, 2, G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15619,7 +15619,7 @@ Gfx* Machine_DrawLoadHyperSpeederTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
         gDPLoadMultiBlock(gfx++, D_8013F380, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15629,7 +15629,7 @@ Gfx* Machine_DrawLoadHyperSpeederTextures(Gfx* gfx) {
 #endif
         gDPLoadMultiBlock(gfx++, aDecalBeastFaceTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -15775,7 +15775,7 @@ Gfx* Machine_DrawLoadGreenPantherTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
         gDPLoadMultiBlock(gfx++, D_8013EB80, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -15785,7 +15785,7 @@ Gfx* Machine_DrawLoadGreenPantherTextures(Gfx* gfx) {
 #endif
         gDPLoadMultiBlock(gfx++, aDecalGreenPantherCamoTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -15825,7 +15825,7 @@ Gfx* Machine_DrawLoadLittleWyvernTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
         gDPLoadMultiBlock(gfx++, D_8013E980, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -15835,7 +15835,7 @@ Gfx* Machine_DrawLoadLittleWyvernTextures(Gfx* gfx) {
 #endif
         gDPLoadMultiBlock(gfx++, aDecalLittleWyvernStripeEndsTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
                           G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -15939,7 +15939,7 @@ Gfx* Machine_DrawLoadIronTigerTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
         gDPLoadMultiBlock(gfx++, D_8013D980, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -15949,7 +15949,7 @@ Gfx* Machine_DrawLoadIronTigerTextures(Gfx* gfx) {
 #endif
         gDPLoadMultiBlock(gfx++, aDecalLeopardTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -16035,7 +16035,7 @@ Gfx* Machine_DrawLoadFireStingrayTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
         gDPLoadMultiBlock(gfx++, D_8013D180, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -16045,7 +16045,7 @@ Gfx* Machine_DrawLoadFireStingrayTextures(Gfx* gfx) {
 #endif
         gDPLoadMultiBlock(gfx++, aDecalFlamesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -16067,7 +16067,7 @@ Gfx* Machine_DrawLoadWildGooseTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
         gDPLoadMultiBlock(gfx++, D_8013C980, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -16077,7 +16077,7 @@ Gfx* Machine_DrawLoadWildGooseTextures(Gfx* gfx) {
 #endif
         gDPLoadMultiBlock(gfx++, aDecalWildGooseLightningTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
                           G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -16101,7 +16101,7 @@ Gfx* Machine_DrawLoadGoldenFoxTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
         gDPLoadMultiBlock(gfx++, D_8013C780, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -16111,7 +16111,7 @@ Gfx* Machine_DrawLoadGoldenFoxTextures(Gfx* gfx) {
 #endif
         gDPLoadMultiBlock(gfx++, aDecalGoldenFoxStripesTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 
@@ -16135,7 +16135,7 @@ Gfx* Machine_DrawLoadBlueFalconTextures(Gfx* gfx) {
 
     gDPPipeSync(gfx++);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
         gDPLoadMultiBlock(gfx++, D_8013C580, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
@@ -16145,7 +16145,7 @@ Gfx* Machine_DrawLoadBlueFalconTextures(Gfx* gfx) {
 #endif
         gDPLoadMultiBlock(gfx++, aDecalBlueFalconWingCheckeredTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
                           G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     }
 #endif
 

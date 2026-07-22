@@ -875,7 +875,7 @@ void AudioLoad_SetUnusedHandler(void* callback) {
     sUnusedHandler = callback;
 }
 
-#ifndef VERSION_JP
+#if BUILD_REVISION >= REVISION_B
 bool gAudioContextInitialized = false;
 #endif
 static char D_800D0CC8[] = "Clear Workarea %x -%x size %x \n";
@@ -947,10 +947,10 @@ void AudioLoad_Init(void* heap, size_t heapSize) {
         }
     }
 
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
     gMaxTempoTvTypeFactors = 1000 * REFRESH_RATE_DEVIATION_NTSC / REFRESH_RATE_NTSC;
     gRefreshRate = REFRESH_RATE_NTSC;
-#else
+#else // OS_TV_TYPE_PAL
     gMaxTempoTvTypeFactors = 1000 * REFRESH_RATE_DEVIATION_PAL / REFRESH_RATE_PAL;
     gRefreshRate = REFRESH_RATE_PAL;
 #endif
@@ -1020,7 +1020,7 @@ void AudioLoad_Init(void* heap, size_t heapSize) {
     }
 
     AudioHeap_InitPool(&gPermanentCache.pool, ramAddr, gPermanentPoolSize);
-#ifndef VERSION_JP
+#if BUILD_REVISION >= REVISION_B
     gAudioContextInitialized = true;
 #endif
 }
@@ -1688,7 +1688,8 @@ void AudioLoad_LoadPermanentSamples(void) {
     }
 }
 
-#ifdef VERSION_JP
+// TODO: Move to correct file
+#if BUILD_REVISION <= REVISION_A
 static char D_800D1130[] = "Warning:Kill Note  %x \n";
 static char D_800D1148[] = "Kill Voice %d (ID %d) %d\n";
 static char D_800D1164[] = "Warning: Running Sequence's data disappear!\n";
