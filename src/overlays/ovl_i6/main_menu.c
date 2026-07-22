@@ -206,7 +206,7 @@ s32 MainMenu_Update(void) {
                 }
             }
 #ifndef EXPANSION_KIT
-#ifndef VERSION_JP
+#if BUILD_REVISION >= REVISION_B
             if ((gSelectedMode == MODE_VS_BATTLE) && (gControllersConnected < 2)) {
                 gSelectedMode = MODE_DEATH_RACE;
             }
@@ -303,7 +303,7 @@ s32 MainMenu_Update(void) {
                     gModeSubOption[gSelectedMode] = kMaxSubOptionLimits[gSelectedMode];
                 }
             }
-#ifndef VERSION_JP
+#if LANGUAGE == LANGUAGE_ENG
             if (gSelectedMode == MODE_VS_BATTLE && (gControllersConnected < gModeSubOption[gSelectedMode] + 2)) {
                 gModeSubOption[gSelectedMode] = gControllersConnected - 2;
                 if (gModeSubOption[gSelectedMode] < 0) {
@@ -537,7 +537,7 @@ void MainMenu_UnlockEverythingInit(Object* unlockEverythingObj) {
 extern u32 gGameFrameCount;
 extern s32 gSelectedMode;
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 const char* D_i6_8011D850[] = {
     "グランプリ",       // Grand Prix
     "タイムアタック",   // Time Attack
@@ -604,7 +604,7 @@ Gfx* MainMenu_SignDraw(Gfx* gfx, Object* signObj) {
     gfx = TextureCache_DrawList_impl(gfx, sMenuSignCacheTexInfos[mode], temp1, temp2, TEXTURE_CACHE_DRAW_TINTED, false,
                                      false, 1.0f, 1.0f, true);
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     if (mode == gSelectedMode) {
         gfx = Font_DrawString(gfx, (temp1 - (Font_GetStringWidth(D_i6_8011D850[mode], FONT_SET_4, 0) / 2)) + 0x20,
                               temp2 + 0x5B, D_i6_8011D850[mode], 0, FONT_SET_4, 0);
@@ -844,9 +844,9 @@ Gfx* MainMenu_NumPlayersDraw(Gfx* gfx, Object* numPlayersObj) {
                     break;
             }
         } else {
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-#else
+#else // LANGUAGE_ENG
             if ((gControllersConnected - 2) < i) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 128);
             } else {
@@ -919,12 +919,12 @@ Gfx* MainMenu_DifficultyDraw(Gfx* gfx, Object* difficultyObj) {
         }
         if ((gUnlockableLevel < 2) && !gSettingEverythingUnlocked) {
             if (i < 3) {
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
                 gfx = TextureCache_DrawList_impl(gfx, sDifficultyCacheTexInfos[i],
                                                  (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
                                                  OBJECT_TOP(difficultyObj) + (i * 20) + 0xC, TEXTURE_CACHE_DRAW_TINTED,
                                                  false, false, 1.0f, 1.0f, true);
-#else
+#else // LANGUAGE_ENG
                 gfx = TextureCache_DrawList_impl(gfx, sDifficultyCacheTexInfos[i],
                                                  (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
                                                  OBJECT_TOP(difficultyObj) + (i * 20) + 0xE, TEXTURE_CACHE_DRAW_TINTED,
@@ -932,11 +932,11 @@ Gfx* MainMenu_DifficultyDraw(Gfx* gfx, Object* difficultyObj) {
 #endif
             }
         } else {
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
             gfx = TextureCache_DrawList_impl(
                 gfx, sDifficultyCacheTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
                 OBJECT_TOP(difficultyObj) + (i * 18) + 5, TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
-#else
+#else // LANGUAGE_ENG
             gfx = TextureCache_DrawList_impl(
                 gfx, sDifficultyCacheTexInfos[i], (OBJECT_LEFT(difficultyObj) - temp_s6) + 0x20,
                 OBJECT_TOP(difficultyObj) + (i * 18) + 7, TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
@@ -997,11 +997,11 @@ Gfx* MainMenu_TimeAttackModeDraw(Gfx* gfx, Object* timeAttackModeObj) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         }
         temp_a1 = sTimeAttackModeCacheTexInfos[i];
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
         gfx = TextureCache_DrawList_impl(
             gfx, temp_a1, (((s32) (0x80 - temp_a1->width) / 2) + OBJECT_LEFT(timeAttackModeObj)) - temp_s7,
             OBJECT_TOP(timeAttackModeObj) + (i * 28) + 0x11, TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);
-#else
+#else // LANGUAGE_ENG
         gfx = TextureCache_DrawList_impl(
             gfx, temp_a1, (((s32) (0x80 - temp_a1->width) / 2) + OBJECT_LEFT(timeAttackModeObj)) - temp_s7,
             OBJECT_TOP(timeAttackModeObj) + (i * 28) + 0x15, TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, true);

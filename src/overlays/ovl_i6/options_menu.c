@@ -85,7 +85,7 @@ OptionsInfo gOptionsInfo[] = {
       0,
       gOptionsVsHandicapSelection,
       { aOptionsVsHandicapTex, TEX_WIDTH(aOptionsVsHandicapTex), TEX_HEIGHT(aOptionsVsHandicapTex) } },
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     // 'Sound Mode'
     { OPTIONS_SOUND_MODE,
       OPTIONS_SHOWN,
@@ -94,7 +94,7 @@ OptionsInfo gOptionsInfo[] = {
       4,
       gOptionsSoundModeSelection,
       { aOptionsSoundModeTex, TEX_WIDTH(aOptionsSoundModeTex), TEX_HEIGHT(aOptionsSoundModeTex) } },
-#else
+#else // LANGUAGE_ENG
     // 'Sound Mode'
     { OPTIONS_SOUND_MODE,
       OPTIONS_SHOWN,

@@ -1546,7 +1546,7 @@ Gfx* MachineSettings_EngineWeightDraw(Gfx* gfx, Object* engineWeightObj) {
                 gDPSetPrimColor(gfx++, 0, 0, 0, 255, 0, 255);
                 break;
         }
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
         gfx = TextureCache_DrawList_impl(gfx, sMachineAccelerationMaxSpeedCacheTexInfo, OBJECT_LEFT(engineWeightObj),
                                          OBJECT_TOP(engineWeightObj), TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f,
                                          1.0f, true);

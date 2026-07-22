@@ -200,7 +200,7 @@ void CourseSelect_UpdateUnlockedGhosts(void) {
     }
 }
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
 const char* sTrackSubtitles[] = {
     "エイトロード",
     "ハイスピード",
@@ -254,7 +254,7 @@ const char* sTrackSubtitles[] = {
 #endif
     "",
 };
-#else
+#else // LANGUAGE_ENG
 const char* sTrackSubtitles[] = {
     "FIGURE EIGHT",
     "HIGH SPEED",
@@ -984,11 +984,12 @@ void CourseSelect_ArrowsInit(Object* arrowsObj) {
 
 void CourseSelect_GhostMarkerInit(Object* ghostMarkerObj) {
     GhostInfo ghostInfo;
-#ifdef EXPANSION_KIT
-    s32 pad[50];
+#if BUILD_REVISION <= REVISION_B
+    s32 pad;
 #endif
-#ifndef VERSION_PAL
+#if BUILD_REVISION >= REVISION_D
     s32 i;
+    s32 pad[50];
 #endif
 
 #ifndef EXPANSION_KIT

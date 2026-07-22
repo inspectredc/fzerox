@@ -191,7 +191,7 @@ void Main_ThreadEntry(void* arg0) {
 
     osViBlack(false);
 
-#ifndef VERSION_PAL
+#if BUILD_REVISION <= REVISION_B
     if (osAppNMIBuffer[15] != 0x20DE1529) {
         // More than 8MB Ram available, n64dd compatible
         if (osGetMemSize() >= 0x800000) {
@@ -225,9 +225,9 @@ void Main_ThreadEntry(void* arg0) {
         if (gLeoDriveConnectionState != 0) {
             LeoFault_LoadFonts();
         }
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
         func_800751FC("EFZJ");
-#else
+#else // LANGUAGE_ENG
         func_800751FC("EFZE");
 #endif
         if (gLeoDriveConnectionState != 0) {
@@ -277,7 +277,7 @@ void Main_ThreadEntry(void* arg0) {
                    sResetThreadStack + sizeof(sResetThreadStack), 100);
     osStartThread(&sResetThread);
 
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
     if (gRamDDCompatible && (gLeoDriveConnectionState != 0)) {
         SLLeoResetClear();
     }
@@ -306,7 +306,7 @@ void Main_ThreadEntry(void* arg0) {
 #ifndef EXPANSION_KIT
     if (gRamDDCompatible && (gLeoDriveConnectionState != 0)) {
         LeoFault_LoadFonts();
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
         func_8007647C();
 #endif
     }
@@ -407,13 +407,13 @@ void Idle_ThreadEntry(void* arg0) {
     gFrameBuffers[1] = &gFrameBuffer2;
     gFrameBuffers[2] = &gFrameBuffer3;
     osCreateViManager(OS_PRIORITY_VIMGR);
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
     if (osTvType == OS_TV_TYPE_NTSC) {
         osViSetMode(&osViModeNtscLan1);
     } else {
         osViSetMode(&osViModeMpalLan1);
     }
-#else
+#else // OS_TV_TYPE_PAL
     osViSetMode(&osViModeFpalLan1);
     osViSetYScale(0.833f);
 #endif

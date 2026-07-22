@@ -2,15 +2,13 @@
 #include "macros.h"
 
 UNUSED u8 D_80400000[0x8];
-#ifndef EXPANSION_KIT
-#ifdef VERSION_JP
+#if BUILD_REVISION <= REVISION_A
 u8 gLeoFontBuffer[181 * 0x80];
-#else
+#elif BUILD_REVISION == REVISION_B
 u8 gLeoFontBuffer[96 * 0x80];
-#endif
-#ifdef VERSION_PAL
+#elif BUILD_REVISION == REVISION_C
+u8 gLeoFontBuffer[96 * 0x80];
 u8 D_80403008[0x10];
-#endif
-#else
+#elif BUILD_REVISION == REVISION_D
 u8 gLeoFontBuffer[110 * 0x80];
 #endif

@@ -1,5 +1,6 @@
 #include "libultra/ultra64.h"
 #include "unk_structs.h"
+#include "fzx_version.h"
 #include "fzx_course.h"
 
 #ifndef EXPANSION_KIT
@@ -69,8 +70,9 @@ CourseBuffer gCourseCtx = { { CREATOR_NINTENDO,
 #endif
 #endif
 
-#ifndef EXPANSION_KIT
-#ifdef VERSION_PAL
+#if BUILD_REVISION <= REVISION_B
+CourseData D_8010BF90 = { 0 };
+#elif BUILD_REVISION == REVISION_C
 CourseContext D_8010BF90 = { { CREATOR_NINTENDO,
                                0,
                                0,
@@ -92,9 +94,6 @@ CourseContext D_8010BF90 = { { CREATOR_NINTENDO,
                                { 0 } } };
 GhostSave D_8010C980[3] = { 0 };
 SaveCourseRecords D_801188C0 = { 0 };
-#else
-CourseData D_8010BF90 = { 0 };
-#endif
 #endif
 
 // 0x801189D0
@@ -160,7 +159,7 @@ CourseData D_8010CF50 = { CREATOR_NINTENDO,
                           { 0 },
                           { 0 } };
 
-#if !defined(EXPANSION_KIT) & !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
 char gEditCupTrackNames[6][9] = { 0 };
 #else
 char gEditCupTrackNames[6 * 4][9] = { 0 };

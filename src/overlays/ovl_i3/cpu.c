@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ovl_i3.h"
+#include "fzx_version.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
 #include "fzx_course.h"
@@ -307,9 +308,9 @@ u32 D_i3_8013E4A8[] = {
     TIME_CONVERT(28000), TIME_CONVERT(27500), TIME_CONVERT(35000), TIME_CONVERT(34000), TIME_CONVERT(33000),
     TIME_CONVERT(31000), TIME_CONVERT(38000), TIME_CONVERT(37000), TIME_CONVERT(36000), TIME_CONVERT(35000),
     TIME_CONVERT(37000), TIME_CONVERT(36000), TIME_CONVERT(34500), TIME_CONVERT(33000),
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
     TIME_CONVERT(25500),
-#else
+#else // OS_TV_TYPE_PAL
     //! @bug When converting between NTSC times to PAL, a digit was lost
     TIME_CONVERT(2550),
 #endif
@@ -548,7 +549,7 @@ void func_i3_80115E74(void) {
                 }
 
                 for (i = 0; i < 200; i++) {
-#if defined(VERSION_US) || defined(VERSION_PAL) || defined(EXPANSION_KIT)
+#if BUILD_REVISION >= REVISION_B
                     if (var_s5 != 0) {
 #endif
                         temp_hi = Math_Rand2() % var_s5;
@@ -564,7 +565,7 @@ void func_i3_80115E74(void) {
                         if ((m >= 3) || ((m >= 2) && (gDifficulty <= EXPERT))) {
                             break;
                         }
-#if defined(VERSION_US) || defined(VERSION_PAL) || defined(EXPANSION_KIT)
+#if BUILD_REVISION >= REVISION_B
                     } else {
                         break;
                     }
@@ -808,7 +809,7 @@ void Cpu_InitRacer(Racer* racer) {
     s32 j;
 
     sPlayerRacer = gRacers;
-#if defined(VERSION_US) || defined(VERSION_PAL) || defined(EXPANSION_KIT)
+#if BUILD_REVISION >= REVISION_B
     D_80141900 = 0;
 #endif
     if (racer->id == 0) {
@@ -824,9 +825,9 @@ void Cpu_InitRacer(Racer* racer) {
 #endif
         } else {
             for (i = 0; i < 0x200; i += 2) {
-#ifndef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_NTSC
                 D_i3_8013DBE8[i + 0] = 69;
-#else
+#else // OS_TV_TYPE_PAL
                 D_i3_8013DBE8[i + 0] = 83;
 #endif
                 D_i3_8013DBE8[i + 1] = 0;

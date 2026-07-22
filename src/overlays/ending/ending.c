@@ -352,7 +352,7 @@ void EndingCutscene_Init(void) {
             case ENDING_CS_RESULTS_END_SCREEN:
                 cutsceneResults->course = 0;
                 cutsceneResults->left = 76.0f;
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
                 cutsceneResults->gapFromLast = 70.0f;
                 cutsceneResults->height = 195;
 #else
@@ -430,7 +430,7 @@ void EndingCutscene_Init(void) {
         sEndingTex = TextureCache_LoadAndCache(endingTextures[0], 168 * 99 * sizeof(u16), false, true, false);
 
         if (endingTextures[1] != NULL) {
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
             sEndingTextTex = TextureCache_LoadAndCache(endingTextures[1], 196 * 16 * sizeof(u16), false, true, false);
 #else
             sEndingTextTex = TextureCache_LoadAndCache(endingTextures[1], 196 * 32 * sizeof(u16), false, true, false);
@@ -731,7 +731,7 @@ Gfx* EndingCutscene_DrawScrollingResults(Gfx* gfx) {
                                         G_IM_SIZ_16b, TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 
                 if (sEndingTextTex != NULL) {
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
                     gfx = TextureUtils_Draw(gfx, sEndingTextTex, cutsceneResults->left + -14.0f,
                                             textureTop + 99.0f + 10.0f, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b,
                                             TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
@@ -1059,7 +1059,7 @@ Gfx* EndingCutscene_DrawEndScreen(Gfx* gfx) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, sEndScreenAlpha);
 
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
     gfx = TextureUtils_Draw(gfx, sEndingTex, 76, 70, 168, 99, G_IM_FMT_RGBA, G_IM_SIZ_16b,
                             TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #else
@@ -1067,7 +1067,7 @@ Gfx* EndingCutscene_DrawEndScreen(Gfx* gfx) {
                             TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #endif
     if (sEndingTextTex != NULL) {
-#ifdef VERSION_JP
+#if LANGUAGE == LANGUAGE_JPN
         gfx = TextureUtils_Draw(gfx, sEndingTextTex, 62, 179, 196, 16, G_IM_FMT_RGBA, G_IM_SIZ_16b,
                                 TEXTURE_RENDER_TINT_PRIM_COLOR, true, false, false);
 #else

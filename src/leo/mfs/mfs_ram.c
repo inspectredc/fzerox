@@ -2,7 +2,7 @@
 #include "macros.h"
 #include "libc/stddef.h"
 
-#if VERSION_PAL
+#if MFS_VERSION == MFS_VERSION_B
 void func_i1_8040BF40(void) {
     UNUSED s32 pad;
 }

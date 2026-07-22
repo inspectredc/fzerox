@@ -584,7 +584,7 @@ s32 Save_SaveCourseRecordProfiles(s32 courseIndex) {
     ProfileSave* profileSaves = gSaveContext.profileSaves;
 #endif
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     if ((courseIndex >= COURSE_MUTE_CITY) && (courseIndex <= COURSE_BIG_HAND)) {
 #endif
         Save_SaveCourseRecord(&profileSaves[0].courses[courseIndex], courseIndex);
@@ -595,7 +595,7 @@ s32 Save_SaveCourseRecordProfiles(s32 courseIndex) {
         for (i = 0; i < 2; i++) {
             Save_WriteSaveCourseRecord(profileSaves, i, courseIndex, checksum);
         }
-#ifdef EXPANSION_KIT
+#if BUILD_REVISION >= REVISION_D
     } else {
         SaveCourseRecords* saveCourseRecord;
         Save_SaveCourseRecord(gSaveContext.profileSaves[0].courses, courseIndex);
@@ -605,7 +605,7 @@ s32 Save_SaveCourseRecordProfiles(s32 courseIndex) {
         *saveCourseRecord = gSaveContext.profileSaves[0].courses[0];
         DDSave_SaveCourseGhost(courseIndex);
     }
-#elif defined(VERSION_PAL)
+#elif BUILD_REVISION == REVISION_C
 }
 #endif
 
@@ -1571,7 +1571,7 @@ void Save_LoadDeathRace(ProfileSave* profileSaves) {
 void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex) {
     s32 i;
     s32 j;
-#if !defined(EXPANSION_KIT) && !defined(VERSION_PAL)
+#if BUILD_REVISION <= REVISION_B
     u16 checksum;
     s32 invalidSaveIndex;
 #else
@@ -1615,7 +1615,7 @@ void Save_LoadCourseRecord(ProfileSave* profileSaves, s32 courseIndex) {
     }
 
     courseRecord = &profileSaves->courses[courseIndex];
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
     // Split into sub-function
     Save_LoadCourseRecord2(courseRecord, courseIndex);
 }
@@ -1981,7 +1981,7 @@ s32 Save_LoadStaffGhostRecord(GhostInfo* ghostInfo, s32 courseIndex) {
     Save_RomCopyGhostRecord(ghostRecord, courseIndex);
     if (ghostInfo != NULL) {
         func_i2_80101590(ghostRecord, ghostInfo);
-#ifdef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_PAL
         ghostInfo->raceTime = Math_Round(ghostInfo->raceTime * (60.0f / 50.0f));
 #endif
     }
@@ -2095,7 +2095,7 @@ s32 Save_LoadStaffGhost_impl(s32 courseIndex, s32 encodedCourseIndex) {
     }
 #endif
 
-#ifdef VERSION_PAL
+#if OS_TV_TYPE == OS_TV_TYPE_PAL
     {
         s32 i;
         ghostRecord = (GhostRecord*) gSaveBuffer;

@@ -197,7 +197,7 @@ s32 Save_LoadStaffGhost_impl(s32 courseIndex, s32 encodedCourseIndex);
 s32 Save_LoadPlayerGhost_impl(s32 courseIndex, s32 encodedCourseIndex, s32 ghostIndex);
 s32 func_i2_801005CC_impl(s32 courseIndex, s32 encodedCourseIndex);
 
-#if defined(EXPANSION_KIT) || defined(VERSION_PAL)
+#if BUILD_REVISION >= REVISION_C
 void Save_LoadCourseRecord2(SaveCourseRecords* courseRecord, s32 courseIndex);
 #endif
 
