@@ -193,8 +193,8 @@ void CourseEdit_Init(void) {
     D_800CCFBC = 3;
     D_800CCFE8 = 3;
     gCameras[0].fov = 40.0f;
-    func_xk1_8002D86C(9, 2);
-    func_xk1_8002D880(0x18);
+    EKController_SetRepeatDelay(9, 2);
+    EKController_SetDeadZone(24);
     func_xk2_800E77F0();
     COURSE_CONTEXT()->courseData = D_8010CF50;
     gVenueOption = COURSE_CONTEXT()->courseData.venue;
@@ -400,8 +400,8 @@ s32 CourseEdit_Update(void) {
         func_xk2_800EC2A0();
     }
     func_xk2_800D8DAC();
-    func_xk1_8002D810(&gControllers[gPlayerControlPorts[0]]);
-    func_xk1_8002D974();
+    EKController_SetGlobalInputs(&gControllers[gPlayerControlPorts[0]]);
+    EKController_UpdateHeldInput();
 
     if (gInCourseEditTestRun) {
         return func_xk2_800ECBC0();

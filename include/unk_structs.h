@@ -665,14 +665,14 @@ typedef struct unk_8011C220 {
     /* 0x14 */ Mtx3F basis;
 } unk_8011C220; // size = 0x38
 
-typedef struct unk_80140E60 {
-    /* 0x00 */ s32 unk_00; // type
-    /* 0x04 */ s32 unk_04; // value
-} unk_80140E60; // size = 0x8
+typedef struct MachineCreateGrid {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+} MachineCreateGrid; // size = 0x8
 
-typedef struct unk_801413F0 {
+typedef struct MachineCreateDrawData {
     /* 0x00 */ Mtx unk_00;
     /* 0x40 */ LookAt unk_40;
-} unk_801413F0; // size = 0x60
+} MachineCreateDrawData; // size = 0x60
 
 #endif // UNK_STRUCTS_H

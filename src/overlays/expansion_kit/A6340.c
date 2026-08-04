@@ -298,13 +298,13 @@ void ExpansionKit_NameEntryHandleStickInput(void) {
 
     if (stickYMag < stickXMag) {
         oldPos = sNameEntryCursorXPos;
-        func_xk1_8002DAE0(&sNameEntryCursorXPos, 9, 1);
+        EKController_UpdateHorizontalOption(&sNameEntryCursorXPos, 9, 1);
         if (oldPos != sNameEntryCursorXPos) {
             func_xk1_80029924();
         }
     } else {
         oldPos = sNameEntryCursorYPos;
-        func_xk1_8002DBD4(&sNameEntryCursorYPos, 4, 0);
+        EKController_UpdateVerticalOptionSlow(&sNameEntryCursorYPos, 4, 0);
         if (oldPos != sNameEntryCursorYPos) {
             Audio_TriggerSystemSE(NA_SE_35);
         }

@@ -14,7 +14,7 @@
       - [0xA3AE0, c]
       - [0xA6340, c]
       - [0xA8140, c]
-      - [0xAAA80, c]
+      - [0xAAA80, c, controller]
       - [0xAB140, pad]
       - [0xAB150, c]
       - [0xABC40, c]
@@ -31,7 +31,7 @@
       - [0xAFD80, .rodata, A6340]
       - [0xAFE40, .data, A8140]
       - [0xAFEA0, .rodata, A8140]
-      - [0xAFEF0, .data, AAA80]
+      - [0xAFEF0, .data, controller]
       - [0xAFF10, .data, expansion_kit_text]
       - [0xB0640, .data, expansion_kit_data]
       - [0xB0670, .data, AB150]
@@ -44,7 +44,7 @@
       - { type: .bss, vram: 0x8003A550, name: A3AE0 }
       - { type: .bss, vram: 0x8003A560, name: A6340 }
       - { type: .bss, vram: 0x8003A5D0, name: A8140 }
-      - { type: .bss, vram: 0x8003BB50, name: AAA80 }
+      - { type: .bss, vram: 0x8003BB50, name: controller }
       - { type: .bss, vram: 0x8003BB60, name: AB150 }
       - { type: .bss, vram: 0x8003BBA0, name: ABC40 }
 

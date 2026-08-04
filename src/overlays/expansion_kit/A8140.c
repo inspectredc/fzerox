@@ -235,12 +235,12 @@ void func_xk1_8002BBA4(void) {
     sp1C = D_xk1_80032BDC;
     if (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_Z) {
         if (gGameMode == GAMEMODE_COURSE_EDIT) {
-            func_xk1_8002DCC8(&D_xk1_80032BDC, D_xk1_8003A5D0 - 1, 0);
+            EKController_UpdateVerticalOptionFast(&D_xk1_80032BDC, D_xk1_8003A5D0 - 1, 0);
         } else {
-            func_xk1_8002DDC4(&D_xk1_80032BDC, D_xk1_8003A5D0 - 1, 0);
+            EKController_UpdateVerticalOptionStaggered(&D_xk1_80032BDC, D_xk1_8003A5D0 - 1, 0);
         }
     } else {
-        func_xk1_8002DBD4(&D_xk1_80032BDC, D_xk1_8003A5D0 - 1, 0);
+        EKController_UpdateVerticalOptionSlow(&D_xk1_80032BDC, D_xk1_8003A5D0 - 1, 0);
     }
 
     if (sp1C != D_xk1_80032BDC) {
@@ -249,9 +249,7 @@ void func_xk1_8002BBA4(void) {
 
     if (D_xk1_80032BDC >= ((D_xk1_80032BEC / 8) + 13)) {
         D_xk1_80032BEC += 8;
-        return;
-    }
-    if (D_xk1_80032BDC < (D_xk1_80032BEC / 8)) {
+    } else if (D_xk1_80032BDC < (D_xk1_80032BEC / 8)) {
         D_xk1_80032BEC -= 8;
     }
 }
@@ -321,7 +319,7 @@ s32 func_xk1_8002BD64(u8 arg0, char* extension) {
             temp_s0->attr = gMfsRamArea.directoryEntry[*var_s1].attr;
             var_s6++;
 
-            if (++D_xk1_8003A5D0 == 0x66) {
+            if (++D_xk1_8003A5D0 == ARRAY_COUNT(D_xk1_8003A5D8)) {
                 break;
             }
         }
@@ -706,7 +704,7 @@ s32 D_xk1_80032C20 = 0;
 void func_xk1_8002D2F0(void) {
     s32 sp1C = D_xk1_80032C20;
 
-    func_xk1_8002DBD4(&D_xk1_80032C20, 1, 1);
+    EKController_UpdateVerticalOptionSlow(&D_xk1_80032C20, 1, 1);
     if (sp1C != D_xk1_80032C20) {
         Audio_TriggerSystemSE(NA_SE_35);
     }

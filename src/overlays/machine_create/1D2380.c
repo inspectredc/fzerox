@@ -83,15 +83,15 @@ void func_xk3_80132850(void) {
 }
 
 extern f32 D_xk3_80136540;
-extern unk_80140E60 D_xk3_80140E60;
+extern MachineCreateGrid gMachineCreatePartsGrid;
 
 void func_xk3_80132884(void) {
     D_807C6EA8.unk_08 = 0;
     gCustomMachineWork = gCustomMachine;
     PRINTF("WORKS MACHINE MODE : PARTS\n");
     gWorksMachineMode = MACHINE_MODE_PARTS;
-    D_xk3_80140E60.unk_00 = 0;
-    D_xk3_80140E60.unk_04 = 0;
+    gMachineCreatePartsGrid.x = 0;
+    gMachineCreatePartsGrid.y = 0;
     D_xk3_80136540 = -7000.0f;
 }
 
@@ -193,14 +193,14 @@ void func_xk3_80132B28(void) {
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-extern unk_80140E60 D_xk3_80140E68;
+extern MachineCreateGrid gMachineCreateColorGrid;
 extern BorderedBoxWidget* gMachineCreateColorBox;
 
 void func_xk3_80132B40(void) {
     PRINTF("WORKS MACHINE MODE : BODY_COLOR\n");
     gWorksMachineMode = MACHINE_MODE_BODY_COLOR;
-    D_xk3_80140E68.unk_00 = 0;
-    D_xk3_80140E68.unk_04 = 0;
+    gMachineCreateColorGrid.x = 0;
+    gMachineCreateColorGrid.y = 0;
     gMachineCreateColorBox =
         BorderedBox_Init(1, 168, 44, 121, 121, 1, GPACK_RGBA5551(0, 0, 0, 1), MachineCreate_DrawColorSelection);
 }
@@ -208,8 +208,8 @@ void func_xk3_80132B40(void) {
 void func_xk3_80132BB0(void) {
     PRINTF("WORKS MACHINE MODE : LINE_COLOR\n");
     gWorksMachineMode = MACHINE_MODE_LINE_COLOR;
-    D_xk3_80140E68.unk_00 = 0;
-    D_xk3_80140E68.unk_04 = 0;
+    gMachineCreateColorGrid.x = 0;
+    gMachineCreateColorGrid.y = 0;
     gMachineCreateColorBox =
         BorderedBox_Init(1, 168, 44, 121, 121, 1, GPACK_RGBA5551(0, 0, 0, 1), MachineCreate_DrawColorSelection);
 }
@@ -217,8 +217,8 @@ void func_xk3_80132BB0(void) {
 void func_xk3_80132C20(void) {
     PRINTF("WORKS MACHINE MODE : NUMBER_COLOR\n");
     gWorksMachineMode = MACHINE_MODE_NUMBER_COLOR;
-    D_xk3_80140E68.unk_00 = 0;
-    D_xk3_80140E68.unk_04 = 0;
+    gMachineCreateColorGrid.x = 0;
+    gMachineCreateColorGrid.y = 0;
     gMachineCreateColorBox =
         BorderedBox_Init(1, 168, 44, 121, 121, 1, GPACK_RGBA5551(0, 0, 0, 1), MachineCreate_DrawColorSelection);
 }
@@ -226,8 +226,8 @@ void func_xk3_80132C20(void) {
 void func_xk3_80132C90(void) {
     PRINTF("WORKS MACHINE MODE : COCKPIT_COLOR\n");
     gWorksMachineMode = MACHINE_MODE_COCKPIT_COLOR;
-    D_xk3_80140E68.unk_00 = 0;
-    D_xk3_80140E68.unk_04 = 0;
+    gMachineCreateColorGrid.x = 0;
+    gMachineCreateColorGrid.y = 0;
     gMachineCreateColorBox =
         BorderedBox_Init(1, 168, 44, 121, 121, 1, GPACK_RGBA5551(0, 0, 0, 1), MachineCreate_DrawColorSelection);
 }
@@ -261,23 +261,23 @@ void func_xk3_80132DDC(void) {
         PRINTF("WORKS MACHINE MODE : MNAME\n");
         gWorksMachineMode = MACHINE_MODE_MNAME;
         D_807C6EA8.unk_08 = 0x11;
-        func_xk1_8002D86C(0x1B, 6);
-        func_xk1_8002D880(0x28);
+        EKController_SetRepeatDelay(27, 6);
+        EKController_SetDeadZone(40);
         func_xk1_800294AC();
         mfsStrCpy(gExpansionKitNameEntryStr, gCustomMachine.machineName);
         ExpansionKit_NameEntryInit(MachineCreate_NameEntryCallback);
     }
 }
 
-extern unk_80140E60 D_xk3_80140E70;
+extern MachineCreateGrid gMachineCreateMachineSettingsGrid;
 extern BorderedBoxWidget* gMachineCreateStatsBox;
 
 void func_xk3_80132E84(void) {
     gCustomMachineWork = gCustomMachine;
     PRINTF("WORKS MACHINE MODE : SETTING\n");
     gWorksMachineMode = MACHINE_MODE_SETTING;
-    D_xk3_80140E70.unk_00 = 0;
-    D_xk3_80140E70.unk_04 = 0;
+    gMachineCreateMachineSettingsGrid.x = 0;
+    gMachineCreateMachineSettingsGrid.y = 0;
     gMachineCreateStatsBox =
         BorderedBox_Init(1, 122, 38, 174, 79, 1, GPACK_RGBA5551(0, 0, 0, 1), MachineCreate_DrawStatSelection);
 }

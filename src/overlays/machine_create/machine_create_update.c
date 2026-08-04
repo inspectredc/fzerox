@@ -9,9 +9,9 @@ s32 D_xk3_80140E50;
 s32 D_xk3_80140E54;
 f32 D_xk3_80140E58;
 
-unk_80140E60 D_xk3_80140E60;
-unk_80140E60 D_xk3_80140E68;
-unk_80140E60 D_xk3_80140E70;
+MachineCreateGrid gMachineCreatePartsGrid;
+MachineCreateGrid gMachineCreateColorGrid;
+MachineCreateGrid gMachineCreateMachineSettingsGrid;
 
 f32 D_xk3_80140E78;
 f32 D_xk3_80140E7C;
@@ -143,43 +143,43 @@ void func_xk3_8012BD84(void) {
         case MACHINE_MODE_LINE_COLOR:
         case MACHINE_MODE_NUMBER_COLOR:
         case MACHINE_MODE_COCKPIT_COLOR: {
-            s32 sp34 = D_xk3_80140E68.unk_00;
-            s32 sp30 = D_xk3_80140E68.unk_04;
-            func_xk1_8002D86C(0x1B, 6);
-            func_xk1_8002D880(0x28);
-            if (D_xk3_80140E68.unk_04 != 8) {
-                func_xk1_8002DAE0(&D_xk3_80140E68, 7, 1);
+            s32 prevX = gMachineCreateColorGrid.x;
+            s32 prevY = gMachineCreateColorGrid.y;
+            EKController_SetRepeatDelay(27, 6);
+            EKController_SetDeadZone(40);
+            if (gMachineCreateColorGrid.y != 8) {
+                EKController_UpdateHorizontalOption(&gMachineCreateColorGrid.x, 7, 1);
             }
-            func_xk1_8002DBD4(&D_xk3_80140E68.unk_04, 8, 0);
-            if ((sp34 != D_xk3_80140E68.unk_00) || (sp30 != D_xk3_80140E68.unk_04)) {
+            EKController_UpdateVerticalOptionSlow(&gMachineCreateColorGrid.y, 8, 0);
+            if ((prevX != gMachineCreateColorGrid.x) || (prevY != gMachineCreateColorGrid.y)) {
                 Audio_TriggerSystemSE(NA_SE_30);
             }
             break;
         }
         case MACHINE_MODE_PARTS: {
-            s32 sp2C = D_xk3_80140E60.unk_00;
-            s32 sp28 = D_xk3_80140E60.unk_04;
-            func_xk1_8002D86C(0x1B, 6);
-            func_xk1_8002D880(0x28);
-            if (D_xk3_80140E60.unk_04 != 3) {
-                func_xk1_8002DAE0(&D_xk3_80140E60, 6, 1);
+            s32 prevX = gMachineCreatePartsGrid.x;
+            s32 prevY = gMachineCreatePartsGrid.y;
+            EKController_SetRepeatDelay(27, 6);
+            EKController_SetDeadZone(40);
+            if (gMachineCreatePartsGrid.y != 3) {
+                EKController_UpdateHorizontalOption(&gMachineCreatePartsGrid.x, 6, 1);
             }
-            func_xk1_8002DBD4(&D_xk3_80140E60.unk_04, 3, 0);
-            if ((sp2C != D_xk3_80140E60.unk_00) || (sp28 != D_xk3_80140E60.unk_04)) {
+            EKController_UpdateVerticalOptionSlow(&gMachineCreatePartsGrid.y, 3, 0);
+            if ((prevX != gMachineCreatePartsGrid.x) || (prevY != gMachineCreatePartsGrid.y)) {
                 Audio_TriggerSystemSE(NA_SE_30);
             }
             break;
         }
         case MACHINE_MODE_SETTING: {
-            s32 sp24 = D_xk3_80140E70.unk_00;
-            s32 sp20 = D_xk3_80140E70.unk_04;
-            func_xk1_8002D86C(0x1B, 6);
-            func_xk1_8002D880(0x28);
-            if (D_xk3_80140E70.unk_04 != 3) {
-                func_xk1_8002DAE0(&D_xk3_80140E70, 4, 1);
+            s32 prevX = gMachineCreateMachineSettingsGrid.x;
+            s32 prevY = gMachineCreateMachineSettingsGrid.y;
+            EKController_SetRepeatDelay(27, 6);
+            EKController_SetDeadZone(40);
+            if (gMachineCreateMachineSettingsGrid.y != 3) {
+                EKController_UpdateHorizontalOption(&gMachineCreateMachineSettingsGrid.x, 4, 1);
             }
-            func_xk1_8002DBD4(&D_xk3_80140E70.unk_04, 3, 0);
-            if ((sp24 != D_xk3_80140E70.unk_00) || (sp20 != D_xk3_80140E70.unk_04)) {
+            EKController_UpdateVerticalOptionSlow(&gMachineCreateMachineSettingsGrid.y, 3, 0);
+            if ((prevX != gMachineCreateMachineSettingsGrid.x) || (prevY != gMachineCreateMachineSettingsGrid.y)) {
                 Audio_TriggerSystemSE(NA_SE_30);
             }
             break;
@@ -191,15 +191,15 @@ void func_xk3_8012BD84(void) {
         case MACHINE_MODE_ENTRY_SELECT_SUPER:
         case MACHINE_MODE_ENTRY_CLEAR_SELECT_FILE:
         case MACHINE_MODE_ENTRY_CLEAR_SELECT_SUPER:
-            func_xk1_8002D86C(0x1B, 6);
-            func_xk1_8002D880(0x28);
+            EKController_SetRepeatDelay(27, 6);
+            EKController_SetDeadZone(40);
             func_xk1_8002BBA4();
             break;
         case MACHINE_MODE_MENU:
             D_xk3_80136554 = (s32) (D_xk3_80140E54 - 0x24) / 16;
-            func_xk1_8002D86C(0x1B, 6);
-            func_xk1_8002D880(0x28);
-            func_xk1_8002DBD4(&D_xk3_80136554, 2, 0);
+            EKController_SetRepeatDelay(27, 6);
+            EKController_SetDeadZone(40);
+            EKController_UpdateVerticalOptionSlow(&D_xk3_80136554, 2, 0);
             D_xk3_80140E54 = (D_xk3_80136554 * 0x10) + 0x24;
             func_xk1_800269F4(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
             func_xk1_80027CFC(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
@@ -208,18 +208,18 @@ void func_xk3_8012BD84(void) {
         case MACHINE_MODE_SELECT_LINE:
         case MACHINE_MODE_SELECT_MARK:
             D_xk3_80136554 = (s32) (D_xk3_80140E54 - 0x34) / 16;
-            func_xk1_8002D86C(0x1B, 6);
-            func_xk1_8002D880(0x28);
-            func_xk1_8002DBD4(&D_xk3_80136554, 7, 0);
+            EKController_SetRepeatDelay(27, 6);
+            EKController_SetDeadZone(40);
+            EKController_UpdateVerticalOptionSlow(&D_xk3_80136554, 7, 0);
             D_xk3_80140E54 = (D_xk3_80136554 * 0x10) + 0x34;
             func_xk1_800269F4(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
             func_xk1_80027CFC(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
             break;
         case MACHINE_MODE_0: {
             s32 sp1C = D_xk3_80136550;
-            func_xk1_8002D86C(0x1B, 6);
-            func_xk1_8002D880(0x28);
-            func_xk1_8002DAE0(&D_xk3_80136550, 5, 1);
+            EKController_SetRepeatDelay(27, 6);
+            EKController_SetDeadZone(40);
+            EKController_UpdateHorizontalOption(&D_xk3_80136550, 5, 1);
             D_xk3_80140E50 = (D_xk3_80136550 * 0x30) + 0x30;
             D_xk3_80140E54 = 0x1C;
             if (sp1C != D_xk3_80136550) {
@@ -474,12 +474,12 @@ void func_xk3_8012CAC8(void) {
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_START) {
         switch (gWorksMachineMode) {
             case MACHINE_MODE_PARTS:
-                D_xk3_80140E60.unk_04 = 3;
+                gMachineCreatePartsGrid.y = 3;
                 D_xk3_80136544 = 20;
                 break;
             case MACHINE_MODE_SETTING:
                 if (BorderedBox_GetInfo(gMachineCreateStatsBox, IS_BORDERED_BOX_OPENED)) {
-                    D_xk3_80140E70.unk_04 = 3;
+                    gMachineCreateMachineSettingsGrid.y = 3;
                     D_xk3_80136544 = 20;
                 }
                 break;
@@ -488,7 +488,7 @@ void func_xk3_8012CAC8(void) {
             case MACHINE_MODE_NUMBER_COLOR:
             case MACHINE_MODE_COCKPIT_COLOR:
                 if (BorderedBox_GetInfo(gMachineCreateColorBox, IS_BORDERED_BOX_OPENED)) {
-                    D_xk3_80140E68.unk_04 = 8;
+                    gMachineCreateColorGrid.y = 8;
                     D_xk3_80136544 = 20;
                 }
                 break;
@@ -630,22 +630,22 @@ void func_xk3_8012CE44(void) {
                 }
                 break;
             case MACHINE_MODE_PARTS:
-                switch (D_xk3_80140E60.unk_04) {
+                switch (gMachineCreatePartsGrid.y) {
                     case 0:
-                        if (D_xk3_80140E60.unk_00 != gCustomMachine.frontType) {
-                            gCustomMachine.frontType = D_xk3_80140E60.unk_00;
+                        if (gMachineCreatePartsGrid.x != gCustomMachine.frontType) {
+                            gCustomMachine.frontType = gMachineCreatePartsGrid.x;
                             Audio_TriggerSystemSE(NA_SE_39);
                         }
                         break;
                     case 1:
-                        if (D_xk3_80140E60.unk_00 != gCustomMachine.rearType) {
-                            gCustomMachine.rearType = D_xk3_80140E60.unk_00;
+                        if (gMachineCreatePartsGrid.x != gCustomMachine.rearType) {
+                            gCustomMachine.rearType = gMachineCreatePartsGrid.x;
                             Audio_TriggerSystemSE(NA_SE_39);
                         }
                         break;
                     case 2:
-                        if (D_xk3_80140E60.unk_00 != gCustomMachine.wingType) {
-                            gCustomMachine.wingType = D_xk3_80140E60.unk_00;
+                        if (gMachineCreatePartsGrid.x != gCustomMachine.wingType) {
+                            gCustomMachine.wingType = gMachineCreatePartsGrid.x;
                             Audio_TriggerSystemSE(NA_SE_39);
                         }
                         break;
@@ -1019,7 +1019,7 @@ void func_xk3_8012DBFC(void) {
     }
     switch (gWorksMachineMode) {
         case MACHINE_MODE_PARTS:
-            if ((D_xk3_80140E60.unk_04 == 3) && (D_xk3_80136544 >= 0)) {
+            if ((gMachineCreatePartsGrid.y == 3) && (D_xk3_80136544 >= 0)) {
                 if (D_xk3_80136544 == 0) {
                     D_xk3_80136544 = -1;
                     PRINTF("WORKS MACHINE MODE : 0\n");
@@ -1033,7 +1033,7 @@ void func_xk3_8012DBFC(void) {
             }
             break;
         case MACHINE_MODE_SETTING:
-            if ((D_xk3_80140E70.unk_04 == 3) && (D_xk3_80136544 >= 0)) {
+            if ((gMachineCreateMachineSettingsGrid.y == 3) && (D_xk3_80136544 >= 0)) {
                 if (D_xk3_80136544 == 0) {
                     D_xk3_80136544 = -1;
                     PRINTF("WORKS MACHINE MODE : 0\n");
@@ -1051,7 +1051,7 @@ void func_xk3_8012DBFC(void) {
         case MACHINE_MODE_LINE_COLOR:
         case MACHINE_MODE_NUMBER_COLOR:
         case MACHINE_MODE_COCKPIT_COLOR:
-            if ((D_xk3_80140E68.unk_04 == 8) && (D_xk3_80136544 >= 0)) {
+            if ((gMachineCreateColorGrid.y == 8) && (D_xk3_80136544 >= 0)) {
                 if (D_xk3_80136544 == 0) {
                     D_xk3_80136544 = -1;
                     func_xk3_8012BC98();
@@ -1080,7 +1080,7 @@ bool func_xk3_8012DF04(void) {
         gWorksMachineMode = MACHINE_MODE_SAVE_FILE_EXIST;
         func_8076869C(MFS_ENTRY_WORKING_DIR, gCustomMachine.machineName, "CARD");
     }
-    func_xk1_8002D974();
+    EKController_UpdateHeldInput();
     if ((D_80794E14 == 0) && (gTransitionState == TRANSITION_INACTIVE) && !D_xk3_80136548) {
         func_xk3_8012BD84();
     }

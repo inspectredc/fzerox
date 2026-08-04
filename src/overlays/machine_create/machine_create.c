@@ -75,11 +75,11 @@ void MachineCreate_Init(void) {
 extern s16 gGameModeChangeState;
 extern s8 D_80794E10;
 extern s32 D_800DCCFC;
-extern unk_801413F0 D_xk3_801413F0[];
-extern unk_801413F0* D_xk3_801414B0;
+extern MachineCreateDrawData gMachineCreateDrawData[];
+extern MachineCreateDrawData* gMachineCreateDrawDataPtr;
 
 s32 MachineCreate_Update(void) {
-    D_xk3_801414B0 = &D_xk3_801413F0[D_800DCCFC];
+    gMachineCreateDrawDataPtr = &gMachineCreateDrawData[D_800DCCFC];
     if (gWorksMachineMode == MACHINE_MODE_ENTRY) {
         MachineCreate_MachineSelectUpdate();
         return GAMEMODE_CREATE_MACHINE;

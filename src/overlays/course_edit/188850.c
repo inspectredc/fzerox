@@ -1111,7 +1111,7 @@ void func_xk2_800D9670(void) {
 
     sp64 = D_xk2_80119730;
     sp60 = D_xk2_80119738;
-    if (func_xk1_8002DAD4() == 1) {
+    if (EKController_GetInputFramesHeld() == 1) {
 
         if (ABS(temp_s0) > 10) {
             if (temp_s0 < 0) {
@@ -1155,7 +1155,7 @@ void func_xk2_800D9670(void) {
             }
         }
     } else {
-        if (func_xk1_8002DAD4() >= 9) {
+        if (EKController_GetInputFramesHeld() >= 9) {
             D_xk2_80119730 += ((D_xk2_80128D44 * sp5C) * temp_s0) + ((D_xk2_80128D40 * sp5C) * temp_s1);
             D_xk2_80119738 += ((D_xk2_80128D40 * sp5C) * temp_s0) - ((D_xk2_80128D44 * sp5C) * temp_s1);
         }
@@ -1325,14 +1325,14 @@ void func_xk2_800DA288(void) {
     }
 
     sp54 = D_xk2_80119734;
-    if (func_xk1_8002DAD4() == 1) {
+    if (EKController_GetInputFramesHeld() == 1) {
         if (temp_s0 < 0) {
             D_xk2_80119734 -= 10.0f;
         } else {
             D_xk2_80119734 += 10.0f;
         }
     } else {
-        if (func_xk1_8002DAD4() >= 9) {
+        if (EKController_GetInputFramesHeld() >= 9) {
             D_xk2_80119734 += sp50 * temp_s0;
         }
     }
@@ -1443,14 +1443,14 @@ void func_xk2_800DA984(void) {
         return;
     }
 
-    if (func_xk1_8002DAD4() == 1) {
+    if (EKController_GetInputFramesHeld() == 1) {
         if (temp_s1 < 0) {
             D_xk2_8011973C -= 10;
         } else {
             D_xk2_8011973C += 10;
         }
     } else {
-        if (func_xk1_8002DAD4() >= 9) {
+        if (EKController_GetInputFramesHeld() >= 9) {
             D_xk2_8011973C += Math_Round(temp_s1 * D_xk2_800F6834);
         }
     }
@@ -1525,7 +1525,7 @@ void func_xk2_800DADEC(void) {
         return;
     }
 
-    if (func_xk1_8002DAD4() == 1) {
+    if (EKController_GetInputFramesHeld() == 1) {
         if (temp_s3 < 0) {
             for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
                 if (D_80128690[i].unk_08 == 0) {
@@ -1546,7 +1546,7 @@ void func_xk2_800DADEC(void) {
                 COURSE_CONTEXT()->courseData.bankAngle[i] = (COURSE_CONTEXT()->courseData.bankAngle[i] / 3) * 3;
             }
         }
-    } else if (func_xk1_8002DAD4() >= 9) {
+    } else if (EKController_GetInputFramesHeld() >= 9) {
         for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
             if (D_80128690[i].unk_08 == 0) {
                 continue;
@@ -1584,13 +1584,13 @@ void func_xk2_800DB154(void) {
         return;
     }
 
-    if (func_xk1_8002DAD4() == 1) {
+    if (EKController_GetInputFramesHeld() == 1) {
         if (temp_s1 < 0) {
             D_xk2_80119740 -= 10;
         } else {
             D_xk2_80119740 += 10;
         }
-    } else if (func_xk1_8002DAD4() >= 9) {
+    } else if (EKController_GetInputFramesHeld() >= 9) {
         D_xk2_80119740 += Math_Round(temp_s1 * D_xk2_800F6834);
     }
 
@@ -1850,7 +1850,7 @@ void func_xk2_800DBCF8(void) {
     if (var_a2 == 0) {
         var_a2 = 1;
     }
-    if (((gGameFrameCount % var_a2) == 0) && ((func_xk1_8002DAD4() == 1) || (func_xk1_8002DAD4() >= 9))) {
+    if (((gGameFrameCount % var_a2) == 0) && ((EKController_GetInputFramesHeld() == 1) || (EKController_GetInputFramesHeld() >= 9))) {
         Audio_TriggerSystemSE(NA_SE_38);
     }
 }
@@ -2933,9 +2933,9 @@ void func_xk2_800DE758(void) {
     temp_v1 = sp18->numItems;
     sp1C = D_xk1_800305FC;
     if (D_80119720->buttonCurrent & BTN_Z) {
-        func_xk1_8002DCC8(&D_xk1_800305FC, temp_v1 - 1, 0);
+        EKController_UpdateVerticalOptionFast(&D_xk1_800305FC, temp_v1 - 1, 0);
     } else {
-        func_xk1_8002DBD4(&D_xk1_800305FC, temp_v1 - 1, 0);
+        EKController_UpdateVerticalOptionSlow(&D_xk1_800305FC, temp_v1 - 1, 0);
     }
     if ((sp18 == &gCreateWidget) && (D_xk1_800305FC != 0) && (D_802CB6D0.controlPointCount < 4)) {
         D_xk1_800305FC = 0;
@@ -3007,11 +3007,11 @@ void func_xk2_800DEA20(void) {
     }
 
     if ((D_xk2_800F684C != 1) && (D_80794E14 == 0)) {
-        func_xk1_8002DAE0(&D_xk2_800F6848, 5, 1);
+        EKController_UpdateHorizontalOption(&D_xk2_800F6848, 5, 1);
     }
     sp1C = D_xk2_800F684C;
     if (D_xk2_800F6848 == 5) {
-        func_xk1_8002DBD4(&D_xk2_800F684C, 1, 1);
+        EKController_UpdateVerticalOptionSlow(&D_xk2_800F684C, 1, 1);
     }
     if (sp1C != D_xk2_800F684C) {
         Audio_TriggerSystemSE(NA_SE_35);

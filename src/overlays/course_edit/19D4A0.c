@@ -107,7 +107,7 @@ void func_xk2_800EBE90(void) {
     s32 sp1C;
 
     sp1C = D_xk2_80103F14;
-    func_xk1_8002DBD4(&D_xk2_80103F14, 5, 0);
+    EKController_UpdateVerticalOptionSlow(&D_xk2_80103F14, 5, 0);
 
     if (sp1C != D_xk2_80103F14) {
         Audio_TriggerSystemSE(NA_SE_35);

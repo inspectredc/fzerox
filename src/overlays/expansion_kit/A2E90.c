@@ -131,7 +131,7 @@ void func_xk1_80025ED4(char* arg0) {
             arg0++;
         } else {
             temp_s1 = (arg0[0] << 8) + arg0[1];
-            D_xk1_8003A548[D_xk1_80030080] = (func_xk1_80025E8C(temp_s1) << 7) + D_xk1_8003A488 + 0xE00;
+            D_xk1_8003A548[D_xk1_80030080] = (func_xk1_80025E8C(temp_s1) * 0x80) + D_xk1_8003A488 + 0xE00;
             D_xk1_80030080++;
             arg0 += 2;
         }
@@ -145,7 +145,7 @@ void func_xk1_80025F98(void) {
     D_xk1_8003A54C = Arena_Allocate(ALLOC_FRONT, D_xk1_80030080 * sizeof(u16));
     D_xk1_8003A548 = Arena_Allocate(ALLOC_FRONT, D_xk1_80030080 * sizeof(s32));
     D_xk1_8003A494 = func_xk1_80025DE4();
-    D_xk1_8003A488 = Arena_Allocate(ALLOC_FRONT, (D_xk1_8003A494 << 7) + 0xE00);
+    D_xk1_8003A488 = Arena_Allocate(ALLOC_FRONT, (D_xk1_8003A494 * 0x80) + 0xE00);
     D_xk1_8003A490 += 0xE00;
     func_xk1_800267C4(D_xk1_8003A54C);
     D_xk1_80030080 = 0;

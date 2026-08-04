@@ -36,7 +36,7 @@ void func_xk2_800F40B0(void) {
     switch (D_xk2_801195E0) {
         case 0:
             sp54 = D_xk2_801195E4;
-            func_xk1_8002DBD4(&D_xk2_801195E4, 5, 1);
+            EKController_UpdateVerticalOptionSlow(&D_xk2_801195E4, 5, 1);
 
             if (sp54 != D_xk2_801195E4) {
                 Audio_TriggerSystemSE(NA_SE_35);
@@ -45,7 +45,7 @@ void func_xk2_800F40B0(void) {
             if ((D_xk2_801195E4 < 4) && sp50) {
                 sp54 = D_800D11C8[D_xk2_801195E4];
 
-                func_xk1_8002DAE0(&D_800D11C8[D_xk2_801195E4], 1, 1);
+                EKController_UpdateHorizontalOption(&D_800D11C8[D_xk2_801195E4], 1, 1);
 
                 if (sp54 != D_800D11C8[D_xk2_801195E4]) {
                     Audio_TriggerSystemSE(NA_SE_30);
@@ -63,26 +63,26 @@ void func_xk2_800F40B0(void) {
             break;
         case 1:
             sp48 = D_xk2_801195E8;
-            func_xk1_8002DBD4(&D_xk2_801195E8, 1, 1);
+            EKController_UpdateVerticalOptionSlow(&D_xk2_801195E8, 1, 1);
             if (sp48 != D_xk2_801195E8) {
                 Audio_TriggerSystemSE(NA_SE_35);
             }
             break;
         case 4:
             sp54 = D_800D11C8[4];
-            func_xk1_8002DAE0(&D_800D11C8[4], 8, 0);
+            EKController_UpdateHorizontalOption(&D_800D11C8[4], 8, 0);
             if (sp54 != D_800D11C8[4]) {
                 Audio_TriggerSystemSE(NA_SE_30);
             }
             break;
         case 3:
             sp44 = D_xk2_801195E4;
-            func_xk1_8002DBD4(&D_xk2_801195E4, 5, 1);
+            EKController_UpdateVerticalOptionSlow(&D_xk2_801195E4, 5, 1);
             if (sp44 != D_xk2_801195E4) {
                 D_xk2_801195E0 = 0;
             }
             sp44 = D_800D11C8[D_xk2_801195E4];
-            func_xk1_8002DAE0(&D_800D11C8[D_xk2_801195E4], 1, 1);
+            EKController_UpdateHorizontalOption(&D_800D11C8[D_xk2_801195E4], 1, 1);
             if (sp44 != D_800D11C8[D_xk2_801195E4]) {
                 Audio_TriggerSystemSE(NA_SE_30);
                 D_xk2_801195E0 = 0;

@@ -139,22 +139,22 @@ Gfx* func_xk3_80135034(Gfx* gfx) {
     return gfx;
 }
 
-extern unk_80140E60 D_xk3_80140E70;
+extern MachineCreateGrid gMachineCreateMachineSettingsGrid;
 extern u16 aMachineCreateOkTex[];
 extern u16 aMachineCreateHighlightedOkTex[];
 extern Gfx D_xk3_80137378[];
 
 Gfx* func_xk3_80135158(Gfx* gfx) {
 
-    if (D_xk3_80140E70.unk_04 == 3) {
+    if (gMachineCreateMachineSettingsGrid.y == 3) {
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateHighlightedOkTex, 259, 98, 32, 16);
     } else {
         gfx = ExpansionKit_DrawRectangleBorderHighlight(
-            gfx, sMachineStatLeftPositions[D_xk3_80140E70.unk_04][D_xk3_80140E70.unk_00],
-            sMachineStatTopPositions[D_xk3_80140E70.unk_04][D_xk3_80140E70.unk_00],
-            sMachineStatLeftPositions[D_xk3_80140E70.unk_04][D_xk3_80140E70.unk_00] + (24 - 1),
-            sMachineStatTopPositions[D_xk3_80140E70.unk_04][D_xk3_80140E70.unk_00] + (16 - 1), 255, 64, 64,
+            gfx, sMachineStatLeftPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x],
+            sMachineStatTopPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x],
+            sMachineStatLeftPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] + (24 - 1),
+            sMachineStatTopPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] + (16 - 1), 255, 64, 64,
             func_xk1_800290C0(), 2, 2);
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateOkTex, 259, 98, 32, 16);
@@ -245,30 +245,30 @@ void func_xk3_8013571C(void) {
     if (!BorderedBox_GetInfo(gMachineCreateStatsBox, IS_BORDERED_BOX_OPENED)) {
         return;
     }
-    if (D_xk3_80140E70.unk_04 == 3) {
+    if (gMachineCreateMachineSettingsGrid.y == 3) {
         PRINTF("WORKS MACHINE MODE : 0\n");
         gWorksMachineMode = MACHINE_MODE_0;
         Audio_TriggerSystemSE(NA_SE_36);
         BorderedBox_StartClose(gMachineCreateStatsBox);
-    } else if (*sMachineStatSelectionStates[D_xk3_80140E70.unk_04][D_xk3_80140E70.unk_00] != MACHINE_STAT_INVALID) {
-        switch (D_xk3_80140E70.unk_04) {
+    } else if (*sMachineStatSelectionStates[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] != MACHINE_STAT_INVALID) {
+        switch (gMachineCreateMachineSettingsGrid.y) {
             case BODY_STAT:
-                if (D_xk3_80140E70.unk_00 != gCustomMachine.body) {
-                    gCustomMachine.body = D_xk3_80140E70.unk_00;
+                if (gMachineCreateMachineSettingsGrid.x != gCustomMachine.body) {
+                    gCustomMachine.body = gMachineCreateMachineSettingsGrid.x;
                     Audio_TriggerSystemSE(NA_SE_39);
                     break;
                 }
                 break;
             case BOOST_STAT:
-                if (D_xk3_80140E70.unk_00 != gCustomMachine.boost) {
-                    gCustomMachine.boost = D_xk3_80140E70.unk_00;
+                if (gMachineCreateMachineSettingsGrid.x != gCustomMachine.boost) {
+                    gCustomMachine.boost = gMachineCreateMachineSettingsGrid.x;
                     Audio_TriggerSystemSE(NA_SE_39);
                     break;
                 }
                 break;
             case GRIP_STAT:
-                if (D_xk3_80140E70.unk_00 != gCustomMachine.grip) {
-                    gCustomMachine.grip = D_xk3_80140E70.unk_00;
+                if (gMachineCreateMachineSettingsGrid.x != gCustomMachine.grip) {
+                    gCustomMachine.grip = gMachineCreateMachineSettingsGrid.x;
                     Audio_TriggerSystemSE(NA_SE_39);
                     break;
                 }

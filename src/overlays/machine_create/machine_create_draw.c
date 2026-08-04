@@ -11,8 +11,8 @@
 #include ASSET_HEADER_EK(overlays/machine_create/machine_create_assets.h)
 
 Vp gMachinePartViewports[3][7];
-unk_801413F0 D_xk3_801413F0[2];
-unk_801413F0* D_xk3_801414B0;
+MachineCreateDrawData gMachineCreateDrawData[2];
+MachineCreateDrawData* gMachineCreateDrawDataPtr;
 
 Gfx* sCustomMachinePartDLs[][7] = {
     { D_9015400, D_9015938, D_9015658, D_9014B40, D_9014DE0, D_9015088, D_90148F8 },
@@ -175,8 +175,6 @@ Gfx* MachineCreate_DrawFloatTextureBlockI8(Gfx* gfx, TexturePtr texture, f32 lef
 
     return gfx;
 }
-
-extern Gfx D_xk3_80137378[];
 
 Gfx* MachineCreate_DrawMenuItem(Gfx* gfx, TexturePtr texture1, TexturePtr texture2, u16 left, u16 top, u8 width,
                                 u8 height, u8 red, u8 green, u8 blue) {
@@ -429,7 +427,7 @@ Gfx* MachineCreate_SetupWingTextureColor(Gfx* gfx, u8 bodyR, u8 bodyG, u8 bodyB,
 
 extern s32 D_xk3_80141294;
 
-extern unk_80140E60 D_xk3_80140E60;
+extern MachineCreateGrid gMachineCreatePartsGrid;
 
 Gfx* func_xk3_801301B4(Gfx* gfx) {
     u8 i;
@@ -475,15 +473,15 @@ Gfx* func_xk3_801301B4(Gfx* gfx) {
                                            sPartsRightPositions[MACHINE_PART_WING][gCustomMachine.wingType],
                                            sPartsBottomPositions[MACHINE_PART_WING][gCustomMachine.wingType],
                                            GPACK_RGBA5551(255, 255, 255, 1), 1, 1);
-    if (D_xk3_80140E60.unk_04 == 3) {
+    if (gMachineCreatePartsGrid.y == 3) {
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateHighlightedOkTex, 264, 155, 32, 16);
     } else {
         gfx = ExpansionKit_DrawRectangleBorderHighlight(
-            gfx, sPartsLeftPositions[D_xk3_80140E60.unk_04][D_xk3_80140E60.unk_00],
-            sPartsTopPositions[D_xk3_80140E60.unk_04][D_xk3_80140E60.unk_00],
-            sPartsRightPositions[D_xk3_80140E60.unk_04][D_xk3_80140E60.unk_00],
-            sPartsBottomPositions[D_xk3_80140E60.unk_04][D_xk3_80140E60.unk_00], 255, 64, 64, func_xk1_800290C0(), 2,
+            gfx, sPartsLeftPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x],
+            sPartsTopPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x],
+            sPartsRightPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x],
+            sPartsBottomPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x], 255, 64, 64, func_xk1_800290C0(), 2,
             2);
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateOkTex, 264, 155, 32, 16);
@@ -491,7 +489,6 @@ Gfx* func_xk3_801301B4(Gfx* gfx) {
     return gfx;
 }
 
-extern unk_801413F0* D_xk3_801414B0;
 extern GfxPool* gGfxPool;
 
 Gfx* func_xk3_80130698(Gfx* gfx, s32 arg1) {
@@ -509,8 +506,8 @@ Gfx* func_xk3_80130698(Gfx* gfx, s32 arg1) {
             break;
         case 1:
             Matrix_SetLookAt(NULL, &spC0, D_xk3_80136540, 0.0f, 1320.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-            Light_SetLookAtSource(&D_xk3_801414B0->unk_40, &spC0);
-            gSPLookAt(gfx++, &D_xk3_801414B0->unk_40);
+            Light_SetLookAtSource(&gMachineCreateDrawDataPtr->unk_40, &spC0);
+            gSPLookAt(gfx++, &gMachineCreateDrawDataPtr->unk_40);
             break;
     }
 
@@ -610,9 +607,9 @@ Gfx* func_xk3_80130EE0(Gfx* gfx) {
                                          gCustomMachine.decal - 1);
     Matrix_SetLookAt(&gGfxPool->unk_20108[1], NULL, 0.0f, 0.0f, 2000.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     Matrix_SetTransRot(&gGfxPool->unk_20308[3], NULL, 1.0f, 0x400, 0, 0, 0.0f, 0.0f, 0.0f);
-    Matrix_SetOrtho(&D_xk3_801414B0->unk_00, NULL, 1.0f, -1550.0f, 1550.0f, -1550.0f, 1550.0f, 10.0f, 12800.0f);
+    Matrix_SetOrtho(&gMachineCreateDrawDataPtr->unk_00, NULL, 1.0f, -1550.0f, 1550.0f, -1550.0f, 1550.0f, 10.0f, 12800.0f);
 
-    gSPMatrix(gfx++, &D_xk3_801414B0->unk_00, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gfx++, &gMachineCreateDrawDataPtr->unk_00, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gfx++, &D_1000000.unk_20108[1], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
     gSPMatrix(gfx++, &D_1000000.unk_20308[3], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
