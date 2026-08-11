@@ -87,12 +87,12 @@ Gfx* func_xk1_8002ECE8(Gfx* gfx, u16 arg1, u16 arg2, s32 arg3, u16 arg4) {
 u16 D_xk1_80033504 = 0;
 u16 D_xk1_80033508 = 0;
 
-extern u8* D_xk3_801372B8[];
+extern u8* gMachineCreateMessageStrs[];
 extern u8* sLeoErrorMessages[];
 extern volatile u8 D_80794E1C;
 extern volatile u8 D_80794E24;
 extern OSMesgQueue D_807C6E90;
-extern u8* D_xk1_800337D0[];
+extern u8* gFileMessageStrs[];
 
 Gfx* func_xk1_8002ED64(Gfx* gfx) {
     static u16 D_xk1_8003350C = 0;
@@ -180,31 +180,31 @@ Gfx* func_xk1_8002ED64(Gfx* gfx) {
             break;
         case 6:
             gfx = func_xk1_8002EAF0(gfx, 104, 1, GPACK_RGBA5551(130, 130, 255, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[0]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[0]);
             break;
         case 5:
             gfx = func_xk1_8002EAF0(gfx, 104, 1, GPACK_RGBA5551(130, 130, 255, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[1]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[1]);
             break;
         case 7:
             gfx = func_xk1_8002EAF0(gfx, 104, 1, GPACK_RGBA5551(130, 130, 255, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[9]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[9]);
             break;
         case 8:
             gfx = func_xk1_8002EAF0(gfx, 136, 1, GPACK_RGBA5551(130, 130, 255, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[10]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[10]);
             break;
         case 9:
             gfx = func_xk1_8002EAF0(gfx, 216, 1, GPACK_RGBA5551(255, 0, 0, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[2]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[2]);
             break;
         case 11:
             gfx = func_xk1_8002EAF0(gfx, 136, 1, GPACK_RGBA5551(130, 130, 255, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[3]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[3]);
             break;
         case 12:
             gfx = func_xk1_8002EAF0(gfx, 168, 1, GPACK_RGBA5551(130, 130, 255, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[4]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[4]);
             break;
         case 13:
             if (D_80794E24 != 0) {
@@ -218,7 +218,7 @@ Gfx* func_xk1_8002ED64(Gfx* gfx) {
                     D_807C6EA8.unk_08 = 0;
                 } else {
                     gfx = func_xk1_8002EAF0(gfx, 168, 1, GPACK_RGBA5551(130, 130, 255, 1));
-                    LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[5]);
+                    LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[5]);
                     D_xk1_80033504++;
                     break;
                 }
@@ -228,11 +228,11 @@ Gfx* func_xk1_8002ED64(Gfx* gfx) {
             break;
         case 14:
             gfx = func_xk1_8002EAF0(gfx, 200, 1, GPACK_RGBA5551(130, 130, 255, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[6]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[6]);
             break;
         case 15:
             gfx = func_xk1_8002EAF0(gfx, 216, 1, GPACK_RGBA5551(130, 130, 255, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[7]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[7]);
             break;
         case 16:
         case 27:
@@ -250,11 +250,11 @@ Gfx* func_xk1_8002ED64(Gfx* gfx) {
                     switch (D_807C6EA8.unk_08) {
                         case 16:
                             gfx = func_xk1_8002EAF0(gfx, 216, 1, GPACK_RGBA5551(255, 0, 0, 1));
-                            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[8]);
+                            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[8]);
                             break;
                         case 27:
                             gfx = func_xk1_8002EAF0(gfx, 184, 1, GPACK_RGBA5551(130, 130, 255, 1));
-                            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[13]);
+                            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[13]);
                             break;
                     }
                     D_xk1_80033504++;
@@ -264,19 +264,19 @@ Gfx* func_xk1_8002ED64(Gfx* gfx) {
             }
             break;
         case 17:
-            gfx = func_xk1_8002ECE8(gfx, 54, 192, D_xk3_801372B8[0], GPACK_RGBA5551(130, 130, 255, 1));
+            gfx = func_xk1_8002ECE8(gfx, 54, 192, gMachineCreateMessageStrs[0], GPACK_RGBA5551(130, 130, 255, 1));
             break;
         case 18:
-            gfx = func_xk1_8002ECE8(gfx, 54, 256, D_xk3_801372B8[2], GPACK_RGBA5551(130, 130, 255, 1));
+            gfx = func_xk1_8002ECE8(gfx, 54, 256, gMachineCreateMessageStrs[2], GPACK_RGBA5551(130, 130, 255, 1));
             EKFileMenu_DrawYesNoOption(&gfx);
             break;
         case 19:
             gfx = func_xk1_8002EA10(gfx, 40, 40, 280, 72, GPACK_RGBA5551(255, 0, 0, 1));
-            gfx = func_xk1_800262F4(gfx, 40, 40, D_xk3_801372B8[3]);
-            gfx = func_xk1_800262F4(gfx, 40, 56, D_xk3_801372B8[4]);
+            gfx = func_xk1_800262F4(gfx, 40, 40, gMachineCreateMessageStrs[3]);
+            gfx = func_xk1_800262F4(gfx, 40, 56, gMachineCreateMessageStrs[4]);
             break;
         case 20:
-            gfx = func_xk1_8002ECE8(gfx, 54, 272, D_xk3_801372B8[5], GPACK_RGBA5551(130, 130, 255, 1));
+            gfx = func_xk1_8002ECE8(gfx, 54, 272, gMachineCreateMessageStrs[5], GPACK_RGBA5551(130, 130, 255, 1));
             EKFileMenu_DrawYesNoOption(&gfx);
             break;
         case 21:
@@ -285,21 +285,21 @@ Gfx* func_xk1_8002ED64(Gfx* gfx) {
             LeoFault_DrawErrorMessage(&gfx, 48, 56, sLeoErrorMessages[26]);
             break;
         case 22:
-            gfx = func_xk1_8002ECE8(gfx, 54, 112, D_xk3_801372B8[6], GPACK_RGBA5551(255, 0, 0, 1));
+            gfx = func_xk1_8002ECE8(gfx, 54, 112, gMachineCreateMessageStrs[6], GPACK_RGBA5551(255, 0, 0, 1));
             break;
         case 23:
-            gfx = func_xk1_8002ECE8(gfx, 54, 128, D_xk3_801372B8[7], GPACK_RGBA5551(255, 0, 0, 1));
+            gfx = func_xk1_8002ECE8(gfx, 54, 128, gMachineCreateMessageStrs[7], GPACK_RGBA5551(255, 0, 0, 1));
             break;
         case 24:
-            gfx = func_xk1_8002ECE8(gfx, 54, 272, D_xk3_801372B8[9], GPACK_RGBA5551(130, 130, 255, 1));
+            gfx = func_xk1_8002ECE8(gfx, 54, 272, gMachineCreateMessageStrs[9], GPACK_RGBA5551(130, 130, 255, 1));
             break;
         case 25:
             gfx = func_xk1_8002EAF0(gfx, 136, 1, GPACK_RGBA5551(130, 130, 255, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[11]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[11]);
             break;
         case 26:
             gfx = func_xk1_8002EAF0(gfx, 184, 1, GPACK_RGBA5551(130, 130, 255, 1));
-            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], D_xk1_800337D0[12]);
+            LeoFault_DrawErrorMessage(&gfx, D_xk1_8003BBA0, D_xk1_8003BBA8[0], gFileMessageStrs[12]);
             break;
     }
 
@@ -330,7 +330,7 @@ Gfx* func_xk1_8002F9DC(Gfx* gfx) {
 }
 
 extern u8* gExpansionKitFontPtr;
-extern u8 D_xk1_80033808[];
+extern u8 gFileMessageChars[];
 
 void func_xk1_8002FA50(void) {
     u16 i;
@@ -339,7 +339,7 @@ void func_xk1_8002FA50(void) {
     D_8003BBB0 = Arena_Allocate(ALLOC_FRONT, 20 * sizeof(s32));
 
     for (i = 0; i < 20; i++) {
-        D_8003BBB0[i] = (D_xk1_80033808[i * 2] << 8) + D_xk1_80033808[i * 2 + 1];
+        D_8003BBB0[i] = (gFileMessageChars[i * 2] << 8) + gFileMessageChars[i * 2 + 1];
         LeoFault_CopyFontToRam(D_8003BBB0[i], gExpansionKitFontPtr + i * 0x80);
     };
 }

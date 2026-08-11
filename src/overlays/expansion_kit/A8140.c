@@ -411,7 +411,7 @@ Gfx* EKFileMenu_DrawSelectFileText(Gfx* gfx, s32 left, s32 top) {
     return gfx;
 }
 
-extern char* D_xk1_800331F0[];
+extern char* gCourseEditMessageStrs[];
 
 void EKFileMenu_DrawFileSelectedConfirmText(Gfx** gfxP, s32 left, s32 top, char* fileNameEncStr, s32 messageId) {
     Gfx* gfx;
@@ -425,7 +425,7 @@ void EKFileMenu_DrawFileSelectedConfirmText(Gfx** gfxP, s32 left, s32 top, char*
         return;
     }
     ExpansionKit_DecodeStr(fileNameEncStr, fileNameStr);
-    mfsStrCpy(messageStr, D_xk1_800331F0[messageId + 1]);
+    mfsStrCpy(messageStr, gCourseEditMessageStrs[messageId + 1]);
     strLen = mfsStrLen(fileNameStr) + mfsStrLen(messageStr);
     strWidth = strLen * 8;
     left = (((34 - strLen) / 2) * 8) + 24;

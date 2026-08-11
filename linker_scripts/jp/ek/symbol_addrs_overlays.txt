@@ -2387,4 +2387,4 @@ D_80128C94 = 0x80128C94; //segment:course_edit
 D_xk2_80128DF8 = 0x80128DF8; //segment:course_edit size:0xE100
 
 
-D_xk3_801372B8 = 0x801372B8; //segment:machine_create
+gMachineCreateMessageStrs = 0x801372B8; //segment:machine_create

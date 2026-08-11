@@ -80,7 +80,7 @@ s32 func_xk2_800EE0EC(s8* arg0, s8** arg1) {
 
 extern Gfx D_3000510[];
 extern Gfx D_3000540[];
-extern char* D_xk1_800331F0[];
+extern char* gCourseEditMessageStrs[];
 extern s32 D_xk2_80119884;
 extern EKLoadedFile gExpansionKitLoadedFiles[];
 
@@ -104,13 +104,13 @@ Gfx* func_xk2_800EE158(Gfx* gfx) {
             D_xk2_80104360++;
             return gfx;
         default:
-            var_a3 = D_xk1_800331F0[D_xk2_80104378];
+            var_a3 = gCourseEditMessageStrs[D_xk2_80104378];
             func_xk2_800EECD4(&gfx, 0x18, (D_xk2_80104360 * 0x10) + 0x38, var_a3, D_xk2_80104378);
             return gfx;
     }
 }
 
-extern u8* D_xk1_8003339C[];
+extern u8* gCourseRestrictionMessageStrs[];
 extern u8 D_xk2_80104CA0[];
 extern s32 gCourseEditCursorYPos;
 
@@ -126,7 +126,7 @@ Gfx* func_xk2_800EE268(Gfx* gfx) {
             continue;
         }
 
-        temp_v0 = mfsStrLen(D_xk1_8003339C[i]);
+        temp_v0 = mfsStrLen(gCourseRestrictionMessageStrs[i]);
         width = temp_v0 * 8;
         left = func_xk2_800EE578(temp_v0);
 
@@ -215,9 +215,9 @@ void func_xk2_800EE67C(Gfx** gfxP) {
     if (D_xk2_8010437C == 0) {
         D_8076C960 = 0;
     }
-    func_xk2_800F2AC0(D_xk1_800331F0[D_xk2_80104380]);
-    temp_v0 = func_xk2_800F2AF4(D_xk1_800331F0[D_xk2_80104380]);
-    func_xk2_800EECD4(&gfx, (((0x22 - temp_v0) / 2) * 8) + 0x18, 0x58, D_xk1_800331F0[D_xk2_80104380], D_xk2_80104380);
+    func_xk2_800F2AC0(gCourseEditMessageStrs[D_xk2_80104380]);
+    temp_v0 = func_xk2_800F2AF4(gCourseEditMessageStrs[D_xk2_80104380]);
+    func_xk2_800EECD4(&gfx, (((0x22 - temp_v0) / 2) * 8) + 0x18, 0x58, gCourseEditMessageStrs[D_xk2_80104380], D_xk2_80104380);
 
     if (D_8076C960 != 0) {
         gSPDisplayList(gfx++, D_8014940);
@@ -243,7 +243,7 @@ void func_xk2_800EE8A0(Gfx** gfxP) {
         return;
     }
 
-    temp_v0 = mfsStrLen(D_xk1_800331F0[12]);
+    temp_v0 = mfsStrLen(gCourseEditMessageStrs[12]);
     width = temp_v0 * 8;
 
     left = 0x22 - temp_v0;
@@ -269,7 +269,7 @@ void func_xk2_800EE8A0(Gfx** gfxP) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
 
     gfx = func_xk1_800264C0(gfx, left, top, 12);
-    left = 0x22 - mfsStrLen(D_xk1_800331F0[13]);
+    left = 0x22 - mfsStrLen(gCourseEditMessageStrs[13]);
     left = ((left / 2) * 8) + 0x18;
     top = 104;
 

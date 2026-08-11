@@ -308,7 +308,7 @@ void MachineCreate_PortraitUpdate(Object* portraitObj) {
     }
 }
 
-extern u8* D_xk3_801372B8[];
+extern u8* gMachineCreateMessageStrs[];
 
 void MachineCreate_DrawDeleteFileConfirmation(Gfx** gfxP, char* fileName) {
     Gfx* gfx;
@@ -324,13 +324,13 @@ void MachineCreate_DrawDeleteFileConfirmation(Gfx** gfxP, char* fileName) {
     }
     ExpansionKit_DecodeStr(fileName, fileStr);
     if (isSuperMachine) {
-        messageLen = mfsStrLen(fileStr) + mfsStrLen(D_xk3_801372B8[10]);
+        messageLen = mfsStrLen(fileStr) + mfsStrLen(gMachineCreateMessageStrs[10]);
         left = ((((34 - messageLen) / 2) + 3) * 8);
         top = 46;
 
         gfx = func_xk1_8002EA10(gfx, left, top, left + (messageLen * 8), 124 - top, GPACK_RGBA5551(130, 130, 255, 1));
     } else {
-        messageLen = mfsStrLen(fileStr) + mfsStrLen(D_xk3_801372B8[10]) + mfsStrLen(D_xk3_801372B8[11]);
+        messageLen = mfsStrLen(fileStr) + mfsStrLen(gMachineCreateMessageStrs[10]) + mfsStrLen(gMachineCreateMessageStrs[11]);
         left = ((((34 - messageLen) / 2) + 3) * 8);
         top = 54;
         gfx = func_xk1_8002EA10(gfx, left, top, left + (messageLen * 8), 124 - top, GPACK_RGBA5551(130, 130, 255, 1));
@@ -343,14 +343,14 @@ void MachineCreate_DrawDeleteFileConfirmation(Gfx** gfxP, char* fileName) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
     if (isSuperMachine) {
-        gfx = func_xk1_800262F4(gfx, left, top, D_xk3_801372B8[10]);
+        gfx = func_xk1_800262F4(gfx, left, top, gMachineCreateMessageStrs[10]);
         top += 16;
         left = (((((34 - messageLen) / 2) + 3) * 8));
-        gfx = func_xk1_800262F4(gfx, left, top, D_xk3_801372B8[11]);
+        gfx = func_xk1_800262F4(gfx, left, top, gMachineCreateMessageStrs[11]);
     } else {
-        gfx = func_xk1_800262F4(gfx, left, top, D_xk3_801372B8[10]);
+        gfx = func_xk1_800262F4(gfx, left, top, gMachineCreateMessageStrs[10]);
         left += 16;
-        gfx = func_xk1_800262F4(gfx, left, top, D_xk3_801372B8[11]);
+        gfx = func_xk1_800262F4(gfx, left, top, gMachineCreateMessageStrs[11]);
     }
 
     EKFileMenu_DrawYesNoOption(&gfx);

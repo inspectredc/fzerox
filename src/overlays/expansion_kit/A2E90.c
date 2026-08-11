@@ -40,8 +40,8 @@ s32 func_xk1_80025C20(s8* arg0) {
     return var_v1;
 }
 
-extern char* D_xk1_800331F0[];
-extern u8* D_xk1_8003339C[];
+extern char* gCourseEditMessageStrs[];
+extern u8* gCourseRestrictionMessageStrs[];
 
 s32 func_xk1_80025C58(void) {
     s32 var_s1;
@@ -49,10 +49,10 @@ s32 func_xk1_80025C58(void) {
 
     var_s1 = 0;
     for (i = 0; i < 31; i++) {
-        var_s1 += func_xk1_80025C20(D_xk1_800331F0[i]);
+        var_s1 += func_xk1_80025C20(gCourseEditMessageStrs[i]);
     }
     for (i = 0; i < 12; i++) {
-        var_s1 += func_xk1_80025C20(D_xk1_8003339C[i]);
+        var_s1 += func_xk1_80025C20(gCourseRestrictionMessageStrs[i]);
     }
 
     return var_s1;
@@ -98,11 +98,11 @@ s32 func_xk1_80025DE4(void) {
     D_xk1_8003A494 = 0;
 
     for (i = 0; i < 31; i++) {
-        func_xk1_80025D2C(D_xk1_800331F0[i]);
+        func_xk1_80025D2C(gCourseEditMessageStrs[i]);
     }
 
     for (i = 0; i < 12; i++) {
-        func_xk1_80025D2C(D_xk1_8003339C[i]);
+        func_xk1_80025D2C(gCourseRestrictionMessageStrs[i]);
     }
 
     return D_xk1_8003A494;
@@ -152,12 +152,12 @@ void func_xk1_80025F98(void) {
 
     for (i = 0; i < 31; i++) {
         D_xk1_8003A498[i] = &D_xk1_8003A548[D_xk1_80030080];
-        func_xk1_80025ED4(D_xk1_800331F0[i]);
+        func_xk1_80025ED4(gCourseEditMessageStrs[i]);
     }
 
     for (i = 0; i < 12; i++) {
         D_xk1_8003A518[i] = &D_xk1_8003A548[D_xk1_80030080];
-        func_xk1_80025ED4(D_xk1_8003339C[i]);
+        func_xk1_80025ED4(gCourseRestrictionMessageStrs[i]);
     };
 }
 
@@ -235,7 +235,7 @@ Gfx* func_xk1_800264C0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     Gfx* tempGfx;
 
     var_s1 = D_xk1_8003A498[arg3];
-    var_s0 = D_xk1_800331F0[arg3];
+    var_s0 = gCourseEditMessageStrs[arg3];
 
     while (*var_s0 != 0) {
         if (*var_s0 == 0xA) {
@@ -257,7 +257,7 @@ Gfx* func_xk1_8002656C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 i;
 
     var_s1 = D_xk1_8003A498[arg3];
-    var_s0 = D_xk1_800331F0[arg3];
+    var_s0 = gCourseEditMessageStrs[arg3];
 
     for (i = 0; i < arg4; i++) {
         while (*var_s0 != 0) {
@@ -290,7 +290,7 @@ Gfx* func_xk1_80026670(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     s8* var_s0;
 
     var_s1 = D_xk1_8003A518[arg3];
-    var_s0 = D_xk1_8003339C[arg3];
+    var_s0 = gCourseRestrictionMessageStrs[arg3];
 
     while (*var_s0 != 0) {
         if (*var_s0 == 0xA) {

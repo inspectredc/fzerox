@@ -446,7 +446,7 @@ s32 func_xk2_800F2AF4(s8* arg0) {
 extern Gfx D_3000510[];
 extern Gfx D_3000540[];
 extern Gfx D_8014940[];
-extern char* D_xk1_800331F0[];
+extern char* gCourseEditMessageStrs[];
 extern s32 gCourseEditCursorYPos;
 
 void func_xk2_800F2B48(Gfx** gfxP) {
@@ -466,7 +466,7 @@ void func_xk2_800F2B48(Gfx** gfxP) {
     }
 
     if ((D_xk2_80104F04 != 0) && (func_xk2_800EF780() != 0) && (gCourseEditCursorYPos < 200)) {
-        width = mfsStrLen(D_xk1_800331F0[21]) * 8;
+        width = mfsStrLen(gCourseEditMessageStrs[21]) * 8;
         width += 16;
         temp_v1 = (s32) (SCREEN_WIDTH - width) / 2;
 
@@ -702,19 +702,19 @@ void func_xk2_800F3600(Gfx** gfxP) {
         switch (sp2C->highlightedIndex) {
             case 0:
                 func_xk2_800F335C(&gfx, 24, D_xk2_80104FD4);
-                func_xk2_800EECD4(&gfx, 0, 156, D_xk1_800331F0[25], 25);
+                func_xk2_800EECD4(&gfx, 0, 156, gCourseEditMessageStrs[25], 25);
                 break;
             case 1:
                 func_xk2_800F335C(&gfx, 24, D_xk2_80104FEC);
-                func_xk2_800EECD4(&gfx, 0, 156, D_xk1_800331F0[26], 26);
+                func_xk2_800EECD4(&gfx, 0, 156, gCourseEditMessageStrs[26], 26);
                 break;
             case 2:
                 func_xk2_800F335C(&gfx, 24, D_xk2_80105008);
-                func_xk2_800EECD4(&gfx, 0, 156, D_xk1_800331F0[27], 27);
+                func_xk2_800EECD4(&gfx, 0, 156, gCourseEditMessageStrs[27], 27);
                 break;
             case 3:
                 func_xk2_800F335C(&gfx, 24, D_xk2_80105024);
-                func_xk2_800EECD4(&gfx, 0, 156, D_xk1_800331F0[28], 28);
+                func_xk2_800EECD4(&gfx, 0, 156, gCourseEditMessageStrs[28], 28);
                 break;
             case 4:
                 func_xk2_800F335C(&gfx, 24, D_xk2_80105048);
@@ -909,9 +909,9 @@ void func_xk2_800F3DAC(Gfx** gfxP) {
     width = 16;
     height = 16;
 
-    func_xk2_800F2AC0(D_xk1_800331F0[22]);
-    temp_v1 = (((0x22 - func_xk2_800F2AF4(D_xk1_800331F0[22])) / 2) * 8) + 0x18;
-    func_xk2_800EECD4(&gfx, temp_v1, 0x58, D_xk1_800331F0[22], 22);
+    func_xk2_800F2AC0(gCourseEditMessageStrs[22]);
+    temp_v1 = (((0x22 - func_xk2_800F2AF4(gCourseEditMessageStrs[22])) / 2) * 8) + 0x18;
+    func_xk2_800EECD4(&gfx, temp_v1, 0x58, gCourseEditMessageStrs[22], 22);
 
     gSPDisplayList(gfx++, D_8014940);
 

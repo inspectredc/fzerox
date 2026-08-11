@@ -124,7 +124,7 @@ void func_xk2_800F5250(Gfx** gfxP);
 extern Mtx D_2000000[];
 extern Gfx D_30004A8[];
 extern Gfx D_3000540[];
-extern char* D_xk1_800331F0[];
+extern char* gCourseEditMessageStrs[];
 extern s32 D_80119880;
 extern u16* gCourseEditIconTextures[];
 extern Gfx D_3000510[];
@@ -227,7 +227,7 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
         EKFileMenu_DrawYesNoOption(&gfx);
     }
     if (D_800D6CA0.unk_08 == 0xFF) {
-        func_xk2_800EECD4(&gfx, 0, 0x48, D_xk1_800331F0[30], 30);
+        func_xk2_800EECD4(&gfx, 0, 0x48, gCourseEditMessageStrs[30], 30);
     }
     if (D_xk2_80119918 == 0) {
         gfx = func_xk2_800E0320(gfx);
@@ -2493,7 +2493,7 @@ Gfx* func_xk2_800E8080(Gfx* gfx) {
                                     0, 0, 1 << 10, 1 << 10);
 
                 gSPDisplayList(gfx++, D_3000540);
-                func_xk2_800EECD4(&gfx, temp_t2_2 + 48, temp_t1 + 16, D_xk1_800331F0[24], 24);
+                func_xk2_800EECD4(&gfx, temp_t2_2 + 48, temp_t1 + 16, gCourseEditMessageStrs[24], 24);
             }
         }
     }
@@ -3028,7 +3028,7 @@ void func_xk2_800EA8E8(Gfx** gfxP) {
         return;
     }
     gfx = *gfxP;
-    func_xk2_800EECD4(&gfx, 0, 0x48, D_xk1_800331F0[18], 18);
+    func_xk2_800EECD4(&gfx, 0, 0x48, gCourseEditMessageStrs[18], 18);
     *gfxP = gfx;
 }
 
@@ -3040,6 +3040,6 @@ void func_xk2_800EA948(Gfx** gfxP) {
         return;
     }
     gfx = *gfxP;
-    func_xk2_800EECD4(&gfx, 0, 0x48, D_xk1_800331F0[23], 23);
+    func_xk2_800EECD4(&gfx, 0, 0x48, gCourseEditMessageStrs[23], 23);
     *gfxP = gfx;
 }
