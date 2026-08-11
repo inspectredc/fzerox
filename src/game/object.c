@@ -815,19 +815,19 @@ void Object_Init(s32 cmdId, s32 left, s32 top, s8 priority) {
             break;
 #ifdef EXPANSION_KIT
         case OBJECT_170:
-            func_xk3_80133B4C(object);
+            MachineCreate_MachineSelectPortraitInit(object);
             break;
         case OBJECT_171:
-            func_xk3_80133B84();
+            MachineCreate_MachineSelectStatsInit();
             break;
         case OBJECT_172:
-            func_xk3_80133BD4(object);
+            MachineCreate_MachineSelectMachineInit(object);
             break;
         case OBJECT_173:
-            func_xk3_80133F40();
+            MachineCreate_MachineSelectCursorInit();
             break;
         case OBJECT_174:
-            func_xk3_8012F5F0(object);
+            MachineCreate_PortraitInit(object);
             break;
 #endif
         default:
@@ -1032,19 +1032,19 @@ Gfx* Object_Draw(Gfx* gfx, Object* object) {
             break;
 #ifdef EXPANSION_KIT
         case OBJECT_170:
-            gfx = func_xk3_80133F6C(gfx, object);
+            gfx = MachineCreate_MachineSelectPortraitDraw(gfx, object);
             break;
         case OBJECT_171:
-            gfx = func_xk3_801340DC(gfx, object);
+            gfx = MachineCreate_MachineSelectStatsDraw(gfx, object);
             break;
         case OBJECT_172:
-            gfx = func_xk3_80134408(gfx, object);
+            gfx = MachineCreate_MachineSelectMachineDraw(gfx, object);
             break;
         case OBJECT_173:
-            gfx = func_xk3_80134854(gfx, object);
+            gfx = MachineCreate_MachineSelectCursorDraw(gfx, object);
             break;
         case OBJECT_174:
-            gfx = func_xk3_8012F628(gfx, object);
+            gfx = MachineCreate_PortraitDraw(gfx, object);
             break;
 #endif
     }
@@ -1144,14 +1144,14 @@ Gfx* Object_UpdateAndDrawAll(Gfx* gfx) {
 #ifdef EXPANSION_KIT
             case OBJECT_170:
                 gTextureSwapSlots[OBJECT_CACHE_INDEX(&gObjects[i])].entryIndex = 0;
-                func_xk3_80134A48(&gObjects[i]);
+                MachineCreate_MachineSelectPortraitUpdate(&gObjects[i]);
                 break;
             case OBJECT_172:
-                func_xk3_80134B04(&gObjects[i]);
+                MachineCreate_MachineSelectMachineUpdate(&gObjects[i]);
                 break;
             case OBJECT_174:
                 gTextureSwapSlots[OBJECT_CACHE_INDEX(&gObjects[i])].entryIndex = 0;
-                func_xk3_8012F6A8(&gObjects[i]);
+                MachineCreate_PortraitUpdate(&gObjects[i]);
                 break;
 #endif
         }

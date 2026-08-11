@@ -5,62 +5,62 @@
 #include "fzx_bordered_box.h"
 #include "src/overlays/ovl_i2/transition.h"
 
-s32 D_xk3_80140E50;
-s32 D_xk3_80140E54;
-f32 D_xk3_80140E58;
+s32 gMachineCreateCursorPosX;
+s32 gMachineCreateCursorPosY;
+f32 gMachineCreateCursorPosYF;
 
 MachineCreateGrid gMachineCreatePartsGrid;
 MachineCreateGrid gMachineCreateColorGrid;
 MachineCreateGrid gMachineCreateMachineSettingsGrid;
 
-f32 D_xk3_80140E78;
-f32 D_xk3_80140E7C;
-f32 D_xk3_80140E80;
-f32 D_xk3_80140E84;
-f32 D_xk3_80140E88;
-f32 D_xk3_80140E8C;
+f32 gMachineCreateMachinePitch;
+f32 gMachineCreateMachineYaw;
+f32 sMachineCreateViewScaleX;
+f32 sMachineCreateViewScaleY;
+f32 sMachineCreateViewTransX;
+f32 sMachineCreateViewTransY;
 CustomMachinesInfo gCustomMachinesInfoBackup;
 CustomMachine gCustomMachineBackup;
 
 u8 D_xk3_80141290;
 u8 D_xk3_80141291;
-s32 D_xk3_80141294;
-char* D_xk3_80141298;
+s32 gMachineCreateMachineWeight;
+char* gMachineCreateSelectedFileName;
 
-f32 D_xk3_80136540 = -7000.0f;
-s8 D_xk3_80136544 = -1;
-u8 D_xk3_80136548 = false;
-u8 D_xk3_8013654C = false;
-s32 D_xk3_80136550 = 0;
+f32 gMachineCreatePartsLightSourceX = -7000.0f;
+s8 sMachineCreateTransitionTimer = -1;
+u8 gMachineCreateModeShowInstructions = false;
+u8 gMachineCreateHighlightExit = false;
+s32 sMachineCreateOptionIndex = 0;
 s32 D_xk3_80136554 = 0;
 
-void func_xk3_8012B950(void) {
-    D_xk3_80140E54 = 0x57;
-    D_xk3_80140E58 = 87.0f;
-    func_xk1_8002B150(0xA8, 0x57, &D_xk3_80140E50, &D_xk3_80140E54);
+void MachineCreate_InitFileMenu(void) {
+    gMachineCreateCursorPosY = 87;
+    gMachineCreateCursorPosYF = 87.0f;
+    EKFileMenu_InitFileMenu(168, 87, &gMachineCreateCursorPosX, &gMachineCreateCursorPosY);
 }
 
 extern GfxPool* gGfxPool;
 
-void func_xk3_8012B99C(void) {
-    gGfxPool->unk_2C2C8[1].vp.vscale[0] = D_xk3_80140E80 * 640.0f;
-    gGfxPool->unk_2C2C8[1].vp.vscale[1] = D_xk3_80140E84 * 480.0f;
+void MachineCreate_UpdateView(void) {
+    gGfxPool->unk_2C2C8[1].vp.vscale[0] = sMachineCreateViewScaleX * ((SCREEN_WIDTH / 2) * 4);
+    gGfxPool->unk_2C2C8[1].vp.vscale[1] = sMachineCreateViewScaleY * ((SCREEN_HEIGHT / 2) * 4);
     gGfxPool->unk_2C2C8[1].vp.vscale[2] = 0x1FF;
     gGfxPool->unk_2C2C8[1].vp.vscale[3] = 0;
-    gGfxPool->unk_2C2C8[1].vp.vtrans[0] = (D_xk3_80140E88 + 25.0f + 64.0f) * 4.0f;
-    gGfxPool->unk_2C2C8[1].vp.vtrans[1] = (D_xk3_80140E8C + 90.0f + 64.0f + 2.0f) * 4.0f;
+    gGfxPool->unk_2C2C8[1].vp.vtrans[0] = (sMachineCreateViewTransX + 25.0f + 64.0f) * 4.0f;
+    gGfxPool->unk_2C2C8[1].vp.vtrans[1] = (sMachineCreateViewTransY + 90.0f + 64.0f + 2.0f) * 4.0f;
     gGfxPool->unk_2C2C8[1].vp.vtrans[2] = 0x1FF;
     gGfxPool->unk_2C2C8[1].vp.vtrans[3] = 0;
 }
 
-void func_xk3_8012BABC(void) {
-    D_xk3_80140E80 = 1.0f;
-    D_xk3_80140E84 = 1.0f;
-    D_xk3_80140E88 = 0.0f;
-    D_xk3_80140E8C = 0.0f;
-    func_xk3_8012B99C();
-    D_xk3_80140E78 = 0.0f;
-    D_xk3_80140E7C = 0.0f;
+void MachineCreate_InitView(void) {
+    sMachineCreateViewScaleX = 1.0f;
+    sMachineCreateViewScaleY = 1.0f;
+    sMachineCreateViewTransX = 0.0f;
+    sMachineCreateViewTransY = 0.0f;
+    MachineCreate_UpdateView();
+    gMachineCreateMachinePitch = 0.0f;
+    gMachineCreateMachineYaw = 0.0f;
 }
 
 u16 MachineCreate_CalculateCustomMachineChecksum(CustomMachine* customMachine) {
@@ -101,42 +101,39 @@ void func_xk3_8012BB48(void) {
 }
 
 extern BorderedBoxWidget* gMachineCreateColorBox;
-extern s32 D_xk3_80140E50;
-extern s32 D_xk3_80140E54;
-extern f32 D_xk3_80140E58;
 extern MenuWidget gMachineCreateWidget;
 
-void func_xk3_8012BC98(void) {
+void MachineCreate_CloseColorMenu(void) {
     s32 mode;
 
     mode = gWorksMachineMode;
-    D_xk3_80140E54 = 0x1C;
-    func_xk1_80027DC8(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
-    D_xk3_80140E54 = 0x44;
-    func_xk1_80027DC8(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
+    gMachineCreateCursorPosY = 28;
+    EKWidget_ExecuteWidgetAction(&gMachineCreateWidget, &gMachineCreateCursorPosX, &gMachineCreateCursorPosY);
+    gMachineCreateCursorPosY = 68;
+    EKWidget_ExecuteWidgetAction(&gMachineCreateWidget, &gMachineCreateCursorPosX, &gMachineCreateCursorPosY);
     switch (mode) {
         case MACHINE_MODE_BODY_COLOR:
-            D_xk3_80140E54 = 0x34;
+            gMachineCreateCursorPosY = 52;
             break;
         case MACHINE_MODE_LINE_COLOR:
-            D_xk3_80140E54 = 0x44;
+            gMachineCreateCursorPosY = 68;
             break;
         case MACHINE_MODE_NUMBER_COLOR:
-            D_xk3_80140E54 = 0x54;
+            gMachineCreateCursorPosY = 84;
             break;
         case MACHINE_MODE_COCKPIT_COLOR:
-            D_xk3_80140E54 = 0x64;
+            gMachineCreateCursorPosY = 100;
             break;
     }
-    D_xk3_80140E58 = D_xk3_80140E54;
+    gMachineCreateCursorPosYF = gMachineCreateCursorPosY;
     BorderedBox_StartClose(gMachineCreateColorBox);
 }
 
-extern s32 D_xk1_80032C20;
-extern s32 D_xk3_80140E50;
-extern s32 D_xk3_80140E54;
+extern s32 gExpansionKitYesNoOptionIndex;
+extern s32 gMachineCreateCursorPosX;
+extern s32 gMachineCreateCursorPosY;
 
-void func_xk3_8012BD84(void) {
+void MachineCreate_UpdateCursor(void) {
 
     switch (gWorksMachineMode) {
         case MACHINE_MODE_BODY_COLOR:
@@ -193,36 +190,36 @@ void func_xk3_8012BD84(void) {
         case MACHINE_MODE_ENTRY_CLEAR_SELECT_SUPER:
             EKController_SetRepeatDelay(27, 6);
             EKController_SetDeadZone(40);
-            func_xk1_8002BBA4();
+            EKFileMenu_UpdateOptionIndex();
             break;
         case MACHINE_MODE_MENU:
-            D_xk3_80136554 = (s32) (D_xk3_80140E54 - 0x24) / 16;
+            D_xk3_80136554 = (s32) (gMachineCreateCursorPosY - 36) / 16;
             EKController_SetRepeatDelay(27, 6);
             EKController_SetDeadZone(40);
             EKController_UpdateVerticalOptionSlow(&D_xk3_80136554, 2, 0);
-            D_xk3_80140E54 = (D_xk3_80136554 * 0x10) + 0x24;
-            func_xk1_800269F4(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
-            func_xk1_80027CFC(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
+            gMachineCreateCursorPosY = (D_xk3_80136554 * 16) + 36;
+            EKWidget_SetCursorToWidget(&gMachineCreateWidget, &gMachineCreateCursorPosX, &gMachineCreateCursorPosY);
+            EKWidget_SetHighlightedIndex(&gMachineCreateWidget, &gMachineCreateCursorPosX, &gMachineCreateCursorPosY);
             break;
         case MACHINE_MODE_MENU_COLOR:
         case MACHINE_MODE_SELECT_LINE:
         case MACHINE_MODE_SELECT_MARK:
-            D_xk3_80136554 = (s32) (D_xk3_80140E54 - 0x34) / 16;
+            D_xk3_80136554 = (s32) (gMachineCreateCursorPosY - 52) / 16;
             EKController_SetRepeatDelay(27, 6);
             EKController_SetDeadZone(40);
             EKController_UpdateVerticalOptionSlow(&D_xk3_80136554, 7, 0);
-            D_xk3_80140E54 = (D_xk3_80136554 * 0x10) + 0x34;
-            func_xk1_800269F4(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
-            func_xk1_80027CFC(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
+            gMachineCreateCursorPosY = (D_xk3_80136554 * 16) + 52;
+            EKWidget_SetCursorToWidget(&gMachineCreateWidget, &gMachineCreateCursorPosX, &gMachineCreateCursorPosY);
+            EKWidget_SetHighlightedIndex(&gMachineCreateWidget, &gMachineCreateCursorPosX, &gMachineCreateCursorPosY);
             break;
         case MACHINE_MODE_0: {
-            s32 sp1C = D_xk3_80136550;
+            s32 prevOptionIndex = sMachineCreateOptionIndex;
             EKController_SetRepeatDelay(27, 6);
             EKController_SetDeadZone(40);
-            EKController_UpdateHorizontalOption(&D_xk3_80136550, 5, 1);
-            D_xk3_80140E50 = (D_xk3_80136550 * 0x30) + 0x30;
-            D_xk3_80140E54 = 0x1C;
-            if (sp1C != D_xk3_80136550) {
+            EKController_UpdateHorizontalOption(&sMachineCreateOptionIndex, 5, 1);
+            gMachineCreateCursorPosX = (sMachineCreateOptionIndex * 48) + 48;
+            gMachineCreateCursorPosY = 28;
+            if (prevOptionIndex != sMachineCreateOptionIndex) {
                 Audio_TriggerSystemSE(NA_SE_35);
             }
             break;
@@ -236,251 +233,222 @@ void func_xk3_8012BD84(void) {
         case MACHINE_MODE_ENTRY_CLEAR_CONFIRM:
         case MACHINE_MODE_ENTRY_CLEAR_SUPER_CONFIRM:
         case MACHINE_MODE_CHECKSUM_ERROR:
-            func_xk1_8002D2F0();
+            EKFileMenu_UpdateYesNoOption();
             break;
         default:
-            D_xk1_80032C20 = 0;
+            gExpansionKitYesNoOptionIndex = 0;
             break;
     }
 }
 
-void func_xk3_8012C1C8(void) {
-    static u8 D_xk3_80136558 = 0;
-    static u8 D_xk3_8013655C = 0;
-    f32 var_ft4;
-    f32 var_fv0;
-    u16 var_a0;
-    u16 var_a1;
-    s32 var_v0;
-    s32 var_v0_2;
-    u16 temp_a1;
-    u16 temp_v1;
+void MachineCreate_UpdateViewZoom(void) {
+    static u8 sZoomOutSpeed = 0;
+    static u8 sZoomInSpeed = 0;
+    u16 zoomIn;
+    u16 zoomOut;
 
-    if (D_xk3_80136548) {
-        temp_v1 = gControllers[gPlayerControlPorts[0]].buttonCurrent;
-        var_v0 = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_A) != 0;
-        if (var_v0 == 0) {
-            var_v0 = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_R) != 0;
-        }
-        var_a0 = var_v0;
-        var_v0 = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_B) != 0;
-        if (var_v0 == 0) {
-            var_v0 = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_L) != 0;
-        }
-        var_a1 = var_v0;
+    if (gMachineCreateModeShowInstructions) {
+        zoomIn = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_A) ||
+                 (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_R);
+        zoomOut = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_B) ||
+                  (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_L);
     } else {
-        var_a0 = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_R;
-        var_a1 = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_L;
+        zoomIn = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_R;
+        zoomOut = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_L;
     }
-    if (var_a1 && var_a0) {
-        D_xk3_8013655C = 0;
-        D_xk3_80136558 = 0;
+    if (zoomOut && zoomIn) {
+        sZoomOutSpeed = sZoomInSpeed = 0;
 
     } else {
-        if (var_a0) {
-            D_xk3_80140E80 *= 1.0f + (0.002f * D_xk3_8013655C);
-            D_xk3_80140E84 = D_xk3_80140E80;
-            if (D_xk3_8013655C < 50) {
-                D_xk3_8013655C++;
+        if (zoomIn) {
+            sMachineCreateViewScaleX *= 1.0f + (0.002f * sZoomInSpeed);
+            sMachineCreateViewScaleY = sMachineCreateViewScaleX;
+            if (sZoomInSpeed < 50) {
+                sZoomInSpeed++;
             }
         } else {
-            D_xk3_8013655C = 0;
+            sZoomInSpeed = 0;
         }
-        if (var_a1) {
-            D_xk3_80140E80 /= (1.0f + (0.002f * D_xk3_80136558));
-            D_xk3_80140E84 = D_xk3_80140E80;
-            if (D_xk3_80136558 < 50) {
-                D_xk3_80136558++;
+        if (zoomOut) {
+            sMachineCreateViewScaleX /= 1.0f + (0.002f * sZoomOutSpeed);
+            sMachineCreateViewScaleY = sMachineCreateViewScaleX;
+            if (sZoomOutSpeed < 50) {
+                sZoomOutSpeed++;
             }
         } else {
-            D_xk3_80136558 = 0;
+            sZoomOutSpeed = 0;
         }
     }
-    if (D_xk3_80140E80 > 6.0f) {
-        D_xk3_80140E80 = D_xk3_80140E84 = 6.0f;
+    if (sMachineCreateViewScaleX > 6.0f) {
+        sMachineCreateViewScaleX = sMachineCreateViewScaleY = 6.0f;
     }
-    if (D_xk3_80140E80 < 0.2f) {
-        D_xk3_80140E80 = D_xk3_80140E84 = 0.2f;
+    if (sMachineCreateViewScaleX < 0.2f) {
+        sMachineCreateViewScaleX = sMachineCreateViewScaleY = 0.2f;
     }
 }
 
-void func_xk3_8012C408(void) {
-    static u8 D_xk3_80136560 = 0;
-    static u8 D_xk3_80136564 = 0;
-    static u8 D_xk3_80136568 = 0;
-    static u8 D_xk3_8013656C = 0;
-    static f32 D_xk3_80136570 = 1.0f;
-    static f32 D_xk3_80136574 = 1.0f;
-    f32 temp_fa0;
+void MachineCreate_UpdateViewTranslation(void) {
+    static u8 sMoveUpSpeed = 0;
+    static u8 sMoveDownSpeed = 0;
+    static u8 sMoveLeftSpeed = 0;
+    static u8 sMoveRightSpeed = 0;
+    static f32 sPrevMachineCreateViewScaleX = 1.0f;
+    static f32 sPrevMachineCreateViewScaleY = 1.0f;
+    f32 scaledRadiusDistance;
 
-    temp_fa0 = (35.0f * D_xk3_80140E80) + 40.0f;
+    scaledRadiusDistance = (35.0f * sMachineCreateViewScaleX) + 40.0f;
 
     if ((gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_CLEFT) &&
         (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_CRIGHT)) {
-        D_xk3_8013656C = 0;
-        D_xk3_80136568 = 0;
+        sMoveLeftSpeed = sMoveRightSpeed = 0;
     } else {
         if ((gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_CUP) &&
             (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_CDOWN)) {
-            D_xk3_80136564 = 0;
-            D_xk3_80136560 = 0;
+            sMoveUpSpeed = sMoveDownSpeed = 0;
         } else {
             if (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_CLEFT) {
-                D_xk3_80140E88 -= 0.2f * D_xk3_80136568;
-                if (D_xk3_80136568 < 15) {
-                    D_xk3_80136568++;
+                sMachineCreateViewTransX -= 0.2f * sMoveLeftSpeed;
+                if (sMoveLeftSpeed < 15) {
+                    sMoveLeftSpeed++;
                 }
             } else {
-                D_xk3_80136568 = 0;
+                sMoveLeftSpeed = 0;
             }
             if (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_CRIGHT) {
-                D_xk3_80140E88 += 0.2f * D_xk3_8013656C;
-                if (D_xk3_8013656C < 15) {
-                    D_xk3_8013656C++;
+                sMachineCreateViewTransX += 0.2f * sMoveRightSpeed;
+                if (sMoveRightSpeed < 15) {
+                    sMoveRightSpeed++;
                 }
             } else {
-                D_xk3_8013656C = 0;
+                sMoveRightSpeed = 0;
             }
             if (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_CUP) {
-                D_xk3_80140E8C -= 0.2f * D_xk3_80136560;
-                if (D_xk3_80136560 < 15) {
-                    D_xk3_80136560++;
+                sMachineCreateViewTransY -= 0.2f * sMoveUpSpeed;
+                if (sMoveUpSpeed < 15) {
+                    sMoveUpSpeed++;
                 }
             } else {
-                D_xk3_80136560 = 0;
+                sMoveUpSpeed = 0;
             }
             if (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_CDOWN) {
 
-                D_xk3_80140E8C += 0.2f * D_xk3_80136564;
-                if (D_xk3_80136564 < 15) {
-                    D_xk3_80136564++;
+                sMachineCreateViewTransY += 0.2f * sMoveDownSpeed;
+                if (sMoveDownSpeed < 15) {
+                    sMoveDownSpeed++;
                 }
             } else {
-                D_xk3_80136564 = 0;
+                sMoveDownSpeed = 0;
             }
         }
     }
 
-    D_xk3_80140E88 *= ((35.0f * D_xk3_80140E80) + 40.0f) / ((35.0f * D_xk3_80136570) + 40.0f);
-    D_xk3_80140E8C *= ((35.0f * D_xk3_80140E84) + 40.0f) / ((35.0f * D_xk3_80136574) + 40.0f);
-    if (D_xk3_80140E88 < -temp_fa0) {
-        D_xk3_80140E88 = -temp_fa0;
-    } else if (temp_fa0 < D_xk3_80140E88) {
-        D_xk3_80140E88 = temp_fa0;
+    sMachineCreateViewTransX *=
+        ((35.0f * sMachineCreateViewScaleX) + 40.0f) / ((35.0f * sPrevMachineCreateViewScaleX) + 40.0f);
+    sMachineCreateViewTransY *=
+        ((35.0f * sMachineCreateViewScaleY) + 40.0f) / ((35.0f * sPrevMachineCreateViewScaleY) + 40.0f);
+    if (sMachineCreateViewTransX < -scaledRadiusDistance) {
+        sMachineCreateViewTransX = -scaledRadiusDistance;
+    } else if (scaledRadiusDistance < sMachineCreateViewTransX) {
+        sMachineCreateViewTransX = scaledRadiusDistance;
     }
-    if (D_xk3_80140E8C < -temp_fa0) {
-        D_xk3_80140E8C = -temp_fa0;
-    } else if (temp_fa0 < D_xk3_80140E8C) {
-        D_xk3_80140E8C = temp_fa0;
+    if (sMachineCreateViewTransY < -scaledRadiusDistance) {
+        sMachineCreateViewTransY = -scaledRadiusDistance;
+    } else if (scaledRadiusDistance < sMachineCreateViewTransY) {
+        sMachineCreateViewTransY = scaledRadiusDistance;
     }
-    D_xk3_80136570 = D_xk3_80140E80;
-    D_xk3_80136574 = D_xk3_80140E84;
+    sPrevMachineCreateViewScaleX = sMachineCreateViewScaleX;
+    sPrevMachineCreateViewScaleY = sMachineCreateViewScaleY;
 }
 
-void func_xk3_8012C744(void) {
-    static u8 D_xk3_80136578 = 0;
-    static u8 D_xk3_8013657C = 0;
-    static u8 D_xk3_80136580 = 0;
-    static u8 D_xk3_80136584 = 0;
-    s32 var_v0;
-    u16 var_a1;
-    u16 var_a2;
-    u16 var_a3;
-    u16 var_v1;
+void MachineCreate_UpdateMachineRotation(void) {
+    static u8 sRotateUpSpeed = 0;
+    static u8 sRotateDownSpeed = 0;
+    static u8 sRotateLeftSpeed = 0;
+    static u8 sRotateRightSpeed = 0;
+    u16 rotateDown;
+    u16 rotateUp;
+    u16 rotateRight;
+    u16 rotateLeft;
 
-    if (D_xk3_80136548) {
-        var_v0 = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_DOWN) != 0;
-        if (var_v0 == 0) {
-            var_v0 = gControllers[gPlayerControlPorts[0]].stickY <= -50;
-        }
-        var_a1 = var_v0;
-        var_v0 = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_UP) != 0;
-        if (var_v0 == 0) {
-            var_v0 = (gControllers[gPlayerControlPorts[0]].stickY < 50) ^ 1;
-        }
-        var_a2 = var_v0;
-        var_v0 = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_RIGHT) != 0;
-        if (var_v0 == 0) {
-            var_v0 = (gControllers[gPlayerControlPorts[0]].stickX < 50) ^ 1;
-        }
-        var_a3 = var_v0;
-        var_v0 = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_LEFT) != 0;
-        if (var_v0 == 0) {
-            var_v0 = gControllers[gPlayerControlPorts[0]].stickX <= -50;
-        }
-        var_v1 = var_v0;
+    if (gMachineCreateModeShowInstructions) {
+        rotateDown = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_DOWN) ||
+                     (gControllers[gPlayerControlPorts[0]].stickY <= -50);
+        rotateUp = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_UP) ||
+                   ((gControllers[gPlayerControlPorts[0]].stickY >= 50));
+        rotateRight = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_RIGHT) ||
+                      ((gControllers[gPlayerControlPorts[0]].stickX >= 50));
+        rotateLeft = (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_LEFT) ||
+                     (gControllers[gPlayerControlPorts[0]].stickX <= -50);
     } else {
-        var_a1 = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_DOWN;
-        var_a2 = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_UP;
-        var_a3 = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_RIGHT;
-        var_v1 = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_LEFT;
+        rotateDown = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_DOWN;
+        rotateUp = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_UP;
+        rotateRight = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_RIGHT;
+        rotateLeft = gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_LEFT;
     }
-    if (var_a2 && var_a1) {
-        D_xk3_8013657C = 0;
-        D_xk3_80136578 = 0;
-    } else if (var_v1 && var_a3) {
-        D_xk3_80136584 = 0;
-        D_xk3_80136580 = 0;
+    if (rotateUp && rotateDown) {
+        sRotateUpSpeed = sRotateDownSpeed = 0;
+    } else if (rotateLeft && rotateRight) {
+        sRotateLeftSpeed = sRotateRightSpeed = 0;
     } else {
-        if (var_a2) {
-            D_xk3_80140E78 -= 0.1f * D_xk3_80136578;
-            if (D_xk3_80136578 < 50) {
-                D_xk3_80136578++;
+        if (rotateUp) {
+            gMachineCreateMachinePitch -= 0.1f * sRotateUpSpeed;
+            if (sRotateUpSpeed < 50) {
+                sRotateUpSpeed++;
             }
         } else {
-            D_xk3_80136578 = 0;
+            sRotateUpSpeed = 0;
         }
-        if (var_a1) {
+        if (rotateDown) {
 
-            D_xk3_80140E78 += 0.1f * D_xk3_8013657C;
-            if (D_xk3_8013657C < 50) {
-                D_xk3_8013657C++;
+            gMachineCreateMachinePitch += 0.1f * sRotateDownSpeed;
+            if (sRotateDownSpeed < 50) {
+                sRotateDownSpeed++;
             }
         } else {
-            D_xk3_8013657C = 0;
+            sRotateDownSpeed = 0;
         }
-        if (var_v1) {
-            D_xk3_80140E7C -= 0.1f * D_xk3_80136580;
-            if (D_xk3_80136580 < 50) {
-                D_xk3_80136580++;
+        if (rotateLeft) {
+            gMachineCreateMachineYaw -= 0.1f * sRotateLeftSpeed;
+            if (sRotateLeftSpeed < 50) {
+                sRotateLeftSpeed++;
             }
         } else {
-            D_xk3_80136580 = 0;
+            sRotateLeftSpeed = 0;
         }
-        if (var_a3) {
-            D_xk3_80140E7C += 0.1f * D_xk3_80136584;
-            if (D_xk3_80136584 < 50) {
-                D_xk3_80136584++;
+        if (rotateRight) {
+            gMachineCreateMachineYaw += 0.1f * sRotateRightSpeed;
+            if (sRotateRightSpeed < 50) {
+                sRotateRightSpeed++;
             }
         } else {
-            D_xk3_80136584 = 0;
+            sRotateRightSpeed = 0;
         }
     }
-    if (D_xk3_80140E78 > 360.0f) {
-        D_xk3_80140E78 -= 360.0f;
-    } else if (D_xk3_80140E78 < -360.0f) {
-        D_xk3_80140E78 += 360.0f;
+    if (gMachineCreateMachinePitch > 360.0f) {
+        gMachineCreateMachinePitch -= 360.0f;
+    } else if (gMachineCreateMachinePitch < -360.0f) {
+        gMachineCreateMachinePitch += 360.0f;
     }
-    if (D_xk3_80140E7C > 360.0f) {
-        D_xk3_80140E7C -= 360.0f;
-    } else if (D_xk3_80140E7C < -360.0f) {
-        D_xk3_80140E7C += 360.0f;
+    if (gMachineCreateMachineYaw > 360.0f) {
+        gMachineCreateMachineYaw -= 360.0f;
+    } else if (gMachineCreateMachineYaw < -360.0f) {
+        gMachineCreateMachineYaw += 360.0f;
     }
 }
 
 extern BorderedBoxWidget* gMachineCreateStatsBox;
 
-void func_xk3_8012CAC8(void) {
+void MachineCreate_UpdateStartInput(void) {
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_START) {
         switch (gWorksMachineMode) {
             case MACHINE_MODE_PARTS:
                 gMachineCreatePartsGrid.y = 3;
-                D_xk3_80136544 = 20;
+                sMachineCreateTransitionTimer = 20;
                 break;
             case MACHINE_MODE_SETTING:
                 if (BorderedBox_GetInfo(gMachineCreateStatsBox, IS_BORDERED_BOX_OPENED)) {
                     gMachineCreateMachineSettingsGrid.y = 3;
-                    D_xk3_80136544 = 20;
+                    sMachineCreateTransitionTimer = 20;
                 }
                 break;
             case MACHINE_MODE_BODY_COLOR:
@@ -489,17 +457,17 @@ void func_xk3_8012CAC8(void) {
             case MACHINE_MODE_COCKPIT_COLOR:
                 if (BorderedBox_GetInfo(gMachineCreateColorBox, IS_BORDERED_BOX_OPENED)) {
                     gMachineCreateColorGrid.y = 8;
-                    D_xk3_80136544 = 20;
+                    sMachineCreateTransitionTimer = 20;
                 }
                 break;
             default:
-                if (D_xk3_80136548) {
+                if (gMachineCreateModeShowInstructions) {
                     Audio_TriggerSystemSE(NA_SE_68);
-                    D_xk3_80136548 = false;
+                    gMachineCreateModeShowInstructions = false;
                     ExpansionKit_SetMenuHighlightDrawFlag(true);
                 } else if (gWorksMachineMode == MACHINE_MODE_0) {
                     Audio_TriggerSystemSE(NA_SE_68);
-                    D_xk3_80136548 = true;
+                    gMachineCreateModeShowInstructions = true;
                     ExpansionKit_SetMenuHighlightDrawFlag(false);
                 }
                 break;
@@ -509,7 +477,7 @@ void func_xk3_8012CAC8(void) {
 
 extern volatile unk_807C6EA8 D_807C6EA8;
 
-void func_xk3_8012CC10(void) {
+void MachineCreate_UpdateBInput(void) {
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) {
         switch (gWorksMachineMode) {
             case MACHINE_MODE_MENU:
@@ -526,7 +494,7 @@ void func_xk3_8012CC10(void) {
                 }
                 PRINTF("WORKS MACHINE MODE : 0\n");
                 gWorksMachineMode = MACHINE_MODE_0;
-                func_xk1_80027B74(&gMachineCreateWidget);
+                EKWidget_CloseRootWidget(&gMachineCreateWidget);
                 break;
             case MACHINE_MODE_PARTS:
             case MACHINE_MODE_SETTING:
@@ -543,7 +511,7 @@ void func_xk3_8012CC10(void) {
             case MACHINE_MODE_NUMBER_COLOR:
             case MACHINE_MODE_COCKPIT_COLOR:
                 gCustomMachine = gCustomMachineWork;
-                func_xk3_8012BC98();
+                MachineCreate_CloseColorMenu();
                 Audio_TriggerSystemSE(NA_SE_37);
                 break;
             case MACHINE_MODE_MESSAGE_BUTTON:
@@ -583,18 +551,18 @@ void func_xk3_8012CC10(void) {
 }
 
 extern const char* gSuperMachineNames[];
-extern u8 D_xk1_800333F0;
-extern u8 D_xk3_80137160;
-extern u8 D_800333F4;
+extern u8 gCustomMachineIsSuper;
+extern u8 gMachineCreateSuperMachinesCount;
+extern u8 gCustomMachineCurrentSuperIndex;
 
-void func_xk3_8012CE44(void) {
+void MachineCreate_UpdateAInput(void) {
     u8 pad;
 
     if ((((gWorksMachineMode != MACHINE_MODE_0) && (gWorksMachineMode != MACHINE_MODE_MENU_COLOR)) ||
          ((!BorderedBox_GetInfo(gMachineCreateStatsBox, IS_BORDERED_BOX_ACTIVE)) &&
           (!BorderedBox_GetInfo(gMachineCreateColorBox, IS_BORDERED_BOX_ACTIVE)))) &&
         (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A)) {
-        if (D_xk1_80032C20 == 0) {
+        if (gExpansionKitYesNoOptionIndex == 0) {
             switch (gWorksMachineMode) {
                 case MACHINE_MODE_LOAD_CONFIRM:
                 case MACHINE_MODE_OVERWRITE_CONFIRM:
@@ -619,31 +587,32 @@ void func_xk3_8012CE44(void) {
             case MACHINE_MODE_MENU_COLOR:
             case MACHINE_MODE_SELECT_LINE:
             case MACHINE_MODE_SELECT_MARK:
-                if ((D_xk1_800333F0 != 0) && (D_xk3_80136550 < 3)) {
-                    D_807C6EA8.unk_08 = 0x16;
+                if (gCustomMachineIsSuper && (sMachineCreateOptionIndex < 3)) {
+                    D_807C6EA8.unk_08 = 22;
                     PRINTF("WORKS MACHINE MODE : MESSAGE_BUTTON\n");
                     gWorksMachineMode = MACHINE_MODE_MESSAGE_BUTTON;
                     Audio_TriggerSystemSE(NA_SE_32);
                 } else {
-                    func_xk1_80027DC8(&gMachineCreateWidget, &D_xk3_80140E50, &D_xk3_80140E54);
-                    D_xk3_80140E58 = D_xk3_80140E54;
+                    EKWidget_ExecuteWidgetAction(&gMachineCreateWidget, &gMachineCreateCursorPosX,
+                                                 &gMachineCreateCursorPosY);
+                    gMachineCreateCursorPosYF = gMachineCreateCursorPosY;
                 }
                 break;
             case MACHINE_MODE_PARTS:
                 switch (gMachineCreatePartsGrid.y) {
-                    case 0:
+                    case MACHINE_PART_FRONT:
                         if (gMachineCreatePartsGrid.x != gCustomMachine.frontType) {
                             gCustomMachine.frontType = gMachineCreatePartsGrid.x;
                             Audio_TriggerSystemSE(NA_SE_39);
                         }
                         break;
-                    case 1:
+                    case MACHINE_PART_REAR:
                         if (gMachineCreatePartsGrid.x != gCustomMachine.rearType) {
                             gCustomMachine.rearType = gMachineCreatePartsGrid.x;
                             Audio_TriggerSystemSE(NA_SE_39);
                         }
                         break;
-                    case 2:
+                    case MACHINE_PART_WING:
                         if (gMachineCreatePartsGrid.x != gCustomMachine.wingType) {
                             gCustomMachine.wingType = gMachineCreatePartsGrid.x;
                             Audio_TriggerSystemSE(NA_SE_39);
@@ -657,46 +626,49 @@ void func_xk3_8012CE44(void) {
                 }
                 break;
             case MACHINE_MODE_SETTING:
-                func_xk3_8013571C();
+                MachineCreate_UpdateMachineSettingAInput();
                 break;
             case MACHINE_MODE_BODY_COLOR:
-                func_xk3_80135E58(&gCustomMachine.red, &gCustomMachine.green, &gCustomMachine.blue);
+                MachineCreate_UpdateColorSelectAInput(&gCustomMachine.red, &gCustomMachine.green, &gCustomMachine.blue);
                 break;
             case MACHINE_MODE_LINE_COLOR:
-                func_xk3_80135E58(&gCustomMachine.decalR, &gCustomMachine.decalG, &gCustomMachine.decalB);
+                MachineCreate_UpdateColorSelectAInput(&gCustomMachine.decalR, &gCustomMachine.decalG,
+                                                      &gCustomMachine.decalB);
                 break;
             case MACHINE_MODE_NUMBER_COLOR:
-                func_xk3_80135E58(&gCustomMachine.numberR, &gCustomMachine.numberG, &gCustomMachine.numberB);
+                MachineCreate_UpdateColorSelectAInput(&gCustomMachine.numberR, &gCustomMachine.numberG,
+                                                      &gCustomMachine.numberB);
                 break;
             case MACHINE_MODE_COCKPIT_COLOR:
-                func_xk3_80135E58(&gCustomMachine.cockpitR, &gCustomMachine.cockpitG, &gCustomMachine.cockpitB);
+                MachineCreate_UpdateColorSelectAInput(&gCustomMachine.cockpitR, &gCustomMachine.cockpitG,
+                                                      &gCustomMachine.cockpitB);
                 break;
             case MACHINE_MODE_LOAD_SELECT_FILE:
                 Audio_TriggerSystemSE(NA_SE_36);
-                if (func_xk1_8002BD14() == 0) {
+                if (EKFileMenu_GetFileIndex() == 0) {
                     PRINTF("WORKS MACHINE MODE : 0\n");
                     gWorksMachineMode = MACHINE_MODE_0;
                     func_xk1_8002FFDC();
-                    D_xk1_800333F0 = 0;
-                } else if ((D_xk3_80137160 != 0) && (func_xk1_8002BD14() == 1)) {
+                    gCustomMachineIsSuper = false;
+                } else if ((gMachineCreateSuperMachinesCount != 0) && (EKFileMenu_GetFileIndex() == 1)) {
                     PRINTF("WORKS MACHINE MODE : LOAD_SELECT_SUPER\n");
                     gWorksMachineMode = MACHINE_MODE_LOAD_SELECT_SUPER;
                     func_xk3_801360B8();
-                    func_xk3_8012B950();
+                    MachineCreate_InitFileMenu();
                 } else {
                     PRINTF("WORKS MACHINE MODE : LOAD_CONFIRM\n");
                     gWorksMachineMode = MACHINE_MODE_LOAD_CONFIRM;
-                    D_xk3_80141298 = func_xk1_8002BCC4();
+                    gMachineCreateSelectedFileName = EKFileMenu_GetFileNameForDisplay();
                 }
                 break;
             case MACHINE_MODE_ENTRY_CLEAR_SELECT_FILE:
-                if ((D_xk3_80137160 != 0) && (func_xk1_8002BD14() == 0)) {
+                if ((gMachineCreateSuperMachinesCount != 0) && (EKFileMenu_GetFileIndex() == 0)) {
                     Audio_TriggerSystemSE(NA_SE_36);
                     PRINTF("WORKS MACHINE MODE : ENTRY_CLEAR_SELECT_SUPER\n");
                     gWorksMachineMode = MACHINE_MODE_ENTRY_CLEAR_SELECT_SUPER;
                     func_xk3_80136320();
                 } else {
-                    D_xk3_80141298 = func_xk1_8002BCC4();
+                    gMachineCreateSelectedFileName = EKFileMenu_GetFileNameForDisplay();
                     Audio_TriggerSystemSE(NA_SE_36);
                     PRINTF("WORKS MACHINE MODE : ENTRY_CLEAR_CONFIRM\n");
                     gWorksMachineMode = MACHINE_MODE_ENTRY_CLEAR_CONFIRM;
@@ -705,12 +677,12 @@ void func_xk3_8012CE44(void) {
             case MACHINE_MODE_ENTRY_CLEAR_CONFIRM: {
                 u8 i;
                 Audio_TriggerSystemSE(NA_SE_39);
-                if (mfsStrCmp(D_xk3_80141298, &gCustomMachine.machineName) == 0) {
+                if (mfsStrCmp(gMachineCreateSelectedFileName, &gCustomMachine.machineName) == 0) {
                     gCustomMachine.number = 31;
                 }
                 for (i = 0; i < 30; i++) {
                     if ((gCustomMachinesInfo.characterCustomState[i] > 0) &&
-                        (mfsStrCmp(&gCustomMachinesInfo.customMachines[i].machineName, D_xk3_80141298) == 0)) {
+                        (mfsStrCmp(&gCustomMachinesInfo.customMachines[i].machineName, gMachineCreateSelectedFileName) == 0)) {
                         gCustomMachinesInfo.characterCustomState[i] = 0;
                         gCustomMachinesInfo.customMachines[i].number = 31;
                         func_8008D33C();
@@ -722,7 +694,7 @@ void func_xk3_8012CE44(void) {
                 break;
             }
             case MACHINE_MODE_ENTRY_CLEAR_SELECT_SUPER:
-                D_xk3_80141298 = func_xk1_8002BCC4();
+                gMachineCreateSelectedFileName = EKFileMenu_GetFileNameForDisplay();
                 Audio_TriggerSystemSE(NA_SE_36);
                 PRINTF("WORKS MACHINE MODE : ENTRY_CLEAR_SUPER_CONFIRM\n");
                 gWorksMachineMode = MACHINE_MODE_ENTRY_CLEAR_SUPER_CONFIRM;
@@ -733,7 +705,7 @@ void func_xk3_8012CE44(void) {
 
                 for (i = 0; i < 30; i++) {
                     if ((gCustomMachinesInfo.characterCustomState[i] == -1) &&
-                        (mfsStrCmp(D_xk3_80141298, gSuperMachineNames[i]) == 0)) {
+                        (mfsStrCmp(gMachineCreateSelectedFileName, gSuperMachineNames[i]) == 0)) {
                         gCustomMachinesInfo.characterCustomState[i] = 0;
                         gCustomMachinesInfo.customMachines[i].number = 31;
                         func_8008D33C();
@@ -747,15 +719,15 @@ void func_xk3_8012CE44(void) {
             }
             case MACHINE_MODE_ENTRY_SELECT_FILE:
                 Audio_TriggerSystemSE(NA_SE_36);
-                if ((D_xk3_80137160 != 0) && (func_xk1_8002BD14() == 0)) {
+                if ((gMachineCreateSuperMachinesCount != 0) && (EKFileMenu_GetFileIndex() == 0)) {
                     PRINTF("WORKS MACHINE MODE : ENTRY_SELECT_SUPER\n");
                     gWorksMachineMode = MACHINE_MODE_ENTRY_SELECT_SUPER;
                     func_xk3_801360B8();
                 } else {
-                    D_xk3_80141298 = func_xk1_8002BCC4();
+                    gMachineCreateSelectedFileName = EKFileMenu_GetFileNameForDisplay();
                     PRINTF("WORKS MACHINE MODE : ENTRY_LOAD_NOW\n");
                     gWorksMachineMode = MACHINE_MODE_ENTRY_LOAD_NOW;
-                    func_80768638(MFS_ENTRY_WORKING_DIR, D_xk3_80141298, "CARD", &gCustomMachineWork,
+                    func_80768638(MFS_ENTRY_WORKING_DIR, gMachineCreateSelectedFileName, "CARD", &gCustomMachineWork,
                                   sizeof(CustomMachine));
                     PRINTF("SUPER MACHINE No.%d\n");
                 }
@@ -764,27 +736,27 @@ void func_xk3_8012CE44(void) {
             case MACHINE_MODE_ENTRY_SELECT_SUPER: {
                 u8 i;
                 if (gWorksMachineMode == MACHINE_MODE_ENTRY_SELECT_SUPER) {
-                    D_xk3_80141291 = D_800333F4;
+                    D_xk3_80141291 = gCustomMachineCurrentSuperIndex;
                 }
                 Audio_TriggerSystemSE(NA_SE_36);
-                D_xk3_80141298 = func_xk1_8002BCC4();
+                gMachineCreateSelectedFileName = EKFileMenu_GetFileNameForDisplay();
 
                 for (i = 0; i < 30; i++) {
-                    if (mfsStrCmp(D_xk3_80141298, gSuperMachineNames[i]) == 0) {
-                        D_800333F4 = i;
+                    if (mfsStrCmp(gMachineCreateSelectedFileName, gSuperMachineNames[i]) == 0) {
+                        gCustomMachineCurrentSuperIndex = i;
                         break;
                     }
                 }
 
                 if (gWorksMachineMode == MACHINE_MODE_ENTRY_SELECT_SUPER) {
                     gCustomMachineBackup = gCustomMachine;
-                    D_xk3_80141290 = D_xk1_800333F0;
-                    D_xk1_800333F0 = 1;
+                    D_xk3_80141290 = gCustomMachineIsSuper;
+                    gCustomMachineIsSuper = true;
                     PRINTF("WORKS MACHINE MODE : ENTRY\n");
                     gWorksMachineMode = MACHINE_MODE_ENTRY;
-                    func_xk3_80132F50();
+                    MachineCreate_MachineSelectInit();
                 } else {
-                    D_xk1_800333F0 = 1;
+                    gCustomMachineIsSuper = true;
                     PRINTF("WORKS MACHINE MODE : 0\n");
                     gWorksMachineMode = MACHINE_MODE_0;
                 }
@@ -794,25 +766,25 @@ void func_xk3_8012CE44(void) {
                 Audio_TriggerSystemSE(NA_SE_36);
                 PRINTF("WORKS MACHINE MODE : DELETE_CONFIRM\n");
                 gWorksMachineMode = MACHINE_MODE_DELETE_CONFIRM;
-                D_xk3_80141298 = func_xk1_8002BCC4();
+                gMachineCreateSelectedFileName = EKFileMenu_GetFileNameForDisplay();
                 break;
             case MACHINE_MODE_LOAD_CONFIRM:
                 Audio_TriggerSystemSE(NA_SE_36);
                 PRINTF("WORKS MACHINE MODE : LOAD_NOW\n");
                 gWorksMachineMode = MACHINE_MODE_LOAD_NOW;
-                func_80768574(MFS_ENTRY_WORKING_DIR, D_xk3_80141298, "CARD", &gCustomMachineWork,
+                func_80768574(MFS_ENTRY_WORKING_DIR, gMachineCreateSelectedFileName, "CARD", &gCustomMachineWork,
                               sizeof(CustomMachine));
                 break;
             case MACHINE_MODE_DELETE_CONFIRM:
             case MACHINE_MODE_CHECKSUM_ERROR: {
                 u8 i;
-                if (mfsStrCmp(D_xk3_80141298, &gCustomMachine.machineName) == 0) {
+                if (mfsStrCmp(gMachineCreateSelectedFileName, &gCustomMachine.machineName) == 0) {
                     gCustomMachine.number = 31;
                 }
 
                 for (i = 0; i < 30; i++) {
                     if ((gCustomMachinesInfo.characterCustomState[i] > 0) &&
-                        (mfsStrCmp(gCustomMachinesInfo.customMachines[i].machineName, D_xk3_80141298) == 0)) {
+                        (mfsStrCmp(gCustomMachinesInfo.customMachines[i].machineName, gMachineCreateSelectedFileName) == 0)) {
                         gCustomMachinesInfo.characterCustomState[i] = 0;
                         gCustomMachinesInfo.customMachines[i].number = 31;
                         func_8008D33C();
@@ -823,7 +795,7 @@ void func_xk3_8012CE44(void) {
                 Audio_TriggerSystemSE(NA_SE_36);
                 PRINTF("WORKS MACHINE MODE : 0\n");
                 gWorksMachineMode = MACHINE_MODE_0;
-                func_807688D0(MFS_ENTRY_WORKING_DIR, D_xk3_80141298, "CARD", true);
+                func_807688D0(MFS_ENTRY_WORKING_DIR, gMachineCreateSelectedFileName, "CARD", true);
                 break;
             }
             case MACHINE_MODE_OVERWRITE_CONFIRM:
@@ -867,7 +839,7 @@ void func_xk3_8012D700(void) {
 extern volatile u8 D_80794E20;
 extern volatile s32 D_807C6F0C;
 
-void func_xk3_8012D79C(void) {
+void MachineCreate_UpdateFileMode(void) {
     u16 checksum;
     u8 i;
 
@@ -877,14 +849,14 @@ void func_xk3_8012D79C(void) {
             checksum = MachineCreate_CalculateCustomMachineChecksum(&gCustomMachineWork);
             if ((gCustomMachineWork.checksum != checksum) || (checksum == 0) ||
                 (MachineCreate_CustomMachineStatsIsValid(&gCustomMachineWork))) {
-                D_807C6EA8.unk_08 = 0x15;
+                D_807C6EA8.unk_08 = 21;
                 PRINTF("WORKS MACHINE MODE : CHECKSUM_ERROR\n");
                 gWorksMachineMode = MACHINE_MODE_CHECKSUM_ERROR;
             } else if (gWorksMachineMode == MACHINE_MODE_ENTRY_LOAD_NOW) {
                 gCustomMachineBackup = gCustomMachine;
-                D_xk3_80141290 = D_xk1_800333F0;
-                D_xk3_80141291 = D_800333F4;
-                D_xk1_800333F0 = 0;
+                D_xk3_80141290 = gCustomMachineIsSuper;
+                D_xk3_80141291 = gCustomMachineCurrentSuperIndex;
+                gCustomMachineIsSuper = false;
                 gCustomMachine = gCustomMachineWork;
                 gCustomMachinesInfoBackup = gCustomMachinesInfo;
 
@@ -898,13 +870,13 @@ void func_xk3_8012D79C(void) {
                 }
                 PRINTF("WORKS MACHINE MODE : ENTRY\n");
                 gWorksMachineMode = MACHINE_MODE_ENTRY;
-                func_xk3_80132F50();
+                MachineCreate_MachineSelectInit();
             } else {
                 gCustomMachine = gCustomMachineWork;
                 func_xk3_8012D700();
                 PRINTF("WORKS MACHINE MODE : 0\n");
                 gWorksMachineMode = MACHINE_MODE_0;
-                D_xk1_800333F0 = 0;
+                gCustomMachineIsSuper = false;
             }
             break;
         case MACHINE_MODE_LOAD_GET_FILE:
@@ -921,7 +893,7 @@ void func_xk3_8012D79C(void) {
                 PRINTF("WORKS MACHINE MODE : LOAD_SELECT_FILE\n");
                 gWorksMachineMode = MACHINE_MODE_LOAD_SELECT_FILE;
             }
-            func_xk3_8012B950();
+            MachineCreate_InitFileMenu();
             break;
         case MACHINE_MODE_DELETE_GET_FILE:
             if (D_807C6F0C == 0) {
@@ -930,12 +902,12 @@ void func_xk3_8012D79C(void) {
             } else {
                 PRINTF("WORKS MACHINE MODE : DELETE_SELECT_FILE\n");
                 gWorksMachineMode = MACHINE_MODE_DELETE_SELECT_FILE;
-                func_xk3_8012B950();
+                MachineCreate_InitFileMenu();
             }
             break;
         case MACHINE_MODE_SAVE_FILE_EXIST:
             if (D_80794E20 == 1) {
-                D_807C6EA8.unk_08 = 0x12;
+                D_807C6EA8.unk_08 = 18;
                 PRINTF("WORKS MACHINE MODE : OVERWRITE_CONFIRM\n");
                 gWorksMachineMode = MACHINE_MODE_OVERWRITE_CONFIRM;
             } else {
@@ -946,7 +918,7 @@ void func_xk3_8012D79C(void) {
             break;
         case MACHINE_MODE_SAVE_GET_FILE:
             if (D_807C6F0C >= 100) {
-                D_807C6EA8.unk_08 = 0x13;
+                D_807C6EA8.unk_08 = 19;
                 PRINTF("WORKS MACHINE MODE : MESSAGE_BUTTON\n");
                 gWorksMachineMode = MACHINE_MODE_MESSAGE_BUTTON;
             } else {
@@ -959,7 +931,7 @@ void func_xk3_8012D79C(void) {
                 gWorksMachineMode = MACHINE_MODE_OVERWRITE_FILE_EXIST;
                 func_8076870C(MFS_ENTRY_WORKING_DIR, gCustomMachine.machineName, "CARD");
             } else if (D_807C6F0C > 100) {
-                D_807C6EA8.unk_08 = 0x13;
+                D_807C6EA8.unk_08 = 19;
                 PRINTF("WORKS MACHINE MODE : MESSAGE_BUTTON\n");
                 gWorksMachineMode = MACHINE_MODE_MESSAGE_BUTTON;
             } else {
@@ -970,7 +942,7 @@ void func_xk3_8012D79C(void) {
             if (D_80794E20 == 1) {
                 func_xk3_8012BB48();
             } else {
-                D_807C6EA8.unk_08 = 0x13;
+                D_807C6EA8.unk_08 = 19;
                 PRINTF("WORKS MACHINE MODE : MESSAGE_BUTTON\n");
                 gWorksMachineMode = MACHINE_MODE_MESSAGE_BUTTON;
             }
@@ -980,37 +952,37 @@ void func_xk3_8012D79C(void) {
     }
 }
 
-s32 D_xk3_80136588[][7] = {
+s32 sMachineCreatePartWeights[][7] = {
     { 270, 290, 320, 350, 420, 580, 630 },  // MACHINE_PART_FRONT
     { 510, 560, 630, 720, 890, 930, 1170 }, // MACHINE_PART_REAR
     { 0, 100, 120, 140, 190, 250, 420 },    // MACHINE_PART_WING
 };
 
-void func_xk3_8012DBFC(void) {
+void MachineCreate_UpdateTransition(void) {
 
     if (gWorksMachineMode == MACHINE_MODE_ENTRY) {
         return;
     }
-    if ((gWorksMachineMode == MACHINE_MODE_PARTS) && (D_xk3_80136540 < 7000.0f)) {
-        D_xk3_80136540 += 300.0f;
+    if ((gWorksMachineMode == MACHINE_MODE_PARTS) && (gMachineCreatePartsLightSourceX < 7000.0f)) {
+        gMachineCreatePartsLightSourceX += 300.0f;
     }
-    if ((D_xk3_80136550 == 5) && !D_xk3_80136548) {
-        D_xk3_8013654C = true;
+    if ((sMachineCreateOptionIndex == 5) && !gMachineCreateModeShowInstructions) {
+        gMachineCreateHighlightExit = true;
     } else {
-        D_xk3_8013654C = false;
+        gMachineCreateHighlightExit = false;
     }
-    if (D_xk1_800333F0 != 0) {
+    if (gCustomMachineIsSuper) {
         return;
     }
-    D_xk3_80141294 = D_xk3_80136588[MACHINE_PART_FRONT][gCustomMachine.frontType] +
-                     D_xk3_80136588[MACHINE_PART_REAR][gCustomMachine.rearType] +
-                     D_xk3_80136588[MACHINE_PART_WING][gCustomMachine.wingType];
+    gMachineCreateMachineWeight = sMachineCreatePartWeights[MACHINE_PART_FRONT][gCustomMachine.frontType] +
+                                  sMachineCreatePartWeights[MACHINE_PART_REAR][gCustomMachine.rearType] +
+                                  sMachineCreatePartWeights[MACHINE_PART_WING][gCustomMachine.wingType];
     switch (gWorksMachineMode) {
         case MACHINE_MODE_SELECT_LINE:
-            gCustomMachine.decal = MACHINE_DECAL((D_xk3_80140E54 - 0x34) / 16);
+            gCustomMachine.decal = MACHINE_DECAL((gMachineCreateCursorPosY - 52) / 16);
             break;
         case MACHINE_MODE_SELECT_MARK:
-            gCustomMachine.logo = MACHINE_LOGO((D_xk3_80140E54 - 0x34) / 16);
+            gCustomMachine.logo = MACHINE_LOGO((gMachineCreateCursorPosY - 52) / 16);
             break;
     }
     if ((gWorksMachineMode == MACHINE_MODE_SETTING) &&
@@ -1019,52 +991,52 @@ void func_xk3_8012DBFC(void) {
     }
     switch (gWorksMachineMode) {
         case MACHINE_MODE_PARTS:
-            if ((gMachineCreatePartsGrid.y == 3) && (D_xk3_80136544 >= 0)) {
-                if (D_xk3_80136544 == 0) {
-                    D_xk3_80136544 = -1;
+            if ((gMachineCreatePartsGrid.y == 3) && (sMachineCreateTransitionTimer >= 0)) {
+                if (sMachineCreateTransitionTimer == 0) {
+                    sMachineCreateTransitionTimer = -1;
                     PRINTF("WORKS MACHINE MODE : 0\n");
                     gWorksMachineMode = MACHINE_MODE_0;
                     Audio_TriggerSystemSE(NA_SE_36);
                 } else {
-                    D_xk3_80136544--;
+                    sMachineCreateTransitionTimer--;
                 }
             } else {
-                D_xk3_80136544 = -1;
+                sMachineCreateTransitionTimer = -1;
             }
             break;
         case MACHINE_MODE_SETTING:
-            if ((gMachineCreateMachineSettingsGrid.y == 3) && (D_xk3_80136544 >= 0)) {
-                if (D_xk3_80136544 == 0) {
-                    D_xk3_80136544 = -1;
+            if ((gMachineCreateMachineSettingsGrid.y == 3) && (sMachineCreateTransitionTimer >= 0)) {
+                if (sMachineCreateTransitionTimer == 0) {
+                    sMachineCreateTransitionTimer = -1;
                     PRINTF("WORKS MACHINE MODE : 0\n");
                     gWorksMachineMode = MACHINE_MODE_0;
                     Audio_TriggerSystemSE(NA_SE_36);
                     BorderedBox_StartClose(gMachineCreateStatsBox);
                 } else {
-                    D_xk3_80136544 -= 1;
+                    sMachineCreateTransitionTimer -= 1;
                 }
             } else {
-                D_xk3_80136544 = -1;
+                sMachineCreateTransitionTimer = -1;
             }
             break;
         case MACHINE_MODE_BODY_COLOR:
         case MACHINE_MODE_LINE_COLOR:
         case MACHINE_MODE_NUMBER_COLOR:
         case MACHINE_MODE_COCKPIT_COLOR:
-            if ((gMachineCreateColorGrid.y == 8) && (D_xk3_80136544 >= 0)) {
-                if (D_xk3_80136544 == 0) {
-                    D_xk3_80136544 = -1;
-                    func_xk3_8012BC98();
+            if ((gMachineCreateColorGrid.y == 8) && (sMachineCreateTransitionTimer >= 0)) {
+                if (sMachineCreateTransitionTimer == 0) {
+                    sMachineCreateTransitionTimer = -1;
+                    MachineCreate_CloseColorMenu();
                     Audio_TriggerSystemSE(NA_SE_36);
                 } else {
-                    D_xk3_80136544 -= 1;
+                    sMachineCreateTransitionTimer -= 1;
                 }
             } else {
-                D_xk3_80136544 = -1;
+                sMachineCreateTransitionTimer = -1;
             }
             break;
         default:
-            D_xk3_80136544 = -1;
+            sMachineCreateTransitionTimer = -1;
             break;
     }
 }
@@ -1072,7 +1044,7 @@ void func_xk3_8012DBFC(void) {
 extern s32 gTransitionState;
 extern volatile u8 D_80794E14;
 
-bool func_xk3_8012DF04(void) {
+bool MachineCreate_MenuUpdate(void) {
 
     func_xk1_800260E4();
     if (gWorksMachineMode == MACHINE_MODE_SAVE_FILE_EXIST_BEFORE) {
@@ -1081,33 +1053,33 @@ bool func_xk3_8012DF04(void) {
         func_8076869C(MFS_ENTRY_WORKING_DIR, gCustomMachine.machineName, "CARD");
     }
     EKController_UpdateHeldInput();
-    if ((D_80794E14 == 0) && (gTransitionState == TRANSITION_INACTIVE) && !D_xk3_80136548) {
-        func_xk3_8012BD84();
+    if ((D_80794E14 == 0) && (gTransitionState == TRANSITION_INACTIVE) && !gMachineCreateModeShowInstructions) {
+        MachineCreate_UpdateCursor();
     }
     if (gWorksMachineMode != MACHINE_MODE_PARTS) {
-        func_xk3_8012C1C8();
-        func_xk3_8012C408();
-        func_xk3_8012B99C();
+        MachineCreate_UpdateViewZoom();
+        MachineCreate_UpdateViewTranslation();
+        MachineCreate_UpdateView();
     }
-    func_xk3_8012C744();
+    MachineCreate_UpdateMachineRotation();
     if (gWorksMachineMode != MACHINE_MODE_MNAME) {
         if (gTransitionState == TRANSITION_INACTIVE) {
-            func_xk3_8012CAC8();
+            MachineCreate_UpdateStartInput();
         }
-        if ((D_80794E14 == 0) && (gTransitionState == TRANSITION_INACTIVE) && !D_xk3_80136548 &&
+        if ((D_80794E14 == 0) && (gTransitionState == TRANSITION_INACTIVE) && !gMachineCreateModeShowInstructions &&
             (!(gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) ||
              !(gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B))) {
-            func_xk3_8012CC10();
-            func_xk3_8012CE44();
+            MachineCreate_UpdateBInput();
+            MachineCreate_UpdateAInput();
         }
     } else {
         ExpansionKit_NameEntryUpdate(NULL, NULL);
     }
     if (D_80794E14 == 0) {
-        func_xk3_8012D79C();
-        func_xk3_8012DBFC();
+        MachineCreate_UpdateFileMode();
+        MachineCreate_UpdateTransition();
     }
-    if (D_xk3_8013654C && (D_80794E14 == 0) && !D_xk3_80136548 &&
+    if (gMachineCreateHighlightExit && (D_80794E14 == 0) && !gMachineCreateModeShowInstructions &&
         (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A)) {
         return true;
     }

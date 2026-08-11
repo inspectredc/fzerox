@@ -915,7 +915,7 @@ void func_xk2_800D8F04(void) {
         D_xk1_8003A554 = gCourseEditCursorYPos;
     }
     if (D_80794E14 == 1) {
-        func_xk1_80027CFC(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
+        EKWidget_SetHighlightedIndex(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
         return;
     }
     func_xk2_800D8AB0();
@@ -970,11 +970,11 @@ void func_xk2_800D8F04(void) {
     func_xk2_800DC018();
     func_xk2_800DC428();
     func_xk2_800DCDD0();
-    func_xk1_80027CFC(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
+    EKWidget_SetHighlightedIndex(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
     if ((D_80119720->buttonPressed & BTN_A) && (D_800D6CA0.unk_08 == 0)) {
         D_xk1_8003A550 = gCourseEditCursorXPos;
         D_xk1_8003A554 = gCourseEditCursorYPos;
-        func_xk1_80027DC8(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
+        EKWidget_ExecuteWidgetAction(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
         if (gMenuWidgetOpen) {
             D_800D6CA0.unk_08 = 1;
         }
@@ -1850,7 +1850,8 @@ void func_xk2_800DBCF8(void) {
     if (var_a2 == 0) {
         var_a2 = 1;
     }
-    if (((gGameFrameCount % var_a2) == 0) && ((EKController_GetInputFramesHeld() == 1) || (EKController_GetInputFramesHeld() >= 9))) {
+    if (((gGameFrameCount % var_a2) == 0) &&
+        ((EKController_GetInputFramesHeld() == 1) || (EKController_GetInputFramesHeld() >= 9))) {
         Audio_TriggerSystemSE(NA_SE_38);
     }
 }
@@ -2624,9 +2625,9 @@ void func_xk2_800DD8C8(void) {
 extern u8 D_80030060[];
 extern s32 gCourseEditFileOption;
 extern s32 gCourseEditEntryOption;
-extern s32 D_xk1_80032C20;
+extern s32 gExpansionKitYesNoOptionIndex;
 extern u8 D_xk1_8003A570[];
-extern unk_8003A5D8 D_xk1_8003A5D8[];
+extern EKLoadedFile gExpansionKitLoadedFiles[];
 
 extern s32 D_xk2_800F7060;
 extern s32 D_xk2_800F7064;
@@ -2635,7 +2636,7 @@ extern s32 D_xk2_80104368;
 extern s32 D_xk2_80104378;
 
 void func_xk2_800DD938(void) {
-    unk_8003A5D8* sp1C;
+    EKLoadedFile* sp1C;
 
     if (D_80119720->buttonPressed & BTN_B) {
         Audio_TriggerSystemSE(NA_SE_37);
@@ -2645,10 +2646,10 @@ void func_xk2_800DD938(void) {
         return;
     }
     if (!(D_80119720->buttonPressed & BTN_A)) {
-        func_xk1_8002D2F0();
+        EKFileMenu_UpdateYesNoOption();
         return;
     }
-    if (D_xk1_80032C20 == 0) {
+    if (gExpansionKitYesNoOptionIndex == 0) {
         Audio_TriggerSystemSE(NA_SE_37);
         D_800D6CA0.unk_08 = 0;
         gCourseEditFileOption = -1;
@@ -2663,7 +2664,7 @@ void func_xk2_800DD938(void) {
     }
     D_xk2_80104364 = 0;
     D_xk2_80104368 = 0;
-    sp1C = &D_xk1_8003A5D8[D_xk2_80119884];
+    sp1C = &gExpansionKitLoadedFiles[D_xk2_80119884];
     switch (D_80119880) {
         case 6:
             func_xk2_800F5C50();
@@ -2686,7 +2687,7 @@ void func_xk2_800DD938(void) {
             return;
         case -1:
         case 9:
-            if (func_xk1_8002BFA4() > 100) {
+            if (EKFileMenu_GetFileCount() > 100) {
                 D_800D6CA0.unk_08 = 0;
                 return;
             }
@@ -2960,7 +2961,7 @@ void func_xk2_800DE758(void) {
             D_xk1_8003A554 = temp_a0;
         }
     }
-    func_xk1_800269F4(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
+    EKWidget_SetCursorToWidget(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
 }
 
 extern u16* gCourseEditIconTextures[];
@@ -3210,7 +3211,7 @@ void func_xk2_800DF2EC(void) {
 void func_xk2_800DF370(void) {
 
     if (D_80119720->buttonPressed & BTN_A) {
-        if (D_xk1_80032C20 != 0) {
+        if (gExpansionKitYesNoOptionIndex != 0) {
             Audio_TriggerSystemSE(NA_SE_5);
             D_800D6CA0.unk_08 = 0;
             func_xk1_8002860C();
@@ -3229,7 +3230,7 @@ void func_xk2_800DF370(void) {
         gCourseEditEntryOption = -1;
         return;
     }
-    func_xk1_8002D2F0();
+    EKFileMenu_UpdateYesNoOption();
 }
 
 extern char gEditCupTrackNames[][9];
@@ -3239,7 +3240,7 @@ void func_xk2_800DF42C(void) {
     s32 i;
 
     if (D_80119720->buttonPressed & BTN_A) {
-        if (D_xk1_80032C20 != 0) {
+        if (gExpansionKitYesNoOptionIndex != 0) {
             switch (D_80119890) {
                 case 1:
                     gEditCupTrackNames[D_xk2_80103F10][0] = '\0';
@@ -3265,7 +3266,7 @@ void func_xk2_800DF42C(void) {
         gCourseEditEntryOption = -1;
         return;
     }
-    func_xk1_8002D2F0();
+    EKFileMenu_UpdateYesNoOption();
 }
 
 void func_xk2_800DF54C(void) {

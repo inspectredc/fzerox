@@ -305,7 +305,7 @@ s32 func_xk2_800F2750(void) {
 extern s32 D_xk2_80104364;
 extern s32 D_xk2_80104368;
 extern s32 D_xk2_80104378;
-extern s32 D_xk1_80032C20;
+extern s32 gExpansionKitYesNoOptionIndex;
 extern s32 gSegmentChunkCount;
 extern u8 D_xk2_80104CA0[];
 
@@ -320,7 +320,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
     COURSE_CONTEXT()->courseData.flag = 0;
     sp18 = 0;
     if (D_802CB6D0.controlPointCount < 4) {
-        D_xk1_80032C20 = 0;
+        gExpansionKitYesNoOptionIndex = 0;
         D_800D6CA0.unk_08 = 0x10;
         D_xk2_80104378 = 9;
         return;
@@ -330,7 +330,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
 
     while (true) {
         if (D_xk2_80104CA0[i] != 0) {
-            D_xk1_80032C20 = 0;
+            gExpansionKitYesNoOptionIndex = 0;
             D_800D6CA0.unk_08 = 0x10;
             D_xk2_80104378 = 7;
             break;
@@ -339,7 +339,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
         if (i == 12) {
             D_xk2_80104CA0[7] = 0;
             if ((func_i2_800B39B4(courseInfo) != -1) || (func_i2_800BE8BC(courseInfo) != -1)) {
-                D_xk1_80032C20 = 0;
+                gExpansionKitYesNoOptionIndex = 0;
                 D_800D6CA0.unk_08 = 0x10;
                 D_xk2_80104378 = 7;
                 break;
@@ -347,7 +347,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
             func_800A4D0C(2);
             temp_v0 = func_800A1954(courseInfo);
             if (temp_v0 != 0) {
-                D_xk1_80032C20 = 0;
+                gExpansionKitYesNoOptionIndex = 0;
                 D_800D6CA0.unk_08 = 0x10;
                 D_xk2_80104378 = 7;
                 if (temp_v0 & 0x10000) {
@@ -364,7 +364,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
             }
             Course_EffectsViewInteractDataInit(false);
             if (D_xk2_80104CA0[7] != 0) {
-                D_xk1_80032C20 = 0;
+                gExpansionKitYesNoOptionIndex = 0;
                 D_800D6CA0.unk_08 = 0x10;
                 D_xk2_80104378 = 7;
                 sp18 = 1;
@@ -373,7 +373,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
             func_800A4D0C(1);
             temp_v0 = func_800A1954(courseInfo);
             if (temp_v0 != 0) {
-                D_xk1_80032C20 = 0;
+                gExpansionKitYesNoOptionIndex = 0;
                 D_800D6CA0.unk_08 = 0x10;
                 D_xk2_80104378 = 7;
                 sp18 = 1;
@@ -390,7 +390,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
             }
             Course_EffectsViewInteractDataInit(false);
             if (D_xk2_80104CA0[7] != 0) {
-                D_xk1_80032C20 = 0;
+                gExpansionKitYesNoOptionIndex = 0;
                 D_800D6CA0.unk_08 = 0x10;
                 D_xk2_80104378 = 7;
                 sp18 = 1;
@@ -446,7 +446,7 @@ s32 func_xk2_800F2AF4(s8* arg0) {
 extern Gfx D_3000510[];
 extern Gfx D_3000540[];
 extern Gfx D_8014940[];
-extern u8* D_xk1_800331F0[];
+extern char* D_xk1_800331F0[];
 extern s32 gCourseEditCursorYPos;
 
 void func_xk2_800F2B48(Gfx** gfxP) {

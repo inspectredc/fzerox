@@ -159,14 +159,14 @@ Gfx* MachineCreate_DrawColorSelection(Gfx* gfx, s32 left, s32 top) {
 
 extern BorderedBoxWidget* gMachineCreateColorBox;
 
-void func_xk3_80135E58(u8* red, u8* green, u8* blue) {
+void MachineCreate_UpdateColorSelectAInput(u8* red, u8* green, u8* blue) {
 
     if (!BorderedBox_GetInfo(gMachineCreateColorBox, IS_BORDERED_BOX_OPENED)) {
         return;
     }
 
     if (gMachineCreateColorGrid.y == 8) {
-        func_xk3_8012BC98();
+        MachineCreate_CloseColorMenu();
         Audio_TriggerSystemSE(NA_SE_36);
     } else if ((*red != sColorSelections[gMachineCreateColorGrid.y][gMachineCreateColorGrid.x][0]) ||
                (*green != sColorSelections[gMachineCreateColorGrid.y][gMachineCreateColorGrid.x][1]) ||

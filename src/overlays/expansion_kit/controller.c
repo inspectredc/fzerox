@@ -76,7 +76,8 @@ void EKController_UpdateHeldInput(void) {
 
     sExpansionKitController = &gControllers[gPlayerControlPorts[0]];
 
-    if (ABS(sExpansionKitController->stickX) > sInputDeadZone || ABS(sExpansionKitController->stickY) > sInputDeadZone) {
+    if (ABS(sExpansionKitController->stickX) > sInputDeadZone ||
+        ABS(sExpansionKitController->stickY) > sInputDeadZone) {
         sInputFramesHeld++;
         // Changed X Direction
         if ((sExpansionKitController->stickX * sLastStickX) < 0) {
@@ -217,7 +218,8 @@ void EKController_UpdateVerticalOptionStaggered(s32* optionIndex, s32 maxIndex, 
     } else if (stickY < -sInputDeadZone) {
         direction = 1;
     }
-    if (((sInputFramesHeld == 1) || (sInputFramesHeld == sInitialInputRepeatDelay) || (sInputFramesHeld == sInitialInputRepeatDelay + 3)) &&
+    if (((sInputFramesHeld == 1) || (sInputFramesHeld == sInitialInputRepeatDelay) ||
+         (sInputFramesHeld == sInitialInputRepeatDelay + 3)) &&
         (optionIndex != NULL)) {
         *optionIndex += direction;
         if (wrapMode == 1) {

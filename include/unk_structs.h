@@ -593,15 +593,14 @@ typedef struct unk_807C6EA8 {
     /* 0x60 */ s32 bssSize;
 } unk_807C6EA8;
 
-typedef struct unk_8003A5D8 {
+typedef struct EKLoadedFile {
     /* 0x00 */ char name[16];
     /* 0x10 */ s32 attr;
     /* 0x14 */ s8 unk_14[0x8];
     /* 0x1C */ char unk_1C;
     /* 0x1D */ char extension[5];
     /* 0x22 */ u8 unk_22;
-    /* 0x23 */ s8 unk_23;
-} unk_8003A5D8; //size = 0x24
+} EKLoadedFile; //size = 0x24
 
 typedef struct unk_800D6CA0 {
     /* 0x00 */ s32 unk_00;
@@ -671,8 +670,8 @@ typedef struct MachineCreateGrid {
 } MachineCreateGrid; // size = 0x8
 
 typedef struct MachineCreateDrawData {
-    /* 0x00 */ Mtx unk_00;
-    /* 0x40 */ LookAt unk_40;
+    /* 0x00 */ Mtx mtx;
+    /* 0x40 */ LookAt lookAt;
 } MachineCreateDrawData; // size = 0x60
 
 #endif // UNK_STRUCTS_H

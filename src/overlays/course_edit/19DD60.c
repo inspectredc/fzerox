@@ -18,7 +18,7 @@ const u16 D_xk2_80104010[] = { BTN_L, BTN_R, BTN_L, BTN_R, BTN_UP, BTN_DOWN, BTN
 
 extern volatile u8 D_80794E14;
 extern unk_800D6CA0 D_800D6CA0;
-extern s32 D_xk1_80032C20;
+extern s32 gExpansionKitYesNoOptionIndex;
 
 void func_xk2_800EC2A0(void) {
     static s32 D_xk2_80104000 = 0;
@@ -39,7 +39,7 @@ void func_xk2_800EC2A0(void) {
             if (D_xk2_80104000 == 10) {
                 D_xk2_80104000 = 0;
                 Audio_TriggerSystemSE(NA_SE_46);
-                D_xk1_80032C20 = 0;
+                gExpansionKitYesNoOptionIndex = 0;
                 D_800D6CA0.unk_08 = 0xFF;
             }
         } else {
@@ -105,7 +105,7 @@ void func_xk2_800EC3AC(void) {
 void func_xk2_800EC508(void) {
 
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
-        if (D_xk1_80032C20 != 0) {
+        if (gExpansionKitYesNoOptionIndex != 0) {
             Audio_TriggerSystemSE(NA_SE_5);
             func_80767FE4(1, 0x20, NULL);
             D_800D6CA0.unk_08 = 0xFE;
@@ -117,14 +117,14 @@ void func_xk2_800EC508(void) {
         Audio_TriggerSystemSE(NA_SE_37);
         D_800D6CA0.unk_08 = 0;
     } else {
-        func_xk1_8002D2F0();
+        EKFileMenu_UpdateYesNoOption();
     }
 }
 
 extern s32 D_xk1_80030608;
 extern s32 D_800CCFBC;
 extern CourseEffectsInfo* D_800E12C0;
-extern s32 D_xk1_80032BF8;
+extern bool D_xk1_80032BF8;
 extern s32 D_xk2_800F7058;
 extern s32 D_xk2_80119800;
 extern u8* sCourseMinimapTex;
@@ -177,10 +177,10 @@ void CourseEdit_Init(void) {
     func_800A4D0C(0);
     gInCourseEditor = true;
     gPointOption = 0;
-    D_xk1_80030608 = 0x1F4;
+    D_xk1_80030608 = 500;
     D_xk2_800F704C = -1;
     D_xk2_80119800 = -1;
-    D_xk1_80032BF8 = 0;
+    D_xk1_80032BF8 = false;
     gCourseInfos->courseSegments = D_802CB6D0.unk_0000;
     gCurrentCourseInfo = gCourseInfos;
     gCurrentCourseInfo->length = 0.0f;
@@ -203,7 +203,7 @@ void CourseEdit_Init(void) {
     func_800747EC(gVenueOption);
     func_xk2_800E7028(D_xk1_80030608);
     func_xk2_800F5C5C();
-    func_xk1_8002AF10(4);
+    EKFileMenu_SetFileListArrowFlashLength(4);
     gCourseVtxPtr = gGfxPool->courseVtxBuffer;
     D_800E12C0 = &gCourseEffectsInfo;
     func_xk2_800DC3F8();
@@ -260,7 +260,7 @@ extern s32 gLastCourseBGM;
 
 void func_xk2_800EC9BC(void) {
     func_xk2_800DE758();
-    func_xk1_80027CFC(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
+    EKWidget_SetHighlightedIndex(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
     if (D_80794E14 == 1) {
         return;
     }
@@ -272,12 +272,12 @@ void func_xk2_800EC9BC(void) {
                 Audio_DDBgmStop();
             }
         }
-        func_xk1_80027B74(&gCourseEditWidget);
+        EKWidget_CloseRootWidget(&gCourseEditWidget);
         gLastCourseBGM = -1;
         D_800D6CA0.unk_08 = 0;
     }
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
-        func_xk1_80027DC8(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
+        EKWidget_ExecuteWidgetAction(&gCourseEditWidget, &D_xk1_8003A550, &D_xk1_8003A554);
     }
     func_xk1_80028064();
     func_xk1_80028250();
@@ -377,9 +377,8 @@ void func_xk2_800ECD90(void) {
 }
 
 extern s32 gCourseEditEntryOption;
-extern s32 D_xk1_80032BF8;
 extern s32 D_xk2_80119918;
-extern unk_8003A5D8 D_xk1_8003A598;
+extern EKLoadedFile D_xk1_8003A598;
 extern s32 D_800DCCFC;
 extern Vtx* gEffectsVtxPtr;
 extern Vtx* gEffectsVtxEndPtr;
@@ -510,7 +509,7 @@ s32 CourseEdit_Update(void) {
             func_xk2_800ECD90();
             break;
         case 0x3:
-            func_xk1_8002BBA4();
+            EKFileMenu_UpdateOptionIndex();
             if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
                 func_xk2_800EB400();
             }
@@ -546,7 +545,7 @@ s32 CourseEdit_Update(void) {
             break;
         case 0x34:
             if (D_80794E14 == 0) {
-                D_xk1_80032BF8 = 0;
+                D_xk1_80032BF8 = false;
                 D_800D6CA0.unk_08 = 0x35;
             }
             break;

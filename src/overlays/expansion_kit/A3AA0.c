@@ -1,7 +1,7 @@
 #include "global.h"
 
 // clang-format off
-u16 D_xk1_800300F0[] = {
+u16 sExpansionKitEncodedCharMap[] = {
     //          ガ       ギ      グ      ゲ       ゴ      ザ      ジ       ズ      ゼ      ゾ      ダ       ヂ      ヅ
     0x0000, 0x834B, 0x834D, 0x834F, 0x8351, 0x8353, 0x8355, 0x8357, 0x8359, 0x835B, 0x835D, 0x835F, 0x8361, 0x8364,
     //  デ      ド       バ      ビ      ブ       ベ      ボ      パ       ピ      プ      ペ      ポ       ぷ      ぺ
@@ -43,17 +43,17 @@ u16 D_xk1_800300F0[] = {
 };
 // clang-format on
 
-void func_xk1_80026830(char* arg0, s8* arg1) {
-    u16 temp_t9;
+void ExpansionKit_DecodeStr(char* encStr, s8* strOut) {
+    u16 jpChar;
 
     while (true) {
-        if (*arg0 == 0) {
+        if (*encStr == 0) {
             break;
         }
-        temp_t9 = D_xk1_800300F0[*arg0];
-        *arg1++ = temp_t9 >> 8;
-        *arg1++ = temp_t9 & 0xFF;
-        arg0++;
+        jpChar = sExpansionKitEncodedCharMap[*encStr];
+        *strOut++ = jpChar >> 8;
+        *strOut++ = jpChar & 0xFF;
+        encStr++;
     }
-    *arg1 = 0;
+    *strOut = 0;
 }

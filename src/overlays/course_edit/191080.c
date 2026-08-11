@@ -118,13 +118,13 @@ Gfx* func_xk2_800DF5FC(Gfx* gfx) {
 }
 
 void func_xk2_800F3DAC(Gfx** gfxP);
-void func_xk1_8002D340(Gfx** gfxP);
+void EKFileMenu_DrawYesNoOption(Gfx** gfxP);
 void func_xk2_800F5250(Gfx** gfxP);
 
 extern Mtx D_2000000[];
 extern Gfx D_30004A8[];
 extern Gfx D_3000540[];
-extern u8* D_xk1_800331F0[];
+extern char* D_xk1_800331F0[];
 extern s32 D_80119880;
 extern u16* gCourseEditIconTextures[];
 extern Gfx D_3000510[];
@@ -224,7 +224,7 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
     }
 
     if ((D_800D6CA0.unk_08 == 0x11) || (D_800D6CA0.unk_08 == 0x23) || (D_800D6CA0.unk_08 == 0xFF)) {
-        func_xk1_8002D340(&gfx);
+        EKFileMenu_DrawYesNoOption(&gfx);
     }
     if (D_800D6CA0.unk_08 == 0xFF) {
         func_xk2_800EECD4(&gfx, 0, 0x48, D_xk1_800331F0[30], 30);
@@ -2935,7 +2935,7 @@ Gfx* func_xk2_800EA3B0(Gfx* gfx) {
     }
     if (D_80119880 == 5) {
         gSPDisplayList(gfx++, D_8014940);
-        func_xk1_8002AF1C(&gfx, 0xD0, 0x48, 0xA, 3);
+        EKFileMenu_DrawFileMenuBorder(&gfx, 0xD0, 0x48, 0xA, 3);
         if (1) {}
         gDPPipeSync(gfx++);
         gDPSetCombineLERP(gfx++, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0);
@@ -2944,7 +2944,7 @@ Gfx* func_xk2_800EA3B0(Gfx* gfx) {
         D_xk1_80032AD0 = 0;
         gfx = func_xk1_8002924C(gfx, 0xD8, 0x50, "  %c%c%c%d", 0xBA, 0xB0, 0xBD, D_xk2_80103F10 + 1);
     }
-    gfx = func_xk1_8002B17C(gfx, 8);
+    gfx = EKFileMenu_DrawFileMenu(gfx, 8);
 
     return gfx;
 }

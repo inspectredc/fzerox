@@ -2303,7 +2303,7 @@ sEADDemoMatrix = 0x800F6B4C; //segment:ead_demo
 func_xk1_80025C00 = 0x80025C00; //segment:expansion_kit
 func_xk1_8002FFDC = 0x8002FFDC; //segment:expansion_kit
 D_xk1_8003A598 = 0x8003A598; //segment:expansion_kit size:0x24
-D_xk1_8003A5D8 = 0x8003A5D8; //segment:expansion_kit size:0xE58
+gExpansionKitLoadedFiles = 0x8003A5D8; //segment:expansion_kit size:0xE58
 
 func_i3_80115E74 = 0x8003F364; //segment:ovl_i3
 func_i3_80116C4C = 0x80040158; //segment:ovl_i3

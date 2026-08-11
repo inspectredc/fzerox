@@ -40,7 +40,7 @@ s32 func_xk1_80025C20(s8* arg0) {
     return var_v1;
 }
 
-extern u8* D_xk1_800331F0[];
+extern char* D_xk1_800331F0[];
 extern u8* D_xk1_8003339C[];
 
 s32 func_xk1_80025C58(void) {

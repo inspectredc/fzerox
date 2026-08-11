@@ -27,17 +27,17 @@ Gfx* func_xk2_800EDF90(Gfx* gfx) {
     D_xk2_80104360 = 1;
     if (D_800D6CA0.unk_08 == 3) {
         if (D_80119880 == 5) {
-            gfx = func_xk1_8002C420(gfx, 0x18, (D_xk2_80104360 * 0x10) + 0x38);
+            gfx = EKFileMenu_DrawSelectFileText(gfx, 0x18, (D_xk2_80104360 * 0x10) + 0x38);
             D_xk2_80104360++;
         } else {
             switch (D_80119880) {
                 case 7:
                 case 8:
                     if (1) {}
-                    gfx = func_xk1_8002C420(gfx, 0x18, (D_xk2_80104360 * 0x10) + 0x38);
+                    gfx = EKFileMenu_DrawSelectFileText(gfx, 0x18, (D_xk2_80104360 * 0x10) + 0x38);
                     break;
                 default:
-                    gfx = func_xk1_8002C420(gfx, 0x58, (D_xk2_80104360 * 0x10) + 0x38);
+                    gfx = EKFileMenu_DrawSelectFileText(gfx, 0x58, (D_xk2_80104360 * 0x10) + 0x38);
                     break;
             }
             D_xk2_80104360++;
@@ -51,8 +51,9 @@ Gfx* func_xk2_800EDF90(Gfx* gfx) {
             case 1:
             case 2:
             case 3:
-                if (func_xk1_8002CA80 != NULL) {
-                    func_xk1_8002D340(&gfx);
+                //! @bug This always evaluates to true
+                if (EKFileMenu_GetEnableDrawConfirmText != NULL) {
+                    EKFileMenu_DrawYesNoOption(&gfx);
                 }
                 break;
         }
@@ -79,9 +80,9 @@ s32 func_xk2_800EE0EC(s8* arg0, s8** arg1) {
 
 extern Gfx D_3000510[];
 extern Gfx D_3000540[];
-extern u8* D_xk1_800331F0[];
+extern char* D_xk1_800331F0[];
 extern s32 D_xk2_80119884;
-extern unk_8003A5D8 D_xk1_8003A5D8[];
+extern EKLoadedFile gExpansionKitLoadedFiles[];
 
 Gfx* func_xk2_800EE158(Gfx* gfx) {
     s32 sp12C;
@@ -98,7 +99,7 @@ Gfx* func_xk2_800EE158(Gfx* gfx) {
         case 1:
         case 2:
         case 3:
-            func_xk1_8002C720(&gfx, sp12C, (D_xk2_80104360 * 0x10) + 0x38, D_xk1_8003A5D8[D_xk2_80119884].name,
+            EKFileMenu_DrawFileSelectedConfirmText(&gfx, sp12C, (D_xk2_80104360 * 0x10) + 0x38, gExpansionKitLoadedFiles[D_xk2_80119884].name,
                               D_xk2_80104378 - 1);
             D_xk2_80104360++;
             return gfx;

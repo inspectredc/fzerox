@@ -69,14 +69,14 @@ D_xk3_80137570:
   offset: 0x1D7230
   symbol: D_xk3_80137570
 
-D_xk3_80137590:
+aMachineCreateBackgroundTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 64
   height: 28
   offset: 0x1D7250
-  symbol: D_xk3_80137590
+  symbol: aMachineCreateBackgroundTex
 
 aMachineCreateMachineNameTex:
   type: TEXTURE

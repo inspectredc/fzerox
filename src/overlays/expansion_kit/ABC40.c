@@ -11,12 +11,12 @@ void func_xk1_8002E9D0(s32 arg0) {
     D_xk1_80033500 = 180 / arg0;
 }
 
-Gfx* func_xk1_8002EA10(Gfx* gfx, u16 arg1, u16 arg2, u16 arg3, u16 arg4, u16 arg5) {
+Gfx* func_xk1_8002EA10(Gfx* gfx, u16 left, u16 top, u16 right, u16 bottom, u16 color) {
 
-    gfx = ExpansionKit_DrawRectangleBorder(gfx, arg1 - 2, arg2 - 2, arg3 + 1, arg4 + 1, arg5, 2, 2);
+    gfx = ExpansionKit_DrawRectangleBorder(gfx, left - 2, top - 2, right + 1, bottom + 1, color, 2, 2);
 
     gSPDisplayList(gfx++, D_xk1_800335F0);
-    gDPFillRectangle(gfx++, arg1, arg2, arg3, arg4);
+    gDPFillRectangle(gfx++, left, top, right, bottom);
     gSPDisplayList(gfx++, D_xk1_80033630);
     return gfx;
 }
@@ -268,7 +268,7 @@ Gfx* func_xk1_8002ED64(Gfx* gfx) {
             break;
         case 18:
             gfx = func_xk1_8002ECE8(gfx, 54, 256, D_xk3_801372B8[2], GPACK_RGBA5551(130, 130, 255, 1));
-            func_xk1_8002D340(&gfx);
+            EKFileMenu_DrawYesNoOption(&gfx);
             break;
         case 19:
             gfx = func_xk1_8002EA10(gfx, 40, 40, 280, 72, GPACK_RGBA5551(255, 0, 0, 1));
@@ -277,7 +277,7 @@ Gfx* func_xk1_8002ED64(Gfx* gfx) {
             break;
         case 20:
             gfx = func_xk1_8002ECE8(gfx, 54, 272, D_xk3_801372B8[5], GPACK_RGBA5551(130, 130, 255, 1));
-            func_xk1_8002D340(&gfx);
+            EKFileMenu_DrawYesNoOption(&gfx);
             break;
         case 21:
             gfx = func_xk1_8002EA10(gfx, 48, 40, 272, 72, GPACK_RGBA5551(255, 0, 0, 1));

@@ -7,6 +7,7 @@
 #include "fzx_machine.h"
 #include "fzx_bordered_box.h"
 #include ASSET_HEADER(machine_models.h)
+#include ASSET_HEADER(create_machine_textures.h)
 #include ASSET_HEADER_EK(expansion_kit_textures.h)
 #include ASSET_HEADER_EK(overlays/machine_create/machine_create_assets.h)
 
@@ -262,14 +263,14 @@ s32 MachineCreate_CharacterSlotFromNumber(s32 number) {
 
 extern TextureSwapEntry* D_xk3_80136E60[];
 
-void func_xk3_8012F5F0(Object* arg0) {
-    OBJECT_CACHE_INDEX(arg0) = TextureCache_AllocSwapSlot(D_xk3_80136E60[0]);
-    OBJECT_STATE(arg0) = -1;
+void MachineCreate_PortraitInit(Object* portraitObj) {
+    OBJECT_CACHE_INDEX(portraitObj) = TextureCache_AllocSwapSlot(D_xk3_80136E60[0]);
+    OBJECT_STATE(portraitObj) = -1;
 }
 
 extern TexSwapSlot gTextureSwapSlots[];
 
-Gfx* func_xk3_8012F628(Gfx* gfx, Object* arg1) {
+Gfx* MachineCreate_PortraitDraw(Gfx* gfx, Object* arg1) {
 
     if (gWorksMachineMode != MACHINE_MODE_ENTRY) {
         gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(arg1)], OBJECT_LEFT(arg1),
@@ -278,84 +279,81 @@ Gfx* func_xk3_8012F628(Gfx* gfx, Object* arg1) {
     return gfx;
 }
 
-extern u8 D_xk1_800333F0;
-extern u8 D_800333F4;
+extern u8 gCustomMachineIsSuper;
+extern u8 gCustomMachineCurrentSuperIndex;
 extern CustomMachine gCustomMachine;
 
-void func_xk3_8012F6A8(Object* arg0) {
-    s32 temp_v1;
+void MachineCreate_PortraitUpdate(Object* portraitObj) {
     s32 character;
-    s32 var_v0;
-    u8 temp_a0;
 
     if (gWorksMachineMode == MACHINE_MODE_ENTRY) {
         return;
     }
 
-    if (D_xk1_800333F0 != 0) {
-        if (OBJECT_STATE(arg0) != (D_800333F4 + 30)) {
-            character = Character_GetCharacterFromSlot(D_800333F4) + 30;
+    if (gCustomMachineIsSuper) {
+        if (OBJECT_STATE(portraitObj) != (gCustomMachineCurrentSuperIndex + 30)) {
+            character = Character_GetCharacterFromSlot(gCustomMachineCurrentSuperIndex) + 30;
             if (character >= 36) {
                 character %= 30;
             }
-            TextureCache_SetSwapSlotEntry(OBJECT_CACHE_INDEX(arg0), 0, D_xk3_80136E60[character]);
+            TextureCache_SetSwapSlotEntry(OBJECT_CACHE_INDEX(portraitObj), 0, D_xk3_80136E60[character]);
         }
-        OBJECT_STATE(arg0) = D_800333F4 + 30;
+        OBJECT_STATE(portraitObj) = gCustomMachineCurrentSuperIndex + 30;
     } else {
-        if (OBJECT_STATE(arg0) != (gCustomMachine.number - 1)) {
-            TextureCache_SetSwapSlotEntry(OBJECT_CACHE_INDEX(arg0), 0,
+        if (OBJECT_STATE(portraitObj) != (gCustomMachine.number - 1)) {
+            TextureCache_SetSwapSlotEntry(OBJECT_CACHE_INDEX(portraitObj), 0,
                                           D_xk3_80136E60[MachineCreate_CharacterSlotFromNumber(gCustomMachine.number)]);
         }
-        OBJECT_STATE(arg0) = gCustomMachine.number - 1;
+        OBJECT_STATE(portraitObj) = gCustomMachine.number - 1;
     }
 }
 
 extern u8* D_xk3_801372B8[];
 
-void func_xk3_8012F7AC(Gfx** gfxP, char* arg1) {
+void MachineCreate_DrawDeleteFileConfirmation(Gfx** gfxP, char* fileName) {
     Gfx* gfx;
-    u16 sp6A;
-    u16 sp68;
-    u8 sp67;
-    char sp44[35];
-    u8 sp43 = 0;
+    u16 left;
+    u16 top;
+    u8 messageLen;
+    char fileStr[35];
+    u8 isSuperMachine = false;
 
     gfx = *gfxP;
-    if (mfsStrLen(arg1) >= 9) {
-        sp43 = 1;
+    if (mfsStrLen(fileName) >= 9) {
+        isSuperMachine = true;
     }
-    func_xk1_80026830(arg1, &sp44);
-    if (sp43) {
-        sp67 = mfsStrLen(&sp44) + mfsStrLen(D_xk3_801372B8[10]);
-        sp6A = ((((34 - sp67) / 2) + 3) * 8);
-        sp68 = 46;
+    ExpansionKit_DecodeStr(fileName, fileStr);
+    if (isSuperMachine) {
+        messageLen = mfsStrLen(fileStr) + mfsStrLen(D_xk3_801372B8[10]);
+        left = ((((34 - messageLen) / 2) + 3) * 8);
+        top = 46;
 
-        gfx = func_xk1_8002EA10(gfx, sp6A, sp68, sp6A + (sp67 * 8), 124 - sp68, GPACK_RGBA5551(130, 130, 255, 1));
+        gfx = func_xk1_8002EA10(gfx, left, top, left + (messageLen * 8), 124 - top, GPACK_RGBA5551(130, 130, 255, 1));
     } else {
-        sp67 = mfsStrLen(&sp44) + mfsStrLen(D_xk3_801372B8[10]) + mfsStrLen(D_xk3_801372B8[11]);
-        sp6A = ((((34 - sp67) / 2) + 3) * 8);
-        sp68 = 54;
-        gfx = func_xk1_8002EA10(gfx, sp6A, sp68, sp6A + (sp67 * 8), 124 - sp68, GPACK_RGBA5551(130, 130, 255, 1));
+        messageLen = mfsStrLen(fileStr) + mfsStrLen(D_xk3_801372B8[10]) + mfsStrLen(D_xk3_801372B8[11]);
+        left = ((((34 - messageLen) / 2) + 3) * 8);
+        top = 54;
+        gfx = func_xk1_8002EA10(gfx, left, top, left + (messageLen * 8), 124 - top, GPACK_RGBA5551(130, 130, 255, 1));
     }
 
     gDPSetPrimColor(gfx++, 0, 0, 255, 64, 64, 255);
-    gfx = func_xk1_800262F4(gfx, sp6A, sp68, &sp44);
-    sp6A += mfsStrLen(&sp44) * 8;
+    gfx = func_xk1_800262F4(gfx, left, top, fileStr);
+    left += mfsStrLen(fileStr) * 8;
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    if (sp43) {
-        gfx = func_xk1_800262F4(gfx, sp6A, sp68, D_xk3_801372B8[10]);
-        sp68 += 16;
-        sp6A = (((((34 - sp67) / 2) + 3) * 8));
-        gfx = func_xk1_800262F4(gfx, sp6A, sp68, D_xk3_801372B8[11]);
+    if (isSuperMachine) {
+        gfx = func_xk1_800262F4(gfx, left, top, D_xk3_801372B8[10]);
+        top += 16;
+        left = (((((34 - messageLen) / 2) + 3) * 8));
+        gfx = func_xk1_800262F4(gfx, left, top, D_xk3_801372B8[11]);
     } else {
-        gfx = func_xk1_800262F4(gfx, sp6A, sp68, D_xk3_801372B8[10]);
-        sp6A += 16;
-        gfx = func_xk1_800262F4(gfx, sp6A, sp68, D_xk3_801372B8[11]);
+        gfx = func_xk1_800262F4(gfx, left, top, D_xk3_801372B8[10]);
+        left += 16;
+        gfx = func_xk1_800262F4(gfx, left, top, D_xk3_801372B8[11]);
     }
 
-    func_xk1_8002D340(&gfx);
+    EKFileMenu_DrawYesNoOption(&gfx);
     *gfxP = gfx;
 }
 
@@ -404,11 +402,11 @@ Gfx* MachineCreate_DrawWeightAndName(Gfx* gfx, s32 weight, s8* characterName) {
     return gfx;
 }
 
-extern f32 D_xk3_80136540;
+extern f32 gMachineCreatePartsLightSourceX;
 
 Gfx* MachineCreate_SetupWingTextureColor(Gfx* gfx, u8 bodyR, u8 bodyG, u8 bodyB, u8 decalR, u8 decalG, u8 decalB) {
 
-    if (!((D_xk3_80136540 >= -100.0f) && (D_xk3_80136540 <= 100.0f))) {
+    if (!((gMachineCreatePartsLightSourceX >= -100.0f) && (gMachineCreatePartsLightSourceX <= 100.0f))) {
         bodyR *= 0.8f;
         bodyG *= 0.8f;
         bodyB *= 0.8f;
@@ -425,11 +423,11 @@ Gfx* MachineCreate_SetupWingTextureColor(Gfx* gfx, u8 bodyR, u8 bodyG, u8 bodyB,
     return gfx;
 }
 
-extern s32 D_xk3_80141294;
+extern s32 gMachineCreateMachineWeight;
 
 extern MachineCreateGrid gMachineCreatePartsGrid;
 
-Gfx* func_xk3_801301B4(Gfx* gfx) {
+Gfx* MachineCreate_DrawMachinePartsMenu(Gfx* gfx) {
     u8 i;
     u8 j;
 
@@ -449,7 +447,7 @@ Gfx* func_xk3_801301B4(Gfx* gfx) {
     gfx = MachineCreate_DrawTextureBlockI8(gfx, aMachineCreateWingTex,
                                            sPartsTextPositions[MACHINE_PART_WING][gCustomMachine.wingType][0],
                                            sPartsTextPositions[MACHINE_PART_WING][gCustomMachine.wingType][1], 40, 8);
-    gfx = MachineCreate_DrawWeight(gfx, 150, 155, D_xk3_80141294);
+    gfx = MachineCreate_DrawWeight(gfx, 150, 155, gMachineCreateMachineWeight);
 
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 7; j++) {
@@ -481,8 +479,8 @@ Gfx* func_xk3_801301B4(Gfx* gfx) {
             gfx, sPartsLeftPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x],
             sPartsTopPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x],
             sPartsRightPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x],
-            sPartsBottomPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x], 255, 64, 64, func_xk1_800290C0(), 2,
-            2);
+            sPartsBottomPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x], 255, 64, 64,
+            func_xk1_800290C0(), 2, 2);
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateOkTex, 264, 155, 32, 16);
     }
@@ -491,23 +489,24 @@ Gfx* func_xk3_801301B4(Gfx* gfx) {
 
 extern GfxPool* gGfxPool;
 
-Gfx* func_xk3_80130698(Gfx* gfx, s32 arg1) {
-    MtxF spC0;
-    MtxF sp80;
+Gfx* MachineCreate_DrawMachineLightSource(Gfx* gfx, s32 mode) {
+    MtxF mtxF1;
+    MtxF mtxF2;
 
     gDPPipeSync(gfx++);
     gSPDisplayList(gfx++, D_90186C8);
 
-    switch (arg1) {
+    switch (mode) {
         case 0:
-            Matrix_FromMtx(gGfxPool->unk_20108, &sp80);
-            Light_SetLookAtSource(&gGfxPool->unk_21B28, &sp80);
+            Matrix_FromMtx(gGfxPool->unk_20108, &mtxF2);
+            Light_SetLookAtSource(&gGfxPool->unk_21B28, &mtxF2);
             gSPLookAt(gfx++, &gGfxPool->unk_21B28);
             break;
         case 1:
-            Matrix_SetLookAt(NULL, &spC0, D_xk3_80136540, 0.0f, 1320.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-            Light_SetLookAtSource(&gMachineCreateDrawDataPtr->unk_40, &spC0);
-            gSPLookAt(gfx++, &gMachineCreateDrawDataPtr->unk_40);
+            Matrix_SetLookAt(NULL, &mtxF1, gMachineCreatePartsLightSourceX, 0.0f, 1320.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+                             0.0f);
+            Light_SetLookAtSource(&gMachineCreateDrawDataPtr->lookAt, &mtxF1);
+            gSPLookAt(gfx++, &gMachineCreateDrawDataPtr->lookAt);
             break;
     }
 
@@ -520,12 +519,12 @@ Gfx* func_xk3_80130698(Gfx* gfx, s32 arg1) {
     return gfx;
 }
 
-extern f32 D_xk3_80140E78;
-extern f32 D_xk3_80140E7C;
+extern f32 gMachineCreateMachinePitch;
+extern f32 gMachineCreateMachineYaw;
 extern GfxPool D_1000000;
 
-Gfx* func_xk3_80130920(Gfx* gfx) {
-    u16 spBE;
+Gfx* MachineCreate_DrawMachine(Gfx* gfx) {
+    u16 perspectiveScale;
 
     if (gWorksMachineMode == MACHINE_MODE_PARTS) {
         gSPViewport(gfx++, &aMachineCreatePartsTogetherViewport);
@@ -538,24 +537,24 @@ Gfx* func_xk3_80130920(Gfx* gfx) {
     gDPSetRenderMode(gfx++, G_RM_PASS, G_RM_AA_ZB_OPA_SURF2);
     gSPDisplayList(gfx++, D_xk3_80137538);
 
-    Matrix_SetFrustrum(gGfxPool->unk_20008, NULL, 44.0f, 10.0f, 12800.0f, 320.0f, 0.0f, 240.0f, 0.0f, &spBE);
+    Matrix_SetFrustrum(gGfxPool->unk_20008, NULL, 44.0f, 10.0f, 12800.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT, 0.0f, &perspectiveScale);
     Matrix_SetLookAt(gGfxPool->unk_20108, NULL, 0.0f, 880.0f, 1320.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-    Matrix_SetTransRot(&gGfxPool->unk_20308[1], NULL, 1.0f, Math_Round(DEG_TO_FZXANG2(D_xk3_80140E78)), 0, 0, 0.0f,
-                       0.0f, 0.0f);
-    Matrix_SetTransRot(&gGfxPool->unk_20308[2], NULL, 1.0f, 0, Math_Round(DEG_TO_FZXANG2(D_xk3_80140E7C)), 0, 0.0f,
-                       0.0f, 0.0f);
+    Matrix_SetTransRot(&gGfxPool->unk_20308[1], NULL, 1.0f, Math_Round(DEG_TO_FZXANG2(gMachineCreateMachinePitch)), 0,
+                       0, 0.0f, 0.0f, 0.0f);
+    Matrix_SetTransRot(&gGfxPool->unk_20308[2], NULL, 1.0f, 0, Math_Round(DEG_TO_FZXANG2(gMachineCreateMachineYaw)), 0,
+                       0.0f, 0.0f, 0.0f);
 
     gSPMatrix(gfx++, &D_1000000.unk_20008, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gfx++, &D_1000000.unk_20108, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
-    gSPPerspNormalize(gfx++, spBE);
+    gSPPerspNormalize(gfx++, perspectiveScale);
     gSPMatrix(gfx++, &D_1000000.unk_20308[2], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gfx++, &D_1000000.unk_20308[1], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    if (D_xk1_800333F0 != 0) {
-        gfx = sSuperMachineLoadTextureFuncs[D_800333F4](gfx);
-        gDPSetEnvColor(gfx++, kSuperMachineEnvColors[D_800333F4][0], kSuperMachineEnvColors[D_800333F4][1],
-                       kSuperMachineEnvColors[D_800333F4][2], 255);
-        gfx = sSuperMachineDrawFuncs[D_800333F4](gfx);
+    if (gCustomMachineIsSuper) {
+        gfx = sSuperMachineLoadTextureFuncs[gCustomMachineCurrentSuperIndex](gfx);
+        gDPSetEnvColor(gfx++, kSuperMachineEnvColors[gCustomMachineCurrentSuperIndex][0], kSuperMachineEnvColors[gCustomMachineCurrentSuperIndex][1],
+                       kSuperMachineEnvColors[gCustomMachineCurrentSuperIndex][2], 255);
+        gfx = sSuperMachineDrawFuncs[gCustomMachineCurrentSuperIndex](gfx);
     } else {
         gfx = Machine_DrawLoadCustomTextures(gfx, gCustomMachine.logo - 1, gCustomMachine.number - 1,
                                              gCustomMachine.decal - 1);
@@ -565,11 +564,11 @@ Gfx* func_xk3_80130920(Gfx* gfx) {
                                  gCustomMachine.numberR, gCustomMachine.numberG, gCustomMachine.numberB, 255, 255, 255,
                                  gCustomMachine.cockpitR, gCustomMachine.cockpitG, gCustomMachine.cockpitB);
     }
-    gfx = func_xk3_80130698(gfx, 0);
+    gfx = MachineCreate_DrawMachineLightSource(gfx, 0);
     gDPSetRenderMode(gfx++, G_RM_ZB_OVL_SURF, G_RM_ZB_OVL_SURF2);
 
-    if (D_xk1_800333F0 != 0) {
-        switch (D_800333F4) {
+    if (gCustomMachineIsSuper) {
+        switch (gCustomMachineCurrentSuperIndex) {
             case CAPTAIN_FALCON:
                 gSPDisplayList(gfx++, D_9012718);
                 break;
@@ -596,7 +595,7 @@ extern RearMachineDraw sRearMachineDrawFuncs[][5];
 extern WingMachineDraw sWingMachineDrawFuncs[][5];
 extern Gfx D_xk3_80137570[];
 
-Gfx* func_xk3_80130EE0(Gfx* gfx) {
+Gfx* MachineCreate_DrawMachineParts(Gfx* gfx) {
     u8 j;
     u8 i;
 
@@ -607,9 +606,10 @@ Gfx* func_xk3_80130EE0(Gfx* gfx) {
                                          gCustomMachine.decal - 1);
     Matrix_SetLookAt(&gGfxPool->unk_20108[1], NULL, 0.0f, 0.0f, 2000.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     Matrix_SetTransRot(&gGfxPool->unk_20308[3], NULL, 1.0f, 0x400, 0, 0, 0.0f, 0.0f, 0.0f);
-    Matrix_SetOrtho(&gMachineCreateDrawDataPtr->unk_00, NULL, 1.0f, -1550.0f, 1550.0f, -1550.0f, 1550.0f, 10.0f, 12800.0f);
+    Matrix_SetOrtho(&gMachineCreateDrawDataPtr->mtx, NULL, 1.0f, -1550.0f, 1550.0f, -1550.0f, 1550.0f, 10.0f,
+                    12800.0f);
 
-    gSPMatrix(gfx++, &gMachineCreateDrawDataPtr->unk_00, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gfx++, &gMachineCreateDrawDataPtr->mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gfx++, &D_1000000.unk_20108[1], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
     gSPMatrix(gfx++, &D_1000000.unk_20308[3], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
@@ -667,7 +667,7 @@ Gfx* func_xk3_80130EE0(Gfx* gfx) {
             }
         }
     }
-    gfx = func_xk3_80130698(gfx, 1);
+    gfx = MachineCreate_DrawMachineLightSource(gfx, 1);
     gDPSetRenderMode(gfx++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
 
     for (i = 0; i < 3; i++) {
@@ -684,7 +684,6 @@ Gfx* func_xk3_80130EE0(Gfx* gfx) {
 
 extern u8 aCreateMachineMarkTex[];
 extern u8 aCreateMachineColorTex[];
-extern u8 aCreateMachineBodyTex[];
 extern u8 aCreateMachineLineTex[];
 extern u8 aCreateMachineNumberTex[];
 extern u8 aCreateMachineCockpitTex[];
@@ -692,59 +691,59 @@ extern u8 D_4001500[];
 extern u8 aCreateMachineUseTex[];
 extern u8 aCreateMachineClearTex[];
 
-extern u8 D_xk3_80136548;
-extern u8 D_xk3_8013654C;
+extern u8 gMachineCreateModeShowInstructions;
+extern u8 gMachineCreateHighlightExit;
 extern s32 D_xk3_80136658;
 extern s32 D_xk3_80136664;
 extern s32 D_xk3_8013666C;
 extern MenuWidget gMachineCreateWidget;
-extern s32 D_xk3_80140E50;
-extern s32 D_xk3_80140E54;
+extern s32 gMachineCreateCursorPosX;
+extern s32 gMachineCreateCursorPosY;
 
 extern CustomMachinesInfo gCustomMachinesInfo;
 extern BorderedBoxWidget* gMachineCreateColorBox;
-extern char* D_xk3_80141298;
+extern char* gMachineCreateSelectedFileName;
 
-Gfx* func_xk3_80131494(Gfx* gfx) {
-    static f32 D_xk3_8013680C = 0.0f;
-    static s8 D_xk3_80136810 = 1;
+Gfx* MachineCreate_DrawGeneral(Gfx* gfx) {
+    static f32 sMachineBackgroundGradient = 0.0f;
+    static s8 sMachineBackgroundGradientDirection = 1;
     f32 colorInfo[6];
-    f32 var_fv0;
+    f32 gradientChangeSpeed;
     u16 color;
     u8 i;
     s32 pad;
 
     if (gWorksMachineMode == MACHINE_MODE_PARTS) {
-        var_fv0 = 0.001f;
+        gradientChangeSpeed = 0.001f;
     } else {
-        var_fv0 = 0.0025f;
+        gradientChangeSpeed = 0.0025f;
     }
 
-    if (D_xk3_80136810 == 1) {
-        D_xk3_8013680C += var_fv0;
-        if (D_xk3_8013680C >= 1.0f) {
-            D_xk3_8013680C = 1.0f;
-            D_xk3_80136810 = -1;
+    if (sMachineBackgroundGradientDirection == 1) {
+        sMachineBackgroundGradient += gradientChangeSpeed;
+        if (sMachineBackgroundGradient >= 1.0f) {
+            sMachineBackgroundGradient = 1.0f;
+            sMachineBackgroundGradientDirection = -1;
         }
     } else {
-        D_xk3_8013680C -= var_fv0;
-        if (D_xk3_8013680C <= 0.0f) {
-            D_xk3_8013680C = 0.0f;
-            D_xk3_80136810 = 1;
+        sMachineBackgroundGradient -= gradientChangeSpeed;
+        if (sMachineBackgroundGradient <= 0.0f) {
+            sMachineBackgroundGradient = 0.0f;
+            sMachineBackgroundGradientDirection = 1;
         }
     }
 
-    colorInfo[0] = ((1.0f - D_xk3_8013680C) * (50.0f - 50.0f)) + (D_xk3_8013680C * 50.0f);
-    colorInfo[1] = ((1.0f - D_xk3_8013680C) * (75.0f - 75.0f)) + (D_xk3_8013680C * 75.0f);
-    colorInfo[2] = ((1.0f - D_xk3_8013680C) * (165.0f - 165.0f)) + (D_xk3_8013680C * 165.0f);
-    colorInfo[3] = ((1.0f - D_xk3_8013680C) * (150.0f - 150.0f)) + (D_xk3_8013680C * 150.0f);
-    colorInfo[4] = ((1.0f - D_xk3_8013680C) * (180.0f - 180.0f)) + (D_xk3_8013680C * 180.0f);
-    colorInfo[5] = ((1.0f - D_xk3_8013680C) * (200.0f - 100.0f)) + (D_xk3_8013680C * 200.0f);
+    colorInfo[0] = ((1.0f - sMachineBackgroundGradient) * (50.0f - 50.0f)) + (sMachineBackgroundGradient * 50.0f);
+    colorInfo[1] = ((1.0f - sMachineBackgroundGradient) * (75.0f - 75.0f)) + (sMachineBackgroundGradient * 75.0f);
+    colorInfo[2] = ((1.0f - sMachineBackgroundGradient) * (165.0f - 165.0f)) + (sMachineBackgroundGradient * 165.0f);
+    colorInfo[3] = ((1.0f - sMachineBackgroundGradient) * (150.0f - 150.0f)) + (sMachineBackgroundGradient * 150.0f);
+    colorInfo[4] = ((1.0f - sMachineBackgroundGradient) * (180.0f - 180.0f)) + (sMachineBackgroundGradient * 180.0f);
+    colorInfo[5] = ((1.0f - sMachineBackgroundGradient) * (200.0f - 100.0f)) + (sMachineBackgroundGradient * 200.0f);
 
     gSPLoadUcodeL(gfx++, gspF3DEX2_Rej_fifo);
     gSPClipRatio(gfx++, FRUSTRATIO_5);
     gSPDisplayList(gfx++, D_xk3_80137378);
-    gDPLoadTextureBlock(gfx++, D_xk3_80137590, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 28, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(gfx++, aMachineCreateBackgroundTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 28, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, 6, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     gSPTextureRectangle(gfx++, 12 << 2, 8 << 2, 307 << 2, 27 << 2, 0, 12 << 5, 8 << 5, 4 * (1 << 10), 1 << 10);
@@ -757,19 +756,19 @@ Gfx* func_xk3_80131494(Gfx* gfx) {
     gSPTextureRectangle(gfx++, 12 << 2, 224 << 2, 307 << 2, 231 << 2, 0, 12 << 5, 0, 4 * (1 << 10), 1 << 10);
 
     if (gWorksMachineMode == MACHINE_MODE_PARTS) {
-        gfx = func_xk3_80130920(gfx);
+        gfx = MachineCreate_DrawMachine(gfx);
         gfx = MachineCreate_DrawColorGradientRectangle(gfx, 24, 41, 295, 76, colorInfo[0], colorInfo[1], colorInfo[2],
                                                        colorInfo[3], colorInfo[4], colorInfo[5]);
         gfx = MachineCreate_DrawColorGradientRectangle(gfx, 24, 78, 295, 113, colorInfo[0], colorInfo[1], colorInfo[2],
                                                        colorInfo[3], colorInfo[4], colorInfo[5]);
         gfx = MachineCreate_DrawColorGradientRectangle(gfx, 24, 115, 295, 150, colorInfo[0], colorInfo[1], colorInfo[2],
                                                        colorInfo[3], colorInfo[4], colorInfo[5]);
-        gfx = func_xk3_80130EE0(gfx);
-        gfx = func_xk3_801301B4(gfx);
+        gfx = MachineCreate_DrawMachineParts(gfx);
+        gfx = MachineCreate_DrawMachinePartsMenu(gfx);
     } else {
         gfx = MachineCreate_DrawColorGradientRectangle(gfx, 25, 90, 152, 217, colorInfo[0], colorInfo[1], colorInfo[2],
                                                        colorInfo[3], colorInfo[4], colorInfo[5]);
-        if (D_xk3_80136548) {
+        if (gMachineCreateModeShowInstructions) {
             color = GPACK_RGBA5551(255, 70, 70, 1);
         } else {
             color = GPACK_RGBA5551(255, 255, 255, 1);
@@ -782,11 +781,11 @@ Gfx* func_xk3_80131494(Gfx* gfx) {
             case MACHINE_MODE_NUMBER_COLOR:
             case MACHINE_MODE_COCKPIT_COLOR:
                 if (!BorderedBox_GetInfo(gMachineCreateColorBox, IS_BORDERED_BOX_OPENED)) {
-                    gfx = func_xk3_80135474(gfx);
+                    gfx = MachineCreate_DrawStatsSummary(gfx);
                 }
                 break;
             default:
-                gfx = func_xk3_80135474(gfx);
+                gfx = MachineCreate_DrawStatsSummary(gfx);
                 break;
         }
 
@@ -797,24 +796,24 @@ Gfx* func_xk3_80131494(Gfx* gfx) {
         gfx = MachineCreate_DrawColorGradientTextureBlockI8(gfx, aMachineCreateSettingsTex, 170, 118, 72, 12, 255, 255,
                                                             0, 255, 120, 0);
         gSPDisplayList(gfx++, D_xk3_80137378);
-        if (D_xk1_800333F0 != 0) {
+        if (gCustomMachineIsSuper) {
             gfx = MachineCreate_DrawTextureTileRGBA16(gfx, D_xk3_8013B280, 178, 97, 120, 16, 0, 0, 59, 15);
             gfx = MachineCreate_DrawTextureTileRGBA16(gfx, D_xk3_8013B280, 178, 97, 120, 16, 60, 0, 119, 15);
             gSPDisplayList(gfx++, D_xk3_801373F0);
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            gfx = func_xk1_8002924C(gfx, 182, 101, "%s", gSuperMachineNames[D_800333F4]);
-            if ((D_800333F4 == CAPTAIN_FALCON) && (gCustomMachinesInfo.characterCustomState[CAPTAIN_FALCON] == -1)) {
+            gfx = func_xk1_8002924C(gfx, 182, 101, "%s", gSuperMachineNames[gCustomMachineCurrentSuperIndex]);
+            if ((gCustomMachineCurrentSuperIndex == CAPTAIN_FALCON) && (gCustomMachinesInfo.characterCustomState[CAPTAIN_FALCON] == -1)) {
                 gfx =
-                    MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[D_800333F4], sCharacterNamesByNumber[6]);
-            } else if ((D_800333F4 == SAMURAI_GOROH) &&
+                    MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[gCustomMachineCurrentSuperIndex], sCharacterNamesByNumber[6]);
+            } else if ((gCustomMachineCurrentSuperIndex == SAMURAI_GOROH) &&
                        (gCustomMachinesInfo.characterCustomState[SAMURAI_GOROH] == -1)) {
                 gfx =
-                    MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[D_800333F4], sCharacterNamesByNumber[4]);
-            } else if ((D_800333F4 == JODY_SUMMER) && (gCustomMachinesInfo.characterCustomState[JODY_SUMMER] == -1)) {
+                    MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[gCustomMachineCurrentSuperIndex], sCharacterNamesByNumber[4]);
+            } else if ((gCustomMachineCurrentSuperIndex == JODY_SUMMER) && (gCustomMachinesInfo.characterCustomState[JODY_SUMMER] == -1)) {
                 gfx =
-                    MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[D_800333F4], sCharacterNamesByNumber[1]);
+                    MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[gCustomMachineCurrentSuperIndex], sCharacterNamesByNumber[1]);
             } else {
-                gfx = MachineCreate_DrawWeight(gfx, 200, 195, kSuperMachineWeights[D_800333F4]);
+                gfx = MachineCreate_DrawWeight(gfx, 200, 195, kSuperMachineWeights[gCustomMachineCurrentSuperIndex]);
             }
         } else {
             gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, D_xk3_8013A980, 190, 97, 72, 16);
@@ -825,13 +824,13 @@ Gfx* func_xk3_80131494(Gfx* gfx) {
             }
 
             if (gCustomMachine.number != 31) {
-                gfx = MachineCreate_DrawWeightAndName(gfx, D_xk3_80141294,
+                gfx = MachineCreate_DrawWeightAndName(gfx, gMachineCreateMachineWeight,
                                                       sCharacterNamesByNumber[gCustomMachine.number - 1]);
             } else {
-                gfx = MachineCreate_DrawWeight(gfx, 200, 195, D_xk3_80141294);
+                gfx = MachineCreate_DrawWeight(gfx, 200, 195, gMachineCreateMachineWeight);
             }
         }
-        gfx = func_xk3_80130920(gfx);
+        gfx = MachineCreate_DrawMachine(gfx);
         switch (gWorksMachineMode) {
             case MACHINE_MODE_MNAME:
                 gfx = ExpansionKit_NameEntryDraw(gfx, NULL, NULL);
@@ -840,36 +839,36 @@ Gfx* func_xk3_80131494(Gfx* gfx) {
             case MACHINE_MODE_DELETE_SELECT_FILE:
             case MACHINE_MODE_ENTRY_SELECT_FILE:
             case MACHINE_MODE_ENTRY_CLEAR_SELECT_FILE:
-                gfx = func_xk1_8002C420(gfx, 88, 54);
-                gfx = func_xk1_8002B17C(gfx, 8);
+                gfx = EKFileMenu_DrawSelectFileText(gfx, 88, 54);
+                gfx = EKFileMenu_DrawFileMenu(gfx, 8);
                 break;
             case MACHINE_MODE_LOAD_SELECT_SUPER:
             case MACHINE_MODE_ENTRY_SELECT_SUPER:
             case MACHINE_MODE_ENTRY_CLEAR_SELECT_SUPER:
-                gfx = func_xk1_8002C420(gfx, 88, 54);
-                gfx = func_xk1_8002B17C(gfx, 14);
+                gfx = EKFileMenu_DrawSelectFileText(gfx, 88, 54);
+                gfx = EKFileMenu_DrawFileMenu(gfx, 14);
                 break;
             case MACHINE_MODE_LOAD_CONFIRM:
-                func_xk1_8002C720(&gfx, 88, 54, D_xk3_80141298, 0);
-                func_xk1_8002D340(&gfx);
+                EKFileMenu_DrawFileSelectedConfirmText(&gfx, 88, 54, gMachineCreateSelectedFileName, 0);
+                EKFileMenu_DrawYesNoOption(&gfx);
                 break;
             case MACHINE_MODE_DELETE_CONFIRM:
-                func_xk1_8002C720(&gfx, 88, 54, D_xk3_80141298, 2);
-                func_xk1_8002D340(&gfx);
+                EKFileMenu_DrawFileSelectedConfirmText(&gfx, 88, 54, gMachineCreateSelectedFileName, 2);
+                EKFileMenu_DrawYesNoOption(&gfx);
                 break;
             case MACHINE_MODE_CHECKSUM_ERROR:
-                func_xk1_8002C720(&gfx, 88, 90, D_xk3_80141298, 2);
-                func_xk1_8002D340(&gfx);
+                EKFileMenu_DrawFileSelectedConfirmText(&gfx, 88, 90, gMachineCreateSelectedFileName, 2);
+                EKFileMenu_DrawYesNoOption(&gfx);
                 break;
             case MACHINE_MODE_ENTRY_CLEAR_CONFIRM:
             case MACHINE_MODE_ENTRY_CLEAR_SUPER_CONFIRM:
-                func_xk3_8012F7AC(&gfx, D_xk3_80141298);
+                MachineCreate_DrawDeleteFileConfirmation(&gfx, gMachineCreateSelectedFileName);
                 break;
         }
         gfx = BorderedBox_Draw(gfx);
     }
 
-    if (D_xk3_80136548) {
+    if (gMachineCreateModeShowInstructions) {
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx =
             MachineCreate_DrawTextureTileRGBA16(gfx, aExpansionKitPauseInstructionsTex, 48, 20, 224, 32, 0, 0, 63, 31);
@@ -881,7 +880,7 @@ Gfx* func_xk3_80131494(Gfx* gfx) {
                                                   31);
     } else {
         gDPSetTexturePersp(gfx++, G_TP_NONE);
-        func_xk1_800276B0(&gfx, &gMachineCreateWidget, D_xk3_80140E50, D_xk3_80140E54);
+        func_xk1_800276B0(&gfx, &gMachineCreateWidget, gMachineCreateCursorPosX, gMachineCreateCursorPosY);
         switch (gWorksMachineMode) {
             case MACHINE_MODE_LOAD_GET_FILE:
             case MACHINE_MODE_LOAD_SELECT_FILE:
@@ -947,7 +946,7 @@ Gfx* func_xk3_80131494(Gfx* gfx) {
                 break;
         }
         gSPDisplayList(gfx++, D_xk3_80137378);
-        if (D_xk3_8013654C) {
+        if (gMachineCreateHighlightExit) {
             gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aExpansionKitMenuExitHighlightTex, 265, 20, 32, 16);
         } else {
             gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aExpansionKitMenuExitTex, 265, 20, 32, 16);

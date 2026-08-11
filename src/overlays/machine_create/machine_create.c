@@ -9,8 +9,8 @@ BorderedBoxWidget* gMachineCreateColorBox;
 
 extern CustomMachinesInfo gCustomMachinesInfo;
 extern s16 D_800CCFE8;
-extern s32 D_xk3_80140E50;
-extern s32 D_xk3_80140E54;
+extern s32 gMachineCreateCursorPosX;
+extern s32 gMachineCreateCursorPosY;
 extern Vp gMachinePartViewports[][7];
 extern bool gInCourseEditor;
 
@@ -28,13 +28,13 @@ void MachineCreate_Init(void) {
     Object_Init(OBJECT_171, 0, 0, 12);
     D_800CCFE8 = 3;
     func_xk1_8002FB80();
-    func_xk3_8012BABC();
+    MachineCreate_InitView();
     func_xk1_8002E9D0(1);
     ExpansionKit_SetInputIndicatorFlashRate(1);
     func_xk1_80025C00(1);
-    func_xk1_8002AF10(0xC);
+    EKFileMenu_SetFileListArrowFlashLength(12);
     func_xk1_80025F98();
-    func_xk1_8002B150(0xA8, 0x57, &D_xk3_80140E50, &D_xk3_80140E54);
+    EKFileMenu_InitFileMenu(168, 87, &gMachineCreateCursorPosX, &gMachineCreateCursorPosY);
     func_80704810(false);
     func_xk1_8002AED0();
 
@@ -84,7 +84,7 @@ s32 MachineCreate_Update(void) {
         MachineCreate_MachineSelectUpdate();
         return GAMEMODE_CREATE_MACHINE;
     }
-    if (func_xk3_8012DF04()) {
+    if (MachineCreate_MenuUpdate()) {
         if (gGameModeChangeState != GAMEMODE_UPDATE) {
             return GAMEMODE_FLX_MAIN_MENU;
         }
@@ -120,7 +120,7 @@ Gfx* MachineCreate_Draw(Gfx* gfx) {
         gfx = MachineCreate_DrawColorGradientRectangle(gfx, 12, 8, 307, 231, 0.0f, 0.0f, 0.0f, 10.0f, 0.0f, 60.0f);
         gfx = MachineCreate_DrawMachineSelect(gfx);
     } else {
-        gfx = func_xk3_80131494(gfx);
+        gfx = MachineCreate_DrawGeneral(gfx);
     }
     return gfx;
 }

@@ -2,38 +2,13 @@
 #include "fzx_course.h"
 #include "fzx_expansion_kit.h"
 #include "fzx_segmentA.h"
+#include ASSET_HEADER(create_machine_textures.h)
 #include ASSET_HEADER_EK(expansion_kit_textures.h)
 #include ASSET_HEADER_EK(course_edit_textures.h)
 #include ASSET_HEADER_EK(overlays/expansion_kit/aA3AE0.h)
 #include ASSET_HEADER_EK(overlays/machine_create/machine_create_assets.h)
 
 extern s32 D_80119890;
-
-extern u16 D_4001B00[];
-extern u16 D_4001D40[];
-extern u16 D_4001F80[];
-extern u16 D_40021C0[];
-extern u16 D_4002400[];
-extern u16 D_4002640[];
-extern u16 D_4002880[];
-extern u16 D_4002AC0[];
-extern u16 D_4002D00[];
-extern u16 D_4002F40[];
-extern u16 D_4003180[];
-extern u16 D_40033C0[];
-extern u16 D_4003600[];
-extern u16 aCreateMachineBodyTex[];
-extern u16 aCreateMachineLineTex[];
-extern u16 aCreateMachineNumberTex[];
-extern u16 aCreateMachineCockpitTex[];
-extern u16 aCreateMachineMarkTex[];
-extern u16 aCreateMachineColorTex[];
-extern u16 D_4001500[];
-extern u16 aCreateMachineUseTex[];
-extern u16 aCreateMachineClearTex[];
-extern u16 aCreateMachinePartsTex[];
-extern u16 aCreateMachineDesignTex[];
-extern u16 aCreateMachineSettingsTex[];
 
 s32 D_xk1_8003A550;
 s32 D_xk1_8003A554;
@@ -405,15 +380,15 @@ s32 gMachineCreateEntryOption = INVALID_OPTION;
 
 MenuDropItem sDecalMenuItems[] = {
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu1Tex, D_4001B00, NULL, func_xk3_8013298C, 16, 16, NULL, NULL },
+      aExpansionKitMenu1Tex, aMachineCreateDecalStripeTex, NULL, func_xk3_8013298C, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu2Tex, D_4001D40, NULL, func_xk3_801329A4, 16, 16, NULL, NULL },
+      aExpansionKitMenu2Tex, aMachineCreateDecalThinStripeTex, NULL, func_xk3_801329A4, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu3Tex, D_4001F80, NULL, func_xk3_801329BC, 16, 16, NULL, NULL },
+      aExpansionKitMenu3Tex, aMachineCreateDecalDoubleStripeTex, NULL, func_xk3_801329BC, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu4Tex, D_40021C0, NULL, func_xk3_801329D4, 16, 16, NULL, NULL },
+      aExpansionKitMenu4Tex, aMachineCreateDecalTripleStripeUnevenTex, NULL, func_xk3_801329D4, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu5Tex, D_4002400, NULL, func_xk3_801329EC, 16, 16, NULL, NULL },
+      aExpansionKitMenu5Tex, aMachineCreateDecalBlockTex, NULL, func_xk3_801329EC, 16, 16, NULL, NULL },
 };
 
 MenuWidget sDecalWidget = { 5,   INVALID_OPTION, INVALID_OPTION, 72, 52, 0, 16, sDecalMenuItems, 104, 56, 104,
@@ -421,21 +396,21 @@ MenuWidget sDecalWidget = { 5,   INVALID_OPTION, INVALID_OPTION, 72, 52, 0, 16, 
 
 MenuDropItem sLogoMenuItems[] = {
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu1Tex, D_4002640, NULL, func_xk3_80132A80, 16, 16, NULL, NULL },
+      aExpansionKitMenu1Tex, aMachineCreateLogoShieldTex, NULL, func_xk3_80132A80, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu2Tex, D_4002880, NULL, func_xk3_80132A98, 16, 16, NULL, NULL },
+      aExpansionKitMenu2Tex, aMachineCreateLogoArrowPlaneTex, NULL, func_xk3_80132A98, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu3Tex, D_4002AC0, NULL, func_xk3_80132AB0, 16, 16, NULL, NULL },
+      aExpansionKitMenu3Tex, aMachineCreateLogoCircleTex, NULL, func_xk3_80132AB0, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu4Tex, D_4002D00, NULL, func_xk3_80132AC8, 16, 16, NULL, NULL },
+      aExpansionKitMenu4Tex, aMachineCreateLogoSkullTex, NULL, func_xk3_80132AC8, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu5Tex, D_4002F40, NULL, func_xk3_80132AE0, 16, 16, NULL, NULL },
+      aExpansionKitMenu5Tex, aMachineCreateLogoYellowGreenTex, NULL, func_xk3_80132AE0, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu6Tex, D_4003180, NULL, func_xk3_80132AF8, 16, 16, NULL, NULL },
+      aExpansionKitMenu6Tex, aMachineCreateLogoKanjiTex, NULL, func_xk3_80132AF8, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu7Tex, D_40033C0, NULL, func_xk3_80132B10, 16, 16, NULL, NULL },
+      aExpansionKitMenu7Tex, aMachineCreateLogoXTex, NULL, func_xk3_80132B10, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu8Tex, D_4003600, NULL, func_xk3_80132B28, 16, 16, NULL, NULL },
+      aExpansionKitMenu8Tex, aMachineCreateLogoN64Tex, NULL, func_xk3_80132B28, 16, 16, NULL, NULL },
 };
 
 MenuWidget sLogoWidget = { 8,   INVALID_OPTION, INVALID_OPTION, 72, 52, 0, 16, sLogoMenuItems, 104, 56, 104,
@@ -461,7 +436,7 @@ MenuDropItem sMachineDesignMenuItems[] = {
     { aExpansionKitMenuGoldBorderBackgroundTex, aExpansionKitMenuGoldBorderHighlightBackgroundTex,
       aCreateMachineMarkTex, NULL, &sLogoWidget, func_xk3_80132A04, 48, 16, NULL, NULL },
     { aExpansionKitMenuGoldBackgroundTex, aExpansionKitMenuGoldBackgroundTex, aCreateMachineColorTex, NULL,
-      &sColorWidget, func_xk3_801326F0, 48, 16, NULL, NULL },
+      &sColorWidget, MachineCreate_ColorMenuCallback, 48, 16, NULL, NULL },
 };
 
 MenuWidget sMachineDesignWidget = {
@@ -469,7 +444,7 @@ MenuWidget sMachineDesignWidget = {
 };
 
 MenuDropItem sMachineRegistrationMenuItems[] = {
-    { aExpansionKitMenuBlueBorderBackgroundTex, aExpansionKitMenuBlueBorderHighlightBackgroundTex, D_4001500, NULL,
+    { aExpansionKitMenuBlueBorderBackgroundTex, aExpansionKitMenuBlueBorderHighlightBackgroundTex, D_7000E00, NULL,
       NULL, func_xk3_80132828, 48, 16, NULL, NULL },
     { aExpansionKitMenuBlueBorderBackgroundTex, aExpansionKitMenuBlueBorderHighlightBackgroundTex, D_xk3_80138B30, NULL,
       NULL, func_xk3_80132DDC, 48, 16, NULL, NULL },
@@ -493,11 +468,11 @@ MenuWidget sMachineRegistrationWidget = { 3,
 
 MenuDropItem sMachineCreateEntryMenuItems[] = {
     { aExpansionKitMenuPurpleBorderBackgroundTex, aExpansionKitMenuPurpleBorderHighlightBackgroundTex,
-      aCreateMachineUseTex, NULL, NULL, func_xk3_8013277C, 48, 16, NULL, NULL },
+      aCreateMachineUseTex, NULL, NULL, MachineCreate_UseEntryCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuPurpleBorderBackgroundTex, aExpansionKitMenuPurpleBorderHighlightBackgroundTex,
-      aCreateMachineClearTex, NULL, NULL, func_xk3_801327A4, 48, 16, NULL, NULL },
+      aCreateMachineClearTex, NULL, NULL, MachineCreate_ClearEntryCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuPurpleBorderBackgroundTex, aExpansionKitMenuPurpleBorderHighlightBackgroundTex,
-      aExpansionKitMenuClearAllTex, NULL, NULL, func_xk3_80132808, 48, 16, NULL, NULL },
+      aExpansionKitMenuClearAllTex, NULL, NULL, MachineCreate_ClearAllEntryCallback, 48, 16, NULL, NULL },
 };
 
 MenuWidget sMachineCreateEntryWidget = { 3,
@@ -518,12 +493,12 @@ MenuDropItem gMachineCreateMenuItems[] = {
     { aExpansionKitMenuGoldBackgroundTex, aExpansionKitMenuGoldBackgroundTex, aCreateMachinePartsTex, NULL, NULL,
       func_xk3_80132884, 48, 16, NULL, NULL },
     { aExpansionKitMenuGoldBackgroundTex, aExpansionKitMenuGoldBackgroundTex, aCreateMachineDesignTex, NULL,
-      &sMachineDesignWidget, func_xk3_801326D8, 48, 16, NULL, NULL },
+      &sMachineDesignWidget, MachineCreate_DesignMenuCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuGoldBackgroundTex, aExpansionKitMenuGoldBackgroundTex, aCreateMachineSettingsTex, NULL, NULL,
       func_xk3_80132E84, 48, 16, NULL, NULL },
     { aMachineCreateMachineRegistrationTex, aMachineCreateMachineRegistrationTex, NULL, NULL,
-      &sMachineRegistrationWidget, func_xk3_801326C0, 48, 16, NULL, NULL },
-    { aExpansionKitMenuEntryTex, aExpansionKitMenuEntryTex, NULL, NULL, &sMachineCreateEntryWidget, func_xk3_80132764,
+      &sMachineRegistrationWidget, MachineCreate_RegistrationMenuCallback, 48, 16, NULL, NULL },
+    { aExpansionKitMenuEntryTex, aExpansionKitMenuEntryTex, NULL, NULL, &sMachineCreateEntryWidget, MachineCreate_EntryMenuCallback,
       48, 16, NULL, NULL },
 };
 
@@ -732,11 +707,11 @@ void func_xk1_800268A8(void) {
 }
 
 extern unk_800D6CA0 D_800D6CA0;
-extern s32 D_xk1_80032C20;
+extern s32 gExpansionKitYesNoOptionIndex;
 
 void func_xk1_800268E4(void) {
     D_80119890 = 2;
-    D_xk1_80032C20 = 0;
+    gExpansionKitYesNoOptionIndex = 0;
     D_800D6CA0.unk_08 = 0x23;
 }
 
@@ -760,7 +735,7 @@ MenuWidget* func_xk1_80026914(MenuWidget* rootWidget) {
     return widget;
 }
 
-s32 func_xk1_80026958(MenuWidget* widget, s32 cursorPosX, s32 cursorPosY) {
+s32 EKWidget_GetCursorIndex(MenuWidget* widget, s32 cursorPosX, s32 cursorPosY) {
     s32 i;
     s32 index;
 
@@ -777,7 +752,7 @@ s32 func_xk1_80026958(MenuWidget* widget, s32 cursorPosX, s32 cursorPosY) {
     return index;
 }
 
-void func_xk1_800269F4(MenuWidget* widget, s32* cursorPosXPtr, s32* cursorPosYPtr) {
+void EKWidget_SetCursorToWidget(MenuWidget* widget, s32* cursorPosXPtr, s32* cursorPosYPtr) {
     s32 cursorPosX;
     s32 cursorPosY;
 
@@ -845,7 +820,7 @@ void func_xk1_80026B44(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 curso
 
     gfx = *gfxP;
 
-    highlightedIndex = func_xk1_80026958(widget, cursorPosX, cursorPosY);
+    highlightedIndex = EKWidget_GetCursorIndex(widget, cursorPosX, cursorPosY);
 
     for (i = 0; i < widget->numItems; i++) {
         menuItem = &widget->menuItems[i];
@@ -1009,49 +984,49 @@ void func_xk1_800276B0(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 curso
     *gfxP = gfx;
 }
 
-void func_xk1_80027B74(MenuWidget* arg0) {
-    s32 temp_v0;
+void EKWidget_CloseRootWidget(MenuWidget* widget) {
+    s32 index;
 
     if (!gMenuWidgetOpen) {
         return;
     }
     while (true) {
-        temp_v0 = arg0->openIndex;
-        if (temp_v0 == INVALID_OPTION) {
+        index = widget->openIndex;
+        if (index == INVALID_OPTION) {
             break;
         }
-        arg0->openIndex = INVALID_OPTION;
-        if (arg0->menuItems[temp_v0].widget == NULL) {
+        widget->openIndex = INVALID_OPTION;
+        if (widget->menuItems[index].widget == NULL) {
             break;
         }
-        arg0 = arg0->menuItems[temp_v0].widget;
+        widget = widget->menuItems[index].widget;
     }
-    if (arg0 != &gBGMWidget) {
+    if (widget != &gBGMWidget) {
         Audio_TriggerSystemSE(NA_SE_37);
     }
     gCourseEditFileOption = INVALID_OPTION;
     gCourseEditEntryOption = INVALID_OPTION;
-    arg0->highlightedIndex = INVALID_OPTION;
+    widget->highlightedIndex = INVALID_OPTION;
     gMenuWidgetOpen = false;
     sMenuPageYOffset = 0;
 }
 
-void func_xk1_80027C1C(MenuWidget* widget) {
-    s32 temp_v0;
+void EKWidget_CloseWidget(MenuWidget* widget) {
+    s32 index;
 
     if (!gMenuWidgetOpen) {
         return;
     }
     while (true) {
-        temp_v0 = widget->openIndex;
-        if (temp_v0 == INVALID_OPTION) {
+        index = widget->openIndex;
+        if (index == INVALID_OPTION) {
             break;
         }
         widget->openIndex = INVALID_OPTION;
-        if (widget->menuItems[temp_v0].widget == NULL) {
+        if (widget->menuItems[index].widget == NULL) {
             break;
         }
-        widget = widget->menuItems[temp_v0].widget;
+        widget = widget->menuItems[index].widget;
     }
 
     widget->highlightedIndex = INVALID_OPTION;
@@ -1060,21 +1035,21 @@ void func_xk1_80027C1C(MenuWidget* widget) {
 }
 
 void func_xk1_80027C80(MenuWidget* widget) {
-    s32 temp_v0;
+    s32 index;
 
     if (D_800D6CA0.unk_08 != 1 || !gMenuWidgetOpen) {
         return;
     }
     while (true) {
-        temp_v0 = widget->openIndex;
-        if (temp_v0 == INVALID_OPTION) {
+        index = widget->openIndex;
+        if (index == INVALID_OPTION) {
             break;
         }
         widget->openIndex = INVALID_OPTION;
-        if (widget->menuItems[temp_v0].widget == NULL) {
+        if (widget->menuItems[index].widget == NULL) {
             break;
         }
-        widget = widget->menuItems[temp_v0].widget;
+        widget = widget->menuItems[index].widget;
     }
 
     widget->highlightedIndex = INVALID_OPTION;
@@ -1085,7 +1060,7 @@ void func_xk1_80027C80(MenuWidget* widget) {
 
 extern s32 D_xk2_800F7048;
 
-void func_xk1_80027CFC(MenuWidget* rootWidget, s32* cursorPosXPtr, s32* cursorPosYPtr) {
+void EKWidget_SetHighlightedIndex(MenuWidget* rootWidget, s32* cursorPosXPtr, s32* cursorPosYPtr) {
     s32 pad;
     MenuWidget* widget = rootWidget;
     s32 pad2;
@@ -1105,7 +1080,7 @@ void func_xk1_80027CFC(MenuWidget* rootWidget, s32* cursorPosXPtr, s32* cursorPo
         widget = widget->menuItems[widget->openIndex].widget;
     }
 
-    var_a1 = func_xk1_80026958(widget, *cursorPosXPtr, *cursorPosYPtr);
+    var_a1 = EKWidget_GetCursorIndex(widget, *cursorPosXPtr, *cursorPosYPtr);
 
     if ((var_a1 != widget->highlightedIndex) && (widget->highlightedIndex != INVALID_OPTION) &&
         (widget != &gBGMWidget)) {
@@ -1114,7 +1089,7 @@ void func_xk1_80027CFC(MenuWidget* rootWidget, s32* cursorPosXPtr, s32* cursorPo
     widget->highlightedIndex = var_a1;
 }
 
-void func_xk1_80027DC8(MenuWidget* rootWidget, s32* cursorPosXPtr, s32* cursorPosYPtr) {
+void EKWidget_ExecuteWidgetAction(MenuWidget* rootWidget, s32* cursorPosXPtr, s32* cursorPosYPtr) {
     s32 pad;
     MenuWidget* widget;
     MenuWidget* selectedWidget;
@@ -1131,7 +1106,7 @@ void func_xk1_80027DC8(MenuWidget* rootWidget, s32* cursorPosXPtr, s32* cursorPo
         widget = widget->menuItems[widget->openIndex].widget;
     }
 
-    selectedIndex = func_xk1_80026958(widget, *cursorPosXPtr, *cursorPosYPtr);
+    selectedIndex = EKWidget_GetCursorIndex(widget, *cursorPosXPtr, *cursorPosYPtr);
     if (selectedIndex != INVALID_OPTION) {
         if (!((widget == &gCourseEditWidget) && (selectedIndex == 2) &&
               (gCourseEditWidget.menuItems[2].widget == NULL)) &&
@@ -1180,7 +1155,7 @@ void func_xk1_80027DC8(MenuWidget* rootWidget, s32* cursorPosXPtr, s32* cursorPo
             }
         } else {
             if (widget->menuItems[selectedIndex].action != NULL) {
-                func_xk1_80027C1C(rootWidget);
+                EKWidget_CloseWidget(rootWidget);
                 widget->menuItems[selectedIndex].action();
             }
         }
@@ -1191,7 +1166,7 @@ extern s32 D_80119880;
 extern u8 D_xk2_800F7400;
 extern s32 D_xk2_80104378;
 extern unk_807B3C20 D_802CB6D0;
-extern s32 D_xk1_80032BF8;
+extern bool D_xk1_80032BF8;
 extern CourseInfo* gCurrentCourseInfo;
 
 void func_xk1_80028064(void) {
@@ -1212,32 +1187,32 @@ void func_xk1_80028064(void) {
             D_80119880 = 1;
             func_xk2_800F27DC(gCurrentCourseInfo);
             if (D_802CB6D0.controlPointCount < 4) {
-                D_xk1_80032C20 = 0;
+                gExpansionKitYesNoOptionIndex = 0;
                 D_800D6CA0.unk_08 = 16;
                 D_xk2_80104378 = 9;
                 D_80119880 = -2;
             } else {
-                D_xk1_80032BF8 = 0;
+                D_xk1_80032BF8 = false;
                 func_8076877C(1, "CRSD");
                 PRINTF("NAME\n");
                 D_800D6CA0.unk_08 = 50;
             }
             break;
         case FILE_OPTION_RENAME:
-            D_xk1_80032BF8 = 0;
+            D_xk1_80032BF8 = false;
             func_8076877C(0, "CRSD");
             PRINTF("DELETE\n");
             D_80119880 = 3;
             D_800D6CA0.unk_08 = 50;
             break;
         case FILE_OPTION_ERASE:
-            D_xk1_80032BF8 = 0;
+            D_xk1_80032BF8 = false;
             func_8076877C(0, "CRSD");
             D_80119880 = 2;
             D_800D6CA0.unk_08 = 50;
             break;
         case FILE_OPTION_COPY:
-            D_xk1_80032BF8 = 0;
+            D_xk1_80032BF8 = false;
             func_8076877C(0, "CRSD");
             PRINTF("BGM NO. SET %d\n");
             D_80119880 = 7;
@@ -1435,7 +1410,7 @@ void func_xk1_80028708(void) {
             gPointOption = POINT_OPTION_SET;
             return;
         case POINT_OPTION_CLEAR_ALL:
-            D_xk1_80032C20 = 0;
+            gExpansionKitYesNoOptionIndex = 0;
             D_800D6CA0.unk_08 = 0x11;
             break;
         case POINT_OPTION_SET:

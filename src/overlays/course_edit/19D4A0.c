@@ -53,7 +53,7 @@ Gfx* func_xk2_800EBB24(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_8014940);
 
-    func_xk1_8002AF1C(&gfx, 0xC8, 0x50, 0xC, 8);
+    EKFileMenu_DrawFileMenuBorder(&gfx, 0xC8, 0x50, 0xC, 8);
 
     for (i = 0; i < 6; i++) {
         var_s3 = gEditCupTrackNames[i];
@@ -117,7 +117,7 @@ void func_xk2_800EBE90(void) {
 
 extern s32 D_80119880;
 extern s32 D_80119890;
-extern s32 D_xk1_80032C20;
+extern s32 gExpansionKitYesNoOptionIndex;
 extern u8 D_xk2_800F7400;
 
 void func_xk2_800EBEF4(void) {
@@ -132,7 +132,7 @@ void func_xk2_800EBEF4(void) {
                 D_xk2_800F7400 = 1;
                 break;
             case 1:
-                D_xk1_80032C20 = 0;
+                gExpansionKitYesNoOptionIndex = 0;
                 D_800D6CA0.unk_08 = 0x23;
                 break;
         }
@@ -151,7 +151,7 @@ void func_xk2_800EBFE8(char* name) {
     }
 }
 
-extern unk_8003A5D8 D_xk1_8003A5D8[];
+extern EKLoadedFile gExpansionKitLoadedFiles[];
 
 void func_xk2_800EC04C(void) {
     bool var_s3;
@@ -161,8 +161,8 @@ void func_xk2_800EC04C(void) {
     for (i = 0; i < 6; i++) {
         var_s3 = true;
         if (gEditCupTrackNames[i][0] != '\0') {
-            for (j = 0; j < func_xk1_8002BFA4(); j++) {
-                if (mfsStrCmp(D_xk1_8003A5D8[j].name, gEditCupTrackNames[i]) == 0) {
+            for (j = 0; j < EKFileMenu_GetFileCount(); j++) {
+                if (mfsStrCmp(gExpansionKitLoadedFiles[j].name, gEditCupTrackNames[i]) == 0) {
                     var_s3 = false;
                 }
             }
@@ -195,13 +195,13 @@ void func_xk2_800EC1D8(void) {
                   1);
 }
 
-s32 func_xk2_800EC234(unk_8003A5D8* arg0) {
+bool func_xk2_800EC234(EKLoadedFile* arg0) {
     s32 i;
 
     for (i = 0; i < 6; i++) {
         if (mfsStrCmp(arg0->name, gEditCupTrackNames[i]) == 0) {
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }

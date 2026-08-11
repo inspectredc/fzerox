@@ -30,7 +30,7 @@ u8* sMachineStatSelectionStates[][5] = {
       &sMachineCreateGripStatA },
 };
 
-u8* sMachineCreateStatTexs[][3] = {
+TexturePtr sMachineCreateStatTexs[][3] = {
     { aMachineCreateStatEInvalidTex, aMachineCreateStatETex, aMachineCreateStatSelectedETex },
     { aMachineCreateStatDInvalidTex, aMachineCreateStatDTex, aMachineCreateStatSelectedDTex },
     { aMachineCreateStatCInvalidTex, aMachineCreateStatCTex, aMachineCreateStatSelectedCTex },
@@ -153,9 +153,11 @@ Gfx* func_xk3_80135158(Gfx* gfx) {
         gfx = ExpansionKit_DrawRectangleBorderHighlight(
             gfx, sMachineStatLeftPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x],
             sMachineStatTopPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x],
-            sMachineStatLeftPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] + (24 - 1),
-            sMachineStatTopPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] + (16 - 1), 255, 64, 64,
-            func_xk1_800290C0(), 2, 2);
+            sMachineStatLeftPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] +
+                (24 - 1),
+            sMachineStatTopPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] +
+                (16 - 1),
+            255, 64, 64, func_xk1_800290C0(), 2, 2);
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateOkTex, 259, 98, 32, 16);
     }
@@ -207,11 +209,11 @@ void MachineCreate_StatValueToString(char** statStrPtr, u8 statValue) {
     }
 }
 
-extern u8 D_xk1_800333F0;
-extern u8 D_800333F4;
+extern u8 gCustomMachineIsSuper;
+extern u8 gCustomMachineCurrentSuperIndex;
 extern u8 kSuperMachineStatValues[][3];
 
-Gfx* func_xk3_80135474(Gfx* gfx) {
+Gfx* MachineCreate_DrawStatsSummary(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_xk3_801373F0);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -221,13 +223,13 @@ Gfx* func_xk3_80135474(Gfx* gfx) {
     gfx = MachineCreate_DrawTextureBlockI8(gfx, aMachineCreateGripTex, 190, 167, 32, 16);
 
     gSPDisplayList(gfx++, D_xk3_80137378);
-    if (D_xk1_800333F0 != 0) {
+    if (gCustomMachineIsSuper) {
         gfx = MachineCreate_DrawTextureBlockRGBA16(
-            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[D_800333F4][0]][2], 230, 133, 24, 16);
+            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][0]][2], 230, 133, 24, 16);
         gfx = MachineCreate_DrawTextureBlockRGBA16(
-            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[D_800333F4][1]][2], 230, 150, 24, 16);
+            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][1]][2], 230, 150, 24, 16);
         gfx = MachineCreate_DrawTextureBlockRGBA16(
-            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[D_800333F4][2]][2], 230, 167, 24, 16);
+            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][2]][2], 230, 167, 24, 16);
     } else {
         gfx =
             MachineCreate_DrawTextureBlockRGBA16(gfx, sMachineCreateStatTexs[gCustomMachine.body][2], 230, 133, 24, 16);
@@ -241,7 +243,7 @@ Gfx* func_xk3_80135474(Gfx* gfx) {
 
 extern BorderedBoxWidget* gMachineCreateStatsBox;
 
-void func_xk3_8013571C(void) {
+void MachineCreate_UpdateMachineSettingAInput(void) {
     if (!BorderedBox_GetInfo(gMachineCreateStatsBox, IS_BORDERED_BOX_OPENED)) {
         return;
     }
@@ -250,7 +252,8 @@ void func_xk3_8013571C(void) {
         gWorksMachineMode = MACHINE_MODE_0;
         Audio_TriggerSystemSE(NA_SE_36);
         BorderedBox_StartClose(gMachineCreateStatsBox);
-    } else if (*sMachineStatSelectionStates[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] != MACHINE_STAT_INVALID) {
+    } else if (*sMachineStatSelectionStates[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] !=
+               MACHINE_STAT_INVALID) {
         switch (gMachineCreateMachineSettingsGrid.y) {
             case BODY_STAT:
                 if (gMachineCreateMachineSettingsGrid.x != gCustomMachine.body) {

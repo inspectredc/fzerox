@@ -178,7 +178,7 @@ s32 func_xk1_8002E368(void) {
             switch (D_807C6EA8.unk_00) {
                 case 11:
                 case 12:
-                    D_807C6F0C = func_xk1_8002BD64(D_807C6EA8.unk_54, D_807C6EA8.extension);
+                    D_807C6F0C = EKFileMenu_LoadFiles(D_807C6EA8.unk_54, D_807C6EA8.extension);
                     break;
                 case 13:
                 case 14:
@@ -232,7 +232,7 @@ s32 func_xk1_8002E368(void) {
                         D_xk1_8003BB60 = D_800CD2B0;
                         if (D_807C6F0C == 0) {
                             D_80794E24 = 1;
-                            D_807C6EA8.unk_08 = 0xD;
+                            D_807C6EA8.unk_08 = 13;
                         }
                         break;
                     case 12:
@@ -244,7 +244,7 @@ s32 func_xk1_8002E368(void) {
             }
             if (D_xk1_80033404 == 0x106) {
                 D_80794E1C = 1;
-                D_807C6EA8.unk_08 = 0x10;
+                D_807C6EA8.unk_08 = 16;
                 sp3C = LEO_ERROR_GOOD;
                 break;
             }
