@@ -15569,8 +15569,8 @@ Gfx* Machine_DrawLoadCrazyBearTextures(Gfx* gfx) {
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
-        gDPLoadMultiBlock(gfx++, D_8013E180, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP,
-                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadMultiBlock(gfx++, aDecalCrazyBearEyeGreyscaleTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #endif
     } else {
 #endif
@@ -15622,8 +15622,8 @@ Gfx* Machine_DrawLoadHyperSpeederTextures(Gfx* gfx) {
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
-        gDPLoadMultiBlock(gfx++, D_8013F380, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
-                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadMultiBlock(gfx++, aDecalBeastFaceGreyscaleTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #endif
     } else {
 #endif
@@ -15778,8 +15778,8 @@ Gfx* Machine_DrawLoadGreenPantherTextures(Gfx* gfx) {
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
-        gDPLoadMultiBlock(gfx++, D_8013EB80, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadMultiBlock(gfx++, aDecalGreenPantherCamoGreyscaleTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #endif
     } else {
 #endif
@@ -15828,8 +15828,8 @@ Gfx* Machine_DrawLoadLittleWyvernTextures(Gfx* gfx) {
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
-        gDPLoadMultiBlock(gfx++, D_8013E980, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
-                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadMultiBlock(gfx++, aDecalLittleWyvernStripeEndsGreyscaleTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16,
+                          0, G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 #endif
     } else {
 #endif
@@ -15942,8 +15942,8 @@ Gfx* Machine_DrawLoadIronTigerTextures(Gfx* gfx) {
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
-        gDPLoadMultiBlock(gfx++, D_8013D980, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                          G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadMultiBlock(gfx++, aDecalLeopardGreyscaleTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #endif
     } else {
 #endif
@@ -16038,8 +16038,8 @@ Gfx* Machine_DrawLoadFireStingrayTextures(Gfx* gfx) {
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
-        gDPLoadMultiBlock(gfx++, D_8013D180, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadMultiBlock(gfx++, aDecalFlamesGreyscaleTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #endif
     } else {
 #endif
@@ -16070,8 +16070,8 @@ Gfx* Machine_DrawLoadWildGooseTextures(Gfx* gfx) {
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
-        gDPLoadMultiBlock(gfx++, D_8013C980, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
-                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadMultiBlock(gfx++, aDecalWildGooseLightningGreyscaleTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0,
+                          G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 #endif
     } else {
 #endif
@@ -16104,8 +16104,8 @@ Gfx* Machine_DrawLoadGoldenFoxTextures(Gfx* gfx) {
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
-        gDPLoadMultiBlock(gfx++, D_8013C780, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadMultiBlock(gfx++, aDecalGoldenFoxStripesGreyscaleTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 #endif
     } else {
 #endif
@@ -16138,8 +16138,8 @@ Gfx* Machine_DrawLoadBlueFalconTextures(Gfx* gfx) {
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart) {
 #ifdef EXPANSION_KIT
-        gDPLoadMultiBlock(gfx++, D_8013C580, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
-                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadMultiBlock(gfx++, aDecalBlueFalconWingCheckeredGreyscaleTex, 0x10, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16,
+                          16, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
 #endif
     } else {
 #endif

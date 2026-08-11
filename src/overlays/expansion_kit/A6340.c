@@ -141,7 +141,7 @@ void ExpansionKit_GetCharacterKeyboardPosition(char letter, s32* xPosPtr, s32* y
     *yPosPtr = yPos;
 }
 
-void func_xk1_800294AC(void) {
+void ExpansionKit_NameEntryClear(void) {
     s32 i;
 
     gExpansionKitNameEntryStrLength = 0;

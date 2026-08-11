@@ -205,8 +205,8 @@ extern s32 D_xk2_80119884;
 s32 func_xk2_800EAF24(EKLoadedFile* arg0) {
     D_80794E10 = 0;
     D_xk2_800F7400 = 0;
-    func_80768574(MFS_ENTRY_WORKING_DIR, arg0->name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension, &D_xk2_800F7408,
-                  sizeof(CourseContext));
+    func_80768574(MFS_ENTRY_WORKING_DIR, arg0->name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension,
+                  &D_xk2_800F7408, sizeof(CourseContext));
     mfsStrCpy(&D_80030060, arg0);
     return 0;
 }
@@ -214,8 +214,8 @@ s32 func_xk2_800EAF24(EKLoadedFile* arg0) {
 s32 func_xk2_800EAFA8(EKLoadedFile* arg0) {
     D_80794E10 = 0;
     D_xk2_800F7400 = 0;
-    func_80768574(MFS_ENTRY_WORKING_DIR, arg0->name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension, &D_xk2_800F7408,
-                  sizeof(CourseContext));
+    func_80768574(MFS_ENTRY_WORKING_DIR, arg0->name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension,
+                  &D_xk2_800F7408, sizeof(CourseContext));
     return 0;
 }
 
@@ -300,11 +300,11 @@ void func_xk2_800EB250(void) {
 
 void func_xk2_800EB304(char* name, s32 attr) {
     if (attr & MFS_FILE_ATTR_FORBID_W) {
-        func_807689BC(MFS_ENTRY_WORKING_DIR, name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension, 0, MFS_FILE_ATTR_FORBID_W,
-                      true);
+        func_807689BC(MFS_ENTRY_WORKING_DIR, name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension, 0,
+                      MFS_FILE_ATTR_FORBID_W, true);
     } else {
-        func_807689BC(MFS_ENTRY_WORKING_DIR, name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension, MFS_FILE_ATTR_FORBID_W, 0,
-                      true);
+        func_807689BC(MFS_ENTRY_WORKING_DIR, name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension,
+                      MFS_FILE_ATTR_FORBID_W, 0, true);
     }
 }
 
@@ -390,7 +390,7 @@ void func_xk2_800EB400(void) {
                     gExpansionKitYesNoOptionIndex = 0;
                     D_800D6CA0.unk_08 = 0x10;
                 } else {
-                    func_xk1_800294AC();
+                    ExpansionKit_NameEntryClear();
                     ExpansionKit_NameEntryInit(func_xk1_8002AC24);
                     D_xk1_8003A550 = 0x58;
                     D_xk1_8003A554 = 0x68;
@@ -416,7 +416,7 @@ void func_xk2_800EB400(void) {
                 gExpansionKitYesNoOptionIndex = 0;
                 D_800D6CA0.unk_08 = 0x10;
             } else {
-                func_xk1_800294AC();
+                ExpansionKit_NameEntryClear();
                 ExpansionKit_NameEntryInit(func_xk1_8002AC24);
                 D_xk1_8003A550 = 0x58;
                 D_xk1_8003A554 = 0x68;
@@ -442,7 +442,7 @@ void func_xk2_800EB400(void) {
         case 5:
             if (gExpansionKitLoadedFiles[D_xk2_80119884].extension[3] == 'E') {
                 Audio_TriggerSystemSE(NA_SE_32);
-                func_xk1_8002D290();
+                EKFileMenu_EnableFileMenuDraw();
                 break;
             }
             mfsStrCpy(gEditCupTrackNames[D_xk2_80103F10], gExpansionKitLoadedFiles[courseIndex].name);
@@ -450,7 +450,7 @@ void func_xk2_800EB400(void) {
             D_800D6CA0.unk_08 = 0x37;
             break;
         case 7:
-            func_xk1_800294AC();
+            ExpansionKit_NameEntryClear();
             mfsStrCpy(gExpansionKitNameEntryStr, gExpansionKitLoadedFiles[courseIndex].name);
             func_xk2_800EAFA8(gExpansionKitLoadedFiles[courseIndex].name);
             gCourseEditFileOption = -1;

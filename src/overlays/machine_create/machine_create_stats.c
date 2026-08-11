@@ -109,7 +109,7 @@ void MachineCreate_UpdateStatSelectionStates(u8 statType, u8 statValue, u8 weigh
     }
 }
 
-void func_xk3_80134FA4(u8 bodyStatValue, u8 boostStatValue, u8 gripStatValue) {
+void MachineCreate_UpdateStatSelectionWeighting(u8 bodyStatValue, u8 boostStatValue, u8 gripStatValue) {
     u8 weightingRemaining;
     u8 bodyWeighting;
     u8 boostWeighting;
@@ -125,7 +125,7 @@ void func_xk3_80134FA4(u8 bodyStatValue, u8 boostStatValue, u8 gripStatValue) {
     MachineCreate_UpdateStatSelectionStates(GRIP_STAT, gripStatValue, weightingRemaining);
 }
 
-Gfx* func_xk3_80135034(Gfx* gfx) {
+Gfx* MachineCreate_DrawStatSelectionStats(Gfx* gfx) {
     u8 i;
     u8 j;
 
@@ -144,7 +144,7 @@ extern u16 aMachineCreateOkTex[];
 extern u16 aMachineCreateHighlightedOkTex[];
 extern Gfx D_xk3_80137378[];
 
-Gfx* func_xk3_80135158(Gfx* gfx) {
+Gfx* MachineCreate_DrawStatSelectionCursorAndOK(Gfx* gfx) {
 
     if (gMachineCreateMachineSettingsGrid.y == 3) {
         gSPDisplayList(gfx++, D_xk3_80137378);
@@ -180,9 +180,9 @@ Gfx* MachineCreate_DrawStatSelection(Gfx* gfx, s32 left, s32 top) {
     gfx = MachineCreate_DrawTextureBlockI8(gfx, aMachineCreateBoostTex, 127, 60, 32, 16);
     gfx = MachineCreate_DrawTextureBlockI8(gfx, aMachineCreateGripTex, 127, 79, 32, 16);
     gSPDisplayList(gfx++, D_xk3_80137378);
-    func_xk3_80134FA4(gCustomMachine.body, gCustomMachine.boost, gCustomMachine.grip);
-    gfx = func_xk3_80135034(gfx);
-    gfx = func_xk3_80135158(gfx);
+    MachineCreate_UpdateStatSelectionWeighting(gCustomMachine.body, gCustomMachine.boost, gCustomMachine.grip);
+    gfx = MachineCreate_DrawStatSelectionStats(gfx);
+    gfx = MachineCreate_DrawStatSelectionCursorAndOK(gfx);
     return gfx;
 }
 
@@ -225,11 +225,14 @@ Gfx* MachineCreate_DrawStatsSummary(Gfx* gfx) {
     gSPDisplayList(gfx++, D_xk3_80137378);
     if (gCustomMachineIsSuper) {
         gfx = MachineCreate_DrawTextureBlockRGBA16(
-            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][0]][2], 230, 133, 24, 16);
+            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][0]][2], 230, 133, 24,
+            16);
         gfx = MachineCreate_DrawTextureBlockRGBA16(
-            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][1]][2], 230, 150, 24, 16);
+            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][1]][2], 230, 150, 24,
+            16);
         gfx = MachineCreate_DrawTextureBlockRGBA16(
-            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][2]][2], 230, 167, 24, 16);
+            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][2]][2], 230, 167, 24,
+            16);
     } else {
         gfx =
             MachineCreate_DrawTextureBlockRGBA16(gfx, sMachineCreateStatTexs[gCustomMachine.body][2], 230, 133, 24, 16);

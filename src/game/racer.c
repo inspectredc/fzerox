@@ -1960,7 +1960,7 @@ void func_8008D33C(void) {
 }
 #else
 extern CustomMachinesInfo gCustomMachinesInfo;
-extern u8 D_i2_80111848[];
+extern u8 gMachineHasSuperVersion[];
 
 #ifdef NON_MATCHING
 void func_8008D33C(void) {
@@ -2010,12 +2010,12 @@ void func_8008D33C(void) {
             gMachines[i].weight =
                 D_800CF488[temp_a2->frontType] + D_800CF498[temp_a2->rearType] + D_800CF4A8[temp_a2->wingType];
         } else if (gCustomMachinesInfo.characterCustomState[characterSlot] < 0) {
-            if ((i == CAPTAIN_FALCON) && (D_i2_80111848[CAPTAIN_FALCON] != 0)) {
+            if ((i == CAPTAIN_FALCON) && gMachineHasSuperVersion[CAPTAIN_FALCON]) {
                 gMachines[i] = sDefaultMachines[30];
             } else {
-                if ((i == SAMURAI_GOROH) && (D_i2_80111848[SAMURAI_GOROH] != 0)) {
+                if ((i == SAMURAI_GOROH) && gMachineHasSuperVersion[SAMURAI_GOROH]) {
                     gMachines[i] = sDefaultMachines[31];
-                } else if ((i == JODY_SUMMER) && (D_i2_80111848[JODY_SUMMER] != 0)) {
+                } else if ((i == JODY_SUMMER) && gMachineHasSuperVersion[JODY_SUMMER]) {
                     gMachines[i] = sDefaultMachines[32];
                 } else {
                     gMachines[i] = sDefaultMachines[i];
@@ -7015,11 +7015,11 @@ Gfx* func_8009CEA0(Gfx* gfx, s32 character) {
         gSPDisplayList(gfx++, D_800CDB6C[customMachine->rearType]);
         gSPDisplayList(gfx++, D_800CDB88[customMachine->wingType]);
     } else if (gCustomMachinesInfo.characterCustomState[characterSlot] < 0) {
-        if ((character == CAPTAIN_FALCON) && (D_i2_80111848[CAPTAIN_FALCON] != 0)) {
+        if ((character == CAPTAIN_FALCON) && gMachineHasSuperVersion[CAPTAIN_FALCON]) {
             gSPDisplayList(gfx++, D_9012718);
-        } else if ((character == SAMURAI_GOROH) && (D_i2_80111848[SAMURAI_GOROH] != 0)) {
+        } else if ((character == SAMURAI_GOROH) && gMachineHasSuperVersion[SAMURAI_GOROH]) {
             gSPDisplayList(gfx++, D_9013460);
-        } else if ((character == JODY_SUMMER) && (D_i2_80111848[JODY_SUMMER] != 0)) {
+        } else if ((character == JODY_SUMMER) && gMachineHasSuperVersion[JODY_SUMMER]) {
             gSPDisplayList(gfx++, D_9013D58);
         } else {
             gSPDisplayList(gfx++, D_800CDAD8[character]);

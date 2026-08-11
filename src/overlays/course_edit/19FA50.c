@@ -99,8 +99,8 @@ Gfx* func_xk2_800EE158(Gfx* gfx) {
         case 1:
         case 2:
         case 3:
-            EKFileMenu_DrawFileSelectedConfirmText(&gfx, sp12C, (D_xk2_80104360 * 0x10) + 0x38, gExpansionKitLoadedFiles[D_xk2_80119884].name,
-                              D_xk2_80104378 - 1);
+            EKFileMenu_DrawFileSelectedConfirmText(&gfx, sp12C, (D_xk2_80104360 * 0x10) + 0x38,
+                                                   gExpansionKitLoadedFiles[D_xk2_80119884].name, D_xk2_80104378 - 1);
             D_xk2_80104360++;
             return gfx;
         default:

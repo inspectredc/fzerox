@@ -22,8 +22,8 @@ f32 sMachineCreateViewTransY;
 CustomMachinesInfo gCustomMachinesInfoBackup;
 CustomMachine gCustomMachineBackup;
 
-u8 D_xk3_80141290;
-u8 D_xk3_80141291;
+u8 sCustomMachineIsSuperBackup;
+u8 gCustomMachineCurrentSuperIndexBackup;
 s32 gMachineCreateMachineWeight;
 char* gMachineCreateSelectedFileName;
 
@@ -80,7 +80,7 @@ extern CustomMachine gCustomMachine;
 extern CustomMachine gCustomMachineWork;
 extern CustomMachinesInfo gCustomMachinesInfo;
 
-void func_xk3_8012BB48(void) {
+void MachineCreate_SaveMachine(void) {
     u8 i;
 
     for (i = 0; i < 30; i++) {
@@ -653,7 +653,7 @@ void MachineCreate_UpdateAInput(void) {
                 } else if ((gMachineCreateSuperMachinesCount != 0) && (EKFileMenu_GetFileIndex() == 1)) {
                     PRINTF("WORKS MACHINE MODE : LOAD_SELECT_SUPER\n");
                     gWorksMachineMode = MACHINE_MODE_LOAD_SELECT_SUPER;
-                    func_xk3_801360B8();
+                    MachineCreate_FileSuperMachineListSetup();
                     MachineCreate_InitFileMenu();
                 } else {
                     PRINTF("WORKS MACHINE MODE : LOAD_CONFIRM\n");
@@ -666,7 +666,7 @@ void MachineCreate_UpdateAInput(void) {
                     Audio_TriggerSystemSE(NA_SE_36);
                     PRINTF("WORKS MACHINE MODE : ENTRY_CLEAR_SELECT_SUPER\n");
                     gWorksMachineMode = MACHINE_MODE_ENTRY_CLEAR_SELECT_SUPER;
-                    func_xk3_80136320();
+                    MachineCreate_FileListClearSuperSetup();
                 } else {
                     gMachineCreateSelectedFileName = EKFileMenu_GetFileNameForDisplay();
                     Audio_TriggerSystemSE(NA_SE_36);
@@ -682,7 +682,8 @@ void MachineCreate_UpdateAInput(void) {
                 }
                 for (i = 0; i < 30; i++) {
                     if ((gCustomMachinesInfo.characterCustomState[i] > 0) &&
-                        (mfsStrCmp(&gCustomMachinesInfo.customMachines[i].machineName, gMachineCreateSelectedFileName) == 0)) {
+                        (mfsStrCmp(&gCustomMachinesInfo.customMachines[i].machineName,
+                                   gMachineCreateSelectedFileName) == 0)) {
                         gCustomMachinesInfo.characterCustomState[i] = 0;
                         gCustomMachinesInfo.customMachines[i].number = 31;
                         func_8008D33C();
@@ -722,7 +723,7 @@ void MachineCreate_UpdateAInput(void) {
                 if ((gMachineCreateSuperMachinesCount != 0) && (EKFileMenu_GetFileIndex() == 0)) {
                     PRINTF("WORKS MACHINE MODE : ENTRY_SELECT_SUPER\n");
                     gWorksMachineMode = MACHINE_MODE_ENTRY_SELECT_SUPER;
-                    func_xk3_801360B8();
+                    MachineCreate_FileSuperMachineListSetup();
                 } else {
                     gMachineCreateSelectedFileName = EKFileMenu_GetFileNameForDisplay();
                     PRINTF("WORKS MACHINE MODE : ENTRY_LOAD_NOW\n");
@@ -736,7 +737,7 @@ void MachineCreate_UpdateAInput(void) {
             case MACHINE_MODE_ENTRY_SELECT_SUPER: {
                 u8 i;
                 if (gWorksMachineMode == MACHINE_MODE_ENTRY_SELECT_SUPER) {
-                    D_xk3_80141291 = gCustomMachineCurrentSuperIndex;
+                    gCustomMachineCurrentSuperIndexBackup = gCustomMachineCurrentSuperIndex;
                 }
                 Audio_TriggerSystemSE(NA_SE_36);
                 gMachineCreateSelectedFileName = EKFileMenu_GetFileNameForDisplay();
@@ -750,7 +751,7 @@ void MachineCreate_UpdateAInput(void) {
 
                 if (gWorksMachineMode == MACHINE_MODE_ENTRY_SELECT_SUPER) {
                     gCustomMachineBackup = gCustomMachine;
-                    D_xk3_80141290 = gCustomMachineIsSuper;
+                    sCustomMachineIsSuperBackup = gCustomMachineIsSuper;
                     gCustomMachineIsSuper = true;
                     PRINTF("WORKS MACHINE MODE : ENTRY\n");
                     gWorksMachineMode = MACHINE_MODE_ENTRY;
@@ -784,7 +785,8 @@ void MachineCreate_UpdateAInput(void) {
 
                 for (i = 0; i < 30; i++) {
                     if ((gCustomMachinesInfo.characterCustomState[i] > 0) &&
-                        (mfsStrCmp(gCustomMachinesInfo.customMachines[i].machineName, gMachineCreateSelectedFileName) == 0)) {
+                        (mfsStrCmp(gCustomMachinesInfo.customMachines[i].machineName, gMachineCreateSelectedFileName) ==
+                         0)) {
                         gCustomMachinesInfo.characterCustomState[i] = 0;
                         gCustomMachinesInfo.customMachines[i].number = 31;
                         func_8008D33C();
@@ -823,7 +825,7 @@ void MachineCreate_UpdateAInput(void) {
     }
 }
 
-void func_xk3_8012D700(void) {
+void MachineCreate_UpdateMachineNumber(void) {
     u8 i;
 
     for (i = 0; i < 30; i++) {
@@ -854,8 +856,8 @@ void MachineCreate_UpdateFileMode(void) {
                 gWorksMachineMode = MACHINE_MODE_CHECKSUM_ERROR;
             } else if (gWorksMachineMode == MACHINE_MODE_ENTRY_LOAD_NOW) {
                 gCustomMachineBackup = gCustomMachine;
-                D_xk3_80141290 = gCustomMachineIsSuper;
-                D_xk3_80141291 = gCustomMachineCurrentSuperIndex;
+                sCustomMachineIsSuperBackup = gCustomMachineIsSuper;
+                gCustomMachineCurrentSuperIndexBackup = gCustomMachineCurrentSuperIndex;
                 gCustomMachineIsSuper = false;
                 gCustomMachine = gCustomMachineWork;
                 gCustomMachinesInfoBackup = gCustomMachinesInfo;
@@ -873,7 +875,7 @@ void MachineCreate_UpdateFileMode(void) {
                 MachineCreate_MachineSelectInit();
             } else {
                 gCustomMachine = gCustomMachineWork;
-                func_xk3_8012D700();
+                MachineCreate_UpdateMachineNumber();
                 PRINTF("WORKS MACHINE MODE : 0\n");
                 gWorksMachineMode = MACHINE_MODE_0;
                 gCustomMachineIsSuper = false;
@@ -922,7 +924,7 @@ void MachineCreate_UpdateFileMode(void) {
                 PRINTF("WORKS MACHINE MODE : MESSAGE_BUTTON\n");
                 gWorksMachineMode = MACHINE_MODE_MESSAGE_BUTTON;
             } else {
-                func_xk3_8012BB48();
+                MachineCreate_SaveMachine();
             }
             break;
         case MACHINE_MODE_OVERWRITE_GET_FILE:
@@ -935,12 +937,12 @@ void MachineCreate_UpdateFileMode(void) {
                 PRINTF("WORKS MACHINE MODE : MESSAGE_BUTTON\n");
                 gWorksMachineMode = MACHINE_MODE_MESSAGE_BUTTON;
             } else {
-                func_xk3_8012BB48();
+                MachineCreate_SaveMachine();
             }
             break;
         case MACHINE_MODE_OVERWRITE_FILE_EXIST:
             if (D_80794E20 == 1) {
-                func_xk3_8012BB48();
+                MachineCreate_SaveMachine();
             } else {
                 D_807C6EA8.unk_08 = 19;
                 PRINTF("WORKS MACHINE MODE : MESSAGE_BUTTON\n");

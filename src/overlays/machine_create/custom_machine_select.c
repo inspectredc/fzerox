@@ -15,39 +15,72 @@ static s32 sMachineSelectIndex;
 static s32 sMachinesUnlocked;
 s32 sPreviousMachineSelectIndex;
 
-static CacheTexInfo sSmallPortraitDrStewartCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitDrStewartTex);
-static CacheTexInfo sSmallPortraitCaptainFalconCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitCaptainFalconTex);
-static CacheTexInfo sSmallPortraitJodySummerCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitJodySummerTex);
-static CacheTexInfo sSmallPortraitSamuraiGorohCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitSamuraiGorohTex);
-static CacheTexInfo sSmallPortraitMightyGazelleCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitMightyGazelleTex);
-static CacheTexInfo sSmallPortraitPicoCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitPicoTex);
-static CacheTexInfo sSmallPortraitBabaCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBabaTex);
-static CacheTexInfo sSmallPortraitMrEadCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitMrEadTex);
-static CacheTexInfo sSmallPortraitOctomanCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitOctomanTex);
-static CacheTexInfo sSmallPortraitTheSkullCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitTheSkullTex);
-static CacheTexInfo sSmallPortraitBeastmanCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBeastmanTex);
-static CacheTexInfo sSmallPortraitAntonioGusterCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitAntonioGusterTex);
-static CacheTexInfo sSmallPortraitDraqCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitDraqTex);
-static CacheTexInfo sSmallPortraitRogerBusterCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitRogerBusterTex);
-static CacheTexInfo sSmallPortraitSilverNeelsenCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitSilverNeelsenTex);
-static CacheTexInfo sSmallPortraitSuperArrowCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitSuperArrowTex);
-static CacheTexInfo sSmallPortraitMrsArrowCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitMrsArrowTex);
-static CacheTexInfo sSmallPortraitZodaCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitZodaTex);
-static CacheTexInfo sSmallPortraitJohnTanakaCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitJohnTanakaTex);
-static CacheTexInfo sSmallPortraitBioRexCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBioRexTex);
-static CacheTexInfo sSmallPortraitKateAlenCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitKateAlenTex);
-static CacheTexInfo sSmallPortraitGomarAndShiohCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitGomarAndShiohTex);
-static CacheTexInfo sSmallPortraitMichaelChainCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitMichaelChainTex);
-static CacheTexInfo sSmallPortraitBillyCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBillyTex);
-static CacheTexInfo sSmallPortraitDrClashCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitDrClashTex);
-static CacheTexInfo sSmallPortraitJackLevinCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitJackLevinTex);
-static CacheTexInfo sSmallPortraitBloodFalconCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBloodFalconTex);
-static CacheTexInfo sSmallPortraitLeonCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitLeonTex);
-static CacheTexInfo sSmallPortraitJamesMcCloudCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitJamesMcCloudTex);
-static CacheTexInfo sSmallPortraitBlackShadowCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBlackShadowTex);
-static CacheTexInfo sSmallPortraitCaptainFalconAltCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitCaptainFalconAltTex);
-static CacheTexInfo sSmallPortraitSamuraiGorohAltCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitSamuraiGorohAltTex);
-static CacheTexInfo sSmallPortraitJodySummerAltCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitJodySummerAltTex);
+static CacheTexInfo sSmallPortraitDrStewartCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitDrStewartTex);
+static CacheTexInfo sSmallPortraitCaptainFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitCaptainFalconTex);
+static CacheTexInfo sSmallPortraitJodySummerCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitJodySummerTex);
+static CacheTexInfo sSmallPortraitSamuraiGorohCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitSamuraiGorohTex);
+static CacheTexInfo sSmallPortraitMightyGazelleCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitMightyGazelleTex);
+static CacheTexInfo sSmallPortraitPicoCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitPicoTex);
+static CacheTexInfo sSmallPortraitBabaCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBabaTex);
+static CacheTexInfo sSmallPortraitMrEadCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitMrEadTex);
+static CacheTexInfo sSmallPortraitOctomanCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitOctomanTex);
+static CacheTexInfo sSmallPortraitTheSkullCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitTheSkullTex);
+static CacheTexInfo sSmallPortraitBeastmanCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBeastmanTex);
+static CacheTexInfo sSmallPortraitAntonioGusterCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitAntonioGusterTex);
+static CacheTexInfo sSmallPortraitDraqCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitDraqTex);
+static CacheTexInfo sSmallPortraitRogerBusterCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitRogerBusterTex);
+static CacheTexInfo sSmallPortraitSilverNeelsenCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitSilverNeelsenTex);
+static CacheTexInfo sSmallPortraitSuperArrowCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitSuperArrowTex);
+static CacheTexInfo sSmallPortraitMrsArrowCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitMrsArrowTex);
+static CacheTexInfo sSmallPortraitZodaCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitZodaTex);
+static CacheTexInfo sSmallPortraitJohnTanakaCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitJohnTanakaTex);
+static CacheTexInfo sSmallPortraitBioRexCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBioRexTex);
+static CacheTexInfo sSmallPortraitKateAlenCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitKateAlenTex);
+static CacheTexInfo sSmallPortraitGomarAndShiohCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitGomarAndShiohTex);
+static CacheTexInfo sSmallPortraitMichaelChainCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitMichaelChainTex);
+static CacheTexInfo sSmallPortraitBillyCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBillyTex);
+static CacheTexInfo sSmallPortraitDrClashCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitDrClashTex);
+static CacheTexInfo sSmallPortraitJackLevinCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitJackLevinTex);
+static CacheTexInfo sSmallPortraitBloodFalconCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBloodFalconTex);
+static CacheTexInfo sSmallPortraitLeonCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitLeonTex);
+static CacheTexInfo sSmallPortraitJamesMcCloudCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitJamesMcCloudTex);
+static CacheTexInfo sSmallPortraitBlackShadowCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitBlackShadowTex);
+static CacheTexInfo sSmallPortraitCaptainFalconAltCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitCaptainFalconAltTex);
+static CacheTexInfo sSmallPortraitSamuraiGorohAltCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitSamuraiGorohAltTex);
+static CacheTexInfo sSmallPortraitJodySummerAltCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aSmallPortraitJodySummerAltTex);
 
 TextureSwapEntry D_xk3_80136C50[] = { { sSmallPortraitDrStewartCacheTexInfo, 60 }, { 0 } };
 TextureSwapEntry D_xk3_80136C60[] = { { sSmallPortraitCaptainFalconCacheTexInfo, 60 }, { 0 } };
@@ -92,7 +125,8 @@ TextureSwapEntry* D_xk3_80136E60[] = {
     D_xk3_80136E30, D_xk3_80136E30, D_xk3_80136E30, D_xk3_80136E40, D_xk3_80136E50, D_xk3_80136E30,
 };
 
-static CacheTexInfo sMachineSelectCursorCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aMachineSelectCursorTex);
+static CacheTexInfo sMachineSelectCursorCacheTexInfo[] =
+    CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aMachineSelectCursorTex);
 static CacheTexInfo sBoostCacheTexInfo[] = CACHE_TEX_INFO_COMP_PAD(TEX_CACHE_FMT_RGBA16, aBoostTex);
 //! @bug should be 0x46 size
 static CacheTexInfo sBodyCacheTexInfo[] = CACHE_TEX_INFO_PAD(TEX_CACHE_MIO0(TEX_CACHE_FMT_RGBA16), aBodyTex, 0x4E);
@@ -199,8 +233,8 @@ void MachineCreate_MachineSelectHandleStickInputs(void) {
     }
 }
 
-extern u8 D_xk3_80141290;
-extern u8 D_xk3_80141291;
+extern u8 sCustomMachineIsSuperBackup;
+extern u8 gCustomMachineCurrentSuperIndexBackup;
 extern u8 kCharacterNumbers[];
 extern CustomMachinesInfo gCustomMachinesInfoBackup;
 extern CustomMachinesInfo gCustomMachinesInfo;
@@ -224,9 +258,9 @@ void MachineCreate_MachineSelectHandleAPress(void) {
         gWorksMachineMode = MACHINE_MODE_0;
         Audio_TriggerSystemSE(NA_SE_36);
         gCustomMachine = gCustomMachineBackup;
-        gCustomMachineIsSuper = D_xk3_80141290;
-        gCustomMachineCurrentSuperIndex = D_xk3_80141291;
-        func_xk3_8012D700();
+        gCustomMachineIsSuper = sCustomMachineIsSuperBackup;
+        gCustomMachineCurrentSuperIndex = gCustomMachineCurrentSuperIndexBackup;
+        MachineCreate_UpdateMachineNumber();
     } else {
         gCustomMachinesInfoBackup = gCustomMachinesInfo;
 
@@ -409,16 +443,17 @@ Gfx* MachineCreate_MachineSelectPortraitDraw(Gfx* gfx, Object* portraitObj) {
         return gfx;
     }
     if (sMachineSelectIndex < 30) {
-        gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitObj)], OBJECT_LEFT(portraitObj),
-                                             OBJECT_TOP(portraitObj), TEXTURE_CACHE_DRAW, false, false, 1.0f, 1.0f, false);
+        gfx = TextureCache_DrawSwapSlot_impl(gfx, &gTextureSwapSlots[OBJECT_CACHE_INDEX(portraitObj)],
+                                             OBJECT_LEFT(portraitObj), OBJECT_TOP(portraitObj), TEXTURE_CACHE_DRAW,
+                                             false, false, 1.0f, 1.0f, false);
         if (gCustomMachinesInfo.characterCustomState[sMachineSelectIndex] > 0) {
-            gfx = Font_DrawString(gfx, 70, 37, gCustomMachinesInfo.customMachines[sMachineSelectIndex].machineName,
-                                  0, 2, 0);
+            gfx = Font_DrawString(gfx, 70, 37, gCustomMachinesInfo.customMachines[sMachineSelectIndex].machineName, 0,
+                                  2, 0);
         } else if (gCustomMachinesInfo.characterCustomState[sMachineSelectIndex] < 0) {
             gfx = Font_DrawString(gfx, 70, 37, gSuperMachineNames[sMachineSelectIndex], 0, 2, 0);
         } else {
-            gfx = Font_DrawString(gfx, 70, 37, gMachineNames[Character_GetCharacterFromSlot(sMachineSelectIndex)],
-                                  0, 2, 0);
+            gfx = Font_DrawString(gfx, 70, 37, gMachineNames[Character_GetCharacterFromSlot(sMachineSelectIndex)], 0, 2,
+                                  0);
         }
     }
     return gfx;
@@ -592,8 +627,9 @@ Gfx* MachineCreate_MachineSelectCursorDraw(Gfx* gfx, Object* cursorObj) {
         }
         OBJECT_LEFT(cursorObj) = ((sMachineSelectIndex % 6) * 0x28) + 0x28;
         OBJECT_TOP(cursorObj) = ((sMachineSelectIndex / 6) * 0x22) + 0x27;
-        gfx = TextureCache_DrawList_impl(gfx, sMachineSelectCursorCacheTexInfo, OBJECT_LEFT(cursorObj), OBJECT_TOP(cursorObj),
-                                         TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f, false);
+        gfx = TextureCache_DrawList_impl(gfx, sMachineSelectCursorCacheTexInfo, OBJECT_LEFT(cursorObj),
+                                         OBJECT_TOP(cursorObj), TEXTURE_CACHE_DRAW_TINTED, false, false, 1.0f, 1.0f,
+                                         false);
     }
     return gfx;
 }

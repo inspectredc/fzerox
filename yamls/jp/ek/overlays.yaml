@@ -346,7 +346,7 @@
       - [0x1D2C10, c, custom_machine_select]
       - [0x1D4960, c, machine_create_stats]
       - [0x1D5570, c, machine_create_color_select]
-      - [0x1D5C50, c, 1D5C50]
+      - [0x1D5C50, c, machine_create_file_list]
       - [0x1D6200, .data, machine_create_update]
       - [0x1D62A0, .data, machine_create_data]
       - [0x1D62C0, .data, machine_create_draw]
@@ -354,7 +354,7 @@
       - [0x1D64F0, .data, custom_machine_select]
       - [0x1D6C60, .data, machine_create_stats]
       - [0x1D6D60, .data, machine_create_color_select]
-      - [0x1D6E20, .data, 1D5C50]
+      - [0x1D6E20, .data, machine_create_file_list]
       - [0x1D6E30, .data, machine_create_text]
       - [0x1D6FB0, .data, machine_create_assets]
       - [0x1DF840, .rodata, machine_create]
@@ -363,7 +363,7 @@
       - [0x1E05D0, .rodata, machine_create_callbacks]
       - [0x1E0A20, .rodata, custom_machine_select]
       - [0x1E0A50, .rodata, machine_create_stats]
-      - [0x1E0AB0, .rodata, 1D5C50]
+      - [0x1E0AB0, .rodata, machine_create_file_list]
       - { type: .bss, vram: 0x80140E40, name: machine_create }
       - { type: .bss, vram: 0x80140E50, name: machine_create_update }
       - { type: .bss, vram: 0x801412A0, name: machine_create_draw }

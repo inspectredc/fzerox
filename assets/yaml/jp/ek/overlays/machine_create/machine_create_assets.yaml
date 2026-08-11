@@ -96,14 +96,14 @@ aMachineCreateSettingsTex:
   offset: 0x1D8290
   symbol: aMachineCreateSettingsTex
 
-D_xk3_80138930:
+aMachineCreateWeightTextTex:
   type: TEXTURE
   ctype: u8
   format: I8
   width: 32
   height: 16
   offset: 0x1D85F0
-  symbol: D_xk3_80138930
+  symbol: aMachineCreateWeightTextTex
 
 D_xk3_80138B30:
   type: TEXTURE
@@ -312,23 +312,23 @@ aMachineCreateHighlightedOkTex:
   offset: 0x1DA240
   symbol: aMachineCreateHighlightedOkTex
 
-D_xk3_8013A980:
+aMachineCreateNameDisplayPlateTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 72
   height: 16
   offset: 0x1DA640
-  symbol: D_xk3_8013A980
+  symbol: aMachineCreateNameDisplayPlateTex
 
-D_xk3_8013B280:
+aMachineCreateSuperNameDisplayPlateTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 120
   height: 16
   offset: 0x1DAF40
-  symbol: D_xk3_8013B280
+  symbol: aMachineCreateSuperNameDisplayPlateTex
 
 aMachineCreateEditMarkerTex:
   type: TEXTURE
@@ -348,84 +348,84 @@ aMachineCreateSuperMarkerTex:
   offset: 0x1DC000
   symbol: aMachineCreateSuperMarkerTex
 
-D_8013C580:
+aDecalBlueFalconWingCheckeredGreyscaleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
   offset: 0x1DC240
-  symbol: D_8013C580
+  symbol: aDecalBlueFalconWingCheckeredGreyscaleTex
 
-D_8013C780:
+aDecalGoldenFoxStripesGreyscaleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
   offset: 0x1DC440
-  symbol: D_8013C780
+  symbol: aDecalGoldenFoxStripesGreyscaleTex
 
-D_8013C980:
+aDecalWildGooseLightningGreyscaleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x1DC640
-  symbol: D_8013C980
+  symbol: aDecalWildGooseLightningGreyscaleTex
 
-D_8013D180:
+aDecalFlamesGreyscaleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x1DCE40
-  symbol: D_8013D180
+  symbol: aDecalFlamesGreyscaleTex
 
-D_8013D980:
+aDecalLeopardGreyscaleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x1DD640
-  symbol: D_8013D980
+  symbol: aDecalLeopardGreyscaleTex
 
-D_8013E180:
+aDecalCrazyBearEyeGreyscaleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x1DDE40
-  symbol: D_8013E180
+  symbol: aDecalCrazyBearEyeGreyscaleTex
 
-D_8013E980:
+aDecalLittleWyvernStripeEndsGreyscaleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 16
   height: 16
   offset: 0x1DE640
-  symbol: D_8013E980
+  symbol: aDecalLittleWyvernStripeEndsGreyscaleTex
 
-D_8013EB80:
+aDecalGreenPantherCamoGreyscaleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x1DE840
-  symbol: D_8013EB80
+  symbol: aDecalGreenPantherCamoGreyscaleTex
 
-D_8013F380:
+aDecalBeastFaceGreyscaleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 32
   height: 32
   offset: 0x1DF040
-  symbol: D_8013F380
+  symbol: aDecalBeastFaceGreyscaleTex
 

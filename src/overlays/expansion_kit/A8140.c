@@ -169,7 +169,7 @@ Gfx* EKFileMenu_DrawFileMenu(Gfx* gfx, s32 maxFileNameLength) {
             if (i == fileMenuOptionIndex) {
                 gDPSetCombineLERP(gfx++, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-            } else if (func_xk3_801363F8(&gExpansionKitLoadedFiles[i])) {
+            } else if (MachineCreate_FileListIsFileForSuperMachine(&gExpansionKitLoadedFiles[i])) {
                 gDPSetCombineLERP(gfx++, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
             } else {
@@ -325,8 +325,8 @@ s32 EKFileMenu_LoadFiles(u8 fileStartOffset, char* extension) {
 
     sExpansionKitFileListScroll = 0;
     sExpansionKitEnableDrawFileMenu = true;
-    EKFileMenu_QSort(&gExpansionKitLoadedFiles[fileStartOffset], sExpansionKitExistingFileCount - fileStartOffset, sizeof(EKLoadedFile),
-                      EKFileMenu_Compare);
+    EKFileMenu_QSort(&gExpansionKitLoadedFiles[fileStartOffset], sExpansionKitExistingFileCount - fileStartOffset,
+                     sizeof(EKLoadedFile), EKFileMenu_Compare);
     D_xk1_80032BF8 = true;
 
     if (filesInDirWithExtension > 100) {
@@ -392,8 +392,8 @@ Gfx* EKFileMenu_DrawSelectFileText(Gfx* gfx, s32 left, s32 top) {
 
     gSPTextureRectangle(gfx++, (left - 2) << 2, (top - 2) << 2, (left + width + 2) << 2, top << 2, 0, 0, 0, 1 << 10,
                         1 << 10);
-    gSPTextureRectangle(gfx++, (left - 2) << 2, (top + 16) << 2, (left + width + 2) << 2, (top + 16 + 2) << 2, 0, 0,
-                        0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (left - 2) << 2, (top + 16) << 2, (left + width + 2) << 2, (top + 16 + 2) << 2, 0, 0, 0,
+                        1 << 10, 1 << 10);
     gSPTextureRectangle(gfx++, (left - 2) << 2, top << 2, left << 2, (top + 16) << 2, 0, 0, 0, 1 << 10, 1 << 10);
     gSPTextureRectangle(gfx++, (left + width) << 2, top << 2, (left + width + 2) << 2, (top + 16) << 2, 0, 0, 0,
                         1 << 10, 1 << 10);
@@ -441,8 +441,7 @@ void EKFileMenu_DrawFileSelectedConfirmText(Gfx** gfxP, s32 left, s32 top, char*
                         1 << 10, 1 << 10);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 160);
-    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + strWidth) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10,
-                        1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + strWidth) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10, 1 << 10);
     gSPDisplayList(gfx++, D_3000540);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     gDPPipeSync(gfx++);
@@ -489,7 +488,9 @@ void EKFileMenu_QuickSort(s8* startPtr, s8* endPtr) {
 
     sortRange = endPtr - startPtr;
     do {
-        pivotElement = (((sortRange / sExpansionKitFileMenuSortElementSize) >> 1) * sExpansionKitFileMenuSortElementSize) + startPtr;
+        pivotElement =
+            (((sortRange / sExpansionKitFileMenuSortElementSize) >> 1) * sExpansionKitFileMenuSortElementSize) +
+            startPtr;
         partitionElement = pivotElement;
         if (sortRange >= sExpansionKitFileMenuSort6ElementsSize) {
             if (sExpansionKitFileMenuCompareFunc(startPtr, pivotElement) > 0) {
@@ -524,7 +525,8 @@ void EKFileMenu_QuickSort(s8* startPtr, s8* endPtr) {
         rightPtr = endPtr - sExpansionKitFileMenuSortElementSize;
 
         while (true) {
-            while ((pivotElement < partitionElement) && (sExpansionKitFileMenuCompareFunc(pivotElement, partitionElement) <= 0)) {
+            while ((pivotElement < partitionElement) &&
+                   (sExpansionKitFileMenuCompareFunc(pivotElement, partitionElement) <= 0)) {
                 pivotElement += sExpansionKitFileMenuSortElementSize;
             }
             while (partitionElement < rightPtr) {
@@ -681,7 +683,7 @@ void EKFileMenu_SetFileCount(s32 fileCount) {
     sExpansionKitExistingFileCount = fileCount;
 }
 
-void func_xk1_8002D290(void) {
+void EKFileMenu_EnableFileMenuDraw(void) {
     sExpansionKitEnableDrawFileMenu = true;
 }
 

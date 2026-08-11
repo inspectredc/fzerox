@@ -358,7 +358,7 @@ void MachineCreate_DrawDeleteFileConfirmation(Gfx** gfxP, char* fileName) {
 }
 
 extern Gfx D_xk3_801373F0[];
-extern u8 D_xk3_80138930[];
+extern u8 aMachineCreateWeightTextTex[];
 extern u8 aMachineCreateKgTex[];
 
 Gfx* MachineCreate_DrawWeight(Gfx* gfx, s32 left, s32 top, s32 weight) {
@@ -368,7 +368,7 @@ Gfx* MachineCreate_DrawWeight(Gfx* gfx, s32 left, s32 top, s32 weight) {
     gSPDisplayList(gfx++, D_xk3_801373F0);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = MachineCreate_DrawTextureBlockI8(gfx, D_xk3_80138930, left, top, 32, 16);
+    gfx = MachineCreate_DrawTextureBlockI8(gfx, aMachineCreateWeightTextTex, left, top, 32, 16);
     if (weight < 1000) {
         left += 41;
     } else {
@@ -537,7 +537,8 @@ Gfx* MachineCreate_DrawMachine(Gfx* gfx) {
     gDPSetRenderMode(gfx++, G_RM_PASS, G_RM_AA_ZB_OPA_SURF2);
     gSPDisplayList(gfx++, D_xk3_80137538);
 
-    Matrix_SetFrustrum(gGfxPool->unk_20008, NULL, 44.0f, 10.0f, 12800.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT, 0.0f, &perspectiveScale);
+    Matrix_SetFrustrum(gGfxPool->unk_20008, NULL, 44.0f, 10.0f, 12800.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT, 0.0f,
+                       &perspectiveScale);
     Matrix_SetLookAt(gGfxPool->unk_20108, NULL, 0.0f, 880.0f, 1320.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     Matrix_SetTransRot(&gGfxPool->unk_20308[1], NULL, 1.0f, Math_Round(DEG_TO_FZXANG2(gMachineCreateMachinePitch)), 0,
                        0, 0.0f, 0.0f, 0.0f);
@@ -552,7 +553,8 @@ Gfx* MachineCreate_DrawMachine(Gfx* gfx) {
 
     if (gCustomMachineIsSuper) {
         gfx = sSuperMachineLoadTextureFuncs[gCustomMachineCurrentSuperIndex](gfx);
-        gDPSetEnvColor(gfx++, kSuperMachineEnvColors[gCustomMachineCurrentSuperIndex][0], kSuperMachineEnvColors[gCustomMachineCurrentSuperIndex][1],
+        gDPSetEnvColor(gfx++, kSuperMachineEnvColors[gCustomMachineCurrentSuperIndex][0],
+                       kSuperMachineEnvColors[gCustomMachineCurrentSuperIndex][1],
                        kSuperMachineEnvColors[gCustomMachineCurrentSuperIndex][2], 255);
         gfx = sSuperMachineDrawFuncs[gCustomMachineCurrentSuperIndex](gfx);
     } else {
@@ -606,8 +608,7 @@ Gfx* MachineCreate_DrawMachineParts(Gfx* gfx) {
                                          gCustomMachine.decal - 1);
     Matrix_SetLookAt(&gGfxPool->unk_20108[1], NULL, 0.0f, 0.0f, 2000.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     Matrix_SetTransRot(&gGfxPool->unk_20308[3], NULL, 1.0f, 0x400, 0, 0, 0.0f, 0.0f, 0.0f);
-    Matrix_SetOrtho(&gMachineCreateDrawDataPtr->mtx, NULL, 1.0f, -1550.0f, 1550.0f, -1550.0f, 1550.0f, 10.0f,
-                    12800.0f);
+    Matrix_SetOrtho(&gMachineCreateDrawDataPtr->mtx, NULL, 1.0f, -1550.0f, 1550.0f, -1550.0f, 1550.0f, 10.0f, 12800.0f);
 
     gSPMatrix(gfx++, &gMachineCreateDrawDataPtr->mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gfx++, &D_1000000.unk_20108[1], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
@@ -743,8 +744,8 @@ Gfx* MachineCreate_DrawGeneral(Gfx* gfx) {
     gSPLoadUcodeL(gfx++, gspF3DEX2_Rej_fifo);
     gSPClipRatio(gfx++, FRUSTRATIO_5);
     gSPDisplayList(gfx++, D_xk3_80137378);
-    gDPLoadTextureBlock(gfx++, aMachineCreateBackgroundTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 28, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                        G_TX_NOMIRROR | G_TX_WRAP, 6, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock(gfx++, aMachineCreateBackgroundTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 28, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 6, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     gSPTextureRectangle(gfx++, 12 << 2, 8 << 2, 307 << 2, 27 << 2, 0, 12 << 5, 8 << 5, 4 * (1 << 10), 1 << 10);
 
@@ -797,26 +798,30 @@ Gfx* MachineCreate_DrawGeneral(Gfx* gfx) {
                                                             0, 255, 120, 0);
         gSPDisplayList(gfx++, D_xk3_80137378);
         if (gCustomMachineIsSuper) {
-            gfx = MachineCreate_DrawTextureTileRGBA16(gfx, D_xk3_8013B280, 178, 97, 120, 16, 0, 0, 59, 15);
-            gfx = MachineCreate_DrawTextureTileRGBA16(gfx, D_xk3_8013B280, 178, 97, 120, 16, 60, 0, 119, 15);
+            gfx = MachineCreate_DrawTextureTileRGBA16(gfx, aMachineCreateSuperNameDisplayPlateTex, 178, 97, 120, 16, 0,
+                                                      0, 59, 15);
+            gfx = MachineCreate_DrawTextureTileRGBA16(gfx, aMachineCreateSuperNameDisplayPlateTex, 178, 97, 120, 16, 60,
+                                                      0, 119, 15);
             gSPDisplayList(gfx++, D_xk3_801373F0);
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
             gfx = func_xk1_8002924C(gfx, 182, 101, "%s", gSuperMachineNames[gCustomMachineCurrentSuperIndex]);
-            if ((gCustomMachineCurrentSuperIndex == CAPTAIN_FALCON) && (gCustomMachinesInfo.characterCustomState[CAPTAIN_FALCON] == -1)) {
-                gfx =
-                    MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[gCustomMachineCurrentSuperIndex], sCharacterNamesByNumber[6]);
+            if ((gCustomMachineCurrentSuperIndex == CAPTAIN_FALCON) &&
+                (gCustomMachinesInfo.characterCustomState[CAPTAIN_FALCON] == -1)) {
+                gfx = MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[gCustomMachineCurrentSuperIndex],
+                                                      sCharacterNamesByNumber[6]);
             } else if ((gCustomMachineCurrentSuperIndex == SAMURAI_GOROH) &&
                        (gCustomMachinesInfo.characterCustomState[SAMURAI_GOROH] == -1)) {
-                gfx =
-                    MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[gCustomMachineCurrentSuperIndex], sCharacterNamesByNumber[4]);
-            } else if ((gCustomMachineCurrentSuperIndex == JODY_SUMMER) && (gCustomMachinesInfo.characterCustomState[JODY_SUMMER] == -1)) {
-                gfx =
-                    MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[gCustomMachineCurrentSuperIndex], sCharacterNamesByNumber[1]);
+                gfx = MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[gCustomMachineCurrentSuperIndex],
+                                                      sCharacterNamesByNumber[4]);
+            } else if ((gCustomMachineCurrentSuperIndex == JODY_SUMMER) &&
+                       (gCustomMachinesInfo.characterCustomState[JODY_SUMMER] == -1)) {
+                gfx = MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[gCustomMachineCurrentSuperIndex],
+                                                      sCharacterNamesByNumber[1]);
             } else {
                 gfx = MachineCreate_DrawWeight(gfx, 200, 195, kSuperMachineWeights[gCustomMachineCurrentSuperIndex]);
             }
         } else {
-            gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, D_xk3_8013A980, 190, 97, 72, 16);
+            gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateNameDisplayPlateTex, 190, 97, 72, 16);
             if ((gWorksMachineMode != MACHINE_MODE_MNAME) && (gCustomMachine.machineName[0] != 0)) {
                 gSPDisplayList(gfx++, D_xk3_801373F0);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);

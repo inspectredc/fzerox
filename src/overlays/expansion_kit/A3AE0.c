@@ -380,15 +380,19 @@ s32 gMachineCreateEntryOption = INVALID_OPTION;
 
 MenuDropItem sDecalMenuItems[] = {
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu1Tex, aMachineCreateDecalStripeTex, NULL, func_xk3_8013298C, 16, 16, NULL, NULL },
+      aExpansionKitMenu1Tex, aMachineCreateDecalStripeTex, NULL, MachineCreate_DecalStripeCallback, 16, 16, NULL,
+      NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu2Tex, aMachineCreateDecalThinStripeTex, NULL, func_xk3_801329A4, 16, 16, NULL, NULL },
+      aExpansionKitMenu2Tex, aMachineCreateDecalThinStripeTex, NULL, MachineCreate_DecalThinStripeCallback, 16, 16,
+      NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu3Tex, aMachineCreateDecalDoubleStripeTex, NULL, func_xk3_801329BC, 16, 16, NULL, NULL },
+      aExpansionKitMenu3Tex, aMachineCreateDecalDoubleStripeTex, NULL, MachineCreate_DecalDoubleStripeCallback, 16, 16,
+      NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu4Tex, aMachineCreateDecalTripleStripeUnevenTex, NULL, func_xk3_801329D4, 16, 16, NULL, NULL },
+      aExpansionKitMenu4Tex, aMachineCreateDecalTripleStripeUnevenTex, NULL,
+      MachineCreate_DecalTripleStripeUnevenCallback, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu5Tex, aMachineCreateDecalBlockTex, NULL, func_xk3_801329EC, 16, 16, NULL, NULL },
+      aExpansionKitMenu5Tex, aMachineCreateDecalBlockTex, NULL, MachineCreate_DecalBlockCallback, 16, 16, NULL, NULL },
 };
 
 MenuWidget sDecalWidget = { 5,   INVALID_OPTION, INVALID_OPTION, 72, 52, 0, 16, sDecalMenuItems, 104, 56, 104,
@@ -396,21 +400,23 @@ MenuWidget sDecalWidget = { 5,   INVALID_OPTION, INVALID_OPTION, 72, 52, 0, 16, 
 
 MenuDropItem sLogoMenuItems[] = {
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu1Tex, aMachineCreateLogoShieldTex, NULL, func_xk3_80132A80, 16, 16, NULL, NULL },
+      aExpansionKitMenu1Tex, aMachineCreateLogoShieldTex, NULL, MachineCreate_LogoShieldCallback, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu2Tex, aMachineCreateLogoArrowPlaneTex, NULL, func_xk3_80132A98, 16, 16, NULL, NULL },
+      aExpansionKitMenu2Tex, aMachineCreateLogoArrowPlaneTex, NULL, MachineCreate_LogoArrowCallback, 16, 16, NULL,
+      NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu3Tex, aMachineCreateLogoCircleTex, NULL, func_xk3_80132AB0, 16, 16, NULL, NULL },
+      aExpansionKitMenu3Tex, aMachineCreateLogoCircleTex, NULL, MachineCreate_LogoCircleCallback, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu4Tex, aMachineCreateLogoSkullTex, NULL, func_xk3_80132AC8, 16, 16, NULL, NULL },
+      aExpansionKitMenu4Tex, aMachineCreateLogoSkullTex, NULL, MachineCreate_LogoSkullCallback, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu5Tex, aMachineCreateLogoYellowGreenTex, NULL, func_xk3_80132AE0, 16, 16, NULL, NULL },
+      aExpansionKitMenu5Tex, aMachineCreateLogoYellowGreenTex, NULL, MachineCreate_LogoYellowGreenCallback, 16, 16,
+      NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu6Tex, aMachineCreateLogoKanjiTex, NULL, func_xk3_80132AF8, 16, 16, NULL, NULL },
+      aExpansionKitMenu6Tex, aMachineCreateLogoKanjiTex, NULL, MachineCreate_LogoKanjiCallback, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu7Tex, aMachineCreateLogoXTex, NULL, func_xk3_80132B10, 16, 16, NULL, NULL },
+      aExpansionKitMenu7Tex, aMachineCreateLogoXTex, NULL, MachineCreate_LogoXCallback, 16, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderSplitBackgroundTex, aExpansionKitMenuGoldBorderSplitHighlightBackgroundTex,
-      aExpansionKitMenu8Tex, aMachineCreateLogoN64Tex, NULL, func_xk3_80132B28, 16, 16, NULL, NULL },
+      aExpansionKitMenu8Tex, aMachineCreateLogoN64Tex, NULL, MachineCreate_LogoN64Callback, 16, 16, NULL, NULL },
 };
 
 MenuWidget sLogoWidget = { 8,   INVALID_OPTION, INVALID_OPTION, 72, 52, 0, 16, sLogoMenuItems, 104, 56, 104,
@@ -418,13 +424,13 @@ MenuWidget sLogoWidget = { 8,   INVALID_OPTION, INVALID_OPTION, 72, 52, 0, 16, s
 
 MenuDropItem sColorMenuItems[] = {
     { aExpansionKitMenuGoldBorderBackgroundTex, aExpansionKitMenuGoldBorderHighlightBackgroundTex,
-      aCreateMachineBodyTex, NULL, NULL, func_xk3_80132B40, 48, 16, NULL, NULL },
+      aCreateMachineBodyTex, NULL, NULL, MachineCreate_BodyColorMenuCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderBackgroundTex, aExpansionKitMenuGoldBorderHighlightBackgroundTex,
-      aCreateMachineLineTex, NULL, NULL, func_xk3_80132BB0, 48, 16, NULL, NULL },
+      aCreateMachineLineTex, NULL, NULL, MachineCreate_LineColorMenuCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderBackgroundTex, aExpansionKitMenuGoldBorderHighlightBackgroundTex,
-      aCreateMachineNumberTex, NULL, NULL, func_xk3_80132C20, 48, 16, NULL, NULL },
+      aCreateMachineNumberTex, NULL, NULL, MachineCreate_NumberColorMenuCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderBackgroundTex, aExpansionKitMenuGoldBorderHighlightBackgroundTex,
-      aCreateMachineCockpitTex, NULL, NULL, func_xk3_80132C90, 48, 16, NULL, NULL },
+      aCreateMachineCockpitTex, NULL, NULL, MachineCreate_CockpitColorMenuCallback, 48, 16, NULL, NULL },
 };
 
 MenuWidget sColorWidget = { 4,   INVALID_OPTION, INVALID_OPTION, 72, 52, 0, 16, sColorMenuItems, 104, 56, 104,
@@ -432,9 +438,9 @@ MenuWidget sColorWidget = { 4,   INVALID_OPTION, INVALID_OPTION, 72, 52, 0, 16, 
 
 MenuDropItem sMachineDesignMenuItems[] = {
     { aExpansionKitMenuGoldBorderBackgroundTex, aExpansionKitMenuGoldBorderHighlightBackgroundTex,
-      aCreateMachineLineTex, NULL, &sDecalWidget, func_xk3_80132910, 48, 16, NULL, NULL },
+      aCreateMachineLineTex, NULL, &sDecalWidget, MachineCreate_DecalMenuCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuGoldBorderBackgroundTex, aExpansionKitMenuGoldBorderHighlightBackgroundTex,
-      aCreateMachineMarkTex, NULL, &sLogoWidget, func_xk3_80132A04, 48, 16, NULL, NULL },
+      aCreateMachineMarkTex, NULL, &sLogoWidget, MachineCreate_LogoMenuCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuGoldBackgroundTex, aExpansionKitMenuGoldBackgroundTex, aCreateMachineColorTex, NULL,
       &sColorWidget, MachineCreate_ColorMenuCallback, 48, 16, NULL, NULL },
 };
@@ -445,11 +451,11 @@ MenuWidget sMachineDesignWidget = {
 
 MenuDropItem sMachineRegistrationMenuItems[] = {
     { aExpansionKitMenuBlueBorderBackgroundTex, aExpansionKitMenuBlueBorderHighlightBackgroundTex, D_7000E00, NULL,
-      NULL, func_xk3_80132828, 48, 16, NULL, NULL },
+      NULL, MachineCreate_LoadFileCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuBlueBorderBackgroundTex, aExpansionKitMenuBlueBorderHighlightBackgroundTex, D_xk3_80138B30, NULL,
-      NULL, func_xk3_80132DDC, 48, 16, NULL, NULL },
+      NULL, MachineCreate_NameFileCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuBlueBorderBackgroundTex, aExpansionKitMenuBlueBorderHighlightBackgroundTex, D_xk3_80138CB0, NULL,
-      NULL, func_xk3_80132850, 48, 16, NULL, NULL },
+      NULL, MachineCreate_DeleteFileCallback, 48, 16, NULL, NULL },
 };
 
 MenuWidget sMachineRegistrationWidget = { 3,
@@ -491,15 +497,15 @@ MenuWidget sMachineCreateEntryWidget = { 3,
 
 MenuDropItem gMachineCreateMenuItems[] = {
     { aExpansionKitMenuGoldBackgroundTex, aExpansionKitMenuGoldBackgroundTex, aCreateMachinePartsTex, NULL, NULL,
-      func_xk3_80132884, 48, 16, NULL, NULL },
+      MachineCreate_PartsMenuCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuGoldBackgroundTex, aExpansionKitMenuGoldBackgroundTex, aCreateMachineDesignTex, NULL,
       &sMachineDesignWidget, MachineCreate_DesignMenuCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuGoldBackgroundTex, aExpansionKitMenuGoldBackgroundTex, aCreateMachineSettingsTex, NULL, NULL,
-      func_xk3_80132E84, 48, 16, NULL, NULL },
+      MachineCreate_StatsMenuCallback, 48, 16, NULL, NULL },
     { aMachineCreateMachineRegistrationTex, aMachineCreateMachineRegistrationTex, NULL, NULL,
       &sMachineRegistrationWidget, MachineCreate_RegistrationMenuCallback, 48, 16, NULL, NULL },
-    { aExpansionKitMenuEntryTex, aExpansionKitMenuEntryTex, NULL, NULL, &sMachineCreateEntryWidget, MachineCreate_EntryMenuCallback,
-      48, 16, NULL, NULL },
+    { aExpansionKitMenuEntryTex, aExpansionKitMenuEntryTex, NULL, NULL, &sMachineCreateEntryWidget,
+      MachineCreate_EntryMenuCallback, 48, 16, NULL, NULL },
 };
 
 MenuWidget gMachineCreateWidget = { 5, INVALID_OPTION, INVALID_OPTION, 24,  20, 48, 0, gMachineCreateMenuItems, 0,

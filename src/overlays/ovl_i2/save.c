@@ -9,7 +9,7 @@ OSIoMesg sSramIoMesg;
 OSPiHandle sSramPiHandle;
 OSPiHandle* gSramPiHandlePtr;
 s16 gSettingSoundMode;
-u8 D_i2_80111848[30];
+u8 gMachineHasSuperVersion[30];
 #ifdef EXPANSION_KIT
 u16 sDDStaffGhostCompletion;
 #endif
@@ -1174,13 +1174,13 @@ void Save_SaveSettings(SaveSettings* saveSettings) {
 
     saveSettings->customUnlocks = 0;
 
-    if (D_i2_80111848[CAPTAIN_FALCON] != 0) {
+    if (gMachineHasSuperVersion[CAPTAIN_FALCON]) {
         saveSettings->customUnlocks |= 1;
     }
-    if (D_i2_80111848[SAMURAI_GOROH] != 0) {
+    if (gMachineHasSuperVersion[SAMURAI_GOROH]) {
         saveSettings->customUnlocks |= 2;
     }
-    if (D_i2_80111848[JODY_SUMMER] != 0) {
+    if (gMachineHasSuperVersion[JODY_SUMMER]) {
         saveSettings->customUnlocks |= 4;
     }
 }
@@ -1396,12 +1396,12 @@ void Save_Load(SaveContext* saveContext) {
 
 #ifndef EXPANSION_KIT
     for (i = 0; i < 30; i++) {
-        D_i2_80111848[i] = 0;
+        gMachineHasSuperVersion[i] = false;
     }
 #else
-    D_i2_80111848[CAPTAIN_FALCON] = 1;
-    D_i2_80111848[SAMURAI_GOROH] = 1;
-    D_i2_80111848[JODY_SUMMER] = 1;
+    gMachineHasSuperVersion[CAPTAIN_FALCON] = true;
+    gMachineHasSuperVersion[SAMURAI_GOROH] = true;
+    gMachineHasSuperVersion[JODY_SUMMER] = true;
 #endif
 
 #ifdef EXPANSION_KIT
@@ -1486,18 +1486,18 @@ void Save_LoadSaveSettings(ProfileSave* profileSaves, bool arg1) {
 
     // clang-format off
     for (i = 0; i < 30; i++) { \
-        D_i2_80111848[i] = 0;
+        gMachineHasSuperVersion[i] = false;
     }
     // clang-format on
 
     if (saveSettings->customUnlocks & 1) {
-        D_i2_80111848[CAPTAIN_FALCON] = 1;
+        gMachineHasSuperVersion[CAPTAIN_FALCON] = true;
     }
     if (saveSettings->customUnlocks & 2) {
-        D_i2_80111848[SAMURAI_GOROH] = 1;
+        gMachineHasSuperVersion[SAMURAI_GOROH] = true;
     }
     if (saveSettings->customUnlocks & 4) {
-        D_i2_80111848[JODY_SUMMER] = 1;
+        gMachineHasSuperVersion[JODY_SUMMER] = true;
     }
 }
 

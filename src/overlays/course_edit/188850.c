@@ -2691,7 +2691,7 @@ void func_xk2_800DD938(void) {
                 D_800D6CA0.unk_08 = 0;
                 return;
             }
-            func_xk1_800294AC();
+            ExpansionKit_NameEntryClear();
             ExpansionKit_NameEntryInit(func_xk1_8002AC24);
             D_800D6CA0.unk_08 = 2;
             return;
@@ -2720,7 +2720,7 @@ void func_xk2_800DD938(void) {
             break;
         case 3:
             if (!(sp1C->attr & MFS_FILE_ATTR_FORBID_W)) {
-                func_xk1_800294AC();
+                ExpansionKit_NameEntryClear();
                 ExpansionKit_NameEntryInit(func_xk1_8002AC24);
                 D_800D6CA0.unk_08 = 2;
                 return;
