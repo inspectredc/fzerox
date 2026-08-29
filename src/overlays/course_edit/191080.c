@@ -1,4 +1,5 @@
 #include "global.h"
+#include "course_edit.h"
 #include "fzx_camera.h"
 #include "fzx_course.h"
 #include "fzx_expansion_kit.h"
@@ -118,10 +119,8 @@ Gfx* func_xk2_800DF5FC(Gfx* gfx) {
 }
 
 void func_xk2_800F3DAC(Gfx** gfxP);
-void EKFileMenu_DrawYesNoOption(Gfx** gfxP);
-void func_xk2_800F5250(Gfx** gfxP);
 
-extern Mtx D_2000000[];
+extern unk_80225800 D_2000000;
 extern Gfx D_30004A8[];
 extern Gfx D_3000540[];
 extern char* gCourseEditMessageStrs[];
@@ -135,7 +134,7 @@ extern unk_800D6CA0 D_800D6CA0;
 extern s32 gCourseEditCursorXPos;
 extern s32 gCourseEditCursorYPos;
 extern s32 D_xk2_800F7404;
-extern s32 D_xk2_80119918;
+extern s32 gCourseEditCameraOnlyMode;
 
 extern u8 D_xk2_80104CA0[];
 
@@ -145,7 +144,7 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
     gSPDisplayList(gfx++, D_9014AA0);
 
     if (gInCourseEditTestRun) {
-        gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gDPPipeSync(gfx++);
         gDPPipelineMode(gfx++, G_PM_1PRIMITIVE);
         gDPSetTextureFilter(gfx++, G_TF_BILERP);
@@ -156,7 +155,7 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
         func_xk2_800E1FC0(&gfx);
         gfx = Racer_Draw(gfx, 0);
         gSPLoadUcodeL(gfx++, gspF3DEX2_fifo);
-        gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         func_xk2_800E1FC0(&gfx);
         gfx = Minimap_DrawCourseMinimap(gfx, 0, 0);
         gfx = Hud_DrawPlayerSpeed(gfx, 0, 0);
@@ -171,7 +170,7 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
     gfx = func_xk2_800E5870(gfx);
     gSPDisplayList(gfx++, D_9014B68);
     gSPDisplayList(gfx++, aExecuteCourseEditAxisDL);
-    gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if ((D_802CB6D0.controlPointCount >= 4) && (D_xk2_800F7044 == 1) && (D_800D6CA0.unk_20 == -1)) {
         gSPDisplayList(gfx++, D_9014BA0);
@@ -179,7 +178,7 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
             gfx = func_800A95B4(gfx);
         }
     }
-    gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if ((D_802CB6D0.controlPointCount >= 4) && (D_800D6CA0.unk_20 == -1) && (D_xk2_800F7404 == 0) &&
         (D_xk2_80104CA0[10] == 0)) {
@@ -210,7 +209,7 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
     gfx = func_xk2_800E4984(gfx);
     gfx = func_xk2_800EDF90(gfx);
     func_xk2_800F2B48(&gfx);
-    if (D_xk2_80119918 != 0) {
+    if (gCourseEditCameraOnlyMode) {
         gSPDisplayList(gfx++, D_3000510);
         gDPSetPrimColor(gfx++, 0, 0, 0, 30, 70, 255);
         gSPTextureRectangle(gfx++, 0 << 2, 0 << 2, SCREEN_WIDTH << 2, 56 << 2, 0, 0, 0, 1 << 10, 1 << 10);
@@ -223,26 +222,26 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
         gfx = func_xk2_800EA3B0(gfx);
     }
 
-    if ((D_800D6CA0.unk_08 == 0x11) || (D_800D6CA0.unk_08 == 0x23) || (D_800D6CA0.unk_08 == 0xFF)) {
+    if ((D_800D6CA0.state == 0x11) || (D_800D6CA0.state == 0x23) || (D_800D6CA0.state == 0xFF)) {
         EKFileMenu_DrawYesNoOption(&gfx);
     }
-    if (D_800D6CA0.unk_08 == 0xFF) {
+    if (D_800D6CA0.state == 0xFF) {
         func_xk2_800EECD4(&gfx, 0, 0x48, gCourseEditMessageStrs[30], 30);
     }
-    if (D_xk2_80119918 == 0) {
-        gfx = func_xk2_800E0320(gfx);
+    if (!gCourseEditCameraOnlyMode) {
+        gfx = CourseEdit_DrawCursor(gfx);
     }
     func_xk2_800EE8A0(&gfx);
     func_xk2_800EE67C(&gfx);
-    if (D_xk2_80119918 == 0) {
+    if (!gCourseEditCameraOnlyMode) {
         func_xk2_800F3548(&gfx);
         func_xk2_800F3600(&gfx);
     }
     func_xk2_800F3DAC(&gfx);
-    if (D_800D6CA0.unk_08 == 4) {
-        func_xk2_800F5250(&gfx);
+    if (D_800D6CA0.state == COURSE_EDIT_OPTIONS_MENU) {
+        CourseEditOptionsMenu_Draw(&gfx);
     }
-    if (D_800D6CA0.unk_08 == 2) {
+    if (D_800D6CA0.state == 2) {
         gfx = ExpansionKit_NameEntryDraw(gfx, &gCourseEditCursorXPos, &gCourseEditCursorYPos);
         if (D_80119880 == 9) {
             s32 x = 24;
@@ -273,7 +272,7 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
 extern unk_80128C94* D_80128C94;
 
 void func_xk2_800DFFF8(void) {
-    CourseSegment* var_s0;
+    CourseSegment* segment;
     Vtx* vtx;
     s32 i;
     Vec3f sp68;
@@ -285,71 +284,70 @@ void func_xk2_800DFFF8(void) {
         return;
     }
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        var_s0 = &D_802CB6D0.unk_0000[i];
-        Course_SplineGetTangent(var_s0, 0.0f, &sp68);
+        segment = &D_802CB6D0.segments[i];
+        Course_SplineGetTangent(segment, 0.0f, &sp68);
         Math_NormalizeXYZ(&sp68.x, &sp68.y, &sp68.z);
 
-        temp_fa1 = (var_s0->up.y * sp68.z) - (sp68.y * var_s0->up.z);
-        temp_ft4 = (var_s0->up.z * sp68.x) - (sp68.z * var_s0->up.x);
-        temp_ft5 = (var_s0->up.x * sp68.y) - (sp68.x * var_s0->up.y);
+        temp_fa1 = (segment->up.y * sp68.z) - (sp68.y * segment->up.z);
+        temp_ft4 = (segment->up.z * sp68.x) - (sp68.z * segment->up.x);
+        temp_ft5 = (segment->up.x * sp68.y) - (sp68.x * segment->up.y);
         vtx = &D_80128C94->unk_0180[i * 6];
-        vtx->v.ob[0] = var_s0->pos.x;
-        vtx->v.ob[1] = var_s0->pos.y;
-        vtx->v.ob[2] = var_s0->pos.z;
+        vtx->v.ob[0] = segment->pos.x;
+        vtx->v.ob[1] = segment->pos.y;
+        vtx->v.ob[2] = segment->pos.z;
         vtx++;
-        vtx->v.ob[0] = var_s0->pos.x;
+        vtx->v.ob[0] = segment->pos.x;
         vtx->v.ob[1] = 0;
-        vtx->v.ob[2] = var_s0->pos.z;
+        vtx->v.ob[2] = segment->pos.z;
         vtx++;
-        vtx->v.ob[0] = var_s0->pos.x + (300.0f * sp68.x);
-        vtx->v.ob[1] = var_s0->pos.y + (300.0f * sp68.y);
-        vtx->v.ob[2] = var_s0->pos.z + (300.0f * sp68.z);
+        vtx->v.ob[0] = segment->pos.x + (300.0f * sp68.x);
+        vtx->v.ob[1] = segment->pos.y + (300.0f * sp68.y);
+        vtx->v.ob[2] = segment->pos.z + (300.0f * sp68.z);
         vtx++;
-        vtx->v.ob[0] = var_s0->pos.x + (300.0f * var_s0->up.x);
-        vtx->v.ob[1] = var_s0->pos.y + (300.0f * var_s0->up.y);
-        vtx->v.ob[2] = var_s0->pos.z + (300.0f * var_s0->up.z);
+        vtx->v.ob[0] = segment->pos.x + (300.0f * segment->up.x);
+        vtx->v.ob[1] = segment->pos.y + (300.0f * segment->up.y);
+        vtx->v.ob[2] = segment->pos.z + (300.0f * segment->up.z);
         vtx++;
-        vtx->v.ob[0] = var_s0->pos.x + (var_s0->radiusLeft * temp_fa1);
-        vtx->v.ob[1] = var_s0->pos.y + (var_s0->radiusLeft * temp_ft4);
-        vtx->v.ob[2] = var_s0->pos.z + (var_s0->radiusLeft * temp_ft5);
+        vtx->v.ob[0] = segment->pos.x + (segment->radiusLeft * temp_fa1);
+        vtx->v.ob[1] = segment->pos.y + (segment->radiusLeft * temp_ft4);
+        vtx->v.ob[2] = segment->pos.z + (segment->radiusLeft * temp_ft5);
         vtx++;
-        vtx->v.ob[0] = var_s0->pos.x - (var_s0->radiusRight * temp_fa1);
-        vtx->v.ob[1] = var_s0->pos.y - (var_s0->radiusRight * temp_ft4);
-        vtx->v.ob[2] = var_s0->pos.z - (var_s0->radiusRight * temp_ft5);
+        vtx->v.ob[0] = segment->pos.x - (segment->radiusRight * temp_fa1);
+        vtx->v.ob[1] = segment->pos.y - (segment->radiusRight * temp_ft4);
+        vtx->v.ob[2] = segment->pos.z - (segment->radiusRight * temp_ft5);
     }
 }
 
 extern Gfx D_8014940[];
-extern s32 D_xk1_8003A550;
-extern s32 D_xk1_8003A554;
+extern s32 gCourseEditMenuCursorXPos;
+extern s32 gCourseEditMenuCursorYPos;
 
-Gfx* func_xk2_800E0320(Gfx* gfx) {
-    s32 var_v0;
-    s32 var_v1;
+Gfx* CourseEdit_DrawCursor(Gfx* gfx) {
+    s32 left;
+    s32 top;
 
     if (D_800D6CA0.unk_00 == 1) {
         return gfx;
     }
     // clang-format off
-    if (D_800D6CA0.unk_08 == 1) {
-        var_v0 = D_xk1_8003A550; \
-        var_v1 = D_xk1_8003A554;
+    if (D_800D6CA0.state == 1) {
+        left = gCourseEditMenuCursorXPos; \
+        top = gCourseEditMenuCursorYPos;
     } else {
-        var_v0 = gCourseEditCursorXPos; \
-        var_v1 = gCourseEditCursorYPos;
+        left = gCourseEditCursorXPos; \
+        top = gCourseEditCursorYPos;
     }
     // clang-format on
-    if (D_800D6CA0.unk_08 == 0x20) {
+    if (D_800D6CA0.state == 0x20) {
         return gfx;
     }
-    if (D_800D6CA0.unk_08 == 4) {
+    if (D_800D6CA0.state == COURSE_EDIT_OPTIONS_MENU) {
         return gfx;
     }
-    if (D_800D6CA0.unk_08 == 3) {
+    if (D_800D6CA0.state == 3) {
         return gfx;
     }
-
-    if (D_800D6CA0.unk_08 == 0x10) {
+    if (D_800D6CA0.state == 0x10) {
         return gfx;
     }
     gSPDisplayList(gfx++, D_8014940);
@@ -357,7 +355,7 @@ Gfx* func_xk2_800E0320(Gfx* gfx) {
     gDPLoadTextureBlock(gfx++, aCourseEditCursorTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gSPTextureRectangle(gfx++, var_v0 << 2, var_v1 << 2, (var_v0 + 16) << 2, (var_v1 + 16) << 2, 0, 0, 0, 1 << 10,
+    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 16) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10,
                         1 << 10);
 
     return gfx;
@@ -399,14 +397,14 @@ Gfx* func_xk2_800E04E0(Gfx* gfx) {
         } else if (i == 0) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 255, 128);
         } else {
-            var_a0 = Math_Round(D_802CB6D0.unk_0000[i].pos.y);
+            var_a0 = Math_Round(D_802CB6D0.segments[i].pos.y);
             if (var_a0 < 0) {
                 var_a0 = 0;
             }
             var_a0 = (var_a0 * 255) / 5000;
             gDPSetPrimColor(gfx++, 0, 0, var_a0, var_a0, 255, 255);
         }
-        spA8 = D_802CB6D0.unk_0000[i].pos;
+        spA8 = D_802CB6D0.segments[i].pos;
 
         if (func_xk2_800EF090(spA8, &spBC, &spB8) != 0) {
             continue;
@@ -432,7 +430,7 @@ s32 func_xk2_800E08FC(s32 arg0) {
     s32 var_a3;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        var_a0 = &D_802CB6D0.unk_0000[i];
+        var_a0 = &D_802CB6D0.segments[i];
         var_a1 = D_80128690[var_a0->segmentIndex].unk_00;
         var_a3 = D_80128690[var_a0->segmentIndex].unk_04;
         if (var_a1 > var_a3) {
@@ -508,7 +506,7 @@ Gfx* func_xk2_800E0BD0(Gfx* gfx) {
         } else {
             var_t5 = 0;
         }
-        var_t4 = D_802CB6D0.unk_0000[var_t5].next->segmentIndex;
+        var_t4 = D_802CB6D0.segments[var_t5].next->segmentIndex;
         if (var_t4 < var_t5) {
             for (i = 0; i < var_t4; i++) {
                 gSPVertex(gfx++, &D_6000000.unk_0180[i * 6], 1, 0);
@@ -536,9 +534,9 @@ Gfx* func_xk2_800E0BD0(Gfx* gfx) {
     gDPSetRenderMode(gfx++, G_RM_AA_XLU_SURF, G_RM_NOOP2);
 
     if (D_800D6CA0.unk_0C != -1) {
-        var_v1_6 = &D_802CB6D0.unk_0000[D_800D6CA0.unk_0C];
+        var_v1_6 = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
     } else {
-        var_v1_6 = &D_802CB6D0.unk_0000[0];
+        var_v1_6 = &D_802CB6D0.segments[0];
     }
 
     var_t5 = D_80128690[var_v1_6->segmentIndex].unk_00;
@@ -723,7 +721,8 @@ extern FrameBuffer* gFrameBuffers[];
 void func_xk2_800E1FC0(Gfx** gfxP) {
     Gfx* gfx;
 
-    gfx = Segment_SetTableAddresses(*gfxP);
+    gfx = *gfxP;
+    gfx = Segment_SetTableAddresses(gfx);
     gSPDisplayList(gfx++, D_3000338);
     gSPSetGeometryMode(gfx++, G_CLIPPING);
     gSPClipRatio(gfx++, FRUSTRATIO_2);
@@ -764,7 +763,7 @@ Gfx* func_xk2_800E2104(Gfx* gfx) {
 extern Gfx D_3000540[];
 extern s32 D_xk1_80032AD0;
 extern CourseSegment* D_xk2_801197EC;
-extern s32 D_xk2_80119918;
+extern s32 gCourseEditCameraOnlyMode;
 extern s32 D_xk2_80128CA0;
 
 void func_xk2_800E2238(Gfx** gfxP) {
@@ -779,7 +778,7 @@ void func_xk2_800E2238(Gfx** gfxP) {
 
     top = 60;
     left = 232;
-    if (D_xk2_80119918 != 0) {
+    if (gCourseEditCameraOnlyMode) {
         return;
     }
     gfx = *gfxP;
@@ -790,7 +789,7 @@ void func_xk2_800E2238(Gfx** gfxP) {
         left = 24;
     }
     D_xk2_80128CA0 = 0x40;
-    D_xk2_801197EC = &D_802CB6D0.unk_0000[D_xk2_800F703C];
+    D_xk2_801197EC = &D_802CB6D0.segments[D_xk2_800F703C];
     func_xk2_800EA028(&gfx, left, top, 64, 116);
     left += 4;
     top += 4;
@@ -1170,7 +1169,7 @@ void func_xk2_800E4364(Gfx** gfxP, CourseSegment* arg1) {
     *gfxP = gfx;
 }
 
-extern s32 D_800D11C8[];
+extern s32 gCourseEditOptions[];
 extern s32 gMoveOption;
 
 void func_xk2_800E47B4(Gfx** gfxP) {
@@ -1179,7 +1178,7 @@ void func_xk2_800E47B4(Gfx** gfxP) {
     Gfx* gfx2;
     s32 i;
 
-    if ((D_800D11C8[1] == 0) || gInCourseEditTestRun || (gCreateOption != CREATE_OPTION_POINT)) {
+    if ((gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_MOVE_POS] == 0) || gInCourseEditTestRun || (gCreateOption != CREATE_OPTION_POINT)) {
         return;
     }
     gfx = *gfxP;
@@ -1193,14 +1192,14 @@ void func_xk2_800E47B4(Gfx** gfxP) {
         switch (gMoveOption) {
             case MOVE_OPTION_MOVE_XZ:
             case MOVE_OPTION_MOVE_Y:
-                func_xk2_800E396C(&gfx2, &D_802CB6D0.unk_0000[i]);
+                func_xk2_800E396C(&gfx2, &D_802CB6D0.segments[i]);
                 break;
             case MOVE_OPTION_WIDTH:
             case MOVE_OPTION_CENTER:
-                func_xk2_800E3E90(&gfx2, &D_802CB6D0.unk_0000[i]);
+                func_xk2_800E3E90(&gfx2, &D_802CB6D0.segments[i]);
                 break;
             case MOVE_OPTION_BANK:
-                func_xk2_800E4364(&gfx2, &D_802CB6D0.unk_0000[i]);
+                func_xk2_800E4364(&gfx2, &D_802CB6D0.segments[i]);
                 break;
         }
     }
@@ -1391,7 +1390,7 @@ Gfx* func_xk2_800E5058(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_3000540);
 
-    if (D_xk2_80119918 == 0) {
+    if (!gCourseEditCameraOnlyMode) {
         if ((gCreateOption == CREATE_OPTION_COURSE) || (gCreateOption == CREATE_OPTION_POINT)) {
             if (D_802CB6D0.controlPointCount >= 0x40) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
@@ -1470,7 +1469,7 @@ Gfx* func_xk2_800E5214(Gfx* gfx) {
 
 Gfx* func_xk2_800E54A4(Gfx* gfx) {
 
-    if (D_xk2_80119918 != 0) {
+    if (gCourseEditCameraOnlyMode) {
         return gfx;
     }
 
@@ -1491,7 +1490,7 @@ extern s32 D_xk1_80030608;
 
 void func_xk2_800E5570(void) {
 
-    if (D_800D6CA0.unk_08 != 0) {
+    if (D_800D6CA0.state != 0) {
         return;
     }
     D_xk2_800F7050 = D_800D6CA0.unk_28.pos.x;
@@ -1537,7 +1536,7 @@ void func_xk2_800E5570(void) {
     }
 }
 
-extern s32 D_xk2_80104CB0;
+extern s32 gCourseEditCameraPitch;
 extern Gfx D_xk2_80136EF8[];
 
 Gfx* func_xk2_800E5870(Gfx* gfx) {
@@ -1547,7 +1546,7 @@ Gfx* func_xk2_800E5870(Gfx* gfx) {
     }
     func_xk2_800E5570();
     gSPDisplayList(gfx++, D_9014AE8);
-    if (D_xk2_80104CB0 < 0) {
+    if (gCourseEditCameraPitch < 0) {
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
         gDPSetCombineMode(gfx++, G_CC_MODULATEI_PRIM, G_CC_MODULATEI_PRIM);
     }
@@ -1591,7 +1590,7 @@ void func_xk2_800E5A38(s32 arg0) {
     if ((D_802CB6D0.controlPointCount >= 4) && (gCurrentCourseInfo->length < 3000.0f)) {
         D_xk2_80104CA0[11] = 1;
     }
-    if (D_800D6CA0.unk_08 != 0x10) {
+    if (D_800D6CA0.state != 0x10) {
         if (D_xk2_800F7040 == 3) {
             D_800D6CA0.unk_1C = -1;
             D_xk2_800F706C = -1;
@@ -1618,7 +1617,7 @@ void func_xk2_800E5B6C(void) {
     s32 temp_v0;
 
     if (!gInCourseEditTestRun) {
-        gCurrentCourseInfo->courseSegments = D_802CB6D0.unk_0000;
+        gCurrentCourseInfo->courseSegments = D_802CB6D0.segments;
         gCurrentCourseInfo->segmentCount = D_802CB6D0.controlPointCount;
     }
     if (gCurrentCourseInfo->segmentCount < 4) {
@@ -1683,7 +1682,7 @@ void func_xk2_800E5D90(CourseInfo* courseInfo) {
     Vec3f sp64;
 
     var_fs0 = 0.0f;
-    var_s0 = D_802CB6D0.unk_0000;
+    var_s0 = D_802CB6D0.segments;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         sp7C = var_s0->pos;
@@ -1703,7 +1702,7 @@ void func_xk2_800E5D90(CourseInfo* courseInfo) {
 
     var_s1 = 0;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        var_s0 = &D_802CB6D0.unk_0000[i];
+        var_s0 = &D_802CB6D0.segments[i];
 
         sp7C = var_s0->pos;
         sp70 = var_s0->next->pos;
@@ -1899,7 +1898,7 @@ bool func_xk2_800E6B3C(void) {
     CourseSegment* var_s0;
 
     var_s3 = false;
-    if (D_800D6CA0.unk_08 == 2) {
+    if (D_800D6CA0.state == 2) {
         return false;
     }
     var_s0 = &D_802CB6D0;
@@ -1945,15 +1944,15 @@ void func_xk2_800E6CA8(s32 arg0, CourseSegment arg1) {
 
     if (arg0 != -1) {
         if (D_802CB6D0.controlPointCount >= 2) {
-            arg1.trackSegmentInfo = D_802CB6D0.unk_0000[arg0].trackSegmentInfo;
+            arg1.trackSegmentInfo = D_802CB6D0.segments[arg0].trackSegmentInfo;
             if (!(arg1.trackSegmentInfo & TRACK_TYPE_MASK) && !(arg1.trackSegmentInfo & TRACK_SHAPE_MASK)) {
                 arg1.trackSegmentInfo = (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_2);
             }
         }
 
         for (i = D_802CB6D0.controlPointCount; i > arg0; i--) {
-            D_802CB6D0.unk_0000[i] = D_802CB6D0.unk_0000[i - 1];
-            D_802CB6D0.unk_0000[i].segmentIndex = i;
+            D_802CB6D0.segments[i] = D_802CB6D0.segments[i - 1];
+            D_802CB6D0.segments[i].segmentIndex = i;
 
             COURSE_CONTEXT()->courseData.bankAngle[i] = COURSE_CONTEXT()->courseData.bankAngle[i - 1];
             D_80128690[i] = D_80128690[i - 1];
@@ -1970,7 +1969,7 @@ void func_xk2_800E6CA8(s32 arg0, CourseSegment arg1) {
         }
     }
 
-    temp_v1 = &D_802CB6D0.unk_0000[arg0 + 1];
+    temp_v1 = &D_802CB6D0.segments[arg0 + 1];
     temp_v1->segmentIndex = arg0 + 1;
     temp_v1->pos.x = Math_Round(arg1.pos.x);
     temp_v1->pos.y = Math_Round(arg1.pos.y);
@@ -2003,7 +2002,7 @@ void func_xk2_800E6F9C(void) {
     CourseSegment* var_v0;
     s32 i;
 
-    var_v0 = D_802CB6D0.unk_0000;
+    var_v0 = D_802CB6D0.segments;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         var_v0->segmentIndex = i;
@@ -2012,12 +2011,12 @@ void func_xk2_800E6F9C(void) {
         var_v0++;
     }
     if (D_802CB6D0.controlPointCount != 0) {
-        D_802CB6D0.unk_0000[0].prev = &D_802CB6D0.unk_0000[D_802CB6D0.controlPointCount - 1];
-        D_802CB6D0.unk_0000[D_802CB6D0.controlPointCount - 1].next = &D_802CB6D0.unk_0000[0];
+        D_802CB6D0.segments[0].prev = &D_802CB6D0.segments[D_802CB6D0.controlPointCount - 1];
+        D_802CB6D0.segments[D_802CB6D0.controlPointCount - 1].next = &D_802CB6D0.segments[0];
     } else {
-        D_802CB6D0.unk_0000[0].segmentIndex = 0;
-        D_802CB6D0.unk_0000[0].prev = D_802CB6D0.unk_0000;
-        D_802CB6D0.unk_0000[0].next = D_802CB6D0.unk_0000;
+        D_802CB6D0.segments[0].segmentIndex = 0;
+        D_802CB6D0.segments[0].prev = D_802CB6D0.segments;
+        D_802CB6D0.segments[0].next = D_802CB6D0.segments;
     }
 }
 
@@ -2100,23 +2099,23 @@ void func_xk2_800E72BC(void) {
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
 
-        if (var_fv0 > D_802CB6D0.unk_0000[i].pos.x) {
-            var_fv0 = D_802CB6D0.unk_0000[i].pos.x;
+        if (var_fv0 > D_802CB6D0.segments[i].pos.x) {
+            var_fv0 = D_802CB6D0.segments[i].pos.x;
         }
-        if (var_fv1 < D_802CB6D0.unk_0000[i].pos.x) {
-            var_fv1 = D_802CB6D0.unk_0000[i].pos.x;
+        if (var_fv1 < D_802CB6D0.segments[i].pos.x) {
+            var_fv1 = D_802CB6D0.segments[i].pos.x;
         }
 
-        if (var_fa0 > D_802CB6D0.unk_0000[i].pos.z) {
-            var_fa0 = D_802CB6D0.unk_0000[i].pos.z;
+        if (var_fa0 > D_802CB6D0.segments[i].pos.z) {
+            var_fa0 = D_802CB6D0.segments[i].pos.z;
         }
-        if (var_fa1 < D_802CB6D0.unk_0000[i].pos.z) {
-            var_fa1 = D_802CB6D0.unk_0000[i].pos.z;
+        if (var_fa1 < D_802CB6D0.segments[i].pos.z) {
+            var_fa1 = D_802CB6D0.segments[i].pos.z;
         }
     }
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        D_802CB6D0.unk_0000[i].pos.x -= (var_fv0 + var_fv1) / 2;
-        D_802CB6D0.unk_0000[i].pos.z -= (var_fa0 + var_fa1) / 2;
+        D_802CB6D0.segments[i].pos.x -= (var_fv0 + var_fv1) / 2;
+        D_802CB6D0.segments[i].pos.z -= (var_fa0 + var_fa1) / 2;
     }
     D_xk2_800F7040 = 3;
 }
@@ -2150,10 +2149,10 @@ Gfx* func_xk2_800E7518(Gfx* gfx) {
     s32 var_t4;
     s32 var_v0;
 
-    if (D_xk2_80119918 != 0) {
+    if (gCourseEditCameraOnlyMode) {
         return gfx;
     }
-    if (D_800D6CA0.unk_08 != 5) {
+    if (D_800D6CA0.state != 5) {
         return gfx;
     }
     if (gCreateOption != CREATE_OPTION_POINT) {
@@ -2196,14 +2195,14 @@ Gfx* func_xk2_800E7518(Gfx* gfx) {
 void func_xk2_800E77F0(void) {
     D_800D6CA0.unk_00 = 0;
     D_800D6CA0.unk_04 = 0;
-    D_800D6CA0.unk_08 = 0;
+    D_800D6CA0.state = 0;
     D_800D6CA0.unk_28.trackSegmentInfo = 0x18000000;
     D_800D6CA0.unk_20 = -1;
     D_800D6CA0.unk_1C = -1;
     D_800D6CA0.unk_24 = 0;
     D_800D6CA0.unk_0C = -1;
     D_800D6CA0.unk_10 = -1;
-    D_800D6CA0.unk_14 = 0;
+    D_800D6CA0.courseYaw = 0;
     D_800D6CA0.unk_28.radiusLeft = 260.0f;
     D_800D6CA0.unk_28.radiusRight = 260.0f;
     D_800D6CA0.unk_28.up.x = 0.0f;
@@ -2230,7 +2229,7 @@ void func_xk2_800E7854(void) {
     func_xk2_800E7BA8();
     func_xk2_800E7990();
     func_xk2_800E7A78();
-    func_80074844();
+    Course_UpdateSignRotation();
     func_80703234();
     if ((D_802CB6D0.controlPointCount >= 4) && (D_800D6CA0.unk_20 == -1)) {
         Course_FeaturesInit(0);
@@ -2263,7 +2262,7 @@ void func_xk2_800E7990(void) {
         return;
     }
     D_xk2_80119818.y = 0.0f;
-    var_s0 = D_802CB6D0.unk_0000;
+    var_s0 = D_802CB6D0.segments;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         Course_SplineGetPosition(var_s0, 0.5f, &D_xk2_80119818);
         if (D_xk2_80119818.y < -375.0f) {
@@ -2290,7 +2289,7 @@ void func_xk2_800E7A78(void) {
     }
     D_xk2_80119828.x = 0.0f;
     D_xk2_80119828.z = 0.0f;
-    var_s0 = D_802CB6D0.unk_0000;
+    var_s0 = D_802CB6D0.segments;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         Course_SplineGetPosition(var_s0, 0.5f, &D_xk2_80119828);
         if ((D_xk2_80119828.x < -15000.0f) || (D_xk2_80119828.x > 15000.0f) || (D_xk2_80119828.z < -15000.0f) ||
@@ -2329,7 +2328,7 @@ void func_xk2_800E7BA8(void) {
     if (D_802CB6D0.controlPointCount < 4) {
         return;
     }
-    var_s0 = D_802CB6D0.unk_0000[0].prev;
+    var_s0 = D_802CB6D0.segments[0].prev;
     temp_fs0 = Course_SplineGetLengthInfo(var_s0, 0.0f, &sp114);
     Course_SplineGetPosition(var_s0, 0.0f, &spF4);
     Course_SplineGetBasis(var_s0, 0.0f, &sp94, temp_fs0);
@@ -2339,7 +2338,7 @@ void func_xk2_800E7BA8(void) {
     Course_SplineGetBasis(var_s0, 0.0f, &spB8, temp_fs0);
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        var_s0 = &D_802CB6D0.unk_0000[i];
+        var_s0 = &D_802CB6D0.segments[i];
 
         temp_s1 = var_s0->next;
         temp_s2 = var_s0->prev;
@@ -2467,10 +2466,10 @@ Gfx* func_xk2_800E8080(Gfx* gfx) {
         }
     }
     {
-        Gfx* sp148;
-        sp148 = D_80128C94->unk_F9A0;
-        func_xk1_800276B0(&sp148, &gCourseEditWidget, D_xk1_8003A550, D_xk1_8003A554);
-        gSPEndDisplayList(sp148++);
+        Gfx* menuGfx;
+        menuGfx = D_80128C94->unk_F9A0;
+        EKWidget_DrawWidgets(&menuGfx, &gCourseEditWidget, gCourseEditMenuCursorXPos, gCourseEditMenuCursorYPos);
+        gSPEndDisplayList(menuGfx++);
     }
 
     gSPDisplayList(gfx++, D_6000000.unk_F9A0);
@@ -2556,7 +2555,7 @@ extern u8 D_80030060[];
 
 Gfx* func_xk2_800E8F7C(Gfx* gfx) {
 
-    if (D_xk2_80119918 != 0) {
+    if (gCourseEditCameraOnlyMode) {
         return gfx;
     }
 
@@ -2589,7 +2588,7 @@ s32 func_xk2_800E9134(s32 arg0) {
     var_v1 = -1;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        var_a0 = &D_802CB6D0.unk_0000[i];
+        var_a0 = &D_802CB6D0.segments[i];
 
         temp_lo = var_a0->startChunk - gSegmentChunks;
         temp_lo_2 = var_a0->endChunk - gSegmentChunks;
@@ -2657,7 +2656,7 @@ void func_xk2_800E93B0(Gfx** gfxP) {
     }
 
     if (D_800D6CA0.unk_1C != -1) {
-        sp28 = D_802CB6D0.unk_0000[D_800D6CA0.unk_1C].pos;
+        sp28 = D_802CB6D0.segments[D_800D6CA0.unk_1C].pos;
         if (func_xk2_800EF090(sp28, &sp38, &sp34) == 0) {
             func_xk2_800E92E4(&gfx, sp38, sp34);
         }
@@ -2679,7 +2678,7 @@ void func_xk2_800E9504(Gfx** gfxP) {
         return;
     }
     gfx = *gfxP;
-    sp28 = D_802CB6D0.unk_0000[D_800D6CA0.unk_20].pos;
+    sp28 = D_802CB6D0.segments[D_800D6CA0.unk_20].pos;
     if (func_xk2_800EF090(sp28, &sp38, &sp34) == 0) {
         func_xk2_800E92E4(&gfx, sp38, sp34);
     }
@@ -2697,7 +2696,7 @@ void func_xk2_800E95E0(Gfx** gfxP) {
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
 
         if (func_xk2_800F1350(i) & 1) {
-            sp44 = D_802CB6D0.unk_0000[i].pos;
+            sp44 = D_802CB6D0.segments[i].pos;
 
             if (func_xk2_800EF090(sp44, &sp54, &sp50) == 0) {
                 func_xk2_800E92E4(&gfx, sp54, sp50);
@@ -2718,7 +2717,7 @@ void func_xk2_800E96F4(Gfx** gfxP) {
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
 
         if (func_xk2_800F1350(i) & 2) {
-            sp44 = D_802CB6D0.unk_0000[i].pos;
+            sp44 = D_802CB6D0.segments[i].pos;
             if (func_xk2_800EF090(sp44, &sp54, &sp50) == 0) {
                 func_xk2_800E92E4(&gfx, sp54, sp50);
             }
@@ -2767,7 +2766,7 @@ void func_xk2_800E98D8(Gfx** gfxP) {
     }
 
     gfx = *gfxP;
-    var_s0 = D_802CB6D0.unk_0000;
+    var_s0 = D_802CB6D0.segments;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
 
         Course_SplineGetPosition(var_s0, 0.5f, &sp68);
@@ -2793,7 +2792,7 @@ s32 CourseEdit_UpdateHighlightedIconIndex(void) {
         gCourseEditHighlightedIconIndex = -1;
         return -1;
     }
-    if (D_800D6CA0.unk_08 != 0) {
+    if (D_800D6CA0.state != 0) {
         return -1;
     }
     if (D_800D6CA0.unk_00 == 1) {
@@ -2844,7 +2843,7 @@ void CourseEdit_DrawIcons(Gfx** gfxP) {
     s32 highlightedIconIndex;
 
     gfx = *gfxP;
-    if (D_xk2_80119918 != 0) {
+    if (gCourseEditCameraOnlyMode) {
         return;
     }
 
@@ -2912,7 +2911,7 @@ Gfx* func_xk2_800EA248(Gfx* gfx) {
     if (gInCourseEditTestRun) {
         return gfx;
     }
-    sp64 = D_802CB6D0.unk_0000[1].pos;
+    sp64 = D_802CB6D0.segments[1].pos;
 
     if (func_xk2_800EF090(sp64, &sp7C, &sp78) != 0) {
         return gfx;
@@ -2930,7 +2929,7 @@ extern s32 D_xk2_80103F10;
 
 Gfx* func_xk2_800EA3B0(Gfx* gfx) {
 
-    if (D_800D6CA0.unk_08 != 3) {
+    if (D_800D6CA0.state != 3) {
         return gfx;
     }
     if (D_80119880 == 5) {
@@ -2980,7 +2979,7 @@ Gfx* func_xk2_800EA4E4(Gfx* gfx) {
         D_xk2_800F7230 = 0;
         D_xk2_800F7234 = 0.0f;
     }
-    temp_a0 = &D_802CB6D0.unk_0000[D_xk2_800F7230];
+    temp_a0 = &D_802CB6D0.segments[D_xk2_800F7230];
 
     temp_fs0 = Course_SplineGetLengthInfo(temp_a0, D_xk2_800F7234, &spDC);
     Course_SplineGetPosition(temp_a0, D_xk2_800F7234, &spC8);
@@ -3024,7 +3023,7 @@ void func_xk2_800EA8E8(Gfx** gfxP) {
     s32 pad[3];
     Gfx* gfx;
 
-    if (D_800D6CA0.unk_08 != 0x11) {
+    if (D_800D6CA0.state != 0x11) {
         return;
     }
     gfx = *gfxP;
@@ -3036,7 +3035,7 @@ void func_xk2_800EA948(Gfx** gfxP) {
     s32 pad[3];
     Gfx* gfx;
 
-    if (D_800D6CA0.unk_08 != 0x23) {
+    if (D_800D6CA0.state != 0x23) {
         return;
     }
     gfx = *gfxP;

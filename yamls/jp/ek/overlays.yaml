@@ -282,7 +282,7 @@
       - [0x191080, c, 191080]
       - [0x19C470, c, 19C470]
       - [0x19D4A0, c, 19D4A0]
-      - [0x19DD60, c, 19DD60]
+      - [0x19DD60, c, course_edit]
       - [0x19F3F0, c, 19F3F0]
       - [0x19FA50, c, 19FA50]
       - [0x1A0B50, c, 1A0B50]
@@ -291,7 +291,7 @@
       - [0x1A3AB0, c, 1A3AB0]
       - [0x1A4020, c, 1A4020]
       - [0x1A4210, c, 1A4210]
-      - [0x1A5B70, c, 1A5B70]
+      - [0x1A5B70, c, course_edit_options_menu]
       - [0x1A7710, c, 1A7710]
       - [0x1A7D50, c, 1A7D50]
       - [0x1A82E0, .data, 188850]
@@ -302,8 +302,8 @@
       - [0x1B5710, .rodata, 19C470]
       - [0x1B59D0, .data, 19D4A0]
       - [0x1B59E0, .rodata, 19D4A0]
-      - [0x1B5AB0, .data, 19DD60]
-      - [0x1B5AD0, .rodata, 19DD60]
+      - [0x1B5AB0, .data, course_edit]
+      - [0x1B5AD0, .rodata, course_edit]
       - [0x1B5D40, .data, 19F3F0]
       - [0x1B5E20, .data, 19FA50]
       - [0x1B5E50, .rodata, 1A0B50]
@@ -315,13 +315,13 @@
       - [0x1B6890, .rodata, 1A3AB0]
       - [0x1B69B0, .data, 1A4210]
       - [0x1B6F50, .rodata, 1A4210]
-      - [0x1B7000, .data, 1A5B70]
-      - [0x1CB120, .rodata, 1A5B70]
+      - [0x1B7000, .data, course_edit_options_menu]
+      - [0x1CB120, .rodata, course_edit_options_menu]
       - [0x1CB140, .data, 1A7710]
       - [0x1CB160, .rodata, 1A7710]
       - [0x1CB170, .rodata, 1A7D50]
       - { type: .bss, vram: 0x80119720, name: 188850 }
-      - { type: .bss, vram: 0x80128C90, name: 19DD60 }
+      - { type: .bss, vram: 0x80128C90, name: course_edit }
       - { type: .bss, vram: 0x80128CA0, name: 19FA50 }
       - { type: .bss, vram: 0x80128CB0, name: 1A1240 }
       - { type: .bss, vram: 0x80128D00, name: 1A2D70 }

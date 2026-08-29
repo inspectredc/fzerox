@@ -3,10 +3,10 @@
 #include "src/overlays/ovl_i3/menus.h"
 #include ASSET_HEADER(common_assets_compressed.h)
 
-s32 D_xk2_8013A7E0;
-s32 D_xk2_8013A7E4;
+s32 sCourseEditPauseMenuOptionIndex;
+s32 sCourseEditPauseScissorBoxSize;
 
-void func_xk2_800F6290(void) {
+void CourseEdit_TestRunPauseMenuInit(void) {
     TextureCache_LoadAndCache(aMenuTextTLUT, 0x200, false, false, false);
     TextureCache_LoadAndCache(aMenuQuitTex, 0x200, false, true, false);
     TextureCache_LoadAndCache(aMenuContinueTex, 0x400, false, true, false);
@@ -17,57 +17,57 @@ void func_xk2_800F6290(void) {
 
 extern s16 sMenuIsBusy;
 
-void func_xk2_800F632C(void) {
-    D_xk2_8013A7E4 = 60;
-    D_xk2_8013A7E0 = 0;
+void CourseEdit_TestRunPauseMenuStart(void) {
+    sCourseEditPauseScissorBoxSize = 60;
+    sCourseEditPauseMenuOptionIndex = 0;
     sMenuIsBusy = 0;
 }
 
 extern s8 gGamePaused;
 extern Gfx D_4011D78[];
 
-Gfx* func_xk2_800F634C(Gfx* gfx) {
+Gfx* CourseEdit_TestRunPauseMenuDraw(Gfx* gfx) {
     s32 pad[2];
 
-    if (D_xk2_8013A7E4 > 0) {
-        D_xk2_8013A7E4 -= 8;
+    if (sCourseEditPauseScissorBoxSize > 0) {
+        sCourseEditPauseScissorBoxSize -= 8;
     } else {
-        D_xk2_8013A7E4 = 0;
+        sCourseEditPauseScissorBoxSize = 0;
     }
 
     gDPPipeSync(gfx++);
-    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, D_xk2_8013A7E4 + 100, D_xk2_8013A7E4 + 41, 0xE6 - D_xk2_8013A7E4,
-                  0x85 - D_xk2_8013A7E4);
+    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sCourseEditPauseScissorBoxSize + 100, sCourseEditPauseScissorBoxSize + 41, 230 - sCourseEditPauseScissorBoxSize,
+                  133 - sCourseEditPauseScissorBoxSize);
 
-    gfx = Menus_DrawBeveledBox(gfx, 0x78, 0x3D, 0xD2, 0x71, 0, 0, 0, 0xDC);
+    gfx = Menus_DrawBeveledBox(gfx, 120, 61, 210, 113, 0, 0, 0, 220);
     gSPDisplayList(gfx++, D_4011D78);
 
     gDPLoadTLUT_pal256(gfx++, TextureCache_GetCached(aMenuTextTLUT));
 
-    gfx = Menus_SetOptionColor(gfx, D_xk2_8013A7E0);
-    gfx = Menus_DrawRaceMenuTexture(gfx, 0xF, 0x8C, 0x50);
-    gfx = Menus_SetOptionColor(gfx, D_xk2_8013A7E0 - 1);
-    gfx = Menus_DrawRaceMenuTexture(gfx, 2, 0x8C, 0x5F);
+    gfx = Menus_SetOptionColor(gfx, sCourseEditPauseMenuOptionIndex);
+    gfx = Menus_DrawRaceMenuTexture(gfx, 15, 140, 80);
+    gfx = Menus_SetOptionColor(gfx, sCourseEditPauseMenuOptionIndex - 1);
+    gfx = Menus_DrawRaceMenuTexture(gfx, 2, 140, 95);
     gDPPipeSync(gfx++);
     gDPSetTextureLUT(gfx++, G_TT_NONE);
     gfx = func_8007DB28(gfx, 0);
-    gfx = Font_DrawScaledString(gfx, 0x7D, (D_xk2_8013A7E0 * 0xF) + 0x61, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
+    gfx = Font_DrawScaledString(gfx, 125, (sCourseEditPauseMenuOptionIndex * 15) + 97, "Ｍ", 1, 5, 0, 0.8f, 0.8f);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 128, 128, 128, 255);
-    gfx = Font_DrawString(gfx, 0xA6 - (Font_GetStringWidth("PAUSE", 6, 1) / 2), 0x4E, "PAUSE", 1, 6, 0);
+    gfx = Font_DrawString(gfx, 166 - (Font_GetStringWidth("PAUSE", 6, 1) / 2), 78, "PAUSE", 1, 6, 0);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 250, 250, 0, 255);
 
-    gfx = Font_DrawString(gfx, 0xA5 - (Font_GetStringWidth("PAUSE", 6, 1) / 2), 0x4D, "PAUSE", 1, 6, 0);
-    if ((D_xk2_8013A7E4 == 0) && (sMenuIsBusy == 0)) {
-        D_xk2_8013A7E0 = Menus_UpdateHighlightedOptionVertical(0, D_xk2_8013A7E0, 1);
+    gfx = Font_DrawString(gfx, 165 - (Font_GetStringWidth("PAUSE", 6, 1) / 2), 77, "PAUSE", 1, 6, 0);
+    if ((sCourseEditPauseScissorBoxSize == 0) && (sMenuIsBusy == 0)) {
+        sCourseEditPauseMenuOptionIndex = Menus_UpdateHighlightedOptionVertical(0, sCourseEditPauseMenuOptionIndex, 1);
         if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
-            switch (D_xk2_8013A7E0) {
+            switch (sCourseEditPauseMenuOptionIndex) {
                 case 0:
-                    func_xk2_800EC8AC();
+                    CourseEdit_UnpauseTestRun();
                     break;
                 case 1:
-                    func_xk2_800EC91C();
+                    CourseEdit_ExitTestRun();
                     break;
             }
         }

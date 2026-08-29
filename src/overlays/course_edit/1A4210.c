@@ -292,7 +292,7 @@ extern Vtx* gCourseVtxPtr;
 
 s32 func_xk2_800F2750(void) {
     gCourseVtxPtr = gGfxPool->courseVtxBuffer;
-    gCourseInfos->courseSegments = D_802CB6D0.unk_0000;
+    gCourseInfos->courseSegments = D_802CB6D0.segments;
     gCourseInfos->segmentCount = D_802CB6D0.controlPointCount;
     if (D_800D6CA0.unk_20 == -1) {
         Course_SegmentContinuousFlagInit(gCourseInfos);
@@ -321,7 +321,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
     sp18 = 0;
     if (D_802CB6D0.controlPointCount < 4) {
         gExpansionKitYesNoOptionIndex = 0;
-        D_800D6CA0.unk_08 = 0x10;
+        D_800D6CA0.state = 0x10;
         D_xk2_80104378 = 9;
         return;
     }
@@ -331,7 +331,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
     while (true) {
         if (D_xk2_80104CA0[i] != 0) {
             gExpansionKitYesNoOptionIndex = 0;
-            D_800D6CA0.unk_08 = 0x10;
+            D_800D6CA0.state = 0x10;
             D_xk2_80104378 = 7;
             break;
         }
@@ -340,7 +340,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
             D_xk2_80104CA0[7] = 0;
             if ((func_i2_800B39B4(courseInfo) != -1) || (func_i2_800BE8BC(courseInfo) != -1)) {
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
                 D_xk2_80104378 = 7;
                 break;
             }
@@ -348,7 +348,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
             temp_v0 = func_800A1954(courseInfo);
             if (temp_v0 != 0) {
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
                 D_xk2_80104378 = 7;
                 if (temp_v0 & 0x10000) {
                     D_xk2_80104CA0[3] = 1;
@@ -365,7 +365,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
             Course_EffectsViewInteractDataInit(false);
             if (D_xk2_80104CA0[7] != 0) {
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
                 D_xk2_80104378 = 7;
                 sp18 = 1;
                 func_800A4D0C(0);
@@ -374,7 +374,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
             temp_v0 = func_800A1954(courseInfo);
             if (temp_v0 != 0) {
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
                 D_xk2_80104378 = 7;
                 sp18 = 1;
                 if (temp_v0 & 0x10000) {
@@ -391,7 +391,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
             Course_EffectsViewInteractDataInit(false);
             if (D_xk2_80104CA0[7] != 0) {
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
                 D_xk2_80104378 = 7;
                 sp18 = 1;
                 func_800A4D0C(0);
@@ -510,7 +510,7 @@ void func_xk2_800F2E4C(Gfx** gfxP) {
     s32 width;
     s32 height;
 
-    if ((D_800D6CA0.unk_08 != 3) || (D_80119880 != 4)) {
+    if ((D_800D6CA0.state != 3) || (D_80119880 != 4)) {
         return;
     }
 
@@ -566,7 +566,7 @@ void func_xk2_800F2E4C(Gfx** gfxP) {
     *gfxP = gfx;
 }
 
-extern s32 D_xk2_80119918;
+extern s32 gCourseEditCameraOnlyMode;
 
 void func_xk2_800F3164(Gfx** gfxP) {
     Gfx* gfx;
@@ -575,7 +575,7 @@ void func_xk2_800F3164(Gfx** gfxP) {
     s32 top;
     s32 width;
 
-    if (D_xk2_80119918 == 0) {
+    if (!gCourseEditCameraOnlyMode) {
         return;
     }
     gfx = *gfxP;
@@ -692,7 +692,7 @@ void func_xk2_800F3600(Gfx** gfxP) {
     Gfx* gfx;
     MenuWidget* sp2C;
 
-    if ((D_8076C96C == 0) || (D_800D6CA0.unk_08 != 1)) {
+    if ((D_8076C96C == 0) || (D_800D6CA0.state != 1)) {
         return;
     }
     sp2C = func_xk1_80026914(&gCourseEditWidget);
@@ -876,11 +876,11 @@ void func_xk2_800F3D10(void) {
         gCourseEditIconTextures[3] = aCourseEditGoldQuestionIconTex;
         D_8076C95C = 0;
         D_8076C960 = 0;
-        D_800D6CA0.unk_08 = 0;
+        D_800D6CA0.state = 0;
     }
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) {
         D_8076C95C = 0;
-        D_800D6CA0.unk_08 = 0;
+        D_800D6CA0.state = 0;
         func_xk2_800EE664(0x16);
     }
 }

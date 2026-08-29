@@ -166,7 +166,7 @@ char gEditCupTrackNames[6 * 4][9] = { 0 };
 #endif
 
 #ifdef EXPANSION_KIT
-s32 D_800D11C8[] = { 1, 1, 1, 1, 4, 0 };
+s32 gCourseEditOptions[] = { 1, 1, 1, 1, 4, 0 };
 #endif
 
 s32 gLivesChangeCounter = 0;

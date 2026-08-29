@@ -480,7 +480,7 @@ Gfx* MachineCreate_DrawMachinePartsMenu(Gfx* gfx) {
             sPartsTopPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x],
             sPartsRightPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x],
             sPartsBottomPositions[gMachineCreatePartsGrid.y][gMachineCreatePartsGrid.x], 255, 64, 64,
-            func_xk1_800290C0(), 2, 2);
+            EKWidget_GetMenuAlpha(), 2, 2);
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateOkTex, 264, 155, 32, 16);
     }
@@ -885,7 +885,7 @@ Gfx* MachineCreate_DrawGeneral(Gfx* gfx) {
                                                   31);
     } else {
         gDPSetTexturePersp(gfx++, G_TP_NONE);
-        func_xk1_800276B0(&gfx, &gMachineCreateWidget, gMachineCreateCursorPosX, gMachineCreateCursorPosY);
+        EKWidget_DrawWidgets(&gfx, &gMachineCreateWidget, gMachineCreateCursorPosX, gMachineCreateCursorPosY);
         switch (gWorksMachineMode) {
             case MACHINE_MODE_LOAD_GET_FILE:
             case MACHINE_MODE_LOAD_SELECT_FILE:

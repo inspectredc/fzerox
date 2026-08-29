@@ -24,29 +24,21 @@ UNUSED Mtx D_xk2_80104D90 = gdSPDefMtx(
 // clang-format on
 
 void func_xk2_800F1FF0(MtxF* arg0, MtxF* arg1, MtxF* arg2) {
-    MtxF* var_a3;
     s32 i;
+    s32 j;
     MtxF sp10;
-    s32 var_t0 = 0;
 
-    var_a3 = &sp10;
-    // FAKE var_t0
     for (i = 0; i != 4; i++) {
-        var_a3->m[i][0] = (arg0->m[i][0] * arg1->m[0][var_t0 + 0]) + (arg0->m[i][1] * arg1->m[1][var_t0 + 0]) +
-                          (arg0->m[i][2] * arg1->m[2][var_t0 + 0]) + (arg0->m[i][3] * arg1->m[3][var_t0 + 0]);
-        var_a3->m[i][1] = (arg0->m[i][0] * arg1->m[0][var_t0 + 1]) + (arg0->m[i][1] * arg1->m[1][var_t0 + 1]) +
-                          (arg0->m[i][2] * arg1->m[2][var_t0 + 1]) + (arg0->m[i][3] * arg1->m[3][var_t0 + 1]);
-        var_a3->m[i][2] = (arg0->m[i][0] * arg1->m[0][var_t0 + 2]) + (arg0->m[i][1] * arg1->m[1][var_t0 + 2]) +
-                          (arg0->m[i][2] * arg1->m[2][var_t0 + 2]) + (arg0->m[i][3] * arg1->m[3][var_t0 + 2]);
-        var_a3->m[i][3] = (arg0->m[i][0] * arg1->m[0][var_t0 + 3]) + (arg0->m[i][1] * arg1->m[1][var_t0 + 3]) +
-                          (arg0->m[i][2] * arg1->m[2][var_t0 + 3]) + (arg0->m[i][3] * arg1->m[3][var_t0 + 3]);
+        for (j = 0; j < 4; j++) {
+            sp10.m[i][j] = (arg0->m[i][0] * arg1->m[0][j]) + (arg0->m[i][1] * arg1->m[1][j]) + (arg0->m[i][2] * arg1->m[2][j]) + (arg0->m[i][3] * arg1->m[3][j]);
+        }
     }
 
     for (i = 0; i != 4; i++) {
-        arg2->m[i][0] = var_a3->m[i][0];
-        arg2->m[i][1] = var_a3->m[i][1];
-        arg2->m[i][2] = var_a3->m[i][2];
-        arg2->m[i][3] = var_a3->m[i][3];
+        arg2->m[i][0] = sp10.m[i][0];
+        arg2->m[i][1] = sp10.m[i][1];
+        arg2->m[i][2] = sp10.m[i][2];
+        arg2->m[i][3] = sp10.m[i][3];
     }
 }
 
@@ -129,7 +121,7 @@ void func_xk2_800F22CC(MtxF* arg0, f32 arg1, f32 arg2, f32 arg3) {
 void func_xk2_800F232C(MtxF* arg0, f32 arg1) {
     s32 temp_ft4;
 
-    temp_ft4 = (arg1 * 4096.0f) / 360.0f;
+    temp_ft4 = DEG_TO_FZXANG(arg1);
     arg0->m[0][0] = 1.0f;
     arg0->m[0][1] = 0.0f;
     arg0->m[0][2] = 0.0f;
@@ -151,7 +143,7 @@ void func_xk2_800F232C(MtxF* arg0, f32 arg1) {
 void func_xk2_800F23E4(MtxF* arg0, f32 arg1) {
     s32 temp_ft4;
 
-    temp_ft4 = (arg1 * 4096.0f) / 360.0f;
+    temp_ft4 = DEG_TO_FZXANG(arg1);
     arg0->m[0][0] = COS(temp_ft4);
     arg0->m[0][1] = 0.0f;
     arg0->m[0][2] = SIN(temp_ft4) * -1.0f;

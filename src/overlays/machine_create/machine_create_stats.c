@@ -157,7 +157,7 @@ Gfx* MachineCreate_DrawStatSelectionCursorAndOK(Gfx* gfx) {
                 (24 - 1),
             sMachineStatTopPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] +
                 (16 - 1),
-            255, 64, 64, func_xk1_800290C0(), 2, 2);
+            255, 64, 64, EKWidget_GetMenuAlpha(), 2, 2);
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateOkTex, 259, 98, 32, 16);
     }

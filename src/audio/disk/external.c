@@ -4,6 +4,7 @@
 #include "fzx_camera.h"
 #include "fzx_game.h"
 #include "fzx_racer.h"
+#include "fzx_expansion_kit.h"
 
 u8 sAudioRetireStatus = 0;
 u8 sActiveVoiceSE = 0;
@@ -453,14 +454,14 @@ void Audio_TriggerVoiceSEStart(u8 sfxId, u16 time) {
     }
 }
 
-extern s32 D_800D11C8[];
+extern s32 gCourseEditOptions[];
 
 void Audio_TriggerSystemSE(u8 sfxId) {
     u8 i;
 
     PRINTF("==BANDO== System SE = %02x\n", sfxId);
 
-    if ((D_80771C94 == 1) && (D_800D11C8[3] == 0)) {
+    if ((D_80771C94 == 1) && (gCourseEditOptions[COURSE_EDIT_OPTION_SFX] == 0)) {
         return;
     }
 
@@ -1412,7 +1413,7 @@ void Audio_EditorBgmDelaySet(void) {
 
     D_80771C8C++;
     if ((D_80771C8C > 180) && (D_80771C7C == 0)) {
-        if (D_800D11C8[2] == 1) {
+        if (gCourseEditOptions[COURSE_EDIT_OPTION_BGM] == 1) {
             AUDIOCMD_GLOBAL_INIT_SEQPLAYER(1, SEQ_DDBGM_COURSE_EDITOR, 0, 0);
             D_80771C74 = 1;
             sActiveBgm = BGM_COURSE_EDITOR;
@@ -1441,7 +1442,7 @@ void Audio_Editor2BgmDelaySet(void) {
 
     D_80771C90++;
     if ((D_80771C90 > 150) && (D_80771C7C == 0)) {
-        if (D_800D11C8[2] == 1) {
+        if (gCourseEditOptions[COURSE_EDIT_OPTION_BGM] == 1) {
             AUDIOCMD_GLOBAL_INIT_SEQPLAYER(1, SEQ_DDBGM_MACHINE_EDITOR, 0, 0);
             sActiveBgm = BGM_MACHINE_EDITOR;
         }
@@ -1470,7 +1471,7 @@ void Audio_EditorBgmStop(void) {
 // Na_Editor_Bgm_Restart
 void Audio_EditorBgmRestart(void) {
     PRINTF("==BANDO== Na_Editor_Bgm_Restart Called \n");
-    if (D_800D11C8[2] == 1) {
+    if (gCourseEditOptions[COURSE_EDIT_OPTION_BGM] == 1) {
         AUDIOCMD_GLOBAL_INIT_SEQPLAYER(1, SEQ_DDBGM_COURSE_EDITOR, 0, 0);
         D_80771C74 = 1;
         sActiveBgm = BGM_COURSE_EDITOR;

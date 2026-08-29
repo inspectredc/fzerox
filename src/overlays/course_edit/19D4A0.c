@@ -11,7 +11,7 @@ void func_xk2_800EB9E0(void) {
     if (SLCheckDiskChange2()) {
         func_807685D8(MFS_ENTRY_WORKING_DIR, "CRS_ENTRY", "CENT", gEditCupTrackNames, sizeof(gEditCupTrackNames));
     }
-    D_800D6CA0.unk_08 = 0x36;
+    D_800D6CA0.state = 0x36;
 }
 
 void func_xk2_800EBA34(void) {
@@ -31,12 +31,12 @@ void func_xk2_800EBA34(void) {
         }
     }
     D_xk2_80103F14 = 0;
-    D_800D6CA0.unk_08 = 0x20;
+    D_800D6CA0.state = 0x20;
 }
 
 extern Gfx D_8014940[];
 
-extern s32 D_xk1_8003A554;
+extern s32 gCourseEditMenuCursorYPos;
 extern s32 D_xk1_80032AD0;
 
 Gfx* func_xk2_800EBB24(Gfx* gfx) {
@@ -45,9 +45,9 @@ Gfx* func_xk2_800EBB24(Gfx* gfx) {
     s32 var_s2;
     u8* var_s3;
 
-    temp_s4 = (D_xk1_8003A554 - 0x34) / 8;
+    temp_s4 = (gCourseEditMenuCursorYPos - 0x34) / 8;
 
-    if (D_800D6CA0.unk_08 != 0x20) {
+    if (D_800D6CA0.state != 0x20) {
         return gfx;
     }
 
@@ -96,9 +96,9 @@ Gfx* func_xk2_800EBB24(Gfx* gfx) {
 extern s32 gCourseEditEntryOption;
 
 void func_xk2_800EBE14(void) {
-    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) && (D_800D6CA0.unk_08 == 0x20)) {
+    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) && (D_800D6CA0.state == 0x20)) {
         Audio_TriggerSystemSE(NA_SE_37);
-        D_800D6CA0.unk_08 = 0;
+        D_800D6CA0.state = 0;
         gCourseEditEntryOption = -1;
     }
 }
@@ -112,7 +112,7 @@ void func_xk2_800EBE90(void) {
     if (sp1C != D_xk2_80103F14) {
         Audio_TriggerSystemSE(NA_SE_35);
     }
-    D_xk1_8003A554 = (D_xk2_80103F14 * 8) + 0x38;
+    gCourseEditMenuCursorYPos = (D_xk2_80103F14 * 8) + 0x38;
 }
 
 extern s32 D_80119880;
@@ -121,19 +121,19 @@ extern s32 gExpansionKitYesNoOptionIndex;
 extern u8 D_xk2_800F7400;
 
 void func_xk2_800EBEF4(void) {
-    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & 0x8000) && (D_800D6CA0.unk_08 == 0x20)) {
+    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & 0x8000) && (D_800D6CA0.state == 0x20)) {
         Audio_TriggerSystemSE(NA_SE_36);
-        D_xk2_80103F10 = (D_xk1_8003A554 - 0x34) / 8;
+        D_xk2_80103F10 = (gCourseEditMenuCursorYPos - 0x34) / 8;
         switch (D_80119890) {
             case 0:
-                D_800D6CA0.unk_08 = 0x31;
+                D_800D6CA0.state = 0x31;
                 D_80119880 = 5;
                 func_8076877C(0, "CRSD");
                 D_xk2_800F7400 = 1;
                 break;
             case 1:
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x23;
+                D_800D6CA0.state = 0x23;
                 break;
         }
     }

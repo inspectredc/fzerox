@@ -98,7 +98,7 @@ s32 Race_Update(void) {
     Camera_Update();
     Background_Update();
     Course_Update();
-    func_80074844();
+    Course_UpdateSignRotation();
 
     return gGameMode;
 }

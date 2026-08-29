@@ -10,8 +10,8 @@
 
 extern s32 D_80119890;
 
-s32 D_xk1_8003A550;
-s32 D_xk1_8003A554;
+s32 gCourseEditMenuCursorXPos;
+s32 gCourseEditMenuCursorYPos;
 
 #include ASSET_SOURCE_EK(overlays/expansion_kit/aA3AE0/aA3AE0.c)
 
@@ -20,7 +20,7 @@ s32 gLastCourseBGM = -1;
 bool gMenuWidgetOpen = false;
 s32 D_xk1_800305FC = 0;
 s32 sMenuHighlightAlpha = 0;
-s32 D_xk1_80030604 = 8;
+s32 sMenuHighlightAlphaDirection = 8;
 s32 D_xk1_80030608 = 500;
 s32 sMenuPageYOffset = 0;
 s32 gCourseEditFileOption = INVALID_OPTION;
@@ -701,15 +701,15 @@ void func_xk1_80026870(void) {
 
     D_80119890 = 0;
     func_xk2_800EB9E0();
-    D_xk1_8003A550 = 0x110;
-    D_xk1_8003A554 = 0x38;
+    gCourseEditMenuCursorXPos = 0x110;
+    gCourseEditMenuCursorYPos = 0x38;
 }
 
 void func_xk1_800268A8(void) {
     D_80119890 = 1;
     func_xk2_800EB9E0();
-    D_xk1_8003A550 = 0x110;
-    D_xk1_8003A554 = 0x38;
+    gCourseEditMenuCursorXPos = 0x110;
+    gCourseEditMenuCursorYPos = 0x38;
 }
 
 extern unk_800D6CA0 D_800D6CA0;
@@ -718,7 +718,7 @@ extern s32 gExpansionKitYesNoOptionIndex;
 void func_xk1_800268E4(void) {
     D_80119890 = 2;
     gExpansionKitYesNoOptionIndex = 0;
-    D_800D6CA0.unk_08 = 0x23;
+    D_800D6CA0.state = 0x23;
 }
 
 void ExpansionKit_SetMenuHighlightDrawFlag(bool shouldHighlight) {
@@ -814,7 +814,7 @@ void EKWidget_SetCursorToWidget(MenuWidget* widget, s32* cursorPosXPtr, s32* cur
     }
 }
 
-void func_xk1_80026B44(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 cursorPosY) {
+void EKWidget_DrawMenuItems(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 cursorPosY) {
     s32 temp_ra;
     s32 temp_s0;
     s32 highlightedIndex;
@@ -905,7 +905,7 @@ void func_xk1_80026B44(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 curso
             gSPTextureRectangle(gfx++, (temp_ra + 28) << 2, temp_s0 << 2, (temp_ra + 44) << 2, (temp_s0 + 16) << 2, 0,
                                 0, 0, 1 << 10, 1 << 10);
         }
-        if ((i == highlightedIndex) && (D_800D6CA0.unk_08 != 3) &&
+        if ((i == highlightedIndex) && (D_800D6CA0.state != 3) &&
             !((widget == &gCourseEditWidget) && (highlightedIndex == 5))) {
             gDPPipeSync(gfx++);
             gDPSetCombineLERP(gfx++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0,
@@ -928,7 +928,7 @@ void func_xk1_80026B44(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 curso
 
 extern u32 gGameFrameCount;
 
-void func_xk1_800276B0(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 cursorPosY) {
+void EKWidget_DrawWidgets(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 cursorPosY) {
     Gfx* gfx;
 
     gfx = *gfxP;
@@ -939,19 +939,19 @@ void func_xk1_800276B0(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 curso
     gDPSetRenderMode(gfx++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    sMenuHighlightAlpha += D_xk1_80030604 * func_xk1_80025C0C();
+    sMenuHighlightAlpha += sMenuHighlightAlphaDirection * ExpansionKit_GetMenuHighlightAlphaChangeScale();
 
     if (sMenuHighlightAlpha > 255) {
         sMenuHighlightAlpha = 255;
-        D_xk1_80030604 = -4;
+        sMenuHighlightAlphaDirection = -4;
     }
     if (sMenuHighlightAlpha < 100) {
         // clang-format off
         sMenuHighlightAlpha = 100; \
-        D_xk1_80030604 = 4;
+        sMenuHighlightAlphaDirection = 4;
         // clang-format on
     }
-    func_xk1_80026B44(&gfx, widget, cursorPosX, cursorPosY);
+    EKWidget_DrawMenuItems(&gfx, widget, cursorPosX, cursorPosY);
 
     while (true) {
         if (widget->itemXOffset != 0) {
@@ -970,7 +970,7 @@ void func_xk1_800276B0(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 curso
         widget = widget->menuItems[widget->openIndex].widget;
     }
 
-    func_xk1_80026B44(&gfx, widget, cursorPosX, cursorPosY);
+    EKWidget_DrawMenuItems(&gfx, widget, cursorPosX, cursorPosY);
 
     gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 8, 308, 232);
 
@@ -1043,7 +1043,7 @@ void EKWidget_CloseWidget(MenuWidget* widget) {
 void func_xk1_80027C80(MenuWidget* widget) {
     s32 index;
 
-    if (D_800D6CA0.unk_08 != 1 || !gMenuWidgetOpen) {
+    if (D_800D6CA0.state != 1 || !gMenuWidgetOpen) {
         return;
     }
     while (true) {
@@ -1061,7 +1061,7 @@ void func_xk1_80027C80(MenuWidget* widget) {
     widget->highlightedIndex = INVALID_OPTION;
     gMenuWidgetOpen = false;
     sMenuPageYOffset = 0;
-    D_800D6CA0.unk_08 = 0;
+    D_800D6CA0.state = 0;
 }
 
 extern s32 D_xk2_800F7048;
@@ -1187,21 +1187,21 @@ void func_xk1_80028064(void) {
             func_8076877C(1, "CRSD");
             PRINTF("LESS POINT\n");
             D_80119880 = 0;
-            D_800D6CA0.unk_08 = 50;
+            D_800D6CA0.state = 50;
             break;
         case FILE_OPTION_SAVE:
             D_80119880 = 1;
             func_xk2_800F27DC(gCurrentCourseInfo);
             if (D_802CB6D0.controlPointCount < 4) {
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 16;
+                D_800D6CA0.state = 16;
                 D_xk2_80104378 = 9;
                 D_80119880 = -2;
             } else {
                 D_xk1_80032BF8 = false;
                 func_8076877C(1, "CRSD");
                 PRINTF("NAME\n");
-                D_800D6CA0.unk_08 = 50;
+                D_800D6CA0.state = 50;
             }
             break;
         case FILE_OPTION_RENAME:
@@ -1209,20 +1209,20 @@ void func_xk1_80028064(void) {
             func_8076877C(0, "CRSD");
             PRINTF("DELETE\n");
             D_80119880 = 3;
-            D_800D6CA0.unk_08 = 50;
+            D_800D6CA0.state = 50;
             break;
         case FILE_OPTION_ERASE:
             D_xk1_80032BF8 = false;
             func_8076877C(0, "CRSD");
             D_80119880 = 2;
-            D_800D6CA0.unk_08 = 50;
+            D_800D6CA0.state = 50;
             break;
         case FILE_OPTION_COPY:
             D_xk1_80032BF8 = false;
             func_8076877C(0, "CRSD");
             PRINTF("BGM NO. SET %d\n");
             D_80119880 = 7;
-            D_800D6CA0.unk_08 = 50;
+            D_800D6CA0.state = 50;
             break;
     }
 }
@@ -1355,9 +1355,9 @@ void func_xk1_80028250(void) {
 
 extern u8 D_80030060[];
 extern u8 D_xk2_80104CA0[];
-extern s32 D_xk2_80104CB0;
-extern s32 D_xk2_80104CB8;
-extern s32 D_xk2_80104CC0;
+extern s32 gCourseEditCameraPitch;
+extern s32 gCourseEditCameraAtX;
+extern s32 gCourseEditCameraAtZ;
 extern s32 D_xk2_800F7044;
 extern s32 D_xk2_800F7058;
 extern f32 D_xk2_80119744;
@@ -1369,10 +1369,10 @@ void func_xk1_8002860C(void) {
     func_xk2_800EF78C();
     func_xk2_800F5C50();
     D_80030060[0] = '\0';
-    D_xk2_80104CB8 = 0;
-    D_xk2_80104CC0 = 0;
-    D_xk2_80104CB0 = 90;
-    D_800D6CA0.unk_14 = 0;
+    gCourseEditCameraAtX = 0;
+    gCourseEditCameraAtZ = 0;
+    gCourseEditCameraPitch = 90;
+    D_800D6CA0.courseYaw = 0;
     D_xk2_800F7044 = 0;
     D_802CB6D0.controlPointCount = 0;
     gCurrentCourseInfo->segmentCount = 0;
@@ -1380,7 +1380,7 @@ void func_xk1_8002860C(void) {
     D_800D6CA0.unk_0C = -1;
     D_800D6CA0.unk_04 = 0;
     D_800D6CA0.unk_1C = -1;
-    if (D_800D6CA0.unk_08 != 0x10) {
+    if (D_800D6CA0.state != 0x10) {
         func_xk2_800F12B0();
     }
     D_xk2_80104CA0[3] = 0;
@@ -1417,7 +1417,7 @@ void func_xk1_80028708(void) {
             return;
         case POINT_OPTION_CLEAR_ALL:
             gExpansionKitYesNoOptionIndex = 0;
-            D_800D6CA0.unk_08 = 0x11;
+            D_800D6CA0.state = 0x11;
             break;
         case POINT_OPTION_SET:
         case POINT_OPTION_START:
@@ -1659,13 +1659,13 @@ void func_xk1_80028F50(void) {
     }
 }
 
-extern s32 D_800D11C8[];
+extern s32 gCourseEditOptions[];
 
 void func_xk1_80028F94(void) {
 
     if ((gBGMWidget.openIndex != INVALID_OPTION) && (func_807424CC() == 0)) {
         if (gLastCourseBGM != gBGMOptionToCourseBGM[gBGMOption]) {
-            if (D_800D11C8[3] != 0) {
+            if (gCourseEditOptions[COURSE_EDIT_OPTION_SFX] != 0) {
                 Audio_TriggerSystemSE(NA_SE_36);
             }
             gLastCourseBGM = gBGMOptionToCourseBGM[gBGMOption];
@@ -1689,6 +1689,6 @@ s32 func_xk1_800290B4(void) {
     return sMenuPageYOffset;
 }
 
-s32 func_xk1_800290C0(void) {
+s32 EKWidget_GetMenuAlpha(void) {
     return sMenuHighlightAlpha;
 }

@@ -31,7 +31,7 @@ void MachineCreate_Init(void) {
     MachineCreate_InitView();
     func_xk1_8002E9D0(1);
     ExpansionKit_SetInputIndicatorFlashRate(1);
-    func_xk1_80025C00(1);
+    ExpansionKit_SetMenuHighlightAlphaChangeScale(1);
     EKFileMenu_SetFileListArrowFlashLength(12);
     func_xk1_80025F98();
     EKFileMenu_InitFileMenu(168, 87, &gMachineCreateCursorPosX, &gMachineCreateCursorPosY);

@@ -22,7 +22,7 @@ void func_xk2_800EA9B0(s8* arg0, s8* arg1) {
 extern s32 gMfsError;
 
 void func_xk2_800EA9DC(char* errorMessage) {
-    if (gMfsError < 0x2A) {
+    if (gMfsError <= LEO_ERROR_DEVICE_COMMUNICATION_FAILURE) {
         PRINTF("%s DEVICE COMMUNICATION FAILURE\n", errorMessage);
         return;
     }
@@ -80,17 +80,17 @@ s32 func_xk2_800EAA1C(u8* arg0) {
     if ((EKFileMenu_GetFileCount() > 100) && (D_80119880 == -1)) {
         D_xk2_80104378 = 6;
         gExpansionKitYesNoOptionIndex = 0;
-        D_800D6CA0.unk_08 = 0x10;
+        D_800D6CA0.state = 0x10;
         return -1;
     }
     COURSE_CONTEXT()->courseData.creatorId = CREATOR_NINTENDO;
     COURSE_CONTEXT()->courseData.controlPointCount = D_802CB6D0.controlPointCount;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        COURSE_CONTEXT()->courseData.controlPoint[i].pos = D_802CB6D0.unk_0000[i].pos;
-        COURSE_CONTEXT()->courseData.controlPoint[i].radiusLeft = D_802CB6D0.unk_0000[i].radiusLeft;
-        COURSE_CONTEXT()->courseData.controlPoint[i].radiusRight = D_802CB6D0.unk_0000[i].radiusRight;
-        COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo = D_802CB6D0.unk_0000[i].trackSegmentInfo;
+        COURSE_CONTEXT()->courseData.controlPoint[i].pos = D_802CB6D0.segments[i].pos;
+        COURSE_CONTEXT()->courseData.controlPoint[i].radiusLeft = D_802CB6D0.segments[i].radiusLeft;
+        COURSE_CONTEXT()->courseData.controlPoint[i].radiusRight = D_802CB6D0.segments[i].radiusRight;
+        COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo = D_802CB6D0.segments[i].trackSegmentInfo;
     }
     sp18 = Course_CalculateChecksum();
     ghostSave = COURSE_CONTEXT()->ghostSave;
@@ -108,11 +108,11 @@ s32 func_xk2_800EAA1C(u8* arg0) {
         if (COURSE_CONTEXT()->courseData.flag != 0) {
             mfsStrCpy(D_xk1_8003A598.name, arg0);
             func_xk2_800EA9B0(D_xk1_8003A598.extension, "CRSD");
-            D_800D6CA0.unk_08 = 0x14;
+            D_800D6CA0.state = 0x14;
         } else {
             mfsStrCpy(D_xk1_8003A598.name, arg0);
             func_xk2_800EA9B0(D_xk1_8003A598.extension, "CRSE");
-            D_800D6CA0.unk_08 = 0x14;
+            D_800D6CA0.state = 0x14;
         }
     }
     mfsStrCpy(D_80030060, arg0);
@@ -124,11 +124,11 @@ s32 func_xk2_800EAC28(u8* arg0) {
     if (D_xk2_800F7408.courseData.flag != 0) {
         mfsStrCpy(&D_xk1_8003A598, arg0);
         func_xk2_800EA9B0(D_xk1_8003A598.extension, "CRSD");
-        D_800D6CA0.unk_08 = 0x14;
+        D_800D6CA0.state = 0x14;
     } else {
         mfsStrCpy(&D_xk1_8003A598, arg0);
         func_xk2_800EA9B0(D_xk1_8003A598.extension, "CRSE");
-        D_800D6CA0.unk_08 = 0x14;
+        D_800D6CA0.state = 0x14;
     }
     return 0;
 }
@@ -181,15 +181,15 @@ void func_xk2_800EACB0(void) {
     courseInfo = &gCourseInfos[0];
     D_802CB6D0.controlPointCount = courseInfo->segmentCount;
     for (i = 0; i < courseInfo->segmentCount; i++) {
-        D_802CB6D0.unk_0000[i] = D_802D0620[i];
-        D_802CB6D0.unk_0000[i].segmentIndex = i;
-        D_802CB6D0.unk_0000[i].next = &D_802CB6D0.unk_0000[i + 1];
-        D_802CB6D0.unk_0000[i].prev = &D_802CB6D0.unk_0000[i - 1];
+        D_802CB6D0.segments[i] = D_802D0620[i];
+        D_802CB6D0.segments[i].segmentIndex = i;
+        D_802CB6D0.segments[i].next = &D_802CB6D0.segments[i + 1];
+        D_802CB6D0.segments[i].prev = &D_802CB6D0.segments[i - 1];
     }
 
     D_800D6CA0.unk_0C = 0;
-    D_802CB6D0.unk_0000[0].prev = &D_802CB6D0.unk_0000[courseInfo->segmentCount - 1];
-    D_802CB6D0.unk_0000[courseInfo->segmentCount - 1].next = &D_802CB6D0.unk_0000[0];
+    D_802CB6D0.segments[0].prev = &D_802CB6D0.segments[courseInfo->segmentCount - 1];
+    D_802CB6D0.segments[courseInfo->segmentCount - 1].next = &D_802CB6D0.segments[0];
     func_xk2_800DC3F8();
     func_xk2_800EF78C();
     func_xk2_800F0FE8();
@@ -207,7 +207,7 @@ s32 func_xk2_800EAF24(EKLoadedFile* arg0) {
     D_xk2_800F7400 = 0;
     func_80768574(MFS_ENTRY_WORKING_DIR, arg0->name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension,
                   &D_xk2_800F7408, sizeof(CourseContext));
-    mfsStrCpy(&D_80030060, arg0);
+    mfsStrCpy(D_80030060, arg0);
     return 0;
 }
 
@@ -223,8 +223,8 @@ extern s32 gCourseEditFileOption;
 extern s32 gCourseEditEntryOption;
 extern bool D_xk1_80032BF8;
 extern s32 D_xk2_800F684C;
-extern s32 D_xk1_8003A550;
-extern s32 D_xk1_8003A554;
+extern s32 gCourseEditMenuCursorXPos;
+extern s32 gCourseEditMenuCursorYPos;
 
 void func_xk2_800EB018(void) {
     s32 pad;
@@ -236,15 +236,15 @@ void func_xk2_800EB018(void) {
         if ((EKFileMenu_GetFileCount() == 0) && (D_80119880 != 1)) {
             gCourseEditFileOption = -1;
             gCourseEditEntryOption = -1;
-            D_800D6CA0.unk_08 = 0;
+            D_800D6CA0.state = 0;
             return;
         }
-        D_800D6CA0.unk_08 = 3;
+        D_800D6CA0.state = 3;
         switch (D_80119880) {
             case 0:
                 mfsStrCpy(gExpansionKitLoadedFiles[0].name, "OFFICIAL");
                 mfsStrCpy(gExpansionKitLoadedFiles[0].extension, "CRSD");
-                EKFileMenu_InitFileMenu(0xA8, 0x68, &D_xk1_8003A550, &D_xk1_8003A554);
+                EKFileMenu_InitFileMenu(0xA8, 0x68, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
                 D_xk2_800F684C = 0;
                 break;
             case 1:
@@ -254,20 +254,20 @@ void func_xk2_800EB018(void) {
                 PRINTF("EDIT_MODE_COURSE 09\n");
                 PRINTF("EDIT_MODE_FILE_LOADING 0\n");
                 PRINTF("EDIT_MODE_COURSE 11\n");
-                EKFileMenu_InitFileMenu(0xA8, 0x68, &D_xk1_8003A550, &D_xk1_8003A554);
+                EKFileMenu_InitFileMenu(0xA8, 0x68, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
                 D_xk2_800F684C = 0;
                 break;
             case 5:
-                EKFileMenu_InitFileMenu(0xD8, 0x68, &D_xk1_8003A550, &D_xk1_8003A554);
+                EKFileMenu_InitFileMenu(0xD8, 0x68, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
                 D_xk2_800F684C = 0;
                 break;
             case 7:
-                EKFileMenu_InitFileMenu(0xA8, 0x68, &D_xk1_8003A550, &D_xk1_8003A554);
+                EKFileMenu_InitFileMenu(0xA8, 0x68, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
                 D_xk2_800F684C = 0;
                 break;
             default:
                 D_xk2_800F684C = 0;
-                EKFileMenu_InitFileMenu(0xA8, 0x68, &D_xk1_8003A550, &D_xk1_8003A554);
+                EKFileMenu_InitFileMenu(0xA8, 0x68, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
                 break;
         }
     }
@@ -309,11 +309,11 @@ void func_xk2_800EB304(char* name, s32 attr) {
 }
 
 void func_xk2_800EB3B4(void) {
-    if (D_800D6CA0.unk_08 != 3) {
+    if (D_800D6CA0.state != 3) {
         return;
     }
     func_xk1_8002BD34();
-    D_800D6CA0.unk_08 = 0;
+    D_800D6CA0.state = 0;
     gCourseEditFileOption = -1;
     gCourseEditEntryOption = -1;
 }
@@ -328,7 +328,7 @@ void func_xk2_800EB400(void) {
     s32 courseIndex;
     EKLoadedFile* temp_v1;
 
-    if (D_800D6CA0.unk_08 != 3) {
+    if (D_800D6CA0.state != 3) {
         return;
     }
     Audio_TriggerSystemSE(NA_SE_36);
@@ -347,21 +347,21 @@ void func_xk2_800EB400(void) {
                 D_80030060[0] = 0;
                 func_xk2_800EACB0();
                 gCourseEditFileOption = -1;
-                D_800D6CA0.unk_08 = 0;
+                D_800D6CA0.state = 0;
                 D_xk2_800F7040 = 3;
                 D_xk2_800F7060 = Math_Rand2() % 30;
                 D_xk2_800F7064 = Math_Rand2() % 4;
             } else {
                 D_xk2_80104378 = 1;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
             }
             break;
         case 8:
             Course_Load(courseIndex);
             func_xk2_800EACB0();
             gCourseEditFileOption = -1;
-            D_800D6CA0.unk_08 = 0x30;
+            D_800D6CA0.state = 0x30;
             D_80119880 = 7;
             D_xk2_800F7040 = 3;
             D_xk2_800F7060 = Math_Rand2() % 30;
@@ -375,11 +375,11 @@ void func_xk2_800EB400(void) {
                 func_xk2_800F5C50();
                 func_xk2_800EAF24(&gExpansionKitLoadedFiles[courseIndex]);
                 gCourseEditFileOption = -1;
-                D_800D6CA0.unk_08 = 0x13;
+                D_800D6CA0.state = 0x13;
             } else {
                 D_xk2_80104378 = 1;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
             }
             break;
         case 1:
@@ -388,23 +388,23 @@ void func_xk2_800EB400(void) {
                 if ((EKFileMenu_GetFileCount() - 1) >= 100) {
                     D_xk2_80104378 = 6;
                     gExpansionKitYesNoOptionIndex = 0;
-                    D_800D6CA0.unk_08 = 0x10;
+                    D_800D6CA0.state = 0x10;
                 } else {
                     ExpansionKit_NameEntryClear();
                     ExpansionKit_NameEntryInit(func_xk1_8002AC24);
-                    D_xk1_8003A550 = 0x58;
-                    D_xk1_8003A554 = 0x68;
-                    D_800D6CA0.unk_08 = 2;
+                    gCourseEditMenuCursorXPos = 0x58;
+                    gCourseEditMenuCursorYPos = 0x68;
+                    D_800D6CA0.state = 2;
                 }
             } else {
                 if (gExpansionKitLoadedFiles[courseIndex].attr & MFS_FILE_ATTR_FORBID_W) {
                     D_xk2_80104378 = 8;
                     gExpansionKitYesNoOptionIndex = 0;
-                    D_800D6CA0.unk_08 = 0x10;
+                    D_800D6CA0.state = 0x10;
                 } else {
                     D_xk2_80104378 = 2;
                     gExpansionKitYesNoOptionIndex = 0;
-                    D_800D6CA0.unk_08 = 0x10;
+                    D_800D6CA0.state = 0x10;
                 }
             }
             break;
@@ -414,30 +414,30 @@ void func_xk2_800EB400(void) {
             if (gExpansionKitLoadedFiles[courseIndex].attr & MFS_FILE_ATTR_FORBID_W) {
                 D_xk2_80104378 = 8;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
             } else {
                 ExpansionKit_NameEntryClear();
                 ExpansionKit_NameEntryInit(func_xk1_8002AC24);
-                D_xk1_8003A550 = 0x58;
-                D_xk1_8003A554 = 0x68;
-                D_800D6CA0.unk_08 = 2;
+                gCourseEditMenuCursorXPos = 0x58;
+                gCourseEditMenuCursorYPos = 0x68;
+                D_800D6CA0.state = 2;
             }
             break;
         case 2:
             if (gExpansionKitLoadedFiles[courseIndex].attr & MFS_FILE_ATTR_FORBID_W) {
                 D_xk2_80104378 = 8;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
             } else {
                 D_xk2_80104378 = 3;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
             }
             break;
         case 4:
             func_xk2_800EB304(gExpansionKitLoadedFiles[courseIndex].name, gExpansionKitLoadedFiles[courseIndex].attr);
             gCourseEditFileOption = -1;
-            D_800D6CA0.unk_08 = 0;
+            D_800D6CA0.state = 0;
             break;
         case 5:
             if (gExpansionKitLoadedFiles[D_xk2_80119884].extension[3] == 'E') {
@@ -447,14 +447,14 @@ void func_xk2_800EB400(void) {
             }
             mfsStrCpy(gEditCupTrackNames[D_xk2_80103F10], gExpansionKitLoadedFiles[courseIndex].name);
             func_xk2_800EC110();
-            D_800D6CA0.unk_08 = 0x37;
+            D_800D6CA0.state = 0x37;
             break;
         case 7:
             ExpansionKit_NameEntryClear();
             mfsStrCpy(gExpansionKitNameEntryStr, gExpansionKitLoadedFiles[courseIndex].name);
             func_xk2_800EAFA8(gExpansionKitLoadedFiles[courseIndex].name);
             gCourseEditFileOption = -1;
-            D_800D6CA0.unk_08 = 0x33;
+            D_800D6CA0.state = 0x33;
             break;
         default:
             break;

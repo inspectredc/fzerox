@@ -125,7 +125,7 @@ Gfx* MachineCreate_DrawColorSelectionCursor(Gfx* gfx) {
         gfx = ExpansionKit_DrawRectangleBorderHighlight(
             gfx, gMachineCreateColorGrid.x * 15 + 168, gMachineCreateColorGrid.y * 15 + 44,
             (gMachineCreateColorGrid.x + 1) * 15 + 168, (gMachineCreateColorGrid.y + 1) * 15 + 44, 255, 64, 64,
-            func_xk1_800290C0(), 2, 2);
+            EKWidget_GetMenuAlpha(), 2, 2);
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateOkTex, 257, 165, 32, 16);
     }

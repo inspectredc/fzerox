@@ -11,9 +11,9 @@ s32 D_xk2_80128D50;
 s32 D_xk2_80128D54;
 s32 D_xk2_80128D58;
 s32 D_xk2_80128D5C;
-f32 D_xk2_80128D60;
-f32 D_xk2_80128D64;
-f32 D_xk2_80128D68;
+f32 sCourseEditCameraForwardX;
+f32 sCourseEditCameraForwardY;
+f32 sCourseEditCameraForwardZ;
 s32 D_xk2_80128D6C;
 
 u8 D_xk2_80104CA0[12] = { 0 };
@@ -26,7 +26,7 @@ void func_xk2_800F12B0(void) {
     D_800D6CA0.unk_1C = -1;
 
     for (i = 0; i < 12; i++) {
-        if ((i != 0xA) && (i != 1) && (i != 3)) {
+        if ((i != 10) && (i != 1) && (i != 3)) {
             D_xk2_80104CA0[i] = 0;
         }
     }
@@ -46,101 +46,92 @@ u8 func_xk2_800F1350(s32 arg0) {
 }
 
 UNUSED s32 D_xk2_80104CAC = 0;
-s32 D_xk2_80104CB0 = 90;
-s32 D_xk2_80104CB4 = 15000;
-s32 D_xk2_80104CB8 = 0;
-s32 D_xk2_80104CBC = 0;
-s32 D_xk2_80104CC0 = 0;
+s32 gCourseEditCameraPitch = 90;
+s32 gCourseEditCameraZoom = 15000;
+s32 gCourseEditCameraAtX = 0;
+s32 gCourseEditCameraAtY = 0;
+s32 gCourseEditCameraAtZ = 0;
 
 void func_xk2_800F1360(void) {
-    D_xk2_80128D48 = D_xk2_80104CB0;
-    D_xk2_80128D4C = D_800D6CA0.unk_14;
-    D_xk2_80128D50 = D_xk2_80104CB4;
-    D_xk2_80128D54 = D_xk2_80104CB8;
-    D_xk2_80128D58 = D_xk2_80104CBC;
-    D_xk2_80128D5C = D_xk2_80104CC0;
+    D_xk2_80128D48 = gCourseEditCameraPitch;
+    D_xk2_80128D4C = D_800D6CA0.courseYaw;
+    D_xk2_80128D50 = gCourseEditCameraZoom;
+    D_xk2_80128D54 = gCourseEditCameraAtX;
+    D_xk2_80128D58 = gCourseEditCameraAtY;
+    D_xk2_80128D5C = gCourseEditCameraAtZ;
 }
 
 void func_xk2_800F13C4(void) {
-    D_xk2_80104CB0 = D_xk2_80128D48;
-    D_800D6CA0.unk_14 = D_xk2_80128D4C;
-    D_xk2_80104CB4 = D_xk2_80128D50;
-    D_xk2_80104CB8 = D_xk2_80128D54;
-    D_xk2_80104CBC = D_xk2_80128D58;
-    D_xk2_80104CC0 = D_xk2_80128D5C;
+    gCourseEditCameraPitch = D_xk2_80128D48;
+    D_800D6CA0.courseYaw = D_xk2_80128D4C;
+    gCourseEditCameraZoom = D_xk2_80128D50;
+    gCourseEditCameraAtX = D_xk2_80128D54;
+    gCourseEditCameraAtY = D_xk2_80128D58;
+    gCourseEditCameraAtZ = D_xk2_80128D5C;
 }
 
-extern Mtx D_2000000[];
+extern unk_80225800 D_2000000;
 extern bool gInCourseEditTestRun;
 extern unk_80128C94 D_6000000;
 extern unk_80128C94* D_80128C94;
 
-#ifdef NON_MATCHING
-// stack
 Gfx* func_xk2_800F1428(Gfx* gfx) {
-    u16 sp13E;
-    s32 pad[9];
-    s32 temp_v0;
-    s32 temp_v1;
+    u16 perspectiveScale;
+    s32 pad[11];
     Camera* camera = gCameras;
-    Mtx spC8;
-    MtxF sp88;
+    Mtx mtx;
+    MtxF mtxF;
 
     if (gInCourseEditTestRun) {
         return Camera_DrawCourseEditTestRun(gfx);
     }
     if (gInCourseEditTestRun) {
-        Matrix_SetFrustrum(&D_80128C94->unk_0000, NULL, (gCameras[0].fov * 320.0f) / 240.0f, 32.0f, 4096.0f, 320.0f,
-                           0.0f, 240.0f, 0.0f, &sp13E);
+        Matrix_SetFrustrum(&D_80128C94->unk_0000, NULL, (gCameras[0].fov * SCREEN_WIDTH) / SCREEN_HEIGHT, 32.0f, 4096.0f, SCREEN_WIDTH,
+                           0.0f, SCREEN_HEIGHT, 0.0f, &perspectiveScale);
     } else {
-        Matrix_SetFrustrum(&D_80128C94->unk_0000, NULL, (gCameras[0].fov * 320.0f) / 240.0f, 128.0f, 32768.0f, 320.0f,
-                           0.0f, 240.0f, 0.0f, &sp13E);
-        sp13E = 0x10;
+        Matrix_SetFrustrum(&D_80128C94->unk_0000, NULL, (gCameras[0].fov * SCREEN_WIDTH) / SCREEN_HEIGHT, 128.0f, 32768.0f, SCREEN_WIDTH,
+                           0.0f, SCREEN_HEIGHT, 0.0f, &perspectiveScale);
+        perspectiveScale = 16;
     }
-    gSPPerspNormalize(gfx++, sp13E);
+    gSPPerspNormalize(gfx++, perspectiveScale);
     gSPMatrix(gfx++, &D_6000000.unk_0000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     Matrix_FromMtx(&D_80128C94->unk_0000, &gCameras[0].projectionMtx);
-    temp_v0 = (D_xk2_80104CB0 * 0x1000) / 360;
-    D_xk2_80128D64 = SIN(temp_v0);
-    D_xk2_80128D68 = COS(temp_v0);
-    temp_v1 = (D_800D6CA0.unk_14 * 0x1000) / 360;
-    D_xk2_80128D60 = SIN(temp_v1) * D_xk2_80128D68;
-    D_xk2_80128D64 = (-1.0f * D_xk2_80128D64);
-    D_xk2_80128D68 = COS(temp_v1) * (-1.0f * D_xk2_80128D68);
-    gCameras[0].basis.x.x = D_xk2_80128D60;
-    gCameras[0].basis.x.y = D_xk2_80128D64;
-    gCameras[0].basis.x.z = D_xk2_80128D68;
+    sCourseEditCameraForwardY = SIN(DEG_TO_FZXANG(gCourseEditCameraPitch));
+    sCourseEditCameraForwardZ = COS(DEG_TO_FZXANG(gCourseEditCameraPitch));
+    sCourseEditCameraForwardX = SIN(DEG_TO_FZXANG(D_800D6CA0.courseYaw)) * sCourseEditCameraForwardZ;
+    sCourseEditCameraForwardY = (-1.0f * sCourseEditCameraForwardY);
+    sCourseEditCameraForwardZ = COS(DEG_TO_FZXANG(D_800D6CA0.courseYaw)) * (-1.0f * sCourseEditCameraForwardZ);
+    gCameras[0].basis.x.x = sCourseEditCameraForwardX;
+    gCameras[0].basis.x.y = sCourseEditCameraForwardY;
+    gCameras[0].basis.x.z = sCourseEditCameraForwardZ;
 
-    gCameras[0].eye.x = D_xk2_80104CB8 - (D_xk2_80104CB4 * D_xk2_80128D60);
-    gCameras[0].eye.y = D_xk2_80104CBC - (D_xk2_80104CB4 * D_xk2_80128D64);
-    gCameras[0].eye.z = D_xk2_80104CC0 - (D_xk2_80104CB4 * D_xk2_80128D68);
+    gCameras[0].eye.x = gCourseEditCameraAtX - (gCourseEditCameraZoom * sCourseEditCameraForwardX);
+    gCameras[0].eye.y = gCourseEditCameraAtY - (gCourseEditCameraZoom * sCourseEditCameraForwardY);
+    gCameras[0].eye.z = gCourseEditCameraAtZ - (gCourseEditCameraZoom * sCourseEditCameraForwardZ);
 
-    D_xk2_80128D40 = SIN(temp_v1);
-    D_xk2_80128D44 = COS(temp_v1);
+    D_xk2_80128D40 = SIN(DEG_TO_FZXANG(D_800D6CA0.courseYaw));
+    D_xk2_80128D44 = COS(DEG_TO_FZXANG(D_800D6CA0.courseYaw));
 
-    gCameras[0].basis.y.x = 0 - (D_xk2_80128D64 * D_xk2_80128D40);
-    gCameras[0].basis.y.y = (D_xk2_80128D60 * D_xk2_80128D40) - (D_xk2_80128D68 * D_xk2_80128D44);
-    gCameras[0].basis.y.z = D_xk2_80128D64 * D_xk2_80128D44;
+    gCameras[0].basis.y.x = 0 - (sCourseEditCameraForwardY * D_xk2_80128D40);
+    gCameras[0].basis.y.y = (sCourseEditCameraForwardX * D_xk2_80128D40) - (sCourseEditCameraForwardZ * D_xk2_80128D44);
+    gCameras[0].basis.y.z = sCourseEditCameraForwardY * D_xk2_80128D44;
 
-    gCameras[0].basis.z.x = (D_xk2_80128D68 * gCameras[0].basis.y.y) - (D_xk2_80128D64 * gCameras[0].basis.y.z);
-    gCameras[0].basis.z.y = (D_xk2_80128D60 * gCameras[0].basis.y.z) - (D_xk2_80128D68 * gCameras[0].basis.y.x);
-    gCameras[0].basis.z.z = (D_xk2_80128D64 * gCameras[0].basis.y.x) - (D_xk2_80128D60 * gCameras[0].basis.y.y);
+    gCameras[0].basis.z.x = (sCourseEditCameraForwardZ * gCameras[0].basis.y.y) - (sCourseEditCameraForwardY * gCameras[0].basis.y.z);
+    gCameras[0].basis.z.y = (sCourseEditCameraForwardX * gCameras[0].basis.y.z) - (sCourseEditCameraForwardZ * gCameras[0].basis.y.x);
+    gCameras[0].basis.z.z = (sCourseEditCameraForwardY * gCameras[0].basis.y.x) - (sCourseEditCameraForwardX * gCameras[0].basis.y.y);
     Matrix_SetLookAt(&D_80128C94->unk_0040, NULL, gCameras[0].eye.x, gCameras[0].eye.y, gCameras[0].eye.z,
-                     D_xk2_80104CB8, D_xk2_80104CBC, D_xk2_80104CC0, gCameras[0].basis.y.x, gCameras[0].basis.y.y,
+                     gCourseEditCameraAtX, gCourseEditCameraAtY, gCourseEditCameraAtZ, gCameras[0].basis.y.x, gCameras[0].basis.y.y,
                      gCameras[0].basis.y.z);
 
     gSPMatrix(gfx++, &D_6000000.unk_0040, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
-    gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     Matrix_FromMtx(&D_80128C94->unk_0040, &gCameras[0].viewMtx);
     Camera_CalculateProjectionViewMtx(&gCameras[0].projectionViewMtx, &gCameras[0].projectionMtx, &gCameras[0].viewMtx);
-    Matrix_SetLockedLookAt(&spC8, NULL, 0.3f, 0.3f, 0.3f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-    Matrix_FromMtx(&spC8, &sp88);
-    func_xk2_800F1FF0(&sp88, &gCameras[0].projectionViewMtx, &gCameras[0].projectionViewMtx);
+    Matrix_SetLockedLookAt(&mtx, NULL, 0.3f, 0.3f, 0.3f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+    Matrix_FromMtx(&mtx, &mtxF);
+    func_xk2_800F1FF0(&mtxF, &gCameras[0].projectionViewMtx, &gCameras[0].projectionViewMtx);
     return gfx;
 }
-#else
-#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/overlays/course_edit/1A2D70/func_xk2_800F1428.s")
-#endif
 
 extern s32 gCourseEditCursorXPos;
 extern s32 gCourseEditCursorYPos;
@@ -199,8 +190,8 @@ void func_xk2_800F1938(void) {
         return;
     }
     if (D_802CB6D0.controlPointCount != 0) {
-        temp_v1 = &D_802CB6D0.unk_0000[D_800D6CA0.unk_0C];
-        if (D_xk2_80104CB0 < 0) {
+        temp_v1 = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+        if (gCourseEditCameraPitch < 0) {
             var_fv1 = (((temp_v1->pos.y + temp_v1->next->pos.y) * 0.3f) / 2);
         } else {
             var_fv1 = (((temp_v1->pos.y + temp_v1->next->pos.y) * 0.3f) / 2);
@@ -251,7 +242,7 @@ void func_xk2_800F1938(void) {
     D_800D6CA0.unk_28.radiusLeft = radiusLeft;
     D_800D6CA0.unk_28.radiusRight = radiusRight;
 
-    if ((D_802CB6D0.controlPointCount == 1) && (D_802CB6D0.unk_0000[0].trackSegmentInfo == 0x18000000) &&
+    if ((D_802CB6D0.controlPointCount == 1) && (D_802CB6D0.segments[0].trackSegmentInfo == 0x18000000) &&
         (D_800D6CA0.unk_28.trackSegmentInfo == 0x18000000)) {
         D_800D6CA0.unk_28.trackSegmentInfo = (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_2);
     } else if (D_802CB6D0.controlPointCount == 0) {

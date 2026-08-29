@@ -453,7 +453,7 @@ s32 EndingCutscene_Update(void) {
     Camera_Update();
     Background_Update();
     Course_Update();
-    func_80074844();
+    Course_UpdateSignRotation();
     EndingCutsceneEffects_Update();
     if (sDrawThanksForPlaying) {
         EndingCutscene_FadeInThanksForPlaying();

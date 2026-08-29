@@ -23,6 +23,8 @@ ctx.c.m2c
 *.mio0d
 *.eeprom
 *.DS_Store
+*.disk
+*.ram
 src/assets/*
 include/assets/*
 /build

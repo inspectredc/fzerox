@@ -4,6 +4,7 @@
 
 #include "global.h"
 #include "leo/mfs.h"
+#include "fzx_expansion_kit.h"
 
 #include ASSET_SOURCE_EK(overlays/ovl_i10/a187510/a187510.c)
 
@@ -36,7 +37,7 @@ void func_i10_8012B894(s32 progress) {
     func_i10_8012B780(aDDLoadBlueFalconTex, progress, 180, 32, 16, 32);
 }
 
-extern s32 D_800D11C8[6];
+extern s32 gCourseEditOptions[6];
 extern OSMesgQueue gMFSMesgQ;
 extern u8 gEditCupTrackNames[4 * 6][9];
 
@@ -48,7 +49,7 @@ void func_i10_8012B904(void) {
     }
     func_8076852C(MFS_ENTRY_WORKING_DIR, "CRS_ENTRY", "CENT", gEditCupTrackNames, sizeof(gEditCupTrackNames));
     osRecvMesg(&gMFSMesgQ, NULL, OS_MESG_BLOCK);
-    func_8076852C(MFS_ENTRY_WORKING_DIR, "OPTION", "OPT", D_800D11C8, sizeof(D_800D11C8));
+    func_8076852C(MFS_ENTRY_WORKING_DIR, "OPTION", "OPT", gCourseEditOptions, sizeof(gCourseEditOptions));
     osRecvMesg(&gMFSMesgQ, NULL, OS_MESG_BLOCK);
 
     for (i = 0; i < 6; i++) {
@@ -57,11 +58,11 @@ void func_i10_8012B904(void) {
         }
     }
     for (i = 0; i < 4; i++) {
-        if ((D_800D11C8[i] < 0) || (D_800D11C8[i] >= 2)) {
-            D_800D11C8[i] = 1;
+        if ((gCourseEditOptions[i] < 0) || (gCourseEditOptions[i] >= 2)) {
+            gCourseEditOptions[i] = 1;
         }
     }
-    if ((D_800D11C8[4] < 0) || (D_800D11C8[4] >= 9)) {
-        D_800D11C8[4] = 4;
+    if ((gCourseEditOptions[COURSE_EDIT_OPTION_CURSOR_SPEED] < 0) || (gCourseEditOptions[COURSE_EDIT_OPTION_CURSOR_SPEED] >= 9)) {
+        gCourseEditOptions[COURSE_EDIT_OPTION_CURSOR_SPEED] = 4;
     }
 }

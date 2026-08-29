@@ -681,7 +681,7 @@ void func_i6_8011D394(void) {
 #endif
 
 extern GfxPool D_1000000;
-extern Mtx D_2000000[];
+extern unk_80225800 D_2000000;
 extern Gfx D_8014810[];
 
 Gfx* func_i6_8011D8C8(Gfx* gfx) {
@@ -704,7 +704,7 @@ Gfx* func_i6_8011D8C8(Gfx* gfx) {
         gDPSetRenderMode(gfx++, G_RM_XLU_SURF, G_RM_NOOP2);
         gDPSetCombineMode(gfx++, G_CC_DECALRGB, G_CC_DECALRGB);
         gSPMatrix(gfx++, D_1000000.unk_2B248, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-        gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         for (sp40 = 0, var_s5 = 0x10, var_s4 = -1; var_s4 < SCREEN_HEIGHT - 1; var_s4 += 16, sp40 += 10, var_s5 += 16) {
 

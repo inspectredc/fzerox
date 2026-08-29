@@ -3622,9 +3622,9 @@ void Course_SegmentsInit(void) {
 #endif
 
     courseInfo = &gCourseInfos[gCourseIndex];
-    courseInfo->courseSegments = D_802C2020.unk_0000;
+    courseInfo->courseSegments = D_802C2020.segments;
 
-    for (i = 0, segment = D_802C2020.unk_0000; i < courseInfo->segmentCount; i++) {
+    for (i = 0, segment = D_802C2020.segments; i < courseInfo->segmentCount; i++) {
         segment->segmentIndex = i;
         segment->next = segment + 1;
         segment->prev = segment - 1;
@@ -3657,7 +3657,7 @@ void Course_SegmentsInit(void) {
     segment = &courseInfo->courseSegments[segmentIndex];
     for (i = 0; i < courseInfo->segmentCount; i++) {
         segmentIndex = segment->segmentIndex;
-        D_802CDFD8.unk_0000[i] = *segment;
+        D_802CDFD8.segments[i] = *segment;
 
 #ifndef EXPANSION_KIT
         D_8010C770.bankAngle[i] = COURSE_CONTEXT()->courseData.bankAngle[segment->segmentIndex];
@@ -3687,9 +3687,9 @@ void Course_SegmentsInit(void) {
 
     for (i = 0; i < courseInfo->segmentCount; i++) {
 #ifndef EXPANSION_KIT
-        D_802C2020.unk_0000[i] = D_802CDFD8.unk_0000[i];
+        D_802C2020.segments[i] = D_802CDFD8.segments[i];
 #endif
-        courseInfo->courseSegments[i] = D_802CDFD8.unk_0000[i];
+        courseInfo->courseSegments[i] = D_802CDFD8.segments[i];
 
         COURSE_CONTEXT()->courseData.bankAngle[i] = D_8010C770.bankAngle[i];
         COURSE_CONTEXT()->courseData.pit[i] = D_8010C770.pit[i];
@@ -4132,7 +4132,7 @@ void func_800742FC(void) {
     COURSE_CONTEXT()->courseData.skybox = SKYBOX_PURPLE;
     D_8010CF50 = COURSE_CONTEXT()->courseData;
     gCourseFeaturesInfo.features = gCourseFeatures;
-    gCourseInfos[0].courseSegments = D_802C2020.unk_0000;
+    gCourseInfos[0].courseSegments = D_802C2020.segments;
     gCourseEffectsInfo.effects = gCourseEffects;
 
     for (i = 0; i < ARRAY_COUNT(gCourseInfos); i++) {}
@@ -4156,25 +4156,25 @@ void func_80074428(s32 courseIndex) {
         return;
     }
 
-    gCourseInfos[courseIndex].courseSegments = D_802C2020.unk_0000;
+    gCourseInfos[courseIndex].courseSegments = D_802C2020.segments;
     gCourseInfos[courseIndex].segmentCount = courseData->controlPointCount;
 
     for (i = 0; i < courseData->controlPointCount; i++) {
-        D_802C2020.unk_0000[i].pos = courseData->controlPoint[i].pos;
-        D_802C2020.unk_0000[i].radiusLeft = courseData->controlPoint[i].radiusLeft;
-        D_802C2020.unk_0000[i].radiusRight = courseData->controlPoint[i].radiusRight;
-        D_802C2020.unk_0000[i].trackSegmentInfo = courseData->controlPoint[i].trackSegmentInfo;
+        D_802C2020.segments[i].pos = courseData->controlPoint[i].pos;
+        D_802C2020.segments[i].radiusLeft = courseData->controlPoint[i].radiusLeft;
+        D_802C2020.segments[i].radiusRight = courseData->controlPoint[i].radiusRight;
+        D_802C2020.segments[i].trackSegmentInfo = courseData->controlPoint[i].trackSegmentInfo;
     }
 
-    var_v0 = D_802C2020.unk_0000;
+    var_v0 = D_802C2020.segments;
     for (i = 0; i < courseData->controlPointCount; i++, var_v0++) {
         var_v0->segmentIndex = i;
         var_v0->next = var_v0 + 1;
         var_v0->prev = var_v0 - 1;
     }
 
-    D_802C2020.unk_0000[0].prev = &D_802C2020.unk_0000[courseData->controlPointCount - 1];
-    D_802C2020.unk_0000[courseData->controlPointCount - 1].next = &D_802C2020.unk_0000[0];
+    D_802C2020.segments[0].prev = &D_802C2020.segments[courseData->controlPointCount - 1];
+    D_802C2020.segments[courseData->controlPointCount - 1].next = &D_802C2020.segments[0];
 
     if (courseData->controlPointCount < 4) {
         return;
@@ -4204,10 +4204,10 @@ void func_80074594(void) {
     courseData->controlPointCount = D_802CB6D0.controlPointCount;
 
     for (i = 0; i < courseData->controlPointCount; i++) {
-        courseData->controlPoint[i].pos = D_802CB6D0.unk_0000[i].pos;
-        courseData->controlPoint[i].radiusLeft = D_802CB6D0.unk_0000[i].radiusLeft;
-        courseData->controlPoint[i].radiusRight = D_802CB6D0.unk_0000[i].radiusRight;
-        courseData->controlPoint[i].trackSegmentInfo = D_802CB6D0.unk_0000[i].trackSegmentInfo;
+        courseData->controlPoint[i].pos = D_802CB6D0.segments[i].pos;
+        courseData->controlPoint[i].radiusLeft = D_802CB6D0.segments[i].radiusLeft;
+        courseData->controlPoint[i].radiusRight = D_802CB6D0.segments[i].radiusRight;
+        courseData->controlPoint[i].trackSegmentInfo = D_802CB6D0.segments[i].trackSegmentInfo;
     }
 }
 
@@ -4254,7 +4254,7 @@ void func_80074744(void) {
     s32 trackShape;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        segment = &D_802CB6D0.unk_0000[i];
+        segment = &D_802CB6D0.segments[i];
         trackShape = segment->trackSegmentInfo & TRACK_SHAPE_MASK;
         switch (trackShape) {
             case TRACK_SHAPE_PIPE:
@@ -4311,41 +4311,41 @@ void func_800747EC(s32 venue) {
 extern GfxPool* gGfxPool;
 extern s8 gGamePaused;
 
-void func_80074844(void) {
-    static s32 D_800CD298 = 0;
-    static s32 D_800CD29C = 0;
+void Course_UpdateSignRotation(void) {
+    static s32 sNintexSignAngle = 0;
+    static s32 sOverheadSignAngle = 0;
     f32 temp;
-    MtxF sp3C;
+    MtxF mtxF;
 
     if (!gGamePaused) {
-        D_800CD298 = (D_800CD298 + 0xFE9) & 0xFFF;
-        D_800CD29C = (D_800CD29C + 0xFDE) & 0xFFF;
+        sNintexSignAngle = (sNintexSignAngle + 0xFE9) & 0xFFF;
+        sOverheadSignAngle = (sOverheadSignAngle + 0xFDE) & 0xFFF;
     }
 
-    sp3C.m[2][1] = sp3C.m[0][1] = sp3C.m[1][0] = sp3C.m[1][2] = sp3C.m[3][0] = sp3C.m[3][1] = sp3C.m[3][2] =
-        sp3C.m[0][3] = sp3C.m[1][3] = sp3C.m[2][3] = 0.0f;
+    mtxF.m[2][1] = mtxF.m[0][1] = mtxF.m[1][0] = mtxF.m[1][2] = mtxF.m[3][0] = mtxF.m[3][1] = mtxF.m[3][2] =
+        mtxF.m[0][3] = mtxF.m[1][3] = mtxF.m[2][3] = 0.0f;
 
-    sp3C.m[3][3] = sp3C.m[1][1] = 1.0f;
+    mtxF.m[3][3] = mtxF.m[1][1] = 1.0f;
 
-    sp3C.m[2][0] = temp = SIN(0x1000 - D_800CD298);
-    sp3C.m[0][2] = -temp;
+    mtxF.m[2][0] = temp = SIN(0x1000 - sNintexSignAngle);
+    mtxF.m[0][2] = -temp;
 
-    sp3C.m[0][0] = sp3C.m[2][2] = temp = COS(0x1000 - D_800CD298);
+    mtxF.m[0][0] = mtxF.m[2][2] = temp = COS(0x1000 - sNintexSignAngle);
 
-    Matrix_ToMtx(&sp3C, gGfxPool->unk_2C5E8);
+    Matrix_ToMtx(&mtxF, gGfxPool->unk_2C5E8);
 
-    sp3C.m[2][0] = temp = SIN(D_800CD298);
-    sp3C.m[0][2] = -temp;
-    sp3C.m[0][0] = sp3C.m[2][2] = temp = COS(D_800CD298);
+    mtxF.m[2][0] = temp = SIN(sNintexSignAngle);
+    mtxF.m[0][2] = -temp;
+    mtxF.m[0][0] = mtxF.m[2][2] = temp = COS(sNintexSignAngle);
 
-    Matrix_ToMtx(&sp3C, gGfxPool->unk_2C628);
-    sp3C.m[1][2] = temp = SIN(D_800CD29C);
-    sp3C.m[2][1] = -temp;
-    sp3C.m[2][2] = sp3C.m[1][1] = temp = COS(D_800CD29C);
+    Matrix_ToMtx(&mtxF, gGfxPool->unk_2C628);
+    mtxF.m[1][2] = temp = SIN(sOverheadSignAngle);
+    mtxF.m[2][1] = -temp;
+    mtxF.m[2][2] = mtxF.m[1][1] = temp = COS(sOverheadSignAngle);
 
-    sp3C.m[2][0] = sp3C.m[0][2] = 0.0f;
-    sp3C.m[0][0] = 1.0f;
-    Matrix_ToMtx(&sp3C, gGfxPool->unk_2C668);
+    mtxF.m[2][0] = mtxF.m[0][2] = 0.0f;
+    mtxF.m[0][0] = 1.0f;
+    Matrix_ToMtx(&mtxF, gGfxPool->unk_2C668);
 }
 
 #ifdef EXPANSION_KIT

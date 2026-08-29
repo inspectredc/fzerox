@@ -48,8 +48,8 @@ extern s32 gSkyboxOption;
 void func_xk2_800EF8B0(void) {
     s32 i;
 
-    if ((D_800D6CA0.unk_08 == 1) || (D_800D6CA0.unk_08 == 3) || (D_800D6CA0.unk_08 == 2) ||
-        (D_800D6CA0.unk_08 == 0x10) || (D_800D6CA0.unk_08 == 0x20) || (D_xk2_80104BC0 == 0)) {
+    if ((D_800D6CA0.state == 1) || (D_800D6CA0.state == 3) || (D_800D6CA0.state == 2) ||
+        (D_800D6CA0.state == 0x10) || (D_800D6CA0.state == 0x20) || (D_xk2_80104BC0 == 0)) {
         return;
     }
     D_xk2_80104BC0 = 0;
@@ -64,7 +64,7 @@ void func_xk2_800EF8B0(void) {
     }
     D_802CB6D0 = D_807B6528;
     COURSE_CONTEXT()->courseData = D_8010CF50;
-    D_xk2_801197EC = D_802CB6D0.unk_0000;
+    D_xk2_801197EC = D_802CB6D0.segments;
     func_xk2_800DC3F8();
     func_xk2_800F5C50();
     D_800D6CA0.unk_0C = D_xk2_80119800;
@@ -142,7 +142,7 @@ void func_xk2_800EFCD0(void) {
         return;
     }
     var_v1 = 0;
-    var_v0_2 = &D_802CB6D0.unk_0000[sp30];
+    var_v0_2 = &D_802CB6D0.segments[sp30];
     temp_t0 = var_v0_2;
     // FAKE!
     // clang-format off
@@ -176,28 +176,28 @@ void func_xk2_800EFCD0(void) {
 extern s32 gCourseEditCursorXPos;
 extern s32 gCourseEditCursorYPos;
 
-s32 func_xk2_800EFDE4(f32 arg0) {
+s32 func_xk2_800EFDE4(f32 range) {
     s32 i;
-    s32 sp70;
-    s32 sp6C;
-    s32 var_fp;
-    f32 temp_fv0;
-    Vec3f sp58;
+    s32 screenXPos;
+    s32 screenYPos;
+    s32 closestControlPoint;
+    f32 distance;
+    Vec3f pos;
 
-    var_fp = -1;
+    closestControlPoint = -1;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
 
-        sp58 = D_802CB6D0.unk_0000[i].pos;
-        if (func_xk2_800EF090(sp58, &sp70, &sp6C) != 0) {
+        pos = D_802CB6D0.segments[i].pos;
+        if (func_xk2_800EF090(pos, &screenXPos, &screenYPos) != 0) {
             continue;
         }
-        temp_fv0 = SQ(gCourseEditCursorXPos - sp70) + SQ(gCourseEditCursorYPos - sp6C);
-        if (temp_fv0 < arg0) {
-            arg0 = temp_fv0;
-            var_fp = i;
+        distance = SQ(gCourseEditCursorXPos - screenXPos) + SQ(gCourseEditCursorYPos - screenYPos);
+        if (distance < range) {
+            range = distance;
+            closestControlPoint = i;
         }
     }
-    return var_fp;
+    return closestControlPoint;
 }
 
 void func_xk2_800EFF40(void) {
@@ -207,16 +207,16 @@ void func_xk2_800EFF40(void) {
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
 
-        if (!(D_802CB6D0.unk_0000[i].trackSegmentInfo & TRACK_FLAG_8000000)) {
-            temp_fv0 = (D_802CB6D0.unk_0000[i].radiusLeft + D_802CB6D0.unk_0000[i].radiusRight) / 2.0f;
-            D_802CB6D0.unk_0000[i].radiusLeft = temp_fv0;
-            D_802CB6D0.unk_0000[i].radiusRight = temp_fv0;
+        if (!(D_802CB6D0.segments[i].trackSegmentInfo & TRACK_FLAG_8000000)) {
+            temp_fv0 = (D_802CB6D0.segments[i].radiusLeft + D_802CB6D0.segments[i].radiusRight) / 2.0f;
+            D_802CB6D0.segments[i].radiusLeft = temp_fv0;
+            D_802CB6D0.segments[i].radiusRight = temp_fv0;
         }
-        temp_a0 = D_802CB6D0.unk_0000[i].prev->segmentIndex;
-        if (!(D_802CB6D0.unk_0000[temp_a0].trackSegmentInfo & TRACK_FLAG_8000000)) {
-            temp_fv0 = (D_802CB6D0.unk_0000[i].radiusLeft + D_802CB6D0.unk_0000[i].radiusRight) / 2.0f;
-            D_802CB6D0.unk_0000[i].radiusLeft = temp_fv0;
-            D_802CB6D0.unk_0000[i].radiusRight = temp_fv0;
+        temp_a0 = D_802CB6D0.segments[i].prev->segmentIndex;
+        if (!(D_802CB6D0.segments[temp_a0].trackSegmentInfo & TRACK_FLAG_8000000)) {
+            temp_fv0 = (D_802CB6D0.segments[i].radiusLeft + D_802CB6D0.segments[i].radiusRight) / 2.0f;
+            D_802CB6D0.segments[i].radiusLeft = temp_fv0;
+            D_802CB6D0.segments[i].radiusRight = temp_fv0;
         }
     }
 }
@@ -380,8 +380,8 @@ void func_xk2_800F07A4(void) {
     Vec3f spF0;
     Mtx3F spCC;
 
-    if ((gCourseEditCursorYPos < 0x38) || (D_800D6CA0.unk_08 == 1) || (D_800D6CA0.unk_08 == 3) ||
-        (D_800D6CA0.unk_08 == 2) || (D_800D6CA0.unk_08 == 0x10) ||
+    if ((gCourseEditCursorYPos < 0x38) || (D_800D6CA0.state == 1) || (D_800D6CA0.state == 3) ||
+        (D_800D6CA0.state == 2) || (D_800D6CA0.state == 0x10) ||
         !((gCreateOption == CREATE_OPTION_DESIGN) && (gDesignStyleOption == TRACK_DESIGN_STYLE_LOOP)) ||
         !(gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) || (D_800D6CA0.unk_0C == 0)) {
         return;
@@ -400,7 +400,7 @@ void func_xk2_800F07A4(void) {
     func_xk2_800EF78C();
     Audio_TriggerSystemSE(NA_SE_39);
     sp1C0 = D_800D6CA0.unk_0C;
-    temp_s2 = &D_802CB6D0.unk_0000[D_800D6CA0.unk_0C];
+    temp_s2 = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
 
     D_xk2_80128CB4 = (temp_s2->radiusLeft + temp_s2->radiusRight) * 0.5f;
     Course_SplineGetBasis(temp_s2, 0.0f, &spCC, Course_SplineGetLengthInfo(temp_s2, 0.0f, &sp1BC));
@@ -438,7 +438,7 @@ void func_xk2_800F07A4(void) {
         COURSE_CONTEXT()->courseData.bankAngle[D_800D6CA0.unk_0C] = 0;
     }
     func_i2_800BE8BC(gCurrentCourseInfo);
-    temp_s2 = D_802CB6D0.unk_0000[sp1C0].next;
+    temp_s2 = D_802CB6D0.segments[sp1C0].next;
     func_80074CE4(gCurrentCourseInfo);
     if (D_xk2_80128CF4 != 0) {
         spFC.x = spCC.y.x;
@@ -519,7 +519,7 @@ void func_xk2_800F0FF4(void) {
         return;
     }
 
-    var_v1 = &D_802CB6D0.unk_0000[1];
+    var_v1 = &D_802CB6D0.segments[1];
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         temp_a0 = var_v1->segmentIndex;
         D_8010C770.bankAngle[i] = 360 - COURSE_CONTEXT()->courseData.bankAngle[temp_a0];
@@ -534,13 +534,13 @@ void func_xk2_800F0FF4(void) {
         D_8010C770.gate[i] = COURSE_CONTEXT()->courseData.gate[temp_a0];
         D_8010C770.building[i] = COURSE_CONTEXT()->courseData.building[temp_a0];
         D_8010C770.sign[i] = COURSE_CONTEXT()->courseData.sign[temp_a0];
-        D_xk2_80119920[i] = D_802CB6D0.unk_0000[temp_a0];
+        D_xk2_80119920[i] = D_802CB6D0.segments[temp_a0];
 
         D_xk2_80119920[i].trackSegmentInfo = var_v1->prev->trackSegmentInfo;
         var_v1 = var_v1->prev;
     }
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        D_802CB6D0.unk_0000[i] = D_xk2_80119920[i];
+        D_802CB6D0.segments[i] = D_xk2_80119920[i];
 
         COURSE_CONTEXT()->courseData.bankAngle[i] = D_8010C770.bankAngle[i];
         COURSE_CONTEXT()->courseData.pit[i] = D_8010C770.pit[i];
@@ -555,12 +555,12 @@ void func_xk2_800F0FF4(void) {
     }
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        D_802CB6D0.unk_0000[i].segmentIndex = i;
-        D_802CB6D0.unk_0000[i].next = &D_802CB6D0.unk_0000[i + 1];
-        D_802CB6D0.unk_0000[i].prev = &D_802CB6D0.unk_0000[i - 1];
+        D_802CB6D0.segments[i].segmentIndex = i;
+        D_802CB6D0.segments[i].next = &D_802CB6D0.segments[i + 1];
+        D_802CB6D0.segments[i].prev = &D_802CB6D0.segments[i - 1];
     }
-    D_802CB6D0.unk_0000[0].prev = &D_802CB6D0.unk_0000[D_802CB6D0.controlPointCount - 1];
-    D_802CB6D0.unk_0000[D_802CB6D0.controlPointCount - 1].next = &D_802CB6D0.unk_0000[0];
+    D_802CB6D0.segments[0].prev = &D_802CB6D0.segments[D_802CB6D0.controlPointCount - 1];
+    D_802CB6D0.segments[D_802CB6D0.controlPointCount - 1].next = &D_802CB6D0.segments[0];
 
     PRINTF("BACKUP\n");
     PRINTF("EFFECT c\n");

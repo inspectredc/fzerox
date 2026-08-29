@@ -61,42 +61,44 @@ const f32 D_xk2_80104390[] = {
     9.494526863, 8.788786888, 8.021718979, 7.17367506,  6.211544991, 5.070877075, 3.58506608,  0,
 };
 
-s32 func_xk2_800EF090(Vec3f arg0, s32* arg1, s32* arg2) {
+// Checks if position is being rendered and stores screen position
+s32 func_xk2_800EF090(Vec3f pos, s32* screenXPosPtr, s32* screenYPosPtr) {
     Camera* camera = gCameras;
-    f32 temp_fa0;
+    s32 pad;
     f32 temp_fv1;
-    f32 sp30;
-    s32 pad[3];
+    f32 screenXPos;
+    f32 screenYPos;
+    s32 pad2[2];
     f32 temp_fv0;
-    s32 pad2;
+    s32 pad3;
 
-    temp_fv0 = (camera->projectionViewMtx.m[0][2] * arg0.x) + (camera->projectionViewMtx.m[1][2] * arg0.y) +
-               (camera->projectionViewMtx.m[2][2] * arg0.z) + camera->projectionViewMtx.m[3][2];
+    temp_fv0 = (camera->projectionViewMtx.m[0][2] * pos.x) + (camera->projectionViewMtx.m[1][2] * pos.y) +
+               (camera->projectionViewMtx.m[2][2] * pos.z) + camera->projectionViewMtx.m[3][2];
     if ((temp_fv0 < 0.0f) || (temp_fv0 > 65536.0f)) {
         return -1;
     }
-    temp_fv1 = 1.0f / (((camera->projectionViewMtx.m[0][3] * arg0.x) + (camera->projectionViewMtx.m[1][3] * arg0.y) +
-                        (camera->projectionViewMtx.m[2][3] * arg0.z)) +
+    temp_fv1 = 1.0f / (((camera->projectionViewMtx.m[0][3] * pos.x) + (camera->projectionViewMtx.m[1][3] * pos.y) +
+                        (camera->projectionViewMtx.m[2][3] * pos.z)) +
                        camera->projectionViewMtx.m[3][3]);
-    temp_fv0 = ((camera->projectionViewMtx.m[0][0] * arg0.x) + (camera->projectionViewMtx.m[1][0] * arg0.y) +
-                (camera->projectionViewMtx.m[2][0] * arg0.z) + camera->projectionViewMtx.m[3][0]) *
+    temp_fv0 = ((camera->projectionViewMtx.m[0][0] * pos.x) + (camera->projectionViewMtx.m[1][0] * pos.y) +
+                (camera->projectionViewMtx.m[2][0] * pos.z) + camera->projectionViewMtx.m[3][0]) *
                temp_fv1;
     if ((temp_fv0 < -1.0f) || (temp_fv0 > 1.0f)) {
         return -1;
     }
-    sp30 = (160.0f * temp_fv0) + 160.0f;
-    temp_fv0 = ((camera->projectionViewMtx.m[0][1] * arg0.x) + (camera->projectionViewMtx.m[1][1] * arg0.y) +
-                (camera->projectionViewMtx.m[2][1] * arg0.z) + camera->projectionViewMtx.m[3][1]) *
+    screenXPos = ((SCREEN_WIDTH / 2) * temp_fv0) + (SCREEN_WIDTH / 2);
+    temp_fv0 = ((camera->projectionViewMtx.m[0][1] * pos.x) + (camera->projectionViewMtx.m[1][1] * pos.y) +
+                (camera->projectionViewMtx.m[2][1] * pos.z) + camera->projectionViewMtx.m[3][1]) *
                temp_fv1;
     if ((temp_fv0 < -1.0f) || (temp_fv0 > 1.0f)) {
         return -1;
     }
-    temp_fa0 = (-120.0f * temp_fv0) + 120.0f;
+    screenYPos = (-(SCREEN_HEIGHT / 2) * temp_fv0) + (SCREEN_HEIGHT / 2);
 
-    if (Math_Round(sp30) >= 0 && Math_Round(sp30) < SCREEN_WIDTH) {
-        if ((Math_Round(temp_fa0) >= 0) && (Math_Round(temp_fa0) < SCREEN_HEIGHT)) {
-            *arg1 = Math_Round(sp30);
-            *arg2 = Math_Round(temp_fa0);
+    if (Math_Round(screenXPos) >= 0 && Math_Round(screenXPos) < SCREEN_WIDTH) {
+        if ((Math_Round(screenYPos) >= 0) && (Math_Round(screenYPos) < SCREEN_HEIGHT)) {
+            *screenXPosPtr = Math_Round(screenXPos);
+            *screenYPosPtr = Math_Round(screenYPos);
             return 0;
         }
     }
@@ -104,40 +106,42 @@ s32 func_xk2_800EF090(Vec3f arg0, s32* arg1, s32* arg2) {
     return -1;
 }
 
-s32 func_xk2_800EF2F0(Vec3f arg0) {
+// Checks if position is being rendered
+s32 func_xk2_800EF2F0(Vec3f pos) {
     Camera* camera = gCameras;
-    f32 temp_fa0;
+    s32 pad;
     f32 temp_fv1;
-    f32 sp30;
-    s32 pad[3];
+    f32 screenXPos;
+    f32 screenYPos;
+    s32 pad2[2];
     f32 temp_fv0;
-    s32 pad2;
+    s32 pad3;
 
-    temp_fv0 = (camera->projectionViewMtx.m[0][2] * arg0.x) + (camera->projectionViewMtx.m[1][2] * arg0.y) +
-               (camera->projectionViewMtx.m[2][2] * arg0.z) + camera->projectionViewMtx.m[3][2];
+    temp_fv0 = (camera->projectionViewMtx.m[0][2] * pos.x) + (camera->projectionViewMtx.m[1][2] * pos.y) +
+               (camera->projectionViewMtx.m[2][2] * pos.z) + camera->projectionViewMtx.m[3][2];
     if ((temp_fv0 < 0.0f) || (temp_fv0 > 65536.0f)) {
         return -1;
     }
-    temp_fv1 = 1.0f / (((camera->projectionViewMtx.m[0][3] * arg0.x) + (camera->projectionViewMtx.m[1][3] * arg0.y) +
-                        (camera->projectionViewMtx.m[2][3] * arg0.z)) +
+    temp_fv1 = 1.0f / (((camera->projectionViewMtx.m[0][3] * pos.x) + (camera->projectionViewMtx.m[1][3] * pos.y) +
+                        (camera->projectionViewMtx.m[2][3] * pos.z)) +
                        camera->projectionViewMtx.m[3][3]);
-    temp_fv0 = ((camera->projectionViewMtx.m[0][0] * arg0.x) + (camera->projectionViewMtx.m[1][0] * arg0.y) +
-                (camera->projectionViewMtx.m[2][0] * arg0.z) + camera->projectionViewMtx.m[3][0]) *
+    temp_fv0 = ((camera->projectionViewMtx.m[0][0] * pos.x) + (camera->projectionViewMtx.m[1][0] * pos.y) +
+                (camera->projectionViewMtx.m[2][0] * pos.z) + camera->projectionViewMtx.m[3][0]) *
                temp_fv1;
     if ((temp_fv0 < -1.0f) || (temp_fv0 > 1.0f)) {
         return -1;
     }
-    sp30 = (160.0f * temp_fv0) + 160.0f;
-    temp_fv0 = ((camera->projectionViewMtx.m[0][1] * arg0.x) + (camera->projectionViewMtx.m[1][1] * arg0.y) +
-                (camera->projectionViewMtx.m[2][1] * arg0.z) + camera->projectionViewMtx.m[3][1]) *
+    screenXPos = ((SCREEN_WIDTH / 2) * temp_fv0) + (SCREEN_WIDTH / 2);
+    temp_fv0 = ((camera->projectionViewMtx.m[0][1] * pos.x) + (camera->projectionViewMtx.m[1][1] * pos.y) +
+                (camera->projectionViewMtx.m[2][1] * pos.z) + camera->projectionViewMtx.m[3][1]) *
                temp_fv1;
     if ((temp_fv0 < -1.0f) || (temp_fv0 > 1.0f)) {
         return -1;
     }
-    temp_fa0 = (-120.0f * temp_fv0) + 120.0f;
+    screenYPos = (-(SCREEN_HEIGHT / 2) * temp_fv0) + (SCREEN_HEIGHT / 2);
 
-    if (Math_Round(sp30) >= 0 && Math_Round(sp30) < SCREEN_WIDTH) {
-        if ((Math_Round(temp_fa0) >= 0) && (Math_Round(temp_fa0) < SCREEN_HEIGHT)) {
+    if (Math_Round(screenXPos) >= 0 && Math_Round(screenXPos) < SCREEN_WIDTH) {
+        if ((Math_Round(screenYPos) >= 0) && (Math_Round(screenYPos) < SCREEN_HEIGHT)) {
             return 0;
         }
     }

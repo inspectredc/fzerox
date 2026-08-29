@@ -605,10 +605,10 @@ typedef struct EKLoadedFile {
 typedef struct unk_800D6CA0 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
+    /* 0x08 */ s32 state;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x14 */ s32 courseYaw;
     /* 0x18 */ s8 unk_18[0x4];
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
@@ -647,7 +647,7 @@ typedef struct MenuWidget {
 } MenuWidget; // size = 0x34
 
 typedef struct unk_807B3C20 {
-    /* 0x0000 */ CourseSegment unk_0000[64];
+    /* 0x0000 */ CourseSegment segments[64];
     /* 0x2900 */ s32 controlPointCount;
 } unk_807B3C20; // size 0x2904
 

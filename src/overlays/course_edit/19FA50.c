@@ -25,7 +25,7 @@ Gfx* func_xk2_800EDF90(Gfx* gfx) {
 
     D_xk2_80128CA4 = 0;
     D_xk2_80104360 = 1;
-    if (D_800D6CA0.unk_08 == 3) {
+    if (D_800D6CA0.state == 3) {
         if (D_80119880 == 5) {
             gfx = EKFileMenu_DrawSelectFileText(gfx, 0x18, (D_xk2_80104360 * 0x10) + 0x38);
             D_xk2_80104360++;
@@ -46,7 +46,7 @@ Gfx* func_xk2_800EDF90(Gfx* gfx) {
     gfx = func_xk2_800EE158(gfx);
     gfx = func_xk2_800EE268(gfx);
 
-    if (D_800D6CA0.unk_08 == 0x10) {
+    if (D_800D6CA0.state == 0x10) {
         switch (D_xk2_80104378) {
             case 1:
             case 2:
@@ -89,7 +89,7 @@ Gfx* func_xk2_800EE158(Gfx* gfx) {
     u8* var_a3;
     s8 sp20[0x108];
 
-    if (D_800D6CA0.unk_08 != 0x10) {
+    if (D_800D6CA0.state != 0x10) {
         return gfx;
     }
     gSPDisplayList(gfx++, D_3000510);
@@ -176,7 +176,7 @@ s32 func_xk2_800EE578(s32 arg0) {
     if (var_a1 < D_xk2_80128CA4) {
         var_a1 = D_xk2_80128CA4;
     }
-    if ((gCourseEditCursorXPos > 0xE0) && (D_xk2_800F703C != -1)) {
+    if ((gCourseEditCursorXPos > 224) && (D_xk2_800F703C != -1)) {
         var_a1 = D_xk2_80128CA0 + 0x20;
         if (((arg0 * 8) + var_a1) > 0x128) {
             var_a1 = (((0x22 - arg0) / 2) * 8) + 0x18;
@@ -239,7 +239,7 @@ void func_xk2_800EE8A0(Gfx** gfxP) {
     s32 temp_v0;
 
     gfx = *gfxP;
-    if (D_800D6CA0.unk_08 != 0x30) {
+    if (D_800D6CA0.state != 0x30) {
         return;
     }
 

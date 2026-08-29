@@ -497,7 +497,7 @@ sMenusLoadedNumberStr = 0x8006D5E0; //segment:ovl_i3
 sPortraitTextureScale = 0x8006D600; //segment:ovl_i3
 sPlayerLeadInterval = 0x8006D798; //segment:ovl_i3
 sLeadRivalRaceTime = 0x8006D7A8; //segment:ovl_i3
-sCourseMinimapTex = 0x8006D7C0; //segment:ovl_i3
+gCourseMinimapTex = 0x8006D7C0; //segment:ovl_i3
 sBackgrounds = 0x8006D7D0; //segment:ovl_i3
 sBackgroundCount = 0x8006D950; //segment:ovl_i3
 sIsEndingCutscene = 0x8006D954; //segment:ovl_i3
@@ -2300,7 +2300,7 @@ sEADDemoMatrix = 0x800F6B4C; //segment:ead_demo
 
 // transition
 
-func_xk1_80025C00 = 0x80025C00; //segment:expansion_kit
+ExpansionKit_SetMenuHighlightAlphaChangeScale = 0x80025C00; //segment:expansion_kit
 func_xk1_8002FFDC = 0x8002FFDC; //segment:expansion_kit
 D_xk1_8003A598 = 0x8003A598; //segment:expansion_kit size:0x24
 gExpansionKitLoadedFiles = 0x8003A5D8; //segment:expansion_kit size:0xE58

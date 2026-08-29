@@ -151,8 +151,8 @@ void ExpansionKit_NameEntryClear(void) {
     }
 }
 
-extern s32 D_xk1_8003A550;
-extern s32 D_xk1_8003A554;
+extern s32 gCourseEditMenuCursorXPos;
+extern s32 gCourseEditMenuCursorYPos;
 
 void ExpansionKit_NameEntryInit(void (*callback)(void)) {
     sNameEntryCursorXPos = 0;
@@ -160,8 +160,8 @@ void ExpansionKit_NameEntryInit(void (*callback)(void)) {
     D_xk1_80032AC8 = true;
     sNameEntryCallbackFunc = callback;
     gExpansionKitNameEntryStrLength = 0;
-    D_xk1_8003A550 = 0x58;
-    D_xk1_8003A554 = 0x58;
+    gCourseEditMenuCursorXPos = 0x58;
+    gCourseEditMenuCursorYPos = 0x58;
     while (true) {
         if (gExpansionKitNameEntryStr[gExpansionKitNameEntryStrLength] == '\0') {
             break;
@@ -479,9 +479,9 @@ extern unk_800D6CA0 D_800D6CA0;
 
 void func_xk1_8002AC24(void) {
     if (gExpansionKitNameEntryStrLength == 0) {
-        D_800D6CA0.unk_08 = 0;
+        D_800D6CA0.state = 0;
     } else {
-        D_800D6CA0.unk_08 = 0x34;
+        D_800D6CA0.state = 0x34;
         func_8076877C(1, "CRSD");
     }
 }
@@ -502,7 +502,7 @@ void func_xk1_8002AC70(void) {
             case 9:
                 D_xk2_80104378 = 4;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
                 gCourseEditFileOption = -1;
                 return;
             case 1:
@@ -510,7 +510,7 @@ void func_xk1_8002AC70(void) {
             default:
                 D_xk2_80104378 = 5;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
                 gCourseEditFileOption = -1;
                 return;
         }
@@ -530,7 +530,7 @@ void func_xk1_8002AC70(void) {
                 D_80119880 = -2;
                 D_xk2_80104378 = 6;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
             } else if (func_xk2_800EAA1C(D_xk1_8003A570) != 0) {
                 gCourseEditFileOption = -1;
             } else {
@@ -541,7 +541,7 @@ void func_xk1_8002AC70(void) {
             if ((EKFileMenu_GetFileCount() - 1) >= 100) {
                 D_xk2_80104378 = 6;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                D_800D6CA0.state = 0x10;
             } else {
                 func_xk2_800EAC28(gExpansionKitNameEntryStr);
                 gCourseEditFileOption = -1;
@@ -552,10 +552,10 @@ void func_xk1_8002AC70(void) {
             func_80768844(MFS_ENTRY_WORKING_DIR, D_xk1_8003A598.name, D_xk1_8003A598.extension,
                           gExpansionKitNameEntryStr, D_xk1_8003A598.extension, true);
             gCourseEditFileOption = -1;
-            D_800D6CA0.unk_08 = 0x22;
+            D_800D6CA0.state = 0x22;
             return;
     }
-    D_800D6CA0.unk_08 = 0;
+    D_800D6CA0.state = 0;
 }
 
 void func_xk1_8002AEB4(s32 arg0, s32 arg1) {
