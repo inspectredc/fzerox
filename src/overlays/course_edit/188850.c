@@ -85,7 +85,7 @@ void func_xk2_800D6D90(s32 arg0, s32 arg1, f32* arg2, f32* arg3) {
         var_v1 = 0;
     } else {
         temp_fv1 -= 16.970562f;
-        temp_ft3 = (func_xk2_800EF5E8((f32) arg1, (f32) arg0) * 4096.0f) / 360.0f;
+        temp_ft3 = DEG_TO_FZXANG(func_xk2_800EF5E8((f32) arg1, (f32) arg0));
         if (arg0) {}
         if (arg1) {}
         var_v0 = COS(temp_ft3) * temp_fv1;
@@ -304,10 +304,10 @@ void func_xk2_800D7A4C(s32 trackPartStyle) {
     s32 var_a2;
     s32 var_a3;
 
-    var_v0 = COURSE_CONTEXT()->courseData.pit[D_800D6CA0.unk_0C] + 1;
-    var_v1 = COURSE_CONTEXT()->courseData.dash[D_800D6CA0.unk_0C] + 1;
-    var_a2 = COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.unk_0C] + 1;
-    var_a3 = COURSE_CONTEXT()->courseData.ice[D_800D6CA0.unk_0C] + 1;
+    var_v0 = COURSE_CONTEXT()->courseData.pit[D_800D6CA0.selectedControlPoint] + 1;
+    var_v1 = COURSE_CONTEXT()->courseData.dash[D_800D6CA0.selectedControlPoint] + 1;
+    var_a2 = COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.selectedControlPoint] + 1;
+    var_a3 = COURSE_CONTEXT()->courseData.ice[D_800D6CA0.selectedControlPoint] + 1;
 
     var_v0 = D_xk2_800F6860[var_v0];
     var_v1 = D_xk2_800F6850[var_v1];
@@ -344,30 +344,30 @@ void func_xk2_800D7A4C(s32 trackPartStyle) {
             break;
     }
 
-    if (COURSE_CONTEXT()->courseData.pit[D_800D6CA0.unk_0C] != D_xk2_800F689C[var_v0]) {
+    if (COURSE_CONTEXT()->courseData.pit[D_800D6CA0.selectedControlPoint] != D_xk2_800F689C[var_v0]) {
         Audio_TriggerSystemSE(NA_SE_39);
-        COURSE_CONTEXT()->courseData.pit[D_800D6CA0.unk_0C] = D_xk2_800F689C[var_v0];
+        COURSE_CONTEXT()->courseData.pit[D_800D6CA0.selectedControlPoint] = D_xk2_800F689C[var_v0];
         D_xk2_800F7040 = 3;
     }
 
-    if (COURSE_CONTEXT()->courseData.dash[D_800D6CA0.unk_0C] != D_xk2_800F68B8[var_v1]) {
+    if (COURSE_CONTEXT()->courseData.dash[D_800D6CA0.selectedControlPoint] != D_xk2_800F68B8[var_v1]) {
         Audio_TriggerSystemSE(NA_SE_39);
-        COURSE_CONTEXT()->courseData.dash[D_800D6CA0.unk_0C] = D_xk2_800F68B8[var_v1];
+        COURSE_CONTEXT()->courseData.dash[D_800D6CA0.selectedControlPoint] = D_xk2_800F68B8[var_v1];
         D_xk2_800F7040 = 3;
         if (gPartsStyleOption != TRACK_PART_STYLE_DASH) {
             func_xk2_800EE664(0x14);
         }
     }
 
-    if (COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.unk_0C] != D_xk2_800F68D4[var_a2]) {
+    if (COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.selectedControlPoint] != D_xk2_800F68D4[var_a2]) {
         Audio_TriggerSystemSE(NA_SE_39);
-        COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.unk_0C] = D_xk2_800F68D4[var_a2];
+        COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.selectedControlPoint] = D_xk2_800F68D4[var_a2];
         D_xk2_800F7040 = 3;
     }
 
-    if (COURSE_CONTEXT()->courseData.ice[D_800D6CA0.unk_0C] != D_xk2_800F68F0[var_a3]) {
+    if (COURSE_CONTEXT()->courseData.ice[D_800D6CA0.selectedControlPoint] != D_xk2_800F68F0[var_a3]) {
         Audio_TriggerSystemSE(NA_SE_39);
-        COURSE_CONTEXT()->courseData.ice[D_800D6CA0.unk_0C] = D_xk2_800F68F0[var_a3];
+        COURSE_CONTEXT()->courseData.ice[D_800D6CA0.selectedControlPoint] = D_xk2_800F68F0[var_a3];
         D_xk2_800F7040 = 3;
     }
 }
@@ -381,7 +381,7 @@ void func_xk2_800D7D80(void) {
         return;
     }
 
-    switch (D_802CB6D0.segments[D_800D6CA0.unk_0C].trackSegmentInfo & TRACK_SHAPE_MASK) {
+    switch (D_802CB6D0.segments[D_800D6CA0.selectedControlPoint].trackSegmentInfo & TRACK_SHAPE_MASK) {
         case TRACK_SHAPE_PIPE:
         case TRACK_SHAPE_CYLINDER:
         case TRACK_SHAPE_HALF_PIPE:
@@ -395,13 +395,13 @@ void func_xk2_800D7D80(void) {
         return;
     }
     if (gPitTypeOption == PIT_MAX) {
-        if (COURSE_CONTEXT()->courseData.pit[D_800D6CA0.unk_0C] != PIT_NONE) {
+        if (COURSE_CONTEXT()->courseData.pit[D_800D6CA0.selectedControlPoint] != PIT_NONE) {
             Audio_TriggerSystemSE(NA_SE_39);
             func_xk2_800EF78C();
-            COURSE_CONTEXT()->courseData.pit[D_800D6CA0.unk_0C] = PIT_NONE;
+            COURSE_CONTEXT()->courseData.pit[D_800D6CA0.selectedControlPoint] = PIT_NONE;
             D_xk2_800F7040 = 3;
         }
-    } else if (gPitTypeOption != COURSE_CONTEXT()->courseData.pit[D_800D6CA0.unk_0C]) {
+    } else if (gPitTypeOption != COURSE_CONTEXT()->courseData.pit[D_800D6CA0.selectedControlPoint]) {
         func_xk2_800EF78C();
         func_xk2_800D7A4C(TRACK_PART_STYLE_PIT);
     }
@@ -418,7 +418,7 @@ void func_xk2_800D7EB8(void) {
         return;
     }
 
-    switch (D_802CB6D0.segments[D_800D6CA0.unk_0C].trackSegmentInfo & TRACK_SHAPE_MASK) {
+    switch (D_802CB6D0.segments[D_800D6CA0.selectedControlPoint].trackSegmentInfo & TRACK_SHAPE_MASK) {
         case TRACK_SHAPE_AIR:
             Audio_TriggerSystemSE(NA_SE_32);
             return;
@@ -430,16 +430,16 @@ void func_xk2_800D7EB8(void) {
         }
     }
     if (gDashTypeOption == DASH_MAX) {
-        if (COURSE_CONTEXT()->courseData.dash[D_800D6CA0.unk_0C] != DASH_NONE) {
+        if (COURSE_CONTEXT()->courseData.dash[D_800D6CA0.selectedControlPoint] != DASH_NONE) {
             Audio_TriggerSystemSE(NA_SE_39);
             func_xk2_800EF78C();
-            COURSE_CONTEXT()->courseData.dash[D_800D6CA0.unk_0C] = DASH_NONE;
+            COURSE_CONTEXT()->courseData.dash[D_800D6CA0.selectedControlPoint] = DASH_NONE;
             D_xk2_800F7040 = 3;
         }
     } else {
-        if ((dashCount >= 32) && (COURSE_CONTEXT()->courseData.dash[D_800D6CA0.unk_0C] == DASH_NONE)) {
+        if ((dashCount >= 32) && (COURSE_CONTEXT()->courseData.dash[D_800D6CA0.selectedControlPoint] == DASH_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
-        } else if (gDashTypeOption != COURSE_CONTEXT()->courseData.dash[D_800D6CA0.unk_0C]) {
+        } else if (gDashTypeOption != COURSE_CONTEXT()->courseData.dash[D_800D6CA0.selectedControlPoint]) {
             func_xk2_800EF78C();
             func_xk2_800D7A4C(TRACK_PART_STYLE_DASH);
         }
@@ -452,7 +452,7 @@ void func_xk2_800D8018(void) {
         return;
     }
 
-    switch (D_802CB6D0.segments[D_800D6CA0.unk_0C].trackSegmentInfo & TRACK_SHAPE_MASK) {
+    switch (D_802CB6D0.segments[D_800D6CA0.selectedControlPoint].trackSegmentInfo & TRACK_SHAPE_MASK) {
         case TRACK_SHAPE_PIPE:
         case TRACK_SHAPE_CYLINDER:
         case TRACK_SHAPE_HALF_PIPE:
@@ -466,13 +466,13 @@ void func_xk2_800D8018(void) {
         return;
     }
     if (gDirtTypeOption == DIRT_MAX) {
-        if (COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.unk_0C] != DIRT_NONE) {
+        if (COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.selectedControlPoint] != DIRT_NONE) {
             Audio_TriggerSystemSE(NA_SE_39);
             func_xk2_800EF78C();
-            COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.unk_0C] = DIRT_NONE;
+            COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.selectedControlPoint] = DIRT_NONE;
             D_xk2_800F7040 = 3;
         }
-    } else if (gDirtTypeOption != COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.unk_0C]) {
+    } else if (gDirtTypeOption != COURSE_CONTEXT()->courseData.dirt[D_800D6CA0.selectedControlPoint]) {
         func_xk2_800EF78C();
         func_xk2_800D7A4C(TRACK_PART_STYLE_DIRT);
     }
@@ -483,7 +483,7 @@ void func_xk2_800D8154(void) {
     if (gPartsStyleOption != TRACK_PART_STYLE_SLIP) {
         return;
     }
-    switch (D_802CB6D0.segments[D_800D6CA0.unk_0C].trackSegmentInfo & TRACK_SHAPE_MASK) {
+    switch (D_802CB6D0.segments[D_800D6CA0.selectedControlPoint].trackSegmentInfo & TRACK_SHAPE_MASK) {
         case TRACK_SHAPE_PIPE:
         case TRACK_SHAPE_CYLINDER:
         case TRACK_SHAPE_HALF_PIPE:
@@ -497,13 +497,13 @@ void func_xk2_800D8154(void) {
         return;
     }
     if (gIceTypeOption == ICE_MAX) {
-        if (COURSE_CONTEXT()->courseData.ice[D_800D6CA0.unk_0C] != ICE_NONE) {
+        if (COURSE_CONTEXT()->courseData.ice[D_800D6CA0.selectedControlPoint] != ICE_NONE) {
             Audio_TriggerSystemSE(NA_SE_39);
             func_xk2_800EF78C();
-            COURSE_CONTEXT()->courseData.ice[D_800D6CA0.unk_0C] = ICE_NONE;
+            COURSE_CONTEXT()->courseData.ice[D_800D6CA0.selectedControlPoint] = ICE_NONE;
             D_xk2_800F7040 = 3;
         }
-    } else if (gIceTypeOption != COURSE_CONTEXT()->courseData.ice[D_800D6CA0.unk_0C]) {
+    } else if (gIceTypeOption != COURSE_CONTEXT()->courseData.ice[D_800D6CA0.selectedControlPoint]) {
         func_xk2_800EF78C();
         func_xk2_800D7A4C(TRACK_PART_STYLE_SLIP);
     }
@@ -524,7 +524,7 @@ void func_xk2_800D8290(void) {
         return;
     }
 
-    switch (D_802CB6D0.segments[D_800D6CA0.unk_0C].trackSegmentInfo & TRACK_SHAPE_MASK) {
+    switch (D_802CB6D0.segments[D_800D6CA0.selectedControlPoint].trackSegmentInfo & TRACK_SHAPE_MASK) {
         case TRACK_SHAPE_PIPE:
         case TRACK_SHAPE_CYLINDER:
         case TRACK_SHAPE_HALF_PIPE:
@@ -539,18 +539,18 @@ void func_xk2_800D8290(void) {
         }
     }
     if (gJumpTypeOption == JUMP_MAX) {
-        if (COURSE_CONTEXT()->courseData.jump[D_800D6CA0.unk_0C] != JUMP_NONE) {
+        if (COURSE_CONTEXT()->courseData.jump[D_800D6CA0.selectedControlPoint] != JUMP_NONE) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
-            COURSE_CONTEXT()->courseData.jump[D_800D6CA0.unk_0C] = JUMP_NONE;
+            COURSE_CONTEXT()->courseData.jump[D_800D6CA0.selectedControlPoint] = JUMP_NONE;
         }
     } else {
-        if ((jumpCount >= 8) && (COURSE_CONTEXT()->courseData.jump[D_800D6CA0.unk_0C] == JUMP_NONE)) {
+        if ((jumpCount >= 8) && (COURSE_CONTEXT()->courseData.jump[D_800D6CA0.selectedControlPoint] == JUMP_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
-        } else if (gJumpTypeOption != COURSE_CONTEXT()->courseData.jump[D_800D6CA0.unk_0C]) {
+        } else if (gJumpTypeOption != COURSE_CONTEXT()->courseData.jump[D_800D6CA0.selectedControlPoint]) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
-            COURSE_CONTEXT()->courseData.jump[D_800D6CA0.unk_0C] = gJumpTypeOption;
+            COURSE_CONTEXT()->courseData.jump[D_800D6CA0.selectedControlPoint] = gJumpTypeOption;
         }
     }
 }
@@ -564,7 +564,7 @@ void func_xk2_800D8418(void) {
         return;
     }
 
-    switch (D_802CB6D0.segments[D_800D6CA0.unk_0C].trackSegmentInfo & TRACK_SHAPE_MASK) {
+    switch (D_802CB6D0.segments[D_800D6CA0.selectedControlPoint].trackSegmentInfo & TRACK_SHAPE_MASK) {
         case TRACK_SHAPE_PIPE:
         case TRACK_SHAPE_CYLINDER:
         case TRACK_SHAPE_HALF_PIPE:
@@ -579,18 +579,18 @@ void func_xk2_800D8418(void) {
         }
     }
     if (gLandmineTypeOption == LANDMINE_MAX) {
-        if (COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.unk_0C] != LANDMINE_NONE) {
+        if (COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.selectedControlPoint] != LANDMINE_NONE) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
-            COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.unk_0C] = LANDMINE_NONE;
+            COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.selectedControlPoint] = LANDMINE_NONE;
         }
     } else {
-        if ((landmineCount >= 8) && (COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.unk_0C] == LANDMINE_NONE)) {
+        if ((landmineCount >= 8) && (COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.selectedControlPoint] == LANDMINE_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
-        } else if (gLandmineTypeOption != COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.unk_0C]) {
+        } else if (gLandmineTypeOption != COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.selectedControlPoint]) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
-            COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.unk_0C] = gLandmineTypeOption;
+            COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.selectedControlPoint] = gLandmineTypeOption;
         }
     }
 }
@@ -604,9 +604,9 @@ void func_xk2_800D85A0(void) {
         return;
     }
 
-    switch (D_802CB6D0.segments[D_800D6CA0.unk_0C].trackSegmentInfo & TRACK_SHAPE_MASK) {
+    switch (D_802CB6D0.segments[D_800D6CA0.selectedControlPoint].trackSegmentInfo & TRACK_SHAPE_MASK) {
         case TRACK_SHAPE_AIR:
-            switch (D_802CB6D0.segments[D_800D6CA0.unk_0C].prev->trackSegmentInfo & TRACK_SHAPE_MASK) {
+            switch (D_802CB6D0.segments[D_800D6CA0.selectedControlPoint].prev->trackSegmentInfo & TRACK_SHAPE_MASK) {
                 case TRACK_SHAPE_ROAD:
                 case TRACK_SHAPE_BORDERLESS_ROAD:
                     break;
@@ -636,20 +636,20 @@ void func_xk2_800D85A0(void) {
     }
 
     if (gGateTypeOption == GATE_MAX) {
-        if (COURSE_CONTEXT()->courseData.gate[D_800D6CA0.unk_0C] != GATE_NONE) {
+        if (COURSE_CONTEXT()->courseData.gate[D_800D6CA0.selectedControlPoint] != GATE_NONE) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
-            COURSE_CONTEXT()->courseData.gate[D_800D6CA0.unk_0C] = GATE_NONE;
+            COURSE_CONTEXT()->courseData.gate[D_800D6CA0.selectedControlPoint] = GATE_NONE;
         }
     } else {
-        if ((decorationalFeatureCount >= 16) && (COURSE_CONTEXT()->courseData.gate[D_800D6CA0.unk_0C] == GATE_NONE)) {
+        if ((decorationalFeatureCount >= 16) && (COURSE_CONTEXT()->courseData.gate[D_800D6CA0.selectedControlPoint] == GATE_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
-        if (gGateTypeOption != COURSE_CONTEXT()->courseData.gate[D_800D6CA0.unk_0C]) {
+        if (gGateTypeOption != COURSE_CONTEXT()->courseData.gate[D_800D6CA0.selectedControlPoint]) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
-            COURSE_CONTEXT()->courseData.gate[D_800D6CA0.unk_0C] = gGateTypeOption;
+            COURSE_CONTEXT()->courseData.gate[D_800D6CA0.selectedControlPoint] = gGateTypeOption;
         }
     }
 }
@@ -675,21 +675,21 @@ void func_xk2_800D8778(void) {
         }
     }
     if (gBuildingTypeOption == BUILDING_MAX) {
-        if (COURSE_CONTEXT()->courseData.building[D_800D6CA0.unk_0C] != BUILDING_NONE) {
+        if (COURSE_CONTEXT()->courseData.building[D_800D6CA0.selectedControlPoint] != BUILDING_NONE) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
-            COURSE_CONTEXT()->courseData.building[D_800D6CA0.unk_0C] = BUILDING_NONE;
+            COURSE_CONTEXT()->courseData.building[D_800D6CA0.selectedControlPoint] = BUILDING_NONE;
         }
     } else {
         if ((decorationalFeatureCount >= 16) &&
-            (COURSE_CONTEXT()->courseData.building[D_800D6CA0.unk_0C] == BUILDING_NONE)) {
+            (COURSE_CONTEXT()->courseData.building[D_800D6CA0.selectedControlPoint] == BUILDING_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
-        if (gBuildingTypeOption != COURSE_CONTEXT()->courseData.building[D_800D6CA0.unk_0C]) {
+        if (gBuildingTypeOption != COURSE_CONTEXT()->courseData.building[D_800D6CA0.selectedControlPoint]) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
-            COURSE_CONTEXT()->courseData.building[D_800D6CA0.unk_0C] = gBuildingTypeOption;
+            COURSE_CONTEXT()->courseData.building[D_800D6CA0.selectedControlPoint] = gBuildingTypeOption;
         }
     }
 }
@@ -703,9 +703,9 @@ void func_xk2_800D88D8(void) {
         return;
     }
 
-    switch (D_802CB6D0.segments[D_800D6CA0.unk_0C].trackSegmentInfo & TRACK_SHAPE_MASK) {
+    switch (D_802CB6D0.segments[D_800D6CA0.selectedControlPoint].trackSegmentInfo & TRACK_SHAPE_MASK) {
         case TRACK_SHAPE_AIR:
-            switch (D_802CB6D0.segments[D_800D6CA0.unk_0C].prev->trackSegmentInfo & TRACK_SHAPE_MASK) {
+            switch (D_802CB6D0.segments[D_800D6CA0.selectedControlPoint].prev->trackSegmentInfo & TRACK_SHAPE_MASK) {
                 case TRACK_SHAPE_ROAD:
                 case TRACK_SHAPE_BORDERLESS_ROAD:
                     break;
@@ -735,20 +735,20 @@ void func_xk2_800D88D8(void) {
     }
 
     if (gSignTypeOption == SIGN_MAX) {
-        if (COURSE_CONTEXT()->courseData.sign[D_800D6CA0.unk_0C] != SIGN_NONE) {
+        if (COURSE_CONTEXT()->courseData.sign[D_800D6CA0.selectedControlPoint] != SIGN_NONE) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
-            COURSE_CONTEXT()->courseData.sign[D_800D6CA0.unk_0C] = SIGN_NONE;
+            COURSE_CONTEXT()->courseData.sign[D_800D6CA0.selectedControlPoint] = SIGN_NONE;
         }
     } else {
-        if ((decorationalFeatureCount >= 16) && (COURSE_CONTEXT()->courseData.sign[D_800D6CA0.unk_0C] == SIGN_NONE)) {
+        if ((decorationalFeatureCount >= 16) && (COURSE_CONTEXT()->courseData.sign[D_800D6CA0.selectedControlPoint] == SIGN_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
-        if (gSignTypeOption != COURSE_CONTEXT()->courseData.sign[D_800D6CA0.unk_0C]) {
+        if (gSignTypeOption != COURSE_CONTEXT()->courseData.sign[D_800D6CA0.selectedControlPoint]) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
-            COURSE_CONTEXT()->courseData.sign[D_800D6CA0.unk_0C] = gSignTypeOption;
+            COURSE_CONTEXT()->courseData.sign[D_800D6CA0.selectedControlPoint] = gSignTypeOption;
         }
     }
 }
@@ -772,12 +772,12 @@ void func_xk2_800D8AB8(void) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
-        if (D_800D6CA0.unk_0C == 0) {
+        if (D_800D6CA0.selectedControlPoint == 0) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
-        if (D_800D6CA0.unk_0C != -1) {
-            temp_v0 = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+        if (D_800D6CA0.selectedControlPoint != -1) {
+            temp_v0 = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
             Math_VectorGetDistance(temp_v0->pos, temp_v0->next->pos);
 
             temp_a1 = gDesignStyleOption;
@@ -897,7 +897,7 @@ extern MenuWidget gCourseEditWidget;
 void CourseEdit_UpdateEditMode(void) {
     s32 pad[37];
     s32 temp_v1;
-    s32 sp1C;
+    s32 prevIndex;
 
     sCourseEditController = &gControllers[gPlayerControlPorts[0]];
 
@@ -933,16 +933,16 @@ void CourseEdit_UpdateEditMode(void) {
         D_xk2_800F703C = -1;
     }
     func_xk2_800DF54C();
-    func_xk2_800F5F2C();
+    CourseEdit_UpdateControlPointHighlight();
     if (!gInCourseEditTestRun) {
         func_xk2_800D7058();
         func_xk2_800D71E8();
         func_xk2_800D78A0();
     }
     func_xk2_800DF2EC();
-    sp1C = gCourseEditHighlightedIconIndex;
+    prevIndex = gCourseEditHighlightedIconIndex;
     CourseEdit_UpdateHighlightedIconIndex();
-    if ((sp1C != -1) && (gCourseEditHighlightedIconIndex == -1)) {
+    if ((prevIndex != -1) && (gCourseEditHighlightedIconIndex == -1)) {
         Audio_TriggerSystemSE(NA_SE_35);
     }
     func_xk2_800DEC1C();
@@ -1767,9 +1767,9 @@ void func_xk2_800DB924(void) {
     func_xk2_800DB550();
 
     if (D_802CB6D0.controlPointCount != 0) {
-        D_800D6CA0.unk_0C = 0;
+        D_800D6CA0.selectedControlPoint = 0;
     } else {
-        D_800D6CA0.unk_0C = -1;
+        D_800D6CA0.selectedControlPoint = -1;
     }
     if (D_802CB6D0.controlPointCount < 4) {
         gCreateOption = CREATE_OPTION_COURSE;
@@ -2002,7 +2002,7 @@ void func_xk2_800DC2D0(void) {
         func_xk2_800DC3F8();
         temp_v0_2 = func_xk2_800EFDE4(4000.0f);
         if (temp_v0_2 != -1) {
-            D_800D6CA0.unk_0C = temp_v0_2;
+            D_800D6CA0.selectedControlPoint = temp_v0_2;
             D_xk2_80119730 = 0.0f;
             D_xk2_80119734 = 0.0f;
             D_xk2_80119738 = 0.0f;
@@ -2034,7 +2034,7 @@ void func_xk2_800DC428(void) {
         D_xk2_801197EC = D_802CB6D0.segments;
         D_xk2_800F704C = -1;
         func_xk2_800DC3F8();
-        D_800D6CA0.unk_0C = D_xk2_80119800;
+        D_800D6CA0.selectedControlPoint = D_xk2_80119800;
         D_800D6CA0.unk_00 = 0;
     }
 }
@@ -2043,9 +2043,9 @@ void func_xk2_800DC4E4(void) {
     if ((sCourseEditController->buttonPressed & BTN_A) && (D_800D6CA0.state == 0) && (gPointOption == POINT_OPTION_START) &&
         (gCreateOption == CREATE_OPTION_COURSE) && (gCourseEditCursorYPos >= 0x38) && (func_xk2_800DEFCC() == 0)) {
         D_xk2_800F7040 = 3;
-        D_800D6CA0.unk_0C = 1;
+        D_800D6CA0.selectedControlPoint = 1;
         func_xk2_800DEB38();
-        D_800D6CA0.unk_0C = 0;
+        D_800D6CA0.selectedControlPoint = 0;
     }
 }
 
@@ -2070,14 +2070,14 @@ void func_xk2_800DC58C(void) {
 }
 
 extern s32 D_xk1_80030608;
-extern s32 D_8076C968;
+extern s32 gCourseEditAlignPointsEnabled;
 
 void func_xk2_800DC67C(void) {
     s32 sp16C;
     s32 sp168;
     s32 sp164;
-    CourseSegment spC0;
-    CourseSegment* spBC;
+    CourseSegment newSegment;
+    CourseSegment* connectedSegment;
     s32 temp_a1;
     s32 var_v1;
 
@@ -2096,23 +2096,23 @@ void func_xk2_800DC67C(void) {
             Audio_TriggerSystemSE(NA_SE_36);
             return;
         }
-        if (D_802CB6D0.controlPointCount >= 0x40) {
+        if (D_802CB6D0.controlPointCount >= 64) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
         Audio_TriggerSystemSE(NA_SE_36);
         D_xk2_800F704C = D_xk2_800F703C;
         if ((gCreateOption == CREATE_OPTION_COURSE) && (D_xk2_80104CA0[1] == 0) && (D_xk2_80104CA0[10] == 0)) {
-            spC0 = D_800D6CA0.unk_28;
-            if ((spC0.pos.x < -15000.0f) || (spC0.pos.x > 15000.0f) || (spC0.pos.y < 0.0f) || (spC0.pos.y > 5000.0f) ||
-                (spC0.pos.z < -15000.0f) || (spC0.pos.z > 15000.0f)) {
+            newSegment = D_800D6CA0.newSegment;
+            if ((newSegment.pos.x < -15000.0f) || (newSegment.pos.x > 15000.0f) || (newSegment.pos.y < 0.0f) || (newSegment.pos.y > 5000.0f) ||
+                (newSegment.pos.z < -15000.0f) || (newSegment.pos.z > 15000.0f)) {
                 Audio_TriggerSystemSE(NA_SE_32);
                 return;
             }
-            if (D_8076C968 != 0) {
-                sp16C = Math_Round(spC0.pos.x);
-                sp168 = Math_Round(spC0.pos.y);
-                sp164 = Math_Round(spC0.pos.z);
+            if (gCourseEditAlignPointsEnabled != 0) {
+                sp16C = Math_Round(newSegment.pos.x);
+                sp168 = Math_Round(newSegment.pos.y);
+                sp164 = Math_Round(newSegment.pos.z);
                 var_v1 = ABS(sp16C);
                 temp_a1 = D_xk1_80030608 / 2;
                 if (var_v1 < temp_a1) {
@@ -2140,36 +2140,36 @@ void func_xk2_800DC67C(void) {
                 } else {
                     sp164 = ((sp164 - temp_a1) / D_xk1_80030608) * D_xk1_80030608;
                 }
-                spC0.pos.x = sp16C;
-                spC0.pos.y = sp168;
-                spC0.pos.z = sp164;
+                newSegment.pos.x = sp16C;
+                newSegment.pos.y = sp168;
+                newSegment.pos.z = sp164;
             }
             if (D_802CB6D0.controlPointCount != 0) {
-                spBC = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
-                if (Math_VectorGetDistance(spC0.pos, spBC->pos) < 498.0f) {
+                connectedSegment = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
+                if (Math_VectorGetDistance(newSegment.pos, connectedSegment->pos) < 498.0f) {
                     Audio_TriggerSystemSE(NA_SE_32);
                     return;
                 }
-                spBC = spBC->next;
-                if (Math_VectorGetDistance(spC0.pos, spBC->pos) < 498.0f) {
+                connectedSegment = connectedSegment->next;
+                if (Math_VectorGetDistance(newSegment.pos, connectedSegment->pos) < 498.0f) {
                     Audio_TriggerSystemSE(NA_SE_32);
                     return;
                 }
             }
 
             Audio_TriggerSystemSE(NA_SE_39);
-            if ((D_xk2_800F704C == -1) && (D_802CB6D0.controlPointCount < 0x40)) {
+            if ((D_xk2_800F704C == -1) && (D_802CB6D0.controlPointCount < 64)) {
                 D_xk2_800F7040 = 3;
                 func_xk2_800EF78C();
                 D_xk2_800F704C = -1;
-                func_xk2_800E6CA8(D_800D6CA0.unk_0C, spC0);
+                CourseEdit_AddNewSegment(D_800D6CA0.selectedControlPoint, newSegment);
             }
         }
     }
 }
 
 void func_xk2_800DCCD8(void) {
-    CourseSegment* temp_at = &D_800D6CA0.unk_28;
+    CourseSegment* temp_at = &D_800D6CA0.newSegment;
     CourseSegment* temp_v0_2;
 
     if ((gCreateOption != CREATE_OPTION_POINT) || (D_800D6CA0.unk_00 != 1)) {
@@ -2177,7 +2177,7 @@ void func_xk2_800DCCD8(void) {
     }
     if ((gMoveOption != MOVE_OPTION_CLEAR) && (sCourseEditController->buttonPressed & BTN_A)) {
         D_xk2_800F7040 = 3;
-        if (D_8076C968 != 0) {
+        if (gCourseEditAlignPointsEnabled != 0) {
             func_xk2_800DE4F8();
         }
         if (gMoveOption != MOVE_OPTION_STRAIGHT) {
@@ -2224,7 +2224,7 @@ void func_xk2_800DCDD0(void) {
                     var_v1 = 0;
                 }
                 if ((sp18 >= var_v1) && (sp18 < var_a0)) {
-                    D_800D6CA0.unk_0C = i;
+                    D_800D6CA0.selectedControlPoint = i;
                 }
             }
         }
@@ -2248,7 +2248,7 @@ void func_xk2_800DCF2C(void) {
         return;
     }
 
-    sp1C = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    sp1C = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
     if ((sp1C->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) !=
         (D_xk2_800F6950[gRoadTypeOption] & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
         func_xk2_800EF78C();
@@ -2273,7 +2273,7 @@ void func_xk2_800DCFE0(void) {
         return;
     }
 
-    sp1C = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    sp1C = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
     if (!func_xk2_800DD688(TRACK_SHAPE_WALLED_ROAD) &&
         (sp1C->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) !=
             (D_xk2_800F6964[gHRoadTypeOption] & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
@@ -2299,7 +2299,7 @@ void func_xk2_800DD0AC(void) {
         return;
     }
 
-    sp1C = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    sp1C = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
     if (!func_xk2_800DD688(TRACK_SHAPE_BORDERLESS_ROAD) &&
         (sp1C->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) !=
             (D_xk2_800F6970[gTRoadTypeOption] & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
@@ -2326,7 +2326,7 @@ void func_xk2_800DD178(void) {
         return;
     }
 
-    sp1C = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    sp1C = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
     if (!func_xk2_800DD688(TRACK_SHAPE_TUNNEL) &&
         (sp1C->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) !=
             (D_xk2_800F697C[gTunnelTypeOption] & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
@@ -2354,7 +2354,7 @@ void func_xk2_800DD244(void) {
         return;
     }
 
-    sp1C = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    sp1C = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
     if (!func_xk2_800DD688(TRACK_SHAPE_PIPE) &&
         (sp1C->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) !=
             (D_xk2_800F698C[gPipeTypeOption] & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
@@ -2390,7 +2390,7 @@ void func_xk2_800DD350(void) {
         return;
     }
 
-    sp1C = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    sp1C = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
     if (!func_xk2_800DD688(TRACK_SHAPE_HALF_PIPE) &&
         (sp1C->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) !=
             (D_xk2_800F699C[gHalfPipeTypeOption] & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
@@ -2426,7 +2426,7 @@ void func_xk2_800DD45C(void) {
         return;
     }
 
-    sp1C = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    sp1C = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
     if (!func_xk2_800DD688(TRACK_SHAPE_CYLINDER) &&
         (sp1C->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) !=
             (D_xk2_800F69AC[gCylinderTypeOption] & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK))) {
@@ -2452,7 +2452,7 @@ void func_xk2_800DD568(void) {
         return;
     }
 
-    sp1C = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    sp1C = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
     if ((sp1C->trackSegmentInfo & (TRACK_SHAPE_MASK | TRACK_TYPE_MASK)) != (TRACK_SHAPE_AIR | TRACK_TYPE_NONE)) {
         Audio_TriggerSystemSE(NA_SE_39);
         func_xk2_800EF78C();
@@ -2480,7 +2480,7 @@ bool func_xk2_800DD688(s32 arg0) {
     s32 temp_v1;
     s32 temp_a1;
 
-    temp_v0 = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    temp_v0 = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
     temp_v1 = temp_v0->prev->trackSegmentInfo & TRACK_FLAG_JOINABLE;
     temp_a1 = temp_v0->next->trackSegmentInfo & TRACK_FLAG_JOINABLE;
 
@@ -2668,7 +2668,7 @@ void func_xk2_800DD938(void) {
     sp1C = &gExpansionKitLoadedFiles[D_xk2_80119884];
     switch (D_80119880) {
         case 6:
-            func_xk2_800F5C50();
+            CourseEdit_ClearControlPointHighlight();
             if (D_xk2_80119884 >= 0x18) {
                 Course_Load(D_xk2_80119884 + 6);
             } else {
@@ -2681,7 +2681,7 @@ void func_xk2_800DD938(void) {
             D_xk2_800F7064 = Math_Rand2() & 3;
             break;
         case 0:
-            func_xk2_800F5C50();
+            CourseEdit_ClearControlPointHighlight();
             func_xk2_800EAF24(sp1C);
             gCourseEditFileOption = -1;
             D_800D6CA0.state = 0x13;
@@ -2970,12 +2970,12 @@ extern u16* gCourseEditIconTextures[];
 void func_xk2_800DE8D0(void) {
 
     if (sCourseEditController->buttonPressed & BTN_A) {
-        if ((D_800D6CA0.unk_00 == 1) || (gCourseEditHighlightedIconIndex != 2)) {
+        if ((D_800D6CA0.unk_00 == 1) || (gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_ALIGN_POINTS)) {
             return;
         }
         Audio_TriggerSystemSE(NA_SE_36);
-        D_8076C968 = (D_8076C968 + 1) % 2;
-        if (D_8076C968 != 0) {
+        gCourseEditAlignPointsEnabled = (gCourseEditAlignPointsEnabled + 1) % 2;
+        if (gCourseEditAlignPointsEnabled != 0) {
             gCourseEditIconTextures[2] = aCourseEditGoldGridAlignIconTex;
         } else {
             gCourseEditIconTextures[2] = aCourseEditGridAlignIconTex;
@@ -3002,7 +3002,7 @@ s32 func_xk2_800DEA14(void) {
 }
 
 void func_xk2_800DEA20(void) {
-    s32 sp1C;
+    s32 prevIndex;
 
     if (D_800D6CA0.state == 2) {
         return;
@@ -3011,11 +3011,11 @@ void func_xk2_800DEA20(void) {
     if ((D_xk2_800F684C != 1) && (D_80794E14 == 0)) {
         EKController_UpdateHorizontalOption(&D_xk2_800F6848, 5, 1);
     }
-    sp1C = D_xk2_800F684C;
+    prevIndex = D_xk2_800F684C;
     if (D_xk2_800F6848 == 5) {
         EKController_UpdateVerticalOptionSlow(&D_xk2_800F684C, 1, 1);
     }
-    if (sp1C != D_xk2_800F684C) {
+    if (prevIndex != D_xk2_800F684C) {
         Audio_TriggerSystemSE(NA_SE_35);
     }
     gCourseEditCursorXPos = (D_xk2_800F6848 * 48) + 48;
@@ -3032,7 +3032,7 @@ void func_xk2_800DEB38(void) {
     CourseSegment* temp_v0;
 
     Audio_TriggerSystemSE(NA_SE_36);
-    temp_v0 = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    temp_v0 = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
     gCourseEditCameraAtX = temp_v0->pos.x * 0.3f;
     gCourseEditCameraAtY = temp_v0->pos.y * 0.3f;
     gCourseEditCameraAtZ = temp_v0->pos.z * 0.3f;
@@ -3043,7 +3043,7 @@ void func_xk2_800DEB38(void) {
 
 void func_xk2_800DEC1C(void) {
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
-        if ((gCourseEditHighlightedIconIndex != 1) || (D_800D6CA0.unk_00 == 1)) {
+        if ((gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_LINE_DISPLAY) || (D_800D6CA0.unk_00 == 1)) {
             return;
         }
         Audio_TriggerSystemSE(NA_SE_36);
@@ -3061,17 +3061,17 @@ void func_xk2_800DEC1C(void) {
     }
 }
 
-extern s32 D_8076C96C;
+extern s32 gCourseEditToolTipEnabled;
 
 void func_xk2_800DECF0(void) {
 
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
-        if ((gCourseEditHighlightedIconIndex != 3) || (D_800D6CA0.unk_00 == 1)) {
+        if ((gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_TOOLTIPS) || (D_800D6CA0.unk_00 == 1)) {
             return;
         }
         Audio_TriggerSystemSE(NA_SE_36);
-        D_8076C96C ^= 1;
-        if (D_8076C96C != 0) {
+        gCourseEditToolTipEnabled ^= 1;
+        if (gCourseEditToolTipEnabled) {
             gCourseEditIconTextures[3] = aCourseEditGoldQuestionIconTex;
         } else {
             gCourseEditIconTextures[3] = aCourseEditQuestionIconTex;
@@ -3099,7 +3099,7 @@ extern s32 D_xk2_80103FF8;
 
 void func_xk2_800DEE20(void) {
     if (gInCourseEditTestRun || (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A)) {
-        if ((D_800D6CA0.unk_00 == 1) || (gCourseEditHighlightedIconIndex != 0)) {
+        if ((D_800D6CA0.unk_00 == 1) || (gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_TEST_DRIVE)) {
             return;
         }
         if ((D_802CB6D0.controlPointCount < 4) || (D_800D6CA0.unk_20 != -1) || (func_xk2_800DEDA8() != 0)) {
@@ -3141,7 +3141,7 @@ s32 func_xk2_800DEFCC(void) {
     s32 i;
     s32 var_a3;
 
-    var_a3 = D_800D6CA0.unk_0C;
+    var_a3 = D_800D6CA0.selectedControlPoint;
     if (D_802CB6D0.controlPointCount < 4) {
         Audio_TriggerSystemSE(NA_SE_32);
         return -1;
@@ -3188,7 +3188,7 @@ s32 func_xk2_800DEFCC(void) {
 
     D_802CB6D0.segments[0].trackSegmentInfo =
         (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_START_LINE);
-    D_800D6CA0.unk_0C = 0;
+    D_800D6CA0.selectedControlPoint = 0;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         D_xk2_801197EC = &D_802CB6D0.segments[i];

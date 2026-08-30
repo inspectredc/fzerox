@@ -288,6 +288,7 @@
       - [0x1A0B50, c, 1A0B50]
       - [0x1A1240, c, 1A1240]
       - [0x1A2D70, c, 1A2D70]
+      - [0x1A2E20, c, 1A2E20]
       - [0x1A3AB0, c, 1A3AB0]
       - [0x1A4020, c, 1A4020]
       - [0x1A4210, c, 1A4210]
@@ -310,7 +311,8 @@
       - [0x1B6680, .data, 1A1240]
       - [0x1B6690, .rodata, 1A1240]
       - [0x1B6760, .data, 1A2D70]
-      - [0x1B6790, .rodata, 1A2D70]
+      - [0x1B6770, .data, 1A2E20]
+      - [0x1B6790, .rodata, 1A2E20]
       - [0x1B67D0, .data, 1A3AB0]
       - [0x1B6890, .rodata, 1A3AB0]
       - [0x1B69B0, .data, 1A4210]
@@ -325,6 +327,7 @@
       - { type: .bss, vram: 0x80128CA0, name: 19FA50 }
       - { type: .bss, vram: 0x80128CB0, name: 1A1240 }
       - { type: .bss, vram: 0x80128D00, name: 1A2D70 }
+      - { type: .bss, vram: 0x80128D40, name: 1A2E20 }
       - { type: .bss, vram: 0x80128D70, name: oxl_xk2_bss }
       - { type: .bss, vram: 0x8013A740, name: 1A7710 }
       - { type: .bss, vram: 0x8013A7E0, name: 1A7D50 }

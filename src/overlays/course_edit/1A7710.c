@@ -1,8 +1,9 @@
 #include "global.h"
 #include "fzx_camera.h"
+#include "fzx_expansion_kit.h"
 #include ASSET_HEADER_EK(course_edit_textures.h)
 
-Vec3f D_xk2_8013A740;
+Vec3f sCourseEditControlPointHighlightPos;
 UNUSED s32 D_xk2_8013A750[2];
 Mtx sCourseEditControlPointOrthoMtx;
 Mtx sCourseEditControlPointLookAtMtx;
@@ -10,22 +11,22 @@ Mtx sCourseEditControlPointLookAtMtx;
 bool sCourseEditControlPointIsHighlighted = false;
 s32 sCourseEditHighlightedControlPoint = -1;
 
-void func_xk2_800F5C50(void) {
+void CourseEdit_ClearControlPointHighlight(void) {
     sCourseEditControlPointIsHighlighted = false;
 }
 
-void func_xk2_800F5C5C(void) {
+void CourseEdit_InitControlPointHighlight(void) {
     Matrix_SetOrtho(&sCourseEditControlPointOrthoMtx, NULL, 1.0f, -(SCREEN_WIDTH / 2), (SCREEN_WIDTH / 2), -(SCREEN_HEIGHT / 2), (SCREEN_HEIGHT / 2), 16.0f, 256.0f);
     Matrix_SetLookAt(&sCourseEditControlPointLookAtMtx, NULL, 0.0f, 0.0f, 128.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 }
 
-bool func_xk2_800F5D10(void) {
+bool CourseEdit_IsControlPointHighlighted(void) {
     return sCourseEditControlPointIsHighlighted;
 }
 
 extern GfxPool* gGfxPool;
 
-void func_xk2_800F5D1C(void) {
+void CourseEdit_UpdateControlPointHighlightVtxs(void) {
     static s32 sControlPointHighlightAngle = 0;
     s32 angle;
     Vtx* vtx;
@@ -83,7 +84,7 @@ void func_xk2_800F5D1C(void) {
     // clang-format on
 }
 
-extern s32 D_8076C968;
+extern s32 gCourseEditAlignPointsEnabled;
 extern s32 gCourseEditCameraZoom;
 extern s32 gCourseEditCameraAtX;
 extern s32 gCourseEditCameraAtY;
@@ -94,13 +95,12 @@ extern s32 gCourseEditCursorXPos;
 extern s32 gCourseEditCursorYPos;
 extern s32 D_xk2_800F7040;
 
-// Update control point highlight
-void func_xk2_800F5F2C(void) {
+void CourseEdit_UpdateControlPointHighlight(void) {
     static s32 sZPressActivationTimer = 0;
     static s32 sZPressActivated = 0;
 
     if (sCourseEditControlPointIsHighlighted) {
-        func_xk2_800F5D1C();
+        CourseEdit_UpdateControlPointHighlightVtxs();
     }
     if (sZPressActivationTimer != 0) {
         sZPressActivationTimer--;
@@ -128,7 +128,7 @@ void func_xk2_800F5F2C(void) {
         sCourseEditControlPointIsHighlighted = true;
         gCourseEditCursorXPos = SCREEN_WIDTH / 2;
         gCourseEditCursorYPos = SCREEN_HEIGHT / 2;
-        if (D_8076C968 != 0) {
+        if (gCourseEditAlignPointsEnabled != 0) {
             func_xk2_800DE4F8();
         }
         D_xk2_800F7040 = 3;
@@ -136,7 +136,7 @@ void func_xk2_800F5F2C(void) {
             D_800D6CA0.unk_00 = 0;
         }
         func_xk2_800DC3F8();
-        D_xk2_8013A740 = D_802CB6D0.segments[sCourseEditHighlightedControlPoint].pos;
+        sCourseEditControlPointHighlightPos = D_802CB6D0.segments[sCourseEditHighlightedControlPoint].pos;
         gCourseEditCameraAtX = D_802CB6D0.segments[sCourseEditHighlightedControlPoint].pos.x * 0.3f;
         gCourseEditCameraAtY = D_802CB6D0.segments[sCourseEditHighlightedControlPoint].pos.y * 0.3f;
         gCourseEditCameraAtZ = D_802CB6D0.segments[sCourseEditHighlightedControlPoint].pos.z * 0.3f;
@@ -151,8 +151,7 @@ void func_xk2_800F5F2C(void) {
 
 extern GfxPool D_1000000;
 
-// draw control point highlight
-void func_xk2_800F61DC(Gfx** gfxP) {
+void CourseEdit_DrawControlPointHighlight(Gfx** gfxP) {
     Gfx* gfx;
 
     if (!sCourseEditControlPointIsHighlighted || (D_800D6CA0.state != 0)) {

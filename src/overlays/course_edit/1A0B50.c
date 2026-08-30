@@ -1,7 +1,9 @@
 #include "global.h"
 #include "fzx_camera.h"
 
-const f32 D_xk2_80104390[] = {
+#define ARCCOS(x) (sCosInverseTable[(s32)((x) * 511)])
+
+const f32 sCosInverseTable[] = {
     90.0,        89.88787842, 89.77575684, 89.66362762, 89.55149841, 89.4393692,  89.32723236, 89.21510315, 89.10296631,
     88.99082947, 88.878685,   88.7665329,  88.6543808,  88.54222107, 88.43005371, 88.31789398, 88.20571136, 88.09352875,
     87.9813385,  87.86914062, 87.75693512, 87.64472198, 87.53249359, 87.42025757, 87.30801392, 87.19576263, 87.08349609,
@@ -158,9 +160,10 @@ f32 func_xk2_800EF52C(f32 arg0) {
         arg0 = 1.0f;
     }
     if (arg0 >= 0.0f) {
-        return D_xk2_80104390[(s32) (arg0 * 511.0f)];
+        return ARCCOS(arg0);
+    } else {
+        return 180.0f - ARCCOS(-arg0);
     }
-    return 180.0f - D_xk2_80104390[(s32) (-arg0 * 511.0f)];
 }
 
 f32 func_xk2_800EF5E8(f32 arg0, f32 arg1) {
@@ -187,9 +190,9 @@ f32 func_xk2_800EF5E8(f32 arg0, f32 arg1) {
 
     temp_fv0 = sqrtf(SQ(arg1) + SQ(arg0));
     if (arg1 <= arg0) {
-        var_fv1 = D_xk2_80104390[(s32) ((arg1 / temp_fv0) * 511.0f)];
+        var_fv1 = ARCCOS(arg1 / temp_fv0);
     } else {
-        var_fv1 = 90.0f - D_xk2_80104390[(s32) ((arg0 / temp_fv0) * 511.0f)];
+        var_fv1 = 90.0f - ARCCOS(arg0 / temp_fv0);
     }
     if (var_v0 && !var_v1) {
         var_fv1 = 180.0 - var_fv1;

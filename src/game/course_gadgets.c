@@ -44,8 +44,8 @@ s32 D_8076C958 = 90;
 s32 D_8076C95C = 0;
 s32 D_8076C960 = 0;
 s32 D_8076C964 = 1;
-s32 D_8076C968 = 0;
-s32 D_8076C96C = 0;
+s32 gCourseEditAlignPointsEnabled = 0;
+s32 gCourseEditToolTipEnabled = 0;
 
 u16* gCourseEditIconTextures[] = {
     aCourseEditTestDriveIconTex,
@@ -300,7 +300,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
                         ++var_v1;
                     }
                 }
-                if (D_800D6CA0.unk_0C == gCourseFeatures[j].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                if (D_800D6CA0.selectedControlPoint == gCourseFeatures[j].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
                     if (sp1D4 != 1) {
                         sp1D4 = 1;
                         gSPDisplayList(gfx++, D_9014C20);
@@ -342,7 +342,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
                         ++var_v1;
                     }
                 }
-                if (D_800D6CA0.unk_0C == gCourseFeatures[j].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                if (D_800D6CA0.selectedControlPoint == gCourseFeatures[j].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
                     if (sp1D4 != 1) {
                         sp1D4 = 1;
                         gSPDisplayList(gfx++, D_9014C20);
@@ -389,7 +389,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
             for (i = 0; i < effectsInfo->count; i++) {
                 effectDrawData = &gEffectsDrawData[D_800DCCFC][i];
 
-                if (D_800D6CA0.unk_0C == gCourseEffects[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                if (D_800D6CA0.selectedControlPoint == gCourseEffects[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
                     if (sp1D4 != 1) {
                         sp1D4 = 1;
                         gSPDisplayList(gfx++, D_9014C20);
@@ -564,7 +564,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
             if (!Course_FeatureIsDecorational(feature->featureType)) {
                 continue;
             }
-            if (D_800D6CA0.unk_0C == gCourseFeatures[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+            if (D_800D6CA0.selectedControlPoint == gCourseFeatures[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
                 if (sp1D4 != 1) {
                     sp1D4 = 1;
                     gSPDisplayList(gfx++, D_9014C20);
@@ -595,7 +595,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
             if (!Course_FeatureIsDecorational(feature->featureType)) {
                 continue;
             }
-            if (D_800D6CA0.unk_0C == gCourseFeatures[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+            if (D_800D6CA0.selectedControlPoint == gCourseFeatures[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
                 if (sp1D4 != 1) {
                     sp1D4 = 1;
                     gSPDisplayList(gfx++, D_9014C20);

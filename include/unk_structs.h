@@ -606,14 +606,14 @@ typedef struct unk_800D6CA0 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 state;
-    /* 0x0C */ s32 unk_0C;
+    /* 0x0C */ s32 selectedControlPoint;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 courseYaw;
     /* 0x18 */ s8 unk_18[0x4];
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ CourseSegment unk_28;
+    /* 0x28 */ CourseSegment newSegment;
     /* 0xCC */ s8 unk_CC[0x24];
 } unk_800D6CA0; // size = 0xF0
 

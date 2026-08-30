@@ -1,5 +1,6 @@
 #include "global.h"
 #include "leo/mfs.h"
+#include "fzx_expansion_kit.h"
 
 s32 D_xk2_80103F10 = 0;
 s32 D_xk2_80103F14 = 0;

@@ -168,9 +168,9 @@ void CourseEdit_Init(void) {
     D_xk2_800F7040 = 4;
     D_xk2_800F7048 = 0;
     // clang-format off
-    D_800D6CA0.unk_28.pos.x = 0.0f; \
-    D_800D6CA0.unk_28.pos.y = 0.0f; \
-    D_800D6CA0.unk_28.pos.z = 0.0f;
+    D_800D6CA0.newSegment.pos.x = 0.0f; \
+    D_800D6CA0.newSegment.pos.y = 0.0f; \
+    D_800D6CA0.newSegment.pos.z = 0.0f;
     // clang-format on
     ExpansionKit_SetMenuHighlightAlphaChangeScale(3);
     ExpansionKit_SetInputIndicatorFlashRate(3);
@@ -204,13 +204,13 @@ void CourseEdit_Init(void) {
     gBGMOption = gBGMOptionToCourseBGM[COURSE_CONTEXT()->courseData.bgm];
     func_800747EC(gVenueOption);
     func_xk2_800E7028(D_xk1_80030608);
-    func_xk2_800F5C5C();
+    CourseEdit_InitControlPointHighlight();
     EKFileMenu_SetFileListArrowFlashLength(4);
     gCourseVtxPtr = gGfxPool->courseVtxBuffer;
     D_800E12C0 = &gCourseEffectsInfo;
     func_xk2_800DC3F8();
     func_xk2_800DD638();
-    D_800D6CA0.unk_0C = D_802CB6D0.controlPointCount - 1;
+    D_800D6CA0.selectedControlPoint = D_802CB6D0.controlPointCount - 1;
     func_xk2_800EF78C();
     func_xk2_800F0FE8();
     if (D_8076C964 == 1) {
@@ -252,7 +252,7 @@ void CourseEdit_ExitTestRun(void) {
     func_xk2_800F13C4();
     func_xk2_800EF8B0();
     D_xk2_800F7040 = 4;
-    D_800D6CA0.unk_0C = gRacers[0].segmentPositionInfo.courseSegment->next->segmentIndex;
+    D_800D6CA0.selectedControlPoint = gRacers[0].segmentPositionInfo.courseSegment->next->segmentIndex;
 }
 
 extern s32 gCourseEditMenuCursorXPos;
@@ -595,7 +595,7 @@ s32 CourseEdit_Update(void) {
                 sCourseEditExitDelayFrames = 0;
                 D_800D6CA0.state = 0xFD;
             } else if (gCourseEditCameraOnlyMode) {
-                func_xk2_800F5F2C();
+                CourseEdit_UpdateControlPointHighlight();
                 func_xk2_800D7058();
                 func_xk2_800D71E8();
                 func_xk2_800D78A0();

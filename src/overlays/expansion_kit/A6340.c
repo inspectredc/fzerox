@@ -25,7 +25,7 @@ char* func_xk1_800290D0(char* buffer, const char* fmt, size_t size) {
     return (char*) memcpy(buffer, fmt, size) + size;
 }
 
-Gfx* func_xk1_800290F4(Gfx* gfx, s32 arg1, s32 arg2, u32 arg3) {
+Gfx* func_xk1_800290F4(Gfx* gfx, s32 left, s32 top, u32 arg3) {
 
     D_xk1_80032ACC = arg3 / 96;
     switch (arg3 / 96) {
@@ -33,15 +33,15 @@ Gfx* func_xk1_800290F4(Gfx* gfx, s32 arg1, s32 arg2, u32 arg3) {
             gSPDisplayList(gfx++, aExpansionKitSetupFontCharacterSheet1DL);
             break;
         case 1:
-            arg3 -= 0x60;
+            arg3 -= 96;
             gSPDisplayList(gfx++, aExpansionKitSetupFontCharacterSheet2DL);
             break;
         case 2:
-            arg3 -= 0xC0;
+            arg3 -= 2 * 96;
             gSPDisplayList(gfx++, aExpansionKitSetupFontCharacterSheet3DL);
             break;
     }
-    gSPTextureRectangle(gfx++, arg1 << 2, arg2 << 2, (arg1 + 8) << 2, (arg2 + 8) << 2, 0, ((arg3 % 16) * 8) << 5,
+    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 8) << 2, (top + 8) << 2, 0, ((arg3 % 16) * 8) << 5,
                         ((arg3 / 16) * 8) << 5, 1 << 10, 1 << 10);
 
     return gfx;

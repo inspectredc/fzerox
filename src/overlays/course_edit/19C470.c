@@ -2,6 +2,7 @@
 #include "leo/mfs.h"
 #include "fzx_save.h"
 #include "fzx_course.h"
+#include "fzx_expansion_kit.h"
 
 u8 D_xk2_800F7400 = 255;
 s32 D_xk2_800F7404 = 0;
@@ -187,7 +188,7 @@ void func_xk2_800EACB0(void) {
         D_802CB6D0.segments[i].prev = &D_802CB6D0.segments[i - 1];
     }
 
-    D_800D6CA0.unk_0C = 0;
+    D_800D6CA0.selectedControlPoint = 0;
     D_802CB6D0.segments[0].prev = &D_802CB6D0.segments[courseInfo->segmentCount - 1];
     D_802CB6D0.segments[courseInfo->segmentCount - 1].next = &D_802CB6D0.segments[0];
     func_xk2_800DC3F8();
@@ -338,7 +339,7 @@ void func_xk2_800EB400(void) {
     switch (D_80119880) {
         case 6:
             if (D_802CB6D0.controlPointCount == 0) {
-                func_xk2_800F5C50();
+                CourseEdit_ClearControlPointHighlight();
                 if (courseIndex >= COURSE_EDIT_1) {
                     Course_Load(courseIndex + 6);
                 } else {
@@ -372,7 +373,7 @@ void func_xk2_800EB400(void) {
                 func_xk1_8002D16C();
                 D_80119880 = 6;
             } else if (D_802CB6D0.controlPointCount == 0) {
-                func_xk2_800F5C50();
+                CourseEdit_ClearControlPointHighlight();
                 func_xk2_800EAF24(&gExpansionKitLoadedFiles[courseIndex]);
                 gCourseEditFileOption = -1;
                 D_800D6CA0.state = 0x13;

@@ -1367,7 +1367,7 @@ extern s32 gSegmentChunkCount;
 
 void func_xk1_8002860C(void) {
     func_xk2_800EF78C();
-    func_xk2_800F5C50();
+    CourseEdit_ClearControlPointHighlight();
     D_80030060[0] = '\0';
     gCourseEditCameraAtX = 0;
     gCourseEditCameraAtZ = 0;
@@ -1377,7 +1377,7 @@ void func_xk1_8002860C(void) {
     D_802CB6D0.controlPointCount = 0;
     gCurrentCourseInfo->segmentCount = 0;
     COURSE_CONTEXT()->courseData.controlPointCount = 0;
-    D_800D6CA0.unk_0C = -1;
+    D_800D6CA0.selectedControlPoint = -1;
     D_800D6CA0.unk_04 = 0;
     D_800D6CA0.unk_1C = -1;
     if (D_800D6CA0.state != 0x10) {

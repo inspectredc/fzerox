@@ -23,6 +23,7 @@ extern unk_807B3C20 D_802CB6D0;
 extern CourseData D_8010CF50;
 extern unk_800D6CA0 D_800D6CA0;
 
+// Make copy of current course
 void func_xk2_800EF78C(void) {
     s32 i;
 
@@ -35,7 +36,7 @@ void func_xk2_800EF78C(void) {
     }
     D_807B6528 = D_802CB6D0;
     D_8010CF50 = COURSE_CONTEXT()->courseData;
-    D_xk2_80119800 = D_800D6CA0.unk_0C;
+    D_xk2_80119800 = D_800D6CA0.selectedControlPoint;
     D_xk2_80104BC0 = 1;
 }
 
@@ -66,8 +67,8 @@ void func_xk2_800EF8B0(void) {
     COURSE_CONTEXT()->courseData = D_8010CF50;
     D_xk2_801197EC = D_802CB6D0.segments;
     func_xk2_800DC3F8();
-    func_xk2_800F5C50();
-    D_800D6CA0.unk_0C = D_xk2_80119800;
+    CourseEdit_ClearControlPointHighlight();
+    D_800D6CA0.selectedControlPoint = D_xk2_80119800;
     D_xk2_800F7040 = 3;
     gVenueOption = COURSE_CONTEXT()->courseData.venue;
     gSkyboxOption = COURSE_CONTEXT()->courseData.skybox;
@@ -383,7 +384,7 @@ void func_xk2_800F07A4(void) {
     if ((gCourseEditCursorYPos < 0x38) || (D_800D6CA0.state == 1) || (D_800D6CA0.state == 3) ||
         (D_800D6CA0.state == 2) || (D_800D6CA0.state == 0x10) ||
         !((gCreateOption == CREATE_OPTION_DESIGN) && (gDesignStyleOption == TRACK_DESIGN_STYLE_LOOP)) ||
-        !(gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) || (D_800D6CA0.unk_0C == 0)) {
+        !(gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) || (D_800D6CA0.selectedControlPoint == 0)) {
         return;
     }
     if (D_802CB6D0.controlPointCount < 4) {
@@ -399,8 +400,8 @@ void func_xk2_800F07A4(void) {
     }
     func_xk2_800EF78C();
     Audio_TriggerSystemSE(NA_SE_39);
-    sp1C0 = D_800D6CA0.unk_0C;
-    temp_s2 = &D_802CB6D0.segments[D_800D6CA0.unk_0C];
+    sp1C0 = D_800D6CA0.selectedControlPoint;
+    temp_s2 = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
 
     D_xk2_80128CB4 = (temp_s2->radiusLeft + temp_s2->radiusRight) * 0.5f;
     Course_SplineGetBasis(temp_s2, 0.0f, &spCC, Course_SplineGetLengthInfo(temp_s2, 0.0f, &sp1BC));
@@ -434,8 +435,8 @@ void func_xk2_800F07A4(void) {
 
     for (i = 0; i < 5; i++) {
         sp108.pos = D_xk2_80128CB8[i];
-        func_xk2_800E6CA8(D_800D6CA0.unk_0C, sp108);
-        COURSE_CONTEXT()->courseData.bankAngle[D_800D6CA0.unk_0C] = 0;
+        CourseEdit_AddNewSegment(D_800D6CA0.selectedControlPoint, sp108);
+        COURSE_CONTEXT()->courseData.bankAngle[D_800D6CA0.selectedControlPoint] = 0;
     }
     func_i2_800BE8BC(gCurrentCourseInfo);
     temp_s2 = D_802CB6D0.segments[sp1C0].next;
