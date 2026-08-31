@@ -36,8 +36,8 @@ Gfx* CourseEdit_TestRunPauseMenuDraw(Gfx* gfx) {
     }
 
     gDPPipeSync(gfx++);
-    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sCourseEditPauseScissorBoxSize + 100, sCourseEditPauseScissorBoxSize + 41, 230 - sCourseEditPauseScissorBoxSize,
-                  133 - sCourseEditPauseScissorBoxSize);
+    gDPSetScissor(gfx++, G_SC_NON_INTERLACE, sCourseEditPauseScissorBoxSize + 100, sCourseEditPauseScissorBoxSize + 41,
+                  230 - sCourseEditPauseScissorBoxSize, 133 - sCourseEditPauseScissorBoxSize);
 
     gfx = Menus_DrawBeveledBox(gfx, 120, 61, 210, 113, 0, 0, 0, 220);
     gSPDisplayList(gfx++, D_4011D78);

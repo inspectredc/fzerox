@@ -15,49 +15,49 @@ void (*sNameEntryCallbackFunc)(void);
 s32 gExpansionKitNameEntryStrLength = 0;
 s32 sInputIndicatorFlashRate = 1;
 bool D_xk1_80032AC8 = false;
-u32 D_xk1_80032ACC = -1;
-s32 D_xk1_80032AD0 = 0;
+u32 sExpansionKitLastEncFontSheet = -1;
+s32 gExpansionKitEncStrEncType = 0;
 
 char sNameEntryKeyboardStr[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ,'& 0123456789";
 UNUSED s32 D_xk1_80032B00 = 0x202D;
 
-char* func_xk1_800290D0(char* buffer, const char* fmt, size_t size) {
+char* ExpansionKit_EncPrOut(char* buffer, const char* fmt, size_t size) {
     return (char*) memcpy(buffer, fmt, size) + size;
 }
 
-Gfx* func_xk1_800290F4(Gfx* gfx, s32 left, s32 top, u32 arg3) {
+Gfx* ExpansionKit_DrawEncChar(Gfx* gfx, s32 left, s32 top, u32 charValue) {
 
-    D_xk1_80032ACC = arg3 / 96;
-    switch (arg3 / 96) {
+    sExpansionKitLastEncFontSheet = charValue / 96;
+    switch (charValue / 96) {
         case 0:
             gSPDisplayList(gfx++, aExpansionKitSetupFontCharacterSheet1DL);
             break;
         case 1:
-            arg3 -= 96;
+            charValue -= 96;
             gSPDisplayList(gfx++, aExpansionKitSetupFontCharacterSheet2DL);
             break;
         case 2:
-            arg3 -= 2 * 96;
+            charValue -= 2 * 96;
             gSPDisplayList(gfx++, aExpansionKitSetupFontCharacterSheet3DL);
             break;
     }
-    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 8) << 2, (top + 8) << 2, 0, ((arg3 % 16) * 8) << 5,
-                        ((arg3 / 16) * 8) << 5, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 8) << 2, (top + 8) << 2, 0, ((charValue % 16) * 8) << 5,
+                        ((charValue / 16) * 8) << 5, 1 << 10, 1 << 10);
 
     return gfx;
 }
 
-s32 func_xk1_80029218(s32 arg0) {
-    if (arg0 < 0x80) {
-        return arg0 - 0x20;
+s32 ExpansionKit_DecodeEncChar(s32 charValue) {
+    if (charValue < 0x80) {
+        return charValue - 0x20;
     }
-    if (D_xk1_80032AD0 == 0) {
-        return arg0 - 0x20;
+    if (gExpansionKitEncStrEncType == 0) {
+        return charValue - 0x20;
     }
-    return arg0 + 0x40;
+    return charValue + 0x40;
 }
 
-Gfx* func_xk1_8002924C(Gfx* gfx, s32 xPos, s32 yPos, const char* fmt, ...) {
+Gfx* ExpansionKit_DrawEncStr(Gfx* gfx, s32 xPos, s32 yPos, const char* fmt, ...) {
     s32 charRemaining;
     u8* charPtr;
     char buffer[0x100];
@@ -65,18 +65,18 @@ Gfx* func_xk1_8002924C(Gfx* gfx, s32 xPos, s32 yPos, const char* fmt, ...) {
     va_list args;
     va_start(args, fmt);
 
-    D_xk1_80032ACC = -1;
-    charRemaining = _Printf(func_xk1_800290D0, buffer, fmt, args);
+    sExpansionKitLastEncFontSheet = -1;
+    charRemaining = _Printf(ExpansionKit_EncPrOut, buffer, fmt, args);
 
     if (charRemaining > 0) {
         charPtr = (s8*) buffer;
         while (charRemaining > 0) {
             if (*charPtr == 1) {
-                D_xk1_80032AD0 = 0;
+                gExpansionKitEncStrEncType = 0;
             } else if (*charPtr == 2) {
-                D_xk1_80032AD0 = 1;
+                gExpansionKitEncStrEncType = 1;
             } else {
-                gfx = func_xk1_800290F4(gfx, xPos, yPos, func_xk1_80029218(*charPtr));
+                gfx = ExpansionKit_DrawEncChar(gfx, xPos, yPos, ExpansionKit_DecodeEncChar(*charPtr));
                 xPos += 8;
             }
             charRemaining--;

@@ -57,11 +57,11 @@ Gfx* func_xk2_800F1428(Gfx* gfx) {
         return Camera_DrawCourseEditTestRun(gfx);
     }
     if (gInCourseEditTestRun) {
-        Matrix_SetFrustrum(&D_80128C94->unk_0000, NULL, (gCameras[0].fov * SCREEN_WIDTH) / SCREEN_HEIGHT, 32.0f, 4096.0f, SCREEN_WIDTH,
-                           0.0f, SCREEN_HEIGHT, 0.0f, &perspectiveScale);
+        Matrix_SetFrustrum(&D_80128C94->unk_0000, NULL, (gCameras[0].fov * SCREEN_WIDTH) / SCREEN_HEIGHT, 32.0f,
+                           4096.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT, 0.0f, &perspectiveScale);
     } else {
-        Matrix_SetFrustrum(&D_80128C94->unk_0000, NULL, (gCameras[0].fov * SCREEN_WIDTH) / SCREEN_HEIGHT, 128.0f, 32768.0f, SCREEN_WIDTH,
-                           0.0f, SCREEN_HEIGHT, 0.0f, &perspectiveScale);
+        Matrix_SetFrustrum(&D_80128C94->unk_0000, NULL, (gCameras[0].fov * SCREEN_WIDTH) / SCREEN_HEIGHT, 128.0f,
+                           32768.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT, 0.0f, &perspectiveScale);
         perspectiveScale = 16;
     }
     gSPPerspNormalize(gfx++, perspectiveScale);
@@ -87,12 +87,15 @@ Gfx* func_xk2_800F1428(Gfx* gfx) {
     gCameras[0].basis.y.y = (sCourseEditCameraForwardX * D_xk2_80128D40) - (sCourseEditCameraForwardZ * D_xk2_80128D44);
     gCameras[0].basis.y.z = sCourseEditCameraForwardY * D_xk2_80128D44;
 
-    gCameras[0].basis.z.x = (sCourseEditCameraForwardZ * gCameras[0].basis.y.y) - (sCourseEditCameraForwardY * gCameras[0].basis.y.z);
-    gCameras[0].basis.z.y = (sCourseEditCameraForwardX * gCameras[0].basis.y.z) - (sCourseEditCameraForwardZ * gCameras[0].basis.y.x);
-    gCameras[0].basis.z.z = (sCourseEditCameraForwardY * gCameras[0].basis.y.x) - (sCourseEditCameraForwardX * gCameras[0].basis.y.y);
+    gCameras[0].basis.z.x =
+        (sCourseEditCameraForwardZ * gCameras[0].basis.y.y) - (sCourseEditCameraForwardY * gCameras[0].basis.y.z);
+    gCameras[0].basis.z.y =
+        (sCourseEditCameraForwardX * gCameras[0].basis.y.z) - (sCourseEditCameraForwardZ * gCameras[0].basis.y.x);
+    gCameras[0].basis.z.z =
+        (sCourseEditCameraForwardY * gCameras[0].basis.y.x) - (sCourseEditCameraForwardX * gCameras[0].basis.y.y);
     Matrix_SetLookAt(&D_80128C94->unk_0040, NULL, gCameras[0].eye.x, gCameras[0].eye.y, gCameras[0].eye.z,
-                     gCourseEditCameraAtX, gCourseEditCameraAtY, gCourseEditCameraAtZ, gCameras[0].basis.y.x, gCameras[0].basis.y.y,
-                     gCameras[0].basis.y.z);
+                     gCourseEditCameraAtX, gCourseEditCameraAtY, gCourseEditCameraAtZ, gCameras[0].basis.y.x,
+                     gCameras[0].basis.y.y, gCameras[0].basis.y.z);
 
     gSPMatrix(gfx++, &D_6000000.unk_0040, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
     gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -205,7 +208,8 @@ void func_xk2_800F1938(void) {
     D_800D6CA0.newSegment.radiusLeft = radiusLeft;
     D_800D6CA0.newSegment.radiusRight = radiusRight;
 
-    if ((D_802CB6D0.controlPointCount == 1) && (D_802CB6D0.segments[0].trackSegmentInfo == (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000)) &&
+    if ((D_802CB6D0.controlPointCount == 1) &&
+        (D_802CB6D0.segments[0].trackSegmentInfo == (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000)) &&
         (D_800D6CA0.newSegment.trackSegmentInfo == (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000))) {
         D_800D6CA0.newSegment.trackSegmentInfo = (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_2);
     } else if (D_802CB6D0.controlPointCount == 0) {

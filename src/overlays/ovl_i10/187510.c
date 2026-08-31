@@ -62,7 +62,8 @@ void func_i10_8012B904(void) {
             gCourseEditOptions[i] = 1;
         }
     }
-    if ((gCourseEditOptions[COURSE_EDIT_OPTION_CURSOR_SPEED] < 0) || (gCourseEditOptions[COURSE_EDIT_OPTION_CURSOR_SPEED] >= 9)) {
+    if ((gCourseEditOptions[COURSE_EDIT_OPTION_CURSOR_SPEED] < 0) ||
+        (gCourseEditOptions[COURSE_EDIT_OPTION_CURSOR_SPEED] >= 9)) {
         gCourseEditOptions[COURSE_EDIT_OPTION_CURSOR_SPEED] = 4;
     }
 }

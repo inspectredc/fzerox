@@ -38,7 +38,7 @@ void func_xk2_800EBA34(void) {
 extern Gfx D_8014940[];
 
 extern s32 gCourseEditMenuCursorYPos;
-extern s32 D_xk1_80032AD0;
+extern s32 gExpansionKitEncStrEncType;
 
 Gfx* func_xk2_800EBB24(Gfx* gfx) {
     s32 temp_s4;
@@ -78,14 +78,14 @@ Gfx* func_xk2_800EBB24(Gfx* gfx) {
             if (i == temp_s4) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
             }
-            D_xk1_80032AD0 = 0;
-            gfx = func_xk1_8002924C(gfx, 0xD0, var_s2, "%d:", i + 1);
+            gExpansionKitEncStrEncType = 0;
+            gfx = ExpansionKit_DrawEncStr(gfx, 0xD0, var_s2, "%d:", i + 1);
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
             if (i == temp_s4) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
             }
-            gfx = func_xk1_8002924C(gfx, 0xD0, var_s2, "%d:%s", i + 1, var_s3);
+            gfx = ExpansionKit_DrawEncStr(gfx, 0xD0, var_s2, "%d:%s", i + 1, var_s3);
         }
     }
     PRINTF("ENTRY.c\n");

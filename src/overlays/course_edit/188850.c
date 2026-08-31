@@ -20,7 +20,7 @@ s32 D_xk2_8011973C;
 s32 D_xk2_80119740;
 f32 D_xk2_80119744;
 CourseSegment D_xk2_80119748;
-CourseSegment* D_xk2_801197EC;
+CourseSegment* gCourseEditInfoSegment;
 UNUSED s32 D_xk2_801197F0[4];
 s32 D_xk2_80119800;
 UNUSED s32 D_xk2_80119808[4];
@@ -585,7 +585,8 @@ void func_xk2_800D8418(void) {
             COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.selectedControlPoint] = LANDMINE_NONE;
         }
     } else {
-        if ((landmineCount >= 8) && (COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.selectedControlPoint] == LANDMINE_NONE)) {
+        if ((landmineCount >= 8) &&
+            (COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.selectedControlPoint] == LANDMINE_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
         } else if (gLandmineTypeOption != COURSE_CONTEXT()->courseData.landmine[D_800D6CA0.selectedControlPoint]) {
             func_xk2_800EF78C();
@@ -642,7 +643,8 @@ void func_xk2_800D85A0(void) {
             COURSE_CONTEXT()->courseData.gate[D_800D6CA0.selectedControlPoint] = GATE_NONE;
         }
     } else {
-        if ((decorationalFeatureCount >= 16) && (COURSE_CONTEXT()->courseData.gate[D_800D6CA0.selectedControlPoint] == GATE_NONE)) {
+        if ((decorationalFeatureCount >= 16) &&
+            (COURSE_CONTEXT()->courseData.gate[D_800D6CA0.selectedControlPoint] == GATE_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
@@ -741,7 +743,8 @@ void func_xk2_800D88D8(void) {
             COURSE_CONTEXT()->courseData.sign[D_800D6CA0.selectedControlPoint] = SIGN_NONE;
         }
     } else {
-        if ((decorationalFeatureCount >= 16) && (COURSE_CONTEXT()->courseData.sign[D_800D6CA0.selectedControlPoint] == SIGN_NONE)) {
+        if ((decorationalFeatureCount >= 16) &&
+            (COURSE_CONTEXT()->courseData.sign[D_800D6CA0.selectedControlPoint] == SIGN_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
@@ -888,7 +891,7 @@ extern volatile u8 D_80794E14;
 extern bool gMenuWidgetOpen;
 extern s32 gCourseEditMenuCursorXPos;
 extern s32 gCourseEditMenuCursorYPos;
-extern s32 D_xk2_800F703C;
+extern s32 gCourseEditInfoControlPoint;
 extern s32 D_xk2_800F7044;
 extern s32 D_xk2_800F704C;
 extern s32 gCourseEditHighlightedIconIndex;
@@ -903,11 +906,11 @@ void CourseEdit_UpdateEditMode(void) {
 
     temp_v1 = D_xk2_800F704C;
     if (temp_v1 != -1) {
-        D_xk2_801197EC = &D_802CB6D0.segments[D_xk2_800F704C];
+        gCourseEditInfoSegment = &D_802CB6D0.segments[D_xk2_800F704C];
     } else {
-        D_xk2_801197EC = D_802CB6D0.segments;
+        gCourseEditInfoSegment = D_802CB6D0.segments;
     }
-    D_xk2_80119748 = *D_xk2_801197EC;
+    D_xk2_80119748 = *gCourseEditInfoSegment;
 
     if (sCourseEditController) {}
     func_xk2_800DBEE4();
@@ -920,17 +923,19 @@ void CourseEdit_UpdateEditMode(void) {
         return;
     }
     func_xk2_800D8AB0();
-    sCourseEditCurrentDpadInput = gControllers[gPlayerControlPorts[0]].buttonCurrent & (BTN_UP | BTN_DOWN | BTN_LEFT | BTN_RIGHT);
-    sCourseEditPressedDpadInput = gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_UP | BTN_DOWN | BTN_LEFT | BTN_RIGHT);
+    sCourseEditCurrentDpadInput =
+        gControllers[gPlayerControlPorts[0]].buttonCurrent & (BTN_UP | BTN_DOWN | BTN_LEFT | BTN_RIGHT);
+    sCourseEditPressedDpadInput =
+        gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_UP | BTN_DOWN | BTN_LEFT | BTN_RIGHT);
     sCourseEditCurrentCButtonInput =
         gControllers[gPlayerControlPorts[0]].buttonCurrent & (BTN_CUP | BTN_CDOWN | BTN_CLEFT | BTN_CRIGHT);
     sCourseEditPressedCButtonInput =
         gControllers[gPlayerControlPorts[0]].buttonPressed & (BTN_CUP | BTN_CDOWN | BTN_CLEFT | BTN_CRIGHT);
-    D_xk2_801197EC = &D_802CB6D0.segments[D_xk2_800F704C];
+    gCourseEditInfoSegment = &D_802CB6D0.segments[D_xk2_800F704C];
     D_xk2_80128D40 = SIN(DEG_TO_FZXANG(D_800D6CA0.courseYaw));
     D_xk2_80128D44 = COS(DEG_TO_FZXANG(D_800D6CA0.courseYaw));
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_Z) {
-        D_xk2_800F703C = -1;
+        gCourseEditInfoControlPoint = -1;
     }
     func_xk2_800DF54C();
     CourseEdit_UpdateControlPointHighlight();
@@ -999,7 +1004,7 @@ void func_xk2_800D934C(void) {
     stickX = sCourseEditController->stickX;
     stickY = sCourseEditController->stickY;
     if ((SQ(stickX) + SQ(stickY)) != 0) {
-        D_xk2_800F703C = -1;
+        gCourseEditInfoControlPoint = -1;
     }
 
     cursorSpeedOption = gCourseEditOptions[COURSE_EDIT_OPTION_CURSOR_SPEED];
@@ -2031,7 +2036,7 @@ void func_xk2_800DC428(void) {
 
     if (sCourseEditController->buttonPressed & BTN_B) {
         D_802CB6D0 = D_807B6528;
-        D_xk2_801197EC = D_802CB6D0.segments;
+        gCourseEditInfoSegment = D_802CB6D0.segments;
         D_xk2_800F704C = -1;
         func_xk2_800DC3F8();
         D_800D6CA0.selectedControlPoint = D_xk2_80119800;
@@ -2040,8 +2045,9 @@ void func_xk2_800DC428(void) {
 }
 
 void func_xk2_800DC4E4(void) {
-    if ((sCourseEditController->buttonPressed & BTN_A) && (D_800D6CA0.state == 0) && (gPointOption == POINT_OPTION_START) &&
-        (gCreateOption == CREATE_OPTION_COURSE) && (gCourseEditCursorYPos >= 0x38) && (func_xk2_800DEFCC() == 0)) {
+    if ((sCourseEditController->buttonPressed & BTN_A) && (D_800D6CA0.state == 0) &&
+        (gPointOption == POINT_OPTION_START) && (gCreateOption == CREATE_OPTION_COURSE) &&
+        (gCourseEditCursorYPos >= 0x38) && (func_xk2_800DEFCC() == 0)) {
         D_xk2_800F7040 = 3;
         D_800D6CA0.selectedControlPoint = 1;
         func_xk2_800DEB38();
@@ -2055,13 +2061,13 @@ void func_xk2_800DC58C(void) {
         return;
     }
     if (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 1) {
-        D_xk2_800F703C = func_xk2_800EFDE4(150.0f);
+        gCourseEditInfoControlPoint = func_xk2_800EFDE4(150.0f);
     }
     if (sCourseEditController->buttonPressed & BTN_A) {
         if (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 0) {
-            D_xk2_800F703C = func_xk2_800EFDE4(150.0f);
+            gCourseEditInfoControlPoint = func_xk2_800EFDE4(150.0f);
         }
-        if (D_xk2_800F703C != -1) {
+        if (gCourseEditInfoControlPoint != -1) {
             Audio_TriggerSystemSE(NA_SE_30);
         } else {
             Audio_TriggerSystemSE(NA_SE_32);
@@ -2086,13 +2092,13 @@ void func_xk2_800DC67C(void) {
         return;
     }
     if (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 1) {
-        D_xk2_800F703C = func_xk2_800EFDE4(150.0f);
+        gCourseEditInfoControlPoint = func_xk2_800EFDE4(150.0f);
     }
     if (sCourseEditController->buttonPressed & BTN_A) {
         if (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 0) {
-            D_xk2_800F703C = func_xk2_800EFDE4(150.0f);
+            gCourseEditInfoControlPoint = func_xk2_800EFDE4(150.0f);
         }
-        if (D_xk2_800F703C != -1) {
+        if (gCourseEditInfoControlPoint != -1) {
             Audio_TriggerSystemSE(NA_SE_36);
             return;
         }
@@ -2101,11 +2107,11 @@ void func_xk2_800DC67C(void) {
             return;
         }
         Audio_TriggerSystemSE(NA_SE_36);
-        D_xk2_800F704C = D_xk2_800F703C;
+        D_xk2_800F704C = gCourseEditInfoControlPoint;
         if ((gCreateOption == CREATE_OPTION_COURSE) && (D_xk2_80104CA0[1] == 0) && (D_xk2_80104CA0[10] == 0)) {
             newSegment = D_800D6CA0.newSegment;
-            if ((newSegment.pos.x < -15000.0f) || (newSegment.pos.x > 15000.0f) || (newSegment.pos.y < 0.0f) || (newSegment.pos.y > 5000.0f) ||
-                (newSegment.pos.z < -15000.0f) || (newSegment.pos.z > 15000.0f)) {
+            if ((newSegment.pos.x < -15000.0f) || (newSegment.pos.x > 15000.0f) || (newSegment.pos.y < 0.0f) ||
+                (newSegment.pos.y > 5000.0f) || (newSegment.pos.z < -15000.0f) || (newSegment.pos.z > 15000.0f)) {
                 Audio_TriggerSystemSE(NA_SE_32);
                 return;
             }
@@ -3191,10 +3197,10 @@ s32 func_xk2_800DEFCC(void) {
     D_800D6CA0.selectedControlPoint = 0;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        D_xk2_801197EC = &D_802CB6D0.segments[i];
-        D_xk2_801197EC->segmentIndex = i;
-        D_xk2_801197EC->next = D_xk2_801197EC + 1;
-        D_xk2_801197EC->prev = D_xk2_801197EC - 1;
+        gCourseEditInfoSegment = &D_802CB6D0.segments[i];
+        gCourseEditInfoSegment->segmentIndex = i;
+        gCourseEditInfoSegment->next = gCourseEditInfoSegment + 1;
+        gCourseEditInfoSegment->prev = gCourseEditInfoSegment - 1;
     }
     D_802CB6D0.segments[0].prev = &D_802CB6D0.segments[D_802CB6D0.controlPointCount - 1];
     D_802CB6D0.segments[D_802CB6D0.controlPointCount - 1].next = &D_802CB6D0.segments[0];
@@ -3272,7 +3278,8 @@ void func_xk2_800DF42C(void) {
 
 void func_xk2_800DF54C(void) {
 
-    if (!(sCourseEditController->buttonPressed & BTN_A) && (sCourseEditController->buttonPressed & BTN_B) && !gInCourseEditTestRun) {
+    if (!(sCourseEditController->buttonPressed & BTN_A) && (sCourseEditController->buttonPressed & BTN_B) &&
+        !gInCourseEditTestRun) {
         if ((D_800D6CA0.state != 1) && (D_800D6CA0.state != 0x11)) {
             func_xk2_800EF8B0();
         }

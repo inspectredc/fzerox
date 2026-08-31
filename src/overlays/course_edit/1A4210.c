@@ -189,55 +189,55 @@ u8 sMoveStraightTooltipEncStr[] = {
 };
 
 // ガードレールのある  ふつうの  どうろです。
-u8 D_xk2_801051D0[] = {
+u8 sTrackDesignRoadTooltipEncStr[] = {
     0x01, 0x81, 0xB0, 0x8F, 0xDA, 0xB0, 0xD9, 0x02, 0xC9, 0x02, 0xB1, 0xD9, 0x20, 0x02, 0xCC, 0xC2,
     0xB3, 0x02, 0xC9, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
 // たかいガードレールがセットされる  どうろです。
-u8 D_xk2_801051F0[] = {
+u8 sTrackDesignHRoadTooltipEncStr[] = {
     0x02, 0xC0, 0xB6, 0xB2, 0x01, 0x81, 0xB0, 0x8F, 0xDA, 0xB0, 0xD9, 0x02, 0x81, 0x01, 0xBE, 0xAF,
     0xC4, 0x02, 0xBB, 0xDA, 0xD9, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00,
 };
 
 // ガードレールがない  きけんな  どうろです。
-u8 D_xk2_80105210[] = {
+u8 sTrackDesignTRoadTooltipEncStr[] = {
     0x01, 0x81, 0xB0, 0x8F, 0xDA, 0xB0, 0xD9, 0x02, 0x81, 0x02, 0xC5, 0xB2, 0x20, 0x02, 0xB7, 0xB9,
     0xDD, 0x02, 0xC5, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
 // トンネルつきの  どうろです。
-u8 D_xk2_80105230[] = {
+u8 sTrackDesignTunnelTooltipEncStr[] = {
     0x01, 0xC4, 0xDD, 0xC8, 0xD9, 0x02, 0xC2, 0xB7, 0x02, 0xC9,
     0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00,
 };
 
 // パイプじょうの  なかをはしる  どうろです。
-u8 D_xk2_80105244[] = {
+u8 sTrackDesignPipeTooltipEncStr[] = {
     0x01, 0x95, 0xB2, 0x97, 0x02, 0x87, 0xAE, 0xB3, 0x02, 0xC9, 0x20, 0x02, 0xC5, 0xB6,
     0xA6, 0xCA, 0xBC, 0xD9, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00,
 };
 
 // ハーフパイプじょうの  なかをはしる  どうろです。
-u8 D_xk2_80105260[] = {
+u8 sTrackDesignHalfPipeTooltipEncStr[] = {
     0x01, 0xCA, 0xB0, 0xCC, 0x01, 0x95, 0xB2, 0x97, 0x02, 0x87, 0xAE, 0xB3, 0x02, 0xC9, 0x20, 0x02,
     0xC5, 0xB6, 0xA6, 0xCA, 0xBC, 0xD9, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00,
 };
 
 // パイプじょうの  そとをはしる  どうろです。
-u8 D_xk2_80105280[] = {
+u8 sTrackDesignCylinderTooltipEncStr[] = {
     0x01, 0x95, 0xB2, 0x97, 0x02, 0x87, 0xAE, 0xB3, 0x02, 0xC9, 0x20, 0x02, 0xBF, 0xC4,
     0xA6, 0xCA, 0xBC, 0xD9, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00,
 };
 
 // どうろと  どうろのあいだに  くうかんを  つくります。
-u8 D_xk2_8010529C[] = {
+u8 sTrackDesignSpaceTooltipEncStr[] = {
     0x02, 0x8F, 0xB3, 0xDB, 0x02, 0xC4, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0xC9, 0x02, 0xB1, 0xB2, 0x8B, 0x02,
     0xC6, 0x20, 0x02, 0xB8, 0xB3, 0xB6, 0xDD, 0x02, 0xA6, 0x20, 0x02, 0xC2, 0xB8, 0xD8, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
 // ポイントどうしのあいだに  ループを  つくります。
-u8 D_xk2_801052C0[] = {
+u8 sTrackDesignLoopTooltipEncStr[] = {
     0x01, 0x99, 0xB2, 0xDD, 0xC4, 0x02, 0x8F, 0xB3, 0xBC, 0xC9, 0x02, 0xB1, 0xB2, 0x8B, 0x02, 0xC6,
     0x20, 0x01, 0xD9, 0xB0, 0x97, 0x02, 0xA6, 0x20, 0x02, 0xC2, 0xB8, 0xD8, 0xCF, 0xBD, 0xA1, 0x00,
 };
@@ -296,49 +296,49 @@ u8 sTrackPartSignTooltipEncStr[] = {
 };
 
 // コースファイルを  よみだします。
-u8 D_xk2_801053B4[] = {
+u8 sFileLoadTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xA6,
     0x20, 0x02, 0xD6, 0xD0, 0x8B, 0xBC, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
 // コースファイルを  かきこみます。
-u8 D_xk2_801053C8[] = {
+u8 sFileSaveTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xA6,
     0x20, 0x02, 0xB6, 0xB7, 0xBA, 0xD0, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
 // コースファイルの  なまえを  へんこうします。
-u8 D_xk2_801053DC[] = {
+u8 sFileRenameTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xC9, 0x20, 0x02, 0xC5, 0xCF,
     0xB4, 0x02, 0xA6, 0x20, 0x02, 0xCD, 0xDD, 0xBA, 0xB3, 0xBC, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
 // コースファイルを  けします。
-u8 D_xk2_801053F8[] = {
+u8 sFileEraseTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xA6,
     0x20, 0x02, 0xB9, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
 // コースファイルを  ほかへ  コピーします。
-u8 D_xk2_8010540C[] = {
+u8 sFileCopyTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xA6, 0x20, 0x02, 0xCE, 0xB6,
     0xCD, 0x20, 0x01, 0xBA, 0x96, 0xB0, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
 // コースファイルを  エディットカップに  エントリーします。
-u8 D_xk2_80105428[] = {
+u8 sEntryRegisterTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xA6, 0x20, 0x01, 0xB4, 0x8E, 0xA8, 0xAF, 0xC4, 0xB6,
     0xAF, 0x97, 0x02, 0xC6, 0x20, 0x01, 0xB4, 0xDD, 0xC4, 0xD8, 0xB0, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00,
 };
 
 // エントリーしているコースを  かいじょします。
-u8 D_xk2_8010544C[] = {
+u8 sEntryDeregisterTooltipEncStr[] = {
     0x01, 0xB4, 0xDD, 0xC4, 0xD8, 0xB0, 0x02, 0xBC, 0xC3, 0xB2, 0xD9, 0x01, 0xBA, 0xB0, 0xBD, 0x02,
     0xA6, 0x20, 0x02, 0xB6, 0xB2, 0x87, 0xAE, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
 // エントリーしているコースを  すべてかいじょします。
-u8 D_xk2_8010546C[] = {
+u8 sEntryDeregisterAllTooltipEncStr[] = {
     0x01, 0xB4, 0xDD, 0xC4, 0xD8, 0xB0, 0x02, 0xBC, 0xC3, 0xB2, 0xD9, 0x01, 0xBA, 0xB0, 0xBD, 0x02, 0xA6, 0x20,
     0x02, 0xBD, 0x93, 0xC3, 0x02, 0xB6, 0xB2, 0x87, 0xAE, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
@@ -522,12 +522,12 @@ void CourseEdit_DrawPressBToReturnToPreviousState(Gfx** gfxP) {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
         // FAKE
-        gSPTextureRectangle(pad = gfx++, (left - 2) << 2, (top - 2) << 2, (left + width + 2) << 2,
-                            (top + 16 + 2) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+        gSPTextureRectangle(pad = gfx++, (left - 2) << 2, (top - 2) << 2, (left + width + 2) << 2, (top + 16 + 2) << 2,
+                            0, 0, 0, 1 << 10, 1 << 10);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gSPTextureRectangle(gfx++, (left - 1) << 2, (top - 1) << 2, (left + width + 1) << 2, (top + 16 + 1) << 2,
-                            0, 0, 0, 1 << 10, 1 << 10);
+        gSPTextureRectangle(gfx++, (left - 1) << 2, (top - 1) << 2, (left + width + 1) << 2, (top + 16 + 1) << 2, 0, 0,
+                            0, 1 << 10, 1 << 10);
         gSPDisplayList(gfx++, D_3000540);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
@@ -540,14 +540,13 @@ void CourseEdit_DrawPressBToReturnToPreviousState(Gfx** gfxP) {
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
-        gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 16) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10,
-                            1 << 10);
+        gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 16) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
         *gfxP = gfx;
     }
 }
 
-extern s32 D_xk1_80032AD0;
+extern s32 gExpansionKitEncStrEncType;
 extern s32 D_80119880;
 
 void func_xk2_800F2E4C(Gfx** gfxP) {
@@ -580,37 +579,37 @@ void func_xk2_800F2E4C(Gfx** gfxP) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     gDPSetTextureFilter(gfx++, G_TF_POINT);
 
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, left, top, D_xk2_80104F28);
-    D_xk1_80032AD0 = 1;
-    gfx = func_xk1_8002924C(gfx, left + 40, top, D_xk2_80104F30);
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, left + 80, top, D_xk2_80104F38);
-    D_xk1_80032AD0 = 1;
-    gfx = func_xk1_8002924C(gfx, left + 112, top, D_xk2_80104F40);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, D_xk2_80104F28);
+    gExpansionKitEncStrEncType = 1;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 40, top, D_xk2_80104F30);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 80, top, D_xk2_80104F38);
+    gExpansionKitEncStrEncType = 1;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 112, top, D_xk2_80104F40);
     top += 8;
-    D_xk1_80032AD0 = 1;
+    gExpansionKitEncStrEncType = 1;
 
-    gfx = func_xk1_8002924C(gfx, left, top, D_xk2_80104F44);
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, D_xk2_80104F44);
     top += 8;
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, left, top, D_xk2_80104F28);
-    D_xk1_80032AD0 = 1;
-    gfx = func_xk1_8002924C(gfx, left + 40, top, D_xk2_80104F50);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, D_xk2_80104F28);
+    gExpansionKitEncStrEncType = 1;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 40, top, D_xk2_80104F50);
     top += 8;
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, left, top, D_xk2_80104F38);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, D_xk2_80104F38);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-    D_xk1_80032AD0 = 1;
-    gfx = func_xk1_8002924C(gfx, left + 32, top, D_xk2_80104F5C);
+    gExpansionKitEncStrEncType = 1;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 32, top, D_xk2_80104F5C);
     top += 8;
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, left, top, D_xk2_80104F28);
-    D_xk1_80032AD0 = 1;
-    gfx = func_xk1_8002924C(gfx, left + 40, top, D_xk2_80104F68);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, D_xk2_80104F28);
+    gExpansionKitEncStrEncType = 1;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 40, top, D_xk2_80104F68);
     *gfxP = gfx;
 }
 
@@ -692,7 +691,7 @@ void CourseEdit_DrawTooltip(Gfx** gfxP, s32 top, s8* str) {
     gSPDisplayList(gfx++, D_3000540);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_xk1_8002924C(gfx, left, top, str);
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, str);
     *gfxP = gfx;
 }
 
@@ -816,63 +815,63 @@ void func_xk2_800F3600(Gfx** gfxP) {
     if (widget == &gCourseEditFileWidget) {
         switch (widget->highlightedIndex) {
             case FILE_OPTION_LOAD:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_801053B4);
+                CourseEdit_DrawTooltip(&gfx, 24, sFileLoadTooltipEncStr);
                 break;
             case FILE_OPTION_SAVE:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_801053C8);
+                CourseEdit_DrawTooltip(&gfx, 24, sFileSaveTooltipEncStr);
                 break;
             case FILE_OPTION_RENAME:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_801053DC);
+                CourseEdit_DrawTooltip(&gfx, 24, sFileRenameTooltipEncStr);
                 break;
             case FILE_OPTION_ERASE:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_801053F8);
+                CourseEdit_DrawTooltip(&gfx, 24, sFileEraseTooltipEncStr);
                 break;
             case FILE_OPTION_COPY:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_8010540C);
+                CourseEdit_DrawTooltip(&gfx, 24, sFileCopyTooltipEncStr);
                 break;
         }
     }
     if (widget == &gCourseEditEntryWidget) {
         switch (widget->highlightedIndex) {
             case ENTRY_OPTION_REGISTER:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_80105428);
+                CourseEdit_DrawTooltip(&gfx, 24, sEntryRegisterTooltipEncStr);
                 break;
             case ENTRY_OPTION_DEREGISTER:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_8010544C);
+                CourseEdit_DrawTooltip(&gfx, 24, sEntryDeregisterTooltipEncStr);
                 break;
             case ENTRY_OPTION_DEREGISTER_ALL:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_8010546C);
+                CourseEdit_DrawTooltip(&gfx, 24, sEntryDeregisterAllTooltipEncStr);
                 break;
         }
     }
     if (widget == &gDesignStyleWidget) {
         switch (widget->highlightedIndex) {
             case TRACK_DESIGN_STYLE_ROAD:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_801051D0);
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignRoadTooltipEncStr);
                 break;
             case TRACK_DESIGN_STYLE_H_ROAD:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_801051F0);
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignHRoadTooltipEncStr);
                 break;
             case TRACK_DESIGN_STYLE_T_ROAD:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_80105210);
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignTRoadTooltipEncStr);
                 break;
             case TRACK_DESIGN_STYLE_TUNNEL:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_80105230);
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignTunnelTooltipEncStr);
                 break;
             case TRACK_DESIGN_STYLE_PIPE:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_80105244);
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignPipeTooltipEncStr);
                 break;
             case TRACK_DESIGN_STYLE_HALF_PIPE:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_80105260);
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignHalfPipeTooltipEncStr);
                 break;
             case TRACK_DESIGN_STYLE_CYLINDER:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_80105280);
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignCylinderTooltipEncStr);
                 break;
             case TRACK_DESIGN_STYLE_SPACE:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_8010529C);
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignSpaceTooltipEncStr);
                 break;
             case TRACK_DESIGN_STYLE_LOOP:
-                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_801052C0);
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignLoopTooltipEncStr);
                 break;
         }
     }

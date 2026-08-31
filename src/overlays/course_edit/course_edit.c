@@ -16,7 +16,8 @@ s32 D_xk2_80103FF4 = 0;
 s32 D_xk2_80103FF8 = 0;
 s32 sCourseEditExitDelayFrames = 0;
 
-const u16 kReinitializeDiskInputs[] = { BTN_L, BTN_R, BTN_L, BTN_R, BTN_UP, BTN_DOWN, BTN_LEFT, BTN_RIGHT, BTN_DOWN, BTN_UP };
+const u16 kReinitializeDiskInputs[] = { BTN_L,    BTN_R,    BTN_L,     BTN_R,    BTN_UP,
+                                        BTN_DOWN, BTN_LEFT, BTN_RIGHT, BTN_DOWN, BTN_UP };
 
 extern volatile u8 D_80794E14;
 extern unk_800D6CA0 D_800D6CA0;

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "fzx_camera.h"
 
-#define ARCCOS(x) (sCosInverseTable[(s32)((x) * 511)])
+#define ARCCOS(x) (sCosInverseTable[(s32) ((x) *511)])
 
 const f32 sCosInverseTable[] = {
     90.0,        89.88787842, 89.77575684, 89.66362762, 89.55149841, 89.4393692,  89.32723236, 89.21510315, 89.10296631,

@@ -16,7 +16,8 @@ void CourseEdit_ClearControlPointHighlight(void) {
 }
 
 void CourseEdit_InitControlPointHighlight(void) {
-    Matrix_SetOrtho(&sCourseEditControlPointOrthoMtx, NULL, 1.0f, -(SCREEN_WIDTH / 2), (SCREEN_WIDTH / 2), -(SCREEN_HEIGHT / 2), (SCREEN_HEIGHT / 2), 16.0f, 256.0f);
+    Matrix_SetOrtho(&sCourseEditControlPointOrthoMtx, NULL, 1.0f, -(SCREEN_WIDTH / 2), (SCREEN_WIDTH / 2),
+                    -(SCREEN_HEIGHT / 2), (SCREEN_HEIGHT / 2), 16.0f, 256.0f);
     Matrix_SetLookAt(&sCourseEditControlPointLookAtMtx, NULL, 0.0f, 0.0f, 128.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 }
 
@@ -42,8 +43,8 @@ void CourseEdit_UpdateControlPointHighlightVtxs(void) {
     sControlPointHighlightAngle = (sControlPointHighlightAngle + 8) % 360;
     angle = DEG_TO_FZXANG(sControlPointHighlightAngle);
 
-    Matrix_SetAxisRotation(NULL, &mtxF, 1.0f, angle, gCameras[0].basis.x.x, gCameras[0].basis.x.y, gCameras[0].basis.x.z,
-                           0.0f, 0.0f, 0.0f);
+    Matrix_SetAxisRotation(NULL, &mtxF, 1.0f, angle, gCameras[0].basis.x.x, gCameras[0].basis.x.y,
+                           gCameras[0].basis.x.z, 0.0f, 0.0f, 0.0f);
 
     vtx = gGfxPool->unk_365E8;
     temp_fv1 = COS(angle) * 24.0f;

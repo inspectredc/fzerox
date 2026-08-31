@@ -178,7 +178,7 @@ Gfx* EKFileMenu_DrawFileMenu(Gfx* gfx, s32 maxFileNameLength) {
             }
         }
 
-        gfx = func_xk1_8002924C(gfx, sExpansionKitFileMenuLeft, fileNameTop, gExpansionKitLoadedFiles[i].name);
+        gfx = ExpansionKit_DrawEncStr(gfx, sExpansionKitFileMenuLeft, fileNameTop, gExpansionKitLoadedFiles[i].name);
         if ((gExpansionKitLoadedFiles[i].extension[3] == 'E') && ((gGameFrameCount % 16) < 8)) {
             gSPDisplayList(gfx++, D_7020808);
             gSPTextureRectangle(gfx++, (sExpansionKitFileMenuLeft + 28) << 2, fileNameTop << 2,

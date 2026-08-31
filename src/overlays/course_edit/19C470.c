@@ -229,7 +229,8 @@ extern s32 gCourseEditMenuCursorYPos;
 
 void func_xk2_800EB018(void) {
     s32 pad;
-    u8 sp20[9] = { 0x20, 0x8E, 0xCC, 0xAB, 0xD9, 0xC4, 0x00, 0x00, 0x00 };
+    //  デフォルト
+    u8 defaultEncStr[9] = { 0x20, 0x8E, 0xCC, 0xAB, 0xD9, 0xC4, 0x00, 0x00, 0x00 };
 
     if (D_xk1_80032BF8 && (D_xk2_800F7400 == 1)) {
         D_xk1_80032BF8 = false;
@@ -245,7 +246,7 @@ void func_xk2_800EB018(void) {
             case 0:
                 mfsStrCpy(gExpansionKitLoadedFiles[0].name, "OFFICIAL");
                 mfsStrCpy(gExpansionKitLoadedFiles[0].extension, "CRSD");
-                EKFileMenu_InitFileMenu(0xA8, 0x68, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
+                EKFileMenu_InitFileMenu(168, 104, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
                 D_xk2_800F684C = 0;
                 break;
             case 1:
@@ -255,20 +256,20 @@ void func_xk2_800EB018(void) {
                 PRINTF("EDIT_MODE_COURSE 09\n");
                 PRINTF("EDIT_MODE_FILE_LOADING 0\n");
                 PRINTF("EDIT_MODE_COURSE 11\n");
-                EKFileMenu_InitFileMenu(0xA8, 0x68, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
+                EKFileMenu_InitFileMenu(168, 104, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
                 D_xk2_800F684C = 0;
                 break;
             case 5:
-                EKFileMenu_InitFileMenu(0xD8, 0x68, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
+                EKFileMenu_InitFileMenu(216, 104, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
                 D_xk2_800F684C = 0;
                 break;
             case 7:
-                EKFileMenu_InitFileMenu(0xA8, 0x68, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
+                EKFileMenu_InitFileMenu(168, 104, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
                 D_xk2_800F684C = 0;
                 break;
             default:
                 D_xk2_800F684C = 0;
-                EKFileMenu_InitFileMenu(0xA8, 0x68, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
+                EKFileMenu_InitFileMenu(168, 104, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
                 break;
         }
     }

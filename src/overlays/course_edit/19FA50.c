@@ -66,7 +66,7 @@ s32 func_xk2_800EE0EC(s8* arg0, s8** arg1) {
 
     var_v1 = *arg1;
 
-    while ((*var_v1 != 0) && (*var_v1 != 0xA)) {
+    while ((*var_v1 != '\0') && (*var_v1 != '\n')) {
         *arg0++ = *var_v1++;
     }
     *arg0 = 0;
@@ -119,24 +119,24 @@ Gfx* func_xk2_800EE268(Gfx* gfx) {
     s32 left;
     s32 top;
     s32 width;
-    s32 temp_v0;
+    s32 length;
 
     for (i = 0; i < 12; i++) {
         if (D_xk2_80104CA0[i] == 0) {
             continue;
         }
 
-        temp_v0 = mfsStrLen(gCourseRestrictionMessageStrs[i]);
-        width = temp_v0 * 8;
-        left = func_xk2_800EE578(temp_v0);
+        length = mfsStrLen(gCourseRestrictionMessageStrs[i]);
+        width = length * 8;
+        left = func_xk2_800EE578(length);
 
-        top = (D_xk2_80104360 * 0x10) + 0x38;
-        if ((gCourseEditCursorYPos + 0x10) >= top) {
-            if ((top + 0x10) >= gCourseEditCursorYPos) {
+        top = (D_xk2_80104360 * 16) + 56;
+        if ((gCourseEditCursorYPos + 16) >= top) {
+            if ((top + 16) >= gCourseEditCursorYPos) {
                 D_xk2_80104360 += 2;
             }
         }
-        top = (D_xk2_80104360 * 0x10) + 0x3C;
+        top = (D_xk2_80104360 * 16) + 60;
 
         gSPDisplayList(gfx++, D_3000510);
         gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 160);
@@ -161,25 +161,25 @@ Gfx* func_xk2_800EE268(Gfx* gfx) {
 }
 
 extern s32 gCourseEditCursorXPos;
-extern s32 D_xk2_800F703C;
+extern s32 gCourseEditInfoControlPoint;
 
-s32 func_xk2_800EE578(s32 arg0) {
+s32 func_xk2_800EE578(s32 length) {
     s32 var_a1;
     s32 temp_v0;
 
     temp_v0 = (D_xk2_80128CA0 + 7) / 8;
 
-    var_a1 = (((0x22 - temp_v0 - arg0) / 2) * 8) + 0x18;
-    if (var_a1 < 0x18) {
-        var_a1 = 0x18;
+    var_a1 = (((34 - temp_v0 - length) / 2) * 8) + 24;
+    if (var_a1 < 24) {
+        var_a1 = 24;
     }
     if (var_a1 < D_xk2_80128CA4) {
         var_a1 = D_xk2_80128CA4;
     }
-    if ((gCourseEditCursorXPos > 224) && (D_xk2_800F703C != -1)) {
-        var_a1 = D_xk2_80128CA0 + 0x20;
-        if (((arg0 * 8) + var_a1) > 0x128) {
-            var_a1 = (((0x22 - arg0) / 2) * 8) + 0x18;
+    if ((gCourseEditCursorXPos > 224) && (gCourseEditInfoControlPoint != -1)) {
+        var_a1 = D_xk2_80128CA0 + 32;
+        if (((length * 8) + var_a1) > 296) {
+            var_a1 = (((34 - length) / 2) * 8) + 24;
         }
     }
     return var_a1;
@@ -193,7 +193,7 @@ void func_xk2_800EE640(void) {
 
 void func_xk2_800EE664(s32 arg0) {
     D_xk2_80104380 = arg0;
-    D_xk2_8010437C = 0x3C;
+    D_xk2_8010437C = 60;
 }
 
 extern Gfx D_8014940[];
@@ -217,7 +217,8 @@ void func_xk2_800EE67C(Gfx** gfxP) {
     }
     func_xk2_800F2AC0(gCourseEditMessageStrs[D_xk2_80104380]);
     temp_v0 = func_xk2_800F2AF4(gCourseEditMessageStrs[D_xk2_80104380]);
-    func_xk2_800EECD4(&gfx, (((0x22 - temp_v0) / 2) * 8) + 0x18, 0x58, gCourseEditMessageStrs[D_xk2_80104380], D_xk2_80104380);
+    func_xk2_800EECD4(&gfx, (((34 - temp_v0) / 2) * 8) + 24, 88, gCourseEditMessageStrs[D_xk2_80104380],
+                      D_xk2_80104380);
 
     if (D_8076C960 != 0) {
         gSPDisplayList(gfx++, D_8014940);

@@ -54,13 +54,16 @@ void CourseEditOptionsMenu_Update(void) {
                 if (prevIndex != gCourseEditOptions[sCourseEditOptionsIndex]) {
                     Audio_TriggerSystemSE(NA_SE_30);
                 }
-                if ((sCourseEditOptionsIndex == COURSE_EDIT_OPTION_CONTROL_POINT_INFO) && (prevIndex == 1) && (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 0)) {
+                if ((sCourseEditOptionsIndex == COURSE_EDIT_OPTION_CONTROL_POINT_INFO) && (prevIndex == 1) &&
+                    (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 0)) {
                     sCourseEditOptionsMenuState = COURSE_EDIT_OPTIONS_SHOW_POINT_SELECT_HELP;
                 }
-                if ((sCourseEditOptionsIndex == COURSE_EDIT_OPTION_BGM) && (prevIndex == 0) && (gCourseEditOptions[COURSE_EDIT_OPTION_BGM] == 1)) {
+                if ((sCourseEditOptionsIndex == COURSE_EDIT_OPTION_BGM) && (prevIndex == 0) &&
+                    (gCourseEditOptions[COURSE_EDIT_OPTION_BGM] == 1)) {
                     Audio_EditorBgmRestart();
                 }
-                if ((sCourseEditOptionsIndex == COURSE_EDIT_OPTION_BGM) && (prevIndex == 1) && (gCourseEditOptions[COURSE_EDIT_OPTION_BGM] == 0)) {
+                if ((sCourseEditOptionsIndex == COURSE_EDIT_OPTION_BGM) && (prevIndex == 1) &&
+                    (gCourseEditOptions[COURSE_EDIT_OPTION_BGM] == 0)) {
                     Audio_EditorBgmStop();
                 }
             }
@@ -111,7 +114,8 @@ void CourseEditOptionsMenu_Update(void) {
                 {
                     u8* helpTextures[2] = { aExpansionKitEditControlHelpTex, aExpansionKitCameraControlHelpTex };
 
-                    mio0Decode(Segment_SegmentedToVirtual(helpTextures[sCourseEditOptionsMenuHelpIndex]), sCourseEditHelpTex);
+                    mio0Decode(Segment_SegmentedToVirtual(helpTextures[sCourseEditOptionsMenuHelpIndex]),
+                               sCourseEditHelpTex);
                 }
                 sCourseEditOptionsMenuState = COURSE_EDIT_OPTIONS_SHOW_HELP_SCREEN;
                 break;
@@ -128,7 +132,8 @@ void CourseEditOptionsMenu_Update(void) {
         switch (sCourseEditOptionsMenuState) {
             case COURSE_EDIT_OPTIONS_MAIN_MENU:
                 Audio_TriggerSystemSE(NA_SE_37);
-                func_807683B8(MFS_ENTRY_WORKING_DIR, "OPTION", "OPT", gCourseEditOptions, sizeof(gCourseEditOptions), 0, 0xFF, true);
+                func_807683B8(MFS_ENTRY_WORKING_DIR, "OPTION", "OPT", gCourseEditOptions, sizeof(gCourseEditOptions), 0,
+                              0xFF, true);
                 D_800D6CA0.state = 0x38;
                 break;
             case COURSE_EDIT_OPTIONS_HELP_MENU:
@@ -217,8 +222,7 @@ void CourseEditOptionsMenu_DrawHelpScreen(Gfx** gfxP) {
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
-        gSPTextureRectangle(gfx2++, left << 2, top << 2, (left + 228) << 2, (top + 1) << 2, 0, 0, 0, 1 << 10,
-                            1 << 10);
+        gSPTextureRectangle(gfx2++, left << 2, top << 2, (left + 228) << 2, (top + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
         top++;
     }
     gSPEndDisplayList(gfx2++);
@@ -267,9 +271,9 @@ void CourseEditOptionsMenu_DrawHelpMenu(Gfx** gfxP) {
     gfx = func_i3_80059EC0(gfx, 3);
     gDPSetCombineMode(gfx++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
 
-    gDPLoadTextureBlock_4b(gfx++, aExpansionKitHelpMenuTex + (((sCourseEditOptionsMenuHelpIndex * 0x10 + 4) * 112) / 2), G_IM_FMT_I, 112,
-                           16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
-                           G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock_4b(gfx++, aExpansionKitHelpMenuTex + (((sCourseEditOptionsMenuHelpIndex * 0x10 + 4) * 112) / 2),
+                           G_IM_FMT_I, 112, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK,
+                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     gSPTextureRectangle(gfx++, 104 << 2, ((sCourseEditOptionsMenuHelpIndex * 0x10) + 138) << 2, 216 << 2,
                         ((sCourseEditOptionsMenuHelpIndex * 0x10) + 138 + 16) << 2, 0, 0, 0, 1 << 10, 1 << 10);
@@ -369,12 +373,13 @@ void CourseEditOptionsMenu_Draw(Gfx** gfxP) {
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 145, 140, 255, 255);
 
-    gDPLoadTextureBlock_4b(gfx++, aExpansionKitOptionsMenuTex + (144 * sCourseEditOptionsTexOffsetHeight[5][0]) / 2, G_IM_FMT_I, 144,
-                           sCourseEditOptionsTexOffsetHeight[5][1], 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK,
-                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock_4b(gfx++, aExpansionKitOptionsMenuTex + (144 * sCourseEditOptionsTexOffsetHeight[5][0]) / 2,
+                           G_IM_FMT_I, 144, sCourseEditOptionsTexOffsetHeight[5][1], 0, G_TX_NOMIRROR | G_TX_CLAMP,
+                           G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     gSPTextureRectangle(gfx++, left << 2, (sCourseEditOptionsTexOffsetHeight[5][0] + 62) << 2, (left + 144) << 2,
-                        (sCourseEditOptionsTexOffsetHeight[5][0] + sCourseEditOptionsTexOffsetHeight[5][1] + 62) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+                        (sCourseEditOptionsTexOffsetHeight[5][0] + sCourseEditOptionsTexOffsetHeight[5][1] + 62) << 2,
+                        0, 0, 0, 1 << 10, 1 << 10);
 
     gDPPipeSync(gfx++);
 
@@ -384,13 +389,17 @@ void CourseEditOptionsMenu_Draw(Gfx** gfxP) {
         gDPSetPrimColor(gfx++, 0, 0, 255, 210, 0, 255);
     }
 
-    gDPLoadTextureBlock_4b(gfx++, aExpansionKitOptionsMenuTex + (144 * sCourseEditOptionsTexOffsetHeight[sCourseEditOptionsIndex][0]) / 2,
-                           G_IM_FMT_I, 144, sCourseEditOptionsTexOffsetHeight[sCourseEditOptionsIndex][1], 0, G_TX_NOMIRROR | G_TX_CLAMP,
-                           G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock_4b(
+        gfx++, aExpansionKitOptionsMenuTex + (144 * sCourseEditOptionsTexOffsetHeight[sCourseEditOptionsIndex][0]) / 2,
+        G_IM_FMT_I, 144, sCourseEditOptionsTexOffsetHeight[sCourseEditOptionsIndex][1], 0, G_TX_NOMIRROR | G_TX_CLAMP,
+        G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gSPTextureRectangle(gfx++, left << 2, (sCourseEditOptionsTexOffsetHeight[sCourseEditOptionsIndex][0] + 62) << 2, (left + 144) << 2,
-                        (sCourseEditOptionsTexOffsetHeight[sCourseEditOptionsIndex][0] + sCourseEditOptionsTexOffsetHeight[sCourseEditOptionsIndex][1] + 62) << 2, 0, 0, 0,
-                        1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, (sCourseEditOptionsTexOffsetHeight[sCourseEditOptionsIndex][0] + 62) << 2,
+                        (left + 144) << 2,
+                        (sCourseEditOptionsTexOffsetHeight[sCourseEditOptionsIndex][0] +
+                         sCourseEditOptionsTexOffsetHeight[sCourseEditOptionsIndex][1] +
+                         62) << 2,
+                        0, 0, 0, 1 << 10, 1 << 10);
 
     for (i = 0; i < 4; i++) {
         gDPPipeSync(gfx++);

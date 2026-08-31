@@ -40,22 +40,22 @@ void func_xk2_800EF78C(void) {
     D_xk2_80104BC0 = 1;
 }
 
-extern s32 D_xk2_800F703C;
+extern s32 gCourseEditInfoControlPoint;
 extern s32 D_xk2_800F7040;
-extern CourseSegment* D_xk2_801197EC;
+extern CourseSegment* gCourseEditInfoSegment;
 extern s32 gVenueOption;
 extern s32 gSkyboxOption;
 
 void func_xk2_800EF8B0(void) {
     s32 i;
 
-    if ((D_800D6CA0.state == 1) || (D_800D6CA0.state == 3) || (D_800D6CA0.state == 2) ||
-        (D_800D6CA0.state == 0x10) || (D_800D6CA0.state == 0x20) || (D_xk2_80104BC0 == 0)) {
+    if ((D_800D6CA0.state == 1) || (D_800D6CA0.state == 3) || (D_800D6CA0.state == 2) || (D_800D6CA0.state == 0x10) ||
+        (D_800D6CA0.state == 0x20) || (D_xk2_80104BC0 == 0)) {
         return;
     }
     D_xk2_80104BC0 = 0;
     Audio_TriggerSystemSE(NA_SE_37);
-    D_xk2_800F703C = -1;
+    gCourseEditInfoControlPoint = -1;
     for (i = 0; i < 64; i++) {
         D_80128690[i] = D_xk2_80128990[i];
     }
@@ -65,7 +65,7 @@ void func_xk2_800EF8B0(void) {
     }
     D_802CB6D0 = D_807B6528;
     COURSE_CONTEXT()->courseData = D_8010CF50;
-    D_xk2_801197EC = D_802CB6D0.segments;
+    gCourseEditInfoSegment = D_802CB6D0.segments;
     func_xk2_800DC3F8();
     CourseEdit_ClearControlPointHighlight();
     D_800D6CA0.selectedControlPoint = D_xk2_80119800;

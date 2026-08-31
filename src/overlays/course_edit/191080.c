@@ -5,6 +5,8 @@
 #include "fzx_expansion_kit.h"
 #include "src/overlays/ovl_i3/hud.h"
 #include "src/overlays/ovl_i3/minimap.h"
+#include ASSET_HEADER(setup_gfx.h)
+#include ASSET_HEADER(course_track_gfx.h)
 #include ASSET_HEADER_EK(expansion_kit_textures.h)
 #include ASSET_HEADER_EK(course_edit_textures.h)
 
@@ -19,7 +21,7 @@ extern MenuDropItem gTRoadTypeMenuItems;
 s32 D_xk2_800F7030 = 0;
 s32 D_xk2_800F7034 = 0;
 s32 D_xk2_800F7038 = 16;
-s32 D_xk2_800F703C = -1;
+s32 gCourseEditInfoControlPoint = -1;
 s32 D_xk2_800F7040 = 0;
 s32 D_xk2_800F7044 = 0;
 s32 D_xk2_800F7048 = 0;
@@ -43,14 +45,26 @@ s8 D_xk2_800F7070[][4] = {
     { 100, 150, 255, 1 },  // TRACK_SHAPE_BORDERLESS_ROAD
 };
 
-u8 D_xk2_800F7090[][8] = {
-    { 0x20, 0x8F, 0xB3, 0xDB, 0x00, 0x00, 0x00, 0x00 }, { 0x20, 0x48, 0x8F, 0xB3, 0xDB, 0x00, 0x00, 0x00 },
-    { 0x20, 0x95, 0xB2, 0x97, 0x00, 0x00, 0x00, 0x00 }, { 0xBC, 0xD8, 0xDD, 0x8B, 0xB0, 0x00, 0x00, 0x00 },
-    { 0xCA, 0xB0, 0xCC, 0x95, 0xB2, 0x97, 0x00, 0x00 }, { 0x20, 0xC4, 0xDD, 0xC8, 0xD9, 0x00, 0x00, 0x00 },
-    { 0x20, 0xBD, 0x98, 0xB0, 0xBD, 0x00, 0x00, 0x00 }, { 0x20, 0x54, 0x8F, 0xB3, 0xDB, 0x00, 0x00, 0x00 },
+u8 sCourseEditTrackShapeEncStrs[][8] = {
+    //  どうろ
+    { 0x20, 0x8F, 0xB3, 0xDB, 0x00, 0x00, 0x00, 0x00 },
+    //  Hどうろ
+    { 0x20, 0x48, 0x8F, 0xB3, 0xDB, 0x00, 0x00, 0x00 },
+    //  パイプ
+    { 0x20, 0x95, 0xB2, 0x97, 0x00, 0x00, 0x00, 0x00 },
+    // シリンダー
+    { 0xBC, 0xD8, 0xDD, 0x8B, 0xB0, 0x00, 0x00, 0x00 },
+    // ハーフパイプ
+    { 0xCA, 0xB0, 0xCC, 0x95, 0xB2, 0x97, 0x00, 0x00 },
+    //  トンネル
+    { 0x20, 0xC4, 0xDD, 0xC8, 0xD9, 0x00, 0x00, 0x00 },
+    //  スペース
+    { 0x20, 0xBD, 0x98, 0xB0, 0xBD, 0x00, 0x00, 0x00 },
+    //  Tどうろ
+    { 0x20, 0x54, 0x8F, 0xB3, 0xDB, 0x00, 0x00, 0x00 },
 };
 
-u8 D_xk2_800F70D0[][3] = {
+u8 sCourseEditTrackShapeBoxColors[][3] = {
     140, 200, 255, // TRACK_SHAPE_ROAD
     80,  200, 140, // TRACK_SHAPE_WALLED_ROAD
     200, 180, 255, // TRACK_SHAPE_PIPE
@@ -61,7 +75,7 @@ u8 D_xk2_800F70D0[][3] = {
     255, 200, 255, // TRACK_SHAPE_BORDERLESS_ROAD
 };
 
-s32 D_xk2_800F70E8[] = {
+s32 sCourseEditRoadMenuItemIndexMap[] = {
     -1, // ROAD_START_LINE
     -1, // ROAD_1
     0,  // ROAD_2
@@ -74,7 +88,7 @@ s32 D_xk2_800F70E8[] = {
     3,  // ROAD_9 ?
 };
 
-MenuDropItem* D_xk2_800F7110[] = {
+MenuDropItem* sCourseEditTrackShapeMenuItems[] = {
     &gRoadTypeMenuItems,     // TRACK_SHAPE_ROAD
     &gHRoadTypeMenuItems,    // TRACK_SHAPE_WALLED_ROAD
     &gPipeTypeMenuItems,     // TRACK_SHAPE_PIPE
@@ -121,12 +135,9 @@ Gfx* func_xk2_800DF5FC(Gfx* gfx) {
 void CourseEdit_DrawTooltipIntroHelper(Gfx** gfxP);
 
 extern unk_80225800 D_2000000;
-extern Gfx D_30004A8[];
-extern Gfx D_3000540[];
 extern char* gCourseEditMessageStrs[];
 extern s32 D_80119880;
 extern u16* gCourseEditIconTextures[];
-extern Gfx D_3000510[];
 extern u8 D_80794E14;
 extern s32 D_8076C964;
 extern unk_800D6CA0 D_800D6CA0;
@@ -204,9 +215,9 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
     func_xk2_800E98D8(&gfx);
     CourseEdit_DrawIcons(&gfx);
     gfx = func_xk2_800E8F7C(gfx);
-    gfx = func_xk2_800E54A4(gfx);
-    gfx = func_xk2_800E5058(gfx);
-    gfx = func_xk2_800E4984(gfx);
+    gfx = CourseEdit_DrawGeneralInfo(gfx);
+    gfx = CourseEdit_DrawControlPointCountVenueId(gfx);
+    gfx = CourseEdit_DrawInfoWindows(gfx);
     gfx = func_xk2_800EDF90(gfx);
     CourseEdit_DrawPressBToReturnToPreviousState(&gfx);
     if (gCourseEditCameraOnlyMode) {
@@ -216,7 +227,7 @@ Gfx* func_xk2_800DF6FC(Gfx* gfx) {
     } else {
         gfx = func_xk2_800E8080(gfx);
     }
-    gfx = func_xk2_800E5214(gfx);
+    gfx = CourseEdit_DrawBGMTooltip(gfx);
     CourseEdit_DrawCameraOnlyInstructions(&gfx);
     if (D_80794E14 == 0) {
         gfx = func_xk2_800EA3B0(gfx);
@@ -318,7 +329,6 @@ void func_xk2_800DFFF8(void) {
     }
 }
 
-extern Gfx D_8014940[];
 extern s32 gCourseEditMenuCursorXPos;
 extern s32 gCourseEditMenuCursorYPos;
 
@@ -355,8 +365,7 @@ Gfx* CourseEdit_DrawCursor(Gfx* gfx) {
     gDPLoadTextureBlock(gfx++, aCourseEditCursorTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 16) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10,
-                        1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 16) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
     return gfx;
 }
@@ -562,13 +571,13 @@ Gfx* func_xk2_800E0BD0(Gfx* gfx) {
     return gfx;
 }
 
-Gfx* func_xk2_800E17E0(Gfx* gfx, s32 arg1) {
+Gfx* func_xk2_800E17E0(Gfx* gfx, s32 controlPoint) {
     s32 var_t5;
     s32 var_t4;
     s32 i;
 
-    var_t5 = D_80128690[arg1].unk_00;
-    var_t4 = D_80128690[arg1].unk_04;
+    var_t5 = D_80128690[controlPoint].unk_00;
+    var_t4 = D_80128690[controlPoint].unk_04;
 
     if (var_t4 < var_t5) {
         if (var_t5 < 0x10000) {
@@ -715,7 +724,6 @@ void func_xk2_800E1F40(Gfx** gfxP) {
     *gfxP = gfx;
 }
 
-extern Gfx D_3000338[];
 extern FrameBuffer* gFrameBuffers[];
 
 void func_xk2_800E1FC0(Gfx** gfxP) {
@@ -760,21 +768,20 @@ Gfx* func_xk2_800E2104(Gfx* gfx) {
     return gfx;
 }
 
-extern Gfx D_3000540[];
-extern s32 D_xk1_80032AD0;
-extern CourseSegment* D_xk2_801197EC;
+extern s32 gExpansionKitEncStrEncType;
+extern CourseSegment* gCourseEditInfoSegment;
 extern s32 gCourseEditCameraOnlyMode;
 extern s32 D_xk2_80128CA0;
 
-void func_xk2_800E2238(Gfx** gfxP) {
-    u8 sp290[0x40];
+void CourseEdit_DrawControlPointInfo(Gfx** gfxP) {
+    u8 strBuf[0x40];
     s32 var_a1;
     s32 left;
     s32 top;
-    s32 sp280;
-    s32 temp_t0_4;
+    s32 trackTypeMenuIndex;
+    s32 shape;
     Gfx* gfx;
-    MenuDropItem* temp_t0_3;
+    MenuDropItem* menuItem;
 
     top = 60;
     left = 232;
@@ -782,24 +789,24 @@ void func_xk2_800E2238(Gfx** gfxP) {
         return;
     }
     gfx = *gfxP;
-    if (D_xk2_800F703C == -1) {
+    if (gCourseEditInfoControlPoint == -1) {
         return;
     }
     if (gCourseEditCursorXPos > 224) {
         left = 24;
     }
     D_xk2_80128CA0 = 0x40;
-    D_xk2_801197EC = &D_802CB6D0.segments[D_xk2_800F703C];
-    func_xk2_800EA028(&gfx, left, top, 64, 116);
+    gCourseEditInfoSegment = &D_802CB6D0.segments[gCourseEditInfoControlPoint];
+    CourseEdit_DrawControlPointInfoBackground(&gfx, left, top, 64, 116);
     left += 4;
     top += 4;
     gSPDisplayList(gfx++, D_3000510);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 0x38) << 2, (top + 0x32) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 56) << 2, (top + 50) << 2, 0, 0, 0, 1 << 10, 1 << 10);
     gDPPipeSync(gfx++);
     gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 
-    var_a1 = (D_xk2_801197EC->segmentIndex + 1) / 10;
+    var_a1 = (gCourseEditInfoSegment->segmentIndex + 1) / 10;
     if (var_a1) {
         gDPLoadTextureBlock(gfx++, aCourseEditNumberSheetTex + var_a1 * 0x90, G_IM_FMT_RGBA, G_IM_SIZ_16b, 12, 12, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
@@ -808,7 +815,7 @@ void func_xk2_800E2238(Gfx** gfxP) {
         gSPTextureRectangle(gfx++, (left + 3) << 2, top << 2, (left + 15) << 2, (top + 12) << 2, 0, 0, 0, 1 << 10,
                             1 << 10);
     }
-    var_a1 = (D_xk2_801197EC->segmentIndex + 1) % 10;
+    var_a1 = (gCourseEditInfoSegment->segmentIndex + 1) % 10;
 
     gDPLoadTextureBlock(gfx++, aCourseEditNumberSheetTex + var_a1 * 0x90, G_IM_FMT_RGBA, G_IM_SIZ_16b, 12, 12, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
@@ -826,28 +833,29 @@ void func_xk2_800E2238(Gfx** gfxP) {
     left += 4;
     top += 16;
 
-    temp_t0_4 = D_xk2_801197EC->trackSegmentInfo & TRACK_SHAPE_MASK;
-    switch (temp_t0_4) {
+    shape = gCourseEditInfoSegment->trackSegmentInfo & TRACK_SHAPE_MASK;
+    switch (shape) {
         case TRACK_SHAPE_ROAD:
-            sp280 = D_xk2_800F70E8[D_xk2_801197EC->trackSegmentInfo & TRACK_TYPE_MASK];
+            trackTypeMenuIndex =
+                sCourseEditRoadMenuItemIndexMap[gCourseEditInfoSegment->trackSegmentInfo & TRACK_TYPE_MASK];
             break;
         case TRACK_SHAPE_AIR:
-            sp280 = 0;
+            trackTypeMenuIndex = 0;
             break;
         default:
-            sp280 = D_xk2_801197EC->trackSegmentInfo & TRACK_TYPE_MASK;
-            func_xk2_800EDE68(sp290, sp280 + 1, 2);
+            trackTypeMenuIndex = gCourseEditInfoSegment->trackSegmentInfo & TRACK_TYPE_MASK;
+            CourseEdit_NumToPaddedInfoEncStr(strBuf, trackTypeMenuIndex + 1, 2);
             break;
     }
 
-    func_xk2_800EDE68(sp290, sp280 + 1, 2);
-    if (sp280 != -1) {
-        var_a1 = TRACK_SHAPE_INDEX((u32) (D_xk2_801197EC->trackSegmentInfo & TRACK_SHAPE_MASK));
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, trackTypeMenuIndex + 1, 2);
+    if (trackTypeMenuIndex != -1) {
+        var_a1 = TRACK_SHAPE_INDEX((u32) (gCourseEditInfoSegment->trackSegmentInfo & TRACK_SHAPE_MASK));
         if (var_a1 == TRACK_SHAPE_INDEX(TRACK_SHAPE_AIR)) {
             var_a1 = 0;
         }
-        temp_t0_3 = D_xk2_800F7110[var_a1];
-        temp_t0_3 += sp280;
+        menuItem = sCourseEditTrackShapeMenuItems[var_a1];
+        menuItem += trackTypeMenuIndex;
 
         gDPPipeSync(gfx++);
         gDPSetCombineMode(gfx++, G_CC_DECALRGBA, G_CC_DECALRGBA);
@@ -858,7 +866,7 @@ void func_xk2_800E2238(Gfx** gfxP) {
 
         gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 48) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
-        gDPLoadTextureBlock(gfx++, temp_t0_3->subContentsRGBATex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 24, 12, 0,
+        gDPLoadTextureBlock(gfx++, menuItem->subContentsRGBATex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 24, 12, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
@@ -867,7 +875,7 @@ void func_xk2_800E2238(Gfx** gfxP) {
 
         gSPDisplayList(gfx++, D_3000540);
 
-        gDPLoadTextureBlock_4b(gfx++, temp_t0_3->contentsTex, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+        gDPLoadTextureBlock_4b(gfx++, menuItem->contentsTex, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                                G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
         gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 16) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10, 1 << 10);
@@ -898,12 +906,12 @@ void func_xk2_800E2238(Gfx** gfxP) {
     }
 
     top += 20;
-    temp_t0_4 = TRACK_SHAPE_INDEX((u32) (D_xk2_801197EC->trackSegmentInfo & TRACK_SHAPE_MASK));
+    shape = TRACK_SHAPE_INDEX((u32) (gCourseEditInfoSegment->trackSegmentInfo & TRACK_SHAPE_MASK));
 
     gSPDisplayList(gfx++, D_3000510);
-    if (D_xk2_801197EC->segmentIndex != 0) {
-        gDPSetPrimColor(gfx++, 0, 0, D_xk2_800F70D0[temp_t0_4][0], D_xk2_800F70D0[temp_t0_4][1],
-                        D_xk2_800F70D0[temp_t0_4][2], 255);
+    if (gCourseEditInfoSegment->segmentIndex != 0) {
+        gDPSetPrimColor(gfx++, 0, 0, sCourseEditTrackShapeBoxColors[shape][0], sCourseEditTrackShapeBoxColors[shape][1],
+                        sCourseEditTrackShapeBoxColors[shape][2], 255);
     } else {
         gDPSetPrimColor(gfx++, 0, 0, 120, 130, 255, 255);
     }
@@ -915,7 +923,7 @@ void func_xk2_800E2238(Gfx** gfxP) {
 
     top++;
     {
-        s32 sp98[8] = {
+        s32 trackShapeEncType[8] = {
             1, // TRACK_SHAPE_ROAD
             1, // TRACK_SHAPE_WALLED_ROAD
             0, // TRACK_SHAPE_PIPE
@@ -926,14 +934,15 @@ void func_xk2_800E2238(Gfx** gfxP) {
             1, // TRACK_SHAPE_BORDERLESS_ROAD
         };
 
-        D_xk1_80032AD0 = sp98[temp_t0_4];
-        if (D_xk2_801197EC->segmentIndex != 0) {
-            gfx = func_xk1_8002924C(gfx, left, top, D_xk2_800F7090[temp_t0_4]);
+        gExpansionKitEncStrEncType = trackShapeEncType[shape];
+        if (gCourseEditInfoSegment->segmentIndex != 0) {
+            gfx = ExpansionKit_DrawEncStr(gfx, left, top, sCourseEditTrackShapeEncStrs[shape]);
         } else {
-            u8 sp90[5] = { 0x83, 0xD8, 0xAF, 0x8F, 0x00 };
+            // グリッド
+            u8 gridEncStr[5] = { 0x83, 0xD8, 0xAF, 0x8F, 0x00 };
 
-            D_xk1_80032AD0 = 0;
-            gfx = func_xk1_8002924C(gfx, left, top, sp90);
+            gExpansionKitEncStrEncType = 0;
+            gfx = ExpansionKit_DrawEncStr(gfx, left, top, gridEncStr);
         }
 
         gDPPipeSync(gfx++);
@@ -941,17 +950,17 @@ void func_xk2_800E2238(Gfx** gfxP) {
 
         top += 14;
 
-        func_xk2_800EDAD0(&gfx, left, top, "X");
-        func_xk2_800EDE68(sp290, Math_Round(D_xk2_801197EC->pos.x / 10.0f), 7);
-        func_xk2_800EDAD0(&gfx, left, top, sp290);
+        CourseEdit_DrawInfoEncStr(&gfx, left, top, "X");
+        CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(gCourseEditInfoSegment->pos.x / 10.0f), 7);
+        CourseEdit_DrawInfoEncStr(&gfx, left, top, strBuf);
         top += 8;
-        func_xk2_800EDAD0(&gfx, left, top, "Y");
-        func_xk2_800EDE68(sp290, Math_Round(D_xk2_801197EC->pos.y / 10.0f), 7);
-        func_xk2_800EDAD0(&gfx, left, top, sp290);
+        CourseEdit_DrawInfoEncStr(&gfx, left, top, "Y");
+        CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(gCourseEditInfoSegment->pos.y / 10.0f), 7);
+        CourseEdit_DrawInfoEncStr(&gfx, left, top, strBuf);
         top += 8;
-        func_xk2_800EDAD0(&gfx, left, top, "Z");
-        func_xk2_800EDE68(sp290, Math_Round(D_xk2_801197EC->pos.z / 10.0f), 7);
-        func_xk2_800EDAD0(&gfx, left, top, sp290);
+        CourseEdit_DrawInfoEncStr(&gfx, left, top, "Z");
+        CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(gCourseEditInfoSegment->pos.z / 10.0f), 7);
+        CourseEdit_DrawInfoEncStr(&gfx, left, top, strBuf);
 
         top += 9;
 
@@ -965,11 +974,14 @@ void func_xk2_800E2238(Gfx** gfxP) {
 
         top += 3;
 
-        D_xk1_80032AD0 = 0;
-        gfx = func_xk1_8002924C(gfx, left, top, "%c%c%c", 0x90, 0xDD, 0xB8);
-        func_xk2_800EDE68(sp290, COURSE_CONTEXT()->courseData.bankAngle[D_xk2_800F703C] % 360, 7);
-        func_xk2_800EDAD0(&gfx, left, top, sp290);
-        gfx = func_xk1_8002924C(gfx, left + 0x28, top + 1, "%c", 0xDF);
+        gExpansionKitEncStrEncType = 0;
+        // バンク
+        gfx = ExpansionKit_DrawEncStr(gfx, left, top, "%c%c%c", 0x90, 0xDD, 0xB8);
+        CourseEdit_NumToPaddedInfoEncStr(strBuf,
+                                         COURSE_CONTEXT()->courseData.bankAngle[gCourseEditInfoControlPoint] % 360, 7);
+        CourseEdit_DrawInfoEncStr(&gfx, left, top, strBuf);
+        // °
+        gfx = ExpansionKit_DrawEncStr(gfx, left + 0x28, top + 1, "%c", 0xDF);
 
         top += 9;
         gSPDisplayList(gfx++, D_3000510);
@@ -981,21 +993,23 @@ void func_xk2_800E2238(Gfx** gfxP) {
         gSPDisplayList(gfx++, D_3000540);
 
         top += 3;
-        D_xk1_80032AD0 = 1;
-        gfx = func_xk1_8002924C(gfx, left, top, "%c%c%c%c", 0xD0, 0xC1, 0xCA, 0x90);
-        func_xk2_800EDE68(sp290, Math_Round((D_xk2_801197EC->radiusLeft + D_xk2_801197EC->radiusRight) / 10.0f), 3);
-        func_xk2_800EDAD0(&gfx, left + 32, top, sp290);
+        gExpansionKitEncStrEncType = 1;
+        // みちはば
+        gfx = ExpansionKit_DrawEncStr(gfx, left, top, "%c%c%c%c", 0xD0, 0xC1, 0xCA, 0x90);
+        CourseEdit_NumToPaddedInfoEncStr(
+            strBuf, Math_Round((gCourseEditInfoSegment->radiusLeft + gCourseEditInfoSegment->radiusRight) / 10.0f), 3);
+        CourseEdit_DrawInfoEncStr(&gfx, left + 32, top, strBuf);
         top += 8;
-        func_xk2_800EDE68(sp290, Math_Round(D_xk2_801197EC->radiusLeft / 10.0f), 3);
-        func_xk2_800EDAD0(&gfx, left, top, sp290);
-        func_xk2_800EDAD0(&gfx, left + 18, top, "-");
-        func_xk2_800EDE68(sp290, Math_Round(D_xk2_801197EC->radiusRight / 10.0f), 7);
-        func_xk2_800EDAD0(&gfx, left, top, sp290);
+        CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(gCourseEditInfoSegment->radiusLeft / 10.0f), 3);
+        CourseEdit_DrawInfoEncStr(&gfx, left, top, strBuf);
+        CourseEdit_DrawInfoEncStr(&gfx, left + 18, top, "-");
+        CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(gCourseEditInfoSegment->radiusRight / 10.0f), 7);
+        CourseEdit_DrawInfoEncStr(&gfx, left, top, strBuf);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 255, 255);
 
-        gfx = func_xk1_8002924C(gfx, left - 2, top, "L");
-        gfx = func_xk1_8002924C(gfx, left + 44, top, "R");
+        gfx = ExpansionKit_DrawEncStr(gfx, left - 2, top, "L");
+        gfx = ExpansionKit_DrawEncStr(gfx, left + 44, top, "R");
     }
 
     *gfxP = gfx;
@@ -1003,168 +1017,169 @@ void func_xk2_800E2238(Gfx** gfxP) {
 
 extern CourseInfo* gCurrentCourseInfo;
 
-void func_xk2_800E38A8(Gfx** gfxP) {
-    u8 sp28[0x40];
+void CourseEdit_DrawCourseLength(Gfx** gfxP) {
+    u8 strBuf[0x40];
     Gfx* gfx;
 
     gfx = *gfxP;
     gSPDisplayList(gfx++, D_8014940);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    func_xk2_800EDE68(sp28, Math_Round(gCurrentCourseInfo->length * 0.1f), 6);
-    func_xk2_800EDAD0(&gfx, 0xF8, 0xBA, sp28);
-    func_xk2_800EDAD0(&gfx, 0x11F, 0xBA, "M");
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(gCurrentCourseInfo->length * 0.1f), 6);
+    CourseEdit_DrawInfoEncStr(&gfx, 248, 186, strBuf);
+    CourseEdit_DrawInfoEncStr(&gfx, 287, 186, "M");
     *gfxP = gfx;
 }
 
-void func_xk2_800E396C(Gfx** gfxP, CourseSegment* arg1) {
-    s32 spDC;
-    s32 spD8;
-    s32 var_ra;
-    u8 sp94[0x40];
+void CourseEdit_DrawMoveXYZInfo(Gfx** gfxP, CourseSegment* segment) {
+    s32 screenPosX;
+    s32 screenPosY;
+    s32 left;
+    u8 strBuf[0x40];
     Gfx* gfx;
 
-    if (func_xk2_800EF090(arg1->pos, &spDC, &spD8) != 0) {
+    if (func_xk2_800EF090(segment->pos, &screenPosX, &screenPosY) != 0) {
         return;
     }
     gfx = *gfxP;
     // clang-format off
-    spDC -= 15; \
-    spD8 -= 34;
+    screenPosX -= 15; \
+    screenPosY -= 34;
     // clang format on
-    var_ra = spDC;
-    if (var_ra <= 0) {
-        var_ra = 1;
+    left = screenPosX;
+    if (left <= 0) {
+        left = 1;
     }
 
     gSPDisplayList(gfx++, D_3000510);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
 
-    gSPTextureRectangle(gfx++, (var_ra - 1) << 2, (spD8 - 1) << 2, (spDC + 31 + 1) << 2, spD8 << 2, 0, 0, 0, 1 << 10, 1 << 10);
-    gSPTextureRectangle(gfx++, (spDC - 1) << 2, (spD8 - 1) << 2, spDC << 2, (spD8 + 24 + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
-    gSPTextureRectangle(gfx++, (spDC + 31) << 2, (spD8 - 1) << 2, (spDC + 31 + 1) << 2, (spD8 + 24 + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
-    gSPTextureRectangle(gfx++, (var_ra - 1) << 2, (spD8 + 24) << 2, (spDC + 31 + 1) << 2, (spD8 + 24 + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (left - 1) << 2, (screenPosY - 1) << 2, (screenPosX + 31 + 1) << 2, screenPosY << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (screenPosX - 1) << 2, (screenPosY - 1) << 2, screenPosX << 2, (screenPosY + 24 + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (screenPosX + 31) << 2, (screenPosY - 1) << 2, (screenPosX + 31 + 1) << 2, (screenPosY + 24 + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (left - 1) << 2, (screenPosY + 24) << 2, (screenPosX + 31 + 1) << 2, (screenPosY + 24 + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
     gSPDisplayList(gfx++, D_3000510);
     gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 160);
 
-    gSPTextureRectangle(gfx++, var_ra << 2, spD8 << 2, (spDC + 31) << 2, (spD8 + 24) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, screenPosY << 2, (screenPosX + 31) << 2, (screenPosY + 24) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
     gSPDisplayList(gfx++, D_3000540);
     gDPSetPrimColor(gfx++, 0, 0, 150, 255, 150, 160);
-    func_xk2_800EDE68(sp94, Math_Round(arg1->pos.x / 10.0f), 5);
-    func_xk2_800EDC88(&gfx, spDC, spD8, sp94);
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(segment->pos.x / 10.0f), 5);
+    CourseEdit_DrawLoadedInfoEncStr(&gfx, screenPosX, screenPosY, strBuf);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 150, 255, 160);
-    func_xk2_800EDE68(sp94, Math_Round(arg1->pos.y / 10.0f), 5);
-    func_xk2_800EDC88(&gfx, spDC, spD8 + 8, sp94);
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(segment->pos.y / 10.0f), 5);
+    CourseEdit_DrawLoadedInfoEncStr(&gfx, screenPosX, screenPosY + 8, strBuf);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 150, 255, 255, 160);
-    func_xk2_800EDE68(sp94, Math_Round(arg1->pos.z / 10.0f), 5);
-    func_xk2_800EDC88(&gfx, spDC, spD8 + 0x10, sp94);
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(segment->pos.z / 10.0f), 5);
+    CourseEdit_DrawLoadedInfoEncStr(&gfx, screenPosX, screenPosY + 16, strBuf);
     *gfxP = gfx;
 }
 
-void func_xk2_800E3E90(Gfx** gfxP, CourseSegment* arg1) {
-    s32 spD4;
-    s32 spD0;
-    s32 var_t4;
+void CourseEdit_DrawCenterWidthInfo(Gfx** gfxP, CourseSegment* segment) {
+    s32 screenPosX;
+    s32 screenPosY;
+    s32 left;
     s32 width = 42;
     s32 height = 16;
-    u8 sp84[0x40];
+    u8 strBuf[0x40];
     Gfx* gfx;
 
-    if (func_xk2_800EF090(arg1->pos, &spD4, &spD0) != 0) {
+    if (func_xk2_800EF090(segment->pos, &screenPosX, &screenPosY) != 0) {
         return;
     }
     gfx = *gfxP;
     // clang-format off
-    spD4 -= 0x15; \
-    spD0 -= 0x18;
+    screenPosX -= 21; \
+    screenPosY -= 24;
     // clang-format on
-    var_t4 = spD4;
-    if (var_t4 <= 0) {
-        var_t4 = 1;
+    left = screenPosX;
+    if (left <= 0) {
+        left = 1;
     }
 
     gSPDisplayList(gfx++, D_3000510);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
 
-    gSPTextureRectangle(gfx++, (var_t4 - 1) << 2, (spD0 - 1) << 2, (spD4 + width + 1) << 2, spD0 << 2, 0, 0, 0, 1 << 10,
-                        1 << 10);
-    gSPTextureRectangle(gfx++, (spD4 - 1) << 2, (spD0 - 1) << 2, spD4 << 2, (spD0 + height + 1) << 2, 0, 0, 0, 1 << 10,
-                        1 << 10);
-    gSPTextureRectangle(gfx++, (spD4 + width) << 2, (spD0 - 1) << 2, (spD4 + width + 1) << 2, (spD0 + height + 1) << 2,
+    gSPTextureRectangle(gfx++, (left - 1) << 2, (screenPosY - 1) << 2, (screenPosX + width + 1) << 2, screenPosY << 2,
                         0, 0, 0, 1 << 10, 1 << 10);
-    gSPTextureRectangle(gfx++, (var_t4 - 1) << 2, (spD0 + height) << 2, (spD4 + width + 1) << 2,
-                        (spD0 + height + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (screenPosX - 1) << 2, (screenPosY - 1) << 2, screenPosX << 2,
+                        (screenPosY + height + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (screenPosX + width) << 2, (screenPosY - 1) << 2, (screenPosX + width + 1) << 2,
+                        (screenPosY + height + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (left - 1) << 2, (screenPosY + height) << 2, (screenPosX + width + 1) << 2,
+                        (screenPosY + height + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
     gSPDisplayList(gfx++, D_3000510);
     gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 160);
 
-    gSPTextureRectangle(gfx++, var_t4 << 2, spD0 << 2, (spD4 + width) << 2, (spD0 + height) << 2, 0, 0, 0, 1 << 10,
-                        1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, screenPosY << 2, (screenPosX + width) << 2, (screenPosY + height) << 2, 0, 0,
+                        0, 1 << 10, 1 << 10);
 
     gSPDisplayList(gfx++, D_3000540);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_xk1_8002924C(gfx, spD4, spD0, "L");
-    gfx = func_xk1_8002924C(gfx, spD4 + 0x24, spD0, "R");
-    func_xk2_800EDA34(&gfx);
-    func_xk2_800EDE68(sp84, Math_Round(arg1->radiusLeft / 10.0f), 3);
-    func_xk2_800EDC88(&gfx, spD4, spD0 + 8, sp84);
-    func_xk2_800EDC88(&gfx, spD4 + 0x12, spD0 + 8, "-");
-    func_xk2_800EDE68(sp84, Math_Round(arg1->radiusRight / 10.0f), 3);
-    func_xk2_800EDC88(&gfx, spD4 + 0x18, spD0 + 8, sp84);
+    gfx = ExpansionKit_DrawEncStr(gfx, screenPosX, screenPosY, "L");
+    gfx = ExpansionKit_DrawEncStr(gfx, screenPosX + 36, screenPosY, "R");
+    CourseEdit_LoadInfoFontSheet(&gfx);
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(segment->radiusLeft / 10.0f), 3);
+    CourseEdit_DrawLoadedInfoEncStr(&gfx, screenPosX, screenPosY + 8, strBuf);
+    CourseEdit_DrawLoadedInfoEncStr(&gfx, screenPosX + 18, screenPosY + 8, "-");
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, Math_Round(segment->radiusRight / 10.0f), 3);
+    CourseEdit_DrawLoadedInfoEncStr(&gfx, screenPosX + 24, screenPosY + 8, strBuf);
     *gfxP = gfx;
 }
 
-void func_xk2_800E4364(Gfx** gfxP, CourseSegment* arg1) {
-    s32 spD4;
-    s32 spD0;
-    s32 var_t4;
+void CourseEdit_DrawBankAngleInfo(Gfx** gfxP, CourseSegment* segment) {
+    s32 screenPosX;
+    s32 screenPosY;
+    s32 left;
     s32 width = 24;
     s32 height = 8;
-    u8 sp84[0x40];
+    u8 strBuf[0x40];
     Gfx* gfx;
 
-    if (func_xk2_800EF090(arg1->pos, &spD4, &spD0) != 0) {
+    if (func_xk2_800EF090(segment->pos, &screenPosX, &screenPosY) != 0) {
         return;
     }
 
     gfx = *gfxP;
     // clang-format off
-    spD4 -= 12; \
-    spD0 -= 16;
+    screenPosX -= 12; \
+    screenPosY -= 16;
     // clang-format on
-    var_t4 = spD4;
-    if (var_t4 <= 0) {
-        var_t4 = 1;
+    left = screenPosX;
+    if (left <= 0) {
+        left = 1;
     }
 
     gSPDisplayList(gfx++, D_3000510);
     gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
 
-    gSPTextureRectangle(gfx++, (var_t4 - 1) << 2, (spD0 - 1) << 2, (spD4 + width + 1) << 2, spD0 << 2, 0, 0, 0, 1 << 10,
-                        1 << 10);
-    gSPTextureRectangle(gfx++, (spD4 - 1) << 2, (spD0 - 1) << 2, spD4 << 2, (spD0 + height + 1) << 2, 0, 0, 0, 1 << 10,
-                        1 << 10);
-    gSPTextureRectangle(gfx++, (spD4 + width) << 2, (spD0 - 1) << 2, (spD4 + width + 1) << 2, (spD0 + height + 1) << 2,
+    gSPTextureRectangle(gfx++, (left - 1) << 2, (screenPosY - 1) << 2, (screenPosX + width + 1) << 2, screenPosY << 2,
                         0, 0, 0, 1 << 10, 1 << 10);
-    gSPTextureRectangle(gfx++, (var_t4 - 1) << 2, (spD0 + height) << 2, (spD4 + width + 1) << 2,
-                        (spD0 + height + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (screenPosX - 1) << 2, (screenPosY - 1) << 2, screenPosX << 2,
+                        (screenPosY + height + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (screenPosX + width) << 2, (screenPosY - 1) << 2, (screenPosX + width + 1) << 2,
+                        (screenPosY + height + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, (left - 1) << 2, (screenPosY + height) << 2, (screenPosX + width + 1) << 2,
+                        (screenPosY + height + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
     gSPDisplayList(gfx++, D_3000510);
     gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 160);
 
-    gSPTextureRectangle(gfx++, var_t4 << 2, spD0 << 2, (spD4 + width) << 2, (spD0 + height) << 2, 0, 0, 0, 1 << 10,
-                        1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, screenPosY << 2, (screenPosX + width) << 2, (screenPosY + height) << 2, 0, 0,
+                        0, 1 << 10, 1 << 10);
 
     gSPDisplayList(gfx++, D_3000540);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-    func_xk2_800EDE68(&sp84, COURSE_CONTEXT()->courseData.bankAngle[arg1->segmentIndex] % 360, 3);
-    func_xk2_800EDAD0(&gfx, spD4, spD0, &sp84);
-    gfx = func_xk1_8002924C(gfx, spD4 + 0x10, spD0, "%c", 0xDF);
+    CourseEdit_NumToPaddedInfoEncStr(&strBuf, COURSE_CONTEXT()->courseData.bankAngle[segment->segmentIndex] % 360, 3);
+    CourseEdit_DrawInfoEncStr(&gfx, screenPosX, screenPosY, &strBuf);
+    // °
+    gfx = ExpansionKit_DrawEncStr(gfx, screenPosX + 16, screenPosY, "%c", 0xDF);
 
     *gfxP = gfx;
 }
@@ -1172,18 +1187,19 @@ void func_xk2_800E4364(Gfx** gfxP, CourseSegment* arg1) {
 extern s32 gCourseEditOptions[];
 extern s32 gMoveOption;
 
-void func_xk2_800E47B4(Gfx** gfxP) {
+void CourseEdit_DrawMoveInfo(Gfx** gfxP) {
     s32 pad[0x12];
     Gfx* gfx;
     Gfx* gfx2;
     s32 i;
 
-    if ((gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_MOVE_POS] == 0) || gInCourseEditTestRun || (gCreateOption != CREATE_OPTION_POINT)) {
+    if ((gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_MOVE_POS] == 0) || gInCourseEditTestRun ||
+        (gCreateOption != CREATE_OPTION_POINT)) {
         return;
     }
     gfx = *gfxP;
     gfx2 = D_80128C94->unk_110C8;
-    func_xk2_800EDA34(&gfx2);
+    CourseEdit_LoadInfoFontSheet(&gfx2);
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         if (D_80128690[i].unk_08 == 0) {
@@ -1192,14 +1208,14 @@ void func_xk2_800E47B4(Gfx** gfxP) {
         switch (gMoveOption) {
             case MOVE_OPTION_MOVE_XZ:
             case MOVE_OPTION_MOVE_Y:
-                func_xk2_800E396C(&gfx2, &D_802CB6D0.segments[i]);
+                CourseEdit_DrawMoveXYZInfo(&gfx2, &D_802CB6D0.segments[i]);
                 break;
             case MOVE_OPTION_WIDTH:
             case MOVE_OPTION_CENTER:
-                func_xk2_800E3E90(&gfx2, &D_802CB6D0.segments[i]);
+                CourseEdit_DrawCenterWidthInfo(&gfx2, &D_802CB6D0.segments[i]);
                 break;
             case MOVE_OPTION_BANK:
-                func_xk2_800E4364(&gfx2, &D_802CB6D0.segments[i]);
+                CourseEdit_DrawBankAngleInfo(&gfx2, &D_802CB6D0.segments[i]);
                 break;
         }
     }
@@ -1214,24 +1230,25 @@ void func_xk2_800E47B4(Gfx** gfxP) {
     *gfxP = gfx;
 }
 
-Gfx* func_xk2_800E4984(Gfx* gfx) {
+Gfx* CourseEdit_DrawInfoWindows(Gfx* gfx) {
 
     D_xk2_80128CA0 = 0;
     gSPDisplayList(gfx++, D_8014940);
-    func_xk2_800E2238(&gfx);
+    CourseEdit_DrawControlPointInfo(&gfx);
     if ((gCreateOption != CREATE_OPTION_COURSE) && (gCreateOption != CREATE_OPTION_POINT)) {
         return gfx;
     }
 
-    func_xk2_800E47B4(&gfx);
+    CourseEdit_DrawMoveInfo(&gfx);
     return gfx;
 }
 
-Gfx* func_xk2_800E49FC(Gfx* gfx) {
+Gfx* CourseEdit_DrawDashCount(Gfx* gfx) {
     s32 dashCount;
     s32 i;
-    u8 sp40[0x40];
-    u8 sp38[5] = { 0x8B, 0xAF, 0xBC, 0xAD, 0x00 };
+    u8 strBuf[0x40];
+    // ダッシュ
+    u8 dashEncStr[5] = { 0x8B, 0xAF, 0xBC, 0xAD, 0x00 };
 
     dashCount = 0;
 
@@ -1255,22 +1272,23 @@ Gfx* func_xk2_800E49FC(Gfx* gfx) {
     } else {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     }
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, 0xE8, 0xBA, &sp38);
-    func_xk2_800EDE68(sp40, dashCount, 2);
-    func_xk2_800EDAD0(&gfx, 0x108, 0xBA, sp40);
-    gfx = func_xk1_8002924C(gfx, 0x114, 0xBA, "/");
-    func_xk2_800EDE68(sp40, 0x20, 2);
-    func_xk2_800EDAD0(&gfx, 0x11B, 0xBA, sp40);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, 232, 186, dashEncStr);
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, dashCount, 2);
+    CourseEdit_DrawInfoEncStr(&gfx, 264, 186, strBuf);
+    gfx = ExpansionKit_DrawEncStr(gfx, 276, 186, "/");
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, 32, 2);
+    CourseEdit_DrawInfoEncStr(&gfx, 283, 186, strBuf);
 
     return gfx;
 }
 
 extern CourseFeaturesInfo gCourseFeaturesInfo;
 
-Gfx* func_xk2_800E4BA0(Gfx* gfx) {
-    u8 sp30[0x40];
-    u8 sp28[5] = { 0x87, 0xAC, 0xDD, 0x97, 0x00 };
+Gfx* CourseEdit_DrawJumpCount(Gfx* gfx) {
+    u8 strBuf[0x40];
+    // ジャンプ
+    u8 jumpEncStr[5] = { 0x87, 0xAC, 0xDD, 0x97, 0x00 };
 
     if (gCreateOption != CREATE_OPTION_PARTS) {
         return gfx;
@@ -1287,20 +1305,21 @@ Gfx* func_xk2_800E4BA0(Gfx* gfx) {
     } else {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     }
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, 0xE8, 0xBA, sp28);
-    func_xk2_800EDE68(sp30, gCourseFeaturesInfo.jumpCount, 1);
-    func_xk2_800EDAD0(&gfx, 0x10E, 0xBA, sp30);
-    gfx = func_xk1_8002924C(gfx, 0x114, 0xBA, "/");
-    func_xk2_800EDE68(sp30, 8, 1);
-    func_xk2_800EDAD0(&gfx, 0x122, 0xBA, sp30);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, 232, 186, jumpEncStr);
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, gCourseFeaturesInfo.jumpCount, 1);
+    CourseEdit_DrawInfoEncStr(&gfx, 270, 186, strBuf);
+    gfx = ExpansionKit_DrawEncStr(gfx, 276, 186, "/");
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, 8, 1);
+    CourseEdit_DrawInfoEncStr(&gfx, 290, 186, strBuf);
 
     return gfx;
 }
 
-Gfx* func_xk2_800E4D04(Gfx* gfx) {
-    u8 sp30[0x40];
-    u8 sp28[5] = { 0xC4, 0xD7, 0xAF, 0x97, 0x00 };
+Gfx* CourseEdit_DrawLandmineCount(Gfx* gfx) {
+    u8 strBuf[0x40];
+    // トラップ
+    u8 trapEncStr[5] = { 0xC4, 0xD7, 0xAF, 0x97, 0x00 };
 
     if (gCreateOption != CREATE_OPTION_PARTS) {
         return gfx;
@@ -1317,22 +1336,23 @@ Gfx* func_xk2_800E4D04(Gfx* gfx) {
     } else {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     }
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, 0xE8, 0xBA, sp28);
-    func_xk2_800EDE68(sp30, gCourseFeaturesInfo.landmineCount / 6, 1);
-    func_xk2_800EDAD0(&gfx, 0x10E, 0xBA, sp30);
-    gfx = func_xk1_8002924C(gfx, 0x114, 0xBA, "/");
-    func_xk2_800EDE68(sp30, 8, 1);
-    func_xk2_800EDAD0(&gfx, 0x122, 0xBA, sp30);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, 232, 186, trapEncStr);
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, gCourseFeaturesInfo.landmineCount / 6, 1);
+    CourseEdit_DrawInfoEncStr(&gfx, 270, 186, strBuf);
+    gfx = ExpansionKit_DrawEncStr(gfx, 276, 186, "/");
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, 8, 1);
+    CourseEdit_DrawInfoEncStr(&gfx, 290, 186, strBuf);
 
     return gfx;
 }
 
-Gfx* func_xk2_800E4E80(Gfx* gfx) {
+Gfx* CourseEdit_DrawDecorationalFeatureCount(Gfx* gfx) {
     s32 decorationalFeatureCount;
     s32 i;
-    u8 sp40[0x40];
-    u8 sp38[5] = { 0xB5, 0x92, 0x87, 0xAA, 0x00 };
+    u8 strBuf[0x40];
+    // オブジェ
+    u8 objectEncStr[5] = { 0xB5, 0x92, 0x87, 0xAA, 0x00 };
 
     decorationalFeatureCount = 0;
 
@@ -1363,13 +1383,13 @@ Gfx* func_xk2_800E4E80(Gfx* gfx) {
     } else {
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     }
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, 0xE8, 0xBA, &sp38);
-    func_xk2_800EDE68(sp40, decorationalFeatureCount, 2);
-    func_xk2_800EDAD0(&gfx, 0x108, 0xBA, sp40);
-    gfx = func_xk1_8002924C(gfx, 0x114, 0xBA, "/");
-    func_xk2_800EDE68(sp40, 0x10, 2);
-    func_xk2_800EDAD0(&gfx, 0x11C, 0xBA, sp40);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, 232, 186, objectEncStr);
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, decorationalFeatureCount, 2);
+    CourseEdit_DrawInfoEncStr(&gfx, 264, 186, strBuf);
+    gfx = ExpansionKit_DrawEncStr(gfx, 276, 186, "/");
+    CourseEdit_NumToPaddedInfoEncStr(strBuf, 16, 2);
+    CourseEdit_DrawInfoEncStr(&gfx, 284, 186, strBuf);
 
     return gfx;
 }
@@ -1377,10 +1397,11 @@ Gfx* func_xk2_800E4E80(Gfx* gfx) {
 extern s32 gVenueOption;
 extern MenuWidget gVenueWidget;
 
-Gfx* func_xk2_800E5058(Gfx* gfx) {
+Gfx* CourseEdit_DrawControlPointCountVenueId(Gfx* gfx) {
     s32 venueIndex;
-    u8 sp3C[0x40];
-    u8 sp34[5] = { 0x99, 0xB2, 0xDD, 0xC4, 0x00 };
+    u8 strBuf[0x40];
+    // ポイント
+    u8 pointEncStr[5] = { 0x99, 0xB2, 0xDD, 0xC4, 0x00 };
 
     if (gVenueWidget.highlightedIndex != -1) {
         venueIndex = gVenueWidget.highlightedIndex;
@@ -1392,21 +1413,21 @@ Gfx* func_xk2_800E5058(Gfx* gfx) {
 
     if (!gCourseEditCameraOnlyMode) {
         if ((gCreateOption == CREATE_OPTION_COURSE) || (gCreateOption == CREATE_OPTION_POINT)) {
-            if (D_802CB6D0.controlPointCount >= 0x40) {
+            if (D_802CB6D0.controlPointCount >= 64) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
             } else {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
             }
-            D_xk1_80032AD0 = 0;
-            gfx = func_xk1_8002924C(gfx, 0xE8, 0xC2, sp34);
-            func_xk2_800EDE68(sp3C, D_802CB6D0.controlPointCount, 2);
-            func_xk2_800EDAD0(&gfx, 0x108, 0xC2, sp3C);
-            gfx = func_xk1_8002924C(gfx, 0x114, 0xC2, "/");
-            func_xk2_800EDE68(sp3C, 0x40, 2);
-            func_xk2_800EDAD0(&gfx, 0x11B, 0xC2, sp3C);
+            gExpansionKitEncStrEncType = 0;
+            gfx = ExpansionKit_DrawEncStr(gfx, 232, 194, pointEncStr);
+            CourseEdit_NumToPaddedInfoEncStr(strBuf, D_802CB6D0.controlPointCount, 2);
+            CourseEdit_DrawInfoEncStr(&gfx, 0x108, 194, strBuf);
+            gfx = ExpansionKit_DrawEncStr(gfx, 0x114, 194, "/");
+            CourseEdit_NumToPaddedInfoEncStr(strBuf, 64, 2);
+            CourseEdit_DrawInfoEncStr(&gfx, 0x11B, 194, strBuf);
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            gfx = func_xk1_8002924C(gfx, 0xE8, 0xC2, "BG %d", venueIndex + 1);
+            gfx = ExpansionKit_DrawEncStr(gfx, 232, 194, "BG %d", venueIndex + 1);
         }
     }
 
@@ -1422,21 +1443,25 @@ Gfx* func_xk2_800E5058(Gfx* gfx) {
     return gfx;
 }
 
+UNUSED u8* sBGMNameTexturesUnused[] = {
+    aCourseEditMuteCity1Tex, aCourseEditSilenceTex,      aCourseEditSandOceanTex,    aCourseEditPortTownTex,
+    aCourseEditBigBlueTex,   aCourseEditDevilsForestTex, aCourseEditRedCanyonTex,    aCourseEditSectorTex,
+    aCourseEditWhiteLandTex, aCourseEditRainbowRoadTex,  aCourseEditRegenerationTex, aCourseEditRollerCoasterTex,
+    aCourseEditBigFootTex,   aCourseEditJaponTex,
+};
+
 u8* sBGMNameTextures[] = {
-    aCourseEditMuteCity1Tex,    aCourseEditSilenceTex,       aCourseEditSandOceanTex,    aCourseEditPortTownTex,
-    aCourseEditBigBlueTex,      aCourseEditDevilsForestTex,  aCourseEditRedCanyonTex,    aCourseEditSectorTex,
-    aCourseEditWhiteLandTex,    aCourseEditRainbowRoadTex,   aCourseEditRegenerationTex, aCourseEditRollerCoasterTex,
-    aCourseEditBigFootTex,      aCourseEditJaponTex,         aCourseEditMuteCity1Tex,    aCourseEditSilenceTex,
-    aCourseEditSandOceanTex,    aCourseEditPortTownTex,      aCourseEditBigBlueTex,      aCourseEditDevilsForestTex,
-    aCourseEditRedCanyonTex,    aCourseEditSectorTex,        aCourseEditWhiteLandTex,    aCourseEditRainbowRoadTex,
-    aCourseEditRegenerationTex, aCourseEditRollerCoasterTex, aCourseEditBigFootTex,      aCourseEditJaponTex,
+    aCourseEditMuteCity1Tex, aCourseEditSilenceTex,      aCourseEditSandOceanTex,    aCourseEditPortTownTex,
+    aCourseEditBigBlueTex,   aCourseEditDevilsForestTex, aCourseEditRedCanyonTex,    aCourseEditSectorTex,
+    aCourseEditWhiteLandTex, aCourseEditRainbowRoadTex,  aCourseEditRegenerationTex, aCourseEditRollerCoasterTex,
+    aCourseEditBigFootTex,   aCourseEditJaponTex,
 };
 
 extern MenuWidget gBGMWidget;
 
-Gfx* func_xk2_800E5214(Gfx* gfx) {
+Gfx* CourseEdit_DrawBGMTooltip(Gfx* gfx) {
     s32 highlightedIndex;
-    s32 temp_v0;
+    s32 top;
 
     gSPDisplayList(gfx++, D_3000540);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -1444,12 +1469,11 @@ Gfx* func_xk2_800E5214(Gfx* gfx) {
     if (gBGMWidget.highlightedIndex != -1) {
         if (gBGMWidget.highlightedIndex != -1) {}
         highlightedIndex = gBGMWidget.highlightedIndex;
-        temp_v0 = (highlightedIndex * 0x10) - func_xk1_800290B4() + 0x28;
+        top = (highlightedIndex * 16) - func_xk1_800290B4() + 40;
         gSPDisplayList(gfx++, D_3000510);
         gDPSetPrimColor(gfx++, 0, 0, 128, 128, 255, 255);
 
-        gSPTextureRectangle(gfx++, 119 << 2, (temp_v0 - 1) << 2, 185 << 2, (temp_v0 + 8 + 1) << 2, 0, 0, 0, 1 << 10,
-                            1 << 10);
+        gSPTextureRectangle(gfx++, 119 << 2, (top - 1) << 2, 185 << 2, (top + 8 + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
         gSPDisplayList(gfx++, D_8014940);
 
@@ -1458,16 +1482,16 @@ Gfx* func_xk2_800E5214(Gfx* gfx) {
 
         gDPSetAlphaCompare(gfx++, G_AC_NONE);
 
-        gDPLoadTextureBlock_4b(gfx++, sBGMNameTextures[highlightedIndex + 14], G_IM_FMT_I, 64, 8, 0,
+        gDPLoadTextureBlock_4b(gfx++, sBGMNameTextures[highlightedIndex], G_IM_FMT_I, 64, 8, 0,
                                G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK,
                                G_TX_NOLOD, G_TX_NOLOD);
 
-        gSPTextureRectangle(gfx++, 120 << 2, temp_v0 << 2, 184 << 2, (temp_v0 + 8) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+        gSPTextureRectangle(gfx++, 120 << 2, top << 2, 184 << 2, (top + 8) << 2, 0, 0, 0, 1 << 10, 1 << 10);
     }
     return gfx;
 }
 
-Gfx* func_xk2_800E54A4(Gfx* gfx) {
+Gfx* CourseEdit_DrawGeneralInfo(Gfx* gfx) {
 
     if (gCourseEditCameraOnlyMode) {
         return gfx;
@@ -1475,14 +1499,14 @@ Gfx* func_xk2_800E54A4(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_8014940);
     gSPDisplayList(gfx++, D_3000540);
-    gfx = func_xk2_800E49FC(gfx);
-    gfx = func_xk2_800E4D04(gfx);
-    gfx = func_xk2_800E4BA0(gfx);
-    gfx = func_xk2_800E4E80(gfx);
+    gfx = CourseEdit_DrawDashCount(gfx);
+    gfx = CourseEdit_DrawLandmineCount(gfx);
+    gfx = CourseEdit_DrawJumpCount(gfx);
+    gfx = CourseEdit_DrawDecorationalFeatureCount(gfx);
     if ((gCreateOption != CREATE_OPTION_COURSE) && (gCreateOption != CREATE_OPTION_POINT)) {
         return gfx;
     }
-    func_xk2_800E38A8(&gfx);
+    CourseEdit_DrawCourseLength(&gfx);
     return gfx;
 }
 
@@ -2387,7 +2411,6 @@ void func_xk2_800E7BA8(void) {
     }
 }
 
-extern Gfx D_3000540[];
 extern MenuWidget gCreateWidget;
 extern MenuWidget gCourseEditWidget;
 extern s32* gCourseEditMenuOptions[];
@@ -2571,11 +2594,11 @@ Gfx* func_xk2_800E8F7C(Gfx* gfx) {
 
     if (D_80030060[0] == '\0') {
         gDPSetPrimColor(gfx++, 0, 0, 255, 64, 64, 0);
-        return func_xk1_8002924C(gfx, 0xE8, 0xB2, "No Title");
+        return ExpansionKit_DrawEncStr(gfx, 0xE8, 0xB2, "No Title");
     }
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 0);
-    return func_xk1_8002924C(gfx, 0xE8, 0xB2, "%s", D_80030060);
+    return ExpansionKit_DrawEncStr(gfx, 0xE8, 0xB2, "%s", D_80030060);
 }
 
 s32 func_xk2_800E9134(s32 arg0) {
@@ -2873,7 +2896,7 @@ void CourseEdit_DrawIcons(Gfx** gfxP) {
     *gfxP = gfx;
 }
 
-void func_xk2_800EA028(Gfx** gfxP, s32 left, s32 top, s32 width, s32 height) {
+void CourseEdit_DrawControlPointInfoBackground(Gfx** gfxP, s32 left, s32 top, s32 width, s32 height) {
     Gfx* gfx;
     s32 pad[4];
 
@@ -2940,15 +2963,14 @@ Gfx* func_xk2_800EA3B0(Gfx* gfx) {
         gDPSetCombineLERP(gfx++, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0);
         gDPSetPrimColor(gfx++, 0, 0, 0, 255, 0, 255);
 
-        D_xk1_80032AD0 = 0;
-        gfx = func_xk1_8002924C(gfx, 0xD8, 0x50, "  %c%c%c%d", 0xBA, 0xB0, 0xBD, D_xk2_80103F10 + 1);
+        gExpansionKitEncStrEncType = 0;
+        gfx = ExpansionKit_DrawEncStr(gfx, 0xD8, 0x50, "  %c%c%c%d", 0xBA, 0xB0, 0xBD, D_xk2_80103F10 + 1);
     }
     gfx = EKFileMenu_DrawFileMenu(gfx, 8);
 
     return gfx;
 }
 
-extern Gfx D_3000400[];
 
 Lights2 D_xk2_800F7208 = gdSPDefLights2(64, 64, 64, 255, 255, 255, 0, 0, 120, 255, 255, 255, 0, 0, 120);
 

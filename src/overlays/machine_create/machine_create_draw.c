@@ -330,7 +330,8 @@ void MachineCreate_DrawDeleteFileConfirmation(Gfx** gfxP, char* fileName) {
 
         gfx = func_xk1_8002EA10(gfx, left, top, left + (messageLen * 8), 124 - top, GPACK_RGBA5551(130, 130, 255, 1));
     } else {
-        messageLen = mfsStrLen(fileStr) + mfsStrLen(gMachineCreateMessageStrs[10]) + mfsStrLen(gMachineCreateMessageStrs[11]);
+        messageLen =
+            mfsStrLen(fileStr) + mfsStrLen(gMachineCreateMessageStrs[10]) + mfsStrLen(gMachineCreateMessageStrs[11]);
         left = ((((34 - messageLen) / 2) + 3) * 8);
         top = 54;
         gfx = func_xk1_8002EA10(gfx, left, top, left + (messageLen * 8), 124 - top, GPACK_RGBA5551(130, 130, 255, 1));
@@ -804,7 +805,7 @@ Gfx* MachineCreate_DrawGeneral(Gfx* gfx) {
                                                       0, 119, 15);
             gSPDisplayList(gfx++, D_xk3_801373F0);
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            gfx = func_xk1_8002924C(gfx, 182, 101, "%s", gSuperMachineNames[gCustomMachineCurrentSuperIndex]);
+            gfx = ExpansionKit_DrawEncStr(gfx, 182, 101, "%s", gSuperMachineNames[gCustomMachineCurrentSuperIndex]);
             if ((gCustomMachineCurrentSuperIndex == CAPTAIN_FALCON) &&
                 (gCustomMachinesInfo.characterCustomState[CAPTAIN_FALCON] == -1)) {
                 gfx = MachineCreate_DrawWeightAndName(gfx, kSuperMachineWeights[gCustomMachineCurrentSuperIndex],
@@ -825,7 +826,7 @@ Gfx* MachineCreate_DrawGeneral(Gfx* gfx) {
             if ((gWorksMachineMode != MACHINE_MODE_MNAME) && (gCustomMachine.machineName[0] != 0)) {
                 gSPDisplayList(gfx++, D_xk3_801373F0);
                 gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-                gfx = func_xk1_8002924C(gfx, 194, 101, "%s", gCustomMachine.machineName);
+                gfx = ExpansionKit_DrawEncStr(gfx, 194, 101, "%s", gCustomMachine.machineName);
             }
 
             if (gCustomMachine.number != 31) {

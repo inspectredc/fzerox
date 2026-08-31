@@ -1,7 +1,7 @@
 #include "global.h"
 #include ASSET_HEADER_EK(course_edit_textures.h)
 
-u8 D_xk2_80104280[] = {
+u8 sCourseEditInfoFontMap[] = {
     255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
     255, 255, 255, 255, 255, 255, 255, 255, 255, 34,  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 39,
     19,  255, 0,   1,   2,   3,   4,   5,   6,   7,   8,   9,   255, 255, 255, 255, 255, 255, 255, 13,  255, 255, 255,
@@ -14,19 +14,19 @@ u8 D_xk2_80104280[] = {
     255, 255, 29,  255, 255, 255, 255, 255, 255, 31,  29,  255, 38,  255, 32,  36,  23,
 };
 
-char* func_xk2_800ED930(char* buffer, const char* fmt, size_t size) {
+char* CourseEdit_InfoPrOut(char* buffer, const char* fmt, size_t size) {
     return (char*) memcpy(buffer, fmt, size) + size;
 }
 
-Gfx* func_xk2_800ED954(Gfx* gfx, s32 arg1, s32 arg2, u8 arg3) {
+Gfx* CourseEdit_DrawInfoChar(Gfx* gfx, s32 left, s32 top, u8 charValue) {
 
-    gSPTextureRectangle(gfx++, arg1 << 2, arg2 << 2, (arg1 + 6) << 2, (arg2 + 8) << 2, 0, ((arg3 % 10) * 6) << 5,
-                        ((arg3 / 10) * 8) << 5, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 6) << 2, (top + 8) << 2, 0, ((charValue % 10) * 6) << 5,
+                        ((charValue / 10) * 8) << 5, 1 << 10, 1 << 10);
 
     return gfx;
 }
 
-void func_xk2_800EDA34(Gfx** gfxP) {
+void CourseEdit_LoadInfoFontSheet(Gfx** gfxP) {
     Gfx* gfx;
 
     gfx = *gfxP;
@@ -37,12 +37,12 @@ void func_xk2_800EDA34(Gfx** gfxP) {
     *gfxP = gfx;
 }
 
-void func_xk2_800EDAD0(Gfx** gfxP, s32 xPos, s32 yPos, const char* fmt, ...) {
+void CourseEdit_DrawInfoEncStr(Gfx** gfxP, s32 xPos, s32 yPos, const char* fmt, ...) {
     s32 charRemaining;
     u8* charPtr;
     char buffer[0x100];
     Gfx* gfx;
-    u8 var_s0;
+    u8 charValue;
     va_list args;
     va_start(args, fmt);
 
@@ -51,18 +51,18 @@ void func_xk2_800EDAD0(Gfx** gfxP, s32 xPos, s32 yPos, const char* fmt, ...) {
     gDPLoadTextureBlock_4b(gfx++, aCourseEditInfoFontSheetTex, G_IM_FMT_I, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    charRemaining = _Printf(func_xk2_800ED930, buffer, fmt, args);
+    charRemaining = _Printf(CourseEdit_InfoPrOut, buffer, fmt, args);
 
     if (charRemaining > 0) {
         charPtr = (s8*) buffer;
         while (charRemaining > 0) {
-            var_s0 = *charPtr;
-            if (var_s0 == ' ') {
+            charValue = *charPtr;
+            if (charValue == ' ') {
                 xPos += 6;
             } else {
-                var_s0 = D_xk2_80104280[var_s0];
-                gfx = func_xk2_800ED954(gfx, xPos, yPos, var_s0);
-                if ((var_s0 == 0x14) || (var_s0 == 0x1D)) {
+                charValue = sCourseEditInfoFontMap[charValue];
+                gfx = CourseEdit_DrawInfoChar(gfx, xPos, yPos, charValue);
+                if ((charValue == 20) || (charValue == 29)) {
                     xPos += 4;
                 } else {
                     xPos += 6;
@@ -77,29 +77,29 @@ void func_xk2_800EDAD0(Gfx** gfxP, s32 xPos, s32 yPos, const char* fmt, ...) {
     *gfxP = gfx;
 }
 
-void func_xk2_800EDC88(Gfx** gfxP, s32 xPos, s32 yPos, const char* fmt, ...) {
+void CourseEdit_DrawLoadedInfoEncStr(Gfx** gfxP, s32 xPos, s32 yPos, const char* fmt, ...) {
     s32 charRemaining;
     u8* charPtr;
     char buffer[0x100];
     Gfx* gfx;
-    u8 var_s0;
+    u8 charValue;
     va_list args;
     va_start(args, fmt);
 
     gfx = *gfxP;
 
-    charRemaining = _Printf(func_xk2_800ED930, buffer, fmt, args);
+    charRemaining = _Printf(CourseEdit_InfoPrOut, buffer, fmt, args);
 
     if (charRemaining > 0) {
         charPtr = (s8*) buffer;
         while (charRemaining > 0) {
-            var_s0 = *charPtr;
-            if (var_s0 == ' ') {
+            charValue = *charPtr;
+            if (charValue == ' ') {
                 xPos += 6;
             } else {
-                var_s0 = D_xk2_80104280[var_s0];
-                gfx = func_xk2_800ED954(gfx, xPos, yPos, var_s0);
-                if ((var_s0 == 0x14) || (var_s0 == 0x1D)) {
+                charValue = sCourseEditInfoFontMap[charValue];
+                gfx = CourseEdit_DrawInfoChar(gfx, xPos, yPos, charValue);
+                if ((charValue == 20) || (charValue == 29)) {
                     xPos += 4;
                 } else {
                     xPos += 6;
@@ -114,64 +114,64 @@ void func_xk2_800EDC88(Gfx** gfxP, s32 xPos, s32 yPos, const char* fmt, ...) {
     *gfxP = gfx;
 }
 
-void func_xk2_800EDD94(s8* arg0, s32 arg1) {
-    bool var_v1;
+void CourseEdit_NumToInfoEncStr(s8* str, s32 num) {
+    bool isNegative;
     s16 i;
     s16 j;
-    s8 sp8[0x10];
+    s8 numStrReverse[0x10];
 
     i = 0;
-    var_v1 = false;
-    if (arg1 < 0) {
-        arg1 = -arg1;
-        var_v1 = true;
+    isNegative = false;
+    if (num < 0) {
+        num = -num;
+        isNegative = true;
     }
     do {
-        sp8[i++] = (arg1 % 10) + '0';
-        arg1 /= 10;
-    } while (arg1 > 0);
+        numStrReverse[i++] = (num % 10) + '0';
+        num /= 10;
+    } while (num > 0);
 
-    if (var_v1) {
-        sp8[i++] = '-';
+    if (isNegative) {
+        numStrReverse[i++] = '-';
     }
 
     for (j = 0; j < i; j++) {
-        arg0[j] = sp8[i - j - 1];
+        str[j] = numStrReverse[i - j - 1];
     }
-    arg0[j] = 0;
+    str[j] = '\0';
 }
 
-void func_xk2_800EDE68(s8* arg0, s32 arg1, s32 arg2) {
-    bool var_v1;
+void CourseEdit_NumToPaddedInfoEncStr(s8* str, s32 num, s32 padStrLen) {
+    bool isNegative;
     s16 i;
     s16 j;
-    s8 sp8[0x10];
-    s16 var_a0;
+    s8 numStrReverse[0x10];
+    s16 padSize;
 
     i = 0;
-    var_v1 = false;
-    if (arg1 < 0) {
-        arg1 = -arg1;
-        var_v1 = true;
+    isNegative = false;
+    if (num < 0) {
+        num = -num;
+        isNegative = true;
     }
     do {
-        sp8[i++] = (arg1 % 10) + '0';
-        arg1 /= 10;
-    } while (arg1 > 0);
+        numStrReverse[i++] = (num % 10) + '0';
+        num /= 10;
+    } while (num > 0);
 
-    if (var_v1) {
-        sp8[i++] = '-';
+    if (isNegative) {
+        numStrReverse[i++] = '-';
     }
 
-    if (i < arg2) {
-        var_a0 = arg2 - i;
-        for (j = 0; j < var_a0; j++) {
-            sp8[i++] = ' ';
+    if (i < padStrLen) {
+        padSize = padStrLen - i;
+        for (j = 0; j < padSize; j++) {
+            numStrReverse[i++] = ' ';
         }
     }
 
     for (j = 0; j < i; j++) {
-        arg0[j] = sp8[i - j - 1];
+        str[j] = numStrReverse[i - j - 1];
     }
-    arg0[j] = 0;
+    str[j] = '\0';
 }

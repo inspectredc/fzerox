@@ -25,12 +25,12 @@
 // You can access the help section using the icon in the bottom right corner
 // You want to cancel your entry, are you sure?
 // First, set the points and create the course
-// Press the A button to set a point. To change the section you are setting, move the cursor to the desired section and press the Z trigger
-// Select points with the Z trigger. You can select multiple points by holding down the Z trigger and drawing a circle around them
-// Press the A button to change the road type. To change the section of road you want to modify, move the cursor to the section you want to modify and press the Z trigger
-// Press the A button to set the mechanism. To change the setting range, move the cursor to the desired range and press the Z trigger
-// The course is too long, so it cannot be moved
-// You want to completely re-initialize the disk, are you sure?
+// Press the A button to set a point. To change the section you are setting, move the cursor to the desired section and
+// press the Z trigger Select points with the Z trigger. You can select multiple points by holding down the Z trigger
+// and drawing a circle around them Press the A button to change the road type. To change the section of road you want
+// to modify, move the cursor to the section you want to modify and press the Z trigger Press the A button to set the
+// mechanism. To change the setting range, move the cursor to the desired range and press the Z trigger The course is
+// too long, so it cannot be moved You want to completely re-initialize the disk, are you sure?
 
 // clang-format off
 char* gCourseEditMessageStrs[] = {

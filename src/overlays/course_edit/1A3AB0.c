@@ -30,7 +30,8 @@ void func_xk2_800F1FF0(MtxF* arg0, MtxF* arg1, MtxF* arg2) {
 
     for (i = 0; i != 4; i++) {
         for (j = 0; j < 4; j++) {
-            sp10.m[i][j] = (arg0->m[i][0] * arg1->m[0][j]) + (arg0->m[i][1] * arg1->m[1][j]) + (arg0->m[i][2] * arg1->m[2][j]) + (arg0->m[i][3] * arg1->m[3][j]);
+            sp10.m[i][j] = (arg0->m[i][0] * arg1->m[0][j]) + (arg0->m[i][1] * arg1->m[1][j]) +
+                           (arg0->m[i][2] * arg1->m[2][j]) + (arg0->m[i][3] * arg1->m[3][j]);
         }
     }
 
