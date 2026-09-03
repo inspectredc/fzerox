@@ -1186,7 +1186,7 @@ s32 Course_SegmentJoinsInit(CourseInfo* courseInfo) {
                     var_v1 = -1;
 #ifdef EXPANSION_KIT
                     if (gInCourseEditor) {
-                        func_xk2_800F1330(segment - courseInfo->courseSegments, 2);
+                        CourseEdit_SetSegmentJoinError(segment - courseInfo->courseSegments, 2);
                     }
 #endif
                 }
@@ -1199,7 +1199,7 @@ s32 Course_SegmentJoinsInit(CourseInfo* courseInfo) {
                     var_v1 = -1;
 #ifdef EXPANSION_KIT
                     if (gInCourseEditor) {
-                        func_xk2_800F1330(segment - courseInfo->courseSegments, 2);
+                        CourseEdit_SetSegmentJoinError(segment - courseInfo->courseSegments, 2);
                     }
 #endif
                 }
@@ -1293,7 +1293,7 @@ void Course_SegmentLengthsInit(CourseInfo* courseInfo) {
 s32 func_i2_800B39B4(CourseInfo* courseInfo) {
     Vec3f vec1;
     Vec3f vec2;
-    f32 temp_fs0;
+    f32 normScale;
     CourseSegment* nextSegment;
     CourseSegment* prevSegment;
     CourseSegment* segment = courseInfo->courseSegments;
@@ -1304,21 +1304,21 @@ s32 func_i2_800B39B4(CourseInfo* courseInfo) {
         vec1.x = segment->pos.x - prevSegment->pos.x;
         vec1.y = segment->pos.y - prevSegment->pos.y;
         vec1.z = segment->pos.z - prevSegment->pos.z;
-        temp_fs0 = 1.0f / sqrtf(SQ_SUM(&vec1));
+        normScale = 1.0f / sqrtf(SQ_SUM(&vec1));
 
-        vec1.x *= temp_fs0;
-        vec1.y *= temp_fs0;
-        vec1.z *= temp_fs0;
+        vec1.x *= normScale;
+        vec1.y *= normScale;
+        vec1.z *= normScale;
 
         vec2.x = nextSegment->pos.x - segment->pos.x;
         vec2.y = nextSegment->pos.y - segment->pos.y;
         vec2.z = nextSegment->pos.z - segment->pos.z;
 
-        temp_fs0 = 1.0f / sqrtf(SQ_SUM(&vec2));
+        normScale = 1.0f / sqrtf(SQ_SUM(&vec2));
 
-        vec2.x *= temp_fs0;
-        vec2.y *= temp_fs0;
-        vec2.z *= temp_fs0;
+        vec2.x *= normScale;
+        vec2.y *= normScale;
+        vec2.z *= normScale;
 
         if (DOT_XYZ(&vec1, &vec2) < -0.997f) {
             return segment - courseInfo->courseSegments;
@@ -4404,7 +4404,7 @@ Gfx* Course_DrawModel(Gfx* gfx, Vtx* vtx, s32 vtxCount) {
 
 extern u32 gGameFrameCount;
 
-Gfx* func_800A95B4(Gfx* gfx) {
+Gfx* Course_DrawEditCourse(Gfx* gfx) {
     s32 trackType;
     u32 trackShape;
     unk_800CF528* temp_a1;
@@ -4753,7 +4753,7 @@ s32 func_i2_800BE8BC(CourseInfo* courseInfo) {
         segment = segment->next;
     } while (segment != courseInfo->courseSegments);
 
-    D_800D6CA0.unk_20 = var_s3;
+    D_800D6CA0.unreasonableControlPoint = var_s3;
     return var_s3;
 }
 

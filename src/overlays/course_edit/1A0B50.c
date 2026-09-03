@@ -63,8 +63,7 @@ const f32 sCosInverseTable[] = {
     9.494526863, 8.788786888, 8.021718979, 7.17367506,  6.211544991, 5.070877075, 3.58506608,  0,
 };
 
-// Checks if position is being rendered and stores screen position
-s32 func_xk2_800EF090(Vec3f pos, s32* screenXPosPtr, s32* screenYPosPtr) {
+s32 CourseEdit_GetScreenPosition(Vec3f pos, s32* screenXPosPtr, s32* screenYPosPtr) {
     Camera* camera = gCameras;
     s32 pad;
     f32 temp_fv1;
@@ -108,8 +107,7 @@ s32 func_xk2_800EF090(Vec3f pos, s32* screenXPosPtr, s32* screenYPosPtr) {
     return -1;
 }
 
-// Checks if position is being rendered
-s32 func_xk2_800EF2F0(Vec3f pos) {
+s32 CourseEdit_CheckPositionOnScreen(Vec3f pos) {
     Camera* camera = gCameras;
     s32 pad;
     f32 temp_fv1;

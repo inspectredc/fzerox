@@ -247,7 +247,7 @@ void func_80095144(void);
 void Racer_Update(void);
 Gfx* Racer_Draw(Gfx* gfx, s32 playerIndex);
 Gfx* func_8009CBE8(Gfx* gfx, s32 arg1, s32 red, s32 green, s32 blue);
-Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2);
+Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 machinePalette);
 Gfx* func_8009CD60(Gfx* gfx, s32 character);
 Gfx* func_8009CE70(Gfx* gfx, s32 character);
 Gfx* func_8009CEA0(Gfx* gfx, s32 character);
@@ -277,7 +277,7 @@ void func_800A4B54(void);
 void func_800A4BAC(void);
 void func_800A4D0C(s32 arg0);
 void func_800A4DF0(void);
-Gfx* func_800A95B4(Gfx* gfx);
+Gfx* Course_DrawEditCourse(Gfx* gfx);
 s32 Course_CalculateChecksum(void);
 
 void mio0Decode(u8*, void*);

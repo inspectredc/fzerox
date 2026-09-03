@@ -11,7 +11,7 @@
 unk_80128C94* D_80128C90;
 unk_80128C94* D_80128C94;
 
-s32 D_xk2_80103FF0 = 0;
+s32 gCourseEditTestRunFadeTimer = 0;
 s32 D_xk2_80103FF4 = 0;
 s32 D_xk2_80103FF8 = 0;
 s32 sCourseEditExitDelayFrames = 0;
@@ -128,7 +128,7 @@ extern s32 D_xk1_80030608;
 extern s32 D_800CCFBC;
 extern CourseEffectsInfo* D_800E12C0;
 extern bool D_xk1_80032BF8;
-extern s32 D_xk2_800F7058;
+extern s32 gCourseEditCourseSplitIndex;
 extern s32 D_xk2_80119800;
 extern u8* gCourseMinimapTex;
 extern MenuWidget gCourseEditWidget;
@@ -139,10 +139,10 @@ extern s32 gVenueOption;
 extern s32 gSkyboxOption;
 extern s32 gBGMOption;
 extern s32 gBGMOptionToCourseBGM[];
-extern s32 D_xk2_800F7060;
-extern s32 D_xk2_800F7064;
+extern s32 gCourseEditMiniMachineCharacter;
+extern s32 gCourseEditMiniMachineColorPalette;
 extern s32 D_xk2_800F7040;
-extern s32 D_xk2_800F7044;
+extern s32 gCourseEditDrawDetailedCourse;
 extern s32 D_xk2_800F7048;
 extern s32 D_xk2_800F704C;
 extern CourseFeaturesInfo gCourseFeaturesInfo;
@@ -151,7 +151,7 @@ extern CourseEffectsInfo gCourseEffectsInfo;
 extern CourseEffect gCourseEffects[];
 extern unk_807B3C20 D_807B6528;
 extern s16 D_800CCFE8;
-extern s32 D_8076C964;
+extern s32 gCourseEditDetailedCourseEnabled;
 extern GfxPool* gGfxPool;
 extern Vtx* gCourseVtxPtr;
 extern CourseInfo* gCurrentCourseInfo;
@@ -164,8 +164,8 @@ void CourseEdit_Init(void) {
     func_80704810(false);
     gNumPlayers = 1;
     func_xk1_80025F98();
-    D_xk2_800F7060 = Math_Rand2() % 30;
-    D_xk2_800F7064 = Math_Rand2() % 4;
+    gCourseEditMiniMachineCharacter = Math_Rand2() % 30;
+    gCourseEditMiniMachineColorPalette = Math_Rand2() % 4;
     D_xk2_800F7040 = 4;
     D_xk2_800F7048 = 0;
     // clang-format off
@@ -214,12 +214,12 @@ void CourseEdit_Init(void) {
     D_800D6CA0.selectedControlPoint = D_802CB6D0.controlPointCount - 1;
     func_xk2_800EF78C();
     func_xk2_800F0FE8();
-    if (D_8076C964 == 1) {
-        D_xk2_800F7044 = 1;
+    if (gCourseEditDetailedCourseEnabled == 1) {
+        gCourseEditDrawDetailedCourse = 1;
     } else {
-        D_xk2_800F7044 = 0;
+        gCourseEditDrawDetailedCourse = 0;
     }
-    D_xk2_800F7058 = 0;
+    gCourseEditCourseSplitIndex = 0;
     gCourseMinimapTex = Arena_Allocate(ALLOC_FRONT, 0x1000);
     D_800D6CA0.state = 0;
 }
@@ -233,7 +233,7 @@ void CourseEdit_UnpauseTestRun(void) {
     if ((gRacers[0].stateFlags & RACER_STATE_FALLING_OFF_TRACK) && (D_xk2_80103FF8 == 0)) {
         D_xk2_80103FF4 = 0;
         D_xk2_80103FF8 = 1;
-        D_xk2_80103FF0 = 120;
+        gCourseEditTestRunFadeTimer = 120;
     }
 }
 
@@ -243,7 +243,7 @@ void CourseEdit_ExitTestRun(void) {
     gGamePaused = false;
     gInCourseEditTestRun = false;
     func_800A4D0C(0);
-    D_xk2_80103FF0 = 0;
+    gCourseEditTestRunFadeTimer = 0;
     D_xk2_80103FF4 = 0;
     D_xk2_80103FF8 = 0;
     Audio_PauseSet(AUDIO_PAUSE_UNPAUSED);
@@ -319,8 +319,8 @@ s32 CourseEdit_TestRunUpdate(void) {
         func_xk2_800E5B6C();
         return GAMEMODE_COURSE_EDIT;
     }
-    if (D_xk2_80103FF0 != 0) {
-        D_xk2_80103FF0 -= 1;
+    if (gCourseEditTestRunFadeTimer != 0) {
+        gCourseEditTestRunFadeTimer--;
     }
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_START) {
         gGamePaused = true;
@@ -336,9 +336,9 @@ s32 CourseEdit_TestRunUpdate(void) {
         if ((gRacers[0].stateFlags & RACER_STATE_RETIRED) && (D_xk2_80103FF8 == 0)) {
             D_xk2_80103FF8 = 1;
             D_xk2_80103FF4 = 0;
-            D_xk2_80103FF0 = 120;
+            gCourseEditTestRunFadeTimer = 120;
         }
-        if ((D_xk2_80103FF0 <= 60) && (D_xk2_80103FF4 == 0)) {
+        if ((gCourseEditTestRunFadeTimer <= 60) && (D_xk2_80103FF4 == 0)) {
             Audio_TestRunStart();
             Racer_Init();
             Camera_Init();
@@ -368,7 +368,7 @@ void func_xk2_800ECD90(void) {
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
         ExpansionKit_NameEntryInit(func_xk1_8002AC24);
         gExpansionKitNameEntryStrLength = mfsStrLen(gExpansionKitNameEntryStr);
-        D_800D6CA0.state = 2;
+        D_800D6CA0.state = COURSE_EDIT_NAME_ENTRY;
         D_80119880 = 9;
         func_xk1_8002AEB4(9, 4);
     }
@@ -502,7 +502,7 @@ s32 CourseEdit_Update(void) {
         case COURSE_EDIT_OPTIONS_MENU:
             CourseEditOptionsMenu_Update();
             break;
-        case 0x2:
+        case COURSE_EDIT_NAME_ENTRY:
             ExpansionKit_NameEntryUpdate(&gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
             break;
         case 0x20:
@@ -527,10 +527,10 @@ s32 CourseEdit_Update(void) {
             func_xk2_800EC174();
             D_800D6CA0.state = 0x37;
             break;
-        case 0x5:
+        case COURSE_EDIT_SELECTION_BOX:
             func_xk2_800D950C();
             if (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_Z) {
-                func_xk2_800DC0D4();
+                CourseEdit_UpdateSelectionBoxEnd();
             } else {
                 func_xk2_800DC2D0();
                 D_800D6CA0.state = 0;
@@ -617,18 +617,18 @@ s32 CourseEdit_Update(void) {
 
 extern Gfx D_8014940[];
 
-void func_xk2_800ED6A4(Gfx** gfxP) {
+void CourseEdit_DrawTestRunFade(Gfx** gfxP) {
     Gfx* gfx;
     s32 alpha;
 
-    if ((D_xk2_80103FF0 == 0) || !gInCourseEditTestRun) {
+    if ((gCourseEditTestRunFadeTimer == 0) || !gInCourseEditTestRun) {
         return;
     }
     gfx = *gfxP;
-    if (D_xk2_80103FF0 > 60) {
-        alpha = ((120 - D_xk2_80103FF0) * 255) / 60;
+    if (gCourseEditTestRunFadeTimer > 60) {
+        alpha = ((120 - gCourseEditTestRunFadeTimer) * 255) / 60;
     } else {
-        alpha = (D_xk2_80103FF0 * 255) / 60;
+        alpha = (gCourseEditTestRunFadeTimer * 255) / 60;
     }
     gSPDisplayList(gfx++, D_8014940);
     gDPSetCombineMode(gfx++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
@@ -659,10 +659,10 @@ Gfx* CourseEdit_Draw(Gfx* gfx) {
     gSPDisplayList(gfx++, D_xk2_80104004[D_800DCD04]);
     gDPSetColorImage(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(gFrameBuffers[D_800DCD04]));
     gSPViewport(gfx++, &aVpFullScreen);
-    gfx = func_xk2_800F1428(gfx);
+    gfx = CourseEdit_DrawCamera(gfx);
     gSPDisplayList(gfx++, D_9014A38);
-    gfx = func_xk2_800DF5FC(gfx);
-    func_xk2_800ED6A4(&gfx);
+    gfx = CourseEdit_DrawUpdateState(gfx);
+    CourseEdit_DrawTestRunFade(&gfx);
     if ((gInCourseEditTestRun) && (gGamePaused)) {
         gfx = CourseEdit_TestRunPauseMenuDraw(gfx);
     }

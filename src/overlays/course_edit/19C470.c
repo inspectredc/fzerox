@@ -1,4 +1,5 @@
 #include "global.h"
+#include "course_edit.h"
 #include "leo/mfs.h"
 #include "fzx_save.h"
 #include "fzx_course.h"
@@ -136,8 +137,8 @@ s32 func_xk2_800EAC28(u8* arg0) {
 
 extern s32 D_80119880;
 extern volatile u8 D_80794E10;
-extern s32 D_xk2_800F7060;
-extern s32 D_xk2_800F7064;
+extern s32 gCourseEditMiniMachineCharacter;
+extern s32 gCourseEditMiniMachineColorPalette;
 extern CourseSegment D_802D0620[];
 extern s32 gVenueOption;
 extern s32 gSkyboxOption;
@@ -195,8 +196,8 @@ void func_xk2_800EACB0(void) {
     func_xk2_800EF78C();
     func_xk2_800F0FE8();
     D_xk2_800F7040 = 3;
-    D_xk2_800F7060 = Math_Rand2() % 30;
-    D_xk2_800F7064 = Math_Rand2() & 3;
+    gCourseEditMiniMachineCharacter = Math_Rand2() % 30;
+    gCourseEditMiniMachineColorPalette = Math_Rand2() % 4;
     D_xk2_800F7404 = 1;
 }
 
@@ -321,7 +322,7 @@ void func_xk2_800EB3B4(void) {
 }
 
 extern u8 gExpansionKitNameEntryStr[];
-extern s32 D_xk2_80103F10;
+extern s32 gCourseEditCourseRegisterIndex;
 extern s32 D_xk2_80104378;
 extern s32 D_xk2_80119884;
 extern char gEditCupTrackNames[][9];
@@ -351,8 +352,8 @@ void func_xk2_800EB400(void) {
                 gCourseEditFileOption = -1;
                 D_800D6CA0.state = 0;
                 D_xk2_800F7040 = 3;
-                D_xk2_800F7060 = Math_Rand2() % 30;
-                D_xk2_800F7064 = Math_Rand2() % 4;
+                gCourseEditMiniMachineCharacter = Math_Rand2() % 30;
+                gCourseEditMiniMachineColorPalette = Math_Rand2() % 4;
             } else {
                 D_xk2_80104378 = 1;
                 gExpansionKitYesNoOptionIndex = 0;
@@ -366,8 +367,8 @@ void func_xk2_800EB400(void) {
             D_800D6CA0.state = 0x30;
             D_80119880 = 7;
             D_xk2_800F7040 = 3;
-            D_xk2_800F7060 = Math_Rand2() % 30;
-            D_xk2_800F7064 = Math_Rand2() % 4;
+            gCourseEditMiniMachineCharacter = Math_Rand2() % 30;
+            gCourseEditMiniMachineColorPalette = Math_Rand2() % 4;
             break;
         case 0:
             if (courseIndex == 0) {
@@ -396,7 +397,7 @@ void func_xk2_800EB400(void) {
                     ExpansionKit_NameEntryInit(func_xk1_8002AC24);
                     gCourseEditMenuCursorXPos = 0x58;
                     gCourseEditMenuCursorYPos = 0x68;
-                    D_800D6CA0.state = 2;
+                    D_800D6CA0.state = COURSE_EDIT_NAME_ENTRY;
                 }
             } else {
                 if (gExpansionKitLoadedFiles[courseIndex].attr & MFS_FILE_ATTR_FORBID_W) {
@@ -422,7 +423,7 @@ void func_xk2_800EB400(void) {
                 ExpansionKit_NameEntryInit(func_xk1_8002AC24);
                 gCourseEditMenuCursorXPos = 0x58;
                 gCourseEditMenuCursorYPos = 0x68;
-                D_800D6CA0.state = 2;
+                D_800D6CA0.state = COURSE_EDIT_NAME_ENTRY;
             }
             break;
         case 2:
@@ -447,7 +448,7 @@ void func_xk2_800EB400(void) {
                 EKFileMenu_EnableFileMenuDraw();
                 break;
             }
-            mfsStrCpy(gEditCupTrackNames[D_xk2_80103F10], gExpansionKitLoadedFiles[courseIndex].name);
+            mfsStrCpy(gEditCupTrackNames[gCourseEditCourseRegisterIndex], gExpansionKitLoadedFiles[courseIndex].name);
             func_xk2_800EC110();
             D_800D6CA0.state = 0x37;
             break;

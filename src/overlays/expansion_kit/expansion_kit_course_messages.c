@@ -12,7 +12,7 @@
 // The course is not available
 // The file is corrupted
 // The starting point has been changed
-// If you copy to another disk******
+// If you want to copy to another disk
 // Please swap the discs
 // OK
 // Please select the files you want to copy
@@ -74,7 +74,7 @@ char* gCourseEditMessageStrs[] = {
 // It's too narrow to place the joint parts
 // No more can be placed here
 // The points on the curve are too close together
-// There are too many dirt sections
+// There are too many effect sections e.g. Dirt
 // The course is too low
 // The course extends out of bounds
 // Display processing has reached its limit

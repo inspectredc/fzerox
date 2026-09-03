@@ -1530,10 +1530,10 @@ D_9014AA0:
   offset: 0x14AA0
   symbol: D_9014AA0
 
-D_9014AE8:
+aCourseEditBackgroundPlaneDL:
   type: GFX
   offset: 0x14AE8
-  symbol: D_9014AE8
+  symbol: aCourseEditBackgroundPlaneDL
 
 D_9014B68:
   type: GFX
@@ -1545,10 +1545,10 @@ D_9014BA0:
   offset: 0x14BA0
   symbol: D_9014BA0
 
-aSetupMouseClickDL:
+aCourseEditMouseClickDL:
   type: GFX
   offset: 0x14BC0
-  symbol: aSetupMouseClickDL
+  symbol: aCourseEditMouseClickDL
 
 D_9014C20:
   type: GFX
@@ -1560,15 +1560,15 @@ D_9014C40:
   offset: 0x14C40
   symbol: D_9014C40
 
-D_9014C60:
+aCourseEditControlPointDL:
   type: GFX
   offset: 0x14C60
-  symbol: D_9014C60
+  symbol: aCourseEditControlPointDL
 
-D_9014CB8:
+aCourseEditStartMarkerDL:
   type: GFX
   offset: 0x14CB8
-  symbol: D_9014CB8
+  symbol: aCourseEditStartMarkerDL
 
 D_9014D18:
   type: GFX

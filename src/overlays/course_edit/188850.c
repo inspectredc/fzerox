@@ -25,11 +25,11 @@ UNUSED s32 D_xk2_801197F0[4];
 s32 D_xk2_80119800;
 UNUSED s32 D_xk2_80119808[4];
 /* new file? */
-Vec3f D_xk2_80119818;
+Vec3f gCourseEditTooLowSegmentPos;
 UNUSED s32 D_xk2_8011981C;
 Vec3f D_xk2_80119828;
 UNUSED s32 D_xk2_8011982C;
-Mtx D_xk2_80119838;
+Mtx gCourseEditCourseLookAtMtx;
 UNUSED s32 D_xk2_80119878[2];
 /* new file? */
 s32 D_80119880;
@@ -40,7 +40,7 @@ s32 D_80119890;
 UNUSED s32 D_xk2_80119898[32];
 s32 gCourseEditCameraOnlyMode;
 CourseSegment D_xk2_80119920[64];
-unk_8011C220 D_8011C220[898];
+CourseSplitInfo gCourseEditCourseSplitInfos[898];
 unk_80128690 D_80128690[64];
 unk_80128690 D_xk2_80128990[64];
 
@@ -50,10 +50,10 @@ s32 gCourseEditCursorYPos = 120;
 UNUSED s32 D_xk2_800F682C = 160;
 UNUSED s32 D_xk2_800F6830 = 120;
 f32 D_xk2_800F6834 = 0.05f;
-s32 D_xk2_800F6838 = 0;
-s32 D_xk2_800F683C = 0;
-s32 D_xk2_800F6840 = 0;
-s32 D_xk2_800F6844 = 0;
+s32 gCourseEditSelectionBoxStartX = 0;
+s32 gCourseEditSelectionBoxStartY = 0;
+s32 gCourseEditSelectionBoxEndX = 0;
+s32 gCourseEditSelectionBoxEndY = 0;
 s32 D_xk2_800F6848 = 0;
 s32 D_xk2_800F684C = 0;
 
@@ -296,7 +296,7 @@ extern s32 gDashTypeOption;
 extern s32 gDirtTypeOption;
 extern s32 gIceTypeOption;
 
-extern u8 D_xk2_80104CA0[];
+extern u8 gCourseEditErrors[];
 
 void func_xk2_800D7A4C(s32 trackPartStyle) {
     s32 var_v0;
@@ -390,7 +390,7 @@ void func_xk2_800D7D80(void) {
             return;
     }
 
-    if ((D_xk2_80104CA0[7] != 0) && (gPitTypeOption != PIT_MAX)) {
+    if (gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] && (gPitTypeOption != PIT_MAX)) {
         Audio_TriggerSystemSE(NA_SE_32);
         return;
     }
@@ -461,7 +461,7 @@ void func_xk2_800D8018(void) {
             return;
     }
 
-    if ((D_xk2_80104CA0[7] != 0) && (gDirtTypeOption != DIRT_MAX)) {
+    if (gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] && (gDirtTypeOption != DIRT_MAX)) {
         Audio_TriggerSystemSE(NA_SE_32);
         return;
     }
@@ -492,7 +492,7 @@ void func_xk2_800D8154(void) {
             return;
     }
 
-    if ((D_xk2_80104CA0[7] != 0) && (gIceTypeOption != ICE_MAX)) {
+    if (gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] && (gIceTypeOption != ICE_MAX)) {
         Audio_TriggerSystemSE(NA_SE_32);
         return;
     }
@@ -828,7 +828,7 @@ void func_xk2_800D8CC4(void) {
     if (gCourseEditCursorYPos < 0x38) {
         return;
     }
-    if (D_800D6CA0.state == 2 || D_800D6CA0.state == 1 || D_800D6CA0.state == 3 || D_800D6CA0.state == 16) {
+    if (D_800D6CA0.state == COURSE_EDIT_NAME_ENTRY || D_800D6CA0.state == 1 || D_800D6CA0.state == 3 || D_800D6CA0.state == 16) {
         return;
     }
 
@@ -886,13 +886,13 @@ void func_xk2_800D8DAC(void) {
 }
 
 extern bool gInCourseEditTestRun;
-extern s32 D_8076C964;
+extern s32 gCourseEditDetailedCourseEnabled;
 extern volatile u8 D_80794E14;
 extern bool gMenuWidgetOpen;
 extern s32 gCourseEditMenuCursorXPos;
 extern s32 gCourseEditMenuCursorYPos;
 extern s32 gCourseEditInfoControlPoint;
-extern s32 D_xk2_800F7044;
+extern s32 gCourseEditDrawDetailedCourse;
 extern s32 D_xk2_800F704C;
 extern s32 gCourseEditHighlightedIconIndex;
 extern MenuWidget gCourseEditWidget;
@@ -953,11 +953,11 @@ void CourseEdit_UpdateEditMode(void) {
     func_xk2_800DEC1C();
     func_xk2_800DE8D0();
     func_xk2_800DECF0();
-    if (!func_xk2_800E6B3C()) {
-        if (D_8076C964 == 1) {
-            D_xk2_800F7044 = 1;
+    if (!CourseEdit_CheckInvalidJoins()) {
+        if (gCourseEditDetailedCourseEnabled == 1) {
+            gCourseEditDrawDetailedCourse = 1;
         } else {
-            D_xk2_800F7044 = 0;
+            gCourseEditDrawDetailedCourse = 0;
         }
     }
     if ((gCourseEditCursorXPos < 230) || (gCourseEditCursorXPos >= 298) || (gCourseEditCursorYPos < 202) ||
@@ -1170,7 +1170,7 @@ void func_xk2_800D9670(void) {
     D_xk2_80119738 = (Math_Round(D_xk2_80119738) / 10) * 10;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
         temp_s0_2 = &D_802CB6D0.segments[i];
@@ -1182,7 +1182,7 @@ void func_xk2_800D9670(void) {
     }
     var_s1 = false;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
         temp_s0_2 = &D_802CB6D0.segments[i];
@@ -1199,7 +1199,7 @@ void func_xk2_800D9670(void) {
         D_xk2_80119738 = sp60;
 
         for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-            if (D_80128690[i].unk_08 == 0) {
+            if (!D_80128690[i].isSelected) {
                 continue;
             }
             temp_s0_2 = &D_802CB6D0.segments[i];
@@ -1213,7 +1213,7 @@ void func_xk2_800D9670(void) {
     sp80 = 15000;
     sp7C = -15000;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
         temp_s0_2 = &D_802CB6D0.segments[i];
@@ -1240,7 +1240,7 @@ void func_xk2_800D9670(void) {
         Audio_TriggerSystemSE(NA_SE_32);
 
         for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-            if (D_80128690[i].unk_08 == 0) {
+            if (!D_80128690[i].isSelected) {
                 continue;
             }
 
@@ -1255,7 +1255,7 @@ void func_xk2_800D9670(void) {
     sp78 = 15000;
     sp74 = -15000;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
 
@@ -1281,7 +1281,7 @@ void func_xk2_800D9670(void) {
         Audio_TriggerSystemSE(NA_SE_32);
 
         for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-            if (D_80128690[i].unk_08 == 0) {
+            if (!D_80128690[i].isSelected) {
                 continue;
             }
 
@@ -1346,7 +1346,7 @@ void func_xk2_800DA288(void) {
     D_xk2_80119734 = (Math_Round(D_xk2_80119734) / 10) * 10;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
 
@@ -1357,7 +1357,7 @@ void func_xk2_800DA288(void) {
     }
     var_s1 = false;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
 
@@ -1374,7 +1374,7 @@ void func_xk2_800DA288(void) {
         Audio_TriggerSystemSE(NA_SE_32);
         D_xk2_80119734 = sp54;
         for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-            if (D_80128690[i].unk_08 == 0) {
+            if (!D_80128690[i].isSelected) {
                 continue;
             }
 
@@ -1387,7 +1387,7 @@ void func_xk2_800DA288(void) {
     sp64 = 10000;
     sp60 = 0;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
 
@@ -1413,7 +1413,7 @@ void func_xk2_800DA288(void) {
     if (var_s0) {
         Audio_TriggerSystemSE(NA_SE_32);
         for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-            if (D_80128690[i].unk_08 == 0) {
+            if (!D_80128690[i].isSelected) {
                 continue;
             }
             temp_s0_2 = &D_802CB6D0.segments[i];
@@ -1464,7 +1464,7 @@ void func_xk2_800DA984(void) {
     D_xk2_8011973C = (D_xk2_8011973C / 10) * 10;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
 
@@ -1490,7 +1490,7 @@ void func_xk2_800DA984(void) {
         D_xk2_8011973C = var_s0;
     }
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
 
@@ -1534,7 +1534,7 @@ void func_xk2_800DADEC(void) {
     if (EKController_GetInputFramesHeld() == 1) {
         if (temp_s3 < 0) {
             for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-                if (D_80128690[i].unk_08 == 0) {
+                if (!D_80128690[i].isSelected) {
                     continue;
                 }
 
@@ -1544,7 +1544,7 @@ void func_xk2_800DADEC(void) {
             }
         } else {
             for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-                if (D_80128690[i].unk_08 == 0) {
+                if (!D_80128690[i].isSelected) {
                     continue;
                 }
 
@@ -1554,7 +1554,7 @@ void func_xk2_800DADEC(void) {
         }
     } else if (EKController_GetInputFramesHeld() >= 9) {
         for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-            if (D_80128690[i].unk_08 == 0) {
+            if (!D_80128690[i].isSelected) {
                 continue;
             }
 
@@ -1603,7 +1603,7 @@ void func_xk2_800DB154(void) {
     D_xk2_80119740 = (D_xk2_80119740 / 10) * 10;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
         temp_v1_2 = &D_807B6528.segments[i];
@@ -1624,7 +1624,7 @@ void func_xk2_800DB154(void) {
         D_xk2_80119740 = var_s3;
     }
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
 
@@ -1730,7 +1730,7 @@ void func_xk2_800DB924(void) {
 
     j = 0;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 != 0) {
+        if (D_80128690[i].isSelected) {
             continue;
         }
 
@@ -1787,12 +1787,12 @@ void func_xk2_800DB924(void) {
     }
     D_xk2_800F704C = -1;
     D_xk2_800F7040 = 3;
-    D_800D6CA0.unk_00 = 0;
+    D_800D6CA0.moveMode = 0;
     func_xk2_800E6F9C();
     func_xk2_800DC3F8();
     D_802CB6D0.segments[0].trackSegmentInfo = (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000);
-    if (func_xk2_800E6B3C()) {
-        D_xk2_800F7044 = 0;
+    if (CourseEdit_CheckInvalidJoins()) {
+        gCourseEditDrawDetailedCourse = 0;
     }
 }
 
@@ -1801,7 +1801,7 @@ s32 func_xk2_800DBC68(void) {
     s32 i;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
         previousSegmentIndex = D_802CB6D0.segments[i].prev->segmentIndex;
@@ -1873,10 +1873,10 @@ void func_xk2_800DBEE4(void) {
             func_xk2_800DEB04();
             break;
         case CREATE_OPTION_POINT:
-            if (D_800D6CA0.unk_00 != 0) {
+            if (D_800D6CA0.moveMode != 0) {
                 func_xk2_800DBCF8();
             }
-            switch (D_800D6CA0.unk_00) {
+            switch (D_800D6CA0.moveMode) {
                 case 0:
                     func_xk2_800DEB04();
                     break;
@@ -1917,7 +1917,7 @@ void func_xk2_800DBEE4(void) {
 }
 
 void func_xk2_800DC018(void) {
-    if (D_800D6CA0.unk_00 == 1) {
+    if (D_800D6CA0.moveMode == 1) {
         return;
     }
     if ((gCourseEditCursorYPos < 56) || ((gCourseEditCursorXPos >= 232) && (gCourseEditCursorXPos <= 295) &&
@@ -1926,58 +1926,58 @@ void func_xk2_800DC018(void) {
     }
 
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_Z) {
-        D_xk2_800F6838 = gCourseEditCursorXPos;
-        D_xk2_800F683C = gCourseEditCursorYPos;
-        D_xk2_800F6840 = gCourseEditCursorXPos;
-        D_xk2_800F6844 = gCourseEditCursorYPos;
-        D_800D6CA0.state = 5;
+        gCourseEditSelectionBoxStartX = gCourseEditCursorXPos;
+        gCourseEditSelectionBoxStartY = gCourseEditCursorYPos;
+        gCourseEditSelectionBoxEndX = gCourseEditCursorXPos;
+        gCourseEditSelectionBoxEndY = gCourseEditCursorYPos;
+        D_800D6CA0.state = COURSE_EDIT_SELECTION_BOX;
     }
 }
 
-void func_xk2_800DC0D4(void) {
-    D_xk2_800F6840 = gCourseEditCursorXPos;
-    D_xk2_800F6844 = gCourseEditCursorYPos;
+void CourseEdit_UpdateSelectionBoxEnd(void) {
+    gCourseEditSelectionBoxEndX = gCourseEditCursorXPos;
+    gCourseEditSelectionBoxEndY = gCourseEditCursorYPos;
 }
 
-s32 func_xk2_800DC0F8(void) {
+s32 CourseEdit_SelectControlPoints(void) {
     s32 i;
-    s32 j;
-    CourseSegment* var_s1;
-    s32 sp70;
-    s32 sp6C;
-    s32 sp68;
-    s32 sp64;
-    s32 sp60;
-    s32 sp5C;
+    s32 controlPointsSelected;
+    s32 pad;
+    s32 screenPosX;
+    s32 screenPosY;
+    s32 left;
+    s32 top;
+    s32 right;
+    s32 bottom;
 
-    j = 0;
+    controlPointsSelected = 0;
     if (gCreateOption != CREATE_OPTION_POINT) {
         return 0;
     }
 
-    if (D_xk2_800F6838 < D_xk2_800F6840) {
-        sp68 = D_xk2_800F6838;
-        sp60 = D_xk2_800F6840;
+    if (gCourseEditSelectionBoxStartX < gCourseEditSelectionBoxEndX) {
+        left = gCourseEditSelectionBoxStartX;
+        right = gCourseEditSelectionBoxEndX;
     } else {
-        sp68 = D_xk2_800F6840;
-        sp60 = D_xk2_800F6838;
+        left = gCourseEditSelectionBoxEndX;
+        right = gCourseEditSelectionBoxStartX;
     }
-    if (D_xk2_800F683C < D_xk2_800F6844) {
-        sp64 = D_xk2_800F683C;
-        sp5C = D_xk2_800F6844;
+    if (gCourseEditSelectionBoxStartY < gCourseEditSelectionBoxEndY) {
+        top = gCourseEditSelectionBoxStartY;
+        bottom = gCourseEditSelectionBoxEndY;
     } else {
-        sp64 = D_xk2_800F6844;
-        sp5C = D_xk2_800F683C;
+        top = gCourseEditSelectionBoxEndY;
+        bottom = gCourseEditSelectionBoxStartY;
     }
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (func_xk2_800EF090(D_802CB6D0.segments[i].pos, &sp70, &sp6C) != 0) {
+        if (CourseEdit_GetScreenPosition(D_802CB6D0.segments[i].pos, &screenPosX, &screenPosY) != 0) {
             continue;
         }
-        if ((sp70 >= sp68) && (sp60 >= sp70) && (sp6C >= sp64) && (sp5C >= sp6C)) {
-            j++;
-            D_80128690[i].unk_08 = 1;
-            D_800D6CA0.unk_00 = 1;
+        if ((screenPosX >= left) && (right >= screenPosX) && (screenPosY >= top) && (bottom >= screenPosY)) {
+            controlPointsSelected++;
+            D_80128690[i].isSelected = true;
+            D_800D6CA0.moveMode = 1;
             func_xk2_800EF78C();
             D_xk2_80119730 = 0.0f;
             D_xk2_80119734 = 0.0f;
@@ -1986,35 +1986,35 @@ s32 func_xk2_800DC0F8(void) {
             D_xk2_80119740 = 0;
         }
     }
-    return j;
+    return controlPointsSelected;
 }
 
 void func_xk2_800DC2D0(void) {
-    s32 temp_v0;
-    s32 temp_v0_2;
+    s32 controlPointsSelected;
+    s32 closestControlPoint;
 
-    if ((gCreateOption != CREATE_OPTION_POINT) || (D_800D6CA0.unk_00 == 1)) {
+    if ((gCreateOption != CREATE_OPTION_POINT) || (D_800D6CA0.moveMode == 1)) {
         return;
     }
     Audio_TriggerSystemSE(NA_SE_69);
     D_xk2_800F704C = -1;
     func_xk2_800DC3F8();
-    temp_v0 = func_xk2_800DC0F8();
-    if (temp_v0 != 0) {
+    controlPointsSelected = CourseEdit_SelectControlPoints();
+    if (controlPointsSelected != 0) {
         D_xk2_800F7040 = 3;
     }
-    if ((temp_v0 == 0) && (D_xk2_800F6838 == D_xk2_800F6840) && (D_xk2_800F683C == D_xk2_800F6844)) {
+    if ((controlPointsSelected == 0) && (gCourseEditSelectionBoxStartX == gCourseEditSelectionBoxEndX) && (gCourseEditSelectionBoxStartY == gCourseEditSelectionBoxEndY)) {
         func_xk2_800DC3F8();
-        temp_v0_2 = func_xk2_800EFDE4(4000.0f);
-        if (temp_v0_2 != -1) {
-            D_800D6CA0.selectedControlPoint = temp_v0_2;
+        closestControlPoint = CourseEdit_GetClosestControlPoint(4000.0f);
+        if (closestControlPoint != -1) {
+            D_800D6CA0.selectedControlPoint = closestControlPoint;
             D_xk2_80119730 = 0.0f;
             D_xk2_80119734 = 0.0f;
             D_xk2_80119738 = 0.0f;
             D_xk2_8011973C = 0;
             D_xk2_80119740 = 0;
-            D_80128690[temp_v0_2].unk_08 = 1;
-            D_800D6CA0.unk_00 = 1;
+            D_80128690[closestControlPoint].isSelected = true;
+            D_800D6CA0.moveMode = 1;
             D_xk2_800F7040 = 3;
             func_xk2_800EF78C();
         }
@@ -2025,12 +2025,12 @@ void func_xk2_800DC3F8(void) {
     s32 i;
 
     for (i = 0; i < 64; i++) {
-        D_80128690[i].unk_08 = 0;
+        D_80128690[i].isSelected = false;
     }
 }
 
 void func_xk2_800DC428(void) {
-    if ((gCreateOption != CREATE_OPTION_POINT) || (D_800D6CA0.unk_00 != 1)) {
+    if ((gCreateOption != CREATE_OPTION_POINT) || (D_800D6CA0.moveMode != 1)) {
         return;
     }
 
@@ -2040,7 +2040,7 @@ void func_xk2_800DC428(void) {
         D_xk2_800F704C = -1;
         func_xk2_800DC3F8();
         D_800D6CA0.selectedControlPoint = D_xk2_80119800;
-        D_800D6CA0.unk_00 = 0;
+        D_800D6CA0.moveMode = 0;
     }
 }
 
@@ -2056,16 +2056,16 @@ void func_xk2_800DC4E4(void) {
 }
 
 void func_xk2_800DC58C(void) {
-    if ((D_800D6CA0.unk_00 == 1) || (D_800D6CA0.state != 0) || (gCreateOption != CREATE_OPTION_POINT) ||
+    if ((D_800D6CA0.moveMode == 1) || (D_800D6CA0.state != 0) || (gCreateOption != CREATE_OPTION_POINT) ||
         (gCourseEditCursorYPos < 56)) {
         return;
     }
     if (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 1) {
-        gCourseEditInfoControlPoint = func_xk2_800EFDE4(150.0f);
+        gCourseEditInfoControlPoint = CourseEdit_GetClosestControlPoint(150.0f);
     }
     if (sCourseEditController->buttonPressed & BTN_A) {
         if (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 0) {
-            gCourseEditInfoControlPoint = func_xk2_800EFDE4(150.0f);
+            gCourseEditInfoControlPoint = CourseEdit_GetClosestControlPoint(150.0f);
         }
         if (gCourseEditInfoControlPoint != -1) {
             Audio_TriggerSystemSE(NA_SE_30);
@@ -2088,15 +2088,15 @@ void func_xk2_800DC67C(void) {
     s32 var_v1;
 
     if ((D_800D6CA0.state != 0) || (gPointOption != POINT_OPTION_SET) || (gCreateOption != CREATE_OPTION_COURSE) ||
-        (gCourseEditCursorYPos < 0x38) || (D_800D6CA0.unk_00 != 0)) {
+        (gCourseEditCursorYPos < 0x38) || (D_800D6CA0.moveMode != 0)) {
         return;
     }
     if (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 1) {
-        gCourseEditInfoControlPoint = func_xk2_800EFDE4(150.0f);
+        gCourseEditInfoControlPoint = CourseEdit_GetClosestControlPoint(150.0f);
     }
     if (sCourseEditController->buttonPressed & BTN_A) {
         if (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 0) {
-            gCourseEditInfoControlPoint = func_xk2_800EFDE4(150.0f);
+            gCourseEditInfoControlPoint = CourseEdit_GetClosestControlPoint(150.0f);
         }
         if (gCourseEditInfoControlPoint != -1) {
             Audio_TriggerSystemSE(NA_SE_36);
@@ -2108,7 +2108,7 @@ void func_xk2_800DC67C(void) {
         }
         Audio_TriggerSystemSE(NA_SE_36);
         D_xk2_800F704C = gCourseEditInfoControlPoint;
-        if ((gCreateOption == CREATE_OPTION_COURSE) && (D_xk2_80104CA0[1] == 0) && (D_xk2_80104CA0[10] == 0)) {
+        if ((gCreateOption == CREATE_OPTION_COURSE) && !gCourseEditErrors[COURSE_EDIT_ERROR_TOO_LONG] && !gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY]) {
             newSegment = D_800D6CA0.newSegment;
             if ((newSegment.pos.x < -15000.0f) || (newSegment.pos.x > 15000.0f) || (newSegment.pos.y < 0.0f) ||
                 (newSegment.pos.y > 5000.0f) || (newSegment.pos.z < -15000.0f) || (newSegment.pos.z > 15000.0f)) {
@@ -2178,7 +2178,7 @@ void func_xk2_800DCCD8(void) {
     CourseSegment* temp_at = &D_800D6CA0.newSegment;
     CourseSegment* temp_v0_2;
 
-    if ((gCreateOption != CREATE_OPTION_POINT) || (D_800D6CA0.unk_00 != 1)) {
+    if ((gCreateOption != CREATE_OPTION_POINT) || (D_800D6CA0.moveMode != 1)) {
         return;
     }
     if ((gMoveOption != MOVE_OPTION_CLEAR) && (sCourseEditController->buttonPressed & BTN_A)) {
@@ -2194,11 +2194,11 @@ void func_xk2_800DCCD8(void) {
         temp_at->radiusLeft = temp_v0_2->radiusLeft;
         temp_at->radiusRight = temp_v0_2->radiusRight;
         D_xk2_800F704C = -1;
-        D_800D6CA0.unk_00 = 0;
+        D_800D6CA0.moveMode = 0;
     }
 }
 
-extern s32 D_xk2_800F7058;
+extern s32 gCourseEditCourseSplitIndex;
 
 void func_xk2_800DCDD0(void) {
     s32 var_v1;
@@ -2221,10 +2221,10 @@ void func_xk2_800DCDD0(void) {
             Audio_TriggerSystemSE(NA_SE_69);
 
             for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-                var_a0 = D_80128690[D_802CB6D0.segments[i].next->segmentIndex].unk_00;
-                var_v1 = D_80128690[i].unk_00;
+                var_a0 = D_80128690[D_802CB6D0.segments[i].next->segmentIndex].startSplit;
+                var_v1 = D_80128690[i].startSplit;
                 if (i + 1 == D_802CB6D0.controlPointCount) {
-                    var_a0 = D_xk2_800F7058;
+                    var_a0 = gCourseEditCourseSplitIndex;
                 }
                 if ((i == 0) && (var_a0 < var_v1)) {
                     var_v1 = 0;
@@ -2475,9 +2475,9 @@ void func_xk2_800DD638(void) {
     s32 i;
 
     for (i = 0; i < 64; i++) {
-        D_80128690[i].unk_00 = 0;
-        D_80128690[i].unk_04 = 0;
-        D_80128690[i].unk_08 = 0;
+        D_80128690[i].startSplit = 0;
+        D_80128690[i].endSplit = 0;
+        D_80128690[i].isSelected = false;
     }
 }
 
@@ -2525,9 +2525,9 @@ s32 func_xk2_800DD76C(f32 arg0) {
     f32 temp_fv0;
 
     var_fp = -1;
-    for (i = 0; i < D_xk2_800F7058; i++) {
-        sp60 = D_8011C220[i].pos;
-        if (func_xk2_800EF090(sp60, &sp78, &sp74) != 0) {
+    for (i = 0; i < gCourseEditCourseSplitIndex; i++) {
+        sp60 = gCourseEditCourseSplitInfos[i].pos;
+        if (CourseEdit_GetScreenPosition(sp60, &sp78, &sp74) != 0) {
             continue;
         }
         temp_v0 = gCourseEditCursorXPos - sp78;
@@ -2636,8 +2636,8 @@ extern s32 gExpansionKitYesNoOptionIndex;
 extern u8 D_xk1_8003A570[];
 extern EKLoadedFile gExpansionKitLoadedFiles[];
 
-extern s32 D_xk2_800F7060;
-extern s32 D_xk2_800F7064;
+extern s32 gCourseEditMiniMachineCharacter;
+extern s32 gCourseEditMiniMachineColorPalette;
 extern s32 D_xk2_80104364;
 extern s32 D_xk2_80104368;
 extern s32 D_xk2_80104378;
@@ -2683,8 +2683,8 @@ void func_xk2_800DD938(void) {
             D_80030060[0] = '\0';
             func_xk2_800EACB0();
             D_xk2_800F7040 = 3;
-            D_xk2_800F7060 = Math_Rand2() % 30;
-            D_xk2_800F7064 = Math_Rand2() & 3;
+            gCourseEditMiniMachineCharacter = Math_Rand2() % 30;
+            gCourseEditMiniMachineColorPalette = Math_Rand2() % 4;
             break;
         case 0:
             CourseEdit_ClearControlPointHighlight();
@@ -2700,7 +2700,7 @@ void func_xk2_800DD938(void) {
             }
             ExpansionKit_NameEntryClear();
             ExpansionKit_NameEntryInit(func_xk1_8002AC24);
-            D_800D6CA0.state = 2;
+            D_800D6CA0.state = COURSE_EDIT_NAME_ENTRY;
             return;
         case 1:
             if (!(sp1C->attr & MFS_FILE_ATTR_FORBID_W)) {
@@ -2729,7 +2729,7 @@ void func_xk2_800DD938(void) {
             if (!(sp1C->attr & MFS_FILE_ATTR_FORBID_W)) {
                 ExpansionKit_NameEntryClear();
                 ExpansionKit_NameEntryInit(func_xk1_8002AC24);
-                D_800D6CA0.state = 2;
+                D_800D6CA0.state = COURSE_EDIT_NAME_ENTRY;
                 return;
             }
             break;
@@ -2891,7 +2891,7 @@ void func_xk2_800DE4F8(void) {
     }
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
 
@@ -2903,7 +2903,7 @@ void func_xk2_800DE4F8(void) {
         temp_s0->pos = sp8C;
     }
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 == 0) {
+        if (!D_80128690[i].isSelected) {
             continue;
         }
         temp_s0 = &D_802CB6D0.segments[i];
@@ -2933,7 +2933,7 @@ void func_xk2_800DE758(void) {
     s32 sp1C;
     MenuWidget* sp18;
 
-    if (D_800D6CA0.state == 2) {
+    if (D_800D6CA0.state == COURSE_EDIT_NAME_ENTRY) {
         return;
     }
 
@@ -2976,7 +2976,7 @@ extern u16* gCourseEditIconTextures[];
 void func_xk2_800DE8D0(void) {
 
     if (sCourseEditController->buttonPressed & BTN_A) {
-        if ((D_800D6CA0.unk_00 == 1) || (gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_ALIGN_POINTS)) {
+        if ((D_800D6CA0.moveMode == 1) || (gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_ALIGN_POINTS)) {
             return;
         }
         Audio_TriggerSystemSE(NA_SE_36);
@@ -3010,7 +3010,7 @@ s32 func_xk2_800DEA14(void) {
 void func_xk2_800DEA20(void) {
     s32 prevIndex;
 
-    if (D_800D6CA0.state == 2) {
+    if (D_800D6CA0.state == COURSE_EDIT_NAME_ENTRY) {
         return;
     }
 
@@ -3049,20 +3049,20 @@ void func_xk2_800DEB38(void) {
 
 void func_xk2_800DEC1C(void) {
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
-        if ((gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_LINE_DISPLAY) || (D_800D6CA0.unk_00 == 1)) {
+        if ((gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_LINE_DISPLAY) || (D_800D6CA0.moveMode == 1)) {
             return;
         }
         Audio_TriggerSystemSE(NA_SE_36);
-        if (D_8076C964 != 0) {
-            D_8076C964 = 0;
+        if (gCourseEditDetailedCourseEnabled != 0) {
+            gCourseEditDetailedCourseEnabled = 0;
             gCourseEditIconTextures[1] = aCourseEditGoldLineModeIconTex;
             return;
         }
-        if (D_xk2_80104CA0[2] != 0) {
+        if (gCourseEditErrors[COURSE_EDIT_ERROR_INVALID_PART_PLACEMENT]) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
-        D_8076C964 = 1;
+        gCourseEditDetailedCourseEnabled = 1;
         gCourseEditIconTextures[1] = aCourseEditLineModeIconTex;
     }
 }
@@ -3072,7 +3072,7 @@ extern s32 gCourseEditToolTipEnabled;
 void func_xk2_800DECF0(void) {
 
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
-        if ((gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_TOOLTIPS) || (D_800D6CA0.unk_00 == 1)) {
+        if ((gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_TOOLTIPS) || (D_800D6CA0.moveMode == 1)) {
             return;
         }
         Audio_TriggerSystemSE(NA_SE_36);
@@ -3089,7 +3089,7 @@ bool func_xk2_800DEDA8(void) {
     s32 i;
 
     for (i = 0; i < 12; i++) {
-        if (D_xk2_80104CA0[i]) {
+        if (gCourseEditErrors[i]) {
             return true;
         }
     }
@@ -3099,23 +3099,23 @@ bool func_xk2_800DEDA8(void) {
 extern s32 D_800CCFBC;
 extern s32 gCourseIndex;
 
-extern s32 D_xk2_80103FF0;
+extern s32 gCourseEditTestRunFadeTimer;
 extern s32 D_xk2_80103FF4;
 extern s32 D_xk2_80103FF8;
 
 void func_xk2_800DEE20(void) {
     if (gInCourseEditTestRun || (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A)) {
-        if ((D_800D6CA0.unk_00 == 1) || (gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_TEST_DRIVE)) {
+        if ((D_800D6CA0.moveMode == 1) || (gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_TEST_DRIVE)) {
             return;
         }
-        if ((D_802CB6D0.controlPointCount < 4) || (D_800D6CA0.unk_20 != -1) || (func_xk2_800DEDA8() != 0)) {
+        if ((D_802CB6D0.controlPointCount < 4) || (D_800D6CA0.unreasonableControlPoint != -1) || (func_xk2_800DEDA8() != 0)) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
         Audio_TriggerSystemSE(NA_SE_36);
         gInCourseEditTestRun = true;
         func_xk2_800F1360();
-        D_xk2_80103FF0 = 0;
+        gCourseEditTestRunFadeTimer = 0;
         D_xk2_80103FF4 = 0;
         D_xk2_80103FF8 = 0;
         D_xk2_800F7040 = 0;
@@ -3241,7 +3241,7 @@ void func_xk2_800DF370(void) {
 }
 
 extern char gEditCupTrackNames[][9];
-extern s32 D_xk2_80103F10;
+extern s32 gCourseEditCourseRegisterIndex;
 
 void func_xk2_800DF42C(void) {
     s32 i;
@@ -3250,7 +3250,7 @@ void func_xk2_800DF42C(void) {
         if (gExpansionKitYesNoOptionIndex != 0) {
             switch (D_80119890) {
                 case 1:
-                    gEditCupTrackNames[D_xk2_80103F10][0] = '\0';
+                    gEditCupTrackNames[gCourseEditCourseRegisterIndex][0] = '\0';
                     break;
                 case 2:
                     for (i = 0; i < 6; i++) {

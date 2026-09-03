@@ -110,7 +110,7 @@ void CourseEdit_UpdateControlPointHighlight(void) {
     if (gControllers[gPlayerControlPorts[0]].buttonCurrent & (BTN_CUP | BTN_CDOWN | BTN_CLEFT | BTN_CRIGHT)) {
         sCourseEditControlPointIsHighlighted = false;
     }
-    if (D_800D6CA0.unk_00 == 1) {
+    if (D_800D6CA0.moveMode == 1) {
         sCourseEditControlPointIsHighlighted = false;
     }
     if (!sZPressActivated || (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_Z)) {
@@ -122,7 +122,7 @@ void CourseEdit_UpdateControlPointHighlight(void) {
         return;
     }
     if (sZPressActivationTimer != 0) {
-        sCourseEditHighlightedControlPoint = func_xk2_800EFDE4(4000.0f);
+        sCourseEditHighlightedControlPoint = CourseEdit_GetClosestControlPoint(4000.0f);
         if (sCourseEditHighlightedControlPoint == -1) {
             return;
         }
@@ -133,8 +133,8 @@ void CourseEdit_UpdateControlPointHighlight(void) {
             func_xk2_800DE4F8();
         }
         D_xk2_800F7040 = 3;
-        if (D_800D6CA0.unk_00 == 1) {
-            D_800D6CA0.unk_00 = 0;
+        if (D_800D6CA0.moveMode == 1) {
+            D_800D6CA0.moveMode = 0;
         }
         func_xk2_800DC3F8();
         sCourseEditControlPointHighlightPos = D_802CB6D0.segments[sCourseEditHighlightedControlPoint].pos;

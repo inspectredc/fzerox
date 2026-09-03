@@ -43,7 +43,7 @@ bool gInCourseEditor = false;
 s32 D_8076C958 = 90;
 s32 D_8076C95C = 0;
 s32 D_8076C960 = 0;
-s32 D_8076C964 = 1;
+s32 gCourseEditDetailedCourseEnabled = 1;
 s32 gCourseEditAlignPointsEnabled = 0;
 s32 gCourseEditToolTipEnabled = 0;
 
@@ -1475,7 +1475,7 @@ s32 D_800CD1E8 = 0;
 #define EFFECT_TEXTURE_SCALAR (1.0f)
 #endif
 
-extern u8 D_xk2_80104CA0[];
+extern u8 gCourseEditErrors[];
 
 Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffect* effect, Vtx* vtx,
                                       f32 rightTextureTCoordinate, f32 leftTextureTCoordinate) {
@@ -1576,7 +1576,7 @@ Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffec
 
         if (D_800CD1E8 >= D_800E32CC) {
 #ifdef EXPANSION_KIT
-            D_xk2_80104CA0[7] = 1;
+            gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] = true;
 #endif
             return vtx;
         }
@@ -1612,7 +1612,7 @@ Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffec
 
 #ifdef EXPANSION_KIT
 extern unk_80128690 D_80128690[];
-extern unk_8011C220 D_8011C220[];
+extern CourseSplitInfo gCourseEditCourseSplitInfos[];
 
 Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseEffect* effect, Vtx* vtx,
                                                  f32 rightTextureTCoordinate, f32 leftTextureTCoordinate) {
@@ -1625,7 +1625,7 @@ Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseE
     f32 leftEdgeDistance;
     s32 textureUnit;
     s32 pad2[2];
-    f32 spFC;
+    f32 lengthFromStart;
     f32 radiusLeft;
     f32 radiusRight;
     f32 radius;
@@ -1638,20 +1638,20 @@ Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseE
 
     textureUnit = 0;
 
-    i = D_80128690[segment->segmentIndex].unk_00;
+    i = D_80128690[segment->segmentIndex].startSplit;
 
     if (i >= 0x10000) {
         return vtx;
     }
 
-    t = D_8011C220[i].unk_04;
+    t = gCourseEditCourseSplitInfos[i].segmentTValue;
 
     while (true) {
-        lengthProportionAlongSegment = Course_SplineGetLengthInfo(segment, t, &spFC);
-        pos.x = D_8011C220[i].pos.x;
-        pos.y = D_8011C220[i].pos.y;
-        pos.z = D_8011C220[i].pos.z;
-        basis = D_8011C220[i].basis;
+        lengthProportionAlongSegment = Course_SplineGetLengthInfo(segment, t, &lengthFromStart);
+        pos.x = gCourseEditCourseSplitInfos[i].pos.x;
+        pos.y = gCourseEditCourseSplitInfos[i].pos.y;
+        pos.z = gCourseEditCourseSplitInfos[i].pos.z;
+        basis = gCourseEditCourseSplitInfos[i].basis;
 
         pos.x += basis.y.x * 10.0f;
         pos.y += basis.y.y * 10.0f;
@@ -1719,7 +1719,7 @@ Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseE
         textureUnit++;
 
         if (D_800CD1E8 >= D_800E32CC) {
-            D_xk2_80104CA0[7] = 1;
+            gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] = true;
             return vtx;
         }
 
@@ -1737,10 +1737,10 @@ Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseE
                 }
             }
         } else {
-            if (D_8011C220[i + 1].unk_04 < t) {
+            if (gCourseEditCourseSplitInfos[i + 1].segmentTValue < t) {
                 t = 1.0f;
             } else {
-                t = D_8011C220[i + 1].unk_04;
+                t = gCourseEditCourseSplitInfos[i + 1].segmentTValue;
             }
             i++;
         }

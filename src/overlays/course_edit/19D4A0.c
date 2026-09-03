@@ -2,7 +2,7 @@
 #include "leo/mfs.h"
 #include "fzx_expansion_kit.h"
 
-s32 D_xk2_80103F10 = 0;
+s32 gCourseEditCourseRegisterIndex = 0;
 s32 D_xk2_80103F14 = 0;
 
 extern char gEditCupTrackNames[4 * 6][9];
@@ -40,13 +40,13 @@ extern Gfx D_8014940[];
 extern s32 gCourseEditMenuCursorYPos;
 extern s32 gExpansionKitEncStrEncType;
 
-Gfx* func_xk2_800EBB24(Gfx* gfx) {
-    s32 temp_s4;
+Gfx* CourseEdit_DrawFileRegisterMenu(Gfx* gfx) {
+    s32 highlightedIndex;
     s32 i;
-    s32 var_s2;
-    u8* var_s3;
+    s32 top;
+    u8* trackNameEncStr;
 
-    temp_s4 = (gCourseEditMenuCursorYPos - 0x34) / 8;
+    highlightedIndex = (gCourseEditMenuCursorYPos - 52) / 8;
 
     if (D_800D6CA0.state != 0x20) {
         return gfx;
@@ -54,38 +54,38 @@ Gfx* func_xk2_800EBB24(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_8014940);
 
-    EKFileMenu_DrawFileMenuBorder(&gfx, 0xC8, 0x50, 0xC, 8);
+    EKFileMenu_DrawFileMenuBorder(&gfx, 200, 80, 12, 8);
 
     for (i = 0; i < 6; i++) {
-        var_s3 = gEditCupTrackNames[i];
-        var_s2 = (i * 8) + 0x58;
+        trackNameEncStr = gEditCupTrackNames[i];
+        top = (i * 8) + 88;
         gDPPipeSync(gfx++);
         gDPSetCombineMode(gfx++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
 
-        if (i == temp_s4) {
+        if (i == highlightedIndex) {
             gDPSetPrimColor(gfx++, 0, 0, 190, 175, 255, 255);
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 0);
         }
 
-        gSPTextureRectangle(gfx++, 206 << 2, var_s2 << 2, 290 << 2, (var_s2 + 8) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+        gSPTextureRectangle(gfx++, 206 << 2, top << 2, 290 << 2, (top + 8) << 2, 0, 0, 0, 1 << 10, 1 << 10);
         gDPPipeSync(gfx++);
 
         gDPSetCombineLERP(gfx++, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0);
 
-        if (var_s3[0] == '\0') {
+        if (trackNameEncStr[0] == '\0') {
             gDPSetPrimColor(gfx++, 0, 0, 0, 255, 0, 255);
-            if (i == temp_s4) {
+            if (i == highlightedIndex) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
             }
             gExpansionKitEncStrEncType = 0;
-            gfx = ExpansionKit_DrawEncStr(gfx, 0xD0, var_s2, "%d:", i + 1);
+            gfx = ExpansionKit_DrawEncStr(gfx, 208, top, "%d:", i + 1);
         } else {
             gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-            if (i == temp_s4) {
+            if (i == highlightedIndex) {
                 gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
             }
-            gfx = ExpansionKit_DrawEncStr(gfx, 0xD0, var_s2, "%d:%s", i + 1, var_s3);
+            gfx = ExpansionKit_DrawEncStr(gfx, 208, top, "%d:%s", i + 1, trackNameEncStr);
         }
     }
     PRINTF("ENTRY.c\n");
@@ -105,12 +105,12 @@ void func_xk2_800EBE14(void) {
 }
 
 void func_xk2_800EBE90(void) {
-    s32 sp1C;
+    s32 prevIndex;
 
-    sp1C = D_xk2_80103F14;
+    prevIndex = D_xk2_80103F14;
     EKController_UpdateVerticalOptionSlow(&D_xk2_80103F14, 5, 0);
 
-    if (sp1C != D_xk2_80103F14) {
+    if (prevIndex != D_xk2_80103F14) {
         Audio_TriggerSystemSE(NA_SE_35);
     }
     gCourseEditMenuCursorYPos = (D_xk2_80103F14 * 8) + 0x38;
@@ -122,9 +122,9 @@ extern s32 gExpansionKitYesNoOptionIndex;
 extern u8 D_xk2_800F7400;
 
 void func_xk2_800EBEF4(void) {
-    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & 0x8000) && (D_800D6CA0.state == 0x20)) {
+    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) && (D_800D6CA0.state == 0x20)) {
         Audio_TriggerSystemSE(NA_SE_36);
-        D_xk2_80103F10 = (gCourseEditMenuCursorYPos - 0x34) / 8;
+        gCourseEditCourseRegisterIndex = (gCourseEditMenuCursorYPos - 52) / 8;
         switch (D_80119890) {
             case 0:
                 D_800D6CA0.state = 0x31;

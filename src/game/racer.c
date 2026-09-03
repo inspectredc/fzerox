@@ -6966,19 +6966,19 @@ Gfx* func_8009CBE8(Gfx* gfx, s32 arg1, s32 red, s32 green, s32 blue) {
     return gfx;
 }
 
-Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2) {
+Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 machinePalette) {
     Machine* machine = &gMachines[character];
     s32 color;
 
     gSPDisplayList(gfx++, D_800CDD38[character]);
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart && (machine->customType == CUSTOM_MACHINE_DEFAULT)) {
-        color = (machine->red[arg2] * 77) + (machine->green[arg2] * 151) + (machine->blue[arg2] * 28);
+        color = (machine->red[machinePalette] * 77) + (machine->green[machinePalette] * 151) + (machine->blue[machinePalette] * 28);
         color >>= 8;
         gDPSetEnvColor(gfx++, color, color, color, 255);
     } else {
 #endif
-        gDPSetEnvColor(gfx++, machine->red[arg2], machine->green[arg2], machine->blue[arg2], 255);
+        gDPSetEnvColor(gfx++, machine->red[machinePalette], machine->green[machinePalette], machine->blue[machinePalette], 255);
 #if BUILD_REVISION >= REVISION_C
     }
 #endif

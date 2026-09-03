@@ -352,7 +352,7 @@ s32 func_xk2_800F2750(void) {
     gCourseVtxPtr = gGfxPool->courseVtxBuffer;
     gCourseInfos->courseSegments = D_802CB6D0.segments;
     gCourseInfos->segmentCount = D_802CB6D0.controlPointCount;
-    if (D_800D6CA0.unk_20 == -1) {
+    if (D_800D6CA0.unreasonableControlPoint == -1) {
         Course_SegmentContinuousFlagInit(gCourseInfos);
         Course_SegmentFormsInit(gCourseInfos);
         return func_800A1954(gCourseInfos);
@@ -365,11 +365,11 @@ extern s32 D_xk2_80104368;
 extern s32 D_xk2_80104378;
 extern s32 gExpansionKitYesNoOptionIndex;
 extern s32 gSegmentChunkCount;
-extern u8 D_xk2_80104CA0[12];
+extern u8 gCourseEditErrors[12];
 
 void func_xk2_800F27DC(CourseInfo* courseInfo) {
     s32 i;
-    s32 temp_v0;
+    s32 invalidChunkIndexInfo;
     s32 pad;
     bool sp18;
 
@@ -384,15 +384,15 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
         return;
     }
 
-    for (i = 0; i < ARRAY_COUNT(D_xk2_80104CA0); i++) {
-        if (D_xk2_80104CA0[i] != 0) {
+    for (i = 0; i < ARRAY_COUNT(gCourseEditErrors); i++) {
+        if (gCourseEditErrors[i]) {
             gExpansionKitYesNoOptionIndex = 0;
             D_800D6CA0.state = 0x10;
             D_xk2_80104378 = 7;
             return;
         }
     }
-    D_xk2_80104CA0[7] = 0;
+    gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] = false;
     if ((func_i2_800B39B4(courseInfo) != -1) || (func_i2_800BE8BC(courseInfo) != -1)) {
         gExpansionKitYesNoOptionIndex = 0;
         D_800D6CA0.state = 0x10;
@@ -400,25 +400,25 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
         return;
     }
     func_800A4D0C(2);
-    temp_v0 = func_800A1954(courseInfo);
-    if (temp_v0 != 0) {
+    invalidChunkIndexInfo = func_800A1954(courseInfo);
+    if (invalidChunkIndexInfo != 0) {
         gExpansionKitYesNoOptionIndex = 0;
         D_800D6CA0.state = 0x10;
         D_xk2_80104378 = 7;
-        if (temp_v0 & 0x10000) {
-            D_xk2_80104CA0[3] = 1;
+        if (invalidChunkIndexInfo & 0x10000) {
+            gCourseEditErrors[COURSE_EDIT_ERROR_ROADS_OVERLAP] = true;
             D_xk2_80104364 = 1;
-            D_800D6CA0.unk_1C = func_xk2_800E9134(temp_v0 & 0xFFFF);
+            D_800D6CA0.overlappingControlPoint = func_xk2_800E9134(invalidChunkIndexInfo & 0xFFFF);
         }
         if (gSegmentChunkCount >= 0x2FF) {
-            D_xk2_80104CA0[10] = 1;
+            gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY] = true;
             D_xk2_80104368 = 1;
         }
         func_800A4D0C(0);
         sp18 = true;
     }
     Course_EffectsViewInteractDataInit(false);
-    if (D_xk2_80104CA0[7] != 0) {
+    if (gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS]) {
         gExpansionKitYesNoOptionIndex = 0;
         D_800D6CA0.state = 0x10;
         D_xk2_80104378 = 7;
@@ -426,25 +426,25 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
         func_800A4D0C(0);
     }
     func_800A4D0C(1);
-    temp_v0 = func_800A1954(courseInfo);
-    if (temp_v0 != 0) {
+    invalidChunkIndexInfo = func_800A1954(courseInfo);
+    if (invalidChunkIndexInfo != 0) {
         gExpansionKitYesNoOptionIndex = 0;
         D_800D6CA0.state = 0x10;
         D_xk2_80104378 = 7;
         sp18 = true;
-        if (temp_v0 & 0x10000) {
-            D_xk2_80104CA0[3] = 1;
+        if (invalidChunkIndexInfo & 0x10000) {
+            gCourseEditErrors[COURSE_EDIT_ERROR_ROADS_OVERLAP] = true;
             D_xk2_80104364 = 1;
-            D_800D6CA0.unk_1C = func_xk2_800E9134(temp_v0 & 0xFFFF);
+            D_800D6CA0.overlappingControlPoint = func_xk2_800E9134(invalidChunkIndexInfo & 0xFFFF);
         }
         if (gSegmentChunkCount >= 0x2FF) {
-            D_xk2_80104CA0[10] = 1;
+            gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY] = true;
             D_xk2_80104368 = 1;
         }
         func_800A4D0C(0);
     }
     Course_EffectsViewInteractDataInit(false);
-    if (D_xk2_80104CA0[7] != 0) {
+    if (gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS]) {
         gExpansionKitYesNoOptionIndex = 0;
         D_800D6CA0.state = 0x10;
         D_xk2_80104378 = 7;
@@ -509,7 +509,7 @@ void CourseEdit_DrawPressBToReturnToPreviousState(Gfx** gfxP) {
     gfx = *gfxP;
     D_xk2_80104F04 = 0;
     for (i = 0; i < 12; i++) {
-        if (D_xk2_80104CA0[i] != 0) {
+        if (gCourseEditErrors[i]) {
             D_xk2_80104F04 = 1;
         }
     }
@@ -731,7 +731,7 @@ extern MenuWidget gMoveWidget;
 extern MenuWidget gDesignStyleWidget;
 extern MenuWidget gPartsStyleWidget;
 
-void func_xk2_800F3600(Gfx** gfxP) {
+void CourseEdit_DrawMenuWidgetTooltip(Gfx** gfxP) {
     s32 pad;
     Gfx* gfx;
     MenuWidget* widget;

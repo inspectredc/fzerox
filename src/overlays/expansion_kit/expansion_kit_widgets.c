@@ -359,7 +359,7 @@ MenuWidget gCylinderTypeWidget = {
 
 MenuDropItem sCourseEditEntryMenuItems[] = {
     { aExpansionKitMenuPurpleBorderBackgroundTex, aExpansionKitMenuPurpleBorderHighlightBackgroundTex,
-      aExpansionKitMenuAcceptTex, NULL, NULL, func_xk1_80026870, 48, 16, NULL, NULL },
+      aExpansionKitMenuRegisterTex, NULL, NULL, func_xk1_80026870, 48, 16, NULL, NULL },
     { aExpansionKitMenuPurpleBorderBackgroundTex, aExpansionKitMenuPurpleBorderHighlightBackgroundTex,
       aExpansionKitMenuClearTex, NULL, NULL, func_xk1_800268A8, 48, 16, NULL, NULL },
     { aExpansionKitMenuPurpleBorderBackgroundTex, aExpansionKitMenuPurpleBorderHighlightBackgroundTex,
@@ -1354,12 +1354,12 @@ void func_xk1_80028250(void) {
 }
 
 extern u8 D_80030060[];
-extern u8 D_xk2_80104CA0[];
+extern u8 gCourseEditErrors[];
 extern s32 gCourseEditCameraPitch;
 extern s32 gCourseEditCameraAtX;
 extern s32 gCourseEditCameraAtZ;
-extern s32 D_xk2_800F7044;
-extern s32 D_xk2_800F7058;
+extern s32 gCourseEditDrawDetailedCourse;
+extern s32 gCourseEditCourseSplitIndex;
 extern f32 D_xk2_80119744;
 
 extern CourseFeaturesInfo gCourseFeaturesInfo;
@@ -1373,20 +1373,20 @@ void func_xk1_8002860C(void) {
     gCourseEditCameraAtZ = 0;
     gCourseEditCameraPitch = 90;
     D_800D6CA0.courseYaw = 0;
-    D_xk2_800F7044 = 0;
+    gCourseEditDrawDetailedCourse = 0;
     D_802CB6D0.controlPointCount = 0;
     gCurrentCourseInfo->segmentCount = 0;
     COURSE_CONTEXT()->courseData.controlPointCount = 0;
     D_800D6CA0.selectedControlPoint = -1;
     D_800D6CA0.unk_04 = 0;
-    D_800D6CA0.unk_1C = -1;
+    D_800D6CA0.overlappingControlPoint = -1;
     if (D_800D6CA0.state != 0x10) {
         func_xk2_800F12B0();
     }
-    D_xk2_80104CA0[3] = 0;
-    D_xk2_80104CA0[7] = 0;
+    gCourseEditErrors[COURSE_EDIT_ERROR_ROADS_OVERLAP] = false;
+    gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] = false;
     gSegmentChunkCount = 0;
-    D_xk2_800F7058 = 0;
+    gCourseEditCourseSplitIndex = 0;
     D_xk2_80119744 = 0.0f;
     gPointOption = POINT_OPTION_SET;
     func_xk2_800DC3F8();

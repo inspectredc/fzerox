@@ -603,15 +603,15 @@ typedef struct EKLoadedFile {
 } EKLoadedFile; //size = 0x24
 
 typedef struct unk_800D6CA0 {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 moveMode;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 state;
     /* 0x0C */ s32 selectedControlPoint;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 courseYaw;
     /* 0x18 */ s8 unk_18[0x4];
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
+    /* 0x1C */ s32 overlappingControlPoint;
+    /* 0x20 */ s32 unreasonableControlPoint;
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ CourseSegment newSegment;
     /* 0xCC */ s8 unk_CC[0x24];
@@ -652,17 +652,17 @@ typedef struct unk_807B3C20 {
 } unk_807B3C20; // size 0x2904
 
 typedef struct unk_80128690 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
+    /* 0x00 */ s32 startSplit;
+    /* 0x04 */ s32 endSplit;
+    /* 0x08 */ bool isSelected;
 } unk_80128690; // size = 0xC
 
-typedef struct unk_8011C220 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
+typedef struct CourseSplitInfo {
+    /* 0x00 */ s32 trackSegmentInfo;
+    /* 0x04 */ f32 segmentTValue;
     /* 0x08 */ Vec3f pos;
     /* 0x14 */ Mtx3F basis;
-} unk_8011C220; // size = 0x38
+} CourseSplitInfo; // size = 0x38
 
 typedef struct MachineCreateGrid {
     /* 0x00 */ s32 x;

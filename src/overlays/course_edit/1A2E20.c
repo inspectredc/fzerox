@@ -46,7 +46,7 @@ extern bool gInCourseEditTestRun;
 extern unk_80128C94 D_6000000;
 extern unk_80128C94* D_80128C94;
 
-Gfx* func_xk2_800F1428(Gfx* gfx) {
+Gfx* CourseEdit_DrawCamera(Gfx* gfx) {
     u16 perspectiveScale;
     s32 pad[11];
     Camera* camera = gCameras;
