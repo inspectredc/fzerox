@@ -12,7 +12,8 @@ void func_xk2_800F12B0(void) {
     D_800D6CA0.overlappingControlPoint = -1;
 
     for (i = 0; i < 12; i++) {
-        if ((i != COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY) && (i != COURSE_EDIT_ERROR_TOO_LONG) && (i != COURSE_EDIT_ERROR_ROADS_OVERLAP)) {
+        if ((i != COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY) && (i != COURSE_EDIT_ERROR_TOO_LONG) &&
+            (i != COURSE_EDIT_ERROR_ROADS_OVERLAP)) {
             gCourseEditErrors[i] = false;
         }
     }

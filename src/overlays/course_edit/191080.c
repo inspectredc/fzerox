@@ -117,8 +117,8 @@ Gfx* CourseEdit_DrawUpdateState(Gfx* gfx) {
     switch (sCourseEditDrawState) {
         case 0:
             sCourseEditDrawState = 1;
-            Matrix_SetLockedLookAt(&gCourseEditCourseLookAtMtx, NULL, 0.3f, 0.3f, 0.3f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-                                   0.0f, 0.0f);
+            Matrix_SetLockedLookAt(&gCourseEditCourseLookAtMtx, NULL, 0.3f, 0.3f, 0.3f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+                                   0.0f, 0.0f, 0.0f, 0.0f);
             break;
         case 1:
             func_xk2_800DF5C0();
@@ -183,7 +183,8 @@ Gfx* CourseEdit_DrawMain(Gfx* gfx) {
     gSPDisplayList(gfx++, aExecuteCourseEditAxisDL);
     gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    if ((D_802CB6D0.controlPointCount >= 4) && (gCourseEditDrawDetailedCourse == 1) && (D_800D6CA0.unreasonableControlPoint == -1)) {
+    if ((D_802CB6D0.controlPointCount >= 4) && (gCourseEditDrawDetailedCourse == 1) &&
+        (D_800D6CA0.unreasonableControlPoint == -1)) {
         gSPDisplayList(gfx++, D_9014BA0);
         if (D_xk2_800F7404 == 0) {
             gfx = Course_DrawEditCourse(gfx);
@@ -423,9 +424,10 @@ Gfx* CourseEdit_DrawControlPoints(Gfx* gfx) {
             pulseScale = 1.0f;
         }
 
-        gSPTextureRectangle(gfx++, Math_Round(screenPosX - (4.0f * pulseScale)) << 2, Math_Round(screenPosY - (4.0f * pulseScale)) << 2,
-                            Math_Round(screenPosX + (4.0f * pulseScale)) << 2, Math_Round(screenPosY + (4.0f * pulseScale)) << 2, 0, 0, 0,
-                            Math_Round((1 << 10) / pulseScale), Math_Round((1 << 10) / pulseScale));
+        gSPTextureRectangle(
+            gfx++, Math_Round(screenPosX - (4.0f * pulseScale)) << 2, Math_Round(screenPosY - (4.0f * pulseScale)) << 2,
+            Math_Round(screenPosX + (4.0f * pulseScale)) << 2, Math_Round(screenPosY + (4.0f * pulseScale)) << 2, 0, 0,
+            0, Math_Round((1 << 10) / pulseScale), Math_Round((1 << 10) / pulseScale));
     }
     return gfx;
 }
@@ -484,7 +486,8 @@ Gfx* CourseEdit_DrawCourseLines(Gfx* gfx) {
         gDPPipeSync(gfx++);
         shapeIndex = TRACK_SHAPE_INDEX(gCourseEditCourseSplitInfos[i].trackSegmentInfo & TRACK_SHAPE_MASK);
 
-        gDPSetPrimColor(gfx++, 0, 0, sCourseEditTrackShapeLineColors[shapeIndex][0], sCourseEditTrackShapeLineColors[shapeIndex][1], sCourseEditTrackShapeLineColors[shapeIndex][2],
+        gDPSetPrimColor(gfx++, 0, 0, sCourseEditTrackShapeLineColors[shapeIndex][0],
+                        sCourseEditTrackShapeLineColors[shapeIndex][1], sCourseEditTrackShapeLineColors[shapeIndex][2],
                         255);
         gSPLineW3D(gfx++, 0, 1, sCourseEditTrackShapeLineColors[shapeIndex][3], 0);
     }
@@ -1801,7 +1804,8 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
 
         gCourseEditCourseSplitIndex++;
         if (gCourseEditCourseSplitIndex >= 896) {
-            gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] = gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
+            gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] =
+                gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
             break;
         }
 
@@ -1831,7 +1835,8 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
                 splitInfo++;
                 gCourseEditCourseSplitIndex++;
                 if (gCourseEditCourseSplitIndex >= 896) {
-                    gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] = gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
+                    gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] =
+                        gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
                     D_80128690[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
                     break;
                 }
@@ -1851,7 +1856,8 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
                     splitInfo->trackSegmentInfo = segment->trackSegmentInfo;
                     splitInfo->segmentTValue = 0.5f;
                     Course_SplineGetPosition(segment, 0.5f, &splitInfo->pos);
-                    Course_SplineGetBasis(segment, 0.5f, &basis, Course_SplineGetLengthInfo(segment, 0.5f, &lengthFromStart));
+                    Course_SplineGetBasis(segment, 0.5f, &basis,
+                                          Course_SplineGetLengthInfo(segment, 0.5f, &lengthFromStart));
                     splitInfo->basis = basis;
                 } else {
                     splitInfo->trackSegmentInfo = segment->trackSegmentInfo;
@@ -1866,13 +1872,15 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
                 gCourseEditCourseSplitIndex++;
 
                 if (gSegmentChunkCount < chunkIndex) {
-                    gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] = gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
+                    gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] =
+                        gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
                     D_80128690[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
                     break;
                 }
 
                 if (gCourseEditCourseSplitIndex >= 896) {
-                    gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] = gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
+                    gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] =
+                        gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
                     D_80128690[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
                     break;
                 }
@@ -1882,12 +1890,14 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
                 splitInfo->pos = pos;
                 splitInfo->trackSegmentInfo = segment->trackSegmentInfo;
                 splitInfo->segmentTValue = 0.5f;
-                Course_SplineGetBasis(segment, 0.5f, &basis, Course_SplineGetLengthInfo(segment, 0.5f, &lengthFromStart));
+                Course_SplineGetBasis(segment, 0.5f, &basis,
+                                      Course_SplineGetLengthInfo(segment, 0.5f, &lengthFromStart));
                 splitInfo->basis = basis;
                 splitInfo++;
                 gCourseEditCourseSplitIndex++;
                 if (gCourseEditCourseSplitIndex >= 896) {
-                    gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] = gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
+                    gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] =
+                        gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
                     D_80128690[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
                     break;
                 }
@@ -1902,7 +1912,8 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
             break;
         }
         if (gCourseEditCourseSplitIndex >= 896) {
-            gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] = gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
+            gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] =
+                gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
             break;
         }
     }
@@ -2200,8 +2211,7 @@ Gfx* CourseEdit_DrawSelectionBox(Gfx* gfx) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
     gSPTextureRectangle(gfx++, left << 2, top << 2, right << 2, (top + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
-    gSPTextureRectangle(gfx++, left << 2, bottom << 2, (right + 1) << 2, (bottom + 1) << 2, 0, 0, 0, 1 << 10,
-                        1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, bottom << 2, (right + 1) << 2, (bottom + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
     gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 1) << 2, bottom << 2, 0, 0, 0, 1 << 10, 1 << 10);
     gSPTextureRectangle(gfx++, right << 2, top << 2, (right + 1) << 2, bottom << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
@@ -2502,8 +2512,8 @@ Gfx* CourseEdit_DrawMenu(Gfx* gfx) {
                 gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 12, 8, 308, 232);
                 gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 128);
 
-                gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 48) << 2, (top + 80) << 2, 0,
-                                    0, 0, 1 << 10, 1 << 10);
+                gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 48) << 2, (top + 80) << 2, 0, 0, 0, 1 << 10,
+                                    1 << 10);
 
                 gSPDisplayList(gfx++, D_3000540);
                 func_xk2_800EECD4(&gfx, left + 48, top + 16, gCourseEditMessageStrs[24], 24);
@@ -2933,7 +2943,8 @@ Gfx* CourseEdit_DrawStartMarker(Gfx* gfx) {
     screenPosY -= 12;
     gSPDisplayList(gfx++, aCourseEditStartMarkerDL);
 
-    gSPTextureRectangle(gfx++, screenPosX << 2, screenPosY << 2, (screenPosX + 24) << 2, (screenPosY + 12) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, screenPosX << 2, screenPosY << 2, (screenPosX + 24) << 2, (screenPosY + 12) << 2, 0, 0,
+                        0, 1 << 10, 1 << 10);
 
     return gfx;
 }
@@ -2961,7 +2972,6 @@ Gfx* CourseEdit_DrawFileSelectRegisterMenu(Gfx* gfx) {
 
     return gfx;
 }
-
 
 Lights2 D_xk2_800F7208 = gdSPDefLights2(64, 64, 64, 255, 255, 255, 0, 0, 120, 255, 255, 255, 0, 0, 120);
 

@@ -50,8 +50,8 @@ extern s32 gSkyboxOption;
 void func_xk2_800EF8B0(void) {
     s32 i;
 
-    if ((D_800D6CA0.state == 1) || (D_800D6CA0.state == 3) || (D_800D6CA0.state == COURSE_EDIT_NAME_ENTRY) || (D_800D6CA0.state == 0x10) ||
-        (D_800D6CA0.state == 0x20) || (D_xk2_80104BC0 == 0)) {
+    if ((D_800D6CA0.state == 1) || (D_800D6CA0.state == 3) || (D_800D6CA0.state == COURSE_EDIT_NAME_ENTRY) ||
+        (D_800D6CA0.state == 0x10) || (D_800D6CA0.state == 0x20) || (D_xk2_80104BC0 == 0)) {
         return;
     }
     D_xk2_80104BC0 = 0;
@@ -247,15 +247,21 @@ s32 func_xk2_800F01C4(Vec3f arg0, Mtx3F arg1) {
     D_xk2_80128CB8[0].x = arg0.x - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.x);
     D_xk2_80128CB8[0].y = arg0.y - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.y);
     D_xk2_80128CB8[0].z = arg0.z - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.z);
-    D_xk2_80128CB8[1].x = (((arg1.y.x + arg1.x.x) * 2000.0f) + arg0.x) - (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
-    D_xk2_80128CB8[1].y = (((arg1.y.y + arg1.x.y) * 2000.0f) + arg0.y) - (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
-    D_xk2_80128CB8[1].z = (((arg1.y.z + arg1.x.z) * 2000.0f) + arg0.z) - (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
+    D_xk2_80128CB8[1].x = (((arg1.y.x + arg1.x.x) * 2000.0f) + arg0.x) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
+    D_xk2_80128CB8[1].y = (((arg1.y.y + arg1.x.y) * 2000.0f) + arg0.y) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
+    D_xk2_80128CB8[1].z = (((arg1.y.z + arg1.x.z) * 2000.0f) + arg0.z) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
     D_xk2_80128CB8[2].x = arg0.x + ((arg1.y.x + arg1.y.x) * 2000.0f);
     D_xk2_80128CB8[2].y = arg0.y + ((arg1.y.y + arg1.y.y) * 2000.0f);
     D_xk2_80128CB8[2].z = arg0.z + ((arg1.y.z + arg1.y.z) * 2000.0f);
-    D_xk2_80128CB8[3].x = arg0.x + ((arg1.y.x - arg1.x.x) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
-    D_xk2_80128CB8[3].y = arg0.y + ((arg1.y.y - arg1.x.y) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
-    D_xk2_80128CB8[3].z = arg0.z + ((arg1.y.z - arg1.x.z) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
+    D_xk2_80128CB8[3].x =
+        arg0.x + ((arg1.y.x - arg1.x.x) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
+    D_xk2_80128CB8[3].y =
+        arg0.y + ((arg1.y.y - arg1.x.y) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
+    D_xk2_80128CB8[3].z =
+        arg0.z + ((arg1.y.z - arg1.x.z) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
     D_xk2_80128CB8[4].x = ((0 * arg1.z.x) + arg0.x) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.x);
     D_xk2_80128CB8[4].y = ((0 * arg1.z.y) + arg0.y) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.y);
     D_xk2_80128CB8[4].z = ((0 * arg1.z.z) + arg0.z) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.z);
@@ -268,15 +274,21 @@ s32 func_xk2_800F01C4(Vec3f arg0, Mtx3F arg1) {
     D_xk2_80128CB8[0].x = arg0.x - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.x);
     D_xk2_80128CB8[0].y = arg0.y - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.y);
     D_xk2_80128CB8[0].z = arg0.z - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.z);
-    D_xk2_80128CB8[1].x = (((arg1.x.x - arg1.y.x) * 2000.0f) + arg0.x) - (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
-    D_xk2_80128CB8[1].y = (((arg1.x.y - arg1.y.y) * 2000.0f) + arg0.y) - (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
-    D_xk2_80128CB8[1].z = (((arg1.x.z - arg1.y.z) * 2000.0f) + arg0.z) - (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
+    D_xk2_80128CB8[1].x = (((arg1.x.x - arg1.y.x) * 2000.0f) + arg0.x) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
+    D_xk2_80128CB8[1].y = (((arg1.x.y - arg1.y.y) * 2000.0f) + arg0.y) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
+    D_xk2_80128CB8[1].z = (((arg1.x.z - arg1.y.z) * 2000.0f) + arg0.z) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
     D_xk2_80128CB8[2].x = arg0.x - ((arg1.y.x + arg1.y.x) * 2000.0f);
     D_xk2_80128CB8[2].y = arg0.y - ((arg1.y.y + arg1.y.y) * 2000.0f);
     D_xk2_80128CB8[2].z = arg0.z - ((arg1.y.z + arg1.y.z) * 2000.0f);
-    D_xk2_80128CB8[3].x = arg0.x - ((arg1.y.x + arg1.x.x) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
-    D_xk2_80128CB8[3].y = arg0.y - ((arg1.y.y + arg1.x.y) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
-    D_xk2_80128CB8[3].z = arg0.z - ((arg1.y.z + arg1.x.z) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
+    D_xk2_80128CB8[3].x =
+        arg0.x - ((arg1.y.x + arg1.x.x) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
+    D_xk2_80128CB8[3].y =
+        arg0.y - ((arg1.y.y + arg1.x.y) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
+    D_xk2_80128CB8[3].z =
+        arg0.z - ((arg1.y.z + arg1.x.z) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
     D_xk2_80128CB8[4].x = ((0 * arg1.z.x) + arg0.x) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.x);
     D_xk2_80128CB8[4].y = ((0 * arg1.z.y) + arg0.y) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.y);
     D_xk2_80128CB8[4].z = ((0 * arg1.z.z) + arg0.z) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.z);

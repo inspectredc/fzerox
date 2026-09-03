@@ -6973,12 +6973,14 @@ Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 machinePalette) {
     gSPDisplayList(gfx++, D_800CDD38[character]);
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart && (machine->customType == CUSTOM_MACHINE_DEFAULT)) {
-        color = (machine->red[machinePalette] * 77) + (machine->green[machinePalette] * 151) + (machine->blue[machinePalette] * 28);
+        color = (machine->red[machinePalette] * 77) + (machine->green[machinePalette] * 151) +
+                (machine->blue[machinePalette] * 28);
         color >>= 8;
         gDPSetEnvColor(gfx++, color, color, color, 255);
     } else {
 #endif
-        gDPSetEnvColor(gfx++, machine->red[machinePalette], machine->green[machinePalette], machine->blue[machinePalette], 255);
+        gDPSetEnvColor(gfx++, machine->red[machinePalette], machine->green[machinePalette],
+                       machine->blue[machinePalette], 255);
 #if BUILD_REVISION >= REVISION_C
     }
 #endif

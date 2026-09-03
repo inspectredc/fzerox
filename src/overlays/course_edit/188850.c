@@ -828,7 +828,8 @@ void func_xk2_800D8CC4(void) {
     if (gCourseEditCursorYPos < 0x38) {
         return;
     }
-    if (D_800D6CA0.state == COURSE_EDIT_NAME_ENTRY || D_800D6CA0.state == 1 || D_800D6CA0.state == 3 || D_800D6CA0.state == 16) {
+    if (D_800D6CA0.state == COURSE_EDIT_NAME_ENTRY || D_800D6CA0.state == 1 || D_800D6CA0.state == 3 ||
+        D_800D6CA0.state == 16) {
         return;
     }
 
@@ -2003,7 +2004,8 @@ void func_xk2_800DC2D0(void) {
     if (controlPointsSelected != 0) {
         D_xk2_800F7040 = 3;
     }
-    if ((controlPointsSelected == 0) && (gCourseEditSelectionBoxStartX == gCourseEditSelectionBoxEndX) && (gCourseEditSelectionBoxStartY == gCourseEditSelectionBoxEndY)) {
+    if ((controlPointsSelected == 0) && (gCourseEditSelectionBoxStartX == gCourseEditSelectionBoxEndX) &&
+        (gCourseEditSelectionBoxStartY == gCourseEditSelectionBoxEndY)) {
         func_xk2_800DC3F8();
         closestControlPoint = CourseEdit_GetClosestControlPoint(4000.0f);
         if (closestControlPoint != -1) {
@@ -2108,7 +2110,8 @@ void func_xk2_800DC67C(void) {
         }
         Audio_TriggerSystemSE(NA_SE_36);
         D_xk2_800F704C = gCourseEditInfoControlPoint;
-        if ((gCreateOption == CREATE_OPTION_COURSE) && !gCourseEditErrors[COURSE_EDIT_ERROR_TOO_LONG] && !gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY]) {
+        if ((gCreateOption == CREATE_OPTION_COURSE) && !gCourseEditErrors[COURSE_EDIT_ERROR_TOO_LONG] &&
+            !gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY]) {
             newSegment = D_800D6CA0.newSegment;
             if ((newSegment.pos.x < -15000.0f) || (newSegment.pos.x > 15000.0f) || (newSegment.pos.y < 0.0f) ||
                 (newSegment.pos.y > 5000.0f) || (newSegment.pos.z < -15000.0f) || (newSegment.pos.z > 15000.0f)) {
@@ -3108,7 +3111,8 @@ void func_xk2_800DEE20(void) {
         if ((D_800D6CA0.moveMode == 1) || (gCourseEditHighlightedIconIndex != COURSE_EDIT_ICON_TEST_DRIVE)) {
             return;
         }
-        if ((D_802CB6D0.controlPointCount < 4) || (D_800D6CA0.unreasonableControlPoint != -1) || (func_xk2_800DEDA8() != 0)) {
+        if ((D_802CB6D0.controlPointCount < 4) || (D_800D6CA0.unreasonableControlPoint != -1) ||
+            (func_xk2_800DEDA8() != 0)) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
         }
