@@ -91,7 +91,7 @@ extern s32 gCourseEditCameraAtX;
 extern s32 gCourseEditCameraAtY;
 extern s32 gCourseEditCameraAtZ;
 extern unk_807B3C20 D_802CB6D0;
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 extern s32 gCourseEditCursorXPos;
 extern s32 gCourseEditCursorYPos;
 extern s32 D_xk2_800F7040;
@@ -110,7 +110,7 @@ void CourseEdit_UpdateControlPointHighlight(void) {
     if (gControllers[gPlayerControlPorts[0]].buttonCurrent & (BTN_CUP | BTN_CDOWN | BTN_CLEFT | BTN_CRIGHT)) {
         sCourseEditControlPointIsHighlighted = false;
     }
-    if (D_800D6CA0.moveMode == 1) {
+    if (gCourseEditContext.moveMode == 1) {
         sCourseEditControlPointIsHighlighted = false;
     }
     if (!sZPressActivated || (gControllers[gPlayerControlPorts[0]].buttonCurrent & BTN_Z)) {
@@ -133,10 +133,10 @@ void CourseEdit_UpdateControlPointHighlight(void) {
             func_xk2_800DE4F8();
         }
         D_xk2_800F7040 = 3;
-        if (D_800D6CA0.moveMode == 1) {
-            D_800D6CA0.moveMode = 0;
+        if (gCourseEditContext.moveMode == 1) {
+            gCourseEditContext.moveMode = 0;
         }
-        func_xk2_800DC3F8();
+        CourseEdit_ClearSegmentSplitSelection();
         sCourseEditControlPointHighlightPos = D_802CB6D0.segments[sCourseEditHighlightedControlPoint].pos;
         gCourseEditCameraAtX = D_802CB6D0.segments[sCourseEditHighlightedControlPoint].pos.x * 0.3f;
         gCourseEditCameraAtY = D_802CB6D0.segments[sCourseEditHighlightedControlPoint].pos.y * 0.3f;
@@ -155,7 +155,7 @@ extern GfxPool D_1000000;
 void CourseEdit_DrawControlPointHighlight(Gfx** gfxP) {
     Gfx* gfx;
 
-    if (!sCourseEditControlPointIsHighlighted || (D_800D6CA0.state != 0)) {
+    if (!sCourseEditControlPointIsHighlighted || (gCourseEditContext.state != 0)) {
         return;
     }
     gfx = *gfxP;

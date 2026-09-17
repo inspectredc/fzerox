@@ -335,7 +335,7 @@ ifeq ($(EXPANSION_KIT),0)
 EXCLUSION_FILES := \
 src/sys/disk/% \
 src/overlays/ovl_i2/dd_save.c \
-src/overlays/ovl_i2/ovl_i2_data2.c \
+src/overlays/ovl_i2/course_edit_context.c \
 src/overlays/ovl_i10/187510.c \
 src/overlays/expansion_kit/% \
 src/overlays/course_edit/% \

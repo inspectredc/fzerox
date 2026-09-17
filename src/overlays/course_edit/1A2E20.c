@@ -21,11 +21,11 @@ s32 gCourseEditCameraAtX = 0;
 s32 gCourseEditCameraAtY = 0;
 s32 gCourseEditCameraAtZ = 0;
 
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 
 void func_xk2_800F1360(void) {
     sCourseEditCameraPitchBackup = gCourseEditCameraPitch;
-    sCourseEditCourseYawBackup = D_800D6CA0.courseYaw;
+    sCourseEditCourseYawBackup = gCourseEditContext.courseYaw;
     sCourseEditCameraZoomBackup = gCourseEditCameraZoom;
     sCourseEditCameraAtXBackup = gCourseEditCameraAtX;
     sCourseEditCameraAtYBackup = gCourseEditCameraAtY;
@@ -34,7 +34,7 @@ void func_xk2_800F1360(void) {
 
 void func_xk2_800F13C4(void) {
     gCourseEditCameraPitch = sCourseEditCameraPitchBackup;
-    D_800D6CA0.courseYaw = sCourseEditCourseYawBackup;
+    gCourseEditContext.courseYaw = sCourseEditCourseYawBackup;
     gCourseEditCameraZoom = sCourseEditCameraZoomBackup;
     gCourseEditCameraAtX = sCourseEditCameraAtXBackup;
     gCourseEditCameraAtY = sCourseEditCameraAtYBackup;
@@ -69,9 +69,9 @@ Gfx* CourseEdit_DrawCamera(Gfx* gfx) {
     Matrix_FromMtx(&D_80128C94->unk_0000, &gCameras[0].projectionMtx);
     sCourseEditCameraForwardY = SIN(DEG_TO_FZXANG(gCourseEditCameraPitch));
     sCourseEditCameraForwardZ = COS(DEG_TO_FZXANG(gCourseEditCameraPitch));
-    sCourseEditCameraForwardX = SIN(DEG_TO_FZXANG(D_800D6CA0.courseYaw)) * sCourseEditCameraForwardZ;
+    sCourseEditCameraForwardX = SIN(DEG_TO_FZXANG(gCourseEditContext.courseYaw)) * sCourseEditCameraForwardZ;
     sCourseEditCameraForwardY = (-1.0f * sCourseEditCameraForwardY);
-    sCourseEditCameraForwardZ = COS(DEG_TO_FZXANG(D_800D6CA0.courseYaw)) * (-1.0f * sCourseEditCameraForwardZ);
+    sCourseEditCameraForwardZ = COS(DEG_TO_FZXANG(gCourseEditContext.courseYaw)) * (-1.0f * sCourseEditCameraForwardZ);
     gCameras[0].basis.x.x = sCourseEditCameraForwardX;
     gCameras[0].basis.x.y = sCourseEditCameraForwardY;
     gCameras[0].basis.x.z = sCourseEditCameraForwardZ;
@@ -80,8 +80,8 @@ Gfx* CourseEdit_DrawCamera(Gfx* gfx) {
     gCameras[0].eye.y = gCourseEditCameraAtY - (gCourseEditCameraZoom * sCourseEditCameraForwardY);
     gCameras[0].eye.z = gCourseEditCameraAtZ - (gCourseEditCameraZoom * sCourseEditCameraForwardZ);
 
-    D_xk2_80128D40 = SIN(DEG_TO_FZXANG(D_800D6CA0.courseYaw));
-    D_xk2_80128D44 = COS(DEG_TO_FZXANG(D_800D6CA0.courseYaw));
+    D_xk2_80128D40 = SIN(DEG_TO_FZXANG(gCourseEditContext.courseYaw));
+    D_xk2_80128D44 = COS(DEG_TO_FZXANG(gCourseEditContext.courseYaw));
 
     gCameras[0].basis.y.x = 0 - (sCourseEditCameraForwardY * D_xk2_80128D40);
     gCameras[0].basis.y.y = (sCourseEditCameraForwardX * D_xk2_80128D40) - (sCourseEditCameraForwardZ * D_xk2_80128D44);
@@ -157,7 +157,7 @@ void func_xk2_800F1938(void) {
         return;
     }
     if (D_802CB6D0.controlPointCount != 0) {
-        selectedSegment = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
+        selectedSegment = &D_802CB6D0.segments[gCourseEditContext.selectedControlPoint];
         if (gCourseEditCameraPitch < 0) {
             yPos = ((selectedSegment->pos.y + selectedSegment->next->pos.y) * 0.3f) / 2;
         } else {
@@ -196,24 +196,24 @@ void func_xk2_800F1938(void) {
         return;
     }
 
-    D_800D6CA0.newSegment.pos.x = ((rayEnd.x - gCameras[0].eye.x) * rayIntersectionDistance) + gCameras[0].eye.x;
-    D_800D6CA0.newSegment.pos.y = yPos;
-    D_800D6CA0.newSegment.pos.z = ((rayEnd.z - gCameras[0].eye.z) * rayIntersectionDistance) + gCameras[0].eye.z;
-    D_800D6CA0.newSegment.pos.x /= 0.3f;
-    D_800D6CA0.newSegment.pos.y /= 0.3f;
-    D_800D6CA0.newSegment.pos.z /= 0.3f;
-    D_800D6CA0.newSegment.pos.x = (Math_Round(D_800D6CA0.newSegment.pos.x) / 10) * 10;
-    D_800D6CA0.newSegment.pos.y = (Math_Round(D_800D6CA0.newSegment.pos.y) / 10) * 10;
-    D_800D6CA0.newSegment.pos.z = (Math_Round(D_800D6CA0.newSegment.pos.z) / 10) * 10;
-    D_800D6CA0.newSegment.radiusLeft = radiusLeft;
-    D_800D6CA0.newSegment.radiusRight = radiusRight;
+    gCourseEditContext.newSegment.pos.x = ((rayEnd.x - gCameras[0].eye.x) * rayIntersectionDistance) + gCameras[0].eye.x;
+    gCourseEditContext.newSegment.pos.y = yPos;
+    gCourseEditContext.newSegment.pos.z = ((rayEnd.z - gCameras[0].eye.z) * rayIntersectionDistance) + gCameras[0].eye.z;
+    gCourseEditContext.newSegment.pos.x /= 0.3f;
+    gCourseEditContext.newSegment.pos.y /= 0.3f;
+    gCourseEditContext.newSegment.pos.z /= 0.3f;
+    gCourseEditContext.newSegment.pos.x = (Math_Round(gCourseEditContext.newSegment.pos.x) / 10) * 10;
+    gCourseEditContext.newSegment.pos.y = (Math_Round(gCourseEditContext.newSegment.pos.y) / 10) * 10;
+    gCourseEditContext.newSegment.pos.z = (Math_Round(gCourseEditContext.newSegment.pos.z) / 10) * 10;
+    gCourseEditContext.newSegment.radiusLeft = radiusLeft;
+    gCourseEditContext.newSegment.radiusRight = radiusRight;
 
     if ((D_802CB6D0.controlPointCount == 1) &&
         (D_802CB6D0.segments[0].trackSegmentInfo == (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000)) &&
-        (D_800D6CA0.newSegment.trackSegmentInfo == (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000))) {
-        D_800D6CA0.newSegment.trackSegmentInfo = (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_2);
+        (gCourseEditContext.newSegment.trackSegmentInfo == (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000))) {
+        gCourseEditContext.newSegment.trackSegmentInfo = (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_2);
     } else if (D_802CB6D0.controlPointCount == 0) {
-        D_800D6CA0.newSegment.trackSegmentInfo =
+        gCourseEditContext.newSegment.trackSegmentInfo =
             (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_START_LINE);
     }
 }

@@ -4,12 +4,12 @@
 u8 sCourseEditSegmentJoinErrors[64];
 u8 gCourseEditErrors[12] = { 0 };
 
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 
 void func_xk2_800F12B0(void) {
     s32 i;
 
-    D_800D6CA0.overlappingControlPoint = -1;
+    gCourseEditContext.overlappingControlPoint = -1;
 
     for (i = 0; i < 12; i++) {
         if ((i != COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY) && (i != COURSE_EDIT_ERROR_TOO_LONG) &&

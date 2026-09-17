@@ -83,7 +83,7 @@ s32 func_xk1_8002E0A8(void) {
              ((D_807C6EA8.unk_00 == 9) || (D_807C6EA8.unk_00 == 0xF) || (D_807C6EA8.unk_00 == 0x10) ||
               (D_807C6EA8.unk_00 == 0x11) || (D_807C6EA8.unk_00 == 0x12))) ||
             ((bcmp(&D_xk1_8003BB80, &D_800CD2B0, sizeof(LEODiskID)) != 0) && (gGameMode == GAMEMODE_CREATE_MACHINE) &&
-             ((D_807C6EA8.unk_00 == 8) || (D_807C6EA8.unk_00 == GAMEMODE_TIME_ATTACK)))) {
+             ((D_807C6EA8.unk_00 == 8) || (D_807C6EA8.unk_00 == 0xE)))) {
             func_80767940();
             return 4;
         }

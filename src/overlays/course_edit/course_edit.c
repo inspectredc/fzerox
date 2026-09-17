@@ -20,7 +20,7 @@ const u16 kReinitializeDiskInputs[] = { BTN_L,    BTN_R,    BTN_L,     BTN_R,   
                                         BTN_DOWN, BTN_LEFT, BTN_RIGHT, BTN_DOWN, BTN_UP };
 
 extern volatile u8 D_80794E14;
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 extern s32 gExpansionKitYesNoOptionIndex;
 
 void CourseEdit_ReinitializeDiskInputsUpdate(void) {
@@ -32,7 +32,7 @@ void CourseEdit_ReinitializeDiskInputsUpdate(void) {
         sCorrectInputsInSequencePressed = 0;
         return;
     }
-    if (D_800D6CA0.state != 0) {
+    if (gCourseEditContext.state != 0) {
         sCorrectInputsInSequencePressed = 0;
         return;
     }
@@ -43,7 +43,7 @@ void CourseEdit_ReinitializeDiskInputsUpdate(void) {
                 sCorrectInputsInSequencePressed = 0;
                 Audio_TriggerSystemSE(NA_SE_46);
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0xFF;
+                gCourseEditContext.state = 0xFF;
             }
         } else {
             sCorrectInputsInSequencePressed = 0;
@@ -111,14 +111,14 @@ void CourseEdit_ConfirmReinitializeDiskUpdate(void) {
         if (gExpansionKitYesNoOptionIndex != 0) {
             Audio_TriggerSystemSE(NA_SE_5);
             func_80767FE4(1, 0x20, NULL);
-            D_800D6CA0.state = 0xFE;
+            gCourseEditContext.state = 0xFE;
         } else {
             Audio_TriggerSystemSE(NA_SE_37);
-            D_800D6CA0.state = 0;
+            gCourseEditContext.state = 0;
         }
     } else if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) {
         Audio_TriggerSystemSE(NA_SE_37);
-        D_800D6CA0.state = 0;
+        gCourseEditContext.state = 0;
     } else {
         EKFileMenu_UpdateYesNoOption();
     }
@@ -169,9 +169,9 @@ void CourseEdit_Init(void) {
     D_xk2_800F7040 = 4;
     D_xk2_800F7048 = 0;
     // clang-format off
-    D_800D6CA0.newSegment.pos.x = 0.0f; \
-    D_800D6CA0.newSegment.pos.y = 0.0f; \
-    D_800D6CA0.newSegment.pos.z = 0.0f;
+    gCourseEditContext.newSegment.pos.x = 0.0f; \
+    gCourseEditContext.newSegment.pos.y = 0.0f; \
+    gCourseEditContext.newSegment.pos.z = 0.0f;
     // clang-format on
     ExpansionKit_SetMenuHighlightAlphaChangeScale(3);
     ExpansionKit_SetInputIndicatorFlashRate(3);
@@ -198,7 +198,7 @@ void CourseEdit_Init(void) {
     gCameras[0].fov = 40.0f;
     EKController_SetRepeatDelay(9, 2);
     EKController_SetDeadZone(24);
-    func_xk2_800E77F0();
+    CourseEdit_InitContext();
     COURSE_CONTEXT()->courseData = D_8010CF50;
     gVenueOption = COURSE_CONTEXT()->courseData.venue;
     gSkyboxOption = COURSE_CONTEXT()->courseData.skybox;
@@ -209,9 +209,9 @@ void CourseEdit_Init(void) {
     EKFileMenu_SetFileListArrowFlashLength(4);
     gCourseVtxPtr = gGfxPool->courseVtxBuffer;
     D_800E12C0 = &gCourseEffectsInfo;
-    func_xk2_800DC3F8();
-    func_xk2_800DD638();
-    D_800D6CA0.selectedControlPoint = D_802CB6D0.controlPointCount - 1;
+    CourseEdit_ClearSegmentSplitSelection();
+    CourseEdit_ClearSegmentSplitInfo();
+    gCourseEditContext.selectedControlPoint = D_802CB6D0.controlPointCount - 1;
     func_xk2_800EF78C();
     func_xk2_800F0FE8();
     if (gCourseEditDetailedCourseEnabled == 1) {
@@ -221,7 +221,7 @@ void CourseEdit_Init(void) {
     }
     gCourseEditCourseSplitIndex = 0;
     gCourseMinimapTex = Arena_Allocate(ALLOC_FRONT, 0x1000);
-    D_800D6CA0.state = 0;
+    gCourseEditContext.state = 0;
 }
 
 extern s8 gGamePaused;
@@ -253,7 +253,7 @@ void CourseEdit_ExitTestRun(void) {
     func_xk2_800F13C4();
     func_xk2_800EF8B0();
     D_xk2_800F7040 = 4;
-    D_800D6CA0.selectedControlPoint = gRacers[0].segmentPositionInfo.courseSegment->next->segmentIndex;
+    gCourseEditContext.selectedControlPoint = gRacers[0].segmentPositionInfo.courseSegment->next->segmentIndex;
 }
 
 extern s32 gCourseEditMenuCursorXPos;
@@ -277,7 +277,7 @@ void func_xk2_800EC9BC(void) {
         }
         EKWidget_CloseRootWidget(&gCourseEditWidget);
         gLastCourseBGM = -1;
-        D_800D6CA0.state = 0;
+        gCourseEditContext.state = 0;
     }
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
         EKWidget_ExecuteWidgetAction(&gCourseEditWidget, &gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
@@ -352,10 +352,10 @@ s32 CourseEdit_TestRunUpdate(void) {
     return GAMEMODE_COURSE_EDIT;
 }
 
-void func_xk2_800ECD60(void) {
-    func_xk2_800EBE90();
-    func_xk2_800EBEF4();
-    func_xk2_800EBE14();
+void CourseEdit_UpdateRegisterFileMenu(void) {
+    CourseEdit_UpdateRegisterFileMenuOption();
+    CourseEdit_RegisterFileMenuHandleAPress();
+    CourseEdit_RegisterFileMenuHandleBPress();
 }
 
 extern s32 gCourseEditFileOption;
@@ -366,15 +366,15 @@ extern s32 D_80119880;
 void func_xk2_800ECD90(void) {
 
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
-        ExpansionKit_NameEntryInit(func_xk1_8002AC24);
+        ExpansionKit_NameEntryInit(ExpansionKit_CourseEditNameEntryCallback);
         gExpansionKitNameEntryStrLength = mfsStrLen(gExpansionKitNameEntryStr);
-        D_800D6CA0.state = COURSE_EDIT_NAME_ENTRY;
+        gCourseEditContext.state = COURSE_EDIT_NAME_ENTRY;
         D_80119880 = 9;
         func_xk1_8002AEB4(9, 4);
     }
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) {
         Audio_TriggerSystemSE(NA_SE_37);
-        D_800D6CA0.state = 0;
+        gCourseEditContext.state = 0;
         gCourseEditFileOption = -1;
     }
 }
@@ -408,7 +408,7 @@ s32 CourseEdit_Update(void) {
     if (gInCourseEditTestRun) {
         return CourseEdit_TestRunUpdate();
     }
-    if (!gCourseEditCameraOnlyMode && (D_800D6CA0.state != 0xFF)) {
+    if (!gCourseEditCameraOnlyMode && (gCourseEditContext.state != 0xFF)) {
         func_xk2_800DEE20();
     }
     if (gInCourseEditTestRun) {
@@ -420,12 +420,12 @@ s32 CourseEdit_Update(void) {
     if (!gInCourseEditTestRun) {
         func_80074744();
     }
-    switch (D_800D6CA0.state) {
+    switch (gCourseEditContext.state) {
         case 0x38:
             if (D_80794E14) {
                 break;
             }
-            D_800D6CA0.state = 0;
+            gCourseEditContext.state = 0;
             break;
         case 0x13:
             if (D_80794E14) {
@@ -434,7 +434,7 @@ s32 CourseEdit_Update(void) {
             if (D_80794E10 && (D_xk2_800F7400 == 0)) {
                 func_xk2_800EF78C();
                 func_xk2_800EACB0();
-                D_800D6CA0.state = 0;
+                gCourseEditContext.state = 0;
             }
             break;
         case 0x14:
@@ -444,14 +444,14 @@ s32 CourseEdit_Update(void) {
             switch (D_80119880) {
                 case -1:
                 case 1:
-                    func_8076814C(MFS_ENTRY_WORKING_DIR, D_xk1_8003A598.name, &D_xk1_8003A598.extension,
+                    func_8076814C(MFS_ENTRY_WORKING_DIR, D_xk1_8003A598.name, D_xk1_8003A598.extension,
                                   COURSE_CONTEXT(), sizeof(CourseContext), 0, 0xFF, true);
-                    D_800D6CA0.state = 0x12;
+                    gCourseEditContext.state = 0x12;
                     break;
                 case 9:
-                    func_807681C8(MFS_ENTRY_WORKING_DIR, D_xk1_8003A598.name, &D_xk1_8003A598.extension,
+                    func_807681C8(MFS_ENTRY_WORKING_DIR, D_xk1_8003A598.name, D_xk1_8003A598.extension,
                                   &D_xk2_800F7408, sizeof(CourseContext), 0, 0xFF, true);
-                    D_800D6CA0.state = 0x12;
+                    gCourseEditContext.state = 0x12;
                     break;
             }
             break;
@@ -463,18 +463,18 @@ s32 CourseEdit_Update(void) {
                 case -1:
                 case 1:
                     if (COURSE_CONTEXT()->courseData.flag == 0) {
-                        func_xk2_800EBFE8(D_xk1_8003A598.name);
-                        D_800D6CA0.state = 0x22;
+                        CourseEdit_EraseTrackName(D_xk1_8003A598.name);
+                        gCourseEditContext.state = 0x22;
                     } else {
-                        D_800D6CA0.state = 0;
+                        gCourseEditContext.state = 0;
                     }
                     break;
                 case 9:
                     if (D_xk2_800F7408.courseData.flag == 0) {
-                        func_xk2_800EBFE8(D_xk1_8003A598.name);
-                        D_800D6CA0.state = 0x22;
+                        CourseEdit_EraseTrackName(D_xk1_8003A598.name);
+                        gCourseEditContext.state = 0x22;
                     } else {
-                        D_800D6CA0.state = 0;
+                        gCourseEditContext.state = 0;
                     }
                     break;
             }
@@ -486,14 +486,14 @@ s32 CourseEdit_Update(void) {
             if (D_80794E14) {
                 break;
             }
-            D_800D6CA0.state = 0;
+            gCourseEditContext.state = 0;
             break;
-        case 0x31:
+        case COURSE_EDIT_STATE_49:
             if (D_80794E14 == 0) {
-                func_xk2_800EB018();
+                CourseEdit_SetupFileMenu();
             }
             break;
-        case 0x1:
+        case COURSE_EDIT_IN_MENU:
             func_xk2_800EC9BC();
             break;
         case 0x10:
@@ -505,19 +505,19 @@ s32 CourseEdit_Update(void) {
         case COURSE_EDIT_NAME_ENTRY:
             ExpansionKit_NameEntryUpdate(&gCourseEditMenuCursorXPos, &gCourseEditMenuCursorYPos);
             break;
-        case 0x20:
-            func_xk2_800ECD60();
+        case COURSE_EDIT_REGISTER_FILE_MENU:
+            CourseEdit_UpdateRegisterFileMenu();
             break;
         case 0x30:
             func_xk2_800ECD90();
             break;
-        case 0x3:
+        case COURSE_EDIT_IN_FILE_MENU:
             EKFileMenu_UpdateOptionIndex();
             if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
-                func_xk2_800EB400();
+                CourseEdit_FileMenuHandleAPress();
             }
             if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) {
-                func_xk2_800EB3B4();
+                CourseEdit_FileMenuHandleBPress();
             }
             break;
         case 0x22:
@@ -525,7 +525,7 @@ s32 CourseEdit_Update(void) {
                 break;
             }
             func_xk2_800EC174();
-            D_800D6CA0.state = 0x37;
+            gCourseEditContext.state = 0x37;
             break;
         case COURSE_EDIT_SELECTION_BOX:
             func_xk2_800D950C();
@@ -533,40 +533,40 @@ s32 CourseEdit_Update(void) {
                 CourseEdit_UpdateSelectionBoxEnd();
             } else {
                 func_xk2_800DC2D0();
-                D_800D6CA0.state = 0;
+                gCourseEditContext.state = 0;
             }
             break;
-        case 0x32:
+        case COURSE_EDIT_STATE_50:
             if (D_80794E14 == 0) {
-                D_800D6CA0.state = 0x31;
+                gCourseEditContext.state = COURSE_EDIT_STATE_49;
             }
             break;
         case 0x33:
             if (D_80794E14 == 0) {
-                D_800D6CA0.state = 0x30;
+                gCourseEditContext.state = 0x30;
             }
             break;
         case 0x34:
             if (D_80794E14 == 0) {
                 D_xk1_80032BF8 = false;
-                D_800D6CA0.state = 0x35;
+                gCourseEditContext.state = 0x35;
             }
             break;
         case 0x35:
             func_xk1_8002AC70();
             break;
-        case 0x36:
+        case COURSE_EDIT_VALIDATE_FILE_NAMES:
             if (D_80794E14) {
                 break;
             }
-            func_xk2_800EBA34();
+            CourseEdit_ValidateRegisteredTrackNames();
             break;
         case 0x37:
             if (D_80794E14) {
                 break;
             }
             func_8070405C(true);
-            D_800D6CA0.state = 0;
+            gCourseEditContext.state = 0;
             break;
         case 0x11:
             func_xk2_800DF370();
@@ -579,14 +579,14 @@ s32 CourseEdit_Update(void) {
                 gCourseEditEntryOption = -1;
                 Audio_TriggerSystemSE(NA_SE_5);
                 func_8070405C(true);
-                D_800D6CA0.state = 0;
+                gCourseEditContext.state = 0;
             }
             break;
         case 0xFD:
             sCourseEditExitDelayFrames++;
             if (sCourseEditExitDelayFrames >= 3) {
                 sCourseEditExitDelayFrames = 0;
-                D_800D6CA0.state = 0;
+                gCourseEditContext.state = 0;
                 CourseEdit_Exit();
                 return GAMEMODE_FLX_MAIN_MENU;
             }
@@ -594,7 +594,7 @@ s32 CourseEdit_Update(void) {
         default:
             if ((CourseEdit_CheckForExit()) && !gCourseEditCameraOnlyMode) {
                 sCourseEditExitDelayFrames = 0;
-                D_800D6CA0.state = 0xFD;
+                gCourseEditContext.state = 0xFD;
             } else if (gCourseEditCameraOnlyMode) {
                 CourseEdit_UpdateControlPointHighlight();
                 func_xk2_800D7058();

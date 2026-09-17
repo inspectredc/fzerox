@@ -651,7 +651,7 @@ void EKFileMenu_QSort(s8* startPtr, s32 listLength, s32 elementSize, s32 (*compa
     }
 }
 
-void func_xk1_8002D16C(void) {
+void EKFileMenu_LoadOfficialCourseList(void) {
     s32 i;
     s32 j;
     s32 k;

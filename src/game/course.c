@@ -4734,7 +4734,7 @@ block_68:
 }
 
 #ifdef EXPANSION_KIT
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 
 s32 func_i2_800BE8BC(CourseInfo* courseInfo) {
     s32 var_s3 = -1;
@@ -4753,7 +4753,7 @@ s32 func_i2_800BE8BC(CourseInfo* courseInfo) {
         segment = segment->next;
     } while (segment != courseInfo->courseSegments);
 
-    D_800D6CA0.unreasonableControlPoint = var_s3;
+    gCourseEditContext.unreasonableControlPoint = var_s3;
     return var_s3;
 }
 

@@ -11,7 +11,7 @@ s32* D_xk1_8003A518[12];
 s32* D_xk1_8003A548;
 u16* D_xk1_8003A54C;
 
-u8 D_80030060[9] = { 0 };
+u8 gCourseEditCourseTitleEncStr[9] = { 0 };
 u8 D_8003006C[9] = { 0 };
 
 UNUSED s32 D_80030078 = 0;

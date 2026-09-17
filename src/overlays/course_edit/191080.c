@@ -140,7 +140,7 @@ extern s32 D_80119880;
 extern u16* gCourseEditIconTextures[];
 extern u8 D_80794E14;
 extern s32 gCourseEditDetailedCourseEnabled;
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 
 extern s32 gCourseEditCursorXPos;
 extern s32 gCourseEditCursorYPos;
@@ -184,7 +184,7 @@ Gfx* CourseEdit_DrawMain(Gfx* gfx) {
     gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if ((D_802CB6D0.controlPointCount >= 4) && (gCourseEditDrawDetailedCourse == 1) &&
-        (D_800D6CA0.unreasonableControlPoint == -1)) {
+        (gCourseEditContext.unreasonableControlPoint == -1)) {
         gSPDisplayList(gfx++, D_9014BA0);
         if (D_xk2_800F7404 == 0) {
             gfx = Course_DrawEditCourse(gfx);
@@ -192,7 +192,7 @@ Gfx* CourseEdit_DrawMain(Gfx* gfx) {
     }
     gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    if ((D_802CB6D0.controlPointCount >= 4) && (D_800D6CA0.unreasonableControlPoint == -1) && (D_xk2_800F7404 == 0) &&
+    if ((D_802CB6D0.controlPointCount >= 4) && (gCourseEditContext.unreasonableControlPoint == -1) && (D_xk2_800F7404 == 0) &&
         !gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY]) {
         gfx = Course_GadgetsDraw(gfx, 0);
     }
@@ -234,10 +234,10 @@ Gfx* CourseEdit_DrawMain(Gfx* gfx) {
         gfx = CourseEdit_DrawFileSelectRegisterMenu(gfx);
     }
 
-    if ((D_800D6CA0.state == 0x11) || (D_800D6CA0.state == 0x23) || (D_800D6CA0.state == 0xFF)) {
+    if ((gCourseEditContext.state == 0x11) || (gCourseEditContext.state == 0x23) || (gCourseEditContext.state == 0xFF)) {
         EKFileMenu_DrawYesNoOption(&gfx);
     }
-    if (D_800D6CA0.state == 0xFF) {
+    if (gCourseEditContext.state == 0xFF) {
         func_xk2_800EECD4(&gfx, 0, 72, gCourseEditMessageStrs[30], 30);
     }
     if (!gCourseEditCameraOnlyMode) {
@@ -250,10 +250,10 @@ Gfx* CourseEdit_DrawMain(Gfx* gfx) {
         CourseEdit_DrawMenuWidgetTooltip(&gfx);
     }
     CourseEdit_DrawTooltipIntroHelper(&gfx);
-    if (D_800D6CA0.state == COURSE_EDIT_OPTIONS_MENU) {
+    if (gCourseEditContext.state == COURSE_EDIT_OPTIONS_MENU) {
         CourseEditOptionsMenu_Draw(&gfx);
     }
-    if (D_800D6CA0.state == COURSE_EDIT_NAME_ENTRY) {
+    if (gCourseEditContext.state == COURSE_EDIT_NAME_ENTRY) {
         gfx = ExpansionKit_NameEntryDraw(gfx, &gCourseEditCursorXPos, &gCourseEditCursorYPos);
         if (D_80119880 == 9) {
             s32 x = 24;
@@ -335,11 +335,11 @@ Gfx* CourseEdit_DrawCursor(Gfx* gfx) {
     s32 left;
     s32 top;
 
-    if (D_800D6CA0.moveMode == 1) {
+    if (gCourseEditContext.moveMode == 1) {
         return gfx;
     }
     // clang-format off
-    if (D_800D6CA0.state == 1) {
+    if (gCourseEditContext.state == COURSE_EDIT_IN_MENU) {
         left = gCourseEditMenuCursorXPos; \
         top = gCourseEditMenuCursorYPos;
     } else {
@@ -347,16 +347,16 @@ Gfx* CourseEdit_DrawCursor(Gfx* gfx) {
         top = gCourseEditCursorYPos;
     }
     // clang-format on
-    if (D_800D6CA0.state == 0x20) {
+    if (gCourseEditContext.state == COURSE_EDIT_REGISTER_FILE_MENU) {
         return gfx;
     }
-    if (D_800D6CA0.state == COURSE_EDIT_OPTIONS_MENU) {
+    if (gCourseEditContext.state == COURSE_EDIT_OPTIONS_MENU) {
         return gfx;
     }
-    if (D_800D6CA0.state == 3) {
+    if (gCourseEditContext.state == COURSE_EDIT_IN_FILE_MENU) {
         return gfx;
     }
-    if (D_800D6CA0.state == 0x10) {
+    if (gCourseEditContext.state == 0x10) {
         return gfx;
     }
     gSPDisplayList(gfx++, D_8014940);
@@ -371,7 +371,7 @@ Gfx* CourseEdit_DrawCursor(Gfx* gfx) {
 
 extern u32 gGameFrameCount;
 extern s32 D_800DCCFC;
-extern unk_80128690 D_80128690[];
+extern SegmentSplitInfo gCourseEditSegmentSplitInfos[];
 
 Gfx* CourseEdit_DrawControlPoints(Gfx* gfx) {
     s32 i;
@@ -390,13 +390,13 @@ Gfx* CourseEdit_DrawControlPoints(Gfx* gfx) {
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         gDPPipeSync(gfx++);
-        if (D_80128690[i].isSelected) {
+        if (gCourseEditSegmentSplitInfos[i].isSelected) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-        } else if ((i == D_800D6CA0.overlappingControlPoint) && (D_800DCCFC != 0)) {
+        } else if ((i == gCourseEditContext.overlappingControlPoint) && (D_800DCCFC != 0)) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-        } else if ((i == D_800D6CA0.unreasonableControlPoint) && (D_800DCCFC != 0)) {
+        } else if ((i == gCourseEditContext.unreasonableControlPoint) && (D_800DCCFC != 0)) {
             gDPSetPrimColor(gfx++, 0, 0, 255, 0, 0, 255);
-        } else if ((i == closestControlPoint) && (D_800D6CA0.moveMode != 1)) {
+        } else if ((i == closestControlPoint) && (gCourseEditContext.moveMode != 1)) {
             if (D_800DCCFC != 0) {
                 gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
             } else {
@@ -418,7 +418,7 @@ Gfx* CourseEdit_DrawControlPoints(Gfx* gfx) {
             continue;
         }
 
-        if (D_80128690[i].isSelected) {
+        if (gCourseEditSegmentSplitInfos[i].isSelected) {
             pulseScale = ((gGameFrameCount % 10) * 0.2f) + 1.0f;
         } else {
             pulseScale = 1.0f;
@@ -440,8 +440,8 @@ s32 CourseEdit_GetSplitControlPoint(s32 split) {
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         segment = &D_802CB6D0.segments[i];
-        startSplit = D_80128690[segment->segmentIndex].startSplit;
-        endSplit = D_80128690[segment->segmentIndex].endSplit;
+        startSplit = gCourseEditSegmentSplitInfos[segment->segmentIndex].startSplit;
+        endSplit = gCourseEditSegmentSplitInfos[segment->segmentIndex].endSplit;
         if (startSplit > endSplit) {
             startSplit = 0;
         }
@@ -467,7 +467,7 @@ Gfx* CourseEdit_DrawCourseLines(Gfx* gfx) {
     gDPSetPrimColor(gfx++, 0, 0, 64, 64, 64, 255);
     gDPSetRenderMode(gfx++, G_RM_AA_OPA_SURF, G_RM_NOOP2);
 
-    if ((D_800D6CA0.unreasonableControlPoint != -1) || (D_802CB6D0.controlPointCount < 4)) {
+    if ((gCourseEditContext.unreasonableControlPoint != -1) || (D_802CB6D0.controlPointCount < 4)) {
         return CourseEdit_DrawControlPointDirectLines(gfx);
     }
     if (gCourseEditDrawDetailedCourse != 0) {
@@ -478,7 +478,7 @@ Gfx* CourseEdit_DrawCourseLines(Gfx* gfx) {
     }
 
     for (i = 0; i < gCourseEditCourseSplitIndex; i++) {
-        if ((CourseEdit_GetSplitControlPoint(i) == D_800D6CA0.selectedControlPoint) && (D_800DCD04 == 0) &&
+        if ((CourseEdit_GetSplitControlPoint(i) == gCourseEditContext.selectedControlPoint) && (D_800DCD04 == 0) &&
             (gCreateOption != CREATE_OPTION_POINT)) {
             continue;
         }
@@ -508,12 +508,12 @@ Gfx* CourseEdit_DrawSelectedSegmentLine(Gfx* gfx) {
         return gfx;
     }
 
-    if (D_800D6CA0.unreasonableControlPoint != -1) {
+    if (gCourseEditContext.unreasonableControlPoint != -1) {
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
         gDPSetRenderMode(gfx++, G_RM_AA_OPA_SURF, G_RM_NOOP2);
-        if (D_800D6CA0.selectedControlPoint != -1) {
-            start = D_800D6CA0.selectedControlPoint;
+        if (gCourseEditContext.selectedControlPoint != -1) {
+            start = gCourseEditContext.selectedControlPoint;
         } else {
             start = 0;
         }
@@ -544,14 +544,14 @@ Gfx* CourseEdit_DrawSelectedSegmentLine(Gfx* gfx) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255 - D_xk2_800F7034);
     gDPSetRenderMode(gfx++, G_RM_AA_XLU_SURF, G_RM_NOOP2);
 
-    if (D_800D6CA0.selectedControlPoint != -1) {
-        segment = &D_802CB6D0.segments[D_800D6CA0.selectedControlPoint];
+    if (gCourseEditContext.selectedControlPoint != -1) {
+        segment = &D_802CB6D0.segments[gCourseEditContext.selectedControlPoint];
     } else {
         segment = &D_802CB6D0.segments[0];
     }
 
-    start = D_80128690[segment->segmentIndex].startSplit;
-    end = D_80128690[segment->segmentIndex].endSplit;
+    start = gCourseEditSegmentSplitInfos[segment->segmentIndex].startSplit;
+    end = gCourseEditSegmentSplitInfos[segment->segmentIndex].endSplit;
 
     if (end < start) {
         for (i = 0; i < end; i++) {
@@ -578,8 +578,8 @@ Gfx* CourseEdit_DrawSegmentLine(Gfx* gfx, s32 controlPoint) {
     s32 endSplit;
     s32 i;
 
-    startSplit = D_80128690[controlPoint].startSplit;
-    endSplit = D_80128690[controlPoint].endSplit;
+    startSplit = gCourseEditSegmentSplitInfos[controlPoint].startSplit;
+    endSplit = gCourseEditSegmentSplitInfos[controlPoint].endSplit;
 
     if (endSplit < startSplit) {
         if (startSplit < 0x10000) {
@@ -692,7 +692,7 @@ Gfx* CourseEdit_DrawPartsLines(Gfx* gfx) {
     if (gCreateOption != CREATE_OPTION_PARTS) {
         return gfx;
     }
-    if (D_800D6CA0.unreasonableControlPoint != -1) {
+    if (gCourseEditContext.unreasonableControlPoint != -1) {
         return gfx;
     }
     gDPPipeSync(gfx++);
@@ -1204,7 +1204,7 @@ void CourseEdit_DrawMoveInfo(Gfx** gfxP) {
     CourseEdit_LoadInfoFontSheet(&gfx2);
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (!D_80128690[i].isSelected) {
+        if (!gCourseEditSegmentSplitInfos[i].isSelected) {
             continue;
         }
         switch (gMoveOption) {
@@ -1516,11 +1516,11 @@ extern s32 D_xk1_80030608;
 
 void func_xk2_800E5570(void) {
 
-    if (D_800D6CA0.state != 0) {
+    if (gCourseEditContext.state != 0) {
         return;
     }
-    D_xk2_800F7050 = D_800D6CA0.newSegment.pos.x;
-    D_xk2_800F7054 = D_800D6CA0.newSegment.pos.z;
+    D_xk2_800F7050 = gCourseEditContext.newSegment.pos.x;
+    D_xk2_800F7054 = gCourseEditContext.newSegment.pos.z;
     if (D_xk2_800F7050 < -32000) {
         D_xk2_800F7050 = -32000;
     }
@@ -1616,14 +1616,14 @@ void func_xk2_800E5A38(s32 arg0) {
     if ((D_802CB6D0.controlPointCount >= 4) && (gCurrentCourseInfo->length < 3000.0f)) {
         gCourseEditErrors[COURSE_EDIT_ERROR_TOO_SHORT] = true;
     }
-    if (D_800D6CA0.state != 0x10) {
+    if (gCourseEditContext.state != 0x10) {
         if (D_xk2_800F7040 == 3) {
-            D_800D6CA0.overlappingControlPoint = -1;
+            gCourseEditContext.overlappingControlPoint = -1;
             D_xk2_800F706C = -1;
             if (arg0 & 0x10000) {
                 gCourseEditErrors[COURSE_EDIT_ERROR_ROADS_OVERLAP] = true;
                 D_xk2_800F706C = arg0 & 0xFFFF;
-                D_800D6CA0.overlappingControlPoint = func_xk2_800E9134(D_xk2_800F706C);
+                gCourseEditContext.overlappingControlPoint = func_xk2_800E9134(D_xk2_800F706C);
             }
         } else {
             D_xk2_800F7068 = -1;
@@ -1654,7 +1654,7 @@ void func_xk2_800E5B6C(void) {
         func_xk2_800E5A38(0);
     } else if (D_xk2_800F7040 != 0) {
         if (D_xk2_800F6820 != 0) {
-            if (D_800D6CA0.moveMode == 1) {
+            if (gCourseEditContext.moveMode == 1) {
                 func_800A4D0C(0);
             } else if (D_xk2_800F7040 == 3) {
                 func_800A4D0C(2);
@@ -1665,12 +1665,12 @@ void func_xk2_800E5B6C(void) {
             func_800A4D0C(0);
         }
         gCourseEditErrors[COURSE_EDIT_ERROR_UNREASONABLE_POINTS] = false;
-        D_800D6CA0.unreasonableControlPoint = func_i2_800B39B4(gCurrentCourseInfo);
+        gCourseEditContext.unreasonableControlPoint = func_i2_800B39B4(gCurrentCourseInfo);
 
-        if (D_800D6CA0.unreasonableControlPoint == -1) {
-            D_800D6CA0.unreasonableControlPoint = func_i2_800BE8BC(gCurrentCourseInfo);
+        if (gCourseEditContext.unreasonableControlPoint == -1) {
+            gCourseEditContext.unreasonableControlPoint = func_i2_800BE8BC(gCurrentCourseInfo);
         }
-        if (D_800D6CA0.unreasonableControlPoint != -1) {
+        if (gCourseEditContext.unreasonableControlPoint != -1) {
             D_xk2_800F7068 = -1;
             D_xk2_800F706C = -1;
             gSegmentChunkCount = 0;
@@ -1743,7 +1743,7 @@ void func_xk2_800E5D90(CourseInfo* courseInfo) {
         dirVec.y = nextPos.y - pos.y;
         dirVec.z = nextPos.z - pos.z;
         Math_VectorSetScale(&dirVec, distance);
-        D_80128690[i].startSplit = var_s1;
+        gCourseEditSegmentSplitInfos[i].startSplit = var_s1;
 
         for (j = 0; j < var_s3; j++, var_s1++) {
             gCourseEditCourseSplitInfos[var_s1].pos.x = (j * dirVec.x) + pos.x;
@@ -1752,12 +1752,12 @@ void func_xk2_800E5D90(CourseInfo* courseInfo) {
             gCourseEditCourseSplitInfos[var_s1].trackSegmentInfo = segment->trackSegmentInfo;
         }
 
-        D_80128690[i].endSplit = var_s1;
+        gCourseEditSegmentSplitInfos[i].endSplit = var_s1;
         if (var_s1 > 832) {
             break;
         }
     }
-    D_80128690[0].startSplit = var_s1;
+    gCourseEditSegmentSplitInfos[0].startSplit = var_s1;
     gCourseEditCourseSplitIndex = var_s1;
 }
 
@@ -1785,7 +1785,7 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
     courseInfo->segmentCount = D_802CB6D0.controlPointCount;
     startSegment = segment;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        D_80128690[i].startSplit = 0x10000;
+        gCourseEditSegmentSplitInfos[i].startSplit = 0x10000;
     }
 
     while (true) {
@@ -1794,7 +1794,7 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
             break;
         }
         chunkIndex = segment->startChunk - gSegmentChunks;
-        D_80128690[segment->segmentIndex].startSplit = gCourseEditCourseSplitIndex;
+        gCourseEditSegmentSplitInfos[segment->segmentIndex].startSplit = gCourseEditCourseSplitIndex;
         splitInfo->pos = segment->pos;
         splitInfo->trackSegmentInfo = segment->trackSegmentInfo;
         splitInfo->segmentTValue = 0.0f;
@@ -1837,7 +1837,7 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
                 if (gCourseEditCourseSplitIndex >= 896) {
                     gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] =
                         gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
-                    D_80128690[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
+                    gCourseEditSegmentSplitInfos[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
                     break;
                 }
             }
@@ -1851,7 +1851,7 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
                     break;
                 }
 
-                if ((gCourseEditCourseSplitIndex == (D_80128690[segment->segmentIndex].startSplit + 1)) &&
+                if ((gCourseEditCourseSplitIndex == (gCourseEditSegmentSplitInfos[segment->segmentIndex].startSplit + 1)) &&
                     (gSegmentChunks[chunkIndex].segmentTValue > 0.5f)) {
                     splitInfo->trackSegmentInfo = segment->trackSegmentInfo;
                     splitInfo->segmentTValue = 0.5f;
@@ -1874,18 +1874,18 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
                 if (gSegmentChunkCount < chunkIndex) {
                     gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] =
                         gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
-                    D_80128690[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
+                    gCourseEditSegmentSplitInfos[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
                     break;
                 }
 
                 if (gCourseEditCourseSplitIndex >= 896) {
                     gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] =
                         gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
-                    D_80128690[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
+                    gCourseEditSegmentSplitInfos[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
                     break;
                 }
             }
-            if (gCourseEditCourseSplitIndex == (D_80128690[segment->segmentIndex].startSplit + 1)) {
+            if (gCourseEditCourseSplitIndex == (gCourseEditSegmentSplitInfos[segment->segmentIndex].startSplit + 1)) {
                 Course_SplineGetPosition(segment, 0.5f, &pos);
                 splitInfo->pos = pos;
                 splitInfo->trackSegmentInfo = segment->trackSegmentInfo;
@@ -1898,13 +1898,13 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
                 if (gCourseEditCourseSplitIndex >= 896) {
                     gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] =
                         gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex - 1];
-                    D_80128690[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
+                    gCourseEditSegmentSplitInfos[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
                     break;
                 }
             }
         }
 
-        D_80128690[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
+        gCourseEditSegmentSplitInfos[segment->segmentIndex].endSplit = gCourseEditCourseSplitIndex;
         gCourseEditCourseSplitInfos[gCourseEditCourseSplitIndex] = gCourseEditCourseSplitInfos[0];
 
         segment = segment->next;
@@ -1931,7 +1931,7 @@ bool CourseEdit_CheckInvalidJoins(void) {
     CourseSegment* segment;
 
     invalidJoin = false;
-    if (D_800D6CA0.state == COURSE_EDIT_NAME_ENTRY) {
+    if (gCourseEditContext.state == COURSE_EDIT_NAME_ENTRY) {
         return false;
     }
     segment = D_802CB6D0.segments;
@@ -1988,7 +1988,7 @@ void CourseEdit_AddNewSegment(s32 selectedControlPoint, CourseSegment newSegment
             D_802CB6D0.segments[i].segmentIndex = i;
 
             COURSE_CONTEXT()->courseData.bankAngle[i] = COURSE_CONTEXT()->courseData.bankAngle[i - 1];
-            D_80128690[i] = D_80128690[i - 1];
+            gCourseEditSegmentSplitInfos[i] = gCourseEditSegmentSplitInfos[i - 1];
 
             COURSE_CONTEXT()->courseData.pit[i] = COURSE_CONTEXT()->courseData.pit[i - 1];
             COURSE_CONTEXT()->courseData.dash[i] = COURSE_CONTEXT()->courseData.dash[i - 1];
@@ -2023,7 +2023,7 @@ void CourseEdit_AddNewSegment(s32 selectedControlPoint, CourseSegment newSegment
     COURSE_CONTEXT()->courseData.gate[selectedControlPoint + 1] = GATE_NONE;
     COURSE_CONTEXT()->courseData.building[selectedControlPoint + 1] = BUILDING_NONE;
     COURSE_CONTEXT()->courseData.sign[selectedControlPoint + 1] = SIGN_NONE;
-    D_800D6CA0.selectedControlPoint = selectedControlPoint + 1;
+    gCourseEditContext.selectedControlPoint = selectedControlPoint + 1;
 
     D_802CB6D0.controlPointCount++;
     gCourseEditMiniMachineCharacter = Math_Rand2() % 30;
@@ -2155,7 +2155,7 @@ Gfx* CourseEdit_DrawControlPointDirectLines(Gfx* gfx) {
     }
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if ((i == D_800D6CA0.selectedControlPoint) && (D_800DCD04 != 0)) {
+        if ((i == gCourseEditContext.selectedControlPoint) && (D_800DCD04 != 0)) {
             continue;
         }
         gSPVertex(gfx++, &D_6000000.unk_0180[i * 6], 1, 0);
@@ -2179,7 +2179,7 @@ Gfx* CourseEdit_DrawSelectionBox(Gfx* gfx) {
     if (gCourseEditCameraOnlyMode) {
         return gfx;
     }
-    if (D_800D6CA0.state != COURSE_EDIT_SELECTION_BOX) {
+    if (gCourseEditContext.state != COURSE_EDIT_SELECTION_BOX) {
         return gfx;
     }
     if (gCreateOption != CREATE_OPTION_POINT) {
@@ -2218,22 +2218,22 @@ Gfx* CourseEdit_DrawSelectionBox(Gfx* gfx) {
     return gfx;
 }
 
-void func_xk2_800E77F0(void) {
-    D_800D6CA0.moveMode = 0;
-    D_800D6CA0.unk_04 = 0;
-    D_800D6CA0.state = 0;
-    D_800D6CA0.newSegment.trackSegmentInfo = TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000;
-    D_800D6CA0.unreasonableControlPoint = -1;
-    D_800D6CA0.overlappingControlPoint = -1;
-    D_800D6CA0.unk_24 = 0;
-    D_800D6CA0.selectedControlPoint = -1;
-    D_800D6CA0.unk_10 = -1;
-    D_800D6CA0.courseYaw = 0;
-    D_800D6CA0.newSegment.radiusLeft = 260.0f;
-    D_800D6CA0.newSegment.radiusRight = 260.0f;
-    D_800D6CA0.newSegment.up.x = 0.0f;
-    D_800D6CA0.newSegment.up.y = 1.0f;
-    D_800D6CA0.newSegment.up.z = 0.0f;
+void CourseEdit_InitContext(void) {
+    gCourseEditContext.moveMode = 0;
+    gCourseEditContext.unk_04 = 0;
+    gCourseEditContext.state = 0;
+    gCourseEditContext.newSegment.trackSegmentInfo = TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000;
+    gCourseEditContext.unreasonableControlPoint = -1;
+    gCourseEditContext.overlappingControlPoint = -1;
+    gCourseEditContext.unk_24 = 0;
+    gCourseEditContext.selectedControlPoint = -1;
+    gCourseEditContext.unk_10 = -1;
+    gCourseEditContext.courseYaw = 0;
+    gCourseEditContext.newSegment.radiusLeft = 260.0f;
+    gCourseEditContext.newSegment.radiusRight = 260.0f;
+    gCourseEditContext.newSegment.up.x = 0.0f;
+    gCourseEditContext.newSegment.up.y = 1.0f;
+    gCourseEditContext.newSegment.up.z = 0.0f;
 }
 
 void func_xk2_800E7854(void) {
@@ -2257,14 +2257,14 @@ void func_xk2_800E7854(void) {
     func_xk2_800E7A78();
     Course_UpdateSignRotation();
     func_80703234();
-    if ((D_802CB6D0.controlPointCount >= 4) && (D_800D6CA0.unreasonableControlPoint == -1)) {
+    if ((D_802CB6D0.controlPointCount >= 4) && (gCourseEditContext.unreasonableControlPoint == -1)) {
         Course_FeaturesInit(0);
         if (D_xk2_800F7040 != 0) {
             Course_EffectsInit(0);
         }
         Course_LandminesViewInteractDataInit();
         Course_JumpsViewInteractDataInit();
-        if (D_800D6CA0.moveMode == 1) {
+        if (gCourseEditContext.moveMode == 1) {
             Course_EffectsViewInteractDataInit(true);
         } else if (D_xk2_800F7040 != 0) {
             Course_EffectsViewInteractDataInit(false);
@@ -2281,7 +2281,7 @@ void func_xk2_800E7990(void) {
     s32 i;
 
     gCourseEditErrors[COURSE_EDIT_ERROR_TOO_LOW] = false;
-    if (D_800D6CA0.unreasonableControlPoint != -1) {
+    if (gCourseEditContext.unreasonableControlPoint != -1) {
         return;
     }
     if (D_802CB6D0.controlPointCount < 4) {
@@ -2307,7 +2307,7 @@ void func_xk2_800E7A78(void) {
     s32 i;
 
     gCourseEditErrors[COURSE_EDIT_ERROR_EXTENDS_OOB] = false;
-    if (D_800D6CA0.unreasonableControlPoint != -1) {
+    if (gCourseEditContext.unreasonableControlPoint != -1) {
         return;
     }
     if (D_802CB6D0.controlPointCount < 4) {
@@ -2348,7 +2348,7 @@ void func_xk2_800E7BA8(void) {
     f32 var_fs1;
 
     var_fs1 = 200.0f;
-    if (D_800D6CA0.unreasonableControlPoint != -1) {
+    if (gCourseEditContext.unreasonableControlPoint != -1) {
         return;
     }
     if (D_802CB6D0.controlPointCount < 4) {
@@ -2575,7 +2575,7 @@ Gfx* CourseEdit_DrawMenu(Gfx* gfx) {
     return gfx;
 }
 
-extern u8 D_80030060[];
+extern u8 gCourseEditCourseTitleEncStr[];
 
 Gfx* CourseEdit_DrawCourseTitle(Gfx* gfx) {
 
@@ -2593,13 +2593,13 @@ Gfx* CourseEdit_DrawCourseTitle(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_3000540);
 
-    if (D_80030060[0] == '\0') {
+    if (gCourseEditCourseTitleEncStr[0] == '\0') {
         gDPSetPrimColor(gfx++, 0, 0, 255, 64, 64, 0);
         return ExpansionKit_DrawEncStr(gfx, 232, 178, "No Title");
     }
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 0);
-    return ExpansionKit_DrawEncStr(gfx, 232, 178, "%s", D_80030060);
+    return ExpansionKit_DrawEncStr(gfx, 232, 178, "%s", gCourseEditCourseTitleEncStr);
 }
 
 s32 func_xk2_800E9134(s32 chunkIndex) {
@@ -2668,7 +2668,7 @@ void CourseEdit_DrawOverlapMouseClick(Gfx** gfxP) {
     s32 screenPosY;
     Vec3f pos;
 
-    if (D_800D6CA0.unreasonableControlPoint != -1) {
+    if (gCourseEditContext.unreasonableControlPoint != -1) {
         return;
     }
     gfx = *gfxP;
@@ -2679,8 +2679,8 @@ void CourseEdit_DrawOverlapMouseClick(Gfx** gfxP) {
         }
     }
 
-    if (D_800D6CA0.overlappingControlPoint != -1) {
-        pos = D_802CB6D0.segments[D_800D6CA0.overlappingControlPoint].pos;
+    if (gCourseEditContext.overlappingControlPoint != -1) {
+        pos = D_802CB6D0.segments[gCourseEditContext.overlappingControlPoint].pos;
         if (CourseEdit_GetScreenPosition(pos, &screenPosX, &screenPosY) == 0) {
             CourseEdit_DrawMouseClick(&gfx, screenPosX, screenPosY);
         }
@@ -2694,15 +2694,15 @@ void CourseEdit_DrawUnreasonablePointMouseClick(Gfx** gfxP) {
     s32 screenPosY;
     Vec3f pos;
 
-    if (D_800D6CA0.unreasonableControlPoint == -1) {
+    if (gCourseEditContext.unreasonableControlPoint == -1) {
         return;
     }
     if (D_802CB6D0.controlPointCount < 4) {
-        D_800D6CA0.unreasonableControlPoint = -1;
+        gCourseEditContext.unreasonableControlPoint = -1;
         return;
     }
     gfx = *gfxP;
-    pos = D_802CB6D0.segments[D_800D6CA0.unreasonableControlPoint].pos;
+    pos = D_802CB6D0.segments[gCourseEditContext.unreasonableControlPoint].pos;
     if (CourseEdit_GetScreenPosition(pos, &screenPosX, &screenPosY) == 0) {
         CourseEdit_DrawMouseClick(&gfx, screenPosX, screenPosY);
     }
@@ -2756,7 +2756,7 @@ void CourseEdit_DrawTooLowMouseClick(Gfx** gfxP) {
     s32 screenPosX;
     s32 screenPosY;
 
-    if (D_800D6CA0.unreasonableControlPoint != -1) {
+    if (gCourseEditContext.unreasonableControlPoint != -1) {
         return;
     }
     if (D_802CB6D0.controlPointCount < 4) {
@@ -2781,7 +2781,7 @@ void CourseEdit_DrawMidPointOOBMouseClick(Gfx** gfxP) {
     s32 i;
     Gfx* gfx;
 
-    if (D_800D6CA0.unreasonableControlPoint != -1) {
+    if (gCourseEditContext.unreasonableControlPoint != -1) {
         return;
     }
     if (D_802CB6D0.controlPointCount < 4) {
@@ -2815,10 +2815,10 @@ s32 CourseEdit_UpdateHighlightedIconIndex(void) {
         gCourseEditHighlightedIconIndex = -1;
         return -1;
     }
-    if (D_800D6CA0.state != 0) {
+    if (gCourseEditContext.state != 0) {
         return -1;
     }
-    if (D_800D6CA0.moveMode == 1) {
+    if (gCourseEditContext.moveMode == 1) {
         gCourseEditHighlightedIconIndex = -1;
         return -1;
     }
@@ -2953,7 +2953,7 @@ extern s32 gCourseEditCourseRegisterIndex;
 
 Gfx* CourseEdit_DrawFileSelectRegisterMenu(Gfx* gfx) {
 
-    if (D_800D6CA0.state != 3) {
+    if (gCourseEditContext.state != COURSE_EDIT_IN_FILE_MENU) {
         return gfx;
     }
     if (D_80119880 == 5) {
@@ -2991,7 +2991,7 @@ Gfx* CourseEdit_DrawMiniMachine(Gfx* gfx) {
     if (D_802CB6D0.controlPointCount < 4) {
         return gfx;
     }
-    if (D_800D6CA0.unreasonableControlPoint != -1) {
+    if (gCourseEditContext.unreasonableControlPoint != -1) {
         return gfx;
     }
     if (gInCourseEditTestRun) {
@@ -3046,7 +3046,7 @@ void CourseEdit_DrawClearCourseWarning(Gfx** gfxP) {
     s32 pad[3];
     Gfx* gfx;
 
-    if (D_800D6CA0.state != 0x11) {
+    if (gCourseEditContext.state != 0x11) {
         return;
     }
     gfx = *gfxP;
@@ -3058,7 +3058,7 @@ void CourseEdit_DrawClearEntryWarning(Gfx** gfxP) {
     s32 pad[3];
     Gfx* gfx;
 
-    if (D_800D6CA0.state != 0x23) {
+    if (gCourseEditContext.state != 0x23) {
         return;
     }
     gfx = *gfxP;

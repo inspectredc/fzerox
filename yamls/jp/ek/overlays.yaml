@@ -238,7 +238,7 @@
       - { type: .bss, vram: 0x800D5810, name: ovl_i2_data1 }
       - { type: .bss, vram: 0x800D58B0, name: ../../game/object }
       - { type: .bss, vram: 0x800D65C0, name: ../../game/course }
-      - { type: .bss, vram: 0x800D6CA0, name: ovl_i2_data2 }
+      - { type: .bss, vram: 0x800D6CA0, name: course_edit_context }
 
   - name: ovl_i9
     exclusive_ram_id: overlay_800D6D90

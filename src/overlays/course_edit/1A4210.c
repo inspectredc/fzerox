@@ -1,4 +1,5 @@
 #include "global.h"
+#include "course_edit.h"
 #include "leo/mfs.h"
 #include "fzx_course.h"
 #include "fzx_expansion_kit.h"
@@ -345,14 +346,14 @@ u8 sEntryDeregisterAllTooltipEncStr[] = {
 
 extern GfxPool* gGfxPool;
 extern unk_807B3C20 D_802CB6D0;
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 extern Vtx* gCourseVtxPtr;
 
 s32 func_xk2_800F2750(void) {
     gCourseVtxPtr = gGfxPool->courseVtxBuffer;
-    gCourseInfos->courseSegments = D_802CB6D0.segments;
-    gCourseInfos->segmentCount = D_802CB6D0.controlPointCount;
-    if (D_800D6CA0.unreasonableControlPoint == -1) {
+    gCourseInfos[0].courseSegments = D_802CB6D0.segments;
+    gCourseInfos[0].segmentCount = D_802CB6D0.controlPointCount;
+    if (gCourseEditContext.unreasonableControlPoint == -1) {
         Course_SegmentContinuousFlagInit(gCourseInfos);
         Course_SegmentFormsInit(gCourseInfos);
         return func_800A1954(gCourseInfos);
@@ -379,7 +380,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
     sp18 = false;
     if (D_802CB6D0.controlPointCount < 4) {
         gExpansionKitYesNoOptionIndex = 0;
-        D_800D6CA0.state = 0x10;
+        gCourseEditContext.state = 0x10;
         D_xk2_80104378 = 9;
         return;
     }
@@ -387,7 +388,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
     for (i = 0; i < ARRAY_COUNT(gCourseEditErrors); i++) {
         if (gCourseEditErrors[i]) {
             gExpansionKitYesNoOptionIndex = 0;
-            D_800D6CA0.state = 0x10;
+            gCourseEditContext.state = 0x10;
             D_xk2_80104378 = 7;
             return;
         }
@@ -395,7 +396,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
     gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] = false;
     if ((func_i2_800B39B4(courseInfo) != -1) || (func_i2_800BE8BC(courseInfo) != -1)) {
         gExpansionKitYesNoOptionIndex = 0;
-        D_800D6CA0.state = 0x10;
+        gCourseEditContext.state = 0x10;
         D_xk2_80104378 = 7;
         return;
     }
@@ -403,12 +404,12 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
     invalidChunkIndexInfo = func_800A1954(courseInfo);
     if (invalidChunkIndexInfo != 0) {
         gExpansionKitYesNoOptionIndex = 0;
-        D_800D6CA0.state = 0x10;
+        gCourseEditContext.state = 0x10;
         D_xk2_80104378 = 7;
         if (invalidChunkIndexInfo & 0x10000) {
             gCourseEditErrors[COURSE_EDIT_ERROR_ROADS_OVERLAP] = true;
             D_xk2_80104364 = 1;
-            D_800D6CA0.overlappingControlPoint = func_xk2_800E9134(invalidChunkIndexInfo & 0xFFFF);
+            gCourseEditContext.overlappingControlPoint = func_xk2_800E9134(invalidChunkIndexInfo & 0xFFFF);
         }
         if (gSegmentChunkCount >= 0x2FF) {
             gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY] = true;
@@ -420,7 +421,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
     Course_EffectsViewInteractDataInit(false);
     if (gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS]) {
         gExpansionKitYesNoOptionIndex = 0;
-        D_800D6CA0.state = 0x10;
+        gCourseEditContext.state = 0x10;
         D_xk2_80104378 = 7;
         sp18 = true;
         func_800A4D0C(0);
@@ -429,13 +430,13 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
     invalidChunkIndexInfo = func_800A1954(courseInfo);
     if (invalidChunkIndexInfo != 0) {
         gExpansionKitYesNoOptionIndex = 0;
-        D_800D6CA0.state = 0x10;
+        gCourseEditContext.state = 0x10;
         D_xk2_80104378 = 7;
         sp18 = true;
         if (invalidChunkIndexInfo & 0x10000) {
             gCourseEditErrors[COURSE_EDIT_ERROR_ROADS_OVERLAP] = true;
             D_xk2_80104364 = 1;
-            D_800D6CA0.overlappingControlPoint = func_xk2_800E9134(invalidChunkIndexInfo & 0xFFFF);
+            gCourseEditContext.overlappingControlPoint = func_xk2_800E9134(invalidChunkIndexInfo & 0xFFFF);
         }
         if (gSegmentChunkCount >= 0x2FF) {
             gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY] = true;
@@ -446,7 +447,7 @@ void func_xk2_800F27DC(CourseInfo* courseInfo) {
     Course_EffectsViewInteractDataInit(false);
     if (gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS]) {
         gExpansionKitYesNoOptionIndex = 0;
-        D_800D6CA0.state = 0x10;
+        gCourseEditContext.state = 0x10;
         D_xk2_80104378 = 7;
         sp18 = true;
         func_800A4D0C(0);
@@ -557,7 +558,7 @@ void func_xk2_800F2E4C(Gfx** gfxP) {
     s32 width;
     s32 height;
 
-    if ((D_800D6CA0.state != 3) || (D_80119880 != 4)) {
+    if ((gCourseEditContext.state != COURSE_EDIT_IN_FILE_MENU) || (D_80119880 != 4)) {
         return;
     }
 
@@ -736,7 +737,7 @@ void CourseEdit_DrawMenuWidgetTooltip(Gfx** gfxP) {
     Gfx* gfx;
     MenuWidget* widget;
 
-    if (!gCourseEditToolTipEnabled || (D_800D6CA0.state != 1)) {
+    if (!gCourseEditToolTipEnabled || (gCourseEditContext.state != COURSE_EDIT_IN_MENU)) {
         return;
     }
     widget = func_xk1_80026914(&gCourseEditWidget);
@@ -920,11 +921,11 @@ void func_xk2_800F3D10(void) {
         gCourseEditIconTextures[3] = aCourseEditGoldQuestionIconTex;
         D_8076C95C = 0;
         D_8076C960 = 0;
-        D_800D6CA0.state = 0;
+        gCourseEditContext.state = 0;
     }
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) {
         D_8076C95C = 0;
-        D_800D6CA0.state = 0;
+        gCourseEditContext.state = 0;
         func_xk2_800EE664(0x16);
     }
 }

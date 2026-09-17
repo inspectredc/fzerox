@@ -242,7 +242,7 @@ extern EffectDrawData gEffectsDrawData[][192];
 #endif
 extern CourseFeature gCourseFeatures[];
 extern unk_80225800 D_2000000;
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 extern s32 D_xk2_800F7034;
 extern s32 gCreateOption;
 extern CourseEffect gCourseEffects[];
@@ -300,7 +300,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
                         ++var_v1;
                     }
                 }
-                if (D_800D6CA0.selectedControlPoint == gCourseFeatures[j].segmentIndex &&
+                if (gCourseEditContext.selectedControlPoint == gCourseFeatures[j].segmentIndex &&
                     gCreateOption == CREATE_OPTION_PARTS) {
                     if (sp1D4 != 1) {
                         sp1D4 = 1;
@@ -343,7 +343,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
                         ++var_v1;
                     }
                 }
-                if (D_800D6CA0.selectedControlPoint == gCourseFeatures[j].segmentIndex &&
+                if (gCourseEditContext.selectedControlPoint == gCourseFeatures[j].segmentIndex &&
                     gCreateOption == CREATE_OPTION_PARTS) {
                     if (sp1D4 != 1) {
                         sp1D4 = 1;
@@ -391,7 +391,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
             for (i = 0; i < effectsInfo->count; i++) {
                 effectDrawData = &gEffectsDrawData[D_800DCCFC][i];
 
-                if (D_800D6CA0.selectedControlPoint == gCourseEffects[i].segmentIndex &&
+                if (gCourseEditContext.selectedControlPoint == gCourseEffects[i].segmentIndex &&
                     gCreateOption == CREATE_OPTION_PARTS) {
                     if (sp1D4 != 1) {
                         sp1D4 = 1;
@@ -567,7 +567,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
             if (!Course_FeatureIsDecorational(feature->featureType)) {
                 continue;
             }
-            if (D_800D6CA0.selectedControlPoint == gCourseFeatures[i].segmentIndex &&
+            if (gCourseEditContext.selectedControlPoint == gCourseFeatures[i].segmentIndex &&
                 gCreateOption == CREATE_OPTION_PARTS) {
                 if (sp1D4 != 1) {
                     sp1D4 = 1;
@@ -599,7 +599,7 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
             if (!Course_FeatureIsDecorational(feature->featureType)) {
                 continue;
             }
-            if (D_800D6CA0.selectedControlPoint == gCourseFeatures[i].segmentIndex &&
+            if (gCourseEditContext.selectedControlPoint == gCourseFeatures[i].segmentIndex &&
                 gCreateOption == CREATE_OPTION_PARTS) {
                 if (sp1D4 != 1) {
                     sp1D4 = 1;
@@ -1611,7 +1611,7 @@ Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffec
 #define EFFECT_TEXTURE_SCALAR2 (2.0f - 1.0f)
 
 #ifdef EXPANSION_KIT
-extern unk_80128690 D_80128690[];
+extern SegmentSplitInfo gCourseEditSegmentSplitInfos[];
 extern CourseSplitInfo gCourseEditCourseSplitInfos[];
 
 Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseEffect* effect, Vtx* vtx,
@@ -1638,7 +1638,7 @@ Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseE
 
     textureUnit = 0;
 
-    i = D_80128690[segment->segmentIndex].startSplit;
+    i = gCourseEditSegmentSplitInfos[segment->segmentIndex].startSplit;
 
     if (i >= 0x10000) {
         return vtx;
@@ -4119,7 +4119,7 @@ void func_800742D0(void) {
     COURSE_CONTEXT()->courseData.skybox = SKYBOX_PURPLE;
 }
 
-extern u8 D_80030060[];
+extern u8 gCourseEditCourseTitleEncStr[];
 extern CourseData D_8010CF50;
 
 void func_800742FC(void) {
@@ -4127,7 +4127,7 @@ void func_800742FC(void) {
 
     bzero(SEGMENT_VRAM_START(game_context), SEGMENT_BSS_SIZE(game_context));
 #ifdef EXPANSION_KIT
-    D_80030060[0] = '\0';
+    gCourseEditCourseTitleEncStr[0] = '\0';
 #endif
     func_80074204();
     D_802CB6D0.controlPointCount = 0;
@@ -4154,7 +4154,7 @@ void func_80074428(s32 courseIndex) {
 #ifdef EXPANSION_KIT
     s32 sp20;
 #endif
-    CourseSegment* var_v0;
+    CourseSegment* segment;
     CourseData* courseData = &COURSE_CONTEXT()->courseData;
 
     if (courseData->controlPointCount == 0) {
@@ -4171,11 +4171,11 @@ void func_80074428(s32 courseIndex) {
         D_802C2020.segments[i].trackSegmentInfo = courseData->controlPoint[i].trackSegmentInfo;
     }
 
-    var_v0 = D_802C2020.segments;
-    for (i = 0; i < courseData->controlPointCount; i++, var_v0++) {
-        var_v0->segmentIndex = i;
-        var_v0->next = var_v0 + 1;
-        var_v0->prev = var_v0 - 1;
+    segment = D_802C2020.segments;
+    for (i = 0; i < courseData->controlPointCount; i++, segment++) {
+        segment->segmentIndex = i;
+        segment->next = segment + 1;
+        segment->prev = segment - 1;
     }
 
     D_802C2020.segments[0].prev = &D_802C2020.segments[courseData->controlPointCount - 1];

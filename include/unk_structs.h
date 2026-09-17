@@ -602,7 +602,7 @@ typedef struct EKLoadedFile {
     /* 0x22 */ u8 unk_22;
 } EKLoadedFile; //size = 0x24
 
-typedef struct unk_800D6CA0 {
+typedef struct CourseEditContext {
     /* 0x00 */ s32 moveMode;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 state;
@@ -615,7 +615,7 @@ typedef struct unk_800D6CA0 {
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ CourseSegment newSegment;
     /* 0xCC */ s8 unk_CC[0x24];
-} unk_800D6CA0; // size = 0xF0
+} CourseEditContext; // size = 0xF0
 
 typedef struct MenuDropItem {
     /* 0x00 */ void* backgroundTex;
@@ -651,11 +651,11 @@ typedef struct unk_807B3C20 {
     /* 0x2900 */ s32 controlPointCount;
 } unk_807B3C20; // size 0x2904
 
-typedef struct unk_80128690 {
+typedef struct SegmentSplitInfo {
     /* 0x00 */ s32 startSplit;
     /* 0x04 */ s32 endSplit;
     /* 0x08 */ bool isSelected;
-} unk_80128690; // size = 0xC
+} SegmentSplitInfo; // size = 0xC
 
 typedef struct CourseSplitInfo {
     /* 0x00 */ s32 trackSegmentInfo;

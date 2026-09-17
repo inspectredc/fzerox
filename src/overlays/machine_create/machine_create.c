@@ -73,7 +73,7 @@ void MachineCreate_Init(void) {
 }
 
 extern s16 gGameModeChangeState;
-extern s8 D_80794E10;
+extern u8 D_80794E10;
 extern s32 D_800DCCFC;
 extern MachineCreateDrawData gMachineCreateDrawData[];
 extern MachineCreateDrawData* gMachineCreateDrawDataPtr;

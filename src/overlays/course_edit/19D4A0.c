@@ -1,26 +1,27 @@
 #include "global.h"
+#include "course_edit.h"
 #include "leo/mfs.h"
 #include "fzx_expansion_kit.h"
 
 s32 gCourseEditCourseRegisterIndex = 0;
-s32 D_xk2_80103F14 = 0;
+s32 sCourseEditRegisterFileMenuIndex = 0;
 
 extern char gEditCupTrackNames[4 * 6][9];
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 
 void func_xk2_800EB9E0(void) {
     if (SLCheckDiskChange2()) {
         func_807685D8(MFS_ENTRY_WORKING_DIR, "CRS_ENTRY", "CENT", gEditCupTrackNames, sizeof(gEditCupTrackNames));
     }
-    D_800D6CA0.state = 0x36;
+    gCourseEditContext.state = COURSE_EDIT_VALIDATE_FILE_NAMES;
 }
 
-void func_xk2_800EBA34(void) {
+void CourseEdit_ValidateRegisteredTrackNames(void) {
     s32 i;
 
     for (i = 0; i < 6; i++) {
         if (Mfs_ValidateFileName(gEditCupTrackNames[i]) != 0) {
-            gEditCupTrackNames[i][0] = 0;
+            gEditCupTrackNames[i][0] = '\0';
         }
     }
 
@@ -31,8 +32,8 @@ void func_xk2_800EBA34(void) {
             gEditCupTrackNames[i][0] = '\0';
         }
     }
-    D_xk2_80103F14 = 0;
-    D_800D6CA0.state = 0x20;
+    sCourseEditRegisterFileMenuIndex = 0;
+    gCourseEditContext.state = COURSE_EDIT_REGISTER_FILE_MENU;
 }
 
 extern Gfx D_8014940[];
@@ -48,7 +49,7 @@ Gfx* CourseEdit_DrawFileRegisterMenu(Gfx* gfx) {
 
     highlightedIndex = (gCourseEditMenuCursorYPos - 52) / 8;
 
-    if (D_800D6CA0.state != 0x20) {
+    if (gCourseEditContext.state != COURSE_EDIT_REGISTER_FILE_MENU) {
         return gfx;
     }
 
@@ -96,45 +97,45 @@ Gfx* CourseEdit_DrawFileRegisterMenu(Gfx* gfx) {
 
 extern s32 gCourseEditEntryOption;
 
-void func_xk2_800EBE14(void) {
-    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) && (D_800D6CA0.state == 0x20)) {
+void CourseEdit_RegisterFileMenuHandleBPress(void) {
+    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) && (gCourseEditContext.state == COURSE_EDIT_REGISTER_FILE_MENU)) {
         Audio_TriggerSystemSE(NA_SE_37);
-        D_800D6CA0.state = 0;
+        gCourseEditContext.state = 0;
         gCourseEditEntryOption = -1;
     }
 }
 
-void func_xk2_800EBE90(void) {
+void CourseEdit_UpdateRegisterFileMenuOption(void) {
     s32 prevIndex;
 
-    prevIndex = D_xk2_80103F14;
-    EKController_UpdateVerticalOptionSlow(&D_xk2_80103F14, 5, 0);
+    prevIndex = sCourseEditRegisterFileMenuIndex;
+    EKController_UpdateVerticalOptionSlow(&sCourseEditRegisterFileMenuIndex, 5, 0);
 
-    if (prevIndex != D_xk2_80103F14) {
+    if (prevIndex != sCourseEditRegisterFileMenuIndex) {
         Audio_TriggerSystemSE(NA_SE_35);
     }
-    gCourseEditMenuCursorYPos = (D_xk2_80103F14 * 8) + 0x38;
+    gCourseEditMenuCursorYPos = (sCourseEditRegisterFileMenuIndex * 8) + 0x38;
 }
 
 extern s32 D_80119880;
-extern s32 D_80119890;
+extern s32 gCourseEditRegistrationState;
 extern s32 gExpansionKitYesNoOptionIndex;
 extern u8 D_xk2_800F7400;
 
-void func_xk2_800EBEF4(void) {
-    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) && (D_800D6CA0.state == 0x20)) {
+void CourseEdit_RegisterFileMenuHandleAPress(void) {
+    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) && (gCourseEditContext.state == COURSE_EDIT_REGISTER_FILE_MENU)) {
         Audio_TriggerSystemSE(NA_SE_36);
         gCourseEditCourseRegisterIndex = (gCourseEditMenuCursorYPos - 52) / 8;
-        switch (D_80119890) {
+        switch (gCourseEditRegistrationState) {
             case 0:
-                D_800D6CA0.state = 0x31;
+                gCourseEditContext.state = COURSE_EDIT_STATE_49;
                 D_80119880 = 5;
                 func_8076877C(0, "CRSD");
                 D_xk2_800F7400 = 1;
                 break;
             case 1:
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0x23;
+                gCourseEditContext.state = 0x23;
                 break;
         }
     }
@@ -142,7 +143,7 @@ void func_xk2_800EBEF4(void) {
     PRINTF("(%s)-(%s) CLEAR\n");
 }
 
-void func_xk2_800EBFE8(char* name) {
+void CourseEdit_EraseTrackName(char* name) {
     s32 i;
 
     for (i = 0; i < 6; i++) {
@@ -179,11 +180,10 @@ void func_xk2_800EC110(void) {
     func_80768434(MFS_ENTRY_WORKING_DIR, "CRS_ENTRY", "CENT", gEditCupTrackNames, sizeof(gEditCupTrackNames), 0, 0xFF,
                   1);
     gCourseEditEntryOption = -1;
+    PRINTF("ENTRY SAVE AFTER DELETE OR RENAME\n");
 }
 
 void func_xk2_800EC174(void) {
-    PRINTF("ENTRY SAVE AFTER DELETE OR RENAME\n");
-
     func_8070405C(false);
     func_807682C0(MFS_ENTRY_WORKING_DIR, "CRS_ENTRY", "CENT", gEditCupTrackNames, sizeof(gEditCupTrackNames), 0, 0xFF,
                   1);

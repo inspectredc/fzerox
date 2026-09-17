@@ -1,4 +1,5 @@
 #include "global.h"
+#include "course_edit.h"
 #include "leo/mfs.h"
 #include ASSET_HEADER_EK(expansion_kit_textures.h)
 #include ASSET_HEADER_EK(course_edit_textures.h)
@@ -18,26 +19,26 @@ s32 D_xk2_80104380 = 0;
 
 extern s32 D_xk2_80104378;
 
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 extern s32 D_80119880;
 
 Gfx* func_xk2_800EDF90(Gfx* gfx) {
 
     D_xk2_80128CA4 = 0;
     D_xk2_80104360 = 1;
-    if (D_800D6CA0.state == 3) {
+    if (gCourseEditContext.state == COURSE_EDIT_IN_FILE_MENU) {
         if (D_80119880 == 5) {
-            gfx = EKFileMenu_DrawSelectFileText(gfx, 0x18, (D_xk2_80104360 * 0x10) + 0x38);
+            gfx = EKFileMenu_DrawSelectFileText(gfx, 24, (D_xk2_80104360 * 16) + 56);
             D_xk2_80104360++;
         } else {
             switch (D_80119880) {
                 case 7:
                 case 8:
                     if (1) {}
-                    gfx = EKFileMenu_DrawSelectFileText(gfx, 0x18, (D_xk2_80104360 * 0x10) + 0x38);
+                    gfx = EKFileMenu_DrawSelectFileText(gfx, 24, (D_xk2_80104360 * 16) + 56);
                     break;
                 default:
-                    gfx = EKFileMenu_DrawSelectFileText(gfx, 0x58, (D_xk2_80104360 * 0x10) + 0x38);
+                    gfx = EKFileMenu_DrawSelectFileText(gfx, 88, (D_xk2_80104360 * 16) + 56);
                     break;
             }
             D_xk2_80104360++;
@@ -46,7 +47,7 @@ Gfx* func_xk2_800EDF90(Gfx* gfx) {
     gfx = func_xk2_800EE158(gfx);
     gfx = func_xk2_800EE268(gfx);
 
-    if (D_800D6CA0.state == 0x10) {
+    if (gCourseEditContext.state == 0x10) {
         switch (D_xk2_80104378) {
             case 1:
             case 2:
@@ -81,7 +82,7 @@ s32 func_xk2_800EE0EC(s8* arg0, s8** arg1) {
 extern Gfx D_3000510[];
 extern Gfx D_3000540[];
 extern char* gCourseEditMessageStrs[];
-extern s32 D_xk2_80119884;
+extern s32 gCourseEditSelectedFileIndex;
 extern EKLoadedFile gExpansionKitLoadedFiles[];
 
 Gfx* func_xk2_800EE158(Gfx* gfx) {
@@ -89,7 +90,7 @@ Gfx* func_xk2_800EE158(Gfx* gfx) {
     u8* var_a3;
     s8 sp20[0x108];
 
-    if (D_800D6CA0.state != 0x10) {
+    if (gCourseEditContext.state != 0x10) {
         return gfx;
     }
     gSPDisplayList(gfx++, D_3000510);
@@ -100,7 +101,7 @@ Gfx* func_xk2_800EE158(Gfx* gfx) {
         case 2:
         case 3:
             EKFileMenu_DrawFileSelectedConfirmText(&gfx, sp12C, (D_xk2_80104360 * 0x10) + 0x38,
-                                                   gExpansionKitLoadedFiles[D_xk2_80119884].name, D_xk2_80104378 - 1);
+                                                   gExpansionKitLoadedFiles[gCourseEditSelectedFileIndex].name, D_xk2_80104378 - 1);
             D_xk2_80104360++;
             return gfx;
         default:
@@ -240,7 +241,7 @@ void CourseEdit_DrawCopyToDifferentDisk(Gfx** gfxP) {
     s32 length;
 
     gfx = *gfxP;
-    if (D_800D6CA0.state != 0x30) {
+    if (gCourseEditContext.state != 0x30) {
         return;
     }
 

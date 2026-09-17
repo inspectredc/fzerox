@@ -475,13 +475,13 @@ Gfx* ExpansionKit_NameEntryDraw(Gfx* gfx, s32* arg1, s32* arg2) {
     return gfx;
 }
 
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 
-void func_xk1_8002AC24(void) {
+void ExpansionKit_CourseEditNameEntryCallback(void) {
     if (gExpansionKitNameEntryStrLength == 0) {
-        D_800D6CA0.state = 0;
+        gCourseEditContext.state = 0;
     } else {
-        D_800D6CA0.state = 0x34;
+        gCourseEditContext.state = 0x34;
         func_8076877C(1, "CRSD");
     }
 }
@@ -502,7 +502,7 @@ void func_xk1_8002AC70(void) {
             case 9:
                 D_xk2_80104378 = 4;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0x10;
+                gCourseEditContext.state = 0x10;
                 gCourseEditFileOption = -1;
                 return;
             case 1:
@@ -510,7 +510,7 @@ void func_xk1_8002AC70(void) {
             default:
                 D_xk2_80104378 = 5;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0x10;
+                gCourseEditContext.state = 0x10;
                 gCourseEditFileOption = -1;
                 return;
         }
@@ -530,7 +530,7 @@ void func_xk1_8002AC70(void) {
                 D_80119880 = -2;
                 D_xk2_80104378 = 6;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0x10;
+                gCourseEditContext.state = 0x10;
             } else if (func_xk2_800EAA1C(D_xk1_8003A570) != 0) {
                 gCourseEditFileOption = -1;
             } else {
@@ -541,21 +541,21 @@ void func_xk1_8002AC70(void) {
             if ((EKFileMenu_GetFileCount() - 1) >= 100) {
                 D_xk2_80104378 = 6;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0x10;
+                gCourseEditContext.state = 0x10;
             } else {
                 func_xk2_800EAC28(gExpansionKitNameEntryStr);
                 gCourseEditFileOption = -1;
             }
             return;
         case 3:
-            func_xk2_800EBFE8(D_xk1_8003A598.name);
+            CourseEdit_EraseTrackName(D_xk1_8003A598.name);
             func_80768844(MFS_ENTRY_WORKING_DIR, D_xk1_8003A598.name, D_xk1_8003A598.extension,
                           gExpansionKitNameEntryStr, D_xk1_8003A598.extension, true);
             gCourseEditFileOption = -1;
-            D_800D6CA0.state = 0x22;
+            gCourseEditContext.state = 0x22;
             return;
     }
-    D_800D6CA0.state = 0;
+    gCourseEditContext.state = 0;
 }
 
 void func_xk1_8002AEB4(s32 arg0, s32 arg1) {

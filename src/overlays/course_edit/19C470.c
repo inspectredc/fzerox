@@ -5,20 +5,16 @@
 #include "fzx_course.h"
 #include "fzx_expansion_kit.h"
 
-u8 D_xk2_800F7400 = 255;
+u8 D_xk2_800F7400 = 0xFF;
 s32 D_xk2_800F7404 = 0;
-CourseContext D_xk2_800F7408 = {
-    { CREATOR_NINTENDO, 0, 0, 0, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 } },
-    { 0 },
-    { 0 }
-};
+CourseContext D_xk2_800F7408 = { { CREATOR_NINTENDO, 0, 0, 0, 0, 0, { 0 }, 0, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 } } };
 
-void func_xk2_800EA9B0(s8* arg0, s8* arg1) {
-    arg0[0] = arg1[0];
-    arg0[1] = arg1[1];
-    arg0[2] = arg1[2];
-    arg0[3] = arg1[3];
-    arg0[4] = arg1[4];
+void CourseEdit_WriteExtension(s8* extensionOut, s8* extension) {
+    extensionOut[0] = extension[0];
+    extensionOut[1] = extension[1];
+    extensionOut[2] = extension[2];
+    extensionOut[3] = extension[3];
+    extensionOut[4] = extension[4];
 }
 
 extern s32 gMfsError;
@@ -64,25 +60,25 @@ void func_xk2_800EA9DC(char* errorMessage) {
     PRINTF("file_access_mode %d\n");
 }
 
-extern u8 D_80030060[];
+extern u8 gCourseEditCourseTitleEncStr[];
 extern u8 D_8003006C[];
 extern s32 D_80119880;
 extern EKLoadedFile D_xk1_8003A598;
 extern s32 D_xk2_80104378;
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 extern s32 gExpansionKitYesNoOptionIndex;
 extern unk_807B3C20 D_802CB6D0;
 
-s32 func_xk2_800EAA1C(u8* arg0) {
+s32 func_xk2_800EAA1C(u8* name) {
     SaveCourseRecords* courseRecords = &COURSE_CONTEXT()->saveCourseRecord;
     GhostSave* ghostSave;
     s32 i;
-    u32 sp18;
+    u32 checksum;
 
     if ((EKFileMenu_GetFileCount() > 100) && (D_80119880 == -1)) {
         D_xk2_80104378 = 6;
         gExpansionKitYesNoOptionIndex = 0;
-        D_800D6CA0.state = 0x10;
+        gCourseEditContext.state = 0x10;
         return -1;
     }
     COURSE_CONTEXT()->courseData.creatorId = CREATOR_NINTENDO;
@@ -94,7 +90,7 @@ s32 func_xk2_800EAA1C(u8* arg0) {
         COURSE_CONTEXT()->courseData.controlPoint[i].radiusRight = D_802CB6D0.segments[i].radiusRight;
         COURSE_CONTEXT()->courseData.controlPoint[i].trackSegmentInfo = D_802CB6D0.segments[i].trackSegmentInfo;
     }
-    sp18 = Course_CalculateChecksum();
+    checksum = Course_CalculateChecksum();
     ghostSave = COURSE_CONTEXT()->ghostSave;
     ghostSave->record.encodedCourseIndex = 0;
     ghostSave->record.raceTime = MAX_TIMER;
@@ -105,32 +101,32 @@ s32 func_xk2_800EAA1C(u8* arg0) {
     ghostSave->record.encodedCourseIndex = 0;
     ghostSave->record.raceTime = MAX_TIMER;
     Save_InitCourseRecord(courseRecords, true);
-    COURSE_CONTEXT()->courseData.checksum = sp18;
+    COURSE_CONTEXT()->courseData.checksum = checksum;
     if ((D_80119880 == -1) || (D_80119880 == 1)) {
         if (COURSE_CONTEXT()->courseData.flag != 0) {
-            mfsStrCpy(D_xk1_8003A598.name, arg0);
-            func_xk2_800EA9B0(D_xk1_8003A598.extension, "CRSD");
-            D_800D6CA0.state = 0x14;
+            mfsStrCpy(D_xk1_8003A598.name, name);
+            CourseEdit_WriteExtension(D_xk1_8003A598.extension, "CRSD");
+            gCourseEditContext.state = 0x14;
         } else {
-            mfsStrCpy(D_xk1_8003A598.name, arg0);
-            func_xk2_800EA9B0(D_xk1_8003A598.extension, "CRSE");
-            D_800D6CA0.state = 0x14;
+            mfsStrCpy(D_xk1_8003A598.name, name);
+            CourseEdit_WriteExtension(D_xk1_8003A598.extension, "CRSE");
+            gCourseEditContext.state = 0x14;
         }
     }
-    mfsStrCpy(D_80030060, arg0);
-    mfsStrCpy(D_8003006C, arg0);
+    mfsStrCpy(gCourseEditCourseTitleEncStr, name);
+    mfsStrCpy(D_8003006C, name);
     return 0;
 }
 
-s32 func_xk2_800EAC28(u8* arg0) {
+s32 func_xk2_800EAC28(u8* name) {
     if (D_xk2_800F7408.courseData.flag != 0) {
-        mfsStrCpy(&D_xk1_8003A598, arg0);
-        func_xk2_800EA9B0(D_xk1_8003A598.extension, "CRSD");
-        D_800D6CA0.state = 0x14;
+        mfsStrCpy(D_xk1_8003A598.name, name);
+        CourseEdit_WriteExtension(D_xk1_8003A598.extension, "CRSD");
+        gCourseEditContext.state = 0x14;
     } else {
-        mfsStrCpy(&D_xk1_8003A598, arg0);
-        func_xk2_800EA9B0(D_xk1_8003A598.extension, "CRSE");
-        D_800D6CA0.state = 0x14;
+        mfsStrCpy(D_xk1_8003A598.name, name);
+        CourseEdit_WriteExtension(D_xk1_8003A598.extension, "CRSE");
+        gCourseEditContext.state = 0x14;
     }
     return 0;
 }
@@ -189,10 +185,10 @@ void func_xk2_800EACB0(void) {
         D_802CB6D0.segments[i].prev = &D_802CB6D0.segments[i - 1];
     }
 
-    D_800D6CA0.selectedControlPoint = 0;
+    gCourseEditContext.selectedControlPoint = 0;
     D_802CB6D0.segments[0].prev = &D_802CB6D0.segments[courseInfo->segmentCount - 1];
     D_802CB6D0.segments[courseInfo->segmentCount - 1].next = &D_802CB6D0.segments[0];
-    func_xk2_800DC3F8();
+    CourseEdit_ClearSegmentSplitSelection();
     func_xk2_800EF78C();
     func_xk2_800F0FE8();
     D_xk2_800F7040 = 3;
@@ -202,21 +198,21 @@ void func_xk2_800EACB0(void) {
 }
 
 extern EKLoadedFile gExpansionKitLoadedFiles[];
-extern s32 D_xk2_80119884;
+extern s32 gCourseEditSelectedFileIndex;
 
-s32 func_xk2_800EAF24(EKLoadedFile* arg0) {
+s32 CourseEdit_LoadCourseAndName(EKLoadedFile* file) {
     D_80794E10 = 0;
     D_xk2_800F7400 = 0;
-    func_80768574(MFS_ENTRY_WORKING_DIR, arg0->name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension,
+    func_80768574(MFS_ENTRY_WORKING_DIR, file->name, &gExpansionKitLoadedFiles[gCourseEditSelectedFileIndex].extension,
                   &D_xk2_800F7408, sizeof(CourseContext));
-    mfsStrCpy(D_80030060, arg0);
+    mfsStrCpy(gCourseEditCourseTitleEncStr, file->name);
     return 0;
 }
 
-s32 func_xk2_800EAFA8(EKLoadedFile* arg0) {
+s32 CourseEdit_LoadCourse(EKLoadedFile* file) {
     D_80794E10 = 0;
     D_xk2_800F7400 = 0;
-    func_80768574(MFS_ENTRY_WORKING_DIR, arg0->name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension,
+    func_80768574(MFS_ENTRY_WORKING_DIR, file->name, &gExpansionKitLoadedFiles[gCourseEditSelectedFileIndex].extension,
                   &D_xk2_800F7408, sizeof(CourseContext));
     return 0;
 }
@@ -228,7 +224,7 @@ extern s32 D_xk2_800F684C;
 extern s32 gCourseEditMenuCursorXPos;
 extern s32 gCourseEditMenuCursorYPos;
 
-void func_xk2_800EB018(void) {
+void CourseEdit_SetupFileMenu(void) {
     s32 pad;
     //  デフォルト
     u8 defaultEncStr[9] = { 0x20, 0x8E, 0xCC, 0xAB, 0xD9, 0xC4, 0x00, 0x00, 0x00 };
@@ -239,10 +235,10 @@ void func_xk2_800EB018(void) {
         if ((EKFileMenu_GetFileCount() == 0) && (D_80119880 != 1)) {
             gCourseEditFileOption = -1;
             gCourseEditEntryOption = -1;
-            D_800D6CA0.state = 0;
+            gCourseEditContext.state = 0;
             return;
         }
-        D_800D6CA0.state = 3;
+        gCourseEditContext.state = COURSE_EDIT_IN_FILE_MENU;
         switch (D_80119880) {
             case 0:
                 mfsStrCpy(gExpansionKitLoadedFiles[0].name, "OFFICIAL");
@@ -301,22 +297,22 @@ void func_xk2_800EB250(void) {
     }
 }
 
-void func_xk2_800EB304(char* name, s32 attr) {
+void CourseEdit_ToggleFileForbidWriteAttr(char* name, s32 attr) {
     if (attr & MFS_FILE_ATTR_FORBID_W) {
-        func_807689BC(MFS_ENTRY_WORKING_DIR, name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension, 0,
+        func_807689BC(MFS_ENTRY_WORKING_DIR, name, &gExpansionKitLoadedFiles[gCourseEditSelectedFileIndex].extension, 0,
                       MFS_FILE_ATTR_FORBID_W, true);
     } else {
-        func_807689BC(MFS_ENTRY_WORKING_DIR, name, &gExpansionKitLoadedFiles[D_xk2_80119884].extension,
+        func_807689BC(MFS_ENTRY_WORKING_DIR, name, &gExpansionKitLoadedFiles[gCourseEditSelectedFileIndex].extension,
                       MFS_FILE_ATTR_FORBID_W, 0, true);
     }
 }
 
-void func_xk2_800EB3B4(void) {
-    if (D_800D6CA0.state != 3) {
+void CourseEdit_FileMenuHandleBPress(void) {
+    if (gCourseEditContext.state != COURSE_EDIT_IN_FILE_MENU) {
         return;
     }
     func_xk1_8002BD34();
-    D_800D6CA0.state = 0;
+    gCourseEditContext.state = 0;
     gCourseEditFileOption = -1;
     gCourseEditEntryOption = -1;
 }
@@ -324,140 +320,139 @@ void func_xk2_800EB3B4(void) {
 extern u8 gExpansionKitNameEntryStr[];
 extern s32 gCourseEditCourseRegisterIndex;
 extern s32 D_xk2_80104378;
-extern s32 D_xk2_80119884;
+extern s32 gCourseEditSelectedFileIndex;
 extern char gEditCupTrackNames[][9];
 
-void func_xk2_800EB400(void) {
-    s32 courseIndex;
-    EKLoadedFile* temp_v1;
+void CourseEdit_FileMenuHandleAPress(void) {
+    s32 fileIndex;
+    EKLoadedFile* file;
 
-    if (D_800D6CA0.state != 3) {
+    if (gCourseEditContext.state != COURSE_EDIT_IN_FILE_MENU) {
         return;
     }
     Audio_TriggerSystemSE(NA_SE_36);
-    courseIndex = EKFileMenu_GetFileIndex();
-    D_xk2_80119884 = courseIndex;
-    temp_v1 = &gExpansionKitLoadedFiles[D_xk2_80119884];
+    fileIndex = EKFileMenu_GetFileIndex();
+    gCourseEditSelectedFileIndex = fileIndex;
+    file = &gExpansionKitLoadedFiles[gCourseEditSelectedFileIndex];
     switch (D_80119880) {
         case 6:
             if (D_802CB6D0.controlPointCount == 0) {
                 CourseEdit_ClearControlPointHighlight();
-                if (courseIndex >= COURSE_EDIT_1) {
-                    Course_Load(courseIndex + 6);
+                if (fileIndex >= COURSE_EDIT_1) {
+                    Course_Load(fileIndex + 6);
                 } else {
-                    Course_Load(courseIndex);
+                    Course_Load(fileIndex);
                 }
-                D_80030060[0] = 0;
+                gCourseEditCourseTitleEncStr[0] = '\0';
                 func_xk2_800EACB0();
                 gCourseEditFileOption = -1;
-                D_800D6CA0.state = 0;
+                gCourseEditContext.state = 0;
                 D_xk2_800F7040 = 3;
                 gCourseEditMiniMachineCharacter = Math_Rand2() % 30;
                 gCourseEditMiniMachineColorPalette = Math_Rand2() % 4;
             } else {
                 D_xk2_80104378 = 1;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0x10;
+                gCourseEditContext.state = 0x10;
             }
             break;
         case 8:
-            Course_Load(courseIndex);
+            Course_Load(fileIndex);
             func_xk2_800EACB0();
             gCourseEditFileOption = -1;
-            D_800D6CA0.state = 0x30;
+            gCourseEditContext.state = 0x30;
             D_80119880 = 7;
             D_xk2_800F7040 = 3;
             gCourseEditMiniMachineCharacter = Math_Rand2() % 30;
             gCourseEditMiniMachineColorPalette = Math_Rand2() % 4;
             break;
         case 0:
-            if (courseIndex == 0) {
-                func_xk1_8002D16C();
+            if (fileIndex == 0) {
+                EKFileMenu_LoadOfficialCourseList();
                 D_80119880 = 6;
             } else if (D_802CB6D0.controlPointCount == 0) {
                 CourseEdit_ClearControlPointHighlight();
-                func_xk2_800EAF24(&gExpansionKitLoadedFiles[courseIndex]);
+                CourseEdit_LoadCourseAndName(&gExpansionKitLoadedFiles[fileIndex]);
                 gCourseEditFileOption = -1;
-                D_800D6CA0.state = 0x13;
+                gCourseEditContext.state = 0x13;
             } else {
                 D_xk2_80104378 = 1;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0x10;
+                gCourseEditContext.state = 0x10;
             }
             break;
         case 1:
-            if (courseIndex == 0) {
+            if (fileIndex == 0) {
                 D_80119880 = -1;
                 if ((EKFileMenu_GetFileCount() - 1) >= 100) {
                     D_xk2_80104378 = 6;
                     gExpansionKitYesNoOptionIndex = 0;
-                    D_800D6CA0.state = 0x10;
+                    gCourseEditContext.state = 0x10;
                 } else {
                     ExpansionKit_NameEntryClear();
-                    ExpansionKit_NameEntryInit(func_xk1_8002AC24);
-                    gCourseEditMenuCursorXPos = 0x58;
-                    gCourseEditMenuCursorYPos = 0x68;
-                    D_800D6CA0.state = COURSE_EDIT_NAME_ENTRY;
+                    ExpansionKit_NameEntryInit(ExpansionKit_CourseEditNameEntryCallback);
+                    gCourseEditMenuCursorXPos = 88;
+                    gCourseEditMenuCursorYPos = 104;
+                    gCourseEditContext.state = COURSE_EDIT_NAME_ENTRY;
                 }
             } else {
-                if (gExpansionKitLoadedFiles[courseIndex].attr & MFS_FILE_ATTR_FORBID_W) {
+                if (gExpansionKitLoadedFiles[fileIndex].attr & MFS_FILE_ATTR_FORBID_W) {
                     D_xk2_80104378 = 8;
                     gExpansionKitYesNoOptionIndex = 0;
-                    D_800D6CA0.state = 0x10;
+                    gCourseEditContext.state = 0x10;
                 } else {
                     D_xk2_80104378 = 2;
                     gExpansionKitYesNoOptionIndex = 0;
-                    D_800D6CA0.state = 0x10;
+                    gCourseEditContext.state = 0x10;
                 }
             }
             break;
         case 3:
-
-            D_xk1_8003A598 = *temp_v1;
-            if (gExpansionKitLoadedFiles[courseIndex].attr & MFS_FILE_ATTR_FORBID_W) {
+            D_xk1_8003A598 = *file;
+            if (gExpansionKitLoadedFiles[fileIndex].attr & MFS_FILE_ATTR_FORBID_W) {
                 D_xk2_80104378 = 8;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0x10;
+                gCourseEditContext.state = 0x10;
             } else {
                 ExpansionKit_NameEntryClear();
-                ExpansionKit_NameEntryInit(func_xk1_8002AC24);
-                gCourseEditMenuCursorXPos = 0x58;
-                gCourseEditMenuCursorYPos = 0x68;
-                D_800D6CA0.state = COURSE_EDIT_NAME_ENTRY;
+                ExpansionKit_NameEntryInit(ExpansionKit_CourseEditNameEntryCallback);
+                gCourseEditMenuCursorXPos = 88;
+                gCourseEditMenuCursorYPos = 104;
+                gCourseEditContext.state = COURSE_EDIT_NAME_ENTRY;
             }
             break;
         case 2:
-            if (gExpansionKitLoadedFiles[courseIndex].attr & MFS_FILE_ATTR_FORBID_W) {
+            if (gExpansionKitLoadedFiles[fileIndex].attr & MFS_FILE_ATTR_FORBID_W) {
                 D_xk2_80104378 = 8;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0x10;
+                gCourseEditContext.state = 0x10;
             } else {
                 D_xk2_80104378 = 3;
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 0x10;
+                gCourseEditContext.state = 0x10;
             }
             break;
         case 4:
-            func_xk2_800EB304(gExpansionKitLoadedFiles[courseIndex].name, gExpansionKitLoadedFiles[courseIndex].attr);
+            CourseEdit_ToggleFileForbidWriteAttr(gExpansionKitLoadedFiles[fileIndex].name, gExpansionKitLoadedFiles[fileIndex].attr);
             gCourseEditFileOption = -1;
-            D_800D6CA0.state = 0;
+            gCourseEditContext.state = 0;
             break;
         case 5:
-            if (gExpansionKitLoadedFiles[D_xk2_80119884].extension[3] == 'E') {
+            if (gExpansionKitLoadedFiles[gCourseEditSelectedFileIndex].extension[3] == 'E') {
                 Audio_TriggerSystemSE(NA_SE_32);
                 EKFileMenu_EnableFileMenuDraw();
-                break;
+            } else {
+                mfsStrCpy(gEditCupTrackNames[gCourseEditCourseRegisterIndex], gExpansionKitLoadedFiles[fileIndex].name);
+                func_xk2_800EC110();
+                gCourseEditContext.state = 0x37;
             }
-            mfsStrCpy(gEditCupTrackNames[gCourseEditCourseRegisterIndex], gExpansionKitLoadedFiles[courseIndex].name);
-            func_xk2_800EC110();
-            D_800D6CA0.state = 0x37;
             break;
         case 7:
             ExpansionKit_NameEntryClear();
-            mfsStrCpy(gExpansionKitNameEntryStr, gExpansionKitLoadedFiles[courseIndex].name);
-            func_xk2_800EAFA8(gExpansionKitLoadedFiles[courseIndex].name);
+            mfsStrCpy(gExpansionKitNameEntryStr, gExpansionKitLoadedFiles[fileIndex].name);
+            CourseEdit_LoadCourse(&gExpansionKitLoadedFiles[fileIndex]);
             gCourseEditFileOption = -1;
-            D_800D6CA0.state = 0x33;
+            gCourseEditContext.state = 0x33;
             break;
         default:
             break;

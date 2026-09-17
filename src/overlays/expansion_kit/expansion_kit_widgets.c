@@ -1,6 +1,7 @@
 #include "global.h"
 #include "fzx_course.h"
 #include "fzx_expansion_kit.h"
+#include "course_edit.h"
 #include "fzx_segmentA.h"
 #include ASSET_HEADER(create_machine_textures.h)
 #include ASSET_HEADER_EK(expansion_kit_textures.h)
@@ -8,7 +9,7 @@
 #include ASSET_HEADER_EK(overlays/expansion_kit/aA3AE0.h)
 #include ASSET_HEADER_EK(overlays/machine_create/machine_create_assets.h)
 
-extern s32 D_80119890;
+extern s32 gCourseEditRegistrationState;
 
 s32 gCourseEditMenuCursorXPos;
 s32 gCourseEditMenuCursorYPos;
@@ -359,11 +360,11 @@ MenuWidget gCylinderTypeWidget = {
 
 MenuDropItem sCourseEditEntryMenuItems[] = {
     { aExpansionKitMenuPurpleBorderBackgroundTex, aExpansionKitMenuPurpleBorderHighlightBackgroundTex,
-      aExpansionKitMenuRegisterTex, NULL, NULL, func_xk1_80026870, 48, 16, NULL, NULL },
+      aExpansionKitMenuRegisterTex, NULL, NULL, EKWidget_RegisterCourseCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuPurpleBorderBackgroundTex, aExpansionKitMenuPurpleBorderHighlightBackgroundTex,
-      aExpansionKitMenuClearTex, NULL, NULL, func_xk1_800268A8, 48, 16, NULL, NULL },
+      aExpansionKitMenuClearTex, NULL, NULL, EKWidget_ClearCourseRegistrationCallback, 48, 16, NULL, NULL },
     { aExpansionKitMenuPurpleBorderBackgroundTex, aExpansionKitMenuPurpleBorderHighlightBackgroundTex,
-      aExpansionKitMenuClearAllTex, NULL, NULL, func_xk1_800268E4, 48, 16, NULL, NULL },
+      aExpansionKitMenuClearAllTex, NULL, NULL, EKWidget_ClearAllCourseRegistrationsCallback, 48, 16, NULL, NULL },
 };
 
 MenuWidget gCourseEditEntryWidget = {
@@ -691,7 +692,7 @@ MenuWidget gCourseEditWidget = { 6, INVALID_OPTION, INVALID_OPTION, 24,  20, 48,
 
 s32 gBGMOptionToCourseBGM[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 11, 10, 13 };
 
-void func_xk1_80026870(void) {
+void EKWidget_RegisterCourseCallback(void) {
 
     // TODO: move to appropriate place
     PRINTF("DEBUG\n");
@@ -699,26 +700,26 @@ void func_xk1_80026870(void) {
     PRINTF("VIRTUAL SCROLL %d\n");
     PRINTF("x,y %d, %d\n");
 
-    D_80119890 = 0;
+    gCourseEditRegistrationState = 0;
     func_xk2_800EB9E0();
-    gCourseEditMenuCursorXPos = 0x110;
-    gCourseEditMenuCursorYPos = 0x38;
+    gCourseEditMenuCursorXPos = 272;
+    gCourseEditMenuCursorYPos = 56;
 }
 
-void func_xk1_800268A8(void) {
-    D_80119890 = 1;
+void EKWidget_ClearCourseRegistrationCallback(void) {
+    gCourseEditRegistrationState = 1;
     func_xk2_800EB9E0();
-    gCourseEditMenuCursorXPos = 0x110;
-    gCourseEditMenuCursorYPos = 0x38;
+    gCourseEditMenuCursorXPos = 272;
+    gCourseEditMenuCursorYPos = 56;
 }
 
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 extern s32 gExpansionKitYesNoOptionIndex;
 
-void func_xk1_800268E4(void) {
-    D_80119890 = 2;
+void EKWidget_ClearAllCourseRegistrationsCallback(void) {
+    gCourseEditRegistrationState = 2;
     gExpansionKitYesNoOptionIndex = 0;
-    D_800D6CA0.state = 0x23;
+    gCourseEditContext.state = 0x23;
 }
 
 void ExpansionKit_SetMenuHighlightDrawFlag(bool shouldHighlight) {
@@ -905,7 +906,7 @@ void EKWidget_DrawMenuItems(Gfx** gfxP, MenuWidget* widget, s32 cursorPosX, s32 
             gSPTextureRectangle(gfx++, (temp_ra + 28) << 2, temp_s0 << 2, (temp_ra + 44) << 2, (temp_s0 + 16) << 2, 0,
                                 0, 0, 1 << 10, 1 << 10);
         }
-        if ((i == highlightedIndex) && (D_800D6CA0.state != 3) &&
+        if ((i == highlightedIndex) && (gCourseEditContext.state != COURSE_EDIT_IN_FILE_MENU) &&
             !((widget == &gCourseEditWidget) && (highlightedIndex == 5))) {
             gDPPipeSync(gfx++);
             gDPSetCombineLERP(gfx++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0,
@@ -1043,7 +1044,7 @@ void EKWidget_CloseWidget(MenuWidget* widget) {
 void func_xk1_80027C80(MenuWidget* widget) {
     s32 index;
 
-    if (D_800D6CA0.state != 1 || !gMenuWidgetOpen) {
+    if (gCourseEditContext.state != COURSE_EDIT_IN_MENU || !gMenuWidgetOpen) {
         return;
     }
     while (true) {
@@ -1061,7 +1062,7 @@ void func_xk1_80027C80(MenuWidget* widget) {
     widget->highlightedIndex = INVALID_OPTION;
     gMenuWidgetOpen = false;
     sMenuPageYOffset = 0;
-    D_800D6CA0.state = 0;
+    gCourseEditContext.state = 0;
 }
 
 extern s32 D_xk2_800F7048;
@@ -1187,21 +1188,21 @@ void func_xk1_80028064(void) {
             func_8076877C(1, "CRSD");
             PRINTF("LESS POINT\n");
             D_80119880 = 0;
-            D_800D6CA0.state = 50;
+            gCourseEditContext.state = COURSE_EDIT_STATE_50;
             break;
         case FILE_OPTION_SAVE:
             D_80119880 = 1;
             func_xk2_800F27DC(gCurrentCourseInfo);
             if (D_802CB6D0.controlPointCount < 4) {
                 gExpansionKitYesNoOptionIndex = 0;
-                D_800D6CA0.state = 16;
+                gCourseEditContext.state = 16;
                 D_xk2_80104378 = 9;
                 D_80119880 = -2;
             } else {
                 D_xk1_80032BF8 = false;
                 func_8076877C(1, "CRSD");
                 PRINTF("NAME\n");
-                D_800D6CA0.state = 50;
+                gCourseEditContext.state = COURSE_EDIT_STATE_50;
             }
             break;
         case FILE_OPTION_RENAME:
@@ -1209,20 +1210,20 @@ void func_xk1_80028064(void) {
             func_8076877C(0, "CRSD");
             PRINTF("DELETE\n");
             D_80119880 = 3;
-            D_800D6CA0.state = 50;
+            gCourseEditContext.state = COURSE_EDIT_STATE_50;
             break;
         case FILE_OPTION_ERASE:
             D_xk1_80032BF8 = false;
             func_8076877C(0, "CRSD");
             D_80119880 = 2;
-            D_800D6CA0.state = 50;
+            gCourseEditContext.state = COURSE_EDIT_STATE_50;
             break;
         case FILE_OPTION_COPY:
             D_xk1_80032BF8 = false;
             func_8076877C(0, "CRSD");
             PRINTF("BGM NO. SET %d\n");
             D_80119880 = 7;
-            D_800D6CA0.state = 50;
+            gCourseEditContext.state = COURSE_EDIT_STATE_50;
             break;
     }
 }
@@ -1353,7 +1354,7 @@ void func_xk1_80028250(void) {
     }
 }
 
-extern u8 D_80030060[];
+extern u8 gCourseEditCourseTitleEncStr[];
 extern u8 gCourseEditErrors[];
 extern s32 gCourseEditCameraPitch;
 extern s32 gCourseEditCameraAtX;
@@ -1368,19 +1369,19 @@ extern s32 gSegmentChunkCount;
 void func_xk1_8002860C(void) {
     func_xk2_800EF78C();
     CourseEdit_ClearControlPointHighlight();
-    D_80030060[0] = '\0';
+    gCourseEditCourseTitleEncStr[0] = '\0';
     gCourseEditCameraAtX = 0;
     gCourseEditCameraAtZ = 0;
     gCourseEditCameraPitch = 90;
-    D_800D6CA0.courseYaw = 0;
+    gCourseEditContext.courseYaw = 0;
     gCourseEditDrawDetailedCourse = 0;
     D_802CB6D0.controlPointCount = 0;
     gCurrentCourseInfo->segmentCount = 0;
     COURSE_CONTEXT()->courseData.controlPointCount = 0;
-    D_800D6CA0.selectedControlPoint = -1;
-    D_800D6CA0.unk_04 = 0;
-    D_800D6CA0.overlappingControlPoint = -1;
-    if (D_800D6CA0.state != 0x10) {
+    gCourseEditContext.selectedControlPoint = -1;
+    gCourseEditContext.unk_04 = 0;
+    gCourseEditContext.overlappingControlPoint = -1;
+    if (gCourseEditContext.state != 0x10) {
         func_xk2_800F12B0();
     }
     gCourseEditErrors[COURSE_EDIT_ERROR_ROADS_OVERLAP] = false;
@@ -1389,7 +1390,7 @@ void func_xk1_8002860C(void) {
     gCourseEditCourseSplitIndex = 0;
     D_xk2_80119744 = 0.0f;
     gPointOption = POINT_OPTION_SET;
-    func_xk2_800DC3F8();
+    CourseEdit_ClearSegmentSplitSelection();
     func_80074204();
     gCurrentCourseInfo->length = 0.0f;
     gCourseFeaturesInfo.jumpCount = 0;
@@ -1417,7 +1418,7 @@ void func_xk1_80028708(void) {
             return;
         case POINT_OPTION_CLEAR_ALL:
             gExpansionKitYesNoOptionIndex = 0;
-            D_800D6CA0.state = 0x11;
+            gCourseEditContext.state = 0x11;
             break;
         case POINT_OPTION_SET:
         case POINT_OPTION_START:

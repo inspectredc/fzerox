@@ -22,7 +22,7 @@ s32 sCourseEditOptionsTexOffsetHeight[][2] = {
 };
 
 extern s32 gCourseEditOptions[6];
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 
 void CourseEditOptionsMenu_Update(void) {
     s32 prevIndex;
@@ -33,7 +33,7 @@ void CourseEditOptionsMenu_Update(void) {
     s32 pad;
 
     optionsIndexUnchanged = true;
-    if (D_800D6CA0.state != COURSE_EDIT_OPTIONS_MENU) {
+    if (gCourseEditContext.state != COURSE_EDIT_OPTIONS_MENU) {
         return;
     }
     controller = &gControllers[gPlayerControlPorts[0]];
@@ -134,7 +134,7 @@ void CourseEditOptionsMenu_Update(void) {
                 Audio_TriggerSystemSE(NA_SE_37);
                 func_807683B8(MFS_ENTRY_WORKING_DIR, "OPTION", "OPT", gCourseEditOptions, sizeof(gCourseEditOptions), 0,
                               0xFF, true);
-                D_800D6CA0.state = 0x38;
+                gCourseEditContext.state = 0x38;
                 break;
             case COURSE_EDIT_OPTIONS_HELP_MENU:
             case COURSE_EDIT_OPTIONS_CURSOR_SPEED_MENU:
