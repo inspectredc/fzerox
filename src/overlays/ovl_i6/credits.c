@@ -878,21 +878,22 @@ Gfx* Credits_SeeYouAgainDraw(Gfx* gfx, Object* seeYouAgainObj) {
     return gfx;
 }
 
-#ifdef NON_MATCHING
 Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
     s32 temp_a0;
-    s32 temp_t1;
     s32 var_t2;
+    s32 temp_t1;
     s32 row;
-    s32 temp;
     s32 var;
-    f32 scale;
     TexturePtr texture;
+    f32 scale;
+    s32 temp_t2;
+    s32 temp_t0;
 
     texture = TextureCache_GetCached(aCreditsMrZeroTex);
-    gSPDisplayList(gfx++, D_3000088);
-
+    temp_t2 = 200;
     var = 60;
+    gSPDisplayList(gfx++, D_3000088);
+    temp_t0 = 64;
 
     for (row = 0; row < 72; row++) {
         gDPLoadTextureTile(gfx++, texture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 1 /* unused by macro */, 0, row, 80,
@@ -900,29 +901,28 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
                            G_TX_NOLOD, G_TX_NOLOD);
 
         if (OBJECT_STATE2(introObj) != 0) {
-            temp_a0 = OBJECT_COUNTER2(introObj);
-            var_t2 = 255 - temp_a0;
-            temp = ((((row * 0x1000) * (temp_a0 + 64)) / 64) / 72);
-            temp_t1 = ((SIN(temp) * (temp_a0 + 4)) / 4);
-            temp = (200 - temp_t1);
+            temp_t1 = ((OBJECT_COUNTER2(introObj) + 4) *
+                       (SIN(((((row * 0x1000) * ((temp_t0 + OBJECT_COUNTER2(introObj)))) / temp_t0) / 72))) / 4);
+            var_t2 = 255 - OBJECT_COUNTER2(introObj);
 
             gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
-            gSPScisTextureRectangle(gfx++, temp << 2, (row + var) << 2, (temp + 80) << 2, (row + var + 1) << 2, 0, 0, 0,
-                                    1 << 10, 1 << 10);
+            gSPScisTextureRectangle(gfx++, (temp_t2 - temp_t1) << 2, (var + row) << 2, ((temp_t2 - temp_t1) + 80) << 2,
+                                    (var + row + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
         }
         if (OBJECT_STATE(introObj) != 0) {
-            temp_a0 = OBJECT_COUNTER(introObj);
-            var_t2 = 255 - temp_a0;
-            temp = ((((row * 0x1000) * (temp_a0 + 64)) / 64) / 72);
-            temp_t1 = ((SIN(temp) * (temp_a0 + 4)) / 4);
+
+            temp_t1 = ((OBJECT_COUNTER(introObj) + 4) *
+                       (SIN(((((row * 0x1000) * ((temp_t0 + OBJECT_COUNTER(introObj)))) / temp_t0) / 72))) / 4);
+            var_t2 = 255 - OBJECT_COUNTER(introObj);
             gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
-            gSPScisTextureRectangle(gfx++, (temp_t1 + 40) << 2, (row + var) << 2, ((temp_t1 + 40) + 80) << 2,
-                                    (row + var + 1) << 2, 0, (80 - 1) * (1 << 5), 0, (64 - 1) * (1 << 10), 1 << 10);
+            gSPScisTextureRectangle(gfx++, (temp_t1 + (240 - temp_t2)) << 2, (var + row) << 2,
+                                    (temp_t1 + (320 - temp_t2)) << 2, (var + row + 1) << 2, 0, (80 - 1) * (1 << 5), 0,
+                                    (64 - 1) * (1 << 10), 1 << 10);
         }
     }
 
     if (INTRO_TIMER(introObj) > 290) {
-        var_t2 = 0xA10 - (INTRO_TIMER(introObj) * 8);
+        var_t2 = (32 - (INTRO_TIMER(introObj) - 290)) * 8;
         if (var_t2 > 255) {
             var_t2 = 255;
         }
@@ -931,7 +931,6 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
         }
 
         scale = (511 - var_t2) / 256.0f;
-
         gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
 
         gfx = Font_DrawScaledString(
@@ -941,12 +940,12 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
                                     (s32) (160.0f - (((f32) Font_GetStringWidth("staff", FONT_SET_1, 0) * scale) / 2)),
                                     D_i6_8011DFAC + D_i6_8011DFB4, "staff", 0, FONT_SET_1, 1, scale, scale);
     } else if (INTRO_TIMER(introObj) > 120) {
-        var_t2 = (INTRO_TIMER(introObj) * 3) - 0x168;
+        var_t2 = (INTRO_TIMER(introObj) - 120) * 3;
         if (var_t2 > 255) {
             var_t2 = 255;
         }
 
-        scale = (f32) (628 - (INTRO_TIMER(introObj) * 2)) / 192.0f;
+        scale = (f32) (((218 - INTRO_TIMER(introObj)) * 2) + 192) / 192.0f;
 
         if (scale < 1.0) {
             scale = 1.0f;
@@ -962,20 +961,6 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
     }
     return gfx;
 }
-#else
-Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj);
-#ifndef EXPANSION_KIT
-#ifdef VERSION_JP
-#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
-#elif VERSION_US
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
-#elif VERSION_PAL
-#pragma GLOBAL_ASM("asm/pal/rev0/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
-#endif
-#else
-#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/overlays/ovl_i6/credits/Credits_IntroDraw.s")
-#endif
-#endif
 
 Gfx* Credits_CopyrightDraw(Gfx* gfx, Object* copyRightObj) {
     s32 var_s2;
