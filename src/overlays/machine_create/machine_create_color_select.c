@@ -113,19 +113,19 @@ Gfx* MachineCreate_DrawColorSelectionBorder(Gfx* gfx) {
     return gfx;
 }
 
-extern unk_80140E60 D_xk3_80140E68;
+extern MachineCreateGrid gMachineCreateColorGrid;
 
 Gfx* MachineCreate_DrawColorSelectionCursor(Gfx* gfx) {
 
-    if (D_xk3_80140E68.unk_04 == 8) {
+    if (gMachineCreateColorGrid.y == 8) {
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateHighlightedOkTex, 257, 165, 32, 16);
     } else {
 
         gfx = ExpansionKit_DrawRectangleBorderHighlight(
-            gfx, D_xk3_80140E68.unk_00 * 15 + 168, D_xk3_80140E68.unk_04 * 15 + 44,
-            (D_xk3_80140E68.unk_00 + 1) * 15 + 168, (D_xk3_80140E68.unk_04 + 1) * 15 + 44, 255, 64, 64,
-            func_xk1_800290C0(), 2, 2);
+            gfx, gMachineCreateColorGrid.x * 15 + 168, gMachineCreateColorGrid.y * 15 + 44,
+            (gMachineCreateColorGrid.x + 1) * 15 + 168, (gMachineCreateColorGrid.y + 1) * 15 + 44, 255, 64, 64,
+            EKWidget_GetMenuAlpha(), 2, 2);
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateOkTex, 257, 165, 32, 16);
     }
@@ -159,21 +159,21 @@ Gfx* MachineCreate_DrawColorSelection(Gfx* gfx, s32 left, s32 top) {
 
 extern BorderedBoxWidget* gMachineCreateColorBox;
 
-void func_xk3_80135E58(u8* red, u8* green, u8* blue) {
+void MachineCreate_UpdateColorSelectAInput(u8* red, u8* green, u8* blue) {
 
     if (!BorderedBox_GetInfo(gMachineCreateColorBox, IS_BORDERED_BOX_OPENED)) {
         return;
     }
 
-    if (D_xk3_80140E68.unk_04 == 8) {
-        func_xk3_8012BC98();
+    if (gMachineCreateColorGrid.y == 8) {
+        MachineCreate_CloseColorMenu();
         Audio_TriggerSystemSE(NA_SE_36);
-    } else if ((*red != sColorSelections[D_xk3_80140E68.unk_04][D_xk3_80140E68.unk_00][0]) ||
-               (*green != sColorSelections[D_xk3_80140E68.unk_04][D_xk3_80140E68.unk_00][1]) ||
-               (*blue != sColorSelections[D_xk3_80140E68.unk_04][D_xk3_80140E68.unk_00][2])) {
-        *red = sColorSelections[D_xk3_80140E68.unk_04][D_xk3_80140E68.unk_00][0];
-        *green = sColorSelections[D_xk3_80140E68.unk_04][D_xk3_80140E68.unk_00][1];
-        *blue = sColorSelections[D_xk3_80140E68.unk_04][D_xk3_80140E68.unk_00][2];
+    } else if ((*red != sColorSelections[gMachineCreateColorGrid.y][gMachineCreateColorGrid.x][0]) ||
+               (*green != sColorSelections[gMachineCreateColorGrid.y][gMachineCreateColorGrid.x][1]) ||
+               (*blue != sColorSelections[gMachineCreateColorGrid.y][gMachineCreateColorGrid.x][2])) {
+        *red = sColorSelections[gMachineCreateColorGrid.y][gMachineCreateColorGrid.x][0];
+        *green = sColorSelections[gMachineCreateColorGrid.y][gMachineCreateColorGrid.x][1];
+        *blue = sColorSelections[gMachineCreateColorGrid.y][gMachineCreateColorGrid.x][2];
         Audio_TriggerSystemSE(NA_SE_39);
     }
 }

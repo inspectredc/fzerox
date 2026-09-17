@@ -1,6 +1,10 @@
 #include "global.h"
+#include "course_edit.h"
 #include "leo/mfs.h"
 #include "fzx_course.h"
+#include "fzx_expansion_kit.h"
+#include ASSET_HEADER(setup_gfx.h)
+#include ASSET_HEADER(course_track_gfx.h)
 #include ASSET_HEADER_EK(expansion_kit_textures.h)
 #include ASSET_HEADER_EK(course_edit_textures.h)
 
@@ -13,18 +17,22 @@ s32 D_xk2_80104F04 = 0;
 
 UNUSED s32 D_xk2_80104F08[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
 
+// プロテクト
 u8 D_xk2_80104F28[] = {
     0x97, 0xDB, 0xC3, 0xB8, 0xC4, 0x00, 0x00, 0x00,
 };
 
+// をかけたい
 u8 D_xk2_80104F30[] = {
     0xA6, 0xB6, 0xB9, 0xC0, 0xB2, 0x00, 0x00, 0x00,
 };
 
+// ファイル
 u8 D_xk2_80104F38[] = {
     0xCC, 0xA7, 0xB2, 0xD9, 0x00, 0x00, 0x00, 0x00,
 };
 
+// を
 u8 D_xk2_80104F40[] = {
     0xA6,
     0x00,
@@ -32,269 +40,320 @@ u8 D_xk2_80104F40[] = {
     0x00,
 };
 
+// せんたくしてください
 u8 D_xk2_80104F44[] = {
     0xBE, 0xDD, 0xC0, 0xB8, 0xBC, 0xC3, 0xB8, 0x8B, 0xBB, 0xB2, 0x00, 0x00,
 };
 
+// がすでにかかっている
 u8 D_xk2_80104F50[] = {
     0x81, 0xBD, 0x8E, 0xC6, 0xB6, 0xB6, 0xAF, 0xC3, 0xB2, 0xD9, 0x00, 0x00,
 };
 
+// をせんたくすると
 u8 D_xk2_80104F5C[] = {
     0xA6, 0xBE, 0xDD, 0xC0, 0xB8, 0xBD, 0xD9, 0xC4, 0x00, 0x00, 0x00, 0x00,
 };
 
+// をかいじょできます
 u8 D_xk2_80104F68[] = {
     0xA6, 0xB6, 0xB2, 0x87, 0xAE, 0x8E, 0xB7, 0xCF, 0xBD, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_80104F74[] = {
+// さくせいしたコースを  テストそうこうできます。
+u8 sTestDriveTooltipEncStr[] = {
     0x02, 0xBB, 0xB8, 0xBE, 0xB2, 0xBC, 0xC0, 0x01, 0xBA, 0xB0, 0xBD, 0x02, 0xA6, 0x20, 0x01, 0xC3,
     0xBD, 0xC4, 0x02, 0xBF, 0xB3, 0xBA, 0xB3, 0x8E, 0xB7, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_80104F94[] = {
+// コースを  ラインで ひょうじします。
+u8 sLineDisplayTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0x02, 0xA6, 0x20, 0x01, 0xD7, 0xB2, 0xDD, 0x02,
     0x8E, 0x20, 0xCB, 0xAE, 0xB3, 0x87, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00,
 };
 
-u8 D_xk2_80104FAC[] = {
+// ポイントのおきばしょをせいげんして ちょくせんをつくりやすくします。
+u8 sAlignPointsTooltipEncStr[] = {
     0x01, 0x99, 0xB2, 0xDD, 0xC4, 0x02, 0xC9, 0xB5, 0xB7, 0x90, 0xBC, 0xAE, 0xA6, 0xBE,
     0xB2, 0x84, 0xDD, 0xBC, 0xC3, 0x20, 0xC1, 0xAE, 0xB8, 0xBE, 0xDD, 0xA6, 0xC2, 0xB8,
     0xD8, 0xD4, 0xBD, 0xB8, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_80104FD4[] = {
+// ベースとなるコースを  つくります。
+u8 sCreateCourseTooltipEncStr[] = {
     0x01, 0x93, 0xB0, 0xBD, 0x02, 0xC4, 0xC5, 0xD9, 0x01, 0xBA, 0xB0, 0xBD,
     0x02, 0xA6, 0x20, 0x02, 0xC2, 0xB8, 0xD8, 0xCF, 0xBD, 0xA1, 0x00, 0x00,
 };
 
-u8 D_xk2_80104FEC[] = {
+// コースのポイントを  いどうなどさせます。
+u8 sCreatePointTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0x02, 0xC9, 0x01, 0x99, 0xB2, 0xDD, 0xC4, 0x02, 0xA6, 0x20,
     0x02, 0xB2, 0x8F, 0xB3, 0xC5, 0x8F, 0xBB, 0xBE, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_80105008[] = {
+// どうろのタイプなどを  へんこうします。
+u8 sCreateDesignTooltipEncStr[] = {
     0x02, 0x8F, 0xB3, 0xDB, 0x02, 0xC9, 0x01, 0xC0, 0xB2, 0x97, 0x02, 0xC5, 0x8F, 0x02,
     0xA6, 0x20, 0x02, 0xCD, 0xDD, 0xBA, 0xB3, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
+// どうろにおけるシカケ  またはビルなどを  いれます。
 u8 D_xk2_80105024[] = {
     0x02, 0x8F, 0xB3, 0xDB, 0x02, 0xC6, 0x02, 0xB5, 0xB9, 0xD9, 0x01, 0xBC, 0xB6, 0xB9, 0x20, 0x02, 0xCF, 0xC0,
     0xCA, 0x01, 0x91, 0xD9, 0x02, 0xC5, 0x8F, 0x02, 0xA6, 0x20, 0x02, 0xB2, 0xDA, 0xCF, 0xBD, 0xA1, 0x00, 0x00,
 };
 
-u8 D_xk2_80105048[] = {
+// はいけいのシーンとそらを  へんこうします。
+u8 sCreateBackgroundTooltipEncStr[] = {
     0x02, 0xCA, 0xB2, 0xB9, 0xB2, 0x02, 0xC9, 0x01, 0xBC, 0xB0, 0xDD, 0x02, 0xC4, 0x02,
     0xBF, 0xD7, 0xA6, 0x20, 0x02, 0xCD, 0xDD, 0xBA, 0xB3, 0xBC, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_80105064[] = {
+// BGMを  へんこうします。
+u8 sCreateBGMTooltipEncStr[] = {
     0x01, 0x42, 0x47, 0x4D, 0x02, 0xA6, 0x20, 0x02, 0xCD, 0xDD,
     0xBA, 0xB3, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_80105078[] = {
+// コースポイントを  セットします。
+u8 sPointSetTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0x01, 0x99, 0xB2, 0xDD, 0xC4, 0x02, 0xA6, 0x20,
     0x01, 0xBE, 0xAF, 0xC4, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_80105090[] = {
+// スタートの  ばしょを  いどうします。
+u8 sPointStartTooltipEncStr[] = {
     0x01, 0xBD, 0xC0, 0xB0, 0xC4, 0x02, 0xC9, 0x20, 0x02, 0x90, 0xBC, 0xAE, 0x02, 0xA6,
     0x20, 0x02, 0xB2, 0x8F, 0xB3, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_801050AC[] = {
+// コースせんたいを  ちゅうしんにいどうします。
+u8 sPointCenteringTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0x02, 0x89, 0xDD, 0xC0, 0xB2, 0x02, 0xA6, 0x20, 0x02, 0xC1, 0xAD, 0xB3,
     0xBC, 0xDD, 0x02, 0xC6, 0x02, 0xB2, 0x8F, 0xB3, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_801050CC[] = {
+// コースの  しんこうほうこうを  かえます。
+u8 sPointReverseTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0x02, 0xC9, 0x20, 0x02, 0xBC, 0xDD, 0xBA, 0xB3, 0xCE, 0xB3,
     0xBA, 0xB3, 0x02, 0xA6, 0x20, 0x02, 0xB6, 0xB4, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_801050E8[] = {
+// コースせんたいを  けします。
+u8 sPointClearAllTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0x02, 0x89, 0xDD, 0xC0, 0xB2, 0x02,
     0xA6, 0x20, 0x02, 0xB9, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00,
 };
 
-u8 D_xk2_801050FC[] = {
+// ポイントを  へいこういどうさせます。
+u8 sMoveXZTooltipEncStr[] = {
     0x01, 0x99, 0xB2, 0xDD, 0xC4, 0x02, 0xA6, 0x20, 0x02, 0xCD, 0xB2, 0xBA,
     0xB3, 0x02, 0xB2, 0x8F, 0xB3, 0x02, 0xBB, 0xBE, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_80105114[] = {
+// ポイントの  たかさを  かえます。
+u8 sMoveYTooltipEncStr[] = {
     0x01, 0x99, 0xB2, 0xDD, 0xC4, 0x02, 0xC9, 0x20, 0x02, 0xC0, 0xB6, 0xBB,
     0xA6, 0x20, 0x02, 0xB6, 0xB4, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_8010512C[] = {
+// ポイントを  ちゅうしんに  みちはばを  かえます。
+u8 sMoveWidthTooltipEncStr[] = {
     0x01, 0x99, 0xB2, 0xDD, 0xC4, 0x02, 0xA6, 0x20, 0x02, 0xC1, 0xAD, 0xB3, 0xBC, 0xDD, 0x02, 0xC6,
     0x20, 0x02, 0xD0, 0xC1, 0xCA, 0x90, 0x02, 0xA6, 0x20, 0x02, 0xB6, 0xB4, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_8010514C[] = {
+// ポイントを  ちゅうしんに  みちの  かたむきを  かえます。
+u8 sMoveBankTooltipEncStr[] = {
     0x01, 0x99, 0xB2, 0xDD, 0xC4, 0x02, 0xA6, 0x20, 0x02, 0xC1, 0xAD, 0xB3, 0xBC, 0xDD,
     0x02, 0xC6, 0x20, 0x02, 0xD0, 0xC1, 0x02, 0xC9, 0x20, 0x02, 0xB6, 0xC0, 0xD1, 0xB7,
     0x02, 0xA6, 0x20, 0x02, 0xB6, 0xB4, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_80105174[] = {
+// みちはばの  ちゅうしんてんを  かえます。
+u8 sMoveCenterTooltipEncStr[] = {
     0x02, 0xD0, 0xC1, 0xCA, 0x90, 0x02, 0xC9, 0x20, 0x02, 0xC1, 0xAD, 0xB3, 0xBC, 0xDD,
     0x02, 0xC3, 0xDD, 0x02, 0xA6, 0x20, 0x02, 0xB6, 0xB4, 0xCF, 0xBD, 0xA1, 0x00, 0x00,
 };
 
-u8 D_xk2_80105190[] = {
+// せんたくしたポイントを  けします。
+u8 sMoveClearTooltipEncStr[] = {
     0x02, 0xBE, 0xDD, 0xC0, 0xB8, 0xBC, 0xC0, 0x01, 0x99, 0xB2, 0xDD, 0xC4,
     0x02, 0xA6, 0x20, 0x02, 0xB9, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_801051A8[] = {
+// せんたくしたふくすうのポイントを  まっすぐにならべます。
+u8 sMoveStraightTooltipEncStr[] = {
     0x02, 0xBE, 0xDD, 0xC0, 0xB8, 0xBC, 0xC0, 0x02, 0xCC, 0xB8, 0xBD, 0xB3, 0x02, 0xC9,
     0x01, 0x99, 0xB2, 0xDD, 0xC4, 0x02, 0xA6, 0x20, 0x02, 0xCF, 0xAF, 0xBD, 0x83, 0x02,
     0xC6, 0x02, 0xC5, 0xD7, 0x93, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_801051D0[] = {
+// ガードレールのある  ふつうの  どうろです。
+u8 sTrackDesignRoadTooltipEncStr[] = {
     0x01, 0x81, 0xB0, 0x8F, 0xDA, 0xB0, 0xD9, 0x02, 0xC9, 0x02, 0xB1, 0xD9, 0x20, 0x02, 0xCC, 0xC2,
     0xB3, 0x02, 0xC9, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_801051F0[] = {
+// たかいガードレールがセットされる  どうろです。
+u8 sTrackDesignHRoadTooltipEncStr[] = {
     0x02, 0xC0, 0xB6, 0xB2, 0x01, 0x81, 0xB0, 0x8F, 0xDA, 0xB0, 0xD9, 0x02, 0x81, 0x01, 0xBE, 0xAF,
     0xC4, 0x02, 0xBB, 0xDA, 0xD9, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00,
 };
 
-u8 D_xk2_80105210[] = {
+// ガードレールがない  きけんな  どうろです。
+u8 sTrackDesignTRoadTooltipEncStr[] = {
     0x01, 0x81, 0xB0, 0x8F, 0xDA, 0xB0, 0xD9, 0x02, 0x81, 0x02, 0xC5, 0xB2, 0x20, 0x02, 0xB7, 0xB9,
     0xDD, 0x02, 0xC5, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_80105230[] = {
+// トンネルつきの  どうろです。
+u8 sTrackDesignTunnelTooltipEncStr[] = {
     0x01, 0xC4, 0xDD, 0xC8, 0xD9, 0x02, 0xC2, 0xB7, 0x02, 0xC9,
     0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_80105244[] = {
+// パイプじょうの  なかをはしる  どうろです。
+u8 sTrackDesignPipeTooltipEncStr[] = {
     0x01, 0x95, 0xB2, 0x97, 0x02, 0x87, 0xAE, 0xB3, 0x02, 0xC9, 0x20, 0x02, 0xC5, 0xB6,
     0xA6, 0xCA, 0xBC, 0xD9, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_80105260[] = {
+// ハーフパイプじょうの  なかをはしる  どうろです。
+u8 sTrackDesignHalfPipeTooltipEncStr[] = {
     0x01, 0xCA, 0xB0, 0xCC, 0x01, 0x95, 0xB2, 0x97, 0x02, 0x87, 0xAE, 0xB3, 0x02, 0xC9, 0x20, 0x02,
     0xC5, 0xB6, 0xA6, 0xCA, 0xBC, 0xD9, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_80105280[] = {
+// パイプじょうの  そとをはしる  どうろです。
+u8 sTrackDesignCylinderTooltipEncStr[] = {
     0x01, 0x95, 0xB2, 0x97, 0x02, 0x87, 0xAE, 0xB3, 0x02, 0xC9, 0x20, 0x02, 0xBF, 0xC4,
     0xA6, 0xCA, 0xBC, 0xD9, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0x8E, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_8010529C[] = {
+// どうろと  どうろのあいだに  くうかんを  つくります。
+u8 sTrackDesignSpaceTooltipEncStr[] = {
     0x02, 0x8F, 0xB3, 0xDB, 0x02, 0xC4, 0x20, 0x02, 0x8F, 0xB3, 0xDB, 0x02, 0xC9, 0x02, 0xB1, 0xB2, 0x8B, 0x02,
     0xC6, 0x20, 0x02, 0xB8, 0xB3, 0xB6, 0xDD, 0x02, 0xA6, 0x20, 0x02, 0xC2, 0xB8, 0xD8, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_801052C0[] = {
+// ポイントどうしのあいだに  ループを  つくります。
+u8 sTrackDesignLoopTooltipEncStr[] = {
     0x01, 0x99, 0xB2, 0xDD, 0xC4, 0x02, 0x8F, 0xB3, 0xBC, 0xC9, 0x02, 0xB1, 0xB2, 0x8B, 0x02, 0xC6,
     0x20, 0x01, 0xD9, 0xB0, 0x97, 0x02, 0xA6, 0x20, 0x02, 0xC2, 0xB8, 0xD8, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_801052E0[] = {
+// エネルギーを  かいふくさせるエリアです。
+u8 sTrackPartPitTooltipEncStr[] = {
     0x01, 0xB4, 0xC8, 0xD9, 0x82, 0xB0, 0x02, 0xA6, 0x20, 0x02, 0xB6, 0xB2, 0xCC, 0xB8,
     0xBB, 0xBE, 0xD9, 0x01, 0xB4, 0xD8, 0xB1, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_801052FC[] = {
+// いちじてきに  かそくできるプレートです。
+u8 sTrackPartDashTooltipEncStr[] = {
     0x02, 0xB2, 0xC1, 0x87, 0xC3, 0xB7, 0xC6, 0x20, 0x02, 0xB6, 0xBF, 0xB8, 0x8E, 0xB7,
     0xD9, 0x01, 0x97, 0xDA, 0xB0, 0xC4, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_80105318[] = {
+// げんそくするエリアです。
+u8 sTrackPartDirtTooltipEncStr[] = {
     0x02, 0x84, 0xDD, 0xBF, 0xB8, 0xBD, 0xD9, 0x01, 0xB4, 0xD8, 0xB1, 0x02, 0x8E, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_80105328[] = {
+// すべりやすいエリアです。
+u8 sTrackPartIceTooltipEncStr[] = {
     0x02, 0xBD, 0x93, 0xD8, 0x02, 0xD4, 0xBD, 0xB2, 0x01, 0xB4,
     0xD8, 0xB1, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_8010533C[] = {
+// ふむと  ジャンプするプレートです。
+u8 sTrackPartJumpTooltipEncStr[] = {
     0x02, 0xCC, 0xD1, 0xC4, 0x20, 0x01, 0x87, 0xAC, 0xDD, 0x97, 0x02, 0xBD,
     0xD9, 0x01, 0x97, 0xDA, 0xB0, 0xC4, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00,
 };
 
-u8 D_xk2_80105354[] = {
+// ふむと  とばされてダメージも  うけるワナです。
+u8 sTrackPartTrapTooltipEncStr[] = {
     0x02, 0xCC, 0xD1, 0xC4, 0x20, 0x02, 0xC4, 0x90, 0xBB, 0xDA, 0xC3, 0x01, 0x8B, 0xD2, 0xB0, 0x87,
     0x02, 0xD3, 0x20, 0x02, 0xB3, 0xB9, 0xD9, 0x01, 0xDC, 0xC5, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00,
 };
 
-u8 D_xk2_80105374[] = {
+// はいけいの  ゲートるいです。
+u8 sTrackPartGateTooltipEncStr[] = {
     0x02, 0xCA, 0xB2, 0xB9, 0xB2, 0x02, 0xC9, 0x20, 0x01, 0x84,
     0xB0, 0xC4, 0x02, 0xD9, 0xB2, 0x8E, 0xBD, 0xA1, 0x00, 0x00,
 };
 
-u8 D_xk2_80105388[] = {
+// はいけいの  ビル  いわなどです。
+u8 sTrackPartBuildingTooltipEncStr[] = {
     0x02, 0xCA, 0xB2, 0xB9, 0xB2, 0x02, 0xC9, 0x20, 0x01, 0x91, 0xD9, 0x20,
     0x02, 0xB2, 0xDC, 0xC5, 0x8F, 0x02, 0x8E, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_801053A0[] = {
+// はいけいの  かんばんるいです。
+u8 sTrackPartSignTooltipEncStr[] = {
     0x02, 0xCA, 0xB2, 0xB9, 0xB2, 0x02, 0xC9, 0x20, 0x02, 0xB6,
     0xDD, 0x90, 0xDD, 0x02, 0xD9, 0xB2, 0x8E, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_801053B4[] = {
+// コースファイルを  よみだします。
+u8 sFileLoadTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xA6,
     0x20, 0x02, 0xD6, 0xD0, 0x8B, 0xBC, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_801053C8[] = {
+// コースファイルを  かきこみます。
+u8 sFileSaveTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xA6,
     0x20, 0x02, 0xB6, 0xB7, 0xBA, 0xD0, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_801053DC[] = {
+// コースファイルの  なまえを  へんこうします。
+u8 sFileRenameTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xC9, 0x20, 0x02, 0xC5, 0xCF,
     0xB4, 0x02, 0xA6, 0x20, 0x02, 0xCD, 0xDD, 0xBA, 0xB3, 0xBC, 0xCF, 0xBD, 0xA1, 0x00,
 };
 
-u8 D_xk2_801053F8[] = {
+// コースファイルを  けします。
+u8 sFileEraseTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xA6,
     0x20, 0x02, 0xB9, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_8010540C[] = {
+// コースファイルを  ほかへ  コピーします。
+u8 sFileCopyTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xA6, 0x20, 0x02, 0xCE, 0xB6,
     0xCD, 0x20, 0x01, 0xBA, 0x96, 0xB0, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_80105428[] = {
+// コースファイルを  エディットカップに  エントリーします。
+u8 sEntryRegisterTooltipEncStr[] = {
     0x01, 0xBA, 0xB0, 0xBD, 0xCC, 0xA7, 0xB2, 0xD9, 0x02, 0xA6, 0x20, 0x01, 0xB4, 0x8E, 0xA8, 0xAF, 0xC4, 0xB6,
     0xAF, 0x97, 0x02, 0xC6, 0x20, 0x01, 0xB4, 0xDD, 0xC4, 0xD8, 0xB0, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00,
 };
 
-u8 D_xk2_8010544C[] = {
+// エントリーしているコースを  かいじょします。
+u8 sEntryDeregisterTooltipEncStr[] = {
     0x01, 0xB4, 0xDD, 0xC4, 0xD8, 0xB0, 0x02, 0xBC, 0xC3, 0xB2, 0xD9, 0x01, 0xBA, 0xB0, 0xBD, 0x02,
     0xA6, 0x20, 0x02, 0xB6, 0xB2, 0x87, 0xAE, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
-u8 D_xk2_8010546C[] = {
+// エントリーしているコースを  すべてかいじょします。
+u8 sEntryDeregisterAllTooltipEncStr[] = {
     0x01, 0xB4, 0xDD, 0xC4, 0xD8, 0xB0, 0x02, 0xBC, 0xC3, 0xB2, 0xD9, 0x01, 0xBA, 0xB0, 0xBD, 0x02, 0xA6, 0x20,
     0x02, 0xBD, 0x93, 0xC3, 0x02, 0xB6, 0xB2, 0x87, 0xAE, 0x02, 0xBC, 0xCF, 0xBD, 0xA1, 0x00, 0x00, 0x00, 0x00,
 };
 
 extern GfxPool* gGfxPool;
 extern unk_807B3C20 D_802CB6D0;
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 extern Vtx* gCourseVtxPtr;
 
 s32 func_xk2_800F2750(void) {
     gCourseVtxPtr = gGfxPool->courseVtxBuffer;
-    gCourseInfos->courseSegments = D_802CB6D0.unk_0000;
-    gCourseInfos->segmentCount = D_802CB6D0.controlPointCount;
-    if (D_800D6CA0.unk_20 == -1) {
+    gCourseInfos[0].courseSegments = D_802CB6D0.segments;
+    gCourseInfos[0].segmentCount = D_802CB6D0.controlPointCount;
+    if (gCourseEditContext.unreasonableControlPoint == -1) {
         Course_SegmentContinuousFlagInit(gCourseInfos);
         Course_SegmentFormsInit(gCourseInfos);
         return func_800A1954(gCourseInfos);
@@ -305,185 +364,175 @@ s32 func_xk2_800F2750(void) {
 extern s32 D_xk2_80104364;
 extern s32 D_xk2_80104368;
 extern s32 D_xk2_80104378;
-extern s32 D_xk1_80032C20;
+extern s32 gExpansionKitYesNoOptionIndex;
 extern s32 gSegmentChunkCount;
-extern u8 D_xk2_80104CA0[];
+extern u8 gCourseEditErrors[12];
 
 void func_xk2_800F27DC(CourseInfo* courseInfo) {
     s32 i;
-    s32 temp_v0;
+    s32 invalidChunkIndexInfo;
     s32 pad;
-    s32 sp18;
+    bool sp18;
 
     D_xk2_80104364 = 0;
     D_xk2_80104368 = 0;
     COURSE_CONTEXT()->courseData.flag = 0;
-    sp18 = 0;
+    sp18 = false;
     if (D_802CB6D0.controlPointCount < 4) {
-        D_xk1_80032C20 = 0;
-        D_800D6CA0.unk_08 = 0x10;
+        gExpansionKitYesNoOptionIndex = 0;
+        gCourseEditContext.state = 0x10;
         D_xk2_80104378 = 9;
         return;
     }
 
-    i = 0;
-
-    while (true) {
-        if (D_xk2_80104CA0[i] != 0) {
-            D_xk1_80032C20 = 0;
-            D_800D6CA0.unk_08 = 0x10;
+    for (i = 0; i < ARRAY_COUNT(gCourseEditErrors); i++) {
+        if (gCourseEditErrors[i]) {
+            gExpansionKitYesNoOptionIndex = 0;
+            gCourseEditContext.state = 0x10;
             D_xk2_80104378 = 7;
-            break;
+            return;
         }
-        i++;
-        if (i == 12) {
-            D_xk2_80104CA0[7] = 0;
-            if ((func_i2_800B39B4(courseInfo) != -1) || (func_i2_800BE8BC(courseInfo) != -1)) {
-                D_xk1_80032C20 = 0;
-                D_800D6CA0.unk_08 = 0x10;
-                D_xk2_80104378 = 7;
-                break;
-            }
-            func_800A4D0C(2);
-            temp_v0 = func_800A1954(courseInfo);
-            if (temp_v0 != 0) {
-                D_xk1_80032C20 = 0;
-                D_800D6CA0.unk_08 = 0x10;
-                D_xk2_80104378 = 7;
-                if (temp_v0 & 0x10000) {
-                    D_xk2_80104CA0[3] = 1;
-                    D_xk2_80104364 = 1;
-                    D_800D6CA0.unk_1C = func_xk2_800E9134(temp_v0 & 0xFFFF);
-                }
-                if (gSegmentChunkCount >= 0x2FF) {
-                    D_xk2_80104CA0[0xA] = 1;
-                    D_xk2_80104368 = 1;
-                }
-                func_800A4D0C(0);
-                sp18 = 1;
-            }
-            Course_EffectsViewInteractDataInit(false);
-            if (D_xk2_80104CA0[7] != 0) {
-                D_xk1_80032C20 = 0;
-                D_800D6CA0.unk_08 = 0x10;
-                D_xk2_80104378 = 7;
-                sp18 = 1;
-                func_800A4D0C(0);
-            }
-            func_800A4D0C(1);
-            temp_v0 = func_800A1954(courseInfo);
-            if (temp_v0 != 0) {
-                D_xk1_80032C20 = 0;
-                D_800D6CA0.unk_08 = 0x10;
-                D_xk2_80104378 = 7;
-                sp18 = 1;
-                if (temp_v0 & 0x10000) {
-                    D_xk2_80104CA0[3] = 1;
-                    D_xk2_80104364 = 1;
-                    D_800D6CA0.unk_1C = func_xk2_800E9134(temp_v0 & 0xFFFF);
-                }
-                if (gSegmentChunkCount >= 0x2FF) {
-                    D_xk2_80104CA0[0xA] = 1;
-                    D_xk2_80104368 = 1;
-                }
-                func_800A4D0C(0);
-            }
-            Course_EffectsViewInteractDataInit(false);
-            if (D_xk2_80104CA0[7] != 0) {
-                D_xk1_80032C20 = 0;
-                D_800D6CA0.unk_08 = 0x10;
-                D_xk2_80104378 = 7;
-                sp18 = 1;
-                func_800A4D0C(0);
-            }
-            func_800A4D0C(0);
-            if (sp18 == 0) {
-                COURSE_CONTEXT()->courseData.flag = 1;
-            }
-            break;
+    }
+    gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] = false;
+    if ((func_i2_800B39B4(courseInfo) != -1) || (func_i2_800BE8BC(courseInfo) != -1)) {
+        gExpansionKitYesNoOptionIndex = 0;
+        gCourseEditContext.state = 0x10;
+        D_xk2_80104378 = 7;
+        return;
+    }
+    func_800A4D0C(2);
+    invalidChunkIndexInfo = func_800A1954(courseInfo);
+    if (invalidChunkIndexInfo != 0) {
+        gExpansionKitYesNoOptionIndex = 0;
+        gCourseEditContext.state = 0x10;
+        D_xk2_80104378 = 7;
+        if (invalidChunkIndexInfo & 0x10000) {
+            gCourseEditErrors[COURSE_EDIT_ERROR_ROADS_OVERLAP] = true;
+            D_xk2_80104364 = 1;
+            gCourseEditContext.overlappingControlPoint = func_xk2_800E9134(invalidChunkIndexInfo & 0xFFFF);
         }
+        if (gSegmentChunkCount >= 0x2FF) {
+            gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY] = true;
+            D_xk2_80104368 = 1;
+        }
+        func_800A4D0C(0);
+        sp18 = true;
+    }
+    Course_EffectsViewInteractDataInit(false);
+    if (gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS]) {
+        gExpansionKitYesNoOptionIndex = 0;
+        gCourseEditContext.state = 0x10;
+        D_xk2_80104378 = 7;
+        sp18 = true;
+        func_800A4D0C(0);
+    }
+    func_800A4D0C(1);
+    invalidChunkIndexInfo = func_800A1954(courseInfo);
+    if (invalidChunkIndexInfo != 0) {
+        gExpansionKitYesNoOptionIndex = 0;
+        gCourseEditContext.state = 0x10;
+        D_xk2_80104378 = 7;
+        sp18 = true;
+        if (invalidChunkIndexInfo & 0x10000) {
+            gCourseEditErrors[COURSE_EDIT_ERROR_ROADS_OVERLAP] = true;
+            D_xk2_80104364 = 1;
+            gCourseEditContext.overlappingControlPoint = func_xk2_800E9134(invalidChunkIndexInfo & 0xFFFF);
+        }
+        if (gSegmentChunkCount >= 0x2FF) {
+            gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY] = true;
+            D_xk2_80104368 = 1;
+        }
+        func_800A4D0C(0);
+    }
+    Course_EffectsViewInteractDataInit(false);
+    if (gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS]) {
+        gExpansionKitYesNoOptionIndex = 0;
+        gCourseEditContext.state = 0x10;
+        D_xk2_80104378 = 7;
+        sp18 = true;
+        func_800A4D0C(0);
+    }
+    func_800A4D0C(0);
+    if (!sp18) {
+        COURSE_CONTEXT()->courseData.flag = 1;
     }
 }
 
-s32 func_xk2_800F2AC0(s8* arg0) {
-    s32 var_v1;
+s32 func_xk2_800F2AC0(s8* str) {
+    s32 numLines;
 
-    var_v1 = 0;
+    numLines = 0;
     do {
-        if ((*arg0 == 0xA) || (*arg0 == 0)) {
-            var_v1++;
+        if ((*str == '\n') || (*str == '\0')) {
+            numLines++;
         }
-    } while (!*arg0++ == 0);
-    return var_v1;
+    } while (!*str++ == 0);
+    return numLines;
 }
 
-s32 func_xk2_800F2AF4(s8* arg0) {
-    s32 var_v0;
-    s32 var_v1;
+s32 func_xk2_800F2AF4(s8* str) {
+    s32 lineLength;
+    s32 maxLineLength;
 
-    var_v1 = 0;
-    var_v0 = 0;
+    maxLineLength = 0;
+    lineLength = 0;
 
     while (true) {
-        if ((*arg0 != 0xA) && (*arg0 != 0)) {
-            arg0++;
-            var_v0++;
+        if ((*str != '\n') && (*str != '\0')) {
+            str++;
+            lineLength++;
             continue;
         }
 
-        if (var_v1 < var_v0) {
-            var_v1 = var_v0;
+        if (maxLineLength < lineLength) {
+            maxLineLength = lineLength;
         }
-        if (*arg0 == 0) {
+        if (*str == '\0') {
             break;
         }
-        arg0++;
-        var_v0 = 0;
+        str++;
+        lineLength = 0;
     }
-    return var_v1;
+    return maxLineLength;
 }
 
-extern Gfx D_3000510[];
-extern Gfx D_3000540[];
-extern Gfx D_8014940[];
-extern u8* D_xk1_800331F0[];
+extern char* gCourseEditMessageStrs[];
 extern s32 gCourseEditCursorYPos;
 
-void func_xk2_800F2B48(Gfx** gfxP) {
+void CourseEdit_DrawPressBToReturnToPreviousState(Gfx** gfxP) {
     Gfx* gfx;
     s32 width;
     s32 i;
-    s32 temp_v1;
+    s32 left;
     s32 top = 200;
     s32 pad;
 
     gfx = *gfxP;
     D_xk2_80104F04 = 0;
     for (i = 0; i < 12; i++) {
-        if (D_xk2_80104CA0[i] != 0) {
+        if (gCourseEditErrors[i]) {
             D_xk2_80104F04 = 1;
         }
     }
 
     if ((D_xk2_80104F04 != 0) && (func_xk2_800EF780() != 0) && (gCourseEditCursorYPos < 200)) {
-        width = mfsStrLen(D_xk1_800331F0[21]) * 8;
-        width += 16;
-        temp_v1 = (s32) (SCREEN_WIDTH - width) / 2;
+        width = mfsStrLen(gCourseEditMessageStrs[21]) * 8 + 16;
+        left = (s32) (SCREEN_WIDTH - width) / 2;
 
         gSPDisplayList(gfx++, D_3000510);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
         // FAKE
-        gSPTextureRectangle(pad = gfx++, (temp_v1 - 2) << 2, (top - 2) << 2, (temp_v1 + width + 2) << 2,
-                            (top + 16 + 2) << 2, 0, 0, 0, 1 << 10, 1 << 10);
+        gSPTextureRectangle(pad = gfx++, (left - 2) << 2, (top - 2) << 2, (left + width + 2) << 2, (top + 16 + 2) << 2,
+                            0, 0, 0, 1 << 10, 1 << 10);
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 255);
-        gSPTextureRectangle(gfx++, (temp_v1 - 1) << 2, (top - 1) << 2, (temp_v1 + width + 1) << 2, (top + 16 + 1) << 2,
-                            0, 0, 0, 1 << 10, 1 << 10);
+        gSPTextureRectangle(gfx++, (left - 1) << 2, (top - 1) << 2, (left + width + 1) << 2, (top + 16 + 1) << 2, 0, 0,
+                            0, 1 << 10, 1 << 10);
         gSPDisplayList(gfx++, D_3000540);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-        gfx = func_xk1_800264C0(gfx, temp_v1 + 16, top, 0x15);
+        gfx = func_xk1_800264C0(gfx, left + 16, top, 21);
 
         gSPDisplayList(gfx++, D_8014940);
 
@@ -492,14 +541,13 @@ void func_xk2_800F2B48(Gfx** gfxP) {
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
-        gSPTextureRectangle(gfx++, temp_v1 << 2, top << 2, (temp_v1 + 16) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10,
-                            1 << 10);
+        gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 16) << 2, (top + 16) << 2, 0, 0, 0, 1 << 10, 1 << 10);
 
         *gfxP = gfx;
     }
 }
 
-extern s32 D_xk1_80032AD0;
+extern s32 gExpansionKitEncStrEncType;
 extern s32 D_80119880;
 
 void func_xk2_800F2E4C(Gfx** gfxP) {
@@ -510,7 +558,7 @@ void func_xk2_800F2E4C(Gfx** gfxP) {
     s32 width;
     s32 height;
 
-    if ((D_800D6CA0.unk_08 != 3) || (D_80119880 != 4)) {
+    if ((gCourseEditContext.state != COURSE_EDIT_IN_FILE_MENU) || (D_80119880 != 4)) {
         return;
     }
 
@@ -532,50 +580,50 @@ void func_xk2_800F2E4C(Gfx** gfxP) {
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
     gDPSetTextureFilter(gfx++, G_TF_POINT);
 
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, left, top, D_xk2_80104F28);
-    D_xk1_80032AD0 = 1;
-    gfx = func_xk1_8002924C(gfx, left + 40, top, D_xk2_80104F30);
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, left + 80, top, D_xk2_80104F38);
-    D_xk1_80032AD0 = 1;
-    gfx = func_xk1_8002924C(gfx, left + 112, top, D_xk2_80104F40);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, D_xk2_80104F28);
+    gExpansionKitEncStrEncType = 1;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 40, top, D_xk2_80104F30);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 80, top, D_xk2_80104F38);
+    gExpansionKitEncStrEncType = 1;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 112, top, D_xk2_80104F40);
     top += 8;
-    D_xk1_80032AD0 = 1;
+    gExpansionKitEncStrEncType = 1;
 
-    gfx = func_xk1_8002924C(gfx, left, top, D_xk2_80104F44);
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, D_xk2_80104F44);
     top += 8;
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 0, 255);
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, left, top, D_xk2_80104F28);
-    D_xk1_80032AD0 = 1;
-    gfx = func_xk1_8002924C(gfx, left + 40, top, D_xk2_80104F50);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, D_xk2_80104F28);
+    gExpansionKitEncStrEncType = 1;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 40, top, D_xk2_80104F50);
     top += 8;
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, left, top, D_xk2_80104F38);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, D_xk2_80104F38);
     gDPPipeSync(gfx++);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
-    D_xk1_80032AD0 = 1;
-    gfx = func_xk1_8002924C(gfx, left + 32, top, D_xk2_80104F5C);
+    gExpansionKitEncStrEncType = 1;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 32, top, D_xk2_80104F5C);
     top += 8;
-    D_xk1_80032AD0 = 0;
-    gfx = func_xk1_8002924C(gfx, left, top, D_xk2_80104F28);
-    D_xk1_80032AD0 = 1;
-    gfx = func_xk1_8002924C(gfx, left + 40, top, D_xk2_80104F68);
+    gExpansionKitEncStrEncType = 0;
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, D_xk2_80104F28);
+    gExpansionKitEncStrEncType = 1;
+    gfx = ExpansionKit_DrawEncStr(gfx, left + 40, top, D_xk2_80104F68);
     *gfxP = gfx;
 }
 
-extern s32 D_xk2_80119918;
+extern s32 gCourseEditCameraOnlyMode;
 
-void func_xk2_800F3164(Gfx** gfxP) {
+void CourseEdit_DrawCameraOnlyInstructions(Gfx** gfxP) {
     Gfx* gfx;
     s32 i;
     s32 left;
     s32 top;
     s32 width;
 
-    if (D_xk2_80119918 == 0) {
+    if (!gCourseEditCameraOnlyMode) {
         return;
     }
     gfx = *gfxP;
@@ -597,43 +645,40 @@ void func_xk2_800F3164(Gfx** gfxP) {
     *gfxP = gfx;
 }
 
-s32 func_xk2_800F3320(s8* arg0) {
-    s32 var_v1;
-    s32 temp;
+s32 CourseEdit_GetEncStrLength(s8* str) {
+    s32 length;
 
-    var_v1 = 0;
+    length = 0;
 
     while (true) {
-        // FAKE
-        temp = *arg0;
-        switch (*arg0) {
-            case 0:
-                goto exit;
+        if (*str == '\0') {
+            break;
+        }
+        switch (*str) {
             case 1:
             case 2:
                 break;
             default:
-                var_v1++;
+                length++;
                 break;
         }
-        arg0++;
+        str++;
     }
 
-exit:
-    return var_v1;
+    return length;
 }
 
-void func_xk2_800F335C(Gfx** gfxP, s32 top, s8* arg2) {
+void CourseEdit_DrawTooltip(Gfx** gfxP, s32 top, s8* str) {
     s32 left;
     s32 width;
     s32 height;
-    s32 temp_v0;
+    s32 length;
     Gfx* gfx;
 
     gfx = *gfxP;
-    temp_v0 = func_xk2_800F3320(arg2);
-    width = temp_v0 * 8;
-    left = (((0x22 - temp_v0) / 2) * 8) + 0x18;
+    length = CourseEdit_GetEncStrLength(str);
+    width = length * 8;
+    left = (((34 - length) / 2) * 8) + 24;
     height = 8;
 
     gSPDisplayList(gfx++, D_3000510);
@@ -647,32 +692,32 @@ void func_xk2_800F335C(Gfx** gfxP, s32 top, s8* arg2) {
     gSPDisplayList(gfx++, D_3000540);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
 
-    gfx = func_xk1_8002924C(gfx, left, top, arg2);
+    gfx = ExpansionKit_DrawEncStr(gfx, left, top, str);
     *gfxP = gfx;
 }
 
-extern s32 D_8076C96C;
+extern s32 gCourseEditToolTipEnabled;
 extern s32 gCourseEditHighlightedIconIndex;
 
-void func_xk2_800F3548(Gfx** gfxP) {
+void CourseEdit_DrawIconTooltip(Gfx** gfxP) {
     s32 top = 194;
     Gfx* gfx;
 
-    if (D_8076C96C == 0) {
+    if (!gCourseEditToolTipEnabled) {
         return;
     }
     gfx = *gfxP;
     switch (gCourseEditHighlightedIconIndex) {
-        case 0:
-            func_xk2_800F335C(&gfx, top, D_xk2_80104F74);
+        case COURSE_EDIT_ICON_TEST_DRIVE:
+            CourseEdit_DrawTooltip(&gfx, top, sTestDriveTooltipEncStr);
             break;
-        case 1:
-            func_xk2_800F335C(&gfx, top, D_xk2_80104F94);
+        case COURSE_EDIT_ICON_LINE_DISPLAY:
+            CourseEdit_DrawTooltip(&gfx, top, sLineDisplayTooltipEncStr);
             break;
-        case 2:
-            func_xk2_800F335C(&gfx, top, D_xk2_80104FAC);
+        case COURSE_EDIT_ICON_ALIGN_POINTS:
+            CourseEdit_DrawTooltip(&gfx, top, sAlignPointsTooltipEncStr);
             break;
-        case 3:
+        case COURSE_EDIT_ICON_TOOLTIPS:
             break;
     }
     *gfxP = gfx;
@@ -687,178 +732,178 @@ extern MenuWidget gMoveWidget;
 extern MenuWidget gDesignStyleWidget;
 extern MenuWidget gPartsStyleWidget;
 
-void func_xk2_800F3600(Gfx** gfxP) {
+void CourseEdit_DrawMenuWidgetTooltip(Gfx** gfxP) {
     s32 pad;
     Gfx* gfx;
-    MenuWidget* sp2C;
+    MenuWidget* widget;
 
-    if ((D_8076C96C == 0) || (D_800D6CA0.unk_08 != 1)) {
+    if (!gCourseEditToolTipEnabled || (gCourseEditContext.state != COURSE_EDIT_IN_MENU)) {
         return;
     }
-    sp2C = func_xk1_80026914(&gCourseEditWidget);
+    widget = func_xk1_80026914(&gCourseEditWidget);
 
     gfx = *gfxP;
-    if (sp2C == &gCreateWidget) {
-        switch (sp2C->highlightedIndex) {
-            case 0:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80104FD4);
-                func_xk2_800EECD4(&gfx, 0, 156, D_xk1_800331F0[25], 25);
+    if (widget == &gCreateWidget) {
+        switch (widget->highlightedIndex) {
+            case CREATE_OPTION_COURSE:
+                CourseEdit_DrawTooltip(&gfx, 24, sCreateCourseTooltipEncStr);
+                func_xk2_800EECD4(&gfx, 0, 156, gCourseEditMessageStrs[25], 25);
                 break;
-            case 1:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80104FEC);
-                func_xk2_800EECD4(&gfx, 0, 156, D_xk1_800331F0[26], 26);
+            case CREATE_OPTION_POINT:
+                CourseEdit_DrawTooltip(&gfx, 24, sCreatePointTooltipEncStr);
+                func_xk2_800EECD4(&gfx, 0, 156, gCourseEditMessageStrs[26], 26);
                 break;
-            case 2:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105008);
-                func_xk2_800EECD4(&gfx, 0, 156, D_xk1_800331F0[27], 27);
+            case CREATE_OPTION_DESIGN:
+                CourseEdit_DrawTooltip(&gfx, 24, sCreateDesignTooltipEncStr);
+                func_xk2_800EECD4(&gfx, 0, 156, gCourseEditMessageStrs[27], 27);
                 break;
-            case 3:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105024);
-                func_xk2_800EECD4(&gfx, 0, 156, D_xk1_800331F0[28], 28);
+            case CREATE_OPTION_PARTS:
+                CourseEdit_DrawTooltip(&gfx, 24, D_xk2_80105024);
+                func_xk2_800EECD4(&gfx, 0, 156, gCourseEditMessageStrs[28], 28);
                 break;
-            case 4:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105048);
+            case CREATE_OPTION_BACKGROUND:
+                CourseEdit_DrawTooltip(&gfx, 24, sCreateBackgroundTooltipEncStr);
                 break;
-            case 5:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105064);
-                break;
-        }
-    }
-    if (sp2C == &gPointWidget) {
-        switch (sp2C->highlightedIndex) {
-            case 0:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105078);
-                break;
-            case 1:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105090);
-                break;
-            case 2:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801050AC);
-                break;
-            case 3:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801050CC);
-                break;
-            case 4:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801050E8);
+            case CREATE_OPTION_BGM:
+                CourseEdit_DrawTooltip(&gfx, 24, sCreateBGMTooltipEncStr);
                 break;
         }
     }
-    if (sp2C == &gMoveWidget) {
-        switch (sp2C->highlightedIndex) {
-            case 0:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801050FC);
+    if (widget == &gPointWidget) {
+        switch (widget->highlightedIndex) {
+            case POINT_OPTION_SET:
+                CourseEdit_DrawTooltip(&gfx, 24, sPointSetTooltipEncStr);
                 break;
-            case 1:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105114);
+            case POINT_OPTION_START:
+                CourseEdit_DrawTooltip(&gfx, 24, sPointStartTooltipEncStr);
                 break;
-            case 2:
-                func_xk2_800F335C(&gfx, 24, D_xk2_8010512C);
+            case POINT_OPTION_CENTERING:
+                CourseEdit_DrawTooltip(&gfx, 24, sPointCenteringTooltipEncStr);
                 break;
-            case 3:
-                func_xk2_800F335C(&gfx, 24, D_xk2_8010514C);
+            case POINT_OPTION_REVERSE:
+                CourseEdit_DrawTooltip(&gfx, 24, sPointReverseTooltipEncStr);
                 break;
-            case 4:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105174);
-                break;
-            case 5:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105190);
-                break;
-            case 6:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801051A8);
+            case POINT_OPTION_CLEAR_ALL:
+                CourseEdit_DrawTooltip(&gfx, 24, sPointClearAllTooltipEncStr);
                 break;
         }
     }
-    if (sp2C == &gCourseEditFileWidget) {
-        switch (sp2C->highlightedIndex) {
-            case 0:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801053B4);
+    if (widget == &gMoveWidget) {
+        switch (widget->highlightedIndex) {
+            case MOVE_OPTION_MOVE_XZ:
+                CourseEdit_DrawTooltip(&gfx, 24, sMoveXZTooltipEncStr);
                 break;
-            case 1:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801053C8);
+            case MOVE_OPTION_MOVE_Y:
+                CourseEdit_DrawTooltip(&gfx, 24, sMoveYTooltipEncStr);
                 break;
-            case 2:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801053DC);
+            case MOVE_OPTION_WIDTH:
+                CourseEdit_DrawTooltip(&gfx, 24, sMoveWidthTooltipEncStr);
                 break;
-            case 3:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801053F8);
+            case MOVE_OPTION_BANK:
+                CourseEdit_DrawTooltip(&gfx, 24, sMoveBankTooltipEncStr);
                 break;
-            case 4:
-                func_xk2_800F335C(&gfx, 24, D_xk2_8010540C);
+            case MOVE_OPTION_CENTER:
+                CourseEdit_DrawTooltip(&gfx, 24, sMoveCenterTooltipEncStr);
                 break;
-        }
-    }
-    if (sp2C == &gCourseEditEntryWidget) {
-        switch (sp2C->highlightedIndex) {
-            case 0:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105428);
+            case MOVE_OPTION_CLEAR:
+                CourseEdit_DrawTooltip(&gfx, 24, sMoveClearTooltipEncStr);
                 break;
-            case 1:
-                func_xk2_800F335C(&gfx, 24, D_xk2_8010544C);
-                break;
-            case 2:
-                func_xk2_800F335C(&gfx, 24, D_xk2_8010546C);
+            case MOVE_OPTION_STRAIGHT:
+                CourseEdit_DrawTooltip(&gfx, 24, sMoveStraightTooltipEncStr);
                 break;
         }
     }
-    if (sp2C == &gDesignStyleWidget) {
-        switch (sp2C->highlightedIndex) {
-            case 0:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801051D0);
+    if (widget == &gCourseEditFileWidget) {
+        switch (widget->highlightedIndex) {
+            case FILE_OPTION_LOAD:
+                CourseEdit_DrawTooltip(&gfx, 24, sFileLoadTooltipEncStr);
                 break;
-            case 1:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801051F0);
+            case FILE_OPTION_SAVE:
+                CourseEdit_DrawTooltip(&gfx, 24, sFileSaveTooltipEncStr);
                 break;
-            case 2:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105210);
+            case FILE_OPTION_RENAME:
+                CourseEdit_DrawTooltip(&gfx, 24, sFileRenameTooltipEncStr);
                 break;
-            case 3:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105230);
+            case FILE_OPTION_ERASE:
+                CourseEdit_DrawTooltip(&gfx, 24, sFileEraseTooltipEncStr);
                 break;
-            case 4:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105244);
-                break;
-            case 5:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105260);
-                break;
-            case 6:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105280);
-                break;
-            case 7:
-                func_xk2_800F335C(&gfx, 24, D_xk2_8010529C);
-                break;
-            case 8:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801052C0);
+            case FILE_OPTION_COPY:
+                CourseEdit_DrawTooltip(&gfx, 24, sFileCopyTooltipEncStr);
                 break;
         }
     }
-    if (sp2C == &gPartsStyleWidget) {
-        switch (sp2C->highlightedIndex) {
-            case 0:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801052E0);
+    if (widget == &gCourseEditEntryWidget) {
+        switch (widget->highlightedIndex) {
+            case ENTRY_OPTION_REGISTER:
+                CourseEdit_DrawTooltip(&gfx, 24, sEntryRegisterTooltipEncStr);
                 break;
-            case 1:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801052FC);
+            case ENTRY_OPTION_DEREGISTER:
+                CourseEdit_DrawTooltip(&gfx, 24, sEntryDeregisterTooltipEncStr);
                 break;
-            case 2:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105318);
+            case ENTRY_OPTION_DEREGISTER_ALL:
+                CourseEdit_DrawTooltip(&gfx, 24, sEntryDeregisterAllTooltipEncStr);
                 break;
-            case 3:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105328);
+        }
+    }
+    if (widget == &gDesignStyleWidget) {
+        switch (widget->highlightedIndex) {
+            case TRACK_DESIGN_STYLE_ROAD:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignRoadTooltipEncStr);
                 break;
-            case 4:
-                func_xk2_800F335C(&gfx, 24, D_xk2_8010533C);
+            case TRACK_DESIGN_STYLE_H_ROAD:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignHRoadTooltipEncStr);
                 break;
-            case 5:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105354);
+            case TRACK_DESIGN_STYLE_T_ROAD:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignTRoadTooltipEncStr);
                 break;
-            case 6:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105374);
+            case TRACK_DESIGN_STYLE_TUNNEL:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignTunnelTooltipEncStr);
                 break;
-            case 7:
-                func_xk2_800F335C(&gfx, 24, D_xk2_80105388);
+            case TRACK_DESIGN_STYLE_PIPE:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignPipeTooltipEncStr);
                 break;
-            case 8:
-                func_xk2_800F335C(&gfx, 24, D_xk2_801053A0);
+            case TRACK_DESIGN_STYLE_HALF_PIPE:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignHalfPipeTooltipEncStr);
+                break;
+            case TRACK_DESIGN_STYLE_CYLINDER:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignCylinderTooltipEncStr);
+                break;
+            case TRACK_DESIGN_STYLE_SPACE:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignSpaceTooltipEncStr);
+                break;
+            case TRACK_DESIGN_STYLE_LOOP:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackDesignLoopTooltipEncStr);
+                break;
+        }
+    }
+    if (widget == &gPartsStyleWidget) {
+        switch (widget->highlightedIndex) {
+            case TRACK_PART_STYLE_PIT:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackPartPitTooltipEncStr);
+                break;
+            case TRACK_PART_STYLE_DASH:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackPartDashTooltipEncStr);
+                break;
+            case TRACK_PART_STYLE_DIRT:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackPartDirtTooltipEncStr);
+                break;
+            case TRACK_PART_STYLE_SLIP:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackPartIceTooltipEncStr);
+                break;
+            case TRACK_PART_STYLE_JUMP:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackPartJumpTooltipEncStr);
+                break;
+            case TRACK_PART_STYLE_TRAP:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackPartTrapTooltipEncStr);
+                break;
+            case TRACK_PART_STYLE_GATE:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackPartGateTooltipEncStr);
+                break;
+            case TRACK_PART_STYLE_BUILDING:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackPartBuildingTooltipEncStr);
+                break;
+            case TRACK_PART_STYLE_SIGN:
+                CourseEdit_DrawTooltip(&gfx, 24, sTrackPartSignTooltipEncStr);
                 break;
         }
     }
@@ -872,27 +917,27 @@ extern s32 D_8076C960;
 void func_xk2_800F3D10(void) {
 
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) {
-        D_8076C96C = 1;
+        gCourseEditToolTipEnabled = 1;
         gCourseEditIconTextures[3] = aCourseEditGoldQuestionIconTex;
         D_8076C95C = 0;
         D_8076C960 = 0;
-        D_800D6CA0.unk_08 = 0;
+        gCourseEditContext.state = 0;
     }
     if (gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) {
         D_8076C95C = 0;
-        D_800D6CA0.unk_08 = 0;
+        gCourseEditContext.state = 0;
         func_xk2_800EE664(0x16);
     }
 }
 
 extern s32 D_8076C958;
 
-void func_xk2_800F3DAC(Gfx** gfxP) {
+void CourseEdit_DrawTooltipIntroHelper(Gfx** gfxP) {
     s32 left;
     s32 top;
     s32 width;
     s32 height;
-    s32 temp_v1;
+    s32 strLeft;
     Gfx* gfx;
 
     gfx = *gfxP;
@@ -909,9 +954,9 @@ void func_xk2_800F3DAC(Gfx** gfxP) {
     width = 16;
     height = 16;
 
-    func_xk2_800F2AC0(D_xk1_800331F0[22]);
-    temp_v1 = (((0x22 - func_xk2_800F2AF4(D_xk1_800331F0[22])) / 2) * 8) + 0x18;
-    func_xk2_800EECD4(&gfx, temp_v1, 0x58, D_xk1_800331F0[22], 22);
+    func_xk2_800F2AC0(gCourseEditMessageStrs[22]);
+    strLeft = (((34 - func_xk2_800F2AF4(gCourseEditMessageStrs[22])) / 2) * 8) + 24;
+    func_xk2_800EECD4(&gfx, strLeft, top, gCourseEditMessageStrs[22], 22);
 
     gSPDisplayList(gfx++, D_8014940);
 
@@ -931,6 +976,6 @@ void func_xk2_800F3DAC(Gfx** gfxP) {
     gDPLoadTextureBlock(gfx++, aCourseEditMouseClickTex, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-    func_xk2_800E92E4(&gfx, 0x120, 0xCC);
+    CourseEdit_DrawMouseClick(&gfx, 288, 204);
     *gfxP = gfx;
 }

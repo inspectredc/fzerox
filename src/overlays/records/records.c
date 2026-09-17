@@ -415,7 +415,7 @@ s32 Records_Update(void) {
     Camera_Update();
     Background_Update();
     Course_Update();
-    func_80074844();
+    Course_UpdateSignRotation();
     if (sGhostMarkerState != GHOST_MARKER_NONE) {
         Records_UpdateGhostMarker();
     }
@@ -937,7 +937,7 @@ void Records_UpdateGhostMarker(void) {
     vtx++;
 }
 
-extern Mtx D_2000000[];
+extern unk_80225800 D_2000000;
 
 Gfx* Records_DrawGhostMarker(Gfx* gfx) {
 
@@ -947,7 +947,7 @@ Gfx* Records_DrawGhostMarker(Gfx* gfx) {
     gDPSetRenderMode(gfx++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
 
     gSPMatrix(gfx++, &sGhostMarkerRenderInfo->mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gfx++, sGhostMarkerRenderInfo->vtx, 4, 0);
 
     gDPLoadTextureBlock_4b(gfx++, TextureCache_GetCached(aHasGhostMarkerTex), G_IM_FMT_I, TEX_WIDTH(aHasGhostMarkerTex),

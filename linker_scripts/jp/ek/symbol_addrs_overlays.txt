@@ -497,7 +497,7 @@ sMenusLoadedNumberStr = 0x8006D5E0; //segment:ovl_i3
 sPortraitTextureScale = 0x8006D600; //segment:ovl_i3
 sPlayerLeadInterval = 0x8006D798; //segment:ovl_i3
 sLeadRivalRaceTime = 0x8006D7A8; //segment:ovl_i3
-sCourseMinimapTex = 0x8006D7C0; //segment:ovl_i3
+gCourseMinimapTex = 0x8006D7C0; //segment:ovl_i3
 sBackgrounds = 0x8006D7D0; //segment:ovl_i3
 sBackgroundCount = 0x8006D950; //segment:ovl_i3
 sIsEndingCutscene = 0x8006D954; //segment:ovl_i3
@@ -2300,10 +2300,10 @@ sEADDemoMatrix = 0x800F6B4C; //segment:ead_demo
 
 // transition
 
-func_xk1_80025C00 = 0x80025C00; //segment:expansion_kit
+ExpansionKit_SetMenuHighlightAlphaChangeScale = 0x80025C00; //segment:expansion_kit
 func_xk1_8002FFDC = 0x8002FFDC; //segment:expansion_kit
 D_xk1_8003A598 = 0x8003A598; //segment:expansion_kit size:0x24
-D_xk1_8003A5D8 = 0x8003A5D8; //segment:expansion_kit size:0xE58
+gExpansionKitLoadedFiles = 0x8003A5D8; //segment:expansion_kit size:0xE58
 
 func_i3_80115E74 = 0x8003F364; //segment:ovl_i3
 func_i3_80116C4C = 0x80040158; //segment:ovl_i3
@@ -2371,7 +2371,7 @@ D_i2_8010ADE0 = 0x800C1CC0; //segment:ovl_i2
 D_i2_8010ADE8 = 0x800C1CC8; //segment:ovl_i2
 D_8010C770 = 0x800CF950; //segment:ovl_i2 size:0x7E0
 D_8010CF50 = 0x800D0910; //segment:ovl_i2 size:0x7E0
-D_i2_80111848 = 0x800D1308; //segment:ovl_i2
+gMachineHasSuperVersion = 0x800D1308; //segment:ovl_i2
 D_80115D50 = 0x800D5810; // segment:ovl_i2
 D_800E33E0 = 0x800D58B0; //segment:ovl_i2
 D_800E3A20 = 0x800D5EF0; //segment:ovl_i2
@@ -2387,4 +2387,4 @@ D_80128C94 = 0x80128C94; //segment:course_edit
 D_xk2_80128DF8 = 0x80128DF8; //segment:course_edit size:0xE100
 
 
-D_xk3_801372B8 = 0x801372B8; //segment:machine_create
+gMachineCreateMessageStrs = 0x801372B8; //segment:machine_create

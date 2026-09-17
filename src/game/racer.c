@@ -1960,7 +1960,7 @@ void func_8008D33C(void) {
 }
 #else
 extern CustomMachinesInfo gCustomMachinesInfo;
-extern u8 D_i2_80111848[];
+extern u8 gMachineHasSuperVersion[];
 
 #ifdef NON_MATCHING
 void func_8008D33C(void) {
@@ -1992,30 +1992,30 @@ void func_8008D33C(void) {
             gMachines[i].boostersType = temp_a2->rearType + 30;
             gMachines[i].customType = CUSTOM_MACHINE_EDITED;
             gMachines[i].number = sDefaultMachines[i].number;
-            gMachines[i].red[0] = temp_a1->red;
-            gMachines[i].green[0] = temp_a1->green;
-            gMachines[i].blue[0] = temp_a1->blue;
-            gMachines[i].red[1] = temp_a1->red + 0x40;
-            gMachines[i].green[1] = temp_a1->green + 0x40;
-            gMachines[i].blue[1] = temp_a1->blue + 0x40;
-            gMachines[i].red[2] = temp_a1->red + 0x80;
-            gMachines[i].green[2] = temp_a1->green + 0x80;
-            gMachines[i].blue[2] = temp_a1->blue + 0x80;
-            gMachines[i].red[3] = temp_a1->red + 0xC0;
-            gMachines[i].green[3] = temp_a1->green + 0xC0;
-            gMachines[i].blue[3] = temp_a1->blue + 0xC0;
+            gMachines[i].red[0] = temp_a1->red & 0xFF;
+            gMachines[i].green[0] = temp_a1->green & 0xFF;
+            gMachines[i].blue[0] = temp_a1->blue & 0xFF;
+            gMachines[i].red[1] = (temp_a1->red + 0x40) & 0xFF;
+            gMachines[i].green[1] = (temp_a1->green + 0x40) & 0xFF;
+            gMachines[i].blue[1] = (temp_a1->blue + 0x40) & 0xFF;
+            gMachines[i].red[2] = (temp_a1->red + 0x80) & 0xFF;
+            gMachines[i].green[2] = (temp_a1->green + 0x80) & 0xFF;
+            gMachines[i].blue[2] = (temp_a1->blue + 0x80) & 0xFF;
+            gMachines[i].red[3] = (temp_a1->red + 0xC0) & 0xFF;
+            gMachines[i].green[3] = (temp_a1->green + 0xC0) & 0xFF;
+            gMachines[i].blue[3] = (temp_a1->blue + 0xC0) & 0xFF;
             gMachines[i].machineStats[BODY_STAT] = BODY_E - temp_a1->body;
             gMachines[i].machineStats[BOOST_STAT] = BOOST_E - temp_a1->boost;
             gMachines[i].machineStats[GRIP_STAT] = GRIP_E - temp_a1->grip;
             gMachines[i].weight =
                 D_800CF488[temp_a2->frontType] + D_800CF498[temp_a2->rearType] + D_800CF4A8[temp_a2->wingType];
         } else if (gCustomMachinesInfo.characterCustomState[characterSlot] < 0) {
-            if ((i == CAPTAIN_FALCON) && (D_i2_80111848[CAPTAIN_FALCON] != 0)) {
+            if ((i == CAPTAIN_FALCON) && gMachineHasSuperVersion[CAPTAIN_FALCON]) {
                 gMachines[i] = sDefaultMachines[30];
             } else {
-                if ((i == SAMURAI_GOROH) && (D_i2_80111848[SAMURAI_GOROH] != 0)) {
+                if ((i == SAMURAI_GOROH) && gMachineHasSuperVersion[SAMURAI_GOROH]) {
                     gMachines[i] = sDefaultMachines[31];
-                } else if ((i == JODY_SUMMER) && (D_i2_80111848[JODY_SUMMER] != 0)) {
+                } else if ((i == JODY_SUMMER) && gMachineHasSuperVersion[JODY_SUMMER]) {
                     gMachines[i] = sDefaultMachines[32];
                 } else {
                     gMachines[i] = sDefaultMachines[i];
@@ -6966,19 +6966,21 @@ Gfx* func_8009CBE8(Gfx* gfx, s32 arg1, s32 red, s32 green, s32 blue) {
     return gfx;
 }
 
-Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2) {
+Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 machinePalette) {
     Machine* machine = &gMachines[character];
     s32 color;
 
     gSPDisplayList(gfx++, D_800CDD38[character]);
 #if BUILD_REVISION >= REVISION_C
     if (gGreyscaleMachinePart && (machine->customType == CUSTOM_MACHINE_DEFAULT)) {
-        color = (machine->red[arg2] * 77) + (machine->green[arg2] * 151) + (machine->blue[arg2] * 28);
+        color = (machine->red[machinePalette] * 77) + (machine->green[machinePalette] * 151) +
+                (machine->blue[machinePalette] * 28);
         color >>= 8;
         gDPSetEnvColor(gfx++, color, color, color, 255);
     } else {
 #endif
-        gDPSetEnvColor(gfx++, machine->red[arg2], machine->green[arg2], machine->blue[arg2], 255);
+        gDPSetEnvColor(gfx++, machine->red[machinePalette], machine->green[machinePalette],
+                       machine->blue[machinePalette], 255);
 #if BUILD_REVISION >= REVISION_C
     }
 #endif
@@ -7015,11 +7017,11 @@ Gfx* func_8009CEA0(Gfx* gfx, s32 character) {
         gSPDisplayList(gfx++, D_800CDB6C[customMachine->rearType]);
         gSPDisplayList(gfx++, D_800CDB88[customMachine->wingType]);
     } else if (gCustomMachinesInfo.characterCustomState[characterSlot] < 0) {
-        if ((character == CAPTAIN_FALCON) && (D_i2_80111848[CAPTAIN_FALCON] != 0)) {
+        if ((character == CAPTAIN_FALCON) && gMachineHasSuperVersion[CAPTAIN_FALCON]) {
             gSPDisplayList(gfx++, D_9012718);
-        } else if ((character == SAMURAI_GOROH) && (D_i2_80111848[SAMURAI_GOROH] != 0)) {
+        } else if ((character == SAMURAI_GOROH) && gMachineHasSuperVersion[SAMURAI_GOROH]) {
             gSPDisplayList(gfx++, D_9013460);
-        } else if ((character == JODY_SUMMER) && (D_i2_80111848[JODY_SUMMER] != 0)) {
+        } else if ((character == JODY_SUMMER) && gMachineHasSuperVersion[JODY_SUMMER]) {
             gSPDisplayList(gfx++, D_9013D58);
         } else {
             gSPDisplayList(gfx++, D_800CDAD8[character]);

@@ -1024,7 +1024,7 @@ void Background_UpdateCloudVtx(Vtx* vtx, Background* background, Camera* camera,
 }
 
 extern GfxPool D_1000000;
-extern Mtx D_2000000[];
+extern unk_80225800 D_2000000;
 
 Gfx* Background_Draw(Gfx* gfx, s32 cameraIndex, s32 scissorBoxType) {
     CourseSkyboxes* skybox;
@@ -1044,7 +1044,7 @@ Gfx* Background_Draw(Gfx* gfx, s32 cameraIndex, s32 scissorBoxType) {
         gDPSetCombineLERP(gfx++, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 204);
     }
-    gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gfx++, &D_1000000.unk_29B48[cameraIndex * 28], 28, 0);
 
     gDPLoadTextureBlock(gfx++, sSkyboxTexture, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP,
@@ -1058,7 +1058,7 @@ Gfx* Background_Draw(Gfx* gfx, s32 cameraIndex, s32 scissorBoxType) {
     }
     if (cameraIndex == 0 && (sBackgroundSpriteCount != 0)) {
         gfx = Background_DrawBackgroundSprites(gfx);
-        gSPMatrix(gfx++, D_2000000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPVertex(gfx++, &D_1000000.unk_29B48[cameraIndex * 28], 28, 0);
     }
 

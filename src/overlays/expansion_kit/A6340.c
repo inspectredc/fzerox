@@ -7,7 +7,7 @@
 // TODO: Unsure on sizes
 u8 gExpansionKitNameEntryStr[16];
 u8 D_xk1_8003A570[40];
-unk_8003A5D8 D_xk1_8003A598;
+EKLoadedFile D_xk1_8003A598;
 s32 sNameEntryCursorXPos;
 s32 sNameEntryCursorYPos;
 void (*sNameEntryCallbackFunc)(void);
@@ -15,49 +15,49 @@ void (*sNameEntryCallbackFunc)(void);
 s32 gExpansionKitNameEntryStrLength = 0;
 s32 sInputIndicatorFlashRate = 1;
 bool D_xk1_80032AC8 = false;
-u32 D_xk1_80032ACC = -1;
-s32 D_xk1_80032AD0 = 0;
+u32 sExpansionKitLastEncFontSheet = -1;
+s32 gExpansionKitEncStrEncType = 0;
 
 char sNameEntryKeyboardStr[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ,'& 0123456789";
 UNUSED s32 D_xk1_80032B00 = 0x202D;
 
-char* func_xk1_800290D0(char* buffer, const char* fmt, size_t size) {
+char* ExpansionKit_EncPrOut(char* buffer, const char* fmt, size_t size) {
     return (char*) memcpy(buffer, fmt, size) + size;
 }
 
-Gfx* func_xk1_800290F4(Gfx* gfx, s32 arg1, s32 arg2, u32 arg3) {
+Gfx* ExpansionKit_DrawEncChar(Gfx* gfx, s32 left, s32 top, u32 charValue) {
 
-    D_xk1_80032ACC = arg3 / 96;
-    switch (arg3 / 96) {
+    sExpansionKitLastEncFontSheet = charValue / 96;
+    switch (charValue / 96) {
         case 0:
             gSPDisplayList(gfx++, aExpansionKitSetupFontCharacterSheet1DL);
             break;
         case 1:
-            arg3 -= 0x60;
+            charValue -= 96;
             gSPDisplayList(gfx++, aExpansionKitSetupFontCharacterSheet2DL);
             break;
         case 2:
-            arg3 -= 0xC0;
+            charValue -= 2 * 96;
             gSPDisplayList(gfx++, aExpansionKitSetupFontCharacterSheet3DL);
             break;
     }
-    gSPTextureRectangle(gfx++, arg1 << 2, arg2 << 2, (arg1 + 8) << 2, (arg2 + 8) << 2, 0, ((arg3 % 16) * 8) << 5,
-                        ((arg3 / 16) * 8) << 5, 1 << 10, 1 << 10);
+    gSPTextureRectangle(gfx++, left << 2, top << 2, (left + 8) << 2, (top + 8) << 2, 0, ((charValue % 16) * 8) << 5,
+                        ((charValue / 16) * 8) << 5, 1 << 10, 1 << 10);
 
     return gfx;
 }
 
-s32 func_xk1_80029218(s32 arg0) {
-    if (arg0 < 0x80) {
-        return arg0 - 0x20;
+s32 ExpansionKit_DecodeEncChar(s32 charValue) {
+    if (charValue < 0x80) {
+        return charValue - 0x20;
     }
-    if (D_xk1_80032AD0 == 0) {
-        return arg0 - 0x20;
+    if (gExpansionKitEncStrEncType == 0) {
+        return charValue - 0x20;
     }
-    return arg0 + 0x40;
+    return charValue + 0x40;
 }
 
-Gfx* func_xk1_8002924C(Gfx* gfx, s32 xPos, s32 yPos, const char* fmt, ...) {
+Gfx* ExpansionKit_DrawEncStr(Gfx* gfx, s32 xPos, s32 yPos, const char* fmt, ...) {
     s32 charRemaining;
     u8* charPtr;
     char buffer[0x100];
@@ -65,18 +65,18 @@ Gfx* func_xk1_8002924C(Gfx* gfx, s32 xPos, s32 yPos, const char* fmt, ...) {
     va_list args;
     va_start(args, fmt);
 
-    D_xk1_80032ACC = -1;
-    charRemaining = _Printf(func_xk1_800290D0, buffer, fmt, args);
+    sExpansionKitLastEncFontSheet = -1;
+    charRemaining = _Printf(ExpansionKit_EncPrOut, buffer, fmt, args);
 
     if (charRemaining > 0) {
         charPtr = (s8*) buffer;
         while (charRemaining > 0) {
             if (*charPtr == 1) {
-                D_xk1_80032AD0 = 0;
+                gExpansionKitEncStrEncType = 0;
             } else if (*charPtr == 2) {
-                D_xk1_80032AD0 = 1;
+                gExpansionKitEncStrEncType = 1;
             } else {
-                gfx = func_xk1_800290F4(gfx, xPos, yPos, func_xk1_80029218(*charPtr));
+                gfx = ExpansionKit_DrawEncChar(gfx, xPos, yPos, ExpansionKit_DecodeEncChar(*charPtr));
                 xPos += 8;
             }
             charRemaining--;
@@ -141,7 +141,7 @@ void ExpansionKit_GetCharacterKeyboardPosition(char letter, s32* xPosPtr, s32* y
     *yPosPtr = yPos;
 }
 
-void func_xk1_800294AC(void) {
+void ExpansionKit_NameEntryClear(void) {
     s32 i;
 
     gExpansionKitNameEntryStrLength = 0;
@@ -151,8 +151,8 @@ void func_xk1_800294AC(void) {
     }
 }
 
-extern s32 D_xk1_8003A550;
-extern s32 D_xk1_8003A554;
+extern s32 gCourseEditMenuCursorXPos;
+extern s32 gCourseEditMenuCursorYPos;
 
 void ExpansionKit_NameEntryInit(void (*callback)(void)) {
     sNameEntryCursorXPos = 0;
@@ -160,8 +160,8 @@ void ExpansionKit_NameEntryInit(void (*callback)(void)) {
     D_xk1_80032AC8 = true;
     sNameEntryCallbackFunc = callback;
     gExpansionKitNameEntryStrLength = 0;
-    D_xk1_8003A550 = 0x58;
-    D_xk1_8003A554 = 0x58;
+    gCourseEditMenuCursorXPos = 0x58;
+    gCourseEditMenuCursorYPos = 0x58;
     while (true) {
         if (gExpansionKitNameEntryStr[gExpansionKitNameEntryStrLength] == '\0') {
             break;
@@ -170,7 +170,7 @@ void ExpansionKit_NameEntryInit(void (*callback)(void)) {
     }
 }
 
-extern unk_8003A5D8 D_xk1_8003A5D8[];
+extern EKLoadedFile gExpansionKitLoadedFiles[];
 extern s32 D_80119880;
 
 s32 func_xk1_80029560(void) {
@@ -180,8 +180,8 @@ s32 func_xk1_80029560(void) {
     if ((D_80119880 == -1) || ((D_80119880 != 3) && (D_80119880 == 9))) {
         var_s1 = 1;
     }
-    while (var_s1 < func_xk1_8002BFA4()) {
-        if (mfsStrCmp(D_xk1_8003A5D8[var_s1].name, gExpansionKitNameEntryStr) == 0) {
+    while (var_s1 < EKFileMenu_GetFileCount()) {
+        if (mfsStrCmp(gExpansionKitLoadedFiles[var_s1].name, gExpansionKitNameEntryStr) == 0) {
             return 1;
         }
         var_s1++;
@@ -298,13 +298,13 @@ void ExpansionKit_NameEntryHandleStickInput(void) {
 
     if (stickYMag < stickXMag) {
         oldPos = sNameEntryCursorXPos;
-        func_xk1_8002DAE0(&sNameEntryCursorXPos, 9, 1);
+        EKController_UpdateHorizontalOption(&sNameEntryCursorXPos, 9, 1);
         if (oldPos != sNameEntryCursorXPos) {
             func_xk1_80029924();
         }
     } else {
         oldPos = sNameEntryCursorYPos;
-        func_xk1_8002DBD4(&sNameEntryCursorYPos, 4, 0);
+        EKController_UpdateVerticalOptionSlow(&sNameEntryCursorYPos, 4, 0);
         if (oldPos != sNameEntryCursorYPos) {
             Audio_TriggerSystemSE(NA_SE_35);
         }
@@ -475,18 +475,18 @@ Gfx* ExpansionKit_NameEntryDraw(Gfx* gfx, s32* arg1, s32* arg2) {
     return gfx;
 }
 
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 
-void func_xk1_8002AC24(void) {
+void ExpansionKit_CourseEditNameEntryCallback(void) {
     if (gExpansionKitNameEntryStrLength == 0) {
-        D_800D6CA0.unk_08 = 0;
+        gCourseEditContext.state = 0;
     } else {
-        D_800D6CA0.unk_08 = 0x34;
+        gCourseEditContext.state = 0x34;
         func_8076877C(1, "CRSD");
     }
 }
 
-extern s32 D_xk1_80032C20;
+extern s32 gExpansionKitYesNoOptionIndex;
 extern s32 D_xk2_80104378;
 
 void func_xk1_8002AC70(void) {
@@ -501,16 +501,16 @@ void func_xk1_8002AC70(void) {
             case -1:
             case 9:
                 D_xk2_80104378 = 4;
-                D_xk1_80032C20 = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                gExpansionKitYesNoOptionIndex = 0;
+                gCourseEditContext.state = 0x10;
                 gCourseEditFileOption = -1;
                 return;
             case 1:
                 break;
             default:
                 D_xk2_80104378 = 5;
-                D_xk1_80032C20 = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                gExpansionKitYesNoOptionIndex = 0;
+                gCourseEditContext.state = 0x10;
                 gCourseEditFileOption = -1;
                 return;
         }
@@ -526,11 +526,11 @@ void func_xk1_8002AC70(void) {
             return;
         case 1:
             mfsStrCpy(gExpansionKitNameEntryStr, D_xk1_8003A570);
-            if ((func_xk1_80029560() == 0) && ((func_xk1_8002BFA4() - 1) >= 100)) {
+            if ((func_xk1_80029560() == 0) && ((EKFileMenu_GetFileCount() - 1) >= 100)) {
                 D_80119880 = -2;
                 D_xk2_80104378 = 6;
-                D_xk1_80032C20 = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                gExpansionKitYesNoOptionIndex = 0;
+                gCourseEditContext.state = 0x10;
             } else if (func_xk2_800EAA1C(D_xk1_8003A570) != 0) {
                 gCourseEditFileOption = -1;
             } else {
@@ -538,24 +538,24 @@ void func_xk1_8002AC70(void) {
             }
             return;
         case 9:
-            if ((func_xk1_8002BFA4() - 1) >= 100) {
+            if ((EKFileMenu_GetFileCount() - 1) >= 100) {
                 D_xk2_80104378 = 6;
-                D_xk1_80032C20 = 0;
-                D_800D6CA0.unk_08 = 0x10;
+                gExpansionKitYesNoOptionIndex = 0;
+                gCourseEditContext.state = 0x10;
             } else {
                 func_xk2_800EAC28(gExpansionKitNameEntryStr);
                 gCourseEditFileOption = -1;
             }
             return;
         case 3:
-            func_xk2_800EBFE8(D_xk1_8003A598.name);
+            CourseEdit_EraseTrackName(D_xk1_8003A598.name);
             func_80768844(MFS_ENTRY_WORKING_DIR, D_xk1_8003A598.name, D_xk1_8003A598.extension,
                           gExpansionKitNameEntryStr, D_xk1_8003A598.extension, true);
             gCourseEditFileOption = -1;
-            D_800D6CA0.unk_08 = 0x22;
+            gCourseEditContext.state = 0x22;
             return;
     }
-    D_800D6CA0.unk_08 = 0;
+    gCourseEditContext.state = 0;
 }
 
 void func_xk1_8002AEB4(s32 arg0, s32 arg1) {

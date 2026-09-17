@@ -23,6 +23,12 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
+#define SCREEN_WIDTH_F 320.0f
+#define SCREEN_HEIGHT_F 240.0f
+
+#define SCREEN_WIDTH_D 320.0
+#define SCREEN_HEIGHT_D 240.0
+
 #define MAX_TIMER (60 * 60 * 1000 - 1)
 
 #define TEX_COMPRESSED_SIZE(tex) (_ ## tex ## _COMPRESSED_SIZE)

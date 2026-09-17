@@ -593,30 +593,29 @@ typedef struct unk_807C6EA8 {
     /* 0x60 */ s32 bssSize;
 } unk_807C6EA8;
 
-typedef struct unk_8003A5D8 {
+typedef struct EKLoadedFile {
     /* 0x00 */ char name[16];
     /* 0x10 */ s32 attr;
     /* 0x14 */ s8 unk_14[0x8];
     /* 0x1C */ char unk_1C;
     /* 0x1D */ char extension[5];
     /* 0x22 */ u8 unk_22;
-    /* 0x23 */ s8 unk_23;
-} unk_8003A5D8; //size = 0x24
+} EKLoadedFile; //size = 0x24
 
-typedef struct unk_800D6CA0 {
-    /* 0x00 */ s32 unk_00;
+typedef struct CourseEditContext {
+    /* 0x00 */ s32 moveMode;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
+    /* 0x08 */ s32 state;
+    /* 0x0C */ s32 selectedControlPoint;
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x14 */ s32 courseYaw;
     /* 0x18 */ s8 unk_18[0x4];
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
+    /* 0x1C */ s32 overlappingControlPoint;
+    /* 0x20 */ s32 unreasonableControlPoint;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ CourseSegment unk_28;
+    /* 0x28 */ CourseSegment newSegment;
     /* 0xCC */ s8 unk_CC[0x24];
-} unk_800D6CA0; // size = 0xF0
+} CourseEditContext; // size = 0xF0
 
 typedef struct MenuDropItem {
     /* 0x00 */ void* backgroundTex;
@@ -648,31 +647,31 @@ typedef struct MenuWidget {
 } MenuWidget; // size = 0x34
 
 typedef struct unk_807B3C20 {
-    /* 0x0000 */ CourseSegment unk_0000[64];
+    /* 0x0000 */ CourseSegment segments[64];
     /* 0x2900 */ s32 controlPointCount;
 } unk_807B3C20; // size 0x2904
 
-typedef struct unk_80128690 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-} unk_80128690; // size = 0xC
+typedef struct SegmentSplitInfo {
+    /* 0x00 */ s32 startSplit;
+    /* 0x04 */ s32 endSplit;
+    /* 0x08 */ bool isSelected;
+} SegmentSplitInfo; // size = 0xC
 
-typedef struct unk_8011C220 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
+typedef struct CourseSplitInfo {
+    /* 0x00 */ s32 trackSegmentInfo;
+    /* 0x04 */ f32 segmentTValue;
     /* 0x08 */ Vec3f pos;
     /* 0x14 */ Mtx3F basis;
-} unk_8011C220; // size = 0x38
+} CourseSplitInfo; // size = 0x38
 
-typedef struct unk_80140E60 {
-    /* 0x00 */ s32 unk_00; // type
-    /* 0x04 */ s32 unk_04; // value
-} unk_80140E60; // size = 0x8
+typedef struct MachineCreateGrid {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+} MachineCreateGrid; // size = 0x8
 
-typedef struct unk_801413F0 {
-    /* 0x00 */ Mtx unk_00;
-    /* 0x40 */ LookAt unk_40;
-} unk_801413F0; // size = 0x60
+typedef struct MachineCreateDrawData {
+    /* 0x00 */ Mtx mtx;
+    /* 0x40 */ LookAt lookAt;
+} MachineCreateDrawData; // size = 0x60
 
 #endif // UNK_STRUCTS_H

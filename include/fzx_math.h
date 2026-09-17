@@ -26,6 +26,7 @@
 #define DEG_TO_FZXANG(x) (((x) * 0x1000) / 360)
 #define DEG_TO_FZXANG2(x) ((x) * (0x1000 / 360.0f))
 #define DEG_TO_FZXANG3(x) ((0x1000 / 360.0f) * x)
+#define DEG_TO_FZXANG4(x) ((0x1000 * (x)) / 360)
 
 typedef union {
     struct {

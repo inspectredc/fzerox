@@ -11,7 +11,7 @@ s32* D_xk1_8003A518[12];
 s32* D_xk1_8003A548;
 u16* D_xk1_8003A54C;
 
-u8 D_80030060[9] = { 0 };
+u8 gCourseEditCourseTitleEncStr[9] = { 0 };
 u8 D_8003006C[9] = { 0 };
 
 UNUSED s32 D_80030078 = 0;
@@ -20,42 +20,42 @@ UNUSED s32 D_8003007C = 0;
 s32 D_xk1_80030080 = 0;
 s32 D_xk1_80030084 = 0;
 
-s32 func_xk1_80025C20(s8* arg0) {
-    s32 var_v1;
+s32 func_xk1_80025C20(s8* str) {
+    s32 length;
 
-    var_v1 = 0;
+    length = 0;
     while (true) {
 
-        if (*arg0 == 0) {
+        if (*str == '\0') {
             break;
         }
 
-        if (*arg0 == 0xA) {
-            arg0++;
+        if (*str == '\n') {
+            str++;
         } else {
-            arg0 += 2;
-            var_v1++;
+            str += 2;
+            length++;
         }
     }
-    return var_v1;
+    return length;
 }
 
-extern u8* D_xk1_800331F0[];
-extern u8* D_xk1_8003339C[];
+extern char* gCourseEditMessageStrs[31];
+extern char* gCourseRestrictionMessageStrs[12];
 
 s32 func_xk1_80025C58(void) {
-    s32 var_s1;
+    s32 allMessagesLength;
     s32 i;
 
-    var_s1 = 0;
-    for (i = 0; i < 31; i++) {
-        var_s1 += func_xk1_80025C20(D_xk1_800331F0[i]);
+    allMessagesLength = 0;
+    for (i = 0; i < ARRAY_COUNT(gCourseEditMessageStrs); i++) {
+        allMessagesLength += func_xk1_80025C20(gCourseEditMessageStrs[i]);
     }
-    for (i = 0; i < 12; i++) {
-        var_s1 += func_xk1_80025C20(D_xk1_8003339C[i]);
+    for (i = 0; i < ARRAY_COUNT(gCourseRestrictionMessageStrs); i++) {
+        allMessagesLength += func_xk1_80025C20(gCourseRestrictionMessageStrs[i]);
     }
 
-    return var_s1;
+    return allMessagesLength;
 }
 
 s32 func_xk1_80025CD8(u16 arg0) {
@@ -77,7 +77,7 @@ void func_xk1_80025D2C(char* arg0) {
             break;
         }
 
-        if (arg0[0] == 0xA) {
+        if (arg0[0] == '\n') {
             arg0++;
         } else {
             temp_s1 = (arg0[0] << 8) + arg0[1];
@@ -97,12 +97,12 @@ s32 func_xk1_80025DE4(void) {
     for (i = 0; i < D_xk1_80030080; i++) {}
     D_xk1_8003A494 = 0;
 
-    for (i = 0; i < 31; i++) {
-        func_xk1_80025D2C(D_xk1_800331F0[i]);
+    for (i = 0; i < ARRAY_COUNT(gCourseEditMessageStrs); i++) {
+        func_xk1_80025D2C(gCourseEditMessageStrs[i]);
     }
 
-    for (i = 0; i < 12; i++) {
-        func_xk1_80025D2C(D_xk1_8003339C[i]);
+    for (i = 0; i < ARRAY_COUNT(gCourseRestrictionMessageStrs); i++) {
+        func_xk1_80025D2C(gCourseRestrictionMessageStrs[i]);
     }
 
     return D_xk1_8003A494;
@@ -127,11 +127,11 @@ void func_xk1_80025ED4(char* arg0) {
             break;
         }
 
-        if (arg0[0] == 0xA) {
+        if (arg0[0] == '\n') {
             arg0++;
         } else {
             temp_s1 = (arg0[0] << 8) + arg0[1];
-            D_xk1_8003A548[D_xk1_80030080] = (func_xk1_80025E8C(temp_s1) << 7) + D_xk1_8003A488 + 0xE00;
+            D_xk1_8003A548[D_xk1_80030080] = (func_xk1_80025E8C(temp_s1) * 0x80) + D_xk1_8003A488 + 0xE00;
             D_xk1_80030080++;
             arg0 += 2;
         }
@@ -145,19 +145,19 @@ void func_xk1_80025F98(void) {
     D_xk1_8003A54C = Arena_Allocate(ALLOC_FRONT, D_xk1_80030080 * sizeof(u16));
     D_xk1_8003A548 = Arena_Allocate(ALLOC_FRONT, D_xk1_80030080 * sizeof(s32));
     D_xk1_8003A494 = func_xk1_80025DE4();
-    D_xk1_8003A488 = Arena_Allocate(ALLOC_FRONT, (D_xk1_8003A494 << 7) + 0xE00);
+    D_xk1_8003A488 = Arena_Allocate(ALLOC_FRONT, (D_xk1_8003A494 * 0x80) + 0xE00);
     D_xk1_8003A490 += 0xE00;
     func_xk1_800267C4(D_xk1_8003A54C);
     D_xk1_80030080 = 0;
 
-    for (i = 0; i < 31; i++) {
+    for (i = 0; i < ARRAY_COUNT(gCourseEditMessageStrs); i++) {
         D_xk1_8003A498[i] = &D_xk1_8003A548[D_xk1_80030080];
-        func_xk1_80025ED4(D_xk1_800331F0[i]);
+        func_xk1_80025ED4(gCourseEditMessageStrs[i]);
     }
 
-    for (i = 0; i < 12; i++) {
+    for (i = 0; i < ARRAY_COUNT(gCourseRestrictionMessageStrs); i++) {
         D_xk1_8003A518[i] = &D_xk1_8003A548[D_xk1_80030080];
-        func_xk1_80025ED4(D_xk1_8003339C[i]);
+        func_xk1_80025ED4(gCourseRestrictionMessageStrs[i]);
     };
 }
 
@@ -232,37 +232,33 @@ Gfx* func_xk1_800263B0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
 Gfx* func_xk1_800264C0(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
     s32* var_s1;
     s8* var_s0;
-    Gfx* tempGfx;
 
     var_s1 = D_xk1_8003A498[arg3];
-    var_s0 = D_xk1_800331F0[arg3];
+    var_s0 = gCourseEditMessageStrs[arg3];
 
-    while (*var_s0 != 0) {
-        if (*var_s0 == 0xA) {
+    for (; *var_s0 != 0; arg1 += 16) {
+        if (*var_s0 == '\n') {
             break;
         }
 
-        tempGfx = func_xk1_800263B0(gfx, arg1, arg2, *var_s1++);
-        arg1 += 16;
-        gfx = tempGfx;
+        gfx = func_xk1_800263B0(gfx, arg1, arg2, *var_s1++);
         var_s0 += 2;
     }
     return gfx;
 }
 
 Gfx* func_xk1_8002656C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    Gfx* tempGfx;
     s32* var_s1;
     s8* var_s0;
     s32 i;
 
     var_s1 = D_xk1_8003A498[arg3];
-    var_s0 = D_xk1_800331F0[arg3];
+    var_s0 = gCourseEditMessageStrs[arg3];
 
     for (i = 0; i < arg4; i++) {
-        while (*var_s0 != 0) {
-            if (*var_s0 == 0xA) {
-                var_s0 += 1;
+        while (*var_s0 != '\0') {
+            if (*var_s0 == '\n') {
+                var_s0++;
                 break;
             }
             var_s1++;
@@ -270,36 +266,30 @@ Gfx* func_xk1_8002656C(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         }
     }
 
-    while (*var_s0 != 0) {
-        if (*var_s0 == 0xA) {
+    for (; *var_s0 != '\0'; arg1 += 16) {
+        if (*var_s0 == '\n') {
             break;
         }
 
-        tempGfx = func_xk1_800263B0(gfx, arg1, arg2, *var_s1++);
-
-        arg1 += 16;
-        gfx = tempGfx;
+        gfx = func_xk1_800263B0(gfx, arg1, arg2, *var_s1++);
         var_s0 += 2;
     }
     return gfx;
 }
 
 Gfx* func_xk1_80026670(Gfx* gfx, s32 arg1, s32 arg2, s32 arg3) {
-    Gfx* tempGfx;
     s32* var_s1;
     s8* var_s0;
 
     var_s1 = D_xk1_8003A518[arg3];
-    var_s0 = D_xk1_8003339C[arg3];
+    var_s0 = gCourseRestrictionMessageStrs[arg3];
 
-    while (*var_s0 != 0) {
-        if (*var_s0 == 0xA) {
+    for (; *var_s0 != 0; arg1 += 16) {
+        if (*var_s0 == '\n') {
             break;
         }
 
-        tempGfx = func_xk1_800263B0(gfx, arg1, arg2, *var_s1++);
-        arg1 += 16;
-        gfx = tempGfx;
+        gfx = func_xk1_800263B0(gfx, arg1, arg2, *var_s1++);
         var_s0 += 2;
     }
     return gfx;

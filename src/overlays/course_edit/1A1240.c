@@ -1,4 +1,5 @@
 #include "global.h"
+#include "course_edit.h"
 #include "fzx_expansion_kit.h"
 #include "fzx_course.h"
 
@@ -13,61 +14,63 @@ s32 func_xk2_800EF780(void) {
     return D_xk2_80104BC0;
 }
 
-extern u8 D_80030060[];
+extern u8 gCourseEditCourseTitleEncStr[];
 extern u8 D_8003006C[];
 extern s32 D_xk2_80119800;
-extern unk_80128690 D_80128690[];
-extern unk_80128690 D_xk2_80128990[];
+extern SegmentSplitInfo gCourseEditSegmentSplitInfos[];
+extern SegmentSplitInfo D_xk2_80128990[];
 extern unk_807B3C20 D_807B6528;
 extern unk_807B3C20 D_802CB6D0;
 extern CourseData D_8010CF50;
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 
+// Make copy of current course
 void func_xk2_800EF78C(void) {
     s32 i;
 
     for (i = 0; i < 64; i++) {
-        D_xk2_80128990[i] = D_80128690[i];
+        D_xk2_80128990[i] = gCourseEditSegmentSplitInfos[i];
     }
 
     for (i = 0; i < 9; i++) {
-        D_8003006C[i] = D_80030060[i];
+        D_8003006C[i] = gCourseEditCourseTitleEncStr[i];
     }
     D_807B6528 = D_802CB6D0;
     D_8010CF50 = COURSE_CONTEXT()->courseData;
-    D_xk2_80119800 = D_800D6CA0.unk_0C;
+    D_xk2_80119800 = gCourseEditContext.selectedControlPoint;
     D_xk2_80104BC0 = 1;
 }
 
-extern s32 D_xk2_800F703C;
+extern s32 gCourseEditInfoControlPoint;
 extern s32 D_xk2_800F7040;
-extern CourseSegment* D_xk2_801197EC;
+extern CourseSegment* gCourseEditInfoSegment;
 extern s32 gVenueOption;
 extern s32 gSkyboxOption;
 
 void func_xk2_800EF8B0(void) {
     s32 i;
 
-    if ((D_800D6CA0.unk_08 == 1) || (D_800D6CA0.unk_08 == 3) || (D_800D6CA0.unk_08 == 2) ||
-        (D_800D6CA0.unk_08 == 0x10) || (D_800D6CA0.unk_08 == 0x20) || (D_xk2_80104BC0 == 0)) {
+    if ((gCourseEditContext.state == COURSE_EDIT_IN_MENU) || (gCourseEditContext.state == COURSE_EDIT_IN_FILE_MENU) ||
+        (gCourseEditContext.state == COURSE_EDIT_NAME_ENTRY) || (gCourseEditContext.state == 0x10) ||
+        (gCourseEditContext.state == COURSE_EDIT_REGISTER_FILE_MENU) || (D_xk2_80104BC0 == 0)) {
         return;
     }
     D_xk2_80104BC0 = 0;
     Audio_TriggerSystemSE(NA_SE_37);
-    D_xk2_800F703C = -1;
+    gCourseEditInfoControlPoint = -1;
     for (i = 0; i < 64; i++) {
-        D_80128690[i] = D_xk2_80128990[i];
+        gCourseEditSegmentSplitInfos[i] = D_xk2_80128990[i];
     }
 
     for (i = 0; i < 9; i++) {
-        D_80030060[i] = D_8003006C[i];
+        gCourseEditCourseTitleEncStr[i] = D_8003006C[i];
     }
     D_802CB6D0 = D_807B6528;
     COURSE_CONTEXT()->courseData = D_8010CF50;
-    D_xk2_801197EC = D_802CB6D0.unk_0000;
-    func_xk2_800DC3F8();
-    func_xk2_800F5C50();
-    D_800D6CA0.unk_0C = D_xk2_80119800;
+    gCourseEditInfoSegment = D_802CB6D0.segments;
+    CourseEdit_ClearSegmentSplitSelection();
+    CourseEdit_ClearControlPointHighlight();
+    gCourseEditContext.selectedControlPoint = D_xk2_80119800;
     D_xk2_800F7040 = 3;
     gVenueOption = COURSE_CONTEXT()->courseData.venue;
     gSkyboxOption = COURSE_CONTEXT()->courseData.skybox;
@@ -131,7 +134,7 @@ void func_xk2_800EFCD0(void) {
     var_v1 = 0;
     var_a2 = 0;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        if (D_80128690[i].unk_08 != 0) {
+        if (gCourseEditSegmentSplitInfos[i].isSelected) {
             var_v1++;
             continue;
         }
@@ -142,13 +145,13 @@ void func_xk2_800EFCD0(void) {
         return;
     }
     var_v1 = 0;
-    var_v0_2 = &D_802CB6D0.unk_0000[sp30];
+    var_v0_2 = &D_802CB6D0.segments[sp30];
     temp_t0 = var_v0_2;
     // FAKE!
     // clang-format off
     var_a0_2 = sp1C; \
     do {
-        if (D_80128690[var_v0_2->segmentIndex].unk_08 != 0) {
+        if (gCourseEditSegmentSplitInfos[var_v0_2->segmentIndex].isSelected) {
             if (var_v1 == 0) {
                 var_a0_2 = var_v0_2;
             }
@@ -176,28 +179,28 @@ void func_xk2_800EFCD0(void) {
 extern s32 gCourseEditCursorXPos;
 extern s32 gCourseEditCursorYPos;
 
-s32 func_xk2_800EFDE4(f32 arg0) {
+s32 CourseEdit_GetClosestControlPoint(f32 range) {
     s32 i;
-    s32 sp70;
-    s32 sp6C;
-    s32 var_fp;
-    f32 temp_fv0;
-    Vec3f sp58;
+    s32 screenXPos;
+    s32 screenYPos;
+    s32 closestControlPoint;
+    f32 distance;
+    Vec3f pos;
 
-    var_fp = -1;
+    closestControlPoint = -1;
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
 
-        sp58 = D_802CB6D0.unk_0000[i].pos;
-        if (func_xk2_800EF090(sp58, &sp70, &sp6C) != 0) {
+        pos = D_802CB6D0.segments[i].pos;
+        if (CourseEdit_GetScreenPosition(pos, &screenXPos, &screenYPos) != 0) {
             continue;
         }
-        temp_fv0 = SQ(gCourseEditCursorXPos - sp70) + SQ(gCourseEditCursorYPos - sp6C);
-        if (temp_fv0 < arg0) {
-            arg0 = temp_fv0;
-            var_fp = i;
+        distance = SQ(gCourseEditCursorXPos - screenXPos) + SQ(gCourseEditCursorYPos - screenYPos);
+        if (distance < range) {
+            range = distance;
+            closestControlPoint = i;
         }
     }
-    return var_fp;
+    return closestControlPoint;
 }
 
 void func_xk2_800EFF40(void) {
@@ -207,16 +210,16 @@ void func_xk2_800EFF40(void) {
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
 
-        if (!(D_802CB6D0.unk_0000[i].trackSegmentInfo & TRACK_FLAG_8000000)) {
-            temp_fv0 = (D_802CB6D0.unk_0000[i].radiusLeft + D_802CB6D0.unk_0000[i].radiusRight) / 2.0f;
-            D_802CB6D0.unk_0000[i].radiusLeft = temp_fv0;
-            D_802CB6D0.unk_0000[i].radiusRight = temp_fv0;
+        if (!(D_802CB6D0.segments[i].trackSegmentInfo & TRACK_FLAG_8000000)) {
+            temp_fv0 = (D_802CB6D0.segments[i].radiusLeft + D_802CB6D0.segments[i].radiusRight) / 2.0f;
+            D_802CB6D0.segments[i].radiusLeft = temp_fv0;
+            D_802CB6D0.segments[i].radiusRight = temp_fv0;
         }
-        temp_a0 = D_802CB6D0.unk_0000[i].prev->segmentIndex;
-        if (!(D_802CB6D0.unk_0000[temp_a0].trackSegmentInfo & TRACK_FLAG_8000000)) {
-            temp_fv0 = (D_802CB6D0.unk_0000[i].radiusLeft + D_802CB6D0.unk_0000[i].radiusRight) / 2.0f;
-            D_802CB6D0.unk_0000[i].radiusLeft = temp_fv0;
-            D_802CB6D0.unk_0000[i].radiusRight = temp_fv0;
+        temp_a0 = D_802CB6D0.segments[i].prev->segmentIndex;
+        if (!(D_802CB6D0.segments[temp_a0].trackSegmentInfo & TRACK_FLAG_8000000)) {
+            temp_fv0 = (D_802CB6D0.segments[i].radiusLeft + D_802CB6D0.segments[i].radiusRight) / 2.0f;
+            D_802CB6D0.segments[i].radiusLeft = temp_fv0;
+            D_802CB6D0.segments[i].radiusRight = temp_fv0;
         }
     }
 }
@@ -238,102 +241,63 @@ s32 func_xk2_800EFFF0(void) {
     return 0;
 }
 
-#ifdef NON_MATCHING
-s32 func_xk2_800F01C4(Vec3f arg0, Mtx3F arg3) {
-    f32 sp84;
-    f32 sp80;
-    f32 sp7C;
-    f32 sp78;
-    f32 sp74;
-    f32 sp70;
-    f32 sp6C;
-    f32 sp68;
-    f32 sp64;
-    f32 sp60;
-    f32 sp5C;
-    f32 sp58;
-    f32 sp54;
-    f32 sp50;
-    f32 sp4C;
-    f32 temp_fa0;
-    f32 temp_fa1;
-    f32 temp_fv1;
+s32 func_xk2_800F01C4(Vec3f arg0, Mtx3F arg1) {
 
     D_xk2_80128CF4 = 0;
-    temp_fa1 = D_xk2_80128CB4 + 150.0f;
-    temp_fv1 = temp_fa1 * D_xk2_80128CB0;
 
-    sp84 = temp_fv1 * arg3.z.x;
-    D_xk2_80128CB8[0].x = arg0.x - sp84;
-    sp80 = temp_fv1 * arg3.z.y;
-    D_xk2_80128CB8[0].y = arg0.y - sp80;
-    sp7C = temp_fv1 * arg3.z.z;
-    D_xk2_80128CB8[0].z = arg0.z - sp7C;
-
-    temp_fa0 = D_xk2_80128CB0 * 0.5f * temp_fa1;
-    sp78 = (arg3.y.x + arg3.x.x) * 2000.0f;
-    sp74 = temp_fa0 * arg3.z.x;
-    D_xk2_80128CB8[1].x = (sp78 + arg0.x) - sp74;
-    sp70 = (arg3.y.y + arg3.x.y) * 2000.0f;
-    sp6C = temp_fa0 * arg3.z.y;
-    D_xk2_80128CB8[1].y = (sp70 + arg0.y) - sp6C;
-    sp68 = (arg3.y.z + arg3.x.z) * 2000.0f;
-    sp64 = temp_fa0 * arg3.z.z;
-    D_xk2_80128CB8[1].z = (sp68 + arg0.z) - sp64;
-
-    sp60 = 2.0f * arg3.y.x * 2000.0f;
-    D_xk2_80128CB8[2].x = sp60 + arg0.x;
-    sp5C = 2.0f * arg3.y.y * 2000.0f;
-    D_xk2_80128CB8[2].y = sp5C + arg0.y;
-    sp58 = 2.0f * arg3.y.z * 2000.0f;
-    D_xk2_80128CB8[2].z = sp58 + arg0.z;
-    D_xk2_80128CB8[3].x = ((arg3.y.x - arg3.x.x) * 2000.0f) + arg0.x + sp74;
-    D_xk2_80128CB8[3].y = ((arg3.y.y - arg3.x.y) * 2000.0f) + arg0.y + sp6C;
-    D_xk2_80128CB8[3].z = ((arg3.y.z - arg3.x.z) * 2000.0f) + arg0.z + sp64;
-    // Need to figure out 0.0f here
-    sp54 = (0.0f * arg3.z.x) + arg0.x;
-    D_xk2_80128CB8[4].x = sp54 + sp84;
-    sp50 = (0.0f * arg3.z.y) + arg0.y;
-    D_xk2_80128CB8[4].y = sp50 + sp80;
-    sp4C = (0.0f * arg3.z.z) + arg0.z;
-    D_xk2_80128CB8[4].z = sp4C + sp7C;
+    D_xk2_80128CB8[0].x = arg0.x - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.x);
+    D_xk2_80128CB8[0].y = arg0.y - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.y);
+    D_xk2_80128CB8[0].z = arg0.z - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.z);
+    D_xk2_80128CB8[1].x = (((arg1.y.x + arg1.x.x) * 2000.0f) + arg0.x) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
+    D_xk2_80128CB8[1].y = (((arg1.y.y + arg1.x.y) * 2000.0f) + arg0.y) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
+    D_xk2_80128CB8[1].z = (((arg1.y.z + arg1.x.z) * 2000.0f) + arg0.z) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
+    D_xk2_80128CB8[2].x = arg0.x + ((arg1.y.x + arg1.y.x) * 2000.0f);
+    D_xk2_80128CB8[2].y = arg0.y + ((arg1.y.y + arg1.y.y) * 2000.0f);
+    D_xk2_80128CB8[2].z = arg0.z + ((arg1.y.z + arg1.y.z) * 2000.0f);
+    D_xk2_80128CB8[3].x =
+        arg0.x + ((arg1.y.x - arg1.x.x) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
+    D_xk2_80128CB8[3].y =
+        arg0.y + ((arg1.y.y - arg1.x.y) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
+    D_xk2_80128CB8[3].z =
+        arg0.z + ((arg1.y.z - arg1.x.z) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
+    D_xk2_80128CB8[4].x = ((0 * arg1.z.x) + arg0.x) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.x);
+    D_xk2_80128CB8[4].y = ((0 * arg1.z.y) + arg0.y) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.y);
+    D_xk2_80128CB8[4].z = ((0 * arg1.z.z) + arg0.z) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.z);
     if (func_xk2_800EFFF0() == 0) {
         return 0;
     }
-    D_xk2_80128CF4 = 1;
-    temp_fa1 = D_xk2_80128CB4 + 150.0f;
-    temp_fv1 = temp_fa1 * D_xk2_80128CB0;
 
-    sp84 = temp_fv1 * arg3.z.x;
-    D_xk2_80128CB8[0].x = arg0.x - sp84;
-    sp80 = temp_fv1 * arg3.z.y;
-    D_xk2_80128CB8[0].y = arg0.y - sp80;
-    sp7C = temp_fv1 * arg3.z.z;
-    D_xk2_80128CB8[0].z = arg0.z - sp7C;
-    temp_fa0 = D_xk2_80128CB0 * 0.5f * temp_fa1;
-    sp74 = temp_fa0 * arg3.z.x;
-    D_xk2_80128CB8[1].x = (((arg3.x.x - arg3.y.x) * 2000.0f) + arg0.x) - sp74;
-    sp6C = temp_fa0 * arg3.z.y;
-    D_xk2_80128CB8[1].y = (((arg3.x.y - arg3.y.y) * 2000.0f) + arg0.y) - sp6C;
-    sp64 = temp_fa0 * arg3.z.z;
-    D_xk2_80128CB8[1].z = (((arg3.x.z - arg3.y.z) * 2000.0f) + arg0.z) - sp64;
-    D_xk2_80128CB8[2].x = arg0.x - sp60;
-    D_xk2_80128CB8[2].y = arg0.y - sp5C;
-    D_xk2_80128CB8[2].z = arg0.z - sp58;
-    D_xk2_80128CB8[3].x = (arg0.x - sp78) + sp74;
-    D_xk2_80128CB8[3].y = (arg0.y - sp70) + sp6C;
-    D_xk2_80128CB8[3].z = (arg0.z - sp68) + sp64;
-    D_xk2_80128CB8[4].x = sp54 + sp84;
-    D_xk2_80128CB8[4].y = sp50 + sp80;
-    D_xk2_80128CB8[4].z = sp4C + sp7C;
+    D_xk2_80128CF4 = 1;
+
+    D_xk2_80128CB8[0].x = arg0.x - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.x);
+    D_xk2_80128CB8[0].y = arg0.y - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.y);
+    D_xk2_80128CB8[0].z = arg0.z - (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.z);
+    D_xk2_80128CB8[1].x = (((arg1.x.x - arg1.y.x) * 2000.0f) + arg0.x) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
+    D_xk2_80128CB8[1].y = (((arg1.x.y - arg1.y.y) * 2000.0f) + arg0.y) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
+    D_xk2_80128CB8[1].z = (((arg1.x.z - arg1.y.z) * 2000.0f) + arg0.z) -
+                          (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
+    D_xk2_80128CB8[2].x = arg0.x - ((arg1.y.x + arg1.y.x) * 2000.0f);
+    D_xk2_80128CB8[2].y = arg0.y - ((arg1.y.y + arg1.y.y) * 2000.0f);
+    D_xk2_80128CB8[2].z = arg0.z - ((arg1.y.z + arg1.y.z) * 2000.0f);
+    D_xk2_80128CB8[3].x =
+        arg0.x - ((arg1.y.x + arg1.x.x) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.x);
+    D_xk2_80128CB8[3].y =
+        arg0.y - ((arg1.y.y + arg1.x.y) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.y);
+    D_xk2_80128CB8[3].z =
+        arg0.z - ((arg1.y.z + arg1.x.z) * 2000.0f) + (((D_xk2_80128CB0 * 0.5f) * (D_xk2_80128CB4 + 150.0f)) * arg1.z.z);
+    D_xk2_80128CB8[4].x = ((0 * arg1.z.x) + arg0.x) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.x);
+    D_xk2_80128CB8[4].y = ((0 * arg1.z.y) + arg0.y) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.y);
+    D_xk2_80128CB8[4].z = ((0 * arg1.z.z) + arg0.z) + (((D_xk2_80128CB4 + 150.0f) * D_xk2_80128CB0) * arg1.z.z);
     if (func_xk2_800EFFF0() == 0) {
         return 0;
     }
     return -1;
 }
-#else
-#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/overlays/course_edit/1A1240/func_xk2_800F01C4.s")
-#endif
 
 f32 func_xk2_800F05C0(CourseSegment* arg0, Vec3f arg1) {
     f32 var_fv1;
@@ -380,10 +344,12 @@ void func_xk2_800F07A4(void) {
     Vec3f spF0;
     Mtx3F spCC;
 
-    if ((gCourseEditCursorYPos < 0x38) || (D_800D6CA0.unk_08 == 1) || (D_800D6CA0.unk_08 == 3) ||
-        (D_800D6CA0.unk_08 == 2) || (D_800D6CA0.unk_08 == 0x10) ||
+    if ((gCourseEditCursorYPos < 0x38) || (gCourseEditContext.state == COURSE_EDIT_IN_MENU) ||
+        (gCourseEditContext.state == COURSE_EDIT_IN_FILE_MENU) ||
+        (gCourseEditContext.state == COURSE_EDIT_NAME_ENTRY) || (gCourseEditContext.state == 0x10) ||
         !((gCreateOption == CREATE_OPTION_DESIGN) && (gDesignStyleOption == TRACK_DESIGN_STYLE_LOOP)) ||
-        !(gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) || (D_800D6CA0.unk_0C == 0)) {
+        !(gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) ||
+        (gCourseEditContext.selectedControlPoint == 0)) {
         return;
     }
     if (D_802CB6D0.controlPointCount < 4) {
@@ -399,8 +365,8 @@ void func_xk2_800F07A4(void) {
     }
     func_xk2_800EF78C();
     Audio_TriggerSystemSE(NA_SE_39);
-    sp1C0 = D_800D6CA0.unk_0C;
-    temp_s2 = &D_802CB6D0.unk_0000[D_800D6CA0.unk_0C];
+    sp1C0 = gCourseEditContext.selectedControlPoint;
+    temp_s2 = &D_802CB6D0.segments[gCourseEditContext.selectedControlPoint];
 
     D_xk2_80128CB4 = (temp_s2->radiusLeft + temp_s2->radiusRight) * 0.5f;
     Course_SplineGetBasis(temp_s2, 0.0f, &spCC, Course_SplineGetLengthInfo(temp_s2, 0.0f, &sp1BC));
@@ -434,11 +400,11 @@ void func_xk2_800F07A4(void) {
 
     for (i = 0; i < 5; i++) {
         sp108.pos = D_xk2_80128CB8[i];
-        func_xk2_800E6CA8(D_800D6CA0.unk_0C, sp108);
-        COURSE_CONTEXT()->courseData.bankAngle[D_800D6CA0.unk_0C] = 0;
+        CourseEdit_AddNewSegment(gCourseEditContext.selectedControlPoint, sp108);
+        COURSE_CONTEXT()->courseData.bankAngle[gCourseEditContext.selectedControlPoint] = 0;
     }
     func_i2_800BE8BC(gCurrentCourseInfo);
-    temp_s2 = D_802CB6D0.unk_0000[sp1C0].next;
+    temp_s2 = D_802CB6D0.segments[sp1C0].next;
     func_80074CE4(gCurrentCourseInfo);
     if (D_xk2_80128CF4 != 0) {
         spFC.x = spCC.y.x;
@@ -519,7 +485,7 @@ void func_xk2_800F0FF4(void) {
         return;
     }
 
-    var_v1 = &D_802CB6D0.unk_0000[1];
+    var_v1 = &D_802CB6D0.segments[1];
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
         temp_a0 = var_v1->segmentIndex;
         D_8010C770.bankAngle[i] = 360 - COURSE_CONTEXT()->courseData.bankAngle[temp_a0];
@@ -534,13 +500,13 @@ void func_xk2_800F0FF4(void) {
         D_8010C770.gate[i] = COURSE_CONTEXT()->courseData.gate[temp_a0];
         D_8010C770.building[i] = COURSE_CONTEXT()->courseData.building[temp_a0];
         D_8010C770.sign[i] = COURSE_CONTEXT()->courseData.sign[temp_a0];
-        D_xk2_80119920[i] = D_802CB6D0.unk_0000[temp_a0];
+        D_xk2_80119920[i] = D_802CB6D0.segments[temp_a0];
 
         D_xk2_80119920[i].trackSegmentInfo = var_v1->prev->trackSegmentInfo;
         var_v1 = var_v1->prev;
     }
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        D_802CB6D0.unk_0000[i] = D_xk2_80119920[i];
+        D_802CB6D0.segments[i] = D_xk2_80119920[i];
 
         COURSE_CONTEXT()->courseData.bankAngle[i] = D_8010C770.bankAngle[i];
         COURSE_CONTEXT()->courseData.pit[i] = D_8010C770.pit[i];
@@ -555,12 +521,12 @@ void func_xk2_800F0FF4(void) {
     }
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        D_802CB6D0.unk_0000[i].segmentIndex = i;
-        D_802CB6D0.unk_0000[i].next = &D_802CB6D0.unk_0000[i + 1];
-        D_802CB6D0.unk_0000[i].prev = &D_802CB6D0.unk_0000[i - 1];
+        D_802CB6D0.segments[i].segmentIndex = i;
+        D_802CB6D0.segments[i].next = &D_802CB6D0.segments[i + 1];
+        D_802CB6D0.segments[i].prev = &D_802CB6D0.segments[i - 1];
     }
-    D_802CB6D0.unk_0000[0].prev = &D_802CB6D0.unk_0000[D_802CB6D0.controlPointCount - 1];
-    D_802CB6D0.unk_0000[D_802CB6D0.controlPointCount - 1].next = &D_802CB6D0.unk_0000[0];
+    D_802CB6D0.segments[0].prev = &D_802CB6D0.segments[D_802CB6D0.controlPointCount - 1];
+    D_802CB6D0.segments[D_802CB6D0.controlPointCount - 1].next = &D_802CB6D0.segments[0];
 
     PRINTF("BACKUP\n");
     PRINTF("EFFECT c\n");

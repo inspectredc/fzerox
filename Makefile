@@ -335,7 +335,7 @@ ifeq ($(EXPANSION_KIT),0)
 EXCLUSION_FILES := \
 src/sys/disk/% \
 src/overlays/ovl_i2/dd_save.c \
-src/overlays/ovl_i2/ovl_i2_data2.c \
+src/overlays/ovl_i2/course_edit_context.c \
 src/overlays/ovl_i10/187510.c \
 src/overlays/expansion_kit/% \
 src/overlays/course_edit/% \
@@ -464,9 +464,13 @@ $(BUILD_DIR)/src/libultra/libc/llcvt.o: MIPS_VERSION := -mips3 -32
 
 $(BUILD_DIR)/src/sys/rom/leo_fault.o: OUT_ENCODING := shift-jis
 $(BUILD_DIR)/src/sys/disk/leo_fault_dd.o: OUT_ENCODING := shift-jis
-$(BUILD_DIR)/src/overlays/expansion_kit/expansion_kit_disk_data.o: OUT_ENCODING := shift-jis
-$(BUILD_DIR)/src/overlays/expansion_kit/expansion_kit_text.o: OUT_ENCODING := shift-jis
-$(BUILD_DIR)/src/overlays/machine_create/machine_create_text.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/overlays/expansion_kit/expansion_kit_file_messages.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/overlays/expansion_kit/expansion_kit_course_messages.o: OUT_ENCODING := shift-jis
+$(BUILD_DIR)/src/overlays/machine_create/machine_create_messages.o: OUT_ENCODING := shift-jis
+
+$(BUILD_DIR)/src/overlays/expansion_kit/expansion_kit_file_messages.o: OPTFLAGS := -O2 -use_readwrite_const
+$(BUILD_DIR)/src/overlays/expansion_kit/expansion_kit_course_messages.o: OPTFLAGS := -O2 -use_readwrite_const
+$(BUILD_DIR)/src/overlays/machine_create/machine_create_messages.o: OPTFLAGS := -O2 -use_readwrite_const
 
 # cc & asm-processor
 CC = $(ASM_PROC) $(ASM_PROC_FLAGS) $(IDO) -- $(AS) $(ASFLAGS) --

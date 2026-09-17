@@ -16,14 +16,14 @@ void func_xk1_8002FBB0(void) {
 }
 
 extern CustomMachinesInfo gCustomMachinesInfo;
-extern u8 D_i2_80111848[];
+extern u8 gMachineHasSuperVersion[];
 
 void func_xk1_8002FBC8(void) {
     u8 i;
 
     for (i = 0; i < 30; i++) {
         if ((gCustomMachinesInfo.characterCustomState[i] < 0) &&
-            (D_i2_80111848[Character_GetCharacterFromSlot(i)] == 0)) {
+            !gMachineHasSuperVersion[Character_GetCharacterFromSlot(i)]) {
             gCustomMachinesInfo.customMachines[i].number = 31;
             gCustomMachinesInfo.characterCustomState[i] = 0;
         }

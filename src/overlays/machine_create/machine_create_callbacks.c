@@ -8,7 +8,7 @@ s32 gWorksMachineMode = MACHINE_MODE_0;
 
 extern s32 gMachineRegistrationOption;
 
-void func_xk3_801326C0(void) {
+void MachineCreate_RegistrationMenuCallback(void) {
     gMachineRegistrationOption = 0;
     PRINTF("WORKS MACHINE MODE : MENU\n");
     gWorksMachineMode = MACHINE_MODE_MENU;
@@ -16,7 +16,7 @@ void func_xk3_801326C0(void) {
 
 extern s32 gMachineDesignOption;
 
-void func_xk3_801326D8(void) {
+void MachineCreate_DesignMenuCallback(void) {
     gMachineDesignOption = 0;
     PRINTF("WORKS MACHINE MODE : MENU\n");
     gWorksMachineMode = MACHINE_MODE_MENU;
@@ -27,7 +27,7 @@ extern volatile unk_807C6EA8 D_807C6EA8;
 extern CustomMachine gCustomMachine;
 extern CustomMachine gCustomMachineWork;
 
-void func_xk3_801326F0(void) {
+void MachineCreate_ColorMenuCallback(void) {
     D_807C6EA8.unk_08 = 0;
     gColorOption = 0;
     gCustomMachineWork = gCustomMachine;
@@ -37,67 +37,67 @@ void func_xk3_801326F0(void) {
 
 extern s32 gMachineCreateEntryOption;
 
-void func_xk3_80132764(void) {
+void MachineCreate_EntryMenuCallback(void) {
     gMachineCreateEntryOption = 0;
     PRINTF("WORKS MACHINE MODE : MENU\n");
     gWorksMachineMode = MACHINE_MODE_MENU;
 }
 
-void func_xk3_8013277C(void) {
+void MachineCreate_UseEntryCallback(void) {
     PRINTF("WORKS MACHINE MODE : ENTRY_GET_FILE\n");
     gWorksMachineMode = MACHINE_MODE_ENTRY_GET_FILE;
-    func_xk3_80135F90();
+    MachineCreate_FileListSetup();
 }
 
 extern volatile u8 D_80794E1C;
 
-void func_xk3_801327A4(void) {
-    if (func_xk3_8013618C(1) != 0) {
-        func_xk3_8012B950();
+void MachineCreate_ClearEntryCallback(void) {
+    if (MachineCreate_FileListClearSetup(1) != 0) {
+        MachineCreate_InitFileMenu();
         PRINTF("WORKS MACHINE MODE : ENTRY_CLEAR_SELECT_FILE\n");
         gWorksMachineMode = MACHINE_MODE_ENTRY_CLEAR_SELECT_FILE;
     } else {
         PRINTF("WORKS MACHINE MODE : 0\n");
         gWorksMachineMode = MACHINE_MODE_0;
         D_80794E1C = 1;
-        D_807C6EA8.unk_08 = 0x1B;
+        D_807C6EA8.unk_08 = 27;
     }
 }
 
-void func_xk3_80132808(void) {
-    D_807C6EA8.unk_08 = 0x14;
+void MachineCreate_ClearAllEntryCallback(void) {
+    D_807C6EA8.unk_08 = 20;
     PRINTF("WORKS MACHINE MODE : ENTRY_ALLCLEAR_CONFIRM\n");
     gWorksMachineMode = MACHINE_MODE_ENTRY_ALLCLEAR_CONFIRM;
 }
 
-void func_xk3_80132828(void) {
+void MachineCreate_LoadFileCallback(void) {
     PRINTF("WORKS MACHINE MODE : LOAD_GET_FILE\n");
     gWorksMachineMode = MACHINE_MODE_LOAD_GET_FILE;
-    func_xk3_80135F90();
+    MachineCreate_FileListSetup();
 }
 
-void func_xk3_80132850(void) {
+void MachineCreate_DeleteFileCallback(void) {
     PRINTF("WORKS MACHINE MODE : DELETE_GET_FILE\n");
     gWorksMachineMode = MACHINE_MODE_DELETE_GET_FILE;
     func_8076877C(0, "CARD");
 }
 
-extern f32 D_xk3_80136540;
-extern unk_80140E60 D_xk3_80140E60;
+extern f32 gMachineCreatePartsLightSourceX;
+extern MachineCreateGrid gMachineCreatePartsGrid;
 
-void func_xk3_80132884(void) {
+void MachineCreate_PartsMenuCallback(void) {
     D_807C6EA8.unk_08 = 0;
     gCustomMachineWork = gCustomMachine;
     PRINTF("WORKS MACHINE MODE : PARTS\n");
     gWorksMachineMode = MACHINE_MODE_PARTS;
-    D_xk3_80140E60.unk_00 = 0;
-    D_xk3_80140E60.unk_04 = 0;
-    D_xk3_80136540 = -7000.0f;
+    gMachineCreatePartsGrid.x = 0;
+    gMachineCreatePartsGrid.y = 0;
+    gMachineCreatePartsLightSourceX = -7000.0f;
 }
 
 extern s32 gDecalOption;
 
-void func_xk3_80132910(void) {
+void MachineCreate_DecalMenuCallback(void) {
     D_807C6EA8.unk_08 = 0;
     gDecalOption = gCustomMachine.decal - 1;
     PRINTF("WORKS MACHINE MODE : SELECT_LINE\n");
@@ -105,31 +105,31 @@ void func_xk3_80132910(void) {
     gCustomMachineWork = gCustomMachine;
 }
 
-void func_xk3_8013298C(void) {
+void MachineCreate_DecalStripeCallback(void) {
     gCustomMachine.decal = MACHINE_DECAL(DECAL_STRIPE);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_801329A4(void) {
+void MachineCreate_DecalThinStripeCallback(void) {
     gCustomMachine.decal = MACHINE_DECAL(DECAL_THIN_STRIPE);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_801329BC(void) {
+void MachineCreate_DecalDoubleStripeCallback(void) {
     gCustomMachine.decal = MACHINE_DECAL(DECAL_DOUBLE_STRIPE);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_801329D4(void) {
+void MachineCreate_DecalTripleStripeUnevenCallback(void) {
     gCustomMachine.decal = MACHINE_DECAL(DECAL_TRIPLE_STRIPE_UNEVEN);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_801329EC(void) {
+void MachineCreate_DecalBlockCallback(void) {
     gCustomMachine.decal = MACHINE_DECAL(DECAL_BLOCK);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
@@ -137,7 +137,7 @@ void func_xk3_801329EC(void) {
 
 extern s32 gLogoOption;
 
-void func_xk3_80132A04(void) {
+void MachineCreate_LogoMenuCallback(void) {
     D_807C6EA8.unk_08 = 0;
     gLogoOption = gCustomMachine.logo - 1;
     PRINTF("WORKS MACHINE MODE : SELECT_MARK\n");
@@ -145,89 +145,89 @@ void func_xk3_80132A04(void) {
     gCustomMachineWork = gCustomMachine;
 }
 
-void func_xk3_80132A80(void) {
+void MachineCreate_LogoShieldCallback(void) {
     gCustomMachine.logo = MACHINE_LOGO(LOGO_SHIELD);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_80132A98(void) {
+void MachineCreate_LogoArrowCallback(void) {
     gCustomMachine.logo = MACHINE_LOGO(LOGO_ARROW_PLANE);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_80132AB0(void) {
+void MachineCreate_LogoCircleCallback(void) {
     gCustomMachine.logo = MACHINE_LOGO(LOGO_CIRCLE);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_80132AC8(void) {
+void MachineCreate_LogoSkullCallback(void) {
     gCustomMachine.logo = MACHINE_LOGO(LOGO_SKULL);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_80132AE0(void) {
+void MachineCreate_LogoYellowGreenCallback(void) {
     gCustomMachine.logo = MACHINE_LOGO(LOGO_YELLOW_GREEN);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_80132AF8(void) {
+void MachineCreate_LogoKanjiCallback(void) {
     gCustomMachine.logo = MACHINE_LOGO(LOGO_KANJI);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_80132B10(void) {
+void MachineCreate_LogoXCallback(void) {
     gCustomMachine.logo = MACHINE_LOGO(LOGO_X);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-void func_xk3_80132B28(void) {
+void MachineCreate_LogoN64Callback(void) {
     gCustomMachine.logo = MACHINE_LOGO(LOGO_N64);
     PRINTF("WORKS MACHINE MODE : 0\n");
     gWorksMachineMode = MACHINE_MODE_0;
 }
 
-extern unk_80140E60 D_xk3_80140E68;
+extern MachineCreateGrid gMachineCreateColorGrid;
 extern BorderedBoxWidget* gMachineCreateColorBox;
 
-void func_xk3_80132B40(void) {
+void MachineCreate_BodyColorMenuCallback(void) {
     PRINTF("WORKS MACHINE MODE : BODY_COLOR\n");
     gWorksMachineMode = MACHINE_MODE_BODY_COLOR;
-    D_xk3_80140E68.unk_00 = 0;
-    D_xk3_80140E68.unk_04 = 0;
+    gMachineCreateColorGrid.x = 0;
+    gMachineCreateColorGrid.y = 0;
     gMachineCreateColorBox =
         BorderedBox_Init(1, 168, 44, 121, 121, 1, GPACK_RGBA5551(0, 0, 0, 1), MachineCreate_DrawColorSelection);
 }
 
-void func_xk3_80132BB0(void) {
+void MachineCreate_LineColorMenuCallback(void) {
     PRINTF("WORKS MACHINE MODE : LINE_COLOR\n");
     gWorksMachineMode = MACHINE_MODE_LINE_COLOR;
-    D_xk3_80140E68.unk_00 = 0;
-    D_xk3_80140E68.unk_04 = 0;
+    gMachineCreateColorGrid.x = 0;
+    gMachineCreateColorGrid.y = 0;
     gMachineCreateColorBox =
         BorderedBox_Init(1, 168, 44, 121, 121, 1, GPACK_RGBA5551(0, 0, 0, 1), MachineCreate_DrawColorSelection);
 }
 
-void func_xk3_80132C20(void) {
+void MachineCreate_NumberColorMenuCallback(void) {
     PRINTF("WORKS MACHINE MODE : NUMBER_COLOR\n");
     gWorksMachineMode = MACHINE_MODE_NUMBER_COLOR;
-    D_xk3_80140E68.unk_00 = 0;
-    D_xk3_80140E68.unk_04 = 0;
+    gMachineCreateColorGrid.x = 0;
+    gMachineCreateColorGrid.y = 0;
     gMachineCreateColorBox =
         BorderedBox_Init(1, 168, 44, 121, 121, 1, GPACK_RGBA5551(0, 0, 0, 1), MachineCreate_DrawColorSelection);
 }
 
-void func_xk3_80132C90(void) {
+void MachineCreate_CockpitColorMenuCallback(void) {
     PRINTF("WORKS MACHINE MODE : COCKPIT_COLOR\n");
     gWorksMachineMode = MACHINE_MODE_COCKPIT_COLOR;
-    D_xk3_80140E68.unk_00 = 0;
-    D_xk3_80140E68.unk_04 = 0;
+    gMachineCreateColorGrid.x = 0;
+    gMachineCreateColorGrid.y = 0;
     gMachineCreateColorBox =
         BorderedBox_Init(1, 168, 44, 121, 121, 1, GPACK_RGBA5551(0, 0, 0, 1), MachineCreate_DrawColorSelection);
 }
@@ -244,40 +244,40 @@ void MachineCreate_NameEntryCallback(void) {
     mfsStrCpy(gCustomMachine.machineName, gExpansionKitNameEntryStr);
     gCustomMachineWork = gCustomMachine;
     gCustomMachineWork.number = 31;
-    func_xk3_8012D700();
+    MachineCreate_UpdateMachineNumber();
     PRINTF("WORKS MACHINE MODE : SAVE_FILE_EXIST_BEFORE\n");
     gWorksMachineMode = MACHINE_MODE_SAVE_FILE_EXIST_BEFORE;
 }
 
-extern u8 D_xk1_800333F0;
+extern u8 gCustomMachineIsSuper;
 
-void func_xk3_80132DDC(void) {
-    if (D_xk1_800333F0 != 0) {
-        D_807C6EA8.unk_08 = 0x17;
+void MachineCreate_NameFileCallback(void) {
+    if (gCustomMachineIsSuper) {
+        D_807C6EA8.unk_08 = 23;
         PRINTF("WORKS MACHINE MODE : MESSAGE_BUTTON\n");
         gWorksMachineMode = MACHINE_MODE_MESSAGE_BUTTON;
         Audio_TriggerSystemSE(NA_SE_32);
     } else {
         PRINTF("WORKS MACHINE MODE : MNAME\n");
         gWorksMachineMode = MACHINE_MODE_MNAME;
-        D_807C6EA8.unk_08 = 0x11;
-        func_xk1_8002D86C(0x1B, 6);
-        func_xk1_8002D880(0x28);
-        func_xk1_800294AC();
+        D_807C6EA8.unk_08 = 17;
+        EKController_SetRepeatDelay(27, 6);
+        EKController_SetDeadZone(40);
+        ExpansionKit_NameEntryClear();
         mfsStrCpy(gExpansionKitNameEntryStr, gCustomMachine.machineName);
         ExpansionKit_NameEntryInit(MachineCreate_NameEntryCallback);
     }
 }
 
-extern unk_80140E60 D_xk3_80140E70;
+extern MachineCreateGrid gMachineCreateMachineSettingsGrid;
 extern BorderedBoxWidget* gMachineCreateStatsBox;
 
-void func_xk3_80132E84(void) {
+void MachineCreate_StatsMenuCallback(void) {
     gCustomMachineWork = gCustomMachine;
     PRINTF("WORKS MACHINE MODE : SETTING\n");
     gWorksMachineMode = MACHINE_MODE_SETTING;
-    D_xk3_80140E70.unk_00 = 0;
-    D_xk3_80140E70.unk_04 = 0;
+    gMachineCreateMachineSettingsGrid.x = 0;
+    gMachineCreateMachineSettingsGrid.y = 0;
     gMachineCreateStatsBox =
         BorderedBox_Init(1, 122, 38, 174, 79, 1, GPACK_RGBA5551(0, 0, 0, 1), MachineCreate_DrawStatSelection);
 }

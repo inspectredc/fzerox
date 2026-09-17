@@ -5,9 +5,9 @@
 #include ASSET_HEADER(course_track_gfx.h)
 
 #if BUILD_REVISION <= REVISION_B
-u8 sCourseMinimapTex[0x1000] = { 0 };
+u8 gCourseMinimapTex[0x1000] = { 0 };
 #else
-u8* sCourseMinimapTex;
+u8* gCourseMinimapTex;
 #endif
 
 u16 sCourseMinimapPalette[] = {
@@ -49,7 +49,7 @@ void Minimap_InitCourseMinimap(void) {
     if (!gInCourseEditor) {
 #endif
 #if BUILD_REVISION >= REVISION_C
-        sCourseMinimapTex = Arena_Allocate(ALLOC_FRONT, MINIMAP_MAX_SIZE);
+        gCourseMinimapTex = Arena_Allocate(ALLOC_FRONT, MINIMAP_MAX_SIZE);
 #endif
 #ifdef EXPANSION_KIT
     }
@@ -64,7 +64,7 @@ void Minimap_InitCourseMinimap(void) {
     }
 
     for (i = 0; i < MINIMAP_MAX_SIZE; i++) {
-        sCourseMinimapTex[i] = MINIMAP_PALETTE_CLEAR;
+        gCourseMinimapTex[i] = MINIMAP_PALETTE_CLEAR;
     }
     segment = courseInfo->courseSegments;
     t = 0.0f;
@@ -81,16 +81,16 @@ void Minimap_InitCourseMinimap(void) {
             row /= 2;
             if ((row >= 0) && (row < MINIMAP_MAX_DIMENSION)) {
                 if (column > 0) {
-                    sCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column - 1] = MINIMAP_PALETTE_BLACK;
+                    gCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column - 1] = MINIMAP_PALETTE_BLACK;
                 }
                 if (column < MINIMAP_MAX_DIMENSION - 1) {
-                    sCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column + 1] = MINIMAP_PALETTE_BLACK;
+                    gCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column + 1] = MINIMAP_PALETTE_BLACK;
                 }
                 if (row > 0) {
-                    sCourseMinimapTex[(row - 1) * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_BLACK;
+                    gCourseMinimapTex[(row - 1) * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_BLACK;
                 }
                 if (row < MINIMAP_MAX_DIMENSION - 1) {
-                    sCourseMinimapTex[(row + 1) * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_BLACK;
+                    gCourseMinimapTex[(row + 1) * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_BLACK;
                 }
             }
         }
@@ -118,9 +118,9 @@ void Minimap_InitCourseMinimap(void) {
             row /= 2;
             if ((row > 0) && (row < MINIMAP_MAX_DIMENSION)) {
                 if (startSegment == segment->next) {
-                    sCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_GREY;
+                    gCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_GREY;
                 } else {
-                    sCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_WHITE;
+                    gCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_WHITE;
                 }
             }
         }
@@ -143,15 +143,15 @@ void Minimap_InitCourseMinimap(void) {
     if ((column > 0) && (column < MINIMAP_MAX_DIMENSION - 1)) {
         row /= 2;
         if ((row > 0) && (row < MINIMAP_MAX_DIMENSION - 1)) {
-            sCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_BLACK;
-            sCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column - 1] = MINIMAP_PALETTE_BLACK;
-            sCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column + 1] = MINIMAP_PALETTE_BLACK;
-            sCourseMinimapTex[(row - 1) * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_BLACK;
-            sCourseMinimapTex[(row + 1) * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_BLACK;
-            sCourseMinimapTex[(row - 1) * MINIMAP_MAX_DIMENSION + column - 1] = MINIMAP_PALETTE_BLACK;
-            sCourseMinimapTex[(row + 1) * MINIMAP_MAX_DIMENSION + column - 1] = MINIMAP_PALETTE_BLACK;
-            sCourseMinimapTex[(row - 1) * MINIMAP_MAX_DIMENSION + column + 1] = MINIMAP_PALETTE_BLACK;
-            sCourseMinimapTex[(row + 1) * MINIMAP_MAX_DIMENSION + column + 1] = MINIMAP_PALETTE_BLACK;
+            gCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_BLACK;
+            gCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column - 1] = MINIMAP_PALETTE_BLACK;
+            gCourseMinimapTex[row * MINIMAP_MAX_DIMENSION + column + 1] = MINIMAP_PALETTE_BLACK;
+            gCourseMinimapTex[(row - 1) * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_BLACK;
+            gCourseMinimapTex[(row + 1) * MINIMAP_MAX_DIMENSION + column + 0] = MINIMAP_PALETTE_BLACK;
+            gCourseMinimapTex[(row - 1) * MINIMAP_MAX_DIMENSION + column - 1] = MINIMAP_PALETTE_BLACK;
+            gCourseMinimapTex[(row + 1) * MINIMAP_MAX_DIMENSION + column - 1] = MINIMAP_PALETTE_BLACK;
+            gCourseMinimapTex[(row - 1) * MINIMAP_MAX_DIMENSION + column + 1] = MINIMAP_PALETTE_BLACK;
+            gCourseMinimapTex[(row + 1) * MINIMAP_MAX_DIMENSION + column + 1] = MINIMAP_PALETTE_BLACK;
         }
     }
 }
@@ -208,7 +208,7 @@ Gfx* Minimap_DrawCourseMinimap(Gfx* gfx, s32 numPlayersIndex, s32 playerIndex) {
     for (i = 0; i < 2; i++) {
         gDPPipeSync(gfx++);
         gDPLoadTextureBlock(
-            gfx++, (sCourseMinimapTex + (i * MINIMAP_MAX_DIMENSION * (s32) (MINIMAP_MAX_DIMENSION * minimapScale)) / 2),
+            gfx++, (gCourseMinimapTex + (i * MINIMAP_MAX_DIMENSION * (s32) (MINIMAP_MAX_DIMENSION * minimapScale)) / 2),
             G_IM_FMT_CI, G_IM_SIZ_8b, MINIMAP_MAX_DIMENSION, (s32) (MINIMAP_MAX_DIMENSION * minimapScale) / 2, 0,
             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
         gSPTextureRectangle(gfx++, left << 2, (s32) (top + (((i * MINIMAP_MAX_DIMENSION) / 2) * minimapScale)) << 2,

@@ -143,149 +143,149 @@ aCreateMachineClearTex:
   offset: 0x1980
   symbol: aCreateMachineClearTex
 
-D_4001200:
+aMachineCreateDecalStripeTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x1B00
-  symbol: D_4001200
+  symbol: aMachineCreateDecalStripeTex
 
-D_4001440:
+aMachineCreateDecalThinStripeTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x1D40
-  symbol: D_4001440
+  symbol: aMachineCreateDecalThinStripeTex
 
-D_4001680:
+aMachineCreateDecalDoubleStripeTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x1F80
-  symbol: D_4001680
+  symbol: aMachineCreateDecalDoubleStripeTex
 
-D_40018C0:
+aMachineCreateDecalTripleStripeUnevenTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x21C0
-  symbol: D_40018C0
+  symbol: aMachineCreateDecalTripleStripeUnevenTex
 
-D_4001B00:
+aMachineCreateDecalBlockTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x2400
-  symbol: D_4001B00
+  symbol: aMachineCreateDecalBlockTex
 
-D_4001D40:
+aMachineCreateLogoShieldTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x2640
-  symbol: D_4001D40
+  symbol: aMachineCreateLogoShieldTex
 
-D_4001F80:
+aMachineCreateLogoArrowPlaneTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x2880
-  symbol: D_4001F80
+  symbol: aMachineCreateLogoArrowPlaneTex
 
-D_40021C0:
+aMachineCreateLogoCircleTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x2AC0
-  symbol: D_40021C0
+  symbol: aMachineCreateLogoCircleTex
 
-D_4002400:
+aMachineCreateLogoSkullTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x2D00
-  symbol: D_4002400
+  symbol: aMachineCreateLogoSkullTex
 
-D_4002640:
+aMachineCreateLogoYellowGreenTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x2F40
-  symbol: D_4002640
+  symbol: aMachineCreateLogoYellowGreenTex
 
-D_4002880:
+aMachineCreateLogoKanjiTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x3180
-  symbol: D_4002880
+  symbol: aMachineCreateLogoKanjiTex
 
-D_4002AC0:
+aMachineCreateLogoXTex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x33C0
-  symbol: D_4002AC0
+  symbol: aMachineCreateLogoXTex
 
-D_4002D00:
+aMachineCreateLogoN64Tex:
   type: TEXTURE
   ctype: u16
   format: RGBA16
   width: 24
   height: 12
   offset: 0x3600
-  symbol: D_4002D00
+  symbol: aMachineCreateLogoN64Tex
 
-D_4002F40:
+aMachineCreateBodyTex:
   type: TEXTURE
   ctype: u8
   format: IA8
   width: 32
   height: 16
   offset: 0x3840
-  symbol: D_4002F40
+  symbol: aMachineCreateBodyTex
 
-D_4003140:
+aMachineCreateBoostTex:
   type: TEXTURE
   ctype: u8
   format: IA8
   width: 32
   height: 16
   offset: 0x3A40
-  symbol: D_4003140
+  symbol: aMachineCreateBoostTex
 
-D_4003340:
+aMachineCreateGripTex:
   type: TEXTURE
   ctype: u8
   format: IA8
   width: 32
   height: 16
   offset: 0x3C40
-  symbol: D_4003340
+  symbol: aMachineCreateGripTex
 
 aMachineCreateStatSelectedATex:
   type: TEXTURE

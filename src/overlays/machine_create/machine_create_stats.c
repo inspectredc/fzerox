@@ -30,7 +30,7 @@ u8* sMachineStatSelectionStates[][5] = {
       &sMachineCreateGripStatA },
 };
 
-u8* sMachineCreateStatTexs[][3] = {
+TexturePtr sMachineCreateStatTexs[][3] = {
     { aMachineCreateStatEInvalidTex, aMachineCreateStatETex, aMachineCreateStatSelectedETex },
     { aMachineCreateStatDInvalidTex, aMachineCreateStatDTex, aMachineCreateStatSelectedDTex },
     { aMachineCreateStatCInvalidTex, aMachineCreateStatCTex, aMachineCreateStatSelectedCTex },
@@ -109,7 +109,7 @@ void MachineCreate_UpdateStatSelectionStates(u8 statType, u8 statValue, u8 weigh
     }
 }
 
-void func_xk3_80134FA4(u8 bodyStatValue, u8 boostStatValue, u8 gripStatValue) {
+void MachineCreate_UpdateStatSelectionWeighting(u8 bodyStatValue, u8 boostStatValue, u8 gripStatValue) {
     u8 weightingRemaining;
     u8 bodyWeighting;
     u8 boostWeighting;
@@ -125,7 +125,7 @@ void func_xk3_80134FA4(u8 bodyStatValue, u8 boostStatValue, u8 gripStatValue) {
     MachineCreate_UpdateStatSelectionStates(GRIP_STAT, gripStatValue, weightingRemaining);
 }
 
-Gfx* func_xk3_80135034(Gfx* gfx) {
+Gfx* MachineCreate_DrawStatSelectionStats(Gfx* gfx) {
     u8 i;
     u8 j;
 
@@ -139,23 +139,25 @@ Gfx* func_xk3_80135034(Gfx* gfx) {
     return gfx;
 }
 
-extern unk_80140E60 D_xk3_80140E70;
+extern MachineCreateGrid gMachineCreateMachineSettingsGrid;
 extern u16 aMachineCreateOkTex[];
 extern u16 aMachineCreateHighlightedOkTex[];
 extern Gfx D_xk3_80137378[];
 
-Gfx* func_xk3_80135158(Gfx* gfx) {
+Gfx* MachineCreate_DrawStatSelectionCursorAndOK(Gfx* gfx) {
 
-    if (D_xk3_80140E70.unk_04 == 3) {
+    if (gMachineCreateMachineSettingsGrid.y == 3) {
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateHighlightedOkTex, 259, 98, 32, 16);
     } else {
         gfx = ExpansionKit_DrawRectangleBorderHighlight(
-            gfx, sMachineStatLeftPositions[D_xk3_80140E70.unk_04][D_xk3_80140E70.unk_00],
-            sMachineStatTopPositions[D_xk3_80140E70.unk_04][D_xk3_80140E70.unk_00],
-            sMachineStatLeftPositions[D_xk3_80140E70.unk_04][D_xk3_80140E70.unk_00] + (24 - 1),
-            sMachineStatTopPositions[D_xk3_80140E70.unk_04][D_xk3_80140E70.unk_00] + (16 - 1), 255, 64, 64,
-            func_xk1_800290C0(), 2, 2);
+            gfx, sMachineStatLeftPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x],
+            sMachineStatTopPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x],
+            sMachineStatLeftPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] +
+                (24 - 1),
+            sMachineStatTopPositions[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] +
+                (16 - 1),
+            255, 64, 64, EKWidget_GetMenuAlpha(), 2, 2);
         gSPDisplayList(gfx++, D_xk3_80137378);
         gfx = MachineCreate_DrawTextureBlockRGBA16(gfx, aMachineCreateOkTex, 259, 98, 32, 16);
     }
@@ -178,9 +180,9 @@ Gfx* MachineCreate_DrawStatSelection(Gfx* gfx, s32 left, s32 top) {
     gfx = MachineCreate_DrawTextureBlockI8(gfx, aMachineCreateBoostTex, 127, 60, 32, 16);
     gfx = MachineCreate_DrawTextureBlockI8(gfx, aMachineCreateGripTex, 127, 79, 32, 16);
     gSPDisplayList(gfx++, D_xk3_80137378);
-    func_xk3_80134FA4(gCustomMachine.body, gCustomMachine.boost, gCustomMachine.grip);
-    gfx = func_xk3_80135034(gfx);
-    gfx = func_xk3_80135158(gfx);
+    MachineCreate_UpdateStatSelectionWeighting(gCustomMachine.body, gCustomMachine.boost, gCustomMachine.grip);
+    gfx = MachineCreate_DrawStatSelectionStats(gfx);
+    gfx = MachineCreate_DrawStatSelectionCursorAndOK(gfx);
     return gfx;
 }
 
@@ -207,11 +209,11 @@ void MachineCreate_StatValueToString(char** statStrPtr, u8 statValue) {
     }
 }
 
-extern u8 D_xk1_800333F0;
-extern u8 D_800333F4;
+extern u8 gCustomMachineIsSuper;
+extern u8 gCustomMachineCurrentSuperIndex;
 extern u8 kSuperMachineStatValues[][3];
 
-Gfx* func_xk3_80135474(Gfx* gfx) {
+Gfx* MachineCreate_DrawStatsSummary(Gfx* gfx) {
 
     gSPDisplayList(gfx++, D_xk3_801373F0);
     gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, 255);
@@ -221,13 +223,16 @@ Gfx* func_xk3_80135474(Gfx* gfx) {
     gfx = MachineCreate_DrawTextureBlockI8(gfx, aMachineCreateGripTex, 190, 167, 32, 16);
 
     gSPDisplayList(gfx++, D_xk3_80137378);
-    if (D_xk1_800333F0 != 0) {
+    if (gCustomMachineIsSuper) {
         gfx = MachineCreate_DrawTextureBlockRGBA16(
-            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[D_800333F4][0]][2], 230, 133, 24, 16);
+            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][0]][2], 230, 133, 24,
+            16);
         gfx = MachineCreate_DrawTextureBlockRGBA16(
-            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[D_800333F4][1]][2], 230, 150, 24, 16);
+            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][1]][2], 230, 150, 24,
+            16);
         gfx = MachineCreate_DrawTextureBlockRGBA16(
-            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[D_800333F4][2]][2], 230, 167, 24, 16);
+            gfx, sMachineCreateStatTexs[kSuperMachineStatValues[gCustomMachineCurrentSuperIndex][2]][2], 230, 167, 24,
+            16);
     } else {
         gfx =
             MachineCreate_DrawTextureBlockRGBA16(gfx, sMachineCreateStatTexs[gCustomMachine.body][2], 230, 133, 24, 16);
@@ -241,34 +246,35 @@ Gfx* func_xk3_80135474(Gfx* gfx) {
 
 extern BorderedBoxWidget* gMachineCreateStatsBox;
 
-void func_xk3_8013571C(void) {
+void MachineCreate_UpdateMachineSettingAInput(void) {
     if (!BorderedBox_GetInfo(gMachineCreateStatsBox, IS_BORDERED_BOX_OPENED)) {
         return;
     }
-    if (D_xk3_80140E70.unk_04 == 3) {
+    if (gMachineCreateMachineSettingsGrid.y == 3) {
         PRINTF("WORKS MACHINE MODE : 0\n");
         gWorksMachineMode = MACHINE_MODE_0;
         Audio_TriggerSystemSE(NA_SE_36);
         BorderedBox_StartClose(gMachineCreateStatsBox);
-    } else if (*sMachineStatSelectionStates[D_xk3_80140E70.unk_04][D_xk3_80140E70.unk_00] != MACHINE_STAT_INVALID) {
-        switch (D_xk3_80140E70.unk_04) {
+    } else if (*sMachineStatSelectionStates[gMachineCreateMachineSettingsGrid.y][gMachineCreateMachineSettingsGrid.x] !=
+               MACHINE_STAT_INVALID) {
+        switch (gMachineCreateMachineSettingsGrid.y) {
             case BODY_STAT:
-                if (D_xk3_80140E70.unk_00 != gCustomMachine.body) {
-                    gCustomMachine.body = D_xk3_80140E70.unk_00;
+                if (gMachineCreateMachineSettingsGrid.x != gCustomMachine.body) {
+                    gCustomMachine.body = gMachineCreateMachineSettingsGrid.x;
                     Audio_TriggerSystemSE(NA_SE_39);
                     break;
                 }
                 break;
             case BOOST_STAT:
-                if (D_xk3_80140E70.unk_00 != gCustomMachine.boost) {
-                    gCustomMachine.boost = D_xk3_80140E70.unk_00;
+                if (gMachineCreateMachineSettingsGrid.x != gCustomMachine.boost) {
+                    gCustomMachine.boost = gMachineCreateMachineSettingsGrid.x;
                     Audio_TriggerSystemSE(NA_SE_39);
                     break;
                 }
                 break;
             case GRIP_STAT:
-                if (D_xk3_80140E70.unk_00 != gCustomMachine.grip) {
-                    gCustomMachine.grip = D_xk3_80140E70.unk_00;
+                if (gMachineCreateMachineSettingsGrid.x != gCustomMachine.grip) {
+                    gCustomMachine.grip = gMachineCreateMachineSettingsGrid.x;
                     Audio_TriggerSystemSE(NA_SE_39);
                     break;
                 }

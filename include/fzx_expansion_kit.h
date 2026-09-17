@@ -3,14 +3,6 @@
 
 #define INVALID_OPTION -1
 
-typedef enum CourseEditFileOption {
-    /* 0 */ FILE_OPTION_LOAD,
-    /* 1 */ FILE_OPTION_SAVE,
-    /* 2 */ FILE_OPTION_RENAME,
-    /* 3 */ FILE_OPTION_ERASE,
-    /* 4 */ FILE_OPTION_COPY,
-} CourseEditFileOption;
-
 typedef enum CreateOption {
     /* 0 */ CREATE_OPTION_COURSE,
     /* 1 */ CREATE_OPTION_POINT,
@@ -38,6 +30,20 @@ typedef enum MoveOption {
     /* 6 */ MOVE_OPTION_STRAIGHT,
 } MoveOption;
 
+typedef enum CourseEditFileOption {
+    /* 0 */ FILE_OPTION_LOAD,
+    /* 1 */ FILE_OPTION_SAVE,
+    /* 2 */ FILE_OPTION_RENAME,
+    /* 3 */ FILE_OPTION_ERASE,
+    /* 4 */ FILE_OPTION_COPY,
+} CourseEditFileOption;
+
+typedef enum CourseEditEntryOption {
+    /* 0 */ ENTRY_OPTION_REGISTER,
+    /* 1 */ ENTRY_OPTION_DEREGISTER,
+    /* 2 */ ENTRY_OPTION_DEREGISTER_ALL,
+} CourseEditEntryOption;
+
 typedef enum TrackDesignStyle {
     /* 0 */ TRACK_DESIGN_STYLE_ROAD,
     /* 1 */ TRACK_DESIGN_STYLE_H_ROAD,
@@ -61,5 +67,40 @@ typedef enum TrackPartStyle {
     /* 7 */ TRACK_PART_STYLE_BUILDING,
     /* 8 */ TRACK_PART_STYLE_SIGN,
 } TrackPartStyle;
+
+typedef enum CourseEditHighlightedIcon {
+    COURSE_EDIT_ICON_TEST_DRIVE,
+    COURSE_EDIT_ICON_LINE_DISPLAY,
+    COURSE_EDIT_ICON_ALIGN_POINTS,
+    COURSE_EDIT_ICON_TOOLTIPS,
+} CourseEditHighlightedIcon;
+
+typedef enum CourseEditOption {
+    COURSE_EDIT_OPTION_CONTROL_POINT_INFO,
+    COURSE_EDIT_OPTION_CONTROL_POINT_MOVE_POS,
+    COURSE_EDIT_OPTION_BGM,
+    COURSE_EDIT_OPTION_SFX,
+    COURSE_EDIT_OPTION_CURSOR_SPEED,
+    COURSE_EDIT_OPTION_HELP,
+} CourseEditOption;
+
+typedef enum CourseEditError {
+    COURSE_EDIT_ERROR_UNREASONABLE_POINTS,
+    COURSE_EDIT_ERROR_TOO_LONG,
+    COURSE_EDIT_ERROR_INVALID_PART_PLACEMENT,
+    COURSE_EDIT_ERROR_ROADS_OVERLAP,
+    COURSE_EDIT_ERROR_TOO_NARROW_FOR_JOINT,
+    COURSE_EDIT_ERROR_NO_MORE_PLACE,
+    COURSE_EDIT_ERROR_POINTS_TOO_CLOSE,
+    COURSE_EDIT_ERROR_TOO_MANY_EFFECTS,
+    COURSE_EDIT_ERROR_TOO_LOW,
+    COURSE_EDIT_ERROR_EXTENDS_OOB,
+    COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY,
+    COURSE_EDIT_ERROR_TOO_SHORT,
+} CourseEditError;
+
+#define EK_CHARSET_1(x) (x)
+#define EK_CHARSET_2(x) ((x) + 96)
+#define EK_CHARSET_3(x) ((x) + 96 * 2)
 
 #endif // FZX_EXPANSION_KIT_H

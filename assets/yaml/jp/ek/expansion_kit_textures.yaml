@@ -460,14 +460,14 @@ aExpansionKitReverseTex:
   offset: 0x1F120
   symbol: aExpansionKitReverseTex
 
-aExpansionKitMenuAcceptTex:
+aExpansionKitMenuRegisterTex:
   type: TEXTURE
   ctype: u8
   format: I4
   width: 48
   height: 16
   offset: 0x1F2A0
-  symbol: aExpansionKitMenuAcceptTex
+  symbol: aExpansionKitMenuRegisterTex
 
 aExpansionKitMenuClearTex:
   type: TEXTURE

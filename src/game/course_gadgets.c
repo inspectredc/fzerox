@@ -43,9 +43,9 @@ bool gInCourseEditor = false;
 s32 D_8076C958 = 90;
 s32 D_8076C95C = 0;
 s32 D_8076C960 = 0;
-s32 D_8076C964 = 1;
-s32 D_8076C968 = 0;
-s32 D_8076C96C = 0;
+s32 gCourseEditDetailedCourseEnabled = 1;
+s32 gCourseEditAlignPointsEnabled = 0;
+s32 gCourseEditToolTipEnabled = 0;
 
 u16* gCourseEditIconTextures[] = {
     aCourseEditTestDriveIconTex,
@@ -242,7 +242,7 @@ extern EffectDrawData gEffectsDrawData[][192];
 #endif
 extern CourseFeature gCourseFeatures[];
 extern unk_80225800 D_2000000;
-extern unk_800D6CA0 D_800D6CA0;
+extern CourseEditContext gCourseEditContext;
 extern s32 D_xk2_800F7034;
 extern s32 gCreateOption;
 extern CourseEffect gCourseEffects[];
@@ -300,7 +300,8 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
                         ++var_v1;
                     }
                 }
-                if (D_800D6CA0.unk_0C == gCourseFeatures[j].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                if (gCourseEditContext.selectedControlPoint == gCourseFeatures[j].segmentIndex &&
+                    gCreateOption == CREATE_OPTION_PARTS) {
                     if (sp1D4 != 1) {
                         sp1D4 = 1;
                         gSPDisplayList(gfx++, D_9014C20);
@@ -342,7 +343,8 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
                         ++var_v1;
                     }
                 }
-                if (D_800D6CA0.unk_0C == gCourseFeatures[j].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                if (gCourseEditContext.selectedControlPoint == gCourseFeatures[j].segmentIndex &&
+                    gCreateOption == CREATE_OPTION_PARTS) {
                     if (sp1D4 != 1) {
                         sp1D4 = 1;
                         gSPDisplayList(gfx++, D_9014C20);
@@ -389,7 +391,8 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
             for (i = 0; i < effectsInfo->count; i++) {
                 effectDrawData = &gEffectsDrawData[D_800DCCFC][i];
 
-                if (D_800D6CA0.unk_0C == gCourseEffects[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+                if (gCourseEditContext.selectedControlPoint == gCourseEffects[i].segmentIndex &&
+                    gCreateOption == CREATE_OPTION_PARTS) {
                     if (sp1D4 != 1) {
                         sp1D4 = 1;
                         gSPDisplayList(gfx++, D_9014C20);
@@ -564,7 +567,8 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
             if (!Course_FeatureIsDecorational(feature->featureType)) {
                 continue;
             }
-            if (D_800D6CA0.unk_0C == gCourseFeatures[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+            if (gCourseEditContext.selectedControlPoint == gCourseFeatures[i].segmentIndex &&
+                gCreateOption == CREATE_OPTION_PARTS) {
                 if (sp1D4 != 1) {
                     sp1D4 = 1;
                     gSPDisplayList(gfx++, D_9014C20);
@@ -595,7 +599,8 @@ Gfx* Course_GadgetsDraw(Gfx* gfx, s32 arg1) {
             if (!Course_FeatureIsDecorational(feature->featureType)) {
                 continue;
             }
-            if (D_800D6CA0.unk_0C == gCourseFeatures[i].segmentIndex && gCreateOption == CREATE_OPTION_PARTS) {
+            if (gCourseEditContext.selectedControlPoint == gCourseFeatures[i].segmentIndex &&
+                gCreateOption == CREATE_OPTION_PARTS) {
                 if (sp1D4 != 1) {
                     sp1D4 = 1;
                     gSPDisplayList(gfx++, D_9014C20);
@@ -1470,7 +1475,7 @@ s32 D_800CD1E8 = 0;
 #define EFFECT_TEXTURE_SCALAR (1.0f)
 #endif
 
-extern u8 D_xk2_80104CA0[];
+extern u8 gCourseEditErrors[];
 
 Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffect* effect, Vtx* vtx,
                                       f32 rightTextureTCoordinate, f32 leftTextureTCoordinate) {
@@ -1571,7 +1576,7 @@ Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffec
 
         if (D_800CD1E8 >= D_800E32CC) {
 #ifdef EXPANSION_KIT
-            D_xk2_80104CA0[7] = 1;
+            gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] = true;
 #endif
             return vtx;
         }
@@ -1606,8 +1611,8 @@ Vtx* Course_TerrainEffectVerticesInit(CourseSegment* segment, f32 t, CourseEffec
 #define EFFECT_TEXTURE_SCALAR2 (2.0f - 1.0f)
 
 #ifdef EXPANSION_KIT
-extern unk_80128690 D_80128690[];
-extern unk_8011C220 D_8011C220[];
+extern SegmentSplitInfo gCourseEditSegmentSplitInfos[];
+extern CourseSplitInfo gCourseEditCourseSplitInfos[];
 
 Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseEffect* effect, Vtx* vtx,
                                                  f32 rightTextureTCoordinate, f32 leftTextureTCoordinate) {
@@ -1620,7 +1625,7 @@ Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseE
     f32 leftEdgeDistance;
     s32 textureUnit;
     s32 pad2[2];
-    f32 spFC;
+    f32 lengthFromStart;
     f32 radiusLeft;
     f32 radiusRight;
     f32 radius;
@@ -1633,20 +1638,20 @@ Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseE
 
     textureUnit = 0;
 
-    i = D_80128690[segment->segmentIndex].unk_00;
+    i = gCourseEditSegmentSplitInfos[segment->segmentIndex].startSplit;
 
     if (i >= 0x10000) {
         return vtx;
     }
 
-    t = D_8011C220[i].unk_04;
+    t = gCourseEditCourseSplitInfos[i].segmentTValue;
 
     while (true) {
-        lengthProportionAlongSegment = Course_SplineGetLengthInfo(segment, t, &spFC);
-        pos.x = D_8011C220[i].pos.x;
-        pos.y = D_8011C220[i].pos.y;
-        pos.z = D_8011C220[i].pos.z;
-        basis = D_8011C220[i].basis;
+        lengthProportionAlongSegment = Course_SplineGetLengthInfo(segment, t, &lengthFromStart);
+        pos.x = gCourseEditCourseSplitInfos[i].pos.x;
+        pos.y = gCourseEditCourseSplitInfos[i].pos.y;
+        pos.z = gCourseEditCourseSplitInfos[i].pos.z;
+        basis = gCourseEditCourseSplitInfos[i].basis;
 
         pos.x += basis.y.x * 10.0f;
         pos.y += basis.y.y * 10.0f;
@@ -1714,7 +1719,7 @@ Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseE
         textureUnit++;
 
         if (D_800CD1E8 >= D_800E32CC) {
-            D_xk2_80104CA0[7] = 1;
+            gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MANY_EFFECTS] = true;
             return vtx;
         }
 
@@ -1732,10 +1737,10 @@ Vtx* Course_TerrainEffectVerticesInitFromStorage(CourseSegment* segment, CourseE
                 }
             }
         } else {
-            if (D_8011C220[i + 1].unk_04 < t) {
+            if (gCourseEditCourseSplitInfos[i + 1].segmentTValue < t) {
                 t = 1.0f;
             } else {
-                t = D_8011C220[i + 1].unk_04;
+                t = gCourseEditCourseSplitInfos[i + 1].segmentTValue;
             }
             i++;
         }
@@ -3622,9 +3627,9 @@ void Course_SegmentsInit(void) {
 #endif
 
     courseInfo = &gCourseInfos[gCourseIndex];
-    courseInfo->courseSegments = D_802C2020.unk_0000;
+    courseInfo->courseSegments = D_802C2020.segments;
 
-    for (i = 0, segment = D_802C2020.unk_0000; i < courseInfo->segmentCount; i++) {
+    for (i = 0, segment = D_802C2020.segments; i < courseInfo->segmentCount; i++) {
         segment->segmentIndex = i;
         segment->next = segment + 1;
         segment->prev = segment - 1;
@@ -3657,7 +3662,7 @@ void Course_SegmentsInit(void) {
     segment = &courseInfo->courseSegments[segmentIndex];
     for (i = 0; i < courseInfo->segmentCount; i++) {
         segmentIndex = segment->segmentIndex;
-        D_802CDFD8.unk_0000[i] = *segment;
+        D_802CDFD8.segments[i] = *segment;
 
 #ifndef EXPANSION_KIT
         D_8010C770.bankAngle[i] = COURSE_CONTEXT()->courseData.bankAngle[segment->segmentIndex];
@@ -3687,9 +3692,9 @@ void Course_SegmentsInit(void) {
 
     for (i = 0; i < courseInfo->segmentCount; i++) {
 #ifndef EXPANSION_KIT
-        D_802C2020.unk_0000[i] = D_802CDFD8.unk_0000[i];
+        D_802C2020.segments[i] = D_802CDFD8.segments[i];
 #endif
-        courseInfo->courseSegments[i] = D_802CDFD8.unk_0000[i];
+        courseInfo->courseSegments[i] = D_802CDFD8.segments[i];
 
         COURSE_CONTEXT()->courseData.bankAngle[i] = D_8010C770.bankAngle[i];
         COURSE_CONTEXT()->courseData.pit[i] = D_8010C770.pit[i];
@@ -4114,7 +4119,7 @@ void func_800742D0(void) {
     COURSE_CONTEXT()->courseData.skybox = SKYBOX_PURPLE;
 }
 
-extern u8 D_80030060[];
+extern u8 gCourseEditCourseTitleEncStr[];
 extern CourseData D_8010CF50;
 
 void func_800742FC(void) {
@@ -4122,7 +4127,7 @@ void func_800742FC(void) {
 
     bzero(SEGMENT_VRAM_START(game_context), SEGMENT_BSS_SIZE(game_context));
 #ifdef EXPANSION_KIT
-    D_80030060[0] = '\0';
+    gCourseEditCourseTitleEncStr[0] = '\0';
 #endif
     func_80074204();
     D_802CB6D0.controlPointCount = 0;
@@ -4132,7 +4137,7 @@ void func_800742FC(void) {
     COURSE_CONTEXT()->courseData.skybox = SKYBOX_PURPLE;
     D_8010CF50 = COURSE_CONTEXT()->courseData;
     gCourseFeaturesInfo.features = gCourseFeatures;
-    gCourseInfos[0].courseSegments = D_802C2020.unk_0000;
+    gCourseInfos[0].courseSegments = D_802C2020.segments;
     gCourseEffectsInfo.effects = gCourseEffects;
 
     for (i = 0; i < ARRAY_COUNT(gCourseInfos); i++) {}
@@ -4149,32 +4154,32 @@ void func_80074428(s32 courseIndex) {
 #ifdef EXPANSION_KIT
     s32 sp20;
 #endif
-    CourseSegment* var_v0;
+    CourseSegment* segment;
     CourseData* courseData = &COURSE_CONTEXT()->courseData;
 
     if (courseData->controlPointCount == 0) {
         return;
     }
 
-    gCourseInfos[courseIndex].courseSegments = D_802C2020.unk_0000;
+    gCourseInfos[courseIndex].courseSegments = D_802C2020.segments;
     gCourseInfos[courseIndex].segmentCount = courseData->controlPointCount;
 
     for (i = 0; i < courseData->controlPointCount; i++) {
-        D_802C2020.unk_0000[i].pos = courseData->controlPoint[i].pos;
-        D_802C2020.unk_0000[i].radiusLeft = courseData->controlPoint[i].radiusLeft;
-        D_802C2020.unk_0000[i].radiusRight = courseData->controlPoint[i].radiusRight;
-        D_802C2020.unk_0000[i].trackSegmentInfo = courseData->controlPoint[i].trackSegmentInfo;
+        D_802C2020.segments[i].pos = courseData->controlPoint[i].pos;
+        D_802C2020.segments[i].radiusLeft = courseData->controlPoint[i].radiusLeft;
+        D_802C2020.segments[i].radiusRight = courseData->controlPoint[i].radiusRight;
+        D_802C2020.segments[i].trackSegmentInfo = courseData->controlPoint[i].trackSegmentInfo;
     }
 
-    var_v0 = D_802C2020.unk_0000;
-    for (i = 0; i < courseData->controlPointCount; i++, var_v0++) {
-        var_v0->segmentIndex = i;
-        var_v0->next = var_v0 + 1;
-        var_v0->prev = var_v0 - 1;
+    segment = D_802C2020.segments;
+    for (i = 0; i < courseData->controlPointCount; i++, segment++) {
+        segment->segmentIndex = i;
+        segment->next = segment + 1;
+        segment->prev = segment - 1;
     }
 
-    D_802C2020.unk_0000[0].prev = &D_802C2020.unk_0000[courseData->controlPointCount - 1];
-    D_802C2020.unk_0000[courseData->controlPointCount - 1].next = &D_802C2020.unk_0000[0];
+    D_802C2020.segments[0].prev = &D_802C2020.segments[courseData->controlPointCount - 1];
+    D_802C2020.segments[courseData->controlPointCount - 1].next = &D_802C2020.segments[0];
 
     if (courseData->controlPointCount < 4) {
         return;
@@ -4204,10 +4209,10 @@ void func_80074594(void) {
     courseData->controlPointCount = D_802CB6D0.controlPointCount;
 
     for (i = 0; i < courseData->controlPointCount; i++) {
-        courseData->controlPoint[i].pos = D_802CB6D0.unk_0000[i].pos;
-        courseData->controlPoint[i].radiusLeft = D_802CB6D0.unk_0000[i].radiusLeft;
-        courseData->controlPoint[i].radiusRight = D_802CB6D0.unk_0000[i].radiusRight;
-        courseData->controlPoint[i].trackSegmentInfo = D_802CB6D0.unk_0000[i].trackSegmentInfo;
+        courseData->controlPoint[i].pos = D_802CB6D0.segments[i].pos;
+        courseData->controlPoint[i].radiusLeft = D_802CB6D0.segments[i].radiusLeft;
+        courseData->controlPoint[i].radiusRight = D_802CB6D0.segments[i].radiusRight;
+        courseData->controlPoint[i].trackSegmentInfo = D_802CB6D0.segments[i].trackSegmentInfo;
     }
 }
 
@@ -4254,7 +4259,7 @@ void func_80074744(void) {
     s32 trackShape;
 
     for (i = 0; i < D_802CB6D0.controlPointCount; i++) {
-        segment = &D_802CB6D0.unk_0000[i];
+        segment = &D_802CB6D0.segments[i];
         trackShape = segment->trackSegmentInfo & TRACK_SHAPE_MASK;
         switch (trackShape) {
             case TRACK_SHAPE_PIPE:
@@ -4311,41 +4316,41 @@ void func_800747EC(s32 venue) {
 extern GfxPool* gGfxPool;
 extern s8 gGamePaused;
 
-void func_80074844(void) {
-    static s32 D_800CD298 = 0;
-    static s32 D_800CD29C = 0;
+void Course_UpdateSignRotation(void) {
+    static s32 sNintexSignAngle = 0;
+    static s32 sOverheadSignAngle = 0;
     f32 temp;
-    MtxF sp3C;
+    MtxF mtxF;
 
     if (!gGamePaused) {
-        D_800CD298 = (D_800CD298 + 0xFE9) & 0xFFF;
-        D_800CD29C = (D_800CD29C + 0xFDE) & 0xFFF;
+        sNintexSignAngle = (sNintexSignAngle + 0xFE9) & 0xFFF;
+        sOverheadSignAngle = (sOverheadSignAngle + 0xFDE) & 0xFFF;
     }
 
-    sp3C.m[2][1] = sp3C.m[0][1] = sp3C.m[1][0] = sp3C.m[1][2] = sp3C.m[3][0] = sp3C.m[3][1] = sp3C.m[3][2] =
-        sp3C.m[0][3] = sp3C.m[1][3] = sp3C.m[2][3] = 0.0f;
+    mtxF.m[2][1] = mtxF.m[0][1] = mtxF.m[1][0] = mtxF.m[1][2] = mtxF.m[3][0] = mtxF.m[3][1] = mtxF.m[3][2] =
+        mtxF.m[0][3] = mtxF.m[1][3] = mtxF.m[2][3] = 0.0f;
 
-    sp3C.m[3][3] = sp3C.m[1][1] = 1.0f;
+    mtxF.m[3][3] = mtxF.m[1][1] = 1.0f;
 
-    sp3C.m[2][0] = temp = SIN(0x1000 - D_800CD298);
-    sp3C.m[0][2] = -temp;
+    mtxF.m[2][0] = temp = SIN(0x1000 - sNintexSignAngle);
+    mtxF.m[0][2] = -temp;
 
-    sp3C.m[0][0] = sp3C.m[2][2] = temp = COS(0x1000 - D_800CD298);
+    mtxF.m[0][0] = mtxF.m[2][2] = temp = COS(0x1000 - sNintexSignAngle);
 
-    Matrix_ToMtx(&sp3C, gGfxPool->unk_2C5E8);
+    Matrix_ToMtx(&mtxF, gGfxPool->unk_2C5E8);
 
-    sp3C.m[2][0] = temp = SIN(D_800CD298);
-    sp3C.m[0][2] = -temp;
-    sp3C.m[0][0] = sp3C.m[2][2] = temp = COS(D_800CD298);
+    mtxF.m[2][0] = temp = SIN(sNintexSignAngle);
+    mtxF.m[0][2] = -temp;
+    mtxF.m[0][0] = mtxF.m[2][2] = temp = COS(sNintexSignAngle);
 
-    Matrix_ToMtx(&sp3C, gGfxPool->unk_2C628);
-    sp3C.m[1][2] = temp = SIN(D_800CD29C);
-    sp3C.m[2][1] = -temp;
-    sp3C.m[2][2] = sp3C.m[1][1] = temp = COS(D_800CD29C);
+    Matrix_ToMtx(&mtxF, gGfxPool->unk_2C628);
+    mtxF.m[1][2] = temp = SIN(sOverheadSignAngle);
+    mtxF.m[2][1] = -temp;
+    mtxF.m[2][2] = mtxF.m[1][1] = temp = COS(sOverheadSignAngle);
 
-    sp3C.m[2][0] = sp3C.m[0][2] = 0.0f;
-    sp3C.m[0][0] = 1.0f;
-    Matrix_ToMtx(&sp3C, gGfxPool->unk_2C668);
+    mtxF.m[2][0] = mtxF.m[0][2] = 0.0f;
+    mtxF.m[0][0] = 1.0f;
+    Matrix_ToMtx(&mtxF, gGfxPool->unk_2C668);
 }
 
 #ifdef EXPANSION_KIT

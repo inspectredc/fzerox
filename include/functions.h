@@ -37,7 +37,7 @@ void Matrix_SetLockedLookAt(Mtx* mtx, MtxF* mtxF, f32 scaleZ, f32 scaleY, f32 sc
 void Matrix_SetLockedLookAtFromVectors(Mtx* mtx, MtxF* mtxF, f32 scaleZ, f32 scaleY, f32 scaleX, Vec3f* lookAt, Vec3f* up, Vec3f* pos);
 void Matrix_ScaleFrom3DMatrix(Mtx* mtx, MtxF* mtxF, f32 xScale, f32 yScale, f32 zScale, Mtx3F* matrix3D, Vec3f* pos);
 void Matrix_SetTransRot(Mtx* mtx, MtxF* mtxF, f32 arg2, s32 xRot, s32 yRot, s32 zRot, f32 xPos, f32 yPos, f32 zPos);
-void Matrix_SetAxisRotation(Mtx* arg0, MtxF* arg1, f32 arg2, s32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9);
+void Matrix_SetAxisRotation(Mtx* mtx, MtxF* mtxF, f32 scale, s32 angle, f32 xAxis, f32 yAxis, f32 zAxis, f32 xPos, f32 yPos, f32 zPos);
 void Matrix_SetLookAt(Mtx* mtx, MtxF* mtxF, f32 eyeX, f32 eyeY, f32 eyeZ, f32 atX, f32 atY, f32 atZ, f32 upX, f32 upY, f32 upZ);
 void Matrix_SetFrustrum(Mtx* mtx, MtxF* mtxF, f32 fovAngle, f32 near, f32 far, f32 fovScaleX, f32 frustumCenterX, f32 fovScaleY, f32 frustumCenterY, u16* perspectiveScale);
 void Matrix_SetOrtho(Mtx* mtx, MtxF* mtxF, f32 scale, f32 left, f32 right, f32 top, f32 bottom, f32 near, f32 far);
@@ -85,7 +85,7 @@ void func_800747EC(s32 venue);
 void Math_NormalizeXZ(f32* x, f32* z);
 void Math_NormalizeXYZ(f32* x, f32* y, f32* z);
 void func_80074CE4(CourseInfo*);
-void func_80074844(void);
+void Course_UpdateSignRotation(void);
 
 void func_8007515C(void);
 
@@ -247,7 +247,7 @@ void func_80095144(void);
 void Racer_Update(void);
 Gfx* Racer_Draw(Gfx* gfx, s32 playerIndex);
 Gfx* func_8009CBE8(Gfx* gfx, s32 arg1, s32 red, s32 green, s32 blue);
-Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 arg2);
+Gfx* func_8009CCBC(Gfx* gfx, s32 character, s32 machinePalette);
 Gfx* func_8009CD60(Gfx* gfx, s32 character);
 Gfx* func_8009CE70(Gfx* gfx, s32 character);
 Gfx* func_8009CEA0(Gfx* gfx, s32 character);
@@ -277,7 +277,7 @@ void func_800A4B54(void);
 void func_800A4BAC(void);
 void func_800A4D0C(s32 arg0);
 void func_800A4DF0(void);
-Gfx* func_800A95B4(Gfx* gfx);
+Gfx* Course_DrawEditCourse(Gfx* gfx);
 s32 Course_CalculateChecksum(void);
 
 void mio0Decode(u8*, void*);
