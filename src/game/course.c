@@ -607,55 +607,49 @@ s32 func_8009D16C(RacerSegmentPositionInfo* arg0, f32 arg1, f32 arg2, f32 arg3, 
     return 0;
 }
 
-#ifdef NON_MATCHING
-// Weird float/double calculations
-void func_8009DB28(CourseSegment* segment, f32* arg1, f32* arg2) {
+void func_8009DB28(CourseSegment* arg0, f32* arg1, f32* arg2) {
     f64 temp_ft5;
     f64 temp_fs0;
     f64 temp_fs1;
     f64 temp_fs2;
     f64 temp_fs3;
     f64 temp_fs4;
-    f64 spB0;
-    f64 spA8;
-    f64 sp60;
-    f64 sp58;
-    f64 sp48;
     f64 temp_fv0_5;
-    f64 temp_fa0_3;
-    f64 temp_fa1_3;
-    f64 temp_ft5_2;
-    f64 temp_fv0_6;
-    f64 temp_ft4;
-    CourseSegment* prevSegment = segment->prev;
-    CourseSegment* nextSegment = segment->next;
-    CourseSegment* nextNextSegment = nextSegment->next;
+    f64 temp_fa0;
+    f64 temp;
+    f64 temp_fa1;
+    f64 sp90;
+    f64 sp88;
+    f64 temp2;
+    f64 sp38;
+    f64 var_fv1;
+    CourseSegment* temp_v0 = arg0->prev;
+    CourseSegment* temp_v1 = arg0->next;
+    CourseSegment* temp_a1 = temp_v1->next;
 
-    temp_ft5 = segment->pos.x - nextSegment->pos.x;
-    temp_fs2 = prevSegment->pos.x - nextNextSegment->pos.x + temp_ft5;
-    temp_fs0 = segment->pos.y - nextSegment->pos.y;
-    temp_fs3 = prevSegment->pos.y - nextNextSegment->pos.y + temp_fs0;
-    temp_fs1 = segment->pos.z - nextSegment->pos.z;
-    temp_fs4 = prevSegment->pos.z - nextNextSegment->pos.z + temp_fs1;
+    temp_fs2 = temp_v0->pos.x - temp_a1->pos.x + (temp_ft5 = arg0->pos.x - temp_v1->pos.x);
+    temp_fs3 = temp_v0->pos.y - temp_a1->pos.y + (temp_fs0 = arg0->pos.y - temp_v1->pos.y);
+    temp_fs4 = temp_v0->pos.z - temp_a1->pos.z + (temp_fs1 = arg0->pos.z - temp_v1->pos.z);
+    temp = (SQ(temp_fs2) + SQ(temp_fs3) + SQ(temp_fs4)) * (1.0 / 16.0);
+    sp38 = ((temp_ft5 * temp_fs2) + (temp_fs0 * temp_fs3) + (temp_fs1 * temp_fs4)) * 0.75;
+    sp90 = SQ(sp38);
+    sp88 = (SQ(temp_ft5) + SQ(temp_fs0) + SQ(temp_fs1)) * 9.0;
 
-    sp58 = ((temp_ft5 * temp_fs2) + (temp_fs0 * temp_fs3) + (temp_fs1 * temp_fs4)) * 0.75;
-    spB0 = SQ(sp58);
-    spA8 = (SQ(temp_ft5) + SQ(temp_fs0) + SQ(temp_fs1)) * 9.0;
 
-    temp_fv0_5 = nextSegment->pos.x - prevSegment->pos.x;
-    temp_fa0_3 = nextSegment->pos.y - prevSegment->pos.y;
-    temp_fa1_3 = nextSegment->pos.z - prevSegment->pos.z;
-    sp60 = (SQ(temp_fs2) + SQ(temp_fs3) + SQ(temp_fs4)) * 0.0625;
-    sp48 = sp60 - SQ(temp_fv0_5) - SQ(temp_fa0_3) - SQ(temp_fa1_3);
-    temp_ft5_2 = sp48 * spA8;
-
-    if (temp_ft5_2 <= spB0) {
-        temp_fv0_6 = sqrtf(spB0 - temp_ft5_2);
-        temp_ft4 = 2.0 * sp48;
-        if (temp_ft4 < -0.1) {
-            *arg1 = (sp58 - temp_fv0_6) / temp_ft4;
-        } else if (temp_ft4 > 0.1) {
-            *arg1 = (sp58 + temp_fv0_6) / temp_ft4;
+    temp_fv0_5 = temp_v1->pos.x - temp_v0->pos.x;
+    temp_fa0 = temp_v1->pos.y - temp_v0->pos.y;
+    temp_fa1 = temp_v1->pos.z - temp_v0->pos.z;
+    var_fv1 = temp - SQ(temp_fv0_5) - SQ(temp_fa0) - SQ(temp_fa1);
+    
+    temp2 = var_fv1 * sp88;
+    temp2 = sp90 - temp2;
+    if (temp2 >= 0) {
+        temp2 = sqrtf(temp2);
+        var_fv1 *= 2.0;
+        if (var_fv1 < -0.1) {
+            *arg1 = (sp38 - temp2) / var_fv1;
+        } else if (var_fv1 > 0.1) {
+            *arg1 = (sp38 + temp2) / var_fv1;
         } else {
             *arg1 = -1.0f;
         }
@@ -663,18 +657,19 @@ void func_8009DB28(CourseSegment* segment, f32* arg1, f32* arg2) {
         *arg1 = -1.0f;
     }
 
-    temp_fv0_5 = nextNextSegment->pos.x - segment->pos.x;
-    temp_fa0_3 = nextNextSegment->pos.y - segment->pos.y;
-    temp_fa1_3 = nextNextSegment->pos.z - segment->pos.z;
-    sp48 = sp60 - SQ(temp_fv0_5) - SQ(temp_fa0_3) - SQ(temp_fa1_3);
-    temp_ft5_2 = sp48 * spA8;
-    if (temp_ft5_2 <= spB0) {
-        temp_fv0_6 = sqrtf(spB0 - temp_ft5_2);
-        temp_ft4 = 2.0 * sp48;
-        if (temp_ft4 < -0.1) {
-            *arg2 = (sp58 - temp_fv0_6) / temp_ft4;
-        } else if (temp_ft4 > 0.1) {
-            *arg2 = (sp58 + temp_fv0_6) / temp_ft4;
+    temp_fv0_5 = temp_a1->pos.x - arg0->pos.x;
+    temp_fa0 = temp_a1->pos.y - arg0->pos.y;
+    temp_fa1 = temp_a1->pos.z - arg0->pos.z;
+    var_fv1 = temp - SQ(temp_fv0_5) - SQ(temp_fa0) - SQ(temp_fa1);
+    temp2 = var_fv1 * sp88;
+    temp2 = sp90 - temp2;
+    if (temp2 >= 0) {
+        temp2 = sqrtf(temp2);
+        var_fv1 *= 2.0;
+        if (var_fv1 < -0.1) {
+            *arg2 = (sp38 - temp2) / var_fv1;
+        } else if (var_fv1 > 0.1) {
+            *arg2 = (sp38 + temp2) / var_fv1;
         } else {
             *arg2 = -1.0f;
         }
@@ -682,20 +677,6 @@ void func_8009DB28(CourseSegment* segment, f32* arg1, f32* arg2) {
         *arg2 = -1.0f;
     }
 }
-#else
-void func_8009DB28(CourseSegment*, f32*, f32*);
-#ifndef EXPANSION_KIT
-#ifdef VERSION_JP
-#pragma GLOBAL_ASM("asm/jp/rev0/nonmatchings/game/course/func_8009DB28.s")
-#elif VERSION_US
-#pragma GLOBAL_ASM("asm/us/rev0/nonmatchings/game/course/func_8009DB28.s")
-#elif VERSION_PAL
-#pragma GLOBAL_ASM("asm/pal/rev0/nonmatchings/game/course/func_8009DB28.s")
-#endif
-#else
-#pragma GLOBAL_ASM("asm/jp/ek/nonmatchings/game/course/func_8009DB28.s")
-#endif
-#endif
 
 s32 Course_SplineCalculateTensions(CourseInfo* courseInfo) {
     f32 alpha1;
