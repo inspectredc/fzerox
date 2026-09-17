@@ -901,20 +901,23 @@ Gfx* Credits_IntroDraw(Gfx* gfx, Object* introObj) {
                            G_TX_NOLOD, G_TX_NOLOD);
 
         if (OBJECT_STATE2(introObj) != 0) {
-            temp_t1 = ((OBJECT_COUNTER2(introObj) + 4) * (SIN(((((row * 0x1000) * ((temp_t0 + OBJECT_COUNTER2(introObj)))) / temp_t0) / 72))) / 4);
+            temp_t1 = ((OBJECT_COUNTER2(introObj) + 4) *
+                       (SIN(((((row * 0x1000) * ((temp_t0 + OBJECT_COUNTER2(introObj)))) / temp_t0) / 72))) / 4);
             var_t2 = 255 - OBJECT_COUNTER2(introObj);
 
             gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
-            gSPScisTextureRectangle(gfx++, (temp_t2 - temp_t1) << 2, (var + row) << 2, ((temp_t2 - temp_t1) + 80) << 2, (var + row + 1) << 2, 0, 0, 0,
-                                    1 << 10, 1 << 10);
+            gSPScisTextureRectangle(gfx++, (temp_t2 - temp_t1) << 2, (var + row) << 2, ((temp_t2 - temp_t1) + 80) << 2,
+                                    (var + row + 1) << 2, 0, 0, 0, 1 << 10, 1 << 10);
         }
         if (OBJECT_STATE(introObj) != 0) {
 
-            temp_t1 = ((OBJECT_COUNTER(introObj) + 4) * (SIN(((((row * 0x1000) * ((temp_t0 + OBJECT_COUNTER(introObj)))) / temp_t0) / 72))) / 4);
+            temp_t1 = ((OBJECT_COUNTER(introObj) + 4) *
+                       (SIN(((((row * 0x1000) * ((temp_t0 + OBJECT_COUNTER(introObj)))) / temp_t0) / 72))) / 4);
             var_t2 = 255 - OBJECT_COUNTER(introObj);
             gDPSetPrimColor(gfx++, 0, 0, var_t2, var_t2, var_t2, var_t2);
-            gSPScisTextureRectangle(gfx++, (temp_t1 + (240 - temp_t2)) << 2, (var + row) << 2, (temp_t1 + (320 - temp_t2)) << 2,
-                                    (var + row + 1) << 2, 0, (80 - 1) * (1 << 5), 0, (64 - 1) * (1 << 10), 1 << 10);
+            gSPScisTextureRectangle(gfx++, (temp_t1 + (240 - temp_t2)) << 2, (var + row) << 2,
+                                    (temp_t1 + (320 - temp_t2)) << 2, (var + row + 1) << 2, 0, (80 - 1) * (1 << 5), 0,
+                                    (64 - 1) * (1 << 10), 1 << 10);
         }
     }
 

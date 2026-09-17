@@ -635,12 +635,11 @@ void func_8009DB28(CourseSegment* arg0, f32* arg1, f32* arg2) {
     sp90 = SQ(sp38);
     sp88 = (SQ(temp_ft5) + SQ(temp_fs0) + SQ(temp_fs1)) * 9.0;
 
-
     temp_fv0_5 = temp_v1->pos.x - temp_v0->pos.x;
     temp_fa0 = temp_v1->pos.y - temp_v0->pos.y;
     temp_fa1 = temp_v1->pos.z - temp_v0->pos.z;
     var_fv1 = temp - SQ(temp_fv0_5) - SQ(temp_fa0) - SQ(temp_fa1);
-    
+
     temp2 = var_fv1 * sp88;
     temp2 = sp90 - temp2;
     if (temp2 >= 0) {
