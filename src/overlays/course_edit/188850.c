@@ -437,7 +437,8 @@ void func_xk2_800D7EB8(void) {
             D_xk2_800F7040 = 3;
         }
     } else {
-        if ((dashCount >= 32) && (COURSE_CONTEXT()->courseData.dash[gCourseEditContext.selectedControlPoint] == DASH_NONE)) {
+        if ((dashCount >= 32) &&
+            (COURSE_CONTEXT()->courseData.dash[gCourseEditContext.selectedControlPoint] == DASH_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
         } else if (gDashTypeOption != COURSE_CONTEXT()->courseData.dash[gCourseEditContext.selectedControlPoint]) {
             func_xk2_800EF78C();
@@ -545,7 +546,8 @@ void func_xk2_800D8290(void) {
             COURSE_CONTEXT()->courseData.jump[gCourseEditContext.selectedControlPoint] = JUMP_NONE;
         }
     } else {
-        if ((jumpCount >= 8) && (COURSE_CONTEXT()->courseData.jump[gCourseEditContext.selectedControlPoint] == JUMP_NONE)) {
+        if ((jumpCount >= 8) &&
+            (COURSE_CONTEXT()->courseData.jump[gCourseEditContext.selectedControlPoint] == JUMP_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
         } else if (gJumpTypeOption != COURSE_CONTEXT()->courseData.jump[gCourseEditContext.selectedControlPoint]) {
             func_xk2_800EF78C();
@@ -588,7 +590,8 @@ void func_xk2_800D8418(void) {
         if ((landmineCount >= 8) &&
             (COURSE_CONTEXT()->courseData.landmine[gCourseEditContext.selectedControlPoint] == LANDMINE_NONE)) {
             Audio_TriggerSystemSE(NA_SE_32);
-        } else if (gLandmineTypeOption != COURSE_CONTEXT()->courseData.landmine[gCourseEditContext.selectedControlPoint]) {
+        } else if (gLandmineTypeOption !=
+                   COURSE_CONTEXT()->courseData.landmine[gCourseEditContext.selectedControlPoint]) {
             func_xk2_800EF78C();
             Audio_TriggerSystemSE(NA_SE_39);
             COURSE_CONTEXT()->courseData.landmine[gCourseEditContext.selectedControlPoint] = gLandmineTypeOption;
@@ -607,7 +610,8 @@ void func_xk2_800D85A0(void) {
 
     switch (D_802CB6D0.segments[gCourseEditContext.selectedControlPoint].trackSegmentInfo & TRACK_SHAPE_MASK) {
         case TRACK_SHAPE_AIR:
-            switch (D_802CB6D0.segments[gCourseEditContext.selectedControlPoint].prev->trackSegmentInfo & TRACK_SHAPE_MASK) {
+            switch (D_802CB6D0.segments[gCourseEditContext.selectedControlPoint].prev->trackSegmentInfo &
+                    TRACK_SHAPE_MASK) {
                 case TRACK_SHAPE_ROAD:
                 case TRACK_SHAPE_BORDERLESS_ROAD:
                     break;
@@ -707,7 +711,8 @@ void func_xk2_800D88D8(void) {
 
     switch (D_802CB6D0.segments[gCourseEditContext.selectedControlPoint].trackSegmentInfo & TRACK_SHAPE_MASK) {
         case TRACK_SHAPE_AIR:
-            switch (D_802CB6D0.segments[gCourseEditContext.selectedControlPoint].prev->trackSegmentInfo & TRACK_SHAPE_MASK) {
+            switch (D_802CB6D0.segments[gCourseEditContext.selectedControlPoint].prev->trackSegmentInfo &
+                    TRACK_SHAPE_MASK) {
                 case TRACK_SHAPE_ROAD:
                 case TRACK_SHAPE_BORDERLESS_ROAD:
                     break;
@@ -769,8 +774,8 @@ void func_xk2_800D8AB8(void) {
     s32 sp2C[] = { TRACK_SHAPE_ROAD, TRACK_SHAPE_WALLED_ROAD, TRACK_SHAPE_BORDERLESS_ROAD, TRACK_SHAPE_TUNNEL,
                    TRACK_SHAPE_PIPE, TRACK_SHAPE_HALF_PIPE,   TRACK_SHAPE_CYLINDER,        TRACK_SHAPE_AIR };
 
-    if ((sCourseEditController->buttonPressed & BTN_A) && (gCourseEditCursorYPos >= 0x38) && (gCourseEditContext.state != COURSE_EDIT_IN_FILE_MENU) &&
-        (gCreateOption == CREATE_OPTION_DESIGN)) {
+    if ((sCourseEditController->buttonPressed & BTN_A) && (gCourseEditCursorYPos >= 0x38) &&
+        (gCourseEditContext.state != COURSE_EDIT_IN_FILE_MENU) && (gCreateOption == CREATE_OPTION_DESIGN)) {
         if (D_802CB6D0.controlPointCount < 4) {
             Audio_TriggerSystemSE(NA_SE_32);
             return;
@@ -828,8 +833,8 @@ void func_xk2_800D8CC4(void) {
     if (gCourseEditCursorYPos < 0x38) {
         return;
     }
-    if (gCourseEditContext.state == COURSE_EDIT_NAME_ENTRY || gCourseEditContext.state == COURSE_EDIT_IN_MENU || gCourseEditContext.state == COURSE_EDIT_IN_FILE_MENU ||
-        gCourseEditContext.state == 16) {
+    if (gCourseEditContext.state == COURSE_EDIT_NAME_ENTRY || gCourseEditContext.state == COURSE_EDIT_IN_MENU ||
+        gCourseEditContext.state == COURSE_EDIT_IN_FILE_MENU || gCourseEditContext.state == 16) {
         return;
     }
 
@@ -2058,8 +2063,8 @@ void func_xk2_800DC4E4(void) {
 }
 
 void func_xk2_800DC58C(void) {
-    if ((gCourseEditContext.moveMode == 1) || (gCourseEditContext.state != 0) || (gCreateOption != CREATE_OPTION_POINT) ||
-        (gCourseEditCursorYPos < 56)) {
+    if ((gCourseEditContext.moveMode == 1) || (gCourseEditContext.state != 0) ||
+        (gCreateOption != CREATE_OPTION_POINT) || (gCourseEditCursorYPos < 56)) {
         return;
     }
     if (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 1) {
@@ -2089,8 +2094,9 @@ void func_xk2_800DC67C(void) {
     s32 temp_a1;
     s32 var_v1;
 
-    if ((gCourseEditContext.state != 0) || (gPointOption != POINT_OPTION_SET) || (gCreateOption != CREATE_OPTION_COURSE) ||
-        (gCourseEditCursorYPos < 0x38) || (gCourseEditContext.moveMode != 0)) {
+    if ((gCourseEditContext.state != 0) || (gPointOption != POINT_OPTION_SET) ||
+        (gCreateOption != CREATE_OPTION_COURSE) || (gCourseEditCursorYPos < 0x38) ||
+        (gCourseEditContext.moveMode != 0)) {
         return;
     }
     if (gCourseEditOptions[COURSE_EDIT_OPTION_CONTROL_POINT_INFO] == 1) {

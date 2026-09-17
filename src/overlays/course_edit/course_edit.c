@@ -449,8 +449,8 @@ s32 CourseEdit_Update(void) {
                     gCourseEditContext.state = 0x12;
                     break;
                 case 9:
-                    func_807681C8(MFS_ENTRY_WORKING_DIR, D_xk1_8003A598.name, D_xk1_8003A598.extension,
-                                  &D_xk2_800F7408, sizeof(CourseContext), 0, 0xFF, true);
+                    func_807681C8(MFS_ENTRY_WORKING_DIR, D_xk1_8003A598.name, D_xk1_8003A598.extension, &D_xk2_800F7408,
+                                  sizeof(CourseContext), 0, 0xFF, true);
                     gCourseEditContext.state = 0x12;
                     break;
             }

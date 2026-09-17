@@ -196,9 +196,11 @@ void func_xk2_800F1938(void) {
         return;
     }
 
-    gCourseEditContext.newSegment.pos.x = ((rayEnd.x - gCameras[0].eye.x) * rayIntersectionDistance) + gCameras[0].eye.x;
+    gCourseEditContext.newSegment.pos.x =
+        ((rayEnd.x - gCameras[0].eye.x) * rayIntersectionDistance) + gCameras[0].eye.x;
     gCourseEditContext.newSegment.pos.y = yPos;
-    gCourseEditContext.newSegment.pos.z = ((rayEnd.z - gCameras[0].eye.z) * rayIntersectionDistance) + gCameras[0].eye.z;
+    gCourseEditContext.newSegment.pos.z =
+        ((rayEnd.z - gCameras[0].eye.z) * rayIntersectionDistance) + gCameras[0].eye.z;
     gCourseEditContext.newSegment.pos.x /= 0.3f;
     gCourseEditContext.newSegment.pos.y /= 0.3f;
     gCourseEditContext.newSegment.pos.z /= 0.3f;
@@ -211,7 +213,8 @@ void func_xk2_800F1938(void) {
     if ((D_802CB6D0.controlPointCount == 1) &&
         (D_802CB6D0.segments[0].trackSegmentInfo == (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000)) &&
         (gCourseEditContext.newSegment.trackSegmentInfo == (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000))) {
-        gCourseEditContext.newSegment.trackSegmentInfo = (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_2);
+        gCourseEditContext.newSegment.trackSegmentInfo =
+            (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_2);
     } else if (D_802CB6D0.controlPointCount == 0) {
         gCourseEditContext.newSegment.trackSegmentInfo =
             (TRACK_FLAG_JOINABLE | TRACK_FLAG_8000000 | TRACK_SHAPE_ROAD | ROAD_START_LINE);

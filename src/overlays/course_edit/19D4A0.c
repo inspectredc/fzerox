@@ -98,7 +98,8 @@ Gfx* CourseEdit_DrawFileRegisterMenu(Gfx* gfx) {
 extern s32 gCourseEditEntryOption;
 
 void CourseEdit_RegisterFileMenuHandleBPress(void) {
-    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) && (gCourseEditContext.state == COURSE_EDIT_REGISTER_FILE_MENU)) {
+    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_B) &&
+        (gCourseEditContext.state == COURSE_EDIT_REGISTER_FILE_MENU)) {
         Audio_TriggerSystemSE(NA_SE_37);
         gCourseEditContext.state = 0;
         gCourseEditEntryOption = -1;
@@ -123,7 +124,8 @@ extern s32 gExpansionKitYesNoOptionIndex;
 extern u8 D_xk2_800F7400;
 
 void CourseEdit_RegisterFileMenuHandleAPress(void) {
-    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) && (gCourseEditContext.state == COURSE_EDIT_REGISTER_FILE_MENU)) {
+    if ((gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) &&
+        (gCourseEditContext.state == COURSE_EDIT_REGISTER_FILE_MENU)) {
         Audio_TriggerSystemSE(NA_SE_36);
         gCourseEditCourseRegisterIndex = (gCourseEditMenuCursorYPos - 52) / 8;
         switch (gCourseEditRegistrationState) {

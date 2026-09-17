@@ -192,8 +192,8 @@ Gfx* CourseEdit_DrawMain(Gfx* gfx) {
     }
     gSPMatrix(gfx++, &D_2000000.unk_000, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    if ((D_802CB6D0.controlPointCount >= 4) && (gCourseEditContext.unreasonableControlPoint == -1) && (D_xk2_800F7404 == 0) &&
-        !gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY]) {
+    if ((D_802CB6D0.controlPointCount >= 4) && (gCourseEditContext.unreasonableControlPoint == -1) &&
+        (D_xk2_800F7404 == 0) && !gCourseEditErrors[COURSE_EDIT_ERROR_TOO_MUCH_TO_DISPLAY]) {
         gfx = Course_GadgetsDraw(gfx, 0);
     }
     if (D_xk2_800F7404 != 0) {
@@ -234,7 +234,8 @@ Gfx* CourseEdit_DrawMain(Gfx* gfx) {
         gfx = CourseEdit_DrawFileSelectRegisterMenu(gfx);
     }
 
-    if ((gCourseEditContext.state == 0x11) || (gCourseEditContext.state == 0x23) || (gCourseEditContext.state == 0xFF)) {
+    if ((gCourseEditContext.state == 0x11) || (gCourseEditContext.state == 0x23) ||
+        (gCourseEditContext.state == 0xFF)) {
         EKFileMenu_DrawYesNoOption(&gfx);
     }
     if (gCourseEditContext.state == 0xFF) {
@@ -1851,7 +1852,8 @@ void func_xk2_800E6270(CourseInfo* courseInfo) {
                     break;
                 }
 
-                if ((gCourseEditCourseSplitIndex == (gCourseEditSegmentSplitInfos[segment->segmentIndex].startSplit + 1)) &&
+                if ((gCourseEditCourseSplitIndex ==
+                     (gCourseEditSegmentSplitInfos[segment->segmentIndex].startSplit + 1)) &&
                     (gSegmentChunks[chunkIndex].segmentTValue > 0.5f)) {
                     splitInfo->trackSegmentInfo = segment->trackSegmentInfo;
                     splitInfo->segmentTValue = 0.5f;

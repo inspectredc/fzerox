@@ -7,7 +7,25 @@
 
 u8 D_xk2_800F7400 = 0xFF;
 s32 D_xk2_800F7404 = 0;
-CourseContext D_xk2_800F7408 = { { CREATOR_NINTENDO, 0, 0, 0, 0, 0, { 0 }, 0, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 } } };
+CourseContext D_xk2_800F7408 = { { CREATOR_NINTENDO,
+                                   0,
+                                   0,
+                                   0,
+                                   0,
+                                   0,
+                                   { 0 },
+                                   0,
+                                   { 0 },
+                                   { 0 },
+                                   { 0 },
+                                   { 0 },
+                                   { 0 },
+                                   { 0 },
+                                   { 0 },
+                                   { 0 },
+                                   { 0 },
+                                   { 0 },
+                                   { 0 } } };
 
 void CourseEdit_WriteExtension(s8* extensionOut, s8* extension) {
     extensionOut[0] = extension[0];
@@ -433,7 +451,8 @@ void CourseEdit_FileMenuHandleAPress(void) {
             }
             break;
         case 4:
-            CourseEdit_ToggleFileForbidWriteAttr(gExpansionKitLoadedFiles[fileIndex].name, gExpansionKitLoadedFiles[fileIndex].attr);
+            CourseEdit_ToggleFileForbidWriteAttr(gExpansionKitLoadedFiles[fileIndex].name,
+                                                 gExpansionKitLoadedFiles[fileIndex].attr);
             gCourseEditFileOption = -1;
             gCourseEditContext.state = 0;
             break;

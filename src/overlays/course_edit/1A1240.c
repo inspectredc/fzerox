@@ -50,8 +50,9 @@ extern s32 gSkyboxOption;
 void func_xk2_800EF8B0(void) {
     s32 i;
 
-    if ((gCourseEditContext.state == COURSE_EDIT_IN_MENU) || (gCourseEditContext.state == COURSE_EDIT_IN_FILE_MENU) || (gCourseEditContext.state == COURSE_EDIT_NAME_ENTRY) ||
-        (gCourseEditContext.state == 0x10) || (gCourseEditContext.state == COURSE_EDIT_REGISTER_FILE_MENU) || (D_xk2_80104BC0 == 0)) {
+    if ((gCourseEditContext.state == COURSE_EDIT_IN_MENU) || (gCourseEditContext.state == COURSE_EDIT_IN_FILE_MENU) ||
+        (gCourseEditContext.state == COURSE_EDIT_NAME_ENTRY) || (gCourseEditContext.state == 0x10) ||
+        (gCourseEditContext.state == COURSE_EDIT_REGISTER_FILE_MENU) || (D_xk2_80104BC0 == 0)) {
         return;
     }
     D_xk2_80104BC0 = 0;
@@ -343,10 +344,12 @@ void func_xk2_800F07A4(void) {
     Vec3f spF0;
     Mtx3F spCC;
 
-    if ((gCourseEditCursorYPos < 0x38) || (gCourseEditContext.state == COURSE_EDIT_IN_MENU) || (gCourseEditContext.state == COURSE_EDIT_IN_FILE_MENU) ||
+    if ((gCourseEditCursorYPos < 0x38) || (gCourseEditContext.state == COURSE_EDIT_IN_MENU) ||
+        (gCourseEditContext.state == COURSE_EDIT_IN_FILE_MENU) ||
         (gCourseEditContext.state == COURSE_EDIT_NAME_ENTRY) || (gCourseEditContext.state == 0x10) ||
         !((gCreateOption == CREATE_OPTION_DESIGN) && (gDesignStyleOption == TRACK_DESIGN_STYLE_LOOP)) ||
-        !(gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) || (gCourseEditContext.selectedControlPoint == 0)) {
+        !(gControllers[gPlayerControlPorts[0]].buttonPressed & BTN_A) ||
+        (gCourseEditContext.selectedControlPoint == 0)) {
         return;
     }
     if (D_802CB6D0.controlPointCount < 4) {
